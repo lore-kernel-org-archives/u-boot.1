@@ -4,139 +4,123 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25E40F327CB
-	for <u-boot@archiver.kernel.org>; Tue, 21 Apr 2026 09:30:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0981AF327BD
+	for <u-boot@archiver.kernel.org>; Tue, 21 Apr 2026 09:51:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9F353843C0;
-	Tue, 21 Apr 2026 11:30:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
+	by phobos.denx.de (Postfix) with ESMTP id 5B4D2843C0;
+	Tue, 21 Apr 2026 11:51:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="LRzvEpWR";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="ZZtE08Nv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DD7C884461; Tue, 21 Apr 2026 11:30:55 +0200 (CEST)
-Received: from SJ2PR03CU001.outbound.protection.outlook.com
- (mail-westusazlp170120002.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c001::2])
+ id 26494843E0; Tue, 21 Apr 2026 11:51:45 +0200 (CEST)
+Received: from PH7PR06CU001.outbound.protection.outlook.com
+ (mail-westus3azlp170100009.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c107::9])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 60C2D8439E
- for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 11:30:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4DEEC8439E
+ for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 11:51:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=altera.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tien.fong.chee@altera.com
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=LHiS9ZbZWHqL2O6ikQQVWAgOfwFyxSz92V03M63pPfFf1qHKBoYO/AfcvHPfqD4jMl6DvMI3EWJiw6X6mdcwPM65y9oeOcRD/RHa57HJLr93FEzQPRRX7hw4pv2B+Si6xWpaUPDtjYLoQcU+wiBxPe4azLmTC+UA797KR7gj3htPO1zWEtViZOTLOvMb98v5QU91R2s1Fjd80MvobH1P4QlGzmBih3U2ZFqAZTXkZPOz5fkvzANCgYVSjf9aMEgjWQNf45vzmJuW8qWStr0mcdBry+t5exyR/M9F1TFHcN9kuKL8ZpWpj4puB0pZ4z8u6XO0bM/i+RN2l9YSFgn0PQ==
+ b=qra+DytG3znwFFYCkgI77GfjiXXIZl98A004FhcogUA8I3MhKHJ588ozU9HwokKeRBEaB2dHt+Wenwuz6Fhz4xLzUA96E1GBUr34FcYDbUciqlEEss7IZcDpKY2iGUh+54lQBgVy6Hnjs2u+DPFMV+jZoejxNG+pSmJrTVw77X2eGUHWDxTKY79qn8o9FCKAaH0uvz3U8x6q97FSKU6HN/M4IA3ilJB1Ufieqe3hDOwo2nMBOn68eKeLPYZBjY39PB9v4mcj7NwpN4t1vn8UpcRHVkeb4pInyOewqdGHb2qZ6HVn7wT6XsRAPclr5KLOYNcwSst+H1sgxphfYokwdQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=s5ltuavUT1s8NGcyI6QjbPUmSRMZdJbEhTCn16eWKik=;
- b=G5IPJR3Gy5TPWdhxFtJAjitX1t5t8w0Cl5C0s4zuSaFRTFz0Vgv97d+1LJIH8Gc6xDdB0ldy1fH9ubduyW4VJjvSDXGSxizO7apnSQxIHO4Paj7eDXcv3gUr8nETZADyaLR+CSl6hQwvOnCOPkS6BxEMWZpzVlpL5DAR7AUx+N0juJOpPdGQdKZxQIFsiXS3bDVQQtFvubue7D1A+P6CfrpuqUG3rMBvrBNGWGxHArGbdjOkSxGjP4K2Q0x2GdXogeSZAGoSbkINAajcqJcK8fV5iTUQ0rmg8ywste4F62hnvzHa4s271xSSDD+Or6WfThL7oEE7RdPzps0jdLuTdA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
- dkim=pass header.d=altera.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
- s=selector2;
+ bh=duPoEP/Zo2Fked+yWftE90/caZTYeTjYAYMfwByU9WU=;
+ b=MWgQ44Ynjmh+WkifYSsfjiO4O4z03cyDyWSIiv5T14t3kjVSPY45C1PMnH4s8t3kGJoo/jcDPHx/0Xik9KGx7d72vYe1A/AncABFgaG9NLKa77ztoxvge9hMQ218oqRX+1TS1Ez7lL0zgGbdEEuusrYMx125mzefxfXkgHQcXtU1XvVyln9rzWbhU2/lBXcOExbw4SzfrIXFxYXjajmsOevghx5e5dJrkaajKjaWeA67COOXIUlMzpICiwtnztyi1Sd/rt5GdbdSz5WGIakpPwCmmcs2ABodomJR/Qk0lnAOeuspF9j4Ro/eQu1dLbM88UZU0MFHJmLAMNfQ1HAFFA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.23.194) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
+ dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=s5ltuavUT1s8NGcyI6QjbPUmSRMZdJbEhTCn16eWKik=;
- b=LRzvEpWRK3DbdqNkhpsYK8bT3jQ67pyTuh2MKSjWnI45C8wSBAQw1H+S0KMIjc3eTgtyOFK8GrcgLVqB73U6ImzHnRmspnAarT0rQPfS1rodzo+8kpR+6WoevoFTd5FI+QbqEowoVA/QjOkA2g5QZAFekLEmsJaFUZs85g+Tt1zFOQ8FHsbCEddltzfQOVE88LcM4LJcetf8hfLjYe0TSpKcYZ+QFFUs0Ka7d6NK5J9liPH17clY+TK+zEkyHjecn4Pi7O/1Plh1G5Zg4h0LCNehTsAnxqingHsyB43C+FiZXUkj96pITkpxADxEsu5JSChGPpBDvb7ta94O3k94rw==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=altera.com;
-Received: from CY1PR03MB8121.namprd03.prod.outlook.com (2603:10b6:930:106::16)
- by SA0PR03MB5641.namprd03.prod.outlook.com (2603:10b6:806:b0::22)
+ bh=duPoEP/Zo2Fked+yWftE90/caZTYeTjYAYMfwByU9WU=;
+ b=ZZtE08NvEaRXQrn5nirGJy4b3Z1aYMXp4LD6V5OZ026LdYWpGZkfG/iwbTltf2s4Gghk+ksd2s4vDeyU5HMBy1rlM02mznZLOlLGbbrCbN3oMHxY5sJl43jpu9QswveKeyAckcrAJtVCVRs9+ofrJkvPbJ8Zfb9nBa1wQ6AAbQg=
+Received: from CH0PR03CA0112.namprd03.prod.outlook.com (2603:10b6:610:cd::27)
+ by IA0PR10MB7232.namprd10.prod.outlook.com (2603:10b6:208:406::13)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9846.16; Tue, 21 Apr
- 2026 09:30:50 +0000
-Received: from CY1PR03MB8121.namprd03.prod.outlook.com
- ([fe80::fe3c:a06b:8724:fab0]) by CY1PR03MB8121.namprd03.prod.outlook.com
- ([fe80::fe3c:a06b:8724:fab0%6]) with mapi id 15.20.9818.033; Tue, 21 Apr 2026
- 09:30:50 +0000
-Message-ID: <c566d6bd-ae38-431d-a43f-326abdce3e69@altera.com>
-Date: Tue, 21 Apr 2026 17:30:42 +0800
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 7/9] clk: s10: Refactor S10 clock driver
-To: alif.zakuan.yuslaimi@altera.com, u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, Marek Vasut <marex@denx.de>,
- Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
- Lukasz Majewski <lukma@denx.de>, Peng Fan <peng.fan@nxp.com>,
- Jaehoon Chung <jh80.chung@samsung.com>
-References: <20260403022513.9446-1-alif.zakuan.yuslaimi@altera.com>
- <20260403022513.9446-8-alif.zakuan.yuslaimi@altera.com>
-Content-Language: en-US
-From: "Chee, Tien Fong" <tien.fong.chee@altera.com>
-In-Reply-To: <20260403022513.9446-8-alif.zakuan.yuslaimi@altera.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: SI2P153CA0008.APCP153.PROD.OUTLOOK.COM
- (2603:1096:4:140::19) To CY1PR03MB8121.namprd03.prod.outlook.com
- (2603:10b6:930:106::16)
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9818.32; Tue, 21 Apr
+ 2026 09:51:38 +0000
+Received: from CH2PEPF00000099.namprd02.prod.outlook.com
+ (2603:10b6:610:cd:cafe::92) by CH0PR03CA0112.outlook.office365.com
+ (2603:10b6:610:cd::27) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9791.48 via Frontend Transport; Tue,
+ 21 Apr 2026 09:51:38 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.194)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.23.194 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.23.194; helo=lewvzet200.ext.ti.com; pr=C
+Received: from lewvzet200.ext.ti.com (198.47.23.194) by
+ CH2PEPF00000099.mail.protection.outlook.com (10.167.244.20) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9791.48 via Frontend Transport; Tue, 21 Apr 2026 09:51:38 +0000
+Received: from DLEE215.ent.ti.com (157.170.170.118) by lewvzet200.ext.ti.com
+ (10.4.14.103) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Tue, 21 Apr
+ 2026 04:51:38 -0500
+Received: from DLEE204.ent.ti.com (157.170.170.84) by DLEE215.ent.ti.com
+ (157.170.170.118) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Tue, 21 Apr
+ 2026 04:51:37 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE204.ent.ti.com
+ (157.170.170.84) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Tue, 21 Apr 2026 04:51:37 -0500
+Received: from [10.24.50.71]
+ (a0497641-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [10.24.50.71])
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 63L9pZgq275791;
+ Tue, 21 Apr 2026 04:51:36 -0500
+Message-ID: <e8b96a8b-1fc8-4f4b-8b4a-aeaec27f3320@ti.com>
+Date: Tue, 21 Apr 2026 15:21:35 +0530
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 3/6] arm: dts: k3-am68: ddr: Update to v0.12.0 of DDR
+ config tool
+To: "Kumar, Udit" <u-kumar1@ti.com>, <trini@konsulko.com>, <s-k6@ti.com>,
+ <bb@ti.com>
+CC: <m-chawdhry@ti.com>, <u-boot@lists.denx.de>, <gehariprasath@ti.com>
+References: <20251031053425.3960963-1-n-francis@ti.com>
+ <20251031053425.3960963-4-n-francis@ti.com>
+ <ff95c3c7-7438-4a30-8731-9a00c440ea8b@ti.com>
+Content-Language: en-US
+From: Neha Malcom Francis <n-francis@ti.com>
+In-Reply-To: <ff95c3c7-7438-4a30-8731-9a00c440ea8b@ti.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CY1PR03MB8121:EE_|SA0PR03MB5641:EE_
-X-MS-Office365-Filtering-Correlation-Id: 717849fd-a794-4d10-056b-08de9f88acc5
-X-MS-Exchange-AtpMessageProperties: SA
+X-MS-TrafficTypeDiagnostic: CH2PEPF00000099:EE_|IA0PR10MB7232:EE_
+X-MS-Office365-Filtering-Correlation-Id: 13529562-e3b2-4519-6fce-08de9f8b9542
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|376014|366016|22082099003|18002099003|56012099003|55112099003;
-X-Microsoft-Antispam-Message-Info: 8IwE7KOIw3Uhe0xMYHmeBZCy2orUN98z0fMsYV/1Q3BESjhZ7ChqYMTeJby+O/RtNZpjlhNQWOC4Fz8XhzDVZaQFEXs5yN9W1IkfjOlYs00aASqNA9bGbPjMbJm+PX4cZRXCAbpgnf3x758xYkzns5YYfDHSE35UYT3gVGDB4EbB1UKEljXrbSHtYZ6q8xMe/Y9lT98EeYYn35lzICReimex8uNHNAa+AdMjezmfVU/s+ZLp9l/BeUt3yTTeUXmbDPdsoK5RCEJCbtKf91UNkAfb7JqrQ1vTRw7/03Q2dl+sqmzqYhhpWcpG6B9mKlu5QdKFPOzZwPHXAUXV6yJU3HHxOlBXF+/Yxr/T+Y6ZiszOh4iLEQrbosraQ4aFoHLt1j9xqfCoelnjO0wucJLIk38+qcZ5HHX6/GHyWXSq7kLgVqOykO8Ac7ZNyJkU49/XwETuKPWC1zvpsbdRCnc8iQJA5S4McsVzAUCbls0HNk9sBLr2OzKnbWKRZLmbCnXX7uhQNoTcNT3iWgGuMQKSw+wKewuumGZZIW6F9+RymKfvGYIE8/j4l2tl02imhhSikwXlxkzWPxYjdaZ3wSkni5upXiunBNNpg3l6vGcxYEUujplOX/4eNOwjF0lx9S9iulEJ8BJUOD5wbzw57PUeZ/eSk7oDf57flxOibbFITBkfopwd8U5pOcdaATICyW6A
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:CY1PR03MB8121.namprd03.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(366016)(22082099003)(18002099003)(56012099003)(55112099003);
+ ARA:13230040|376014|36860700016|1800799024|82310400026|56012099003|22082099003|18002099003;
+X-Microsoft-Antispam-Message-Info: mBFe9t1D9w+UK8Huck6n3PF/Rmiot9/X4Xbm/0BIJjWPmWwexvAXi+vPPzwPqOIKGcst7+Ey9SRZEjbFv2oBiau1Yzj1LvypyeorhmwF3tOhUZ7sF49BHMEFOePUQoRjYY1qpTIvqUPr/+DQ3vy84mfKqfoJvQFtjbOMokNJeSIG/IcxNO4K8nnX39DMxs8R5VB0gJYiMuVIat0Wh3r1W1fgwKEnDMKxUEirlBJJ4nXw7CaWTHWHjB7XgbpXjIxqux5lPDXO8Kp1I1VpNdynzHsZ0nUKh37mVeIwWuZe/XSAQqd8IAzjvG/OX/5quGOyI3Z6T2AaEhzR+Ma1CBgRrPFNmOPSvzSrVZjPUwtbYbnhakiFAPowa8/DMAGaxwhVYYy/Oi2SqMaK9wNjPdhwg45sY4nmbDHsCfph+3qvhNyxzT7yRWubxWZ7GwU8R8a0EFxx6lsslIOlgF9W6cVyJTO8tj0WSkfk1JRAjdvnCqyu+4cZZWwfQ8Q8MyfPUB0n39D6wN5fHMn680C2NUw/HO/7lIOJ9srSrcHLOQ1Z/+V+wGKe+9qpiwlvO1PGtp+zx00yB5KxTOwj/oBvN4isT5joiqoovNi77s82Xznk0fm0+BP1hQAFjzYcfywsC1PT54LBnHzrXFyTIdMf6rC2/Hp0pPkrW43RZfiNZK2hW18AXYjBocXxAMHE6ccZm3b7Yk/5B8Yqk3uucI6qOeb8HKgf34GoqeyetO7XVvurbZg=
+X-Forefront-Antispam-Report: CIP:198.47.23.194; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:lewvzet200.ext.ti.com; PTR:InfoDomainNonexistent;
+ CAT:NONE;
+ SFS:(13230040)(376014)(36860700016)(1800799024)(82310400026)(56012099003)(22082099003)(18002099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?bUwxZGNxVWxzdHBlaGFhMnRWcXNhUXNsaVpYUTI5K1gyallkcUs5V2lyYkJl?=
- =?utf-8?B?SDNVc3pWblBVMy8wajVOT1B2NFhvYzBMenNyQWJjVTRxZWJVZllJaWlROGJr?=
- =?utf-8?B?OXJOZnoyNzBKY2UwSDdJK2hpZ01jTWJQYVk5MGNXRUZwaG5GZXBiaWJhdkJY?=
- =?utf-8?B?MzQvb0x0MTNaNUQyRFJHOWhORExHYkhTMm9ONjA4TTdoQjJSczl2NlpURmVZ?=
- =?utf-8?B?ZXBRSG4rMnZ4UU9YYkh4WXBFQm5LRkNEbHRiOGxQUDJVcXdqWVcrTjgvcWpO?=
- =?utf-8?B?WnkyOW5yc20xdURteWlXeFBvUXlaMy9GamlmZGhtd2FqNDZYWkFsSlo3VVY2?=
- =?utf-8?B?dzhvQjJkbFh1V0xEVWp2c0lQYVFwQUlNU1ZCVTJwTTE3bS9FU1ZObWpZTjVI?=
- =?utf-8?B?NklRVmIvVEY4ZTRmbHR0ZkNFSCtnTTZhaFltTG04Z2hyMTQ5Sm92M2V5S3M0?=
- =?utf-8?B?KzBCd0l5RkxlVnIweUJxNlhsVTNYRUUxaVptdFplVlM4U2lSbkl6ajVsRlJ5?=
- =?utf-8?B?VEkwRlJ0OVlkWkJaNEFWZnRBR241QzV0M1NJUEQzQzJjMXIxMkY2S0JDVEJJ?=
- =?utf-8?B?b3pUM3Y0QWEzMzdZOWN1K2lxaEptNFArbjV1ZGNlbTk2QmJUbHAxeGNZVkN2?=
- =?utf-8?B?NEpoZldQbXA4Z091bUM4MkRpL1FIQ0FKVDVlZGFYVmdNTHFTTTErSURpRVlV?=
- =?utf-8?B?RUtGMldzR3l0bXAvSFFsRVBXcTVjTWhZZEtHZkhMSThIbzNlRnV5cTRSYU1O?=
- =?utf-8?B?dXpGRkVqR3FqK1FEeSt3dFFCRzRGYTkzckRiVC8wT2c0YzZoT1hmS2hFMHd1?=
- =?utf-8?B?ZXFoSUZjU2FNSTNERmQ4WWhjc0JyN2V5N2t6Mmg4Yi9FcE1BZlVDQ3IyQkgx?=
- =?utf-8?B?a1FUT2NjY3JQbVFoYUc2SXJ3TnhSbVBnTTdoWlh6NmhRZFZudURJNXpOdGNU?=
- =?utf-8?B?bjRxZVhWWUZPSVRkNkIrZzh0N2tQb1V6MWQ4Z2g3dXFmaVdwRDRPQlo2Qkdo?=
- =?utf-8?B?cUtlQXdKaTVNSzBuZUVJUm56S0JsbmNtUlp0Q1hoZEVBZzNtZzRuY0luZlQw?=
- =?utf-8?B?UHlOanNwVHc4UWF6cWU5TDhkMFQ3cEQ2aFRUK2RuUUg3YTl3QmNWRFovSFdo?=
- =?utf-8?B?QVNJdy9TbU1KdTRRc3ppTEtwOTIzMFpnMGpmaStqcmJGNjVBSzJadko3Z25I?=
- =?utf-8?B?NWxuWGNyNHVmWkx1RjNWQjVhSzRKZEJEcm53aW83NkFBNktDMFlRUXlqeEh1?=
- =?utf-8?B?UUNuc1dEQmZsWnpma0hMbmRMeXdGRTdYNmpoeTl4cTFzWURIZ3J5SUtLcG00?=
- =?utf-8?B?NktXRjBMRlhQVHdZVlZ2YXVIOVg2S09XdjRnQ1ZjbkZKOWI5SnFmcUJEK2hj?=
- =?utf-8?B?UG9lY2F0Q0NvUHZmV0d1QWRVK3p0R3VDY1FVeExOVE15QldyYzc1R1FTNmFL?=
- =?utf-8?B?VEJILyt6TUlwbk42OE9PNzJELzJhSWtTMEZQOGd2aFBZYmozTWo2VlJmbFBI?=
- =?utf-8?B?UUFZYWU1MEFSeUp1N1p5YWJEc055L3A5TlhyUVZXeXB5ZzJOdG1hbGxWaWxE?=
- =?utf-8?B?REtOTzlFRHVqWFlheG90YjVjZ212S3dycWF5ZEEzNXBQWGRHWnJCSDFZTVRr?=
- =?utf-8?B?eDMxTytwb1VVN0pHRTlyMFN2NFBJaHNOUFpTZ09XekdKQk5kcDdwNjY0dXJu?=
- =?utf-8?B?RWdjU3kxeFNhK2lUY3cvVzBWemZYWXZqSEVvL0greWFHbXBKNmZxNlliVzUw?=
- =?utf-8?B?M09KeFV0UTJxZDBzOERqSWdDYlpGemUzcVQzbjVVbUJnWkY3NnNqc2EzVHhS?=
- =?utf-8?B?blZaakcrRTFhbmc0dVZuY3lqblpDeW5mS01HQWY2RjhBYXJhMWhBQTV4TnAv?=
- =?utf-8?B?eC9sZnFvUzdBSFQ4bzNWajd3MzE4UmU2MDZ2YlBVeEljQ1FCbmVyRWREYkVz?=
- =?utf-8?B?dUlBR3ZoSis5SkhaUU5SUk5wRGttVVl4amkzcTIxREh1YTlWUWFqL0swdHVF?=
- =?utf-8?B?cGdIRjlFODhnVUlGZUxiWlJzd1kvQVN4OWZTemNGL3p1NzNTL0owNG9aVXBF?=
- =?utf-8?B?cVROM09JWjhUUGR6SzgwaCtQanM0OWJ4bHAzUEV4bG1VWUdVODFSY1lXSXhr?=
- =?utf-8?B?aGEvVDZ1OGcydlZmV29GMi9XenB1MFhMU0FydU1xdjJjUTNLa2U5NzJiUFUx?=
- =?utf-8?B?bU0xR2Z2QW11Q2UyMGViaDF4YXBsaVNmRDk0cDZuV2o4R3Q0QUY2TzMvcFhP?=
- =?utf-8?B?aHFBRk16bGVGbEh2Zk9haXl5aVFSdE1mSVQvNTR5L2p0TmdJZnpZR0szVTEw?=
- =?utf-8?B?eGZJRGZEcGM3cnljZ1RVTisxY3NSZEFhOENvdE5sQURRa1ZUMlNtVlZlbjlU?=
- =?utf-8?Q?egU/ZLTjppfvs824=3D?=
-X-OriginatorOrg: altera.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 717849fd-a794-4d10-056b-08de9f88acc5
-X-MS-Exchange-CrossTenant-AuthSource: CY1PR03MB8121.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Apr 2026 09:30:49.9850 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 0VoFy6FX9D7JZi3bltn3R5bURr759Jf2D+uWWxYgXrzcp5IwzmfQN6aIwCsLVmiTFRdad9JNwFdVPqOiMDqp2daw3N0/pSLKR9yvAU2BA24=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA0PR03MB5641
+X-MS-Exchange-AntiSpam-MessageData-0: VgkmNa57Dj037XNP1mC2qnzFVmmslZ1/REp34aD16vnnMABIODAt7lyyxpk9B2FBpi1RVHRbK+lFxYp2ndrdyR1VlDDYQbBtVeuMJL8Kr6NsCh7F5/T6IdYQwk5NBRYyJO1vcDrZ+cWfbKego7M5uKEeR/Sq8adgrQyzXvKBFnwPG+3dE/6hqP5iir0+wYgLAHokzyzwL0I12i9vgIvCoR87Mm4ff5Sp6DH5mIhvrzzec6ffpc2g6udG+dsVh3PJhQ+xD1yqBP73HgUi5UKrN4TjNPakqvDu2t4Am/fZo5hGzKk1qp9EiwlT4hCcPnoT6zN8qucn0QaWlV575C12hg9cjLrnT0/wcqwnljGgMhPPKKFx4K6Lb41XN45NItgAdRVUf3xF1vNsDbBvpsrSv1NucISYbsKo8DHt/wY59Dn7/oEBufkzpyO5JDyjQsc1
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Apr 2026 09:51:38.5650 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 13529562-e3b2-4519-6fce-08de9f8b9542
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.194];
+ Helo=[lewvzet200.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: CH2PEPF00000099.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA0PR10MB7232
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -153,100 +137,69 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Alif,
+Hi Udit
 
+On 21/04/26 09:20, Kumar, Udit wrote:
+> 
+> 
+> On 10/31/2025 11:04 AM, Neha Malcom Francis wrote:
+>> Update the DDR configuration for AM68 according to the SysConfig
+>> DDR Configuration tool v0.12.0. Log of changes between 0.9.1 to 0.12.0
+>> is [0].
+>>
+>> [0] https://dev.ti.com/tirex/content/TDA4x_DRA8x_AM67x-AM69x_DDR_Config_0.12.00.0000/docs/RevisionHistory.html
+>>
+>> Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
+>> ---
+>>  arch/arm/dts/k3-am68-ddr-sk-lp4-4266.dtsi | 4410 +++++++++++++++++++++
+>>  arch/arm/dts/k3-am68-sk-r5-base-board.dts |    2 +-
+>>  2 files changed, 4411 insertions(+), 1 deletion(-)
+>>  create mode 100644 arch/arm/dts/k3-am68-ddr-sk-lp4-4266.dtsi
+>>
+>> diff --git a/arch/arm/dts/k3-am68-ddr-sk-lp4-4266.dtsi b/arch/arm/dts/k3-am68-ddr-sk-lp4-4266.dtsi
+>> new file mode 100644
+>> index 00000000000..ea773a2ca4f
+>> --- /dev/null
+>> +++ b/arch/arm/dts/k3-am68-ddr-sk-lp4-4266.dtsi
+>> @@ -0,0 +1,4410 @@
+>> +// SPDX-License-Identifier: GPL-2.0+
+>> +/*
+>> + * Copyright (C) 2023 Texas Instruments Incorporated - http://www.ti.com/
+>> + * This file was generated with the following tool revisions:
+>> + *     - SysConfig: Revision 1.25.0+4268
+>> + *     - Jacinto7_DDRSS_RegConfigTool: Revision 0.12.0
+>> + * This file was generated on Thu Oct 30 2025 14:50:37 GMT+0530 (India Standard Time)
+>> + *
+>> + * Multi DDR Configuration (table based on register configuration tool inputs):
+>> + * |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
+>> + * | DDRSS | PHYSICAL SIZE | SOFTWARE ACCESSIBLE SIZE |
+>> + * |~~~~~~~|~~~~~~~~~~~~~~~|~~~~~~~~~~~~~~~~~~~~~~~~~~|
+>> + * |   0   |      8 GB     |           8 GB           |
+>> + * |~~~~~~~|~~~~~~~~~~~~~~~|~~~~~~~~~~~~~~~~~~~~~~~~~~|
+>> + * |   1   |      8 GB     |           8 GB           |
+>> + * |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
+>> +*/
+>> +
+> 
+> Reviewed-by: Udit Kumar <u-kumar1@ti.com>
 
-On 3/4/2026 10:25 am, alif.zakuan.yuslaimi@altera.com wrote:
-> From: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
->
-> Refactor Stratix10 clock manager driver to support driver model, following
-> Agilex clock driver.
->
-> Create a new clock driver, clk-s10.c, for Stratix10 which supports the
-> driver model. This allows several APIs such as enable/disable clock, and
-> get clock rate to be supported.
->
-> This driver will be initialized during SPL to bring up the clock as early
-> as possible. The clock initialization process are refactored into this new
-> driver from clock_manager_s10.c during clock driver probe.
->
-> Excluding Stratix10 from legacy method of obtaining clkmgr base address in
-> mach-socfpga/misc.c as the base address is already obtained during clock
-> driver probe during SPL initialization.
->
-> Signed-off-by: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
-> ---
->   MAINTAINERS                                   |   1 +
->   arch/arm/mach-socfpga/Kconfig                 |   2 +
->   arch/arm/mach-socfpga/clock_manager_s10.c     | 449 ++-----------
->   .../include/mach/clock_manager_s10.h          | 176 +-----
->   arch/arm/mach-socfpga/misc.c                  |   3 +-
->   arch/arm/mach-socfpga/spl_s10.c               |   7 +-
->   drivers/clk/altera/Makefile                   |   1 +
->   drivers/clk/altera/clk-s10.c                  | 591 ++++++++++++++++++
->   drivers/clk/altera/clk-s10.h                  | 202 ++++++
->   9 files changed, 861 insertions(+), 571 deletions(-)
->   create mode 100644 drivers/clk/altera/clk-s10.c
->   create mode 100644 drivers/clk/altera/clk-s10.h
->
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index c58d8f85e33..863e0b763d8 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -159,6 +159,7 @@ F:	arch/arm/mach-socfpga/
->   F:	board/altera/stratix10-socdk/
->   F:	board/intel/agilex-socdk/
->   F:	configs/socfpga_*
-> +F:	drivers/clk/altera/
->   F:	drivers/ddr/altera/
->   F:	drivers/power/domain/altr-pmgr-agilex5.c
->   F:	drivers/sysreset/sysreset_socfpga*
-> diff --git a/arch/arm/mach-socfpga/Kconfig b/arch/arm/mach-socfpga/Kconfig
-> index aec0fb7b1c8..c7ecdc4055f 100644
-> --- a/arch/arm/mach-socfpga/Kconfig
-> +++ b/arch/arm/mach-socfpga/Kconfig
-> @@ -149,8 +149,10 @@ config ARCH_SOCFPGA_STRATIX10
->   	select ARMV8_MULTIENTRY
->   	select ARMV8_SET_SMPEN
->   	select BINMAN if SPL_ATF
-> +	select CLK
->   	select FPGA_INTEL_SDM_MAILBOX
->   	select GICV2
-> +	select SPL_CLK if SPL
->   	select ARCH_SOCFPGA_SOC64
->   
-> [...]
+Thank you for the R-by, but there was a later version:
+https://lore.kernel.org/u-boot/20251103071035.674604-1-n-francis@ti.com/
 
-> diff --git a/drivers/clk/altera/clk-s10.h b/drivers/clk/altera/clk-s10.h
-> new file mode 100644
-> index 00000000000..f5be1e68500
-> --- /dev/null
-> +++ b/drivers/clk/altera/clk-s10.h
-> @@ -0,0 +1,202 @@
-> +/* SPDX-License-Identifier: GPL-2.0
-> + *
-> + * Copyright (C) 2026 Altera Corporation <www.altera.com>
-> + *
-> + */
-> +
-> +#ifndef	_CLK_S10_
-> +#define	_CLK_S10_
-> +
-> +#ifndef __ASSEMBLY__
-> +#include <linux/bitops.h>
-> +#endif
-> +
-> +#define COUNTER_FREQUENCY_REAL	400000000
+But no worries, I will add the R-by when sending v3 as there are no
+logical changes in this patch.
 
+> 
+>> +#define DDRSS_PLL_FHS_CNT 5
+>> +#define DDRSS1_PLL_FHS_CNT 5
+>> +#define DDRSS_PLL_FREQUENCY_0 27500000
+>> +#define DDRSS_PLL_FREQUENCY_1 1066500000
+>> +#define DDRSS_PLL_FREQUENCY_2 1066500000
+>> +
+> [..]
+> 
 
-COUNTER_FREQUENCY_REAL 400000000 defined in clk-s10.h but never 
-referenced in clk-s10.c.
-
-Example: 
-https://github.com/u-boot/u-boot/blob/e3405917a1806971d9e72a94186b299f05581e1a/drivers/clk/altera/clk-agilex.c#L357
-
-
-Best regards,
-
-Tien Fong
+-- 
+Thanking You
+Neha Malcom Francis
 
