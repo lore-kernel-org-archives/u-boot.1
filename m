@@ -4,92 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11397F94CB3
-	for <u-boot@archiver.kernel.org>; Tue, 21 Apr 2026 22:51:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1F22F94CB3
+	for <u-boot@archiver.kernel.org>; Tue, 21 Apr 2026 22:51:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A833E84319;
-	Wed, 22 Apr 2026 00:51:03 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id EB6748419C;
+	Wed, 22 Apr 2026 00:51:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="lRwrgMkS";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="e2XEEwYJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7E537842FD; Wed, 22 Apr 2026 00:51:01 +0200 (CEST)
-Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
- [IPv6:2a00:1450:4864:20::62d])
+ id E750C84337; Wed, 22 Apr 2026 00:51:04 +0200 (CEST)
+Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
+ [IPv6:2a00:1450:4864:20::634])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8920D83AC5
- for <u-boot@lists.denx.de>; Wed, 22 Apr 2026 00:50:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0EDA083AC5
+ for <u-boot@lists.denx.de>; Wed, 22 Apr 2026 00:51:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-b8f9568e074so813853066b.0
- for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 15:50:59 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1776811859; cv=none;
+Received: by mail-ej1-x634.google.com with SMTP id
+ a640c23a62f3a-b941762394aso650006566b.1
+ for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 15:51:03 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1776811862; cv=none;
  d=google.com; s=arc-20240605;
- b=G7Xqsq1hHM+CH9oFMHKsBBY82jLPSKQBIYCFoqlE4z9QIW9T5wVJRDTZ2KxwB6wmV8
- W6yhtTsXie/0iOVPfUJcjuxZewhV7QHh6QNOTifK/CMpKlrTxAMJkgwRS/f4/3mslNg3
- TuU52y+uCk/k1r/w0KRjdkxB42UiRDCGTUnNOOtGqNpSrVLKk5z0sNUfMzlNUvmu2p9E
- +jIYdSjaAwxzaaqMMTW4NCFbXmARVWbH6RScPgQrkvHGQZDOM95VaACEWrw5qNZyhMZQ
- zi30VjTHBCdRpb9rxDavpbfpvUrKHG2NC4RPG4FLoY0NC8nwsVkaijSDMvGZmIxUK/OJ
- npKA==
+ b=IiOXRzHbHJ+PnodrNZspY9h4827utopPu6RBOVBSRGvlPQWeLZNenjQGCjlUL9CeOC
+ ne73e+Ut27iZdIONeAGLBPELYa4GFAAnx24XJHjzne7ANZtafUQc2xbol+4/5Dny7+e8
+ msb0gs3IsdChm2MFrMHm4z+hcC20+MYWm1996Mpyswp/sZS1xybGOf/R4tU+DB+NStTl
+ R3zXLrvZX3oEw6r60qSAy9RfZigWUrx6e+g/ZQ4EjrzmEKy1WJJ1L8jJ6ultnoUw42Rb
+ oPgFZ1/wOBmX5iOYi6yJ+KIgU5wHDBuaRuEXP1boU3SPpmiYEtwReFch7eXc1VM406m0
+ q9jQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=4Dc8yUHiogEq0hoKKQDXrfGWTfaHY5KTRzzGmvkb7Og=;
+ bh=UfxGlShJndguUIUycEnxYNHigdL7zsNnw2fAng3T+VI=;
  fh=T79q7iQaKgdBLSTuhvl3jRYD2v6g+8MB8Joags6q2NI=;
- b=INnKbWowX+goougqJBQaaZlB5/cXrW7JGGuyKxYhsG3N5H6D4J4Wn4bbmzYjJ1c2Vo
- /+f0Zy2X0bej8Zt51X8QVsJ9TlYjaCqZ/ae4/0Q6ELeW9MONkjs6gYk0NIJzBDtuffGA
- DDmIO6ursIVuWT5McIEFqh3XVSQW9MpW6RM5WQ1j6AMYJ88CBOAm5HShB5472qfnVaDR
- a2Dpf+z3dXm8JmZKk8ypxGzeIysg1T6LJdvqi/srbo7DhFuBGK/3YjsYegyqqh+NlGe3
- x+sDgWdJ4hbjY/hb4wwXxdX8XhwuqQYOjKP8Nf17rWtwrbaiCvdtW2cMiL08ZKC3c/sY
- FO4g==; darn=lists.denx.de
+ b=XhPHjYH1CVGKcYbARLNQMmQwBPW009025St3A3U1iPRKwlDm++n7+N1FjLMRvGC+7Q
+ 5huI8WKkqi64BzmfYvWmKeL48c8q8P+Fadsojven054CDqETVEZidSFOdMc4utHsi9TM
+ eHdc2WeUbVwVGMvTS3auZwcXF/6qfkOu10ihzCvz9hhOmGLCiqCMzlnNQi87b19xWz4B
+ CxjnCv76LvGYWKmxwVpOLwK478cOAsJeaQE9ys53Vz0tnwkm2M/h+FZaS3MGlOE96STb
+ 2eRHeU/HR1maGWbLK4kqE9TwgJzYXxednpOmQkPhgFu6UALkOB3o4VjZs/wMQ5nkDknv
+ l+IA==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1776811859; x=1777416659; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1776811862; x=1777416662; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=4Dc8yUHiogEq0hoKKQDXrfGWTfaHY5KTRzzGmvkb7Og=;
- b=lRwrgMkSMwO9pmGA3WgLIBGAHvG/4P2gZkgfmAbBliJkShjyTrtK6o0FbPMrAI3tKI
- 0+ArF5HHLYyUyRaALhA26Zy11lgep/8/f6Yka7a8skUsgYAf+ndHjozSlIZ+hvFjeQrd
- H53PZshB+2k0UMKAzwor/I6FFtMTd+djv1huE=
+ bh=UfxGlShJndguUIUycEnxYNHigdL7zsNnw2fAng3T+VI=;
+ b=e2XEEwYJ80Am7gystuQcENmavCNNFs2DMYQojoZltm3edgjOC80MBzTKWFrBVmEz9L
+ pNuX6CsIFhYOMKcfrjMNqBbdm3t3Rveo10wz5UVsQlFwEru5ND+EMMrEVtxAPHTazGI/
+ Hs9MlwkPc7G7Murvb0iGvIYU+80tnFwer7Ve0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776811859; x=1777416659;
+ d=1e100.net; s=20251104; t=1776811862; x=1777416662;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=4Dc8yUHiogEq0hoKKQDXrfGWTfaHY5KTRzzGmvkb7Og=;
- b=k/q2xHA7tv4EMjznogQozLRI7BageB1afE+oK7FALdYvnCovsaI0aW2anUCB5DAmWp
- +lE8T6XszQMW11DLTksQIWatmCI3cCd8rZ8uzKouNiFqu4qBRvd0Uenc5i3an4nX/O1Y
- clxItpB7Ttf6lOHb/EcvWsoyUIjxGOcT30rXxaC2DRT4k+Vaz3DyijBQ2JB79/YCJydx
- m9WnAZbuWUVvTPvWK9vEzBS6/1dg/zykRqIAqWbaU2qD5hvwFZndTEf6+tUvEGNqyz+G
- LRRYgD+VeJzB1a8FYFpNsNcw1YmPW3gEwQkbbpPZ8Hm2BSCFCQ4FzMzBiPgM1itzY+B9
- 7tgA==
-X-Gm-Message-State: AOJu0Yzhuw9V5pQlK3b7PRM+PwQyT87nk3ayxg7eYms3IrCLLwP1G9MH
- pDNsbzdUnLYFgVYoAYkpcc24UG0X35rUfNpKAWxBEYp1NisxLx7UVVAVflFGIC5L1QAM7SJwF6N
- JFcBiYTIVmA2OtNPg8IoCQg3Cy5U2zFjoFA1WiMov
-X-Gm-Gg: AeBDieudn4OjkQEtsp9I5JQ14EbbJtq0tkFWiSQbrCnDNqCvncJDLpONHpV3ygYPfsP
- 0h18Y/Pz1EyAstz+H2126VC53knNBO9GahAaybtggdr9EAqmoUC4Z/ICDYLnM5C0Z5TjhZiGsRV
- V7WSLgL/wFfCbCEpKVU8c4fB/JD4tXbPr2lMqS1yau2iMkhkLta6HhUfzNB9E4CvcM3xc/qYj8z
- 1ZZeWTAGADUPbdGG3LcMoFTJlBXc4z1zOaSAG5BkTWac+Tpf/0jLm9se7kkFHwo1KM+KvBk5CBK
- +VVlDoucnnC/pR61aRbk
-X-Received: by 2002:a17:907:970a:b0:ba7:9885:b56e with SMTP id
- a640c23a62f3a-ba79885ba4amr500815866b.20.1776811858917; Tue, 21 Apr 2026
- 15:50:58 -0700 (PDT)
+ bh=UfxGlShJndguUIUycEnxYNHigdL7zsNnw2fAng3T+VI=;
+ b=DDpyLy+/BtElA06ebnXs8RD6dLn5FBHoyhP3ORnqfOWWYj+qqJIgyZ9IIhIprA8Xy0
+ /nxzHsy08HVeGlmYQkmDki/fMb1hIwLw6GpzwEy7qc3TNFQk4HbcmzcvLs49/s2idxlF
+ 9oOzlbOqCOWC/OJ6N9vh3zLjfOwvINaykHukxKhUzQfzXYPNrtxmxapU5xbEdTY+wnvO
+ mH/jyn0wnPFB7pPppdZUESVZxLeD5cK+v33TRs7O/27wjjipY8HN5IWTUm5V8NHtTTYg
+ yZxhWjKr6r49c7C/uCY7qcqjhtGp9o7xv4NTYroWWBJEssVSWqoUVhcVDCccBqCFRDPH
+ FHeQ==
+X-Gm-Message-State: AOJu0YwXegQzs7PWMW1pCHeOMtjUuqRuvEKKxyXkigGlaP7UqADw/mPZ
+ plY7tsedh+edoxVmL3IWwlVA/Jwva0SLocbzsSrwtNHRLpoOktdAPWd8Z0ic/yxo4khq1R/8bjx
+ ho8/1Bv8yF6psbFM91Gu2i3R6Pj+pPiZhDWwJP0C8
+X-Gm-Gg: AeBDiet7aRQxcpvuZAIMSbekiuSulD95fJWjv0QtYm3ru/n5xBEvx5meq3QnNYOffOw
+ YrP2eJWxrxzbyXlB6UvnVzp37DG6sua0oRwNarr61ANS9m6jhmv3kmICPl+SzKVWSUZ4jaVb3qM
+ +eFP5S9DgacADH8WFXHQxJSKr34LNokx9FkqT/TkEMhUnvwrDpDkLAjkPBpdigH+e1bQJWnExz9
+ vq3eXhJVpwfcPx3TZBvCaa+fV0WdoB2SHkxwZ8qApKWMOc2kSILbJfMVQ8BZdD+lliK9P7vWNyU
+ da+XKP2Mi14Ab7PXLAmW
+X-Received: by 2002:a17:907:c318:b0:ba8:28de:697 with SMTP id
+ a640c23a62f3a-ba828de0ac3mr529854466b.9.1776811862553; Tue, 21 Apr 2026
+ 15:51:02 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260421-ten64-add-usb5744-v2-0-eaa81288e393@traverse.com.au>
- <20260421-ten64-add-usb5744-v2-2-eaa81288e393@traverse.com.au>
-In-Reply-To: <20260421-ten64-add-usb5744-v2-2-eaa81288e393@traverse.com.au>
+ <20260421-ten64-add-usb5744-v2-3-eaa81288e393@traverse.com.au>
+In-Reply-To: <20260421-ten64-add-usb5744-v2-3-eaa81288e393@traverse.com.au>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 22 Apr 2026 10:50:44 +1200
-X-Gm-Features: AQROBzCiW7U_AloyWMMGClzlX9a8JeZdrTFW0iK3YEoX-ADoexhqnVgC12KaKa8
-Message-ID: <CAFLszTgq_M6TxjD0Kcsh63M6Td7CeHF4p6v9Q67v4JAMmxQ2OQ@mail.gmail.com>
-Subject: Re: [PATCH v2 2/8] board: ten64: add fdt fixup to hide usb hub
- topology
+Date: Wed, 22 Apr 2026 10:50:48 +1200
+X-Gm-Features: AQROBzC_ppL9osczPBe8QdJ7uah37vyo-eG-SvkcJCKxdcG_7vPENSgaavHZSqc
+Message-ID: <CAFLszTisHY-Um8a833uOQv6Z2nqWRa2N1tyY4U_kfMThFPHzjg@mail.gmail.com>
+Subject: Re: [PATCH v2 3/8] board: ten64: remove USB hub references from
+ internal FDT when needed
 To: matt@traverse.com.au
 Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
  Lukasz Czechowski <lukasz.czechowski@thaumatec.com>,
@@ -113,45 +113,17 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Mathew,
-
 On 2026-04-21T00:04:33, Mathew McBride <matt@traverse.com.au> wrote:
-> board: ten64: add fdt fixup to hide usb hub topology
+> board: ten64: remove USB hub references from internal FDT when needed
 >
-> The USB Hub (microchip,usb5744) can enter a dis-/reconnect loop
-> if a driver tries to re-initialise the hub over I2C.
+> More recent revisions of the Ten64 board do not have a USB Hub
+> (USB5744). The references to the USB5744 need to be removed in U-Boot's
+> internal FDT to avoid the USB5744 setup being invoked on these boards.
 >
-> On the Ten64 board, this process only needs to be run once
-> per system reset cycle, which is carried out by U-Boot.
->
-> As there are distributions shipping with the affected
-> driver by default, the best solution is to remove
-> the USB hub toplogy information from the FDT passed
-> to the operating system, so the OS won't attempt
-> to re-initialise the USB hub under any circumstance.
->
+> Reviewed-by: Peng Fan <peng.fan@nxp.com>
 > Signed-off-by: Mathew McBride <matt@traverse.com.au>
 >
-> board/traverse/ten64/ten64.c | 45 ++++++++++++++++++++++++++++++++++++++++++++
->  1 file changed, 45 insertions(+)
+> board/traverse/ten64/ten64.c | 13 +++++++++++++
+>  1 file changed, 13 insertions(+)
 
-> diff --git a/board/traverse/ten64/ten64.c b/board/traverse/ten64/ten64.c
-> @@ -186,6 +186,50 @@ void fdt_fixup_board_enet(void *fdt)
-> +/* The onboard USB hub driver (microchip,usb5744)
-> + * can cause a disconnect-reconnect loop if the operating system
-> + * attempts to re-initalise the hub after U-Boot has already done it.
-
-Typo: re-initalise -> re-initialise
-
-> diff --git a/board/traverse/ten64/ten64.c b/board/traverse/ten64/ten64.c
-> @@ -251,6 +295,7 @@ int ft_board_setup(void *blob, struct bd_info *bd)
-> +     fdt_fixup_usb_hub(blob);
->       return 0;
-
-The return value of fdt_fixup_usb_hub() is ignored here. I understand
-from the cover letter this is intentional (when the control FDT is
-passed to the OS, the fixup has already been done by board_fix_fdt),
-but a short comment explaining why would be useful.
-
-Regards,
-Simon
+Reviewed-by: Simon Glass <sjg@chromium.org>
