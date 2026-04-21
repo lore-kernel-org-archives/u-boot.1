@@ -4,103 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE1EFF8FA6A
-	for <u-boot@archiver.kernel.org>; Tue, 21 Apr 2026 12:38:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BCDBAF8FA6A
+	for <u-boot@archiver.kernel.org>; Tue, 21 Apr 2026 12:38:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 72EE98431C;
+	by phobos.denx.de (Postfix) with ESMTP id AFE568432A;
 	Tue, 21 Apr 2026 14:37:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="iDjdKQx3";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="dor9wbhE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 416A884347; Tue, 21 Apr 2026 09:46:07 +0200 (CEST)
-Received: from smtp-relay-internal-1.canonical.com
- (smtp-relay-internal-1.canonical.com [185.125.188.123])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 1940C8436C; Tue, 21 Apr 2026 10:08:55 +0200 (CEST)
+Received: from mail-pj1-x102b.google.com (mail-pj1-x102b.google.com
+ [IPv6:2607:f8b0:4864:20::102b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 48FD280077
- for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 09:46:04 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=canonical.com
+ by phobos.denx.de (Postfix) with ESMTPS id DF8FB84378
+ for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 10:08:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=aristo.chen@canonical.com
-Received: from mail-pl1-f200.google.com (mail-pl1-f200.google.com
- [209.85.214.200])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id E0F5F3F9B4
- for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 07:46:03 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1776757563;
- bh=zz59E4w06lYZtzurs03kSANHL3hlxhb94txewbVgWVQ=;
- h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
- MIME-Version;
- b=iDjdKQx377Fw6JY1Cql6LrutlGCWEmqbnCmBuxxEAla+k2aw/9CNj0FlTeK9x9pdL
- MrDtGXrZfrwDVr2dMwtZcgBBeRFbN492V9o0T71Nj8+b6I36GjOSnhqamoG2VAfQ9d
- W7p8QPnrnLjnVkVY3ClbylFVyHCJqONd3RBBt0UFKGCM2aVX/4vtGjyl+V517DIDOL
- 4KdXUxFuos4WHv+3ld0Y/ssT4wjjjPu7bou+A+AWPN/NCmAENIxWCCUZ3E1Cxy/W40
- jeoDNsI0Uh1zhQIW2DDYRd+Gdp56u5avAwOOMvOeWog5ku35W+TQpps3JRVhHPA0uv
- qKJ4qdoq6E2vJXKskBH6Fk70Tytdg8NzzS3A+gjOyWfGGNlMh6xhMlH8fw031m5p1X
- YDI6Ec8pcqxTbpbgZEnnHh0IEpGJQfN6uwGPci1cH6Hce4ha/TlSJhgMITJJlbfayo
- hMBNX9xOSWgSeTCEeuImWWyD/8GUkVFsFDGos5zkb5yxqGenIlCqJyw6dExTtJxYWs
- g+Ds3CXaNVUBaN8wBLJB+VWR/ZPwOqNceeVQLhcOYczMUdzbKJCJIRY8VZaIeHezX3
- 9VYCgAoOi5rwAhbRCMdc+aSlPDgGYYR9pQ07A1UfE8oSHE+HjRWQR6+UBuo63krlhO
- D9cGTgFDXIjgm3Dn9g/q7slI=
-Received: by mail-pl1-f200.google.com with SMTP id
- d9443c01a7336-2b2eba42b8dso36361085ad.0
- for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 00:46:03 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=happycpu@gmail.com
+Received: by mail-pj1-x102b.google.com with SMTP id
+ 98e67ed59e1d1-35fb7c1a455so1583834a91.3
+ for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 01:08:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1776758931; x=1777363731; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=ty1AuVJ60rqNW9oDZzVrfMesTBg9B7KTK4geTZZvpik=;
+ b=dor9wbhEJwJir4FsScn6Lld1Bz3j2k/j6Td/tjx1JXSFQnmHgVmgsRrVQGLC5gkm+r
+ eJlv2JTiXihPJdHl411OB8dJXfzVmxhvpAgOZvVGL8ViOm5p9ag4SmjnKKTTpRzQQVR8
+ GpRwWi0Xuxfrpb0CsOwvfGgCzfFs22Cp3fK0lTV2dCN3jp/DI5wd1F1OxQYxINiYz78b
+ IkiR5z857O0IiJ5kyhVkH+JbnmkBgK9RxUHcfAPL/Nln+DLa1cBth5Is1Y/NDF0xy/n/
+ fdLLomDXQVfcyLtj4E0FLLHWy6TXdIDc/TvEyf038bgQPxK5Wm6vtJ3t7hjdI1FR1y0s
+ ibZQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776757562; x=1777362362;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=zz59E4w06lYZtzurs03kSANHL3hlxhb94txewbVgWVQ=;
- b=IXvrtVtoFfAis2SCTHPgqweOyi+pQHZoQVc4N5rZ7Olyv4Tz5uynBStUCIoPcJiY9i
- AvDaHsZk4zyCgG3P146lgkZjjfhnlajFMoT5NY1bkpJ9Q3Axt/vEKSMpYdYcgI+eDOFq
- Agv3TOEKpcchcB1n1PxVJY/hkAtN9SVflzGF8SwYMHs6dnKkCqzzoLGyd2VNs/XCyHRc
- yG96R7zf46IsL97MDfYJZmYZIgQ0VkgQbaxK4QKYu2k5WHlMe99kU5ZEcWhgDtX0sy+h
- Xb4M336/U4/eWie/7meL8pOqOUmF773Z1fG7g06FaRAhpoXjdYbD8i2ktwPFybnkzPrU
- 4KIw==
-X-Gm-Message-State: AOJu0YyBE2se8I4Nk3Rjs5p1AwzPPt6W6RmvBi/W1xYmoyfDWKBkT/vo
- 8SGwqTPilcTKI3g857oluBweAmZuGt0hE3X2VbHqqB6hHjnKWIFFs6o91lTZfsFCjeDDpaupo/s
- U7FA+YI0jvkAnVU3OcLRYLhZNiU2KSp/ma34LTnW1i3S/qD2V+Gm3O95Zm/9uQ4bUFgaBxYD6XS
- hfxsocKA==
-X-Gm-Gg: AeBDievIVUPvTYF74EZ8Jwp7r/Gr5b+VA+0gBbktx3JM4eljGsxulj/WmsUjqWXbmtj
- L2tIslH0aoYpj08nZ7+83rPSXVp1wchYRCkbBEHV2eP+n+h7MPD3nSbaNsW2tQ3mw4U3O7UhnIo
- vTi8uzIczupVESJ2sle51sRKasWJpdszbRmNTpOAnoutZx4FcmOiP1Bl+buRw6ws1QFI8OAvrO7
- ylQ8TwVCHC4lhubw60xnpP9P2Sx8C+jg6emV3NJw/V23u/S4oI/uyKvcfU1wHxFAH1pUs2oTjCa
- Vc+jEhCQvmOiiswnFsS6Ap572lBOq6XqzqD91wYI1lPPAQ7pwW8sCiTvhgM6wiwB0GVhxBQ1gdP
- Eqi0hlE+94RGC6Hv0ELzkY+Tz5NZgNauQUB4xLv1auaou2RbRiXjluSX/l4h7ZY8O1I/qgs5HqO
- cNMiQGyrc=
-X-Received: by 2002:a17:902:e54c:b0:2b2:ece2:bc1b with SMTP id
- d9443c01a7336-2b5f9f63726mr183148405ad.26.1776757562117; 
- Tue, 21 Apr 2026 00:46:02 -0700 (PDT)
-X-Received: by 2002:a17:902:e54c:b0:2b2:ece2:bc1b with SMTP id
- d9443c01a7336-2b5f9f63726mr183148005ad.26.1776757561737; 
- Tue, 21 Apr 2026 00:46:01 -0700 (PDT)
-Received: from noble-uboot.lxd (124-218-37-86.cm.dynamic.apol.com.tw.
- [124.218.37.86]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2b5fab297c8sm118729345ad.67.2026.04.21.00.45.59
+ d=1e100.net; s=20251104; t=1776758931; x=1777363731;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ty1AuVJ60rqNW9oDZzVrfMesTBg9B7KTK4geTZZvpik=;
+ b=bf869PvA64dl1QonRW6OWoyxN2boAly8r+qrTprcq/M+85Y4zhrsz6w7BQmH9M8OCD
+ l81USLpOcSuzh1Y49IDcQyNjsARUW6Zt7RZ/Yv65g1r7nm0MTJ+xkwHsd5TvaNYFusAF
+ +LwmKnWzJKxMtFbzkv7zO+mK9xQxKtjB6vNUYlSMxOWsk18wQ2NBilep8Rxa+TjTOv6T
+ NW0TZZZY9U1R0P41x1q7xMi03rSqNf6wH0n59a1LtvAS5fDUQGKksZwWuoL23S5H1dCE
+ 6Xdh1JJCKWGvhOvVsbHxjdATw7CxThM6SY8eeq8u6ZOUyLtdLiBKcu8SiFpLiY+giJCu
+ W7sg==
+X-Gm-Message-State: AOJu0Yy2Rr4Q4JTku920eRM+vTYinBomkjRpnAVRuBldjAoSu+/w5YeN
+ 28Hb+tu6bgUextJedvS19cAO+PHJ2ohYLrXdVVNRFI3v2NhG9rxI//4r6/jZag==
+X-Gm-Gg: AeBDieu4FoPA98PPKPgGm8vqI+qU/muiL/PSoJGoZLmv5O8gxxkn797Qwm4NrVDLi8a
+ uyWY4X8+X7cSy9bdAm6o/Z+xtQIXiBNW8KPZ9Gx3zGEl0k0pD/kzPu2TtXGk3OtohjlD22nmkqh
+ gBVs0g47gYN1UqZSoy2F/Aqv6SKWsy+QVIb4KQO3ouVr02oPIEB7DIJc5jsRYphsCs3Qcdtw+ej
+ 9omVxsdMu5bKyAv9Qh8rc0v1PsreJu+dFfSjHfHZA1a4aGSTD4Jz43hCG0soz/1/lcRiC7hQfdE
+ XM2dlnjxlnh8CVSf06B/exIfDj6Ktp8CqbpWXEavJdOQsTYfVX6vIS1EWSjYjsy3gpgS1C55FD9
+ IpmUYC5Zhfn66VrCpw/NkmW+90oR/Od8/cnM2dVSk8HcODgmljIjReM4CWwWnk5RAfkj0afrzi3
+ RbnAY+e1O44xOY4yPpCsUuTJnxJE/J7NEHPDF+C0+jCifBSWL0bqg4ZCUOhP6WTFEO
+X-Received: by 2002:a17:90a:e7ca:b0:35d:8fdb:4f36 with SMTP id
+ 98e67ed59e1d1-3614048a21bmr17510273a91.18.1776758930864; 
+ Tue, 21 Apr 2026 01:08:50 -0700 (PDT)
+Received: from happycpu-p1.. ([121.160.151.7])
+ by smtp.gmail.com with ESMTPSA id
+ 98e67ed59e1d1-36141973c57sm12547393a91.14.2026.04.21.01.08.49
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 21 Apr 2026 00:46:01 -0700 (PDT)
-From: Aristo Chen <aristo.chen@canonical.com>
+ Tue, 21 Apr 2026 01:08:50 -0700 (PDT)
+From: Chanhong Jung <happycpu@gmail.com>
 To: u-boot@lists.denx.de
-Cc: ggiordano@phytec.com, w.egorov@phytec.de, trini@konsulko.com,
- marek.vasut+renesas@mailbox.org, iwamatsu@nigauri.org, bb@ti.com,
- afd@ti.com, d.schultz@phytec.de, peng.fan@nxp.com,
- patrice.chotard@foss.st.com, hai.pham.ud@renesas.com, michal.simek@amd.com,
- Aristo Chen <aristo.chen@canonical.com>
-Subject: [PATCH v2 3/3] configs: phycore_am62x_r5_ethboot: Drop duplicate
- CONFIG entries
-Date: Tue, 21 Apr 2026 07:44:40 +0000
-Message-ID: <20260421074523.4930-3-aristo.chen@canonical.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260421074523.4930-1-aristo.chen@canonical.com>
-References: <20260420145353.3923395-1-aristo.chen@canonical.com>
- <20260421074523.4930-1-aristo.chen@canonical.com>
+Cc: trini@konsulko.com,
+	sjg@chromium.org,
+	peng.fan@nxp.com
+Subject: [PATCH] gpio: 74x164: use dev_read_* APIs for live-tree compatibility
+Date: Tue, 21 Apr 2026 17:08:47 +0900
+Message-Id: <20260421080847.235789-1-happycpu@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Tue, 21 Apr 2026 14:37:42 +0200
@@ -120,32 +97,78 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-CONFIG_SPL_MMC=n and CONFIG_SPL_DM_SPI=n are each listed twice in the
-defconfig. Remove the redundant occurrences so each option appears only
-once.
+With CONFIG_OF_LIVE=y, dev_of_offset(dev) does not return a valid
+flat-FDT offset, so fdtdec_get_int(gd->fdt_blob, offset, ...) inside
+gen_74x164_probe() fails to locate the "registers-number" property and
+always falls back to the default value of 1. This results in a 4-chip
+74HC595 daisy chain being exposed as only 8 GPIOs instead of 32, and
+any consumer referencing offsets >= 8 fails to bind with -ENOENT
+("GPIO ... not found" / Error -22).
 
-Signed-off-by: Aristo Chen <aristo.chen@canonical.com>
+The "registers-default" property is ignored for the same reason, so
+any configured power-on output pattern is silently discarded.
+
+Replace the flat-FDT helpers with dev_read_u32_default() and
+dev_read_u8_array_ptr(), which correctly walk both live and flat
+trees. This matches how other DM GPIO drivers (e.g. pca953x_gpio.c)
+read their per-device properties.
+
+Tested on stm32mp153d-ssonic (CONFIG_OF_LIVE=y) with a 4-chip 74HC595
+chain: all 32 GPIOs are now exposed, and 16 consumer LED nodes at
+offsets 0..31 bind successfully.
+
+Fixes: 9300f711baac ("dm: gpio: introduce 74x164 driver")
+Signed-off-by: Chanhong Jung <happycpu@gmail.com>
 ---
- configs/phycore_am62x_r5_ethboot_defconfig | 2 --
- 1 file changed, 2 deletions(-)
+ drivers/gpio/74x164_gpio.c | 13 ++++++-------
+ 1 file changed, 6 insertions(+), 7 deletions(-)
 
-diff --git a/configs/phycore_am62x_r5_ethboot_defconfig b/configs/phycore_am62x_r5_ethboot_defconfig
-index a4434388ff8..02343c08629 100644
---- a/configs/phycore_am62x_r5_ethboot_defconfig
-+++ b/configs/phycore_am62x_r5_ethboot_defconfig
-@@ -21,7 +21,6 @@ CONFIG_DM_I2C=y
- CONFIG_SYS_I2C_OMAP24XX=y
- CONFIG_PHY_TI_DP83867=y
- CONFIG_TI_AM65_CPSW_NUSS=y
--CONFIG_SPL_MMC=n
- CONFIG_SPL_DM_SPI=n
- CONFIG_SPL_MMC=n
- CONFIG_SPL_SPI_FLASH_SUPPORT=n
-@@ -38,4 +37,3 @@ CONFIG_SPI_FLASH_MT35XU=n
- CONFIG_SPI=n
- CONFIG_DM_SPI=n
- CONFIG_CADENCE_QSPI=n
--CONFIG_SPL_DM_SPI=n
+diff --git a/drivers/gpio/74x164_gpio.c b/drivers/gpio/74x164_gpio.c
+index 331428ccdb9..e394d1ce379 100644
+--- a/drivers/gpio/74x164_gpio.c
++++ b/drivers/gpio/74x164_gpio.c
+@@ -10,7 +10,6 @@
+ 
+ #include <errno.h>
+ #include <dm.h>
+-#include <fdtdec.h>
+ #include <malloc.h>
+ #include <asm/global_data.h>
+ #include <asm/gpio.h>
+@@ -127,10 +126,9 @@ static int gen_74x164_probe(struct udevice *dev)
+ {
+ 	struct gen_74x164_priv *priv = dev_get_priv(dev);
+ 	struct gpio_dev_priv *uc_priv = dev_get_uclass_priv(dev);
++	const u8 *defaults;
+ 	char *str, name[32];
+ 	int ret;
+-	const void *fdt = gd->fdt_blob;
+-	int node = dev_of_offset(dev);
+ 
+ 	snprintf(name, sizeof(name), "%s_", dev->name);
+ 	str = strdup(name);
+@@ -141,16 +139,17 @@ static int gen_74x164_probe(struct udevice *dev)
+ 	 * See Linux kernel:
+ 	 * Documentation/devicetree/bindings/gpio/gpio-74x164.txt
+ 	 */
+-	priv->nregs = fdtdec_get_int(fdt, node, "registers-number", 1);
++	priv->nregs = dev_read_u32_default(dev, "registers-number", 1);
+ 	priv->buffer = calloc(priv->nregs, sizeof(u8));
+ 	if (!priv->buffer) {
+ 		ret = -ENOMEM;
+ 		goto free_str;
+ 	}
+ 
+-	ret = fdtdec_get_byte_array(fdt, node, "registers-default",
+-				    priv->buffer, priv->nregs);
+-	if (ret)
++	defaults = dev_read_u8_array_ptr(dev, "registers-default", priv->nregs);
++	if (defaults)
++		memcpy(priv->buffer, defaults, priv->nregs);
++	else
+ 		dev_dbg(dev, "No registers-default property\n");
+ 
+ 	ret = gpio_request_by_name(dev, "oe-gpios", 0, &priv->oe,
 -- 
-2.43.0
+2.34.1
 
