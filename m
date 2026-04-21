@@ -4,95 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76D68F94CB5
-	for <u-boot@archiver.kernel.org>; Tue, 21 Apr 2026 22:48:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80A4CF94CB3
+	for <u-boot@archiver.kernel.org>; Tue, 21 Apr 2026 22:49:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1916183AC5;
-	Wed, 22 Apr 2026 00:48:58 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1FB5F84307;
+	Wed, 22 Apr 2026 00:49:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="SxG+2ig9";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MN5w4ySG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B321D83AC5; Wed, 22 Apr 2026 00:48:56 +0200 (CEST)
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [IPv6:2a00:1450:4864:20::632])
+ id BD23684307; Wed, 22 Apr 2026 00:49:03 +0200 (CEST)
+Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
+ [IPv6:2a00:1450:4864:20::631])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E451C842FC
- for <u-boot@lists.denx.de>; Wed, 22 Apr 2026 00:48:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DE311842FD
+ for <u-boot@lists.denx.de>; Wed, 22 Apr 2026 00:48:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-ba9ad0fbc3aso169257166b.1
- for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 15:48:53 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1776811733; cv=none;
+Received: by mail-ej1-x631.google.com with SMTP id
+ a640c23a62f3a-ba5b107eaa2so185975966b.3
+ for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 15:48:58 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1776811738; cv=none;
  d=google.com; s=arc-20240605;
- b=es+koEYQZ77v+X37usXF/AvdZ9am7TcrkbGWPxUvK36yF2eDtmdThKY1mYQsBY0Ntu
- BPIDtj4TOxQ+RYM1zdKgOPoLuk5tHwNM87cAQKqbB7+YmgwOsTW5F+fnMNLdba8PKEdQ
- F9fTRNqtkCue3JOnxbPBBCsxryoE6dbbUnz30ya1QshQzT6pqJhGEBAz3qQLaisc3y/5
- 28VmaOI7Ko6Jey1elKlx+4jrNFxX+Oed1l75xhmd8T0wn2h5fMcLbX8q3J9GxIRWeVoi
- 1ZrrxC3v4mNvxHxQx0NH9mzjChQ+lt+R1q7gDvjyjPnJT2eNwV5GTtWpVLTB9rESJcdt
- zMKw==
+ b=bf5s7x+LEXm1ivsEKhKMgY7OqodcLw4IMIttuk1KGTouFNlyzoCK4Y2npb77El1FW6
+ yPfK1KMnDik0Aqix9JJBDCGy4PsBchwOyYU6CyMZoRPSObIkjP5njrLwRg94P1bYvtel
+ dSY/myhv166iPuPFcJPCcx1rtAkEAsKXivXs8zyBmVPIqRV4MsSboPqKu3tiwi2w7bix
+ H3QrISq61gEiG5uQWnnJgWK97ZIfs81sbWdj8bxh3Sxyg1s+d1OrZgKKwzBg0hJPPayk
+ 3HavM5mSwzAYTX+9WD7oZPjbUJ18NR6kMjFcmj3IZPh1ExWgiW3RjklDSd+pVPGgw3De
+ Q8KA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=kvWKAbGk2NEMKFfkfXNG8PlpuqwkUGnybDNlrXRWis0=;
- fh=Iu3q8pU/HxKUxgIX3o2NhCmX5QQC75oOn2rrUk5yUdU=;
- b=P72pzlYb0l7OiZo0A4Nzl5o3CQ4UY+OUQN0ZtNKJxUXfpye44UHwQM77uSm8s5cOM2
- yWeOGBM/mb5L+kLV+nPrET2MbJWVtUrz1dVc0KGZz5Vwd1+yq9COYZR72FnTqaDZYtYh
- x83x2LqLJXG9KF0u5qa79wzsQGI6Dp2CSC9/AKYvNyXF7V81wd3jdNTWGg1H+deASS3t
- FBpyfGeAwhqAyWHEVn2OjjsBvBVg2EpFoautxHo3tgA5jfLWWN7BPVOlr4XAb2WBc7I6
- jZvv825MRLalaxMD1S2nEaXTXR44m9E6DiAM3vnZz3j1hxvToWHkrCcCFxSj0yEjtv83
- xu+w==; darn=lists.denx.de
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=FJhfHzo9ISsqhxLa/8KexMDsXkz54+A6a8My7UqBOKE=;
+ fh=LrXM2QBjOv+SYZI9Lo3tXlCIcaAX0M7c7QDhx9ga1yc=;
+ b=ELUCoQtAolqNEaKUuSGu1pCo2gVSR56vlhBsDNCTTgmJIRTD82wiWaDxh5S0kf3obD
+ 6SOOtIAHY4Zwr4NJJoNERPRu0OIvQlNVBkmXkaOFm3TBaqHUiQOKD+zBqtdogdc1WTIS
+ fDJUjYp9mtpAI7p34B6FA6lrhFPpaGetSzwZG0XYKa7rmkneXPC25A12X6+7uhYMUDvB
+ WSyDqds11YbKToc6TYftuWyk7V3vdAeX8sexS/Xwn1AgZ9Vkdn+fZ/k4bt69+SNXUPvR
+ XFofejvbSfNxEXrwMW4EsH0hDBqLZvIhk6QPuI7HM9y3ILCYo2sMoAjjGGzsULlnGVE0
+ zgQA==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1776811733; x=1777416533; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=kvWKAbGk2NEMKFfkfXNG8PlpuqwkUGnybDNlrXRWis0=;
- b=SxG+2ig9gSHkQt9DB82dT37qvN7H0BHveUrgmgD6xMC8Ig6/kq9Ms62eIzl7bLdW5F
- KssM9Q1U413LyM5SoyUiwcnFXDh7/4bjtRHEheAhzBb5pnG7kQW/p0ZsOAgEdYr9UjzI
- OPYYKtLYs+Z/ED2VCnrG7XkBCvv36lS94EVmQ=
+ d=chromium.org; s=google; t=1776811738; x=1777416538; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=FJhfHzo9ISsqhxLa/8KexMDsXkz54+A6a8My7UqBOKE=;
+ b=MN5w4ySGJEDZNdps0wBaovqu0KSMhl/8y1NrR0IbiTPW2bjhlAh4kwt/K++S5KzYWH
+ s0zSXPchi6DRRfj5O3uZ5Dg2mL8ZVEKlu4+vWlk0lLlfVaM0yyhTPuLNihQ43SMXwe6c
+ s9EKXgBQDI0jDRW9JrzOzuCMeec6ve8uL3Tsc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776811733; x=1777416533;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=kvWKAbGk2NEMKFfkfXNG8PlpuqwkUGnybDNlrXRWis0=;
- b=izGmO1dg96F7D8zC3LJN2V5I/pcVLM7yrmjm1x/zHpm98oUZPPVQFtwxXioYY5HIaI
- CDz/72p0J082yZh8aEaR06LFaT1kZ51q7ACAecLYDyR8Xhc0OFUQPxinor2RkaJGFvTq
- kWECAPOyhCJ/7nKPiESMQkYXteuZHNDU9HZJNyUf2vgd+2gHkmWDyb6FxkQLeQhjPEm0
- /BKXsC9bFoJZEgtG3CZDqJhnoGnJl74TcGF2j5pl0o+XSe5mL6Dno4tW11jNBG8nmVlh
- PZJjD7mYZ4MloU6rqiBYa5qt5FU5Jp2Znam9AyvXgoRQRqK2PZn8UAMwQScse2bIIpCZ
- BfsA==
-X-Gm-Message-State: AOJu0Yx6j7SN6CSlWOKUe651Bbd4xPDt5DYxIq/OsaoSyK5Y6EQsh8Ws
- 370AbnimodMAOvfAousdGQ94uy8ZIDpsy46Z/1MJOh+yMfD7fXFsw0I0STeer//tM9ZgVMo11jr
- jS1zvIxTxhWZlCcvfYdmKsaHQRsByItXaZH3dOYl5lJ/TPMVPTE8ywQ==
-X-Gm-Gg: AeBDiesRw18HCvkQK9cD0TwkMoeIG28NBQai8HIcbb5nqguPUDg1Afk/g9Wy8QCees6
- GoXpRysS8Ug0PuHX+NwPaqRv6OuxPowbPI9UicGDajG5EPsOq6NO0Gz3Fs6A6RzmqjyihdZCNed
- /wjDhh42yNjLxJuQYUp23eDYJDC5/hX1FkMLdpy6uFpXLK4apjJlIcMpgFt8JKna9TF5/tXMecj
- iSaPSMIOTjGb6xflAL/MrVvVhb4cyvwV/E0UraSVKCEl839g0jkqskxbBnfCjN4ELELg0avZ5k1
- 2KV7vZEKyrrGa4kzGOwE
-X-Received: by 2002:a17:907:c30a:b0:b9b:7bf8:800b with SMTP id
- a640c23a62f3a-ba41afe998emr941114566b.40.1776811733267; Tue, 21 Apr 2026
- 15:48:53 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1776811738; x=1777416538;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=FJhfHzo9ISsqhxLa/8KexMDsXkz54+A6a8My7UqBOKE=;
+ b=JkA7CUEILEyQZd5NzP0oggu+wk4a6yNMtcqY6RmjsHD52+vnmUIWwdUh6xyU1SoreE
+ pPqtgLyr/SaWY2INckJumqEcEEzaBvjicXmZfe+E4wOwWiIYb4q+ZMTxuTEwI/tGGkzc
+ EOP6IfzYrtKw1Meuo4Nl7d3h5EY2t/otVzQXB4VjOWNsd0wDuZjMlougj7GtUL5cWIUN
+ 89Ftq4B2zZrT9JfJtEVLHXJrqZM+gQlpkrQVFd93HA+DrxRuLba7UrjtLs28rlI2FrCX
+ pHBaa9e1m0bG7ZfW1+PBkxnvbz/iZD0C9zE7xKnRVLGTEJh2PNF3pyEg9FHiQkFBmYZS
+ VtVA==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ89Z1Qfz2Fc/Fc0DK2FFO7OBY0qDa8nwPpCbwdjFkRqqmMYvXZ/y5wO6xoXCa6rs/6cHMxBXdE=@lists.denx.de
+X-Gm-Message-State: AOJu0YxuK8BrCXhN6/H5rCXuFaW2Dmly70l6MHQePK3ZhM/swG8f+6Gi
+ uf037I9fCsJwiD0OltWNgdAwXlFljjjj10KrUPc0H/pnW+8x0QZySRyDIZM0KiY/GQPlm4CZZ93
+ PwNZixO3K+F4/VnzALX0DE6Jmp2H27Sae5VoquOoP
+X-Gm-Gg: AeBDieszjQ31ZwHLG8PNKpv4ZlEhozeiF5t7+S7UvjVREb9mr6Wszt8S/Om0hQklaQA
+ hpmTNCmXKnhSxQcDKdrukN7A5tWYHVkzYtUXiFkdAHc9puq2Aiubl9Tsw+lquAk3xrY05lY3crR
+ 1l2xTCYHTfNbUAGCIgt7X+Gq9WNuNwWZQh3YLZYuF+IzPgjmHeKkGhsm7glevN0hrsP1iKqkQ2Y
+ 4/VxuMpUmiyo7N5Dh+Vtuoe5tHFa0WEXpiq1z8vtBkfBvyldXvOJZfxwvLht7IDjX2OtWe2fn3O
+ AV6JapJlxYJtdQ2Mzkmd
+X-Received: by 2002:a17:907:3d8e:b0:ba7:4cd9:ca27 with SMTP id
+ a640c23a62f3a-ba74cd9ef49mr586284866b.41.1776811738381; Tue, 21 Apr 2026
+ 15:48:58 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260420220804.71564-1-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20260420220804.71564-1-heinrich.schuchardt@canonical.com>
+References: <20260420164725.359539-1-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20260420164725.359539-1-heinrich.schuchardt@canonical.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 22 Apr 2026 10:48:36 +1200
-X-Gm-Features: AQROBzC6W9Vc-RueIov-Kg00zDfhHVouMOFz02JiKxFS13ZzD98ja3DAOQ0UONA
-Message-ID: <CAFLszTibdFVBG+jVpJjFsbWocu=WgABas8r8cdB1RAuXAX_8cQ@mail.gmail.com>
-Subject: Re: [0/4] acpi: handle duplicate tables in acpi dump
+Date: Wed, 22 Apr 2026 10:48:39 +1200
+X-Gm-Features: AQROBzBVlMcPGi2JIatxJraIC3thl0K6gJSBFSVnOCvN_sohLt1yGQFvtuBTKdo
+Message-ID: <CAFLszTjAqjEtnLb1Ns7fLp7jt90XSfOwJ9iyG55aYA9EWv4fWQ@mail.gmail.com>
+Subject: Re: [PATCH 1/1] acpi: fix initial RSDT and XSDT size
 To: heinrich.schuchardt@canonical.com
-Cc: u-boot@lists.denx.de
+Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
+ Bin Meng <bmeng.cn@gmail.com>, 
+ Stefan Roese <sr@denx.de>, Saket Sinha <saket.sinha89@gmail.com>,
+ u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -109,26 +112,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
-
-On 2026-04-20T22:08:00, Heinrich Schuchardt
+On 2026-04-20T16:47:25, Heinrich Schuchardt
 <heinrich.schuchardt@canonical.com> wrote:
+> acpi: fix initial RSDT and XSDT size
+>
+> When creating the RSDT and the XSDT table they contain no entries.
+> The table size therefore must equal the header size.
+>
+> Without this change a NULL deference has been observed in
+> acpi_find_table() when running ut dm on sandbox64_defconfig
+> executed via sudo ./u-boot -D.
+>
+> Fixes: 94ba15a3f13f ("x86: Move base tables to a writer function")
+> Fixes: 7e586f69070d ("acpi: Put table-setup code in its own function")
+> Fixes: ab5efd576c4e ("x86: acpi: Adjust order in acpi_table.c")
+> Fixes: 867bcb63e79f ("x86: Generate a valid ACPI table")
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+>
+> lib/acpi/base.c | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
 
-> @index: 1-based index number to find
-
-The header comment says 1-based, but the implementation is 0-based =E2=80=
-=94
-the function returns when index reaches 0, and all callers pass 0 for
-the first table. Please can you fix this to say '@index: 0-based index
-number to find'?
-
-> Update all callers to pass index 1.
-
-Should say 'pass index 0'.
-
-> ACPI tables like SSDT may have multiple indexs.
-
-Typo: 'indexs' should be 'indices'.
-
-Regards,
-Simon
+Reviewed-by: Simon Glass <sjg@chromium.org>
