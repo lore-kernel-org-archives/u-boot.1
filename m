@@ -4,122 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E0C1F94CB3
-	for <u-boot@archiver.kernel.org>; Tue, 21 Apr 2026 22:14:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF297F94CB4
+	for <u-boot@archiver.kernel.org>; Tue, 21 Apr 2026 22:39:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 35C3F83AC5;
-	Wed, 22 Apr 2026 00:14:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id EDD60839D5;
+	Wed, 22 Apr 2026 00:39:15 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="r+yCFbOR";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="X7C91BId";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8E8BD83AC5; Wed, 22 Apr 2026 00:14:26 +0200 (CEST)
-Received: from SA9PR02CU001.outbound.protection.outlook.com
- (mail-southcentralusazlp170130001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c10c::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id DFB9683AC5; Wed, 22 Apr 2026 00:39:13 +0200 (CEST)
+Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
+ [IPv6:2a00:1450:4864:20::635])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3790B839D5
- for <u-boot@lists.denx.de>; Wed, 22 Apr 2026 00:14:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 39C2583936
+ for <u-boot@lists.denx.de>; Wed, 22 Apr 2026 00:39:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=rs@ti.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=lCF9Mdx+d4SJpnu4LzJVa8CEL1gbQB67qj/xYfXXNs/sDUmpLQMV8hM60gzBCHw6Vd3qKu05T2+/V9vnLVNkgtglCccKSr5/0frM0Dx9uCzZOKU3CMmF6tU+LTFJr+Q70TLefHe6KKwoQedi9lOoyGQdyEbKeVXIGYhFR7mZSc1UnhyIIWB+905w7QTPG926puNnKxirz127KyugdSmPP5Ak6b6eaC+cI+f/vI3zCF1TZ+oH6B6yJQY/uD+jZyasRZCeDDBmaokieRRMcy5bAtC8uyNt86PawxLNLtHarW5XgojRa17srVhtlfau8moqJ8oOpZLfwdJO/4dJeuTMBw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=xvAGlGNN4hFFq0bvboPMfN5jk3YGvPcdecEwMvbeBx4=;
- b=U/a0NqliFOfDVro1PA+JBPjzyq+BuUdaJSSK1L7jWuI0TaOcrqyPbk8UENgWkuagoN/+g4SeNWeVPmomQaOanU0i3ctPI1ZOBsLjSRwoEy2qIMRPJ/1YNgyF6YvrKAOQYc0A2NB/voBtDXe+u7/YHSrO/0KsWicqICXkObCdVIoV1zOT+bEtCeRrSdZnFC9ph4sFzq80w5hZlnPUwJXa6lw/sMvMF1Z/bwq/cuZht5TSgWRqbVhcHXhAx7W6+NxdzG6K3KKloL/QC25z/yS8lhchaMIKPaB7mhNTJWC/DSZM7htYd38DSIj0qO1wr3yTtXgiIU/yP8jBnfXj+y2T5Q==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.21.194) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
- dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=xvAGlGNN4hFFq0bvboPMfN5jk3YGvPcdecEwMvbeBx4=;
- b=r+yCFbORjLBaz2/iCUQKN9bxZkjnrq9ilFNMBV6K5iqVUHUNfjiEyDZ3pBl7b0InpG056lswwhRoNpH4THAW0VftiQCVqHxCdnVO2f9kTGqh6ltKQDEioaoKE6ZACU8X2FIJt1wb0mmjmegNWVmNj2F9JWTjexgKCnO579dQQek=
-Received: from BN1PR13CA0020.namprd13.prod.outlook.com (2603:10b6:408:e2::25)
- by IA1PR10MB5972.namprd10.prod.outlook.com (2603:10b6:208:3ec::7)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9846.17; Tue, 21 Apr
- 2026 22:14:19 +0000
-Received: from BN2PEPF000055E0.namprd21.prod.outlook.com
- (2603:10b6:408:e2:cafe::ae) by BN1PR13CA0020.outlook.office365.com
- (2603:10b6:408:e2::25) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9846.15 via Frontend Transport; Tue,
- 21 Apr 2026 22:14:18 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.194)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.21.194 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.21.194; helo=flwvzet200.ext.ti.com; pr=C
-Received: from flwvzet200.ext.ti.com (198.47.21.194) by
- BN2PEPF000055E0.mail.protection.outlook.com (10.167.245.10) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9870.4 via Frontend Transport; Tue, 21 Apr 2026 22:14:17 +0000
-Received: from DFLE208.ent.ti.com (10.64.6.66) by flwvzet200.ext.ti.com
- (10.248.192.31) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Tue, 21 Apr
- 2026 17:14:14 -0500
-Received: from DFLE210.ent.ti.com (10.64.6.68) by DFLE208.ent.ti.com
- (10.64.6.66) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Tue, 21 Apr
- 2026 17:14:14 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE210.ent.ti.com
- (10.64.6.68) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Tue, 21 Apr 2026 17:14:14 -0500
-Received: from localhost (rs-desk.dhcp.ti.com [128.247.81.39])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 63LMEEYU1020442;
- Tue, 21 Apr 2026 17:14:14 -0500
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x635.google.com with SMTP id
+ a640c23a62f3a-baa8c78ac7fso92363966b.0
+ for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 15:39:11 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1776811150; cv=none;
+ d=google.com; s=arc-20240605;
+ b=XWYoNfelZyFmTXUCHppmmepMyO5OBFsHTbFGVUBiXQ6xoNrSN58uP8aLmm/tn4Ordn
+ pA2wC3Z6d8FCVj44FILsMtXOXPJgKfmy3fVo820OMVw50kinoL4xKbH3BxVZ9IWVGT9D
+ usIIy/Obn0r6xxTmnfLaYCbfmD8668IhE4oVzXPx+iqwIaLxNvLEO+7Tqwy7EN8H4014
+ ME0yPYipt/RfqQbz8hLio7eoKw8RguHBDD+9jkTfOqsCGFJYpGwAZilGxciWprnMCQmI
+ UOEc4Qn3MhM4get+rFXlLNFSawRiA9fE5EjR/F5YiVjRPT+OYh2GilPh7uWMh0wn9kf0
+ Y/7w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=zLOUGE2QRKI+OG/IeM8L0UEgxuhCTDgzWs2ugAq3b1I=;
+ fh=EThWCHGHt343PXesa/4+4ZO1y/ssTtINZWn/LindcxU=;
+ b=MGs4w6qpoFon+N44gQy+gF1KO1Avp8b0c7f/yqTXf6/6FoqenoE3IaiDgqNjo2GtRH
+ 7185OJt0VtQxWoHNC1VJL4CJW8lN19DjtZw8Aljs74GknDXiUwOZABHeYHUCr24RYnfL
+ mbX0sJUtnxl85rOTGIr+Rxy99sZgUI24ZqQxsVAdJrWGJiL88egGXIeV3Hw5IHbXPDIf
+ 7xEIXACP70zoD/pfn2aKovz3TnSP+143XshAEmjZavJS8tGirFmO8JV30/2HmCBX0WPZ
+ mdRMklddL7nHgPMwxQZQc8PTDt57kJ0g9RplY9fWj4KJu4VBExTtziAUNvd4kECH+iC3
+ Ljtw==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1776811150; x=1777415950; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=zLOUGE2QRKI+OG/IeM8L0UEgxuhCTDgzWs2ugAq3b1I=;
+ b=X7C91BIdH5kHuS4BXvB97m9LyxvKUoy28ymk//JkliN1JzwJLEquTkUhxhFmVvio0k
+ aFoDt2io8f8fMbIN5hJDk8XDiECpyxvSS542ODLKyQp7ZHJr6enL17FX4yw40LTENMYS
+ CrfhwMnQj5jA85gfYr3ghqz+6L3c7+8vQx/G8=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1776811150; x=1777415950;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=zLOUGE2QRKI+OG/IeM8L0UEgxuhCTDgzWs2ugAq3b1I=;
+ b=pVF2rEa3JEpKt3lLgTo9vEFvc00qqleX5KmTbPS8E7qIknEYf8QRARVt+gShRNZ/+O
+ /qiMn7c4l2YE/Oc4GDLwo8TwL80XVYD62pekzi4e5kvrjuh42meII6dwtdcuB5+RzMPE
+ QwmH8mF1NJFQ/zR8V2/wrD1nA9mpDxEI92Q4hK+TCQkDv4bRuFKUjHzy30VfJ71ccy/H
+ ASvwTs40CK/606/9fOK+nXWIZovGV8RgTw7dpqjCafEYzWYddd4sx9qyytA98kntZAHB
+ U5pOQ/hDnN9NJVnjjAub5z4vmkH0z4YzdatbYXoVv5cl324Sunm1a8QdsNDewNIzG1cI
+ 3prg==
+X-Gm-Message-State: AOJu0Yys2rzOOHB1Y/wmVHKKJh9ZSe2BQFcnYsJFJcxsh1cDg0fwnMOr
+ X4usIvgLcYdDrLCueowGF8O9sIvqACDJ7Tz9g2n3a3TxLsUHyBKw4NL0nZN98z8EFI95mt5kEdY
+ vk6BzZyouzir87mrELawNfhcvnOAud28wQFZLVPvNF9s46BQ3MLSOSmm+
+X-Gm-Gg: AeBDies3/FR6O1pPQ6lKYvYr/B2qVnlvsOP0eDYCBdk2mVQ29UZLxn9TmzCmbRmJ340
+ acasSVJ98s+PsVkw3gs1so873P2MDm46qIbz5xJRQcYaiz8yio5/Mnp5Yz+RsafkgfuxA+m0FlE
+ xVGC8tKWkfmj7Pdez4rkUQ3fmBOus5j00WRzZuevsLWvTZMovDMCeFtwZH1+x56euFEICYf+Rz2
+ QBIZ3lGS3iKiNtVCJ8PJALnTl/jp8nQO1G+cX7U5iP9dvAWGgB5120rP1x8BrdnHIpNIhfRV2iD
+ EIXgft2K6Nyj/oNocnxg
+X-Received: by 2002:a17:907:72c6:b0:ba6:1412:9339 with SMTP id
+ a640c23a62f3a-ba6141295bfmr667704166b.20.1776811150566; Tue, 21 Apr 2026
+ 15:39:10 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+References: <20260420074601.24988-1-briansune@gmail.com>
+ <CAFLszThRNhVTMRpVPySFSComEhL_s0a1wY1BVnKKtV+K6OXnEQ@mail.gmail.com>
+ <CAN7C2SCpBYi=c1kS7-aXL9Qf7wUq_ipcvQMSUSW9aYrQqUcAAg@mail.gmail.com>
+In-Reply-To: <CAN7C2SCpBYi=c1kS7-aXL9Qf7wUq_ipcvQMSUSW9aYrQqUcAAg@mail.gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Wed, 22 Apr 2026 10:38:59 +1200
+X-Gm-Features: AQROBzCMduKTvQ_WO7N69qiDMPyxkayubhPaUeSLBbfMWz_3YPnL4rXcRxrEqLA
+Message-ID: <CAFLszTiiv-os+sK+g+E7zUHqZVj79Pf9bUx6G2LczmgwUXXozQ@mail.gmail.com>
+Subject: Re: [PATCH v3] Improve handosff prepare on SoCFPGA
+To: Sune Brian <briansune@gmail.com>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
-Date: Tue, 21 Apr 2026 17:14:14 -0500
-Message-ID: <DHZ6GETQ2Z6C.2EZP9ISNJR0E7@ti.com>
-CC: <robertcnelson@gmail.com>, <ayush@beagleboard.org>,
- <Erik.Welsh@octavosystems.com>, <anshuld@ti.com>, <bb@ti.com>,
- <trini@konsulko.com>, <afd@ti.com>, <xypron.glpk@gmx.de>,
- <ilias.apalodimas@linaro.org>, <u-boot@lists.denx.de>
-Subject: Re: [PATCHv4 2/6] boot_fdt_add_mem_rsv_regions: free old dtb
- reservations
-From: Randolph Sapp <rs@ti.com>
-To: Simon Glass <sjg@chromium.org>, <rs@ti.com>
-X-Mailer: aerc 0.21.0-0-g5549850facc2
-References: <20260420192520.1444749-1-rs@ti.com>
- <20260420192520.1444749-3-rs@ti.com>
- <CAFLszTggCLQPaJcRoxhjHOuRM10yW3pr8JjRj+LLA-ZupVOSjg@mail.gmail.com>
-In-Reply-To: <CAFLszTggCLQPaJcRoxhjHOuRM10yW3pr8JjRj+LLA-ZupVOSjg@mail.gmail.com>
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN2PEPF000055E0:EE_|IA1PR10MB5972:EE_
-X-MS-Office365-Filtering-Correlation-Id: 3a2365cc-286f-48c4-0bc7-08de9ff35455
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|82310400026|376014|36860700016|1800799024|56012099003|18002099003|22082099003;
-X-Microsoft-Antispam-Message-Info: qH57Cre0VtLtdlqjZIfCXhsARTmyFBZZJLC49TLHx0EYA4l5oePLi9VABNttdbSI6qWS8Gt+tOMcDBZj5hTPlazAI3Nc+6TjIZQ+0wNIdleU+SEnaazFWBL2vDZooV7/i7G1qV7ua1Cs7mAEnYUIvUmp6jN3ilPigrzGZqitwEF9l7m6P6dCl8ZJi5VLR6O5mF2FljLSzo7lUV8rQM3O3JauRUx+HoxqbUZCePVVuMMRriJARoSK8Dz2gNGqypgj8WKBoHhpipOxOH9jUKb9OBRvBsonMr48hsqz9sQwgnxU29eQ/A4jlJuyssKjNDAQozmJXglAwQAVGz5kBbwoHdbrCMOF0mT0lnGmG2hl21YL25T0WM/fZptcP4R4zaZ/+6uNtfIzjQCJxcjiKwrd6A2S1S9orUhwgLwP9KJvjipr9lCe7yBhDlcDar0X09jsfQfSKG9Wu34Fc2xhKxN4ujaq52M8FZRZNSc0jj/KwQCYDCudA4JQ927QBOwQylvMyjIrvLr0nCpSGyqeobTfUHBzv05ub6VUmfGgp5ixuHlUUvyMxfL5o/Jooae4YpFNSHjV/40Ke3kkn8cQLQkK9Oy3buRibYoDsHgqHwjWeCQITQGDhCy1+FCwsYE7+Df0pHFBaDWMsgk7azCrBF7bPI/LdCxbrSkzZUqTF6VT3TN5FhMj7tmSo6o6M5FdYlJbKYk5Xwc0cFdpM4XnOzxmPuAG8koCNjzgCI+QDPM/1Jzqti/it++EZ2LUl88931Mnq5vqBDCDQczDhJ4XEIe3XA==
-X-Forefront-Antispam-Report: CIP:198.47.21.194; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:flwvzet200.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
- SFS:(13230040)(82310400026)(376014)(36860700016)(1800799024)(56012099003)(18002099003)(22082099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: HubBAUwnGdyQ2nTNC6eFfuDgzZpnWBrkjPz2ewy7H8GaUpXcoOl3sdOIiorb9hhvD3Z0ybGztctA/OxSOkngDLTTXBDwtQkZoNSK0+0yLVUMMgMQ8ejaL5N/n5xUAY0B7CuZnbl8PTcP/4mg7K9smfbjdEeiJU2OrDWLSS4DCNiicY3AIAb2NW7ZEJMQQd7OpoFsUrSOHgU1g2Pk9QUsx4cAO0bCRO2BpmlcpP01Wx0qjFHxcXKogIyDmnrFOIylvAsYKGjGeoGAOhDiGfAWxOrnJ/7aHt1HGZ5hYmReKANzGmzEu4Xl1rM7Yc+48SChT+X7AM4Kp8c/vz4016JzqhSYUSEq6ai3YFCmRfprITOYP2Oiv8+ZkiUDqnK9wiz4KnBObb/DXUuCd1J9OqOghaXQobNNwRBqec2arjIbTN48zEKsifPIzN/5jmZw6vo0
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Apr 2026 22:14:17.2700 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 3a2365cc-286f-48c4-0bc7-08de9ff35455
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.194];
- Helo=[flwvzet200.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: BN2PEPF000055E0.namprd21.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR10MB5972
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -136,50 +111,102 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue Apr 21, 2026 at 3:40 PM CDT, Simon Glass wrote:
-> Hi Randolph,
->
-> On 2026-04-20T19:25:18, Randolph Sapp <rs@ti.com> wrote:
->> boot_fdt_add_mem_rsv_regions: free old dtb reservations
->>
->> Add a free flag and an initial call to free allocations covered by the
->> global FDT. This assumes that all calls to boot_fdt_add_mem_rsv_regions
->> occur before the transition to the new device tree, thus we can access
->> the currently active device tree through the global data pointer.
->>
->> This allows us to clearly indicate to the user when a device tree
->> reservation fails. How we handle this can still use some improvement.
->> Right now we'll keep the default behavior and try to boot anyway.
->>
->> This functionality was broken in:
->> 5a6aa7d ("boot: fdt: Handle already reserved memory in boot_fdt_reserve_=
-region()")
->>
->> Signed-off-by: Randolph Sapp <rs@ti.com>
->>
->> arch/mips/lib/bootm.c |  2 +-
->>  boot/bootm.c          |  2 +-
->>  boot/bootm_os.c       |  2 +-
->>  boot/image-board.c    |  2 +-
->>  boot/image-fdt.c      | 57 +++++++++++++++++++++++++++++++++++---------=
--------
->>  include/image.h       |  2 +-
->>  lib/lmb.c             |  2 +-
->>  7 files changed, 45 insertions(+), 24 deletions(-)
->
->> diff --git a/boot/image-fdt.c b/boot/image-fdt.c
->> @@ -69,35 +69,51 @@ static const struct legacy_img_hdr *image_get_fdt(ul=
-ong fdt_addr)
->> +static void boot_fdt_reserve_region(u64 addr, u64 size, u32 flags, bool=
- free)
->>  {
->> -     long ret;
->> +     int ret;
->
-> nit: perhaps keep this one 'long' since lmb_free() returns long ?
->
-> Regards,
-> Simon
+Hi Brian,
 
-Ugh, yeah though it should only return 0, -EEXIST, or -1 since that's all
-lmb_add_region_flags returns. I'm not going to ask why that's the case.
+On Tue, 21 Apr 2026 at 11:12, Sune Brian <briansune@gmail.com> wrote:
+>
+> On Tue, Apr 21, 2026 at 3:32=E2=80=AFAM Simon Glass <sjg@chromium.org> wr=
+ote:
+> >
+> > Hi Brian,
+> >
+> > On 2026-04-20T07:46:01, Brian Sune <briansune@gmail.com> wrote:
+> > > Improve handosff prepare on SoCFPGA
+> > >
+> > > There are some cases that the Python scripts
+> > > are run and the qts files are not replaced.
+> > > Make sure qts folder h files are removed before
+> > > handoff script runs.
+> > >
+> > > Signed-off-by: Brian Sune <briansune@gmail.com>
+> > >
+> > > arch/arm/mach-socfpga/config.mk | 29 ++++++++++++++++++++++++++---
+> > >  1 file changed, 26 insertions(+), 3 deletions(-)
+> >
+> > Typo in commit message: "handosff" should be "handoff".
+> >
+> > > diff --git a/arch/arm/mach-socfpga/config.mk b/arch/arm/mach-socfpga/=
+config.mk
+> > > @@ -8,6 +8,8 @@ else ifeq ($(CONFIG_ARCH_SOCFPGA_ARRIA5),y)
+> > > +HANDOFF_KEEP ?=3D 0
+> >
+> > > diff --git a/arch/arm/mach-socfpga/config.mk b/arch/arm/mach-socfpga/=
+config.mk
+> > > @@ -43,6 +45,27 @@ socfpga_g5_handoff_prepare:
+> > > +             if [ -n "$$HANDOFF_KEEP" ]; then \
+> >
+> > HANDOFF_KEEP defaults to "0", so -n "0" is always true. I suspect you w=
+ant:
+> >
+> >     if [ "$$HANDOFF_KEEP" !=3D "0" ]; then \
+>
+> Hi Simon,
+>
+> I think this is a misunderstanding.
+> My original idea is to use the HANDOFF_KEEP=3D(whatever is mistyped)
+> to run the keep branch.
+>
+> While the absence of HANDOFF_KEEP(anything) will not keep.
+> But simply HANDOFF_KEEP will not work and need HANDOFF_KEEP=3Dxxx.
+
+I'd suggest either dropping the assignment to '0', since someone
+reading the Makefile will reasonably expect the shell to see it as
+'off'.
+
+In any case, how about a comment above to explain what the argument is
+for and what it does?
+
+>
+> Because the command >
+> "make prepare HANDOFF_KEEP=3Dxxx" is very distinctly long
+> HANDOFF_KEEP=3Dxxx so it must keep my thingy.
+> Even if I mistyped =3D0 etc.
+>
+> And during the absence of HANDOFF_KEEP=3Dxxxx
+> "make prepare " immediately, see ok clean so it will not keep good.
+>
+> That's my original thought.
+> I think I should changed to:
+> if [ -n "$${HANDOFF_KEEP+x}" ]; then \
+>
+>
+> Need your comments on this.
+>
+> Thanks,
+> Brian
+>
+> >
+> > Otherwise the 'preserve' path is always taken and the 'clean' path is d=
+ead code.
+> >
+> > You could also have an empty variable meaning don't keep.
+> >
+> > > diff --git a/arch/arm/mach-socfpga/config.mk b/arch/arm/mach-socfpga/=
+config.mk
+> > > @@ -43,6 +45,27 @@ socfpga_g5_handoff_prepare:
+> > > +             trap 'rm -rf "$$TEMP_DIR"' EXIT;
+> >
+> > The trap is set after TEMP_DIR has already been used. If the python
+> > script or mv fails partway through, the temporary directory won't be
+> > cleaned up. You could move the trap to immediately after mktemp
+
+OK I had that wrong. If someone presses Ctrl-C while Python is running
+it would not clean up, but that's a minor issue...
+
+Please note that you should add a change log for version 2, 3, etc. -
+see here for details:
+
+https://docs.u-boot.org/en/latest/develop/sending_patches.html
+
+Regards,
+Simon
