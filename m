@@ -4,110 +4,108 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9444F8FA72
-	for <u-boot@archiver.kernel.org>; Tue, 21 Apr 2026 13:07:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04837F8FA72
+	for <u-boot@archiver.kernel.org>; Tue, 21 Apr 2026 13:08:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4544A83E36;
-	Tue, 21 Apr 2026 15:07:28 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9C62683E36;
+	Tue, 21 Apr 2026 15:08:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="dSFPv/H5";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="jE/mA36q";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="Bu0eETE9";
+	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Q0gzWuk7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0AEE083E76; Tue, 21 Apr 2026 15:07:27 +0200 (CEST)
+ id 7E0EA840A9; Tue, 21 Apr 2026 15:08:12 +0200 (CEST)
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
  [205.220.180.131])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8F68283A91
- for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 15:07:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F324F83A91
+ for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 15:08:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=balaji.selvanathan@oss.qualcomm.com
 Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 63LAm4bS1511084
- for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 13:07:22 GMT
+ 63LAirlc1510952
+ for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 13:08:08 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- 6IJeLVc27K8/M0aN7u8utDbpeBeBEZ5LjYtl5f5NUNs=; b=dSFPv/H5ae/yPkAa
- y0Crz/Flzxj6p0473hsYyyoI8zh8ssCB84fniDtDmlT7nWjAP5uqwsOZ+XPm/nNU
- oUToxjoemVstanUrRq0/DCsMgp3DMl+RLMD1sJJLFNiMA7r3Eq1JpOJe9kLk0f73
- Wf8z0h8bHWbV7qak///uQtNhve5FAVOMb4EiE+a/OOH3yt57rES0aMXsohKWSMsn
- Zlyr2WDkp0T6nvTIBXgSmu8Tf6c4oQrZaew/96V4w2B7fIYEng+gxbhGVtyc6H2E
- ooN4+uLfJFHuKbJrAHB+ndHDOtrdgzqBurmefqMCeoDN5sSFwLeMEBcvEeOjIzRT
- pKNLcw==
-Received: from mail-pl1-f199.google.com (mail-pl1-f199.google.com
- [209.85.214.199])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4dp2ak1u4n-1
+ 7Cfx9sly2ZQUDmIlQhklXlUG6HusSyFy68f5HqAbgRQ=; b=Bu0eETE9Ozik/10/
+ 4UEumV/tqwB6XBayjltHPmQDAvxNpgzp8UPQbhjPg3xZkmUREhsgjm62mCcRGYK1
+ tTaZIJmJs9ifQfT0THCDV1hAlm750mlXr+Cyc54ssLt1QNr2YX30vjds8nCRPaUc
+ i+gWUN4KMcj0UegJTakZr1YkBDe3cbpEm1dvZAv3GSSIh1EA97EuYQVfxZRunC82
+ 8vTfh9rxJ6LbGm7otyLW1d0WvJoSS2xNju9rdBYn+lM5fA6TPO13oyAO9P00Z8hl
+ PUj5Kq1lPfiL1Noq5JjaFae5+8BFPl3FrSzDPvB4cW2k90dAEJfR98KPmcKJeVTo
+ VsnDFg==
+Received: from mail-pj1-f69.google.com (mail-pj1-f69.google.com
+ [209.85.216.69])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4dp2ak1ugp-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 13:07:21 +0000 (GMT)
-Received: by mail-pl1-f199.google.com with SMTP id
- d9443c01a7336-2b2ec948174so39855705ad.0
- for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 06:07:21 -0700 (PDT)
+ for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 13:08:08 +0000 (GMT)
+Received: by mail-pj1-f69.google.com with SMTP id
+ 98e67ed59e1d1-35d9467e85aso4409310a91.0
+ for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 06:08:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1776776840; x=1777381640; darn=lists.denx.de; 
+ d=oss.qualcomm.com; s=google; t=1776776887; x=1777381687; darn=lists.denx.de; 
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=6IJeLVc27K8/M0aN7u8utDbpeBeBEZ5LjYtl5f5NUNs=;
- b=jE/mA36qg3nRtUNxBLmayCULi3sD1KKXqQlibqDz34uTnoJMk2mS9xjOTIyfu/PvpP
- NKLw8nq8nWqE6OAA++7Ltr/ZkpgG1gUk2qtyDY24LlBI+09PIEW8xpkHKCRIXi76VOld
- 5km+LCfn9i2eLEF0i7ekcdo4z+a+prdF8y2BDxHpcGrNaOcgLntmq8ACAe5rys47MunN
- fIrx+o1VoYfZM0moeIOy9JJgA41Izg5x45Fm1xot2+AIPU+j3AJK68TpBPu4VguYWXU9
- VyXa8OtxQ9H3SlaFJyeJQV09dIa2ahjCBV4xtShZQRRM7RUFwmaBttIGdqtJQAXXrPCL
- WsPQ==
+ bh=7Cfx9sly2ZQUDmIlQhklXlUG6HusSyFy68f5HqAbgRQ=;
+ b=Q0gzWuk752P3DyIzcMf/9Y9efayTBW45lb82Co1FYOyA8qA2n59p4sfX5b99bJduqd
+ 0umpMtGvVQk5v0CMWF5hr6hE+a3ZPHSqMZoGMMoR6EHTQ0PBY+R4I/MXlRzj2GAuxgFF
+ xA+BT+4Y1lN+jElRLxjldf97f22nrzaM5zTGJgjLH/3YCvTPeIMktpK2R5+6vOcx44Hv
+ 8pwI1E40YJSRUwNUw38HTcDLNLf6toi/pgZjQNu65vNYUYg7S8rJtYwRvZyyP3kfi5Ym
+ NxbcxQwIi1fb+Oxe7G4yBbamLqOLqgo3No1mFl0DJQn8cH3rBLY2XYrWgRD6SFcJ2rwZ
+ d/vg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776776840; x=1777381640;
+ d=1e100.net; s=20251104; t=1776776887; x=1777381687;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=6IJeLVc27K8/M0aN7u8utDbpeBeBEZ5LjYtl5f5NUNs=;
- b=FG27iC4Jn26xWp3xZYhavmHc7PmvonSQ+uQVWLW+uElpKmYpsXLQ83D86DYWMH3zTT
- MOGQI2DYKRdGOkmjSpZ98WBwVcsbvAxPC7MAl8zGGwkXup9Th0qjzb5+C1Ij26lJ7mKe
- VKq6Wd0NX0J79Aa744JZJPflKzbQlsl0igMGHtFqgW32JmL6zonXeLWBGJDG6F09VS4v
- 5oRenHEgIRT5/OxaJHMNtw+77akCdhml7ncY3GHq+oa5vCmUVh7P0xlBAGD7mwm1PkbX
- I3chPiBBxw0DRrvBuBhRjVBHjQan3Mjd81kXIzvGG5mJiGB5xtpLNnwdWUct52iDWqrK
- sJ/Q==
+ bh=7Cfx9sly2ZQUDmIlQhklXlUG6HusSyFy68f5HqAbgRQ=;
+ b=sUgC5pJq0PLNb3ySxZPuVaZnHuGkk0i2Oj/J65+cnK52L5efBDnw033P5bKQNMsMrw
+ LNs72kdwq/Kv+IfFlmt13yJgVy6XK5WSIiFj1P9OxKcDyoqkOh6NAYsNm16Bo8sZ+BDn
+ N5QSSQ25GiEdUU8tAJ3CYdIFiccidlUGX51648JqblIjDgqPv4y6YcFfjD+rLghXlZUl
+ TYL99xqPLvUChurSMEUoj+ajmGJRZVsTsMT/+ekr6xMKfnoNNUT7q1tN8dx3zC56VPp3
+ e8Qy4RB9f1WP9M+t+2/eFD8mJHPs37jwfRPHQFzHenBveFUGAXoS8UPAQErjq1BA/fGt
+ AUbw==
 X-Forwarded-Encrypted: i=1;
- AFNElJ83WPIBY2fJkrUdDJOH0nHShbzU0ih5m4ZZkPZI8FE8U4vArFywlM911QxKOjAebGPZFaJ9FGQ=@lists.denx.de
-X-Gm-Message-State: AOJu0YyMUzYr2btGNrV3VGPO6Tn3oUUjGAwHXLAh1Ky9ZaQPHZkeC0vb
- 9Not7zRmkd8JpP6J5mYtITUaa+O9jhTl5I8WHUWNUHTieIFxMDKbiVTi31tFD8jWN4A4tpbD5x+
- C+U9ymPnUBfQungDEOwKgStofbAWFPs+Ijqz5uItXxISdxzKTCsEXE/RA
-X-Gm-Gg: AeBDiev/6c6q1A/RZss4XSc4SzZGQjQeF8q4qOBN0RIo+9Ty42kc9vV7N02jTvk5nqd
- 0Gi/kCF3qHxKzWHpJ1UzWbN1NnzfudN43FOisA4mTMSfQ+IKg098gDRjwiDL14rcjTfh4XjS1gV
- ZwDB+Sy+bWcnorerKhAbhbQfE80W9n7JogAPxuNPuGbmDbYx3eslxNOFwLivKIDEZaDZSA+NsuH
- x4HftaOXR0ymgWLbuZ+k/qkNodazw1sQ7JuCFCOJvaUW6jw/PqXbVKt1sHkk3PKthrZeHa5tD1B
- hawQL7CQeV7H1W6HNzLNj+FqP7wqSRh6twnonl4K0FIQVdVEgm1Sq+YmmUjo5xQYT+A1AGRiFKr
- lOX+3u0z9U7k8fmABaptvxvgKQZ4e75GSXz1ZUpezJVVwEgSEYrDpmWV6pb0ionsxOUPd
-X-Received: by 2002:a17:903:1663:b0:2b2:dca5:101b with SMTP id
- d9443c01a7336-2b5f9efc3b7mr201917125ad.12.1776776839732; 
- Tue, 21 Apr 2026 06:07:19 -0700 (PDT)
-X-Received: by 2002:a17:903:1663:b0:2b2:dca5:101b with SMTP id
- d9443c01a7336-2b5f9efc3b7mr201916495ad.12.1776776839029; 
- Tue, 21 Apr 2026 06:07:19 -0700 (PDT)
+ AFNElJ8+tu1YG5/FlXyjgeWUf3L/QbhIP/Ei21GG2CkEJGGc5Q4Z9hqp27wvRddapR7n0JYZUvbwXsg=@lists.denx.de
+X-Gm-Message-State: AOJu0Ywb6pD3Oe45gw2s1XD6KgIzktugr2siY6rvkXo86dRf25QTUpd8
+ SVIiYKxstXpaMPrlUTwXRrQYDVPR4/UqrayZyGUkKAikcOD5wg3qG/4xm7wzb6eCn3ZrxbenqLt
+ YD4YYsaVnziaWfvKVMRZGIc9SHzEgABi2Cxio0HhO50T/XVsWSsPdujj3
+X-Gm-Gg: AeBDievRxRIPBHWjGbmZvFlq0EhZ0AkwC+Cz59xORM36ozQg4itxwmt7IQGAr7Zo+QD
+ npa65XHcA1azYj470ddOFLCJPJDC9OhYRITUD4DRI/vs9ZLAvme6V/J61N8i9yRiwhvnlzLCAZa
+ fZ0sZrk8QFM1QzSaIf78T2Ib6EJutnpB5Gnny9F8w0dJePJAWkuF7Rvk4FWhj7QrvSjDEUilS5Q
+ bZBZkivpGPBYsHgIwmwd6ctEpCUorem9431hQyWUuSVzCcqVs+0tRTdgzUnNxPOxH7CSenhQ508
+ juOw3ohXTts0BpBaoZPMja9K9auBifgMwl6l1O+KWmRrXNxaJ1vaGUBF7rCZfTOC7QoB17Z30X4
+ OiPSDP7F/tbpqvymHSN4vFcXph0H/zEEB9x+Q6yl+Cw1nl0Nq85MdUNGdunHyQLaJUmcF
+X-Received: by 2002:a17:90b:278f:b0:35b:e4f8:7cc5 with SMTP id
+ 98e67ed59e1d1-361404a5988mr15704381a91.25.1776776887244; 
+ Tue, 21 Apr 2026 06:08:07 -0700 (PDT)
+X-Received: by 2002:a17:90b:278f:b0:35b:e4f8:7cc5 with SMTP id
+ 98e67ed59e1d1-361404a5988mr15704332a91.25.1776776886713; 
+ Tue, 21 Apr 2026 06:08:06 -0700 (PDT)
 Received: from [192.168.0.7] ([183.82.177.74])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2b5fab3bd2bsm142520465ad.74.2026.04.21.06.07.13
+ d9443c01a7336-2b5fa92c428sm157616225ad.0.2026.04.21.06.08.01
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 21 Apr 2026 06:07:18 -0700 (PDT)
-Message-ID: <533e8a1c-e157-4e5c-837b-32858b44179e@oss.qualcomm.com>
-Date: Tue, 21 Apr 2026 18:37:10 +0530
+ Tue, 21 Apr 2026 06:08:06 -0700 (PDT)
+Message-ID: <8a98b441-b765-494c-ab53-c6cb2dd663f1@oss.qualcomm.com>
+Date: Tue, 21 Apr 2026 18:37:59 +0530
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH 3/3] fs: fat: Limit transfer size to prevent SDHCI
  controller timeout
-To: Jonas Karlman <jonas@kwiboo.se>
-Cc: Sumit Garg <sumit.garg@kernel.org>,
- "u-boot-qcom@groups.io" <u-boot-qcom@groups.io>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- Lukasz Majewski <lukma@denx.de>,
- Casey Connolly <casey.connolly@linaro.org>,
+To: Casey Connolly <casey.connolly@linaro.org>,
+ Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io,
+ u-boot@lists.denx.de
+Cc: Lukasz Majewski <lukma@denx.de>,
  Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>,
  Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
  Stephan Gerhold <stephan.gerhold@linaro.org>,
@@ -118,28 +116,28 @@ Cc: Sumit Garg <sumit.garg@kernel.org>,
  Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
 References: <20260324-emmc_sd-v1-0-883a45538b6e@oss.qualcomm.com>
  <20260324-emmc_sd-v1-3-883a45538b6e@oss.qualcomm.com>
- <6b16c87a-ef5d-4c5d-9268-f1c0c3884b05@kwiboo.se>
+ <a8c8f3f7-15ca-49b2-872e-aded2a424ff0@linaro.org>
 Content-Language: en-US
 From: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-In-Reply-To: <6b16c87a-ef5d-4c5d-9268-f1c0c3884b05@kwiboo.se>
+In-Reply-To: <a8c8f3f7-15ca-49b2-872e-aded2a424ff0@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Authority-Analysis: v=2.4 cv=KItqylFo c=1 sm=1 tr=0 ts=69e77689 cx=c_pps
- a=JL+w9abYAAE89/QcEU+0QA==:117 a=wgjzkBLg20+cMgJN0zysmg==:17
+Content-Transfer-Encoding: 8bit
+X-Authority-Analysis: v=2.4 cv=KItqylFo c=1 sm=1 tr=0 ts=69e776b8 cx=c_pps
+ a=vVfyC5vLCtgYJKYeQD43oA==:117 a=wgjzkBLg20+cMgJN0zysmg==:17
  a=IkcTkHD0fZMA:10 a=A5OVakUREuEA:10 a=s4-Qcg_JpJYA:10
  a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
- a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=qvZ195YzLHTVefmX5ZYA:9 a=QEXdDO2ut3YA:10
- a=324X-CrmTo6CU4MGRt3R:22
-X-Proofpoint-GUID: _spj1XZeD_CFvH4-a-vl2REQc_TCGnMJ
-X-Proofpoint-ORIG-GUID: _spj1XZeD_CFvH4-a-vl2REQc_TCGnMJ
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNDIxMDEzMCBTYWx0ZWRfX6oceElS4jolS
- KUDmzd0mBrkWnAyuh6fzBuz19UJFjHey6Hj7k4vAxrMc2rSJ35byjURuGykSQnnBvo76LrdsfT3
- BseYhJSpgIfUCMAtzoE5HzOweRrY9iuAx9nt2uuTGyy5Yk5AyNRIis0xie59EgMih36zsPcl8va
- 2YBmE2jXAp05bynTTGDuOmerFFa5eGU8UPjrmLZrx9zD/KCLBrvYDe1hfAH6YB/FfCu9L9Z9Ec2
- f/xTU5QFAG0FugUgkRhRJ/I0h+kVQnItZ9kAPLAcWlt5ZJxA6E7RVYearRdYsP1L7CjeiYh2drd
- U6dEhAtbzMsyXTlMcuQSctDAD20/ygmOlK4btDECivDB0fqVVN0OUq8L/Em5kndLLXBnX5SZqOD
- MGgXhw8JCYQYmPGcVrWXsisUjEVnd4qKWEZyT/fKuFP7Vep5VFGhlNfmwSV9AmQTUuYLKXdmkv0
- zQCrBnFnzS0cchjZhLQ==
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=H_SXT-ECsLmEC2VvKS0A:9 a=3ZKOabzyN94A:10
+ a=QEXdDO2ut3YA:10 a=rl5im9kqc5Lf4LNbBjHf:22
+X-Proofpoint-GUID: 3_MylelLDHIOReLD-DaoZ4-RxgxUMEfa
+X-Proofpoint-ORIG-GUID: 3_MylelLDHIOReLD-DaoZ4-RxgxUMEfa
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNDIxMDEzMCBTYWx0ZWRfX+UedGy0NLZnv
+ B1Qo2AqmPE52LrOEbvU679nT/98PhaO8E1jITq3h/8gaFhAI3YNy64wQ7dawjgyOGQeJLiBxb/V
+ R06tmdlW4fS0X+mRjFRy/LPp3pzLPNh7tfNA9NwNY2vIMKhvE48UhOOUOyDC7hCBX8hPLeFCwlp
+ sOePJvKZAJOuvDdQzpA92jGiqYPJmMHVqtMArV+BIJDysXTYwrIccfbIKODxKfsswq9RXF0Ohpk
+ YB70vUIhabQFbenaILAQypL9+GEaDnDS2s4n6on7TTTxUKZC/mfEqSitWD/+7ybXWClP5kzJbBt
+ 2zoM6+WdAOe2CQBvL8J7Mlw2TJN47kbcvYVO4+kEh/nmSG+fBWlepdIqhkZ6/BjAELZDsw8Htzx
+ IHFbx4w4mNOgiCjAjm19SZ9O98Aaj5pV9mVLuV2CJjuCiV4/N1Og0pjwAZ4eD4HBJtN6l18zo+4
+ Kasi3oWMCVneqcXQVig==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
  definitions=2026-04-21_02,2026-04-20_02,2025-10-01_01
@@ -166,10 +164,10 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-On 3/24/2026 5:32 PM, Jonas Karlman wrote:
-> Hi,
+On 3/24/2026 5:26 PM, Casey Connolly wrote:
+> Hi Balaji,
 >
-> On 3/24/2026 6:52 AM, Balaji Selvanathan wrote:
+> On 24/03/2026 06:52, Balaji Selvanathan wrote:
 >> Some SDHCI controllers have limitations on maximum transfer sizes
 >> and can timeout on large block operations.
 >>
@@ -177,7 +175,24 @@ On 3/24/2026 5:32 PM, Jonas Karlman wrote:
 >> to stay within controller limits. This prevents timeout errors during
 >> large file transfers on FAT filesystems while maintaining
 >> compatibility with all platforms.
->>
+> Shouldn't this be split into two transfers at the MMC layer? Perhaps
+> with a quirk flag?
+>
+> In fact this seems to be already totally supported, just change
+> CONFIG_SYS_MMC_MAX_BLK_COUNT to 16384 (see mmc_get_b_max() in mmc_bread()).
+
+Hi  Casey,
+
+Thanks for the feedback. Addressed this in v2: 
+https://lore.kernel.org/u-boot/20260421-emmc-v2-0-0ebd3322b676@oss.qualcomm.com/
+
+Regards,
+
+Balaji
+
+>
+> Kind regards,
+>
 >> This patch builds on top of the work from:
 >> https://lore.kernel.org/u-boot/20260224035000.1617869-1-varadarajan.narayanan@oss.qualcomm.com/
 >>
@@ -211,24 +226,6 @@ On 3/24/2026 5:32 PM, Jonas Karlman wrote:
 >> +		/* Break large reads/writes into chunks */
 >> +		while (n > 0) {
 >> +			__u32 transfer_count = (n > MAX_BLOCKS_PER_TRANSFER) ? MAX_BLOCKS_PER_TRANSFER : n;
-> Have you tried to configure SYS_MMC_MAX_BLK_COUNT=16384 for your
-> platform, or otherwise set b_max in your mmc driver?
->
-> That should cause similar max blocks handling at a the mmc-uclass level.
->
-> Regards,
-> Jonas
-
-Hi Jonas,
-
-Thanks for the feedback. Addressed this in v2: 
-https://lore.kernel.org/u-boot/20260421-emmc-v2-0-0ebd3322b676@oss.qualcomm.com/.
-
-Thanks,
-
-Balaji
-
->
 >>   
 >> -		if (ret != n) {
 >> -			ret = -1;
