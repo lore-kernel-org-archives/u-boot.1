@@ -4,86 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1DBA9F8FA93
-	for <u-boot@archiver.kernel.org>; Tue, 21 Apr 2026 15:12:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 961EDF8FA90
+	for <u-boot@archiver.kernel.org>; Tue, 21 Apr 2026 15:12:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E8BA6840A9;
-	Tue, 21 Apr 2026 17:12:17 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 9285F8422D;
+	Tue, 21 Apr 2026 17:12:18 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=ee.vjti.ac.in
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="AgbNvFNO";
+	dkim=pass (1024-bit key; unprotected) header.d=vjti.ac.in header.i=@vjti.ac.in header.b="BIGtVqwc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A9DE4841C8; Tue, 21 Apr 2026 14:50:08 +0200 (CEST)
-Received: from mail-qk1-x741.google.com (mail-qk1-x741.google.com
- [IPv6:2607:f8b0:4864:20::741])
+ id 36861840D8; Tue, 21 Apr 2026 15:21:19 +0200 (CEST)
+Received: from mail-pj1-x102c.google.com (mail-pj1-x102c.google.com
+ [IPv6:2607:f8b0:4864:20::102c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 077DE83E76
- for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 14:50:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A6FFE83BC8
+ for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 15:21:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=none (p=none dis=none) header.from=ee.vjti.ac.in
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jcethrid@gmail.com
-Received: by mail-qk1-x741.google.com with SMTP id
- af79cd13be357-8d7e7f48499so466105785a.1
- for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 05:50:04 -0700 (PDT)
+ spf=none smtp.mailfrom=ssrane_b23@ee.vjti.ac.in
+Received: by mail-pj1-x102c.google.com with SMTP id
+ 98e67ed59e1d1-35d94f4ee36so2515258a91.3
+ for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 06:21:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1776775804; x=1777380604; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=fITQELsvy9bXsJRewdREpmqsoq9vPvOTl9rYxckme2I=;
- b=AgbNvFNOIfORMRB08+QfHHvnIHi6UpIWymIoUafka1DVhDFxOtZZr006ZuUFu1j3ta
- QruWcwZB8DUDJ0G0kwr7QABbwBOS//qotC+Q9uLSRBLAIFkwmWS44p7uF623TNJvL3j7
- QKnk53Z+oPzoEFpROYE1S+97m1RsBRSvvzfA5kY6tkFv0r+Z781hpObkyYhwdzVAYR2b
- TKRx25zDDN0K6q1BrafZvL4kp3c6FM6VbQqQZ4vawmP6+jRm/4bIMC6OSQvviHNPFuvK
- GjGqszPI2XGxZxDH6GqSKHb1g73Y2bRNGTfXTknzFP6bf/ibU+bz7/kNLMMJL7zUTJSi
- EvgQ==
+ d=vjti.ac.in; s=google; t=1776777674; x=1777382474; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=5twtEUoqqF7FdkHJBIXqDYaOZk7RuX7Gq1CEVw76hZ8=;
+ b=BIGtVqwcWDcloiiT6j3Kij8GyX8Gz9hfZQXEgL6dRhYG9X//RXcq5oNNe9X5brRBv9
+ AW47EHFsI926iJn+EwukqSFpYWwbFzDZs+vkiH19QDE+YaB4qJKF5MNG34vKuGOQaDZD
+ bNgh9RI4y0RJYt8dsAjY/zHuVju/5G2/TSFmE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776775804; x=1777380604;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=fITQELsvy9bXsJRewdREpmqsoq9vPvOTl9rYxckme2I=;
- b=kCl4n1shi7BBQhogYnEMBL03XAQcIoPFTQERls5JFu7HjkNoyyiVHYf92XQmoNutk2
- tgyH/epwAtpBrv3XvRZ623fixlOc2+yn9gskDdy+urbm3BHxvo36wwSkNiwzuYKXgP96
- I09Q3mgtU0024+JVrMY6if1ML8Puqhq2mSYm3Gj6+NO6Go9QYmOF1kANLu/RdBmes4WG
- y2kZfdQtaJ7cXj6uFhZbwOcagICWcRuZ4IKodINfTB7lMueJISKKR/bikRqxUIG2vBag
- 9UaRpBgNfba9WSPl2s6HnMS8GVe08UpZcMGsasMmAKXK5pUXr5Y2QVNGANeScPQemSUZ
- xYcQ==
-X-Forwarded-Encrypted: i=1;
- AFNElJ92cusTHJ+oARoU8u8+sYIrmt355NbL/sJhdGR+oyScN03/mF19q9QNgQnDSWUnxf14PjZAA0o=@lists.denx.de
-X-Gm-Message-State: AOJu0YwxRxISqvtmjyYK+bYqgC6zkhNX+NBCLiE0Sxj4pQi8iilUCcmo
- tcVvDWEYZVLoqhfVjx6Y/wXN+ozShb7OjEcjNVPJW6d4I6CNhSQJuEAD
-X-Gm-Gg: AeBDievdTM9w7BajZHTtaxmDB0012Uz4W6gTe4rmJbeYsXeDb2xp7WsoLlvbQv8ylj2
- HOHvc2IzBuajvcYrBf7NQM1wkLxHw+10GP7WkuKDqFARLg+2446K43aU6Oiyufx/pkkJ9hUXM+e
- nDjYusAHJsk8s9C+985CUvsz87s0eURu3K0PUFWyE21Eju59r0KhmhukZteiNF8RptJ96O8Ks19
- tDP+cQfghfa3Aw2b2jfLh0xoMVB54rgXOFktPXvV+grWFMWmIbm3P6+ivcptz6lSF2biNJDlMMC
- KAOdEd24yLEJvD4i89v5xQiD92toiScUQhsRpl+sMDlpI/SuqB+A8JGBNXhneEtgcMhIySOzMln
- K5RSQG6w2W0MhUweK4JJiL8/d1lO381gh/KjsJxL+Unxl3h6vpHX2DvQyiF1o5+Zeuwx2+IwKOk
- zCIQcsPwJlSrBdZyNPvzJCgnxF2WxvCTMCeSqFU7GydcQX
-X-Received: by 2002:ad4:574b:0:b0:8b1:f8fe:507b with SMTP id
- 6a1803df08f44-8b1f8fe54edmr20536876d6.19.1776775803739; 
- Tue, 21 Apr 2026 05:50:03 -0700 (PDT)
-Received: from cethr-l01.localdomain ([136.56.120.109])
- by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-8b02ac7834esm99919196d6.18.2026.04.21.05.50.00
+ d=1e100.net; s=20251104; t=1776777674; x=1777382474;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=5twtEUoqqF7FdkHJBIXqDYaOZk7RuX7Gq1CEVw76hZ8=;
+ b=Egda4HQ4VXZl4qbIzjCeFJW1TA7JzfsmHXR6CQGz6m2m4LgLEe5iAW3Z978kgDOcvv
+ wgwwhx/7exyGlyP6cV7x6fyPqY2uMo+TttF3/sWKtlX59isUCFAi5rStiECR4l27ID7u
+ 6R6SVvmEIu4Ep/0xC6vfRd40UJ5HwzotLefuFxPeNpknsfLZasu1Kp+TPXrKAjx3vx1a
+ M9rAwpmGJLKtOGTmCqDsbdCHRH1m9t0g/zRGWEPdXm1L14OjvZuScHWEWyQZ4cd0U5i/
+ 5EP4/09ZxfXX4xuJ/+agvJDufczkJbmRIU463KVJK0rhztVGRxLAGT2AXtwQn2LmV7W7
+ CDbA==
+X-Gm-Message-State: AOJu0YxSPjeOIEBvsj+llJBTXM/5etreLGTPvb8iBk5DyYRjaJELPQkn
+ mHm782rdA60IFCoGCOiByHMXNR1FaIg8H+8E58H7cVhnekgp/FmcVYPRARc3m0RXb+VSuznnCV4
+ N4kWDQ00=
+X-Gm-Gg: AeBDiethOHlKyy8fw1qShI32tUusddWth8DWLbEYDdFuyXoz+5gfjJ4LnzsY9VWx9oC
+ 0eMpkZ/x37efu/a9u6w+KIGFSIU6oOSigjWrwBe51OT0zWJX3iyNuSZz9zzFZMUd9ubn7hlTnLv
+ 6xKeawE0ui8S/8yBraDE3DX7UfIKbHdlxN6S/TCPzhI6W8MZwW5KeOLvPbTXiYsp+VIWxPa3hL7
+ 4tsCDFaqiwbzIiHlATVXCs7ypbyFHacztMjP24Db5n6pJeEZ+F/3ECPh7yFdJzfbHdKpygGtOpV
+ 7p/kfENw7h+4GyhluJ/P2SA18QhaKwmo6ayL34Nfk+7LY1TZE9zx56UXCuzBTYC4aurb8Cvy8OD
+ WwqbEtope8urEH9xokA4+VBA31IL31LsyzycZq+AB2dtzXctYnoDQlInv4fa/ZI8vTAeZp9dvhA
+ vfqwbNDs/8fIo/8bllRv9r4wxZVYGVQIZG+BAidH0QMJo1muIp/9e0wCPHSaKkrC609rmLM1fLx
+ UayfSRXfSV23TyktRlRMrDD/7072/pY
+X-Received: by 2002:a17:90b:350f:b0:359:8e5e:43de with SMTP id
+ 98e67ed59e1d1-3614049358emr19088822a91.22.1776777674316; 
+ Tue, 21 Apr 2026 06:21:14 -0700 (PDT)
+Received: from ranegod-HP-ENVY-x360-Convertible-13-bd0xxx.www.tendawifi.com
+ ([14.139.108.62]) by smtp.gmail.com with ESMTPSA id
+ 98e67ed59e1d1-3613fb42e25sm6688376a91.3.2026.04.21.06.21.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 21 Apr 2026 05:50:01 -0700 (PDT)
-From: Caleb Ethridge <jcethrid@gmail.com>
-To: sjg@chromium.org
-Cc: caleb.ethridge@analog.com, jcethrid@gmail.com, linux@analog.com,
- malysagreg@gmail.com, philip@philipmolloy.com, trini@konsulko.com,
- u-boot@lists.denx.de
-Subject: Re: [RESEND v4 14/14] arm: sc5xx: Add fdt_addr_r, kernel_addr_r,
- and initrd_addr
-Date: Tue, 21 Apr 2026 08:50:00 -0400
-Message-Id: <20260421125000.5677-1-jcethrid@gmail.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <CAFLszTj9nd+1N7U5DyQfmnx67F67OTdHFo0FSArpLMv0qSZgAg@mail.gmail.com>
-References: <CAFLszTj9nd+1N7U5DyQfmnx67F67OTdHFo0FSArpLMv0qSZgAg@mail.gmail.com>
+ Tue, 21 Apr 2026 06:21:13 -0700 (PDT)
+From: Shaurya Rane <ssrane_b23@ee.vjti.ac.in>
+To: u-boot@lists.denx.de
+Cc: jd@ti.com, tl@ti.com, trini@konsulko.com, sjg@chromium.org,
+ Shaurya Rane <ssrane_b23@ee.vjti.ac.in>
+Subject: [PATCH v3 0/2] BeaglePlay: add ITE IT66121 HDMI bridge driver and
+ enable splash
+Date: Tue, 21 Apr 2026 18:51:00 +0530
+Message-ID: <20260421132103.30033-1-ssrane_b23@ee.vjti.ac.in>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Tue, 21 Apr 2026 17:12:16 +0200
@@ -103,29 +96,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+This series adds a U-Boot driver for the ITE IT66121 DPI-to-HDMI bridge
+and wires it up on the BeaglePlay so the board can drive an HDMI output
+from U-Boot (used for the splash screen via TIDSS).
 
-> Similarly, initrd_addr=85000000 seems inconsistent when the load
-> address is around Aa000000; sc594-som-ezkit uses A8000000. Please can
-> you check?
+Patch 1 adds the new video bridge driver. Patch 2 enables the DSS,
+I2C2 and HDMI-bridge DT nodes for U-Boot (bootph-all) and turns on the
+required Kconfig options (TIDSS, VIDEO_BRIDGE_ITE_IT66121, BMP,
+SPLASH_SCREEN, etc.) in am62x_beagleplay_a53_defconfig.
 
-That is correct, these should be A******* to match the sc594-ezkit. I will
-fix this in the next version.
+Tested on BeaglePlay hardware: U-Boot renders the BMP splash over HDMI
+via the IT66121 bridge.
 
-> The standard U-Boot naming convention is ramdisk_addr_r - would it
-> make sense to use that name?
+v3 addresses Simon's v2 review comments on the driver: the remaining
+bare BIT() constants in it66121_hw_init() now use named defines with a
+comment describing the AFE power-on sequence, and the unused-looking
+bpp local in it66121_attach() has a comment clarifying it is a
+required edid_get_timing() out-parameter.
 
-Yes, I will update from initrd_addr to ramdisk_addr_r.
 
-> The commit message says these are for booti, but adi_boot.env uses
-> bootm with fitImage and does not reference these variables. Is this
-> preparatory work for a future patch? If so, please mention that in the
-> commit message.
+Shaurya Rane (2):
+  video: bridge: add ITE IT66121 DPI-to-HDMI bridge driver
+  BeaglePlay: enable IT66121 HDMI bridge and video stack
 
-Yes, currently there are no boot commands that use the booti command
-and its structure, but there will be in the future. This patch is just laying
-the groundwork for this future work, I will update the commit message.
+ arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi |  42 ++
+ configs/am62x_beagleplay_a53_defconfig       |  13 +
+ drivers/video/bridge/Kconfig                 |  10 +
+ drivers/video/bridge/Makefile                |   1 +
+ drivers/video/bridge/it66121.c               | 609 +++++++++++++++++++
+ 5 files changed, 675 insertions(+)
+ create mode 100644 drivers/video/bridge/it66121.c
 
-Thanks, 
+-- 
+2.43.0
 
-Caleb Ethridge
