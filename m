@@ -4,106 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B2D0FF885C
-	for <u-boot@archiver.kernel.org>; Sat, 25 Apr 2026 19:54:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5D21FF885A
+	for <u-boot@archiver.kernel.org>; Sat, 25 Apr 2026 20:08:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DCFBE8437C;
-	Sat, 25 Apr 2026 21:54:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 169378419E;
+	Sat, 25 Apr 2026 22:08:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="yG4eVm3t";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="DhdrnEIT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4D1A08447F; Sat, 25 Apr 2026 21:54:53 +0200 (CEST)
-Received: from mail-qv1-xf29.google.com (mail-qv1-xf29.google.com
- [IPv6:2607:f8b0:4864:20::f29])
+ id 3FFAA8420C; Sat, 25 Apr 2026 22:08:16 +0200 (CEST)
+Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
+ [IPv6:2a00:1450:4864:20::32d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0F6D684378
- for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 21:54:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E387784178
+ for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 22:08:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-qv1-xf29.google.com with SMTP id
- 6a1803df08f44-8ac9ef74131so136630766d6.1
- for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 12:54:50 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1777146889; cv=none;
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-48374014a77so116976425e9.3
+ for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 13:08:13 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1777147693; cv=none;
  d=google.com; s=arc-20240605;
- b=eP50qmNMhhYTHxq8rFjK2OsMeUmbVHGS56YuZKGoTa5gqC1ML/ZWdahvtJtQpaUPHN
- 1UinGjUhESbLbOub5Nwar/dTA2/i3Mv86Vq6S7tGC8TivOYV80s8ZxRYJ6Ga8w04/lDv
- ObqAIOq6Nn6p5miPd9SP2VlxgxUvZxKsZ+2Nykj5mKVA5Jwsem+sJ5RzPplBCZMLH8ki
- gq8x9dQYJW0jl95KCKu3/PPIGlIc62672XCBKEhmIl71rAbdfYKEcCZ7frYCNi5Q3otk
- dPSahUxn101Go4GUJeNiXe2KOwRKmT/Z5RFs5BDqS3sHnPs7v+fi1V13PwHqfctGhVvO
- DZcQ==
+ b=Ymy5oDZAmIuEdRaokNXG73w9VxPf9YbzB/33rMkaSiqjFczGQpOEiEtxTeVuXUD/zd
+ hI2K6NkPw865uFaD2MwKnWTdMLYhy25JKtbGgYtWpX7GCeh7qqbhTwbMOzAeh1hO63vG
+ 4q1TMVt0B5sc4+JiCJfj1tSWVzlqF3/Xd9x7nPznoHPJu22o89c37VL1htCkI3KlK23P
+ E0x14Z4asX+zA2G3eVd/nzIDn6EyzcOJTysw/3aYLCi4bzdcUL7/tweiMXH1wR58oGgp
+ zdndv3YYyfX/Ponq5BRxy0bEzgy5o/x7sJqaqwvCsHKpqIUNHW40SGOrb/M1nD7H25BT
+ g/lg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=9Pk9YWTP2K/Sa/go/y9fY/sF8s1gySf09w7haiDjqoQ=;
- fh=2RTDJNBsX8WwaWeZE6hCtyaIZqa5MUGi+LdvoukKqR8=;
- b=jWk2Zw2yV5MoBnSzeKhofT1OV+Sz9YjQ70CPRyP6f52GmYfhJZlqwQkBvkr7vFPTbr
- bdAeRQPaXOgk794o24bgM/DDS3rBXG0OQFliTIBr75P1DZaOiGUwktPmXCnAQZloF4Cg
- YvD5URL8sLuDYtGNBBxWe8/OXPYcPAj4HGRCSo5K9T04Ngtn3Fh5HBNO28V+4wP7d8yU
- iY19y7CiDoKjhc7UJl4q1AXhzMMldE4fM4cDb7IqpXBYkPavulrbJbIl/lujv43O4E4t
- Obj/e+wHcFXpdA060bvvIsUbUw1lUbe7YBIlTTxayoZrSPgKWKgyLDjr9FFV4YLU1q7S
- zosA==; darn=lists.denx.de
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=q2wh19CCCQ5JHODDT04EbXBebRoxxlL7efyGkhVuvZc=;
+ fh=hEymi4IDFEKte3k2lI6EQ3gTkd/kHtxBaVclzQGgSGw=;
+ b=XXdHkZEw2hmWBNhAsF7HLCV1lvyuddUoaPxhK7YyH6wGzuE9qHk4fmb1gRO20YTcS6
+ xJFnnX/ZDHADe1NYDAZf3Wc0k+30JUeM/+CEoNnrNTskVeGKI31zkGl66mgaoWVI9TPA
+ knrf0HS5qwLbbq+d5bq4jpv+PrNhUhj3poV3OykLGmzsfLccZXgZdMevmDaqCHzhun6h
+ yZ3S0fPdldnSwX2LcCtGe4wCid64YzmzfkW/j6PqXfI15iB4jXQza9xggW7Bb6BsLUwv
+ hRq4OY/ISnfs9uAgW36d7e8f45WeHIHRs33kNvDTmjqJz6eeI2CrRsDnkM6ctzVIleU8
+ h7Kg==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1777146889; x=1777751689; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=9Pk9YWTP2K/Sa/go/y9fY/sF8s1gySf09w7haiDjqoQ=;
- b=yG4eVm3tzuZ2cqEBeMuJJ4JSOoxciX7KTGh/NVYhkWx5Uq/WqlXjg3WIz26kdI6/ay
- R1GNt5uzk35O4cYv+AbbPtUQ9GY9UIxRS5I6LhYnT6Vo3Vl2z8LfR0qFraK/faPAfER5
- xV9M/JVi5OmX3EbxjG9i6x+2HKKiOTcc8CbbBbYSBg2QgLZSTa6yz9QsNMNR4Pe7hIsu
- p1eLU91Jr/UZDCpmXQDfkF8qggj998LyomRVwnKfkSgWRhBlUOPit7FcvfD3H65RWWdx
- tTFgSDVDZ2MlIglvqdDj2iM70Mya2n3sqJLU1kTqNE6blg5/30oJ99mXu3uiufH+6uwC
- Qhjw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777146889; x=1777751689;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=chromium.org; s=google; t=1777147693; x=1777752493; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=9Pk9YWTP2K/Sa/go/y9fY/sF8s1gySf09w7haiDjqoQ=;
- b=DBrI4536QUoVTpmS92o+ZE79qO8FSKad3JBA1ebR7tLIdqqHNU6AgCzqkU+4Tuve7O
- KMBy/mNFBxkAJTyxU3L1sRXvxIGw/u3l1rK9d0aiESep28+Kwa7sghOLaN4E6QudlyK2
- pSz9D0VUJYzwZMUlpp5djx7CEK/5JC02sRSAT6avfYO/GFKHz1QKOWlhH0YftIpDgfpM
- UnxACu+boSGF3tHsaXMFnqKbeL+6rn39xEjJpfHDFomlaF0bFE0JBA8YlFui555Xf8uS
- Y1jGclxSOAcOzYx//hPVJ7Z3SQNiSfBs7e/QRDaprw8hWg8sqYV1RyJ0QjNIDuKVmxb6
- 0g3w==
-X-Forwarded-Encrypted: i=1;
- AFNElJ+c0houw1v2xiDZAOG1au8FhmcNiY+sDasv3SE9BwCp5x6KyrREBLeQVu/WMCBhGef7VBROio8=@lists.denx.de
-X-Gm-Message-State: AOJu0YxDQOLtHBqp4hG2emJ/HFd8DGAH6B+p/No+AynIoRIYwY8pPXHO
- zpDABHOtNLXm0HHXtM9RKsT0iAmp+lSK3cMPnfvjEGCHZTCztn1EbwWSu1FIC4lEWwXHugYkjbO
- K6GbivSd4HHJdWrR9QUG69eG1ZudX9UeTbr9Gd3L2plS5e3YdsdJWIT0=
-X-Gm-Gg: AeBDietGoPtm6aVgjs6vDEgCkN1agG+SKwBWK/2ZbCjigAQ8D4cQpBzFkRwaj5/2G15
- QAbY6YV9bjSux8ruNE1GnSTYWes06MN1+rYPbXfAgczS/ffwwnSUqUvYpDHbLNbo8psmtrm+FSh
- xeyoz2DnHxcUdWmmmRpywN8gEQjGUspk5/7vqLBvyw7WghbFxk9WZhYSo2Pt6R5SxFgtTRF7CF1
- QhmZqAykftlB1DxbGo26un3dSN8XgwCJ3l1Hs43pdmjQkMXIHNozJf3DMs9f1dEP+nhdLah1HLN
- nJ9wYcVbx6WHPQ6Xm7u48VNkWec0iZYutRXQn7Vzf7b/d23YWYu2J50PIZvYRCbktIkb/Oa567P
- 0EQgAXVbubJw6W+bo3XC7oxkOfNWQO2bhh15Yvs1s4mnowc3Lm8E5bM38VcSPLDcsHoVyBlhUhG
- HgRMohP/tivGaLGBrvyaB1ALp4wYequ1s4AetA1jvmK4c0Fi5gDN9GGqIxRU92xuPq5ZPVOeRGc
- 0UIjmj2QtiSSxkx/IN2v0NwlvCISm80l6y4QjK6ZDPv98UueWKmEgLQI0GHsQt7pevgCe13hk0a
- jvr1EanYktFu8J4Rvk7NszcICSZPhDKlD29M1jtwR25D6NXrZcwCAQ==
-X-Received: by 2002:a05:690e:144d:b0:653:1c2a:9499 with SMTP id
- 956f58d0204a3-6531c2a977amr24228010d50.51.1776958173461; Thu, 23 Apr 2026
- 08:29:33 -0700 (PDT)
+ bh=q2wh19CCCQ5JHODDT04EbXBebRoxxlL7efyGkhVuvZc=;
+ b=DhdrnEITEzMdQO4BGYM4+M/3M8zH1E82NvNYuecwgxgPwSeI3eK732I4W1+1ZKsiPh
+ 3NlL6l/hY7qnX+HxEgQtbqM96Sd2wWHVwawnk3W1mciT8qsJw8U4RFhKlrzdqOlg9DHv
+ DRVM9R5fy97T+l/Ze5vldMX1Q5yZ2BQ1JIncw=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1777147693; x=1777752493;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=q2wh19CCCQ5JHODDT04EbXBebRoxxlL7efyGkhVuvZc=;
+ b=OJhSh63ejrotNcW7TWuyVpMLme2r4AkDkQ5KSawgnNHCloZezhG5Od0HtG1ckC6I1N
+ 7xjz6xfhR5ORD0RrmxZawjaHmAWGI9WtC4cb88bqNK8YhSZjeh7Ja5th7xI251lr3v1r
+ +4sMef0LqHtP+rtROKQKZJ4GLbgRFzR/XNCMUhOcuRTR9DS48JRidxS61U+gl0kBZFV5
+ o6AR0ELUfXWPu6GsveVdwuOsR3w1jr+fVZ+9EYu8QUWCX1uZgW/JUCTkRrN8hljFs0lF
+ Ylnjaofec7RAp/8pP52XHKj8FOR2b86OWdXQiLgXa9So/P/EyznpuaEn/HVhMzkKGPMG
+ qw3A==
+X-Gm-Message-State: AOJu0YzSwsVVdfESzxp03OCi7YSkdG1tRGqDixvgl8gr3sqKlzCRXUH5
+ 777pq5TPNThy3pJk6gR/CZTpNYYo0AqUXDqt0nwtwAwtcEohUcL65ycnEdKWDGVXOTMWFPvy7py
+ 3dHla5g6w/QR5+feaayBdnivp266gWZPeNDsHl7UDgXXfhTC/tJA3bA==
+X-Gm-Gg: AeBDietOhW8owuCi4ujg0TK2OG4zljrkNOvSCGgc9xGyoYXZOuRf7FaxZ6hd6THC1Vq
+ 2dEzjI7TZtNQaWnNN9qkOCKcoUVwq4eWuIN9Qiqc3NWp1YEKJeUwp/7zG/wsv2sHr3Q5umFnDuw
+ O0uObMeUReyGP0iORJY9amHnCQahH4Lvf60UxWq2HcqISuw1g87k0BwdKJEwI6SPjYhEqa6BC6S
+ Ia2B0jdCbXWf1LrmER6GxKURgYbmTn4+EAV2GFTQ7gvRuC/aL3eGxyhHzeed2zL1x/UdisceVBE
+ e3N1GxKe8TbVSuo8lgHU
+X-Received: by 2002:a17:907:3d8e:b0:ba9:7898:c0ab with SMTP id
+ a640c23a62f3a-ba97898d80amr478251966b.13.1776895821187; Wed, 22 Apr 2026
+ 15:10:21 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260416055948.130041-1-ilias.apalodimas@linaro.org>
- <20260416055948.130041-7-ilias.apalodimas@linaro.org>
- <9511039f-3c92-4b4f-b6fd-c13d48867d24@amd.com>
-In-Reply-To: <9511039f-3c92-4b4f-b6fd-c13d48867d24@amd.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Thu, 23 Apr 2026 18:28:56 +0300
-X-Gm-Features: AQROBzDKP6Oi0ShEwpTrD1RMarwEoOs6y7U3I7HTM3KdCP2rNyxmkCnvKLFywzk
-Message-ID: <CAC_iWjK-nrgc5k6G4PioWb=YoLi5vJojfPLC_=N8_68RAiJNXg@mail.gmail.com>
-Subject: Re: [PATCH v2 6/6] common: Add an option to relocate on ram top
-To: Michal Simek <michal.simek@amd.com>
-Cc: trini@konsulko.com, marek.vasut+renesas@mailbox.org, jonas@kwiboo.se, 
- anshuld@ti.com, sjg@chromium.org, u-boot@lists.denx.de
+References: <20260421004719.73491-1-briansune@gmail.com>
+ <CAFLszTjJOfcddrdbN7oMPGAVZJRmj689-1bN5bY2gGiFdc=RGg@mail.gmail.com>
+ <CAN7C2SAJYbMFmRorV7w6XphPh24iuTTeobW6q66Dk9_q1s61jg@mail.gmail.com>
+In-Reply-To: <CAN7C2SAJYbMFmRorV7w6XphPh24iuTTeobW6q66Dk9_q1s61jg@mail.gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Thu, 23 Apr 2026 10:10:08 +1200
+X-Gm-Features: AQROBzB732I9OyycwRY1OTpp8xpwNJ2Uvm-P1xOtcf-uqCReAP8hmHuss42vpQI
+Message-ID: <CAFLszTiafeVeAm-A6KVDoiXbEKLOQAWEyojO2msDB-yMPrBUVQ@mail.gmail.com>
+Subject: Re: [PATCH v4] Improve handoff prepare on SoCFPGA
+To: Sune Brian <briansune@gmail.com>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ Chee Tien Fong <tien.fong.chee@altera.com>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -120,67 +112,108 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Michal
+Hi Brian,
 
+On Wed, 22 Apr 2026 at 15:13, Sune Brian <briansune@gmail.com> wrote:
+>
+> On Wed, Apr 22, 2026 at 10:54=E2=80=AFAM Simon Glass <sjg@chromium.org> w=
+rote:
+> >
+> > Hi Brian,
+> >
+> > On 2026-04-21T00:47:19, Sune Brian <briansune@gmail.com> wrote:
+> > > Improve handoff prepare on SoCFPGA
+> > >
+> > > There are some cases that the Python scripts
+> > > are run and the qts files are not replaced.
+> > >
+> > > This patch introduces:
+> > > 1) TMP folder for Python script
+> > > 2) TMP folder will automatically remove on exit
+> > > 3) If PY script fails, the replace will not conduct.
+> > > 4) Only when PY script passed the replace with keep
+> > > or without keep will be done via NEW HANDOFF_KEEP=3Dxxx
+> > > 5) When keep is selected the old files are renamed to
+> > > xxx.h.handoff.<timestamp>
+> > >
+> > > As such this ensure qts folder h files are properly
+> > > updated.
+> > >
+> > > Signed-off-by: Brian Sune <briansune@gmail.com>
+> > >
+> > > arch/arm/mach-socfpga/config.mk | 27 ++++++++++++++++++++++++---
+> > >  1 file changed, 24 insertions(+), 3 deletions(-)
+> >
+> > Reviewed-by: Simon Glass <sjg@chromium.org>
+> >
+> > Some thoughts though.
+> >
+>
+> Hi Simon.
+>
+> > We try to add a change log for each revision and use imperative
+> > present tense (Introduce a temp folder... rather than This patch
+> > introduces...). Spell out Python script rather than PY script, and
+> > reword as prose or a bullet list instead of 1), 2), ... You could also
+> > explain *why* the qts files were sometimes not being replaced - the
+>
+> Because it is not fully traceable, git pull sometimes could introduce
+> some kind of unknown cases that even run make prepare will not update
+> the h files or the python script itself does not fully replace it from
+> first place.
+> So the easiest way to play safe in any possible condition is
+> [remove and replace] or simply [rename and create].
+>
+> And I don't even fully confirm the cases, while this patch does improve
+> the previous .mk operation no matter if it is solving the unreplacing iss=
+ue
+> or not.
+>
+> So the motivation was explained from the title itself.
+>
+> > motivation paragraph currently just says some cases without saying
+> > what goes wrong.
+> >
+> > The message says kept files are renamed to xxx.h.handoff.<timestamp>
+> > but the code uses .h.handoff_backup.<timestamp> - they should match.
+>
+> That my mistake on the description, indeed it should be
+> .h.handoff_backup.<timestamp>
+>
+> The idea just follows T.F. previous optional idea so I don't fully pay at=
+tention
+> to the wordings.
+>
+> >
+> > > diff --git a/arch/arm/mach-socfpga/config.mk b/arch/arm/mach-socfpga/=
+config.mk
+> > > @@ -43,6 +43,27 @@ socfpga_g5_handoff_prepare:
+> > > +                     if [ -n '$${HANDOFF_KEEP+x}' ] && [ '$${HANDOFF=
+_KEEP:-1}' !=3D '0' ]; then \
+> >
+> > How about:
+> >
+>
+> No I don't like this because you ignored my original idea on:
+> 1) HANDOFF_KEEP=3D should run keep
+> because HANDOFF_KEEP cannot without =3D in .mk usage
+> 2) When users use this flag, hence,  it is telling that they want to
+> keep the thingy.
+> So it makes no sense to =3D1 or =3D0 to further control it from first pla=
+ce.
+> This flag is inherently boolean logic.
+> But due to your suggestion I further elaborated this boolean flag to
+> support =3D0 or =3D1 or =3Dx cases.
+>
+> Sorry for this part, I will not change.
 
-> >   {
-> >       debug("Monitor len: %08x\n", gd->mon_len);
-> > -#if CONFIG_VAL(SYS_MEM_TOP_HIDE)
-> > +
-> > +     if (CONFIG_IS_ENABLED(RELOC_ADDR_TOP)) {
-> > +             int bank;
-> > +             phys_size_t total_size = 0;
-> > +
-> > +             for (bank = 0; bank < CONFIG_NR_DRAM_BANKS; bank++) {
-> > +                     if (gd->ram_top <= gd->bi_dram[bank].start)
-> > +                             gd->ram_top = gd->bi_dram[bank].start +
-> > +                                             gd->bi_dram[bank].size;
-> > +                     total_size += gd->bi_dram[bank].size;
->
-> Here you have one problem. If the latest bank is defined with size = 0
-> then your code won't ignore it and just use it. I think you should check at
-> least that size is not zero.
-
-I don't think this checks belongs here. IIRC the only reason to do
-that is have some previous stage bootloader, or earlier u-boot code
-update the zero length with a valid region. We already do similar
-checks in fdt_fixup_memory_banks(). We should add similar ones to the
-dram_init_banksize() variants. Most of the board specific functions
-call fdtdec_setup_memory_banksize() anyway, which I plan to fix as
-well and get rid of board code that's not needed anymore.
+That's fine...note that you have my review tag, so you can add that to
+a new version, if you do one.
 
 >
-> Obviously size needs to be big enough to fit u-boot itself.
-
-Yea that makes sense, I can add a check for this.
-
+> Cheers,
+> Brian
 >
-> And as I said this is one configuration. Versal Gen 2 code has by default
-> configuration that it stays in a bank where it runs.
-> board/amd/versal2/board.c: dram_init()
->
-> Added by commit 3aebac5a759b ("arm64: versal2: Populate DRAM banks before page
-> table size calculation")
-> Focus on text variable.
->
-> That's why I can imagine that above code can be extended by one more
-> configuration to stay inside bank where actually u-boot is now.
-
-With having the dram bank in an array we can go an extra step in the
-future and have a Kconfig option with an int, representing the array
-position of the bank we want to relocate. That should cover what you
-ask here?
-
-Thanks
-/Ilias
->
-> Thanks,
-> Michal
->
->
->
->
->
->
-> Thanks,
-> Michal
+> > if [ '$${HANDOFF_KEEP:-0}' !=3D '0' ] ; then \
+Regards,
+Simon
