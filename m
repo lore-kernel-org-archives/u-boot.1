@@ -4,137 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB7ABF9EDCC
-	for <u-boot@archiver.kernel.org>; Wed, 22 Apr 2026 13:26:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5DCFF9EDE8
+	for <u-boot@archiver.kernel.org>; Wed, 22 Apr 2026 14:31:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CEE3D840CB;
-	Wed, 22 Apr 2026 15:26:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
+	by phobos.denx.de (Postfix) with ESMTP id A70028423E;
+	Wed, 22 Apr 2026 16:31:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="RJd5AToK";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="bxowxh5w";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6E8C984178; Wed, 22 Apr 2026 15:26:06 +0200 (CEST)
-Received: from DB3PR0202CU003.outbound.protection.outlook.com
- (mail-northeuropeazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 52C378423D; Wed, 22 Apr 2026 16:31:30 +0200 (CEST)
+Received: from mail-ot1-x32d.google.com (mail-ot1-x32d.google.com
+ [IPv6:2607:f8b0:4864:20::32d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8504A83BC8
- for <u-boot@lists.denx.de>; Wed, 22 Apr 2026 15:26:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
+ by phobos.denx.de (Postfix) with ESMTPS id C18EB83E76
+ for <u-boot@lists.denx.de>; Wed, 22 Apr 2026 16:31:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quentin.schulz@cherry.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=xLJ5DE3PyFsaokrKabAXTZqcOQeolFGPPx0ORMTIMZ1jCU+0JhU8FnBspvBT07z9uMA3wLcjrSoUPY9FRbTFQOMA7DqWN+6+V6u9Jpsd0f5/d+UE4MIC44IouWLVMS48BT6nNEAXV3RW+XqZWPKwFuGC4vq5764G+wN+Sh2Jm3cV8NAO0Y8zun7Nc+3c3FFE+N2k6g1gXAH0hD3xXl/RX6UvbJxmCdBXDUCCo8QfmDodF/zengp5gtYTPa9ZP+KrTE68pbEMpEd6PdXHE8WlUAD8sojq79wp5Kr8HBnob8KU5H2vwdd1MBAXjM20GQYpYX3cRXWf2mI89ZoO5FSJ8A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=I7l4zGwvVuHzBQOPfIdm3RgzXT9UBK3v/NdabkllVfc=;
- b=KWrhJKEe/f54l/D43nJbXMhnSk5BxncRZWESP7Giz3l86f1qQ9WWzNgJfzHKqhkn7WydAeseqqJxWqyMyXQCPcAIH92qYKgiCSMWpBjpeJHsnF5L2JMQqVoribwDhYqlguNuL5XwLxpwOBzB5ahI1KSXd1IlSoogMo0mmuRCBljpEU0BBXuaiaVK9DjWxSwhNf/4aI6atyMji1MbnCkMwo6tcWjyjR6IzbimWZLX//4FDcpPP7XJ/o4vEE+JhNLieRJFXbxFueDBGBDPMub/UyBoDqwCrynV5UdX0tE27ru0pIKUHZQOQglLdnDToJahIT7j8zCm6K7QQvKeizfnyw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=I7l4zGwvVuHzBQOPfIdm3RgzXT9UBK3v/NdabkllVfc=;
- b=RJd5AToKfQ0LtHY4NVSpiJUjcd6POtHNvKigt7XDB4nOSG5ax6GBGzQrM0BooiIVTq3FC+zIIYhjUHzzMZAvbPr912Hh8Joe9TRKf3pmcC6v3Z1Dfo4Qpu2gUBAWoSIhKQn5mw2sfiMdAqNV4t+UCRSzWJURe9+mifsEy2xAltw=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from DBBPR04MB7737.eurprd04.prod.outlook.com (2603:10a6:10:1e5::22)
- by GV1PR04MB10243.eurprd04.prod.outlook.com (2603:10a6:150:17d::9)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9846.18; Wed, 22 Apr
- 2026 13:25:58 +0000
-Received: from DBBPR04MB7737.eurprd04.prod.outlook.com
- ([fe80::5960:fb4b:9313:2b00]) by DBBPR04MB7737.eurprd04.prod.outlook.com
- ([fe80::5960:fb4b:9313:2b00%4]) with mapi id 15.20.9846.017; Wed, 22 Apr 2026
- 13:25:58 +0000
-Message-ID: <f8f4e639-0e73-4d14-828a-92dbfe5526ba@cherry.de>
-Date: Wed, 22 Apr 2026 15:25:55 +0200
-User-Agent: Mozilla Thunderbird
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-Subject: Couple of clang warnings for Rockchip boards
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>, Jonas Karlman <jonas@kwiboo.se>,
- Xuhui Lin <xuhui.lin@rock-chips.com>, Heiko Stuebner <heiko@sntech.de>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Sebastian Reichel <sebastian.reichel@collabora.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: VI1PR07CA0304.eurprd07.prod.outlook.com
- (2603:10a6:800:130::32) To DBBPR04MB7737.eurprd04.prod.outlook.com
- (2603:10a6:10:1e5::22)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=raymondmaoca@gmail.com
+Received: by mail-ot1-x32d.google.com with SMTP id
+ 46e09a7af769-7dcd89701acso1459097a34.1
+ for <u-boot@lists.denx.de>; Wed, 22 Apr 2026 07:31:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1776868285; x=1777473085; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=rXY+W+JxORLG1BOq+8h9JAwxdOOX/JxO7S+gDophbPQ=;
+ b=bxowxh5wv2Vtr9VLe/4JBg24SX48a5Ae/X/mK+H6kuvQw0IRoxBO1ovnxrui/QX72L
+ NkqvC6uHe7vGtX2/014ibCuNEq71SWQhNLIfyGK/yZ9fw5TMfRKxqfbY1I1049Vwqd8M
+ TGhMvqpYpXeloEor0qgd5DcAB2i6nIJvKjmRliCpS6EozVKRij/dgjJl4PXqLeAa154d
+ iYYNNylvxY+LcEo4Om7dByedjYe+nVhHdfQg2z4X5kBqPiLXobsF6Xoe3B3auvZZwNSm
+ WmPUFM4NCuuoMTajet1qx34gwHLy8ft26C8kfgyN9zDYR/ONVbwpufQGsilDeF36/xYe
+ ygKA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1776868285; x=1777473085;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=rXY+W+JxORLG1BOq+8h9JAwxdOOX/JxO7S+gDophbPQ=;
+ b=azyMgd9Cc5h2CnIPY6M77MIM1zw8Uy84H+/4lyl1DrJLdVq8oyy0exjsotDr96u1N2
+ aqpHGr+k3w6jCbBgF/HkqBj164lH1LKPBcZYcDtMVvAyW8dH3KbFS7Z7FpSMVR1L1fUo
+ ai5Wa7HuAhvNYEFbknp0j4AS1GBMbzloqJoLZLfb32ZWSBqP8tIOcebzomX1O1CPmXyY
+ cUa42Mo/OtxfeN6P/CQICaPkq/W9+fiSf3qy/l6Prn8T+wmv8yDJf1cN7E9nIGPPqXT4
+ cTGG6gi3VchdaPt/OQbHPSsYkXPuaequ+M9q/OWwE0chP4YBqb0iKZx1jZZ+msLiBiY/
+ R8+A==
+X-Gm-Message-State: AOJu0Yy0FOx1wrTNLgXJwk+7bppgnrlo1jwgGkjNCbrmdFaKhVyvpWcZ
+ HulFdWPROs8BqFFstmqjdrKh0zawzH5CNCNmp5SjBqfCKvP1xJaJQLhwI09z7kgToKM=
+X-Gm-Gg: AeBDies+ZSWKT63DnT1gBul3hEjdwPnGKT94mKBS6hYq8RltZIpMZSqgY+tdOSCbxb5
+ O0WjQ3F5qi8R50qk+beFbd2KklDTKQGs2eAZWnpC8fWHP2c8wvoIIuYwh2SBUAsnX1OV4KBbSp3
+ ZQ06o3SOhnqmCN4Qoic6AEy9ZVuH6xGtKqbj5GrtGCC+w87UNinaDw3UzGClYJMIstAVBKTLM4x
+ gH8VITNOrOT5RgCUA36IWMXjqwlbvK56B8AqbR8h5J6U3U8tWNCle1T/SBMa7bVzV4TeNvskbNA
+ EddlsewCvIND4gnbLArqHYhGGJL1+ad3ZS25CLaZaSXP+TtKfgBQ/4quY4l78elYpaOcjT2zCFa
+ ngiGhqxHRvJnkH6EPvhCgOkjtV7FY8UTnoF8ue9xR5cNOyCN+i8kV1AO3H+hqZ8S9RkUtCSl5Hb
+ 58QI6IAWlygg3lMocExuOzIrgKAOGVvyQ/i6HuRNHVnjG0Sgj99N2DNAGzeOFg7NbIECXi+bkvW
+ B2Lbr2zNtAEu8tNSKR55w==
+X-Received: by 2002:a4a:ee07:0:b0:694:96ff:d51 with SMTP id
+ 006d021491bc7-69496ff1126mr4636773eaf.23.1776868285034; 
+ Wed, 22 Apr 2026 07:31:25 -0700 (PDT)
+Received: from ubuntu.localdomain (172-97-209-197.cpe.distributel.net.
+ [172.97.209.197]) by smtp.gmail.com with ESMTPSA id
+ d75a77b69052e-50e394903dfsm138772501cf.26.2026.04.22.07.31.23
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 22 Apr 2026 07:31:24 -0700 (PDT)
+From: Raymond Mao <raymondmaoca@gmail.com>
+To: u-boot@lists.denx.de
+Cc: uboot@riscstar.com, u-boot-spacemit@groups.io, raymond.mao@riscstar.com,
+ rick@andestech.com, ycliang@andestech.com, trini@konsulko.com,
+ lukma@denx.de, hs@nabladev.com, jh80.chung@samsung.com, peng.fan@nxp.com,
+ xypron.glpk@gmx.de, randolph@andestech.com, dlan@gentoo.org,
+ junhui.liu@pigmoral.tech, neil.armstrong@linaro.org,
+ quentin.schulz@cherry.de, samuel@sholland.org, raymondmaoca@gmail.com
+Subject: [PATCH 00/16] Add PIN and SPI support for Spacemit K1
+Date: Wed, 22 Apr 2026 10:30:56 -0400
+Message-Id: <20260422143112.1329478-1-raymondmaoca@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DBBPR04MB7737:EE_|GV1PR04MB10243:EE_
-X-MS-Office365-Filtering-Correlation-Id: b18a80da-e252-42fe-cdb6-08dea072b05e
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|7416014|366016|10070799003|1800799024|18002099003|56012099003;
-X-Microsoft-Antispam-Message-Info: IGN/PpPCX7sg6X+VdqNBgZBP4PL+cZjiFwBVr69AkGmvjaNgeyVpMKG9r+Bk4YD5j3LEyCCzXlixotMiZBj4lffiqkDVcmoUv16bNZ+2DVn2cjTjvr20zxhH9CrNdVnK3grr1aHfYxaYR+QDAmX4L4s/h3LlyBNnqVXec/hZdSYs+wrnUIkqxSWhc6HVPs9XF+rKKhxCJ39aa1Qy9hiuXv4RX+gDnJvoQzdKE0UaOPL4DEPIpmeJ1CnyyYfk0ljIcHykSR8ZqlBsmRCk8uiXCE6tBaJPO4MCGFKpIx8c/Zf6ZpbHpSP3hSNvV7tyzE0mCH3VMiojLu8tOH7z45xWEre2I26bUgP95kyItgD0ss7Y4FDoA/rzYEHhBw1X6RdNrwFK38jpRJRNN8mFF7ZpIt+0TW7iNMYAiqdbADBoRYLfSx2XXVQXe5nXF6qpKMoMKsVdZwsRSuRrzq46emSVhjHW6dIwTIwfaJoFRge8dhVJsYTlwWvQzkIJIOZ95i7oFjZ78jeiqqbVe9hIo8RiDcC1pRW8/yi7SwmAstWhDtj/nSquZseHb/NrTpyFiH3MZ7JCv4/U0MAKSLwKhaA0KqQ8a7yq2yaRaVPYka7BC3e+iJBhpemPkT71ggppvZscp5UV1KsBLRxybN454Nz2GgB550NKuqa+8eHlKRfgSB8nh3NK4wgpuWKKeHxOBNiX
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:DBBPR04MB7737.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(7416014)(366016)(10070799003)(1800799024)(18002099003)(56012099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?dGRoc2szMG9MRjR6cEdrbWpiMVR1OXZ5bi9JbVJXTmNtWTZmUVB4T0tSaVk1?=
- =?utf-8?B?aTBqNThQN2pXZEovVzBmcFVTd3FJVVppM2ZzUDhtZ0ZEczFYTDdYMkxBVHcy?=
- =?utf-8?B?aEt4Q29ObGNES0JJRzFwTk43MHpKd1RubHJ5YW5wSkU0YnAraFNRL3ppUkpU?=
- =?utf-8?B?c2VkMUxJckVZOTVOTE56QmhoUnZHNW9nWjkvdGk2OTNSM3hQQldydk0wWWRD?=
- =?utf-8?B?VG10VEFzbVZXZ2xqYTJtVXozc2FLWkJqNFNCRFdYV2lWQnVZSmdha0dOUjNP?=
- =?utf-8?B?TU5DTVVacngxTXJuS1orV3BSQ2NpcmUxbTlCQmRoeU96WTZGSitWZzNQZzA1?=
- =?utf-8?B?ZW9nQUNGZEsxbUNxRzVYOUQ4Y2VmVi9ud1hKUmhzOEh2a3dRaHJlVkEydlMz?=
- =?utf-8?B?NHVvT3VvNEVvbkc0ZnVZc2xvOWI5bzhqdzNja2VweURreEV1U2NYL2ZNMWhx?=
- =?utf-8?B?TmxvQnBvYk5mL0FrNEVWd1JZSDlTYWMwMGtwclk5VEZKLzdqWTBSY1ZWRXBB?=
- =?utf-8?B?WEg5WmNXN2lIK0tONmMrSmdFZ21OU3hXK24yNFdiMm9DQzRMbnE2dms3NHIy?=
- =?utf-8?B?Qm91OGNmcm42ZHZYVll0Nlk0ZVNTbEpyNHZ1emZYbHYrSkNvYzl5RDQ2Vnkz?=
- =?utf-8?B?VXpLSGlaWTR2cW5uQkpPcUVPdFVSc3M1ZUZCT1pnNSsrTG84NzRpNEdUQll2?=
- =?utf-8?B?VE1WM1VaU0RBTFhpTHoyU3cvRTNIZjV3N0E1SVc2VklhMDZvM1RiUWhFaGFB?=
- =?utf-8?B?VmhicUQvNFoxOExzK3hlMTRlZlUxMXQ5bDVkT1VyZ3JRR1VyeDhJS0hWU1ZG?=
- =?utf-8?B?Vy9ySTVVb3FralVpSFBPeWUrSDJGMHB2UlpBRHhjREQvQWd0SWJsYmo0cHdu?=
- =?utf-8?B?YzlRL0g0YVFBZmlkV2dPNU5VTlA1UndQOUszanoyMTdhNWs3K1dxNDhqYmQx?=
- =?utf-8?B?QTNyRWxJeUkxMSt2eHpOdkk0UGRmUnZZRGFOUG5zczFuczNCaVh6NmMyWURV?=
- =?utf-8?B?K1NMaVVDalhoWG0wQm1xenk3dURyQVlzU0VKOFl0TkxySnppMFZlUGhxNVVa?=
- =?utf-8?B?RjFMNFdQM1BLSmtFZzVlOHpOb2t2UkMzcUVEdFY0UEhKelo5T0FWdytWOWpa?=
- =?utf-8?B?QnNzeVRVTFRhQ3poc3R1d2M2WldMOS9oaWVsKzlmeHAramNsSncvb293a2M4?=
- =?utf-8?B?Q3dseG80OWZYZ3VHa0ljRFVFSW5Tb2E0RmJ2L3NRRFR3ZkhXV3RNMldmR3Fa?=
- =?utf-8?B?SmZzaXNiVHpQeXZtdmdmd1Q5ZTAzamtPR1poa1EzdGRFUkkzcXVpVFZhOWxN?=
- =?utf-8?B?bEt6dE5jcDdaV1dacEVLWGk4RkovZTF5bHVZM3N3SytTWGNqTXNKT3RtQndU?=
- =?utf-8?B?TE9DaGFtRFlhdVkzV2sxRUZtbWFQakpoaWRNS3B0QVp6NUlsckdSZkdGNFBn?=
- =?utf-8?B?bThscjlzZmFsdmR4UWY3VHBsbzRva2wzVXJibEZDNDc3dzg2ZjI2NUFJTXlm?=
- =?utf-8?B?YldrQmczSngxaWhYZ3cyVVVuYXJEcC9aWWRNdVJJL211OEsxSmIrUUo0WFlx?=
- =?utf-8?B?b3VncFRrMGE5YVpRUkduTktieks4T21XMXdvSVphczlIOXFwYnFQNC8zMStu?=
- =?utf-8?B?emtzTEVEU1R4MXZaOVlramNMalhMbFlRMVJ2T1g1UDh1ZFArREZWcmNwR2hT?=
- =?utf-8?B?ZE5WWHRQSXcyb0srNEIvV2s1ZThFeTg0Zk9qdjFxeHhlemgvVE40RHljczRi?=
- =?utf-8?B?Q0x2SHk0QThPUm1Zcy9IdHpzOURXRDkzWU5hckR2N2JtUHJRVC9HMk5TTWJG?=
- =?utf-8?B?c3RhcnBsYVhuZFYxRE1OSWEvZVU5eWZ5ditDd2pOeXdGN1NRdFlGa294aE9V?=
- =?utf-8?B?T2pQUVB3aXRpM2VMeVN5SEViZFh3bk5vMEpjc1NqS25GbHhDOUdSYlJpMXJI?=
- =?utf-8?B?TkNMYzBxTEFXRHh1QnNxSVZEU0EyZ0ZMWllRMlZvR0lKMEV6YjdRYUE3dDF1?=
- =?utf-8?B?SldlNmx1bU9tc2N3akxsaHJUM0R2OEdiY2NocmxHZm96ZHpOcUxxakczTUc3?=
- =?utf-8?B?WS9EVk8yWUozVVp1WGhqZHNoZllWSU1iZ1g1cEdndDFGSERkWUgzcVVOMUY3?=
- =?utf-8?B?T1I3cC9wSHdFTDBJZ2pEUTNacGVzR0FVV0lpZnAybllGdFZjMUY1cStrZ21v?=
- =?utf-8?B?TVNuWEN2WHpQRm40em8rM3EyYlJaYWlKNjVmY1cwb2JyMFkwNXZ5YmFyYkFz?=
- =?utf-8?B?VytSeHY1NEpNQVkzaE9sQzlUOHRycUluQTFWdUxlMHJiQkREM1NORnJqNnhO?=
- =?utf-8?B?cjBQQkR1cENjZks4MUlLa1FIRENFcTFFM0V6MGFHTmJycFF2OEFDMUFvTGVM?=
- =?utf-8?Q?sdX+vsjrqqbI8UR/kM7SC8f3oSlgKHPGxv8DJ?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: b18a80da-e252-42fe-cdb6-08dea072b05e
-X-MS-Exchange-CrossTenant-AuthSource: DBBPR04MB7737.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Apr 2026 13:25:58.0485 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: z2PmOaahna4cuqrzeQcJCX+x5rgKuPUYL1+pyZAs005aiG0UG2xhWl39orkg4kVP8h1HIy7PomhZMNiTnbjbV3Yk9E/e4A+YDO8ooWMW0B8=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV1PR04MB10243
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -151,131 +100,76 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi all,
+From: Raymond Mao <raymond.mao@riscstar.com>
 
-I'm looking into force-enabling CONFIG_WERROR for all Rockchip SoCs. 
-First, let me know if this is a bad idea :)
+Add pinctrl, GPIO, and SPI NOR flash support for the Spacemit K1 SoC
+and enable U-Boot to boot on K1-based boards.
 
-gcc version 15.2.1 20250808 (Red Hat Cross 15.2.1-1) (GCC) for both ARM 
-and Aarch64 machines report no warnings (built with a config fragment 
-enabling CONFIG_WERROR).
+Notes:
+Tested on the Muse Pi Pro.
+BananaPi F3 is untestable due to missing SPI NOR flash.
 
-For clang, I went for cross-compiling using either
-make HOSTCC=clang CROSS_COMPILE=arm-linux-gnu- CC=clang O=build/ ...
-or
-make HOSTCC=clang CROSS_COMPILE=aarch64-linux-gnu- CC=clang O=build/ ...
+Prerequisite:
+-------------
+This series depend on another pending-to-merge series [1].
 
-First things first, I can't even build any of the Aarch32/ARM with clang 
-for some reason, so this only applies for Aarch64 Rockchip platforms.
+[1] [PATCH v3 00/16] Add board support for Spacemit K1 SoC in SPL
+https://lore.kernel.org/u-boot/20260325223232.1553212-1-raymondmaoca@gmail.com/
 
-Some platforms couldn't be built due to hitting the max TPL limit (e.g. 
-PX30).
+Raymond Mao (16):
+  gpio: add gpio driver for Spacemit K1 SoC
+  pinctrl: add pinctrl driver for Spacemit K1 SoC
+  dts: k1: fix gpio ranges
+  dts: k1: import pinctrl dts file from upstream folder
+  dts: k1: remove embedded subnode in pin configs
+  configs: k1: enable pinctrl and gpio
+  mtd: spi: select SPL_SPI_FLASH_TINY in SPL stage
+  mtd: spi: enable spi_nor_remove() in soft reset config
+  spi: fsl: add support for Spacemit K1 SoC
+  dts: k1: add QSPI controller support
+  board: k1: enable SPI NOR flash in SPL
+  riscv: binman: Always set default configuration in FIT image
+  spacemit: k1: append RISCV_MMODE_TIMERBASE
+  spacemit: k1: Add multiple device tree support
+  spacemit: k1: Add support for mmc regulator initialization
+  spacemit: k1: rename device tree prefix from "k1-" to "k1_"
 
-clang version 21.1.8 (Fedora 21.1.8-4.fc43) (or clang version 22.1.1 
-(Fedora 22.1.1-2.fc44), doesn't matter) issues three warnings:
+ arch/riscv/dts/Makefile                   |   2 +-
+ arch/riscv/dts/binman.dtsi                |   2 -
+ arch/riscv/dts/k1-bananapi-f3.dts         |  28 --
+ arch/riscv/dts/k1-pinctrl.dtsi            |  19 -
+ arch/riscv/dts/k1.dtsi                    |  21 +-
+ arch/riscv/dts/k1_bananapi-f3.dts         | 189 ++++++++
+ arch/riscv/dts/k1_muse-pi-pro.dts         | 199 ++++++++
+ arch/riscv/dts/k1_pinctrl.dtsi            |  79 ++++
+ arch/riscv/dts/{k1-spl.dts => k1_spl.dts} |  62 ++-
+ board/spacemit/k1/MAINTAINERS             |   2 +
+ board/spacemit/k1/spl.c                   |  56 ++-
+ configs/spacemit_k1_defconfig             |  37 +-
+ drivers/gpio/Kconfig                      |   8 +
+ drivers/gpio/Makefile                     |   1 +
+ drivers/gpio/spacemit_gpio.c              | 217 +++++++++
+ drivers/mtd/spi/Makefile                  |   5 +-
+ drivers/mtd/spi/sf_probe.c                |   8 +-
+ drivers/pinctrl/Kconfig                   |   1 +
+ drivers/pinctrl/Makefile                  |   1 +
+ drivers/pinctrl/spacemit/Kconfig          |   9 +
+ drivers/pinctrl/spacemit/Makefile         |   2 +
+ drivers/pinctrl/spacemit/pinctrl-k1.c     | 550 ++++++++++++++++++++++
+ drivers/spi/fsl_qspi.c                    |   9 +
+ include/configs/k1.h                      |  12 +-
+ 24 files changed, 1422 insertions(+), 97 deletions(-)
+ delete mode 100644 arch/riscv/dts/k1-bananapi-f3.dts
+ delete mode 100644 arch/riscv/dts/k1-pinctrl.dtsi
+ create mode 100644 arch/riscv/dts/k1_bananapi-f3.dts
+ create mode 100644 arch/riscv/dts/k1_muse-pi-pro.dts
+ create mode 100644 arch/riscv/dts/k1_pinctrl.dtsi
+ rename arch/riscv/dts/{k1-spl.dts => k1_spl.dts} (88%)
+ create mode 100644 drivers/gpio/spacemit_gpio.c
+ create mode 100644 drivers/pinctrl/spacemit/Kconfig
+ create mode 100644 drivers/pinctrl/spacemit/Makefile
+ create mode 100644 drivers/pinctrl/spacemit/pinctrl-k1.c
 
-1. Chromebooks EC fails to build:
-In file included from 
-/home/qschulz/work/upstream/u-boot/drivers/misc/cros_ec.c:21:
-In file included from 
-/home/qschulz/work/upstream/u-boot/include/cros_ec.h:12:
-/home/qschulz/work/upstream/u-boot/include/ec_commands.h:3578:2: error: 
-field  within 'struct ec_params_charge_state' is less aligned than 
-'union ec_params_charge_state::(anonymous at 
-/home/qschulz/work/upstream/u-boot/include/ec_commands.h:3578:2)' and is 
-usually due to 'struct ec_params_charge_state' being packed, which can 
-lead to unaligned accesses [-Werror,-Wunaligned-access]
-  3578 |         union {
-       |         ^
+-- 
+2.25.1
 
-The following
-
-diff --git a/include/ec_commands.h b/include/ec_commands.h
-index 23597d28b2c..c5f9777c0c7 100644
---- a/include/ec_commands.h
-+++ b/include/ec_commands.h
-@@ -3575,7 +3575,7 @@ enum charge_state_params {
-
-  struct __ec_todo_packed ec_params_charge_state {
-  	uint8_t cmd;				/* enum charge_state_command */
--	union {
-+	union __ec_todo_packed {
-  		struct __ec_align1 {
-  			/* no args */
-  		} get_state;
-
-seems to fix it. The upstream EC git repo 
-(https://chromium.googlesource.com/chromiumos/platform/ec) has a commit 
-with more changes, see 65da9cc08766 ("include/ec_commands.h: Fix 
-unaligned access warnings"). It doesn't apply cleanly (and I haven't 
-looked into other patches to backport for this to apply cleanly). I'm 
-not sure what we're supposed to do here? I also don't have a Chromebook 
-to test.
-
-2. RK3528, RK3576 and RK3588 boards fail with (replace rk3528 in path 
-for the other SoCs)
-
-/home/qschulz/work/upstream/u-boot/arch/arm/mach-rockchip/rk3528/rk3528.c:98:45: 
-error: value size does not match register size specified by the 
-constraint and modifier [-Werror,-Wasm-operand-widths]
-    98 |         asm volatile("msr cntfrq_el0, %0" : : "r" 
-(CONFIG_COUNTER_FREQUENCY));
-       |                                                    ^
-include/generated/autoconf.h:372:34: note: expanded from macro 
-'CONFIG_COUNTER_FREQUENCY'
-   372 | #define CONFIG_COUNTER_FREQUENCY 24000000
-       |                                  ^
-/home/qschulz/work/upstream/u-boot/arch/arm/mach-rockchip/rk3528/rk3528.c:98:32: 
-note: use constraint modifier "w"
-    98 |         asm volatile("msr cntfrq_el0, %0" : : "r" 
-(CONFIG_COUNTER_FREQUENCY));
-       |                                       ^~
-       |                                       %w0
-
-Note that all Rockchip SoCs have CONFIG_COUNTER_FREQUENCY set to 24000000.
-
-The cntfrq_el0 register is 64b 
-(https://developer.arm.com/documentation/ddi0601/2026-03/AArch64-Registers/CNTFRQ-EL0--Counter-timer-Frequency-Register?lang=en), 
-though the top 32b are reserved. Android decided to ignore this warning 
-in the Little Kernel with 
-https://android.googlesource.com/kernel/lk/+/923541d4c23565a47d020d84202a6f77d22fc149%5E%21/.
-
-I tried to follow clang's recommendation and switch this to %w0 but it 
-fails with:
-
-/tmp/rk3588-a0a4b8.s: Assembler messages:
-/tmp/rk3588-a0a4b8.s:87: Error: operand mismatch -- `msr cntfrq_el0,w9'
-/tmp/rk3588-a0a4b8.s:87: Info:    did you mean this?
-/tmp/rk3588-a0a4b8.s:87: Info:    	msr cntfrq_el0, x9
-clang: error: assembler command failed with exit code 1 (use -v to see 
-invocation)
-
-I tried casting CONFIG_COUNTER_FREQUENCY into a u64 and it builds and no 
-magic smoke when booting a board. Whether this is the proper fix, I 
-don't know, but the warning is then gone. We could also decide to ignore 
-the warning like for Android's Little Kernel (where and how much this is 
-used is unclear as the repo isn't seeing much activity).
-
-The register documentation indicates this is not used by the hardware at 
-all, so even if it was broken, we probably wouldn't see a difference?
-
-3. Boards building USB TCPM fail with
-
-In file included from 
-/home/qschulz/work/upstream/u-boot/drivers/usb/tcpm/tcpm-uclass.c:12:
-In file included from 
-/home/qschulz/work/upstream/u-boot/include/usb/tcpm.h:12:
-/home/qschulz/work/upstream/u-boot/include/usb/pd.h:212:2: error: field 
-within 'struct pd_message' is less aligned than 'union 
-pd_message::(anonymous at 
-/home/qschulz/work/upstream/u-boot/include/usb/pd.h:212:2)' and is 
-usually due to 'struct pd_message' being packed, which can lead to 
-unaligned accesses [-Werror,-Wunaligned-access]
-   212 |         union {
-       |         ^
-
-This file is apparently adapted from upstream Linux, where the code is 
-identical for that struct. So not sure what to do here.
-
-Cheers,
-Quentin
