@@ -4,94 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4263F94CA2
-	for <u-boot@archiver.kernel.org>; Wed, 22 Apr 2026 00:13:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B89BCF94CB8
+	for <u-boot@archiver.kernel.org>; Wed, 22 Apr 2026 00:13:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3A1D68352B;
-	Wed, 22 Apr 2026 02:13:13 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7ABBF84178;
+	Wed, 22 Apr 2026 02:13:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="fOIIs5N5";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="lv4FmlWB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6058683AC5; Wed, 22 Apr 2026 02:13:12 +0200 (CEST)
-Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
- [IPv6:2a00:1450:4864:20::62b])
+ id 9A697805D7; Wed, 22 Apr 2026 02:13:16 +0200 (CEST)
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [IPv6:2a00:1450:4864:20::632])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 78B53805D7
- for <u-boot@lists.denx.de>; Wed, 22 Apr 2026 02:13:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BA7C484178
+ for <u-boot@lists.denx.de>; Wed, 22 Apr 2026 02:13:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62b.google.com with SMTP id
- a640c23a62f3a-ba67b332bbaso463076166b.0
- for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 17:13:09 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1776816789; cv=none;
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-ba699316b42so497453866b.3
+ for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 17:13:14 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1776816794; cv=none;
  d=google.com; s=arc-20240605;
- b=gQBye0vjAdsXrXSqzVDldqIeAqui9JKDBzTtuSoY7qybTz+2yyT8TPxlNqbHDM6aem
- CzAIWsKarW/YCbSqp5hMHPa6bWcQbXCOAzWzf1/zdGIxwN20PgZTfyrcYPjeCqQYlBHr
- 5sa/xM7+miJCpSa5mDSd9KehUE25KTvBtuYoowAgjj4EymRnXNotaCiTdkoF+pETL6sH
- xESlQKU5RAv/tgjd4Dg4NxUbG1zxRcQ5m1KUeNkYWOYEb1S6YSnywzTtKFF1beT7tXCS
- gaHl25zl9gaWSAsbiMh6D0h3V1fy7N/Rjfnl3VVMPlEy0bySfpalM97zRlnP/waaRtfz
- NVFg==
+ b=DlXe5uRwe9VXSbQmBnXqMwT8TFp0Lqyk5vUCWLQ9lYHGwrFdqaK8mFJmCFzewBZh0r
+ BTvCWn0b2DnVMNbTFByc02+hkbDaI98psBtacjXzn92KatLLSJvYnsCu1AxksUWVX6JS
+ z8uVKdXyotdme4ZH2NYXcKVLoo1jeHVzIodj2qPnMH02w3gVJXVPneeMyAr1xJOzK0BI
+ MgzsNDNHOBbG67Urrztgx5wQSxBA/K5DmrShY9FZeRVqRPx3lWEFL8+2yAlU06svZW5i
+ XqItYhoQ4uYQeCf6jPWswI5a8HwbrckzpliZG5sOKDmlUa6yVKCNrl7895KA4ojl+jqK
+ /uwg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=jyjfIQcSftFAylXzsKPrC0AWe0hc9g5QRAy3Jh+Tdjg=;
- fh=W+sppDaEmylgYtfj8wklqZS5+WrCEISPF8M8G6j8M6g=;
- b=JWD9r3K9ti7L3lgxAA8XOOS6HjHNxtR7HGeah2WuhCxkzu0vWIu1hiGRj7SDNdmbyG
- /D+3iHjRxWz3DxMBI3UUWeWhFPznMldIKmMQJCQlZoe3JwOeLqwPrJWGCV6kCXb3pg4i
- w26QdUu+bNggJk10FRpj561brQ+wHjjIyymPucMMTQtGrDRKZL/MltQCJNE+7EXwNODV
- D/+Uba8pPL+IfeXMCuOIMqKQvVMF5mfDrhWzYEonAVp2YqQpReGfnv/SsV0CNSHsqqaQ
- +DcUFbfkz+9c4Va3NaEb21x5Xb6QeF8vQsmyII7VFd6gwGQ6wN/GC9EtA4In5j1sobuT
- pyyg==; darn=lists.denx.de
+ bh=s4irnFq4eZnnlu6+wQnijqmH0xIaBSnc89DTzxv6nUk=;
+ fh=GyjVbUzo/sgVo7o61ypigW4C4XsTPGWcaBQI7MMmv2s=;
+ b=b73o4HKBTp6Z9QbYm/1K02AjWXDUa2/ZRJ2lGKg8Qpk2J0HTZv7FCfCIO81H6F9Zlg
+ 4qumtKYWM8qDT195a1bkkrss/rK8VCFKryK0uDsvNtJuYZzgqWOce5jLS96fQQ2sisnQ
+ yquMlxLSJwOCOPL87Ul/2K8M67O8kc+tMGJjLNffeAB8PTsVNkq0wxaERC18aVnCwsvf
+ QURRrg3xzcCHChxgYV9rE9gAQeYC8N9sRl6IYIFx/XA7+CW05qdROYxjtnB3jvEO1Zu7
+ cV8unFcCTzSuT7vuz+K35HbDBRsl3DdXoDg+8Byj1Iyq9AnwzvCiBjMUeeOkROXLQsaQ
+ yeWQ==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1776816789; x=1777421589; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1776816794; x=1777421594; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=jyjfIQcSftFAylXzsKPrC0AWe0hc9g5QRAy3Jh+Tdjg=;
- b=fOIIs5N55ZNK0BbV8SeB4S+bBil4nmpcyJKpPY1t5uqn2wCCF8GDdXnkIsigrAlhD3
- YloxXM/YBk04U36R6EeM4DDnl9hfC7/zfpXXTk3Q4A5oEbOEQlc1Fj0ukGYhnEQ1swRv
- ieFU3xltZdAt5+UdWQPSeBqhjkYKeNdtIPbVQ=
+ bh=s4irnFq4eZnnlu6+wQnijqmH0xIaBSnc89DTzxv6nUk=;
+ b=lv4FmlWBU5Yd/ncq9SLWWYgg7B6Mnkt4iswjmnRzU1kp4bszx7Cw0QJw1ADBTHc8E/
+ vR7Ijc/aQwXdZLd37y4z6zGdkaTBxPhmCOvNQnNGPXZ4quDPhXBREwiBkK1f3IvNrNTx
+ 1ndyW58gtjCVQ5hnC8I8hXCNOcbitUCV8++cc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776816789; x=1777421589;
+ d=1e100.net; s=20251104; t=1776816794; x=1777421594;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=jyjfIQcSftFAylXzsKPrC0AWe0hc9g5QRAy3Jh+Tdjg=;
- b=PiDT2Omc/m6qyI+bmj4uN0CYpc808tk+QZDqnp1grpms02PO0cBq8DbjHh77uiRCBB
- fC1y2XGnSiJHThBc9m3SJlfvOr+zLvsZpAwTcOoXsslt8ST+oBu8+o6IgQ9Nwl7xzblT
- rGkYKTNMVMrsaqFd6ESmYdxRWSCkx8NDwnFAFlsip0xttGKUOTJJXH30Jz+3mTjX2ZBc
- IxMBvqPVQrG7qIv0HeFiVh/9iXx/IZl8b9fd63aNJutOWNA55yD1Z5nD+WDIT42keGWE
- YFYKn5ILQhn2zEBrPmwwjIFAPHIpGRfvrN7ub3F48ZH0yWFsbjGlJ5o1hhiDmtYfQQD6
- 9Nkg==
+ bh=s4irnFq4eZnnlu6+wQnijqmH0xIaBSnc89DTzxv6nUk=;
+ b=BWb5QWfiCPZJOIUBJnX8xRSUrrjsbkbNpK1+J2g0bFVqd58xjvc6LjjDVQMdcX5ucw
+ l8cM2KwSXywT/c8ELnF+ZmFXDE5AWl8hCr8mYh6wtRT6Nf7hi/Nqws/R23tr3GemHbU3
+ 1YxREiAkcCuernw/IO/n5feZHmAg5qbLll6HSw7GzE9Tz9clh9RTCIAUlVEOtJpzUnzz
+ 8RJuopsTnXdF8e9vnfrL2+FsX6q0qcVW/Rkkt/Mkm0cWCqImlzWs9jDOzz+QDq3wnBM/
+ fCExF7Tgi40jgrvU5qrfgxGVG+p3AosUmGaI7KBv/v8E/WW24KlTdnj5DFpcZNr4GbpE
+ BDKA==
 X-Forwarded-Encrypted: i=1;
- AFNElJ/Z9r0bXKXakpNtgXugXock9yqcRMppLmknpfsX0QmK2R38bL7Au6vWXlnCqfXXHWmR4pSJjb0=@lists.denx.de
-X-Gm-Message-State: AOJu0YyjJ4ueJyw5m4P55vtB3bjqv6do2NwDv9o9+PEL5IiXTAsYFLcY
- f+fGvfi0uRwvkGoY27Z5r9iUMTJkElrpu8pVe8DFiF47F0VS/qI9X4eg148dpLx9lEEnajOAlLb
- UYj9Su+vnoZGZ5uWmsc4xFSK3muF9QtHRP6QlH4s+
-X-Gm-Gg: AeBDietY94zL+rFljZ7A1VMgnNHBHI3fTjSlO6VAqDxEpYD7BBY09lRto67fVkejA+c
- pPIL50J6fl0ojfL7G73Y+phBsol2V9NzIjAgPLlBonq5CxX+Uari/lR1HwvZZtPu95GCvpm95uD
- 7zpwC66kAMo4Rd3HxrHVGhNsaIoxQRg5hSTqtTtunjGkbyxNhsLb6LWOfxMd2pdjjHIDs8An2cu
- lFeWY4JDHHMGzhx+hmMoVIkM3FdFsYzgA3Qc6XjD8JkAqjbMDC0s6gqYSxoocJpiDF+YOTtlDJU
- RlG9xEIVYpfrDrVc4oJq
-X-Received: by 2002:a17:906:8e15:b0:b9c:4fa:9141 with SMTP id
- a640c23a62f3a-ba419077377mr894224466b.9.1776816789346; Tue, 21 Apr 2026
- 17:13:09 -0700 (PDT)
+ AFNElJ/a6s9HtZQOA3HWGzCy+3ZTczfpIVVsJ4VTiebYg5dxrjNcEwFh9Wi+TIkAvrk3gsoBneWDU98=@lists.denx.de
+X-Gm-Message-State: AOJu0YzkR7k3WsV0+w9NkTFjOR3mzy5NjkLb/YW4xfvvzaRtE26ughdi
+ ScArAjBgVp1kfuaxp7x8R9K2ejGvg7M7RoZ62+0c0jvnJHVmqaORdIeSEXzh9Kjr3W1MNoMce8u
+ SvAxOt1jycSPrr75OyPvv88ojHLyGcCLDerqG8bDCDELxwt3Tk3d1oQ==
+X-Gm-Gg: AeBDieuLRGsJxQuuWFR79eOniWGCy7mvko06zJUPFix710UvRXDRtM0zoRA+F4fxR/i
+ tOp9Weu/7iGvOEXo+Ub0IPz3F8at/X6gT1Vb5p6TnfcFty0wTxnv16koDeCECVGaj2chpJovj0k
+ i7yuVCuixRZL8brVHzMWDpKppaTiZfXkc3a89+UjNd3NGOQi7t3+VPBqozuKH5zhUHoREq0LHHM
+ jMZ/0Y6hxS9h3LmkWtWZLpXOu7uCtLn++21Vps3KBuOXULTtMShkBN4SRj/3Afd9fbj5a11gkvB
+ UhrmcC97GldvskO+8Dzz
+X-Received: by 2002:a17:907:7b97:b0:ba7:a94d:af9b with SMTP id
+ a640c23a62f3a-ba7a95cf4f4mr556957866b.35.1776816794163; Tue, 21 Apr 2026
+ 17:13:14 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260421210954.1170437-1-philippe.reynes@softathome.com>
- <20260421210954.1170437-7-philippe.reynes@softathome.com>
-In-Reply-To: <20260421210954.1170437-7-philippe.reynes@softathome.com>
+ <20260421210954.1170437-10-philippe.reynes@softathome.com>
+In-Reply-To: <20260421210954.1170437-10-philippe.reynes@softathome.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 22 Apr 2026 12:12:56 +1200
-X-Gm-Features: AQROBzCBBOIy6JCV0GOBaDaHmHCMcV4pLEdNS-sRKS77buW78PVJpQbs5hFGg8E
-Message-ID: <CAFLszTi3ns1zta_zAwDScdcB+VaLqWYM4MZS0hjUt5bC3Y64QA@mail.gmail.com>
-Subject: Re: [PATCH v5 06/15] test: dm: ecdsa.c: clean this test as software
- ecdsa is now implemented
+Date: Wed, 22 Apr 2026 12:13:00 +1200
+X-Gm-Features: AQROBzBjh70EcZnLww7TVHRm0GuGPOqJ92QQxXMM_s_RYNAuoL-rHzj3BxKIQoU
+Message-ID: <CAFLszTj-j6WCrB0BdjmBa4onVF8wPb+rPnQvpD2Hn4+gWapxJw@mail.gmail.com>
+Subject: Re: [PATCH v5 09/15] tools: fit_image_setup_sig: set required_keynode
+ to -1
 To: philippe.reynes@softathome.com
 Cc: marko.makela@iki.fi, jonny.green@keytechinc.com, raymondmaoca@gmail.com, 
  trini@konsulko.com, simon.glass@canonical.com, u-boot@lists.denx.de
@@ -112,61 +112,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Philippe,
-
 On 2026-04-21T21:09:51, Philippe Reynes <philippe.reynes@softathome.com> wrote:
-> test: dm: ecdsa.c: clean this test as software ecdsa is now implemented
+> tools: fit_image_setup_sig: set required_keynode to -1
 >
-> The test ecdsa was done when ecdsa was only supported by hardware.
-> So it wasn't possible to test ecdsa on sandbox, and there is a test
-> to check that ecdsa is not supported on sandbox.
-> Now, there is a software implementation of ecdsa. So we remove
-> this outdated test.
+> When initializing info about a signature, set required_keynode
+> to -1 instead of 0, as 0 is a valid keynode offset.
 >
 > Signed-off-by: Philippe Reynes <philippe.reynes@softathome.com>
 >
-> test/dm/ecdsa.c | 107 ++++++++++++++++++++++++++++++++++++++++++++++++++------
->  1 file changed, 97 insertions(+), 10 deletions(-)
+> tools/image-host.c | 1 +
+>  1 file changed, 1 insertion(+)
 
-> diff --git a/test/dm/ecdsa.c b/test/dm/ecdsa.c
-> @@ -3,36 +3,123 @@
-
-The commit message says "we remove this outdated test" but this patch
-refactors it to perform actual ECDSA verification. Please can you
-rephrase to describe what it actually does.
-
-> diff --git a/test/dm/ecdsa.c b/test/dm/ecdsa.c
-> @@ -3,36 +3,123 @@
-> +#define CHECK(op) ({                                                 \
-> +             int err = op;                                           \
-> +             if (err < 0) {                                          \
-> +                     printf("%s: %s: %s\n", __func__, #op,           \
-> +                            fdt_strerror(err));                      \
-> +                     return err;                                     \
-> +             }                                                       \
-> +                                                                     \
-> +             err;                                                    \
-> +     })
-
-hex2bin() returns -1 on error, which is not a valid fdt_strerror()
-input. Consider using a more generic error message.
-
-> diff --git a/test/dm/ecdsa.c b/test/dm/ecdsa.c
-> @@ -3,36 +3,123 @@
-> +     value = malloc(len / 2);
-> +     if (!value) {
-> +             ret = -EINVAL;
-> +             goto out;
-> +     }
-
-We use -ENOMEM when out of malloc() space.
-
-> diff --git a/test/dm/ecdsa.c b/test/dm/ecdsa.c
-> @@ -3,36 +3,123 @@
-> +     size_t fdt_size = 512;
-> +     char fdt[512];
-
-The value 512 is duplicated. Please can you use a #define for clarity.
-
-Regards,
-Simon
+Reviewed-by: Simon Glass <sjg@chromium.org>
