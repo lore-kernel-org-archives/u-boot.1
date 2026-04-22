@@ -4,90 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7CB3BFA1FD6
-	for <u-boot@archiver.kernel.org>; Wed, 22 Apr 2026 16:28:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5FFBFA1FD6
+	for <u-boot@archiver.kernel.org>; Wed, 22 Apr 2026 16:39:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 20A4784366;
-	Wed, 22 Apr 2026 18:28:40 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 3ABB4842BF;
+	Wed, 22 Apr 2026 18:39:16 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="UEoLcoCr";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="VDvo54Fr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9CE4C842E7; Wed, 22 Apr 2026 18:28:38 +0200 (CEST)
-Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
- [IPv6:2a00:1450:4864:20::335])
+ id EF93E84312; Wed, 22 Apr 2026 18:39:14 +0200 (CEST)
+Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
+ [IPv6:2607:f8b0:4864:20::333])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DBA358439F
- for <u-boot@lists.denx.de>; Wed, 22 Apr 2026 18:28:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B65C58412A
+ for <u-boot@lists.denx.de>; Wed, 22 Apr 2026 18:39:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x335.google.com with SMTP id
- 5b1f17b1804b1-4891e86fabeso48857085e9.1
- for <u-boot@lists.denx.de>; Wed, 22 Apr 2026 09:28:34 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x333.google.com with SMTP id
+ 46e09a7af769-7dcd9061b1aso1804876a34.2
+ for <u-boot@lists.denx.de>; Wed, 22 Apr 2026 09:39:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1776875314; x=1777480114; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1776875951; x=1777480751; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=GVXoYJszoYYeDIeEdirdEdZ0DE/tVE4lV1r3uPvG3L4=;
- b=UEoLcoCr7XZhAE5MY0dJDI3s5Q6W/RdOKnCAMfn6z7l61akZ4yFHX16aX9SPrmRgCw
- 8LAWE8UjFidao69FS5U+NeVzHXkF0nxZijdeVlF40CCOIEY67JDF72rWbqlVg2f/Ga6v
- Mgc4Gs4e05piajyV3v+8Tv7e+7ggD0BQRTC/KSKTvY8wFODCiQgClUaUtp+hJEu1AzKA
- pAugcp7ZJwEuCyx0+4oDwvmDyKCjE7sQTHg7ZIYi3ACKUqanDPUerVgz6ZWe6WTY4ocb
- 9w1N4Tgyb0fs99nvsNStZHXQrR/AOD9PSJrpU3iqQZs3Y6PnlMpIRtMBP9sCI+ADagDD
- q2kg==
+ bh=O/UPfWCw/WUinCc5NO9XIMVfY8PeMfHr96iibE+Y2aU=;
+ b=VDvo54FrRhyvZW43rX8gF9izTLHBzt7hwWeZWbnrqyuGEYSj3IQcLOmuq9N28oww9F
+ 8saMqlaxccU9X71dFQZgUTSs++oRATyR0sQ7lL8clRg9Tf30DUugGm38VdPRBxRrr4BZ
+ VNFJ3b/wZFzoQBp7+HttSrgmpvjth3SFy/kBU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776875314; x=1777480114;
+ d=1e100.net; s=20251104; t=1776875951; x=1777480751;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=GVXoYJszoYYeDIeEdirdEdZ0DE/tVE4lV1r3uPvG3L4=;
- b=ldHkYXJKAByET1JBJwQ8KzH+XMBVD6XsN7imcIHTSRP8HIYs06J+8uFjiKKSD0qQBJ
- /cZsyPFqbvM7wGO9Tp6Mp5XcUmSb9FZNruinPLcyAa3UTPaE8KDbJhX6yD7/tGba3CTP
- leU78EZuyCRvg4p7nawsgaCTw0+fsevbq5+kuf/QPBU+oaLLPk+3g5ODh4j9n8Ehnypw
- YjRjGcG014lA1W2BoiQKS3Q58r9NQBtZXSzLA88nusu92ce7OIRvbk9YuX6d+1NlHN7C
- SX2CFTwUj0GM4h7Vod91Qn6j101CMTJEuTPwQiYtRDPpd/YzcCQDv7ZxJWux2S0i9oFo
- eHzg==
-X-Forwarded-Encrypted: i=1;
- AFNElJ8DgGAWCal6i8+XAblyZHaW/FR8qerYVJoMCbEbGB8OamdR4gCvvb0HXz5VXv5LihNZwyMxgVY=@lists.denx.de
-X-Gm-Message-State: AOJu0YxDWtXaHDVv6L5CuJGDd2EDmxu1h4uqSqpwCsxLaQKG8dblk1Hq
- Nn6GuNjfdW0+FotzoigyS1wNyNPx7w7KWQGII/3chF7NDEPOYeazRl4i7jBe5fzqf6o=
-X-Gm-Gg: AeBDievOPU6+khf2ENsegpbNT/WDaZF+UOQMFVYj0WsV5aEHLGBp2bXATdY4S16Heka
- inGgMq5LIJaXmLLW+5k0OkaTONgIGbYSLxcyeKttUbyS6x1IF0kbc0NE1HC8XHLGeNSTWC3PGZy
- PyaL9qDEUn7ccbZIlkMg2dYC5xm3C3uHyKUikjgHEBQxbYQdO0X14jjvds2jTi1tD+HRj77WefD
- l60qawNGrI1pdaMl+uMyVbtj72j88oltHgOM/YVlTEQF98nzxhlpp8x3x3q1ZzLDkVr8GR2wLIq
- 3dyDSP4aCmP2l7NX2WSme5yfy7uq8HThIlvU1SNn1ZTq049uJTJAcma5Qs/2xHP+netb1r4IB9i
- Nzpln1AcamNh6PIfinBka303QhI9Qj8v5YyaGUZL5+uvQ6QgESyMrW+odNoWHOj9042W0uatMRx
- az3fA4nTZPFjeEqUpq2e0nXQG8xX04GgJne8071SfrK3XA7rYI5p8k1pI=
-X-Received: by 2002:a05:600c:a30b:b0:487:4eb:d125 with SMTP id
- 5b1f17b1804b1-488fb74dff1mr231656565e9.9.1776875314158; 
- Wed, 22 Apr 2026 09:28:34 -0700 (PDT)
-Received: from arrakeen.starnux.net ([2a01:e0a:106d:1080:8261:5fff:fe11:bdda])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-488fb7c0eacsm144898075e9.35.2026.04.22.09.28.33
+ bh=O/UPfWCw/WUinCc5NO9XIMVfY8PeMfHr96iibE+Y2aU=;
+ b=Lk+Th2GyTms5Xw839L13kKUVDv5cCRVewZNjZfamSw13M2X8SUazNYn9KPackZibY/
+ 9uuqe853xDWmq/rqqcWA0ifJED9rpDOOkmAfWYuloGN/QskynjB5Ss6gxWfadC937OzH
+ K5HurydEDTr5ZNDXYE4DwO/eLxtVR3Ecd+8EI9H9E2kEOXzVHNMQ/h45KzwuQa1Xv/Ve
+ Cjh9pIf2+gKP06vzfYEoSJv5OIpRYND9qwD1mnvdPw0Cq9yAH4uItV6BTZJGyGyvhjFC
+ aoHyR8qr375VG22hKvokmIQZEDuRdNqNXVmtNe5w4YqCtYBuEGujWq2lWOsx3oJ3472s
+ l9xw==
+X-Gm-Message-State: AOJu0Yyv0M8OcjU1lSAE2Ws0w3esPe3es5FMyYYphZ2XWe6ORcOpVRNN
+ iFhiHv4YwDhgGGoGBlxTLbtnBheMhBttZHb7oz/Ppz59ne/oFIFJGO3GGlTmRiTlink=
+X-Gm-Gg: AeBDieucCzWS0jXULGR09XZKG+0c1K9m39UPFw7+niKijacDeFZO0xqejrrKFP/QPJM
+ FRg7p/1Uu6BPFCY033QJGDxSUPg7hT1g7KZeHguZ1kgZZ0zHEMpJ8iuEjbzbIi8K/F2uDwNZR5a
+ 0t6JXixTBYmzIFK5TFw271ZS0HX7sMssnGl9IFNu117NH4adeXzn/dHCKVRXFF0abRzZTWDQX8O
+ lfE+S5U5yCTyYfAOJEoEQHWeAcnqhrAofaQoWcxjZp36kOfIrEI1fCf24tsMcBAbe/GjL/HH9Ql
+ XMXdk0S63aEarhJXADOicPu1vITq78eVlOIovnt0Pz1nSNOPhc43Hu/f67xU7GyX6dr2W9/S8HK
+ U9go/W6OT5oY6QKJ4z0Y9IwtKFrkhJGDFI9b5WP81LWUZSayHq4hkhf8FOV8fifSKJQ7JV1NUue
+ N+TP7cyOvfjqZYe3GH/cztI6dKspRIfbS1GnXaVbIG3wlbHB/mYu7b2oX93IeruzNIoyYNNo2lq
+ sBfcRtpg/2EwWzPO9fYNfsxs/gkYecblWr/ScT53ez32d/7/OMHp9wuGeyZ
+X-Received: by 2002:a05:6830:82a8:b0:7dc:dd3c:9a3 with SMTP id
+ 46e09a7af769-7dcdd3c1101mr4884658a34.15.1776875951450; 
+ Wed, 22 Apr 2026 09:39:11 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-189-203-106-235.totalplay.net.
+ [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7dc9759bfa3sm14380249a34.13.2026.04.22.09.39.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 22 Apr 2026 09:28:33 -0700 (PDT)
-From: Neil Armstrong <neil.armstrong@linaro.org>
-To: u-boot-amlogic@groups.io, u-boot@lists.denx.de, 
- Ferass El Hafidi <funderscore@postmarketos.org>
-Cc: Tom Rini <trini@konsulko.com>, 
- Evgeny Bachinin <EABachinin@salutedevices.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20260422-b4-amlogic-sysreset-capsules-v3-0-07b5ccc8f552@postmarketos.org>
-References: <20260422-b4-amlogic-sysreset-capsules-v3-0-07b5ccc8f552@postmarketos.org>
-Subject: Re: [PATCH v3 0/4] Enable EFI Capsule on Disk on Libre Computer
- LePotato & LaFrite
-Message-Id: <177687531359.2025915.13597925861310436957.b4-ty@b4>
-Date: Wed, 22 Apr 2026 18:28:33 +0200
+ Wed, 22 Apr 2026 09:39:10 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>
+Cc: Christian Taedcke <christian.taedcke@weidmueller.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Marek Vasut <marex@denx.de>, 
+ Martin Schwan <m.schwan@phytec.de>, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>
+In-Reply-To: <20260404140328.3724864-1-sjg@chromium.org>
+References: <20260404140328.3724864-1-sjg@chromium.org>
+Subject: Re: [PATCH 00/14] test: Convert tests to use FsHelper and DiskHelper
+Message-Id: <177687595019.1874069.6108189427119374756.b4-ty@konsulko.com>
+Date: Wed, 22 Apr 2026 10:39:10 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.15.1
+X-Mailer: b4 0.14.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,33 +101,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+On Sat, 04 Apr 2026 08:03:04 -0600, Simon Glass wrote:
 
-On Wed, 22 Apr 2026 15:43:22 +0000, Ferass El Hafidi wrote:
-> Mostly everything is already in place to enable EFI capsules and in particular
-> EFI capsule on disk.
+> This series adds a DiskHelper class and converts most test code to use
+> FsHelper and DiskHelper instead of calling mk_fs() and setup_image()
+> directly.
 > 
-> First, switch all Amlogic boards to use SYSRESET. EFI Capsule on Disk
-> functionality expects sysreset to be present. As the current reset_cpu()
-> function in board-common.c is basically only doing PSCI reset on U-Boot
-> proper, we can replace it with sysreset's PSCI support, which works just
-> fine for that purpose provided BL31 is running (SPL stays on an
-> SoC-specific reset_cpu() which does for(;;);, as the overhead for
-> sysreset is too high and we don't have PSCI yet at that point).
+> The FsHelper class (already upstream) provides a cleaner interface for
+> creating filesystem images, handling temporary directories and cleanup
+> automatically. The new DiskHelper class builds on this, creating
+> partitioned disk images from one or more FsHelper filesystems.
 > 
 > [...]
 
-Thanks, Applied to https://source.denx.de/u-boot/custodians/u-boot-amlogic (u-boot-amlogic-next)
+Applied to u-boot/master, thanks!
 
-[1/4] arm: mach-meson: provide reset_cpu only when SYSRESET is disabled
-      https://source.denx.de/u-boot/custodians/u-boot-amlogic/-/commit/93c13379a4446ea38f85c4e393d187b8de2159ab
-[2/4] arm: meson: enable SYSRESET_PSCI
-      https://source.denx.de/u-boot/custodians/u-boot-amlogic/-/commit/63a0b3e9abba4df4e6d560f317be2712862c6141
-[3/4] configs: libretech-ac_defconfig: enable EFI Capsule on Disk
-      https://source.denx.de/u-boot/custodians/u-boot-amlogic/-/commit/94deb742654ae2f8996e9db17158834261b8c05e
-[4/4] configs: libretech-cc_defconfig: enable EFI Capsule on Disk
-      https://source.denx.de/u-boot/custodians/u-boot-amlogic/-/commit/e07cc9e7fdcc35780f539ee1d452ffd3da0fbd1f
-
+[01/14] test: Add a helper class to create disk images
+        commit: 7c69117337412d2477bc3f72e4042bca4a4e66b3
+[02/14] test: fs_helper: Skip empty srcdir when creating a filesystem
+        commit: 4e1793b1fb21e3896cf018fc35fc2c9c3e202138
+[03/14] test: Fix broken fs_obj_fat fixture
+        commit: e072d3aa24d09b8160af4596b82023ae94739c1d
+[04/14] test: Convert test_cat to use FsHelper
+        commit: 46a732469003314a7b7752637e5296d962dce773
+[05/14] test: Convert test_xxd to use FsHelper
+        commit: 17eb232e47fdee7f29e40599b0ce40dbeaaa8064
+[06/14] test: Convert test_efi_bootmgr to use FsHelper
+        commit: 3dc999d17ef9b4c8873358d0761a03cc5d155281
+[07/14] test: Convert setup_bootmenu_image() to use FsHelper
+        commit: 57e1788ee1362d9ad03e72e75026da5ae7d1b686
+[08/14] test: Split out core of Fedora image into a new function
+        commit: e3077e03e69183c71c9ca58e49ee9eaf7ccd9fcb
+[09/14] test: Convert setup_bootflow_image() to use FsHelper
+        commit: e7c46fc967fc2f180393a4e42f7c338311330c1e
+[10/14] test: Convert setup_efi_image() to use FsHelper
+        commit: 22ff15d191c0196cd87678a57e45e7525313770b
+[11/14] test: Convert test_ut_dm_init() to use FsHelper
+        commit: 28e8fcd9eabf7c5ef44aeee0315bd375247fd86e
+[12/14] test: Rename setup_bootflow_image()
+        commit: 8fc67f3901fd77381d9e88da78d6345d15dda5ce
+[13/14] test: Convert setup_rauc_image() to use FsHelper
+        commit: 1469083834bfc9f4925005bf06c0b45957055a54
+[14/14] test: Convert test_fs fixtures to use FsHelper
+        commit: bbc04206b5cb358e1482d06c74f2801c9ef97751
 -- 
-Neil
+Tom
+
 
