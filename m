@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B51C0FA1FC2
-	for <u-boot@archiver.kernel.org>; Wed, 22 Apr 2026 15:43:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9CF0FA1FC5
+	for <u-boot@archiver.kernel.org>; Wed, 22 Apr 2026 15:43:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2A078843C3;
-	Wed, 22 Apr 2026 17:43:41 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 74CDE843C6;
+	Wed, 22 Apr 2026 17:43:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=postmarketos.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=postmarketos.org header.i=@postmarketos.org header.b="gTsQxXWW";
+	dkim=pass (2048-bit key; unprotected) header.d=postmarketos.org header.i=@postmarketos.org header.b="Kp4WK7c4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 119E0843EA; Wed, 22 Apr 2026 17:43:40 +0200 (CEST)
-Received: from out-188.mta0.migadu.com (out-188.mta0.migadu.com
- [91.218.175.188])
+ id 23809843D8; Wed, 22 Apr 2026 17:43:41 +0200 (CEST)
+Received: from out-180.mta0.migadu.com (out-180.mta0.migadu.com
+ [IPv6:2001:41d0:1004:224b::b4])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 15D13843B8
- for <u-boot@lists.denx.de>; Wed, 22 Apr 2026 17:43:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CF41B843D1
+ for <u-boot@lists.denx.de>; Wed, 22 Apr 2026 17:43:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=postmarketos.org
 Authentication-Results: phobos.denx.de;
@@ -29,50 +29,48 @@ Authentication-Results: phobos.denx.de;
 X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
  include these headers.
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=postmarketos.org;
- s=key1; t=1776872616;
+ s=key1; t=1776872617;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding;
- bh=EE5Mz6faPdqmKhXq9ad7HUmtt7j5D3zJBBZq3KTHE3w=;
- b=gTsQxXWWImJumjGOOu/qrwAOU25lC3gyph1w8GcQkPekG1h9Z+AImjrHf9cpB6XsaqST3G
- yvl4jmaZTeTo+mgO241T6T7dSODvU+POL4UQ+8mr65fF/0sEM4IX96aKW5EXKxuuGU3Chr
- 7tbIj91vymJov8CSZdm1+VFKSFomk/64Q/yg4oGVcQbCmlxs5odPIEv8x2x2cozbP24B0h
- InNs59zDfm+wa/W20PlfZwWR22TjcmhZfXhUSBny3HjaQeko0ZcEPKkANDumra9quCwXdN
- +1Xw39Ok5QWriUXLicdV/2mArWG5+rat/el6x04MrwysHh9s/32UtPSGw2om2g==
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=b7YPzW7ar84iuQsUv9oCtS64vTevJoRF13hjgsyAL9E=;
+ b=Kp4WK7c4wPEb0AC6BmEajLrrl+w72SUdlkbERfYFSuD4DbLuAenCKu6qEiT4kcW857VrGa
+ sQJSK8jRiBmu+ryRv9TLjjvLcyYRvuI4D4UUpdQ2NIPs65iHpuuKv1ScSBhY9HfL78P1Vr
+ oR/Bd5xuZSXEw0T8tC4RjCojJD3ZhpmcmyCrhb5GIbV5oEldcWfoHKEWLfBTa50EOiAo9a
+ f/6oSMQeklBTgf/1ddF6fzDPsbAG+dS7xrv5qf3krcWLUO5ktkmnPnm2o3ootXM5bH/X2c
+ ArPpY3Kn04gWXu/xEAY+Fzij/aTEy/TI96yTYsCJ+gcIEqtEXSdtGYNdeIjYxg==
 From: Ferass El Hafidi <funderscore@postmarketos.org>
-Subject: [PATCH v3 0/4] Enable EFI Capsule on Disk on Libre Computer
- LePotato & LaFrite
-Date: Wed, 22 Apr 2026 15:43:22 +0000
-Message-Id: <20260422-b4-amlogic-sysreset-capsules-v3-0-07b5ccc8f552@postmarketos.org>
+Date: Wed, 22 Apr 2026 15:43:23 +0000
+Subject: [PATCH v3 1/4] arm: mach-meson: provide reset_cpu only when
+ SYSRESET is disabled
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAJvs6GkC/43NsQ6DIBSF4VcxzKVBRCKd+h5NB9SLkqoYLiU1x
- ncvOnVo0o7/Gb6zEgRvAcklW4mHaNG6KUVxykjT66kDatvUhDMumWAVrQXV4+A621Bc0ANCoI2
- e8TkA0sqUSvIWjDY1ScTswdjXwd/uqXuLwfnleIv5vv4Jx5wyKk1RVBLqMufiOjsMo/YPCA7Pz
- ndk9yP/MDn/YfJkAhMgGgVSGfXF3LbtDWNvL6EjAQAA
-X-Change-ID: 20260408-b4-amlogic-sysreset-capsules-8f5962defafb
+Message-Id: <20260422-b4-amlogic-sysreset-capsules-v3-1-07b5ccc8f552@postmarketos.org>
+References: <20260422-b4-amlogic-sysreset-capsules-v3-0-07b5ccc8f552@postmarketos.org>
+In-Reply-To: <20260422-b4-amlogic-sysreset-capsules-v3-0-07b5ccc8f552@postmarketos.org>
 To: u-boot-amlogic@groups.io, u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>, 
  Neil Armstrong <neil.armstrong@linaro.org>, 
  Evgeny Bachinin <EABachinin@salutedevices.com>, 
  Marek Vasut <marek.vasut+renesas@mailbox.org>, 
  Ferass El Hafidi <funderscore@postmarketos.org>
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3528;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1347;
  i=funderscore@postmarketos.org; h=from:subject:message-id;
- bh=EhZ5OWIcBbeynF+1/IpuIzgo8xo8GZ5sF7ZdN+mBaSk=;
- b=owEBbQKS/ZANAwAKAYSvy9DXiZoDAcsmYgBp6OyihUqxFSFa9nxteL6jzUwad0cQJSqhhOdsu
- Yba7B78sIGJAjMEAAEKAB0WIQQDAbw3+1VcrP15i+6Er8vQ14maAwUCaejsogAKCRCEr8vQ14ma
- Axl6D/9WEVcwJPfG478o40lm01clK1TG1wc1lGb1qLH6WpRa5bEvBsROR7tL8M05hum/gIhrAV7
- H+sjdwg6drnnMJy3/Fx6XWbf+bKugnmvwuLMWwUZTuLiC4ZyEmavq7EPpH8oCF8hinRoX5UHpz1
- SqvMuGqfl2tJ3a4t/nh5LCbKNvEVLG00BKsxt62CCkCyHTFNifQLGCpzI1/NqJnDvoJftabbrBU
- kHaRn3zwzfuICbsvg1UWRc43UnvKf+JeaXrvwIiUxQ6+ciQNH3HN/MsM6uV51jWiGoOTy8b1poW
- FWjHAx4Hq0/Bhj9V4XP4wtZQVRTRLetCESueLyKTflWjHoZKEHP5dFFCbPYFpvt0YeSNY1ugUW2
- wg5AXJahJCIAoL257i3mzC+6r/NhlOb8RMqLEK7XID3wUJiulaTRsk5Hf7nbES1NIk1i6t3+JDa
- b+VFK3DSWMM7yxuA+N/IYE1jwEtRuf/KkL08XzkXBFOk88FetDEL+Bwwb3JBunm8q3aKa0r00ki
- ITkM87zuh0v2QwfP12gMPjNnm4a1zHhhgPVhKB1qNNuKpEqkRu2htbw+JrhkBAhglQ16BjfP7Ax
- 2oHdnFUs4m2Iv5a+DsvEu1OEvFmwozwQoTiha1YKEnj6XN9Gn0Uhdl75cmDwcoK5l7DZLuP4Vmh
- bl0dSVhQtrOzh3w==
+ bh=IoO1gOKnt0cbf2RWK6vS8f3st5C63IkFCn5XCxBr6JE=;
+ b=owEBbQKS/ZANAwAKAYSvy9DXiZoDAcsmYgBp6OyiD+/FeSVSupsuN9+ByzDbJBfvzZZ1s0FXQ
+ SOyjPdkj9uJAjMEAAEKAB0WIQQDAbw3+1VcrP15i+6Er8vQ14maAwUCaejsogAKCRCEr8vQ14ma
+ AwoHD/448ZNhM7XwwsPT9attJ/Wq6HlxLhSfhia/mKMhr1S/PamlQCxx2kmIuIc/PXY7Nj4q432
+ B0wHm9L4mDMU4cdDq27xOtKlRVuB0BFiOVlkONByTYSQc2gx/Vav0DcZl+2EKOWGd4cR6sS64u3
+ IN6mwNGY8wa/0ywWavvJJpU2bTDDOJDnIbq/EnJR8HOEmfJtDYX2HCylFem2H5D8OCQtb5i93Ty
+ eXyNZWssKH5HSnvv+JvUy2bEFWP0tSZkuZVa3DXwP9nWMcnnfx9sr2bkeD50UqiIyx9lo50KYkJ
+ qATdShUy4f6/jTLTy7pfBuQzJ4qrYRYqdFPAiZfLpFOIPQsGTIgruyoSPdcArLwr63/JFq8/+f6
+ PVuAfdKU+yVsAk4FxSyinzbwFAJuUq7mXwoXwS8hF4KoR2lobg1cL1jMa9FfVD+wCyB+n0euUaX
+ cnCpb1PU43R+AUau8+FSG8cjiqLhnZMilR2MOue6s6MgbRuutA8cGM/+QsJxwrBEfdodJtnrPDO
+ DKy30s+OI6dwpGsBTpBsDZzj9pENChAgtdXJS/0FfQjIn8KGuGa8BqKnrwz2d/YfqOO9xIUunaO
+ miSt0vRFe0mKdJkhE5q2c4FWg14GzQDO+HXQMqo81ZXT25YP4iBhXM70dpQTru1YsNLw5ILriQI
+ 94nzUrmdXmZBTWA==
 X-Developer-Key: i=funderscore@postmarketos.org; a=openpgp;
  fpr=0301BC37FB555CACFD798BEE84AFCBD0D7899A03
 X-Migadu-Flow: FLOW_OUT
@@ -92,84 +90,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Mostly everything is already in place to enable EFI capsules and in particular
-EFI capsule on disk.
-
-First, switch all Amlogic boards to use SYSRESET. EFI Capsule on Disk
-functionality expects sysreset to be present. As the current reset_cpu()
-function in board-common.c is basically only doing PSCI reset on U-Boot
-proper, we can replace it with sysreset's PSCI support, which works just
-fine for that purpose provided BL31 is running (SPL stays on an
-SoC-specific reset_cpu() which does for(;;);, as the overhead for
-sysreset is too high and we don't have PSCI yet at that point).
-
-Then we can enable capsule on disk. LaFrite has Capsule updates enabled
-already, so it is simply a matter of enabling CoD. LePotato does not
-have Capsule updates enabled by default, however it can be easily enabled
-and setup to update u-boot on eMMC/SD.
-
-With Capsule on Disk setup, it becomes possible to update U-Boot directly
-from Linux, without having to worry about manually using `flashprog`
-(for SPI flash) or `dd` (for eMMC/SD). Instead, thanks to CoD, updates
-can be handled by `fwupd` and applied upon next EFI boot.
-
-To test:
-
- * build U-Boot as usual
-
- * in that running U-Boot, run: `efidebug capsule esrt` to get the GUID
-   -OR-
-   run the following in your tree:
-	tools/mkeficapsule guidgen path_to_devicetree_here U_BOOT_MESON_MMC
-	                                   (or U_BOOT_MESON_SPI on LaFrite)
-
- * proceed with the following guide to create a capsule file:
-   https://docs.u-boot.org/en/latest/develop/uefi/uefi.html#enabling-uefi-capsule-update-feature
-
- * generate a .cab file suitable for fwupd using `mkcab`:
-   https://gitlab.postmarketos.org/tauchgang/tauchgang-ci/-/tree/main/mkcab
-	mkcab u-boot-libretech-cc.capsule GUID-GOES-HERE libretech-cc "LePotato" 2026.04
-   (as of writing, the README.md suggests this is for Qualcomm only. It
-    actually does nothing that is Qualcomm-specific, and works on any
-    board that supports Capsule on Disk and fwupd)
-
- * on the board itself, boot to Linux via EFI, install fwupd, copy the resulting
-   .cab file, and run as root:
-	fwupdtool --force install u-boot-libretech-cc.cab
-
- * reboot, make sure you boot over EFI, else the capsule update will not
-   start
+This is in preparation of enabling SYSRESET across all Amlogic boards by
+default. SYSRESET brings its own reset_cpu implementation which will
+conflict with the one defined in board-common.c.
+SPL however will not have SYSRESET enabled (due to overhead in the final
+image, as we have very little space to work with), and thus will still
+need that reset_cpu to be defined. Furthermore, some boards do not enable
+PSCI support in U-Boot, so they may still need this implementation.
+Guard reset_cpu inside #ifdef to only compile it in when SYSRESET is not
+enabled.
 
 Signed-off-by: Ferass El Hafidi <funderscore@postmarketos.org>
 ---
-Changes in v3:
- - (Neil, I removed your R-b on the second patch since it changed
-    significantly to fix the build failure you reported)
- - Link to v2 (bogus): https://lore.kernel.org/r/20260422-b4-amlogic-sysreset-capsules-v2-0-e04e4c9e69f9@postmarketos.org
- - Keep reset_cpu in board-common.c, but guarded
- - Only imply SYSRESET_PSCI, for boards to be able to disable it if
-   needed
- - Link to v1: https://lore.kernel.org/r/20260408-b4-amlogic-sysreset-capsules-v1-0-6f3386eb5124@postmarketos.org
-
----
-Ferass El Hafidi (4):
-      arm: mach-meson: provide reset_cpu only when SYSRESET is disabled
-      arm: meson: enable SYSRESET_PSCI
-      configs: libretech-ac_defconfig: enable EFI Capsule on Disk
-      configs: libretech-cc_defconfig: enable EFI Capsule on Disk
-
- arch/arm/mach-meson/Kconfig        | 2 ++
  arch/arm/mach-meson/board-common.c | 6 ++----
- configs/libretech-ac_defconfig     | 1 +
- configs/libretech-cc_defconfig     | 4 ++++
- 4 files changed, 9 insertions(+), 4 deletions(-)
----
-base-commit: f0000b4a57e9edf8ff8454b9056d767466dff57f
-change-id: 20260408-b4-amlogic-sysreset-capsules-8f5962defafb
+ 1 file changed, 2 insertions(+), 4 deletions(-)
 
-Best regards,
+diff --git a/arch/arm/mach-meson/board-common.c b/arch/arm/mach-meson/board-common.c
+index a5afc2d75c0..c34b81e5e78 100644
+--- a/arch/arm/mach-meson/board-common.c
++++ b/arch/arm/mach-meson/board-common.c
+@@ -155,16 +155,14 @@ int board_late_init(void)
+ 	return meson_board_late_init();
+ }
+ 
++#if defined(CONFIG_XPL) || !CONFIG_IS_ENABLED(SYSRESET)
+ void reset_cpu(void)
+ {
+-#if CONFIG_SPL_BUILD
+ 	/*
+ 	 * We do not have BL31 running yet, so no PSCI.
+ 	 * Instead, let the watchdog reset the board.
+ 	 */
+ 	for (;;)
+ 		;
+-#else
+-	psci_system_reset();
+-#endif
+ }
++#endif
+
 -- 
---
-Best regards,
-Ferass
+2.53.0
 
