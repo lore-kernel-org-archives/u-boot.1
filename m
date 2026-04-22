@@ -4,84 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64CBFFA1FEB
-	for <u-boot@archiver.kernel.org>; Wed, 22 Apr 2026 19:39:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47F34FA1FEE
+	for <u-boot@archiver.kernel.org>; Wed, 22 Apr 2026 19:51:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5E5288432A;
-	Wed, 22 Apr 2026 21:39:00 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 8731D8439E;
+	Wed, 22 Apr 2026 21:51:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Xm0szHUx";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="WbVirwzX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AE5E584372; Wed, 22 Apr 2026 21:38:58 +0200 (CEST)
-Received: from mail-qt1-x82b.google.com (mail-qt1-x82b.google.com
- [IPv6:2607:f8b0:4864:20::82b])
+ id 29C6F8426E; Wed, 22 Apr 2026 21:51:24 +0200 (CEST)
+Received: from mail-ot1-x335.google.com (mail-ot1-x335.google.com
+ [IPv6:2607:f8b0:4864:20::335])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A35AC8426E
- for <u-boot@lists.denx.de>; Wed, 22 Apr 2026 21:38:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 102A88426E
+ for <u-boot@lists.denx.de>; Wed, 22 Apr 2026 21:51:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=raymondmaoca@gmail.com
-Received: by mail-qt1-x82b.google.com with SMTP id
- d75a77b69052e-506362ac5f7so47922551cf.1
- for <u-boot@lists.denx.de>; Wed, 22 Apr 2026 12:38:56 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x335.google.com with SMTP id
+ 46e09a7af769-7dcd689829eso2176715a34.3
+ for <u-boot@lists.denx.de>; Wed, 22 Apr 2026 12:51:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1776886735; x=1777491535; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=jh5OoNNlrmBk4Gdyaib9lGhu1BCpzlL08gEtEipXNGU=;
- b=Xm0szHUxzW/hrU9/BVcwFUzAEWsQAXnk9pyQEuUj84EGmrOpF5qnrvupoDv7sMQOsW
- rXrL49ZNr68gOJ3gRHqIDiZO0FIYPSfo6RWJUACPhkHz0OvpGpIojiWqwroeU3ettvLY
- /PJMUslRz8CAb6G/7jLonehLsjfps7XpHgAEwGXEviOOyRM48ssUXjZ2Hz3TiVQGcw1X
- 931Ftrt4aJ8dS7Hlo0PbmuN57QEXUHvEkgvPcorpOovvRIseFiAA+fs8HWPV4cuDVYwu
- rrU8c6tiIBW6t/8xM5FNibKNzQBeT8cBmDoWvHuMkD+Kpq394xYDWDBYbJTDnYC4NL2y
- ZAyw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776886735; x=1777491535;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=konsulko.com; s=google; t=1776887481; x=1777492281; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=jh5OoNNlrmBk4Gdyaib9lGhu1BCpzlL08gEtEipXNGU=;
- b=NmHkXS1hjyEIykOVcQXQ7K/XwDlsnaMuznBlfyCZUcMOGUTmlzP1ssydVCpEQGE30g
- fMkg1emYSq10ZSOhVdf0Gb1MsNlwi5TWu3YIpghqW63OKZJmj++UdQYud/4u1xxMyMkH
- z7E8gcoF2xnR03KNR26/tvlFymY9LtMbO6e8HnbO9TAthQ8B//79ysLw21/5WEEBU8fP
- EindjzlXv10bC8atAgI+tm+6ZUFStWIvoik/dGH45fC9wCA/4u2uFAuR1/7npm97bf6u
- rnm2RjG2wSN1ORQNDLhM0vy8aP4vD3dIenSqbncDxVGMyjgfiFKtdqeBHJaw6Tolkbns
- 3sbg==
-X-Gm-Message-State: AOJu0YyKiTHt02yOHJIIlVwOIFs7N83tdRrj+QMTqZ6LAf9uPabcGZdc
- mGt2EZhe1fQSL+niL7M2KaRMoymxZEsFNTMUzJjMrN+9+j1SARpABMh85d0LQlJUq0U=
-X-Gm-Gg: AeBDiesi/PP/DT2qUQRgEDAfsRvD/4546l8i9kxe/hUHrUROEHWBsLZ091bpgPFHa+R
- 83nFImYpVpMZRq4IleFvk7CUjsthP7KijhSZcaTG8xnXHvFY19Ob3gtgc+/rj81KpM7byRiKtIB
- UA69+LsWNhnm0rXgLuih00GJcmEQABQDe0tsC+LrparoBdmMu+/TJuvPQq+npwzrB2ftwKdJfCP
- mzh8wmhmFYweZrqgiPi1eh6qmSCFI3ihGGiWphhmZD56JlbUXLRNkZeZXu9LxWgwF0ODxnTBAVg
- 6jr91i8A2RiZuHMVPbLBzCmJqGbdktQjbvGyqXLvraNuBk1fw2aalNfPrKN1L+osjUWV06wAzCT
- HBeVGv8s3Wx6IKY8NCKPWdQYl4SpDiaDc1Tn5H97s8F6S3Ahi29gaHuZN41sXB60NzAQeiphRkA
- /Bv3DjYaZd1jkGkm2PiifZLQ2Zzk6ZQ+q3Kr99aqJPhoc+AUCKH5zUAQwPvFho2N6TF9pEc978t
- qCM7VhJnqz29pIjtJjmQvl/stMiVKwT
-X-Received: by 2002:ac8:5807:0:b0:50d:7c44:e144 with SMTP id
- d75a77b69052e-50e36b3ecaamr406794901cf.11.1776886735006; 
- Wed, 22 Apr 2026 12:38:55 -0700 (PDT)
-Received: from ubuntu.localdomain (172-97-209-197.cpe.distributel.net.
- [172.97.209.197]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-8b205cc0353sm23382586d6.10.2026.04.22.12.38.53
+ bh=lgeYS1Kp0f6IlVNN+8kUPFb9feC9115+wv9Us3UTFag=;
+ b=WbVirwzXoVC7lNE7sPkFPMfn+YgVJypl0zXsWozt5Vt/S0QpsbKT8ds76LujeLIDqa
+ BqfZt7IH4UTOT8/ivu5td+6ZfWhg3JZeBVrAeB5u5UutrcSP+1khvlXatJ1Txjjmw8LR
+ OGZV7LWSP0dSZHvereDfJojiRAr91Pg8zDmLY=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1776887481; x=1777492281;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=lgeYS1Kp0f6IlVNN+8kUPFb9feC9115+wv9Us3UTFag=;
+ b=I8DhHde8i6dIF+HI4XVUZayUp9gL8eca1aq6Z7nCXrSYTXrC6uCzXLJB2DsQ5siIJ6
+ a/b5aZXshavvsOzvnj5MWad93uE+77EJAWtb+f/4JT1gyVuyahTEFWZ7+0iHVrrKUJqT
+ ozFbIAec5JOjdy61pnOHe+tvSovdRyESwtUciQsxQ88xR+MrvtYOJhyWo7s5VzEaKt+7
+ 33WwqqSbIf9Oll9Ta5lnvL+TnqdCzz0fo29zIVsdpDeBjb8jv+FgKeju8HTebhLW/CKV
+ ll+/VoptWSJQVE771945t5lmoyxHRvxGhJMvD80SrNLC1zuTILesRSqL2Vj6tDH4qwdR
+ BkaQ==
+X-Gm-Message-State: AOJu0YyqFpyge4FfGN3iLqR1ncNqnXzNFeXLJIVEhkgJ+AIqM1+69ecW
+ wfZjp9gKgLq/mbsPu7ZlXz6yasgZDQgKO+IgjhQfEDkquzKDvoWGUZs/kBqX3VI2kFo=
+X-Gm-Gg: AeBDievUSYnaVXjZfiz5cParl+tno0TYk5ntjpmwIvoMcoUOIwKX8wPuFJsradxbhGb
+ yFLWAObylN5/3XIxgKukGupTvMKZC2wjeFkCXMN35wXEVJOwxjz0tBkRnIBP8eDgtZJTqSO6ZDt
+ +kkRu4XGn50ItVsyDmhh7VGHcyiY44Xbl9EXW7znzTyoS3lkPW1YQ1ocZG0fANAhbCxt1Am9cWU
+ XbqWWS0mbgqmm8dC594F/aZBdV8O0ho+a67aEEtcT1lT0QwdH27XNWcsW/BNPKpW/y5RvcedS04
+ 4CvOJ3fblHpyMXX6/IsUqMkrgXAc1j3J7M283g+F+6R6Ky+c9dYlOvP8sEVZHNJ2DhWduuraCqY
+ bVzLRQDCEd4vRbtw3y5AP+WJPLp7uCfas0vCesG+vd/W+Z790kiDUG03rIb1DutJPH1nrD/KQwR
+ MEOFEgOFApRaGcuZgjPBu2S80xRLUYmfp32BRJ7L5FIj94MzzyBH9g96FDEo0+7+V0IwR0R7u34
+ CXJhKpTYkKQrkY8qcvztLmbzhI5PzWuY+x2drxEdn4/sk73UnQ0ttDBojrQ
+X-Received: by 2002:a9d:5cc6:0:b0:7dc:a256:5e2e with SMTP id
+ 46e09a7af769-7dca25660f5mr9563231a34.1.1776887480809; 
+ Wed, 22 Apr 2026 12:51:20 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-189-203-106-235.totalplay.net.
+ [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7dcd9a0847esm4963542a34.17.2026.04.22.12.51.19
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 22 Apr 2026 12:38:54 -0700 (PDT)
-From: Raymond Mao <raymondmaoca@gmail.com>
-To: u-boot@lists.denx.de
-Cc: Raymond Mao <raymond.mao@riscstar.com>,
- Raymond Mao <raymondmaoca@gmail.com>, Tom Rini <trini@konsulko.com>,
- Samuel Holland <samuel.holland@sifive.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Subject: [PATCH v2] smbios: Add an explicit bounds check for Type 9 length
-Date: Wed, 22 Apr 2026 15:38:45 -0400
-Message-Id: <20260422193846.1333146-1-raymondmaoca@gmail.com>
-X-Mailer: git-send-email 2.25.1
+ Wed, 22 Apr 2026 12:51:20 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: Fabio Estevam <festevam@gmail.com>
+Cc: u-boot@lists.denx.de, franz.schnyder@toradex.com, 
+ alexander.feilke@ew.tq-group.com, cniedermaier@dh-electronics.com, 
+ emanuele.ghidoli@toradex.com, peng.fan@oss.nxp.com, primoz.fiser@norik.com, 
+ simona.toaca@oss.nxp.com, ye.li@nxp.com
+In-Reply-To: <20260422014627.1870805-1-festevam@gmail.com>
+References: <20260422014627.1870805-1-festevam@gmail.com>
+Subject: Re: [GIT PULL] Please pull u-boot-imx-master-20260421
+Message-Id: <177688747969.1917521.5957258528932035654.b4-ty@konsulko.com>
+Date: Wed, 22 Apr 2026 13:51:19 -0600
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,41 +99,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Raymond Mao <raymond.mao@riscstar.com>
+On Tue, 21 Apr 2026 22:46:27 -0300, Fabio Estevam wrote:
 
-Fix Coverity Scan defect on Type 9 length.
-Type 9 formatted length is built dynamically from peer_grouping_count.
-Although peer_grouping_count is a byte, the resulting formatted area
-still must fit in the SMBIOS header length field (u8).
-Add an explicit bounds check before extending len, so the size used by
-map_sysmem() and memset() is guaranteed to be valid and consistent
-with hdr.length.
+> Please pull from u-boot-imx/master, thanks.
+> 
+> The following changes since commit 052988aa29bfd506d7ce207fbb3f5374a5dbecbb:
+> 
+>   Merge patch series "Linux compat improvements and CCF prep" (2026-04-21 11:21:59 -0600)
+> 
+> are available in the Git repository at:
+> 
+> [...]
 
-Fixes: a8442c226635 ("smbios: add support for dynamic generation of Type 9 system slot tables")
-Addresses-Coverity-ID: CID 645487: Insecure data handling (TAINTED_SCALAR)
-Signed-off-by: Raymond Mao <raymond.mao@riscstar.com>
----
-Changes in v2:
-- return len 0 for errors to align with the existing convention of the
-  file. 
- 
- lib/smbios.c | 3 +++
- 1 file changed, 3 insertions(+)
+Merged into u-boot/master, thanks!
 
-diff --git a/lib/smbios.c b/lib/smbios.c
-index d5f18c8bd69..fdab5948aad 100644
---- a/lib/smbios.c
-+++ b/lib/smbios.c
-@@ -1093,6 +1093,9 @@ static int smbios_write_type9_1slot(ulong *current, int handle,
- 	 * TODO:
- 	 * peer_groups = <peer_grouping_count> * SMBIOS_TYPE9_PGROUP_SIZE
- 	 */
-+	if (len + pgroups_size > U8_MAX)
-+		return 0;
-+
- 	len += pgroups_size;
- 
- 	t = map_sysmem(*current, len);
 -- 
-2.25.1
+Tom
+
 
