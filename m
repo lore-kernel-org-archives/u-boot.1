@@ -4,98 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62F49FA1FE0
-	for <u-boot@archiver.kernel.org>; Wed, 22 Apr 2026 18:17:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B61A1FA1FE3
+	for <u-boot@archiver.kernel.org>; Wed, 22 Apr 2026 18:32:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EC64884314;
-	Wed, 22 Apr 2026 20:17:51 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0626A84312;
+	Wed, 22 Apr 2026 20:32:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Lp0y16VP";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="q67M55QN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CFAEA8431C; Wed, 22 Apr 2026 20:17:50 +0200 (CEST)
-Received: from mail-yx1-xb130.google.com (mail-yx1-xb130.google.com
- [IPv6:2607:f8b0:4864:20::b130])
+ id 0A4CF8431C; Wed, 22 Apr 2026 20:32:38 +0200 (CEST)
+Received: from mail-yw1-x112a.google.com (mail-yw1-x112a.google.com
+ [IPv6:2607:f8b0:4864:20::112a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 88B2C84178
- for <u-boot@lists.denx.de>; Wed, 22 Apr 2026 20:17:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A3CE784227
+ for <u-boot@lists.denx.de>; Wed, 22 Apr 2026 20:32:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=raymondmaoca@gmail.com
-Received: by mail-yx1-xb130.google.com with SMTP id
- 956f58d0204a3-64d5a7926cfso5850439d50.2
- for <u-boot@lists.denx.de>; Wed, 22 Apr 2026 11:17:48 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1776881867; cv=none;
+Received: by mail-yw1-x112a.google.com with SMTP id
+ 00721157ae682-793fdbb8d3aso60956777b3.3
+ for <u-boot@lists.denx.de>; Wed, 22 Apr 2026 11:32:35 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1776882754; cv=none;
  d=google.com; s=arc-20240605;
- b=AS6cTiN6cBbSJxUJrTRxNbtlMv2YRFWChxLZzjV3C8Dd+YgflzilmQMan9Kc2ppJwB
- c5Naa6RSzpJEIhO0uB+6Z+mcTwbbp2RNQxF7F4nUUYJIvUYIeP2tAXYKvSwgWCzFOkc3
- HqoDzPcPC6gM3SeQSOKBAz0l65lb3VzKxHkc26vyclAU+RkDdtOs2CjvN738QTkK5ePD
- g6Fgye1CQ5GnMSuAbA8Q3yP6icaajdeQiKPMluqi01LY4axBXPgtFPaCr/7iNCmyjP4a
- 72KaJ80Hxz5BwefhTZaKP0Ug3e/q3m8RoY58biWqxwmZty9+PFOThsrhzWZJ9r41SgV2
- 8X4g==
+ b=dcC1Ott22mjEKyG5QJuKW7/ITWc5u5O4TOFp38ObW0+TmyfbisHNVwKDHNxpXNm9FQ
+ dHGkZ+ZHpl95H1KKFsnOAS3acCWSgZ81sDVxsdH+ZrJnisIIfcz0SXHW/qOFhk6ua+EH
+ 1mQ9y5WRF0xb/7AGSQsCApJxDTaD+63r6IZweXbxOqRRwV9Q7unPo1A/Z9XhHSlJ/eaB
+ LBvGLDhVSFSsqrUa3rl+QnI3DJRIvRX9YcvOkkUQA2RPuMip+zv4rv1IJQMbehbqJhVC
+ 9YqcBZxoRBGIgVhdAGR2w7i4qceouUMqKFXG5c2HKVqorIiz1VLgLNIJpIRg9mcQGCGr
+ M15A==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:dkim-signature;
- bh=iAFiB2J25Y9wEhbq4gP0UwDSbSVw2Tg8ecI19Fy9+Fo=;
- fh=U1i/jawuBx51ap2uIX98lHerem0n/o5YUGTOYsYGGLo=;
- b=dCsZUrN6oL7eQzh+7ODLVy2kJzghAdme7Hk5A728JiZC4nHNj/dh+3RxNvzbsY76Ik
- 9ni3YCEbCG0tm6lqg+4t6WpKuPkz2guZh+/CvJH2NYMgps19o40S+5pl9HpSo8xVA8TT
- prLEE84vNg44bArNy2loY+EvmWNMVtAFwPZ3oqjrxJ8oqLkcBwnidJqfz/dokQ4CrIRp
- f/YGDtUoHqCR5YiaIsbPETNyYC/d227V+5cwvJCWp/CdAU1CI2wlxpPJ/OE/GDKtDraV
- C2gswqDzrxAy01rePT6WXcPszByDBJXApr8CAhk2Sj2fo20zuhuVXKD1asCCDPK519E8
- yK0A==; darn=lists.denx.de
+ bh=u4dgC8BChEwkkuxJFUUHUIpiGS2lQrToW/ThV77aBRU=;
+ fh=Igyl1IYJ02Rq5wduX2oUnPVJiFpnVKT9alkAJClTLPI=;
+ b=hdHxwZadN1kuMqHL0+S3wGzSW6ZdtLw2Kb4uzugc8n46P9nzy6yTGlNCu68j+PoqXv
+ Dzf1WDKZhW/oh3ua/ogQjcKid4FwG+2KJCNUoKVq49PrLg/diFawVYFEFVlM7wiIMKSe
+ YbxXf5weFUKYkOA5nlxZaoEVFau3Bo6pLxiqdH68ad7tVexG1FOEoJ+pPEkYnYt4CXCb
+ jLSJfQoB5QYBqg2fdInFF1hPv8pBQPE/oTcL6XTkKX9A3Ge3kBYx/LeAQmpf4bHT1nTL
+ i7S/FREi8SqtMDqvlguNigY9PsubV2JWx0QrQKP8UPv8xn/A5e68G7ZswFWWwomeSk38
+ 7VTQ==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1776881867; x=1777486667; darn=lists.denx.de;
+ d=gmail.com; s=20251104; t=1776882754; x=1777487554; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=iAFiB2J25Y9wEhbq4gP0UwDSbSVw2Tg8ecI19Fy9+Fo=;
- b=Lp0y16VPC5VSt9A2lyJsdmwGPJdzWej794mMGKEdcJBdSHYj9aqwPjDu3lv7xLfuza
- 4Vz0Pf+tNU72/BkYcxFlPPen7E8O4MV0Q1mIijEAR2nxH+K5cl9XLorEJFuxcim4oov0
- j4FjZLUix3U1i3w+5x2i04QXnvnOxXzoS7vAyhujwqBiL384jNUPPXGoUF45FWH027gI
- D6bYF/vmsZWO4KQEbJN2X/AZGeR/sN6f0vWQQ5Dgtu0jYcDl27ULHEu3bzLLsCaO9s8p
- XieSOg3nghhO3N+B0TisKeiDgrzdiUYkN7Y0V4bUCG/LJ1LmA01jqvHUN5/5nzrVqM1T
- 702Q==
+ bh=u4dgC8BChEwkkuxJFUUHUIpiGS2lQrToW/ThV77aBRU=;
+ b=q67M55QNFnxQ7LdIe/H+a8oOjNu34OwrHFs9x9SlGKQC+4VR8vHNKX0H10tR9GiOXO
+ 39RfDf1m9Bu70VEhLd2AHqC/DRJWQDz4PUcq41gxgscChNExzitdUmBB3+Yf6gVro/rF
+ jnpjbQtUE3NwnJP0lC3J6/SVhrPFqxWfEWKNvqBjF7DE4xpSAvHp2RaoVweUb7Kluut1
+ ecvAMxw7J/KybWmBzlzKTE9ZwmhTftTEaIBIxy7LjwrDBElmqvdprbFbYuUzJap0HuXk
+ ZkbCeiPzI3E8VbI/vAp4dfJ3Qqf5bFfqfsZClAceweTXhZy5ZlWTIzljPf+9XfUjxlNA
+ yPFg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776881867; x=1777486667;
+ d=1e100.net; s=20251104; t=1776882754; x=1777487554;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=iAFiB2J25Y9wEhbq4gP0UwDSbSVw2Tg8ecI19Fy9+Fo=;
- b=eryQ93KAI/Ik4kP/28NmVYjxnBEkQTGzMg6a4pWPWxaF/P68nItk5PT2+uDA48G1ly
- N8k9u/5J2368tqadC4pYGVp89Rh3O43rWqu6tjZtgASBQgjeH6NKYgkMOYq7M5lkAZSY
- kx9jqzHs2oXBMrNEE42iLTuBJ2va81fdCyL1B8Wf/BGb/fRl1eQNTDuxEmalOtDPi8tA
- HeXvuakinPLtsJW62Nbsy0RczDk7XgWrS9WFHWBlhHKuByo2vpWuHP/dRmOP+0mya2VE
- SwRw7b09jJRc8D7A33VZ1VYQ7BYzc6XNNOsRbvAytYxhqxfTUgg1Kf9f9REYtdcCzww/
- q5jQ==
+ bh=u4dgC8BChEwkkuxJFUUHUIpiGS2lQrToW/ThV77aBRU=;
+ b=H5LVa5K92LmdJFw3Kp0dxNOIziU2WMkHm2ttC3cQ1k2RO3heBivL9NR4hO7W5ZWH9E
+ HcEFxiJMWopsn9kUkoD2CccYTWtfqLmLLKXCCcwJ772N7XHieuqTVZLI+KoDLN3YKTjE
+ fFyN9KYV75oCUJzAps/w8zoCY1RvnxIgaBRgsxV5GLHrDLUCfd9li2Ym2OXSWNbBkfMc
+ 7vw8mj2zz2Ubvqx8Ov00+85gxI5ZT5ZoSUYBrKA4T+h1y72szIZg7xU5casXcX9lrCpo
+ gU+PkRbhqpnfpxYcfOSXp3cHnaeznlPwpgp33mgKZ0PDOZsTGkgQucqKMwkwVC63CIJt
+ RdLA==
 X-Forwarded-Encrypted: i=1;
- AFNElJ/FL9bPLWtqCoJ/n0wnRcUj2fjtogB1w65XTHMyD57hWgfJVGAKfuDWmMecIZlRJpeVu/9tsJ8=@lists.denx.de
-X-Gm-Message-State: AOJu0YxFRKOe8uSuJ2xg65K078kTjGeqWwqVOalyhUtsAx+00mVWTAH5
- PLkns1FMsIQHsZHapWtF+FY+QY/Rw/MT3bPVyDLWoX6o+78a+XQ68m0A+YnEr23sOkU/DmN3aOq
- 1AcuvJwlEfZM4YYYqwe4a8jDBzDwuo2g=
-X-Gm-Gg: AeBDietfT3N+7JYVsbbFoDD4f2cEZxWoRLEny//1Or+9wQmx7musIADyA0y5K7D4etl
- +EOJ6HEv0Qj7ZDPvH5XrwdDbNqzApWJCUzTEHX/A7K6muwsTtc+cmYgJxAmW4cbETCk4/67vKfI
- CiaFDrlGDrMq5LJUpHMMlHeFSsMgedgCnqAHm+cyhTYXKLG7hwLOnJxkkd9ihzIzCHA4NiSUvy7
- Acee6YmfcLNLMtCHtILZoTC4ZbdYqTPKrksETyLop6o1W3VpGfEKACM9CLlpFWQIgNScWFNJaSR
- l1dz3i7zbgMhQFukyMPvUSdfC8922g==
-X-Received: by 2002:a05:690e:23db:b0:651:c7b1:d1e2 with SMTP id
- 956f58d0204a3-653109ae164mr15517625d50.37.1776881867002; Wed, 22 Apr 2026
- 11:17:47 -0700 (PDT)
+ AFNElJ/ZKaSVUt+Tlmnu/N7aPVwBOa4H0vDizn36bllR1/keZS0IOODJIBssltWoXJKrdM1OTdxw8xE=@lists.denx.de
+X-Gm-Message-State: AOJu0YwBulLum7QDcyVzSuSxfe6G0nR9HIU0VjReoarLFnLZi+a4nsst
+ 7s6Japj7N+3lG4dIWKqYJt/YQ8nDE31xeenzteyaSBVr42etzgKVqkn5mGee6Lij6DBCxLaYOA2
+ kbLlHGyEDIT9c7GdDdO0CjWnZl44bKEM=
+X-Gm-Gg: AeBDieuhewh2453ljm6zVjff9BT0psnCkxsUP3jS3PmXkGn2JrQXON+Dlsm7k98ak24
+ TlSAFG8KOzaKXJZIo2GqN53dMHHY71UVUOW9Ks+P6hc0qyINurfoz70BH7eH8oZpn17vlMIjX/J
+ LHhmK6V3/WQ193Ns0HVTKQ1Fyum64qCXTvHvoj/48wj6hjW4UgjRwF5XVyUex2TLU3AcLjhP9hy
+ gQizwIhOMays/Ym11vQttUOvx0UG8xqrvE2TXwElFMPe4Zeholt5oJ50q/aU+WEGaXweSVgxuN9
+ bttqCVM9k+RuGUJFIz0=
+X-Received: by 2002:a53:b608:0:b0:651:b7f5:14f5 with SMTP id
+ 956f58d0204a3-65310a11307mr17589735d50.31.1776882754316; Wed, 22 Apr 2026
+ 11:32:34 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260421210954.1170437-1-philippe.reynes@softathome.com>
- <20260421210954.1170437-4-philippe.reynes@softathome.com>
-In-Reply-To: <20260421210954.1170437-4-philippe.reynes@softathome.com>
+ <20260421210954.1170437-2-philippe.reynes@softathome.com>
+In-Reply-To: <20260421210954.1170437-2-philippe.reynes@softathome.com>
 From: Raymond Mao <raymondmaoca@gmail.com>
-Date: Wed, 22 Apr 2026 14:17:35 -0400
-X-Gm-Features: AQROBzCTeuOmDLrBpoEdB2cEhkxqh_Fq46tNiIKyx2uQhjLisNEfwvv0a2dbL3Q
-Message-ID: <CAMDkj5y1aC0Kmy4X6dW7Tb092Bb0xrsLB648K9Ek22t-n51Mgw@mail.gmail.com>
-Subject: Re: [PATCH v5 03/15] ecdsa: initial support of ecdsa using mbedtls
+Date: Wed, 22 Apr 2026 14:32:22 -0400
+X-Gm-Features: AQROBzAF7UQwh97nvvyAbfof679Nroh2Ud1y0PykJ2hS9QvD8WVf6euMoD6wTI0
+Message-ID: <CAMDkj5xSEbEkHPrsJ2ZnRZ56BsiZXTKV6RxoWrJn-oZfZBi_cg@mail.gmail.com>
+Subject: Re: [PATCH v5 01/15] ecdsa: fix support of secp521r1
 To: Philippe Reynes <philippe.reynes@softathome.com>
 Cc: marko.makela@iki.fi, jonny.green@keytechinc.com, trini@konsulko.com, 
  simon.glass@canonical.com, u-boot@lists.denx.de
@@ -122,295 +122,413 @@ Hi Philippe,
 On Tue, Apr 21, 2026 at 5:10=E2=80=AFPM Philippe Reynes
 <philippe.reynes@softathome.com> wrote:
 >
-> Adds an initial support of ecdsa verify using mbedtls.
+> Current implementation of ecdsa only supports key len aligned on
+> 8 bits. But the curve secp521r1 uses a key of 521 bits which is not
+> aligned on 8 bits. In this commit, we update the keys management
+> for ecdsa to support keys that are not aligned on 8 bits.
 >
 > Signed-off-by: Philippe Reynes <philippe.reynes@softathome.com>
 > ---
 > v2:
-> - rename sw_ecdsa.c to ecdsa.c
+> - intitial version
 > v3:
-> - rename sw_ecdsa_verify to ecdsa_hash_verify
-> - stop on first group found
-> - check signature len
-> - use debug instead of printf
-> - check function returns
-> - fix memleaks in ecdsa_hash_verify
+> - fix typo in comments
 > v4:
-> - move struct ecdsa_public_key from ecdsa-u-class.h to internal/ecdsa.h
-> - use DIV_ROUND_UP
-> - some code cleanup
+> - fix commit message
+> - clean code with DIV_ROUND_UP-
+> - duplicate data before shifting
+> - support ecdsa521 and secp521r1
+> - clean code
 > v5:
-> - add kerneldoc header for ecdsa_hash_verify
-> - read error when setting Q.Z
+> - check that x and y are not null before using them
+> - free keys when keys not found
 >
->  include/crypto/ecdsa-uclass.h   |  15 +---
->  include/crypto/internal/ecdsa.h |  39 +++++++++
->  lib/mbedtls/Makefile            |   3 +
->  lib/mbedtls/ecdsa.c             | 146 ++++++++++++++++++++++++++++++++
->  4 files changed, 189 insertions(+), 14 deletions(-)
->  create mode 100644 include/crypto/internal/ecdsa.h
->  create mode 100644 lib/mbedtls/ecdsa.c
+>  lib/ecdsa/ecdsa-libcrypto.c | 63 ++++++++++++++++++++++++++++++-
+>  lib/ecdsa/ecdsa-verify.c    | 75 +++++++++++++++++++++++++++++++++----
+>  lib/fdt-libcrypto.c         |  2 +-
+>  tools/image-sig-host.c      |  7 ++++
+>  4 files changed, 137 insertions(+), 10 deletions(-)
 >
-> diff --git a/include/crypto/ecdsa-uclass.h b/include/crypto/ecdsa-uclass.=
-h
-> index 189843820a0..047a5eda2fc 100644
-> --- a/include/crypto/ecdsa-uclass.h
-> +++ b/include/crypto/ecdsa-uclass.h
-> @@ -4,20 +4,7 @@
->   */
+> diff --git a/lib/ecdsa/ecdsa-libcrypto.c b/lib/ecdsa/ecdsa-libcrypto.c
+> index c4bfb2cec61..41590d22a51 100644
+> --- a/lib/ecdsa/ecdsa-libcrypto.c
+> +++ b/lib/ecdsa/ecdsa-libcrypto.c
+> @@ -26,6 +26,8 @@
+>  #include <openssl/ec.h>
+>  #include <openssl/bn.h>
 >
->  #include <dm/device.h>
-> -
-> -/**
-> - * struct ecdsa_public_key - ECDSA public key properties
-> - *
-> - * The struct has pointers to the (x, y) curve coordinates to an ECDSA p=
-ublic
-> - * key, as well as the name of the ECDSA curve. The size of the key is i=
-nferred
-> - * from the 'curve_name'
-> - */
-> -struct ecdsa_public_key {
-> -       const char *curve_name; /* Name of curve, e.g. "prime256v1" */
-> -       const void *x;          /* x coordinate of public key */
-> -       const void *y;          /* y coordinate of public key */
-> -       unsigned int size_bits; /* key size in bits, derived from curve n=
-ame */
-> -};
-> +#include <crypto/internal/ecdsa.h>
->
->  struct ecdsa_ops {
->         /**
-> diff --git a/include/crypto/internal/ecdsa.h b/include/crypto/internal/ec=
-dsa.h
-> new file mode 100644
-> index 00000000000..fe00797c5b0
-> --- /dev/null
-> +++ b/include/crypto/internal/ecdsa.h
-> @@ -0,0 +1,39 @@
-> +/* SPDX-License-Identifier: GPL-2.0+ */
-> +/*
-> + * Copyright (c) 2026, Philippe Reynes <philippe.reynes@softathome.com>
-> + */
-> +#ifndef _ECDSA_HELPER_
-> +#define _ECDSA_HELPER_
+> +#define DIV_ROUND_UP(n, d) (((n) + (d) - 1) / (d))
 > +
-> +#include <linux/types.h>
+>  /* Image signing context for openssl-libcrypto */
+>  struct signer {
+>         EVP_PKEY *evp_key;      /* Pointer to EVP_PKEY object */
+> @@ -41,10 +43,26 @@ struct ecdsa_public_key {
+>         int size_bits;
+>  };
+>
+> +static char *memdup(char *buf, size_t size)
+> +{
+> +       char *dup;
 > +
-> +/**
-> + * struct ecdsa_public_key - ECDSA public key properties
-> + *
-> + * The struct has pointers to the (x, y) curve coordinates to an ECDSA p=
-ublic
-> + * key, as well as the name of the ECDSA curve. The size of the key is i=
-nferred
-> + * from the 'curve_name'
-> + */
-> +struct ecdsa_public_key {
-> +       const char *curve_name; /* Name of curve, e.g. "prime256v1" */
-> +       const void *x;          /* x coordinate of public key */
-> +       const void *y;          /* y coordinate of public key */
-> +       unsigned int size_bits; /* key size in bits, derived from curve n=
-ame */
+> +       dup =3D malloc(size);
+> +       if (dup)
+> +               memcpy(dup, buf, size);
+> +
+> +       return dup;
+> +}
+> +
+>  static int fdt_get_key(struct ecdsa_public_key *key, const void *fdt, in=
+t node)
+>  {
+> +       const char *x;
+> +       const char *y;
+>         int x_len;
+>         int y_len;
+> +       int expected_len;
+> +
+> +       memset(key, 0, sizeof(*key));
+>
+>         key->curve_name =3D fdt_getprop(fdt, node, "ecdsa,curve", NULL);
+>         if (!key->curve_name)
+> @@ -54,6 +72,8 @@ static int fdt_get_key(struct ecdsa_public_key *key, co=
+nst void *fdt, int node)
+>                 key->size_bits =3D 256;
+>         else if (!strcmp(key->curve_name, "secp384r1"))
+>                 key->size_bits =3D 384;
+> +       else if (!strcmp(key->curve_name, "secp521r1"))
+> +               key->size_bits =3D 521;
+>         else
+>                 return -EINVAL;
+>
+> @@ -63,12 +83,43 @@ static int fdt_get_key(struct ecdsa_public_key *key, =
+const void *fdt, int node)
+>         if (!key->x || !key->y)
+>                 return -EINVAL;
+>
+> -       if (x_len !=3D key->size_bits / 8 || y_len !=3D key->size_bits / =
+8)
+> +       /*
+> +        * The public key is stored as an array of u32, so if the key siz=
+e is
+> +        * not a multiple of 32 (for example 521), we may have extra byte=
+s.
+> +        * To avoid any issue later, we shift the x and y pointer to the =
+first
+> +        * useful byte.
+> +        */
+> +       expected_len =3D DIV_ROUND_UP(key->size_bits, 8);
+> +
+> +       if (x_len < expected_len || y_len < expected_len)
+>                 return -EINVAL;
+>
+> +       x =3D memdup((char *)key->x + (x_len - expected_len), expected_le=
+n);
+> +       if (!x) {
+> +               fprintf(stderr, "Cannot allocate memory for point X");
+> +               return -ENOMEM;
+> +       }
+> +       key->x =3D (const uint8_t *)x;
+> +
+> +       y =3D memdup((char *)key->y + (y_len - expected_len), expected_le=
+n);
+> +       if (!y) {
+> +               fprintf(stderr, "Cannot allocate memory for point Y");
+> +               free((char *)x);
+> +               return -ENOMEM;
+> +       }
+> +       key->y =3D (const uint8_t *)y;
+> +
+>         return 0;
+>  }
+>
+> +static void fdt_free_key(struct ecdsa_public_key *key)
+> +{
+> +       if (!key)
+> +               return;
+> +       free((char *)key->x);
+
+It is safer to be:
+if (key->x)
+     free((char *)key->x);
+
+> +       free((char *)key->y);
+
+Ditto.
+
+> +}
+> +
+>  static int read_key_from_fdt(struct signer *ctx, const void *fdt, int no=
+de)
+>  {
+>         struct ecdsa_public_key pubkey;
+> @@ -89,8 +140,11 @@ static int read_key_from_fdt(struct signer *ctx, cons=
+t void *fdt, int node)
+>                 nid =3D NID_X9_62_prime256v1;
+>         } else if (!strcmp(pubkey.curve_name, "secp384r1")) {
+>                 nid =3D NID_secp384r1;
+> +       } else if (!strcmp(pubkey.curve_name, "secp521r1")) {
+> +               nid =3D NID_secp521r1;
+>         } else {
+>                 fprintf(stderr, "Unsupported curve name: '%s'\n", pubkey.=
+curve_name);
+> +               fdt_free_key(&pubkey);
+>                 return -EINVAL;
+>         }
+>
+> @@ -100,6 +154,7 @@ static int read_key_from_fdt(struct signer *ctx, cons=
+t void *fdt, int node)
+>         ec_key =3D EC_KEY_new_by_curve_name(nid);
+>         if (!ec_key) {
+>                 fprintf(stderr, "Failed to allocate EC_KEY for curve %s\n=
+", pubkey.curve_name);
+> +               fdt_free_key(&pubkey);
+>                 return -ENOMEM;
+>         }
+>
+> @@ -108,10 +163,11 @@ static int read_key_from_fdt(struct signer *ctx, co=
+nst void *fdt, int node)
+>         if (!point) {
+>                 fprintf(stderr, "Failed to allocate EC_POINT\n");
+>                 EC_KEY_free(ec_key);
+> +               fdt_free_key(&pubkey);
+>                 return -ENOMEM;
+>         }
+>
+> -       len =3D pubkey.size_bits / 8;
+> +       len =3D DIV_ROUND_UP(pubkey.size_bits, 8);
+>
+>         uint8_t buf[1 + len * 2];
+>
+> @@ -123,6 +179,7 @@ static int read_key_from_fdt(struct signer *ctx, cons=
+t void *fdt, int node)
+>                 fprintf(stderr, "Failed to convert (x,y) point to EC_POIN=
+T\n");
+>                 EC_POINT_free(point);
+>                 EC_KEY_free(ec_key);
+> +               fdt_free_key(&pubkey);
+>                 return -EINVAL;
+>         }
+>
+> @@ -130,11 +187,13 @@ static int read_key_from_fdt(struct signer *ctx, co=
+nst void *fdt, int node)
+>                 fprintf(stderr, "Failed to set EC_POINT as public key\n")=
+;
+>                 EC_POINT_free(point);
+>                 EC_KEY_free(ec_key);
+> +               fdt_free_key(&pubkey);
+>                 return -EINVAL;
+>         }
+>
+>         fprintf(stderr, "Successfully loaded ECDSA key from FDT node %d\n=
+", node);
+>         EC_POINT_free(point);
+> +       fdt_free_key(&pubkey);
+>         ctx->ecdsa_key =3D ec_key;
+>
+>         return 0;
+> diff --git a/lib/ecdsa/ecdsa-verify.c b/lib/ecdsa/ecdsa-verify.c
+> index 629b662cf6c..e503627f490 100644
+> --- a/lib/ecdsa/ecdsa-verify.c
+> +++ b/lib/ecdsa/ecdsa-verify.c
+> @@ -10,6 +10,7 @@
+>
+>  #include <crypto/ecdsa-uclass.h>
+>  #include <dm/uclass.h>
+> +#include <malloc.h>
+>  #include <u-boot/ecdsa.h>
+>
+>  /*
+> @@ -24,13 +25,19 @@ static int ecdsa_key_size(const char *curve_name)
+>                 return 256;
+>         else if (!strcmp(curve_name, "secp384r1"))
+>                 return 384;
+> +       else if (!strcmp(curve_name, "secp521r1"))
+> +               return 521;
+>
+>         return 0;
+>  }
+>
+>  static int fdt_get_key(struct ecdsa_public_key *key, const void *fdt, in=
+t node)
+>  {
+> -       int x_len, y_len;
+> +       int expected_len, x_len, y_len;
+> +       const char *x;
+> +       const char *y;
+> +
+> +       memset(key, 0, sizeof(*key));
+>
+>         key->curve_name =3D fdt_getprop(fdt, node, "ecdsa,curve", NULL);
+>         if (!key->curve_name) {
+> @@ -50,15 +57,46 @@ static int fdt_get_key(struct ecdsa_public_key *key, =
+const void *fdt, int node)
+>         if (!key->x || !key->y)
+>                 return -EINVAL;
+>
+> -       if (x_len !=3D (key->size_bits / 8) || y_len !=3D (key->size_bits=
+ / 8)) {
+> +       /*
+> +        * The public key is stored as an array of u32, so if the key siz=
+e is
+> +        * not a multiple of 32 (for example 521), we may have extra byte=
+s.
+> +        * To avoid any issue later, we shift the x and y pointer to the =
+first
+> +        * useful byte.
+> +        */
+> +       expected_len =3D DIV_ROUND_UP(key->size_bits, 8);
+> +
+> +       if (x_len < expected_len || y_len < expected_len) {
+>                 printf("%s: node=3D%d, curve@%p x@%p+%i y@%p+%i\n", __fun=
+c__,
+>                        node, key->curve_name, key->x, x_len, key->y, y_le=
+n);
+>                 return -EINVAL;
+>         }
+>
+> +       x =3D memdup((char *)key->x + (x_len - expected_len), expected_le=
+n);
+> +       if (!x) {
+> +               debug("Cannot allocate memory for point X");
+> +               return -ENOMEM;
+> +       }
+> +       key->x =3D (const uint8_t *)x;
+> +
+> +       y =3D memdup((char *)key->y + (y_len - expected_len), expected_le=
+n);
+> +       if (!y) {
+> +               debug("Cannot allocate memory for point Y");
+> +               free((char *)x);
+> +               return -ENOMEM;
+> +       }
+> +       key->y =3D (const uint8_t *)y;
+> +
+>         return 0;
+>  }
+>
+> +static void fdt_free_key(struct ecdsa_public_key *key)
+> +{
+> +       if (!key)
+> +               return;
+> +       free((char *)key->x);
+> +       free((char *)key->y);
+> +}
+> +
+>  static int ecdsa_verify_hash(struct udevice *dev,
+>                              const struct image_sign_info *info,
+>                              const void *hash, const void *sig, uint sig_=
+len)
+> @@ -73,11 +111,16 @@ static int ecdsa_verify_hash(struct udevice *dev,
+>
+>         if (info->required_keynode > 0) {
+>                 ret =3D fdt_get_key(&key, info->fdt_blob, info->required_=
+keynode);
+> -               if (ret < 0)
+> +               if (ret < 0) {
+> +                       fdt_free_key(&key);
+>                         return ret;
+> +               }
+> +
+> +               ret =3D ops->verify(dev, &key, hash, algo->checksum_len,
+> +                                 sig, sig_len);
+> +               fdt_free_key(&key);
+>
+> -               return ops->verify(dev, &key, hash, algo->checksum_len,
+> -                                  sig, sig_len);
+> +               return ret;
+>         }
+>
+>         sig_node =3D fdt_subnode_offset(info->fdt_blob, 0, FIT_SIG_NODENA=
+ME);
+> @@ -87,15 +130,21 @@ static int ecdsa_verify_hash(struct udevice *dev,
+>         /* Try all possible keys under the "/signature" node */
+>         fdt_for_each_subnode(key_node, info->fdt_blob, sig_node) {
+>                 ret =3D fdt_get_key(&key, info->fdt_blob, key_node);
+> -               if (ret < 0)
+> +               if (ret < 0) {
+
+'if (ret)' is fine. Moreover, when fdt_get_key() returns a non-zero
+value, the key is already free.
+
+> +                       fdt_free_key(&key);
+>                         continue;
+> +               }
+>
+>                 ret =3D ops->verify(dev, &key, hash, algo->checksum_len,
+>                                   sig, sig_len);
+>
+>                 /* On success, don't worry about remaining keys */
+> -               if (!ret)
+> +               if (!ret) {
+> +                       fdt_free_key(&key);
+>                         return 0;
+> +               }
+> +
+> +               fdt_free_key(&key);
+
+Above few lines can be simplified as:
+```
+fdt_free_key(&key);
+if (!ret)
+    return 0;
+```
+
+Regards,
+Raymond
+
+>         }
+>
+>         return -EPERM;
+> @@ -135,6 +184,18 @@ U_BOOT_CRYPTO_ALGO(ecdsa384) =3D {
+>         .verify =3D ecdsa_verify,
+>  };
+>
+> +U_BOOT_CRYPTO_ALGO(ecdsa521) =3D {
+> +       .name =3D "ecdsa521",
+> +       .key_len =3D ECDSA521_BYTES,
+> +       .verify =3D ecdsa_verify,
 > +};
 > +
-> +/**
-> + *
-> + * ecdsa_hash_verify() - Verify the ecdsa signature of a hash
-> + *
-> + * @pubkey : ecdsa public key
-> + * @hash : Hash
-> + * @hash_len : Size of the hash
-> + * @signature : Signature
-> + * @sig_len : Size of the signature
-> + * Return: 0 if all verified ok, <0 on error
-> + */
-> +int ecdsa_hash_verify(const struct ecdsa_public_key *pubkey,
-> +                     const void *hash, size_t hash_len,
-> +                     const void *signature, size_t sig_len);
+> +U_BOOT_CRYPTO_ALGO(secp521r1) =3D {
+> +       .name =3D "secp521r1",
+> +       .key_len =3D ECDSA521_BYTES,
+> +       .verify =3D ecdsa_verify,
+> +};
 > +
-> +#endif
-> diff --git a/lib/mbedtls/Makefile b/lib/mbedtls/Makefile
-> index a24c8389744..33698c92282 100644
-> --- a/lib/mbedtls/Makefile
-> +++ b/lib/mbedtls/Makefile
-> @@ -11,6 +11,9 @@ obj-$(CONFIG_$(PHASE_)SHA1_MBEDTLS) +=3D sha1.o
->  obj-$(CONFIG_$(PHASE_)SHA256_MBEDTLS) +=3D sha256.o
->  obj-$(CONFIG_$(PHASE_)SHA512_MBEDTLS) +=3D sha512.o
->
-> +# shim layer for ecdsa
-> +obj-$(CONFIG_$(PHASE_)ECDSA_MBEDTLS) +=3D ecdsa.o
-> +
->  # x509 libraries
->  obj-$(CONFIG_$(PHASE_)ASYMMETRIC_PUBLIC_KEY_MBEDTLS) +=3D \
->         public_key.o
-> diff --git a/lib/mbedtls/ecdsa.c b/lib/mbedtls/ecdsa.c
-> new file mode 100644
-> index 00000000000..90c9c37e96e
-> --- /dev/null
-> +++ b/lib/mbedtls/ecdsa.c
-> @@ -0,0 +1,146 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +/*
-> + * Copyright (C) 2026 Philippe Reynes <philippe.reynes@softathome.com>
-> + */
-> +
-> +#include <log.h>
-> +#include <linux/errno.h>
-> +#include <linux/string.h>
-> +#include <linux/types.h>
-> +
-> +#include <crypto/internal/ecdsa.h>
-> +
-> +#include "mbedtls_options.h" /* required to access private fields */
-> +#include <mbedtls/ecdsa.h>
-> +#include <mbedtls/ecp.h>
-> +
-> +static mbedtls_ecp_group_id ecdsa_search_group_id(const char *curve_name=
-)
-> +{
-> +       mbedtls_ecp_group_id grp_id =3D MBEDTLS_ECP_DP_NONE;
-> +       const mbedtls_ecp_curve_info *info;
-> +
-> +       if (!curve_name)
-> +               goto out;
-> +
-> +       if (!strcmp(curve_name, "prime256v1"))
-> +               return MBEDTLS_ECP_DP_SECP256R1;
-> +
-> +       info =3D mbedtls_ecp_curve_list();
-> +       while (info && info->name) {
-> +               if (!strcmp(curve_name, info->name)) {
-> +                       grp_id =3D info->grp_id;
-> +                       break;
-> +               }
-> +               info++;
-> +       }
-> +
-> + out:
-> +       return grp_id;
-> +}
-> +
-> +int ecdsa_hash_verify(const struct ecdsa_public_key *pubkey,
-> +                     const void *hash, size_t hash_len,
-> +                     const void *signature, size_t sig_len)
-> +{
-> +       mbedtls_ecp_group_id grp_id;
-> +       mbedtls_ecp_group grp;
-> +       mbedtls_ecp_point Q;
-> +       mbedtls_mpi r, s;
-> +       int key_len;
-> +       int err =3D -1;
-> +
-> +       key_len =3D DIV_ROUND_UP(pubkey->size_bits, 8);
-> +
-> +       /* check the signature len */
-> +       if (sig_len !=3D 2 * key_len) {
-> +               log_debug("sig len should be twice the key len (sig len =
-=3D %zu, key len =3D %d)\n",
-> +                         sig_len, key_len);
-> +               err =3D -EINVAL;
-> +               goto out;
-> +       }
-> +
-> +       /* search the group */
-> +       grp_id =3D ecdsa_search_group_id(pubkey->curve_name);
-> +       if (grp_id =3D=3D MBEDTLS_ECP_DP_NONE) {
-> +               log_debug("curve name %s not found\n", pubkey->curve_name=
-);
-> +               err =3D -EINVAL;
-> +               goto out;
-> +       }
-> +
-> +       /* init and load the group */
-> +       mbedtls_ecp_group_init(&grp);
-> +       err =3D mbedtls_ecp_group_load(&grp, grp_id);
-> +       if (err) {
-> +               err =3D -EINVAL;
-> +               goto out1;
-> +       }
-> +
-> +       /* prepare the pubkey */
-> +       mbedtls_ecp_point_init(&Q);
-> +       err =3D mbedtls_mpi_read_binary(&Q.X, pubkey->x, key_len);
-> +       if (err) {
-> +               log_debug("could not read value x of the public key (err =
-=3D %d)\n",
-> +                         err);
-> +               err =3D -EINVAL;
-> +               goto out2;
-> +       }
-> +       err =3D mbedtls_mpi_read_binary(&Q.Y, pubkey->y, key_len);
-> +       if (err) {
-> +               log_debug("could not read value y of the public key (err =
-=3D %d)\n",
-> +                         err);
-> +               err =3D -EINVAL;
-> +               goto out2;
-> +       }
-> +       err =3D mbedtls_mpi_lset(&Q.Z, 1);
-> +       if (err) {
-> +               log_debug("could not set value z of the public key (err =
-=3D %d)\n",
-> +                         err);
-> +               err =3D -EINVAL;
-> +               goto out2;
-> +       }
-> +
-> +       /* check if the pubkey is valid */
-> +       err =3D mbedtls_ecp_check_pubkey(&grp, &Q);
-> +       if (err) {
-> +               log_debug("public key is invalid (err =3D %d)\n", err);
-> +               err =3D -EKEYREJECTED;
-> +               goto out2;
-> +       }
-> +
-> +       /* compute r */
-> +       mbedtls_mpi_init(&r);
-> +       err =3D mbedtls_mpi_read_binary(&r, signature, key_len);
-> +       if (err) {
-> +               log_debug("could not read value r of the signature (err =
-=3D %d)\n",
-> +                         err);
-> +               err =3D -EINVAL;
-> +               goto out3;
-> +       }
-> +
-> +       /* compute s */
-> +       mbedtls_mpi_init(&s);
-> +       err =3D mbedtls_mpi_read_binary(&s, signature + key_len, key_len)=
-;
-> +       if (err) {
-> +               log_debug("could not read value s of the signature (err =
-=3D %d)\n",
-> +                         err);
-> +               err =3D -EINVAL;
-> +               goto out4;
-> +       }
-> +
-> +       /* check the signature */
-> +       err =3D mbedtls_ecdsa_verify(&grp, hash, hash_len, &Q, &r, &s);
-> +       if (err)
-> +               err =3D -EINVAL;
-> +
-> + out4:
-> +       mbedtls_mpi_free(&s);
-> + out3:
-> +       mbedtls_mpi_free(&r);
-> + out2:
-> +       mbedtls_ecp_point_free(&Q);
-> + out1:
-> +       mbedtls_ecp_group_free(&grp);
-> + out:
-> +
-> +       return err;
-> +}
+>  /*
+>   * uclass definition for ECDSA API
+>   *
+> diff --git a/lib/fdt-libcrypto.c b/lib/fdt-libcrypto.c
+> index ecb0344c8f6..090246b44e9 100644
+> --- a/lib/fdt-libcrypto.c
+> +++ b/lib/fdt-libcrypto.c
+> @@ -10,7 +10,7 @@
+>  int fdt_add_bignum(void *blob, int noffset, const char *prop_name,
+>                    BIGNUM *num, int num_bits)
+>  {
+> -       int nwords =3D num_bits / 32;
+> +       int nwords =3D (num_bits + 31) / 32;
+>         int size;
+>         uint32_t *buf, *ptr;
+>         BIGNUM *tmp, *big2, *big32, *big2_32;
+> diff --git a/tools/image-sig-host.c b/tools/image-sig-host.c
+> index 5285263c616..285547994ca 100644
+> --- a/tools/image-sig-host.c
+> +++ b/tools/image-sig-host.c
+> @@ -83,6 +83,13 @@ struct crypto_algo crypto_algos[] =3D {
+>                 .add_verify_data =3D ecdsa_add_verify_data,
+>                 .verify =3D ecdsa_verify,
+>         },
+> +       {
+> +               .name =3D "ecdsa521",
+> +               .key_len =3D ECDSA521_BYTES,
+> +               .sign =3D ecdsa_sign,
+> +               .add_verify_data =3D ecdsa_add_verify_data,
+> +               .verify =3D ecdsa_verify,
+> +       },
+>         {
+>                 .name =3D "secp521r1",
+>                 .key_len =3D ECDSA521_BYTES,
 > --
 > 2.43.0
 >
-
-Looks good to me.
-Reviewed-by: Raymond Mao <raymondmaoca@gmail.com>
-
-Thanks and regards,
-Raymond
