@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70BA6F9EDE8
-	for <u-boot@archiver.kernel.org>; Wed, 22 Apr 2026 14:31:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A999EF9EDDB
+	for <u-boot@archiver.kernel.org>; Wed, 22 Apr 2026 14:31:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4BDD28423D;
-	Wed, 22 Apr 2026 16:31:35 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id F0021842C7;
+	Wed, 22 Apr 2026 16:31:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="qZ7KD6Z0";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="l9kFJGGA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3499B83E76; Wed, 22 Apr 2026 16:31:33 +0200 (CEST)
-Received: from mail-oo1-xc2a.google.com (mail-oo1-xc2a.google.com
- [IPv6:2607:f8b0:4864:20::c2a])
+ id B710684312; Wed, 22 Apr 2026 16:31:38 +0200 (CEST)
+Received: from mail-qt1-x835.google.com (mail-qt1-x835.google.com
+ [IPv6:2607:f8b0:4864:20::835])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9409683E76
- for <u-boot@lists.denx.de>; Wed, 22 Apr 2026 16:31:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8EF8F842CE
+ for <u-boot@lists.denx.de>; Wed, 22 Apr 2026 16:31:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=raymondmaoca@gmail.com
-Received: by mail-oo1-xc2a.google.com with SMTP id
- 006d021491bc7-6949192b840so1071919eaf.3
- for <u-boot@lists.denx.de>; Wed, 22 Apr 2026 07:31:30 -0700 (PDT)
+Received: by mail-qt1-x835.google.com with SMTP id
+ d75a77b69052e-50d6b9bca48so71254771cf.2
+ for <u-boot@lists.denx.de>; Wed, 22 Apr 2026 07:31:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1776868289; x=1777473089; darn=lists.denx.de;
+ d=gmail.com; s=20251104; t=1776868292; x=1777473092; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=SQpv5V24mxw7Ap8Eu0xG5upTdupkPhXVEKoFv2dN7Q0=;
- b=qZ7KD6Z0TewEzD6Xixmo2iQK3+bW+OSVQGCWvMdygrUq7D6Lt+UJ5ciSTC6ZvNtCPy
- yPgF9/5eQc/TisgmEW7Ei/C4tnDACj1Jx/va3vZSnyE85Lc5cXxSZT6yNjkzj0xZ5s/C
- B7jOjyU0/iagzqWyTLpaFxzyBJ+zMk4pkvHpJhoDwzGYMKZ1Dl/ZcxHF6VskdugBvOLD
- ShdOpuvv19r/fnIOWnT3CAvOGpiPl4+ZafI8qBfQ00yLL1eKyrbTiNXic0YOo1/5UMAj
- tKX2UFsWM9FpS5ry5dpE3AnnM6uBWLz3DsDecoRzHQZCC4NjWyPFSlZWT275K2D2Ymrq
- L62g==
+ bh=IRj5nJ7FHCTpew7h6huIRAeng6HEU8UKlf2+PFarWi8=;
+ b=l9kFJGGASNiQkkVsNrXZGH6pCiEgTNs3hJKhwSl1dqyyyPuVRpIrfBbvTXypUpzsIQ
+ mrLfjj5XKm/EKqT0ESWidlpAR4+8kFj+p0chSGseH1BQIFK0mfdcmRHNkQwo0BuX5oGk
+ /TZ3MuvjPGoETRRll9zwCGWrJLQBZd7udcCk1451K8p7Tx4aUlEaqusvbNxkjcnY17Yg
+ Bi6d/IvAO7CrFSke98k54QfhzPQohjIU726in697pSR5GngMvOiJ3X0KP0sArPXqsmmv
+ b1dPRLuxplOPBSPSlf7fchWkXx9rf54ibOl8Ah2RuvKMT9We4IOzJkuOEjr7b0uDRt4Z
+ hXcg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776868289; x=1777473089;
+ d=1e100.net; s=20251104; t=1776868292; x=1777473092;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=SQpv5V24mxw7Ap8Eu0xG5upTdupkPhXVEKoFv2dN7Q0=;
- b=PlJzuKQrywmzPDy2JqUfxozcF9FfLcG7AwnuQduIBtKWiQrXX1Gf+CpzIBepAAS9sM
- KaUE0FbFqp33jxCZX3lr9rVJ7a3alIk5HgAvEfGCf7sPT0Mf51ipiJXNS/8qrwXC90oi
- e2Mt6Baa2bUDVLHMgf8fL01JzWjzOSuOCDHWJlOUGt3DQnkaZfb6f1PV9Vv8ARGL7aj1
- GNWDdp3HBDOYWZ/7jb4ibBq9jyv+DNHRTYyiT1b5JoGdTUNqhAE8El9/XJZ/kaKiGLdM
- lzr8+T6VRtn2fcDHl74TtpqX7uqmE4q+pSk1/DmxKnq6ZNkyrk0qs6oSRzkITdfPsAgn
- viKQ==
-X-Gm-Message-State: AOJu0YxJHxPV8giOpY/TOXTPvYIfAPnN+BZCplS26T8PKesAf1Xll4Tr
- gQHFv9rdz7hED8kgDRNZn/N0vdyOzQGO6oiWTBCT3aDKMlgvIBiDFNNkrZigzdwRw9Y=
-X-Gm-Gg: AeBDieuCtxU2DDf/bRpvBgpKnAk3Bko76ohqpdOqVwNPJ0M4CfPdzYDyqe1fA6IRq+t
- KMjHOssw3LfZnQlMHnLMqmrkoo9lohdfvl01GIaE43YAMOh4m4pft2yu7tH+1gzqwbc29R8OxQZ
- v+BQK4A+FfD2qTcOwwPYw6sPkNqbdP4o5EoPsmXYXxfDl9MduAu4nnLOSAS7NvtPmMTjSq3yT7K
- 6HCiPNVnRnu1utmUix5h33LexJUJvPqkMKNLnjtAbG9EL0RJGt+37PNMzFpP/4F0W2ZO2WE569e
- OgFOQzNrQp54x4Mb4RxyquFClc0sUU4chwThzgO6cSOONxo8Xhn0/KVUCz1Oy6bFS+vR+Wb68TA
- NchHLZ5zbce2G+xkuOvPHd18dJPJLthLVKAxfNqSq7cMgGewdGMm3iSLm6mjJ/u95MitvUFNCow
- DtSx9nH5j4wBCKPFUNncB2tNbe259ea8mEDjtqWX1IcZM732DNW+N82i99niauQ+98UrWXo1xA8
- rmaj9B0Ejaa7jwCCc36iA==
-X-Received: by 2002:a05:6820:858c:10b0:680:89db:fd78 with SMTP id
- 006d021491bc7-69462e2042dmr8200563eaf.1.1776868288908; 
- Wed, 22 Apr 2026 07:31:28 -0700 (PDT)
+ bh=IRj5nJ7FHCTpew7h6huIRAeng6HEU8UKlf2+PFarWi8=;
+ b=WgdGVnGSfqruDXl+VjfV9lixlYEdYwBeaHxy7vnsvOdjDQEtj36Ks5nch1fqMsd2+X
+ 27qSMJGJrp6putjZF8dmI9E5cyxuKdW+4l2sCz1mBf4W42GflxveJQ56xvX7E+vnlOUK
+ dTWLGjaiPeJpbp/xP0nPu/LH6jNDBoa+K0pl3U6gAAFVi8sQlB9hjeN8y6v+8VNboLi6
+ H7zY+ofDnfVFDb04PnGz1wwp1lp8g54I9nyMO6m2p9gntTYLOu3k0cIxcShfmbj82EYP
+ 5MHTLLGsR9uMBUJnf/MrA+rKhIp0GPTV0Tjx0kH5MnmlPP+Yuvj2cMF4sm8VU6iF/isD
+ pdPQ==
+X-Gm-Message-State: AOJu0YxoAq9Cw9ALgcKmX8ej5AS+jD2y1EvozXkrcq/rlhC6iaCqMpG+
+ 7/Yt7eBvblbdhRmBhDrPnIEuZgPR+NyN8hD9X/98eRYgeCE4dcD8Hq9PFiNIs8sh
+X-Gm-Gg: AeBDietYYEt7KvtacwN8UK8K1n7O2agIFuuuFrmg8MLJMaZkaS79kahThBcStdr+Xgz
+ 0upUP8keD9kzk7mKjQqqRnmeO61+j+mL3+gRxKmFCl5L15acp8vPiyag3mqkFIM3ZG0nm35Mk6m
+ +KdolqnhAnopc3R3COlAPMCLO/k0BvE7qiKKUlq1hQhYxmcn2K29qCCWZpmISK+tZZ4XdrQYZBf
+ dCZvo4oJg2okoNfwerq/d2OjqspMIw6enZuvMayyTIbdj+5V/ypd40DmrXRCnMX9U6OCPidnN2Y
+ CprBJdJ/oKM0Zcb5Kg6N+noD9SWQaTFLP6vnKOARtuq7Rze2I4BUwRez0slE6bAwD8nCMx11m9j
+ aNEfNrO/qEMb382brfI8DssCbaykDeHUaG9EqLRiQ9Ci619MFc7HzZ0Z4Ow87cQW4vy2NlWluUz
+ 0bJhYUNUhh812krbrfDSHWqE6Sl32KIEnewlHSzj35nl84OcDnhYmlVnQBAMr8E6J0zZmtEgLxA
+ sXlfJdZ1BH9EeI9kcOlMQ==
+X-Received: by 2002:a05:622a:5ce:b0:50d:8389:c3f3 with SMTP id
+ d75a77b69052e-50e36d9c15fmr323811581cf.54.1776868291663; 
+ Wed, 22 Apr 2026 07:31:31 -0700 (PDT)
 Received: from ubuntu.localdomain (172-97-209-197.cpe.distributel.net.
  [172.97.209.197]) by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-50e394903dfsm138772501cf.26.2026.04.22.07.31.27
+ d75a77b69052e-50e394903dfsm138772501cf.26.2026.04.22.07.31.30
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 22 Apr 2026 07:31:28 -0700 (PDT)
+ Wed, 22 Apr 2026 07:31:31 -0700 (PDT)
 From: Raymond Mao <raymondmaoca@gmail.com>
 To: u-boot@lists.denx.de
 Cc: uboot@riscstar.com, u-boot-spacemit@groups.io, raymond.mao@riscstar.com,
@@ -79,9 +79,9 @@ Cc: uboot@riscstar.com, u-boot-spacemit@groups.io, raymond.mao@riscstar.com,
  xypron.glpk@gmx.de, randolph@andestech.com, dlan@gentoo.org,
  junhui.liu@pigmoral.tech, neil.armstrong@linaro.org,
  quentin.schulz@cherry.de, samuel@sholland.org, raymondmaoca@gmail.com
-Subject: [PATCH 01/16] gpio: add gpio driver for Spacemit K1 SoC
-Date: Wed, 22 Apr 2026 10:30:57 -0400
-Message-Id: <20260422143112.1329478-2-raymondmaoca@gmail.com>
+Subject: [PATCH 02/16] pinctrl: add pinctrl driver for Spacemit K1 SoC
+Date: Wed, 22 Apr 2026 10:30:58 -0400
+Message-Id: <20260422143112.1329478-3-raymondmaoca@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20260422143112.1329478-1-raymondmaoca@gmail.com>
 References: <20260422143112.1329478-1-raymondmaoca@gmail.com>
@@ -105,59 +105,79 @@ X-Virus-Status: Clean
 
 From: Raymond Mao <raymond.mao@riscstar.com>
 
-Enable gpio driver for Spacemit K1 SoC.
+Add pinctrl driver for Spacemit K1 SoC.
 
 Signed-off-by: Raymond Mao <raymond.mao@riscstar.com>
 ---
- drivers/gpio/Kconfig         |   8 ++
- drivers/gpio/Makefile        |   1 +
- drivers/gpio/spacemit_gpio.c | 217 +++++++++++++++++++++++++++++++++++
- 3 files changed, 226 insertions(+)
- create mode 100644 drivers/gpio/spacemit_gpio.c
+ drivers/pinctrl/Kconfig               |   1 +
+ drivers/pinctrl/Makefile              |   1 +
+ drivers/pinctrl/spacemit/Kconfig      |   9 +
+ drivers/pinctrl/spacemit/Makefile     |   2 +
+ drivers/pinctrl/spacemit/pinctrl-k1.c | 550 ++++++++++++++++++++++++++
+ 5 files changed, 563 insertions(+)
+ create mode 100644 drivers/pinctrl/spacemit/Kconfig
+ create mode 100644 drivers/pinctrl/spacemit/Makefile
+ create mode 100644 drivers/pinctrl/spacemit/pinctrl-k1.c
 
-diff --git a/drivers/gpio/Kconfig b/drivers/gpio/Kconfig
-index 1484dd3504c..b51886d41f3 100644
---- a/drivers/gpio/Kconfig
-+++ b/drivers/gpio/Kconfig
-@@ -449,6 +449,14 @@ config SANDBOX_GPIO_COUNT
- 	  of 'anonymous' GPIOs that do not belong to any device or bank.
- 	  Select a suitable value depending on your needs.
- 
-+config SPACEMIT_GPIO
-+	bool "Spacemit K1 GPIO driver"
-+	depends on DM_GPIO && TARGET_SPACEMIT_K1
-+	help
-+	  Support the GPIO device in Spacemit SoCs. The GPIOs are arranged
-+	  into a number of banks (different for each SoC type) each with 32
-+	  GPIOs.
-+
- config SUNXI_GPIO
- 	bool "Allwinner GPIO driver"
- 	depends on ARCH_SUNXI
-diff --git a/drivers/gpio/Makefile b/drivers/gpio/Makefile
-index fec258f59f5..7760aa8e11a 100644
---- a/drivers/gpio/Makefile
-+++ b/drivers/gpio/Makefile
-@@ -66,6 +66,7 @@ obj-$(CONFIG_MVEBU_GPIO)	+= mvebu_gpio.o
- obj-$(CONFIG_MSM_GPIO)		+= msm_gpio.o
- obj-$(CONFIG_$(PHASE_)PCF8575_GPIO)	+= pcf8575_gpio.o
- obj-$(CONFIG_$(PHASE_)QCOM_PMIC_GPIO)	+= qcom_pmic_gpio.o qcom_spmi_gpio.o
-+obj-$(CONFIG_$(PHASE_)SPACEMIT_GPIO)	+= spacemit_gpio.o
- obj-$(CONFIG_MT7620_GPIO)	+= mt7620_gpio.o
- obj-$(CONFIG_MT7621_GPIO)	+= mt7621_gpio.o
- obj-$(CONFIG_MSCC_SGPIO)	+= mscc_sgpio.o
-diff --git a/drivers/gpio/spacemit_gpio.c b/drivers/gpio/spacemit_gpio.c
+diff --git a/drivers/pinctrl/Kconfig b/drivers/pinctrl/Kconfig
+index 578edbf8168..a3abe0ea04d 100644
+--- a/drivers/pinctrl/Kconfig
++++ b/drivers/pinctrl/Kconfig
+@@ -419,6 +419,7 @@ source "drivers/pinctrl/nxp/Kconfig"
+ source "drivers/pinctrl/qcom/Kconfig"
+ source "drivers/pinctrl/renesas/Kconfig"
+ source "drivers/pinctrl/rockchip/Kconfig"
++source "drivers/pinctrl/spacemit/Kconfig"
+ source "drivers/pinctrl/sunxi/Kconfig"
+ source "drivers/pinctrl/tegra/Kconfig"
+ source "drivers/pinctrl/uniphier/Kconfig"
+diff --git a/drivers/pinctrl/Makefile b/drivers/pinctrl/Makefile
+index 29fb9b484d0..ece7a57767c 100644
+--- a/drivers/pinctrl/Makefile
++++ b/drivers/pinctrl/Makefile
+@@ -33,6 +33,7 @@ obj-$(CONFIG_PINCTRL_SCMI)	+= pinctrl-scmi.o
+ obj-$(CONFIG_PINCTRL_SINGLE)	+= pinctrl-single.o
+ obj-$(CONFIG_PINCTRL_STI)	+= pinctrl-sti.o
+ obj-$(CONFIG_PINCTRL_STM32)	+= pinctrl_stm32.o
++obj-$(CONFIG_$(PHASE_)PINCTRL_SPACEMIT_K1) += spacemit/
+ obj-$(CONFIG_$(PHASE_)PINCTRL_SX150X) += pinctrl-sx150x.o
+ obj-$(CONFIG_$(PHASE_)PINCTRL_STMFX)	+= pinctrl-stmfx.o
+ obj-$(CONFIG_PINCTRL_TH1520)	+= pinctrl-th1520.o
+diff --git a/drivers/pinctrl/spacemit/Kconfig b/drivers/pinctrl/spacemit/Kconfig
 new file mode 100644
-index 00000000000..02a13bd8bce
+index 00000000000..6aab89e160c
 --- /dev/null
-+++ b/drivers/gpio/spacemit_gpio.c
-@@ -0,0 +1,217 @@
++++ b/drivers/pinctrl/spacemit/Kconfig
+@@ -0,0 +1,9 @@
++config PINCTRL_SPACEMIT_K1
++	bool "Spacemit K1 SoC pinctrl driver"
++	depends on PINCTRL_GENERIC && DM
++	help
++	  Supports pin multiplexing control on Spacemit K1 SoCs.
++
++	  The driver is controlled by a device tree node which contains both
++	  the GPIO definitions and pin control functions for each available
++	  multiplex function.
+diff --git a/drivers/pinctrl/spacemit/Makefile b/drivers/pinctrl/spacemit/Makefile
+new file mode 100644
+index 00000000000..0dc43c72cb1
+--- /dev/null
++++ b/drivers/pinctrl/spacemit/Makefile
+@@ -0,0 +1,2 @@
++# SPDX-License-Identifier: GPL-2.0
++obj-y += pinctrl-k1.o
+diff --git a/drivers/pinctrl/spacemit/pinctrl-k1.c b/drivers/pinctrl/spacemit/pinctrl-k1.c
+new file mode 100644
+index 00000000000..a6a22eacac7
+--- /dev/null
++++ b/drivers/pinctrl/spacemit/pinctrl-k1.c
+@@ -0,0 +1,550 @@
 +// SPDX-License-Identifier: GPL-2.0
 +/*
++ * Copyright (c) 2024 Yixun Lan <dlan@gentoo.org>
 + * Copyright (c) 2025-2026 RISCstar Ltd.
 + */
 +
-+#include <asm/gpio.h>
 +#include <clk.h>
 +#include <dm/device.h>
 +#include <dm/device_compat.h>
@@ -166,208 +186,541 @@ index 00000000000..02a13bd8bce
 +#include <linux/bitops.h>
 +#include <linux/errno.h>
 +#include <linux/io.h>
-+#include <log.h>
 +
-+#define GPIO_BANK_SIZE		32
-+#define GPIO_TO_BANK(pin)	((pin) / GPIO_BANK_SIZE)
-+#define GPIO_TO_BIT(pin)	((pin) % GPIO_BANK_SIZE)
++/*
++ * +---------+----------+-----------+--------+--------+----------+--------+
++ * |   pull  |   drive  | schmitter |  slew  |  edge  |  strong  |   mux  |
++ * | up/down | strength |  trigger  |  rate  | detect |   pull   |  mode  |
++ * +---------+----------+-----------+--------+--------+----------+--------+
++ *   3 bits     3 bits     2 bits     1 bit    3 bits     1 bit    3 bits
++ */
 +
-+static inline int gpio_to_reg_offset(unsigned int pin)
-+{
-+	unsigned int bank = GPIO_TO_BANK(pin);
++#define PAD_MUX			GENMASK(2, 0)
++#define PAD_STRONG_PULL		BIT(3)
++#define PAD_EDGE_RISE		BIT(4)
++#define PAD_EDGE_FALL		BIT(5)
++#define PAD_EDGE_CLEAR		BIT(6)
++#define PAD_SLEW_RATE		GENMASK(12, 11)
++#define PAD_SLEW_RATE_EN	BIT(7)
++#define PAD_SCHMITT		GENMASK(9, 8)
++#define PAD_DRIVE		GENMASK(12, 10)
++#define PAD_PULLDOWN		BIT(13)
++#define PAD_PULLUP		BIT(14)
++#define PAD_PULL_EN		BIT(15)
 +
-+	if (bank == 0)
-+		return 0;
-+	else if (bank == 1)
-+		return 4;
-+	else if (bank == 2)
-+		return 8;
-+	else if (bank == 3)
-+		return 0x100;
-+	log_warning("Use default GPIO bank for an invalid GPIO[%d].\n", pin);
-+	return 0;
-+}
++#define PIN_POWER_STATE_1V8		1800
++#define PIN_POWER_STATE_3V3		3300
 +
-+#define REG_PLR(pin)		(0x00 + gpio_to_reg_offset(pin))
-+#define REG_PDR(pin)		(0x0c + gpio_to_reg_offset(pin))
-+#define REG_PSR(pin)		(0x18 + gpio_to_reg_offset(pin))
-+#define REG_PCR(pin)		(0x24 + gpio_to_reg_offset(pin))
-+#define REG_SDR(pin)		(0x54 + gpio_to_reg_offset(pin))
-+#define REG_CDR(pin)		(0x60 + gpio_to_reg_offset(pin))
-+
-+struct spacemit_gpio_data {
-+	u16	gpio_base;
-+	u16	gpio_count;
-+	u8	num_banks;
++enum spacemit_pin_io_type {
++	IO_TYPE_NONE = 0,
++	IO_TYPE_1V8,
++	IO_TYPE_3V3,
++	IO_TYPE_EXTERNAL,
 +};
 +
-+struct spacemit_gpio_priv {
-+	void __iomem *regs;
++struct spacemit_pin_io {
++	unsigned int	pin : 12;	// 0~4095
++	unsigned int	io_type : 4;	// 0~15
++	unsigned int	ds : 8;		// 0~255
++	unsigned int	reserved : 8;
 +};
 +
-+static int spacemit_gpio_xlate(struct udevice *dev, struct gpio_desc *desc,
-+			       struct ofnode_phandle_args *args)
++struct spacemit_pinctrl_data {
++	struct spacemit_pin_io *io_pins;
++	int nr_io_pins;
++
++	void __iomem * (*pin_to_reg)(struct udevice *dev, unsigned int pin);
++	int (*get_gpio_mux)(struct udevice *dev, unsigned int pin);
++	int (*get_pins)(struct udevice *dev);
++	int (*get_functions)(struct udevice *dev);
++	int (*get_io_type)(struct udevice *dev, unsigned int pin);
++};
++
++struct spacemit_pinctrl_priv {
++	void __iomem		*regs;
++	struct spacemit_pin_io	*io_pins;
++	int			nr_io_pins;
++};
++
++struct spacemit_pin_mux_config {
++	const struct spacemit_pin	*pin;
++	u32				config;
++};
++
++struct spacemit_pin_drv_strength {
++	unsigned int	val : 8;
++	unsigned int	ma : 16;
++	unsigned int	reserved : 8;
++};
++
++static char pin_name[PINNAME_SIZE];
++
++/* External: IO voltage via external source, can be 1.8V or 3.3V */
++static struct spacemit_pin_io k1_io_pins[] = {
++	{ 47, IO_TYPE_EXTERNAL, 0, },
++	{ 48, IO_TYPE_EXTERNAL, 0, },
++	{ 49, IO_TYPE_EXTERNAL, 0, },
++	{ 50, IO_TYPE_EXTERNAL, 0, },
++	{ 51, IO_TYPE_EXTERNAL, 0, },
++	{ 52, IO_TYPE_EXTERNAL, 0, },
++	{ 75, IO_TYPE_EXTERNAL, 0, },
++	{ 76, IO_TYPE_EXTERNAL, 0, },
++	{ 77, IO_TYPE_EXTERNAL, 0, },
++	{ 78, IO_TYPE_EXTERNAL, 0, },
++	{ 79, IO_TYPE_EXTERNAL, 0, },
++	{ 80, IO_TYPE_EXTERNAL, 0, },
++	{ 98, IO_TYPE_EXTERNAL, 0, },
++	{ 99, IO_TYPE_EXTERNAL, 0, },
++	{ 100, IO_TYPE_EXTERNAL, 0, },
++	{ 101, IO_TYPE_EXTERNAL, 0, },
++	{ 102, IO_TYPE_EXTERNAL, 0, },
++	{ 103, IO_TYPE_EXTERNAL, 0, },
++	{ 104, IO_TYPE_EXTERNAL, 0, },
++	{ 105, IO_TYPE_EXTERNAL, 0, },
++	{ 106, IO_TYPE_EXTERNAL, 0, },
++	{ 107, IO_TYPE_EXTERNAL, 0, },
++	{ 108, IO_TYPE_EXTERNAL, 0, },
++	{ 109, IO_TYPE_EXTERNAL, 0, },
++};
++
++static inline int k1_get_pins(struct udevice *dev)
 +{
-+	struct spacemit_gpio_data *data;
-+	u32 bank, offset, flags;
-+
-+	data = (struct spacemit_gpio_data *)dev_get_driver_data(dev);
-+	if (args->args_count < 3) {
-+		dev_err(dev, "Invalid args count: %d, expected 3\n",
-+			args->args_count);
-+		return -EINVAL;
-+	}
-+	bank = args->args[0];
-+	offset = args->args[1];
-+	flags = args->args[2];
-+
-+	if (bank >= data->num_banks) {
-+		dev_err(dev, "Invalid gpio bank: %u (max %u)\n",
-+			bank, data->num_banks - 1);
-+		return -EINVAL;
-+	}
-+	if (offset >= GPIO_BANK_SIZE) {
-+		dev_err(dev, "Invalid offset: %u (max 31)\n", offset);
-+		return -EINVAL;
-+	}
-+	desc->offset = bank * GPIO_BANK_SIZE + offset;
-+	desc->flags = flags;
-+	return 0;
++	return 128;
 +}
 +
-+static int spacemit_gpio_get_value(struct udevice *dev, unsigned int offset)
++static inline int k1_get_functions(struct udevice *dev)
 +{
-+	struct spacemit_gpio_priv *priv = dev_get_priv(dev);
-+	void __iomem *addr;
-+	u32 value, mask;
-+
-+	addr = priv->regs + REG_PLR(offset);
-+	value = readl(addr);
-+	mask = 1 << GPIO_TO_BIT(offset);
-+	return !!(value & mask);
++	return 7;
 +}
 +
-+static int spacemit_gpio_get_function(struct udevice *dev, unsigned int offset)
++// The pin number equals to the gpio number.
++static void __iomem *k1_pin_to_reg(struct udevice *dev, unsigned int pin)
 +{
-+	struct spacemit_gpio_priv *priv = dev_get_priv(dev);
-+	void __iomem *addr;
-+	u32 value, mask;
++	struct spacemit_pinctrl_priv *priv = dev_get_priv(dev);
++	unsigned int offset = 1;
 +
-+	addr = priv->regs + REG_PDR(offset);
-+	value = readl(addr);
-+	mask = 1 << GPIO_TO_BIT(offset);
-+	if (value & mask)
-+		return GPIOF_OUTPUT;
-+	return GPIOF_INPUT;
-+}
-+
-+static int spacemit_gpio_get_flags(struct udevice *dev, unsigned int offset,
-+				   ulong *flagsp)
-+{
-+	ulong flags = 0;
-+	u32 dir;
-+
-+	dir = spacemit_gpio_get_function(dev, offset);
-+	if (dir) {
-+		flags |= GPIOD_IS_OUT;
-+		if (spacemit_gpio_get_value(dev, offset))
-+			flags |= GPIOD_IS_OUT_ACTIVE;
++	if (pin < 86) {
++		offset += pin;
++	} else if (pin < 93) {
++		offset += pin + 36;
++	} else if (pin < 98) {
++		offset += pin + 23;
++	} else if (pin == 98) {		// QSPI_DAT3
++		offset += 92;
++	} else if (pin == 99) {		// QSPI_DAT2
++		offset += 91;
++	} else if (pin == 100) {	// QSPI_DAT1
++		offset += 90;
++	} else if (pin == 101) {	// QSPI_DAT0
++		offset += 89;
++	} else if (pin == 102) {	// QSPI_CLK
++		offset += 94;
++	} else if (pin == 103) {	// QSPI_CS1
++		offset += 93;
++	} else if (pin < 111) {
++		offset += pin + 5;
++	} else if (pin < 128) {
++		offset += pin + 19;
 +	} else {
-+		flags |= GPIOD_IS_IN;
++		dev_err(dev, "Invalid pin (%u)\n", pin);
++		return NULL;
 +	}
-+	*flagsp = flags;
-+	return 0;
++	return priv->regs + (offset << 2);
 +}
 +
-+static int spacemit_gpio_set_flags(struct udevice *dev, unsigned int offset,
-+				   ulong flags)
++static int k1_get_gpio_mux(struct udevice *dev, unsigned int selector)
 +{
-+	struct spacemit_gpio_priv *priv = dev_get_priv(dev);
-+	void __iomem *addr;
-+	int value;
++	u32 mux = 0;
 +
-+	value = (flags & GPIOD_IS_OUT_ACTIVE) ? 1 : 0;
-+	if (flags & GPIOD_IS_IN) {
-+		addr = priv->regs + REG_CDR(offset);
-+		writel(1 << GPIO_TO_BIT(offset), addr);
++	if (selector < 70) {
++		mux = 0;
++	} else if (selector < 74) {
++		mux = 1;
++	} else if (selector < 93) {
++		mux = 0;
++	} else if (selector < 104) {
++		mux = 1;
++	} else if (selector < 110) {
++		mux = 4;
++	} else if (selector < 128) {
++		mux = 0;
++	} else {
++		dev_err(dev, "Invalid pin (%u)\n", selector);
++		return -EINVAL;
 +	}
-+	if (flags & GPIOD_IS_OUT) {
-+		if (value) {
-+			addr = priv->regs + REG_PSR(offset);
-+			writel(1 << GPIO_TO_BIT(offset), addr);
-+		} else {
-+			addr = priv->regs + REG_PCR(offset);
-+			writel(1 << GPIO_TO_BIT(offset), addr);
-+		}
-+		addr = priv->regs + REG_SDR(offset);
-+		writel(1 << GPIO_TO_BIT(offset), addr);
-+	}
-+	return 0;
++	return mux;
 +}
 +
-+static const struct dm_gpio_ops spacemit_gpio_ops = {
-+	.request	= pinctrl_gpio_request,
-+	.rfree		= pinctrl_gpio_free,
-+	.xlate		= spacemit_gpio_xlate,
-+	.get_value	= spacemit_gpio_get_value,
-+	.get_function	= spacemit_gpio_get_function,
-+	.get_flags	= spacemit_gpio_get_flags,
-+	.set_flags	= spacemit_gpio_set_flags,
++static int k1_get_io_type(struct udevice *dev, unsigned int selector)
++{
++	if (selector < 47)
++		return IO_TYPE_1V8;
++	else if (selector < 53)
++		return IO_TYPE_EXTERNAL;
++	else if (selector < 75)
++		return IO_TYPE_1V8;
++	else if (selector < 81)
++		return IO_TYPE_EXTERNAL;
++	else if (selector < 98)
++		return IO_TYPE_1V8;
++	else if (selector < 110)
++		return IO_TYPE_EXTERNAL;
++	else if (selector < 128)
++		return IO_TYPE_1V8;
++	return -EINVAL;
++}
++
++/* use IO high level output current as the table */
++static struct spacemit_pin_drv_strength spacemit_ds_1v8_tbl[4] = {
++	{ 0, 11 },
++	{ 2, 21 },
++	{ 4, 32 },
++	{ 6, 42 },
 +};
 +
-+static int spacemit_gpio_probe(struct udevice *dev)
++static struct spacemit_pin_drv_strength spacemit_ds_3v3_tbl[8] = {
++	{ 0,  7 },
++	{ 2, 10 },
++	{ 4, 13 },
++	{ 6, 16 },
++	{ 1, 19 },
++	{ 3, 23 },
++	{ 5, 26 },
++	{ 7, 29 },
++};
++
++static inline u8 spacemit_get_ds_value(struct spacemit_pin_drv_strength *tbl,
++				       u32 num, u32 ma)
 +{
-+	struct spacemit_gpio_priv *priv;
-+	struct spacemit_gpio_data *data;
-+	struct gpio_dev_priv *uc_priv = dev_get_uclass_priv(dev);
++	int i;
++
++	for (i = 0; i < num; i++)
++		if (ma <= tbl[i].ma)
++			return tbl[i].val;
++
++	return tbl[num - 1].val;
++}
++
++static inline u32 spacemit_get_ds_ma(struct spacemit_pin_drv_strength *tbl,
++				     u32 num, u32 val)
++{
++	int i;
++
++	for (i = 0; i < num; i++)
++		if (val == tbl[i].val)
++			return tbl[i].ma;
++
++	return 0;
++}
++
++static inline u8 spacemit_get_drive_strength(enum spacemit_pin_io_type type,
++					     u32 ma)
++{
++	switch (type) {
++	case IO_TYPE_1V8:
++		return spacemit_get_ds_value(spacemit_ds_1v8_tbl,
++					     ARRAY_SIZE(spacemit_ds_1v8_tbl),
++					     ma);
++	case IO_TYPE_3V3:
++		return spacemit_get_ds_value(spacemit_ds_3v3_tbl,
++					     ARRAY_SIZE(spacemit_ds_3v3_tbl),
++					     ma);
++	default:
++		return 0;
++	}
++}
++
++static inline u32 spacemit_get_drive_strength_ma(enum spacemit_pin_io_type type,
++						 u32 value)
++{
++	switch (type) {
++	case IO_TYPE_1V8:
++		return spacemit_get_ds_ma(spacemit_ds_1v8_tbl,
++					  ARRAY_SIZE(spacemit_ds_1v8_tbl),
++					  value & 0x6);
++	case IO_TYPE_3V3:
++		return spacemit_get_ds_ma(spacemit_ds_3v3_tbl,
++					  ARRAY_SIZE(spacemit_ds_3v3_tbl),
++					  value);
++	default:
++		return 0;
++	}
++}
++
++static inline u16 spacemit_dt_get_pin(u32 value)
++{
++	return value >> 16;
++}
++
++static inline u16 spacemit_dt_get_pin_mux(u32 value)
++{
++	return value & GENMASK(15, 0);
++}
++
++static int spacemit_get_pins_count(struct udevice *dev)
++{
++	struct spacemit_pinctrl_data *data;
++
++	data = (struct spacemit_pinctrl_data *)dev_get_driver_data(dev);
++	if (!data || !data->get_pins)
++		return -EINVAL;
++	return data->get_pins(dev);
++}
++
++static const char *spacemit_get_pin_name(struct udevice *dev,
++					 unsigned int selector)
++{
++	struct spacemit_pinctrl_data *data;
++	unsigned int npins;
++
++	data = (struct spacemit_pinctrl_data *)dev_get_driver_data(dev);
++	if (!data || !data->get_pins)
++		return NULL;
++	npins = data->get_pins(dev);
++
++	if (selector >= npins)
++		snprintf(pin_name, PINNAME_SIZE, "Error");
++	else
++		snprintf(pin_name, PINNAME_SIZE, "PIN%u", selector);
++
++	return pin_name;
++}
++
++static int spacemit_get_functions_count(struct udevice *dev)
++{
++	struct spacemit_pinctrl_data *data;
++
++	data = (struct spacemit_pinctrl_data *)dev_get_driver_data(dev);
++	if (!data || !data->get_functions)
++		return -EINVAL;
++	return data->get_functions(dev);
++}
++
++static int spacemit_get_pin_muxing(struct udevice *dev, unsigned int pin,
++				   char *buf, int size)
++{
++	struct spacemit_pinctrl_data *data;
++	void __iomem *addr;
++	u32 mux, val;
++
++	data = (struct spacemit_pinctrl_data *)dev_get_driver_data(dev);
++	if (!data || !data->pin_to_reg)
++		return -EINVAL;
++
++	addr = data->pin_to_reg(dev, pin);
++	if (!addr)
++		return -EINVAL;
++
++	val = readl(addr);
++	mux = val & PAD_MUX;
++	snprintf(buf, size, "[%p] 0x%08x MUX%d", addr, val, mux);
++	return 0;
++}
++
++static int spacemit_pinctrl_request_gpio(struct udevice *dev,
++					 unsigned int selector)
++{
++	struct spacemit_pinctrl_data *data;
++	void __iomem *addr;
++	int mux;
++
++	data = (struct spacemit_pinctrl_data *)dev_get_driver_data(dev);
++	if (!data || !data->pin_to_reg || !data->get_gpio_mux)
++		return -EINVAL;
++	addr = data->pin_to_reg(dev, selector);
++	mux = data->get_gpio_mux(dev, selector);
++	if (mux < 0) {
++		dev_err(dev, "Invalid pin (%d)\n", selector);
++		return -EINVAL;
++	}
++	clrsetbits_le32(addr, PAD_MUX, mux & PAD_MUX);
++	return 0;
++}
++
++static int spacemit_pinctrl_free_gpio(struct udevice *dev,
++				      unsigned int selector)
++{
++	return 0;
++}
++
++static int spacemit_pinmux_set(struct udevice *dev, unsigned int pin,
++			       unsigned int mux)
++{
++	struct spacemit_pinctrl_data *data;
++	void __iomem *addr;
++
++	data = (struct spacemit_pinctrl_data *)dev_get_driver_data(dev);
++	if (!data || !data->pin_to_reg)
++		return -EINVAL;
++	addr = data->pin_to_reg(dev, pin);
++	clrsetbits_le32(addr, PAD_MUX, mux & PAD_MUX);
++	return 0;
++}
++
++static int spacemit_pinmux_property_set(struct udevice *dev, u32 pinmux_group)
++{
++	u32 pin, mux;
++
++	pin = spacemit_dt_get_pin(pinmux_group);
++	mux = spacemit_dt_get_pin_mux(pinmux_group);
++	return spacemit_pinmux_set(dev, pin, mux);
++}
++
++static const struct pinconf_param spacemit_pinconf_params[] = {
++	{ "bias-disable",	PIN_CONFIG_BIAS_DISABLE,	0 },
++	{ "bias-pull-down",	PIN_CONFIG_BIAS_PULL_DOWN,	1 },
++	{ "bias-pull-up",	PIN_CONFIG_BIAS_PULL_UP,	1 },
++	{ "drive-strength",	PIN_CONFIG_DRIVE_STRENGTH,	U32_MAX },
++	{ "power-source",	PIN_CONFIG_POWER_SOURCE,	U32_MAX },
++};
++
++static int spacemit_pinconf_set(struct udevice *dev, unsigned int pin_selector,
++				unsigned int param, unsigned int argument)
++{
++	struct spacemit_pinctrl_data *data;
++	struct spacemit_pinctrl_priv *priv = dev_get_priv(dev);
++	void __iomem *addr;
++	u32 mask = 0;
++	unsigned int io_type;
++	u8 ds;
++	bool found;
++	int i;
++
++	data = (struct spacemit_pinctrl_data *)dev_get_driver_data(dev);
++	if (!data || !data->pin_to_reg)
++		return -EINVAL;
++	addr = data->pin_to_reg(dev, pin_selector);
++	switch (param) {
++	case PIN_CONFIG_BIAS_DISABLE:
++		clrbits_le32(addr, PAD_PULLUP | PAD_PULLDOWN | PAD_PULL_EN);
++		break;
++	case PIN_CONFIG_BIAS_PULL_DOWN:
++		mask = PAD_PULLDOWN | PAD_PULLUP | PAD_PULL_EN;
++		clrsetbits_le32(addr, mask, PAD_PULLDOWN | PAD_PULL_EN);
++		break;
++	case PIN_CONFIG_BIAS_PULL_UP:
++		mask = PAD_PULLDOWN | PAD_PULLUP | PAD_PULL_EN;
++		clrsetbits_le32(addr, mask, PAD_PULLUP | PAD_PULL_EN);
++		break;
++	case PIN_CONFIG_DRIVE_STRENGTH:
++		io_type = IO_TYPE_1V8;
++		for (i = 0; i < priv->nr_io_pins; i++) {
++			if (priv->io_pins[i].pin != pin_selector)
++				continue;
++			io_type = priv->io_pins[i].io_type;
++			break;
++		}
++		if (io_type != IO_TYPE_3V3 && io_type != IO_TYPE_1V8) {
++			dev_err(dev, "Invalid IO type (%d)\n", io_type);
++			return -EINVAL;
++		}
++		ds = spacemit_get_drive_strength(io_type, argument);
++		clrsetbits_le32(addr, PAD_DRIVE, ds);
++		break;
++	case PIN_CONFIG_POWER_SOURCE:
++		for (i = 0, found = false; i < priv->nr_io_pins; i++) {
++			if (priv->io_pins[i].pin != pin_selector)
++				continue;
++			if (argument == PIN_POWER_STATE_3V3) {
++				priv->io_pins[i].io_type = IO_TYPE_3V3;
++				found = true;
++			} else if (argument == PIN_POWER_STATE_1V8) {
++				priv->io_pins[i].io_type = IO_TYPE_1V8;
++				found = true;
++			}
++			break;
++		}
++		if (!found && argument != PIN_POWER_STATE_1V8) {
++			dev_err(dev, "Invalid power source (%d)\n", argument);
++			return -EINVAL;
++		}
++		break;
++	default:
++		return -EOPNOTSUPP;
++	}
++	return 0;
++}
++
++static int spacemit_pinctrl_probe(struct udevice *dev)
++{
++	struct spacemit_pinctrl_data *data;
++	struct spacemit_pinctrl_priv *priv;
 +	struct clk_bulk clks;
++	size_t size;
 +	int ret;
 +
-+	data = (struct spacemit_gpio_data *)dev_get_driver_data(dev);
++	data = (struct spacemit_pinctrl_data *)dev_get_driver_data(dev);
 +	priv = dev_get_priv(dev);
 +	priv->regs = dev_read_addr_ptr(dev);
 +	if (!priv->regs) {
 +		dev_err(dev, "Fail to get base address\n");
 +		return -EINVAL;
 +	}
-+	uc_priv->bank_name = "GPIO";
-+	uc_priv->gpio_count = data->gpio_count;
-+	uc_priv->gpio_base = data->gpio_base;
++	priv->nr_io_pins = data->nr_io_pins;
++	size = priv->nr_io_pins * sizeof(struct spacemit_pin_io);
++	priv->io_pins = (struct spacemit_pin_io *)memdup(data->io_pins, size);
++	if (!priv->io_pins) {
++		dev_err(dev, "Fail to allocate memory\n");
++		return -ENOMEM;
++	}
 +
 +	ret = clk_get_bulk(dev, &clks);
 +	if (ret) {
 +		dev_err(dev, "Fail to get bulk clks\n");
-+		return ret;
++		goto out_get_clk;
 +	}
 +	ret = clk_enable_bulk(&clks);
 +	if (ret) {
 +		dev_err(dev, "Fail to enable bulk clks\n");
-+		goto out;
++		goto out_clks;
 +	}
 +	return 0;
-+out:
++out_clks:
 +	clk_release_bulk(&clks);
++out_get_clk:
++	free(priv->io_pins);
 +	return ret;
 +}
 +
-+static const struct spacemit_gpio_data k1_gpio_data = {
-+	.num_banks	= 4,
-+	.gpio_count	= 128,
-+	.gpio_base	= 0,
++static const struct spacemit_pinctrl_data k1_pinctrl_data = {
++	.io_pins	= k1_io_pins,
++	.nr_io_pins	= ARRAY_SIZE(k1_io_pins),
++	.pin_to_reg	= k1_pin_to_reg,
++	.get_gpio_mux	= k1_get_gpio_mux,
++	.get_pins	= k1_get_pins,
++	.get_functions	= k1_get_functions,
++	.get_io_type	= k1_get_io_type,
 +};
 +
-+static const struct udevice_id spacemit_gpio_ids[] = {
-+	{ .compatible = "spacemit,k1-gpio", .data = (uintptr_t)&k1_gpio_data, },
-+	{ /* sentinel */ }
++static const struct udevice_id spacemit_pinctrl_ids[] = {
++	{
++		.compatible = "spacemit,k1-pinctrl",
++		.data = (uintptr_t)&k1_pinctrl_data,
++	}, { /* sentinel */ }
 +};
 +
-+U_BOOT_DRIVER(k1_gpio) = {
-+	.name		= "spacemit_k1_gpio",
-+	.id		= UCLASS_GPIO,
-+	.of_match	= spacemit_gpio_ids,
-+	.ops		= &spacemit_gpio_ops,
-+	.priv_auto	= sizeof(struct spacemit_gpio_priv),
-+	.probe		= spacemit_gpio_probe,
++static const struct pinctrl_ops spacemit_pinctrl_ops = {
++	.get_pins_count		= spacemit_get_pins_count,
++	.get_pin_name		= spacemit_get_pin_name,
++	.get_functions_count	= spacemit_get_functions_count,
++	.get_pin_muxing		= spacemit_get_pin_muxing,
++	.set_state		= pinctrl_generic_set_state,
++	.gpio_request_enable	= spacemit_pinctrl_request_gpio,
++	.gpio_disable_free	= spacemit_pinctrl_free_gpio,
++	.pinmux_set		= spacemit_pinmux_set,
++	.pinmux_property_set	= spacemit_pinmux_property_set,
++	.pinconf_num_params	= ARRAY_SIZE(spacemit_pinconf_params),
++	.pinconf_params		= spacemit_pinconf_params,
++	.pinconf_set		= spacemit_pinconf_set,
++};
++
++U_BOOT_DRIVER(spacemit_pinctrl) = {
++	.name		= "spacemit_pinctrl",
++	.id		= UCLASS_PINCTRL,
++	.of_match	= spacemit_pinctrl_ids,
++	.ops		= &spacemit_pinctrl_ops,
++	.priv_auto	= sizeof(struct spacemit_pinctrl_priv),
++	.probe		= spacemit_pinctrl_probe,
 +};
 -- 
 2.25.1
