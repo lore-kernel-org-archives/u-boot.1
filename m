@@ -4,25 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A328F94CA2
-	for <u-boot@archiver.kernel.org>; Wed, 22 Apr 2026 01:46:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 122D3F94CBC
+	for <u-boot@archiver.kernel.org>; Wed, 22 Apr 2026 01:46:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7190983C51;
-	Wed, 22 Apr 2026 03:46:27 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 460828412A;
+	Wed, 22 Apr 2026 03:46:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="NxJhtdGc";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="Xmkmqu7e";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="KijCAcfk";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="H8dMfGJ9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 399B083BC8; Wed, 22 Apr 2026 03:46:26 +0200 (CEST)
-Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org
- [IPv6:2001:67c:2050:0:465::202])
+ id 7971583FFA; Wed, 22 Apr 2026 03:46:28 +0200 (CEST)
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
+ [IPv6:2001:67c:2050:0:465::102])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3F90183936
- for <u-boot@lists.denx.de>; Wed, 22 Apr 2026 03:46:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A353C83936
+ for <u-boot@lists.denx.de>; Wed, 22 Apr 2026 03:46:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
@@ -31,54 +31,52 @@ Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4g0hsC6wTvz9tlV;
- Wed, 22 Apr 2026 03:46:23 +0200 (CEST)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4g0hsG334Mz9tgL;
+ Wed, 22 Apr 2026 03:46:26 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1776822384;
+ s=mail20150812; t=1776822386;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=5GrWt0eP60DE40ZOJhaTvS8v3xSdwyNfP0fMZjoeeeU=;
- b=NxJhtdGc9D1Ki/GRWkJM4clLzgNSVOgw+XYkFLeQnebVfA5gd6sI9JxPJ7YEivSW4hWhl+
- PU8mUrcy3SLmszYUR1rXpcCpt0qKAvE3O8y6mTW6KzzUXhT2/zn1Hn+z/pkfmt8Uvn7ci5
- AnUJFIiPbaCsiHVAHltiN+sxMSySD7tlBPlEy52MJM3lOsT+BkBZBih+eakDBgpaZWc52v
- mY6ne6QC55zSwlQrxHEdLWxEcwkTKozIOgWezNyT64yuCgu6NmDa2STVUto5BWuW3yUHRW
- SJvwTNsGnAy70RgYytqi4VpOu0KOCqzeVa2NW0cXb6xfN35QaLeRhiJQQodlCw==
-Message-ID: <69ea2021-48e0-4b16-ae97-0d56b85b88d7@mailbox.org>
+ bh=ZZ+4o81aV/zvRQm9j4NB6u8TSyniFZJyHcO1Ex2kGYI=;
+ b=KijCAcfkENyVm+2A8HHpmqWj0gAvhUlJv77fFlP6XtMDPqWpsQnKxFNEz3GlPBNUwsIrA1
+ 0TwiVLkVbC+H/w1nnuZJLqF9Pm8A+3eOFW1Xxr4jtkLQ1zi2ncVnmDs/gOVObcM3FRoIub
+ wn4ZSscrVUB2ard88Oq03WyAsS3KUG+8CKi0gj2jUPCgcB7szM9Z7Dhno+EB6LzmGD6acO
+ 1CKPqyTpHxKSvsEFFKrGOHEDV35j2uPbfQ0QYjDsjASgoiSLjYkpZa2fWgvOHoNMBlwnfO
+ vx/JFtk+GCW4xPNuI6bPgnKA1ldn5WhFaApP8wzAv0v+AKht3s4/gfahwCJIeQ==
+Message-ID: <41c9c73f-63ac-4ddf-98f4-d2762e94f0c8@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1776822382;
+ s=mail20150812; t=1776822385;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=5GrWt0eP60DE40ZOJhaTvS8v3xSdwyNfP0fMZjoeeeU=;
- b=Xmkmqu7eiqR+W3Jx8wZJcdNjVZHH749dgV/nfjyuJPHPmd8qGZO/ZyEzw9c1JIgLUediaS
- LYGtDtocny0FF4DMXZ6vHdzZalMoVa7FzPPNCNmDVJ5A52L1s+ab9yMKj5Tq6PZVAfq85f
- uWa+TB2/g7KQj4wqiaBprgWkx9TCl8iQzLXl4nGoEMTIq8tV+HdieAy8ytP7ku/VJbiZF7
- 7Iv2QXBjH9HB0ggIJYKWkX6suMISAU5qluNucnzjn7V96991ErxNgAEFo+DMJiX0k92E5r
- CDu/lFdBizAoQjf7aSqJfcRJ0qgMxg1pr0mF39SjzEbqV3sZpSyLOJAUUScqgg==
-Date: Wed, 22 Apr 2026 03:14:50 +0200
+ bh=ZZ+4o81aV/zvRQm9j4NB6u8TSyniFZJyHcO1Ex2kGYI=;
+ b=H8dMfGJ9t/UFPD4xlwNU4jxeZX6SU9PBrEu4Uw+gMb5HdPEPcN8fM59jPFfg7XyXi+Otvm
+ ZfvIeJKkOJmRiwoS+fCEuMaIaX9vCsSLh12a4VsDjAh7pcXn5aR3Yq+VW+gNR48mCZ81gx
+ oPcnOYUQjmQEMqLl4Ro+lKPNexuC7KCIJ1Xz8DtbE7Xs2B/zgO7OlukFCCLqrvWVuoRQ9I
+ R8BF3wjQu3ivn7+LpkPwxJoJc8luMi8gdSC1Z6b3JygEXoYqBkvot2OWToZJOHN4poEhaP
+ +XIByfybfh6/4hiqvycMpaT8t8O/ycaIjzftCFTHydWuWf5RBwUU8vq2u913kA==
+Date: Wed, 22 Apr 2026 03:16:15 +0200
 MIME-Version: 1.0
-Subject: Re: [PATCH v3] net: phy: fix duplicate eth_phy binding
-To: Pranav Tilak <pranav.vinaytilak@amd.com>, u-boot@lists.denx.de,
- michal.simek@amd.com
-Cc: git@amd.com, padmarao.begari@amd.com,
- Jerome Forissier <jerome.forissier@arm.com>, Tom Rini <trini@konsulko.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- "SkyLake.Huang" <skylake.huang@mediatek.com>,
- "Lucien.Jheng" <lucienzx159@gmail.com>, Peng Fan <peng.fan@nxp.com>,
- Siddharth Vadapalli <s-vadapalli@ti.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Ramon Fried <rfried.dev@gmail.com>
-References: <20260421113445.3834570-1-pranav.vinaytilak@amd.com>
+Subject: Re: [PATCH] usb: gadget: renesas: add support for RZ/G2L SoC
+To: Michele Bisogno <micbis.openwrt@gmail.com>
+Cc: u-boot@lists.denx.de, marek.vasut+renesas@mailbox.org, paul@pbarker.dev,
+ jh80.chung@samsung.com, peng.fan@nxp.com, lukma@denx.de,
+ mkorpershoek@kernel.org, trini@konsulko.com
+References: <20260415172113.273702-1-micbis.openwrt@gmail.com>
+ <aaa1648f-7aa0-4a76-b21f-3566bf40f528@mailbox.org>
+ <CAP8xZ6mEb8A8epx+j_f=NS80hdOD7MvzzuUHDb3R70WgXioBjw@mail.gmail.com>
+ <5aaaf387-f48b-4fe0-8461-7c3f05e27fe2@mailbox.org>
+ <CAP8xZ6n3=ryYZF7hmx1-m-CHneAt9eyKwKy0qWRzLNCpF+mwRA@mail.gmail.com>
 Content-Language: en-US
 From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20260421113445.3834570-1-pranav.vinaytilak@amd.com>
+In-Reply-To: <CAP8xZ6n3=ryYZF7hmx1-m-CHneAt9eyKwKy0qWRzLNCpF+mwRA@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: 62320f5d3d885337870
-X-MBO-RS-META: bicnw1h7zponz45s8w8iurtthaujj77g
+X-MBO-RS-META: gznszw7ardmk9mitxd59xxotdieyuu7w
+X-MBO-RS-ID: 48db31876a797ca9372
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,45 +93,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 4/21/26 1:34 PM, Pranav Tilak wrote:
-> When both CONFIG_PHY_ETHERNET_ID and CONFIG_DM_ETH_PHY are enabled,
-> eth_phy_binds_nodes() called from eth_post_bind() already binds the
-> ethernet PHY node to eth_phy_generic_drv. However, phy_connect_phy_id()
-> called via phy_connect() also binds the same PHY node, resulting in
-> duplicate entries in the DM tree.
-> 
-> Fix this by checking at the beginning of phy_connect() whether the PHY
-> is already bound via uclass_get_device_by_phandle(). If so, skip all
-> generic binding methods.
-> 
-> Fixes: 68a4d1506109 ("net: phy: Bind ETH_PHY uclass driver to each new PHY")
-> Signed-off-by: Pranav Tilak <pranav.vinaytilak@amd.com>
-> ---
-> Changes in v3:
-> - Moved duplicate binding check to beginning of phy_connect()
-> 
-> Changes in v2:
-> - Move duplicate binding check to caller phy_connect()
-> - Update commit description
-> 
->   drivers/net/phy/phy.c | 6 ++++++
->   1 file changed, 6 insertions(+)
-> 
-> diff --git a/drivers/net/phy/phy.c b/drivers/net/phy/phy.c
-> index d7e0c4fe02d..b1eb5173fe8 100644
-> --- a/drivers/net/phy/phy.c
-> +++ b/drivers/net/phy/phy.c
-> @@ -927,7 +927,12 @@ struct phy_device *phy_connect(struct mii_dev *bus, int addr,
->   {
->   	struct phy_device *phydev = NULL;
->   	uint mask = (addr >= 0) ? (1 << addr) : 0xffffffff;
-> +	struct udevice *phy_dev;
->   
-> +	/* Skip binding if PHY already bound by eth_phy_binds_nodes(). */
-> +	if (!IS_ENABLED(CONFIG_DM_ETH_PHY) ||
-> +	    uclass_get_device_by_phandle(UCLASS_ETH_PHY, dev,
-> +					 "phy-handle", &phy_dev)) {
+On 4/21/26 9:32 AM, Michele Bisogno wrote:
 
-You can not simply disable the phy_connect() code if DM_ETH_PHY is 
-enabled, that will break a lot of users. There has to be some runtime 
-check here to determine whether a PHY is already connected or not.
+Hello Michele,
+
+> thank you for your comments and suggestions.
+> 
+>> If Linux also contains the PIO code, it would also benefit from matching
+>> improvement, right ?
+> 
+> Yes, though I have found the fix is not strictly required. We can maintain
+> synchronization between both repositories by utilizing the cfifo_byte_addr
+> parameter for the RZ/G2L and similar devices, allowing us to leave the
+> existing PIO code untouched.
+> 
+>> This should be a separate bugfix patch.
+> 
+> Agreed.
+> 
+>> Ideally, let's try to keep the Linux and U-Boot driver code base
+>> synchronized as much as possible.
+> 
+> Understood. I am currently preparing a revised patch set that aligns with
+> this approach to ensure consistency between the codebases.
+Thank you !
