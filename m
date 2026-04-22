@@ -4,61 +4,120 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 002B9FA1FC7
-	for <u-boot@archiver.kernel.org>; Wed, 22 Apr 2026 15:54:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7F2FFA1FD3
+	for <u-boot@archiver.kernel.org>; Wed, 22 Apr 2026 16:26:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 58D6A843B6;
-	Wed, 22 Apr 2026 17:54:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=postmarketos.org
+	by phobos.denx.de (Postfix) with ESMTP id 94855842EF;
+	Wed, 22 Apr 2026 18:26:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=postmarketos.org header.i=@postmarketos.org header.b="sNbNpsbL";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="D4qaAxno";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5C1C4843C0; Wed, 22 Apr 2026 17:54:43 +0200 (CEST)
-Received: from out-186.mta1.migadu.com (out-186.mta1.migadu.com
- [95.215.58.186])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 46487842BF; Wed, 22 Apr 2026 18:26:38 +0200 (CEST)
+Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
+ [IPv6:2a00:1450:4864:20::32f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 711B684370
- for <u-boot@lists.denx.de>; Wed, 22 Apr 2026 17:54:40 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=postmarketos.org
+ by phobos.denx.de (Postfix) with ESMTPS id 7B09484262
+ for <u-boot@lists.denx.de>; Wed, 22 Apr 2026 18:26:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=funderscore@postmarketos.org
-Date: Wed, 22 Apr 2026 15:51:45 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=postmarketos.org;
- s=key1; t=1776873279;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=aSvV/YsZs8s+uc/E5MAN/mtwGsBehxds7qAIBdhZKyc=;
- b=sNbNpsbLDh2zVta8mbBu7HZZaFd5stYmEJ2xhiW1ryrnv92OP0iRKMJ7NRe08II7xGibcQ
- kUPMLCHbKO1T7oKcsxWm/+jgEZCosyMR8GWjZQYaUOpjfh/gCE14U17pBtWpexKlzcukop
- bWuNKJsKdCI1P5veF63naSF7N0pVsR+EJDLhDZqj7/IrjKnrv1l4ddKifqhSqjL/A1g1OF
- DD3iQtA1GaP2Jmd0seFHp/98VIZLriTJC5/lTUd39IouXCfBSDCyxqvXBJMZtV3z3+PYXZ
- UrmnFb8/9aWYT++vAg8C1FDsdRo5Udcy0ZboANYP61u7kFOZimaVsij1+7DobA==
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
- include these headers.
-From: Ferass El Hafidi <funderscore@postmarketos.org>
-To: Neil Armstrong <neil.armstrong@linaro.org>, u-boot-amlogic@groups.io,
- u-boot@lists.denx.de
-Cc: Lukasz Majewski <lukma@denx.de>, Tom Rini <trini@konsulko.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Marek Vasut <marek.vasut+usb@mailbox.org>,
- Peter Robinson <pbrobinson@gmail.com>, Svyatoslav Ryhel <clamor95@gmail.com>,
- Simon Glass <sjg@chromium.org>,
- Ferass El Hafidi <funderscore@postmarketos.org>,
- Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH] clk: meson: do not fail when setting SD_EMMC_x_CLK0
-References: <20260422-u-boot-amlogic-test-v1-1-b5790d3c04e0@linaro.org>
-In-Reply-To: <20260422-u-boot-amlogic-test-v1-1-b5790d3c04e0@linaro.org>
-Message-ID: <tdwk56.2ups5wleej3c0@postmarketos.org>
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-488d2079582so66728645e9.2
+ for <u-boot@lists.denx.de>; Wed, 22 Apr 2026 09:26:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1776875195; x=1777479995; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:from:to:cc:subject:date:message-id
+ :reply-to; bh=cuCeYogGpkN/LhhedCGAUq7c/dseD6cXD/qn9VdqF2U=;
+ b=D4qaAxnoYqiAH004s/yR2r8KFGqksmAy9P5cgonV1sI5NCx3IcNxGNg0UE+45JUF9A
+ ZNOAWGuVg89mAZArNkt/q6Cx4QTrOYwe7H/2b97YeY0VDxt6KTZsYdjtMXEzgDDNayCe
+ mOyzxVLgQvY3yWWPsQXVixLCxajE9Z9FSV2ElxYdH96XMcPD3P7noz/rbjq4WutPt/b0
+ WjaBJsEYrcIO9FKSYap63+HkiFOYuhqh6u7Zt32yMvikh0ZAbKFTqzzTWtaaMJ7cpCxY
+ aVt2jb76ZccjJ+B7M4GQ+P6gn+E/hNWMRpiMFg6EiRnB2+a/LECr4HdkCsreU+Ztko9g
+ l0sw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1776875195; x=1777479995;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=cuCeYogGpkN/LhhedCGAUq7c/dseD6cXD/qn9VdqF2U=;
+ b=l6hqZi6gSfOcQPH0qAAE5ZrEmp/w2aM8CoPMc4C69Ds3/xgfj9BfVR6NFl13qYvYzq
+ 6TJ9q0Wv+5av4VpsOfdPGO+mIgQsVl0gpTbrajapx1u8zMxL4lAFDNfdjH65EyzJ4Ggo
+ NdlvAPCkKxHdySmwDiGM8y3SH0fO3B+iqKfEvz9Zy8Fi6PAicIRvdZlHPvJONi1q/ROQ
+ H4+UNpxVA6QL+SQ0YFigA/OhI6ve+gFAYHSwI3niiHNq2R/uDBM0PMCTHrZJ42Bafo6c
+ LG8oiOPTxx7oAg5U+nUvhBhJJdTb8vW8MLcclBa8gBvHMEB1rDHQvWPAIM5sBQryiOTH
+ ZTEg==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ/UoP65C5rg2dr+QL9FkA+yUlt/y83xu40YWTIgRQbaBob2RZ7NOJpgK2MLpF9Idxx9R11nChg=@lists.denx.de
+X-Gm-Message-State: AOJu0YzSuF4mPYUpaVhnaW1RtYKkmv9Q93Jy4mUzMz/QXPhu88etw1e7
+ QKohRsQgCcCs1f04Rvbh1UUIpTWmiL0xqr/XotqTkuAGG/K71LUtIBtBFg5o3d0tM4s=
+X-Gm-Gg: AeBDieu87crjx6Ad+SaS3PTE2NmbTKNkN6lG0Wg2BxVMunvCb3JrA5AwTMS/foxN6Cd
+ CRfVNAFpFN57rOOvrMYo/gAcWnUXf3UJjjsWaHU2VHTnMdXGjIuCnrz8VgHk9IeZbtBZaqyhAIB
+ Ah8AsAEahmomLqo2G8xETopWO9tLky9B7YVhR7aYT7jjGUS3AceihqVaXaBAYwxNEyNtTgdiyxI
+ yfUcsLbzZQrkPdyEMGReZTYWbeduX+PddQ3c8x/YEdnCJrjFxXiKCZvjeT2KYT6aAFnj+lxJK3Z
+ 3VzYY43WYh/WMAMVQ7JjpA3MWV5nvLmlhIbS2bNUeVJVgmoFr+KzzH4SpbJZSWCRdOFQ7qPPQaE
+ 6uR+/5hsIe+BUXNkcvx0Hn+iALxYwTPqxqhdHvF1FV+pTVWz9356WUuvL4oOplJYGrVpdmJ8iX+
+ ajgDxIcg0vVi9O/2gBa1KPFsgwz0VNNkjQLuDYj2ShaAv30pfpULYtv11wMTznkAQtLna37K7PR
+ B4tBSYGKjZ6jRz0WQ==
+X-Received: by 2002:a05:600c:444a:b0:487:1520:d107 with SMTP id
+ 5b1f17b1804b1-488fb793580mr307763075e9.31.1776875194750; 
+ Wed, 22 Apr 2026 09:26:34 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:106d:1080:7d92:9cde:4eb2:46d7?
+ ([2a01:e0a:106d:1080:7d92:9cde:4eb2:46d7])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-48a5d27d6casm4330665e9.27.2026.04.22.09.26.34
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 22 Apr 2026 09:26:34 -0700 (PDT)
+Message-ID: <48d4b6e1-b150-42cb-9949-d99a08fcdbcf@linaro.org>
+Date: Wed, 22 Apr 2026 18:26:33 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain; charset=utf-8; format=flowed
-X-Migadu-Flow: FLOW_OUT
+User-Agent: Mozilla Thunderbird
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Subject: Re: [PATCH v3 1/4] arm: mach-meson: provide reset_cpu only when
+ SYSRESET is disabled
+To: Ferass El Hafidi <funderscore@postmarketos.org>,
+ u-boot-amlogic@groups.io, u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>,
+ Evgeny Bachinin <EABachinin@salutedevices.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>
+References: <20260422-b4-amlogic-sysreset-capsules-v3-0-07b5ccc8f552@postmarketos.org>
+ <20260422-b4-amlogic-sysreset-capsules-v3-1-07b5ccc8f552@postmarketos.org>
+Content-Language: en-US, fr
+Autocrypt: addr=neil.armstrong@linaro.org; keydata=
+ xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
+ GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
+ BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
+ qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
+ 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
+ AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
+ OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
+ Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
+ YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
+ GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
+ UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
+ GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
+ yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
+ QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
+ SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
+ 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
+ Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
+ oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
+ M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
+ 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
+ KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
+ 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
+ QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
+Organization: Linaro
+In-Reply-To: <20260422-b4-amlogic-sysreset-capsules-v3-1-07b5ccc8f552@postmarketos.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,74 +129,54 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Neil,
+On 4/22/26 17:43, Ferass El Hafidi wrote:
+> This is in preparation of enabling SYSRESET across all Amlogic boards by
+> default. SYSRESET brings its own reset_cpu implementation which will
+> conflict with the one defined in board-common.c.
+> SPL however will not have SYSRESET enabled (due to overhead in the final
+> image, as we have very little space to work with), and thus will still
+> need that reset_cpu to be defined. Furthermore, some boards do not enable
+> PSCI support in U-Boot, so they may still need this implementation.
+> Guard reset_cpu inside #ifdef to only compile it in when SYSRESET is not
+> enabled.
+> 
+> Signed-off-by: Ferass El Hafidi <funderscore@postmarketos.org>
+> ---
+>   arch/arm/mach-meson/board-common.c | 6 ++----
+>   1 file changed, 2 insertions(+), 4 deletions(-)
+> 
+> diff --git a/arch/arm/mach-meson/board-common.c b/arch/arm/mach-meson/board-common.c
+> index a5afc2d75c0..c34b81e5e78 100644
+> --- a/arch/arm/mach-meson/board-common.c
+> +++ b/arch/arm/mach-meson/board-common.c
+> @@ -155,16 +155,14 @@ int board_late_init(void)
+>   	return meson_board_late_init();
+>   }
+>   
+> +#if defined(CONFIG_XPL) || !CONFIG_IS_ENABLED(SYSRESET)
+>   void reset_cpu(void)
+>   {
+> -#if CONFIG_SPL_BUILD
+>   	/*
+>   	 * We do not have BL31 running yet, so no PSCI.
+>   	 * Instead, let the watchdog reset the board.
+>   	 */
+>   	for (;;)
+>   		;
+> -#else
+> -	psci_system_reset();
+> -#endif
+>   }
+> +#endif
+> 
 
-On Wed, 22 Apr 2026 08:48, Neil Armstrong <neil.armstrong@linaro.org> wrote:
->Since Linux v7.0, the MMC controllers has the following properties:
->  assigned-clocks = <&clkc CLKID_SD_EMMC_x_CLK0>;
->  assigned-clock-rates = <24000000>;
->Which causes mmc controllers to fail in probe.
->
->Make sure we do not fail until we properly implement rate setup.
->
->Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
->---
+Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
 
-This works on my board, thank you! Here's my:
-
-Tested-by: Ferass El Hafidi <funderscore@postmarketos.org> # on lepotato
-
-> drivers/clk/meson/g12a.c | 5 +++++
-> drivers/clk/meson/gxbb.c | 5 +++++
-> 2 files changed, 10 insertions(+)
->
->diff --git a/drivers/clk/meson/g12a.c b/drivers/clk/meson/g12a.c
->index a7a42b2edb6..f33938e1419 100644
->--- a/drivers/clk/meson/g12a.c
->+++ b/drivers/clk/meson/g12a.c
->@@ -946,6 +946,11 @@ static ulong meson_clk_set_rate_by_id(struct clk *clk, unsigned long id,
-> 	case CLKID_HDMI:
-> 		return meson_clk_set_rate_by_id(clk, CLKID_HDMI_DIV,
-> 						rate, current_rate);
->+	case CLKID_SD_EMMC_A_CLK0:
->+	case CLKID_SD_EMMC_B_CLK0:
->+	case CLKID_SD_EMMC_C_CLK0:
->+		/* TOFIX: implement rate set for MMC clocks */
->+		return 0;
-> 	default:
-> 		return -ENOENT;
-> 	}
->diff --git a/drivers/clk/meson/gxbb.c b/drivers/clk/meson/gxbb.c
->index 218be45c2cb..bf46f4d50bc 100644
->--- a/drivers/clk/meson/gxbb.c
->+++ b/drivers/clk/meson/gxbb.c
->@@ -900,6 +900,11 @@ static ulong meson_clk_set_rate_by_id(struct clk *clk, unsigned long id,
-> 	case CLKID_HDMI:
-> 		return meson_clk_set_rate_by_id(clk, CLKID_HDMI_DIV,
-> 						rate, current_rate);
->+	case CLKID_SD_EMMC_A_CLK0:
->+	case CLKID_SD_EMMC_B_CLK0:
->+	case CLKID_SD_EMMC_C_CLK0:
->+		/* TOFIX: implement rate set for MMC clocks */
->+		return 0;
-> 	default:
-> 		return -ENOENT;
-> 	}
->
->---
->base-commit: 052988aa29bfd506d7ce207fbb3f5374a5dbecbb
->change-id: 20260422-u-boot-amlogic-test-6bd61f679c90
->
->Best regards,
->--  
->Neil Armstrong <neil.armstrong@linaro.org>
->
-
---
-Best regards,
-Ferass
+Thanks,
+Neil
