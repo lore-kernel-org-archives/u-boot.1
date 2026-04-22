@@ -4,96 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69C1AF94CA2
-	for <u-boot@archiver.kernel.org>; Wed, 22 Apr 2026 01:16:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2271FF94CA2
+	for <u-boot@archiver.kernel.org>; Wed, 22 Apr 2026 01:16:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 61D1A83BC8;
-	Wed, 22 Apr 2026 03:16:18 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id AF64C842B7;
+	Wed, 22 Apr 2026 03:16:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="aI/Iq6FW";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="m6tiLbLf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 77495805D7; Wed, 22 Apr 2026 03:16:17 +0200 (CEST)
-Received: from mail-pl1-x62d.google.com (mail-pl1-x62d.google.com
- [IPv6:2607:f8b0:4864:20::62d])
+ id 967BD805D7; Wed, 22 Apr 2026 03:16:33 +0200 (CEST)
+Received: from mail-pl1-x634.google.com (mail-pl1-x634.google.com
+ [IPv6:2607:f8b0:4864:20::634])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2F33C841C8
- for <u-boot@lists.denx.de>; Wed, 22 Apr 2026 03:16:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4F321840D8
+ for <u-boot@lists.denx.de>; Wed, 22 Apr 2026 03:16:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pl1-x62d.google.com with SMTP id
- d9443c01a7336-2b788a98557so9439595ad.2
- for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 18:16:15 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1776820574; cv=none;
+Received: by mail-pl1-x634.google.com with SMTP id
+ d9443c01a7336-2a7a9b8ed69so41572765ad.2
+ for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 18:16:31 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1776820590; cv=none;
  d=google.com; s=arc-20240605;
- b=JUjUgr/vRs4Ex5rMHKVZ1GTANJdJW0nSOSrZdgwwcA5htWPAiGscJIU+jcrp/D2ncN
- wVCr+nBWIVLz3u/57H2nSyFBtzFSiKXZHPUfIru2XaNSaLG88GPwdDCBphX+5BOxe1qN
- +lxhvSdnZ4bDBHkEVsSgDCwtlaVYKB9lUV6tocGLDg951PXOlAEgbcVoYcvpMAtnL4Ux
- PsUBlTa5mQWce/myvSxHW+I32K92JnCU7SJ7/ctO5lHPexkfpbV6xi8yf4ZLZSQn8has
- d+3nbbVg4/lkVAbaMyAh+4Bx/ry8RqCBTSSKZ4Je9ceq01JlszRWHZuT9QTfCwQ5PMUR
- T5YQ==
+ b=XXTE7dtx14QnH8zHJ258R3sMCdJBIIn2f52O0aGiHyf00zDt8LqbCJbx0/xvzjn/K1
+ pJArWKKYB5P42a2ejLKJHcYYXao2v8ZY6iX7VJmG2oJmnVK7e4YXKyhqJdbC2JWkzK9H
+ rsXxWFsyb2Q+iakjvBPBDc2HaEBxwiVMK1lt14O0tVMlg5qUt8nyVtOz7ZnyMDEWF5iW
+ EE8X4J8IZVQxiqagPmf71IE1mP3ssfGmCJ55LVTrAyIbBM0q9+qU889cDPcLItT8Tfd4
+ mIcJ7Ga7UxDI+k7rEvtClgRmas+e/ikwVuUIKoyDWjRZXUW5mIATka91kNsSEaWmnAnW
+ UGAw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=CSAEZh/kFb5Oqu8HKLIhg1j6lG45Q2sMZrTStpaOHqI=;
- fh=s5k+GXS5xpLDRTh8FeQDL4pYyUAXQZOxB2tgRxoo5BI=;
- b=BH3BGS8DGq8HZ3TemtgWEYpXylT4Vn++cIrwGC0aDUww8rYKGMatyAFh3Gy7LoR8j2
- aGxVa6PquEN1qwA63Kx4s3JrHvRXozcCNiR9gQd5Yn6CHRjfpi4KZHT97dLdOR4QBaR3
- xPzggGOx7SpoRXOh4Br/GZgZIWnz5m5hIHc0hGNEDUC42QOeZlNl1kN0IIdIwN+NZDlY
- RyoNQhPDJY4pZ3kciFBwvJdXSL9Tyvy0iocEgcPcrFzlr84dkd/uXSfImyxa+PdnH351
- 3VdQoW1Tce5nyxZxae6QN7+mdbZ9yGWQbw6Z7DJfgicwbWcr8H4WQeV+azBPvXu9fvwV
- dOHQ==; darn=lists.denx.de
+ bh=r4hmwsMrDqG4KYkR4KqZxiaJAzB/esDLVuYe4Tw6LbI=;
+ fh=T79q7iQaKgdBLSTuhvl3jRYD2v6g+8MB8Joags6q2NI=;
+ b=FZvTmG/TgDMLgVEri6rhWtGmZr3/DXyao6Hh+jMitpe+jaz6gZ0AtZguETFUy8nlvj
+ am4rIhqbKkD0J9EBmTFQVMfvnQe0Q8LUtdyFPKZpEMr53FcoDFVpO3YTWT/qlmZ1O6FZ
+ kCuZRbZRMI/Jcuf9sQ1s+U24BN5fIHOmVDGH74v9Aq0Wm6D6ksQ7oca5siQafTMN3eqq
+ q8UfUErcESUZyclQOgjxK8un+QtdAz+mVx8It7SCx6ktE8v7yes6JrSjYRbub4LQjuOZ
+ JT8tHYeIupg4TvgL/5Dm4hOEDhrcQynxdSNBfi3Vi9/1Vf67TqMvCVENWtbWg79rvVnY
+ VdWg==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1776820574; x=1777425374; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1776820590; x=1777425390; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=CSAEZh/kFb5Oqu8HKLIhg1j6lG45Q2sMZrTStpaOHqI=;
- b=aI/Iq6FWsx3KfPxqAdRdQ2YAXNbs+Kg0FLTLUh+vBPq1+s08cVLA58YiWtWeYAZy2w
- mXviN5E7RI4Xj4l6Pl2rq5RbNCbHvTH9VYjMfRXchcCFP+CtmoX+MoJ4A3yoqZrMEgR1
- 5OaSeVfxH4ymLVz+DQAtDUFoJuXP/dLNx+mZQ=
+ bh=r4hmwsMrDqG4KYkR4KqZxiaJAzB/esDLVuYe4Tw6LbI=;
+ b=m6tiLbLfJlrLX5/83vUnhCoMAFykJ9Fk0MMAjpy40PcB/dfDfc4yy8U65CEXAHdrE0
+ wJ0YaYaCS47vE0FLQk6CrMTjhw8ugFU97zU5XOxIoTH6G8m6z8oQP07LRTFeP7QxIQxM
+ X4tNPH6bduugqMQvOQv0h3paK74IEkhavH6LY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776820574; x=1777425374;
+ d=1e100.net; s=20251104; t=1776820590; x=1777425390;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=CSAEZh/kFb5Oqu8HKLIhg1j6lG45Q2sMZrTStpaOHqI=;
- b=mfE8joW6Ve6l1jCGHOLxzfQgxUd5q6y6xSGpFqGFiD+uwfGUjAdVK4AmE0XC1bAsl6
- +kFPEZydAV5weNrCCyZMobhqJvQ9TR2+eaEqIYOSdhyWEyvVqA4MYcg7tmX462C0vmo/
- 1ImhYa3aHAW2VhV7tTM1yULOgCq04OhijUR1gkMcnDj9L85LcYRbw36eG3EcnwurqQoC
- 28hs1cPpY/wMlgJ0fP8KFBqi17esQG7s0yuvd2SMaAjsJHtnbzanaYTPjz/Izdi8UjHL
- 9TRgwoPYE6lboz4L88M09deFDVATxPV75LUWAbilXuu1bmTAPkfdM9liuEbjShLWBkf9
- wT1g==
-X-Forwarded-Encrypted: i=1;
- AFNElJ+1oNZZIJOlY2H2cMOvrSzpcSbIs7PRyAaxOEo/TwT8gNVKrCCC2Y8KyqHXGFENbJuMmiW9vKE=@lists.denx.de
-X-Gm-Message-State: AOJu0YzQNxFSxnXfBQLD0FWrmk9fmbxaqzBysL8bP/JIOzZfydR2EHur
- X2nB3lbTGPU5ldvu3UNxq76KSSA2mY0rBlPRJvhDwMpcAb58PaVRwgP9hHXcIxIe90d3lfI82F5
- sTKdgrDsJ0Dgk0DKpuFyS49EEagMxYH8OU9Q9RpCZ
-X-Gm-Gg: AeBDieu63QkrmRebFNhJV7uUO43xRlpQrwZ+uFFxkipQn1kcyCLH74lntaiqUIQoBC9
- GizofHBFzal/7mq2HYN54cNBZKcVfTNZzaW2/zxjbqcCQGjxx73VnrXyYYLssbHnl2bwC8cGrFi
- midksyLpy37GtrW4qaieonj9c811XJC94ZtNCA+Ru07CajI1Y/dlx1FlhUc2TG+wORPudSu0mO4
- 3tQ8vK8u8xSmhoDOnYAkiIdcyuGRVQBoaCqHLMYfmA97Td1zvp21EMoiztagGiptRwqDiFQM0Fq
- 5MoE4KcoWSWIBvJ4N3Lr9tHfIl68/kw=
-X-Received: by 2002:a17:903:8c6:b0:2b0:c45a:bc2 with SMTP id
- d9443c01a7336-2b5f9eddc7emr220647045ad.16.1776820573566; Tue, 21 Apr 2026
- 18:16:13 -0700 (PDT)
+ bh=r4hmwsMrDqG4KYkR4KqZxiaJAzB/esDLVuYe4Tw6LbI=;
+ b=Ey4FWsnU8pUApe+VWSTSWDvUgz5RLn4msPX6hWhZEXm2m8w5SV95jYMpyGie3ys05g
+ AaqY2GbvW/VBV9TVnakA6PL2nB+PAm6MTyNuqcWrlTHb+fFhv664qQOn17G6yAZM1Vl3
+ Cf2lVUxKoH+JUOFoKF9mGvUMJ5+P3bD3T1+4+MgbnAopqRmsKNP70FMkg6r6kXIn81xQ
+ kuJdp9WJCydeksy7hMIvax1sowahv+EhheWsJzN+PbpxZ6xSlNPvzPRYMsnbtli7RXbe
+ liqRbaSJkUtefTRyYToVPJgKDw2itqJ8KlzkLihBchtQxbuoCy1Tveuv8Ll2bkrvK10E
+ /exQ==
+X-Gm-Message-State: AOJu0YzULia4DQYDAZVw+VBpwCTSLanbMoJzJYxG6LZbUa6xmwR2MBfV
+ O+Ypdf1u+mcMcE0XqVD+Iflqw4eXR7zN8t3bQceg8noQh3cL3iLIH06AOEN+Smc+qAdG55ry5iz
+ 5AJ2B1exVLIqB494PZ+TvHBdG2zGNGH+RJkA2WooI
+X-Gm-Gg: AeBDievm+0Eb4TeUJ7tJXw1Q0xyQxzLrYoTlzGiMB9RchVV4LT0YVNR90DigyY9IxyN
+ UZxrq7EqAPLYm2i8Bnyj2wHfNqQEExKMX1ktvcMj+ocPmnrWZHhgePp1Y62ZfxN6cjCMEW0HzoV
+ BpYGV9DfCk38UVBBZlXaDWkfKXJI2Bi2gNizvG8p78ABBEqZrw8E9POKlS8u/47LPZJr2TbO2Qg
+ etxLFzJtfSG44zZqeyxhY7MGkOqDVmL5LCY2pf5E93qOE0rrWEfXOjzrkLA8zV1WRN0EBD+1kPu
+ ow4T8OM/UQ6QGz5F9Lf8
+X-Received: by 2002:a17:903:987:b0:2b2:3dd9:c5f5 with SMTP id
+ d9443c01a7336-2b5fa0044d9mr238657635ad.36.1776820589688; Tue, 21 Apr 2026
+ 18:16:29 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260420-net-kconfig-v1-0-9900002d8e72@cherry.de>
- <CAFLszTjTSUOy9=d5NpgsP63dQp7UXuhpqg4wFwnXgWJzD74_6w@mail.gmail.com>
- <3462e9ac-e882-4145-88d2-a553cd1c3cb2@cherry.de>
-In-Reply-To: <3462e9ac-e882-4145-88d2-a553cd1c3cb2@cherry.de>
+References: <20260421-ten64-add-usb5744-v2-0-eaa81288e393@traverse.com.au>
+ <20260421-ten64-add-usb5744-v2-1-eaa81288e393@traverse.com.au>
+In-Reply-To: <20260421-ten64-add-usb5744-v2-1-eaa81288e393@traverse.com.au>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 22 Apr 2026 13:15:48 +1200
-X-Gm-Features: AQROBzAf7xRrS2jGFjqKPDeXJlQGBkjZ1ouw73iZA-qYk-KC9aErTq7E8ZpDLWM
-Message-ID: <CAFLszTiPWDtL4Xz2RpvGenr+8smgpq_E8rjuZ2qAqriTGU4OMw@mail.gmail.com>
-Subject: Re: [0/6] net: migrate NO_NET out of the networking stack choice
-To: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: foss+uboot@0leil.net, u-boot@lists.denx.de
+Date: Wed, 22 Apr 2026 13:15:43 +1200
+X-Gm-Features: AQROBzCdjj6qJciIbqMrhgO_Kcv0KpilbxP9DAB34SQQYP7TkNXVsZP9-cNklWo
+Message-ID: <CAFLszTh=NVKYe2NS5t_kj2t9C+3oCfUqpY919fqEr9jyHgpN5w@mail.gmail.com>
+Subject: Re: [PATCH v2 1/8] usb: onboard-hub: fix compile issue with gpio.h
+ import
+To: matt@traverse.com.au
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ Lukasz Czechowski <lukasz.czechowski@thaumatec.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, 
+ Michal Simek <michal.simek@amd.com>, Marek Vasut <marek.vasut@mailbox.org>, 
+ Padmarao Begari <padmarao.begari@amd.com>, Peng Fan <peng.fan@nxp.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -111,113 +113,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Quentin,
+On 2026-04-21T00:04:33, Mathew McBride <matt@traverse.com.au> wrote:
+> usb: onboard-hub: fix compile issue with gpio.h import
+>
+> This resolves the following compile error when compiling
+> ten64_tfa_defconfig:
+>
+> In file included from ./arch/arm/include/asm/gpio.h:2,
+>                  from common/usb_onboard_hub.c:10:
+> ./arch/arm/include/asm/arch/gpio.h:17:9: error: unknown type name 'ulong'
+>    17 |         ulong addr;
+> ./arch/arm/include/asm/arch/gpio.h:18:9: error: unknown type name 'ulong'
+>    18 |         ulong size;
+> ./arch/arm/include/asm/arch/gpio.h:19:9: error: unknown type name 'uint'
+>    19 |         uint ngpios;
+>
+> Reviewed-by: Peng Fan <peng.fan@nxp.com>
+> Signed-off-by: Mathew McBride <matt@traverse.com.au>
+> Reviewed-by: Marek Vasut <marek.vasut+usb@mailbox.org>
+>
+> common/usb_onboard_hub.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 
-On Tue, 21 Apr 2026 at 23:06, Quentin Schulz <quentin.schulz@cherry.de> wrote:
->
-> Hi Simon,
->
-> On 4/20/26 9:51 PM, Simon Glass wrote:
-> > Hi Quentin,
-> >
-> > On 2026-04-20T11:36:06, Quentin Schulz <foss+uboot@0leil.net> wrote:
-> >
-> >> This series introduces a new NET umbrella symbol with NET_LEGACY and NET_LWIP underneath.
-> >
-> > Thanks for this cleanup!
-> >
-> > Re SYS_RX_ETH_BUFFER, how about moving the extern for net_rx_packets[]
-> > to net-legacy.h ? (is it used with lwip?)
-> >
->
-> That's not the only thing making use of SYS_RX_ETH_BUFFER.
->
-> - drivers/net/fsl_enetc.h uses it as value for ENETC_BD_CNT which is
-> used in drivers/net/fsl_enetc.c,
-> - drivers/net/rtl8169.c uses it (if defined, otherwise defaults to 4) to
-> create a static buffer, see NUM_RX_DESC,
-> - include/net-common.h sets PKTBUFSRX to it, this in turn is used in
-> *many* places, including many network (assumed Ethernet controller)
-> drivers, net/lwip/net-lwip.c, net/net-common.c (with net_rx_packets
-> array, used all over the place), net/net.c, and net/tcp.c.
->
-> So seems to be used for both NET_LEGACY and NET_LWIP.
->
-> Simply guarding the "#include <net-common.h>" with
-> CONFIG_IS_ENABLED(NET) won't do as many files currently expect some
-> functions/macros/constants from that header to be defined.
->
-> Another option is to ifdef PKTBUFSRX contant and net_rx_packets array in
-> include/net-common.h. But it's used in arch/sandbox/include/asm/eth.h
-> and drivers/dma/ti/k3-udma.c which aren't clearly dpeending on NET being
-> set. All defconfigs enabling CONFIG_TI_K3_NAVSS_UDMA do not modify the
-> default CONFIG_SYS_RX_ETH_BUFFER which is 4 (according to
-> ./tools/qconfig.py -l -f CONFIG_TI_K3_NAVSS_UDMA
-> '~CONFIG_SYS_RX_ETH_BUFFER=4') so it should be fine for this driver not
-> to have PKTBUFSRX defined (as UDMA_RX_DESC_NUM will then default to 4).
-> According to ./tools/qconfig.py -l -f CONFIG_SANDBOX CONFIG_NO_NET, all
-> sandbox defconfigs have network enabled so maybe
-> arch/sandbox/include/asm/eth.h is not an issue either (or rather, for
-> later :) ).
->
-> With
->
-> diff --git a/include/net-common.h b/include/net-common.h
-> index 69b6316c1ec..0c260873c2c 100644
-> --- a/include/net-common.h
-> +++ b/include/net-common.h
-> @@ -20,7 +20,9 @@
->    *    alignment in memory.
->    *
->    */
-> +#if CONFIG_IS_ENABLED(NET)
->   #define PKTBUFSRX     CONFIG_SYS_RX_ETH_BUFFER
-> +#endif
->   #define PKTALIGN      ARCH_DMA_MINALIGN
->
->   /* IPv4 addresses are always 32 bits in size */
-> @@ -132,7 +134,9 @@ static inline void net_set_state(enum net_loop_state
-> state)
->   }
->
->   extern int            net_restart_wrap;       /* Tried all network devices */
-> +#if CONFIG_IS_ENABLED(NET)
->   extern uchar          *net_rx_packets[PKTBUFSRX]; /* Receive packets */
-> +#endif
->   extern const u8               net_bcast_ethaddr[ARP_HLEN];    /* Ethernet broadcast
-> address */
->   extern struct in_addr net_ip;         /* Our    IP addr (0 = unknown) */
->   /* Indicates whether the pxe path prefix / config file was specified
-> in dhcp option */
-> diff --git a/net/Kconfig b/net/Kconfig
-> index e712a0dd2ac..deab340f26b 100644
-> --- a/net/Kconfig
-> +++ b/net/Kconfig
-> @@ -279,8 +279,6 @@ config TFTP_BLOCKSIZE
->           almost-MTU block sizes.
->           You can also activate CONFIG_IP_DEFRAG to set a larger block.
->
-> -endif   # if NET
-> -
->   config SYS_RX_ETH_BUFFER
->           int "Number of receive packet buffers"
->           default 4
-> @@ -289,3 +287,6 @@ config SYS_RX_ETH_BUFFER
->             controllers it is recommended to set this value to 8 or even
-> higher,
->             since all buffers can be full shortly after enabling the
-> interface on
->             high Ethernet traffic.
-> +
-> +endif   # if NET
-> +
->
->
-> And building sandbox_defconfig with CONFIG_NO_NET=y, the build finishes
-> without any issue. So maybe that's the way forward? I think this would
-> be better as a separate series though, what do you think?
-
-Yes that approach seems good, definitely a separate series as you say.
-
-Regards,
-Simon
+Reviewed-by: Simon Glass <sjg@chromium.org>
