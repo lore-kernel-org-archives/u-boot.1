@@ -4,149 +4,137 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F259F94CC1
-	for <u-boot@archiver.kernel.org>; Wed, 22 Apr 2026 04:11:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57E53F94CCB
+	for <u-boot@archiver.kernel.org>; Wed, 22 Apr 2026 06:05:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A9F9D83936;
-	Wed, 22 Apr 2026 06:11:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
+	by phobos.denx.de (Postfix) with ESMTP id 6181084255;
+	Wed, 22 Apr 2026 08:05:09 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="QMlRZAvD";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Q2dyN9uJ";
+	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="NYuxmsZO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EE66483BC8; Wed, 22 Apr 2026 06:11:28 +0200 (CEST)
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
- [205.220.180.131])
+ id 4C79C8352B; Wed, 22 Apr 2026 08:05:02 +0200 (CEST)
+Received: from BYAPR05CU005.outbound.protection.outlook.com
+ (mail-westusazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c000::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 759338352B
- for <u-boot@lists.denx.de>; Wed, 22 Apr 2026 06:11:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=oss.qualcomm.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=balaji.selvanathan@oss.qualcomm.com
-Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 63LIaEhQ2936073
- for <u-boot@lists.denx.de>; Wed, 22 Apr 2026 04:11:25 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:message-id
- :mime-version:subject:to; s=qcppdkim1; bh=J5EkYDnUWV58DGNFLWTOtK
- NwbI18smpS4cLIqhTmEyc=; b=QMlRZAvDX62JY6dllq6jAm3vazwWzJQ0ObXkap
- OiwkFMecXWBJMLRXpsY3ZzqMS4ua431DJEVuT/hXvjVwFuYEmeSK/Ag/LGUCDCqF
- jLosrT0inf7GxakxrgsEyrl+AciZbQG6KkU4UsiHfh8NnjJjuHzYWGQoV7xa4/hj
- Cv1NfrSPQ5/3my0cmOq/XSZou7W+t3RvC4/MhuDUe8TezwnVGv2SGeAFuKVdyJKP
- 0flOJ9bJ5F8DB5X/Q3KVULi/9luGuybhuLwXtJFmVrZBlG/mPdAuIE7qPAkE6Vn2
- C4h66ULo6aeuCUEVi+qHLKLNLxQcQjQcneYg0MlDaFCgzJcg==
-Received: from mail-pl1-f198.google.com (mail-pl1-f198.google.com
- [209.85.214.198])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4dpenk9jmk-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Wed, 22 Apr 2026 04:11:24 +0000 (GMT)
-Received: by mail-pl1-f198.google.com with SMTP id
- d9443c01a7336-2b24cd2e2b3so46864045ad.0
- for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 21:11:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1776831084; x=1777435884; darn=lists.denx.de; 
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=J5EkYDnUWV58DGNFLWTOtKNwbI18smpS4cLIqhTmEyc=;
- b=Q2dyN9uJbjTGNpaK6UzU2fwo/p92MDPiIH6OOAgJoz201pnaQOsEmVD0jnyr/DFcd6
- MwwxRS8fX5TbAbhU3ks/Ud26JLSqKLQOxCi2RBtDVz77FyqAwItFSvoL6Pe8/arSbgKU
- 6+k6JejwndnzyiZuEKDWWBaNNpxiwhBGOhvR7dKkPWsooXGQbS0oyVUXqJ/kGT/Lgpe8
- Dwe+2AxzaAl1ViWHHQqKwqt1+oROv3XGOrWlDP/LH8bnOAU8Fe5KiLY91EWogZmrky2c
- U0u36GJ7tjeJMXdJf6x0nyatDCOGJ1DY8hGV1lXVbx0pqhViWGapK3OiZEqYThRFZMfc
- kE7Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776831084; x=1777435884;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=J5EkYDnUWV58DGNFLWTOtKNwbI18smpS4cLIqhTmEyc=;
- b=XgpuqB0oOXApzI/9Ltp3EuDBNWPZTkVfgZHbJsi4qQkWl0y8lpkGjtF4jKiU8Dg+jA
- af1bK8XLo0zNmG6Q2YvOnfhgdtKGuPbAzEfg1vh7+GsVLqx6YLRjxKOr8MGDBiWAQmnI
- Te5HMxX2fyJYayAvaXlXujNbfA8bGJJEUCtvcVB8kAD5uM0zrHxLYKvoC6kxdmfmbODU
- EZ1GHbJV6bjJFfFbuMbtIsXJZiixzUBbLVW0+SRr8zgkamn8/NwqgmvzpGIY+hzhTiyg
- K463FATEUHAZIIhdd+Ebkd4K/RMcuZsdfRwfgO4XMlOhtwQfIJKaSVPCcMM8ufG5hqZX
- odvQ==
-X-Forwarded-Encrypted: i=1;
- AFNElJ/XQl7d0eZ6wRtjV6yg0ZmDyt6SjIgyZgeEh6ZpwRWI9BGQAALRa9GT3p8t+F0RU9i1oMPAJNg=@lists.denx.de
-X-Gm-Message-State: AOJu0YwljfTrx8kww8zOVFlkFW2I6mMvE+Oh6XweJj/40G36FVzqoozF
- WwsC5rPk8N3AfL9bSJx5trOss9FdQFw6MjAh0tjFrPLMgQ6u2ask58oypEtBGkvj33K4Ru4zfAV
- pgcbQjqHRIdeRLQJQvRGVedCYQRybdL9tBnbComjLq2qM5D3DmedEdfB8
-X-Gm-Gg: AeBDieu8DEa9c11dx1nZpQLAkSk3mEZSDGtLSnQBLtcZSLr7Ujn3fycJyslC9rWjxdP
- ei42KMWlEEMklLa8Rb4cHLp1Kerx+zRrCM8DltzWa1q8dNNCdcYx3M+mwGDaEhJher2rDPhtDPe
- sVRRg2xFyOU9oeTrwOcH0DPCz+eHUofcsnlQ+FsnJkhlyI4vva7su3+92vD2Bfp5f/uczU9DiG7
- 4h6zxLkIep49zVI0Vi9O17AUsAbQK7ZgUDX9S3oq8j1Vu7MVD42E8iHL880Qbo7LzQjuBJmFZIP
- zIJ5PIcuTKX7YdkuSMGmlui9TN2CSolm2MA7sAnHwrRfyNOmexxPB5v4g8cz3mAZeN98Hq6xTp1
- ASG/dsDwDkcKKakr4T6owEXUBZMXhCl2Amp7ky0cP6Du5TD/vEsWXKVonGk9IF0/KR4k2XTb24m
- /qFSqwg/7ndSX9bXWxuVcYGbDR/1FUUhQSwg2XixGLghxattBj7J8RZag3le3V
-X-Received: by 2002:a17:902:f645:b0:2ae:5163:c2aa with SMTP id
- d9443c01a7336-2b5f9f519e5mr206177455ad.20.1776831083784; 
- Tue, 21 Apr 2026 21:11:23 -0700 (PDT)
-X-Received: by 2002:a17:902:f645:b0:2ae:5163:c2aa with SMTP id
- d9443c01a7336-2b5f9f519e5mr206177155ad.20.1776831083260; 
- Tue, 21 Apr 2026 21:11:23 -0700 (PDT)
-Received: from hu-bselvana-blr.qualcomm.com
- (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2b5fa9ff3bfsm185539395ad.7.2026.04.21.21.11.19
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 21 Apr 2026 21:11:22 -0700 (PDT)
-From: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-Date: Wed, 22 Apr 2026 09:41:18 +0530
-Subject: [PATCH] arch: snapdragon: Improve serial number detection using
- SMEM interface
+ by phobos.denx.de (Postfix) with ESMTPS id 14E2983BC8
+ for <u-boot@lists.denx.de>; Wed, 22 Apr 2026 08:04:59 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=reject dis=none) header.from=altera.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=tien.fong.chee@altera.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=FCJksbGFakac6ziIETq33iAadEkAPMXS9D2F9CUcQz6QKpe5yVuqu9vXmGSeGXE9xmH54eriB0edOdkIe5jzrxQAqx4cAbvPcV4ZVCkIc0x5K1kjliM5S8dcQ6FTOSh1zse7Ma6qqcN1IuKIe91+EUNVt9iTy088o+QdVXxfgkueiue6ahQxdbP782KhJw5lXMW76BT42BRCdkEbiamxyJOqM7/iWXpBSCClwv6A8MQkqyJqYH8/BIrDCiJYa5spqG4zGtAy4xwqbfG7S9a5mbkenk6CMaDYlvS6lqOBHqM2pI2GYLIDST8sIe10wbx/tZ7wjStVCMWjcuxS8zEWCw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=ZwXL7LSRqhB7tM+hs6qBlBtTCCVCeTVepAPi1d8cTFs=;
+ b=rFQoHeDbbBmRwqix7wbuuA8qxhmYGxeSKtYPVTrDqEXPXfFRC4cS7IG9OjgV4fnoEZyhT4o6nu+RkO8Ba0aHLzr9cTGRaN0P5FAGfzZSNv2AVIzxvPUFPyhfYlc1BzB1mUFIOnit55ge5xqccOIvl2bUdsfgokfCZgO07/2aYdEQfaz18ik7Ti1ycNPc3NdK4lzs81TYsD4BCzKrGWcEHXLkgQbrqoZx4Z6Qw7tWXp2wA/Tp4+7IWGzO//ahPBVfcuWiuOeUvcUWUzGhb/tDiC58VUw5T36f1i2aawswH3oVFXw7uKci+lMddN/376UJK0VEOZ4Q8K6kbkNTAko6tw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
+ dkim=pass header.d=altera.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=ZwXL7LSRqhB7tM+hs6qBlBtTCCVCeTVepAPi1d8cTFs=;
+ b=NYuxmsZOXzQ5vDmE8sxBuzmnoXR1NH+5Uxw+6MOCudPjxq9kepSGj7YH+ccfNOZ8wu8g/SgTPijYiAqaGOTG1XJoFEgtKdMj0nRf6Vm8jPedoHCpqpFTn1Gn7eUcEE8lpNy8oW4JHAamv3Ycu9l2nf4h/lLFQn0SmzG7pS+5nMieOHMQKIEdvcr9OnTHMM7qxoInFWi2Db9h1r9jHzyKIOFOf2jSzv36Kj3a5BY7QlIuToJ7kbNGPsSTNyfMGFPnfp8f0u955nQfnYhRJ0O0IYErgoLujLD9z9PcPBt/Ffy4PtoWhhPjlC0NsoBjEl3aNsaFmKvP/aLk1lZ9f89XWg==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=altera.com;
+Received: from LV8PR03MB8137.namprd03.prod.outlook.com (2603:10b6:408:295::8)
+ by DS0PR03MB7726.namprd03.prod.outlook.com (2603:10b6:8:1f9::15) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9846.16; Wed, 22 Apr
+ 2026 06:04:56 +0000
+Received: from LV8PR03MB8137.namprd03.prod.outlook.com
+ ([fe80::efa9:4b97:3b4a:8235]) by LV8PR03MB8137.namprd03.prod.outlook.com
+ ([fe80::efa9:4b97:3b4a:8235%6]) with mapi id 15.20.9846.016; Wed, 22 Apr 2026
+ 06:04:55 +0000
+Message-ID: <33279917-7f3a-4a33-83dd-0c78ed5e88ed@altera.com>
+Date: Wed, 22 Apr 2026 14:04:48 +0800
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4] Improve handoff prepare on SoCFPGA
+To: Sune Brian <briansune@gmail.com>, Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
+References: <20260421004719.73491-1-briansune@gmail.com>
+ <CAFLszTjJOfcddrdbN7oMPGAVZJRmj689-1bN5bY2gGiFdc=RGg@mail.gmail.com>
+ <CAN7C2SAJYbMFmRorV7w6XphPh24iuTTeobW6q66Dk9_q1s61jg@mail.gmail.com>
+Content-Language: en-US
+From: "Chee, Tien Fong" <tien.fong.chee@altera.com>
+In-Reply-To: <CAN7C2SAJYbMFmRorV7w6XphPh24iuTTeobW6q66Dk9_q1s61jg@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: SI2PR04CA0007.apcprd04.prod.outlook.com
+ (2603:1096:4:197::19) To LV8PR03MB8137.namprd03.prod.outlook.com
+ (2603:10b6:408:295::8)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260422-serial-v1-1-1f246885bd70@oss.qualcomm.com>
-X-B4-Tracking: v=1; b=H4sIAGVK6GkC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
- vPSU3UzU4B8JSMDIzMDEyMjXZD6xBxdS2MjY8MkY6Mk8yRDJaDigqLUtMwKsEHRsbW1AOPQjK9
- YAAAA
-X-Change-ID: 20260422-serial-93231b32b7b1
-To: Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io,
- u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, Casey Connolly <casey.connolly@linaro.org>, 
- Neil Armstrong <neil.armstrong@linaro.org>,
- Sughosh Ganu <sughosh.ganu@arm.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- George Chan <gchan9527@gmail.com>,
- Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1776831079; l=2823;
- i=balaji.selvanathan@oss.qualcomm.com; s=20260213; h=from:subject:message-id; 
- bh=0lOy7NgBVY0VkqJzzGvWZSftethWiAvT2ufGxv/vtcA=;
- b=hE7La6Nz/m9LdmQTdyGpBltzp2sxIFk45HhCX1vZ6PA53jO1TDhiEoPWrJM/q/dp0KZp1U6QV
- DT6KIg0NLMFCAtU2MUhtIhpsNdnAGAmQlBkwTFqMJzXZg4BqG99HR6h
-X-Developer-Key: i=balaji.selvanathan@oss.qualcomm.com; a=ed25519;
- pk=CDpYiUU3SH7KGEtsBvY2tBGPiWfMxqWJF0p2LftOfnc=
-X-Proofpoint-GUID: lhcElJzmZb8asKkCzrlTmmnK62PUPsuY
-X-Authority-Analysis: v=2.4 cv=SONykuvH c=1 sm=1 tr=0 ts=69e84a6c cx=c_pps
- a=MTSHoo12Qbhz2p7MsH1ifg==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
- a=IkcTkHD0fZMA:10 a=A5OVakUREuEA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
- a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=GqcJuMMKbsYl-prE61YA:9 a=QEXdDO2ut3YA:10
- a=GvdueXVYPmCkWapjIL-Q:22
-X-Proofpoint-ORIG-GUID: lhcElJzmZb8asKkCzrlTmmnK62PUPsuY
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNDIyMDAzOSBTYWx0ZWRfX0eHum/jJQrvg
- oW88r0Us4pdXHE+/T/+15CTk2qx2vbFcHvmw9c8Zq4t/g+O1O2YGGZ8IyFeAYRGGa71KVxMofMS
- A1A6m9mwvX1PeOys+O0/qHODJ9HgH/8TvxDplIGj9zvxbspQTTsNMhOGSNyuB+/iP1i1PX9gjXP
- v0z46SPFTCfrdU96riF0zZpYBqqUU5eHmC0jE7dhS2F8W4fnPf6cZpwIj1V2aEDwwaUw6pgBQGi
- Ib4A/xwkrEYAcy4n4O1I/nbkE3UqV4TZb2RwmolWnChBdVEThdyaZa3NFeSmZd59HIcn18TUeI+
- MxAAUEiVenTYP95lThErLmSCZQdD8HmiJ37+fcbAExV10ur26oeGWBLnb8cmio9epZRSHhShP8Q
- Mtrqi+Nie7URiHDSNMjaTYmhDJy/HtfVjQt5gvAHlrK2JTWlA7Ph+cnXzWipwjWqPthWzoRJ2V5
- NneV0IahA96ELgBqmQA==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
- definitions=2026-04-21_03,2026-04-21_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- bulkscore=0 priorityscore=1501 adultscore=0 impostorscore=0 malwarescore=0
- spamscore=0 suspectscore=0 lowpriorityscore=0 clxscore=1015 phishscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2604200000 definitions=main-2604220039
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: LV8PR03MB8137:EE_|DS0PR03MB7726:EE_
+X-MS-Office365-Filtering-Correlation-Id: 0fdaaf8f-f268-4753-a26d-08dea0351384
+X-MS-Exchange-AtpMessageProperties: SA
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|376014|366016|56012099003|11006099003|22082099003|18002099003|55112099003;
+X-Microsoft-Antispam-Message-Info: DNTvN7OLQrfX6vwm7TT49M0vVStRYd/KS0F7S18Cbi0Mxu0ebihXaXUk7g6pio4DxIsfcKesqWE+xX6hktLRYARMtQC+WA0aOz1zn4ZouuBm4iyXTMqKR++wdnij3HreilUGOUKFxMalG7rnEjJ6x4DiLNMVtmYYeUvfgoP2VZMY0NjH09N+ykkRrxyiZSQhA9ff1mOXFOzZxJ2xBzERdlKauJ1zUBz1neYv3v1xn+4c+85Ay10V8rGU1BEZVcz19c3qW8S8NOq+j83xz3MyoaTPkI3n1xkeY6Jxt5jM1Ac7yh/npa7b7G5QKxsjchZuml98LRhkyTTOjwuhZvpJbnsJw/7w4SpS6A3IYJN68+8dLEk82633kGHI3axKRTKBr32DFwI6BhrxetpbxM9mWTayPZxt/F15kdai7lK1BrdsVMbrKiFK90IHhs8siYgNsK9x14VwDqccIpZbrnX+6UEXqX3/EtFX/2rWileZIwoJVsNqaz9IBpC3hxnVpAsfMf8xG+XGauHODL2ox42zbdCM5GYM4BOqYXik92IeCD2ZwXqthmpZ0um1NGIlSK34Wf3iZG4YihmsDGhKHkqyTCbMwLdNEg+I8wzufwSivPGI0LomArHUCRt8kZsePwGL1yHbTTzebRPJZdZDi6DawvbAm5NojqDkhQknI1YOcLEYdK07E2ON5zN7e14DN1+rYHZN+yvCiYUylp4d7k9PXOOLwmB875bwNPy0aMsV11c=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:LV8PR03MB8137.namprd03.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(376014)(366016)(56012099003)(11006099003)(22082099003)(18002099003)(55112099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?L3l2UTdXUzk0cmwxRmY4UGxSV1g5MjhUSFV1MCtEeXpmcGhKZjFtNjNLRVN1?=
+ =?utf-8?B?UVkzMkovN3NwekRJOUZBTWduMDR5L2VtSkRDUGRLZW5HcFUrdUp5bTlTSlo1?=
+ =?utf-8?B?UEQzQ3B5aEdaMHlERmtIOW9qUExTWW5VVmhvM2Z1ZmdpaDJiRGl6ZmpVV0FZ?=
+ =?utf-8?B?NlZvdVdXV1JNMCtjVEZDaUJpdjRYanRRRTYwMkhSb0oxVmlEemdOdVVOYWQ1?=
+ =?utf-8?B?d3NNeW9YT1F1UWxyNkpHZWJaTnlTSFRqcmthZ292eXFuQmI0U3RXNy9yeEZk?=
+ =?utf-8?B?UFl0WGpYcWk5QTd5VHZWUDRBVDg3dzR6OWZwNnZZVjBrSWJpRDVsMFBKZGlL?=
+ =?utf-8?B?azl6cWhFN3lXTE0vTWpaRG1FNFNsZlNrVGoxSXNmQlpaR1FrbEh5ZDJ3Y1JN?=
+ =?utf-8?B?dFFDWE94WHNTUGRTRjJXWHZkdUozU3hKQlNMenVSNGg4OWtkZjFxcDE0VVZP?=
+ =?utf-8?B?ODhEV1cyTFdHVjBRTzkyNStNL3hmY055bGRUZmlZK2JZV0Z3ak9wU0tVN3Nz?=
+ =?utf-8?B?clN3c3hhVkRpZ2F0RXhDRzRtbXk2MEJoVTRMQ2hoRTdXVjZOb2hwTk83eUQ1?=
+ =?utf-8?B?ZVpIQlJ4aGY4ejU5UGNvTDZlc2xESnFzQVpRRHVpZWpxK2lzTXdHRWNOazlL?=
+ =?utf-8?B?aUFUbkVKbTR2Wjc0Nmx6RVpOb1BZdDJYM3ZmS2NuWThFZUdab01VbUFMMFk0?=
+ =?utf-8?B?M2NCbkJCaVZJN0RiNExRdExaQ0k4dFVyMHdOMjc5VFV1c056QTFjL2M2dzli?=
+ =?utf-8?B?Qm9XckJNYTVKQmVndVV4cDY2SzhaaEMvMnBhaXdEZUZoTFF1ZkVKblZSZDRm?=
+ =?utf-8?B?YnRDVWtlUGx5L0luVUV4dGhRbUhXUkwvVVFibmxjRS9rRkJWeHljVTRBZ1h3?=
+ =?utf-8?B?SlBWYjdPRGpGZTlsUEMxUHJURVhzQjhFZkVrSVR6Yzh6eWZTOWZkQUJVUVZm?=
+ =?utf-8?B?endhTmN2QmR2Sk5pMkxBVzZMcXl5SEZGbHhUbWY5czdvK1VmalJLVXo2WGtP?=
+ =?utf-8?B?dlEydVJmZWY0QlZOMDY5azNCNGdBT2JZOEVyRUc2NGVtS3ZHZzBnUXhLS2ZP?=
+ =?utf-8?B?ZGJ3cW9jNkdHdWpJaUZqdmpOdTEzd1VnZVVNV2FDeC94VG54U3F3THVkQ1U5?=
+ =?utf-8?B?Z29zeDRldVE2ZWhTMmZnVTU1WE1mUzhhSzRnZlNFdUhPaGlpQXErb2JVUTds?=
+ =?utf-8?B?VjhPWjlDL2xxRVBKRWp4dDEyZVQxaW9hSGcyOFpSbGZnQ0pxYldaNnhtajBh?=
+ =?utf-8?B?THp0cERMcmZFdkpmVitVWWo1enpkKzhISnRRRWFSMmtoTmNTOVlzb1pTNVha?=
+ =?utf-8?B?VE54NjFJYkhQMlF2blRFa01mdXZ2dWNteHM5L3BIRkRabGFvNC8xaWEvOXlh?=
+ =?utf-8?B?Vm1UVXpPQjBFWHlPSTU0SDlsRWFlOW43MUR5RVl0a3BSOGdab1p6Qy9sWDBM?=
+ =?utf-8?B?dUIrSU5WdGVYbWM1bFFxaFMyNG02MWR5NlQyQ0NaemRQdVZOWUdFVzNsOHpQ?=
+ =?utf-8?B?Qmkxb1lEcFpITkorbTkzNXkxdndOYjdDaDJiZ1B2QVFmUFQrTis5UG1QcVhv?=
+ =?utf-8?B?cTVZMk5YU2dJd3lIcDhxOVJqL3U2YTFvMUNIQTZzU3p2UUEyWk0wVE5uSTdT?=
+ =?utf-8?B?S2xOdG5DK2tSb0tNN2lHRkR1L293S213cWFoWlVWcnZLTE91eVZ6bDVzUUFw?=
+ =?utf-8?B?L0QvQkhLUlZpaEZiUU9ibTliRWovUzBibUpUN0RiT3Q1aXkyVWduWXVhQld1?=
+ =?utf-8?B?NHVYUTdJUUpFR0pnd2RYeTFhUGY5OWdzVWNIbGxMSkdVU1RibWkwdGswU0Rs?=
+ =?utf-8?B?VG1YTmFBaFlOYmRkZHk4b1lST01sTjBSb2d3cmpxNy9aU2ZIZHJZOHB3QlhH?=
+ =?utf-8?B?THRseklOY0cySXhSWHdZMDdYTy9vOERNQ3lTb0hURElOS1lDZEM0QUlzd3NM?=
+ =?utf-8?B?M21PM3BJV0JmdVNRcWZrbTJ1bGdoSW94UDZXbXVBR3dKeDBkRlo2WWRweTlM?=
+ =?utf-8?B?KzNiM2hPWjRkSlFsK2x3K1Q2OWJaWFlXUFBNdER0N2lWQ3RTaFR5bHg3ay94?=
+ =?utf-8?B?bFdZYVhlS0hHaVlSUU5keTR6V2xMdWZhd0pxYzdSMG5maU5YdFoyZjFiNDBW?=
+ =?utf-8?B?K2dVTFp1SGxyNW9MaGxDSUZhK3YvNHRYRnNHVldZVFZvbVF0UlJIMGNSTkhN?=
+ =?utf-8?B?VzNZQko1V1E4L1IzaVBNM20zT2IxT25JZlRlTjBBcHk4SEdzMDdiZXpIdjUx?=
+ =?utf-8?B?eUVLV01mTmlXUSt3b2RxbEVITExHOEV0SUhlZ1pLUTU4aEs5dHpKTVFwRDlC?=
+ =?utf-8?B?QndrZHZoenBWSDJuamVXN1RNK2pnOUExZnU1U2dSdGhTOGVpeEVZV040MVZx?=
+ =?utf-8?Q?ORp4mYteLe+3GvKs=3D?=
+X-OriginatorOrg: altera.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 0fdaaf8f-f268-4753-a26d-08dea0351384
+X-MS-Exchange-CrossTenant-AuthSource: LV8PR03MB8137.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Apr 2026 06:04:55.8803 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: nNbqV4ZmfHaAKH1SxbB9tuBFAbu1AMbmdkbOeYusPAB2Y5C+6XFYrXCacE9c8r9Kz1ERn8L74BA4DLB5ekex2dTU6R9trr0HPiLiHwvalqE=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR03MB7726
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -163,98 +151,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enhance serial number detection by prioritizing SMEM-based retrieval
-over bootargs parsing for better reliability and consistency across
-Qualcomm Snapdragon platforms.
+Hi Brian,
 
-Add board_serial_num() function to retrieve serial number directly
-from SMEM using the socinfo interface. This provides access to the
-hardware-stored serial number in shared memory, eliminating the
-dependency on kernel command line parsing.
+On 22/4/2026 11:13 am, Sune Brian wrote:
+> [CAUTION: This email is from outside your organization. Unless you trust the sender, do not click on links or open attachments as it may be a fraudulent email attempting to steal your information and/or compromise your computer.]
+>
+> On Wed, Apr 22, 2026 at 10:54 AM Simon Glass <sjg@chromium.org> wrote:
+>> Hi Brian,
+>>
+>> On 2026-04-21T00:47:19, Sune Brian <briansune@gmail.com> wrote:
+>>> Improve handoff prepare on SoCFPGA
+>>>
+>>> There are some cases that the Python scripts
+>>> are run and the qts files are not replaced.
+>>>
+>>> This patch introduces:
+>>> 1) TMP folder for Python script
+>>> 2) TMP folder will automatically remove on exit
+>>> 3) If PY script fails, the replace will not conduct.
+>>> 4) Only when PY script passed the replace with keep
+>>> or without keep will be done via NEW HANDOFF_KEEP=xxx
+>>> 5) When keep is selected the old files are renamed to
+>>> xxx.h.handoff.<timestamp>
+>>>
+>>> As such this ensure qts folder h files are properly
+>>> updated.
+>>>
+>>> Signed-off-by: Brian Sune <briansune@gmail.com>
+>>>
+>>> arch/arm/mach-socfpga/config.mk | 27 ++++++++++++++++++++++++---
+>>>   1 file changed, 24 insertions(+), 3 deletions(-)
+>> Reviewed-by: Simon Glass <sjg@chromium.org>
 
-This patch depends on the following patch [1], which adds the
-socinfo header file.
 
-[1] https://lore.kernel.org/all/20260106122134.2047864-3-aswin.murugan@oss.qualcomm.com/
+Reviewed-by: Tien Fong Chee <tien.fong.chee@altera.com>
 
-Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
----
- arch/arm/mach-snapdragon/board.c     | 31 +++++++++++++++++++++++++++++++
- arch/arm/mach-snapdragon/qcom-priv.h |  2 ++
- 2 files changed, 33 insertions(+)
 
-diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/board.c
-index 5fb3240acc5..2f058038b25 100644
---- a/arch/arm/mach-snapdragon/board.c
-+++ b/arch/arm/mach-snapdragon/board.c
-@@ -32,6 +32,8 @@
- #include <usb.h>
- #include <sort.h>
- #include <time.h>
-+#include <smem.h>
-+#include <soc/qcom/socinfo.h>
- 
- #include "qcom-priv.h"
- 
-@@ -363,10 +365,39 @@ static const char *get_cmdline(void)
- 	return cmdline;
- }
- 
-+/**
-+ * board_serial_num() - Retrieves the board serial number from SMEM
-+ * @serial_num_ptr: Pointer to store the serial number
-+ *
-+ * Return: 0 on success, negative error code on failure.
-+ */
-+int board_serial_num(u32 *serial_num_ptr)
-+{
-+	struct socinfo *soc_info_ptr;
-+	struct udevice *dev_ptr;
-+	size_t total_size;
-+
-+	if (uclass_get_device(UCLASS_SMEM, 0, &dev_ptr) != 0)
-+		return -ENODEV;
-+
-+	soc_info_ptr = smem_get(dev_ptr, 0, SMEM_HW_SW_BUILD_ID, &total_size);
-+	if (!soc_info_ptr)
-+		return -ENODATA;
-+
-+	*serial_num_ptr = soc_info_ptr->serial_num;
-+	return 0;
-+}
-+
- void qcom_set_serialno(void)
- {
- 	const char *cmdline = get_cmdline();
- 	char serial[32];
-+	u32 serial_num;
-+
-+	if (board_serial_num(&serial_num) == 0) {
-+		env_set_hex("serial#", serial_num);
-+		return;
-+	}
- 
- 	if (!cmdline) {
- 		log_debug("Failed to get bootargs\n");
-diff --git a/arch/arm/mach-snapdragon/qcom-priv.h b/arch/arm/mach-snapdragon/qcom-priv.h
-index b8bf574e8bb..3da841b8cda 100644
---- a/arch/arm/mach-snapdragon/qcom-priv.h
-+++ b/arch/arm/mach-snapdragon/qcom-priv.h
-@@ -17,6 +17,8 @@ enum qcom_boot_source {
- 
- extern enum qcom_boot_source qcom_boot_source;
- 
-+int board_serial_num(u32 *serial_num_ptr);
-+
- #if IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT)
- void qcom_configure_capsule_updates(void);
- #else
+Please roll a v5 with:
+1) Commit message: imperative tense, add a short v5 changelog vs v4,
+    spell out "Python", and fix the backup filename in the text to match
+    the code (.h.handoff_backup.<timestamp>).
 
----
-base-commit: 052988aa29bfd506d7ce207fbb3f5374a5dbecbb
-change-id: 20260422-serial-93231b32b7b1
+
+2) HANDOFF_KEEP: I am fine keeping your current semantics [OR: please
+    adopt Simon's single test ...]. Either way, add a brief comment in
+    config.mk next to the recipe stating: unset => remove old headers;
+    HANDOFF_KEEP set and not 0 => rename old *.h to *.h.handoff_backup.*;
+    HANDOFF_KEEP=0 => remove old headers even when the variable is set.
+
+
+3) [Optional] If HANDOFF_KEEP= (empty) should not mean "keep", adjust the
+    shell logic or document the current behavior.
+
+
+With that I can apply from list.
+
+
+Thanks.
 
 Best regards,
--- 
-Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+
+Tien Fong
 
