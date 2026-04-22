@@ -4,89 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 322A5FF885C
-	for <u-boot@archiver.kernel.org>; Sat, 25 Apr 2026 18:30:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B454FF885C
+	for <u-boot@archiver.kernel.org>; Sat, 25 Apr 2026 18:33:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F29A484314;
-	Sat, 25 Apr 2026 20:29:59 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=e-labworks.com
+	by phobos.denx.de (Postfix) with ESMTP id C204184486;
+	Sat, 25 Apr 2026 20:33:16 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=e-labworks-com.20251104.gappssmtp.com header.i=@e-labworks-com.20251104.gappssmtp.com header.b="zlkTSDCF";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="N5ESmQsz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A66D284370; Sat, 25 Apr 2026 20:29:58 +0200 (CEST)
+ id 250588448C; Sat, 25 Apr 2026 20:33:16 +0200 (CEST)
 Received: from mail-qv1-xf34.google.com (mail-qv1-xf34.google.com
  [IPv6:2607:f8b0:4864:20::f34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B7E8C842E7
- for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 20:29:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none)
- header.from=e-labworks.com
+ by phobos.denx.de (Postfix) with ESMTPS id 0A0E384445
+ for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 20:33:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=none smtp.mailfrom=sergio.prado@e-labworks.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
 Received: by mail-qv1-xf34.google.com with SMTP id
- 6a1803df08f44-899d6b7b073so94168416d6.2
- for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 11:29:54 -0700 (PDT)
+ 6a1803df08f44-8b038a00370so75766306d6.1
+ for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 11:33:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=e-labworks-com.20251104.gappssmtp.com; s=20251104; t=1777141793; x=1777746593;
- darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=6no6ML6Iq/qveYgoXgq5rlTzz8LOIQ3UBaDqH7XCbUA=;
- b=zlkTSDCF7xlQ7mE5rUfvvOUQC4/1EDnqlpkh89IJdMoshNalOavYySyEfPyNDqL+Nz
- dRP1U0sVS7PcTAPGDimLzTdlNS6PGw2pmrWODSYQhGPKkB9bKupfXDNEGvcu2s/MCn2/
- AwahS3mylBLhgXNIgZARhkYS44LWrlU76H9uyfyMSfL4JJ8BR5tMy9xZFrUJ/MO6afcA
- VSXcd2LIEyffuiJ41JHpSyQMb21IwKzlDeFPGRB7BdEQAg2vxs6z1urJgE8Vga+dgWkc
- ySHAyezOXUrybXg8FGQYq3rLcpN82d4q0U2XcSP90J70nK5aNoxQgwCrH0DPiIcqdkvR
- 4d3w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777141793; x=1777746593;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=konsulko.com; s=google; t=1777141993; x=1777746793; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=6no6ML6Iq/qveYgoXgq5rlTzz8LOIQ3UBaDqH7XCbUA=;
- b=OM1ScKdRCaIwb76x3NKH8e8J63OVy6sF44h7nVzLUoisAhti2JQsCliz4kAgSTRZDQ
- 2GOh0h1e+BZ7JYldGn9r2gYqDHpYyxxa3NdZ6WO6FooNs4ZsKmQOAY6g4d1rJs+4BKal
- rrby0TOxZxWwJdLCh7iTAmVK72x4lcPdAwNV1q8ArGMi5Xk2b+N5RqfJAmx9WtZeNI2U
- 06bpZHLZND8UlpVD4ATcrIVnF/qECJcrjFp6g50xA0JvXXcY+9hOn73GFAU0m7lgiVdK
- vPynT+PSvR5f2xiH4KFAqJi0rlFkQppSioye3KiOlCHkvYOwdYTvfdIMyu7ewigX6KkG
- qGoQ==
-X-Gm-Message-State: AOJu0YwoXrsGhY0tVl3IfYR5BQBbd/mveB3FZx1lEdbIpcIbIVazafd8
- UbdqnlOqzz28lgvSizzqE5FG9vS4dOyj851Lx9wfm3n695+nDC9qnH8qQ2XRXcQ2SmJsGkvmplL
- ZngTk+lVmAg==
-X-Gm-Gg: AeBDietgFtqUmPoFAtAHI72f6JeET9B+Of/CgFbMK2iqbSBqolwaC8xJY58Misarz7a
- DxmqZ5AlTAQnPV+5PCAzsNZ8IekIkoiRL69yF9bJ8Ljp9YF1C4zX0Lmfq0XKKSKJ6g1z8Ai/Acp
- YiW8KTd7TkYqe5Ka2hcgrLaHtNWQDfqNdzffLCdNQve4dq2QkcIalqjFZ1AScStisSS/I0zbqNJ
- qI2WGPQ9dLtqO0FvNzA60nyx1yfGDuvIelmEQr+WLD89ahO2zG5OsjK7xzOKtk2q36PYk9twD00
- PW0Rh6cwD1YB3Hvoav/krbVQwS7BTpSV6U9uosIuTcEpK0JNd3L8vCczAq/M3r43ht5V6NapzbV
- I/aNlMnpscvEPSY6rd7EGN6gk/o5Y+2zME1qDSZwdKbL1PYkbH/mrUxAiWlmndOQG9p1AX6+EaE
- Ygz/fk59GOmK8MyWrXuJ43eRrcCebz/mcG0RNp8Tb1lw==
-X-Received: by 2002:a05:693c:3007:b0:2ea:5057:a2f9 with SMTP id
- 5a478bee46e88-2ea5057b737mr6662607eec.16.1776959181212; 
- Thu, 23 Apr 2026 08:46:21 -0700 (PDT)
-Received: from desktop.. ([2804:7f0:6401:dc31:4200:1760:44a0:9daa])
- by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-2e539fa5c86sm33732055eec.1.2026.04.23.08.46.17
+ bh=C9WmJSEhO9A0FULwe9kZLf8tw1TNrXZotWxHHJges60=;
+ b=N5ESmQszwMyoF50uytK6MfWlHbp8DJx4O0OPrjpCqAqc23BYBIDQIpm0tkMRbcppsI
+ bjwoaE6rKBP4YVHR+YP5R/r3dLDa3fP0OdyDhBNL8tfGYFDKLoTueAkDeNxszLvI/eqp
+ QPVT7LD3fdaK1VMUvUoZzplqRsLpE42j+mCow=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1777141993; x=1777746793;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=C9WmJSEhO9A0FULwe9kZLf8tw1TNrXZotWxHHJges60=;
+ b=npSyvCUS4Fp8N2TeKRnEJJk9zHea07E1x1kAv8hekpB9kzpAKC33Kxnd8Lv1wn8Rox
+ wNccb6WfUNRZMigbMg0tU0OVVUfZN1DvxonYkHA3ruKnZLhdEIGO1/70LRU020e/X7YR
+ GC/A8NeMDZZwGjfDX7oLLV1QV+CKVpMtckoB0T68SBDzn6z+84Vrts0ZhlfjhhsF8HIx
+ b5yhpwdYmxYbr0d9HEDVDuanke0D9l8+1XP4KTFZ7gXS4ObuwG6vrGCSv74G0Kz6lU+j
+ +tHbOwWG33PaafBkX4cRvm6O7/I6XpeVbkg7en5P3qynDXGBhQCtFHYmkLEQrRUxv5y+
+ 0cRQ==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ+kKiq+tiOqFQOo5TPmWFcvNO9BQhuJruNjWG0vwXht1a83SimWf1qVl5h6Ra1qZM+dqsBVaEI=@lists.denx.de
+X-Gm-Message-State: AOJu0YyZQHpX8a+sXivkWFNOFXT2HzYDicDali7F5ywm5RoP8A3qIch/
+ RawUg2SbhUQIHXLTEa//IF1y5YKvBWosQfe8MZ3L1clXE5Gv4cVqwgKeGDBqtGjpehEwzne3cqg
+ ZMerXwzpm+A==
+X-Gm-Gg: AeBDieuIUw5XBk53JY1g7xSm/N5B/v65vGdHp0HrJ5WJYuBLECnbw2DBFP3oKvWZDm8
+ 9rEm5pAakNsu/c7bXyMoCuJS6Ex7hDYrKbrs4U38LReSl8nBtv89MecOQ6EvwlbwOTqljyfulOY
+ 7DGaqHaYR0/5pdAWMv9+7IQzYAe2NBhBb4wnLFoeQLVTzC+mRtEoWbYFtaHidVWb5jjc1321KxT
+ oZHd+pUAk3nLxoV6MWG8okqBAVdyASaPC0uY1tTSjndmyFj3xcheybCWXGvEnMOZn+nu2xJiEL8
+ s0memkktHTfrUpGL1NL/KPZxo9NPoEBqxQ0Jl458crzyPx0iUsWvLPdh+yZSA5zFZrds/GYEThs
+ 5EOA25ilXRJkKp6cnmJpHV+/MbLiPbl2jwI9zJZj+Wmg6wiNmpyaqyhEjecku23pJWak0IGzxX7
+ ErPxiEee+eVYX3FzScF6QX+oIHGkVD0DWyM4mr5VKJ/fHyBtLDiO0Q1t8hNfo3pTPsLavpYJplq
+ aZay52txw5k8JSw3kfn/HV84UeWvF0sdD1zgkArgbXeLwu5rjgrCMurQd+W
+X-Received: by 2002:a05:6808:80b0:b0:479:dcb1:dcee with SMTP id
+ 5614622812f47-479dcb1ede4mr7952535b6e.18.1776898139202; 
+ Wed, 22 Apr 2026 15:48:59 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-189-203-106-235.totalplay.net.
+ [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-479f3cf40d1sm3874175b6e.12.2026.04.22.15.48.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 23 Apr 2026 08:46:20 -0700 (PDT)
-From: Sergio Prado <sergio.prado@e-labworks.com>
-To: u-boot@lists.denx.de
-Cc: trini@konsulko.com, sjg@chromium.org, alpernebiyasak@gmail.com,
- ilias.apalodimas@linaro.org, marek.vasut+renesas@mailbox.org,
- sughosh.ganu@arm.com, wolfgang.wallner@at.abb.com, bb@ti.com,
- y.moog@phytec.de, xypron.glpk@gmx.de, sergio.prado@e-labworks.com,
- jerome.forissier@arm.com, afd@ti.com, quentin.schulz@cherry.de,
- Wojciech.Dubowik@mt.com
-Subject: [PATCH v3 0/2] binman: add PKCS#11/HSM signing support for X509
- certificates
-Date: Thu, 23 Apr 2026 12:45:34 -0300
-Message-Id: <20260423154536.768603-1-sergio.prado@e-labworks.com>
-X-Mailer: git-send-email 2.34.1
+ Wed, 22 Apr 2026 15:48:58 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: Francesco Dolcini <francesco.dolcini@toradex.com>, 
+ Vitor Soares <ivitro@gmail.com>
+Cc: Vitor Soares <vitor.soares@toradex.com>, u-boot@lists.denx.de
+In-Reply-To: <20260401141844.539308-2-ivitro@gmail.com>
+References: <20260401141844.539308-2-ivitro@gmail.com>
+Subject: Re: [PATCH v1] configs: aquila-am69: Set ENV_MMC_EMMC_HW_PARTITION
+ and ENV_RELOC_GD_ENV_ADDR
+Message-Id: <177689813850.1956774.6334118032132278169.b4-ty@konsulko.com>
+Date: Wed, 22 Apr 2026 16:48:58 -0600
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,96 +101,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Motivation
-----------
+On Wed, 01 Apr 2026 15:18:42 +0100, Vitor Soares wrote:
 
-TI K3 secure boot requires X509 certificates to be signed with a private
-key at build time. Until now, binman expected this key to be present as a
-plain PEM file on the build host. For production use, however, private keys
-should never exist unprotected on a build machine — they belong inside a
-Hardware Security Module (HSM) that enforces access control and keeps the
-key material unexportable.
+> Set CONFIG_ENV_MMC_EMMC_HW_PARTITION=1 to store the environment in the
+> eMMC first hardware boot partition instead of defaulting to 0 (user
+> data area), where the rootfs and data partitions normally reside,
+> risking corruption. This keeps the full boot stack self-contained in
+> the eMMC hardware boot partition.
+> 
+> Enable CONFIG_ENV_RELOC_GD_ENV_ADDR so that gd->env_addr is adjusted by
+> the relocation offset during U-Boot relocation. Without it, gd->env_addr
+> keeps pointing to the pre-relocation address of the default
+> environment, leading to incorrect environment access before env_load()
+> completes.
+> 
+> [...]
 
-This series adds support for signing X509 certificates via any PKCS#11-
-capable HSM (YubiKey, TPM, network HSM, SoftHSM2 for development, etc.).
+Applied to u-boot/master, thanks!
 
-Design
-------
-
-Two new make variables are the sole user-visible interface:
-
-  BINMAN_PKCS11_URI    PKCS#11 URI of the signing key on the HSM, e.g.
-                       pkcs11:token=mytoken;object=mykey;type=private
-  BINMAN_PKCS11_MODULE Path to the PKCS#11 shared library (.so), e.g.
-                       /usr/lib/softhsm/libsofthsm2.so (optional when the
-                       module is already configured via openssl.cnf or
-                       PKCS11_MODULE_PATH)
-
-When BINMAN_PKCS11_URI is set, binman replaces the on-disk keyfile with
-the URI at signing time. The PKCS11_PIN environment variable can be used
-to supply the token PIN non-interactively; it is appended as a
-pin-value=<pin> query parameter to the URI.
-
-The openssl bintool auto-detects which OpenSSL PKCS#11 interface to use:
-
- - If the pkcs11 provider is loaded (OpenSSL >= 3.1 + pkcs11-provider),
-   it uses -provider default -provider pkcs11.
- - Otherwise it falls back to the legacy libp11 engine
-   (-engine pkcs11 -keyform engine).
-
-Detection is done once via 'openssl list -providers' and the result is
-cached, so there is no per-signing subprocess overhead.
-
-Testing
--------
-
-Tested on a Toradex Verdin AM62 (verdin-am62_a53_defconfig) board with
-both legacy engine path and pkcs11 provider path using SoftHSM2 and
-YubiKey 5 NFC.
-
-A subtle issue was discovered during testing: binman uses a
-ThreadPoolExecutor internally (etype/section.py) and may call multiple
-ObtainContents() methods concurrently even under make -j1. SoftHSM2 and
-some real HSMs do not support simultaneous logins from different threads,
-which caused intermittent "login failed" and "object not found" errors
-during multi-certificate builds. To fix it, a module-level threading.Lock
-was used to serialise all PKCS#11 signing calls.
-
-Test coverage: btool/openssl.py and etype/x509_cert.py remain at 100%
-(verified with 'binman test -T').
-
-Changes in v3:
-- Split into two patches: bintool infrastructure (1/2) and x509_cert
-  feature (2/2)
-- Fix global environment mutation: _run_cmd_pkcs11() no longer writes to
-  os.environ directly; it now uses the new extra_env parameter so module
-  paths are scoped to the subprocess only, which is both cleaner and safe
-  under concurrent execution
-- Add module-level threading.Lock to serialise concurrent PKCS#11 signing
-  calls and fix intermittent login failures caused by binman's
-  ThreadPoolExecutor
-- Fix URI query string separator: use '&' when the URI already contains
-  '?' (e.g. module-path already present), '?' otherwise
-- Test cases updated
-
-Changes in v2:
-- Add tests for _build_key_args() (PEM path, PKCS#11 provider, PKCS#11
-  engine, PIN appending), _pkcs11_use_provider() (caching),
-  _run_cmd_pkcs11() (with and without module path), and end-to-end
-  x509_cert signing with a PKCS#11 URI (testX509CertPkcs11), ensuring
-  btool/openssl.py and etype/x509_cert.py have 100% test coverage
-
-Sergio Prado (2):
-  binman: bintool: add extra_env parameter to run_cmd
-  binman: x509_cert: add PKCS#11/HSM signing support
-
- Makefile                        |   2 +
- tools/binman/binman.rst         |  18 +++++
- tools/binman/bintool.py         |  15 +++-
- tools/binman/btool/openssl.py   | 117 +++++++++++++++++++++++++++-----
- tools/binman/etype/x509_cert.py |  47 +++++++++++--
- tools/binman/ftest.py           | 110 ++++++++++++++++++++++++++++++
- 6 files changed, 286 insertions(+), 23 deletions(-)
-
+[1/1] configs: aquila-am69: Set ENV_MMC_EMMC_HW_PARTITION and ENV_RELOC_GD_ENV_ADDR
+      commit: 6f44d897435fe700afb7bb1858d6bc15516c3956
 -- 
-2.34.1
+Tom
+
+
