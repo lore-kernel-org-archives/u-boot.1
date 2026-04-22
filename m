@@ -4,91 +4,131 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D93BFF9EDE0
-	for <u-boot@archiver.kernel.org>; Wed, 22 Apr 2026 14:45:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0BC60F9EDE0
+	for <u-boot@archiver.kernel.org>; Wed, 22 Apr 2026 14:45:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 91A388435B;
+	by phobos.denx.de (Postfix) with ESMTP id D729C84390;
 	Wed, 22 Apr 2026 16:45:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=9elements.com
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=9elements.com header.i=@9elements.com header.b="csJv7HEf";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="JNzjcXUR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8C8F984178; Wed, 22 Apr 2026 14:58:05 +0200 (CEST)
-Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
- [IPv6:2a00:1450:4864:20::331])
+ id 0784C8423E; Wed, 22 Apr 2026 15:47:15 +0200 (CEST)
+Received: from mail-lj1-x229.google.com (mail-lj1-x229.google.com
+ [IPv6:2a00:1450:4864:20::229])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 636E883936
- for <u-boot@lists.denx.de>; Wed, 22 Apr 2026 14:58:01 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=9elements.com
+ by phobos.denx.de (Postfix) with ESMTPS id B501183BC8
+ for <u-boot@lists.denx.de>; Wed, 22 Apr 2026 15:47:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=maximilian.brune@9elements.com
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-4891b0786beso30492775e9.1
- for <u-boot@lists.denx.de>; Wed, 22 Apr 2026 05:58:01 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lj1-x229.google.com with SMTP id
+ 38308e7fff4ca-38e7d984096so59891821fa.2
+ for <u-boot@lists.denx.de>; Wed, 22 Apr 2026 06:47:09 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1776865629; cv=none;
+ d=google.com; s=arc-20240605;
+ b=dmAddFYfaU9W6ezJO68HOy3pi43dKQQcGx+jTJ8QbYJQWBxQfmByQlpffzrIrS1TA+
+ zC1Mxsq/mLp6oTalrskOt4+FdrGCVt+7hO3erv4KcFowYzZHXDev5GfZV7oD/IhlFntz
+ 8xx65HJjeIlklSIikjss00HIFzeb2Ummvg9NFBCoi7b7EGbT2cIKWHq7Bv+OnNhxlM4i
+ MpmxGj4latT7RSrI5urNEC4a5nv3GmC2w2JXXCNgnumHiwuqNEBu6qnB9ylyd4tDG5pU
+ J54HjZrSM4kBBNBIF24cYg9PYwWh2VRC6ERdz//6UFAgJPBDXPDDn4IrTRxphi/5zGc0
+ UBXw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=tKZXe++TwV9zFM8MzIe9WBAC89R9N/AfM8E2NZzKLV4=;
+ fh=VdmutiOgV7YF/H2RFOfe7KY1vUpRFELyzJ4m3DrBPzY=;
+ b=SZQ76BCrgiF/Y8r6KnbP6lHU8/fIUQ38sjicjIv4CH7UaLOANNNex6jWUhovEyUzbb
+ miGnTAwwdi5bjFrQvR0hhMLjnctvASqtSXSly5GxQdadnpyCLAtgAGKWc57IyVxcnd3d
+ 7jYoBkecVhNkHfOyyNXzkG6cghlotX8Us684bFo+Kz9OBG9M+JpvZMKhSUIxDEeUyQcF
+ CG2EnXAS7CNo93yWfnNcd9sdZAB/yZ+g8q90i4jdtOKbwG858uOtjdsHm9isBQnD7osw
+ nO3tKOs/FWypgSBTP0GL0A1qqLauQqQ90mcd8XEbvxWpfePtjzCkexZLv4vRFp6+nQjA
+ 6UVQ==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=9elements.com; s=google; t=1776862680; x=1777467480; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ d=gmail.com; s=20251104; t=1776865629; x=1777470429; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=e60BwJUwSBTPYoSPSX9L56xzzvHvHc09J9JBeYSXNtg=;
- b=csJv7HEfiMzU0Ce9ygq3zpSOH/tRev+OzPvFCzbi4OOzwFUdy7/YdTg/8Jg+rkYJmS
- 95VEgXtuuu0QZp0s1xE0zejpcPK0MItJee3heLtpWhJtGUkBT2XAkHuS21JCmOfHYWwk
- Yphh8k+TTTKm5WnKyLd3w7WmHeJTsj/y6hGxCgCe6o80YuQAX8fanoU/l8JR5tsF3pL1
- kDV6vqiLtJRHq66rb6tF1EjgYDL6SQEOUPJ6ZwPw96JoKVLiWW1LwI605BYUj8GCuvh4
- lI3Pmq0YEm6i1v68s9ZKelZtxxmMTHYRtRqa/FvklfEPdaDUBqyfcxdLZuCwtFW0z/lj
- rfbw==
+ bh=tKZXe++TwV9zFM8MzIe9WBAC89R9N/AfM8E2NZzKLV4=;
+ b=JNzjcXUReJ1aTwSr5koObZJEj9dkvlb8ieiM/ZmuFR7ECP4frN1Te45DG5TlMtXsla
+ f4bKNWFO0SYYX716b6WET8PhexXdacfMqldyZFxRH95g34nkgVFNYPWstsd77IndIy0l
+ Arpu8DMLtDPMM6tJ8EN6AMO4SQOLW403S/yMRA+LbNf3jdXbaoQOhs5ZoenNhNppMeBV
+ 21XsqYZTnJjPacrHtYTQf+TiSFFQ0JkgH8YYNHgmvmhHHwCqAwPOwHIglVnBCaK6+kPU
+ Y8CDZow9YWY6OpE5uDJG20kLJdEYuJVUUd0D9k1lmcls/pvYAnVMh46LOXj0kFCj2b+q
+ 7r4g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776862680; x=1777467480;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ d=1e100.net; s=20251104; t=1776865629; x=1777470429;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=e60BwJUwSBTPYoSPSX9L56xzzvHvHc09J9JBeYSXNtg=;
- b=hLUW1zOfApIbnWbbhzE0dRj8jUma1hUjiHKOlSjFgsw7AlhRGKY0kGdKaOlzCR/Kas
- kkiwOzqVE8CfU7CW5yCr3Oz53z7WRJiqF7XoeOVkL94EQlghF0bMi3vn8waca+L2Kqgh
- bHD45yG41ZCoc48NVNE0Xp4tVU9EOvxJayUcrMhyb70uf14bKTJmQUjcNrRemxZuL1UF
- 4mEEpQu2nt+FSe+iC+u8GLSzYVN/C0q/bQCOvAxQ51t2MUE3T0XLE9vnnW79iiS7eVnb
- Jro8QFkrLK4SZpBtlC97MMLu7GIvKnCcLTBFWrxqduNj1w5J1yMHkDXbuuCDK6bbxjch
- BqjA==
-X-Gm-Message-State: AOJu0Yx8AkryQYl2O88M9OKm+g3OlNpAwkfxmu7ebmiNFuJrmiYWV1w0
- Aynn7Bm27ST7am4T8NZHsSSSDRGL/0qVZd+6Bjww3zAEOYmqMvup/UranlWnO1MNvX4g7DicsES
- ZYwGm0fncpg==
-X-Gm-Gg: AeBDietO70KdbqXGtU11w+0DqOYt7ZUoApBJf7SsUFXR1C/BX4kQCqeNC4cxNhpc5hY
- nU52sCavmf85KdBr8HPI+TvqRRzWWpIezymc67qQsjhjI2FGIilxMRQb/evr5rvijicELlQns66
- gG72n0D72jOhdDQFTWWQq16hFi6tVYiSLIWPOshKJQtg+QJFBmRiT/hR0e3O/vTrDuThjHmoV0E
- I4ptfSMEcSs+a/GKDLVqEiemGvVcZ/0nUd8cS8rn0KUrY7YV3gdavBmpIA0GsDOLh6FJYiM5rn8
- zollvdqyTP4t7SQHc4Xz/aKoiPVl3nB6necy3559R0t/KCRGEEHTYPhbkgLqoeUl+wtGyR6AiQp
- 65TzKrrAHIcIqgWUkVowHmHvlP6Y2yAb2RevoiqRD6C/rz1bPUgB7sUco0FCMAa3dXBwyhTZ5dd
- DOFkvDOEsOzWjukZMpr7KDTvzy7BV6a9S2ucxHwPu8v4pc63C7NNuxOn5Oio3AR9KN4PAGyb5fm
- g1oSUwu3uIjabpEYWxa+bp0wLfqOtJ6EFG9IQCQOv/y+P43WdzzwxsyO28i
-X-Received: by 2002:a05:600c:37c4:b0:48a:5501:7995 with SMTP id
- 5b1f17b1804b1-48a55017b71mr113152995e9.18.1776862680522; 
- Wed, 22 Apr 2026 05:58:00 -0700 (PDT)
-Received: from mmax.sec.9e.network
- (p200300ed8f1a0a004662703f880fa970.dip0.t-ipconnect.de.
- [2003:ed:8f1a:a00:4662:703f:880f:a970])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-488fb7a06f3sm162384965e9.22.2026.04.22.05.57.59
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 22 Apr 2026 05:57:59 -0700 (PDT)
-From: Maximilian Brune <maximilian.brune@9elements.com>
-To: u-boot@lists.denx.de
-Cc: trini@konsulko.com, andrew.goodbody@linaro.org,
- george.mccollister@konsulko.com,
- Maximilian Brune <maximilian.brune@9elements.com>,
- Simon Glass <sjg@chromium.org>
-Subject: [PATCH v3] pci: correct PCI device enumeration to include all
- functions on device 0
-Date: Wed, 22 Apr 2026 14:57:53 +0200
-Message-ID: <20260422125753.29574-1-maximilian.brune@9elements.com>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260416161305.24118-1-maximilian.brune@9elements.com>
-References: <20260416161305.24118-1-maximilian.brune@9elements.com>
+ bh=tKZXe++TwV9zFM8MzIe9WBAC89R9N/AfM8E2NZzKLV4=;
+ b=SmpztFTaB6Fwd+x28iMWW14j8hYeEVaDYW3D2G81vKwaYxRBIacVNquf/2y4Gc9gyE
+ nlG9/qPzRcN3M0JlWC9Ehy/tbsbEuiTooqPkZ2s4F5CokzdvtHMcEZnvRSRzIbdszyYW
+ P9f4RyKoD9AUu2l3NPjY23/Rxp+StSoThAqIEK9qT+qYVD93+JFA7wlhskSLHnbC7HjP
+ eb+z7NIxmWgKZoNbsKqHgNE2eCWOh0w8MkezStJFtRbY1K8gJiW748TgyMlBXBz91tOI
+ nxuQA2fdqVJfgmTHQ5wB0ObGu0mnQ1Au50X8TpLj6lg886UtKGumsJo0bQE+i7laY8EZ
+ AKZg==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ8k2eJb1JAw6tH1u2v53czi6Sn0dQcxBXVbY1GlFYahGI33U12K7vUZmlCBt6cA9B7CEORg/7E=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz/wHMVnD3jWverjv/EVi+D0GI7gScsOASu6kjRGgfI4qBoA9N4
+ KaEd6gUNXuT47xzlhCwGBFT19FkRZPsA3Xrdv9JgPpEu2W16FNK39Q0wEUJrUnaLE8Wxcpe0zM6
+ F6CLb4oLGIyhJxy2+uimVckyAD3sEcRc=
+X-Gm-Gg: AeBDievs/KYcPKs4viVlo8Vwm/FLRfPTugOOcwKIatYvJIb3PjVJzG1OaCR5yQ/04hq
+ BQDL8y39sRdpW4xrMw9c9BoCmNtQpf2JKX0sh0gQacw0MRNL1YlqaCPQHn02+VvaHgiFWJtiiG6
+ K1UXJWYRFOu5mHr/hFtE9Op713AFMB7fDTYCY9EmoT3OCu2PD1uGiBFDu2PCXwfiICmdTWKDfeM
+ ov1HuTtKOZxTSj5vO4frK4v9JbThleWbj7HkfdIeqY/U63j6ATqY3bgtLl8jOaUreRrReOb5x6c
+ z9pP6p1RFXfjk/GWRkAF2LYmzFT9RhX0ykt9NoyBbXe4oHZoe/PpKamUkzoqPok1bhpPD8fRnxU
+ f40un3A8=
+X-Received: by 2002:a05:651c:2120:b0:38e:a8ef:b61 with SMTP id
+ 38308e7fff4ca-38ec7b479b6mr69847081fa.29.1776865628558; Wed, 22 Apr 2026
+ 06:47:08 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20260421-wdt-v1-0-0bd01ec6a7c4@nxp.com>
+ <20260421-wdt-v1-2-0bd01ec6a7c4@nxp.com>
+ <aa7822a0-a114-4989-b23d-9e242bd2dcde@mailbox.org>
+ <PAXPR04MB96446CF3749068C53E1E8092E22D2@PAXPR04MB9644.eurprd04.prod.outlook.com>
+In-Reply-To: <PAXPR04MB96446CF3749068C53E1E8092E22D2@PAXPR04MB9644.eurprd04.prod.outlook.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Wed, 22 Apr 2026 10:46:57 -0300
+X-Gm-Features: AQROBzCbYdRYKRT_FgQtL883Rgg01qLl_uoEOt8KcM6hnXQDUi1vpOCW3C2ZenU
+Message-ID: <CAOMZO5A2h1fx=NAPhg-2ise0RQzLJed9GsHGSB6Qa2AgMmP99g@mail.gmail.com>
+Subject: Re: [PATCH v2 2/5] arm: dts: imx: Update watchdog nodes for dynamic
+ base address lookup
+To: "Alice Guo (OSS)" <alice.guo@oss.nxp.com>
+Cc: Stefan Roese <stefan.roese@mailbox.org>, dl-uboot-imx <uboot-imx@nxp.com>, 
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ Christoph Stoidner <c.stoidner@phytec.de>, 
+ "upstream@lists.phytec.de" <upstream@lists.phytec.de>,
+ Stefano Babic <sbabic@nabladev.com>, 
+ Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>,
+ Ye Li <ye.li@nxp.com>, 
+ Simon Glass <sjg@chromium.org>, "Ross, Fedor" <fedor.ross@ifm.com>, 
+ =?UTF-8?Q?S=C3=A9bastien_Szymanski?= <sebastien.szymanski@armadeus.com>, 
+ =?UTF-8?Q?Jo=C3=A3o_Paulo_Gon=C3=A7alves?= <joao.goncalves@toradex.com>, 
+ Primoz Fiser <primoz.fiser@norik.com>,
+ Frieder Schrempf <frieder.schrempf@kontron.de>, 
+ =?UTF-8?Q?J=C3=A9r=C3=A9mie_Dautheribes_=28Schneider_Electric=29?=
+ <jeremie.dautheribes@bootlin.com>, 
+ Jacky Bai <ping.bai@nxp.com>, Francesco Dolcini <francesco.dolcini@toradex.com>,
+ Mathieu Othacehe <m.othacehe@gmail.com>, Lukasz Majewski <lukma@denx.de>, 
+ Ernest Van Hoecke <ernest.vanhoecke@toradex.com>, 
+ Emanuele Ghidoli <emanuele.ghidoli@toradex.com>, 
+ Max Krummenacher <max.krummenacher@toradex.com>,
+ Wadim Egorov <w.egorov@phytec.de>, 
+ Sumit Garg <sumit.garg@oss.qualcomm.com>, 
+ "tharvey@gateworks.com" <tharvey@gateworks.com>, Anshul Dalal <anshuld@ti.com>,
+ Franz Schnyder <franz.schnyder@toradex.com>,
+ Sam Protsenko <semen.protsenko@linaro.org>, 
+ Joseph Guo <qijian.guo@nxp.com>, Ji Luo <ji.luo@nxp.com>,
+ Marek Vasut <marex@nabladev.com>, Alice Guo <alice.guo@nxp.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-Mailman-Approved-At: Wed, 22 Apr 2026 16:44:59 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -106,46 +146,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Currently the implementation does not just skip all devices beside
-device 0, it also skips all functions (besides 0) on device 0. This
-broke basically all AMD platforms, since they have a lot of internal SOC
-devices behind these functions.
+Hi Alice,
 
-This was detected, because the XHCI controller and therefore the USB
-devices were not found by u-boot on AMD/crater platform.
+On Wed, Apr 22, 2026 at 12:49=E2=80=AFAM Alice Guo (OSS) <alice.guo@oss.nxp=
+.com> wrote:
 
-PCI_MASK_BUS() returns both device and function bits, so it skips any
-bdf where either device > 0 or function > 0. Using PCI_DEV() extracts
-only the device number, matching the intent in only_one_child().
-It therefore now checks all functions on device 0 (Linux does the same).
+[Please trim your replies]
 
-I build tested u-boot as coreboot payload and run it on a recent x86 AMD
-platform. Devices like the XHCI controller are now found again.
+> Hi Stefan,
+>
+> For platforms with CONFIG_OF_UPSTREAM enabled, the DTS/DTSI files come di=
+rectly from the upstream kernel tree and should not be modified in U-Boot, =
+so the watchdog node is added in the corresponding xxx-u-boot.dtsi.
 
-Fixes: fbde868ba4aa ("pci: skip unnecessary PCIe scanning")
-Signed-off-by: Maximilian Brune <maximilian.brune@9elements.com>
-Reviewed-by: Simon Glass <sjg@chromium.org>
-CC: Tom Rini <trini@konsulko.com>
-CC: Andrew Goodbody <andrew.goodbody@linaro.org>
-CC: George McCollister <george.mccollister@konsulko.com>
-CC: Simon Glass <sjg@chromium.org>
----
- drivers/pci/pci-uclass.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Please send the watchdog changes to the upstream kernel, so that
+u-boot.dtsi does not grow unnecessarily.
 
-diff --git a/drivers/pci/pci-uclass.c b/drivers/pci/pci-uclass.c
-index 83b76d01f24..f58d542ef75 100644
---- a/drivers/pci/pci-uclass.c
-+++ b/drivers/pci/pci-uclass.c
-@@ -927,7 +927,7 @@ int pci_bind_bus_devices(struct udevice *bus)
- 		if (PCI_FUNC(bdf) && !found_multi)
- 			continue;
- 
--		if (only_one_child(bus) && (PCI_MASK_BUS(bdf) > 0))
-+		if (only_one_child(bus) && (PCI_DEV(bdf) > 0))
- 			continue;
- 
- 		/* Check only the first access, we don't expect problems */
--- 
-2.53.0
+Then mention the upstream lore URL in the U-Boot patch.
 
+We can accept the u-boot.dtsi changes temporarily, but please make it
+clear in the U-Boot patch that an effort is being made to get the
+u-boot.dtsi change to the upstream kernel.
+
+> For platforms without CONFIG_OF_UPSTREAM, the DTS/DTSI files are maintain=
+ed locally in U-Boot, and the watchdog node is added directly to xxx.dtsi.
+
+Please help convert the NXP platforms to CONFIG_OF_UPSTREAM.
