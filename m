@@ -4,150 +4,149 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4B17F94CB2
-	for <u-boot@archiver.kernel.org>; Wed, 22 Apr 2026 03:54:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F259F94CC1
+	for <u-boot@archiver.kernel.org>; Wed, 22 Apr 2026 04:11:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2717A83936;
-	Wed, 22 Apr 2026 05:54:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
+	by phobos.denx.de (Postfix) with ESMTP id A9F9D83936;
+	Wed, 22 Apr 2026 06:11:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="kQvMQIi6";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="QMlRZAvD";
+	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Q2dyN9uJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 00F4883AC5; Wed, 22 Apr 2026 05:54:50 +0200 (CEST)
-Received: from AM0PR83CU005.outbound.protection.outlook.com
- (mail-westeuropeazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::1])
+ id EE66483BC8; Wed, 22 Apr 2026 06:11:28 +0200 (CEST)
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
+ [205.220.180.131])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DFB168352B
- for <u-boot@lists.denx.de>; Wed, 22 Apr 2026 05:54:47 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=oss.nxp.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=alice.guo@oss.nxp.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Q9lJ9GnOWqrHrILGZJB2nDx+m86HFqz5Wd3PNeV2TmfBUSCQJbApM4aPq4HQa0ZJj2gnYnzsBct3sGOn8Vhl0/mb6M/GF6Dm9EJZHbSD7MR96yQT/ZM+ocECnOyypP32p8bEUt6e4LJG9jR7pT430GSIIRbQmquFEl4iQ87JfNfIoQGXtq5BRSsLLwf2MgbDwo3yrNFcwV2rvUXdZjplaLS70sp7iNeSJhCWKwRADdzasiXrG6KkoagyBOeHtPKRtGjhqyffX1AIScrOQHLkrThZaOrZF8GUtPQ3DihIwarz0f1xkTaSnP5LvKgU8HiG8RQotPZFk+h4wRknw5NPxw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=jwG/6hfTpBH0KrKXb3RCo+GJ4rtIm5YIw63RGR2cYPw=;
- b=cLfZmGc0SrInL4B3Ztj+dV7yTPq5oUmSXxanzcEI35DSwwS8JpjTIfqD3jSZGXX1HW3l5o41/+Vw19knxpuXhM5wH+RCEekGkdRY7/I/YBcfeVFsPlkF6qnZbyhj/T8nAFhuC1jinOzDtmbI16FP7n1mtO2bf3oE/GMIvzdcAHEZqZBTWrDRDJN22FC2wSpjq4wdEgAFS404uZNuqDXqEFlLA5REzI/WQILQ4bd9lHomF1lwa6ZIse4yMX2KcYUVLTuG7OixcYCSI/CX+nzEw5JLWVmg8g9nha8l5HEATbJ51FT2kWJuNiTmVMycLlF9OJ293CB50WlCAH+kqYNNbw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
- dkim=pass header.d=oss.nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
- s=selector1-NXP1-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=jwG/6hfTpBH0KrKXb3RCo+GJ4rtIm5YIw63RGR2cYPw=;
- b=kQvMQIi6O8PzrLe0TqVAmN/COgsSJtwSMQxJk1sXLA898EGQs7rL14rR4jLqBrGUb6oAECwmDs1T8Rj6I4Gf59qiO8QYW+ZfPl51M9TPd+/dnHl40Dgt0Zc20D+iXVLR7ZmV3ZnHjnZwSIHteqDt7TpzPV+SJQvRI4tnwNJ8JsQ8EC/7BnrP3vejgPJCWdnP67FWCVGAZLLDHxiF+2xk+rAHbpVmnPc4Pmj6AjWH4lUSM5NNgwhur1s4gCT5iY+TiyZFZnIU5cNKK64Mkg/VCPfczvbpNJF9RQtXHW9rv+1L/6+binES72FPF9lbwscfUaH6XsIQ4miYCzIKJOMisg==
-Received: from PAXPR04MB9644.eurprd04.prod.outlook.com (2603:10a6:102:242::11)
- by VI0PR04MB11940.eurprd04.prod.outlook.com (2603:10a6:800:307::15)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9846.16; Wed, 22 Apr
- 2026 03:54:44 +0000
-Received: from PAXPR04MB9644.eurprd04.prod.outlook.com
- ([fe80::cf3:c5b0:7a0c:d11b]) by PAXPR04MB9644.eurprd04.prod.outlook.com
- ([fe80::cf3:c5b0:7a0c:d11b%5]) with mapi id 15.20.9818.031; Wed, 22 Apr 2026
- 03:54:44 +0000
-From: "Alice Guo (OSS)" <alice.guo@oss.nxp.com>
-To: "tharvey@gateworks.com" <tharvey@gateworks.com>, "Alice Guo (OSS)"
- <alice.guo@oss.nxp.com>
-CC: "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Marek Vasut
- <marex@nabladev.com>, Jerome Forissier <jerome.forissier@arm.com>, Tom Rini
- <trini@konsulko.com>, Beiyan Yun <root@infi.wang>, Bo-Cun Chen
- <bc-bocun.chen@mediatek.com>, Siddharth Vadapalli <s-vadapalli@ti.com>,
- Weijie Gao <weijie.gao@mediatek.com>, Ye Li <ye.li@nxp.com>, Vladimir Oltean
- <vladimir.oltean@nxp.com>, Michael Walle <mwalle@kernel.org>,
- =?utf-8?B?VGhvbWFzIFNjaMOkZmVy?= <thomas.schaefer@kontron.com>, Marek Vasut
- <marex@denx.de>, Alice Guo <alice.guo@nxp.com>
-Subject: =?utf-8?B?5Zue5aSNOiBbUEFUQ0ggdjEgMS8yXSBuZXQ6IHBoeTogYXF1YW50aWE6IElu?=
- =?utf-8?Q?crease_timeout_for_out_of_reset?=
-Thread-Topic: [PATCH v1 1/2] net: phy: aquantia: Increase timeout for out of
- reset
-Thread-Index: AQHc0gvB21sT5AV5Q02fVL1wLGoPXw==
-Date: Wed, 22 Apr 2026 03:54:43 +0000
-Message-ID: <PAXPR04MB96442DF7A37A8055214DA528E22D2@PAXPR04MB9644.eurprd04.prod.outlook.com>
-References: <20260415-10g-v1-0-f6809a31c2b2@nxp.com>
- <20260415-10g-v1-1-f6809a31c2b2@nxp.com>
- <CAJ+vNU3+rN1hVZQRTHEQmi+uo5o1ak9epLL=VFqNRMGNT-iNSg@mail.gmail.com>
-In-Reply-To: <CAJ+vNU3+rN1hVZQRTHEQmi+uo5o1ak9epLL=VFqNRMGNT-iNSg@mail.gmail.com>
-Accept-Language: zh-CN, en-US
-Content-Language: zh-CN
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=oss.nxp.com;
-x-ms-exchange-messagesentrepresentingtype: 1
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: PAXPR04MB9644:EE_|VI0PR04MB11940:EE_
-x-ms-office365-filtering-correlation-id: 752b6572-3914-4303-1798-08dea022e38f
-x-ms-exchange-sharedmailbox-routingagent-processed: True
-x-ld-processed: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635,ExtAddr
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
- ARA:13230040|366016|7416014|376014|19092799006|1800799024|22082099003|18002099003|56012099003|38070700021;
-x-microsoft-antispam-message-info: tA1FaGlQxDsYCaMFU8qKnMZlYmvWIh7NivoavhVimos7400+yiP51iR1sugMaMbVcLc2uP8u1UHxoltWrYtGJRnzPK3F5WHc/JMTNHhwqP9lzkdb5RfqN36wCz6pzP7MtmiFnvjF2AeW6ZbhoFlU92CP+kR7DuB6hBGR0jzt/F3VIf5TvSrDZI41oBHJM55+ACN9rgH7gtoi/ZH1O2uR6RM9EZH6VywacmNvrEJlPQhmZpuCUX41V1sT5JXEjwIqGeDgvpqxME9DitUByDZ5YhMXcIqe6QPODe+Kq9QaA/CSrtDC+yEcbsCRO/En/lorHBL63XZEQBunqnhPhhEX3GKkvsbXQa/rSaOIouatXMzlWai+Bxf/7erIXnBPJtf3qgwIFEjdnMayhZ+gKeAmhak98AgWGCyUdKakuZxz7IXGbTV5bVjyUZ7Wz9z32xgEyKyxlkUUZFS8fN6nMwDKrZG9juPa+d19vTk488/W0oeEQW/iOquqa353TejOLnvMyhzDd20RkGEKN1aBe2TgHyrIpzvKtj6j42Y3fiBWshJ0Q6j9Sk4vC0cp3mrSlsuQ9xHenMU1IrY7BrlG2Tdt/MF49LU0ppQG6ncT1gGlR8yLYWZXka7IbBVLJKjTWHln576Doaxg7i3CAEz8uSNHgF/Cx3tffhJXX5fAMJXswUPrMTTXlyKC/psC1HVEq4ZC0lUnUKJow0eb5tZOSm2JQ+HYL9m+M2qXanNpN1YXHOJ3cMvTD8BqT5Ir0xTtCthc8PsCp1ESj2aDMvfjDdigmndbl51zjOVTlSuFpjIzk0s=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:zh-cn; SCL:1;
- SRV:; IPV:NLI; SFV:NSPM; H:PAXPR04MB9644.eurprd04.prod.outlook.com; PTR:;
- CAT:NONE;
- SFS:(13230040)(366016)(7416014)(376014)(19092799006)(1800799024)(22082099003)(18002099003)(56012099003)(38070700021);
- DIR:OUT; SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?a3FLNUtOVklJY0ZTZWdZKzJrUkh2eUNaaFdoVEdpelhnV0RYTk4wSnU1UE5X?=
- =?utf-8?B?MHErRGFkMDVyU3pjeExnT2xyMFJHU0lRcm1kRWFLdi80c2lOQWZkRDB5WFRC?=
- =?utf-8?B?cjZJclArMS9sWndXR0F1UVJUdU91TmRrajB0ei9kbnA0RzRFdXowaGFZVDFU?=
- =?utf-8?B?RGtEVG1lVCtaVTJkZ3pnVGd1bG1UaHplRDhUSm5TVlVoQXErejRBU040Q0o3?=
- =?utf-8?B?QTNkUVg3S1dJK1Q5bEtqZk45cy9kYlBpRjlWRVd2Z3NkaTYrU1diTUs4OHRN?=
- =?utf-8?B?c00rcnVxc3ZqQUZHV1BHWFloMldRTmVqTGJWUEtRcW9VanluWnhheU5DaWli?=
- =?utf-8?B?WWt6Vy9XYjlubTdZNmhybkFpdzhyNlRqYlhNNVhNZlgvd2pwVHlMSFpxdXpQ?=
- =?utf-8?B?dVVkMSthTFVVRi9BT2FITzVEVHd3d2tuTUYwQWxXTmsxS2tPSTd0S1JBKzA3?=
- =?utf-8?B?b1JLWDJxN0lSalVIUTU3YjcybFBrVHZIZWozOUVpemtCZmFQYzVLZHZlUC91?=
- =?utf-8?B?cGEwMGtRS29jVmEwK3JEbHZwUlhYUGJYWXZhNWZBOTFYQXJaN0FjWUlxaUpK?=
- =?utf-8?B?U3RuZzZSVHl6YVAxUlpFR0hDOTgwMzdqLzRsSTA0d3Z5bjY0ci9ROStQdDhQ?=
- =?utf-8?B?anlzTllrTkVYaU1VVWwrMGdodUwrKzF1MVN5ZEJ0UkNiRWNYbVBsSUVNZ2tM?=
- =?utf-8?B?WTdWMEFmTEN3RmphNWw3U2ZpeWx1dDFxWWZJMmxScDh1cVBSSlBjRjY4VTlo?=
- =?utf-8?B?b1hxZTM3MjJIeEFoQzZRMWU5Wnk3YTlUaUZJWDg0RUxhYmZlcktEY3BtN1Bh?=
- =?utf-8?B?Nkp2ZC9rRkg2RFdxc291TGd6cmlvblR0dkw1V2M5UEZMNTgvWFREWEZsVnRO?=
- =?utf-8?B?ZnNSamZOZzFGR1ZFanhkUTliaEJtT0ZzWGdyK2QxdngzR2s4RWVEd3I2ZVZn?=
- =?utf-8?B?cFJLVmF2SzdqalYyTU1DWnlISE03VVI5UFozUVA2bm1lcXhxR05XVXVFMU52?=
- =?utf-8?B?b1FVcjA1TjVnZVpXcTRXdytPa3hWd0YxNHNsc0hHMlcyL29FUDFTREpQamNI?=
- =?utf-8?B?QTYzSUp1Qm5XMG8vU2JreEowUC9QT2xWQWNRamxvdjN1dkYrTUR5STcyKytp?=
- =?utf-8?B?UWFScUxHYUR4RWs0RHpnU0UvQ3hKUHZmVnpOQWJ2TkVrT0g0RFlKdzU2WTJM?=
- =?utf-8?B?Ry9OMnNmZlZPNG4weVIreWF0cVdIZWxCWTFLcno2M1VxTmtxUHNLaTYweVh5?=
- =?utf-8?B?L2lmeUk0ZDNEbzQzNndQbHdsbnV0TVZGU2RQbXAzWTJ1WEVKekVCWnhCN1Bq?=
- =?utf-8?B?c09UK0hWeWxoWU5oMVBGdzNpOGgxc0d5TzlRTDBTS25PejlVY3lqK3lmbHpk?=
- =?utf-8?B?dThSN1pKdjJsdCt3QnFRQ05nNUNMczVXK3NFb2NuenZpVlBXM3VqQU1uMVov?=
- =?utf-8?B?cThOK3pMS29PbXRhSEN0VU8yMWMraVhMWHlQcmduc1E1VXBoTVJlZ2Q2NGg4?=
- =?utf-8?B?dDhabDZ1R0p0N21kSmZmMnN6c204aFhPQkQyaElTOXNGMm1mVDE2NThheWRy?=
- =?utf-8?B?UjBUNDZhekJDejhQZmdrNi9YM1dwMHY3eitoNGdDZGVtZ3NWaXplMk51TXRz?=
- =?utf-8?B?TmwrU2hpa2g2NTRzTEVwV2sxRHVBb25uWHNRRHRrdFM2TG1hbERiRFdFZnQx?=
- =?utf-8?B?WEFrOVhHSmI2N1RMUHNNbGI1cUxTZkdiNndvNmRSaFZ5N2tQVjM4OEF5TWtN?=
- =?utf-8?B?Mi8vYWcrcGZkSjdsT2FvN29wRFpiYzJDWE4yclRML2xvZEhPeEgyZGZaWDBZ?=
- =?utf-8?B?SFFKT2xEMGNNK1MxNjZna3JZNGJwRGJTVXpETkxoZm54UUIwZzNTeGFLcnRk?=
- =?utf-8?B?ekFaTzgyTUYrRXRFUHJxNko2TWxTbXQ1S2hOZll0WWg3SWxzODV3anE3Y21x?=
- =?utf-8?B?dzZIYWNFcmZwT3NrV2NkNlhhTDdrTC92ZDRMaml3VnpSNGExVjdyN2FhZUVK?=
- =?utf-8?B?OFdTeThNcXVTSHRqRW5EdTM5MEkrN2pQRjJNMjVHdll3U1AzNGcwaC9sZ1JF?=
- =?utf-8?B?ZW96N2VYLzVvRVdnNG9jaEhZL016QzN2VG1RbVd5OG5sR0ZVNkxyc0NWQWg5?=
- =?utf-8?B?RUxNQ2MwZ2tSSmlMTlpxSWN4cUZLQWRnZUdsSGpGeHptZ1RHazdZU3JtZnZM?=
- =?utf-8?B?YnFpZUN0b1A4c3RBL3hoR2tKcWJLb1doL3VmQThLOWhZV0FTa1o4QmVUOVlC?=
- =?utf-8?B?RnVHTlVuWWRmWEtvQ0c5VktXMjBpY1JLajJNQlFObnN3NXJsdXowcWtvY0VH?=
- =?utf-8?Q?SjEwlvrF0oiif93afT?=
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+ by phobos.denx.de (Postfix) with ESMTPS id 759338352B
+ for <u-boot@lists.denx.de>; Wed, 22 Apr 2026 06:11:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=oss.qualcomm.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=balaji.selvanathan@oss.qualcomm.com
+Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 63LIaEhQ2936073
+ for <u-boot@lists.denx.de>; Wed, 22 Apr 2026 04:11:25 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-transfer-encoding:content-type:date:from:message-id
+ :mime-version:subject:to; s=qcppdkim1; bh=J5EkYDnUWV58DGNFLWTOtK
+ NwbI18smpS4cLIqhTmEyc=; b=QMlRZAvDX62JY6dllq6jAm3vazwWzJQ0ObXkap
+ OiwkFMecXWBJMLRXpsY3ZzqMS4ua431DJEVuT/hXvjVwFuYEmeSK/Ag/LGUCDCqF
+ jLosrT0inf7GxakxrgsEyrl+AciZbQG6KkU4UsiHfh8NnjJjuHzYWGQoV7xa4/hj
+ Cv1NfrSPQ5/3my0cmOq/XSZou7W+t3RvC4/MhuDUe8TezwnVGv2SGeAFuKVdyJKP
+ 0flOJ9bJ5F8DB5X/Q3KVULi/9luGuybhuLwXtJFmVrZBlG/mPdAuIE7qPAkE6Vn2
+ C4h66ULo6aeuCUEVi+qHLKLNLxQcQjQcneYg0MlDaFCgzJcg==
+Received: from mail-pl1-f198.google.com (mail-pl1-f198.google.com
+ [209.85.214.198])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4dpenk9jmk-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <u-boot@lists.denx.de>; Wed, 22 Apr 2026 04:11:24 +0000 (GMT)
+Received: by mail-pl1-f198.google.com with SMTP id
+ d9443c01a7336-2b24cd2e2b3so46864045ad.0
+ for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 21:11:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=oss.qualcomm.com; s=google; t=1776831084; x=1777435884; darn=lists.denx.de; 
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=J5EkYDnUWV58DGNFLWTOtKNwbI18smpS4cLIqhTmEyc=;
+ b=Q2dyN9uJbjTGNpaK6UzU2fwo/p92MDPiIH6OOAgJoz201pnaQOsEmVD0jnyr/DFcd6
+ MwwxRS8fX5TbAbhU3ks/Ud26JLSqKLQOxCi2RBtDVz77FyqAwItFSvoL6Pe8/arSbgKU
+ 6+k6JejwndnzyiZuEKDWWBaNNpxiwhBGOhvR7dKkPWsooXGQbS0oyVUXqJ/kGT/Lgpe8
+ Dwe+2AxzaAl1ViWHHQqKwqt1+oROv3XGOrWlDP/LH8bnOAU8Fe5KiLY91EWogZmrky2c
+ U0u36GJ7tjeJMXdJf6x0nyatDCOGJ1DY8hGV1lXVbx0pqhViWGapK3OiZEqYThRFZMfc
+ kE7Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1776831084; x=1777435884;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=J5EkYDnUWV58DGNFLWTOtKNwbI18smpS4cLIqhTmEyc=;
+ b=XgpuqB0oOXApzI/9Ltp3EuDBNWPZTkVfgZHbJsi4qQkWl0y8lpkGjtF4jKiU8Dg+jA
+ af1bK8XLo0zNmG6Q2YvOnfhgdtKGuPbAzEfg1vh7+GsVLqx6YLRjxKOr8MGDBiWAQmnI
+ Te5HMxX2fyJYayAvaXlXujNbfA8bGJJEUCtvcVB8kAD5uM0zrHxLYKvoC6kxdmfmbODU
+ EZ1GHbJV6bjJFfFbuMbtIsXJZiixzUBbLVW0+SRr8zgkamn8/NwqgmvzpGIY+hzhTiyg
+ K463FATEUHAZIIhdd+Ebkd4K/RMcuZsdfRwfgO4XMlOhtwQfIJKaSVPCcMM8ufG5hqZX
+ odvQ==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ/XQl7d0eZ6wRtjV6yg0ZmDyt6SjIgyZgeEh6ZpwRWI9BGQAALRa9GT3p8t+F0RU9i1oMPAJNg=@lists.denx.de
+X-Gm-Message-State: AOJu0YwljfTrx8kww8zOVFlkFW2I6mMvE+Oh6XweJj/40G36FVzqoozF
+ WwsC5rPk8N3AfL9bSJx5trOss9FdQFw6MjAh0tjFrPLMgQ6u2ask58oypEtBGkvj33K4Ru4zfAV
+ pgcbQjqHRIdeRLQJQvRGVedCYQRybdL9tBnbComjLq2qM5D3DmedEdfB8
+X-Gm-Gg: AeBDieu8DEa9c11dx1nZpQLAkSk3mEZSDGtLSnQBLtcZSLr7Ujn3fycJyslC9rWjxdP
+ ei42KMWlEEMklLa8Rb4cHLp1Kerx+zRrCM8DltzWa1q8dNNCdcYx3M+mwGDaEhJher2rDPhtDPe
+ sVRRg2xFyOU9oeTrwOcH0DPCz+eHUofcsnlQ+FsnJkhlyI4vva7su3+92vD2Bfp5f/uczU9DiG7
+ 4h6zxLkIep49zVI0Vi9O17AUsAbQK7ZgUDX9S3oq8j1Vu7MVD42E8iHL880Qbo7LzQjuBJmFZIP
+ zIJ5PIcuTKX7YdkuSMGmlui9TN2CSolm2MA7sAnHwrRfyNOmexxPB5v4g8cz3mAZeN98Hq6xTp1
+ ASG/dsDwDkcKKakr4T6owEXUBZMXhCl2Amp7ky0cP6Du5TD/vEsWXKVonGk9IF0/KR4k2XTb24m
+ /qFSqwg/7ndSX9bXWxuVcYGbDR/1FUUhQSwg2XixGLghxattBj7J8RZag3le3V
+X-Received: by 2002:a17:902:f645:b0:2ae:5163:c2aa with SMTP id
+ d9443c01a7336-2b5f9f519e5mr206177455ad.20.1776831083784; 
+ Tue, 21 Apr 2026 21:11:23 -0700 (PDT)
+X-Received: by 2002:a17:902:f645:b0:2ae:5163:c2aa with SMTP id
+ d9443c01a7336-2b5f9f519e5mr206177155ad.20.1776831083260; 
+ Tue, 21 Apr 2026 21:11:23 -0700 (PDT)
+Received: from hu-bselvana-blr.qualcomm.com
+ (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-2b5fa9ff3bfsm185539395ad.7.2026.04.21.21.11.19
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 21 Apr 2026 21:11:22 -0700 (PDT)
+From: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+Date: Wed, 22 Apr 2026 09:41:18 +0530
+Subject: [PATCH] arch: snapdragon: Improve serial number detection using
+ SMEM interface
 MIME-Version: 1.0
-X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB9644.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 752b6572-3914-4303-1798-08dea022e38f
-X-MS-Exchange-CrossTenant-originalarrivaltime: 22 Apr 2026 03:54:44.0160 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: 5g5ZwI0qvZwNJNfWXcQm7k4drby6CPqXDauc07KD2c38/t8qHUtmD3+iCWSEQpVs6ZFjN/p7jJU/gOXbjY8xbQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI0PR04MB11940
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260422-serial-v1-1-1f246885bd70@oss.qualcomm.com>
+X-B4-Tracking: v=1; b=H4sIAGVK6GkC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDIzMDEyMjXZD6xBxdS2MjY8MkY6Mk8yRDJaDigqLUtMwKsEHRsbW1AOPQjK9
+ YAAAA
+X-Change-ID: 20260422-serial-93231b32b7b1
+To: Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io,
+ u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, Casey Connolly <casey.connolly@linaro.org>, 
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Sughosh Ganu <sughosh.ganu@arm.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ George Chan <gchan9527@gmail.com>,
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1776831079; l=2823;
+ i=balaji.selvanathan@oss.qualcomm.com; s=20260213; h=from:subject:message-id; 
+ bh=0lOy7NgBVY0VkqJzzGvWZSftethWiAvT2ufGxv/vtcA=;
+ b=hE7La6Nz/m9LdmQTdyGpBltzp2sxIFk45HhCX1vZ6PA53jO1TDhiEoPWrJM/q/dp0KZp1U6QV
+ DT6KIg0NLMFCAtU2MUhtIhpsNdnAGAmQlBkwTFqMJzXZg4BqG99HR6h
+X-Developer-Key: i=balaji.selvanathan@oss.qualcomm.com; a=ed25519;
+ pk=CDpYiUU3SH7KGEtsBvY2tBGPiWfMxqWJF0p2LftOfnc=
+X-Proofpoint-GUID: lhcElJzmZb8asKkCzrlTmmnK62PUPsuY
+X-Authority-Analysis: v=2.4 cv=SONykuvH c=1 sm=1 tr=0 ts=69e84a6c cx=c_pps
+ a=MTSHoo12Qbhz2p7MsH1ifg==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+ a=IkcTkHD0fZMA:10 a=A5OVakUREuEA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=GqcJuMMKbsYl-prE61YA:9 a=QEXdDO2ut3YA:10
+ a=GvdueXVYPmCkWapjIL-Q:22
+X-Proofpoint-ORIG-GUID: lhcElJzmZb8asKkCzrlTmmnK62PUPsuY
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNDIyMDAzOSBTYWx0ZWRfX0eHum/jJQrvg
+ oW88r0Us4pdXHE+/T/+15CTk2qx2vbFcHvmw9c8Zq4t/g+O1O2YGGZ8IyFeAYRGGa71KVxMofMS
+ A1A6m9mwvX1PeOys+O0/qHODJ9HgH/8TvxDplIGj9zvxbspQTTsNMhOGSNyuB+/iP1i1PX9gjXP
+ v0z46SPFTCfrdU96riF0zZpYBqqUU5eHmC0jE7dhS2F8W4fnPf6cZpwIj1V2aEDwwaUw6pgBQGi
+ Ib4A/xwkrEYAcy4n4O1I/nbkE3UqV4TZb2RwmolWnChBdVEThdyaZa3NFeSmZd59HIcn18TUeI+
+ MxAAUEiVenTYP95lThErLmSCZQdD8HmiJ37+fcbAExV10ur26oeGWBLnb8cmio9epZRSHhShP8Q
+ Mtrqi+Nie7URiHDSNMjaTYmhDJy/HtfVjQt5gvAHlrK2JTWlA7Ph+cnXzWipwjWqPthWzoRJ2V5
+ NneV0IahA96ELgBqmQA==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
+ definitions=2026-04-21_03,2026-04-21_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ bulkscore=0 priorityscore=1501 adultscore=0 impostorscore=0 malwarescore=0
+ spamscore=0 suspectscore=0 lowpriorityscore=0 clxscore=1015 phishscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2604200000 definitions=main-2604220039
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -164,40 +163,98 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-PiAtLS0tLemCruS7tuWOn+S7ti0tLS0tDQo+IOWPkeS7tuS6ujogVGltIEhhcnZleSA8dGhhcnZl
-eUBnYXRld29ya3MuY29tPg0KPiDlj5HpgIHml7bpl7Q6IDIwMjblubQ05pyIMjHml6UgMjM6NDUN
-Cj4g5pS25Lu25Lq6OiBBbGljZSBHdW8gKE9TUykgPGFsaWNlLmd1b0Bvc3MubnhwLmNvbT4NCj4g
-5oqE6YCBOiB1LWJvb3RAbGlzdHMuZGVueC5kZTsgTWFyZWsgVmFzdXQgPG1hcmV4QG5hYmxhZGV2
-LmNvbT47IEplcm9tZQ0KPiBGb3Jpc3NpZXIgPGplcm9tZS5mb3Jpc3NpZXJAYXJtLmNvbT47IFRv
-bSBSaW5pIDx0cmluaUBrb25zdWxrby5jb20+OyBCZWl5YW4NCj4gWXVuIDxyb290QGluZmkud2Fu
-Zz47IEJvLUN1biBDaGVuIDxiYy1ib2N1bi5jaGVuQG1lZGlhdGVrLmNvbT47DQo+IFNpZGRoYXJ0
-aCBWYWRhcGFsbGkgPHMtdmFkYXBhbGxpQHRpLmNvbT47IFdlaWppZSBHYW8NCj4gPHdlaWppZS5n
-YW9AbWVkaWF0ZWsuY29tPjsgWWUgTGkgPHllLmxpQG54cC5jb20+OyBWbGFkaW1pciBPbHRlYW4N
-Cj4gPHZsYWRpbWlyLm9sdGVhbkBueHAuY29tPjsgTWljaGFlbCBXYWxsZSA8bXdhbGxlQGtlcm5l
-bC5vcmc+OyBUaG9tYXMNCj4gU2Now6RmZXIgPHRob21hcy5zY2hhZWZlckBrb250cm9uLmNvbT47
-IE1hcmVrIFZhc3V0IDxtYXJleEBkZW54LmRlPjsNCj4gQWxpY2UgR3VvIDxhbGljZS5ndW9Abnhw
-LmNvbT4NCj4g5Li76aKYOiBSZTogW1BBVENIIHYxIDEvMl0gbmV0OiBwaHk6IGFxdWFudGlhOiBJ
-bmNyZWFzZSB0aW1lb3V0IGZvciBvdXQgb2YgcmVzZXQNCj4gDQo+IE9uIFdlZCwgQXByIDE1LCAy
-MDI2IGF0IDE6NTTigK9BTSA8YWxpY2UuZ3VvQG9zcy5ueHAuY29tPiB3cm90ZToNCj4gPg0KPiA+
-IEZyb206IFllIExpIDx5ZS5saUBueHAuY29tPg0KPiA+DQo+ID4gQ3VycmVudCB0aW1lb3V0IGZv
-ciBQSFkgb3V0IG9mIHJlc2V0IGlzIDUwbXMgd2hpY2ggaXMgdG9vIHNob3J0Lg0KPiA+IEluY3Jl
-YXNlIGl0IHRvIDJzIHRvIGFsaWduIHdpdGgga2VybmVsLg0KPiA+DQo+ID4gU2lnbmVkLW9mZi1i
-eTogWWUgTGkgPHllLmxpQG54cC5jb20+DQo+ID4gU2lnbmVkLW9mZi1ieTogQWxpY2UgR3VvIDxh
-bGljZS5ndW9AbnhwLmNvbT4NCj4gPiAtLS0NCj4gPiAgZHJpdmVycy9uZXQvcGh5L2FxdWFudGlh
-LmMgfCAyICstDQo+ID4gIDEgZmlsZSBjaGFuZ2VkLCAxIGluc2VydGlvbigrKSwgMSBkZWxldGlv
-bigtKQ0KPiA+DQo+ID4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvbmV0L3BoeS9hcXVhbnRpYS5jIGIv
-ZHJpdmVycy9uZXQvcGh5L2FxdWFudGlhLmMNCj4gPiBpbmRleCAxMGI4N2RmYjhhYi4uODNkYTNl
-MWNjNzcgMTAwNjQ0DQo+ID4gLS0tIGEvZHJpdmVycy9uZXQvcGh5L2FxdWFudGlhLmMNCj4gPiAr
-KysgYi9kcml2ZXJzL25ldC9waHkvYXF1YW50aWEuYw0KPiA+IEBAIC00MDAsNyArNDAwLDcgQEAg
-aW50IGFxdWFudGlhX2NvbmZpZyhzdHJ1Y3QgcGh5X2RldmljZSAqcGh5ZGV2KQ0KPiA+ICAgICAg
-ICAgaW50IGludGVyZmFjZSA9IHBoeWRldi0+aW50ZXJmYWNlOw0KPiA+ICAgICAgICAgdTMyIHZh
-bCwgaWQsIHJzdGF0dXMsIGZhdWx0Ow0KPiA+ICAgICAgICAgdTMyIHJlZ192YWwxID0gMDsNCj4g
-PiAtICAgICAgIGludCBudW1fcmV0cmllcyA9IDU7DQo+ID4gKyAgICAgICBpbnQgbnVtX3JldHJp
-ZXMgPSAyMDA7DQo+ID4gICAgICAgICBpbnQgdXN4X2FuID0gMDsNCj4gPg0KPiA+ICAgICAgICAg
-LyoNCj4gPg0KPiA+IC0tDQo+ID4gMi4zNC4xDQo+ID4NCj4gDQo+IEhpIEFsaWNlLA0KPiANCj4g
-SSByYW4gaW50byB0aGlzIGFzIHdlbGwgb24gYSBuZXcgYm9hcmQgSSdtIGJyaW5naW5nIHVwLiBJ
-IGZvdW5kIEkgbmVlZGVkIDEwMA0KPiByZXRyaWVzIGluIG15IHNpdHVhdGlvbi4NCj4gDQo+IEFj
-a2VkLWJ5OiBUaW0gSGFydmV5IDx0aGFydmV5QGdhdGV3b3Jrcy5jb20+DQo+IA0KPiBCZXN0IFJl
-Z2FyZHMsDQo+IA0KPiBUaW0NCg0KSGkgVGltLA0KDQpUaGFua3MgZm9yIGNvbmZpcm1pbmcgYW5k
-IGZvciB0aGUgQWNrLiBJIHByZWZlciB0byBrZWVwIHRoZSBjdXJyZW50IHJldHJ5IGNvdW50IGZv
-ciBub3cuDQoNCkJlc3QgcmVnYXJkcywNCkFsaWNlDQo=
+Enhance serial number detection by prioritizing SMEM-based retrieval
+over bootargs parsing for better reliability and consistency across
+Qualcomm Snapdragon platforms.
+
+Add board_serial_num() function to retrieve serial number directly
+from SMEM using the socinfo interface. This provides access to the
+hardware-stored serial number in shared memory, eliminating the
+dependency on kernel command line parsing.
+
+This patch depends on the following patch [1], which adds the
+socinfo header file.
+
+[1] https://lore.kernel.org/all/20260106122134.2047864-3-aswin.murugan@oss.qualcomm.com/
+
+Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+---
+ arch/arm/mach-snapdragon/board.c     | 31 +++++++++++++++++++++++++++++++
+ arch/arm/mach-snapdragon/qcom-priv.h |  2 ++
+ 2 files changed, 33 insertions(+)
+
+diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/board.c
+index 5fb3240acc5..2f058038b25 100644
+--- a/arch/arm/mach-snapdragon/board.c
++++ b/arch/arm/mach-snapdragon/board.c
+@@ -32,6 +32,8 @@
+ #include <usb.h>
+ #include <sort.h>
+ #include <time.h>
++#include <smem.h>
++#include <soc/qcom/socinfo.h>
+ 
+ #include "qcom-priv.h"
+ 
+@@ -363,10 +365,39 @@ static const char *get_cmdline(void)
+ 	return cmdline;
+ }
+ 
++/**
++ * board_serial_num() - Retrieves the board serial number from SMEM
++ * @serial_num_ptr: Pointer to store the serial number
++ *
++ * Return: 0 on success, negative error code on failure.
++ */
++int board_serial_num(u32 *serial_num_ptr)
++{
++	struct socinfo *soc_info_ptr;
++	struct udevice *dev_ptr;
++	size_t total_size;
++
++	if (uclass_get_device(UCLASS_SMEM, 0, &dev_ptr) != 0)
++		return -ENODEV;
++
++	soc_info_ptr = smem_get(dev_ptr, 0, SMEM_HW_SW_BUILD_ID, &total_size);
++	if (!soc_info_ptr)
++		return -ENODATA;
++
++	*serial_num_ptr = soc_info_ptr->serial_num;
++	return 0;
++}
++
+ void qcom_set_serialno(void)
+ {
+ 	const char *cmdline = get_cmdline();
+ 	char serial[32];
++	u32 serial_num;
++
++	if (board_serial_num(&serial_num) == 0) {
++		env_set_hex("serial#", serial_num);
++		return;
++	}
+ 
+ 	if (!cmdline) {
+ 		log_debug("Failed to get bootargs\n");
+diff --git a/arch/arm/mach-snapdragon/qcom-priv.h b/arch/arm/mach-snapdragon/qcom-priv.h
+index b8bf574e8bb..3da841b8cda 100644
+--- a/arch/arm/mach-snapdragon/qcom-priv.h
++++ b/arch/arm/mach-snapdragon/qcom-priv.h
+@@ -17,6 +17,8 @@ enum qcom_boot_source {
+ 
+ extern enum qcom_boot_source qcom_boot_source;
+ 
++int board_serial_num(u32 *serial_num_ptr);
++
+ #if IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT)
+ void qcom_configure_capsule_updates(void);
+ #else
+
+---
+base-commit: 052988aa29bfd506d7ce207fbb3f5374a5dbecbb
+change-id: 20260422-serial-93231b32b7b1
+
+Best regards,
+-- 
+Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+
