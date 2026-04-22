@@ -4,89 +4,103 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E293FA1FD9
-	for <u-boot@archiver.kernel.org>; Wed, 22 Apr 2026 17:51:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54B05FA1FE1
+	for <u-boot@archiver.kernel.org>; Wed, 22 Apr 2026 18:16:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4C3B4842C4;
-	Wed, 22 Apr 2026 19:51:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 9610B842FC;
+	Wed, 22 Apr 2026 20:16:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="c/PRZUX6";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="GrnO3l4q";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 88FC9842D7; Wed, 22 Apr 2026 19:51:23 +0200 (CEST)
-Received: from mail-oa1-x42.google.com (mail-oa1-x42.google.com
- [IPv6:2001:4860:4864:20::42])
+ id A9B7784312; Wed, 22 Apr 2026 20:16:10 +0200 (CEST)
+Received: from mail-yw1-x112b.google.com (mail-yw1-x112b.google.com
+ [IPv6:2607:f8b0:4864:20::112b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EAAD884255
- for <u-boot@lists.denx.de>; Wed, 22 Apr 2026 19:51:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4F84C84178
+ for <u-boot@lists.denx.de>; Wed, 22 Apr 2026 20:16:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x42.google.com with SMTP id
- 586e51a60fabf-40f1ffba6a0so4060804fac.0
- for <u-boot@lists.denx.de>; Wed, 22 Apr 2026 10:51:20 -0700 (PDT)
+ spf=pass smtp.mailfrom=raymondmaoca@gmail.com
+Received: by mail-yw1-x112b.google.com with SMTP id
+ 00721157ae682-79ea87af213so95529127b3.0
+ for <u-boot@lists.denx.de>; Wed, 22 Apr 2026 11:16:08 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1776881767; cv=none;
+ d=google.com; s=arc-20240605;
+ b=hXfgGrh4PR6ZAV/AocytvHwU/qq0ZDZAvJi4HuSgy86id6NFzsfNONrs83lNV04TXK
+ /xyNc3HWFX4TDDUTZeCtQQ31ov7GZ9NosU0m3U+/wgNJOeQ6Z5JKaqxCOGM3+6N/LiQH
+ ddeYVfpXezzyWexh0iYMcVGBBfmEWXPVe9cvp3H4dCTHaPxW5A0dptE+LHt9jvXrynfj
+ ZitM+qHFVA44/8Ls8ZMGdeKppJntb2IruYfpZ0VkYYXQM24pcgJh+MlqL0GUCWcTmB3F
+ BH6lW2CF/wznRLWfayEEHVhE16DC6UAkukyZgzUQNDdUEEQ7JwkZHbTjDpDgsPXrK3YB
+ QaIA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=mb4EWD7isy7+VH3EXr5X3vFSMcd03OO7jdB4QvIN2o8=;
+ fh=MTfo45vSTzKVBjZkkTJPhGIruFtJ1bW4V8M5Sxk5wKY=;
+ b=jEeivfPG8ygeWpmCvMl16vjousCNc+ngiXFhUNikJ1Qv2HFelZp5rJqBDCWGuMcbBj
+ SJ+ld8kPAT960W3FIc9yFVFylAThdV7HmI+cx1iu3I3L3Cbt4cFaL7aZGz073sNmf/Vm
+ aR62+4Kmka2/LK+kG9hzAtN0IQQciB8yoYrPExMwIEroERliHqSmWNvxE4qN0OZZlYQX
+ QyQVv8Ut/cbrT7afk+/nyEOo02eaKFrAZQaQ+yrWgtXI9+svQyYwr3/TfJmZF/2pUQLT
+ pA7BNoXllKZP5d5FDznEw5oJABBRMs+KstF+Lg0S83EI6ObWUcSTesGFwSwXlYeoDxdI
+ C0sw==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1776880279; x=1777485079; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=TKjtqQWsZUwJWnj9Yuqm1QvfU9yEhcgCi0KdCsEvitw=;
- b=c/PRZUX6VylqVoTyIKnKMQwdmihXZb+rVykUYm5ZHsrj50ffr+Xsxtp1yhvLFBi7UE
- CjMYumo3/3ec24yMKs9A4ObDG+E58SzryazV+b5lNaEIPT1PLVTzlhNjCwFj0IJcemJ5
- yNVnHXCnqtTUbCjH/ktqy/pJo7Qdz4CTab/wQ=
+ d=gmail.com; s=20251104; t=1776881767; x=1777486567; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=mb4EWD7isy7+VH3EXr5X3vFSMcd03OO7jdB4QvIN2o8=;
+ b=GrnO3l4qsRFjBDmwN82kuDsOOiqP58dBoatGbG/s3MfzzRdnbFylffWLlGHGDFzaKK
+ bRpI2IM8KzVtWxK1l2GWP+rlW3a+EAUf6UxkD/WHILOO5mPrW0U+9YlgCqxVOU6Zanv/
+ MaPWb2dkxIdQgNXwQmh95U78OCAcCCvNf9sY5iRfY0O4Pgcnr9FtU386Id2dEjvjwNfv
+ p69sq8ucV1RciCwmnRZY0ptOA+ixjCFDbqw5TG4O1BkeS0P8qGhOYfKaQniusrEyIO16
+ rHLQ9oKFs8EvCbXZKlDqbZJJdhKzYX/EketiJTkO6A0it0v6PiNF+6rFHL5jiAR56J36
+ 5syA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776880279; x=1777485079;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=TKjtqQWsZUwJWnj9Yuqm1QvfU9yEhcgCi0KdCsEvitw=;
- b=LEAICvOCCglmXfAxxW69Inl1inGJ2l8VYbnv36APTjQqq2bkS6QFeOSlHDf/RWzgyE
- HNwVYWaT6DfJmYzoKiGmC/PBNsT5tl2kqdUT4ezDILiyO7QkmW9LVv8CLYgXXzHOzMOv
- d6vSLsvxshZCuNCXNY8zQsu225qLLRwCdn2U6jnlvUm8P4KskBt6Pr/pKQ/9ZNj/TM9H
- TAUMzoE+79lnFqxQEpBPzE6qahyyUDPjCTscvAvJM1gMLYooCl2P2oEN2TXV7LZtuUT6
- uIIzulVdP0wrmkmLTmLD9THu0vW8jZzcnewAyTTflR/E3zuChpM7S+7T2NQ7BLiWxR0+
- 3FvQ==
-X-Gm-Message-State: AOJu0YwJxzz+xBm4ofNce+9oMU4CT5RSFkwSg6Q6wlLzu5+KHLq7hxp/
- iyXZNPG0si+ZpeUko86+TEHnFrMeQkjrxwuwzvwRSoX+p9U5OqKMyaTDAeathWDFHxY=
-X-Gm-Gg: AeBDiev26hLm3AOQOYtvL9kg4XnLPgAkiRpfHLHO0xVz4pdQ83PWnigCAeE/x8aRBAN
- gjD3fAP0Papk/vlY77qeNdtopJ8TGP61lKZci2BK+dps5P7i/Bg0sueN76N1zQW2CufX4vgyD+I
- 0Q2rCAWqQHuZBSJcuAsCxnvNS6Cr+YZjoIOdTPUEJg5mPjUr0mzf0toXGF+2GALMxdToMsPgqXG
- pTvxE+vv1w7Rnqmq4s66wuQiOHqZ8mjDeq9xuT+ypvTs+aUK9IfBFRndUCB/KCI+1YB1mELav+U
- h7ZkZrn1GoXkJd97ETxhA5K51EJYRmhq1YMwdsF/6aSq0oTekIxWLFrh+2A6O1aTNCu3AfDaeO2
- WsuxqbrdYVNT5XsejvUuK3/U9yl65EV0P3Ksh0BMRv6UxsdSwRtWfvNZ2sZ0OG3K3sCRInDRNv9
- VZxOHkoqX2z2zr7a4ZUJvjGTDDbmfDdZ4nqCfq/s7whISh8MWjbBMWeItUQlPGTxrWzZrAfjosC
- OHYo3vQcQLnvuxNpwPHNzajj0utTqctANoOsAP4w0du3+o5SSR1J5lf8wmCfg==
-X-Received: by 2002:a05:6820:1891:b0:694:9fa0:aa4a with SMTP id
- 006d021491bc7-6949fa0bc40mr3569033eaf.44.1776880279490; 
- Wed, 22 Apr 2026 10:51:19 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
- [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-694984114f5sm3504387eaf.7.2026.04.22.10.51.18
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 22 Apr 2026 10:51:18 -0700 (PDT)
-Date: Wed, 22 Apr 2026 11:51:16 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>, Jonas Karlman <jonas@kwiboo.se>,
- Xuhui Lin <xuhui.lin@rock-chips.com>, Heiko Stuebner <heiko@sntech.de>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Sebastian Reichel <sebastian.reichel@collabora.com>,
- Dmitrii Sharshakov <d3dx12.xx@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Subject: Re: Couple of clang warnings for Rockchip boards
-Message-ID: <20260422175116.GF41863@bill-the-cat>
-References: <f8f4e639-0e73-4d14-828a-92dbfe5526ba@cherry.de>
+ d=1e100.net; s=20251104; t=1776881767; x=1777486567;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=mb4EWD7isy7+VH3EXr5X3vFSMcd03OO7jdB4QvIN2o8=;
+ b=QbW/+PUaYUpw12jzNNwf0xBjhMZYgTG4pd3puoqPr0LBnCLFySngYbfbrhhHcQ2tdR
+ BkFWaosCIYhvg9ZUjiNEG8rYbV8GBzk+knIlsFCddf/+R4723Q36UsRj4i6FiS8EsTD/
+ z99pvpucaUalg/Sm9l7zkHyFe+syq73614Mz4C7IlHV2KlTqpCOgIeOY+l48GUlfcUNK
+ yfwqZnB132l02n1Q8l5TXmM8k+N1UE6H7TKsbmaunBeH18IYg+NggMZ7atsbs3r+WPde
+ Nkaho1vuY4sbiq/68U4dlV6KBVJQt7Mt26WxdA2axRxvR+V44s2rCbKAUEfWKZWEzSBC
+ Lp5g==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ/3xgIlZYpomLBg1qkhyVmXHWMsO+NWnGctG09njE7YqOqqoAzW42SS1L3yL6kufg6qBgzHnxA=@lists.denx.de
+X-Gm-Message-State: AOJu0YwnvF+ZRupd0h9AcLYhnTLOazQvYoRl4/UObSlhQ7oWa8yg/Va6
+ ADXZWoiEGGdJ8mQ50Xw1DwcOtN7vrBbQF0VTUatG2ZDtw1fWsS+N9KfrrwDLqZVPxxqpD/urrQx
+ qytPK9l46lJ7ZYQlmXEZV/tIEpDjZQUDnxK44XyU=
+X-Gm-Gg: AeBDies9fkK6vSAGgzSCPVvUkQR/69iev8EOVhLjFl6SXWWDN9qeqYab0jF91PBkzcZ
+ XK4ODhL8U0OQnO9oBXFUpmJjpN11sBoA3K/uDs97vt2WES+IBYXFeNhlwIv15j8sBu/AYPmFQbu
+ jfri/SKmnqkvzitTwaBIeIN7N6WY420ZX+QjMcCRSNWNgyvm5wc4lFoIsNCXYODxzfdWj3vom4E
+ XoRDqyae6q9eIoxQy4Stt805zD4IRE5jUpqfkrNBv3Rb3bJl94eXmXZzVx0wMQuOQngEjT/qXIc
+ wI1vuMEreWFXCeDLzJA=
+X-Received: by 2002:a05:690e:1384:b0:64a:ce57:cac4 with SMTP id
+ 956f58d0204a3-65311b20b91mr16978202d50.24.1776881766930; Wed, 22 Apr 2026
+ 11:16:06 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="WiPuCqNHHhyqrAce"
-Content-Disposition: inline
-In-Reply-To: <f8f4e639-0e73-4d14-828a-92dbfe5526ba@cherry.de>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20260421210954.1170437-1-philippe.reynes@softathome.com>
+ <20260421210954.1170437-3-philippe.reynes@softathome.com>
+In-Reply-To: <20260421210954.1170437-3-philippe.reynes@softathome.com>
+From: Raymond Mao <raymondmaoca@gmail.com>
+Date: Wed, 22 Apr 2026 14:15:55 -0400
+X-Gm-Features: AQROBzC9ddiPN87BuiBb4ZzpZ_k99chZ3aEG05dqg4K2xVGieV2t0gofRCKrzj0
+Message-ID: <CAMDkj5zdKyHMFgshNxOLVeDSE1+V4sHzLEB=YNvvdPempc6iuQ@mail.gmail.com>
+Subject: Re: [PATCH v5 02/15] mbedtls: enable support of ecc
+To: Philippe Reynes <philippe.reynes@softathome.com>
+Cc: marko.makela@iki.fi, jonny.green@keytechinc.com, trini@konsulko.com, 
+ simon.glass@canonical.com, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,182 +117,297 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Philippe,
 
---WiPuCqNHHhyqrAce
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Tue, Apr 21, 2026 at 5:10=E2=80=AFPM Philippe Reynes
+<philippe.reynes@softathome.com> wrote:
+>
+> Enables the support of ecc in mbedtls.
+>
+> Signed-off-by: Philippe Reynes <philippe.reynes@softathome.com>
+> ---
+> v2:
+> - move ecdsa to MBEDTLS_LIB_X509
+> - enhance depencendies
+> v3:
+> - do not use _MBEDTLS in mbedtls_def_config.h
+> v4:
+> - do not select ECDSA on some configs
+> - remove duplicated MBEDTLS_ECP_DP_SECP256K1_ENABLED
+> - change dependencies for ECDSA configs
+> v5:
+> - MBEDTLS_LIB_TLS depends en ECDSA_MBEDTLS
+> - update some configs according to previous change
+> - build of ecdsa is conditionned by ECDSA_MBEDTLS
+>
+>  configs/amd_versal2_virt_defconfig       |  3 +++
+>  configs/qemu_arm64_lwip_defconfig        |  3 +++
+>  configs/sandbox_defconfig                |  1 +
+>  configs/starfive_visionfive2_defconfig   |  3 +++
+>  configs/xilinx_versal_net_virt_defconfig |  3 +++
+>  configs/xilinx_versal_virt_defconfig     |  3 +++
+>  configs/xilinx_zynqmp_kria_defconfig     |  3 +++
+>  configs/xilinx_zynqmp_virt_defconfig     |  3 +++
+>  lib/ecdsa/Kconfig                        |  1 +
+>  lib/mbedtls/Kconfig                      | 14 ++++++++++++++
+>  lib/mbedtls/Makefile                     | 16 +++++++++-------
+>  lib/mbedtls/mbedtls_def_config.h         | 17 +++++++++++++++++
+>  12 files changed, 63 insertions(+), 7 deletions(-)
+>
+> diff --git a/configs/amd_versal2_virt_defconfig b/configs/amd_versal2_vir=
+t_defconfig
+> index 0f4b75c72e1..cbc0789d5b3 100644
+> --- a/configs/amd_versal2_virt_defconfig
+> +++ b/configs/amd_versal2_virt_defconfig
+> @@ -167,6 +167,9 @@ CONFIG_VIRTIO_MMIO=3Dy
+>  CONFIG_VIRTIO_NET=3Dy
+>  CONFIG_VIRTIO_BLK=3Dy
+>  CONFIG_MBEDTLS_LIB=3Dy
+> +CONFIG_ECDSA_MBEDTLS=3Dy
+> +CONFIG_ECDSA=3Dy
+> +CONFIG_ECDSA_VERIFY=3Dy
+>  CONFIG_TPM=3Dy
+>  # CONFIG_OPTEE_LIB is not set
+>  CONFIG_TOOLS_MKFWUMDATA=3Dy
+> diff --git a/configs/qemu_arm64_lwip_defconfig b/configs/qemu_arm64_lwip_=
+defconfig
+> index a974970c3d3..151506eaca2 100644
+> --- a/configs/qemu_arm64_lwip_defconfig
+> +++ b/configs/qemu_arm64_lwip_defconfig
+> @@ -3,6 +3,9 @@
+>  CONFIG_ARM=3Dy
+>  CONFIG_ARCH_QEMU=3Dy
+>
+> +CONFIG_ECDSA=3Dy
+> +CONFIG_ECDSA_VERIFY=3Dy
+> +CONFIG_ECDSA_MBEDTLS=3Dy
+>  CONFIG_NET_LWIP=3Dy
+>  CONFIG_CMD_DNS=3Dy
+>  CONFIG_CMD_NFS=3Dy
+> diff --git a/configs/sandbox_defconfig b/configs/sandbox_defconfig
+> index f26295103f1..15831dd7e04 100644
+> --- a/configs/sandbox_defconfig
+> +++ b/configs/sandbox_defconfig
+> @@ -391,6 +391,7 @@ CONFIG_PANIC_HANG=3Dy
+>  CONFIG_CMD_DHRYSTONE=3Dy
+>  CONFIG_MBEDTLS_LIB=3Dy
+>  CONFIG_HKDF_MBEDTLS=3Dy
+> +CONFIG_ECDSA_MBEDTLS=3Dy
+>  CONFIG_ECDSA=3Dy
+>  CONFIG_ECDSA_VERIFY=3Dy
+>  CONFIG_RSASSA_PSS=3Dy
+> diff --git a/configs/starfive_visionfive2_defconfig b/configs/starfive_vi=
+sionfive2_defconfig
+> index 74a24dfd074..77b3146f6cb 100644
+> --- a/configs/starfive_visionfive2_defconfig
+> +++ b/configs/starfive_visionfive2_defconfig
+> @@ -156,3 +156,6 @@ CONFIG_USB_GADGET=3Dy
+>  CONFIG_WDT=3Dy
+>  CONFIG_WDT_STARFIVE=3Dy
+>  CONFIG_MBEDTLS_LIB=3Dy
+> +CONFIG_ECDSA_MBEDTLS=3Dy
+> +CONFIG_ECDSA=3Dy
+> +CONFIG_ECDSA_VERIFY=3Dy
+> diff --git a/configs/xilinx_versal_net_virt_defconfig b/configs/xilinx_ve=
+rsal_net_virt_defconfig
+> index 3410b874a04..90c04b98e0d 100644
+> --- a/configs/xilinx_versal_net_virt_defconfig
+> +++ b/configs/xilinx_versal_net_virt_defconfig
+> @@ -155,4 +155,7 @@ CONFIG_VIRTIO_MMIO=3Dy
+>  CONFIG_VIRTIO_NET=3Dy
+>  CONFIG_VIRTIO_BLK=3Dy
+>  CONFIG_MBEDTLS_LIB=3Dy
+> +CONFIG_ECDSA_MBEDTLS=3Dy
+> +CONFIG_ECDSA=3Dy
+> +CONFIG_ECDSA_VERIFY=3Dy
+>  CONFIG_TPM=3Dy
+> diff --git a/configs/xilinx_versal_virt_defconfig b/configs/xilinx_versal=
+_virt_defconfig
+> index d5d60d7f87d..bd3e368d1b4 100644
+> --- a/configs/xilinx_versal_virt_defconfig
+> +++ b/configs/xilinx_versal_virt_defconfig
+> @@ -170,5 +170,8 @@ CONFIG_VIRTIO_MMIO=3Dy
+>  CONFIG_VIRTIO_NET=3Dy
+>  CONFIG_VIRTIO_BLK=3Dy
+>  CONFIG_MBEDTLS_LIB=3Dy
+> +CONFIG_ECDSA_MBEDTLS=3Dy
+> +CONFIG_ECDSA=3Dy
+> +CONFIG_ECDSA_VERIFY=3Dy
+>  CONFIG_TPM=3Dy
+>  CONFIG_TOOLS_MKFWUMDATA=3Dy
+> diff --git a/configs/xilinx_zynqmp_kria_defconfig b/configs/xilinx_zynqmp=
+_kria_defconfig
+> index 72a4668b448..7a741416685 100644
+> --- a/configs/xilinx_zynqmp_kria_defconfig
+> +++ b/configs/xilinx_zynqmp_kria_defconfig
+> @@ -221,6 +221,9 @@ CONFIG_VIRTIO_BLK=3Dy
+>  CONFIG_BINMAN_DTB=3D"./arch/arm/dts/zynqmp-binman-som.dtb"
+>  CONFIG_PANIC_HANG=3Dy
+>  CONFIG_MBEDTLS_LIB=3Dy
+> +CONFIG_ECDSA_MBEDTLS=3Dy
+> +CONFIG_ECDSA=3Dy
+> +CONFIG_ECDSA_VERIFY=3Dy
+>  CONFIG_TPM=3Dy
+>  CONFIG_SPL_GZIP=3Dy
+>  CONFIG_TOOLS_MKFWUMDATA=3Dy
+> diff --git a/configs/xilinx_zynqmp_virt_defconfig b/configs/xilinx_zynqmp=
+_virt_defconfig
+> index 1433b63979a..7dd73c48c1b 100644
+> --- a/configs/xilinx_zynqmp_virt_defconfig
+> +++ b/configs/xilinx_zynqmp_virt_defconfig
+> @@ -239,6 +239,9 @@ CONFIG_VIRTIO_BLK=3Dy
+>  CONFIG_BINMAN_DTB=3D"./arch/arm/dts/zynqmp-binman.dtb"
+>  CONFIG_PANIC_HANG=3Dy
+>  CONFIG_MBEDTLS_LIB=3Dy
+> +CONFIG_ECDSA_MBEDTLS=3Dy
+> +CONFIG_ECDSA=3Dy
+> +CONFIG_ECDSA_VERIFY=3Dy
+>  CONFIG_TPM=3Dy
+>  CONFIG_SPL_GZIP=3Dy
+>  CONFIG_TOOLS_MKFWUMDATA=3Dy
+> diff --git a/lib/ecdsa/Kconfig b/lib/ecdsa/Kconfig
+> index ca13b6bfa1f..dac8bcf23dd 100644
+> --- a/lib/ecdsa/Kconfig
+> +++ b/lib/ecdsa/Kconfig
+> @@ -1,6 +1,7 @@
+>  config ECDSA
+>         bool "Enable ECDSA support"
+>         depends on DM
+> +       select ASN1_DECODER
+>         help
+>           This enables the ECDSA (elliptic curve signature) algorithm for=
+ FIT
+>           image verification in U-Boot. The ECDSA algorithm is implemente=
+d
+> diff --git a/lib/mbedtls/Kconfig b/lib/mbedtls/Kconfig
+> index 789721ee6cd..e948a8876f6 100644
+> --- a/lib/mbedtls/Kconfig
+> +++ b/lib/mbedtls/Kconfig
+> @@ -247,6 +247,9 @@ config MBEDTLS_LIB_X509
+>
+>  if MBEDTLS_LIB_X509
+>
+> +config BIGNUM_MBEDTLS
+> +       bool
+> +
+>  config ASN1_DECODER_MBEDTLS
+>         bool "ASN1 decoder with MbedTLS certificate library"
+>         depends on MBEDTLS_LIB_X509 && ASN1_DECODER
+> @@ -264,6 +267,7 @@ config RSA_PUBLIC_KEY_PARSER_MBEDTLS
+>         bool "RSA public key parser with MbedTLS certificate library"
+>         depends on ASYMMETRIC_PUBLIC_KEY_MBEDTLS
+>         select ASN1_DECODER_MBEDTLS
+> +       select BIGNUM_MBEDTLS
+>         help
+>           This option chooses MbedTLS certificate library for RSA public =
+key
+>           parser.
+> @@ -292,6 +296,15 @@ config MSCODE_PARSER_MBEDTLS
+>           This option chooses MbedTLS certificate library for MS authenti=
+code
+>           parser.
+>
+> +config ECDSA_MBEDTLS
+> +       bool "Enable ECDSA support with MbedTLS certificate library"
+> +       depends on MBEDTLS_LIB_X509 && ECDSA_VERIFY
+> +       select ASN1_DECODER_MBEDTLS if ASN1_DECODER
+> +       select BIGNUM_MBEDTLS
+> +       help
+> +         This option enables support of ECDSA with the MbedTLS certifica=
+te
+> +         library.
+> +
+>  endif # MBEDTLS_LIB_X509
+>
+>  config MBEDTLS_LIB_TLS
+> @@ -300,6 +313,7 @@ config MBEDTLS_LIB_TLS
+>         depends on X509_CERTIFICATE_PARSER_MBEDTLS
+>         depends on ASYMMETRIC_PUBLIC_KEY_MBEDTLS
+>         depends on ASN1_DECODER_MBEDTLS
+> +       depends on ECDSA_MBEDTLS
 
-On Wed, Apr 22, 2026 at 03:25:55PM +0200, Quentin Schulz wrote:
+ecdsa is not mandatory for TLS. so this dependency is not correct.
 
-> Hi all,
->=20
-> I'm looking into force-enabling CONFIG_WERROR for all Rockchip SoCs. Firs=
-t,
-> let me know if this is a bad idea :)
+Regards,
+Raymond
 
-This is how CI works, so this part should go fine.
-
-> gcc version 15.2.1 20250808 (Red Hat Cross 15.2.1-1) (GCC) for both ARM a=
-nd
-> Aarch64 machines report no warnings (built with a config fragment enabling
-> CONFIG_WERROR).
->=20
-> For clang, I went for cross-compiling using either
-> make HOSTCC=3Dclang CROSS_COMPILE=3Darm-linux-gnu- CC=3Dclang O=3Dbuild/ =
-=2E..
-> or
-> make HOSTCC=3Dclang CROSS_COMPILE=3Daarch64-linux-gnu- CC=3Dclang O=3Dbui=
-ld/ ...
-
-I'm adding in Dmitrii here because I thought we had fixed clang builds
-again rather recently, but I haven't put them in CI and I thought we
-might also need another Kbuild re-sync for a few more things too.
-
-> First things first, I can't even build any of the Aarch32/ARM with clang =
-for
-> some reason, so this only applies for Aarch64 Rockchip platforms.
->=20
-> Some platforms couldn't be built due to hitting the max TPL limit (e.g.
-> PX30).
-
-I've also run in to this over the years trying to test clang and having
-LTO not work, or be very much larger than expected. Just FYI.
-
-> clang version 21.1.8 (Fedora 21.1.8-4.fc43) (or clang version 22.1.1 (Fed=
-ora
-> 22.1.1-2.fc44), doesn't matter) issues three warnings:
->=20
-> 1. Chromebooks EC fails to build:
-> In file included from
-> /home/qschulz/work/upstream/u-boot/drivers/misc/cros_ec.c:21:
-> In file included from
-> /home/qschulz/work/upstream/u-boot/include/cros_ec.h:12:
-> /home/qschulz/work/upstream/u-boot/include/ec_commands.h:3578:2: error:
-> field  within 'struct ec_params_charge_state' is less aligned than 'union
-> ec_params_charge_state::(anonymous at
-> /home/qschulz/work/upstream/u-boot/include/ec_commands.h:3578:2)' and is
-> usually due to 'struct ec_params_charge_state' being packed, which can le=
-ad
-> to unaligned accesses [-Werror,-Wunaligned-access]
->  3578 |         union {
->       |         ^
->=20
-> The following
->=20
-> diff --git a/include/ec_commands.h b/include/ec_commands.h
-> index 23597d28b2c..c5f9777c0c7 100644
-> --- a/include/ec_commands.h
-> +++ b/include/ec_commands.h
-> @@ -3575,7 +3575,7 @@ enum charge_state_params {
->=20
->  struct __ec_todo_packed ec_params_charge_state {
->  	uint8_t cmd;				/* enum charge_state_command */
-> -	union {
-> +	union __ec_todo_packed {
->  		struct __ec_align1 {
->  			/* no args */
->  		} get_state;
->=20
-> seems to fix it. The upstream EC git repo
-> (https://chromium.googlesource.com/chromiumos/platform/ec) has a commit w=
-ith
-> more changes, see 65da9cc08766 ("include/ec_commands.h: Fix unaligned acc=
-ess
-> warnings"). It doesn't apply cleanly (and I haven't looked into other
-> patches to backport for this to apply cleanly). I'm not sure what we're
-> supposed to do here? I also don't have a Chromebook to test.
-
-I would just go with making the changes we need to make here, and cc'ing
-some board maintainers for functional testing.
-
-> 2. RK3528, RK3576 and RK3588 boards fail with (replace rk3528 in path for
-> the other SoCs)
->=20
-> /home/qschulz/work/upstream/u-boot/arch/arm/mach-rockchip/rk3528/rk3528.c=
-:98:45:
-> error: value size does not match register size specified by the constraint
-> and modifier [-Werror,-Wasm-operand-widths]
->    98 |         asm volatile("msr cntfrq_el0, %0" : : "r"
-> (CONFIG_COUNTER_FREQUENCY));
->       |                                                    ^
-> include/generated/autoconf.h:372:34: note: expanded from macro
-> 'CONFIG_COUNTER_FREQUENCY'
->   372 | #define CONFIG_COUNTER_FREQUENCY 24000000
->       |                                  ^
-> /home/qschulz/work/upstream/u-boot/arch/arm/mach-rockchip/rk3528/rk3528.c=
-:98:32:
-> note: use constraint modifier "w"
->    98 |         asm volatile("msr cntfrq_el0, %0" : : "r"
-> (CONFIG_COUNTER_FREQUENCY));
->       |                                       ^~
->       |                                       %w0
->=20
-> Note that all Rockchip SoCs have CONFIG_COUNTER_FREQUENCY set to 24000000.
->=20
-> The cntfrq_el0 register is 64b (https://developer.arm.com/documentation/d=
-di0601/2026-03/AArch64-Registers/CNTFRQ-EL0--Counter-timer-Frequency-Regist=
-er?lang=3Den),
-> though the top 32b are reserved. Android decided to ignore this warning in
-> the Little Kernel with https://android.googlesource.com/kernel/lk/+/92354=
-1d4c23565a47d020d84202a6f77d22fc149%5E%21/.
->=20
-> I tried to follow clang's recommendation and switch this to %w0 but it fa=
-ils
-> with:
->=20
-> /tmp/rk3588-a0a4b8.s: Assembler messages:
-> /tmp/rk3588-a0a4b8.s:87: Error: operand mismatch -- `msr cntfrq_el0,w9'
-> /tmp/rk3588-a0a4b8.s:87: Info:    did you mean this?
-> /tmp/rk3588-a0a4b8.s:87: Info:    	msr cntfrq_el0, x9
-> clang: error: assembler command failed with exit code 1 (use -v to see
-> invocation)
->=20
-> I tried casting CONFIG_COUNTER_FREQUENCY into a u64 and it builds and no
-> magic smoke when booting a board. Whether this is the proper fix, I don't
-> know, but the warning is then gone. We could also decide to ignore the
-> warning like for Android's Little Kernel (where and how much this is used=
- is
-> unclear as the repo isn't seeing much activity).
->=20
-> The register documentation indicates this is not used by the hardware at
-> all, so even if it was broken, we probably wouldn't see a difference?
-
-Can we define it as 24000000ULL? Maybe. If not 0x16e3600ULL with a
-comment should work.
-
-> 3. Boards building USB TCPM fail with
->=20
-> In file included from
-> /home/qschulz/work/upstream/u-boot/drivers/usb/tcpm/tcpm-uclass.c:12:
-> In file included from
-> /home/qschulz/work/upstream/u-boot/include/usb/tcpm.h:12:
-> /home/qschulz/work/upstream/u-boot/include/usb/pd.h:212:2: error: field
-> within 'struct pd_message' is less aligned than 'union
-> pd_message::(anonymous at
-> /home/qschulz/work/upstream/u-boot/include/usb/pd.h:212:2)' and is usually
-> due to 'struct pd_message' being packed, which can lead to unaligned
-> accesses [-Werror,-Wunaligned-access]
->   212 |         union {
->       |         ^
->=20
-> This file is apparently adapted from upstream Linux, where the code is
-> identical for that struct. So not sure what to do here.
-
-I'm not sure either.
-
---=20
-Tom
-
---WiPuCqNHHhyqrAce
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaekKkQAKCRAr4qD1Cr/k
-ClmwAP9biF7/4vMue3kRtm9GpEc/npNbivec8PfZviFW7T7PiQEA2VkCSo0TOq5c
-j7iiC9GQoFUJI56afaAToCNC+rrxtgc=
-=Ti4n
------END PGP SIGNATURE-----
-
---WiPuCqNHHhyqrAce--
+>         depends on MBEDTLS_LIB
+>         help
+>           Enable MbedTLS TLS library. Required for HTTPs support
+> diff --git a/lib/mbedtls/Makefile b/lib/mbedtls/Makefile
+> index c5b445bd85c..a24c8389744 100644
+> --- a/lib/mbedtls/Makefile
+> +++ b/lib/mbedtls/Makefile
+> @@ -39,13 +39,20 @@ mbedtls_lib_crypto-$(CONFIG_$(PHASE_)HKDF_MBEDTLS) +=
+=3D \
+>  # MbedTLS X509 library
+>  obj-$(CONFIG_$(XPL_)MBEDTLS_LIB_X509) +=3D mbedtls_lib_x509.o
+>  mbedtls_lib_x509-y :=3D $(MBEDTLS_LIB_DIR)/x509.o
+> +mbedtls_lib_x509-$(CONFIG_$(PHASE_)ECDSA_MBEDTLS) +=3D \
+> +       $(MBEDTLS_LIB_DIR)/ecdsa.o \
+> +       $(MBEDTLS_LIB_DIR)/ecp.o \
+> +       $(MBEDTLS_LIB_DIR)/ecp_curves.o \
+> +       $(MBEDTLS_LIB_DIR)/ecp_curves_new.o \
+> +       $(MBEDTLS_LIB_DIR)/pk_ecc.o
+> +mbedtls_lib_x509-$(CONFIG_$(PHASE_)BIGNUM_MBEDTLS) +=3D \
+> +       $(MBEDTLS_LIB_DIR)/bignum.o \
+> +       $(MBEDTLS_LIB_DIR)/bignum_core.o
+>  mbedtls_lib_x509-$(CONFIG_$(PHASE_)ASN1_DECODER_MBEDTLS) +=3D \
+>         $(MBEDTLS_LIB_DIR)/asn1parse.o \
+>         $(MBEDTLS_LIB_DIR)/asn1write.o \
+>         $(MBEDTLS_LIB_DIR)/oid.o
+>  mbedtls_lib_x509-$(CONFIG_$(PHASE_)RSA_PUBLIC_KEY_PARSER_MBEDTLS) +=3D \
+> -       $(MBEDTLS_LIB_DIR)/bignum.o \
+> -       $(MBEDTLS_LIB_DIR)/bignum_core.o \
+>         $(MBEDTLS_LIB_DIR)/rsa.o \
+>         $(MBEDTLS_LIB_DIR)/rsa_alt_helpers.o
+>  mbedtls_lib_x509-$(CONFIG_$(PHASE_)ASYMMETRIC_PUBLIC_KEY_MBEDTLS) +=3D \
+> @@ -64,7 +71,6 @@ mbedtls_lib_tls-y :=3D \
+>         $(MBEDTLS_LIB_DIR)/mps_reader.o \
+>         $(MBEDTLS_LIB_DIR)/mps_trace.o \
+>         $(MBEDTLS_LIB_DIR)/net_sockets.o \
+> -       $(MBEDTLS_LIB_DIR)/pk_ecc.o \
+>         $(MBEDTLS_LIB_DIR)/ssl_cache.o \
+>         $(MBEDTLS_LIB_DIR)/ssl_ciphersuites.o \
+>         $(MBEDTLS_LIB_DIR)/ssl_client.o \
+> @@ -82,8 +88,4 @@ mbedtls_lib_tls-y :=3D \
+>         $(MBEDTLS_LIB_DIR)/cipher.o \
+>         $(MBEDTLS_LIB_DIR)/cipher_wrap.o \
+>         $(MBEDTLS_LIB_DIR)/ecdh.o \
+> -       $(MBEDTLS_LIB_DIR)/ecdsa.o \
+> -       $(MBEDTLS_LIB_DIR)/ecp.o \
+> -       $(MBEDTLS_LIB_DIR)/ecp_curves.o \
+> -       $(MBEDTLS_LIB_DIR)/ecp_curves_new.o \
+>         $(MBEDTLS_LIB_DIR)/gcm.o \
+> diff --git a/lib/mbedtls/mbedtls_def_config.h b/lib/mbedtls/mbedtls_def_c=
+onfig.h
+> index dda3f4dd6e4..d1bbcaa0924 100644
+> --- a/lib/mbedtls/mbedtls_def_config.h
+> +++ b/lib/mbedtls/mbedtls_def_config.h
+> @@ -89,6 +89,23 @@
+>  #define MBEDTLS_ASN1_WRITE_C
+>  #endif
+>
+> +#if CONFIG_IS_ENABLED(ECDSA_MBEDTLS)
+> +#define MBEDTLS_ECDSA_C
+> +#define MBEDTLS_ECP_C
+> +#define MBEDTLS_BIGNUM_C
+> +#define MBEDTLS_ECP_DP_SECP192R1_ENABLED
+> +#define MBEDTLS_ECP_DP_SECP224R1_ENABLED
+> +#define MBEDTLS_ECP_DP_SECP256R1_ENABLED
+> +#define MBEDTLS_ECP_DP_SECP384R1_ENABLED
+> +#define MBEDTLS_ECP_DP_SECP521R1_ENABLED
+> +#define MBEDTLS_ECP_DP_SECP192K1_ENABLED
+> +#define MBEDTLS_ECP_DP_SECP224K1_ENABLED
+> +#define MBEDTLS_ECP_DP_SECP256K1_ENABLED
+> +#define MBEDTLS_ECP_DP_BP256R1_ENABLED
+> +#define MBEDTLS_ECP_DP_BP384R1_ENABLED
+> +#define MBEDTLS_ECP_DP_BP512R1_ENABLED
+> +#endif
+> +
+>  #endif /* #if CONFIG_IS_ENABLED(MBEDTLS_LIB_X509) */
+>
+>  #if CONFIG_IS_ENABLED(MBEDTLS_LIB_TLS)
+> --
+> 2.43.0
+>
