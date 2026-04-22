@@ -4,101 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04A83F94CB7
-	for <u-boot@archiver.kernel.org>; Wed, 22 Apr 2026 01:16:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69C1AF94CA2
+	for <u-boot@archiver.kernel.org>; Wed, 22 Apr 2026 01:16:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AD0DC8352B;
-	Wed, 22 Apr 2026 03:16:11 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 61D1A83BC8;
+	Wed, 22 Apr 2026 03:16:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="A/qoiX7f";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="aI/Iq6FW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4F570805D7; Wed, 22 Apr 2026 03:16:11 +0200 (CEST)
-Received: from mail-pf1-x42a.google.com (mail-pf1-x42a.google.com
- [IPv6:2607:f8b0:4864:20::42a])
+ id 77495805D7; Wed, 22 Apr 2026 03:16:17 +0200 (CEST)
+Received: from mail-pl1-x62d.google.com (mail-pl1-x62d.google.com
+ [IPv6:2607:f8b0:4864:20::62d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2A43184198
- for <u-boot@lists.denx.de>; Wed, 22 Apr 2026 03:16:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2F33C841C8
+ for <u-boot@lists.denx.de>; Wed, 22 Apr 2026 03:16:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pf1-x42a.google.com with SMTP id
- d2e1a72fcca58-82f0884bcfaso3466578b3a.1
- for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 18:16:09 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1776820568; cv=none;
+Received: by mail-pl1-x62d.google.com with SMTP id
+ d9443c01a7336-2b788a98557so9439595ad.2
+ for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 18:16:15 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1776820574; cv=none;
  d=google.com; s=arc-20240605;
- b=SlcXgwTt8LzBKHzniznbYQcFbGtNXmbQU8wM6Qb7Xo6DA8nglcYyFc738h4kkKM27d
- gklD4tuPO9K7iBterrYUGG99hDpOU7/FwBc6QyLm86rohKLKBnszr5x9FmC7FwqlJv2O
- VZq+0lMW5sLi3WnwK6JJTBOxBidY2MC+YRlPz33j1EJsnfwRV/6gTwmzovKeNb16sgsW
- 0BB+5JmqeWJ1BbmcmKdKeQ9GV39RXrKY7uqXdOf9Ta/Hy+C0tVJflt3sGFBFqCgG/cuX
- 9yddV83RgpXbt8KLtjwyoWLzdWX8zhaSFPqtCdodS7CQQmW64CKdQrXAC5KtdWwUW7j8
- 08ZA==
+ b=JUjUgr/vRs4Ex5rMHKVZ1GTANJdJW0nSOSrZdgwwcA5htWPAiGscJIU+jcrp/D2ncN
+ wVCr+nBWIVLz3u/57H2nSyFBtzFSiKXZHPUfIru2XaNSaLG88GPwdDCBphX+5BOxe1qN
+ +lxhvSdnZ4bDBHkEVsSgDCwtlaVYKB9lUV6tocGLDg951PXOlAEgbcVoYcvpMAtnL4Ux
+ PsUBlTa5mQWce/myvSxHW+I32K92JnCU7SJ7/ctO5lHPexkfpbV6xi8yf4ZLZSQn8has
+ d+3nbbVg4/lkVAbaMyAh+4Bx/ry8RqCBTSSKZ4Je9ceq01JlszRWHZuT9QTfCwQ5PMUR
+ T5YQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=waPxNdbZii8GSinrg6Xd0GapDCdKT8M9gtanvPnLBig=;
- fh=phVN0hR9p+tXKrDBspdyL2SbWphOksAevCzGYC6/ufo=;
- b=VwIG9NzP2fVDiSDyFwsbHAFmOScGp4BlSBDfz47OfXkWfu+nINkt8D9xk5C+6YzHpR
- qxNVZdYK1xvo0FB+/D8nnKPe4rNsh+WPuURYOA+CbqhuQlRughMrocPDObCRSphso4UQ
- s35+eAdc67mFxSmEnXSGUcAKKtdkwSIv/UV42/hO0MGv64BPWblj5t+nx3GvTOHuSrTU
- 0y7ZQyqddjhJml9dWJnHV7rXlqyjgIDykR1kC7ij7XehtbxERrUBeHwasEhuHp1+hOop
- qHeFsFGZ1yTx9lNzXyd5zgKIPiFxpVbq8KOrQMlhb81y3Djj0W6CM/cNvrk+pT6AjXE/
- vqYA==; darn=lists.denx.de
+ bh=CSAEZh/kFb5Oqu8HKLIhg1j6lG45Q2sMZrTStpaOHqI=;
+ fh=s5k+GXS5xpLDRTh8FeQDL4pYyUAXQZOxB2tgRxoo5BI=;
+ b=BH3BGS8DGq8HZ3TemtgWEYpXylT4Vn++cIrwGC0aDUww8rYKGMatyAFh3Gy7LoR8j2
+ aGxVa6PquEN1qwA63Kx4s3JrHvRXozcCNiR9gQd5Yn6CHRjfpi4KZHT97dLdOR4QBaR3
+ xPzggGOx7SpoRXOh4Br/GZgZIWnz5m5hIHc0hGNEDUC42QOeZlNl1kN0IIdIwN+NZDlY
+ RyoNQhPDJY4pZ3kciFBwvJdXSL9Tyvy0iocEgcPcrFzlr84dkd/uXSfImyxa+PdnH351
+ 3VdQoW1Tce5nyxZxae6QN7+mdbZ9yGWQbw6Z7DJfgicwbWcr8H4WQeV+azBPvXu9fvwV
+ dOHQ==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1776820568; x=1777425368; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1776820574; x=1777425374; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=waPxNdbZii8GSinrg6Xd0GapDCdKT8M9gtanvPnLBig=;
- b=A/qoiX7f/mNt6qjsTj/va7/xwKW4tjz6PkN+EtgtkcOPkMVU26Jwjxu5Qdi/2FcDDj
- Y2mXeBt5P16yU3z5xwdJ3rqbiOD549F0Jnu/pnZJStj/2INjYuwkyP+wc/KS6sDcwqO2
- r9zUr4Y6URWcBJE7sXbzYwBJxlBRhHtTTiO7U=
+ bh=CSAEZh/kFb5Oqu8HKLIhg1j6lG45Q2sMZrTStpaOHqI=;
+ b=aI/Iq6FWsx3KfPxqAdRdQ2YAXNbs+Kg0FLTLUh+vBPq1+s08cVLA58YiWtWeYAZy2w
+ mXviN5E7RI4Xj4l6Pl2rq5RbNCbHvTH9VYjMfRXchcCFP+CtmoX+MoJ4A3yoqZrMEgR1
+ 5OaSeVfxH4ymLVz+DQAtDUFoJuXP/dLNx+mZQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776820568; x=1777425368;
+ d=1e100.net; s=20251104; t=1776820574; x=1777425374;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=waPxNdbZii8GSinrg6Xd0GapDCdKT8M9gtanvPnLBig=;
- b=YrjZzxohhiTplNoxo6qsluX9NvXspMR7F1EO7fzyVaQLtWWU5O5JCF1jTIb0mOuR6C
- s+5wIASpJE/AJshOTKch4ENMjGCeYiDUjmJEHO1ZM2S7A+XU/Xsk089U6xEHrj2pEOeB
- 3FAzcg92r35NZsO+Kyic77Pad7UIFZ+IqfStkryqkN0nmls8gXXy0xvEhMaKTGKvGsvl
- IFIPK0xvKUuuF+W78SklEjKWHIpMVDZrHPT/TfYQGBpehPOyeAstu7OrER0ErtUQOHqX
- tWVj2F4avJsU1J0+jhKBYL4kROFCT8ccDC2zKcMxB83Uwx64Rsfi9fJfJny9E3YD2nel
- JHxw==
+ bh=CSAEZh/kFb5Oqu8HKLIhg1j6lG45Q2sMZrTStpaOHqI=;
+ b=mfE8joW6Ve6l1jCGHOLxzfQgxUd5q6y6xSGpFqGFiD+uwfGUjAdVK4AmE0XC1bAsl6
+ +kFPEZydAV5weNrCCyZMobhqJvQ9TR2+eaEqIYOSdhyWEyvVqA4MYcg7tmX462C0vmo/
+ 1ImhYa3aHAW2VhV7tTM1yULOgCq04OhijUR1gkMcnDj9L85LcYRbw36eG3EcnwurqQoC
+ 28hs1cPpY/wMlgJ0fP8KFBqi17esQG7s0yuvd2SMaAjsJHtnbzanaYTPjz/Izdi8UjHL
+ 9TRgwoPYE6lboz4L88M09deFDVATxPV75LUWAbilXuu1bmTAPkfdM9liuEbjShLWBkf9
+ wT1g==
 X-Forwarded-Encrypted: i=1;
- AFNElJ9xHgmC3BguM0fxz+d6bKTqHwMQ1HLDGPoYqUr8yElU//di+heTqSLbJQnfTrZrrqvPX27SdK0=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx+DtejJt5q+Xs6gsUXM2EiMIQJiKTAXwQGLbHkdCMzHPk+eoiI
- fQEHL1LL9F3JhoL5eP6CfpObtCAyM7SCLvZxuyx8LWU7rk1DFvWXPTS8GAT/Y5HuhN0Tf7Cf5Oy
- fmiAhug2jZPZL640hfcsBwYzQRavDZhEnQIA4CE0i
-X-Gm-Gg: AeBDiespNMCRJ6omanJil87tw4p3TCgQZKtKI7GzLsgl9U+0+G2J+xXvIuprOldtlg7
- o+cYLa/qv10BTdwX8EGRCFCzfPFSZui7i/OQHtKsxHRB6gB74GT9ZoFrd434QO6AzkHWjDoTqcr
- Nsu/JMULR4OY3uBs+OX+y9cQPgcz6u5Riog0JD/vSbLDIdujKtksJUm8h7oIN6eyAv2+9RWCyUD
- YT3qIY+UsUggnPJ19qzwqPKGf4YlmNkakRDM2vAymgsto9hAcB0ZfLTRNEHdyBv7X2kpRMz07SV
- 4iAq/cMOOji7RdSXFeapE8J9JhdbRrY=
-X-Received: by 2002:a05:6a00:1742:b0:82c:21a9:872c with SMTP id
- d2e1a72fcca58-82f8c7daee3mr21754267b3a.7.1776820567453; Tue, 21 Apr 2026
- 18:16:07 -0700 (PDT)
+ AFNElJ+1oNZZIJOlY2H2cMOvrSzpcSbIs7PRyAaxOEo/TwT8gNVKrCCC2Y8KyqHXGFENbJuMmiW9vKE=@lists.denx.de
+X-Gm-Message-State: AOJu0YzQNxFSxnXfBQLD0FWrmk9fmbxaqzBysL8bP/JIOzZfydR2EHur
+ X2nB3lbTGPU5ldvu3UNxq76KSSA2mY0rBlPRJvhDwMpcAb58PaVRwgP9hHXcIxIe90d3lfI82F5
+ sTKdgrDsJ0Dgk0DKpuFyS49EEagMxYH8OU9Q9RpCZ
+X-Gm-Gg: AeBDieu63QkrmRebFNhJV7uUO43xRlpQrwZ+uFFxkipQn1kcyCLH74lntaiqUIQoBC9
+ GizofHBFzal/7mq2HYN54cNBZKcVfTNZzaW2/zxjbqcCQGjxx73VnrXyYYLssbHnl2bwC8cGrFi
+ midksyLpy37GtrW4qaieonj9c811XJC94ZtNCA+Ru07CajI1Y/dlx1FlhUc2TG+wORPudSu0mO4
+ 3tQ8vK8u8xSmhoDOnYAkiIdcyuGRVQBoaCqHLMYfmA97Td1zvp21EMoiztagGiptRwqDiFQM0Fq
+ 5MoE4KcoWSWIBvJ4N3Lr9tHfIl68/kw=
+X-Received: by 2002:a17:903:8c6:b0:2b0:c45a:bc2 with SMTP id
+ d9443c01a7336-2b5f9eddc7emr220647045ad.16.1776820573566; Tue, 21 Apr 2026
+ 18:16:13 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260420012348.400492-1-marek.vasut+renesas@mailbox.org>
- <CAFLszTg+nfKGCaHGz6-GHoQ+KntLYYdUTZqfYGpBdsvLSW9FZQ@mail.gmail.com>
- <0c112980-e5db-4acc-97df-c1097c41112b@mailbox.org>
-In-Reply-To: <0c112980-e5db-4acc-97df-c1097c41112b@mailbox.org>
+References: <20260420-net-kconfig-v1-0-9900002d8e72@cherry.de>
+ <CAFLszTjTSUOy9=d5NpgsP63dQp7UXuhpqg4wFwnXgWJzD74_6w@mail.gmail.com>
+ <3462e9ac-e882-4145-88d2-a553cd1c3cb2@cherry.de>
+In-Reply-To: <3462e9ac-e882-4145-88d2-a553cd1c3cb2@cherry.de>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 22 Apr 2026 13:15:37 +1200
-X-Gm-Features: AQROBzDUsXO46LaaHXKN0NeRiMOYsqlXGHFrnypW_6893cKLVWK-7mel51je7s0
-Message-ID: <CAFLszTgV6L=G2-MpBgYh3h=4QM0r0V-aLueS3zUgTCTx3YmcpA@mail.gmail.com>
-Subject: Re: [PATCH] kbuild: Respect CONFIG_SYS_DTC_PAD_BYTES after fdtgrep
-To: Marek Vasut <marek.vasut@mailbox.org>
-Cc: marek.vasut+renesas@mailbox.org, u-boot@lists.denx.de, 
- Adriano Cordova <adrianox@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Peter Robinson <pbrobinson@gmail.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, 
- Sughosh Ganu <sughosh.ganu@arm.com>, Tom Rini <trini@konsulko.com>
+Date: Wed, 22 Apr 2026 13:15:48 +1200
+X-Gm-Features: AQROBzAf7xRrS2jGFjqKPDeXJlQGBkjZ1ouw73iZA-qYk-KC9aErTq7E8ZpDLWM
+Message-ID: <CAFLszTiPWDtL4Xz2RpvGenr+8smgpq_E8rjuZ2qAqriTGU4OMw@mail.gmail.com>
+Subject: Re: [0/6] net: migrate NO_NET out of the networking stack choice
+To: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: foss+uboot@0leil.net, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -116,31 +111,113 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Marek,
+Hi Quentin,
 
-On Tue, 21 Apr 2026 at 12:48, Marek Vasut <marek.vasut@mailbox.org> wrote:
+On Tue, 21 Apr 2026 at 23:06, Quentin Schulz <quentin.schulz@cherry.de> wrote:
 >
-> On 4/20/26 6:14 AM, Simon Glass wrote:
-> > On 2026-04-20T01:23:26, Marek Vasut <marek.vasut+renesas@mailbox.org> wrote:
-> >> kbuild: Respect CONFIG_SYS_DTC_PAD_BYTES after fdtgrep
-> >>
-> >> The fdtgrep command will reduce the DT to minimum size, thus eliminating
-> >> the extra padding configured via CONFIG_SYS_DTC_PAD_BYTES. Reinstate the
-> >> extra padding by running the output DTB from fdtgrep through DTC with the
-> >> -p CONFIG_SYS_DTC_PAD_BYTES flag again in case CONFIG_SYS_DTC_PAD_BYTES
-> >> is not zero.
-> >>
-> >> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
-> >>
-> >> scripts/Makefile.lib | 7 +++++++
-> >>   1 file changed, 7 insertions(+)
+> Hi Simon,
+>
+> On 4/20/26 9:51 PM, Simon Glass wrote:
+> > Hi Quentin,
 > >
-> > Reviewed-by: Simon Glass <sjg@chromium.org>
+> > On 2026-04-20T11:36:06, Quentin Schulz <foss+uboot@0leil.net> wrote:
+> >
+> >> This series introduces a new NET umbrella symbol with NET_LEGACY and NET_LWIP underneath.
+> >
+> > Thanks for this cleanup!
+> >
+> > Re SYS_RX_ETH_BUFFER, how about moving the extern for net_rx_packets[]
+> > to net-legacy.h ? (is it used with lwip?)
+> >
 >
-> Is this something which can be added into fdtgrep itself btw ?
+> That's not the only thing making use of SYS_RX_ETH_BUFFER.
+>
+> - drivers/net/fsl_enetc.h uses it as value for ENETC_BD_CNT which is
+> used in drivers/net/fsl_enetc.c,
+> - drivers/net/rtl8169.c uses it (if defined, otherwise defaults to 4) to
+> create a static buffer, see NUM_RX_DESC,
+> - include/net-common.h sets PKTBUFSRX to it, this in turn is used in
+> *many* places, including many network (assumed Ethernet controller)
+> drivers, net/lwip/net-lwip.c, net/net-common.c (with net_rx_packets
+> array, used all over the place), net/net.c, and net/tcp.c.
+>
+> So seems to be used for both NET_LEGACY and NET_LWIP.
+>
+> Simply guarding the "#include <net-common.h>" with
+> CONFIG_IS_ENABLED(NET) won't do as many files currently expect some
+> functions/macros/constants from that header to be defined.
+>
+> Another option is to ifdef PKTBUFSRX contant and net_rx_packets array in
+> include/net-common.h. But it's used in arch/sandbox/include/asm/eth.h
+> and drivers/dma/ti/k3-udma.c which aren't clearly dpeending on NET being
+> set. All defconfigs enabling CONFIG_TI_K3_NAVSS_UDMA do not modify the
+> default CONFIG_SYS_RX_ETH_BUFFER which is 4 (according to
+> ./tools/qconfig.py -l -f CONFIG_TI_K3_NAVSS_UDMA
+> '~CONFIG_SYS_RX_ETH_BUFFER=4') so it should be fine for this driver not
+> to have PKTBUFSRX defined (as UDMA_RX_DESC_NUM will then default to 4).
+> According to ./tools/qconfig.py -l -f CONFIG_SANDBOX CONFIG_NO_NET, all
+> sandbox defconfigs have network enabled so maybe
+> arch/sandbox/include/asm/eth.h is not an issue either (or rather, for
+> later :) ).
+>
+> With
+>
+> diff --git a/include/net-common.h b/include/net-common.h
+> index 69b6316c1ec..0c260873c2c 100644
+> --- a/include/net-common.h
+> +++ b/include/net-common.h
+> @@ -20,7 +20,9 @@
+>    *    alignment in memory.
+>    *
+>    */
+> +#if CONFIG_IS_ENABLED(NET)
+>   #define PKTBUFSRX     CONFIG_SYS_RX_ETH_BUFFER
+> +#endif
+>   #define PKTALIGN      ARCH_DMA_MINALIGN
+>
+>   /* IPv4 addresses are always 32 bits in size */
+> @@ -132,7 +134,9 @@ static inline void net_set_state(enum net_loop_state
+> state)
+>   }
+>
+>   extern int            net_restart_wrap;       /* Tried all network devices */
+> +#if CONFIG_IS_ENABLED(NET)
+>   extern uchar          *net_rx_packets[PKTBUFSRX]; /* Receive packets */
+> +#endif
+>   extern const u8               net_bcast_ethaddr[ARP_HLEN];    /* Ethernet broadcast
+> address */
+>   extern struct in_addr net_ip;         /* Our    IP addr (0 = unknown) */
+>   /* Indicates whether the pxe path prefix / config file was specified
+> in dhcp option */
+> diff --git a/net/Kconfig b/net/Kconfig
+> index e712a0dd2ac..deab340f26b 100644
+> --- a/net/Kconfig
+> +++ b/net/Kconfig
+> @@ -279,8 +279,6 @@ config TFTP_BLOCKSIZE
+>           almost-MTU block sizes.
+>           You can also activate CONFIG_IP_DEFRAG to set a larger block.
+>
+> -endif   # if NET
+> -
+>   config SYS_RX_ETH_BUFFER
+>           int "Number of receive packet buffers"
+>           default 4
+> @@ -289,3 +287,6 @@ config SYS_RX_ETH_BUFFER
+>             controllers it is recommended to set this value to 8 or even
+> higher,
+>             since all buffers can be full shortly after enabling the
+> interface on
+>             high Ethernet traffic.
+> +
+> +endif   # if NET
+> +
+>
+>
+> And building sandbox_defconfig with CONFIG_NO_NET=y, the build finishes
+> without any issue. So maybe that's the way forward? I think this would
+> be better as a separate series though, what do you think?
 
-Yes I'm sure that would be possible: perhaps a flag to maintain the
-same padding as it finds in the input file.
+Yes that approach seems good, definitely a separate series as you say.
 
 Regards,
 Simon
