@@ -4,107 +4,101 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DAFE8F94CB7
-	for <u-boot@archiver.kernel.org>; Wed, 22 Apr 2026 01:16:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04A83F94CB7
+	for <u-boot@archiver.kernel.org>; Wed, 22 Apr 2026 01:16:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6A852840D8;
-	Wed, 22 Apr 2026 03:16:08 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id AD0DC8352B;
+	Wed, 22 Apr 2026 03:16:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="QktUoV00";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="A/qoiX7f";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2D2A28412A; Wed, 22 Apr 2026 03:16:07 +0200 (CEST)
-Received: from mail-pl1-x633.google.com (mail-pl1-x633.google.com
- [IPv6:2607:f8b0:4864:20::633])
+ id 4F570805D7; Wed, 22 Apr 2026 03:16:11 +0200 (CEST)
+Received: from mail-pf1-x42a.google.com (mail-pf1-x42a.google.com
+ [IPv6:2607:f8b0:4864:20::42a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F0554805D7
- for <u-boot@lists.denx.de>; Wed, 22 Apr 2026 03:16:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2A43184198
+ for <u-boot@lists.denx.de>; Wed, 22 Apr 2026 03:16:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pl1-x633.google.com with SMTP id
- d9443c01a7336-2aaf43014d0so29941415ad.2
- for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 18:16:03 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1776820562; cv=none;
+Received: by mail-pf1-x42a.google.com with SMTP id
+ d2e1a72fcca58-82f0884bcfaso3466578b3a.1
+ for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 18:16:09 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1776820568; cv=none;
  d=google.com; s=arc-20240605;
- b=c8HFjarGOAZIsDwT8Yvwq9b5HUmd+X4/kj+SGIdPsilOwtYae2RdBpji5lA2g9567x
- tEDsIcHFUM28PVklmZ36vR7UfMXOvm98xeBf/DC0EDnJUHCvyT/mAX7RRZUSIUewsFz3
- 4XI7VWYt1+cgSelFGXApqNcOoMJy3wE8G5fkJjUMOd0RoDPGQJX/HT2MxwKZk++PMiXD
- LXB+VJ7jXbLJ8is+u33NkrcApTLJOYbR6SWCjN42FUy/AT0iKqsVHHnnUtTCu5+h2DPK
- 0e9VXQvWZAZa9QkE47EQwKw64IYrIcKlNlEijTnxKsXSFvvQwz5/SttUvr2om+AJLO4t
- CU/w==
+ b=SlcXgwTt8LzBKHzniznbYQcFbGtNXmbQU8wM6Qb7Xo6DA8nglcYyFc738h4kkKM27d
+ gklD4tuPO9K7iBterrYUGG99hDpOU7/FwBc6QyLm86rohKLKBnszr5x9FmC7FwqlJv2O
+ VZq+0lMW5sLi3WnwK6JJTBOxBidY2MC+YRlPz33j1EJsnfwRV/6gTwmzovKeNb16sgsW
+ 0BB+5JmqeWJ1BbmcmKdKeQ9GV39RXrKY7uqXdOf9Ta/Hy+C0tVJflt3sGFBFqCgG/cuX
+ 9yddV83RgpXbt8KLtjwyoWLzdWX8zhaSFPqtCdodS7CQQmW64CKdQrXAC5KtdWwUW7j8
+ 08ZA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=f380575tfjgH/MpP8yId6uNPN9ubVecTNmizm5ioL30=;
- fh=B286HwM6/Dv+o0K0VY9DuUJQtpHJO1IEYbBzrGusgA8=;
- b=jxUk6MRFC/830FKrQ1D8MZZOUFViN+l1VsrM3pM1VRftYlw1rBaIrrlLZNsbvfx6XR
- D1xtIlB7xbeOhwtVDKefbuRZK8vQLvIJWAtYs3VZrPDbv+NrXG8BY8S9Ruw7Q3zA3x0k
- Q7sVERBhrCzHPe+kBqvmxDxBtL9oyG7ayfdZW0mcNbSjdiDrxR6rE1uqQnTgdbJ5j8en
- VKy73QOeupDy6vxJY0OhDjmmTznJ6AVQRti7h4hVb91Ailgg+cm0lBCbmGqBrlLftCG4
- WDNJ5gpUJNz7iTLXSPBxi6+EN4Ew+XHhDNy2A7wmHGiyZt/eWxH9zUUlhuawY/8FgO/9
- 3Neg==; darn=lists.denx.de
+ bh=waPxNdbZii8GSinrg6Xd0GapDCdKT8M9gtanvPnLBig=;
+ fh=phVN0hR9p+tXKrDBspdyL2SbWphOksAevCzGYC6/ufo=;
+ b=VwIG9NzP2fVDiSDyFwsbHAFmOScGp4BlSBDfz47OfXkWfu+nINkt8D9xk5C+6YzHpR
+ qxNVZdYK1xvo0FB+/D8nnKPe4rNsh+WPuURYOA+CbqhuQlRughMrocPDObCRSphso4UQ
+ s35+eAdc67mFxSmEnXSGUcAKKtdkwSIv/UV42/hO0MGv64BPWblj5t+nx3GvTOHuSrTU
+ 0y7ZQyqddjhJml9dWJnHV7rXlqyjgIDykR1kC7ij7XehtbxERrUBeHwasEhuHp1+hOop
+ qHeFsFGZ1yTx9lNzXyd5zgKIPiFxpVbq8KOrQMlhb81y3Djj0W6CM/cNvrk+pT6AjXE/
+ vqYA==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1776820562; x=1777425362; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1776820568; x=1777425368; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=f380575tfjgH/MpP8yId6uNPN9ubVecTNmizm5ioL30=;
- b=QktUoV00w3W+zKehl+ouz51jUrvc6fC8qsmgyTVL3rKbiI7/inWAcp/Oeb4nSPL/Uk
- 7f+LIisAsbpeM72pN5mT6F1HWSUzF/1AiNoVHcnXgnl5Yn1DU4XKfhlst9ifS7cW5uSQ
- jsh2jQfi0RlwfgXd7kwarE+II9hf5DmLuKj+w=
+ bh=waPxNdbZii8GSinrg6Xd0GapDCdKT8M9gtanvPnLBig=;
+ b=A/qoiX7f/mNt6qjsTj/va7/xwKW4tjz6PkN+EtgtkcOPkMVU26Jwjxu5Qdi/2FcDDj
+ Y2mXeBt5P16yU3z5xwdJ3rqbiOD549F0Jnu/pnZJStj/2INjYuwkyP+wc/KS6sDcwqO2
+ r9zUr4Y6URWcBJE7sXbzYwBJxlBRhHtTTiO7U=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776820562; x=1777425362;
+ d=1e100.net; s=20251104; t=1776820568; x=1777425368;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=f380575tfjgH/MpP8yId6uNPN9ubVecTNmizm5ioL30=;
- b=gVCGPubYR1F++c0TXAFpaPwaCJCGaJgNux/LEVs4u39Pm9kHTMaot0LYBHCMNNb3V7
- dzdqGlND/BVMGyEQaB69NWL8Mn1XEOFoynD/0b+OO9Tin5CO6O0Bs025kxdoFOtPTKt9
- l7WeG1NFRWuvq2vKDghcHuNRDbTkxFCSljnAZdVlcimEf8beOnT6gwmWYtHa6U5GGV8G
- wW9z7w5m5qZgtP/TJXDHKeEl8azXInRw0py6CVv2kez4be580OVBhTOLSjqjXqEJkouO
- /dPRfcv6zFIaVpjS5I01gKkXtLFrWdu0HeGtkCeBV3HpNrHrkIcFFwpDjlrJ6YDBGrrg
- fvRQ==
+ bh=waPxNdbZii8GSinrg6Xd0GapDCdKT8M9gtanvPnLBig=;
+ b=YrjZzxohhiTplNoxo6qsluX9NvXspMR7F1EO7fzyVaQLtWWU5O5JCF1jTIb0mOuR6C
+ s+5wIASpJE/AJshOTKch4ENMjGCeYiDUjmJEHO1ZM2S7A+XU/Xsk089U6xEHrj2pEOeB
+ 3FAzcg92r35NZsO+Kyic77Pad7UIFZ+IqfStkryqkN0nmls8gXXy0xvEhMaKTGKvGsvl
+ IFIPK0xvKUuuF+W78SklEjKWHIpMVDZrHPT/TfYQGBpehPOyeAstu7OrER0ErtUQOHqX
+ tWVj2F4avJsU1J0+jhKBYL4kROFCT8ccDC2zKcMxB83Uwx64Rsfi9fJfJny9E3YD2nel
+ JHxw==
 X-Forwarded-Encrypted: i=1;
- AFNElJ/BDe/vLQNaLRs58JwTa4AQ1TKz3NI8jjtG3pebQa96eJMgvj9yC4eXFLRXAS4BXzgDbzZTp18=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy0Nj8n9LmkxX6FCOagM2BNyhWp1+m0ISFHlcRZYz2V6NEQiW0p
- nBBijrojehB2naoRN8woFv4sxzyLNoE6bimCIDPG0hQ/HcJAFG8Su5inZUyKsI8GRlbe90RSaEm
- GfV2QR7viMimvlfkce9X2VuUp/fvu3hIa1b1qm6xPzWleymVYVqmEcw==
-X-Gm-Gg: AeBDievE+zDPWCevpslWOy6h+TSh2G18Gx0CF1qoh8cz7xElyVGPNIfAbLjgTBPFent
- xv/c5I3sWZ1/7T41IijI0OEH5mu4AmF69bJZAlyiWgtvNVq+rzRwiWv97lOPgXj2patzxVjOsId
- dJPlW6YbQ/PBb1WDFVxgQcHSW41KnQVEvdZT4+dJRYbA8jS9Lg4MhD0pVcUQnSYnvGpilt+AXvN
- UjhaTBLUnApfahyP1LDazfB5/tZYTjtd5M3OZLfpKyy3NsOqYD2obXer2swn3TT1JmIh/rUFJYc
- K08WdChlrakJRLXo4FiX
-X-Received: by 2002:a17:903:1ac6:b0:2b2:5840:809c with SMTP id
- d9443c01a7336-2b5f9e77d75mr205753515ad.1.1776820561580; Tue, 21 Apr 2026
- 18:16:01 -0700 (PDT)
+ AFNElJ9xHgmC3BguM0fxz+d6bKTqHwMQ1HLDGPoYqUr8yElU//di+heTqSLbJQnfTrZrrqvPX27SdK0=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx+DtejJt5q+Xs6gsUXM2EiMIQJiKTAXwQGLbHkdCMzHPk+eoiI
+ fQEHL1LL9F3JhoL5eP6CfpObtCAyM7SCLvZxuyx8LWU7rk1DFvWXPTS8GAT/Y5HuhN0Tf7Cf5Oy
+ fmiAhug2jZPZL640hfcsBwYzQRavDZhEnQIA4CE0i
+X-Gm-Gg: AeBDiespNMCRJ6omanJil87tw4p3TCgQZKtKI7GzLsgl9U+0+G2J+xXvIuprOldtlg7
+ o+cYLa/qv10BTdwX8EGRCFCzfPFSZui7i/OQHtKsxHRB6gB74GT9ZoFrd434QO6AzkHWjDoTqcr
+ Nsu/JMULR4OY3uBs+OX+y9cQPgcz6u5Riog0JD/vSbLDIdujKtksJUm8h7oIN6eyAv2+9RWCyUD
+ YT3qIY+UsUggnPJ19qzwqPKGf4YlmNkakRDM2vAymgsto9hAcB0ZfLTRNEHdyBv7X2kpRMz07SV
+ 4iAq/cMOOji7RdSXFeapE8J9JhdbRrY=
+X-Received: by 2002:a05:6a00:1742:b0:82c:21a9:872c with SMTP id
+ d2e1a72fcca58-82f8c7daee3mr21754267b3a.7.1776820567453; Tue, 21 Apr 2026
+ 18:16:07 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260420220321.71147-1-heinrich.schuchardt@canonical.com>
- <20260420220321.71147-5-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20260420220321.71147-5-heinrich.schuchardt@canonical.com>
+References: <20260420012348.400492-1-marek.vasut+renesas@mailbox.org>
+ <CAFLszTg+nfKGCaHGz6-GHoQ+KntLYYdUTZqfYGpBdsvLSW9FZQ@mail.gmail.com>
+ <0c112980-e5db-4acc-97df-c1097c41112b@mailbox.org>
+In-Reply-To: <0c112980-e5db-4acc-97df-c1097c41112b@mailbox.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 22 Apr 2026 13:15:34 +1200
-X-Gm-Features: AQROBzBBxwk_NE5xUTovt753nHDQF1G0fxskF2i4Jk1nUjD3CnHk5XIUDCHo7PQ
-Message-ID: <CAFLszTjFgs+igGXmmi8Ec9fjThBvWKnTgOBLSCiLJX0QzrgYpQ@mail.gmail.com>
-Subject: Re: [PATCH v2 4/4] efi_loader: centralize messaging for
- efi_init_obj_list
-To: heinrich.schuchardt@canonical.com
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>, 
- Tom Rini <trini@konsulko.com>, Mark Kettenis <kettenis@openbsd.org>, 
- Patrice Chotard <patrice.chotard@foss.st.com>, Peng Fan <peng.fan@nxp.com>, 
- Christian Marangi <ansuelsmth@gmail.com>, Sughosh Ganu <sughosh.ganu@arm.com>, 
- Casey Connolly <casey.connolly@linaro.org>,
- =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>, 
+Date: Wed, 22 Apr 2026 13:15:37 +1200
+X-Gm-Features: AQROBzDUsXO46LaaHXKN0NeRiMOYsqlXGHFrnypW_6893cKLVWK-7mel51je7s0
+Message-ID: <CAFLszTgV6L=G2-MpBgYh3h=4QM0r0V-aLueS3zUgTCTx3YmcpA@mail.gmail.com>
+Subject: Re: [PATCH] kbuild: Respect CONFIG_SYS_DTC_PAD_BYTES after fdtgrep
+To: Marek Vasut <marek.vasut@mailbox.org>
+Cc: marek.vasut+renesas@mailbox.org, u-boot@lists.denx.de, 
  Adriano Cordova <adrianox@gmail.com>,
- Wolfgang Wallner <wolfgang.wallner@at.abb.com>, 
- Martyn Welch <martyn.welch@collabora.com>, Javier Tia <floss@jetm.me>, 
- Ying-Chun Liu <paul.liu@linaro.org>, AKASHI Takahiro <akashi.tkhro@gmail.com>,
- u-boot@lists.denx.de
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Peter Robinson <pbrobinson@gmail.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, 
+ Sughosh Ganu <sughosh.ganu@arm.com>, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -122,45 +116,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+Hi Marek,
 
-On 2026-04-20T22:03:17, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
-> efi_loader: centralize messaging for efi_init_obj_list
+On Tue, 21 Apr 2026 at 12:48, Marek Vasut <marek.vasut@mailbox.org> wrote:
 >
-> If efi_init_obj_list() fails we cannot use the UEFI sub-system.
+> On 4/20/26 6:14 AM, Simon Glass wrote:
+> > On 2026-04-20T01:23:26, Marek Vasut <marek.vasut+renesas@mailbox.org> wrote:
+> >> kbuild: Respect CONFIG_SYS_DTC_PAD_BYTES after fdtgrep
+> >>
+> >> The fdtgrep command will reduce the DT to minimum size, thus eliminating
+> >> the extra padding configured via CONFIG_SYS_DTC_PAD_BYTES. Reinstate the
+> >> extra padding by running the output DTB from fdtgrep through DTC with the
+> >> -p CONFIG_SYS_DTC_PAD_BYTES flag again in case CONFIG_SYS_DTC_PAD_BYTES
+> >> is not zero.
+> >>
+> >> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+> >>
+> >> scripts/Makefile.lib | 7 +++++++
+> >>   1 file changed, 7 insertions(+)
+> >
+> > Reviewed-by: Simon Glass <sjg@chromium.org>
 >
-> * Instead of having messages for this everywhere write an error message
->   in efi_init_obj_list().
-> * Always use (ret != EFI_SUCCESS) when checking the return value of
->   efi_init_obj_list().
-> * Remove the return code from the error message as it does not help
->   users to understand which initialization went wrong.
->
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
->
-> boot/bootmeth_efi_mgr.c      |  4 ++--
->  cmd/bootefi.c                |  5 +----
->  cmd/bootmenu.c               |  6 +-----
->  cmd/eficonfig.c              |  6 +-----
->  cmd/efidebug.c               |  5 +----
->  cmd/nvedit_efi.c             | 10 ++--------
->  lib/efi_loader/efi_bootbin.c |  5 +----
->  lib/efi_loader/efi_bootmgr.c |  5 +----
->  lib/efi_loader/efi_setup.c   |  2 ++
->  9 files changed, 12 insertions(+), 36 deletions(-)
+> Is this something which can be added into fdtgrep itself btw ?
 
-> diff --git a/boot/bootmeth_efi_mgr.c b/boot/bootmeth_efi_mgr.c
-> @@ -58,8 +58,8 @@ static int efi_mgr_read_bootflow(struct udevice *dev, struct bootflow *bflow)
-> -     if (ret)
-> -             return log_msg_ret('init', ret);
-> +     if (ret != EFI_SUCCESS)
-> +             return ret;
-
-This function returns int but you are returning an efi_status_t directly.
-
-Please can you keep using log_msg_ret() here, maybe with -EIO, or
-convert to an appropriate negative errno value?
+Yes I'm sure that would be possible: perhaps a flag to maintain the
+same padding as it finds in the input file.
 
 Regards,
 Simon
