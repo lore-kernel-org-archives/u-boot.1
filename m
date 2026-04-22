@@ -4,85 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50D1CF94CDC
-	for <u-boot@archiver.kernel.org>; Wed, 22 Apr 2026 08:10:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9B4EF94CDC
+	for <u-boot@archiver.kernel.org>; Wed, 22 Apr 2026 08:14:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0533D83FE9;
-	Wed, 22 Apr 2026 10:10:12 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 560A683936;
+	Wed, 22 Apr 2026 10:14:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="BOTDpmLD";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="PHRt8gxo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A643684178; Wed, 22 Apr 2026 10:10:10 +0200 (CEST)
-Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
- [IPv6:2a00:1450:4864:20::329])
+ id 5211783C51; Wed, 22 Apr 2026 10:14:27 +0200 (CEST)
+Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
+ [IPv6:2a00:1450:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 99E0D83E76
- for <u-boot@lists.denx.de>; Wed, 22 Apr 2026 10:10:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 178158352B
+ for <u-boot@lists.denx.de>; Wed, 22 Apr 2026 10:14:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x329.google.com with SMTP id
- 5b1f17b1804b1-488e1a8ac40so64470295e9.2
- for <u-boot@lists.denx.de>; Wed, 22 Apr 2026 01:10:05 -0700 (PDT)
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-488a8ca4aadso70265135e9.3
+ for <u-boot@lists.denx.de>; Wed, 22 Apr 2026 01:14:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1776845405; x=1777450205; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1776845664; x=1777450464; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Ny8SbbHD8feLmBSX0Y8lmRPduhAaOnZhJGrj6Zr63ac=;
- b=BOTDpmLDbrjTMnhVAWkmhNxoorrSEMxyTpiStiSIXyDha5ihEfMLwfSL+XUv3tJ0iI
- 0auoQ69JlwiCBNdDxXY9sMJJqekvFyWX5WrR9ze76glym9Ob/yjTh0UfjEiQcG31iFbt
- lITN+yPyfs/0kfr+hXWzmRewneUkvlONAOJr7RbUm5bqBzqI5AIXAdWeSTF7pUVjowai
- EcMe6b1BqBS4ScCQjl83zKWpeT8DKtm5XciR5aeykPO865AekYH1hwnGrKM4FWOvpvw7
- s3yWbkJR6reu80HRczMtw6mRKuHx+ZWHsG5m/WzaW33sYgu35/olUCPvklyee1awcnzl
- TI2w==
+ bh=58rO0BHCmcNKdyW0hYjR2hZXXpALkLzaUfe2KGPbU68=;
+ b=PHRt8gxoLhSDfaC/Nx8nwBp3ITTXHwSYk/X7GRKdoPBQ2Lc2+FmD9MvZgqEFNjrD52
+ iv96tEgayNBSn+O3i4KSCQqlBPwsNdfMv/KNokFthRrPPaS1PqHsF1mFE9elGIYozttY
+ IHBO66F8V5iRmdfLClCpQlJ17km00bdYuWr1B8NXu5JY96pbAeEQQgapObBsBP2rL+0o
+ DqNQdy8Gnb1Fnk12QuCPy0uDRYTXCP6ACdywytszv+9xR/4/27vSGwjVqGtyIt/0+6pa
+ 9qhg/uE8ohulvDa6pLypjasapdE+nlCViNhc+IrxTeLJBtuer/Xsv1RPFmwSgLiWqSsG
+ tIkQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776845405; x=1777450205;
+ d=1e100.net; s=20251104; t=1776845664; x=1777450464;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=Ny8SbbHD8feLmBSX0Y8lmRPduhAaOnZhJGrj6Zr63ac=;
- b=JMeZsIPgu35z81cF6hAMWIj6RQOr0GWTsjE7uwdE5SGrOQ4e0+kOH8LCukaLs/Bbw1
- FAR9JTV3uAlvpWrRbF5Nkt7pD8+CsOL0Y3KnbbTu+D53cmDzrhfPweV/9yfOARfBaHmM
- Vs9kNXHYsuy4QwRODgVuZBxKK3pwR7l7jr1EtcidaMd+3/w9o+j39tX/+0rPxyoYxXuE
- 0mylRHjwBGxAv0bgb4+jFcVEIKNyAtg/5tcq3W3nhaveQOMN1J5O9+pPWNoX8dgA32Ke
- pk5nOzrmGcip29O27dWwzt1CwU3IrNsfaxoKmW9gHGU8ZrDAuGB5BMBkUrtP/0ye1t2Y
- q2dw==
-X-Gm-Message-State: AOJu0YyKjZ+lLXDmo8xpZ0laSMDc7sFap5v2K2hzmaHaF+Zh/lp+mXjq
- 7yMnudTkvCUtmA2nqH7vwdsqIctAAiGgPg2S6U4kO24k0kn+nE3NUWwlpSBNE5caufiNOh73KiE
- Z9duTXJQ=
-X-Gm-Gg: AeBDietmnQnd76H+C+tbzO2zvUZKIi07h/t5pts0W7OndmJxoDAOXu9U3bl+xEFQ/vI
- mKJ+MfH9lW85p69a8ELjl61kX/S5yBUe/G2iZcz5JN4f1D/YJGZl63Jitaomf055kleVkOq2tz8
- IPMiC/a16L5s+bOqWXo+Td/jwefph5zp1x6e2G4mw3Do5mp8r47h8MdgBxVrWhni/dVdBCgBW58
- BdirzCXjQIshlFb3w7cx0XUDh8jfQIYjnWZe8c2ZN2qLHBr5Wm7h7aa67c0nzDeQjwWtA79XwEV
- 3kHJ0Jp2TUtfPn6blJmzYep5Kun9UOdK3zcnM94YKA5r8hIRy8xHOoPkwrwbBwF4JZGsxpikks7
- 1Gbs2LU9yiPHOqRdN2vOZYcSfy9oy4P0o/C6WbTn8hivJWv/DDy4JHdSi9C///wZME8kLEKlAtY
- AKTjfaYd5Ygo/FaKATKyEoZBd6DlX+T5sAHGbnBMASqlZDll1w0UHkPy4=
-X-Received: by 2002:a05:600c:797:b0:489:1a3a:9e45 with SMTP id
- 5b1f17b1804b1-4891a3a9f38mr114578775e9.26.1776845404753; 
- Wed, 22 Apr 2026 01:10:04 -0700 (PDT)
-Received: from arrakeen.starnux.net ([2a01:e0a:106d:1080:52eb:f6ff:feb3:451a])
+ bh=58rO0BHCmcNKdyW0hYjR2hZXXpALkLzaUfe2KGPbU68=;
+ b=hImG5/ITto2qYx3Awr2CmXViPKlHyL+imxIhyCZ04AF9lcWGP/67wCfwR4bmLIflmP
+ 3bYhdyuwEUrQD9dw6+jjx9XytnWmdr66ioWdgk6igRVybtPk44hKoTRwCMZV1J3QJo5j
+ 8n0+jHUTpIAA78EaWcVAFyrXH5c1P6bzdYU9eDGw5VvFX+gnwGkY/KH5OH/qXJxHC3H0
+ AFLLbAkOvO+NB2xtvWU20GCCJwnrMhLFax/SoPNvmy9fLJ0nc0lI1xm7FQzknKY0BpNg
+ minciR7Z5XtX4rEBddT82HAvbvG5j37N3n146te+ygQnLbt9w0xp3IQHVt9kpC4I7D4Y
+ tqoQ==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ8E6zvRjFSB58+xlRpJ0kGhknn2z6jIEmtjw5QrjbPnwDprBY9cxHT6OEwbGHKGirgSf3vuYJ4=@lists.denx.de
+X-Gm-Message-State: AOJu0Yzptx0y4fl6X6Nv0YDGtY9H0cb/7DL581sTqlNW7F6g4U/daSDX
+ /YIg+KttMkXZzt5PfyCb/b15m+yvYAsn9DodZAkirhb31Zrl7SdrKQKV5OoNN30KEz4=
+X-Gm-Gg: AeBDies8nGT7m+LiyYsmLClNLAeaRTOBfIj9o0p6kJtd3NIKr65t69M8967bcpOi47V
+ x7tXgHCC43XuiRMG2TP9pA6r7GjdHrzA1GKh6m67dX39y8T86yLrAHjKsuAGPO4tpVvg2V2sysi
+ uB2b1Mq6+uFUuL0DTzZecZjJUShPF2DiNdTJ1AyCBkdavVSbZkY7g1YBSjj+JVdkos+r9/o/x0Q
+ 9T+V8osfB+Kqz8+NWm3dY3LHdFh6laqIk9ZedWKBvBYP2dP1r1zNG6YTOoztIttsdpGFdEEQ5hF
+ P44/d6U7xog93BAzsuL1sIdhgk6Zydt6YOqLSuP5ltITHg0wi9Vv52AfayHPFooD9BnkV/TcmI8
+ QorvlRt8MOG9mJhfwcuNWdSUewgL9WBc924nnoaKPGqmSuM58h8nSm0lmA8zzNokYy7jF62q5Os
+ zFo0xoFXHu8ZvUtv9hn3BUHa+S17N6PKR/Nmxy/Ji0P0qtrnatOD/koII0LFAptSU5yg==
+X-Received: by 2002:a05:600c:8183:b0:488:ab26:8fe0 with SMTP id
+ 5b1f17b1804b1-488fb765b1dmr250407915e9.15.1776845664319; 
+ Wed, 22 Apr 2026 01:14:24 -0700 (PDT)
+Received: from arrakeen.starnux.net ([2a01:e0a:106d:1080:8261:5fff:fe11:bdda])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-488fc0f8188sm453974945e9.2.2026.04.22.01.10.04
+ 5b1f17b1804b1-4891cc7b2efsm122016285e9.0.2026.04.22.01.14.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 22 Apr 2026 01:10:04 -0700 (PDT)
+ Wed, 22 Apr 2026 01:14:23 -0700 (PDT)
 From: Neil Armstrong <neil.armstrong@linaro.org>
-To: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>
-Cc: Bhupesh Sharma <bhupesh.linux@gmail.com>, 
- Julien Stephan <jstephan@baylibre.com>, 
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Tom Rini <trini@konsulko.com>, 
- Tuyen Dang <tuyen.dang.xa@renesas.com>, 
- Yoshihiro Shimoda <yoshihiro.shimoda.uh@renesas.com>
-In-Reply-To: <20260415215837.448867-1-marek.vasut+renesas@mailbox.org>
-References: <20260415215837.448867-1-marek.vasut+renesas@mailbox.org>
-Subject: Re: [PATCH] ufs: rcar-gen5: Update line reset configuration
-Message-Id: <177684540417.2674178.12661677518777822561.b4-ty@b4>
-Date: Wed, 22 Apr 2026 10:10:04 +0200
+To: u-boot-amlogic@groups.io, u-boot@lists.denx.de, 
+ Ferass El Hafidi <funderscore@postmarketos.org>
+Cc: Tom Rini <trini@konsulko.com>, 
+ Evgeny Bachinin <EABachinin@salutedevices.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20260408-b4-amlogic-sysreset-capsules-v1-0-6f3386eb5124@postmarketos.org>
+References: <20260408-b4-amlogic-sysreset-capsules-v1-0-6f3386eb5124@postmarketos.org>
+Subject: Re: [PATCH 0/4] Enable EFI Capsule on Disk on Libre Computer
+ LePotato & LaFrite
+Message-Id: <177684566365.2679545.5969910941110488483.b4-ty@b4>
+Date: Wed, 22 Apr 2026 10:14:23 +0200
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -105,14 +106,30 @@ X-Virus-Status: Clean
 
 Hi,
 
-On Wed, 15 Apr 2026 23:58:08 +0200, Marek Vasut wrote:
-> Synchronize line reset configuration with SDK 4.28 parameters.
-> These values are programmed into the PHY.
+On Wed, 08 Apr 2026 20:30:11 +0000, Ferass El Hafidi wrote:
+> Mostly everything is already in place to enable EFI capsules and in particular
+> EFI capsule on disk.
+> 
+> First, switch all Amlogic boards to use SYSRESET. EFI Capsule on Disk
+> functionality expects sysreset to be present. As the current reset_cpu()
+> function in board-common.c is basically only doing PSCI reset on U-Boot
+> proper, we can replace it with sysreset's PSCI support, which works just
+> fine for that purpose provided BL31 is running (SPL stays on an
+> SoC-specific reset_cpu() which does for(;;);, as the overhead for
+> sysreset is too high and we don't have PSCI yet at that point).
+> 
+> [...]
 
-Thanks, Applied to https://source.denx.de/u-boot/custodians/u-boot-ufs (u-boot-ufs-next)
+Thanks, Applied to https://source.denx.de/u-boot/custodians/u-boot-amlogic (u-boot-amlogic-next)
 
-[1/1] ufs: rcar-gen5: Update line reset configuration
-      https://source.denx.de/u-boot/custodians/u-boot-ufs/-/commit/1089ed95f54e43ddbbe19712b69d9ace374e572c
+[1/4] arm: mach-meson: move reset_cpu to spl only
+      https://source.denx.de/u-boot/custodians/u-boot-amlogic/-/commit/a6f2d59191a6afb603927e821ab0077fdac970ab
+[2/4] arm: meson: enable SYSRESET_PSCI
+      https://source.denx.de/u-boot/custodians/u-boot-amlogic/-/commit/2cd6e8b143eec0f490c4797f2d18112c57cfc557
+[3/4] configs: libretech-ac_defconfig: enable EFI Capsule on Disk
+      https://source.denx.de/u-boot/custodians/u-boot-amlogic/-/commit/61a7cae07230cba2e8ac502c851ed36073081a81
+[4/4] configs: libretech-cc_defconfig: enable EFI Capsule on Disk
+      https://source.denx.de/u-boot/custodians/u-boot-amlogic/-/commit/b075c1d247113da582d61cc7192affb918cfae02
 
 -- 
 Neil
