@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10BF0FA1FC0
-	for <u-boot@archiver.kernel.org>; Wed, 22 Apr 2026 15:40:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43FBAFA1FC1
+	for <u-boot@archiver.kernel.org>; Wed, 22 Apr 2026 15:40:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8FB9D83BC8;
-	Wed, 22 Apr 2026 17:39:40 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5AE0484399;
+	Wed, 22 Apr 2026 17:39:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=postmarketos.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=postmarketos.org header.i=@postmarketos.org header.b="omuoo7of";
+	dkim=pass (2048-bit key; unprotected) header.d=postmarketos.org header.i=@postmarketos.org header.b="RIe4onnS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B10298431C; Wed, 22 Apr 2026 17:39:31 +0200 (CEST)
-Received: from out-170.mta1.migadu.com (out-170.mta1.migadu.com
- [95.215.58.170])
+ id A393484333; Wed, 22 Apr 2026 17:39:33 +0200 (CEST)
+Received: from out-174.mta1.migadu.com (out-174.mta1.migadu.com
+ [95.215.58.174])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BE1C283BC8
- for <u-boot@lists.denx.de>; Wed, 22 Apr 2026 17:39:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 40202842E6
+ for <u-boot@lists.denx.de>; Wed, 22 Apr 2026 17:39:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=postmarketos.org
 Authentication-Results: phobos.denx.de;
@@ -29,25 +29,25 @@ Authentication-Results: phobos.denx.de;
 X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
  include these headers.
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=postmarketos.org;
- s=key1; t=1776872369;
+ s=key1; t=1776872370;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=lOuZz7lvQndsIyML4zQVJ7hX8vwExcnhjD2pWkXMGLI=;
- b=omuoo7of+N8mEE/5kTz8rkw2Cv6z/9mqC0Weg1F5Ss2Qz102X9QC1nQ0R+Kdvf9P5An0CG
- +YRKLJjRFuMy5HC5oDF5u0Jhfhwo+41Jfs/SnyYC4qynmkMZQ6xl/OfUn6ttc2tjdRMgu7
- mm8KdTPALig1iyrzcvrAMYGNt3yk4gBpc/rWGhQkEQ953ud8twVf+GmwO9fWLpTjGouXCR
- RCPQ/6wB0ZDu2sS2Hrpu0vbq5I8Vhev1DPYAUl9n7JzXTSPWTZOSf6mQtVHD0z6/E3ef0C
- vrXI4DdHgFSiH4aCTMU6vEx7TPXbAty0b2f32u6J5NxfXFD/yczSjlWyMYiJNg==
+ bh=DNPhg45MzTi1ZtvS4xQLym0Inbjtyod1lrkB+jfBc+o=;
+ b=RIe4onnSwGu0oLZ/y1paZq1v7phdmB257GZv5l65yd+WaQHGf+zDi2yGhfw6mGxOjJHmfX
+ fUbeGTmNZnkjQ+v+E4mBH8xsRaHyjtf7eKXvmSks9AXm2pldIc2AAaH7TcrKkldC34rj+n
+ Ik9SItiYsNzx6HRXfF/Px2MJ/a6rU8myCDepWL8olE3OMimVjlYWagDikQVPHpMId6Idva
+ fPjkIm39+K1EDvV3Fhgx0K/iqlbvwZpD/pGjuIpGoQsW93E46hgaW3zeHEAkq5d3CTTA7v
+ e7CYmRlPL8qWBX73eqGd/At2ENiqyUu1envI1hL+gBMEpgQ9SlILW1UQ9CTSMw==
 From: Ferass El Hafidi <funderscore@postmarketos.org>
-Date: Wed, 22 Apr 2026 15:39:06 +0000
-Subject: [PATCH v2 3/4] configs: libretech-ac_defconfig: enable EFI Capsule
+Date: Wed, 22 Apr 2026 15:39:07 +0000
+Subject: [PATCH v2 4/4] configs: libretech-cc_defconfig: enable EFI Capsule
  on Disk
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260422-b4-amlogic-sysreset-capsules-v2-3-e04e4c9e69f9@postmarketos.org>
+Message-Id: <20260422-b4-amlogic-sysreset-capsules-v2-4-e04e4c9e69f9@postmarketos.org>
 References: <20260422-b4-amlogic-sysreset-capsules-v2-0-e04e4c9e69f9@postmarketos.org>
 In-Reply-To: <20260422-b4-amlogic-sysreset-capsules-v2-0-e04e4c9e69f9@postmarketos.org>
 To: u-boot-amlogic@groups.io, u-boot@lists.denx.de
@@ -56,21 +56,21 @@ Cc: Tom Rini <trini@konsulko.com>,
  Evgeny Bachinin <EABachinin@salutedevices.com>, 
  Marek Vasut <marek.vasut+renesas@mailbox.org>, 
  Ferass El Hafidi <funderscore@postmarketos.org>
-X-Developer-Signature: v=1; a=openpgp-sha256; l=771;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1184;
  i=funderscore@postmarketos.org; h=from:subject:message-id;
- bh=lsFAb6WIU7UkZswT3Jl47z04z/J3OIDZgcTSN4HJH+0=;
- b=owEBbQKS/ZANAwAKAYSvy9DXiZoDAcsmYgBp6OurznQytNRqzroVSWlPpm9hHrZbiAI3U4fjz
- IihpWQsCFyJAjMEAAEKAB0WIQQDAbw3+1VcrP15i+6Er8vQ14maAwUCaejrqwAKCRCEr8vQ14ma
- Ay+MD/4hJkYtTOocUQjsCaRDsjp/LINEeFNH1CP896f1BBBICKJs27dXWTfGZyb61d30hsnwA+g
- +mStGnsxXeT19nqC8cFGOzM4KRGNXV2SakmI/MgkxxclePy1d58GYMNeG1IdwOzhDVtMnPwFmEt
- TJIpziJ4iYKP4pLYTxghRaYhuVuN9lYIqn6d8muaNryCahDCs8FyvIs6CXX5c+zUfa7yoHUTJwu
- eH0Bi2l6cfe0cvsFIKRorvDPVH6DrhdJbnuP6nbcRWcjUxAzaUtFzoR6NrMEDUbF8lmNUoNZirl
- u6f6yS8EfwBAsC/6rXgR4b5N1Lnx3Fiu6GZouOT2R4qN4Ao1V0CQxQwJ9hwh2+o538k8viyu4M6
- EDP5D24ttPwzYyzi/1T392S94yj3uNC4kYLkK03PEkuZdbxwQ2vxXQdJjzA9rXS9mf71tSMt7nD
- +NDoNpD1cqkSPmJu5Dj0kbrWEzJo1fVio0jgKc1OWPvgVsE9b5BYor/FostT1KmpmngTzGdqPgk
- 1/W88RNWruPRrEzdmuZ6OxULbTtj2U5xW3hsO/A2MAH9artFXOlfBvhV1SVCJ9htII5Qc86sSFh
- 26hiQC7TscBHu+PhUjroVweOaF+H26sSEPR9wrkTIRdSg9JgATKbmy6/yXALeJCB3q1Y7RK/lvd
- 2JyB6Wi0Snl+zPA==
+ bh=LMGF3fO18XQ6NCapMDLKdOuMoeXUFmiMa4p/kVkgmOs=;
+ b=kA0DAAoBhK/L0NeJmgMByyZiAGno66yjGbsKF9LuqvrpHIsZJbnQiv+qipR0oprp5ioVoZ4Ay
+ okCMwQAAQoAHRYhBAMBvDf7VVys/XmL7oSvy9DXiZoDBQJp6OusAAoJEISvy9DXiZoDvG0P/0xg
+ 0+LLH5lAyseaEww8sJ7RaylZPOAiQyidflFcYMM5Pk09eMhtpHlKccLOZ5RmBmwlchqYvEbdZKo
+ GVN0I12myiRtppuaP7PoXQytW9eB78EqTgNCEXtasx/nddpA8Bq0cU7V1Jl8Gbe64fmotSeY2Yp
+ Kh575OEvA3q/CZf7dnNYF/9hfBfpnb6C60uY2sdelko6ls/HMCfMnscaiaIafKtcEUJ5hiWnYYg
+ kpc13nZNncb2RU6wCWk4m64R8rGAXP3LozVck3RacLgtwfefdwGoupNz+Hk5eY5IZ89Hi6rf2Uo
+ cYN+mbEQj1pPe8FPTEuHKaKk56wxBNs1IkmURX2LPJwewBm5h92thqmN/ka84EZ54cxryX6gnNu
+ b8J1p59oYbmB40N/k5beFBEqlIzM1LjjmuuCGRNM3MSQmSVGu9JCJHHqJUYu/ueBeWlorSNmxvW
+ 0U7m/dClenLe0AKPtuQ322wd9cVN9WiNCSpwVQS+TDVND+CIzkMLx5mcnHdr4odasQw1GLpI03l
+ Hlbibs2qayuz04qmNxhTwAtKWpzGtDo3jhvQw/GTxtvXzD0iYMKzL9LXPSHmb3+1BTE+VficWl4
+ oOeO0qBffXUivqHqLBWbw7JK23hT+zJolKqLfEw2xfY2MmhI2IMcaVpsc/gTST6XnJT00VsF6lu
+ Jp5wZ
 X-Developer-Key: i=funderscore@postmarketos.org; a=openpgp;
  fpr=0301BC37FB555CACFD798BEE84AFCBD0D7899A03
 X-Migadu-Flow: FLOW_OUT
@@ -90,27 +90,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Everything is already in place for EFI capsule updates, so enabling
-Capsule on Disk is fairly trivial. This allows updating U-Boot on SPI
-flash from Linux using fwupd's Capsule support.
+Everything is in place to allow this board to support EFI Capsule updates.
+Enable everything needed to support Capsule updates, as well as Capsule
+on Disk. All this allows updating U-Boot on eMMC directly from linux using
+fwupd. Also enable DFU_MMC, which is a requirement for EFI Capsule flashing
+to eMMC/SD to work.
 
 Signed-off-by: Ferass El Hafidi <funderscore@postmarketos.org>
 ---
- configs/libretech-ac_defconfig | 1 +
- 1 file changed, 1 insertion(+)
+ configs/libretech-cc_defconfig | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/configs/libretech-ac_defconfig b/configs/libretech-ac_defconfig
-index 1a67ca734b8..17d54655017 100644
---- a/configs/libretech-ac_defconfig
-+++ b/configs/libretech-ac_defconfig
-@@ -23,6 +23,7 @@ CONFIG_DEBUG_UART=y
+diff --git a/configs/libretech-cc_defconfig b/configs/libretech-cc_defconfig
+index d5878bdc431..622922e97ee 100644
+--- a/configs/libretech-cc_defconfig
++++ b/configs/libretech-cc_defconfig
+@@ -16,6 +16,9 @@ CONFIG_DEBUG_UART_CLOCK=24000000
+ CONFIG_IDENT_STRING=" libretech-cc"
+ CONFIG_DEBUG_UART=y
  CONFIG_REMAKE_ELF=y
- CONFIG_EFI_RUNTIME_UPDATE_CAPSULE=y
- CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
++CONFIG_EFI_RUNTIME_UPDATE_CAPSULE=y
++CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
 +CONFIG_EFI_CAPSULE_ON_DISK=y
  CONFIG_FIT=y
  CONFIG_FIT_SIGNATURE=y
  CONFIG_FIT_VERBOSE=y
+@@ -38,6 +41,7 @@ CONFIG_OF_CONTROL=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+ CONFIG_SARADC_MESON=y
+ CONFIG_DFU_RAM=y
++CONFIG_DFU_MMC=y
+ CONFIG_MMC_MESON_GX=y
+ CONFIG_PHY_MESON_GXL=y
+ CONFIG_DM_MDIO=y
 
 -- 
 2.53.0
