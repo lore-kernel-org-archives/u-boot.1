@@ -4,119 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27E19FA1FD6
-	for <u-boot@archiver.kernel.org>; Wed, 22 Apr 2026 17:11:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E293FA1FD9
+	for <u-boot@archiver.kernel.org>; Wed, 22 Apr 2026 17:51:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DFB4D84413;
-	Wed, 22 Apr 2026 19:10:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 4C3B4842C4;
+	Wed, 22 Apr 2026 19:51:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="j7zcRT1B";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="c/PRZUX6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0E56D843F3; Wed, 22 Apr 2026 19:10:16 +0200 (CEST)
-Received: from SA9PR02CU001.outbound.protection.outlook.com
- (mail-southcentralusazlp170130001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c10c::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 88FC9842D7; Wed, 22 Apr 2026 19:51:23 +0200 (CEST)
+Received: from mail-oa1-x42.google.com (mail-oa1-x42.google.com
+ [IPv6:2001:4860:4864:20::42])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CC7E78439F
- for <u-boot@lists.denx.de>; Wed, 22 Apr 2026 19:10:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EAAD884255
+ for <u-boot@lists.denx.de>; Wed, 22 Apr 2026 19:51:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=rs@ti.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ilXvWB0iqdGbylPE5GxDQYxZiAeQ93L6g31vTk/k6iKoXZFBB/vlVc906XXNq7pTEyMEiKwM5SrEF4ux5nmOqGMeoFtg97MSL7WqsJ/s4ylmN/xM8S7UmQAOqLZM1hG+JI8830FpH6Ai1kSi5BxoB5c2NuAAFNOAS7+T3T6O7Gzu+78Vg70cO65IFXCq64h70RpmFA9aoPKO/U/gqUx5Ewn41uU50Doo7JuLpEXe+CYgSMZgRaTv84wtzb26r0TkmIT1RAWuCfRNOocb4EpnpUMiB/yDn8m398Uv4+exQPegwAKvuqbtWJbGvco2gjsTTs3mm7v418/3/TyTjyCMVA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=F1O0sSC93B9UVD94Q1Ld5tJEbvxV4r9C0QAMa3h9DKM=;
- b=ByYVLNIJgHFyaTewJ8coCCuQoVu4TEcG60Gav3jjE616K9ugDEn50GZ2BJkIMkjTOfszVptHOY0ypmGYtEPJZi01BSdugVjEHK13Nquv8VOzdK9TBo9gd/ujb99n/HMa/oO/5ERy+tV6QNNGJIiguYtd1P5r4yGO1okUv5F9DUYA4fkpPjpM9rhc2uadnGQAeyVvHpODOOVYTGf6BG4nxwF/xwp42uQwlX2VJERSOR0H7TvQHkrtw9ANxMagNIZv1GNj766fCf7ashhl1q0EvUCfpOnw22sQ9o8PFhqlOod3x09mIGrenIof0F+GZa0N8OuzDYOgDTI8LKE9wO157Q==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.21.194) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
- dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=F1O0sSC93B9UVD94Q1Ld5tJEbvxV4r9C0QAMa3h9DKM=;
- b=j7zcRT1Bjqh5MnOllKOvq86yq2Pb/FcLUxa1PkTQCFWbDlufQ6X9NdN+DYPhFfj/KLlvcMoE+2qVLZqLrO21zd/95lO28G9nJmpXJvYO5bH9fuPG1KGNIo3HRtalKGx0I08KC3lcYUFfq/JpaWxbJ5rQwpCijnbNhlFFbKkaZX4=
-Received: from CH2PR07CA0037.namprd07.prod.outlook.com (2603:10b6:610:5b::11)
- by CH0PR10MB7412.namprd10.prod.outlook.com (2603:10b6:610:184::17)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9846.20; Wed, 22 Apr
- 2026 17:10:10 +0000
-Received: from DS3PEPF0000C37E.namprd04.prod.outlook.com
- (2603:10b6:610:5b:cafe::c) by CH2PR07CA0037.outlook.office365.com
- (2603:10b6:610:5b::11) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9791.48 via Frontend Transport; Wed,
- 22 Apr 2026 17:10:10 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.194)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.21.194 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.21.194; helo=flwvzet200.ext.ti.com; pr=C
-Received: from flwvzet200.ext.ti.com (198.47.21.194) by
- DS3PEPF0000C37E.mail.protection.outlook.com (10.167.23.8) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9846.18 via Frontend Transport; Wed, 22 Apr 2026 17:10:09 +0000
-Received: from DFLE212.ent.ti.com (10.64.6.70) by flwvzet200.ext.ti.com
- (10.248.192.31) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 22 Apr
- 2026 12:09:57 -0500
-Received: from DFLE212.ent.ti.com (10.64.6.70) by DFLE212.ent.ti.com
- (10.64.6.70) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 22 Apr
- 2026 12:09:57 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE212.ent.ti.com
- (10.64.6.70) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Wed, 22 Apr 2026 12:09:57 -0500
-Received: from rs-desk.dhcp.ti.com (rs-desk.dhcp.ti.com [128.247.81.39])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 63MH9uPN2769561;
- Wed, 22 Apr 2026 12:09:57 -0500
-From: <rs@ti.com>
-To: <robertcnelson@gmail.com>, <ayush@beagleboard.org>,
- <Erik.Welsh@octavosystems.com>, <anshuld@ti.com>, <bb@ti.com>,
- <trini@konsulko.com>, <afd@ti.com>, <xypron.glpk@gmx.de>,
- <ilias.apalodimas@linaro.org>
-CC: <u-boot@lists.denx.de>
-Subject: [PATCHv5 3/6] efi_dt_fixup: use fdtdec_get_bool
-Date: Wed, 22 Apr 2026 12:09:43 -0500
-Message-ID: <20260422170946.3394481-4-rs@ti.com>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260422170946.3394481-1-rs@ti.com>
-References: <20260422170946.3394481-1-rs@ti.com>
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x42.google.com with SMTP id
+ 586e51a60fabf-40f1ffba6a0so4060804fac.0
+ for <u-boot@lists.denx.de>; Wed, 22 Apr 2026 10:51:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1776880279; x=1777485079; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=TKjtqQWsZUwJWnj9Yuqm1QvfU9yEhcgCi0KdCsEvitw=;
+ b=c/PRZUX6VylqVoTyIKnKMQwdmihXZb+rVykUYm5ZHsrj50ffr+Xsxtp1yhvLFBi7UE
+ CjMYumo3/3ec24yMKs9A4ObDG+E58SzryazV+b5lNaEIPT1PLVTzlhNjCwFj0IJcemJ5
+ yNVnHXCnqtTUbCjH/ktqy/pJo7Qdz4CTab/wQ=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1776880279; x=1777485079;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=TKjtqQWsZUwJWnj9Yuqm1QvfU9yEhcgCi0KdCsEvitw=;
+ b=LEAICvOCCglmXfAxxW69Inl1inGJ2l8VYbnv36APTjQqq2bkS6QFeOSlHDf/RWzgyE
+ HNwVYWaT6DfJmYzoKiGmC/PBNsT5tl2kqdUT4ezDILiyO7QkmW9LVv8CLYgXXzHOzMOv
+ d6vSLsvxshZCuNCXNY8zQsu225qLLRwCdn2U6jnlvUm8P4KskBt6Pr/pKQ/9ZNj/TM9H
+ TAUMzoE+79lnFqxQEpBPzE6qahyyUDPjCTscvAvJM1gMLYooCl2P2oEN2TXV7LZtuUT6
+ uIIzulVdP0wrmkmLTmLD9THu0vW8jZzcnewAyTTflR/E3zuChpM7S+7T2NQ7BLiWxR0+
+ 3FvQ==
+X-Gm-Message-State: AOJu0YwJxzz+xBm4ofNce+9oMU4CT5RSFkwSg6Q6wlLzu5+KHLq7hxp/
+ iyXZNPG0si+ZpeUko86+TEHnFrMeQkjrxwuwzvwRSoX+p9U5OqKMyaTDAeathWDFHxY=
+X-Gm-Gg: AeBDiev26hLm3AOQOYtvL9kg4XnLPgAkiRpfHLHO0xVz4pdQ83PWnigCAeE/x8aRBAN
+ gjD3fAP0Papk/vlY77qeNdtopJ8TGP61lKZci2BK+dps5P7i/Bg0sueN76N1zQW2CufX4vgyD+I
+ 0Q2rCAWqQHuZBSJcuAsCxnvNS6Cr+YZjoIOdTPUEJg5mPjUr0mzf0toXGF+2GALMxdToMsPgqXG
+ pTvxE+vv1w7Rnqmq4s66wuQiOHqZ8mjDeq9xuT+ypvTs+aUK9IfBFRndUCB/KCI+1YB1mELav+U
+ h7ZkZrn1GoXkJd97ETxhA5K51EJYRmhq1YMwdsF/6aSq0oTekIxWLFrh+2A6O1aTNCu3AfDaeO2
+ WsuxqbrdYVNT5XsejvUuK3/U9yl65EV0P3Ksh0BMRv6UxsdSwRtWfvNZ2sZ0OG3K3sCRInDRNv9
+ VZxOHkoqX2z2zr7a4ZUJvjGTDDbmfDdZ4nqCfq/s7whISh8MWjbBMWeItUQlPGTxrWzZrAfjosC
+ OHYo3vQcQLnvuxNpwPHNzajj0utTqctANoOsAP4w0du3+o5SSR1J5lf8wmCfg==
+X-Received: by 2002:a05:6820:1891:b0:694:9fa0:aa4a with SMTP id
+ 006d021491bc7-6949fa0bc40mr3569033eaf.44.1776880279490; 
+ Wed, 22 Apr 2026 10:51:19 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
+ [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-694984114f5sm3504387eaf.7.2026.04.22.10.51.18
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 22 Apr 2026 10:51:18 -0700 (PDT)
+Date: Wed, 22 Apr 2026 11:51:16 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Xuhui Lin <xuhui.lin@rock-chips.com>, Heiko Stuebner <heiko@sntech.de>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Sebastian Reichel <sebastian.reichel@collabora.com>,
+ Dmitrii Sharshakov <d3dx12.xx@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Subject: Re: Couple of clang warnings for Rockchip boards
+Message-ID: <20260422175116.GF41863@bill-the-cat>
+References: <f8f4e639-0e73-4d14-828a-92dbfe5526ba@cherry.de>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS3PEPF0000C37E:EE_|CH0PR10MB7412:EE_
-X-MS-Office365-Filtering-Correlation-Id: 1d6d9ed1-5c64-4408-fac5-08dea09201ed
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|36860700016|376014|82310400026|18002099003|22082099003|56012099003;
-X-Microsoft-Antispam-Message-Info: +uM9p5CDI21TyRulYKAOAzKTo2mKDaUfqzTop9B86gYRHby3KKmKZplm3AoLiWmmylsv+6iM44syMrwtPU2xIrxXcZAqpON9olqiba1E9swjB4Hmh/IkcT2VvLbsS9D0aGkPAUQGAvIda+wXBNKvGaCBGnFnaAp+rOkDQLWCzwHM+m5rn/m7iXygJOZruVlGzgoYCYNyhX8fc3NrWNahPxCfpSGevpYE7YET+DgS6FhvqTMCliByCkzi2hLbAdZfVMEN/iyOXg7drba9hZDisfHJtNCXJdSMn+T0f46izDvFRPbVxjcUuSrpGMjYVjH3q4/imOHg1DHXQ78MkSxdoVO6t4diB6rARaZPCTRyAHTmFKZnXrCozpEUJ1T1QNwDiNr8Ddan/GJzgKlBKKDBHnXufnE27995onqKmCJhJjRdu5OhZgxTVyFb7h9XEE+JQsolGath7qEQfXtazCuIo7SOYcN/pel3YR31zdO8qNPeCqj6U+wVn/XC5zw4tGKDPbSlWiKcbL19x/u7hfqDNSzUicsXKRNxFc7FI6Yd4fU0833WrZ9a7I7s1yOgT6fHdwleGkZUJYltT3aYaOhtwm6bxDKg+jSiwu4RF9lCmAS0eHTEf2WF5BnhRHH+PPj/5wSPm80UJkvEo4k8PEXYwxZrp3i4Q06QxCR95b2HU2xI3BZgOWM8kmn7DFZyz0RGxZ/BwNdvkCAp4og+k+8CG8zJlN/Pgs/5IH/g3AhNFM6mf4MHmpMVTX2CDGaoXukidVWl18MBhDTp/ClwLPxhag==
-X-Forefront-Antispam-Report: CIP:198.47.21.194; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:flwvzet200.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
- SFS:(13230040)(1800799024)(36860700016)(376014)(82310400026)(18002099003)(22082099003)(56012099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: iBpBE73iEtDp9pweDFP/QXa2ldnGAx0B7Wj+wBkPrwYDN9ZdfCY+JKJQ7M1ksX7SwWJs+EfMZaWaoKXwHQwVz9pfaEBIJ1xIp4BoXg1h6sPIoiQrx5V2h2T8lXV8//wWBrZaWIZLEhTmO1IdA3s+n47c41CseVOG76JH6gaCQMK1jHDhyXOdf0lS2657R2qGCSFDPG7tfHeFD5K8x9rSVl1UFKbjiiOhR32beRPpuf95QCBwXgmGpNejd0P4579NAJ9Q2+0/rH33918vUwizIPgNBZaHIye4wL5hy3uknisBCLDZddAj8PvBXYy2SDDXG2eLPHm8pXGDhAu2yFc28RuN4i70EFsVfQLqWmCasEnhFhEcpk/YvzwJUALL+vgc1eycml/A3xCBuMim47BKZSVi9hIoqzEwaxwx84//xsyhACogO2mK6tZ0XwrhtBx7
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Apr 2026 17:10:09.0300 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1d6d9ed1-5c64-4408-fac5-08dea09201ed
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.194];
- Helo=[flwvzet200.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: DS3PEPF0000C37E.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH0PR10MB7412
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="WiPuCqNHHhyqrAce"
+Content-Disposition: inline
+In-Reply-To: <f8f4e639-0e73-4d14-828a-92dbfe5526ba@cherry.de>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -133,34 +103,182 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Randolph Sapp <rs@ti.com>
 
-Use the more straightforward fdtdec_get_bool instead of fdt_getprop and
-a return code check.
+--WiPuCqNHHhyqrAce
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Randolph Sapp <rs@ti.com>
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Reviewed-by: Anshul Dalal <anshuld@ti.com>
-Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Reviewed-by: Simon Glass <sjg@chromium.org>
----
- lib/efi_loader/efi_dt_fixup.c | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
+On Wed, Apr 22, 2026 at 03:25:55PM +0200, Quentin Schulz wrote:
 
-diff --git a/lib/efi_loader/efi_dt_fixup.c b/lib/efi_loader/efi_dt_fixup.c
-index 544e1aa9808..333711b9957 100644
---- a/lib/efi_loader/efi_dt_fixup.c
-+++ b/lib/efi_loader/efi_dt_fixup.c
-@@ -123,8 +123,7 @@ void efi_carve_out_dt_rsv(void *fdt)
- 			    fdtdec_get_is_enabled(fdt, subnode)) {
- 				bool nomap;
- 
--				nomap = !!fdt_getprop(fdt, subnode, "no-map",
--						      NULL);
-+				nomap = fdtdec_get_bool(fdt, subnode, "no-map");
- 				efi_reserve_memory(fdt_addr, fdt_size, nomap);
- 			}
- 			subnode = fdt_next_subnode(fdt, subnode);
--- 
-2.53.0
+> Hi all,
+>=20
+> I'm looking into force-enabling CONFIG_WERROR for all Rockchip SoCs. Firs=
+t,
+> let me know if this is a bad idea :)
 
+This is how CI works, so this part should go fine.
+
+> gcc version 15.2.1 20250808 (Red Hat Cross 15.2.1-1) (GCC) for both ARM a=
+nd
+> Aarch64 machines report no warnings (built with a config fragment enabling
+> CONFIG_WERROR).
+>=20
+> For clang, I went for cross-compiling using either
+> make HOSTCC=3Dclang CROSS_COMPILE=3Darm-linux-gnu- CC=3Dclang O=3Dbuild/ =
+=2E..
+> or
+> make HOSTCC=3Dclang CROSS_COMPILE=3Daarch64-linux-gnu- CC=3Dclang O=3Dbui=
+ld/ ...
+
+I'm adding in Dmitrii here because I thought we had fixed clang builds
+again rather recently, but I haven't put them in CI and I thought we
+might also need another Kbuild re-sync for a few more things too.
+
+> First things first, I can't even build any of the Aarch32/ARM with clang =
+for
+> some reason, so this only applies for Aarch64 Rockchip platforms.
+>=20
+> Some platforms couldn't be built due to hitting the max TPL limit (e.g.
+> PX30).
+
+I've also run in to this over the years trying to test clang and having
+LTO not work, or be very much larger than expected. Just FYI.
+
+> clang version 21.1.8 (Fedora 21.1.8-4.fc43) (or clang version 22.1.1 (Fed=
+ora
+> 22.1.1-2.fc44), doesn't matter) issues three warnings:
+>=20
+> 1. Chromebooks EC fails to build:
+> In file included from
+> /home/qschulz/work/upstream/u-boot/drivers/misc/cros_ec.c:21:
+> In file included from
+> /home/qschulz/work/upstream/u-boot/include/cros_ec.h:12:
+> /home/qschulz/work/upstream/u-boot/include/ec_commands.h:3578:2: error:
+> field  within 'struct ec_params_charge_state' is less aligned than 'union
+> ec_params_charge_state::(anonymous at
+> /home/qschulz/work/upstream/u-boot/include/ec_commands.h:3578:2)' and is
+> usually due to 'struct ec_params_charge_state' being packed, which can le=
+ad
+> to unaligned accesses [-Werror,-Wunaligned-access]
+>  3578 |         union {
+>       |         ^
+>=20
+> The following
+>=20
+> diff --git a/include/ec_commands.h b/include/ec_commands.h
+> index 23597d28b2c..c5f9777c0c7 100644
+> --- a/include/ec_commands.h
+> +++ b/include/ec_commands.h
+> @@ -3575,7 +3575,7 @@ enum charge_state_params {
+>=20
+>  struct __ec_todo_packed ec_params_charge_state {
+>  	uint8_t cmd;				/* enum charge_state_command */
+> -	union {
+> +	union __ec_todo_packed {
+>  		struct __ec_align1 {
+>  			/* no args */
+>  		} get_state;
+>=20
+> seems to fix it. The upstream EC git repo
+> (https://chromium.googlesource.com/chromiumos/platform/ec) has a commit w=
+ith
+> more changes, see 65da9cc08766 ("include/ec_commands.h: Fix unaligned acc=
+ess
+> warnings"). It doesn't apply cleanly (and I haven't looked into other
+> patches to backport for this to apply cleanly). I'm not sure what we're
+> supposed to do here? I also don't have a Chromebook to test.
+
+I would just go with making the changes we need to make here, and cc'ing
+some board maintainers for functional testing.
+
+> 2. RK3528, RK3576 and RK3588 boards fail with (replace rk3528 in path for
+> the other SoCs)
+>=20
+> /home/qschulz/work/upstream/u-boot/arch/arm/mach-rockchip/rk3528/rk3528.c=
+:98:45:
+> error: value size does not match register size specified by the constraint
+> and modifier [-Werror,-Wasm-operand-widths]
+>    98 |         asm volatile("msr cntfrq_el0, %0" : : "r"
+> (CONFIG_COUNTER_FREQUENCY));
+>       |                                                    ^
+> include/generated/autoconf.h:372:34: note: expanded from macro
+> 'CONFIG_COUNTER_FREQUENCY'
+>   372 | #define CONFIG_COUNTER_FREQUENCY 24000000
+>       |                                  ^
+> /home/qschulz/work/upstream/u-boot/arch/arm/mach-rockchip/rk3528/rk3528.c=
+:98:32:
+> note: use constraint modifier "w"
+>    98 |         asm volatile("msr cntfrq_el0, %0" : : "r"
+> (CONFIG_COUNTER_FREQUENCY));
+>       |                                       ^~
+>       |                                       %w0
+>=20
+> Note that all Rockchip SoCs have CONFIG_COUNTER_FREQUENCY set to 24000000.
+>=20
+> The cntfrq_el0 register is 64b (https://developer.arm.com/documentation/d=
+di0601/2026-03/AArch64-Registers/CNTFRQ-EL0--Counter-timer-Frequency-Regist=
+er?lang=3Den),
+> though the top 32b are reserved. Android decided to ignore this warning in
+> the Little Kernel with https://android.googlesource.com/kernel/lk/+/92354=
+1d4c23565a47d020d84202a6f77d22fc149%5E%21/.
+>=20
+> I tried to follow clang's recommendation and switch this to %w0 but it fa=
+ils
+> with:
+>=20
+> /tmp/rk3588-a0a4b8.s: Assembler messages:
+> /tmp/rk3588-a0a4b8.s:87: Error: operand mismatch -- `msr cntfrq_el0,w9'
+> /tmp/rk3588-a0a4b8.s:87: Info:    did you mean this?
+> /tmp/rk3588-a0a4b8.s:87: Info:    	msr cntfrq_el0, x9
+> clang: error: assembler command failed with exit code 1 (use -v to see
+> invocation)
+>=20
+> I tried casting CONFIG_COUNTER_FREQUENCY into a u64 and it builds and no
+> magic smoke when booting a board. Whether this is the proper fix, I don't
+> know, but the warning is then gone. We could also decide to ignore the
+> warning like for Android's Little Kernel (where and how much this is used=
+ is
+> unclear as the repo isn't seeing much activity).
+>=20
+> The register documentation indicates this is not used by the hardware at
+> all, so even if it was broken, we probably wouldn't see a difference?
+
+Can we define it as 24000000ULL? Maybe. If not 0x16e3600ULL with a
+comment should work.
+
+> 3. Boards building USB TCPM fail with
+>=20
+> In file included from
+> /home/qschulz/work/upstream/u-boot/drivers/usb/tcpm/tcpm-uclass.c:12:
+> In file included from
+> /home/qschulz/work/upstream/u-boot/include/usb/tcpm.h:12:
+> /home/qschulz/work/upstream/u-boot/include/usb/pd.h:212:2: error: field
+> within 'struct pd_message' is less aligned than 'union
+> pd_message::(anonymous at
+> /home/qschulz/work/upstream/u-boot/include/usb/pd.h:212:2)' and is usually
+> due to 'struct pd_message' being packed, which can lead to unaligned
+> accesses [-Werror,-Wunaligned-access]
+>   212 |         union {
+>       |         ^
+>=20
+> This file is apparently adapted from upstream Linux, where the code is
+> identical for that struct. So not sure what to do here.
+
+I'm not sure either.
+
+--=20
+Tom
+
+--WiPuCqNHHhyqrAce
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaekKkQAKCRAr4qD1Cr/k
+ClmwAP9biF7/4vMue3kRtm9GpEc/npNbivec8PfZviFW7T7PiQEA2VkCSo0TOq5c
+j7iiC9GQoFUJI56afaAToCNC+rrxtgc=
+=Ti4n
+-----END PGP SIGNATURE-----
+
+--WiPuCqNHHhyqrAce--
