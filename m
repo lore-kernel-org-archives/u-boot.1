@@ -4,93 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45DE7F94CB8
-	for <u-boot@archiver.kernel.org>; Wed, 22 Apr 2026 00:10:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D8B5F94CA2
+	for <u-boot@archiver.kernel.org>; Wed, 22 Apr 2026 00:11:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 896DF8352B;
-	Wed, 22 Apr 2026 02:10:35 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id CF10B8352B;
+	Wed, 22 Apr 2026 02:11:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Y9O2wfU3";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MAmDqVXh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 10FAC83936; Wed, 22 Apr 2026 02:10:35 +0200 (CEST)
-Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
- [IPv6:2a00:1450:4864:20::532])
+ id F038483BC8; Wed, 22 Apr 2026 02:11:09 +0200 (CEST)
+Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
+ [IPv6:2a00:1450:4864:20::62f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DCB5E805D7
- for <u-boot@lists.denx.de>; Wed, 22 Apr 2026 02:10:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1614F805D7
+ for <u-boot@lists.denx.de>; Wed, 22 Apr 2026 02:11:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x532.google.com with SMTP id
- 4fb4d7f45d1cf-672c23aa064so8929093a12.2
- for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 17:10:32 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1776816632; cv=none;
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-ba8472c1613so430596666b.0
+ for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 17:11:08 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1776816667; cv=none;
  d=google.com; s=arc-20240605;
- b=JUbznk7hzZxhpWbnwCotqO1RykX2/7sD0KcPrsI6j8M/pEzBhxnHtBOsGZENoAZU/T
- RgswGjwyx1ezZgziKgOnLgcxt8w3e9plrhQAWw7sx5PaTInF5fH/KusPPJAcLnJk2B6Y
- tdtmNi7G4hyvqHxp5EgoYT94Pe1ujdYRRDyeNW/TuS6tERz66DiisihvgYZWqIWuHj3L
- cdunhp2i3ry7KV9sHR3LuGkV8ywlr34Ma+XaZn1RhIAdy6s75qG/8CUWLjP+3/3jMRli
- 2FU6UXa4C1QkSI53YP7GdgG6uT8AJY6Kp4O3l9jTfGuoKdHotqADdFGxSmfs+wiV5EgP
- rLaw==
+ b=Apv0wJ+FkOXs06EhvsADTujgNWxQ0Rzrq0PKCXEvf/P3quwjzu6DfvOkDGcHq/XVs2
+ +WN+RGytL8tPQdooEbff0xUu2cEjoEGrYO0rJjfalrUVBD92BKy6WoaRH1Cf06g0AvSK
+ fOUIrRqDXJ94T/H+p8WnLo7ytmFdRu6JQSiYK+nTDpeEHIAAZsxeCs/oscVQHCs2ccJn
+ kgU/w6+RQbgCr/2ekc9p8GnQ0nHNnUBHnpG/p6eti+6nJR6bTexxgFvGvoNAVtGnvEU0
+ utNFsEAj/hgKOzBDuXkLKTQDL03Ts+mrR6QFydlZR3fn1LSHeygb9Wsu5zTU98p97M4x
+ IEhw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=A2Dr1RGSCLsbPSa2gIKuxGU2q4MrV50rfp3sK/wIZyA=;
- fh=huZavGIedmb5t2orr+/Rb1tnWmifMM80sbfGbi0WwQs=;
- b=kN8DY/8Paqfr+lqa9uY1KRkd+hNhoWurgZycqDRraslwL6KclTVASx905x1Uk9L85w
- Zrsm2sn3s2ElFAZfRFl3IJa7sQ/t+l8nGU3ylmqzTJZaKnFdmJUEmVlmAol+4bW4Qh5b
- CW50xTrHd1bZkk3qSkO8ZISctjPhVdcIT4Hy2ewGAEjh5pdPljuxHm561nTB/CFZcs76
- dX6SUHA3o894YyjEgCGkPaW6Pu+nmayIpoMVY2pkj3NZhxC/vJkVpgYthzA03Ax/2Nnd
- bgH6VZqQftzmOlmXHRf1NhEUh3dMsA4mJKr8sCM6ZPiv4OjW8KoeFMyxoEYaHFhOp5Xi
- D9Aw==; darn=lists.denx.de
+ bh=TL4r1tdGjUnwEXTXhpc7lA+MRbNVa5uxrUyWPErcVsc=;
+ fh=ayJuwa4Uc6vWMTHhvM545NH9C0PrVSSSMfPknYNDaJQ=;
+ b=HG4Zsle5el32iGPcLDxU55SgzthPyvoT0/0QifRvQROnHqi4012b2aKoUyG7NHcHFZ
+ IwmkUVYbIw+oZjCh30fFQ2Cgn2h8X0h1IrnCVcri2Sv5sIhKdzyJtKC6bJYruEbRXRCO
+ rism80vdD8WsjWN5O6iTP8SqPmkKN1CSQXWLuoWMludz729G5h9o9Gad5dh7ZfNO3caO
+ wS5O4VkYCZfvpr9muy07+bQm8phXc5pS9nppcjpuH7pxKeNvzh0XBpKbA+85kEwAuKlm
+ u82nzRyFFzGF4pzGSoxN06h8/FJlYW7jzq8WPXmCcag4KBeKL7kzxq2aJkNwnLs0EHai
+ g1vw==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1776816632; x=1777421432; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1776816667; x=1777421467; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=A2Dr1RGSCLsbPSa2gIKuxGU2q4MrV50rfp3sK/wIZyA=;
- b=Y9O2wfU3XaAqIDTFf1cFIHY3AaqIV2d/TB+xBhQNW8eLYP5/O/KYcbfC+haptTnaWH
- tU14cxpGDDpasDNdOPTbH7QA6clR7JKYkaw8VOi3RiJER0hZvHJgNmiq8REcVYrN4eqq
- qu9kbgrVeb45Q8+cnYFIWKqTzmagwJ5Dy9jZ8=
+ bh=TL4r1tdGjUnwEXTXhpc7lA+MRbNVa5uxrUyWPErcVsc=;
+ b=MAmDqVXhF/czGc66bb/VRK5cATNiC5mt7zJ4DZ6jZZewZDYSa7p0PcHQI4sMibYWvE
+ UBdzBwCSyG3KGRBVBnZLGyDBv/AuokGCJEE4QKQLci1IOBSdz0qmQPr0BSr970wKi5GC
+ YIcnU21Hn/Xl6FmRvcO9LI68vMVbA0ZDfcKLw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776816632; x=1777421432;
+ d=1e100.net; s=20251104; t=1776816667; x=1777421467;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=A2Dr1RGSCLsbPSa2gIKuxGU2q4MrV50rfp3sK/wIZyA=;
- b=Fff4EbcSAA3/mhM2CAefvDDn17zyh7QMKe9pQf+PY0HGLTMjkYc8HeiktPHzpmLcp7
- loK1OpVxijsLurQFjSecx9zHceXSXfeeM+J8gv7IZDEGQI2inx7UEqlrhUJhWgCFKwhe
- Xym+5KSDwpCYEKbAVmJHK0q4GOAczGnK4y9wD5NVhtAl7AI8R+NzXwaIbL2EtlSBwZO0
- ScoGYuB5f0PJr9kveKNbkE6MqJiA7C15dz5l82FGO7gm0bx++yb3zEDHMepIN1Zs98ye
- N+8aRXFQTEmhS1JahEOt3+qCjat6zLRvCJZH4l+9kccILgX0Iw+Hpen6p7Wv059cNoX7
- l3Vg==
+ bh=TL4r1tdGjUnwEXTXhpc7lA+MRbNVa5uxrUyWPErcVsc=;
+ b=YRCZU+fx8SLrujahHd+CHYdw5K5w9/5lt7/4OYI0soDGe+VU/DI1yJ+DdiOg60jYCI
+ dfdaVAUB+wMN578GcosVBJ4PqrFixSjm3e+X17CiST7cKXJBx6X06HvBs4cRq0MDzsjT
+ Dyi5hZ8M3EcMzFN8+Rpg2crZ3wtv1/waldQkkdangtlN6G75crn7ZxQ4KLsYgrx5PFKQ
+ 4yAugro8eMicqgfS7YX9nu/FUWdze79evAj+6gMHUqRls0trpSn6679CsBGbs4tlSu1q
+ RmMcEEoTsiCVcU7Jw3ZzIh0JqlnbhWPT3YZ7PWRN/KNL8wz/XnPk/uOW31J5mT9rco1R
+ /rlQ==
 X-Forwarded-Encrypted: i=1;
- AFNElJ9ymmwcs0C1/M/arDlVmXCU0O/gs5Y+Bypq3bV69pvwkpHjGYjspN3V4uvVZaSWs47TvL/sz1g=@lists.denx.de
-X-Gm-Message-State: AOJu0YxuE0/B2S3oc4Nq8aJ9u/IrqUARM4fncbnR+7LWRcpOEJDyOH3z
- 7cwW6asys3zJ484Nrms/e9v0MSZXlrgA/qxAfj/+jEmhtzC9qie21NcJ560qfN5dYw8rZMIHpW1
- oCgyjWQtTsA3uFzhnwJ6Ox5001VolHH2GuN/Xkdez
-X-Gm-Gg: AeBDietPx69OOo/2PvzdmlRruz+bdHihPKg9Q6ULLQoiEewAaYO2GEn5sApCTWdIu10
- XaWF/Rhf0vKs5URq4wQxRkfGxT3eOnZyoct4UzSB/TOLUYJ1Gpk0mhcbl3WFTsf4Dpb1Mf4RRCX
- KPE8kF/ECnG23cmDx4WiFFycafFi5ut/S9y9PbWy3XOsgDiFC2m16nW8IG9UBAFq8914APQvvEu
- Jd87FT/1K2I6kVg3babHZXSSHdRt/bBQ2TlFNL5s2vEJv/5cPd8tTC7SzcB7MCJG/Htyta4QAzu
- yTNadajZkgsdNf0FO8op
-X-Received: by 2002:a17:907:a60b:b0:b9c:b069:8ab6 with SMTP id
- a640c23a62f3a-ba418b7e7d6mr905539366b.7.1776816632153; Tue, 21 Apr 2026
- 17:10:32 -0700 (PDT)
+ AFNElJ9I152UjK3Y0/K4FSg/7tWWAEMip/rseYMEFPYzX8+KCuiE2g6aEWhPpVkBYGvghyotxyiIXfs=@lists.denx.de
+X-Gm-Message-State: AOJu0YxakwMhr3i9uLQ20mhtJVLXHQK4ad2UsP7W3WlqhCA9MWCCMK0g
+ 4b6jpU/+2yt+IMcDo055F82hhGSOfBh1hCIB4Y96IiCvHW4B41/e2xnemJkMQFEZpKGYkveaEUf
+ EgqXT/Tn2Fn59BKa2xRgCWt3TLyCH77LE6pN7IVor
+X-Gm-Gg: AeBDiesBjNmqEHKw93CrX8uWr7vpbc2wbeF7Zm2Cly7NzIq5Jl1zquJEeCbrMc43qU7
+ TBA2ZV6GM1TvAkY8SFrJYrwDBrSGPGb1lKkea00fJjBsCw8NP6fnsrQoZtAimI1Rk7jrMWyVoVe
+ 6LO5dqfqT/LsoUhM34AFg7y/nR1qZs+1tM9pWsqZ54fyuqLM5eBiybgpwwLDDakKuoNFA9g0V5m
+ 9FsQMTUCiFv3FHZ7wLJSFMTi1TqtOHCMmXyxMXR2OBs2eh01GPXjvxrWlncL1DE8PTDcprBJdJa
+ rsvRgS73277iHI1hEsgE
+X-Received: by 2002:a17:907:3f9b:b0:ba8:bcb3:e2d0 with SMTP id
+ a640c23a62f3a-ba8bcb3eaabmr449489866b.0.1776816667147; Tue, 21 Apr 2026
+ 17:11:07 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260421210954.1170437-1-philippe.reynes@softathome.com>
- <20260421210954.1170437-3-philippe.reynes@softathome.com>
-In-Reply-To: <20260421210954.1170437-3-philippe.reynes@softathome.com>
+ <20260421210954.1170437-4-philippe.reynes@softathome.com>
+In-Reply-To: <20260421210954.1170437-4-philippe.reynes@softathome.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 22 Apr 2026 12:10:19 +1200
-X-Gm-Features: AQROBzA0UdOSbAmA6-XVzjGIa6oG1Xy6BazhF8Ne-qybcWooMQZZ5D_pgzffAkM
-Message-ID: <CAFLszTizb=a5uvtjFRbDoUYoPX2iXyzt_jiFdkqBcKJbeOk3mw@mail.gmail.com>
-Subject: Re: [PATCH v5 02/15] mbedtls: enable support of ecc
+Date: Wed, 22 Apr 2026 12:10:54 +1200
+X-Gm-Features: AQROBzBMMiCjVDIi6Sl52vATlSUNDyJ5CsX6Q-w7DW-BVB9fb2kvEkUGhYPETyo
+Message-ID: <CAFLszTi7VKhJrr9ejVT+Tg7rbfeoes9WqsggEaXsEK3sVSVeYg@mail.gmail.com>
+Subject: Re: [PATCH v5 03/15] ecdsa: initial support of ecdsa using mbedtls
 To: philippe.reynes@softathome.com
 Cc: marko.makela@iki.fi, jonny.green@keytechinc.com, raymondmaoca@gmail.com, 
  trini@konsulko.com, simon.glass@canonical.com, u-boot@lists.denx.de
@@ -114,67 +114,28 @@ X-Virus-Status: Clean
 Hi Philippe,
 
 On 2026-04-21T21:09:51, Philippe Reynes <philippe.reynes@softathome.com> wrote:
-> mbedtls: enable support of ecc
+> ecdsa: initial support of ecdsa using mbedtls
 >
-> Enables the support of ecc in mbedtls.
+> Adds an initial support of ecdsa verify using mbedtls.
 >
 > Signed-off-by: Philippe Reynes <philippe.reynes@softathome.com>
 >
-> configs/amd_versal2_virt_defconfig       |  3 +++
->  configs/qemu_arm64_lwip_defconfig        |  3 +++
->  configs/sandbox_defconfig                |  1 +
->  configs/starfive_visionfive2_defconfig   |  3 +++
->  configs/xilinx_versal_net_virt_defconfig |  3 +++
->  configs/xilinx_versal_virt_defconfig     |  3 +++
->  configs/xilinx_zynqmp_kria_defconfig     |  3 +++
->  configs/xilinx_zynqmp_virt_defconfig     |  3 +++
->  lib/ecdsa/Kconfig                        |  1 +
->  lib/mbedtls/Kconfig                      | 14 ++++++++++++++
->  lib/mbedtls/Makefile                     | 16 +++++++++-------
->  lib/mbedtls/mbedtls_def_config.h         | 17 +++++++++++++++++
->  12 files changed, 63 insertions(+), 7 deletions(-)
+> include/crypto/ecdsa-uclass.h   |  15 +----
+>  include/crypto/internal/ecdsa.h |  39 +++++++++++
+>  lib/mbedtls/Makefile            |   3 +
+>  lib/mbedtls/ecdsa.c             | 146 ++++++++++++++++++++++++++++++++++++++++
+>  4 files changed, 189 insertions(+), 14 deletions(-)
 
-> diff --git a/lib/mbedtls/Kconfig b/lib/mbedtls/Kconfig
-> @@ -300,6 +313,7 @@ config MBEDTLS_LIB_TLS
-> +     depends on ECDSA_MBEDTLS
+> diff --git a/include/crypto/internal/ecdsa.h b/include/crypto/internal/ecdsa.h
+> @@ -0,0 +1,39 @@
+> + * @pubkey : ecdsa public key
+> + * @hash : Hash
+> + * @hash_len : Size of the hash
+> + * @signature : Signature
+> + * @sig_len : Size of the signature
 
-Adding ECDSA_MBEDTLS as a hard dependency on MBEDTLS_LIB_TLS means
-every board using TLS now requires CONFIG_ECDSA and
-CONFIG_ECDSA_VERIFY. I suspect you want to separate the TLS ECC
-requirements from FIT signature verification. Perhaps the ECC curve
-support should be in a separate CONFIG_ECC_MBEDTLS option that both
-TLS and ECDSA verification can select?
-
-> diff --git a/configs/qemu_arm64_lwip_defconfig b/configs/qemu_arm64_lwip_defconfig
-> @@ -3,6 +3,9 @@
-> +CONFIG_ECDSA=y
-> +CONFIG_ECDSA_VERIFY=y
-> +CONFIG_ECDSA_MBEDTLS=y
-
-This suggests the coupling between TLS and ECDSA verification is too
-tight. These boards want HTTPS but might not need FIT ECDSA signature
-verification.
-
-> diff --git a/lib/mbedtls/mbedtls_def_config.h b/lib/mbedtls/mbedtls_def_config.h
-> @@ -89,6 +89,23 @@
-> +#if CONFIG_IS_ENABLED(ECDSA_MBEDTLS)
-> +#define MBEDTLS_ECDSA_C
-> +#define MBEDTLS_ECP_C
-> +#define MBEDTLS_BIGNUM_C
-> +#define MBEDTLS_ECP_DP_SECP192R1_ENABLED
-> +#define MBEDTLS_ECP_DP_SECP224R1_ENABLED
-> +#define MBEDTLS_ECP_DP_SECP256R1_ENABLED
-> +#define MBEDTLS_ECP_DP_SECP384R1_ENABLED
-> +#define MBEDTLS_ECP_DP_SECP521R1_ENABLED
-> +#define MBEDTLS_ECP_DP_SECP192K1_ENABLED
-> +#define MBEDTLS_ECP_DP_SECP224K1_ENABLED
-> +#define MBEDTLS_ECP_DP_SECP256K1_ENABLED
-> +#define MBEDTLS_ECP_DP_BP256R1_ENABLED
-> +#define MBEDTLS_ECP_DP_BP384R1_ENABLED
-> +#define MBEDTLS_ECP_DP_BP512R1_ENABLED
-> +#endif
-
-How much code size is added by enabling all ECC curves unconditionally?
+The kernel-doc style uses no space before the colon. Please can you
+use @pubkey: etc.
 
 Regards,
 Simon
