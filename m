@@ -4,85 +4,101 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF977F94CB7
-	for <u-boot@archiver.kernel.org>; Wed, 22 Apr 2026 01:46:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88A4FF94CA2
+	for <u-boot@archiver.kernel.org>; Wed, 22 Apr 2026 01:50:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D3B6784198;
-	Wed, 22 Apr 2026 03:46:40 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E101A83AC5;
+	Wed, 22 Apr 2026 03:50:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="q1WMvrkb";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="XO60loiF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 33B7983936; Wed, 22 Apr 2026 03:46:39 +0200 (CEST)
-Received: from mail-dy1-x132e.google.com (mail-dy1-x132e.google.com
- [IPv6:2607:f8b0:4864:20::132e])
+ id 22A9A83C51; Wed, 22 Apr 2026 03:50:20 +0200 (CEST)
+Received: from mail-lj1-x22f.google.com (mail-lj1-x22f.google.com
+ [IPv6:2a00:1450:4864:20::22f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DFD6684198
- for <u-boot@lists.denx.de>; Wed, 22 Apr 2026 03:46:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DC24183936
+ for <u-boot@lists.denx.de>; Wed, 22 Apr 2026 03:50:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-dy1-x132e.google.com with SMTP id
- 5a478bee46e88-2e622a9da9cso4339479eec.0
- for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 18:46:35 -0700 (PDT)
+Received: by mail-lj1-x22f.google.com with SMTP id
+ 38308e7fff4ca-38e7d983f50so54622101fa.1
+ for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 18:50:17 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1776822617; cv=none;
+ d=google.com; s=arc-20240605;
+ b=hwTc6Fua/sH3bb05CK11SiEb7y/ziSJA8kdRvzvfvSQdgPk1zDDPOWt+GsDf0obQt8
+ OXTc1PMZXUg8N0eHBwnaQJhudXDLS9dMV1C8kiFht552er1VCcp1FjkOWs1UBTY+ZU+O
+ 6EXfvZbkFjAa+bl/KSDXzNmnrYnIr+Klo0udRLBWwqZP7RceHE/37hhIymplDi0eXFUQ
+ iNs2NUbrQY05/UEAm/XfsAjH1zxmKoNhiGvaUXeHM2iaVO8n7QZnbTPuRkryumGgOysh
+ lOEd5SEfIDEBqzOo3DmHT+Qqmw9FpIHvRzP5fLYVdIHCVj0r9JUdO1asy7Tk4VR/BwEk
+ JIKw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=Bdz3bBj0DLW9I3vAq8jwRYdT7jBhl1wFsZJoQAa6wAY=;
+ fh=707FTTJlrFytdCmxsftjCkf3+Taq1pL03khHDHMOhkA=;
+ b=GjHc32XCPmR22a6Tv2H9XOxwxH6UnR0MaGBYq/O07ppmnRiB+IBWV9a0kSj1XkCZTt
+ PrXQAt9FgD5q20J2QXlYzdOnO9xndth1MpPkI6gFWy51PsT2BdFtzJv0CbAGaq1kUHQs
+ SBQgxGyKC3EU73yMt/Z5vJi6E+lsZAILUTatg4W9O1bJ6QEQs6rSyET2snHZfCa0f359
+ KKMSzITfLv4cq2JKvIl9KdxqLS2/5zn2SP6Dk5OFvCBrwLxZB0GkUcBcLVMxRV6mEfXU
+ u2hVCnnFFEPgmts6Vhk0snVBrHLPLRz1ZgFLZd2hK/uLA8YL6Oo3FJU3fkIiq8oAKRiv
+ cSIQ==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1776822394; x=1777427194; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=zR2sFkgAVL71+IAnaB6tRnzJKwuZ39Qf9A4AoP9dpUg=;
- b=q1WMvrkbWQ4T3OYR8oOrWpl/LBi8MI0bIgQRIM7bpiaPQbriRqXrvYAfreSmMm5WlW
- vbAzxFsvUegpvrn7a2C/dVNW4XNJDdl+cw40hMb9X0975yuwcuFli/ec5//+YdL01IT4
- WOw9b0t4Z624ITiVen0vGLElUmxU6xURWx7mNnNBsxRAvW7KCqQ5VfneOwh0prn65GR1
- 9icbd9OUHzAJEIQ46evwoXj8d80eiXBRQh3RxZc5No9gvwV3OeQ3P5O1ugJvT+GaEkoI
- LGRcato6iFtNt5pDmt0+unKGbRYb3niqsXoptyprzlTEoHI5eVvxn9QP0In0yRYWg53S
- 388w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776822394; x=1777427194;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=gmail.com; s=20251104; t=1776822617; x=1777427417; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=zR2sFkgAVL71+IAnaB6tRnzJKwuZ39Qf9A4AoP9dpUg=;
- b=Crk46JRIbQBJ/y2O5epoVwwKtAcrOZeNcMgALZIQFUhhWyNqfh48SZOMNxcvBY+JOm
- jhYGKvOWwpKwkyvRcWifP53YI4yl1XN+dlM+Z90fjbtTm5cTNW1amBIC3Ca04767SJEV
- erdij9bMv8ku/VaZ6y0EGbdVuNPoR4cNOC8HpI6ZrzJ9ceXsHD/FYAaJP5pMrPu+L6SS
- WYFo8GLrVSc02d4Qw6WKarpKfaXJXG0eUoPTwQSAS43vvrslYtlnWNz+osIpvPbUB2ik
- ux5bhLCt+cq9gvG7cP5SNIotrgKWlQDZdKZMIAXjv+QDC31z4JSIcQmGcsltPE1Me7uA
- kCyA==
-X-Gm-Message-State: AOJu0YxT9dWNAsqIMA8KSqhSqqZ1gKTAFCFPuAVXuMaSaAumlWewHoQD
- KElevmaIuZA9r/alBtWi5flthNm+o8+Tmwb3eZEO+xjMla9ccdtg3JWz
-X-Gm-Gg: AeBDievuYZeLR/OMGC9r9ebL1mlEQMdoMPJoZYbA5bN2EQSFJ+ZNJhBxvFVwJxV4T4n
- 3k4MFGhTMFicNNy9viyEWOkFIfQi3fSntswZrv22u4oP3xKHRWMtoc4n9y7/o8HshZrAdwyuCoH
- XSJ+SMvrG9MS98dAvAFUWT6Yb5yzlPcCT66u5ZuUHKeSWq1Vjf8WucxIAzgblrVdz8g2gCqeyAN
- W4C3JcP4plP0T/hIVyUBLHrVO7aUx3NV++b2rQk2skZTM2jiaTVUXAsXHWOlFOyvuLq7xjAdQED
- s4e8K1g/EJhEDAmYUixQM6EAdqYaZI3ZHooAPW6QMwgoUnzu9uv6WBPhM1Q7/hiZFg2bOlLvhWz
- thOv+x/3vB/6eLUHszG6lwaC1Zo0BvBdHslVFrQFYx5bge0XCGUYwauUNtkZCcAayMcDDDHDK4b
- z4hTGFlrCkmdQI/UhqIXRvaBZigL72WCzlViToUlkw0gUz1q0goMVQVw1+yoI2xhnR+Tt5PK25j
- h7WXVuYaXUWzARpb14=
-X-Received: by 2002:a05:7300:2392:b0:2ce:f3d7:221 with SMTP id
- 5a478bee46e88-2e478a2f29cmr13065922eec.17.1776822393962; 
- Tue, 21 Apr 2026 18:46:33 -0700 (PDT)
-Received: from fabio-Precision-3551..
- ([2804:1b3:a800:bd17:4311:47b3:4c2c:8e76])
- by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-2e53d8b3dd9sm21280409eec.27.2026.04.21.18.46.30
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 21 Apr 2026 18:46:33 -0700 (PDT)
-From: Fabio Estevam <festevam@gmail.com>
-To: trini@konsulko.com
-Cc: u-boot@lists.denx.de, franz.schnyder@toradex.com,
- alexander.feilke@ew.tq-group.com, cniedermaier@dh-electronics.com,
- emanuele.ghidoli@toradex.com, peng.fan@oss.nxp.com, primoz.fiser@norik.com,
- simona.toaca@oss.nxp.com, ye.li@nxp.com
-Subject: [GIT PULL] Please pull u-boot-imx-master-20260421
-Date: Tue, 21 Apr 2026 22:46:27 -0300
-Message-ID: <20260422014627.1870805-1-festevam@gmail.com>
-X-Mailer: git-send-email 2.43.0
+ bh=Bdz3bBj0DLW9I3vAq8jwRYdT7jBhl1wFsZJoQAa6wAY=;
+ b=XO60loiF/JxvfZlYiHgVdiz3MrxUeA4RJtK4V/U9bhQ0PDWqN/wBOgS8castYjwSsS
+ 6oVfHTuC+4fT2DyCDUY7p2Ca/RF/OxJhH5boJ9twqZyuPPhmCjGaRDxe8uwu2vDNCHc/
+ KAaoTRLf4BvjRYydeZ9x3QTO98fLEp5D/+HRZj/BK5BSWNTxgkD7NdcsRMLiKg82ur9v
+ gSO1JpGTeIK7KIw6IVmElmQQ370nEVn8cljc1ai0pP7YnH+4Bn8m7NFu9P91zGonPFwE
+ uty0mXoBr908+2UTVWiSqnbx9Aj9oDu4oUx3vsDfRS6i+VNOLacFfP/V+DCIVjQYE2fB
+ 3Rmg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1776822617; x=1777427417;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=Bdz3bBj0DLW9I3vAq8jwRYdT7jBhl1wFsZJoQAa6wAY=;
+ b=qa9WAQrBX8IgP/NeUey8HNMv7coLqgp7rtl7LIkwXPfo3LJQ0q/UkOFbXv1xV8Zuwf
+ wqI1dGKzYJkhZqSZDLk/Y/nE/3pViTI8rsrqRVQbvmcuROfbkhIucHS0y76Kjvsq4TkA
+ q/mJFBAdvkXGJBK7pMjDcl/n/yl/xGpszyOX+eDh35vq51ZXg8/BmICwMl+yF7HQdjI3
+ uFPIl8Ais+iyWUYh5bs4kgzzsaujf+eOOm3+yM2gwTjDeWmYUTj2FrdixNgLYdMvSYUF
+ LC4VtIF4JA/m3ThTnv/d92ykNgdkgC5MeCupvb9Ji/UTMQTl4apqoGFKn7kbu/gSyUip
+ vyqA==
+X-Gm-Message-State: AOJu0YxHur3GSY4KbRHz8noXkaXaj/pyKDYiMmDl+TFstQDNkXu2v5cU
+ +DpuoUl/pzCybAR7X/SBhHDFhUO3IfIiaKe8acBw8OtLWpCOv0RB8rL1xJxULOEhl7uPatp9oAX
+ O5q300xs8pV+o/Wz+1JyA96IvbF7tNCl84n81
+X-Gm-Gg: AeBDieuAciKwB8rWJh6JGQGfNWKHX09VU6n+Lvk6PpPWreNRTmZqlxAECd6q9vxA8Mc
+ nDqocM72bSbdM+M3cC2TCVT8bpeNKqu3QCv9ipKd9iWpi2u3X92OQ/9BjeDPPw9MgRBXaatUt9Z
+ PBfMJU19F049FQ6bnXow3ukApfKBEnPvWxl2fQ3nM7hKahDxMCreBeg3AxHG+NGO1wUwNURGQRg
+ jjM+TqIaEnej8KS7n7BkemOyzL/ft0h5SDFGi4qKZvVGZhiJ0zrwdJ7HcrkBAayssd1//5oxav7
+ QiIhskhXnVrD1Bf7WsmA3naC5frQ7iM0/6G91Zfv2kW8Aqpl8VzolE6yoeawPLaQSJm0s/k9/Pb
+ PposYNxVSc5DunYutIA==
+X-Received: by 2002:a2e:bc26:0:b0:38e:58f1:99f7 with SMTP id
+ 38308e7fff4ca-38ec7b61afcmr57018631fa.33.1776822616838; Tue, 21 Apr 2026
+ 18:50:16 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20260414155928.1391211-1-krzysztof@kd-solutions.pl>
+In-Reply-To: <20260414155928.1391211-1-krzysztof@kd-solutions.pl>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Tue, 21 Apr 2026 22:50:05 -0300
+X-Gm-Features: AQROBzA59BmqV16MA1FJj9cN5hJH4M2hjQ7Xoby5Kb5vpshTSm6KWda_oGmmWJM
+Message-ID: <CAOMZO5D7VJrSvjpmKBm2mLuGXTa0J2PUn8Vps-u-S-dpPqwfkg@mail.gmail.com>
+Subject: Re: [PATCH] imx93: Add support for OPTEE
+To: =?UTF-8?Q?Krzysztof_Drobi=C5=84ski?= <krzysztof@kd-solutions.pl>
+Cc: u-boot@lists.denx.de, sbabic@nabladev.com, trini@konsulko.com, 
+ jeremie.dautheribes@bootlin.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,206 +115,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+On Tue, Apr 14, 2026 at 12:59=E2=80=AFPM Krzysztof Drobi=C5=84ski
+<krzysztof@kd-solutions.pl> wrote:
+>
+> OPTEE-OS starts correctly when "opteed" is enabled for Secure Payload
+> Dispatcher in TF-A (tested on OP-TEE version: 4.9.0), however imx93
+> devices require a patch for OPTEE targets because binman does not see
+> the tee.bin file when it is available.
+>
+> Enable conditional OPTEE support for imx93 devices.
+>
+> Signed-off-by: Krzysztof Drobi=C5=84ski <krzysztof@kd-solutions.pl>
+> ---
+>  arch/arm/dts/imx93-u-boot.dtsi | 3 +++
+>  1 file changed, 3 insertions(+)
+>
+> diff --git a/arch/arm/dts/imx93-u-boot.dtsi b/arch/arm/dts/imx93-u-boot.d=
+tsi
+> index dc86746ac90..60648bd10a5 100644
+> --- a/arch/arm/dts/imx93-u-boot.dtsi
+> +++ b/arch/arm/dts/imx93-u-boot.dtsi
+> @@ -69,6 +69,9 @@
+>                                 container;
+>                                 image0 =3D "a55", "bl31.bin", "0x204E0000=
+";
+>                                 image1 =3D "a55", "u-boot.bin", "0x802000=
+00";
+> +#if defined(CONFIG_OPTEE)
+> +                               image2 =3D "a55", "tee.bin", "0x96000000"=
+;
+> +#endif
 
-Please pull from u-boot-imx/master, thanks.
+This patch breaks CI:
 
-The following changes since commit 052988aa29bfd506d7ce207fbb3f5374a5dbecbb:
+https://source.denx.de/u-boot/custodians/u-boot-imx/-/jobs/1430279
 
-  Merge patch series "Linux compat improvements and CCF prep" (2026-04-21 11:21:59 -0600)
-
-are available in the Git repository at:
-
-  https://gitlab.denx.de/u-boot/custodians/u-boot-imx.git tags/u-boot-imx-master-20260421
-
-for you to fetch changes up to 589153f6070a285a60411d032ce9b08598acd707:
-
-  imx8mq: phanbell: enable SPL DM (2026-04-21 20:49:40 -0300)
-
-u-boot-imx-master-20260421
---------------------------
-
-CI: https://source.denx.de/u-boot/custodians/u-boot-imx/-/pipelines/29880
-
-- Convert TQMA7 boards to SPL.
-- Use second Ethernet MAC also from fuse on i.MX dhelectronics boards.
-- Add support for Toradex Verdin iMX95.
-- Drop SPL_POWER_LEGACY from imx8m boards.
-- Increase the Aquantia Ethernet PHY reset timeout.
-----------------------------------------------------------------
-Alexander Feilke (7):
-      Kconfig: update build-target for MX7 with SPL
-      board/tq: Add common SoM API
-      arch: arm: dts: tqma7x: add u-boot device tree fragments
-      arch: arm: dts: tqma7x: add boot phase properties
-      board: tqma7: add code for u-boot with spl
-      configs: tqma7: add defconfigs
-      doc: tqma7: add documentation
-
-Christoph Niedermaier (1):
-      board: dhelectronics: imx: Use second Ethernet MAC also from fuse
-
-Emanuele Ghidoli (3):
-      common: memsize: add RAM size probe based on alias detection
-      board: toradex: add Toradex Verdin iMX95
-      toradex: tdx-cfg-block: add verdin imx95 0226, 0227 and 0228 pid4
-
-Nora Schiffer (1):
-      env: add env_set_runtime() helper
-
-Peng Fan (15):
-      imx8mq: evk: drop redundant gd clearing in board_init_f
-      imx8mq: pitx: drop redundant gd clearing in board_init_f
-      imx8mq: phanbell: drop redundant gd clearing in board_init_f
-      imx8mq: reform2: drop redundant gd clearing in board_init_f
-      imx8mq: pico: drop redundant gd clearing in board_init_f
-      imx8mq: cm: drop redundant gd clearing in board_init_f
-      imx8mq: Correct signed_hdmi firmware position
-      mx6: sabreauto/sd: Exclude power_init_board from SPL build
-      board: nxp: common: fix PFUZE100 DM build and unify DM/non-DM handling
-      imx8mq: evk: Migrate to DM PMIC framework
-      imx8mq: phanbell: Drop SPL_POWER_LEGACY
-      imx8mq: reform2: Drop SPL_POWER_LEGACY
-      imx8mq: pico: Drop SPL_POWER_LEGACY
-      imx8mq: kontron: migrate PITX-IMX8M to DM PMIC framework
-      imx8mq: phanbell: enable SPL DM
-
-Primoz Fiser (1):
-      imx: imx9: Select ARCH_MISC_INIT for all i.MX9 SoCs
-
-Simona Toaca (2):
-      drivers: ddr: imx: Fix Kconfig for SAVED_DRAM_TIMING_BASE
-      configs: imx9{43, 5}: Enable SPI SFDP support
-
-Ye Li (2):
-      net: phy: aquantia: Increase timeout for out of reset
-      net: fsl_enetc: Add iMX95 enetc4 10Gbps port support
-
- Kconfig                                            |    2 +-
- arch/arm/dts/imx7d-mba7-u-boot.dtsi                |   10 +
- arch/arm/dts/imx7s-mba7-u-boot.dtsi                |   48 +
- arch/arm/dts/imx7s-tqma7-u-boot.dtsi               |   22 +
- arch/arm/dts/imx8mq-evk-u-boot.dtsi                |   88 +-
- arch/arm/dts/imx8mq-kontron-pitx-imx8m-u-boot.dtsi |   64 ++
- arch/arm/dts/imx8mq-librem5-r4-u-boot.dtsi         |    2 +-
- arch/arm/dts/imx8mq-phanbell-u-boot.dtsi           |   41 +
- arch/arm/dts/imx8mq-u-boot.dtsi                    |  240 ++--
- arch/arm/dts/imx95-verdin-dev.dtsi                 |  239 ++++
- arch/arm/dts/imx95-verdin-wifi-dev-u-boot.dtsi     |  112 ++
- arch/arm/dts/imx95-verdin-wifi-dev.dts             |   21 +
- arch/arm/dts/imx95-verdin-wifi.dtsi                |   50 +
- arch/arm/dts/imx95-verdin.dtsi                     | 1172 ++++++++++++++++++++
- arch/arm/mach-imx/imx9/Kconfig                     |    8 +-
- arch/arm/mach-imx/mx7/Kconfig                      |   16 +
- board/dhelectronics/common/dh_imx.c                |    4 +-
- board/dhelectronics/common/dh_imx.h                |    3 +-
- board/dhelectronics/dh_imx6/dh_imx6.c              |    2 +-
- board/dhelectronics/dh_imx8mp/imx8mp_dhcom_pdk2.c  |    6 +-
- board/google/imx8mq_phanbell/spl.c                 |  127 +--
- board/kontron/pitx_imx8m/spl.c                     |  188 +---
- board/mntre/imx8mq_reform2/spl.c                   |    6 -
- board/nxp/common/Makefile                          |    2 +-
- board/nxp/common/pfuze.c                           |   96 +-
- board/nxp/common/pfuze.h                           |    2 +-
- board/nxp/imx8mq_evk/spl.c                         |  186 +---
- board/nxp/mx6sabreauto/mx6sabreauto.c              |    2 +
- board/nxp/mx6sabresd/mx6sabresd.c                  |    2 +
- board/ronetix/imx8mq-cm/spl.c                      |    5 -
- board/technexion/pico-imx8mq/spl.c                 |    6 -
- board/toradex/common/tdx-cfg-block.c               |    3 +
- board/toradex/common/tdx-cfg-block.h               |    3 +
- board/toradex/verdin-imx95/Kconfig                 |   36 +
- board/toradex/verdin-imx95/MAINTAINERS             |   13 +
- board/toradex/verdin-imx95/Makefile                |    8 +
- board/toradex/verdin-imx95/spl.c                   |   75 ++
- board/toradex/verdin-imx95/verdin-imx95.c          |   80 ++
- board/toradex/verdin-imx95/verdin-imx95.env        |   20 +
- board/tq/MAINTAINERS                               |    9 +
- board/tq/common/Kconfig                            |    3 +
- board/tq/common/Makefile                           |    1 +
- board/tq/common/tq_som.c                           |   32 +
- board/tq/common/tq_som.h                           |   35 +
- board/tq/tqma7/Kconfig                             |  103 ++
- board/tq/tqma7/Makefile                            |   14 +
- board/tq/tqma7/spl.c                               |  123 ++
- board/tq/tqma7/spl_mba7.c                          |  182 +++
- board/tq/tqma7/spl_tqma7_ram.c                     |  171 +++
- board/tq/tqma7/tqma7.c                             |   96 ++
- board/tq/tqma7/tqma7.cfg                           |   26 +
- board/tq/tqma7/tqma7.env                           |   35 +
- board/tq/tqma7/tqma7_mba7.c                        |  148 +++
- common/memsize.c                                   |   59 +
- configs/imx8mq_evk_defconfig                       |   21 +-
- configs/imx8mq_phanbell_defconfig                  |   14 +-
- configs/imx8mq_reform2_defconfig                   |    1 -
- configs/imx943_evk_defconfig                       |    1 +
- configs/imx95_evk.config                           |    1 +
- configs/kontron_pitx_imx8m_defconfig               |   16 +-
- configs/pico-imx8mq_defconfig                      |    1 -
- configs/tqma7_common.config                        |  119 ++
- configs/tqma7_mba7_mmc_defconfig                   |    2 +
- configs/tqma7_mba7_qspi_defconfig                  |    2 +
- configs/tqma7_mba7_uuu_defconfig                   |    2 +
- configs/tqma7_mmc.config                           |    4 +
- configs/tqma7_qspi.config                          |    7 +
- configs/tqma7_uuu.config                           |   22 +
- configs/verdin-imx95_defconfig                     |  183 +++
- doc/board/index.rst                                |    1 +
- doc/board/nxp/imx8mq_evk.rst                       |    4 +-
- doc/board/toradex/index.rst                        |    1 +
- doc/board/toradex/verdin-imx95.rst                 |  171 +++
- doc/board/tq/index.rst                             |   12 +
- doc/board/tq/tqma7.rst                             |   77 ++
- drivers/ddr/imx/imx9/Kconfig                       |    2 +-
- drivers/ddr/imx/phy/helper.c                       |   13 +
- drivers/net/fsl_enetc.c                            |   57 +-
- drivers/net/fsl_enetc.h                            |    1 +
- drivers/net/fsl_enetc_xpcs_phy.c                   |  970 ++++++++++++++++
- drivers/net/phy/aquantia.c                         |    2 +-
- include/configs/tqma7.h                            |   71 ++
- include/configs/tqma7_mba7.h                       |   16 +
- include/configs/verdin-imx95.h                     |   27 +
- include/env.h                                      |   20 +
- include/env/tq/spi.env                             |    4 +
- include/init.h                                     |    7 +
- 87 files changed, 5233 insertions(+), 666 deletions(-)
- create mode 100644 arch/arm/dts/imx7d-mba7-u-boot.dtsi
- create mode 100644 arch/arm/dts/imx7s-mba7-u-boot.dtsi
- create mode 100644 arch/arm/dts/imx7s-tqma7-u-boot.dtsi
- create mode 100644 arch/arm/dts/imx95-verdin-dev.dtsi
- create mode 100644 arch/arm/dts/imx95-verdin-wifi-dev-u-boot.dtsi
- create mode 100644 arch/arm/dts/imx95-verdin-wifi-dev.dts
- create mode 100644 arch/arm/dts/imx95-verdin-wifi.dtsi
- create mode 100644 arch/arm/dts/imx95-verdin.dtsi
- create mode 100644 board/toradex/verdin-imx95/Kconfig
- create mode 100644 board/toradex/verdin-imx95/MAINTAINERS
- create mode 100644 board/toradex/verdin-imx95/Makefile
- create mode 100644 board/toradex/verdin-imx95/spl.c
- create mode 100644 board/toradex/verdin-imx95/verdin-imx95.c
- create mode 100644 board/toradex/verdin-imx95/verdin-imx95.env
- create mode 100644 board/tq/common/tq_som.c
- create mode 100644 board/tq/common/tq_som.h
- create mode 100644 board/tq/tqma7/Kconfig
- create mode 100644 board/tq/tqma7/Makefile
- create mode 100644 board/tq/tqma7/spl.c
- create mode 100644 board/tq/tqma7/spl_mba7.c
- create mode 100644 board/tq/tqma7/spl_tqma7_ram.c
- create mode 100644 board/tq/tqma7/tqma7.c
- create mode 100644 board/tq/tqma7/tqma7.cfg
- create mode 100644 board/tq/tqma7/tqma7.env
- create mode 100644 board/tq/tqma7/tqma7_mba7.c
- create mode 100644 configs/tqma7_common.config
- create mode 100644 configs/tqma7_mba7_mmc_defconfig
- create mode 100644 configs/tqma7_mba7_qspi_defconfig
- create mode 100644 configs/tqma7_mba7_uuu_defconfig
- create mode 100644 configs/tqma7_mmc.config
- create mode 100644 configs/tqma7_qspi.config
- create mode 100644 configs/tqma7_uuu.config
- create mode 100644 configs/verdin-imx95_defconfig
- create mode 100644 doc/board/toradex/verdin-imx95.rst
- create mode 100644 doc/board/tq/index.rst
- create mode 100644 doc/board/tq/tqma7.rst
- create mode 100644 drivers/net/fsl_enetc_xpcs_phy.c
- create mode 100644 include/configs/tqma7.h
- create mode 100644 include/configs/tqma7_mba7.h
- create mode 100644 include/configs/verdin-imx95.h
++binman: Error 1 running 'mkimage -d ./imx9image.imx-boot.u-boot -n
+./u-boot-container.cfgout -T imx8image
+./imx9image-out.imx-boot.u-boot': 1+0 records in
++1+0 records out
++887808 bytes (888 kB, 867 KiB) copied, 0.00296579 s, 299 MB/s
++1732+1 records in
++1732+1 records out
++887152 bytes (887 kB, 866 KiB) copied, 0.00434548 s, 204 MB/s
++./tee.bin: Can't open: No such file or directory
++make[1]: *** [Makefile:1395: .binman_stamp] Error 1
++make: *** [Makefile:189: __sub-make] Error 2
