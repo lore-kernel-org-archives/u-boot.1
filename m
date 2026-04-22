@@ -4,87 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3E3EFF885C
-	for <u-boot@archiver.kernel.org>; Sat, 25 Apr 2026 20:39:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70D24FF885A
+	for <u-boot@archiver.kernel.org>; Sat, 25 Apr 2026 20:47:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 579A28457C;
-	Sat, 25 Apr 2026 22:37:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 9098F84514;
+	Sat, 25 Apr 2026 22:47:37 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Q8kJbhqM";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="OKgZYEwx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CE08384558; Sat, 25 Apr 2026 22:37:36 +0200 (CEST)
-Received: from mail-dy1-x1333.google.com (mail-dy1-x1333.google.com
- [IPv6:2607:f8b0:4864:20::1333])
+ id A131D8452C; Sat, 25 Apr 2026 22:47:36 +0200 (CEST)
+Received: from mail-lj1-x235.google.com (mail-lj1-x235.google.com
+ [IPv6:2a00:1450:4864:20::235])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 918DE843B8
- for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 22:37:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D3FE4844AF
+ for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 22:47:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-dy1-x1333.google.com with SMTP id
- 5a478bee46e88-2dee127b3c5so13264646eec.1
- for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 13:37:34 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-lj1-x235.google.com with SMTP id
+ 38308e7fff4ca-38dd575bca3so87542141fa.1
+ for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 13:47:33 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1777150053; cv=none;
+ d=google.com; s=arc-20240605;
+ b=LATQijURB5/+ym4lyQlWlYQBfIQuUqlndSls5NruVQSJkph9qnVu0SpEBDL/CS/U4e
+ FfGs1KL/NU9drXzgZNCT3ZR5Kr3il5I0a887xh4KZYW36+h8IQpi/oMiSlnwtqeb6OmQ
+ GTAEF/2nzP4cMBh2aDN6p1y4XW3dysVzp2x3eZnYYtQclznBc8pLWSkkZZVbd0TC9cVF
+ rJ5C0z4aHwFYE5KsSWhM2B8XbAZLK+gNtjKzGSnd/TGpQNgDRcKjG+olboELhWAV3k6B
+ jrinsNgvsTvAxJHHlwikvUSiV5Uap3DkgUAWzd3OYDOZ7fRTCDcC8AHrQwKRvCmtv6hH
+ tk5g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=WgAu5h4xEzkrU/ZeVi9iXQ/JOHtGr8cD7A9yO0xyMuo=;
+ fh=XUFRYmYGYRXaPdEVa0BorvzlEMbC6h7UrdgBnGfsHWA=;
+ b=LHOr6SQRSyoQcfoob7bipgv9xSopPzdjWn1sjhQAMvxG2jFh7bwGW+z0LQPqQXcP05
+ qDGsmR4tcVEBMFDAPCiIZ1VH8gM8+v1lNBp+orJT47JQNTM/X2vQFr4wrnSwRTXiCYLv
+ y57DgVbAVsn+SG7432WVrw+eDr3Q7kRe7U/8FA2zKFosYeRBpgrjuV+P5/UUZsXtswhp
+ AZGBhTlrPPawS/Te2E+TB6rO2Uo1056BrFuqqnMLZV2GyDgYWnVgbQLRHqB8kO4yw+l9
+ GeVEMXj+HmFy0OshpEJz8aWenB2DcaEilJ4SXg4/ulb3HhmGOCLdh0nKDzWuGpUlyyF5
+ LOTg==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1777149453; x=1777754253; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=1ZIWGXFAyZT/lMgnm9W8F91Vl2w0kweRJ0Ai/SJKWbs=;
- b=Q8kJbhqMGzvwCKudq16L1WzZLGJubj6x/FfdVA5OOTG9hO6alxTBmd8ZR8yYmMdmrY
- 1SLZxtUEPY4955CHKNSIpzTKXK5nWz84QK+Cytxd43Qu0iOayOx+3DwG0swJ2Y46zRdf
- WBN/gtHsTXc4UiRbMceMLB3KDfbUehXtA/7BI=
+ d=chromium.org; s=google; t=1777150053; x=1777754853; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=WgAu5h4xEzkrU/ZeVi9iXQ/JOHtGr8cD7A9yO0xyMuo=;
+ b=OKgZYEwxVVyYmocOc2g1RrDK9Yo+ExFdwf1gwspHj+GUkXP1VbIQtntVg/ApbadaYJ
+ giUJfIUiWc5h4SjtUZEQDylm5fszL8sfQHFEmH6x3WvQ+c482k83Bosfx2VUVnLAt/27
+ lgqS5dBHRqMCVkr71O1hws8w+QAwbCzIL5hes=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777149453; x=1777754253;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=1ZIWGXFAyZT/lMgnm9W8F91Vl2w0kweRJ0Ai/SJKWbs=;
- b=YtXEAyRZVkJncphNgODlu9/vSP62sOqFZPDijDRhdgn0c4Ygk5KYf7j5VkXFO6mshN
- CJu520sF7+7vH0MPAbl9GAYRtFTPi0ndy+tJOhEqvbZpA0LQ3l4BGLRCqzpStbAuDdGO
- SKGJLOXuapi9nQO1WkL2eEl1z5/MeZ4Fmlutr5vh8Z4i0pUgNtWamqrbeG3yo5B7E/XC
- PQGO9pbFNpAq784HamnWLPGer9JZqVI0hz0OqYhuj5FGH5PGoBGFLugjkDzET6PHyABW
- 7UtSOir+nPOjl5vPACa8mIVMj1LPE0FcwV15XfMjCDmEdGyjXPnHagPsEQATU2WRLe54
- +G6Q==
-X-Gm-Message-State: AOJu0YwOXgriZIm9v9FC+i1K8NW05IZtVQwD40L4POl/hUnkfEbc2zau
- zCfzxdbkhab3TB9vEmAfBUB2Nx3nbHQNmqXEEJN1+JZU0EaOo3OoJhbFfxydn9x8yZrK576bZX9
- XvtphF65P1Q==
-X-Gm-Gg: AeBDieu1VglGSacY8tgxaPrg4wnC6haf+e4ijx30/JYhceKiYrl96MK24TIBOszsZ29
- zINXFXSEAV0GoJt71+G9N2b886h5OQKH6pkte2poUsQCgk8nEpUrLOao8XcMggAMfCv09cFVD64
- BcUq/uzwxckTIkalg9FLJlOEaLae/Tz5LpxdTUU7W1uSzyos0eHRRVp3+7LNnrDS4D/y12Xd7sb
- IAjzbV69vJjPKZSQK+H7plcxDytVIan6W1XmQGfnXJF/UlyRQrzZ1YORq0rXBlsjAUXvTD22rlk
- GSXQGnI/WnqwKZ/2rIEIgc/CB/cTmMWMNSHRCuxWC56dxVp6ZklyATL956pG/RSvIBW1VaVCmxb
- OxBQ3roxGTeTcU2aBLXeTUGpM9JbxwTXoGeua5OCaYiZctQPdq8cNYbotuvlvH0xfQ8HyzzfGpK
- 1DNO7q9SemjY8tO6pTYnfFM0PUJ6HvjwVmxpS6OFLrb12MoSQIpK4Ffqzd6XUBHEB5j2cAlNbjR
- 7hyshb7qEwyynIfUJMekQtRIYxDricRfAKyP5FK15QqPJshd27qy8v/pGpr
-X-Received: by 2002:a05:6808:6f8f:b0:46a:7c00:5cd8 with SMTP id
- 5614622812f47-4799c9fb44amr12317468b6e.22.1776898138392; 
- Wed, 22 Apr 2026 15:48:58 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-189-203-106-235.totalplay.net.
- [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-479f3cf40d1sm3874175b6e.12.2026.04.22.15.48.57
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 22 Apr 2026 15:48:58 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.dE, Philip Molloy <philip@philipmolloy.com>
-Cc: linux@analog.com, Philip Molloy <philip.molloy@analog.com>, 
- Arturs Artamonovs <arturs.artamonovs@analog.com>, 
- Greg Malysa <malysagreg@gmail.com>, 
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>, 
- Vasileios Bimpikas <vasileios.bimpikas@analog.com>
-In-Reply-To: <20260401093354.3608142-1-philip@philipmolloy.com>
-References: <20260401093354.3608142-1-philip@philipmolloy.com>
-Subject: Re: [PATCH] board: adi: Fix exception when using standalone SoM
-Message-Id: <177689813754.1956774.1584582090840741597.b4-ty@konsulko.com>
-Date: Wed, 22 Apr 2026 16:48:57 -0600
+ d=1e100.net; s=20251104; t=1777150053; x=1777754853;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=WgAu5h4xEzkrU/ZeVi9iXQ/JOHtGr8cD7A9yO0xyMuo=;
+ b=Sj59wqac342Wc4ElcYTQ0dYA+DWC0daFFoMumfToYan8PEvGsJJHdwUQKQMb4i0Ekr
+ hmvFhmN7kTXk/KT6jMPyJbyTLS3dPXlMvbqJ+AFtET01elm69tbkbf0qpywT4pj702IH
+ zigjgL9EVEHUyOaexhNGGU8Hs1JKmFRgBfDqK++BS90LgjZulgwNxcfPtzdgxVU6X1CX
+ sTfjg5HU3k+WBRYcI3hHIir/h0/VmL4mBPIsmVwF5WMviNdFJXH2Mkz4LLvua5h1OWi2
+ zJJ9YDMWeh4+VTPoUtH1ub8rtZFbLwD2SsdGCc7m/pUw0fxnye+nCZksdBaShg6fkMzO
+ sxxw==
+X-Gm-Message-State: AOJu0YwPaOZIDx4UbZ4rbpYOieY5y3xl4vJMc0XuRnHFGhDsLIfrNvio
+ VtxG2i5yMIzHlTwUGjNEod8mLVic54dkGuGgljo8BhfMJalRZftZQenFnfbbUZQn5SW8SFGD+gU
+ d3E5jN5wV1+Jp5+vYgctEEkpAGrL18mYE7ATxKMOhPKRgBFbYWyxHnRhH
+X-Gm-Gg: AeBDiesApTfFLt+uHOUA6IPs9sQibELakLRpTQLjgppHzwrkNDGwXQaxxPB+I2sZqJ0
+ RcH618znd6lk1MrdLRITH/GuZKt5L4AkcU/n+tCMjrgpBhGm7+Q8H8UTGGomHgCCVSdfJzthlXb
+ MwOxgXecU3sI2aiwucYtUB7qN0fnMo71oBRMCk5Xhkv/u1k9bUPjeCqTA067H127gM9cP95q5Y2
+ TFRDXowrX5vTKldqT86sJ6A3xo240E/ZKl5TCRhIy0gBjGjo89i1XFJCrz+zFWy18XcThBgJ0eI
+ TPD9oxGkbyyzz8qPtKQ+wflwBLZWuss=
+X-Received: by 2002:a17:907:968f:b0:ba6:4eea:c1e1 with SMTP id
+ a640c23a62f3a-ba64eeaca99mr854129066b.17.1776891277171; Wed, 22 Apr 2026
+ 13:54:37 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.3
+References: <20260422023131.2813748-1-sjg@chromium.org>
+ <9a9194d8-65ee-4c84-a760-2a73378a7170@mailbox.org>
+In-Reply-To: <9a9194d8-65ee-4c84-a760-2a73378a7170@mailbox.org>
+From: Simon Glass <sjg@chromium.org>
+Date: Thu, 23 Apr 2026 08:54:23 +1200
+X-Gm-Features: AQROBzCB-AAl4vmuQX-HxzwvWdG8KHqNxrWqkkVoDlE8pCgTgW_kJvwgJcnj9Z4
+Message-ID: <CAFLszTi+_1KBMWJ2rRF0B+4KJTfewrGicdrWJeybs-EJ7_HJRg@mail.gmail.com>
+Subject: Re: [PATCH] fdtgrep: Add option to reserve free space in the output
+ FDT
+To: Marek Vasut <marek.vasut@mailbox.org>
+Cc: u-boot@lists.denx.de, Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,25 +110,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 01 Apr 2026 09:31:56 +0000, Philip Molloy wrote:
+Hi Marek,
 
-> Although less common, ADSP SoM boards can be operated standalone without
-> a carrier board. The SoM can be powered over USB-C by moving the jumper
-> on JP1.
-> 
-> The board configuration needs to be heavily refactored to reduce the
-> number of defconfigs and leverage the devicetree. The TI DP83867
-> support, which is dependent on that configuration, needs to be removed.
-> Until then this change allows the same U-Boot binary to work correctly
-> both with carrier boards and the standalone SoM.
-> 
-> [...]
+On Thu, 23 Apr 2026 at 07:08, Marek Vasut <marek.vasut@mailbox.org> wrote:
+>
+> On 4/22/26 4:31 AM, Simon Glass wrote:
+> > When producing a DTB from fdtgrep, there is no way to reserve extra
+> > space so that more nodes/properties can be added at runtime without
+> > growing totalsize first.
+> >
+> > Add a -B/--pad option that appends a caller-specified number of free
+> > bytes after the strings section and grows totalsize accordingly. The
+> > padding is applied after fdt_pack(), so it is not reclaimed when -r is
+> > used.
+> >
+> > Suggested-by: Marek Vasut <marek.vasut@mailbox.org>
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > ---
+> >
+> >   tools/binman/btool/fdtgrep.py |  3 ++-
+> >   tools/fdtgrep.c               | 31 ++++++++++++++++++++++++++++++-
+> >   2 files changed, 32 insertions(+), 2 deletions(-)
+> >
+> > diff --git a/tools/binman/btool/fdtgrep.py b/tools/binman/btool/fdtgrep.py
+> > index 446b2f4144b..7b393241878 100644
+> > --- a/tools/binman/btool/fdtgrep.py
+> > +++ b/tools/binman/btool/fdtgrep.py
+> > @@ -16,9 +16,10 @@ Output formats are:
+> >       dtb - device tree blob (sets -Hmt automatically)
+> >       bin - device tree fragment (may not be a valid .dtb)
+> >
+> > -Options: -[haAc:b:C:defg:G:HIlLmn:N:o:O:p:P:rRsStTvhV]
+> > +Options: -[haAB:c:b:C:defg:G:HIlLmn:N:o:O:p:P:rRsStTvhV]
+> >     -a, --show-address                 Display address
+> >     -A, --colour                       Show all nodes/tags, colour those that match
+> > +  -B, --pad <arg>                    Append free space to the output FDT, for later growth
+> Shouldn't the parameter at least match the dtc -p parameter ? -p is not
+> taken yet.
 
-Applied to u-boot/master, thanks!
+We have:
 
-[1/1] board: adi: Fix exception when using standalone SoM
-      commit: 1994e69d4e5b8b8bb01436b6b8e7ddf42d8e4785
--- 
-Tom
+  -p, --include-prop <arg>           Property to include in grep
 
-
+Regards,
+Simon
