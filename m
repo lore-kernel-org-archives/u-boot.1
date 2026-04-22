@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8CC2F9EDC0
-	for <u-boot@archiver.kernel.org>; Wed, 22 Apr 2026 12:34:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E95AF9EDC0
+	for <u-boot@archiver.kernel.org>; Wed, 22 Apr 2026 12:35:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 108278429E;
-	Wed, 22 Apr 2026 14:34:23 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A5EDD84286;
+	Wed, 22 Apr 2026 14:34:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gehealthcare.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gehealthcare.com header.i=@gehealthcare.com header.b="sb7cOvBS";
+	dkim=pass (2048-bit key; unprotected) header.d=gehealthcare.com header.i=@gehealthcare.com header.b="UE3PHOAd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B6D9F84286; Wed, 22 Apr 2026 11:47:05 +0200 (CEST)
-Received: from CH4PR04CU002.outbound.protection.outlook.com
- (mail-northcentralusazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c105::7])
+ id 03DC5840CB; Wed, 22 Apr 2026 11:47:06 +0200 (CEST)
+Received: from CY3PR05CU001.outbound.protection.outlook.com
+ (mail-westcentralusazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c112::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 88DB3840CB
+ by phobos.denx.de (Postfix) with ESMTPS id E6D0B84227
  for <u-boot@lists.denx.de>; Wed, 22 Apr 2026 11:47:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=gehealthcare.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=Brian.Ruley@gehealthcare.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=c4bnQ0WGGc12WAl8fOBGaRJzNAjxgP8zlIpebFizAOdLgtecu/BXEw4pcoyT3mO8Ex3xWGivNCeFgozSZNGsJtlwVnv4h29/Us7Hd9ByFLXAePvnaUMtr8fc2YpDIXcu7Q4nNU893rSXnKHZbLEp5oUddDGrbjt1q9UU8b+ghkisNv7eTqqSYGKKZgiSlopQZRGgfSstNzBqbB5B7wn/2j65PcVd+PEqCXqgGLxvSog2banCjh+8HTRBzTN0dgR34TyMFvSGPQgxVz/C4TcN4lKwBOXgl61PUhLB1NPWxBr6KUzvNJQ2L17ymnptoqi3GErdbkcZY5+oMCHPIqz7xw==
+ b=T423ZjkuGiPr3s7vUhOkPXIpXfPi9npdURVDAg4xvIFZdIojV5ruVHmoXk4tD5Bf8xnUc0eOTOZM8fe0r5WrOgsVm8WTBQhwH5om2NyGSEvCoH9mS/dz9gJxBZVDMuzhrhLPgRzLV0prmhWaPpyR5RRqLB5bjO8jlmJ8m/9l14Cp1aTVvo6F08xgfj0sa3IT5EwyNGkmmTuDo6b0EhXWRT3eeJ6c8+oNAPKJvEnHNeY/C8H+BzMn1MggbzFyOl+XSAffkmmJadYXGyLjrzB708fE9OwlrEBhwwyPDxCQu5dqrfK/0N4cdCQCTSy/gEGHSuxyXtHD6SEYTdqSj8LFrA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=DnqgJeRHYBlsn+amyVsGuZFr3agFOVsf1QhRQUHwPOg=;
- b=x7/rn1VE1VS5cBvrE5oI+PRu+U4lt0uOQPRqLe66/1fUcoQ5KPUoH1HZlbyC31rc2LKuO2l7LV4PIZImaEJS5L/K71+Fa+9QgcFJhXItLpl+3hQmzCD3pCl0VfPXOwwEY7q9ALhw5jFfad6D2ROQUpcb2kIqDOdzUqXFVWxA/DlHJ3/9J4hMYP0oa9p/4SNRtTnyu5tgTXdEQqHee67A0+PQ4lk8ABgkhjxLI3IJLD0wDoQV0iN5PaVnTlYP7f9UROrpbnvEOfSib0FGHdXpBtyAZTBaQzLeNqtRsMv5+XiAViaXJTgF+t1q5rKjts01RMb+6Zn1wWiKaRrLSMxp/Q==
+ bh=mtqNb/nYIDRk1uA2l9jpGpVVcAwqZHXmaYAjbAmF4vc=;
+ b=YlM04FlnanUOd3wvUGaQR+NK0ijAQRDEkC8rKVaafzxPbl8/sqPR0rtlcGTN1E5BfNA5yH5fll3ahwCDs62I0MGOX9P4GZFVziXfwpC53HL9Yx0bf3YYBfzBVltAekiAjn6l80f80D4bXNotb0bZ3F2EI/SD82g7xgB2oiR2mF32k3FnLK0cYtUhJvA4tRpFPYfBr2DU74yyRKDlz+gmA2Vmx5AnipTkb1ACrxGV72W+BPdsrcJ//bLSfp4mbzDokRYJ6hZ7XgL1Juqfi/FqrJ7yK+RWbaO6QD19Mm5jQft+h/CeNt/+qdkWAIgPM5srAofzdZirOHUhQSBiTxv7Kw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
  165.85.157.49) smtp.rcpttodomain=lists.denx.de
  smtp.mailfrom=gehealthcare.com; dmarc=fail (p=quarantine sp=quarantine
@@ -42,16 +42,16 @@ ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gehealthcare.com;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=DnqgJeRHYBlsn+amyVsGuZFr3agFOVsf1QhRQUHwPOg=;
- b=sb7cOvBSjIbfJWqmFDxQ4nqKWg16ld2O/xcj4BDpNqretWbJ7UFifddMrEKEuFwCD5YT+UqiB6O6M/R+xh6jNblZbahBfuTDTm2vZup5A2F3cHpV2RYh3z92cLrnxdjY/OpwCoHdIFIBYMzEYgxtLPkXa3sgigsdrx/8E1fO/LpUp2EFgKOYG1np6DKBnlADTr4IA4jr4R+as7rh6UA6YkPwMvvHQASEFxVSKjiaD24ygwiSA9hsWaBoUUBLa8xxstjU659O9jt71JBsPjxFRKWAKUNqPLdeOafCospOvqUezq9IfBVKh1xpQEkwUU3qZ6ND1JFTvqvrjgvvSHp2DQ==
-Received: from CH5P223CA0005.NAMP223.PROD.OUTLOOK.COM (2603:10b6:610:1f3::17)
- by DM3PPF2F3BE8063.namprd22.prod.outlook.com (2603:10b6:f:fc00::e17)
- with Microsoft SMTP Server (version=TLS1_2,
+ bh=mtqNb/nYIDRk1uA2l9jpGpVVcAwqZHXmaYAjbAmF4vc=;
+ b=UE3PHOAdNDov1zbkQ7xZEm66EM7IQbE5JEmGXaPbDwN5fKCfVJJLcUk1jF2MBJpmJK8hU1x1jfsQbX8oXnFIfMmkFGAAIIhStBmaDN4MuDYp/I4WoB0ivlFL2bNti+hbTWeebpYJXsY5PsGGYPKFpUYb185K7y674V3lVXHlnDHE1kujpnQGTZmGrENijqh063QhwUcM1AJjbnTz5zpuyBUlIzo7+qPKVKj2QIvy0/FShjQbAl8w4TyWCuCBRuM+/h5dka9GB/6tQW0GeoMgXYDDtgLxrpI/KzAW6Sggx48sqg+qgnLEuQmzAqNf7/kBDHDWIQaHOfZTwnn7AZ/U4g==
+Received: from DM6PR11CA0007.namprd11.prod.outlook.com (2603:10b6:5:190::20)
+ by LV3PR22MB5795.namprd22.prod.outlook.com (2603:10b6:408:27a::20) with
+ Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9846.16; Wed, 22 Apr
- 2026 09:46:58 +0000
-Received: from CH1PEPF0000A34B.namprd04.prod.outlook.com
- (2603:10b6:610:1f3:cafe::79) by CH5P223CA0005.outlook.office365.com
- (2603:10b6:610:1f3::17) with Microsoft SMTP Server (version=TLS1_3,
+ 2026 09:46:59 +0000
+Received: from CY4PEPF0000E9D2.namprd03.prod.outlook.com
+ (2603:10b6:5:190:cafe::e7) by DM6PR11CA0007.outlook.office365.com
+ (2603:10b6:5:190::20) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.20.9791.48 via Frontend Transport; Wed,
  22 Apr 2026 09:46:58 +0000
 X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 165.85.157.49)
@@ -60,55 +60,53 @@ X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 165.85.157.49)
 Received-SPF: Fail (protection.outlook.com: domain of gehealthcare.com does
  not designate 165.85.157.49 as permitted sender)
  receiver=protection.outlook.com; client-ip=165.85.157.49;
- helo=atlrelay2.compute.ge-healthcare.net;
-Received: from atlrelay2.compute.ge-healthcare.net (165.85.157.49) by
- CH1PEPF0000A34B.mail.protection.outlook.com (10.167.244.10) with Microsoft
+ helo=mkerelay2.compute.ge-healthcare.net;
+Received: from mkerelay2.compute.ge-healthcare.net (165.85.157.49) by
+ CY4PEPF0000E9D2.mail.protection.outlook.com (10.167.241.137) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9846.18 via Frontend Transport; Wed, 22 Apr 2026 09:46:58 +0000
+ 15.20.9846.18 via Frontend Transport; Wed, 22 Apr 2026 09:46:57 +0000
 Received: from zoo11.fihel.lab.ge-healthcare.net
  (zoo11.fihel.lab.ge-healthcare.net [10.168.174.93])
- by builder1.fihel.lab.ge-healthcare.net (Postfix) with ESMTP id 7D5E21319B;
- Wed, 22 Apr 2026 12:46:56 +0300 (EEST)
+ by builder1.fihel.lab.ge-healthcare.net (Postfix) with ESMTP id B8E6F131E4;
+ Wed, 22 Apr 2026 12:46:55 +0300 (EEST)
 From: Brian Ruley <brian.ruley@gehealthcare.com>
 To: Lukasz Majewski <lukma@denx.de>,
 	Tom Rini <trini@konsulko.com>
 Cc: Brian Ruley <brian.ruley@gehealthcare.com>,
 	u-boot@lists.denx.de
-Subject: [PATCH 2/5] clk: imx6q: add missing pll bypasses
-Date: Wed, 22 Apr 2026 12:46:40 +0300
-Message-ID: <20260422094649.57611-2-brian.ruley@gehealthcare.com>
+Subject: [PATCH 1/5] clk: imx6q: cosmetic: keep pll definitions together
+Date: Wed, 22 Apr 2026 12:46:39 +0300
+Message-ID: <20260422094649.57611-1-brian.ruley@gehealthcare.com>
 X-Mailer: git-send-email 2.47.3
-In-Reply-To: <20260422094649.57611-1-brian.ruley@gehealthcare.com>
-References: <20260422094649.57611-1-brian.ruley@gehealthcare.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH1PEPF0000A34B:EE_|DM3PPF2F3BE8063:EE_
+X-MS-TrafficTypeDiagnostic: CY4PEPF0000E9D2:EE_|LV3PR22MB5795:EE_
 Content-Type: text/plain
-X-MS-Office365-Filtering-Correlation-Id: c69bf364-9058-409d-9c40-08dea05418b8
+X-MS-Office365-Filtering-Correlation-Id: f09bf760-fe97-4210-0e05-08dea054186d
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|82310400026|36860700016|376014|18002099003|56012099003|22082099003;
-X-Microsoft-Antispam-Message-Info: eM3JBimT/tnommMdv7E4x5I0OtO/8z3yiMouHmwjiVpOeHcL25G5K07MYL5dVg8dlfKpumOYa3/sq4AshyHfTuIFT3Ua5d6TpmgDBfMc2cpotO9KXShsvQ7JHytQgTO4e2fET2XSf81k7Vaj47W7liEi7vqsxR+qWeK4YQPf8dPVVuF+4myL6FT1s4PVJzQDeghJRA9lqpNNko7HrccEEJpxZoiVY5CubULF2eWR/NwOhU47TSSuKo+qyTHv3Ym7sdbiE6987xY7L8+3QUU2Dkr0B33bg2neZfDOxeajQ8vUtnjMayt6qDYQt4oef0Y0oIuw0vevZ7CLSU/M34Pp4w10Q2aHc18MRD5AobN1mYR1zheT4DU3wAtJ31GQI0rt/rfOH9k3WcupYjA2HwOlK9SgHI1PKZ4bmiOyquNgSJDIWEMoYh0ZWhbdY+40ZKxc35tzCA4/ud31tDy6Qylm2XFHVe3thpto+DPorH8k0D55aXbYQXohZeg16vlyFro3Vyt/wWnHmOEQHbFYKPniVJG32H7yS2Ovn0zm+7FeZrcgWV1NNSnCEqyjlhjTg8G6PR3E2fWnuwz1OrIc/QDLcFbiBhid2RqAFcrGPdKmiY4xHO601/h2HUsM28n9nHGauWK/WjajhsFeGQbeo6GOe8rBehpYI9zAQyij4BOzkYeNUzP8ymzQmd3LHtsXcgVxNwYQ/42/kiWZegPAeJE0jfpaHnrRIxgIcAh80qwBxRJ9l57162wYWVQkrX2RG4QiGpKq2mm7afEchUSwQm9iZw==
+ ARA:13230040|36860700016|376014|1800799024|82310400026|56012099003|18002099003;
+X-Microsoft-Antispam-Message-Info: J2vQ7syyj8QWIs24pQE8qfmDGpuSWmlcgH3192YhT7yO06Tb5JC1KVj3EoMJh+wQ5BHrGf3Kwk7w/Lwz/EyKs6ubrBhkSRXD9/l8GsSvdcp7pzsIGY9LBfHj+gLpSaHnOAv2sZUkWAxK5LOjnR5QScAnUbio1ABuhsfQurcWmJ/d1xDkhkaJpA8kMTbQ0wr7BSzDXgdPWxf6Gw1hVm6RlXsmQAcQxz5lNDArdH/LTZxGdk2pCQCWCfBCkbfJZIqgGsru3XJIoOQOH7URZpexK7rPRIomVmW/UfK3/8C4vnXSpbghwkW4BhxrQ8doUzwSVwB2FPhb2ad9J/6j1z7RlD2LpXy8B9tsL1Z0KwMXk4IwSJlsa7nepBF2OU0c+oLfck8FznVALSq/JWmr75XwxH1qLEjbY0Xhkx796RiRKSHvo4zYcYSeI3C0WFzMUCMBei1V6N8EZc+i32zAgOq9X4cEXK7BIcSBC0W/Xr9wRK9nD7Fu0tpXef7qyo0Q0ZIMlvmYThSLwv6ovz0vbdf5iaqi69p7uuhq+IUOQQoYQ6Sur5vUjP8fRBeL9JOFj+6q6hMLzeLYLar/TxpK3T3ib9C20qdkWgPWHUbQ49xJ+huOaIQTgMy0gx23R793qNIcOZo3qCeVKIH7RB1f27lHU/Y0GcB11fEf0yPzwhmvlFXa24pymVt/ZGoawA/2Ug55uTfLIAlpT4dDvcFMQB6zbcSsbYNflqWldDNCqa/SR79WxMALwo1hIKGtCGrCBLZaVaM78F0IwGT8LQEpU6rBwA==
 X-Forefront-Antispam-Report: CIP:165.85.157.49; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:atlrelay2.compute.ge-healthcare.net;
+ IPV:NLI; SFV:NSPM; H:mkerelay2.compute.ge-healthcare.net;
  PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(1800799024)(82310400026)(36860700016)(376014)(18002099003)(56012099003)(22082099003);
+ SFS:(13230040)(36860700016)(376014)(1800799024)(82310400026)(56012099003)(18002099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: XIWwNWRFipDfPgfllNvG+TZ94c4YNBCMGJaSFaaBNmL40IJ6r2UIpAxrsomAlt1BYYJd/ruMp2idXIapMhl6mIDQKSwXfmQpbmhovOp8L+TMQtIl1yxIZugzpqh9qQVg3V0Om4xMCBlfE9fDiDKIR7N0xR71h4hOINZaj3veOhzydnqrlfb8uHmXcTmHHiqhJ5N/qJkyxGas05PA6kzNaOOSJDV7GImwL2ArseIIMIVKaQvQwa40p1XuV+Jd/lUOXXvGL1lmUSNHsrORGC59ImzQF25sImTLRhnc12isZUeP+h0Hx0MHyK4EUacLTj1BcssznC9zu0ve5yh2ctszqYqYZD8mHsNNA8I2PF+GgAA4RAWNYDKzQQHaWq/xpvNDfYPum0qn2MEZS3q0cXNsiH1yr7If5oezYSCyUU3l4kWFmZv239AxZDjU5bVfeTve
+X-MS-Exchange-AntiSpam-MessageData-0: 1U6kslA2j6DdZT2MmCIWjUshzXvwzMHmNOkkgviy7lYtyn5/v7oc2dXwLwPl/Q3fLqRpf3p32onYTCgn2hNacsD25c3xsRB4A8ziFdWl2Cxxo2tpklNTKXbF81r25grEOLstgVfjsZCwxW+xp3UXb0m8cSEvl0Dlw2v+NFayGH9nJQ6xGwNRmWeb2vajncS2xLrZIhrcacc/XDaPPMD0h32ivfU130Ql5HTkr5s386RWgEK7Ksk7trcijFj75IR5Ao+jOevEL+9Qlbn3u6JBVsAFlrHRJwAvIsvWRMIOuWFa8f2pbvgZkxXghAAe+yu6PheAWC1kmo8JkHJKmYHGUDtblS4kL4oySCxK4s0VXwgGMFwwHhrEAohyhU2DiK5u4ZQKm7rgCPfPvSpJyXGfgTCInNyIMEBcyMOi6u9WS7sInlDBWDYT9e1b5DrAX7uD
 X-OriginatorOrg: gehealthcare.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Apr 2026 09:46:58.3480 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: c69bf364-9058-409d-9c40-08dea05418b8
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Apr 2026 09:46:57.8314 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: f09bf760-fe97-4210-0e05-08dea054186d
 X-MS-Exchange-CrossTenant-Id: 9a309606-d6ec-4188-a28a-298812b4bbbf
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=9a309606-d6ec-4188-a28a-298812b4bbbf; Ip=[165.85.157.49];
- Helo=[atlrelay2.compute.ge-healthcare.net]
+ Helo=[mkerelay2.compute.ge-healthcare.net]
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: TreatMessagesAsInternal-CH1PEPF0000A34B.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: TreatMessagesAsInternal-CY4PEPF0000E9D2.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM3PPF2F3BE8063
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV3PR22MB5795
 X-Mailman-Approved-At: Wed, 22 Apr 2026 14:34:21 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -126,127 +124,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-After reset, all PLLs are bypassed by default so unbypass them so that
-dependent clocks can function correctly.
+Make it easier to reason about by keeping similar clocks grouped
+together. While at it, fix comment spacing.
 
 Signed-off-by: Brian Ruley <brian.ruley@gehealthcare.com>
 ---
- drivers/clk/imx/clk-imx6q.c | 98 +++++++++++++++++++++++++++++++++----
- 1 file changed, 88 insertions(+), 10 deletions(-)
+ drivers/clk/imx/clk-imx6q.c | 15 ++++++++-------
+ 1 file changed, 8 insertions(+), 7 deletions(-)
 
 diff --git a/drivers/clk/imx/clk-imx6q.c b/drivers/clk/imx/clk-imx6q.c
-index cd06d211e8d..eadb44749a0 100644
+index f57ac79f8ca..cd06d211e8d 100644
 --- a/drivers/clk/imx/clk-imx6q.c
 +++ b/drivers/clk/imx/clk-imx6q.c
-@@ -111,6 +111,41 @@ static const char *ipu2_di1_sels_2[] = {
- 	"ipu2_di1_pre", "dummy", "dummy", "ldb_di0_podf", "ldb_di1_podf",
- };
- 
-+static const char *pll_bypass_src_sels[] = {
-+	"osc",
-+	"lvds1_in",
-+	"lvds2_in",
-+	"dummy",
-+};
-+static const char *pll1_bypass_sels[] = {
-+	"pll1",
-+	"pll1_bypass_src",
-+};
-+static const char *pll2_bypass_sels[] = {
-+	"pll2",
-+	"pll2_bypass_src",
-+};
-+static const char *pll3_bypass_sels[] = {
-+	"pll3",
-+	"pll3_bypass_src",
-+};
-+static const char *pll4_bypass_sels[] = {
-+	"pll4",
-+	"pll4_bypass_src",
-+};
-+static const char *pll5_bypass_sels[] = {
-+	"pll5",
-+	"pll5_bypass_src",
-+};
-+static const char *pll6_bypass_sels[] = {
-+	"pll6",
-+	"pll6_bypass_src",
-+};
-+static const char *pll7_bypass_sels[] = {
-+	"pll7",
-+	"pll7_bypass_src",
-+};
-+
- static unsigned int share_count_mipi_core_cfg;
- 
- static int imx6q_clk_probe(struct udevice *dev)
-@@ -120,27 +155,70 @@ static int imx6q_clk_probe(struct udevice *dev)
- 	/* Anatop clocks */
- 	base = (void *)ANATOP_BASE_ADDR;
- 
--	clk_dm(IMX6QDL_CLK_PLL2,
--	       imx_clk_pllv3(dev, IMX_PLLV3_GENERIC, "pll2_bus", "osc",
--			     base + 0x30, 0x1));
--	clk_dm(IMX6QDL_CLK_PLL3_USB_OTG,
--	       imx_clk_pllv3(dev, IMX_PLLV3_USB, "pll3_usb_otg", "osc",
--			     base + 0x10, 0x3));
-+	clk_dm(IMX6QDL_PLL2_BYPASS_SRC,
-+	       imx_clk_mux(dev, "pll2_bypass_src", base + 0x30, 14, 2,
-+			   pll_bypass_src_sels,
-+			   ARRAY_SIZE(pll_bypass_src_sels)));
-+	clk_dm(IMX6QDL_PLL3_BYPASS_SRC,
-+	       imx_clk_mux(dev, "pll3_bypass_src", base + 0x10, 14, 2,
-+			   pll_bypass_src_sels,
-+			   ARRAY_SIZE(pll_bypass_src_sels)));
-+	clk_dm(IMX6QDL_PLL5_BYPASS_SRC,
-+	       imx_clk_mux(dev, "pll5_bypass_src", base + 0xa0, 14, 2,
-+			   pll_bypass_src_sels,
-+			   ARRAY_SIZE(pll_bypass_src_sels)));
-+	clk_dm(IMX6QDL_PLL6_BYPASS_SRC,
-+	       imx_clk_mux(dev, "pll6_bypass_src", base + 0xe0, 14, 2,
-+			   pll_bypass_src_sels,
-+			   ARRAY_SIZE(pll_bypass_src_sels)));
-+
-+	clk_dm(IMX6QDL_CLK_PLL2, imx_clk_pllv3(dev, IMX_PLLV3_GENERIC, "pll2",
-+					       "osc", base + 0x30, 0x1));
-+	clk_dm(IMX6QDL_CLK_PLL3, imx_clk_pllv3(dev, IMX_PLLV3_USB, "pll3",
-+					       "osc", base + 0x10, 0x3));
- 	clk_dm(IMX6QDL_CLK_PLL5, imx_clk_pllv3(dev, IMX_PLLV3_AV, "pll5", "osc",
- 					       base + 0xa0, 0x7f));
- 	clk_dm(IMX6QDL_CLK_PLL6, imx_clk_pllv3(dev, IMX_PLLV3_ENET, "pll6",
- 					       "osc", base + 0xe0, 0x3));
- 
-+	clk_dm(IMX6QDL_PLL2_BYPASS,
-+	       imx_clk_mux_flags(dev, "pll2_bypass", base + 0x30, 16, 1,
-+				 pll2_bypass_sels, ARRAY_SIZE(pll2_bypass_sels),
-+				 CLK_SET_RATE_PARENT));
-+	clk_dm(IMX6QDL_PLL3_BYPASS,
-+	       imx_clk_mux_flags(dev, "pll3_bypass", base + 0x10, 16, 1,
-+				 pll3_bypass_sels, ARRAY_SIZE(pll3_bypass_sels),
-+				 CLK_SET_RATE_PARENT));
-+	clk_dm(IMX6QDL_PLL5_BYPASS,
-+	       imx_clk_mux_flags(dev, "pll5_bypass", base + 0xa0, 16, 1,
-+				 pll5_bypass_sels, ARRAY_SIZE(pll5_bypass_sels),
-+				 CLK_SET_RATE_PARENT));
-+	clk_dm(IMX6QDL_PLL6_BYPASS,
-+	       imx_clk_mux_flags(dev, "pll6_bypass", base + 0xe0, 16, 1,
-+				 pll6_bypass_sels, ARRAY_SIZE(pll6_bypass_sels),
-+				 CLK_SET_RATE_PARENT));
-+
-+	SET_CLK_PARENT(IMX6QDL_PLL2_BYPASS, IMX6QDL_CLK_PLL2);
-+	SET_CLK_PARENT(IMX6QDL_PLL3_BYPASS, IMX6QDL_CLK_PLL3);
-+	SET_CLK_PARENT(IMX6QDL_PLL5_BYPASS, IMX6QDL_CLK_PLL5);
-+	SET_CLK_PARENT(IMX6QDL_PLL6_BYPASS, IMX6QDL_CLK_PLL6);
-+
-+	clk_dm(IMX6QDL_CLK_PLL2_BUS,
-+	       imx_clk_gate(dev, "pll2_bus", "pll2_bypass", base + 0x30, 13));
-+	clk_dm(IMX6QDL_CLK_PLL3_USB_OTG,
-+	       imx_clk_gate(dev, "pll3_usb_otg", "pll3_bypass", base + 0x10,
-+			    13));
-+	clk_dm(IMX6QDL_CLK_PLL5_VIDEO,
-+	       imx_clk_gate(dev, "pll5_video", "pll5_bypass", base + 0xa0, 13));
-+	clk_dm(IMX6QDL_CLK_PLL6_ENET,
-+	       imx_clk_gate(dev, "pll6_enet", "pll6_bypass", base + 0xe0, 13));
+@@ -126,18 +126,19 @@ static int imx6q_clk_probe(struct udevice *dev)
+ 	clk_dm(IMX6QDL_CLK_PLL3_USB_OTG,
+ 	       imx_clk_pllv3(dev, IMX_PLLV3_USB, "pll3_usb_otg", "osc",
+ 			     base + 0x10, 0x3));
++	clk_dm(IMX6QDL_CLK_PLL5, imx_clk_pllv3(dev, IMX_PLLV3_AV, "pll5", "osc",
++					       base + 0xa0, 0x7f));
++	clk_dm(IMX6QDL_CLK_PLL6, imx_clk_pllv3(dev, IMX_PLLV3_ENET, "pll6",
++					       "osc", base + 0xe0, 0x3));
 +
  	clk_dm(IMX6QDL_CLK_PLL3_60M,
  	       imx_clk_fixed_factor(dev, "pll3_60m", "pll3_usb_otg", 1, 8));
@@ -254,13 +151,28 @@ index cd06d211e8d..eadb44749a0 100644
  	       imx_clk_fixed_factor(dev, "pll3_80m", "pll3_usb_otg", 1, 6));
  	clk_dm(IMX6QDL_CLK_PLL3_120M,
  	       imx_clk_fixed_factor(dev, "pll3_120m", "pll3_usb_otg", 1, 4));
--	clk_dm(IMX6QDL_CLK_PLL5_VIDEO,
--	       imx_clk_gate(dev, "pll5_video", "pll5", base + 0xa0, 13));
--	clk_dm(IMX6QDL_CLK_PLL6_ENET,
--	       imx_clk_gate(dev, "pll6_enet", "pll6", base + 0xe0, 13));
+-	clk_dm(IMX6QDL_CLK_PLL5, imx_clk_pllv3(dev, IMX_PLLV3_AV, "pll5", "osc",
+-					       base + 0xa0, 0x7f));
+ 	clk_dm(IMX6QDL_CLK_PLL5_VIDEO,
+ 	       imx_clk_gate(dev, "pll5_video", "pll5", base + 0xa0, 13));
+-	clk_dm(IMX6QDL_CLK_PLL6, imx_clk_pllv3(dev, IMX_PLLV3_ENET, "pll6",
+-					       "osc", base + 0xe0, 0x3));
+ 	clk_dm(IMX6QDL_CLK_PLL6_ENET,
+ 	       imx_clk_gate(dev, "pll6_enet", "pll6", base + 0xe0, 13));
  
- 	clk_dm(IMX6QDL_CLK_PLL2_PFD0_352M,
- 	       imx_clk_pfd("pll2_pfd0_352m", "pll2_bus", base + 0x100, 0));
+@@ -279,9 +280,9 @@ static int imx6q_clk_probe(struct udevice *dev)
+ 				   ldb_di_sels, ARRAY_SIZE(ldb_di_sels)));
+ 	} else {
+ 		/*
+-                 * Need to set these as read-only due to a hardware bug.
+-                 * Keeping default mux values. Fixed on the i.MX6 QuadPlus
+-                 */
++		 * Need to set these as read-only due to a hardware bug.
++		 * Keeping default mux values. Fixed on the i.MX6 QuadPlus
++		 */
+ 		clk_dm(IMX6QDL_CLK_LDB_DI0_SEL,
+ 		       imx_clk_mux_flags(dev, "ldb_di0_sel", base + 0x2c, 9, 3,
+ 					 ldb_di_sels, ARRAY_SIZE(ldb_di_sels),
 -- 
 2.47.3
 
