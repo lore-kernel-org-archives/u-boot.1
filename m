@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71FB8FA1FD7
-	for <u-boot@archiver.kernel.org>; Wed, 22 Apr 2026 17:10:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65EF8FA1FD6
+	for <u-boot@archiver.kernel.org>; Wed, 22 Apr 2026 17:10:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BE94A843D0;
-	Wed, 22 Apr 2026 19:10:15 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1BF8C843AF;
+	Wed, 22 Apr 2026 19:10:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="nstsOHjK";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="sYj84r23";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9B70B843F3; Wed, 22 Apr 2026 19:10:08 +0200 (CEST)
-Received: from SJ2PR03CU001.outbound.protection.outlook.com
- (mail-westusazlp170120002.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c001::2])
+ id D41D984370; Wed, 22 Apr 2026 19:10:08 +0200 (CEST)
+Received: from BN1PR04CU002.outbound.protection.outlook.com
+ (mail-eastus2azlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c110::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BF923843D1
- for <u-boot@lists.denx.de>; Wed, 22 Apr 2026 19:10:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6A80E8439F
+ for <u-boot@lists.denx.de>; Wed, 22 Apr 2026 19:10:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=rs@ti.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=sgN2qA1OVMyR3R3m/0fwldPhzNhiZ2RH5+p2T00pO1msVF9ZL9An5uC1DyFsB3SDcPwKCEY8d8M8jlF3bGOQA7yifmL+7UUU5MqRzUohQlMb4LEKCNN10vCOmTy2B60wVFoJAcnClPNGAZl4b2va82cdlwuNgc0MaSiweAJU5LknFP0vOnx+zNStt/uoQjov9rKj0j4GlFLMNDfNlBabQqGTnJOuOTnhJu3w/kdeGXsIwuAF9qHqoIQs+E/gnfJyiP6h4bD/LZ194ricyujd+c6eCatrDkRov5ycBNkgDQ8i72P3ZGD4LU4L+8iWgxwdbbYhZ61yFpFwzIt9uf+m6A==
+ b=IT8YQat6yKgcUHib8x2y+Be3JBMaSYwvTuHzwrTuoKqEVFtO4LQrIda4Grp6xBl8PbA/tGlMfaSA9ksq+mqAvEl/p14TgmtMjXdAFwWXhnJuj4f6e+FnKfKdAMleSASTEfUKd24FlmIHtqgYzAFfEift53l1/aIaOtk/CqtgjFcwXRVHMfu+NTqyloEf1PGSmR5x5XJFPZ+qSeoq3F7wkzy1m04A5W9xZONG01vQyfR/+PGNrBBVGzQJs/xZ0U6x/J6ztHx6XarEq9eATTnhf6NPwm6byMoTbjOXQXONI7ERK8aYBGmPSa9yYwuyKkPmYTBGzHOPLlG/TVd2gX75ZA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=SULF2RlUXLZAEs24CgeD/T48JqZsZ/ui0reyz5k+lms=;
- b=XIEHbiNLfuOiiZeL37K/QhY25AL2Uws2Yzl5tz7oHR0uoHHUDXjf+eVYA5Vujr+HZ+6kZyCPjMO2eO9eURr6xDHtUa4GsJUzWk62ClutxPPnJa1F9uufEOh9s/7rVzNadHorszgbEDhwvTWGTnpP188Te13B6Jnz/b7NdZBuu4yQdHbqQMR3Y5Nc9YURd7Qd0q3MnvYsGYPkdizSCkQUuQ/OEPzS3fJ3UNsYOMls58Di2fXKKRZXs7ugw2Nj4/q5Ti3IegZd8XhXsN8y9LsLuZWYk1wshqFr1xWoHW7wheQsAWH6GJ7z541QLZm93VF2GCFLSSP64vf0OvHxYmKJAQ==
+ bh=l5cKaYWEXpJkj+DHzenphJ9FKgkoigICiqjvva2Nupk=;
+ b=MUDsoeHPc7noyLlfq3TjzXbd9IJl0qYBDUnt5Z2nWBzmX1mKJKZa6AF/kZp1wr9o9rESAFnqXY9k+CVHe+vujwIwT0QFSscB+hxyJd2SqimLKL28DsuBt1suU1YOb6WX+AcDmo9DCzhpk+BxmWDSd2jAPG/f62fn61XUWSAiO2U8GNOZ81X50xeaX0lZCPaa9qSjmMACqwWtA9Xgdy7Xy8cxJZRhbO2vvSg+ot16fWFR8RK44Dr36CCUAKZVLNDhsk1WLES8qB0mKqoOom+jUpv19dwzHFK3+tTp0B9bDtgAAAd++u9zfUJ6gDm/ag0TXPGdMpiewTfDs+v3JgrPzA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.23.194) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
+ 198.47.23.195) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
  dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
  dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=SULF2RlUXLZAEs24CgeD/T48JqZsZ/ui0reyz5k+lms=;
- b=nstsOHjKGgcmTXaCLXPdiH9t8uMueX35bjmucN6TQP0goyAoI5V81Yso6hGLGIe5+a71f0FRx6/WrF3jQrSL4R2CRqFAGwAqT9PwZEI8fsGA9RmyBdHzgOQ5y+FPITSNpOKRHaj438xjQj6Z7tmI3MD5n3j9SLpAqbSuG3E1cc0=
-Received: from PH8PR07CA0026.namprd07.prod.outlook.com (2603:10b6:510:2cf::21)
- by DS4PR10MB997671.namprd10.prod.outlook.com (2603:10b6:8:317::7)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9846.16; Wed, 22 Apr
- 2026 17:09:59 +0000
-Received: from SJ1PEPF000023DA.namprd21.prod.outlook.com
- (2603:10b6:510:2cf:cafe::a2) by PH8PR07CA0026.outlook.office365.com
- (2603:10b6:510:2cf::21) with Microsoft SMTP Server (version=TLS1_3,
+ bh=l5cKaYWEXpJkj+DHzenphJ9FKgkoigICiqjvva2Nupk=;
+ b=sYj84r23DOrZAt0mIgN0ASUM2qxL+5J3q6kZlD/tog6agCK/qTCtAaR4THHgQmtgn+GaWup3pMtHqExvO7rcX5X2iIKYWBzsw3lDTko8IZx9HPD/dRO4X6hRTxkjvZpN7FpDnyoRdvJZzOEZi7pJx8odHtIqcOw0UBLOX/Cl4zM=
+Received: from DS7PR03CA0327.namprd03.prod.outlook.com (2603:10b6:8:2b::35) by
+ CO1PR10MB4404.namprd10.prod.outlook.com (2603:10b6:303:90::8) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9818.32; Wed, 22 Apr 2026 17:10:02 +0000
+Received: from CY4PEPF0000EDD7.namprd03.prod.outlook.com
+ (2603:10b6:8:2b:cafe::e1) by DS7PR03CA0327.outlook.office365.com
+ (2603:10b6:8:2b::35) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.20.9791.48 via Frontend Transport; Wed,
- 22 Apr 2026 17:09:59 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.194)
+ 22 Apr 2026 17:10:02 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.195)
  smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
  action=none header.from=ti.com;
 Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.23.194 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.23.194; helo=lewvzet200.ext.ti.com; pr=C
-Received: from lewvzet200.ext.ti.com (198.47.23.194) by
- SJ1PEPF000023DA.mail.protection.outlook.com (10.167.244.75) with Microsoft
+ 198.47.23.195 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.23.195; helo=lewvzet201.ext.ti.com; pr=C
+Received: from lewvzet201.ext.ti.com (198.47.23.195) by
+ CY4PEPF0000EDD7.mail.protection.outlook.com (10.167.241.203) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9870.4 via Frontend Transport; Wed, 22 Apr 2026 17:09:58 +0000
-Received: from DLEE213.ent.ti.com (157.170.170.116) by lewvzet200.ext.ti.com
- (10.4.14.103) with Microsoft SMTP Server (version=TLS1_2,
+ 15.20.9846.18 via Frontend Transport; Wed, 22 Apr 2026 17:10:01 +0000
+Received: from DLEE212.ent.ti.com (157.170.170.114) by lewvzet201.ext.ti.com
+ (10.4.14.104) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 22 Apr
  2026 12:09:57 -0500
-Received: from DLEE207.ent.ti.com (157.170.170.95) by DLEE213.ent.ti.com
- (157.170.170.116) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DLEE201.ent.ti.com (157.170.170.76) by DLEE212.ent.ti.com
+ (157.170.170.114) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 22 Apr
  2026 12:09:57 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE207.ent.ti.com
- (157.170.170.95) with Microsoft SMTP Server (version=TLS1_2,
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE201.ent.ti.com
+ (157.170.170.76) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
  Transport; Wed, 22 Apr 2026 12:09:57 -0500
 Received: from rs-desk.dhcp.ti.com (rs-desk.dhcp.ti.com [128.247.81.39])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 63MH9uPQ2769561;
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 63MH9uPO2769561;
  Wed, 22 Apr 2026 12:09:57 -0500
 From: <rs@ti.com>
 To: <robertcnelson@gmail.com>, <ayush@beagleboard.org>,
@@ -82,9 +82,9 @@ To: <robertcnelson@gmail.com>, <ayush@beagleboard.org>,
  <trini@konsulko.com>, <afd@ti.com>, <xypron.glpk@gmx.de>,
  <ilias.apalodimas@linaro.org>
 CC: <u-boot@lists.denx.de>
-Subject: [PATCHv5 6/6] memory: reserve from start_addr_sp to initial_relocaddr
-Date: Wed, 22 Apr 2026 12:09:46 -0500
-Message-ID: <20260422170946.3394481-7-rs@ti.com>
+Subject: [PATCHv5 4/6] efi_selftest_memory: check for duplicates first
+Date: Wed, 22 Apr 2026 12:09:44 -0500
+Message-ID: <20260422170946.3394481-5-rs@ti.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260422170946.3394481-1-rs@ti.com>
 References: <20260422170946.3394481-1-rs@ti.com>
@@ -94,30 +94,30 @@ Content-Type: text/plain
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ1PEPF000023DA:EE_|DS4PR10MB997671:EE_
-X-MS-Office365-Filtering-Correlation-Id: 01f3ad70-ff9f-4078-0718-08dea091fbe5
+X-MS-TrafficTypeDiagnostic: CY4PEPF0000EDD7:EE_|CO1PR10MB4404:EE_
+X-MS-Office365-Filtering-Correlation-Id: 5cb1ed73-d2b8-44ea-08f6-08dea091fdb9
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|82310400026|36860700016|1800799024|22082099003|18002099003|56012099003;
-X-Microsoft-Antispam-Message-Info: CAhcABA92iI40983uSdbFDIPAOjdwLsItmYr1fC77+ZpXLF6OxFazRX6dWgxylvhN/nNO5zS6uE8w6bQk5lI6w33TmPHQm5vIlrK0o7qtEPLy5KHd86kDwOq/3iLeFwNvJwvAY90sXMWb/J9hLBTCb84eUrSPJm94FCaYLopDoWLbhPCNyqQpTHWvH/QbR5si6N5rpuRv5AUSyL7lQcYOpN2TrM4cDvuJGpEnRahf/TbYzn/aD86F7RzIrKx6xOL1HFib9szGN85KBeZ5Bk/7LjV8n4gsgB+4oomgBo8W8FAavc7WQPjHQBsRuTHVI1wnyMb+a/QeGWw2RPTw4SBhgnhK68q4gJ9tyUbTpezdctp/fBBzqm5qnU3f8hlPIuF7VBAR2EHkX5rYAOS7iA6HtwgiYrNJEL0zumOguXLFzTo3RGHguHEA+GGN81PydeIX6PP7Mo8lkqThGZvklzYLhNPG/pU66dkpwzPUi3/OeCMQakEtdyFf5iH7lflNaA+X6dHznSLmn2/aigB9aIx/LFzOfN56s5WVP+OD/vOS3KrrUJ5zYIphQY9MOtPuI+4xzEPfXgUeE5p/sAKA4kmxVrHL0S+N275LGZPfKzE6+cnNosD7PTQS3TId3jjnQN0HTTPM0y1lCB94D0pqaDXuIjJEJ5JeqtRefQ0BavSWWes4cz/+iuu9KL2Y6jh5uXNvcIen9MeDw7LUVUw36EJ0I5bFhOeEpki9xcciJDwbEQ=
-X-Forefront-Antispam-Report: CIP:198.47.23.194; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:lewvzet200.ext.ti.com; PTR:InfoDomainNonexistent;
+ ARA:13230040|36860700016|376014|1800799024|82310400026|56012099003|18002099003|22082099003;
+X-Microsoft-Antispam-Message-Info: Wk7uY9cIkR5dYG42SOPCGtn3+2ybi8r/4yUgUUKSpXBmXUC5Cvg3H5fJRNpLoz4FUFoR0U0XK5QPP/swrzRK2pj80fXSUC4ZH10WWHOLWLA8bwFq3XgOzsvHOx/jL+3T5tEN6y69xS+0D+AxafHdOSrptdQV6qzl1fDfh1vNy7r9fp4Wt935YfCQrxhUybg4SDGySO6C0cjaLqiTc47tPboEBijMuO5qp2ZGrEcdmxsgdCOFK25Yg6qOMzG40m/1lRM+NTq79P1nX6JvBDXwc0P4I+MWU+lpHQYrybNHki6aeQPths2EC2Nttnt/JhWg5iCYSaY3awQX4tVt23HKq0ObRrDchudKX9FFOySyqWjpdO6uKF4/rDlLctrU4SKsQh+GcirBQBdLhYEY4YieGyLyVZ3BUIvHB81T9FtFbv4RJ1Mf4eDpQBGhhPvfwqZzlEkgFsB0q75dO3/yxvEsz9AFBhqMKYVyQLwVe6TQfIIRYuMInNlBVm5bNcmNH+rtrz+5/RCxWXJ7ufXZDRop6KYHo7i+Wx3cdIwF6vE2H7nTa3JNhGFQ37JcICD3vnMJhMOE2aPIgsajVYouatMKWIJ0yJONQqFegCTPkUNKBtPRPgMPBlTcfKXzs9gndWrtjWHPa5+Qjha5R2jqhBWx0WzpfxRsIK7O+Aa6clLVRORU0GgBZZiFS26HWz0KZ3FYPf0MULbWn5jtSjZKPs+g9O+1ED9JPi1dVBl/Q2TNdDnD41MT58x9kLJ7pIrupc1W22HHRiXRKRs223K1Z3EP7w==
+X-Forefront-Antispam-Report: CIP:198.47.23.195; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:lewvzet201.ext.ti.com; PTR:InfoDomainNonexistent;
  CAT:NONE;
- SFS:(13230040)(376014)(82310400026)(36860700016)(1800799024)(22082099003)(18002099003)(56012099003);
+ SFS:(13230040)(36860700016)(376014)(1800799024)(82310400026)(56012099003)(18002099003)(22082099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: h7sftcxtTCX8xL/HbuOOvBsPreWdwTBqWB9T/Zw7rZDT0z6CZ2hvZl7HBxnOWQolsu+woHoOKRPOMvNCMcq0lw325X/c57iE4wQB1upEUWKRexFjhSZON/KvJoD0j6AIi4a6tSfXy0TdPlaypUAj5gb8HWl6IVxK92VQaaoCXs3xJR8FHWJ1QYDfRJwXY8uM1csSbCYu5RB2uK4w+CpvxUlcdPK2uyGd1QtZ3koB/omljrL/MYGWhCOLPjHCXVMv4x41DgtGYqwEPDpHJkh5JEw4Mo7ufsH4J29pj7KRM2c+CCcc7/x9NSigaJwuLKW1PZJXXWvP6RYnfG4jteWSNO8Af65GhEmisRMknFKHPO3br1hdKs7K+qbxAcNGGuOfPddoJPudHm7hIKBJ9jV2+TtWaa5SNuuYd+tIKIcGYheygz/qwB17E/TnitbReNat
+X-MS-Exchange-AntiSpam-MessageData-0: MFdcBMShbChfpFATZiVyi4dXxwfAQZyYJcFRSjzwVt8tfqNYPOm0ClSrehbSAG4PhLURODLrsqrMCEwv1KAW1GtmTYdUxT6xnc6Pql7E2l9Yw4tzX/Q2qvhBfzRp2hVYwFLOPMruNodyaR/RN20tBx6a+xH2b5AKNMDlr3bAvxbve0A63Bux8QUdeEtjajXX1BdMb0adVukggMJrO8JQ0wVH4X5AU0wjwNDn/x6bBccyiPmkAfZ1NRTYbWTObUcP66ykuh6f9OsY8F+o2G70sp2+ImgYgbw/ozqlTr/Yq7vYaFjALq8XPlEANPsftC/zlE2+tWyhJxEfcjoC6mkIa9vzs94tcA9IjUVOtXeWXfcFO8MPFxKydGDSUp7x+uopuCJ22FRmJ4T/M7wSQqghkOMWfVm0ehs1axhShuTraObjeKRkozhifFexAzDzQQCB
 X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Apr 2026 17:09:58.8751 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 01f3ad70-ff9f-4078-0718-08dea091fbe5
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Apr 2026 17:10:01.9814 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 5cb1ed73-d2b8-44ea-08f6-08dea091fdb9
 X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.194];
- Helo=[lewvzet200.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: SJ1PEPF000023DA.namprd21.prod.outlook.com
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.195];
+ Helo=[lewvzet201.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: CY4PEPF0000EDD7.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS4PR10MB997671
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CO1PR10MB4404
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -136,142 +136,65 @@ X-Virus-Status: Clean
 
 From: Randolph Sapp <rs@ti.com>
 
-Add a new global data struct member called initial_relocaddr. This
-stores the original value of relocaddr, directly from setup_dest_addr.
-This is specifically to avoid any adjustments made by other init
-functions.
-
-Reserve the memory from gd->start_addr_sp - CONFIG_STACK_SIZE to
-gd->initial_relocaddr instead of gd->ram_top. This allows platform
-specific relocation addresses to work without unnecessarily painting
-over a large range.
-
-Since PRAM comes out of this initial area up to initial_relocaddr, we no
-longer need to account for it separately.
+Check for duplicate memory mappings before reporting any incorrect
+attributes. Could be that second allocation has the correct type while
+the first doesn't. Knowing there is a duplicate in this scenario is
+more helpful than just reporting the first mismatch.
 
 Signed-off-by: Randolph Sapp <rs@ti.com>
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Reviewed-by: Simon Glass <sjg@chromium.org>
 ---
- common/board_f.c                  |  9 ++++++-
- include/asm-generic/global_data.h |  7 ++++++
- lib/efi_loader/efi_memory.c       |  2 +-
- lib/lmb.c                         | 39 +++++--------------------------
- 4 files changed, 22 insertions(+), 35 deletions(-)
+ lib/efi_selftest/efi_selftest_memory.c | 21 ++++++++++-----------
+ 1 file changed, 10 insertions(+), 11 deletions(-)
 
-diff --git a/common/board_f.c b/common/board_f.c
-index ce87c619e68..31c6eb725fb 100644
---- a/common/board_f.c
-+++ b/common/board_f.c
-@@ -330,6 +330,8 @@ __weak int arch_setup_dest_addr(void)
- 
- static int setup_dest_addr(void)
+diff --git a/lib/efi_selftest/efi_selftest_memory.c b/lib/efi_selftest/efi_selftest_memory.c
+index 4d32a280061..7320964c129 100644
+--- a/lib/efi_selftest/efi_selftest_memory.c
++++ b/lib/efi_selftest/efi_selftest_memory.c
+@@ -60,7 +60,7 @@ static int find_in_memory_map(efi_uintn_t map_size,
+ 			      u64 addr, int memory_type)
  {
-+	int ret;
-+
- 	debug("Monitor len: %08x\n", gd->mon_len);
- 	/*
- 	 * Ram is setup, size stored in gd !!
-@@ -356,7 +358,12 @@ static int setup_dest_addr(void)
- 	gd->relocaddr = gd->ram_top;
- 	debug("Ram top: %08llX\n", (unsigned long long)gd->ram_top);
+ 	efi_uintn_t i;
+-	bool found = false;
++	struct efi_mem_desc *match = NULL;
  
--	return arch_setup_dest_addr();
-+	ret = arch_setup_dest_addr();
-+	if (ret != 0)
-+		return ret;
-+
-+	gd->initial_relocaddr = gd->relocaddr;
-+	return ret;
+ 	for (i = 0; map_size; ++i, map_size -= desc_size) {
+ 		struct efi_mem_desc *entry = &memory_map[i];
+@@ -72,24 +72,23 @@ static int find_in_memory_map(efi_uintn_t map_size,
+ 
+ 		if (addr >= entry->physical_start &&
+ 		    addr < entry->physical_start +
+-			    (entry->num_pages << EFI_PAGE_SHIFT)) {
+-			if (found) {
++				    (entry->num_pages << EFI_PAGE_SHIFT)) {
++			if (match) {
+ 				efi_st_error("Duplicate memory map entry\n");
+ 				return EFI_ST_FAILURE;
+ 			}
+-			found = true;
+-			if (memory_type != entry->type) {
+-				efi_st_error
+-					("Wrong memory type %d, expected %d\n",
+-					 entry->type, memory_type);
+-				return EFI_ST_FAILURE;
+-			}
++			match = entry;
+ 		}
+ 	}
+-	if (!found) {
++	if (!match) {
+ 		efi_st_error("Missing memory map entry\n");
+ 		return EFI_ST_FAILURE;
+ 	}
++	if (memory_type != match->type) {
++		efi_st_error("Wrong memory type %d, expected %d\n", match->type,
++			     memory_type);
++		return EFI_ST_FAILURE;
++	}
+ 	return EFI_ST_SUCCESS;
  }
  
- #ifdef CFG_PRAM
-diff --git a/include/asm-generic/global_data.h b/include/asm-generic/global_data.h
-index 745d2c3a966..6c60a79c2ab 100644
---- a/include/asm-generic/global_data.h
-+++ b/include/asm-generic/global_data.h
-@@ -107,6 +107,13 @@ struct global_data {
- 	 * GDB using the 'add-symbol-file u-boot <relocaddr>' command.
- 	 */
- 	unsigned long relocaddr;
-+	/**
-+	 * @initial_relocaddr: end of memory currently in use by uboot
-+	 *
-+	 * This should be the original value of relocaddr before any other
-+	 * allocations or reservations shift it.
-+	 */
-+	unsigned long initial_relocaddr;
- 	/**
- 	 * @irq_sp: IRQ stack pointer
- 	 */
-diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
-index 046a2bb4641..ece05c142f0 100644
---- a/lib/efi_loader/efi_memory.c
-+++ b/lib/efi_loader/efi_memory.c
-@@ -869,7 +869,7 @@ static void add_u_boot_and_runtime(void)
- 	/* Add U-Boot */
- 	uboot_start = ((uintptr_t)map_sysmem(gd->start_addr_sp, 0) -
- 		       uboot_stack_size) & ~EFI_PAGE_MASK;
--	uboot_pages = ((uintptr_t)map_sysmem(gd->ram_top - 1, 0) -
-+	uboot_pages = ((uintptr_t)map_sysmem(gd->initial_relocaddr, 0) -
- 		       uboot_start + EFI_PAGE_MASK) >> EFI_PAGE_SHIFT;
- 	efi_update_memory_map(uboot_start, uboot_pages, EFI_BOOT_SERVICES_CODE,
- 			      false, false);
-diff --git a/lib/lmb.c b/lib/lmb.c
-index 9a8c70b778a..e5d4d726ab1 100644
---- a/lib/lmb.c
-+++ b/lib/lmb.c
-@@ -534,46 +534,19 @@ static long lmb_reserve(phys_addr_t base, phys_size_t size, u32 flags)
- 
- static void lmb_reserve_uboot_region(void)
- {
--	int bank;
--	ulong end, bank_end;
-+	ulong size;
- 	phys_addr_t rsv_start;
--	ulong pram = 0;
- 
- 	rsv_start = gd->start_addr_sp - CONFIG_STACK_SIZE;
--	end = gd->ram_top;
-+	size = gd->initial_relocaddr - rsv_start;
- 
--	/*
--	 * Reserve memory from aligned address below the bottom of U-Boot stack
--	 * until end of RAM area to prevent LMB from overwriting that memory.
--	 */
--	debug("## Current stack ends at 0x%08lx ", (ulong)rsv_start);
-+	debug("## Current stack ends at 0x%08lx\n", (ulong)rsv_start);
- 
--#ifdef CFG_PRAM
--	pram = env_get_ulong("pram", 10, CFG_PRAM);
--	pram = pram << 10; /* size is in kB */
--#endif
--
--	for (bank = 0; bank < CONFIG_NR_DRAM_BANKS; bank++) {
--		if (!gd->bd->bi_dram[bank].size ||
--		    rsv_start < gd->bd->bi_dram[bank].start)
--			continue;
--		/* Watch out for RAM at end of address space! */
--		bank_end = gd->bd->bi_dram[bank].start +
--			gd->bd->bi_dram[bank].size - 1;
--		if (rsv_start > bank_end)
--			continue;
--		if (bank_end > end)
--			bank_end = end - 1;
-+	lmb_reserve(rsv_start, size, LMB_NOOVERWRITE);
- 
--		lmb_reserve(rsv_start, bank_end - rsv_start - pram + 1,
-+	if (gd->flags & GD_FLG_SKIP_RELOC)
-+		lmb_reserve((phys_addr_t)(uintptr_t)_start, gd->mon_len,
- 			    LMB_NOOVERWRITE);
--
--		if (gd->flags & GD_FLG_SKIP_RELOC)
--			lmb_reserve((phys_addr_t)(uintptr_t)_start,
--				    gd->mon_len, LMB_NOOVERWRITE);
--
--		break;
--	}
- }
- 
- static void lmb_reserve_common(void *fdt_blob)
 -- 
 2.53.0
 
