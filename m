@@ -4,64 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2AE81FA1FD4
-	for <u-boot@archiver.kernel.org>; Wed, 22 Apr 2026 16:28:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 755EBFA1FD4
+	for <u-boot@archiver.kernel.org>; Wed, 22 Apr 2026 16:28:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6294184262;
-	Wed, 22 Apr 2026 18:28:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id D4D1C842E7;
+	Wed, 22 Apr 2026 18:28:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="ni0XKpyx";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="mPpwlY2m";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CF8878426E; Wed, 22 Apr 2026 18:28:25 +0200 (CEST)
-Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 7CF498432A; Wed, 22 Apr 2026 18:28:38 +0200 (CEST)
+Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
+ [IPv6:2a00:1450:4864:20::333])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BA41D8412A
- for <u-boot@lists.denx.de>; Wed, 22 Apr 2026 18:28:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3A0788431C
+ for <u-boot@lists.denx.de>; Wed, 22 Apr 2026 18:28:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4g14Qr5bD7z9tnC;
- Wed, 22 Apr 2026 18:28:20 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1776875300;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=3bXajOOCyJnPhxoTzW6bJJUp2G6gp6jkaPRWGMaUY6E=;
- b=ni0XKpyxbGDL18MPVfAm09oavuc07+HRtX+EdSRGdoOR12+DuciiFUB2peCurGJEVCyCR7
- VGkL9EnJBe6zBv0ZYReR9C8ZhKqHVGjBcUfdbdlYUl6x7FPDKgEUOzgr1YzBBIC68E6qUR
- ZdbHQKbpJfzgMLJPCWsnt8Vk1i57lZe22WPIgnMhntXPX/VDBTQvhlRCCTGL6BKPLbKRW/
- +F5gqPyfj79FrRr/T8puWwGM55llibvrAfJz1M6yFM27qmRa/QqL3wFgjhnWGWftYSCzOe
- 7xuDR7YV6+1rA8kpsihSijX74+uSuceajK4gBBr5ZVrFVnAU/0W1t+8ijZx/Ag==
-Message-ID: <66b59836-8989-45e7-b690-520b2b57cfdb@mailbox.org>
-Date: Wed, 22 Apr 2026 13:28:27 +0200
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wm1-x333.google.com with SMTP id
+ 5b1f17b1804b1-488b0e1b870so92774875e9.2
+ for <u-boot@lists.denx.de>; Wed, 22 Apr 2026 09:28:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1776875313; x=1777480113; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ubqinD/2ACj1c16EbA9jpCKhig8Vombkyn1m3I98TvY=;
+ b=mPpwlY2mpOoKEzQlH/VEC1g1Ro6/3jGL5JmML4gBUrRpGhYovtxgfiAPjnsYaVHytW
+ gk9yiYSS3fqTq5jj9ccImuRQmohGtdHpNCJoCem5rnOpeUJ/IK4h0iqmFZszuTDej25L
+ dys8GDJ33izc3hlH4mCKVT8JFJHP3G1QNPkx4XMgUs7rvZ/vAcdDI5/GEb7eHKkeQAdy
+ mjW1k9NJpCmnFPUjbvhjU+/dhViM59DM8MDoblFMfcuDAMU3RYIHvUpGe9HW6sAzsAk3
+ RfO5F4HAV4VeYxKwwEu62uNpXElELNhA+z1csZCUaI7aJfLjN/8lpySiLSTzQhiWcZjx
+ 4T2g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1776875313; x=1777480113;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=ubqinD/2ACj1c16EbA9jpCKhig8Vombkyn1m3I98TvY=;
+ b=jLOavak2+FOds1RGV6gDLcuxI6y55dinS0CubXEuQ7php+4rV4eNSjogWuPTKofbAw
+ Q2i+gaXe7pRmCc0pNu5UIktUMKcKVSiSTEvmcfSDblBbqpq4PD0ymgZTKb6zk8UVp/Sr
+ vCqIEYuuhTUnL7BxC8w7PNpyPK/JWNFuKpFcY59+PDrDRneNl5bjrD4qg6x/cQUDmAmo
+ NbZnySal/srOJ9jhfSNOtQqIwrd5zHV0Bw1WXyuMGTLYDae3ST++MXgLAPxG81+EZIQE
+ xJ6LTuoyjyLbi6u7Bd7u6ZruXKSp+v/cYNyc88NdW5rq09H7zZpSKNfGla63TMSboXkP
+ TsjA==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ+iXpjcADFzHPB/Gera3939PhjvjJkdqkDwKHy3s9bInjpZhK9d1CQY6BPl7zosB/HXvzva41Q=@lists.denx.de
+X-Gm-Message-State: AOJu0YxHjGifQGXKJhfxskhVOxgayeK1pOl7O5jBRpfh80I8PNDjtc+6
+ jbhO71Q72fzr7R/rp00MKNa2PDEN24sZTMPoPbXB6qZUytUEyVts2JDI2vlIxEfD6Es=
+X-Gm-Gg: AeBDievIoZYst4JZ/ZB/5QPmHM0TEGGwJedeq4+hRgS0/YbIkYoXoVv6q/WbYPEY2uo
+ H5w6C/5KMh5xG6PIQtNh8kpRh4L+jEXiR5w0yenlYIIz1FBYtd5foUUQr7samuKyfYzsGgd1gu9
+ 90b0inB5/A6ox5eO+qQHT0tJOyvtHmpX6vAob1BuDv6NFFZ/5IYI1RiRxJ6nO6T0Ust2KK0UkPu
+ 37Uheo8LoV2vQ7st3u9UDnAOCJsntwruTcn/8kBZeJRarHofXS5kUN6Z5JFJoA437uDsacUR6rA
+ 7NmbNLHwnPS1nZMJrRv8b5lwt4kzUxygTS0lU5QHPVSyf1oisdmihdCrnNSCZq24iBzlyw7APVY
+ +WG1FAkzpkj0Mon2+9Pblb3QynbnvOaItDg91KYSkpnLBupJEYqCrlcdDdeKKI3IxjOC9Xbf/Lz
+ pm0kgFRE6dJOjqRmHrP4pkqrdkB3MlM/xmxVc9expmvZrNbks6PI4CuYs=
+X-Received: by 2002:a05:600c:8b38:b0:488:b14f:b8ed with SMTP id
+ 5b1f17b1804b1-488fb6e815amr345108445e9.0.1776875313425; 
+ Wed, 22 Apr 2026 09:28:33 -0700 (PDT)
+Received: from arrakeen.starnux.net ([2a01:e0a:106d:1080:8261:5fff:fe11:bdda])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-488fb7c0eacsm144898075e9.35.2026.04.22.09.28.32
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 22 Apr 2026 09:28:33 -0700 (PDT)
+From: Neil Armstrong <neil.armstrong@linaro.org>
+To: u-boot-amlogic@groups.io, u-boot@lists.denx.de, 
+ Neil Armstrong <neil.armstrong@linaro.org>
+Cc: Lukasz Majewski <lukma@denx.de>, Tom Rini <trini@konsulko.com>, 
+ Andrew Goodbody <andrew.goodbody@linaro.org>, 
+ Marek Vasut <marek.vasut+usb@mailbox.org>, 
+ Peter Robinson <pbrobinson@gmail.com>, 
+ Svyatoslav Ryhel <clamor95@gmail.com>, Simon Glass <sjg@chromium.org>, 
+ Ferass El Hafidi <funderscore@postmarketos.org>
+In-Reply-To: <20260422-u-boot-amlogic-test-v1-1-b5790d3c04e0@linaro.org>
+References: <20260422-u-boot-amlogic-test-v1-1-b5790d3c04e0@linaro.org>
+Subject: Re: [PATCH] clk: meson: do not fail when setting SD_EMMC_x_CLK0
+Message-Id: <177687531266.2025915.11674452554926179447.b4-ty@b4>
+Date: Wed, 22 Apr 2026 18:28:32 +0200
 MIME-Version: 1.0
-Subject: Re: [PATCH v3] usb: dwc2_udc_otg_phy: fix compilation on non-Exynos
- patforms
-To: Marius Dinu <m95d+git@psihoexpert.ro>, u-boot@lists.denx.de
-Cc: Lukasz Majewski <lukma@denx.de>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>, Tom Rini
- <trini@konsulko.com>, Junhui Liu <junhui.liu@pigmoral.tech>,
- Quentin Schulz <quentin.schulz@cherry.de>
-References: <ab44395a-dc24-4141-8211-16a16281d349@cherry.de>
- <20260422083430.20345-1-m95d+git@psihoexpert.ro>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20260422083430.20345-1-m95d+git@psihoexpert.ro>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: 790eb77c060c86961e1
-X-MBO-RS-META: rgsrorgp9zkpcicomgob7buwfrjjajbo
+X-Mailer: b4 0.15.1
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,34 +106,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 4/22/26 10:32 AM, Marius Dinu wrote:
-> s5p_cpu_id used in drivers/usb/gadget/dwc2_udc_otg_phy.c is undefined on
-> platforms other than Exynos.
-> 
-> Signed-off-by: Marius Dinu <m95d+git@psihoexpert.ro>
-> Acked-by: Quentin Schulz <quentin.schulz@cherry.de>
-> ---
->   drivers/usb/gadget/dwc2_udc_otg_phy.c | 2 ++
->   1 file changed, 2 insertions(+)
-> 
-> diff --git a/drivers/usb/gadget/dwc2_udc_otg_phy.c b/drivers/usb/gadget/dwc2_udc_otg_phy.c
-> index e0ac5d142b0..c56ff1125bd 100644
-> --- a/drivers/usb/gadget/dwc2_udc_otg_phy.c
-> +++ b/drivers/usb/gadget/dwc2_udc_otg_phy.c
-> @@ -56,10 +56,12 @@ void otg_phy_init(struct dwc2_udc *dev)
->   	else /* C110 GONI */
->   		clrbits_le32(&phy->phypwr, OTG_DISABLE_0 | ANALOG_PWRDOWN | FORCE_SUSPEND_0);
+Hi,
 
-This ^ C210 Universal and C110 Goni stuff is also Exynos specific. Do we 
-need some SoC-specific dwc2_udc_otg_phy_exynos.c file which would 
-contain that SoC specific code ?
+On Wed, 22 Apr 2026 10:48:58 +0200, Neil Armstrong wrote:
+> Since Linux v7.0, the MMC controllers has the following properties:
+>   assigned-clocks = <&clkc CLKID_SD_EMMC_x_CLK0>;
+>   assigned-clock-rates = <24000000>;
+> Which causes mmc controllers to fail in probe.
+> 
+> Make sure we do not fail until we properly implement rate setup.
+> 
+> [...]
 
-> +#if defined(CONFIG_ARCH_EXYNOS) || defined(CONFIG_ARCH_S5PC1XX)
->   	if (s5p_cpu_id == 0x4412)
->   		clrsetbits_le32(&phy->phyclk, EXYNOS4X12_ID_PULLUP0 | EXYNOS4X12_COMMON_ON_N0,
->   				EXYNOS4X12_CLK_SEL_24MHZ); /* PLL 24Mhz */
->   	else
-> +#endif
->   		clrsetbits_le32(&phy->phyclk, ID_PULLUP0 | COMMON_ON_N0,
->   				CLK_SEL_24MHZ); /* PLL 24Mhz */
-[...]
+Thanks, Applied to https://source.denx.de/u-boot/custodians/u-boot-amlogic (u-boot-amlogic-next)
+
+[1/1] clk: meson: do not fail when setting SD_EMMC_x_CLK0
+      https://source.denx.de/u-boot/custodians/u-boot-amlogic/-/commit/723f14c946cbc8c09c3acf7bb7b7da65a4eeecd0
+
+-- 
+Neil
+
