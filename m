@@ -4,83 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72C53FF885C
-	for <u-boot@archiver.kernel.org>; Sat, 25 Apr 2026 20:24:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11BE5FF885C
+	for <u-boot@archiver.kernel.org>; Sat, 25 Apr 2026 20:25:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F2B3984150;
-	Sat, 25 Apr 2026 22:24:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=monstr.eu
+	by phobos.denx.de (Postfix) with ESMTP id A3E33842E7;
+	Sat, 25 Apr 2026 22:25:16 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=e-labworks.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=monstr-eu.20251104.gappssmtp.com header.i=@monstr-eu.20251104.gappssmtp.com header.b="NaydSHo7";
+	dkim=pass (2048-bit key; unprotected) header.d=e-labworks-com.20251104.gappssmtp.com header.i=@e-labworks-com.20251104.gappssmtp.com header.b="enrnSsSz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D704684178; Sat, 25 Apr 2026 22:24:42 +0200 (CEST)
-Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
- [IPv6:2a00:1450:4864:20::52d])
+ id 28A9E8435B; Sat, 25 Apr 2026 22:25:16 +0200 (CEST)
+Received: from mail-vk1-xa44.google.com (mail-vk1-xa44.google.com
+ [IPv6:2607:f8b0:4864:20::a44])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 35A1084099
- for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 22:24:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E6E0684099
+ for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 22:25:13 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none)
+ header.from=e-labworks.com
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=monstr.eu
-Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=monstr@monstr.eu
-Received: by mail-ed1-x52d.google.com with SMTP id
- 4fb4d7f45d1cf-6764e36dc88so9471112a12.1
- for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 13:24:40 -0700 (PDT)
+ spf=none smtp.mailfrom=sergio.prado@e-labworks.com
+Received: by mail-vk1-xa44.google.com with SMTP id
+ 71dfb90a1353d-56d93355337so5502635e0c.0
+ for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 13:25:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=monstr-eu.20251104.gappssmtp.com; s=20251104; t=1777148679; x=1777753479;
+ d=e-labworks-com.20251104.gappssmtp.com; s=20251104; t=1777148713; x=1777753513;
  darn=lists.denx.de; 
- h=content-transfer-encoding:subject:from:cc:to:content-language
- :user-agent:mime-version:date:message-id:from:to:cc:subject:date
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=akzVFqalptCAxvjPp3UsLlkMnq77io5GmGNeX0T6TIo=;
- b=NaydSHo7L0kxrn3tnmSnVwIM9e1ZmtMaQbJ+5zZ7VxQIM3ZiFUutDGIe3iR+85vDcz
- 4wYAtE8CgIBeJ2Ij9axunKyoy0Mn0f2QY5pDWxP/yMYM6jrr5u0iOGPxQiurxMXrwuSb
- tFNvbo6zQCUJpMGM1FnUqSYV9+Vg+252G/FRUTTL4RtiEkgDf4se5/ER99Ddbn8wFpZ4
- VGryLYk0csdVYA1A/UqqgzfPkIUl1fw8C9kKT6JGfJSUD3KKj1h+LinxllMgeT0UvDmJ
- zIU3KzXmAcJknadMgwjV6zLBSXbKtv3LrBiD89iMnhqLTKJ9GIbs2UH4SstmWci4y6Di
- 3isw==
+ bh=3j+JXdPBzJYO4sYTQbHuDmaA7mFTuPfLaQOSgFGtfhU=;
+ b=enrnSsSzUTN9cJZcR8hbIJVziSa0QQRBUfB5NSH4yKOT1ZaskaIxIsePTloVywf0Jm
+ /GNVd53hGkUMtLm6vVOmjoT7FXXPfroFqFQ8Xmzj8Kb2/vd8yo2LzDQGmMVhI8iUOqcn
+ XNhK71jWlzMAUSZ97RdBLuGt8NPel1ZYTQGn1l3JLyIZXiMl2gsTxsxVEpPHUfERQsbc
+ VnHJORCBvA4u0sTRVZANA2UaBAQ09xV1BgppLQWJedv4Rq33JlqN8OBji3UMbujrrGRN
+ vcZxWpi/DZjK9xBnxp0T3W7Tjfa/EBuB+Zq4fCSYF8YnQioPd7VTdnaHQ1B1MDRH7EW3
+ OvlA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777148679; x=1777753479;
- h=content-transfer-encoding:subject:from:cc:to:content-language
- :user-agent:mime-version:date:message-id:x-gm-gg:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=akzVFqalptCAxvjPp3UsLlkMnq77io5GmGNeX0T6TIo=;
- b=f81S9k2qyyFsZLWydygzeALgOxFYkAFoGv4HMUpf3JFDzJgd1H9rQhynTsA+HTD6Bu
- o2R6EiLK1xyU7igaY8YNukIS8TJN/oQi4ODuPvMaSVoKnhYWjkVnAS8qK2AfYRR9qCut
- Twq1yXwPyR2KToEzcgDfOg3vAv2azX9+bkJDa2zpakjP0f+I2iVr3z27IvC2FPhH+ije
- JF3RPD97pzj4teB3/xAlBLjngV4Rc8ZO+MwYxOs/bcuf3t6mHKKHPn1Y8W7HIfm8DooN
- mF+xfGpc7rSV0IvKOK+jDtf4UHo7CoLHyg3GlpQUMUnuyC1HhmfZLKGtIDLBNH4Cy3lO
- r1WA==
-X-Gm-Message-State: AOJu0YzcVrMRN8gkCtei3Qv5zcmYLGwICepD9r5hi3hTLzKcEaEj+2u1
- lMGv5tNQ/yUB0MUDT01iduzVp51O06va8ml2cMW0ZE7g+tWLOrLM4Nl5SI/meT721c2VnDWbgxO
- Q1RDoWg==
-X-Gm-Gg: AeBDieu+SqsFGRj7zOL8j0zAWppdDu4O+0Z+esfwEIDpiOJsc8PLuVCq24DR5II1aBm
- O1Io/S19p0fZQqQL6cg1u0iuQDXyDyykdtHPVpdqZIpDUApSqDn3xvNBeT/EjOx96PzggV/q6zj
- LFFbNkgQay4bhuHS/3tcbVJgdj/oDxr55LkJTOViMiEq9R0vB63eQD7Gj5DDCds4PYU1fpKV71/
- rpN9BW36rc5BkuT1S5j5CRlmdj+TO5tq8kIP/9s25WA37xhD1hhei51M/8VsxzbF1sT7LeDOjeE
- rTjD7ddyeGyQHEKPx+bbt0TeWPfeQIwW8UeKFwRdy2mYHdcjub6ChVHnfzktCZk7AGeZJBsZ0mQ
- m9IVLdhCZR2Mlwt3OS/ugD/X75TmXouVxx8aIEF0s6zyKntghSA6YdeE3FtJ5FahP9EympdFpVN
- GJvomsMDmNcoqfq1wUNi5jPRUr8wTPLeVA3lD4FNdJ8n3uTWxqTsd8qYSFEpXvMQ==
-X-Received: by 2002:a17:907:9341:b0:b9e:503:5923 with SMTP id
- a640c23a62f3a-ba4229dc662mr1018998966b.30.1776950451346; 
- Thu, 23 Apr 2026 06:20:51 -0700 (PDT)
-Received: from [192.168.0.105] (nat-108f.starnet.cz. [109.164.53.108])
+ d=1e100.net; s=20251104; t=1777148713; x=1777753513;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=3j+JXdPBzJYO4sYTQbHuDmaA7mFTuPfLaQOSgFGtfhU=;
+ b=Kc0DrIikyYuT3mJLaOnPVtcc0+pd2RreNiR4dfmpHXRwoTlqPKAfANlBNsXJwlCslk
+ 0XntVjTkKLR/b9GNGDPYta2FRjHH3+SgdeXKWibzJJ7E9QiQuUfeWKJeW1ee0kG27vWb
+ t2aHrzX17zhBptu3jdburUqr4dRJ4gMMJe+1Vl8Xbj0Js6VD6M+6sA2dL6zsnO86bgDq
+ irFHey7WXatCDCXh0TFfFP6RpEEkerNchURxG3OG8FPA/Nt/5dUuLxDKM/XBXzlAWaQi
+ 2w1ZkeIoKwjPwxr/o+eWLtVs/g1y+CaAmdKpy5eRxDxRs7LWyeg4jvnoGCZmPWFPvxoZ
+ lSTA==
+X-Gm-Message-State: AOJu0Ywfa3tHQgMFqRm1s2yXvmU67kiIP/oo4J6CpDZnsFTRp1kDRD2q
+ eV3cpcjKzV6wkfnZYc9s1cXuzSe0IqyNKmtt5la64pd8QFJxayRFN3IV72M0kEDUJDpY1Pqs8LS
+ rBDyLTxpLVzH2
+X-Gm-Gg: AeBDietu/pSuyL8b2zG2KJAg+s/wg42utpZ1o3eWJvD76A1DjmxQMev5ZakTRNjv5TY
+ nWN62Bf8E0EXUl2ikX/t+V4ke6dtGEFrdaZw9kYXgxmCR0oGIlIwEl2HBGSkPghfN7lXRq+5Rke
+ 5eQN775qdHEcwX+2KvoOqQSpFT/eXWT96xwKBDsyRBXrX1KiMD27gXzhvkn8cVBtEtpS6bLh0zH
+ n5rExrKGYEdA3eOaY/eJcQNUv5Fj7t63KlhOSpNi8Rdugh1BUADcsrxEayodh+6E8A91vZdXLMs
+ 75Df0OgEzF1s3a0MPoA6D1a2nUCOpOGTb03dCxQC4S+d7QWqFGCP6Uei/V7BIxFgIgMv6BHQujt
+ 7fHIkxdrgZg9GTeZgwnM8C3Tc6OEQZYcpM4O2GP3EIOq+1mMVOkpN02tnB322Dd5d6fp7fSdr3v
+ GidSfJweiYg9tXLKN7Vd66zdEFgaLvbSt9XGQPwUFhhKE8y2o6vh9a
+X-Received: by 2002:a05:7300:6d23:b0:2ca:9b08:e7d2 with SMTP id
+ 5a478bee46e88-2e478a34148mr16447657eec.22.1776959187971; 
+ Thu, 23 Apr 2026 08:46:27 -0700 (PDT)
+Received: from desktop.. ([2804:7f0:6401:dc31:4200:1760:44a0:9daa])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ba45503c435sm655091966b.43.2026.04.23.06.20.50
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 23 Apr 2026 06:20:50 -0700 (PDT)
-Message-ID: <a37aad0d-34a0-48a5-8f9b-8553f11b1f16@monstr.eu>
-Date: Thu, 23 Apr 2026 15:20:49 +0200
+ 5a478bee46e88-2e539fa5c86sm33732055eec.1.2026.04.23.08.46.24
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 23 Apr 2026 08:46:27 -0700 (PDT)
+From: Sergio Prado <sergio.prado@e-labworks.com>
+To: u-boot@lists.denx.de
+Cc: trini@konsulko.com, sjg@chromium.org, alpernebiyasak@gmail.com,
+ ilias.apalodimas@linaro.org, marek.vasut+renesas@mailbox.org,
+ sughosh.ganu@arm.com, wolfgang.wallner@at.abb.com, bb@ti.com,
+ y.moog@phytec.de, xypron.glpk@gmx.de, sergio.prado@e-labworks.com,
+ jerome.forissier@arm.com, afd@ti.com, quentin.schulz@cherry.de,
+ Wojciech.Dubowik@mt.com
+Subject: [PATCH v3 1/2] binman: bintool: add extra_env parameter to run_cmd
+Date: Thu, 23 Apr 2026 12:45:35 -0300
+Message-Id: <20260423154536.768603-2-sergio.prado@e-labworks.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20260423154536.768603-1-sergio.prado@e-labworks.com>
+References: <20260423154536.768603-1-sergio.prado@e-labworks.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: en-US
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-From: Michal Simek <monstr@monstr.eu>
-Subject: [GIT PULL] AMD/Xilinx changes for 2026-07-rc1 v3
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -98,100 +104,76 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Add an optional extra_env dict parameter to run_cmd() and
+run_cmd_result(). When provided, the key/value pairs are merged into
+the subprocess environment for that invocation only, leaving the parent
+process environment unchanged.
 
-please pull these patches to your tree. The biggest part is new pcie driver for 
-Versal Gen 2 SOC. Others are small fixes and adjustments.
+This might be needed by bintools that must inject environment variables
+into specific tool calls without polluting the global environment.
 
-Thanks,
-Michal
+Signed-off-by: Sergio Prado <sergio.prado@e-labworks.com>
+---
+ tools/binman/bintool.py | 15 ++++++++++++---
+ 1 file changed, 12 insertions(+), 3 deletions(-)
 
-The following changes since commit e973fa5115e40f93bb1425db5b1cc1f3d9b8047d:
-
-   cli: flush stdin before enabling cli (2026-04-22 14:23:49 -0600)
-
-are available in the Git repository at:
-
-   https://source.denx.de/u-boot/custodians/u-boot-microblaze.git 
-tags/xilinx-for-v2026.07-rc1-v3
-
-for you to fetch changes up to 9e0511261221b63458bc0d4cfd08596f5c8840d4:
-
-   net: zynq_gem: Clear stale speed bits in NWCFG before setting new ones 
-(2026-04-23 11:52:18 +0200)
-
-----------------------------------------------------------------
-AMD/Xilinx/FPGA changes for v2026.07-rc1 v3
-
-versal2:
-- Wire PCIe IP
-
-cmd/fpga:
-- Fix loadb help text guarding
-- Add support for skipping fpga ID check
-
-zynqmp:
-- Describe missing devices/IDs
-- Fix issue around zu63dr_SE
-
-clk/versal:
-- Fix out-of-bounds parent id for DUMMY_PARENT
-
-net/gem:
-- Add support for 10GBE
-- Clear stale speed bits in NWCFG
-
-net/axi_emac:
-- Filter out broadcast and multicast packets
-
-pci:
-- Add driver for AMD PCIe IP based on DesignWare core
-
-----------------------------------------------------------------
-Michal Simek (5):
-       net: xilinx: Reject broadcast and multicast packets in AXI Ethernet MAC
-       soc: xilinx: zynqmp: Add support for new ZynqMP devices
-       board: xilinx: zynqmp: Register alternate FPGA device for zu63dr_SE
-       cmd: fpga: Fix wrong preprocessor guard for loadb help text
-       fpga: xilinx: Add option to skip bitstream ID check
-
-Padmarao Begari (1):
-       clk: versal: Fix out-of-bounds parent id for DUMMY_PARENT
-
-Pranav Sanwal (3):
-       pci: Add AMD Versal2 DW PCIe host controller driver
-       arm: versal2: Map PCIe DBI and config regions when PCIe is enabled
-       amd: versal2: Enable PCIe/NVMe support and add NVMe boot target
-
-Pranav Tilak (3):
-       net: zynq_gem: add SPEED_10000 case in clock rate selection
-       net: zynq_gem: set 128-bit AXI bus width for 10GBE
-       net: zynq_gem: reinitialize RX BDs on every init
-
-Rafał Hibner (1):
-       net: zynq_gem: Clear stale speed bits in NWCFG before setting new ones
-
-  MAINTAINERS                        |   5 +
-  arch/arm/mach-versal2/cpu.c        |  18 +-
-  board/xilinx/zynqmp/zynqmp.c       |  17 ++
-  cmd/fpga.c                         |   2 +-
-  configs/amd_versal2_virt_defconfig |   6 +
-  drivers/clk/clk_versal.c           |   1 +
-  drivers/fpga/xilinx.c              |   7 +-
-  drivers/net/xilinx_axi_emac.c      |  20 +-
-  drivers/net/zynq_gem.c             |  61 +++--
-  drivers/pci/Kconfig                |  11 +
-  drivers/pci/Makefile               |   1 +
-  drivers/pci/pcie_dw_amd.c          | 250 ++++++++++++++++++++
-  drivers/soc/soc_xilinx_zynqmp.c    |  45 ++++
-  include/configs/amd_versal2.h      |   9 +-
-  14 files changed, 425 insertions(+), 28 deletions(-)
-  create mode 100644 drivers/pci/pcie_dw_amd.c
-
+diff --git a/tools/binman/bintool.py b/tools/binman/bintool.py
+index 9c76c8881a46..9d4f31b8afa1 100644
+--- a/tools/binman/bintool.py
++++ b/tools/binman/bintool.py
+@@ -272,7 +272,8 @@ class Bintool:
+                 show_status(col.RED, 'Failures', status[FAIL])
+         return not status[FAIL]
+ 
+-    def run_cmd_result(self, *args, binary=False, raise_on_error=True):
++    def run_cmd_result(self, *args, binary=False, raise_on_error=True,
++                       extra_env=None):
+         """Run the bintool using command-line arguments
+ 
+         Args:
+@@ -281,6 +282,8 @@ class Bintool:
+             binary (bool): True to return output as bytes instead of str
+             raise_on_error (bool): True to raise a ValueError exception if the
+                 tool returns a non-zero return code
++            extra_env (dict): Extra environment variables to set for this
++                invocation, or None
+ 
+         Returns:
+             CommandResult: Resulting output from the bintool, or None if the
+@@ -291,6 +294,10 @@ class Bintool:
+         name = os.path.expanduser(self.name)  # Expand paths containing ~
+         all_args = (name,) + args
+         env = tools.get_env_with_path()
++        if extra_env:
++            if env is None:
++                env = dict(os.environ)
++            env.update(extra_env)
+         tout.debug(f"bintool: {' '.join(all_args)}")
+         result = command.run_pipe(
+             [all_args], capture=True, capture_stderr=True, env=env,
+@@ -315,18 +322,20 @@ class Bintool:
+             tout.debug(result.stderr)
+         return result
+ 
+-    def run_cmd(self, *args, binary=False):
++    def run_cmd(self, *args, binary=False, extra_env=None):
+         """Run the bintool using command-line arguments
+ 
+         Args:
+             args (list of str): Arguments to provide, in addition to the bintool
+                 name
+             binary (bool): True to return output as bytes instead of str
++            extra_env (dict): Extra environment variables to set for this
++                invocation, or None
+ 
+         Returns:
+             str or bytes: Resulting stdout from the bintool
+         """
+-        result = self.run_cmd_result(*args, binary=binary)
++        result = self.run_cmd_result(*args, binary=binary, extra_env=extra_env)
+         if result:
+             return result.stdout
+ 
 -- 
-Michal Simek, Ing. (M.Eng), OpenPGP -> KeyID: FE3D1F91
-w: www.monstr.eu p: +42-0-721842854
-Maintainer of Linux kernel - Xilinx Microblaze
-Maintainer of Linux kernel - Xilinx Zynq ARM and ZynqMP/Versal ARM64 SoCs
-U-Boot custodian - Xilinx Microblaze/Zynq/ZynqMP/Versal/Versal NET SoCs
-TF-A maintainer - Xilinx ZynqMP/Versal/Versal NET SoCs
+2.34.1
+
