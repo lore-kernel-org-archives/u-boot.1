@@ -4,86 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF493FF885C
-	for <u-boot@archiver.kernel.org>; Sat, 25 Apr 2026 16:26:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1A0BFF885C
+	for <u-boot@archiver.kernel.org>; Sat, 25 Apr 2026 16:27:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 917E984255;
-	Sat, 25 Apr 2026 18:26:40 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 676F9843C3;
+	Sat, 25 Apr 2026 18:27:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=ifm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ZESVgbLC";
+	dkim=pass (2048-bit key; unprotected) header.d=ifm.com header.i=@ifm.com header.b="ht11/RbY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8146D84376; Sat, 25 Apr 2026 18:26:39 +0200 (CEST)
-Received: from mail-pl1-x636.google.com (mail-pl1-x636.google.com
- [IPv6:2607:f8b0:4864:20::636])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 594ED83FB0; Sat, 25 Apr 2026 18:27:44 +0200 (CEST)
+Received: from pp2023.ppsmtp.net (pp2023.ppsmtp.net [132.145.231.115])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 579FF84255
- for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 18:26:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 67BB48435B
+ for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 18:27:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=reject dis=none) header.from=ifm.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=visitorckw@gmail.com
-Received: by mail-pl1-x636.google.com with SMTP id
- d9443c01a7336-2b458ca2296so55264555ad.0
- for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 09:26:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1777134396; x=1777739196; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Q2q0wQgD6idkHesbZhFPTtv3SbZ/Lz5zwtb0AKbH9DU=;
- b=ZESVgbLCCyUg23Dci2ZoEt4jlIVR689Qy7/ItF43NVezcDaJFIX0f835DEvXApsLda
- AJ4V5b4lJwrBwm59uX5ZU5np7UYNnQGVOZPMv8LhRhQ2en0JkIgHsKgLduiHR7MP6P0w
- 4K/h3aX0g0vMJIucN7RGdYudLvJPGpaN1Zif23x6lcq3vD6Y1l91lLzcEZkUxDbarIAu
- ZZ3Bi07DYB6/lOG3zsR5Ix+zQylQE4/gtSyYT4ji8RNo0Hj3mvECh9GzND3Zlv+MBaix
- FnZZ6jvhRmQwujb4Nuf62OvgbBr3fNew7PCQu8Dk20BrO43PfLWXopRO34pPosmQEfM1
- hCkg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777134396; x=1777739196;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Q2q0wQgD6idkHesbZhFPTtv3SbZ/Lz5zwtb0AKbH9DU=;
- b=XP5gW7XA8wROPbDfx3+pg6MgEAgratsdZeTvugTqM98R9mUEfIbSja98uKZ6n4M9Ee
- 7NpziGkD2v1scUehaLs5KEUTOEzDqmXkJDymgpHY/Ak8HuXAlkA1yzsmnC21mj7kMgkx
- LPRJStpE+jHB++Bg6oYCp/J/mTbsgUy0lb0GqRS5xrz2Jqiuat9yp996IHd25vYfdKaH
- ddKNYR08oT+AlUaZTdAZmM9SkpPSophkmeXOMVcaAhd1j/99yrNYhptJmwXmtm215Ikr
- uNey0DlYplAucZ9VxYaYXuWCStkw15lIBwS4ey6vIORDLEaaLp+hHzKnb1IBhIBHVSAu
- lFug==
-X-Forwarded-Encrypted: i=1;
- AFNElJ+cQeCV5Dt/x66knd3GHDo0u5hJqqo98+TTTLdY1piRbE/k+OtGL1T5cg4pKMBo7GbOA1PruXg=@lists.denx.de
-X-Gm-Message-State: AOJu0Yxfn395IxGBDpbCfPr8XIRnK3cxjtTXJtL6xBmB733hGDi3S0Kc
- 55qmyJD3pSN9WmuXTrgpuT2XMAXDpgsSC34+Iq7kDNnikxMnc8RzCaLW
-X-Gm-Gg: AeBDietaonDjG09lQ11H0YYUkreoYi35t1rmSmqQ5vgPq6NsAJvBAdkTWDuX+xyJlcQ
- Vzj/A9DxpjUoycP5XMYPH0Z6zb9q3FacNFJLYx3uHjkGhQXtZi+RyOI1OAFGTyTIW4t8MGDqFq+
- d9c43uA5GqZdlkE+QFkTEd8D7tx9gH7C3ttY2tEd+cS94Xdu2xO2poNOPrAA8njEXP9uYffEa//
- 7BLZ+7gFcDKzDKsu9AUVfsTaSMrU2AxfPH+RjIIY39BtXAYZhgnUM3Ryoe94AjK/bJ2nJXSEtmA
- ZxcC1FWZjtRUacygjl9+uivPwZ4+I3adbvOCi0wYzNnyyLOdUHRyah1Y/aYAyhBDFyqD1x7xLGA
- ygoT7MYoBuZGDDLYrAxKq00JNdozyQZs4e2KB99hpONY/E7hnZ5xqcRwog5w1r4HRHKhFHJ80ov
- n+H03krP8ZWXgMd9Y+xV61Xf6l7FnQ/SaM5WTt4MfhoNthkdMA6JnuUs44dDfbXWQ6tS9CgXabD
- L8=
-X-Received: by 2002:a17:903:2ecc:b0:2b4:6022:bf8c with SMTP id
- d9443c01a7336-2b5f9f52984mr404001825ad.22.1777134395683; 
- Sat, 25 Apr 2026 09:26:35 -0700 (PDT)
-Received: from google.com (61-230-36-6.dynamic-ip.hinet.net. [61.230.36.6])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2b7bdd9c00csm58260565ad.50.2026.04.25.09.26.34
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 25 Apr 2026 09:26:35 -0700 (PDT)
-Date: Sun, 26 Apr 2026 00:26:32 +0800
-From: Kuan-Wei Chiu <visitorckw@gmail.com>
-To: Angelo Dureghello <angelo@kernel-space.org>
-Cc: trini@konsulko.com, u-boot@lists.denx.de, sjg@chromium.org
-Subject: Re: [PATCH 4/9] board: stmark2: remove old garbage
-Message-ID: <aezrOFUXtdXpxJHu@google.com>
-References: <20260416121431.20852-1-angelo@kernel-space.org>
- <20260416121431.20852-4-angelo@kernel-space.org>
+ spf=pass smtp.mailfrom=fedor.ross@ifm.com
+Received: from pps.filterd (pp2023.ppsmtp.internal [127.0.0.1])
+ by pp2023.ppsmtp.internal (8.18.1.7/8.18.1.7) with ESMTP id 63NBsBHD002802;
+ Thu, 23 Apr 2026 13:54:57 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ifm.com; h=cc
+ :content-transfer-encoding:content-type:date:from:message-id
+ :mime-version:subject:to; s=pps; bh=R+b4RDdrcH6jlGlvmP1Zalm75p3W
+ wjvoXirDbKld+tg=; b=ht11/RbYSTii2ZyWTrgXazD5y8m8Jjbe0delm2atN3SI
+ Dx5g+VWTNH+Ebu3GdEm5eMgjQUD7CyBAhcmXz0WbydCA0cz/81gVTdc9p3KfNZnq
+ r1wBob/JgB9E0sNjLBvkd/abFqYPafQ+Z3j5ojscdXTpaca5pJEuQIlQKObwI8Ht
+ KpYVWcNpwqIhAIbRgc6nW2pER5Z1GHrb7W3HKeG5sw+qAJX/Q2daJGPOZXO6hcKW
+ OoJ+SIldfW/NNrBJOQBPkWNpBIKVJ3mBRj9q/IscNm7I9MQvF5WxOp6SZhVZFrNw
+ O1xY6t/2i9j4AkcqrK2deRz2qhf2OpD3eniujzTUAQ==
+From: <fedor.ross@ifm.com>
+Subject: [PATCH 0/2] Add SPI NOR A/B switching support and detect A/B image
+ on MX95
+Date: Thu, 23 Apr 2026 13:54:41 +0200
+Message-ID: <20260423-b4-imx95_img_set_sel-v1-0-1681ea8b1507@ifm.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260416121431.20852-4-angelo@kernel-space.org>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAIEI6mkC/x2MQQqAIBAAvxJ7TjDZlPpKRFRutVAWGiGEf086z
+ GEOMy8E8kwB2uIFTw8HPl2Wqixg3ka3kmCbHZRUWqKSYkLBR2zqgY91CHRndmGQ9IQVWlIGcnp
+ 5Wjj+265P6QMsyBi/ZgAAAA==
+X-Change-ID: 20260420-b4-imx95_img_set_sel-74e6b414de27
+To: NXP i.MX U-Boot Team <uboot-imx@nxp.com>, <u-boot@lists.denx.de>
+CC: Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>,
+ Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>, Alice Guo
+ <alice.guo@nxp.com>, Ye Li <ye.li@nxp.com>,
+ Jacky Bai <ping.bai@nxp.com>, Marek Vasut <marex@nabladev.com>,
+ Rasmus Villemoes <ravi@prevas.dk>,
+ =?utf-8?q?Jo=C3=A3o_Paulo_Gon=C3=A7alves?= <joao.goncalves@toradex.com>,
+ Fedor Ross <fedor.ross@ifm.com>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1776945295; l=907;
+ i=fedor.ross@ifm.com; s=20251127; h=from:subject:message-id;
+ bh=2OiXwLvbw9vrE4PKnFbRiFen5o/sdf+wgDdlmGVyFpw=;
+ b=kLfdh+Gu6/J5WEO1fSXxcMcx/3QzizKOoGXWOzLWdZk8A6DzxAAdyEADLIVY9PS9HLD/HLMH/
+ f2caj2RmVplC0ClBSu/IsGPWKgESiI5hCsNs4T4OmU6umz9f4krx+2+
+X-Developer-Key: i=fedor.ross@ifm.com; a=ed25519;
+ pk=QXV2AUGQzqdu1EMmSJgH2f2Z1Mu1wSx7+5+dcQzQ864=
+X-Originating-IP: [172.19.129.122]
+X-ClientProxiedBy: DEESEX10.intra.ifm (172.26.140.25) To DEESEX10.intra.ifm
+ (172.26.140.25)
+X-Proofpoint-ID: SID=4dpjh9dc92 QID=4dpjh9dc92-1
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
+ definitions=2026-04-23_03,2026-04-21_02,2025-10-01_01
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,35 +88,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Angelo,
+This series adds support for SPI NOR A/B switching support on i.MX95 .
+Therefore, add a function to obtain selected boot image by reading out
+ROM data via SCMI. With this in place, it is also possible to implement
+the getprisec subcommand of bmode command to detect which of A/B image
+was booted.
 
-On Thu, Apr 16, 2026 at 02:14:26PM +0200, Angelo Dureghello wrote:
-> Remove old erroneous garbage.
-> 
-> Signed-off-by: Angelo Dureghello <angelo@kernel-space.org>
-> ---
->  include/configs/stmark2.h | 1 -
->  1 file changed, 1 deletion(-)
-> 
-> diff --git a/include/configs/stmark2.h b/include/configs/stmark2.h
-> index a7afbb3be1f..c1096398359 100644
-> --- a/include/configs/stmark2.h
-> +++ b/include/configs/stmark2.h
-> @@ -18,7 +18,6 @@
->  		"load mmc 0:1 ${loadaddr_ramfs} uRamfs\0"	\
->  	"kern_size=0x700000\0"					\
->  	"loadaddr=0x42000000\0"					\
-> -		"-(rootfs)\0"					\
+Signed-off-by: Fedor Ross <fedor.ross@ifm.com>
+---
+Fedor Ross (1):
+      imx9: scmi: soc: Add support for detecting primary/secondary bmode on MX95
 
-Since this line was introduced in patch 3, would it be possible to fold
-this change into that one?
+Marek Vasut (1):
+      imx: Add SPI NOR A/B switching support
 
-Regards,
-Kuan-Wei
+ arch/arm/mach-imx/Kconfig           |  2 +-
+ arch/arm/mach-imx/image-container.c | 10 ++++++++++
+ arch/arm/mach-imx/imx9/scmi/soc.c   | 18 ++++++++++++++++++
+ 3 files changed, 29 insertions(+), 1 deletion(-)
+---
+base-commit: e973fa5115e40f93bb1425db5b1cc1f3d9b8047d
+change-id: 20260420-b4-imx95_img_set_sel-74e6b414de27
 
->  	"loadaddr_ramfs=0x43000000\0"				\
->  	"update_uboot=loady ${loadaddr}; "			\
->  		"sf probe 0:1 50000000; "			\
-> -- 
-> 2.53.0
-> 
+Best regards,
+-- 
+Fedor Ross <fedor.ross@ifm.com>
+
