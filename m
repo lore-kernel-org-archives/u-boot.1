@@ -4,55 +4,127 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5CBCFF8860
-	for <u-boot@archiver.kernel.org>; Sat, 25 Apr 2026 18:05:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22202FF8860
+	for <u-boot@archiver.kernel.org>; Sat, 25 Apr 2026 18:05:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DF50C844E4;
-	Sat, 25 Apr 2026 20:02:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id 2B40A84485;
+	Sat, 25 Apr 2026 20:02:49 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=arm.com header.i=@arm.com header.b="d9oD9fTN";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20251104.gappssmtp.com header.i=@baylibre-com.20251104.gappssmtp.com header.b="L6YqTbMC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 12E9680087; Sat, 25 Apr 2026 19:01:54 +0200 (CEST)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id C86A5843F3
- for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 19:01:46 +0200 (CEST)
+ id 316CD84359; Sat, 25 Apr 2026 19:04:44 +0200 (CEST)
+Received: from mail-pj1-x1035.google.com (mail-pj1-x1035.google.com
+ [IPv6:2607:f8b0:4864:20::1035])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 3C53D84314
+ for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 19:04:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=arm.com
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=harsimransingh.tungal@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 385BD35A4;
- Fri, 24 Apr 2026 10:32:37 -0700 (PDT)
-Received: from e132995.arm.com (unknown [10.57.64.144])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 007363F7B4;
- Fri, 24 Apr 2026 10:32:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
- t=1777051962; bh=o25mbI5+VH/4QVNB7QXTgECO/6BXCMNh6anOaf4gBlA=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=d9oD9fTN330CcEhoZ4VfVxtcVVd8+fNWs002Hy7R7dO7I2OKGUJNVFV/S6s6RohAA
- pupmeCohV3hgbbe3mdLuM2QmrirG6wqX6PlBLGExYA8TpGY2SQKfcZZytTLCUOvapk
- d7Qs5xXZ5mxKs1EOyN2/CjkMqQLmzJpZwGN+BFH8=
-From: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
-To: u-boot@lists.denx.de
-Cc: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Hugues Kamba Mpiana <hugues.kambampiana@arm.com>,
- Simon Glass <sjg@chromium.org>,
- Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
-Subject: [PATCH 04/12] efi_loader: enable EFI runtime
- SetVariable()/GetVariable() using FF-A transport
-Date: Fri, 24 Apr 2026 18:31:43 +0100
-Message-Id: <20260424173151.371134-5-harsimransingh.tungal@arm.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20260424173151.371134-1-harsimransingh.tungal@arm.com>
-References: <20260424173151.371134-1-harsimransingh.tungal@arm.com>
+ spf=pass smtp.mailfrom=dlechner@baylibre.com
+Received: by mail-pj1-x1035.google.com with SMTP id
+ 98e67ed59e1d1-35da9692ec3so7666966a91.1
+ for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 10:04:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20251104.gappssmtp.com; s=20251104; t=1777136679; x=1777741479;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=LP8RZxXgehMgGibw3rWAAAb+E8kNyuXwR2Bf7xWWQ4U=;
+ b=L6YqTbMCsHZNV6KCVMXqbZ5q/kVyp7xctHwI1vzdsTF/NcAi/8IrI2XeMv1Px+lvje
+ 9gHPEAVMrV+uTYhaGBau3b9zAp4/SyHaDpoY/0be/SyIeIWmm936oJ7qW8/HaonGRcT0
+ 9t9IvRXUBnFtClFr2a5MxKM5paHvbeAgVDXi684jSN1VNTPbquKbgwbctcYIlm7WXWly
+ IZIXxtTrOaLcedb8vECMwPDSXGlcm38r0L1xPvki5naBuMVk7sRIVLHY6EA+1+z5KdcC
+ 34h8CsOHP0mh3ag1o3KpATBcMtcrm12Yj/DRxuZFycXrrJGPNHUkKsCk7ot7xoeVAFW5
+ 9afw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1777136679; x=1777741479;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=LP8RZxXgehMgGibw3rWAAAb+E8kNyuXwR2Bf7xWWQ4U=;
+ b=Sd4V7FTwB4L5m+2f9XSoH2av9u59N2uxssqx2BS19y1dCcpyJ2gVCkV9uIEbB+ZwMr
+ Xl50H9oYWF+JtxJE33TdHSxt9HuPWjgkuvM0RkOBZpJqbe4ThIAGgDU/1mG2qlzIWjhS
+ 6NSixufBKVnKPOCw6XpMc0vffipUFom89Wa/GAM+Ew1zmkSbRRTZe5RMYaJ6xhG2YdCZ
+ kg5H8adbAKflUtgYYlF5+sXbT/tyWNbGckrYB71kmnX+SAhy6Fcr9mT5HE31dgTmk79v
+ WJ071zPRXPo5wDXhZqmDCcFuxG/SO8Tf9vZfrEN5d1la8xBr7qXwAN8igTy/5o+cJc18
+ szzA==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ/mxYuLsOXxU2WOGFRdyvBPCIts2o8EAo8nMpkA3WmUHbfRVYu9eZYR7Dqyxar2dCPaq8LynS8=@lists.denx.de
+X-Gm-Message-State: AOJu0YwzVoSr/rdOT5IMVD/xEf5hQo/C5ZfSqkk8P23xUaWxmuvW98tH
+ bTrFKoI3OuMwlS7wR3oGK5mK5E7eo8dADfRQwG3d0fvfBwwiHtNrWEw+I5yHkhBA11KDdOgZGi0
+ k1c3u
+X-Gm-Gg: AeBDieuXZB2ZJw+kL2nWM2Ogb1Bx9ngez0Lm2Uknq9HFhWn7ZMk158rTIbRH8a0EMnq
+ slZkI8YfD31KUzORCUt3AvBUHu0+cUM2jNMY/5ApV6xGcjN7vkB2hkIFWj0ptEZFP9quZaa1fI2
+ wKM/c24shIlICqbZMFxfxUTWvN4JiUlyBNPZq7P/lvLpkynnhlyrylyHr/m+FyU6AunDbLuUzlX
+ nBGp7SJF8B/IX5VA9YQDqZVX6v8p2t1sctnzxZ57CF2IzoKXBRzvmgIrqDQEr7+rY5z8cSp+PlV
+ aGI+fzt/rjkIyQW9pfcnro7ruGd66K3QV7vV8wQ7YBtWOx3RCKWZQJ7qlpRypOMla7aZO4VehL7
+ 7v+GGN64uY1m0KhwJt+nlud7mvh9a7auUQxw7CGAYvbE5T9IsAg7bzqRMsVSkJfeLXHrHc46e9J
+ nsWtEUgix9vqpTsJv+luarvLohvzUjahyhCS3b2zKpSn1mdYdvJ12mS7MCgCbDQ2wsnvCIp0TA4
+ ikHyszNqE4P
+X-Received: by 2002:a05:690c:c50d:b0:7ba:f858:1ece with SMTP id
+ 00721157ae682-7baf8581f61mr162481097b3.39.1776955277598; 
+ Thu, 23 Apr 2026 07:41:17 -0700 (PDT)
+Received: from ?IPV6:2600:8803:e7e4:500:3cc7:689f:be44:d58a?
+ ([2600:8803:e7e4:500:3cc7:689f:be44:d58a])
+ by smtp.gmail.com with ESMTPSA id
+ 00721157ae682-7b9ee8be7b4sm80437577b3.13.2026.04.23.07.41.15
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 23 Apr 2026 07:41:17 -0700 (PDT)
+Message-ID: <46a97266-620e-41ca-972a-936a08904d5f@baylibre.com>
+Date: Thu, 23 Apr 2026 09:41:14 -0500
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 5/9] net: phy: air_phy_lib: Factorize BuckPBus register
+To: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de
+Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
+ Jerome Forissier <jerome.forissier@arm.com>, Tom Rini <trini@konsulko.com>,
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Robert Marko <robert.marko@sartura.hr>, Simon Glass <sjg@chromium.org>,
+ Yao Zi <me@ziyao.cc>, Quentin Schulz <quentin.schulz@cherry.de>,
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ "Lucien.Jheng" <lucienzx159@gmail.com>, Weijie Gao
+ <weijie.gao@mediatek.com>, Romain Gantois <romain.gantois@bootlin.com>,
+ Siddharth Vadapalli <s-vadapalli@ti.com>,
+ Yanqing Wang <ot_yanqing.wang@mediatek.com>, Beiyan Yun <root@infi.wang>,
+ Ryder Lee <ryder.lee@mediatek.com>, Chunfeng Yun
+ <chunfeng.yun@mediatek.com>,
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Kory Maincent <kory.maincent@bootlin.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Kuan-Wei Chiu <visitorckw@gmail.com>, Raymond Mao
+ <raymond.mao@riscstar.com>, Peng Fan <peng.fan@nxp.com>,
+ Stefan Roese <stefan.roese@mailbox.org>,
+ Philip Molloy <philip.molloy@analog.com>,
+ fanyi zhang <fanyi.zhang@mediatek.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Kever Yang <kever.yang@rock-chips.com>, Marek Vasut
+ <marek.vasut@mailbox.org>, Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Heiko Stuebner <heiko@sntech.de>, Samuel Holland
+ <samuel.holland@sifive.com>,
+ Christophe Roullier <christophe.roullier@foss.st.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Chris-QJ Chen <chris-qj.chen@mediatek.com>,
+ Macpaul Lin <macpaul.lin@mediatek.com>,
+ Sam Protsenko <semen.protsenko@linaro.org>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Sky Huang <SkyLake.Huang@mediatek.com>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>, Tommy Shih
+ <tommy.shih@airoha.com>, Kevin-KW Huang <kevin-kw.huang@airoha.com>
+References: <20260423-add-ethernet-support-for-genio-520-720-v1-0-47ca918e0017@baylibre.com>
+ <20260423-add-ethernet-support-for-genio-520-720-v1-5-47ca918e0017@baylibre.com>
+Content-Language: en-US
+From: David Lechner <dlechner@baylibre.com>
+In-Reply-To: <20260423-add-ethernet-support-for-genio-520-720-v1-5-47ca918e0017@baylibre.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-Mailman-Approved-At: Sat, 25 Apr 2026 20:02:44 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -70,417 +142,240 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Route EFI runtime variable APIs through FF-A MM communication
+On 4/23/26 8:25 AM, Julien Stephan wrote:
+> In preparation of Airoha AN8801R PHY support, move the BuckPBus
+> register accessors and definitions, present in air_en8811h driver,
+> into the Airoha PHY shared code (air_phy_lib), so they will be usable
+> by the new driver without duplicating them.
+> Also, update air_en8811h driver to use the new function names.
+> 
+> Adapted from [1].
+> 
+> [1]: https://lore.kernel.org/all/20260326-add-airoha-an8801-support-v2-2-1a42d6b6050f@collabora.com/
 
-This patch implements full EFI Runtime Variable Services (GetVariable,
-SetVariable, GetNextVariableName, and QueryVariableInfo) using the
-FF-A/MM communication backend. Once ExitBootServices() has been invoked,
-all variable operations now use the runtime-safe FF-A transport instead
-of the boot-time communication paths.
+This can be written as a tag:
 
-Key changes:
-============
 
- - Add runtime-safe variable property handling via FF-A MM SP.
- - Add runtime versions of variable access and property operations.
- - Replace all standard memory operations with EFI-runtime-safe variants.
+Link: https://lore.kernel.org/all/20260326-add-airoha-an8801-support-v2-2-1a42d6b6050f@collabora.com/ [1]
+> 
+> Signed-off-by: Julien Stephan <jstephan@baylibre.com>
+> ---
+>  MAINTAINERS                          |   2 +-
+>  drivers/net/phy/airoha/Kconfig       |   6 +
+>  drivers/net/phy/airoha/Makefile      |   1 +
+>  drivers/net/phy/airoha/air_en8811.c  | 276 +++++++----------------------------
+>  drivers/net/phy/airoha/air_phy_lib.c | 221 ++++++++++++++++++++++++++++
+>  drivers/net/phy/airoha/air_phy_lib.h |  39 +++++
+>  6 files changed, 320 insertions(+), 225 deletions(-)
+> 
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index 40ba3542ca3..4bda6b9e8c4 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -61,7 +61,7 @@ F:	lib/acpi/
+>  AIROHA PHY
+>  M:	Tommy Shih <tommy.shih@airoha.com>
+>  S:	Maintained
+> -F:	drivers/net/phy/airoha/air_en8811.c
+> +F:	drivers/net/phy/airoha/
+>  
+>  ALIST
+>  M:	Simon Glass <sjg@chromium.org>
+> diff --git a/drivers/net/phy/airoha/Kconfig b/drivers/net/phy/airoha/Kconfig
+> index da8747939e3..2a2f4f05bb2 100644
+> --- a/drivers/net/phy/airoha/Kconfig
+> +++ b/drivers/net/phy/airoha/Kconfig
+> @@ -7,6 +7,12 @@ config PHY_AIROHA_EN8811
+>  	depends on PHY_AIROHA
+>  	depends on SUPPORTS_FW_LOADER
+>  	select FW_LOADER
+> +	select PHY_AIRONA_PHYLIB
+>  	help
+>  	  AIROHA EN8811H supported.
+>  	  AIROHA AN8811HB supported.
+> +
+> +config PHY_AIRONA_PHYLIB
+> +	tristate
+> +	help
+> +	  Airoha Ethernet PHY common library
+> diff --git a/drivers/net/phy/airoha/Makefile b/drivers/net/phy/airoha/Makefile
+> index 84d23b19ab0..cbf123986f2 100644
+> --- a/drivers/net/phy/airoha/Makefile
+> +++ b/drivers/net/phy/airoha/Makefile
+> @@ -1,3 +1,4 @@
+>  # SPDX-License-Identifier: GPL-2.0
+>  
+>  obj-$(CONFIG_PHY_AIROHA_EN8811) += air_en8811.o
+> +obj-$(CONFIG_PHY_AIRONA_PHYLIB) += air_phy_lib.o
+> diff --git a/drivers/net/phy/airoha/air_en8811.c b/drivers/net/phy/airoha/air_en8811.c
+> index 0b974472732..04b7282072d 100644
+> --- a/drivers/net/phy/airoha/air_en8811.c
+> +++ b/drivers/net/phy/airoha/air_en8811.c
 
-Signed-off-by: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
----
- lib/charset.c                     |   2 +-
- lib/efi_loader/efi_variable_tee.c | 322 +++++++++++++++++++++++++++++-
- 2 files changed, 318 insertions(+), 6 deletions(-)
+...
 
-diff --git a/lib/charset.c b/lib/charset.c
-index 182c92a50c4..738ad1352de 100644
---- a/lib/charset.c
-+++ b/lib/charset.c
-@@ -407,7 +407,7 @@ size_t __efi_runtime u16_strnlen(const u16 *in, size_t count)
- 	return i;
- }
- 
--size_t u16_strsize(const void *in)
-+size_t __efi_runtime u16_strsize(const void *in)
- {
- 	return (u16_strlen(in) + 1) * sizeof(u16);
- }
-diff --git a/lib/efi_loader/efi_variable_tee.c b/lib/efi_loader/efi_variable_tee.c
-index e4d97dc55ab..30687c21b8e 100644
---- a/lib/efi_loader/efi_variable_tee.c
-+++ b/lib/efi_loader/efi_variable_tee.c
-@@ -859,6 +859,38 @@ out:
- 	return ret;
- }
- 
-+static efi_status_t __efi_runtime set_property_int_runtime(const u16 *variable_name,
-+							   efi_uintn_t name_size,
-+							   const efi_guid_t *vendor,
-+							   struct var_check_property *var_property)
-+{
-+	struct smm_variable_var_check_property *smm_property;
-+	efi_uintn_t payload_size;
-+	u8 *comm_buf = NULL;
-+	efi_status_t ret;
-+
-+	payload_size = sizeof(*smm_property) + name_size;
-+	if (payload_size > max_payload_size) {
-+		ret = EFI_INVALID_PARAMETER;
-+		return ret;
-+	}
-+	comm_buf = setup_mm_hdr((void **)&smm_property, payload_size,
-+				SMM_VARIABLE_FUNCTION_VAR_CHECK_VARIABLE_PROPERTY_SET,
-+				&ret);
-+	if (!comm_buf)
-+		return ret;
-+
-+	efi_memcpy_runtime(&smm_property->guid, vendor, sizeof(*vendor));
-+	smm_property->name_size = name_size;
-+	efi_memcpy_runtime(&smm_property->property, var_property,
-+			   sizeof(smm_property->property));
-+	efi_memcpy_runtime(smm_property->name, variable_name, name_size);
-+
-+	ret = mm_communicate_runtime(comm_buf, payload_size);
-+
-+	return ret;
-+}
-+
- static efi_status_t get_property_int(const u16 *variable_name,
- 				     efi_uintn_t name_size,
- 				     const efi_guid_t *vendor,
-@@ -904,6 +936,49 @@ out:
- 	return ret;
- }
- 
-+static efi_status_t __efi_runtime get_property_int_runtime(const u16 *variable_name,
-+							   efi_uintn_t name_size,
-+							   const efi_guid_t *vendor,
-+							   struct var_check_property *var_property)
-+{
-+	struct smm_variable_var_check_property *smm_property;
-+	efi_uintn_t payload_size;
-+	u8 *comm_buf = NULL;
-+	efi_status_t ret;
-+
-+	efi_memset_runtime(var_property, 0, sizeof(*var_property));
-+	payload_size = sizeof(*smm_property) + name_size;
-+	if (payload_size > max_payload_size) {
-+		ret = EFI_INVALID_PARAMETER;
-+		return ret;
-+	}
-+	comm_buf = setup_mm_hdr((void **)&smm_property, payload_size,
-+				SMM_VARIABLE_FUNCTION_VAR_CHECK_VARIABLE_PROPERTY_GET,
-+				&ret);
-+	if (!comm_buf)
-+		return ret;
-+
-+	efi_memcpy_runtime(&smm_property->guid, vendor, sizeof(smm_property->guid));
-+	smm_property->name_size = name_size;
-+	efi_memcpy_runtime(smm_property->name, variable_name, name_size);
-+
-+	ret = mm_communicate_runtime(comm_buf, payload_size);
-+	/*
-+	 * Currently only R/O property is supported in StMM.
-+	 * Variables that are not set to R/O will not set the property in StMM
-+	 * and the call will return EFI_NOT_FOUND. We are setting the
-+	 * properties to 0x0 so checking against that is enough for the
-+	 * EFI_NOT_FOUND case.
-+	 */
-+	if (ret == EFI_NOT_FOUND)
-+		ret = EFI_SUCCESS;
-+	if (ret != EFI_SUCCESS)
-+		return ret;
-+	efi_memcpy_runtime(var_property, &smm_property->property, sizeof(*var_property));
-+
-+	return ret;
-+}
-+
- efi_status_t efi_get_variable_int(const u16 *variable_name,
- 				  const efi_guid_t *vendor,
- 				  u32 *attributes, efi_uintn_t *data_size,
-@@ -991,6 +1066,92 @@ out:
- 	return ret;
- }
- 
-+efi_status_t __efi_runtime efi_get_variable_runtime(u16 *variable_name,
-+						    const efi_guid_t *vendor,
-+						    u32 *attributes,
-+						    efi_uintn_t *data_size,
-+						    void *data)
-+{
-+	struct var_check_property var_property;
-+	struct smm_variable_access *var_acc;
-+	efi_uintn_t payload_size;
-+	efi_uintn_t name_size;
-+	efi_uintn_t tmp_dsize;
-+	u8 *comm_buf = NULL;
-+	efi_status_t ret, tmp;
-+
-+	if (!variable_name || !vendor || !data_size) {
-+		ret = EFI_INVALID_PARAMETER;
-+		return ret;
-+	}
-+
-+	/* Check payload size */
-+	name_size = u16_strsize(variable_name);
-+	if (name_size > max_payload_size - MM_VARIABLE_ACCESS_HEADER_SIZE) {
-+		ret = EFI_INVALID_PARAMETER;
-+		return ret;
-+	}
-+
-+	/* Trim output buffer size */
-+	tmp_dsize = *data_size;
-+	if (name_size + tmp_dsize >
-+			max_payload_size - MM_VARIABLE_ACCESS_HEADER_SIZE) {
-+		tmp_dsize = max_payload_size -
-+				MM_VARIABLE_ACCESS_HEADER_SIZE -
-+				name_size;
-+	}
-+
-+	/* Get communication buffer and initialize header */
-+	payload_size = MM_VARIABLE_ACCESS_HEADER_SIZE + name_size + tmp_dsize;
-+	comm_buf = setup_mm_hdr((void **)&var_acc, payload_size,
-+				SMM_VARIABLE_FUNCTION_GET_VARIABLE, &ret);
-+	if (!comm_buf)
-+		return ret;
-+
-+	/* Fill in contents */
-+	efi_memcpy_runtime(&var_acc->guid, vendor, sizeof(var_acc->guid));
-+	var_acc->data_size = tmp_dsize;
-+	var_acc->name_size = name_size;
-+	var_acc->attr = attributes ? *attributes : 0;
-+	efi_memcpy_runtime(var_acc->name, variable_name, name_size);
-+
-+	/* Communicate */
-+	ret = mm_communicate_runtime(comm_buf, payload_size);
-+	if (ret != EFI_SUCCESS && ret != EFI_BUFFER_TOO_SMALL)
-+		return ret;
-+
-+	/* Update with reported data size for trimmed case */
-+	*data_size = var_acc->data_size;
-+
-+	/* Copy the data if ret is EFI_SUCCESS  */
-+	if (ret == EFI_SUCCESS) {
-+		if (data)
-+			efi_memcpy_runtime(data, (u8 *)var_acc->name + var_acc->name_size,
-+					   var_acc->data_size);
-+		else
-+			ret = EFI_INVALID_PARAMETER;
-+	}
-+
-+	/*
-+	 * UEFI > 2.7 needs the attributes set even if the buffer is
-+	 * smaller
-+	 */
-+	if (attributes) {
-+		tmp = get_property_int_runtime(variable_name, name_size, vendor,
-+					       &var_property);
-+		if (tmp != EFI_SUCCESS) {
-+			ret = tmp;
-+			return ret;
-+		}
-+		*attributes = var_acc->attr;
-+		if (var_property.property &
-+		    VAR_CHECK_VARIABLE_PROPERTY_READ_ONLY)
-+			*attributes |= EFI_VARIABLE_READ_ONLY;
-+	}
-+
-+	return ret;
-+}
-+
- efi_status_t efi_get_next_variable_name_int(efi_uintn_t *variable_name_size,
- 					    u16 *variable_name,
- 					    efi_guid_t *guid)
-@@ -1055,6 +1216,68 @@ out:
- 	return ret;
- }
- 
-+efi_status_t __efi_runtime efi_get_next_variable_name_runtime(efi_uintn_t *variable_name_size,
-+							      u16 *variable_name,
-+							      efi_guid_t *guid)
-+{
-+	struct smm_variable_getnext *var_getnext;
-+	efi_uintn_t payload_size;
-+	efi_uintn_t out_name_size;
-+	efi_uintn_t in_name_size;
-+	u8 *comm_buf = NULL;
-+	efi_status_t ret;
-+
-+	if (!variable_name_size || !variable_name || !guid) {
-+		ret = EFI_INVALID_PARAMETER;
-+		return ret;
-+	}
-+
-+	out_name_size = *variable_name_size;
-+	in_name_size = u16_strsize(variable_name);
-+
-+	if (out_name_size < in_name_size) {
-+		ret = EFI_INVALID_PARAMETER;
-+		return ret;
-+	}
-+
-+	if (in_name_size > max_payload_size - MM_VARIABLE_GET_NEXT_HEADER_SIZE) {
-+		ret = EFI_INVALID_PARAMETER;
-+		return ret;
-+	}
-+
-+	/* Trim output buffer size */
-+	if (out_name_size > max_payload_size - MM_VARIABLE_GET_NEXT_HEADER_SIZE)
-+		out_name_size = max_payload_size - MM_VARIABLE_GET_NEXT_HEADER_SIZE;
-+
-+	payload_size = MM_VARIABLE_GET_NEXT_HEADER_SIZE + out_name_size;
-+	comm_buf = setup_mm_hdr((void **)&var_getnext, payload_size,
-+				SMM_VARIABLE_FUNCTION_GET_NEXT_VARIABLE_NAME,
-+				&ret);
-+	if (!comm_buf)
-+		return ret;
-+
-+	/* Fill in contents */
-+	efi_memcpy_runtime(&var_getnext->guid, guid, sizeof(*guid));
-+	var_getnext->name_size = out_name_size;
-+	efi_memcpy_runtime(var_getnext->name, variable_name, in_name_size);
-+	efi_memset_runtime((u8 *)var_getnext->name + in_name_size, 0x0,
-+			   out_name_size - in_name_size);
-+
-+	/* Communicate */
-+	ret = mm_communicate_runtime(comm_buf, payload_size);
-+	if (ret == EFI_SUCCESS || ret == EFI_BUFFER_TOO_SMALL) {
-+		/* Update with reported data size for trimmed case */
-+		*variable_name_size = var_getnext->name_size;
-+	}
-+	if (ret != EFI_SUCCESS)
-+		return ret;
-+
-+	efi_memcpy_runtime(guid, &var_getnext->guid, sizeof(*guid));
-+	efi_memcpy_runtime(variable_name, var_getnext->name, var_getnext->name_size);
-+
-+	return ret;
-+}
-+
- efi_status_t efi_set_variable_int(const u16 *variable_name,
- 				  const efi_guid_t *vendor, u32 attributes,
- 				  efi_uintn_t data_size, const void *data,
-@@ -1197,11 +1420,11 @@ out:
-  *
-  * @attributes:				bitmask to select variables to be
-  *					queried
-- * @maximum_variable_storage_size:	maximum size of storage area for the
-+ * @max_variable_storage_size:		maximum size of storage area for the
-  *					selected variable types
-- * @remaining_variable_storage_size:	remaining size of storage are for the
-+ * @remain_variable_storage_size:	remaining size of storage are for the
-  *					selected variable types
-- * @maximum_variable_size:		maximum size of a variable of the
-+ * @max_variable_size:			maximum size of a variable of the
-  *					selected type
-  * Return:				status code
-  */
-@@ -1210,7 +1433,33 @@ efi_query_variable_info_runtime(u32 attributes, u64 *max_variable_storage_size,
- 				u64 *remain_variable_storage_size,
- 				u64 *max_variable_size)
- {
--	return EFI_UNSUPPORTED;
-+	struct smm_variable_query_info *mm_query_info;
-+	efi_uintn_t payload_size;
-+	efi_status_t ret;
-+	u8 *comm_buf;
-+
-+	if (!max_variable_storage_size ||
-+	    !remain_variable_storage_size ||
-+	    !max_variable_size || !attributes)
-+		return EFI_INVALID_PARAMETER;
-+
-+	payload_size = sizeof(*mm_query_info);
-+	comm_buf = setup_mm_hdr((void **)&mm_query_info, payload_size,
-+				SMM_VARIABLE_FUNCTION_QUERY_VARIABLE_INFO,
-+				&ret);
-+	if (!comm_buf)
-+		return ret;
-+
-+	mm_query_info->attr = attributes;
-+	ret = mm_communicate_runtime(comm_buf, payload_size);
-+	if (ret != EFI_SUCCESS)
-+		return ret;
-+	*max_variable_storage_size = mm_query_info->max_variable_storage;
-+	*remain_variable_storage_size =
-+			mm_query_info->remaining_variable_storage;
-+	*max_variable_size = mm_query_info->max_variable_size;
-+
-+	return ret;
- }
- 
- /**
-@@ -1228,7 +1477,70 @@ efi_set_variable_runtime(u16 *variable_name, const efi_guid_t *guid,
- 			 u32 attributes, efi_uintn_t data_size,
- 			 const void *data)
- {
--	return EFI_UNSUPPORTED;
-+	efi_status_t ret, mm_communicate_ret = EFI_SUCCESS;
-+	struct var_check_property var_property;
-+	struct smm_variable_access *var_acc;
-+	efi_uintn_t payload_size;
-+	efi_uintn_t name_size;
-+	u8 *comm_buf = NULL;
-+	bool ro;
-+
-+	if (!variable_name || variable_name[0] == 0 || !guid)
-+		return EFI_INVALID_PARAMETER;
-+
-+	if (data_size > 0 && !data)
-+		return EFI_INVALID_PARAMETER;
-+
-+	/* Check payload size */
-+	name_size = u16_strsize(variable_name);
-+	payload_size = MM_VARIABLE_ACCESS_HEADER_SIZE + name_size + data_size;
-+	if (payload_size > max_payload_size)
-+		return EFI_INVALID_PARAMETER;
-+
-+	ro = !!(attributes & EFI_VARIABLE_READ_ONLY);
-+	attributes &= EFI_VARIABLE_MASK;
-+
-+	ret = get_property_int_runtime(variable_name, name_size, guid,
-+				       &var_property);
-+	if (ret != EFI_SUCCESS)
-+		return ret;
-+
-+	/*
-+	 * Allocate the buffer early, before switching to RW (if needed)
-+	 * so we won't need to account for any failures in reading/setting
-+	 * the properties, if the allocation fails
-+	 */
-+	comm_buf = setup_mm_hdr((void **)&var_acc, payload_size,
-+				SMM_VARIABLE_FUNCTION_SET_VARIABLE, &ret);
-+	if (!comm_buf)
-+		return ret;
-+
-+	if (var_property.property & VAR_CHECK_VARIABLE_PROPERTY_READ_ONLY)
-+		return EFI_WRITE_PROTECTED;
-+
-+	/* Fill in contents */
-+	efi_memcpy_runtime(&var_acc->guid, guid, sizeof(*guid));
-+	var_acc->data_size = data_size;
-+	var_acc->name_size = name_size;
-+	var_acc->attr = attributes;
-+	efi_memcpy_runtime(var_acc->name, variable_name, name_size);
-+	efi_memcpy_runtime((u8 *)var_acc->name + name_size, data, data_size);
-+
-+	/* Communicate */
-+	ret = mm_communicate_runtime(comm_buf, payload_size);
-+	if (ret != EFI_SUCCESS)
-+		mm_communicate_ret = ret;
-+
-+	if (ro && !(var_property.property & VAR_CHECK_VARIABLE_PROPERTY_READ_ONLY)) {
-+		var_property.revision = VAR_CHECK_VARIABLE_PROPERTY_REVISION;
-+		var_property.property |= VAR_CHECK_VARIABLE_PROPERTY_READ_ONLY;
-+		var_property.attributes = attributes;
-+		var_property.minsize = 1;
-+		var_property.maxsize = var_acc->data_size;
-+		ret = set_property_int_runtime(variable_name, name_size, guid, &var_property);
-+	}
-+
-+	return (mm_communicate_ret == EFI_SUCCESS) ? ret : mm_communicate_ret;
- }
- 
- /**
--- 
-2.34.1
+> @@ -887,12 +725,12 @@ static int en8811h_restart_mcu(struct phy_device *phydev)
+>  	if (ret < 0)
+>  		return ret;
+>  
+> -	ret = air_buckpbus_reg_write(phydev, EN8811H_FW_CTRL_1,
+> -				     EN8811H_FW_CTRL_1_START);
+> +	ret = air_phy_buckpbus_reg_write(phydev, EN8811H_FW_CTRL_1,
+> +					 EN8811H_FW_CTRL_1_START);
+>  	if (ret < 0)
+>  		return ret;
+>  
+> -	return air_buckpbus_reg_write(phydev, EN8811H_FW_CTRL_1,
+> +	return air_phy_buckpbus_reg_write(phydev, EN8811H_FW_CTRL_1,
+>  				      EN8811H_FW_CTRL_1_FINISH);
+
+Need to fix alignment?
+
+>  }
+>  
+> @@ -1091,8 +929,8 @@ static int en8811h_config(struct phy_device *phydev)
+>  		pbus_value &= ~EN8811H_POLARITY_TX_NORMAL;
+>  	else
+>  		pbus_value |=  EN8811H_POLARITY_TX_NORMAL;
+> -	ret = air_buckpbus_reg_modify(phydev, EN8811H_POLARITY,
+> -				      EN8811H_POLARITY_RX_REVERSE |
+> +	ret = air_phy_buckpbus_reg_modify(phydev, EN8811H_POLARITY,
+> +					  EN8811H_POLARITY_RX_REVERSE |
+>  				      EN8811H_POLARITY_TX_NORMAL,
+>  				      pbus_value);
+
+And here?
+
+>  	if (ret < 0)
+> @@ -1142,12 +980,12 @@ static int an8811hb_config(struct phy_device *phydev)
+>  		priv->mcu_needs_restart = true;
+>  	}
+>  
+> -	ret = air_buckpbus_reg_read(phydev, AN8811HB_PRO_ID, &pbus_value);
+> +	ret = air_phy_buckpbus_reg_read(phydev, AN8811HB_PRO_ID, &pbus_value);
+>  	if (ret < 0)
+>  		return ret;
+>  	priv->pro_id = (pbus_value & AN8811HB_PRO_ID_VERSION) + 1;
+>  
+> -	ret = air_buckpbus_reg_read(phydev, AN8811HB_HWTRAP2, &pbus_value);
+> +	ret = air_phy_buckpbus_reg_read(phydev, AN8811HB_HWTRAP2, &pbus_value);
+>  	if (ret < 0)
+>  		return ret;
+>  	priv->pkg_sel = (pbus_value & AN8811HB_HWTRAP2_PKG) >> 12;
+> @@ -1163,8 +1001,8 @@ static int an8811hb_config(struct phy_device *phydev)
+>  		pbus_value |= AN8811HB_RX_POLARITY_NORMAL;
+>  
+>  	debug("1 pbus_value 0x%x\n", pbus_value);
+> -	ret = air_buckpbus_reg_modify(phydev, AN8811HB_RX_POLARITY,
+> -				      AN8811HB_RX_POLARITY_NORMAL, pbus_value);
+> +	ret = air_phy_buckpbus_reg_modify(phydev, AN8811HB_RX_POLARITY,
+> +					  AN8811HB_RX_POLARITY_NORMAL, pbus_value);
+>  	if (ret < 0)
+>  		return ret;
+>  
+> @@ -1175,34 +1013,34 @@ static int an8811hb_config(struct phy_device *phydev)
+>  		pbus_value |= AN8811HB_TX_POLARITY_NORMAL;
+>  
+>  	debug("2 pbus_value 0x%x\n", pbus_value);
+> -	ret = air_buckpbus_reg_modify(phydev, AN8811HB_TX_POLARITY,
+> -				      AN8811HB_TX_POLARITY_NORMAL, pbus_value);
+> +	ret = air_phy_buckpbus_reg_modify(phydev, AN8811HB_TX_POLARITY,
+> +					  AN8811HB_TX_POLARITY_NORMAL, pbus_value);
+>  	if (ret < 0)
+>  		return ret;
+>  
+>  	/* Configure led gpio pins as output */
+>  	if (priv->pkg_sel) {
+> -		ret = air_buckpbus_reg_modify(phydev, AN8811HB_GPIO_OUTPUT,
+> -					      AN8811HB_GPIO_OUTPUT_MASK,
+> +		ret = air_phy_buckpbus_reg_modify(phydev, AN8811HB_GPIO_OUTPUT,
+> +						  AN8811HB_GPIO_OUTPUT_MASK,
+>  					      AN8811HB_GPIO_OUTPUT_0115);
+>  		if (ret < 0)
+>  			return ret;
+> -		ret = air_buckpbus_reg_modify(phydev, AN8811HB_GPIO_SEL_1,
+> -					      AN8811HB_GPIO_SEL_1_0_MASK |
+> +		ret = air_phy_buckpbus_reg_modify(phydev, AN8811HB_GPIO_SEL_1,
+> +						  AN8811HB_GPIO_SEL_1_0_MASK |
+>  					      AN8811HB_GPIO_SEL_1_1_MASK,
+>  					      AN8811HB_GPIO_SEL_1_0 |
+>  					      AN8811HB_GPIO_SEL_1_1);
+
+and here, and below...
+
+>  		if (ret < 0)
+>  			return ret;
+>  
+> -		ret = air_buckpbus_reg_modify(phydev, AN8811HB_GPIO_SEL_2,
+> -					      AN8811HB_GPIO_SEL_2_15_MASK,
+> +		ret = air_phy_buckpbus_reg_modify(phydev, AN8811HB_GPIO_SEL_2,
+> +						  AN8811HB_GPIO_SEL_2_15_MASK,
+>  					      AN8811HB_GPIO_SEL_2_15);
+>  		if (ret < 0)
+>  			return ret;
+>  	} else {
+> -		ret = air_buckpbus_reg_modify(phydev, AN8811HB_GPIO_OUTPUT,
+> -					      AN8811HB_GPIO_OUTPUT_345,
+> +		ret = air_phy_buckpbus_reg_modify(phydev, AN8811HB_GPIO_OUTPUT,
+> +						  AN8811HB_GPIO_OUTPUT_345,
+>  					      AN8811HB_GPIO_OUTPUT_345);
+>  		if (ret < 0)
+>  			return ret;
+> @@ -1373,16 +1211,6 @@ static int en8811h_probe(struct phy_device *phydev)
+>  	return 0;
+>  }
+>  
+> -static int air_phy_read_page(struct phy_device *phydev)
+> -{
+> -	return phy_read(phydev, MDIO_DEVAD_NONE, AIR_EXT_PAGE_ACCESS);
+> -}
+> -
+> -static int air_phy_write_page(struct phy_device *phydev, int page)
+> -{
+> -	return phy_write(phydev, MDIO_DEVAD_NONE, AIR_EXT_PAGE_ACCESS, page);
+> -}
+> -
+>  U_BOOT_PHY_DRIVER(en8811h) = {
+>  	.name = "Airoha EN8811H",
+>  	.uid = EN8811H_PHY_ID,
+> diff --git a/drivers/net/phy/airoha/air_phy_lib.c b/drivers/net/phy/airoha/air_phy_lib.c
+> new file mode 100644
+> index 00000000000..133cba55bbf
+> --- /dev/null
+> +++ b/drivers/net/phy/airoha/air_phy_lib.c
+> @@ -0,0 +1,221 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * Airoha Ethernet PHY common library
+> + *
+> + * Copyright (C) 2026 Airoha Technology Corp.
+> + * Copyright (C) 2026 Collabora Ltd.
+> + *                    Louis-Alexis Eyraud <louisalexis.eyraud@collabora.com>
+> + *
+> + * Adapated from https://lore.kernel.org/all/20260326-add-airoha-an8801-support-v2-2-1a42d6b6050f@collabora.com/
+> + */
+> +
+
+...
+
+> +int air_phy_buckpbus_reg_read(struct phy_device *phydev, u32 pbus_address,
+> +			      u32 *pbus_data)
+> +{
+> +	int saved_page;
+> +	int ret = 0;
+> +
+> +	saved_page = phy_select_page(phydev, AIR_PHY_PAGE_EXTENDED_4);
+> +
+> +	if (saved_page >= 0) {
+> +		ret = __air_buckpbus_reg_read(phydev, pbus_address, pbus_data);
+> +		if (ret < 0)
+> +			dev_err(phydev->dev, "%s 0x%08x failed: %d\n", __func__,
+> +				pbus_address, ret);
+> +	}
+> +
+> +	return phy_restore_page(phydev, saved_page, ret);
+> +}
+> +EXPORT_SYMBOL_GPL(air_phy_buckpbus_reg_read);
+
+EXPORT_SYMBOL_GPL() is no-op in U-Boot. Should we just drop it?
 
