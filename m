@@ -4,86 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC07DFF8860
-	for <u-boot@archiver.kernel.org>; Sat, 25 Apr 2026 17:02:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86F5DFF8860
+	for <u-boot@archiver.kernel.org>; Sat, 25 Apr 2026 17:04:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6EFFC840AB;
-	Sat, 25 Apr 2026 19:02:28 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 157BE842E7;
+	Sat, 25 Apr 2026 19:04:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="VlpW4ddQ";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="IBkv6Ftt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5F7B0842BF; Sat, 25 Apr 2026 19:02:27 +0200 (CEST)
-Received: from mail-pj1-x1036.google.com (mail-pj1-x1036.google.com
- [IPv6:2607:f8b0:4864:20::1036])
+ id 24284842FD; Sat, 25 Apr 2026 19:04:11 +0200 (CEST)
+Received: from mail-vs1-xe32.google.com (mail-vs1-xe32.google.com
+ [IPv6:2607:f8b0:4864:20::e32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2E3E580087
- for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 19:02:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 294C6842C7
+ for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 19:04:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=visitorckw@gmail.com
-Received: by mail-pj1-x1036.google.com with SMTP id
- 98e67ed59e1d1-362ddc1de56so1862286a91.1
- for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 10:02:25 -0700 (PDT)
+ spf=pass smtp.mailfrom=briansune@gmail.com
+Received: by mail-vs1-xe32.google.com with SMTP id
+ ada2fe7eead31-605a27fa8d5so4814007137.1
+ for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 10:04:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1777136544; x=1777741344; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=O7TtxyxFXFkfRnjj/wzyKATo8ENPdXnEmenWmHaRghs=;
- b=VlpW4ddQNuXOSL2cPzkJ4XNWsW8PuKY2za6xzp7xJiTIZCs4lWeB+tC2rQNGJMYGZs
- JWVpkyOHCLwzH+3zxHHVPjgmL/zcDMCoR1q2duUHZ3s2x8kg3a5b8eQ6mFBLwTUedYP7
- Wf9WGXad0HKFy9/5k4CUhxRiGyHFNeWoyJW2QJcVsoJ3fwQ2ZXFxbZxMBiNliX4feczQ
- vMW8El40jgNS3hdS1XYjIqB5N9K+tBggYjaUE3xOtq6JV916HX/QA2LWARnZtSyZdsf2
- KpVFA/kk/Hzu58TAjHm7tcJkNwb7m6WdL6TnHcxDV9OGEcp65jVJejKlx9qczyLLsJv0
- VRDg==
+ d=gmail.com; s=20251104; t=1777136646; x=1777741446; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=ELYdV0Mi6VZUYZNcFtqYBDmwnAaJY0IsGrrStGFtJhQ=;
+ b=IBkv6FttE1MIypkRzXrTNDVusN3AVN+dGyCeiY/WStR1FmKQ4JiJd68dBItGlUB/6j
+ tpXtsXKR07+3ynOF9hCNToVbidb+R1tbNtXuuGdD4RNZ4QVKQX8Rq33/HH0QvqOGx+RP
+ R6j1TK7tfmQ0sYUyjrFU8jX6QHHr6/v+lu3IM5Mee93LrrTCZC1yE1otQtS6I/toLv7V
+ t3bmKfqvxOoFjv9ltouuc8xOLMsJZrmDmEfd870VP0GZiIZEzOXA/N3QwQynP0cP4MX0
+ qF6PPwnXOjyUFMDDeqLtGoX9yiZZAuialOJu/WUyAvDvS5Cg2Xb94Q9FtSErYRlvFVY4
+ JlOQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777136544; x=1777741344;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=O7TtxyxFXFkfRnjj/wzyKATo8ENPdXnEmenWmHaRghs=;
- b=rg2+0mZz6NQ4WWrV6EM9/bl+d6cABLSrYTac0bRHQZYVpp3my8Ndp9HfXa1+c//4p/
- /1y6fR4oI+nSbFhKpwWVgnjiYvN1uXyOHR8KD+Ar4dxmJcoONGo8XYX+5X5uFdOq195S
- RfzCKrGBaSAPplO+SJeKQl6T56NR9GM8DDroe94f3z6eUbWepvI1qomSh46BT0pGUVbW
- SjkaKv78rxVaK3QBFJijzODvElxK2Kn5g5uKzmAqVyEbsBwOGg3aXChK9zeAaVxuRalr
- CejBmxfSsyGHihBQ/YI9I7FgpB5YPFvlv36sC4Z5u63+Egvf77BLB+2I3UeNanRRWb5x
- kfFQ==
-X-Forwarded-Encrypted: i=1;
- AFNElJ8cnBsScOGyXer8xWYgutjbWHlIVMHsf6fsWhKhYRx9u3uRT6icWhD5dt2aOIYN1uX9Buazz/U=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy/C12z8qlY3/RTp8TK3wdFyuanYW3KbVu0XdNLQE79ATz9EhXi
- w1mx4gvVFGA1tiUjyO7kJyEdsnRQ90XXq2tS7cXqzIodd4tL+WTbNRgzQlCVKQ==
-X-Gm-Gg: AeBDieu/RY0ZTTkyUvwSDvPIsxHTFcSUWcfmb9N3fq8Ce/a1FZTHDXGxCDlAJWg8O5M
- 566e6P0oLy/NhePfW0HjYSEsZ88o0bQcGL6SnOzGXPwju/4CIgoNQpJZAE7j/iKhh/Z637R4s5y
- rTjKgzsgNF0/jChi4r/vpSaCaqW2B9tdLSkv4nwPh+78SajwN/MY0iJuSGMWLl6AEwGVeNm1XXe
- dO+ROXupNySmL7qipPzOcQ+gWe1AyOtT9WdmucYY8tcOYep6zw93PE24VQlmyWLdfotZzl9aw5L
- eQbCj29EMzq5uXgZL2XNLgPpdDcK1D6ftlylQc+M968KRBoGFoh3CkCZL0xT6LCZzf01+VV8NKN
- B/S2yyom/gBh8OkT4mURkVBcNIXK/+2a3CgZmAGG0D4N8xaOPDYPW+gl2gQcbAdQVlA/DMOYg2m
- SpzkpNu1X2hhId1issEEuPwVLtXBU6ftTMNNUDZBgyBSyA1lTotaI4RNHWi5s+XDUWbB+OB6i4v
- uw1QnMJzQl88w==
-X-Received: by 2002:a17:90b:3504:b0:35f:b6a1:8d27 with SMTP id
- 98e67ed59e1d1-3614046f76amr40664848a91.18.1777136543482; 
- Sat, 25 Apr 2026 10:02:23 -0700 (PDT)
-Received: from google.com (61-230-36-6.dynamic-ip.hinet.net. [61.230.36.6])
+ d=1e100.net; s=20251104; t=1777136646; x=1777741446;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ELYdV0Mi6VZUYZNcFtqYBDmwnAaJY0IsGrrStGFtJhQ=;
+ b=TpFamU1ElMqZut26+78t4YYV1MBMRrkuDNoUN/JzUbbKB3sNJ+m9hbb2cl1NEaDeA6
+ lCBJw/EgS7UsMHSg18fF4Z+CvWn76keTqb6SdweVSiSejxQjPiTyxa5L1ZzBTRgIUndV
+ 2ISSkNu7Ju5KMBEBvStAGc4KwNlgi1bbc2ZgPiuPQ1czh0vp5LN+9pddiDeXtEvBbPzu
+ 2iCFFoR2JHhiFhfDVsTIGvvyiEykueXAzpFh/RVIg6IpGWmMAAZHCTy8ASmoIDgaFjzs
+ PcjOgAd9SkyUO6T9spzlDJYmVh/kIBqXReiYhGsS6mLGkSqYI73GVVcu1H2bVWMapBDS
+ DUjw==
+X-Gm-Message-State: AOJu0YzdBYUP12akKcB8Vu0Z4VBldFzDJoZKlyG4YhuGI6FnyGiG/n12
+ j4knyhPY+WTsyTiBkcSe21UcdeqfV9ZNhAK/gecGoHoHGau7gQOjNJw1Hl4z8yB1KNrg9A==
+X-Gm-Gg: AeBDietgzPR9LXa37a/9koAJFpFBNMoocMgaBc/HjyTryKEhx/FoUhtd/37s47EDXfe
+ jW5Q5vRoPOwvlFmERBXrHHzDU6XoBLQNEBRKS/sCDovfjsJMONdPF86xTIJOsWahl96i19Mfc5B
+ z73OMYcpvovQ4qLeuiWGoa+s89iaCPCn0z+8esAiVHwh/URQseOy/9iyodv0524GYMd1o3uG7cq
+ 6s5LOoqMjBasLY75Ox817t/lPJmxPKCGVshXIqzTsHW2jtmPtv4qNhMho/Ue1Ctt+VY7Ewa3Mzb
+ hqdq8EN7+xPdGTaT5wM6PP3bcIlH3KTnKF9rR4xJwZ2YWNEidfC07mQvxw8r7w1SLKRo/aE/WHr
+ 53thJoNbnueSNflBgtT/TJBln6qJSHWIegUYRnnJ0+Jt01vaihQzxu5gWCMu1GlNVdQE8BcG6Et
+ YRL64ypyth1iepnOHxoD6KZOuMUvQQKfOEXkMdqnBBxixc3/9WwZhgI2wH
+X-Received: by 2002:a17:903:384c:b0:2b0:7e4d:f390 with SMTP id
+ d9443c01a7336-2b5f9fb1b9cmr247651455ad.41.1776917062047; 
+ Wed, 22 Apr 2026 21:04:22 -0700 (PDT)
+Received: from intel-VirtualBox.. ([94.156.205.164])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-361410bafa9sm26946189a91.15.2026.04.25.10.02.21
+ d9443c01a7336-2b60003ffd7sm163641365ad.80.2026.04.22.21.04.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 25 Apr 2026 10:02:23 -0700 (PDT)
-Date: Sun, 26 Apr 2026 01:02:20 +0800
-From: Kuan-Wei Chiu <visitorckw@gmail.com>
-To: Angelo Dureghello <angelo@kernel-space.org>
-Cc: trini@konsulko.com, u-boot@lists.denx.de, sjg@chromium.org
-Subject: Re: [PATCH 5/9] configs: stmark2: add support for mmc
-Message-ID: <aezznOpfVei-LZF8@google.com>
-References: <20260416121431.20852-1-angelo@kernel-space.org>
- <20260416121431.20852-5-angelo@kernel-space.org>
+ Wed, 22 Apr 2026 21:04:21 -0700 (PDT)
+From: Brian Sune <briansune@gmail.com>
+To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
+ Chee Tien Fong <tien.fong.chee@altera.com>, Simon Glass <sjg@chromium.org>
+Cc: Brian Sune <briansune@gmail.com>
+Subject: [PATCH v6] Improve handoff prepare on SoCFPGA
+Date: Thu, 23 Apr 2026 12:04:11 +0800
+Message-Id: <20260423040411.3257-1-briansune@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260416121431.20852-5-angelo@kernel-space.org>
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,114 +95,88 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Angelo,
+Ensure qts folder header files are properly updated by isolating
+the Python execution environment. This prevents partial or failed
+script runs from corrupting the target directory.
 
-On Thu, Apr 16, 2026 at 02:14:27PM +0200, Angelo Dureghello wrote:
-> Add support for mmc.
-> 
-> Signed-off-by: Angelo Dureghello <angelo@kernel-space.org>
+Changelog v5 -> v6:
+ - Clean HANDOFF_KEEP comments.
 
-it looks like the changes to stmark2_defconfig were edited manually.
-Could you please use make savedefconfig to generate this file?
+Changelog v4 -> v5:
+ - Change HANDOFF_KEEP condition to if [ "$${HANDOFF_KEEP:-0}" != "0" ]
+ - Add HANDOFF_KEEP and HANDOFF_PATH comments in config.mk
 
-Regards,
-Kuan-Wei
+Changes:
+ - Implement a temp folder for Python script execution.
+ - Clean temp folder automatically despite execution failures.
+ - Gate the file replacement process on the successful exit of
+   the Python scripts.
+ - Execute the replacement (with or without keep) only upon script
+   success via the NEW HANDOFF_KEEP=xxx variable.
+ - Rename old files to .h.handoff_backup.<timestamp> when the
+   keep option is selected.
 
-$ make stmark2_defconfig
-$ make savedefconfig
-$ diff -u configs/stmark2_defconfig defconfig
---- configs/stmark2_defconfig   2026-04-25 17:01:03.607521115 +0000
-+++ defconfig   2026-04-25 17:01:11.186044050 +0000
-@@ -28,18 +28,17 @@
- # CONFIG_CMD_IMPORTENV is not set
- CONFIG_CMD_I2C=y
- # CONFIG_CMD_LOADS is not set
-+CONFIG_CMD_MMC=y
- CONFIG_CMD_SPI=y
- # CONFIG_CMD_SETEXPR is not set
- CONFIG_CMD_CACHE=y
--CONFIG_CMD_MTDPARTS=y
--CONFIG_MTDIDS_DEFAULT="nor0=spi-flash.0"
--CONFIG_MTDPARTS_DEFAULT="mtdparts=spi-flash.0:1m(u-boot),7m(kernel),-(rootfs)"
--CONFIG_CMD_MMC=y
- CONFIG_CMD_EXT2=y
- CONFIG_CMD_EXT4=y
- CONFIG_CMD_FAT=y
- CONFIG_CMD_FS_GENERIC=y
--CONFIG_DOS_PARTITION=y
-+CONFIG_CMD_MTDPARTS=y
-+CONFIG_MTDIDS_DEFAULT="nor0=spi-flash.0"
-+CONFIG_MTDPARTS_DEFAULT="mtdparts=spi-flash.0:1m(u-boot),7m(kernel),-(rootfs)"
- CONFIG_ENV_IS_IN_SPI_FLASH=y
- CONFIG_ENV_SPI_CS=1
- CONFIG_ENV_RELOC_GD_ENV_ADDR=y
-@@ -48,9 +47,8 @@
- CONFIG_NO_NET=y
- CONFIG_DM_I2C=y
- CONFIG_SYS_I2C_FSL=y
--CONFIG_MTD=y
- CONFIG_MMC=y
--CONFIG_FSL_ESDHC_IMX=y
-+CONFIG_MTD=y
- CONFIG_DM_SPI_FLASH=y
- CONFIG_SPI_FLASH_ISSI=y
- CONFIG_SPI_FLASH_MTD=y
+Reviewed-by: Simon Glass <sjg@chromium.org>
+Reviewed-by: Tien Fong Chee <tien.fong.chee@altera.com>
+Signed-off-by: Brian Sune <briansune@gmail.com>
+---
+ arch/arm/mach-socfpga/config.mk | 39 ++++++++++++++++++++++++++++++---
+ 1 file changed, 36 insertions(+), 3 deletions(-)
 
-> ---
->  configs/stmark2_defconfig | 18 +++++++++++++-----
->  1 file changed, 13 insertions(+), 5 deletions(-)
-> 
-> diff --git a/configs/stmark2_defconfig b/configs/stmark2_defconfig
-> index ae1fa34df2a..763cbac158d 100644
-> --- a/configs/stmark2_defconfig
-> +++ b/configs/stmark2_defconfig
-> @@ -3,19 +3,19 @@ CONFIG_TEXT_BASE=0x47E00000
->  CONFIG_SYS_MALLOC_LEN=0x40000
->  CONFIG_SF_DEFAULT_SPEED=50000000
->  CONFIG_ENV_SIZE=0x2000
-> -CONFIG_ENV_OFFSET=0x40000
-> +CONFIG_ENV_OFFSET=0x80000
->  CONFIG_ENV_SECT_SIZE=0x10000
->  CONFIG_DEFAULT_DEVICE_TREE="stmark2"
-> -CONFIG_SYS_MONITOR_LEN=262144
-> -CONFIG_SYS_LOAD_ADDR=0x40010000
-> +CONFIG_SYS_MONITOR_LEN=327680
-> +CONFIG_SYS_LOAD_ADDR=0x42000000
->  CONFIG_TARGET_STMARK2=y
->  CONFIG_SYS_BARGSIZE=256
->  CONFIG_SYS_MONITOR_BASE=0x47E00400
->  CONFIG_TIMESTAMP=y
->  CONFIG_USE_BOOTARGS=y
-> -CONFIG_BOOTARGS="console=ttyS0,115200 root=/dev/ram0 rw rootfstype=ramfs rdinit=/bin/init devtmpfs.mount=1"
-> +CONFIG_BOOTARGS="console=ttyS0,115200 root=/dev/ram0 rw rootfstype=ramfs rdinit=/sbin/init devtmpfs.mount=1"
->  CONFIG_USE_BOOTCOMMAND=y
-> -CONFIG_BOOTCOMMAND="sf probe 0:1 50000000; sf read ${loadaddr} 0x100000 ${kern_size}; bootm ${loadaddr}"
-> +CONFIG_BOOTCOMMAND="run boot_sd; bootm ${loadaddr} ${loadaddr_ramfs}"
->  CONFIG_SYS_PBSIZE=283
->  # CONFIG_DISPLAY_BOARDINFO is not set
->  CONFIG_SYS_MALLOC_BOOTPARAMS=y
-> @@ -34,6 +34,12 @@ CONFIG_CMD_CACHE=y
->  CONFIG_CMD_MTDPARTS=y
->  CONFIG_MTDIDS_DEFAULT="nor0=spi-flash.0"
->  CONFIG_MTDPARTS_DEFAULT="mtdparts=spi-flash.0:1m(u-boot),7m(kernel),-(rootfs)"
-> +CONFIG_CMD_MMC=y
-> +CONFIG_CMD_EXT2=y
-> +CONFIG_CMD_EXT4=y
-> +CONFIG_CMD_FAT=y
-> +CONFIG_CMD_FS_GENERIC=y
-> +CONFIG_DOS_PARTITION=y
->  CONFIG_ENV_IS_IN_SPI_FLASH=y
->  CONFIG_ENV_SPI_CS=1
->  CONFIG_ENV_RELOC_GD_ENV_ADDR=y
-> @@ -43,6 +49,8 @@ CONFIG_NO_NET=y
->  CONFIG_DM_I2C=y
->  CONFIG_SYS_I2C_FSL=y
->  CONFIG_MTD=y
-> +CONFIG_MMC=y
-> +CONFIG_FSL_ESDHC_IMX=y
->  CONFIG_DM_SPI_FLASH=y
->  CONFIG_SPI_FLASH_ISSI=y
->  CONFIG_SPI_FLASH_MTD=y
-> -- 
-> 2.53.0
-> 
+diff --git a/arch/arm/mach-socfpga/config.mk b/arch/arm/mach-socfpga/config.mk
+index 1ca1d33cb16..f341aaaea56 100644
+--- a/arch/arm/mach-socfpga/config.mk
++++ b/arch/arm/mach-socfpga/config.mk
+@@ -1,6 +1,18 @@
+ # SPDX-License-Identifier: GPL-2.0+
+ #
+ # Brian Sune <briansune@gmail.com>
++#
++# HANDOFF_PATH
++# ------------
++# Unset - Board path where qts locates and "hps_isw_handoff" should be placed.
++# Set   - Custom path points to "hps_isw_handoff" folder.
++#
++# HANDOFF_KEEP
++# ------------
++# Unset	- Clean header files.
++# Set	- HANDOFF_KEEP= , Clean header files.
++#	  HANDOFF_KEEP=0, Clean header files.
++#	  HANDOFF_KEEP=1, Backup header files and rename to ".h.handoff_backup.<timestamp>".
+ 
+ ifeq ($(CONFIG_ARCH_SOCFPGA_CYCLONE5),y)
+ archprepare: socfpga_g5_handoff_prepare
+@@ -43,6 +55,27 @@ socfpga_g5_handoff_prepare:
+ 			exit 0; \
+ 		fi; \
+ 		echo "[INFO] Found hiof file: $$HIOF_FILE"; \
+-		echo "[INFO] Running BSP generator..."; \
+-		python3 $(srctree)/tools/cv_bsp_generator/cv_bsp_generator.py -i "$$HANDOFF_PATH" -o "$$BOARD_DIR/qts" || echo "[WARN] BSP generator failed, continuing..."; \
+-		echo "[DONE] SoCFPGA QTS handoff conversion complete."
++		echo "[INFO] Try BSP generator..."; \
++		TEMP_DIR=$$(mktemp -dp "$$BOARD_DIR/"); \
++		trap 'rm -rf "$$TEMP_DIR"' EXIT; \
++		if python3 $(srctree)/tools/cv_bsp_generator/cv_bsp_generator.py -i "$$HANDOFF_PATH" -o "$$TEMP_DIR"; then \
++			if [ "$${HANDOFF_KEEP:-0}" != "0" ]; then \
++				echo "[INFO] Preserving old BSP files..."; \
++				TIMESTAMP=$$(date +%Y%m%d_%H%M%S); \
++				for f in "$$BOARD_DIR"/qts/*.h; do \
++					[ -e "$$f" ] || continue; \
++					echo "[INFO] $$f -> $${f%.h}.h.handoff_backup.$$TIMESTAMP"; \
++					mv "$$f" "$${f%.h}.h.handoff_backup.$$TIMESTAMP"; \
++				done; \
++			else \
++				echo "[INFO] Clean old BSP files..."; \
++				if ls "$$BOARD_DIR/qts"/*.h >/dev/null 2>&1; then \
++					rm "$$BOARD_DIR/qts"/*.h; \
++					echo "[INFO] Removed old BSP files..."; \
++				fi; \
++			fi; \
++			mv "$$TEMP_DIR"/*.h "$$BOARD_DIR"/qts; \
++			echo "[INFO] SoCFPGA QTS handoff conversion complete."; \
++		else \
++			echo "[WARN] BSP generator failed!"; \
++		fi;
+-- 
+2.34.1
+
