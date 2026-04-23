@@ -4,85 +4,128 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 625ADFF885A
-	for <u-boot@archiver.kernel.org>; Sat, 25 Apr 2026 20:36:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53F60FF885C
+	for <u-boot@archiver.kernel.org>; Sat, 25 Apr 2026 20:36:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D603D843B8;
-	Sat, 25 Apr 2026 22:36:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 2C6DD8442B;
+	Sat, 25 Apr 2026 22:36:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="kBVqZyJg";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20251104.gappssmtp.com header.i=@baylibre-com.20251104.gappssmtp.com header.b="BCW/V0MZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1639084314; Sat, 25 Apr 2026 20:26:17 +0200 (CEST)
-Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
- [IPv6:2a00:1450:4864:20::62f])
+ id 395FF844BF; Sat, 25 Apr 2026 20:30:19 +0200 (CEST)
+Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
+ [IPv6:2a00:1450:4864:20::631])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 673AE84486
- for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 20:26:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CF43484445
+ for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 20:30:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=micbis.openwrt@gmail.com
-Received: by mail-ej1-x62f.google.com with SMTP id
- a640c23a62f3a-b941762394aso1209535966b.1
- for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 11:26:14 -0700 (PDT)
+ spf=pass smtp.mailfrom=jstephan@baylibre.com
+Received: by mail-ej1-x631.google.com with SMTP id
+ a640c23a62f3a-b9c745e18a0so1528481966b.1
+ for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 11:30:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1777141574; x=1777746374; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=z2W0NtqRYdAnm2T0HOW9NVmAlwA4XiLSxiWKhv+m5hY=;
- b=kBVqZyJg1V7MfydB0wo0KWpukw5FQrpSFGdWesweW5n9mHCPF0zAe9RywjbIRg9XKh
- nBf8JeOnH9VxyjCiEVrl1nbK/kDQjo0KGXpgrmEJuK3qBwgCHtAP7f6D12la/QKqpUgG
- Ml3IzTHPSDTNrLHLI9cY1xdwVgiDWFNswRlsyNVELB787xomq6NSN5Ss1ulr+8mW47WF
- 3pe7xvRwUAKp1Ku9oif99eWVe27eMVsTYvIMDfuAK5NyMxB5WQNfNOMvwTPFACDrtzAN
- MOwxROc4AKKfQsTZ6imwUZLAJJYvNNA/ItBxXt9b7MtvyW0QsOeudwZh0hqoIHi/HRZ/
- LxqQ==
+ d=baylibre-com.20251104.gappssmtp.com; s=20251104; t=1777141816; x=1777746616;
+ darn=lists.denx.de; 
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=QFgGCKBb75M1KBAd4XUR3VRHVE2SjOFMXhwqyL8/eXk=;
+ b=BCW/V0MZQgonbNj6y7g9e2ybmWvGZowilGDOSX792mXKc94FkyQab9oNoDGS9T091b
+ ohFTGMKbR51j3pShIyrggeq7Osde1DGKBWPJAjeJjlKulC7ekd5RoW0L47EwwP12pVP3
+ 1vKh52CWaSQErQrvwyXyZJeuQbWxPqNlXOTxb5m54iog2vYtaxNvYlaLHh6zXwyKsepV
+ 0bYqdwZuO+/U7ZO4CORT0NJpPk+5FQ2Hf8uBzImCOhKxqo7DjFqTdypXRLyiuEMbutPF
+ He1JV44SSS6te7AZctOhtOrgCpJdrILij2SGV82c/BnAg7eVVV79Ka5Dyw910vEhpJUm
+ vskQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777141574; x=1777746374;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=z2W0NtqRYdAnm2T0HOW9NVmAlwA4XiLSxiWKhv+m5hY=;
- b=DuKXlAodi4RxyzqnYDQuFclk9917niHl7vcUUWOqnrnofCKCga2BdJLlCgR4ToaGbC
- 1/KeGi/OW2nuTlVYQVSSlCXnDOisyG0W5ZAgR0DfJLqnGUO/yj4ALChfP0GZdmYCS5fw
- zrCFbSJNpT0UHedK8eqANZxULouox+fBIMx4VNEsRzlG8AELnMqLju6W9SpyrOaIi8GO
- MxUKZ2hAIGPjE8iCcnmsik2YmpZMCqi2BB93yY0wJTxyZeTkM2Ag2DdzmBKDzv0KSBwA
- JuFaxpzh2ng+yQT8F1fNnBTYeSqNqdMW1q6lhMofbUNU5aZJKr2NzGSTUtMouaRCrb2i
- cxWw==
-X-Forwarded-Encrypted: i=1;
- AFNElJ9pRjYmYouzGk+na/xLOLpUrwJ3fOgvFL6g6ZtVGabn2mdRCXcrj9pc2K1N+M/ptsZ43MQikSE=@lists.denx.de
-X-Gm-Message-State: AOJu0YzGlQYnMMcHrJwlbqLbxN8gAw1vApquSR0Sf3emo+sCJXQ5aBAM
- yYy8IfD/gt3eaq8KqbUnwi2ECEdscaQmfklqIn3Kkqvyht9QxiSVMAMsYdRrJA==
-X-Gm-Gg: AeBDiev9jc+08KIfvVrRqQmrlKMC0zLrzpbnp4Q6k0QdQJLvHneIK/r56FtSN1D+IA4
- yyUMjsRQ349vuLs+sLiJ8meILYwnu1W39VyUYJ2dLaonb/X5f+VN94/VLbE5pKPSJAoZjxZlDFk
- Vhwo3YsSqe3pX9F61UA0h685fBsQd3XhgIpl+oBZBba/jxjSIK5G7fHT56yvBRdljyEQYq0PtlG
- CAi+dhbsOBmMIZYyJzaizJXxsy9sbxtmDC4bLBebj1mGueenLby5DOi6GkqCnXIb69dYmKFtsM0
- sQWexNpcoch0RZalZ8PmNbSUwPf+YFCeCIFxaYbTtLvZUmjpOdKnwxC9qLcI9tc3ZV3KLJYwfhh
- YXZ/cQIDMlUJSbHb6Efv5/gxqhvxbo8eLFpLkcDK02MWqOdB6jh+wILvIuc0r2D57tIAS8k+1N0
- er5Dc4RYqnZheq3QhSZPCHUk+Eoak5+QJeDfqXd6GR3rl0kN8nvuIUuiC7itNB/g==
-X-Received: by 2002:a05:600c:4ec6:b0:489:1f98:71e3 with SMTP id
- 5b1f17b1804b1-4891f987487mr234720645e9.28.1776949423245; 
- Thu, 23 Apr 2026 06:03:43 -0700 (PDT)
-Received: from localhost.localdomain ([151.70.144.55])
+ d=1e100.net; s=20251104; t=1777141816; x=1777746616;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=QFgGCKBb75M1KBAd4XUR3VRHVE2SjOFMXhwqyL8/eXk=;
+ b=coWPWCdC7EFuGEIyHbZfCsjM8I7E2Htp4epkRUm786pYguodz8WQZkTpfrvzf7WlUq
+ dKJIZY2PYop3JVDJB3o6HfwEuQe21fI+Zs2QRH4WkVcTw+/RhEPx9t9hGi5mJ5Q958MX
+ VqXjSCQ8B5kaOr+97NGlWPq/lPpIJ/1Li270Xv+BmbCw/bPeDSjV7RpBEJ0RCvsdLTxS
+ WfuVlTKZ6tF1eAbUPmYwWHR4ue8fOdVfB3Z8kyOsH/finvhA6BhFMQOmGzQGrZlUKwY3
+ wEvJdUdkN4GHRe9kgZ5OKP4tWx5Z0x+Cu8QYIHoA4bRKJqM2OaTpel7MgR/EvIHWvs8C
+ OAUw==
+X-Gm-Message-State: AOJu0YxHUsEkouYRKTUc94hvMdke0DMHgRozqJUmd23n2K5aK2yV0UoX
+ rE8eeq2AaL7M602e3J+OUd/TDa5DN7v/3+ExVpRd3lMdLHn9Tw6j96PTSqcxFbiOtD3yVOYJnyl
+ 14x4YvxA=
+X-Gm-Gg: AeBDieubbGNbJQ2OOScG3MSUPfnXkjsZRBNoTBPH2l9bLLue9F9ka1/vI+LTNkxRUjQ
+ rtY+c6ckHYcO7dA9Wsx6AsycFvsKmkmkakf39+MtG6BsLDwGMS1987txG0Yq3G7z+cvn7CV5Ha/
+ PW81b9kG1PAf9xO2pc6ZthzmQHCOoQ+hh+/r79iNn4CHx8aOSvMzWSMQ9f3tWIips2261qyBgp6
+ bj98Mmntqp/6bfi3hoLSxHxjTK2XtqiyAo1FhQkzEPpx3eXx5zPq3bbEUTgaiIqXkXcy/dDt+nz
+ EWMMqrQSmunupA2cACQqKzP3YLzG77mNjVloPcKIAjuwLMmAh6OV9QKfNV7dHUskScZqHcFgTKi
+ FtYrtEwhEbNcyYubrxFU+S0SAmKf/oDz4VVm8N9KTLws/f2MV8DGBlKfU9feMuQi2HKshqZMqCj
+ g1ar/RHr/qfJw0Qbrcvxh5cfqCRzXBqQeP7jbwW8uFys/JXveqX7dpI+El+rPsHM8rWyMUUNtNd
+ VQTaNwlQIr84tzk0TtMLzQzd1qRZLiJ22jDCybdhf9kfnxyFKLdBfhDMgoXT0+VzhDsRhFqrkbE
+ xAjjgJ85SkTc22j5OVqBa/yF4XMp
+X-Received: by 2002:a05:600c:19d3:b0:48a:55ec:c007 with SMTP id
+ 5b1f17b1804b1-48a55ecc113mr148807775e9.15.1776950762274; 
+ Thu, 23 Apr 2026 06:26:02 -0700 (PDT)
+Received: from [192.168.1.100]
+ (2a02-842a-d52e-6101-56a2-efb9-07f1-cf08.rev.sfr.net.
+ [2a02:842a:d52e:6101:56a2:efb9:7f1:cf08])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-488fc0f8188sm549381425e9.2.2026.04.23.06.03.41
+ 5b1f17b1804b1-4891bb3d121sm500300885e9.14.2026.04.23.06.26.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 23 Apr 2026 06:03:42 -0700 (PDT)
-From: Michele Bisogno <micbis.openwrt@gmail.com>
-To: Marek Vasut <marex@denx.de>, Lukasz Majewski <lukma@denx.de>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>
-Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Tom Rini <trini@konsulko.com>,
- u-boot@lists.denx.de, Michele Bisogno <micbis.openwrt@gmail.com>
-Subject: [PATCH v5 0/3] usb: gadget: rcar: Add RZ/G2L support and lifecycle
- fixes
-Date: Thu, 23 Apr 2026 15:03:20 +0200
-Message-Id: <20260423130323.32533-1-micbis.openwrt@gmail.com>
-X-Mailer: git-send-email 2.34.1
+ Thu, 23 Apr 2026 06:26:01 -0700 (PDT)
+From: Julien Stephan <jstephan@baylibre.com>
+Date: Thu, 23 Apr 2026 15:25:54 +0200
+Subject: [PATCH 3/9] net: Fix alphabetical ordering in drivers/net/Makefile
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260423-add-ethernet-support-for-genio-520-720-v1-3-47ca918e0017@baylibre.com>
+References: <20260423-add-ethernet-support-for-genio-520-720-v1-0-47ca918e0017@baylibre.com>
+In-Reply-To: <20260423-add-ethernet-support-for-genio-520-720-v1-0-47ca918e0017@baylibre.com>
+To: u-boot@lists.denx.de
+Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
+ Jerome Forissier <jerome.forissier@arm.com>, Tom Rini <trini@konsulko.com>, 
+ Christian Marangi <ansuelsmth@gmail.com>, 
+ Robert Marko <robert.marko@sartura.hr>, Simon Glass <sjg@chromium.org>, 
+ Yao Zi <me@ziyao.cc>, Quentin Schulz <quentin.schulz@cherry.de>, 
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ "Lucien.Jheng" <lucienzx159@gmail.com>, 
+ Weijie Gao <weijie.gao@mediatek.com>, 
+ Romain Gantois <romain.gantois@bootlin.com>, 
+ Siddharth Vadapalli <s-vadapalli@ti.com>, 
+ Yanqing Wang <ot_yanqing.wang@mediatek.com>, Beiyan Yun <root@infi.wang>, 
+ Ryder Lee <ryder.lee@mediatek.com>, 
+ Chunfeng Yun <chunfeng.yun@mediatek.com>, 
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
+ David Lechner <dlechner@baylibre.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Kory Maincent <kory.maincent@bootlin.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Kuan-Wei Chiu <visitorckw@gmail.com>, 
+ Raymond Mao <raymond.mao@riscstar.com>, Peng Fan <peng.fan@nxp.com>, 
+ Stefan Roese <stefan.roese@mailbox.org>, 
+ Philip Molloy <philip.molloy@analog.com>, 
+ fanyi zhang <fanyi.zhang@mediatek.com>, Jonas Karlman <jonas@kwiboo.se>, 
+ Kever Yang <kever.yang@rock-chips.com>, 
+ Marek Vasut <marek.vasut@mailbox.org>, 
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, 
+ Heiko Stuebner <heiko@sntech.de>, 
+ Samuel Holland <samuel.holland@sifive.com>, 
+ Christophe Roullier <christophe.roullier@foss.st.com>, 
+ Patrice Chotard <patrice.chotard@foss.st.com>, 
+ Chris-QJ Chen <chris-qj.chen@mediatek.com>, 
+ Macpaul Lin <macpaul.lin@mediatek.com>, 
+ Sam Protsenko <semen.protsenko@linaro.org>, 
+ Michael Trimarchi <michael@amarulasolutions.com>, 
+ Sky Huang <SkyLake.Huang@mediatek.com>, 
+ Leo Yu-Chi Liang <ycliang@andestech.com>, 
+ Tommy Shih <tommy.shih@airoha.com>, 
+ Kevin-KW Huang <kevin-kw.huang@airoha.com>, 
+ Julien Stephan <jstephan@baylibre.com>
+X-Mailer: b4 0.14.3
 X-Mailman-Approved-At: Sat, 25 Apr 2026 22:36:28 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -100,46 +143,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This series adds support for the Renesas RZ/G2L (R9A07G044) USBHS
-controller. During development, several lifecycle and resource 
-management issues were identified and addressed to satisfy RZ/G2L 
-hardware requirements and prevent resource leaks across the driver.
+Reorder entries to maintain alphabetical sorting by CONFIG_ names:
+- Move CONFIG_DWC_ETH_QOS_QCOM before CONFIG_DWC_ETH_QOS_ROCKCHIP
+- Move CONFIG_DWC_ETH_XGMAC after CONFIG_DWC_ETH_QOS_STM32
+- Move CONFIG_MDIO_GPIO_BITBANG before CONFIG_MDIO_IPQ4019
+- Move airoha directory at the end
 
-The series is split into three logical parts to ensure bisectability:
-1. A bugfix for the gadget deletion sequence during driver remove.
-2. The addition of reset controller infrastructure and proper 
-   clock/reset teardown logic.
-3. The RZ/G2L specific hardware parameters, SYSCFG logic, and 
-   compatible strings.
+This ensures consistent alphabetical ordering throughout the Makefile.
 
-Changes in v5:
-- Simplified usbhs_probe() signature to only take struct udevice *dev,
-  deriving private data internally as requested.
-- Fixed resource leak in usbhs_udc_otg_probe() error paths by adding 
-  reset_assert_bulk() to the teardown sequence.
-- Standardized resource management by ensuring the probe error path 
-  perfectly mirrors the removal path.
+Signed-off-by: Julien Stephan <jstephan@baylibre.com>
+---
+ drivers/net/Makefile | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
 
-Changes in v4:
-- Split the monolithic patch into a 3-patch series as requested.
-- Added usb_del_gadget_udc() to fix resource leak on driver remove.
-- Implemented bulk reset controller support (required for RZ/G2L).
-- Improved error handling in probe() to ensure clocks are disabled 
-  if reset initialization or deassertion fails.
-- Moved reset and clock handles to private data to ensure persistence.
-- Reorganized hunks to ensure each patch in the series compiles 
-  independently (bisectability).
-
-
-Michele Bisogno (3):
-  usb: gadget: rcar: Fix gadget registration lifecycle in remove
-  usb: gadget: rcar: Add support for reset controller
-  usb: gadget: rcar: Add support for RZ/G2L (R9A07G044)
-
- drivers/usb/gadget/rcar/common.c      | 58 +++++++++++++++++++++++----
- drivers/usb/gadget/rcar/renesas_usb.h |  1 +
- 2 files changed, 52 insertions(+), 7 deletions(-)
+diff --git a/drivers/net/Makefile b/drivers/net/Makefile
+index 5e90183d090..c485068e5d2 100644
+--- a/drivers/net/Makefile
++++ b/drivers/net/Makefile
+@@ -5,7 +5,6 @@
+ 
+ 
+ obj-$(CONFIG_AG7XXX) += ag7xxx.o
+-obj-y += airoha/
+ obj-$(CONFIG_AIROHA_ETH) += airoha_eth.o
+ obj-$(CONFIG_ALTERA_TSE) += altera_tse.o
+ obj-$(CONFIG_ASPEED_MDIO) += aspeed_mdio.o
+@@ -22,12 +21,12 @@ obj-$(CONFIG_DWC_ETH_QOS) += dwc_eth_qos.o
+ obj-$(CONFIG_DWC_ETH_QOS_ADI) += dwc_eth_qos_adi.o
+ obj-$(CONFIG_DWC_ETH_QOS_IMX) += dwc_eth_qos_imx.o
+ obj-$(CONFIG_DWC_ETH_QOS_INTEL) += dwc_eth_qos_intel.o
+-obj-$(CONFIG_DWC_ETH_QOS_ROCKCHIP) += dwc_eth_qos_rockchip.o
+ obj-$(CONFIG_DWC_ETH_QOS_QCOM) += dwc_eth_qos_qcom.o
+-obj-$(CONFIG_DWC_ETH_XGMAC) += dwc_eth_xgmac.o
+-obj-$(CONFIG_DWC_ETH_XGMAC_SOCFPGA) += dwc_eth_xgmac_socfpga.o
++obj-$(CONFIG_DWC_ETH_QOS_ROCKCHIP) += dwc_eth_qos_rockchip.o
+ obj-$(CONFIG_DWC_ETH_QOS_STARFIVE) += dwc_eth_qos_starfive.o
+ obj-$(CONFIG_DWC_ETH_QOS_STM32) += dwc_eth_qos_stm32.o
++obj-$(CONFIG_DWC_ETH_XGMAC) += dwc_eth_xgmac.o
++obj-$(CONFIG_DWC_ETH_XGMAC_SOCFPGA) += dwc_eth_xgmac_socfpga.o
+ obj-$(CONFIG_E1000) += e1000.o
+ obj-$(CONFIG_E1000_SPI) += e1000_spi.o
+ obj-$(CONFIG_EEPRO100) += eepro100.o
+@@ -62,9 +61,9 @@ obj-$(CONFIG_KSZ9477) += ksz9477.o
+ obj-$(CONFIG_LITEETH) += liteeth.o
+ obj-$(CONFIG_MACB) += macb.o
+ obj-$(CONFIG_MCFFEC) += mcffec.o mcfmii.o
++obj-$(CONFIG_MDIO_GPIO_BITBANG) += mdio_gpio.o
+ obj-$(CONFIG_MDIO_IPQ4019) += mdio-ipq4019.o
+ obj-$(CONFIG_MDIO_MSCC_MIIM) += mdio-mscc-miim.o
+-obj-$(CONFIG_MDIO_GPIO_BITBANG) += mdio_gpio.o
+ obj-$(CONFIG_MDIO_MT7531_MMIO) += mdio-mt7531-mmio.o
+ obj-$(CONFIG_MDIO_MUX_I2CREG) += mdio_mux_i2creg.o
+ obj-$(CONFIG_MDIO_MUX_MESON_G12A) += mdio_mux_meson_g12a.o
+@@ -109,6 +108,7 @@ obj-$(CONFIG_XILINX_AXIEMAC) += xilinx_axi_emac.o
+ obj-$(CONFIG_XILINX_AXIMRMAC) += xilinx_axi_mrmac.o
+ obj-$(CONFIG_XILINX_EMACLITE) += xilinx_emaclite.o
+ obj-$(CONFIG_ZYNQ_GEM) += zynq_gem.o
++obj-y += airoha/
+ obj-y += mscc_eswitch/
+ obj-y += phy/
+ obj-y += qe/
 
 -- 
-2.34.1
+2.52.0
 
