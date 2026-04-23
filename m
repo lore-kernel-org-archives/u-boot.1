@@ -4,96 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70D24FF885A
-	for <u-boot@archiver.kernel.org>; Sat, 25 Apr 2026 20:47:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2785DFF885C
+	for <u-boot@archiver.kernel.org>; Sat, 25 Apr 2026 21:08:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9098F84514;
-	Sat, 25 Apr 2026 22:47:37 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 5C2F28435B;
+	Sat, 25 Apr 2026 23:08:03 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="OKgZYEwx";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="FCYJPeq6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A131D8452C; Sat, 25 Apr 2026 22:47:36 +0200 (CEST)
-Received: from mail-lj1-x235.google.com (mail-lj1-x235.google.com
- [IPv6:2a00:1450:4864:20::235])
+ id 8BCD084534; Sat, 25 Apr 2026 22:48:12 +0200 (CEST)
+Received: from mail-qv1-xf44.google.com (mail-qv1-xf44.google.com
+ [IPv6:2607:f8b0:4864:20::f44])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D3FE4844AF
- for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 22:47:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5B76584540
+ for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 22:48:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-lj1-x235.google.com with SMTP id
- 38308e7fff4ca-38dd575bca3so87542141fa.1
- for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 13:47:33 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1777150053; cv=none;
- d=google.com; s=arc-20240605;
- b=LATQijURB5/+ym4lyQlWlYQBfIQuUqlndSls5NruVQSJkph9qnVu0SpEBDL/CS/U4e
- FfGs1KL/NU9drXzgZNCT3ZR5Kr3il5I0a887xh4KZYW36+h8IQpi/oMiSlnwtqeb6OmQ
- GTAEF/2nzP4cMBh2aDN6p1y4XW3dysVzp2x3eZnYYtQclznBc8pLWSkkZZVbd0TC9cVF
- rJ5C0z4aHwFYE5KsSWhM2B8XbAZLK+gNtjKzGSnd/TGpQNgDRcKjG+olboELhWAV3k6B
- jrinsNgvsTvAxJHHlwikvUSiV5Uap3DkgUAWzd3OYDOZ7fRTCDcC8AHrQwKRvCmtv6hH
- tk5g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=WgAu5h4xEzkrU/ZeVi9iXQ/JOHtGr8cD7A9yO0xyMuo=;
- fh=XUFRYmYGYRXaPdEVa0BorvzlEMbC6h7UrdgBnGfsHWA=;
- b=LHOr6SQRSyoQcfoob7bipgv9xSopPzdjWn1sjhQAMvxG2jFh7bwGW+z0LQPqQXcP05
- qDGsmR4tcVEBMFDAPCiIZ1VH8gM8+v1lNBp+orJT47JQNTM/X2vQFr4wrnSwRTXiCYLv
- y57DgVbAVsn+SG7432WVrw+eDr3Q7kRe7U/8FA2zKFosYeRBpgrjuV+P5/UUZsXtswhp
- AZGBhTlrPPawS/Te2E+TB6rO2Uo1056BrFuqqnMLZV2GyDgYWnVgbQLRHqB8kO4yw+l9
- GeVEMXj+HmFy0OshpEJz8aWenB2DcaEilJ4SXg4/ulb3HhmGOCLdh0nKDzWuGpUlyyF5
- LOTg==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=jcethrid@gmail.com
+Received: by mail-qv1-xf44.google.com with SMTP id
+ 6a1803df08f44-8aca6bd57cfso84550686d6.0
+ for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 13:48:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1777150053; x=1777754853; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=WgAu5h4xEzkrU/ZeVi9iXQ/JOHtGr8cD7A9yO0xyMuo=;
- b=OKgZYEwxVVyYmocOc2g1RrDK9Yo+ExFdwf1gwspHj+GUkXP1VbIQtntVg/ApbadaYJ
- giUJfIUiWc5h4SjtUZEQDylm5fszL8sfQHFEmH6x3WvQ+c482k83Bosfx2VUVnLAt/27
- lgqS5dBHRqMCVkr71O1hws8w+QAwbCzIL5hes=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777150053; x=1777754853;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=gmail.com; s=20251104; t=1777150089; x=1777754889; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=WgAu5h4xEzkrU/ZeVi9iXQ/JOHtGr8cD7A9yO0xyMuo=;
- b=Sj59wqac342Wc4ElcYTQ0dYA+DWC0daFFoMumfToYan8PEvGsJJHdwUQKQMb4i0Ekr
- hmvFhmN7kTXk/KT6jMPyJbyTLS3dPXlMvbqJ+AFtET01elm69tbkbf0qpywT4pj702IH
- zigjgL9EVEHUyOaexhNGGU8Hs1JKmFRgBfDqK++BS90LgjZulgwNxcfPtzdgxVU6X1CX
- sTfjg5HU3k+WBRYcI3hHIir/h0/VmL4mBPIsmVwF5WMviNdFJXH2Mkz4LLvua5h1OWi2
- zJJ9YDMWeh4+VTPoUtH1ub8rtZFbLwD2SsdGCc7m/pUw0fxnye+nCZksdBaShg6fkMzO
- sxxw==
-X-Gm-Message-State: AOJu0YwPaOZIDx4UbZ4rbpYOieY5y3xl4vJMc0XuRnHFGhDsLIfrNvio
- VtxG2i5yMIzHlTwUGjNEod8mLVic54dkGuGgljo8BhfMJalRZftZQenFnfbbUZQn5SW8SFGD+gU
- d3E5jN5wV1+Jp5+vYgctEEkpAGrL18mYE7ATxKMOhPKRgBFbYWyxHnRhH
-X-Gm-Gg: AeBDiesApTfFLt+uHOUA6IPs9sQibELakLRpTQLjgppHzwrkNDGwXQaxxPB+I2sZqJ0
- RcH618znd6lk1MrdLRITH/GuZKt5L4AkcU/n+tCMjrgpBhGm7+Q8H8UTGGomHgCCVSdfJzthlXb
- MwOxgXecU3sI2aiwucYtUB7qN0fnMo71oBRMCk5Xhkv/u1k9bUPjeCqTA067H127gM9cP95q5Y2
- TFRDXowrX5vTKldqT86sJ6A3xo240E/ZKl5TCRhIy0gBjGjo89i1XFJCrz+zFWy18XcThBgJ0eI
- TPD9oxGkbyyzz8qPtKQ+wflwBLZWuss=
-X-Received: by 2002:a17:907:968f:b0:ba6:4eea:c1e1 with SMTP id
- a640c23a62f3a-ba64eeaca99mr854129066b.17.1776891277171; Wed, 22 Apr 2026
- 13:54:37 -0700 (PDT)
+ bh=+6gUZivq8PD3uTPMd+4hu8dE2KyTc38gDyskWGzZWwI=;
+ b=FCYJPeq6qSxNPP75yprCuk98hTNN4moj0LK5bL1Rm47SAqxlnYoAXDxGxsAZ//Xsh+
+ bxufmY2XQn73XFrZ6FcsVwZmiEW3tnoe3gH0poTqAW5YyiO3UZoBQB9PiTa1W979LkRE
+ UmSTwpwyttwj3iCeEiW0EVVGHNKljjhUUGHaucqViii456OWFtd+x9wzaLFkoWaa8vjK
+ vpmvuj37jsrFu40mbHdUEV9ecLhfcPwTV49TmB1wrPgb3w5jOLjRIcXeAOkCPoiXW2zO
+ 9+niNB5jhB8T2T2Coyy37OAXMwIu6hrtRfkamYMWAe9tIsW4dW+btdYsK6YPlqa8CNQS
+ SgSA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1777150089; x=1777754889;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=+6gUZivq8PD3uTPMd+4hu8dE2KyTc38gDyskWGzZWwI=;
+ b=af7uv5H0C0rULFYUZA5aXg90Nnu9fp6b3nwQsduVathlVhBwi9TPU89uLbNMIc+I/6
+ 9er4qw9Llhg4IcuZ0qpEiihUnw8a7vSIjbN3ONOWyqcC6YlMeM395ID5+zZ2q13vnvIs
+ ON/ywMIQ397/etk6FMF6VeKNQ/DNHSwW00EEei6xo6iCYvHbRUEN7OmYnnVuvAswTM6c
+ 4uzRXarB3nSeYYyoi3IPw86LO95vh9EagShS4LViVwUi8tnhPiHvrHY1yaGXeE28pyZ6
+ 4kynGqHh/Kpe7B5gfQd4tAUnOQL9Blv34SE8xOtsEvnKYJpYmzA3ZyfT8jktiDaoVidE
+ A8Pg==
+X-Gm-Message-State: AOJu0YxlJuas7/PzLffxvAj2dAi8rXKSRQgRehfSwLaP1EHL/iiSNbE4
+ D/xH/stg5V4ZT2pJ+xRT6eCWSV+Tn3IwGW3pid6eo5XW1ZrDcP5kUjwa1XlVeoZn
+X-Gm-Gg: AeBDies7MOsQhPInBEK1eQGUTQpQLImiO6Z17iMFnsycx9v2dsAhaKGWaU5RKcZTDK2
+ 5645cB9l0/dAnlsbz3VYcrVRFta+0fTwHP8Aj+ByyEqbiAlKkRPbFPxB/Z0SeyfQAYrEyGWUvhk
+ uQSQLchCc9CVBpZC1QpaOYOUDowwy3YTqc3D3w5VsudyBwae5P2FZ5EJxF9CYxUrGJ1xMYOOgz3
+ Ewxbe57qpUxUwIE2CLwVS/k9NRHa+sDaHTsoLR3lDpuAbtEpoxTDRGIHhRDnoLCnRRoCb9PgzNh
+ t7MJiwSzJ68OCG8CPhPpHiKd2JX+cvOZs9q8SRyrH57W0Zh3hrLzKksO1LxzbAqFowr4wi2AZku
+ urkZ+5ULsJpjHwv6JZ/IYLfVLO1oWHMrVTkNNXxuGrkDodcfYclxEsB1rUDySVZDaCu/Mcgrv4y
+ 1GT8NqRuqx1PnoZZsgTYU205FlVPaK/w/kanoA7NFmKVVK
+X-Received: by 2002:a05:6214:2f0e:b0:89c:4cac:74c5 with SMTP id
+ 6a1803df08f44-8b0280f81aemr407391126d6.25.1776954311780; 
+ Thu, 23 Apr 2026 07:25:11 -0700 (PDT)
+Received: from cethr-l01.localdomain ([136.56.120.109])
+ by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-8b02aa4f1f9sm157183266d6.0.2026.04.23.07.25.10
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 23 Apr 2026 07:25:11 -0700 (PDT)
+From: Caleb Ethridge <jcethrid@gmail.com>
+To: u-boot@lists.denx.de
+Cc: malysagreg@gmail.com, trini@konsulko.com, linux@analog.com,
+ philip@philipmolloy.com, sjg@chromium.org,
+ Caleb Ethridge <caleb.ethridge@analog.com>
+Subject: [PATCH v5 01/15] configs: sc5xx: Do not store environment in SPI flash
+Date: Thu, 23 Apr 2026 10:24:36 -0400
+Message-Id: <d86949c4ae8dd1314af7537c5799c7b92ddc17cb.1776954004.git.jcethrid@gmail.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <cover.1776954004.git.jcethrid@gmail.com>
+References: <cover.1776954004.git.jcethrid@gmail.com>
 MIME-Version: 1.0
-References: <20260422023131.2813748-1-sjg@chromium.org>
- <9a9194d8-65ee-4c84-a760-2a73378a7170@mailbox.org>
-In-Reply-To: <9a9194d8-65ee-4c84-a760-2a73378a7170@mailbox.org>
-From: Simon Glass <sjg@chromium.org>
-Date: Thu, 23 Apr 2026 08:54:23 +1200
-X-Gm-Features: AQROBzCB-AAl4vmuQX-HxzwvWdG8KHqNxrWqkkVoDlE8pCgTgW_kJvwgJcnj9Z4
-Message-ID: <CAFLszTi+_1KBMWJ2rRF0B+4KJTfewrGicdrWJeybs-EJ7_HJRg@mail.gmail.com>
-Subject: Re: [PATCH] fdtgrep: Add option to reserve free space in the output
- FDT
-To: Marek Vasut <marek.vasut@mailbox.org>
-Cc: u-boot@lists.denx.de, Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Sat, 25 Apr 2026 23:08:00 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -110,47 +100,203 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Marek,
+From: Caleb Ethridge <caleb.ethridge@analog.com>
 
-On Thu, 23 Apr 2026 at 07:08, Marek Vasut <marek.vasut@mailbox.org> wrote:
->
-> On 4/22/26 4:31 AM, Simon Glass wrote:
-> > When producing a DTB from fdtgrep, there is no way to reserve extra
-> > space so that more nodes/properties can be added at runtime without
-> > growing totalsize first.
-> >
-> > Add a -B/--pad option that appends a caller-specified number of free
-> > bytes after the strings section and grows totalsize accordingly. The
-> > padding is applied after fdt_pack(), so it is not reclaimed when -r is
-> > used.
-> >
-> > Suggested-by: Marek Vasut <marek.vasut@mailbox.org>
-> > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > ---
-> >
-> >   tools/binman/btool/fdtgrep.py |  3 ++-
-> >   tools/fdtgrep.c               | 31 ++++++++++++++++++++++++++++++-
-> >   2 files changed, 32 insertions(+), 2 deletions(-)
-> >
-> > diff --git a/tools/binman/btool/fdtgrep.py b/tools/binman/btool/fdtgrep.py
-> > index 446b2f4144b..7b393241878 100644
-> > --- a/tools/binman/btool/fdtgrep.py
-> > +++ b/tools/binman/btool/fdtgrep.py
-> > @@ -16,9 +16,10 @@ Output formats are:
-> >       dtb - device tree blob (sets -Hmt automatically)
-> >       bin - device tree fragment (may not be a valid .dtb)
-> >
-> > -Options: -[haAc:b:C:defg:G:HIlLmn:N:o:O:p:P:rRsStTvhV]
-> > +Options: -[haAB:c:b:C:defg:G:HIlLmn:N:o:O:p:P:rRsStTvhV]
-> >     -a, --show-address                 Display address
-> >     -A, --colour                       Show all nodes/tags, colour those that match
-> > +  -B, --pad <arg>                    Append free space to the output FDT, for later growth
-> Shouldn't the parameter at least match the dtc -p parameter ? -p is not
-> taken yet.
+Remove config option enabling storage of the environment
+in the SPI flash, to match shift of programming boot media
+to Linux.
 
-We have:
+Signed-off-by: Caleb Ethridge <caleb.ethridge@analog.com>
+---
+ configs/sc573-ezkit_defconfig          | 4 ----
+ configs/sc584-ezkit_defconfig          | 5 -----
+ configs/sc589-ezkit_defconfig          | 5 -----
+ configs/sc589-mini_defconfig           | 5 -----
+ configs/sc594-som-ezkit-spl_defconfig  | 4 ----
+ configs/sc594-som-ezlite-spl_defconfig | 4 ----
+ configs/sc598-som-ezkit-spl_defconfig  | 4 ----
+ configs/sc598-som-ezlite-spl_defconfig | 4 ----
+ 8 files changed, 35 deletions(-)
 
-  -p, --include-prop <arg>           Property to include in grep
+diff --git a/configs/sc573-ezkit_defconfig b/configs/sc573-ezkit_defconfig
+index fc4ce13cc70..976d8e0306a 100644
+--- a/configs/sc573-ezkit_defconfig
++++ b/configs/sc573-ezkit_defconfig
+@@ -3,9 +3,6 @@ CONFIG_SYS_ARM_CACHE_WRITETHROUGH=y
+ CONFIG_ARCH_SC5XX=y
+ CONFIG_SYS_MALLOC_LEN=0x100000
+ CONFIG_SPL_GPIO=y
+-CONFIG_ENV_SIZE=0x4000
+-CONFIG_ENV_OFFSET=0xD0000
+-CONFIG_ENV_SECT_SIZE=0x4000
+ CONFIG_DM_GPIO=y
+ CONFIG_SPL_SYS_MALLOC_F_LEN=0x10000
+ CONFIG_SPL_SERIAL=y
+@@ -52,7 +49,6 @@ CONFIG_CMD_FS_GENERIC=y
+ CONFIG_SPL_OF_CONTROL=y
+ CONFIG_OF_EMBED=y
+ CONFIG_ENV_OVERWRITE=y
+-CONFIG_ENV_IS_IN_SPI_FLASH=y
+ CONFIG_USE_HOSTNAME=y
+ CONFIG_HOSTNAME="sc573-ezkit"
+ CONFIG_NET_RETRY_COUNT=20
+diff --git a/configs/sc584-ezkit_defconfig b/configs/sc584-ezkit_defconfig
+index a8c6b9f1224..27f55804199 100644
+--- a/configs/sc584-ezkit_defconfig
++++ b/configs/sc584-ezkit_defconfig
+@@ -3,9 +3,6 @@ CONFIG_SYS_ARM_CACHE_WRITETHROUGH=y
+ CONFIG_ARCH_SC5XX=y
+ CONFIG_SYS_MALLOC_LEN=0x100000
+ CONFIG_SPL_GPIO=y
+-CONFIG_ENV_SIZE=0x4000
+-CONFIG_ENV_OFFSET=0xD0000
+-CONFIG_ENV_SECT_SIZE=0x4000
+ CONFIG_DM_GPIO=y
+ CONFIG_SPL_SYS_MALLOC_F_LEN=0x8000
+ CONFIG_SPL_SERIAL=y
+@@ -57,8 +54,6 @@ CONFIG_CMD_FS_GENERIC=y
+ CONFIG_SPL_OF_CONTROL=y
+ CONFIG_OF_EMBED=y
+ CONFIG_ENV_OVERWRITE=y
+-CONFIG_ENV_IS_IN_SPI_FLASH=y
+-CONFIG_ENV_SPI_MAX_HZ=10000000
+ CONFIG_USE_HOSTNAME=y
+ CONFIG_HOSTNAME="sc584-ezkit"
+ CONFIG_NET_RETRY_COUNT=20
+diff --git a/configs/sc589-ezkit_defconfig b/configs/sc589-ezkit_defconfig
+index 9cd204e40ab..180b6904d95 100644
+--- a/configs/sc589-ezkit_defconfig
++++ b/configs/sc589-ezkit_defconfig
+@@ -5,9 +5,6 @@ CONFIG_SYS_MALLOC_LEN=0x100000
+ CONFIG_SPL_GPIO=y
+ CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xC203F000
+ CONFIG_SF_DEFAULT_SPEED=1000000
+-CONFIG_ENV_SIZE=0x4000
+-CONFIG_ENV_OFFSET=0xD0000
+-CONFIG_ENV_SECT_SIZE=0x4000
+ CONFIG_DM_GPIO=y
+ CONFIG_SPL_SYS_MALLOC_F_LEN=0x8000
+ CONFIG_SPL_SERIAL=y
+@@ -61,8 +58,6 @@ CONFIG_CMD_FS_GENERIC=y
+ CONFIG_SPL_OF_CONTROL=y
+ CONFIG_OF_EMBED=y
+ CONFIG_ENV_OVERWRITE=y
+-CONFIG_ENV_IS_IN_SPI_FLASH=y
+-CONFIG_ENV_SPI_MAX_HZ=10000000
+ CONFIG_USE_HOSTNAME=y
+ CONFIG_HOSTNAME="sc589-ezkit"
+ CONFIG_NET_RETRY_COUNT=20
+diff --git a/configs/sc589-mini_defconfig b/configs/sc589-mini_defconfig
+index 0908ab1708b..92c2741f701 100644
+--- a/configs/sc589-mini_defconfig
++++ b/configs/sc589-mini_defconfig
+@@ -4,9 +4,6 @@ CONFIG_ARCH_SC5XX=y
+ CONFIG_SYS_MALLOC_LEN=0x100000
+ CONFIG_SPL_GPIO=y
+ CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xC203F000
+-CONFIG_ENV_SIZE=0x10000
+-CONFIG_ENV_OFFSET=0xD0000
+-CONFIG_ENV_SECT_SIZE=0x10000
+ CONFIG_DM_GPIO=y
+ CONFIG_SPL_SYS_MALLOC_F_LEN=0x8000
+ CONFIG_SPL_SERIAL=y
+@@ -58,8 +55,6 @@ CONFIG_CMD_FS_GENERIC=y
+ CONFIG_SPL_OF_CONTROL=y
+ CONFIG_OF_EMBED=y
+ CONFIG_ENV_OVERWRITE=y
+-CONFIG_ENV_IS_IN_SPI_FLASH=y
+-CONFIG_ENV_SPI_MAX_HZ=10000000
+ CONFIG_USE_HOSTNAME=y
+ CONFIG_HOSTNAME="sc589-mini"
+ CONFIG_NET_RETRY_COUNT=20
+diff --git a/configs/sc594-som-ezkit-spl_defconfig b/configs/sc594-som-ezkit-spl_defconfig
+index c62097a2ac9..c379de2c146 100644
+--- a/configs/sc594-som-ezkit-spl_defconfig
++++ b/configs/sc594-som-ezkit-spl_defconfig
+@@ -4,9 +4,6 @@ CONFIG_ARCH_SC5XX=y
+ CONFIG_SYS_MALLOC_LEN=0x100000
+ CONFIG_SPL_GPIO=y
+ CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x8203f000
+-CONFIG_ENV_SIZE=0x20000
+-CONFIG_ENV_OFFSET=0x100000
+-CONFIG_ENV_SECT_SIZE=0x20000
+ CONFIG_DM_GPIO=y
+ CONFIG_SPL_DM_SPI=y
+ CONFIG_SPL_SYS_MALLOC_F_LEN=0x10000
+@@ -40,7 +37,6 @@ CONFIG_CMD_EXT4=y
+ CONFIG_CMD_FAT=y
+ CONFIG_OF_EMBED=y
+ CONFIG_ENV_OVERWRITE=y
+-CONFIG_ENV_IS_IN_SPI_FLASH=y
+ CONFIG_USE_HOSTNAME=y
+ CONFIG_HOSTNAME="sc594-som-ezkit"
+ CONFIG_NET_RETRY_COUNT=20
+diff --git a/configs/sc594-som-ezlite-spl_defconfig b/configs/sc594-som-ezlite-spl_defconfig
+index 39481351102..54b26ed85c2 100644
+--- a/configs/sc594-som-ezlite-spl_defconfig
++++ b/configs/sc594-som-ezlite-spl_defconfig
+@@ -3,9 +3,6 @@ CONFIG_SYS_ARM_CACHE_WRITETHROUGH=y
+ CONFIG_ARCH_SC5XX=y
+ CONFIG_SYS_MALLOC_LEN=0x100000
+ CONFIG_SPL_GPIO=y
+-CONFIG_ENV_SIZE=0x20000
+-CONFIG_ENV_OFFSET=0x100000
+-CONFIG_ENV_SECT_SIZE=0x20000
+ CONFIG_DM_GPIO=y
+ CONFIG_SPL_DM_SPI=y
+ CONFIG_SPL_SYS_MALLOC_F_LEN=0x10000
+@@ -45,7 +42,6 @@ CONFIG_CMD_FAT=y
+ # CONFIG_DOS_PARTITION is not set
+ CONFIG_OF_EMBED=y
+ CONFIG_ENV_OVERWRITE=y
+-CONFIG_ENV_IS_IN_SPI_FLASH=y
+ CONFIG_USE_HOSTNAME=y
+ CONFIG_HOSTNAME="sc594-som-ezlite"
+ CONFIG_NET_RETRY_COUNT=20
+diff --git a/configs/sc598-som-ezkit-spl_defconfig b/configs/sc598-som-ezkit-spl_defconfig
+index ad3a6fcc236..7027a7f8a2a 100644
+--- a/configs/sc598-som-ezkit-spl_defconfig
++++ b/configs/sc598-som-ezkit-spl_defconfig
+@@ -4,9 +4,6 @@ CONFIG_COUNTER_FREQUENCY=31250000
+ CONFIG_ARCH_SC5XX=y
+ CONFIG_SYS_MALLOC_LEN=0x100000
+ CONFIG_SPL_GPIO=y
+-CONFIG_ENV_SIZE=0x20000
+-CONFIG_ENV_OFFSET=0x180000
+-CONFIG_ENV_SECT_SIZE=0x20000
+ CONFIG_DM_GPIO=y
+ CONFIG_SPL_DM_SPI=y
+ CONFIG_SPL_SYS_MALLOC_F_LEN=0x10000
+@@ -63,7 +60,6 @@ CONFIG_CMD_EXT4_WRITE=y
+ CONFIG_CMD_FAT=y
+ CONFIG_OF_EMBED=y
+ CONFIG_ENV_OVERWRITE=y
+-CONFIG_ENV_IS_IN_SPI_FLASH=y
+ CONFIG_USE_HOSTNAME=y
+ CONFIG_HOSTNAME="sc598-som-ezkit"
+ CONFIG_NET_RETRY_COUNT=20
+diff --git a/configs/sc598-som-ezlite-spl_defconfig b/configs/sc598-som-ezlite-spl_defconfig
+index 34dbedf12b4..0b59b36f264 100644
+--- a/configs/sc598-som-ezlite-spl_defconfig
++++ b/configs/sc598-som-ezlite-spl_defconfig
+@@ -4,9 +4,6 @@ CONFIG_COUNTER_FREQUENCY=31250000
+ CONFIG_ARCH_SC5XX=y
+ CONFIG_SYS_MALLOC_LEN=0x100000
+ CONFIG_SPL_GPIO=y
+-CONFIG_ENV_SIZE=0x20000
+-CONFIG_ENV_OFFSET=0x180000
+-CONFIG_ENV_SECT_SIZE=0x20000
+ CONFIG_DM_GPIO=y
+ CONFIG_SPL_DM_SPI=y
+ CONFIG_SPL_SYS_MALLOC_F_LEN=0x10000
+@@ -62,7 +59,6 @@ CONFIG_CMD_EXT4=y
+ CONFIG_CMD_EXT4_WRITE=y
+ CONFIG_OF_EMBED=y
+ CONFIG_ENV_OVERWRITE=y
+-CONFIG_ENV_IS_IN_SPI_FLASH=y
+ CONFIG_USE_HOSTNAME=y
+ CONFIG_HOSTNAME="sc598-som-ezlite"
+ CONFIG_NET_RETRY_COUNT=20
+-- 
+2.34.1
 
-Regards,
-Simon
