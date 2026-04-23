@@ -4,96 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA238FF8860
-	for <u-boot@archiver.kernel.org>; Sat, 25 Apr 2026 16:56:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1EB9FF885C
+	for <u-boot@archiver.kernel.org>; Sat, 25 Apr 2026 16:56:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C6A8284374;
-	Sat, 25 Apr 2026 18:55:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 191268425F;
+	Sat, 25 Apr 2026 18:55:34 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="QkUcrSlN";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="p9vgzRBB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C728E83FB0; Sat, 25 Apr 2026 18:28:53 +0200 (CEST)
-Received: from mail-qt1-x82e.google.com (mail-qt1-x82e.google.com
- [IPv6:2607:f8b0:4864:20::82e])
+ id 63F8B842BF; Sat, 25 Apr 2026 18:34:39 +0200 (CEST)
+Received: from mail-ua1-x943.google.com (mail-ua1-x943.google.com
+ [IPv6:2607:f8b0:4864:20::943])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 286AF8439F
- for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 18:28:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 097C083FF5
+ for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 18:34:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=lucienzx159@gmail.com
-Received: by mail-qt1-x82e.google.com with SMTP id
- d75a77b69052e-50d87c138e1so90630871cf.1
- for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 09:28:49 -0700 (PDT)
+ spf=pass smtp.mailfrom=jcethrid@gmail.com
+Received: by mail-ua1-x943.google.com with SMTP id
+ a1e0cc1a2514c-94aaa5d3bfcso5152868241.3
+ for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 09:34:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1777134528; x=1777739328; darn=lists.denx.de;
- h=in-reply-to:from:content-language:references:cc:to:subject
- :user-agent:mime-version:date:message-id:from:to:cc:subject:date
+ d=gmail.com; s=20251104; t=1777134876; x=1777739676; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=n+beSAOPwtW8EprolRDlwZ2L0dTQnjWV0S86OW2SNQI=;
- b=QkUcrSlN/12EQr89v0Pt2GvkvV8tMkN6f+RmGNT37FxX325fAEcO7zn+4D4JNOnxBx
- tXDLt7wI96VxwxX+LCZZGeP9VK4pefMD+0BrGzelg5Pv6PDGUS/UNMETXHMaZPQt289Z
- NQL0wqg88UenPww4JiMC05j/OTJFhhKb+B+LVl2/ogUfoaCaORCGf75xX0snhS7FGPbk
- c9cABxN6nqeyBulsH5C7g5Pavf5y3iM03o0mdacDAAh8+JK7/eilF2m57OWHiZXechSm
- /lmTkOUZzoYHTNjGY94ydrMuYqh/m5+WqckDs7RCTbNSOp16g+dOuRMSFS0Ya0IWwK/O
- yk5w==
+ bh=0rhjHCeHqsTChJ1NFRA8a2p8g2b1zBvajnobE5jxHoY=;
+ b=p9vgzRBB5AbX9xMT0sK17k8DxCRrxFnzHlci6+rsxj/9KJ9vqwyxyLsYODqhdbYBQC
+ pb2YmKa2h8qZoaIQeK14D03YvQv+30QgXHBr3J0AM5Lk10NowjssXRVXJ5ySqihSfoh7
+ KLW7X4lj3RzKZBPG8sxXbLgf2JjKJiiaoyT/9LR44+MW3K3TuiIt8WlQf7jDHM5SzoH6
+ jrEYb2XdqfG2k1Mv0w0Gi+nSkHA8L6tCiyzu2DvhQXV9wyS0qRUr/UzI+G52wntDSjCe
+ FFzs+Lz+EoQw2/V9H+D3CJyDLdbX3oSFkY3gpjKCvCMFoEZhcr+InmUjJsBMsCyKY/WS
+ f1tg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777134528; x=1777739328;
- h=in-reply-to:from:content-language:references:cc:to:subject
- :user-agent:mime-version:date:message-id:x-gm-gg:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=n+beSAOPwtW8EprolRDlwZ2L0dTQnjWV0S86OW2SNQI=;
- b=mUC0HVvIuORPT9CdiFk3UTNCN1bOc3Mx0uersl3kxVFCwC1LsVHcOusDG4C/tWUjsC
- 7kT/1V1mvEaslyDEFnPkOKWEjYFBxb74/xQvTvJdmKiRzZiETyopT9188qIBJEs/6FlP
- XcjKxcZBwdWYZGRBykHkQZeP39F2sNE+i+I/t/mwWIxW8cg0+EFlTw1cwax5CR1JaFrr
- xDSrIgtw3BO/EG04L3oB8QL2fSJeBW/py07PE2Ga9gRsGtfrdsP3QzKZCQZgnCT5s+mX
- JZQXHtEx7dmUneptZ0jyZOEVhiDDW6/9GtkPXhEnHpaX1mrXWab8YOifyHHjLnVVe8YX
- rPDQ==
-X-Forwarded-Encrypted: i=1;
- AFNElJ+/b3pj4eKhu4bwsYlCgLrR5KoN/bRfhmCttPdXQNth23cBNe6l37g0o8Foacw1FoSO59MGQaM=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx6EO/leSFZjnAY6Co/x4f3SdmkkLm6G+blLcRqCL/U4nrwKx4B
- J7LLKTFUI5CG+JS7nDgCldzaxUtzSg+PK5zFrP6wXI+R4+KrVOEDOiQBPlbkRw==
-X-Gm-Gg: AeBDievVThNjPrMeWFPCYDbdxOkW6z2hrdo0yuEVBP0a+GOsR1+R+Nwp4f3UNxxqQox
- +vvqDAwFsZq+P77pSpSZrfP0yDCcFV3ZgP6BqYtxPhiJEPuzzPGHmowxHMd3Y3CfQC4gPXUtEZ0
- JgLdX6hFmdn0Wq8Kbz3IJdm9wpavQnwaa173HUhKuVX6NU7223DuHDei/+g026XStfXuLwCdffj
- rDWxqlXYCy3FcKsgYEmd7LG/RXx7/n64Qwgc3uOsHiu0E9/030x3YFDVj10RV/EyyUmnHlEu0Az
- s5MI+2uIlrwD5UBXd6bFJgXUd9A+odJjY9tJPjSl0DvZOw3xyExewz4omvITDjv5dpDSIZcrVaK
- d+Y7V1yrov+WHepw2nXmeqN6qpJvnvT29MTJhGXJrcDh7zA5LPBp1Czm9zb8ZJSW2x4ja5ID1eW
- yJMUhhAWP6/dRRE8hutJzjHhfFRy8Rq63qN1r9JW43h5a1xTiUQ2trkqMl/62GUAztV4U247//i
- cd5HHiIapCwjmlpDDkuHQ==
-X-Received: by 2002:a05:6a00:93a8:b0:82f:9c37:ea65 with SMTP id
- d2e1a72fcca58-82f9c37fbdcmr24211265b3a.42.1777049208707; 
- Fri, 24 Apr 2026 09:46:48 -0700 (PDT)
-Received: from [192.168.0.5] (124-218-201-66.cm.dynamic.apol.com.tw.
- [124.218.201.66]) by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-82f8ebb3f8asm24942852b3a.36.2026.04.24.09.46.45
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 24 Apr 2026 09:46:48 -0700 (PDT)
-Message-ID: <39b348ed-ffd3-46bd-9de3-e7bbac224766@gmail.com>
-Date: Sat, 25 Apr 2026 00:46:44 +0800
+ d=1e100.net; s=20251104; t=1777134876; x=1777739676;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=0rhjHCeHqsTChJ1NFRA8a2p8g2b1zBvajnobE5jxHoY=;
+ b=cHLMpEZOr+Ne45uMikEARxiOHEQ9MWxyonmidECNBOSwykXfMevN5iuFj6mJIZam9T
+ vV47UNL+I5WDi5AvD11ds8O6YZavzm1rGdPv7eTA4D+BT1myw9g1FJ6IOEeAYHr/GZao
+ xVZqFHxCGQvMO+jP1JB0mWd/GUn4PGVXugMXAPSwcbvj0SdUcGh4+ncjCnaHHVmQuFxd
+ c6zOICuk1ijdRk2W2Rs4IGFmJNYfvaO3yqN/U3QqoVN1GWzfZd43wV6d72aIaBB2eWjA
+ 78PJeoR0Z5uB2c2z8vfujKJY1eTseU3pOn97nNqGFSnhUL/GwXXv7U2ZMTaXv2521UoT
+ cofw==
+X-Gm-Message-State: AOJu0YxbtTXmd1VnZ7TL8varQpmhIPKSsrimfs5c5476nQRODnd02+fw
+ RysmO8Cnuyh62kiOsgV4oAnri4J7gBhr/5PfsgHHnwPTm4L/DJC+uzxr8BUyM1wC
+X-Gm-Gg: AeBDies1JXFlutkEnQAhLc11cA+nGWa67GGe0Xp1K1terhV4+QvOxY7evex4wLDyl5M
+ GcvcoomD5y4xC4Ajx8tbAj6XXiZeN7VZJPcJ8MrGFuK+vX7Ky8OfGFKExj7RdkhvNdM4nZMPncy
+ WL/IB8TrgC8LOduarHANJRZU8D8dTOgC3El+c2krXAcDq+/t96xi+MqMA9jqWOwEmxmYJ+oFPNO
+ ENzCpXUggu+bYqAniY0JqZlm8f0aG5ATDYTksTpIUkS/SFMIgOVJza/xh1aPnNSZXFaHZcrtTZL
+ wf2vnODSNXaqahGJFWjR4G4mjOT/DfxNrK+4g91i/NAq9TlVrSvPu1ZeKR0znPF0eCtWQMt6bn3
+ VFiQL5jMPNXl6pC6F3VLtaYsCaPzVtqtKw4b7vlmc1TA+WGWpMvHKGX8nALT4WLJJFz4Px38zHm
+ fxiS2hMbRjPzSi56Wq/efLhgw6wsgQX1P8HB2WFYs6ftwdNWO88QmZCz0=
+X-Received: by 2002:ad4:5de5:0:b0:8ac:7ad3:4a66 with SMTP id
+ 6a1803df08f44-8b0280bbdd2mr437759456d6.21.1776954345724; 
+ Thu, 23 Apr 2026 07:25:45 -0700 (PDT)
+Received: from cethr-l01.localdomain ([136.56.120.109])
+ by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-8b02aa4f1f9sm157183266d6.0.2026.04.23.07.25.44
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 23 Apr 2026 07:25:45 -0700 (PDT)
+From: Caleb Ethridge <jcethrid@gmail.com>
+To: u-boot@lists.denx.de
+Cc: malysagreg@gmail.com, trini@konsulko.com, linux@analog.com,
+ philip@philipmolloy.com, sjg@chromium.org,
+ Caleb Ethridge <caleb.ethridge@analog.com>
+Subject: [PATCH v5 05/15] mach-sc5xx: Add USB boot command
+Date: Thu, 23 Apr 2026 10:24:40 -0400
+Message-Id: <bcf7a2612fb0be0814444ca70ed060052042e034.1776954004.git.jcethrid@gmail.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <cover.1776954004.git.jcethrid@gmail.com>
+References: <cover.1776954004.git.jcethrid@gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 1/4] phy: add common PHY properties support
-To: Simon Glass <sjg@chromium.org>
-Cc: trini@konsulko.com, jerome.forissier@arm.com, sumit.garg@kernel.org,
- marek.vasut+renesas@mailbox.org, vladimir.oltean@nxp.com,
- ericwouds@gmail.com, kabel@kernel.org, frank-w@public-files.de,
- daniel@makrotopia.org, ansuelsmth@gmail.com, mkorpershoek@kernel.org,
- skylake.huang@mediatek.com, lucien.jheng@airoha.com, u-boot@lists.denx.de
-References: <20260405144944.41074-1-lucienzx159@gmail.com>
- <20260405144944.41074-2-lucienzx159@gmail.com>
- <CAFLszTj_einDasc5rRzt4KjyLuG2AS+=Y5w6H14aHuE43-dx1A@mail.gmail.com>
-Content-Language: en-US
-From: "Lucien.Jheng" <lucienzx159@gmail.com>
-In-Reply-To: <CAFLszTj_einDasc5rRzt4KjyLuG2AS+=Y5w6H14aHuE43-dx1A@mail.gmail.com>
-X-Mailman-Approved-At: Sat, 25 Apr 2026 18:55:32 +0200
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+X-Mailman-Approved-At: Sat, 25 Apr 2026 18:55:32 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -110,52 +100,115 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+From: Caleb Ethridge <caleb.ethridge@analog.com>
 
-Simon Glass 於 2026/4/11 下午 10:37 寫道:
-> Hi Lucien,
->
-> On 2026-04-05T14:49:40, Lucien.Jheng<lucienzx159@gmail.com> wrote:
->> phy: add common PHY properties support
->>
->> Add a new PHY_COMMON_PROPS library that provides helper functions for
->> PHY drivers to read standardized polarity properties from the device
->> tree node:
->>
->>    - phy_get_rx_polarity() / phy_get_tx_polarity()
->>    - phy_get_manual_rx_polarity() / phy_get_manual_tx_polarity()
->>
->> The dt-bindings/phy/phy.h header with PHY_POL_NORMAL, PHY_POL_INVERT,
->> and PHY_POL_AUTO constants is provided via dts/upstream/include, which
->> is already in the build include path.
->>
->> Ported from Merge tag 'phy-for-7.0':
->>    git://git.kernel.org/pub/scm/linux/kernel/git/phy/linux-phy
->>
->> Link:https://git.kernel.org/linus/e7556b59ba65179612bce3fa56bb53d1b4fb20db
->> Signed-off-by: Lucien.Jheng<lucienzx159@gmail.com>
->>
->> drivers/phy/Kconfig                  |   8 +
->>   drivers/phy/Makefile                 |   1 +
->>   drivers/phy/phy-common-props.c       | 286 +++++++++++++++++++++++++++++++++++
->>   include/linux/phy/phy-common-props.h |  69 +++++++++
->>   4 files changed, 364 insertions(+)
->> diff --git a/drivers/phy/phy-common-props.c b/drivers/phy/phy-common-props.c
->> @@ -74,6 +74,10 @@ static int ofnode_get_u32_prop_for_name(ofnode node, const char *name,
->> +     if (!name) {
->> +             printf("Error: Lookup key inside \"%s\" is mandatory\n",
->> +                    names_title);
-> In U-Boot drivers, error messages typically use log_err() or pr_err()
-> rather than printf(). This applies to the other printf() calls in this
-> file as well. Please can you switch to pr_err() for consistency? Also
-> note that these errors consume code space, so you could use
-> log_debug() if you don't want to do that.
+Add the USB boot command to the environments
+of the boards that support it.
 
-Sorry for the late reply.
+Signed-off-by: Caleb Ethridge <caleb.ethridge@analog.com>
+---
+ board/adi/sc573-ezkit/sc573-ezkit.env           | 1 +
+ board/adi/sc584-ezkit/sc584-ezkit.env           | 1 +
+ board/adi/sc589-ezkit/sc589-ezkit.env           | 1 +
+ board/adi/sc589-mini/sc589-mini.env             | 1 +
+ board/adi/sc594-som-ezkit/sc594-som-ezkit.env   | 1 +
+ board/adi/sc594-som-ezlite/sc594-som-ezlite.env | 1 +
+ board/adi/sc598-som-ezkit/sc598-som-ezkit.env   | 1 +
+ include/env/adi/adi_boot.env                    | 7 +++++++
+ 8 files changed, 14 insertions(+)
 
-I will switch to pr_err for consistency.
+diff --git a/board/adi/sc573-ezkit/sc573-ezkit.env b/board/adi/sc573-ezkit/sc573-ezkit.env
+index 51157ff36aa..36bd207f410 100644
+--- a/board/adi/sc573-ezkit/sc573-ezkit.env
++++ b/board/adi/sc573-ezkit/sc573-ezkit.env
+@@ -11,5 +11,6 @@ loadaddr=CONFIG_SC5XX_LOADADDR
+ #define USE_SPI
+ #define USE_RAM
+ #define USE_MMC
++#define USE_USB
+ 
+ #include <env/adi/adi_boot.env>
+diff --git a/board/adi/sc584-ezkit/sc584-ezkit.env b/board/adi/sc584-ezkit/sc584-ezkit.env
+index 6d4b20d70f6..9336fc4e59d 100644
+--- a/board/adi/sc584-ezkit/sc584-ezkit.env
++++ b/board/adi/sc584-ezkit/sc584-ezkit.env
+@@ -10,5 +10,6 @@ loadaddr=CONFIG_SC5XX_LOADADDR
+ #define USE_NFS
+ #define USE_SPI
+ #define USE_RAM
++#define USE_USB
+ 
+ #include <env/adi/adi_boot.env>
+diff --git a/board/adi/sc589-ezkit/sc589-ezkit.env b/board/adi/sc589-ezkit/sc589-ezkit.env
+index d068b44573f..a4a686158ca 100644
+--- a/board/adi/sc589-ezkit/sc589-ezkit.env
++++ b/board/adi/sc589-ezkit/sc589-ezkit.env
+@@ -11,5 +11,6 @@ loadaddr=CONFIG_SC5XX_LOADADDR
+ #define USE_RAM
+ #define USE_MMC
+ #define USE_SPI
++#define USE_USB
+ 
+ #include <env/adi/adi_boot.env>
+diff --git a/board/adi/sc589-mini/sc589-mini.env b/board/adi/sc589-mini/sc589-mini.env
+index 3827cf4e9a5..2a322bc6761 100644
+--- a/board/adi/sc589-mini/sc589-mini.env
++++ b/board/adi/sc589-mini/sc589-mini.env
+@@ -11,5 +11,6 @@ loadaddr=CONFIG_SC5XX_LOADADDR
+ #define USE_RAM
+ #define USE_SPI
+ #define USE_MMC
++#define USE_USB
+ 
+ #include <env/adi/adi_boot.env>
+diff --git a/board/adi/sc594-som-ezkit/sc594-som-ezkit.env b/board/adi/sc594-som-ezkit/sc594-som-ezkit.env
+index 69d2ec3ba03..a4c72f2e9c7 100644
+--- a/board/adi/sc594-som-ezkit/sc594-som-ezkit.env
++++ b/board/adi/sc594-som-ezkit/sc594-som-ezkit.env
+@@ -12,5 +12,6 @@ loadaddr=CONFIG_SC5XX_LOADADDR
+ #define USE_OSPI
+ #define USE_RAM
+ #define USE_MMC
++#define USE_USB
+ 
+ #include <env/adi/adi_boot.env>
+diff --git a/board/adi/sc594-som-ezlite/sc594-som-ezlite.env b/board/adi/sc594-som-ezlite/sc594-som-ezlite.env
+index f915175e041..e312fc95ae4 100644
+--- a/board/adi/sc594-som-ezlite/sc594-som-ezlite.env
++++ b/board/adi/sc594-som-ezlite/sc594-som-ezlite.env
+@@ -12,5 +12,6 @@ loadaddr=CONFIG_SC5XX_LOADADDR
+ #define USE_OSPI
+ #define USE_RAM
+ #define USE_MMC
++#define USE_USB
+ 
+ #include <env/adi/adi_boot.env>
+diff --git a/board/adi/sc598-som-ezkit/sc598-som-ezkit.env b/board/adi/sc598-som-ezkit/sc598-som-ezkit.env
+index b6f477c8402..754dcece976 100644
+--- a/board/adi/sc598-som-ezkit/sc598-som-ezkit.env
++++ b/board/adi/sc598-som-ezkit/sc598-som-ezkit.env
+@@ -12,5 +12,6 @@ loadaddr=CONFIG_SC5XX_LOADADDR
+ #define USE_OSPI
+ #define USE_RAM
+ #define USE_MMC
++#define USE_USB
+ 
+ #include <env/adi/adi_boot.env>
+diff --git a/include/env/adi/adi_boot.env b/include/env/adi/adi_boot.env
+index eb098dd2256..d6caa95325e 100644
+--- a/include/env/adi/adi_boot.env
++++ b/include/env/adi/adi_boot.env
+@@ -68,3 +68,10 @@ ramboot= wget ${loadaddr} ${serverip}:/fitImage;
+ 	run ramargs;
+ 	bootm ${loadaddr}
+ #endif
++
++#if defined(USE_USB)
++usbargs=setenv bootargs root=/dev/sda2 rw rootfstype=ext4 rootwait ${adi_bootargs}
++usbboot=usb start;
++	ext4load usb 0:1 ${loadaddr} /fitImage; run usbargs;
++	bootm ${loadaddr}
++#endif
+-- 
+2.34.1
 
-Thank you.
-
->
-> Regards,
-> Simon
