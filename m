@@ -4,72 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5713FF885C
-	for <u-boot@archiver.kernel.org>; Sat, 25 Apr 2026 16:20:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68F87FF885C
+	for <u-boot@archiver.kernel.org>; Sat, 25 Apr 2026 16:20:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3D6D984099;
-	Sat, 25 Apr 2026 18:20:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=ifm.com
+	by phobos.denx.de (Postfix) with ESMTP id 063C683FF5;
+	Sat, 25 Apr 2026 18:20:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=ifm.com header.i=@ifm.com header.b="Gz/cZwNZ";
+	dkim=pass (2048-bit key; unprotected) header.d=0leil.net header.i=@0leil.net header.b="ZEjc7qpy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1EED383FB0; Sat, 25 Apr 2026 18:20:08 +0200 (CEST)
-Received: from pp2023.ppsmtp.net (pp2023.ppsmtp.net [132.145.231.115])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 91DC683FB0; Sat, 25 Apr 2026 18:20:31 +0200 (CEST)
+Received: from smtp-42ab.mail.infomaniak.ch (smtp-42ab.mail.infomaniak.ch
+ [84.16.66.171])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 989FC840ED
- for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 18:20:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CE7E1840CB
+ for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 18:20:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=ifm.com
+ dmarc=pass (p=reject dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=fedor.ross@ifm.com
-Received: from pps.filterd (pp2023.ppsmtp.internal [127.0.0.1])
- by pp2023.ppsmtp.internal (8.18.1.7/8.18.1.7) with ESMTP id 63NBsBHE002802;
- Thu, 23 Apr 2026 13:54:58 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ifm.com; h=cc
- :content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=pps; bh=gq1nTI
- y+/CDUeeEW0Wf7DuXiYs29wnqt7zrmzUhsIes=; b=Gz/cZwNZBRiDMKTaSyIopF
- 5GsU9bjyo65RWXeo57c8aDv1lWgteXD+jLma74AR1aOhYrIZdR/0WdUswjTbMze0
- gPNu2mRRCld0VgKIGwPbSowJ3cfWNq1dP/bdfCIQNAced6qBxV9VZ8XU7Nl3sE/i
- sYnO50TlGK+gLGvCzUxs0s4xbr6l4PNjAhuttn6XFg8yZfOeWXgJ1q2BzunAP0vJ
- USPr5fXz9aW1gly0CJoFKQHVMaCVmbMaIhlhXc08JdWCfKFuN7C0S6Y76NrxCEV6
- PlsKZuCby6s/qoEgTjr/Rpqjxi0c0v6hUAq07Bi98aV6qmfDKn87a5riu+t78/lg
- ==
-From: <fedor.ross@ifm.com>
-Date: Thu, 23 Apr 2026 13:54:42 +0200
-Subject: [PATCH 1/2] imx: Add SPI NOR A/B switching support
+ spf=pass smtp.mailfrom=foss+uboot@0leil.net
+Received: from smtp-4-0000.mail.infomaniak.ch (smtp-4-0000.mail.infomaniak.ch
+ [10.7.10.107])
+ by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4g1dCS2prkzb2m;
+ Thu, 23 Apr 2026 16:05:24 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=0leil.net;
+ s=20231125; t=1776953124;
+ bh=Am+dN9nWVO3w1+L7d79/2Oz6ZB6t6UiDiMGAsf3ikNQ=;
+ h=From:Date:Subject:To:Cc:From;
+ b=ZEjc7qpyWwgvZ9X6riMRGoEaFMayXTrP5n8/XGO2YVOhs3Lpz0sqFJcELO/RMgLM2
+ uD7d2n0CO1bYQEbvQ1ym65CNbgF73VEA3H7+oYMVbxniiKhPhG0tAn7MRZOyXEHjO8
+ 9agY6eal3tQVR6VmO52lJAnrQ/bqeobDkOLQVj1fVJNEwbclBeTKFDiCTcOj7kyL15
+ s5LArYRzwHIJsdoodBXfSzCNnL8if8IR+v2dIZK3vxhhZDaZXC59bCp8PiSrILaICL
+ jlj6rj6Bv1wVx6PV/g12H26xvCKoMiAIppWJT7Oq5wBbMAxwxiS0kBPwQJm6kRZnw1
+ e41Z+NcepL/GQ==
+Received: from unknown by smtp-4-0000.mail.infomaniak.ch (Postfix) with ESMTPA
+ id 4g1dCP6Pj3zQyf; Thu, 23 Apr 2026 16:05:21 +0200 (CEST)
+From: Quentin Schulz <foss+uboot@0leil.net>
+Date: Thu, 23 Apr 2026 16:05:13 +0200
+Subject: [PATCH] rockchip: fix asm-operand-widths clang warning
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-ID: <20260423-b4-imx95_img_set_sel-v1-1-1681ea8b1507@ifm.com>
-References: <20260423-b4-imx95_img_set_sel-v1-0-1681ea8b1507@ifm.com>
-In-Reply-To: <20260423-b4-imx95_img_set_sel-v1-0-1681ea8b1507@ifm.com>
-To: NXP i.MX U-Boot Team <uboot-imx@nxp.com>, <u-boot@lists.denx.de>
-CC: Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>,
- Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>, Alice Guo
- <alice.guo@nxp.com>, Ye Li <ye.li@nxp.com>,
- Jacky Bai <ping.bai@nxp.com>, Marek Vasut <marex@nabladev.com>,
- Rasmus Villemoes <ravi@prevas.dk>,
- =?utf-8?q?Jo=C3=A3o_Paulo_Gon=C3=A7alves?= <joao.goncalves@toradex.com>,
- Fedor Ross <fedor.ross@ifm.com>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1776945295; l=1766;
- i=fedor.ross@ifm.com; s=20251127; h=from:subject:message-id;
- bh=uR3X3hZ2xg9FNfKuMBITAnOd9FWGT1xbvVk4gG0nyEw=;
- b=4+TNGKzuXgj41mOjHbJaK04PrHJUp+auCfoS8ZE1NYWJy8K4xVBysb14v27HT74X/2rrHifs2
- NABt5Gkqt40AWZGvFW+SVVBVj9oWiSwKU3Qzg8ItykSYnY1/nbD4V2O
-X-Developer-Key: i=fedor.ross@ifm.com; a=ed25519;
- pk=QXV2AUGQzqdu1EMmSJgH2f2Z1Mu1wSx7+5+dcQzQ864=
-X-Originating-IP: [172.19.129.122]
-X-ClientProxiedBy: DEESEX10.intra.ifm (172.26.140.25) To DEESEX10.intra.ifm
- (172.26.140.25)
-X-Proofpoint-ID: SID=4dpjh9dc95 QID=4dpjh9dc95-1
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
- definitions=2026-04-23_03,2026-04-21_02,2025-10-01_01
+Message-Id: <20260423-rk35-cnt-freq-v1-1-8f07677be5ca@cherry.de>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMQQqDMBBA0avIrDsQExXqVUoXOpm0YyHaiYog3
+ t3YLt/i/x0Sq3CCtthBeZUkY8wobwXQu4svRvHZYI1tTGUd6sfVSHHGoPxFU997R8F5bwlyMyk
+ H2X6/x/PvtPQD03xN4DhO1QXN63EAAAA=
+X-Change-ID: 20260423-rk35-cnt-freq-059b3cf3dd2c
+To: u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, 
+ Kever Yang <kever.yang@rock-chips.com>, Jonas Karlman <jonas@kwiboo.se>, 
+ Xuhui Lin <xuhui.lin@rock-chips.com>, Heiko Stuebner <heiko@sntech.de>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, 
+ Mark Kettenis <mark.kettenis@xs4all.nl>
+X-Mailer: b4 0.15-dev-47773
+X-Infomaniak-Routing: alpha
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,72 +79,86 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Marek Vasut <marex@nabladev.com>
+From: Quentin Schulz <quentin.schulz@cherry.de>
 
-Query the SM via SCMI, obtain rom_passover_t->img_set_sel and based on
-that, add 0 or 0x400000 offset (A or B copy offset) to boot container
-read address.
+CONFIG_COUNTER_FREQUENCY is currently 24000000 for all SoCs, meaning it
+fits in a 32b type. For 64b SoCs, it's an issue since the registers are
+64b.
 
-Signed-off-by: Marek Vasut <marex@nabladev.com>
-Signed-off-by: Fedor Ross <fedor.ross@ifm.com>
+clang complains that we're trying to fit a 32b value into a 64b
+register:
+
+arch/arm/mach-rockchip/rk3528/rk3528.c:98:45: error: value size does not match register size specified by the constraint and modifier [-Werror,-Wasm-operand-widths]
+   98 |         asm volatile("msr cntfrq_el0, %0" : : "r" (CONFIG_COUNTER_FREQUENCY));
+      |                                                    ^
+include/generated/autoconf.h:372:34: note: expanded from macro 'CONFIG_COUNTER_FREQUENCY'
+  372 | #define CONFIG_COUNTER_FREQUENCY 24000000
+      |                                  ^
+/home/qschulz/work/upstream/u-boot/arch/arm/mach-rockchip/rk3528/rk3528.c:98:32: note: use constraint modifier "w"
+   98 |         asm volatile("msr cntfrq_el0, %0" : : "r" (CONFIG_COUNTER_FREQUENCY));
+      |                                       ^~
+      |                                       %w0
+
+Even though cntfrq_el0[1] is only using the 32b LSB of its 64b, use the
+'x' operand modifier[2] to force the value to be 64b and fix the
+warning.
+
+[1] https://developer.arm.com/documentation/ddi0601/2026-03/AArch64-Registers/CNTFRQ-EL0--Counter-timer-Frequency-Register?lang=en
+[2] https://gcc.gnu.org/onlinedocs/gcc/Extended-Asm.html#AArch64-Operand-Modifiers
+
+Suggested-by: Mark Kettenis <mark.kettenis@xs4all.nl>
+Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 ---
- arch/arm/mach-imx/image-container.c | 10 ++++++++++
- arch/arm/mach-imx/imx9/scmi/soc.c   | 13 +++++++++++++
- 2 files changed, 23 insertions(+)
+ arch/arm/mach-rockchip/rk3528/rk3528.c | 2 +-
+ arch/arm/mach-rockchip/rk3576/rk3576.c | 2 +-
+ arch/arm/mach-rockchip/rk3588/rk3588.c | 2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/arch/arm/mach-imx/image-container.c b/arch/arm/mach-imx/image-container.c
-index 7bfcc9d7e9d..eeea0b80b39 100644
---- a/arch/arm/mach-imx/image-container.c
-+++ b/arch/arm/mach-imx/image-container.c
-@@ -204,6 +204,8 @@ static int get_dev_container_size(void *dev, int dev_type, unsigned long offset,
- 	return ret;
- }
+diff --git a/arch/arm/mach-rockchip/rk3528/rk3528.c b/arch/arm/mach-rockchip/rk3528/rk3528.c
+index f9bfc445b85..a39cb8be9a1 100644
+--- a/arch/arm/mach-rockchip/rk3528/rk3528.c
++++ b/arch/arm/mach-rockchip/rk3528/rk3528.c
+@@ -95,7 +95,7 @@ void rockchip_stimer_init(void)
+ 	if (reg & TIMER_EN)
+ 		return;
  
-+extern u8 imx95_detect_secondary_image_boot(void);
-+
- static bool check_secondary_cnt_set(unsigned long *set_off)
- {
- #if IS_ENABLED(CONFIG_ARCH_IMX8)
-@@ -227,6 +229,14 @@ static bool check_secondary_cnt_set(unsigned long *set_off)
- 	}
- #endif
+-	asm volatile("msr cntfrq_el0, %0" : : "r" (CONFIG_COUNTER_FREQUENCY));
++	asm volatile("msr cntfrq_el0, %x0" : : "r" (CONFIG_COUNTER_FREQUENCY));
+ 	writel(0xffffffff, HP_TIMER_BASE + HP_LOAD_COUNT0_REG);
+ 	writel(0xffffffff, HP_TIMER_BASE + HP_LOAD_COUNT1_REG);
+ 	writel(TIMER_EN, HP_TIMER_BASE + HP_CTRL_REG);
+diff --git a/arch/arm/mach-rockchip/rk3576/rk3576.c b/arch/arm/mach-rockchip/rk3576/rk3576.c
+index c17ba418ced..e44ebb6e676 100644
+--- a/arch/arm/mach-rockchip/rk3576/rk3576.c
++++ b/arch/arm/mach-rockchip/rk3576/rk3576.c
+@@ -130,7 +130,7 @@ void rockchip_stimer_init(void)
+ 	if (reg & TIMER_EN)
+ 		return;
  
-+#if IS_ENABLED(CONFIG_IMX95)
-+	u8 img_set_sel = imx95_detect_secondary_image_boot();
-+
-+	*set_off = img_set_sel ? 0x400000 : 0;
-+
-+	return !!img_set_sel;
-+#endif
-+
- 	return false;
- }
+-	asm volatile("msr cntfrq_el0, %0" : : "r" (CONFIG_COUNTER_FREQUENCY));
++	asm volatile("msr cntfrq_el0, %x0" : : "r" (CONFIG_COUNTER_FREQUENCY));
+ 	writel(0xffffffff, HP_TIMER_BASE + HP_LOAD_COUNT0_REG);
+ 	writel(0xffffffff, HP_TIMER_BASE + HP_LOAD_COUNT1_REG);
+ 	writel((TIMER_EN << 16) | TIMER_EN, HP_TIMER_BASE + HP_CTRL_REG);
+diff --git a/arch/arm/mach-rockchip/rk3588/rk3588.c b/arch/arm/mach-rockchip/rk3588/rk3588.c
+index eedce7b9b08..10f96175a17 100644
+--- a/arch/arm/mach-rockchip/rk3588/rk3588.c
++++ b/arch/arm/mach-rockchip/rk3588/rk3588.c
+@@ -167,7 +167,7 @@ void rockchip_stimer_init(void)
+ 	if (reg & TIMER_EN)
+ 		return;
  
-diff --git a/arch/arm/mach-imx/imx9/scmi/soc.c b/arch/arm/mach-imx/imx9/scmi/soc.c
-index fbee435786c..330b276b23a 100644
---- a/arch/arm/mach-imx/imx9/scmi/soc.c
-+++ b/arch/arm/mach-imx/imx9/scmi/soc.c
-@@ -745,6 +745,19 @@ void build_info(void)
- 	puts("\n");
- }
- 
-+#if IS_ENABLED(CONFIG_IMX95)
-+u8 imx95_detect_secondary_image_boot(void)
-+{
-+	rom_passover_t rdata = { 0 };
-+	int ret = scmi_get_rom_data(&rdata);
-+
-+	if (!ret)
-+		return rdata.img_set_sel;
-+
-+	return 0;
-+}
-+#endif
-+
- int arch_misc_init(void)
- {
- 	build_info();
+-	asm volatile("msr cntfrq_el0, %0" : : "r" (CONFIG_COUNTER_FREQUENCY));
++	asm volatile("msr cntfrq_el0, %x0" : : "r" (CONFIG_COUNTER_FREQUENCY));
+ 	writel(0xffffffff, HP_TIMER_BASE + HP_LOAD_COUNT0_REG);
+ 	writel(0xffffffff, HP_TIMER_BASE + HP_LOAD_COUNT1_REG);
+ 	writel(TIMER_EN, HP_TIMER_BASE + HP_CTRL_REG);
 
--- 
-2.47.3
+---
+base-commit: bfe90a308a94caa9d855440683521ff04122ae2a
+change-id: 20260423-rk35-cnt-freq-059b3cf3dd2c
+
+Best regards,
+--  
+Quentin Schulz <quentin.schulz@cherry.de>
 
