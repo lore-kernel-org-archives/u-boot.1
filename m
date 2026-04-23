@@ -4,92 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A100FF885C
-	for <u-boot@archiver.kernel.org>; Sat, 25 Apr 2026 18:25:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 322A5FF885C
+	for <u-boot@archiver.kernel.org>; Sat, 25 Apr 2026 18:30:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F4133844E3;
-	Sat, 25 Apr 2026 20:25:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id F29A484314;
+	Sat, 25 Apr 2026 20:29:59 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=e-labworks.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="h6zCObvt";
+	dkim=pass (2048-bit key; unprotected) header.d=e-labworks-com.20251104.gappssmtp.com header.i=@e-labworks-com.20251104.gappssmtp.com header.b="zlkTSDCF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 114488448C; Sat, 25 Apr 2026 20:22:26 +0200 (CEST)
-Received: from mail-oo1-xc36.google.com (mail-oo1-xc36.google.com
- [IPv6:2607:f8b0:4864:20::c36])
+ id A66D284370; Sat, 25 Apr 2026 20:29:58 +0200 (CEST)
+Received: from mail-qv1-xf34.google.com (mail-qv1-xf34.google.com
+ [IPv6:2607:f8b0:4864:20::f34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 71F8484480
- for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 20:22:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B7E8C842E7
+ for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 20:29:54 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none)
+ header.from=e-labworks.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=lucienzx159@gmail.com
-Received: by mail-oo1-xc36.google.com with SMTP id
- 006d021491bc7-68470763896so4761095eaf.1
- for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 11:22:23 -0700 (PDT)
+ spf=none smtp.mailfrom=sergio.prado@e-labworks.com
+Received: by mail-qv1-xf34.google.com with SMTP id
+ 6a1803df08f44-899d6b7b073so94168416d6.2
+ for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 11:29:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1777141342; x=1777746142; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=6bqIXZgDQ/UMUvXqSsKgirnDD5nDcus65tNaiPSkH9s=;
- b=h6zCObvtHf79p3KdmM6Vv6PsSCqazkQM+na8Qnl2rW/7MimmxKNRDW+DLSpbaLF9UC
- akciq3lHaUmQYhBQGFWshfVdMRXPn5h4fMiXi3siKDZOVs/Gs/enntz4LXhoYYEMdYlW
- LQpX05o2A5PO7YXcyJpm87kLYwnUySqd3LEk7NuYqY8dpSDyZ77BnOBsOVYYYjODU6jv
- Z+FH/a9xJ63ttEawYj/PHCzkD/GDJCPC1UYWzengFbcFmQooCPj66640dQuEYFi3iWW0
- drtBan9lQh/eNusmI7VcuuwPKEZQxsO0nTN+09fTLPYcf9XrYLf30N73BaN+jMriJy5K
- qo3Q==
+ d=e-labworks-com.20251104.gappssmtp.com; s=20251104; t=1777141793; x=1777746593;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=6no6ML6Iq/qveYgoXgq5rlTzz8LOIQ3UBaDqH7XCbUA=;
+ b=zlkTSDCF7xlQ7mE5rUfvvOUQC4/1EDnqlpkh89IJdMoshNalOavYySyEfPyNDqL+Nz
+ dRP1U0sVS7PcTAPGDimLzTdlNS6PGw2pmrWODSYQhGPKkB9bKupfXDNEGvcu2s/MCn2/
+ AwahS3mylBLhgXNIgZARhkYS44LWrlU76H9uyfyMSfL4JJ8BR5tMy9xZFrUJ/MO6afcA
+ VSXcd2LIEyffuiJ41JHpSyQMb21IwKzlDeFPGRB7BdEQAg2vxs6z1urJgE8Vga+dgWkc
+ ySHAyezOXUrybXg8FGQYq3rLcpN82d4q0U2XcSP90J70nK5aNoxQgwCrH0DPiIcqdkvR
+ 4d3w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777141342; x=1777746142;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=6bqIXZgDQ/UMUvXqSsKgirnDD5nDcus65tNaiPSkH9s=;
- b=FsqZer3rLTUSL0SOntWc4zNJNRCbEOWDcqY5gx/Cbcs6FF/B7zmFocv15gFABZDj8R
- Eo3r1xw+Kz/SRVFoSHr9zdQf+2L163HeHWcce0ZTOXEao5O1pkRZrs3yaA7pJ82gVya1
- Rb4R//3GoWKG2hIC94ZhdnhayXwKt57hY4f4FJEGTMHZAhvzpjX+1ItFIXPOq7i3hCFb
- 9zd3HV/VWtmeTjA7y+1Me9chiwPKEE4ePKEjLNol6Cu1c6TjGiQdZYUPEvmh1m4XtOsu
- wiS9M4DF52PHwutx4Vt6359jHGXxZodBLL2t0d2DyKePPIGndhEg4DHxCSmEacLA07aK
- CxaA==
-X-Forwarded-Encrypted: i=1;
- AFNElJ9oZDnIytBaFEPqpjO0DxMlOrLIjomVqlvN8ndyj7upakN2pavD0Ou8Z/2WCToWaBQnbp7dhuw=@lists.denx.de
-X-Gm-Message-State: AOJu0YxTj1dLnRcwj845WHsSL/JzngBH9G3uedd0GAeeA02XIb+o3WgM
- SuRuH9WIW0+iHNDoOk/NbCujY7hTUuKk0b1VRWVCgTtq6Dpwkc/JLUfdC3Dsww==
-X-Gm-Gg: AeBDievibZ9fS7e3G3Lu+1PmyGfPNFKgC0Rfj+go4tchsZtFxWFjPqsgQwOvWcC0d6n
- 1R1ACFdTLd03VE/StTc3+cEJcdTHIIZG6gwzibEMt7TX10f8v6FSZoAO9Z+pp9Z1Yhl/chQprjp
- LNkorlaleXIfo43Ufhz52Fu9/hxdgIoKmnCpseKMal5HzVj9RE8I1qJ6pAZeTwzXEg2TFbqWFMy
- 02lXUWZdS5MONObEF7qgmrfTAUGNki7UYJFGLhYj0YYGfr3gRpp8WHaZp2Go9Jb1pb8RCs/1Fiu
- c7uJHxUkYuFfCW3GHBmASqFap4U1V6W5ksEVW29Nh6lx+gLk/OGzCIEcebcmblmcSvxNbtF9AQB
- k7+F1/UKY16Uj12fFAeB3Ca2yZ/PLcW2pQFgBvOy2n21Db5Vncv2m801Y7r9rWj/ZFK4HN/hrMt
- NCn39E0eC0toNPPA2k/xISqDC05ifvGFhkwNj9BYjAuoFk+vG0i65pm3QXyJkxh3BqVDnQDmQSV
- ecQyDooQRGNqoagNR+MOAoBcCDpCNP3
-X-Received: by 2002:a17:903:2acb:b0:2b4:5b9e:2f51 with SMTP id
- d9443c01a7336-2b5f9fb80demr392994735ad.34.1777104520101; 
- Sat, 25 Apr 2026 01:08:40 -0700 (PDT)
-Received: from localhost.localdomain (124-218-201-66.cm.dynamic.apol.com.tw.
- [124.218.201.66]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2b5fab0cbaasm250916935ad.54.2026.04.25.01.08.36
+ d=1e100.net; s=20251104; t=1777141793; x=1777746593;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=6no6ML6Iq/qveYgoXgq5rlTzz8LOIQ3UBaDqH7XCbUA=;
+ b=OM1ScKdRCaIwb76x3NKH8e8J63OVy6sF44h7nVzLUoisAhti2JQsCliz4kAgSTRZDQ
+ 2GOh0h1e+BZ7JYldGn9r2gYqDHpYyxxa3NdZ6WO6FooNs4ZsKmQOAY6g4d1rJs+4BKal
+ rrby0TOxZxWwJdLCh7iTAmVK72x4lcPdAwNV1q8ArGMi5Xk2b+N5RqfJAmx9WtZeNI2U
+ 06bpZHLZND8UlpVD4ATcrIVnF/qECJcrjFp6g50xA0JvXXcY+9hOn73GFAU0m7lgiVdK
+ vPynT+PSvR5f2xiH4KFAqJi0rlFkQppSioye3KiOlCHkvYOwdYTvfdIMyu7ewigX6KkG
+ qGoQ==
+X-Gm-Message-State: AOJu0YwoXrsGhY0tVl3IfYR5BQBbd/mveB3FZx1lEdbIpcIbIVazafd8
+ UbdqnlOqzz28lgvSizzqE5FG9vS4dOyj851Lx9wfm3n695+nDC9qnH8qQ2XRXcQ2SmJsGkvmplL
+ ZngTk+lVmAg==
+X-Gm-Gg: AeBDietgFtqUmPoFAtAHI72f6JeET9B+Of/CgFbMK2iqbSBqolwaC8xJY58Misarz7a
+ DxmqZ5AlTAQnPV+5PCAzsNZ8IekIkoiRL69yF9bJ8Ljp9YF1C4zX0Lmfq0XKKSKJ6g1z8Ai/Acp
+ YiW8KTd7TkYqe5Ka2hcgrLaHtNWQDfqNdzffLCdNQve4dq2QkcIalqjFZ1AScStisSS/I0zbqNJ
+ qI2WGPQ9dLtqO0FvNzA60nyx1yfGDuvIelmEQr+WLD89ahO2zG5OsjK7xzOKtk2q36PYk9twD00
+ PW0Rh6cwD1YB3Hvoav/krbVQwS7BTpSV6U9uosIuTcEpK0JNd3L8vCczAq/M3r43ht5V6NapzbV
+ I/aNlMnpscvEPSY6rd7EGN6gk/o5Y+2zME1qDSZwdKbL1PYkbH/mrUxAiWlmndOQG9p1AX6+EaE
+ Ygz/fk59GOmK8MyWrXuJ43eRrcCebz/mcG0RNp8Tb1lw==
+X-Received: by 2002:a05:693c:3007:b0:2ea:5057:a2f9 with SMTP id
+ 5a478bee46e88-2ea5057b737mr6662607eec.16.1776959181212; 
+ Thu, 23 Apr 2026 08:46:21 -0700 (PDT)
+Received: from desktop.. ([2804:7f0:6401:dc31:4200:1760:44a0:9daa])
+ by smtp.gmail.com with ESMTPSA id
+ 5a478bee46e88-2e539fa5c86sm33732055eec.1.2026.04.23.08.46.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 25 Apr 2026 01:08:39 -0700 (PDT)
-From: "Lucien.Jheng" <lucienzx159@gmail.com>
-To: trini@konsulko.com, jerome.forissier@arm.com, sumit.garg@kernel.org,
- marek.vasut+renesas@mailbox.org, vladimir.oltean@nxp.com
-Cc: ericwouds@gmail.com, kabel@kernel.org, frank-w@public-files.de,
- daniel@makrotopia.org, ansuelsmth@gmail.com, mkorpershoek@kernel.org,
- skylake.huang@mediatek.com, lucien.jheng@airoha.com, u-boot@lists.denx.de,
- "Lucien.Jheng" <lucienzx159@gmail.com>
-Subject: [PATCH v4 2/3] net: phy: airoha: air_en8811: use standard
- rx-polarity/tx-polarity properties
-Date: Sat, 25 Apr 2026 16:06:48 +0800
-Message-Id: <20260425080649.75688-3-lucienzx159@gmail.com>
+ Thu, 23 Apr 2026 08:46:20 -0700 (PDT)
+From: Sergio Prado <sergio.prado@e-labworks.com>
+To: u-boot@lists.denx.de
+Cc: trini@konsulko.com, sjg@chromium.org, alpernebiyasak@gmail.com,
+ ilias.apalodimas@linaro.org, marek.vasut+renesas@mailbox.org,
+ sughosh.ganu@arm.com, wolfgang.wallner@at.abb.com, bb@ti.com,
+ y.moog@phytec.de, xypron.glpk@gmx.de, sergio.prado@e-labworks.com,
+ jerome.forissier@arm.com, afd@ti.com, quentin.schulz@cherry.de,
+ Wojciech.Dubowik@mt.com
+Subject: [PATCH v3 0/2] binman: add PKCS#11/HSM signing support for X509
+ certificates
+Date: Thu, 23 Apr 2026 12:45:34 -0300
+Message-Id: <20260423154536.768603-1-sergio.prado@e-labworks.com>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20260425080649.75688-1-lucienzx159@gmail.com>
-References: <20260425080649.75688-1-lucienzx159@gmail.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Sat, 25 Apr 2026 20:25:41 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,154 +103,96 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Replace the proprietary airoha,pnswap-rx / airoha,pnswap-tx boolean
-device tree properties with the standard rx-polarity and tx-polarity
-properties defined in phy-common-props.yaml.
+Motivation
+----------
 
-Backward compatibility is maintained by reading the legacy boolean
-properties first and passing them as the default_pol argument to
-phy_get_rx/tx_polarity(). If the standard properties are absent the
-legacy values are used transparently, so existing device trees remain
-functional without modification.
+TI K3 secure boot requires X509 certificates to be signed with a private
+key at build time. Until now, binman expected this key to be present as a
+plain PEM file on the build host. For production use, however, private keys
+should never exist unprotected on a build machine — they belong inside a
+Hardware Security Module (HSM) that enforces access control and keeps the
+key material unexportable.
 
-Link: https://git.kernel.org/linus/66d8a334b57e64e43810623b3d88f0ce9745270b
-Signed-off-by: Lucien.Jheng <lucienzx159@gmail.com>
----
-``` dts config
-rx-polarity = <PHY_POL_INVERT>;
-tx-polarity = <PHY_POL_NORMAL>;
+This series adds support for signing X509 certificates via any PKCS#11-
+capable HSM (YubiKey, TPM, network HSM, SoftHSM2 for development, etc.).
 
-```en8811h init log with new PHY common props:
-U-Boot 2026.01-rc5--gd1a76e2e4a64-dirty (Apr 25 2026 - 15:37:25 +0800)
-131072 bytes read in 57 ms (2.2 MiB/s)
-mtk-eth ethernet@15100000: MD32 firmware version: 24112802
-ofnode_read_bool: airoha,pnswap-rx: false
-phy_get_polarity_for_mode: querying 'rx-polarity' for mode '2500base-x' (supported=0x3, default=0)
-ofnode_get_u32_prop_for_name: looking up '2500base-x' in props='rx-polarity' names='rx-polarity-names' default=0
-ofnode_read_prop: rx-polarity: ofnode_count_u32_prop: property 'rx-polarity' has 4 bytes (1 elements)
-ofnode_get_u32_prop_for_name: 'rx-polarity' has 1 elements, 'rx-polarity-names' has -1 entries
-ofnode_get_u32_prop_for_name: '2500base-x' not found in 'rx-polarity-names', trying 'default'
-ofnode_get_u32_prop_for_name: 'default' entry not found in 'rx-polarity-names'
-ofnode_get_u32_prop_for_name: single-element 'rx-polarity', reading directly
-ofnode_read_u32_index: rx-polarity: 0x1 (1)
-ofnode_get_u32_prop_for_name: resolved value 1 for name '2500base-x' from 'rx-polarity'
-phy_get_polarity_for_mode: 'rx-polarity' for mode '2500base-x' = 1
-ofnode_read_bool: airoha,pnswap-tx: false
-phy_get_polarity_for_mode: querying 'tx-polarity' for mode '2500base-x' (supported=0x3, default=0)
-ofnode_get_u32_prop_for_name: looking up '2500base-x' in props='tx-polarity' names='tx-polarity-names' default=0
-ofnode_read_prop: tx-polarity: ofnode_count_u32_prop: property 'tx-polarity' has 4 bytes (1 elements)
-ofnode_get_u32_prop_for_name: 'tx-polarity' has 1 elements, 'tx-polarity-names' has -1 entries
-ofnode_get_u32_prop_for_name: '2500base-x' not found in 'tx-polarity-names', trying 'default'
-ofnode_get_u32_prop_for_name: 'default' entry not found in 'tx-polarity-names'
-ofnode_get_u32_prop_for_name: single-element 'tx-polarity', reading directly
-ofnode_read_u32_index: tx-polarity: 0x0 (0)
-ofnode_get_u32_prop_for_name: resolved value 0 for name '2500base-x' from 'tx-polarity'
-phy_get_polarity_for_mode: 'tx-polarity' for mode '2500base-x' = 0
+Design
+------
 
- drivers/net/phy/airoha/Kconfig      |  1 +
- drivers/net/phy/airoha/air_en8811.c | 60 +++++++++++++++++++++--------
- 2 files changed, 45 insertions(+), 16 deletions(-)
+Two new make variables are the sole user-visible interface:
 
-diff --git a/drivers/net/phy/airoha/Kconfig b/drivers/net/phy/airoha/Kconfig
-index da8747939e3..4139df343ad 100644
---- a/drivers/net/phy/airoha/Kconfig
-+++ b/drivers/net/phy/airoha/Kconfig
-@@ -7,6 +7,7 @@ config PHY_AIROHA_EN8811
- 	depends on PHY_AIROHA
- 	depends on SUPPORTS_FW_LOADER
- 	select FW_LOADER
-+	select PHY_COMMON_PROPS
- 	help
- 	  AIROHA EN8811H supported.
- 	  AIROHA AN8811HB supported.
-diff --git a/drivers/net/phy/airoha/air_en8811.c b/drivers/net/phy/airoha/air_en8811.c
-index 0b974472732..32f06dd6dfa 100644
---- a/drivers/net/phy/airoha/air_en8811.c
-+++ b/drivers/net/phy/airoha/air_en8811.c
-@@ -23,6 +23,7 @@
- #include <linux/compat.h>
- #include <dm/device_compat.h>
- #include <u-boot/crc.h>
-+#include <linux/phy/phy-common-props.h>
+  BINMAN_PKCS11_URI    PKCS#11 URI of the signing key on the HSM, e.g.
+                       pkcs11:token=mytoken;object=mykey;type=private
+  BINMAN_PKCS11_MODULE Path to the PKCS#11 shared library (.so), e.g.
+                       /usr/lib/softhsm/libsofthsm2.so (optional when the
+                       module is already configured via openssl.cnf or
+                       PKCS11_MODULE_PATH)
 
- /* MII Registers */
- #define AIR_AUX_CTRL_STATUS		0x1d
-@@ -1046,11 +1047,50 @@ static int air_leds_init(struct phy_device *phydev, int num, u16 dur, int mode)
- 	return 0;
- }
+When BINMAN_PKCS11_URI is set, binman replaces the on-disk keyfile with
+the URI at signing time. The PKCS11_PIN environment variable can be used
+to supply the token PIN non-interactively; it is appended as a
+pin-value=<pin> query parameter to the URI.
 
--static int en8811h_config(struct phy_device *phydev)
-+static int en8811h_config_serdes_polarity(struct phy_device *phydev)
- {
--	struct en8811h_priv *priv = phydev->priv;
- 	ofnode node = phy_get_ofnode(phydev);
-+	unsigned int pol, default_pol;
- 	u32 pbus_value = 0;
-+	int ret;
-+
-+	if (!ofnode_valid(node))
-+		return 0;
-+
-+	default_pol = PHY_POL_NORMAL;
-+	if (ofnode_read_bool(node, "airoha,pnswap-rx"))
-+		default_pol = PHY_POL_INVERT;
-+
-+	ret = phy_get_rx_polarity(node,
-+				  phy_string_for_interface(phydev->interface),
-+				  BIT(PHY_POL_NORMAL) | BIT(PHY_POL_INVERT),
-+				  default_pol, &pol);
-+	if (ret)
-+		return ret;
-+	if (pol == PHY_POL_INVERT)
-+		pbus_value |= EN8811H_POLARITY_RX_REVERSE;
-+
-+	default_pol = PHY_POL_NORMAL;
-+	if (ofnode_read_bool(node, "airoha,pnswap-tx"))
-+		default_pol = PHY_POL_INVERT;
-+
-+	ret = phy_get_tx_polarity(node,
-+				  phy_string_for_interface(phydev->interface),
-+				  BIT(PHY_POL_NORMAL) | BIT(PHY_POL_INVERT),
-+				  default_pol, &pol);
-+	if (ret)
-+		return ret;
-+	if (pol == PHY_POL_NORMAL)
-+		pbus_value |= EN8811H_POLARITY_TX_NORMAL;
-+
-+	return air_buckpbus_reg_modify(phydev, EN8811H_POLARITY,
-+				       EN8811H_POLARITY_RX_REVERSE |
-+				       EN8811H_POLARITY_TX_NORMAL, pbus_value);
-+}
-+
-+static int en8811h_config(struct phy_device *phydev)
-+{
-+	struct en8811h_priv *priv = phydev->priv;
- 	int ret = 0;
+The openssl bintool auto-detects which OpenSSL PKCS#11 interface to use:
 
- 	/* If restart happened in .probe(), no need to restart now */
-@@ -1081,20 +1121,8 @@ static int en8811h_config(struct phy_device *phydev)
- 	if (ret < 0)
- 		return ret;
+ - If the pkcs11 provider is loaded (OpenSSL >= 3.1 + pkcs11-provider),
+   it uses -provider default -provider pkcs11.
+ - Otherwise it falls back to the legacy libp11 engine
+   (-engine pkcs11 -keyform engine).
 
--	/* Serdes polarity */
--	pbus_value = 0;
--	if (ofnode_read_bool(node, "airoha,pnswap-rx"))
--		pbus_value |=  EN8811H_POLARITY_RX_REVERSE;
--	else
--		pbus_value &= ~EN8811H_POLARITY_RX_REVERSE;
--	if (ofnode_read_bool(node, "airoha,pnswap-tx"))
--		pbus_value &= ~EN8811H_POLARITY_TX_NORMAL;
--	else
--		pbus_value |=  EN8811H_POLARITY_TX_NORMAL;
--	ret = air_buckpbus_reg_modify(phydev, EN8811H_POLARITY,
--				      EN8811H_POLARITY_RX_REVERSE |
--				      EN8811H_POLARITY_TX_NORMAL,
--				      pbus_value);
-+	/* Configure Serdes polarity from device tree */
-+	ret = en8811h_config_serdes_polarity(phydev);
- 	if (ret < 0)
- 		return ret;
+Detection is done once via 'openssl list -providers' and the result is
+cached, so there is no per-signing subprocess overhead.
 
---
+Testing
+-------
+
+Tested on a Toradex Verdin AM62 (verdin-am62_a53_defconfig) board with
+both legacy engine path and pkcs11 provider path using SoftHSM2 and
+YubiKey 5 NFC.
+
+A subtle issue was discovered during testing: binman uses a
+ThreadPoolExecutor internally (etype/section.py) and may call multiple
+ObtainContents() methods concurrently even under make -j1. SoftHSM2 and
+some real HSMs do not support simultaneous logins from different threads,
+which caused intermittent "login failed" and "object not found" errors
+during multi-certificate builds. To fix it, a module-level threading.Lock
+was used to serialise all PKCS#11 signing calls.
+
+Test coverage: btool/openssl.py and etype/x509_cert.py remain at 100%
+(verified with 'binman test -T').
+
+Changes in v3:
+- Split into two patches: bintool infrastructure (1/2) and x509_cert
+  feature (2/2)
+- Fix global environment mutation: _run_cmd_pkcs11() no longer writes to
+  os.environ directly; it now uses the new extra_env parameter so module
+  paths are scoped to the subprocess only, which is both cleaner and safe
+  under concurrent execution
+- Add module-level threading.Lock to serialise concurrent PKCS#11 signing
+  calls and fix intermittent login failures caused by binman's
+  ThreadPoolExecutor
+- Fix URI query string separator: use '&' when the URI already contains
+  '?' (e.g. module-path already present), '?' otherwise
+- Test cases updated
+
+Changes in v2:
+- Add tests for _build_key_args() (PEM path, PKCS#11 provider, PKCS#11
+  engine, PIN appending), _pkcs11_use_provider() (caching),
+  _run_cmd_pkcs11() (with and without module path), and end-to-end
+  x509_cert signing with a PKCS#11 URI (testX509CertPkcs11), ensuring
+  btool/openssl.py and etype/x509_cert.py have 100% test coverage
+
+Sergio Prado (2):
+  binman: bintool: add extra_env parameter to run_cmd
+  binman: x509_cert: add PKCS#11/HSM signing support
+
+ Makefile                        |   2 +
+ tools/binman/binman.rst         |  18 +++++
+ tools/binman/bintool.py         |  15 +++-
+ tools/binman/btool/openssl.py   | 117 +++++++++++++++++++++++++++-----
+ tools/binman/etype/x509_cert.py |  47 +++++++++++--
+ tools/binman/ftest.py           | 110 ++++++++++++++++++++++++++++++
+ 6 files changed, 286 insertions(+), 23 deletions(-)
+
+-- 
 2.34.1
-
