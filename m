@@ -4,100 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD778FF885A
-	for <u-boot@archiver.kernel.org>; Sat, 25 Apr 2026 20:29:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CDD2CFF885A
+	for <u-boot@archiver.kernel.org>; Sat, 25 Apr 2026 20:32:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4925E8425F;
-	Sat, 25 Apr 2026 22:29:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id F0A0584099;
+	Sat, 25 Apr 2026 22:32:00 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="lI+nyi01";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="LdMbe8l7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7D4F484413; Sat, 25 Apr 2026 22:29:15 +0200 (CEST)
-Received: from mail-vk1-xa35.google.com (mail-vk1-xa35.google.com
- [IPv6:2607:f8b0:4864:20::a35])
+ id CD09A84099; Sat, 25 Apr 2026 22:31:59 +0200 (CEST)
+Received: from mail-vs1-xe2e.google.com (mail-vs1-xe2e.google.com
+ [IPv6:2607:f8b0:4864:20::e2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 13F0484099
- for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 22:29:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9665783FF5
+ for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 22:31:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=briansune@gmail.com
-Received: by mail-vk1-xa35.google.com with SMTP id
- 71dfb90a1353d-56f8c77ca6aso6123961e0c.2
- for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 13:29:13 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1777148952; cv=none;
- d=google.com; s=arc-20240605;
- b=iZ2wQH7gbYxfbWHs+3HH3f2V2gcJe7r0m/AUOH906HkSgmtoV4dv0OJbWeTxfiJrso
- Ku8t6u3lnfT+Fii5A0BiqPLoXPhr8ec03zGVQu/OQBw6/tPK31CJ9fIkC4NmQdvoCDL6
- n9yGFnsGfh3PjdC/htHYa4LVqLgC6WDZiSbswJfZVZ4JQf5JaR1Yi74wpk7qnRq194bl
- oMkB1hMPyb//hnU11ka2inQzGUiRW8Xs87oy2mD8y4LAImuxnhsHy0f8ZXiU5kHAchT7
- 0xymmdgwtwCx9KsASmLEFtMk+2dV3roD5MLB5bJSkVbirPv5WeOfv2ASh5aUlQkehLBQ
- SVWw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=fk1BxS6YuCEhcq9QN4kYWYP+cfYP6zQjrQQY0dXSpck=;
- fh=k35IO2L1j89wb6y1sDvfp+bf1e6g8N/OsFBPLpxMlRg=;
- b=bi16qUSQtgNTEpsTGYK/okXToMZ52rVa/rC1p6rhSc1s8WDl3QwUXeVXiKBgRnauWl
- bJwqLkpC4YApdu27t4SdR9ccly4aqw0LYeEZhGI83WX7YkOI+mHVfP2sMeLt1cOCsfNo
- hHVnZjEnfMiVVGer/k+DXrsGaUTTtmojrzf8KO93eyavIv0Roy9etNf1t/j516upSHtL
- EhioACe4gMkXVIyGCnSeAVNdILIld5AbIyzrgLEcmkbWQ8M/7ywj5vjEwQQ2RscEAcok
- TZTr6uf7nTNn4tfXnTIsGwRpn5IumkN1BPfM2mt3cMuYkW56tAZnv2MCe/NPBC9llpIE
- HfRQ==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-vs1-xe2e.google.com with SMTP id
+ ada2fe7eead31-6058ac0ebceso5454366137.2
+ for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 13:31:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1777148952; x=1777753752; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=fk1BxS6YuCEhcq9QN4kYWYP+cfYP6zQjrQQY0dXSpck=;
- b=lI+nyi01GrRuMgniIqrnzJm7FzU7Y8mg3e7K8O0pvE/M6Ftog8FhilHRfjH7bFz7sb
- e1vEdGGORLA55ApdqVbjt1qFZnz/70aNqRFdpYuTL7ODpyp/Twgij5kk9Dh0pM8eJfUt
- 4aQOBZcDxasRdSvJWrEoHHJJl6hsCEUlBr4yIu+yx3XZlXKoEjoGb5akfidv8jDfkUHK
- 33CyK85QutEtNjty/txode14+MqXNdJvMiK0LTkD1/ytNiDFgEwtJmgJon+wgyw5btuV
- Eihpyprbpxa+KKZuJKP3IKL4P8JFf27A4co5fr3NsRxxHwHY/3MS5xK4IoiMbJ4bg0O2
- uGTQ==
+ d=konsulko.com; s=google; t=1777149116; x=1777753916; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=wATnMTkrQ6FLdAHN/1ymheNqVYtGDRzqq5wxSbNcBk0=;
+ b=LdMbe8l7mxbOnx2tqIzNrKvtu9ja5e3zWcybQ8xefpkbNHwes7apxhrO6UuE6t0v1+
+ DqEckGXyp0ShnTANbFBWIZqn74sGCMX3sGRpCiFayKnmolaJ/jBIVjNTWCsV/qQ8LsAK
+ KcQ09KvqjuB5uC0NbAC0Gnq68utZWdSMoR7Fs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777148952; x=1777753752;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=fk1BxS6YuCEhcq9QN4kYWYP+cfYP6zQjrQQY0dXSpck=;
- b=MUgFB8DK/K89afBIyjTOyEDhZepdgmUIM5d/DLvD8z3AW6QQzv/lKThC3cEGAuxD2K
- aQcCptPouoOrDZiuWWrv7j3PUSDdVFcNSwhqujmEG+LBHIefuehG6SX30uLNNFQNrZG7
- Ms/8OMYaiezKAinz89gEn/lBc81aNwDXN8W0jBnxQfy7ekpVROHCeQ4cB2smXePVr2Qk
- 7UM+8b5NGeophfpriryZSfHDW9c+Os2losbGmk5rCm07/hZWvXrvEoeQFn4Cg3vYlatX
- Q18091cO4p7FRoloRAvYPuLcyTHrLRZhwc72qKfckr3ztbJDSSk+1hsLQPxQRP8tyyG+
- MkBg==
-X-Gm-Message-State: AOJu0YzV6PltCB6HDVBPeApwdj5GraUFTOHlgGahCWb8iziXC4pqKSM8
- YFs6DaLtO4tIx3JNj/pBdX+38U6bTwk2ZeibrNVfSax2Y+rfF1RGUerlsASq7e3+nzMc2Glzf6Q
- wiTlXL1281z+mRfdRjegO3nj/eDTEi0JHlmo/VT/Hlg==
-X-Gm-Gg: AeBDieuvljyKXKjRdKy5V5O3LzCZvakMc4HwNccCh6ikk85QCdw9P7bd4hiLUmE3w7c
- zo8Wrbmke5xuXix4fM+fkVOquqEnVEYsuAXRUe5B45rON1rgI35hRc9hKo/Jr3tDdn63T9W8GdW
- RV4HK/v8IgaQOopV3r+AwvDZMv0/A/f1S0kiz5RJ2WUlP4jGgdispMO0XJbprdl/l57GG7BleDe
- G7kd+1C4PSeU1fkp3P/TZ0kA6/uWhiizEoRtEB1Wy3AiP2EgccEjw+6Gml7XcG6Nx5VVYQGIwl/
- QJXRK1FAe/rm3Ur9n4c=
-X-Received: by 2002:a05:6808:894d:b0:479:ead7:2a53 with SMTP id
- 5614622812f47-479ead745a7mr7895489b6e.11.1776946695012; Thu, 23 Apr 2026
- 05:18:15 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1777149116; x=1777753916;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:to:from:x-gm-gg:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=wATnMTkrQ6FLdAHN/1ymheNqVYtGDRzqq5wxSbNcBk0=;
+ b=CrU50FxL0ph1VjpEzMThhtVI7xY3kpP7QnaOpSfTuruEPAXKsXdB5SzRbC4Jd6672d
+ MEck6P4Jpic2t+XaTyPQW5USjxz+GuEQdBOCrOsykq6WLJzq2TSjZUq+f29XpKhJsowb
+ CxD6q6+6fqzMt4MSeDIVayqAQgAx/FX1p6YlxbcInDYpM1n6+vtiZEMuEIOXkxw7MXKN
+ nNQXmLATZ46UcTAcJctKHoMJb6ECiixp6tykY18Dm9CGBp6yDOOPAvRgs8t0JdpCKQ8H
+ YT6zrVdltqiAsrPNoZYXO1ga+0VRTfUd4ls7EkFNYmeOGE5q64Iyg7DrRkGx4KKR0L7g
+ rgog==
+X-Gm-Message-State: AOJu0YwahQAiHJWPmScMqyHkiEyuEGQCNs0vXLNVBJdf/V0cMa752wMF
+ 2P/xLE0d9KkpmXBgOVle9UN+9NaHRajfEC8l3txbAueWKyyJTmQ3IeQ4xRZKkMDhokkE29+o478
+ nW9rm8ePGMg==
+X-Gm-Gg: AeBDieurepJnx+b2F6JcaGJ2RM8jHgv71Kw+/lA2dp41jtVRdLKhmT0N4R1asE8ynrM
+ G63af9SHhbgvYUern6IsFA3DKtvv1BsWp/l3yiy2MV0UrMcgncd/MQUhq2lkSDpU00oXhK3JhB9
+ f5IWFn33aKTk4Xan5YCYtaNLotRSm4Tw656nyoLP94e6C3Y/ELEbz9MP8F6DRdHq09r4XyjZFnw
+ IPTZ+/J5GdqNmD9fgRWZcEqIWAFEGs2RaGahrKUz66r9d8+c1N8JDCETuniuMVDZr1vJNYq+42Q
+ ZhTohU1xq7Uz56nFLBaP/vFvvvuZl8Ma80BY0PsUF/rJqZfMWw6tlvEdB9kdQG4qjQ4UDA9xyye
+ u9jQN9na4KdXeatYnF24Q3F04suRmTHyvI7Z/ZxPumT560E4t7/bzgpbk2VJe77g8KiC4Mpe88y
+ UiAS9v4X4p8jihUC0uPZNX69pvAWpa2q9gYMRDGwDeSRjaOa7MIXMGNJ5zuQ5K1fakOpzFITbwX
+ +3TeGa+hMDAqfmbWFZ6+vo5IkQzgTI+BFTlUJ1hvTCDlzFCQhPTi2bCsg3+DmWCgNfD3Bs=
+X-Received: by 2002:a05:6870:b2d1:b0:42c:24e7:f074 with SMTP id
+ 586e51a60fabf-42c24e8cd37mr7466881fac.17.1776909750532; 
+ Wed, 22 Apr 2026 19:02:30 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-189-203-106-235.totalplay.net.
+ [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-42f090b1de9sm5587967fac.6.2026.04.22.19.02.29
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 22 Apr 2026 19:02:30 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>
+In-Reply-To: <20260413130007.1987326-1-sjg@chromium.org>
+References: <20260413130007.1987326-1-sjg@chromium.org>
+Subject: Re: [PATCH v3 0/8] test: Refactor FIT test for clarity and
+ extensibility
+Message-Id: <177690974962.1999178.6083237812778038477.b4-ty@konsulko.com>
+Date: Wed, 22 Apr 2026 20:02:29 -0600
 MIME-Version: 1.0
-References: <20260423080637.30006-1-alif.zakuan.yuslaimi@altera.com>
-In-Reply-To: <20260423080637.30006-1-alif.zakuan.yuslaimi@altera.com>
-From: Sune Brian <briansune@gmail.com>
-Date: Thu, 23 Apr 2026 20:18:02 +0800
-X-Gm-Features: AQROBzA1akF-CUsGspDVY_sLdM_y69DUEveVTJ5RI1Ldx9KtUTyy4avLuCdUtMI
-Message-ID: <CAN7C2SAyU4nFoBNdO1S2NzX==CvzQja5h3NQGEjWwNZ3aUYO6Q@mail.gmail.com>
-Subject: Re: [PATCH v2 0/3] SoCFPGA: Update DDR Support for Gen5/Arria10 in
- U-Boot
-To: alif.zakuan.yuslaimi@altera.com
-Cc: u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -114,63 +96,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Apr 23, 2026 at 4:06=E2=80=AFPM <alif.zakuan.yuslaimi@altera.com> w=
-rote:
->
-> From: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
->
-> This patch set updates the boot support for the Altera SoCFPGA Gen5/Arria=
-10 platform in U-Boot. The changes include:
->         1. Update MMU/dcache setup across Gen5/Arria10 using common drive=
-r
->         2. Add ECC scrubbing support for Gen5/Arria10
->         3. Add DRAM size checking for Gen5/Arria10
->
-> This patch set has been tested on CycloneV devkit with SDMMC boot and RAM=
- boot (TFTP & ARM DS debugger).
-> Tested on Arria10 devkit with RAM boot as well
->
-> v1->v2:
-> --------
-> - ECC scrubbing, Gen5 DRAM size checking, and shared dram_bank_mmu_setup(=
-) is set as optional via Kconfig and
->   defaulted on only for the reference Arria10/CycloneV boards to avoid SP=
-L overflows on size-limited Gen5
->   defconfigs.
->
-> History:
-> --------
-> [v1]: https://patchwork.ozlabs.org/project/uboot/cover/20251216084623.195=
-89-1-alif.zakuan.yuslaimi@altera.com/
->
-> Alif Zakuan Yuslaimi (3):
->   arm: socfpga: Consolidate dram_bank_mmu_setup()
->   ddr: altera: gen5: Add DRAM size checking
->   ddr: socfpga: Add ECC DRAM scrubbing support for Gen5/Arria10
->
->  arch/arm/mach-socfpga/Kconfig        | 21 +++++++
->  arch/arm/mach-socfpga/misc.c         | 31 ++++++++++
->  arch/arm/mach-socfpga/misc_arria10.c | 26 ---------
->  arch/arm/mach-socfpga/spl_a10.c      |  4 ++
->  arch/arm/mach-socfpga/spl_gen5.c     | 17 ++++++
->  drivers/ddr/altera/Makefile          |  4 +-
->  drivers/ddr/altera/sdram_arria10.c   | 34 +++++------
->  drivers/ddr/altera/sdram_gen5.c      | 64 ++++++++++++++++++++-
->  drivers/ddr/altera/sdram_soc32.c     | 85 ++++++++++++++++++++++++++++
->  drivers/ddr/altera/sdram_soc32.h     | 15 +++++
->  10 files changed, 252 insertions(+), 49 deletions(-)
->  create mode 100644 drivers/ddr/altera/sdram_soc32.c
->  create mode 100644 drivers/ddr/altera/sdram_soc32.h
->
-> --
-> 2.43.7
->
+On Mon, 13 Apr 2026 06:59:51 -0600, Simon Glass wrote:
 
-Hi Alif,
+> This series reworks the FIT test (test_fit.py) to make it easier to
+> maintain and extend. It fixes the buildconfigspec so the test actually
+> runs on sandbox, avoids unnecessary U-Boot restarts, renames the main
+> test for easier selection, adds a missing-kernel check, fixes Python
+> warnings, converts the test to use a class, splits into separate test
+> functions, and adds Sphinx documentation.
+> 
+> [...]
 
-Just a small question.
-The size issue for the failed board in the last pipeline test is unsolvable=
-?
+Applied to u-boot/master, thanks!
 
-Thanks,
-Brian
+[1/8] test: fit: Drop the fit_signature buildconfigspec
+      commit: 863446256b0b03a1729c697dc694014c74cbd0be
+[2/8] test: fit: Avoid restarting U-Boot
+      commit: 1cd07d900c59dc8df1a59cf5c2a2b3c87fb7fb8b
+[3/8] test: Rename test_fit() to test_fit_base()
+      commit: 875ebafe448b4ad665f131fd19fea07970af0027
+[4/8] test: Add a check for a missing kernel
+      commit: 55aa0c5acc4f6a0133b93bd3e91bf25367e14db7
+[5/8] test: Update fit test to fix a few Python warnings
+      commit: 09a9dd3780c782b48cc3b9995c066d242eed5199
+[6/8] test: Convert FIT test to use a class
+      commit: cd6e1f6dbe45f39b7aa92107826b9ad88a859b28
+[7/8] test: Add fsetup fixture and prepare helper for FIT test
+      commit: 06b12fba0ce89c803440f3f113e6548343b648e7
+[8/8] test: Add documentation for the FIT test
+      commit: 65c036eeecb9c2c2f991ee10dfd31c7bb24c9ff5
+-- 
+Tom
+
+
