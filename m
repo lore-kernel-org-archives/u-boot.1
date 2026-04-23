@@ -4,125 +4,108 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD004FF8860
-	for <u-boot@archiver.kernel.org>; Sat, 25 Apr 2026 16:36:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0ADBDFF885C
+	for <u-boot@archiver.kernel.org>; Sat, 25 Apr 2026 16:40:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3C53C8412A;
-	Sat, 25 Apr 2026 18:36:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 6E45884105;
+	Sat, 25 Apr 2026 18:40:18 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Tw6q1mP/";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="t5/6dP8a";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1D8178407E; Sat, 25 Apr 2026 18:36:32 +0200 (CEST)
-Received: from CY3PR05CU001.outbound.protection.outlook.com
- (mail-westcentralusazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c112::7])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id E184A84109; Sat, 25 Apr 2026 18:40:17 +0200 (CEST)
+Received: from mail-oa1-x35.google.com (mail-oa1-x35.google.com
+ [IPv6:2001:4860:4864:20::35])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E02FA84109
- for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 18:36:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6340D840CB
+ for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 18:40:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=b-padhi@ti.com
-Received: from CO1PR10MB4435.namprd10.prod.outlook.com (2603:10b6:303:6c::17)
- by MW4PR10MB5861.namprd10.prod.outlook.com (2603:10b6:303:180::8)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9846.23; Sat, 25 Apr
- 2026 07:49:23 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=AFGYBrh43cOKFyvAH4roWsYi3mSL3XNznBPC4TqLyMK8K79Ls+BmH3H/WAwWBMAmYYMr0Ffg8rGHFVH8WZ/1Lyq+QYPqu8aTTfpR2myRM2eNPNlF7SNSF6ov9WC2Hicl8mPuuETJbjji4fR8tT/2FzEm/pG6aALj6TbX29MhBj66wGdRMTqCBBbHgZdUiBzWZFHqDzEWm9w0InewEK4rhPjGI0lyoIwJSuyhfiM6OgQwpZmO2oqgLdrTRsJagwoCiWTmUZUCce3i15oscmVGBKVlSSPWox9Yo2eNlwd3b4od7XiTkz3PboVYx6EhnjZrWTIJJ4lbet4NwMYO5rMbwA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=+u4ubUIRwW/l0byA9OLrX8nXDHwY8oaHKB0cQgsEjhI=;
- b=g/DM1QgmOem/omxKf1/T3Pw6IvUVCDr5AW8z+DEJcurwL1+aL3jdNmU6n4yn5Y8owQ1bHn6Wy87iYE+0FPjS+qbtQgKeWOIT+2hVuh6TM3Ari5Jiph5XJmaD50IleapQHfmes8Rufys+BCIl5n3c90xUrB8JAMzg09p0IFVbCD45dgP6mkE0CQjH8KTZkKel5jDl/2R2puryIT+MLBh/rZczrgaDITrPzZxF2iNVGfpWHKksPixsKEhjj7vmZpoCqDwKjdqGIqONS2aD9cPW1HYxTYDa62w498W7Q8RwNfkrMbQjd6DrEH+Z8LckqlOSRoyJ70gwVD9wqR0/AM/hMw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.23.194) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
- dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=+u4ubUIRwW/l0byA9OLrX8nXDHwY8oaHKB0cQgsEjhI=;
- b=Tw6q1mP/s4A0gGsGqfhiBRx5ZOlG1rf2K1bym3vZNYokq2fJJyoMTCS2lauXsDIX2jRz3s0SZsY0vzL2tGf/NawyrvWD0LaL+tWUX/XbJPdSqmL6kag5yIwGCYVCCf4ZhnVsqtCVtLgVtfOUZLFSbt7cMIEJncMORuRrx5Z1QzU=
-Received: from BL1P221CA0034.NAMP221.PROD.OUTLOOK.COM (2603:10b6:208:5b5::18)
- by CO1PR10MB4435.namprd10.prod.outlook.com (2603:10b6:303:6c::17)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9846.23; Sat, 25 Apr
- 2026 03:38:03 +0000
-Received: from MN1PEPF0000ECD9.namprd02.prod.outlook.com
- (2603:10b6:208:5b5:cafe::ed) by BL1P221CA0034.outlook.office365.com
- (2603:10b6:208:5b5::18) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9846.23 via Frontend Transport; Sat,
- 25 Apr 2026 03:38:03 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.194)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.23.194 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.23.194; helo=lewvzet200.ext.ti.com; pr=C
-Received: from lewvzet200.ext.ti.com (198.47.23.194) by
- MN1PEPF0000ECD9.mail.protection.outlook.com (10.167.242.138) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9846.18 via Frontend Transport; Sat, 25 Apr 2026 03:38:03 +0000
-Received: from DLEE206.ent.ti.com (157.170.170.90) by lewvzet200.ext.ti.com
- (10.4.14.103) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Fri, 24 Apr
- 2026 22:38:00 -0500
-Received: from DLEE205.ent.ti.com (157.170.170.85) by DLEE206.ent.ti.com
- (157.170.170.90) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Fri, 24 Apr
- 2026 22:38:00 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE205.ent.ti.com
- (157.170.170.85) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Fri, 24 Apr 2026 22:38:00 -0500
-Received: from uda0510294.dhcp.ti.com (uda0510294.dhcp.ti.com [10.24.50.162])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id
- 63P3bk812903263; Fri, 24 Apr 2026 22:37:57 -0500
-From: Beleswar Padhi <b-padhi@ti.com>
-To: <trini@konsulko.com>
-CC: <afd@ti.com>, <bb@ti.com>, <anshuld@ti.com>, <hnagalla@ti.com>,
- <jm@ti.com>, <nm@ti.com>, <n-francis@ti.com>, <u-kumar1@ti.com>,
- <b-padhi@ti.com>, <u-boot@lists.denx.de>
-Subject: [PATCH v4 02/11] arm: mach-k3: Use FIT image data addr as fallback if
- 'load' prop is missing
-Date: Sat, 25 Apr 2026 09:07:33 +0530
-Message-ID: <20260425033742.1519298-3-b-padhi@ti.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20260425033742.1519298-1-b-padhi@ti.com>
-References: <20260425033742.1519298-1-b-padhi@ti.com>
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-oa1-x35.google.com with SMTP id
+ 586e51a60fabf-40f1ffba6a0so6515734fac.0
+ for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 09:40:14 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1777135213; cv=none;
+ d=google.com; s=arc-20240605;
+ b=daomddkm0J9/yiPwiiMO5INdxCT1Bvuaf9pUBIcmM6Phc1FfKmUYSJQ3Y7p693r+jc
+ v19itWnw1j2R9v/vEtm4owjZi4ZSTotGgaOSVfQrefoyRGt0faYnMATAdy4trldEhb/I
+ 3OAfWQfjwnBBXDFHqCN7B7BnYlUzTirqy7kMS68rkMtVYxJQFGhwgy+WF9KVhK6CXmS1
+ MzQI1niVWF7vHISw6Rkbyd6xDE2oF20qpYw9YRGsP9kbzrUkPOFgYBoDyrrQua59Mnbt
+ GlN3RyFWDNgV/rl09axKzTtr5znIMdPtn4SRDt555pv+Nzi915lZwmS260o3eThsIS9c
+ /k9Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=hg4I4aLzzSUK+2Ny/I/KwQv36JUwWymks3Il9haf9Xg=;
+ fh=1pqfa4fLOAnWs0aRnppSe1xXirl+0mZpoFceW6lVFfY=;
+ b=UK28pL/di8N9zMo3I7rd/vIHoNjuJgrSgRt0cZybCVPrOa0hxs8fuScv3F6lQED9td
+ fYSPf2bD0R4OhO0CuzWSnStYIwbN9GgvcjZopSOs4hQ6HZa2eLmIzGIT3K0o8jNyGq/6
+ nlQ/Lm1CsipB1QLk4xmi/+8I5opFEIvOv8FBZc/UwYT8KDrIKk1LCJH7MBllzw051j3O
+ emPbHjo55UFPDmbOVjzXxPf+vVzs5uZZg2B9/dwWc/fQtPZi50Nv0yaXCrlcOW29M8CT
+ iiV4W1zEaIv5yCvaiTTzYeucBd9T52d5ljtYLbMAC7b5JAjTSiMD6o7qsvaNaJPoOYkJ
+ QBCA==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1777135213; x=1777740013; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=hg4I4aLzzSUK+2Ny/I/KwQv36JUwWymks3Il9haf9Xg=;
+ b=t5/6dP8apXKOlkahUFn6K+3R5hl9H01+dpavKOWCBNLfgHZH8KSVluUXAmyOGOj4we
+ Ffq5UJ6zvlTsE7POmELcJQ0JROK1eSt9KCdhBB/pxabUT/3hrmGmr4W5yt+1/ubAoijd
+ m46vYoVdQA1xzFeF9S2ObGZi9L/yvn9oeWbfMAZGBzCBn9Mh5i2Ic36plKmctMwb2Uqm
+ Evipt+5YcGTDfspajh7BwPeBRHHfHokyZz3kOpjsWYRj8Uu6uC4wfdnXRx3r6x2/o/1w
+ diW9I9tVx2N9ajuj6oTskJ3Et5cocPNsP+JIq+toxptS3bZCLR3S3m7A2oO2m+XiGkEQ
+ XO2Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1777135213; x=1777740013;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=hg4I4aLzzSUK+2Ny/I/KwQv36JUwWymks3Il9haf9Xg=;
+ b=HlKVb3d92z7eJkw22RIc3UDWMTKHktl0ZRs6jj+y5LMuWKU2gUcW+3I/F1YzwjfD+m
+ vlk7MSWMouKG/eeV/zxeoMOghP/eHmZ0Tu9T4eZWlZYfbPODW4dqeUFz0MJEBeg28QPc
+ CT28tY7pB6CWU9Zn5KAy/rMaOcJJNlOeNO9jmmwpcKj5kMeoon4VQmOSnWWeZbkrEOSf
+ K59jYMaIdV4S9Dn/Z9S+/Xf2+3RW4cS1YWqyuwVpgQXneRQCTC6JXlnlifqSRquchaOP
+ 4ghPcC/O329tU662DScfM7/TRkIkwGrggIz52qpWnqXEnrXcV4jfBYtrm3TMeDrJQIBO
+ ywMg==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ/LooK8De1Bt3KB43a3g/3BX4BlskGNmye732ZSvZSnWmdnG0E0DIkVjwD5Rw2+b1REF2Z4EWY=@lists.denx.de
+X-Gm-Message-State: AOJu0YzbpIBOJtubsQ8UTPoP5aDCG1XO19SIOO4tPeXhWWpw2+FPac2D
+ UiU0c5rAeghdvUC+vkyjHM31WftRjf5ecNDlG6UL8n5Nb2wOjpWUjdpHSIlO+zfaQu/wtD0ZjB7
+ /fRoJDT/+vRsPiYmoo4+0mBGUrw6lpDQtndAT3JiDfnwfjqVfc3xm4hM=
+X-Gm-Gg: AeBDies/xAoNoqCL1a/Vk4hUIO3za/cuZmGmI7MgaAqaUfonjnnabYFe0ThPX2nWnjR
+ 6dGsu2eVag17CY3diIyw4Zg9uHgtXHwzyYS9smVc4cQUtYgkfB4hcOkai3yg5I6+uJNSwMpt2Dx
+ v6Lhrydm0HIpBNmplvQJML/RZ3bQw+Rw4iyDN7TJY8S6vkickzF6Xi4BmCaKWjwohK/qiZkVo1X
+ 9/jgo3cczsgTZ7SjK1wUajh9DlKM0DIOYluywI4b53zPWK98Np0YFm5K6s+GQjWR0mWvOSMSKYZ
+ K1OcVhyZ6/1sTjMfqmyacoBtHde2fTRdo7HpCvkyUTUlkonbR78VfxLjYxkOFBbiy4CcaZRaPgl
+ 9DcwMT6c/fPkR//5HgHEpUK0LjJ9OwmGIiWgQ7CioaUxhEjSr5IkE+oCdB7070cSQ04EKs+g7gj
+ mwMimkiK0weAR4sOTEfL3JPJVuRp+p98SvIivCNEH+phc0bpkN1li2laeOiiBUDv2i3rrkF3mbE
+ aIWjvi7MjLa8mjoPGyLyU/BN9dsQwH+w9mzvXvjR+UXlhRNI16k0uOiqxnBaYbmFOydvYhfiUHl
+ aHSwy67KpS1KYF6SHrc/Q/qU++oMGdOYfoH3CcLlyq/UPrNnw/shnQ==
+X-Received: by 2002:a53:d005:0:b0:654:2ef4:a5d0 with SMTP id
+ 956f58d0204a3-6542ef4b01cmr13873284d50.59.1776965198144; Thu, 23 Apr 2026
+ 10:26:38 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: MN1PEPF0000ECD9:EE_|CO1PR10MB4435:EE_|MW4PR10MB5861:EE_
-X-MS-Office365-Filtering-Correlation-Id: b8b19ed8-9f6c-4e09-c0d1-08dea27c0e4e
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|82310400026|36860700016|376014|1800799024|56012099003|22082099003|18002099003;
-X-Microsoft-Antispam-Message-Info: 9n28rXG9HwhpboFpv8LwNH1MiePZBX6PNJMitU8GpKV4Q5b6ZWgHV0eroWr2VfQ/YBYi9lt1MzXV6K0ry6RMkIjX0lzQb9Ym16mu8bv2E8/pSqj/kOZK67G9QKlW+6vdXIBr0p1zDozgPMwyat90lwKoN5KVJ6SniZMMBIC4rgfSn/DPq6TLO+fHYGAAI3+z29QpSe0IVGpOO8wZ3c3ILGtWkaT85mYUJqDJHE07swO3S9+5PxwL1Q9fB5Fl1QcPiEIO8/ZnMsFGf2f/y2YIQKaelyY6PfnGz/JoGv+5AvjX/5A3DBWwR/KfGZc2TxA7vRGkVX0wnlU+GR9uFp/OlLyMtzhkM67mn/42BrkqG8hpyBAcQpjPDmDfpubZxMKG1hIqi74zrRQQD6dVo1U1Am7ZQBbrr8zo2w9c4cfphWtGUL2cIHkzQscYx8Y6I0ihTsV/vYNC8sfMsgakZu4vaAC2b7iEoRhWeNE+29LCSqVH1lywUm1zKnf7NzPBamma/ODeiacLuuRJmELqbdf4YY7WowAUZPdzTIeNDqywMc++fXpeFN3Jkyz3lwBInAesLW+1cUCQslhOa8Teu0aEm06EsN5im41PmbvJ0XRg77uuAFp3gsj/ajmr9ScchmEVbwZoo27ExI06OBGdTaAUdVihZ87dzh0H/+5tiNnYeprLRoCTCg79+DNndvil7AMI3LOg3kcS+7KPjTRJBjeTALAa9YAa4mSs4yl/a+xGGNi0BlaFfXl6Qx0PNow/xUVcgUQlt+0HWlyDpI1AajRLmIO+PV2hrkTcbxSkP1rNfNc=
-X-Forefront-Antispam-Report: CIP:198.47.23.194; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:lewvzet200.ext.ti.com; PTR:InfoDomainNonexistent;
- CAT:NONE;
- SFS:(13230040)(82310400026)(36860700016)(376014)(1800799024)(56012099003)(22082099003)(18002099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: YvNR5sD8FGyjj3ONSQvG9WKPAdwJvIT0S1k+Wxn7RnXJ9oJK/JguTeCMZILl5D/xZR+XDXHilhBPb52kdeuPrYsASEqb1Et2xLOxChUJZSqWcdigACm7uGaDyX/PEdAbJblMK7EZV01fBy7BlUEdWx10rwXiVHTMPncmFfWUqHZRO2MRtdKrAt7IZ+2EfigidZXwT9hc7ZJEeTM0MO0nzXxXnUxCo5xpPEcFG+EA/dLsb2KQiyDXCKoYj9sa6vWXNx5wmfvLxjbyKH3DSsiN+kXp0ftZMn1+kyBNVkzojc+D7DZmBiszpHy9tPzZfUbThnoIsyGu+wtPcylfiRf4ewax8J9UsCkqaI9Svt1hUsqv3otp1WXpsYlb++H39FM3UQvOmHS95lQI6wg3rR2QNhILoLqg5AyQKGmIm1sZlJXHvPbJLD4hChgq7939tzD6
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Apr 2026 03:38:03.1677 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: b8b19ed8-9f6c-4e09-c0d1-08dea27c0e4e
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.194];
- Helo=[lewvzet200.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: MN1PEPF0000ECD9.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CO1PR10MB4435
-X-OriginatorOrg: ti.com
+References: <20260416055948.130041-1-ilias.apalodimas@linaro.org>
+ <20260416055948.130041-7-ilias.apalodimas@linaro.org>
+ <9511039f-3c92-4b4f-b6fd-c13d48867d24@amd.com>
+ <CAC_iWjK-nrgc5k6G4PioWb=YoLi5vJojfPLC_=N8_68RAiJNXg@mail.gmail.com>
+ <c938e4b7-66a7-4156-b394-1b28c213e14f@amd.com>
+In-Reply-To: <c938e4b7-66a7-4156-b394-1b28c213e14f@amd.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Thu, 23 Apr 2026 20:26:02 +0300
+X-Gm-Features: AQROBzCIEcS9ra3-md8l314u1vJlm7XSjqfagycAv5N1h5R8WtePPlNOxVrJVSQ
+Message-ID: <CAC_iWj+8zdF1MG2ZEmgJmF8-ONYDaHAjH3GLDLhutEzhC1fpiw@mail.gmail.com>
+Subject: Re: [PATCH v2 6/6] common: Add an option to relocate on ram top
+To: Michal Simek <michal.simek@amd.com>
+Cc: trini@konsulko.com, marek.vasut+renesas@mailbox.org, jonas@kwiboo.se, 
+ anshuld@ti.com, sjg@chromium.org, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -139,77 +122,85 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-It is possible for FIT Images to skip mentioning the pre-defined 'load'
-address property. In those cases, SPL uses the actual address of the FIT
-Image data as the fallback load address. Use this FIT data address for
-referencing the image when the 'load' property is missing.
+On Thu, 23 Apr 2026 at 19:06, Michal Simek <michal.simek@amd.com> wrote:
+>
+>
+>
+> On 4/23/26 17:28, Ilias Apalodimas wrote:
+> > Hi Michal
+> >
+> >
+> >>>    {
+> >>>        debug("Monitor len: %08x\n", gd->mon_len);
+> >>> -#if CONFIG_VAL(SYS_MEM_TOP_HIDE)
+> >>> +
+> >>> +     if (CONFIG_IS_ENABLED(RELOC_ADDR_TOP)) {
+> >>> +             int bank;
+> >>> +             phys_size_t total_size = 0;
+> >>> +
+> >>> +             for (bank = 0; bank < CONFIG_NR_DRAM_BANKS; bank++) {
+> >>> +                     if (gd->ram_top <= gd->bi_dram[bank].start)
+> >>> +                             gd->ram_top = gd->bi_dram[bank].start +
+> >>> +                                             gd->bi_dram[bank].size;
+> >>> +                     total_size += gd->bi_dram[bank].size;
+> >>
+> >> Here you have one problem. If the latest bank is defined with size = 0
+> >> then your code won't ignore it and just use it. I think you should check at
+> >> least that size is not zero.
+> >
+> > I don't think this checks belongs here. IIRC the only reason to do
+> > that is have some previous stage bootloader, or earlier u-boot code
+> > update the zero length with a valid region. We already do similar
+> > checks in fdt_fixup_memory_banks(). We should add similar ones to the
+> > dram_init_banksize() variants. Most of the board specific functions
+> > call fdtdec_setup_memory_banksize() anyway, which I plan to fix as
+> > well and get rid of board code that's not needed anymore.
+> >
+> >>
+> >> Obviously size needs to be big enough to fit u-boot itself.
+> >
+> > Yea that makes sense, I can add a check for this.
+> >
+> >>
+> >> And as I said this is one configuration. Versal Gen 2 code has by default
+> >> configuration that it stays in a bank where it runs.
+> >> board/amd/versal2/board.c: dram_init()
+> >>
+> >> Added by commit 3aebac5a759b ("arm64: versal2: Populate DRAM banks before page
+> >> table size calculation")
+> >> Focus on text variable.
+> >>
+> >> That's why I can imagine that above code can be extended by one more
+> >> configuration to stay inside bank where actually u-boot is now.
+> >
+> > With having the dram bank in an array we can go an extra step in the
+> > future and have a Kconfig option with an int, representing the array
+> > position of the bank we want to relocate. That should cover what you
+> > ask here?
+>
+> Position in an array won't help because we have generic configuration which can
+> run with different amount of MCs/banks and it is not practical to say which one
+> it is. That's why we use bank where u-boot runs before relocation.
 
-Signed-off-by: Beleswar Padhi <b-padhi@ti.com>
----
-v4: Changelog:
-1. None
+Ok, then we'll need to add a Kconfig option for that o nce someone extends it.
 
-Link to v3:
-https://lore.kernel.org/all/20251231173621.1069988-3-b-padhi@ti.com/
+>
+> Another part which we were handling was actually also dealing with reserved
+> memory nodes. Did you test it? I mean configuration where you have more banks
+> and the last bank is all reserved. Then U-Boot shouldn't relocate to it. That's
+> what it is handled today too.
 
-v3: Changelog:
-1. None
+Apart from some xilinx boards calling get_mem_top() I am not aware of
+any core code handling this. The current patch only depends on what
+dram_init_banksize() does. But then I don't think dram_init_banksize()
+should be responsible for parsing the reserved memory nodes and
+adjusting ram top, reloc addresses etc.
+What I can change in the patch though is call get_mem_top() instead of
+the for loop that adjusts ram_top. That function already takes the
+reserved regions into account.
 
-Link to v2:
-https://lore.kernel.org/all/20250506104202.16741-6-b-padhi@ti.com/
+Thanks
+/Ilias
 
-v2: Changelog:
-1. New patch. Fetch FDT Data addr for accessing image if 'load' prop is
-not present in node.
-
- arch/arm/mach-k3/r5/common.c | 23 +++++++++++++++++++++--
- 1 file changed, 21 insertions(+), 2 deletions(-)
-
-diff --git a/arch/arm/mach-k3/r5/common.c b/arch/arm/mach-k3/r5/common.c
-index 484d96f9536..50c4231655e 100644
---- a/arch/arm/mach-k3/r5/common.c
-+++ b/arch/arm/mach-k3/r5/common.c
-@@ -328,12 +328,15 @@ void board_fit_image_post_process(const void *fit, int node, void **p_image,
- 				  size_t *p_size)
- {
- 	int len;
--	int i;
-+	int i, ret;
- 	const char *os;
--	u32 addr;
-+	u32 addr, load_addr;
-+	const void *fit_image_loadaddr;
-+	size_t fit_image_size;
- 
- 	os = fdt_getprop(fit, node, "os", &len);
- 	addr = fdt_getprop_u32_default_node(fit, node, 0, "entry", -1);
-+	load_addr = fdt_getprop_u32_default_node(fit, node, 0, "load", -1);
- 
- 	debug("%s: processing image: addr=%x, size=%d, os=%s\n", __func__,
- 	      addr, *p_size, os);
-@@ -342,6 +345,22 @@ void board_fit_image_post_process(const void *fit, int node, void **p_image,
- 		if (!strcmp(os, image_os_match[i])) {
- 			fit_image_info[i].image_start = addr;
- 			fit_image_info[i].image_len = *p_size;
-+			/*
-+			 * If the 'load' property is missing in the FIT image,
-+			 * fall back to using the actual in-memory address of
-+			 * the FIT image data.
-+			 */
-+			if (load_addr == -1) {
-+				ret = fit_image_get_data(fit, node,
-+							 &fit_image_loadaddr,
-+							 &fit_image_size);
-+				if (ret < 0)
-+					panic("Error accessing node os = %s in FIT (%d)\n",
-+					      os, ret);
-+				fit_image_info[i].load = (ulong)fit_image_loadaddr;
-+			} else {
-+				fit_image_info[i].load = load_addr;
-+			}
- 			debug("%s: matched image for ID %d\n", __func__, i);
- 			break;
- 		}
--- 
-2.34.1
-
+> Thanks,
+> Michal
