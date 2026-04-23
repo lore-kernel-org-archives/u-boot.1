@@ -4,102 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41BC4FF885C
-	for <u-boot@archiver.kernel.org>; Sat, 25 Apr 2026 16:49:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7D95FF885C
+	for <u-boot@archiver.kernel.org>; Sat, 25 Apr 2026 16:55:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A2DDA840ED;
-	Sat, 25 Apr 2026 18:49:36 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 33A6484011;
+	Sat, 25 Apr 2026 18:55:13 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=sony.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Pc6/puB/";
+	dkim=pass (2048-bit key; unprotected) header.d=sony.com header.i=@sony.com header.b="fc8ly/CR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D884383FF5; Sat, 25 Apr 2026 18:49:35 +0200 (CEST)
-Received: from mail-oi1-x22c.google.com (mail-oi1-x22c.google.com
- [IPv6:2607:f8b0:4864:20::22c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 3BDEC842BF; Sat, 25 Apr 2026 18:33:05 +0200 (CEST)
+Received: from jpms-ob01.noc.sony.co.jp (jpms-ob01.noc.sony.co.jp
+ [IPv6:2001:cf8:ace:41::4])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6CA1B841F2
- for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 18:49:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 576FF843AF
+ for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 18:31:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=sony.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-oi1-x22c.google.com with SMTP id
- 5614622812f47-479d593a0c3so4850732b6e.0
- for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 09:49:33 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1777135772; cv=none;
- d=google.com; s=arc-20240605;
- b=Z+1McaHd1eitJ5r2uCqxMqln9RlSi3rM/X4dlFDnMTuTYTtzBDZNBnmFdIsHQNzU0H
- rQ+IMl9ImvF+o2O85Fpy75l4LSDErv8Pg3DzFiV+sJkGj+xkzsXomSkcexscV3zjZXTi
- VAVJEp543KiPSLhpDQXTJGpItKgfbjH01zg2dQZRDXLydo3HYrutHiImYVjV3r5FRxc2
- w00WZ9/JraPAZ8hvNBs+iQv0DL/Ci6aWWrnLaDVZd1IC1ikbklsLL4Re0nZltyljCWdg
- vOhTs4R0Yj9LRxmi0yFEeuzN7hhXS3aV89EE+57JO/LJIvqsmHXT7Wve0evQv5ugNoCB
- szTw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=u6xU8clAbf4HDOpo5MM54IdK0X8LJrdkKD6LDLWugi0=;
- fh=iI0k2WOlHk/i1DDgkPxRh2JLVGuTZOkAhh6iawqqQt8=;
- b=EQ4wK2A4K2h4N50MTWI4d3+Z4ejrROhAG/ihKdqIKjT9usrZBbjym/oF1CEooreAaM
- mwl3DMw/7vsEkCkvsgE6m7jqokP9tgai6IEARx4BTCZ3LvUWyOe6qSLAs23LhC6YFP8J
- hfp800zwPrAof+CUqOW6DCu/4EK0oeM66fUYIgPsisu9BRoG/n4Q68AS+oiOMy4DVIEu
- bvGfIasO07GLFsPLBhtpzi8mhZNqZ+3ypxS2raWqoJe5CL5aGYkTYltsaHEUdrIRnsg1
- bU0GHsFCCmnHEkEMD6LkkKDRvg5OYyGasXvv/pqaGaLoEtBUQXXvNag1xmbGLZFO4fr4
- VxbA==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ spf=pass smtp.mailfrom=Jacky.Cao@sony.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1777135772; x=1777740572; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=u6xU8clAbf4HDOpo5MM54IdK0X8LJrdkKD6LDLWugi0=;
- b=Pc6/puB/IPJHn9P7Cie+KYGN7yDnHpPiAAicLXZeJ/4YocBtplT5ugGj7JGd9r0FIh
- ZWxStYMptGHCsNjIWwP6or5e0cK6APqFDdF5NBz0TVqI8+xTQl8BPzxILpqtN99eE2jR
- ui/LffnXviezg0ZtxTKMztJ2I2jBTQAmRMXn/R7MZbJ1Wzq5ZzzzJ7W5mk34eziKdE/k
- SJ0aXkXQSBebVOndECSmnj/7VurKEO9cEJyTIA/bp4jfGX9n4gtA6EoN5RBsvU9AkvSL
- KyKsYR+gVKjJ9TpzWWWZ0iTTrUPlGbkIewQjd+66tOr9JE1+FPQPuxTwM0V9l6n2vJwK
- yEGQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777135772; x=1777740572;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=u6xU8clAbf4HDOpo5MM54IdK0X8LJrdkKD6LDLWugi0=;
- b=R17O9fCPo79c9lGtlBMl6PgszozONx9DFTYs5+WHjCjbEHPIVxffJ2RBMc3pqjCvEr
- RmLrnnArrPZWtbWV3hAAtZ/V79IkM2xka6F8o191osIAQXLEodFC0afvMYk2bZ+rNklA
- TsmTb4YAn9bUM+UaLU/G3ZRR8dhf1SL36WgJzhycGStSFleqzBv1jZXcBjTH1IDq3omy
- 3Cqa7imzyl2rNVGEzeI1vBopdJl0SBbXyXzLN//ZETd5TwXmpZYcDI060r1whn1c/sfr
- Ojyc/8VV6ap2mQv5BliaJAoOG0T3Su72aFADWk5dXADvdy2stUHzI39dTV/cM4dv/zV5
- Qc6A==
-X-Gm-Message-State: AOJu0YzHqMEX5zEWUeenqrtHfBi5ks9wm2Yppj9X7+YEK1EJXhTLKWhj
- RcDw8OzpWc4PjMHO1YqvBY1LC2W0NRvTZncHZLI9yPLNsKRg5HT6JWnDf6s74Zz2SW6A9JK3sNm
- SOawuoDDHHmq0c5G4XT5zYUthvFRvms6jW0g0ZDjWapnH2WGdC+1RkWQ=
-X-Gm-Gg: AeBDievOE6vTNFGY7QNYDyB0amy15Ohy8jR+EVVW5wsKHV4b3VXmvPPUdhq1yzJ0V62
- W3tSdgUA+7pA+RTP5p4F/Og2VuR709QHF2AUtEFj/GoJCMt7DExn5QDi7EM1lw7NsozYl7GsSIe
- 45nHjLM3iG+Knk3Ne411Ogg0sCgzJIcx/N1EQz7LYkgHv7JeXV2wlaPCX4JAI4fiM712H+QO/fu
- MAvps3QUjMlviBSJ8UwvaNNRGrWWjFdeE9KfKjEftGvyJzKz0J70sqv0Cp6eJhSpTRjRFJ5ErVH
- hv3Gd/Uz47Yf7Ub0z6hfbNHiALrUhZ5n1sIvwHESNoargy4MbW0ZxJ3yHihy3k2BbmEhupZmV0k
- AcUZHPojBO22nC13Mb8K05zCkL9N2yqpjnaiGn+IwC8CPIzyJOec836MLdszRkOT4EI9Bu6FCac
- LFBrnbgDWzA54Yk5+Cb7yOrCr/snisCig+O89jVR2cYdHiRQbOz6odT4PoliImJRQwSdeb0LCPm
- 0npqiCrYOHpOPmIKvOxucdNeuO7TNJkl9OPOfdjRhYh26YDmqdVciI5r91PB28JyTF/3CJ7IqIL
- ZxlHUvIHIF4qSkNFCtH1T/EIL++IJ2cK5GZd3mehjIMt2qRrIJzO+oU5KOSOl8xRbA==
-X-Received: by 2002:a05:690e:1697:b0:650:3124:b8c9 with SMTP id
- 956f58d0204a3-65311a9ee43mr16685531d50.20.1776934707189; Thu, 23 Apr 2026
- 01:58:27 -0700 (PDT)
+ d=sony.com; s=s1jp; t=1777134735; x=1808670735;
+ h=from:to:cc:subject:date:message-id:mime-version:
+ content-transfer-encoding;
+ bh=cVboO+fPoSd7ca95hKxNyTN7P+kT/SJI8zKrOIP8mME=;
+ b=fc8ly/CRUHv0hxK4r9a1ZGZxwnjkJKMGTv7JqR2qb7Azx6fyHH8FJEVH
+ 6Ic7RI/GjjPaBKrNA4HKXqNO7fqi0u4drPLFbTgnf+pWsH85Ds8WvT1ZT
+ CIPL2pfnGrkDfkTH04fJ5QZj/QrgPUWak+FQglgBPuMVJfyUKkh9ew5ON
+ vNWtSBw8+UKxiMtHUF2ny9kuvi6WNypd93xoONSQLiVQhps0n+ZqFH/rd
+ TH28NKskH/kr2nDuvDS/E5k1WHGTP5Phq4CEUGZuN2W18i8mDLUAfuU+Z
+ 2Iai8xYuHIYX0d7Ejp5TAL9KTVKT0a2Tqd8KF0zKbO+9gQSabITU7BqrS g==;
+X-CSE-ConnectionGUID: bmdCHUAfRd+29hBiXltmeQ==
+X-CSE-MsgGUID: Lv6Hzn3vQxGWoTNXILWZmQ==
+Received: from unknown (HELO jpmta-ob1.noc.sony.co.jp)
+ ([IPv6:2001:cf8:0:6e7::6])
+ by jpms-ob01.noc.sony.co.jp with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 23 Apr 2026 14:37:41 +0900
+X-CSE-ConnectionGUID: g3dGA21MRWC8wACDVFG7qw==
+X-CSE-MsgGUID: rOsyLaghSiy0PDccKIcpbg==
+X-IronPort-AV: E=Sophos;i="6.23,194,1770562800"; d="scan'208";a="634878588"
+Received: from unknown (HELO cscsh-5109201560-dev.ap.sony.com)
+ ([43.82.111.224])
+ by jpmta-ob1.noc.sony.co.jp with ESMTP; 23 Apr 2026 14:37:40 +0900
+From: Jacky Cao <Jacky.Cao@sony.com>
+To: u-boot@lists.denx.de
+Cc: simon.gaynor@ezurio.com, trini@konsulko.com,
+ troy.kisky@boundarydevices.com, Jacky Cao <Jacky.Cao@sony.com>
+Subject: [PATCH v1] nitrogen6x: Fix compile error if VIDEO_IPUV3 is disabled
+Date: Thu, 23 Apr 2026 13:37:25 +0800
+Message-Id: <20260423053725.103866-1-Jacky.Cao@sony.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20260422193846.1333146-1-raymondmaoca@gmail.com>
-In-Reply-To: <20260422193846.1333146-1-raymondmaoca@gmail.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Thu, 23 Apr 2026 11:57:50 +0300
-X-Gm-Features: AQROBzDP_acyoPcX7-eUfMU2MQgb1_DARbXSY7B-r5k9ZVuSDfGoEd4PnKK4UMo
-Message-ID: <CAC_iWjLJCzKRxEvCOH7RHSrvNUtPPJxBgwfAJ5GBfKTMSu-TUQ@mail.gmail.com>
-Subject: Re: [PATCH v2] smbios: Add an explicit bounds check for Type 9 length
-To: Raymond Mao <raymondmaoca@gmail.com>
-Cc: u-boot@lists.denx.de, Raymond Mao <raymond.mao@riscstar.com>, 
- Tom Rini <trini@konsulko.com>, Samuel Holland <samuel.holland@sifive.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Sat, 25 Apr 2026 18:55:12 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -116,49 +76,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Thanks Raynond,
+Following compile error happens for mx6qsabrelite when disable
+CONFIG_VIDEO_IPUV3.
 
-On Wed, 22 Apr 2026 at 22:38, Raymond Mao <raymondmaoca@gmail.com> wrote:
->
-> From: Raymond Mao <raymond.mao@riscstar.com>
->
-> Fix Coverity Scan defect on Type 9 length.
-> Type 9 formatted length is built dynamically from peer_grouping_count.
-> Although peer_grouping_count is a byte, the resulting formatted area
-> still must fit in the SMBIOS header length field (u8).
-> Add an explicit bounds check before extending len, so the size used by
-> map_sysmem() and memset() is guaranteed to be valid and consistent
-> with hdr.length.
->
-> Fixes: a8442c226635 ("smbios: add support for dynamic generation of Type 9 system slot tables")
-> Addresses-Coverity-ID: CID 645487: Insecure data handling (TAINTED_SCALAR)
-> Signed-off-by: Raymond Mao <raymond.mao@riscstar.com>
-> ---
+board/boundary/nitrogen6x/nitrogen6x.c: In function 'misc_init_r':
+board/boundary/nitrogen6x/nitrogen6x.c:912:22: error: 'RGB_BACKLIGHT_GP' undeclared (first use in this function)
+  912 |         gpio_request(RGB_BACKLIGHT_GP, "lvds backlight");
+      |                      ^~~~~~~~~~~~~~~~
+board/boundary/nitrogen6x/nitrogen6x.c:912:22: note: each undeclared identifier is reported only once for each function it appears in
+  CC      cmd/bind.o
+  CC      drivers/gpio/gpio-uclass.o
+  CC      boot/bootmeth_extlinux.o
+board/boundary/nitrogen6x/nitrogen6x.c:913:22: error: 'LVDS_BACKLIGHT_GP' undeclared (first use in this function)
+  913 |         gpio_request(LVDS_BACKLIGHT_GP, "lvds backlight");
+      |                      ^~~~~~~~~~~~~~~~~
+  AR      arch/arm/lib/lib.a
+make[1]: *** [scripts/Makefile.build:271: board/boundary/nitrogen6x/nitrogen6x.o] Error 1
+  CC      boot/bootmeth_pxe.o
+make: *** [Makefile:2205: board/boundary/nitrogen6x] Error 2
+make: *** Waiting for unfinished jobs....
 
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+To fix this, use reported macros included in CONFIG_VIDEO_IPUV3.
 
+Fixes: 1b51e5f4cd2a ("nitrogen6x: reserve used gpios")
 
-> Changes in v2:
-> - return len 0 for errors to align with the existing convention of the
->   file.
->
->  lib/smbios.c | 3 +++
->  1 file changed, 3 insertions(+)
->
-> diff --git a/lib/smbios.c b/lib/smbios.c
-> index d5f18c8bd69..fdab5948aad 100644
-> --- a/lib/smbios.c
-> +++ b/lib/smbios.c
-> @@ -1093,6 +1093,9 @@ static int smbios_write_type9_1slot(ulong *current, int handle,
->          * TODO:
->          * peer_groups = <peer_grouping_count> * SMBIOS_TYPE9_PGROUP_SIZE
->          */
-> +       if (len + pgroups_size > U8_MAX)
-> +               return 0;
-> +
->         len += pgroups_size;
->
->         t = map_sysmem(*current, len);
-> --
-> 2.25.1
->
+Signed-off-by: Jacky Cao <Jacky.Cao@sony.com>
+---
+ board/boundary/nitrogen6x/nitrogen6x.c | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/board/boundary/nitrogen6x/nitrogen6x.c b/board/boundary/nitrogen6x/nitrogen6x.c
+index 1adee9a461f..e45db109f4f 100644
+--- a/board/boundary/nitrogen6x/nitrogen6x.c
++++ b/board/boundary/nitrogen6x/nitrogen6x.c
+@@ -909,8 +909,10 @@ static const struct boot_mode board_boot_modes[] = {
+ 
+ int misc_init_r(void)
+ {
++#if defined(CONFIG_VIDEO_IPUV3)
+ 	gpio_request(RGB_BACKLIGHT_GP, "lvds backlight");
+ 	gpio_request(LVDS_BACKLIGHT_GP, "lvds backlight");
++#endif
+ 	gpio_request(GP_USB_OTG_PWR, "usbotg power");
+ 	gpio_request(IMX_GPIO_NR(7, 12), "usbh1 hub reset");
+ 	gpio_request(IMX_GPIO_NR(2, 2), "back");
+-- 
+2.34.1
+
