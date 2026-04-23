@@ -4,83 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56C7CFF885A
-	for <u-boot@archiver.kernel.org>; Sat, 25 Apr 2026 20:38:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 820A5FF885C
+	for <u-boot@archiver.kernel.org>; Sat, 25 Apr 2026 20:38:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 18C56844E4;
+	by phobos.denx.de (Postfix) with ESMTP id 54AF78457D;
 	Sat, 25 Apr 2026 22:36:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="WXma9TZE";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="W2M4cXZg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F2DB58419E; Sat, 25 Apr 2026 22:02:08 +0200 (CEST)
-Received: from mail-pj1-x1044.google.com (mail-pj1-x1044.google.com
- [IPv6:2607:f8b0:4864:20::1044])
+ id 03082841D7; Sat, 25 Apr 2026 22:10:31 +0200 (CEST)
+Received: from mail-lj1-x233.google.com (mail-lj1-x233.google.com
+ [IPv6:2a00:1450:4864:20::233])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B4DC284154
- for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 22:02:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F39A484178
+ for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 22:10:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jcethrid@gmail.com
-Received: by mail-pj1-x1044.google.com with SMTP id
- 98e67ed59e1d1-3614826eca4so8009551a91.1
- for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 13:02:06 -0700 (PDT)
+ spf=pass smtp.mailfrom=micbis.openwrt@gmail.com
+Received: by mail-lj1-x233.google.com with SMTP id
+ 38308e7fff4ca-38ea6a5a0b3so87743481fa.3
+ for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 13:10:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1777147325; x=1777752125; darn=lists.denx.de;
+ d=gmail.com; s=20251104; t=1777147828; x=1777752628; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=FoPRsH+3rt5UvLzzr97UhZ6VyOxF6JZRf8i/FcdvSMI=;
- b=WXma9TZELvFUV1U/NJnFMTNEBZThR7NenYmxgjVeTqjNbz1nDEvsSHebOlhwb6rkMp
- rvkatGOHF5EQbAYy1trSvuxUPrT7rjMjG7pkf4a1QmE8c2kM9tUBp0TwK1atA6KG6AeZ
- gvKBAuWFH4I2+rc1ctr0n1LhiSa+/WROxM8PQ7SaD6KlkXra3fNCbJty5gi9ytcfOQsK
- eM7GdX8PyJGBvGBU6i8m/I68I5q26hIuOSqYxnfFAO2eoyf5lmrpQziI6CyRQ4Km9MX4
- ELAlgMu1HRgfc9FPbchotmEx2+UXNrRaBXnYQ8wuuNtowe33cmSD4Rj99qUqOWjmvC8m
- l2sQ==
+ bh=zkwmsnFoENg8PCpuC74lQSspv6JZWl+rFhjNSgslJ8M=;
+ b=W2M4cXZgDZCKhCLqTJVNJDOfjpvI0i3OvRMyGQHgWLWmVgm8M/kGyLDqPnnUtmLif3
+ 1LVKQEoqm1l0RnubZJ1QfI3yu4d/nrcjuU5czwncRyVVUxSX99WuJz20v32iWIspaVET
+ MKWCc7Ok2y5pw2a52PLdWGpXibysFozt9NcaU5DfQSZuPbuoM5WVRyvdIyVU0fwcJd1s
+ igaYfHCDVEsLpKpSb0TblnhJ0dFb5NRg7Rlk2n8IWw02HIRK0btce1K2wYfR8+H5ddyG
+ tvpkCRMD2EBEK8310QGEjx/eTV8dFWNEkTuXwX4a99m0qHjUdlnhgNwmGdREQaESRBo5
+ RJIg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777147325; x=1777752125;
+ d=1e100.net; s=20251104; t=1777147828; x=1777752628;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=FoPRsH+3rt5UvLzzr97UhZ6VyOxF6JZRf8i/FcdvSMI=;
- b=kaovWTMNVtrjEaOUwXUvUcIhbJm/uaaBshr5GP6FFw1pNXlEQh+rqqLM5qgnXIAlEx
- 6GteDUDyyRLP9hLlGEXbiX9sIcN2glqsjFtjczr1RqpASkMehG3fBZPLK7S70Lf/Aofg
- 8aU6mWo1fTqBe4fKqi+0IYuvkZnsCizuGbFvikMkUGFjt4NqELFBSzW3I56FE0TZhlXG
- QNFxdBJSdZhgiuwwcJhKJri/FgxuhRjEglWe8JQ6YIBBn10bwYrilIKXnj8I67JMXva2
- HGTs2U4DFNhVl1kA/JMKposfn/1xDdnoQC0MTBNy9TB7pWFuKWO/8PEB26TmylyP6kn2
- HfXw==
-X-Gm-Message-State: AOJu0YysiZ5Z2QGoVOvvogH5m3QJG1/HJOldVAjmRQQj+gwIoq1JEbfO
- 2mP85TfQk95aExJeLlacN2VyVswPLmdvGFAUUb0wPtLTt1wSky1aARD9iH0qBWAO
-X-Gm-Gg: AeBDieuP/jCPW4KrM0RoBANH5p3rZ8PiCm4NyOdjsbWTUKpvHY7rEweRNKJW7VZgq7C
- hFDHgeGJXjpbdmdXp1XDiVRskbheMpmjoTj+gT/yi+PgvK/0/X/Dv4hYmKQ5nUDGMSDqY3Ouka4
- Y0hfWT/KkUHIi6djuo7tO+/AuIhMDSpLXrx/NNwhJY5QpTJpt0RNfzl9MEuFLnnxOaLIw93hbj/
- 9w53BTQr/qXQsmv8rENb9Oy1mGqf4fN1/zWewLBEiQ38cVDKKOShb+BMQmNX450qzH8hjAIFER4
- qJTuZ6M1ZlGCZMLcJkHMLe6l3c/jlCfgus00WDHre0/r9PBTzpAbA3/In/uaIgAN+X2WnMTBPBX
- fiMcbhsbf1MHkqrkaiYx8ErkE+U6gpXM4XMOGBlNb3QCyM+dmRhyh7BeGwVr1LIeU1FnjFwkB8h
- 8lzglQsOZ0l4mZWmYBkldo0IrKo7BrtdssKLNLlTtDoeR9HKPmL2XKROA=
-X-Received: by 2002:a05:6122:20a2:b0:56b:814e:d35a with SMTP id
- 71dfb90a1353d-56fa58fc2c7mr13270256e0c.8.1776954350764; 
- Thu, 23 Apr 2026 07:25:50 -0700 (PDT)
-Received: from cethr-l01.localdomain ([136.56.120.109])
+ bh=zkwmsnFoENg8PCpuC74lQSspv6JZWl+rFhjNSgslJ8M=;
+ b=h3YFIKis9xvi74Tncbp60x7QBKeCXW6PFzimJCbGTGrHWpJQfntRDObAsViOqYZF1R
+ J0CvN7HfrediVHRqKE3NifN4PudVrPCuABC1AEfYd8mjpjyV9l74eBgpGje6PR652xCt
+ oW0VRytz74pgmObXZRAwFV7wdF3FxXQQDbGrt6DPzEHWeubXHuZm/I14F9G0ctU8ySJh
+ kZqwVMNfFkntpHeARQ0EG+LaCMdGFALCMvMMUonnDxBRgy4/LkIAvG9sfMm4MIU1dHDS
+ bsvwjybB/49q5oKRNMAJOQvd5BPBrjbEVLoo0LEXoex7YjkDeaySrVYefOMyXquY3JM7
+ Dmrg==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ9gmiIBLiuq1eLcZWrP5WhUYQ2TjCi2eRCHGf5Awx2gQr7hN4BC8loUCVgP11D1wdI8rK5w340=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy9SMKsfKKprFGAv9xtwRFzo7p5iSrTthfO4K5L7yFBLfTwVt8R
+ 67hFGHMkPLxHiocpcKj9pcqh+HVukjXK7Bz/+Z5ou1wDf7GYR1RplIA/jERlvw==
+X-Gm-Gg: AeBDieuOVewiT7MlEsl3SSnbOOT051lxpk18j3b8sjoqCSwIdIFwv8VVRq6hn2nzYQY
+ Wu6gZhKPlz+I9cFsWRdPZOKy5j6oE/4zR/mHVTiXGa+IZj8d5J+fkAFSxMltBsVijBkQuW11qJv
+ Pr/aqDQwN4k1fo1cVcTeBVqov0TTV5vdfSyiyPB72UB9ZonJEWGsUo68mlEV5hO84QK/Xx1r0+l
+ 2+kEAmhbifBS3Xx/xbInzpZZZp4v9pqZedpRdbs+nmc2MKRzi1mPkMsiu7hNmOe4chWL5M9tBV1
+ FXp8WKCARnoltunBwwle93jbU1mue8NdC+A2yDVDRuhO5Pk2/IRXGsmhX8R8CR3WAKtg9g6Aha9
+ 1tu7c4uZd8gpeKQ7+zBI897AagQbNymr0z8PXsLT9dRb/rYznbCXseHcjUQhwcGxS7R/rJ1yWBF
+ qbtgIm5nbkLv9ua8WQNuI+WNQQtBFzfGDUyUqlTDM8hS5NaEzfuKc=
+X-Received: by 2002:a05:600c:5285:b0:48a:5333:811e with SMTP id
+ 5b1f17b1804b1-48a53338269mr225648525e9.15.1776949426857; 
+ Thu, 23 Apr 2026 06:03:46 -0700 (PDT)
+Received: from localhost.localdomain ([151.70.144.55])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-8b02aa4f1f9sm157183266d6.0.2026.04.23.07.25.49
+ 5b1f17b1804b1-488fc0f8188sm549381425e9.2.2026.04.23.06.03.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 23 Apr 2026 07:25:50 -0700 (PDT)
-From: Caleb Ethridge <jcethrid@gmail.com>
-To: u-boot@lists.denx.de
-Cc: malysagreg@gmail.com, trini@konsulko.com, linux@analog.com,
- philip@philipmolloy.com, sjg@chromium.org,
- Caleb Ethridge <caleb.ethridge@analog.com>
-Subject: [PATCH v5 09/15] mach-sc5xx: Update image load address
-Date: Thu, 23 Apr 2026 10:24:44 -0400
-Message-Id: <c3d7aaf8ae4f70a19f66837ab987f51fbe91387d.1776954004.git.jcethrid@gmail.com>
+ Thu, 23 Apr 2026 06:03:45 -0700 (PDT)
+From: Michele Bisogno <micbis.openwrt@gmail.com>
+To: Marek Vasut <marex@denx.de>, Lukasz Majewski <lukma@denx.de>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>
+Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de, Michele Bisogno <micbis.openwrt@gmail.com>
+Subject: [PATCH v5 2/3] usb: gadget: rcar: Add support for reset controller
+Date: Thu, 23 Apr 2026 15:03:22 +0200
+Message-Id: <20260423130323.32533-3-micbis.openwrt@gmail.com>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <cover.1776954004.git.jcethrid@gmail.com>
-References: <cover.1776954004.git.jcethrid@gmail.com>
+In-Reply-To: <20260423130323.32533-1-micbis.openwrt@gmail.com>
+References: <20260423130323.32533-1-micbis.openwrt@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Sat, 25 Apr 2026 22:36:28 +0200
@@ -100,114 +102,129 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Caleb Ethridge <caleb.ethridge@analog.com>
+Some Renesas SoCs, such as the RZ/G2L, require the USBHS core to
+be explicitly deasserted from reset before register access is
+possible.
 
-Update the load address for the image in
-each environment to match the updated partitions
-in Linux.
+Update the OTG probe to handle a bulk reset controller. To maintain
+hardware stability, the reset is deasserted after clocks are
+enabled in probe(), and asserted before clocks are disabled
+in remove().
 
-Signed-off-by: Caleb Ethridge <caleb.ethridge@analog.com>
+Update the error paths in probe to ensures clocks are disabled
+if the reset initialization fails.
+
+Signed-off-by: Michele Bisogno <micbis.openwrt@gmail.com>
 ---
- board/adi/sc573-ezlite/sc573-ezlite.env         | 2 +-
- board/adi/sc584-ezkit/sc584-ezkit.env           | 2 +-
- board/adi/sc589-ezkit/sc589-ezkit.env           | 2 +-
- board/adi/sc589-mini/sc589-mini.env             | 2 +-
- board/adi/sc594-som-ezkit/sc594-som-ezkit.env   | 2 +-
- board/adi/sc594-som-ezlite/sc594-som-ezlite.env | 2 +-
- board/adi/sc598-som-ezkit/sc598-som-ezkit.env   | 2 +-
- 7 files changed, 7 insertions(+), 7 deletions(-)
+ drivers/usb/gadget/rcar/common.c | 35 +++++++++++++++++++++++++-------
+ 1 file changed, 28 insertions(+), 7 deletions(-)
 
-diff --git a/board/adi/sc573-ezlite/sc573-ezlite.env b/board/adi/sc573-ezlite/sc573-ezlite.env
-index 36bd207f410..4ee08deb1b3 100644
---- a/board/adi/sc573-ezlite/sc573-ezlite.env
-+++ b/board/adi/sc573-ezlite/sc573-ezlite.env
-@@ -4,7 +4,7 @@
-  */
+diff --git a/drivers/usb/gadget/rcar/common.c b/drivers/usb/gadget/rcar/common.c
+index d40d6736a54..32c4f1fadb1 100644
+--- a/drivers/usb/gadget/rcar/common.c
++++ b/drivers/usb/gadget/rcar/common.c
+@@ -16,6 +16,7 @@
+ #include <linux/usb/ch9.h>
+ #include <linux/usb/gadget.h>
+ #include <usb.h>
++#include <reset.h>
  
- jffs2file=adsp-sc5xx-__stringify(CONFIG_ADI_IMAGE)-adsp-sc573-ezkit.jffs2
--adi_image_offset=0xe0000
-+adi_image_offset=0xd0000
- loadaddr=CONFIG_SC5XX_LOADADDR
+ #include "common.h"
  
- #define USE_NFS
-diff --git a/board/adi/sc584-ezkit/sc584-ezkit.env b/board/adi/sc584-ezkit/sc584-ezkit.env
-index 9336fc4e59d..bdfc0f037bc 100644
---- a/board/adi/sc584-ezkit/sc584-ezkit.env
-+++ b/board/adi/sc584-ezkit/sc584-ezkit.env
-@@ -4,7 +4,7 @@
-  */
+@@ -290,6 +291,9 @@ struct usbhs_priv_otg_data {
+ 	void __iomem		*base;
+ 	void __iomem		*phybase;
  
- jffs2file=adsp-sc5xx-__stringify(CONFIG_ADI_IMAGE)-adsp-sc584-ezkit.jffs2
--adi_image_offset=0xe0000
-+adi_image_offset=0xd0000
- loadaddr=CONFIG_SC5XX_LOADADDR
++	struct clk_bulk clk_bulk;
++	struct reset_ctl_bulk reset_bulk;
++
+ 	struct platform_device	usbhs_dev;
+ 	struct usbhs_priv	usbhs_priv;
  
- #define USE_NFS
-diff --git a/board/adi/sc589-ezkit/sc589-ezkit.env b/board/adi/sc589-ezkit/sc589-ezkit.env
-index a4a686158ca..6f314542ecc 100644
---- a/board/adi/sc589-ezkit/sc589-ezkit.env
-+++ b/board/adi/sc589-ezkit/sc589-ezkit.env
-@@ -4,7 +4,7 @@
-  */
+@@ -355,8 +359,10 @@ static int usbhs_udc_otg_gadget_handle_interrupts(struct udevice *dev)
+ 	return 0;
+ }
  
- jffs2file=adsp-sc5xx-__stringify(CONFIG_ADI_IMAGE)-adsp-sc589-ezkit.jffs2
--adi_image_offset=0xe0000
-+adi_image_offset=0xd0000
- loadaddr=CONFIG_SC5XX_LOADADDR
+-static int usbhs_probe(struct usbhs_priv *priv)
++static int usbhs_probe(struct udevice *dev)
+ {
++	struct usbhs_priv_otg_data *otg_priv = dev_get_priv(dev);
++	struct usbhs_priv *priv = &otg_priv->usbhs_priv;
+ 	int ret;
  
- #define USE_NFS
-diff --git a/board/adi/sc589-mini/sc589-mini.env b/board/adi/sc589-mini/sc589-mini.env
-index 2a322bc6761..c5ea555411e 100644
---- a/board/adi/sc589-mini/sc589-mini.env
-+++ b/board/adi/sc589-mini/sc589-mini.env
-@@ -4,7 +4,7 @@
-  */
+ 	priv->dparam.type = USBHS_TYPE_RCAR_GEN3;
+@@ -396,34 +402,41 @@ static int usbhs_udc_otg_probe(struct udevice *dev)
+ {
+ 	struct usbhs_priv_otg_data *priv = dev_get_priv(dev);
+ 	struct usb_gadget *gadget;
+-	struct clk_bulk clk_bulk;
+ 	int ret = -EINVAL;
  
- jffs2file=adsp-sc5xx-__stringify(CONFIG_ADI_IMAGE)-adsp-sc589-mini.jffs2
--adi_image_offset=0xe0000
-+adi_image_offset=0xd0000
- loadaddr=CONFIG_SC5XX_LOADADDR
+ 	priv->base = dev_read_addr_ptr(dev);
+ 	if (!priv->base)
+ 		return -EINVAL;
  
- #define USE_NFS
-diff --git a/board/adi/sc594-som-ezkit/sc594-som-ezkit.env b/board/adi/sc594-som-ezkit/sc594-som-ezkit.env
-index a4c72f2e9c7..4d86eafe145 100644
---- a/board/adi/sc594-som-ezkit/sc594-som-ezkit.env
-+++ b/board/adi/sc594-som-ezkit/sc594-som-ezkit.env
-@@ -4,7 +4,7 @@
-  */
+-	ret = clk_get_bulk(dev, &clk_bulk);
++	ret = clk_get_bulk(dev, &priv->clk_bulk);
+ 	if (ret)
+ 		return ret;
  
- jffs2file=adsp-sc5xx-__stringify(CONFIG_ADI_IMAGE)-adsp-sc594-som-ezkit.jffs2
--adi_image_offset=0x110000
-+adi_image_offset=0x100000
- loadaddr=CONFIG_SC5XX_LOADADDR
+-	ret = clk_enable_bulk(&clk_bulk);
++	ret = clk_enable_bulk(&priv->clk_bulk);
+ 	if (ret)
+ 		return ret;
  
- #define USE_NFS
-diff --git a/board/adi/sc594-som-ezlite/sc594-som-ezlite.env b/board/adi/sc594-som-ezlite/sc594-som-ezlite.env
-index e312fc95ae4..d374ebd5a54 100644
---- a/board/adi/sc594-som-ezlite/sc594-som-ezlite.env
-+++ b/board/adi/sc594-som-ezlite/sc594-som-ezlite.env
-@@ -4,7 +4,7 @@
-  */
++	ret = reset_get_bulk(dev, &priv->reset_bulk);
++	if (ret)
++		goto err_clk;
++
++	ret = reset_deassert_bulk(&priv->reset_bulk);
++	if (ret)
++		goto err_clk;
++
+ 	clrsetbits_le32(priv->base + UGCTRL2, UGCTRL2_USB0SEL_MASK, UGCTRL2_USB0SEL_EHCI);
+ 	clrsetbits_le16(priv->base + LPSTS, LPSTS_SUSPM, LPSTS_SUSPM);
  
- jffs2file=adsp-sc5xx-__stringify(CONFIG_ADI_IMAGE)-adsp-sc594-som-ezlite.jffs2
--adi_image_offset=0x110000
-+adi_image_offset=0x100000
- loadaddr=CONFIG_SC5XX_LOADADDR
+ 	ret = generic_setup_phy(dev, &priv->phy, 0, PHY_MODE_USB_OTG, 1);
+ 	if (ret)
+-		goto err_clk;
++		goto err_reset;
  
- #define USE_NFS
-diff --git a/board/adi/sc598-som-ezkit/sc598-som-ezkit.env b/board/adi/sc598-som-ezkit/sc598-som-ezkit.env
-index 754dcece976..cbc5a57c755 100644
---- a/board/adi/sc598-som-ezkit/sc598-som-ezkit.env
-+++ b/board/adi/sc598-som-ezkit/sc598-som-ezkit.env
-@@ -4,7 +4,7 @@
-  */
+ 	priv->phybase = dev_read_addr_ptr(priv->phy.dev);
  
- jffs2file=adsp-sc5xx-__stringify(CONFIG_ADI_IMAGE)-adsp-sc598-som-ezkit.jffs2
--adi_image_offset=0x110000
-+adi_image_offset=0x100000
- loadaddr=CONFIG_SC5XX_LOADADDR
+ 	priv->usbhs_priv.pdev = &priv->usbhs_dev;
+ 	priv->usbhs_priv.base = priv->base;
+ 	priv->usbhs_dev.dev.driver_data = &priv->usbhs_priv;
+-	ret = usbhs_probe(&priv->usbhs_priv);
++	ret = usbhs_probe(dev);
+ 	if (ret < 0)
+ 		goto err_phy;
  
- #define USE_NFS
+@@ -439,8 +452,10 @@ static int usbhs_udc_otg_probe(struct udevice *dev)
+ 
+ err_phy:
+ 	generic_shutdown_phy(&priv->phy);
++err_reset:
++	reset_assert_bulk(&priv->reset_bulk);
+ err_clk:
+-	clk_disable_bulk(&clk_bulk);
++	clk_disable_bulk(&priv->clk_bulk);
+ 	return ret;
+ }
+ 
+@@ -456,6 +471,12 @@ static int usbhs_udc_otg_remove(struct udevice *dev)
+ 	usbhs_fifo_remove(&priv->usbhs_priv);
+ 	usbhs_pipe_remove(&priv->usbhs_priv);
+ 
++	reset_assert_bulk(&priv->reset_bulk);
++	reset_release_bulk(&priv->reset_bulk);
++
++	clk_disable_bulk(&priv->clk_bulk);
++	clk_release_bulk(&priv->clk_bulk);
++
+ 	generic_shutdown_phy(&priv->phy);
+ 
+ 	return dm_scan_fdt_dev(dev);
 -- 
 2.34.1
 
