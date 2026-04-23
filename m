@@ -4,86 +4,127 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25AD8FF885C
-	for <u-boot@archiver.kernel.org>; Sat, 25 Apr 2026 18:06:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 764C9FF8860
+	for <u-boot@archiver.kernel.org>; Sat, 25 Apr 2026 18:07:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 01B2184543;
+	by phobos.denx.de (Postfix) with ESMTP id 4303684552;
 	Sat, 25 Apr 2026 20:02:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="b4+5Rgh+";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20251104.gappssmtp.com header.i=@baylibre-com.20251104.gappssmtp.com header.b="xRSRYHbF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 45DE884099; Sat, 25 Apr 2026 19:40:31 +0200 (CEST)
-Received: from mail-vs1-xe43.google.com (mail-vs1-xe43.google.com
- [IPv6:2607:f8b0:4864:20::e43])
+ id 874F5843FB; Sat, 25 Apr 2026 19:47:11 +0200 (CEST)
+Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
+ [IPv6:2607:f8b0:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1122F839D9
- for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 19:40:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id ADF9B8435B
+ for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 19:47:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jcethrid@gmail.com
-Received: by mail-vs1-xe43.google.com with SMTP id
- ada2fe7eead31-612d8a59ca0so5800311137.1
- for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 10:40:29 -0700 (PDT)
+ spf=pass smtp.mailfrom=dlechner@baylibre.com
+Received: by mail-ot1-x32f.google.com with SMTP id
+ 46e09a7af769-7d1872504cbso7608548a34.0
+ for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 10:47:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1777138828; x=1777743628; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=e2Xwx2NihrmI3wiyjtJsXhyoXs1r+RQxdzldD10AS8c=;
- b=b4+5Rgh+KX27uFIonLXpbSjmjld8C6B7jKj5T1rUXavgBxJDgiQRJifwFbE/BQEeIk
- Dj2vXZXg9Dbwtk1by3kAsfIqJdKC2oURQIrajeN6hKRMn+nINTNsdAcqaTce+FUrwb6p
- dltCC3IIuY3g/ZbNuVCdQReEhOQT4vAPYWnprFts35Yk6UjDOMJyXg9b74wQ5my738yp
- sa4HSk1Gs8BJDQq/qwJGtkx+pZyVOdJhn2p6OmLDr099KshBg7u9VMKa5OLyCLRG07Ui
- mbY6aUmsdBABPNvZtJ8C74mk+ChxewtZFqTXe0FTVxDzIkgpq3tFVG5vaZ6qXHQAspGF
- 1TOQ==
+ d=baylibre-com.20251104.gappssmtp.com; s=20251104; t=1777139227; x=1777744027;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=RRVfAAn2++xzTHEepAqp1w58FLGaSSNsVGGyMUWBjO0=;
+ b=xRSRYHbFHTpFZlzl+7Dbn9x4kN74abE71FJ4ZI9B3x9HVVtWddQS+HRphAx909ubnO
+ iJ3sqHQnCCdlvijvfxh/DKp/hgu51DVTXIFA8e/LcTQCMJpaHAx5X7i8mmAWTzOJKhrO
+ 1zBpNm25wc8uzrjhuLDZlLfzN3q5v9cLgP2V+vt730NiCeWfG5OHSxlJfgHr4Yu7HRYX
+ +tujIrPoTg765bH/n90djhiRI5SKRGk0QSNd3e/l7isOYLMpFjMZPdeAZzDeRqd09/gw
+ OxvoCg7rtR4mxUkEiP2Zj0K1meSMHa/3sTu7+zdr3w+//aa9zMmPirLcHJy7eULBTZp4
+ DGXA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777138828; x=1777743628;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=e2Xwx2NihrmI3wiyjtJsXhyoXs1r+RQxdzldD10AS8c=;
- b=Yw2cQ8SeycJaTxvFOS18uUV5MHioXdGIuUg4hbiM4R5QIbZxfwhLQiVvOsBz7y1cv0
- C44m9g6XY3wwLzfK+dwBeqlrIcs6FkyKEqfFo05k7Eqynb2mhOghuhZGkmvPNAYW4y8G
- Vp4SvFtJXdSdlnbr/NlliAxkrjVBxb5tXFKhr9qButBZRoIZQRaBAe0hDa1Le8ZzMt1Z
- Iz+b5oVCOY8WhqRZJ+zGLyyBCvP3HIelu3MdxxJ2jR3wumXZp6krGdpKUwBSwLxb2skc
- 1wUZ4hqfPRYB99SRhdjPo3Z26C+2UYnoKkibUXvUxsOcu/s9FpbdtzneN2zZwXBGH+xS
- IiIA==
-X-Gm-Message-State: AOJu0YxXrebMXIXfzSVIgzrwDocWbYO4fMmKqv+Mjtio2wyGmuxYT3K7
- Q5LYwTj3a16NnQ4WL9PP0opa3fyTJy68eUHJ7aciHHmYH9hg/xzy0nCVezG0X7gR
-X-Gm-Gg: AeBDiesouvVr0NLO1rAZswcLYfqI+xXKsrAC8/kvw/h2WpGhAIWypVTI5TBqU/cuHyp
- gMruioEDlJK07h3RfwDc6H07SiUvn5XclZdS/OpeaQXsjdCOwP9A8df7O72SgmcIijVLB11wivf
- MrUJ+S06fB75dY9lAtasUdXtHMiMHVRS6Fwp2BpKGfkKB0rZWb+j5CSf3b9zLRqZGK6fORep/mn
- Ubr0AbmGOl8MNZVWDiXfKE+BZl3EGWiuWtVreVYp1gyyNVZOKYiBf5EgeeEBgOm8bTyzdGt7Z/B
- M7KCFt0eHTojdcYTiMfaSITsA3gVHQFcnqhHoms9t/uN/spO9amWH4JYlEqk5LG73AgQPkC/pGJ
- 5moMOm/rCHKS/6TQU2DEushrSV4qIWb8hqt2o4usHx9iNRo24v5LM18m/ztqwXpP1VAD9uQGRMU
- r6Re9FM8xpW5+v46/73IzZ5goARZA7kHaKbBMtVc2wjqCc
-X-Received: by 2002:a05:6214:5c82:b0:8ae:6347:8c91 with SMTP id
- 6a1803df08f44-8b027fd8fb0mr378409296d6.3.1776954357266; 
- Thu, 23 Apr 2026 07:25:57 -0700 (PDT)
-Received: from cethr-l01.localdomain ([136.56.120.109])
+ d=1e100.net; s=20251104; t=1777139227; x=1777744027;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=RRVfAAn2++xzTHEepAqp1w58FLGaSSNsVGGyMUWBjO0=;
+ b=jeJaJmrtAt/tuuxw/7zmKF3SRjAmpKlEb24IY/E5pIdBwLbI+c/Qtz0QrQXI4N9pi8
+ i1zmEn8Qcr00J2cXNd41ISiMQ7iQxXjDduAJ3Nt/KGl5tCkhFG+gOn6mRiSLFCzzSVD2
+ 2mO872NrRB6zcYcTfZsBdvxowyx4wJA9cyJmLb6BLhl59qX/SdeYT3yBGlcz6HPVhiY0
+ d+J7RZder//zQ/BLEG5ze8JeaJQa0w1cM98EzvKoLv2molqLSQfPsbBgXZEQ3gBOPqZ3
+ NDCvpTuX5D1Bq0HUtIyjK9yDvZWz8Ab1EXXMkW4DaEncaGi7ntqfxWr025POgowqLlTL
+ OPAQ==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ9q0BV9vPGHnQPax+CK4xUmVKLfwwZHNuUwEfe7RPN+vRkWeAIz8ElNf5dNrkIPUfD/BFoNzs4=@lists.denx.de
+X-Gm-Message-State: AOJu0YyRyquE7MOTuqgMWbGTo/xy+tXqARkTkzAEpC2fLep7m9i6imgD
+ JltG2ekZKoDuPWGQzRiEnLRhgt4y8DqtnmbzBWJtQ8lyaLzJ+4f/AjCn1U4jo8b2QWpWS41172v
+ JcXyX
+X-Gm-Gg: AeBDieuHNcjYkSrXtJfvDUM5SU2Wu6b4C6NQo5X2eNQPC6TJ1T8vFBuTW5v1ws3+KNw
+ 0S+43NUW+alm+EgPnK3nUfwIK0u2hURlEBjFi1/zXv9DQ8ttPhQvVb8C4BvRgxXlTJQtAWfj7kK
+ XXDj34IwocLdCLQZ0S38Q4k47DfC+LNPBzcjihKh7VF0dIax7jktizSzurelcCZuSKDfEC7SuM4
+ ayaYAQXKfR7L8Pk+F/PBGUxNEppDDxGhRFMHv8U8+TksOgQ/mKch593bR+6ixadpeCu6kRbYs2B
+ tuQuGLCrYeDTXgWXyhdxOAz1KvM0L2UNOTQoDf8DcCtJnLQhwXDFMbB/ryf6fzKPrqUynVyl49S
+ SDk6iuaRnu4xDEyH4KHKO8Q6ZE+I/corJzF4pUdca+9wrqRz+SxgZ2IKXBGOCBVDH9r3O2TTtlk
+ 4NCs/3iuFp9sIPOFEHPPW5V7cl1/eR/4YCnZMaictBlZ0jzgQjFpmRGW9jGcKr7Hs9nG1JXTc9R
+ gbH42uu1okj
+X-Received: by 2002:a05:6820:2e90:b0:694:98e5:2800 with SMTP id
+ 006d021491bc7-69498e53d21mr4212112eaf.23.1776958067624; 
+ Thu, 23 Apr 2026 08:27:47 -0700 (PDT)
+Received: from ?IPV6:2600:8803:e7e4:500:3cc7:689f:be44:d58a?
+ ([2600:8803:e7e4:500:3cc7:689f:be44:d58a])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-8b02aa4f1f9sm157183266d6.0.2026.04.23.07.25.56
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 23 Apr 2026 07:25:57 -0700 (PDT)
-From: Caleb Ethridge <jcethrid@gmail.com>
-To: u-boot@lists.denx.de
-Cc: malysagreg@gmail.com, trini@konsulko.com, linux@analog.com,
- philip@philipmolloy.com, sjg@chromium.org,
- Caleb Ethridge <caleb.ethridge@analog.com>
-Subject: [PATCH v5 14/15] arm: sc5xx: Add fdt_addr_r, kernel_addr_r,
- and ramdisk_addr_r
-Date: Thu, 23 Apr 2026 10:24:49 -0400
-Message-Id: <53cf194ead51b7d52dffe9013a8e192cb3effb15.1776954004.git.jcethrid@gmail.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <cover.1776954004.git.jcethrid@gmail.com>
-References: <cover.1776954004.git.jcethrid@gmail.com>
+ 586e51a60fabf-42ff2b6b2cdsm1076139fac.1.2026.04.23.08.27.45
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 23 Apr 2026 08:27:47 -0700 (PDT)
+Message-ID: <dc4bf83d-97d4-4076-8b73-29fcb9c0dc08@baylibre.com>
+Date: Thu, 23 Apr 2026 10:27:45 -0500
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 7/9] net: dwc_eth_qos: Add mediatek support
+To: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de
+Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
+ Jerome Forissier <jerome.forissier@arm.com>, Tom Rini <trini@konsulko.com>,
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Robert Marko <robert.marko@sartura.hr>, Simon Glass <sjg@chromium.org>,
+ Yao Zi <me@ziyao.cc>, Quentin Schulz <quentin.schulz@cherry.de>,
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ "Lucien.Jheng" <lucienzx159@gmail.com>, Weijie Gao
+ <weijie.gao@mediatek.com>, Romain Gantois <romain.gantois@bootlin.com>,
+ Siddharth Vadapalli <s-vadapalli@ti.com>,
+ Yanqing Wang <ot_yanqing.wang@mediatek.com>, Beiyan Yun <root@infi.wang>,
+ Ryder Lee <ryder.lee@mediatek.com>, Chunfeng Yun
+ <chunfeng.yun@mediatek.com>,
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Kory Maincent <kory.maincent@bootlin.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Kuan-Wei Chiu <visitorckw@gmail.com>, Raymond Mao
+ <raymond.mao@riscstar.com>, Peng Fan <peng.fan@nxp.com>,
+ Stefan Roese <stefan.roese@mailbox.org>,
+ Philip Molloy <philip.molloy@analog.com>,
+ fanyi zhang <fanyi.zhang@mediatek.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Kever Yang <kever.yang@rock-chips.com>, Marek Vasut
+ <marek.vasut@mailbox.org>, Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Heiko Stuebner <heiko@sntech.de>, Samuel Holland
+ <samuel.holland@sifive.com>,
+ Christophe Roullier <christophe.roullier@foss.st.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Chris-QJ Chen <chris-qj.chen@mediatek.com>,
+ Macpaul Lin <macpaul.lin@mediatek.com>,
+ Sam Protsenko <semen.protsenko@linaro.org>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Sky Huang <SkyLake.Huang@mediatek.com>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>, Tommy Shih
+ <tommy.shih@airoha.com>, Kevin-KW Huang <kevin-kw.huang@airoha.com>
+References: <20260423-add-ethernet-support-for-genio-520-720-v1-0-47ca918e0017@baylibre.com>
+ <20260423-add-ethernet-support-for-genio-520-720-v1-7-47ca918e0017@baylibre.com>
+Content-Language: en-US
+From: David Lechner <dlechner@baylibre.com>
+In-Reply-To: <20260423-add-ethernet-support-for-genio-520-720-v1-7-47ca918e0017@baylibre.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-Mailman-Approved-At: Sat, 25 Apr 2026 20:02:44 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -101,145 +142,119 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Caleb Ethridge <caleb.ethridge@analog.com>
+On 4/23/26 8:25 AM, Julien Stephan wrote:
+> Synopsys DWC Ethernet QOS device support for MediaTek SoCs.
+> in particular this initial commit adds support for Genio 520/720 and
+> Genio 510/700 EVKs
+> 
 
-Add fdt_addr_r, kernel_addr_r, and ramdisk_addr_r to the SC5xx boards.
-These variables are currently unused in the environment but will be
-used in the future once support for booti commands is added to the
-SC5xx boards.
+...
 
-Signed-off-by: Caleb Ethridge <caleb.ethridge@analog.com>
----
- board/adi/sc573-ezlite/sc573-ezlite.env         | 4 ++++
- board/adi/sc584-ezkit/sc584-ezkit.env           | 4 ++++
- board/adi/sc589-ezkit/sc589-ezkit.env           | 4 ++++
- board/adi/sc589-mini/sc589-mini.env             | 4 ++++
- board/adi/sc594-som-ezkit/sc594-som-ezkit.env   | 4 ++++
- board/adi/sc594-som-ezlite/sc594-som-ezlite.env | 4 ++++
- board/adi/sc598-som-ezkit/sc598-som-ezkit.env   | 4 ++++
- board/adi/sc598-som-ezlite/sc598-som-ezlite.env | 4 ++++
- 8 files changed, 32 insertions(+)
+> +#define RX_DELAY_MAX_PS			9800
+> +#define TX_DELAY_MAX_PS			9800
 
-diff --git a/board/adi/sc573-ezlite/sc573-ezlite.env b/board/adi/sc573-ezlite/sc573-ezlite.env
-index ab1acabef53..bc1fdf293c2 100644
---- a/board/adi/sc573-ezlite/sc573-ezlite.env
-+++ b/board/adi/sc573-ezlite/sc573-ezlite.env
-@@ -3,6 +3,10 @@
-  * (C) Copyright 2024 - Analog Devices, Inc.
-  */
- 
-+fdt_addr_r=CONFIG_SYS_LOAD_ADDR
-+kernel_addr_r=0x84008000
-+ramdisk_addr_r=0x85000000
-+
- #define USE_NFS
- #define USE_SPI
- #define USE_RAM
-diff --git a/board/adi/sc584-ezkit/sc584-ezkit.env b/board/adi/sc584-ezkit/sc584-ezkit.env
-index 0b8035ca6b1..e98abb37476 100644
---- a/board/adi/sc584-ezkit/sc584-ezkit.env
-+++ b/board/adi/sc584-ezkit/sc584-ezkit.env
-@@ -3,6 +3,10 @@
-  * (C) Copyright 2024 - Analog Devices, Inc.
-  */
- 
-+fdt_addr_r=CONFIG_SYS_LOAD_ADDR
-+kernel_addr_r=0x8A308000
-+ramdisk_addr_r=0x8A800000
-+
- #define USE_NFS
- #define USE_SPI
- #define USE_RAM
-diff --git a/board/adi/sc589-ezkit/sc589-ezkit.env b/board/adi/sc589-ezkit/sc589-ezkit.env
-index 00f90c7942e..d44806b149b 100644
---- a/board/adi/sc589-ezkit/sc589-ezkit.env
-+++ b/board/adi/sc589-ezkit/sc589-ezkit.env
-@@ -3,6 +3,10 @@
-  * (C) Copyright 2024 - Analog Devices, Inc.
-  */
- 
-+fdt_addr_r=CONFIG_SYS_LOAD_ADDR
-+kernel_addr_r=0xC4008000
-+ramdisk_addr_r=0xC5000000
-+
- #define USE_NFS
- #define USE_RAM
- #define USE_MMC
-diff --git a/board/adi/sc589-mini/sc589-mini.env b/board/adi/sc589-mini/sc589-mini.env
-index 13079ed7527..52b82016e3c 100644
---- a/board/adi/sc589-mini/sc589-mini.env
-+++ b/board/adi/sc589-mini/sc589-mini.env
-@@ -3,6 +3,10 @@
-  * (C) Copyright 2024 - Analog Devices, Inc.
-  */
- 
-+fdt_addr_r=CONFIG_SYS_LOAD_ADDR
-+kernel_addr_r=0xC4008000
-+ramdisk_addr_r=0xC5000000
-+
- #define USE_NFS
- #define USE_RAM
- #define USE_SPI
-diff --git a/board/adi/sc594-som-ezkit/sc594-som-ezkit.env b/board/adi/sc594-som-ezkit/sc594-som-ezkit.env
-index 324bfae4571..7ed3cf9b454 100644
---- a/board/adi/sc594-som-ezkit/sc594-som-ezkit.env
-+++ b/board/adi/sc594-som-ezkit/sc594-som-ezkit.env
-@@ -3,6 +3,10 @@
-  * (C) Copyright 2024 - Analog Devices, Inc.
-  */
- 
-+fdt_addr_r=CONFIG_SYS_LOAD_ADDR
-+kernel_addr_r=0xA3008000
-+ramdisk_addr_r=0xA8000000
-+
- #define USE_NFS
- #define USE_SPI
- #define USE_OSPI
-diff --git a/board/adi/sc594-som-ezlite/sc594-som-ezlite.env b/board/adi/sc594-som-ezlite/sc594-som-ezlite.env
-index 324bfae4571..7ed3cf9b454 100644
---- a/board/adi/sc594-som-ezlite/sc594-som-ezlite.env
-+++ b/board/adi/sc594-som-ezlite/sc594-som-ezlite.env
-@@ -3,6 +3,10 @@
-  * (C) Copyright 2024 - Analog Devices, Inc.
-  */
- 
-+fdt_addr_r=CONFIG_SYS_LOAD_ADDR
-+kernel_addr_r=0xA3008000
-+ramdisk_addr_r=0xA8000000
-+
- #define USE_NFS
- #define USE_SPI
- #define USE_OSPI
-diff --git a/board/adi/sc598-som-ezkit/sc598-som-ezkit.env b/board/adi/sc598-som-ezkit/sc598-som-ezkit.env
-index 324bfae4571..da1ff295b0e 100644
---- a/board/adi/sc598-som-ezkit/sc598-som-ezkit.env
-+++ b/board/adi/sc598-som-ezkit/sc598-som-ezkit.env
-@@ -3,6 +3,10 @@
-  * (C) Copyright 2024 - Analog Devices, Inc.
-  */
- 
-+fdt_addr_r=CONFIG_SYS_LOAD_ADDR
-+kernel_addr_r=0x9a200000
-+ramdisk_addr_r=0x9c000000
-+
- #define USE_NFS
- #define USE_SPI
- #define USE_OSPI
-diff --git a/board/adi/sc598-som-ezlite/sc598-som-ezlite.env b/board/adi/sc598-som-ezlite/sc598-som-ezlite.env
-index ab1acabef53..3f65fdabe18 100644
---- a/board/adi/sc598-som-ezlite/sc598-som-ezlite.env
-+++ b/board/adi/sc598-som-ezlite/sc598-som-ezlite.env
-@@ -3,6 +3,10 @@
-  * (C) Copyright 2024 - Analog Devices, Inc.
-  */
- 
-+fdt_addr_r=CONFIG_SYS_LOAD_ADDR
-+kernel_addr_r=0x9a200000
-+ramdisk_addr_r=0x9c000000
-+
- #define USE_NFS
- #define USE_SPI
- #define USE_RAM
--- 
-2.34.1
+Do we need two macros for the same value? Or can be DELAY_MAX_PS?
 
+> +
+> +#define OUT_OP				true
+> +
+
+...
+
+> +static int mtk_set_interface(struct udevice *dev)
+> +{
+> +	struct eth_pdata *pdata = dev_get_plat(dev);
+> +	struct eqos_mtk_priv *mtk_pdata = pdata->priv_pdata;
+> +	int rmii_clk_from_mac = mtk_pdata->rmii_clk_from_mac ? EQOS_MTK_RMII_CLK_SRC_INTERNAL : 0;
+> +	int rmii_rxc = mtk_pdata->rmii_rxc ? EQOS_MTK_RMII_CLK_SRC_RXC : 0;
+> +	u32 intf_val = 0;
+> +
+> +	/* select phy interface in top control domain */
+> +	switch (pdata->phy_interface) {
+> +	case PHY_INTERFACE_MODE_MII:
+> +		intf_val |= FIELD_PREP(EQOS_MTK_ETH_INTF_SEL, EQOS_MTK_PHY_INTF_MII);
+> +		break;
+> +	case PHY_INTERFACE_MODE_RMII:
+> +		intf_val |= (rmii_rxc | rmii_clk_from_mac);
+> +		intf_val |= FIELD_PREP(EQOS_MTK_ETH_INTF_SEL, EQOS_MTK_PHY_INTF_RMII);
+> +		break;
+> +	case PHY_INTERFACE_MODE_RGMII:
+> +	case PHY_INTERFACE_MODE_RGMII_TXID:
+> +	case PHY_INTERFACE_MODE_RGMII_RXID:
+> +	case PHY_INTERFACE_MODE_RGMII_ID:
+> +		intf_val |= FIELD_PREP(EQOS_MTK_ETH_INTF_SEL, EQOS_MTK_PHY_INTF_RGMII);
+> +		break;
+> +	default:
+> +		pr_err("%s: dev=%p phy interface not supported\n", __func__, dev);
+> +		return -EINVAL;
+> +	}
+> +
+> +	/* only support external PHY */
+> +	intf_val |= EQOS_MTK_EXT_PHY_MODE;
+> +	if (OUT_OP)
+
+OUT_OP is defined as true. Can we drop the macro and the condition?
+
+> +		intf_val |= EQOS_MTK_TXC_OUT_OP;
+> +
+> +	regmap_write(mtk_pdata->peri_regmap, MT8189_PERI_ETH_CTRL0, intf_val);
+> +
+> +	return 0;
+> +}
+> +
+> +static int mtk_config_dt(struct udevice *dev)
+> +{	struct eth_pdata *pdata = dev_get_plat(dev);
+> +	struct eqos_mtk_priv *mtk_pdata = pdata->priv_pdata;
+> +	struct ofnode_phandle_args args;
+> +	u32 tx_delay_ps, rx_delay_ps;
+> +	int ret;
+> +
+> +	if (!dev_read_u32(dev, "mediatek,tx-delay-ps", &tx_delay_ps)) {
+> +		if (tx_delay_ps > TX_DELAY_MAX_PS) {
+> +			pr_err("%s: dev=%p Invalid TX clock delay: %dps\n",
+> +			       __func__, dev, tx_delay_ps);
+> +			return -EINVAL;
+> +		}
+> +	}
+> +
+> +	if (!dev_read_u32(dev, "mediatek,rx-delay-ps", &rx_delay_ps)) {
+> +		if (rx_delay_ps > RX_DELAY_MAX_PS) {
+> +			pr_err("%s: dev=%p Invalid RX clock delay: %dps\n",
+> +			       __func__, dev, rx_delay_ps);
+> +			return -EINVAL;
+> +		}
+> +	}
+> +
+> +	/* 290ps per stage */
+
+Should we make a macro for that?
+
+> +	mtk_pdata->tx_delay_ps_per_stage = tx_delay_ps / 290;
+> +	mtk_pdata->rx_delay_ps_per_stage = rx_delay_ps / 290;
+
+Doing demtional analysis, ps / (ps/stage) = stage.
+
+So {tx,rx}_delay_ps_per_stage should just be stage units, not
+ps_per_stage.
+
+> +
+> +	mtk_pdata->tx_inv = dev_read_bool(dev, "mediatek,txc-inverse");
+> +	mtk_pdata->rx_inv = dev_read_bool(dev, "mediatek,rxc-inverse");
+> +	mtk_pdata->rmii_clk_from_mac = dev_read_bool(dev, "mediatek,rmii-clk-from-mac");
+> +	mtk_pdata->rmii_rxc = dev_read_bool(dev, "mediatek,rmii-rxc");
+> +
+> +	ret = dev_read_phandle_with_args(dev, "mediatek,pericfg", NULL, 0, 0, &args);
+> +	if (ret) {
+> +		pr_err("Failed to get mediatek,pericfg property: %d\n", ret);
+> +		return ret;
+> +	}
+> +
+> +	mtk_pdata->peri_regmap = syscon_node_to_regmap(args.node);
+> +	if (IS_ERR(mtk_pdata->peri_regmap)) {
+> +		pr_err("%s: dev=%p Invalid perif_cfg reg\n", __func__, dev);
+> +		return -EINVAL;
+> +	}
+> +
+> +	return 0;
+> +}
+> +
