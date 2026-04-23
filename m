@@ -4,85 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 820A5FF885C
-	for <u-boot@archiver.kernel.org>; Sat, 25 Apr 2026 20:38:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 035FFFF885C
+	for <u-boot@archiver.kernel.org>; Sat, 25 Apr 2026 20:39:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 54AF78457D;
+	by phobos.denx.de (Postfix) with ESMTP id EF5C5844FD;
 	Sat, 25 Apr 2026 22:36:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="W2M4cXZg";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="JLYTZPTq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 03082841D7; Sat, 25 Apr 2026 22:10:31 +0200 (CEST)
-Received: from mail-lj1-x233.google.com (mail-lj1-x233.google.com
- [IPv6:2a00:1450:4864:20::233])
+ id DBC7C842E7; Sat, 25 Apr 2026 22:31:45 +0200 (CEST)
+Received: from mail-dl1-x1242.google.com (mail-dl1-x1242.google.com
+ [IPv6:2607:f8b0:4864:20::1242])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F39A484178
- for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 22:10:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A527283FF5
+ for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 22:31:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=micbis.openwrt@gmail.com
-Received: by mail-lj1-x233.google.com with SMTP id
- 38308e7fff4ca-38ea6a5a0b3so87743481fa.3
- for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 13:10:28 -0700 (PDT)
+ spf=pass smtp.mailfrom=jcethrid@gmail.com
+Received: by mail-dl1-x1242.google.com with SMTP id
+ a92af1059eb24-12c6df0b9bbso7539366c88.1
+ for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 13:31:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1777147828; x=1777752628; darn=lists.denx.de;
+ d=gmail.com; s=20251104; t=1777149102; x=1777753902; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=zkwmsnFoENg8PCpuC74lQSspv6JZWl+rFhjNSgslJ8M=;
- b=W2M4cXZgDZCKhCLqTJVNJDOfjpvI0i3OvRMyGQHgWLWmVgm8M/kGyLDqPnnUtmLif3
- 1LVKQEoqm1l0RnubZJ1QfI3yu4d/nrcjuU5czwncRyVVUxSX99WuJz20v32iWIspaVET
- MKWCc7Ok2y5pw2a52PLdWGpXibysFozt9NcaU5DfQSZuPbuoM5WVRyvdIyVU0fwcJd1s
- igaYfHCDVEsLpKpSb0TblnhJ0dFb5NRg7Rlk2n8IWw02HIRK0btce1K2wYfR8+H5ddyG
- tvpkCRMD2EBEK8310QGEjx/eTV8dFWNEkTuXwX4a99m0qHjUdlnhgNwmGdREQaESRBo5
- RJIg==
+ bh=hNMsZFP1DORyw9Kkzscp45gO0mOD1crtj5fObpmEXpw=;
+ b=JLYTZPTqL87MdEh5R7zblqE333xshsr7R91DCmW7wZV3YczRO2e76ia+MRQI9J6Fhr
+ bRybIZfhv7BmCWVjwAHL05BDKCYrRoTSxRJ+Y2heeSc+3uJnhYO/kF4yjtYcaaBLxacU
+ WDu6ZI/ncpTGqiOGKPSNnFktslvHaLW1wc9c+I2gjhlbXIBz/7GdlK5QwFOzOtVa7CTc
+ jeDfYzAmf5dkUu3Pg0u5BGBkfz2rS1n/7wylbbKUIJTEKiP3kymK4ToJIBR/jmUOxZOH
+ rpXNR5VuEWpqJYPabHl9Xpe7NCDYftIJD3liUXFsj+EJIgnmXvufTH38QLMxSnGgfNTW
+ I8oQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777147828; x=1777752628;
+ d=1e100.net; s=20251104; t=1777149102; x=1777753902;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=zkwmsnFoENg8PCpuC74lQSspv6JZWl+rFhjNSgslJ8M=;
- b=h3YFIKis9xvi74Tncbp60x7QBKeCXW6PFzimJCbGTGrHWpJQfntRDObAsViOqYZF1R
- J0CvN7HfrediVHRqKE3NifN4PudVrPCuABC1AEfYd8mjpjyV9l74eBgpGje6PR652xCt
- oW0VRytz74pgmObXZRAwFV7wdF3FxXQQDbGrt6DPzEHWeubXHuZm/I14F9G0ctU8ySJh
- kZqwVMNfFkntpHeARQ0EG+LaCMdGFALCMvMMUonnDxBRgy4/LkIAvG9sfMm4MIU1dHDS
- bsvwjybB/49q5oKRNMAJOQvd5BPBrjbEVLoo0LEXoex7YjkDeaySrVYefOMyXquY3JM7
- Dmrg==
-X-Forwarded-Encrypted: i=1;
- AFNElJ9gmiIBLiuq1eLcZWrP5WhUYQ2TjCi2eRCHGf5Awx2gQr7hN4BC8loUCVgP11D1wdI8rK5w340=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy9SMKsfKKprFGAv9xtwRFzo7p5iSrTthfO4K5L7yFBLfTwVt8R
- 67hFGHMkPLxHiocpcKj9pcqh+HVukjXK7Bz/+Z5ou1wDf7GYR1RplIA/jERlvw==
-X-Gm-Gg: AeBDieuOVewiT7MlEsl3SSnbOOT051lxpk18j3b8sjoqCSwIdIFwv8VVRq6hn2nzYQY
- Wu6gZhKPlz+I9cFsWRdPZOKy5j6oE/4zR/mHVTiXGa+IZj8d5J+fkAFSxMltBsVijBkQuW11qJv
- Pr/aqDQwN4k1fo1cVcTeBVqov0TTV5vdfSyiyPB72UB9ZonJEWGsUo68mlEV5hO84QK/Xx1r0+l
- 2+kEAmhbifBS3Xx/xbInzpZZZp4v9pqZedpRdbs+nmc2MKRzi1mPkMsiu7hNmOe4chWL5M9tBV1
- FXp8WKCARnoltunBwwle93jbU1mue8NdC+A2yDVDRuhO5Pk2/IRXGsmhX8R8CR3WAKtg9g6Aha9
- 1tu7c4uZd8gpeKQ7+zBI897AagQbNymr0z8PXsLT9dRb/rYznbCXseHcjUQhwcGxS7R/rJ1yWBF
- qbtgIm5nbkLv9ua8WQNuI+WNQQtBFzfGDUyUqlTDM8hS5NaEzfuKc=
-X-Received: by 2002:a05:600c:5285:b0:48a:5333:811e with SMTP id
- 5b1f17b1804b1-48a53338269mr225648525e9.15.1776949426857; 
- Thu, 23 Apr 2026 06:03:46 -0700 (PDT)
-Received: from localhost.localdomain ([151.70.144.55])
+ bh=hNMsZFP1DORyw9Kkzscp45gO0mOD1crtj5fObpmEXpw=;
+ b=gpPOTO5xPoq0sOVsQUS7u9ZPlcWUbdmLecXVWkER9+x2YBLJts5U36YjE9R0Q8GbLP
+ qLJEH9Y0JStBFWNcUSchaf3Ux3lryRoVmFiM3xhiAz69hjguk+hzzDSzyRiHgCxOlgYW
+ LSv+keoXcctym9u8zAnphxqA9PPqmFMvX4kPtyimlqN8Mn2lHH/9l3cDT93Eia64Dieu
+ 8PJVqcmErSnJiS7TKWBoPgArxtB5QXCZSY7Wn9zAE3bj5LW4Dq9I+QyQSPreEpcBoKWp
+ GbcxY11s0X2pBCEUdnX+u3p+aNe2NxAKS6TabcRwioZU4YFIV5Xs0RGqrGdPPmw4J8F1
+ ZINg==
+X-Gm-Message-State: AOJu0YyNtqMC7cqHok58O0tgz/qy9tKHrGN67Zsw1RrlNH1ZUxTbxJ5X
+ bELC5gyb17INSxnvKbVlw7kcc2Xfn4NvnIKcLgAUDupBMZehSzViBby7kQmGvoq0
+X-Gm-Gg: AeBDievJ6nmRjW83oPvo53AyIFIPuZ29bWL2pR+6oIdkbz9ZWzMfHIRPGefcHfp1qxv
+ 0K90W+um5SslBzUX6DsdXsZ7FnxIsUO8isz1yjGC/5j1IJqYzCKs0i+a+vJVGhyUniv5JrVILla
+ XNl7d11YDxRSvuhx4Dwn/8gJltDQaocagMCo4rxt1kTx0miZGe9iUKSit552Vr7lLkhRkg0gyZx
+ eD3UFtPzEcz+XEpcGdk6mintjc8CLl15HtfRnk2P24jwqNk+bUIISuDzE/juoZOM47tMqHJJY/Z
+ N11GX1f3gUkeZnD/KUEFvtuHeDyZXXff80GK6N3N+rdbozcEVCitFGDOGoSJYfVFYbZehtfuFVD
+ c39n77B4BtlzFxOFvy7XOiHfHuVIULmw3D68LPPFemnjQTqesK8Ect9o1SvWF9AncH4AhfNmL1c
+ mrYzcmwjgMKOYjo/rpKTRSkb6UMI+MrRxm3bVBxVinCM/s
+X-Received: by 2002:a05:6214:4d06:b0:8ac:b5c2:2dfb with SMTP id
+ 6a1803df08f44-8b027fd9e98mr401987746d6.1.1776954344481; 
+ Thu, 23 Apr 2026 07:25:44 -0700 (PDT)
+Received: from cethr-l01.localdomain ([136.56.120.109])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-488fc0f8188sm549381425e9.2.2026.04.23.06.03.45
+ 6a1803df08f44-8b02aa4f1f9sm157183266d6.0.2026.04.23.07.25.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 23 Apr 2026 06:03:45 -0700 (PDT)
-From: Michele Bisogno <micbis.openwrt@gmail.com>
-To: Marek Vasut <marex@denx.de>, Lukasz Majewski <lukma@denx.de>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>
-Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Tom Rini <trini@konsulko.com>,
- u-boot@lists.denx.de, Michele Bisogno <micbis.openwrt@gmail.com>
-Subject: [PATCH v5 2/3] usb: gadget: rcar: Add support for reset controller
-Date: Thu, 23 Apr 2026 15:03:22 +0200
-Message-Id: <20260423130323.32533-3-micbis.openwrt@gmail.com>
+ Thu, 23 Apr 2026 07:25:44 -0700 (PDT)
+From: Caleb Ethridge <jcethrid@gmail.com>
+To: u-boot@lists.denx.de
+Cc: malysagreg@gmail.com, trini@konsulko.com, linux@analog.com,
+ philip@philipmolloy.com, sjg@chromium.org,
+ Caleb Ethridge <caleb.ethridge@analog.com>
+Subject: [PATCH v5 04/15] mach-sc5xx: Switch from tftp to wget
+Date: Thu, 23 Apr 2026 10:24:39 -0400
+Message-Id: <39d4e7e75c543754563f36b265ae584889211d57.1776954004.git.jcethrid@gmail.com>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20260423130323.32533-1-micbis.openwrt@gmail.com>
-References: <20260423130323.32533-1-micbis.openwrt@gmail.com>
+In-Reply-To: <cover.1776954004.git.jcethrid@gmail.com>
+References: <cover.1776954004.git.jcethrid@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Sat, 25 Apr 2026 22:36:28 +0200
@@ -102,129 +100,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Some Renesas SoCs, such as the RZ/G2L, require the USBHS core to
-be explicitly deasserted from reset before register access is
-possible.
+From: Caleb Ethridge <caleb.ethridge@analog.com>
 
-Update the OTG probe to handle a bulk reset controller. To maintain
-hardware stability, the reset is deasserted after clocks are
-enabled in probe(), and asserted before clocks are disabled
-in remove().
+Switch the nfsboot and other relevant commands to use
+wget instead of tftp. This also includes the addition of
+the httpdstp variable for selecting the wget port.
 
-Update the error paths in probe to ensures clocks are disabled
-if the reset initialization fails.
+The default port is set to 8000 instead of the usual 80
+to allow for use with an unprivileged web server.
 
-Signed-off-by: Michele Bisogno <micbis.openwrt@gmail.com>
+Signed-off-by: Caleb Ethridge <caleb.ethridge@analog.com>
 ---
- drivers/usb/gadget/rcar/common.c | 35 +++++++++++++++++++++++++-------
- 1 file changed, 28 insertions(+), 7 deletions(-)
+ include/env/adi/adi_boot.env | 11 +++++------
+ 1 file changed, 5 insertions(+), 6 deletions(-)
 
-diff --git a/drivers/usb/gadget/rcar/common.c b/drivers/usb/gadget/rcar/common.c
-index d40d6736a54..32c4f1fadb1 100644
---- a/drivers/usb/gadget/rcar/common.c
-+++ b/drivers/usb/gadget/rcar/common.c
-@@ -16,6 +16,7 @@
- #include <linux/usb/ch9.h>
- #include <linux/usb/gadget.h>
- #include <usb.h>
-+#include <reset.h>
+diff --git a/include/env/adi/adi_boot.env b/include/env/adi/adi_boot.env
+index 3c196e40603..eb098dd2256 100644
+--- a/include/env/adi/adi_boot.env
++++ b/include/env/adi/adi_boot.env
+@@ -15,6 +15,7 @@
+ /* Config options */
+ ethaddr=02:80:ad:20:31:e8
+ eth1addr=02:80:ad:20:31:e9
++httpdstp=8000
+ uart_console=CONFIG_UART_CONSOLE
+ #ifdef CONFIG_SC59X_64
+ initrd_high=0xffffffffffffffff
+@@ -27,15 +28,14 @@ adi_bootargs=EARLY_PRINTK console=ttySC0,CONFIG_BAUDRATE vmalloc=512M
+ ramargs=setenv bootargs ${adi_bootargs}
  
- #include "common.h"
+ addip=setenv bootargs ${bootargs} ip=${ipaddr}:${serverip}:${gatewayip}:${netmask}:${hostname}:eth0:off
++rootpath=/romfs
  
-@@ -290,6 +291,9 @@ struct usbhs_priv_otg_data {
- 	void __iomem		*base;
- 	void __iomem		*phybase;
+ /* Boot modes are selectable and should be defined in the board env before including */
+ #if defined(USE_NFS)
+-// rootpath is set by CONFIG_ROOTPATH
+ nfsargs=setenv bootargs root=/dev/nfs rw nfsroot=${serverip}:${rootpath},tcp,nfsvers=3 ${adi_bootargs}
+-nfsboot=run init_ethernet;
+-	tftp ${loadaddr} ${tftp_dir_prefix}${imagefile};
+-	run nfsargs;
++nfsboot= run nfsargs;
+ 	run addip;
++	wget ${loadaddr} ${serverip}:/fitImage;
+ 	bootm ${loadaddr}
+ #endif
  
-+	struct clk_bulk clk_bulk;
-+	struct reset_ctl_bulk reset_bulk;
-+
- 	struct platform_device	usbhs_dev;
- 	struct usbhs_priv	usbhs_priv;
+@@ -64,8 +64,7 @@ ospiboot=run ospiargs;
+ #endif
  
-@@ -355,8 +359,10 @@ static int usbhs_udc_otg_gadget_handle_interrupts(struct udevice *dev)
- 	return 0;
- }
- 
--static int usbhs_probe(struct usbhs_priv *priv)
-+static int usbhs_probe(struct udevice *dev)
- {
-+	struct usbhs_priv_otg_data *otg_priv = dev_get_priv(dev);
-+	struct usbhs_priv *priv = &otg_priv->usbhs_priv;
- 	int ret;
- 
- 	priv->dparam.type = USBHS_TYPE_RCAR_GEN3;
-@@ -396,34 +402,41 @@ static int usbhs_udc_otg_probe(struct udevice *dev)
- {
- 	struct usbhs_priv_otg_data *priv = dev_get_priv(dev);
- 	struct usb_gadget *gadget;
--	struct clk_bulk clk_bulk;
- 	int ret = -EINVAL;
- 
- 	priv->base = dev_read_addr_ptr(dev);
- 	if (!priv->base)
- 		return -EINVAL;
- 
--	ret = clk_get_bulk(dev, &clk_bulk);
-+	ret = clk_get_bulk(dev, &priv->clk_bulk);
- 	if (ret)
- 		return ret;
- 
--	ret = clk_enable_bulk(&clk_bulk);
-+	ret = clk_enable_bulk(&priv->clk_bulk);
- 	if (ret)
- 		return ret;
- 
-+	ret = reset_get_bulk(dev, &priv->reset_bulk);
-+	if (ret)
-+		goto err_clk;
-+
-+	ret = reset_deassert_bulk(&priv->reset_bulk);
-+	if (ret)
-+		goto err_clk;
-+
- 	clrsetbits_le32(priv->base + UGCTRL2, UGCTRL2_USB0SEL_MASK, UGCTRL2_USB0SEL_EHCI);
- 	clrsetbits_le16(priv->base + LPSTS, LPSTS_SUSPM, LPSTS_SUSPM);
- 
- 	ret = generic_setup_phy(dev, &priv->phy, 0, PHY_MODE_USB_OTG, 1);
- 	if (ret)
--		goto err_clk;
-+		goto err_reset;
- 
- 	priv->phybase = dev_read_addr_ptr(priv->phy.dev);
- 
- 	priv->usbhs_priv.pdev = &priv->usbhs_dev;
- 	priv->usbhs_priv.base = priv->base;
- 	priv->usbhs_dev.dev.driver_data = &priv->usbhs_priv;
--	ret = usbhs_probe(&priv->usbhs_priv);
-+	ret = usbhs_probe(dev);
- 	if (ret < 0)
- 		goto err_phy;
- 
-@@ -439,8 +452,10 @@ static int usbhs_udc_otg_probe(struct udevice *dev)
- 
- err_phy:
- 	generic_shutdown_phy(&priv->phy);
-+err_reset:
-+	reset_assert_bulk(&priv->reset_bulk);
- err_clk:
--	clk_disable_bulk(&clk_bulk);
-+	clk_disable_bulk(&priv->clk_bulk);
- 	return ret;
- }
- 
-@@ -456,6 +471,12 @@ static int usbhs_udc_otg_remove(struct udevice *dev)
- 	usbhs_fifo_remove(&priv->usbhs_priv);
- 	usbhs_pipe_remove(&priv->usbhs_priv);
- 
-+	reset_assert_bulk(&priv->reset_bulk);
-+	reset_release_bulk(&priv->reset_bulk);
-+
-+	clk_disable_bulk(&priv->clk_bulk);
-+	clk_release_bulk(&priv->clk_bulk);
-+
- 	generic_shutdown_phy(&priv->phy);
- 
- 	return dm_scan_fdt_dev(dev);
+ #if defined(USE_RAM)
+-ramboot=run init_ethernet;
+-	tftp ${loadaddr} ${tfpt_dir_prefix}${imagefile};
++ramboot= wget ${loadaddr} ${serverip}:/fitImage;
+ 	run ramargs;
+ 	bootm ${loadaddr}
+ #endif
 -- 
 2.34.1
 
