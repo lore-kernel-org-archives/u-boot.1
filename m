@@ -4,87 +4,101 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C15BFF885C
-	for <u-boot@archiver.kernel.org>; Sat, 25 Apr 2026 21:08:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4DAB9FF885C
+	for <u-boot@archiver.kernel.org>; Sat, 25 Apr 2026 21:20:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 99EE0844AF;
-	Sat, 25 Apr 2026 23:08:04 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C61B584353;
+	Sat, 25 Apr 2026 23:20:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="srXt7foV";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="N0rWX3WR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 93A658445C; Sat, 25 Apr 2026 23:03:37 +0200 (CEST)
-Received: from mail-qv1-xf41.google.com (mail-qv1-xf41.google.com
- [IPv6:2607:f8b0:4864:20::f41])
+ id 9B3B38435C; Sat, 25 Apr 2026 23:20:55 +0200 (CEST)
+Received: from mail-oo1-xc2d.google.com (mail-oo1-xc2d.google.com
+ [IPv6:2607:f8b0:4864:20::c2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3995C84307
- for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 23:03:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5E10884178
+ for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 23:20:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jcethrid@gmail.com
-Received: by mail-qv1-xf41.google.com with SMTP id
- 6a1803df08f44-8a3b0242631so112369556d6.3
- for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 14:03:35 -0700 (PDT)
+ spf=pass smtp.mailfrom=briansune@gmail.com
+Received: by mail-oo1-xc2d.google.com with SMTP id
+ 006d021491bc7-68470763896so4800684eaf.1
+ for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 14:20:53 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1777152052; cv=none;
+ d=google.com; s=arc-20240605;
+ b=jkf7M/zmyvK6ArXM9xqmtK04/svHTQBmDjaKmhS7czXmKJ2ESBX/p7oI5jsYRhTfqg
+ v+mHAeqkMFms0w4WeRGg56vkqwWOftt3tMBuvyzkEL5VPC9CMM754tSTdir7RsjPGj4p
+ Ofia7wRU3CSSK9W0IJiov/kLQwNr+J99P1Tz9buzXLPF9SQXGehDeShGr4UxJoJEziwz
+ yRNHajf2IJD1LOFoSQfU+gqrulHAeWkC5ZTwTzZEr5kKveCWne1hrNqBa/dPVzcmEkbs
+ 8LSi/4h2aBKsddkW2n7Cs24MX98yuec3+/eHhJXm2pJdaIQ/72whUGs6IajgNpiRcLnc
+ AjdQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=nD4Vw9P7JilS8K7XT0SNTlErvZ8TbXVwzvAI5v3hYTc=;
+ fh=DFrvjkYae3Jq40RhUx4J9+lntH6NSaSi7QcpJxmZ6iw=;
+ b=ae9af36I7hYzgOmRFneUlCMh0x05LsddSzW8n4sHSh5PiKWEWXSgVHwhxvSowmzKZ5
+ iPJQbNt+3OmLZEL4/XemA3jEo2aQuzwNNkVaGXr6cxXNjcHUZI1MpojpNudweFtBLuUU
+ 8TF9XQ3oSuaAO9CSoM/SAA4jlzNr7q1tbBYcWudPoyyDASudW916H4VinPhRj+Ka1+Vo
+ 8W5ghbSerxGbpM3gFBoIlaRVsu7LMHteRt2Viu/b+aM9XXJoexoTjXHF2NlXBorXqqCU
+ YmB/8MLLnMVn+Ey8BRTrbgZ0bjc/q87QjlEHpyOzgokt/5Sd6mBNtzUVMOOI8zrfSLYz
+ g3VA==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1777151014; x=1777755814; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ d=gmail.com; s=20251104; t=1777152052; x=1777756852; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=q7tMHmRZFsf8oK3LdG7UcLp/Vy0+rPteRfgu8Cf3UyU=;
- b=srXt7foV+vYj3wZvDfWfpNw1ysN+7+lw/WvV/uJXXbH6nJTzxBCN4FU126Eyp+OMtY
- p2N/0LnqQDgmO/IyWPEv5nmIfCmUQoTs0aCxuXNlZJaCQ6ojZ8DhU2ILCa0s6vbk/+ff
- 93M0gQvaAU3yBrsjOcuHUcp/TXtaPfQ4aH1X2Cs7NQD9ovtX0jo3B9n5PFfFkgUyBcsb
- O3/JCQ7kaubJto1W68v7IBRk0uXR02V0tHWbR6Ll0BhQvx0bGTJ3qv8sdIg2ZXpQtW+K
- +cADHtPFStdVmwOyBfoE4B+YJ048th3IIIOE8gxeMriFGdVAvDdbOsJXVwmxbWAi8T65
- Ot6g==
+ bh=nD4Vw9P7JilS8K7XT0SNTlErvZ8TbXVwzvAI5v3hYTc=;
+ b=N0rWX3WRXnw5YmSZxWiVOTtksOzL+lSvUBngUhH4ZK0nVEtvHyj2JV/M7hafKPyDX8
+ Prv6yModZreXPl6Iv0snXFeJoGr6Gu91AHwca8dbs91kKbOaDRNyk/yB4lTEPw1c+E1m
+ kZYApbDyTsHthm8mNPeQxE7blaZTfhuxE0iqlWcxO5bl7/ugM9VMse5FKE2o+r64GpcA
+ P7qkt9c7KP5v42827hE5OgvYQ8mB+nNa/Q9NdHSWDme86qx0i9otc6cvh+46kjE1Gwea
+ rarAu9OKYLfIjFivoO0GEki0IaktBIt1DlTPiDl9/pJur1UN5tCHiYdT/iBZS28DhJ65
+ RImg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777151014; x=1777755814;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ d=1e100.net; s=20251104; t=1777152052; x=1777756852;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=q7tMHmRZFsf8oK3LdG7UcLp/Vy0+rPteRfgu8Cf3UyU=;
- b=h7SH8N1UW4TskkG803PxUVFWiN1Xubkv9L/knMpQpSWzkIZ+5/OCLaL4sq2AXFkWcU
- zGCwcSn22BpdL8huo4HsQfEQ6K9R2qFnrk04Nzvm0gsrDJpcm3qNvOoksQV1NPcKVdGd
- KIiNJA4dnGJ0e3MhGP3nC89TkH3iPnik+cspGMRbC04ZiFRt9vitqxrhKtr2vJ+awK/w
- DDcYKVW/RbdYNr1RsCDoCMcfy8CpDEsU1sGrwQKQekJdxUh9G3tZ7+U1RZMOm8c7d4NT
- DegZymQU4R51QVLmYy6KQeT8S04eNQtHi099PGGr/G5LwpadH0UVFzmn2B81NwYxSwin
- ZL2w==
-X-Gm-Message-State: AOJu0Yx5t26aNOqrC5lmGu8+Wz9Yb/IdmjlTCFGC4ujFoMEGUJOs5v0s
- t9syT2TNwZfAaNqEHL7QAyS8iDCbovgxSJFQnFYVL2RlWYuqgTdS25sznSTYqLbb
-X-Gm-Gg: AeBDieva1KsrIxt2AyEMslnf3ZsQCNNmhpg5zuaYeLwzTQMbQdazyS+aAYOEdKIzbWq
- XTcGbk0C2tyI1dLh78U4Ja2sUn1sTNKriYecCWOm3CPKfPtetZJW/c5h4rdjvLwYw/qYSGEFSKa
- E85KoHTS8JSVsx+2GY/7T3ZYZb6vCktIIXPww/N09vm578K8lTWdij+hYwj3KlAnO0gff1UjIdT
- dx/kVsjxUqY9+HCWdkQNgq3XJAYjT2IIUS2B5MT71n5PKMoIwPPM0O9GnRpVH2LrpQy19c3aad5
- YMcNFwTsntqtwx3+aYLa776p4tNjEyxD3pAWf/GLNM5ZiPcceUewiT11YjY6B/sU1d4lPAItPqz
- etJHFjIdy8xybWjkx/6bATkffynDWTH1uYYEC0MvZ9hOt0n2xS4m042978Yc9dZ83g/SBbtO38d
- 6DxjZLN04PFEUrWzYNi3wwb+nqdgTOCEr1UMH4TOms+lv4
-X-Received: by 2002:a05:6102:6a92:b0:603:273f:3576 with SMTP id
- ada2fe7eead31-616f4d72895mr15510666137.10.1776954342100; 
- Thu, 23 Apr 2026 07:25:42 -0700 (PDT)
-Received: from cethr-l01.localdomain ([136.56.120.109])
- by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-8b02aa4f1f9sm157183266d6.0.2026.04.23.07.25.41
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 23 Apr 2026 07:25:41 -0700 (PDT)
-From: Caleb Ethridge <jcethrid@gmail.com>
-To: u-boot@lists.denx.de
-Cc: malysagreg@gmail.com, trini@konsulko.com, linux@analog.com,
- philip@philipmolloy.com, sjg@chromium.org,
- Caleb Ethridge <caleb.ethridge@analog.com>
-Subject: [PATCH v5 02/15] mach-sc5xx: Remove update commands from default
- environment
-Date: Thu, 23 Apr 2026 10:24:37 -0400
-Message-Id: <80621463fd15e2eca9fb138110bb18ebbf2351d9.1776954004.git.jcethrid@gmail.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <cover.1776954004.git.jcethrid@gmail.com>
-References: <cover.1776954004.git.jcethrid@gmail.com>
+ bh=nD4Vw9P7JilS8K7XT0SNTlErvZ8TbXVwzvAI5v3hYTc=;
+ b=AbpwFBPhhlIlCBgH4WgT8w58aeo6dgMNsuonxcye1/Apdbz6UHawAmk6W+6O9ftt0r
+ wG+xZRx5sXk23/UaN34HQ8KUTCTtnfm9taMhgZh1SqEOg+7jb0G65xoLVWTIimfVZbY9
+ YMF0kVdGYOMi7IkRTaSoAj6j9X+LAE0+YeTH0joldsI9ROXGPjenVC5N1x3rW/XoPL0r
+ rx2/aHH848haBa+9Kqr9vhmPWh2BWzMvl8Nf33UT9MJKSOk6fAkgvvY+0E7/oGL5pOM0
+ fKEi2rfwUyxNtNFDiVQGhPLILb3Js7q17BxCuYGNUtLAGAkKBjYoXiDxDYN7LbRI4Z40
+ AJoA==
+X-Gm-Message-State: AOJu0Yz5crbSyRyX/1jjJqdXCnt7+XTBycFx7EGonutJXmSBfSsoWWgT
+ i1rujTbwF5xH9bF6XFuwUUzIhT0evM/79BLq564Ad7QZbBGjx4mg9WhYnCobeWQPLO6yYS3Pqmt
+ wyXdsFCNVokHkc9OsHM4mxg42OLFkGBWiTuj7swuE66Mb
+X-Gm-Gg: AeBDiesTWfgi9mRuPfc5Il+m4DlnjAUIBjh5qPVoLCpBl/rbXsJEOpvtswuBezAkYNy
+ SVvNWGu9i075x9TYkqkwIuZP5Km8oANVKLqO2hUaoyQ0IjLzdqXBYvxzvdasBqfDEwhYECnjdls
+ EFPswfFubaGhe1rLT/McrTD5n+NB0dgwd7L0q5XJp4hJgeksHmAeSLJ4HP6gAjkKY0tFYe4uqqq
+ rIGDranaaTu35ZTqWj1cesBeUKkrKzW7D89nOnjuPullGV4E5P5MnZ53tlm72qElHR5glA5gReu
+ fLlWerFWzu1SULDgz8I=
+X-Received: by 2002:a05:6830:3103:b0:7d7:f5d4:ef5b with SMTP id
+ 46e09a7af769-7dc94fdae02mr18657234a34.7.1776914628871; Wed, 22 Apr 2026
+ 20:23:48 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Sat, 25 Apr 2026 23:08:00 +0200
+References: <20260422065910.5398-1-briansune@gmail.com>
+ <870316ea-6fbb-4923-b772-58528eadaf10@altera.com>
+In-Reply-To: <870316ea-6fbb-4923-b772-58528eadaf10@altera.com>
+From: Sune Brian <briansune@gmail.com>
+Date: Thu, 23 Apr 2026 11:23:36 +0800
+X-Gm-Features: AQROBzBhANm5SxYzmVoB11BBrMYqzjaL7W5bSKio3xF4GfglUca5iSgJkMEEzxA
+Message-ID: <CAN7C2SDD2p89v=haRMt4Fj=xypRcWP4PGTQ17WSJA1ysp2n+CA@mail.gmail.com>
+Subject: Re: [PATCH v5] Improve handoff prepare on SoCFPGA
+To: "Chee, Tien Fong" <tien.fong.chee@altera.com>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ Simon Glass <sjg@chromium.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,281 +115,158 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Caleb Ethridge <caleb.ethridge@analog.com>
+On Thu, Apr 23, 2026 at 10:20=E2=80=AFAM Chee, Tien Fong
+<tien.fong.chee@altera.com> wrote:
+>
+> Hi Brian,
+>
+>
+> On 22/4/2026 2:59 pm, Brian Sune wrote:
+> > [CAUTION: This email is from outside your organization. Unless you trus=
+t the sender, do not click on links or open attachments as it may be a frau=
+dulent email attempting to steal your information and/or compromise your co=
+mputer.]
+> >
+> > Ensure qts folder header files are properly updated by isolating
+> > the Python execution environment. This prevents partial or failed
+> > script runs from corrupting the target directory.
+> >
+> > Changelog v4 -> v5:
+> > - Change HANDOFF_KEEP condition to if [ 2501{HANDOFF_KEEP:-0} !=3D 0 ]
+>
+>
+> appears corrupted in the commit message, e.g.:
+>       if [ 2501{HANDOFF_KEEP:-0} !=3D 0 ]
+>
+>
+>     Please correct this to the actual test (e.g. reference to
+>     "${HANDOFF_KEEP:-0}" and proper quoting) so 'git log' is accurate.
+>
+>
+> > - Add HANDOFF_KEEP and HANDOFF_PATH comments in config.mk
+> >
+> > Changes:
+> > - Implement a temp folder for Python script execution.
+> > - Clean temp folder automatically despite execution failures.
+> > - Gate the file replacement process on the successful exit of
+> >    the Python scripts.
+> > - Execute the replacement (with or without keep) only upon script
+> >    success via the NEW HANDOFF_KEEP=3Dxxx variable.
+> > - Rename old files to .h.handoff_backup.<timestamp> when the
+> >    keep option is selected.
+> >
+> > Signed-off-by: Brian Sune <briansune@gmail.com>
+> > ---
+> >   arch/arm/mach-socfpga/config.mk | 38 ++++++++++++++++++++++++++++++--=
+-
+> >   1 file changed, 35 insertions(+), 3 deletions(-)
+> >
+> > diff --git a/arch/arm/mach-socfpga/config.mk b/arch/arm/mach-socfpga/co=
+nfig.mk
+> > index 1ca1d33cb16..e777b95b528 100644
+> > --- a/arch/arm/mach-socfpga/config.mk
+> > +++ b/arch/arm/mach-socfpga/config.mk
+> > @@ -1,6 +1,17 @@
+> >   # SPDX-License-Identifier: GPL-2.0+
+> >   #
+> >   # Brian Sune <briansune@gmail.com>
+> > +#
+> > +# HANDOFF_PATH
+> > +# ------------
+> > +# Unset - Board path where qts locates and "hps_isw_handoff" should be=
+ placed.
+> > +# Set   - Custom path points to "hps_isw_handoff" folder.
+> > +#
+> > +# HANDOFF_KEEP
+> > +# ------------
+> > +# Unset - HANDOFF_KEEP=3D , Clean header files.
+> > +# Set   - HANDOFF_KEEP=3D0, Clean header files.
+> > +#         HANDOFF_KEEP=3D1, Backup header files and rename to ".h.hand=
+off_backup.<timestamp>".
+>
+>
+> Should be tightened to match the real behaviour:
+>     - For HANDOFF_KEEP, avoid lines that mix "Unset" and "HANDOFF_KEEP=3D=
+ " in
+>       a way that is easy to misread. Document:
+>         unset, empty, or =3D0  =3D> clean old .h in qts, then install new
+>         =3D1 (or any non-0)     =3D> rename old *.h to .h.handoff_backup.=
+<ts>
+>
+>
+>     - For HANDOFF_PATH, a short "unset: auto hps_isw_handoff; set: custom
+>       handoff path" style note reads clearer than the current phrasing.
+>
+> >
+> >   ifeq ($(CONFIG_ARCH_SOCFPGA_CYCLONE5),y)
+> >   archprepare: socfpga_g5_handoff_prepare
+> > @@ -43,6 +54,27 @@ socfpga_g5_handoff_prepare:
+> >                          exit 0; \
+> >                  fi; \
+> >                  echo "[INFO] Found hiof file: $$HIOF_FILE"; \
+> > -               echo "[INFO] Running BSP generator..."; \
+> > -               python3 $(srctree)/tools/cv_bsp_generator/cv_bsp_genera=
+tor.py -i "$$HANDOFF_PATH" -o "$$BOARD_DIR/qts" || echo "[WARN] BSP generat=
+or failed, continuing..."; \
+> > -               echo "[DONE] SoCFPGA QTS handoff conversion complete."
+> > +               echo "[INFO] Try BSP generator..."; \
+> > +               TEMP_DIR=3D$$(mktemp -dp "$$BOARD_DIR/"); \
+> > +               trap 'rm -rf "$$TEMP_DIR"' EXIT; \
+> > +               if python3 $(srctree)/tools/cv_bsp_generator/cv_bsp_gen=
+erator.py -i "$$HANDOFF_PATH" -o "$$TEMP_DIR"; then \
+> > +                       if [ "$${HANDOFF_KEEP:-0}" !=3D "0" ]; then \
+> > +                               echo "[INFO] Preserving old BSP files..=
+."; \
+> > +                               TIMESTAMP=3D$$(date +%Y%m%d_%H%M%S); \
+> > +                               for f in "$$BOARD_DIR"/qts/*.h; do \
+> > +                                       [ -e "$$f" ] || continue; \
+> > +                                       echo "[INFO] $$f -> $${f%.h}.h.=
+handoff_backup.$$TIMESTAMP"; \
+> > +                                       mv "$$f" "$${f%.h}.h.handoff_ba=
+ckup.$$TIMESTAMP"; \
+> > +                               done; \
+> > +                       else \
+> > +                               echo "[INFO] Clean old BSP files..."; \
+> > +                               if ls "$$BOARD_DIR/qts"/*.h >/dev/null =
+2>&1; then \
+> > +                                       rm "$$BOARD_DIR/qts"/*.h; \
+> > +                                       echo "[INFO] Removed old BSP fi=
+les..."; \
+> > +                               fi; \
+> > +                       fi; \
+> > +                       mv "$$TEMP_DIR"/*.h "$$BOARD_DIR"/qts; \
+> > +                       echo "[INFO] SoCFPGA QTS handoff conversion com=
+plete."; \
+> > +               else \
+> > +                       echo "[WARN] BSP generator failed!"; \
+> > +               fi;
+> > --
+> > 2.34.1
+>
+>
+> You can add Simon and my review tag to a new version.
+>
+> I=E2=80=99m fine to proceed with v5 as posted. If you prefer a different
+> implementation,
+>
+> feel free to propose it in a follow=E2=80=91up patch and we can review it=
+ there.
 
-Remove the update_spi family of commands from the U-boot
-environment. These commands are not standard in U-boot,
-and boot media programming has moved to Linux, so the
-commands can be safely removed.
+Hi T.F.,
 
-Signed-off-by: Caleb Ethridge <caleb.ethridge@analog.com>
----
- board/adi/sc573-ezkit/sc573-ezkit.env         |  2 -
- board/adi/sc584-ezkit/sc584-ezkit.env         |  2 -
- board/adi/sc589-ezkit/sc589-ezkit.env         |  2 -
- board/adi/sc589-mini/sc589-mini.env           |  2 -
- board/adi/sc594-som-ezkit/sc594-som-ezkit.env |  2 -
- .../adi/sc594-som-ezlite/sc594-som-ezlite.env |  2 -
- board/adi/sc598-som-ezkit/sc598-som-ezkit.env |  2 -
- .../adi/sc598-som-ezlite/sc598-som-ezlite.env |  2 -
- configs/sc573-ezkit_defconfig                 |  2 -
- configs/sc584-ezkit_defconfig                 |  2 -
- configs/sc589-ezkit_defconfig                 |  2 -
- configs/sc589-mini_defconfig                  |  2 -
- include/env/adi/adi_boot.env                  | 53 -------------------
- 13 files changed, 77 deletions(-)
+I committed a new v6 patch just to replace the corrupted " symbol.
 
-diff --git a/board/adi/sc573-ezkit/sc573-ezkit.env b/board/adi/sc573-ezkit/sc573-ezkit.env
-index 8b03a3d5da9..c8781aaad82 100644
---- a/board/adi/sc573-ezkit/sc573-ezkit.env
-+++ b/board/adi/sc573-ezkit/sc573-ezkit.env
-@@ -3,9 +3,7 @@
-  * (C) Copyright 2024 - Analog Devices, Inc.
-  */
- 
--adi_stage2_offset=CONFIG_SC5XX_UBOOT_OFFSET
- adi_image_offset=CONFIG_SC5XX_FITIMAGE_OFFSET
--adi_rfs_offset=CONFIG_SC5XX_ROOTFS_OFFSET
- jffs2file=adsp-sc5xx-__stringify(CONFIG_ADI_IMAGE)-adsp-sc573-ezkit.jffs2
- loadaddr=CONFIG_SC5XX_LOADADDR
- 
-diff --git a/board/adi/sc584-ezkit/sc584-ezkit.env b/board/adi/sc584-ezkit/sc584-ezkit.env
-index 8a6f7edd5e8..2a76c005d1c 100644
---- a/board/adi/sc584-ezkit/sc584-ezkit.env
-+++ b/board/adi/sc584-ezkit/sc584-ezkit.env
-@@ -3,9 +3,7 @@
-  * (C) Copyright 2024 - Analog Devices, Inc.
-  */
- 
--adi_stage2_offset=CONFIG_SC5XX_UBOOT_OFFSET
- adi_image_offset=CONFIG_SC5XX_FITIMAGE_OFFSET
--adi_rfs_offset=CONFIG_SC5XX_ROOTFS_OFFSET
- jffs2file=adsp-sc5xx-__stringify(CONFIG_ADI_IMAGE)-adsp-sc584-ezkit.jffs2
- loadaddr=CONFIG_SC5XX_LOADADDR
- 
-diff --git a/board/adi/sc589-ezkit/sc589-ezkit.env b/board/adi/sc589-ezkit/sc589-ezkit.env
-index b8206e85179..8eaa776cc6e 100644
---- a/board/adi/sc589-ezkit/sc589-ezkit.env
-+++ b/board/adi/sc589-ezkit/sc589-ezkit.env
-@@ -3,9 +3,7 @@
-  * (C) Copyright 2024 - Analog Devices, Inc.
-  */
- 
--adi_stage2_offset=CONFIG_SC5XX_UBOOT_OFFSET
- adi_image_offset=CONFIG_SC5XX_FITIMAGE_OFFSET
--adi_rfs_offset=CONFIG_SC5XX_ROOTFS_OFFSET
- jffs2file=adsp-sc5xx-__stringify(CONFIG_ADI_IMAGE)-adsp-sc589-ezkit.jffs2
- loadaddr=CONFIG_SC5XX_LOADADDR
- 
-diff --git a/board/adi/sc589-mini/sc589-mini.env b/board/adi/sc589-mini/sc589-mini.env
-index f7628b0b335..a7addcd3957 100644
---- a/board/adi/sc589-mini/sc589-mini.env
-+++ b/board/adi/sc589-mini/sc589-mini.env
-@@ -3,9 +3,7 @@
-  * (C) Copyright 2024 - Analog Devices, Inc.
-  */
- 
--adi_stage2_offset=CONFIG_SC5XX_UBOOT_OFFSET
- adi_image_offset=CONFIG_SC5XX_FITIMAGE_OFFSET
--adi_rfs_offset=CONFIG_SC5XX_ROOTFS_OFFSET
- jffs2file=adsp-sc5xx-__stringify(CONFIG_ADI_IMAGE)-adsp-sc589-mini.jffs2
- loadaddr=CONFIG_SC5XX_LOADADDR
- 
-diff --git a/board/adi/sc594-som-ezkit/sc594-som-ezkit.env b/board/adi/sc594-som-ezkit/sc594-som-ezkit.env
-index 069edc717da..85fa8c8d49c 100644
---- a/board/adi/sc594-som-ezkit/sc594-som-ezkit.env
-+++ b/board/adi/sc594-som-ezkit/sc594-som-ezkit.env
-@@ -3,9 +3,7 @@
-  * (C) Copyright 2024 - Analog Devices, Inc.
-  */
- 
--adi_stage2_offset=CONFIG_SC5XX_UBOOT_OFFSET
- adi_image_offset=CONFIG_SC5XX_FITIMAGE_OFFSET
--adi_rfs_offset=CONFIG_SC5XX_ROOTFS_OFFSET
- jffs2file=adsp-sc5xx-__stringify(CONFIG_ADI_IMAGE)-adsp-sc594-som-ezkit.jffs2
- loadaddr=CONFIG_SC5XX_LOADADDR
- 
-diff --git a/board/adi/sc594-som-ezlite/sc594-som-ezlite.env b/board/adi/sc594-som-ezlite/sc594-som-ezlite.env
-index e5382b67c81..f2ee8d06801 100644
---- a/board/adi/sc594-som-ezlite/sc594-som-ezlite.env
-+++ b/board/adi/sc594-som-ezlite/sc594-som-ezlite.env
-@@ -3,9 +3,7 @@
-  * (C) Copyright 2024 - Analog Devices, Inc.
-  */
- 
--adi_stage2_offset=CONFIG_SC5XX_UBOOT_OFFSET
- adi_image_offset=CONFIG_SC5XX_FITIMAGE_OFFSET
--adi_rfs_offset=CONFIG_SC5XX_ROOTFS_OFFSET
- jffs2file=adsp-sc5xx-__stringify(CONFIG_ADI_IMAGE)-adsp-sc594-som-ezlite.jffs2
- loadaddr=CONFIG_SC5XX_LOADADDR
- 
-diff --git a/board/adi/sc598-som-ezkit/sc598-som-ezkit.env b/board/adi/sc598-som-ezkit/sc598-som-ezkit.env
-index 2cb475e1001..080afaef406 100644
---- a/board/adi/sc598-som-ezkit/sc598-som-ezkit.env
-+++ b/board/adi/sc598-som-ezkit/sc598-som-ezkit.env
-@@ -3,9 +3,7 @@
-  * (C) Copyright 2024 - Analog Devices, Inc.
-  */
- 
--adi_stage2_offset=CONFIG_SC5XX_UBOOT_OFFSET
- adi_image_offset=CONFIG_SC5XX_FITIMAGE_OFFSET
--adi_rfs_offset=CONFIG_SC5XX_ROOTFS_OFFSET
- jffs2file=adsp-sc5xx-__stringify(CONFIG_ADI_IMAGE)-adsp-sc598-som-ezkit.jffs2
- loadaddr=CONFIG_SC5XX_LOADADDR
- 
-diff --git a/board/adi/sc598-som-ezlite/sc598-som-ezlite.env b/board/adi/sc598-som-ezlite/sc598-som-ezlite.env
-index 1d9ea6d188b..a3486de503e 100644
---- a/board/adi/sc598-som-ezlite/sc598-som-ezlite.env
-+++ b/board/adi/sc598-som-ezlite/sc598-som-ezlite.env
-@@ -3,9 +3,7 @@
-  * (C) Copyright 2024 - Analog Devices, Inc.
-  */
- 
--adi_stage2_offset=CONFIG_SC5XX_UBOOT_OFFSET
- adi_image_offset=CONFIG_SC5XX_FITIMAGE_OFFSET
--adi_rfs_offset=CONFIG_SC5XX_ROOTFS_OFFSET
- loadaddr=CONFIG_SC5XX_LOADADDR
- jffs2file=adsp-sc5xx-__stringify(CONFIG_ADI_IMAGE)-adsp-sc598-som-ezlite.jffs2
- 
-diff --git a/configs/sc573-ezkit_defconfig b/configs/sc573-ezkit_defconfig
-index 976d8e0306a..7a0c7d04e84 100644
---- a/configs/sc573-ezkit_defconfig
-+++ b/configs/sc573-ezkit_defconfig
-@@ -6,9 +6,7 @@ CONFIG_SPL_GPIO=y
- CONFIG_DM_GPIO=y
- CONFIG_SPL_SYS_MALLOC_F_LEN=0x10000
- CONFIG_SPL_SERIAL=y
--CONFIG_SC5XX_UBOOT_OFFSET=0x20000
- CONFIG_SC5XX_FITIMAGE_OFFSET=0xE0000
--CONFIG_SC5XX_ROOTFS_OFFSET=0x6E0000
- CONFIG_SC5XX_LOADADDR=0x83000000
- CONFIG_WATCHDOG_TIMEOUT_MSECS=60000
- CONFIG_CGU0_CLKOUTSEL=7
-diff --git a/configs/sc584-ezkit_defconfig b/configs/sc584-ezkit_defconfig
-index 27f55804199..7975a610ca3 100644
---- a/configs/sc584-ezkit_defconfig
-+++ b/configs/sc584-ezkit_defconfig
-@@ -10,9 +10,7 @@ CONFIG_SPL_STACK=0x200C0000
- CONFIG_SPL_BSS_START_ADDR=0x200A0000
- CONFIG_SPL_BSS_MAX_SIZE=0x8000
- CONFIG_SC58X=y
--CONFIG_SC5XX_UBOOT_OFFSET=0x20000
- CONFIG_SC5XX_FITIMAGE_OFFSET=0xE0000
--CONFIG_SC5XX_ROOTFS_OFFSET=0x6E0000
- CONFIG_SC5XX_LOADADDR=0x89300000
- CONFIG_WATCHDOG_TIMEOUT_MSECS=60000
- CONFIG_ADI_BUG_EZKHW21=y
-diff --git a/configs/sc589-ezkit_defconfig b/configs/sc589-ezkit_defconfig
-index 180b6904d95..0ceb57f1f42 100644
---- a/configs/sc589-ezkit_defconfig
-+++ b/configs/sc589-ezkit_defconfig
-@@ -13,9 +13,7 @@ CONFIG_SPL_BSS_START_ADDR=0x200A0000
- CONFIG_SPL_BSS_MAX_SIZE=0x8000
- CONFIG_SC58X=y
- CONFIG_TARGET_SC589_EZKIT=y
--CONFIG_SC5XX_UBOOT_OFFSET=0x20000
- CONFIG_SC5XX_FITIMAGE_OFFSET=0xE0000
--CONFIG_SC5XX_ROOTFS_OFFSET=0x6E0000
- CONFIG_SC5XX_LOADADDR=0xC3000000
- CONFIG_WATCHDOG_TIMEOUT_MSECS=60000
- CONFIG_ADI_USE_DMC1=y
-diff --git a/configs/sc589-mini_defconfig b/configs/sc589-mini_defconfig
-index 92c2741f701..32678b63a9f 100644
---- a/configs/sc589-mini_defconfig
-+++ b/configs/sc589-mini_defconfig
-@@ -12,9 +12,7 @@ CONFIG_SPL_BSS_START_ADDR=0x200A0000
- CONFIG_SPL_BSS_MAX_SIZE=0x8000
- CONFIG_SC58X=y
- CONFIG_TARGET_SC589_MINI=y
--CONFIG_SC5XX_UBOOT_OFFSET=0x20000
- CONFIG_SC5XX_FITIMAGE_OFFSET=0xE0000
--CONFIG_SC5XX_ROOTFS_OFFSET=0x8E0000
- CONFIG_SC5XX_LOADADDR=0xC3000000
- CONFIG_WATCHDOG_TIMEOUT_MSECS=60000
- CONFIG_ADI_USE_DMC1=y
-diff --git a/include/env/adi/adi_boot.env b/include/env/adi/adi_boot.env
-index db4148b1af9..b574892e0a0 100644
---- a/include/env/adi/adi_boot.env
-+++ b/include/env/adi/adi_boot.env
-@@ -1,9 +1,7 @@
- /*
-  * A target board needs to set these variables for the commands below to work:
-  *
-- * - adi_stage2_offset, the location of stage2-boot.ldr on the SPI flash
-  * - adi_image_offset, location of the fitImage on the SPI flash
-- * - adi_rfs_offset, location of the RFS on the SPI flash
-  * - loadaddr, where you want to load things
-  * - jffs2file, name of the jffs2 file for update, ex adsp-sc5xx-tiny-adsp-sc573.jffs2
-  */
-@@ -15,7 +13,6 @@
- #endif
- 
- /* Config options */
--imagefile=fitImage
- ethaddr=02:80:ad:20:31:e8
- eth1addr=02:80:ad:20:31:e9
- uart_console=CONFIG_UART_CONSOLE
-@@ -25,11 +22,6 @@ initrd_high=0xffffffffffffffff
- initrd_high=0xffffffff
- #endif
- 
--/* Helper routines */
--init_ethernet=mii info;
--	dhcp;
--	setenv serverip ${tftpserverip}
--
- /* Args for each boot mode */
- adi_bootargs=EARLY_PRINTK console=ttySC0,CONFIG_BAUDRATE vmalloc=512M
- ramargs=setenv bootargs ${adi_bootargs}
-@@ -73,48 +65,3 @@ ramboot=run init_ethernet;
- 	run ramargs;
- 	bootm ${loadaddr}
- #endif
--
--/* Update commands */
--stage1file=stage1-boot.ldr
--stage2file=stage2-boot.ldr
--
--#if defined(USE_SPI) || defined(USE_OSPI)
--update_spi_uboot_stage1=tftp ${loadaddr} ${tftp_dir_prefix}${stage1file};
--	sf probe ${sfdev};
--	sf update ${loadaddr} 0x0 ${filesize}
--update_spi_uboot_stage2=tftp ${loadaddr} ${tftp_dir_prefix}${stage2file};
--	sf probe ${sfdev};
--	sf update ${loadaddr} ${adi_stage2_offset} ${filesize}
--update_spi_uboot=run update_spi_uboot_stage1;
--	run update_spi_uboot_stage2;
--update_spi_fit=tftp ${loadaddr} ${tftp_dir_prefix}${imagefile};
--	sf probe ${sfdev};
--	sf update ${loadaddr} ${adi_image_offset} ${filesize};
--	setenv imagesize ${filesize}
--update_spi_rfs=tftp ${loadaddr} ${tftp_dir_prefix}${jffs2file};
--	sf probe ${sfdev};
--	sf update ${loadaddr} ${adi_rfs_offset} ${filesize}
--
--start_update_spi=run init_ethernet;
--	run update_spi_uboot;
--	run update_spi_fit;
--	run update_spi_rfs;
--start_update_spi_uboot_only=run init_ethernet;
--	run update_spi_uboot;
--#endif
--
--#if defined(USE_SPI)
--update_spi=setenv sfdev CONFIG_SC_BOOT_SPI_BUS:CONFIG_SC_BOOT_SPI_SSEL;
--	setenv bootcmd run spiboot;
--	setenv argscmd spiargs;
--	run start_update_spi;
--	saveenv
--#endif
--
--#if defined(USE_OSPI)
--update_ospi=setenv sfdev CONFIG_SC_BOOT_OSPI_BUS:CONFIG_SC_BOOT_OSPI_SSEL;
--	setenv bootcmd run ospiboot;
--	setenv argscmd spiargs;
--	run start_update_spi;
--	saveenv
--#endif
--- 
-2.34.1
+The version control placing v5 with v5 is not allowed so v6 is used.
+While the change log kept v4->v5 because code changes are not
+done under v6.
+So v6 is a git commit text fix only.
 
+Thanks,
+Brian
+
+>
+>
+> Best regards,
+>
+> Tien Fong
+>
