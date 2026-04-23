@@ -4,128 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77C3FFF885C
-	for <u-boot@archiver.kernel.org>; Sat, 25 Apr 2026 21:08:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C15BFF885C
+	for <u-boot@archiver.kernel.org>; Sat, 25 Apr 2026 21:08:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0621B84422;
+	by phobos.denx.de (Postfix) with ESMTP id 99EE0844AF;
 	Sat, 25 Apr 2026 23:08:04 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20251104.gappssmtp.com header.i=@baylibre-com.20251104.gappssmtp.com header.b="nkpMmnYn";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="srXt7foV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7EEFA84514; Sat, 25 Apr 2026 22:53:56 +0200 (CEST)
-Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
- [IPv6:2a00:1450:4864:20::430])
+ id 93A658445C; Sat, 25 Apr 2026 23:03:37 +0200 (CEST)
+Received: from mail-qv1-xf41.google.com (mail-qv1-xf41.google.com
+ [IPv6:2607:f8b0:4864:20::f41])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 740FA84329
- for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 22:53:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3995C84307
+ for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 23:03:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jstephan@baylibre.com
-Received: by mail-wr1-x430.google.com with SMTP id
- ffacd0b85a97d-43d73422431so8072628f8f.2
- for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 13:53:53 -0700 (PDT)
+ spf=pass smtp.mailfrom=jcethrid@gmail.com
+Received: by mail-qv1-xf41.google.com with SMTP id
+ 6a1803df08f44-8a3b0242631so112369556d6.3
+ for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 14:03:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20251104.gappssmtp.com; s=20251104; t=1777150432; x=1777755232;
- darn=lists.denx.de; 
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=OqUqBsl7kIUdZCD3faFvhnVIGA6HBu1Xz03kb0w+fsA=;
- b=nkpMmnYndg7U66weEcW0A9WhOeJQjXLJVWzbCCj6DjXVB59l9SKAc8LZ00FAHIo/iA
- DytPhE9UeidK8vGaL7MososZvdWbRVZYMhzvyClQ8C81aIr0QtVcGMKcW57/AyQGJoN+
- 6GHjLKPtSxCgK9DJWzO80z3FJLBGci1H68Rh8/fjf8hkSS/GwKPHDgqYDzjdooDeqBv8
- rDSercceccnZTwRmMeMFQO2aaSg6jTfZ3Nw6qmClu5xZ/19miCSZT/hXc/o419FUaElV
- EnzrO2ippK2bPHaROFfhEurMiSQyb8B0HhLEOq/cRzqtQsXu7P0N7bTGe3aWmHUvVBuP
- ScIg==
+ d=gmail.com; s=20251104; t=1777151014; x=1777755814; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=q7tMHmRZFsf8oK3LdG7UcLp/Vy0+rPteRfgu8Cf3UyU=;
+ b=srXt7foV+vYj3wZvDfWfpNw1ysN+7+lw/WvV/uJXXbH6nJTzxBCN4FU126Eyp+OMtY
+ p2N/0LnqQDgmO/IyWPEv5nmIfCmUQoTs0aCxuXNlZJaCQ6ojZ8DhU2ILCa0s6vbk/+ff
+ 93M0gQvaAU3yBrsjOcuHUcp/TXtaPfQ4aH1X2Cs7NQD9ovtX0jo3B9n5PFfFkgUyBcsb
+ O3/JCQ7kaubJto1W68v7IBRk0uXR02V0tHWbR6Ll0BhQvx0bGTJ3qv8sdIg2ZXpQtW+K
+ +cADHtPFStdVmwOyBfoE4B+YJ048th3IIIOE8gxeMriFGdVAvDdbOsJXVwmxbWAi8T65
+ Ot6g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777150432; x=1777755232;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=OqUqBsl7kIUdZCD3faFvhnVIGA6HBu1Xz03kb0w+fsA=;
- b=HXBu71K6+ZGCIh0ogv5U3BlruozOIwbIERIqu0wzRtzVXTAhANNrVCXhXh5YJgckZ0
- tqIqZxlmQkpTNK7P3ZYqJWJl/hruzw6i8B5p5QKFfCcTyfBoXeGGWhdSqQ/vdk56yhpJ
- NFFlUqc9MihhT9sh84vE2jWGLkf0Ctt+ff77yYiKbOI9vdgQo47jxfzsHag+/AZTfgCm
- G6l3ABlO1r+ki1AVAn0JDElnoWimT1tUcXEAjMn/fXRlxQMPQPW1m67zyUPSafnrAuEj
- UQYRSQTSwoisYwpv5Q7pEPKkVGriBpVRtI58RVt9eHGKKAMhX3Lz2sg+hVzlz/0MnBOK
- Q8BQ==
-X-Gm-Message-State: AOJu0Yxb0fjamsf32OujEGilTnIIx1bZU+QIMjiRl0InLST6o9zwUbVl
- YkP+rZuTup2fA+Cg2W4R7zfe7qjYZ+uG48pexDdryNfJd9l5NhCQ+YuANOKwodYIkPX3ZSSkyXa
- mIGRMCks=
-X-Gm-Gg: AeBDievyFZaEvnAO6DirvktArepDbDAhRGClV77V6NQNCA4ME/AXm+nX4k1kMbTA+lP
- oLnEGqxsKgssKDB0I38Qfbr76flzYptGwp7z1YslCLUXH+gZT1kGMAB/2ZFeuf6MGGGpD7uir+Y
- Tq4wqia/qIKBV2mTD42dqupNaDyv5xGQiD+ISc5ZNriAw+VuquvcoNzEDawn0f3UFhumh/Yl5ss
- ea+HflaOOhcqrvNxtvTCnGWrf3mir5j6SAwvwm8XePAntUAA2nHxNvUndo2n6WOoyWv4BlgugBS
- 3qIJbYVtFV8jLamJV59Bl3KHNL5LzQRJUacHQbhdnIPZaaYAetCa7hSZ73fPLZGiiYi+/OyDr1N
- NvPUDU0X2NgLDPsQ+EWAyHQ+H6Nrz4WGK/LcS6iCLniXBGaH09UmHLVcMwpINn1IiH0XtlYZXRE
- tdr9NunfDKrYT7wQrI/cZVwg0nrrDAcwdRo+KI8iuTnTs6Bi5Z21Cj1QPx9WSzMvKYm4VXvTN9E
- EpLejfNi6R3xWo1G6xOXka7Ubzz29TZEOkoDwF3+sNzh+/LdSWzprq/Kamawrn/L8C4WKSSFIOV
- oUw7R0t8W+o9RuMCwQ==
-X-Received: by 2002:a05:600c:444a:b0:487:1520:d107 with SMTP id
- 5b1f17b1804b1-488fb793580mr361390725e9.31.1776950766974; 
- Thu, 23 Apr 2026 06:26:06 -0700 (PDT)
-Received: from [192.168.1.100]
- (2a02-842a-d52e-6101-56a2-efb9-07f1-cf08.rev.sfr.net.
- [2a02:842a:d52e:6101:56a2:efb9:7f1:cf08])
+ d=1e100.net; s=20251104; t=1777151014; x=1777755814;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=q7tMHmRZFsf8oK3LdG7UcLp/Vy0+rPteRfgu8Cf3UyU=;
+ b=h7SH8N1UW4TskkG803PxUVFWiN1Xubkv9L/knMpQpSWzkIZ+5/OCLaL4sq2AXFkWcU
+ zGCwcSn22BpdL8huo4HsQfEQ6K9R2qFnrk04Nzvm0gsrDJpcm3qNvOoksQV1NPcKVdGd
+ KIiNJA4dnGJ0e3MhGP3nC89TkH3iPnik+cspGMRbC04ZiFRt9vitqxrhKtr2vJ+awK/w
+ DDcYKVW/RbdYNr1RsCDoCMcfy8CpDEsU1sGrwQKQekJdxUh9G3tZ7+U1RZMOm8c7d4NT
+ DegZymQU4R51QVLmYy6KQeT8S04eNQtHi099PGGr/G5LwpadH0UVFzmn2B81NwYxSwin
+ ZL2w==
+X-Gm-Message-State: AOJu0Yx5t26aNOqrC5lmGu8+Wz9Yb/IdmjlTCFGC4ujFoMEGUJOs5v0s
+ t9syT2TNwZfAaNqEHL7QAyS8iDCbovgxSJFQnFYVL2RlWYuqgTdS25sznSTYqLbb
+X-Gm-Gg: AeBDieva1KsrIxt2AyEMslnf3ZsQCNNmhpg5zuaYeLwzTQMbQdazyS+aAYOEdKIzbWq
+ XTcGbk0C2tyI1dLh78U4Ja2sUn1sTNKriYecCWOm3CPKfPtetZJW/c5h4rdjvLwYw/qYSGEFSKa
+ E85KoHTS8JSVsx+2GY/7T3ZYZb6vCktIIXPww/N09vm578K8lTWdij+hYwj3KlAnO0gff1UjIdT
+ dx/kVsjxUqY9+HCWdkQNgq3XJAYjT2IIUS2B5MT71n5PKMoIwPPM0O9GnRpVH2LrpQy19c3aad5
+ YMcNFwTsntqtwx3+aYLa776p4tNjEyxD3pAWf/GLNM5ZiPcceUewiT11YjY6B/sU1d4lPAItPqz
+ etJHFjIdy8xybWjkx/6bATkffynDWTH1uYYEC0MvZ9hOt0n2xS4m042978Yc9dZ83g/SBbtO38d
+ 6DxjZLN04PFEUrWzYNi3wwb+nqdgTOCEr1UMH4TOms+lv4
+X-Received: by 2002:a05:6102:6a92:b0:603:273f:3576 with SMTP id
+ ada2fe7eead31-616f4d72895mr15510666137.10.1776954342100; 
+ Thu, 23 Apr 2026 07:25:42 -0700 (PDT)
+Received: from cethr-l01.localdomain ([136.56.120.109])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4891bb3d121sm500300885e9.14.2026.04.23.06.26.04
+ 6a1803df08f44-8b02aa4f1f9sm157183266d6.0.2026.04.23.07.25.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 23 Apr 2026 06:26:06 -0700 (PDT)
-From: Julien Stephan <jstephan@baylibre.com>
-Date: Thu, 23 Apr 2026 15:25:56 +0200
-Subject: [PATCH 5/9] net: phy: air_phy_lib: Factorize BuckPBus register
-MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260423-add-ethernet-support-for-genio-520-720-v1-5-47ca918e0017@baylibre.com>
-References: <20260423-add-ethernet-support-for-genio-520-720-v1-0-47ca918e0017@baylibre.com>
-In-Reply-To: <20260423-add-ethernet-support-for-genio-520-720-v1-0-47ca918e0017@baylibre.com>
+ Thu, 23 Apr 2026 07:25:41 -0700 (PDT)
+From: Caleb Ethridge <jcethrid@gmail.com>
 To: u-boot@lists.denx.de
-Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
- Jerome Forissier <jerome.forissier@arm.com>, Tom Rini <trini@konsulko.com>, 
- Christian Marangi <ansuelsmth@gmail.com>, 
- Robert Marko <robert.marko@sartura.hr>, Simon Glass <sjg@chromium.org>, 
- Yao Zi <me@ziyao.cc>, Quentin Schulz <quentin.schulz@cherry.de>, 
- Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- "Lucien.Jheng" <lucienzx159@gmail.com>, 
- Weijie Gao <weijie.gao@mediatek.com>, 
- Romain Gantois <romain.gantois@bootlin.com>, 
- Siddharth Vadapalli <s-vadapalli@ti.com>, 
- Yanqing Wang <ot_yanqing.wang@mediatek.com>, Beiyan Yun <root@infi.wang>, 
- Ryder Lee <ryder.lee@mediatek.com>, 
- Chunfeng Yun <chunfeng.yun@mediatek.com>, 
- Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
- David Lechner <dlechner@baylibre.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Kory Maincent <kory.maincent@bootlin.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Kuan-Wei Chiu <visitorckw@gmail.com>, 
- Raymond Mao <raymond.mao@riscstar.com>, Peng Fan <peng.fan@nxp.com>, 
- Stefan Roese <stefan.roese@mailbox.org>, 
- Philip Molloy <philip.molloy@analog.com>, 
- fanyi zhang <fanyi.zhang@mediatek.com>, Jonas Karlman <jonas@kwiboo.se>, 
- Kever Yang <kever.yang@rock-chips.com>, 
- Marek Vasut <marek.vasut@mailbox.org>, 
- Patrick Delaunay <patrick.delaunay@foss.st.com>, 
- Heiko Stuebner <heiko@sntech.de>, 
- Samuel Holland <samuel.holland@sifive.com>, 
- Christophe Roullier <christophe.roullier@foss.st.com>, 
- Patrice Chotard <patrice.chotard@foss.st.com>, 
- Chris-QJ Chen <chris-qj.chen@mediatek.com>, 
- Macpaul Lin <macpaul.lin@mediatek.com>, 
- Sam Protsenko <semen.protsenko@linaro.org>, 
- Michael Trimarchi <michael@amarulasolutions.com>, 
- Sky Huang <SkyLake.Huang@mediatek.com>, 
- Leo Yu-Chi Liang <ycliang@andestech.com>, 
- Tommy Shih <tommy.shih@airoha.com>, 
- Kevin-KW Huang <kevin-kw.huang@airoha.com>, 
- Julien Stephan <jstephan@baylibre.com>
-X-Mailer: b4 0.14.3
+Cc: malysagreg@gmail.com, trini@konsulko.com, linux@analog.com,
+ philip@philipmolloy.com, sjg@chromium.org,
+ Caleb Ethridge <caleb.ethridge@analog.com>
+Subject: [PATCH v5 02/15] mach-sc5xx: Remove update commands from default
+ environment
+Date: Thu, 23 Apr 2026 10:24:37 -0400
+Message-Id: <80621463fd15e2eca9fb138110bb18ebbf2351d9.1776954004.git.jcethrid@gmail.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <cover.1776954004.git.jcethrid@gmail.com>
+References: <cover.1776954004.git.jcethrid@gmail.com>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Sat, 25 Apr 2026 23:08:00 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -143,822 +101,281 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In preparation of Airoha AN8801R PHY support, move the BuckPBus
-register accessors and definitions, present in air_en8811h driver,
-into the Airoha PHY shared code (air_phy_lib), so they will be usable
-by the new driver without duplicating them.
-Also, update air_en8811h driver to use the new function names.
+From: Caleb Ethridge <caleb.ethridge@analog.com>
 
-Adapted from [1].
+Remove the update_spi family of commands from the U-boot
+environment. These commands are not standard in U-boot,
+and boot media programming has moved to Linux, so the
+commands can be safely removed.
 
-[1]: https://lore.kernel.org/all/20260326-add-airoha-an8801-support-v2-2-1a42d6b6050f@collabora.com/
-
-Signed-off-by: Julien Stephan <jstephan@baylibre.com>
+Signed-off-by: Caleb Ethridge <caleb.ethridge@analog.com>
 ---
- MAINTAINERS                          |   2 +-
- drivers/net/phy/airoha/Kconfig       |   6 +
- drivers/net/phy/airoha/Makefile      |   1 +
- drivers/net/phy/airoha/air_en8811.c  | 276 +++++++----------------------------
- drivers/net/phy/airoha/air_phy_lib.c | 221 ++++++++++++++++++++++++++++
- drivers/net/phy/airoha/air_phy_lib.h |  39 +++++
- 6 files changed, 320 insertions(+), 225 deletions(-)
+ board/adi/sc573-ezkit/sc573-ezkit.env         |  2 -
+ board/adi/sc584-ezkit/sc584-ezkit.env         |  2 -
+ board/adi/sc589-ezkit/sc589-ezkit.env         |  2 -
+ board/adi/sc589-mini/sc589-mini.env           |  2 -
+ board/adi/sc594-som-ezkit/sc594-som-ezkit.env |  2 -
+ .../adi/sc594-som-ezlite/sc594-som-ezlite.env |  2 -
+ board/adi/sc598-som-ezkit/sc598-som-ezkit.env |  2 -
+ .../adi/sc598-som-ezlite/sc598-som-ezlite.env |  2 -
+ configs/sc573-ezkit_defconfig                 |  2 -
+ configs/sc584-ezkit_defconfig                 |  2 -
+ configs/sc589-ezkit_defconfig                 |  2 -
+ configs/sc589-mini_defconfig                  |  2 -
+ include/env/adi/adi_boot.env                  | 53 -------------------
+ 13 files changed, 77 deletions(-)
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 40ba3542ca3..4bda6b9e8c4 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -61,7 +61,7 @@ F:	lib/acpi/
- AIROHA PHY
- M:	Tommy Shih <tommy.shih@airoha.com>
- S:	Maintained
--F:	drivers/net/phy/airoha/air_en8811.c
-+F:	drivers/net/phy/airoha/
+diff --git a/board/adi/sc573-ezkit/sc573-ezkit.env b/board/adi/sc573-ezkit/sc573-ezkit.env
+index 8b03a3d5da9..c8781aaad82 100644
+--- a/board/adi/sc573-ezkit/sc573-ezkit.env
++++ b/board/adi/sc573-ezkit/sc573-ezkit.env
+@@ -3,9 +3,7 @@
+  * (C) Copyright 2024 - Analog Devices, Inc.
+  */
  
- ALIST
- M:	Simon Glass <sjg@chromium.org>
-diff --git a/drivers/net/phy/airoha/Kconfig b/drivers/net/phy/airoha/Kconfig
-index da8747939e3..2a2f4f05bb2 100644
---- a/drivers/net/phy/airoha/Kconfig
-+++ b/drivers/net/phy/airoha/Kconfig
-@@ -7,6 +7,12 @@ config PHY_AIROHA_EN8811
- 	depends on PHY_AIROHA
- 	depends on SUPPORTS_FW_LOADER
- 	select FW_LOADER
-+	select PHY_AIRONA_PHYLIB
- 	help
- 	  AIROHA EN8811H supported.
- 	  AIROHA AN8811HB supported.
-+
-+config PHY_AIRONA_PHYLIB
-+	tristate
-+	help
-+	  Airoha Ethernet PHY common library
-diff --git a/drivers/net/phy/airoha/Makefile b/drivers/net/phy/airoha/Makefile
-index 84d23b19ab0..cbf123986f2 100644
---- a/drivers/net/phy/airoha/Makefile
-+++ b/drivers/net/phy/airoha/Makefile
-@@ -1,3 +1,4 @@
- # SPDX-License-Identifier: GPL-2.0
+-adi_stage2_offset=CONFIG_SC5XX_UBOOT_OFFSET
+ adi_image_offset=CONFIG_SC5XX_FITIMAGE_OFFSET
+-adi_rfs_offset=CONFIG_SC5XX_ROOTFS_OFFSET
+ jffs2file=adsp-sc5xx-__stringify(CONFIG_ADI_IMAGE)-adsp-sc573-ezkit.jffs2
+ loadaddr=CONFIG_SC5XX_LOADADDR
  
- obj-$(CONFIG_PHY_AIROHA_EN8811) += air_en8811.o
-+obj-$(CONFIG_PHY_AIRONA_PHYLIB) += air_phy_lib.o
-diff --git a/drivers/net/phy/airoha/air_en8811.c b/drivers/net/phy/airoha/air_en8811.c
-index 0b974472732..04b7282072d 100644
---- a/drivers/net/phy/airoha/air_en8811.c
-+++ b/drivers/net/phy/airoha/air_en8811.c
-@@ -24,6 +24,8 @@
- #include <dm/device_compat.h>
- #include <u-boot/crc.h>
+diff --git a/board/adi/sc584-ezkit/sc584-ezkit.env b/board/adi/sc584-ezkit/sc584-ezkit.env
+index 8a6f7edd5e8..2a76c005d1c 100644
+--- a/board/adi/sc584-ezkit/sc584-ezkit.env
++++ b/board/adi/sc584-ezkit/sc584-ezkit.env
+@@ -3,9 +3,7 @@
+  * (C) Copyright 2024 - Analog Devices, Inc.
+  */
  
-+#include "air_phy_lib.h"
-+
- /* MII Registers */
- #define AIR_AUX_CTRL_STATUS		0x1d
- #define AIR_AUX_CTRL_STATUS_SPEED_MASK	GENMASK(4, 2)
-@@ -32,10 +34,6 @@
- #define AIR_AUX_CTRL_STATUS_SPEED_1000	0x8
- #define AIR_AUX_CTRL_STATUS_SPEED_2500	0xc
+-adi_stage2_offset=CONFIG_SC5XX_UBOOT_OFFSET
+ adi_image_offset=CONFIG_SC5XX_FITIMAGE_OFFSET
+-adi_rfs_offset=CONFIG_SC5XX_ROOTFS_OFFSET
+ jffs2file=adsp-sc5xx-__stringify(CONFIG_ADI_IMAGE)-adsp-sc584-ezkit.jffs2
+ loadaddr=CONFIG_SC5XX_LOADADDR
  
--#define AIR_EXT_PAGE_ACCESS		0x1f
--#define AIR_PHY_PAGE_STANDARD		0x0000
--#define AIR_PHY_PAGE_EXTENDED_4		0x0004
+diff --git a/board/adi/sc589-ezkit/sc589-ezkit.env b/board/adi/sc589-ezkit/sc589-ezkit.env
+index b8206e85179..8eaa776cc6e 100644
+--- a/board/adi/sc589-ezkit/sc589-ezkit.env
++++ b/board/adi/sc589-ezkit/sc589-ezkit.env
+@@ -3,9 +3,7 @@
+  * (C) Copyright 2024 - Analog Devices, Inc.
+  */
+ 
+-adi_stage2_offset=CONFIG_SC5XX_UBOOT_OFFSET
+ adi_image_offset=CONFIG_SC5XX_FITIMAGE_OFFSET
+-adi_rfs_offset=CONFIG_SC5XX_ROOTFS_OFFSET
+ jffs2file=adsp-sc5xx-__stringify(CONFIG_ADI_IMAGE)-adsp-sc589-ezkit.jffs2
+ loadaddr=CONFIG_SC5XX_LOADADDR
+ 
+diff --git a/board/adi/sc589-mini/sc589-mini.env b/board/adi/sc589-mini/sc589-mini.env
+index f7628b0b335..a7addcd3957 100644
+--- a/board/adi/sc589-mini/sc589-mini.env
++++ b/board/adi/sc589-mini/sc589-mini.env
+@@ -3,9 +3,7 @@
+  * (C) Copyright 2024 - Analog Devices, Inc.
+  */
+ 
+-adi_stage2_offset=CONFIG_SC5XX_UBOOT_OFFSET
+ adi_image_offset=CONFIG_SC5XX_FITIMAGE_OFFSET
+-adi_rfs_offset=CONFIG_SC5XX_ROOTFS_OFFSET
+ jffs2file=adsp-sc5xx-__stringify(CONFIG_ADI_IMAGE)-adsp-sc589-mini.jffs2
+ loadaddr=CONFIG_SC5XX_LOADADDR
+ 
+diff --git a/board/adi/sc594-som-ezkit/sc594-som-ezkit.env b/board/adi/sc594-som-ezkit/sc594-som-ezkit.env
+index 069edc717da..85fa8c8d49c 100644
+--- a/board/adi/sc594-som-ezkit/sc594-som-ezkit.env
++++ b/board/adi/sc594-som-ezkit/sc594-som-ezkit.env
+@@ -3,9 +3,7 @@
+  * (C) Copyright 2024 - Analog Devices, Inc.
+  */
+ 
+-adi_stage2_offset=CONFIG_SC5XX_UBOOT_OFFSET
+ adi_image_offset=CONFIG_SC5XX_FITIMAGE_OFFSET
+-adi_rfs_offset=CONFIG_SC5XX_ROOTFS_OFFSET
+ jffs2file=adsp-sc5xx-__stringify(CONFIG_ADI_IMAGE)-adsp-sc594-som-ezkit.jffs2
+ loadaddr=CONFIG_SC5XX_LOADADDR
+ 
+diff --git a/board/adi/sc594-som-ezlite/sc594-som-ezlite.env b/board/adi/sc594-som-ezlite/sc594-som-ezlite.env
+index e5382b67c81..f2ee8d06801 100644
+--- a/board/adi/sc594-som-ezlite/sc594-som-ezlite.env
++++ b/board/adi/sc594-som-ezlite/sc594-som-ezlite.env
+@@ -3,9 +3,7 @@
+  * (C) Copyright 2024 - Analog Devices, Inc.
+  */
+ 
+-adi_stage2_offset=CONFIG_SC5XX_UBOOT_OFFSET
+ adi_image_offset=CONFIG_SC5XX_FITIMAGE_OFFSET
+-adi_rfs_offset=CONFIG_SC5XX_ROOTFS_OFFSET
+ jffs2file=adsp-sc5xx-__stringify(CONFIG_ADI_IMAGE)-adsp-sc594-som-ezlite.jffs2
+ loadaddr=CONFIG_SC5XX_LOADADDR
+ 
+diff --git a/board/adi/sc598-som-ezkit/sc598-som-ezkit.env b/board/adi/sc598-som-ezkit/sc598-som-ezkit.env
+index 2cb475e1001..080afaef406 100644
+--- a/board/adi/sc598-som-ezkit/sc598-som-ezkit.env
++++ b/board/adi/sc598-som-ezkit/sc598-som-ezkit.env
+@@ -3,9 +3,7 @@
+  * (C) Copyright 2024 - Analog Devices, Inc.
+  */
+ 
+-adi_stage2_offset=CONFIG_SC5XX_UBOOT_OFFSET
+ adi_image_offset=CONFIG_SC5XX_FITIMAGE_OFFSET
+-adi_rfs_offset=CONFIG_SC5XX_ROOTFS_OFFSET
+ jffs2file=adsp-sc5xx-__stringify(CONFIG_ADI_IMAGE)-adsp-sc598-som-ezkit.jffs2
+ loadaddr=CONFIG_SC5XX_LOADADDR
+ 
+diff --git a/board/adi/sc598-som-ezlite/sc598-som-ezlite.env b/board/adi/sc598-som-ezlite/sc598-som-ezlite.env
+index 1d9ea6d188b..a3486de503e 100644
+--- a/board/adi/sc598-som-ezlite/sc598-som-ezlite.env
++++ b/board/adi/sc598-som-ezlite/sc598-som-ezlite.env
+@@ -3,9 +3,7 @@
+  * (C) Copyright 2024 - Analog Devices, Inc.
+  */
+ 
+-adi_stage2_offset=CONFIG_SC5XX_UBOOT_OFFSET
+ adi_image_offset=CONFIG_SC5XX_FITIMAGE_OFFSET
+-adi_rfs_offset=CONFIG_SC5XX_ROOTFS_OFFSET
+ loadaddr=CONFIG_SC5XX_LOADADDR
+ jffs2file=adsp-sc5xx-__stringify(CONFIG_ADI_IMAGE)-adsp-sc598-som-ezlite.jffs2
+ 
+diff --git a/configs/sc573-ezkit_defconfig b/configs/sc573-ezkit_defconfig
+index 976d8e0306a..7a0c7d04e84 100644
+--- a/configs/sc573-ezkit_defconfig
++++ b/configs/sc573-ezkit_defconfig
+@@ -6,9 +6,7 @@ CONFIG_SPL_GPIO=y
+ CONFIG_DM_GPIO=y
+ CONFIG_SPL_SYS_MALLOC_F_LEN=0x10000
+ CONFIG_SPL_SERIAL=y
+-CONFIG_SC5XX_UBOOT_OFFSET=0x20000
+ CONFIG_SC5XX_FITIMAGE_OFFSET=0xE0000
+-CONFIG_SC5XX_ROOTFS_OFFSET=0x6E0000
+ CONFIG_SC5XX_LOADADDR=0x83000000
+ CONFIG_WATCHDOG_TIMEOUT_MSECS=60000
+ CONFIG_CGU0_CLKOUTSEL=7
+diff --git a/configs/sc584-ezkit_defconfig b/configs/sc584-ezkit_defconfig
+index 27f55804199..7975a610ca3 100644
+--- a/configs/sc584-ezkit_defconfig
++++ b/configs/sc584-ezkit_defconfig
+@@ -10,9 +10,7 @@ CONFIG_SPL_STACK=0x200C0000
+ CONFIG_SPL_BSS_START_ADDR=0x200A0000
+ CONFIG_SPL_BSS_MAX_SIZE=0x8000
+ CONFIG_SC58X=y
+-CONFIG_SC5XX_UBOOT_OFFSET=0x20000
+ CONFIG_SC5XX_FITIMAGE_OFFSET=0xE0000
+-CONFIG_SC5XX_ROOTFS_OFFSET=0x6E0000
+ CONFIG_SC5XX_LOADADDR=0x89300000
+ CONFIG_WATCHDOG_TIMEOUT_MSECS=60000
+ CONFIG_ADI_BUG_EZKHW21=y
+diff --git a/configs/sc589-ezkit_defconfig b/configs/sc589-ezkit_defconfig
+index 180b6904d95..0ceb57f1f42 100644
+--- a/configs/sc589-ezkit_defconfig
++++ b/configs/sc589-ezkit_defconfig
+@@ -13,9 +13,7 @@ CONFIG_SPL_BSS_START_ADDR=0x200A0000
+ CONFIG_SPL_BSS_MAX_SIZE=0x8000
+ CONFIG_SC58X=y
+ CONFIG_TARGET_SC589_EZKIT=y
+-CONFIG_SC5XX_UBOOT_OFFSET=0x20000
+ CONFIG_SC5XX_FITIMAGE_OFFSET=0xE0000
+-CONFIG_SC5XX_ROOTFS_OFFSET=0x6E0000
+ CONFIG_SC5XX_LOADADDR=0xC3000000
+ CONFIG_WATCHDOG_TIMEOUT_MSECS=60000
+ CONFIG_ADI_USE_DMC1=y
+diff --git a/configs/sc589-mini_defconfig b/configs/sc589-mini_defconfig
+index 92c2741f701..32678b63a9f 100644
+--- a/configs/sc589-mini_defconfig
++++ b/configs/sc589-mini_defconfig
+@@ -12,9 +12,7 @@ CONFIG_SPL_BSS_START_ADDR=0x200A0000
+ CONFIG_SPL_BSS_MAX_SIZE=0x8000
+ CONFIG_SC58X=y
+ CONFIG_TARGET_SC589_MINI=y
+-CONFIG_SC5XX_UBOOT_OFFSET=0x20000
+ CONFIG_SC5XX_FITIMAGE_OFFSET=0xE0000
+-CONFIG_SC5XX_ROOTFS_OFFSET=0x8E0000
+ CONFIG_SC5XX_LOADADDR=0xC3000000
+ CONFIG_WATCHDOG_TIMEOUT_MSECS=60000
+ CONFIG_ADI_USE_DMC1=y
+diff --git a/include/env/adi/adi_boot.env b/include/env/adi/adi_boot.env
+index db4148b1af9..b574892e0a0 100644
+--- a/include/env/adi/adi_boot.env
++++ b/include/env/adi/adi_boot.env
+@@ -1,9 +1,7 @@
+ /*
+  * A target board needs to set these variables for the commands below to work:
+  *
+- * - adi_stage2_offset, the location of stage2-boot.ldr on the SPI flash
+  * - adi_image_offset, location of the fitImage on the SPI flash
+- * - adi_rfs_offset, location of the RFS on the SPI flash
+  * - loadaddr, where you want to load things
+  * - jffs2file, name of the jffs2 file for update, ex adsp-sc5xx-tiny-adsp-sc573.jffs2
+  */
+@@ -15,7 +13,6 @@
+ #endif
+ 
+ /* Config options */
+-imagefile=fitImage
+ ethaddr=02:80:ad:20:31:e8
+ eth1addr=02:80:ad:20:31:e9
+ uart_console=CONFIG_UART_CONSOLE
+@@ -25,11 +22,6 @@ initrd_high=0xffffffffffffffff
+ initrd_high=0xffffffff
+ #endif
+ 
+-/* Helper routines */
+-init_ethernet=mii info;
+-	dhcp;
+-	setenv serverip ${tftpserverip}
 -
- #define AIR_PBUS_MODE_ADDR_HIGH		0x1c
- /* MII Registers Page 4 */
- #define AIR_BPBUS_MODE			0x10
-@@ -309,166 +307,6 @@ static int air_pbus_reg_write(struct phy_device *phydev,
- 	return ret;
- }
- 
--static int air_buckpbus_reg_write(struct phy_device *phydev,
--				  u32 pbus_address, u32 pbus_data)
--{
--	int ret, saved_page;
+ /* Args for each boot mode */
+ adi_bootargs=EARLY_PRINTK console=ttySC0,CONFIG_BAUDRATE vmalloc=512M
+ ramargs=setenv bootargs ${adi_bootargs}
+@@ -73,48 +65,3 @@ ramboot=run init_ethernet;
+ 	run ramargs;
+ 	bootm ${loadaddr}
+ #endif
 -
--	saved_page = phy_select_page(phydev, AIR_PHY_PAGE_EXTENDED_4);
--	if (saved_page < 0)
--		return saved_page;
+-/* Update commands */
+-stage1file=stage1-boot.ldr
+-stage2file=stage2-boot.ldr
 -
--	ret = phy_write(phydev, MDIO_DEVAD_NONE, AIR_BPBUS_MODE,
--			AIR_BPBUS_MODE_ADDR_FIXED);
--	if (ret < 0)
--		goto restore_page;
+-#if defined(USE_SPI) || defined(USE_OSPI)
+-update_spi_uboot_stage1=tftp ${loadaddr} ${tftp_dir_prefix}${stage1file};
+-	sf probe ${sfdev};
+-	sf update ${loadaddr} 0x0 ${filesize}
+-update_spi_uboot_stage2=tftp ${loadaddr} ${tftp_dir_prefix}${stage2file};
+-	sf probe ${sfdev};
+-	sf update ${loadaddr} ${adi_stage2_offset} ${filesize}
+-update_spi_uboot=run update_spi_uboot_stage1;
+-	run update_spi_uboot_stage2;
+-update_spi_fit=tftp ${loadaddr} ${tftp_dir_prefix}${imagefile};
+-	sf probe ${sfdev};
+-	sf update ${loadaddr} ${adi_image_offset} ${filesize};
+-	setenv imagesize ${filesize}
+-update_spi_rfs=tftp ${loadaddr} ${tftp_dir_prefix}${jffs2file};
+-	sf probe ${sfdev};
+-	sf update ${loadaddr} ${adi_rfs_offset} ${filesize}
 -
--	ret = phy_write(phydev, MDIO_DEVAD_NONE, AIR_BPBUS_WR_ADDR_HIGH,
--			upper_16_bits(pbus_address));
--	if (ret < 0)
--		goto restore_page;
+-start_update_spi=run init_ethernet;
+-	run update_spi_uboot;
+-	run update_spi_fit;
+-	run update_spi_rfs;
+-start_update_spi_uboot_only=run init_ethernet;
+-	run update_spi_uboot;
+-#endif
 -
--	ret = phy_write(phydev, MDIO_DEVAD_NONE, AIR_BPBUS_WR_ADDR_LOW,
--			lower_16_bits(pbus_address));
--	if (ret < 0)
--		goto restore_page;
+-#if defined(USE_SPI)
+-update_spi=setenv sfdev CONFIG_SC_BOOT_SPI_BUS:CONFIG_SC_BOOT_SPI_SSEL;
+-	setenv bootcmd run spiboot;
+-	setenv argscmd spiargs;
+-	run start_update_spi;
+-	saveenv
+-#endif
 -
--	ret = phy_write(phydev, MDIO_DEVAD_NONE, AIR_BPBUS_WR_DATA_HIGH,
--			upper_16_bits(pbus_data));
--	if (ret < 0)
--		goto restore_page;
--
--	ret = phy_write(phydev, MDIO_DEVAD_NONE, AIR_BPBUS_WR_DATA_LOW,
--			lower_16_bits(pbus_data));
--	if (ret < 0)
--		goto restore_page;
--
--restore_page:
--	if (ret < 0)
--		dev_err(phydev->dev, "%s 0x%08x failed: %d\n", __func__,
--			pbus_address, ret);
--
--	return phy_restore_page(phydev, saved_page, ret);
--}
--
--static int air_buckpbus_reg_read(struct phy_device *phydev,
--				 u32 pbus_address, u32 *pbus_data)
--{
--	int pbus_data_low, pbus_data_high;
--	int ret = 0, saved_page;
--
--	saved_page = phy_select_page(phydev, AIR_PHY_PAGE_EXTENDED_4);
--	if (saved_page < 0)
--		return saved_page;
--
--	ret = phy_write(phydev, MDIO_DEVAD_NONE, AIR_BPBUS_MODE,
--			AIR_BPBUS_MODE_ADDR_FIXED);
--	if (ret < 0)
--		goto restore_page;
--
--	ret = phy_write(phydev, MDIO_DEVAD_NONE, AIR_BPBUS_RD_ADDR_HIGH,
--			upper_16_bits(pbus_address));
--	if (ret < 0)
--		goto restore_page;
--
--	ret = phy_write(phydev, MDIO_DEVAD_NONE, AIR_BPBUS_RD_ADDR_LOW,
--			lower_16_bits(pbus_address));
--	if (ret < 0)
--		goto restore_page;
--
--	pbus_data_high = phy_read(phydev, MDIO_DEVAD_NONE, AIR_BPBUS_RD_DATA_HIGH);
--	if (pbus_data_high < 0) {
--		ret = pbus_data_high;
--		goto restore_page;
--	}
--
--	pbus_data_low = phy_read(phydev, MDIO_DEVAD_NONE, AIR_BPBUS_RD_DATA_LOW);
--	if (pbus_data_low < 0) {
--		ret = pbus_data_low;
--		goto restore_page;
--	}
--
--	*pbus_data = pbus_data_low | (pbus_data_high << 16);
--
--restore_page:
--	if (ret < 0)
--		dev_err(phydev->dev, "%s 0x%08x failed: %d\n", __func__,
--			pbus_address, ret);
--
--	return phy_restore_page(phydev, saved_page, ret);
--}
--
--static int air_buckpbus_reg_modify(struct phy_device *phydev,
--				   u32 pbus_address, u32 mask, u32 set)
--{
--	int pbus_data_low, pbus_data_high;
--	u32 pbus_data_old, pbus_data_new;
--	int ret = 0, saved_page;
--
--	saved_page = phy_select_page(phydev, AIR_PHY_PAGE_EXTENDED_4);
--	if (saved_page < 0)
--		return saved_page;
--
--	ret = phy_write(phydev, MDIO_DEVAD_NONE, AIR_BPBUS_MODE,
--			AIR_BPBUS_MODE_ADDR_FIXED);
--	if (ret < 0)
--		goto restore_page;
--
--	ret = phy_write(phydev, MDIO_DEVAD_NONE, AIR_BPBUS_RD_ADDR_HIGH,
--			upper_16_bits(pbus_address));
--	if (ret < 0)
--		goto restore_page;
--
--	ret = phy_write(phydev, MDIO_DEVAD_NONE, AIR_BPBUS_RD_ADDR_LOW,
--			lower_16_bits(pbus_address));
--	if (ret < 0)
--		goto restore_page;
--
--	pbus_data_high = phy_read(phydev, MDIO_DEVAD_NONE, AIR_BPBUS_RD_DATA_HIGH);
--	if (pbus_data_high < 0) {
--		ret = pbus_data_high;
--		goto restore_page;
--	}
--
--	pbus_data_low = phy_read(phydev, MDIO_DEVAD_NONE, AIR_BPBUS_RD_DATA_LOW);
--	if (pbus_data_low < 0) {
--		ret = pbus_data_low;
--		goto restore_page;
--	}
--
--	pbus_data_old = pbus_data_low | (pbus_data_high << 16);
--	pbus_data_new = (pbus_data_old & ~mask) | set;
--	if (pbus_data_new == pbus_data_old)
--		goto restore_page;
--
--	ret = phy_write(phydev, MDIO_DEVAD_NONE, AIR_BPBUS_WR_ADDR_HIGH,
--			upper_16_bits(pbus_address));
--	if (ret < 0)
--		goto restore_page;
--
--	ret = phy_write(phydev, MDIO_DEVAD_NONE, AIR_BPBUS_WR_ADDR_LOW,
--			lower_16_bits(pbus_address));
--	if (ret < 0)
--		goto restore_page;
--
--	ret = phy_write(phydev, MDIO_DEVAD_NONE, AIR_BPBUS_WR_DATA_HIGH,
--			upper_16_bits(pbus_data_new));
--	if (ret < 0)
--		goto restore_page;
--
--	ret = phy_write(phydev, MDIO_DEVAD_NONE, AIR_BPBUS_WR_DATA_LOW,
--			lower_16_bits(pbus_data_new));
--	if (ret < 0)
--		goto restore_page;
--
--restore_page:
--	if (ret < 0)
--		dev_err(phydev->dev, "%s 0x%08x failed: %d\n", __func__,
--			pbus_address, ret);
--
--	return phy_restore_page(phydev, saved_page, ret);
--}
--
- static int air_write_buf(struct phy_device *phydev, unsigned long address,
- 			 unsigned long array_size, const unsigned char *buffer)
- {
-@@ -539,12 +377,12 @@ static int an8811hb_check_crc(struct phy_device *phydev,
- 	u32 pbus_value;
- 
- 	/* Configure CRC */
--	ret = air_buckpbus_reg_modify(phydev, set1, AN8811HB_CRC_RD_EN,
--				      AN8811HB_CRC_RD_EN);
-+	ret = air_phy_buckpbus_reg_modify(phydev, set1, AN8811HB_CRC_RD_EN,
-+					  AN8811HB_CRC_RD_EN);
- 	if (ret < 0)
- 		return ret;
- 
--	ret = air_buckpbus_reg_read(phydev, set1, &pbus_value);
-+	ret = air_phy_buckpbus_reg_read(phydev, set1, &pbus_value);
- 	if (ret < 0)
- 		return ret;
- 
-@@ -553,14 +391,14 @@ static int an8811hb_check_crc(struct phy_device *phydev,
- 	do {
- 		mdelay(300);
- 
--		ret = air_buckpbus_reg_read(phydev, mon2, &pbus_value);
-+		ret = air_phy_buckpbus_reg_read(phydev, mon2, &pbus_value);
- 		if (ret < 0)
- 			return ret;
- 
- 		debug("%d: reg 0x%x val 0x%x!\n", __LINE__, mon2, pbus_value);
- 
- 		if (pbus_value & AN8811HB_CRC_ST) {
--			ret = air_buckpbus_reg_read(phydev, mon3, &pbus_value);
-+			ret = air_phy_buckpbus_reg_read(phydev, mon3, &pbus_value);
- 			if (ret < 0)
- 				return ret;
- 
-@@ -584,11 +422,11 @@ static int an8811hb_check_crc(struct phy_device *phydev,
- 		}
- 	} while (--retry);
- 
--	ret = air_buckpbus_reg_modify(phydev, set1, AN8811HB_CRC_RD_EN, 0);
-+	ret = air_phy_buckpbus_reg_modify(phydev, set1, AN8811HB_CRC_RD_EN, 0);
- 	if (ret < 0)
- 		return ret;
- 
--	ret = air_buckpbus_reg_read(phydev, set1, &pbus_value);
-+	ret = air_phy_buckpbus_reg_read(phydev, set1, &pbus_value);
- 	if (ret < 0)
- 		return ret;
- 
-@@ -646,8 +484,8 @@ static int an8811hb_surge_protect_cfg(struct phy_device *phydev)
- 		return ret;
- 	}
- 
--	ret = air_buckpbus_reg_modify(phydev, AIR_PHY_CONTROL,
--				      AIR_PHY_CONTROL_SURGE_5R,
-+	ret = air_phy_buckpbus_reg_modify(phydev, AIR_PHY_CONTROL,
-+					  AIR_PHY_CONTROL_SURGE_5R,
- 				      AIR_PHY_CONTROL_SURGE_5R);
- 	if (ret < 0)
- 		return ret;
-@@ -706,13 +544,13 @@ static int en8811h_load_firmware(struct phy_device *phydev)
- 		goto en8811h_load_firmware_out;
- 	}
- 
--	ret = air_buckpbus_reg_write(phydev, EN8811H_FW_CTRL_1,
--				     EN8811H_FW_CTRL_1_START);
-+	ret = air_phy_buckpbus_reg_write(phydev, EN8811H_FW_CTRL_1,
-+					 EN8811H_FW_CTRL_1_START);
- 	if (ret < 0)
- 		goto en8811h_load_firmware_out;
- 
--	ret = air_buckpbus_reg_modify(phydev, EN8811H_FW_CTRL_2,
--				      EN8811H_FW_CTRL_2_LOADING,
-+	ret = air_phy_buckpbus_reg_modify(phydev, EN8811H_FW_CTRL_2,
-+					  EN8811H_FW_CTRL_2_LOADING,
- 				      EN8811H_FW_CTRL_2_LOADING);
- 	if (ret < 0)
- 		goto en8811h_load_firmware_out;
-@@ -727,13 +565,13 @@ static int en8811h_load_firmware(struct phy_device *phydev)
- 	if (ret < 0)
- 		goto en8811h_load_firmware_out;
- 
--	ret = air_buckpbus_reg_modify(phydev, EN8811H_FW_CTRL_2,
--				      EN8811H_FW_CTRL_2_LOADING, 0);
-+	ret = air_phy_buckpbus_reg_modify(phydev, EN8811H_FW_CTRL_2,
-+					  EN8811H_FW_CTRL_2_LOADING, 0);
- 	if (ret < 0)
- 		goto en8811h_load_firmware_out;
- 
--	ret = air_buckpbus_reg_write(phydev, EN8811H_FW_CTRL_1,
--				     EN8811H_FW_CTRL_1_FINISH);
-+	ret = air_phy_buckpbus_reg_write(phydev, EN8811H_FW_CTRL_1,
-+					 EN8811H_FW_CTRL_1_FINISH);
- 	if (ret < 0)
- 		goto en8811h_load_firmware_out;
- 
-@@ -741,8 +579,8 @@ static int en8811h_load_firmware(struct phy_device *phydev)
- 	if (ret < 0)
- 		goto en8811h_load_firmware_out;
- 
--	air_buckpbus_reg_read(phydev, EN8811H_FW_VERSION,
--			      &priv->firmware_version);
-+	air_phy_buckpbus_reg_read(phydev, EN8811H_FW_VERSION,
-+				  &priv->firmware_version);
- 
- 	dev_info(phydev->dev, "MD32 firmware version: %08x\n",
- 		 priv->firmware_version);
-@@ -778,8 +616,8 @@ static int an8811hb_load_firmware(struct phy_device *phydev)
- 	if (ret < 0)
- 		goto an8811hb_load_firmware_out;
- 
--	ret = air_buckpbus_reg_write(phydev, AIR_PHY_FW_CTRL_1,
--				     AIR_PHY_FW_CTRL_1_START);
-+	ret = air_phy_buckpbus_reg_write(phydev, AIR_PHY_FW_CTRL_1,
-+					 AIR_PHY_FW_CTRL_1_START);
- 	if (ret < 0)
- 		goto an8811hb_load_firmware_out;
- 
-@@ -803,8 +641,8 @@ static int an8811hb_load_firmware(struct phy_device *phydev)
- 	if (ret < 0)
- 		goto an8811hb_load_firmware_out;
- 
--	ret = air_buckpbus_reg_write(phydev, AIR_PHY_FW_CTRL_1,
--				     AIR_PHY_FW_CTRL_1_FINISH);
-+	ret = air_phy_buckpbus_reg_write(phydev, AIR_PHY_FW_CTRL_1,
-+					 AIR_PHY_FW_CTRL_1_FINISH);
- 	if (ret < 0)
- 		goto an8811hb_load_firmware_out;
- 
-@@ -817,7 +655,7 @@ static int an8811hb_load_firmware(struct phy_device *phydev)
- 	do {
- 		mdelay(300);
- 
--		ret = air_buckpbus_reg_read(phydev, AIR_PHY_FW_CTRL_1, &reg_val);
-+		ret = air_phy_buckpbus_reg_read(phydev, AIR_PHY_FW_CTRL_1, &reg_val);
- 		if (ret < 0)
- 			goto an8811hb_load_firmware_out;
- 
-@@ -827,8 +665,8 @@ static int an8811hb_load_firmware(struct phy_device *phydev)
- 		debug("%d: reg 0x%x val 0x%x!\n", __LINE__, AIR_PHY_FW_CTRL_1,
- 		      reg_val);
- 
--		ret = air_buckpbus_reg_write(phydev, AIR_PHY_FW_CTRL_1,
--					     AIR_PHY_FW_CTRL_1_FINISH);
-+		ret = air_phy_buckpbus_reg_write(phydev, AIR_PHY_FW_CTRL_1,
-+						 AIR_PHY_FW_CTRL_1_FINISH);
- 		if (ret < 0)
- 			goto an8811hb_load_firmware_out;
- 
-@@ -838,8 +676,8 @@ static int an8811hb_load_firmware(struct phy_device *phydev)
- 	if (ret < 0)
- 		goto an8811hb_load_firmware_out;
- 
--	air_buckpbus_reg_read(phydev, AIR_PHY_MD32FW_VERSION,
--			      &priv->firmware_version);
-+	air_phy_buckpbus_reg_read(phydev, AIR_PHY_MD32FW_VERSION,
-+				  &priv->firmware_version);
- 
- 	debug("MD32 firmware version: %08x\n", priv->firmware_version);
- 
-@@ -858,8 +696,8 @@ int an8811hb_cko_cfg(struct phy_device *phydev)
- 	int ret = 0;
- 
- 	if (!ofnode_read_bool(node, "airoha,phy-output-clock")) {
--		ret = air_buckpbus_reg_modify(phydev, AN8811HB_CLK_DRV,
--					      AN8811HB_CLK_DRV_CKO_MASK,
-+		ret = air_phy_buckpbus_reg_modify(phydev, AN8811HB_CLK_DRV,
-+						  AN8811HB_CLK_DRV_CKO_MASK,
- 					      AN8811HB_CLK_DRV_CKOPWD    |
- 					      AN8811HB_CLK_DRV_CKO_LDPWD |
- 					      AN8811HB_CLK_DRV_CKO_LPPWD);
-@@ -868,7 +706,7 @@ int an8811hb_cko_cfg(struct phy_device *phydev)
- 
- 		debug("CKO Output mode - Disabled\n");
- 	} else {
--		ret = air_buckpbus_reg_read(phydev, AN8811HB_HWTRAP2, &pbus_value);
-+		ret = air_phy_buckpbus_reg_read(phydev, AN8811HB_HWTRAP2, &pbus_value);
- 		if (ret < 0)
- 			return ret;
- 
-@@ -887,12 +725,12 @@ static int en8811h_restart_mcu(struct phy_device *phydev)
- 	if (ret < 0)
- 		return ret;
- 
--	ret = air_buckpbus_reg_write(phydev, EN8811H_FW_CTRL_1,
--				     EN8811H_FW_CTRL_1_START);
-+	ret = air_phy_buckpbus_reg_write(phydev, EN8811H_FW_CTRL_1,
-+					 EN8811H_FW_CTRL_1_START);
- 	if (ret < 0)
- 		return ret;
- 
--	return air_buckpbus_reg_write(phydev, EN8811H_FW_CTRL_1,
-+	return air_phy_buckpbus_reg_write(phydev, EN8811H_FW_CTRL_1,
- 				      EN8811H_FW_CTRL_1_FINISH);
- }
- 
-@@ -1091,8 +929,8 @@ static int en8811h_config(struct phy_device *phydev)
- 		pbus_value &= ~EN8811H_POLARITY_TX_NORMAL;
- 	else
- 		pbus_value |=  EN8811H_POLARITY_TX_NORMAL;
--	ret = air_buckpbus_reg_modify(phydev, EN8811H_POLARITY,
--				      EN8811H_POLARITY_RX_REVERSE |
-+	ret = air_phy_buckpbus_reg_modify(phydev, EN8811H_POLARITY,
-+					  EN8811H_POLARITY_RX_REVERSE |
- 				      EN8811H_POLARITY_TX_NORMAL,
- 				      pbus_value);
- 	if (ret < 0)
-@@ -1142,12 +980,12 @@ static int an8811hb_config(struct phy_device *phydev)
- 		priv->mcu_needs_restart = true;
- 	}
- 
--	ret = air_buckpbus_reg_read(phydev, AN8811HB_PRO_ID, &pbus_value);
-+	ret = air_phy_buckpbus_reg_read(phydev, AN8811HB_PRO_ID, &pbus_value);
- 	if (ret < 0)
- 		return ret;
- 	priv->pro_id = (pbus_value & AN8811HB_PRO_ID_VERSION) + 1;
- 
--	ret = air_buckpbus_reg_read(phydev, AN8811HB_HWTRAP2, &pbus_value);
-+	ret = air_phy_buckpbus_reg_read(phydev, AN8811HB_HWTRAP2, &pbus_value);
- 	if (ret < 0)
- 		return ret;
- 	priv->pkg_sel = (pbus_value & AN8811HB_HWTRAP2_PKG) >> 12;
-@@ -1163,8 +1001,8 @@ static int an8811hb_config(struct phy_device *phydev)
- 		pbus_value |= AN8811HB_RX_POLARITY_NORMAL;
- 
- 	debug("1 pbus_value 0x%x\n", pbus_value);
--	ret = air_buckpbus_reg_modify(phydev, AN8811HB_RX_POLARITY,
--				      AN8811HB_RX_POLARITY_NORMAL, pbus_value);
-+	ret = air_phy_buckpbus_reg_modify(phydev, AN8811HB_RX_POLARITY,
-+					  AN8811HB_RX_POLARITY_NORMAL, pbus_value);
- 	if (ret < 0)
- 		return ret;
- 
-@@ -1175,34 +1013,34 @@ static int an8811hb_config(struct phy_device *phydev)
- 		pbus_value |= AN8811HB_TX_POLARITY_NORMAL;
- 
- 	debug("2 pbus_value 0x%x\n", pbus_value);
--	ret = air_buckpbus_reg_modify(phydev, AN8811HB_TX_POLARITY,
--				      AN8811HB_TX_POLARITY_NORMAL, pbus_value);
-+	ret = air_phy_buckpbus_reg_modify(phydev, AN8811HB_TX_POLARITY,
-+					  AN8811HB_TX_POLARITY_NORMAL, pbus_value);
- 	if (ret < 0)
- 		return ret;
- 
- 	/* Configure led gpio pins as output */
- 	if (priv->pkg_sel) {
--		ret = air_buckpbus_reg_modify(phydev, AN8811HB_GPIO_OUTPUT,
--					      AN8811HB_GPIO_OUTPUT_MASK,
-+		ret = air_phy_buckpbus_reg_modify(phydev, AN8811HB_GPIO_OUTPUT,
-+						  AN8811HB_GPIO_OUTPUT_MASK,
- 					      AN8811HB_GPIO_OUTPUT_0115);
- 		if (ret < 0)
- 			return ret;
--		ret = air_buckpbus_reg_modify(phydev, AN8811HB_GPIO_SEL_1,
--					      AN8811HB_GPIO_SEL_1_0_MASK |
-+		ret = air_phy_buckpbus_reg_modify(phydev, AN8811HB_GPIO_SEL_1,
-+						  AN8811HB_GPIO_SEL_1_0_MASK |
- 					      AN8811HB_GPIO_SEL_1_1_MASK,
- 					      AN8811HB_GPIO_SEL_1_0 |
- 					      AN8811HB_GPIO_SEL_1_1);
- 		if (ret < 0)
- 			return ret;
- 
--		ret = air_buckpbus_reg_modify(phydev, AN8811HB_GPIO_SEL_2,
--					      AN8811HB_GPIO_SEL_2_15_MASK,
-+		ret = air_phy_buckpbus_reg_modify(phydev, AN8811HB_GPIO_SEL_2,
-+						  AN8811HB_GPIO_SEL_2_15_MASK,
- 					      AN8811HB_GPIO_SEL_2_15);
- 		if (ret < 0)
- 			return ret;
- 	} else {
--		ret = air_buckpbus_reg_modify(phydev, AN8811HB_GPIO_OUTPUT,
--					      AN8811HB_GPIO_OUTPUT_345,
-+		ret = air_phy_buckpbus_reg_modify(phydev, AN8811HB_GPIO_OUTPUT,
-+						  AN8811HB_GPIO_OUTPUT_345,
- 					      AN8811HB_GPIO_OUTPUT_345);
- 		if (ret < 0)
- 			return ret;
-@@ -1373,16 +1211,6 @@ static int en8811h_probe(struct phy_device *phydev)
- 	return 0;
- }
- 
--static int air_phy_read_page(struct phy_device *phydev)
--{
--	return phy_read(phydev, MDIO_DEVAD_NONE, AIR_EXT_PAGE_ACCESS);
--}
--
--static int air_phy_write_page(struct phy_device *phydev, int page)
--{
--	return phy_write(phydev, MDIO_DEVAD_NONE, AIR_EXT_PAGE_ACCESS, page);
--}
--
- U_BOOT_PHY_DRIVER(en8811h) = {
- 	.name = "Airoha EN8811H",
- 	.uid = EN8811H_PHY_ID,
-diff --git a/drivers/net/phy/airoha/air_phy_lib.c b/drivers/net/phy/airoha/air_phy_lib.c
-new file mode 100644
-index 00000000000..133cba55bbf
---- /dev/null
-+++ b/drivers/net/phy/airoha/air_phy_lib.c
-@@ -0,0 +1,221 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Airoha Ethernet PHY common library
-+ *
-+ * Copyright (C) 2026 Airoha Technology Corp.
-+ * Copyright (C) 2026 Collabora Ltd.
-+ *                    Louis-Alexis Eyraud <louisalexis.eyraud@collabora.com>
-+ *
-+ * Adapated from https://lore.kernel.org/all/20260326-add-airoha-an8801-support-v2-2-1a42d6b6050f@collabora.com/
-+ */
-+
-+#include <dm/device_compat.h>
-+#include <linux/compat.h>
-+#include <phy.h>
-+
-+#include "air_phy_lib.h"
-+
-+#define AIR_EXT_PAGE_ACCESS	0x1f
-+
-+static int __air_buckpbus_reg_read(struct phy_device *phydev,
-+				   u32 pbus_address, u32 *pbus_data)
-+{
-+	int pbus_data_low, pbus_data_high;
-+	int ret;
-+
-+	ret = phy_write(phydev, MDIO_DEVAD_NONE, AIR_BPBUS_MODE,
-+			AIR_BPBUS_MODE_ADDR_FIXED);
-+	if (ret < 0)
-+		return ret;
-+
-+	ret = phy_write(phydev, MDIO_DEVAD_NONE, AIR_BPBUS_RD_ADDR_HIGH,
-+			upper_16_bits(pbus_address));
-+	if (ret < 0)
-+		return ret;
-+
-+	ret = phy_write(phydev, MDIO_DEVAD_NONE, AIR_BPBUS_RD_ADDR_LOW,
-+			lower_16_bits(pbus_address));
-+	if (ret < 0)
-+		return ret;
-+
-+	pbus_data_high = phy_read(phydev, MDIO_DEVAD_NONE,
-+				  AIR_BPBUS_RD_DATA_HIGH);
-+	if (pbus_data_high < 0)
-+		return pbus_data_high;
-+
-+	pbus_data_low = phy_read(phydev, MDIO_DEVAD_NONE,
-+				 AIR_BPBUS_RD_DATA_LOW);
-+	if (pbus_data_low < 0)
-+		return pbus_data_low;
-+
-+	*pbus_data = pbus_data_low | (pbus_data_high << 16);
-+	return 0;
-+}
-+
-+static int __air_buckpbus_reg_write(struct phy_device *phydev,
-+				    u32 pbus_address, u32 pbus_data)
-+{
-+	int ret;
-+
-+	ret = phy_write(phydev, MDIO_DEVAD_NONE, AIR_BPBUS_MODE,
-+			AIR_BPBUS_MODE_ADDR_FIXED);
-+	if (ret < 0)
-+		return ret;
-+
-+	ret = phy_write(phydev, MDIO_DEVAD_NONE, AIR_BPBUS_WR_ADDR_HIGH,
-+			upper_16_bits(pbus_address));
-+	if (ret < 0)
-+		return ret;
-+
-+	ret = phy_write(phydev, MDIO_DEVAD_NONE, AIR_BPBUS_WR_ADDR_LOW,
-+			lower_16_bits(pbus_address));
-+	if (ret < 0)
-+		return ret;
-+
-+	ret = phy_write(phydev, MDIO_DEVAD_NONE, AIR_BPBUS_WR_DATA_HIGH,
-+			upper_16_bits(pbus_data));
-+	if (ret < 0)
-+		return ret;
-+
-+	ret = phy_write(phydev, MDIO_DEVAD_NONE, AIR_BPBUS_WR_DATA_LOW,
-+			lower_16_bits(pbus_data));
-+	if (ret < 0)
-+		return ret;
-+
-+	return 0;
-+}
-+
-+static int __air_buckpbus_reg_modify(struct phy_device *phydev,
-+				     u32 pbus_address, u32 mask, u32 set)
-+{
-+	int pbus_data_low, pbus_data_high;
-+	u32 pbus_data_old, pbus_data_new;
-+	int ret;
-+
-+	ret = phy_write(phydev, MDIO_DEVAD_NONE, AIR_BPBUS_MODE,
-+			AIR_BPBUS_MODE_ADDR_FIXED);
-+	if (ret < 0)
-+		return ret;
-+
-+	ret = phy_write(phydev, MDIO_DEVAD_NONE, AIR_BPBUS_RD_ADDR_HIGH,
-+			upper_16_bits(pbus_address));
-+	if (ret < 0)
-+		return ret;
-+
-+	ret = phy_write(phydev, MDIO_DEVAD_NONE, AIR_BPBUS_RD_ADDR_LOW,
-+			lower_16_bits(pbus_address));
-+	if (ret < 0)
-+		return ret;
-+
-+	pbus_data_high = phy_read(phydev, MDIO_DEVAD_NONE,
-+				  AIR_BPBUS_RD_DATA_HIGH);
-+	if (pbus_data_high < 0)
-+		return pbus_data_high;
-+
-+	pbus_data_low = phy_read(phydev, MDIO_DEVAD_NONE,
-+				 AIR_BPBUS_RD_DATA_LOW);
-+	if (pbus_data_low < 0)
-+		return pbus_data_low;
-+
-+	pbus_data_old = pbus_data_low | (pbus_data_high << 16);
-+	pbus_data_new = (pbus_data_old & ~mask) | set;
-+	if (pbus_data_new == pbus_data_old)
-+		return 0;
-+
-+	ret = phy_write(phydev, MDIO_DEVAD_NONE, AIR_BPBUS_WR_ADDR_HIGH,
-+			upper_16_bits(pbus_address));
-+	if (ret < 0)
-+		return ret;
-+
-+	ret = phy_write(phydev, MDIO_DEVAD_NONE, AIR_BPBUS_WR_ADDR_LOW,
-+			lower_16_bits(pbus_address));
-+	if (ret < 0)
-+		return ret;
-+
-+	ret = phy_write(phydev, MDIO_DEVAD_NONE, AIR_BPBUS_WR_DATA_HIGH,
-+			upper_16_bits(pbus_data_new));
-+	if (ret < 0)
-+		return ret;
-+
-+	ret = phy_write(phydev, MDIO_DEVAD_NONE, AIR_BPBUS_WR_DATA_LOW,
-+			lower_16_bits(pbus_data_new));
-+	if (ret < 0)
-+		return ret;
-+
-+	return 0;
-+}
-+
-+int air_phy_buckpbus_reg_read(struct phy_device *phydev, u32 pbus_address,
-+			      u32 *pbus_data)
-+{
-+	int saved_page;
-+	int ret = 0;
-+
-+	saved_page = phy_select_page(phydev, AIR_PHY_PAGE_EXTENDED_4);
-+
-+	if (saved_page >= 0) {
-+		ret = __air_buckpbus_reg_read(phydev, pbus_address, pbus_data);
-+		if (ret < 0)
-+			dev_err(phydev->dev, "%s 0x%08x failed: %d\n", __func__,
-+				pbus_address, ret);
-+	}
-+
-+	return phy_restore_page(phydev, saved_page, ret);
-+}
-+EXPORT_SYMBOL_GPL(air_phy_buckpbus_reg_read);
-+
-+int air_phy_buckpbus_reg_write(struct phy_device *phydev, u32 pbus_address,
-+			       u32 pbus_data)
-+{
-+	int saved_page;
-+	int ret = 0;
-+
-+	saved_page = phy_select_page(phydev, AIR_PHY_PAGE_EXTENDED_4);
-+
-+	if (saved_page >= 0) {
-+		ret = __air_buckpbus_reg_write(phydev, pbus_address,
-+					       pbus_data);
-+		if (ret < 0)
-+			dev_err(phydev->dev, "%s 0x%08x failed: %d\n", __func__,
-+				pbus_address, ret);
-+	}
-+
-+	return phy_restore_page(phydev, saved_page, ret);
-+}
-+EXPORT_SYMBOL_GPL(air_phy_buckpbus_reg_write);
-+
-+int air_phy_buckpbus_reg_modify(struct phy_device *phydev, u32 pbus_address,
-+				u32 mask, u32 set)
-+{
-+	int saved_page;
-+	int ret = 0;
-+
-+	saved_page = phy_select_page(phydev, AIR_PHY_PAGE_EXTENDED_4);
-+
-+	if (saved_page >= 0) {
-+		ret = __air_buckpbus_reg_modify(phydev, pbus_address, mask,
-+						set);
-+		if (ret < 0)
-+			dev_err(phydev->dev, "%s 0x%08x failed: %d\n", __func__,
-+				pbus_address, ret);
-+	}
-+
-+	return phy_restore_page(phydev, saved_page, ret);
-+}
-+EXPORT_SYMBOL_GPL(air_phy_buckpbus_reg_modify);
-+
-+int air_phy_read_page(struct phy_device *phydev)
-+{
-+	return phy_read(phydev, MDIO_DEVAD_NONE, AIR_EXT_PAGE_ACCESS);
-+}
-+EXPORT_SYMBOL_GPL(air_phy_read_page);
-+
-+int air_phy_write_page(struct phy_device *phydev, int page)
-+{
-+	return phy_write(phydev, MDIO_DEVAD_NONE, AIR_EXT_PAGE_ACCESS, page);
-+}
-+EXPORT_SYMBOL_GPL(air_phy_write_page);
-+
-+MODULE_DESCRIPTION("Airoha PHY Library");
-+MODULE_LICENSE("GPL");
-+MODULE_AUTHOR("Louis-Alexis Eyraud");
-diff --git a/drivers/net/phy/airoha/air_phy_lib.h b/drivers/net/phy/airoha/air_phy_lib.h
-new file mode 100644
-index 00000000000..845d2f7cfb4
---- /dev/null
-+++ b/drivers/net/phy/airoha/air_phy_lib.h
-@@ -0,0 +1,39 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+/*
-+ * Copyright (C) 2026 Airoha Technology Corp.
-+ * Copyright (C) 2026 Collabora Ltd.
-+ *                    Louis-Alexis Eyraud <louisalexis.eyraud@collabora.com>
-+ */
-+
-+#ifndef __AIR_PHY_LIB_H
-+#define __AIR_PHY_LIB_H
-+
-+#define AIR_EXT_PAGE_ACCESS	0x1f
-+
-+#define AIR_PHY_PAGE_STANDARD		0x0000
-+#define AIR_PHY_PAGE_EXTENDED_1		0x0001
-+#define AIR_PHY_PAGE_EXTENDED_4		0x0004
-+
-+/* MII Registers Page 4*/
-+#define AIR_BPBUS_MODE			0x10
-+#define   AIR_BPBUS_MODE_ADDR_FIXED	0x0000
-+#define   AIR_BPBUS_MODE_ADDR_INCR	BIT(15)
-+#define AIR_BPBUS_WR_ADDR_HIGH		0x11
-+#define AIR_BPBUS_WR_ADDR_LOW		0x12
-+#define AIR_BPBUS_WR_DATA_HIGH		0x13
-+#define AIR_BPBUS_WR_DATA_LOW		0x14
-+#define AIR_BPBUS_RD_ADDR_HIGH		0x15
-+#define AIR_BPBUS_RD_ADDR_LOW		0x16
-+#define AIR_BPBUS_RD_DATA_HIGH		0x17
-+#define AIR_BPBUS_RD_DATA_LOW		0x18
-+
-+int air_phy_buckpbus_reg_modify(struct phy_device *phydev, u32 pbus_address,
-+				u32 mask, u32 set);
-+int air_phy_buckpbus_reg_read(struct phy_device *phydev, u32 pbus_address,
-+			      u32 *pbus_data);
-+int air_phy_buckpbus_reg_write(struct phy_device *phydev, u32 pbus_address,
-+			       u32 pbus_data);
-+int air_phy_read_page(struct phy_device *phydev);
-+int air_phy_write_page(struct phy_device *phydev, int page);
-+
-+#endif /* __AIR_PHY_LIB_H */
-
+-#if defined(USE_OSPI)
+-update_ospi=setenv sfdev CONFIG_SC_BOOT_OSPI_BUS:CONFIG_SC_BOOT_OSPI_SSEL;
+-	setenv bootcmd run ospiboot;
+-	setenv argscmd spiargs;
+-	run start_update_spi;
+-	saveenv
+-#endif
 -- 
-2.52.0
+2.34.1
 
