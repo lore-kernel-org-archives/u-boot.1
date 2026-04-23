@@ -4,90 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11BE5FF885C
-	for <u-boot@archiver.kernel.org>; Sat, 25 Apr 2026 20:25:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD778FF885A
+	for <u-boot@archiver.kernel.org>; Sat, 25 Apr 2026 20:29:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A3E33842E7;
-	Sat, 25 Apr 2026 22:25:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=e-labworks.com
+	by phobos.denx.de (Postfix) with ESMTP id 4925E8425F;
+	Sat, 25 Apr 2026 22:29:16 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=e-labworks-com.20251104.gappssmtp.com header.i=@e-labworks-com.20251104.gappssmtp.com header.b="enrnSsSz";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="lI+nyi01";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 28A9E8435B; Sat, 25 Apr 2026 22:25:16 +0200 (CEST)
-Received: from mail-vk1-xa44.google.com (mail-vk1-xa44.google.com
- [IPv6:2607:f8b0:4864:20::a44])
+ id 7D4F484413; Sat, 25 Apr 2026 22:29:15 +0200 (CEST)
+Received: from mail-vk1-xa35.google.com (mail-vk1-xa35.google.com
+ [IPv6:2607:f8b0:4864:20::a35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E6E0684099
- for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 22:25:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none)
- header.from=e-labworks.com
+ by phobos.denx.de (Postfix) with ESMTPS id 13F0484099
+ for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 22:29:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=none smtp.mailfrom=sergio.prado@e-labworks.com
-Received: by mail-vk1-xa44.google.com with SMTP id
- 71dfb90a1353d-56d93355337so5502635e0c.0
- for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 13:25:13 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=briansune@gmail.com
+Received: by mail-vk1-xa35.google.com with SMTP id
+ 71dfb90a1353d-56f8c77ca6aso6123961e0c.2
+ for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 13:29:13 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1777148952; cv=none;
+ d=google.com; s=arc-20240605;
+ b=iZ2wQH7gbYxfbWHs+3HH3f2V2gcJe7r0m/AUOH906HkSgmtoV4dv0OJbWeTxfiJrso
+ Ku8t6u3lnfT+Fii5A0BiqPLoXPhr8ec03zGVQu/OQBw6/tPK31CJ9fIkC4NmQdvoCDL6
+ n9yGFnsGfh3PjdC/htHYa4LVqLgC6WDZiSbswJfZVZ4JQf5JaR1Yi74wpk7qnRq194bl
+ oMkB1hMPyb//hnU11ka2inQzGUiRW8Xs87oy2mD8y4LAImuxnhsHy0f8ZXiU5kHAchT7
+ 0xymmdgwtwCx9KsASmLEFtMk+2dV3roD5MLB5bJSkVbirPv5WeOfv2ASh5aUlQkehLBQ
+ SVWw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=fk1BxS6YuCEhcq9QN4kYWYP+cfYP6zQjrQQY0dXSpck=;
+ fh=k35IO2L1j89wb6y1sDvfp+bf1e6g8N/OsFBPLpxMlRg=;
+ b=bi16qUSQtgNTEpsTGYK/okXToMZ52rVa/rC1p6rhSc1s8WDl3QwUXeVXiKBgRnauWl
+ bJwqLkpC4YApdu27t4SdR9ccly4aqw0LYeEZhGI83WX7YkOI+mHVfP2sMeLt1cOCsfNo
+ hHVnZjEnfMiVVGer/k+DXrsGaUTTtmojrzf8KO93eyavIv0Roy9etNf1t/j516upSHtL
+ EhioACe4gMkXVIyGCnSeAVNdILIld5AbIyzrgLEcmkbWQ8M/7ywj5vjEwQQ2RscEAcok
+ TZTr6uf7nTNn4tfXnTIsGwRpn5IumkN1BPfM2mt3cMuYkW56tAZnv2MCe/NPBC9llpIE
+ HfRQ==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=e-labworks-com.20251104.gappssmtp.com; s=20251104; t=1777148713; x=1777753513;
- darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ d=gmail.com; s=20251104; t=1777148952; x=1777753752; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=3j+JXdPBzJYO4sYTQbHuDmaA7mFTuPfLaQOSgFGtfhU=;
- b=enrnSsSzUTN9cJZcR8hbIJVziSa0QQRBUfB5NSH4yKOT1ZaskaIxIsePTloVywf0Jm
- /GNVd53hGkUMtLm6vVOmjoT7FXXPfroFqFQ8Xmzj8Kb2/vd8yo2LzDQGmMVhI8iUOqcn
- XNhK71jWlzMAUSZ97RdBLuGt8NPel1ZYTQGn1l3JLyIZXiMl2gsTxsxVEpPHUfERQsbc
- VnHJORCBvA4u0sTRVZANA2UaBAQ09xV1BgppLQWJedv4Rq33JlqN8OBji3UMbujrrGRN
- vcZxWpi/DZjK9xBnxp0T3W7Tjfa/EBuB+Zq4fCSYF8YnQioPd7VTdnaHQ1B1MDRH7EW3
- OvlA==
+ bh=fk1BxS6YuCEhcq9QN4kYWYP+cfYP6zQjrQQY0dXSpck=;
+ b=lI+nyi01GrRuMgniIqrnzJm7FzU7Y8mg3e7K8O0pvE/M6Ftog8FhilHRfjH7bFz7sb
+ e1vEdGGORLA55ApdqVbjt1qFZnz/70aNqRFdpYuTL7ODpyp/Twgij5kk9Dh0pM8eJfUt
+ 4aQOBZcDxasRdSvJWrEoHHJJl6hsCEUlBr4yIu+yx3XZlXKoEjoGb5akfidv8jDfkUHK
+ 33CyK85QutEtNjty/txode14+MqXNdJvMiK0LTkD1/ytNiDFgEwtJmgJon+wgyw5btuV
+ Eihpyprbpxa+KKZuJKP3IKL4P8JFf27A4co5fr3NsRxxHwHY/3MS5xK4IoiMbJ4bg0O2
+ uGTQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777148713; x=1777753513;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ d=1e100.net; s=20251104; t=1777148952; x=1777753752;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=3j+JXdPBzJYO4sYTQbHuDmaA7mFTuPfLaQOSgFGtfhU=;
- b=Kc0DrIikyYuT3mJLaOnPVtcc0+pd2RreNiR4dfmpHXRwoTlqPKAfANlBNsXJwlCslk
- 0XntVjTkKLR/b9GNGDPYta2FRjHH3+SgdeXKWibzJJ7E9QiQuUfeWKJeW1ee0kG27vWb
- t2aHrzX17zhBptu3jdburUqr4dRJ4gMMJe+1Vl8Xbj0Js6VD6M+6sA2dL6zsnO86bgDq
- irFHey7WXatCDCXh0TFfFP6RpEEkerNchURxG3OG8FPA/Nt/5dUuLxDKM/XBXzlAWaQi
- 2w1ZkeIoKwjPwxr/o+eWLtVs/g1y+CaAmdKpy5eRxDxRs7LWyeg4jvnoGCZmPWFPvxoZ
- lSTA==
-X-Gm-Message-State: AOJu0Ywfa3tHQgMFqRm1s2yXvmU67kiIP/oo4J6CpDZnsFTRp1kDRD2q
- eV3cpcjKzV6wkfnZYc9s1cXuzSe0IqyNKmtt5la64pd8QFJxayRFN3IV72M0kEDUJDpY1Pqs8LS
- rBDyLTxpLVzH2
-X-Gm-Gg: AeBDietu/pSuyL8b2zG2KJAg+s/wg42utpZ1o3eWJvD76A1DjmxQMev5ZakTRNjv5TY
- nWN62Bf8E0EXUl2ikX/t+V4ke6dtGEFrdaZw9kYXgxmCR0oGIlIwEl2HBGSkPghfN7lXRq+5Rke
- 5eQN775qdHEcwX+2KvoOqQSpFT/eXWT96xwKBDsyRBXrX1KiMD27gXzhvkn8cVBtEtpS6bLh0zH
- n5rExrKGYEdA3eOaY/eJcQNUv5Fj7t63KlhOSpNi8Rdugh1BUADcsrxEayodh+6E8A91vZdXLMs
- 75Df0OgEzF1s3a0MPoA6D1a2nUCOpOGTb03dCxQC4S+d7QWqFGCP6Uei/V7BIxFgIgMv6BHQujt
- 7fHIkxdrgZg9GTeZgwnM8C3Tc6OEQZYcpM4O2GP3EIOq+1mMVOkpN02tnB322Dd5d6fp7fSdr3v
- GidSfJweiYg9tXLKN7Vd66zdEFgaLvbSt9XGQPwUFhhKE8y2o6vh9a
-X-Received: by 2002:a05:7300:6d23:b0:2ca:9b08:e7d2 with SMTP id
- 5a478bee46e88-2e478a34148mr16447657eec.22.1776959187971; 
- Thu, 23 Apr 2026 08:46:27 -0700 (PDT)
-Received: from desktop.. ([2804:7f0:6401:dc31:4200:1760:44a0:9daa])
- by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-2e539fa5c86sm33732055eec.1.2026.04.23.08.46.24
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 23 Apr 2026 08:46:27 -0700 (PDT)
-From: Sergio Prado <sergio.prado@e-labworks.com>
-To: u-boot@lists.denx.de
-Cc: trini@konsulko.com, sjg@chromium.org, alpernebiyasak@gmail.com,
- ilias.apalodimas@linaro.org, marek.vasut+renesas@mailbox.org,
- sughosh.ganu@arm.com, wolfgang.wallner@at.abb.com, bb@ti.com,
- y.moog@phytec.de, xypron.glpk@gmx.de, sergio.prado@e-labworks.com,
- jerome.forissier@arm.com, afd@ti.com, quentin.schulz@cherry.de,
- Wojciech.Dubowik@mt.com
-Subject: [PATCH v3 1/2] binman: bintool: add extra_env parameter to run_cmd
-Date: Thu, 23 Apr 2026 12:45:35 -0300
-Message-Id: <20260423154536.768603-2-sergio.prado@e-labworks.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20260423154536.768603-1-sergio.prado@e-labworks.com>
-References: <20260423154536.768603-1-sergio.prado@e-labworks.com>
+ bh=fk1BxS6YuCEhcq9QN4kYWYP+cfYP6zQjrQQY0dXSpck=;
+ b=MUgFB8DK/K89afBIyjTOyEDhZepdgmUIM5d/DLvD8z3AW6QQzv/lKThC3cEGAuxD2K
+ aQcCptPouoOrDZiuWWrv7j3PUSDdVFcNSwhqujmEG+LBHIefuehG6SX30uLNNFQNrZG7
+ Ms/8OMYaiezKAinz89gEn/lBc81aNwDXN8W0jBnxQfy7ekpVROHCeQ4cB2smXePVr2Qk
+ 7UM+8b5NGeophfpriryZSfHDW9c+Os2losbGmk5rCm07/hZWvXrvEoeQFn4Cg3vYlatX
+ Q18091cO4p7FRoloRAvYPuLcyTHrLRZhwc72qKfckr3ztbJDSSk+1hsLQPxQRP8tyyG+
+ MkBg==
+X-Gm-Message-State: AOJu0YzV6PltCB6HDVBPeApwdj5GraUFTOHlgGahCWb8iziXC4pqKSM8
+ YFs6DaLtO4tIx3JNj/pBdX+38U6bTwk2ZeibrNVfSax2Y+rfF1RGUerlsASq7e3+nzMc2Glzf6Q
+ wiTlXL1281z+mRfdRjegO3nj/eDTEi0JHlmo/VT/Hlg==
+X-Gm-Gg: AeBDieuvljyKXKjRdKy5V5O3LzCZvakMc4HwNccCh6ikk85QCdw9P7bd4hiLUmE3w7c
+ zo8Wrbmke5xuXix4fM+fkVOquqEnVEYsuAXRUe5B45rON1rgI35hRc9hKo/Jr3tDdn63T9W8GdW
+ RV4HK/v8IgaQOopV3r+AwvDZMv0/A/f1S0kiz5RJ2WUlP4jGgdispMO0XJbprdl/l57GG7BleDe
+ G7kd+1C4PSeU1fkp3P/TZ0kA6/uWhiizEoRtEB1Wy3AiP2EgccEjw+6Gml7XcG6Nx5VVYQGIwl/
+ QJXRK1FAe/rm3Ur9n4c=
+X-Received: by 2002:a05:6808:894d:b0:479:ead7:2a53 with SMTP id
+ 5614622812f47-479ead745a7mr7895489b6e.11.1776946695012; Thu, 23 Apr 2026
+ 05:18:15 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20260423080637.30006-1-alif.zakuan.yuslaimi@altera.com>
+In-Reply-To: <20260423080637.30006-1-alif.zakuan.yuslaimi@altera.com>
+From: Sune Brian <briansune@gmail.com>
+Date: Thu, 23 Apr 2026 20:18:02 +0800
+X-Gm-Features: AQROBzA1akF-CUsGspDVY_sLdM_y69DUEveVTJ5RI1Ldx9KtUTyy4avLuCdUtMI
+Message-ID: <CAN7C2SAyU4nFoBNdO1S2NzX==CvzQja5h3NQGEjWwNZ3aUYO6Q@mail.gmail.com>
+Subject: Re: [PATCH v2 0/3] SoCFPGA: Update DDR Support for Gen5/Arria10 in
+ U-Boot
+To: alif.zakuan.yuslaimi@altera.com
+Cc: u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,76 +114,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add an optional extra_env dict parameter to run_cmd() and
-run_cmd_result(). When provided, the key/value pairs are merged into
-the subprocess environment for that invocation only, leaving the parent
-process environment unchanged.
+On Thu, Apr 23, 2026 at 4:06=E2=80=AFPM <alif.zakuan.yuslaimi@altera.com> w=
+rote:
+>
+> From: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
+>
+> This patch set updates the boot support for the Altera SoCFPGA Gen5/Arria=
+10 platform in U-Boot. The changes include:
+>         1. Update MMU/dcache setup across Gen5/Arria10 using common drive=
+r
+>         2. Add ECC scrubbing support for Gen5/Arria10
+>         3. Add DRAM size checking for Gen5/Arria10
+>
+> This patch set has been tested on CycloneV devkit with SDMMC boot and RAM=
+ boot (TFTP & ARM DS debugger).
+> Tested on Arria10 devkit with RAM boot as well
+>
+> v1->v2:
+> --------
+> - ECC scrubbing, Gen5 DRAM size checking, and shared dram_bank_mmu_setup(=
+) is set as optional via Kconfig and
+>   defaulted on only for the reference Arria10/CycloneV boards to avoid SP=
+L overflows on size-limited Gen5
+>   defconfigs.
+>
+> History:
+> --------
+> [v1]: https://patchwork.ozlabs.org/project/uboot/cover/20251216084623.195=
+89-1-alif.zakuan.yuslaimi@altera.com/
+>
+> Alif Zakuan Yuslaimi (3):
+>   arm: socfpga: Consolidate dram_bank_mmu_setup()
+>   ddr: altera: gen5: Add DRAM size checking
+>   ddr: socfpga: Add ECC DRAM scrubbing support for Gen5/Arria10
+>
+>  arch/arm/mach-socfpga/Kconfig        | 21 +++++++
+>  arch/arm/mach-socfpga/misc.c         | 31 ++++++++++
+>  arch/arm/mach-socfpga/misc_arria10.c | 26 ---------
+>  arch/arm/mach-socfpga/spl_a10.c      |  4 ++
+>  arch/arm/mach-socfpga/spl_gen5.c     | 17 ++++++
+>  drivers/ddr/altera/Makefile          |  4 +-
+>  drivers/ddr/altera/sdram_arria10.c   | 34 +++++------
+>  drivers/ddr/altera/sdram_gen5.c      | 64 ++++++++++++++++++++-
+>  drivers/ddr/altera/sdram_soc32.c     | 85 ++++++++++++++++++++++++++++
+>  drivers/ddr/altera/sdram_soc32.h     | 15 +++++
+>  10 files changed, 252 insertions(+), 49 deletions(-)
+>  create mode 100644 drivers/ddr/altera/sdram_soc32.c
+>  create mode 100644 drivers/ddr/altera/sdram_soc32.h
+>
+> --
+> 2.43.7
+>
 
-This might be needed by bintools that must inject environment variables
-into specific tool calls without polluting the global environment.
+Hi Alif,
 
-Signed-off-by: Sergio Prado <sergio.prado@e-labworks.com>
----
- tools/binman/bintool.py | 15 ++++++++++++---
- 1 file changed, 12 insertions(+), 3 deletions(-)
+Just a small question.
+The size issue for the failed board in the last pipeline test is unsolvable=
+?
 
-diff --git a/tools/binman/bintool.py b/tools/binman/bintool.py
-index 9c76c8881a46..9d4f31b8afa1 100644
---- a/tools/binman/bintool.py
-+++ b/tools/binman/bintool.py
-@@ -272,7 +272,8 @@ class Bintool:
-                 show_status(col.RED, 'Failures', status[FAIL])
-         return not status[FAIL]
- 
--    def run_cmd_result(self, *args, binary=False, raise_on_error=True):
-+    def run_cmd_result(self, *args, binary=False, raise_on_error=True,
-+                       extra_env=None):
-         """Run the bintool using command-line arguments
- 
-         Args:
-@@ -281,6 +282,8 @@ class Bintool:
-             binary (bool): True to return output as bytes instead of str
-             raise_on_error (bool): True to raise a ValueError exception if the
-                 tool returns a non-zero return code
-+            extra_env (dict): Extra environment variables to set for this
-+                invocation, or None
- 
-         Returns:
-             CommandResult: Resulting output from the bintool, or None if the
-@@ -291,6 +294,10 @@ class Bintool:
-         name = os.path.expanduser(self.name)  # Expand paths containing ~
-         all_args = (name,) + args
-         env = tools.get_env_with_path()
-+        if extra_env:
-+            if env is None:
-+                env = dict(os.environ)
-+            env.update(extra_env)
-         tout.debug(f"bintool: {' '.join(all_args)}")
-         result = command.run_pipe(
-             [all_args], capture=True, capture_stderr=True, env=env,
-@@ -315,18 +322,20 @@ class Bintool:
-             tout.debug(result.stderr)
-         return result
- 
--    def run_cmd(self, *args, binary=False):
-+    def run_cmd(self, *args, binary=False, extra_env=None):
-         """Run the bintool using command-line arguments
- 
-         Args:
-             args (list of str): Arguments to provide, in addition to the bintool
-                 name
-             binary (bool): True to return output as bytes instead of str
-+            extra_env (dict): Extra environment variables to set for this
-+                invocation, or None
- 
-         Returns:
-             str or bytes: Resulting stdout from the bintool
-         """
--        result = self.run_cmd_result(*args, binary=binary)
-+        result = self.run_cmd_result(*args, binary=binary, extra_env=extra_env)
-         if result:
-             return result.stdout
- 
--- 
-2.34.1
-
+Thanks,
+Brian
