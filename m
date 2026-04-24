@@ -4,149 +4,162 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C417BFF885C
-	for <u-boot@archiver.kernel.org>; Sat, 25 Apr 2026 16:07:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1E47FF8860
+	for <u-boot@archiver.kernel.org>; Sat, 25 Apr 2026 16:07:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2DC65843A4;
-	Sat, 25 Apr 2026 18:07:23 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 849E984312;
+	Sat, 25 Apr 2026 18:07:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="fGpoPasD";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="oPxxacKN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 12C7E84394; Sat, 25 Apr 2026 18:07:21 +0200 (CEST)
-Received: from AM0PR83CU005.outbound.protection.outlook.com
- (mail-westeuropeazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::1])
+ id 63EF584277; Sat, 25 Apr 2026 18:07:39 +0200 (CEST)
+Received: from PA4PR04CU001.outbound.protection.outlook.com
+ (mail-francecentralazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20a::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1CF0C84353
- for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 18:07:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9F4288421D
+ for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 18:07:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=cherry.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=quentin.schulz@cherry.de
-Received: from PA1PR04MB10987.eurprd04.prod.outlook.com
- (2603:10a6:102:486::14) by AS8PR04MB7896.eurprd04.prod.outlook.com
- (2603:10a6:20b:2a2::12) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9846.17; Sat, 25 Apr
- 2026 07:00:38 +0000
-Received: from VI0PR04MB10493.eurprd04.prod.outlook.com
- (2603:10a6:800:21c::14) by PA1PR04MB10987.eurprd04.prod.outlook.com
- (2603:10a6:102:486::14) with Microsoft SMTP Server (version=TLS1_2,
+Received: from GVXPR04MB10475.eurprd04.prod.outlook.com (2603:10a6:150:1ea::5)
+ by AS8PR04MB7621.eurprd04.prod.outlook.com (2603:10a6:20b:299::9)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9846.23; Sat, 25 Apr
+ 2026 16:07:19 +0000
+Received: from VI1PR04MB7120.eurprd04.prod.outlook.com (2603:10a6:800:124::18)
+ by GVXPR04MB10475.eurprd04.prod.outlook.com (2603:10a6:150:1ea::5)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9846.23; Sat, 25 Apr
+ 2026 06:31:56 +0000
+Received: from DB8PR04MB6796.eurprd04.prod.outlook.com (2603:10a6:10:11e::7)
+ by VI1PR04MB7120.eurprd04.prod.outlook.com (2603:10a6:800:124::18) with
+ Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9846.23; Fri, 24 Apr
- 2026 19:56:47 +0000
+ 2026 19:23:35 +0000
+Received: from PAXPR04MB8960.eurprd04.prod.outlook.com (2603:10a6:102:20f::20)
+ by DB8PR04MB6796.eurprd04.prod.outlook.com (2603:10a6:10:11e::7) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9846.22; Fri, 24 Apr
+ 2026 19:15:22 +0000
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=vmjgvYlY6jqW5JTP+V0fY+D4lwKZCUzqUuDWNUSCstOnns7ItWiwKqw1z1fd6Ul0nG8mEGofWMkVq3stNIDbyyzAdwIQF8m+DFDrcgMiBt5aa5LwoEfk5gFaPum7Jwpy+XTx3p7ycA03NGCx28jYJ6ukSaJ2EJbol2oL1C+qhJ92i8ohS3X9A9EMDhyvXpWFwk8W4pxPVQC9gWXidr46l45tMR15FwO2qUdOVjUUsglW1vsHYNYac53ig+qdKqB+a5NoxE9CMLq004+VY68Dli0dhAOD1RShCcnMZyL02jvUwdJM5dtgj4F4J9qHifGTtv2E1fHqyZ5ngtldAE3b6Q==
+ b=ZsTNUDXwyXcBKYk9F2eC5R3F+zhpAhmAfBrXwmuLdQLcYZwyxqKVqxbAVKbHKBrE3AjSJ0kMkN75v5SnC9sVPY5ArKU1Xh1IZ4cYFlkUj2M6SmCgdmErJcmMvAyfsQvRkBcNT8NxNc8f+CI4rj8AOW4+CDB7uIFLOe0APlH+7mYlH4eC7AK+DDZQI6patFf6eRWEpJCqyKbqx8XSlSipo0+4biDgt0k5Tt1d3vZs45vOl4lTAoj1WDg5rdX9OMCxIbaiu8R2Xf11Wlh7oKWIA5ycMZ1kNIGnqTXhd9Ge1YamzzNjuktJ/cfN79L6Ebg5Puf6KYO/VD7rk6Oit7uvGg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=SFP8Z94eCTOWWJUaGzlmLjPPTSE3F5tubYwN3Cm44Bk=;
- b=KhyuKoNFoC3Dk7xMvOjUwWedGkYB2uAeONsfTsXbNlmma5LcEVs1cDy6RxgxHaPDvxoAL8NnIOwTHroAaYqPicAHzPGGlWn0+FE/pWBn4zqBGL2EYBUyFpSXGp7DRm0PXSP73UnZoYYhcvZz9M5j3GL/OYIFUS2YvSLgqbpEcr8JTeBoG13PAZpi4WN3wQV1OrDsmfOE8MvPBJoNpTWg1VlWJEDvHr4UPt6UNZKxM9z7sBKjoej8Xc+prEGH79dd3yhLfx/zse+ZQrzWvtyvnsJ2ijBz5wvOQT1eBSMyJrGA3c2sRo39s0eUwBbgcNxJBtqok/b4/Wqp47VqZkVmlw==
+ bh=AXhN7pVCDlcKnOB8lEtcDyw6v4vRwAwcaRsMF7C5Kog=;
+ b=ORRM1nG6Z4Io08PWlyLVI25FP3E5axRc0m/wfEg/NrCPu20YSRjrEIDdGxyIhCjPrtDtQ3Il/jiZ62nhkPMIa3HboQdo+jx/nL4yBQBcsnZ5s5lBHbqN7eT/ddhabOHveTTZV2+XTsE//KzsxEG7DuXThvVmFsFi1oF+V8N5Fk9jwF0/YfI6vyVNXrYnOOxt1m4Ea1EfycKrrPXw69NfNmS7LJvgtw9DA6VmGtVhZ1AolOa/K3/x2R2SUEmCR4fs4dgbIo1BxGe9A7X0UlIgsk8Xa79npP+5Lj8yiKujh4Aem2FJ3DV50YlYDSf2qv+W7gItlRG6KWN4PFzFxurHcQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
  dkim=pass header.d=cherry.de; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=SFP8Z94eCTOWWJUaGzlmLjPPTSE3F5tubYwN3Cm44Bk=;
- b=fGpoPasDlJhuBW2LJ3LBkM7UBB60dfN89cXhGFlCMAQ9epe3HnCjdsV9GMVjhLpiLOJO0zc/P0KTgN6hV9yiUqP0JtoW6iMuC729I1lW2TZ3Xm/6kD/DPJ+BrzZLSKdnu/4klCyjQZep0AcsH1g4t4fVbpVi+NaKt0R65JUQeLE=
+ bh=AXhN7pVCDlcKnOB8lEtcDyw6v4vRwAwcaRsMF7C5Kog=;
+ b=oPxxacKNftRvv/h35PNe8UM14FuZjo+Z8Isanqab1DhR24C6G6Ob+CcB/s7QvvvNHWCIH5cLwUTc/sqoj12dTbmqOQ5JF7pT99c0OdLHSF3qzDU/mzc85Heh9suov3z2Ftn4BZNpMxhUiUO6/6u+JpxhJVjOMp1e5qnSadqZHDo=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=cherry.de;
 Received: from DBBPR04MB7737.eurprd04.prod.outlook.com (2603:10a6:10:1e5::22)
- by VI0PR04MB10493.eurprd04.prod.outlook.com (2603:10a6:800:21c::14)
+ by PAXPR04MB8960.eurprd04.prod.outlook.com (2603:10a6:102:20f::20)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9846.22; Fri, 24 Apr
- 2026 17:52:55 +0000
+ 2026 17:02:25 +0000
 Received: from DBBPR04MB7737.eurprd04.prod.outlook.com
  ([fe80::5960:fb4b:9313:2b00]) by DBBPR04MB7737.eurprd04.prod.outlook.com
  ([fe80::5960:fb4b:9313:2b00%4]) with mapi id 15.20.9846.017; Fri, 24 Apr 2026
- 17:52:55 +0000
-Message-ID: <4f97bccf-bc6a-4576-8b29-1e8681f0f0a6@cherry.de>
-Date: Fri, 24 Apr 2026 19:52:53 +0200
+ 17:02:25 +0000
+Message-ID: <4264e62d-2b59-48d3-a619-aa2a7c6dee89@cherry.de>
+Date: Fri, 24 Apr 2026 19:02:22 +0200
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 3/3] binman: Flesh out the softhsm2-util bintool docstring
-From: Quentin Schulz <quentin.schulz@cherry.de>
-To: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Neha Malcom Francis <n-francis@ti.com>, Peng Fan <peng.fan@nxp.com>,
- Philippe Reynes <philippe.reynes@softathome.com>,
- Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>,
- Tom Rini <trini@konsulko.com>
-References: <20260421231126.597390-1-sjg@chromium.org>
- <20260421231126.597390-4-sjg@chromium.org>
- <22dacc9a-103f-4b54-8f65-ba1227be2114@cherry.de>
+Subject: Re: [PATCH v3 0/7] Add FIT multi-DTB selection for Qualcomm platforms
+To: Tom Rini <trini@konsulko.com>,
+ Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+Cc: casey.connolly@linaro.org, neil.armstrong@linaro.org,
+ sumit.garg@kernel.org, sughosh.ganu@arm.com, ilias.apalodimas@linaro.org,
+ gchan9527@gmail.com, mchitale@ventanamicro.com, maximmosk4@gmail.com,
+ jonas@kwiboo.se, marek.vasut@mailbox.org, peng.fan@nxp.com,
+ sajattack@postmarketos.org, balaji.selvanathan@oss.qualcomm.com,
+ wolfgang.wallner@at.abb.com, e@freeshell.de, yangshiji66@outlook.com,
+ jan.kiszka@siemens.com, funderscore@postmarketos.org, hs@nabladev.com,
+ kory.maincent@bootlin.com, jj251510319013@gmail.com,
+ carlos.lopezr4096@gmail.com, u-boot-qcom@groups.io, u-boot@lists.denx.de
+References: <20260417120951.3454249-1-aswin.murugan@oss.qualcomm.com>
+ <20260420181159.GA2373171@bill-the-cat>
 Content-Language: en-US
-In-Reply-To: <22dacc9a-103f-4b54-8f65-ba1227be2114@cherry.de>
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <20260420181159.GA2373171@bill-the-cat>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: VI4PEPF00000161.AUTP296.PROD.OUTLOOK.COM
- (2603:10a6:808:1::86e) To DBBPR04MB7737.eurprd04.prod.outlook.com
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: VI1PR08CA0215.eurprd08.prod.outlook.com
+ (2603:10a6:802:15::24) To DBBPR04MB7737.eurprd04.prod.outlook.com
  (2603:10a6:10:1e5::22)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DBBPR04MB7737:EE_|VI0PR04MB10493:EE_|PA1PR04MB10987:EE_|AS8PR04MB7896:EE_
-X-MS-Office365-Filtering-Correlation-Id: 39907b95-b4fe-41a2-8060-08dea22a5077
+X-MS-TrafficTypeDiagnostic: DBBPR04MB7737:EE_|PAXPR04MB8960:EE_|DB8PR04MB6796:EE_|VI1PR04MB7120:EE_|GVXPR04MB10475:EE_|AS8PR04MB7621:EE_
+X-MS-Office365-Filtering-Correlation-Id: 3a0ff719-f41a-4621-b3f2-08dea223425c
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|10070799003|1800799024|366016|376014|18002099003|22082099003|56012099003;
-X-Microsoft-Antispam-Message-Info: BA/gmrkA+OYr7/mnzmvc9XeM0EsuKHjCMV3CcVX3Yf0tuhWY64RO2SyINxo6CwGUsiYhX0fSY3pyjzew3JjN36sRyTDm9jpeaTebuPaBrIwj9tLuNDFpRcSdaIHY/GV4uHHPqkA8Gip0VOvw3MXuBmWmNh/FJM/o9MTgvA+dgss40/EVBUIpvQRRe9tvLlsrVaOpmhkeJLiRS+j7awX3pnvLewAEZsSE0jSlktFAPVY8TFmV3PHOUHgjmqEL2EPkhr6D9TIc9jWPlfRGvNMonQsIcTm4H1dObggie2TLe8K2tJN1a6IGNT4gShBoGktQKU3Unbhdl+3Fl4ik/wtuT7ptZyi6eeFtCaVXyqEZM81zbuw6Rgo3Ixh2pSqvK2JZgGzyPFrKdLDWh5LIAsasaKKHqOVrqDMxb/4SIBcageI1EoKRufnyH3Sgb2i+A03mIxOfl5Dh9qSPvDxKL2ljCZ3E3eTbbYwwBObg/4N0WZkNYK9KSJO91X6E36c5E0bbp63BsCkEiuQ7u7eNEDur6chYcRfy+qZ/k2XNfm8owB5GuwHSTce6OZa5bSY7dE7DskxfONsSwhZoDuF+T7FC/zmeXMqO0OcpsK/WPeVIZdmqQETGyuqUTK93t9L+lNbmFoqrJRaYDt6mrP9DKpYwOXWwztLEhITjp4ipSo7zxEZDQ08Zu4StBlLMnGdM8nzipIUCi2kwMQEHe8Cw1MY397/05XoezUq6FHUe/ESnVmw=
+ ARA:13230040|1800799024|366016|10070799003|7416014|376014|18002099003|22082099003|56012099003;
+X-Microsoft-Antispam-Message-Info: ZbKzkg9TpZRn5ei3dwC+DyXIiY2MX6u6sI2O+/+S21g4gUGumeflCD45UgR3rqf4NIiG8DYk1hTSg+6IHUANDUrmOoVZxDdvyv/m+NdkCwXDSWxhPwF8F117c3gmt9R6LRd0VBQRw+mfiXpWqGjufBTngr6znwhKuxba2C4CaPSdnA786DiakTHGQdfN5gbh80DszaJWK1IqNYjxkRJDDGnsHu4YQ/piISCXAfwWRA8Idshc7sXLoiWJ9fkElXchgid8oUmD34dbL6xOKhbfZcM53rgy9atxPscCvzrGDcIwwnsAyndTg2auUONTLVSUMk3wnLonUVdjy8XyvDNZuyoOywSl2JrrT6gzkc6XNriOZ+8WXyOaL+s11u0YYKShyvfBCgDX0CsQXYcVn2Bt98LVDkOW6V41pOAMXm+hUDpEKAAuGxGMvsoakxS8vG+alXaB4zBTQ64MISA7n+GsP3WXDDb1jXp0Zo/DkrbeHuI3FH3lXs/4D9+EvZ5+Iq7Vn3u4PRQKkCTMIUMvqhx+UPzaPircdaqr9XF1CmEUZkaDKu0JK80giACMoMW8xuuHnn7FEF1taNw2wHJX7SaysFFi32ELTD8/okAUk9x25yIaEWc15fmX/UIYk6Ar6qA7FrpH5LvZSydSovcHDTJGOZM9cQQh1S1r3qQSB0RTcbqGgYxkFX3qRxoFUlui4zvEWr7JgVkuoIJ2qKoaK8SfWwxuTWxs+7zJiCp3TVsSAE0=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:DBBPR04MB7737.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(10070799003)(1800799024)(366016)(376014)(18002099003)(22082099003)(56012099003);
+ SFS:(13230040)(1800799024)(366016)(10070799003)(7416014)(376014)(18002099003)(22082099003)(56012099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?ZlJITE5TUk0rNFlKN1pDYy9UeGpUODd3clY4VEdQKzIxWlBTejA3NnV2WEY0?=
- =?utf-8?B?cm1BWkFMWUNURUpqTjdYVE8xbitUd2t4WE1XSHFOUERzUnRURlJiNzBUZXJm?=
- =?utf-8?B?ZUJ2VEJna0N0b2xKbnlmY0N4Y09xQkJtVHlOVWwwMmhMdm9xa1Q4TVZNdW9n?=
- =?utf-8?B?TnpPNklFcGRWbFNRNTF3SFJ3dkRDQmtIVUN4Q0dTZDNMK3R2RTlocGx2NXdn?=
- =?utf-8?B?M2dhMDhHVGJ2clpqOWpnb2xQc3RZeVhlNHdMZy9WOEJON1NWV0lodThtVHZo?=
- =?utf-8?B?bjZQQXR2WDBJZmJtQmdjc1pkbjhOOXZoQm9mb3VobEcyYyszQm9DM2c2R2tD?=
- =?utf-8?B?WmI5WjlJUXZHMHdBYTFJTlZpV1BRY2UyczFjK016TmRpYVNEMEs5Q1RDcWFF?=
- =?utf-8?B?bDM0bDRwalUzNGE3OEpveitwS3BLU2pISldUbmo1VVVaM2EzM3YyQXpLdTd6?=
- =?utf-8?B?QUgra0FIeVRNY3hNdWpqbnJsOEpwTTR1Tks5dDNWdFczVGNSN2o4V0gxOHQ5?=
- =?utf-8?B?Uy9PQUxvM0JVSGFpOXo5dDhtZko4L2RUdjdJWGVXMkdPZHJFWlcwYU9WYWhq?=
- =?utf-8?B?TVUrODhQR1c0ZVJzQUFBTWZ6alA2M0VESjFYRGxjaHU5RnVTU2htNDdldXNK?=
- =?utf-8?B?SkZMS2pHU0tHT1M1aE1pYkZ1MHpRaUNDWGpjT283R2tOUjVTMUVudy9Kd0dM?=
- =?utf-8?B?eE05RDVvVTI3aVBCT01XUUY4eXQzeDUzaXYxTUVHbzkxeW1xY01RYjNvMGZm?=
- =?utf-8?B?N3U2Z2U1TnAwWWZEQm40U0srUDFWb3RKd2lyM2x4YVVZRGJGU2pwMnpFbzhq?=
- =?utf-8?B?U243QWxVVFNFK3gyMjJzNkpicG1zeGtyYzVGVTVHZHEwblRYaGlZRUJNaVNN?=
- =?utf-8?B?QzdVeW1BYWZJU1RNbDYrZENJZFBDVU5QeWltT3diZ0NQM2kyN1dOSTZtemdt?=
- =?utf-8?B?NWE0b3pESVJmQTdFdjZiMDMyZWx0aythYmZVaTg4ZHRKNDE4ZEkvUGhnZFlG?=
- =?utf-8?B?ajZxNmVCdlZUdlVpWkpOcWdMT0d6Y2ljd01FSG4vaHY0TmwwRzNZZnQ0c3ln?=
- =?utf-8?B?a0RwM3NYcHpWeHA5S3dBTGtrbmZlQ0llMEorNHBxak5Ha25yVkkrOTJHb21R?=
- =?utf-8?B?blF2SzFHN2ZPdVRjY1ZOVVk2N3B6dzE4Q3RDWEpQWm9KK2pWVGcrdmViWG12?=
- =?utf-8?B?T2U5QTQ5MzRIV09FRzFPa1I0czhKb1krUC9JaCtNZFRkTG4yZlprYnVEUFNI?=
- =?utf-8?B?WGRrV2tpWkFsZnErMk16RmlDbmVETnBvUjV1U2pCRVVlQ0l3aGl4b3hOOHMr?=
- =?utf-8?B?eGhDclZJWVJuUEpYSzdYbUdMWTQ4bHRtU2k5ZHVxTXJrbkhkSjY3YXRRU25y?=
- =?utf-8?B?OUtQMytlUlZYdXZhUW95L3BkRnFxUEZEMGlwN09COUt1NCtvUXRrT2srclRI?=
- =?utf-8?B?TXBkM0VpYTJjaHFhMUZpNDRQenlMNlpMZVJCYVFlZkNEMjUvWUxUSlJvYXlQ?=
- =?utf-8?B?UE9LRmhCNXFKMXpuNUxmckNyTUc2TEp5eW9zZ2RRWHlHWks4TE85VkVHQitO?=
- =?utf-8?B?eFJSWE9vOXR1M0prTktJZWxnQjJBbUN2QmFGL2pJWWNnRkoyTUtwc1lSWjM3?=
- =?utf-8?B?d2hrV3VCbC8yRWVXbEZTUjQvaVF0NE8yVk1WZ3R5OXFWMnR1QyszcG5SRlIv?=
- =?utf-8?B?eFJNSmx1bFU4UkMrallsdzhVemI5VUd1bS9uQjZha2IvblUwN1ByMDh0eEVs?=
- =?utf-8?B?VUd4Z3VvWVB5bE02NGY4T3NnbnA3S3RQUTAyZEZISVpkdjBtRm96aG1talNz?=
- =?utf-8?B?L1JpRGZhVk1CdlJranRXVGlTQXZJNzNvM3BERHlCQUtycXBONDVyczc5cEtR?=
- =?utf-8?B?T2t0cDFjSW5OZVEvTzFzK2tSSW5UZlVUNEgvdG9nOEdrSW84YnBOeEgwSUU0?=
- =?utf-8?B?ZzdvMmszdjVneDJPMUZRc2VQdllmQVhtdGUrQzQ2MkhhUkZBYzVyWmQ5ZWty?=
- =?utf-8?B?ME1HUHdsZUl3NDU1K2lRSmlJSVlVQjZuNHdmMWNEZkpueHhYZlo1ZmVVVDdM?=
- =?utf-8?B?cDZlMnE2c3k3bUh2dm1RZEtyd3Jpdkk3ckFYNXV1a1BvQ1l4YmQ2OUxkQSt2?=
- =?utf-8?B?WTVaYmcyUVFpSUNOMkk3dXM0Mm11ckRubTNxZll3Rk9HMVJBdkZHd3ZDaFp6?=
- =?utf-8?B?dXcwN1dWOUpFTC8rODFuZ2VRakJTK25LOG1zdm5mU29VOFFzM2xyVzd6SUpM?=
- =?utf-8?B?SndlYXM4RzZPZWI5SlVCb2UrMkVuRnRtZTgyTUpxWFIzTGVzbDJzNkdvL08w?=
- =?utf-8?B?OHYwMjRQcjVPV0RyMTVPRDcvSEpNL0RpcGMycXR3cDllSkthUHBLS2p5YndZ?=
- =?utf-8?Q?TzHfvWTVakCW7g+nOeb566PA96n32qTbHRJwl?=
-X-MS-Exchange-CrossTenant-Network-Message-Id: 39907b95-b4fe-41a2-8060-08dea22a5077
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?bTBJWHFBVXdUaE9heHhlSWx0S0IrY3RnalllSllydHpqYUp5aUJvODZmUW5M?=
+ =?utf-8?B?Yjc5bDg0NG5iUTFqb1p0em9rZWZaS1Vwa0dLeEptK0RSZUZ3RjZKdThBNGNF?=
+ =?utf-8?B?dVAzWTVSY1ZwUHdoVFlqSjRjVVM0UTl1YUxMRGFtSzRxRlpHTGc3SC9vMEFH?=
+ =?utf-8?B?RS9tcEd6U2pjNTFRamRpNXphekhLTDhiMWRwM1VMZ2p0TTF1eVBrK0d6R0I4?=
+ =?utf-8?B?SlVDdlNaM3A1c3UxeERUOU9PUGlrZ0E0L0ZnZ2JoTGluM1RDTFpIN0tRYmlZ?=
+ =?utf-8?B?K2JuL2hkb2FrQVAzMVBueTYrM0w3Wnc4aWJrS3lycS9DNnJzOFZTaVNWSUZL?=
+ =?utf-8?B?eGp3WitUcFhNMmhVbjVocVpSRWlQdWNTUzNlZUtQK0xHVTJuSGphN3JmMHMv?=
+ =?utf-8?B?RFdWV1d1VmloR2R2Mm9iZDdXRk5JRmVXaTU5cGIzYi9Cb2JVTU8yU2xPQ08y?=
+ =?utf-8?B?L2IxcGM0bTRlZFFGQVNUVlJHMFMxSHRTa1pkeG43dHJuUXRqUVluY2d2V2hW?=
+ =?utf-8?B?YWFOSDcrZzBreVRjb0NTckZ2QnRWd3FGNG5JQjI3S3p4a3VjL0EwMFJWQVBT?=
+ =?utf-8?B?UUQzMk5BTm1HYTdiTW9GZlY1RVU3b1RFdWRIcFo1M1RwYXBMd0pvbGN2aFB1?=
+ =?utf-8?B?VjJtQnowN2s5Smd2aUJJcHc4TkdOT0Job1kyQ3RoMXU0ODZkTkRBOUo4aGZy?=
+ =?utf-8?B?SFQ5MzVUY1VEMHhZUDZEQjdnWjArYWdNNUErRVJIOGExYVdjOTJmazF0UHlO?=
+ =?utf-8?B?MWhGaXliaUQ4M1FRbGV6cmRscUd2NnBaNXNZN2N0TDY3YTErNS9xV3lWTGJy?=
+ =?utf-8?B?em9Qdlc2NVkrVWdTTXcrM2dMVHNJVnZtMWlhaWU1TytjQ1NBTTVXcmFoemlW?=
+ =?utf-8?B?VmdKTW9INkNscjRhWjFPY2lTZVlmZzIreEU5cFI5MUNWVFptNjM2OVJ1TjZa?=
+ =?utf-8?B?VlFuQkJPV1VDcDF5dlhiMytJQTNOVGdwTHZnOGZXNTBhSlBvTFhmb0lFbnlj?=
+ =?utf-8?B?OFQ1YkZoK2U2WVo2RnVQUC9DV1NkczNOQkNpeERCS2phaXVOZGdQYWc1cU5y?=
+ =?utf-8?B?L3Q1NnpCOGZyNmJIZjRXSHFLc2N0MDhLcE92Z3JJdzhwZkRmTE1YdCtnKyt5?=
+ =?utf-8?B?YzFCWm5RMFBHYW5aWjUwZWE2TVhsc3RJUnJodjN5MFUxd0E3TldCUlhsYVo4?=
+ =?utf-8?B?S0ExT3VUQXBzZ3h3ZUhIWG1tSEVONlBQZk1nYTZXTWYzWmlna0lWc3dUMG9i?=
+ =?utf-8?B?SnkwOWo2TE9tTzRnd1U2Y3NaVjZQTVowVzgrdnlqZkhnbWxTcUpnUnhyWUkw?=
+ =?utf-8?B?SkFSMmkwYmNJallCMnM4eFlodE1BRUs1ejYzWWdUQmJqMEozNktDbDFZNjlN?=
+ =?utf-8?B?cTdXWU90UVYzRU9EYmtCcWdwUkVlajJaZjVudEF4T25Yd0xORFRQb3ltL0Fw?=
+ =?utf-8?B?OWo5c1JZbWlFSUtsL1FOengzaDlTL1Z6RXdnTnZLU3VjbDVxWVRpV3NFeVp1?=
+ =?utf-8?B?Y0I3ejYxbjFtUUVVOFdINFBDWHJ4dFMwU1hJVGlaVWF2WjVreEJWUUdxOHRJ?=
+ =?utf-8?B?dUlOTGhDNzQ0cCtMNC9mdXJwcGRETW9oTEx4dk1HREc1cVFhVCs0ZDhadVR3?=
+ =?utf-8?B?cm5ORXFWYzVOZXZxM09QOW5ORGVQeHZPa1JKL3lOZFk4RTlIeVZTZlZJSEl4?=
+ =?utf-8?B?YytxdmNoeDNmVHhQZS8xZFNPd0p0eEZaNFNFRGlONmtXaXVSbXNYbmw4NXls?=
+ =?utf-8?B?QzNSdU5vUnFHN3lYVU56V0k3cmZsTE42ZW00akxrajFaQm9udElRdEhvT0hB?=
+ =?utf-8?B?amJ4VDhBbXdSTzNZeWR1VjFCQllMbXBSNHV6RW0yWXRDWmRSS1Y4cE5xTzlr?=
+ =?utf-8?B?YUJpblFkaUYram44K0Y0QnFkUGJ3TkdlUk9Ca01qVWVsRXU1d1Q0c0ZocE9E?=
+ =?utf-8?B?eFhLTmZ0eXROSHRxelc2clpRYTgram51VE9Iai9lOXRTWGVTblBWNXEvcEpp?=
+ =?utf-8?B?K3FveU9uazZNREh5M2VIVWp3UVE2VU9mWmFUT2pXKzFuVVhWTGEwUUdKRVpT?=
+ =?utf-8?B?UzhyWGNLeUJSbXFKTUwyTG91dFcyTUNxb3c3QlNISThtMG9JbVBjSkZFREJO?=
+ =?utf-8?B?SzY2U1VIQ1NtbkhEYjF6U1dudmV5aExqeE5CUmc5Qk13L01PelhyRUd5WGN2?=
+ =?utf-8?B?cFgva0Z5ZXFjRXB1T0dneFZqbVY3blBiUjdMbnREN3hYNFM3bjBsMnFKTXlx?=
+ =?utf-8?B?ZzNSYStKamN1am45aVVlYy8wL0puTjJkZ05lMjUrWDYyRUt5Y3JURGxIWHZ2?=
+ =?utf-8?B?b1JuSEcxNFlkajlUb0FZMnEyUk9KRk54U0U0UmIwM0JRbEJyQmdNc0tVOGhD?=
+ =?utf-8?Q?tQWMbSaebG0D7n0gc8qd7kHrGMJ2a0e4AcNF8?=
+X-MS-Exchange-CrossTenant-Network-Message-Id: 3a0ff719-f41a-4621-b3f2-08dea223425c
 X-MS-Exchange-CrossTenant-AuthSource: DBBPR04MB7737.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Apr 2026 17:52:55.6666 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Apr 2026 17:02:25.6005 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: vqW8OYyp87GQn54QYW+Fb20SmiO5FZKzsQ8JqTv/PDOOyB/MZHk/ghBpO/ax1toYdNLfDSX4Dk1Ww01K5xhbTFYFfgz9FJaXALUu0QqzdyI=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI0PR04MB10493
+X-MS-Exchange-CrossTenant-UserPrincipalName: 0DgYp7XWxFGKKyU609MU4P0cUIxGq30W+PW/l9/a9Qjq+6l1xG9sMZC6PxWGjbUd9sQfT4/Umbi3qNYZ/Yrf0ptG63CtNnQGA67o3Gzudng=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXPR04MB8960
 X-OriginatorOrg: cherry.de
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -164,72 +177,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 4/24/26 7:50 PM, Quentin Schulz wrote:
-> Hi Simon,
-> 
-> On 4/22/26 1:11 AM, Simon Glass wrote:
->> The Sphinx-generated bintools.rst currently produces an empty section
->> for this bintool, since its class docstring is only a single line and
->> so the body under the heading is blank.
+On 4/20/26 8:11 PM, Tom Rini wrote:
+> On Fri, Apr 17, 2026 at 05:39:44PM +0530, Aswin Murugan wrote:
+>> This series adds dynamic device tree selection from FIT images for
+>> Qualcomm Snapdragon platforms, enabling U-Boot to select the
+>> appropriate DTB based on hardware parameters detected from SMEM.
 >>
->> Extend the docstring with a short description of what softhsm2-util
->> does and how binman uses it, so the generated documentation has useful
->> content.
+>> Qualcomm fit based DTB format is documented in [1]
+>> The fit image contains only DTB, while the kernel will be part of UKI image.
 >>
-> 
-> Welllllllll... Binman currently doesn't use it for anything but checking 
-> if the tool is installed on the system and if not downloads it. I've 
-> basically abused this to check that softhsm2-util is available on the 
-> system, but I'm not using the bintool to run commands.
-> 
-> I'm now wondering why, because I guess we could replace 
-> tools.run('softhsm2-util', args) with softhsm2_util.run(args)...
-> 
-> And the same for pkcs11-tool I guess?
-> 
->> Suggested-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
->> Signed-off-by: Simon Glass <sjg@chromium.org>
->> ---
+>> The implementation consists of three parts:
 >>
->>   tools/binman/btool/softhsm2_util.py | 11 ++++++++++-
->>   1 file changed, 10 insertions(+), 1 deletion(-)
+>> 1. SMEM cache infrastructure: Provides cached access to commonly
+>>     used SMEM data (socinfo, RAM partitions) to avoid redundant
+>>     lookups during boot. Includes socinfo header from Linux kernel
+>>     for SoC identification.
 >>
->> diff --git a/tools/binman/btool/softhsm2_util.py b/tools/binman/btool/ 
->> softhsm2_util.py
->> index 869221d841d..e79584da11d 100644
->> --- a/tools/binman/btool/softhsm2_util.py
->> +++ b/tools/binman/btool/softhsm2_util.py
->> @@ -7,7 +7,16 @@ from binman import bintool
->>   class Bintoolsofthsm2_util(bintool.Bintool):
->> -    """SoftHSMv2 -- support tool for libsofthsm2"""
->> +    """SoftHSMv2 -- support tool for libsofthsm2
->> +
->> +    This bintool supports running `softhsm2-util`, the command-line 
->> utility
->> +    shipped with SoftHSMv2 (a software implementation of a PKCS#11 
->> token).
->> +    Binman uses it to initialise a token so that keys can be imported 
->> and used
->> +    to sign FIT images or capsules via the PKCS#11 interface, without 
->> requiring
->> +    real hardware.
->> +
+>> 2. FIT multi-DTB selection: Implements the core selection logic
+>>     that reads hardware parameters from SMEM, parses metadata DTB,
+>>     matches FIT configurations, and loads the selected DTB with
+>>     overlays. Integrates with EFI boot flow by setting fdt_addr.
+>>
+>> 3. mkimage: add fatfs image type for FAT partition images
+>>     Added fatimage.c handler that uses mkfs.vfat and mcopy to create
+>>     FAT images from a directory.
 > 
-> Yeah I don't know, this is all transparent to binman really. You 
-> configure the FIT via DT to use pkcs11 and binman will simply call 
-> mkimage with that which in turn will call openssl which in turn will 
-> call softhsm2 engine (see tools/binman/test/fit/openssl.conf). So it can 
-> be used for anything, and binman really doesn't care about this bintool 
-> except for its own unit tests signing FIT images with a pkcs11 engine.
-> 
-> I would remove the last sentence. Maybe we should tell the user to use 
-> this bintool only to check whether the package is installed but that the 
-> actual signature/token setup is expected to be done outside of binman?
+> I'm unsure why part 3 here is appropriate for U-Boot. It's wrapping
+> existing tooling to create a fat image?
 > 
 
-and I didn't read the other two patches before sending the previous 
-mail, but it applies to those two other bintools as well.
+I concur. Aswin, you need to justify with a usecase because I don't see 
+a benefit for generating a fat image from mkimage for now. Why do you 
+even need a filesystem for just the fitimage? Why not flash the fitimage 
+directly on the partition?
 
-> Cheers,
-> Quentin
-
+Cheers,
+Quentin
