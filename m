@@ -4,105 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5AC4AFF8860
-	for <u-boot@archiver.kernel.org>; Sat, 25 Apr 2026 16:57:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C18DFF885C
+	for <u-boot@archiver.kernel.org>; Sat, 25 Apr 2026 16:57:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 44B5E843C5;
+	by phobos.denx.de (Postfix) with ESMTP id 83E1D843E3;
 	Sat, 25 Apr 2026 18:55:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="MprzVbNS";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="MOg4Lso1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AA00A84105; Sat, 25 Apr 2026 18:45:55 +0200 (CEST)
-Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
- [IPv6:2607:f8b0:4864:20::32c])
+ id CC86684105; Sat, 25 Apr 2026 18:46:24 +0200 (CEST)
+Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
+ [IPv6:2a00:1450:4864:20::530])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7639883FF5
- for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 18:45:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D51C683FF5
+ for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 18:46:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=micbis.openwrt@gmail.com
-Received: by mail-ot1-x32c.google.com with SMTP id
- 46e09a7af769-7dcd8ef572aso2906610a34.1
- for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 09:45:53 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1777135552; cv=none;
- d=google.com; s=arc-20240605;
- b=PNlaNcE/LF8tdoAB2sAe3mj3gR/H/lVKGpaLXpl89CjTSCqRY4SMF2zmqnyTic02jp
- sw1LBQLSqWfQoevyxHMJWJ6VtQf2OhZ5e/T1dFpUTDPrKqgn8spnQ64T7hgoYEmTTsJE
- RMETRzfcAnjbjWuLbkbafYHwYIded9u/8+WiujHVA+aEK9AYlro2ABoKxBU0v/dRibLX
- K/li0LuCYlDr+C1kk/d4AWdcrOB4baSNK2GEFFNh5i/PVnhDjslrvDtdPCNKTUUwi3N0
- Yc5axbLDmKs2RxbIZ6WC3t9lVjBTsWQl6FBx6yBP/xVfUU9Pdl7713yuVOfpc+D9GmEc
- GFPg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=tAPfanhmVCl70f7M6wdAB9llVjfhaMp/GoJI5gGU8LQ=;
- fh=aaODkfIO4AEHi5TFUT6oBY/pY3tp8NU+UtOkxWE2xbY=;
- b=g7vFy35GrKNe85nM/iihgToK5goulZ7jQY+If97f2Fl7ZrsISKEYqx3zA3Z8ERDKuV
- OUQLgxyLbMDP7kVaQy8oVSX7szZg1xwAJCos3VAsxHr0n5DydA8cpIolMAmiPDzO6trb
- t7EDfrq4lSxekfHXUoT8bSFuA/ZPrnTrdRiVQFjYi8wTqmWG5olwKQOyIJBTETRvzIQB
- cw7dcJtpe3F+tgUGxGBsNq+px2ij0JdCzCguMq429XERoarhQdxftE/TiCSKow/Sqll6
- GwgZ4Fatss2eMdRy6DOvCEFhz3ADHnHT230VqYyl2zHvplYx2pYF+YM8sHXebvIajBX8
- bPpQ==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+Received: by mail-ed1-x530.google.com with SMTP id
+ 4fb4d7f45d1cf-6729c6f0ca7so10586543a12.0
+ for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 09:46:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1777135552; x=1777740352; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=tAPfanhmVCl70f7M6wdAB9llVjfhaMp/GoJI5gGU8LQ=;
- b=MprzVbNS1/QcyhFOaSL5QwYpn+FqLPUW6ol/WeUBGEUW1TbktlZJ/ucADVnVdsKLzq
- eMjyPCD/ipY1kFJEQIaEeN/iLsIimSavs4WJXrTUXUdj+4kyoN/6r93oemlINpN32Hj2
- uM/Ze038OGbRFMj+Hkj2j1FRFXDuoGCSxVmeqNVZ7Z0mdj2hoQP84V8P6Mr9a9lwCfsM
- xEML6p5b7j3FWpQkEJ8mJiaQZbgI7C45Zy5Al1uBiuTxusPTRqwsC5xcAWBZHwMZg2Re
- 3Vp/1tpemq38o/G14L2in5GizQ6ZbHED3Qy+iPQlAO7Jn8YqXZ9rsLkKKipqRrH6ALbf
- Ddbg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777135552; x=1777740352;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=gmail.com; s=20251104; t=1777135582; x=1777740382; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=tAPfanhmVCl70f7M6wdAB9llVjfhaMp/GoJI5gGU8LQ=;
- b=JIZ/PtJviBp4eelGEG+TF29QIVbJO0jZrZStzeYIUScjcC8wS4ytrBH3OOjf37oXb5
- EJzmOxIpISBRq+u7X/JfnVAKQoStMSdAxdcHrK5tnJ+UF/QmaxhUV46+gh+HuhvlJ76b
- K6ZPYFrR0eYUmWyfZhXHvn0pHhCWi7QgnyMgt1dMc8Ge7PywMtM0K+OY2PcRxmaYzNXY
- Va4cAP6ZF1NKkP/67moGBMxK4Xlh5LFZspK+JIv8Lqupu/vDbP2s01ynSNPuHvr7zBXt
- UOYUtKeMuCBt9gtWoWDF2jz9U50zM+H6yMRhSpRPB2PdoR1HbXymCmvoxqSDviHt0Een
- 5cTw==
+ bh=xUe2stPyjsAPPulSulQOXixF15m5m+LFwVhBMoJRTYk=;
+ b=MOg4Lso13MufdlyBr7uLmNJyZlRZNMzFgADZpQhu35C0LxNUF7hnV8S11WC4jTrfip
+ VcfQ+IY/uBhSHPrzlEaHECAtCJ0qTNMlPWb0ONUsyeuJ1exdFMJn5Rtncb1GdzyC/dC1
+ A2KOpjgFFA0JsQpu3apCsHXvj3WxVSGK+Rnn502pjQUhPOiaBYw+ilozD0ezs129+g8A
+ HVWXiPyoncygaFUiu5EBb0h4b1IrWfFk+4rZWPVEbRblICHETzQIxdh4XEr9hOPg6KTW
+ xVB8uCTEOH+TUvAIX/g9vCeN/OWbioJxNon5519OmcHEvYFTeZqkThK73v/2rGpgSfMq
+ 40wg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1777135582; x=1777740382;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=xUe2stPyjsAPPulSulQOXixF15m5m+LFwVhBMoJRTYk=;
+ b=gQn0ghLMREqh1tACT6qwF/YnrDhiqXHajpJJOJGs66tNzEE2QEY7F7Trncwy5u8NBd
+ 2Q9ZSp85fAy0hQRrGvFrhlWc1XGq1eokjA0eXiM2p7FV53Y7X3MzQtqknEKc1T0u8YkX
+ YjTjacuOIqu8bXMw7V5hk508XX80twVPikiiKAg3Bu4li4JLiLC/5kJ3L0oHTKUnmbpE
+ yNDBNLRokxGZl/tckqJSIFSw4mJZ3B6KoKoa9mRIWY93/YSK9MM5//15pdS34ppp7K3S
+ 3TkzbBoLxeugnE41GGlivDl/NoIPTPnRX3eU46+a0gBpjUyUEvH6kfFEGOd88v+Fi16P
+ JQ4Q==
 X-Forwarded-Encrypted: i=1;
- AFNElJ/YKmH9T0jEgHPVhCpc4CXCwiZCQizg0hEPQ/VJ1rkTOzE6O1iNHjJLpxV6MaSKOvznjmaegGs=@lists.denx.de
-X-Gm-Message-State: AOJu0YxHzIN4WxCzvMMsU1y96jB7xt6z8hmIi0OoujfFZWtCy5TnjjYh
- 9f5lj8N514vEiq8XXqalHzogLVjNmc8XTXNEKxRt/cwbXEDXH33TyCwknoLxb1TRzCV+8MGQC6f
- 2ZJZDDdDPhrnY/Js6lS1tdMxCnWLTsput6g==
-X-Gm-Gg: AeBDiesUfURuesVBJ6Of+kQM++JqQRCRfBcLFXJVS8bUtDRZIeiIta41Wz/XEF5uIqw
- r68kV0PiVr7Dyua7o2tChURKdjU4U+c+eb4txxEPs0YnbswqUfAq88VSte7LFL8dVPihYLW6cjC
- +ORV1QCe4YXscEJWyXFZFvDtweMsqDdvM82zk3/hN2OGu1JnLIfen2RajSbs4U2S6IIQRN8OJ5n
- EcpS99CyiTTYJHAA+dOEXzGA+iXEVqflyD5VrMG9/XJxvqm/lgAAF8ltC43cfhnHZQmCYtsR9Zm
- CbncCo0ypHxOg9xkwAg=
-X-Received: by 2002:a05:6820:290c:b0:694:979e:333d with SMTP id
- 006d021491bc7-694979e352dmr5771424eaf.37.1776931511852; Thu, 23 Apr 2026
- 01:05:11 -0700 (PDT)
-MIME-Version: 1.0
-References: <20260422165938.35925-1-micbis.openwrt@gmail.com>
- <20260422165938.35925-2-micbis.openwrt@gmail.com>
- <edd83758-4f28-425c-b828-fb1e7a885d4d@mailbox.org>
-In-Reply-To: <edd83758-4f28-425c-b828-fb1e7a885d4d@mailbox.org>
+ AFNElJ95PgI+BI6iQa20me2h0NbnHxOItTn27MAlcfx1ECDrYmcluf5N13ZqNj/49+GVu2vt0HQfudk=@lists.denx.de
+X-Gm-Message-State: AOJu0YzNze4wDQqp8mQIIdtF7E+RklAwkt2Hz0a+dkYixWqxBSyjibaI
+ 2TIjOurCFKHs9JgmYQMR0OEBvHLw3xEaCo7/JnEfLckLDlUcY4/L+3IjuIdG7w==
+X-Gm-Gg: AeBDietpw8gmS3BIly0GdqFPviBUhN6SdH+O8t2cn3cdi6WzCPdJtXV/4RITk6VvLu2
+ pwuWwrH9CnF6lgOJ7QMK0N9ETaY0PSU3tf7n2xODRJMa3ax5PF+OdCkO3REdI9JqXs55PyVZfc0
+ ER4CJeC0C6CUT/llUWIVmYADybrUs3/RJNJ4MoxImFtp0OzJP4eaeJHcC5cdYEbILe/lDycJ0Sx
+ m2N5nPsKHwOhjudG2/rPG0VNmb0rgez7gojqa8f4Ir8w9EMA3t61y28MuomdDwlhecqGOnMwsgE
+ Mm4im2DL/m2ptwUK4jhB5IoG/20l6ZDPQaWPso+RoDpJieRbvE7HJdMoTj0xk60kZCvtizVXGlZ
+ zr0efdvcwyOQMwjL8RKsGn5PxjdNXs7W/JWXzFN3mr21GzutWEQlrWCtFE2/Pa2FWtt44NUGJyC
+ 2EdWJbB7TwjbnjZt3tebd44A+pkXIaUlbZ3fPD0ArmSvu70cVZFyo=
+X-Received: by 2002:a05:600c:621b:b0:487:5c0:671f with SMTP id
+ 5b1f17b1804b1-488fb742e74mr498815105e9.9.1777046647088; 
+ Fri, 24 Apr 2026 09:04:07 -0700 (PDT)
+Received: from localhost.localdomain ([151.70.144.55])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-488fc10777csm678783845e9.8.2026.04.24.09.04.05
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 24 Apr 2026 09:04:06 -0700 (PDT)
 From: Michele Bisogno <micbis.openwrt@gmail.com>
-Date: Thu, 23 Apr 2026 10:05:00 +0200
-X-Gm-Features: AQROBzDKKPOSmFuBhFNiJm6_z9BkimRGucysZ6kpDYPIJM2uqyh4c4hUuDymshw
-Message-ID: <CAP8xZ6n2ibGnmAacHB0t6pjhAYuyYL9kRfPGayCDneLM3rLQVQ@mail.gmail.com>
-Subject: Re: [PATCH v4 1/3] usb: gadget: rcar: Fix gadget registration
- lifecycle in remove
-To: Marek Vasut <marek.vasut@mailbox.org>
-Cc: Lukasz Majewski <lukma@denx.de>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>, 
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Tom Rini <trini@konsulko.com>,
- u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+To: Marek Vasut <marex@denx.de>, Lukasz Majewski <lukma@denx.de>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>
+Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de, Michele Bisogno <micbis.openwrt@gmail.com>
+Subject: [PATCH v6 2/3] usb: gadget: rcar: Add support for reset controller
+Date: Fri, 24 Apr 2026 18:03:15 +0200
+Message-Id: <20260424160316.157380-3-micbis.openwrt@gmail.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20260424160316.157380-1-micbis.openwrt@gmail.com>
+References: <20260424160316.157380-1-micbis.openwrt@gmail.com>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Sat, 25 Apr 2026 18:55:44 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -120,35 +102,135 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 23 Apr 2026 at 05:02, Marek Vasut <marek.vasut@mailbox.org> wrote:
->
-> On 4/22/26 6:59 PM, Michele Bisogno wrote:
-> > The driver currently fails to unregister the USB gadget when the
-> > device is removed or the driver is unbound. This leads to dangling
-> > pointers in the UDC core and potential memory corruption.
-> >
-> > Add a call to usb_del_gadget_udc() in the remove path to ensure
-> > a clean teardown of the gadget interface.
-> >
-> > Signed-off-by: Michele Bisogno <micbis.openwrt@gmail.com>
-> > ---
-> >   drivers/usb/gadget/rcar/common.c | 4 ++++
-> >   1 file changed, 4 insertions(+)
-> >
-> > diff --git a/drivers/usb/gadget/rcar/common.c b/drivers/usb/gadget/rcar/common.c
-> > index 2ba022a3f2c..f7b34f0485f 100644
-> > --- a/drivers/usb/gadget/rcar/common.c
-> > +++ b/drivers/usb/gadget/rcar/common.c
-> > @@ -447,8 +447,12 @@ err_clk:
-> >   static int usbhs_udc_otg_remove(struct udevice *dev)
-> >   {
-> >       struct usbhs_priv_otg_data *priv = dev_get_priv(dev);
-> > +     struct usb_gadget *gadget;
-> >
-> >       usbhs_rcar3_power_ctrl(&priv->usbhs_priv, false);
-> > +     gadget = usbhsg_get_gadget(&priv->usbhs_priv);
->
-> One more nitpick, usbhsg_get_gadget() can never return NULL, so this
-> test for NULL is unnecessary, please drop it.
+Some Renesas SoCs, such as the RZ/G2L, require the USBHS core to
+be explicitly deasserted from reset before register access is
+possible.
 
-OK.
+Update the OTG probe to handle a bulk reset controller. To maintain
+hardware stability, the reset is deasserted after clocks are
+enabled in probe(), and asserted before clocks are disabled
+in remove().
+
+Update the error paths in probe to ensures clocks are disabled
+if the reset initialization fails.
+
+Signed-off-by: Michele Bisogno <micbis.openwrt@gmail.com>
+---
+ drivers/usb/gadget/rcar/common.c | 42 ++++++++++++++++++++++++++------
+ 1 file changed, 34 insertions(+), 8 deletions(-)
+
+diff --git a/drivers/usb/gadget/rcar/common.c b/drivers/usb/gadget/rcar/common.c
+index d40d6736a54..2bf0dcff393 100644
+--- a/drivers/usb/gadget/rcar/common.c
++++ b/drivers/usb/gadget/rcar/common.c
+@@ -15,6 +15,7 @@
+ #include <linux/err.h>
+ #include <linux/usb/ch9.h>
+ #include <linux/usb/gadget.h>
++#include <reset.h>
+ #include <usb.h>
+ 
+ #include "common.h"
+@@ -290,6 +291,9 @@ struct usbhs_priv_otg_data {
+ 	void __iomem		*base;
+ 	void __iomem		*phybase;
+ 
++	struct clk_bulk clk_bulk;
++	struct reset_ctl_bulk reset_bulk;
++
+ 	struct platform_device	usbhs_dev;
+ 	struct usbhs_priv	usbhs_priv;
+ 
+@@ -355,8 +359,10 @@ static int usbhs_udc_otg_gadget_handle_interrupts(struct udevice *dev)
+ 	return 0;
+ }
+ 
+-static int usbhs_probe(struct usbhs_priv *priv)
++static int usbhs_probe(struct udevice *dev)
+ {
++	struct usbhs_priv_otg_data *otg_priv = dev_get_priv(dev);
++	struct usbhs_priv *priv = &otg_priv->usbhs_priv;
+ 	int ret;
+ 
+ 	priv->dparam.type = USBHS_TYPE_RCAR_GEN3;
+@@ -396,34 +402,41 @@ static int usbhs_udc_otg_probe(struct udevice *dev)
+ {
+ 	struct usbhs_priv_otg_data *priv = dev_get_priv(dev);
+ 	struct usb_gadget *gadget;
+-	struct clk_bulk clk_bulk;
+ 	int ret = -EINVAL;
+ 
+ 	priv->base = dev_read_addr_ptr(dev);
+ 	if (!priv->base)
+ 		return -EINVAL;
+ 
+-	ret = clk_get_bulk(dev, &clk_bulk);
++	ret = clk_get_bulk(dev, &priv->clk_bulk);
+ 	if (ret)
+ 		return ret;
+ 
+-	ret = clk_enable_bulk(&clk_bulk);
++	ret = clk_enable_bulk(&priv->clk_bulk);
+ 	if (ret)
+-		return ret;
++		goto err_clk_enable;
++
++	ret = reset_get_bulk(dev, &priv->reset_bulk);
++	if (ret)
++		goto err_clk;
++
++	ret = reset_deassert_bulk(&priv->reset_bulk);
++	if (ret)
++		goto err_reset_deassert;
+ 
+ 	clrsetbits_le32(priv->base + UGCTRL2, UGCTRL2_USB0SEL_MASK, UGCTRL2_USB0SEL_EHCI);
+ 	clrsetbits_le16(priv->base + LPSTS, LPSTS_SUSPM, LPSTS_SUSPM);
+ 
+ 	ret = generic_setup_phy(dev, &priv->phy, 0, PHY_MODE_USB_OTG, 1);
+ 	if (ret)
+-		goto err_clk;
++		goto err_reset;
+ 
+ 	priv->phybase = dev_read_addr_ptr(priv->phy.dev);
+ 
+ 	priv->usbhs_priv.pdev = &priv->usbhs_dev;
+ 	priv->usbhs_priv.base = priv->base;
+ 	priv->usbhs_dev.dev.driver_data = &priv->usbhs_priv;
+-	ret = usbhs_probe(&priv->usbhs_priv);
++	ret = usbhs_probe(dev);
+ 	if (ret < 0)
+ 		goto err_phy;
+ 
+@@ -439,8 +452,15 @@ static int usbhs_udc_otg_probe(struct udevice *dev)
+ 
+ err_phy:
+ 	generic_shutdown_phy(&priv->phy);
++err_reset:
++	reset_assert_bulk(&priv->reset_bulk);
++err_reset_deassert:
++	reset_release_bulk(&priv->reset_bulk);
+ err_clk:
+-	clk_disable_bulk(&clk_bulk);
++	clk_disable_bulk(&priv->clk_bulk);
++err_clk_enable:
++	clk_release_bulk(&priv->clk_bulk);
++
+ 	return ret;
+ }
+ 
+@@ -458,6 +478,12 @@ static int usbhs_udc_otg_remove(struct udevice *dev)
+ 
+ 	generic_shutdown_phy(&priv->phy);
+ 
++	reset_assert_bulk(&priv->reset_bulk);
++	reset_release_bulk(&priv->reset_bulk);
++
++	clk_disable_bulk(&priv->clk_bulk);
++	clk_release_bulk(&priv->clk_bulk);
++
+ 	return dm_scan_fdt_dev(dev);
+ }
+ 
+-- 
+2.34.1
+
