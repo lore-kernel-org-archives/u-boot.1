@@ -4,47 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54613FF885C
-	for <u-boot@archiver.kernel.org>; Sat, 25 Apr 2026 17:10:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF660FF8860
+	for <u-boot@archiver.kernel.org>; Sat, 25 Apr 2026 17:10:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 17233842FC;
+	by phobos.denx.de (Postfix) with ESMTP id 5EA05843E3;
 	Sat, 25 Apr 2026 19:10:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=dolcini.it
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=dolcini.it header.i=@dolcini.it header.b="UAF56CgH";
+	dkim=pass (2048-bit key; unprotected) header.d=dolcini.it header.i=@dolcini.it header.b="zAPkFx2t";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D723C843E3; Sat, 25 Apr 2026 19:10:17 +0200 (CEST)
-Received: from mail11.truemail.it (mail11.truemail.it [IPv6:2001:4b7e:0:8::81])
+ id 38A84843E3; Sat, 25 Apr 2026 19:10:18 +0200 (CEST)
+Received: from mail11.truemail.it (mail11.truemail.it [217.194.8.81])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F344B841F2
+ by phobos.denx.de (Postfix) with ESMTPS id F25BE84178
  for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 19:10:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=dolcini.it
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=francesco@dolcini.it
 Received: from francesco-nb.. (93-49-2-63.ip317.fastwebnet.it [93.49.2.63])
- by mail11.truemail.it (Postfix) with ESMTPA id 397E9207A2;
- Fri, 24 Apr 2026 12:42:20 +0200 (CEST)
+ by mail11.truemail.it (Postfix) with ESMTPA id 4C3E820A93;
+ Fri, 24 Apr 2026 12:42:21 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dolcini.it;
- s=default; t=1777027340;
- bh=Nw5zymD/5ImHgiNS9dyk12ggfLPo5WQfyy2fNjJis64=; h=From:To:Subject;
- b=UAF56CgHYIEMzCk/SYfVKbZqW+Th2YYZQR7fOSqToJk/uBLLZpLBuaJYgVCtKWILw
- osQCiusjqxrSpZ+cf49Zs2lEzW/WyNQTG3OJ+CbPPxAjn1q8pTslK+cJZDJy0+OOWS
- +rEK09aa8Ti9UaBwLYTWkehNLStoMRCxFlM7KzUvmnvcHG9K6Fs/qe5l3gRTB+SDVj
- 9OmvIKvSzktdDGaI2WJCYvuKSOcJfY7jzfWUuBJHvI2ykH0EggJtVY0s71sF83NYeR
- SJSTml4AXmMvwLyzcjIQx29uOCeTmZZas6QbMtWRzBLOruNaxxJsF+Cgkurl9ptAoV
- MHglGn4DJEDDQ==
+ s=default; t=1777027341;
+ bh=f60sOsqS/TJsoK7gldV1Zu8hBmLzKhp08x7CH2MYsOo=; h=From:To:Subject;
+ b=zAPkFx2t8DbY/CEbhWjJHR/WzofuIMH3i8x9EHx4mfO4th5Oyiuz1f0pxqw7735Mp
+ RWphNB83iADNDspjiaYVPjUd2zsL/qE5y77NQ0aegn7aGfheg73Fil2gj+lcOGDWii
+ vafrlX4kt3iucjqp3fIpz73q70ScVNYY7C0ZCvhNJeZOTl0eYPKyJGAz9HnfTQkaXb
+ +g0EkeJpJc5x7bLz78ZnmUuM4M7+UzHc7kpIcTnrG+sZ3bzS/KtEnPcyto0ftBTeDF
+ RBWMdaxzjO7WqRtzh/CySzZfPpgv6vfCyY7eCz7SIVtGyuX3T17QY0m7o6hLxUtEoB
+ zSuciM/wEYiWg==
 From: Francesco Dolcini <francesco@dolcini.it>
 To: Francesco Dolcini <francesco.dolcini@toradex.com>,
  Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de
-Subject: [PATCH v1 00/10] configs: toradex: Enable EFI
-Date: Fri, 24 Apr 2026 12:42:02 +0200
-Message-ID: <20260424104213.303752-1-francesco@dolcini.it>
+Subject: [PATCH v1 03/10] configs: colibri-imx8x: Enable EFI
+Date: Fri, 24 Apr 2026 12:42:05 +0200
+Message-ID: <20260424104213.303752-4-francesco@dolcini.it>
 X-Mailer: git-send-email 2.47.3
+In-Reply-To: <20260424104213.303752-1-francesco@dolcini.it>
+References: <20260424104213.303752-1-francesco@dolcini.it>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -65,39 +67,45 @@ X-Virus-Status: Clean
 
 From: Francesco Dolcini <francesco.dolcini@toradex.com>
 
-Enable standard EFI support for all the arm64 Toradex boards, as required
-for booting standard aarch64 Linux distribution, following the ARM
-recommendations for SystemReady compliance [1].
+Enable standard EFI support, as required for booting standard aarch64
+Linux distribution, following the ARM recommendations for SystemReady
+compliance [1].
 
-The RTC used on these boards is not currently supported by U-Boot,
+The RTC used on this board is not currently supported by U-Boot,
 therefore it is not enabled at the moment.
 
 Link: https://developer.arm.com/documentation/DUI1101/4-5/Configure-U-Boot-for-SystemReady [1]
+Signed-off-by: Francesco Dolcini <francesco.dolcini@toradex.com>
+---
+ configs/colibri-imx8x_defconfig | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-Francesco Dolcini (10):
-  configs: apalis-imx8: Enable EFI
-  configs: aquila-am69: Enable EFI related options
-  configs: colibri-imx8x: Enable EFI
-  configs: toradex-smarc-imx8mp: Enable EFI related options
-  configs: toradex-smarc-imx95: Enable EFI related options
-  configs: verdin-am62: Enable EFI related options
-  configs: verdin-am62p: Enable EFI related options
-  configs: verdin-imx8mm: Enable EFI related options
-  configs: verdin-imx8mp: Enable EFI related options
-  configs: verdin-imx95: Enable EFI related options
-
- configs/apalis-imx8_defconfig          | 3 ++-
- configs/aquila-am69_a72_defconfig      | 2 +-
- configs/colibri-imx8x_defconfig        | 3 ++-
- configs/toradex-smarc-imx8mp_defconfig | 3 ++-
- configs/toradex-smarc-imx95_defconfig  | 2 ++
- configs/verdin-am62_a53_defconfig      | 3 ++-
- configs/verdin-am62p_a53_defconfig     | 3 ++-
- configs/verdin-imx8mm_defconfig        | 3 ++-
- configs/verdin-imx8mp_defconfig        | 3 ++-
- configs/verdin-imx95_defconfig         | 2 ++
- 10 files changed, 19 insertions(+), 8 deletions(-)
-
+diff --git a/configs/colibri-imx8x_defconfig b/configs/colibri-imx8x_defconfig
+index fd6a6b47fcfc..abca8a96d630 100644
+--- a/configs/colibri-imx8x_defconfig
++++ b/configs/colibri-imx8x_defconfig
+@@ -19,7 +19,6 @@ CONFIG_IMX_BOOTAUX=y
+ CONFIG_SYS_MEMTEST_START=0x88000000
+ CONFIG_SYS_MEMTEST_END=0x89000000
+ CONFIG_REMAKE_ELF=y
+-# CONFIG_EFI_LOADER is not set
+ CONFIG_FIT=y
+ CONFIG_FIT_VERBOSE=y
+ CONFIG_DISTRO_DEFAULTS=y
+@@ -36,11 +35,13 @@ CONFIG_BOARD_EARLY_INIT_F=y
+ CONFIG_SYS_PROMPT="Colibri iMX8X # "
+ CONFIG_CMD_CPU=y
+ CONFIG_CMD_ASKENV=y
++CONFIG_CMD_NVEDIT_EFI=y
+ CONFIG_CMD_MEMTEST=y
+ CONFIG_CMD_CLK=y
+ CONFIG_CMD_DM=y
+ CONFIG_CMD_FUSE=y
+ CONFIG_CMD_GPIO=y
++CONFIG_CMD_GPT=y
+ CONFIG_CMD_I2C=y
+ CONFIG_CMD_MMC=y
+ CONFIG_CMD_CACHE=y
 -- 
 2.47.3
 
