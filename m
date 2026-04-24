@@ -4,97 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36149FF885C
-	for <u-boot@archiver.kernel.org>; Sat, 25 Apr 2026 18:03:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D371FFF8860
+	for <u-boot@archiver.kernel.org>; Sat, 25 Apr 2026 18:03:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6B988843F5;
+	by phobos.denx.de (Postfix) with ESMTP id D4B0284439;
 	Sat, 25 Apr 2026 20:02:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="cYumNRln";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=arm.com header.i=@arm.com header.b="YG+H4q/d";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3E21B842BF; Sat, 25 Apr 2026 19:01:10 +0200 (CEST)
-Received: from mail-dl1-x122a.google.com (mail-dl1-x122a.google.com
- [IPv6:2607:f8b0:4864:20::122a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 89B5480087
- for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 19:01:07 +0200 (CEST)
+ id 039E3843FB; Sat, 25 Apr 2026 19:01:48 +0200 (CEST)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id A2CB2840AB
+ for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 19:01:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=lucienzx159@gmail.com
-Received: by mail-dl1-x122a.google.com with SMTP id
- a92af1059eb24-12c7212836bso6157000c88.0
- for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 10:01:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1777136466; x=1777741266; darn=lists.denx.de;
- h=in-reply-to:from:content-language:references:cc:to:subject
- :user-agent:mime-version:date:message-id:from:to:cc:subject:date
- :message-id:reply-to;
- bh=3zfm/g0LsZvduljyylmsZ/z/boJCMUEoAB9cg1Qeg/w=;
- b=cYumNRln0a1Duu9rCI0354xG27G/GfLkV+tSDncXRkKsdem74OfLpeQU8Sxw/4/Tpw
- bhE3y5HM+pdomBJryieEfLy6L8UXSOOIUmoOeYUqf7V+3Hg8EvD9AXKgyN0cK45ydj1H
- qDOcstNZ6i1Xb9kDRzDRoN3RcJ0pU4jk4GOYQ0xrlJB++lDPG4BfsTkT9deERF4XfnXy
- kzL4zghGXYY00bBfvlrNSC+GG2j86BbRlO+fB0apqY5msimQh+Igtppo5mq1nMGNOALw
- rNkVjLupAEfJcBbPOUJWczG4e+OssizjIyoAAwG0h3hk1OK+D15Ppw90P0Jd4yV8DTXM
- iGWg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777136466; x=1777741266;
- h=in-reply-to:from:content-language:references:cc:to:subject
- :user-agent:mime-version:date:message-id:x-gm-gg:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=3zfm/g0LsZvduljyylmsZ/z/boJCMUEoAB9cg1Qeg/w=;
- b=PBLqP2fuuvnUsKUOA2VulXwqv8voli0i18n2CV8oPqRhSJjDuOJPGHy+ynl5Myg7ao
- TYd0Zs8lqYVf77GvBUTOExK243bT06xTXK4UTt/JFNcFoARJ1ndNBhBA0ZHRnPEBhoni
- LSbkQuznuVbtDXJjI01xBCyGFRlLmWSl8a/351npKviLrXhGzxB7KwNXRbcCe192Vhgx
- Pid7Zha8pu8hhIUOFm4iAu6p5RMncRN48yu1PK4mRKgDKEuGM2gUaWZEH4/afMoKxS0b
- 2jet+zEu4hu+ohoSM5AnHcBEcMvqCqqt/0EjMIrwPkC89PwXW6rVJnDX6BnCFP3i0Ycs
- IP5Q==
-X-Forwarded-Encrypted: i=1;
- AFNElJ9bAyZNBNXtiwWwbvDKRX6XQenfGwSaiWz9hVrbfXM/kuG9rFEC6hp+NuwO3t/ZlKmDxLUqymY=@lists.denx.de
-X-Gm-Message-State: AOJu0YxL4s9VUzpu/kmg2ytpFtT9L6OYge1QnucCLm62+V1Djrpx+Tbx
- dronruFLLXNxVcvTvrxUnRYnsCV4VYs3r3q5QAFLMD8rPbg9nBRqDDw4M8ZYQw==
-X-Gm-Gg: AeBDietBaQafubK4AYMYIunbgMaUXAbmbwOiFOIE09oIqmZa+ZsHR6NLsasnUZhsGFw
- hD8k8C9JjEqhEYZYWs8+jwgRZmY7MTzpxbdZ1HneRwwZ8rR8awj+qdR4zzTKd7HYHQ7JssJsYOV
- PExB0Dvx3dWN+aOZYZ1upMHeA3OPkwP31UMvrN47ujXJIDXDMtrFgLHmS3bfWwveayFpUTaQ8Lp
- NmoAP3UNO8jVbnsPvZnO4sxleIib+bEUn1qXXdgHYEQzHnwURztfBV5u7QBZODa8RdfpvHn2SOA
- KMSPIIzHcynAHrNsiYb9oa3n60Wt+d0fP79OsWa7Gmh4p5xgtdYCM+vWCzPCtr9CaiUzmiQOMFq
- Ae1mkh4rW8vROOrzZiOymKsk8AkGiADYH79KTWEFLeBshbu2TAfHYmjFR3LF1Fzik9dQ6cedRX6
- 6luTYi4TbxwSDFEPK0UtDOUDM9OigfB0MTpZ42DNTEzPF727MY18yCriYP/STzGezddGKJqq4iP
- t70ALwua4Ee/8voGZAzHg==
-X-Received: by 2002:a17:903:4510:b0:2b2:a6a2:c8ca with SMTP id
- d9443c01a7336-2b5f9ed123cmr247232705ad.13.1777049313399; 
- Fri, 24 Apr 2026 09:48:33 -0700 (PDT)
-Received: from [192.168.0.5] (124-218-201-66.cm.dynamic.apol.com.tw.
- [124.218.201.66]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2b5fab40786sm247603515ad.79.2026.04.24.09.48.30
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 24 Apr 2026 09:48:33 -0700 (PDT)
-Message-ID: <c4532203-1827-4740-aaa0-35f086bfe126@gmail.com>
-Date: Sat, 25 Apr 2026 00:48:30 +0800
+ spf=pass smtp.mailfrom=harsimransingh.tungal@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 90F6735AC;
+ Fri, 24 Apr 2026 10:32:50 -0700 (PDT)
+Received: from e132995.arm.com (unknown [10.57.64.144])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id A9D733F7B4;
+ Fri, 24 Apr 2026 10:32:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
+ t=1777051976; bh=7RpMKcsa9jFFBBqt0mirMpE9CEsSslFHO9vkZezUhps=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=YG+H4q/dX0Kt7iGvPU1R3rprUEe7ObjBWNhaiORnAmUTHvaxhYD8o0cIy54J7HK47
+ LeuCF0BgU+Iv3uVrwSyKaQBghvTYj1vaMpHedlyA1MeaRgVwXBkxMlz2HBtV6FhWIS
+ 3ozioKqlD2WI2h9pfMn0Cdy399WjDNFFPzNgKxPM=
+From: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
+To: u-boot@lists.denx.de
+Cc: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ Tom Rini <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Hugues Kamba Mpiana <hugues.kambampiana@arm.com>,
+ Simon Glass <sjg@chromium.org>,
+ Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
+Subject: [PATCH 11/12] doc: bootefi: note two-phase runtime variables selftest
+Date: Fri, 24 Apr 2026 18:31:50 +0100
+Message-Id: <20260424173151.371134-12-harsimransingh.tungal@arm.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20260424173151.371134-1-harsimransingh.tungal@arm.com>
+References: <20260424173151.371134-1-harsimransingh.tungal@arm.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 2/4] net: phy: air_en8811h: use standard
- rx-polarity/tx-polarity properties
-To: Simon Glass <sjg@chromium.org>
-Cc: trini@konsulko.com, jerome.forissier@arm.com, sumit.garg@kernel.org,
- marek.vasut+renesas@mailbox.org, vladimir.oltean@nxp.com,
- ericwouds@gmail.com, kabel@kernel.org, frank-w@public-files.de,
- daniel@makrotopia.org, ansuelsmth@gmail.com, mkorpershoek@kernel.org,
- skylake.huang@mediatek.com, lucien.jheng@airoha.com, u-boot@lists.denx.de
-References: <20260405144944.41074-1-lucienzx159@gmail.com>
- <20260405144944.41074-3-lucienzx159@gmail.com>
- <CAFLszTiL-j=i0AFyoDc8yKFAxoKzdZms6tqiT_ePohYGaGM-RA@mail.gmail.com>
-Content-Language: en-US
-From: "Lucien.Jheng" <lucienzx159@gmail.com>
-In-Reply-To: <CAFLszTiL-j=i0AFyoDc8yKFAxoKzdZms6tqiT_ePohYGaGM-RA@mail.gmail.com>
-X-Mailman-Approved-At: Sat, 25 Apr 2026 20:02:44 +0200
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+X-Mailman-Approved-At: Sat, 25 Apr 2026 20:02:44 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -111,44 +69,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Explain how the runtime variable selftest runs in two phases
 
-Simon Glass 於 2026/4/11 下午 10:37 寫道:
-> Hi Lucien,
->
-> On 2026-04-05T14:49:40, Lucien.Jheng<lucienzx159@gmail.com> wrote:
->> net: phy: air_en8811h: use standard rx-polarity/tx-polarity properties
->>
->> Replace the proprietary airoha,pnswap-rx / airoha,pnswap-tx boolean
->> device tree properties with the standard rx-polarity and tx-polarity
->> properties defined in phy-common-props.yaml.
->>
->> Backward compatibility is maintained by reading the legacy boolean
->> properties first and passing them as the default_pol argument to
->> phy_get_rx/tx_polarity(). If the standard properties are absent the
->> legacy values are used transparently, so existing device trees remain
->> functional without modification.
->>
->> Link:https://git.kernel.org/linus/66d8a334b57e64e43810623b3d88f0ce9745270b
->> Signed-off-by: Lucien.Jheng<lucienzx159@gmail.com>
->>
->> drivers/net/phy/airoha/Kconfig      |  1 +
->>   drivers/net/phy/airoha/air_en8811.c | 58 ++++++++++++++++++++++++++++---------
->>   2 files changed, 45 insertions(+), 14 deletions(-)
->> diff --git a/drivers/net/phy/airoha/air_en8811.c b/drivers/net/phy/airoha/air_en8811.c
->> @@ -1046,6 +1047,47 @@ static int air_leds_init(...)
->> +     ret = phy_get_rx_polarity(node,
->> +                               phy_interface_strings[phydev->interface],
-> Should you use phy_string_for_interface() here instead of directly indexing?
->
->> diff --git a/drivers/net/phy/airoha/air_en8811.c b/drivers/net/phy/airoha/air_en8811.c
->> @@ -1046,6 +1047,47 @@ static int air_leds_init(...)
->> +     ret = phy_get_tx_polarity(node,
->> +                               phy_interface_strings[phydev->interface],
-> Same here.
+Document that the "variables at runtime" selftest runs in two
+phases when CONFIG_EFI_RT_VOLATILE_STORE is not enabled, and
+show how to select it with efi_selftest.
 
-I will use phy_string_for_interface() in the next patch.
+Signed-off-by: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
+---
+ doc/usage/cmd/bootefi.rst | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
 
-Thanks
->
-> Regards,
-> Simon
+diff --git a/doc/usage/cmd/bootefi.rst b/doc/usage/cmd/bootefi.rst
+index 7c5448586b7..91aebf1a4b5 100644
+--- a/doc/usage/cmd/bootefi.rst
++++ b/doc/usage/cmd/bootefi.rst
+@@ -160,6 +160,16 @@ environment variable to match one of the listed identifiers
+ Some of the tests execute the ExitBootServices() UEFI boot service and will not
+ return to the command line but require a board reset.
+ 
++The test *variables at runtime* runs in two phases when
++CONFIG_EFI_RT_VOLATILE_STORE is not enabled. Run it once to create a
++runtime-accessible variable in non-volatile storage, reboot, then run it
++again to validate, append, and delete that variable.
++
++::
++
++    => setenv efi_selftest 'variables at runtime'
++    => bootefi selftest
++
+ Configuration
+ -------------
+ 
+@@ -167,6 +177,8 @@ To use the *bootefi* command you must specify CONFIG_CMD_BOOTEFI=y.
+ The *bootefi bootmgr* sub-command requries CMD_BOOTEFI_BOOTMGR=y.
+ The *bootefi hello* sub-command requries CMD_BOOTEFI_HELLO=y.
+ The *bootefi selftest* sub-command depends on CMD_BOOTEFI_SELFTEST=y.
++The *variables at runtime* selftest runs in two phases when
++CONFIG\_EFI\_RT\_VOLATILE\_STORE is not enabled.
+ 
+ See also
+ --------
+-- 
+2.34.1
+
