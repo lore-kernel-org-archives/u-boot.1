@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84D75FF885C
-	for <u-boot@archiver.kernel.org>; Sat, 25 Apr 2026 18:04:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26E2DFF8860
+	for <u-boot@archiver.kernel.org>; Sat, 25 Apr 2026 18:04:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8E9DE844BD;
+	by phobos.denx.de (Postfix) with ESMTP id D77A0844C1;
 	Sat, 25 Apr 2026 20:02:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=arm.com header.i=@arm.com header.b="htak67co";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=arm.com header.i=@arm.com header.b="oe4R9f/b";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DC72F842FD; Sat, 25 Apr 2026 19:01:51 +0200 (CEST)
+ id E5AD5842BF; Sat, 25 Apr 2026 19:01:51 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id BBCAE843E0
+ by phobos.denx.de (Postfix) with ESMTP id A70C384394
  for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 19:01:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=harsimransingh.tungal@arm.com
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 899D135AD;
- Fri, 24 Apr 2026 10:32:52 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 3D42435A8;
+ Fri, 24 Apr 2026 10:32:45 -0700 (PDT)
 Received: from e132995.arm.com (unknown [10.57.64.144])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 7E5183F7B4;
- Fri, 24 Apr 2026 10:32:56 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 45B413F7B4;
+ Fri, 24 Apr 2026 10:32:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
- t=1777051978; bh=+x5wp1lBslfS6w+D+Ltfg462R3eeWTvGEJtTeAHd7Is=;
+ t=1777051970; bh=0biRjWPtYnfTV7eWpIXIzANLRhwUOI+ST0UERPiKYy4=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=htak67coacowwD4/k6Zl6g35bFsXrIdxeT+dhMlgQosineUhvvfhHJBerss1EsCTW
- DNGGlgj+AVR8rnp4n6g27Hgt29dHU0nWO3JoqF/VmeJ3rCrtRY6Tq5Jb+xj9W3PlKX
- P+kQbv0aJ/WD0/P1UvyXyMRemuhruLWgUakt3pj4=
+ b=oe4R9f/b9hEhA97psgGXHY88d/TmaOmoSDqxWqJ+fe57yFEo3+q6kTrpe17WQpTMM
+ /lgU3MgyHmxVdveXfkb3p+0tQljV5W4hSWPP66vwV9Uijz1HEZDBeJ2uhOnjeO/gjy
+ Gmwxb/MzWgp6oKD6SYJPR/RWduoHNQAD1jlNE8Po=
 From: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
 To: u-boot@lists.denx.de
 Cc: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
@@ -44,10 +44,9 @@ Cc: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
  Hugues Kamba Mpiana <hugues.kambampiana@arm.com>,
  Simon Glass <sjg@chromium.org>,
  Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
-Subject: [PATCH 12/12] efi_loader: align FF-A cache maintenance with runtime
- path
-Date: Fri, 24 Apr 2026 18:31:51 +0100
-Message-Id: <20260424173151.371134-13-harsimransingh.tungal@arm.com>
+Subject: [PATCH 08/12] test: dm: add sandbox FF-A runtime transport tests
+Date: Fri, 24 Apr 2026 18:31:47 +0100
+Message-Id: <20260424173151.371134-9-harsimransingh.tungal@arm.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20260424173151.371134-1-harsimransingh.tungal@arm.com>
 References: <20260424173151.371134-1-harsimransingh.tungal@arm.com>
@@ -70,74 +69,163 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Match boot-time FF-A cache handling to runtime behavior
+Exercise FF-A runtime helpers via sandbox DM tests
 
-The boot-time FF-A MM communication path used invalidate_dcache_all()
-after copying the message into the shared buffer. This differs from the
-runtime path, which performs range-based maintenance to avoid global cache
-operations.
+Add driver-model unit tests that exercise the FF-A runtime helpers on
+sandbox. The new tests reuse the sandbox emulator to validate both the
+positive direct-request flow and failure handling, priming the emulator
+state so the runtime path can be executed.
 
-Update ffa_mm_communicate() to use the same pattern as the runtime helper:
-clean the shared buffer range before the SMC and invalidate the same range
-after the response. This keeps boot-time and runtime behavior consistent
-and avoids whole-cache invalidation.
-
-Signed-off-by: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
 Signed-off-by: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
 ---
- lib/efi_loader/efi_variable_tee.c | 33 ++++++++++++++++++++++++-------
- 1 file changed, 26 insertions(+), 7 deletions(-)
+ arch/sandbox/include/asm/sandbox_arm_ffa.h | 16 ++++-
+ test/dm/Makefile                           |  3 +-
+ test/dm/ffa_runtime.c                      | 82 ++++++++++++++++++++++
+ 3 files changed, 99 insertions(+), 2 deletions(-)
+ create mode 100644 test/dm/ffa_runtime.c
 
-diff --git a/lib/efi_loader/efi_variable_tee.c b/lib/efi_loader/efi_variable_tee.c
-index 30687c21b8e..df509a435b1 100644
---- a/lib/efi_loader/efi_variable_tee.c
-+++ b/lib/efi_loader/efi_variable_tee.c
-@@ -389,19 +389,38 @@ static efi_status_t ffa_mm_communicate(void *comm_buf, ulong comm_buf_size)
- 	memcpy(virt_shared_buf, comm_buf, tx_data_size);
+diff --git a/arch/sandbox/include/asm/sandbox_arm_ffa.h b/arch/sandbox/include/asm/sandbox_arm_ffa.h
+index be2790f4960..a20eb159b73 100644
+--- a/arch/sandbox/include/asm/sandbox_arm_ffa.h
++++ b/arch/sandbox/include/asm/sandbox_arm_ffa.h
+@@ -1,6 +1,6 @@
+ /* SPDX-License-Identifier: GPL-2.0+ */
+ /*
+- * Copyright 2022-2023 Arm Limited and/or its affiliates <open-source-office@arm.com>
++ * Copyright 2022-2023, 2026 Arm Limited and/or its affiliates <open-source-office@arm.com>
+  *
+  * Authors:
+  *   Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
+@@ -26,6 +26,20 @@
+ #define SANDBOX_SP3_ID 0x6452
+ #define SANDBOX_SP4_ID 0x7814
  
- 	/*
--	 * The secure world might have cache disabled for
--	 * the device region used for shared buffer (which is the case for Optee).
--	 * In this case, the secure world reads the data from DRAM.
--	 * Let's flush the cache so the DRAM is updated with the latest data.
-+	 * Shared buffer cache maintenance for FF-A / OP-TEE communication:
-+	 *
-+	 * NS -> S (request path):
-+	 *
-+	 * The non-secure side populates the shared buffer. If the buffer is cached
-+	 * in NS, the updated bytes may reside in dirty D-cache lines and not yet be
-+	 * visible in DDR. Since the secure world typically reads the shared buffer
-+	 * directly from DDR (e.g. with caches disabled / non-coherent mapping), we
-+	 * must clean the corresponding cache lines to the Point of Coherency (PoC)
-+	 * before entering secure world.
-+	 *
-+	 * S -> NS (response path):
-+	 *
-+	 * The secure world may update the same shared buffer in DDR. After returning
-+	 * to non-secure, any cached copies of that region in NS may be stale. We
-+	 * therefore invalidate the shared buffer range after the FF-A call to drop
-+	 * those lines and force subsequent reads to fetch the latest data from DDR.
- 	 */
--#ifdef CONFIG_ARM64
--	invalidate_dcache_all();
--#endif
-+	if (IS_ENABLED(CONFIG_ARM64))
-+		flush_dcache_range((unsigned long)virt_shared_buf,
-+				   (unsigned long)virt_shared_buf +
-+				   CONFIG_FFA_SHARED_MM_BUF_SIZE);
- 
- 	/* Announce there is data in the shared buffer */
- 
- 	ffa_ret = ffa_notify_mm_sp();
- 
-+	if (IS_ENABLED(CONFIG_ARM64))
-+		invalidate_dcache_range((unsigned long)virt_shared_buf,
-+					(unsigned long)virt_shared_buf +
-+					CONFIG_FFA_SHARED_MM_BUF_SIZE);
++/*
++ * The sandbox FF-A emulator uses fixed, synthetic execution-context counts and
++ * property bitfields for each partition.
++ */
++#define SANDBOX_SP1_EXEC_CTXT 0x5687
++#define SANDBOX_SP2_EXEC_CTXT 0x9587
++#define SANDBOX_SP3_EXEC_CTXT 0x7687
++#define SANDBOX_SP4_EXEC_CTXT 0x1487
 +
- 	switch (ffa_ret) {
- 	case 0: {
- 		ulong rx_data_size;
++#define SANDBOX_SP1_PROPERTIES 0x89325621
++#define SANDBOX_SP2_PROPERTIES 0x45325621
++#define SANDBOX_SP3_PROPERTIES 0x23325621
++#define SANDBOX_SP4_PROPERTIES 0x70325621
++
+ /* Invalid service UUID (no matching SP) */
+ #define SANDBOX_SERVICE3_UUID	"55d532ed-0942-e699-722d-c09ca798d9cd"
+ 
+diff --git a/test/dm/Makefile b/test/dm/Makefile
+index 771b703b737..ee1298ba572 100644
+--- a/test/dm/Makefile
++++ b/test/dm/Makefile
+@@ -1,7 +1,7 @@
+ # SPDX-License-Identifier: GPL-2.0+
+ #
+ # Copyright (c) 2013 Google, Inc
+-# Copyright 2022-2023 Arm Limited and/or its affiliates <open-source-office@arm.com>
++# Copyright 2022-2023, 2026 Arm Limited and/or its affiliates <open-source-office@arm.com>
+ 
+ # Tests for particular subsystems - when enabling driver model for a new
+ # subsystem you must add sandbox tests here.
+@@ -96,6 +96,7 @@ obj-$(CONFIG_ACPI_PMC) += pmc.o
+ obj-$(CONFIG_DM_PMIC) += pmic.o
+ obj-$(CONFIG_DM_PWM) += pwm.o
+ obj-$(CONFIG_ARM_FFA_TRANSPORT) += ffa.o
++obj-$(CONFIG_ARM_FFA_TRANSPORT) += ffa_runtime.o
+ obj-$(CONFIG_QFW) += qfw.o
+ obj-$(CONFIG_RAM) += ram.o
+ obj-y += regmap.o
+diff --git a/test/dm/ffa_runtime.c b/test/dm/ffa_runtime.c
+new file mode 100644
+index 00000000000..4ba859fa314
+--- /dev/null
++++ b/test/dm/ffa_runtime.c
+@@ -0,0 +1,82 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Functional tests for FF-A runtime helpers
++ *
++ * Copyright 2026 Arm Limited and/or its affiliates <open-source-office@arm.com>
++ *
++ * Authors:
++ *      Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
++ */
++
++#include <dm.h>
++#include <dm/test.h>
++#include <asm/sandbox_arm_ffa.h>
++#include <asm/sandbox_arm_ffa_priv.h>
++#include <arm_ffa_runtime.h>
++#include <test/ut.h>
++
++static int ffa_runtime_get_sp_id(struct unit_test_state *uts, u16 *sp_id)
++{
++	struct ffa_partition_desc *descs;
++	u32 count;
++	struct udevice *dev;
++	const char *svc_uuid = SANDBOX_SERVICE1_UUID;
++
++	ut_assertok(uclass_first_device_err(UCLASS_FFA, &dev));
++	ut_assertok(ffa_partition_info_get(dev, svc_uuid, &count, &descs));
++	ut_assert(count > 0);
++
++	*sp_id = descs[0].info.id;
++	return 0;
++}
++
++static int dm_test_ffa_runtime_ack(struct unit_test_state *uts)
++{
++	struct ffa_send_direct_data msg = {0};
++	u16 sp_id;
++	u8 cnt;
++
++	ut_assertok(ffa_runtime_get_sp_id(uts, &sp_id));
++
++	ffa_copy_runtime_priv(&(struct ffa_priv_runtime){
++		.id = NS_PHYS_ENDPOINT_ID,
++	});
++	ffa_enable_runtime_context();
++
++	/* Ensure runtime context is available before attempting runtime-only paths */
++	ut_assert(ffa_get_status_runtime_context());
++
++	/* Runtime messaging should reuse the sandbox emulator and return 0xff pattern */
++	ut_assertok(ffa_sync_send_receive_runtime(sp_id, &msg, true));
++	for (cnt = 0; cnt < sizeof(struct ffa_send_direct_data) / sizeof(u64); cnt++)
++		ut_asserteq_64(-1UL, ((u64 *)&msg)[cnt]);
++
++	/* Validate FF-A error to errno translation helpers */
++	ut_asserteq(-EINVAL, ffa_to_std_errno(-INVALID_PARAMETERS));
++	ut_asserteq(-EOPNOTSUPP, ffa_to_std_errno(-NOT_SUPPORTED));
++
++	return 0;
++}
++DM_TEST(dm_test_ffa_runtime_ack, UTF_SCAN_FDT | UTF_CONSOLE);
++
++static int dm_test_ffa_runtime_nack(struct unit_test_state *uts)
++{
++	struct ffa_send_direct_data msg = {0};
++	u16 sp_id;
++
++	ut_assertok(ffa_runtime_get_sp_id(uts, &sp_id));
++
++	ffa_copy_runtime_priv(&(struct ffa_priv_runtime){
++		.id = NS_PHYS_ENDPOINT_ID,
++	});
++	ffa_enable_runtime_context();
++
++	/* Ensure runtime context is available before attempting runtime-only paths */
++	ut_assert(ffa_get_status_runtime_context());
++
++	/* Invalid partition IDs must be rejected and mapped to -EINVAL */
++	ut_asserteq(-EINVAL, ffa_sync_send_receive_runtime(0, &msg, true));
++
++	return 0;
++}
++DM_TEST(dm_test_ffa_runtime_nack, UTF_SCAN_FDT | UTF_CONSOLE);
 -- 
 2.34.1
 
