@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1654BFF885C
-	for <u-boot@archiver.kernel.org>; Sat, 25 Apr 2026 18:04:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0AAFFF885C
+	for <u-boot@archiver.kernel.org>; Sat, 25 Apr 2026 18:04:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 22440844C7;
+	by phobos.denx.de (Postfix) with ESMTP id 60F8D844D3;
 	Sat, 25 Apr 2026 20:02:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=arm.com header.i=@arm.com header.b="Fy2NWnc2";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=arm.com header.i=@arm.com header.b="Lg2RaUHI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 66C4A842BF; Sat, 25 Apr 2026 19:01:52 +0200 (CEST)
+ id 6DFF180087; Sat, 25 Apr 2026 19:01:53 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id A97C4843B9
+ by phobos.denx.de (Postfix) with ESMTP id C3CBF843E3
  for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 19:01:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=harsimransingh.tungal@arm.com
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id C712435AA;
- Fri, 24 Apr 2026 10:32:48 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 1A5B935A3;
+ Fri, 24 Apr 2026 10:32:35 -0700 (PDT)
 Received: from e132995.arm.com (unknown [10.57.64.144])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id D687C3F7B4;
- Fri, 24 Apr 2026 10:32:52 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id E38FA3F7B4;
+ Fri, 24 Apr 2026 10:32:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
- t=1777051974; bh=HaZ3VkhkxqMUI+U5fRnMQjFpzpaiSuGGDdcIvhtHOD0=;
+ t=1777051960; bh=OfeXytju7nRN/6+GjreQDr1QfLp3Q5YSOuQRT7NEwx0=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=Fy2NWnc2dYoWpiZ9E8BOClQeVhna3FPR1NhpRbiyWWGSBNo1SF7zALEAauoC+X1CP
- 9hZ9lq5ODParJ4m70NR0eAtw77AnwLeTULYSwGVuF1NoITPwwsO+uphu/DOj8gj+SJ
- 9eoTx/b744Y0IQlH5jJ8nMlUooI+N3BAKiFDKdFI=
+ b=Lg2RaUHIfJ1LiryyH27sTlQe9L65XtvUDwwMFmekKC5VwbaWL6IHj3/57CEXIXAY2
+ blitmbrXVk/q33LnP1hZJmfkkfpY0opRtCKIZBWPogHVSD+K5av0hUX0vx3FNSAXCq
+ ShTWHdyOKopmHy+J7nmmPT8hpn5xylIqvUzHwrOk=
 From: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
 To: u-boot@lists.denx.de
 Cc: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
@@ -44,9 +44,10 @@ Cc: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
  Hugues Kamba Mpiana <hugues.kambampiana@arm.com>,
  Simon Glass <sjg@chromium.org>,
  Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
-Subject: [PATCH 10/12] doc: arm64: document FF-A runtime path for EFI variables
-Date: Fri, 24 Apr 2026 18:31:49 +0100
-Message-Id: <20260424173151.371134-11-harsimransingh.tungal@arm.com>
+Subject: [PATCH 03/12] efi_loader: add FF-A runtime support in EFI variable
+ TEE driver
+Date: Fri, 24 Apr 2026 18:31:42 +0100
+Message-Id: <20260424173151.371134-4-harsimransingh.tungal@arm.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20260424173151.371134-1-harsimransingh.tungal@arm.com>
 References: <20260424173151.371134-1-harsimransingh.tungal@arm.com>
@@ -69,175 +70,477 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Document how EFI runtime variables use FF-A MM communication
+Enable MM variable services over FF-A after ExitBootServices
 
-Describe the FF-A runtime layer on arm64 and how EFI variable
-runtime services use the FF-A transport and shared MM buffer.
-Also clarify armffa command scope and link to the FF-A doc.
+This patch extends lib/efi_loader/efi_variable_tee.c to support FF-A
+communication with the secure world during EFI runtime. It enables EFI
+runtime variable access and MM communication using FF-A transport when
+ExitBootServices() has already been called.
+
+Key changes:
+ ------------
+  - Introduce runtime-safe implementations for MM communication,
+    notification, and variable access using FF-A driver.
+  - Introduce communication-buffer helper (get_comm_buf()) that switches
+    between dynamic allocation (boot phase) and the fixed FF-A shared
+    buffer (runtime phase).
+  - Mark persistent data and code with __efi_runtime and
+    __efi_runtime_data attributes.
+  - Use direct physical address mapping for shared buffers since
+    U-Boot operates with 1:1 physical-to-virtual mapping.
+  - Only per-buffer cache maintenance is performed at runtime,
+    as whole D-cache invalidation would violate the OS coherency model
+    after ExitBootServices().
+  - Add runtime-phase tracking (efi_runtime_enabled).
+
+The change reuses the statically reserved shared buffer, replaces
+allocations with __efi_runtime copies, and updates the runtime service
+table so EFI variable runtime calls reach the secure partition via FF-A.
 
 Signed-off-by: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
 ---
- doc/arch/arm64.ffa.rst   | 92 +++++++++++++++++++++++++++++++++++++---
- doc/usage/cmd/armffa.rst | 11 +++++
- 2 files changed, 96 insertions(+), 7 deletions(-)
+ lib/efi_loader/efi_variable_tee.c | 331 ++++++++++++++++++++++++++++--
+ 1 file changed, 319 insertions(+), 12 deletions(-)
 
-diff --git a/doc/arch/arm64.ffa.rst b/doc/arch/arm64.ffa.rst
-index f966f8ba6af..ff0efb7da1d 100644
---- a/doc/arch/arm64.ffa.rst
-+++ b/doc/arch/arm64.ffa.rst
-@@ -15,10 +15,10 @@ application in S-EL0, or a Trusted OS in S-EL1.
- The U-Boot FF-A support (the bus) implements the interfaces to communicate
- with partitions in the Secure world aka Secure partitions (SPs).
+diff --git a/lib/efi_loader/efi_variable_tee.c b/lib/efi_loader/efi_variable_tee.c
+index 6a1fa39bb6f..e4d97dc55ab 100644
+--- a/lib/efi_loader/efi_variable_tee.c
++++ b/lib/efi_loader/efi_variable_tee.c
+@@ -4,7 +4,7 @@
+  *
+  *  Copyright (C) 2019 Linaro Ltd. <sughosh.ganu@linaro.org>
+  *  Copyright (C) 2019 Linaro Ltd. <ilias.apalodimas@linaro.org>
+- *  Copyright 2022-2023 Arm Limited and/or its affiliates <open-source-office@arm.com>
++ *  Copyright 2022-2023, 2026 Arm Limited and/or its affiliates <open-source-office@arm.com>
+  *
+  *  Authors:
+  *    Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
+@@ -14,6 +14,7 @@
  
--The FF-A support specifically focuses on communicating with SPs that
--isolate portions of EFI runtime services that must run in a protected
--environment which is inaccessible by the Host OS or Hypervisor.
--Examples of such services are set/get variables.
-+U-Boot's FF-A bus support exposes an optional transport that EFI runtime
-+services can use to communicate with Secure Partitions. Through this
-+interface, EFI services (such as variable access) can request or exchange
-+data with the Secure World using FF-A.
+ #if CONFIG_IS_ENABLED(ARM_FFA_TRANSPORT)
+ #include <arm_ffa.h>
++#include <arm_ffa_runtime.h>
+ #endif
+ #include <cpu_func.h>
+ #include <dm.h>
+@@ -34,20 +35,47 @@
+ #define MM_DENIED (-3)
+ #define MM_NO_MEMORY (-5)
  
- The FF-A support uses the SMC ABIs defined by the FF-A specification to:
++static const int __efi_runtime_rodata mm_sp_errmap[] = {
++	[-MM_NOT_SUPPORTED]	 = -EINVAL,
++	[-MM_INVALID_PARAMETER]	 = -EPERM,
++	[-MM_DENIED]		 = -EACCES,
++	[-MM_NO_MEMORY]		 = -EBUSY,
++};
++
+ static const char *mm_sp_svc_uuid = MM_SP_UUID;
+-static u16 mm_sp_id;
++static u16 __efi_runtime_data mm_sp_id;
+ #endif
  
-@@ -26,13 +26,13 @@ The FF-A support uses the SMC ABIs defined by the FF-A specification to:
- - Access an SP's service through communication protocols
-   e.g. EFI MM communication protocol
++static void *__efi_runtime_data ffa_shared_buf;
++static const efi_guid_t __efi_runtime_rodata mm_var_guid_runtime =
++	EFI_MM_VARIABLE_GUID;
++
+ extern struct efi_var_file __efi_runtime_data *efi_var_buf;
+-static efi_uintn_t max_buffer_size;	/* comm + var + func + data */
+-static efi_uintn_t max_payload_size;	/* func + data */
++static efi_uintn_t __efi_runtime_data max_buffer_size;	/* comm + var + func + data */
++static efi_uintn_t __efi_runtime_data max_payload_size;	/* func + data */
+ static const u16 __efi_runtime_rodata pk[] = u"PK";
++static bool __efi_runtime_data efi_runtime_enabled;
  
--At this stage of development only EFI boot-time services are supported.
--Runtime support will be added in future developments.
--
- The U-Boot FF-A support provides the following parts:
+ struct mm_connection {
+ 	struct udevice *tee;
+ 	u32 session;
+ };
  
- - A Uclass driver providing generic FF-A methods.
- - An Arm FF-A device driver providing Arm-specific methods and reusing the Uclass methods.
-+- An optional runtime FF-A transport (toggled via CONFIG_ARM_FFA_RT_MODE) that is
-+  resident after ExitBootServices() and enables EFI runtime variable services
-+  via FF-A helpers and a shared MM communication buffer.
- - A sandbox emulator for Arm FF-A, emulates the FF-A side of the Secure World and provides
-   FF-A ABIs inspection methods.
- - An FF-A sandbox device driver for FF-A communication with the emulated Secure World.
-@@ -69,6 +69,12 @@ CONFIG_ARM_FFA_TRANSPORT
-     When using an Arm 64-bit platform, the Arm FF-A driver will be used.
-     When using sandbox, the sandbox FF-A emulator and FF-A sandbox driver will be used.
++/**
++ * efi_is_runtime_enabled() - Indicate whether the system is in the UEFI runtime phase
++ *
++ * This helper returns whether the firmware has transitioned into the
++ * UEFI runtime phase, meaning that ExitBootServices() has been invoked.
++ *
++ * Return:
++ *   true  - The system is operating in UEFI runtime mode.
++ *   false - The system is still in the boot services phase.
++ */
++static bool __efi_runtime efi_is_runtime_enabled(void)
++{
++	return efi_runtime_enabled;
++}
++
+ /**
+  * get_connection() - Retrieve OP-TEE session for a specific UUID.
+  *
+@@ -169,6 +197,28 @@ static efi_status_t optee_mm_communicate(void *comm_buf, ulong dsize)
+ }
  
-+CONFIG_ARM_FFA_RT_MODE
-+    Enables the FF-A runtime transport. This option depends on
-+    CONFIG_ARM_FFA_TRANSPORT and CONFIG_EFI_LOADER, and is enabled by default.
-+    When enabled, a minimal set of FF-A operations remains available after
-+    ExitBootServices().
+ #if CONFIG_IS_ENABLED(ARM_FFA_TRANSPORT)
++/**
++ * ffa_map_sp_event_runtime() - Map MM SP response to errno (runtime-safe)
++ * @sp_event_ret: MM SP return code from ffa_notify_mm_sp_runtime()
++ *
++ * Convert the MM SP return code into a standard U-Boot errno. This helper
++ * is marked __efi_runtime to ensure it is safe to call after
++ * ExitBootServices().
++ *
++ * Return: 0 on success, negative errno on failure
++ */
++static __efi_runtime int ffa_map_sp_event_runtime(int sp_event_ret)
++{
++	int idx = -sp_event_ret;
 +
- FF-A ABIs under the hood
- ------------------------
++	if (sp_event_ret == MM_SUCCESS)
++		return 0;
++	if (idx > 0 && idx < (int)ARRAY_SIZE(mm_sp_errmap) &&
++	    mm_sp_errmap[idx])
++		return mm_sp_errmap[idx];
++	return -EACCES;
++}
++
+ /**
+  * ffa_notify_mm_sp() - Announce there is data in the shared buffer
+  *
+@@ -225,6 +275,35 @@ static int ffa_notify_mm_sp(void)
+ 	return ret;
+ }
  
-@@ -158,6 +164,77 @@ they want to use (32-bit vs 64-bit). Selecting the protocol means using
- the 32-bit or 64-bit version of FFA_MSG_SEND_DIRECT_{REQ, RESP}.
- The calling convention between U-Boot and the secure world stays the same: SMC32.
++/**
++ * ffa_notify_mm_sp_runtime() - Runtime implementation of
++ *                              ffa_notify_mm_sp()
++ *
++ * Notify the MM partition in the trusted world that
++ * data is available in the shared buffer.
++ * This is a blocking call during which trusted world has exclusive access
++ * to the MM shared buffer.
++ *
++ * Return:
++ *
++ * 0 on success
++ */
++static int __efi_runtime ffa_notify_mm_sp_runtime(void)
++{
++	struct ffa_send_direct_data msg = {0};
++	int ret;
++	int sp_event_ret;
++
++	msg.data0 = CONFIG_FFA_SHARED_MM_BUF_OFFSET;
++
++	ret = ffa_sync_send_receive_runtime(mm_sp_id, &msg, 1);
++	if (ret)
++		return ret;
++
++	ret = ffa_map_sp_event_runtime(sp_event_ret);
++	return ret;
++}
++
+ /**
+  * ffa_discover_mm_sp_id() - Query the MM partition ID
+  *
+@@ -360,6 +439,116 @@ static efi_status_t ffa_mm_communicate(void *comm_buf, ulong comm_buf_size)
+ 	return efi_ret;
+ }
  
-+FF-A runtime support for EFI variables
-+--------------------------------------
++/**
++ * ffa_mm_communicate_runtime() - Runtime implementation of ffa_mm_communicate()
++ * @comm_buf:		locally allocated communication buffer used for rx/tx
++ * @comm_buf_size:	communication buffer size
++ *
++ * Issue a door bell event to notify the MM partition (SP) running in OP-TEE
++ * that there is data to read from the shared buffer.
++ * Communication with the MM SP is performed using FF-A transport.
++ * On the event, MM SP can read the data from the buffer and
++ * update the MM shared buffer with response data.
++ * The response data is copied back to the communication buffer.
++ *
++ * Return:
++ *
++ * EFI status code
++ */
++static efi_status_t __efi_runtime ffa_mm_communicate_runtime(void *comm_buf,
++							     ulong comm_buf_size)
++{
++	ulong tx_data_size;
++	int ffa_ret;
++	efi_status_t efi_ret;
++	struct efi_mm_communicate_header *mm_hdr;
 +
-+U-Boot provides an FF-A runtime transport to keep a minimal set of FF-A operations
-+available after ExitBootServices(). This runtime transport is enabled with
-+CONFIG_ARM_FFA_RT_MODE. The runtime helpers and data are marked with
-+``__efi_runtime`` / ``__efi_runtime_data`` through the
-+``__ffa_runtime`` / ``__ffa_runtime_data`` aliases in
-+``include/arm_ffa_runtime.h``.
++	if (!comm_buf)
++		return EFI_INVALID_PARAMETER;
 +
-+Runtime context is enabled at ExitBootServices(), and the following prerequisites
-+are prepared during FF-A bus probe:
++	/* Discover MM partition ID at boot time */
++	if (!mm_sp_id)
++		return EFI_UNSUPPORTED;
 +
-+- The U-Boot FF-A endpoint ID is discovered at boot time with FFA_ID_GET and
-+  stored in the runtime private data.
-+- An ExitBootServices() event is registered by the runtime transport to enable
-+  the runtime context with ffa_enable_runtime_context() when EFI transitions
-+  to runtime.
++	mm_hdr = (struct efi_mm_communicate_header *)comm_buf;
++	tx_data_size = mm_hdr->message_len + sizeof(efi_guid_t) + sizeof(size_t);
 +
-+At runtime, the driver model is no longer available. Runtime users should
-+use the runtime interface ffa_sync_send_receive_runtime(), which internally
-+verifies the runtime context before issuing FF-A calls.
++	if (comm_buf_size != tx_data_size || tx_data_size > CONFIG_FFA_SHARED_MM_BUF_SIZE)
++		return EFI_INVALID_PARAMETER;
 +
-+EFI variable services over FF-A
-+-------------------------------
++	/*
++	 * Shared buffer cache maintenance for FF-A / OP-TEE communication:
++	 *
++	 * NS -> S (request path):
++	 *
++	 * The non-secure side populates the shared buffer. If the buffer is cached
++	 * in NS, the updated bytes may reside in dirty D-cache lines and not yet be
++	 * visible in DDR. Since the secure world typically reads the shared buffer
++	 * directly from DDR (e.g. with caches disabled / non-coherent mapping), we
++	 * must clean the corresponding cache lines to the Point of Coherency (PoC)
++	 * before entering secure world.
++	 *
++	 * S -> NS (response path):
++	 *
++	 * The secure world may update the same shared buffer in DDR. After returning
++	 * to non-secure, any cached copies of that region in NS may be stale. We
++	 * therefore invalidate the shared buffer range after the FF-A call to drop
++	 * those lines and force subsequent reads to fetch the latest data from DDR.
++	 *
++	 * Note: Whole-cache invalidation must not be used in EFI runtime context.
++	 * After ExitBootServices(), the OS owns the cache hierarchy; global invalidation
++	 * could drop OS dirty lines and violate the OS coherency model. Always operate
++	 * on the shared buffer range only.
++	 */
++	if (IS_ENABLED(CONFIG_ARM64))
++		flush_dcache_range((unsigned long)comm_buf,
++				   (unsigned long)((u8 *)comm_buf +
++						   CONFIG_FFA_SHARED_MM_BUF_SIZE));
 +
-+When CONFIG_EFI_MM_COMM_TEE and CONFIG_ARM_FFA_TRANSPORT are enabled, U-Boot
-+routes EFI variable services to an MM Secure Partition (SP) over FF-A.
-+The MM SP is discovered at boot time using FFA_PARTITION_INFO_GET and its
-+partition ID is cached in runtime data.
++	/* Announce there is data in the shared buffer */
 +
-+The data path uses a shared MM communication buffer and a door-bell style
-+direct message:
++	ffa_ret = ffa_notify_mm_sp_runtime();
 +
-+- The communication buffer is located at CONFIG_FFA_SHARED_MM_BUF_ADDR and
-+  sized by CONFIG_FFA_SHARED_MM_BUF_SIZE.
-+- CONFIG_FFA_SHARED_MM_BUF_OFFSET is sent in the FF-A direct message payload
-+  to indicate where the data begins.
-+- The buffer is filled by memcpy(), the cache is flushed before notifying the
-+  MM SP, and later the buffer is reused directly with only the shared-buffer
-+  range invalidated (invalidate_dcache_range()) to avoid whole-cache
-+  invalidation.
++	if (IS_ENABLED(CONFIG_ARM64))
++		invalidate_dcache_range((unsigned long)comm_buf,
++					(unsigned long)((u8 *)comm_buf +
++							CONFIG_FFA_SHARED_MM_BUF_SIZE));
 +
-+After ExitBootServices(), EFI SetVariable()/GetVariable() call paths use the
-+runtime MM communication helpers:
++	switch (ffa_ret) {
++	case 0: {
++		ulong rx_data_size;
 +
-+- get_comm_buf() switches to the static shared buffer
-+- mm_communicate_runtime() selects FF-A transport when the runtime context
-+  is enabled
-+- ffa_mm_communicate_runtime() issues FFA_MSG_SEND_DIRECT_{REQ,RESP} through
-+  ffa_sync_send_receive_runtime()
++		rx_data_size = ((struct efi_mm_communicate_header *)comm_buf)->message_len +
++				sizeof(efi_guid_t) +
++				sizeof(size_t);
 +
-+Configuration notes
-+-------------------
++		if (rx_data_size > comm_buf_size) {
++			efi_ret = EFI_OUT_OF_RESOURCES;
++			break;
++		}
 +
-+Enable FF-A transport and MM communication:
++		efi_ret = EFI_SUCCESS;
++		break;
++	}
++	case -EINVAL:
++		efi_ret = EFI_DEVICE_ERROR;
++		break;
++	case -EPERM:
++		efi_ret = EFI_INVALID_PARAMETER;
++		break;
++	case -EACCES:
++		efi_ret = EFI_ACCESS_DENIED;
++		break;
++	case -EBUSY:
++		efi_ret = EFI_OUT_OF_RESOURCES;
++		break;
++	default:
++		efi_ret = EFI_ACCESS_DENIED;
++	}
 +
-+- CONFIG_ARM_FFA_TRANSPORT
-+- CONFIG_ARM_FFA_RT_MODE
-+- CONFIG_EFI_MM_COMM_TEE
++	return efi_ret;
++}
 +
-+CONFIG_ARM_FFA_RT_MODE is enabled by default. It turns on MM communication for
-+EFI runtime and may be disabled when EFI services over FF-A are not required
-+after ExitBootServices().
-+
-+Configure the shared MM communication buffer:
-+
-+- CONFIG_FFA_SHARED_MM_BUF_ADDR
-+- CONFIG_FFA_SHARED_MM_BUF_SIZE
-+- CONFIG_FFA_SHARED_MM_BUF_OFFSET
-+
- Requirements for user drivers
- -----------------------------
+ /**
+  * get_mm_comms() - detect the available MM transport
+  *
+@@ -386,6 +575,27 @@ static enum mm_comms_select get_mm_comms(void)
  
-@@ -256,6 +333,7 @@ For example, when using FF-A with Corstone-1000, debug logs enabled, the output
- Contributors
- ------------
-    * Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
-+   * Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
- 
- .. _`FF-A v1.0 specification`: https://documentation-service.arm.com/static/5fb7e8a6ca04df4095c1d65e
- .. _`SMC Calling Convention v1.2 specification`: https://documentation-service.arm.com/static/5f8edaeff86e16515cdbe4c6
-diff --git a/doc/usage/cmd/armffa.rst b/doc/usage/cmd/armffa.rst
-index dbe4d5bc842..2b865f88015 100644
---- a/doc/usage/cmd/armffa.rst
-+++ b/doc/usage/cmd/armffa.rst
-@@ -39,6 +39,17 @@ The command also allows to gather secure partitions information and ping these
- 
- The command is also helpful in testing the communication with secure partitions.
- 
-+Notes
-+-----
+ 	return MM_COMMS_FFA;
+ }
 +
-+armffa is a boot-time test command. It relies on the FF-A driver model device
-+(UCLASS_FFA) and is not intended for EFI runtime use after
-+ExitBootServices().
++/**
++ * get_mm_comms_runtime() - detect the available MM transport at runtime
++ *
++ * Make sure the FF-A bus is available at runtime and ready
++ * for use.
++ *
++ * Return:
++ *
++ * MM_COMMS_FFA or MM_COMMS_UNDEFINED
++ */
++static enum mm_comms_select __efi_runtime get_mm_comms_runtime(void)
++{
++	bool ret;
 +
-+armffa does not provide EFI variable operations. For more information about
-+using EFI runtime SetVariable() and GetVariable() over FF-A please see
-+:doc:`../../arch/arm64.ffa`.
++	ret = efi_is_runtime_enabled();
++	if (!ret)
++		return MM_COMMS_UNDEFINED;
 +
- Example
- -------
++	return MM_COMMS_FFA;
++}
+ #endif
  
+ /**
+@@ -433,9 +643,86 @@ static efi_status_t mm_communicate(u8 *comm_buf, efi_uintn_t dsize)
+ 	return var_hdr->ret_status;
+ }
+ 
++/**
++ * mm_communicate_runtime() - Runtime implementation of mm_communicate()
++ *
++ * @comm_buf:	locally allocated communication buffer
++ * @dsize:		buffer size
++ *
++ * The SP (also called partition) can be any MM SP such as  StandAlonneMM or smm-gateway.
++ * The comm_buf format is the same for both partitions.
++ * When using the u-boot OP-TEE driver, StandAlonneMM is supported.
++ * When using the u-boot FF-A  driver, any MM SP is supported.
++ *
++ * Return:		status code
++ */
++static efi_status_t __efi_runtime mm_communicate_runtime(u8 *comm_buf, efi_uintn_t dsize)
++{
++	efi_status_t ret = EFI_UNSUPPORTED;
++	struct efi_mm_communicate_header *mm_hdr;
++	struct smm_variable_communicate_header *var_hdr;
++	enum mm_comms_select mm_comms;
++
++	dsize += MM_COMMUNICATE_HEADER_SIZE + MM_VARIABLE_COMMUNICATE_SIZE;
++	mm_hdr = (struct efi_mm_communicate_header *)comm_buf;
++	var_hdr = (struct smm_variable_communicate_header *)mm_hdr->data;
++
++	if (IS_ENABLED(CONFIG_ARM_FFA_TRANSPORT)) {
++		mm_comms = get_mm_comms_runtime();
++		if (mm_comms == MM_COMMS_FFA)
++			ret = ffa_mm_communicate_runtime(comm_buf, dsize);
++	}
++
++	if (ret != EFI_SUCCESS)
++		return ret;
++
++	return var_hdr->ret_status;
++}
++
++/**
++ * get_comm_buf() - Obtain a communication buffer for MM/FF-A exchange
++ * @payload_size: size of the payload that will be appended to the
++ *                MM communication header
++ * This helper returns a buffer suitable for constructing an
++ * EFI_MM_COMMUNICATE message. During the boot phase a new buffer is
++ * dynamically allocated. After ExitBootServices(), dynamic
++ * allocation is no longer permitted, and all runtime communication must
++ * use the statically reserved FF-A shared buffer.
++ *
++ * Return:
++ *   Pointer to a valid communication buffer on success,
++ *   NULL if allocation fails during the boot phase.
++ */
++static __efi_runtime u8 *get_comm_buf(efi_uintn_t payload_size)
++{
++	u8 *comm_buf;
++
++	/* After ExitBootServices(), dynamic allocation is no longer permitted.
++	 * Use the predefined FF-A shared buffer at runtime; otherwise allocate
++	 * a fresh buffer during the boot phase.
++	 */
++	if (efi_is_runtime_enabled()) {
++		if (IS_ENABLED(CONFIG_ARM_FFA_RT_MODE)) {
++			comm_buf = ffa_shared_buf;
++			if (!comm_buf)
++				return NULL;
++			efi_memset_runtime(comm_buf, 0, CONFIG_FFA_SHARED_MM_BUF_SIZE);
++		} else {
++			return NULL;
++		}
++	} else {
++		comm_buf = calloc(1, MM_COMMUNICATE_HEADER_SIZE +
++				MM_VARIABLE_COMMUNICATE_SIZE +
++				payload_size);
++		if (!comm_buf)
++			return NULL;
++	}
++	return comm_buf;
++}
++
+ /**
+  * setup_mm_hdr() -	Allocate a buffer for StandAloneMM and initialize the
+- *			header data.
++ *			header data. It is runtime safe.
+  *
+  * @dptr:		pointer address of the corresponding StandAloneMM
+  *			function
+@@ -444,10 +731,9 @@ static efi_status_t mm_communicate(u8 *comm_buf, efi_uintn_t dsize)
+  * @ret:		EFI return code
+  * Return:		buffer or NULL
+  */
+-static u8 *setup_mm_hdr(void **dptr, efi_uintn_t payload_size,
+-			efi_uintn_t func, efi_status_t *ret)
++static __efi_runtime u8 *setup_mm_hdr(void **dptr, efi_uintn_t payload_size,
++				      efi_uintn_t func, efi_status_t *ret)
+ {
+-	const efi_guid_t mm_var_guid = EFI_MM_VARIABLE_GUID;
+ 	struct efi_mm_communicate_header *mm_hdr;
+ 	struct smm_variable_communicate_header *var_hdr;
+ 	u8 *comm_buf;
+@@ -465,16 +751,15 @@ static u8 *setup_mm_hdr(void **dptr, efi_uintn_t payload_size,
+ 		return NULL;
+ 	}
+ 
+-	comm_buf = calloc(1, MM_COMMUNICATE_HEADER_SIZE +
+-			  MM_VARIABLE_COMMUNICATE_SIZE +
+-			  payload_size);
++	comm_buf = get_comm_buf(payload_size);
+ 	if (!comm_buf) {
+ 		*ret = EFI_OUT_OF_RESOURCES;
+ 		return NULL;
+ 	}
+ 
+ 	mm_hdr = (struct efi_mm_communicate_header *)comm_buf;
+-	guidcpy(&mm_hdr->header_guid, &mm_var_guid);
++	efi_memcpy_runtime(&mm_hdr->header_guid, &mm_var_guid_runtime,
++			   sizeof(mm_hdr->header_guid));
+ 	mm_hdr->message_len = MM_VARIABLE_COMMUNICATE_SIZE + payload_size;
+ 
+ 	var_hdr = (struct smm_variable_communicate_header *)mm_hdr->data;
+@@ -982,6 +1267,9 @@ void efi_variables_boot_exit_notify(void)
+ 			efi_get_next_variable_name_runtime;
+ 	efi_runtime_services.set_variable = efi_set_variable_runtime;
+ 	efi_update_table_header_crc32(&efi_runtime_services.hdr);
++
++	/* Set efi_runtime_enabled as true after ExitBootServices */
++	efi_runtime_enabled = true;
+ }
+ 
+ /**
+@@ -993,6 +1281,25 @@ efi_status_t efi_init_variables(void)
+ {
+ 	efi_status_t ret;
+ 
++	if (IS_ENABLED(CONFIG_ARM_FFA_RT_MODE)) {
++		/*
++		 * The FF-A shared buffer is accessed by EFI runtime services, so it must
++		 * be marked as runtime memory in the EFI memory map.
++		 */
++		ffa_shared_buf = (void *)CONFIG_FFA_SHARED_MM_BUF_ADDR;
++		ret = efi_add_memory_map(CONFIG_FFA_SHARED_MM_BUF_ADDR,
++					 CONFIG_FFA_SHARED_MM_BUF_SIZE,
++					 EFI_RUNTIME_SERVICES_DATA);
++		if (ret != EFI_SUCCESS) {
++			log_err("EFI: failed to add FF-A shared buffer to runtime map (%lu)\n",
++				ret);
++			return ret;
++		}
++		log_info("EFI: FF-A shared buffer runtime map: addr=0x%lx size=0x%lx\n",
++			 (ulong)CONFIG_FFA_SHARED_MM_BUF_ADDR,
++			 (ulong)CONFIG_FFA_SHARED_MM_BUF_SIZE);
++	}
++
+ 	/* Create a cached copy of the variables that will be enabled on ExitBootServices() */
+ 	ret = efi_var_mem_init();
+ 	if (ret != EFI_SUCCESS)
 -- 
 2.34.1
 
