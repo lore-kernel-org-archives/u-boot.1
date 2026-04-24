@@ -4,51 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5E50FF885C
-	for <u-boot@archiver.kernel.org>; Sat, 25 Apr 2026 17:09:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E014BFF8860
+	for <u-boot@archiver.kernel.org>; Sat, 25 Apr 2026 17:10:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1D122840AB;
-	Sat, 25 Apr 2026 19:09:01 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 748D78435C;
+	Sat, 25 Apr 2026 19:10:16 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=dolcini.it
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="loOzN12/";
+	dkim=pass (2048-bit key; unprotected) header.d=dolcini.it header.i=@dolcini.it header.b="OEM0YUX8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 961DA841DF; Sat, 25 Apr 2026 19:08:59 +0200 (CEST)
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+ id 4F6E984329; Sat, 25 Apr 2026 19:10:15 +0200 (CEST)
+Received: from mail11.truemail.it (mail11.truemail.it [IPv6:2001:4b7e:0:8::81])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 58E2A840AB
- for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 19:08:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
+ by phobos.denx.de (Postfix) with ESMTPS id 0125C8429E
+ for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 19:10:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 678DE4048C;
- Fri, 24 Apr 2026 10:42:46 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id EBDA9C2BCB9;
- Fri, 24 Apr 2026 10:42:43 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1777027366;
- bh=5vxQ/yerrc0T6oNjk3IJr+fUwGuyYCqEVuNH2NjmMoU=;
- h=From:To:Cc:Subject:Date:From;
- b=loOzN12/6qpEvwKxLU/rJe6Dc4ENRJv7Z6/nNBgiqV8Kfh9FYggkOyDmFBeHI/qvu
- 9xzmLKRiohsrrB6wCHbQXqE4MPYxAfZ88mCuVoH0zNChLCdk6OJFcpNL6+SVdtg8oI
- p4w+xkVuuZDbSH/n1iNK6AcuR8z8l3EubEGNA6hEgNgPGMlRDPaWz284ZiyEM1bqqc
- PA06k8bVbxE+RjWAG7ZVly728ddH9dzQgdjvm1EhJQnDvwKI6HO+q2gJ9AZSOzPXwZ
- qX7+vwmBfDy5Y0ll66U3pg11iahPtLYUqKzj8JDfQAoOJaNyo8JSvwCewr3NSCAAlq
- s+4xsDbftPUpA==
-From: Sumit Garg <sumit.garg@kernel.org>
-To: u-boot@lists.denx.de
-Cc: casey.connolly@linaro.org, neil.armstrong@linaro.org, trini@konsulko.com,
- aswin.murugan@oss.qualcomm.com, u-boot-qcom@groups.io,
- Sumit Garg <sumit.garg@oss.qualcomm.com>
-Subject: [PATCH v2] dts: lemans-evk-u-boot: add override dtsi
-Date: Fri, 24 Apr 2026 16:12:37 +0530
-Message-ID: <20260424104237.968195-1-sumit.garg@kernel.org>
-X-Mailer: git-send-email 2.51.0
+ dmarc=pass (p=none dis=none) header.from=dolcini.it
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=francesco@dolcini.it
+Received: from francesco-nb.. (93-49-2-63.ip317.fastwebnet.it [93.49.2.63])
+ by mail11.truemail.it (Postfix) with ESMTPA id DD66921F32;
+ Fri, 24 Apr 2026 12:42:23 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dolcini.it;
+ s=default; t=1777027344;
+ bh=DD2TpZTOJ+fMCha+4/CAywxL8JMwePKW6/bU7hKJAGs=; h=From:To:Subject;
+ b=OEM0YUX8p5vxnoC4HWARrIWz+1sUFIHHwWw75NOdLSLq5/60LniH3RHkiIFi5BE1l
+ hQB2p5V9g+wtbenWoeAkyFND5BH8VSFeYdkzrWxRxiy1voluYMp7QtZjTPbpuumZTA
+ Jl4P/UJm6xbF5h/iHCmBx/7wysaNDtWh7Ighor8oI8RF6FoANJeQ4onw0w7UQuvjNL
+ n5UY+bTAgz+uFQY/MeH3P9ioKeA6yfL2B18DDJf/qG6u79p0NyhBncpwcimd0XunPY
+ W7AJo0BD+qg5r3dFNQn915JtNyk8Sf/kwjYw8Q0AU/m0eWjBn7hSIReZSDjOgAY6FT
+ lMsn0bM90yNZA==
+From: Francesco Dolcini <francesco@dolcini.it>
+To: Francesco Dolcini <francesco.dolcini@toradex.com>,
+ Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+Subject: [PATCH v1 10/10] configs: verdin-imx95: Enable EFI related options
+Date: Fri, 24 Apr 2026 12:42:12 +0200
+Message-ID: <20260424104213.303752-11-francesco@dolcini.it>
+X-Mailer: git-send-email 2.47.3
+In-Reply-To: <20260424104213.303752-1-francesco@dolcini.it>
+References: <20260424104213.303752-1-francesco@dolcini.it>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -67,47 +65,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+From: Francesco Dolcini <francesco.dolcini@toradex.com>
 
-Add initial support for the lemans EVK platform based on lemans SoC.
-Define memory layout statically.
+Enable EFI related options, as suggested for booting standard aarch64
+Linux distribution, following the ARM recommendations for SystemReady
+compliance [1].
 
-Signed-off-by: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
-Signed-off-by: Sumit Garg <sumit.garg@oss.qualcomm.com>
+The RTC used on this board is not currently supported by U-Boot,
+therefore it is not enabled at the moment.
+
+Link: https://developer.arm.com/documentation/DUI1101/4-5/Configure-U-Boot-for-SystemReady [1]
+Signed-off-by: Francesco Dolcini <francesco.dolcini@toradex.com>
 ---
+ configs/verdin-imx95_defconfig | 2 ++
+ 1 file changed, 2 insertions(+)
 
-Changes in v2:
-- Fix last DRAM bank of memory layout
-
- arch/arm/dts/lemans-evk-u-boot.dtsi | 19 +++++++++++++++++++
- 1 file changed, 19 insertions(+)
- create mode 100644 arch/arm/dts/lemans-evk-u-boot.dtsi
-
-diff --git a/arch/arm/dts/lemans-evk-u-boot.dtsi b/arch/arm/dts/lemans-evk-u-boot.dtsi
-new file mode 100644
-index 00000000000..cdd3d32f61a
---- /dev/null
-+++ b/arch/arm/dts/lemans-evk-u-boot.dtsi
-@@ -0,0 +1,19 @@
-+// SPDX-License-Identifier: BSD-3-Clause
-+/*
-+ * Copyright (c) 2026, Qualcomm Innovation Center, Inc. All rights reserved.
-+ */
-+
-+/ {
-+	/* Will be removed when bootloader updates later */
-+	memory@80000000 {
-+		device_type = "memory";
-+		reg = <0x0 0x80000000 0x0 0x3ee00000>,
-+		      <0x0 0xc0000000 0x0 0x0fd00000>,
-+		      <0xD 0x00000000 0x2 0x54100000>,
-+		      <0xA 0x80000000 0x1 0x80000000>,
-+		      <0x9 0x00000000 0x1 0x80000000>,
-+		      <0x1 0x00000000 0x3 0x00000000>,
-+		      <0x0 0xd0000000 0x0 0x01900000>,
-+		      <0x0 0xd3500000 0x0 0x2cb00000>;
-+	};
-+};
+diff --git a/configs/verdin-imx95_defconfig b/configs/verdin-imx95_defconfig
+index 6dbf921e64be..c4a6bcd25864 100644
+--- a/configs/verdin-imx95_defconfig
++++ b/configs/verdin-imx95_defconfig
+@@ -64,6 +64,7 @@ CONFIG_SPL_THERMAL=y
+ CONFIG_SPL_WATCHDOG=y
+ CONFIG_SYS_PROMPT="Verdin iMX95 # "
+ CONFIG_CMD_ASKENV=y
++CONFIG_CMD_NVEDIT_EFI=y
+ CONFIG_CRC32_VERIFY=y
+ CONFIG_CMD_MD5SUM=y
+ CONFIG_MD5SUM_VERIFY=y
+@@ -71,6 +72,7 @@ CONFIG_CMD_MEMTEST=y
+ CONFIG_CMD_CLK=y
+ CONFIG_CMD_FUSE=y
+ CONFIG_CMD_GPIO=y
++CONFIG_CMD_GPT=y
+ CONFIG_CMD_I2C=y
+ CONFIG_CMD_MMC=y
+ CONFIG_CMD_PCI=y
 -- 
-2.51.0
+2.47.3
 
