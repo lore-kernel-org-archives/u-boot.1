@@ -4,94 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0CEADFF8860
-	for <u-boot@archiver.kernel.org>; Sat, 25 Apr 2026 18:07:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA8CBFF8860
+	for <u-boot@archiver.kernel.org>; Sat, 25 Apr 2026 18:07:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4AC12844D8;
-	Sat, 25 Apr 2026 20:03:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=seznam.cz
+	by phobos.denx.de (Postfix) with ESMTP id 8B867844FF;
+	Sat, 25 Apr 2026 20:03:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=seznam.cz header.i=@seznam.cz header.b="HboBGov8";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="s/1b4pa1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0AF70842BF; Sat, 25 Apr 2026 19:01:45 +0200 (CEST)
-Received: from mxd-3-71c.seznam.cz (mxd-3-71c.seznam.cz
- [IPv6:2a02:598:96:8a00::1200:71c])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id E7C838435B; Sat, 25 Apr 2026 19:51:21 +0200 (CEST)
+Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
+ [IPv6:2a00:1450:4864:20::630])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DE53080087
- for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 19:01:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C818184308
+ for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 19:51:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=seznam.cz
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=Michael.Srba@seznam.cz
-Received: from email.seznam.cz by smtpc-mxd-68df9c878f-gdfk6
- (smtpc-mxd-68df9c878f-gdfk6 [2a02:598:96:8a00::1200:71c])
- id 36bbd02c6db5844537121c72; Sat, 25 Apr 2026 19:01:42 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=seznam.cz; s=szn1;
- t=1777136502; bh=/SaWiySK1VlT8Xh6zy8hStSqUnp9gICJ3C/gufNmazw=;
- h=Message-ID:Date:MIME-Version:User-Agent:Subject:To:Cc:
- Content-Language:From:Content-Type:Content-Transfer-Encoding;
- b=HboBGov8Jv5Y+gx6TqTiziuG6gDTC/l2j9/1nZpYCMeYbGvFNiW5vmGgGQBjF259P
- Dm85AbRdHbMISo506ux2rNECfvebnkKgbwgQHIXujMAp/Ut447P3baYSbqY8tTzIHD
- 4lXfB/LgJIiyKciXfDBH/5qEGfot+jFSaL8EmzcK9y6np94hsvPnTciLgLvvBG7K3p
- hwwaeP8/+ZJA3M68y4BWq9cS4Jsg7RwYhJHYsuXIbYjRsezrnPWp1nWPoQRmJxl68i
- RzW5OM0JuNiFUoC329vnnWl3cz5cbBuozTHE3ZCeIB7NNjYiMQmlK346o3u5s6g64V
- 7E6LigJzIhUmg==
-Received: from [192.168.0.240] (ip-111-27.static.ccinternet.cz
- [147.161.27.111])
- by smtpd-relay-6597cc8696-6mkdd (szn-email-smtpd/2.0.72) with ESMTPA
- id 7baa3c3d-cb05-4424-b596-4aff9a4c02cf;
- Fri, 24 Apr 2026 19:05:05 +0200
-Message-ID: <07351632-4572-4bd0-890b-c162ef0ba5d4@seznam.cz>
-Date: Fri, 24 Apr 2026 19:05:03 +0200
+ spf=pass smtp.mailfrom=micbis.openwrt@gmail.com
+Received: by mail-ej1-x630.google.com with SMTP id
+ a640c23a62f3a-b9c9d03524cso1233940766b.3
+ for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 10:51:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1777139479; x=1777744279; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ZoydWEKnN0EEChvkfKpSzrThS6WCboZ434hrmvxtqvU=;
+ b=s/1b4pa16MHWxiuy2ZPB3Ml++iNlmAREr1lrXjnuTqxrhYoN95rJCVl9hwykjduHMW
+ mwgmaPn2VB9NY364CfeZhmeOeLiwAqSdpavOONlBFTOxHtPqLhVwigga1pux4fONZAYk
+ gg+y9bq5C1rSbg7vbXIu+M6VGFejELGIDDTrNxWp3bXhnJoZjipCHpB4V1uNalwTeDWC
+ lpBOWa7Vw/tqo6X6tn0NXSTazZdexQLV3wVqaPLnHSxwmc6hdEQxjgdsCWopL6x46Nvl
+ dvajSCP6VkFz8HBKIZnlwG0i57BHmIyc+opJSrT/p1F5FsYdZ7wsKYwKaDTBo9g/NHYX
+ 7Wcg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1777139479; x=1777744279;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=ZoydWEKnN0EEChvkfKpSzrThS6WCboZ434hrmvxtqvU=;
+ b=SmvhR4sEpFmLQ30Ju0J+Q9oW/ZvM8hPmLIL5pcRbw5LSjdLczwRmzul+mX3Um3eTY1
+ YI9ADwkhN2A8nxDLYRoRLdbEWOpCLlL0UsfMiSqwJ8TRVfWUHCgYdXgBn39nrrOyCwrV
+ n1R7FfMa/Aw3J5BObBWM8kzJtJmE11uEf19jnFPJ5gQahBMcc1AhJfJ8dRBQOCvJGmpe
+ 29G9LVvZRZq5jf8oOuuLE9mO+Ah3yxIdRKTIhcZH1AKK6bVy+P8EgQfMX7oAlXMkWc/J
+ LmY2go+5KE2lvxQca0IPzS7Ps0CYO9CeJdAJou05ytz9Pmgr6by1K34l9q1+J02NUQoZ
+ wvAg==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ+2vnk9oneKhuajXB4UkeiWkeOK0e52YOqI6f0uCoG4ZTAa8RXVINBsMHoRYzldXIDYg4NA7xE=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw9MNLnxnUENvMo6PtsOdgHqnzaw9tr+wPLjiNIQ4AfhXzL1X5b
+ c7ihTfqN0CahSJ1CWdJNlNERKrGZv21D69+qqh4KCst/plvNRdRw3MFQdOHI6g==
+X-Gm-Gg: AeBDieudy1ewYVcxzatQIp/Y5PosKhQKDM1O3CJapvie0A/LuSmdUvlS25T7dBeaecW
+ 6573FF2UKRV+FEGurbPCBMImZ9fZWDaO31BkdmL2cWqNfxIPMqz1gyQvouWHuwl1SOvNhsFPmhC
+ 2m7DK84pcX2j1qn2rYIQcbCf27eInKLC6puKr2V+cqHNEKsPTdCzPYpUBraJ4Gm5xaFKP6nNbll
+ +b7ACLcldl8vhmRBm7ABMdBxc/dpuT/I9zEiYkds7xkEqYTpskozmkIi8xRlvleJMX3J8D3gg8G
+ ML8TK2RDTv5x/IcWktIxteIx4LVnsh0Tm5Fb8o1ewGuguF9XyrrfvLQuoIrEIFlZ17NBcwzA8+N
+ n2tTqGWlImzhJj2mBq0oPjlcvdfNuLIQAhC5LC4OI5CmJYdhUydA6GO19bbhan9cT4LOzvGc1Op
+ HG9jFmW+NGlYRxDB/7ryiaiUQzK+o79TvQ55LNx/la7u9fmeLs7C8=
+X-Received: by 2002:a05:600c:a40a:b0:489:1ba8:5bf0 with SMTP id
+ 5b1f17b1804b1-4891ba85dc1mr289191445e9.21.1777046648285; 
+ Fri, 24 Apr 2026 09:04:08 -0700 (PDT)
+Received: from localhost.localdomain ([151.70.144.55])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-488fc10777csm678783845e9.8.2026.04.24.09.04.07
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 24 Apr 2026 09:04:07 -0700 (PDT)
+From: Michele Bisogno <micbis.openwrt@gmail.com>
+To: Marek Vasut <marex@denx.de>, Lukasz Majewski <lukma@denx.de>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>
+Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de, Michele Bisogno <micbis.openwrt@gmail.com>
+Subject: [PATCH v6 3/3] usb: gadget: rcar: Add support for RZ/G2L (R9A07G044)
+Date: Fri, 24 Apr 2026 18:03:16 +0200
+Message-Id: <20260424160316.157380-4-micbis.openwrt@gmail.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20260424160316.157380-1-micbis.openwrt@gmail.com>
+References: <20260424160316.157380-1-micbis.openwrt@gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 01/11] Makefile: add SPL_REMAKE_ELF_LDSCRIPT feature
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>,
- u-boot-qcom@groups.io, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@arm.com>,
- Anshul Dalal <anshuld@ti.com>, Peng Fan <peng.fan@nxp.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Andrew Davis <afd@ti.com>,
- Hrushikesh Salunke <h-salunke@ti.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>, Ye Li <ye.li@nxp.com>,
- Andre Przywara <andre.przywara@arm.com>,
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>, Dhruva Gole <d-gole@ti.com>,
- Kaustabh Chakraborty <kauschluss@disroot.org>,
- Jerome Forissier <jerome.forissier@arm.com>, Heiko Schocher
- <hs@nabladev.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Lukasz Majewski <lukma@denx.de>,
- Mateusz Kulikowski <mateusz.kulikowski@gmail.com>,
- Dinesh Maniyam <dinesh.maniyam@altera.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Michal Simek <michal.simek@amd.com>, Yao Zi <me@ziyao.cc>,
- Peter Korsgaard <peter@korsgaard.com>,
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Casey Connolly <casey.connolly@linaro.org>,
- Tingting Meng <tingting.meng@altera.com>,
- Tien Fong Chee <tien.fong.chee@altera.com>, Alice Guo <alice.guo@nxp.com>,
- George Chan <gchan9527@gmail.com>,
- Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
- Alexey Charkov <alchark@gmail.com>, Ronald Wahl <ronald.wahl@legrand.com>,
- Michael Trimarchi <michael@amarulasolutions.com>
-References: <20260421-qcom_spl-v3-0-efee3f76754d@seznam.cz>
- <20260421-qcom_spl-v3-1-efee3f76754d@seznam.cz>
- <20260421204536.GA41863@bill-the-cat>
- <68690d5a-e48c-4ff7-920f-f0d4b65f5bec@seznam.cz>
- <20260424161955.GJ41863@bill-the-cat>
-Content-Language: en-US
-From: Michael Srba <Michael.Srba@seznam.cz>
-In-Reply-To: <20260424161955.GJ41863@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Sat, 25 Apr 2026 20:03:18 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -109,105 +102,91 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+The Renesas RZ/G2L (and RZ/G2LC) USBHS controller requires the
+CNEN bit in the SYSCFG register to be set for function operation.
+Additionally, its CFIFO is byte-addressable.
 
-On 4/24/26 18:19, Tom Rini wrote:
-> On Fri, Apr 24, 2026 at 02:14:42AM +0200, Michael Srba wrote:
->> Hi,
->>
->> On 4/21/26 22:45, Tom Rini wrote:
->>> On Tue, Apr 21, 2026 at 09:43:44PM +0200, michael.srba@seznam.cz wrote:
->>>
->>>> From: Michael Srba <Michael.Srba@seznam.cz>
->>>>
->>>> Some platforms (e.g. least Qualcomm), use the ELF format in creative
->>>> ways, including in the bootrom. Make SPL_REMAKE_ELF use a linker script
->>>> specified in SPL_REMAKE_ELF_LDSCRIPT (with the previously hardcoded path
->>>> as the default).
->>>>
->>>> Signed-off-by: Michael Srba <Michael.Srba@seznam.cz>
->>>> ---
->>>>    Makefile           | 10 ++++++++--
->>>>    common/spl/Kconfig | 10 ++++++++++
->>>>    2 files changed, 18 insertions(+), 2 deletions(-)
->>>>
->>>> diff --git a/Makefile b/Makefile
->>>> index 8af18668b0f..50893d5689e 100644
->>>> --- a/Makefile
->>>> +++ b/Makefile
->>>> @@ -2004,16 +2004,22 @@ u-boot.elf: u-boot.bin u-boot-elf.lds FORCE
->>>>    quiet_cmd_u-boot-spl-elf ?= LD      $@
->>>>    	cmd_u-boot-spl-elf ?= $(LD) spl/u-boot-spl-elf.o -o $@ \
->>>>    	$(if $(CONFIG_SYS_BIG_ENDIAN),-EB,-EL) \
->>>> -	-T u-boot-elf.lds --defsym=$(CONFIG_PLATFORM_ELFENTRY)=$(CONFIG_SPL_TEXT_BASE) \
->>>> +	-T spl/u-boot-spl-elf.lds --defsym=$(CONFIG_PLATFORM_ELFENTRY)=$(CONFIG_SPL_TEXT_BASE) \
->>>>    	-Ttext=$(CONFIG_SPL_TEXT_BASE)
->>>> -spl/u-boot-spl.elf: spl/u-boot-spl.bin u-boot-elf.lds
->>>> +spl/u-boot-spl.elf: spl/u-boot-spl.bin spl/u-boot-spl-elf.lds
->>>>    	$(Q)$(OBJCOPY) -I binary $(PLATFORM_ELFFLAGS) $< spl/u-boot-spl-elf.o
->>>>    	$(call if_changed,u-boot-spl-elf)
->>>> +SPL_REMAKE_ELF_LDSCRIPT := $(addprefix $(srctree)/,$(CONFIG_SPL_REMAKE_ELF_LDSCRIPT:"%"=%))
->>>> +
->>>> +spl/u-boot-spl-elf.lds: $(SPL_REMAKE_ELF_LDSCRIPT) FORCE
->>>> +	$(call if_changed_dep,cpp_lds)
->>>> +
->>>>    u-boot-elf.lds: arch/u-boot-elf.lds prepare FORCE
->>>>    	$(call if_changed_dep,cpp_lds)
->>>>    PHONY += prepare0
->>>> +
->>>>    # MediaTek's ARM-based u-boot needs a header to contains its load address
->>>>    # which is parsed by the BootROM.
->>>>    # If the SPL build is enabled, the header will be added to the spl binary,
->>>> diff --git a/common/spl/Kconfig b/common/spl/Kconfig
->>>> index d1a85f50209..1d279a2bb05 100644
->>>> --- a/common/spl/Kconfig
->>>> +++ b/common/spl/Kconfig
->>>> @@ -247,6 +247,16 @@ config SPL_HANDOFF
->>>>    	  proper. Also SPL can receive information from TPL in the same place
->>>>    	  if that is enabled.
->>>> +config SPL_REMAKE_ELF_LDSCRIPT
->>>> +	string "Linker script for SPL ELF"
->>>> +	depends on SPL_REMAKE_ELF
->>>> +	default "arch/$(ARCH)/u-boot-spl-elf.lds"
->>>> +	help
->>>> +	  This allows specifying a linker script that will act on u-boot-spl.bin.
->>>> +	  Some platforms (e.g Qualcomm) use the ELF format in creative ways,
->>>> +	  including in the bootrom. For such platforms, you can change the default
->>>> +	  linker script to a platform-specific one.
->>>> +
->>>>    config SPL_LDSCRIPT
->>>>    	string "Linker script for the SPL stage"
->>>>    	default "arch/arm/cpu/arm926ejs/sunxi/u-boot-spl.lds" if MACH_SUNIV
->>> Did what I said about cleaning up the remake elf Makefile logic itself
->>> get lost somewhere? Sorry. To repeat, we should have a remake elf
->>> function, make use of $(PHASE_) and have Kconfig entries for both
->>> REMAKE_ELF_LDSCRIPT and SPL_REMAKE_ELF_SCRIPT (so we can use $(PHASE_)
->>> again to get the right one. Thanks!
->>>
->> Trying to figure this out, I feel like I must be missing something...
->> It seems like $(PHASE_) is never going to be anything other than an empty
->> string inside the main Makefile?
->> While `libs-$(CONFIG_$(PHASE_)ALTERA_SDRAM) += drivers/ddr/altera/` would
->> make me think otherwise, most of the contents of the toplevel Makefile
->> strongly suggest that it's only ever executed once, rather than one time
->> for each of u-boot proper, spl, tpl, vpl. I have tried to use $(PHASE_)
->> anyway, but it really doesn't seem to work. Could you explain more
->> specifically how I should do this?
-> I had thought this would work, yes. Does this mean the other cases of
-> $(PHASE_) in the top-level Makefile also aren't working? And, is there
-> some other Makefile where $(PHASE_) does indeed work, that we could move
-> this particular logic to?
->
-Yes, I'm pretty sure the other cases are also not working.
-I don't see a way to do this "properly" with the current Makefile setup,
-but obviously I don't know that much about it.
-I think the cleanest way would be add a new Makefile, maybe
-Makefile.foreachphase in scripts/ (or some shorter name), and have
-the toplevel makefile do include magic to include it multiple times
-with $(PHASE_) set (and probably stuff like $(phase) and/or $(BIN) too,
-those currently don't exist at all but would be handy for obvious reasons).
+Introduce a new renesas_usbhs_driver_param structure for the
+RZ/G2L SoC and link it via the udevice_id data pointer. Update
+usbhs_probe() to accept the udevice pointer to retrieve these
+parameters during initialization.
 
-In any case I would prefer if the current iteration could just go through
-for now, since this looks like a non-trivial change that would better
-be done by someone who spent more than two days trying to understand the
-Makefile system.
+This alignment follows the logic used in the Linux kernel
+renesas_usbhs driver.
+
+Reviewed-by: Marek Vasut <marex@denx.de>
+Signed-off-by: Michele Bisogno <micbis.openwrt@gmail.com>
+---
+ drivers/usb/gadget/rcar/common.c      | 20 ++++++++++++++++++++
+ drivers/usb/gadget/rcar/renesas_usb.h |  1 +
+ 2 files changed, 21 insertions(+)
+
+diff --git a/drivers/usb/gadget/rcar/common.c b/drivers/usb/gadget/rcar/common.c
+index 2bf0dcff393..10548f7a20c 100644
+--- a/drivers/usb/gadget/rcar/common.c
++++ b/drivers/usb/gadget/rcar/common.c
+@@ -92,6 +92,12 @@ void usbhs_sys_function_ctrl(struct usbhs_priv *priv, int enable)
+ 	u16 mask = DCFM | DRPD | DPRPU | HSE | USBE;
+ 	u16 val  = HSE | USBE;
+ 
++	/* CNEN bit is required for function operation */
++	if (usbhs_get_dparam(priv, has_cnen)) {
++		mask |= CNEN;
++		val  |= CNEN;
++	}
++
+ 	/*
+ 	 * if enable
+ 	 *
+@@ -363,13 +369,21 @@ static int usbhs_probe(struct udevice *dev)
+ {
+ 	struct usbhs_priv_otg_data *otg_priv = dev_get_priv(dev);
+ 	struct usbhs_priv *priv = &otg_priv->usbhs_priv;
++	struct renesas_usbhs_driver_param *plat_param;
+ 	int ret;
+ 
++	plat_param = (struct renesas_usbhs_driver_param *)dev_get_driver_data(dev);
++
+ 	priv->dparam.type = USBHS_TYPE_RCAR_GEN3;
+ 	priv->dparam.pio_dma_border = 64;
+ 	priv->dparam.pipe_configs = usbhsc_new_pipe;
+ 	priv->dparam.pipe_size = ARRAY_SIZE(usbhsc_new_pipe);
+ 
++	if (plat_param) {
++		priv->dparam.has_cnen		= plat_param->has_cnen;
++		priv->dparam.cfifo_byte_addr	= plat_param->cfifo_byte_addr;
++	}
++
+ 	/* call pipe and module init */
+ 	ret = usbhs_pipe_probe(priv);
+ 	if (ret < 0)
+@@ -487,8 +501,14 @@ static int usbhs_udc_otg_remove(struct udevice *dev)
+ 	return dm_scan_fdt_dev(dev);
+ }
+ 
++static struct renesas_usbhs_driver_param rzg2l_param = {
++	.has_cnen = 1,
++	.cfifo_byte_addr = 1,
++};
++
+ static const struct udevice_id usbhs_udc_otg_ids[] = {
+ 	{ .compatible = "renesas,rcar-gen3-usbhs" },
++	{ .compatible = "renesas,rzg2l-usbhs", .data = (unsigned long)&rzg2l_param },
+ 	{},
+ };
+ 
+diff --git a/drivers/usb/gadget/rcar/renesas_usb.h b/drivers/usb/gadget/rcar/renesas_usb.h
+index 8155e3dcaf6..140a70251cf 100644
+--- a/drivers/usb/gadget/rcar/renesas_usb.h
++++ b/drivers/usb/gadget/rcar/renesas_usb.h
+@@ -111,6 +111,7 @@ struct renesas_usbhs_driver_param {
+ 	u32 has_otg:1; /* for controlling PWEN/EXTLP */
+ 	u32 has_sudmac:1; /* for SUDMAC */
+ 	u32 has_usb_dmac:1; /* for USB-DMAC */
++	u32 has_cnen:1;
+ 	u32 cfifo_byte_addr:1; /* CFIFO is byte addressable */
+ #define USBHS_USB_DMAC_XFER_SIZE	32	/* hardcode the xfer size */
+ 	u32 multi_clks:1;
+-- 
+2.34.1
+
