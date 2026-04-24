@@ -4,83 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5A81FF885C
-	for <u-boot@archiver.kernel.org>; Sat, 25 Apr 2026 18:08:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F6D1FF8860
+	for <u-boot@archiver.kernel.org>; Sat, 25 Apr 2026 18:08:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 10B798455B;
+	by phobos.denx.de (Postfix) with ESMTP id 532C284564;
 	Sat, 25 Apr 2026 20:03:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Zuo2k8pd";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="D61M6KMk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AA2DF84319; Sat, 25 Apr 2026 20:02:06 +0200 (CEST)
-Received: from mail-qk1-x742.google.com (mail-qk1-x742.google.com
- [IPv6:2607:f8b0:4864:20::742])
+ id BAFA184319; Sat, 25 Apr 2026 20:02:42 +0200 (CEST)
+Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
+ [IPv6:2a00:1450:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 91BBA80087
- for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 20:02:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B42CD80087
+ for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 20:02:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jcethrid@gmail.com
-Received: by mail-qk1-x742.google.com with SMTP id
- af79cd13be357-8ef2118b478so511263985a.0
- for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 11:02:04 -0700 (PDT)
+ spf=pass smtp.mailfrom=micbis.openwrt@gmail.com
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-48374014a77so116062505e9.3
+ for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 11:02:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1777140123; x=1777744923; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ICE6Uu31Z3+Oim2GsebNaxOF5NTenlaIE0sod4H9L94=;
- b=Zuo2k8pdO8bg95e7BjnIHkXalPrXMZ+hr5iNRijqi7+XzVUb8QlrkXmGem+it5Xs39
- R5V0CD+Ykr2D+dpoqWS4rLVBNHql0CrRjRmBHpg2BFlL8/dVd1KTJbiob+1iRsUApLUl
- sLDbpZjcevyRhxvakOSCJhW8o9hLpsn9rTt/P0eyBHnnFDoXdMyZt9B+rSsHh+ToiQhx
- DqoA3/L0YRGVJ/SHqcKGwX6wztIPc7eFLHcXNT9bbuj2Ok+tUPyQwrtSPCMxkLOCp/Sh
- 8qHwPh8GlnB4sEjijcGd1BBm/FuBSkO6YGnbioVklPYnVPou6yBTywayzC84He4r946f
- 9rbw==
+ d=gmail.com; s=20251104; t=1777140160; x=1777744960; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=QybEL3l2wkLhkhqaBAVVBOhgrBGlBSxV/kkk2PXb3yE=;
+ b=D61M6KMkKLEn8QimLstgS64AYqLkYEabLfRO4pzVwvWnfn9UzNsguKn8FYM92ALpXD
+ rHX7fqXXdeXrYsjP2xY/EXk5x2qG8VjIEt3IOd2PwHenHe9sAWaSZ5CVK0CCXOEzJr3Z
+ 9nM6E4iTCfPFbCljMdGSctwugZtROWRcoy5dEaa0CDGU1J3K1n7hZV+TjRf7ddb7fEPf
+ Imy5WDtjQupCfgNAAU49LSJw0zVmHVqCX3zL5Fd1sX/oGZrQDBV0ED9fj/AXVj7jZLgm
+ rDaa+AfmM+sbduyFXYIEQGURt0WM77OFIfhtOd4J+z44Zd4EBxq5vDujw7/dlFUuLpSP
+ wi1Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777140123; x=1777744923;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=ICE6Uu31Z3+Oim2GsebNaxOF5NTenlaIE0sod4H9L94=;
- b=BHLoPgpE0yXJwrdr8aohiLasTXBpp6yCJ/qdIhijnk6MjTnb5zlu9qbt2OPYn9dlwt
- tnGEfLPzWwj/1vXCehaalES5DwOgfUA4Z948NEo4YjzBQ4KoHCrseopTSgxX2Hht2KkY
- gO7jiuXAhFtWJdfI/owninZs2aY0fHtnBMMome78WdmGxAXyx8oiAlXAS5+574uAmI3F
- v8wLEzZHrxKg+/Y4AdwIz4/DIux8G/z0vB42TY7G8OE3d70KBI2m9Fz6zJC8CcHDa6Us
- D99qglMfd5siZbxZMvkRRaFfvoMiQ3vt03lGd0xoWjYzBi7XrrJDEdLSSMBWciGZEbsa
- XoBA==
-X-Gm-Message-State: AOJu0YyWtSxtEpyPTU4/PJOayUHoJjp2ndCM4KaVujt5eUjDg0zwC6nv
- sJ8iOn8Ot8R2V2qhFpVhGqUs7+Q5J6TtHyZtDcvXoKW0UKz24l9mpYF5oKMAYBy3
-X-Gm-Gg: AeBDiesdOQix3Us4Ozxbfk3l90pUPDQcYlDdZCSCdbUbC4Z5FllOCNWt2BdInCq1Uer
- QjJ5kiGr+Rd1MEpVsvgkDu4NyEMusOFBVBUFjEIHa5aWw4nodUt6mRxGxQNKoO7mLNzlOjaYV7y
- bnKrlJweXNwdoNsiX0oyv28QKKWrmf/OwlNFxuEJUJtMbhWRIdJo/+lxW9ip/KhWtR1hOO69U1r
- pFvYCJj0ihGuO3296s+yvwNLSFvCiGTGhbMQES1yFrifEq8mpk3RcjsBXqkcGI1K3kfN0AXorJS
- TZ/P+DrNE919fI/iF7GhNiS7i3IBOoVkVeumnsEJdNoFw1Rl3y8dY2P1W/voISYCKV/9fCUZWPI
- yHLlNf6CQJ4rRBqk5iHllBr6ELuzoGTcuyCacP0JIZkYfeJkg2ZN+CR0+kjjM2dYQC6aAXxYIJP
- zuDTcVT0C1PueMXHgVTuIU3sFKI9qUKhbCC8J7LMdJpXE0
-X-Received: by 2002:a05:6214:4019:b0:8ae:5fcc:ebc3 with SMTP id
- 6a1803df08f44-8b02813ae15mr422539426d6.38.1776954347097; 
- Thu, 23 Apr 2026 07:25:47 -0700 (PDT)
-Received: from cethr-l01.localdomain ([136.56.120.109])
+ d=1e100.net; s=20251104; t=1777140160; x=1777744960;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=QybEL3l2wkLhkhqaBAVVBOhgrBGlBSxV/kkk2PXb3yE=;
+ b=oT+rvR9J1MIOb/wAi2gk/xW10GUKi8eiFxRGw6D7bd2FXOxafFxjjGGBiXvWObzrwJ
+ ZhW6wnVA8S4fs1fv09zXBYvyq9F0E1zekNr68bzzgC1+uOO4CKU7xBlTvU5se4jxgGPQ
+ 3p6fnzHzRLu4C0eCnO1p4ms9iBZBjnqGPx/N9HaIij8BlQmNoLH0HwgQlk2Cfbqe5UM2
+ qOJI9+55HOd5hIG55dIj8qfOj11TxivSNakX2kZgjgkMGmUC/kmF+IYI333pc+vDuFT6
+ oJBHiR/Clt/xkl400kuRa1L0Fu8TeswjUKsA/UE2jK6AsWd3zLZ2NQN/S37hD1dMPgsb
+ ZtzQ==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ9Ih7UEEmgAxaAaURH5OK9/aExel6zrbvoyUiJDrJrl4+iy45hgXPCjT8pBm3yhjdHBWQfxnvk=@lists.denx.de
+X-Gm-Message-State: AOJu0YwfdEIxFjr9COFiLMoCsNQe2aBL5+u5Vf3JFB8uBUWveF22jX+x
+ +JTSFzualjaJe0C71MI2QefanbDw1lbV69AwXx+3jDadDoHbCaIZjXFp1hbauQ==
+X-Gm-Gg: AeBDietJumievTnbH1uCokjXcHsCmNPU9GghNiTMNGSFJOy/MTGU1jKcr9/rxrk9ggA
+ KtbxpwfPjeZf8rz2NgYzEmGJWGTVl9U1wVnXtoPBBj/VfQrOgNRmrdW2SYBLhlJsn20aQS6D37E
+ oQZd5/WLpE8tZs746+EuQNoPnWntcnHIEXZwDEA68iNjyPrZiNsddHWiyzHrs9j2tHmaRi4mbck
+ xWp7lTNjBninDPsuZ1qGKzZ4/pwE6bmMeOrnL8J7XaAeRutxIRuvA44ovB9JA22K6uOvG9mIDio
+ Aq6XZYLkeFVAGz/j9VyEQzuVBdL9rgR5Spm89J8pPDvMRvHsLkwLB/YJSXNfb0KRXeFso2fnsyk
+ Zfs15pRJ7AYsgCzPMptzLcEkhVzTzurYfod55zRJwsI4xx+YpS94jVfljqHHmrrYe1DYydWykfR
+ 5ek737c26CVWRNvouRYcZDPxNiNLini22MEbdwrro78BILLPaYBi8=
+X-Received: by 2002:a05:600c:3546:b0:488:81b1:ae36 with SMTP id
+ 5b1f17b1804b1-488fb7880camr464761695e9.23.1777046644537; 
+ Fri, 24 Apr 2026 09:04:04 -0700 (PDT)
+Received: from localhost.localdomain ([151.70.144.55])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-8b02aa4f1f9sm157183266d6.0.2026.04.23.07.25.45
+ 5b1f17b1804b1-488fc10777csm678783845e9.8.2026.04.24.09.04.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 23 Apr 2026 07:25:46 -0700 (PDT)
-From: Caleb Ethridge <jcethrid@gmail.com>
-To: u-boot@lists.denx.de
-Cc: malysagreg@gmail.com, trini@konsulko.com, linux@analog.com,
- philip@philipmolloy.com, sjg@chromium.org,
- Caleb Ethridge <caleb.ethridge@analog.com>
-Subject: [PATCH v5 06/15] mach-sc5xx: Remove preliminary binman support
-Date: Thu, 23 Apr 2026 10:24:41 -0400
-Message-Id: <650457e35a26c26601053a00dcb09e33cb8f151c.1776954004.git.jcethrid@gmail.com>
+ Fri, 24 Apr 2026 09:04:04 -0700 (PDT)
+From: Michele Bisogno <micbis.openwrt@gmail.com>
+To: Marek Vasut <marex@denx.de>, Lukasz Majewski <lukma@denx.de>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>
+Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de, Michele Bisogno <micbis.openwrt@gmail.com>
+Subject: [PATCH v6 0/3] usb: gadget: rcar: Add RZ/G2L support and lifecycle
+ fixes
+Date: Fri, 24 Apr 2026 18:03:13 +0200
+Message-Id: <20260424160316.157380-1-micbis.openwrt@gmail.com>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <cover.1776954004.git.jcethrid@gmail.com>
-References: <cover.1776954004.git.jcethrid@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Sat, 25 Apr 2026 20:03:18 +0200
@@ -100,113 +100,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Caleb Ethridge <caleb.ethridge@analog.com>
+This series adds support for the Renesas RZ/G2L (R9A07G044) USBHS
+controller. During development, several lifecycle and resource 
+management issues were identified and addressed to satisfy RZ/G2L 
+hardware requirements and prevent resource leaks across the driver.
 
-Remove preliminary binman support from all sc5xx ADSP boards.
-Full support was never added because it was unused.
+The series is split into three logical parts to ensure bisectability:
+1. A bugfix for the gadget deletion sequence during driver remove.
+2. The addition of reset controller infrastructure and proper 
+   clock/reset teardown logic.
+3. The RZ/G2L specific hardware parameters, SYSCFG logic, and 
+   compatible strings.
 
-Signed-off-by: Caleb Ethridge <caleb.ethridge@analog.com>
----
- arch/arm/dts/sc5xx.dtsi     | 41 -------------------------------------
- arch/arm/mach-sc5xx/Kconfig | 33 -----------------------------
- 2 files changed, 74 deletions(-)
+Changes in v6:
+- Fixed teardown order in usbhs_udc_otg_remove() to ensure PHY shutdown 
+  occurs before reset assertion and clock disablement.
+- Added explicit reset_release_bulk() and clk_release_bulk() to both 
+  the remove path and the probe error paths.
+- Sorted header inclusions alphabetically as requested.
+- Fixed a bug in the clock enable error path where resources were 
+  not properly released.
+- Carried over the Reviewed-by tags
 
-diff --git a/arch/arm/dts/sc5xx.dtsi b/arch/arm/dts/sc5xx.dtsi
-index 9d346ae62e0..072631e34f7 100644
---- a/arch/arm/dts/sc5xx.dtsi
-+++ b/arch/arm/dts/sc5xx.dtsi
-@@ -25,47 +25,6 @@
- 		bootph-pre-ram;
- 	};
- 
--#ifdef CONFIG_SC5XX_USE_BINMAN
--	binman {
--		filename = CONFIG_SC5XX_BINMAN_FILENAME;
--		stage1-boot {
--			offset = <CONFIG_SC5XX_UBOOT_SPL_OFFSET>;
--			type = "blob-ext";
--			filename = "spl/u-boot-spl.ldr";
--		};
--
--		/* since falcon mode can jump from SPL to OS directly
--		 * full u-boot is optional
--		 *
--		 * @todo: review if we can say this given support has
--		 * not yet been upstreamed. Otherwise we might have to
--		 * invoke binman only for full u-boot.
--		 */
--		stage2-boot {
--			offset = <CONFIG_SC5XX_UBOOT_OFFSET>;
--			type = "blob-ext";
--			filename = "u-boot.ldr";
--			optional;
--		};
--
--#ifdef CONFIG_SC5XX_FITIMAGE_NAME
--		fitImage {
--			offset = <CONFIG_SC5XX_FITIMAGE_OFFSET>;
--			type = "blob-ext";
--			filename = CONFIG_SC5XX_FITIMAGE_NAME;
--		};
--#endif
--
--#ifdef CONFIG_SC5XX_ROOTFS_NAME
--		rfs {
--			offset = <CONFIG_SC5XX_ROOTFS_OFFSET>;
--			type = "blob-ext";
--			filename = CONFIG_SC5XX_ROOTFS_NAME;
--		};
--#endif
--	};
--#endif
--
- 	clocks {
- 		dummy: dummy {
- 			compatible = "fixed-clock";
-diff --git a/arch/arm/mach-sc5xx/Kconfig b/arch/arm/mach-sc5xx/Kconfig
-index cfa7ed46a82..70fab57fb3c 100644
---- a/arch/arm/mach-sc5xx/Kconfig
-+++ b/arch/arm/mach-sc5xx/Kconfig
-@@ -146,39 +146,6 @@ config SC5XX_LOADADDR
- 	help
- 	  The default load address for u-boot.
- 
--menu "Binman configuration"
--config SC5XX_USE_BINMAN
--	bool "Use binman for final image"
--	select BINMAN
--	help
--	  If you wish to use binman to assemble an image, say 'Y' here.
--	  This will enable binman-specific sections in the device tree.
--
--config SC5XX_BINMAN_FILENAME
--	string "Image name"
--	default "sc5xx-image.img"
--	depends on SC5XX_USE_BINMAN
--	help
--	  The name of the image that will be created by binman.
--	  This is used to create the final image.
--
--config SC5XX_FITIMAGE_NAME
--	string "FitImage name"
--	default "fitImage"
--	depends on SC5XX_USE_BINMAN
--	help
--	  The name of the fitImage to be packed by binman.
--	  This is used to create the final image.
--
--config SC5XX_ROOTFS_NAME
--	string "RootFS name"
--	default "rootfs"
--	depends on SC5XX_USE_BINMAN
--	help
--	  The name of the rootfs to be packed by binman.
--	  This is used to create the final image.
--endmenu
--
- config ADI_IMAGE
- 	string "ADI fitImage type"
- 	help
+Changes in v5:
+- Simplified usbhs_probe() signature to only take struct udevice *dev,
+  deriving private data internally as requested.
+- Fixed resource leak in usbhs_udc_otg_probe() error paths by adding 
+  reset_assert_bulk() to the teardown sequence.
+- Standardized resource management by ensuring the probe error path 
+  perfectly mirrors the removal path.
+
+Changes in v4:
+- Split the monolithic patch into a 3-patch series as requested.
+- Added usb_del_gadget_udc() to fix resource leak on driver remove.
+- Implemented bulk reset controller support (required for RZ/G2L).
+- Improved error handling in probe() to ensure clocks are disabled 
+  if reset initialization or deassertion fails.
+- Moved reset and clock handles to private data to ensure persistence.
+- Reorganized hunks to ensure each patch in the series compiles 
+  independently (bisectability).
+
+
+Michele Bisogno (3):
+  usb: gadget: rcar: Fix gadget registration lifecycle in remove
+  usb: gadget: rcar: Add support for reset controller
+  usb: gadget: rcar: Add support for RZ/G2L (R9A07G044)
+
+ drivers/usb/gadget/rcar/common.c      | 65 +++++++++++++++++++++++----
+ drivers/usb/gadget/rcar/renesas_usb.h |  1 +
+ 2 files changed, 58 insertions(+), 8 deletions(-)
+
 -- 
 2.34.1
 
