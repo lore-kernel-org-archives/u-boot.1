@@ -4,87 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C3BCFF8860
-	for <u-boot@archiver.kernel.org>; Sat, 25 Apr 2026 18:47:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CAE8CFF885C
+	for <u-boot@archiver.kernel.org>; Sat, 25 Apr 2026 19:05:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E747E842FC;
-	Sat, 25 Apr 2026 20:46:58 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0954584255;
+	Sat, 25 Apr 2026 21:05:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="djxy42Dy";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="XwoSfZ5d";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B7F8984376; Sat, 25 Apr 2026 20:46:57 +0200 (CEST)
-Received: from mail-ot1-x32d.google.com (mail-ot1-x32d.google.com
- [IPv6:2607:f8b0:4864:20::32d])
+ id 7EEE284258; Sat, 25 Apr 2026 21:05:11 +0200 (CEST)
+Received: from mail-dl1-x1236.google.com (mail-dl1-x1236.google.com
+ [IPv6:2607:f8b0:4864:20::1236])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 93B0880087
- for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 20:46:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5471C84150
+ for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 21:05:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32d.google.com with SMTP id
- 46e09a7af769-7dccb8644c4so3023286a34.0
- for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 11:46:55 -0700 (PDT)
+Received: by mail-dl1-x1236.google.com with SMTP id
+ a92af1059eb24-12dbd0f7ecaso1810524c88.0
+ for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 12:05:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1777142814; x=1777747614; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1777143908; x=1777748708; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=lurez2D4CAfZTYTd/q8xTfL83pAJNzUyNmQL7Ukf2ug=;
- b=djxy42Dy9pihzojT1SE2vV9cJ/2UwfbPdrhaAMKhLQBR38/NhPzrU8NBJ1rxsyqsUg
- suZd6NEb6/PS/QhKCiwLcGfJgFN0wQvaXObHT6KwW/IpGV97u7srXoqvCOCnecE6FByZ
- zVYIollWx21YtRMqiONKe7+kR7tYAsTZhRgHM=
+ bh=JDNEcQ2CsunxQkiRVCPSv8/sRE1j3qi898LU5RnVZyo=;
+ b=XwoSfZ5dQIv2Gue0+UAhAREkNBTkw3vs+cWi+R3oDbZ3AgEOLWaCgemGJto8H+CQxn
+ 1vCASPBSATZmjrKOJ+ACLGBNbzojI+4rYxjZoHVlPr1Vy3sxmB4PuAOKHcA/5o5gQNzF
+ WTQQmk4tQswQkzRudX1t1GeyJ4YGF07PByhK0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777142814; x=1777747614;
+ d=1e100.net; s=20251104; t=1777143908; x=1777748708;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=lurez2D4CAfZTYTd/q8xTfL83pAJNzUyNmQL7Ukf2ug=;
- b=MX2clqEvMtL7sPFUwcjffYbFuMvLziuU7AO7ZUmign0WM3ad6K4OxemPfYzKPTMZXr
- f5XgTfOWDta5PSNL53sNbbyXi374UqYwKfJZObMoZ5YRflikUDnLvhVr7YySwevi1taW
- eRhP+MfT7xotFqJtLrIcvarDnFzbpfb3gVijbBMjJQOwNj+6mNyisjZRD7JqJCzmxzwL
- 80zS03XCw7gGNcIr2pT29cU+A9bqwWvXxbYWOQ5hpEGB5pUZnW0W1Rc/RRhZUodIQFrR
- WnxL2qoSK6kS0A+JulbjBEDdfPYSTA5JH7B4N2ByPxbK0QIAHnZ6aZ3P7cDPVrsmY1HS
- gJCg==
-X-Gm-Message-State: AOJu0Yz3Cx9Yq4hAApFCbzCYskzOp7wUeQZ38TY376lcDvVDz1VKiI6j
- /xHXuTJiANxLBWW6SnCedN2APehGekfDJoE/wfh63QOejgK49Z/LrOou4ONC7m8jpPyRH+bSBIR
- B8qNO7behFQ==
-X-Gm-Gg: AeBDiet0iZzyBE4kxukPcQammPbu7H1CUn0dGE3lIga48jqfdgTrE4V407U+9FGNhVZ
- Al75Q3bbkMPxb3rdXw+uNKdHiWiX4Z9DXKV3gdNR2o32hyHUOGdsa2aojfroQaWP0frEaoyNDHw
- uWu9hhgEKNU35wd3w5uyDOsHaxPf6mL2077o+EB86Ig2K2QK8P6XgwN3P4S9NE/cM6fZSdMXsi0
- ycBnWxcxz0QU5fbhT/x8tRoxpT7343wKu2MlCJIfbJFv+5CQJ+j28zwHBcknJNa5t6LDA0ggSNN
- LM7X8EUPsonhbjZ3cT4gU2kUOj3S5leeHHkGsnOSS7fdNRkwoB3V+VHhF6SMqvveeJiVeJeV6Fz
- JWk9dcT7g++DcqGaEx9VkfaZ6tGlhxNGMZQR1KSnYxxeJlBRX2zlvLjytfIqx4/ID1ypXvsrrY7
- VilqXH1aAC9h7/YT1qq9TxCiwA7rPnfqyWxI5MsxJbAgvt3EUb1sdX8/bM8ZvGwXKNwhzYuHgx1
- EtxRy3VJ8phLGXpSblvYM0x8ZORL5lIISc+3A7eVP+nSoFwLXHKxQivzSLeCww77Fomb1s=
-X-Received: by 2002:a05:6808:2515:b0:467:46e7:e6dd with SMTP id
- 5614622812f47-4799c9776b7mr13522798b6e.16.1776898141652; 
- Wed, 22 Apr 2026 15:49:01 -0700 (PDT)
+ bh=JDNEcQ2CsunxQkiRVCPSv8/sRE1j3qi898LU5RnVZyo=;
+ b=fA9iGcuMbnOzKfn15pt4eDAFRZbg2s3x6ghsmdvP9/WlsYk/0vuTqMCHITe23Ctj2o
+ JMNMYTZVLT3+thc0KO6qXlt/awkyyPJQvouneZmVwnycpYkYOGg+SzWf4+Ac0NdVJVfP
+ rxVkenSqy+CWQ2aXy/N27EXq5rFtAHIDEeNXQwKGl8p7/CVCdN512ox0wu/72v/M27MD
+ qnDr/niZu4s6QDCbuuQikvACT+nW3ocZeR2ui4EPexy3832wCgHCXSQolKHlJ8VMXgcG
+ uj8B7WPaXnMSp5t4rtPXraiJ2qeF0NWLH9PW+dQDDpcYj2kvs9RreKknNV9Pig7vw/9N
+ 4unw==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ8QdHj8bnlcbE7oxTDBnwJ+2U/KhnNDi4nLc0ZFlQEmCOpVsX2hy9XnhStm0Vk6MqSazD0ykK0=@lists.denx.de
+X-Gm-Message-State: AOJu0YzXsclOQyPK22MTCzmt9T+ayz4GM32t7lrrb5RyZFR5dYsu9LXK
+ R3Oq/v+JOfcmgnByCnyyWfUbEGEvNiUVmpFOxrKdwSwsSqLV2zfaCGJ06pF3uRtYZ7+lPLv0Mhd
+ xw8qyrUPw1A==
+X-Gm-Gg: AeBDies4kFB4Hlr5SBJw6MFPCpknElyQIGPMvi+0I8bPJ9rpmZAW4XdxTPw5KTuhshE
+ Z5NNnqb48tgICCm5JL0qihIr0g9jRqWc8YlL7aQfURRK/luZmMqG/urDkBzvUqRJ88AVFF7N84E
+ oXm0J/0J92oyMRQaGvxFSFoATR6QY+otAFtCwVuDM+kPd0igAVLMHrA2ooJ7cTgkoRNXQMD6vBg
+ H4UBxp+0o3OToPikHexzqtlNyCdXuFWUCRWw383kvVvaFw5DS2jKbE8lY3f/MCLWg8ejV0ufQqA
+ MjQl6gT/v4IZ2xDW/niWXeDlqnig/rGYNC6aYITS/gwzWyro/f1VJg3FZvKOvdFCtiVIl1o81Iy
+ pN5/xNnXoaucH1OwWAmKtnJDwDNG/qcKxU1ZLt76L1HwJxinQ69zOdLALmqYZ6NnJ033H8uwq0O
+ /Ip5aQQY6XDlp4Lys+rA+mxZ7r4jTsor2sHMJEUmPQLGMS6KXBvpgVJhQcTa/g6HuRGYYUWNB5t
+ O0gCWB4x8jtvx3kbQtiCcLpy4iMOOnouzbaVztJVpLCC2QEQBk5/2oaEM2H
+X-Received: by 2002:a05:6830:43ac:b0:7dc:cd0b:58ba with SMTP id
+ 46e09a7af769-7dccd0b6c6dmr15210277a34.4.1777056651092; 
+ Fri, 24 Apr 2026 11:50:51 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-106-235.totalplay.net.
  [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-479f3cf40d1sm3874175b6e.12.2026.04.22.15.49.00
+ 46e09a7af769-7dc975034e7sm19832464a34.6.2026.04.24.11.50.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 22 Apr 2026 15:49:01 -0700 (PDT)
+ Fri, 24 Apr 2026 11:50:50 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Quentin Schulz <quentin.schulz@cherry.de>, 
- Gregor Herburger <gregor.herburger@linutronix.de>
-Cc: Alexander Sverdlin <alexander.sverdlin@siemens.com>, 
- Simon Glass <sjg@chromium.org>, Casey Connolly <casey.connolly@linaro.org>, 
- David Zang <davidzangcs@gmail.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Sam Protsenko <semen.protsenko@linaro.org>, 
- Sughosh Ganu <sughosh.ganu@arm.com>
-In-Reply-To: <20260413152526.153605-1-gregor.herburger@linutronix.de>
-References: <20260413152526.153605-1-gregor.herburger@linutronix.de>
-Subject: Re: [PATCH v4 1/2] console: add console_flush_stdin()
-Message-Id: <177689814032.1956774.1380688153599790570.b4-ty@konsulko.com>
-Date: Wed, 22 Apr 2026 16:49:00 -0600
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Javier Tia <floss@jetm.me>, u-boot@lists.denx.de, 
+ Javier Tia <floss@jetm.me>
+In-Reply-To: <20260417173345.6559-1-heinrich.schuchardt@canonical.com>
+References: <20260417173345.6559-1-heinrich.schuchardt@canonical.com>
+Subject: Re: [PATCH 1/1] Mailmap entry for Javier Tia
+Message-Id: <177705665038.2527258.855539774076095779.b4-ty@konsulko.com>
+Date: Fri, 24 Apr 2026 12:50:50 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -105,21 +101,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 13 Apr 2026 17:24:53 +0200, Gregor Herburger wrote:
+On Fri, 17 Apr 2026 19:33:45 +0200, Heinrich Schuchardt wrote:
 
-> Add a common helper console_flush_stdin() to drain all pending
-> characters from stdin. This consolidates the open-coded
-> while (tstc()) getchar() pattern that appeared in multiple places
-> across the tree.
+> Javier has left Linaro. Forward to his new email address.
 > 
 > 
 
 Applied to u-boot/master, thanks!
 
-[1/2] console: add console_flush_stdin()
-      commit: 2c8fdd7aea1d3c6c380ea5b5080147dc7fe9c38f
-[2/2] cli: flush stdin before enabling cli
-      commit: e973fa5115e40f93bb1425db5b1cc1f3d9b8047d
+[1/1] Mailmap entry for Javier Tia
+      commit: 0d2e561ce40b58ea3cb19044375a8043b5330f6f
 -- 
 Tom
 
