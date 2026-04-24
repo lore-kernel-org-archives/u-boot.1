@@ -4,81 +4,112 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97998FF885C
-	for <u-boot@archiver.kernel.org>; Sat, 25 Apr 2026 18:13:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB655FF8860
+	for <u-boot@archiver.kernel.org>; Sat, 25 Apr 2026 18:13:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D232584324;
-	Sat, 25 Apr 2026 20:13:02 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 43A7A8445C;
+	Sat, 25 Apr 2026 20:13:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="W7a8dFJj";
+	dkim=pass (2048-bit key; unprotected) header.d=gateworks.com header.i=@gateworks.com header.b="Ap9IlNFJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8315884401; Sat, 25 Apr 2026 20:13:01 +0200 (CEST)
-Received: from mail-ua1-x933.google.com (mail-ua1-x933.google.com
- [IPv6:2607:f8b0:4864:20::933])
+ id 65D6284462; Sat, 25 Apr 2026 20:13:55 +0200 (CEST)
+Received: from mail-qk1-x731.google.com (mail-qk1-x731.google.com
+ [IPv6:2607:f8b0:4864:20::731])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 46E46842FC
- for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 20:12:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BC3A7842FC
+ for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 20:13:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=briansune@gmail.com
-Received: by mail-ua1-x933.google.com with SMTP id
- a1e0cc1a2514c-9568bae58f7so4460752241.3
- for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 11:12:59 -0700 (PDT)
+ spf=pass smtp.mailfrom=tharvey@gateworks.com
+Received: by mail-qk1-x731.google.com with SMTP id
+ af79cd13be357-8cb5c9ba82bso1355960585a.2
+ for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 11:13:52 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1777140831; cv=none;
+ d=google.com; s=arc-20240605;
+ b=FfsVYi0RyIAnk4RE0MDdn07Rxlzc5nM8td87uQTbL+qigTLXERVMOCM5foPT1kA67S
+ v+gr5dgFHVx4NWixqtWt7dKgzGuSo2wdMSrmtceV0tV013wj/xsFtdsQ05xMjj9Ujb16
+ qE0c0pHAfhHcWTTYj4krv45OOsuIt4Hzan2rOkH2UQ0VSbXmxKc15+psDvP8gvtzB5r3
+ rBMcVkDj78vsDHsH0e/xWU9sopMaaAf27kz1oj1/oNUs1Aj73mMwNJWR50+wMHIgVdb1
+ IvO2loy2VN5GD782BgVch/kSijLXzunoJp0dxVlPsz209kQEsh/lINsXruzlXd0mZuCG
+ XeXA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=hdTF+bMnv6bBoOrmpdXCJMTEGvDGsgaCibATBmLHdps=;
+ fh=mH/4VRnOPO90qrWF8WAaltchqTpn6XbMSTb6A2AVD/Y=;
+ b=dAKmpUj/4Xv/bCgVjofUQdacFY4IASM2ZfjxHY2Fx/nG4yVnCw9mjZl8lyDNlWyCjp
+ gBT3lS32A3CowmapE6FwdNh9KDKLjAwzCvC/dP549vOzD7/mtKZz93L1aF7iWCn2vEom
+ Sg57WNPyBF4tc/YUq/V3qao4fvE0L3oT+S1Ip+zJwDmDNygHJYEmRJWTv5YjsPjbwsqo
+ rMaT5t3Jq1eAOJFVOOvA23YhJcQq7xVrArKSKkq5+TNTDJibfBMmPxVJDLH8QinDovaF
+ IwjRdLCD0Slpj6rX+PhFlGF00UrELOoyGaH/GOA6kkAD8geZtteccJc6D8gjcD7Quj2A
+ VM3g==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1777140778; x=1777745578; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=wBFNCyQF1/ZQAKnYTf+xmEqUnMrUmNb6GuodGV0JMqw=;
- b=W7a8dFJj3pi7oXdx+dl565JV+8Ia8J0+OTZM29UOLDFhFZTA2ms7R9OICfS8OA2W32
- +sX54l3NoYBvkl2MnNAh4GCIpATLxGjt+rJWKR5rU9gBOyo32ANvtN38P9ocZx3Rh6uI
- FFQ8DImlK40tyA2lui1X9KO7o9zYfaAzJaSlzKIXzAoU5stW9AvLKlaAOztUUP4eOzCj
- 3UTOl0bEtifZDH6tw8EPXF42FUHDyN+c9FaGXNlCTs1OzL5LOeISjQ99He0UjAk+qdH4
- E3twn/Bfmd2lA2C8moF6i/rNPcxw4kg1uDuzXSUtcoq1gi+1qNsfYjh4Of8drG8S90qw
- CRAQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777140778; x=1777745578;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=gateworks.com; s=google; t=1777140831; x=1777745631; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=wBFNCyQF1/ZQAKnYTf+xmEqUnMrUmNb6GuodGV0JMqw=;
- b=nuM/hZezbnK0RhbpLvq9hrRdT4Rw2w0czhEhuBzrSZSBzShsJHGql0QPdQy6AyoJ3Z
- m+twv6vTsiNk2Mex1c+BLPbvo9eB2uDevBDJ44H2uPjwd4UyZFCqQIDlGcEVLoeXz0qv
- 19nbtiry4ef40fIZhPuEO7atdx7YnDhBeaUGCEUA3q/Ufhx1qNhcj0WN0DjCvNyhzmR7
- P8nM0PvqTjOHcVgzNES2BtEk/5MPWNtzqqEsRHsxdhob3RAVbQz58YHAdAtsKj5fWW9o
- uBGwdmi6g/OUBbna5tF7yb/8wp7OL3ywmtwbuiuYRCX8HErHI0TrJp5JXxtu1/cNHsJU
- z/3Q==
-X-Gm-Message-State: AOJu0YyJlkAkh/PA1D9GYxasvD55lESgusQYplL/b2xH0Z1ZZxAhR5Ut
- AvhP/3dMSih1SFArXM35kbStpW5crVx/6VRiFEsvTn+rSN35X8d87i4TQFpkHPs8maF9DA==
-X-Gm-Gg: AeBDiesXn6u08tzB20iKNblXWo7PXwf7VcTls013yYedj83uHIrhBBWQx051lLB/yqD
- 8UFEPk7SxXPSP0HAryseqxcVPeYbM6Mrn9yhpVToHL9U8XJn8S49oplAhZ2l/0jDLMzkgpYny5f
- XjOQRgwbCXsiDQd1WLKjJkHIh7FM5+P2vuwu9XgPr+fgsL8MDyS44yUS5f1ApfFNHwU40BTlCe/
- 8ECXqOUTFrQaNwFQrnKeJROxqzh9zVzZcmt9ipFYV/NbLK8FpQ/cXrNdrsqo+xHumiqtUWtXv0O
- uLIJGn44LYJYi2vu1AtaURdYWsMqTSfAkCGLf2/vT0MaJuQ5vTR51TpYoHaTz6hqmAkOSPHw7zK
- FAJhVwin2Gpm8zfdmmCoZpOQ/uFF3qbQ3wtFmLQ4k9Z0gWd2agtt6n/D0mIOfku2WgtJZxVPMfC
- hTVdOKOCQ3UNsSLNbh5V6WEbqg6m2lYc6G23uM7paV3UjqF1vTkkgyrV0j
-X-Received: by 2002:a17:903:286:b0:2b2:680c:2193 with SMTP id
- d9443c01a7336-2b5f9f64affmr269266985ad.31.1776913920542; 
- Wed, 22 Apr 2026 20:12:00 -0700 (PDT)
-Received: from intel-VirtualBox.. ([94.156.205.152])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2b5fab3bd2bsm189529935ad.74.2026.04.22.20.11.58
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 22 Apr 2026 20:12:00 -0700 (PDT)
-From: Brian Sune <briansune@gmail.com>
-To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
- Chee Tien Fong <tien.fong.chee@altera.com>, Simon Glass <sjg@chromium.org>
-Cc: Brian Sune <briansune@gmail.com>
-Subject: [PATCH v6] Improve handoff prepare on SoCFPGA
-Date: Thu, 23 Apr 2026 11:11:55 +0800
-Message-Id: <20260423031155.14747-1-briansune@gmail.com>
-X-Mailer: git-send-email 2.34.1
+ bh=hdTF+bMnv6bBoOrmpdXCJMTEGvDGsgaCibATBmLHdps=;
+ b=Ap9IlNFJSfILjkv8ZOIqNN4BrTbaIK/Jsx3bSdEGwDih2Vif+8lE3yrVL8pE8+UFLf
+ svDnaRPNO7jY8yOknaNSGByxXjTxzDkB37fCCHywwKdE12GSmTuwu1eOZe+g9cTenstf
+ 9Dyz0XjI9pFYkV1tfbLCKuBrIZHO5I2yKi/Myy1vDLVbw6cf+fSngC3MNpcbjG/0YSVQ
+ lqEgwV+kRywIsWQTnUPjVu/pBXf8ymuRMfV8hcR7hOlMv/olFDXbUOBs1kwosl7G2DsK
+ J7dZrkKWB5cC8UijnvHGtuba1auj0fu711zYGdO8s0cO4IQfNP6m3vKKRyUQtJZ0VI6R
+ sRJg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1777140831; x=1777745631;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=hdTF+bMnv6bBoOrmpdXCJMTEGvDGsgaCibATBmLHdps=;
+ b=nHGoE7/9w/b9X+Zt/Jouy551BvNDm2WktlZpIWv5NM1QBXPg2FdgV1V24DmQAo59YB
+ PaVMJuX1g6HcQz4ZhpKDP2tyQXmEnWiA8iPNeGuIGbenhaqIp03yK2ko1UHIz2VlKtqO
+ IsQLyhbCtPVBXQleikn4BKgAtFNGaZ0rIiTNnkw/lxTPUDTzddsyuaEHAUvADscQ7E0R
+ UjjkD7ewrVzNGcBAeF7Avb8vuiU9YLCX+IRjFOO1ZZ9qlFc4JttVWem4RmmeyC8BPFgk
+ +BACM3MAiGylnKKPLnOgm2Ok/MVq83NkueFNr/5p/t9r2J64XjZ+cK0tGTdvJp2W+c2W
+ wYdQ==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ+r+pJCruJ4hfVZThja5o5Zmc6khe1r0zMCNDkllMVK+c6yZKmVgkH/MW7V5b5+im64pcNbaTE=@lists.denx.de
+X-Gm-Message-State: AOJu0Yzi8a4Z0TbhMK37xVAdlcVjQ8/xPu1K9Ss0yWVuulItS2PO2W3N
+ XWkEoSmjiGILKfiKFtX5+u2ZhEiZnl3otgwWBGJma1PFPebFsFExy2q9OGs9wxFERy14qgzesMu
+ 7rSn3tka4gtXhO5SsYGB6NRDkbEL1+J2jgTDGdQmtivQwrz+sEro04Ao=
+X-Gm-Gg: AeBDiet/bBFsUy98S05HpU7akOXRdOW8FABDEi+2ut0b4uc6T2TeOrXi4/pYWsuYPI6
+ WR9jM/Gup+wzQDC0KdLmbJj8GQ6lj5cxMKCNX+q8kU5iTVgEzlqJkgGAWMd/zHZdYdb1mSWAgjB
+ 8uxpopEW+ebt03rtseBSHKzusolnz6nn6Embhi8UY/0p/6Cf9IVoBs9L+52mLFQ3f76tNSpbhhb
+ fbbfSQkBGx7nv+03dxlR1OcWY9NUsbxPjVYiywHo4LTp1c1YJqmzIITVe/MlNYL2QeF4dBdLHKE
+ t0sj1aE/A4YKDwkSrw==
+X-Received: by 2002:a05:6808:19a6:b0:466:f57b:2ad2 with SMTP id
+ 5614622812f47-4799c9a833amr17093303b6e.31.1777045857037; Fri, 24 Apr 2026
+ 08:50:57 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20260424-imx952netc-v1-0-87723013827b@nxp.com>
+ <20260424-imx952netc-v1-1-87723013827b@nxp.com>
+In-Reply-To: <20260424-imx952netc-v1-1-87723013827b@nxp.com>
+From: Tim Harvey <tharvey@gateworks.com>
+Date: Fri, 24 Apr 2026 08:50:45 -0700
+X-Gm-Features: AQROBzDd8nqryfeo-AFM43w4mX_Dw3bP8gcA2XyB7GXcJq_mHHZY_tp423sizxs
+Message-ID: <CAJ+vNU05YTaOPgYnSvUFnciz5smSv6AAK5TEqY5i9312X+5XYA@mail.gmail.com>
+Subject: Re: [PATCH v3 1/2] net: fsl_enetc: fix the duplex setting on the iMX
+ platform
+To: alice.guo@oss.nxp.com
+Cc: Marek Vasut <marek.vasut@mailbox.org>, Ye Li <ye.li@nxp.com>,
+ u-boot@lists.denx.de, 
+ Jerome Forissier <jerome.forissier@arm.com>, Tom Rini <trini@konsulko.com>, 
+ Peng Fan <peng.fan@nxp.com>, Thomas Schaefer <thomas.schaefer@kontron.com>, 
+ Michael Walle <mwalle@kernel.org>, Clark Wang <xiaoning.wang@nxp.com>, 
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>, 
+ Robert Marko <robert.marko@sartura.hr>, Yao Zi <me@ziyao.cc>,
+ Jacky Bai <ping.bai@nxp.com>, 
+ Andrew Goodbody <andrew.goodbody@linaro.org>, Alice Guo <alice.guo@nxp.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,86 +126,84 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Ensure qts folder header files are properly updated by isolating
-the Python execution environment. This prevents partial or failed
-script runs from corrupting the target directory.
+On Thu, Apr 23, 2026 at 11:54=E2=80=AFPM <alice.guo@oss.nxp.com> wrote:
+>
+> From: Clark Wang <xiaoning.wang@nxp.com>
+>
+> The iMX and LS platforms use different bits in the same register to
+> set duplex, but their logics are opposite.
+> The current settings will result in unexpected configurations in
+> RGMII mode.
+>
+> Fixes: e6df2f5e22c6 ("net: fsl_enetc: Update enetc driver to support i.MX=
+95")
+> Signed-off-by: Clark Wang <xiaoning.wang@nxp.com>
+> Signed-off-by: Alice Guo <alice.guo@nxp.com>
+> Reviewed-by: Peng Fan <peng.fan@nxp.com>
+> ---
+>  drivers/net/fsl_enetc.c | 18 +++++++++---------
+>  1 file changed, 9 insertions(+), 9 deletions(-)
+>
+> diff --git a/drivers/net/fsl_enetc.c b/drivers/net/fsl_enetc.c
+> index 206f1a381bb..b07193e4e83 100644
+> --- a/drivers/net/fsl_enetc.c
+> +++ b/drivers/net/fsl_enetc.c
+> @@ -18,6 +18,7 @@
+>  #include <asm/io.h>
+>  #include <pci.h>
+>  #include <miiphy.h>
+> +#include <linux/bitfield.h>
+>  #include <linux/bug.h>
+>  #include <linux/delay.h>
+>  #include <linux/build_bug.h>
+> @@ -396,7 +397,7 @@ static int enetc_init_sgmii(struct udevice *dev)
+>  /* set up MAC for RGMII */
+>  static void enetc_init_rgmii(struct udevice *dev, struct phy_device *phy=
+dev)
+>  {
+> -       u32 old_val, val, dpx =3D 0;
+> +       u32 old_val, val =3D 0;
+>
+>         old_val =3D val =3D enetc_read_mac_port(dev, ENETC_PM_IF_MODE);
+>
+> @@ -416,15 +417,14 @@ static void enetc_init_rgmii(struct udevice *dev, s=
+truct phy_device *phydev)
+>                 val |=3D ENETC_PM_IFM_SSP_10;
+>         }
+>
+> -       if (enetc_is_imx95(dev))
+> -               dpx =3D ENETC_PM_IFM_FULL_DPX_IMX;
+> +       if  (enetc_is_imx95(dev))
+> +               val =3D u32_replace_bits(val,
+> +                                      phydev->duplex =3D=3D DUPLEX_FULL =
+? 0 : 1,
+> +                                      ENETC_PM_IFM_FULL_DPX_IMX);
+>         else if (enetc_is_ls1028a(dev))
+> -               dpx =3D ENETC_PM_IFM_FULL_DPX_LS;
+> -
+> -       if (phydev->duplex =3D=3D DUPLEX_FULL)
+> -               val |=3D dpx;
+> -       else
+> -               val &=3D ~dpx;
+> +               val =3D u32_replace_bits(val,
+> +                                      phydev->duplex =3D=3D DUPLEX_FULL =
+? 1 : 0,
+> +                                      ENETC_PM_IFM_FULL_DPX_LS);
+>
+>         if (val =3D=3D old_val)
+>                 return;
+>
+> --
+> 2.34.1
+>
 
-Changelog v4 -> v5:
- - Change HANDOFF_KEEP condition to if [ "{HANDOFF_KEEP:-0}" != "0" ]
- - Add HANDOFF_KEEP and HANDOFF_PATH comments in config.mk
+Hi Alice,
 
-Changes:
- - Implement a temp folder for Python script execution.
- - Clean temp folder automatically despite execution failures.
- - Gate the file replacement process on the successful exit of
-   the Python scripts.
- - Execute the replacement (with or without keep) only upon script
-   success via the NEW HANDOFF_KEEP=xxx variable.
- - Rename old files to .h.handoff_backup.<timestamp> when the
-   keep option is selected.
+It looks like this is required for i.MX94 and i.MX95 as well as
+i.MX952 and should be split out if you end up making any other changes
+to this series but otherwise:
+Reviewed-by: Tim Harvey <tharvey@gateworks.com>
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+Best regards,
 
-Reviewed-by: Tien Fong Chee <tien.fong.chee@altera.com>
-Signed-off-by: Brian Sune <briansune@gmail.com>
----
- arch/arm/mach-socfpga/config.mk | 39 ++++++++++++++++++++++++++++++---
- 1 file changed, 36 insertions(+), 3 deletions(-)
-
-diff --git a/arch/arm/mach-socfpga/config.mk b/arch/arm/mach-socfpga/config.mk
-index 1ca1d33cb16..f341aaaea56 100644
---- a/arch/arm/mach-socfpga/config.mk
-+++ b/arch/arm/mach-socfpga/config.mk
-@@ -1,6 +1,18 @@
- # SPDX-License-Identifier: GPL-2.0+
- #
- # Brian Sune <briansune@gmail.com>
-+#
-+# HANDOFF_PATH
-+# ------------
-+# Unset - Board path where qts locates and "hps_isw_handoff" should be placed.
-+# Set   - Custom path points to "hps_isw_handoff" folder.
-+#
-+# HANDOFF_KEEP
-+# ------------
-+# Unset	- Clean header files.
-+# Set	- HANDOFF_KEEP= , Clean header files.
-+#	  HANDOFF_KEEP=0, Clean header files.
-+#	  HANDOFF_KEEP=1, Backup header files and rename to ".h.handoff_backup.<timestamp>".
- 
- ifeq ($(CONFIG_ARCH_SOCFPGA_CYCLONE5),y)
- archprepare: socfpga_g5_handoff_prepare
-@@ -43,6 +55,27 @@ socfpga_g5_handoff_prepare:
- 			exit 0; \
- 		fi; \
- 		echo "[INFO] Found hiof file: $$HIOF_FILE"; \
--		echo "[INFO] Running BSP generator..."; \
--		python3 $(srctree)/tools/cv_bsp_generator/cv_bsp_generator.py -i "$$HANDOFF_PATH" -o "$$BOARD_DIR/qts" || echo "[WARN] BSP generator failed, continuing..."; \
--		echo "[DONE] SoCFPGA QTS handoff conversion complete."
-+		echo "[INFO] Try BSP generator..."; \
-+		TEMP_DIR=$$(mktemp -dp "$$BOARD_DIR/"); \
-+		trap 'rm -rf "$$TEMP_DIR"' EXIT; \
-+		if python3 $(srctree)/tools/cv_bsp_generator/cv_bsp_generator.py -i "$$HANDOFF_PATH" -o "$$TEMP_DIR"; then \
-+			if [ "$${HANDOFF_KEEP:-0}" != "0" ]; then \
-+				echo "[INFO] Preserving old BSP files..."; \
-+				TIMESTAMP=$$(date +%Y%m%d_%H%M%S); \
-+				for f in "$$BOARD_DIR"/qts/*.h; do \
-+					[ -e "$$f" ] || continue; \
-+					echo "[INFO] $$f -> $${f%.h}.h.handoff_backup.$$TIMESTAMP"; \
-+					mv "$$f" "$${f%.h}.h.handoff_backup.$$TIMESTAMP"; \
-+				done; \
-+			else \
-+				echo "[INFO] Clean old BSP files..."; \
-+				if ls "$$BOARD_DIR/qts"/*.h >/dev/null 2>&1; then \
-+					rm "$$BOARD_DIR/qts"/*.h; \
-+					echo "[INFO] Removed old BSP files..."; \
-+				fi; \
-+			fi; \
-+			mv "$$TEMP_DIR"/*.h "$$BOARD_DIR"/qts; \
-+			echo "[INFO] SoCFPGA QTS handoff conversion complete."; \
-+		else \
-+			echo "[WARN] BSP generator failed!"; \
-+		fi;
--- 
-2.34.1
-
+Tim
