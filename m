@@ -4,81 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2EDD7FF8860
-	for <u-boot@archiver.kernel.org>; Sat, 25 Apr 2026 19:18:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0457FFF8860
+	for <u-boot@archiver.kernel.org>; Sat, 25 Apr 2026 19:22:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7850684441;
-	Sat, 25 Apr 2026 21:18:02 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 6D14284255;
+	Sat, 25 Apr 2026 21:22:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="A5G0Bn0G";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="SbPbB4yc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C051C84459; Sat, 25 Apr 2026 21:18:00 +0200 (CEST)
-Received: from mail-qv1-xf2f.google.com (mail-qv1-xf2f.google.com
- [IPv6:2607:f8b0:4864:20::f2f])
+ id 972CA84308; Sat, 25 Apr 2026 21:22:45 +0200 (CEST)
+Received: from mail-qv1-xf36.google.com (mail-qv1-xf36.google.com
+ [IPv6:2607:f8b0:4864:20::f36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9CC5D84150
- for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 21:17:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CC7CC84150
+ for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 21:22:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=briansune@gmail.com
-Received: by mail-qv1-xf2f.google.com with SMTP id
- 6a1803df08f44-8a154cc6a48so99166626d6.0
- for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 12:17:58 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qv1-xf36.google.com with SMTP id
+ 6a1803df08f44-8a58057d7baso106716986d6.1
+ for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 12:22:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1777144677; x=1777749477; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=at3TCY3ZpsSYpV6IIwhama1WN9Ehs2t8U8FenpIsdSQ=;
- b=A5G0Bn0Gj/G5lnyKcCDS2WS9XcW0dZN34FWpmZh4WmpBa+xDrtD+btigXWFDPeFmp6
- gEe54R1d06PBAG3UT/WdLgXlndnckwOJ0zX5H9fAwcezFOtqpBnhLQewv40JZ6ybO0kL
- wzJhmKBytkGpjHvRCA/cBnX4ZH6scIn4gVwpKhCISxTp4FfVBoXozF0PQN04JMwKGVJx
- EFn7AeyK6rn3lqamkmaomM8TnLIhv4WugjHI4isPhBfoimqgX8DveepN2HW78ZyHjKSq
- kx8jfR9KJgvSM2MP+GOUPIBAvbk+JU0cdXV7EW3I825YRZFLy4TtPBvzq6RnZViiEh9G
- UJ0A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777144677; x=1777749477;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=konsulko.com; s=google; t=1777144962; x=1777749762; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=at3TCY3ZpsSYpV6IIwhama1WN9Ehs2t8U8FenpIsdSQ=;
- b=RrAtFxBO8BdwNb9yPR4JxEwpzQzrdPg3GuRPcFJ3GJ6Tkm2olf0Guc7iHFmNl0txG2
- VSHAEpQ3BLzqahNxI+V/nL/ovbOIG9P+/kWkp1XcZFHiv4WGokJswSSULwGu0vx0kpRC
- zlBDx8mUJWXtIFTAf05vwwWq1OArcTgF7jfjkD6ZhTveMLZA45DPWbWdiO5DPBebP5sb
- fhqFl6yg9jRnC1PcBrGnMiNS4To4weA1L4O6rnslEIkoRtgNTCtHA7cG9Fx37M/jwwe6
- ycYOCqw6IquZw9oF2pXRr3DLzgzSvSTpMGs7V74P2t7rni6PqPt6DR7HKHVWE2D/+pQf
- 0ThA==
-X-Gm-Message-State: AOJu0YxYYpzg35iUyHbSdJ27QrQBq6sluwbXz0jfmuxZGqJK5Wm+YPSc
- gOdLLaSxLT3zsjZjkcg9o14lxDYbKv084AL1+onC2w3S+5oiuE3hpKrPnohQ7NOTQTLOQA==
-X-Gm-Gg: AeBDies61+Lx8wwLhCSpbd0qLTiDO7kiE8z60yH356CjpdYWDG/+O/GQlcTbjrsOYHY
- 3KOYf0VeFrQyJxRaKrgshzT+bcVSJntC2WhJhaa2aimweegGrHFVBNPTZINjss/Jo/Crns4uqqN
- T/ferB1WKnGnbSKej+XFGueYIgN8UnHzahQ5vaOurVnhE3L0A+8H+Oxd7NrD6lrdSGsCGSj0jh5
- /BMF1dy2WWKslrabw2j3Jz5WrpwkeLWy3Xbpl5DlP5A0nHqujCIxmtFWoFFQRsm779VOAgMGPNK
- t+rUgHpGwg0w8EyQ8UcO/n5s1X3dQF41dbrduMjTG10QczOXPvb85axnreErG6ms/XShPr7m9Ig
- ttdMk/49qmKc3pSXYMBTH13g2UlDnnTNXMGaUhbp/GddMccUNh3ERVro11ksYZJVUfpYRvM8VE9
- JNbPKpDrwHux/dby19r2WFUfMqJn6m2YIvYXBqKEkOFj19d5Z+0v9ZEOVN
-X-Received: by 2002:a17:903:2983:b0:2ae:4cb8:484a with SMTP id
- d9443c01a7336-2b5f9ee2d80mr238413025ad.17.1776918511046; 
- Wed, 22 Apr 2026 21:28:31 -0700 (PDT)
-Received: from intel-VirtualBox.. ([94.156.205.164])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2b5fa9ff3b4sm231563545ad.2.2026.04.22.21.28.29
+ bh=q8ZnKAXLlkDWEbd9R8is152JgwePeEsgzwkCXKl2YNI=;
+ b=SbPbB4ycDZMCiCKAUjiCBOYkd4TXxM/7EJWivKKJDP70hQvbeyaA5lS3CK/o413ziK
+ OI/8DefjsjqoQPJZYVSNNk/JpMG+CJa+QY/ThgwKSGz31fNr4dAhan8C+Ph4IVXvvJaj
+ t9A7HR+Hl6DZlyNt8sxEdRgHW3inuO6OpiuNc=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1777144962; x=1777749762;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=q8ZnKAXLlkDWEbd9R8is152JgwePeEsgzwkCXKl2YNI=;
+ b=qz11m5LY8VomUIsLGs+gCusfrcaBLYj1S9wwe299XwmrG9iiV7wpOcp8wMPRtqNXOo
+ OaamgedP78vVHsULP2DE8hb3vr7v/+Ml7odu9lxQz/ccWnP6x/BbWcdHkfFF5ACy6L2p
+ kQ2dfukVsS0W7e8jaaw49pDw24yCL6KUBxS355PXcZjsZYe1A5/IxXOVwgXkxocDqW6M
+ fRBRslqt+s9i+8w+6GeDviO8esAAGcm0Fka5g4x7a0LOjtHFBgn5uGPt6NCnAaFJ6MRm
+ x0wZ136ThMJ27cixUxz3RUA26ITHLnRmLUuFXB5IVKHy2aOEYAvff0y2urbkSe/ea+A2
+ ub0A==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ9i5gNrrMn0JtYT+7pM30y6IC7R7ZpmTusv8HrAGkglWZjP0W7E1W5U0/ImQNc4yoCeh4W0VOM=@lists.denx.de
+X-Gm-Message-State: AOJu0YwzdvOVbTGfX/OkkAnYXhj+kuIkEZjki2r3IceZb4zNS9e7ZWo+
+ j5y6hjUlpeURwtij7s9bIq4qOVbnZFPCYmIApuWdSkntnP/cciVQi05//bO8Foi14uaim2jnLcZ
+ 86RMmBbUVZg==
+X-Gm-Gg: AeBDietES+NSvVn6XhQLbw0A3qbQqqNe2AbgevIafp0IRXinFwKBFmCwxPKTpAUi9w6
+ iLm8lcM1klxYlfee2uWZTa39+Rq6DSFkmZRATxwX9/Em3xLX7ro1UwPuolCqvIrjIggnNkpm0xb
+ jFA6M/EBKfEKgESDnOMZI6w6T+dnUWbq3wwqKohmpYqcVvAtAK+M46LINfQjHZlOhoZoNAiWZaQ
+ GcO9p9dC04VmiUiM2kxe0IbLtwhmuY9Z0Itz/UmAJokE+BtSLPZW8LCe0qlxwxMRciDjmsHw1N3
+ ZDNvfr/BsOwQusIqErQbzq3kpXYP/hkd5r0QNpqaRYlrNZPLGfEGyLX4sszQvko77nvxxAFE8cy
+ m4ogdXA/VpodbW6Q6n+/nGOb+oSBzvOl10qpWcXBd2anKk3Z1R8C4F2cRT4DZdhCUPhy4XoD4am
+ 37lPXshFISOREbcEKz+iZf3MNS9kju3g3jeXeXf1EVpL0esIML9fQUOOXNwmBYpieFTqKm+nnuZ
+ LNZK9gPCQSXaYqMP4Umi2Jii9aq5vLk6doQwOxOdG1GxGbFXcjOsf86mIyM
+X-Received: by 2002:a05:6830:67cd:b0:7de:4f6b:9e10 with SMTP id
+ 46e09a7af769-7de4f6ba281mr5401892a34.0.1777056654832; 
+ Fri, 24 Apr 2026 11:50:54 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-189-203-106-235.totalplay.net.
+ [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7dc975034e7sm19832464a34.6.2026.04.24.11.50.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 22 Apr 2026 21:28:30 -0700 (PDT)
-From: Brian Sune <briansune@gmail.com>
-To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
- Chee Tien Fong <tien.fong.chee@altera.com>, Simon Glass <sjg@chromium.org>
-Cc: Brian Sune <briansune@gmail.com>
-Subject: [PATCH v6] Improve handoff prepare on SoCFPGA
-Date: Thu, 23 Apr 2026 12:28:24 +0800
-Message-Id: <20260423042824.3480-1-briansune@gmail.com>
-X-Mailer: git-send-email 2.34.1
+ Fri, 24 Apr 2026 11:50:54 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
+In-Reply-To: <20260418181510.51490-1-heinrich.schuchardt@canonical.com>
+References: <20260418181510.51490-1-heinrich.schuchardt@canonical.com>
+Subject: Re: [PATCH 1/1] scripts/dtc: avoid discarded qualifiers in
+ overlay_fixup_phandle
+Message-Id: <177705665410.2527258.6800784302117606631.b4-ty@konsulko.com>
+Date: Fri, 24 Apr 2026 12:50:54 -0600
 MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
+X-Mailer: b4 0.14.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,85 +100,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Ensure qts folder header files are properly updated by isolating
-the Python execution environment. This prevents partial or failed
-script runs from corrupting the target directory.
+On Sat, 18 Apr 2026 20:15:10 +0200, Heinrich Schuchardt wrote:
 
-Changelog v5 -> v6:
- - Clean HANDOFF_KEEP comments.
+> When building with GCC 15.2 the following warning show up:
+> 
+>     scripts/dtc/libfdt/fdt_overlay.c:422:21: warning:
+>     assignment discards ‘const’ qualifier from pointer target type
+>     [-Wdiscarded-qualifiers]
+>       422 |                 sep = memchr(fixup_str, ':', fixup_len);
+>           |                     ^
+>     scripts/dtc/libfdt/fdt_overlay.c:432:21: warning:
+>     assignment discards ‘const’ qualifier from pointer target type
+>     [-Wdiscarded-qualifiers]
+>       432 |                 sep = memchr(name, ':', fixup_len);
+>           |                     ^
+> 
+> [...]
 
-Changelog v4 -> v5:
- - Change HANDOFF_KEEP condition to if [ "$${HANDOFF_KEEP:-0}" != "0" ]
- - Add HANDOFF_KEEP and HANDOFF_PATH comments in config.mk
+Applied to u-boot/master, thanks!
 
-Changes:
- - Implement a temp folder for Python script execution.
- - Clean temp folder automatically despite execution failures.
- - Gate the file replacement process on the successful exit of
-   the Python scripts.
- - Execute the replacement (with or without keep) only upon script
-   success via the NEW HANDOFF_KEEP=xxx variable.
- - Rename old files to .h.handoff_backup.<timestamp> when the
-   keep option is selected.
-Signed-off-by: Brian Sune <briansune@gmail.com>
----
- arch/arm/mach-socfpga/config.mk | 39 ++++++++++++++++++++++++++++++---
- 1 file changed, 36 insertions(+), 3 deletions(-)
-
-diff --git a/arch/arm/mach-socfpga/config.mk b/arch/arm/mach-socfpga/config.mk
-index 1ca1d33cb16..f341aaaea56 100644
---- a/arch/arm/mach-socfpga/config.mk
-+++ b/arch/arm/mach-socfpga/config.mk
-@@ -1,6 +1,18 @@
- # SPDX-License-Identifier: GPL-2.0+
- #
- # Brian Sune <briansune@gmail.com>
-+#
-+# HANDOFF_PATH
-+# ------------
-+# Unset - Board path where qts locates and "hps_isw_handoff" should be placed.
-+# Set   - Custom path points to "hps_isw_handoff" folder.
-+#
-+# HANDOFF_KEEP
-+# ------------
-+# Unset	- Clean header files.
-+# Set	- HANDOFF_KEEP= , Clean header files.
-+#	  HANDOFF_KEEP=0, Clean header files.
-+#	  HANDOFF_KEEP=1, Backup header files and rename to ".h.handoff_backup.<timestamp>".
- 
- ifeq ($(CONFIG_ARCH_SOCFPGA_CYCLONE5),y)
- archprepare: socfpga_g5_handoff_prepare
-@@ -43,6 +55,27 @@ socfpga_g5_handoff_prepare:
- 			exit 0; \
- 		fi; \
- 		echo "[INFO] Found hiof file: $$HIOF_FILE"; \
--		echo "[INFO] Running BSP generator..."; \
--		python3 $(srctree)/tools/cv_bsp_generator/cv_bsp_generator.py -i "$$HANDOFF_PATH" -o "$$BOARD_DIR/qts" || echo "[WARN] BSP generator failed, continuing..."; \
--		echo "[DONE] SoCFPGA QTS handoff conversion complete."
-+		echo "[INFO] Try BSP generator..."; \
-+		TEMP_DIR=$$(mktemp -dp "$$BOARD_DIR/"); \
-+		trap 'rm -rf "$$TEMP_DIR"' EXIT; \
-+		if python3 $(srctree)/tools/cv_bsp_generator/cv_bsp_generator.py -i "$$HANDOFF_PATH" -o "$$TEMP_DIR"; then \
-+			if [ "$${HANDOFF_KEEP:-0}" != "0" ]; then \
-+				echo "[INFO] Preserving old BSP files..."; \
-+				TIMESTAMP=$$(date +%Y%m%d_%H%M%S); \
-+				for f in "$$BOARD_DIR"/qts/*.h; do \
-+					[ -e "$$f" ] || continue; \
-+					echo "[INFO] $$f -> $${f%.h}.h.handoff_backup.$$TIMESTAMP"; \
-+					mv "$$f" "$${f%.h}.h.handoff_backup.$$TIMESTAMP"; \
-+				done; \
-+			else \
-+				echo "[INFO] Clean old BSP files..."; \
-+				if ls "$$BOARD_DIR/qts"/*.h >/dev/null 2>&1; then \
-+					rm "$$BOARD_DIR/qts"/*.h; \
-+					echo "[INFO] Removed old BSP files..."; \
-+				fi; \
-+			fi; \
-+			mv "$$TEMP_DIR"/*.h "$$BOARD_DIR"/qts; \
-+			echo "[INFO] SoCFPGA QTS handoff conversion complete."; \
-+		else \
-+			echo "[WARN] BSP generator failed!"; \
-+		fi;
+[1/1] scripts/dtc: avoid discarded qualifiers in overlay_fixup_phandle
+      commit: c6faf583c4c2b237c42b7797794d00424248ea0d
 -- 
-2.34.1
+Tom
+
 
