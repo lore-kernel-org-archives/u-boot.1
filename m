@@ -4,125 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13C7CFF8860
-	for <u-boot@archiver.kernel.org>; Sat, 25 Apr 2026 16:25:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D857FF8860
+	for <u-boot@archiver.kernel.org>; Sat, 25 Apr 2026 16:25:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9BDEA84011;
-	Sat, 25 Apr 2026 18:25:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id EA02984348;
+	Sat, 25 Apr 2026 18:25:16 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=dolcini.it
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="jaIgUFJJ";
+	dkim=pass (2048-bit key; unprotected) header.d=dolcini.it header.i=@dolcini.it header.b="kuF58Srf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 69A8F8412A; Sat, 25 Apr 2026 18:25:07 +0200 (CEST)
-Received: from PH7PR06CU001.outbound.protection.outlook.com
- (mail-westus3azlp170100009.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c107::9])
+ id 2CBAC83FB0; Sat, 25 Apr 2026 18:25:16 +0200 (CEST)
+Received: from mail11.truemail.it (mail11.truemail.it [IPv6:2001:4b7e:0:8::81])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CB11083FB0
- for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 18:25:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 72AE08432A
+ for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 18:25:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=b-padhi@ti.com
-Received: from CO6PR10MB5617.namprd10.prod.outlook.com (2603:10b6:303:148::12)
- by CH0PR10MB5114.namprd10.prod.outlook.com (2603:10b6:610:dd::13)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9846.24; Sat, 25 Apr
- 2026 13:18:47 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=pIa4ked+omC2QLpEG90q0c6esIYGIbLRu3AUbxj+dHWO8doYlpevn9CASCEfPoDshCEK4EvoO0YGc1AaYo3zn/Mdw6dVH4GzMkDACTffZgaAvb6My8fT7L1GI0QyW2LEZPrQdORVVY4QS+MGbbVIzCzva50olpT7pEYVHfEc0g+v+0l5g5PI5r2LKHtNQGwW5szZa4Fm67vjVNrOuv9uSSa8Q2M0OBaIxF0C+ZqFU9CvYNTnfJ+fp/PBozqmDfTkmi5dDwxDXclKyYFkOYm4UqesqWUdyj5a3NRPstnSTTkLBRHlADznuKWsg6ezlPyuq+mmNJGqHcT4WlML8z8Bhg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=MVUz8jVvyl3aQlbdD2jl6mZPXLfz5fMoty3I2e0mnnA=;
- b=S9tHx/DmUt++t/uxwrgG2/VwNDPNCqliTaPFx7NQjuQhFiRPJjlssO6IJ5RIClURO2ThbpmiZnxxRwusLJeblevmPQx5r6TAopjFfn1DaCBRSYUXFCtSLTisB/ewt0etxvISAjlMLpx+DQRynVbA27BQjUAjjwK3kNEgImiJCImXzXLklxZ0WEXNbVmJMPF7XaiyFYA+a8NLBPWMwAsJ2GBKqRpZK/kzSduN42z5Vrzw0btfrNOMgACf3ZUtPyrRXblG4yhpJBnGQjEreM+QJ1ZE3kvepjhWSs98YdrnrYVg5tmHNOi+d59qF/Mfydc9eC/yrkKk2m5z4eWkmosluw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.23.195) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
- dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=MVUz8jVvyl3aQlbdD2jl6mZPXLfz5fMoty3I2e0mnnA=;
- b=jaIgUFJJY2Ob8oNFgyM2SeaduUngVIVkqxmk09gDItSTsym3WAbwmtTlD/GCVWaMXkyfzfaBC6FF8mknVvl76Cbwgi5NgBlrgBhc7FVIfwIOKKoWDsSqHRittTaQ0vjnAWjLSEP3ToUDCk5tzluSvzHXDOyJAgZb/mIN1rlAtEc=
-Received: from SA9PR10CA0021.namprd10.prod.outlook.com (2603:10b6:806:a7::26)
- by CO6PR10MB5617.namprd10.prod.outlook.com (2603:10b6:303:148::12)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9846.23; Sat, 25 Apr
- 2026 03:38:09 +0000
-Received: from SN1PEPF0002636B.namprd02.prod.outlook.com
- (2603:10b6:806:a7:cafe::ab) by SA9PR10CA0021.outlook.office365.com
- (2603:10b6:806:a7::26) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9846.22 via Frontend Transport; Sat,
- 25 Apr 2026 03:38:08 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.195)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.23.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.23.195; helo=lewvzet201.ext.ti.com; pr=C
-Received: from lewvzet201.ext.ti.com (198.47.23.195) by
- SN1PEPF0002636B.mail.protection.outlook.com (10.167.241.136) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9791.48 via Frontend Transport; Sat, 25 Apr 2026 03:38:07 +0000
-Received: from DLEE200.ent.ti.com (157.170.170.75) by lewvzet201.ext.ti.com
- (10.4.14.104) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Fri, 24 Apr
- 2026 22:38:07 -0500
-Received: from DLEE211.ent.ti.com (157.170.170.113) by DLEE200.ent.ti.com
- (157.170.170.75) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Fri, 24 Apr
- 2026 22:38:07 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE211.ent.ti.com
- (157.170.170.113) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Fri, 24 Apr 2026 22:38:07 -0500
-Received: from uda0510294.dhcp.ti.com (uda0510294.dhcp.ti.com [10.24.50.162])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id
- 63P3bk832903263; Fri, 24 Apr 2026 22:38:04 -0500
-From: Beleswar Padhi <b-padhi@ti.com>
-To: <trini@konsulko.com>
-CC: <afd@ti.com>, <bb@ti.com>, <anshuld@ti.com>, <hnagalla@ti.com>,
- <jm@ti.com>, <nm@ti.com>, <n-francis@ti.com>, <u-kumar1@ti.com>,
- <b-padhi@ti.com>, <u-boot@lists.denx.de>
-Subject: [PATCH v4 04/11] arm: mach-k3: Add config option for packaging HSM
- firmware
-Date: Sat, 25 Apr 2026 09:07:35 +0530
-Message-ID: <20260425033742.1519298-5-b-padhi@ti.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20260425033742.1519298-1-b-padhi@ti.com>
-References: <20260425033742.1519298-1-b-padhi@ti.com>
+ dmarc=pass (p=none dis=none) header.from=dolcini.it
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=francesco@dolcini.it
+Received: from francesco-nb.. (93-49-2-63.ip317.fastwebnet.it [93.49.2.63])
+ by mail11.truemail.it (Postfix) with ESMTPA id 7A2F81FE9C;
+ Fri, 24 Apr 2026 10:45:56 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dolcini.it;
+ s=default; t=1777020356;
+ bh=agByQXGGaIrOFB1nL4lo4z3k1us/x+W8lr0GUM7F0HY=; h=From:To:Subject;
+ b=kuF58SrfSh1/xCPE7xAFVvWEMBNWIasOfuVJCp7BR8T8C2RusSLWpCnFm3vDVgskx
+ SoRcwYlFUaJqg72+GcuJcyJlzvm8R2Tg/lORJ4UFE6L11QoenNLSsOmvvx6Ig2XIuY
+ gAnFaqVkO9u+GY7HF7GszeV09EXusoGam/GnutdgWavyko4qgv3+CCU1Br+kBdCYnP
+ YU2BnlD0ZBZ99e4xShV+Ny7DGU57o+g2lkcbgkJJLNHC1EBbUWLwVxaYGYtQONn6UE
+ FOfg5L5pu3kEDKPl/0c+4n8VSgCA89lJDwWQtSCkhIeZonUVDMNJgYQoCkW7grDQr0
+ yWQq0NafHZTLA==
+From: Francesco Dolcini <francesco@dolcini.it>
+To: Tom Rini <trini@konsulko.com>
+Cc: Francesco Dolcini <francesco.dolcini@toradex.com>,
+	u-boot@lists.denx.de
+Subject: [PATCH] rtc: ds1307: Remove legacy non-DM code
+Date: Fri, 24 Apr 2026 10:45:44 +0200
+Message-ID: <20260424084546.260786-1-francesco@dolcini.it>
+X-Mailer: git-send-email 2.47.3
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SN1PEPF0002636B:EE_|CO6PR10MB5617:EE_|CH0PR10MB5114:EE_
-X-MS-Office365-Filtering-Correlation-Id: 9b081270-86b6-4ec8-f8a8-08dea27c111c
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|1800799024|82310400026|36860700016|18002099003|22082099003|56012099003;
-X-Microsoft-Antispam-Message-Info: 46sucvd0XWtb0XNaWpBSmzcrgA6bwk1NZ6jAqJB4V07ArRoXXkNaAWcx/Iw3KywW3KNk5/RsQyx9URpc2MR2hQq1sP/hGzQa3eYa5rK3BFErqeBrxTGv8rdGVhshokqYMMgqGxCXl1RoCaa1PzbMoowjbPx7ZUyP7AW6+KSxa0IdaWVFZirN/pmPKWI0uy0q++mnBczVuqPLpojaybbxN9EbHBsS/IHcgWzxVB+2u1ksk4EsRZMh9m050D063gcLJZjUGTuthi5FUsZ4uPSJ/LnDwutnWgaTFsWvcMl2RUkBnBK877VjcjFTU08yHLz3dzlGeOzBx4sipkMiXp2YVNR2uhQ7KdweWTT/HDJ+vFNvu+ySPf7Af0bp6cmweHG0A8Gysi8xlsUvqtVlvmw5LccFagCCD3luwbGs3+654FCYIELIyMfS886wvPlFpBJC9IrzvCTKOX/4ovp4vrqqWNk09ey26H+OtgCWs1oLsjXpCeIlkAsdC8VgQxb/qNCs/ampmYIsW5eLiBfgOqqyYZ2vmSRuqyTBs8w34BnlySZYhYPTh8j+2tmvQBHOLZX9+A4ewpy5vNCkvooasHSzhuNyOB9ERMruKEsq+oc4uQ9YM29zyrPQ+Iq6IdUv5zFmrUxKrGk2YeZgu6HO2BNXmmE+6icr8QYqunMeqGt5j860c8+2gCdn4Yr3woOtpAf2e2ZVJz46oc9Z2ELhfzapTgBGQZU0+4ohWMEZFE5s48Aq7ZMX0EHxXyl6O34jehXLt23VuJ5WpIqszfPGnilzTuNgtcTyIkvixgRDHs9MuvI=
-X-Forefront-Antispam-Report: CIP:198.47.23.195; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:lewvzet201.ext.ti.com; PTR:InfoDomainNonexistent;
- CAT:NONE;
- SFS:(13230040)(376014)(1800799024)(82310400026)(36860700016)(18002099003)(22082099003)(56012099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: +rirvC+HZ0ZiWOITlhqcZZ8B4KghDRTc8lJddMGyJeQzQ9AMb0NmTGKGiNB6mB6EfpWwiDf6kkmuxc3A+UfmPsznhdaIe1JsEP04E9Vctre7/SR2p4M26+6Nv+cGv47RgCIWe/gupU0o8eYR9WMMq4aHN+/OXwEyf6FOv+JtF4s1L611tveSXBkMdvPK+2/LbOrrbZBl0GdBrL7D7IITtwUcoWB1soPzl/IS1RzeyAVwX/b8yLPBjUcVol93k19xFyMf3iS1BsW+d1Jt7m7p/bXbHdwc+4ULk1HHgO5uCV8owyGX697xot0wPD48bpeEZSPTfqzBGoY7V0WCC0R8Y99Oa1a/QxZxQgLJ2X5y5Do5YK33LfoOYgETqBtyc70O86JLAfQGIa7gIHL7IhgMixVv0DF0CoY27cIacXHe0zFE66Uc/CgrM8/PJ6X/mm7h
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Apr 2026 03:38:07.9187 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 9b081270-86b6-4ec8-f8a8-08dea27c111c
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.195];
- Helo=[lewvzet201.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: SN1PEPF0002636B.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CO6PR10MB5617
-X-OriginatorOrg: ti.com
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -139,52 +63,183 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Some K3 SoCs like J721S2, and J784S4 have a HSM (High Security Module)
-M4F core in the Wakeup Voltage Domain which could be used to run secure
-services like Authentication. Add a config option which indicates that
-the SoC has a HSM core and the firmware for the core is available.
+From: Francesco Dolcini <francesco.dolcini@toradex.com>
 
-Signed-off-by: Beleswar Padhi <b-padhi@ti.com>
+The DS1307 driver depends on DM_RTC since commit d425d6056e01 ("rtc: Add
+DM support to ds1307"), remove the related obsolete code.
+
+Signed-off-by: Francesco Dolcini <francesco.dolcini@toradex.com>
 ---
-v4: Changelog:
-1. None
+ drivers/rtc/ds1307.c | 152 -------------------------------------------
+ 1 file changed, 152 deletions(-)
 
-Link to v3:
-https://lore.kernel.org/all/20251231173621.1069988-5-b-padhi@ti.com/
-
-v3: Changelog:
-1. Updated description of config to match with functionality.
-
-Link to v2:
-https://lore.kernel.org/all/20250506104202.16741-2-b-padhi@ti.com/
-
-v2: Changelog:
-1. Removed 'default = n' line from CONFIG.
-
-Link to v1:
-https://lore.kernel.org/all/20250422095430.363792-2-b-padhi@ti.com/
-
- arch/arm/mach-k3/Kconfig | 7 +++++++
- 1 file changed, 7 insertions(+)
-
-diff --git a/arch/arm/mach-k3/Kconfig b/arch/arm/mach-k3/Kconfig
-index a32ed3a9683..df7290f74e0 100644
---- a/arch/arm/mach-k3/Kconfig
-+++ b/arch/arm/mach-k3/Kconfig
-@@ -198,6 +198,13 @@ config K3_REMOTEPROC_PRU
- 	imply REMOTEPROC_TI_PRU
- 	default y if (SOC_K3_AM642 || SOC_K3_AM654)
+diff --git a/drivers/rtc/ds1307.c b/drivers/rtc/ds1307.c
+index 049210991014..34d8f8c5276b 100644
+--- a/drivers/rtc/ds1307.c
++++ b/drivers/rtc/ds1307.c
+@@ -68,157 +68,6 @@ enum ds_type {
+ #define MCP7941X_BIT_ST		0x80
+ #define MCP7941X_BIT_VBATEN	0x08
  
-+config K3_HSM_FW
-+	bool "Package firmware for HSM core"
-+	help
-+	  Enabling this will indicate that the system has a HSM (High Security
-+	  Module) M4 Core and the firmware for the core is available. When
-+	  enabled, the firmware for HSM core will be packaged inside tispl.bin.
-+
- if CPU_V7R
- source "arch/arm/mach-k3/r5/Kconfig"
- endif
+-#ifndef CONFIG_DM_RTC
+-
+-/*---------------------------------------------------------------------*/
+-#undef DEBUG_RTC
+-
+-#ifdef DEBUG_RTC
+-#define DEBUGR(fmt, args...) printf(fmt, ##args)
+-#else
+-#define DEBUGR(fmt, args...)
+-#endif
+-/*---------------------------------------------------------------------*/
+-
+-#ifndef CFG_SYS_I2C_RTC_ADDR
+-# define CFG_SYS_I2C_RTC_ADDR	0x68
+-#endif
+-
+-#if defined(CONFIG_RTC_DS1307) && (CONFIG_SYS_I2C_SPEED > 100000)
+-# error The DS1307 is specified only up to 100kHz!
+-#endif
+-
+-static uchar rtc_read (uchar reg);
+-static void rtc_write (uchar reg, uchar val);
+-
+-/*
+- * Get the current time from the RTC
+- */
+-int rtc_get (struct rtc_time *tmp)
+-{
+-	int rel = 0;
+-	uchar sec, min, hour, mday, wday, mon, year;
+-
+-#ifdef CONFIG_RTC_MCP79411
+-read_rtc:
+-#endif
+-	sec = rtc_read (RTC_SEC_REG_ADDR);
+-	min = rtc_read (RTC_MIN_REG_ADDR);
+-	hour = rtc_read (RTC_HR_REG_ADDR);
+-	wday = rtc_read (RTC_DAY_REG_ADDR);
+-	mday = rtc_read (RTC_DATE_REG_ADDR);
+-	mon = rtc_read (RTC_MON_REG_ADDR);
+-	year = rtc_read (RTC_YR_REG_ADDR);
+-
+-	DEBUGR ("Get RTC year: %02x mon: %02x mday: %02x wday: %02x "
+-		"hr: %02x min: %02x sec: %02x\n",
+-		year, mon, mday, wday, hour, min, sec);
+-
+-#ifdef CONFIG_RTC_DS1307
+-	if (sec & RTC_SEC_BIT_CH) {
+-		printf ("### Warning: RTC oscillator has stopped\n");
+-		/* clear the CH flag */
+-		rtc_write (RTC_SEC_REG_ADDR,
+-			   rtc_read (RTC_SEC_REG_ADDR) & ~RTC_SEC_BIT_CH);
+-		rel = -1;
+-	}
+-#endif
+-
+-#ifdef CONFIG_RTC_MCP79411
+-	/* make sure that the backup battery is enabled */
+-	if (!(wday & MCP7941X_BIT_VBATEN)) {
+-		rtc_write(RTC_DAY_REG_ADDR,
+-			  wday | MCP7941X_BIT_VBATEN);
+-	}
+-
+-	/* clock halted?  turn it on, so clock can tick. */
+-	if (!(sec & MCP7941X_BIT_ST)) {
+-		rtc_write(RTC_SEC_REG_ADDR, MCP7941X_BIT_ST);
+-		printf("Started RTC\n");
+-		goto read_rtc;
+-	}
+-#endif
+-
+-	tmp->tm_sec  = bcd2bin (sec & 0x7F);
+-	tmp->tm_min  = bcd2bin (min & 0x7F);
+-	tmp->tm_hour = bcd2bin (hour & 0x3F);
+-	tmp->tm_mday = bcd2bin (mday & 0x3F);
+-	tmp->tm_mon  = bcd2bin (mon & 0x1F);
+-	tmp->tm_year = bcd2bin (year) + ( bcd2bin (year) >= 70 ? 1900 : 2000);
+-	tmp->tm_wday = bcd2bin ((wday - 1) & 0x07);
+-	tmp->tm_yday = 0;
+-	tmp->tm_isdst= 0;
+-
+-	DEBUGR ("Get DATE: %4d-%02d-%02d (wday=%d)  TIME: %2d:%02d:%02d\n",
+-		tmp->tm_year, tmp->tm_mon, tmp->tm_mday, tmp->tm_wday,
+-		tmp->tm_hour, tmp->tm_min, tmp->tm_sec);
+-
+-	return rel;
+-}
+-
+-/*
+- * Set the RTC
+- */
+-int rtc_set (struct rtc_time *tmp)
+-{
+-	DEBUGR ("Set DATE: %4d-%02d-%02d (wday=%d)  TIME: %2d:%02d:%02d\n",
+-		tmp->tm_year, tmp->tm_mon, tmp->tm_mday, tmp->tm_wday,
+-		tmp->tm_hour, tmp->tm_min, tmp->tm_sec);
+-
+-	if (tmp->tm_year < 1970 || tmp->tm_year > 2069)
+-		printf("WARNING: year should be between 1970 and 2069!\n");
+-
+-	rtc_write (RTC_YR_REG_ADDR, bin2bcd (tmp->tm_year % 100));
+-	rtc_write (RTC_MON_REG_ADDR, bin2bcd (tmp->tm_mon));
+-#ifdef CONFIG_RTC_MCP79411
+-	rtc_write (RTC_DAY_REG_ADDR,
+-		   bin2bcd (tmp->tm_wday + 1) | MCP7941X_BIT_VBATEN);
+-#else
+-	rtc_write (RTC_DAY_REG_ADDR, bin2bcd (tmp->tm_wday + 1));
+-#endif
+-	rtc_write (RTC_DATE_REG_ADDR, bin2bcd (tmp->tm_mday));
+-	rtc_write (RTC_HR_REG_ADDR, bin2bcd (tmp->tm_hour));
+-	rtc_write (RTC_MIN_REG_ADDR, bin2bcd (tmp->tm_min));
+-#ifdef CONFIG_RTC_MCP79411
+-	rtc_write (RTC_SEC_REG_ADDR, bin2bcd (tmp->tm_sec) | MCP7941X_BIT_ST);
+-#else
+-	rtc_write (RTC_SEC_REG_ADDR, bin2bcd (tmp->tm_sec));
+-#endif
+-
+-	return 0;
+-}
+-
+-/*
+- * Reset the RTC. We setting the date back to 1970-01-01.
+- * We also enable the oscillator output on the SQW/OUT pin and program
+- * it for 32,768 Hz output. Note that according to the datasheet, turning
+- * on the square wave output increases the current drain on the backup
+- * battery to something between 480nA and 800nA.
+- */
+-void rtc_reset (void)
+-{
+-	rtc_write (RTC_SEC_REG_ADDR, 0x00);	/* clearing Clock Halt	*/
+-	rtc_write (RTC_CTL_REG_ADDR, RTC_CTL_BIT_SQWE | RTC_CTL_BIT_RS1 | RTC_CTL_BIT_RS0);
+-}
+-
+-/*
+- * Helper functions
+- */
+-
+-static
+-uchar rtc_read (uchar reg)
+-{
+-	return (i2c_reg_read (CFG_SYS_I2C_RTC_ADDR, reg));
+-}
+-
+-static void rtc_write (uchar reg, uchar val)
+-{
+-	i2c_reg_write (CFG_SYS_I2C_RTC_ADDR, reg, val);
+-}
+-
+-#endif /* !CONFIG_DM_RTC */
+-
+-#ifdef CONFIG_DM_RTC
+ static int ds1307_rtc_set(struct udevice *dev, const struct rtc_time *tm)
+ {
+ 	int ret;
+@@ -366,4 +215,3 @@ U_BOOT_DRIVER(rtc_ds1307) = {
+ 	.of_match = ds1307_rtc_ids,
+ 	.ops	= &ds1307_rtc_ops,
+ };
+-#endif /* CONFIG_DM_RTC */
 -- 
-2.34.1
+2.47.3
 
