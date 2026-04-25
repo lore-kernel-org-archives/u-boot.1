@@ -4,123 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 470ECFF8860
-	for <u-boot@archiver.kernel.org>; Sat, 25 Apr 2026 16:58:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59A0BFF8860
+	for <u-boot@archiver.kernel.org>; Sat, 25 Apr 2026 17:00:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CF9E184314;
-	Sat, 25 Apr 2026 18:58:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id D05E9840AB;
+	Sat, 25 Apr 2026 19:00:20 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="PHyaM8Y8";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="B3N/ovs8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E614D84374; Sat, 25 Apr 2026 18:58:06 +0200 (CEST)
-Received: from BYAPR05CU005.outbound.protection.outlook.com
- (mail-westusazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c000::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 9D986840AB; Sat, 25 Apr 2026 19:00:19 +0200 (CEST)
+Received: from mail-ot1-x32d.google.com (mail-ot1-x32d.google.com
+ [IPv6:2607:f8b0:4864:20::32d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5B1B384314
- for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 18:58:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6987980087
+ for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 19:00:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=b-padhi@ti.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=y0asrb7wxF2waORyzkNjLVnxKbxkMVkrwy47wQ73c1qRkht6wox+JSdGBtGf8SHoENNfX94O/kYKDUVYgsQRthjZtaO2vd98SJK7b23WCysgapMtxQkf+RVtoiIFOFe1KuYkULzWL6UbSB2ZsbsNc/1pbbzLDfYL5LuSm09YlHAwlWHr249qt5UGX/PalZokB9usIAGijQ22zNev/r+N1wv1TM34aXy7WtU+MpmyXHogQ2kipPQgZ6IIsihUtAddtyNkcDvWQa0mSbb4ezh02mETOzjOm371R6H7GuIgacaZwk2s914sgDNm1qPMOC/LYoVdaEMx/0+2vCdKOw/9uw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=i1oE46WZVnV/mGsWB0pfzxOqlDZFo0AtHdIgfZNHpik=;
- b=AJN3zl2gQ8WjbT9WZW7k16dTpe9pIcIghQPZGhUx3OdXI3AlIcR2aQg1vgj2uQ1Gc4SZpdBKPCZ81ExQt0bzYvK3DbXp/IfF5ENRIp+DXeM5EyDuXTivULPC3dLtr+8iCTgaA50BPLHtAXs5fcFrFCdLzlIjfcwuqoXr+Mjh3HPdenySUiZ5Q5b40FRugnHSaPPMAM3Ox09cwQf/ybyM0osAx9Xoif96m7SMdlqsHf2a23c+5tHcyMGGs7dMJ9RkyYtC8ZNzvEJ2LQVzavhX0ynkU1o9ff3sGjomxrw9/mH+btf1TsJtDccpT1F7bjcACN57XdKUQKOrOn4E4A4n9g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.23.195) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
- dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=i1oE46WZVnV/mGsWB0pfzxOqlDZFo0AtHdIgfZNHpik=;
- b=PHyaM8Y8BnPvLUFxLAOGrOuHS6fO4j3uc8so5N3Ln5qVP+2+5muEuEHoigMVowZDXStmE/chtWaeiTj7odD7CpVa3Nve8u+hLaV/ASV84CmKPr6SRrdz8mzf07QMu+5qrBbVTXRlHLiD7/o9UyJ0+UW3EIqguzAJ/CAJS8r0ETY=
-Received: from CO1PR10MB4532.namprd10.prod.outlook.com (2603:10b6:303:6d::17)
- by CO1PR10MB4532.namprd10.prod.outlook.com (2603:10b6:303:6d::17)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9846.16; Sat, 25 Apr
- 2026 16:57:58 +0000
-Received: from CO1PR10MB4532.namprd10.prod.outlook.com
- (fe80::2d59:baa8:16c:1700%6) by CO1PR10MB4532.namprd10.prod.outlook.com
- (fe80::2d59:baa8:16c:1700%6) with TransportReplication id Version 15.20
- (Build 9846.16); Sat, 25 Apr 2026 16:57:58 +0000
-Received: from SN1PEPF0002636A.namprd02.prod.outlook.com
- (2603:10b6:806:27:cafe::e9) by SA9PR13CA0127.outlook.office365.com
- (2603:10b6:806:27::12) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9846.20 via Frontend Transport; Sat,
- 25 Apr 2026 03:38:14 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.195)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.23.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.23.195; helo=lewvzet201.ext.ti.com; pr=C
-Received: from lewvzet201.ext.ti.com (198.47.23.195) by
- SN1PEPF0002636A.mail.protection.outlook.com (10.167.241.135) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9846.18 via Frontend Transport; Sat, 25 Apr 2026 03:38:14 +0000
-Received: from DLEE202.ent.ti.com (157.170.170.77) by lewvzet201.ext.ti.com
- (10.4.14.104) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Fri, 24 Apr
- 2026 22:38:14 -0500
-Received: from DLEE207.ent.ti.com (157.170.170.95) by DLEE202.ent.ti.com
- (157.170.170.77) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Fri, 24 Apr
- 2026 22:38:14 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE207.ent.ti.com
- (157.170.170.95) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Fri, 24 Apr 2026 22:38:14 -0500
-Received: from uda0510294.dhcp.ti.com (uda0510294.dhcp.ti.com [10.24.50.162])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id
- 63P3bk852903263; Fri, 24 Apr 2026 22:38:11 -0500
-From: Beleswar Padhi <b-padhi@ti.com>
-To: <trini@konsulko.com>
-CC: <afd@ti.com>, <bb@ti.com>, <anshuld@ti.com>, <hnagalla@ti.com>,
- <jm@ti.com>, <nm@ti.com>, <n-francis@ti.com>, <u-kumar1@ti.com>,
- <b-padhi@ti.com>, <u-boot@lists.denx.de>
-Subject: [PATCH v4 06/11] arm: dts: k3-{j721s2/j722s/j784s4}-binman: Pack HSM
- firmware inside tispl.bin
-Date: Sat, 25 Apr 2026 09:07:37 +0530
-Message-ID: <20260425033742.1519298-7-b-padhi@ti.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20260425033742.1519298-1-b-padhi@ti.com>
-References: <20260425033742.1519298-1-b-padhi@ti.com>
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x32d.google.com with SMTP id
+ 46e09a7af769-7de5badb627so949786a34.0
+ for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 10:00:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1777136416; x=1777741216; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=TmOMAn1opitZpTjhV1Cc0rCp9qU05c/+yOokwsrnd/o=;
+ b=B3N/ovs80SO7Cr2N9qS1DQ5EDKG1ZimossJrP7X83+GU8oKrUaptWFUAVpOBKd/8ze
+ KdjlFPa+shSAGTnWEuGNUJJMT+Aj70rULF57DGkXGafHuvZ7cjPeQ0bo88/k2rJvE7dd
+ yWsh66yuFkahQ8RoW7uMqTNn7DPynRg4fCVrE=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1777136416; x=1777741216;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=TmOMAn1opitZpTjhV1Cc0rCp9qU05c/+yOokwsrnd/o=;
+ b=cPwFlbwW+9LTHx68lTh9mOx6yJGt7WauJETjH2sn9oKGeCJD1qouJzLH/iySIZn7CP
+ lpSXBlbCn4JhUl8iT/LBQ69DsKlCavQMxLFeOMSP+F3wc8siUuZa4C4jPUooNDtHnCD3
+ UCygI+/KUrgHisQnJqa00gyCITzHuJRfgv21Sx1pmuKHH7EZcPg1PhKCnMAh1tkHcm97
+ ZfJ5KrSxc0N5BpF29xxp8fzd23Ps0Qd1YOI1cxu/PAHr0eKuyqn0HW/wqZV2tBAAgjJS
+ fx/RwnDIrYfaLDfZB/xkHRVLSl+Ys4nEFDQk/8nGTeiHJMso5kwuXoDnEgQuUDoChR9e
+ gr0w==
+X-Gm-Message-State: AOJu0YzNG+bnSl3k2XkidFBihwvdb5237aiHx40pnXmJ3OOmH1lYniqz
+ mJH68cfODWsleY/f7xEsCqkxVrxY2ZROdVu+lyyQF3QNzHhWU8oKI5Hn5QNUBohgssuT0PrASC2
+ dGiL/QYzLYg==
+X-Gm-Gg: AeBDiesA2xICYQLVuLp4ys2BOryQmWPUEeHYtijbyM7bWetaW/C9LnJMJdJ8WBPaOwR
+ Jd/GpxQCFxKdETAzwJi3RxJuV1uEfWi+bDQN9C+z1ymQLQDCJMvIel+5XAa+hGSUTkkwhtID+mr
+ zrtsRL1O3MdfqiGmJgzTSM5674Gs+TTyznQwgH8fuGxkCr5ewdVmPdHYYg1TMBwohCBgFhurwCE
+ CDT/FMqLAKUqZZqH6CvS0TiIoF15KMTIOivVDSZ6hlwO91Vd8AcuwVC5qVta3W4Wd91FoLfyCU1
+ yeTmmLVXV+iSH1lVMLGWtXhHWKxdLrmznYrNmlaHxfowdAx+gQlDxWPC+C3N86pnisURUC+ljmB
+ sVzMKB9g9XvxQmYEaRFBgt+iGleU4zjZUrJWVEhepv1KRwKuS1Y0YjNHeSB0CfII5/qQluZp5U9
+ k0lMei1mUVOK/glEZ2eZCk2SeZgroBDqQ4zStgcMupL00JoEkT+xc81cQNyj5p2qqcB11R1w3GW
+ t4do4cxv/EteOCkPzWmQ5keychBspfTjgYcps3sDbWTEt+qUiQdys9ylYmDaA==
+X-Received: by 2002:a05:6830:3890:b0:7dc:dd91:b5b1 with SMTP id
+ 46e09a7af769-7dcdd91b6f5mr12236031a34.5.1777136416207; 
+ Sat, 25 Apr 2026 10:00:16 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
+ [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7dcc892c515sm15906543a34.21.2026.04.25.10.00.15
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 25 Apr 2026 10:00:15 -0700 (PDT)
+Date: Sat, 25 Apr 2026 11:00:13 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Eugen Hristev <ehristev@kernel.org>
+Cc: u-boot@lists.denx.de
+Subject: Re: [PATCH] MAINTAINERS, mailmap: Change email for Eugen Hristev
+Message-ID: <20260425170013.GY41863@bill-the-cat>
+References: <20260425-maintainers-v1-1-114f12ce0656@kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SN1PEPF0002636A:EE_|CO1PR10MB4532:EE_
-X-MS-Office365-Filtering-Correlation-Id: b5a96477-0878-4f05-32b6-08dea27c1525
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|82310400026|36860700016|376014|1800799024|56012099003|22082099003|18002099003;
-X-Microsoft-Antispam-Message-Info: ZVJZXukDrH+cjcE8I7G2RR4y0XyX3V6wageFJv9MZa6dgL59Ut3aqNnRP/OkFTtdTnY//dyK7uJWxzrTclJqLtmy5DUJ0/34FLyP5pEuBIzfKX7Q+w/LmfVsxp7GichlIm7Q47an2Vb7DvVoE3M+GofprNwqNkCey1dbqFRfURMCWxWt/39do9WHeoMIBL/fiMpUPkcvV8GZ/5zXuJsZNY7Mu6MJRW4+JipawEoVOWCASDQddxqSXO5Wi1uSahCpJyj9cpwRzbFZm+Qtwh5/7KhUW1NdtdSbMKL5Cj5qWuRpeYXvRcBZIzFKOqKEoWvN5DMVIj226RbkRgp6KIVMO45IxkAPzB1i5SYzNE/fT6pUZc6uHyrGllaJDeu962A09eGCBcFGNs33ryhRLWEcVEecTT/zOWZTcZ9lV/q+WPq4FayvrQ81R5pHynSWPUJMzMSiT9gE5Glqd2XPIE0tkW4Xe0/X0op2jLHmpVYlXq3gFhav4Rw2WA8qtjhl0YJjW7Zt8ohCICojU1Hr0U81JWQQF8Lo6CXDil85v8h/Z0luYa8akCkHX43naqUzhPGJAYSmZJKM5vMo4KelZjtxABb5A/r1bQW9D9da3ppsa3GktEi1ChBQ63m8K3K+wAY4Z4OC+dBDjDA8/WC/VHW9L+Te4iiZtfZpG9M+c5fVO40Dx257KIRlOQOR/15qwkpvPFfkoG8C6Nst1L3FtAiq5g2PmNRaCGvXptgdfrC8FfDXKfoEQu2qpfKBnsVWOG1Wagg503pLMEdKyH0uCPcvJbD/OwJ91rPxuTKT1Hb3HAY=
-X-Forefront-Antispam-Report: CIP:198.47.23.195; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:lewvzet201.ext.ti.com; PTR:InfoDomainNonexistent;
- CAT:NONE;
- SFS:(13230040)(82310400026)(36860700016)(376014)(1800799024)(56012099003)(22082099003)(18002099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: HIfFRxQPGOEMjHlGBJIg6Sy+F60w0uEojyp99gUE6SAuBI4nCR7XE8Kai2M2bN+bdzt+twVrv/uD7Iyx7OmtfOacT8NTsGVvlFC3utjP0vmcEtaf5KS8b5UAGYQMhgtU/vq0mFmeaS1TK6rqCxNoYxFtYFMKsCMcs7PRPih+8tgIQwkIwf5GRW7brAjNS8vhT0BbnbHxACREI4Tw4JGNg6ddtx0xOfooPmVNt01OOfWRXoOmEGwDfudGQ6ZeywcailS4T1DkVgGwRD8xQ2FaQ3ngBSY9yVfeVnWvNvbtZLUKmslR4CyH21vligplXagNyUaV9YNw851Zi2FvdHHBbT4tIkw2TwqrjXI2IAFrjcuaUH/2qrsXYC9lnv37Ewl2DSl2WzX7jrgJo1glN+8loaMkGTxIFh9GBWwyk5bZZOiFQVD8YEavy0r/v91LQJjA
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Apr 2026 03:38:14.6812 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: b5a96477-0878-4f05-32b6-08dea27c1525
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.195];
- Helo=[lewvzet201.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: SN1PEPF0002636A.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CO1PR10MB4532
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="+ZIDa/VXH2su7Vfd"
+Content-Disposition: inline
+In-Reply-To: <20260425-maintainers-v1-1-114f12ce0656@kernel.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -137,132 +97,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Pack the HSM firmware in tispl.bin fit image so that it can be unloaded
-and used by R5 SPL to boot the HSM core. By default, point to the
-firmware for HS-SE device type. This needs to be changed to point to
-appropriate firmware when using a different device type.
 
-Signed-off-by: Beleswar Padhi <b-padhi@ti.com>
----
-v4: Changelog:
-1. Changed node labels from 'hsm' to 'hsm_fw' as 'hsm' was already used
-   by the device tree remoteproc node definiton.
+--+ZIDa/VXH2su7Vfd
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Link to v3:
-https://lore.kernel.org/all/20251231173621.1069988-7-b-padhi@ti.com/
+On Sat, Apr 25, 2026 at 04:17:12PM +0300, Eugen Hristev wrote:
 
-v3: Changelog:
-1. Pack firmware for J722S SoC as well.
+> Replace old bouncing emails with ehristev@kernel.org
+>=20
+> Signed-off-by: Eugen Hristev <ehristev@kernel.org>
+> ---
+>  .mailmap    | 5 +++--
+>  MAINTAINERS | 2 +-
+>  2 files changed, 4 insertions(+), 3 deletions(-)
 
-Link to v2:
-https://lore.kernel.org/all/20250506104202.16741-5-b-padhi@ti.com/
+Can you please update the various board MAINTAINER files you're listed
+in as well? Thanks!
 
-v2: Changelog:
-None to this patch.
+--=20
+Tom
 
-Link to v1:
-https://lore.kernel.org/all/20250422095430.363792-4-b-padhi@ti.com/
+--+ZIDa/VXH2su7Vfd
+Content-Type: application/pgp-signature; name="signature.asc"
 
- arch/arm/dts/k3-j721s2-binman.dtsi | 12 ++++++++++++
- arch/arm/dts/k3-j722s-binman.dtsi  | 12 ++++++++++++
- arch/arm/dts/k3-j784s4-binman.dtsi | 14 ++++++++++++++
- 3 files changed, 38 insertions(+)
+-----BEGIN PGP SIGNATURE-----
 
-diff --git a/arch/arm/dts/k3-j721s2-binman.dtsi b/arch/arm/dts/k3-j721s2-binman.dtsi
-index f79b3e543ae..2b36b04965e 100644
---- a/arch/arm/dts/k3-j721s2-binman.dtsi
-+++ b/arch/arm/dts/k3-j721s2-binman.dtsi
-@@ -268,6 +268,14 @@
- 
- 					};
- 				};
-+#ifdef CONFIG_K3_HSM_FW
-+				hsm {
-+					hsm_fw: blob-ext {
-+						filename = "ti-hsm/hsm-demo-firmware-j721s2-hs.bin";
-+					};
-+				};
-+#endif
-+
- 				dm {
- 					ti-secure {
- 						content = <&dm>;
-@@ -300,7 +308,11 @@
- 				conf-0 {
- 					description = "k3-j721s2-common-proc-board";
- 					firmware = "atf";
-+#ifdef CONFIG_K3_HSM_FW
-+					loadables = "hsm", "tee", "dm", "spl";
-+#else
- 					loadables = "tee", "dm", "spl";
-+#endif
- 					fdt = "fdt-0";
- 				};
- 			};
-diff --git a/arch/arm/dts/k3-j722s-binman.dtsi b/arch/arm/dts/k3-j722s-binman.dtsi
-index 278b7bfac7f..3834d081c30 100644
---- a/arch/arm/dts/k3-j722s-binman.dtsi
-+++ b/arch/arm/dts/k3-j722s-binman.dtsi
-@@ -117,6 +117,14 @@
- 
- 		fit {
- 			images {
-+#ifdef CONFIG_K3_HSM_FW
-+				hsm {
-+					hsm_fw: blob-ext {
-+						filename = "ti-hsm/hsm-demo-firmware-j722s-hs.bin";
-+					};
-+				};
-+#endif
-+
- 				dm {
- 					ti-secure {
- 						content = <&dm>;
-@@ -153,7 +161,11 @@
- 				conf-0 {
- 					description = "k3-j722s-evm";
- 					firmware = "atf";
-+#ifdef CONFIG_K3_HSM_FW
-+					loadables = "hsm", "tee", "dm", "spl";
-+#else
- 					loadables = "tee", "dm", "spl";
-+#endif
- 					fdt = "fdt-0";
- 				};
- 			};
-diff --git a/arch/arm/dts/k3-j784s4-binman.dtsi b/arch/arm/dts/k3-j784s4-binman.dtsi
-index 34b2cc1e681..1da98228ff8 100644
---- a/arch/arm/dts/k3-j784s4-binman.dtsi
-+++ b/arch/arm/dts/k3-j784s4-binman.dtsi
-@@ -154,6 +154,16 @@
- 
- 		fit {
- 			images {
-+
-+#ifdef CONFIG_K3_HSM_FW
-+				hsm {
-+					hsm_fw: blob-ext {
-+						filename = "ti-hsm/hsm-demo-firmware-j784s4-hs.bin";
-+					};
-+				};
-+
-+#endif
-+
- 				dm {
- 					ti-secure {
- 						content = <&dm>;
-@@ -188,7 +198,11 @@
- 				conf-0 {
- 					description = BOARD_DESCRIPTION;
- 					firmware = "atf";
-+#ifdef CONFIG_K3_HSM_FW
-+					loadables = "hsm", "tee", "dm", "spl";
-+#else
- 					loadables = "tee", "dm", "spl";
-+#endif
- 					fdt = "fdt-0";
- 				};
- 			};
--- 
-2.34.1
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaezzHQAKCRAr4qD1Cr/k
+Cta4AP9WDjnZB6iL3thOxG8WP1pOJHlQB9TnvIVizcKeA4K9PAEA96BMxboRH8SB
+gnK+rd0sYjCg7Pb/3Td62PViMf+3ogo=
+=w/2N
+-----END PGP SIGNATURE-----
 
+--+ZIDa/VXH2su7Vfd--
