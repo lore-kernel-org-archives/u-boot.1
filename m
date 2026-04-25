@@ -4,52 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23A9AFF885C
-	for <u-boot@archiver.kernel.org>; Sat, 25 Apr 2026 23:49:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FA4FFF885A
+	for <u-boot@archiver.kernel.org>; Sat, 25 Apr 2026 23:49:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E0AB084372;
-	Sun, 26 Apr 2026 01:47:30 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2770684394;
+	Sun, 26 Apr 2026 01:47:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=seznam.cz
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=seznam.cz header.i=@seznam.cz header.b="ani+Q/Qy";
+	dkim=pass (2048-bit key; secure) header.d=seznam.cz header.i=@seznam.cz header.b="QXLdZ+YA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C527384099; Sun, 26 Apr 2026 01:28:18 +0200 (CEST)
-Received: from mxd-3-71c.seznam.cz (mxd-3-71c.seznam.cz
- [IPv6:2a02:598:96:8a00::1200:71c])
+ id E613383FDB; Sun, 26 Apr 2026 01:28:18 +0200 (CEST)
+Received: from mxd-2-a06.seznam.cz (mxd-2-a06.seznam.cz
+ [IPv6:2a02:598:64:8a00::1000:a06])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9AC4783FDB
+ by phobos.denx.de (Postfix) with ESMTPS id EB1C68407E
  for <u-boot@lists.denx.de>; Sun, 26 Apr 2026 01:28:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=seznam.cz
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=michael.srba@seznam.cz
-Received: from email.seznam.cz by smtpc-mxd-68df9c878f-gdfk6
- (smtpc-mxd-68df9c878f-gdfk6 [2a02:598:96:8a00::1200:71c])
- id 20fe20d07bf074b92157ec8e; Sun, 26 Apr 2026 01:27:52 +0200 (CEST)
+Received: from email.seznam.cz by smtpc-mxd-68df9c878f-wmttj
+ (smtpc-mxd-68df9c878f-wmttj [2a02:598:64:8a00::1000:a06])
+ id 4e2b0f7e15255b174f82c320; Sun, 26 Apr 2026 01:27:45 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=seznam.cz; s=szn1;
- t=1777159672; bh=1en3rM7TNB8TmtiyKMvGuK2JZoWRfOuH94hBYEXzpgk=;
+ t=1777159665; bh=b9hGm2+/ikbUYrgXFWa5mkGy4Y5NRNQ8nvW+UvvMbXk=;
  h=From:Date:Subject:MIME-Version:Content-Type:
  Content-Transfer-Encoding:Message-Id:To:Cc;
- b=ani+Q/QyuJBPhRrY7ZUERx31HwNSXmloWJC23Y6wca0n0w1F1uOoe4qZjK+O4B61I
- 8s0QC4Z4CR/1zLsPosZZP0NAudF0S0D0P0vBTWUGIiUaVnfjyJK4/YaZ/N7KO6ckSO
- fk1zAYhx5bC55YXJynovDA4aeMzYrzV/qpASA5EgofjFytWoUXqYq/HYwDZnZqWJ0t
- 5TW83GASMIImynFYHJ8rgQLxhv+eTO5Ug8LrVPSTEezEWaqvouG32/JcezUSvmFRud
- WnYBS9Re/FCITSRSHB9s4/3pTpHI91etNoUpibcDyinOTkjVRD6Bm+tX4NZ3Cdfutx
- i8JUHPRDs0jDQ==
+ b=QXLdZ+YADIXuF2scFPH5fGmZETa3/378Zsv+NRfNoTTlcge3w+M7LeaUwkIpXk6/R
+ vx2AzHzCyu0qxxLbaCyelhTciSjoWVkPphAaOnjSKLOuwso6fgy6O5aywZ6B7Vd2Bk
+ aCeP1hG/rzA6CJS52AMTqhzTVJPkTnlGr+1brlxEgTvK5Nog09lG8c0D9A9d0KQcrR
+ RoC5tSBJrDtE+9EwPis0HkaNnVyVc5NOOitT0snTr4ZfcCtBD8Ciq8NfQ6+gL6cfZI
+ TZCJiaCJEoPUL3uxoilBzHE/MmC3oxCqkyKNi8+LDAbkD+JYok+NB/eI++XLGRTkoa
+ cHQgWR0ZTCI5A==
 Received: from [127.0.0.1] (ip-111-27.static.ccinternet.cz [147.161.27.111])
  by smtpd-relay-7c7c659656-cskk5 (szn-email-smtpd/2.0.72) with ESMTPA
- id e0e7803f-367f-48e6-bd26-abdbb17333e9;
- Sun, 26 Apr 2026 01:26:54 +0200
+ id 79a3598c-18fb-4b7d-839e-07f9766dee68;
+ Sun, 26 Apr 2026 01:26:57 +0200
 From: michael.srba@seznam.cz
-Date: Sun, 26 Apr 2026 01:26:04 +0200
-Subject: [PATCH v4 02/11] of_live: support in SPL
+Date: Sun, 26 Apr 2026 01:26:09 +0200
+Subject: [PATCH v4 07/11] mach-snapdragon: Kconfig: changes / additions to
+ support SPL
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260426-qcom_spl-v4-2-8cf4133ff883@seznam.cz>
+Message-Id: <20260426-qcom_spl-v4-7-8cf4133ff883@seznam.cz>
 References: <20260426-qcom_spl-v4-0-8cf4133ff883@seznam.cz>
 In-Reply-To: <20260426-qcom_spl-v4-0-8cf4133ff883@seznam.cz>
 To: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>, 
@@ -108,82 +109,116 @@ X-Virus-Status: Clean
 
 From: Michael Srba <Michael.Srba@seznam.cz>
 
-Add CONFIG_SPL_OF_LIVE and if set, initialize of_live in spl.c
+An SoC to target has to be selected, e.g. TARGET_SDM845.
+This will enable the per-SoC boot0.h.
 
 Signed-off-by: Michael Srba <Michael.Srba@seznam.cz>
-Reviewed-by: Simon Glass <sjg@chromium.org>
 ---
- common/spl/spl.c | 9 +++++++++
- dts/Kconfig      | 8 ++++++++
- lib/Makefile     | 2 +-
- 3 files changed, 18 insertions(+), 1 deletion(-)
+ arch/arm/Kconfig                 | 34 +++++++++++++++++++++++++++++++++-
+ arch/arm/mach-snapdragon/Kconfig | 31 ++++++++++++++++++++++++++++---
+ 2 files changed, 61 insertions(+), 4 deletions(-)
 
-diff --git a/common/spl/spl.c b/common/spl/spl.c
-index 8256fa97862..13559baf059 100644
---- a/common/spl/spl.c
-+++ b/common/spl/spl.c
-@@ -17,6 +17,7 @@
- #include <irq_func.h>
- #include <log.h>
- #include <mapmem.h>
-+#include <of_live.h>
- #include <serial.h>
- #include <spl.h>
- #include <spl_load.h>
-@@ -510,6 +511,14 @@ static int spl_common_init(bool setup_malloc)
- 			return ret;
- 		}
- 	}
-+	if (CONFIG_IS_ENABLED(OF_LIVE)) {
-+		bootstage_start(BOOTSTAGE_ID_ACCUM_OF_LIVE, "of_live");
-+		ret = of_live_build(gd->fdt_blob,
-+				    (struct device_node **)gd_of_root_ptr());
-+		bootstage_accum(BOOTSTAGE_ID_ACCUM_OF_LIVE);
-+		if (ret)
-+			return ret;
-+	}
- 	if (CONFIG_IS_ENABLED(DM)) {
- 		bootstage_start(BOOTSTAGE_ID_ACCUM_DM_SPL,
- 				xpl_phase() == PHASE_TPL ? "dm tpl" : "dm_spl");
-diff --git a/dts/Kconfig b/dts/Kconfig
-index af8d30b45ab..aeb1014253a 100644
---- a/dts/Kconfig
-+++ b/dts/Kconfig
-@@ -86,6 +86,14 @@ config OF_LIVE
- 	  enables a live tree which is available after relocation,
- 	  and can be adjusted as needed.
- 
-+config SPL_OF_LIVE
-+	bool "Enable use of a live tree in SPL"
-+	depends on SPL_DM && SPL_OF_CONTROL
-+	help
-+	  This option enables a live tree in SPL, allowing the sharing
-+	  of OF fixup code between U-Boot proper and SPL.
-+	  See also OF_LIVE.
+diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
+index 03416c55265..ddabc23fc9e 100644
+--- a/arch/arm/Kconfig
++++ b/arch/arm/Kconfig
+@@ -1124,6 +1124,7 @@ config ARCH_SNAPDRAGON
+ 	bool "Qualcomm Snapdragon SoCs"
+ 	select ARM64
+ 	select DM
++	select DM_EVENT if USB_DWC3_GENERIC || SPL_USB_DWC3_GENERIC
+ 	select DM_GPIO
+ 	select DM_SERIAL
+ 	select DM_RESET
+@@ -1138,9 +1139,40 @@ config ARCH_SNAPDRAGON
+ 	select SAVE_PREV_BL_FDT_ADDR if !ENABLE_ARM_SOC_BOOT0_HOOK
+ 	select LINUX_KERNEL_IMAGE_HEADER if !ENABLE_ARM_SOC_BOOT0_HOOK
+ 	select SYSRESET
+-	select SYSRESET_PSCI
++	select SYSRESET_PSCI if !SPL
+ 	select ANDROID_BOOT_IMAGE_IGNORE_BLOB_ADDR
+ 	select MMU_PGPROT
++	select SUPPORT_SPL
 +
- config OF_UPSTREAM
- 	bool "Enable use of devicetree imported from Linux kernel release"
- 	depends on !COMPILE_TEST
-diff --git a/lib/Makefile b/lib/Makefile
-index d0ffabc2b47..bbd540e9687 100644
---- a/lib/Makefile
-+++ b/lib/Makefile
-@@ -13,7 +13,6 @@ obj-$(CONFIG_FWU_MULTI_BANK_UPDATE) += fwu_updates/
- obj-$(CONFIG_LZMA) += lzma/
- obj-$(CONFIG_BZIP2) += bzip2/
- obj-$(CONFIG_FIT) += libfdt/
--obj-$(CONFIG_OF_LIVE) += of_live.o
- obj-$(CONFIG_CMD_DHRYSTONE) += dhry/
- obj-$(CONFIG_ARCH_AT91) += at91/
- obj-$(CONFIG_OPTEE_LIB) += optee/
-@@ -55,6 +54,7 @@ obj-$(CONFIG_BITREVERSE) += bitrev.o
- obj-y += list_sort.o
- endif
++	select OF_LIVE if USB_DWC3_GENERIC
++	select SPL_OF_LIVE if SPL_USB_DWC3_GENERIC
++	select ARMV8_SPL_EXCEPTION_VECTORS if SPL
++	select ENABLE_ARM_SOC_BOOT0_HOOK if SPL
++	select SPL_DM if SPL
++	select SPL_DM_GPIO if SPL
++	select SPL_DM_PMIC if SPL
++	select SPL_DM_USB_GADGET if SPL
++	select SPL_ENV_SUPPORT if SPL
++	select SPL_EVENT if SPL_USB_DWC3_GENERIC
++	select SPL_GPIO if SPL
++	select SPL_HAS_BSS_LINKER_SECTION if SPL
++	select SPL_LIBCOMMON_SUPPORT if SPL
++	select SPL_LIBDISK_SUPPORT if SPL
++	select SPL_LIBGENERIC_SUPPORT if SPL
++	select SPL_OF_REAL if SPL
++	select SPL_OF_CONTROL if SPL
++	select SPL_PINCONF if SPL
++	select SPL_PINCTRL if SPL
++	select SPL_PINCTRL_FULL if SPL
++	select SPL_PINCTRL_GENERIC if SPL
++	select SPL_PINCONF_RECURSIVE if SPL
++	select SPL_PINMUX if SPL
++	select SPL_SPMI if SPL
++	select SPL_SPMI_MSM if SPL
++	select SPL_SPRINTF if SPL
++	select SPL_STRTO if SPL
++	select SPL_USB_GADGET if SPL
++	imply SPL_MMC if SPL
+ 	imply OF_UPSTREAM
+ 	imply CMD_DM
+ 	imply DM_USB_GADGET
+diff --git a/arch/arm/mach-snapdragon/Kconfig b/arch/arm/mach-snapdragon/Kconfig
+index f82cd0d3291..3b5ae6d98fb 100644
+--- a/arch/arm/mach-snapdragon/Kconfig
++++ b/arch/arm/mach-snapdragon/Kconfig
+@@ -17,9 +17,6 @@ config SYS_MALLOC_F_LEN
+ config SPL_SYS_MALLOC_F
+ 	default y
  
-+obj-$(CONFIG_$(PHASE_)OF_LIVE) += of_live.o
- obj-$(CONFIG_$(PHASE_)TPM) += tpm-common.o
- ifeq ($(CONFIG_$(PHASE_)TPM),y)
- obj-$(CONFIG_TPM) += tpm_api.o
+-config SPL_SYS_MALLOC_F_LEN
+-	default 0x2000
+-
+ config SYS_MALLOC_LEN
+ 	default 0x800000
+ 
+@@ -42,4 +39,32 @@ config SYS_CONFIG_NAME
+ 	  Based on this option include/configs/<CONFIG_SYS_CONFIG_NAME>.h header
+ 	  will be used for board configuration.
+ 
++config SPL_SHARES_INIT_SP_ADDR
++	default n
++
++config SPL_HAVE_INIT_STACK
++	default y
++
++choice
++	prompt "Qualcomm SoC select"
++	default TARGET_NONE if !SPL
++	help
++	  While U-Boot on Qualcomm platforms doesn't generally need compile-time
++	  adjustment based on the target SoC, there are a few exceptions to this.
++	  Currently this concerns boot0.h discrimination.
++
++config TARGET_NONE
++	bool "Generic build"
++	help
++	  Select this if you're not building SPL. U-Boot proper builds are currently
++	  generic across all SoCs.
++
++config TARGET_SDM845
++	bool "SPL targeting the sdm845 SoC"
++	help
++	  Select this if you are building u-boot SPL for sdm845.
++	  Currently this gates sdm845-specific boot0.h (only used in SPL).
++
++endchoice
++
+ endif
 
 -- 
 2.53.0
