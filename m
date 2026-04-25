@@ -4,85 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1EB9FF885C
-	for <u-boot@archiver.kernel.org>; Sat, 25 Apr 2026 16:56:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78AE3FF885C
+	for <u-boot@archiver.kernel.org>; Sat, 25 Apr 2026 16:56:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 191268425F;
+	by phobos.denx.de (Postfix) with ESMTP id 5B63184399;
 	Sat, 25 Apr 2026 18:55:34 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="p9vgzRBB";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="lXiynJBp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 63F8B842BF; Sat, 25 Apr 2026 18:34:39 +0200 (CEST)
-Received: from mail-ua1-x943.google.com (mail-ua1-x943.google.com
- [IPv6:2607:f8b0:4864:20::943])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 04E0C840CB; Sat, 25 Apr 2026 18:55:08 +0200 (CEST)
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 097C083FF5
- for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 18:34:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7097F80077
+ for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 18:55:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jcethrid@gmail.com
-Received: by mail-ua1-x943.google.com with SMTP id
- a1e0cc1a2514c-94aaa5d3bfcso5152868241.3
- for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 09:34:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1777134876; x=1777739676; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=0rhjHCeHqsTChJ1NFRA8a2p8g2b1zBvajnobE5jxHoY=;
- b=p9vgzRBB5AbX9xMT0sK17k8DxCRrxFnzHlci6+rsxj/9KJ9vqwyxyLsYODqhdbYBQC
- pb2YmKa2h8qZoaIQeK14D03YvQv+30QgXHBr3J0AM5Lk10NowjssXRVXJ5ySqihSfoh7
- KLW7X4lj3RzKZBPG8sxXbLgf2JjKJiiaoyT/9LR44+MW3K3TuiIt8WlQf7jDHM5SzoH6
- jrEYb2XdqfG2k1Mv0w0Gi+nSkHA8L6tCiyzu2DvhQXV9wyS0qRUr/UzI+G52wntDSjCe
- FFzs+Lz+EoQw2/V9H+D3CJyDLdbX3oSFkY3gpjKCvCMFoEZhcr+InmUjJsBMsCyKY/WS
- f1tg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777134876; x=1777739676;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=0rhjHCeHqsTChJ1NFRA8a2p8g2b1zBvajnobE5jxHoY=;
- b=cHLMpEZOr+Ne45uMikEARxiOHEQ9MWxyonmidECNBOSwykXfMevN5iuFj6mJIZam9T
- vV47UNL+I5WDi5AvD11ds8O6YZavzm1rGdPv7eTA4D+BT1myw9g1FJ6IOEeAYHr/GZao
- xVZqFHxCGQvMO+jP1JB0mWd/GUn4PGVXugMXAPSwcbvj0SdUcGh4+ncjCnaHHVmQuFxd
- c6zOICuk1ijdRk2W2Rs4IGFmJNYfvaO3yqN/U3QqoVN1GWzfZd43wV6d72aIaBB2eWjA
- 78PJeoR0Z5uB2c2z8vfujKJY1eTseU3pOn97nNqGFSnhUL/GwXXv7U2ZMTaXv2521UoT
- cofw==
-X-Gm-Message-State: AOJu0YxbtTXmd1VnZ7TL8varQpmhIPKSsrimfs5c5476nQRODnd02+fw
- RysmO8Cnuyh62kiOsgV4oAnri4J7gBhr/5PfsgHHnwPTm4L/DJC+uzxr8BUyM1wC
-X-Gm-Gg: AeBDies1JXFlutkEnQAhLc11cA+nGWa67GGe0Xp1K1terhV4+QvOxY7evex4wLDyl5M
- GcvcoomD5y4xC4Ajx8tbAj6XXiZeN7VZJPcJ8MrGFuK+vX7Ky8OfGFKExj7RdkhvNdM4nZMPncy
- WL/IB8TrgC8LOduarHANJRZU8D8dTOgC3El+c2krXAcDq+/t96xi+MqMA9jqWOwEmxmYJ+oFPNO
- ENzCpXUggu+bYqAniY0JqZlm8f0aG5ATDYTksTpIUkS/SFMIgOVJza/xh1aPnNSZXFaHZcrtTZL
- wf2vnODSNXaqahGJFWjR4G4mjOT/DfxNrK+4g91i/NAq9TlVrSvPu1ZeKR0znPF0eCtWQMt6bn3
- VFiQL5jMPNXl6pC6F3VLtaYsCaPzVtqtKw4b7vlmc1TA+WGWpMvHKGX8nALT4WLJJFz4Px38zHm
- fxiS2hMbRjPzSi56Wq/efLhgw6wsgQX1P8HB2WFYs6ftwdNWO88QmZCz0=
-X-Received: by 2002:ad4:5de5:0:b0:8ac:7ad3:4a66 with SMTP id
- 6a1803df08f44-8b0280bbdd2mr437759456d6.21.1776954345724; 
- Thu, 23 Apr 2026 07:25:45 -0700 (PDT)
-Received: from cethr-l01.localdomain ([136.56.120.109])
- by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-8b02aa4f1f9sm157183266d6.0.2026.04.23.07.25.44
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 23 Apr 2026 07:25:45 -0700 (PDT)
-From: Caleb Ethridge <jcethrid@gmail.com>
-To: u-boot@lists.denx.de
-Cc: malysagreg@gmail.com, trini@konsulko.com, linux@analog.com,
- philip@philipmolloy.com, sjg@chromium.org,
- Caleb Ethridge <caleb.ethridge@analog.com>
-Subject: [PATCH v5 05/15] mach-sc5xx: Add USB boot command
-Date: Thu, 23 Apr 2026 10:24:40 -0400
-Message-Id: <bcf7a2612fb0be0814444ca70ed060052042e034.1776954004.git.jcethrid@gmail.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <cover.1776954004.git.jcethrid@gmail.com>
-References: <cover.1776954004.git.jcethrid@gmail.com>
+ spf=pass smtp.mailfrom=ehristev@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by tor.source.kernel.org (Postfix) with ESMTP id 969BA60052;
+ Sat, 25 Apr 2026 13:17:18 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 84FC1C2BCB0;
+ Sat, 25 Apr 2026 13:17:17 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1777123038;
+ bh=P2lsIsKkqxthTgxHz58KHYCLqp+cv/zWaHP1JbqK+as=;
+ h=From:Date:Subject:To:Cc:From;
+ b=lXiynJBpjBlOE4lrDCZZQRq6TWmxk5v3hq5RYcUc0gDDLzo3nviDk/MhQ7VBU3zf6
+ y5ybYGmyi1ftAZDoVoLHCB9sFLudLGAwqN03Q2ZbXdK7rtAXBZTwUAlIMC8usypShK
+ 39aE631WV1XFG6rCK4tVlxfocMpxn1XqnSRC0BsDZNWyueK9tHZue6qiVNcD33PU6W
+ c+EXtVxlLCDznpRU+o77y3G7xEzBXSKvdc71WA8+kX3hpxIA+G+/J2YP4uJWOnNs1+
+ L9WFZNg71rw7Igu+AV69DeuBSB/gZw+8ubH5XGW+75LDusMDENejT+fXBS+F6+nN7T
+ xLaxEPNCi4bjw==
+From: Eugen Hristev <ehristev@kernel.org>
+Date: Sat, 25 Apr 2026 16:17:12 +0300
+Subject: [PATCH] MAINTAINERS, mailmap: Change email for Eugen Hristev
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260425-maintainers-v1-1-114f12ce0656@kernel.org>
+X-B4-Tracking: v=1; b=H4sIANe+7GkC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDIzMDEyNT3dzEzLwSIE4tKtZNSUlKNUszT02xNEhRAuooKEpNy6wAmxYdC+E
+ XlyZlpSaXgIxQqq0FAP/yYJlvAAAA
+X-Change-ID: 20260425-maintainers-ddbe6f7ed90d
+To: u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, Eugen Hristev <ehristev@kernel.org>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1688; i=ehristev@kernel.org;
+ h=from:subject:message-id; bh=P2lsIsKkqxthTgxHz58KHYCLqp+cv/zWaHP1JbqK+as=;
+ b=owGbwMvMwCXWkjcnuXne3fmMp9WSGDLf7Lsj3BvI/yQl7dmyx8tWb4yxfv/P6r3DzYm7Qv75y
+ dhvUMwL6ihlYRDjYpAVU2SpNvlXK9y/w/2kq6UKzBxWJpAhDFycAjARjsMM/11MXk+NYLg0jXHD
+ 4xcO5nPyHsxXmrRTt3KybEY1j3WE1S1GhvNMXg0/Sif9+peYo9RysmpZinzoK5uGvfdXHGnQOPl
+ BmwkA
+X-Developer-Key: i=ehristev@kernel.org; a=openpgp;
+ fpr=AB184498D27A77B65D7852C81EB31E020EAC2FC8
 X-Mailman-Approved-At: Sat, 25 Apr 2026 18:55:32 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -100,115 +79,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Caleb Ethridge <caleb.ethridge@analog.com>
+Replace old bouncing emails with ehristev@kernel.org
 
-Add the USB boot command to the environments
-of the boards that support it.
-
-Signed-off-by: Caleb Ethridge <caleb.ethridge@analog.com>
+Signed-off-by: Eugen Hristev <ehristev@kernel.org>
 ---
- board/adi/sc573-ezkit/sc573-ezkit.env           | 1 +
- board/adi/sc584-ezkit/sc584-ezkit.env           | 1 +
- board/adi/sc589-ezkit/sc589-ezkit.env           | 1 +
- board/adi/sc589-mini/sc589-mini.env             | 1 +
- board/adi/sc594-som-ezkit/sc594-som-ezkit.env   | 1 +
- board/adi/sc594-som-ezlite/sc594-som-ezlite.env | 1 +
- board/adi/sc598-som-ezkit/sc598-som-ezkit.env   | 1 +
- include/env/adi/adi_boot.env                    | 7 +++++++
- 8 files changed, 14 insertions(+)
+ .mailmap    | 5 +++--
+ MAINTAINERS | 2 +-
+ 2 files changed, 4 insertions(+), 3 deletions(-)
 
-diff --git a/board/adi/sc573-ezkit/sc573-ezkit.env b/board/adi/sc573-ezkit/sc573-ezkit.env
-index 51157ff36aa..36bd207f410 100644
---- a/board/adi/sc573-ezkit/sc573-ezkit.env
-+++ b/board/adi/sc573-ezkit/sc573-ezkit.env
-@@ -11,5 +11,6 @@ loadaddr=CONFIG_SC5XX_LOADADDR
- #define USE_SPI
- #define USE_RAM
- #define USE_MMC
-+#define USE_USB
+diff --git a/.mailmap b/.mailmap
+index df143d7f31b4..0c2e96219f83 100644
+--- a/.mailmap
++++ b/.mailmap
+@@ -43,8 +43,9 @@ Christopher Obbard <christopher.obbard@linaro.org> <chris.obbard@collabora.com>
+ Dirk Behme <dirk.behme@googlemail.com>
+ <duje@dujemihanovic.xyz> <duje.mihanovic@skole.hr>
+ Durga Challa <durga.challa@amd.com> <vnsl.durga.challa@xilinx.com>
+-Eugen Hristev <eugen.hristev@linaro.org> <eugen.hristev@microchip.com>
+-Eugen Hristev <eugen.hristev@linaro.org> <eugen.hristev@collabora.com>
++Eugen Hristev <ehristev@kernel.org> <eugen.hristev@microchip.com>
++Eugen Hristev <ehristev@kernel.org> <eugen.hristev@linaro.org>
++Eugen Hristev <ehristev@kernel.org> <eugen.hristev@collabora.com>
+ Fabio Estevam <fabio.estevam@nxp.com>
+ Greg Malysa <malysagreg@gmail.com> <greg.malysa@timesys.com>
+ Harini Katakam <harini.katakam@amd.com> <harini.katakam@xilinx.com>
+diff --git a/MAINTAINERS b/MAINTAINERS
+index fc5cd553ec3d..1ad65bf2f4c0 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -475,7 +475,7 @@ F:	configs/eDPU_defconfig
+ F:	configs/uDPU_defconfig
  
- #include <env/adi/adi_boot.env>
-diff --git a/board/adi/sc584-ezkit/sc584-ezkit.env b/board/adi/sc584-ezkit/sc584-ezkit.env
-index 6d4b20d70f6..9336fc4e59d 100644
---- a/board/adi/sc584-ezkit/sc584-ezkit.env
-+++ b/board/adi/sc584-ezkit/sc584-ezkit.env
-@@ -10,5 +10,6 @@ loadaddr=CONFIG_SC5XX_LOADADDR
- #define USE_NFS
- #define USE_SPI
- #define USE_RAM
-+#define USE_USB
- 
- #include <env/adi/adi_boot.env>
-diff --git a/board/adi/sc589-ezkit/sc589-ezkit.env b/board/adi/sc589-ezkit/sc589-ezkit.env
-index d068b44573f..a4a686158ca 100644
---- a/board/adi/sc589-ezkit/sc589-ezkit.env
-+++ b/board/adi/sc589-ezkit/sc589-ezkit.env
-@@ -11,5 +11,6 @@ loadaddr=CONFIG_SC5XX_LOADADDR
- #define USE_RAM
- #define USE_MMC
- #define USE_SPI
-+#define USE_USB
- 
- #include <env/adi/adi_boot.env>
-diff --git a/board/adi/sc589-mini/sc589-mini.env b/board/adi/sc589-mini/sc589-mini.env
-index 3827cf4e9a5..2a322bc6761 100644
---- a/board/adi/sc589-mini/sc589-mini.env
-+++ b/board/adi/sc589-mini/sc589-mini.env
-@@ -11,5 +11,6 @@ loadaddr=CONFIG_SC5XX_LOADADDR
- #define USE_RAM
- #define USE_SPI
- #define USE_MMC
-+#define USE_USB
- 
- #include <env/adi/adi_boot.env>
-diff --git a/board/adi/sc594-som-ezkit/sc594-som-ezkit.env b/board/adi/sc594-som-ezkit/sc594-som-ezkit.env
-index 69d2ec3ba03..a4c72f2e9c7 100644
---- a/board/adi/sc594-som-ezkit/sc594-som-ezkit.env
-+++ b/board/adi/sc594-som-ezkit/sc594-som-ezkit.env
-@@ -12,5 +12,6 @@ loadaddr=CONFIG_SC5XX_LOADADDR
- #define USE_OSPI
- #define USE_RAM
- #define USE_MMC
-+#define USE_USB
- 
- #include <env/adi/adi_boot.env>
-diff --git a/board/adi/sc594-som-ezlite/sc594-som-ezlite.env b/board/adi/sc594-som-ezlite/sc594-som-ezlite.env
-index f915175e041..e312fc95ae4 100644
---- a/board/adi/sc594-som-ezlite/sc594-som-ezlite.env
-+++ b/board/adi/sc594-som-ezlite/sc594-som-ezlite.env
-@@ -12,5 +12,6 @@ loadaddr=CONFIG_SC5XX_LOADADDR
- #define USE_OSPI
- #define USE_RAM
- #define USE_MMC
-+#define USE_USB
- 
- #include <env/adi/adi_boot.env>
-diff --git a/board/adi/sc598-som-ezkit/sc598-som-ezkit.env b/board/adi/sc598-som-ezkit/sc598-som-ezkit.env
-index b6f477c8402..754dcece976 100644
---- a/board/adi/sc598-som-ezkit/sc598-som-ezkit.env
-+++ b/board/adi/sc598-som-ezkit/sc598-som-ezkit.env
-@@ -12,5 +12,6 @@ loadaddr=CONFIG_SC5XX_LOADADDR
- #define USE_OSPI
- #define USE_RAM
- #define USE_MMC
-+#define USE_USB
- 
- #include <env/adi/adi_boot.env>
-diff --git a/include/env/adi/adi_boot.env b/include/env/adi/adi_boot.env
-index eb098dd2256..d6caa95325e 100644
---- a/include/env/adi/adi_boot.env
-+++ b/include/env/adi/adi_boot.env
-@@ -68,3 +68,10 @@ ramboot= wget ${loadaddr} ${serverip}:/fitImage;
- 	run ramargs;
- 	bootm ${loadaddr}
- #endif
-+
-+#if defined(USE_USB)
-+usbargs=setenv bootargs root=/dev/sda2 rw rootfstype=ext4 rootwait ${adi_bootargs}
-+usbboot=usb start;
-+	ext4load usb 0:1 ${loadaddr} /fitImage; run usbargs;
-+	bootm ${loadaddr}
-+#endif
--- 
-2.34.1
+ ARM MICROCHIP/ATMEL AT91
+-M:	Eugen Hristev <eugen.hristev@microchip.com>
++M:	Eugen Hristev <ehristev@kernel.org>
+ S:	Maintained
+ T:	git https://source.denx.de/u-boot/custodians/u-boot-at91.git
+ F:	arch/arm/dts/at91*
+
+---
+base-commit: 9f61fd5b80a43ae20ba115e3a2933d47d720ab82
+change-id: 20260425-maintainers-ddbe6f7ed90d
+
+Best regards,
+--  
+Eugen Hristev <ehristev@kernel.org>
 
