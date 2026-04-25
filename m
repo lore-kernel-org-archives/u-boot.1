@@ -4,88 +4,124 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A6F5FA1FEF
-	for <u-boot@archiver.kernel.org>; Wed, 22 Apr 2026 20:21:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54CE1FF885C
+	for <u-boot@archiver.kernel.org>; Sat, 25 Apr 2026 16:06:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6629884401;
-	Wed, 22 Apr 2026 22:21:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 4ADC48420C;
+	Sat, 25 Apr 2026 18:06:03 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="KoXpTwKB";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="nMmgCoJl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B7C5E84277; Wed, 22 Apr 2026 19:00:43 +0200 (CEST)
-Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
- [IPv6:2a00:1450:4864:20::332])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 248CF841DF; Sat, 25 Apr 2026 18:06:02 +0200 (CEST)
+Received: from SN4PR2101CU001.outbound.protection.outlook.com
+ (mail-southcentralusazlp170120001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c10d::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0CA1384314
- for <u-boot@lists.denx.de>; Wed, 22 Apr 2026 19:00:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 82E3584099
+ for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 18:05:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=micbis.openwrt@gmail.com
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-48909558b3aso48814355e9.0
- for <u-boot@lists.denx.de>; Wed, 22 Apr 2026 10:00:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1776877235; x=1777482035; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=eXkH/ZC1/r1mtLVPLqLEHNs4+L4xtL+8l1G0DSlOQ0Y=;
- b=KoXpTwKB0GUy1az1hkG6vR2GoAXSlBzquHM6PwWQ/N6i7BPJy2xtgKEp3sg+rhGwzA
- slkiPF63UTZ+EgPLg5VQMIv95GeoIkUJdJoK/vrYBlwYMmChnqMsmBoB88QbwC4ml1H5
- EeGfqtebxOLPk7AGIYovFAlumyY3zrEArUw4V1t/CZW+QwkzYDICJ0jGNg+hQBenLoI4
- k47Q3iXzxy9f0FHTOVU8EgSYNEY1ZqtJNV2vGnpEMvOy5bNZgG6vMeI7gQX9bSyBp5bC
- c9DmfpvDLRvvthUsRfls0bLADNAiQQo22xpC/kdIPDLelnAbhaCbKgTSjQpiVvIg/S6N
- J4iQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776877235; x=1777482035;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=eXkH/ZC1/r1mtLVPLqLEHNs4+L4xtL+8l1G0DSlOQ0Y=;
- b=jqadZVIF1HOasej+YVSQDm/2axUTr9N+5KF6kmKwD3pcN/kK97tXAXXxFzAJPTZxWa
- v19mjduTL96vj7WEkwfHa0k9MxtTDAqzytS1t+nrcqLHxypP/llysjnLZhDnR8afz9ZU
- oPAoqiHavA2Pqo16asN0HMxsrncb8pCiOs8h853DlhP7QkbTyOl13kuExSgEuJgndTPT
- ITderPR7E0hP92DSWjCRpwByNqzgJMJe7g+L5GYF09gXrlJLNpVkXQoKMRCOiuSlU9eh
- r7D1/YJ0qqPjJALVEgdBLjqm1BJt4kfrWeFaTR8MLNz5vA452FCC7oyS+hYhc6aDgFyh
- j2/g==
-X-Forwarded-Encrypted: i=1;
- AFNElJ9PGsevCSkRbiFNNeiRTXnBCRMOX24pV4maEYU3KxmLJusvxlalOgChsLpHonx9DwrpKDbCF7s=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx1xAflVBypylNRMyy+sbLJITtEMweTpmrtuE+pewCTH+UijJ6R
- MW8Cwsq1cwo+Q2iavsEYPL/sSNvpI6GEPFKsE8phAPaMHeRZBB39nc8Q
-X-Gm-Gg: AeBDiesHdzUjF6xwk0WHvuJAP4yGBk+I4/6QnKWs28eWTJJH06QDTPe31F3oa2b6Fv8
- JkZBSBvFs8FPdbgYUsrOmuvfcFzl06TmaFUk7u+pISftpvHyd5fnSIusfGo82iBzZS0Okf1UcBw
- 7bMCF/W7uuyzeEFg0uPDcndmEhaROV126qW3oc4hvuu3mlSKivNlTKKVFLdLnYorwqufxSrATLZ
- XYlK0wTJOxF93N4pdSH2QjPNzwaLoo4u/vrM+IQEbN8SZC5dnFJahBDtg4a58QbIj/73A+gukap
- 7vayG84rFEoV5uus4cF8A5V+b7IdkmEXj6BqQ3j+iR018QUO2YzYuRIbqTUS2navxYq/hb0yV0d
- n3uCD++AD+RTm0R8eUMCsaxlDItMCeWwipOFMelPws8TdtUBuaK5ipIxrE8rRDJtn/dZbTGOrUi
- jZsRkHezzC4uvWLUkSr8Sf9OTEbpGB7BQJwGAjIdjwSsekeOclA5Y=
-X-Received: by 2002:a05:600c:3053:b0:48a:53ea:140b with SMTP id
- 5b1f17b1804b1-48a53ea1526mr85749075e9.28.1776877235034; 
- Wed, 22 Apr 2026 10:00:35 -0700 (PDT)
-Received: from localhost.localdomain ([151.70.144.55])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4891c08faffsm453725165e9.1.2026.04.22.10.00.33
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 22 Apr 2026 10:00:34 -0700 (PDT)
-From: Michele Bisogno <micbis.openwrt@gmail.com>
-To: Marek Vasut <marex@denx.de>, Lukasz Majewski <lukma@denx.de>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>
-Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Tom Rini <trini@konsulko.com>,
- u-boot@lists.denx.de, Michele Bisogno <micbis.openwrt@gmail.com>
-Subject: [PATCH v4 2/3] usb: gadget: rcar: Add support for reset controller
-Date: Wed, 22 Apr 2026 18:59:37 +0200
-Message-Id: <20260422165938.35925-3-micbis.openwrt@gmail.com>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=b-padhi@ti.com
+Received: from PH7PR10MB6602.namprd10.prod.outlook.com (2603:10b6:510:206::9)
+ by DS4PPF80E5E852F.namprd10.prod.outlook.com (2603:10b6:f:fc00::d2e)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9846.24; Sat, 25 Apr
+ 2026 14:41:28 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=xtbq5snMuUCKvgBo3iybdB1J7lsCxf/Y8+NjW+r8LdYygAB91+MrN9T8ZWRseUJmnzFzAOYnS5HJtLaQdY/BwbYurgAC477ROyx1bdXQr1Uq8tBPsawN2GRA+phL87C59Fq6BtAu7y62mrAOkTtUrmfaYdJGWmktL1YC6IeqBqSnJqho2BFXhW5GolnndEvu8QLPLVVwQkp3RlQBjJt1nkVIKVQ1jAf9HuZ2XdRKrv2rEXnd7+uNpRk2+uemkyNE8xDa2lklePFfk2Puu/i2vraS2Y85+QK1F5lOLTuJEFBEhd1ckm0Iuo2wdLDVb5dwIYnOuWKmwFKnmin8Loi1YQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=LJHhbaqBhmFUldgEUGaZP/mPVyAMAOmZedLoC62fl6E=;
+ b=YeyYVp48WjbA6uivqW2W4DntMnhebXA9dCDR0yXtA2HxaQsWmZj3DdqVSBan+GnI2j26/FYWJIVWpkKM3SH5QIAQDm2PyYzREqJ4Blsp/39O4I6+tWqrJJAfO/apxU4QKsMb3x4BJEltwQDHSzoUYv5q3tfe2vaJ+c+gx2VGoKrwR3M5ohl2avR3x2NuqFxxt0T32qp2eqcb8OeLMGNUxeDsL9ATIDlk0lkBJI62lov5kweN5S80xC+TpmqQHYTiYgjNKqQf7DnKVg/7LElflb+eZ9rSLIoUAGCI7WM6AaBdaB3SVyoQI2jDAvYnmpU/NG3cdzeiX5BoI7qhQ/q6OA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.21.195) smtp.rcpttodomain=chromium.org smtp.mailfrom=ti.com;
+ dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=LJHhbaqBhmFUldgEUGaZP/mPVyAMAOmZedLoC62fl6E=;
+ b=nMmgCoJl1JYVZImvOASDHUIW5XQtEhXN1VQFHPMyrJQf3/V4UlUr3Z2fTKTFlq58BG8QolInSzB9Oek8naYm5dbNqDNuBw/sdN4mlwHmraKjPJ7Gl2jsOur/BAOFFdUWGjvzeV74MaZLVkHs3543h61ur9JY7X0nteeNsIB8tL0=
+Received: from BN9P221CA0009.NAMP221.PROD.OUTLOOK.COM (2603:10b6:408:10a::17)
+ by PH7PR10MB6602.namprd10.prod.outlook.com (2603:10b6:510:206::9)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9846.16; Sat, 25 Apr
+ 2026 03:38:27 +0000
+Received: from BN2PEPF000044A4.namprd02.prod.outlook.com
+ (2603:10b6:408:10a::4) by BN9P221CA0009.outlook.office365.com
+ (2603:10b6:408:10a::17) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9846.23 via Frontend Transport; Sat,
+ 25 Apr 2026 03:38:24 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.195)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.21.195 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.21.195; helo=flwvzet201.ext.ti.com; pr=C
+Received: from flwvzet201.ext.ti.com (198.47.21.195) by
+ BN2PEPF000044A4.mail.protection.outlook.com (10.167.243.155) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9846.18 via Frontend Transport; Sat, 25 Apr 2026 03:38:22 +0000
+Received: from DFLE212.ent.ti.com (10.64.6.70) by flwvzet201.ext.ti.com
+ (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Fri, 24 Apr
+ 2026 22:38:21 -0500
+Received: from DFLE201.ent.ti.com (10.64.6.59) by DFLE212.ent.ti.com
+ (10.64.6.70) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Fri, 24 Apr
+ 2026 22:38:21 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE201.ent.ti.com
+ (10.64.6.59) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Fri, 24 Apr 2026 22:38:21 -0500
+Received: from uda0510294.dhcp.ti.com (uda0510294.dhcp.ti.com [10.24.50.162])
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id
+ 63P3bk872903263; Fri, 24 Apr 2026 22:38:18 -0500
+From: Beleswar Padhi <b-padhi@ti.com>
+To: <trini@konsulko.com>
+CC: <afd@ti.com>, <bb@ti.com>, <anshuld@ti.com>, <hnagalla@ti.com>,
+ <jm@ti.com>, <nm@ti.com>, <n-francis@ti.com>, <u-kumar1@ti.com>,
+ <b-padhi@ti.com>, <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>
+Subject: [PATCH v4 08/11] tools: binman: Add a test for boot and load
+ extensions
+Date: Sat, 25 Apr 2026 09:07:39 +0530
+Message-ID: <20260425033742.1519298-9-b-padhi@ti.com>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20260422165938.35925-1-micbis.openwrt@gmail.com>
-References: <20260422165938.35925-1-micbis.openwrt@gmail.com>
+In-Reply-To: <20260425033742.1519298-1-b-padhi@ti.com>
+References: <20260425033742.1519298-1-b-padhi@ti.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Wed, 22 Apr 2026 22:21:26 +0200
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BN2PEPF000044A4:EE_|PH7PR10MB6602:EE_|DS4PPF80E5E852F:EE_
+X-MS-Office365-Filtering-Correlation-Id: 3b9ff400-352f-4367-6f13-08dea27c19e2
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|82310400026|376014|36860700016|56012099003|22082099003|18002099003;
+X-Microsoft-Antispam-Message-Info: axHMdN+BEFp2FfBSvcqOOxe6GNoDpbln0BdHGTWyHhFzuOzqsOJGVNJkakPCQc8gN44tazp0egJ5drAObNUdsHtwFLGTncB8rpqH8GbkeUr8xoCL3Mm/qST9NYcbyvd4MbpR7tBkjB/9yL/ed/F0OFz8CGuz0iEByQJLF9cC8nxX+PjpvB69hIDMSFU/lv1fx9uBfkFrRiDeT0tUkQRl6rSf9ql3PnVzUV496FLBwBE31KmilRAU2NQekpBiS/41rsn7iNozOfOIXRneZriwAOt8on/cW9JzAjZg+mAWWGgw3ycEESakMOU2evWyyxqTCKCqsk0RNTbvPgHcd7AFdmHY5ejgdx7kVL1EiXv9DYFpSrHEDux2Sx3TALO3J9OKs42Rqu2O2cuid+DtntX4od9w3QEfxUXWNm7kj6fJwQ1cWBcbE7fJJaBkT+0yMV2p//QVOEuspBcSVp3zcduXL/auXTthaYfoRcVfPOQTuVTWJWYgyJFnqSbSQRJFWozFTYiXQTccBzrmtVQbruz13+7z5ZHtCLniYjqFjEZIuM0P2CU+QLJ7dgm/S5KcjoBqLU5nHMvHPXAH8SXvtIWk/99e9/vcuwmlYh6jnC3jc3gk0dQw7EI0ChYK8XGSlscIgfbupmStTKV0zYXqxhjJB7aGn/n1sezP8NIaioFXXhMC9rhABaYwkljch7h0CjggwyWE/3+NgOUEk6UH4wR7QhDFS4GxEgIDjlOAf4JSe6O5L7V8mie2BjvH4B8gFkU04Me24IL8I1zBTKbc4jGBeg==
+X-Forefront-Antispam-Report: CIP:198.47.21.195; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:flwvzet201.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
+ SFS:(13230040)(1800799024)(82310400026)(376014)(36860700016)(56012099003)(22082099003)(18002099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: YfQfwjcoAkN+XGV40Is0fDiuQ/cJ45Ior3teA88dAoMFYpHyEk9pVSa+uk9167A9UnvXRiZkan7YsgC/hdDzYBpEV7rHuHvpRYhD+PhJClJPmzXXhqma5jHiYk0FtPvEluWYuf85t7NfJbQU4I/5QzDvgKTm+FLcFC3ME+c7bZ5QT5FRDVts7WFl21jHqg2DncM7dnD+lhj6ekcuv/sViDmhgPjuUxRqO6w3IpXWC44edFgas88EIeI+rLcXMUQ3W+vAjp2gQ0f7uCMvDTm08LSQvkEaeMLaWaVBHVQa6E/XdnkNiRq9tybi+YLwfLxkHFqBzUwMHY47xRhwXvRG5Sa8JPTa19qs3TwDQvQ4v33xONOjf/nsEsRIDVQfoMko0kaNzq7Li7KMRCtZzVjrjpp0Lo4z+k8b9vSMwfJ9HAYYY6kh+x+mwcA20IfHZ63U
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Apr 2026 03:38:22.5886 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 3b9ff400-352f-4367-6f13-08dea27c19e2
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.195];
+ Helo=[flwvzet201.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: BN2PEPF000044A4.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR10MB6602
+X-OriginatorOrg: ti.com
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,117 +138,73 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Some Renesas SoCs, such as the RZ/G2L, require the USBHS core to
-be explicitly deasserted from reset before register access is
-possible.
+Add test coverage for the boot and load extension functionality in
+ti-secure certificates. This verifies that a certificate can be
+generated having boot and load extensions.
 
-Update the OTG probe to handle a bulk reset controller. To maintain
-hardware stability, the reset is deasserted after clocks are
-enabled in probe(), and asserted before clocks are disabled
-in remove().
-
-Update the error paths in probe to ensures clocks are disabled
-if the reset initialization fails.
-
-Signed-off-by: Michele Bisogno <micbis.openwrt@gmail.com>
+Signed-off-by: Beleswar Padhi <b-padhi@ti.com>
 ---
- drivers/usb/gadget/rcar/common.c | 29 +++++++++++++++++++++++------
- 1 file changed, 23 insertions(+), 6 deletions(-)
+Cc: Simon Glass <sjg@chromium.org>
 
-diff --git a/drivers/usb/gadget/rcar/common.c b/drivers/usb/gadget/rcar/common.c
-index f7b34f0485f..a5d56f8dbe4 100644
---- a/drivers/usb/gadget/rcar/common.c
-+++ b/drivers/usb/gadget/rcar/common.c
-@@ -16,6 +16,7 @@
- #include <linux/usb/ch9.h>
- #include <linux/usb/gadget.h>
- #include <usb.h>
-+#include <reset.h>
+v4: Changelog:
+1. New patch. Added binman test for load & boot extensions in
+   certificate.
+
+ tools/binman/ftest.py                         | 10 ++++++++
+ .../test/vendor/ti_secure_boot_load_ext.dts   | 23 +++++++++++++++++++
+ 2 files changed, 33 insertions(+)
+ create mode 100644 tools/binman/test/vendor/ti_secure_boot_load_ext.dts
+
+diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
+index ca5149ee654..f36d760375d 100644
+--- a/tools/binman/ftest.py
++++ b/tools/binman/ftest.py
+@@ -7270,6 +7270,16 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+                                 entry_args=entry_args)[0]
+         self.assertGreater(len(data), len(TI_UNSECURE_DATA))
  
- #include "common.h"
- 
-@@ -290,6 +291,9 @@ struct usbhs_priv_otg_data {
- 	void __iomem		*base;
- 	void __iomem		*phybase;
- 
-+	struct clk_bulk clk_bulk;
-+	struct reset_ctl_bulk reset_bulk;
++    def testPackTiSecureBootLoadExt(self):
++        """Test that an image with TI secured binary having boot & load extensions can be created"""
++        keyfile = self.TestFile('security/key.key')
++        entry_args = {
++            'keyfile': keyfile,
++        }
++        data = self._DoReadFileDtb('vendor/ti_secure_boot_load_ext.dts',
++                                   entry_args=entry_args)[0]
++        self.assertGreater(len(data), len(TI_UNSECURE_DATA))
 +
- 	struct platform_device	usbhs_dev;
- 	struct usbhs_priv	usbhs_priv;
- 
-@@ -355,7 +359,7 @@ static int usbhs_udc_otg_gadget_handle_interrupts(struct udevice *dev)
- 	return 0;
- }
- 
--static int usbhs_probe(struct usbhs_priv *priv)
-+static int usbhs_probe(struct usbhs_priv *priv, struct udevice *dev)
- {
- 	int ret;
- 
-@@ -396,21 +400,28 @@ static int usbhs_udc_otg_probe(struct udevice *dev)
- {
- 	struct usbhs_priv_otg_data *priv = dev_get_priv(dev);
- 	struct usb_gadget *gadget;
--	struct clk_bulk clk_bulk;
- 	int ret = -EINVAL;
- 
- 	priv->base = dev_read_addr_ptr(dev);
- 	if (!priv->base)
- 		return -EINVAL;
- 
--	ret = clk_get_bulk(dev, &clk_bulk);
-+	ret = clk_get_bulk(dev, &priv->clk_bulk);
- 	if (ret)
- 		return ret;
- 
--	ret = clk_enable_bulk(&clk_bulk);
-+	ret = clk_enable_bulk(&priv->clk_bulk);
- 	if (ret)
- 		return ret;
- 
-+	ret = reset_get_bulk(dev, &priv->reset_bulk);
-+	if (ret)
-+		goto err_clk;
+     def testEncryptedNoAlgo(self):
+         """Test encrypted node with missing required properties"""
+         with self.assertRaises(ValueError) as e:
+diff --git a/tools/binman/test/vendor/ti_secure_boot_load_ext.dts b/tools/binman/test/vendor/ti_secure_boot_load_ext.dts
+new file mode 100644
+index 00000000000..5c29d18e627
+--- /dev/null
++++ b/tools/binman/test/vendor/ti_secure_boot_load_ext.dts
+@@ -0,0 +1,23 @@
++// SPDX-License-Identifier: GPL-2.0+
 +
-+	ret = reset_deassert_bulk(&priv->reset_bulk);
-+	if (ret)
-+		goto err_clk;
++/dts-v1/;
 +
- 	clrsetbits_le32(priv->base + UGCTRL2, UGCTRL2_USB0SEL_MASK, UGCTRL2_USB0SEL_EHCI);
- 	clrsetbits_le16(priv->base + LPSTS, LPSTS_SUSPM, LPSTS_SUSPM);
- 
-@@ -423,7 +434,7 @@ static int usbhs_udc_otg_probe(struct udevice *dev)
- 	priv->usbhs_priv.pdev = &priv->usbhs_dev;
- 	priv->usbhs_priv.base = priv->base;
- 	priv->usbhs_dev.dev.driver_data = &priv->usbhs_priv;
--	ret = usbhs_probe(&priv->usbhs_priv);
-+	ret = usbhs_probe(&priv->usbhs_priv, dev);
- 	if (ret < 0)
- 		goto err_phy;
- 
-@@ -440,7 +451,7 @@ static int usbhs_udc_otg_probe(struct udevice *dev)
- err_phy:
- 	generic_shutdown_phy(&priv->phy);
- err_clk:
--	clk_disable_bulk(&clk_bulk);
-+	clk_disable_bulk(&priv->clk_bulk);
- 	return ret;
- }
- 
-@@ -457,6 +468,12 @@ static int usbhs_udc_otg_remove(struct udevice *dev)
- 	usbhs_fifo_remove(&priv->usbhs_priv);
- 	usbhs_pipe_remove(&priv->usbhs_priv);
- 
-+	reset_assert_bulk(&priv->reset_bulk);
-+	reset_release_bulk(&priv->reset_bulk);
++/ {
++	#address-cells = <1>;
++	#size-cells = <1>;
 +
-+	clk_disable_bulk(&priv->clk_bulk);
-+	clk_release_bulk(&priv->clk_bulk);
-+
- 	generic_shutdown_phy(&priv->phy);
- 
- 	return dm_scan_fdt_dev(dev);
++	binman {
++		ti-secure {
++			content = <&unsecure_binary>;
++			proc_id = <0x20>;
++			flags_set = <0x00000001>;
++			flags_clr = <0x00000002>;
++			reset_vector = <0x70000000>;
++			dest_addr = <0x80000000>;
++			auth_type = <0x02>;
++		};
++		unsecure_binary: blob-ext {
++			filename = "ti_unsecure.bin";
++		};
++	};
++};
 -- 
 2.34.1
 
