@@ -4,92 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54CE1FF885C
-	for <u-boot@archiver.kernel.org>; Sat, 25 Apr 2026 16:06:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60BCEFF885C
+	for <u-boot@archiver.kernel.org>; Sat, 25 Apr 2026 16:06:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4ADC48420C;
-	Sat, 25 Apr 2026 18:06:03 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3146B84137;
+	Sat, 25 Apr 2026 18:06:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="nMmgCoJl";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="X+z+5Hy8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 248CF841DF; Sat, 25 Apr 2026 18:06:02 +0200 (CEST)
-Received: from SN4PR2101CU001.outbound.protection.outlook.com
- (mail-southcentralusazlp170120001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c10d::1])
+ id 51DED84109; Sat, 25 Apr 2026 18:06:05 +0200 (CEST)
+Received: from CY7PR03CU001.outbound.protection.outlook.com
+ (mail-westcentralusazlp170100005.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c112::5])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 82E3584099
- for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 18:05:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9823984120
+ for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 18:06:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=b-padhi@ti.com
-Received: from PH7PR10MB6602.namprd10.prod.outlook.com (2603:10b6:510:206::9)
- by DS4PPF80E5E852F.namprd10.prod.outlook.com (2603:10b6:f:fc00::d2e)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9846.24; Sat, 25 Apr
- 2026 14:41:28 +0000
+Received: from CYXPR10MB7951.namprd10.prod.outlook.com (2603:10b6:930:dc::9)
+ by CH2PR10MB4343.namprd10.prod.outlook.com (2603:10b6:610:a9::21) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9846.23; Sat, 25 Apr
+ 2026 12:57:00 +0000
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=xtbq5snMuUCKvgBo3iybdB1J7lsCxf/Y8+NjW+r8LdYygAB91+MrN9T8ZWRseUJmnzFzAOYnS5HJtLaQdY/BwbYurgAC477ROyx1bdXQr1Uq8tBPsawN2GRA+phL87C59Fq6BtAu7y62mrAOkTtUrmfaYdJGWmktL1YC6IeqBqSnJqho2BFXhW5GolnndEvu8QLPLVVwQkp3RlQBjJt1nkVIKVQ1jAf9HuZ2XdRKrv2rEXnd7+uNpRk2+uemkyNE8xDa2lklePFfk2Puu/i2vraS2Y85+QK1F5lOLTuJEFBEhd1ckm0Iuo2wdLDVb5dwIYnOuWKmwFKnmin8Loi1YQ==
+ b=kdREsT2e5nOWjM3BKXXtbkdMdZEsdNDLFhxnn9rJDdWcsz4+EdRcnlbp0OdIuunmY2h6E8sOIXG3Juy0MRCzqAOnX8pR2STfAmRh4BuUZmjUlFP5oLveuNO1n/N28xJezjNadug5T4LHDKdRDk/gx9A04/d2XvJW4uM6GN5nsuwHVXbP3eoi0rMql+IWX3hgRLUbw95gXSJuaOaTt+BhdWyCtmeOuykYxS3kGMZuHMMqlInypoa++kMcio8AaFfEnDNfzoh33zf9E0JPEFaG1apfvUNO78TeW0i1G3WPkBkO3vEVflMyeOOjQko5e32zaLbgLiesa2O4O0Iqpzf5aw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=LJHhbaqBhmFUldgEUGaZP/mPVyAMAOmZedLoC62fl6E=;
- b=YeyYVp48WjbA6uivqW2W4DntMnhebXA9dCDR0yXtA2HxaQsWmZj3DdqVSBan+GnI2j26/FYWJIVWpkKM3SH5QIAQDm2PyYzREqJ4Blsp/39O4I6+tWqrJJAfO/apxU4QKsMb3x4BJEltwQDHSzoUYv5q3tfe2vaJ+c+gx2VGoKrwR3M5ohl2avR3x2NuqFxxt0T32qp2eqcb8OeLMGNUxeDsL9ATIDlk0lkBJI62lov5kweN5S80xC+TpmqQHYTiYgjNKqQf7DnKVg/7LElflb+eZ9rSLIoUAGCI7WM6AaBdaB3SVyoQI2jDAvYnmpU/NG3cdzeiX5BoI7qhQ/q6OA==
+ bh=ywCzqBzg6fKPu0QKPGLzNUrzP6H95ANbjICTqPHRWrI=;
+ b=Y+wglyuAI0PnrxgkPF265cyv3xOv6prZ6wbvYRBmXDX87SEyyPsKXYNlBoxAwiOVS+cs/n3UJ1sNDwlkaTiVo7LyCKstAkrEx/+IOXPM+oTapm859Wl0C7xLtF7zYo7wyO8R4CWm/4+TANkajvPYO67TFOvVjCfnQeVxjgeHBctyE2UHwA8iEpVyCwyF5JN0O6mihea5b94zxlOLI138TWLF9OFNgLCLBQGRqBgAyAwqqM1Qx1HRcN4HeNjiBctsuPYR4QAvGfmRpfDglVQep4yFKqqOf6LQxxNwJXKUZoX1iBwsZZBm+7JhxlPWfNjbGGXI9WFk0BPC938M++Xjtw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.21.195) smtp.rcpttodomain=chromium.org smtp.mailfrom=ti.com;
+ 198.47.23.194) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
  dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
  dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=LJHhbaqBhmFUldgEUGaZP/mPVyAMAOmZedLoC62fl6E=;
- b=nMmgCoJl1JYVZImvOASDHUIW5XQtEhXN1VQFHPMyrJQf3/V4UlUr3Z2fTKTFlq58BG8QolInSzB9Oek8naYm5dbNqDNuBw/sdN4mlwHmraKjPJ7Gl2jsOur/BAOFFdUWGjvzeV74MaZLVkHs3543h61ur9JY7X0nteeNsIB8tL0=
-Received: from BN9P221CA0009.NAMP221.PROD.OUTLOOK.COM (2603:10b6:408:10a::17)
- by PH7PR10MB6602.namprd10.prod.outlook.com (2603:10b6:510:206::9)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9846.16; Sat, 25 Apr
- 2026 03:38:27 +0000
-Received: from BN2PEPF000044A4.namprd02.prod.outlook.com
- (2603:10b6:408:10a::4) by BN9P221CA0009.outlook.office365.com
- (2603:10b6:408:10a::17) with Microsoft SMTP Server (version=TLS1_3,
+ bh=ywCzqBzg6fKPu0QKPGLzNUrzP6H95ANbjICTqPHRWrI=;
+ b=X+z+5Hy86qsC9upLRoLbZzvnXA3aXJR3YcAw/a2k8yv84Ls79HV+Sg8+UNUZT6wnpfmMwkwzTC7I/l52GYvRRsSx3e9BZMJEvHKR5tIYnM5dXLlL7MU5SXzrQOjvDWWrNhnyNbHtB2bzcUrkRHZm1DvuS4Hy9F2ZBpX2zbYNO+g=
+Received: from BL0PR0102CA0048.prod.exchangelabs.com (2603:10b6:208:25::25) by
+ CYXPR10MB7951.namprd10.prod.outlook.com (2603:10b6:930:dc::9) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9846.22; Sat, 25 Apr 2026 03:38:32 +0000
+Received: from MN1PEPF0000ECD8.namprd02.prod.outlook.com
+ (2603:10b6:208:25:cafe::49) by BL0PR0102CA0048.outlook.office365.com
+ (2603:10b6:208:25::25) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.20.9846.23 via Frontend Transport; Sat,
- 25 Apr 2026 03:38:24 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.195)
+ 25 Apr 2026 03:38:32 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.194)
  smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
  action=none header.from=ti.com;
 Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.21.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.21.195; helo=flwvzet201.ext.ti.com; pr=C
-Received: from flwvzet201.ext.ti.com (198.47.21.195) by
- BN2PEPF000044A4.mail.protection.outlook.com (10.167.243.155) with Microsoft
+ 198.47.23.194 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.23.194; helo=lewvzet200.ext.ti.com; pr=C
+Received: from lewvzet200.ext.ti.com (198.47.23.194) by
+ MN1PEPF0000ECD8.mail.protection.outlook.com (10.167.242.137) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9846.18 via Frontend Transport; Sat, 25 Apr 2026 03:38:22 +0000
-Received: from DFLE212.ent.ti.com (10.64.6.70) by flwvzet201.ext.ti.com
- (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
+ 15.20.9846.18 via Frontend Transport; Sat, 25 Apr 2026 03:38:32 +0000
+Received: from DLEE202.ent.ti.com (157.170.170.77) by lewvzet200.ext.ti.com
+ (10.4.14.103) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Fri, 24 Apr
- 2026 22:38:21 -0500
-Received: from DFLE201.ent.ti.com (10.64.6.59) by DFLE212.ent.ti.com
- (10.64.6.70) with Microsoft SMTP Server (version=TLS1_2,
+ 2026 22:38:31 -0500
+Received: from DLEE215.ent.ti.com (157.170.170.118) by DLEE202.ent.ti.com
+ (157.170.170.77) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Fri, 24 Apr
- 2026 22:38:21 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE201.ent.ti.com
- (10.64.6.59) with Microsoft SMTP Server (version=TLS1_2,
+ 2026 22:38:31 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE215.ent.ti.com
+ (157.170.170.118) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Fri, 24 Apr 2026 22:38:21 -0500
+ Transport; Fri, 24 Apr 2026 22:38:31 -0500
 Received: from uda0510294.dhcp.ti.com (uda0510294.dhcp.ti.com [10.24.50.162])
  by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id
- 63P3bk872903263; Fri, 24 Apr 2026 22:38:18 -0500
+ 63P3bk8A2903263; Fri, 24 Apr 2026 22:38:28 -0500
 From: Beleswar Padhi <b-padhi@ti.com>
 To: <trini@konsulko.com>
 CC: <afd@ti.com>, <bb@ti.com>, <anshuld@ti.com>, <hnagalla@ti.com>,
  <jm@ti.com>, <nm@ti.com>, <n-francis@ti.com>, <u-kumar1@ti.com>,
- <b-padhi@ti.com>, <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>
-Subject: [PATCH v4 08/11] tools: binman: Add a test for boot and load
- extensions
-Date: Sat, 25 Apr 2026 09:07:39 +0530
-Message-ID: <20260425033742.1519298-9-b-padhi@ti.com>
+ <b-padhi@ti.com>, <u-boot@lists.denx.de>
+Subject: [PATCH v4 11/11] arm: mach-k3: r5: common: Invoke boot of HSM M4 core
+Date: Sat, 25 Apr 2026 09:07:42 +0530
+Message-ID: <20260425033742.1519298-12-b-padhi@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20260425033742.1519298-1-b-padhi@ti.com>
 References: <20260425033742.1519298-1-b-padhi@ti.com>
@@ -99,28 +98,29 @@ Content-Type: text/plain
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN2PEPF000044A4:EE_|PH7PR10MB6602:EE_|DS4PPF80E5E852F:EE_
-X-MS-Office365-Filtering-Correlation-Id: 3b9ff400-352f-4367-6f13-08dea27c19e2
+X-MS-TrafficTypeDiagnostic: MN1PEPF0000ECD8:EE_|CYXPR10MB7951:EE_|CH2PR10MB4343:EE_
+X-MS-Office365-Filtering-Correlation-Id: a2e6678d-ef70-47fd-9b36-08dea27c1f8e
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|82310400026|376014|36860700016|56012099003|22082099003|18002099003;
-X-Microsoft-Antispam-Message-Info: axHMdN+BEFp2FfBSvcqOOxe6GNoDpbln0BdHGTWyHhFzuOzqsOJGVNJkakPCQc8gN44tazp0egJ5drAObNUdsHtwFLGTncB8rpqH8GbkeUr8xoCL3Mm/qST9NYcbyvd4MbpR7tBkjB/9yL/ed/F0OFz8CGuz0iEByQJLF9cC8nxX+PjpvB69hIDMSFU/lv1fx9uBfkFrRiDeT0tUkQRl6rSf9ql3PnVzUV496FLBwBE31KmilRAU2NQekpBiS/41rsn7iNozOfOIXRneZriwAOt8on/cW9JzAjZg+mAWWGgw3ycEESakMOU2evWyyxqTCKCqsk0RNTbvPgHcd7AFdmHY5ejgdx7kVL1EiXv9DYFpSrHEDux2Sx3TALO3J9OKs42Rqu2O2cuid+DtntX4od9w3QEfxUXWNm7kj6fJwQ1cWBcbE7fJJaBkT+0yMV2p//QVOEuspBcSVp3zcduXL/auXTthaYfoRcVfPOQTuVTWJWYgyJFnqSbSQRJFWozFTYiXQTccBzrmtVQbruz13+7z5ZHtCLniYjqFjEZIuM0P2CU+QLJ7dgm/S5KcjoBqLU5nHMvHPXAH8SXvtIWk/99e9/vcuwmlYh6jnC3jc3gk0dQw7EI0ChYK8XGSlscIgfbupmStTKV0zYXqxhjJB7aGn/n1sezP8NIaioFXXhMC9rhABaYwkljch7h0CjggwyWE/3+NgOUEk6UH4wR7QhDFS4GxEgIDjlOAf4JSe6O5L7V8mie2BjvH4B8gFkU04Me24IL8I1zBTKbc4jGBeg==
-X-Forefront-Antispam-Report: CIP:198.47.21.195; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:flwvzet201.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
- SFS:(13230040)(1800799024)(82310400026)(376014)(36860700016)(56012099003)(22082099003)(18002099003);
+ ARA:13230040|1800799024|82310400026|376014|36860700016|22082099003|18002099003|56012099003;
+X-Microsoft-Antispam-Message-Info: 7VAspks8aetXBjChaCpm+gyBm4qXk/2e8tpCClAbCdFIBSdoHo3cUgFcUyxkJifgo2bpaN3sRe3TzrTI+/wBifrpEX7MeWdpJ8WhV3QORzEkQQGc175z6OO0RQ6fAewkjejA9JM8RIIZ9v2GwInBJdjuJGUQNROOUIc0FNPd+eI9Yb65FDLgPzXTtWBzzfIz4cxn781DUSFP+DFhbZpidey9TXuJQlxL1bWxS4PUxh2ht/WcI1Rqi8X2cjVkEGSiG5i/9FoTnJcSVOuT6k5p8I+eYne7u6b0lcuBNgok67N9z9tuwYc0ffs08z+7fofTgK2bgUae5LnWN1De08hBubzVuPVAR/ahGCN3ibSNjSz6lDqbVSwLMsVW5JtBX2J6brTl2egRt3RGORzm/FymP9fWdMQLBuCU0TQ5CADZsA8DvrVvyiMccYoBBx6eXzmnz2sxyGLzBXWHWAm9Ejr7TaGaMAyQsqZOlflbeBdjrmnXTx5YwKdI/mVloc9dszNFn+ZI5/yXdLKwRr6I3VkWhcaGGf7gDErszxfvstWRmo+n3AH9sDYFKFCUGCoc8K+qHR1u3aDoNeNXIUy68Z3YYg+3J7UWZ5GA/oukVrSL2hhjWCpU49/tTzfGjDR9bIMjVzfj3Nc9u99hA2JFT/DFs5HVKaW2BxNcpwv4rQCJ6gBepLER5eSWgNlSCSVYXyOkdazSO2EUI4Rk1VvYgeVOjmBweb64BCYZ1n6sr7JSyp0=
+X-Forefront-Antispam-Report: CIP:198.47.23.194; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:lewvzet200.ext.ti.com; PTR:InfoDomainNonexistent;
+ CAT:NONE;
+ SFS:(13230040)(1800799024)(82310400026)(376014)(36860700016)(22082099003)(18002099003)(56012099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: YfQfwjcoAkN+XGV40Is0fDiuQ/cJ45Ior3teA88dAoMFYpHyEk9pVSa+uk9167A9UnvXRiZkan7YsgC/hdDzYBpEV7rHuHvpRYhD+PhJClJPmzXXhqma5jHiYk0FtPvEluWYuf85t7NfJbQU4I/5QzDvgKTm+FLcFC3ME+c7bZ5QT5FRDVts7WFl21jHqg2DncM7dnD+lhj6ekcuv/sViDmhgPjuUxRqO6w3IpXWC44edFgas88EIeI+rLcXMUQ3W+vAjp2gQ0f7uCMvDTm08LSQvkEaeMLaWaVBHVQa6E/XdnkNiRq9tybi+YLwfLxkHFqBzUwMHY47xRhwXvRG5Sa8JPTa19qs3TwDQvQ4v33xONOjf/nsEsRIDVQfoMko0kaNzq7Li7KMRCtZzVjrjpp0Lo4z+k8b9vSMwfJ9HAYYY6kh+x+mwcA20IfHZ63U
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Apr 2026 03:38:22.5886 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 3b9ff400-352f-4367-6f13-08dea27c19e2
+X-MS-Exchange-AntiSpam-MessageData-0: Z8leqazGR8yqyNRuIVP1zx1iNntqQyZS0WNP/Yr5MjuSx3jkaRJ8gecD7/PX3HX3Gcbql8ZvKO7gQ5FcMacsPfbUBS+9bMGaHhYcJS/+MqpnL/6+GEsTaXJoEGaIRZYbflJLsaQj5TF2erWx5PFap0SAr0qtQNMw8LYFfHl019QtzptW0Uf10EtYK510SBi0H/S+nG1GjYsoGmBcYGyAm5NVXTm3UJYFtpwHhGG5g5iOoa3iebzSpDdDtrCxkkKFkMt8eSqA7wLEX/Um1R0xKeIcxpNYru1j96Xq/mu6KPDVOwi3M9VkD5xtJd5hNGLrI6WiuFGhqN0CfnNCcVX6oTzGrALNUD6agWJVv2S9Kmw6/NZWXP9xjTIIR+7K9nW+b73OdoMdvi8bH6DvSYl/hamh7xvn5q7nO9tzGcZVXrGmP/8pC/LoU/0pQpazBYmV
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Apr 2026 03:38:32.1045 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: a2e6678d-ef70-47fd-9b36-08dea27c1f8e
 X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.195];
- Helo=[flwvzet201.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: BN2PEPF000044A4.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.194];
+ Helo=[lewvzet200.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: MN1PEPF0000ECD8.namprd02.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR10MB6602
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CYXPR10MB7951
 X-OriginatorOrg: ti.com
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -138,73 +138,83 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add test coverage for the boot and load extension functionality in
-ti-secure certificates. This verifies that a certificate can be
-generated having boot and load extensions.
+The tispl.bin fit image is packed with the HSM firmware image. Populate
+the "os" info of the image so that it can be detected and used to load
+the HSM core. Further, invoke the load and boot of HSM core at R5 SPL
+stage using the remoteprocessor framework.
 
 Signed-off-by: Beleswar Padhi <b-padhi@ti.com>
 ---
-Cc: Simon Glass <sjg@chromium.org>
-
 v4: Changelog:
-1. New patch. Added binman test for load & boot extensions in
-   certificate.
+1. None
 
- tools/binman/ftest.py                         | 10 ++++++++
- .../test/vendor/ti_secure_boot_load_ext.dts   | 23 +++++++++++++++++++
- 2 files changed, 33 insertions(+)
- create mode 100644 tools/binman/test/vendor/ti_secure_boot_load_ext.dts
+Link to v3:
+https://lore.kernel.org/all/20251231173621.1069988-11-b-padhi@ti.com/
 
-diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
-index ca5149ee654..f36d760375d 100644
---- a/tools/binman/ftest.py
-+++ b/tools/binman/ftest.py
-@@ -7270,6 +7270,16 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
-                                 entry_args=entry_args)[0]
-         self.assertGreater(len(data), len(TI_UNSECURE_DATA))
+v3: Changelog:
+1. Use remoteproc framework to boot HSM core.
+
+Link to v2:
+https://lore.kernel.org/all/20250506104202.16741-8-b-padhi@ti.com/
+
+v2: Changelog:
+1. Hang system boot if HSM firmware failed to boot.
+2. __maybe_unused to decrease preprocessor usage.
+3. Better error messages with return code.
+4. Added Error case in if-elseif-else ladder.
+
+Note:
+#define PROC_ID_HSM_M4F seems to have extra tab in the diff/patch.
+But when patch gets applied in file, all of them have consistent
+tabs.
+
+Link to v1:
+https://lore.kernel.org/all/18e01808-499d-4690-995a-45ac5fd727d9@ti.com
+
+ arch/arm/mach-k3/r5/common.c | 16 ++++++++++++++++
+ 1 file changed, 16 insertions(+)
+
+diff --git a/arch/arm/mach-k3/r5/common.c b/arch/arm/mach-k3/r5/common.c
+index f075b881901..df93b2bba5f 100644
+--- a/arch/arm/mach-k3/r5/common.c
++++ b/arch/arm/mach-k3/r5/common.c
+@@ -28,6 +28,7 @@ enum {
+ 	IMAGE_ID_TIFSSTUB_HS,
+ 	IMAGE_ID_TIFSSTUB_FS,
+ 	IMAGE_ID_TIFSSTUB_GP,
++	IMAGE_ID_HSM,
+ 	IMAGE_AMT,
+ };
  
-+    def testPackTiSecureBootLoadExt(self):
-+        """Test that an image with TI secured binary having boot & load extensions can be created"""
-+        keyfile = self.TestFile('security/key.key')
-+        entry_args = {
-+            'keyfile': keyfile,
-+        }
-+        data = self._DoReadFileDtb('vendor/ti_secure_boot_load_ext.dts',
-+                                   entry_args=entry_args)[0]
-+        self.assertGreater(len(data), len(TI_UNSECURE_DATA))
+@@ -40,6 +41,7 @@ static const char *image_os_match[IMAGE_AMT] = {
+ 	"tifsstub-hs",
+ 	"tifsstub-fs",
+ 	"tifsstub-gp",
++	"hsm",
+ };
+ #endif
+ 
+@@ -158,6 +160,20 @@ void __noreturn jump_to_image(struct spl_image_info *spl_image)
+ 				     &loadaddr);
+ 	}
+ 
++	if (IS_ENABLED(CONFIG_REMOTEPROC_TI_K3_HSM_M4F)) {
++		ret = rproc_load(2, fit_image_info[IMAGE_ID_HSM].load,
++				 fit_image_info[IMAGE_ID_HSM].image_len);
++		if (ret) {
++			panic("Error while loading HSM firmware, ret = %d\n", ret);
++		} else {
++			ret = rproc_start(2);
++			if (ret)
++				panic("Error while starting HSM core\n");
++			else
++				printf("Successfully loaded and started HSM core\n");
++		}
++	}
 +
-     def testEncryptedNoAlgo(self):
-         """Test encrypted node with missing required properties"""
-         with self.assertRaises(ValueError) as e:
-diff --git a/tools/binman/test/vendor/ti_secure_boot_load_ext.dts b/tools/binman/test/vendor/ti_secure_boot_load_ext.dts
-new file mode 100644
-index 00000000000..5c29d18e627
---- /dev/null
-+++ b/tools/binman/test/vendor/ti_secure_boot_load_ext.dts
-@@ -0,0 +1,23 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+
-+/dts-v1/;
-+
-+/ {
-+	#address-cells = <1>;
-+	#size-cells = <1>;
-+
-+	binman {
-+		ti-secure {
-+			content = <&unsecure_binary>;
-+			proc_id = <0x20>;
-+			flags_set = <0x00000001>;
-+			flags_clr = <0x00000002>;
-+			reset_vector = <0x70000000>;
-+			dest_addr = <0x80000000>;
-+			auth_type = <0x02>;
-+		};
-+		unsecure_binary: blob-ext {
-+			filename = "ti_unsecure.bin";
-+		};
-+	};
-+};
+ 	/*
+ 	 * It is assumed that remoteproc device 1 is the corresponding
+ 	 * Cortex-A core which runs ATF. Make sure DT reflects the same.
 -- 
 2.34.1
 
