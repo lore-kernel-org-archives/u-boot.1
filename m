@@ -4,128 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 764C9FF8860
-	for <u-boot@archiver.kernel.org>; Sat, 25 Apr 2026 18:07:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7106BFF8860
+	for <u-boot@archiver.kernel.org>; Sat, 25 Apr 2026 18:07:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4303684552;
+	by phobos.denx.de (Postfix) with ESMTP id 8260C8455E;
 	Sat, 25 Apr 2026 20:02:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20251104.gappssmtp.com header.i=@baylibre-com.20251104.gappssmtp.com header.b="xRSRYHbF";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="sbD9iX86";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 874F5843FB; Sat, 25 Apr 2026 19:47:11 +0200 (CEST)
-Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
- [IPv6:2607:f8b0:4864:20::32f])
+ id F011084372; Sat, 25 Apr 2026 19:58:04 +0200 (CEST)
+Received: from mail-vs1-xe2f.google.com (mail-vs1-xe2f.google.com
+ [IPv6:2607:f8b0:4864:20::e2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ADF9B8435B
- for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 19:47:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C6B1D84099
+ for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 19:58:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dlechner@baylibre.com
-Received: by mail-ot1-x32f.google.com with SMTP id
- 46e09a7af769-7d1872504cbso7608548a34.0
- for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 10:47:08 -0700 (PDT)
+ spf=pass smtp.mailfrom=lucienzx159@gmail.com
+Received: by mail-vs1-xe2f.google.com with SMTP id
+ ada2fe7eead31-60fbeeeaa7aso5175580137.0
+ for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 10:58:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20251104.gappssmtp.com; s=20251104; t=1777139227; x=1777744027;
- darn=lists.denx.de; 
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=RRVfAAn2++xzTHEepAqp1w58FLGaSSNsVGGyMUWBjO0=;
- b=xRSRYHbFHTpFZlzl+7Dbn9x4kN74abE71FJ4ZI9B3x9HVVtWddQS+HRphAx909ubnO
- iJ3sqHQnCCdlvijvfxh/DKp/hgu51DVTXIFA8e/LcTQCMJpaHAx5X7i8mmAWTzOJKhrO
- 1zBpNm25wc8uzrjhuLDZlLfzN3q5v9cLgP2V+vt730NiCeWfG5OHSxlJfgHr4Yu7HRYX
- +tujIrPoTg765bH/n90djhiRI5SKRGk0QSNd3e/l7isOYLMpFjMZPdeAZzDeRqd09/gw
- OxvoCg7rtR4mxUkEiP2Zj0K1meSMHa/3sTu7+zdr3w+//aa9zMmPirLcHJy7eULBTZp4
- DGXA==
+ d=gmail.com; s=20251104; t=1777139881; x=1777744681; darn=lists.denx.de;
+ h=in-reply-to:from:content-language:references:cc:to:subject
+ :user-agent:mime-version:date:message-id:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=1NjIXJNKW7DRbAcVeZ6ITMlfqiVJG/JIg5EWLoTUtcE=;
+ b=sbD9iX86R7HvAm1JMHehR5rBqPvHs/2udc9Iyh4dP8jRZ3mFOexqGdRSdDBtHt9j1R
+ CGhmOT9oRcTvjGbo+mlagalimNNRvJm+XDhp9YTy2Vv7/V6r0zblVbCJUtxPoV98ro/U
+ pJwJpxOystFTdvvR3jdSu6AI6wDAU79OQ0RXHAX+1tntQKuaQWy66AD8jfp9mspvJTXK
+ 7Zodw5ygosGlWukODOZmVfW8MDpm6F33Y9RYmEMavgn6OKp8wD+Zgjl8tPLh4tmourje
+ xyNcl8C1l7ZwH5u3gKduGRLg5YgWf56Rd+94tKVov0EPMyk5h4JzDVbnUG5juthzrpKc
+ MPvA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777139227; x=1777744027;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=RRVfAAn2++xzTHEepAqp1w58FLGaSSNsVGGyMUWBjO0=;
- b=jeJaJmrtAt/tuuxw/7zmKF3SRjAmpKlEb24IY/E5pIdBwLbI+c/Qtz0QrQXI4N9pi8
- i1zmEn8Qcr00J2cXNd41ISiMQ7iQxXjDduAJ3Nt/KGl5tCkhFG+gOn6mRiSLFCzzSVD2
- 2mO872NrRB6zcYcTfZsBdvxowyx4wJA9cyJmLb6BLhl59qX/SdeYT3yBGlcz6HPVhiY0
- d+J7RZder//zQ/BLEG5ze8JeaJQa0w1cM98EzvKoLv2molqLSQfPsbBgXZEQ3gBOPqZ3
- NDCvpTuX5D1Bq0HUtIyjK9yDvZWz8Ab1EXXMkW4DaEncaGi7ntqfxWr025POgowqLlTL
- OPAQ==
-X-Forwarded-Encrypted: i=1;
- AFNElJ9q0BV9vPGHnQPax+CK4xUmVKLfwwZHNuUwEfe7RPN+vRkWeAIz8ElNf5dNrkIPUfD/BFoNzs4=@lists.denx.de
-X-Gm-Message-State: AOJu0YyRyquE7MOTuqgMWbGTo/xy+tXqARkTkzAEpC2fLep7m9i6imgD
- JltG2ekZKoDuPWGQzRiEnLRhgt4y8DqtnmbzBWJtQ8lyaLzJ+4f/AjCn1U4jo8b2QWpWS41172v
- JcXyX
-X-Gm-Gg: AeBDieuHNcjYkSrXtJfvDUM5SU2Wu6b4C6NQo5X2eNQPC6TJ1T8vFBuTW5v1ws3+KNw
- 0S+43NUW+alm+EgPnK3nUfwIK0u2hURlEBjFi1/zXv9DQ8ttPhQvVb8C4BvRgxXlTJQtAWfj7kK
- XXDj34IwocLdCLQZ0S38Q4k47DfC+LNPBzcjihKh7VF0dIax7jktizSzurelcCZuSKDfEC7SuM4
- ayaYAQXKfR7L8Pk+F/PBGUxNEppDDxGhRFMHv8U8+TksOgQ/mKch593bR+6ixadpeCu6kRbYs2B
- tuQuGLCrYeDTXgWXyhdxOAz1KvM0L2UNOTQoDf8DcCtJnLQhwXDFMbB/ryf6fzKPrqUynVyl49S
- SDk6iuaRnu4xDEyH4KHKO8Q6ZE+I/corJzF4pUdca+9wrqRz+SxgZ2IKXBGOCBVDH9r3O2TTtlk
- 4NCs/3iuFp9sIPOFEHPPW5V7cl1/eR/4YCnZMaictBlZ0jzgQjFpmRGW9jGcKr7Hs9nG1JXTc9R
- gbH42uu1okj
-X-Received: by 2002:a05:6820:2e90:b0:694:98e5:2800 with SMTP id
- 006d021491bc7-69498e53d21mr4212112eaf.23.1776958067624; 
- Thu, 23 Apr 2026 08:27:47 -0700 (PDT)
-Received: from ?IPV6:2600:8803:e7e4:500:3cc7:689f:be44:d58a?
- ([2600:8803:e7e4:500:3cc7:689f:be44:d58a])
- by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-42ff2b6b2cdsm1076139fac.1.2026.04.23.08.27.45
+ d=1e100.net; s=20251104; t=1777139881; x=1777744681;
+ h=in-reply-to:from:content-language:references:cc:to:subject
+ :user-agent:mime-version:date:message-id:x-gm-gg:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=1NjIXJNKW7DRbAcVeZ6ITMlfqiVJG/JIg5EWLoTUtcE=;
+ b=UBgRD4h4o1MUYvMkrJ4eMWCwc5+VvAi9TM1DiH2rLyQeHWAIVhhMB4y6zSNs+b1Vta
+ oCdjJgnKs7xsI0JsYGq9H9UtFbk0yaH53hww6I/JQsGdsNjUDCH2roYJMnPTK4jxDwVR
+ 85phHZQMdCBIvjy/p3Lu3ageXJ9qt1KFhak5kNmoF6NqTqj10OfEMw826WkdBTK/96kn
+ mwDr9rJiSJKkC0d2H5mKd/rP7tlBdLS/lTZZtQNbPbvmQhQscMLrE1JoPw8XbqOVjWMd
+ RCqNl9FTiYuUU4IkST9se9EK/7mLUizb0b8QM/SLwuumFDrW0YOUj0cu5TU0lgaNQ/VL
+ V/dA==
+X-Gm-Message-State: AOJu0YzlRPqHCInfCK13en9m6IqtJP4xgCRHOpmP683P1SKtRxYax79D
+ JlT9xzKnnFZ8DgvgglR7PKBAZhJ/qN8b2dZUFnUD4GnoQo0mH1V1aZ3A79qRow==
+X-Gm-Gg: AeBDievIXDCwyDK+5IHTg9ICxNyfKEqtNYKb8sxldgu5e7o+DdXeKJkqn5FlRViivar
+ eEHUbCzyt5vMOZN49WMDDBxV5T0ri9hVVxWNcL+KPm0WGfTxXxK+K9qSTLDD0aNKeWl41IM6+fW
+ MNjkyO8oSZ9KgbGlvfpIyD6Y58jjh4sRGqAkLUDulum8Ip0vY0CkogNe5vCQyIcL54zeiDbnztu
+ VaFBsvEH/+GNoylP8Ln53HTNR9JuAXopeCF2OfGd5RGfgH9ufAJsEovTuQFjBNrh2UB8kZIOg1w
+ eJYPTBLag7CvkmEuc79VO44rt0pwzewCfsPPkhfJm1xIUbDXV6ViJRC2wwV2xpYt0PWYY78F/5c
+ Q7XqCEcxz9/XeIEeudo2NbVHrcWgbfi47UFd4RigasGozNtcfMuzczpmIHDcTIE6XZ3VY61qMkQ
+ gUCATtVdSziDCxfSbSV1tyHXfBpJyrnw7HJuPWOC5yQQr9VsKYyaGxqpNVCoV3Q/DYwKzQunlsq
+ E0C1WaawIbpBLtguozqmA==
+X-Received: by 2002:a17:90b:388b:b0:35f:bd51:cf60 with SMTP id
+ 98e67ed59e1d1-361403c3168mr35133914a91.1.1777083506777; 
+ Fri, 24 Apr 2026 19:18:26 -0700 (PDT)
+Received: from [192.168.0.5] (124-218-201-66.cm.dynamic.apol.com.tw.
+ [124.218.201.66]) by smtp.gmail.com with ESMTPSA id
+ 98e67ed59e1d1-3613fb7b3aesm12779324a91.4.2026.04.24.19.18.25
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 23 Apr 2026 08:27:47 -0700 (PDT)
-Message-ID: <dc4bf83d-97d4-4076-8b73-29fcb9c0dc08@baylibre.com>
-Date: Thu, 23 Apr 2026 10:27:45 -0500
+ Fri, 24 Apr 2026 19:18:26 -0700 (PDT)
+Message-ID: <9b3f9140-8549-4693-9ff2-0b4db1ea320a@gmail.com>
+Date: Sat, 25 Apr 2026 10:18:23 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 7/9] net: dwc_eth_qos: Add mediatek support
-To: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de
-Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- Jerome Forissier <jerome.forissier@arm.com>, Tom Rini <trini@konsulko.com>,
- Christian Marangi <ansuelsmth@gmail.com>,
- Robert Marko <robert.marko@sartura.hr>, Simon Glass <sjg@chromium.org>,
- Yao Zi <me@ziyao.cc>, Quentin Schulz <quentin.schulz@cherry.de>,
- Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- "Lucien.Jheng" <lucienzx159@gmail.com>, Weijie Gao
- <weijie.gao@mediatek.com>, Romain Gantois <romain.gantois@bootlin.com>,
- Siddharth Vadapalli <s-vadapalli@ti.com>,
- Yanqing Wang <ot_yanqing.wang@mediatek.com>, Beiyan Yun <root@infi.wang>,
- Ryder Lee <ryder.lee@mediatek.com>, Chunfeng Yun
- <chunfeng.yun@mediatek.com>,
- Igor Belwon <igor.belwon@mentallysanemainliners.org>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Kory Maincent <kory.maincent@bootlin.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Kuan-Wei Chiu <visitorckw@gmail.com>, Raymond Mao
- <raymond.mao@riscstar.com>, Peng Fan <peng.fan@nxp.com>,
- Stefan Roese <stefan.roese@mailbox.org>,
- Philip Molloy <philip.molloy@analog.com>,
- fanyi zhang <fanyi.zhang@mediatek.com>, Jonas Karlman <jonas@kwiboo.se>,
- Kever Yang <kever.yang@rock-chips.com>, Marek Vasut
- <marek.vasut@mailbox.org>, Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Heiko Stuebner <heiko@sntech.de>, Samuel Holland
- <samuel.holland@sifive.com>,
- Christophe Roullier <christophe.roullier@foss.st.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Chris-QJ Chen <chris-qj.chen@mediatek.com>,
- Macpaul Lin <macpaul.lin@mediatek.com>,
- Sam Protsenko <semen.protsenko@linaro.org>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Sky Huang <SkyLake.Huang@mediatek.com>,
- Leo Yu-Chi Liang <ycliang@andestech.com>, Tommy Shih
- <tommy.shih@airoha.com>, Kevin-KW Huang <kevin-kw.huang@airoha.com>
-References: <20260423-add-ethernet-support-for-genio-520-720-v1-0-47ca918e0017@baylibre.com>
- <20260423-add-ethernet-support-for-genio-520-720-v1-7-47ca918e0017@baylibre.com>
+Subject: Re: [v3,0/4] phy: add common PHY polarity properties support
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de
+References: <20260405144944.41074-1-lucienzx159@gmail.com>
+ <CAFLszTgMvRHfrEa8=-m+AszoKvxg-TshcH2qx4z--yN6ZwoQGg@mail.gmail.com>
 Content-Language: en-US
-From: David Lechner <dlechner@baylibre.com>
-In-Reply-To: <20260423-add-ethernet-support-for-genio-520-720-v1-7-47ca918e0017@baylibre.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+From: "Lucien.Jheng" <lucienzx159@gmail.com>
+In-Reply-To: <CAFLszTgMvRHfrEa8=-m+AszoKvxg-TshcH2qx4z--yN6ZwoQGg@mail.gmail.com>
 X-Mailman-Approved-At: Sat, 25 Apr 2026 20:02:44 +0200
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -142,119 +103,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 4/23/26 8:25 AM, Julien Stephan wrote:
-> Synopsys DWC Ethernet QOS device support for MediaTek SoCs.
-> in particular this initial commit adds support for Genio 520/720 and
-> Genio 510/700 EVKs
-> 
+Hi Simon
 
-...
+Simon Glass 於 2026/4/11 下午 10:37 寫道:
+> Hi Lucien,
+>
+> On 2026-04-05T14:49:40, Lucien.Jheng<lucienzx159@gmail.com> wrote:
+>
+>> Patches 3-4 add sandbox DM unit tests for the new library
+> Patches 3 and 4 have a bisection problem. Patch 3 adds test code
+> referencing DT nodes like /phy-common-props-missing, but those nodes
+> are only created in patch 4. Please can you squash patches 3 and 4
+> together, or reorder so the DTS changes come first?
+I will squash patch 3 and 4 together in the next patch.
+>
+>> Add obj-$(CONFIG_PHY_COMMON_PROPS) build entry in test/dm/Makefile
+> I don't see an update to sandbox_defconfig to enable
+> CONFIG_PHY_COMMON_PROPS for testing. Please can you add a patch to
+> enable PHY_COMMON_PROPS in sandbox_defconfig, or imply it from
+> SANDBOX?
 
-> +#define RX_DELAY_MAX_PS			9800
-> +#define TX_DELAY_MAX_PS			9800
+I will update sandbox_defconfig in the next patch.
 
-Do we need two macros for the same value? Or can be DELAY_MAX_PS?
+Thanks
 
-> +
-> +#define OUT_OP				true
-> +
-
-...
-
-> +static int mtk_set_interface(struct udevice *dev)
-> +{
-> +	struct eth_pdata *pdata = dev_get_plat(dev);
-> +	struct eqos_mtk_priv *mtk_pdata = pdata->priv_pdata;
-> +	int rmii_clk_from_mac = mtk_pdata->rmii_clk_from_mac ? EQOS_MTK_RMII_CLK_SRC_INTERNAL : 0;
-> +	int rmii_rxc = mtk_pdata->rmii_rxc ? EQOS_MTK_RMII_CLK_SRC_RXC : 0;
-> +	u32 intf_val = 0;
-> +
-> +	/* select phy interface in top control domain */
-> +	switch (pdata->phy_interface) {
-> +	case PHY_INTERFACE_MODE_MII:
-> +		intf_val |= FIELD_PREP(EQOS_MTK_ETH_INTF_SEL, EQOS_MTK_PHY_INTF_MII);
-> +		break;
-> +	case PHY_INTERFACE_MODE_RMII:
-> +		intf_val |= (rmii_rxc | rmii_clk_from_mac);
-> +		intf_val |= FIELD_PREP(EQOS_MTK_ETH_INTF_SEL, EQOS_MTK_PHY_INTF_RMII);
-> +		break;
-> +	case PHY_INTERFACE_MODE_RGMII:
-> +	case PHY_INTERFACE_MODE_RGMII_TXID:
-> +	case PHY_INTERFACE_MODE_RGMII_RXID:
-> +	case PHY_INTERFACE_MODE_RGMII_ID:
-> +		intf_val |= FIELD_PREP(EQOS_MTK_ETH_INTF_SEL, EQOS_MTK_PHY_INTF_RGMII);
-> +		break;
-> +	default:
-> +		pr_err("%s: dev=%p phy interface not supported\n", __func__, dev);
-> +		return -EINVAL;
-> +	}
-> +
-> +	/* only support external PHY */
-> +	intf_val |= EQOS_MTK_EXT_PHY_MODE;
-> +	if (OUT_OP)
-
-OUT_OP is defined as true. Can we drop the macro and the condition?
-
-> +		intf_val |= EQOS_MTK_TXC_OUT_OP;
-> +
-> +	regmap_write(mtk_pdata->peri_regmap, MT8189_PERI_ETH_CTRL0, intf_val);
-> +
-> +	return 0;
-> +}
-> +
-> +static int mtk_config_dt(struct udevice *dev)
-> +{	struct eth_pdata *pdata = dev_get_plat(dev);
-> +	struct eqos_mtk_priv *mtk_pdata = pdata->priv_pdata;
-> +	struct ofnode_phandle_args args;
-> +	u32 tx_delay_ps, rx_delay_ps;
-> +	int ret;
-> +
-> +	if (!dev_read_u32(dev, "mediatek,tx-delay-ps", &tx_delay_ps)) {
-> +		if (tx_delay_ps > TX_DELAY_MAX_PS) {
-> +			pr_err("%s: dev=%p Invalid TX clock delay: %dps\n",
-> +			       __func__, dev, tx_delay_ps);
-> +			return -EINVAL;
-> +		}
-> +	}
-> +
-> +	if (!dev_read_u32(dev, "mediatek,rx-delay-ps", &rx_delay_ps)) {
-> +		if (rx_delay_ps > RX_DELAY_MAX_PS) {
-> +			pr_err("%s: dev=%p Invalid RX clock delay: %dps\n",
-> +			       __func__, dev, rx_delay_ps);
-> +			return -EINVAL;
-> +		}
-> +	}
-> +
-> +	/* 290ps per stage */
-
-Should we make a macro for that?
-
-> +	mtk_pdata->tx_delay_ps_per_stage = tx_delay_ps / 290;
-> +	mtk_pdata->rx_delay_ps_per_stage = rx_delay_ps / 290;
-
-Doing demtional analysis, ps / (ps/stage) = stage.
-
-So {tx,rx}_delay_ps_per_stage should just be stage units, not
-ps_per_stage.
-
-> +
-> +	mtk_pdata->tx_inv = dev_read_bool(dev, "mediatek,txc-inverse");
-> +	mtk_pdata->rx_inv = dev_read_bool(dev, "mediatek,rxc-inverse");
-> +	mtk_pdata->rmii_clk_from_mac = dev_read_bool(dev, "mediatek,rmii-clk-from-mac");
-> +	mtk_pdata->rmii_rxc = dev_read_bool(dev, "mediatek,rmii-rxc");
-> +
-> +	ret = dev_read_phandle_with_args(dev, "mediatek,pericfg", NULL, 0, 0, &args);
-> +	if (ret) {
-> +		pr_err("Failed to get mediatek,pericfg property: %d\n", ret);
-> +		return ret;
-> +	}
-> +
-> +	mtk_pdata->peri_regmap = syscon_node_to_regmap(args.node);
-> +	if (IS_ERR(mtk_pdata->peri_regmap)) {
-> +		pr_err("%s: dev=%p Invalid perif_cfg reg\n", __func__, dev);
-> +		return -EINVAL;
-> +	}
-> +
-> +	return 0;
-> +}
-> +
+>
+> Regards,
+> Simon
