@@ -4,49 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D857FF8860
-	for <u-boot@archiver.kernel.org>; Sat, 25 Apr 2026 16:25:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF493FF885C
+	for <u-boot@archiver.kernel.org>; Sat, 25 Apr 2026 16:26:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EA02984348;
-	Sat, 25 Apr 2026 18:25:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=dolcini.it
+	by phobos.denx.de (Postfix) with ESMTP id 917E984255;
+	Sat, 25 Apr 2026 18:26:40 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=dolcini.it header.i=@dolcini.it header.b="kuF58Srf";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ZESVgbLC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2CBAC83FB0; Sat, 25 Apr 2026 18:25:16 +0200 (CEST)
-Received: from mail11.truemail.it (mail11.truemail.it [IPv6:2001:4b7e:0:8::81])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 8146D84376; Sat, 25 Apr 2026 18:26:39 +0200 (CEST)
+Received: from mail-pl1-x636.google.com (mail-pl1-x636.google.com
+ [IPv6:2607:f8b0:4864:20::636])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 72AE08432A
- for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 18:25:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 579FF84255
+ for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 18:26:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=dolcini.it
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=francesco@dolcini.it
-Received: from francesco-nb.. (93-49-2-63.ip317.fastwebnet.it [93.49.2.63])
- by mail11.truemail.it (Postfix) with ESMTPA id 7A2F81FE9C;
- Fri, 24 Apr 2026 10:45:56 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dolcini.it;
- s=default; t=1777020356;
- bh=agByQXGGaIrOFB1nL4lo4z3k1us/x+W8lr0GUM7F0HY=; h=From:To:Subject;
- b=kuF58SrfSh1/xCPE7xAFVvWEMBNWIasOfuVJCp7BR8T8C2RusSLWpCnFm3vDVgskx
- SoRcwYlFUaJqg72+GcuJcyJlzvm8R2Tg/lORJ4UFE6L11QoenNLSsOmvvx6Ig2XIuY
- gAnFaqVkO9u+GY7HF7GszeV09EXusoGam/GnutdgWavyko4qgv3+CCU1Br+kBdCYnP
- YU2BnlD0ZBZ99e4xShV+Ny7DGU57o+g2lkcbgkJJLNHC1EBbUWLwVxaYGYtQONn6UE
- FOfg5L5pu3kEDKPl/0c+4n8VSgCA89lJDwWQtSCkhIeZonUVDMNJgYQoCkW7grDQr0
- yWQq0NafHZTLA==
-From: Francesco Dolcini <francesco@dolcini.it>
-To: Tom Rini <trini@konsulko.com>
-Cc: Francesco Dolcini <francesco.dolcini@toradex.com>,
-	u-boot@lists.denx.de
-Subject: [PATCH] rtc: ds1307: Remove legacy non-DM code
-Date: Fri, 24 Apr 2026 10:45:44 +0200
-Message-ID: <20260424084546.260786-1-francesco@dolcini.it>
-X-Mailer: git-send-email 2.47.3
+ spf=pass smtp.mailfrom=visitorckw@gmail.com
+Received: by mail-pl1-x636.google.com with SMTP id
+ d9443c01a7336-2b458ca2296so55264555ad.0
+ for <u-boot@lists.denx.de>; Sat, 25 Apr 2026 09:26:37 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1777134396; x=1777739196; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=Q2q0wQgD6idkHesbZhFPTtv3SbZ/Lz5zwtb0AKbH9DU=;
+ b=ZESVgbLCCyUg23Dci2ZoEt4jlIVR689Qy7/ItF43NVezcDaJFIX0f835DEvXApsLda
+ AJ4V5b4lJwrBwm59uX5ZU5np7UYNnQGVOZPMv8LhRhQ2en0JkIgHsKgLduiHR7MP6P0w
+ 4K/h3aX0g0vMJIucN7RGdYudLvJPGpaN1Zif23x6lcq3vD6Y1l91lLzcEZkUxDbarIAu
+ ZZ3Bi07DYB6/lOG3zsR5Ix+zQylQE4/gtSyYT4ji8RNo0Hj3mvECh9GzND3Zlv+MBaix
+ FnZZ6jvhRmQwujb4Nuf62OvgbBr3fNew7PCQu8Dk20BrO43PfLWXopRO34pPosmQEfM1
+ hCkg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1777134396; x=1777739196;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=Q2q0wQgD6idkHesbZhFPTtv3SbZ/Lz5zwtb0AKbH9DU=;
+ b=XP5gW7XA8wROPbDfx3+pg6MgEAgratsdZeTvugTqM98R9mUEfIbSja98uKZ6n4M9Ee
+ 7NpziGkD2v1scUehaLs5KEUTOEzDqmXkJDymgpHY/Ak8HuXAlkA1yzsmnC21mj7kMgkx
+ LPRJStpE+jHB++Bg6oYCp/J/mTbsgUy0lb0GqRS5xrz2Jqiuat9yp996IHd25vYfdKaH
+ ddKNYR08oT+AlUaZTdAZmM9SkpPSophkmeXOMVcaAhd1j/99yrNYhptJmwXmtm215Ikr
+ uNey0DlYplAucZ9VxYaYXuWCStkw15lIBwS4ey6vIORDLEaaLp+hHzKnb1IBhIBHVSAu
+ lFug==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ+cQeCV5Dt/x66knd3GHDo0u5hJqqo98+TTTLdY1piRbE/k+OtGL1T5cg4pKMBo7GbOA1PruXg=@lists.denx.de
+X-Gm-Message-State: AOJu0Yxfn395IxGBDpbCfPr8XIRnK3cxjtTXJtL6xBmB733hGDi3S0Kc
+ 55qmyJD3pSN9WmuXTrgpuT2XMAXDpgsSC34+Iq7kDNnikxMnc8RzCaLW
+X-Gm-Gg: AeBDietaonDjG09lQ11H0YYUkreoYi35t1rmSmqQ5vgPq6NsAJvBAdkTWDuX+xyJlcQ
+ Vzj/A9DxpjUoycP5XMYPH0Z6zb9q3FacNFJLYx3uHjkGhQXtZi+RyOI1OAFGTyTIW4t8MGDqFq+
+ d9c43uA5GqZdlkE+QFkTEd8D7tx9gH7C3ttY2tEd+cS94Xdu2xO2poNOPrAA8njEXP9uYffEa//
+ 7BLZ+7gFcDKzDKsu9AUVfsTaSMrU2AxfPH+RjIIY39BtXAYZhgnUM3Ryoe94AjK/bJ2nJXSEtmA
+ ZxcC1FWZjtRUacygjl9+uivPwZ4+I3adbvOCi0wYzNnyyLOdUHRyah1Y/aYAyhBDFyqD1x7xLGA
+ ygoT7MYoBuZGDDLYrAxKq00JNdozyQZs4e2KB99hpONY/E7hnZ5xqcRwog5w1r4HRHKhFHJ80ov
+ n+H03krP8ZWXgMd9Y+xV61Xf6l7FnQ/SaM5WTt4MfhoNthkdMA6JnuUs44dDfbXWQ6tS9CgXabD
+ L8=
+X-Received: by 2002:a17:903:2ecc:b0:2b4:6022:bf8c with SMTP id
+ d9443c01a7336-2b5f9f52984mr404001825ad.22.1777134395683; 
+ Sat, 25 Apr 2026 09:26:35 -0700 (PDT)
+Received: from google.com (61-230-36-6.dynamic-ip.hinet.net. [61.230.36.6])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-2b7bdd9c00csm58260565ad.50.2026.04.25.09.26.34
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 25 Apr 2026 09:26:35 -0700 (PDT)
+Date: Sun, 26 Apr 2026 00:26:32 +0800
+From: Kuan-Wei Chiu <visitorckw@gmail.com>
+To: Angelo Dureghello <angelo@kernel-space.org>
+Cc: trini@konsulko.com, u-boot@lists.denx.de, sjg@chromium.org
+Subject: Re: [PATCH 4/9] board: stmark2: remove old garbage
+Message-ID: <aezrOFUXtdXpxJHu@google.com>
+References: <20260416121431.20852-1-angelo@kernel-space.org>
+ <20260416121431.20852-4-angelo@kernel-space.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260416121431.20852-4-angelo@kernel-space.org>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -63,183 +100,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Francesco Dolcini <francesco.dolcini@toradex.com>
+Hi Angelo,
 
-The DS1307 driver depends on DM_RTC since commit d425d6056e01 ("rtc: Add
-DM support to ds1307"), remove the related obsolete code.
+On Thu, Apr 16, 2026 at 02:14:26PM +0200, Angelo Dureghello wrote:
+> Remove old erroneous garbage.
+> 
+> Signed-off-by: Angelo Dureghello <angelo@kernel-space.org>
+> ---
+>  include/configs/stmark2.h | 1 -
+>  1 file changed, 1 deletion(-)
+> 
+> diff --git a/include/configs/stmark2.h b/include/configs/stmark2.h
+> index a7afbb3be1f..c1096398359 100644
+> --- a/include/configs/stmark2.h
+> +++ b/include/configs/stmark2.h
+> @@ -18,7 +18,6 @@
+>  		"load mmc 0:1 ${loadaddr_ramfs} uRamfs\0"	\
+>  	"kern_size=0x700000\0"					\
+>  	"loadaddr=0x42000000\0"					\
+> -		"-(rootfs)\0"					\
 
-Signed-off-by: Francesco Dolcini <francesco.dolcini@toradex.com>
----
- drivers/rtc/ds1307.c | 152 -------------------------------------------
- 1 file changed, 152 deletions(-)
+Since this line was introduced in patch 3, would it be possible to fold
+this change into that one?
 
-diff --git a/drivers/rtc/ds1307.c b/drivers/rtc/ds1307.c
-index 049210991014..34d8f8c5276b 100644
---- a/drivers/rtc/ds1307.c
-+++ b/drivers/rtc/ds1307.c
-@@ -68,157 +68,6 @@ enum ds_type {
- #define MCP7941X_BIT_ST		0x80
- #define MCP7941X_BIT_VBATEN	0x08
- 
--#ifndef CONFIG_DM_RTC
--
--/*---------------------------------------------------------------------*/
--#undef DEBUG_RTC
--
--#ifdef DEBUG_RTC
--#define DEBUGR(fmt, args...) printf(fmt, ##args)
--#else
--#define DEBUGR(fmt, args...)
--#endif
--/*---------------------------------------------------------------------*/
--
--#ifndef CFG_SYS_I2C_RTC_ADDR
--# define CFG_SYS_I2C_RTC_ADDR	0x68
--#endif
--
--#if defined(CONFIG_RTC_DS1307) && (CONFIG_SYS_I2C_SPEED > 100000)
--# error The DS1307 is specified only up to 100kHz!
--#endif
--
--static uchar rtc_read (uchar reg);
--static void rtc_write (uchar reg, uchar val);
--
--/*
-- * Get the current time from the RTC
-- */
--int rtc_get (struct rtc_time *tmp)
--{
--	int rel = 0;
--	uchar sec, min, hour, mday, wday, mon, year;
--
--#ifdef CONFIG_RTC_MCP79411
--read_rtc:
--#endif
--	sec = rtc_read (RTC_SEC_REG_ADDR);
--	min = rtc_read (RTC_MIN_REG_ADDR);
--	hour = rtc_read (RTC_HR_REG_ADDR);
--	wday = rtc_read (RTC_DAY_REG_ADDR);
--	mday = rtc_read (RTC_DATE_REG_ADDR);
--	mon = rtc_read (RTC_MON_REG_ADDR);
--	year = rtc_read (RTC_YR_REG_ADDR);
--
--	DEBUGR ("Get RTC year: %02x mon: %02x mday: %02x wday: %02x "
--		"hr: %02x min: %02x sec: %02x\n",
--		year, mon, mday, wday, hour, min, sec);
--
--#ifdef CONFIG_RTC_DS1307
--	if (sec & RTC_SEC_BIT_CH) {
--		printf ("### Warning: RTC oscillator has stopped\n");
--		/* clear the CH flag */
--		rtc_write (RTC_SEC_REG_ADDR,
--			   rtc_read (RTC_SEC_REG_ADDR) & ~RTC_SEC_BIT_CH);
--		rel = -1;
--	}
--#endif
--
--#ifdef CONFIG_RTC_MCP79411
--	/* make sure that the backup battery is enabled */
--	if (!(wday & MCP7941X_BIT_VBATEN)) {
--		rtc_write(RTC_DAY_REG_ADDR,
--			  wday | MCP7941X_BIT_VBATEN);
--	}
--
--	/* clock halted?  turn it on, so clock can tick. */
--	if (!(sec & MCP7941X_BIT_ST)) {
--		rtc_write(RTC_SEC_REG_ADDR, MCP7941X_BIT_ST);
--		printf("Started RTC\n");
--		goto read_rtc;
--	}
--#endif
--
--	tmp->tm_sec  = bcd2bin (sec & 0x7F);
--	tmp->tm_min  = bcd2bin (min & 0x7F);
--	tmp->tm_hour = bcd2bin (hour & 0x3F);
--	tmp->tm_mday = bcd2bin (mday & 0x3F);
--	tmp->tm_mon  = bcd2bin (mon & 0x1F);
--	tmp->tm_year = bcd2bin (year) + ( bcd2bin (year) >= 70 ? 1900 : 2000);
--	tmp->tm_wday = bcd2bin ((wday - 1) & 0x07);
--	tmp->tm_yday = 0;
--	tmp->tm_isdst= 0;
--
--	DEBUGR ("Get DATE: %4d-%02d-%02d (wday=%d)  TIME: %2d:%02d:%02d\n",
--		tmp->tm_year, tmp->tm_mon, tmp->tm_mday, tmp->tm_wday,
--		tmp->tm_hour, tmp->tm_min, tmp->tm_sec);
--
--	return rel;
--}
--
--/*
-- * Set the RTC
-- */
--int rtc_set (struct rtc_time *tmp)
--{
--	DEBUGR ("Set DATE: %4d-%02d-%02d (wday=%d)  TIME: %2d:%02d:%02d\n",
--		tmp->tm_year, tmp->tm_mon, tmp->tm_mday, tmp->tm_wday,
--		tmp->tm_hour, tmp->tm_min, tmp->tm_sec);
--
--	if (tmp->tm_year < 1970 || tmp->tm_year > 2069)
--		printf("WARNING: year should be between 1970 and 2069!\n");
--
--	rtc_write (RTC_YR_REG_ADDR, bin2bcd (tmp->tm_year % 100));
--	rtc_write (RTC_MON_REG_ADDR, bin2bcd (tmp->tm_mon));
--#ifdef CONFIG_RTC_MCP79411
--	rtc_write (RTC_DAY_REG_ADDR,
--		   bin2bcd (tmp->tm_wday + 1) | MCP7941X_BIT_VBATEN);
--#else
--	rtc_write (RTC_DAY_REG_ADDR, bin2bcd (tmp->tm_wday + 1));
--#endif
--	rtc_write (RTC_DATE_REG_ADDR, bin2bcd (tmp->tm_mday));
--	rtc_write (RTC_HR_REG_ADDR, bin2bcd (tmp->tm_hour));
--	rtc_write (RTC_MIN_REG_ADDR, bin2bcd (tmp->tm_min));
--#ifdef CONFIG_RTC_MCP79411
--	rtc_write (RTC_SEC_REG_ADDR, bin2bcd (tmp->tm_sec) | MCP7941X_BIT_ST);
--#else
--	rtc_write (RTC_SEC_REG_ADDR, bin2bcd (tmp->tm_sec));
--#endif
--
--	return 0;
--}
--
--/*
-- * Reset the RTC. We setting the date back to 1970-01-01.
-- * We also enable the oscillator output on the SQW/OUT pin and program
-- * it for 32,768 Hz output. Note that according to the datasheet, turning
-- * on the square wave output increases the current drain on the backup
-- * battery to something between 480nA and 800nA.
-- */
--void rtc_reset (void)
--{
--	rtc_write (RTC_SEC_REG_ADDR, 0x00);	/* clearing Clock Halt	*/
--	rtc_write (RTC_CTL_REG_ADDR, RTC_CTL_BIT_SQWE | RTC_CTL_BIT_RS1 | RTC_CTL_BIT_RS0);
--}
--
--/*
-- * Helper functions
-- */
--
--static
--uchar rtc_read (uchar reg)
--{
--	return (i2c_reg_read (CFG_SYS_I2C_RTC_ADDR, reg));
--}
--
--static void rtc_write (uchar reg, uchar val)
--{
--	i2c_reg_write (CFG_SYS_I2C_RTC_ADDR, reg, val);
--}
--
--#endif /* !CONFIG_DM_RTC */
--
--#ifdef CONFIG_DM_RTC
- static int ds1307_rtc_set(struct udevice *dev, const struct rtc_time *tm)
- {
- 	int ret;
-@@ -366,4 +215,3 @@ U_BOOT_DRIVER(rtc_ds1307) = {
- 	.of_match = ds1307_rtc_ids,
- 	.ops	= &ds1307_rtc_ops,
- };
--#endif /* CONFIG_DM_RTC */
--- 
-2.47.3
+Regards,
+Kuan-Wei
 
+>  	"loadaddr_ramfs=0x43000000\0"				\
+>  	"update_uboot=loady ${loadaddr}; "			\
+>  		"sf probe 0:1 50000000; "			\
+> -- 
+> 2.53.0
+> 
