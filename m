@@ -4,80 +4,99 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99F48FF885C
-	for <u-boot@archiver.kernel.org>; Sun, 26 Apr 2026 13:57:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 002F9FF885E
+	for <u-boot@archiver.kernel.org>; Sun, 26 Apr 2026 15:36:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 45F0484099;
-	Sun, 26 Apr 2026 15:57:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=smile.fr
+	by phobos.denx.de (Postfix) with ESMTP id 1133D83FF5;
+	Sun, 26 Apr 2026 17:36:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=smile.fr header.i=@smile.fr header.b="NZPvjFdw";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="XuIqhUwP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 15C8183FF5; Sun, 26 Apr 2026 15:57:23 +0200 (CEST)
+ id B32818407E; Sun, 26 Apr 2026 17:36:24 +0200 (CEST)
 Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
  [IPv6:2a00:1450:4864:20::331])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6E2B8839D9
- for <u-boot@lists.denx.de>; Sun, 26 Apr 2026 15:57:20 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=smile.fr
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=romain.naour@smile.fr
+ by phobos.denx.de (Postfix) with ESMTPS id 70C8B80087
+ for <u-boot@lists.denx.de>; Sun, 26 Apr 2026 17:36:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=amarulasolutions.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=dario.binacchi@amarulasolutions.com
 Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-488b150559bso74346825e9.1
- for <u-boot@lists.denx.de>; Sun, 26 Apr 2026 06:57:20 -0700 (PDT)
+ 5b1f17b1804b1-4891cd41959so76295065e9.3
+ for <u-boot@lists.denx.de>; Sun, 26 Apr 2026 08:36:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=smile.fr; s=google; t=1777211840; x=1777816640; darn=lists.denx.de;
+ d=amarulasolutions.com; s=google; t=1777217781; x=1777822581;
+ darn=lists.denx.de; 
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=4VsADveJjOQcTmy5iIfpAgbtyJbbH5WTr7xU4sgdqE4=;
- b=NZPvjFdwm0zPIIpFQBzpMyOHl7NmiqTgz9FTqtv4i+Y1TUu9B6QusBLv6JIzOGabL7
- HvgXIesjEJiV1Un46yUsVGe8Bqx9TwElAUAEPxE8IjXn2RNO7snYzS1g2mBnz6UP5A0z
- rUgYD8HAABDSMztgPrv4kfxJZQsjYtBjET+A8=
+ bh=0bTiupAMZrJPuHFqIh5SV7noAT+NuuYb+WXTBbCsIN4=;
+ b=XuIqhUwPHKoMpVfXDZovbLrrTZxx89LoJh7Hdsi6b3er8bFc/BxgSyMWxG+rYsjBId
+ oWTOO61Jy6RUbq9KGmKXYuCG4uvlvtlqNJQnaZhzLSt7cEQFMeSBydistpAj0WShtBs4
+ pJwS/mKdqDdYzlKLq0XRkI4n6XtBUxGEwhZEk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777211840; x=1777816640;
+ d=1e100.net; s=20251104; t=1777217781; x=1777822581;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=4VsADveJjOQcTmy5iIfpAgbtyJbbH5WTr7xU4sgdqE4=;
- b=Hu2DzymP420PVEFqtnE68quy7pSx57pP7GB+qN6Ol/k5MAHe1w0Ji0pziGWT4sFbRM
- Ifju3/f2Vwfv7d3ZZSxzJjc+0sjgJ6wPJgNWN0nMVZ9K6WJSiA8SyMeZHCrkTdAaH9c1
- FnIC0ybIIjeZDT8EnZLdGJLAo7NvP1hiH0y4TKyTZ+K4HJK+uRdbeKO7Prc7tX66k50k
- 4FU5xXfAeIsBct11l3c4G+ccSihxsRZ3cBgkoJHWvWW+ujiD5WtD8zDVyJyRh3BddPO7
- LCFVdiBY5DHzjNemFFcTxRtc1sqJHXW/eAYEViNVcHNgHHlAi4+Z7FArzhiX+ZUA8OjJ
- /1Kw==
-X-Gm-Message-State: AOJu0YzVgPUju2Deen6BhVkg6YPaCVSS+0+FUiAfVe3F//xFqps9Mjul
- NOpXI5GiHN0zJzqTZ+T8eukPO5CJZ5yVIdvHK5KbhtMM5mPKxwgxxWc7wOjhSYpdOMUqVdRsHan
- eIObRTNQ=
-X-Gm-Gg: AeBDiesbN59kal4TB5pybrr4omMGoAow3kkWtJ69XATGtJSy+xA7mXXZkwLqj781ekS
- fPUm4xYCsU5RMHKgZMDqIB2/AiXQ9vE0zUumIyxRcbGOVQsIX+/k9LYrWZnfl9O+s731EN5J/68
- azVTPzoGNa+U5hJK1lkDLi6ACpjfeL6YSYiKXE1Np8f/PgqRwjhCs8POK/EK/wDMry05hzqJb8q
- VL3+Nt64W2jFMOCy84DDwYAtYOfxgeLQ3ZaxLaXyyJE8pTUY9FMnOCd8iqIiP1wKiqJVHmt44Kn
- WynNMVWY2s+ugNPJ2FoEo4V6hWYNysUKl6bw8kpXWt0NaF5WJAbV/M7ck7K+VDLkq0aWPbed2Qo
- yoi6ASlaZ9C97uWPU5LddQzA7kHqKiXPzgeqVMz0jK7/JGiG5rp30ZU3GswYG1NaSZyTkC95DpW
- zo8Wi5AaJ8jTzPC6VIea9+TtcjucmK5ff0xw88XVxrUum5Cwb2oLg4uMQU1z7XePAjlwpRZJ7wq
- cs3+3SjWRi73VGeQ5O+5+1fFgLTnki6OOcx
-X-Received: by 2002:a05:600c:1390:b0:483:709e:f238 with SMTP id
- 5b1f17b1804b1-488fb78ea6fmr572186655e9.29.1777211839753; 
- Sun, 26 Apr 2026 06:57:19 -0700 (PDT)
-Received: from P-NTS-Evian.home
- (2a01cb0594a2a2002ad9827a59cb148a.ipv6.abo.wanadoo.fr.
- [2a01:cb05:94a2:a200:2ad9:827a:59cb:148a])
+ bh=0bTiupAMZrJPuHFqIh5SV7noAT+NuuYb+WXTBbCsIN4=;
+ b=mP760oZPl0sD8lWZNRPTNiFP6DApJVFWloPzEHycZLe/q6yK/Qq8Hnh18O30H8qSeR
+ 5dGmKkDkawoTzOjE4lUwIPPXRUg6MxnjVdK2xo+mOfsyW5+34k7FVgSbABFZG3SydwTr
+ r6o59e4mHznjhc97DghLfPp44INua0J84LkzvP2G0W3XtEDDstiTmE4gRC5zzXFX5YnA
+ 59gXV6II9QtpwAfDea5AHuSVK5P2COThynOmW/BI0ZGlzdzjx5WH8gm0PPUlHDWt+4yI
+ YYklluLlmF3ppnh93ZvbmxWHZPwkzlfrF2wpzKl7bf/ShHXN333qc7OYsz7WavNvPhpc
+ qg+A==
+X-Gm-Message-State: AOJu0YyIZsFyWyfFJA9rOmp0NzHk3YFk9QNhs3RX6EoSCmFaH1eMM3Hc
+ Ta5M9YUh+B1Z67dIKc/BE6807pEkUA2CgxqAMQJ9UF5kncsphLzNT3hcFjurtCdtkik9Gf20A8z
+ jwJL5
+X-Gm-Gg: AeBDiet+pCIKdygAH3z1YIxYYqssacCPpITWNLTYd1sjViHy0jh2m2bK10R1hvsnZQ+
+ aG7Vh/2/vbKaYfLM8QZ03mD+UE8JrzMj2fOHtbQxdrWAgR+uU+nahlMOKKSsy47CEf/J1tPPF53
+ FsYT+RXJZBFaMqmvKYXKyGf7ZLwrI3lAmhkjCfAaHhF/dOO9zgOWp7EATS8Fed7EMFzWWmyKoj0
+ BvdRiwICy0Hr5IoMvF8zKZ93nNMalNpH1H/xjBQFhscMLThtpZzJvvS7+3gNFXkkxkFPtFpHCxk
+ lhBNDoHgDSpgptV3EH93pTRWW3TXbP6Gh/nvZScMP9kJ8OWCFpsVSG4slQfPaWGSJ8Ox7cly5Gm
+ pkyF61ng567Ds1bVHHDF2bBnN3XPX10qB+LxQQTwEXidX7WYcUTLcaf1NYbIY4fhP6cm0avH7np
+ PQ85a4SRoHQ6pCpEdxPRoroFEYolzTPCsl0GCwX3qR/zdJ6AeAgCVWlriEZH1Fdmravh+X7BEFY
+ F3CBT9IiVDRWKnc1EhInxnM6NpfejUVCiEUMhEZwllCPCCzwcwz2im2/OvNV9gTltxSPPI3Zto8
+ HcJ56FfY/PRHM2ng0FFOF2svi4SVGA==
+X-Received: by 2002:a05:600c:5246:b0:488:a639:b787 with SMTP id
+ 5b1f17b1804b1-488fb74fc0dmr568333695e9.11.1777217780930; 
+ Sun, 26 Apr 2026 08:36:20 -0700 (PDT)
+Received: from dario-ThinkPad-P14s-Gen-5.amarulasolutions.com
+ (host-82-56-22-134.retail.telecomitalia.it. [82.56.22.134])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-48a682588f8sm119035785e9.10.2026.04.26.06.57.19
+ 5b1f17b1804b1-48a5499b0edsm388438845e9.14.2026.04.26.08.36.19
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 26 Apr 2026 06:57:19 -0700 (PDT)
-From: Romain Naour <romain.naour@smile.fr>
+ Sun, 26 Apr 2026 08:36:20 -0700 (PDT)
+From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
 To: u-boot@lists.denx.de
-Cc: nm@ti.com, robertcnelson@gmail.com, Romain Naour <romain.naour@smile.fr>
-Subject: [PATCH 1/2] configs/j721e_{beaglebone64,
- evm}_defconfig: reduce fastboot buffer
-Date: Sun, 26 Apr 2026 15:57:14 +0200
-Message-ID: <20260426135715.1395250-1-romain.naour@smile.fr>
-X-Mailer: git-send-email 2.52.0
+Cc: linux-amarula@amarulasolutions.com,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Dinesh Maniyam <dinesh.maniyam@altera.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Javier Martinez Canillas <javierm@redhat.com>,
+ Jerome Forissier <jerome.forissier@arm.com>,
+ John Toomey <john.toomey@amd.com>, Jonathan GUILLOT <jonathan@joggee.fr>,
+ Kory Maincent <kory.maincent@bootlin.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Michal Simek <michal.simek@amd.com>,
+ Padmarao Begari <padmarao.begari@amd.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Rasmus Villemoes <ravi@prevas.dk>, Simon Glass <sjg@chromium.org>,
+ Sughosh Ganu <sughosh.ganu@arm.com>, Tom Rini <trini@konsulko.com>,
+ =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>,
+ uboot-stm32@st-md-mailman.stormreply.com
+Subject: [PATCH v5 0/8] Support metadata-driven A/B boot for STM32MP25
+Date: Sun, 26 Apr 2026 17:35:25 +0200
+Message-ID: <20260426153617.2039651-1-dario.binacchi@amarulasolutions.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -96,87 +115,85 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Using Snagboot's Snagflash tool to flash the SD card using
-fastboot-uboot mode on SK-TDA4VM crash u-boot.
+This series, the mainline version of [1], provides the necessary changes
+in U-Boot to support the metadata-driven A/B update flow for STM32MP25
+boards. It implements the logic required to dynamically select the boot
+bank based on FWU metadata.
 
-Flashing an image.wic.xz file generated by Yocto doesn't work as
-expected:
+These changes are designed to be backward compatible while providing
+the necessary infrastructure for the A/B scheme.
 
-2026-04-25 16:46:21,134 [INFO] flashed 267296768/267296768 bytes
-2026-04-25 16:46:21,162 [INFO] Flashing sparse range 10/13
-2026-04-25 16:46:21,163 [INFO] Flashing to MMC device...
+The series has been tested on the STM32MP257F-EV1 board.
 
-On the the chunk is bigger that previous one and doesn't fit in the RAM
-memory mapping set by the SoC (TDA4VM)
+Additionally, some patches in the series propose changes with
+general-purpose utility:
 
-downloading of 267296768 bytes finished
-MMC write: dev # 1, block # 2101440, count 522064 ... 522064 blocks written: OK
-switch to partitions #0, OK
-mmc1 is current device
-Starting download of 486944768 bytes
+ 1/7 lib: uuid: add partition type GUID for extended bootloader
+ 4/7 cmd: part: support lookup by UUID in 'part number'
+ 6/7 fwu: add helper to get image GUID by type and bank index
 
-"Synchronous Abort" handler, esr 0x96000046, far 0x9e800000
-Indeed, this memory address (0x9e800000) is "reserved"
+[1] https://github.com/STMicroelectronics/u-boot/pull/6
 
-"bdinfo" allows to notice that 0x9e800000 address is actually
-"reserved":
+Changes in v5:
+- Update doc/usage/cmd/part.rst to reflect the changes related to the
+  part command.
+- Add Acked-by of Ilias Apalodimas to patch 6/8 "fwu: add helper to get
+  image GUID by type and bank index"
 
-  memory.count = 0x2
-  memory[0]      [0x80000000-0xffffffff], 0x80000000 bytes, flags: none
-  memory[1]      [0x880000000-0x8ffffffff], 0x80000000 bytes, flags: none
-  reserved.count = 0x4
-  reserved[0]    [0x9e800000-0xa8ffffff], 0xa800000 bytes, flags: no-map
-  reserved[1]    [0xaa000000-0xabbfffff], 0x1c00000 bytes, flags: no-map
-  reserved[2]    [0xfce40b30-0xffffffff], 0x31bf4d0 bytes, flags: no-overwrite
-  reserved[3]    [0x8ffff7000-0x8ffffffff], 0x9000 bytes, flags: no-notify, no-overwrite
+Changes in v4:
+- Place the part command tests in the cmd suite rather than the dm
+  suite.
+- Order the include files according the U-Boot coding style.
+- Add patch 7/8 test: dm: fwu_mdata: add test for fwu_mdata_get_image_guid
 
-CONFIG_FASTBOOT_BUF_SIZE was initialy set to 0x2F000000 in the u-boot
-configuration for the SK-TDA4VM.
+Changes in v3:
+- Wrap lines exceeding 80 columns in test/cmd/part.c file.
+- Combine run_command() and ut_asserteq() -> ut_asserteq(1, run_command(
+- Add kerneldoc comment for fwu_mdata_get_image_guid() above its declaration
+  in fwu.h.
+- Add log_warning() messages to fwu_platform_hook() to catch inconsistent
+  FWU metadata (boot GUID found but root GUID missing or viceversa), as
+  suggested by Simon Glass.
 
-With SYS_LOAD_ADDR set to 0x82000000, the end of the fastboot buffer is
-at 0xB1000000 and overlap the reserved region[0] and region[1].
+Changes in v2:
+- Add links to the XBOOTLDR specification in the commit message of patch
+   1/7 lib: uuid: add partition type GUID for extended bootloader.
+- Update help for 'part start', 'part size' to mention UUID.
+- Add kerneldoc comment for fwu_mdata_get_image_guid().
+- Pass efi_guid_t by pointer in fwu_mdata_get_image_guid().
+- Add patches:
+   5/7 test: cmd: part: add UUID lookup tests
+   3/7 test: cmd: add unit tests for part command
+   2/7 test: dm: part: add test for part_get_info_by_uuid
 
-In order to avoid writing the first reserved address (0x9e800000) we
-have to reduce CONFIG_FASTBOOT_BUF_SIZE to 0x1c800000.
+Dario Binacchi (8):
+  lib: uuid: add partition type GUID for extended bootloader
+  test: dm: part: add test for part_get_info_by_uuid
+  test: cmd: add unit tests for part command
+  cmd: part: support lookup by UUID
+  test: cmd: part: add UUID lookup tests
+  fwu: add helper to get image GUID by type and bank index
+  test: dm: fwu_mdata: add test for fwu_mdata_get_image_guid
+  board: st: stm32mp25: support dynamic A/B bank bootup
 
-On this platfrom 0x9e800000 is reserved since it's used for optee
-(K3_OPTEE_LOAD_ADDR).
+ board/st/stm32mp2/stm32mp2.c          |  32 ++++
+ cmd/part.c                            |  12 +-
+ doc/README.gpt                        |   2 +
+ doc/usage/cmd/part.rst                |   6 +-
+ include/configs/stm32mp25_st_common.h |  15 ++
+ include/fwu.h                         |  11 ++
+ include/part_efi.h                    |   3 +
+ lib/fwu_updates/fwu.c                 |  33 ++++
+ lib/uuid.c                            |   1 +
+ test/cmd/Makefile                     |   1 +
+ test/cmd/part.c                       | 209 ++++++++++++++++++++++++++
+ test/dm/fwu_mdata.c                   |  48 ++++++
+ test/dm/part.c                        |  53 +++++++
+ 13 files changed, 419 insertions(+), 7 deletions(-)
+ create mode 100644 test/cmd/part.c
 
-(Issue initially reported on Snagboot)
-[1] https://github.com/bootlin/snagboot/issues/90
-
-Signed-off-by: Romain Naour <romain.naour@smile.fr>
----
- configs/j721e_beagleboneai64_a72_defconfig | 2 +-
- configs/j721e_evm_a72_defconfig            | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/configs/j721e_beagleboneai64_a72_defconfig b/configs/j721e_beagleboneai64_a72_defconfig
-index dc76504eb83..abb53687ed6 100644
---- a/configs/j721e_beagleboneai64_a72_defconfig
-+++ b/configs/j721e_beagleboneai64_a72_defconfig
-@@ -97,7 +97,7 @@ CONFIG_DMA_CHANNELS=y
- CONFIG_TI_K3_NAVSS_UDMA=y
- CONFIG_USB_FUNCTION_FASTBOOT=y
- CONFIG_FASTBOOT_BUF_ADDR=0x82000000
--CONFIG_FASTBOOT_BUF_SIZE=0x2F000000
-+CONFIG_FASTBOOT_BUF_SIZE=0x1c800000
- CONFIG_FASTBOOT_FLASH=y
- CONFIG_FASTBOOT_FLASH_MMC_DEV=0
- CONFIG_FASTBOOT_CMD_OEM_FORMAT=y
-diff --git a/configs/j721e_evm_a72_defconfig b/configs/j721e_evm_a72_defconfig
-index ed94fff0885..dac1c5ec82f 100644
---- a/configs/j721e_evm_a72_defconfig
-+++ b/configs/j721e_evm_a72_defconfig
-@@ -104,7 +104,7 @@ CONFIG_DMA_CHANNELS=y
- CONFIG_TI_K3_NAVSS_UDMA=y
- CONFIG_USB_FUNCTION_FASTBOOT=y
- CONFIG_FASTBOOT_BUF_ADDR=0x82000000
--CONFIG_FASTBOOT_BUF_SIZE=0x2F000000
-+CONFIG_FASTBOOT_BUF_SIZE=0x1c800000
- CONFIG_FASTBOOT_FLASH=y
- CONFIG_FASTBOOT_FLASH_MMC_DEV=0
- CONFIG_FASTBOOT_CMD_OEM_FORMAT=y
 -- 
-2.52.0
+2.43.0
 
+base-commit: 9f61fd5b80a43ae20ba115e3a2933d47d720ab82
+branch: fwupdate-ab
