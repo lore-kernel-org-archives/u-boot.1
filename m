@@ -4,61 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EDCD8FF885E
-	for <u-boot@archiver.kernel.org>; Sun, 26 Apr 2026 16:32:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8BAAFF885E
+	for <u-boot@archiver.kernel.org>; Sun, 26 Apr 2026 16:35:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 82E4983FDB;
-	Sun, 26 Apr 2026 18:32:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=makrotopia.org
+	by phobos.denx.de (Postfix) with ESMTP id 7A68183FDB;
+	Sun, 26 Apr 2026 18:35:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="SOBZH+U+";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="hzGo8eY0";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9F09A83FF5; Sun, 26 Apr 2026 18:32:51 +0200 (CEST)
-Received: from pidgin.makrotopia.org (pidgin.makrotopia.org
- [IPv6:2a07:2ec0:3002::65])
+ id 9CDC48407E; Sun, 26 Apr 2026 18:35:18 +0200 (CEST)
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B595D839D9
- for <u-boot@lists.denx.de>; Sun, 26 Apr 2026 18:32:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=makrotopia.org
+ by phobos.denx.de (Postfix) with ESMTPS id EFB07839D9
+ for <u-boot@lists.denx.de>; Sun, 26 Apr 2026 18:35:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=daniel@makrotopia.org
-Received: from local
- by pidgin.makrotopia.org with esmtpsa (TLS1.3:TLS_AES_256_GCM_SHA384:256)
- (Exim 4.99) (envelope-from <daniel@makrotopia.org>)
- id 1wH2P3-000000007wx-2PPQ; Sun, 26 Apr 2026 16:32:17 +0000
-Date: Sun, 26 Apr 2026 17:32:12 +0100
-From: Daniel Golle <daniel@makrotopia.org>
-To: Marek Vasut <marek.vasut@mailbox.org>
-Cc: Rasmus Villemoes <ravi@prevas.dk>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>, Quentin Schulz <quentin.schulz@cherry.de>,
- Kory Maincent <kory.maincent@bootlin.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>, Peng Fan <peng.fan@nxp.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Martin Schwan <m.schwan@phytec.de>, Anshul Dalal <anshuld@ti.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Sughosh Ganu <sughosh.ganu@arm.com>,
- Aristo Chen <jj251510319013@gmail.com>,
- Ludwig Nussel <ludwig.nussel@siemens.com>,
- Benjamin ROBIN <dev@benjarobin.fr>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- James Hilliard <james.hilliard1@gmail.com>,
- Wolfgang Wallner <wolfgang.wallner@at.abb.com>,
- Kunihiko Hayashi <hayashi.kunihiko@socionext.com>,
- David Lechner <dlechner@baylibre.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Mayuresh Chitale <mchitale@ventanamicro.com>,
- Jonas Karlman <jonas@kwiboo.se>, Shiji Yang <yangshiji66@outlook.com>,
- Francois Berder <fberder@outlook.fr>, u-boot@lists.denx.de
-Subject: Re: [PATCH v2 0/7] fit: dm-verity support
-Message-ID: <ae4-DA_TIVAEAaC3@makrotopia.org>
-References: <cover.1776302805.git.daniel@makrotopia.org>
- <87wlxxltnc.fsf@prevas.dk> <aeocicfRVu7NuC6T@makrotopia.org>
- <cf943303-9f48-4cb0-b055-0c2115fceeac@mailbox.org>
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4g3XNy2TJwz9t5H;
+ Sun, 26 Apr 2026 18:35:14 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1777221314;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=mnHfCxCQ+ogO2U9YSzi2sX/YIZaq3B3dgd15L/jmCDU=;
+ b=SOBZH+U+QWMvMIra3MIq9dUhoD4C+1TkzhY/PI4b+4hJSTPKIy0BRiQQ7iw5lxoK/WH967
+ YJmWF3yZmQ3nnrjkAv6beQgbSBtzVBwikiyTm0KCtJOcknph7qudTxs+yc4gdANHwjUdyv
+ cY+TCK/B/Y0ZSucFOgrFrxyaOdSorsTfmBiJ/MZgYUHGzPljXcyome02hTVPbvD+Hq8+de
+ xYv4UESiW8JhIyl5UPEXuo8QvXuwlGW1e7WXuYCm+gNs+V0S7cDBNryXcTKvQcDzPDfqO/
+ vmDQ/Txz77wtAVC7jTXy4BrTu3Egb+gXAfrsU6KqbTN9gkfAM5GiI6+h6MilWQ==
+Message-ID: <6944f28f-131f-4a08-9ef9-aae812926f4b@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1777221312;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=mnHfCxCQ+ogO2U9YSzi2sX/YIZaq3B3dgd15L/jmCDU=;
+ b=hzGo8eY0mDJwqgeibJ74L89ru7X1dIX+1a84iYT9ay+rhKHvNBVjsIjj5+44GcCJf/V8vd
+ iJEI2aOmFr5+QlE+2sZrMvCwWupjlzTvb7JDWJdTV1PCoKSFENCBRVNHDNQtxBHP3LPJds
+ 7KXHu+7pRtsDTxQpWJjWArDXGkto6R6UJlYN8f9WhJteoflwfHy1E1Hivacvn2YLTClagG
+ GU7yhC5iNOB9H91NOwfiEwemPDwNryEHXLKMgKgpe5Htk3g3kBIe3KKzAHru4PCPbpK9t3
+ ALAxVtxht8Ujq7yfH4rgjbwLQoRp/IzSuEUG1vTqFNbqNdumS7N8DoO3wVzBPg==
+Date: Sun, 26 Apr 2026 18:35:05 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <cf943303-9f48-4cb0-b055-0c2115fceeac@mailbox.org>
+Subject: Re: [PATCH v2 6/6] common: Add an option to relocate on ram top
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>, trini@konsulko.com
+Cc: marek.vasut+renesas@mailbox.org, jonas@kwiboo.se, anshuld@ti.com,
+ sjg@chromium.org, u-boot@lists.denx.de
+References: <20260416055948.130041-1-ilias.apalodimas@linaro.org>
+ <20260416055948.130041-7-ilias.apalodimas@linaro.org>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <20260416055948.130041-7-ilias.apalodimas@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-MBO-RS-META: 6db3uey8nz5m17moo6rawhzywpps57ng
+X-MBO-RS-ID: 3681fafe126fd8c7496
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,64 +88,97 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, Apr 26, 2026 at 06:20:55PM +0200, Marek Vasut wrote:
-> On 4/23/26 3:20 PM, Daniel Golle wrote:
-> > On Thu, Apr 23, 2026 at 02:59:19PM +0200, Rasmus Villemoes wrote:
-> > > On Thu, Apr 16 2026, Daniel Golle <daniel@makrotopia.org> wrote:
-> > > 
-> > > > This series adds dm-verity support to U-Boot's FIT image infrastructure.
-> > > > It is the first logical subset of the larger OpenWrt boot method series
-> > > > posted as an RFC in February 2026 [1], extracted here for independent
-> > > > review and merging.
-> > > > 
-> > > > OpenWrt's firmware model embeds a read-only squashfs or erofs root
-> > > > filesystem directly inside a uImage.FIT container as a FILESYSTEM-type
-> > > > loadable FIT image. At boot the kernel maps this sub-image directly from
-> > > > the underlying block device via the fitblk driver (/dev/fit0, /dev/fit1,
-> > > 
-> > > Can you show me where that fitblk driver lives, because I can't find
-> > > anything like that in the linux source code. Grepping for 'fitblk' or
-> > > 'dev/fit' turns up nothing.
-> > 
-> > The driver is currently downstream, but going to be (re-)submitted upsteam.
-> > See below for more.
-> > 
-> > > 
-> > > > ...), the goal is that the bootloader never even copies it to RAM.
-> > > 
-> > > Hm, how is that achieved? I.e., how do you load and boot the FIT image
-> > > without loading that part, but still reading in e.g. the kernel?
-> > 
-> > The next series after this is going to suggest a way for on-demand
-> > loading only the actually necessary FIT images from a storage backend.
-> > See
-> > https://github.com/u-boot/u-boot/pull/870
+On 4/16/26 7:59 AM, Ilias Apalodimas wrote:
+> Right now we only relocate u-boot to the top of the first
+> memory bank unless the board specific code overwrites it.
+> This is problematic when loading big binaries as it
+> fragments the contiguous memory space for no apparent reason.
 > 
-> This should be posted on the ML, see .github/pull_request_template.md :
+> It's worth noting that there are cases where we must not relocate
+> above the 4GiB boundary (64bit hardware with 32bit only capable
+> DMA). E.g This will break platforms, if the ethernet
+> controller cannot DMA above 4 GiB, and once U-Boot does
+> get relocated above 4 GiB, the packet buffer which is built
+> into the U-Boot binary is also relocated above 4 GiB.
+
+On certain platforms, it is currently not possible to relocate U-Boot 
+above the 32bit boundary, due to various dependencies on content located 
+below the 32bit boundary. One such example is ethernet, where the packet 
+buffer built into U-Boot binary is placed below the 32bit boundary and 
+allows loading of data via ethernet even above 32bit boundary due to 
+memory copy from the packet buffer to the destination location.
+
+> A previous patch moves the bi_dram[] info from bd to gd and make
+> the memory bank information available early. So move the
+> dram_init_banksize() INITCALL before the relocation address calculation
+> and use it to derive the address.
 > 
-> "
-> Please do not submit a Pull Request via github.  Our project makes use of
-> mailing lists for patch submission and review.  For more details please
-> see https://u-boot.readthedocs.io/en/latest/develop/sending_patches.html
-> "
-
-I of course had also posted it to the mailing list back then.
-I just thought it'd be easier to look at it on Github than in the list
-archive:
-
-https://lists.denx.de/pipermail/u-boot/2026-February/610274.html
-
+> Also add a Kconfig option and allow the common code to relocate U-Boot
+> to the top of the last discovered bank.
 > 
-> That said, U-Boot SPL already handles on-demand loading of parts of
-> fitImages generated with mkimage -E (fitImage with external data). There is
-> no need to reinvent the wheel.
+> Reviewed-by: Anshul Dalal <anshuld@ti.com>
+> Tested-by: Anshul Dalal <anshuld@ti.com>
+> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> ---
+>   Kconfig          | 10 ++++++++++
+>   common/board_f.c | 25 +++++++++++++++++++------
+>   2 files changed, 29 insertions(+), 6 deletions(-)
+> 
+> diff --git a/Kconfig b/Kconfig
+> index 7f00e76ba786..63c273ca8c8f 100644
+> --- a/Kconfig
+> +++ b/Kconfig
+> @@ -491,6 +491,16 @@ config SKIP_RELOCATE_CODE_DATA_OFFSET
+>   	  Offset of the read-write memory which contains data, from read-only
+>   	  memory which contains executable text.
+>   
+> +config RELOC_ADDR_TOP
+> +	bool "Relocate to the topmost memory address"
+> +	depends on EXPERT
+> +	help
+> +	  When U-Boot relocates, it chooses the end of the first memory bank.
+> +	  Enable this if you have multiple banks and want U-Boot to relocate
+> +	  to the topmost memory address. This will use the information of the
+> +	  board memory banks configured with dram_init_banksize().
 
-This has been discussed in detail already when the RFC series was
-posted:
+... use the information ... to do what ?
 
-https://lists.denx.de/pipermail/u-boot/2026-February/611074.html
+> +	  Use this if you are certain all of the devices can DMA to high memory.
 
-tl;dr:
-|> So there really isn't much overlap other than the fact that there is a
-|> struct with a priv pointer and a .read callback, and even that uses a
-|> different addressing parameter (sectors vs. bytes).
+... can access memory above the 32bit boundary.
+
+> +
+>   endif # EXPERT
+>   
+>   config PHYS_64BIT
+> diff --git a/common/board_f.c b/common/board_f.c
+> index 4ac22dca9e7c..f95e789257ad 100644
+> --- a/common/board_f.c
+> +++ b/common/board_f.c
+> @@ -339,7 +339,22 @@ static int setup_ram_base(void)
+>   static int setup_ram_config(void)
+>   {
+>   	debug("Monitor len: %08x\n", gd->mon_len);
+> -#if CONFIG_VAL(SYS_MEM_TOP_HIDE)
+> +
+> +	if (CONFIG_IS_ENABLED(RELOC_ADDR_TOP)) {
+> +		int bank;
+> +		phys_size_t total_size = 0;
+> +
+> +		for (bank = 0; bank < CONFIG_NR_DRAM_BANKS; bank++) {
+> +			if (gd->ram_top <= gd->bi_dram[bank].start)
+> +				gd->ram_top = gd->bi_dram[bank].start +
+> +						gd->bi_dram[bank].size;
+> +			total_size += gd->bi_dram[bank].size;
+> +		}
+> +		gd->ram_size = total_size;
+
+Shouldn't this also apply board_get_usable_ram_top() to be consistent ?
+
+> +	} else {
+> +		gd->ram_top = gd->ram_base + get_effective_memsize();
+> +		gd->ram_top = board_get_usable_ram_top(gd->mon_len);
+
+Should this really use gd->mon_len as a parameter, or gd->ram_top?
+
+[...]
