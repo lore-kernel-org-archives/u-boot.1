@@ -4,85 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B806FFF885E
-	for <u-boot@archiver.kernel.org>; Sun, 26 Apr 2026 15:48:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 539B2FF885D
+	for <u-boot@archiver.kernel.org>; Sun, 26 Apr 2026 15:48:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CAAED84372;
-	Sun, 26 Apr 2026 17:47:42 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1B7568435C;
+	Sun, 26 Apr 2026 17:47:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="OX9huxM6";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="d8eVooye";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6F51B84309; Sun, 26 Apr 2026 17:47:41 +0200 (CEST)
-Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
- [IPv6:2a00:1450:4864:20::42f])
+ id 143118437C; Sun, 26 Apr 2026 17:47:43 +0200 (CEST)
+Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com
+ [IPv6:2a00:1450:4864:20::42b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 810738407E
- for <u-boot@lists.denx.de>; Sun, 26 Apr 2026 17:47:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1575484370
+ for <u-boot@lists.denx.de>; Sun, 26 Apr 2026 17:47:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=dario.binacchi@amarulasolutions.com
-Received: by mail-wr1-x42f.google.com with SMTP id
- ffacd0b85a97d-43d03db7f87so6396458f8f.3
- for <u-boot@lists.denx.de>; Sun, 26 Apr 2026 08:47:39 -0700 (PDT)
+Received: by mail-wr1-x42b.google.com with SMTP id
+ ffacd0b85a97d-43d7650202fso7172723f8f.2
+ for <u-boot@lists.denx.de>; Sun, 26 Apr 2026 08:47:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1777218459; x=1777823259;
+ d=amarulasolutions.com; s=google; t=1777218460; x=1777823260;
  darn=lists.denx.de; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=KdenFksAhxmVcxyTgy6MvO1TEY6LsbInC1KB7MV5fFk=;
- b=OX9huxM6TwXiZ9qOS4gW1XBOaTfqA8RTFI1k8ASIysdprS8j6PKWDDgYNnmaBXtPVG
- 25vSD9Qi8nAXQHKR/9daWf581Gv9YtOdbCGY0vg6rr/tTsOJ3vVk4EjAQeS8dWAFvM3Q
- KZlsgd7IzaFNrDbOUM0aaxgpLwXJ1a5DDV/JY=
+ bh=pyCTNQQ5HSE9YWFE9QctEWIoRgXv/rGHYVY5OZpmknE=;
+ b=d8eVooyet/Jkk7EceNILt1VWmnLDlHe3LUkU5RPXZYRjLHMTSHxi6bX39OBqtRaN2b
+ 0HFX4KxzrcfCCK0NgASDHemf6zJnn03TU44b4luXi65gMMAGa5sbk/dUg9nl49mSz93t
+ ul0Kxsm8Et86TSFhBEMJiVyTM7qXMJ3YzJqYo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777218459; x=1777823259;
+ d=1e100.net; s=20251104; t=1777218460; x=1777823260;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=KdenFksAhxmVcxyTgy6MvO1TEY6LsbInC1KB7MV5fFk=;
- b=KjIlGiSvQNcoEkXk1yk4TMJbESV1j1dJlXaUP1cKq4pjUJj7lkNvigrDb1EKYPIlyr
- S6lnW6nb7GtyyPuz0juslk2N++/lhFpketAFsulEfIlCD00JirjFpi7L3eY3Sm0Ugar1
- iWecAClngo3y4SQykUbTW97pCisQRYFGvP0LPbBa4Jw2vGbUsy5+7D7RNMYAz3iAJWCz
- FcsYCngzteKiMX7cY1dqZ6fekjrZFyF2URYu2tBNYNuzG3omXFYybCEsVV0YslI6qk2D
- A0x1AfuUhtTema+jsvcdzxM7qXGKNZnSYYzPFTsaMzysCRaBJGnFMguZt2mCm8VIR5wN
- tfqQ==
-X-Gm-Message-State: AOJu0Yzh2XpMoZcndp18pdI+3+WK5IjdPBLEPn0bc1qehepwH+Y08hPp
- tbkkIpR3YSuzkwp8CojE7tj/oeHp9ZNn3RTKdhiU0kv9KiaEDcMtGPhAYVWpGb9boAHOiB5wfZi
- eYxPD
-X-Gm-Gg: AeBDietLWYCxCUi+qhd5+zQpFSFR+B8EfZrmRqHC6JRakt7vEgDyjrYUWhAt+K5hi74
- m7eBOiIIH73yX+0Rmr7W7+usZEX3hZolwQ38nzbQnegt8SJxVl8vFxmKarPeZzMtEVqNdEz3xaK
- 9cqpuh8zcEKlKDEw3oIOBcfp+pgPlhXSduSfGPMCSv7sTlqi0rEXgK07hJGC5b+E6GBzT6eme/O
- oHat5kF5/iYlhsezVfx79eth7J6s0cmKA5MMH9uqyNzoLOjqxmIigLWfwwT/fwr7Qw86apHFB3s
- fXHCWAiopCYG7+Cmw8Z5oPMVZDusScJBoRTb4WxgVpM/1PzRYKkSu7eC8cBjifb+QW4JPj/C8JS
- KwoFV4vdD4SEzGTh42NWpFZK9/KoskIPGAqJ1oDYOADfoFFDxEiPq0J/AntDp5Xqd6f7FR4/xaT
- Wya0VuKW9tIwRoG9UJEFWESY+RPi1JCO1UVaJ+XQBWOmFDoZBHKwQb3tZ8vSsOdj80LIWJn4BBk
- 5V6pVYecBnbj8kBAcZeNPx/teIFLCuYYZtc76n8JqHTDIZndSEvERDVRQat2os2iGROLPwEes3g
- CKytBIVFeEvvzCZiTjToH7EMdThxgA==
-X-Received: by 2002:a05:6000:1ac9:b0:43d:6787:9934 with SMTP id
- ffacd0b85a97d-43fe3db39b2mr58717997f8f.9.1777218458731; 
- Sun, 26 Apr 2026 08:47:38 -0700 (PDT)
+ bh=pyCTNQQ5HSE9YWFE9QctEWIoRgXv/rGHYVY5OZpmknE=;
+ b=H/XufsgfCFZZurryP23TYsee75rmaXJ76z/2lhmLVNkSTkMJ3eUDIJMvmWPoVCCE32
+ oOmgtII0d+I7/OdYcjDyX3OWw8yeX2DCxM08i4lAh0Nq+0HwoXf02jcPL5RTCudyBoHb
+ 4FjbQUM2NlWWXflw8sGtyJq+G1/4FiMyLUl/BbvUb+tyncSEYeEos+fM8ZLGBkQBGYDM
+ 1MeD2h/bqXDvtLyXhSvl+ubyvylB1A1jwp8qO9AekZaNBNbP3A4h6pGfCHSHr42EADSO
+ iPbHxATJQozWxQlv65EMoIZ/NPQgwqpjZKDN//njIVCiPnLsvnYeKQbU2YJqR8O3gcHx
+ JdMQ==
+X-Gm-Message-State: AOJu0YwcOh3K1x+gmDNKbV8oNnyCJOfZ5m3Bh8cCT07YQGscTZkKuL2d
+ 1qP0Yf0I16xd5AH/EJaAVncpA94aQHhpOUPP0fEgGopCfO1DiKNfrKVxhaHIjH7vhujO9UeA6RB
+ lpqYR
+X-Gm-Gg: AeBDiet8nITWwTN5i4DOnR83JIrB5AvGdn/VDwxdOTcY0/6tu/Y5C59gjFD3wGhR0NU
+ K+UM0+AjnMOZj5k5+u3E50n9Msgh/CBrvds2P43xPOG8YmpzZG3Yka65bmL1drP9+1RxUzVdKir
+ 1MoIqmv0489pWIJ7Jnfqx8Lw8Gl2EeD09leiqo6BcZA5K3NUBKBoF+iQ+2hZuCDAKqQE+pHZGp2
+ BA/jFE0kryMLkBcKMryIk2rxjs0CxG4HSukbKIawEiYORdpkoL1xERoZ9+p5prbbmvd4mizPgiF
+ JqwCVQQLZb4YIDXGB9e5/NhsW6L8E/D4LnAhFpbDtxuqyRt0E+FNZXbapMFS0hDcPu1zwz8hHnE
+ mKB1dnNv5XgP+3VhlZ/2h1UCmzsMdEAQ86sR/wuMm+/mYXxPkEBqn6/X7bPALfbq9YI/CAxDwUV
+ YSMbiCStQM3PpapmdWaYmSo0WpCkwNlM6LbGEG1dH4dfAUlwbP8zSF9/Op0oG5h2wrgXHpMRV5s
+ 4O4YWL2mlBwqQSjxfL7oo/YSYatA4BmzOBFLBQBwFgOXAv0mH4cDR85K7lDELEbHt2BYXEWrLg2
+ bj/hiAljldZk9SnFFBaDfkeEFy0EU1L6DyEEcf1a
+X-Received: by 2002:a05:6000:230c:b0:43d:303f:f358 with SMTP id
+ ffacd0b85a97d-43fe3dc5981mr64165640f8f.2.1777218460103; 
+ Sun, 26 Apr 2026 08:47:40 -0700 (PDT)
 Received: from dario-ThinkPad-P14s-Gen-5.amarulasolutions.com
  (host-82-56-22-134.retail.telecomitalia.it. [82.56.22.134])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-44123d23e0bsm34489985f8f.15.2026.04.26.08.47.37
+ ffacd0b85a97d-44123d23e0bsm34489985f8f.15.2026.04.26.08.47.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 26 Apr 2026 08:47:38 -0700 (PDT)
+ Sun, 26 Apr 2026 08:47:39 -0700 (PDT)
 From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
 To: u-boot@lists.denx.de
 Cc: linux-amarula@amarulasolutions.com,
  Dario Binacchi <dario.binacchi@amarulasolutions.com>,
  Simon Glass <sjg@chromium.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Michal Simek <michal.simek@amd.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v7 7/8] test: dm: fwu_mdata: add test for
- fwu_mdata_get_image_guid
-Date: Sun, 26 Apr 2026 17:47:00 +0200
-Message-ID: <20260426154724.2042569-8-dario.binacchi@amarulasolutions.com>
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>,
+ uboot-stm32@st-md-mailman.stormreply.com
+Subject: [PATCH v7 8/8] board: st: stm32mp25: support dynamic A/B bank bootup
+Date: Sun, 26 Apr 2026 17:47:01 +0200
+Message-ID: <20260426154724.2042569-9-dario.binacchi@amarulasolutions.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260426154724.2042569-1-dario.binacchi@amarulasolutions.com>
 References: <20260426154724.2042569-1-dario.binacchi@amarulasolutions.com>
@@ -104,76 +106,131 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a new unit test for the fwu_mdata_get_image_guid() function.
+Enable automatic detection of the active A/B bank by retrieving
+partition GUIDs from FWU metadata.
+
+This ensures the system correctly identifies the bootable partitions
+even in multi-bank scenarios, falling back to a standard bootable flag
+scan if the UUIDs are missing.
+
+To enable A/B bank bootup on stm32mp25 boards, add the following Kconfig
+options to the stm32mp25_defconfig:
+
+ CONFIG_FWU_MULTI_BANK_UPDATE=y
+ CONFIG_FWU_MDATA=y
+ CONFIG_FWU_NUM_BANKS=2
+ CONFIG_FWU_NUM_IMAGES_PER_BANK=3
+ CONFIG_CMD_FWU_METADATA=y
+ CONFIG_FWU_MDATA_V2=y
 
 Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
 Reviewed-by: Simon Glass <sjg@chromium.org>
 
 ---
 
-Changes in v7:
-- Add Reviewed-by of Simon Glass for patc 7/8 of "test: dm:
-fwu_mdata: add test for fwu_mdata_get_image_guid"
+(no changes since v5)
 
- test/dm/fwu_mdata.c | 48 +++++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 48 insertions(+)
+Changes in v5:
+- Add Acked-by of Ilias Apalodimas to patch 6/8 "fwu: add helper to get
+  image GUID by type and bank index"
 
-diff --git a/test/dm/fwu_mdata.c b/test/dm/fwu_mdata.c
-index cfe543d8a236..8624ccf61f79 100644
---- a/test/dm/fwu_mdata.c
-+++ b/test/dm/fwu_mdata.c
-@@ -143,3 +143,51 @@ static int dm_test_fwu_mdata_write(struct unit_test_state *uts)
- 	return 0;
+Changes in v4:
+- Add patch 7/8 test: dm: fwu_mdata: add test for fwu_mdata_get_image_guid
+
+Changes in v3:
+- Wrap lines exceeding 80 columns in test/cmd/part.c file.
+- Combine run_command() and ut_asserteq() -> ut_asserteq(1, run_command(
+- Add kerneldoc comment for fwu_mdata_get_image_guid() above its declaration
+  in fwu.h.
+- Add log_warning() messages to fwu_platform_hook() to catch inconsistent
+  FWU metadata (boot GUID found but root GUID missing or viceversa), as
+  suggested by Simon Glass.
+- Add Reviewed-by tag of Simon Glass.
+
+Changes in v2:
+- Add links to the XBOOTLDR specification in the commit message of patch
+   1/7 lib: uuid: add partition type GUID for extended bootloader.
+- Update help for 'part start', 'part size' to mention UUID.
+- Add kerneldoc comment for fwu_mdata_get_image_guid().
+- Pass efi_guid_t by pointer in fwu_mdata_get_image_guid().
+- Add patches:
+   5/7 test: cmd: part: add UUID lookup tests
+   3/7 test: cmd: add unit tests for part command
+   2/7 test: dm: part: add test for part_get_info_by_uuid
+- Pass efi_guid_t by pointer in fwu_mdata_get_image_guid() calls.
+
+ board/st/stm32mp2/stm32mp2.c          | 32 +++++++++++++++++++++++++++
+ include/configs/stm32mp25_st_common.h | 15 +++++++++++++
+ 2 files changed, 47 insertions(+)
+
+diff --git a/board/st/stm32mp2/stm32mp2.c b/board/st/stm32mp2/stm32mp2.c
+index 43bc583378e6..5cbbbc322a3a 100644
+--- a/board/st/stm32mp2/stm32mp2.c
++++ b/board/st/stm32mp2/stm32mp2.c
+@@ -208,4 +208,36 @@ void fwu_plat_get_bootidx(uint *boot_idx)
+ 	*boot_idx = (readl(TAMP_FWU_BOOT_INFO_REG) >>
+ 		    TAMP_FWU_BOOT_IDX_OFFSET) & TAMP_FWU_BOOT_IDX_MASK;
  }
- DM_TEST(dm_test_fwu_mdata_write, UTF_SCAN_FDT);
 +
-+static int dm_test_fwu_mdata_get_image_guid(struct unit_test_state *uts)
++int fwu_platform_hook(struct udevice *dev, struct fwu_data *data)
 +{
-+	efi_guid_t image_type_guid =
-+		EFI_GUID(0x09d7cf52, 0x0720, 0x4710, \
-+			 0x91, 0xd1, 0x08, 0x46, 0x9b, 0x7f, 0xe9, 0xc8);
-+	efi_guid_t bank_0_image_guid =
-+		EFI_GUID(0x10057a86, 0xdaf1, 0x4f93, \
-+			 0xba, 0x7f, 0xb1, 0x95, 0xf7, 0xfa, 0x41, 0x70);
-+	efi_guid_t bank_1_image_guid =
-+		EFI_GUID(0xdb62ed3e, 0x6237, 0x4fb4, \
-+			 0x80, 0xc4, 0x1b, 0x74, 0xd8, 0x46, 0xa8, 0xe7);
-+	efi_guid_t wrong_image_type_guid =
-+		EFI_GUID(0x12345678, 0x1302, 0x133f, \
-+			 0x18, 0x0a, 0x14, 0x05, 0x18, 0x05, 0x14, 0x0b);
-+	struct udevice *dev;
-+	efi_guid_t image_guid;
++	uint boot_idx;
++	efi_guid_t boot_uuid, root_uuid;
++	const efi_guid_t boot_type_guid = PARTITION_XBOOTLDR;
++	const efi_guid_t root_type_guid =
++		PARTITION_LINUX_FILE_SYSTEM_DATA_GUID;
++	char uuidbuf[UUID_STR_LEN + 1];
++	int retb, retr;
 +
-+	ut_assertok(setup_blk_device(uts));
-+	ut_assertok(populate_mmc_disk_image(uts));
-+	ut_assertok(write_mmc_blk_device(uts));
++	fwu_plat_get_bootidx(&boot_idx);
 +
-+	/*
-+	 * Trigger lib/fwu_updates/fwu.c fwu_boottime_checks()
-+	 * to populate g_dev global pointer in that library.
-+	 */
-+	ut_assertok(event_notify_null(EVT_POST_PREBOOT));
++	retb = fwu_mdata_get_image_guid(&boot_uuid, &boot_type_guid, boot_idx);
++	retr = fwu_mdata_get_image_guid(&root_uuid, &root_type_guid, boot_idx);
 +
-+	ut_assertok(uclass_first_device_err(UCLASS_FWU_MDATA, &dev));
++	if (!retb && !retr) {
++		uuid_bin_to_str(boot_uuid.b, uuidbuf, UUID_STR_FORMAT_GUID);
++		env_set("boot_partuuid", uuidbuf);
 +
-+	ut_assertok(fwu_init());
-+
-+	ut_assertok(fwu_mdata_get_image_guid(&image_guid, &image_type_guid, 0));
-+	ut_assertok(guidcmp(&image_guid, &bank_0_image_guid));
-+
-+	ut_assertok(fwu_mdata_get_image_guid(&image_guid, &image_type_guid, 1));
-+	ut_assertok(guidcmp(&image_guid, &bank_1_image_guid));
-+
-+	ut_asserteq(-EINVAL, fwu_mdata_get_image_guid(&image_guid,
-+						      &image_type_guid, 2));
-+
-+	ut_asserteq(-ENOENT, fwu_mdata_get_image_guid(&image_guid,
-+						      &wrong_image_type_guid,
-+						      0));
++		uuid_bin_to_str(root_uuid.b, uuidbuf, UUID_STR_FORMAT_GUID);
++		env_set("root_partuuid", uuidbuf);
++	} else if (!retb && retr) {
++		log_warning("%s: found boot GUID but missing root GUID (%d)\n",
++			    __func__, retr);
++	} else if (!retr && retb) {
++		log_warning("%s: found root GUID but missing boot GUID (%d)\n",
++			    __func__, retb);
++	}
 +
 +	return 0;
 +}
-+DM_TEST(dm_test_fwu_mdata_get_image_guid, UTF_SCAN_FDT);
+ #endif /* CONFIG_FWU_MULTI_BANK_UPDATE */
+diff --git a/include/configs/stm32mp25_st_common.h b/include/configs/stm32mp25_st_common.h
+index cb679eb1be22..0b0267ae99b0 100644
+--- a/include/configs/stm32mp25_st_common.h
++++ b/include/configs/stm32mp25_st_common.h
+@@ -8,7 +8,22 @@
+ #ifndef __CONFIG_STM32MP25_ST_COMMON_H__
+ #define __CONFIG_STM32MP25_ST_COMMON_H__
+ 
++#ifdef CONFIG_FWU_MULTI_BANK_UPDATE
++#define SCAN_DEV_FOR_BOOT_PARTS \
++	"setenv devplist; " \
++	"env exists boot_partuuid && " \
++		"part number ${devtype} ${devnum} ${boot_partuuid} devplist; " \
++	"env exists devplist || " \
++		"part list ${devtype} ${devnum} -bootable devplist; "
++
++#define ST_STM32MP25_FWU_ENV \
++	"altbootcmd=${bootcmd}\0"
++#else
++#define ST_STM32MP25_FWU_ENV
++#endif
++
+ #define STM32MP_BOARD_EXTRA_ENV \
++	ST_STM32MP25_FWU_ENV \
+ 	"usb_pgood_delay=2000\0" \
+ 	"console=ttySTM0\0"
+ 
 -- 
 2.43.0
 
