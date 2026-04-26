@@ -4,85 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8493AFF885D
-	for <u-boot@archiver.kernel.org>; Sun, 26 Apr 2026 15:36:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA565FF885E
+	for <u-boot@archiver.kernel.org>; Sun, 26 Apr 2026 15:36:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A8AC484120;
-	Sun, 26 Apr 2026 17:36:28 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E07DC839D9;
+	Sun, 26 Apr 2026 17:36:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="frObQ8d9";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="dfCEcckP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C19A784105; Sun, 26 Apr 2026 17:36:26 +0200 (CEST)
-Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
- [IPv6:2a00:1450:4864:20::331])
+ id 5E25F84105; Sun, 26 Apr 2026 17:36:28 +0200 (CEST)
+Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
+ [IPv6:2a00:1450:4864:20::329])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D985D80087
- for <u-boot@lists.denx.de>; Sun, 26 Apr 2026 17:36:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4B8F484099
+ for <u-boot@lists.denx.de>; Sun, 26 Apr 2026 17:36:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=dario.binacchi@amarulasolutions.com
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-488b150559bso74772375e9.1
- for <u-boot@lists.denx.de>; Sun, 26 Apr 2026 08:36:24 -0700 (PDT)
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-4891c00e7aeso67451055e9.2
+ for <u-boot@lists.denx.de>; Sun, 26 Apr 2026 08:36:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1777217784; x=1777822584;
+ d=amarulasolutions.com; s=google; t=1777217785; x=1777822585;
  darn=lists.denx.de; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=j7kw4CvLJkX2EjGaympe8ZZB0RtPYp/BO11dE+j3/IY=;
- b=frObQ8d9j4TK96wC8OX2sX7objpRCh9lzZ9RA4IaeUauKhusg4zaEgTlXX+h0umhiT
- P4lMflaT+4oPr5Rlm0QgC9iyMaQuV+naJOMWCREADIMajIGIo1jFXpWricX3l08BUPIO
- ohO6J/0FLkbCs4oYDydTvnwTOWpm+tiFQ9H8s=
+ bh=hw9GLngKjgFma/Ds2VDGbYsokmFxr4udRFfMO00ab54=;
+ b=dfCEcckPCUslanF2mi73jPQ7/52ROHQsotSdBIrrJAPBF6H7/7GXTVi+dG2ZDSoRp9
+ gcrroBoUp8UGRva98eDneUi0BEBxz1bO0Fpzn4RylUsFbbD0tfEV6PV1y1QD8LzqGF69
+ r/pD+JHBuqdd8lephMXu/gqsEFyrp2ELiTpXk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777217784; x=1777822584;
+ d=1e100.net; s=20251104; t=1777217785; x=1777822585;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=j7kw4CvLJkX2EjGaympe8ZZB0RtPYp/BO11dE+j3/IY=;
- b=UAR/5dditq7dGyhUhWhLxtqBlOcXRXVjS0xaelwlffwmCRLxNqRtZUcex0CpqFf1Oa
- LZRg4ttSKCwEymCfAd8Fefv1InEwrGNAB2neXoUyzn568cKKmk3NJ7SxsfgMypbYqG5u
- Vuf3YVnPKX+SR4Hog8XQTEEh5NSgfGDkYm+XnSQblYgSSdG6Hs4NUWwwopv94KaaG5Q5
- S8PgR5fdx1tuILe5/Nvc8eynlX2LmxXBtd1lsAjFcVGy81DbJhsLqelBRW4z4rvsS0/9
- KuJdK3MzjUSYsPZLjLIzu/79TXKy2K4NKek75EwN8v4Ryc4JlzkPJr0FFv1lPHl+Feyv
- JZfg==
-X-Gm-Message-State: AOJu0YyfAQ4CYmW2RXJejuhKOTTipyLLJ+Ogy2RQxNzkkGcl8uqScb+G
- RVea++s5uPKQexi5R5QUTZU17au8LmMzxK/7hLqMMP/h/hqUrqvnunUuTh1WtSWF5+rgLhKTDhr
- 7rjcG
-X-Gm-Gg: AeBDietzobvDZPmuxUluZPzK7ke+OtBXQpy0xP2AazbGs51RbNnW1hgb2BpQxFaNQR3
- X5Ed1q1bQ01DmsSGjShfwn5MqcHEUaWS0pkPz80RwyM4zaGMfrzHKNr51oDNg2BiCT7ZGBSPjks
- RhSs5k5+2+MFP4hfLPIDp3qxB9C6f7acKmFiQZAZhn63Tf5cMZuKVB1LzhJsxSva6V3hBrKVq9V
- cgcqnfzmFXoLUv+anQ+xW2Szpt3w4VpBg97RjrLLxsfA3z7sVG35JasaB8fcxb5Q2DtdGpcEkVB
- TO2qjKY+V++oDUGdtlKuwh4fangOW6sqSw6AXYfNAC6kA0SWB0TH+jYirmq4RMIhSNAe/q9z+ZW
- eIEUQuJcuFjt9PEcHXQGBL6Kpzn+oFaTwr2S9zbHDucpsOW5a8nObWfytvUj+X2zqzRpC8oUR+S
- qVq3CpYu0gwWcDIIu11m78I0xzvo+QzGUCYCguP5AO3LKow/wS5MJ9gf/cfCZsqYbnZuCWO9dDj
- 1jjIc5/dWh95S4SZ0rUDgXO2/SwXZ0rfoJnGmfcfEMPzBOy77q5aSkUDN3thTjZORmtZoVBGOmp
- GJX/RwzWCwRRzx64Uj3EPMJjPdpSkQ==
-X-Received: by 2002:a05:600c:a305:b0:48a:53cb:85f4 with SMTP id
- 5b1f17b1804b1-48a53cb8734mr287837415e9.24.1777217783633; 
- Sun, 26 Apr 2026 08:36:23 -0700 (PDT)
+ bh=hw9GLngKjgFma/Ds2VDGbYsokmFxr4udRFfMO00ab54=;
+ b=i+wo4Ut0dekMkKFYxE1m97TDexqdMqb8QVYs09EnhIgzs1IJhC0k7iIQBlKxf6BKxQ
+ hMHBMeJkghSDVrSdnioB6/toLucNS9oDem92l4vfOiOYLubhkaHezYBQfFIpOtmtobJV
+ 2XvN7x8s2PZ6+pKRDYjhrMyJNpdjlJ04mUYUcNROE+l3qfG5adrVwwDVwfHhtMft1F5g
+ t21xOSTbFgP3++0EPWUJKPgkhFhF8l/NiU30ITyCW2iWHIIsTULXCHksr+uyyUCQwRC7
+ S/BaveoEhfJs4dpLXOMUDRm/TDyGzxCwNwHeAUG5bY5d+XA1uOwRx4VKXudns2ijqbMn
+ izQg==
+X-Gm-Message-State: AOJu0YwcSa4vh8CbQ0sKIuAwomjB0uSyVUCvRiOsZOJnw92/FP7JJQ8v
+ YKkMaYAKf/Sz1BDQQvDm9EfWMnRHJBiZTDdF+6FkR8TnYFpzs96WqxScGozHC8taON6Googj+NY
+ 37AO8
+X-Gm-Gg: AeBDieuAr4KUjTXY6w6VYUkLHyErRu2jTTDZ7nV5DbmEoo7BmN0mh/tP2i5SDbVpWE/
+ cVoOT7hGFlVWdVH8rJ8hPcsZvXwdIdZzz36zGaQHndX6jTsWF175pY38VZFAtR7+9UxVq/FyudT
+ RtFxx+5ziiaqE7wgJkJt35ZMXj/qFcsw+ftdRVfQZBDFQFKDFDj9/xocD6rvDnAcxQqoSWpVjz3
+ 3eveTpFfqBZ9nVvMwqVRnhZBveUIE/nrcm2yiL8CL2no5Ui42hZY7xDWGkpNiMHYg5SzqPaxjDl
+ Jm0LRHHVpaH2sEoPnc6rNUpCHQbJ74HQ9kx0n4XQRlGhKIqyzwCeuNFSmV697PDQ0ZWirPiVwv1
+ F0eJHovIgaRzq+1B7+68MJaS8mhEQw2eoO5Q9s84Dqjot6DkC0d9P3J3PiK5BMwc3/0VemB5jWl
+ wsUKWFxq23N7LEpcQ7okSHvNuJq2NUD/77+PNK04aoJJ5b2lKA/JfZd+h2Wej8+x1saCkMjoS7x
+ Vivbyt/jWXR+elCVPpml0p3B+IB4s2TIKnnQfyawQVj5FfqF+FD6oZdxUXJg/vO+Jk79NT2PypJ
+ KEgGVIUGx0OUvaaXsEK8omTZ0t6ifQ==
+X-Received: by 2002:a05:600c:4707:b0:488:bfc3:efc with SMTP id
+ 5b1f17b1804b1-488fb6e8eb5mr550713775e9.0.1777217785396; 
+ Sun, 26 Apr 2026 08:36:25 -0700 (PDT)
 Received: from dario-ThinkPad-P14s-Gen-5.amarulasolutions.com
  (host-82-56-22-134.retail.telecomitalia.it. [82.56.22.134])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-48a5499b0edsm388438845e9.14.2026.04.26.08.36.22
+ 5b1f17b1804b1-48a5499b0edsm388438845e9.14.2026.04.26.08.36.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 26 Apr 2026 08:36:23 -0700 (PDT)
+ Sun, 26 Apr 2026 08:36:24 -0700 (PDT)
 From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
 To: u-boot@lists.denx.de
 Cc: linux-amarula@amarulasolutions.com,
  Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Simon Glass <sjg@chromium.org>,
- Jerome Forissier <jerome.forissier@arm.com>,
+ Dinesh Maniyam <dinesh.maniyam@altera.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH v5 2/8] test: dm: part: add test for part_get_info_by_uuid
-Date: Sun, 26 Apr 2026 17:35:27 +0200
-Message-ID: <20260426153617.2039651-3-dario.binacchi@amarulasolutions.com>
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v5 3/8] test: cmd: add unit tests for part command
+Date: Sun, 26 Apr 2026 17:35:28 +0200
+Message-ID: <20260426153617.2039651-4-dario.binacchi@amarulasolutions.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260426153617.2039651-1-dario.binacchi@amarulasolutions.com>
 References: <20260426153617.2039651-1-dario.binacchi@amarulasolutions.com>
@@ -104,82 +105,217 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a new unit test for the part_get_info_by_uuid() function.
+Add unit tests for the 'part' command, specifically for the 'number',
+'start', and 'size' subcommands.
+
+These tests establish a baseline for the current partition lookup
+functionality by name. This foundation will be used by subsequent
+patches to extend the command, ensuring consistent behavior as new
+features are introduced.
 
 Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
-Reviewed-by: Simon Glass <sjg@chromium.org>
 
 ---
 
-(no changes since v3)
+(no changes since v4)
+
+Changes in v4:
+- Place the part command tests in the cmd suite rather than the dm
+  suite.
+- Order the include files according the U-Boot coding style.
 
 Changes in v3:
-- Add Reviewed-by tag of Simon Glass
+- Wrap the lines exceeding 80 columns
+- Combine run_command() and ut_asserteq() -> ut_asserteq(1, run_command(
 
- test/dm/part.c | 53 ++++++++++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 53 insertions(+)
+ test/cmd/Makefile |   1 +
+ test/cmd/part.c   | 165 ++++++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 166 insertions(+)
+ create mode 100644 test/cmd/part.c
 
-diff --git a/test/dm/part.c b/test/dm/part.c
-index caae23bd4aad..ad37d7f406f4 100644
---- a/test/dm/part.c
-+++ b/test/dm/part.c
-@@ -195,3 +195,56 @@ static int dm_test_part_get_info_by_type(struct unit_test_state *uts)
- 	return 0;
- }
- DM_TEST(dm_test_part_get_info_by_type, UTF_SCAN_PDATA | UTF_SCAN_FDT);
+diff --git a/test/cmd/Makefile b/test/cmd/Makefile
+index 8c9f112782d0..41fe21a4541e 100644
+--- a/test/cmd/Makefile
++++ b/test/cmd/Makefile
+@@ -26,6 +26,7 @@ obj-$(CONFIG_CMD_LOADM) += loadm.o
+ obj-$(CONFIG_CMD_MEMINFO) += meminfo.o
+ obj-$(CONFIG_CMD_MEMORY) += mem_copy.o
+ obj-$(CONFIG_CMD_MEM_SEARCH) += mem_search.o
++obj-$(CONFIG_CMD_PART) += part.o
+ ifdef CONFIG_CMD_PCI
+ obj-$(CONFIG_CMD_PCI_MPS) += pci_mps.o
+ endif
+diff --git a/test/cmd/part.c b/test/cmd/part.c
+new file mode 100644
+index 000000000000..5751dd315dd8
+--- /dev/null
++++ b/test/cmd/part.c
+@@ -0,0 +1,165 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Test for part command
++ *
++ * Copyright (C) 2026 Amarula Solutions
++ * Written by Dario Binacchi <dario.binacchi@amarulasolutions.com>
++ */
 +
-+static int dm_test_part_get_info_by_uuid(struct unit_test_state *uts)
++#include <command.h>
++#include <dm.h>
++#include <env.h>
++#include <part.h>
++#include <vsprintf.h>
++#include <dm/test.h>
++#include <test/cmd.h>
++#include <test/test.h>
++#include <test/ut.h>
++
++static struct disk_partition gpt_parts[] = {
++	{
++		.start = 48,
++		.size = 1,
++		.name = "test1",
++		.uuid = "c5bce7a2-03f0-4d03-9048-01ff23b9d527",
++	},
++	{
++		.start = 49,
++		.size = 2,
++		.name = "test2",
++		.uuid = "9df346e8-2c53-4cd8-b9ac-3af83f9a9b74",
++	},
++};
++
++static char disk_guid[UUID_STR_LEN + 1] =
++	"8d60b397-1bb6-4d33-80ee-b1587d24c2f8";
++
++static int setup_gpt_partitions(struct unit_test_state *uts,
++				unsigned int mmc_dev_num)
 +{
-+	struct disk_partition parts[] = {
-+		{
-+			.start = 48,
-+			.size = 1,
-+			.name = "test1",
-+			.uuid = "c5bce7a2-03f0-4d03-9048-01ff23b9d527",
-+		},
-+		{
-+			.start = 49,
-+			.size = 1,
-+			.name = "test2",
-+			.uuid = "9df346e8-2c53-4cd8-b9ac-3af83f9a9b74",
-+		},
-+	};
-+	char disk_guid[UUID_STR_LEN + 1] =
-+		"8d60b397-1bb6-4d33-80ee-b1587d24c2f8";
 +	struct blk_desc *mmc_dev_desc;
-+	struct disk_partition info;
-+	int part, i;
++	char dev_str[10];
++	int i;
 +
-+	ut_asserteq(2, blk_get_device_by_str("mmc", "2", &mmc_dev_desc));
++	snprintf(dev_str, sizeof(dev_str), "%u", mmc_dev_num);
++
++	ut_asserteq(mmc_dev_num, blk_get_device_by_str("mmc", dev_str,
++						       &mmc_dev_desc));
 +
 +	if (CONFIG_IS_ENABLED(RANDOM_UUID)) {
-+		for (i = 0; i < ARRAY_SIZE(parts); i++)
-+			gen_rand_uuid_str(parts[i].uuid, UUID_STR_FORMAT_STD);
++		for (i = 0; i < ARRAY_SIZE(gpt_parts); i++)
++			gen_rand_uuid_str(gpt_parts[i].uuid,
++					  UUID_STR_FORMAT_STD);
 +
 +		gen_rand_uuid_str(disk_guid, UUID_STR_FORMAT_STD);
 +	}
 +
-+	ut_assertok(gpt_restore(mmc_dev_desc, disk_guid, parts,
-+				ARRAY_SIZE(parts)));
++	ut_assertok(gpt_restore(mmc_dev_desc, disk_guid, gpt_parts,
++				ARRAY_SIZE(gpt_parts)));
++	return 0;
++}
 +
-+	for (i = 0; i < ARRAY_SIZE(parts); i++) {
-+		part = part_get_info_by_uuid(mmc_dev_desc, parts[i].uuid,
-+					     &info);
++static int cmd_test_part_number(struct unit_test_state *uts)
++{
++	unsigned int mmc_dev_num = 2;
++	char expected[10];
++	int i;
 +
-+		ut_asserteq(i + 1, part);
-+		ut_asserteq_str(parts[i].name, info.name);
-+		ut_asserteq(parts[i].start, info.start);
-+		ut_asserteq(parts[i].size, info.size);
++	ut_assertok(setup_gpt_partitions(uts, mmc_dev_num));
++
++	for (i = 0; i < ARRAY_SIZE(gpt_parts); i++) {
++		env_set("partnum", NULL);
++		ut_assertok(run_commandf("part number mmc %u %s partnum",
++					 mmc_dev_num, gpt_parts[i].name));
++		snprintf(expected, sizeof(expected), "0x%x", i + 1);
++		ut_asserteq_str(expected, env_get("partnum"));
 +	}
 +
-+	part = part_get_info_by_uuid(mmc_dev_desc,
-+				     "00000000-0000-0000-0000-000000000000",
-+				     &info);
-+	ut_assert(part < 0);
++	env_set("partnum", NULL);
++	ut_asserteq(1, run_commandf("part number mmc %u bogus partnum",
++				    mmc_dev_num));
++	ut_assertnull(env_get("partnum"));
 +
 +	return 0;
 +}
-+DM_TEST(dm_test_part_get_info_by_uuid, UTF_SCAN_PDATA | UTF_SCAN_FDT);
++CMD_TEST(cmd_test_part_number, UTF_CONSOLE);
++
++static int cmd_test_part_start(struct unit_test_state *uts)
++{
++	unsigned int mmc_dev_num = 2;
++	char expected[32];
++	int i;
++
++	ut_assertok(setup_gpt_partitions(uts, mmc_dev_num));
++
++	for (i = 0; i < ARRAY_SIZE(gpt_parts); i++) {
++		env_set("partstart", NULL);
++		ut_assertok(run_commandf("part start mmc %u %d partstart",
++					 mmc_dev_num, i + 1));
++		snprintf(expected, sizeof(expected), "%lx",
++			 (unsigned long)gpt_parts[i].start);
++		ut_asserteq_str(expected, env_get("partstart"));
++	}
++
++	env_set("partstart", NULL);
++	ut_asserteq(1, run_commandf("part start mmc %u 3 partstart",
++				    mmc_dev_num));
++	ut_assertnull(env_get("partstart"));
++
++	for (i = 0; i < ARRAY_SIZE(gpt_parts); i++) {
++		env_set("partstart", NULL);
++		ut_assertok(run_commandf("part start mmc %u %s partstart",
++					 mmc_dev_num, gpt_parts[i].name));
++		snprintf(expected, sizeof(expected), "%lx",
++			 (unsigned long)gpt_parts[i].start);
++		ut_asserteq_str(expected, env_get("partstart"));
++	}
++
++	env_set("partstart", NULL);
++	ut_asserteq(1, run_commandf("part start mmc %u bogus partstart",
++				    mmc_dev_num));
++	ut_assertnull(env_get("partstart"));
++
++	return 0;
++}
++CMD_TEST(cmd_test_part_start, UTF_CONSOLE);
++
++static int cmd_test_part_size(struct unit_test_state *uts)
++{
++	unsigned int mmc_dev_num = 2;
++	char expected[32];
++	int i;
++
++	ut_assertok(setup_gpt_partitions(uts, mmc_dev_num));
++
++	for (i = 0; i < ARRAY_SIZE(gpt_parts); i++) {
++		env_set("partsize", NULL);
++		ut_assertok(run_commandf("part size mmc %u %d partsize",
++					 mmc_dev_num, i + 1));
++		snprintf(expected, sizeof(expected), "%lx",
++			 (unsigned long)gpt_parts[i].size);
++		ut_asserteq_str(expected, env_get("partsize"));
++	}
++
++	env_set("partsize", NULL);
++	ut_asserteq(1, run_commandf("part size mmc %u 3 partsize",
++				    mmc_dev_num));
++	ut_assertnull(env_get("partsize"));
++
++	for (i = 0; i < ARRAY_SIZE(gpt_parts); i++) {
++		env_set("partsize", NULL);
++		ut_assertok(run_commandf("part size mmc %u %s partsize",
++					 mmc_dev_num, gpt_parts[i].name));
++		snprintf(expected, sizeof(expected), "%lx",
++			 (unsigned long)gpt_parts[i].size);
++		ut_asserteq_str(expected, env_get("partsize"));
++	}
++
++	env_set("partsize", NULL);
++	ut_asserteq(1, run_commandf("part size mmc %u bogus partsize",
++				    mmc_dev_num));
++	ut_assertnull(env_get("partsize"));
++
++	return 0;
++}
++CMD_TEST(cmd_test_part_size, UTF_CONSOLE);
 -- 
 2.43.0
 
