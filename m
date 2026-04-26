@@ -4,88 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E28FFF885E
-	for <u-boot@archiver.kernel.org>; Sun, 26 Apr 2026 15:48:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B806FFF885E
+	for <u-boot@archiver.kernel.org>; Sun, 26 Apr 2026 15:48:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 918A8840ED;
+	by phobos.denx.de (Postfix) with ESMTP id CAAED84372;
 	Sun, 26 Apr 2026 17:47:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="QsuPKd3g";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="OX9huxM6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 45D5784348; Sun, 26 Apr 2026 17:47:40 +0200 (CEST)
-Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com
- [IPv6:2a00:1450:4864:20::432])
+ id 6F51B84309; Sun, 26 Apr 2026 17:47:41 +0200 (CEST)
+Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
+ [IPv6:2a00:1450:4864:20::42f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 445AB83FDB
- for <u-boot@lists.denx.de>; Sun, 26 Apr 2026 17:47:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 810738407E
+ for <u-boot@lists.denx.de>; Sun, 26 Apr 2026 17:47:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=dario.binacchi@amarulasolutions.com
-Received: by mail-wr1-x432.google.com with SMTP id
- ffacd0b85a97d-43d73352cf2so7840625f8f.1
- for <u-boot@lists.denx.de>; Sun, 26 Apr 2026 08:47:38 -0700 (PDT)
+Received: by mail-wr1-x42f.google.com with SMTP id
+ ffacd0b85a97d-43d03db7f87so6396458f8f.3
+ for <u-boot@lists.denx.de>; Sun, 26 Apr 2026 08:47:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1777218457; x=1777823257;
+ d=amarulasolutions.com; s=google; t=1777218459; x=1777823259;
  darn=lists.denx.de; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=5GSYQhGo2SyIVxnn6Fpy6y7erjo+T2Ff+eqsbRqEQV0=;
- b=QsuPKd3gCkgkW6ll3BIKJL8ZZXGfe0CPX+QkRfEJXvd+UJcziHIwZfJn+nPcANpOst
- AMQhZkrhzoIHGJe2fszoqTsVo9Z5RzyNLPADLJdtRV99XlXluSaw6r+6FnhBohW+mW+b
- 1W96VMavm/RW+W6YjdxU8REQifRLA0ZnHrRfw=
+ bh=KdenFksAhxmVcxyTgy6MvO1TEY6LsbInC1KB7MV5fFk=;
+ b=OX9huxM6TwXiZ9qOS4gW1XBOaTfqA8RTFI1k8ASIysdprS8j6PKWDDgYNnmaBXtPVG
+ 25vSD9Qi8nAXQHKR/9daWf581Gv9YtOdbCGY0vg6rr/tTsOJ3vVk4EjAQeS8dWAFvM3Q
+ KZlsgd7IzaFNrDbOUM0aaxgpLwXJ1a5DDV/JY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777218457; x=1777823257;
+ d=1e100.net; s=20251104; t=1777218459; x=1777823259;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=5GSYQhGo2SyIVxnn6Fpy6y7erjo+T2Ff+eqsbRqEQV0=;
- b=XA4UU5/rrQCOWTmLDluM9Ybdxe/hzzH6VgvYLmHJR79LPG5st3FjrLcs0fD2DQrUG2
- iw+Sw+OD3tTI0dotfXqoKiYYJegs+UA5ipAs8Ix8eW83wDtCBM/ht4eG5OHZ4D0WiEmz
- xlFM7k/rHBLBvrdCpH8WIq+Lq8dxNgq/dQ74imnWzhbS/QBIEJCPOCXE8QpZxoS2gPQ+
- 6hFujSH7AxEZUZVcbmsRae52VTPVBQ2RuT44A5Ke3rGCiliawjb0vGcmtV5SqbFBHwl7
- EhdP41GfYX9dYuXCG9jfC99rQmEmAi9RXVIqqqbeQoqpZamG0qVaj8nf6l4bffNIr8B/
- 4TzA==
-X-Gm-Message-State: AOJu0Ywd7AyYaOho0Ki2K9W/VjGOcRAcplcAWYYwgWbEI3oFytJm0kxd
- B7rHh+VnLPYfhc/nkREjtiTf1NO8a8fvMQqGUODm/mdvw3Sl0YUw2IhJf5BbfUElKziCc1PZZSx
- bK1Yj
-X-Gm-Gg: AeBDieuxMG976WzsUq08s/GtH4J3S7qp2/EkLABh7OoWEcmrB67qkPGgl5J3sd5+Obd
- 2Dit6rp8IA4Txp7kcmQ17fJo5qknOWrifLCJi0fM+KPafePCyBQHsU8o+E/taGb0DjOqkGqHxtx
- g8ibV0p1bLlQe9YN8LRdkGd6IIiBEk27fuOiz5bGKJ/CeGV2HPh75BqR8qUXHqRp8AtuvWGEieJ
- kSIp0JTcpVpEAb4MW7da1e4bLoCdomY5Kzs+fH3ExuR0yuX58sAGocHlchuI9N/HZNt4TqdvfUg
- fP2IJZZJYiPy9trOugewE2jYg450xaA17FpCjeVLZrkNeuuzB+WdP+YJJFEWfZlaJQT7Fs3BPdP
- 4PKnRIzsOFRTBDv6loWpQGpkoQ5sUWo8kc3Sm0D0ZxGm3mf8zLKdVCw9TggRRBR9BF+A4SfuimN
- YjEsi6jdZtMdnjtTpdp4ET0ZY5+xJbWMb2xO82gQlBRzgs01hi+tquRdbnpUt7YlfkJ6J3FVGDW
- d4fitHhHZ3pJTXUAXaTpZNpsol0VUzUitruXJCW8hAtO0fFsz2CcZrXP57Nxj7GRgIAD407XSP5
- CM2dmKBD4UdO74enNgYG4TtgSDtrCA==
-X-Received: by 2002:a05:6000:4283:b0:43d:73ff:fd59 with SMTP id
- ffacd0b85a97d-43fe3db9bc9mr60196646f8f.10.1777218457451; 
- Sun, 26 Apr 2026 08:47:37 -0700 (PDT)
+ bh=KdenFksAhxmVcxyTgy6MvO1TEY6LsbInC1KB7MV5fFk=;
+ b=KjIlGiSvQNcoEkXk1yk4TMJbESV1j1dJlXaUP1cKq4pjUJj7lkNvigrDb1EKYPIlyr
+ S6lnW6nb7GtyyPuz0juslk2N++/lhFpketAFsulEfIlCD00JirjFpi7L3eY3Sm0Ugar1
+ iWecAClngo3y4SQykUbTW97pCisQRYFGvP0LPbBa4Jw2vGbUsy5+7D7RNMYAz3iAJWCz
+ FcsYCngzteKiMX7cY1dqZ6fekjrZFyF2URYu2tBNYNuzG3omXFYybCEsVV0YslI6qk2D
+ A0x1AfuUhtTema+jsvcdzxM7qXGKNZnSYYzPFTsaMzysCRaBJGnFMguZt2mCm8VIR5wN
+ tfqQ==
+X-Gm-Message-State: AOJu0Yzh2XpMoZcndp18pdI+3+WK5IjdPBLEPn0bc1qehepwH+Y08hPp
+ tbkkIpR3YSuzkwp8CojE7tj/oeHp9ZNn3RTKdhiU0kv9KiaEDcMtGPhAYVWpGb9boAHOiB5wfZi
+ eYxPD
+X-Gm-Gg: AeBDietLWYCxCUi+qhd5+zQpFSFR+B8EfZrmRqHC6JRakt7vEgDyjrYUWhAt+K5hi74
+ m7eBOiIIH73yX+0Rmr7W7+usZEX3hZolwQ38nzbQnegt8SJxVl8vFxmKarPeZzMtEVqNdEz3xaK
+ 9cqpuh8zcEKlKDEw3oIOBcfp+pgPlhXSduSfGPMCSv7sTlqi0rEXgK07hJGC5b+E6GBzT6eme/O
+ oHat5kF5/iYlhsezVfx79eth7J6s0cmKA5MMH9uqyNzoLOjqxmIigLWfwwT/fwr7Qw86apHFB3s
+ fXHCWAiopCYG7+Cmw8Z5oPMVZDusScJBoRTb4WxgVpM/1PzRYKkSu7eC8cBjifb+QW4JPj/C8JS
+ KwoFV4vdD4SEzGTh42NWpFZK9/KoskIPGAqJ1oDYOADfoFFDxEiPq0J/AntDp5Xqd6f7FR4/xaT
+ Wya0VuKW9tIwRoG9UJEFWESY+RPi1JCO1UVaJ+XQBWOmFDoZBHKwQb3tZ8vSsOdj80LIWJn4BBk
+ 5V6pVYecBnbj8kBAcZeNPx/teIFLCuYYZtc76n8JqHTDIZndSEvERDVRQat2os2iGROLPwEes3g
+ CKytBIVFeEvvzCZiTjToH7EMdThxgA==
+X-Received: by 2002:a05:6000:1ac9:b0:43d:6787:9934 with SMTP id
+ ffacd0b85a97d-43fe3db39b2mr58717997f8f.9.1777218458731; 
+ Sun, 26 Apr 2026 08:47:38 -0700 (PDT)
 Received: from dario-ThinkPad-P14s-Gen-5.amarulasolutions.com
  (host-82-56-22-134.retail.telecomitalia.it. [82.56.22.134])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-44123d23e0bsm34489985f8f.15.2026.04.26.08.47.36
+ ffacd0b85a97d-44123d23e0bsm34489985f8f.15.2026.04.26.08.47.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 26 Apr 2026 08:47:37 -0700 (PDT)
+ Sun, 26 Apr 2026 08:47:38 -0700 (PDT)
 From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
 To: u-boot@lists.denx.de
 Cc: linux-amarula@amarulasolutions.com,
  Dario Binacchi <dario.binacchi@amarulasolutions.com>,
  Simon Glass <sjg@chromium.org>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Kory Maincent <kory.maincent@bootlin.com>,
- Michal Simek <michal.simek@amd.com>,
- Padmarao Begari <padmarao.begari@amd.com>,
- Sughosh Ganu <sughosh.ganu@arm.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v7 6/8] fwu: add helper to get image GUID by type and bank
- index
-Date: Sun, 26 Apr 2026 17:46:59 +0200
-Message-ID: <20260426154724.2042569-7-dario.binacchi@amarulasolutions.com>
+ Michal Simek <michal.simek@amd.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v7 7/8] test: dm: fwu_mdata: add test for
+ fwu_mdata_get_image_guid
+Date: Sun, 26 Apr 2026 17:47:00 +0200
+Message-ID: <20260426154724.2042569-8-dario.binacchi@amarulasolutions.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260426154724.2042569-1-dario.binacchi@amarulasolutions.com>
 References: <20260426154724.2042569-1-dario.binacchi@amarulasolutions.com>
@@ -107,105 +104,76 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Introduce fwu_mdata_get_image_guid() to retrieve a specific image GUID
-from the FWU metadata based on the bank index and image type GUID.
-
-This allows identifying the correct partition in multi-bank (A/B)
-scenarios, ensuring the correct image is targeted depending on the
-current bank.
+Add a new unit test for the fwu_mdata_get_image_guid() function.
 
 Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
 Reviewed-by: Simon Glass <sjg@chromium.org>
-Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 
 ---
 
-(no changes since v5)
+Changes in v7:
+- Add Reviewed-by of Simon Glass for patc 7/8 of "test: dm:
+fwu_mdata: add test for fwu_mdata_get_image_guid"
 
-Changes in v5:
-- Add Acked-by of Ilias Apalodimas (added to v3)
+ test/dm/fwu_mdata.c | 48 +++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 48 insertions(+)
 
-Changes in v4:
-- Add Reviewed-by of Simon Glass
-
-Changes in v3:
-- Add kerneldoc comment for fwu_mdata_get_image_guid() above its
-  declaration in fwu.h.
-
-Changes in v2:
-- Add kerneldoc comment for fwu_mdata_get_image_guid().
-- Pass efi_guid_t by pointer for consistency.
-
- include/fwu.h         | 11 +++++++++++
- lib/fwu_updates/fwu.c | 33 +++++++++++++++++++++++++++++++++
- 2 files changed, 44 insertions(+)
-
-diff --git a/include/fwu.h b/include/fwu.h
-index 9cee8fb085cb..68a51fb4296b 100644
---- a/include/fwu.h
-+++ b/include/fwu.h
-@@ -396,6 +396,17 @@ void fwu_populate_mdata_image_info(struct fwu_data *data);
-  */
- int fwu_get_mdata_size(uint32_t *mdata_size);
- 
-+/**
-+ * fwu_mdata_get_image_guid() - Get image GUID for a type and bank
-+ * @image_guid: Pointer to be filled with the found image GUID
-+ * @image_type_guid: Pointer to the image type GUID to search for
-+ * @bank_index: Index of the bank
-+ *
-+ * Return: 0 if OK, -ve on error
-+ */
-+int fwu_mdata_get_image_guid(efi_guid_t *image_guid,
-+			     const efi_guid_t *image_type_guid, u32 bank_index);
-+
- /**
-  * fwu_state_machine_updates() - Update FWU state of the platform
-  * @state: FWU bank state
-diff --git a/lib/fwu_updates/fwu.c b/lib/fwu_updates/fwu.c
-index e82600a29a40..2b11e5da061d 100644
---- a/lib/fwu_updates/fwu.c
-+++ b/lib/fwu_updates/fwu.c
-@@ -243,6 +243,39 @@ int fwu_sync_mdata(struct fwu_mdata *mdata, int part)
+diff --git a/test/dm/fwu_mdata.c b/test/dm/fwu_mdata.c
+index cfe543d8a236..8624ccf61f79 100644
+--- a/test/dm/fwu_mdata.c
++++ b/test/dm/fwu_mdata.c
+@@ -143,3 +143,51 @@ static int dm_test_fwu_mdata_write(struct unit_test_state *uts)
  	return 0;
  }
- 
-+/**
-+ * fwu_mdata_get_image_guid() - Get image GUID for a type and bank
-+ * @image_guid: Pointer to be filled with the found image GUID
-+ * @image_type_guid: Pointer to the image type GUID to search for
-+ * @bank_index: Index of the bank
-+ *
-+ * Return: 0 if OK, -ve on error
-+ */
-+int fwu_mdata_get_image_guid(efi_guid_t *image_guid,
-+			     const efi_guid_t *image_type_guid, u32 bank_index)
+ DM_TEST(dm_test_fwu_mdata_write, UTF_SCAN_FDT);
++
++static int dm_test_fwu_mdata_get_image_guid(struct unit_test_state *uts)
 +{
-+	struct fwu_data *data = &g_fwu_data;
-+	struct fwu_image_entry *image;
-+	int i;
++	efi_guid_t image_type_guid =
++		EFI_GUID(0x09d7cf52, 0x0720, 0x4710, \
++			 0x91, 0xd1, 0x08, 0x46, 0x9b, 0x7f, 0xe9, 0xc8);
++	efi_guid_t bank_0_image_guid =
++		EFI_GUID(0x10057a86, 0xdaf1, 0x4f93, \
++			 0xba, 0x7f, 0xb1, 0x95, 0xf7, 0xfa, 0x41, 0x70);
++	efi_guid_t bank_1_image_guid =
++		EFI_GUID(0xdb62ed3e, 0x6237, 0x4fb4, \
++			 0x80, 0xc4, 0x1b, 0x74, 0xd8, 0x46, 0xa8, 0xe7);
++	efi_guid_t wrong_image_type_guid =
++		EFI_GUID(0x12345678, 0x1302, 0x133f, \
++			 0x18, 0x0a, 0x14, 0x05, 0x18, 0x05, 0x14, 0x0b);
++	struct udevice *dev;
++	efi_guid_t image_guid;
 +
-+	if (bank_index >= data->num_banks)
-+		return -EINVAL;
++	ut_assertok(setup_blk_device(uts));
++	ut_assertok(populate_mmc_disk_image(uts));
++	ut_assertok(write_mmc_blk_device(uts));
 +
-+	for (i = 0; i < data->num_images; i++) {
-+		image = &data->fwu_images[i];
++	/*
++	 * Trigger lib/fwu_updates/fwu.c fwu_boottime_checks()
++	 * to populate g_dev global pointer in that library.
++	 */
++	ut_assertok(event_notify_null(EVT_POST_PREBOOT));
 +
-+		if (!guidcmp(image_type_guid, &image->image_type_guid)) {
-+			struct fwu_image_bank_info *bank;
++	ut_assertok(uclass_first_device_err(UCLASS_FWU_MDATA, &dev));
 +
-+			bank = &image->img_bank_info[bank_index];
-+			guidcpy(image_guid, &bank->image_guid);
-+			return 0;
-+		}
-+	}
++	ut_assertok(fwu_init());
 +
-+	return -ENOENT;
++	ut_assertok(fwu_mdata_get_image_guid(&image_guid, &image_type_guid, 0));
++	ut_assertok(guidcmp(&image_guid, &bank_0_image_guid));
++
++	ut_assertok(fwu_mdata_get_image_guid(&image_guid, &image_type_guid, 1));
++	ut_assertok(guidcmp(&image_guid, &bank_1_image_guid));
++
++	ut_asserteq(-EINVAL, fwu_mdata_get_image_guid(&image_guid,
++						      &image_type_guid, 2));
++
++	ut_asserteq(-ENOENT, fwu_mdata_get_image_guid(&image_guid,
++						      &wrong_image_type_guid,
++						      0));
++
++	return 0;
 +}
-+
- /**
-  * fwu_mdata_copies_allocate() - Allocate memory for metadata
-  * @mdata_size: Size of the metadata structure
++DM_TEST(dm_test_fwu_mdata_get_image_guid, UTF_SCAN_FDT);
 -- 
 2.43.0
 
