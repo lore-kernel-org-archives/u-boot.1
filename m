@@ -4,87 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 896B8FF885D
-	for <u-boot@archiver.kernel.org>; Sun, 26 Apr 2026 15:47:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09A4AFF885E
+	for <u-boot@archiver.kernel.org>; Sun, 26 Apr 2026 15:48:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ACE3A841F2;
-	Sun, 26 Apr 2026 17:47:37 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2868D84150;
+	Sun, 26 Apr 2026 17:47:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="PXrWgBPg";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="W3tv7DC7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 53DB384314; Sun, 26 Apr 2026 17:47:36 +0200 (CEST)
-Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
- [IPv6:2a00:1450:4864:20::32a])
+ id 4D7D08412A; Sun, 26 Apr 2026 17:47:38 +0200 (CEST)
+Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com
+ [IPv6:2a00:1450:4864:20::436])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0EAD283FF5
- for <u-boot@lists.denx.de>; Sun, 26 Apr 2026 17:47:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9F3AC84309
+ for <u-boot@lists.denx.de>; Sun, 26 Apr 2026 17:47:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=dario.binacchi@amarulasolutions.com
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-4890098abbaso73076685e9.0
- for <u-boot@lists.denx.de>; Sun, 26 Apr 2026 08:47:34 -0700 (PDT)
+Received: by mail-wr1-x436.google.com with SMTP id
+ ffacd0b85a97d-43cfce3a195so5328495f8f.2
+ for <u-boot@lists.denx.de>; Sun, 26 Apr 2026 08:47:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1777218453; x=1777823253;
+ d=amarulasolutions.com; s=google; t=1777218455; x=1777823255;
  darn=lists.denx.de; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=f4MKtAW7WUF1UijbrIXVqwjoMi3T7GY9a2EZQvpWa84=;
- b=PXrWgBPgWGU1m8+6qaKMZXEpfnaTQuNZFjxYU23qkHRB+Gdum4+XciFmxVfJZ1Z5qM
- 1SIyu6loNgsKpMSogD3fcm4C/HHUjTZhBW9MtYv2/al7HGKSobIbCs9QRazYG+UZIjgi
- fqHGmYvYKvRPgRcF+ZnQGq3yQZsNv2spZ/EyM=
+ bh=xRUth/tej3+7h0oPp5SVnZPyDPN+il6XelJ/U9ZGoW4=;
+ b=W3tv7DC7Zc23BIWmXihJKHGa6of/oR2entbgfAMcTb4ewFvafaRToC4y4M8+554JVg
+ ZniT/aTXUMnzMy2bqlxzu1GxlPVjBYP8S0ltXPhZ5rIqCAdOVthfCrSjDa2QfXikLHLd
+ 2AvUF0loVbqCpWnYJ/edOSDr2Grvu1DpXGK58=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777218453; x=1777823253;
+ d=1e100.net; s=20251104; t=1777218455; x=1777823255;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=f4MKtAW7WUF1UijbrIXVqwjoMi3T7GY9a2EZQvpWa84=;
- b=WTvfFhpTY4XkhF3ZRxySxfRGk6dmnDWjymkKgYwOjLHiprkBnC0qMmL1ymJdpTj6LM
- uuFr4umu6N/oVr037bQad06oaSY3rINnlU4pruUqT5Ssd8QuLTxDdToPDxXZg6u1nIWD
- tmeRzp26UDvycaFBT6yzA6lPGp91JTvszp2NpsUiQpgcA2ZyQxCl7Bdt+9Bil0P2epnI
- D1E1ft5MYTTfbrlzEWPPk+85LDaeWZ0eD8eJuqTCB0i1fHE4HxS8CYPAIZrmma73S8og
- DODvDMcdY6Uoj+0raIpkaTOwYNKvgSWxG3a8oV1u6COQGpVMwbL9ObBWjrBvmPP+I7jW
- n/0g==
-X-Gm-Message-State: AOJu0Yz2NOswayIaAar30DS7MaRbUw6rGmTEhxk3QSCZD6cUZiX1NbcV
- Gn0aE5j+tODOqvGO9216J22Ciwg+j0ONtuAxasBW9BO2++8K81Tu/HClAHQhgmfd481EvE5lE1T
- bGCeS
-X-Gm-Gg: AeBDievPn44KJDdGrv5+hdPYtnRtUu0D/aUPXHljXVkqP2riZntKSvQjhyr6mHEnbK9
- Iq/W7HO/BrO0Ws42V2b5tomloaWfNY5WUbQN9/t0hGYCLu2kprgEHkJUBoJdPURS7QnEP2aYHIO
- r4LfTsLZAhLVdpLs/D/ElfzbmmKVU7N0mMPz/duPDedwnfhYLpBACOlk6O9jgxf1WQv7Uw/Q4Lh
- YqjnLSUd5Y+y1B9flX90wws4GpuhT+mzPzlKB9MtHMNju/ZDcxcLape8b3WWoQwp7H2aCCvRRhi
- hjuF2AM6Cy/MDCKfw/A/QXbFGOceQhse2J43OLWCqIkarkGJ8jog3cFfJsqaD15dPiVN9CX+MwF
- Yz02V5Uz4IoMFbHmYV10BE+pl+yJiKwUoFGGXUsqDyhkU2qYnxBOVd6g3BMHXOqkDO4hhG22wVB
- oSeWeGmHL0GbHdEpl/BskObcfUE1al95b35d/SlCT1nRvmJsoaWe0FAoUG/jB2hYuiPOQpWgvbx
- RkAUy8ye8jDC6PlIKqBo32WQe+V5ByJ02Vt3GbQB+EYLJFemqyQPbEfpOJS+GK0BSVGp/XssESx
- VTGlqZ6m7MWobMWXVqCOjkOlhNUqVg==
-X-Received: by 2002:a05:600c:450a:b0:48a:72ab:f88c with SMTP id
- 5b1f17b1804b1-48a72abf8admr1792735e9.17.1777218453239; 
- Sun, 26 Apr 2026 08:47:33 -0700 (PDT)
+ bh=xRUth/tej3+7h0oPp5SVnZPyDPN+il6XelJ/U9ZGoW4=;
+ b=hVU7vwhmw0ZDLLCezJF238h6lM7FQewZZexjpnrEFU6WT1xkkZEsjcpIdGkR12Qx7g
+ dRxj/bpk5UQFuyeP7Zz/rs9vAOyTJyINFHqD2efFiGRDtOm5bl0voGJXMKBoB/97rrUs
+ onEZXd7y0ZWkXupzw8qvjV6y89ICr/oK2Ax44/ct911rZzwKV7e4W8UO0Y1h4opWMA/l
+ nbOohSnCE0/bf2BdStACUSl/WOdZ27qh2sMN/cCJxhWEUOp4eUdqOPhnaQU2wiIljYI5
+ BGcLl1l7MTh9xYEbWdinaSBkWBgdVJRD09Q83Nv/t39aYj4lzfgs46gb/8v8v8mbvHgg
+ vpRA==
+X-Gm-Message-State: AOJu0YwNicxKSaVIs6T43Gy7p1sSNIRrMzDcMW+J09sbB8GthPut3w9A
+ o6yXTn8o1SZl7SC+rW0EWPAtno/KEq5rLFYxbCGlCd3/ZkNxH+qtOIL6dYryqUapzcWxulBSbiM
+ MRsfP
+X-Gm-Gg: AeBDievDpf2dxEMzav+LxKb5IwUyqIhmbMR9RpWo3/ztClpSqWffFTLG8lV5HgPqf5g
+ 8j7/T4ZfCN+18QWF9D40cLMtiiSxzJgIoPYNctPks8j+261bJFdIL4cz+crOJSLspDfSKAieYjv
+ 1YCrQeYl0DcMaTO6isXXlZngNSL8HWehUyMvU8uN4wF5Ksxzjdbo8tC4h8sM4GtSw5mEWjqcpkR
+ nG46N6CvZItJfUZgjZoFqtCH5M5aDV3GKN6uh534kqywXGVdBTydCBJcSyjaO1oHwL9FAjh/Td5
+ podjsRQVMgftazCDx+z4J6X2ISx7m8d0tljDdqa+z6WzAH3a9WCWSh3S38voUtEIt1myKSBgqQK
+ peHGZI5oyDXEN15w6ai/gBTxlYMqsn6fQTKHXzELf9KBwdCFfvAMi/6V380Cy8ujGI+0UbVKqZd
+ qVydeCCLbRnbzimSVwS6xPhJoPVwLQy6867d5mBcqIFH2BNMjSKjX/ngrAtpNX+YgHQQDrJuZTC
+ 8NG9FHA53DdWZEDERXjv5cya2HV6/Af0kf9AI2T1c+ePn94rdVhxJCSDxXQSKVrSpjo+pHIbndx
+ tzqTNEFgxPnW+sjdQGVGnHwmNl++6A==
+X-Received: by 2002:a05:6000:230b:b0:43d:7cb5:43b2 with SMTP id
+ ffacd0b85a97d-43fe3db3150mr60692893f8f.15.1777218454766; 
+ Sun, 26 Apr 2026 08:47:34 -0700 (PDT)
 Received: from dario-ThinkPad-P14s-Gen-5.amarulasolutions.com
  (host-82-56-22-134.retail.telecomitalia.it. [82.56.22.134])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-44123d23e0bsm34489985f8f.15.2026.04.26.08.47.32
+ ffacd0b85a97d-44123d23e0bsm34489985f8f.15.2026.04.26.08.47.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 26 Apr 2026 08:47:32 -0700 (PDT)
+ Sun, 26 Apr 2026 08:47:34 -0700 (PDT)
 From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
 To: u-boot@lists.denx.de
 Cc: linux-amarula@amarulasolutions.com,
  Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>,
- Dinesh Maniyam <dinesh.maniyam@altera.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH v7 3/8] test: cmd: add unit tests for part command
-Date: Sun, 26 Apr 2026 17:46:56 +0200
-Message-ID: <20260426154724.2042569-4-dario.binacchi@amarulasolutions.com>
+ Simon Glass <sjg@chromium.org>, Jonathan GUILLOT <jonathan@joggee.fr>,
+ Padmarao Begari <padmarao.begari@amd.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Rasmus Villemoes <ravi@prevas.dk>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v7 4/8] cmd: part: support lookup by UUID
+Date: Sun, 26 Apr 2026 17:46:57 +0200
+Message-ID: <20260426154724.2042569-5-dario.binacchi@amarulasolutions.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260426154724.2042569-1-dario.binacchi@amarulasolutions.com>
 References: <20260426154724.2042569-1-dario.binacchi@amarulasolutions.com>
@@ -106,222 +104,103 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add unit tests for the 'part' command, specifically for the 'number',
-'start', and 'size' subcommands.
+The 'part' command currently allows looking up a partition only by its
+number or name.
 
-These tests establish a baseline for the current partition lookup
-functionality by name. This foundation will be used by subsequent
-patches to extend the command, ensuring consistent behavior as new
-features are introduced.
+Extend the 'number', 'start', and 'size' subcommands to support looking
+up the partition via its UUID. Unlike names, UUIDs guarantee unique
+partition identification, avoiding ambiguity.
+
+The logic is updated to check if the provided string is a valid UUID
+before falling back to a name-based search. The help strings for these
+subcommands are updated accordingly.
 
 Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
 Reviewed-by: Simon Glass <sjg@chromium.org>
 
 ---
 
-(no changes since v6)
+(no changes since v5)
 
-Changes in v6:
-- Add Reviewed-by of Simon Glass to patch 3/8 "test: cmd: add unit
-  tests for part command"
-
-Changes in v4:
-- Place the part command tests in the cmd suite rather than the dm
-  suite.
-- Order the include files according the U-Boot coding style.
+Changes in v5:
+- Update doc/usage/cmd/part.rst to reflect the changes related to the
+  part command.
 
 Changes in v3:
-- Wrap the lines exceeding 80 columns
-- Combine run_command() and ut_asserteq() -> ut_asserteq(1, run_command(
+- Add Reviewed-by tag of Simon Glass
 
- test/cmd/Makefile |   1 +
- test/cmd/part.c   | 165 ++++++++++++++++++++++++++++++++++++++++++++++
- 2 files changed, 166 insertions(+)
- create mode 100644 test/cmd/part.c
+Changes in v2:
+- Update commit message.
+- Update help for 'part start', 'part size' to mention UUID.
 
-diff --git a/test/cmd/Makefile b/test/cmd/Makefile
-index 8c9f112782d0..41fe21a4541e 100644
---- a/test/cmd/Makefile
-+++ b/test/cmd/Makefile
-@@ -26,6 +26,7 @@ obj-$(CONFIG_CMD_LOADM) += loadm.o
- obj-$(CONFIG_CMD_MEMINFO) += meminfo.o
- obj-$(CONFIG_CMD_MEMORY) += mem_copy.o
- obj-$(CONFIG_CMD_MEM_SEARCH) += mem_search.o
-+obj-$(CONFIG_CMD_PART) += part.o
- ifdef CONFIG_CMD_PCI
- obj-$(CONFIG_CMD_PCI_MPS) += pci_mps.o
- endif
-diff --git a/test/cmd/part.c b/test/cmd/part.c
-new file mode 100644
-index 000000000000..5751dd315dd8
---- /dev/null
-+++ b/test/cmd/part.c
-@@ -0,0 +1,165 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Test for part command
-+ *
-+ * Copyright (C) 2026 Amarula Solutions
-+ * Written by Dario Binacchi <dario.binacchi@amarulasolutions.com>
-+ */
-+
-+#include <command.h>
-+#include <dm.h>
-+#include <env.h>
-+#include <part.h>
-+#include <vsprintf.h>
-+#include <dm/test.h>
-+#include <test/cmd.h>
-+#include <test/test.h>
-+#include <test/ut.h>
-+
-+static struct disk_partition gpt_parts[] = {
-+	{
-+		.start = 48,
-+		.size = 1,
-+		.name = "test1",
-+		.uuid = "c5bce7a2-03f0-4d03-9048-01ff23b9d527",
-+	},
-+	{
-+		.start = 49,
-+		.size = 2,
-+		.name = "test2",
-+		.uuid = "9df346e8-2c53-4cd8-b9ac-3af83f9a9b74",
-+	},
-+};
-+
-+static char disk_guid[UUID_STR_LEN + 1] =
-+	"8d60b397-1bb6-4d33-80ee-b1587d24c2f8";
-+
-+static int setup_gpt_partitions(struct unit_test_state *uts,
-+				unsigned int mmc_dev_num)
-+{
-+	struct blk_desc *mmc_dev_desc;
-+	char dev_str[10];
-+	int i;
-+
-+	snprintf(dev_str, sizeof(dev_str), "%u", mmc_dev_num);
-+
-+	ut_asserteq(mmc_dev_num, blk_get_device_by_str("mmc", dev_str,
-+						       &mmc_dev_desc));
-+
-+	if (CONFIG_IS_ENABLED(RANDOM_UUID)) {
-+		for (i = 0; i < ARRAY_SIZE(gpt_parts); i++)
-+			gen_rand_uuid_str(gpt_parts[i].uuid,
-+					  UUID_STR_FORMAT_STD);
-+
-+		gen_rand_uuid_str(disk_guid, UUID_STR_FORMAT_STD);
-+	}
-+
-+	ut_assertok(gpt_restore(mmc_dev_desc, disk_guid, gpt_parts,
-+				ARRAY_SIZE(gpt_parts)));
-+	return 0;
-+}
-+
-+static int cmd_test_part_number(struct unit_test_state *uts)
-+{
-+	unsigned int mmc_dev_num = 2;
-+	char expected[10];
-+	int i;
-+
-+	ut_assertok(setup_gpt_partitions(uts, mmc_dev_num));
-+
-+	for (i = 0; i < ARRAY_SIZE(gpt_parts); i++) {
-+		env_set("partnum", NULL);
-+		ut_assertok(run_commandf("part number mmc %u %s partnum",
-+					 mmc_dev_num, gpt_parts[i].name));
-+		snprintf(expected, sizeof(expected), "0x%x", i + 1);
-+		ut_asserteq_str(expected, env_get("partnum"));
-+	}
-+
-+	env_set("partnum", NULL);
-+	ut_asserteq(1, run_commandf("part number mmc %u bogus partnum",
-+				    mmc_dev_num));
-+	ut_assertnull(env_get("partnum"));
-+
-+	return 0;
-+}
-+CMD_TEST(cmd_test_part_number, UTF_CONSOLE);
-+
-+static int cmd_test_part_start(struct unit_test_state *uts)
-+{
-+	unsigned int mmc_dev_num = 2;
-+	char expected[32];
-+	int i;
-+
-+	ut_assertok(setup_gpt_partitions(uts, mmc_dev_num));
-+
-+	for (i = 0; i < ARRAY_SIZE(gpt_parts); i++) {
-+		env_set("partstart", NULL);
-+		ut_assertok(run_commandf("part start mmc %u %d partstart",
-+					 mmc_dev_num, i + 1));
-+		snprintf(expected, sizeof(expected), "%lx",
-+			 (unsigned long)gpt_parts[i].start);
-+		ut_asserteq_str(expected, env_get("partstart"));
-+	}
-+
-+	env_set("partstart", NULL);
-+	ut_asserteq(1, run_commandf("part start mmc %u 3 partstart",
-+				    mmc_dev_num));
-+	ut_assertnull(env_get("partstart"));
-+
-+	for (i = 0; i < ARRAY_SIZE(gpt_parts); i++) {
-+		env_set("partstart", NULL);
-+		ut_assertok(run_commandf("part start mmc %u %s partstart",
-+					 mmc_dev_num, gpt_parts[i].name));
-+		snprintf(expected, sizeof(expected), "%lx",
-+			 (unsigned long)gpt_parts[i].start);
-+		ut_asserteq_str(expected, env_get("partstart"));
-+	}
-+
-+	env_set("partstart", NULL);
-+	ut_asserteq(1, run_commandf("part start mmc %u bogus partstart",
-+				    mmc_dev_num));
-+	ut_assertnull(env_get("partstart"));
-+
-+	return 0;
-+}
-+CMD_TEST(cmd_test_part_start, UTF_CONSOLE);
-+
-+static int cmd_test_part_size(struct unit_test_state *uts)
-+{
-+	unsigned int mmc_dev_num = 2;
-+	char expected[32];
-+	int i;
-+
-+	ut_assertok(setup_gpt_partitions(uts, mmc_dev_num));
-+
-+	for (i = 0; i < ARRAY_SIZE(gpt_parts); i++) {
-+		env_set("partsize", NULL);
-+		ut_assertok(run_commandf("part size mmc %u %d partsize",
-+					 mmc_dev_num, i + 1));
-+		snprintf(expected, sizeof(expected), "%lx",
-+			 (unsigned long)gpt_parts[i].size);
-+		ut_asserteq_str(expected, env_get("partsize"));
-+	}
-+
-+	env_set("partsize", NULL);
-+	ut_asserteq(1, run_commandf("part size mmc %u 3 partsize",
-+				    mmc_dev_num));
-+	ut_assertnull(env_get("partsize"));
-+
-+	for (i = 0; i < ARRAY_SIZE(gpt_parts); i++) {
-+		env_set("partsize", NULL);
-+		ut_assertok(run_commandf("part size mmc %u %s partsize",
-+					 mmc_dev_num, gpt_parts[i].name));
-+		snprintf(expected, sizeof(expected), "%lx",
-+			 (unsigned long)gpt_parts[i].size);
-+		ut_asserteq_str(expected, env_get("partsize"));
-+	}
-+
-+	env_set("partsize", NULL);
-+	ut_asserteq(1, run_commandf("part size mmc %u bogus partsize",
-+				    mmc_dev_num));
-+	ut_assertnull(env_get("partsize"));
-+
-+	return 0;
-+}
-+CMD_TEST(cmd_test_part_size, UTF_CONSOLE);
+ cmd/part.c             | 12 ++++++++----
+ doc/usage/cmd/part.rst |  6 +++---
+ 2 files changed, 11 insertions(+), 7 deletions(-)
+
+diff --git a/cmd/part.c b/cmd/part.c
+index 5e520d707f39..3191d5861fdb 100644
+--- a/cmd/part.c
++++ b/cmd/part.c
+@@ -144,6 +144,10 @@ static int do_part_info(int argc, char *const argv[], enum cmd_part_info param)
+ 		err = part_get_info(desc, part, &info);
+ 		if (err)
+ 			return 1;
++	} else if (uuid_str_valid(argv[2])) {
++		part = part_get_info_by_uuid(desc, argv[2], &info);
++		if (part < 0)
++			return 1;
+ 	} else {
+ 		part = part_get_info_by_name(desc, argv[2], &info);
+ 		if (part < 0)
+@@ -517,13 +521,13 @@ U_BOOT_CMD(
+ 	"      flags can be -bootable (list only bootable partitions)\n"
+ 	"part start <interface> <dev> <part> <varname>\n"
+ 	"    - set environment variable to the start of the partition (in blocks)\n"
+-	"      part can be either partition number or partition name\n"
++	"      part can be either partition number, UUID or name\n"
+ 	"part size <interface> <dev> <part> <varname>\n"
+ 	"    - set environment variable to the size of the partition (in blocks)\n"
+-	"      part can be either partition number or partition name\n"
++	"      part can be either partition number, UUID or name\n"
+ 	"part number <interface> <dev> <part> <varname>\n"
+-	"    - set environment variable to the partition number using the partition name\n"
+-	"      part must be specified as partition name\n"
++	"    - set environment variable to the partition number using the partition UUID or name\n"
++	"      part must be specified as partition UUID or name\n"
+ 	"part name <interface> <dev> <part> <varname>\n"
+ 	"    - set environment variable to the partition name using the partition number\n"
+ 	"      part must be specified as partition number\n"
+diff --git a/doc/usage/cmd/part.rst b/doc/usage/cmd/part.rst
+index b91f6541f7f8..a0e7be08a9ab 100644
+--- a/doc/usage/cmd/part.rst
++++ b/doc/usage/cmd/part.rst
+@@ -52,7 +52,7 @@ The 'part list' command prints or sets an environment variable to the list of pa
+         an optional environment variable to store the list of partitions value into.
+ 
+ The 'part start' command sets an environment variable to the start of the partition (in blocks),
+-part can be either partition number or partition name.
++part can be either partition number, partition UUID or partition name.
+ 
+     interface
+         interface for accessing the block device (mmc, sata, scsi, usb, ....)
+@@ -64,7 +64,7 @@ part can be either partition number or partition name.
+         a variable to store the current start of the partition value into.
+ 
+ The 'part size' command sets an environment variable to the size of the partition (in blocks),
+-part can be either partition number or partition name.
++part can be either partition number, partition UUID or partition name.
+ 
+     interface
+         interface for accessing the block device (mmc, sata, scsi, usb, ....)
+@@ -76,7 +76,7 @@ part can be either partition number or partition name.
+         a variable to store the current size of the partition value into.
+ 
+ The 'part number' command sets an environment variable to the partition number using the partition name,
+-part must be specified as partition name.
++part must be specified as partition UUID or partition name.
+ 
+     interface
+         interface for accessing the block device (mmc, sata, scsi, usb, ....)
 -- 
 2.43.0
 
