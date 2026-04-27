@@ -4,56 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4CA8BFF885E
-	for <u-boot@archiver.kernel.org>; Mon, 27 Apr 2026 12:33:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2064FF885E
+	for <u-boot@archiver.kernel.org>; Mon, 27 Apr 2026 12:35:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D7F6F83AA9;
-	Mon, 27 Apr 2026 14:33:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 5B99483693;
+	Mon, 27 Apr 2026 14:35:18 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="uI4YU23l";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=arm.com header.i=@arm.com header.b="mwJ8Wm84";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3A6CA83FDB; Mon, 27 Apr 2026 14:33:29 +0200 (CEST)
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3057983693
- for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 14:33:27 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
+ id 162E283693; Mon, 27 Apr 2026 14:35:16 +0200 (CEST)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id A3BF080433
+ for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 14:35:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mwalle@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 5E011439C6;
- Mon, 27 Apr 2026 12:33:25 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id DA83CC19425;
- Mon, 27 Apr 2026 12:33:24 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1777293205;
- bh=LvMMl94EdaFmjbDys43LpqXInplP9pNqsJBtC0gp808=;
- h=Date:From:To:Subject:Cc:References:In-Reply-To:From;
- b=uI4YU23lM9vUahs0t6mu9yg7ZnTaGrrmdpOx0KRzVPMK3ZNyFuOujXi7FDDf5F03y
- S2xnPmhmWojlU1gvgnKE0M4vFfTrFyv38/KbImtCqDEdLlul0vkiRN+zoBfaQ8JjrN
- pI5V3qMLJOZDhUx7hICyvvMBp+12n4EWVhdJTugATIf5ax9iDJtKdibqECwPtXIkrC
- txf7d5mm08PDdpJLdFY4DDLHAbWNOO/WxSCs30fmlWODAQdPKFGalhv3kG/OsUxLvm
- rwC5bxCm1uDU+1XFWK4nLTpyzSt6JOw/nWJxXWoqJMcaaOFZjld/tXS1pnPBP19hkH
- HjMyMA1BUmaLw==
-Mime-Version: 1.0
-Content-Type: multipart/signed;
- boundary=b1d6eedbecbfb52dd6325f6443de9506fa081379a60cbeac4c41ec61dc8f;
- micalg=pgp-sha384; protocol="application/pgp-signature"
-Date: Mon, 27 Apr 2026 14:33:20 +0200
-Message-Id: <DI3XUWVXNGP3.2TI0N0LDP7ZJ4@kernel.org>
-From: "Michael Walle" <mwalle@kernel.org>
-To: "Tomas Alvarez Vanoli" <tomas.alvarez-vanoli@hitachienergy.com>,
- <u-boot@lists.denx.de>
-Subject: Re: [PATCH 0/1] spi: fsl_espi: fix din offset
-Cc: <trini@konsulko.com>, <chuanhua.han@nxp.com>
-X-Mailer: aerc 0.20.0
-References: <20260324170212.481394-1-tomas.alvarez-vanoli@hitachienergy.com>
-In-Reply-To: <20260324170212.481394-1-tomas.alvarez-vanoli@hitachienergy.com>
+ dmarc=pass (p=none dis=none) header.from=arm.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=andre.przywara@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 6AA071684;
+ Mon, 27 Apr 2026 05:35:07 -0700 (PDT)
+Received: from [10.41.150.145] (e142021.arm.com [10.41.150.145])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id B3E533F62B;
+ Mon, 27 Apr 2026 05:35:10 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
+ t=1777293312; bh=iWjPth9k+iOY52rKCibGBARkf2oOtTAUHUE62pj7AWQ=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=mwJ8Wm84+Eo06Ytt72iykUOckbxM9+nPWN/nDMBWRB9m3HvxUgmL+T/QDp/uUYUmR
+ Sahv35IRxnH6mdMrHmjccYflncAzgInIwK6U/CJCdJqKlJ90D+dpPyShZvowsBXQkp
+ rTkzZBVwIfieGfp3VyZyjmVAgCQBaL8mryam3WJo=
+Message-ID: <cfe67c5d-0762-4366-94df-e64728847f0b@arm.com>
+Date: Mon, 27 Apr 2026 14:35:08 +0200
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 3/5] mtd: rawnand: sunxi: clean sunxi_nand_chip_init()
+To: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>,
+ Richard Genoud <richard.genoud@bootlin.com>
+Cc: Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Tom Rini <trini@konsulko.com>, Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Miquel Raynal <miquel.raynal@bootlin.com>,
+ James Hilliard <james.hilliard1@gmail.com>,
+ Boris Brezillon <bbrezillon@kernel.org>,
+ Thomas Petazzoni <thomas.petazzoni@bootlin.com>, u-boot@lists.denx.de
+References: <20260327140508.3680105-1-richard.genoud@bootlin.com>
+ <20260327140508.3680105-4-richard.genoud@bootlin.com>
+ <CAOf5uwnYuZi46ZKijOJ-PLt_55Nwg9BQ5w+3Mtu+VxNvrER1Qw@mail.gmail.com>
+Content-Language: en-US
+From: Andre Przywara <andre.przywara@arm.com>
+In-Reply-To: <CAOf5uwnYuZi46ZKijOJ-PLt_55Nwg9BQ5w+3Mtu+VxNvrER1Qw@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,62 +72,143 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
---b1d6eedbecbfb52dd6325f6443de9506fa081379a60cbeac4c41ec61dc8f
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
+Hi,
 
-Hi Tomas,
+On 3/27/26 15:42, Michael Nazzareno Trimarchi wrote:
+> Hi Richard
+> 
+> On Fri, Mar 27, 2026 at 3:05 PM Richard Genoud
+> <richard.genoud@bootlin.com> wrote:
+>>
+>> In sunxi_nand_chip_init there's quite a lot of kfree/return, it's easy
+>> to forget a kfree(), so use a goto/kfree instead.
+>>
+>> Signed-off-by: Richard Genoud <richard.genoud@bootlin.com>
+>> ---
+>>   drivers/mtd/nand/raw/sunxi_nand.c | 41 ++++++++++++++-----------------
+>>   1 file changed, 18 insertions(+), 23 deletions(-)
+>>
+>> diff --git a/drivers/mtd/nand/raw/sunxi_nand.c b/drivers/mtd/nand/raw/sunxi_nand.c
+>> index 9fc9bc5e0198..ecab9ebc9576 100644
+>> --- a/drivers/mtd/nand/raw/sunxi_nand.c
+>> +++ b/drivers/mtd/nand/raw/sunxi_nand.c
+>> @@ -1600,21 +1600,20 @@ static int sunxi_nand_chip_init(struct udevice *dev, struct sunxi_nfc *nfc,
+>>                  if (ret) {
+>>                          dev_err(dev, "could not retrieve reg property: %d\n",
+>>                                  ret);
+>> -                       kfree(chip);
+>> -                       return ret;
+>> +                       goto out;
+>>                  }
+>>
+>>                  if (tmp > NFC_MAX_CS) {
+>>                          dev_err(dev,
+>>                                  "invalid reg value: %u (max CS = 7)\n", tmp);
+>> -                       kfree(chip);
+>> -                       return -EINVAL;
+>> +                       ret = -EINVAL;
+>> +                       goto out;
+>>                  }
+>>
+>>                  if (test_and_set_bit(tmp, &nfc->assigned_cs)) {
+>>                          dev_err(dev, "CS %d already assigned\n", tmp);
+>> -                       kfree(chip);
+>> -                       return -EINVAL;
+>> +                       ret = -EINVAL;
+>> +                       goto out;
+>>                  }
+>>
+>>                  chip->sels[i].cs = tmp;
+>> @@ -1640,15 +1639,13 @@ static int sunxi_nand_chip_init(struct udevice *dev, struct sunxi_nfc *nfc,
+>>                  dev_err(dev,
+>>                          "could not retrieve timings for ONFI mode 0: %d\n",
+>>                          ret);
+>> -               kfree(chip);
+>> -               return ret;
+>> +               goto out;
+>>          }
+>>
+>>          ret = sunxi_nand_chip_set_timings(nfc, chip, timings);
+>>          if (ret) {
+>>                  dev_err(dev, "could not configure chip timings: %d\n", ret);
+>> -               kfree(chip);
+>> -               return ret;
+>> +               goto out;
+>>          }
+>>
+>>          nand = &chip->nand;
+>> @@ -1669,10 +1666,8 @@ static int sunxi_nand_chip_init(struct udevice *dev, struct sunxi_nfc *nfc,
+>>
+>>          mtd = nand_to_mtd(nand);
+>>          ret = nand_scan_ident(mtd, nsels, NULL);
+>> -       if (ret) {
+>> -               kfree(chip);
+>> -               return ret;
+>> -       }
+>> +       if (ret)
+>> +               goto out;
+>>
+>>          if (nand->bbt_options & NAND_BBT_USE_FLASH)
+>>                  nand->bbt_options |= NAND_BBT_NO_OOB;
+>> @@ -1685,34 +1680,34 @@ static int sunxi_nand_chip_init(struct udevice *dev, struct sunxi_nfc *nfc,
+>>          ret = sunxi_nand_chip_init_timings(nfc, chip);
+>>          if (ret) {
+>>                  dev_err(dev, "could not configure chip timings: %d\n", ret);
+>> -               kfree(chip);
+>> -               return ret;
+>> +               goto out;
+>>          }
+>>
+>>          ret = sunxi_nand_ecc_init(mtd, &nand->ecc);
+>>          if (ret) {
+>>                  dev_err(dev, "ECC init failed: %d\n", ret);
+>> -               kfree(chip);
+>> -               return ret;
+>> +               goto out;
+>>          }
+>>
+>>          ret = nand_scan_tail(mtd);
+>>          if (ret) {
+>>                  dev_err(dev, "nand_scan_tail failed: %d\n", ret);
+>> -               kfree(chip);
+>> -               return ret;
+>> +               goto out;
+>>          }
+>>
+>>          ret = nand_register(devnum, mtd);
+>>          if (ret) {
+>>                  dev_err(dev, "failed to register mtd device: %d\n", ret);
+>> -               kfree(chip);
+>> -               return ret;
+>> +               goto out;
+>>          }
+>>
+>>          list_add_tail(&chip->node, &nfc->chips);
+>>
+>> -       return 0;
+>> +out:
+>> +       if (ret)
+>> +               kfree(chip);
+>> +
+>> +       return ret;
+>>   }
+>>
+>>   static int sunxi_nand_chips_init(struct udevice *dev, struct sunxi_nfc *nfc)
+> 
+> I need to go a bit in the code but seems that out can happen even if
+> there is no error. It's
+> not so common to have if (ret) if exit condition in case of errot
 
-On Tue Mar 24, 2026 at 6:02 PM CET, Tomas Alvarez Vanoli wrote:
-> Hello,
->
-> While working on an old T1040-based board, I ran into issues when reading=
- data
-> with spi_xfer. It seems to me that the driver is copying the data back to=
- the
-> caller at the wrong addresses. I am not entirely sure what was the intent=
-ion
-> with the original code as far as I can tell.
->
-> With my suggested change, at least a small tx of 3 bytes works correctly =
-and I
-> can see the expected data in the buffer.
->
-> I've really only tested this with a 2016 version of u-boot but the code h=
-as not
-> changed regarding this since then, and I suspect that there's not a lot o=
-f
-> boards left using this driver to read spi data in u-boot :)
+So I think it's fine in this case, ret is always set before we "goto", 
+and in the success case "ret" must be 0 from the last check. But I agree 
+that the construct is a bit uncommon and fragile, so what about keeping 
+the "return 0;" (to use the common pattern and help readability), and 
+rename the label to "out_err" or "out_free", to make it more obvious 
+that this the error path only, and we expect ret to be set?
 
-This will break the SPI NOR flash on the P2041RDB:
+Cheers,
+Andre
 
-=3D> sf probe
-jedec_spi_nor flash@0: unrecognized JEDEC id bytes: 00, 01, 20
-Failed to initialize SPI flash at 0:0 (error -2)
+> 
+> Michael
 
-After reverting this commit, I get:
-=3D> sf probe
-SF: Detected s25sl12801 with page size 256 Bytes, erase size 64 KiB, total =
-16 MiB
-
-What kind of issues do you see? And how does your patch resolves
-this? I guess we can assume the code was working correctly once.
-Honestly, I don't understand that code either. But I doubt just
-moving pointers around will fix anything.
-
-Thanks,
--michael
-
---b1d6eedbecbfb52dd6325f6443de9506fa081379a60cbeac4c41ec61dc8f
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iKgEABMJADAWIQTIVZIcOo5wfU/AngkSJzzuPgIf+AUCae9XkRIcbXdhbGxlQGtl
-cm5lbC5vcmcACgkQEic87j4CH/gySgGA9qeQXdK45vOKmtvdbMRIEVyVLHHDBoD5
-0GZ9heiQqhKc+0COTCSgD9qz8Apf0lySAYCiZcexefkveP1pjp+VyNQ3/5oN/FsS
-zGSuhTVumoJPu2vO8/xam+xNaMtHayUgarI=
-=Btmm
------END PGP SIGNATURE-----
-
---b1d6eedbecbfb52dd6325f6443de9506fa081379a60cbeac4c41ec61dc8f--
