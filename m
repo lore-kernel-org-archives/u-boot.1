@@ -4,113 +4,106 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8061FF8862
-	for <u-boot@archiver.kernel.org>; Mon, 27 Apr 2026 07:53:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A19ABFF8862
+	for <u-boot@archiver.kernel.org>; Mon, 27 Apr 2026 07:55:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2B1D083693;
-	Mon, 27 Apr 2026 09:53:58 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 347BE83693;
+	Mon, 27 Apr 2026 09:55:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="pn3Z64sB";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="zqngEnGz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 10F3483693; Mon, 27 Apr 2026 09:53:57 +0200 (CEST)
-Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
- [IPv6:2a00:1450:4864:20::32d])
+ id DF50E83C14; Mon, 27 Apr 2026 09:55:33 +0200 (CEST)
+Received: from mail-yx1-xb12f.google.com (mail-yx1-xb12f.google.com
+ [IPv6:2607:f8b0:4864:20::b12f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A120480433
- for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 09:53:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F0F5480433
+ for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 09:55:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x32d.google.com with SMTP id
- 5b1f17b1804b1-488a8ca4aadso138271905e9.3
- for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 00:53:53 -0700 (PDT)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yx1-xb12f.google.com with SMTP id
+ 956f58d0204a3-656d749109cso1171362d50.3
+ for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 00:55:30 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1777276530; cv=none;
+ d=google.com; s=arc-20240605;
+ b=jVK4AWNuzP5fVBv353PDAUQBV27ZSLXW5d3zqa0Xm+zyh8+HN71KkUxREMdiyRLbVT
+ JmPC3ztbSu+GAJ0aMpH8vX9jaGDEyHLf5eDuQQ7nzjwCZD5OCD/Ub325D0AOVbGXQydk
+ fD9v/DAJbU5dAqCKBk00h246pomyfQ4z6HzfjOoLkHHjE4QzrDO+oKgg8yimvCb5QmeQ
+ plPChJpxhtH0SZgkLsuAGS3SneOjpT5xogbpzlt/SmdpJaMVbemw2GS/HR6TToUlZL0q
+ 5KzR14qXjBtZVC9QvEDrN4RmwXdKSKbJIidDI6lMSjV6WZfPRg73Ofr6SjjMDEojRrRw
+ YFSg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=nHyd9IWh9tMkoDZauxdxk98HXlbts8JlYZAKFRGP2Nw=;
+ fh=ImUlq5X5PTm8yLMTWig4dzxPpH7liUFxG2zCFCr2ynk=;
+ b=abvLEF19i6h4NgHJOnEJgDbfPMa21D7glZYatUetM4YfKtv4UMds9iViT1uxRf7+Uo
+ ByxculrErI2LC7Q/XtJGIDu2gtEwteLacDYl2/Jpd2Z3jlWRQzycF4vR5VzTOEdG+VO8
+ i58bdsT/AL6sj7l0ph/WpM/HvSjWOcWSLsfCC9hJwhFskh2vMEpuuAcvdwbQYaOUYyeX
+ tPFc1m1aM4YrETKoVS6mgiPpzMJLEjpfD/2snOOyoa8MsF0R47/ll/7AUJ8fsbALur/L
+ He1BBYwHD4He0v0Ns1AoPlhjTlfb5v4P6c5oLvvaTHiJ6VpY6pLeTQTcRw8C/CFk8Y0B
+ 2Agw==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1777276433; x=1777881233; darn=lists.denx.de;
- h=content-transfer-encoding:organization:autocrypt:content-language
- :cc:to:reply-to:subject:from:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=RBdzZxS33oTsi3JXiSoA1A8tpFKlShXs59Ic8lkNYfo=;
- b=pn3Z64sB/vBEel5sswf3N5YufGjoDXOqDFIajjI3kTzylzOdo+kMX6gA/43eSh7wlP
- +0Nou64l0VGNok9Uoo/8fj5sPjfB0HOVOD73Xq5d5q6w1Z98KZ5/FUTqMQEFWUNxltk+
- wLWITWLzQIOV7KNMecdULT0v2uOPoRPOG4S8fZoWs++816t59kVPJZj5dzB5/pKHiZfk
- 4RV7gxjFW/5BMyqmHuRwLyJdZLihwrnl4yDYKH7SZoDxRBOJicvCSVjMa+Jn8DYTU1EB
- zd1de7XMTiqJ+kLiqSTk7vYdVzLcAtRvLXuRkm/QnqfcG3gLbjnwt1Ts26RN0YRUr1s+
- cGIA==
+ d=linaro.org; s=google; t=1777276530; x=1777881330; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=nHyd9IWh9tMkoDZauxdxk98HXlbts8JlYZAKFRGP2Nw=;
+ b=zqngEnGzW9p72oLFlzZXkB2FigNau7OVTBv2A5paTT8KKRAbdIp07UtBBfKw3mxuqM
+ ApoFabocMiEVBkuuUiVRFTOCShW//tP4gcTlc6Z2le2+66/o/SfPACjpaI3+jUUHwYdU
+ /zhLiHANCOyzqFTDPfXMK/4tyu6bPfUTAj1HOMmSGVv5xxoImgX0tT/mfhQiDjgwCrSa
+ 7fcvOfE7vaUXdy6Qq8iMkzI3eKNBVCRB39jYKmTNnk4Cg52hH7SP59XwRMRybckQiSg1
+ bLIZKGCzvulMuLFR8dfVN6IPcpy0ePMSoGiNU3MxQlcWp2xUAEeMF/cPK2Tpo8XLf5Aj
+ nv6A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777276433; x=1777881233;
- h=content-transfer-encoding:organization:autocrypt:content-language
- :cc:to:reply-to:subject:from:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=RBdzZxS33oTsi3JXiSoA1A8tpFKlShXs59Ic8lkNYfo=;
- b=Kkwltji+sHXycK1L2c53ty92roseb3ugUUHAyd/IKvK5+nzdmlQPgCc+TYbBcCAFiy
- OQbCZOO8JlefY6r59zZqqKrX3v97JFt9aGzw2ys/ktbnGhPYHmBDvL24E9XbMIzRqmDR
- 4g1MP/pwPOUGDGNczIlP01uYxMSPdGPvJRqLyMC5hvRk/KFIIEtFm/7AVCmqwHPYmsii
- oDBEmAWFNv46tEE2QX9WgNoqWOIKxnAb4yfmvp+Z0JM9GdlekMsARmeX8sMVHgBi+Wvt
- ZHGev9kGx61OTpyn2K0G/SDa2dm3IncUSJrqA8wvKaVHAAZho/2gPlZGkG2Hwbvgo+Pf
- cZSw==
-X-Forwarded-Encrypted: i=1;
- AFNElJ+dXgryDqEyqTTIXAOmpp8yDa62pALiQmf6/NC3sajxErLy4FKuWlPImNrFFzq0G7kC9XGxb2A=@lists.denx.de
-X-Gm-Message-State: AOJu0YyfEFQsFoNImoRkZeJSXcJE7OCiZ5ArUDRHbWNm4RZAFP+BdDbT
- DwNdR5OA+e+DbfN8OgrWdeCsTop/Iw4a2rvMeA1y0yKJ42pOstBWl3S/5yVI7AC3G0M=
-X-Gm-Gg: AeBDietM1mEQf8rDK2waP4YWU8CbpNzM8AbuyJ/BuPDMmVuJzWppjJnPfVz+Akcqjwp
- X39NuUgnOljtzQqBwcCF4wE63oPVRtHCMqHe0+6WElV0kSbOyh1tMmY11Y24OOd2p4WRkb4YKrf
- 8o5wMmE4RVrrYqSKJnO2xTU6MnyjiqP+WwMXCsLAKT/n3b6+5zNguSaTqB+xnAHXFluFOBqO4W4
- y25ac5QAepVBbAOUsabEPZmlFV4hE4hy2M9DFZ++alU0x2fG+PX0zXVfA1tqnmyBK/Uvtme/cr/
- aONlqZAs6iNcEQawu3b5h749DVUwTDwfOS26K1K72mOszbWxSsdbm6a2xdQP96IewihDcIfvkEJ
- AkKZoJ6BTKN1O/i3r3WbVqRLVN6rPtEtiI+lhxw+G4ZVLU87OmwS8DdP5o/bLgYutZsV4h/FzkD
- Qbc6Fy9r0vsk8bC33jIfCnxl5jQb41Ndz+Q1wYf+H+Q89kuHCBdh4SmRooy0+tVYLctCZ73Z1se
- MeHmPULDjx2d9LVsTyoRuyvioZ3
-X-Received: by 2002:a05:600c:3053:b0:48a:53ea:140b with SMTP id
- 5b1f17b1804b1-48a53ea1526mr236261285e9.28.1777276432550; 
- Mon, 27 Apr 2026 00:53:52 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:106d:1080:ad59:75f7:6c30:2440?
- ([2a01:e0a:106d:1080:ad59:75f7:6c30:2440])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-48a682588f8sm162693215e9.10.2026.04.27.00.53.52
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 27 Apr 2026 00:53:52 -0700 (PDT)
-Message-ID: <41f5a6a9-6a0b-4df4-abd3-aee0a7297ba6@linaro.org>
-Date: Mon, 27 Apr 2026 09:53:54 +0200
+ d=1e100.net; s=20251104; t=1777276530; x=1777881330;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=nHyd9IWh9tMkoDZauxdxk98HXlbts8JlYZAKFRGP2Nw=;
+ b=BKZLRGTCkGHaOQvDvTwu0Wiey9WSn5pGqe9X/OA7RMBX+c7CR+ZNm+nKDZwx9sRRld
+ oH2EbweJeBWVqJor+oB1ntBP5yBN3Lqkmbj8TTCzOVWNVDt/BLbhxf3ixX4ydihCGGBY
+ 87DcWCMUc0qWDt3e3+ka9NfQ00LdpDNYlwNg8sfXhL5mSfsZGpQ3Wjpdj9H38jHBE9D8
+ PIrtKZrurHman37oc7N5uUC/3HjvGMRcOQiJWRdAOISHdAXBufVw3rkI7rfcXhbY3V7F
+ f868F6V5thuScb3d1bocNnG85kxwITKunLM1JKVxyoEKvAbX+xhQfAX2eXDeQZeT4Iy/
+ v8pQ==
+X-Gm-Message-State: AOJu0YzdWat4RG6HwXgaa0ruNi/HvHgSrHDIqmCxVR+0D4DisxFAF/kZ
+ RHIen6rexbO5+wcNJSq5r7UzSz73ma6/eBkmBS9CLhh1vR4EWy6c/7lgvsjkDGIWbNJ4DvYqS5U
+ kwAUkWu/8o0LR6g7NQpeJ1jiAK69Ukz7BoCJW/VrNug==
+X-Gm-Gg: AeBDievLgV9WjxHdSy8vk5GgsfrpMvNSDsgg5+eUeZIyXBdOKRrrAXnfd7JjCYplzMv
+ KPINVoDgQQPBJ0P+a3YQnqqyHq8ekFcHpOfgyBjqch/Kqz8Hxn8eYFQ7jpVN+lVD+VC3QKeh4Ye
+ qT3vCKg3x0iG3Ve+1CvNNCmPwZfqzP04shtHIGY7HOQ+sXTPD4HTtPZ0yMG8J1KEcwZM0rvtXI/
+ GUwcIru8hVVqIrMLcZtqIlt6li9/p0Rh8srrXKk13vInI74yEV2WoVfqyZGoUvL1ObDgdW569gC
+ k5SISn2cg9xvgmyMNKgaHX7Fuo5vdBSHz1QRbIT4cCLkZlhp+J4+P+6otCpGwjAvO/xHnSjVC+O
+ JFELdMQn1rTX46tcQXWrTmHDoKk5HxyuE4QkmIncpDrHmNySzYk8m2moYpwmdEacR5Cdjp0YtMw
+ sOePOxOpqFLAuC3SclGMJF5bw1Elk7dPV4XsSmcI4BGWNc/Xq6MoDDkV1NW/KVE8HMCd5ot/zBP
+ yFMg8jIbcV0gzlXwOdArBxTUhGWWvsieXPKpzOhANypeBTIERFGED8KLah2Q4SjxDmvGroBgcgw
+ xPLp8KAmg9UQ/xvzFHH8JGQlao106AfOG23Tn3YLdSP0pLAPAZrsUYUbRacWfhkOXZafMRqeUJc
+ bIGIbKlGzBWeXbhCPemfGRYK1KqI=
+X-Received: by 2002:a53:d748:0:b0:64c:9ec3:d71a with SMTP id
+ 956f58d0204a3-65310a737b1mr28722222d50.48.1777276529764; Mon, 27 Apr 2026
+ 00:55:29 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: [GIT PULL] Please pull u-boot-amlogic-next-20260427
-To: trini@konsulko.com
-Cc: u-boot-amlogic@groups.io, u-boot@lists.denx.de
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+References: <20260424173151.371134-1-harsimransingh.tungal@arm.com>
+ <20260424173151.371134-2-harsimransingh.tungal@arm.com>
+In-Reply-To: <20260424173151.371134-2-harsimransingh.tungal@arm.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Mon, 27 Apr 2026 10:54:53 +0300
+X-Gm-Features: AVHnY4LYp1c_fUow9mYOsB2b6aLQ4dXGfnHcbm3viX3FL5VnpNL8u6IOfKV7owQ
+Message-ID: <CAC_iWjL4zL=kH2XhDG5Cn4wyyn9i8CcXf019j=xxUi0fk1B+Jw@mail.gmail.com>
+Subject: Re: [PATCH 01/12] efi_loader: add runtime memset helper
+To: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
+Cc: u-boot@lists.denx.de, Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>, 
+ Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Hugues Kamba Mpiana <hugues.kambampiana@arm.com>,
+ Simon Glass <sjg@chromium.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -122,51 +115,74 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+On Fri, 24 Apr 2026 at 20:32, Harsimran Singh Tungal
+<harsimransingh.tungal@arm.com> wrote:
+>
+> Add efi_memset_runtime() for EFI runtime paths
+>
+> This keeps buffer initialization in runtime-resident code after
+> ExitBootServices() and avoids relying on non-runtime helpers.
+>
+> Signed-off-by: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
+> ---
 
-Here's a short set of Amlogic changes, first fixing MMC init when switched
-to Linux 7.0 DT, and adding support for EFI capsule on disk on Libre Computer
-boards.
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 
-Thanks,
-Neil
-
-The following changes since commit 052988aa29bfd506d7ce207fbb3f5374a5dbecbb:
-
-   Merge patch series "Linux compat improvements and CCF prep" (2026-04-21 11:21:59 -0600)
-
-are available in the Git repository at:
-
-   https://source.denx.de/u-boot/custodians/u-boot-amlogic.git tags/u-boot-amlogic-next-20260427
-
-for you to fetch changes up to e07cc9e7fdcc35780f539ee1d452ffd3da0fbd1f:
-
-   configs: libretech-cc_defconfig: enable EFI Capsule on Disk (2026-04-22 18:27:26 +0200)
-
-----------------------------------------------------------------
-- enable EFI Capsule on Disk (+ sysreset fixup/cleanup)
-- do not fail when setting SD_EMMC_x_CLK0 on GX/G12
-
-----------------------------------------------------------------
-Ferass El Hafidi (4):
-       arm: mach-meson: provide reset_cpu only when SYSRESET is disabled
-       arm: meson: enable SYSRESET_PSCI
-       configs: libretech-ac_defconfig: enable EFI Capsule on Disk
-       configs: libretech-cc_defconfig: enable EFI Capsule on Disk
-
-Neil Armstrong (1):
-       clk: meson: do not fail when setting SD_EMMC_x_CLK0
-
-  arch/arm/mach-meson/Kconfig        | 2 ++
-  arch/arm/mach-meson/board-common.c | 6 ++----
-  configs/libretech-ac_defconfig     | 1 +
-  configs/libretech-cc_defconfig     | 4 ++++
-  drivers/clk/meson/g12a.c           | 5 +++++
-  drivers/clk/meson/gxbb.c           | 5 +++++
-  6 files changed, 19 insertions(+), 4 deletions(-)
+>  include/efi_loader.h         |  3 +++
+>  lib/efi_loader/efi_runtime.c | 21 +++++++++++++++++++++
+>  2 files changed, 24 insertions(+)
+>
+> diff --git a/include/efi_loader.h b/include/efi_loader.h
+> index 3a4d502631c..63944192aeb 100644
+> --- a/include/efi_loader.h
+> +++ b/include/efi_loader.h
+> @@ -1151,6 +1151,9 @@ void efi_memcpy_runtime(void *dest, const void *src, size_t n);
+>  /* runtime implementation of memcmp() */
+>  int efi_memcmp_runtime(const void *s1, const void *s2, size_t n);
+>
+> +/* runtime implementation of memset */
+> +__efi_runtime void *efi_memset_runtime(void *dest, int c, size_t n);
+> +
+>  /* commonly used helper functions */
+>  u16 *efi_create_indexed_name(u16 *buffer, size_t buffer_size, const char *name,
+>                              unsigned int index);
+> diff --git a/lib/efi_loader/efi_runtime.c b/lib/efi_loader/efi_runtime.c
+> index 73d4097464c..d9604399209 100644
+> --- a/lib/efi_loader/efi_runtime.c
+> +++ b/lib/efi_loader/efi_runtime.c
+> @@ -233,6 +233,27 @@ int __efi_runtime efi_memcmp_runtime(const void *s1, const void *s2, size_t n)
+>         return 0;
+>  }
+>
+> +/**
+> + * efi_memset_runtime() - fill a memory region with a byte value
+> + *
+> + * At runtime memset() is not available.
+> + *
+> + * @dest:   pointer to the block of memory to fill.
+> + * @c:      value to be set. The value is passed as an int, but the
+> + *          function fills the block of memory using the u8 conversion of this value.
+> + * @n:      number of bytes to be set to the value.
+> + * Return:  dest is returned
+> + */
+> +__efi_runtime void *efi_memset_runtime(void *dest, int c, size_t n)
+> +{
+> +       u8 *d = dest;
+> +
+> +       for (; n; --n)
+> +               *d++ = c;
+> +
+> +       return dest;
+> +}
+> +
+>  /**
+>   * efi_update_table_header_crc32() - Update crc32 in table header
+>   *
+> --
+> 2.34.1
+>
