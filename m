@@ -4,138 +4,129 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5AB8FF8868
-	for <u-boot@archiver.kernel.org>; Mon, 27 Apr 2026 17:27:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92619FF8860
+	for <u-boot@archiver.kernel.org>; Mon, 27 Apr 2026 17:55:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0500683BC4;
-	Mon, 27 Apr 2026 19:27:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
+	by phobos.denx.de (Postfix) with ESMTP id B27B483BC4;
+	Mon, 27 Apr 2026 19:55:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=hotmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="gCc+ia/H";
+	dkim=pass (2048-bit key; unprotected) header.d=hotmail.com header.i=@hotmail.com header.b="HabgoK85";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A968083C14; Mon, 27 Apr 2026 19:27:17 +0200 (CEST)
-Received: from AS8PR04CU009.outbound.protection.outlook.com
- (mail-westeuropeazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::3])
+ id 259C583C14; Mon, 27 Apr 2026 19:49:06 +0200 (CEST)
+Received: from DM1PR04CU001.outbound.protection.outlook.com
+ (mail-centralusazolkn190100000.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:d107::])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6799283AA9
- for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 19:27:15 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
+ by phobos.denx.de (Postfix) with ESMTPS id 7AE4A83AA9
+ for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 19:49:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ dmarc=pass (p=none dis=none) header.from=hotmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=macromorgan@hotmail.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=jg0cF6smCjzWRAh3P8TBBoqoTfMEmBEjlBEB8HXs5dOT0V2FGlrV4j6x0I8rgPb+GVaHJXKT6w3GDbPu/BLcbmzaWJBTprbpGFYasDTwsNx+tD/RmxvJOm9ROWQ6iqlWlkYKVBcOeGypltJHupPTCzr+VoyGRYVnuperSQaN65yUXNb5YOM30BuqV4KTKIAv+sE681zfCcTyFFu9iS2C0sD8sqLcMZZY9CxyZnfOdpcZFJbcrJ5Ai814JT7UTiZkUSj8C26Z0uvpYGJhcUHvIbMVxOkRh7ZIp8MUj+kwKem19pauppwdEDUPuFjmbPnh4UlcZrnufK7hXgpIpJqw4w==
+ b=ffWAANWhT03ZEtgYeEmGu4aTLnFeIVI/755oYwLLJgNYi6vG5uh8TcrKjjRCtqQlPehaBQ+HsIxpqfxcOXwDGHtFFglcfBlI6UWNVjthTgqVqUAayx9z5BcaF+roNs40YoInD8+5NOKXNyz3yiL1YkLbeji+KFRNnkjSLoocGg1qF1+Xb3PbG42+5g2rdmSpCOa1XC0iV7GuK9sJpQdwsGbKl1FnFcnSUYeuEV8umG5E3EeygCv6sGNE5Lb7H06uq9ldRC0ZrIER2ZpkwoXGrglvYFj2xPgp2HiEMccUTnXzSwswYHrm5Ydf8F6b5OLFILW3SVPx/3sdwuTOgcrEBA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=0+MgbIl/iJWSl6W6opxFX5IecypNSaQE3AhMRd520rc=;
- b=jklfke0dwJ5M/KYraioulFt+hXiEyBPKJgFoGU4mNArYUkYgeUfhdIXfq4meMdn8e1G6m2/G2tOZe3JlO4n7ASOkBvsn0tRIJ07lKc5YsLLwKlLbVEZkn1zTdRyHKBNVamXXj5+IUPjnP7SY77dkZRw/VboD1TXyJjHWF4J3IZcEWL/1iM2I9RHQ3x9VO0KZ9qDTYKnohq6CBWioKUviZYeJoBSvm4POkiM4FPA7J/1KtXwNKxiz6N+OIAH/BkiQf3ww/zUW6iJU+kcdm4DuTwEEJ2abmjrOwN1SlsSQR/RKl96n2t3x+rwHSxi5PAgCb7BNWPE9EZn8NPZrG2+uRw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ bh=99e6aVX/d/q4DKEbeuuNSrig/VUadY6QWl7ynWcwwkQ=;
+ b=kur6bxFVWtOpQvYP/SgoZEBMPcIS4WInsmM59PsZiVNHtJTLi5MRycFZsBMqpqHD+SFFXclSZIwKX2QHJftXAo2puRY4VewMdR2oBcMebaUWw8Evl4vU8z2Jc1O5BQbiv2cQwLfZc33zpQzJvg2Q12y2Rguks2Pxd5si7w1v1NIjiy+NZcmqfZAkkDeF4DVZEq0jOg/1qKhtzIwNj/Jzf6BS80B51z+UAf/3J5zQcAT7DVgawTZgjAZQzZEl5Yz72+u4OaOs7UPIKBawGpzKHjTpR6LMdgrQUz+CQ8O/Sp4eVvkPJKLxA3fM7aQkAbhzNVMJDzHg+fAjLBXmC/l+1Q==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
+ dkim=none; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=hotmail.com;
+ s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=0+MgbIl/iJWSl6W6opxFX5IecypNSaQE3AhMRd520rc=;
- b=gCc+ia/HpnRTeKJ3kAXTrf6gZee0igxraY76OQ7IsP4p7LVLhW0k5ga2z5J0yuP4+reJY1n2IDXKCYDdHAVjc8R1xkcpCWiFOmcB2P612IYv0Z2PWD3p/y6szoiUVFfygTFNAGPh7Vnkp0HHqxih3nizBu6Gps1K4Pvtk9CUfUI=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from PA4PR04MB7743.eurprd04.prod.outlook.com (2603:10a6:102:b8::20)
- by VI1PR04MB7197.eurprd04.prod.outlook.com (2603:10a6:800:129::17)
- with Microsoft SMTP Server (version=TLS1_2,
+ bh=99e6aVX/d/q4DKEbeuuNSrig/VUadY6QWl7ynWcwwkQ=;
+ b=HabgoK85gyqXZwpe01PfB1zIjx9aI9XDoqXhxxTG94+9nJoSeCtBSI/v8kIZMz/Ty+HmYeX947bVIvgt2+wgJeXxSOrfd1SXzZT/hpgaumy8UqPA4Mj3l23vxdCwgGegxXoA6GeWgiVqYOShWvCEvAvN175zOv3PTftbTMxuAE2z1LG+Cc90/MjfPxA3LDDbL5k13PrXIdVQfTiKI275Diebvx/CPu59R089SbvFeu0nlRi4UwnvfXmZ46sglchS3xK9xAJFK+erInNXIbWHyQJuG+88GQkuFl1+3avZ0a9IkyVjfYa+gLG6RaUZ8/1lFkYEV7bMZTHkjjthgwrT+Q==
+Received: from PH0PR19MB997338.namprd19.prod.outlook.com
+ (2603:10b6:510:3b1::18) by DM4PR19MB6344.namprd19.prod.outlook.com
+ (2603:10b6:8:a5::15) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9846.26; Mon, 27 Apr
- 2026 17:27:11 +0000
-Received: from PA4PR04MB7743.eurprd04.prod.outlook.com
- ([fe80::9a4e:252f:2fd:97b7]) by PA4PR04MB7743.eurprd04.prod.outlook.com
- ([fe80::9a4e:252f:2fd:97b7%6]) with mapi id 15.20.9846.016; Mon, 27 Apr 2026
- 17:27:11 +0000
-Message-ID: <8fd75285-39c3-4dfa-a163-41bc6628d995@cherry.de>
-Date: Mon, 27 Apr 2026 19:27:10 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/3] sunxi: spl: fix SPL_SUNXI_LED active low configuration
-To: Andre Przywara <andre.przywara@arm.com>,
- Paul Kocialkowski <paulk@sys-base.io>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
- Jernej Skrabec <jernej.skrabec@gmail.com>, linux-sunxi@lists.linux.dev
-References: <20260407223447.4956-1-andre.przywara@arm.com>
- <20260407223447.4956-2-andre.przywara@arm.com> <adfMQBPdntWy1KIq@shepard>
- <cf689aa6-4852-41c1-9c49-3c208e40d76b@cherry.de>
- <33493bbd-2364-4015-a3ab-858992800da9@arm.com>
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <33493bbd-2364-4015-a3ab-858992800da9@arm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: FR3P281CA0054.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:4a::18) To PA4PR04MB7743.eurprd04.prod.outlook.com
- (2603:10a6:102:b8::20)
+ 2026 17:48:59 +0000
+Received: from PH0PR19MB997338.namprd19.prod.outlook.com
+ ([fe80::fd22:ee23:3e25:3172]) by PH0PR19MB997338.namprd19.prod.outlook.com
+ ([fe80::fd22:ee23:3e25:3172%6]) with mapi id 15.20.9846.025; Mon, 27 Apr 2026
+ 17:48:59 +0000
+Date: Mon, 27 Apr 2026 12:48:52 -0500
+From: Chris Morgan <macromorgan@hotmail.com>
+To: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: Chris Morgan <macroalpha82@gmail.com>, u-boot@lists.denx.de,
+ jonas@kwiboo.se, trini@konsulko.com, kever.yang@rock-chips.com,
+ philipp.tomsich@vrull.eu, sjg@chromium.org
+Subject: Re: [PATCH] board: rockchip: add Anbernic RG-DS
+Message-ID: <PH0PR19MB99733877D409EC734B398DE017A5362@PH0PR19MB997338.namprd19.prod.outlook.com>
+References: <20260423183549.598018-1-macroalpha82@gmail.com>
+ <71f9df6c-81a5-461a-abae-ee07814705d0@cherry.de>
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <71f9df6c-81a5-461a-abae-ee07814705d0@cherry.de>
+X-ClientProxiedBy: SA1P222CA0040.NAMP222.PROD.OUTLOOK.COM
+ (2603:10b6:806:2d0::8) To PH0PR19MB997338.namprd19.prod.outlook.com
+ (2603:10b6:510:3b1::18)
+X-Microsoft-Original-Message-ID: <ae-hhE1xwZApYEDl@wintermute.localhost.fail>
 MIME-Version: 1.0
+X-MS-Exchange-MessageSentRepresentingType: 1
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PA4PR04MB7743:EE_|VI1PR04MB7197:EE_
-X-MS-Office365-Filtering-Correlation-Id: 7cda1f1f-2fc1-43eb-13bc-08dea482377f
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
+X-MS-TrafficTypeDiagnostic: PH0PR19MB997338:EE_|DM4PR19MB6344:EE_
+X-MS-Office365-Filtering-Correlation-Id: 11ee01eb-7741-4684-988c-08dea48542da
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|366016|1800799024|10070799003|376014|56012099003|18002099003|22082099003;
-X-Microsoft-Antispam-Message-Info: BL/tvClv889uEgLB76p5SXxNsCDnOISPaN4Wp40eTmiwKG1dk8pHFC04ZKf7N3PsRru2KWl+8K9H8kJDWwyg6AV1K7P9D1oowIkXtbBGS65I0wig4En3v/9XzLysAcZ3QKab/PJvQ5Aojha024Kv2F0MZv0vDml6K7IJsM+GqObj+9PZJhujcpVczw7h3hVGV2EGVKSOOGYzR2jEA8ZSpfOa6MI3mW2fPzd8B/e2lW/29WaohcJViooDkfIJST+B5bZCuugbcMR6VMKuLjKBIp8vgUsJJoGra29gNcYp5V1dkA2O7S1xLtfJ8zOEeYLYMe/FozcDoKbMCfXfVg/EDzV3naUW7Tn7vb8sgbNs9NcA2ov9gCrMnvgi3GP1hyjZOmFD/Nv/mDYlePWs4fyqTBFMkL7qHtmpHazSdVBkuiAzengwIzeQJPRRXMctP2fIcPaujehjmiIhRbmiQ3Gq06Kn5YyM6k9+ib9zZRwf7tGAyrlUi1U6BwSHhWT09r8S5zuoqlEPGe6trINMsEUM13nLPqZkwgJLW64cpTWgtD3Oq16oVzqLkesOf5MdaaqCH6IIRL963J2fn2QvCzbf5K3EfUk9eAaLvl7r2VV0F7ilmr/olzjP9xA5jTSfT8AQAZKPybbO8xhQbLFDE0lhHTHFuIBFZq5oQi8r9SU4PkHOkf069CFtU8PPlP4lqI+YdPWTchsbekv3qakB/tdHY3gF67l5k/2VIKhjeTYXkzM=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PA4PR04MB7743.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(1800799024)(10070799003)(376014)(56012099003)(18002099003)(22082099003);
- DIR:OUT; SFP:1101; 
+ ARA:14566002|461199028|23021999003|15080799012|19110799012|8060799015|6090799003|25031999004|5072599009|24021099003|37011999003|10035399007|440099028|3412199025|40105399003|52005399003;
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?E+ajmAPHDu1gdaGa/lxWCYyWWo/AqN/JX4KqHXcM+uBfSz16xFpIoutniR7Y?=
+ =?us-ascii?Q?WCeHFEi2r0R5fS1uX1EgyYWJag1Nwij7QWeW8h/M0D3RNexDRktRJN99IgsS?=
+ =?us-ascii?Q?xJiztRsmn3JCvUd77byGccCNanDbWnIDoQf+Gg132b/lmbcxfLcU+tR06ro9?=
+ =?us-ascii?Q?ls7CzaF9/jXM30PW16qdPhmv43z5lzlbG5mhAb3pJWQ9a93mNw+VTFUTgvbu?=
+ =?us-ascii?Q?PbdMiQ29FLzPtrhoJivVMav6FmSJU0o/UcY+ImaiA3nnojHq4CGB9HW8hKJB?=
+ =?us-ascii?Q?sU6fYo8f7LFubGqDi2qEZ3erq/0+oCjV7qOYnDDTSjbdZ46gUIM2ttnH1adI?=
+ =?us-ascii?Q?8omy+DenHk3aQ84CjJ82icFxsAJPZLFYG8eNBZWenf2Tv3rxSM3lwCuLaunw?=
+ =?us-ascii?Q?R4XNd1Gmx1HOMKb5vjfxQT5RWSiyuXWGlfi0YGHrOmHsPixS8qBpGj2E2nLN?=
+ =?us-ascii?Q?RGUVmIAJ8xyfJNHzbZHiO7fwxVqYotGUrd9RMaBz0JPd6gaXlkKz1WdiNYic?=
+ =?us-ascii?Q?ntn4WKf8ycMFHil0ydY5rl3u+k2tgPma9KiMvd9jDyGKG3NzI+k8dL/DPEVe?=
+ =?us-ascii?Q?ZLmXUBhlhQeKF6QoiFCDi3ajkv0hk+xxcy63hucLJlJpbCm6s3b4ICvffAw9?=
+ =?us-ascii?Q?NEY2uP+uj5nrdbroQBgXudtPZYPsHm81ZJVPE7jAHh5igr2EMXLVSo57V3lP?=
+ =?us-ascii?Q?BhsSQAO47Gd0Mxl6JROvIfrr/Ks7R2SSHHvOcXNO2twUFzYiCXFv96pennSV?=
+ =?us-ascii?Q?juV5Cq3UucbyckK/kUtwbAQX3B/p2AQGwGibeHk3Ygj01Br0SCzsrUEcBDqq?=
+ =?us-ascii?Q?DsQw/YeTcCyv6WWGXHPoxOk76cajz+cJp/1zb1PrSq5z8RsSO/42sz0HgaZ2?=
+ =?us-ascii?Q?qRN4pVfUP7Wezd+U6j5PZ+54iObjC0g6sJa7FqL1SN4y8WSc8KE2zFfK5Mla?=
+ =?us-ascii?Q?BTOwIfa+pnb7kfX3o0f9AM2b+5Rq42MxdFG0Oqp4jP0hgMo0fHM82KwwMHH/?=
+ =?us-ascii?Q?8g0L?=
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?K3E2VHZtb0JkZi96NmZqeFBDb0RLTGdTUkd3cXJUM0JHMEVzWk4zNTdmZDdQ?=
- =?utf-8?B?TmxBdVcxQWxTZ1o3TGtoMFNkeTR3OFVNMmZYVm9tTUg1U2FNZ01ZbnVWWE9M?=
- =?utf-8?B?cTlnQ3dZNEh1UDUwamdyZHJRWFpsZ3kxWXUwYTJObllNR29zeUtNcW5rczFM?=
- =?utf-8?B?aWJDWHBrLzhJVmNKR0Z3VHd5Tld2RDh1dDk3Z05EdkpvR2VkSGplUDVjQ1lr?=
- =?utf-8?B?WURreFB3L0V2NzJpeklmQXpOWWVIL3BnNDVxbXFzM3VXeHdUYzUwMnNrYkFw?=
- =?utf-8?B?d25ybmhSTWhybDNRY3ZRYXhZTEVRT1REVlNpL3ZRQy8yQmNyL0JTWjR2dVpC?=
- =?utf-8?B?YlZNVGtaL1k0K1ZBSU83ZVBrZzQzcFdjSTEvK25rcEpIOXBpVk5vcHNQeVJD?=
- =?utf-8?B?Nk4yNWdBNGpMcEtES2JoYk10TXZYb21XNWVZMzhLdFVlclFISnlidE8rb1I5?=
- =?utf-8?B?RFFlVmhuUmtzUVA5TEQ0NmExdXZPOWlyRmE3N1FvLyttNGFWMVYyQXAzSmRV?=
- =?utf-8?B?UUVoSDBHbDR4YlZZWlRIVUdPL3lOTW9GOWxvK2NFVUZtZ3dsckJWNGh6cUEy?=
- =?utf-8?B?ajl1aDFja3RRcXhOdWJmNDUwQnl5VTVSSDRVR0E2NmM1VklmRVhZbjhpTDNL?=
- =?utf-8?B?MjBPc1BsUExzMU1tTTVnVUljYW1iUHZuQnZSYVRZckh0cExEdU9mWjR5QlFZ?=
- =?utf-8?B?WndRUXorcVBDQ2hYWkdqT2Z4c2FSa2hScjZoWEYwRi9Sc2NJNzcxMXFpellQ?=
- =?utf-8?B?U3BJS25mWS8rVUcrKzhsaDJpeHZWc0pRc2o2S2o0ckNQckdnTFR2blB5SmV3?=
- =?utf-8?B?VHRRUWhaYkJRVmZtWi9CZCtXUTNPSEsyTmRvWXVoWEpieWtvVU9SUDV6VFA1?=
- =?utf-8?B?V1BOd2tRa1d4ZVlUdU5Bb1pmYkVtalNFeXRDa3ExMEtPWCtqU0k0a0lqamFo?=
- =?utf-8?B?eUZCM1czV0JZaC9VL1RmcHdlR1NrQVYybjQ1U3VReUNIUVRPWTA4WjhqUzEw?=
- =?utf-8?B?eUhvdGtkb3ZraDQxVEd2ZXJhdGtyNmYyQll0cWJTWkVrcTV0ZURpc1VwUTU2?=
- =?utf-8?B?MURLb0lMdnpBTEJwT1VydEkyYm83aDh4bjVzWWd2VmxvRFJjTk5IL3JkV1Vl?=
- =?utf-8?B?NDd2NlY1VEROdzJNdEoxQVFLUEE0OXV5VmhzZjN5Y1VPWTJkWmFHSDBGc2R3?=
- =?utf-8?B?RjkzS2lRMzdwNlJISkxjQk9YZ01yVy9RYTNNVG5LNWRtcEJhUXJaWHZFbEh0?=
- =?utf-8?B?UkRBRGc5MFdjTS90aEZxbFFkYkZUSjNyTXVQOUFJbVltOXJQRjVwOHA3KzVz?=
- =?utf-8?B?OGJaZElqT25yMzNyRjFOcUhxNnpKMTJNVXpQMGFsRXFTVkpUNzhzR3hUSGRO?=
- =?utf-8?B?UFJKSDNIWTArUStFanFtdnpBSUhXbFVJWTZhYlBqWnY4Q1NzUVZROHJuZ3A5?=
- =?utf-8?B?K3kvTWJRVXk3UFZsRXUzMHhlVEQvdnU3ZWpRTC8wRjlQUXE5dFdsRU5Sdldx?=
- =?utf-8?B?eXMvNUVwWlFxc05SYk9hN0Vuc2JTcjliT2FVZnAwcUpBczJ4Y242S3N2ZmRx?=
- =?utf-8?B?cklrbEo2Tm5NdDJPVVFOY21OZ3hRTGtvY2lhbHZxOExvb0I1VHdpd25EOU9L?=
- =?utf-8?B?SVRTSFhTWTRiRTFRVDVOWHcxR1dDS0dqNWYzRUFQSnhCWnNNTU9pU0hqdlpm?=
- =?utf-8?B?NndFQ2FIMTY2bGZBeGZXMVRVaTJlV3FKS2dPRHppU2tyeGhNUEZ3RnI2MWN6?=
- =?utf-8?B?S0NCZklNVENRNXp3Qzd6YTNtZEljOGo5azJLR3FKNmJEVUNEcHJZZnVWWlZw?=
- =?utf-8?B?cDljMThTVk5hNUZuNndOWXV6bDhTMW83UW9HQmhVUFlESkdseWxuMVRiSVVO?=
- =?utf-8?B?VGhGUVVTM3F1TE9sbkZhaTZLSGFiVkJnYlpTc24yN0hVYldFS0h0Y0p4aXlR?=
- =?utf-8?B?SnFWLzNMZ3QxNTB0M3VMZW5qRVFPdDVoMEVFZlUxTU9GbVUzQ1pud0xaaFd4?=
- =?utf-8?B?OFlybERwWVBIQ1hMU3o4NENPZlFYQ0tpWVYvS3QxTmxFNTBmMDBrRktrNjIv?=
- =?utf-8?B?S2JBam1XS3VrbkplZlhLSXZYU1FkaHVrT284MHFIRTNadE9FTlNwY2FrMTNo?=
- =?utf-8?B?VVZrRGRrV3pRYklXc0wwMHJTUFZ4TjEzVHZPZCtEcTdQOExYaXZ1YVFMclBE?=
- =?utf-8?B?VzdWQTAyVWs1UmswRTBrRUYxWHlNZTdiVFhRbVA2eUpMdXF2bTVFKytuRDFo?=
- =?utf-8?B?bW5wTFAweDJFanhYbktvMlFPcnE0ZFRxTEJtZ2o3Tk9IdFI4SS81S1R2NWdk?=
- =?utf-8?B?cURMb25Vb1BuQ21SL1VmOXppUjVFOElyRyt1ayt5djc5clZlditxOG1oUmgw?=
- =?utf-8?Q?jsH6a/LLRdVRZehf67X1j2KEK7vj45VbYkmq0?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 7cda1f1f-2fc1-43eb-13bc-08dea482377f
-X-MS-Exchange-CrossTenant-AuthSource: PA4PR04MB7743.eurprd04.prod.outlook.com
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?SIde3oFH7OgEZp8hiQ8OltSzuZZ7xe4rQhKynbNVDLpYvAijx0AC2N4pb4h6?=
+ =?us-ascii?Q?FaZ2MWN1QX7N/YGatDn9HrFVcHjBTDEIBFnAvGZfBmPFNzo5zYVP9XVdOoU1?=
+ =?us-ascii?Q?yLN8rYF8fdFV8htd/yMmpwWsOTymrRw/YI58aMxEUVBNRCtkQFVEh2cEzWEp?=
+ =?us-ascii?Q?ZzvZF2S7x+zUAcgs79jmCUHrjCGW35FL8EdfPNlOUk1vcCrQ/pNa1g928hvK?=
+ =?us-ascii?Q?UWAbYoFgsqENncxRiNDw+LnSRNqLgfqhR7BNaIuvpMWwc48rHJCTUq64AT3K?=
+ =?us-ascii?Q?UYtmA3YsYo6H0BDS1hTXE6Oz0/WnVbDW6jdwNl78wKFwfubvoeM3m1W9mgI+?=
+ =?us-ascii?Q?rupWH2eIQkPqW9R7RF+nGnIj6i2GAuVyMyIiSnn8qfjI8LGSD/0eHEhwNvY5?=
+ =?us-ascii?Q?NSvVQZkkR6Ov2ITmlrOGoqvV/KfflW+joOb1NQ0T0GAY9KtxNEnLyFw4j9U0?=
+ =?us-ascii?Q?/Xd/hzFqTBRp+70sK3hdt5G5IaF4zP8YGbuOTMZ9ehlZ5x5tMwy/94kk/A9L?=
+ =?us-ascii?Q?nMpE607TLYQM+b8PKzY7W4L2Fch+ksIa2H0+jZ2J285IHHPVtYURJVk0XzmL?=
+ =?us-ascii?Q?yJWmKPAcgbssM2h3RVFCjjaXsBpoWG4oS9PziUQ5p54Lj7EVxR5O3PUniJjX?=
+ =?us-ascii?Q?AKkPwVWH/2E3b92Wz8ed+PAMHWFkqYzaxegG0NCBoARJ9OxC2Agcbh39PrEF?=
+ =?us-ascii?Q?pyLIlADV2wCuzQKvM7TEk0zbzHE6BRx84X0bKTRKy0Fz8eRAPBBon+ER8GpN?=
+ =?us-ascii?Q?yfupfCB24VV5lrU2docQ+q968RMyLgsUc0SiuhqtYBZ3wAc/WaSB7jvIRBg6?=
+ =?us-ascii?Q?kMOu9PXLtgq+fpAHgynCKiWhxgt50cFAwMslp2FYK5d4jj0GBtkNuYOpfOKL?=
+ =?us-ascii?Q?gkJWvTlA/UlvS3XNz1AuVS2pEobZEmegc1PPgE4/SZll1L5Dg5T0yop2dZrI?=
+ =?us-ascii?Q?pyjdGAndJ40cHuTRvzjKBOkNhTUsWMZ4NU5M1Yg7sa3kkbyutw3TU1AdGHrV?=
+ =?us-ascii?Q?UWw2KZYjHocdsJwztQw22BLwf2xIHXOOVs1GnsuWB5LzXO5iXsXsPPOXCwbc?=
+ =?us-ascii?Q?Hh/cp23rIvj+tpQmFNoJ+JW7A2pm8Wh8+zmdaT7nSZB9Z4K0v71n1Oye4cON?=
+ =?us-ascii?Q?WP1h9GaIIbiNVuqgRrHq0vpstxiHI1LhXMQ1kbe2ofX+sEYlA3QRq1S2+BSc?=
+ =?us-ascii?Q?harP2KSE5kJkOrLePTThvALaIUMgrCzBj3yod9ivTg/ZkUtGyap9Yu1wGGtK?=
+ =?us-ascii?Q?4D/IsuoVbErE+EPA6fzDPy/smRCQutXv8lz7+KkrDY7ugvZ8Ttjc75wuoQq0?=
+ =?us-ascii?Q?8iKexLWGRVKwSR9Dz3ZQHA/QyzIxNNrSbbq6nKbkhEVyj10sV0zdXdgBngS6?=
+ =?us-ascii?Q?Dl5n9Zn2WfXmcwvhedegYPw+g++L0RpSrSgJlJ2ZZhV+QsgLKw=3D=3D?=
+X-OriginatorOrg: sct-15-20-9412-4-msonline-outlook-990eb.templateTenant
+X-MS-Exchange-CrossTenant-Network-Message-Id: 11ee01eb-7741-4684-988c-08dea48542da
+X-MS-Exchange-CrossTenant-AuthSource: PH0PR19MB997338.namprd19.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Apr 2026 17:27:11.8576 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Apr 2026 17:48:59.4615 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: wc87iN6zWDjYp/e1Z0R9A24qzBlRObR3l6UQwD8KX48UrN/7OtkqQLTVxZQpH9FAxK430MOSRkn0hJX3+KmfK9gzGoyhvrHBPi3ckRj7ZgY=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR04MB7197
+X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
+X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR19MB6344
+X-Mailman-Approved-At: Mon, 27 Apr 2026 19:55:49 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -152,114 +143,246 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Andre,
+On Mon, Apr 27, 2026 at 01:29:41PM +0200, Quentin Schulz wrote:
+> Hi Chris,
+> 
+> On 4/23/26 8:35 PM, Chris Morgan wrote:
+> > From: Chris Morgan <macromorgan@hotmail.com>
+> > 
+> > Add support for the Anbernic RG-DS dual-screen handheld gaming device.
+> > 
+> > Link: https://anbernic.com/products/rgds
+> > Signed-off-by: Chris Morgan <macromorgan@hotmail.com>
+> > ---
+> >   .../arm/dts/rk3568-anbernic-rg-ds-u-boot.dtsi | 41 ++++++++++
+> >   arch/arm/mach-rockchip/rk3568/Kconfig         |  7 ++
+> >   board/anbernic/rg-ds/Kconfig                  | 12 +++
+> >   board/anbernic/rg-ds/MAINTAINERS              |  7 ++
+> >   configs/anbernic-rg-ds-rk3568_defconfig       | 76 +++++++++++++++++++
+> >   include/configs/anbernic-rg-ds-rk3568.h       | 12 +++
+> >   6 files changed, 155 insertions(+)
+> >   create mode 100644 arch/arm/dts/rk3568-anbernic-rg-ds-u-boot.dtsi
+> >   create mode 100644 board/anbernic/rg-ds/Kconfig
+> >   create mode 100644 board/anbernic/rg-ds/MAINTAINERS
+> >   create mode 100644 configs/anbernic-rg-ds-rk3568_defconfig
+> >   create mode 100644 include/configs/anbernic-rg-ds-rk3568.h
+> > 
+> 
+> Please add an entry to doc/board/rockchip/rockchip.rst.
 
-On 4/27/26 3:07 PM, Andre Przywara wrote:
-> Hi Quentin, Paul,
+Will do.
+
 > 
-> ah, it seems like LEDs are the "embedded bike shed", let me add my shade 
-> of blue ;-)
+> > diff --git a/arch/arm/dts/rk3568-anbernic-rg-ds-u-boot.dtsi b/arch/arm/dts/rk3568-anbernic-rg-ds-u-boot.dtsi
+> > new file mode 100644
+> > index 00000000000..337e50f2e54
+> > --- /dev/null
+> > +++ b/arch/arm/dts/rk3568-anbernic-rg-ds-u-boot.dtsi
+> > @@ -0,0 +1,41 @@
+> > +// SPDX-License-Identifier: GPL-2.0+
+> > +
+> > +#include "rk356x-u-boot.dtsi"
+> > +
+> > +&gpio0 {
+> > +	bootph-pre-ram;
+> > +};
+> > +
+> > +&i2c0 {
+> > +	bootph-pre-ram;
+> > +};
+> > +
+> > +&i2c0_xfer {
+> > +	bootph-pre-ram;
+> > +};
+> > +
+> > +&i2s1m0_mclk {
+> > +	bootph-pre-ram;
+> > +};
+> > +
+> > +&pmic_int_l {
+> > +	bootph-pre-ram;
+> > +};
+> > +
+> > +&rk817 {
+> > +	regulators {
+> > +		bootph-pre-ram;
+> > +	};
+> > +};
+> > +
+> > +&sdhci {
+> > +	cap-mmc-highspeed;
+> > +};
 > 
-> On 4/21/26 19:12, Quentin Schulz wrote:
->> Hi Paul,
->>
->> On 4/9/26 5:56 PM, Paul Kocialkowski wrote:
->>> Hi,
->>>
->>> On Wed 08 Apr 26, 00:34, Andre Przywara wrote:
->>>> The newly introduced Allwinner SPL LED "framework" defined a
->>>> SPL_SUNXI_LED_STATUS_STATE Kconfig symbol, that was supposed to denote
->>>> the active-low vs. active-high polarity of the LED. However this is
->>>> a bool symbol, so it will simply vanish if not defined, and we 
->>>> cannot use
->>>> it directly inside a C statement.
->>>>
->>>> Filter the symbol through the IS_ENABLED() macro, which will return 
->>>> 0 if
->>>> the symbol is not defined, which is the intended value here.
->>>>
->>>> This fixes configuring LEDs with active-low polarity.
->>>>
->>>> Signed-off-by: Andre Przywara <andre.przywara@arm.com>
->>>> ---
->>>>   board/sunxi/board.c | 2 +-
->>>>   1 file changed, 1 insertion(+), 1 deletion(-)
->>>>
->>>> diff --git a/board/sunxi/board.c b/board/sunxi/board.c
->>>> index d7722d1858a..80dcae9c1a4 100644
->>>> --- a/board/sunxi/board.c
->>>> +++ b/board/sunxi/board.c
->>>> @@ -563,7 +563,7 @@ static void 
->>>> sunxi_spl_store_dram_size(phys_addr_t dram_size)
->>>>   static void status_led_init(void)
->>>>   {
->>>>   #if CONFIG_IS_ENABLED(SUNXI_LED_STATUS)
->>>> -    unsigned int state = CONFIG_SPL_SUNXI_LED_STATUS_STATE;
->>>> +    unsigned int state = 
->>>> IS_ENABLED(CONFIG_SPL_SUNXI_LED_STATUS_STATE);
->>>
->>> Sorry I didn't react to the initial submission, but it feels like the
->>> CONFIG_SPL_SUNXI_LED_STATUS_STATE symbol really means active-high if 
->>> enabled
->>> and active-low if disabled. The name would suggest that it's an int 
->>> with a value
->>> of either 0 or 1 instead.
->>>
->>
->> Yeah, I lazily renamed the old CONFIG_LED_STATUS_STATE which used to 
->> be an int range (0..2) and made it both specific for Allwinner as well 
->> as changing it into a bool.
->>
->>> I think it would be less confusing to call the symbol
->>> CONFIG_SPL_SUNXI_LED_STATUS_ACTIVE_LOW and reverse its meaning, so 
->>> that we can
->>> spare defining it in most configs (that will be active-high).
->>
->> You can also have
->> default y
->> in your symbol to not have to reverse the meaning.
-> 
-> So what about:
-> config CONFIG_SPL_SUNXI_LED_STATUS_ACTIVE_HIGH
->      default y
-> then?
-> 
->>
->>> Also the description currently mentions "initial state" which may be 
->>> confusing
->>> as it could refer to the state inherited after reset (e.g. due to 
->>> some pull
->>> resistor) or the state we do set in the SPL.
->>>
->>
->> It was the prompt for the now removed LED_STATUS_STATE. What are you 
->> suggesting instead?
-> 
-> I came up with:
-> Whether the GPIO of the status LED must be set high or low to turn the 
-> LED on.
-> Thoughts?
-> 
->>
->>>>       unsigned int gpio = CONFIG_SPL_SUNXI_LED_STATUS_BIT;
->>>
->>> And while at it I would rename this to something like:
->>> CONFIG_SPL_SUNXI_LED_STATUS_GPIO since it indicates the GPIO number, 
->>> not a
->>> specific bit in a sunxi-specific kind of register.
->>>
->>
->> Also a remnant of LED_STATUS_BIT* symbols. Either work for me.
-> 
-> Yes, indeed CONFIG_LED_STATUS_GPIO makes much more sense.
+> Why is this not upstreamed to the Linux kernel DTS?
 > 
 
-CONFIG_SPL_SUNXI_LED_STATUS_GPIO I'm assuming?
+I think early in testing I copied this from another board, but it turns
+out after testing this isn't needed so I'll remove it.
 
-> Let me know what you think.
+> > +
+> > +&sdmmc_pwren_l {
+> > +	bootph-pre-ram;
+> > +};
+> > +
+> > +&vcc3v3_sd {
+> > +	bootph-pre-ram;
+> > +};
+> 
+> Don't you need vccio_sd as well since it's the vin-supply of vcc3v3_sd? (and
+> also used as vqmmc-supply for sdmmc0
+
+I will add it. I believe the regulator is programmed by OTP to always
+be on during boot, but it couldn't hurt to be explicit. 
+
+> 
+> > diff --git a/arch/arm/mach-rockchip/rk3568/Kconfig b/arch/arm/mach-rockchip/rk3568/Kconfig
+> > index 2730220a18e..8fbd764ab54 100644
+> > --- a/arch/arm/mach-rockchip/rk3568/Kconfig
+> > +++ b/arch/arm/mach-rockchip/rk3568/Kconfig
+> > @@ -8,6 +8,12 @@ config TARGET_EVB_RK3568
+> >   	help
+> >   	  RK3568 EVB is a evaluation board for Rockchp RK3568.
+> > +config TARGET_ANBERNIC_RG_DS_RK3568
+> > +	bool "Anbernic RG DS"
+> > +	help
+> > +	  Anbernic RG DS gaming device with Rockchip RK3568 and dual
+> > +	  displays.
+> > +
+> >   config TARGET_ANBERNIC_RGXX3_RK3566
+> >   	bool "Anbernic RGXX3"
+> >   	help
+> > @@ -71,6 +77,7 @@ config SYS_SOC
+> >   	default "rk3568"
+> >   source "board/rockchip/evb_rk3568/Kconfig"
+> > +source "board/anbernic/rg-ds/Kconfig"
+> >   source "board/anbernic/rgxx3_rk3566/Kconfig"
+> >   source "board/hardkernel/odroid_m1/Kconfig"
+> >   source "board/hardkernel/odroid_m1s/Kconfig"
+> > diff --git a/board/anbernic/rg-ds/Kconfig b/board/anbernic/rg-ds/Kconfig
+> > new file mode 100644
+> > index 00000000000..cb93c249cf4
+> > --- /dev/null
+> > +++ b/board/anbernic/rg-ds/Kconfig
+> > @@ -0,0 +1,12 @@
+> > +if TARGET_RG_DS_RK3568
+> > +
+> > +config SYS_BOARD
+> > +	default "rg-ds-rk3568"
+> > +
+> > +config SYS_VENDOR
+> > +	default "anbernic"
+> > +
+> > +config SYS_CONFIG_NAME
+> > +	default "rg-ds-rk3568"
+> > +
+> > +endif
+> > diff --git a/board/anbernic/rg-ds/MAINTAINERS b/board/anbernic/rg-ds/MAINTAINERS
+> > new file mode 100644
+> > index 00000000000..79ddb663ab7
+> > --- /dev/null
+> > +++ b/board/anbernic/rg-ds/MAINTAINERS
+> > @@ -0,0 +1,7 @@
+> > +ANBERNIC-RG-DS-RK3568
+> > +M:	Chris Morgan <macromorgan@hotmail.com>
+> > +S:	Maintained
+> > +F:	arch/arm/dts/rk3568-anbernic-rg-ds-u-boot.dtsi
+> > +F:	board/anbernic/rg-ds
+> 
+> Should we have rk3568 mentioned here maybe? Not a blocker though.
+
+I'll add it.
+
+> 
+> > +F:	configs/anbernic-rg-ds_defconfig
+> > +F:	include/configs/anbernic-rg-ds.h
+> 
+> Both defconfig and include files do not match here.
 > 
 
-Ack to all but I also don't care too much about Allwinner. @Paul?
+Sorry, will fix.
 
-Cheers,
-Quentin
+> > diff --git a/configs/anbernic-rg-ds-rk3568_defconfig b/configs/anbernic-rg-ds-rk3568_defconfig
+> > new file mode 100644
+> > index 00000000000..c16a208a117
+> > --- /dev/null
+> > +++ b/configs/anbernic-rg-ds-rk3568_defconfig
+> > @@ -0,0 +1,76 @@
+> > +CONFIG_ARM=y
+> > +CONFIG_SKIP_LOWLEVEL_INIT=y
+> > +CONFIG_COUNTER_FREQUENCY=24000000
+> > +CONFIG_ARCH_ROCKCHIP=y
+> > +CONFIG_SPL_GPIO=y
+> > +CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3568-anbernic-rg-ds"
+> > +CONFIG_ROCKCHIP_RK3568=y
+> > +CONFIG_ROCKCHIP_RK8XX_DISABLE_BOOT_ON_POWERON=y
+> > +CONFIG_SPL_SERIAL=y
+> > +CONFIG_TARGET_ANBERNIC_RG_DS_RK3568=y
+> > +CONFIG_SYS_LOAD_ADDR=0xc00800
+> > +CONFIG_DEBUG_UART_BASE=0xFE660000
+> > +CONFIG_DEBUG_UART_CLOCK=24000000
+> > +CONFIG_DEBUG_UART=y
+> > +# CONFIG_EFI_LOADER is not set
+> 
+> Any reason for explicitly disabling EFI support? (aside from other anbernic
+> devices disabling it as well?) I believe some distros depend on that for
+> booting up?
+
+I don't use it, but I shouldn't explicitly disable it. I'll remove that.
+
+> 
+> > +CONFIG_FIT=y
+> > +CONFIG_FIT_VERBOSE=y
+> > +CONFIG_SPL_FIT_SIGNATURE=y
+> > +CONFIG_SPL_LOAD_FIT=y
+> > +CONFIG_LEGACY_IMAGE_FORMAT=y
+> 
+> Is this really used? I'm thinking we should probably stop using this for new
+> boards if possible?
+
+I don't use it, I just copied it from my other Rockchip boards. I'll remove it.
+
+> 
+> > +CONFIG_OF_STDOUT_VIA_ALIAS=y
+> > +CONFIG_DEFAULT_FDT_FILE="rockchip/rk3568-anbernic-rg-ds.dtb"
+> > +CONFIG_DISABLE_CONSOLE=y
+> 
+> Why no console? This will make debugging harder no?
+
+I belive this was a vestige from something I copied, so I'll remove that.
+
+> 
+> > +# CONFIG_CONSOLE_MUX is not set
+> > +CONFIG_BOARD_TYPES=y
+> > +# CONFIG_DISPLAY_CPUINFO is not set
+> > +CONFIG_DISPLAY_BOARDINFO_LATE=y
+> > +CONFIG_BOARD_RNG_SEED=y
+> > +CONFIG_SPL_MAX_SIZE=0x40000
+> > +# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
+> > +CONFIG_SPL_POWER=y
+> > +CONFIG_SPL_ATF=y
+> > +CONFIG_CMD_PWM=y
+> > +CONFIG_CMD_GPT=y
+> > +CONFIG_CMD_MMC=y
+> > +# CONFIG_CMD_SETEXPR is not set
+> > +# CONFIG_CMD_CLS is not set
+> > +# CONFIG_SPL_DOS_PARTITION is not set
+> > +CONFIG_SPL_OF_CONTROL=y
+> > +CONFIG_OF_LIVE=y
+> > +CONFIG_OF_LIST="rockchip/rk3568-anbernic-rg-ds"
+> > +CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
+> 
+> Why remove clock-names?
+
+For the RK817 PMIC it has clocks but they are only needed for the audio codec.
+Based on observation when probing the PMIC if the clocks are defined but cannot
+be probed then probing the PMIC also fails. Since the clocks are really only
+used for the audio codec, we don't need them here.
+
+> 
+> Cheers,
+> Quentin
+
+I'll make all the changes you suggest, except for the clock-names one which
+has an explicit reason. Thank you for your review.
+
+Chris
