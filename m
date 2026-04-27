@@ -4,53 +4,107 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CBEABFF8850
-	for <u-boot@archiver.kernel.org>; Mon, 27 Apr 2026 04:55:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C3B6FF8860
+	for <u-boot@archiver.kernel.org>; Mon, 27 Apr 2026 05:28:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CC37C83693;
-	Mon, 27 Apr 2026 06:55:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=archcloudlabs.com
+	by phobos.denx.de (Postfix) with ESMTP id 0E6C883693;
+	Mon, 27 Apr 2026 07:28:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=archcloudlabs.com header.i=@archcloudlabs.com header.b="FFWZgNks";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="KdCevvnI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 610A383FDB; Sun, 26 Apr 2026 22:45:24 +0200 (CEST)
-Received: from out-177.mta1.migadu.com (out-177.mta1.migadu.com
- [95.215.58.177])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id F2CD7839D9; Mon, 27 Apr 2026 07:28:06 +0200 (CEST)
+Received: from mail-yx1-xb12d.google.com (mail-yx1-xb12d.google.com
+ [IPv6:2607:f8b0:4864:20::b12d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5C38F80087
- for <u-boot@lists.denx.de>; Sun, 26 Apr 2026 22:45:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=archcloudlabs.com
+ by phobos.denx.de (Postfix) with ESMTPS id 559D380077
+ for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 07:28:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dllcoolj@archcloudlabs.com
-Content-Type: multipart/mixed;
- boundary=6cafb2f3c59859c127b88ea0c9d64ab27fe765b023581055df2ca1b28985
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=archcloudlabs.com;
- s=key1; t=1777236320;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:mime-version:mime-version:content-type:content-type;
- bh=Cm4m2oY3KYM2ldZV5kl38dUJ3qryT4KMddZRnoVWHx4=;
- b=FFWZgNksxZ3Akby5cQdKYq1EDv948JEtLdD5ML6xADl3rPrGgqAZIMBSK+kO3H0AvXgOse
- qKU6AZi0aujdYJewwLydVTIzO3atYdBCwz2AWOf/Vf/7CF1QuCwsyLOHurAhLavs8AfH5Q
- +kBUbW4n/J8JZz0GBUsAXAThi62/xiqThM+zk6/FeEKgvj5rJzHrUmYs5kmnUMOwPEii8L
- 6DMFHPE1JkXMSww+TsmN6gf8G7M9KxaoxN2b5+7Xy5WlNx5j0jd75GbK+7kzIEqI+6Lnur
- uHbOVqaTyh0ZzNL8PPTuVHqUviiDswRaIbXiZxvFL3KNqolmmP3XxfIdCXk9tg==
-Mime-Version: 1.0
-Date: Sun, 26 Apr 2026 16:45:15 -0400
-Message-Id: <DI3DOZXB8ES4.12PBN3MVHW911@archcloudlabs.com>
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
- include these headers.
-From: "Jared Stroud" <dllcoolj@archcloudlabs.com>
-To: <trini@konsulko.com>, <joaomarcos.costa@bootlin.com>,
- <richard.genoud@bootlin.com>, <thomas.petazzoni@bootlin.com>,
- <miquel.raynal@bootlin.com>, <u-boot@lists.denx.de>
-Subject: [PATCH] fs/squashfs fix overflow in sqfs_find_inode()
-X-Migadu-Flow: FLOW_OUT
-X-Mailman-Approved-At: Mon, 27 Apr 2026 06:55:50 +0200
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yx1-xb12d.google.com with SMTP id
+ 956f58d0204a3-65427236e94so6404443d50.1
+ for <u-boot@lists.denx.de>; Sun, 26 Apr 2026 22:28:03 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1777267682; cv=none;
+ d=google.com; s=arc-20240605;
+ b=BMpZcChEnrPu+jW3GHqBfaD1IINDW3E56r3Q+rz768jJRB0qR48fZSr0NVUjQL/4pW
+ uXwufJbqOHOYdZqMyLoV5MejQK23qXg1jXyk0tSWzne4LfgH1Z9g0HCxe/PnoFOO2OpH
+ gz1h9iBN/Ebuh8BXTmAD5rgTB9pBQip76rWQpXlZ2U0uLRDSt7l+ju/Pn1y+PragNwAw
+ AEDUMpDO3Ny9naEg7mynUK1oCRadBFJWr/Hz4hoX6IYk/ZZO0+oO7r6WdHo0sLKyHNww
+ qrHCnIO3BL+i99IWsTF9/Q40F2LZHvoZW01vNYHoyW+mpcYvuycMiArof/L5WQgzsULk
+ ChnQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=3znor5SgIGx8UFkkXCfc4obtG7sN9Y8i0o+7DpPuL8o=;
+ fh=2aUzbW5EtNKzL4BdJFR67kmysRyhyYprU9mL/ppi/8I=;
+ b=kQ3lhq0uI+aGLJAcdAprxwar0zVsy57/GrSsTtmtOtVEjfWT1f3oarTiodl0B1wj0g
+ hDLxj3ERk3NfHPaobDPUxyOv3aWA0ACCSx/joUfDi7ERAHuudr6+0MXvHLGX6+dV7Zmm
+ 2QFuBeNRFWk0boBEFXIONQsspxCC4nSzQHBNxahyr9GjHhJOudqS38M/8liY0dwse3zU
+ akPSFF2/pHTKd0mqEiUOpEC0bErgrZE0eRBfYRqaxywoHUOjPJhtK53EFrP/vpAl1k1z
+ /rHVd5sylNQsICN9CLaFN/vwLe+J46cFF30OhMQAFfzsok0cjkJks0Yx0eM8FJCEBExj
+ WeqA==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1777267682; x=1777872482; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=3znor5SgIGx8UFkkXCfc4obtG7sN9Y8i0o+7DpPuL8o=;
+ b=KdCevvnIoSOK5D182pt8RqhCah50Z8ojEFRVeZ+Ntp7mK+7+tarPfdUvgsJY8rVV7K
+ 4G3XO/ZNGjKM+vmVrt2uLU7ruSVWILnmUGNECTwXVwbuviHzB5y7CiNKHzY1a1tIMJnQ
+ QOnDjl/8C/c9JaDuYEc3x1WSAZXJrdPe/1f4h115+2lcLo8vXpR576V3FYgHGUWyeZiC
+ g6IUhKCHRhcedEYdmj97nyus715HLjA2x5GZme2VdQ7Lnibw6sZ4krmSYzNK5GEgFhhh
+ ng19K2SXRpF2FYq1/7Oy/H7KYddgloFKc/pbeKKysA6eRQEqImk75cnF1LXePfbtKv1V
+ 7GAw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1777267682; x=1777872482;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=3znor5SgIGx8UFkkXCfc4obtG7sN9Y8i0o+7DpPuL8o=;
+ b=c93anQLK8T/tMVJE/x37U2tFdhbqz4jUOwPVOPOeyPmiDxwAu8/CuvEmWSN0t0NRs+
+ l8pQTdx+JXrjwsdscZ0mTFsbBznm7v2lzEDwNCeXUmHt97R7dym7aESGzRcieGysMt3M
+ R8aklYE5IjnZuVCn1NAroVl0Dm6RssE+tphREmVRrU5ANa1jMz9DHjJsAFyWrBXA7wGT
+ Yor7s3bgChbC2s8/HN1I1NAUsuGahflVGop4xX95V5rAFx8dahUI2THxX5xuRLho4RDK
+ WvrzPfCxjhRJXAFotnQ0eGuSpXxQEO8k/CzTFIhe5WP6MXSp010hfhCM6UwUJqzuCdfT
+ bGMw==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ/fBDwBFPnPF7XW1/7C/tvz8TqzgwQXygd+NcwHziAYQmNblWw1F1FfBzI6WamYmICzxC5p3h0=@lists.denx.de
+X-Gm-Message-State: AOJu0YySVT24TT6wNwWKtKvzSSBEFOgp+2NyCirnJ45hW2E3Ap2ok0SU
+ 2ehhM8RW7Cjv6qjgcmWbGzgTn6YAjWklIt1ANEXLR8fj2iL6yfjDuwufJn6FcJA5WQ8UGpDc5ml
+ 9l4jXIFsNQEg8RXtXm7JGMjl7GV/QBpV8yFWGdHOFNw==
+X-Gm-Gg: AeBDiev6FSPhJi4fajG2K/9+kKkUuBKc2STEmuV4d1wXST4iXXNoelDqlQSKEOAWvVK
+ iVjO9SXaS67pkIwymy+UwMcirXPAKGvO2ocw9lBbZKLD4E/QOuMLA6b1KbetdpYoeHcJtdiyr3u
+ seQf58uAb7vdassXeyJrmsIK3oG9NJXeY31hY5H+WttwjYbZA0Mn1UdTqmMoFWba/MitjiIIQLd
+ utAYHsy1V9CAQ7IvVCv6GGzkSDsDyuesmIbhFtHgFJozyh28NOrkwxJQLDgHXvz4uGtgtBbqZJp
+ iRRDD5Sey5dbUavetDCcoku6O50ZwgNiJUoU5ddEDYr0ZaFLTueyl/iZe+hm0+h3XKLr8kA4Qs5
+ ia+WzUNfFFiFjtz9/UVFSE5K1K7h8e0xDThgfBanmb10+j6k/9vJYJx0/Hbwgx9LCMT5yvaaH3R
+ xaQm6HXIo97IyW4aphW09aJWU+TyIup43lTI3XhRWSJwvOgIJwFMY73xb8Bkw+S+d2ud1iXV71w
+ 9j5W5MQNHhzKzf1PdMmcrlGsknUdbFl10FvQYxPtLhG9QrbO88MVO+IrerpWFfc9EZ05VX0tQYC
+ oF/34EjNBtUfzmJ7m4uGscHLDHM1/BiuqQ6hOrjWI0hswe/CIXSXibGMxshKh7k1oS2rVhEgZWR
+ oa9yJ30/KLG6LCTpx
+X-Received: by 2002:a53:ac87:0:b0:657:a0f4:ac1d with SMTP id
+ 956f58d0204a3-657a103f063mr7711523d50.12.1777267681948; Sun, 26 Apr 2026
+ 22:28:01 -0700 (PDT)
+MIME-Version: 1.0
+References: <20260416055948.130041-1-ilias.apalodimas@linaro.org>
+ <20260416055948.130041-4-ilias.apalodimas@linaro.org>
+ <a1e1a4ff-55a3-4d3a-9050-7df48071163b@mailbox.org>
+In-Reply-To: <a1e1a4ff-55a3-4d3a-9050-7df48071163b@mailbox.org>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Mon, 27 Apr 2026 08:27:25 +0300
+X-Gm-Features: AQROBzANHmeF2OweHTtFGbZMOEwudcdCVxqcDzAIi7hg3DwsRFn6kCpBDlVJ3Gs
+Message-ID: <CAC_iWjJ+i0-9cKvOoDU0tH6hWyYTa0X2z_UEa1Hqa4xu5NpciA@mail.gmail.com>
+Subject: Re: [PATCH v2 3/6] treewide: move bi_dram[] from bd to gd
+To: Marek Vasut <marek.vasut@mailbox.org>
+Cc: trini@konsulko.com, marek.vasut+renesas@mailbox.org, jonas@kwiboo.se, 
+ anshuld@ti.com, sjg@chromium.org, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -67,146 +121,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
---6cafb2f3c59859c127b88ea0c9d64ab27fe765b023581055df2ca1b28985
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+On Sun, 26 Apr 2026 at 19:24, Marek Vasut <marek.vasut@mailbox.org> wrote:
+>
+> On 4/16/26 7:59 AM, Ilias Apalodimas wrote:
+> > Currently, the bi_dram[] information is stored in the board info
+> > structure (bd). Because bd is only valid after reserve_board(),
+> > dram_init_banksize() must be called late in the initialization process.
+> > This limitation is problematic, as it forces us to rely on a variety of
+> > bespoke functions to determine board RAM, bank memory sizes, and other
+> > early setup requirements.
+> >
+> > By moving bi_dram[] into the global data (gd)
+> The change itself is fine, but the variable name should be updated.
+> Doesn't 'bi_dram' literally stand for "board info - dram" ? Since the
+> bi_dram is now in gd, it should be called something else, maybe simply
+> "dram" ?
 
-Hello u-boot list,
+Sure, i'll move it to 'dram'
 
-I found a parsing bug in sqfs_find_inode().=20
-While fuzzing the file_size attributes of the squashfs_reg_inode structure,=
- if the file_size attribute has a sufficient large value, &base->inode_numb=
-er will jump to an arbitrary location in memory resulting in a invalid memo=
-ry access and crash.
-
-I tested this with a modified file SquashFS file system and U-Boot Sandbox =
-with release 2026.01.
-
-```
-	for (k =3D 0; k < le32_to_cpu(inode_count); k++) {
-
-		// 3) jump ahead in the inode_table from new offset
-		base =3D inode_table + offset;
-
-		// 4) attempt to access location in memory
-		if (get_unaligned_le32(&base->inode_number) =3D=3D inode_number)
-			return inode_table + offset;
-
-		// 1) large file size is read here
-		sz =3D sqfs_inode_size(base, le32_to_cpu(block_size));=20
-
-		if (sz < 0)
-			return NULL;
-
-		// 2) file size is added to offset
-		offset +=3D sz;
-	}
-```
-
-The crash and resulting ASAN output can be seen below.
-```
-hit any key to stop autoboot: 0
-=3D> host bind 0 random3.sqfs
-=3D> ls host 0 /
-AddressSanitizer:DEADLYSIGNAL
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-=3D=3D75950=3D=3DERROR: AddressSanitizer: SEGV on unknown address 0x0000671=
-28936 (pc 0x0000006689a1 bp 0x000019b354a0 sp 0x7fff2b718600 T0)
-=3D=3D75950=3D=3DThe signal is caused by a READ memory access.
-    #0 0x0000006689a1 in sqfs_find_inode fs/squashfs/sqfs_inode.c:131
-    #1 0x000000660c79 in sqfs_search_dir fs/squashfs/sqfs.c:489
-    #2 0x000000662af6 in sqfs_opendir_nest fs/squashfs/sqfs.c:977
-    #3 0x0000006238e3 in fs_opendir fs/fs.c:669
-    #4 0x000000623c67 in fs_ls_generic fs/fs.c:66
-    #5 0x000000623fc2 in fs_ls fs/fs.c:537
-    #6 0x000000623fc2 in do_ls fs/fs.c:881
-    #7 0x000000623fc2 in do_ls.isra.0 fs/fs.c:870
-    #8 0x0000004eae8e in cmd_call common/command.c:582
-    #9 0x0000004eae8e in cmd_process common/command.c:637
-    #10 0x0000004da9d6 in run_pipe_real common/cli_hush.c:1672
-    #11 0x0000004da9d6 in run_list_real common/cli_hush.c:1868
-    #12 0x0000004db112 in run_list common/cli_hush.c:2017
-    #13 0x0000004db112 in parse_stream_outer common/cli_hush.c:3207
-    #14 0x0000004117eb in parse_file_outer common/cli_hush.c:3299
-    #15 0x0000004117eb in cli_loop common/cli.c:306
-    #16 0x0000004117eb in main_loop common/main.c:86
-    #17 0x0000004117eb in run_main_loop common/board_r.c:584
-    #18 0x0000004117eb in initcall_run_r common/board_r.c:776
-    #19 0x0000004117eb in board_init_r common/board_r.c:806
-    #20 0x0000004117eb in sandbox_main arch/sandbox/cpu/start.c:584
-    #21 0x7fb1a66105b4 in __libc_start_call_main (/lib64/libc.so.6+0x35b4) =
-(BuildId: 5e8f131adc80bf454af46edf4a1527ae61e1b968)
-    #22 0x7fb1a6610667 in __libc_start_main@@GLIBC_2.34 (/lib64/libc.so.6+0=
-x3667) (BuildId: 5e8f131adc80bf454af46edf4a1527ae61e1b968)
-    #23 0x000000401524 in _start (/usr/src/u-boot/u-boot+0x401524) (BuildId=
-: 7121dd98eb40baab73fe6c0941c8200f29e1ad23)
-
-=3D=3D75950=3D=3DRegister values:
-rax =3D 0x000000006712892a  rbx =3D 0x00000000009dbaa0  rcx =3D 0x000000000=
-0020000  rdx =3D 0x0000000000000000
-rdi =3D 0x0000000000006fd5  rsi =3D 0x0000000000007abd  rbp =3D 0x000000001=
-9b354a0  rsp =3D 0x00007fff2b718600
- r8 =3D 0x000000004d5f348a   r9 =3D 0x0000000067128936  r10 =3D 0x000000000=
-0000501  r11 =3D 0x0000000000000001
-r12 =3D 0x0000000000000002  r13 =3D 0x0000000000000001  r14 =3D 0x000000001=
-9a0e900  r15 =3D 0x0000000000000001
-AddressSanitizer can not provide additional info.
-SUMMARY: AddressSanitizer: SEGV fs/squashfs/sqfs_inode.c:131 in sqfs_find_i=
-node
-=3D=3D75950=3D=3DABORTING
-```
-
-This bug is similar to CVE-2024-57254 in that memory operations are occurin=
-g based on inode values.
-I applied a similar fixed via the commmit c8e929e5758999933f9e905049ef2bf3f=
-e6b140d, re-tested U-Boot with the crashing file system, and successfully a=
-voided the crash.
-
-```
- fs/squashfs/sqfs_inode.c | 3 +++
- 1 file changed, 3 insertions(+)
-
-diff --git a/fs/squashfs/sqfs_inode.c b/fs/squashfs/sqfs_inode.c
-index ce9a8ff8e2a..addd76cc07e 100644
---- a/fs/squashfs/sqfs_inode.c
-+++ b/fs/squashfs/sqfs_inode.c
-@@ -135,6 +135,9 @@ void *sqfs_find_inode(void *inode_table, int inode_numb=
-er, __le32 inode_count,
- 		if (sz < 0)
- 			return NULL;
-=20
-+ 		if (__builtin_add_overflow(offset, sz, &offset))
-+ 			return NULL;
-+=20
- 		offset +=3D sz;
- 	}
-=20
---=20
-2.53.0
-`
-
---6cafb2f3c59859c127b88ea0c9d64ab27fe765b023581055df2ca1b28985
-Content-Transfer-Encoding: base64
-Content-Disposition: attachment;
- filename=0001-adding-overflow-check-for-offset-calculation.patch
-Content-Type: text/x-patch; charset=utf-8;
- name=0001-adding-overflow-check-for-offset-calculation.patch
-
-RnJvbSAyNjAxNDJkNjc2NWUwODkzOGFiMDZiYTgzZDVjMmVjZGJjZDA2NDdjIE1vbiBTZXAgMTcg
-MDA6MDA6MDAgMjAwMQpGcm9tOiBkbGxjb29saiA8ZGxsY29vbGpAYXJjaGNsb3VkbGFicy5sYW4+
-CkRhdGU6IFN1biwgMjYgQXByIDIwMjYgMTI6MTc6MTIgLTA0MDAKU3ViamVjdDogW1BBVENIXSBh
-ZGRpbmcgb3ZlcmZsb3cgY2hlY2sgZm9yIG9mZnNldCBjYWxjdWxhdGlvbgoKU2lnbmVkLW9mZi1i
-eTogSmFyZWQgU3Ryb3VkIDxkbGxjb29sakBhcmNoY2xvdWRsYWJzLmNvbT4KLS0tCiBmcy9zcXVh
-c2hmcy9zcWZzX2lub2RlLmMgfCAzICsrKwogMSBmaWxlIGNoYW5nZWQsIDMgaW5zZXJ0aW9ucygr
-KQoKZGlmZiAtLWdpdCBhL2ZzL3NxdWFzaGZzL3NxZnNfaW5vZGUuYyBiL2ZzL3NxdWFzaGZzL3Nx
-ZnNfaW5vZGUuYwppbmRleCBjZTlhOGZmOGUyYS4uYWRkZDc2Y2MwN2UgMTAwNjQ0Ci0tLSBhL2Zz
-L3NxdWFzaGZzL3NxZnNfaW5vZGUuYworKysgYi9mcy9zcXVhc2hmcy9zcWZzX2lub2RlLmMKQEAg
-LTEzNSw2ICsxMzUsOSBAQCB2b2lkICpzcWZzX2ZpbmRfaW5vZGUodm9pZCAqaW5vZGVfdGFibGUs
-IGludCBpbm9kZV9udW1iZXIsIF9fbGUzMiBpbm9kZV9jb3VudCwKIAkJaWYgKHN6IDwgMCkKIAkJ
-CXJldHVybiBOVUxMOwogCisgCQlpZiAoX19idWlsdGluX2FkZF9vdmVyZmxvdyhvZmZzZXQsIHN6
-LCAmb2Zmc2V0KSkKKyAJCQlyZXR1cm4gTlVMTDsKKyAKIAkJb2Zmc2V0ICs9IHN6OwogCX0KIAot
-LSAKMi41My4wCgo=
---6cafb2f3c59859c127b88ea0c9d64ab27fe765b023581055df2ca1b28985--
+Cheers
+/Ilias
