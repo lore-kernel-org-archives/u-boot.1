@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF6C3FF8860
-	for <u-boot@archiver.kernel.org>; Mon, 27 Apr 2026 13:59:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6BE28FF8860
+	for <u-boot@archiver.kernel.org>; Mon, 27 Apr 2026 13:59:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 53D30842F2;
-	Mon, 27 Apr 2026 15:59:11 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A0B3B8426C;
+	Mon, 27 Apr 2026 15:59:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=kernel-space.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=kernel-space.org header.i=@kernel-space.org header.b="hCRhyRGi";
+	dkim=pass (1024-bit key; unprotected) header.d=kernel-space.org header.i=@kernel-space.org header.b="o+xaAzDp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6D588842CE; Mon, 27 Apr 2026 15:59:06 +0200 (CEST)
+ id 6DE3A8426C; Mon, 27 Apr 2026 15:59:06 +0200 (CEST)
 Received: from mail.kernel-space.org (unknown
  [IPv6:2a03:4000:b:d08:14a9:1bff:fedc:75ad])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3130E842CE
+ by phobos.denx.de (Postfix) with ESMTPS id 4830F842D7
  for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 15:59:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=kernel-space.org
@@ -32,21 +32,21 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel-space.org;
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=swAcaXIFGXAdo6BK0AOCi6d43J8FJAwK/KbSOA+ZuRQ=;
- b=hCRhyRGiI56uqoVRQXdHIRft3Ov22cGR1ytEr4ZQ+XJuXU8N0B8RBCxfuludA5JULde5bz
- 0rD4kemV2a5YIflUGdW6eBp1tBhNLzR1aipGU/aUJPgU41CWGGC2PWiZWflAX6d94Prv+K
- jl7mAKm9E4iib0jE0rK8V+KITeGw5tE=
+ bh=kWTUBg2VsWz8OU5Msqt/D80hQw4+SFIAgAewiGHBhUQ=;
+ b=o+xaAzDpCHZj3X260vXrauNnYZHFCFg41RUFB/SR6B1Ode1RIO7ImCPVbraJupZUF4lSkm
+ BrAgeuaghLWrrT/GWQ2hlHDqxmwthVkma8r1sjiIdrYtUdopRQCKecT1II652YuU4R8Pw9
+ KY0gNe8574sex0qhLRpctChT0LRtAEY=
 Received: from archlinux (<unknown> [2a07:7e81:7daa:0:62cf:84ff:feee:627])
- by oreshnik (OpenSMTPD) with ESMTPSA id 95952b72
+ by oreshnik (OpenSMTPD) with ESMTPSA id 6623ac95
  (TLSv1.3:TLS_AES_256_GCM_SHA384:256:NO); 
  Mon, 27 Apr 2026 13:59:00 +0000 (UTC)
 From: Angelo Dureghello <angelo@kernel-space.org>
 To: trini@konsulko.com
 Cc: visitorckw@gmail.com, u-boot@lists.denx.de, sjg@chromium.org,
  Angelo Dureghello <angelo@kernel-space.org>
-Subject: [PATCH v2 4/9] board: stmark2: remove old garbage
-Date: Mon, 27 Apr 2026 15:58:49 +0200
-Message-ID: <20260427135854.18496-4-angelo@kernel-space.org>
+Subject: [PATCH v2 5/9] mmc: Kconfig: allows m68k to use esdhc imx driver
+Date: Mon, 27 Apr 2026 15:58:50 +0200
+Message-ID: <20260427135854.18496-5-angelo@kernel-space.org>
 X-Mailer: git-send-email 2.54.0
 In-Reply-To: <20260427135854.18496-1-angelo@kernel-space.org>
 References: <20260427135854.18496-1-angelo@kernel-space.org>
@@ -68,25 +68,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Remove old erroneous garbage.
+Allow cpu families as mcf5441x (m68k) to use the fsl_esdhc_imx driver
+since the hardware ip module is the same.
 
 Signed-off-by: Angelo Dureghello <angelo@kernel-space.org>
----
- include/configs/stmark2.h | 1 -
- 1 file changed, 1 deletion(-)
 
-diff --git a/include/configs/stmark2.h b/include/configs/stmark2.h
-index a7afbb3be1f..c1096398359 100644
---- a/include/configs/stmark2.h
-+++ b/include/configs/stmark2.h
-@@ -18,7 +18,6 @@
- 		"load mmc 0:1 ${loadaddr_ramfs} uRamfs\0"	\
- 	"kern_size=0x700000\0"					\
- 	"loadaddr=0x42000000\0"					\
--		"-(rootfs)\0"					\
- 	"loadaddr_ramfs=0x43000000\0"				\
- 	"update_uboot=loady ${loadaddr}; "			\
- 		"sf probe 0:1 50000000; "			\
+---
+Changes in v2:
+- moved before menuconfig changes
+---
+ drivers/mmc/Kconfig | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/mmc/Kconfig b/drivers/mmc/Kconfig
+index 22bd3a972bd..24bd16ad5f3 100644
+--- a/drivers/mmc/Kconfig
++++ b/drivers/mmc/Kconfig
+@@ -924,7 +924,7 @@ config ESDHCI_QUIRK_BROKEN_TIMEOUT_VALUE
+ 
+ config FSL_ESDHC_IMX
+ 	bool "Freescale/NXP i.MX eSDHC controller support"
+-	depends on MACH_IMX
++	depends on MACH_IMX || M68K
+ 	help
+ 	  This selects support for the i.MX eSDHC (Enhanced Secure Digital Host
+ 	  Controller) found on numerous Freescale/NXP SoCs.
 -- 
 2.54.0
 
