@@ -4,54 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27DAAFF885E
-	for <u-boot@archiver.kernel.org>; Mon, 27 Apr 2026 14:00:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4E19FF885E
+	for <u-boot@archiver.kernel.org>; Mon, 27 Apr 2026 14:04:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 565D784378;
-	Mon, 27 Apr 2026 15:59:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=kernel-space.org
+	by phobos.denx.de (Postfix) with ESMTP id 8E74D841DF;
+	Mon, 27 Apr 2026 16:04:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=kernel-space.org header.i=@kernel-space.org header.b="R/hf+ONU";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="JnFHg1mz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 46D51842CE; Mon, 27 Apr 2026 15:59:09 +0200 (CEST)
-Received: from mail.kernel-space.org (v2202511311555398556.powersrv.de
- [46.38.245.6])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id B426A8419E; Mon, 27 Apr 2026 16:04:05 +0200 (CEST)
+Received: from mail-ot1-x342.google.com (mail-ot1-x342.google.com
+ [IPv6:2607:f8b0:4864:20::342])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C7D48842F2
- for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 15:59:01 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=kernel-space.org
+ by phobos.denx.de (Postfix) with ESMTPS id 8B26483AA9
+ for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 16:04:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=angelo@kernel-space.org
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel-space.org;
- s=s1; t=1777298341;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=vRVozhtsbMthbOmNYWaEBCVex49/y7yVLPGwUTGPU+s=;
- b=R/hf+ONUyVM8hbgRBTGMs9CyD9SUQ7/2GJMOw0sx+hofOvMTpHilfaR+W7DnHf9G/GBahv
- h6f6fUfL+Irr6V4k4GPF+8AzABn7mo2Q7DfWtGehmcIHfoQdgvcdHtKmvkoNBuC/6lQrKd
- VPLmDdTTDIvRpujhp9SpULE6N3VfXJM=
-Received: from archlinux (<unknown> [2a07:7e81:7daa:0:62cf:84ff:feee:627])
- by oreshnik (OpenSMTPD) with ESMTPSA id 70136f58
- (TLSv1.3:TLS_AES_256_GCM_SHA384:256:NO); 
- Mon, 27 Apr 2026 13:59:01 +0000 (UTC)
-From: Angelo Dureghello <angelo@kernel-space.org>
-To: trini@konsulko.com
-Cc: visitorckw@gmail.com, u-boot@lists.denx.de, sjg@chromium.org,
- Angelo Dureghello <angelo@kernel-space.org>
-Subject: [PATCH v2 8/9] m68k: mcf5441x: create stub to use imx drivers
-Date: Mon, 27 Apr 2026 15:58:53 +0200
-Message-ID: <20260427135854.18496-8-angelo@kernel-space.org>
-X-Mailer: git-send-email 2.54.0
-In-Reply-To: <20260427135854.18496-1-angelo@kernel-space.org>
-References: <20260427135854.18496-1-angelo@kernel-space.org>
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x342.google.com with SMTP id
+ 46e09a7af769-7dcd89701acso5301184a34.1
+ for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 07:04:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1777298639; x=1777903439; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=1LmA3qMSHojnb2NOxQRmUNfam8A3MjcIkfTQDmlNO20=;
+ b=JnFHg1mzLXeE0TB+NhCWBew4S6WVZ7tioeuoJNxd1/pZhDBBSjjjrIZPSulVgtgtB4
+ rEL8s+sd7JpSaXg/3VAUXqah/TEgcFr4ANIP/eSYbUlIFUjYbLpQbFBOCq6QTnUeShcA
+ 2MRAw5O4CQdLpd1BuetJVkljFoH4zLlNSfXkQ=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1777298639; x=1777903439;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=1LmA3qMSHojnb2NOxQRmUNfam8A3MjcIkfTQDmlNO20=;
+ b=YZ+FEtaGxKNl8djIXa9D3UZfuqTxscumREJ56gkbJ2lN4JsBdDf0kjZ5YFSzCaSgt7
+ 0nZxeGZRGiRj6MfOCsaKp9FXbXu7422QVEKO6d+dsJKe86PYvBdJAnMiTyGoEeAwIaZQ
+ n8b1Fm4MGhr2jb8fScZrdS/qBQNjk7cSLVdz7j/XL03Whbwi+BofjcpQOvrrvQGDniH2
+ xkoB+BL9Gsl2ObLIpYFDWq8/PmHRxQoJ4akHX3qmDqtXMEXkTU8ha7dPCcvJ9mpku06T
+ TgOAB12Y/5NEVhqzvM4xTNH6Wl3dQKo7Rs9h8Vy1Ynrb4yMxS5zgMqAbi8qbZYg/TTNH
+ /1tQ==
+X-Gm-Message-State: AOJu0YwTPlJo9rSGyDi9FVXft3P+r2V5/e41Nm7Y1yfNZB840QYuI9qu
+ YPIpvTr91NGx8GDW4Xvy4ml27BctxyMufgbbAl6HJMBwoe+5GUClK1Y0iTgsF5OP4XI=
+X-Gm-Gg: AeBDieu6Vj21bYCzGrH45AzYqSV4C2Dk1KNX1wBTFJzCmVBH9ye2NDG3kBzeQjItBX0
+ 2GMtJsSuqEXeblMgTzCOw541pfZZf7B/di6A5Fu8MYZkDecdmqA/vVupSHOljjInyQjgsf+dqJY
+ rYuccv9u1GfNdwq/dUkD0zZ8tVKAD5OxHdvfhvit8abadDWMLumsMgBxgoEYS5tS8wPwaJ6z7CF
+ +JANh3Fa9sKC/M41c1EUWg592R2+SNEJVXstlzFv3hOdS5KdG/+cJYGvNvxMJsD/GC9acfbyFDa
+ qgEABXbthEAwjTzDELiQOnhTUnziMoFUjC7hseiDL8ypxguZeQq+I3qv42BusH4TKhVH/zYW7jE
+ Dl1D4tMtQiGiytYIWStDYIICCA4QQg3PnlRyXRaDE/XAEvWz9efl5mxiqsKhs9DiC/GMLO45M1R
+ loYzL9GRdScLgWSeB7mbpXJcXEu3YBzQ7NWR9zkS1g5SvOgqMY1abuzgR+mx6VuKjgE2cuUQg0W
+ uOCaGFRjrvNE/STs9KFWtL2IzPxuUxen3FAXjT+8ZDNgvBlSiipjXg250QC
+X-Received: by 2002:a05:6830:81ed:b0:7d9:b58e:55ed with SMTP id
+ 46e09a7af769-7dc9522b228mr26536922a34.25.1777298639190; 
+ Mon, 27 Apr 2026 07:03:59 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-189-203-106-235.totalplay.net.
+ [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7de72a3c2aasm5616216a34.12.2026.04.27.07.03.58
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 27 Apr 2026 07:03:58 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de, Marek Vasut <marek.vasut+usb@mailbox.org>
+Cc: Michele Bisogno <micbis.openwrt@gmail.com>
+In-Reply-To: <20260426194506.220004-1-marek.vasut+usb@mailbox.org>
+References: <20260426194506.220004-1-marek.vasut+usb@mailbox.org>
+Subject: Re: [PULL] u-boot-usb/master
+Message-Id: <177729863823.3442985.3945508998867146800.b4-ty@konsulko.com>
+Date: Mon, 27 Apr 2026 08:03:58 -0600
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -68,98 +96,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Some NXP imx hardware ip module as the esdhc controller are exactly the
-same in some new ColdFire cpus. For the specific case, mcf5441x needs to
-use the existing fsl_esdhc_imx.c driver for the esdhc device.
+On Sun, 26 Apr 2026 21:44:51 +0200, Marek Vasut wrote:
 
-Create a stub to be able to use NXP "imx" serie drivers as the
-fsl_esdhc_imx in the ColdFire architecture.
+> The following changes since commit 9f61fd5b80a43ae20ba115e3a2933d47d720ab82:
+> 
+>   Makefile: fix host CPP pollution in cmd_gen_envp (2026-04-24 12:49:27 -0600)
+> 
+> are available in the Git repository at:
+> 
+>   git://source.denx.de/u-boot-usb.git master
+> 
+> [...]
 
-Signed-off-by: Angelo Dureghello <angelo@kernel-space.org>
----
- arch/m68k/Kconfig                           |  1 +
- arch/m68k/include/asm/arch-mcf5445x/clock.h | 19 +++++++++++++++++
- arch/m68k/lib/Makefile                      |  1 +
- arch/m68k/lib/clock.c                       | 23 +++++++++++++++++++++
- 4 files changed, 44 insertions(+)
- create mode 100644 arch/m68k/include/asm/arch-mcf5445x/clock.h
- create mode 100644 arch/m68k/lib/clock.c
+Merged into u-boot/master, thanks!
 
-diff --git a/arch/m68k/Kconfig b/arch/m68k/Kconfig
-index 6ce8f577e3a..00e89bd0a62 100644
---- a/arch/m68k/Kconfig
-+++ b/arch/m68k/Kconfig
-@@ -62,6 +62,7 @@ config MCF5441x
- 	select DM
-         select DM_SERIAL
- 	select ARCH_COLDFIRE
-+	select CREATE_ARCH_SYMLINK
- 	bool
- 
- config M680x0
-diff --git a/arch/m68k/include/asm/arch-mcf5445x/clock.h b/arch/m68k/include/asm/arch-mcf5445x/clock.h
-new file mode 100644
-index 00000000000..10ceecafcea
---- /dev/null
-+++ b/arch/m68k/include/asm/arch-mcf5445x/clock.h
-@@ -0,0 +1,19 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+/*
-+ * ColdFire clock support
-+ *
-+ * Copyright 2026 Kernelspace.
-+ * Angelo Dureghello <angelo@kernel-space.org>
-+ */
-+
-+#ifndef __CLOCK_H
-+#define __CLOCK_H
-+
-+/* Stub to use fsl/nxp drivers. */
-+enum mxc_clock {
-+	MXC_ESDHC_CLK,
-+};
-+
-+int mxc_get_clock(enum mxc_clock clk);
-+
-+#endif /* __CLOCK_H */
-diff --git a/arch/m68k/lib/Makefile b/arch/m68k/lib/Makefile
-index cf93715637a..9ad67c4272c 100644
---- a/arch/m68k/lib/Makefile
-+++ b/arch/m68k/lib/Makefile
-@@ -9,3 +9,4 @@ lib-$(CONFIG_USE_PRIVATE_LIBGCC) += lshrdi3.o muldi3.o ashldi3.o ashrdi3.o
- 
- obj-$(CONFIG_CMD_BOOTM) += bootm.o
- obj-$(CONFIG_ARCH_COLDFIRE) += cache.o interrupts.o time.o traps.o bdinfo.o fec.o
-+obj-$(CONFIG_MCF5441x) += clock.o
-diff --git a/arch/m68k/lib/clock.c b/arch/m68k/lib/clock.c
-new file mode 100644
-index 00000000000..5d9aeed96c3
---- /dev/null
-+++ b/arch/m68k/lib/clock.c
-@@ -0,0 +1,23 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * (C) Copyright 2026 Kernelspace
-+ * Angelo Dureghello <angelo@kernel-space.org>
-+ */
-+
-+#include <config.h>
-+#include <asm/arch/clock.h>
-+#include <asm/global_data.h>
-+
-+DECLARE_GLOBAL_DATA_PTR;
-+/*
-+ * Stub to use existing nxp/fsl drivers.
-+ */
-+int mxc_get_clock(enum mxc_clock clk)
-+{
-+	if (clk == MXC_ESDHC_CLK)
-+		return gd->arch.sdhc_clk;
-+
-+	printf("Unsupported MXC CLK: %d\n", clk);
-+
-+	return 0;
-+}
 -- 
-2.54.0
+Tom
+
 
