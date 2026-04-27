@@ -4,143 +4,107 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60B4DFF8860
-	for <u-boot@archiver.kernel.org>; Mon, 27 Apr 2026 16:19:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E768AFF8860
+	for <u-boot@archiver.kernel.org>; Mon, 27 Apr 2026 16:21:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6EEA683BC4;
-	Mon, 27 Apr 2026 18:19:32 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
+	by phobos.denx.de (Postfix) with ESMTP id 3374F841F2;
+	Mon, 27 Apr 2026 18:21:55 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="UXHMUJ/9";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="eJmZYyD/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3E2EC84178; Mon, 27 Apr 2026 18:19:31 +0200 (CEST)
-Received: from AM0PR83CU005.outbound.protection.outlook.com
- (mail-westeuropeazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 98A4A83BC4; Mon, 27 Apr 2026 18:21:54 +0200 (CEST)
+Received: from mail-yx1-xb12d.google.com (mail-yx1-xb12d.google.com
+ [IPv6:2607:f8b0:4864:20::b12d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 29DE283AA9
- for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 18:19:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
+ by phobos.denx.de (Postfix) with ESMTPS id D942F8421D
+ for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 18:21:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quentin.schulz@cherry.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ikUubd0FCmrg6eJ3aBxxBGqXgGAZCkprwE2SH+ACRgRAg8F1nQQ+9sS+5PGuWbNs085LmZxCtv/RX6k68ihJmTvh/GY/04QURxMuZykNJQjn4Ns78OJbGk1MsuhpCqPlwkiBQba32LzGkvevGbs2IvFM93cDe2WkSyHktBITUweLtNu542qFeh4M0XG1EM4ThLza8HIUHkCJ73S3PoSAoIHmlZLG4lpnTRROUeGKlzf1wSeQe0/Q6VC+6NZYZUOfllQ++qpZ4J7lALt3b2eZbyTq4T2WXIDaknNJCgF1/wCZWrNjVxy9DAuAIRCejxDiVR8BGzZf+A1yV2uLlbTsZA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ghoZW5VJ7TC/1craH5wzDvGz6uESjnxjbsE+u0Bc+VY=;
- b=hfIP1/Ql5+DtTqwCqwDH06WLBElSVTCrhJ7ZyVu2L6Y8me82KN5OumEeE9kNKDNmRIEnvvO+kmLfgw31geuXuKhKRlCbLcNLG+Ppc7zoBo5joSjPCY5ItXs/BY5zT9yFThhQRIqSmByGPJ/tJ+9Jq6TCesPtyWnHUZQS64Mc8frabcXSLbNwe642R1hgChZcIB17hBCrKZktueQUGTHttkFQ+JV7AcLi9fCq+sV3+ujN0+A3cGAvLXQp1YhUyWyqDylhFlzbHoxZZcRAZpTs2fSr7P2kTZlDQgsbQwBXxesJY5V9UfPUEKFpprnpf8wbpJmj91dyyl29YajLqMFbWg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ghoZW5VJ7TC/1craH5wzDvGz6uESjnxjbsE+u0Bc+VY=;
- b=UXHMUJ/9VY6zVnc7SjBEj4y8Q3KDFeYJE0ErQeOZ0T5TDVLkGFRIYeYVHhPSiVBtoYl21LvWaErHl671d2lR6HBBj0NsIBbipDYW6yo0hwVj7weTrfQ6EfhWFOKVJdAUbB9HK5uSQ9xFYtUvZXC0sI0btWMnYkUn42vXplXTkmQ=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from PA4PR04MB7743.eurprd04.prod.outlook.com (2603:10a6:102:b8::20)
- by AMCPR04MB12672.eurprd04.prod.outlook.com (2603:10a6:20b:76e::18)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9846.26; Mon, 27 Apr
- 2026 16:19:26 +0000
-Received: from PA4PR04MB7743.eurprd04.prod.outlook.com
- ([fe80::9a4e:252f:2fd:97b7]) by PA4PR04MB7743.eurprd04.prod.outlook.com
- ([fe80::9a4e:252f:2fd:97b7%6]) with mapi id 15.20.9846.016; Mon, 27 Apr 2026
- 16:19:26 +0000
-Message-ID: <8dc3d041-cafb-4022-833b-64ee9c950d7e@cherry.de>
-Date: Mon, 27 Apr 2026 18:19:24 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/4] iminfo: also verify signatures
-To: Ludwig Nussel <ludwig.nussel@siemens.com>, u-boot@lists.denx.de
-Cc: Frank Wunderlich <frank-w@public-files.de>,
- James Hilliard <james.hilliard1@gmail.com>, Jonas Karlman <jonas@kwiboo.se>,
- Julien Stephan <jstephan@baylibre.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Mayuresh Chitale <mchitale@ventanamicro.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Osama Abdelkader <osama.abdelkader@gmail.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>, Peng Fan <peng.fan@nxp.com>,
- Shiji Yang <yangshiji66@outlook.com>, Tom Rini <trini@konsulko.com>,
- Wolfgang Wallner <wolfgang.wallner@at.abb.com>, Yao Zi <me@ziyao.cc>
-References: <20260427150409.400914-1-ludwig.nussel@siemens.com>
- <20260427150409.400914-2-ludwig.nussel@siemens.com>
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <20260427150409.400914-2-ludwig.nussel@siemens.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: FR4P281CA0049.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:cc::13) To PA4PR04MB7743.eurprd04.prod.outlook.com
- (2603:10a6:102:b8::20)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yx1-xb12d.google.com with SMTP id
+ 956f58d0204a3-654672a6d68so4705805d50.0
+ for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 09:21:51 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1777306911; cv=none;
+ d=google.com; s=arc-20240605;
+ b=Yo10jKc6mCkN4aiNxsfH2T5exbh4Jylh225UjDVr9hf5GrAWf1ZRICNF3z0ZjqnE8w
+ FlsvVj8GarbAFcFOoLqu0dHNVuWasCtVYrpEVKqjMaDa6qScwE5OF3ut2HtJWFgDgswA
+ payHhZYeGg38bvJZqyHKLdcYEWvxgYI38fhhTBzyyAN1I/djGjsZYyFD/Kwf1R8I12O8
+ mQ/1UzZlRlZhxpygdjvmWnfHoss/56n82ufm7qMvtnj6mkixoBuJC1Y3Ze7fnuNvRxts
+ ymHIcqSWOgj52nCumim5X4fagVS1FWXv2ZuwyOCU6OUTr7K79df9t6Q0dPfCAJlnYiMS
+ UOIA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=F1yt8/s5XmYA9s1OKOsrXxrrXFbQpckyGAQEYiYH7Lk=;
+ fh=ImUlq5X5PTm8yLMTWig4dzxPpH7liUFxG2zCFCr2ynk=;
+ b=kZQ+ceLjdxzS1G3Mvmie5H4LAoJKSHRRq0zfVmbNHm0ccgLtegmAztGt3wshv0MJp8
+ gxqB6CnIAQaOAI+tBj5bcZMH6k1hOhVrNKfPJntGrq8GZ+bwfCIF1HZXwLB0NKUMDvXY
+ Fi+3X3AhyvAxfQ5Z8qU3mkYdZNsunhGycEVe1qmltI5SYZlvMkaUs82w8UReWMQpVKXl
+ OrJPoFNAE7vHVdjW2DnF+NkGdvRTWsa9sZpTuAiX/CB0dCye3pFlhkp2WmMVnlVJCxC6
+ Y8gEOLZaYK4XH3xP9fje6gLXz6o22DQ0fkFBI9ckPBNR42S/ZObwcTulmpb+0z/e2BlQ
+ pWNA==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1777306911; x=1777911711; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=F1yt8/s5XmYA9s1OKOsrXxrrXFbQpckyGAQEYiYH7Lk=;
+ b=eJmZYyD/vhamcUVCrvWfBqdHRPlms8LPEh1RuT1dYnowfWyd7h98ths0C3A9maSGS3
+ WaedGz1Ub7JOsqOATUQv34Bb6Tq0fb7rA505YgVyemuYMgW/UWAM+rrjapJ05Xljg+O1
+ tm1eWMOVJecIrIrO/+8yWvhi8itbneMkHTaOx2OHuhigAYvZVTZOHSQSbsNz6rlabtlF
+ AtoMB1CISGuO1qF8G828QpxnMwDqfpCOLAqxxU9jP5tkM9283NFm3gUbSJ+ABG0GK3LA
+ DC5UOQpqbEsPY4Ito1D720VxvTE435QXAQXToYa+XtPe7SGP9yRRqlJQVwVrfpTJQj1k
+ /gaQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1777306911; x=1777911711;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=F1yt8/s5XmYA9s1OKOsrXxrrXFbQpckyGAQEYiYH7Lk=;
+ b=AZA4v2wjVyltn2WC/O28rDVhnYNhx/YQAvNnzlMHYrrol96solSNLkWMzNxumNWveR
+ joNWXw2yVdm4mdGqn6RkSln5rh3R6Hw/OR3Y649wyHjJXtKL603JyrVLYTtrsuzusbJr
+ UrnH/sBUIhc9rpAbZZy5RC3wM3yIjA+b0MUiZKeNKkkP0EdHCboZ/yDLGquSXBp3Ij26
+ 2el9eMI3qUkWd6MDquSI/JVLzrZvm8jW6Pa4fQKhbvF3HrG8NKAODNj3l1JBHWHA/IEa
+ MwGM6i0ucj9imaio4uQf/lnLsJ/+0qDKLcz0lmAbjChQpMUFsdupNtz5g8Tbk18mvlu8
+ MOig==
+X-Gm-Message-State: AOJu0Yz5abPUwpBf7XCL7DOpwpPslKtesGLNf+j4BMFePXSv3WAQOpcr
+ CcTn8toX6iOvoUXkDeHWRtacm1FDITVugVF2l0a6O9ZlWYNejWQ+4M39V0k0kQAUoHAbYGkLdVQ
+ 5TjF2rHyXciLH4/p8x10yzcCNWLXzQ/4hhgA7cHjBUQ==
+X-Gm-Gg: AeBDiesoX6ASw0mp6E2PSRcEmkvD6jH0C20SeRbPJfZ27y/6lwyCOPbqpC04Dxl/hOp
+ ADWof4dI3FXqoI+LcUCOO7bjH7tUTc6E2le3ebEXDROZKzKkRuIMZJVcWwIhfijZEBpSK3W7FSf
+ ChZN1YHNpw1NvjBGWefPv3mIC/2VQT9Sb0OwenT6IoCyXA6O0JsMAaB2XI9oHVOoZOTtmsUsGhX
+ VWHqKUDoQ7qbRuIwEbtFA5tg+yePOYfmF2kmn9G+6tgJGiil3hL4v9HulrQO+nHWYp19P6hdmx8
+ mJynGEAXTvM/dDRCX6smFMoR6Mss+TXPIHHBX+FHdTQDiydj1gmaO8KbK6qOdbjnWbFbHBBDlNM
+ JyuiSK5e66MpyI6/JgETgq3Jgu0fbfq4h0hgJ7Gq0Aa55a4NSnGzVlMk++NytKBopc+GwkGhtZH
+ DKPSuO1qvdqIBgYNex8SHcNneHgp/7NOL5Fm1vkU1Xz28czBPZwAHvPQBapDgYP9nWnZlhhWr8j
+ QGWZItPQVDiW1f7sEAOd4SOobAS1KnGW4HpbdDxJPPIaTurDsUCVNo6WGlwkLOW40JppBLhgYxu
+ UFAnfogeMdk4VchqeGyOeaietuyKgjcGUuKks92XiSU0wDzRsvyotFhDtK1MJ7TF28+N50vYnVX
+ 7nuO8BkrApfFJvqwDSAQw2LemBCg=
+X-Received: by 2002:a05:690e:480d:b0:654:403b:6440 with SMTP id
+ 956f58d0204a3-65bde74a6f6mr73338d50.7.1777306910447; Mon, 27 Apr 2026
+ 09:21:50 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PA4PR04MB7743:EE_|AMCPR04MB12672:EE_
-X-MS-Office365-Filtering-Correlation-Id: b6b4542d-5b86-4004-6a12-08dea478c04b
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|7416014|1800799024|376014|10070799003|366016|18002099003|22082099003|56012099003;
-X-Microsoft-Antispam-Message-Info: f2vwW1kFMK/Fb8ewtcK3u7C2TmaZjN/0Sj2UFVWNdkNTngVzAprnRT3tUy3vsGPapmqN57Mg25Jwh/is1CsNVgkIHQ1Od3IXjp2PrY1tcUU4rq2nddmK0XXJb8r8or4HrAGHPRTSOFcBYL5U+FyEvZjC3bsKE/Ajiaf7M5xgQG4EJzscAfX90xvmUiG0eHkwsKeXnCM7gUetFWq6h9CyX9t/k9BBCy0+aO3ck/Fmkms/Wwxgk+lxpI+c1mP7Bi9Xc/zyKzuBfmUX3pf21N161MmZr5+Z9GeNzzqM1l0aQdxlA4uJ+pbwuUHbmrrs1yVfe4ruiBhCco77yinZC/dewy6yvuMcWemUlv2RnnJ5LOOP8CIbSxY7JruGQASkw90GohOB5vkWXAXAFNut8wgcfQqHDrvTV1sjcb5jPaBRo4lT2eE39DSNdJis6l+ZFKDOSRakAkb/syHM+42bJ7xqQ7ZrCfjHDPV06zYrexPJpUejO4h4Uqal4pxh9RQXt3e8/Q4gHjiVGLUjx7UUuJnl0MJs5n/7uHpMQYtagWjjb9DmADXXEdmfcjb/9GOw4i8WMxOnp3kvQDhjIniSlf/FAjzHP0lgcvLuUDPGopgYP+92U7B8rhS9z0Wp+h55fTlciMF5kvXLKLbkI9NIujrjiSH7WKzTfRmLkKJhqYxptCYIHIHD0voUMbamWaKJLcz48fuyLQc9CwA+mGIbIUK989HgS2jQeKXQTS7QwKymVZk=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PA4PR04MB7743.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(7416014)(1800799024)(376014)(10070799003)(366016)(18002099003)(22082099003)(56012099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?cjMva0dKQVBYZTdXT0xuNXVxVjhKOGRvR3daRFlOQTBzL0NNbXZEQzVueW5s?=
- =?utf-8?B?QXVMdWQ1Y3J2bGJHV0phZVU5QkNxMWtNem1wYUgzdW1FM0xwKys2d2VyeE5t?=
- =?utf-8?B?SDc1NUZET3N0UnpUcnFBTVM5d1h3RTluQ2M4bVd6UWFDRUk5L0kzZTQvZVA2?=
- =?utf-8?B?MVQrbEg5eGpXNExTTVhOTjNNSmsvekFtTHcyNEYzQ2JlOU5CdXNZblJlSVVN?=
- =?utf-8?B?eFVmVW9NWnh5cEliMURscUpJbyswUTBmNVJHRndaVndCUCtYWFhnTm5PY1Uz?=
- =?utf-8?B?Y095OExWTTlldUd0MzBhVHJPMHF0ZlhzQnZtU2owdHZqSUYxdnRVOHo4ZXh1?=
- =?utf-8?B?TzR0QXEwSFhUaG5KWTNLUjNmd2Z2M0VNSXNJMDJLMDUyd3B6M0NRVXNFOVZJ?=
- =?utf-8?B?K3ZMRmwwRXkxU1c3cFBBWDVDcmNKQllGdEJRaXJWQ1duQk9aSDJ0SjR5cUFH?=
- =?utf-8?B?VUZxMm0rY2ptbXd5dFg5c3BaR3RNU0R0ZmM0TjdwU2UxeGhpQVNldHBoUjhx?=
- =?utf-8?B?LzFCYXhKVFRRazh4YmwycFpOV0tON1RIRVdZaDh4MDVSQi9TQUlqaWp1NUR3?=
- =?utf-8?B?N3BBZGNYb0tLL1Z2Rmp3Yi83QWhOSVdkNHdJSHo3TjlnTGl5MkNER0YxclVv?=
- =?utf-8?B?Zlk3UUNpT3J0WnVuL0xuenFQT3Bmd3hpSG9KQ1VYMVhzZFc4RVpUeXFRRFpy?=
- =?utf-8?B?V1ZvWFE4bFJ0WE9HZGNYL3MyZjl3SjhRSWp5aXRPVGFNMHRNUTJ3d1dMWDJv?=
- =?utf-8?B?clgrNmQyL3JzcURsN3B0K0RQZFFPaDZJVGljdVk5NXlENkFldXVZR0ZFZ3p3?=
- =?utf-8?B?NUVESTJ4L1JuaTNhYWszeFUycDFSWkZ5WUpkZEdRNzJucnJvUTF2Q1ByeXJD?=
- =?utf-8?B?L0VjcFJncEcvQmdodlZQUHUvaE5WWTd5WUlpdHV3UEhXYWwwSitCTFI5Sjl5?=
- =?utf-8?B?WHc5NXJrQ3lRSzViQXpqKzFVNXhGU09YSFVQVFZZdWtSeHpFR3VldW9Qb0ph?=
- =?utf-8?B?RUl4eHQ5aFo0MFc5bmxtcXlneEJGcHAranQ3U05uYU1jZFpEMjhLNWY4VVRy?=
- =?utf-8?B?SWFlWXJmQVZPOHhvV1dLMEhBMkRsR0FoVmxhM3lidGV6aE8weUNpcmpOTCtF?=
- =?utf-8?B?R1dKV3Z0bFdPWUJGMFh0cjMxcU9VYnNsNUpDTWwxb1crUUFIRXpwQUpydUZK?=
- =?utf-8?B?cDJQVlJTZS9FTUFMYkNZVVJKSG5MS0xnanFMUDZ1NjFpTFVFMGhsUmMvN1NY?=
- =?utf-8?B?a0czWHFPWm1jYXB4clZnNkZ5ems2R1RlVHM1cjFLK1VZUGllVDcxQ3QxcWZX?=
- =?utf-8?B?MytMNGcySVJyZlF6RjJJeEJXMUxKL3Y0dXo4OVpDZ2Z1Q0xOMVk4QTYrTXRm?=
- =?utf-8?B?aEFENCtwc3hITDlzbk0vR1BadzA1UkdidmR4S2h2M1YxRVkwMXJ5TGpMRmJZ?=
- =?utf-8?B?a3NHWmRvSWdDQ2FqcG5CeDBQdE1FN3FqSDFBRE0vLy84SVF5S3A5NVBmLzNJ?=
- =?utf-8?B?amJDVHZRVXpMUE1uaEpSSHVzSVM5QU16N3hPQkxkNTJzSlRaSjMzMElQOEFw?=
- =?utf-8?B?ZUs2Sm5NaUp0N2twcWN6bnRyMGNBN0dnY3B0T2VTbUtoZGlWOEFXVHZ0VExp?=
- =?utf-8?B?MVJpK0lRQmpqQjJtL3M0bTdUZ0V4ano4WGdwNEZuVWJHaGN4NFVTRkVBdWFu?=
- =?utf-8?B?ZjAzaDlZazgzRVZPTkptd0tWbXg4YTE2Mk1rZlBhbWFPR3RkV0RVcnphZWVw?=
- =?utf-8?B?ci9yYnRpRWtiRnRTWnBvK0lsSzYvbVcrcmVkY3ZobnQxVWZCaGlLbnU4Wksz?=
- =?utf-8?B?WmxLTUdBcU5hY2FjN2wyWk5EQ0JGQml6aW5xbWovMXZmVHBubzdKazFKWFc4?=
- =?utf-8?B?Q2JrUVozOGFISjRDVHBncldydnJhSXNBUzFTckcydG5PaHFkRm5aZjk1MXN3?=
- =?utf-8?B?T2pPNFBmc0kyb3BNcTVQMnhHdlp5bFJ2SDljOXEzZlUxSzZIRlI4K2dFSDIx?=
- =?utf-8?B?RlVqblhFMXVCejJVeTNzWnB2RVlRZ3JabXEyczc5R0V1UHU2d3JRN0huc3ZJ?=
- =?utf-8?B?Q09JRjBxWDF2OFlWc20rZVF5aE5KS1Zqdy9YK083NUZzM3p0WFhqa2JhaFFr?=
- =?utf-8?B?empNY1A3MUYwbHA0MUY1b05yQnZXK2ZLeHNBRUx3SHhoZmhSZnlORlpIQWhG?=
- =?utf-8?B?dURna3Z4TGNtUzRsNEdQNDF1M1Bab01XYVdkMHJ1dmZQdW5VbWk4TC9WUUV5?=
- =?utf-8?B?YzJlRk9XUGpuUlZGUjQwRnJGOXU1MVQvU0tQNEF0enA4RHQvUkdmV2JCK0kw?=
- =?utf-8?B?OUtJZnppakgwUDJJYWNoR2lINEZRRWZVNnVrYVc1VXpsTGkySytVdjdhUFJZ?=
- =?utf-8?Q?hvWN29sRt9LYtcIfw6dsnLm1ToGckrAcunzuG?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: b6b4542d-5b86-4004-6a12-08dea478c04b
-X-MS-Exchange-CrossTenant-AuthSource: PA4PR04MB7743.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Apr 2026 16:19:26.3723 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 0Y1tJLD1gYp2LgqsB67sdy7iPomxPhrdXG4LFCf8rUAvQl9glKI9QVDG+WNvgYglKWnY8gi6hQVjij0OfQVB/fytkJpVJxvA/UY2BDsDSn8=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AMCPR04MB12672
+References: <20260424173151.371134-1-harsimransingh.tungal@arm.com>
+ <20260424173151.371134-4-harsimransingh.tungal@arm.com>
+In-Reply-To: <20260424173151.371134-4-harsimransingh.tungal@arm.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Mon, 27 Apr 2026 19:21:14 +0300
+X-Gm-Features: AVHnY4LWiNGJ0FrKo6Ee7TnMaLSM2_U4DWG7bwKb9TTnooJcE71HflX7zdY5cSM
+Message-ID: <CAC_iWj+TMCCMkRmAV3x2gh0LoxBt3pvkJgnojq48fCkJBFro+w@mail.gmail.com>
+Subject: Re: [PATCH 03/12] efi_loader: add FF-A runtime support in EFI
+ variable TEE driver
+To: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
+Cc: u-boot@lists.denx.de, Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>, 
+ Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Hugues Kamba Mpiana <hugues.kambampiana@arm.com>,
+ Simon Glass <sjg@chromium.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -157,112 +121,341 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ludwig,
+Hi Harsimran,
 
-On 4/27/26 5:03 PM, Ludwig Nussel wrote:
-> The iminfo command already verifies hashes of images. This change also
-> verifies signatures of configurations if enabled.
-> 
-> Signed-off-by: Ludwig Nussel <ludwig.nussel@siemens.com>
-> ---
-> 
->   boot/image-fit.c | 36 ++++++++++++++++++++++++++++++++++++
->   cmd/bootm.c      |  7 +++++++
->   include/image.h  |  1 +
->   3 files changed, 44 insertions(+)
-> 
-> diff --git a/boot/image-fit.c b/boot/image-fit.c
-> index 2d2709aa5b1..b2c6db79edb 100644
-> --- a/boot/image-fit.c
-> +++ b/boot/image-fit.c
-> @@ -1512,6 +1512,42 @@ int fit_all_image_verify(const void *fit)
->   	return 1;
->   }
->   
-> +int fit_all_configurations_verify(const void *fit)
+On Fri, 24 Apr 2026 at 20:32, Harsimran Singh Tungal
+<harsimransingh.tungal@arm.com> wrote:
+>
+> Enable MM variable services over FF-A after ExitBootServices
+>
+> This patch extends lib/efi_loader/efi_variable_tee.c to support FF-A
+> communication with the secure world during EFI runtime. It enables EFI
+> runtime variable access and MM communication using FF-A transport when
+> ExitBootServices() has already been called.
+>
+> Key changes:
+>  ------------
+>   - Introduce runtime-safe implementations for MM communication,
+>     notification, and variable access using FF-A driver.
+>   - Introduce communication-buffer helper (get_comm_buf()) that switches
+>     between dynamic allocation (boot phase) and the fixed FF-A shared
+>     buffer (runtime phase).
+>   - Mark persistent data and code with __efi_runtime and
+>     __efi_runtime_data attributes.
+>   - Use direct physical address mapping for shared buffers since
+>     U-Boot operates with 1:1 physical-to-virtual mapping.
+>   - Only per-buffer cache maintenance is performed at runtime,
+>     as whole D-cache invalidation would violate the OS coherency model
+>     after ExitBootServices().
+>   - Add runtime-phase tracking (efi_runtime_enabled).
+
+Why is this needed? For the memory allocations?
+
+[...]
+
+>   *
+>   *  Authors:
+>   *    Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
+> @@ -14,6 +14,7 @@
+>
+>  #if CONFIG_IS_ENABLED(ARM_FFA_TRANSPORT)
+>  #include <arm_ffa.h>
+> +#include <arm_ffa_runtime.h>
+>  #endif
+>  #include <cpu_func.h>
+>  #include <dm.h>
+> @@ -34,20 +35,47 @@
+>  #define MM_DENIED (-3)
+>  #define MM_NO_MEMORY (-5)
+>
+> +static const int __efi_runtime_rodata mm_sp_errmap[] = {
+> +       [-MM_NOT_SUPPORTED]      = -EINVAL,
+> +       [-MM_INVALID_PARAMETER]  = -EPERM,
+> +       [-MM_DENIED]             = -EACCES,
+> +       [-MM_NO_MEMORY]          = -EBUSY,
+> +};
+> +
+
+These are already defined above and used in ffa_notify_mm_sp(). If you
+plan to convert them, do it for the entire file.
+
+[...]
+
+> +/**
+> + * efi_is_runtime_enabled() - Indicate whether the system is in the UEFI runtime phase
+> + *
+> + * This helper returns whether the firmware has transitioned into the
+> + * UEFI runtime phase, meaning that ExitBootServices() has been invoked.
+> + *
+> + * Return:
+> + *   true  - The system is operating in UEFI runtime mode.
+> + *   false - The system is still in the boot services phase.
+> + */
+> +static bool __efi_runtime efi_is_runtime_enabled(void)
 > +{
+> +       return efi_runtime_enabled;
+> +}
 
-Please document this function. It's clearly surprising to me that the 
-function successfully return if at least one conf node could be verified.
+Enabled is a bit confusing. efi_at_runtime() should be enough. The
+efi_tcg.c code calls this 'ebs_called'
 
-> +	int confs_noffset;
-> +	int noffset;
-> +	int r = -ENOENT;
 > +
-> +	/* Find images parent node offset */
-> +	confs_noffset = fdt_path_offset(fit, FIT_CONFS_PATH);
-> +	if (confs_noffset < 0) {
-> +		printf("Can't find configurations parent node '%s' (%s)\n",
-> +		       FIT_IMAGES_PATH, fdt_strerror(confs_noffset));
-> +		return confs_noffset;
-> +	}
+>  /**
+>   * get_connection() - Retrieve OP-TEE session for a specific UUID.
+>   *
+> @@ -169,6 +197,28 @@ static efi_status_t optee_mm_communicate(void *comm_buf, ulong dsize)
+>  }
+>
+>  #if CONFIG_IS_ENABLED(ARM_FFA_TRANSPORT)
+> +/**
+> + * ffa_map_sp_event_runtime() - Map MM SP response to errno (runtime-safe)
+> + * @sp_event_ret: MM SP return code from ffa_notify_mm_sp_runtime()
+> + *
+> + * Convert the MM SP return code into a standard U-Boot errno. This helper
+> + * is marked __efi_runtime to ensure it is safe to call after
+> + * ExitBootServices().
+> + *
+> + * Return: 0 on success, negative errno on failure
+> + */
+> +static __efi_runtime int ffa_map_sp_event_runtime(int sp_event_ret)
+> +{
+> +       int idx = -sp_event_ret;
 > +
-> +	/* Process all config subnodes, check hashes for each */
-> +	printf("## Checking signatures for FIT Image at %08lx ...\n",
-> +	       (ulong)fit);
-> +
-
-Please mention in the log output that we are checking conf signatures 
-and not image signatures.
-
-> +	fdt_for_each_subnode(noffset, fit, confs_noffset) {
-> +		int ret;
-> +
-> +		printf("%s ... ", fit_get_name(fit, noffset, NULL));
-
-Please indent like we have for fit image node verification, with 3 
-leading spaces.
-
-> +		ret = fit_config_verify(fit, noffset);
-> +		if (ret) {
-> +			r = ret;
-> +			continue;
-> +		}
-> +		/* at least one correct config */
-> +		if (r == -ENOENT)
-
-Where is this ENOENT originating from, it's not obvious to me.
-
-> +			r = 0;
-
-This will be overwritten if the last checked config is a fail, so it 
-isn't "at least one correct config".
-
-> +		puts("OK\n");
-> +	}
-> +
-> +	return r;
-
-Please stay consistent with fit_all_image_verify which returns 0 if not 
-all images are valid, otherwise 1. Here the logic is inverted and allow 
-for partial verification. The former is an issue, the latter *could* be 
-fine if we document it well.
-
+> +       if (sp_event_ret == MM_SUCCESS)
+> +               return 0;
+> +       if (idx > 0 && idx < (int)ARRAY_SIZE(mm_sp_errmap) &&
+> +           mm_sp_errmap[idx])
+> +               return mm_sp_errmap[idx];
+> +       return -EACCES;
 > +}
 > +
->   static int fit_image_uncipher(const void *fit, int image_noffset,
->   			      void **data, size_t *size)
->   {
-> diff --git a/cmd/bootm.c b/cmd/bootm.c
-> index ca7cec91fad..2faa9648c46 100644
-> --- a/cmd/bootm.c
-> +++ b/cmd/bootm.c
-> @@ -335,6 +335,13 @@ static int image_info(ulong addr)
->   			return 1;
->   		}
->   
-> +		if (CONFIG_IS_ENABLED(FIT_SIGNATURE) &&
-> +		    fit_all_configurations_verify(hdr) != 0) {
-> +			puts("Signature verification failed!\n");
-> +			unmap_sysmem(hdr);
-> +			return 1;
-> +		}
+>  /**
+>   * ffa_notify_mm_sp() - Announce there is data in the shared buffer
+>   *
+> @@ -225,6 +275,35 @@ static int ffa_notify_mm_sp(void)
+>         return ret;
+>  }
+>
+> +/**
+> + * ffa_notify_mm_sp_runtime() - Runtime implementation of
+> + *                              ffa_notify_mm_sp()
+> + *
+> + * Notify the MM partition in the trusted world that
+> + * data is available in the shared buffer.
+> + * This is a blocking call during which trusted world has exclusive access
+> + * to the MM shared buffer.
+> + *
+> + * Return:
+> + *
+> + * 0 on success
+> + */
+> +static int __efi_runtime ffa_notify_mm_sp_runtime(void)
+> +{
+> +       struct ffa_send_direct_data msg = {0};
+> +       int ret;
+> +       int sp_event_ret;
+> +
+> +       msg.data0 = CONFIG_FFA_SHARED_MM_BUF_OFFSET;
+> +
+> +       ret = ffa_sync_send_receive_runtime(mm_sp_id, &msg, 1);
+> +       if (ret)
+> +               return ret;
+> +
+> +       ret = ffa_map_sp_event_runtime(sp_event_ret);
+> +       return ret;
+> +}
+> +
+>  /**
+>   * ffa_discover_mm_sp_id() - Query the MM partition ID
+>   *
+> @@ -360,6 +439,116 @@ static efi_status_t ffa_mm_communicate(void *comm_buf, ulong comm_buf_size)
+>         return efi_ret;
+>  }
+>
+> +/**
+> + * ffa_mm_communicate_runtime() - Runtime implementation of ffa_mm_communicate()
+> + * @comm_buf:          locally allocated communication buffer used for rx/tx
+> + * @comm_buf_size:     communication buffer size
+> + *
+> + * Issue a door bell event to notify the MM partition (SP) running in OP-TEE
+> + * that there is data to read from the shared buffer.
+> + * Communication with the MM SP is performed using FF-A transport.
+> + * On the event, MM SP can read the data from the buffer and
+> + * update the MM shared buffer with response data.
+> + * The response data is copied back to the communication buffer.
+> + *
+> + * Return:
+> + *
+> + * EFI status code
+> + */
+> +static efi_status_t __efi_runtime ffa_mm_communicate_runtime(void *comm_buf,
+> +                                                            ulong comm_buf_size)
+> +{
+
+There's a lot of code duplication between the boottime and runtime
+variants, but I don;t see why we need it. Can't we have a single
+function that works both boottime and runtime?
+
+[...]
+> +        * must clean the corresponding cache lines to the Point of Coherency (PoC)
+> +        * before entering secure world.
+> +        *
+> +        * S -> NS (response path):
+> +        *
+> +        * The secure world may update the same shared buffer in DDR. After returning
+> +        * to non-secure, any cached copies of that region in NS may be stale. We
+> +        * therefore invalidate the shared buffer range after the FF-A call to drop
+> +        * those lines and force subsequent reads to fetch the latest data from DDR.
+> +        *
+> +        * Note: Whole-cache invalidation must not be used in EFI runtime context.
+> +        * After ExitBootServices(), the OS owns the cache hierarchy; global invalidation
+> +        * could drop OS dirty lines and violate the OS coherency model. Always operate
+> +        * on the shared buffer range only.
+> +        */
+> +       if (IS_ENABLED(CONFIG_ARM64))
+> +               flush_dcache_range((unsigned long)comm_buf,
+
+This doesn't seem to be marked as efi_runtime. How was this patchset tested?
+
+> +                                  (unsigned long)((u8 *)comm_buf +
+> +                                                  CONFIG_FFA_SHARED_MM_BUF_SIZE));
+> +
+> +       /* Announce there is data in the shared buffer */
+> +
+> +       ffa_ret = ffa_notify_mm_sp_runtime();
+> +
+> +       if (IS_ENABLED(CONFIG_ARM64))
+> +               invalidate_dcache_range((unsigned long)comm_buf,
+> +                                       (unsigned long)((u8 *)comm_buf +
+> +                                                       CONFIG_FFA_SHARED_MM_BUF_SIZE));
+> +
+> +       switch (ffa_ret) {
+> +       case 0: {
+
+[...]
+
+
+>
+>  /**
+> @@ -433,9 +643,86 @@ static efi_status_t mm_communicate(u8 *comm_buf, efi_uintn_t dsize)
+>         return var_hdr->ret_status;
+>  }
+>
+> +/**
+> + * mm_communicate_runtime() - Runtime implementation of mm_communicate()
+> + *
+> + * @comm_buf:  locally allocated communication buffer
+> + * @dsize:             buffer size
+> + *
+> + * The SP (also called partition) can be any MM SP such as  StandAlonneMM or smm-gateway.
+> + * The comm_buf format is the same for both partitions.
+> + * When using the u-boot OP-TEE driver, StandAlonneMM is supported.
+> + * When using the u-boot FF-A  driver, any MM SP is supported.
+> + *
+> + * Return:             status code
+> + */
+> +static efi_status_t __efi_runtime mm_communicate_runtime(u8 *comm_buf, efi_uintn_t dsize)
+> +{
+> +       efi_status_t ret = EFI_UNSUPPORTED;
+> +       struct efi_mm_communicate_header *mm_hdr;
+> +       struct smm_variable_communicate_header *var_hdr;
+> +       enum mm_comms_select mm_comms;
+> +
+> +       dsize += MM_COMMUNICATE_HEADER_SIZE + MM_VARIABLE_COMMUNICATE_SIZE;
+> +       mm_hdr = (struct efi_mm_communicate_header *)comm_buf;
+> +       var_hdr = (struct smm_variable_communicate_header *)mm_hdr->data;
+> +
+> +       if (IS_ENABLED(CONFIG_ARM_FFA_TRANSPORT)) {
+> +               mm_comms = get_mm_comms_runtime();
+> +               if (mm_comms == MM_COMMS_FFA)
+> +                       ret = ffa_mm_communicate_runtime(comm_buf, dsize);
+
+Same remarks here. I think having a single variant instead of an
+_runtime one is going to be easier to maintain. Especially for the
+functions that are very similar.
+
+> +       }
+> +
+> +       if (ret != EFI_SUCCESS)
+> +               return ret;
+> +
+> +       return var_hdr->ret_status;
+> +}
+> +
+> +/**
+
+[...]
+
+> -                       efi_uintn_t func, efi_status_t *ret)
+> +static __efi_runtime u8 *setup_mm_hdr(void **dptr, efi_uintn_t payload_size,
+> +                                     efi_uintn_t func, efi_status_t *ret)
+>  {
+> -       const efi_guid_t mm_var_guid = EFI_MM_VARIABLE_GUID;
+>         struct efi_mm_communicate_header *mm_hdr;
+>         struct smm_variable_communicate_header *var_hdr;
+>         u8 *comm_buf;
+> @@ -465,16 +751,15 @@ static u8 *setup_mm_hdr(void **dptr, efi_uintn_t payload_size,
+>                 return NULL;
+>         }
+>
+> -       comm_buf = calloc(1, MM_COMMUNICATE_HEADER_SIZE +
+> -                         MM_VARIABLE_COMMUNICATE_SIZE +
+> -                         payload_size);
+> +       comm_buf = get_comm_buf(payload_size);
+>         if (!comm_buf) {
+>                 *ret = EFI_OUT_OF_RESOURCES;
+>                 return NULL;
+>         }
+>
+>         mm_hdr = (struct efi_mm_communicate_header *)comm_buf;
+> -       guidcpy(&mm_hdr->header_guid, &mm_var_guid);
+> +       efi_memcpy_runtime(&mm_hdr->header_guid, &mm_var_guid_runtime,
+> +                          sizeof(mm_hdr->header_guid));
+>         mm_hdr->message_len = MM_VARIABLE_COMMUNICATE_SIZE + payload_size;
+>
+>         var_hdr = (struct smm_variable_communicate_header *)mm_hdr->data;
+> @@ -982,6 +1267,9 @@ void efi_variables_boot_exit_notify(void)
+>                         efi_get_next_variable_name_runtime;
+>         efi_runtime_services.set_variable = efi_set_variable_runtime;
+>         efi_update_table_header_crc32(&efi_runtime_services.hdr);
+> +
+> +       /* Set efi_runtime_enabled as true after ExitBootServices */
+> +       efi_runtime_enabled = true;
+>  }
+>
+>  /**
+> @@ -993,6 +1281,25 @@ efi_status_t efi_init_variables(void)
+>  {
+>         efi_status_t ret;
+>
+> +       if (IS_ENABLED(CONFIG_ARM_FFA_RT_MODE)) {
+> +               /*
+> +                * The FF-A shared buffer is accessed by EFI runtime services, so it must
+> +                * be marked as runtime memory in the EFI memory map.
+> +                */
+> +               ffa_shared_buf = (void *)CONFIG_FFA_SHARED_MM_BUF_ADDR;
+> +               ret = efi_add_memory_map(CONFIG_FFA_SHARED_MM_BUF_ADDR,
+> +                                        CONFIG_FFA_SHARED_MM_BUF_SIZE,
+> +                                        EFI_RUNTIME_SERVICES_DATA);
+> +               if (ret != EFI_SUCCESS) {
+> +                       log_err("EFI: failed to add FF-A shared buffer to runtime map (%lu)\n",
+> +                               ret);
+> +                       return ret;
+> +               }
+> +               log_info("EFI: FF-A shared buffer runtime map: addr=0x%lx size=0x%lx\n",
+> +                        (ulong)CONFIG_FFA_SHARED_MM_BUF_ADDR,
+> +                        (ulong)CONFIG_FFA_SHARED_MM_BUF_SIZE);
+> +       }
 > +
 
-After patch 4/4, I believe this will now fail if you have a FIT image 
-with only image signatures and no conf signatures (which is valid!).
+You should remove the memory map reservation if any of the code below fails.
 
-Also need tests to make sure this doesn't regress.
+>         /* Create a cached copy of the variables that will be enabled on ExitBootServices() */
+>         ret = efi_var_mem_init();
+>         if (ret != EFI_SUCCESS)
+> --
+> 2.34.1
+>
 
-Cheers,
-Quentin
+Thanks
+/Ilias
