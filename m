@@ -4,142 +4,105 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23928FF885A
-	for <u-boot@archiver.kernel.org>; Tue, 28 Apr 2026 04:27:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9597FFF886F
+	for <u-boot@archiver.kernel.org>; Tue, 28 Apr 2026 04:27:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7CFAB842EF;
+	by phobos.denx.de (Postfix) with ESMTP id BA3C684314;
 	Tue, 28 Apr 2026 06:27:14 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="hXXU+DGI";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="I8KHogbA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CCEC7842EF; Tue, 28 Apr 2026 05:37:06 +0200 (CEST)
-Received: from BYAPR05CU005.outbound.protection.outlook.com
- (mail-westusazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c000::1])
+ id A82EC84106; Tue, 28 Apr 2026 06:07:19 +0200 (CEST)
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 79EDE84150
- for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 05:37:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 10F1084099
+ for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 06:07:16 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=redhat.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=altera.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=chen.huei.lok@altera.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=R0m+aiuA2zej3K71nnQHP9r8pkD4jhTl5SrJz/QoqsXDPLgwCGAcQlIk1/P1n5fWqChqrt1jE1evd8YHmFegRnHQt87enO8luwyfIsrvVdUi4RcqzTEhBDdn3rbGwaNIFyO6/8gHrPPd3Vf6WNAk3bQ2G6OaE1l9kfjRcAd6cqzemmaHM+9/65hvcTTQq6wtgtbYuol6rzkgxp94FC3kghE2GCHj05XyKX24Z3Vr2VPzLXTtdDrcDcxcN1wBYPZSAv0Xw2M7RJ0pnP1ziqwyBZABFLuV/adz+9P2TISOPkwmTHtg/iV9M8W579l7xloiN1/c1rX4tjmXoqA656RxSw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ok8IUTpWUnoOmJgLptp3XEjWybPd7GaU81S6i2rFP2I=;
- b=nW0ukF9a6WBlllwjpYrJpl2aWQICN0DXdGD7/n5wZrvWcsjF9PZ1A4fPRlQN4wqUnivqlJluWCybDnxw82i1t18xBAk9zBeF/psvQWZtLtomxWaS3rJW6WkYL3kPWcR8hNxH9J5w18Gyby2Mj4PKZulj0hP+vP44tf/ZTibBxz0oSiRyR3ByxJ0l2rfwt2g5dajN9k74lMP6AVLuwJxFNciGQmTHkcCdfkGw0vfeRgkuYDK3yTgsLzjxU80F3utDrC5JPOmc1axZDtOgE6gC+vlhcNgeX8aFkgNy6xgaUTUDIEnI09glim5bkAf2u3jCUqIveZIGcn4Y7U/QRT4W1w==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
- dkim=pass header.d=altera.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ok8IUTpWUnoOmJgLptp3XEjWybPd7GaU81S6i2rFP2I=;
- b=hXXU+DGICQll5vJJDab8xdT5r3gW4MijdM6ht+tRkiOYwSrzNvWbzImcMSZu45OVm+Z7auT29Vazssjhv1ZJ6lVPoE5wVwF3wOj5krPDQGyEKeG/IUm8zy4w8FPg3Ti8mQOoeweVtLugw8RHpx4VtR7S8AMIKpe9OJVzvbXKM432ooVIY6rUW+jK3nRwMi39XLbiznwKXUk8bHm1kW+Me2CnrODdMm6mAUHOjQIrSeib9tjhTgMC4kkSoB1Z2Lx0jK1SN/iIVZ6J6RKP5nTAaL6PVIeokDd+S+B3FYDbymve1t4lU/vKaV/BsQIsZR90127sFnjLE3ZSJI9th1OjSQ==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=altera.com;
-Received: from IA3PR03MB8021.namprd03.prod.outlook.com (2603:10b6:208:502::17)
- by IA1PR03MB8263.namprd03.prod.outlook.com (2603:10b6:208:5af::15)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9846.26; Tue, 28 Apr
- 2026 03:37:01 +0000
-Received: from IA3PR03MB8021.namprd03.prod.outlook.com
- ([fe80::3016:b672:c683:f7ad]) by IA3PR03MB8021.namprd03.prod.outlook.com
- ([fe80::3016:b672:c683:f7ad%4]) with mapi id 15.20.9846.025; Tue, 28 Apr 2026
- 03:37:01 +0000
-Message-ID: <7ad7e158-d474-4df4-80c3-c616952ed2eb@altera.com>
-Date: Tue, 28 Apr 2026 11:36:52 +0800
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 7/8] arch: arm: dts: n5x : Switch to using upstream
- Linux DT config
-Content-Language: en-US
-References: <16f2943c-7337-4a77-9ae3-f9d2dbbed686@altera.com>
-To: "Chee, Tien Fong" <tien.fong.chee@altera.com>, u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, Marek Vasut <marex@denx.de>,
- Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
- Dinesh Maniyam <dinesh.maniyam@altera.com>,
- Boon Khai Ng <boon.khai.ng@altera.com>,
- Kok Kiang Hea <kok.kiang.hea@altera.com>, chen.huei.lok@altera.com
-From: "Lok, Chen Huei" <chen.huei.lok@altera.com>
-In-Reply-To: <16f2943c-7337-4a77-9ae3-f9d2dbbed686@altera.com>
-X-Forwarded-Message-Id: <16f2943c-7337-4a77-9ae3-f9d2dbbed686@altera.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: SG2P153CA0048.APCP153.PROD.OUTLOOK.COM (2603:1096:4:c6::17)
- To IA3PR03MB8021.namprd03.prod.outlook.com
- (2603:10b6:208:502::17)
+ spf=pass smtp.mailfrom=ekovsky@redhat.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1777349235;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=rdryLV0YICc5YlOEF8rPDK88n8gF0YpIBPdngbQcTrI=;
+ b=I8KHogbAt0yhsD2amZgyq+GtQ5W7GEE3VFh+TjYsbMBdD025eXTL0Dy7UT3WcPUhQo4x+N
+ tN4AMXSG/jlLWOgCLqaFTd2gaq66qwAkjLrOkrBonjn+JH/+evfLudjo+g/6hKaTq7L5BJ
+ GU7tCqKbL4ZuvUVwINiUIhU61jAED2Y=
+Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com
+ [209.85.222.198]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-473-HNi5QMUGP-iknkec-5UHWQ-1; Mon, 27 Apr 2026 16:43:43 -0400
+X-MC-Unique: HNi5QMUGP-iknkec-5UHWQ-1
+X-Mimecast-MFC-AGG-ID: HNi5QMUGP-iknkec-5UHWQ_1777322623
+Received: by mail-qk1-f198.google.com with SMTP id
+ af79cd13be357-8eaf1ce4a9bso1504818085a.1
+ for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 13:43:43 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1777322623; x=1777927423;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:date:from:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=rdryLV0YICc5YlOEF8rPDK88n8gF0YpIBPdngbQcTrI=;
+ b=ZY3ZApmDAG+SruZN7RmhL+8ygezMQhfU7pD2e7NQHvZ8pc014Yqcb5wI+K9f1OiNc1
+ nHPbgXzd+lz5r8t43GRcguHd8nwKxHU/Sj3YZjm/LbtdHpvspUKcCGfqJ/0+eYhMg8JU
+ Lhiusk4XDwbcHCgY0dutc9D7XeAPyVJyJ214iyG+iXn2mjjJbgnzy4bs32KKQ4nkRfai
+ aNVaQmn8j4LYh6SCCyCGbEgtfXBDbluYlF3V8Rd8qVOwbHcLMuYL62X9HN4vKh8dpceB
+ D726mONi4YmfIW2SuuZFbek2HGFgubkmqZ2uznyiRHJzqcB613sF8NzU02JAmmN3GPwz
+ h6oQ==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ+i4eGS9Drb5OVhhm3TSZZEsZpIjyz0dfJWzLhn0Ue+NJpmlz2xKS5PdwGt9/5vkoCE/pY9zQo=@lists.denx.de
+X-Gm-Message-State: AOJu0YyRDz/CtMhY63mqIKT/M2cswrlg2hESwQyuNebpf99kJjafP4gF
+ M8W8wuyD69pxZu0+XdJfYZNguVJye1k6dVc+2cYBO6qArZtxCL6igN9T8/HGGYcKl0cTGTQiWjV
+ 2vHF3dKUXnTqa2eo0A8I5gpkJEKxSLYokz3jSnfuNoNbtqYJVg7j9z+c=
+X-Gm-Gg: AeBDietnBhX2T3F3wJUDenryLG4BsTnnczLtvu9PEFLrBuUbBQeuTSaE9fVMJRpBFJy
+ 8l23vnbTjqOIl95FMg74vcQ4xrKRzjC7NWEaZLCMunMqAdFkG4+1z1z0K5O4OvUpZ6PZUE9RpJH
+ dpwo3s2zQLrTGaaTNM+QTVcMppvcZcOD1vpy/tBqvLrvwm6OcCc+WPPfi/kVxW538LKdY6WsZC0
+ Uc2mPAQcOuHOIwhIbPUyNJ+mieuCcp9/ceKGjtW9TrQXYf+fWKsOIsvrsCq+d4cqqODl4b4T6T9
+ HBh8qUzmH68avZgEO/PN2CpdEmDigjirtdR+utQNmRPPI64fYD48znnoI76U/MykAFZxPEVQ3nf
+ OVUzCtiOEEj2iHjq2VtZ6yka9oZY=
+X-Received: by 2002:a05:620a:170c:b0:8f1:7ce7:5aff with SMTP id
+ af79cd13be357-8f7ccfa6b37mr47643885a.1.1777322622946; 
+ Mon, 27 Apr 2026 13:43:42 -0700 (PDT)
+X-Received: by 2002:a05:620a:170c:b0:8f1:7ce7:5aff with SMTP id
+ af79cd13be357-8f7ccfa6b37mr47639185a.1.1777322622340; 
+ Mon, 27 Apr 2026 13:43:42 -0700 (PDT)
+Received: from localhost ([38.246.12.206]) by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-8f7c8a97f3esm22383585a.47.2026.04.27.13.43.41
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 27 Apr 2026 13:43:41 -0700 (PDT)
+From: Eddie Kovsky <ekovsky@redhat.com>
+X-Google-Original-From: Eddie Kovsky <ewk@edkovsky.org>
+Date: Mon, 27 Apr 2026 14:43:40 -0600
+To: Tom Rini <trini@konsulko.com>
+Cc: Eddie Kovsky <ekovsky@redhat.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Tobias Olausson <tobias@eub.se>,
+ Paul HENRYS <paul.henrys_ext@softathome.com>,
+ Simon Glass <sjg@chromium.org>, Jan Stancek <jstancek@redhat.com>,
+ Enric Balletbo i Serra <eballetb@redhat.com>,
+ a.fatoum@pengutronix.de, mark.kettenis@xs4all.nl, u-boot@lists.denx.de
+Subject: Re: [PATCH v3] Add support for OpenSSL Provider API
+Message-ID: <ae_KfGqNrsWZ1rfQ@daedalus>
+References: <20260120164524.253188-1-ekovsky@redhat.com>
+ <87ikckmbbi.fsf@kernel.org> <aZc_efHFk1Q-iWvP@daedalus>
+ <20260219172836.GN3233182@bill-the-cat> <aaHWNU0LQqJ0zNDD@daedalus>
+ <20260227174744.GW1593142@bill-the-cat> <ac2WqaHYgLslig_a@daedalus>
+ <20260402162704.GG41863@bill-the-cat> <admdwS1tuX_ZdPFF@daedalus>
+ <20260413181258.GD41863@bill-the-cat>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: IA3PR03MB8021:EE_|IA1PR03MB8263:EE_
-X-MS-Office365-Filtering-Correlation-Id: 52da166f-2976-4aed-6118-08dea4d76848
-X-MS-Exchange-AtpMessageProperties: SA
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|1800799024|366016|56012099003|18002099003|22082099003|55112099003;
-X-Microsoft-Antispam-Message-Info: o0h81U1qnAZA0Iqb5QEg26bRr8ScxYZb+O+ZMBz3cqM9rU2Mu1yEmskKJePfWmqJMCL9dy+0T5UjTCkky3KTbChDZtfmL3DW8ht0Ge0ismnuM9ldsbJ5mz34Ji9FWaLvwN01G1DyBTuu/NpYGQBnArPXIi53EynhAlqa8nsJQf5GkcZJlQp77BDTHtN9SRD29PxfDVup1uFyFLwhQ79Lj3VkdKzRve40D0Gdqig2bUFgY8d6Z5Dp07VC/VjJAV8Flx8COKoCtEr9ZIkOkVdpCYt2MLMi8ccTunFswRLn6CwLLlkeLke6ZAKNTvabSpC7ccqlg8Ki/+P3Bm0oBrXian2fAR47NThZvQ3GqnwveEBspAVSngNAmY3gmXFn5MLXHPVTScEVZuPWmRiw+3+oeQr/06VRluNcOXuS0sAb2G5lrgZaUf470EpiqaoWWRie0vxzGSw/05sFedcBMxKRXuh4qasWKKNbqWGPIxeeOoq5Q7jcl/T4M4fppqxPeQm1VQaxsZ8JGLZDFIyY4xEV8syz528FCwJcz9lprAJVAvn70oMBOHobfawhUhNkFcnSQ0gLFJLCZa8ovaF+nkDkcKzcq9G7l/GtWDg/Z5dz4ARXZF2VCL+ZTOyspNlqrhTHw9h9xwiQthXDvp6+9OT3GIEJSExe0CfujeNp68iAHAb4AqEulN85QLm1tVt47+884QzGuZg2+wPIJJDB396DSWeTEsIf0ZWSfoURyImM1N8=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:IA3PR03MB8021.namprd03.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(1800799024)(366016)(56012099003)(18002099003)(22082099003)(55112099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?cnpJR2JGcTk3aUVxbTdHWU5NZlFtZitjQjdCcXVFbmt1ZDRRN1lXL2UrcWZa?=
- =?utf-8?B?UlBFUDBjSlFSTXBacG03aGZDSG53L25sN0I4T2ZjaldVSjAzazhSc2dwdGt3?=
- =?utf-8?B?VW02VXNkcmM5dk02M29pVklwdXV5MFEvMGpDb2VaWFQzVjEwcGxjdG4yMlpt?=
- =?utf-8?B?bktxTFVVaGJ4My9vdGhTdGpPSEV4N2tIR3ZOTkJ6Qi92dnpmZTdGVGhjWHBl?=
- =?utf-8?B?aGtVVkRwaHQwZUFlcmxjVmNycHpqbThhRnI0ejRqamFYSXFGRFVQTitmTllT?=
- =?utf-8?B?Qi9ROXNGMkg3MUovalBLNmJQeHpIZWdHUGp2aDVWQm9Yd2ljSWNUcTlYVjU0?=
- =?utf-8?B?dTZRWnFTUTFlTkRNTHdtOFBPZjAxOUpCZmhMZHpzQmRJNXQvcjNQaXJzTldH?=
- =?utf-8?B?aDdaS3FJZ1E5cHdTOVFnSVE1OHg5VFlOS29vZWY3THd6UGNLK2MwTmRPakFW?=
- =?utf-8?B?R3VPNFNnL29wR0FzOHdBSmtXa2hUaGt3ZTV6NWQ3YkVFcW9KSzNQNEJvY1dD?=
- =?utf-8?B?ZHNJWE9wVWpJc3B6TUJ4bGpVeG5mUTdHVFl3NjJHVUN6YlRuR1kxZVZLRmtl?=
- =?utf-8?B?ZlFUSnlxU2tmei9wa0ljTndNTE9OZjZoZWduYzBvMm4zOEprRjBQNTdNWW53?=
- =?utf-8?B?L3RVUi9zUnk1b1pQajUzd0FzaVkvRjVTaldkWE1DRVNTeklQdThqWkwyWE1B?=
- =?utf-8?B?YmoyTm9yZWlHOS9CMmtLYUsyTjcybDVXOExLNm9OcWY2bzJqSk1vbHpGOWl5?=
- =?utf-8?B?SHpCQWVYdzJnQld0MFJ0UjVxdlk3eXR0UU5Qd2ZSOTdKNVB0YW1tUS83N0Q4?=
- =?utf-8?B?YVliMHdsUkY5cEd2TGtFQlRKcGU1R1RiNzcxbzNtZ3lHYXJ2QSt3N0NCQ3Bx?=
- =?utf-8?B?ZVIyWjNRVG5hWmIySG55Q1VHSjQ0MHk4TVgyamFvUk52ZVhWOXF0dnBjRHNR?=
- =?utf-8?B?TlRnMUIzRURiZ2JJMHRyK09xK3Z4a2xEMFFGMGxvbGU4ZHppVGxtMzhCcDlS?=
- =?utf-8?B?TERvU01KR0JyeEh1alZ1bFdxYVk0TjBlWjcwbFl4ZnlkSm5raXlyR29yWGdD?=
- =?utf-8?B?UWwvUnpLWW5qOVArSmd6bnFkZGJkSzVZc1NLYVpDeCsxUm9DV3pMY0c1VjJE?=
- =?utf-8?B?dkQxbW8yUlN4RFN6RElMbjRDQXA0a0habFgvYWtjUE5ydWZ3RXk0bTBOS1hH?=
- =?utf-8?B?ZmFoUXUra0ZZNnM1Z1JGUDcwZCs0TjZZVXpoWVBwTk1vaStQS1VSdCtwQzRq?=
- =?utf-8?B?V1J5VER1S0l3bDBna055M3B4dzlkWCtEb3dNYXhtSEpacWtJZ3lxdkQrWDJJ?=
- =?utf-8?B?cmQrMWdreUlJc3RLRmEzd0pmN1ZWYTJ6dnA0Y1VsUDQySFdJWnVZTm5KdTRM?=
- =?utf-8?B?d05YQmdrUks5OFVaWmJUVEdhMVFYajVlUHlBYkYrMFYvS08wYUt3bnhBbE9M?=
- =?utf-8?B?MDRyUGJIcHU1M2VPRnc1R3VBVFRZQzdISjJUMUZRaWVPMGdrZWlKZGdWdGl2?=
- =?utf-8?B?b2hXRG9KekZvOVVqTGgrU3hqRlNUM0ZzMVVxc1p0MmMyUG5oZHJhVHJZVEJa?=
- =?utf-8?B?dUtyV05JY3FvMVlKbHhQZ082WE16SjdpVVpMbHpMdUtMWGFkNFd6eS9yQkUx?=
- =?utf-8?B?RENUd1dxM1dHRlRlbnFzUFVBZjVvZ3JFSHJFVTJ3NEZjQlArMlR6WjgzWVlr?=
- =?utf-8?B?S3F2a2RlUE9HSWhmbmpPRGVDY2pxdWdTcStDMHFqcm5MMHR0QzJReGxwZm9v?=
- =?utf-8?B?a2JKVDJONlo3dzRtb3FpZ1lxK1dRUGNvWUZoc3dxc00vRlIzOEswZ3pCYVRT?=
- =?utf-8?B?RnFMVnY3b2VYM1pDZGFaVHJhK0dFUlBNTnYvbjJhRE4vUEV4cUlLYTE1WUJs?=
- =?utf-8?B?TUZSN3NZNkRvTGRoNU1JYmVuZU14RFdwSTBUazVMWXMxZ2dSa3FwSXZYSVNY?=
- =?utf-8?B?MWp2aDliTnRPOExHOUFnN0JQSCtkTXlGYkJCYkhHVHBsQVF3aWVTU1FYcFg0?=
- =?utf-8?B?Z2UyYlBjNlQxaStwc1VqZW9hRCtJaFBHc2tHY2ROU2tuanM2ZEYwdmp6TERv?=
- =?utf-8?B?UDQ5ZmdjdjZQMFcrR1RoS1JhKzhINFJWNjhYUnc1aG5HVGtNU1R1YXpVQTdu?=
- =?utf-8?B?UUVnZ1BGVXQ5T1RocHRMbnlMK29pUTZ6c0kxa3RVVVY2YlltYjIwUTdMM1gx?=
- =?utf-8?B?SnVoV3NZTjNHWkRyWFp1NjBZZmdrTE45dFBTUDRRWnlSMGNuenJRVTFzN3k4?=
- =?utf-8?B?T1JCOCs4Z0o2d0IxNkNCcVB1eWhVcmR2a29pd1FvNmRTZG9IT3lPdDM0Tml5?=
- =?utf-8?B?WldrOEE2NXF3Mld6QmdrZCs5bVlEM2xTeVl0cHdKWU9Tbks1V1JaU1RjQ2x5?=
- =?utf-8?Q?eXBCD9elNO7TdIPU=3D?=
-X-OriginatorOrg: altera.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 52da166f-2976-4aed-6118-08dea4d76848
-X-MS-Exchange-CrossTenant-AuthSource: IA3PR03MB8021.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Apr 2026 03:37:01.1628 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: MONVqlpHR7WI2gBC72aRFpXAzV2O2uYH0+XW4Ur6MiN26ovkjDyzCcCG91yqv0gePOhFD1G30tUtAKw1FO1HzUvSSWqMacFWI51haBjNe3w=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR03MB8263
+In-Reply-To: <20260413181258.GD41863@bill-the-cat>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-MFC-PROC-ID: UlaqZbUgNwC4mq-Y1VDTn3SQTtKUeXavh-gIuLcFyuU_1777322623
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 X-Mailman-Approved-At: Tue, 28 Apr 2026 06:27:12 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -157,74 +120,89 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tien Fong,
+On 04/13/26, Tom Rini wrote:
+> On Fri, Apr 10, 2026 at 07:02:57PM -0600, Eddie Kovsky wrote:
+> > --->8
+> > > > I finally got to the bottom of this. Debian/Ubuntu ship OpenSSL backends
+> > > > separately. The CI environment is missing the 'pkcs11-provider'
+> > > > package, which is causing the binman tests to fail.
+> > > > 
+> > > >     $ apt show pkcs11-provider
+> > > >     Package: pkcs11-provider
+> > > >     Version: 1.0-3
+> > > >     Priority: optional
+> > > >     Section: libs
+> > > >     Maintainer: Luca Boccassi <bluca@debian.org>
+> > > >     Installed-Size: 410 kB
+> > > >     Depends: libc6 (>= 2.34), libssl3t64 (>= 3.0.7~)
+> > > >     Homepage: https://github.com/latchset/pkcs11-provider
+> > > >     Download-Size: 125 kB
+> > > >     APT-Manual-Installed: yes
+> > > >     APT-Sources: http://ftp.debian.org/debian stable/main amd64 Packages
+> > > >     Description: OpenSSL 3 provider for PKCS11
+> > > >     With this provider for OpenSSL you can use the OpenSSL library
+> > > >     (version 3) and command line tools with any PKCS11 implementation as
+> > > >     backend for the crypto operations.
+> > > > 
+> > > > With this package installed the SSL errors logged on Azure are no longer reproducible.
+> > > > 
+> > > > The results from the first pipeline expired while I was investigating
+> > > > this. I reran the CI job so you can see the error messages.
+> > > > 
+> > > >     https://dev.azure.com/u-boot/u-boot/_build/results?buildId=13035&view=logs&j=c59aff74-743b-5f08-f408-4a608a489153&t=f2ea3536-b291-5a39-ad92-0220c9b8101a
+> > > > 
+> > > > I have looked into the .azure-pipelines.yml file, but it's not clear to
+> > > > me how to configure the CI to install extra packages.
+> > > 
+> > > Ah, OK. So the package needs to be added to tools/docker/Dockerfile (and
+> > > doc/build/gcc.rst). For testing changes out, you can then modify
+> > > .azure-pipelines.yml to point at your image, rather than the default
+> > > image. Or hack in a "sudo apt-get update && sudo apt-get install ..." to
+> > > the job.
+> > > 
+> > > -- 
+> > > Tom
+> > 
+> > Hi Tom
+> > 
+> > Updating the dockerfile and documentation was easy enough, but I was
+> > still seeing the Azure pipeline fail with the same errors. It seems to
+> > be ignoring the updated dockerfile.
+> > 
+> > After digging through the pipeline logs I noticed that Azure is using
+> > the Windows Subsystem for Linux with Arch Linux to set up the test
+> > environment. The package name 'pkcs11-provider' is even the same on
+> > Arch, so I added that to .azure-pipelines.yml.
+> > 
+> >     https://archlinux.org/packages/extra/x86_64/pkcs11-provider/
+> > 
+> > And the Azure pipeline now fails because it reports the package doesn't
+> > exist.
+> > 
+> >     https://dev.azure.com/u-boot/u-boot/_build/results?buildId=13066&view=logs&j=8222cf02-b5ce-5040-5def-6173bf341f71&t=5f6e674b-07e4-5ce5-77ac-ecaae7331dd8
+> > 
+> > I am not an expert in these CI systems, so I'm not sure what else can be
+> > done to change the test environment.
+> 
+> So, I see two problems. One is the failure on Windows hosts. Perhaps
+> https://www.msys2.org/docs/package-management/ has some hints on how to
+> find out where it's looking for packages and if that's packaged in turn?
+> The other is that the binman test suites are still failing, on Linux.
+> 
+> -- 
+> Tom
 
->> +
->> +&flash0 {
->> +	#address-cells = <1>;
->> +	#size-cells = <1>;
->> +	compatible = "jedec,spi-nor";
->
->
-> upstream DTS has this compatible defined, so the overrides is redundant.
->
->
-I will drop the redundant "compatible" override for
-&flash0 in v2.
->> diff --git a/arch/arm/dts/socfpga_n5x_socdk-u-boot.dtsi b/arch/arm/dts/socfpga_n5x_socdk-u-boot.dtsi
->> index bc2fb91dfb5..f013ed49cd3 100644
->> --- a/arch/arm/dts/socfpga_n5x_socdk-u-boot.dtsi
->> +++ b/arch/arm/dts/socfpga_n5x_socdk-u-boot.dtsi
->> @@ -8,12 +8,11 @@
->>   #include "socfpga_n5x-u-boot.dtsi"
->>
->>   /{
->> -	aliases {
->> -		spi0 = &qspi;
->> -		i2c0 = &i2c1;
->> +	chosen {
->> +		u-boot,spl-boot-order = &mmc;
->>   	};
->>
->> -	memory {
->> +	memory@0 {
->>   		/*
->>   		 * Memory type: DDR4 (non-interleaving mode)
->>   		 * 16GB
->> @@ -38,10 +37,21 @@
->>   };
->>
->>   &flash0 {
->> -	compatible = "jedec,spi-nor";
->> +	reg = <0>;
->>   	spi-tx-bus-width = <4>;
->>   	spi-rx-bus-width = <4>;
->> +	spi-max-frequency = <100000000>;
->>   	bootph-all;
->> +
->> +	m25p,fast-read;
->> +	cdns,page-size = <256>;
->> +	cdns,block-size = <16>;
->> +	cdns,read-delay = <1>;
->> +	cdns,tshsl-ns = <50>;
->> +	cdns,tsd2d-ns = <50>;
->> +	cdns,tchsh-ns = <4>;
->> +	cdns,tslch-ns = <4>;
->> +	/delete-property/ cdns,read-delay;
->
->
-> This is contradictory. Setting a property and then deleting it in the 
-> same board overlay is nonsensical.
->
-> The intent is unclear, if read-delay should not be set, don't add it; 
-> if it should be set, don't delete it.
->
->
-Agreed. I will remove the unnecessary addition of "cdns,read-delay = 
-<1>;" and
-keep the node consistent in v2.
+Okay, I see now that MSYS2 is really a package management tool for
+Windows that happens to reuse some of the tools from Arch Linux. But it
+doesn't package pkcs11-provider. The only pkcs11 package available is
+pkcs11-helper, which is a different upstream and does not resolve the
+binman failures on Azure.
 
+    https://packages.msys2.org/base/mingw-w64-pkcs11-helper
 
-Best regards,
+I will include the Dockerfile update adding pkcs11-provider when I send
+v4, which should resolve the errors on Linux. But at this point I've
+done all I can to resolve the issues with CI.
 
-Lok
+Eddie
+
