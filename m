@@ -4,146 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45E66FF8860
-	for <u-boot@archiver.kernel.org>; Mon, 27 Apr 2026 12:07:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64B25FF8860
+	for <u-boot@archiver.kernel.org>; Mon, 27 Apr 2026 12:13:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ED7C083C14;
-	Mon, 27 Apr 2026 14:07:12 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
+	by phobos.denx.de (Postfix) with ESMTP id DB44D83693;
+	Mon, 27 Apr 2026 14:13:52 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="Rf/4uHK2";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="HpHVEXCQ";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=arm.com header.i=@arm.com header.b="I2Cyw1b1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D402B8407E; Mon, 27 Apr 2026 14:07:10 +0200 (CEST)
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
- [205.220.168.131])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 59D9780433
- for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 14:07:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=oss.qualcomm.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=balaji.selvanathan@oss.qualcomm.com
-Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 63R8T9MZ1762101
- for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 12:07:06 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- CH2sh64zuUGVIgoqFSFo5N1hsS0D/q3FSIwR/Bjddfc=; b=Rf/4uHK2aOEFzw+w
- 34V0YeW84uxpdmz4GfRqH631IVAhUY7B2uu+oGHfFCcYXJcja2ooBlgmUzFCWcb7
- y7swTzSNYVV3+wIjmzei8aZhilvO4KuzyUrtsQkGdB2QqrXSg6O0PePy96T9c3xo
- voClSOB1B/I5HP/g0ueBzCvbT+33FQW46etRchziW8fh3qPy78D1YZd7hf7YtOBw
- JAEZE/00UVT0wXN4GPNQGACPfO5JVVtcqYqsihggTt6MZxs8bPnTqoiDvlaYLhJ1
- 695iw1QPSaMcsRTZHWL4LdZbN7Dl/R5W1h+s9mSjlMN5jCvnkT+4LuMG2LlnwRvP
- c+CTgA==
-Received: from mail-pj1-f70.google.com (mail-pj1-f70.google.com
- [209.85.216.70])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4drpw9dy5d-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 12:07:06 +0000 (GMT)
-Received: by mail-pj1-f70.google.com with SMTP id
- 98e67ed59e1d1-354c0234c1fso11113443a91.2
- for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 05:07:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1777291625; x=1777896425; darn=lists.denx.de; 
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=CH2sh64zuUGVIgoqFSFo5N1hsS0D/q3FSIwR/Bjddfc=;
- b=HpHVEXCQCBM9qBkN3Zzg4Gb2CMfNNr9l8IWKymhj/DYhbswboYyasakf5cELkAWHih
- kRSeb4hdzQUZ0kOxyZGkiW24gjGIg1ckKhZoxLh+Yl//o4SXBYl9YtUiA8mm2S4BlzXU
- xuCRvLeykROtQmEKoN7fba3arT9KMZG/HDzC9s9ac0pMusxnGAChMPBsuGLrK7kTnaUI
- y00Exz7hwkYWqapfAl3FG70nMXjLRybYUnY8R7uNaZ4oah4ml+3gRd6jnUqLJL9FGYrh
- fEo4thAl8S4wSU8YKZ7HupeXWzWhpHZPwdC4PrQbqLOH2DD+gObCLmkA5iUb3IFBJnpo
- /QiQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777291625; x=1777896425;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=CH2sh64zuUGVIgoqFSFo5N1hsS0D/q3FSIwR/Bjddfc=;
- b=S5fess9tqp6ivI/sx7J3HwOYzXJUkf6KyXeILZvEYHkmMKtaKVKNByL3N37J9vskJA
- c5OpvcDGsiXTkFfzgoAenil548cj/y6eIKLU35CGgPArFgyE6y37h9+2fSX5B7pXAMvh
- 29ZPNjASAVInAL7rcUVQWWQWed3iqvLjzLnuY6wjeobuyuPiBP6qht9UT9d7+u8CQPwF
- 1sQ2E5/zpsMwD5y9SHgqNemvT1p2T7N5/xNh8/Wn3qRqdpXtRV4unfCAy6tTjlyr0rn2
- wtluCkY/W0yIsHlgq0RhRIG6gYmxtlZUfM4uYF1+2L7WQvzL/mUvnI3lFpWpBiaX2ZyD
- 95WQ==
-X-Gm-Message-State: AOJu0YwpeXXfNeiS2i2m8wawoCYCzyWrcJW0x0i6Y0kBOx+OY4A7DQB4
- esb1DfUr3rK6J1oKjzQGYcR4E7I5zyZ8Y3niv45Y0xJ7R0tw1+4XglifAMRibz4zal0rZ7v0EL+
- dYjFZsnsyutYRDbbOe2QjPINgdIvHaNGQNK2ixTgRXvFflAv+UN0pxx3z
-X-Gm-Gg: AeBDietI6tkeGiMAd4ddDOxa/jtDNOi9wjAfcdosMmxdcBaF92VSZwGvGgVsYYJz9sd
- Sq7VbLJMHPBxUACRV2eeuFBWYpKviCmuZTvzGN+zLsTmOkvXzlY4e2Qak0aSgFEZ4fOhIQOlnV2
- 6WElYY1g4s8tXM7aEx32HQLvt+Uj56acoFL4sWwlHrNVKKPtW0cuN3d3PzSsUBHfIePHgCFF6fJ
- IsUubR2aXrwyn8VkeRcriZI4mRMc46e4KZim2AD+1Ih1XKbI/jFLADB13d7ysXlvlwGid8vYpKR
- 9ZWEIAQDIK5gXau/4gDbu2n25KMdLsdDo66VnDE+2aV4SZOKnm8MnnQr/Jf27BHmIy/DPlmk1MO
- +5tUMTZkQzLD/sccAOQ1v+1koZvRhZjTI/6b9kGC/+okVwuTMQoFLz8PRZ07NtIsNkKR+AB45T0
- VqRPCuH/iuIGwWcsEGC+RNl3WfTkKhdrHVhwotIA35TpJWUFBTiGwxJ2UYBFOK
-X-Received: by 2002:a17:90a:d40d:b0:35e:27ec:de0 with SMTP id
- 98e67ed59e1d1-36140462a99mr43442607a91.13.1777291625414; 
- Mon, 27 Apr 2026 05:07:05 -0700 (PDT)
-X-Received: by 2002:a17:90a:d40d:b0:35e:27ec:de0 with SMTP id
- 98e67ed59e1d1-36140462a99mr43442539a91.13.1777291624765; 
- Mon, 27 Apr 2026 05:07:04 -0700 (PDT)
-Received: from hu-bselvana-blr.qualcomm.com
- (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
- by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-36140feea38sm31832910a91.6.2026.04.27.05.07.01
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 27 Apr 2026 05:07:04 -0700 (PDT)
-From: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-Date: Mon, 27 Apr 2026 17:36:45 +0530
-Subject: [PATCH v2 4/4] doc: fastboot: Document block device selection syntax
+ id 7B17C83BC4; Mon, 27 Apr 2026 14:13:51 +0200 (CEST)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id D071680433
+ for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 14:13:48 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=arm.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=andre.przywara@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 9724D1684;
+ Mon, 27 Apr 2026 05:13:42 -0700 (PDT)
+Received: from [10.41.150.145] (e142021.arm.com [10.41.150.145])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id EEF093F62B;
+ Mon, 27 Apr 2026 05:13:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
+ t=1777292028; bh=T3qO5gyY+2fnfufZjGE9mDAW2Apy+DnOhN9TBrrqwhI=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=I2Cyw1b1BjtwAujYg4lIObJ54xXiHhwfhX9SrY0EOwhp39UR54WvJD7x1rOOnU5wy
+ QlRaQELCe6mgLFIAAQ4j3bjdM8r9KSyyk7Ye/WJ9VpkMz6nZQegB9QlL9cgNYRJ6bu
+ 7HYUdN3uM6YTEUo5sIqWwD+7AAbW61EdvygF1OnI=
+Message-ID: <32260d09-4b23-4b13-916e-b9e330178087@arm.com>
+Date: Mon, 27 Apr 2026 14:13:45 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/6] sunxi: move SID MAC fallback from board env setup to
+ EMAC read_rom_hwaddr
+To: Lukas Schmid <lukas.schmid@netcube.li>, Tom Rini <trini@konsulko.com>,
+ Hans de Goede <hdegoede@redhat.com>,
+ Jerome Forissier <jerome.forissier@arm.com>
+Cc: u-boot@lists.denx.de
+References: <20260325192628.750398-1-lukas.schmid@netcube.li>
+ <20260325192628.750398-2-lukas.schmid@netcube.li>
+Content-Language: en-US
+From: Andre Przywara <andre.przywara@arm.com>
+In-Reply-To: <20260325192628.750398-2-lukas.schmid@netcube.li>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260427-fb_gpt-v2-4-9e7fe3c1649a@oss.qualcomm.com>
-References: <20260427-fb_gpt-v2-0-9e7fe3c1649a@oss.qualcomm.com>
-In-Reply-To: <20260427-fb_gpt-v2-0-9e7fe3c1649a@oss.qualcomm.com>
-To: u-boot@lists.denx.de
-Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Tom Rini <trini@konsulko.com>, Heiko Schocher <hs@nabladev.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Dmitrii Merkurev <dimorinny@google.com>,
- Adrian Freihofer <adrian.freihofer@siemens.com>,
- Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
- Ariel D'Alessandro <ariel.dalessandro@collabora.com>,
- Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1777291604; l=2803;
- i=balaji.selvanathan@oss.qualcomm.com; s=20260213; h=from:subject:message-id; 
- bh=PAWPglHHQqQ/oLL6xWsVay4ApyLNDJ2kUhnwly9cJT8=;
- b=8+JcNq6/Rn9DSuylLxuL8PpHfBORiASTnWJA2lVkj1EOSP7ZPMPoI6XUlBT56SRNNf7mu/UL5
- lkyDjun0ywHAKzocYvfvRmCoZQE3O8lJyze8hMjppFXpB5AgTvLCg+I
-X-Developer-Key: i=balaji.selvanathan@oss.qualcomm.com; a=ed25519;
- pk=CDpYiUU3SH7KGEtsBvY2tBGPiWfMxqWJF0p2LftOfnc=
-X-Proofpoint-GUID: ZvxfNtDkl6jpR_bQMvgbxJ-5JNIHX1C_
-X-Authority-Analysis: v=2.4 cv=H67rBeYi c=1 sm=1 tr=0 ts=69ef516a cx=c_pps
- a=0uOsjrqzRL749jD1oC5vDA==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
- a=IkcTkHD0fZMA:10 a=A5OVakUREuEA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
- a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=pwJvMj_HW4Ly6_9t7PsA:9 a=QEXdDO2ut3YA:10
- a=mQ_c8vxmzFEMiUWkPHU9:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNDI3MDEyOSBTYWx0ZWRfX3OKAkrpVLGhv
- wwkCAaXYtJ5EUSvO4WeFqojla841FcUCQ7HtwrOIZbbh8yMhzNt/EvvoFFBbOEqaHGc3PrFXK3h
- Rv2iU7d+sTFHz6KF0snfdEigTPuy21d2IDX9yIhTjtQjsnwEB9zRzUNX79k4NbUKnEeQlIuPCN0
- vHTtsU3KiSjff3H5m1TB8rys/c8gPJC4CRJ38s+oZmipTZ9svd/ujkYNbTHffAV+kP5J+YhgmBy
- HfLiMewQBi2Lm+1HJJ1ycCBK96BJluDoG80RvxiPgT6gkL9/Bt17kD46EnteEJPK7xREpoaA0Qv
- CqLSQDSQex86GSR3KtnyZg0YMvhcj5tpKKB2E3cq7zElxsIxuyVTKgUQXUVgxu6WBP37Ns+Iccg
- 8vEtMkcMKdqpxxUTW2jbmrixfvmgM6pm5GLBLusneazf7flrYWlCtcf5x5wZiErln0ZzS1zwpYF
- etZcCPI87rton4iflOQ==
-X-Proofpoint-ORIG-GUID: ZvxfNtDkl6jpR_bQMvgbxJ-5JNIHX1C_
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
- definitions=2026-04-27_03,2026-04-21_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 bulkscore=0 adultscore=0 suspectscore=0 phishscore=0
- priorityscore=1501 spamscore=0 impostorscore=0 clxscore=1015 malwarescore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2604200000 definitions=main-2604270129
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -160,85 +68,300 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add documentation for the device selection syntax in fastboot
-block device operations. Users can now specify target devices
-using "N:partition" format where N is the device number.
+Hi Lukas,
 
-Document usage examples for regular partition operations like
-"fastboot flash 0:boot boot.img" and partition table operations
-like "fastboot flash 1:gpt gpt.img". When no device number is
-specified, the default from CONFIG_FASTBOOT_FLASH_BLOCK_DEVICE_ID
-is used.
+On 3/25/26 20:26, Lukas Schmid wrote:
+> sunxi currently seeds ethaddr/ethXaddr in setup_environment() from SID.
+> That happens before Ethernet probe, so even with a clean persisted
+> environment we can populate env with a generated MAC and later get a
+> mismatch warning when DM Ethernet reads a different MAC from DT/NVMEM.
+> 
+> Stop generating Ethernet MAC env variables in setup_environment() and
+> provide SID-derived fallback addresses through read_rom_hwaddr in the
+> sunxi EMAC drivers instead.
+> 
+> Also move the SID uniqueness/MAC derivation logic into shared sunxi arch
+> helpers so board code and drivers use one implementation and keep legacy
+> algorithm compatibility across SoCs.
+> 
+> This keeps the generic MAC source order (DT/NVMEM first, fallback second),
+> avoids board-level MAC policy special-casing, and prevents same-boot
+> env-vs-NVMEM mismatch warnings caused by early env seeding.
+> 
 
-Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
-Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
----
-Changes in v2:
-- No changes
----
- doc/android/fastboot.rst | 41 +++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 41 insertions(+)
+Many thanks for reworking this, it looks indeed much better now! I was a 
+bit uneasy first about selling the SID based MAC generation as a "MAC 
+ROM read", but I now thinks that somehow fits, since it's some kind of 
+ROM inside the "network chip" (SoC in this case).
+The only problem is that there is a third MAC in use by Allwinner chips: 
+SUN7I_GMAC, using the ETH_DESIGNWARE/designware.c driver.
+So we can add the same read_rom_hwaddr there, and guard this with an 
+IS_ENABLED(CONFIG_ARCH_SUNXI), but then the sunxi_get_sid_mac_addr() 
+prototype needs to either move into a different header, or we find some 
+other solution without (too many) #ifdef's.
+Try "Bananapi_defconfig" for an Allwinner board using this MAC, and say 
+rock-pi-s-rk3308_defconfig for an example outside of Allwinner, to test 
+this.
 
-diff --git a/doc/android/fastboot.rst b/doc/android/fastboot.rst
-index 19e2ee9d407..ce3a030e701 100644
---- a/doc/android/fastboot.rst
-+++ b/doc/android/fastboot.rst
-@@ -147,6 +147,38 @@ The Fastboot implementation in U-Boot allows to write images into disk
- partitions. Target partitions are referred on the host computer by
- their names.
- 
-+Device Selection for Block Devices
-+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-+
-+When using ``FASTBOOT_FLASH_BLOCK``, you can specify which block device to
-+target by prefixing the partition name with the device number and a colon.
-+
-+Syntax::
-+
-+    <device_number>:<partition_name>
-+
-+Examples::
-+
-+    fastboot flash 0:boot boot.img        # Flash to device 0, partition "boot"
-+    fastboot flash 1:system system.img    # Flash to device 1, partition "system"
-+    fastboot flash 0:gpt gpt.img          # Write GPT to device 0
-+    fastboot flash 1:mbr mbr.img          # Write MBR to device 1
-+
-+If no device number is specified, the default device from
-+``CONFIG_FASTBOOT_FLASH_BLOCK_DEVICE_ID`` is used::
-+
-+    fastboot flash boot boot.img          # Uses default device
-+
-+This syntax is supported for:
-+
-+* Regular partition flashing
-+* GPT partition table updates (``gpt`` or ``N:gpt``)
-+* MBR partition table updates (``mbr`` or ``N:mbr``)
-+* Partition erasing operations
-+
-+Partition Name Formats
-+^^^^^^^^^^^^^^^^^^^^^^
-+
- For GPT/EFI the respective partition name is used.
- 
- For MBR the partitions are referred by generic names according to the
-@@ -186,6 +218,15 @@ configuration options:
-    CONFIG_FASTBOOT_GPT_NAME
-    CONFIG_FASTBOOT_MBR_NAME
- 
-+When using block devices (``FASTBOOT_FLASH_BLOCK``), you can specify the target
-+device by prefixing with the device number::
-+
-+   fastboot flash 0:gpt gpt.img    # Write GPT to device 0
-+   fastboot flash 1:mbr mbr.img    # Write MBR to device 1
-+
-+If no device number is specified, the default device from
-+``CONFIG_FASTBOOT_FLASH_BLOCK_DEVICE_ID`` is used.
-+
- In Action
- ---------
- 
+> Signed-off-by: Lukas Schmid <lukas.schmid@netcube.li>
+> ---
+>   arch/arm/include/asm/arch-sunxi/sys_proto.h |  6 +++
+>   arch/arm/mach-sunxi/cpu_info.c              | 44 ++++++++++++++++
+>   board/sunxi/board.c                         | 57 +--------------------
+>   drivers/net/sun8i_emac.c                    | 15 ++++++
+>   drivers/net/sunxi_emac.c                    | 15 ++++++
+>   5 files changed, 81 insertions(+), 56 deletions(-)
+> 
+> diff --git a/arch/arm/include/asm/arch-sunxi/sys_proto.h b/arch/arm/include/asm/arch-sunxi/sys_proto.h
+> index 92c7721a530..6f70753e948 100644
+> --- a/arch/arm/include/asm/arch-sunxi/sys_proto.h
+> +++ b/arch/arm/include/asm/arch-sunxi/sys_proto.h
+> @@ -12,6 +12,12 @@
+>   
+>   void sdelay(unsigned long);
+>   
+> +/* Read SID and apply legacy/newer-SoC normalization for uniqueness. */
+> +bool sunxi_get_unique_sid(unsigned int *sid);
+> +
+> +/* Build legacy-compatible SID-derived locally administered MAC address. */
+> +bool sunxi_get_sid_mac_addr(int index, u8 mac[6]);
+> +
+>   /* return_to_fel() - Return to BROM from SPL
+>    *
+>    * This returns back into the BROM after U-Boot SPL has performed its initial
+> diff --git a/arch/arm/mach-sunxi/cpu_info.c b/arch/arm/mach-sunxi/cpu_info.c
+> index c3a51d9956e..d804307e280 100644
+> --- a/arch/arm/mach-sunxi/cpu_info.c
+> +++ b/arch/arm/mach-sunxi/cpu_info.c
+> @@ -9,8 +9,10 @@
+>   #include <asm/io.h>
+>   #include <asm/arch/cpu.h>
+>   #include <asm/arch/clock.h>
+> +#include <asm/arch/sys_proto.h>
+>   #include <axp_pmic.h>
+>   #include <errno.h>
+> +#include <u-boot/crc.h>
+>   
+>   #ifdef CONFIG_MACH_SUN6I
+>   int sunxi_get_ss_bonding_id(void)
+> @@ -175,3 +177,45 @@ int sunxi_get_sid(unsigned int *sid)
+>   	return -ENODEV;
+>   #endif
+>   }
+> +
+> +bool sunxi_get_unique_sid(unsigned int *sid)
+> +{
+> +	if (sunxi_get_sid(sid) != 0)
+> +		return false;
+> +
+> +	if (!sid[0])
+> +		return false;
+> +
+> +	/*
+> +	 * On newer SoCs use a CRC over SID words 1..3 for better uniqueness,
+> +	 * while keeping the long-standing algorithm on older SoCs.
+> +	 */
+> +#if !defined(CONFIG_MACH_SUN4I) && !defined(CONFIG_MACH_SUN5I) && \
+> +	!defined(CONFIG_MACH_SUN6I) && !defined(CONFIG_MACH_SUN7I) && \
+> +	!defined(CONFIG_MACH_SUN8I_A23) && !defined(CONFIG_MACH_SUN8I_A33)
+> +	sid[3] = crc32(0, (unsigned char *)&sid[1], 12);
+> +#endif
+> +
+> +	/* Ensure the NIC-specific bytes are not all 0. */
+> +	if ((sid[3] & 0xffffff) == 0)
+> +		sid[3] |= 0x800000;
+> +
+> +	return true;
+> +}
+> +
+> +bool sunxi_get_sid_mac_addr(int index, u8 mac[6])
+> +{
+> +	unsigned int sid[4];
+> +
+> +	if (!sunxi_get_unique_sid(sid))
+> +		return false;
+> +
+> +	mac[0] = ((index & 0xf) << 4) | 0x02;
+> +	mac[1] = (sid[0] >>  0) & 0xff;
+> +	mac[2] = (sid[3] >> 24) & 0xff;
+> +	mac[3] = (sid[3] >> 16) & 0xff;
+> +	mac[4] = (sid[3] >>  8) & 0xff;
+> +	mac[5] = (sid[3] >>  0) & 0xff;
+> +
+> +	return true;
+> +}
+> diff --git a/board/sunxi/board.c b/board/sunxi/board.c
+> index d7722d1858a..420c4504720 100644
+> --- a/board/sunxi/board.c
+> +++ b/board/sunxi/board.c
+> @@ -41,7 +41,6 @@
+>   #include <asm/gpio.h>
+>   #include <sunxi_gpio.h>
+>   #include <asm/io.h>
+> -#include <u-boot/crc.h>
+>   #include <env_internal.h>
+>   #include <linux/libfdt.h>
+>   #include <fdt_support.h>
+> @@ -750,34 +749,7 @@ static void parse_spl_header(const uint32_t spl_addr)
+>   
+>   static bool get_unique_sid(unsigned int *sid)
+>   {
+> -	if (sunxi_get_sid(sid) != 0)
+> -		return false;
+> -
+> -	if (!sid[0])
+> -		return false;
+> -
+> -	/*
+> -	 * The single words 1 - 3 of the SID have quite a few bits
+> -	 * which are the same on many models, so we take a crc32
+> -	 * of all 3 words, to get a more unique value.
+> -	 *
+> -	 * Note we only do this on newer SoCs as we cannot change
+> -	 * the algorithm on older SoCs since those have been using
+> -	 * fixed mac-addresses based on only using word 3 for a
+> -	 * long time and changing a fixed mac-address with an
+> -	 * u-boot update is not good.
+> -	 */
+> -#if !defined(CONFIG_MACH_SUN4I) && !defined(CONFIG_MACH_SUN5I) && \
+> -    !defined(CONFIG_MACH_SUN6I) && !defined(CONFIG_MACH_SUN7I) && \
+> -    !defined(CONFIG_MACH_SUN8I_A23) && !defined(CONFIG_MACH_SUN8I_A33)
+> -	sid[3] = crc32(0, (unsigned char *)&sid[1], 12);
+> -#endif
+> -
+> -	/* Ensure the NIC specific bytes of the mac are not all 0 */
+> -	if ((sid[3] & 0xffffff) == 0)
+> -		sid[3] |= 0x800000;
+> -
+> -	return true;
+> +	return sunxi_get_unique_sid(sid);
 
--- 
-2.34.1
+So why do we need this extra get_unique_sid() function still? The 
+prototyp is the same, so can't we just change all callers to use the 
+new, external function?
+
+Cheers,
+Andre
+
+>   }
+>   
+>   /*
+> @@ -788,37 +760,10 @@ static void setup_environment(const void *fdt)
+>   {
+>   	char serial_string[17] = { 0 };
+>   	unsigned int sid[4];
+> -	uint8_t mac_addr[6];
+> -	char ethaddr[16];
+> -	int i;
+>   
+>   	if (!get_unique_sid(sid))
+>   		return;
+>   
+> -	for (i = 0; i < 4; i++) {
+> -		sprintf(ethaddr, "ethernet%d", i);
+> -		if (!fdt_get_alias(fdt, ethaddr))
+> -			continue;
+> -
+> -		if (i == 0)
+> -			strcpy(ethaddr, "ethaddr");
+> -		else
+> -			sprintf(ethaddr, "eth%daddr", i);
+> -
+> -		if (env_get(ethaddr))
+> -			continue;
+> -
+> -		/* Non OUI / registered MAC address */
+> -		mac_addr[0] = (i << 4) | 0x02;
+> -		mac_addr[1] = (sid[0] >>  0) & 0xff;
+> -		mac_addr[2] = (sid[3] >> 24) & 0xff;
+> -		mac_addr[3] = (sid[3] >> 16) & 0xff;
+> -		mac_addr[4] = (sid[3] >>  8) & 0xff;
+> -		mac_addr[5] = (sid[3] >>  0) & 0xff;
+> -
+> -		eth_env_set_enetaddr(ethaddr, mac_addr);
+> -	}
+> -
+>   	if (!env_get("serial#")) {
+>   		snprintf(serial_string, sizeof(serial_string),
+>   			"%08x%08x", sid[0], sid[3]);
+> diff --git a/drivers/net/sun8i_emac.c b/drivers/net/sun8i_emac.c
+> index 41c52f56d7a..a267b6cd7f5 100644
+> --- a/drivers/net/sun8i_emac.c
+> +++ b/drivers/net/sun8i_emac.c
+> @@ -13,6 +13,7 @@
+>   #include <cpu_func.h>
+>   #include <log.h>
+>   #include <asm/cache.h>
+> +#include <asm/arch/sys_proto.h>
+>   #include <asm/global_data.h>
+>   #include <asm/gpio.h>
+>   #include <asm/io.h>
+> @@ -259,6 +260,19 @@ static int sun8i_eth_write_hwaddr(struct udevice *dev)
+>   	return 0;
+>   }
+>   
+> +static int sun8i_eth_read_rom_hwaddr(struct udevice *dev)
+> +{
+> +	struct eth_pdata *pdata = dev_get_plat(dev);
+> +	u8 mac[ARP_HLEN];
+> +
+> +	if (!sunxi_get_sid_mac_addr(dev_seq(dev), mac))
+> +		return -ENODEV;
+> +
+> +	memcpy(pdata->enetaddr, mac, ARP_HLEN);
+> +
+> +	return 0;
+> +}
+> +
+>   static void sun8i_adjust_link(struct emac_eth_dev *priv,
+>   			      struct phy_device *phydev)
+>   {
+> @@ -715,6 +729,7 @@ static int sun8i_emac_eth_probe(struct udevice *dev)
+>   
+>   static const struct eth_ops sun8i_emac_eth_ops = {
+>   	.start                  = sun8i_emac_eth_start,
+> +	.read_rom_hwaddr	= sun8i_eth_read_rom_hwaddr,
+>   	.write_hwaddr           = sun8i_eth_write_hwaddr,
+>   	.send                   = sun8i_emac_eth_send,
+>   	.recv                   = sun8i_emac_eth_recv,
+> diff --git a/drivers/net/sunxi_emac.c b/drivers/net/sunxi_emac.c
+> index 3dee849c97e..f45a0790a40 100644
+> --- a/drivers/net/sunxi_emac.c
+> +++ b/drivers/net/sunxi_emac.c
+> @@ -15,6 +15,7 @@
+>   #include <miiphy.h>
+>   #include <net.h>
+>   #include <asm/io.h>
+> +#include <asm/arch/sys_proto.h>
+>   #include <asm/arch/clock.h>
+>   #include <power/regulator.h>
+>   
+> @@ -539,6 +540,19 @@ static int sunxi_emac_eth_send(struct udevice *dev, void *packet, int length)
+>   	return _sunxi_emac_eth_send(priv, packet, length);
+>   }
+>   
+> +static int sunxi_emac_read_rom_hwaddr(struct udevice *dev)
+> +{
+> +	struct eth_pdata *pdata = dev_get_plat(dev);
+> +	u8 mac[ARP_HLEN];
+> +
+> +	if (!sunxi_get_sid_mac_addr(dev_seq(dev), mac))
+> +		return -ENODEV;
+> +
+> +	memcpy(pdata->enetaddr, mac, ARP_HLEN);
+> +
+> +	return 0;
+> +}
+> +
+>   static int sunxi_emac_eth_recv(struct udevice *dev, int flags, uchar **packetp)
+>   {
+>   	struct emac_eth_dev *priv = dev_get_priv(dev);
+> @@ -581,6 +595,7 @@ static int sunxi_emac_eth_probe(struct udevice *dev)
+>   
+>   static const struct eth_ops sunxi_emac_eth_ops = {
+>   	.start			= sunxi_emac_eth_start,
+> +	.read_rom_hwaddr	= sunxi_emac_read_rom_hwaddr,
+>   	.send			= sunxi_emac_eth_send,
+>   	.recv			= sunxi_emac_eth_recv,
+>   	.stop			= sunxi_emac_eth_stop,
 
