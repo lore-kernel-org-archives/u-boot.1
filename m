@@ -4,141 +4,134 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68132FF8860
-	for <u-boot@archiver.kernel.org>; Mon, 27 Apr 2026 17:05:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17EEAFF8869
+	for <u-boot@archiver.kernel.org>; Mon, 27 Apr 2026 17:17:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EE7B68407D;
-	Mon, 27 Apr 2026 19:04:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 89A4E83BC4;
+	Mon, 27 Apr 2026 19:17:20 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="Lw446C/M";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="aWykAaa6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 377C584178; Mon, 27 Apr 2026 19:04:57 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
+ id 4C73A83C14; Mon, 27 Apr 2026 19:17:17 +0200 (CEST)
+Received: from DU2PR03CU002.outbound.protection.outlook.com
+ (mail-northeuropeazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BE9CB83BC4
- for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 19:04:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BCF2383AA9
+ for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 19:17:14 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1777309492; x=1777914292; i=xypron.glpk@gmx.de;
- bh=VaN+fQv1YHJH1ZFFhYLzAfzMYSYnzcLqyXRE905vSVA=;
- h=X-UI-Sender-Class:Date:From:To:CC:Subject:In-Reply-To:References:
- Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:cc:
- content-transfer-encoding:content-type:date:from:message-id:
- mime-version:reply-to:subject:to;
- b=Lw446C/Mx6M9O9AsdkPlucM3I5bv2aK44pbUAPmGLcTIxiSkk0xjAK8xtzoxSBAz
- ViKvg6X0avUFOAYehStQPqfwZseRXeKJIuwqiw4lLyBJnsenAzeyFxo6h6uUfjZlW
- aAhlF5p/QqKOyUI5SNtht/olfkvLx+YlrW1hlZamkMoeL3N1u6lU9Pd16XdWmEtar
- EumPfaBKoCvqJQ4hxnCNsMQH5ftYgWc/i7XiJCuXyhTjdKRnTlTGbozFKikj2QOhr
- GY9bwdZT0SMRffiX0Kii0YOp2qAyiuboDhc5ihLJK/OvvWGmeqzGnMaHlTaiXtjuW
- cyJ30cr1q8csv0UAvg==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from client.hidden.invalid by mail.gmx.net (mrgmx004
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1Mq2j2-1vd8g21csE-00fHbt; Mon, 27
- Apr 2026 19:04:52 +0200
-Date: Mon, 27 Apr 2026 19:04:49 +0200
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
-CC: u-boot@lists.denx.de, trini@konsulko.com
-Subject: Re: [PATCH] efi_loader: fix AllocatePages overlap status
-User-Agent: Thunderbird for Android
-In-Reply-To: <CAC_iWj+iD0m9JL+A++W85+sYQGYSqVHP287ga7g13dkVevy9AA@mail.gmail.com>
-References: <20260427150530.3156000-1-harsimransingh.tungal@arm.com>
- <CAC_iWj+iD0m9JL+A++W85+sYQGYSqVHP287ga7g13dkVevy9AA@mail.gmail.com>
-Message-ID: <28B9184F-96D7-45AF-84AA-98EB2ECE713A@gmx.de>
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=gDCosF/waYxoFBumcwhC+NAjKJEvUhrUP3RK++rQ+LCqyAu3cFTVGqKFcTzG33hjZHFCBZfrwQzWauM6fbrWq6FabfrGm1d29rNJOfb8jCUJxXxMQSafwHyV7LnaQu+/RAC7UAC7XmLlRV3uQn5SdS68poRnWeR2cJYSQINWRxp1BoaRtgwdvrxaIeLeUKOhiPmW2EENSThv3r6RIdMer72cAj6LWgJUMpbjV8GXhaYrhaHZrktZAhSIJzfwzE3tN7rjjDW9NbX8XQ7EdniUeSqLynsZEXnSRcBV07bS7BkkbbmhZ0Y8olvTIjLTAMyfg6DM58jc2DWIfmbGL83lqg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=XlPlkfH8G2OKOcERlH45NoB6z7lvXSeclW8SaNmNVik=;
+ b=Yaf5/w0slCPm2LB66uZmJOE7ZeFd6Lo3Y6BE+Tns9KjX9wnxjQ0O/0sbCuvWw6ZWIbwGDAhdc0KqD3s555ItZMR/tYseUfVFaDRJau9xbY1hF64nZugfb79C7r/omZApxrOOkDJHD2dyRhPGj5m347lyi7/I5hmphvmNukoRuBiji0a8g5ea+gMiWXY31hptz3j0Fmr/auH9tScERm0FZVBH/bu7vSV06vPdGDNUp42jR3XgZIlytRnkF+gXoiPWzqddT874aHnBpmKJNlHxAj+NQjnc/vjeaUyV2hd9u7ThZuE66RIRNKqcNyIZqfMUuX20sTD4RuhjeCuNMYJSUg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=XlPlkfH8G2OKOcERlH45NoB6z7lvXSeclW8SaNmNVik=;
+ b=aWykAaa6VgRE0zws3JR/1TuTeakDSpyltovqU//s7ry6KLgqdcvLNsap7WrK8ANKByUW4pGGcs0yWOwWVExvrLbR6HFFmhK7GXCv5S9hZhWWibih+WJyUBJtzDvDoqBe8nA2NhFUVRDVlNTTkoQld1sQX76495xwJWt4cEWYpjw=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from PA4PR04MB7743.eurprd04.prod.outlook.com (2603:10a6:102:b8::20)
+ by GV1PR04MB10252.eurprd04.prod.outlook.com (2603:10a6:150:1ae::17)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9846.26; Mon, 27 Apr
+ 2026 17:17:10 +0000
+Received: from PA4PR04MB7743.eurprd04.prod.outlook.com
+ ([fe80::9a4e:252f:2fd:97b7]) by PA4PR04MB7743.eurprd04.prod.outlook.com
+ ([fe80::9a4e:252f:2fd:97b7%6]) with mapi id 15.20.9846.016; Mon, 27 Apr 2026
+ 17:17:10 +0000
+Message-ID: <d09d6f4c-f0ab-48ff-aa80-c53b697b0130@cherry.de>
+Date: Mon, 27 Apr 2026 19:17:09 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] fs/squashfs fix overflow in sqfs_find_inode()
+To: Jared Stroud <dllcoolj@archcloudlabs.com>, trini@konsulko.com,
+ joaomarcos.costa@bootlin.com, richard.genoud@bootlin.com,
+ thomas.petazzoni@bootlin.com, miquel.raynal@bootlin.com, u-boot@lists.denx.de
+References: <DI3DOZXB8ES4.12PBN3MVHW911@archcloudlabs.com>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <DI3DOZXB8ES4.12PBN3MVHW911@archcloudlabs.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: FR3P281CA0050.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:4a::19) To PA4PR04MB7743.eurprd04.prod.outlook.com
+ (2603:10a6:102:b8::20)
 MIME-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:4BCkp7Ksj88fCydYW7f42GBRVnTP533JKUQyAnycYp64msy5z6r
- gVwYPUEy4mks1RWfiuGjRX5ZkBdqn6kS0rZ3R6FEsHXtCVwQ9olrt6VkCLxe1MyELxvmn6i
- Lx/unSa4lw3BXf04DX9/dQIIA6SJhBczNvDkEox3z+v4g8RRk3QHzMMqC2hqyJmDGjnnDgg
- Qhr7KQhh1Vql26oVrkrUA==
-UI-OutboundReport: notjunk:1;M01:P0:fk3SLMa4j7U=;yypFIS+JfJYl9lqHHAx/Kbyxoam
- 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
- 3YbY6ifOGw0llgSE3/358LMyt4AgMA5gUm20=
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PA4PR04MB7743:EE_|GV1PR04MB10252:EE_
+X-MS-Office365-Filtering-Correlation-Id: 09fef647-dec6-4116-512b-08dea480d0f9
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|10070799003|376014|366016|1800799024|22082099003|18002099003|17096099003|56012099003;
+X-Microsoft-Antispam-Message-Info: 8OtlreEwFf21UNotkMtvMahdsl/AaaY7WxKM/hlESHFjla5ICO9DYVpQm+r/0pHgyFRj5Y1Q2vgmyxH4AS/2yjF8nSyXwCNsg3HxhFYEsD3+42gnU9mr8cO91HtRsyDEUG0175SYHBBKivvDsNHcAT3ZsMmcry6XA5HdEzBMvRY4hcIX7DOnW9LR0P4WLImiLxwF7aovMBgBzEmU/mlZOADDPsPYWe4PFFn+c2UhPWi7IPoWwgWrQZId6UhUev/BkYSpruVl5dnpAKhn6WEnL5puQ4kiul7Gab0e6NUplKJH5q7OWEn7HBXEuIbkNIEeoJEbrnxhdMJTIhSJzfi1AHWCiGvqcbizTIMHJjX3Q4dxqisxiJshDyQBPoTR8mqIPppNrUYIHWDPsQFIhJ/zI8OPbJySAJy1AHYfYzwknJjvXUmTm7kqcbkR7gWe3dTh8ALJ6N8saFGtRRFXBEXW7Ve1R4KgpF2dOXEDpRR7QbxDYA/FWjYpkNLYq4aLcSclfrBC9TXcQHepg2UWTyWcewT6Tz2IbZBWYYFZSUTw7y3S+HBOSr8Doi614zlappEkANyLY5drq2Y1XvYUnr1dKiYZXojd09T0HetdTrMgni938KmV7+kDefgEk1NsQ3IMNZgCxOVxd4gKNHoEEWoDVnNwpPVrmeQAfFETKL1xESeFXi3bmzt0j4xhfPkOwXV4
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PA4PR04MB7743.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(10070799003)(376014)(366016)(1800799024)(22082099003)(18002099003)(17096099003)(56012099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?eElDTStGMXZ0ckQ5SkFnWmpmbU42dHcvU0ZoR0JZUWJMYWRMa2RFMTRBaXht?=
+ =?utf-8?B?d2tqU1FweUZwZG11WHN6MmNMVVVLdTNST1RhT0NuNW50VDEzRE1FNjBGWnFM?=
+ =?utf-8?B?NE1xRThWS0NOQUpaQXVkYThNN1BIelI4TWVFQnljZm9XSVhGeFJvUm8ydHlO?=
+ =?utf-8?B?Slp4cWFGL1lJZFhiUThtczJUOUZ5aVRIYWVPV3poclhmQ0JiRWg3Yjlha0hn?=
+ =?utf-8?B?bk42TW0wOU42WWlMRW1QeDFTbms4TDlZbmFtWUV5NEQzZjMxd3o2M2hUaHpT?=
+ =?utf-8?B?N0tmZ3R2NHZNaFFMTW5TZ1l4VXkxVTNBYVJXSjdrblBKY0wxcFdhWmRKVWFR?=
+ =?utf-8?B?dkJtbldzblMrZDdSa2Q1RXB5MmZoTGdjcnpFVHJBOXlrSFpXbTlJMFIzcnJr?=
+ =?utf-8?B?blErdUpmY1BOeld5Zk5Qc3RvYTZyaXZockxxbWNKMUZMRzFGa056dzZYVzcr?=
+ =?utf-8?B?R2E5Vnl2QWNXYXJ4RnB6bGdTQ3ZtVk1qWkN3bmtxb0NqcmxSNWNEenpHQy9Z?=
+ =?utf-8?B?MlBic0crckt4QVJPSjFVZnZGbUI3SEluMXJRb2ZsVk1raXF2Z1ZielhDdUpS?=
+ =?utf-8?B?T2FLL0VnNmV1WHhDNVRZNzNqN3QrTDIwdndHNzl4dVgybnJtdGlVV2MzN2cx?=
+ =?utf-8?B?ZGRGUVg0RlNsbU5PQzIvNGt1LzRNaXBkSWo1dk9UckFtRjBrMmptcWxnSlov?=
+ =?utf-8?B?bkhSbXZHK3hhYngvVGxMcTRyZ1U5Z2NvUFQ5RFppaTFoVWtGNXc5cE1JTFJE?=
+ =?utf-8?B?ZlRyY0hXSXlkNVVlNnE4STNhVWVMVU9hWDRtOHN5OGpkS2RnRmF5YnVZMmtX?=
+ =?utf-8?B?enNlMXVvNVZnM2dKdS9MMmo1Z2k3OGxXTXN0Q0NvdFV4RHRFbjFReE42ZTNh?=
+ =?utf-8?B?cCtWUjd0MFFRS1lRTTcvY1ErZlU0OEpVaENDTE1UZHJjMU9kWXFGRSt3bzhu?=
+ =?utf-8?B?V3ZLU0MvSENya0ZpVHZpSHhXOXdtbS9jQlhXcTFqaXI3eTNIb2x0alF5UC84?=
+ =?utf-8?B?OElObG40LzBFS2Y1WTY1dEM2MU9SV1hkSTRubW15MXJrSkdyWXBIc3FXMHAw?=
+ =?utf-8?B?TzhzYTQ4TkY3Qms5WjNqMnRZYTUyRXB6dHpHUE05RFJqTWFzbnJPRW5TSWtR?=
+ =?utf-8?B?RVNTekFzampnMGFoaWxNSytRNWx2OFhWellMaUlwckZoK1VFVEM3Um51b0F3?=
+ =?utf-8?B?TTVORHh4elltcy9SZkVBdXNibi93TGdSbEtqbTRKekhJRlU2UytoODI4RE44?=
+ =?utf-8?B?YkVWUDdvUHBZeFl0bCtuVkFWeUUyaSt5U0FIcEhrdy92Uzg4MFlWdDNOUzBK?=
+ =?utf-8?B?RTM3bHZrYW5tbTNtTTcrS2srMC8zSSszbDlMSm9UZTh5K0d4SkZPRmJHUytR?=
+ =?utf-8?B?Z3YrWUJpQ0NldXlwT1d1QnUzMFBzWEpBMlZYQWh0eXE0WGJKbVFkaFprSzl5?=
+ =?utf-8?B?b1Y3c2o4N0NTTEJsbXhpMExOVzBHYU90MVdtY2NndVJLWHo2dGg0aExYb2pQ?=
+ =?utf-8?B?VnBPOGd0Q3JIVlNmZ3JFd295UUpoNHZqV25zVjlXcC9oaXQyRzhpUUdsS0cw?=
+ =?utf-8?B?MXBUOGEvWitUV2V6Z0kyaC9LSTE4NzA4d3RQMWJSVFh3dWpUZDdpZ09IRENy?=
+ =?utf-8?B?dTJ0dEZocmhJQ1R5cW5CVnJmb0NsVm53TkJVaFNZYzVLZWdCRm5rM2IrMlhM?=
+ =?utf-8?B?clBnQmlEUnJvK1ExMzVOc0E1Tmg0YU91QzRPM29uV2x6Q2p4S1lTMW1WZ1BP?=
+ =?utf-8?B?cGJicXE5VVYrM3Z2ZXNYekFuZGV4T0U2UzM0VGdGYWplZWNpaFJ4dnBKTmxl?=
+ =?utf-8?B?Q1E1SEFjUVZaYzFEWlNlYmpMamxsUlFOZTdNN0lxWVRqeVJBUXltREVYSHFG?=
+ =?utf-8?B?VCtQZGVrS1k4RHNHUDNuczFuOXRBSWpNbk9WOGpKNmVmTC90ak1QMitVcXNJ?=
+ =?utf-8?B?TnIybTBYMUF5NE5ad2I3NVRZRi9jOEJtR1F0NUNGVUxhWDFETE1mY09BcEVR?=
+ =?utf-8?B?R1V6eVN3cjNpQkpwUnA0elBNaEt3YTloaTQ5MVJJemZRVkg2UEpoRFlXcXpt?=
+ =?utf-8?B?SzlNSXRya0ptc21CRzRpUHFzMWpLYUUwYitsWTRTV2I3UVlKSTdEdGt3aWJY?=
+ =?utf-8?B?RjVYdFpRRkR5c1BwYkdySE5wNTRWVE9QaElNRmhRL2QwOHFvRkRoZVpMVGwr?=
+ =?utf-8?B?ZkpVbHIwWUZUZk5QMitqL1lJN05TVk10NzI3VXFCVGJNY3VLTTFvUUFscSs3?=
+ =?utf-8?B?aUVxeGlEVDRlcXNrTUx5YUlkVENQNGlGeXI0SW1zaFlCcGpJdStKd2tqZEpX?=
+ =?utf-8?B?aDV1M0Y5OGF2WU9LQ0VJa3BHMWc2SkttSWp3L3FHQkhVcHRxT1JUaXFicHVF?=
+ =?utf-8?Q?FTnjAnKziLwVIrnHiVSKQwpJ8QQpSqx48TVlI?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 09fef647-dec6-4116-512b-08dea480d0f9
+X-MS-Exchange-CrossTenant-AuthSource: PA4PR04MB7743.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Apr 2026 17:17:10.3334 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: m4qlDY7jouJ/nS276IlUFAORfMZtRfmi8rKuSdAZ8ahbc1UyacjqAOEbdpt4rPld/NYrydIYUEOxA8O6yLZn2/vSTqH7VJCNUQ0njReDVcA=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV1PR04MB10252
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -155,101 +148,115 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Am 27=2E April 2026 17:48:21 MESZ schrieb Ilias Apalodimas <ilias=2Eapalodi=
-mas@linaro=2Eorg>:
->Hi Harsiman,
->
->On Mon, 27 Apr 2026 at 18:05, Harsimran Singh Tungal
-><harsimransingh=2Etungal@arm=2Ecom> wrote:
->>
->> Return EFI_NOT_FOUND for EFI_ALLOCATE_ADDRESS overlap
->>
->> When efi_allocate_pages() is called with EFI_ALLOCATE_ADDRESS, UEFI
->> expects EFI_NOT_FOUND if the requested address range is already
->> allocated or unavailable=2E
->>  U-Boot currently returns
->> EFI_OUT_OF_RESOURCES when efi_update_memory_map() detects an overlap
->> after a successful lmb_alloc_mem(), which does not match
->> EFI_ALLOCATE_ADDRESS semantics=2E
->>
->> Return EFI_NOT_FOUND for EFI_ALLOCATE_ADDRESS requests that fail due
->> to an overlapping EFI memory descriptor, while keeping
->> EFI_OUT_OF_RESOURCES for other allocation types=2E
->>
->> The UEFI specification [1] specifies that
->> EFI_BOOT_SERVICES=2EAllocatePages must return EFI_NOT_FOUND when the
->> requested address range is unavailable or already allocated;
->> EFI_OUT_OF_RESOURCES applies to non=E2=80=91address=E2=80=91specific al=
-location
->> failures=2E
->
->Where does the EFI spec say that? EDKII indeed returns EFI_NOT_FOUND
->for AllocateAddress but looking at the function description, I can't
->find anything specific=2E
->
->Thanks
->/Ilias
+Hi Jared,
 
-Thank you Harsimran for investigating this difference to EDJ II=2E
+Thanks for the report and the possible patch.
 
-The spec has:
+On 4/26/26 10:45 PM, Jared Stroud wrote:
+> [You don't often get email from dllcoolj@archcloudlabs.com. Learn why this is important at https://aka.ms/LearnAboutSenderIdentification ]
+> 
+> Hello u-boot list,
+> 
+> I found a parsing bug in sqfs_find_inode().
+> While fuzzing the file_size attributes of the squashfs_reg_inode structure, if the file_size attribute has a sufficient large value, &base->inode_number will jump to an arbitrary location in memory resulting in a invalid memory access and crash.
+> 
+> I tested this with a modified file SquashFS file system and U-Boot Sandbox with release 2026.01.
+> 
+> ```
+>          for (k = 0; k < le32_to_cpu(inode_count); k++) {
+> 
+>                  // 3) jump ahead in the inode_table from new offset
+>                  base = inode_table + offset;
+> 
+>                  // 4) attempt to access location in memory
+>                  if (get_unaligned_le32(&base->inode_number) == inode_number)
+>                          return inode_table + offset;
+> 
+>                  // 1) large file size is read here
+>                  sz = sqfs_inode_size(base, le32_to_cpu(block_size));
+> 
+>                  if (sz < 0)
+>                          return NULL;
+> 
+>                  // 2) file size is added to offset
+>                  offset += sz;
+>          }
+> ```
+> 
+> The crash and resulting ASAN output can be seen below.
+> ```
+> hit any key to stop autoboot: 0
+> => host bind 0 random3.sqfs
+> => ls host 0 /
+> AddressSanitizer:DEADLYSIGNAL
+> =================================================================
+> ==75950==ERROR: AddressSanitizer: SEGV on unknown address 0x000067128936 (pc 0x0000006689a1 bp 0x000019b354a0 sp 0x7fff2b718600 T0)
+> ==75950==The signal is caused by a READ memory access.
+>      #0 0x0000006689a1 in sqfs_find_inode fs/squashfs/sqfs_inode.c:131
+>      #1 0x000000660c79 in sqfs_search_dir fs/squashfs/sqfs.c:489
+>      #2 0x000000662af6 in sqfs_opendir_nest fs/squashfs/sqfs.c:977
+>      #3 0x0000006238e3 in fs_opendir fs/fs.c:669
+>      #4 0x000000623c67 in fs_ls_generic fs/fs.c:66
+>      #5 0x000000623fc2 in fs_ls fs/fs.c:537
+>      #6 0x000000623fc2 in do_ls fs/fs.c:881
+>      #7 0x000000623fc2 in do_ls.isra.0 fs/fs.c:870
+>      #8 0x0000004eae8e in cmd_call common/command.c:582
+>      #9 0x0000004eae8e in cmd_process common/command.c:637
+>      #10 0x0000004da9d6 in run_pipe_real common/cli_hush.c:1672
+>      #11 0x0000004da9d6 in run_list_real common/cli_hush.c:1868
+>      #12 0x0000004db112 in run_list common/cli_hush.c:2017
+>      #13 0x0000004db112 in parse_stream_outer common/cli_hush.c:3207
+>      #14 0x0000004117eb in parse_file_outer common/cli_hush.c:3299
+>      #15 0x0000004117eb in cli_loop common/cli.c:306
+>      #16 0x0000004117eb in main_loop common/main.c:86
+>      #17 0x0000004117eb in run_main_loop common/board_r.c:584
+>      #18 0x0000004117eb in initcall_run_r common/board_r.c:776
+>      #19 0x0000004117eb in board_init_r common/board_r.c:806
+>      #20 0x0000004117eb in sandbox_main arch/sandbox/cpu/start.c:584
+>      #21 0x7fb1a66105b4 in __libc_start_call_main (/lib64/libc.so.6+0x35b4) (BuildId: 5e8f131adc80bf454af46edf4a1527ae61e1b968)
+>      #22 0x7fb1a6610667 in __libc_start_main@@GLIBC_2.34 (/lib64/libc.so.6+0x3667) (BuildId: 5e8f131adc80bf454af46edf4a1527ae61e1b968)
+>      #23 0x000000401524 in _start (/usr/src/u-boot/u-boot+0x401524) (BuildId: 7121dd98eb40baab73fe6c0941c8200f29e1ad23)
+> 
+> ==75950==Register values:
+> rax = 0x000000006712892a  rbx = 0x00000000009dbaa0  rcx = 0x0000000000020000  rdx = 0x0000000000000000
+> rdi = 0x0000000000006fd5  rsi = 0x0000000000007abd  rbp = 0x0000000019b354a0  rsp = 0x00007fff2b718600
+>   r8 = 0x000000004d5f348a   r9 = 0x0000000067128936  r10 = 0x0000000000000501  r11 = 0x0000000000000001
+> r12 = 0x0000000000000002  r13 = 0x0000000000000001  r14 = 0x0000000019a0e900  r15 = 0x0000000000000001
+> AddressSanitizer can not provide additional info.
+> SUMMARY: AddressSanitizer: SEGV fs/squashfs/sqfs_inode.c:131 in sqfs_find_inode
+> ==75950==ABORTING
+> ```
+> 
+> This bug is similar to CVE-2024-57254 in that memory operations are occuring based on inode values.
+> I applied a similar fixed via the commmit c8e929e5758999933f9e905049ef2bf3fe6b140d, re-tested U-Boot with the crashing file system, and successfully avoided the crash.
+> 
+> ```
+>   fs/squashfs/sqfs_inode.c | 3 +++
+>   1 file changed, 3 insertions(+)
+> 
+> diff --git a/fs/squashfs/sqfs_inode.c b/fs/squashfs/sqfs_inode.c
+> index ce9a8ff8e2a..addd76cc07e 100644
+> --- a/fs/squashfs/sqfs_inode.c
+> +++ b/fs/squashfs/sqfs_inode.c
+> @@ -135,6 +135,9 @@ void *sqfs_find_inode(void *inode_table, int inode_number, __le32 inode_count,
+>                  if (sz < 0)
+>                          return NULL;
+> 
+> +               if (__builtin_add_overflow(offset, sz, &offset))
+> +                       return NULL;
+> +
+>                  offset += sz;
+>          }
+> 
+> --
+> 2.53.0
+> `
 
-EFI_NOT_FOUND
-The requested pages could not be found=2E
+Please send this as a proper patch (we don't accept patches sent as 
+attachment) on the mailing list following the instructions from 
+https://docs.u-boot.org/en/latest/CONTRIBUTE.html and 
+https://docs.u-boot.org/en/latest/develop/sending_patches.html. This 
+will make it more likely to be looked at.
 
-and
-
-EFI_OUT_OF_RESOURCEST
-The pages could not be allocated=2E
-
-Looking at the text one could assume that EFI_NOT_FOUND should be returned=
- if the pages requested with AllocateAddress don't exist in the memory map=
-=2E
-
-If the pages exist and are already allocated EFI_NOT_FOUND does not look l=
-ike the right return code according to the spec=2E
-
-It is unclear if for AllocateMaxAddress a comparison to the memory bottom =
-is required=2E
-
-The specification should be clarified in the UEFI forum=2E
-
-Best regards
-
-Heinrich=20
-
-
-
-
->
->>
->> [1] https://uefi=2Eorg/specs/UEFI/2=2E10_A/07_Services_Boot_Services=2E=
-html
->>
->> Signed-off-by: Harsimran Singh Tungal <harsimransingh=2Etungal@arm=2Eco=
-m>
->> ---
->>  lib/efi_loader/efi_memory=2Ec | 4 +++-
->>  1 file changed, 3 insertions(+), 1 deletion(-)
->>
->> diff --git a/lib/efi_loader/efi_memory=2Ec b/lib/efi_loader/efi_memory=
-=2Ec
->> index b77c2f980cc=2E=2E63cf1a7277f 100644
->> --- a/lib/efi_loader/efi_memory=2Ec
->> +++ b/lib/efi_loader/efi_memory=2Ec
->> @@ -510,7 +510,9 @@ efi_status_t efi_allocate_pages(enum efi_allocate_t=
-ype type,
->>                 /* Map would overlap, bail out */
->>                 lmb_free(addr, (u64)pages << EFI_PAGE_SHIFT, flags);
->>                 unmap_sysmem((void *)(uintptr_t)efi_addr);
->> -               return  EFI_OUT_OF_RESOURCES;
->> +               if (type =3D=3D EFI_ALLOCATE_ADDRESS)
->> +                       return EFI_NOT_FOUND;
->> +               return EFI_OUT_OF_RESOURCES;
->>         }
->>
->>         *memory =3D efi_addr;
->> --
->> 2=2E34=2E1
->>
-
+Cheers,
+Quentin
