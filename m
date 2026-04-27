@@ -4,112 +4,106 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27966FF8864
-	for <u-boot@archiver.kernel.org>; Mon, 27 Apr 2026 07:56:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68E92FF8862
+	for <u-boot@archiver.kernel.org>; Mon, 27 Apr 2026 07:57:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A7A3E83693;
-	Mon, 27 Apr 2026 09:56:30 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0212F8419E;
+	Mon, 27 Apr 2026 09:57:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="YMuypD9s";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Q40J3Tyn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BEB5E84120; Mon, 27 Apr 2026 09:56:29 +0200 (CEST)
-Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
- [IPv6:2a00:1450:4864:20::32b])
+ id 0E5998419E; Mon, 27 Apr 2026 09:57:10 +0200 (CEST)
+Received: from mail-yw1-x112a.google.com (mail-yw1-x112a.google.com
+ [IPv6:2607:f8b0:4864:20::112a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8C9DF80433
- for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 09:56:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EB78B8416F
+ for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 09:57:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x32b.google.com with SMTP id
- 5b1f17b1804b1-4890d945eb4so49062325e9.0
- for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 00:56:27 -0700 (PDT)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yw1-x112a.google.com with SMTP id
+ 00721157ae682-79ea87af213so150905227b3.0
+ for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 00:57:07 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1777276627; cv=none;
+ d=google.com; s=arc-20240605;
+ b=jdwAeZ1C8mOF8kzvwrT2b1LMZSMByW3G+PO81lPjQRD7qRoX+bM8/V2oQMI0pMg/aO
+ rRY9DdbtZFiK7P9EIzTBsMBhb4lXRKZcHABZ/2QJ9UT35i2kgxbW08aRg385jzDGAfSY
+ laDjQqsUdKicKfvuVekHdTqUKXazDhX291HG6cXFYGqLPnMAJnNl9sg20DKBwCEq6qy4
+ ciEMXsHB9g9AbrZEBVwJbdTRjQDQVBERs5suppcTtCbZYU2bCMlERc+5U0S9GDls9Ftj
+ GrK1m/gl3E9E+8aa5Y0/cybOVIHkK/Sj8JlBoc8hJ/cb/I527wk6YKrX25qdlihWcrzO
+ MupA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=pcMIbqB2kKcYex0D6adCrlJhh6fmpmhPK+/X9OajpsY=;
+ fh=ImUlq5X5PTm8yLMTWig4dzxPpH7liUFxG2zCFCr2ynk=;
+ b=kcXzBAudslVbO+qlz+/G0NPQxjhV+H+8ZrcAd0dCOyE9dyhCUknGw5LyxEsQKl6jHT
+ O0iM15lckw+leC0WzSfJM4d8oYsnmN/2DZJAsHmQjxLNG5nCsizAZ6RuK1EHxFkiwbdk
+ EtSW3dgSDbB2yPcfRXyI/niB1DfqfkUVyyWU7ciKPpE8qt7s0x1PAkZfkzcQ1Z6C4Mvm
+ xYoUmdmhr2v+rg3mzruLANOLggeQjySugpWl7yWb5KvpL8ILLvFsT09kjLsyksdqDRwa
+ yrz8WE/lFkRkSu6vm0dHeAt6cai9aTZWv6H/LjXH5Kdxxm+nslttyLOe29yL0FN7+FeX
+ ooYw==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1777276587; x=1777881387; darn=lists.denx.de;
- h=content-transfer-encoding:organization:autocrypt:content-language
- :cc:to:reply-to:subject:from:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=joKczF6XzP6rdLXJu4qd29R7Zp1AGpXpKmNbVYO6K/Y=;
- b=YMuypD9spuSjif3MBVBNi/Y2SEABu9Z1wGWcXQS7wkHFRFq3lceXOG0DvcYK7KNn/Z
- 7WOA/PfmTdmThSsFQLdJxY6E17vX+Hy+ucezNJvCFbIbfJcVqM51o4qqmNMEGpzOZb7f
- feI+HGvEdS8hCJ/Kg5Wbu9iwU2Q5uEzywEM3HagqHBWKS2E0qVTomWigV3b2Lnjz3loY
- wzxOU9YhblUlGNbK0wHYgbF8BL9NbW+k0oaz7RnWcMM9bqd2dx2wxzFP6De9XEGtlaq8
- Ou0apCLs6tglrZ6sfdZpVektWSzMLBBIvP1QwvR08BvYv+UdifNRhy1V6L4xSPIaG+dv
- xkHQ==
+ d=linaro.org; s=google; t=1777276627; x=1777881427; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=pcMIbqB2kKcYex0D6adCrlJhh6fmpmhPK+/X9OajpsY=;
+ b=Q40J3TynQANYeDqCb7yrbKCggS+cskf5aIJUWVYdxOew9nnOvN64OJeI3VzYcRi+FI
+ VyglAHPJ7JIndkSH/tj63/Yz4EbLBh1DdAOa2nxZ2V2HJ2q3A9WTvC1vUXCTPj77r6dr
+ vuLnR4TnPq3JDMm5Tdz1uZgj+5MpMs5ynsw+NnB37dN4RrccwsO5BgvSJcHqopePZQkX
+ sdwT6UJE1Wopw/k/p1X5bxXRRTXKwsw5Sjjb+lcBDuRfUyUa9wiAC0vjksnKiFTAJkAx
+ sX0TVoBtBRSou6Miw32V6kJ75OapYhJ/mdln6YrjGwQkx1EhlSLpL1+9Mpv/2R/OaCJk
+ Q1AQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777276587; x=1777881387;
- h=content-transfer-encoding:organization:autocrypt:content-language
- :cc:to:reply-to:subject:from:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=joKczF6XzP6rdLXJu4qd29R7Zp1AGpXpKmNbVYO6K/Y=;
- b=mGTlZ6pcxN13wzSL5mcaQ0s5NFGvWKI/kHgOgMG7IT/aP0uQ54gY15OvMLGjv83ISv
- AVzyfsfJE4lMxBg7ChS41/kGcc1gRlo0gMEbjsPUoj7v3u7oIWpzfMEEqxNecd7Y7AMa
- v5Ta6MtLbsC0miXFXP5QBpSDeTIFiLJeHHnnOY5VP/VUKRa+wCoVsY1KfpSP60wBsc2x
- EfDdt/dyGkBt6iRUWIviXPokU7MWCJonGgHQ/2C8yt8iS+L2Jd6wh0rI3rBRkLd/PiFB
- 7AtzwajlWIJusAdEoneeEPWJiZa5ao+w8uYPNxOYoqKmYoEr41Rauz14BWmgdPgyQSKu
- Fehg==
-X-Gm-Message-State: AOJu0YzcxoMIKAPeZC2eENPgYV9bMerLdO/GZzDbqKp8Zg5fom9TetCg
- tErzfiwEQlusotMBIw6QzVDhK24fgm7syJbvc5FE/QMNa4sKYncMSxiJk+nvomqtek0=
-X-Gm-Gg: AeBDiesaE0GznMDBSy3GkwsBJnwZrI5ZXz5cWyaBOJRr3/ZoYdn0GZJrGtpkG8uQTDo
- 4miEKCuzTLZKvSic2EqDUIq/wBq0pU1ddWrwFpjNwtGcaK+whNzzc7ZYyi4sbpFSYu97lOGnlJE
- aU5s6oBh1I9gC4PHeTam8/osuJ/A5XGOuZb4KcCzi+KyTzBNhTdKXnQNe4cD2P8IknS9jB7B2WF
- g5gfr1oupo7xC2oLjVHn3o+E8f9qYNV2TCOXLUcPEnCk1l2Wgno+598e2SOXftrim2Q3wfIBTTH
- PeS74kG1L0CTjIbo9d4Gh0pnfoTL8OLjtSzgQ88K1n0dcAUMOiNxOIs58+z6244o53aHq0QjOFF
- 7wm+RyQD9d9qXdPPr6ZsNJk6Iz/7W6PTS3jDjodLdRsI9D9p7Sdjuv7MjuFuEHmK3OwU38FhXVj
- t825mivuUbPUR5x6HL6gREGYigayEpcIjC8ukBcp9AjSwCsLroHjKpowg0tzI+3zv3RIEmgHggq
- /jK0XP9zgdydrq2gw==
-X-Received: by 2002:a05:600c:3b2a:b0:48a:534a:eed8 with SMTP id
- 5b1f17b1804b1-48a534af0ffmr378685935e9.1.1777276586747; 
- Mon, 27 Apr 2026 00:56:26 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:106d:1080:ad59:75f7:6c30:2440?
- ([2a01:e0a:106d:1080:ad59:75f7:6c30:2440])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-488fc177dafsm939134475e9.4.2026.04.27.00.56.26
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 27 Apr 2026 00:56:26 -0700 (PDT)
-Message-ID: <c5ebc13e-50f0-4341-b8e3-0e0d797a0125@linaro.org>
-Date: Mon, 27 Apr 2026 09:56:29 +0200
+ d=1e100.net; s=20251104; t=1777276627; x=1777881427;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=pcMIbqB2kKcYex0D6adCrlJhh6fmpmhPK+/X9OajpsY=;
+ b=snc2Ck+8Io21fCEFBgyvXwMyKni1UvLUaQKg/CpPjzKHoUeRygpdZWgrzRS483Mq0O
+ O7wtG8QbQXws6vg70lpI3qIE7Wsz9VbU+FGfYqgVBEf50omYG26u/QJ3Eg7laFnNUuvv
+ tj8WEF/5zHhkgJxauQYlhqR+cwwoeIT6xELwva3CHBYUvftwkkcAfzgftVSL066FOE8a
+ cucz/sV+HFyHSijlc3cJ02avDwGCGMYdfc33lzOTp5iF0P5f39mCn1GH3EdUop0KbrTt
+ KmG5udWlVsRjEt+Z3oCT6igBP3/fwdYeB1Fh4b8OuisLj5tRXlI25LFJ/tjtXMw0iJlg
+ LDuQ==
+X-Gm-Message-State: AOJu0YzW9EKU9ATeZXoCWfxwSVloB0hGSWxjkFXgv2ytvSM6TNXzSCRI
+ hwFvDmz8bb/GB7GTOB9Wxkr0NSs1z1niUD/DZxJmyL4bZPsoLHSTlkEn7VgDvu849paHqy78uIy
+ PDU3+3ePW+g7K1aQK05WB8BiFKdq4OkQJcWLP45Jquw==
+X-Gm-Gg: AeBDieuYETtMuPQeH1adxyrfO8N7Ab144VxJZTJrnP7B5HIZW3b4/5MHK/oxntbmQ5D
+ F1x0MiICZ0Y5VHOaJzeTV0u5krcRIOrJYzbi3x0q/CyB4Y6WoHWvCXvbQXToJEul5fmsmKbJ3fK
+ OHhHd0CSiX0F+QfH3qT9eK/4JJcpzFQjPZcg9zVMgApIz87jwxlE1xQ0uIUZ2hWRMOxHItFZrUx
+ PzXoP8ZpCUPvezDSKjgRp8X00WpENEFE1KZhgixCYDYygfwaCHM294Rpo4Lmvt1nGA+CzoRx0zn
+ WEHoEuxwbr19VIlP1lpbkfg5bo5fzh6X0KUNT5xNSqPPwr6KYahq/qz3ZzujDoJfnPRTtSKzsw0
+ n0o8nxa/fWVF5bmCsZojFVYIXgZG5sYf59jEp+sCDf4iZS24wLa5Hw5oSVGT9SXfYoXYAIWUWp0
+ VdyFcV1EV+6/VPEvC6l+dAUBGcXmV6/5RjULqGKr8rkf7+kJpv0Hd+DlkyizrfEpcZY2yZ5wDpq
+ 6d92sJOe6vkK8qlvZp0RTJ9HBegf6I1fFw0A2eazwfU/are8g+btyajEg9ZffUDoya7bkmOly3P
+ rF9bFcSiteQ6gZlrN6o54NpmjTyrZ3ohrj5SpZr4NqMapiF2qcxJq4exlW5lTQOBYYwI0oBm4T5
+ /ulsVNDGby5zehx+Y
+X-Received: by 2002:a05:690e:1449:b0:650:97c:b1be with SMTP id
+ 956f58d0204a3-653118e48ebmr28774011d50.10.1777276626741; Mon, 27 Apr 2026
+ 00:57:06 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: [GIT PULL] Please pull u-boot-ufs-20260313
-To: trini@konsulko.com
-Cc: u-boot@lists.denx.de, Bhupesh Sharma <bhupesh.linux@gmail.com>,
- Neha Malcom Francis <n-francis@ti.com>
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+References: <20260424173151.371134-1-harsimransingh.tungal@arm.com>
+ <20260424173151.371134-7-harsimransingh.tungal@arm.com>
+In-Reply-To: <20260424173151.371134-7-harsimransingh.tungal@arm.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Mon, 27 Apr 2026 10:56:30 +0300
+X-Gm-Features: AQROBzDBr5352K_OYYqt4PA0-MzMH7MyeJaoSTfSeMMLPzaiSYwFpZ4vkIyrf1s
+Message-ID: <CAC_iWj+X-bkRvymmTWc5gYFFT_bdeRR2E6QesaGxS_ZtOf+pYA@mail.gmail.com>
+Subject: Re: [PATCH 06/12] corstone1000: enable bootefi selftest
+To: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
+Cc: u-boot@lists.denx.de, Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>, 
+ Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Hugues Kamba Mpiana <hugues.kambampiana@arm.com>,
+ Simon Glass <sjg@chromium.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -121,46 +115,49 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+On Fri, 24 Apr 2026 at 20:32, Harsimran Singh Tungal
+<harsimransingh.tungal@arm.com> wrote:
+>
+> Enable UEFI selftest command in Corstone-1000 defconfig
+>
+> Turn on CONFIG_CMD_BOOTEFI_SELFTEST in the Corstone-1000 defconfig
+> so the board can run the built-in UEFI self-test suite during
+> development and validation.
+>
+> Signed-off-by: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
+> ---
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 
-This is small set of UFS changes for next release, Reset fixes for Renesas Gen5 & rockchip,
-and possible corruption fix.
 
-Thanks,
-Neil
-
-The following changes since commit 052988aa29bfd506d7ce207fbb3f5374a5dbecbb:
-
-   Merge patch series "Linux compat improvements and CCF prep" (2026-04-21 11:21:59 -0600)
-
-are available in the Git repository at:
-
-   https://source.denx.de/u-boot/custodians/u-boot-ufs.git tags/u-boot-ufs-20260427
-
-for you to fetch changes up to 1089ed95f54e43ddbbe19712b69d9ace374e572c:
-
-   ufs: rcar-gen5: Update line reset configuration (2026-04-22 10:09:40 +0200)
-
-----------------------------------------------------------------
-- Update line reset configuration for rcar-gen5
-- core: Fix heap corruption due to out of bounds write
-- rockchip: Make use of controller resets
-
-----------------------------------------------------------------
-Alexey Charkov (1):
-       ufs: rockchip: Make use of controller resets
-
-Marek Vasut (2):
-       ufs: core: Fix heap corruption due to out of bounds write
-       ufs: rcar-gen5: Update line reset configuration
-
-  drivers/ufs/ufs-renesas-rcar-gen5.c | 16 ++++++++--------
-  drivers/ufs/ufs-rockchip.c          | 13 ++++++++++++-
-  drivers/ufs/ufs-uclass.c            | 10 +++++++++-
-  3 files changed, 29 insertions(+), 10 deletions(-)
+>  configs/corstone1000_defconfig | 3 +++
+>  1 file changed, 3 insertions(+)
+>
+> diff --git a/configs/corstone1000_defconfig b/configs/corstone1000_defconfig
+> index 527a679b785..b5fb4868e0f 100644
+> --- a/configs/corstone1000_defconfig
+> +++ b/configs/corstone1000_defconfig
+> @@ -32,6 +32,8 @@ CONFIG_SYS_PROMPT="corstone1000# "
+>  # CONFIG_CMD_CONSOLE is not set
+>  CONFIG_CMD_FWU_METADATA=y
+>  CONFIG_CMD_BOOTZ=y
+> +# CONFIG_CMD_BOOTEFI_HELLO is not set
+> +CONFIG_CMD_BOOTEFI_SELFTEST=y
+>  # CONFIG_CMD_XIMG is not set
+>  CONFIG_CMD_GPT=y
+>  CONFIG_CMD_LOADM=y
+> @@ -63,6 +65,7 @@ CONFIG_SYSRESET=y
+>  CONFIG_SYSRESET_PSCI=y
+>  CONFIG_TEE=y
+>  CONFIG_OPTEE=y
+> +# CONFIG_CMD_POWEROFF is not set
+>  CONFIG_USB=y
+>  CONFIG_USB_ISP1760=y
+>  # CONFIG_RANDOM_UUID is not set
+> --
+> 2.34.1
+>
