@@ -4,98 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61F07FF885D
-	for <u-boot@archiver.kernel.org>; Tue, 28 Apr 2026 03:52:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5072FF885D
+	for <u-boot@archiver.kernel.org>; Tue, 28 Apr 2026 04:02:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C615284106;
-	Tue, 28 Apr 2026 05:52:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 3401784106;
+	Tue, 28 Apr 2026 06:02:52 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20251104.gappssmtp.com header.i=@baylibre-com.20251104.gappssmtp.com header.b="DxjsheUk";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="jmAVKDIL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 73AB78421D; Tue, 28 Apr 2026 05:52:04 +0200 (CEST)
-Received: from mail-ua1-x932.google.com (mail-ua1-x932.google.com
- [IPv6:2607:f8b0:4864:20::932])
+ id 6DD0284119; Tue, 28 Apr 2026 06:02:50 +0200 (CEST)
+Received: from mail-qk1-x741.google.com (mail-qk1-x741.google.com
+ [IPv6:2607:f8b0:4864:20::741])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3EE4784099
- for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 05:52:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DC9A784099
+ for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 06:02:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dlechner@baylibre.com
-Received: by mail-ua1-x932.google.com with SMTP id
- a1e0cc1a2514c-953ac1602f8so7106050241.1
- for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 20:52:01 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qk1-x741.google.com with SMTP id
+ af79cd13be357-8ef5776530bso703491985a.0
+ for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 21:02:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20251104.gappssmtp.com; s=20251104; t=1777348320; x=1777953120;
- darn=lists.denx.de; 
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
+ d=konsulko.com; s=google; t=1777348966; x=1777953766; darn=lists.denx.de;
+ h=content-disposition:mime-version:message-id:subject:cc:to:from:date
  :from:to:cc:subject:date:message-id:reply-to;
- bh=fjXhlW+fG26C+HNtYE/O0M8k1B9AXo2rDdqVlTSnSws=;
- b=DxjsheUkgn6FqLQBOhX/gclnI/Vz++9Dshav7kmn9LnsLk8o/9YvKU6MqOSwCCBO0m
- ZlugxtHz+yOCqoSXQg2VmCWBp6hLGrqqa/Zxre4iut0ZPu4L9CKug8EMCG59SO1USNCR
- by3yASfutkGVPwErOA+p72YoZJVoNIOk7h+QtjgibCL8Vn+/Zp9RImXIZ7DdZtwGW4Qg
- KTCao+1ViQVlKYz4qYojo8h8JuvSKPhjx/vl3gpcwkw1zZE12IoZEWM57cNViJkzIWcR
- ogVTjdumskrNiGVN6MLAUhLP0jsx/4K7pR7BfMGVnTjI+1A8Vh4hdOcjXE1mSxt8a3yI
- 8RFw==
+ bh=djWNV1Ug9iw3oST0AT9jWwvGxXJp0ibox2umG5kTso8=;
+ b=jmAVKDIL8Jq9bjPrKzr1nC4VUZmaz4MObRGNEV5v1fcupgHF86pnA7vzV672BiuHcy
+ VL6TV4lGmpv/6alKVZfi89lRHzkaLTPR4naHZLM3T1eWAou8/KskvDV7eXzZeil0wjvB
+ fpCOBZoWNU/9sNmt/9HK4E8Lmun7dBeWTbAcY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777348320; x=1777953120;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
+ d=1e100.net; s=20251104; t=1777348966; x=1777953766;
+ h=content-disposition:mime-version:message-id:subject:cc:to:from:date
  :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=fjXhlW+fG26C+HNtYE/O0M8k1B9AXo2rDdqVlTSnSws=;
- b=Nea2ZAJVV0SLRMCg1g+I4B6BMg3QgCoqI8LrFi9WtiFps1K6bfEv0i6fTxEBPurIj9
- LRXMcB7XI4LujvRGvtLkUHZEmszoV9Mz8rMn30pzI35U3Oj1bgICG3qvgPjuxd/kVQub
- YK6dmIH0ZgWRG7MydiM8/LBlfVXqA0ZBuDh6+5gZjZTGykSApwmaLXoNHaECMf+RKGlD
- HsaoXNbpCdRM0InvC0zO821U6zQNlD/Lc3Q+tUKFigZKz6NzGB67h57dzN0d+BtN2iah
- 6gZ4YLX9My7fUmifee9zyvBcIQOWPxGemF8rHMyeSu6JmPdCflbsvI3WwH2AzZg3mAPD
- rSTg==
-X-Forwarded-Encrypted: i=1;
- AFNElJ+wEfyjh+XAqUv8r+6p9xoDJx8YV4TolYSLduFdW8AG8NJIzdi69w08nfwRe9C4FZXHWCHSNxU=@lists.denx.de
-X-Gm-Message-State: AOJu0YzWpjL1MIK+HpPXzraHyGUbuJrwA0WTFfCp+NGUACWdlf19zdlu
- kZ4qNxKu8k1fmIJmJla80YoFwNnuSxeOZs6BgRTTAG86Av2c0k89ZWYKFQI1b52O+dp8a26T3rM
- BFqwi
-X-Gm-Gg: AeBDieuuDhOesUESM+mUhRTWSzyh9pYpzBkLSOxcHzUoBTfcqKKkooHV1QOCs0TYl5v
- JVl9MuVr+N2RPpX1AXZmKscoKbTSsg8orp5kekuV2Shf+ZLc6gigtzvGV/AamfXELcDGPxlYxf1
- t0BSJ6nxJ5E1IV5p1RY9Qhfk7qMC/ETvFmoxfh1nskPtPVWvZUoddvkThlAJq7Ik+dhAN0ttsaa
- rHd+pl8ZHS0BpvTo0i7qyGKSAyEtf7i5zd+OHkSAyvOP/44TB6dZnJN2Z7F1atDy8NqyTmMuliQ
- G3/E5QFSpnOvAsqb2Jp5spc4cc0yOl9PWyefh6SGNpS0KEbLq6xigoZBm0JFIFZ/GwIl2Xu3SYP
- BoNANZCBpScqngCpt8C+MVPs9+/rBkDPMg5nlcXg2lxi0nmc095eZ3Dv1GD+MF8ibpzU8WJ3cX6
- 61N5aj5undbz85Fg/OASFZb3lc0FEzj0PrmrfX8GpeNUw1qlBzh3iC+OXlrEy4FDGUoZCbR+d7X
- IjZsqHIVe38
-X-Received: by 2002:a05:6870:519:b0:42d:8229:ba3d with SMTP id
- 586e51a60fabf-433f1eaae90mr381891fac.11.1777331756630; 
- Mon, 27 Apr 2026 16:15:56 -0700 (PDT)
-Received: from ?IPV6:2600:8803:e7e4:500:efba:bc47:a81b:dd0f?
- ([2600:8803:e7e4:500:efba:bc47:a81b:dd0f])
- by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-433ef7d122esm670149fac.0.2026.04.27.16.15.55
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 27 Apr 2026 16:15:56 -0700 (PDT)
-Message-ID: <16a5c572-ba55-4481-82a3-013e4dd0b772@baylibre.com>
-Date: Mon, 27 Apr 2026 18:15:55 -0500
+ bh=djWNV1Ug9iw3oST0AT9jWwvGxXJp0ibox2umG5kTso8=;
+ b=m9I+Csjcwn6HFPvpFsVpDoiDJpF/hnQT94QAonJCNUGlkCDdo0HRxAhN/+ALI/izLH
+ LtN4ImNTYACrPakdN1Yiv9lDrIxDj4CpWI4kRoyU5Gz5X5z7ki0D+wlzkA+XuiV4xUxq
+ Rn758NkQRssdPvIkWsd40MWqlZrmKorEPbwrUzV6T1KYlteNBiCl4GKYdHoRU+SQ2gJn
+ AmW9B+gq9TEb6agHlKZroi2dCazFZ49HjPDDmn3ss1ScF2XkXqOmCei/J2kYpnu5DXOq
+ pihRuO4HAqzy1/JVM4e63XwucSElObQoEOwircNszFI7grK/vpaovQQFyHmP5vE+5qRw
+ 26rw==
+X-Gm-Message-State: AOJu0Yye+jyb7JQnBxoRHiAFNyowU68xz+bO0Sx9iNGplLqrcRNEsB3q
+ oVhsMbkXA0HbK7su+R+/J9HN+I6k4H9pm4gr92fsOjIqbzLampVEbJdFEgXyT5+EFNRwP2oYzDq
+ yrDTMcfCkeCLN
+X-Gm-Gg: AeBDietXuR5SPME9kLslsDXVwPfY0x7tLbiFhu7fnztqx8hI1YJ8gNKnXahLb/WnzIb
+ ujBJjZusuqZUFixQUIK8eYWQoGSEq6vyps6rxI5MuUD5OBMPqpTqsT185zkcymrhL2DnYuHfbfd
+ cstI7bDwB4TClb0JKKjQ52qnQw/fnPgJc6jRVg+89SWkrqW/FKqNOEbfn7P+/1V7YqJp86Ey8PG
+ yGqJFLlTIvg58/bphzbSaIgTTeIEGnepAQKzWScAuZ7BQ5R7r5vAf03VTSDpRPX5yfvC3+A4lbl
+ sjxwMH5y2ihy9+9xmdX3UHfo/UQOdFq9rRfVnyOYqSNXyKPFrrxZWIAO6Cts7HkffAVPebzGSMU
+ QjmyEnKi5b+Sc/rga23Wal9ssFwU6bpMrT1WKymxsUrLzL7UVSB+LAnU17cN2hoxtKfoqP6CsN7
+ 6zTqy6T4r0Hp96Ds/i8fGx+FGs/RL1cL/sdcAYGyCXf1d7yRUwSSm/dfbJOfc+pd0z+KWcCFrOa
+ mBjv7xM0lxFvFKQmBzEDtW/HIOrt09rfDGHhNP+Wsbpi0r6KNKye3uxK9wiPg==
+X-Received: by 2002:a05:6830:3813:b0:7dc:dd58:50ab with SMTP id
+ 46e09a7af769-7de9a0b5f96mr512589a34.14.1777331125004; 
+ Mon, 27 Apr 2026 16:05:25 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
+ [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7de986d6cd0sm626659a34.22.2026.04.27.16.05.24
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 27 Apr 2026 16:05:24 -0700 (PDT)
+Date: Mon, 27 Apr 2026 17:05:22 -0600
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de
+Cc: u-boot-custodians@lists.denx.de, u-boot-board-maintainers@lists.denx.de
+Subject: [ANN] U-Boot v2026.07-rc1 released
+Message-ID: <20260427230522.GP41863@bill-the-cat>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 0/8] power: pmic: mtk-pwrap: add more capability flags
-To: Jaehoon Chung <jh80.chung@samsung.com>
-Cc: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de,
- Macpaul Lin <macpaul.lin@mediatek.com>, Ryder Lee <ryder.lee@mediatek.com>,
- Weijie Gao <weijie.gao@mediatek.com>,
- Chunfeng Yun <chunfeng.yun@mediatek.com>,
- Igor Belwon <igor.belwon@mentallysanemainliners.org>,
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- Peng Fan <peng.fan@nxp.com>, Tom Rini <trini@konsulko.com>
-References: <20260409-mtk-pmic-fixes-v2-0-73e83aa6345b@baylibre.com>
-Content-Language: en-US
-From: David Lechner <dlechner@baylibre.com>
-In-Reply-To: <20260409-mtk-pmic-fixes-v2-0-73e83aa6345b@baylibre.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="/MLUozQ11QqC8XP3"
+Content-Disposition: inline
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -112,61 +94,73 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 4/9/26 3:30 PM, David Lechner wrote:
-> After using the mtk-pwrap driver a bit, we noticed that there were a few
-> places where it was writing to registers that were not defined on all
-> platforms. The undefined registers are treated as 0, which is the DONE2
-> register on the affected platforms. This could cause the DONE2 register
-> to have an incorrect value, which could cause Linux to re-initialize the
-> PMIC unnecessarily.
-> 
-> To avoid this issue and ensure that we only write to registers that are
-> defined on a given platform, we can add some more capability flags to
-> conditionally call any register writes that aren't common to all
-> platforms.
-> 
-> There are also a couple of other cleanups that we do along the way. And
-> in v2, I've picked up Julien's patch to add support for MT8195 and
-> rebased on top of this.
-> 
-> Signed-off-by: David Lechner <dlechner@baylibre.com>
-> ---
-> Changes in v2:
-> - Use EOPNOTSUPP.
-> - Reorder patches to reduce churn.
-> - Added new patch to fix driver description comment.
-> - Added new patch to drop chip type enum.
-> - Picked up Julien's patches from [1] and rebased on these changes.
-> - Link to [1]: https://lore.kernel.org/u-boot/20260317-mt8195-add-ufs-support-v1-0-7d731ec438ae@baylibre.com/
-> - Link to v1: https://patch.msgid.link/20260327-mtk-pmic-fixes-v1-0-ef874ca82409@baylibre.com
-> 
-> ---
-> David Lechner (6):
->       power: pmic: mtk-pwrap: fix file description
->       power: pmic: mtk-pwrap: add PWRAP_CAP_WDT_SRC flag
->       power: pmic: mtk-pwrap: add init capability flag
->       power: pmic: mtk-pwrap: drop PWRAP_SLV_CAP_DUALIO on mt6359
->       power: pmic: mtk-pwrap: remove interrupt related code
->       power: pmic: mtk-pwrap: use pmic compatible to select child info
-> 
-> Julien Stephan (2):
->       power: pmic: mtk-pwrap: use tabs for alignment
->       power: pmic: mtk-pwrap: add MT8195 support
-> 
->  drivers/power/pmic/mtk-pwrap.c | 115 +++++++++++++++++++++--------------------
->  1 file changed, 60 insertions(+), 55 deletions(-)
-> ---
-> base-commit: 2a1bcefce835b827bbf88a9e112d646c5c4af9c1
-> change-id: 20260317-mtk-pmic-fixes-c1523b1b0dad
-> 
-> Best regards,
-> --  
-> David Lechner <dlechner@baylibre.com>
-> 
 
-Hi Jaehoon,
+--/MLUozQ11QqC8XP3
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Is it OK if I take this through the MediaTek tree? We need to
-pick this up for v2026.07 to make sure the boards we added recently
-are working correctly.
+Hey all,
 
+So it's release day and I have tagged and pushed things out.
+
+As I believe most people are aware, we had an issue wtih our mailman
+server last week. We have a migration plan and have been working on it
+as quickly as circumstances allow.
+
+With that, content wise this was a regular merge window I believe.
+There's a few more things I'm expecting, and others I'm hoping for
+before -rc2 happens, but I think things in general are in fine shape.
+
+One thing I do want to bring up is that it might really be time to
+retire support for running our tools on Windows under MSYS, rather than
+something like WSL. The move to support more modern OpenSSL versions has
+hit a lack of support problem in MSYS[1].
+
+We're continuing with a community meeting following the release and the
+calendar link is
+https://calendar.google.com/calendar/event?action=3DTEMPLATE&tmeid=3DMHYzYz=
+Q1dWh2bnRjcm80czVmcDczYmhsNThfMjAyNjAxMjdUMTUwMDAwWiA4OWJlN2I4MTMxMzZiZWMwN=
+mE4M2RlNGRhNTk3NDVmMGFiZDExYzFiODM2MDYxYWUwNmMxYzdkYmNkMThkZjQxQGc&tmsrc=3D=
+89be7b813136bec06a83de4da59745f0abd11c1b836061ae06c1c7dbcd18df41%40group.ca=
+lendar.google.com&scp=3DALL
+and once again this is the same time as the previous meeting. The
+meeting details itself are:
+https://meet.google.com/yyx-dsaj-iwr
+April 28th, 2025. 9am (GMT -06:00)
+
+To join by phone:
+https://meet.google.com/tel/yyx-dsaj-iwr?pin=3D7760044274127&hs=3D1
+
+In terms of a rough changelog:
+- We have synced with the v7.0-dts tag for upstream device trees /
+  bindings.
+- Lots of platform updates. This is always the case with -rc1 and I
+  never know which ones to emphasize.
+- Fixes in our UEFI, SMBIOS, MMC, DFU, USB, networking, UFS, pytest,
+  virtio, hush shell commands, squashfs, environment and FWU update
+  subsystems.
+- Global cleanup of "gd" inclusion in code.
+- The legacy LED API has been removed (thanks again all!)
+
+I continue to plan to do an rc release every two weeks and the final
+release will be 06 July 2026.
+
+Thanks all!
+
+[1]: https://lore.kernel.org/u-boot/ae_KfGqNrsWZ1rfQ@daedalus/
+--=20
+Tom
+
+--/MLUozQ11QqC8XP3
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCae/rsgAKCRAr4qD1Cr/k
+CrT5AQD+5PiJ6zO7Fg5B9SjRHhwQDDG3hVOfQTXFVE9XwiChhQD+MSWcewydk+ON
+8IFQOdDodzNS1ZGVcP1TH0bNYN2WqAE=
+=MQ9K
+-----END PGP SIGNATURE-----
+
+--/MLUozQ11QqC8XP3--
