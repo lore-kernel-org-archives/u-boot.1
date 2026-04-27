@@ -4,58 +4,99 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2064FF885E
-	for <u-boot@archiver.kernel.org>; Mon, 27 Apr 2026 12:35:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ABF9CFF885E
+	for <u-boot@archiver.kernel.org>; Mon, 27 Apr 2026 12:53:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5B99483693;
-	Mon, 27 Apr 2026 14:35:18 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id E0BA283693;
+	Mon, 27 Apr 2026 14:53:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=flipper.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=arm.com header.i=@arm.com header.b="mwJ8Wm84";
+	dkim=pass (2048-bit key; unprotected) header.d=flipper.net header.i=@flipper.net header.b="mldP7OtF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 162E283693; Mon, 27 Apr 2026 14:35:16 +0200 (CEST)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id A3BF080433
- for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 14:35:13 +0200 (CEST)
+ id EDB5E83AA9; Mon, 27 Apr 2026 14:53:44 +0200 (CEST)
+Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
+ [IPv6:2a00:1450:4864:20::435])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id CE68880433
+ for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 14:53:42 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=flipper.net
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=arm.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andre.przywara@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 6AA071684;
- Mon, 27 Apr 2026 05:35:07 -0700 (PDT)
-Received: from [10.41.150.145] (e142021.arm.com [10.41.150.145])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id B3E533F62B;
- Mon, 27 Apr 2026 05:35:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
- t=1777293312; bh=iWjPth9k+iOY52rKCibGBARkf2oOtTAUHUE62pj7AWQ=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=mwJ8Wm84+Eo06Ytt72iykUOckbxM9+nPWN/nDMBWRB9m3HvxUgmL+T/QDp/uUYUmR
- Sahv35IRxnH6mdMrHmjccYflncAzgInIwK6U/CJCdJqKlJ90D+dpPyShZvowsBXQkp
- rTkzZBVwIfieGfp3VyZyjmVAgCQBaL8mryam3WJo=
-Message-ID: <cfe67c5d-0762-4366-94df-e64728847f0b@arm.com>
-Date: Mon, 27 Apr 2026 14:35:08 +0200
+ spf=pass smtp.mailfrom=alchark@flipper.net
+Received: by mail-wr1-x435.google.com with SMTP id
+ ffacd0b85a97d-43cff5dafc3so8194320f8f.1
+ for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 05:53:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=flipper.net; s=google; t=1777294422; x=1777899222; darn=lists.denx.de;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=1NGtbkZOvJd4iwTIDW3/TB+bnqplu5MnmlgFpLTkS4A=;
+ b=mldP7OtFZFDcTm+3wC+PwMIFzTk8ATgwIXgoKje4yBBRvAyt5furIDsc/awekgMH7t
+ uDdGNre2O+huR4HBFNbIr3PqtgBQDjedADwG79eyYo+2IBey45wy2Zhjlm6liMXBtAZQ
+ /NGkWUJ4tSYxoITs1tjAC5RQaLkYkFjbVFYHdjd3C0uhk2taWZYT6YyGfRpO2ir/8ncJ
+ wVRUJBTUNhK1xszrj4PJ+Ge/2WPuGbTlxzCaG2c6LfOy62h6Q4D0DJIHdImpkblfugSX
+ Sj/2ZiJ5mVoMC0Ev7pXnA8p2ZgiaKgclIfgBhnYN0gwr7tPCCNOR9Y3vIUGfFb4nsYqz
+ rA0A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1777294422; x=1777899222;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=1NGtbkZOvJd4iwTIDW3/TB+bnqplu5MnmlgFpLTkS4A=;
+ b=CcuKweblTUucjWxy0D8NZrGfv5aRyVYmWYEseAQqSyz9tHqisBX6w8mmKNbWJWrMRR
+ HXtAe0EVRQkguF/ddia+vaargdCHvSNdpAnhF/wjtQPctzKhLDJf4QoQ22tWrE1ANWcS
+ Z/sZrU+wbXL3zDORA0c+pjDHbxn7VMjzX0AiS1+OHS3RDgq2Cv6BK2Xt9EAFYHAheITc
+ 9FwtDfq6CfJBksUxJ0rTYFeKrSu4TSMpeBo4ugtGrTAWPrUb7DwKUsc/WUFgz9EUvHGR
+ maCtYUxtFLQfJ/BpqX5wDSUFK6suj3Cg7x5hzPA8FKZFL9DQdFHoH7WvaqiyM0QWBq6w
+ RPQw==
+X-Gm-Message-State: AOJu0Yx2H9YBrkrdmIisUG6r1++F6f6eYkrK7RGWeiHgqB3hhOjBAjub
+ 3eAicjVq/6CDmDEFU5m+5O633zujE2pnJi1S88HjjMfoYX38+3HW4YOrKeDmaGT+oc4Uctca52o
+ LQwH2
+X-Gm-Gg: AeBDietRoImOjpFVUNJ4j+T3iAogBq5y0yx3K/iG3Dhwfew2avwP5ABBSvQgUpMRZUX
+ FXiRCrrI+fO5fzsApsAfqm/cKbP4Bz09aibCLb8W8sVleWuMNqvEpfx9zecA057EH3akfDc/m+L
+ 72x4hviryNYogZv/q+VuAfQpDv8YS5JOgdlQ/ALFhYfWpEoXRioywCJ18ebD0yDwYpyX8n5ZIaM
+ iGWXRFASpNdOpknDb7rHRmA71GKti5ghnuhh+nJ17NszaoeFXcyIxtky9A2Yqx2ophcY/x3/v7o
+ XD7D4yJSBB02EZwlz/GAtK1KNFOhSgzqlXVTU/gi3DxK4Ii8udklcdSOP2j+hll32O18GhZHWl4
+ P8SL92Q07rFeD/n/1C+GtDVNmQt+/KnKc94vXx0gIqoXjCuAZ0QsGlQGZekWMIUrZgcx1VV7PLc
+ DhpmIfOJOV7bQ7zZj52pl5tOrPBA2RAyFOB9/RJa59jwc6xmqB8M6jZ72ujnhoT4cAwZG6jvsNs
+ m/VZZe+4mKdrS7m
+X-Received: by 2002:a05:6000:40cb:b0:43e:aa43:243 with SMTP id
+ ffacd0b85a97d-43fe3e24eaamr68659859f8f.43.1777294421784; 
+ Mon, 27 Apr 2026 05:53:41 -0700 (PDT)
+Received: from alchark-surface.localdomain (bba-86-98-192-109.alshamil.net.ae.
+ [86.98.192.109]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-43fe4e3a7b4sm74890468f8f.22.2026.04.27.05.53.39
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 27 Apr 2026 05:53:41 -0700 (PDT)
+From: Alexey Charkov <alchark@flipper.net>
+Date: Mon, 27 Apr 2026 16:53:22 +0400
+Subject: [PATCH] rockchip: rk3576: Properly handle USB controller takeover
+ from BootROM
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 3/5] mtd: rawnand: sunxi: clean sunxi_nand_chip_init()
-To: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>,
- Richard Genoud <richard.genoud@bootlin.com>
-Cc: Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Tom Rini <trini@konsulko.com>, Andrew Goodbody <andrew.goodbody@linaro.org>,
- Miquel Raynal <miquel.raynal@bootlin.com>,
- James Hilliard <james.hilliard1@gmail.com>,
- Boris Brezillon <bbrezillon@kernel.org>,
- Thomas Petazzoni <thomas.petazzoni@bootlin.com>, u-boot@lists.denx.de
-References: <20260327140508.3680105-1-richard.genoud@bootlin.com>
- <20260327140508.3680105-4-richard.genoud@bootlin.com>
- <CAOf5uwnYuZi46ZKijOJ-PLt_55Nwg9BQ5w+3Mtu+VxNvrER1Qw@mail.gmail.com>
-Content-Language: en-US
-From: Andre Przywara <andre.przywara@arm.com>
-In-Reply-To: <CAOf5uwnYuZi46ZKijOJ-PLt_55Nwg9BQ5w+3Mtu+VxNvrER1Qw@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260427-rk3576-usb-gadget-v1-1-982fd1de08db@flipper.net>
+X-B4-Tracking: v=1; b=H4sIAEFc72kC/x3MQQ5AMBBA0avIrE1SQytcRSzQaU0kSItIxN01l
+ m/x/wORg3CENnsg8CVRtjWhyDOY5mH1jGKTgRQZVVGNYSl1bfCMI/rBej6wcUZpamxZEEPq9sB
+ O7v/Z9e/7AcxX/jVjAAAA
+X-Change-ID: 20260427-rk3576-usb-gadget-9f60529d312e
+To: u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, 
+ Kever Yang <kever.yang@rock-chips.com>, Jonas Karlman <jonas@kwiboo.se>, 
+ Anton Burticica <mouse@ya.ru>, Alexey Charkov <alchark@flipper.net>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2259; i=alchark@flipper.net;
+ h=from:subject:message-id; bh=x5QZoKCT7SF4HRdQNrsHLyrK41+s/8Dz9gNQg9SVD8Y=;
+ b=owGbwMvMwCW2adGNfoHIK0sZT6slMWS+jwn4VXC/KNSw8+GnOKFK/nbj0GnHo/vdpfqOJ2ibe
+ Wc+dTvXMZGFQYyLwVJMkWXutyW2U434Zu3y8PgKM4eVCWSItEgDAxCwMPDlJuaVGukY6ZlqG+oZ
+ GukY6xgxcHEKwFT/cWb4H8Q+I2vLvFdF3xYLyc7hKHupn2FW13UiInT1/fBY9f9czgz/NN7MnB5
+ eM0nmi30Rx2728/MMrs/OXFnFyy0r+ld7r1QHHwA=
+X-Developer-Key: i=alchark@flipper.net; a=openpgp;
+ fpr=9DF6A43D95320E9ABA4848F5B2A2D88F1059D4A5
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,143 +113,73 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+From: Anton Burticica <mouse@ya.ru>
 
-On 3/27/26 15:42, Michael Nazzareno Trimarchi wrote:
-> Hi Richard
-> 
-> On Fri, Mar 27, 2026 at 3:05 PM Richard Genoud
-> <richard.genoud@bootlin.com> wrote:
->>
->> In sunxi_nand_chip_init there's quite a lot of kfree/return, it's easy
->> to forget a kfree(), so use a goto/kfree instead.
->>
->> Signed-off-by: Richard Genoud <richard.genoud@bootlin.com>
->> ---
->>   drivers/mtd/nand/raw/sunxi_nand.c | 41 ++++++++++++++-----------------
->>   1 file changed, 18 insertions(+), 23 deletions(-)
->>
->> diff --git a/drivers/mtd/nand/raw/sunxi_nand.c b/drivers/mtd/nand/raw/sunxi_nand.c
->> index 9fc9bc5e0198..ecab9ebc9576 100644
->> --- a/drivers/mtd/nand/raw/sunxi_nand.c
->> +++ b/drivers/mtd/nand/raw/sunxi_nand.c
->> @@ -1600,21 +1600,20 @@ static int sunxi_nand_chip_init(struct udevice *dev, struct sunxi_nfc *nfc,
->>                  if (ret) {
->>                          dev_err(dev, "could not retrieve reg property: %d\n",
->>                                  ret);
->> -                       kfree(chip);
->> -                       return ret;
->> +                       goto out;
->>                  }
->>
->>                  if (tmp > NFC_MAX_CS) {
->>                          dev_err(dev,
->>                                  "invalid reg value: %u (max CS = 7)\n", tmp);
->> -                       kfree(chip);
->> -                       return -EINVAL;
->> +                       ret = -EINVAL;
->> +                       goto out;
->>                  }
->>
->>                  if (test_and_set_bit(tmp, &nfc->assigned_cs)) {
->>                          dev_err(dev, "CS %d already assigned\n", tmp);
->> -                       kfree(chip);
->> -                       return -EINVAL;
->> +                       ret = -EINVAL;
->> +                       goto out;
->>                  }
->>
->>                  chip->sels[i].cs = tmp;
->> @@ -1640,15 +1639,13 @@ static int sunxi_nand_chip_init(struct udevice *dev, struct sunxi_nfc *nfc,
->>                  dev_err(dev,
->>                          "could not retrieve timings for ONFI mode 0: %d\n",
->>                          ret);
->> -               kfree(chip);
->> -               return ret;
->> +               goto out;
->>          }
->>
->>          ret = sunxi_nand_chip_set_timings(nfc, chip, timings);
->>          if (ret) {
->>                  dev_err(dev, "could not configure chip timings: %d\n", ret);
->> -               kfree(chip);
->> -               return ret;
->> +               goto out;
->>          }
->>
->>          nand = &chip->nand;
->> @@ -1669,10 +1666,8 @@ static int sunxi_nand_chip_init(struct udevice *dev, struct sunxi_nfc *nfc,
->>
->>          mtd = nand_to_mtd(nand);
->>          ret = nand_scan_ident(mtd, nsels, NULL);
->> -       if (ret) {
->> -               kfree(chip);
->> -               return ret;
->> -       }
->> +       if (ret)
->> +               goto out;
->>
->>          if (nand->bbt_options & NAND_BBT_USE_FLASH)
->>                  nand->bbt_options |= NAND_BBT_NO_OOB;
->> @@ -1685,34 +1680,34 @@ static int sunxi_nand_chip_init(struct udevice *dev, struct sunxi_nfc *nfc,
->>          ret = sunxi_nand_chip_init_timings(nfc, chip);
->>          if (ret) {
->>                  dev_err(dev, "could not configure chip timings: %d\n", ret);
->> -               kfree(chip);
->> -               return ret;
->> +               goto out;
->>          }
->>
->>          ret = sunxi_nand_ecc_init(mtd, &nand->ecc);
->>          if (ret) {
->>                  dev_err(dev, "ECC init failed: %d\n", ret);
->> -               kfree(chip);
->> -               return ret;
->> +               goto out;
->>          }
->>
->>          ret = nand_scan_tail(mtd);
->>          if (ret) {
->>                  dev_err(dev, "nand_scan_tail failed: %d\n", ret);
->> -               kfree(chip);
->> -               return ret;
->> +               goto out;
->>          }
->>
->>          ret = nand_register(devnum, mtd);
->>          if (ret) {
->>                  dev_err(dev, "failed to register mtd device: %d\n", ret);
->> -               kfree(chip);
->> -               return ret;
->> +               goto out;
->>          }
->>
->>          list_add_tail(&chip->node, &nfc->chips);
->>
->> -       return 0;
->> +out:
->> +       if (ret)
->> +               kfree(chip);
->> +
->> +       return ret;
->>   }
->>
->>   static int sunxi_nand_chips_init(struct udevice *dev, struct sunxi_nfc *nfc)
-> 
-> I need to go a bit in the code but seems that out can happen even if
-> there is no error. It's
-> not so common to have if (ret) if exit condition in case of errot
+When booting via USB download mode (Maskrom), the BootROM leaves the
+USB3OTG0 controller in an active state. U-Boot must properly reset
+the controller before reinitializing it for fastboot or other USB
+gadget functions.
 
-So I think it's fine in this case, ret is always set before we "goto", 
-and in the success case "ret" must be 0 from the last check. But I agree 
-that the construct is a bit uncommon and fragile, so what about keeping 
-the "return 0;" (to use the common pattern and help readability), and 
-rename the label to "out_err" or "out_free", to make it more obvious 
-that this the error path only, and we expect ret to be set?
+Without this change, USB gadget mode commands such as fastboot and ums
+fail when U-Boot is loaded via Maskrom USB download because the
+controller state is inconsistent.
 
-Cheers,
-Andre
+Signed-off-by: Anton Burticica <mouse@ya.ru>
+[Removed unrelated changes, adjusted the commit description]
+Signed-off-by: Alexey Charkov <alchark@flipper.net>
+---
+ arch/arm/mach-rockchip/rk3576/rk3576.c | 18 ++++++++++++++++++
+ 1 file changed, 18 insertions(+)
 
-> 
-> Michael
+diff --git a/arch/arm/mach-rockchip/rk3576/rk3576.c b/arch/arm/mach-rockchip/rk3576/rk3576.c
+index c17ba418ced5..84618ad5acb7 100644
+--- a/arch/arm/mach-rockchip/rk3576/rk3576.c
++++ b/arch/arm/mach-rockchip/rk3576/rk3576.c
+@@ -7,6 +7,8 @@
+ 
+ #include <dm.h>
+ #include <misc.h>
++#include <linux/bitops.h>
++#include <linux/delay.h>
+ #include <asm/armv8/mmu.h>
+ #include <asm/arch-rockchip/bootrom.h>
+ #include <asm/arch-rockchip/hardware.h>
+@@ -39,6 +41,10 @@
+ #define USB_GRF_BASE		0x2601E000
+ #define USB3OTG0_CON1		0x0030
+ 
++#define TOP_CRU_BASE		0x27200000
++#define TOP_CRU_SOFTRST_CON47	0x0abc
++#define SOFTRST47_ARESETN_USB3OTG0	BIT(5)
++
+ enum {
+ 	BROM_BOOTSOURCE_FSPI0 = 3,
+ 	BROM_BOOTSOURCE_FSPI1_M1 = 6,
+@@ -189,6 +195,18 @@ int arch_cpu_init(void)
+ 	 */
+ 	writel(0xffffff00, SYS_SGRF_BASE + SYS_SGRF_SOC_CON20);
+ 
++	/* If the controller was left running by the boot ROM, reset it */
++	if (read_brom_bootsource_id() == BROM_BOOTSOURCE_USB) {
++		/* Assert USB3OTG0 reset */
++		writel(RK_SETBITS(SOFTRST47_ARESETN_USB3OTG0),
++		       TOP_CRU_BASE + TOP_CRU_SOFTRST_CON47);
++		udelay(1000);
++		/* De-assert USB3OTG0 reset */
++		writel(RK_CLRBITS(SOFTRST47_ARESETN_USB3OTG0),
++		       TOP_CRU_BASE + TOP_CRU_SOFTRST_CON47);
++		udelay(1000);
++	}
++
+ 	/* Disable USB3OTG0 U3 port, later enabled by USBDP PHY driver */
+ 	writel(0xffff0188, USB_GRF_BASE + USB3OTG0_CON1);
+ 
+
+---
+base-commit: 9f61fd5b80a43ae20ba115e3a2933d47d720ab82
+change-id: 20260427-rk3576-usb-gadget-9f60529d312e
+
+Best regards,
+-- 
+Alexey Charkov <alchark@flipper.net>
 
