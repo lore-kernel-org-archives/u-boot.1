@@ -4,103 +4,103 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C3B6FF8860
-	for <u-boot@archiver.kernel.org>; Mon, 27 Apr 2026 05:28:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76266FF8860
+	for <u-boot@archiver.kernel.org>; Mon, 27 Apr 2026 06:21:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0E6C883693;
-	Mon, 27 Apr 2026 07:28:08 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A1BF180433;
+	Mon, 27 Apr 2026 08:21:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="KdCevvnI";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="JQmdZ6mM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F2CD7839D9; Mon, 27 Apr 2026 07:28:06 +0200 (CEST)
-Received: from mail-yx1-xb12d.google.com (mail-yx1-xb12d.google.com
- [IPv6:2607:f8b0:4864:20::b12d])
+ id 1C22183693; Mon, 27 Apr 2026 08:21:33 +0200 (CEST)
+Received: from mail-yx1-xb135.google.com (mail-yx1-xb135.google.com
+ [IPv6:2607:f8b0:4864:20::b135])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 559D380077
- for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 07:28:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2FCD080077
+ for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 08:21:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yx1-xb12d.google.com with SMTP id
- 956f58d0204a3-65427236e94so6404443d50.1
- for <u-boot@lists.denx.de>; Sun, 26 Apr 2026 22:28:03 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1777267682; cv=none;
+Received: by mail-yx1-xb135.google.com with SMTP id
+ 956f58d0204a3-656d749109cso1122915d50.3
+ for <u-boot@lists.denx.de>; Sun, 26 Apr 2026 23:21:28 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1777270888; cv=none;
  d=google.com; s=arc-20240605;
- b=BMpZcChEnrPu+jW3GHqBfaD1IINDW3E56r3Q+rz768jJRB0qR48fZSr0NVUjQL/4pW
- uXwufJbqOHOYdZqMyLoV5MejQK23qXg1jXyk0tSWzne4LfgH1Z9g0HCxe/PnoFOO2OpH
- gz1h9iBN/Ebuh8BXTmAD5rgTB9pBQip76rWQpXlZ2U0uLRDSt7l+ju/Pn1y+PragNwAw
- AEDUMpDO3Ny9naEg7mynUK1oCRadBFJWr/Hz4hoX6IYk/ZZO0+oO7r6WdHo0sLKyHNww
- qrHCnIO3BL+i99IWsTF9/Q40F2LZHvoZW01vNYHoyW+mpcYvuycMiArof/L5WQgzsULk
- ChnQ==
+ b=JDL2UxB884aTPRHnw18qLAKFs7VICSJdkxs8TYw8Nblq/p5CtwAPRUdb3tt4huU6/w
+ 9c/I1A5VK7DMd0nn3bvbUB6BLVrq4VGsgJONGicdSwDR0PAbgZQxN50i+O/ul3m1RDrS
+ 9DGa5QzDgJ4L5XqRdgMUTeoHBqtVT3txyYktN+FGfcn6eyZfQoXNvgqk2LvBDiyO8Myp
+ mocjNQ7hTWux1uw/vgYfbXoapd5jfU5G0MZjRpsFvpjGUeDFiNQiPuO56+XxayfiAYep
+ AMMUnrJYI434MeP5E5c/Ru2Y9EV2vJT1YvRFrSnf/4OA0C4+TyrJ/GRC+xJ7MJEv33D4
+ fIGQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=3znor5SgIGx8UFkkXCfc4obtG7sN9Y8i0o+7DpPuL8o=;
- fh=2aUzbW5EtNKzL4BdJFR67kmysRyhyYprU9mL/ppi/8I=;
- b=kQ3lhq0uI+aGLJAcdAprxwar0zVsy57/GrSsTtmtOtVEjfWT1f3oarTiodl0B1wj0g
- hDLxj3ERk3NfHPaobDPUxyOv3aWA0ACCSx/joUfDi7ERAHuudr6+0MXvHLGX6+dV7Zmm
- 2QFuBeNRFWk0boBEFXIONQsspxCC4nSzQHBNxahyr9GjHhJOudqS38M/8liY0dwse3zU
- akPSFF2/pHTKd0mqEiUOpEC0bErgrZE0eRBfYRqaxywoHUOjPJhtK53EFrP/vpAl1k1z
- /rHVd5sylNQsICN9CLaFN/vwLe+J46cFF30OhMQAFfzsok0cjkJks0Yx0eM8FJCEBExj
- WeqA==; darn=lists.denx.de
+ bh=WBEy0yibVSgfkxKZVuaLnGBDMKFaSP3r4PBqiOv/S0s=;
+ fh=K6enBat9UrJALC3ipcbY3vo5VFPEQmwc5buMiUNLkMQ=;
+ b=ZxJ7ykFbD4O701mhlEJUdhvzwZvnuO9VqLn5N8Wkah3MTxAgaFEacDIZSUMFWcQbSE
+ YvZHtGTu/Glfab571oxjPP5aquhgIqJT/DtC9MzQHR0Zuev+JEi0rP9HFdDGI7Cw9xUo
+ k1qAeispx9Dh0QT6JBMtTr4lYm/WzMEFDJfDWFOe7fj5GjtDZNdrjmMKyQlPWG8U22Yx
+ ElFmMLtqBQZqbj93tWyzuY2kKXU/gibntOpKTkwB0aFuPlJQXPOIsEPdqoIE5gy123rS
+ yeCrESv/zmgi0hftMt55YgR9OO5KD9T3nannjWKCpieLHjh5MvAdYvDjfRCWKGIVunOp
+ rhlg==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1777267682; x=1777872482; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1777270888; x=1777875688; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=3znor5SgIGx8UFkkXCfc4obtG7sN9Y8i0o+7DpPuL8o=;
- b=KdCevvnIoSOK5D182pt8RqhCah50Z8ojEFRVeZ+Ntp7mK+7+tarPfdUvgsJY8rVV7K
- 4G3XO/ZNGjKM+vmVrt2uLU7ruSVWILnmUGNECTwXVwbuviHzB5y7CiNKHzY1a1tIMJnQ
- QOnDjl/8C/c9JaDuYEc3x1WSAZXJrdPe/1f4h115+2lcLo8vXpR576V3FYgHGUWyeZiC
- g6IUhKCHRhcedEYdmj97nyus715HLjA2x5GZme2VdQ7Lnibw6sZ4krmSYzNK5GEgFhhh
- ng19K2SXRpF2FYq1/7Oy/H7KYddgloFKc/pbeKKysA6eRQEqImk75cnF1LXePfbtKv1V
- 7GAw==
+ bh=WBEy0yibVSgfkxKZVuaLnGBDMKFaSP3r4PBqiOv/S0s=;
+ b=JQmdZ6mMCp6t/qq9SwMHKi7CM+tbvLJRCGRl6WtBQBIZ8lTdZdan2nt00h8XCA5GP/
+ I3Hk0oOvqBKZO+qp3loMS/4FnXarDUqUmdawWFZQCwyD/Z4oNbFj61Tn301F6ulwTjVe
+ ZIY/4g64PEyy1WiEi+JHpQOUix9NMiZiVIEt560/zdkgQQ4M7vASWLRXPDrnJFCcSe9I
+ +tDfpQKb6gfiMb+Pkcn11nBS+2OD9IP12BMNBz4R5jLyfOAB2QNL5g5IFVRE3wslfKnW
+ 4mpEXR+TYDjfSucZd+q/uShrfCEMDb7Gqu98wjqPjkpEDRcwd7K927gezK8th2ENPDZY
+ qnNg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777267682; x=1777872482;
+ d=1e100.net; s=20251104; t=1777270888; x=1777875688;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=3znor5SgIGx8UFkkXCfc4obtG7sN9Y8i0o+7DpPuL8o=;
- b=c93anQLK8T/tMVJE/x37U2tFdhbqz4jUOwPVOPOeyPmiDxwAu8/CuvEmWSN0t0NRs+
- l8pQTdx+JXrjwsdscZ0mTFsbBznm7v2lzEDwNCeXUmHt97R7dym7aESGzRcieGysMt3M
- R8aklYE5IjnZuVCn1NAroVl0Dm6RssE+tphREmVRrU5ANa1jMz9DHjJsAFyWrBXA7wGT
- Yor7s3bgChbC2s8/HN1I1NAUsuGahflVGop4xX95V5rAFx8dahUI2THxX5xuRLho4RDK
- WvrzPfCxjhRJXAFotnQ0eGuSpXxQEO8k/CzTFIhe5WP6MXSp010hfhCM6UwUJqzuCdfT
- bGMw==
+ bh=WBEy0yibVSgfkxKZVuaLnGBDMKFaSP3r4PBqiOv/S0s=;
+ b=OSyIiS7+CgtEuHc/i4oQ39cnsVdh+96JV1JhMqNvQTHMLE8CXGNV7jYZoDcKBTCkCW
+ cQVePKN6IWP1tQiONooJ9XiCtzBlTlwDq7SeQlyplkXV5Fl4AwZIHcSrgV73Lj4SEVzx
+ VYIfU5VC2FPuhi87fUM7arfvR+irxdelun9zUG6x2DLXjj08mepeDnp/QseBiw2cFMqS
+ w5ciImW7WxxI22LJ5vDZGnxrkWPCRZZ8ILaN6lZzN2rqS6y+Sf55h9udkpsE1nSHXlwB
+ V1Wf+kxTakXDBeRuJdp66s3QY1WSuG9e3hWahO2jqzpe1JKMnHGUAHkT0oeiKdwazTzy
+ 4E2Q==
 X-Forwarded-Encrypted: i=1;
- AFNElJ/fBDwBFPnPF7XW1/7C/tvz8TqzgwQXygd+NcwHziAYQmNblWw1F1FfBzI6WamYmICzxC5p3h0=@lists.denx.de
-X-Gm-Message-State: AOJu0YySVT24TT6wNwWKtKvzSSBEFOgp+2NyCirnJ45hW2E3Ap2ok0SU
- 2ehhM8RW7Cjv6qjgcmWbGzgTn6YAjWklIt1ANEXLR8fj2iL6yfjDuwufJn6FcJA5WQ8UGpDc5ml
- 9l4jXIFsNQEg8RXtXm7JGMjl7GV/QBpV8yFWGdHOFNw==
-X-Gm-Gg: AeBDiev6FSPhJi4fajG2K/9+kKkUuBKc2STEmuV4d1wXST4iXXNoelDqlQSKEOAWvVK
- iVjO9SXaS67pkIwymy+UwMcirXPAKGvO2ocw9lBbZKLD4E/QOuMLA6b1KbetdpYoeHcJtdiyr3u
- seQf58uAb7vdassXeyJrmsIK3oG9NJXeY31hY5H+WttwjYbZA0Mn1UdTqmMoFWba/MitjiIIQLd
- utAYHsy1V9CAQ7IvVCv6GGzkSDsDyuesmIbhFtHgFJozyh28NOrkwxJQLDgHXvz4uGtgtBbqZJp
- iRRDD5Sey5dbUavetDCcoku6O50ZwgNiJUoU5ddEDYr0ZaFLTueyl/iZe+hm0+h3XKLr8kA4Qs5
- ia+WzUNfFFiFjtz9/UVFSE5K1K7h8e0xDThgfBanmb10+j6k/9vJYJx0/Hbwgx9LCMT5yvaaH3R
- xaQm6HXIo97IyW4aphW09aJWU+TyIup43lTI3XhRWSJwvOgIJwFMY73xb8Bkw+S+d2ud1iXV71w
- 9j5W5MQNHhzKzf1PdMmcrlGsknUdbFl10FvQYxPtLhG9QrbO88MVO+IrerpWFfc9EZ05VX0tQYC
- oF/34EjNBtUfzmJ7m4uGscHLDHM1/BiuqQ6hOrjWI0hswe/CIXSXibGMxshKh7k1oS2rVhEgZWR
- oa9yJ30/KLG6LCTpx
-X-Received: by 2002:a53:ac87:0:b0:657:a0f4:ac1d with SMTP id
- 956f58d0204a3-657a103f063mr7711523d50.12.1777267681948; Sun, 26 Apr 2026
- 22:28:01 -0700 (PDT)
+ AFNElJ98ET0ZVqH7DHOwWYnU86iGy5wwrVtGfy+28Hr3r5VBnMWuFgtzelaPAipeEl4D6eZM30CLCdo=@lists.denx.de
+X-Gm-Message-State: AOJu0YxHxDnO+H0GQAM0Z/d++bW/jHZd5IJ0+OP7zwFwOBXSirtnVpga
+ 5K/GKupqSNqUwWQU/PdwRz3xdsvluu8ipwpy5t7P2GbR0+CuEcXjBpxi7qPVz1IOWwr0YtxJfAJ
+ y9ZxPodF+n15NwidB6+8jQz8o0OcJXTwfrxLrDS1bcQ==
+X-Gm-Gg: AeBDiesVothSFvCOV2+WgVfyXKwQGHs1HZzn+kROknd2Sm5uxZSq9nJLALim+BQLwG+
+ WYWNwWLtQP5DEMI5+4fD288Q+EQ3QCSvd9rnNoxyaW8M1FUgiqdKdhhV+C4AANOUKdRC4sp0sDO
+ C3mWiBfuh/rqy6jkdDVrkwxZ2qpxHi8in6mhBCDIUvhWGAktsqE/hlClZsfzL9YLUXYMhEVQLqF
+ +l7ldm4P54PDbs23SjU5F44OIpO3lPagrrxDEocMmwGMKpV/uD5WNgeKKsCjUfHpezUSNMnyoz3
+ x1wvY5SCfTIAgdCxCPIk3O1iUagaNwyvXMA9xfSohljuMRF/GFbS/1+9Drg6IYIjcSuy3NBRkMx
+ t9c/nMxvTpkyQBD7NVL2yaJFvSMUpqPTaYKa5yo1ixBCuvojSMd/xia4Z1np9sfcGj0piu37w3b
+ lWjr18c1CgbI7mm1Fr4uZNb7rMz1IrDuuY+rOhvq0g4mFg4YpS5uH+wrQess0CRK4shOn68YEjK
+ pPB70+r8PONcP5eLW9RgPc4QSxxpqrvBzbrQOFPtDVRM5STppi28l4Y8VthdLqw0d8d4HKGAi2S
+ 8daM6io4poIUtIMOqP0fM7JVSCqMc5Hs/up36tlBslls4B85EOaxY+ftPZ4CxPmqgnlfv2yAtWW
+ jUX4dYlyCVmNdFM9B
+X-Received: by 2002:a05:690e:4191:b0:650:21bd:e0e7 with SMTP id
+ 956f58d0204a3-65310a4db10mr34326323d50.44.1777270887761; Sun, 26 Apr 2026
+ 23:21:27 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260416055948.130041-1-ilias.apalodimas@linaro.org>
- <20260416055948.130041-4-ilias.apalodimas@linaro.org>
- <a1e1a4ff-55a3-4d3a-9050-7df48071163b@mailbox.org>
-In-Reply-To: <a1e1a4ff-55a3-4d3a-9050-7df48071163b@mailbox.org>
+ <20260416055948.130041-7-ilias.apalodimas@linaro.org>
+ <6944f28f-131f-4a08-9ef9-aae812926f4b@mailbox.org>
+In-Reply-To: <6944f28f-131f-4a08-9ef9-aae812926f4b@mailbox.org>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Mon, 27 Apr 2026 08:27:25 +0300
-X-Gm-Features: AQROBzANHmeF2OweHTtFGbZMOEwudcdCVxqcDzAIi7hg3DwsRFn6kCpBDlVJ3Gs
-Message-ID: <CAC_iWjJ+i0-9cKvOoDU0tH6hWyYTa0X2z_UEa1Hqa4xu5NpciA@mail.gmail.com>
-Subject: Re: [PATCH v2 3/6] treewide: move bi_dram[] from bd to gd
+Date: Mon, 27 Apr 2026 09:20:51 +0300
+X-Gm-Features: AQROBzAKVMJgg-xjy2794HBk60rtIWcSEBSqZCI_fsTwlP_hJ0QP6gNHshda7Gs
+Message-ID: <CAC_iWj+ufWdroVDCh9qNAYfsjON5r_pdfOUgyB=h=b2b_rMVKg@mail.gmail.com>
+Subject: Re: [PATCH v2 6/6] common: Add an option to relocate on ram top
 To: Marek Vasut <marek.vasut@mailbox.org>
 Cc: trini@konsulko.com, marek.vasut+renesas@mailbox.org, jonas@kwiboo.se, 
  anshuld@ti.com, sjg@chromium.org, u-boot@lists.denx.de
@@ -121,23 +121,85 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, 26 Apr 2026 at 19:24, Marek Vasut <marek.vasut@mailbox.org> wrote:
+Hi Marek,
+
+On Sun, 26 Apr 2026 at 19:35, Marek Vasut <marek.vasut@mailbox.org> wrote:
 >
 > On 4/16/26 7:59 AM, Ilias Apalodimas wrote:
-> > Currently, the bi_dram[] information is stored in the board info
-> > structure (bd). Because bd is only valid after reserve_board(),
-> > dram_init_banksize() must be called late in the initialization process.
-> > This limitation is problematic, as it forces us to rely on a variety of
-> > bespoke functions to determine board RAM, bank memory sizes, and other
-> > early setup requirements.
+> > Right now we only relocate u-boot to the top of the first
+> > memory bank unless the board specific code overwrites it.
+> > This is problematic when loading big binaries as it
+> > fragments the contiguous memory space for no apparent reason.
 > >
-> > By moving bi_dram[] into the global data (gd)
-> The change itself is fine, but the variable name should be updated.
-> Doesn't 'bi_dram' literally stand for "board info - dram" ? Since the
-> bi_dram is now in gd, it should be called something else, maybe simply
-> "dram" ?
+> > It's worth noting that there are cases where we must not relocate
+> > above the 4GiB boundary (64bit hardware with 32bit only capable
+> > DMA). E.g This will break platforms, if the ethernet
+> > controller cannot DMA above 4 GiB, and once U-Boot does
+> > get relocated above 4 GiB, the packet buffer which is built
+> > into the U-Boot binary is also relocated above 4 GiB.
+>
+> On certain platforms, it is currently not possible to relocate U-Boot
+> above the 32bit boundary, due to various dependencies on content located
+> below the 32bit boundary. One such example is ethernet, where the packet
+> buffer built into U-Boot binary is placed below the 32bit boundary and
+> allows loading of data via ethernet even above 32bit boundary due to
+> memory copy from the packet buffer to the destination location.
+>
+> > A previous patch moves the bi_dram[] info from bd to gd and make
+> > the memory bank information available early. So move the
+> > dram_init_banksize() INITCALL before the relocation address calculation
+> > and use it to derive the address.
+> >
+> > Also add a Kconfig option and allow the common code to relocate U-Boot
+> > to the top of the last discovered bank.
+> >
 
-Sure, i'll move it to 'dram'
+[...]
 
-Cheers
-/Ilias
+>
+> > +
+> >   endif # EXPERT
+> >
+> >   config PHYS_64BIT
+> > diff --git a/common/board_f.c b/common/board_f.c
+> > index 4ac22dca9e7c..f95e789257ad 100644
+> > --- a/common/board_f.c
+> > +++ b/common/board_f.c
+> > @@ -339,7 +339,22 @@ static int setup_ram_base(void)
+> >   static int setup_ram_config(void)
+> >   {
+> >       debug("Monitor len: %08x\n", gd->mon_len);
+> > -#if CONFIG_VAL(SYS_MEM_TOP_HIDE)
+> > +
+> > +     if (CONFIG_IS_ENABLED(RELOC_ADDR_TOP)) {
+> > +             int bank;
+> > +             phys_size_t total_size = 0;
+> > +
+> > +             for (bank = 0; bank < CONFIG_NR_DRAM_BANKS; bank++) {
+> > +                     if (gd->ram_top <= gd->bi_dram[bank].start)
+> > +                             gd->ram_top = gd->bi_dram[bank].start +
+> > +                                             gd->bi_dram[bank].size;
+> > +                     total_size += gd->bi_dram[bank].size;
+> > +             }
+> > +             gd->ram_size = total_size;
+>
+> Shouldn't this also apply board_get_usable_ram_top() to be consistent ?
+
+Simon asked the same thing. I'd rather keep this option strict for now
+and always relocate to the upper memory boundary fnor now. Once I do
+further cleanups, I can either add it or remove the function entirely
+since dram_init_banksize() (which hs also board specific) runs really
+early now.
+
+>
+> > +     } else {
+> > +             gd->ram_top = gd->ram_base + get_effective_memsize();
+> > +             gd->ram_top = board_get_usable_ram_top(gd->mon_len);
+>
+> Should this really use gd->mon_len as a parameter, or gd->ram_top?
+
+I haven't really thought about thism since it's what we currently do.
+In any case that's a change that needs to go on another patch.
+
+>
+> [...]
