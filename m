@@ -4,87 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22C44FF8868
-	for <u-boot@archiver.kernel.org>; Mon, 27 Apr 2026 19:57:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88B74FF8868
+	for <u-boot@archiver.kernel.org>; Mon, 27 Apr 2026 19:57:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B450B83693;
-	Mon, 27 Apr 2026 21:57:10 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0A36A83693;
+	Mon, 27 Apr 2026 21:57:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Y6gm/IyP";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="FrAWHmaX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0F4AD83693; Mon, 27 Apr 2026 21:57:09 +0200 (CEST)
-Received: from mail-oa1-x41.google.com (mail-oa1-x41.google.com
- [IPv6:2001:4860:4864:20::41])
+ id 650F88407E; Mon, 27 Apr 2026 21:57:47 +0200 (CEST)
+Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
+ [IPv6:2607:f8b0:4864:20::32a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4D0C6805D7
- for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 21:57:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4BD38805D7
+ for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 21:57:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x41.google.com with SMTP id
- 586e51a60fabf-40f1a1f77a6so7894566fac.2
- for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 12:57:06 -0700 (PDT)
+Received: by mail-ot1-x32a.google.com with SMTP id
+ 46e09a7af769-7dcd17e19b6so4358649a34.1
+ for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 12:57:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1777319825; x=1777924625; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1777319864; x=1777924664; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=QXMLGrg+yknsd4dx3NYuHSEV0t3cWmHpEu6XD4a7C+Q=;
- b=Y6gm/IyP385RyDPGZJrwV/lTGjPcK+vhjDnSYbRT86AFKi6GYRHnTBsbORVDKnfbBh
- Eacm1hQUVW1te1DPwth7CasScCkgWVg8rc/Sr7rzfBgEur2NGjW7wPJg8EWjkgAbcAvB
- 52QyRmr69Sz1/pdZJIRZ1ra9d4gdRkeZnGlz4=
+ bh=2ds0+OQl1WvYU3et0yjHgxSHceIEHuaUc7riBfsnCiU=;
+ b=FrAWHmaXAyl8Em8yklcVvVDCimaPZUpCUY+8mclmtjO5IWdfhTa6yyfviHOday2+kr
+ k2JZdLA1w/i6rDkLC4Ijl0vu5nZmBsb6WxSeMkoP2qJYTmbsucb+eY4T+xXxiuVbvf3m
+ wNGetzNSPp26X52RWHWdz23N8uJdUl0brcP3M=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777319825; x=1777924625;
+ d=1e100.net; s=20251104; t=1777319864; x=1777924664;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=QXMLGrg+yknsd4dx3NYuHSEV0t3cWmHpEu6XD4a7C+Q=;
- b=Q2NGWjj4hg1gUxEpKixJrkiuZgu1W/mX/D8XZsM+AljINEfTt+XkLvca6Mw/PNYEN3
- X0I/8esAjWayK9eNC5ki7LFj8+VjsVSY+gH+XJNvgmdy3r5hEg6AfzmbIY2TOg7oN49r
- EYVj601zSxzJhc93PYLBRwk0EuzqCW2SIkqWUBaR45Sr7Wu0PrGxw/8UGZIL8Sm4hSDG
- 4anIduoaC1bX5aQ4fklNYw4ToLDIW/vMtwb9UEt9TxxkZmoFkUYZ60tYWU8ctQ+ZUFBs
- MElbzCU/UTP1qw6CdrmUWf/V9XQIvBSPdXiCnwlp1cgB5mo+ZC04y6P5TOxD4J2QCj04
- I45w==
+ bh=2ds0+OQl1WvYU3et0yjHgxSHceIEHuaUc7riBfsnCiU=;
+ b=bq6s1BVqOeN+rq4A1HKtCgNJ2rU0kfIV7g5RXEHaQ+qL87aEikn15UcOmFJhUqr3CS
+ d6uZnM93JzhbSrYl+OnqVvGkzB8OO7+m8XjhCljeSUgRBvXXGkoH2Jd/3kneZweMBwYz
+ sVdadTfNAyGQqqe96DtXsu8BvGm54OZq/Y2YfXmguROTyFuqHPV3UVhbrWnaM2jyLrWp
+ 5+4eUJCmg/6Gk/QBfikY5PKx6l6GAN7dtVg6H7Y8a4SFiOdfs8mGGkjRVbY38keyhIFy
+ YsVUEF7Q2PH79DNfAukqygfgvnEr2F6hZdAWVDeIJgzhwgkQXl4nEELtLbVLXTXIHLel
+ tO2w==
 X-Forwarded-Encrypted: i=1;
- AFNElJ9slKZBsrqh2cISzE90dU/4k7Lc1LkGGsMpZC77ugPjwfL3bLTwRjoG5xHgOEgtcDpkz8iWOn0=@lists.denx.de
-X-Gm-Message-State: AOJu0YyfleIk3ZgooGGp4W1vKFwUxnH8/RNvQpcdrCID0EhcktB2BxBN
- mqMrg2mm5QhNpwyE8Kojt5vdsEmpseB5yCq5516clPgC4i1u3MT4BAETeXckR5HfKbI=
-X-Gm-Gg: AeBDieu2IHFkSX1PDyH56jkr2uCGwB9ZP/XhawL0dq59BUn4+ioe5YrMk+/B6r3D1Ag
- 6ovc/uP4iRjopUDS5Ry02tbzN5GuBDpOlW8fSLPdFLLbZ/KbYrgfDmGSrhJ1EjTY8/oTGorkYui
- M+0Rbs72l9GEIPqaU/Zdc0srKpeSPik/AOBrvp+4/6C4jGTuFiZpCz5MiUwvLniMICNUQWGQC0O
- EcXH8ULZAEEEbkmEwD24zoih1xxgTFjPyl/fXIlhlvlFGRZZUipSD/nBuQi+99BGu0+UjmnpNPZ
- Gyjl5uCIYwR3AOqmYhvQVl/lvL4qYIHduKSl71iOEujs74EkBEopToEnswJ/JwAIXln31m9H2qo
- x8EyS21VOanyuzwW8RwLDysCeCPwX2tCJ0nqP/Dfq5PMtkw6pWid9mxh8BNajdiEDpPOgnd4/Aa
- fEwI7ohDr+DceXO4KBWNYbfSVyo5CVHkAbAUZh2VmCnx9F/f+FHNzRpnIeyJsd5EvcxArQhDlVR
- 0Ss5Xy1E8XtGHxS9ikZKZd1GN54O6VojeqSIVkb1aUtvUbqoLnDgsI3Wo3p1vRgwAtuY9G8
-X-Received: by 2002:a05:6820:f02b:b0:696:22bd:8584 with SMTP id
- 006d021491bc7-6965b8f341fmr262613eaf.1.1777319824948; 
- Mon, 27 Apr 2026 12:57:04 -0700 (PDT)
+ AFNElJ+Dt/K2F2zxVXlB+gpTLdF5wXhNywxu9U6ZqPGfHBiiR/qDz40lw4zmIFBp0Oh9drUgoVG2xME=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx++BiDxWzd8Nj4WoUvDZb4eLEZUt0+WpAFOFMH8huoG9N5U5JT
+ tphzKtk8aik9pzXRpRRcKqVVm2xIK8CVglE9q5GaNK4hEREyZhz6vsRJ7SZyH01ZajY=
+X-Gm-Gg: AeBDieup7GjB8w25Hf1SQIUK4cUEm9lcfOcXZhvdlJtPLmid8RO4rEeHty9XrshyFn2
+ ZJ0oc+eOZp+vwizErrvrqkt39HaiNeil96BnfnFTzGKHxyQDfZ29VvZFoj4+HFDnoBxUeJTGJSl
+ j+Rjgss/EFEuoeqhrgmKmI53uP7AnCMIHZmwwtNOQ5ejHWDN1BaC6KXnwdo9glEo7zwyHHjAk3H
+ /GqRo8qrngXvbc3I3SpoVi4CZFSGTJLZfuorG1FABw37m48VQBEnRTcrNqniC8AiuULqnQB0+ZJ
+ utCar2ypILMo8tA2T7MlpDG4VDc0XxHveJWYiA3bqXGwXc6rwB2RWvHD7bjD5SNQK5uOJxf+/j6
+ N67RA6qYGOFauZq/RUpn99oW93b6UbjadFKYdn/tzstUVt1/MIFL7t4PdAZcoMiydf31/I4g+S5
+ G7nRnJ4TuyH8r7WB2TxQLhZnYpf0rVEZC01pj5cj840/8gp1kspCdjF50mOWAa40L1VuJ/24bjx
+ uiAZKx9CgeSMTwPJyER6yLjXUjGIbAW1oqyGr3zN/qk3TNPH8HXO8A3i7IM5Q==
+X-Received: by 2002:a05:6830:6618:b0:7dc:c4ae:a689 with SMTP id
+ 46e09a7af769-7de99f808acmr105565a34.2.1777319864038; 
+ Mon, 27 Apr 2026 12:57:44 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
  [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-6965ba57ee1sm170526eaf.12.2026.04.27.12.57.03
+ 46e09a7af769-7de9871ceeasm285030a34.27.2026.04.27.12.57.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 27 Apr 2026 12:57:04 -0700 (PDT)
-Date: Mon, 27 Apr 2026 13:57:02 -0600
+ Mon, 27 Apr 2026 12:57:43 -0700 (PDT)
+Date: Mon, 27 Apr 2026 13:57:41 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Beleswar Padhi <b-padhi@ti.com>
 Cc: afd@ti.com, bb@ti.com, anshuld@ti.com, hnagalla@ti.com, jm@ti.com,
  nm@ti.com, n-francis@ti.com, u-kumar1@ti.com, u-boot@lists.denx.de,
  Simon Glass <sjg@chromium.org>
-Subject: Re: [PATCH v4 07/11] binman: openssl: Add boot and load extensions
- to x509 cert
-Message-ID: <20260427195702.GN41863@bill-the-cat>
+Subject: Re: [PATCH v4 08/11] tools: binman: Add a test for boot and load
+ extensions
+Message-ID: <20260427195741.GO41863@bill-the-cat>
 References: <20260425033742.1519298-1-b-padhi@ti.com>
- <20260425033742.1519298-8-b-padhi@ti.com>
+ <20260425033742.1519298-9-b-padhi@ti.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="t+HQx52v8hK+dDaY"
+ protocol="application/pgp-signature"; boundary="YkhZ+EMl83gSBp06"
 Content-Disposition: inline
-In-Reply-To: <20260425033742.1519298-8-b-padhi@ti.com>
+In-Reply-To: <20260425033742.1519298-9-b-padhi@ti.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -103,56 +103,33 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---t+HQx52v8hK+dDaY
+--YkhZ+EMl83gSBp06
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sat, Apr 25, 2026 at 09:07:38AM +0530, Beleswar Padhi wrote:
->=20
-> The boot and load extensions in the x509 certificate are required for
-> requesting the secure entity (TIFS) to boot a core. These fields are
-> defined in the binman node for each core that must be booted by TIFS
-> and must be included when generating the signed certificate.
->=20
-> Add support to parse the boot and load extension properties from the
-> binman node and populate them into the certificate. If any of the
-> mandatory properties for an extension are missing, that respective
-> extension section is NOT added to the certificate.
+On Sat, Apr 25, 2026 at 09:07:39AM +0530, Beleswar Padhi wrote:
+
+> Add test coverage for the boot and load extension functionality in
+> ti-secure certificates. This verifies that a certificate can be
+> generated having boot and load extensions.
 >=20
 > Signed-off-by: Beleswar Padhi <b-padhi@ti.com>
-> ---
-> Cc: Simon Glass <sjg@chromium.org>
->=20
-> v4: Changelog:
-> 1. None
->=20
-> Link to v3:
-> https://lore.kernel.org/all/20251231173621.1069988-8-b-padhi@ti.com/
->=20
-> v3: Changelog:
-> 1. New patch. Add support to sign HSM firmware here in U-Boot.
->=20
->  tools/binman/btool/openssl.py   | 49 ++++++++++++++++++++++++++++++---
->  tools/binman/etype/ti_secure.py | 18 ++++++++++++
->  tools/binman/etype/x509_cert.py |  4 ++-
->  3 files changed, 66 insertions(+), 5 deletions(-)
 
-Is there some testing we could be adding here? Does CI pass (and so yes,
-everything that coverage checks for has been caught already) ? Thanks.
+Oh tests are here. This should be folded in please, thanks.
 
 --=20
 Tom
 
---t+HQx52v8hK+dDaY
+--YkhZ+EMl83gSBp06
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCae+/jgAKCRAr4qD1Cr/k
-Cv9NAP9NhUJ3KzI+RHgAKtGLn83MH7YCpimTUxf2lHBPbdtXAwD/bnVf0meBCJnj
-gqeM4ufOdCpcohccMZxYYUSNkP1oDAc=
-=uyzD
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCae+/tQAKCRAr4qD1Cr/k
+CiLgAQCosEWRx9VgdUCR7EhFLXl2o97Ce7nYYFyJSTrsFgOjtwD/XbSUcIWn2C9M
+51bsQd+svkbXth7l9LO53hpjEeoklwM=
+=8JZV
 -----END PGP SIGNATURE-----
 
---t+HQx52v8hK+dDaY--
+--YkhZ+EMl83gSBp06--
