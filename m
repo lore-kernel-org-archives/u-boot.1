@@ -4,47 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8F60FF8868
-	for <u-boot@archiver.kernel.org>; Mon, 27 Apr 2026 15:05:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0454FF8868
+	for <u-boot@archiver.kernel.org>; Mon, 27 Apr 2026 15:05:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5A6F08407E;
+	by phobos.denx.de (Postfix) with ESMTP id 8DA3E841DF;
 	Mon, 27 Apr 2026 17:05:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=siemens.com header.i=ludwig.nussel@siemens.com header.b="bnpF6B1h";
+	dkim=pass (2048-bit key; secure) header.d=siemens.com header.i=ludwig.nussel@siemens.com header.b="Z7r4MD58";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9F15383C14; Mon, 27 Apr 2026 17:04:56 +0200 (CEST)
-Received: from mta-65-225.siemens.flowmailer.net
- (mta-65-225.siemens.flowmailer.net [185.136.65.225])
+ id 1C3CA8419E; Mon, 27 Apr 2026 17:04:59 +0200 (CEST)
+Received: from mta-65-226.siemens.flowmailer.net
+ (mta-65-226.siemens.flowmailer.net [185.136.65.226])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8F9F78407E
+ by phobos.denx.de (Postfix) with ESMTPS id BBEA98410D
  for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 17:04:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ludwig.nussel@siemens.com
-Received: by mta-65-225.siemens.flowmailer.net with ESMTPSA id
- 202604271504528b365eb70a0002077d for <u-boot@lists.denx.de>;
+Received: by mta-65-226.siemens.flowmailer.net with ESMTPSA id
+ 202604271504537c79a7c91e00020743 for <u-boot@lists.denx.de>;
  Mon, 27 Apr 2026 17:04:53 +0200
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm2;
  d=siemens.com; i=ludwig.nussel@siemens.com;
  h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc:References:In-Reply-To;
- bh=GTe8iGV2Xs0pt2vtU1UYEiHbZ86D7s7veUPgkncxa0A=;
- b=bnpF6B1hvGrXGhoRoBw+Z75BwgjucuiQY+ee9ABcU8jPkfly1fqDt8mQPhcVdj1YveWIZ8
- h8LdrAZO/VQQpkWUFIlP61dw0BDHddzOF0Ql0jeT+J6hN8vob2CP1fFp2/8zc5QHiIzO/P/+
- Nq7M2sj7amqPLPMbQg6cdc8/QKf1iogueXIWN07OGH/iowCPAuYNF88W1pTkNyQctGYyVZiU
- PX3e5GpNOXPe8WyUZe/TPwyYOE7op/a9xEcQRtn16E0M/MB7V1PYkXuKDdviAA56YBqrpt6i
- wVwOkpnATYlbqKW7W2TqG/XDERTMZDRWchvzgM3iNBP9vKm9GOIb8Rrg==;
+ bh=xKfh1LqiXZWINGwprlhclp8hRf7/leQkgw70DQiJ9rM=;
+ b=Z7r4MD58maQW7HarKpZK2xYQt7Hb5lhDXEdzsBnoNOHYkvY9o8jOKGH+fwWn3MqRGsAj3c
+ b1BL38k8OdmtfWBO/v8aqsHh0qTwA9jjPH11zqMm+ZMeg6TqxqxDSJN7itcR8zK0lqirsLdw
+ O8d0z3WHr34GZDe8Q5Lb7DJwkhBTkUhu3mH/0O8zZmGJoHSG4KOQbKeG7BnGSo3zbLYnTv0F
+ Tl459I2BGroiE7oY1sUZW1/vCok787GPpBCLGsKi4WAzP6JDPMTYMLghYaYPWFbJIb+aLd5l
+ 4hfNuIXPYgSxoNn+qf8yuZwqERVeRnRthHFtLJgOLtmsY/0/NGlSiRnQ==;
 From: Ludwig Nussel <ludwig.nussel@siemens.com>
 To: u-boot@lists.denx.de
 Cc: Ludwig Nussel <ludwig.nussel@siemens.com>,
-	Tom Rini <trini@konsulko.com>
-Subject: [PATCH 3/4] mkimage: define log_err and log_info
-Date: Mon, 27 Apr 2026 17:03:40 +0200
-Message-ID: <20260427150409.400914-3-ludwig.nussel@siemens.com>
+ Simon Glass <simon.glass@canonical.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH 4/4] image-fit-sig: require signatures
+Date: Mon, 27 Apr 2026 17:03:41 +0200
+Message-ID: <20260427150409.400914-4-ludwig.nussel@siemens.com>
 In-Reply-To: <20260427150409.400914-1-ludwig.nussel@siemens.com>
 References: <20260427150409.400914-1-ludwig.nussel@siemens.com>
 MIME-Version: 1.0
@@ -67,43 +67,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Define log_err an log_info centrally in mkimage.h so any file used
-in this context benefits from it.
+Signature nodes in the device tree are mandatory if u-boot is compiled
+with signature verification. Allowing signature verification to pass
+if those nodes are missing would leave the system fail open.
 
 Signed-off-by: Ludwig Nussel <ludwig.nussel@siemens.com>
 ---
 
- boot/image-pre-load.c | 3 ---
- tools/mkimage.h       | 2 ++
- 2 files changed, 2 insertions(+), 3 deletions(-)
+ boot/image-fit-sig.c | 12 ++++--------
+ 1 file changed, 4 insertions(+), 8 deletions(-)
 
-diff --git a/boot/image-pre-load.c b/boot/image-pre-load.c
-index 2f851ebb28c..cd319ddb777 100644
---- a/boot/image-pre-load.c
-+++ b/boot/image-pre-load.c
-@@ -35,9 +35,6 @@ ulong image_load_offset;
-  */
- static struct image_sig_info *host_info;
+diff --git a/boot/image-fit-sig.c b/boot/image-fit-sig.c
+index 433df20281f..b89b82ee58e 100644
+--- a/boot/image-fit-sig.c
++++ b/boot/image-fit-sig.c
+@@ -618,7 +618,6 @@ static int fit_config_verify_required_keys(const void *fit, int conf_noffset,
+ 	int noffset;
+ 	int key_node;
+ 	int verified = 0;
+-	int reqd_sigs = 0;
+ 	bool reqd_policy_all = true;
+ 	const char *reqd_mode;
  
--#define log_info(fmt, args...)	printf(fmt, ##args)
--#define log_err(fmt, args...)	printf(fmt, ##args)
+@@ -639,9 +638,8 @@ static int fit_config_verify_required_keys(const void *fit, int conf_noffset,
+ 	/* Work out what we need to verify */
+ 	key_node = fdt_subnode_offset(key_blob, 0, FIT_SIG_NODENAME);
+ 	if (key_node < 0) {
+-		debug("%s: No signature node found: %s\n", __func__,
+-		      fdt_strerror(key_node));
+-		return 0;
++		log_err("No signature node found: %s\n", fdt_strerror(key_node));
++		return -EPERM;
+ 	}
+ 
+ 	/* Get required-mode policy property from DTB */
+@@ -668,8 +666,6 @@ static int fit_config_verify_required_keys(const void *fit, int conf_noffset,
+ 		if (!required || strcmp(required, "conf"))
+ 			continue;
+ 
+-		reqd_sigs++;
 -
- void image_pre_load_sig_set_info(struct image_sig_info *info)
- {
- 	host_info = info;
-diff --git a/tools/mkimage.h b/tools/mkimage.h
-index 5d6bcc9301a..62fbfcacbb3 100644
---- a/tools/mkimage.h
-+++ b/tools/mkimage.h
-@@ -31,6 +31,8 @@
- #endif /* MKIMAGE_DEBUG */
+ 		ret = fit_config_verify_key(fit, conf_noffset, key_blob,
+ 					    noffset);
+ 		if (ret) {
+@@ -685,8 +681,8 @@ static int fit_config_verify_required_keys(const void *fit, int conf_noffset,
+ 		}
+ 	}
  
- #define log_debug(fmt, args...)	debug(fmt, ##args)
-+#define log_info(fmt, args...)	printf(fmt, ##args)
-+#define log_err(fmt, args...)	fprintf(stderr, fmt, ##args)
+-	if (reqd_sigs && !verified) {
+-		printf("Failed to verify 'any' of the required signature(s)\n");
++	if (!verified) {
++		log_err("Failed to verify 'any' of the required signature(s)\n");
+ 		return -EPERM;
+ 	}
  
- static inline void *map_sysmem(ulong paddr, unsigned long len)
- {
 -- 
 2.43.0
 
