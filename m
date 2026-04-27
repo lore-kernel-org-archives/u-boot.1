@@ -4,63 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1EFBFF885E
-	for <u-boot@archiver.kernel.org>; Mon, 27 Apr 2026 13:40:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34A94FF885E
+	for <u-boot@archiver.kernel.org>; Mon, 27 Apr 2026 13:47:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5197E83AA9;
-	Mon, 27 Apr 2026 15:40:49 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
+	by phobos.denx.de (Postfix) with ESMTP id 7CC5083AA9;
+	Mon, 27 Apr 2026 15:47:55 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="YSD1rvEU";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=arm.com header.i=@arm.com header.b="HOTCGjvk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8BC3783BC4; Mon, 27 Apr 2026 15:40:47 +0200 (CEST)
-Received: from mx.nabladev.com (mx.nabladev.com
- [IPv6:2a00:f820:417:0:178:251:229:89])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A22AF80433
- for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 15:40:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=nabladev.com
+ id 7514883C14; Mon, 27 Apr 2026 15:47:53 +0200 (CEST)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id 0108080433
+ for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 15:47:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marex@nabladev.com
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 4235C109D7A; Mon, 27 Apr 2026 15:40:41 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
- s=dkim; t=1777297244;
- h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:content-language:in-reply-to:references;
- bh=ktvZSKcRfxlHyna4Fuwc009HSu8a0219QRLpkTRFJxw=;
- b=YSD1rvEUb1UxU5rZn7biKnq3yNfkQprrZIB15k4ynT9h+sndHcanBt0WUVGCtKmfqoeWqX
- RQz7NMfnQYpz72F6S2jFKiS/iq7d7L9TcixxAvO5X7GlNTW2Erru+87k/RlMk8KA4BZR2D
- DLYstiu+47OKJ+fAN6z0W5ObvAMt2rURgygajw9lwA1K96CoZB0LuAl0do2qirWSET6tTC
- J+++A9CSFombiQvUBR1qaZhQxZjjKZpypXQfaa4bZVHjItZX2CRAi2BlACnDPr5oEa5yFj
- tKZlQxXelW9PYnS6fbjbfzp3efIgiWq5X9EReTQETNBMBI87bHUHSgsqoG7QSg==
-Message-ID: <9f07c0ed-0d0c-462e-b237-146f641dffb7@nabladev.com>
-Date: Mon, 27 Apr 2026 15:40:41 +0200
+ dmarc=pass (p=none dis=none) header.from=arm.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=andre.przywara@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id A02AB1684;
+ Mon, 27 Apr 2026 06:47:43 -0700 (PDT)
+Received: from [10.41.150.145] (e142021.arm.com [10.41.150.145])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id E4E233F763;
+ Mon, 27 Apr 2026 06:47:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
+ t=1777297669; bh=sAcRz+s3VxC9fd5JEExM2aP/iGSA30kK6d0brEQHyjA=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=HOTCGjvktW2ZGTkIMMhQczavzTSioHMm9krf+a1MqWK4vGDeU0ncuyv4fpmR8Y0ln
+ hoWkzEbaEouSm64oTduC+a7mb+CYt2GP3P6yo3jtEZGiqMhekeBF+ESA4b97+hTG6C
+ XmKINObFsYx4A9A8TNbMABHImVS9uAXWGvizlav4=
+Message-ID: <86b9f145-e94d-44f7-b8d5-8ced07f478d9@arm.com>
+Date: Mon, 27 Apr 2026 15:47:44 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/2] imx9: scmi: soc: Add support for detecting
- primary/secondary bmode on MX95
-To: Fedor Ross <fedor.ross@ifm.com>, "NXP i.MX U-Boot Team"
- <uboot-imx@nxp.com>, u-boot@lists.denx.de
-Cc: Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>,
- Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>,
- Alice Guo <alice.guo@nxp.com>, Ye Li <ye.li@nxp.com>,
- Jacky Bai <ping.bai@nxp.com>, Rasmus Villemoes <ravi@prevas.dk>,
- =?UTF-8?Q?Jo=C3=A3o_Paulo_Gon=C3=A7alves?= <joao.goncalves@toradex.com>,
- Ji Luo <ji.luo@nxp.com>, Primoz Fiser <primoz.fiser@norik.com>,
- Ranjani Vaidyanathan <ranjani.vaidyanathan@nxp.com>
-References: <20260427-b4-imx95_img_set_sel-v2-0-b5d760ebc89b@ifm.com>
- <20260427-b4-imx95_img_set_sel-v2-2-b5d760ebc89b@ifm.com>
+Subject: Re: [PATCH v2 0/5] mtd: rawnand: sunxi: Fix user data length for H6
+To: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
+Cc: Richard Genoud <richard.genoud@bootlin.com>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Tom Rini <trini@konsulko.com>, Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Miquel Raynal <miquel.raynal@bootlin.com>,
+ James Hilliard <james.hilliard1@gmail.com>,
+ Boris Brezillon <bbrezillon@kernel.org>,
+ Thomas Petazzoni <thomas.petazzoni@bootlin.com>, u-boot@lists.denx.de
+References: <20260327140508.3680105-1-richard.genoud@bootlin.com>
+ <fb530fbd-6dac-4f37-8447-dc15e9b0b0fd@arm.com>
+ <CAOf5uwkUXrsX6w_1LYiLK+f5HFsefx3t6Qp5urxEu_N-15KZ7g@mail.gmail.com>
 Content-Language: en-US
-From: Marek Vasut <marex@nabladev.com>
-In-Reply-To: <20260427-b4-imx95_img_set_sel-v2-2-b5d760ebc89b@ifm.com>
+From: Andre Przywara <andre.przywara@arm.com>
+In-Reply-To: <CAOf5uwkUXrsX6w_1LYiLK+f5HFsefx3t6Qp5urxEu_N-15KZ7g@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,10 +72,95 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 4/27/26 3:32 PM, Fedor Ross wrote:
-> Implement the 'getprisec' subcommand of 'bmode' command for i.MX95 by
-> reading out the ROM log events. This event is set by the BootROM if it
-> switched to the secondary copy due to primary copy being corrupted.
+Hi Michael,
+
+On 4/27/26 14:31, Michael Nazzareno Trimarchi wrote:
+> Hi Andre
 > 
-> Signed-off-by: Fedor Ross <fedor.ross@ifm.com>
-Reviewed-by: Marek Vasut <marex@nabladev.com>
+> On Mon, Apr 27, 2026 at 2:28 PM Andre Przywara <andre.przywara@arm.com 
+> <mailto:andre.przywara@arm.com>> wrote:
+> 
+>     Dario, Michael,
+> 
+>     are you going to take those patches eventually, or are they supposed to
+>     go through the sunxi tree? Somehow patchwork put this on my plate, but
+>     MAINTAINERS says it's yours.
+> 
+>     I will have a final look at those patches, but I think they are fine
+>     since their counterparts passed the kernel reviews ;-)
+> 
+> 
+> Company projects are stressing me out. I will check today with Dario
+
+Sorry to hear that! I can easily take care of this series, if you are 
+fine with that. It would touch only those sunxi specific files anyway.
+
+Cheers,
+Andre
+
+> Michael
+> 
+>     Cheers,
+>     Andre
+> 
+>     On 3/27/26 15:05, Richard Genoud wrote:
+>      > This series introduces the correct usage of user data length for
+>      > H6/H616.
+>      > If the older SoCs must use a fixed value of 4 user data bytes for
+>     each
+>      > ECC step, the H6 can have a different value for each step.
+>      >
+>      > In the first round, the behavior was kept as the one used by A10.
+>      > But we have multiple choices:
+>      > - do like A10 like before (and not use all OOB)
+>      > - do like the vendor kernel (different from A10, but not using
+>     all OOB)
+>      > - use the whole OOB for user data bytes
+>      >
+>      > In this second round, the third approach is implemented.
+>      >
+>      > All patches but the 4th are code cleaning.
+>      > The 4th patch enables using a variable user data length for H6/H616
+>      > along with maximizing it.
+>      >
+>      > A similar series has been accepted for Linux:
+>      > https://lore.kernel.org/lkml/20260317142437.580204-1-
+>     richard.genoud@bootlin.com/ <https://lore.kernel.org/
+>     lkml/20260317142437.580204-1-richard.genoud@bootlin.com/>
+>      >
+>      > Changes from v1:
+>      > - gather reviewed-by
+>      > - clean sunxi_nand_chip_init()
+>      > - use all possible remaining OOB space for user data bytes
+>      >
+>      > Richard Genoud (5):
+>      >    mtd: rawnand: sunxi: Replace hard coded value by a define
+>      >    mtd: rawnand: sunxi: make the code mode self-explanatory
+>      >    mtd: rawnand: sunxi: clean sunxi_nand_chip_init()
+>      >    mtd: rawnand: sunxi: introduce variable user data length
+>      >    mtd: nand: raw: sunxi_spl: remove user data length reset
+>      >
+>      >   drivers/mtd/nand/raw/sunxi_nand.c     | 292 ++++++++++++++++++
+>     +-------
+>      >   drivers/mtd/nand/raw/sunxi_nand.h     |   3 +
+>      >   drivers/mtd/nand/raw/sunxi_nand_spl.c | 129 +++++++++---
+>      >   3 files changed, 324 insertions(+), 100 deletions(-)
+>      >
+>      >
+>      > base-commit: ba7bf918dafcd093ad733b07ba490baeb20cf5da
+> 
+> 
+> 
+> -- 
+> Michael Nazzareno Trimarchi
+> Co-Founder & Chief Executive Officer
+> M. +39 347 913 2170
+> michael@amarulasolutions.com <mailto:michael@amarulasolutions.com>
+> __________________________________
+> 
+> Amarula Solutions BV
+> Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
+> T. +31 (0)85 111 9172
+> info@amarulasolutions.com <mailto:info@amarulasolutions.com>
+> www.amarulasolutions.com <http://www.amarulasolutions.com>
+
