@@ -4,85 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69714FF886D
-	for <u-boot@archiver.kernel.org>; Mon, 27 Apr 2026 19:42:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED9D5FF886D
+	for <u-boot@archiver.kernel.org>; Mon, 27 Apr 2026 19:42:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 996A384106;
-	Mon, 27 Apr 2026 21:42:36 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id CFCE58407E;
+	Mon, 27 Apr 2026 21:42:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="X3NZtdJT";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ozpOg14H";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 09ABD83C51; Mon, 27 Apr 2026 21:42:33 +0200 (CEST)
-Received: from mail-oo1-xc36.google.com (mail-oo1-xc36.google.com
- [IPv6:2607:f8b0:4864:20::c36])
+ id 0BFB0805D7; Mon, 27 Apr 2026 21:42:35 +0200 (CEST)
+Received: from mail-ot1-x331.google.com (mail-ot1-x331.google.com
+ [IPv6:2607:f8b0:4864:20::331])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E163183693
- for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 21:42:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 73DC78407E
+ for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 21:42:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc36.google.com with SMTP id
- 006d021491bc7-6948ff6b006so4745867eaf.2
- for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 12:42:30 -0700 (PDT)
+Received: by mail-ot1-x331.google.com with SMTP id
+ 46e09a7af769-7d4c383f2fcso8904425a34.0
+ for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 12:42:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1777318949; x=1777923749; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1777318950; x=1777923750; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=pHhLXGYHf/HhcK5qPUXp6gFLH+EeshSlOFE9Tw8b4E4=;
- b=X3NZtdJTE4RK9izbB4vvHnbIxj2DnuoaXsXgGgRZbpafC5nCLx+F3HbDYtbrDZ0C8W
- bx2IBdRRYcR2gYZKHI6w155K2sAV2BHwV7MU6M0j0BBVE/l9C/b5kucdV46L1m9YulaG
- /M3PuGjBTuuIks4Pr+J9HO6XQRGBftYmWK2QU=
+ bh=vb29o2a1z56s2/J/xZvVW3VvGP6oCnzkFXwJq2N3bKk=;
+ b=ozpOg14HSZBhR35hETKG064j8W73Qm+5FTmdAAA5t78zTavU00Unm5G4sTaF7yXtkx
+ 1v6EKBsL4Xdc3tOlnvGCj18W3UvdQhxD8T5wDvxJn2pilzVQ5xo5/4i9W2wPOEroyWci
+ Ena6vj8OpyVEsKNGmRCUT73ZfHM9KedLs8dvQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777318949; x=1777923749;
+ d=1e100.net; s=20251104; t=1777318950; x=1777923750;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=pHhLXGYHf/HhcK5qPUXp6gFLH+EeshSlOFE9Tw8b4E4=;
- b=phI8lO0h/KRjpafkeIK6FgTXf3kUu3O8YNl7nIT/Oiz3NsEUSsc/7TjBwj1PHLQcLi
- 3lrQEfxdEZQDRkGs0ukzs2UUFt4KEvuHiZCWCLOiUpqTSJsp1HH6ZtzrNwF5yeLjFMZk
- wbUPtJS6Nwpyh/LWxzaroFjBurPEbguAkWxQ+/6NX+wF5g3mv/AfakOxIGExDk5DyBeP
- L6AbFj7VXVPkStQEKO37tW0oGrvG2vHME6/Ww/VrSQIeszMvSstM1Auf/vstSlzzf4AA
- qOHF0GQPL0TmSmnoKEMQ3rrxvFBKAFxNW1v0RIHABCc4q4DDivBs19x1dazalrtBFTlE
- H2Aw==
-X-Gm-Message-State: AOJu0YxmhRNg2sBxjUK+Gtng3mMfGuw/3AxqglhdMq9Ob46iD3U8USvg
- OWJcuKJE9liojAVO2N8oc8G9Y/L6Ez9Q82lR/AlqGaL+YBk0mhjU6SlN15icKFfhR59NugWZquO
- ei2xZ7bBUhg==
-X-Gm-Gg: AeBDieuXVVQKkPNbOz+al0UQ9TV0dnxpb9vz4WbRc9LUqqx63QGexPEQ+S79aWzh0iO
- ovvgZyd8cixzC8xYeshSZrjU0vQLlN/Y6TEkRD29LYrhT3HrstqGaMKNJyFSpFYRjWDl4iWrZjV
- 8aFUrvwa63jFiXiKCsYJb7+rJpwKZgAWPjKx0zdU+/di4WeLBcP4PbKv0/d+iqPzEcYLRTZjBLL
- mEY4J6jUCJmpumFMTd1kJYWOr8g1tL/JgnP4jxMxrUFvonkeiawOsp96EYDETxdzNj1qmNrStXd
- u2xOlwK8N5dRp725wUlBwCwXYeo1L5U1/6saab0wYq9fLF1aTSjalGEjt7DG0SklKo0vBmREfpZ
- fH2CxVq6FhctqNusWRsWc83f6s9oqmvxsS0yPicH4ztPT+lKgBbLXwy6/rhdEztcPmc702IPOAu
- g8P5SV3eFNNwjGjXACQ7mf8IPg9Lmri4hNxmrAZbPqWz6AaQWaq6Vb1BybB0l/EZcoNxgFgXWK3
- J+fYd9ey/6vS22dKXCG5x3vEbS9DECRB0mApV7F5wkIi7RuulJMOS4Ju0Hq
-X-Received: by 2002:a05:6820:f008:b0:696:22dc:b4db with SMTP id
- 006d021491bc7-6965ba35059mr227420eaf.41.1777318949326; 
- Mon, 27 Apr 2026 12:42:29 -0700 (PDT)
+ bh=vb29o2a1z56s2/J/xZvVW3VvGP6oCnzkFXwJq2N3bKk=;
+ b=avtbU5I70Ae45O/Jy4bMWpnivEVytoMFjc0/AUGEtRqFyUPR2OO5FG1aDzme97avYw
+ 85TtuAduMGR1Wh4/nRzJF7SSC5qLC964V/y6IPRRfeDIxzwux1D3BkvJ5Vy49px4KYMO
+ zY0n4Ea56uYgPplYEKCxwcXn9nrkivkZK5ESbrcckteG43/RJuEo59SsJCApUYjcuFpY
+ JrzF7M9vY//ntKlQCo1KX/J+cd1str8WHzgBEwdsvwSIao8CiQWjJak1IpU20hXHvSDG
+ nCsZwLI2PQ7elCZ1sLzuFy3mL+4MDiUS0yD5EqplagarmeUlxG5iwWaDgwur7idSX3Dt
+ Tuhg==
+X-Gm-Message-State: AOJu0Yzdl4x7lXZDoBX919HtbhOEOq9CDKSV4DC4baAv1cwU2pgl2YpQ
+ LGQNxdRN7F4M1mwlzOGpaBAhnqEn1rbElmz1HMwjZuCqM06gi170KrZT4+TzKT3F91c=
+X-Gm-Gg: AeBDieu+wbBUr8HrSK8Fg4W2g2O01cbXnlU61+xTCNhu2eeENz9XFM8/npw5apYR0/t
+ mabHuzeD4KqkKZp3Z190oUHmMUHMIvZcF/ibOD1hJ+tU8tZq4tTeovQrqmVkJbASWX8wj7J550t
+ rGQSj/1R+m2VOXSyAybmM6foIr2ZUVf2ExvdV0H9UZRco1tVC8lOX9q6k+Zio1PMLHdJRt0dS7j
+ E8ChTWMs7/HZJKV//CVqfysCD0eQZMOCHSykFdgCnXy8LvAp5Uvw+QE1oljvTC0aFE8RsVT+22P
+ KrtzahgdRLK8KzUmezpLNfYZa1ww5Mvc8mzDQVNX8RGWbq2uh8DTAzOci6W2iVN8Z+MxeolphkH
+ FbYbzkINMjnxn876W4Ee4ODvQll7hHFReeCSQrjxF75PzVfe9BXPPHrEiuJ1UKOSXinD4Mqf9gn
+ vSm+Jacnqps7HoeO6EJKgb/vhmNl3FExuysFzTX5dW0V+MhUJ969AmTNEzAY1MghoMDfNwv5KUf
+ ADxLParC4VqlbRquk01cwiyU+nvymDnRhCyhGz5B0E8u+sgfGbx3z2CclBZhQ/7VculYM8=
+X-Received: by 2002:a05:6820:81cc:b0:694:9156:9b97 with SMTP id
+ 006d021491bc7-6965b935c7amr250395eaf.22.1777318950222; 
+ Mon, 27 Apr 2026 12:42:30 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-106-235.totalplay.net.
  [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-6965b94aa0esm187247eaf.6.2026.04.27.12.42.28
+ 006d021491bc7-6965b94aa0esm187247eaf.6.2026.04.27.12.42.29
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Mon, 27 Apr 2026 12:42:29 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, 
- =?utf-8?q?Christian_P=C3=B6tzsch?= <christian.poetzsch@kernkonzept.com>
-Cc: Bin Meng <bmeng.cn@gmail.com>, Simon Glass <sjg@chromium.org>, 
- Adam Lackorzynski <adam@l4re.org>
-In-Reply-To: <20260417120319.573470-1-christian.poetzsch@kernkonzept.com>
-References: <20260327081858.311591-1-christian.poetzsch@kernkonzept.com>
- <20260417120319.573470-1-christian.poetzsch@kernkonzept.com>
-Subject: Re: [PATCH v2] virtio: add support for SIZE_MAX & SEG_MAX features
-Message-Id: <177731894862.3526444.9446134173350850010.b4-ty@konsulko.com>
-Date: Mon, 27 Apr 2026 13:42:28 -0600
+To: u-boot@lists.denx.de, Ernest Van Hoecke <ernestvanhoecke@gmail.com>
+Cc: Francesco Dolcini <francesco.dolcini@toradex.com>, 
+ Apurva Nandan <a-nandan@ti.com>, Vitor Soares <vitor.soares@toradex.com>, 
+ Ernest Van Hoecke <ernest.vanhoecke@toradex.com>
+In-Reply-To: <20260417-elb-6911-aquila69-ofupstr-v1-0-400d93db3747@toradex.com>
+References: <20260417-elb-6911-aquila69-ofupstr-v1-0-400d93db3747@toradex.com>
+Subject: Re: [PATCH 0/2] k3-am69-aquila: Migrate to OF_UPSTREAM and add
+ remoteproc FW pre-loading
+Message-Id: <177731894948.3526444.17041699596998946768.b4-ty@konsulko.com>
+Date: Mon, 27 Apr 2026 13:42:29 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 X-Mailer: b4 0.14.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -100,24 +99,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 17 Apr 2026 14:03:19 +0200, Christian Pötzsch wrote:
+On Fri, 17 Apr 2026 15:42:02 +0200, Ernest Van Hoecke wrote:
 
-> Some virtio implementations may forward the virtio requests directly to
-> the underlying hw. The hw may have some restrictions in how many and how
-> big the requests can be. Therefore, the corresponding virtio device will
-> announce this limitations with the SIZE_MAX & SEG_MAX feature.
+> This patch series migrates the Aquila AM69 to OF_UPSTREAM to receive
+> automatic device tree updates. It also adds remoteproc firmware
+> pre-loading to the environment.
 > 
-> Add support for those features. Split an io request into multiple virtio
-> requests if more than seg_max segments would be used. Also split a
-> single buffer request into multiple segments if the buffer is bigger
-> then size_max.
 > 
-> [...]
 
 Applied to u-boot/master, thanks!
 
-[1/1] virtio: add support for SIZE_MAX & SEG_MAX features
-      commit: bb4142af7ed8c94b3df3e75ca9ab3ef450e80885
+[1/2] arm: dts: k3-am69-aquila: migrate to OF_UPSTREAM
+      commit: 26b52c083eff8728663d0b5f7c1c7832a6972190
+[2/2] board: toradex: aquila-am69: add remoteproc firmware pre-loading
+      commit: cf8bb114418e7b96f1d18d4e38418ccf8eec957f
 -- 
 Tom
 
