@@ -4,132 +4,134 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE0A6FF8868
-	for <u-boot@archiver.kernel.org>; Mon, 27 Apr 2026 16:01:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 740D3FF8868
+	for <u-boot@archiver.kernel.org>; Mon, 27 Apr 2026 16:03:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4D66F84178;
-	Mon, 27 Apr 2026 18:01:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=hitachienergy.com
+	by phobos.denx.de (Postfix) with ESMTP id E03B883BC4;
+	Mon, 27 Apr 2026 18:03:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=hitachienergy.com header.i=@hitachienergy.com header.b="ncHuIFLV";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="iDWyTsNl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1BADE83BC4; Mon, 27 Apr 2026 17:00:34 +0200 (CEST)
-Received: from AM0PR02CU008.outbound.protection.outlook.com
- (mail-westeuropeazlp170130006.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::6])
+ id BD0578416F; Mon, 27 Apr 2026 18:03:04 +0200 (CEST)
+Received: from AS8PR04CU009.outbound.protection.outlook.com
+ (mail-westeuropeazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0550B83693
- for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 17:00:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5E29E83AA9
+ for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 18:03:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=hitachienergy.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=tomas.alvarez-vanoli@hitachienergy.com
+ header.from=cherry.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=j1URii7aLtgPJdNuPHx1QnGsVz8FxeZaMz3E0pgsvjGUIUALpdhspgY5RXN0FW2YY2JpMxqZDz4AXl388rKP+uT7sbFgMPLqA4SnPGYhqpjIlf0GC6YteXiCpG0+eMPvnUkLsaBdEBR/TGxf9Su5g8zwCntI4eZrhzg8SGz8uA4IZ6/GO+My+qgO2lmoIVcqmD6ip2My1DVYrK2EfDh5+8QovmumVtC7n5zXvBzw2MrLD1cN1ZfttlMv4WyitOnUU01i9W2AgBlbieepm5Ij3u53KqsaQ3KrT7VwnD6rdEo6x78vFQOZJhonDwXDzxcmdjl1cVBQ5iWsFbDjlJyxsg==
+ b=BouHnIisEjaQzpXGLzmsGn3tvh7MY+35OS1bH4FV+WzfNZ/SG3n9+bvvOUXRND+cVr342Ku1JL+yxypK910Zfab40/h3GSKOhv4AJ3NG5ipPHDAzLPpYto3IxTp1ut2XVJuMfD7jm7+IfWfoXcJimJxjJwcr0MA1eGA+bDudHlZh73wlhYlGoPwXHNk3lF4buBw59XYDWs0BM1sXuE37UF4QEqxRjIMVumpC5LRLHmAAMFp1xsXZZXx7RQTXtSJRpofxqtnIaIz4mkxd50YmlSRITKOr44Ag8a5UJJCq/arfGtRpu74MeEn8LsteXfZkBdIuzkzY5cEZK+MEWGyT7w==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=+EI9yYcnKYPH0p+dFEqZ8NB4AmHfZ0b9hvgDBOgSyVE=;
- b=ZFUMrF+K6xDPD583uY0zCpv1Ik7E6ikIKp2UCSuQkPWzLZvAOpEQxZBTShHAEjNyv0ZAX3VZMkYS+bHlv5mkTqIs1PQbRRAfwp240tePS4UjqxJ0BmMS8ghAOzu7jO/NIxl2z5SSP6y5LJG0Fa7HFYtv/cdVEl0NN0MGDqmmeawNAP0mYACqToXXl+CdKNpbcRidzGYtP8vYOXZ2vu2xfrtkZ5Bz0KC9dNjqaVGgOvpmtGDeFF25CYF3kYh2YznuAJRvLuGjdNrtilRh5Dn8NxBDqdXT4MCZS3H1NLFDA8z7TglDRNzzvaGu7O2xCu+a0uQ5U93bCYaw0rtvMd6nfg==
+ bh=4jJXRDCVPVPzrW6UYru4uae2OQof+DBiUK743LuFxQE=;
+ b=BMMzU28kX36P86tTbJJjdsmCkRSu1cvrjPJDJpUkSI3A1x5rKDbSQjLo7RguljBxepxyHcJuWx9eAWbTU/pOiulOvAVZHmNdyMYXZ+3d5OfRTdTgbSaBt0eN6QOL2IaxwRwiybot0PotK8CqWC2XKhI+fYOX9LCdUxnAyUOH0RFtbn5dL+WNCZ+Ku5C3damCr5qLPhzBwLD2T4HWe5rrb6Ha7aU1gLWfxl223bAYI8vdvVqF8aPbQgYkIgjqKhVXm3fRqemOems38EH9dtaqfWir/+3jVKVD1UTvGEleqJdVN1a3EcP+UhEJOIA5/gJ1PMt5uM/WouWVEnmdGv40hg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=hitachienergy.com; dmarc=pass action=none
- header.from=hitachienergy.com; dkim=pass header.d=hitachienergy.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=hitachienergy.com;
- s=selector1;
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=+EI9yYcnKYPH0p+dFEqZ8NB4AmHfZ0b9hvgDBOgSyVE=;
- b=ncHuIFLVMgRkCTEB+RW3HAMS07+h5Cd9chd/KEzv1ApQY6V3+sjHPUXVaFUHREFTQd7Qp8Q3JtDhP2gie73vPN8gUMFWT+/KMEr1XyePqcpj8lK2oyqZvawSll9b3BmAO6eY/uVBGCW3cgsrXyLkCDv2wA8ENe13GI+jchCJMk6/ouJDNWmoqv3ZmjIgJRrUlfI983BTE0x3GC6zrg63D1JbM4wQ77ZLWtnhRaZcPlBgDyKDtnh5Op+G+75o3Iq7aMr9aNXsJxMTcQ+bh51POZStbZtUL2krhmlb6TvMdwSViSjbW6h7E6O09+Y1fOdBNcjJJ9vqq3Z4MSSqmHUCkw==
-Received: from DB9PR06MB7849.eurprd06.prod.outlook.com (2603:10a6:10:291::22)
- by DB8PR06MB6442.eurprd06.prod.outlook.com (2603:10a6:10:126::7) with
- Microsoft SMTP Server (version=TLS1_2,
+ bh=4jJXRDCVPVPzrW6UYru4uae2OQof+DBiUK743LuFxQE=;
+ b=iDWyTsNlCSa7X1PIj8laAYKd0lpVGJDbm9UI0glPJVtmGYb6pzeAYv7WBpmtNWGHBMAW3iHLYsjhoLxkmCgizV1NV3+0nl23uhcraFSwBJoui8zjaXU7S9JSkzAAq0ChOplEOOOAzhx3oVuINAd7z3Gj7rdIHULFXWMFBcEzFgY=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from PA4PR04MB7743.eurprd04.prod.outlook.com (2603:10a6:102:b8::20)
+ by AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
+ with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9846.26; Mon, 27 Apr
- 2026 15:00:30 +0000
-Received: from DB9PR06MB7849.eurprd06.prod.outlook.com
- ([fe80::f0f5:da:c159:65ab]) by DB9PR06MB7849.eurprd06.prod.outlook.com
- ([fe80::f0f5:da:c159:65ab%7]) with mapi id 15.20.9846.025; Mon, 27 Apr 2026
- 15:00:30 +0000
-From: Tomas Alvarez Vanoli <tomas.alvarez-vanoli@hitachienergy.com>
-To: Michael Walle <mwalle@kernel.org>, "u-boot@lists.denx.de"
- <u-boot@lists.denx.de>
-CC: "trini@konsulko.com" <trini@konsulko.com>, "chuanhua.han@nxp.com"
- <chuanhua.han@nxp.com>
-Subject: Re: [PATCH 0/1] spi: fsl_espi: fix din offset
-Thread-Topic: [PATCH 0/1] spi: fsl_espi: fix din offset
-Thread-Index: AQHcu7ACMCR13v4txEGC5uikEn95zLXzDK8AgAAo/ss=
-Date: Mon, 27 Apr 2026 15:00:29 +0000
-Message-ID: <DB9PR06MB7849FF9D7AFDD1CD3C3304B7C2362@DB9PR06MB7849.eurprd06.prod.outlook.com>
-References: <20260324170212.481394-1-tomas.alvarez-vanoli@hitachienergy.com>
- <DI3XUWVXNGP3.2TI0N0LDP7ZJ4@kernel.org>
-In-Reply-To: <DI3XUWVXNGP3.2TI0N0LDP7ZJ4@kernel.org>
-Accept-Language: en-US
+ 2026 16:03:00 +0000
+Received: from PA4PR04MB7743.eurprd04.prod.outlook.com
+ ([fe80::9a4e:252f:2fd:97b7]) by PA4PR04MB7743.eurprd04.prod.outlook.com
+ ([fe80::9a4e:252f:2fd:97b7%6]) with mapi id 15.20.9846.016; Mon, 27 Apr 2026
+ 16:03:00 +0000
+Message-ID: <a8d658e4-68b0-46d7-9b00-34155ddb5c0f@cherry.de>
+Date: Mon, 27 Apr 2026 18:02:58 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 4/4] image-fit-sig: require signatures
+To: Ludwig Nussel <ludwig.nussel@siemens.com>, u-boot@lists.denx.de
+Cc: Simon Glass <simon.glass@canonical.com>, Tom Rini <trini@konsulko.com>
+References: <20260427150409.400914-1-ludwig.nussel@siemens.com>
+ <20260427150409.400914-4-ludwig.nussel@siemens.com>
 Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-msip_labels: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=hitachienergy.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: DB9PR06MB7849:EE_|DB8PR06MB6442:EE_
-x-ms-office365-filtering-correlation-id: 5062e538-bf6a-4e53-33c2-08dea46db947
-x-he-o365-outbound: HEO365Out
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
- ARA:13230040|366016|376014|1800799024|56012099003|18002099003|22082099003|38070700021;
-x-microsoft-antispam-message-info: s3NgHU8RGeY2yZ5MLfj5rsnvdmB8dzyHe6TM7nNX+m9NRTXByDae+WGWV0yq2xJH+cUFHsPnhuVJneCq1GuSCbfs/MhRvtOHe7NHBaP4JxJ6NvIUJIXklrMGcv1Cx6EeygRTSv1YIL+53/MkPNilHvLMOuFoV8W0QuAcuBaHMuX0y4jwBwRw7CGOWSweXc0Ut/GVrwu9+QYl6oZ2LtIp4HCZ+c1mimSkqmXRNzSEsKgX+TQYmZRJFYQL27tWNsRP0IU/03XpfgyXnwMAZI6mifYiGo11ajrWW9Yv8Nmvlqv2t8OkgROpMSEQbnDAyM3YMLz21s+NPzCZh2CG3Jt3CU6TzMhECBydpY80O+KCUEMrPXXwwaZtpQA67NvAYy2eOQ3zAwElY/oica2Tkf/amvB1UGNkUo6XqLFx6+DXCEAyk1IL9jcfo8G1u1K6ljOtxt/qvQF6MFQ6inKHi4vF/NF8hArSStyjIYQM6uP61qVSqqB3X3MpJ6+BUWJUa9P70OBzeOKSkosNqh3gBsmcKMW6V5RiS3Uq818ByZMBXnAVNIuBWvaldj4wOwRpEK5zFIklYr2tj4UTZiVgI+bhi+dbWU0fQawNRZPyAme1Acv0t0PJhB3IJLYuhTc2ZxNZBJjSkdJZ44wydGk+/Ayth66j1IAqNyNbbrY305MoatIvQ6VpR2GAbeN685QrM8RUYnJyJbVgyW0joyCeGg3WZXF4QN6kTyzabbQ2cZC5fk1uMZlL8zewHGUBdQoEntyDhBi8wL96Gsu+pXAUkuCsIKw5l8QlSYRuNZZaH645Fvw=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:DB9PR06MB7849.eurprd06.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(376014)(1800799024)(56012099003)(18002099003)(22082099003)(38070700021);
- DIR:OUT; SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?iso-8859-1?Q?4qyh7mweQH4wzI2p76z+bvPHr81DN2Dt/mxBk3dPw4aNiFISFbWssPNYcF?=
- =?iso-8859-1?Q?WnEE3FER2bFumJZaFKE5cTwRUrSMlWIVkJX3VIaFd7XOIHWjvcteuEvBwE?=
- =?iso-8859-1?Q?8kRgfI+HUxleiON4vJQT5mL+mJq+smLExspG1i2yeaA9k3uGova6UfXvwx?=
- =?iso-8859-1?Q?adNuX4qKZwRxzYqt0HZ4SNqPfpuZa9SbhgTzYYiOQA2mDao8HfHiXxy+Em?=
- =?iso-8859-1?Q?6Yto82vsausv9VJwbRQu9yIeoqiZkds1HGTLTIJUJAiAYO5Ma2HImpUABP?=
- =?iso-8859-1?Q?sMg9ghLWhgEw/NnbUwhEWCHvu909hIe7EBpL/jTOvIdBEqUSip4i7hy0pG?=
- =?iso-8859-1?Q?KWz0ydJbe/SDOunde5yg2UPI7P1zYRK4Uaw25HzUUiX+INMeE28ZxWDyDg?=
- =?iso-8859-1?Q?l9VPWZgFpM0d4buZvtAP+q728VI6b3oz00WMD9Yd/b0vhFIhIdBatfdygo?=
- =?iso-8859-1?Q?tMSxndmaxo27V5eAmNEpHuQevb3W1LapRXEV0EXycbZ5zWQDMFamaHZYRN?=
- =?iso-8859-1?Q?6NaCksgFpm5SphjYtiHSCQUCeLSpKCwj0kKuPW51NczL4tJm9QtMNZlyV9?=
- =?iso-8859-1?Q?S9ba37lD6QF2mQsNadNrJJq6Dr7kD39GYW5RrXp1A7aFUxGSRjF2d+P220?=
- =?iso-8859-1?Q?v+E58a5xHDGA6YHbH50gYVf/W4K4DV0M+w6FM/xQDTtI8Q4qpQVrkv56VW?=
- =?iso-8859-1?Q?JGiDMRrM9ClmmWmUoariD0bQHtNP0ZwcltXHgdJXo7ipicqZBACVJ9slod?=
- =?iso-8859-1?Q?ThjZyL+BTOAddTmFopLvcwgjcmVL+OUzmS7KPg+5aS9LAEiuj4SnWAeSQm?=
- =?iso-8859-1?Q?qT2kWF1iy2qCJWxdhDoVEDnnWnxXxG/L3g6xtIkDjMcZyhDX9V4TcwK+m5?=
- =?iso-8859-1?Q?jpDANiAVn+9CTjdEbn8cBf4ktmtmBPzb02h7j0f5wF6uM+GMERFRy4G4ma?=
- =?iso-8859-1?Q?EdfOTIZ63OGcuWv1t5MFB7LoXpKLkA5jNVKbQJ4dIDl91BICG3juyczvt/?=
- =?iso-8859-1?Q?F+tKaVN8IIrGQH1rqfQTg4IvPWK/ebPLZqR7dB4w8AsdsYxBlPETO1L18t?=
- =?iso-8859-1?Q?VooQBvk7X7PVm30EL6Imv5o+XagguHFhFL1AhGes/8NFWlEeuZZD/v9zUY?=
- =?iso-8859-1?Q?zLqVtQzCtoP1MH4nnJwgMFqzCJLcltZtPt/GW3s895PtR+hh/k6NDGZ08b?=
- =?iso-8859-1?Q?U7s435+ha1nZHP95u7fXRTMJGCKh7d6J1AI9jc5MQhpNO3NAFhwivzCn86?=
- =?iso-8859-1?Q?uI3DqGajHY73n/fVbusmN24r0ExdTKOm9jcZAk5Mwru3unHo5HiVoOPs+z?=
- =?iso-8859-1?Q?4k5gF6E2LDb6QC7uZGg4IOKC3wELmiWr2EcwsYDSl2/bDLuD0VuxQrBt5E?=
- =?iso-8859-1?Q?b8BBQElsSiYKRlHwn1lAyZ9uaw6QWGnRTMXpSR+EIGWXNX/2YwCIfPUgtg?=
- =?iso-8859-1?Q?nmOb0B2vIPt6lnrCBmWTe31m/jtHBn0j5xnKBim6G9BMlMjs1kjztw23tt?=
- =?iso-8859-1?Q?YcF5MRqYx/OxKHtyHunKFNNTa/8+d/ltC6EHwh90Vra54dXt6zw/UQJ+VK?=
- =?iso-8859-1?Q?Q6s+9HVBZPbiENc109N04tcbLe1leIXdbmTgsR4+c3y/n9Pum17Mv5Gauh?=
- =?iso-8859-1?Q?Y7Ig/8klyKVFq9kS6KDYeGgLq4+QNLFATPT9KDP/NbTUHyF/eWj1cRJ+u8?=
- =?iso-8859-1?Q?TljVv7A3w2y3+1yKdsWIJkr5uVVaF3c0I9wnL9Jw4DNpOrGelyU2DuLgTR?=
- =?iso-8859-1?Q?QhObXpwW0tJCzFDtMx5HmRj5lXvw1UOa3gVylzeO7zf2A+Oe0f6gV34oZi?=
- =?iso-8859-1?Q?K2hoz7VtX+0j+QJ+IM0YMSfr0AG7afqTaLt1r3qq/lyYr6QrNuQv?=
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <20260427150409.400914-4-ludwig.nussel@siemens.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: VI1PR0102CA0084.eurprd01.prod.exchangelabs.com
+ (2603:10a6:803:15::25) To PA4PR04MB7743.eurprd04.prod.outlook.com
+ (2603:10a6:102:b8::20)
 MIME-Version: 1.0
-X-OriginatorOrg: hitachienergy.com
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PA4PR04MB7743:EE_|AS8PR04MB8897:EE_
+X-MS-Office365-Filtering-Correlation-Id: b5f06a95-a927-41a0-3496-08dea4767401
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|366016|1800799024|10070799003|376014|56012099003|18002099003|22082099003;
+X-Microsoft-Antispam-Message-Info: 4I5VX32ItIgAAlDL4PF8FylI52gW8IHEgw/bwaiIqjg9ctXXw4wilXPxEEZlLTXQ/CMr5mZF5o9GLEICs5kfMXGBpTnFUsfAlraS/c5YeHRK/ddyVDiXapgBQ5G9j8tMY4IKJzWRLxo2c0HS9ve44iS7YgpOO3duIwMc1l4TZQFtOY0ewrH92Uk7pX5PwG9Xup5mOpmTd/KEQKLi+aKCpM+Q6PrquurcR2tSfAuj1nsi7iJh6iEthopOqOFvgtHlNuux834WmZQYkzYZN3Ol/KA75314LdfR5+A+tZulMGWG5vGf2JFmImg2fLfNDUX+xFao6BK+BTTE7KzszObxs9flxGEC0P1TB5YnMnvHZZRUDmIO8ZcOp9ZaA7ZmBmmDsk8B7YEY5S8Ep5BKg7QWI4/m95XSFl1dOfcZqyaYc98Zz4LicHQ4k3MZuug/4xLbOxHJ1DyNHT40w9yXGIiy20vrMPIa8/Sdopu4YD++oxvQxayZDUlSxIvKxHTIy6I04P1DT7gxQNGVRk3QuFOUGqYbVIxRpYiWzq2tAJ1Yh7FQzgK2ej6aHrQ5Iz9XY6b6d6Unfpm4T1gkDKG0BP+6jyR+LZh812578DVP0rTVDN9M4NBJ8cXHW6R1OGfvxSYynWCxRFQlrN1yGXyUo9/sascLp4qSKL5dFCvBPE/l6k4/X/JQ8t5tU5ifgBift4vtGyhVNH8OM480y9lK89N/7r/OpF5M/oyKt3/ekWmr/pA=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PA4PR04MB7743.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(1800799024)(10070799003)(376014)(56012099003)(18002099003)(22082099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?QXUvTTc2RXpnMWVlVUFkZ3hUcWtGWWFsYUJKcC9DVHcrYWFLc2tIVFI0U3Ba?=
+ =?utf-8?B?UHhYVUd5bHNPNHRBT1J1Nk1Pc3RyZlFrOENHTW5FSXpGRUpLVnZNZkd5dEVx?=
+ =?utf-8?B?VmREL2NBYzVqcUVsUHNaQ3lwaVZUK3U5eUFUN0Fkc3FZSEZQWXo5TnJtd25m?=
+ =?utf-8?B?TlVleDJzMnF3aWU3Z2Z2WmxDN24vcUk3N241UXhocFNwZ3QyZ2dlVzNUaEhj?=
+ =?utf-8?B?eTJjUDUzU2ZuVTh4c3BrTVQ3aFJ4cnlWTGpDK3dLNDYrTSt3ZllOY0dyVGlR?=
+ =?utf-8?B?NG1IWGxZcnJncXZpWDdJRDB6V0hyWFdKSVlRVXhMZW52clgvdGJzMUJlaUI3?=
+ =?utf-8?B?VHdueUtEN1ptWnJlNytoZkhFSkJHdGdteGdQUWk3VlVQeFRKU3ZZVnpvcDls?=
+ =?utf-8?B?aE8reUpFVkY2ZWVhLzA2YUZpUktuL1d3MGozeDFHaURHZEszQ1hSbW94enpM?=
+ =?utf-8?B?Yk55ZGI0WXZWb0xvVFRRRWFGMFNXUGI4SHRVL3FJRGpqNk50d3pCZ0FyUlFv?=
+ =?utf-8?B?NGRsVVYxUFo1S2Z2UFd6MjhISkVkUlRsVkNmTktHRHBHSXRldXQzUW8raHJq?=
+ =?utf-8?B?czRhVXJZTG5vb0E0OGdjSXo1M3BMTWhSbTIyekFqbEl4ZStlNVp4bWZvMjVB?=
+ =?utf-8?B?U2ovdHMxRkl0RVMwNXFxU2twMUZ1Zy9jeGhiRHBJVnNERFJwbmF4bGRuZVA0?=
+ =?utf-8?B?UEtyVlNPZDVESWorVGxrS0VYaE8xaG9lQ2h6bEZQTk4xbEMzUjdvVityM0Jx?=
+ =?utf-8?B?RUREUEN6SVdaRythNE51RGtrdUtxR3FabjN6UHhTMytwUUt4Ty9EUHpaeENo?=
+ =?utf-8?B?VWR2cStiV3JkaUd0Tmg2NjFONXF2OEVuYUlzOFZ6VVRiaDFSZ04xb0M0bVor?=
+ =?utf-8?B?enltS1I0VjR2MlA1VU5kTnRFd1phRHVJUHZvR2p6MzRIRjZNQ1ZzbUZZQ3FO?=
+ =?utf-8?B?RE1KSkJQbHdTa01SNmJXd09NNEFRL0dHZXFoazNEaFB3QVllUTdCZ3lsclJ2?=
+ =?utf-8?B?SWZKM3FwRXo2QTNtbE1iTGhzZ1VyNmxKTFI4N3IvTU1XK0tkL0Q0a3ZiR0tG?=
+ =?utf-8?B?NUNERi9obHJHU0dYbjFqenUzTVlPSVRmYnNoVkVkR21jbmRrZk83aTNsRytm?=
+ =?utf-8?B?aFNLN1Z1UjEzclZjT2hwcGJNOHk1SU0wUERwN3Fwck5tcFNWMFhOa3Ixcmd2?=
+ =?utf-8?B?UmxwTXcwZUpJMVB3dWxNVzIzQllXQ251c2RlOVhSamZjUkNsT0xOYlRHM1Jk?=
+ =?utf-8?B?S05KNFo5YStKOUdRYkgrV1dUT2RqcUxGbHVWTTA1YytwUkV4M283ZWo5aCtl?=
+ =?utf-8?B?R2dnb3pYZUJzRy9EbVd3MTZleHllWUU1dks0OThTK1ViOUl1cTdBclhBVTg3?=
+ =?utf-8?B?NDZadmJ4Ni83QUxIaURoZVBscmg1WFVVOC9TMXlTaGJmNmkyQ2laZUdKa2ZP?=
+ =?utf-8?B?Ujc0M3RWV1FBbE9Icnk2TFN2MG8zQUdqSXZuZUUyZGxjVGlSbFJWbjI2bUha?=
+ =?utf-8?B?Nlhyc3A3RnNadEpJS2wwVTczeDAzZXhsSldpSldoc2hXQ0ZHdjZIc2FaUFVV?=
+ =?utf-8?B?MTN5OHhPVVBHUUVwMjYvZmVKZ2pKRXRFWDU1S1Nycm4wYUNicTFsODFCRysw?=
+ =?utf-8?B?RHVmb3JzMkhraDJ4ekRMTWpOQVdVVm4xeUZzdWUwTE1RcHR1am0xdnhBeVpy?=
+ =?utf-8?B?cHduT0EwQmRad2hYd2FqcHVRQnpXNms4ajdyWmYyLzIrMGhCSTA5ZEdhdVF6?=
+ =?utf-8?B?MVdLWTZUZkovRjdRWG83bXdIR3dSOWJxcDl6cXNscHZENVVuekV0T2VqUDM3?=
+ =?utf-8?B?NlpVcXRJTnZ4V2JVcGlJV1JuNlFNNzF1dlhjT0xEZ2h2MDBmR2ZodkZXcGhT?=
+ =?utf-8?B?QW5kU0hkZHg5MTNmVlp1YkxmQmpoWjhkMGNjVks2ZEtKREJKR2ZKWkxiazVF?=
+ =?utf-8?B?UFBzU1JxRktwTUJiM1lmNTF3SHZSVFlvU0hoSDJTZFlYMHVCMjczQ3M1ZnN3?=
+ =?utf-8?B?VGpBdFM3bnFKZFZoRkEyemhDbzkxMGd4UFQ1TEhPYXhIWTNKUUZZYUFibUY2?=
+ =?utf-8?B?KzlkcjVYZlRjejR1aUtkQlFaQjBzZ0R3NVFIeXN2OHBMSGJwejBhYS9nMGMz?=
+ =?utf-8?B?ZithSW5uZmJKY3dOLytETjBDa0NRcnkzRk5DYXUzSDdEcE5hS0RMeFFnTTFJ?=
+ =?utf-8?B?eDA0RG9xNHc5M09tSVNvRjJ3TXYxQi9Rbm40Yk44MXNVNjFDREcxSmZkRG1o?=
+ =?utf-8?B?YkdHTGhyTzZNR1RmZVVTTHM3d29rM3VYRzFBOFN2bUQ2YndQMnRSdEIxWjFY?=
+ =?utf-8?B?WUpjcU4yaCt2eHRFOWVXUS81cGZTaGtkK0J2MkZDd0h6ZWhqaithbnltY0p4?=
+ =?utf-8?Q?JgMT9aG5R4mdW5U2szWjSs0U8cPVwLUw3koPY?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: b5f06a95-a927-41a0-3496-08dea4767401
+X-MS-Exchange-CrossTenant-AuthSource: PA4PR04MB7743.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: DB9PR06MB7849.eurprd06.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5062e538-bf6a-4e53-33c2-08dea46db947
-X-MS-Exchange-CrossTenant-originalarrivaltime: 27 Apr 2026 15:00:29.9467 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 7831e6d9-dc6c-4cd1-9ec6-1dc2b4133195
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: ZdZG6B2MPI/7vncUVSQck3KbtgBS7aV+2Bzn90kcTs9qVbCIuo+wcFH52JnVwFL4Nwf2YiOEQRMx1aiQqO/JJptZyiPcTMuGmbBkPgDKyT4qBR0JY5j9U3PfGyNl+XWH
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB8PR06MB6442
-X-Mailman-Approved-At: Mon, 27 Apr 2026 18:01:11 +0200
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Apr 2026 16:03:00.0421 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: fMtqRxq9YQv6RiFYAKO8oGIiwESLRaxpca4+30m/EkmmRa/IJtA7DqRRfr69THNOTdlYR/siblPCyeNafu68qW+1xnUOGqzz4O6sQpk5pkI=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR04MB8897
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -146,147 +148,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi=0A=
-=0A=
->What kind of issues do you see? And how does your patch resolves=0A=
->this? I guess we can assume the code was working correctly once.=0A=
-=0A=
-The problem was that when calling spi_xfer like so:=0A=
-=0A=
-`spi_xfer(spi_slv, bitlen, &dout, &din, SPI_XFER_ONCE);`=0A=
-=0A=
-To read a read only part of chip with known values, I was getting garbage.=
-=0A=
-=0A=
-Digging deeper into the driver and adding print statements I was able to=0A=
-determine that:=0A=
-=0A=
-- fsl_espi_rx was getting the expected data and putting it in the correct=
-=0A=
-address (local din)=0A=
-=0A=
-- The memcpy later in the code was taking data from a different address=0A=
-(buffer + 2 * cmd_len) and putting it in the user pointer (the &din from my=
-=0A=
-call)=0A=
-=0A=
->Honestly, I don't understand that code either. ...=0A=
-=0A=
-The switch at the start of the function determines the buffer and offset se=
-tup.=0A=
-To be fair I only focused on my issue, SPI_XFER_ONCE which is the same as=
-=0A=
-SPI_XFER_BEGIN | SPI_XFER_END, and in a small transaction.=0A=
-=0A=
-Inside the ONCE case, the driver allocates a buffer of double the transacti=
-on,=0A=
-because it puts the tx data in the first half, and then will write the rx d=
-ata=0A=
-in the second half.=0A=
-=0A=
-The case of only "SPI_XFER_END" is a bit more "cryptic" to put it nicely, a=
-nd I=0A=
-did not properly debug it if I am being honest.=0A=
-=0A=
-However, for my case of the ONCE transfer, if you look at the start of the =
-while=0A=
-loop:=0A=
-=0A=
-```=0A=
-	while (num_chunks--) {=0A=
-		if (data_in)=0A=
-			din =3D buffer + rx_offset;=0A=
-```=0A=
-=0A=
-This means that if the user passed a pointer to get the read data back, the=
-n=0A=
-we set a local "din" to the buffer we allocated at the start plus rx_offset=
-.=0A=
-In the "ONCE" case, this is the second half of the buffer. In the END case,=
- this=0A=
-"cmd_len".=0A=
-=0A=
-This din pointer is what is passed to "fsl_espi_rx", where I had corroborat=
-ed=0A=
-that the chip data read was the expected.=0A=
-=0A=
-When we get to later in the while loop, there's this:=0A=
-=0A=
-```=0A=
-		if (data_in) {=0A=
-			memcpy(data_in, buffer + 2 * cmd_len, tran_len);=0A=
-			if (*buffer =3D=3D 0x0b) {=0A=
-				data_in +=3D tran_len;=0A=
-				data_len -=3D tran_len;=0A=
-				*(int *)buffer +=3D tran_len;=0A=
-			}=0A=
-		}=0A=
-```=0A=
-=0A=
-where I made my change, in the memcpy source pointer. This is the code in c=
-harge=0A=
-of copying the data back to the caller/user.=0A=
-=0A=
-As you can see, for the ONCE case, cmd_len is 0, so it is taking the data a=
-t the=0A=
-start of buffer (my tx data, not the rx data). Hopefully the bug I was=0A=
-experiencing is clearer with this explanation.=0A=
-=0A=
-As I mentally traced this code I realized of a better fix, hopefully you ca=
-n=0A=
-review this and/or test in on your board too.=0A=
-=0A=
-Given that for the ONCE transfer cmd_len is 0, what could be changed is als=
-o:=0A=
-=0A=
-diff --git a/drivers/spi/fsl_espi.c b/drivers/spi/fsl_espi.c=0A=
-index b1586d12912..ef2ebd5840b 100644=0A=
---- a/drivers/spi/fsl_espi.c=0A=
-+++ b/drivers/spi/fsl_espi.c=0A=
-@@ -287,13 +287,13 @@ int spi_xfer(struct spi_slave *slave, unsigned int bi=
-tlen, const void *data_out,=0A=
-                break;=0A=
-        case SPI_XFER_BEGIN | SPI_XFER_END:=0A=
-                len =3D data_len;=0A=
--               buffer =3D (unsigned char *)malloc(len * 2);=0A=
-+               buffer =3D (unsigned char *)malloc(len);=0A=
-                if (!buffer) {=0A=
-                        debug("SF: Failed to malloc memory.\n");=0A=
-                        return 1;=0A=
-                }=0A=
-                memcpy(buffer, data_out, len);=0A=
--               rx_offset =3D len;=0A=
-+               rx_offset =3D 0;=0A=
-                cmd_len =3D 0;=0A=
-                break;=0A=
-        }=0A=
-=0A=
-This theoretically should work and should also not affect the "END" case.=
-=0A=
-=0A=
-The two things that support this are that:=0A=
-=0A=
-- The loop always writes out first, so the rx data can safely overwrite the=
- tx=0A=
-- cmd_len is set to 0 for the ONCE case, so data_in memcpy would take the r=
-x=0A=
-data from the right rx_offset (0)=0A=
-=0A=
-Hopefully this explanation and my proposed alternative fix are helpful, I'm=
- glad=0A=
-someone else was able to test this, I had cc'ed someone from nxp hoping the=
-y=0A=
-could shine some light on the code but their email does not exist anymore.=
-=0A=
-=0A=
-It would be good to know what flags the flash probe is passing to the drive=
-r,=0A=
-to know if the problem actualyl arises from the switch statement at the sta=
-rt=0A=
-or handling multiple chunks/blks. I can say for certain that for a single=
-=0A=
-chunk and signle block, the ONCE transfer was not working correctly for me.=
-=0A=
-=0A=
-Best Regards,=0A=
-Tomas=
+Hi Ludwig,
+
+On 4/27/26 5:03 PM, Ludwig Nussel wrote:
+> Signature nodes in the device tree are mandatory if u-boot is compiled
+> with signature verification. Allowing signature verification to pass
+
+First, it's not enforced at build time and cannot, as it depends on the 
+binman FDT node to be properly configured. But we cannot do that, 
+because we don't know the user setup.
+
+You can (mis)configure U-Boot to do signature verification but forget to 
+add the signature to the SPL/proper DTB. Then it'll do nothing of 
+course. To be fair, I got bit by that very mistake recently so maybe 
+there's something to improve there indeed.
+
+> if those nodes are missing would leave the system fail open.
+> 
+
+Yeah but why would they be missing in the first place? It's not like 
+this is something you can modify if part of a secure boot. The DTB of 
+stage 1 is used to verify FIT from stage 2. You need to trust DTB of 
+stage 1 (by verifying it with stage 0, etc.) otherwise I can also simply 
+just change the public key in there.
+
+Also, this isn't actually handling fit image signature, only conf. Yes, 
+image signature is mostly security theater but at least we would have 
+consistent behavior here.
+
+We very much need additional tests as well.
+
+Cheers,
+Quentin
