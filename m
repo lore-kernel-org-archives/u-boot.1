@@ -4,58 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB625FF8860
-	for <u-boot@archiver.kernel.org>; Mon, 27 Apr 2026 15:08:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07973FF8868
+	for <u-boot@archiver.kernel.org>; Mon, 27 Apr 2026 15:42:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 319328407E;
-	Mon, 27 Apr 2026 17:08:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=free.fr
+	by phobos.denx.de (Postfix) with ESMTP id 10D658407E;
+	Mon, 27 Apr 2026 17:42:15 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=free.fr header.i=@free.fr header.b="rsq/i4+M";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Ewti25pS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5FE5483693; Mon, 27 Apr 2026 17:08:44 +0200 (CEST)
-Received: from smtp6-g21.free.fr (smtp6-g21.free.fr [IPv6:2a01:e0c:1:1599::15])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id E63BD83AA9; Mon, 27 Apr 2026 17:42:13 +0200 (CEST)
+Received: from mail-oi1-x236.google.com (mail-oi1-x236.google.com
+ [IPv6:2607:f8b0:4864:20::236])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6266583693
- for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 17:08:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CA7B08407D
+ for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 17:42:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=free.fr
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=vjardin@free.fr
-Received: from localhost.localdomain (unknown
- [IPv6:2a01:e0a:98a:56a0:e0ee:b353:5249:f120])
- (Authenticated sender: vjardin@free.fr)
- by smtp6-g21.free.fr (Postfix) with ESMTPSA id 4E4F378034D;
- Mon, 27 Apr 2026 17:08:28 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=free.fr;
- s=smtp-20201208; t=1777302521;
- bh=zUghVHmGktXdZGFAMQ56Plg4V5Ef3hnnivwQzd1ULIc=;
- h=From:To:Cc:Subject:Date:From;
- b=rsq/i4+MSsLZzreh6ygeBbsv1Ht5Em0WnAtowOcZQzK0msJbsw/h8f04UIyz1A0ux
- /XzfnUG6zrTZYXzb6jKdo98qQFpHJY7RBeHiI517Yn4+2jl5t6fa92f0LvX8gTcyN4
- YIb7rXdwnMqsj64gTB+3MfV54nxNsL/TWZiWnAokZlz64qS3ehmP/nyOqSOJKdKZwl
- XvjicN3XoYyq7Ob2G/IrrbC4N0Co2UAf44QjEqTglaJKrSl0AuP2YO4K3L1s0OkhPC
- E1YwaoOn8/qOVXQqlTBLApmnE5Odx/7oMGaLPmsOBGdri9uofQzvNHS3IRyrFLUJ6r
- ujyAVbx0urRMw==
-From: Vincent Jardin <vjardin@free.fr>
-To: u-boot@lists.denx.de
-Cc: Vignesh R <vigneshr@ti.com>,
- Takahiro Kuwano <takahiro.kuwano@infineon.com>,
- Tom Rini <trini@konsulko.com>, Tudor Ambarus <tudor.ambarus@linaro.org>,
- Ssunk <ssunkkan@gmail.com>, Jeffrey Yu <jeyu@issi.com>,
- Flaviu Nistor <flaviu.nistor@gmail.com>,
- Chen Huei Lok <chen.huei.lok@altera.com>,
- Christoph Reiter <christoph.reiter@evk.biz>,
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
- Shiji Yang <yangshiji66@outlook.com>, David Lechner <dlechner@baylibre.com>
-Subject: [PATCH] mtd: spi-nor: Add gd55lb02gf chips
-Date: Mon, 27 Apr 2026 17:08:07 +0200
-Message-ID: <20260427150808.17319-1-vjardin@free.fr>
-X-Mailer: git-send-email 2.50.1
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x236.google.com with SMTP id
+ 5614622812f47-479d68a9062so4426988b6e.1
+ for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 08:42:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1777304530; x=1777909330; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=2W+/rCbHjWgeDfmOLnEAqkCjwrfBbMfS5HTd07ZBIuw=;
+ b=Ewti25pS3XXQlSRKPwAa74jQqS6qwSTaFLkzqplvJp/S/QfHqPJUJi0ktrKEc4L6N0
+ Ay48kPYqT3ItyeCJapbDMTI4k+wVBdQs/1eNkZYgLiM4UMPC/T8SdtqSCMFWRRGr1s4y
+ HZLGkRNVsQk/u2ukh0VQaUFYfV3QK0lMGfIO8=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1777304530; x=1777909330;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=2W+/rCbHjWgeDfmOLnEAqkCjwrfBbMfS5HTd07ZBIuw=;
+ b=D3b3G2woOSxWHKlW7+d1QO5fC1RIaWwhCeOIVBQ70ons4HbYi34qCzIFROQNoSkOSX
+ 78T8j9nha8I03+n8OpM7o3Z4tJ48oJ+u33zSA87PXJbOuHtYKDng55PkzkKTeMKIioVL
+ 85y6xKiejt61/UnhpocmqD/pB2WYDqAX3pZtBOIWUx+3X0O48C9tiZGYr/REU7FVzhQ0
+ YZgoD8VY2xWJHG7S72+KLDP0zGo0XSIRbI8mjLiyzrg6MMhAL8FRBkmG/w2G9o5To4DB
+ l4XD6vUQC+KkqtGYZM8qgmJwiCY2QpKWNpPH4MlaS/hGIy92y11HMAIlp43UVRV0bfnT
+ tIFA==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ+r+0Pfsu7u/dUiHzGDPMvdgXWeoi8dXq0kZ/clASsI0eKaheTC3lBacy3Qc6rAm+Bodq5Z3Xw=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy4Jl3n7YN8oGvvkxjOJSrRd/CP3NvObrfDsXf2mtrrR3zQeOih
+ WVGVjBSEFLwzDDGbUVju/2eW8HjWXMBkJVTFsAGRAFlIJJZgTVUwviTNMGcklP0pxbs=
+X-Gm-Gg: AeBDiett/U0P09m/J/J+1NI9SlnqyHjEaoV4wpUs1LpQ6IxIB3jWO7uGKxXmLWcijZd
+ XJeNTLHpXSbjKK8gmww/vmklQHGzv2D8HJBv2Bc1RqnszttUuAGv8al5TuhhbJ/dGrVavnzYDkd
+ c5Jbzq9SxbjIwFfuCmq5jPHIneAZm+TamZhaqeKJgW2l5UUuIYX8o4kcoKIk5ar80iFyeh1phfC
+ yYzRiF4YTeO8qiNA1LbMvWgXYuoSDAEfrAb/C5NAXgsZfcau7NXldWeTR8ZovkHmj4QR4u2jkan
+ UuW/F5kC15h4AZ1MRc0q43PCk/Mlk1HmznglREIcy4DuT4HcqkTmIRGfWJiWEflXUbiMkeu9DPd
+ AO+8fZ68qqjauJhvd8Gl9xjLwPbsapeAP2sPiLxpV4jsvwBdex267gr2JttQKVvyjP2fU+RwSud
+ XJa2rkSwR7Zh5zCxKeBHzSoyW3S5/dm9xWJ+xsXsuVj5uKIXuZkeINb1D5YXN2w5vx2pVMaGD8F
+ FTXgowH3nOO3FqTFk9QqdaWqlJvhf7/HVYxIfBKoIrFTYLY495uDgW5tqvN
+X-Received: by 2002:a05:6808:1791:b0:47b:beb4:6c82 with SMTP id
+ 5614622812f47-47bbeb4ad6fmr10844804b6e.16.1777304530569; 
+ Mon, 27 Apr 2026 08:42:10 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-189-203-106-235.totalplay.net.
+ [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-47c1c8cd7c2sm824896b6e.2.2026.04.27.08.42.09
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 27 Apr 2026 08:42:10 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: Neil Armstrong <neil.armstrong@linaro.org>
+Cc: u-boot-amlogic@groups.io, u-boot@lists.denx.de
+In-Reply-To: <41f5a6a9-6a0b-4df4-abd3-aee0a7297ba6@linaro.org>
+References: <41f5a6a9-6a0b-4df4-abd3-aee0a7297ba6@linaro.org>
+Subject: Re: [GIT PULL] Please pull u-boot-amlogic-next-20260427
+Message-Id: <177730452980.3468459.13288390272488234397.b4-ty@konsulko.com>
+Date: Mon, 27 Apr 2026 09:42:09 -0600
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,31 +98,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Same die as gd55lb02g but a distinct JEDEC ID (memtype byte
-0x60 vs 0x67), so the existing entry does not match.
+On Mon, 27 Apr 2026 09:53:54 +0200, Neil Armstrong wrote:
 
-Quad-read flag left disabled until QE bring-up is sorted; the
-chip ships with QE = 0 and lighting it requires a controller
-fixup that is not yet wired.
+> Here's a short set of Amlogic changes, first fixing MMC init when switched
+> to Linux 7.0 DT, and adding support for EFI capsule on disk on Libre Computer
+> boards.
+> 
+> Thanks,
+> Neil
+> 
+> The following changes since commit 052988aa29bfd506d7ce207fbb3f5374a5dbecbb:
+> 
+> [...]
 
-Signed-off-by: Vincent Jardin <vjardin@free.fr>
----
- drivers/mtd/spi/spi-nor-ids.c | 2 ++
- 1 file changed, 2 insertions(+)
+Merged into u-boot/master, thanks!
 
-diff --git a/drivers/mtd/spi/spi-nor-ids.c b/drivers/mtd/spi/spi-nor-ids.c
-index c0fa98424aa..a29bc98d027 100644
---- a/drivers/mtd/spi/spi-nor-ids.c
-+++ b/drivers/mtd/spi/spi-nor-ids.c
-@@ -191,6 +191,8 @@ const struct flash_info spi_nor_ids[] = {
- 	SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_4B_OPCODES)},
- 	{INFO("gd55lb02g", 0xc8671C, 0, 64 * 1024, 4096,	SECT_4K |
- 	SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_4B_OPCODES)},
-+	{INFO("gd55lb02gf", 0xc8601C, 0, 64 * 1024, 4096,	SECT_4K |
-+	/* SPI_NOR_QUAD_READ | */ SPI_NOR_HAS_LOCK | SPI_NOR_4B_OPCODES)},
- 	{INFO("gd25lf80", 0xc86314, 0, 64 * 1024, 16,	SECT_4K |
- 	SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK)},
- 	{INFO("gd25lf16", 0xc86315, 0, 64 * 1024, 32,	SECT_4K |
 -- 
-2.50.1 (Apple Git-155)
+Tom
+
 
