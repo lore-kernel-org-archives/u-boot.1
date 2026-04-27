@@ -4,107 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76266FF8860
-	for <u-boot@archiver.kernel.org>; Mon, 27 Apr 2026 06:21:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E977DFF8865
+	for <u-boot@archiver.kernel.org>; Mon, 27 Apr 2026 06:59:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A1BF180433;
-	Mon, 27 Apr 2026 08:21:34 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 27FCD80433;
+	Mon, 27 Apr 2026 08:59:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="JQmdZ6mM";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="iHEMIAgZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1C22183693; Mon, 27 Apr 2026 08:21:33 +0200 (CEST)
-Received: from mail-yx1-xb135.google.com (mail-yx1-xb135.google.com
- [IPv6:2607:f8b0:4864:20::b135])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 3545383693; Mon, 27 Apr 2026 08:59:55 +0200 (CEST)
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2FCD080077
- for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 08:21:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AE9DA80077
+ for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 08:59:52 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yx1-xb135.google.com with SMTP id
- 956f58d0204a3-656d749109cso1122915d50.3
- for <u-boot@lists.denx.de>; Sun, 26 Apr 2026 23:21:28 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1777270888; cv=none;
- d=google.com; s=arc-20240605;
- b=JDL2UxB884aTPRHnw18qLAKFs7VICSJdkxs8TYw8Nblq/p5CtwAPRUdb3tt4huU6/w
- 9c/I1A5VK7DMd0nn3bvbUB6BLVrq4VGsgJONGicdSwDR0PAbgZQxN50i+O/ul3m1RDrS
- 9DGa5QzDgJ4L5XqRdgMUTeoHBqtVT3txyYktN+FGfcn6eyZfQoXNvgqk2LvBDiyO8Myp
- mocjNQ7hTWux1uw/vgYfbXoapd5jfU5G0MZjRpsFvpjGUeDFiNQiPuO56+XxayfiAYep
- AMMUnrJYI434MeP5E5c/Ru2Y9EV2vJT1YvRFrSnf/4OA0C4+TyrJ/GRC+xJ7MJEv33D4
- fIGQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=WBEy0yibVSgfkxKZVuaLnGBDMKFaSP3r4PBqiOv/S0s=;
- fh=K6enBat9UrJALC3ipcbY3vo5VFPEQmwc5buMiUNLkMQ=;
- b=ZxJ7ykFbD4O701mhlEJUdhvzwZvnuO9VqLn5N8Wkah3MTxAgaFEacDIZSUMFWcQbSE
- YvZHtGTu/Glfab571oxjPP5aquhgIqJT/DtC9MzQHR0Zuev+JEi0rP9HFdDGI7Cw9xUo
- k1qAeispx9Dh0QT6JBMtTr4lYm/WzMEFDJfDWFOe7fj5GjtDZNdrjmMKyQlPWG8U22Yx
- ElFmMLtqBQZqbj93tWyzuY2kKXU/gibntOpKTkwB0aFuPlJQXPOIsEPdqoIE5gy123rS
- yeCrESv/zmgi0hftMt55YgR9OO5KD9T3nannjWKCpieLHjh5MvAdYvDjfRCWKGIVunOp
- rhlg==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1777270888; x=1777875688; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=WBEy0yibVSgfkxKZVuaLnGBDMKFaSP3r4PBqiOv/S0s=;
- b=JQmdZ6mMCp6t/qq9SwMHKi7CM+tbvLJRCGRl6WtBQBIZ8lTdZdan2nt00h8XCA5GP/
- I3Hk0oOvqBKZO+qp3loMS/4FnXarDUqUmdawWFZQCwyD/Z4oNbFj61Tn301F6ulwTjVe
- ZIY/4g64PEyy1WiEi+JHpQOUix9NMiZiVIEt560/zdkgQQ4M7vASWLRXPDrnJFCcSe9I
- +tDfpQKb6gfiMb+Pkcn11nBS+2OD9IP12BMNBz4R5jLyfOAB2QNL5g5IFVRE3wslfKnW
- 4mpEXR+TYDjfSucZd+q/uShrfCEMDb7Gqu98wjqPjkpEDRcwd7K927gezK8th2ENPDZY
- qnNg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777270888; x=1777875688;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=WBEy0yibVSgfkxKZVuaLnGBDMKFaSP3r4PBqiOv/S0s=;
- b=OSyIiS7+CgtEuHc/i4oQ39cnsVdh+96JV1JhMqNvQTHMLE8CXGNV7jYZoDcKBTCkCW
- cQVePKN6IWP1tQiONooJ9XiCtzBlTlwDq7SeQlyplkXV5Fl4AwZIHcSrgV73Lj4SEVzx
- VYIfU5VC2FPuhi87fUM7arfvR+irxdelun9zUG6x2DLXjj08mepeDnp/QseBiw2cFMqS
- w5ciImW7WxxI22LJ5vDZGnxrkWPCRZZ8ILaN6lZzN2rqS6y+Sf55h9udkpsE1nSHXlwB
- V1Wf+kxTakXDBeRuJdp66s3QY1WSuG9e3hWahO2jqzpe1JKMnHGUAHkT0oeiKdwazTzy
- 4E2Q==
-X-Forwarded-Encrypted: i=1;
- AFNElJ98ET0ZVqH7DHOwWYnU86iGy5wwrVtGfy+28Hr3r5VBnMWuFgtzelaPAipeEl4D6eZM30CLCdo=@lists.denx.de
-X-Gm-Message-State: AOJu0YxHxDnO+H0GQAM0Z/d++bW/jHZd5IJ0+OP7zwFwOBXSirtnVpga
- 5K/GKupqSNqUwWQU/PdwRz3xdsvluu8ipwpy5t7P2GbR0+CuEcXjBpxi7qPVz1IOWwr0YtxJfAJ
- y9ZxPodF+n15NwidB6+8jQz8o0OcJXTwfrxLrDS1bcQ==
-X-Gm-Gg: AeBDiesVothSFvCOV2+WgVfyXKwQGHs1HZzn+kROknd2Sm5uxZSq9nJLALim+BQLwG+
- WYWNwWLtQP5DEMI5+4fD288Q+EQ3QCSvd9rnNoxyaW8M1FUgiqdKdhhV+C4AANOUKdRC4sp0sDO
- C3mWiBfuh/rqy6jkdDVrkwxZ2qpxHi8in6mhBCDIUvhWGAktsqE/hlClZsfzL9YLUXYMhEVQLqF
- +l7ldm4P54PDbs23SjU5F44OIpO3lPagrrxDEocMmwGMKpV/uD5WNgeKKsCjUfHpezUSNMnyoz3
- x1wvY5SCfTIAgdCxCPIk3O1iUagaNwyvXMA9xfSohljuMRF/GFbS/1+9Drg6IYIjcSuy3NBRkMx
- t9c/nMxvTpkyQBD7NVL2yaJFvSMUpqPTaYKa5yo1ixBCuvojSMd/xia4Z1np9sfcGj0piu37w3b
- lWjr18c1CgbI7mm1Fr4uZNb7rMz1IrDuuY+rOhvq0g4mFg4YpS5uH+wrQess0CRK4shOn68YEjK
- pPB70+r8PONcP5eLW9RgPc4QSxxpqrvBzbrQOFPtDVRM5STppi28l4Y8VthdLqw0d8d4HKGAi2S
- 8daM6io4poIUtIMOqP0fM7JVSCqMc5Hs/up36tlBslls4B85EOaxY+ftPZ4CxPmqgnlfv2yAtWW
- jUX4dYlyCVmNdFM9B
-X-Received: by 2002:a05:690e:4191:b0:650:21bd:e0e7 with SMTP id
- 956f58d0204a3-65310a4db10mr34326323d50.44.1777270887761; Sun, 26 Apr 2026
- 23:21:27 -0700 (PDT)
+ spf=pass smtp.mailfrom=sumit.garg@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sea.source.kernel.org (Postfix) with ESMTP id 19003418B7;
+ Mon, 27 Apr 2026 06:59:51 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 08437C2BCB4;
+ Mon, 27 Apr 2026 06:59:46 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1777273191;
+ bh=d71TfqubBNvmtfu8Y9TnvT2sAfitYc7Kh8Wp/9a2pZY=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=iHEMIAgZwu8LcGEguHo2o5jyrS9fDXgkV6A7VO52lmBabZ/UP8KBq59mxbJea8K9q
+ INPJE3gjmPpJvN8aLp5Bo5XQmnPdM+NwAPf2n0okAAWldkMANPxt6Stthr3Bh7H0dt
+ Wx+0bqLsZn/cwQ/XC58hpYv1xxN7YA61uDWJMJ4B5VwQTM50GgElMMapP9/hG7tNzb
+ ZiyTrtSMJrWfQZ28L1+gAxgwE9vDc4YmA8k1AsoCi7JOxXCEWTCUhTyAnz6bi8zdbH
+ cnaiGLbEb0vIzuxONv4PxOWOm8E1tlXl09IFTwk0sttDHjv8MVwAlpKideb1NtH/ga
+ X/nhV6XCmBKbA==
+Date: Mon, 27 Apr 2026 12:29:43 +0530
+From: Sumit Garg <sumit.garg@kernel.org>
+To: Tom Rini <trini@konsulko.com>, Casey Connolly <casey.connolly@linaro.org>
+Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io, neil.armstrong@linaro.org,
+ Ajit Singh <blfizzyy@gmail.com>,
+ Antony Kurniawan Soemardi <linux@smankusors.com>,
+ Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
+ Luca Weiss <luca.weiss@fairphone.com>,
+ Sumit Garg <sumit.garg@oss.qualcomm.com>,
+ Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
+Subject: Re: [PULL] Please pull casey/qcom-main-13Apr2026
+Message-ID: <ae8JX1O7PGJaFSX8@sumit-xelite>
+References: <20260419030602.2470577-1-casey.connolly@linaro.org>
+ <20260419154026.GV41863@bill-the-cat>
 MIME-Version: 1.0
-References: <20260416055948.130041-1-ilias.apalodimas@linaro.org>
- <20260416055948.130041-7-ilias.apalodimas@linaro.org>
- <6944f28f-131f-4a08-9ef9-aae812926f4b@mailbox.org>
-In-Reply-To: <6944f28f-131f-4a08-9ef9-aae812926f4b@mailbox.org>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Mon, 27 Apr 2026 09:20:51 +0300
-X-Gm-Features: AQROBzAKVMJgg-xjy2794HBk60rtIWcSEBSqZCI_fsTwlP_hJ0QP6gNHshda7Gs
-Message-ID: <CAC_iWj+ufWdroVDCh9qNAYfsjON5r_pdfOUgyB=h=b2b_rMVKg@mail.gmail.com>
-Subject: Re: [PATCH v2 6/6] common: Add an option to relocate on ram top
-To: Marek Vasut <marek.vasut@mailbox.org>
-Cc: trini@konsulko.com, marek.vasut+renesas@mailbox.org, jonas@kwiboo.se, 
- anshuld@ti.com, sjg@chromium.org, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260419154026.GV41863@bill-the-cat>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -121,85 +75,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Marek,
+Hi Casey,
 
-On Sun, 26 Apr 2026 at 19:35, Marek Vasut <marek.vasut@mailbox.org> wrote:
->
-> On 4/16/26 7:59 AM, Ilias Apalodimas wrote:
-> > Right now we only relocate u-boot to the top of the first
-> > memory bank unless the board specific code overwrites it.
-> > This is problematic when loading big binaries as it
-> > fragments the contiguous memory space for no apparent reason.
-> >
-> > It's worth noting that there are cases where we must not relocate
-> > above the 4GiB boundary (64bit hardware with 32bit only capable
-> > DMA). E.g This will break platforms, if the ethernet
-> > controller cannot DMA above 4 GiB, and once U-Boot does
-> > get relocated above 4 GiB, the packet buffer which is built
-> > into the U-Boot binary is also relocated above 4 GiB.
->
-> On certain platforms, it is currently not possible to relocate U-Boot
-> above the 32bit boundary, due to various dependencies on content located
-> below the 32bit boundary. One such example is ethernet, where the packet
-> buffer built into U-Boot binary is placed below the 32bit boundary and
-> allows loading of data via ethernet even above 32bit boundary due to
-> memory copy from the packet buffer to the destination location.
->
-> > A previous patch moves the bi_dram[] info from bd to gd and make
-> > the memory bank information available early. So move the
-> > dram_init_banksize() INITCALL before the relocation address calculation
-> > and use it to derive the address.
-> >
-> > Also add a Kconfig option and allow the common code to relocate U-Boot
-> > to the top of the last discovered bank.
-> >
+On Sun, Apr 19, 2026 at 09:40:26AM -0600, Tom Rini wrote:
+> On Sun, Apr 19, 2026 at 05:03:16AM +0200, Casey Connolly wrote:
+> 
+> > Hi Tom,
+> > 
+> > Various Qualcomm additions this cycle:
+> > * USB superspeed support for 1 platform
+> > * Initial support for the Milos platform and the Fairphone Gen 6 (chainloaded from ABL)
+> > * Improved support for booting with OP-TEE on supported platforms
+> > * Initial basic power domain support
+> > 
+> > Notably there is a generic change to the device core, missing power
+> > domains will no longer cause a device to fail probe and instead will
+> > just print a warning. This shouldn't affect any existing platforms.
+> 
+> Unfortunately I get a fail to build in CI:
+> https://source.denx.de/u-boot/u-boot/-/jobs/1428016
+> +(qcm6490) drivers/phy/qcom/phy-qcom-qmp-combo.c: In function 'qmp_combo_com_init':
+> +(qcm6490) drivers/phy/qcom/phy-qcom-qmp-combo.c:288:35: error: unused variable 'cfg' [-Werro
+> r=unused-variable]
+> +(qcm6490)   288 |         const struct qmp_phy_cfg *cfg = qmp->cfg;
+> +(qcm6490)       |                                   ^~~
+> +(qcm6490) cc1: all warnings being treated as errors
+> +(qcm6490) make[4]: *** [scripts/Makefile.build:271: drivers/phy/qcom/phy-qcom-qmp-combo.o] E
+> rror 1
+> +(qcm6490) make[3]: *** [scripts/Makefile.build:492: drivers/phy/qcom] Error 2
+> +(qcm6490) make[2]: *** [scripts/Makefile.build:492: drivers/phy] Error 2
+> +(qcm6490) make[1]: *** [Makefile:2205: drivers] Error 2
 
-[...]
+Do you plan to re-send this PR with updated USB super speed patch-set
+from Balaji here [1] which should take care of this CI issue?
 
->
-> > +
-> >   endif # EXPERT
-> >
-> >   config PHYS_64BIT
-> > diff --git a/common/board_f.c b/common/board_f.c
-> > index 4ac22dca9e7c..f95e789257ad 100644
-> > --- a/common/board_f.c
-> > +++ b/common/board_f.c
-> > @@ -339,7 +339,22 @@ static int setup_ram_base(void)
-> >   static int setup_ram_config(void)
-> >   {
-> >       debug("Monitor len: %08x\n", gd->mon_len);
-> > -#if CONFIG_VAL(SYS_MEM_TOP_HIDE)
-> > +
-> > +     if (CONFIG_IS_ENABLED(RELOC_ADDR_TOP)) {
-> > +             int bank;
-> > +             phys_size_t total_size = 0;
-> > +
-> > +             for (bank = 0; bank < CONFIG_NR_DRAM_BANKS; bank++) {
-> > +                     if (gd->ram_top <= gd->bi_dram[bank].start)
-> > +                             gd->ram_top = gd->bi_dram[bank].start +
-> > +                                             gd->bi_dram[bank].size;
-> > +                     total_size += gd->bi_dram[bank].size;
-> > +             }
-> > +             gd->ram_size = total_size;
->
-> Shouldn't this also apply board_get_usable_ram_top() to be consistent ?
+Since the v2026.04-rc1 is going to be tagged today, we really don't want
+to miss this merge window again for all these pending features to be
+merged.
 
-Simon asked the same thing. I'd rather keep this option strict for now
-and always relocate to the upper memory boundary fnor now. Once I do
-further cleanups, I can either add it or remove the function entirely
-since dram_init_banksize() (which hs also board specific) runs really
-early now.
+[1] https://lore.kernel.org/all/20260418-kodiak_ss-v4-0-d381670c9d78@oss.qualcomm.com/
 
->
-> > +     } else {
-> > +             gd->ram_top = gd->ram_base + get_effective_memsize();
-> > +             gd->ram_top = board_get_usable_ram_top(gd->mon_len);
->
-> Should this really use gd->mon_len as a parameter, or gd->ram_top?
-
-I haven't really thought about thism since it's what we currently do.
-In any case that's a change that needs to go on another patch.
-
->
-> [...]
+-Sumit
