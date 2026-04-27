@@ -4,106 +4,105 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E42DDFF885E
-	for <u-boot@archiver.kernel.org>; Mon, 27 Apr 2026 12:06:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88CC9FF8860
+	for <u-boot@archiver.kernel.org>; Mon, 27 Apr 2026 12:07:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 402B983BC4;
-	Mon, 27 Apr 2026 14:06:56 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7E78784119;
+	Mon, 27 Apr 2026 14:07:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="MkKaBBpK";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="gtPAAU1b";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="RRcNHmF+";
+	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="IsUleudT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EC33180433; Mon, 27 Apr 2026 14:06:54 +0200 (CEST)
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
- [205.220.168.131])
+ id F40D184119; Mon, 27 Apr 2026 14:06:58 +0200 (CEST)
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
+ [205.220.180.131])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0615680433
- for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 14:06:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id ABC7F8407E
+ for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 14:06:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=balaji.selvanathan@oss.qualcomm.com
-Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
+Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 63R8kGFR3961981
- for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 12:06:50 GMT
+ 63R8T8Ce2913806
+ for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 12:06:55 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:message-id
- :mime-version:subject:to; s=qcppdkim1; bh=nMYGjILHp3JkgaQ0C0reCr
- 2+sOjvnvBR5rpa/AHsJ6s=; b=MkKaBBpKVfXS+V3fhs1z8+zar27Ulb+XFxuq+E
- wQySd2DfUiPRR+0m65wxrT0hoFaJcOg22gyBGMmuotmjYaoF+swdNRnCDnMka3pN
- nw98gKUZ5ej6ghfpW5l8GQia1yb01cbFHENI77koZuEwSbspTfSbX0jkUgO7AMHd
- eHp4cqA6P1Bz3abRT9q281Mlu5j6thUX/9Za6dYFeuk8Kmhb/I73m6ZQ0GSjjs1s
- 4vgjpDtBdqCGb7IY6MGO4zWzVafZRYa7WR0/EMhghdZOP9c73HUItmRXTM7JshHn
- dhr7dYZGfAM3M4+me+UUv5oWS3CNZOb73JSfNtjjsefrkadg==
-Received: from mail-pj1-f71.google.com (mail-pj1-f71.google.com
- [209.85.216.71])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4dt4k30yfe-1
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ xcDfx6D81qrZ42GllMZe+dWFbCCuhCtHPicj+je1RTE=; b=RRcNHmF+nBS5Fshg
+ CFScL4W2x9NG2JiZHwZkfhmiGMC2khSgZhd1LVP9yXb7DSK31Id9UPB5/CI5blZj
+ nPDdpC3BGC73lLQc8/xUkjIWgUhCsEfmLeYIagrXs/EzeT3rnZjKUpC9PbwZ72oQ
+ kHGdebUuY+Ccs2VbwJyg3Eg+DdGVPzQakVqPsyN3rBXg7wP7SqOgsj3THtD1IvO7
+ bPS6W+40yK/DjVtiSR7ePs1WSVA8MSItZbzTstcBuJ77N7mnl4qkKPFjpLukTNSl
+ 0zWmwb062eAGyA5acQDMQ3Oqja5E2YGk5i9JM3f2NsuN++MqT1kMlt6wetxCCiGf
+ PeYpLQ==
+Received: from mail-pj1-f70.google.com (mail-pj1-f70.google.com
+ [209.85.216.70])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4dt26xhc7x-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 12:06:50 +0000 (GMT)
-Received: by mail-pj1-f71.google.com with SMTP id
- 98e67ed59e1d1-35fbb5779e8so10927654a91.3
- for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 05:06:49 -0700 (PDT)
+ for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 12:06:55 +0000 (GMT)
+Received: by mail-pj1-f70.google.com with SMTP id
+ 98e67ed59e1d1-362d9dd9a49so4537550a91.0
+ for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 05:06:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1777291609; x=1777896409; darn=lists.denx.de; 
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:from:to:cc:subject:date:message-id:reply-to;
- bh=nMYGjILHp3JkgaQ0C0reCr2+sOjvnvBR5rpa/AHsJ6s=;
- b=gtPAAU1bh2zONgfl2Nf4H3kuJKsifiKI6L/rC4BFCbPj7FiWITkkUujqwXU817h4YA
- ZSXhPHLjiSPPKXYZNpQ5EJHWE4BrBBVa3gfycHov1frRVu97aZ8bgCslk4LrVFk7DjCQ
- D3yzjd1bXSWQX7dr6CKDM7zMDT/CApYdC3hIgj7dxPi92wFLXeoCL6nsGYiJlbmc8n8a
- SD77MdwyTIA4W5B2G0IRcJmBvUpoUtjjg3YxeV9ZX1VAbRM0Bco4X2IwClFiEDB/AG5C
- 8yduirEN3DcNkRf8IwCDYpUdlwDD36X+3vbXGCx/+D+ruxlW2WWPGRhMBbLM4TvxTSVb
- gn6w==
+ d=oss.qualcomm.com; s=google; t=1777291614; x=1777896414; darn=lists.denx.de; 
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=xcDfx6D81qrZ42GllMZe+dWFbCCuhCtHPicj+je1RTE=;
+ b=IsUleudTpfeKWyujmZuWqekt6Xj0rQiGeoA4RIw0j3D9BBc27f/5ULc5xMHmTsZscF
+ 0lC56dtDEAxuy5SWKC2cktJLof/aeLgIxhAvGJpQfipBoojKzW1ctKeJ6J/0+Lio7TvN
+ dWQlzZR5Ulvo/eK1MKKidDpQambfCHes48hyLS38oxSNbLnYWfAwr6wy2TrM8mvI5Dit
+ j/+DFgwW/tZWE6YH6eLiOKpXmX6jiw0bv2Yd/CwPdhb3J3Fa4dlISn+W/PBP4v1yE6N7
+ tt5RUWztSgSHNf/wBImAv0GtiIs1hVPTtVPpSNKbXKZbM65aGL7xBkfDLp/PKT4OUBfg
+ q/kQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777291609; x=1777896409;
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=nMYGjILHp3JkgaQ0C0reCr2+sOjvnvBR5rpa/AHsJ6s=;
- b=nZ3wuwZw07pU5pPj5H2/EY4JCl1et0zOTbDJnkHDIIHGjhSq6WPgDDMlRDSGZ7XSRs
- wa+aGoK9L2GYsaqFL6YyqVkNf+3kU4QQTpwt5DIe1QYbxV5f9ZsuIOUUYeOAbN5ttwCd
- 0JmeiMFKEKGljo8Yq+eMS3DvpDE3bhH+wbDD2ZGzYp+7rjB/rfiVMyhAs+AokA9cerZU
- DBgA0XIgo5MJYlVQY6wY8SACxnCKRIC1bWQZp+lu5NA/hAIZGWx3wpLLV4SH64oyFhod
- jOeE3BUwdCZ3wxA4OQU1l2LnCdPEO1Olte6JrXoCCKU5qB1PmDoJZ9a2bo0OANvmxP3f
- Vkbw==
-X-Gm-Message-State: AOJu0Yz/STgFvoVSZkhpjAS8YQsc+7L9NJQbnOucYngicau+2CaPKILy
- CUwmh2V9XgY3yEIMJ009vTYp4XeXKogqgFDVMxgHWW26m3Ur+7JxSERpI6ThRvK9Gx5YgrgCKff
- p+dDlo+pG3xKrMY/9jwY7lIEKMUePx//qlkHb5BDIM+a+UZYkL+rZUzg8
-X-Gm-Gg: AeBDievX7ZwzGnBAl4+hdeNLxkymL7MfZrqmjJQdt+gbO3V7tLAzBp731RsJnu25rZr
- kr2zAPrV1+7vHSzS/JfHwHT4Zd7v7FNEEDWb4Z5me0fIvsuvES0WVQXU5ZJLlsYXgwEFG1hfzfS
- vL0Wd81hVcAC1iE+ruGdSMg5+ZVr0JOy9PQBsL7QdlsDKqArHRjiBdijvR+4xZ1BrofJG3ws5Qv
- Smz+iCbEBAROlMthr1baonRtqbPKxpvlp7rbn3TNBI90nRADiDHwjahJURab7hY6MXACGnLZFyX
- Isb6+cENU3XwGUnFDuAkbxhxz1xQ+W8YeK/zNFMy/AMEBGWiw+CGTE7k4V2UL9AM9MSAnsmsKno
- QZ5DkYcksL+GvZCW3oX18HWxwQRt0GVRu73j3ogE/jp4DK27Bq9WHBY7AzlEKDGnIFOngC9RjbB
- 25Rdk/BZnb4ONIt6vBTyZAL/1Y7ufWIwru91YlTkIn/ARbPmnHlqmJ+OPvshzf
-X-Received: by 2002:a17:90a:e704:b0:35b:9896:cbcd with SMTP id
- 98e67ed59e1d1-361404b9b70mr40880904a91.27.1777291609290; 
- Mon, 27 Apr 2026 05:06:49 -0700 (PDT)
-X-Received: by 2002:a17:90a:e704:b0:35b:9896:cbcd with SMTP id
- 98e67ed59e1d1-361404b9b70mr40880871a91.27.1777291608699; 
- Mon, 27 Apr 2026 05:06:48 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1777291614; x=1777896414;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=xcDfx6D81qrZ42GllMZe+dWFbCCuhCtHPicj+je1RTE=;
+ b=kYX9Ma81942YX3OnzhnCij7AUUQRaj7afGLCIYDSFgNNOgE0Gf2MdHmdd4EsIMhrXH
+ o4jjqlKy4xg5TLtnkIDq6Ms7zN47xBv+T1AFY6DicbVwyZgt4eLPxi9bGFUe2E73U96w
+ Hd+bYVp8O55txr5qRPSKqn7ePW/p+u1cHJuEAD+AgDcwoMfJacppsqHFKkG0ltmpISzb
+ 1KqulxIepQ8Nd0dCxtz6oTm25llTfFMhvNuG0lS2H2l3Z+wgoVsUj4CZF/efa9TPnJ0Z
+ vxNy8lPfVh3C7Lp/EOv5OzgXFD33DntOxNPDTSFPzxtiyBpt/okBDhuczhdiKqTIbB4l
+ yBtA==
+X-Gm-Message-State: AOJu0YwDncIGJHpu5nZc9YQ6+YA5wYR7Y4BJ7XVgv0UIrJFMlpc+zLwJ
+ yCGpjMRRdLUchkLNkjr4no22241D3LcjQj6qxScsFnYArVN7Ph3rTzYHO2jswe9Tf9AgzMZR8To
+ vSuE8zi1UVaUR7Zbdz+FzS9/PKYUfySIbANLrmD2PqwNd2+DY0mOLNalw
+X-Gm-Gg: AeBDievo8HZcBNYR9PycGANTeDmRYMxmN2cYxCRCK2Y2DEAS2c5Wa6yfXqNx+5qat9s
+ 4RTa3MNCkp9UhyyO8wFlwu+Y4dBkauZC4bkbvYHMPPcSgVwC6IZN4Z2bU31rOtBN1q6Q1Zbqb3T
+ J0BYhDvrgTCiW0QBmVqrDDN/3VXsUXSG4ih6c33/d5Q6z7xHhsEFnQJSd3axphXwWHzfA8woAn/
+ l85gcbT1d3wPp3NnjXlT/f8o9pDdKtd0k4rS9cQW0nt7rd+SVV8B+cyY3z4/g8IA+3Gz5WLbkXU
+ 6oXLHAE2EJbTm2pOzpEoeQ2ZXUHEA/Ic0Ui/0/3XATHksUdcq61Mmu6rj2ClG4WIM7aijHkPpuI
+ ECM7uQ7BwuwMqzIUwuMTNkJufgOewFLlT+MSGbr22yxetz3I+jKILU5thSmIxQeMkjYelY9PlwJ
+ FW05d1hf+gCgYLs3pyAd5JarMmJmS4dlxc1wx/Hp70qZxOaOAOTAri6C0F2ESQ
+X-Received: by 2002:a17:90b:5112:b0:35c:30a8:32a with SMTP id
+ 98e67ed59e1d1-361403f4e8cmr42633957a91.9.1777291613773; 
+ Mon, 27 Apr 2026 05:06:53 -0700 (PDT)
+X-Received: by 2002:a17:90b:5112:b0:35c:30a8:32a with SMTP id
+ 98e67ed59e1d1-361403f4e8cmr42633872a91.9.1777291612782; 
+ Mon, 27 Apr 2026 05:06:52 -0700 (PDT)
 Received: from hu-bselvana-blr.qualcomm.com
  (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-36140feea38sm31832910a91.6.2026.04.27.05.06.44
+ 98e67ed59e1d1-36140feea38sm31832910a91.6.2026.04.27.05.06.49
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 27 Apr 2026 05:06:48 -0700 (PDT)
+ Mon, 27 Apr 2026 05:06:52 -0700 (PDT)
 From: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-Subject: [PATCH v2 0/4] fastboot: block: Add GPT/MBR and device selection
-Date: Mon, 27 Apr 2026 17:36:41 +0530
-Message-Id: <20260427-fb_gpt-v2-0-9e7fe3c1649a@oss.qualcomm.com>
+Date: Mon, 27 Apr 2026 17:36:42 +0530
+Subject: [PATCH v2 1/4] fastboot: block: Add device selection syntax
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAFFR72kC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyjHQUlJIzE
- vPSU3UzU4B8JSMDIzMDEyNz3bSk+PSCEl0LsxTzFDNTS9OUxBQloOKCotS0zAqwQdGxtbUAL6x
- L5FgAAAA=
-X-Change-ID: 20260427-fb_gpt-86d7d6595dad
+Message-Id: <20260427-fb_gpt-v2-1-9e7fe3c1649a@oss.qualcomm.com>
+References: <20260427-fb_gpt-v2-0-9e7fe3c1649a@oss.qualcomm.com>
+In-Reply-To: <20260427-fb_gpt-v2-0-9e7fe3c1649a@oss.qualcomm.com>
 To: u-boot@lists.denx.de
 Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>,
  Tom Rini <trini@konsulko.com>, Heiko Schocher <hs@nabladev.com>,
@@ -114,35 +113,35 @@ Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>,
  Ariel D'Alessandro <ariel.dalessandro@collabora.com>,
  Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1777291604; l=2245;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1777291604; l=4085;
  i=balaji.selvanathan@oss.qualcomm.com; s=20260213; h=from:subject:message-id; 
- bh=rrW9yGOufwdV1gZZBldba1nrABs276OHi06zUMydFAo=;
- b=NCWJI5uyS44VVEHAAPEdQPjRF+B5483VudambAO2adDQK3O8TRgIm1omef0phkpec52fFjhcv
- uh9iCaYiGXEAUTyHP7IZ2H3rL7A9ZHWzspBouy10OIK6PUtiroSUxt4
+ bh=2jyIUq/p3c/U+CuKZp5vOyIHrJtYn/zQ6ymWpe+3Fhg=;
+ b=ZAi/9SfCmRUbTTVdvCvyJHnvr5GOirJ0A7sh/lCXY9uCTULePSIewgwR20+kL6+nYGyEAYsSi
+ QxSgMynZpVOBwU/xJ1KEt0+ZD59GCu66MCrX+5JG+2bTVYxX8Gxi0OH
 X-Developer-Key: i=balaji.selvanathan@oss.qualcomm.com; a=ed25519;
  pk=CDpYiUU3SH7KGEtsBvY2tBGPiWfMxqWJF0p2LftOfnc=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNDI3MDEyOSBTYWx0ZWRfX9+qfY0z1RiKh
- eb8rvdZkTqf3PBRi0ohYK1WMaxSy+pL/JfrWxAhLvPPRCXvoWbo6okNXeT7deqkTUp6PeYda0ei
- A1JVZE0pvpSpQRntldKczZU58dvsP29sw9slw/qgyNY26EQwxJxcFlnJ7ShOW5LuF0lilBjzXd9
- iGd9ByTlACB9ubi4y5HXLzF1Ez4Lj6P64F8VVndBDmpyy1+Wqg0zbO1uy9f/YR6p3pNZ9mvJ695
- M3i0dwLUsdl4rHQbXxGekvrThvuZ3H6ublldvgPnB5JqijyRubu3kPp61iX51FG3nwdxG+zEUfr
- f56jNcnkNgv65EdiKxcSbhvxX605FkdXLcgAcGqI8Am6gxnqMNrKyFBasgWnN5PMNsox6a0Y3nN
- P7SvnnaD8R0sXk3B0aolE3yD9KOrCQ2ReYW24hjlG8hyvAhh7eZi7aV4IqOwDbDxkcgfiDsTZZd
- iHFsAkYv0IV+QY6vQug==
-X-Authority-Analysis: v=2.4 cv=a7QAM0SF c=1 sm=1 tr=0 ts=69ef515a cx=c_pps
- a=UNFcQwm+pnOIJct1K4W+Mw==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+X-Proofpoint-GUID: jEYfGrgPSgxCtrlpVVb-y1bayyvehJFp
+X-Proofpoint-ORIG-GUID: jEYfGrgPSgxCtrlpVVb-y1bayyvehJFp
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNDI3MDEyOSBTYWx0ZWRfX+vJeesiu/lEn
+ mzrk0X/giUM8D2u3yqTpc1l6BvQQxC4iGH2u+2S/heZHavTeOqcFDm4NJyc/qyo5dFqyGq7wCQ+
+ c8iQHU/gZ92/c0LdSn/kTvRIk7wHPislU7cra9Zg9oA2Co8f0IKQnTrh9uxbuO+SzfLzBv4kZv2
+ qcZ9QM9vDmZ8L4+a2YS+kkzHILHWBrpYjs1JZuS6FO4TxiJQ6vtsLMAdm5FV958Ui4C2NgZ2Deb
+ YQ1W84EIYq/k86qq+9W6A3bG6dMRiJpHWLTVw/Su+Y5t/kAgkecu8kRHoFdsSRdp+/yhwAb66Rg
+ cHAsqvX/3ym0k4eTEAC8hnpw+qdMd46cKTzGmjzqNrT93kAsg9yFIdnNmiOTHFkVrK/+7DPnwC5
+ BRMVzM4WoQA97rGXT1APsCa94ZHTzXQwqdkLlaNm//BoM2V1gcrbyIF2HsMWUi0Bsc6W3X1b7Vl
+ JBPZY2hpDbiSvLbH9rg==
+X-Authority-Analysis: v=2.4 cv=FM8rAeos c=1 sm=1 tr=0 ts=69ef515f cx=c_pps
+ a=0uOsjrqzRL749jD1oC5vDA==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
  a=IkcTkHD0fZMA:10 a=A5OVakUREuEA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
- a=NEAV23lmAAAA:8 a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=_aTGsJdUfmxtiA1JYQUA:9
- a=QEXdDO2ut3YA:10 a=uKXjsCUrEbL0IQVhDsJ9:22
-X-Proofpoint-GUID: biEQfBU5Uxmz31TOg_hiTX_JQOFM-b1S
-X-Proofpoint-ORIG-GUID: biEQfBU5Uxmz31TOg_hiTX_JQOFM-b1S
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
+ a=EUspDBNiAAAA:8 a=ur9GPcVNT4V7s1MEKRwA:9 a=QEXdDO2ut3YA:10
+ a=mQ_c8vxmzFEMiUWkPHU9:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
  definitions=2026-04-27_03,2026-04-21_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 malwarescore=0 spamscore=0 phishscore=0 impostorscore=0
- lowpriorityscore=0 suspectscore=0 bulkscore=0 priorityscore=1501 adultscore=0
+ lowpriorityscore=0 suspectscore=0 adultscore=0 bulkscore=0 phishscore=0
+ spamscore=0 malwarescore=0 priorityscore=1501 impostorscore=0 clxscore=1015
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2604200000 definitions=main-2604270129
 X-BeenThere: u-boot@lists.denx.de
@@ -161,58 +160,124 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This series enables GPT and MBR partition table operations for
-fastboot block devices and introduces device selection syntax.
-
-Patch 1 implements device selection syntax allowing users to specify the
+Implement device selection syntax allowing users to specify the
 target block device using "N:partition" format, where N is the
-device number.
+device number. When no device is specified, the default from
+CONFIG_FASTBOOT_FLASH_BLOCK_DEVICE_ID is used.
 
-Patch 2 adds fastboot_flash_gpt_partition_table() and
-fastboot_flash_mbr_partition_table() helper functions that handle
-flashing of GPT and MBR partition tables to block devices.
+Modify fastboot_block_get_part_info() to use the new parsing
+function, enabling operations like "fastboot flash 0:boot boot.img"
+to write to specific devices while maintaining backward compatibility
+with the existing "fastboot flash boot boot.img" syntax.
 
-Patch 3 adds support for flashing GPT and MBR partition tables to the
-fastboot block backend. This enables operations like "fastboot flash
-gpt gpt.img" and "fastboot flash mbr mbr.img" for block devices.
-
-Patch 4 documents the new syntax with usage examples.
-
-CI test results
----------------
-        https://github.com/u-boot/u-boot/pull/941/checks
-	All checks have passed
+Example usage:
+  fastboot flash 0:boot boot.img      # Flash to device 0
+  fastboot flash 1:system system.img  # Flash to device 1
+  fastboot flash boot boot.img        # Use default device
 
 Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 ---
 Changes in v2:
-- Seperate adding device selection syntax and GPT/MBR flashing support
-  into seperate patches.
-- Introduce common helper functions such as
-  fastboot_flash_gpt_partition_table and
-  fastboot_flash_mbr_partition_table functions that can be used both
-  in fb_mmc.c and fb_block.c fot GPT and MBR flashing.
-- Link to v1: https://lore.kernel.org/u-boot/20260410-fb_block-v1-0-68f0c976fe0e@oss.qualcomm.com/
-
+- Newly created in v2
+- Has only device selection syntax related changes
 ---
-Balaji Selvanathan (4):
-      fastboot: block: Add device selection syntax
-      fastboot: Add GPT/MBR partition table flashing helper functions
-      fastboot: block: Add GPT/MBR partition table flashing support
-      doc: fastboot: Document block device selection syntax
+ drivers/fastboot/fb_block.c | 53 +++++++++++++++++++++++++++++++++++++++++----
+ 1 file changed, 49 insertions(+), 4 deletions(-)
 
- doc/android/fastboot.rst     |  41 +++++++++++++++++
- drivers/fastboot/Kconfig     |   4 +-
- drivers/fastboot/fb_block.c  | 102 +++++++++++++++++++++++++++++++++++++++++--
- drivers/fastboot/fb_common.c |  94 +++++++++++++++++++++++++++++++++++++++
- drivers/fastboot/fb_mmc.c    |  49 +++------------------
- include/fastboot-internal.h  |  30 +++++++++++++
- 6 files changed, 272 insertions(+), 48 deletions(-)
----
-base-commit: 9f61fd5b80a43ae20ba115e3a2933d47d720ab82
-change-id: 20260427-fb_gpt-86d7d6595dad
+diff --git a/drivers/fastboot/fb_block.c b/drivers/fastboot/fb_block.c
+index 51d1abb18c7..061ffd930a5 100644
+--- a/drivers/fastboot/fb_block.c
++++ b/drivers/fastboot/fb_block.c
+@@ -11,6 +11,7 @@
+ #include <image-sparse.h>
+ #include <malloc.h>
+ #include <part.h>
++#include <vsprintf.h>
+ 
+ /**
+  * FASTBOOT_MAX_BLOCKS_ERASE - maximum blocks to erase per derase call
+@@ -124,6 +125,44 @@ static lbaint_t fb_block_sparse_reserve(struct sparse_storage *info,
+ 	return blkcnt;
+ }
+ 
++/**
++ * parse_device_partition() - Parse and validate device:partition format
++ * @part_name: Input string in format "N:partition" or "partition"
++ * @device: Output device number
++ * @partition_name: Output partition name pointer (can be NULL)
++ *
++ * Parses the input string to extract device number and partition name.
++ * If no device is specified, uses the default from config.
++ * Returns: 0 on success, -EINVAL if format is invalid
++ */
++static int parse_device_partition(const char *part_name, int *device,
++				  const char **partition_name)
++{
++	const char *colon_pos;
++
++	*device = config_opt_enabled(CONFIG_FASTBOOT_FLASH_BLOCK,
++				     CONFIG_FASTBOOT_FLASH_BLOCK_DEVICE_ID, -1);
++
++	/* Check for colon in partition name */
++	colon_pos = strchr(part_name, ':');
++
++	/* Reject invalid format like ":partition" */
++	if (colon_pos && colon_pos == part_name)
++		return -EINVAL;
++
++	/* Override if device:partition format detected */
++	if (colon_pos && colon_pos > part_name) {
++		*device = simple_strtoul(part_name, NULL, 10);
++		if (partition_name)
++			*partition_name = colon_pos + 1;
++	} else {
++		if (partition_name)
++			*partition_name = part_name;
++	}
++
++	return 0;
++}
++
+ int fastboot_block_get_part_info(const char *part_name,
+ 				 struct blk_desc **dev_desc,
+ 				 struct disk_partition *part_info,
+@@ -133,25 +172,31 @@ int fastboot_block_get_part_info(const char *part_name,
+ 	const char *interface = config_opt_enabled(CONFIG_FASTBOOT_FLASH_BLOCK,
+ 						   CONFIG_FASTBOOT_FLASH_BLOCK_INTERFACE_NAME,
+ 						   NULL);
+-	const int device = config_opt_enabled(CONFIG_FASTBOOT_FLASH_BLOCK,
+-					      CONFIG_FASTBOOT_FLASH_BLOCK_DEVICE_ID, -1);
++	int device;
++	const char *partition_name;
+ 
+ 	if (!part_name || !strcmp(part_name, "")) {
+ 		fastboot_fail("partition not given", response);
+ 		return -ENOENT;
+ 	}
++
+ 	if (!interface || !strcmp(interface, "")) {
+ 		fastboot_fail("block interface isn't provided", response);
+ 		return -EINVAL;
+ 	}
+ 
++	if (parse_device_partition(part_name, &device, &partition_name) < 0) {
++		fastboot_fail("invalid partition name format", response);
++		return -EINVAL;
++	}
++
+ 	*dev_desc = blk_get_dev(interface, device);
+-	if (!dev_desc) {
++	if (!*dev_desc) {
+ 		fastboot_fail("no such device", response);
+ 		return -ENODEV;
+ 	}
+ 
+-	ret = part_get_info_by_name(*dev_desc, part_name, part_info);
++	ret = part_get_info_by_name(*dev_desc, partition_name, part_info);
+ 	if (ret < 0)
+ 		fastboot_fail("failed to get partition info", response);
+ 
 
-Best regards,
 -- 
-Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+2.34.1
 
