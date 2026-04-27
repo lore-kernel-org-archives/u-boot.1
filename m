@@ -4,100 +4,147 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D361FF885E
-	for <u-boot@archiver.kernel.org>; Mon, 27 Apr 2026 11:54:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E42DDFF885E
+	for <u-boot@archiver.kernel.org>; Mon, 27 Apr 2026 12:06:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8583E83693;
-	Mon, 27 Apr 2026 13:54:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 402B983BC4;
+	Mon, 27 Apr 2026 14:06:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ecLwv/hn";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="MkKaBBpK";
+	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="gtPAAU1b";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E1AF780433; Mon, 27 Apr 2026 13:54:25 +0200 (CEST)
-Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
- [IPv6:2a00:1450:4864:20::629])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id EC33180433; Mon, 27 Apr 2026 14:06:54 +0200 (CEST)
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
+ [205.220.168.131])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 57F6480433
- for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 13:54:23 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-ba7a1cc0380so1648019266b.2
- for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 04:54:23 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1777290863; cv=none;
- d=google.com; s=arc-20240605;
- b=UH+ZdlNY3SBpX4wA3ZsjMkxWra+Ddfl8nWqemYcy8vaLo/EoFBHxO9uEQ2L7PwQzee
- zcZLTF3+YcTxfztaYZwgN5w83+dYJq5pGVeynMLOP4LQdBiuYnUCRzwovuBE6yfMKN86
- d+oepCdBTcNPGJiYy+nKhop92C1KA73Wi6G03E5CsA00Uu9ZcL+CAlRg0jQyV8KTWkVR
- EredvSIRVz9LxUlLK29fxCM1ibRK3ZWMCyIFFX80q0ALZK2g/y+jBugp27OmNJOomZCD
- JZQ4bNW+Zko6cye6s8Vljv0sCOECW8tJM7rlO1nyFJIh8YE8E33THqjQNDZeufVLNa/k
- Exhw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=Wpw9O2wJ5n3o8zSORG/tAAsUqcKpiKOPT+3GYjffMIo=;
- fh=gXGkhr1MrhK2wEDleHYXVHAigNGe1Sk0dnbdYi9qgxA=;
- b=NCcHIqxxz7zWAHgxcftQrnP7NNxOQUOwnVeByzNxiLGRDFkU+f4QLzKSo/dN+MWtZA
- 8tvWDXPo2iaOlBTqT4wwZtxi+HS/mmPLzj/JGUhbcULKRlBjWLdS2J74qA3Vel1Wg3/a
- Gax3xkk7/Ha/APkpFAsDM9urUMWvt2jIY7yLStTl6aa/RatSfV3qA+2I2J1F6KIUJYXt
- C1JEXXcWhwIXbIvlb0xwKDg+1J2vQDq9n0bmQyHFS267psQf+y9lWQdy6MxxrmA5qYny
- rgHpHasZGb1Uq15d3YoGYsblWDxdlNpXCybEIwhch4K+UHWwhiCmEANnxatwljVPmYEC
- +ccQ==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ by phobos.denx.de (Postfix) with ESMTPS id 0615680433
+ for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 14:06:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=oss.qualcomm.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=balaji.selvanathan@oss.qualcomm.com
+Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 63R8kGFR3961981
+ for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 12:06:50 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-transfer-encoding:content-type:date:from:message-id
+ :mime-version:subject:to; s=qcppdkim1; bh=nMYGjILHp3JkgaQ0C0reCr
+ 2+sOjvnvBR5rpa/AHsJ6s=; b=MkKaBBpKVfXS+V3fhs1z8+zar27Ulb+XFxuq+E
+ wQySd2DfUiPRR+0m65wxrT0hoFaJcOg22gyBGMmuotmjYaoF+swdNRnCDnMka3pN
+ nw98gKUZ5ej6ghfpW5l8GQia1yb01cbFHENI77koZuEwSbspTfSbX0jkUgO7AMHd
+ eHp4cqA6P1Bz3abRT9q281Mlu5j6thUX/9Za6dYFeuk8Kmhb/I73m6ZQ0GSjjs1s
+ 4vgjpDtBdqCGb7IY6MGO4zWzVafZRYa7WR0/EMhghdZOP9c73HUItmRXTM7JshHn
+ dhr7dYZGfAM3M4+me+UUv5oWS3CNZOb73JSfNtjjsefrkadg==
+Received: from mail-pj1-f71.google.com (mail-pj1-f71.google.com
+ [209.85.216.71])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4dt4k30yfe-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 12:06:50 +0000 (GMT)
+Received: by mail-pj1-f71.google.com with SMTP id
+ 98e67ed59e1d1-35fbb5779e8so10927654a91.3
+ for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 05:06:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1777290863; x=1777895663; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Wpw9O2wJ5n3o8zSORG/tAAsUqcKpiKOPT+3GYjffMIo=;
- b=ecLwv/hngyTU0AwMs2lyKkSDe7vKa+75arN6G46OW2wWa+3rRDaW/OX7eQEKunTseb
- RaaX8gvSwe8RcAiUBBP9fuZuKJNUfLk3JKF1BLZH+1gKsrDcsONj4QSc6H5xy461Rxpc
- LCziiWljDYECxI4QTXtqRzDgqJ9ninUWVanVw=
+ d=oss.qualcomm.com; s=google; t=1777291609; x=1777896409; darn=lists.denx.de; 
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=nMYGjILHp3JkgaQ0C0reCr2+sOjvnvBR5rpa/AHsJ6s=;
+ b=gtPAAU1bh2zONgfl2Nf4H3kuJKsifiKI6L/rC4BFCbPj7FiWITkkUujqwXU817h4YA
+ ZSXhPHLjiSPPKXYZNpQ5EJHWE4BrBBVa3gfycHov1frRVu97aZ8bgCslk4LrVFk7DjCQ
+ D3yzjd1bXSWQX7dr6CKDM7zMDT/CApYdC3hIgj7dxPi92wFLXeoCL6nsGYiJlbmc8n8a
+ SD77MdwyTIA4W5B2G0IRcJmBvUpoUtjjg3YxeV9ZX1VAbRM0Bco4X2IwClFiEDB/AG5C
+ 8yduirEN3DcNkRf8IwCDYpUdlwDD36X+3vbXGCx/+D+ruxlW2WWPGRhMBbLM4TvxTSVb
+ gn6w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777290863; x=1777895663;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=1e100.net; s=20251104; t=1777291609; x=1777896409;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Wpw9O2wJ5n3o8zSORG/tAAsUqcKpiKOPT+3GYjffMIo=;
- b=hM3gUjAsv3HJ4kxrBadrmb+Chr7XzYzWCzM02w792sglav90Dww489jTecWvkfzquB
- TGMsh0tRIdOfoE9VLJgcs8+Hr6FKY6XmEQkdItE/fyNARPqf9DqlMXWPzrMZBASpZI+L
- X4sZx4qkmjftvSHo7YDJ426xre0Y29ZlE0DMq/xJCiVf4OOY80v9GCrr6O6mRvXNxGvK
- mT/ARD1j/Gdz1V+xtu6GNuYTqcq0eMlWagcwHIKaLjF9iXSO6Iq5DHlowdYpzti3P3OU
- BEghP1oQmwjJh5D6pIQscMkb11VT9usWbnCYlaxok1+3Jxx3+5670epHD3jVWeplGO39
- kdPg==
-X-Gm-Message-State: AOJu0YzUElUYQVydXiTjxHYn2sUjLdDPp12KG8LtXkThfYchMQXi9SXt
- eixp0iCKkTcTx30PuJkhFzcP9dJsT/aLs3PDjP5mquZyPJeMLZTmaQr0YlQKO7UVeLlelp5NXny
- pTky1mDUi6Q7AHWaQBkhJwDAzA2ktrUnEon2T5ZjCgj0X7DA0uDFRWA==
-X-Gm-Gg: AeBDievKg5abRGkfhWzVxZSV3vUwD2QrjuqX9PY17FqirV8y7pnxBT0zqH1F3rlrk3Y
- KPKh08dnWOM9CigIcfGuQtNZF4a+y+rSW7di8D53zpbMXXJFHIH3TpDl7dVDapZOYgEdx5Grc6b
- nD+CfwEF1nVnNjpoUo5hZnMOeuFMJRYjWIBapnyz5KcycLbn3U2AKjFw3tscVEyxcPLXTs+ccy0
- 03i4I69d/WIM67NHZZwJMIC+A5CvZCHOpJLAquUwOEY6k83B6WQ2mPFxhzV6rl+2OXDg/3JdHS/
- SR5vPLnDyNTglRzRvmXjYcqOpJ+blg==
-X-Received: by 2002:a17:907:d641:b0:b9b:e619:a73a with SMTP id
- a640c23a62f3a-ba41b3e2885mr2020222966b.46.1777290862639; Mon, 27 Apr 2026
- 04:54:22 -0700 (PDT)
+ bh=nMYGjILHp3JkgaQ0C0reCr2+sOjvnvBR5rpa/AHsJ6s=;
+ b=nZ3wuwZw07pU5pPj5H2/EY4JCl1et0zOTbDJnkHDIIHGjhSq6WPgDDMlRDSGZ7XSRs
+ wa+aGoK9L2GYsaqFL6YyqVkNf+3kU4QQTpwt5DIe1QYbxV5f9ZsuIOUUYeOAbN5ttwCd
+ 0JmeiMFKEKGljo8Yq+eMS3DvpDE3bhH+wbDD2ZGzYp+7rjB/rfiVMyhAs+AokA9cerZU
+ DBgA0XIgo5MJYlVQY6wY8SACxnCKRIC1bWQZp+lu5NA/hAIZGWx3wpLLV4SH64oyFhod
+ jOeE3BUwdCZ3wxA4OQU1l2LnCdPEO1Olte6JrXoCCKU5qB1PmDoJZ9a2bo0OANvmxP3f
+ Vkbw==
+X-Gm-Message-State: AOJu0Yz/STgFvoVSZkhpjAS8YQsc+7L9NJQbnOucYngicau+2CaPKILy
+ CUwmh2V9XgY3yEIMJ009vTYp4XeXKogqgFDVMxgHWW26m3Ur+7JxSERpI6ThRvK9Gx5YgrgCKff
+ p+dDlo+pG3xKrMY/9jwY7lIEKMUePx//qlkHb5BDIM+a+UZYkL+rZUzg8
+X-Gm-Gg: AeBDievX7ZwzGnBAl4+hdeNLxkymL7MfZrqmjJQdt+gbO3V7tLAzBp731RsJnu25rZr
+ kr2zAPrV1+7vHSzS/JfHwHT4Zd7v7FNEEDWb4Z5me0fIvsuvES0WVQXU5ZJLlsYXgwEFG1hfzfS
+ vL0Wd81hVcAC1iE+ruGdSMg5+ZVr0JOy9PQBsL7QdlsDKqArHRjiBdijvR+4xZ1BrofJG3ws5Qv
+ Smz+iCbEBAROlMthr1baonRtqbPKxpvlp7rbn3TNBI90nRADiDHwjahJURab7hY6MXACGnLZFyX
+ Isb6+cENU3XwGUnFDuAkbxhxz1xQ+W8YeK/zNFMy/AMEBGWiw+CGTE7k4V2UL9AM9MSAnsmsKno
+ QZ5DkYcksL+GvZCW3oX18HWxwQRt0GVRu73j3ogE/jp4DK27Bq9WHBY7AzlEKDGnIFOngC9RjbB
+ 25Rdk/BZnb4ONIt6vBTyZAL/1Y7ufWIwru91YlTkIn/ARbPmnHlqmJ+OPvshzf
+X-Received: by 2002:a17:90a:e704:b0:35b:9896:cbcd with SMTP id
+ 98e67ed59e1d1-361404b9b70mr40880904a91.27.1777291609290; 
+ Mon, 27 Apr 2026 05:06:49 -0700 (PDT)
+X-Received: by 2002:a17:90a:e704:b0:35b:9896:cbcd with SMTP id
+ 98e67ed59e1d1-361404b9b70mr40880871a91.27.1777291608699; 
+ Mon, 27 Apr 2026 05:06:48 -0700 (PDT)
+Received: from hu-bselvana-blr.qualcomm.com
+ (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
+ by smtp.gmail.com with ESMTPSA id
+ 98e67ed59e1d1-36140feea38sm31832910a91.6.2026.04.27.05.06.44
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 27 Apr 2026 05:06:48 -0700 (PDT)
+From: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+Subject: [PATCH v2 0/4] fastboot: block: Add GPT/MBR and device selection
+Date: Mon, 27 Apr 2026 17:36:41 +0530
+Message-Id: <20260427-fb_gpt-v2-0-9e7fe3c1649a@oss.qualcomm.com>
 MIME-Version: 1.0
-References: <f8f4e639-0e73-4d14-828a-92dbfe5526ba@cherry.de>
- <CAFLszTjWZ9DBKVui_2EE-nSg8K+5eC9V8jvwp638dLeyp_p6vw@mail.gmail.com>
- <175e1198-2ac4-48de-b68a-c29f786832cc@cherry.de>
-In-Reply-To: <175e1198-2ac4-48de-b68a-c29f786832cc@cherry.de>
-From: Simon Glass <sjg@chromium.org>
-Date: Mon, 27 Apr 2026 23:54:09 +1200
-X-Gm-Features: AVHnY4JFRbeEHih58bP6Yife7PREjivXrJfuryZf5l0XiA3h5PTjAxiNDJQvchQ
-Message-ID: <CAFLszThQ+kyCkojFm2=VNtLTtLDYT4iVmpqnto8awiMVqsct0Q@mail.gmail.com>
-Subject: Re: Couple of clang warnings for Rockchip boards
-To: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>, 
- Jonas Karlman <jonas@kwiboo.se>, Xuhui Lin <xuhui.lin@rock-chips.com>, 
- Heiko Stuebner <heiko@sntech.de>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Sebastian Reichel <sebastian.reichel@collabora.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAFFR72kC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyjHQUlJIzE
+ vPSU3UzU4B8JSMDIzMDEyNz3bSk+PSCEl0LsxTzFDNTS9OUxBQloOKCotS0zAqwQdGxtbUAL6x
+ L5FgAAAA=
+X-Change-ID: 20260427-fb_gpt-86d7d6595dad
+To: u-boot@lists.denx.de
+Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Tom Rini <trini@konsulko.com>, Heiko Schocher <hs@nabladev.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Dmitrii Merkurev <dimorinny@google.com>,
+ Adrian Freihofer <adrian.freihofer@siemens.com>,
+ Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
+ Ariel D'Alessandro <ariel.dalessandro@collabora.com>,
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1777291604; l=2245;
+ i=balaji.selvanathan@oss.qualcomm.com; s=20260213; h=from:subject:message-id; 
+ bh=rrW9yGOufwdV1gZZBldba1nrABs276OHi06zUMydFAo=;
+ b=NCWJI5uyS44VVEHAAPEdQPjRF+B5483VudambAO2adDQK3O8TRgIm1omef0phkpec52fFjhcv
+ uh9iCaYiGXEAUTyHP7IZ2H3rL7A9ZHWzspBouy10OIK6PUtiroSUxt4
+X-Developer-Key: i=balaji.selvanathan@oss.qualcomm.com; a=ed25519;
+ pk=CDpYiUU3SH7KGEtsBvY2tBGPiWfMxqWJF0p2LftOfnc=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNDI3MDEyOSBTYWx0ZWRfX9+qfY0z1RiKh
+ eb8rvdZkTqf3PBRi0ohYK1WMaxSy+pL/JfrWxAhLvPPRCXvoWbo6okNXeT7deqkTUp6PeYda0ei
+ A1JVZE0pvpSpQRntldKczZU58dvsP29sw9slw/qgyNY26EQwxJxcFlnJ7ShOW5LuF0lilBjzXd9
+ iGd9ByTlACB9ubi4y5HXLzF1Ez4Lj6P64F8VVndBDmpyy1+Wqg0zbO1uy9f/YR6p3pNZ9mvJ695
+ M3i0dwLUsdl4rHQbXxGekvrThvuZ3H6ublldvgPnB5JqijyRubu3kPp61iX51FG3nwdxG+zEUfr
+ f56jNcnkNgv65EdiKxcSbhvxX605FkdXLcgAcGqI8Am6gxnqMNrKyFBasgWnN5PMNsox6a0Y3nN
+ P7SvnnaD8R0sXk3B0aolE3yD9KOrCQ2ReYW24hjlG8hyvAhh7eZi7aV4IqOwDbDxkcgfiDsTZZd
+ iHFsAkYv0IV+QY6vQug==
+X-Authority-Analysis: v=2.4 cv=a7QAM0SF c=1 sm=1 tr=0 ts=69ef515a cx=c_pps
+ a=UNFcQwm+pnOIJct1K4W+Mw==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+ a=IkcTkHD0fZMA:10 a=A5OVakUREuEA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
+ a=NEAV23lmAAAA:8 a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=_aTGsJdUfmxtiA1JYQUA:9
+ a=QEXdDO2ut3YA:10 a=uKXjsCUrEbL0IQVhDsJ9:22
+X-Proofpoint-GUID: biEQfBU5Uxmz31TOg_hiTX_JQOFM-b1S
+X-Proofpoint-ORIG-GUID: biEQfBU5Uxmz31TOg_hiTX_JQOFM-b1S
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
+ definitions=2026-04-27_03,2026-04-21_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ clxscore=1015 malwarescore=0 spamscore=0 phishscore=0 impostorscore=0
+ lowpriorityscore=0 suspectscore=0 bulkscore=0 priorityscore=1501 adultscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2604200000 definitions=main-2604270129
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -114,265 +161,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Quentin,
+This series enables GPT and MBR partition table operations for
+fastboot block devices and introduces device selection syntax.
 
-On Thu, 23 Apr 2026 at 22:24, Quentin Schulz <quentin.schulz@cherry.de> wrote:
->
-> Hi Simon,
->
-> On 4/22/26 11:57 PM, Simon Glass wrote:
-> > Hi Quentin,
-> >
-> > On Thu, 23 Apr 2026 at 01:26, Quentin Schulz <quentin.schulz@cherry.de> wrote:
-> >>
-> >> Hi all,
-> >>
-> >> I'm looking into force-enabling CONFIG_WERROR for all Rockchip SoCs.
-> >> First, let me know if this is a bad idea :)
-> >
-> > I don't like it, as it makes development slower. I like to see all the
-> > warnings created by a change and tend to fix them iteratively. We
-> > already have a warning check in CI. A better approach is to
-> >
-> > Can you use: KCFLAGS=-Werror
-> >
-> > either in your environment or on the 'make' cmdline?
-> >
->
-> Well, if it's during development, you can always disable WERROR? The
-> fact that I've never actually enabled -Werror locally in about a decade
-> in U-Boot probably isn't a good sign. One of the things that make me
-> wary though is compiler updates with new warnings. I've tested with
-> clang 22, don't know when clang 23 is planned to be released. GCC 16 is
-> about to be released as well.
->
-> By having the check in CI, we have a longer-than-necessary feedback loop
-> for contributors. Has this been an issue in the past? /me shrugs
+Patch 1 implements device selection syntax allowing users to specify the
+target block device using "N:partition" format, where N is the
+device number.
 
-This is strange though, because people should see the warnings during
-development. I wonder if it is scrolling off the screen.
+Patch 2 adds fastboot_flash_gpt_partition_table() and
+fastboot_flash_mbr_partition_table() helper functions that handle
+flashing of GPT and MBR partition tables to block devices.
 
-One my bugbears is non-actionable output. When the build succeeds
-(with no warnings) I see no output, using 'buildman -I --board xxx -w
--o /tmp/b/xxx' or in fact these days 'um build xxx'. This uses 'make
--s' under the hood, so that it doesn't print a huge list of filenames,
-etc. I also sometimes do a 'fresh' build with 'um build -F xxx' to
-check everything is clean ('buildman -m' does something similar).
+Patch 3 adds support for flashing GPT and MBR partition tables to the
+fastboot block backend. This enables operations like "fastboot flash
+gpt gpt.img" and "fastboot flash mbr mbr.img" for block devices.
 
-Note that buildman returns exit code 101 if there are any warnings, so
-the build basically fails.
+Patch 4 documents the new syntax with usage examples.
 
->
-> No defconfig seems to be setting this option, not sure exactly why that is.
+CI test results
+---------------
+        https://github.com/u-boot/u-boot/pull/941/checks
+	All checks have passed
 
-To me this is a difference between 'functionality' options and
-development options. Putting development options in Kconfig makes it
-harder to turn them on and off, since you must either edit the
-defconfig or edit the .config file. It is easier to just pass an
-environment variable.
+Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+---
+Changes in v2:
+- Seperate adding device selection syntax and GPT/MBR flashing support
+  into seperate patches.
+- Introduce common helper functions such as
+  fastboot_flash_gpt_partition_table and
+  fastboot_flash_mbr_partition_table functions that can be used both
+  in fb_mmc.c and fb_block.c fot GPT and MBR flashing.
+- Link to v1: https://lore.kernel.org/u-boot/20260410-fb_block-v1-0-68f0c976fe0e@oss.qualcomm.com/
 
->
-> Also, FYI, enabling CONFIG_WERROR doesn't apply the -Werror flag to the
-> host tools, which I believe is an oversight. I see buildman sets
-> HOSTCFLAGS=-Werror, maybe we should do that in the appropriate place
-> based on CONFIG_WERROR as well?
+---
+Balaji Selvanathan (4):
+      fastboot: block: Add device selection syntax
+      fastboot: Add GPT/MBR partition table flashing helper functions
+      fastboot: block: Add GPT/MBR partition table flashing support
+      doc: fastboot: Document block device selection syntax
 
-Yes, that seems to be an oversight.
+ doc/android/fastboot.rst     |  41 +++++++++++++++++
+ drivers/fastboot/Kconfig     |   4 +-
+ drivers/fastboot/fb_block.c  | 102 +++++++++++++++++++++++++++++++++++++++++--
+ drivers/fastboot/fb_common.c |  94 +++++++++++++++++++++++++++++++++++++++
+ drivers/fastboot/fb_mmc.c    |  49 +++------------------
+ include/fastboot-internal.h  |  30 +++++++++++++
+ 6 files changed, 272 insertions(+), 48 deletions(-)
+---
+base-commit: 9f61fd5b80a43ae20ba115e3a2933d47d720ab82
+change-id: 20260427-fb_gpt-86d7d6595dad
 
->
-> >>
-> >> gcc version 15.2.1 20250808 (Red Hat Cross 15.2.1-1) (GCC) for both ARM
-> >> and Aarch64 machines report no warnings (built with a config fragment
-> >> enabling CONFIG_WERROR).
-> >>
-> >> For clang, I went for cross-compiling using either
-> >> make HOSTCC=clang CROSS_COMPILE=arm-linux-gnu- CC=clang O=build/ ...
-> >> or
-> >> make HOSTCC=clang CROSS_COMPILE=aarch64-linux-gnu- CC=clang O=build/ ...
-> >>
-> >> First things first, I can't even build any of the Aarch32/ARM with clang
-> >> for some reason, so this only applies for Aarch64 Rockchip platforms.
-> >>
-> >> Some platforms couldn't be built due to hitting the max TPL limit (e.g.
-> >> PX30).
-> >
-> > It's interesting that clang code is larger than gcc. There was a time
-> > that I thought clang would replace gcc. But clang is much slower and
-> > if it doesn't provide code-size benefits, I'm not sure that will
-> > happen. We all use it as an lsp though, at least.
-> >
->
->  From what I've gathered, clang can cross-compile to many different
-> archs with a single binary, GCC goes for separate toolchains, which
-> kinda is a pain to be honest.
+Best regards,
+-- 
+Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 
-Yes it seems so. I've never actually tried it though, have you? For my
-workflow, buildman handles the toolchains.
-
->
-> Also, it's nice for build systems like Buildroot or Yocto to only need a
-> single toolchain (either clang or GCC, but not both) for everything. So
-> in an ideal world if you want to use clang for everything, you could.
-> Last time I checked, you cannot build TF-A on RK3399 with clang only.
-> I'm also not entirely sure how far we are from building the kernel with
-> clang, or maybe it's already fully supported.
-
-I don't know either. I wonder how it handles linker scripts?
-
->
-> >>
-> >> clang version 21.1.8 (Fedora 21.1.8-4.fc43) (or clang version 22.1.1
-> >> (Fedora 22.1.1-2.fc44), doesn't matter) issues three warnings:
-> >>
-> >> 1. Chromebooks EC fails to build:
-> >> In file included from
-> >> /home/qschulz/work/upstream/u-boot/drivers/misc/cros_ec.c:21:
-> >> In file included from
-> >> /home/qschulz/work/upstream/u-boot/include/cros_ec.h:12:
-> >> /home/qschulz/work/upstream/u-boot/include/ec_commands.h:3578:2: error:
-> >> field  within 'struct ec_params_charge_state' is less aligned than
-> >> 'union ec_params_charge_state::(anonymous at
-> >> /home/qschulz/work/upstream/u-boot/include/ec_commands.h:3578:2)' and is
-> >> usually due to 'struct ec_params_charge_state' being packed, which can
-> >> lead to unaligned accesses [-Werror,-Wunaligned-access]
-> >>    3578 |         union {
-> >>         |         ^
-> >>
-> >> The following
-> >>
-> >> diff --git a/include/ec_commands.h b/include/ec_commands.h
-> >> index 23597d28b2c..c5f9777c0c7 100644
-> >> --- a/include/ec_commands.h
-> >> +++ b/include/ec_commands.h
-> >> @@ -3575,7 +3575,7 @@ enum charge_state_params {
-> >>
-> >>    struct __ec_todo_packed ec_params_charge_state {
-> >>          uint8_t cmd;                            /* enum charge_state_command */
-> >> -       union {
-> >> +       union __ec_todo_packed {
-> >>                  struct __ec_align1 {
-> >>                          /* no args */
-> >>                  } get_state;
-> >>
-> >> seems to fix it. The upstream EC git repo
-> >> (https://chromium.googlesource.com/chromiumos/platform/ec) has a commit
-> >> with more changes, see 65da9cc08766 ("include/ec_commands.h: Fix
-> >> unaligned access warnings"). It doesn't apply cleanly (and I haven't
-> >> looked into other patches to backport for this to apply cleanly). I'm
-> >> not sure what we're supposed to do here? I also don't have a Chromebook
-> >> to test.
-> >
-> > It should be possible to backport this, to avoid divergence. I could
-> > look at that if you like.
-> >
->
-> That'd be nice :) Maybe the solution would be a sync with upstream
-> instead of backporting select patches? I have no experience with CrOS EC
-> so no clue what we're supposed to do here, especially since if I
-> understood correctly, they switched to Zephyr somewhat recently, so
-> maybe the API changed and isn't backward compatible (I don't think the
-> Rockchip Chromebooks were migrated to that).
-
-Yes, I led that effort in the distant past - we changed from a
-home-grown OS to Zephyr. But it still uses the same protocol.
-
-https://chromium.googlesource.com/chromiumos/platform/ec/+/HEAD/docs/zephyr/README.md
-
->
-> > For now you could use a #pragma just around the header include, or in cros_ec.c
-> >
->
-> I'd rather not silence warnings if we're planning on fixing them soon-ish :)
-
-Indeed, I'll take a look at updating the file.
-
->
-> > I don't think you need to worry about the struct going wrong, so long
-> > as the size remains the same. There are two Chromebooks in the SJG lab
-> > you can try it with: bob and kevin
-> >
->
-> Well, if we pack it, it may change the size, that's the whole point of
-> packing no? Or you meant checking that the current size of the struct is
-> the same after packing it to make clang happy?
->
-> But also, are we doing anything with this? Like some CrOS EC checks in
-> labgrid for example? I cannot see any test for the crosec command in
-> test/py/tests/ for example. No test specific to a chromebook either (git
-> grep chromebook test/py/tests).
-
-It is used for the sandbox keyboard, for example.
-
->
-> >>
-> >> 2. RK3528, RK3576 and RK3588 boards fail with (replace rk3528 in path
-> >> for the other SoCs)
-> [...]
-> >> I tried casting CONFIG_COUNTER_FREQUENCY into a u64 and it builds and no
-> >> magic smoke when booting a board. Whether this is the proper fix, I
-> >> don't know, but the warning is then gone. We could also decide to ignore
-> >> the warning like for Android's Little Kernel (where and how much this is
-> >> used is unclear as the repo isn't seeing much activity).
-> >>
-> >> The register documentation indicates this is not used by the hardware at
-> >> all, so even if it was broken, we probably wouldn't see a difference?
-> >
-> > Similar to what Tom says...does this work?:
-> >
-> > asm volatile("msr cntfrq_el0, %0" : : "r"
-> >    ((u64)CONFIG_COUNTER_FREQUENCY));
-> >
->
-> Yes this was among the things I tried (see paragraph with the magic
-> smoke not happening). I should probably start practicing condensing my
-> mails :)
-
-Ah OK, missed that sorry.
-
->
-> >>
-> >> 3. Boards building USB TCPM fail with
-> >>
-> >> In file included from
-> >> /home/qschulz/work/upstream/u-boot/drivers/usb/tcpm/tcpm-uclass.c:12:
-> >> In file included from
-> >> /home/qschulz/work/upstream/u-boot/include/usb/tcpm.h:12:
-> >> /home/qschulz/work/upstream/u-boot/include/usb/pd.h:212:2: error: field
-> >> within 'struct pd_message' is less aligned than 'union
-> >> pd_message::(anonymous at
-> >> /home/qschulz/work/upstream/u-boot/include/usb/pd.h:212:2)' and is
-> >> usually due to 'struct pd_message' being packed, which can lead to
-> >> unaligned accesses [-Werror,-Wunaligned-access]
-> >>     212 |         union {
-> >>         |         ^
-> >>
-> >> This file is apparently adapted from upstream Linux, where the code is
-> >> identical for that struct. So not sure what to do here.
-> >
-> > Maybe add __packed ?
-> >
->
-> We could, but if upstream (Linux) didn't fix it, maybe there's a reason
-> and we should discuss it there first?
->
-> So, looking a bit more into this, the kernel actually silences a bunch
-> of warnings when not passing W=N to `make`, one of them being
-> unaligned-access, see
-> https://elixir.bootlin.com/linux/v7.0/source/scripts/Makefile.warn#L155.
-> So maybe we need to sync some of those back to U-Boot as well?
->
-> Our scripts/Makefile.extrawarn is claimed[1] to be loosely based on
-> Linux 6.1's, but it is actually quite different. So not sure how much we
-> should be backporting and how.
-
-In most cases it would be better to line up with the Linux version as
-much as possible. But for unaligned-access, I suspect we have good
-reason to warn about that since it can cause some boards to fail to
-boot.
-
-Regards,
-Simon
-
-
-
-> [1] bd3f9ee679b4 ("kbuild: Bump the build system to 6.1")
