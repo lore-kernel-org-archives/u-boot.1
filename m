@@ -4,61 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E977DFF8865
-	for <u-boot@archiver.kernel.org>; Mon, 27 Apr 2026 06:59:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C589FF8861
+	for <u-boot@archiver.kernel.org>; Mon, 27 Apr 2026 07:09:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 27FCD80433;
-	Mon, 27 Apr 2026 08:59:56 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 6ED0E83C14;
+	Mon, 27 Apr 2026 09:09:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=mediatek.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="iHEMIAgZ";
+	dkim=pass (1024-bit key; unprotected) header.d=mediatek.com header.i=@mediatek.com header.b="O6HLaUL4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3545383693; Mon, 27 Apr 2026 08:59:55 +0200 (CEST)
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+ id 10A4583FDB; Mon, 27 Apr 2026 09:09:32 +0200 (CEST)
+Received: from mailgw02.mediatek.com (unknown [210.61.82.184])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AE9DA80077
- for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 08:59:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 94F5F80077
+ for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 09:09:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
+ header.from=mediatek.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 19003418B7;
- Mon, 27 Apr 2026 06:59:51 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 08437C2BCB4;
- Mon, 27 Apr 2026 06:59:46 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1777273191;
- bh=d71TfqubBNvmtfu8Y9TnvT2sAfitYc7Kh8Wp/9a2pZY=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=iHEMIAgZwu8LcGEguHo2o5jyrS9fDXgkV6A7VO52lmBabZ/UP8KBq59mxbJea8K9q
- INPJE3gjmPpJvN8aLp5Bo5XQmnPdM+NwAPf2n0okAAWldkMANPxt6Stthr3Bh7H0dt
- Wx+0bqLsZn/cwQ/XC58hpYv1xxN7YA61uDWJMJ4B5VwQTM50GgElMMapP9/hG7tNzb
- ZiyTrtSMJrWfQZ28L1+gAxgwE9vDc4YmA8k1AsoCi7JOxXCEWTCUhTyAnz6bi8zdbH
- cnaiGLbEb0vIzuxONv4PxOWOm8E1tlXl09IFTwk0sttDHjv8MVwAlpKideb1NtH/ga
- X/nhV6XCmBKbA==
-Date: Mon, 27 Apr 2026 12:29:43 +0530
-From: Sumit Garg <sumit.garg@kernel.org>
-To: Tom Rini <trini@konsulko.com>, Casey Connolly <casey.connolly@linaro.org>
-Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io, neil.armstrong@linaro.org,
- Ajit Singh <blfizzyy@gmail.com>,
- Antony Kurniawan Soemardi <linux@smankusors.com>,
- Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
- Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
- Luca Weiss <luca.weiss@fairphone.com>,
- Sumit Garg <sumit.garg@oss.qualcomm.com>,
- Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
-Subject: Re: [PULL] Please pull casey/qcom-main-13Apr2026
-Message-ID: <ae8JX1O7PGJaFSX8@sumit-xelite>
-References: <20260419030602.2470577-1-casey.connolly@linaro.org>
- <20260419154026.GV41863@bill-the-cat>
+ spf=pass smtp.mailfrom=weijie.gao@mediatek.com
+X-UUID: 04745554420811f19a16598d5ca7f8ec-20260427
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mediatek.com;
+ s=dk; 
+ h=Content-Type:MIME-Version:Message-ID:Date:Subject:CC:To:From;
+ bh=Z1MwIeNYoGCW3hcyT0ag7OXfzy1UQRv0x+xy6HPFhGk=; 
+ b=O6HLaUL4rWw93b4mxh3dy51385XTSVTiKgHXvWpmQKdKfrC0I0Q7jRtTfNzx1aOOQ/wIwpCLw4nB9k4Yhl+lre4fNMxXIPU2PWs1EHzPvd6McTiFBQxPbh1/R7IQQKlxmdwG9/0LHOJruUISJMOLuPwSAeLv0kLtbr4rurnRw2A=;
+X-CID-P-RULE: Release_Ham
+X-CID-O-INFO: VERSION:1.3.12, REQID:95ca3f41-32d5-4608-935c-247aeb3e5b31, IP:0,
+ U
+ RL:0,TC:0,Content:-5,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTION
+ :release,TS:-5
+X-CID-META: VersionHash:e7bac3a, CLOUDID:62cca764-469e-4eb6-aeb8-4b21454b0f32,
+ B
+ ulkID:nil,BulkQuantity:0,Recheck:0,SF:102|836|865|888|898,TC:-5,Content:0|
+ 15|50,EDM:-3,IP:nil,URL:0,File:130,RT:0,Bulk:nil,QS:nil,BEC:-1,COL:0,OSI:0
+ ,OSA:0,AV:0,LES:1,SPR:NO,DKR:0,DKP:0,BRR:0,BRE:0,ARC:0
+X-CID-BVR: 2,SSN|SDN
+X-CID-BAS: 2,SSN|SDN,0,_
+X-CID-FACTOR: TF_CID_SPAM_SNR
+X-CID-RHF: D41D8CD98F00B204E9800998ECF8427E
+X-UUID: 04745554420811f19a16598d5ca7f8ec-20260427
+Received: from mtkmbs14n2.mediatek.inc [(172.21.101.76)] by
+ mailgw02.mediatek.com (envelope-from <weijie.gao@mediatek.com>)
+ (Generic MTA with TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384 256/256)
+ with ESMTP id 1896026179; Mon, 27 Apr 2026 15:09:22 +0800
+Received: from mtkmbs11n2.mediatek.inc (172.21.101.187) by
+ mtkmbs13n2.mediatek.inc (172.21.101.108) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.29; Mon, 27 Apr 2026 15:09:21 +0800
+Received: from mcddlt001.gcn.mediatek.inc (10.19.240.15) by
+ mtkmbs11n2.mediatek.inc (172.21.101.73) with Microsoft SMTP Server id
+ 15.2.2562.29 via Frontend Transport; Mon, 27 Apr 2026 15:09:20 +0800
+From: Weijie Gao <weijie.gao@mediatek.com>
+To: <u-boot@lists.denx.de>
+CC: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, Tom Rini
+ <trini@konsulko.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>, Simon
+ Glass <sjg@chromium.org>, Weijie Gao <weijie.gao@mediatek.com>
+Subject: [PATCH v3 00/10] Add support for ubi environment to create volumes
+ (v3)
+Date: Mon, 27 Apr 2026 15:09:11 +0800
+Message-ID: <cover.1777272283.git.weijie.gao@mediatek.com>
+X-Mailer: git-send-email 2.17.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260419154026.GV41863@bill-the-cat>
+Content-Type: text/plain
+X-MTK: N
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,44 +86,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Casey,
+This patch series expose more ubi helpers to allow the ubi environment to
+create ubi env volumes if not exist.
 
-On Sun, Apr 19, 2026 at 09:40:26AM -0600, Tom Rini wrote:
-> On Sun, Apr 19, 2026 at 05:03:16AM +0200, Casey Connolly wrote:
-> 
-> > Hi Tom,
-> > 
-> > Various Qualcomm additions this cycle:
-> > * USB superspeed support for 1 platform
-> > * Initial support for the Milos platform and the Fairphone Gen 6 (chainloaded from ABL)
-> > * Improved support for booting with OP-TEE on supported platforms
-> > * Initial basic power domain support
-> > 
-> > Notably there is a generic change to the device core, missing power
-> > domains will no longer cause a device to fail probe and instead will
-> > just print a warning. This shouldn't affect any existing platforms.
-> 
-> Unfortunately I get a fail to build in CI:
-> https://source.denx.de/u-boot/u-boot/-/jobs/1428016
-> +(qcm6490) drivers/phy/qcom/phy-qcom-qmp-combo.c: In function 'qmp_combo_com_init':
-> +(qcm6490) drivers/phy/qcom/phy-qcom-qmp-combo.c:288:35: error: unused variable 'cfg' [-Werro
-> r=unused-variable]
-> +(qcm6490)   288 |         const struct qmp_phy_cfg *cfg = qmp->cfg;
-> +(qcm6490)       |                                   ^~~
-> +(qcm6490) cc1: all warnings being treated as errors
-> +(qcm6490) make[4]: *** [scripts/Makefile.build:271: drivers/phy/qcom/phy-qcom-qmp-combo.o] E
-> rror 1
-> +(qcm6490) make[3]: *** [scripts/Makefile.build:492: drivers/phy/qcom] Error 2
-> +(qcm6490) make[2]: *** [scripts/Makefile.build:492: drivers/phy] Error 2
-> +(qcm6490) make[1]: *** [Makefile:2205: drivers] Error 2
+Changes:
+v2: Add const qualifier for char */void * in function parameters
+    Adjust normal command message
 
-Do you plan to re-send this PR with updated USB super speed patch-set
-from Balaji here [1] which should take care of this CI issue?
+v3: Fix command messages
+    Fix some incorrect code flow and error handling
+    Correct dynamic parameter type
+    Add comments for exported functions
 
-Since the v2026.04-rc1 is going to be tagged today, we really don't want
-to miss this merge window again for all these pending features to be
-merged.
+Weijie Gao (10):
+  ubi: remove unnecessary extern directive from function prototypes
+  cmd: ubi: mark read-only function parameters with const
+  cmd: ubi: use void * for buf parameter in ubi_volume_read
+  cmd: ubifs: mark string parameters with const
+  cmd: ubi: change the type of parameter dynamic to bool
+  cmd: ubi: reorganize command messages
+  cmd: ubi: export more APIs to public
+  cmd: ubi: allow creating volume with all free spaces in ubi_create_vol
+  ubi: add comments for exported ubi API functions
+  env: ubi: add support to create environment volume if it does not
+    exist
 
-[1] https://lore.kernel.org/all/20260418-kodiak_ss-v4-0-d381670c9d78@oss.qualcomm.com/
+ cmd/ubi.c             | 162 ++++++++++++++++++++++++++++--------------
+ cmd/ubifs.c           |   2 +-
+ env/Kconfig           |  11 +++
+ env/ubi.c             |  39 +++++++++-
+ fs/ubifs/super.c      |   2 +-
+ fs/ubifs/ubifs.c      |   2 +-
+ include/ubi_uboot.h   | 106 +++++++++++++++++++++++++--
+ include/ubifs_uboot.h |   4 +-
+ 8 files changed, 260 insertions(+), 68 deletions(-)
 
--Sumit
+-- 
+2.45.2
+
