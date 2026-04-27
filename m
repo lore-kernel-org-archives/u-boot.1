@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F119BFF8860
-	for <u-boot@archiver.kernel.org>; Mon, 27 Apr 2026 13:59:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7DB9FF885E
+	for <u-boot@archiver.kernel.org>; Mon, 27 Apr 2026 13:59:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EBF8A84312;
-	Mon, 27 Apr 2026 15:59:13 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 34F87842EF;
+	Mon, 27 Apr 2026 15:59:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=kernel-space.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=kernel-space.org header.i=@kernel-space.org header.b="ymqhLBPj";
+	dkim=pass (1024-bit key; unprotected) header.d=kernel-space.org header.i=@kernel-space.org header.b="wWpaRM4f";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6E18D83BC4; Mon, 27 Apr 2026 15:59:06 +0200 (CEST)
+ id 6DAE2842C7; Mon, 27 Apr 2026 15:59:06 +0200 (CEST)
 Received: from mail.kernel-space.org (unknown
  [IPv6:2a03:4000:b:d08:14a9:1bff:fedc:75ad])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 05FFA8426C
+ by phobos.denx.de (Postfix) with ESMTPS id 1A77A842C7
  for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 15:59:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=kernel-space.org
@@ -32,21 +32,21 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel-space.org;
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=96w3PDJNebj+7kWe9Ua9pm0y7l/Zh84qjrRQwPSCDv0=;
- b=ymqhLBPjGT/cKl3yFlKh+5N8uFRTkC5Ez1YO+K1eibLPdc1AYO2Uzwif8axw/PzyrHbH54
- cdPefxhj78zW5HvuAjDLlJuoDFluGD69sgbbEWkjDxxfk+kFD9wWOgtfteJ09TflgxcNCa
- EyJSXhL/pFtm42MhkOAERhM3o+aZF/U=
+ bh=Tne5kF14M93JF+XszKSE44M8YblU1V8b32saUCeDP4Q=;
+ b=wWpaRM4f4fIR/pyN43mUD2jAXju6hNb0cdkXGOkZ4SYsN34lPUa2hgK5P8co8pvYCiBQGg
+ 3FYrAERv6KiVtQAtyXn9DWYZyAh8HHyLrQ+Fn68UE0IBKz8edDVRaebSynxPyMAXyVDla1
+ /aqouOmFCu2yzcT1uCJn7FqAd1sNrBw=
 Received: from archlinux (<unknown> [2a07:7e81:7daa:0:62cf:84ff:feee:627])
- by oreshnik (OpenSMTPD) with ESMTPSA id fba54a19
+ by oreshnik (OpenSMTPD) with ESMTPSA id 8badebd1
  (TLSv1.3:TLS_AES_256_GCM_SHA384:256:NO); 
  Mon, 27 Apr 2026 13:58:59 +0000 (UTC)
 From: Angelo Dureghello <angelo@kernel-space.org>
 To: trini@konsulko.com
 Cc: visitorckw@gmail.com, u-boot@lists.denx.de, sjg@chromium.org,
  Angelo Dureghello <angelo@kernel-space.org>
-Subject: [PATCH v2 2/9] m68k: dts: stmark2: enable esdhc
-Date: Mon, 27 Apr 2026 15:58:47 +0200
-Message-ID: <20260427135854.18496-2-angelo@kernel-space.org>
+Subject: [PATCH v2 3/9] board: stmark2: add sd boot command
+Date: Mon, 27 Apr 2026 15:58:48 +0200
+Message-ID: <20260427135854.18496-3-angelo@kernel-space.org>
 X-Mailer: git-send-email 2.54.0
 In-Reply-To: <20260427135854.18496-1-angelo@kernel-space.org>
 References: <20260427135854.18496-1-angelo@kernel-space.org>
@@ -68,25 +68,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable esdhc device.
+Add command to boot from sd.
 
 Signed-off-by: Angelo Dureghello <angelo@kernel-space.org>
 ---
- arch/m68k/dts/stmark2.dts | 4 ++++
- 1 file changed, 4 insertions(+)
+ include/configs/stmark2.h | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
-diff --git a/arch/m68k/dts/stmark2.dts b/arch/m68k/dts/stmark2.dts
-index 3ba68b77d64..8e196fa65ff 100644
---- a/arch/m68k/dts/stmark2.dts
-+++ b/arch/m68k/dts/stmark2.dts
-@@ -45,3 +45,7 @@
- &i2c0 {
- 	status = "okay";
- };
-+
-+&esdhc {
-+	status = "okay";
-+};
+diff --git a/include/configs/stmark2.h b/include/configs/stmark2.h
+index c8a39e191a2..a7afbb3be1f 100644
+--- a/include/configs/stmark2.h
++++ b/include/configs/stmark2.h
+@@ -14,9 +14,12 @@
+ 	board/sysam/stmark2/sbf_dram_init.o (.text*)
+ 
+ #define CFG_EXTRA_ENV_SETTINGS				\
++	"boot_sd=load mmc 0:1 ${loadaddr} uImage; "		\
++		"load mmc 0:1 ${loadaddr_ramfs} uRamfs\0"	\
+ 	"kern_size=0x700000\0"					\
+-	"loadaddr=0x40001000\0"					\
++	"loadaddr=0x42000000\0"					\
+ 		"-(rootfs)\0"					\
++	"loadaddr_ramfs=0x43000000\0"				\
+ 	"update_uboot=loady ${loadaddr}; "			\
+ 		"sf probe 0:1 50000000; "			\
+ 		"sf erase 0 0x80000; "				\
 -- 
 2.54.0
 
