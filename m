@@ -4,74 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D6F2FF8861
-	for <u-boot@archiver.kernel.org>; Mon, 27 Apr 2026 07:11:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2075AFF8862
+	for <u-boot@archiver.kernel.org>; Mon, 27 Apr 2026 07:28:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F36B3842E7;
-	Mon, 27 Apr 2026 09:09:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=mediatek.com
+	by phobos.denx.de (Postfix) with ESMTP id 90C3283693;
+	Mon, 27 Apr 2026 09:28:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=disroot.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=mediatek.com header.i=@mediatek.com header.b="XYe4wejp";
+	dkim=pass (2048-bit key; secure) header.d=disroot.org header.i=@disroot.org header.b="W3DBn6PA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6D21580433; Mon, 27 Apr 2026 09:09:49 +0200 (CEST)
-Received: from mailgw02.mediatek.com (unknown [210.61.82.184])
+ id E079D83693; Mon, 27 Apr 2026 07:53:01 +0200 (CEST)
+Received: from layka.disroot.org (layka.disroot.org [178.21.23.139])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1E6C783AA9
- for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 09:09:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=mediatek.com
+ by phobos.denx.de (Postfix) with ESMTPS id C183F80077
+ for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 07:52:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=weijie.gao@mediatek.com
-X-UUID: 1046706a420811f19a16598d5ca7f8ec-20260427
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mediatek.com;
- s=dk; 
- h=Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:CC:To:From;
- bh=d19RNAfcB6xvbqPEsT0OpZPgE6rf5NHvqfa22CEZ06s=; 
- b=XYe4wejpPkzLceYXzUpJ9U6oLB0LedZ6ugjm2L5WjPkFGGgoDGsQ8LdzdWlq0Wi5oaaKvQevLvDXCHLnaALGa1hwQK4F/MR9g4Ew75cJ5fi2NC+3wOTACYPVNGczGbdVPOJ/dURa48BUra9j5jKGC9tqXSl22jQ20GowN4vML5s=;
-X-CID-P-RULE: Release_Ham
-X-CID-O-INFO: VERSION:1.3.12, REQID:2ae9ae0e-577c-4bad-8e49-764bb7faabfd, IP:0,
- U
- RL:0,TC:0,Content:0,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTION:
- release,TS:0
-X-CID-META: VersionHash:e7bac3a, CLOUDID:f92a7fbe-65a8-4b41-ac18-3671578a914d,
- B
- ulkID:nil,BulkQuantity:0,Recheck:0,SF:81|82|102|836|865|888|898,TC:-5,Cont
- ent:0|15|50,EDM:-3,IP:nil,URL:0,File:130,RT:0,Bulk:nil,QS:nil,BEC:-1,COL:0
- ,OSI:0,OSA:0,AV:0,LES:1,SPR:NO,DKR:0,DKP:0,BRR:0,BRE:0,ARC:0
-X-CID-BVR: 2,SSN|SDN
-X-CID-BAS: 2,SSN|SDN,0,_
-X-CID-FACTOR: TF_CID_SPAM_SNR
-X-CID-RHF: D41D8CD98F00B204E9800998ECF8427E
-X-UUID: 1046706a420811f19a16598d5ca7f8ec-20260427
-Received: from mtkmbs09n1.mediatek.inc [(172.21.101.35)] by
- mailgw02.mediatek.com (envelope-from <weijie.gao@mediatek.com>)
- (Generic MTA with TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384 256/256)
- with ESMTP id 89929218; Mon, 27 Apr 2026 15:09:42 +0800
-Received: from mtkmbs11n2.mediatek.inc (172.21.101.187) by
- mtkmbs10n1.mediatek.inc (172.21.101.34) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.29; Mon, 27 Apr 2026 15:09:41 +0800
-Received: from mcddlt001.gcn.mediatek.inc (10.19.240.15) by
- mtkmbs11n2.mediatek.inc (172.21.101.73) with Microsoft SMTP Server id
- 15.2.2562.29 via Frontend Transport; Mon, 27 Apr 2026 15:09:40 +0800
-From: Weijie Gao <weijie.gao@mediatek.com>
-To: <u-boot@lists.denx.de>
-CC: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, Tom Rini
- <trini@konsulko.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>, Simon
- Glass <sjg@chromium.org>, Weijie Gao <weijie.gao@mediatek.com>
-Subject: [PATCH v3 10/10] env: ubi: add support to create environment volume
- if it does not exist
-Date: Mon, 27 Apr 2026 15:09:39 +0800
-Message-ID: <d7ec0e5d655f8c2f1d159908f74d00927d7a0776.1777272283.git.weijie.gao@mediatek.com>
-X-Mailer: git-send-email 2.17.0
-In-Reply-To: <cover.1777272283.git.weijie.gao@mediatek.com>
-References: <cover.1777272283.git.weijie.gao@mediatek.com>
+ dmarc=pass (p=reject dis=none) header.from=disroot.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=kauschluss@disroot.org
+Received: from mail01.disroot.lan (localhost [127.0.0.1])
+ by disroot.org (Postfix) with ESMTP id 823AA27307;
+ Mon, 27 Apr 2026 07:52:59 +0200 (CEST)
+Received: from layka.disroot.org ([127.0.0.1])
+ by localhost (disroot.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id jzygu0r5cbEO; Mon, 27 Apr 2026 07:52:59 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=disroot.org; s=mail;
+ t=1777269178; bh=MbsMAPv5cKak9RtAzMn7Deardvy0p6T+2TTUHaF5Hv4=;
+ h=From:Subject:Date:To:Cc;
+ b=W3DBn6PAG32P2wkSQQ0d6hXt4F4nWFB5JGmFqabxHVa/NY+8y3PoTFmoUKGoIzqni
+ nDKwaLshpEV6p0szyo0jJK9Q/BK8nx7Y/u4bSb2LXIBjdl03E22YBhu/hiEWYfZa1f
+ G+AmTJuev1CEBlgMQ54QYEmElhccPF0eH+y+1TvE5LrBVkdf0wd9TgpEgOOH9tH6CK
+ AvNK2XxzJE5o0C1CpFlXYYnzzAgBaawTWDj8wxgd19CErGQWW2UzHK+AlreRpg1WRV
+ HKkqddEsig+fcwhVrlRaoW979iVStLn33zr3+YqWZjMH5KjqSkVQn91Ed1pUqg9HQw
+ sOQF6oa2/o2dg==
+From: Kaustabh Chakraborty <kauschluss@disroot.org>
+Subject: [PATCH 0/4] HS400 and HS400ES support for Exynos DW-MMC drivers
+Date: Mon, 27 Apr 2026 11:22:48 +0530
+Message-Id: <20260427-dwmmc-exynos-hs400-es-v1-0-3495df40a9ac@disroot.org>
 MIME-Version: 1.0
-Content-Type: text/plain
-X-MTK: N
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIALD57mkC/yXMyw6CMBBG4Vchs3aSsSEUfRXjAsqPjAnFdLxAC
+ O9uleW3OGclQ1IYnYuVEt5qOsWM46GgMDTxBtYum5y4SkrnufuMY2DMS5yMBytFGMat9yKnppY
+ 6gHL7SOh1/n8v1932au8Iz9+Mtu0Lmj+7DnkAAAA=
+X-Change-ID: 20260427-dwmmc-exynos-hs400-es-b77009a808ce
+To: Peng Fan <peng.fan@nxp.com>, u-boot@lists.denx.de
+Cc: Minkyu Kang <mk7.kang@samsung.com>, Tom Rini <trini@konsulko.com>, 
+ Jaehoon Chung <jh80.chung@samsung.com>, Anand Moon <linux.amoon@gmail.com>, 
+ Sam Protsenko <semen.protsenko@linaro.org>, 
+ Lukas Timmermann <uboot@timmermann.space>, 
+ Henrik Grimler <henrik@grimler.se>, 
+ Kaustabh Chakraborty <kauschluss@disroot.org>
+X-Mailman-Approved-At: Mon, 27 Apr 2026 09:28:50 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,106 +75,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add an option to allow environment volume being auto created if not
-exist.
+Since upstream dts version v7.0+, Exynos 7870 devices have an explicit
+`bus-width = <8>` property. This results in the U-Boot driver trying to
+initialize the HS400 mode, which appears to fail. The HS400 support
+added in the DW-MMC Exynos driver appears to have an incomplete init
+sequence.
 
-Signed-off-by: Weijie Gao <weijie.gao@mediatek.com>
----
-v2: updated kconfig help text
-    added error output when failed to create volume
-v3: fix error handling and default env setting
----
- env/Kconfig | 11 +++++++++++
- env/ubi.c   | 35 ++++++++++++++++++++++++++++++++++-
- 2 files changed, 45 insertions(+), 1 deletion(-)
+This patch series adds the missing pieces to enable HS400 support, and
+additionally adds support for HS400ES too.
 
-diff --git a/env/Kconfig b/env/Kconfig
-index 7abd82ab6f3..8404e0d44eb 100644
---- a/env/Kconfig
-+++ b/env/Kconfig
-@@ -716,6 +716,17 @@ config ENV_UBI_VOLUME_REDUND
- 	help
- 	  Name of the redundant volume that you want to store the environment in.
- 
-+config ENV_UBI_VOLUME_CREATE
-+	bool "Create UBI volume if not exist"
-+	depends on ENV_IS_IN_UBI
-+	help
-+	  This option is useful if u-boot will be booted from a fresh device
-+	  where environment volume hasn't been created in the UBI partition.
-+	  This is a common case where factory UBI image contains only volumes
-+	  with valid data.
-+	  By enabling this option, environment volume(s) will be created before
-+	  loading if not exist.
-+
- config ENV_UBI_VID_OFFSET
- 	int "ubi environment VID offset"
- 	depends on ENV_IS_IN_UBI
-diff --git a/env/ubi.c b/env/ubi.c
-index 46970ba754f..6b995ce40ac 100644
---- a/env/ubi.c
-+++ b/env/ubi.c
-@@ -103,12 +103,29 @@ static int env_ubi_save(void)
- }
- #endif /* CONFIG_ENV_REDUNDANT */
- 
-+static int env_ubi_volume_create(const char *volume)
-+{
-+	struct ubi_volume *vol;
-+	int ret;
-+
-+	vol = ubi_find_volume(volume);
-+	if (vol)
-+		return 0;
-+
-+	ret = ubi_create_vol(volume, CONFIG_ENV_SIZE, true, UBI_VOL_NUM_AUTO,
-+			     false);
-+	if (ret)
-+		printf("Failed to create environment volume '%s'\n", volume);
-+
-+	return ret;
-+}
-+
- #ifdef CONFIG_ENV_REDUNDANT
- static int env_ubi_load(void)
- {
- 	ALLOC_CACHE_ALIGN_BUFFER(char, env1_buf, CONFIG_ENV_SIZE);
- 	ALLOC_CACHE_ALIGN_BUFFER(char, env2_buf, CONFIG_ENV_SIZE);
--	int read1_fail, read2_fail;
-+	int read1_fail, read2_fail, create1_fail, create2_fail;
- 	env_t *tmp_env1, *tmp_env2;
- 
- 	/*
-@@ -132,6 +149,15 @@ static int env_ubi_load(void)
- 		return -EIO;
- 	}
- 
-+	if (IS_ENABLED(CONFIG_ENV_UBI_VOLUME_CREATE)) {
-+		create1_fail = env_ubi_volume_create(CONFIG_ENV_UBI_VOLUME);
-+		create2_fail = env_ubi_volume_create(CONFIG_ENV_UBI_VOLUME_REDUND);
-+		if (create1_fail && create2_fail) {
-+			env_set_default(NULL, 0);
-+			return -ENODEV;
-+		}
-+	}
-+
- 	read1_fail = ubi_volume_read(CONFIG_ENV_UBI_VOLUME, tmp_env1, 0,
- 				     CONFIG_ENV_SIZE);
- 	if (read1_fail)
-@@ -169,6 +195,13 @@ static int env_ubi_load(void)
- 		return -EIO;
- 	}
- 
-+	if (IS_ENABLED(CONFIG_ENV_UBI_VOLUME_CREATE)) {
-+		if (env_ubi_volume_create(CONFIG_ENV_UBI_VOLUME)) {
-+			env_set_default(NULL, 0);
-+			return -ENODEV;
-+		}
-+	}
-+
- 	if (ubi_volume_read(CONFIG_ENV_UBI_VOLUME, buf, 0, CONFIG_ENV_SIZE)) {
- 		printf("\n** Unable to read env from %s:%s **\n",
- 		       CONFIG_ENV_UBI_PART, CONFIG_ENV_UBI_VOLUME);
--- 
-2.45.2
+The last patch in the series also enables HS400ES support in the
+exynos-mobile defconfig.
+
+Signed-off-by: Kaustabh Chakraborty <kauschluss@disroot.org>
+---
+Kaustabh Chakraborty (4):
+      mmc: exynos_dw_mmc: add proper init sequence for HS400 support
+      mmc: dw_mmc: setup set_enhanced_strobe ops in driver
+      mmc: exynos_dw_mmc: add support for HS400ES
+      configs: exynos-mobile: enable support for HS400ES in MMC driver
+
+ arch/arm/mach-exynos/include/mach/dwmmc.h |  5 ++
+ configs/exynos-mobile_defconfig           |  1 +
+ drivers/mmc/dw_mmc.c                      | 19 +++++++
+ drivers/mmc/exynos_dw_mmc.c               | 88 ++++++++++++++++++++++++++++++-
+ include/dwmmc.h                           | 10 ++++
+ 5 files changed, 121 insertions(+), 2 deletions(-)
+---
+base-commit: 9f61fd5b80a43ae20ba115e3a2933d47d720ab82
+change-id: 20260427-dwmmc-exynos-hs400-es-b77009a808ce
+
+Best regards,
+--  
+Kaustabh Chakraborty <kauschluss@disroot.org>
 
