@@ -4,104 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 406E5FF8868
-	for <u-boot@archiver.kernel.org>; Mon, 27 Apr 2026 15:49:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F374FF8868
+	for <u-boot@archiver.kernel.org>; Mon, 27 Apr 2026 15:56:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AFB608407D;
-	Mon, 27 Apr 2026 17:49:02 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 80A7F8407D;
+	Mon, 27 Apr 2026 17:56:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="sL9YbJWZ";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="dLdgJRGg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DDD998407D; Mon, 27 Apr 2026 17:49:01 +0200 (CEST)
-Received: from mail-yx1-xb136.google.com (mail-yx1-xb136.google.com
- [IPv6:2607:f8b0:4864:20::b136])
+ id 8350384106; Mon, 27 Apr 2026 17:55:57 +0200 (CEST)
+Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
+ [IPv6:2607:f8b0:4864:20::32c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1B5128416F
- for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 17:48:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6769083BC4
+ for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 17:55:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yx1-xb136.google.com with SMTP id
- 956f58d0204a3-65492d097acso3612791d50.3
- for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 08:48:59 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1777304938; cv=none;
- d=google.com; s=arc-20240605;
- b=M7BBfQkGIQayrvaetfDs0kQHQDR0WxkEWblkFE5QwUX/0heWqYsMwaFyde+TAhFYlt
- kEpumw0XAu1svc4auCbm76zk59DiwxCnuPVO6u67NwOd+GYUQDK83KDPIlUJMaZa/M6k
- IjLablr9lAiweb561D9c/C4nW28KkQS6o2GwOAc6UlCVdHy6W5QAq/N9TK9L8eMi2J0b
- 3Q+wLvyJdjQBvErehrLC6B/A6UkD9zYkcB5kWiEY+oFxu/6nAECCf3KjVfrwISsHCHdo
- kvb9FRXadGaXotTxpLAphuv0YR//DAlDL1+/cdVFAhWQ7lC1+OuOZl4HhOQiJbPIGUXW
- gyRQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=axr+qxZ6OGN1GxL+Aw54sNEXqwqHf189XhcXyaQGp0U=;
- fh=gRqF68w5xlhHI5vFNNkFEhHzKZRRR85TsS5nflw4rJI=;
- b=WOBK46MCpprxMkEqZwYlQv+e/H15W9zNXZbVdhvSBIezlfOyNncJmz/zb2+cn5I9aP
- mwYOE2zzZcWaEZJKbbxQGgoc9HDGgNSUEkBtQRzVRfVviRLLVJtTgZPNIrhFaTrVZMX9
- 4NQ6dWI0p6xcb241govBYzVy2o8IDH/8DBOzxFQaPrF8yPNLWEJ5PR2w5floU+RhGxlZ
- D4Cr3i0oh2fxbz7kZCX48uW2+OwcSjaNqMOO+fU11LEu2trBxoci20X2jLcd9PYVOBwg
- 5DUWPSKhTdsDBMYQzD53xf5elWhzL0JoKbreXysIdvf7p0fGbAgHqkG0ETyoUfxCtk+P
- SyQQ==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x32c.google.com with SMTP id
+ 46e09a7af769-7de44ed7a11so4577476a34.1
+ for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 08:55:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1777304938; x=1777909738; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=axr+qxZ6OGN1GxL+Aw54sNEXqwqHf189XhcXyaQGp0U=;
- b=sL9YbJWZCSMgNShsBTUMVc+be2Gx7UC0RhGI7bJ6VKEu+KM/+ZIjGF53lM1spdesg7
- r58aZqLRvlpklP3A5AfYAxIaQ3sjwzdQ74ThooI4q9R51vtRQZp33kcIR0b1OsIeaH+z
- WGyHv3q8hNDDUqdfUNbh1lV+eIK/scwAb41UOZf2zUafYoSC0z+t2GPYI8xGTo0coM48
- Msc+/+VJhZhRmcXjkcDmIyhmXtaWauJBf8zmryslgp94qyFGfYXilpvQBb42rKunDAOY
- 78Hlqxrrzz/hgYbZlirt2t+djiz8rxpEHEftC1mVBg4OsZVs+z+nL+oPmwyQls1bkuRj
- UnIA==
+ d=konsulko.com; s=google; t=1777305354; x=1777910154; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=FdUVZKkjrI0O7YPoc/HDiI9y35BkegJL7sSOHlzTHYY=;
+ b=dLdgJRGgQ/lDz7KpQxJRu07yN1FMYbsPWLLfYVgSAEXxl6mi8DDRe7GMIlrZayIRn7
+ MBT0Oq+0Rl4aAQuqbRRyZqaImChT4q1e23C1x3UNTmxCwwXg4gWTi1JpI4ezwuZk2E4N
+ 1ACGDapmfkgFfsCAjkkQHMF69F5Lp0zMFRq4c=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777304938; x=1777909738;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=axr+qxZ6OGN1GxL+Aw54sNEXqwqHf189XhcXyaQGp0U=;
- b=VCf9x76HnW6YmK4UWb0sVUNFdLXnPQJCzW3sx4/vH/AwOC2SG0iu/0F5rhdOXWOdLP
- mu8KHpUeC2gJohPjWDnK/54uCs6zGEZy3VsULKDv7bbEY+yuhNnjFfpqdjfgWf7lXG0d
- IXzL4yiMww7bifGQe49RcF48l8b95oIbJLB7lpjrHiDxx2cDJnFZ3pSrymXMplOTjbd5
- UPIjSRrotWDD9muRSF9rF5qji4tOpnCW4IpTNMxVDrNW0NYbE6v0YqQH5VyuuWk0KtN3
- 4wnSJr0i8MBAbWnSxD/ct67Aosj/qmzGEdGKO6CucGXFU75Fr6X20g7qJFgwV7zGquYp
- QdWQ==
-X-Gm-Message-State: AOJu0Ywm8tjDvd/oepTRW1U8H+L6pIuregHC01QAGipoQ2vwlPu7CIWh
- L61RGtCddhBY/xihziagrclbjpOft4d4KvUUQdzwQ1Hh4c8SKT2UZeUuTASF76a/p7va3bVaeMz
- SFOTJ5If4Qtscoit32VHL5sSgH8E1WpGCT75GWpZI0wVUiaKj9MJO7rc=
-X-Gm-Gg: AeBDievfSlAlu/BflHr/lM0/IUalxVeR1JIB7j1kmliIakuDnG/I+KKlJZJBZKpMQ+E
- mS9n+1mpTARDI6o/+M55bBA7n4pwCa24J4Dx3XZPQGsBmfOBtyPoZ4Tkyjk4kPo1wqlclWD6jUa
- p/V+x1KHrQ9+pFFurLQd6ylEFE3m3FBEC1vuW4LLsm7RtaHSqrF6XFohyp0VrO2PVJLy4LvTJWC
- TK6YOkKT58Py5v3Ou9VT1WgvJvfE4OQtbvvHKLDIQLr3KF/O/86SSrep4/2+qEDjJiK96QerR+w
- V/Z0fPHdPb/vc77hvrW9K1h6cY8hIJIjAtHhbtiRjzKuWpYKP+WkLrRNTKDFykhb+LUKGaBpPa/
- jBcJFiLg6RQVeQi4uBNEO8IdmC8rwiRhCvXF4QktAbKaNetMvtShmmrjegQHWD36VCS4PtpSDem
- 8sEDXoZpyq/957CRcyfd5zeQJ1QCTEBqETGM2r2ZdR7kHYKXAY9bIf+9H6PPhCLKtlKt5YdNckS
- w18ha1bID8BZ9XPxYeZ1Fvg5q8fUwN+3ABJ3pNDEn9Li/8hsdh/TYe7ei7FYew6AAK04YFVT2OE
- 5U07Y1OuwVih2wRph4sgD19Di5G1bLoqzPgEUYMHeVUbHV1vgBShmdX8hsF6BK4I9/ftFVLgtYZ
- +ux/LWmAQpqpusTO8IvA0q3n7WVw=
-X-Received: by 2002:a05:690e:1b60:b0:651:b1ad:49f6 with SMTP id
- 956f58d0204a3-65310a13c2bmr29522128d50.40.1777304937679; Mon, 27 Apr 2026
- 08:48:57 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1777305354; x=1777910154;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=FdUVZKkjrI0O7YPoc/HDiI9y35BkegJL7sSOHlzTHYY=;
+ b=g+a4gvELKOygVpB8hGjHrjDv9ltqFXxy7HrA+Rw1/OW8EtwIkgLk9g99ySrr1kBz9X
+ EZfltNc4drtSs9Un+qD7KQ3lt26UwEOh5Q64b4uQUCF8qkss0ulZD+iWPWVcwINumE72
+ vB7qxTr+x22gyhCEFbkQGUAyr3WehaTSBqjSl1NRk3Q2dskAJlS647T5Hx9GstIkfwzo
+ HJ7bGURH29MIM5sq7IFtN93t7UkZ4Z0dLBBGKkJoXMlzk89wRE6Wum9vPWJAEcsJY2EE
+ 1+hBOFaTdpfUB34cqaojCTpqe2NXI5nqp+hiVDZ8PsQDdIwen59T0eBa+87DA1tEn+kI
+ b5BA==
+X-Gm-Message-State: AOJu0YzSfgCqTUS/1X53Ohd9cY63dl1stU1XivvAvTzYZ0S/BKeY4n08
+ BItL1elXGIPTLzt+nZ9S74Vqxo59zWgvZxXWPEWrcsWNvPvgfpGU15SVtW/rL/UOxnQ=
+X-Gm-Gg: AeBDiesUJJBLqmmIfDqb2YvNMHZno+/eqAurihOJFB5iwg9O73A7OSTvpCRyT9n6mxE
+ nXZJNbb+Pmt404NJHV7f1xjzPJd+55bthD+076WS3KFdyACo5/UxvCRObVnMXMSy6hxhVXhveiI
+ +7wgpvXcHODQp5fRPb6VvoZSwpkxyADHytNgfT+Pt44DOtRDnv637mJT7XsGdnoUEZ8d/aV11t5
+ PrnmEnkdmjDP3CqK/MWvQAvOWgUw6hr3kcIFGqXMOWMgY5utniDj181BoNY6yQruoDMT4Q9ppv9
+ OGXkpji6BetD6u8SwV6sDqxTkAstGtMC9ju1ScpJMOIzVO9C6yKvBlBlf0msRfs3jduy7K0hqsH
+ e3nJK70RS2+1Ov8h+82oTQlbt3RqkO57Qb6cGUoAHvdPWU3QVbcfzTRJecv0EEqwfAbNhZnMedV
+ 8jltLhgjPe3L2yQ1rG+te14cvNcnm2xx0W0/CK9rDPDX3/r2CgOLgQ4cph5S6TRvQ/IAPQx3UWd
+ F0puBhUVTFtwBazPVg3h0hbpKwSHz/XmloCGkKTF2TUfKW3QEGvrXeDCLjaVw==
+X-Received: by 2002:a05:6830:3809:b0:7dc:c926:4f87 with SMTP id
+ 46e09a7af769-7dcc926689bmr20735643a34.16.1777305354150; 
+ Mon, 27 Apr 2026 08:55:54 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
+ [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7dce6a9405asm15253396a34.5.2026.04.27.08.55.53
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 27 Apr 2026 08:55:53 -0700 (PDT)
+Date: Mon, 27 Apr 2026 09:55:51 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Ludwig Nussel <ludwig.nussel@siemens.com>
+Cc: u-boot@lists.denx.de, Peng Fan <peng.fan@nxp.com>,
+ Sam Protsenko <semen.protsenko@linaro.org>,
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>
+Subject: Re: [PATCH 1/4] qemu: overlay signature nodes
+Message-ID: <20260427155551.GH41863@bill-the-cat>
+References: <20260427150409.400914-1-ludwig.nussel@siemens.com>
 MIME-Version: 1.0
-References: <20260427150530.3156000-1-harsimransingh.tungal@arm.com>
-In-Reply-To: <20260427150530.3156000-1-harsimransingh.tungal@arm.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Mon, 27 Apr 2026 18:48:21 +0300
-X-Gm-Features: AVHnY4L-ndMHIlPGDhUZaHkaZCyswnqQeG1lQVBDwrhs8QLG9ae_cPDX0benUXs
-Message-ID: <CAC_iWj+iD0m9JL+A++W85+sYQGYSqVHP287ga7g13dkVevy9AA@mail.gmail.com>
-Subject: Re: [PATCH] efi_loader: fix AllocatePages overlap status
-To: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
-Cc: u-boot@lists.denx.de, trini@konsulko.com, xypron.glpk@gmx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="bvqbEg5KPwEANAVG"
+Content-Disposition: inline
+In-Reply-To: <20260427150409.400914-1-ludwig.nussel@siemens.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -118,63 +98,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Harsiman,
 
-On Mon, 27 Apr 2026 at 18:05, Harsimran Singh Tungal
-<harsimransingh.tungal@arm.com> wrote:
->
-> Return EFI_NOT_FOUND for EFI_ALLOCATE_ADDRESS overlap
->
-> When efi_allocate_pages() is called with EFI_ALLOCATE_ADDRESS, UEFI
-> expects EFI_NOT_FOUND if the requested address range is already
-> allocated or unavailable.
->  U-Boot currently returns
-> EFI_OUT_OF_RESOURCES when efi_update_memory_map() detects an overlap
-> after a successful lmb_alloc_mem(), which does not match
-> EFI_ALLOCATE_ADDRESS semantics.
->
-> Return EFI_NOT_FOUND for EFI_ALLOCATE_ADDRESS requests that fail due
-> to an overlapping EFI memory descriptor, while keeping
-> EFI_OUT_OF_RESOURCES for other allocation types.
->
-> The UEFI specification [1] specifies that
-> EFI_BOOT_SERVICES.AllocatePages must return EFI_NOT_FOUND when the
-> requested address range is unavailable or already allocated;
-> EFI_OUT_OF_RESOURCES applies to non=E2=80=91address=E2=80=91specific allo=
-cation
-> failures.
+--bvqbEg5KPwEANAVG
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Where does the EFI spec say that? EDKII indeed returns EFI_NOT_FOUND
-for AllocateAddress but looking at the function description, I can't
-find anything specific.
+On Mon, Apr 27, 2026 at 05:03:38PM +0200, Ludwig Nussel wrote:
 
-Thanks
-/Ilias
+> The keys trusted for FIT signature verification are supposed to be
+> embedded in the device tree built into u-boot. When running in Qemu it's
+> convenient to use the device tree provided by the VM which doesn't know
+> about signatures though. So merge the signature nodes at run time.
+>=20
+> Needs
+>   CONFIG_OF_OMIT_DTB=3Dn
+>   CONFIG_OF_LIBFDT_OVERLAY=3Dy
+>=20
+> Signed-off-by: Ludwig Nussel <ludwig.nussel@siemens.com>
 
->
-> [1] https://uefi.org/specs/UEFI/2.10_A/07_Services_Boot_Services.html
->
-> Signed-off-by: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
-> ---
->  lib/efi_loader/efi_memory.c | 4 +++-
->  1 file changed, 3 insertions(+), 1 deletion(-)
->
-> diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
-> index b77c2f980cc..63cf1a7277f 100644
-> --- a/lib/efi_loader/efi_memory.c
-> +++ b/lib/efi_loader/efi_memory.c
-> @@ -510,7 +510,9 @@ efi_status_t efi_allocate_pages(enum efi_allocate_typ=
-e type,
->                 /* Map would overlap, bail out */
->                 lmb_free(addr, (u64)pages << EFI_PAGE_SHIFT, flags);
->                 unmap_sysmem((void *)(uintptr_t)efi_addr);
-> -               return  EFI_OUT_OF_RESOURCES;
-> +               if (type =3D=3D EFI_ALLOCATE_ADDRESS)
-> +                       return EFI_NOT_FOUND;
-> +               return EFI_OUT_OF_RESOURCES;
->         }
->
->         *memory =3D efi_addr;
-> --
-> 2.34.1
->
+This series seems interesting. Can you please reply with a cover letter
+that explains it a bit and perhaps some usage information? Thanks!
+
+--=20
+Tom
+
+--bvqbEg5KPwEANAVG
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCae+HBAAKCRAr4qD1Cr/k
+Cl8RAQDpfKo6dXL07aIvHbEug8lpGQf4cefPOik1xuLYTbeRdwEA/+nVwE/i/zaL
++wbfEtaI/im4rhhGpLZEIWnHf5jr7gU=
+=fKSr
+-----END PGP SIGNATURE-----
+
+--bvqbEg5KPwEANAVG--
