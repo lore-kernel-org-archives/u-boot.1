@@ -4,99 +4,121 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ABF9CFF885E
-	for <u-boot@archiver.kernel.org>; Mon, 27 Apr 2026 12:53:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1157DFF885E
+	for <u-boot@archiver.kernel.org>; Mon, 27 Apr 2026 12:54:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E0BA283693;
-	Mon, 27 Apr 2026 14:53:46 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=flipper.net
+	by phobos.denx.de (Postfix) with ESMTP id 94C8683693;
+	Mon, 27 Apr 2026 14:54:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=flipper.net header.i=@flipper.net header.b="mldP7OtF";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20251104.gappssmtp.com header.i=@baylibre-com.20251104.gappssmtp.com header.b="phKBT1jt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EDB5E83AA9; Mon, 27 Apr 2026 14:53:44 +0200 (CEST)
-Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
- [IPv6:2a00:1450:4864:20::435])
+ id 5BB7483693; Mon, 27 Apr 2026 11:03:20 +0200 (CEST)
+Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
+ [IPv6:2a00:1450:4864:20::434])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CE68880433
- for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 14:53:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=flipper.net
+ by phobos.denx.de (Postfix) with ESMTPS id 909B583693
+ for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 11:03:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=alchark@flipper.net
-Received: by mail-wr1-x435.google.com with SMTP id
- ffacd0b85a97d-43cff5dafc3so8194320f8f.1
- for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 05:53:42 -0700 (PDT)
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=msp@baylibre.com
+Received: by mail-wr1-x434.google.com with SMTP id
+ ffacd0b85a97d-43d64313c39so7826719f8f.3
+ for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 02:03:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=flipper.net; s=google; t=1777294422; x=1777899222; darn=lists.denx.de;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=1NGtbkZOvJd4iwTIDW3/TB+bnqplu5MnmlgFpLTkS4A=;
- b=mldP7OtFZFDcTm+3wC+PwMIFzTk8ATgwIXgoKje4yBBRvAyt5furIDsc/awekgMH7t
- uDdGNre2O+huR4HBFNbIr3PqtgBQDjedADwG79eyYo+2IBey45wy2Zhjlm6liMXBtAZQ
- /NGkWUJ4tSYxoITs1tjAC5RQaLkYkFjbVFYHdjd3C0uhk2taWZYT6YyGfRpO2ir/8ncJ
- wVRUJBTUNhK1xszrj4PJ+Ge/2WPuGbTlxzCaG2c6LfOy62h6Q4D0DJIHdImpkblfugSX
- Sj/2ZiJ5mVoMC0Ev7pXnA8p2ZgiaKgclIfgBhnYN0gwr7tPCCNOR9Y3vIUGfFb4nsYqz
- rA0A==
+ d=baylibre-com.20251104.gappssmtp.com; s=20251104; t=1777280596; x=1777885396;
+ darn=lists.denx.de; 
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=8FA7wdvPh0JW1oPGdymenauIjTpB46aUoIkUR+JYpKY=;
+ b=phKBT1jtgkUEOz4xkzb3PlRjARR048C6FHCx3VySGlao6KODq9G1DMcrniwJESZ9te
+ 6AgIzeNPJRgZ20WjmTadmaUxGV/eJrtg3rdiDCW0nswRjg/fBNxnkl9CLuQpXEz2/awQ
+ sPB361s9h8WoNEmcIs27DrOngBK5nb6tyFUSo1zLp+oczhDtU6UlrKrmtlfw+s/tDPHP
+ P/C4rxZ27m0H9SmnnQS4veoMco+3bbiOnkZ5rraXUJWV7aL3utd2yl97zTTcUy7BkIbQ
+ TbXV76NO4PVHK2Ol/Ds//woNl73Qj8+twKuNxZyQJu2ZDxzTzTVdqP30EtMRJrT9M7bC
+ Jf0g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777294422; x=1777899222;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=1e100.net; s=20251104; t=1777280596; x=1777885396;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=1NGtbkZOvJd4iwTIDW3/TB+bnqplu5MnmlgFpLTkS4A=;
- b=CcuKweblTUucjWxy0D8NZrGfv5aRyVYmWYEseAQqSyz9tHqisBX6w8mmKNbWJWrMRR
- HXtAe0EVRQkguF/ddia+vaargdCHvSNdpAnhF/wjtQPctzKhLDJf4QoQ22tWrE1ANWcS
- Z/sZrU+wbXL3zDORA0c+pjDHbxn7VMjzX0AiS1+OHS3RDgq2Cv6BK2Xt9EAFYHAheITc
- 9FwtDfq6CfJBksUxJ0rTYFeKrSu4TSMpeBo4ugtGrTAWPrUb7DwKUsc/WUFgz9EUvHGR
- maCtYUxtFLQfJ/BpqX5wDSUFK6suj3Cg7x5hzPA8FKZFL9DQdFHoH7WvaqiyM0QWBq6w
- RPQw==
-X-Gm-Message-State: AOJu0Yx2H9YBrkrdmIisUG6r1++F6f6eYkrK7RGWeiHgqB3hhOjBAjub
- 3eAicjVq/6CDmDEFU5m+5O633zujE2pnJi1S88HjjMfoYX38+3HW4YOrKeDmaGT+oc4Uctca52o
- LQwH2
-X-Gm-Gg: AeBDietRoImOjpFVUNJ4j+T3iAogBq5y0yx3K/iG3Dhwfew2avwP5ABBSvQgUpMRZUX
- FXiRCrrI+fO5fzsApsAfqm/cKbP4Bz09aibCLb8W8sVleWuMNqvEpfx9zecA057EH3akfDc/m+L
- 72x4hviryNYogZv/q+VuAfQpDv8YS5JOgdlQ/ALFhYfWpEoXRioywCJ18ebD0yDwYpyX8n5ZIaM
- iGWXRFASpNdOpknDb7rHRmA71GKti5ghnuhh+nJ17NszaoeFXcyIxtky9A2Yqx2ophcY/x3/v7o
- XD7D4yJSBB02EZwlz/GAtK1KNFOhSgzqlXVTU/gi3DxK4Ii8udklcdSOP2j+hll32O18GhZHWl4
- P8SL92Q07rFeD/n/1C+GtDVNmQt+/KnKc94vXx0gIqoXjCuAZ0QsGlQGZekWMIUrZgcx1VV7PLc
- DhpmIfOJOV7bQ7zZj52pl5tOrPBA2RAyFOB9/RJa59jwc6xmqB8M6jZ72ujnhoT4cAwZG6jvsNs
- m/VZZe+4mKdrS7m
-X-Received: by 2002:a05:6000:40cb:b0:43e:aa43:243 with SMTP id
- ffacd0b85a97d-43fe3e24eaamr68659859f8f.43.1777294421784; 
- Mon, 27 Apr 2026 05:53:41 -0700 (PDT)
-Received: from alchark-surface.localdomain (bba-86-98-192-109.alshamil.net.ae.
- [86.98.192.109]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-43fe4e3a7b4sm74890468f8f.22.2026.04.27.05.53.39
+ bh=8FA7wdvPh0JW1oPGdymenauIjTpB46aUoIkUR+JYpKY=;
+ b=XKcKNg6ofmqERrvWXnrs16Xvi4CjVvba/xeQ1Kx8ARoRkTcwjPyuK8VNK+MHweaTa7
+ CN6wv1yu0fY9iEu6HY8wdUfpgAIkUglYaMbeWnsVNHmpieVRYQ8bkNMKIoyuxFR+YIPw
+ AvFRX2OWYqZW2y/dIXVNCeLrYwZvPX/2UX6t289LX2Zbf7418RAiAx9NzUTd3iwLmbx/
+ TKfMGxMDjqSz10rYFoIv9mWurD7IyaVSc/a/ayCMunUogMgzF0XQx3D6TjAf8iQmlJTf
+ Dnh+6fP1T8troHJZoRfJ9oOxcaO4KPk8cmtjuTutaWkYZ3X9BZdFGwfBlrzOe41JgXMe
+ 9VVA==
+X-Gm-Message-State: AOJu0YyIi+MLuIrcHglYoHBv4t0GZECNXvBkDVBwroj2LL+GO2QMPIEL
+ Gf8x+rKnVVmWdZFkOdcueu28dnL/fJ2vNTboXqRTqND3O0om/tYi7b3CCQn+tsLLEpc=
+X-Gm-Gg: AeBDiesV8e2f9BB2SPHMWjf4uFydWkyVa9ANyhj096RV/8FRShsCyUiwEObkWAlkHKo
+ ujJGqRrdWSppGQ+TAnbzAa/wRlG8efo0MXJdIrcY0qWuoXGRWua8ybT1hCsvdP/mVyyCe9SBRrK
+ 7JJQEW+AgzPAOPhoHTuBuEkHJtJ2oVAX1dWk4xZY9jcBQCaTi4eXggA48g6f4Y7lDAXIwj2Ht7j
+ OewNFohVnuVsvKjAXovWBFD6Pgadtjan2RLkHnFPljLDbX3dttthKv+dmhB+nevfb286Vj53mut
+ h11cET+QxEXBQgPROV5jw4JjEDtHDL3VwZirVGQfO9Jnb1JdorBxM3B4KhB+PKXUjCC5jIoa5VG
+ RIAYEoV9az+1uAEZXlyHm7rhY+XhAwrQegB8AM6NXxmOAa48BnEHerCstpJ4ANBAr+Sz564Kpiq
+ GvWG3P5fhFLcQ0VjKzcpuH77SBqWFvi9I=
+X-Received: by 2002:a05:6000:2c0b:b0:439:beb9:5a96 with SMTP id
+ ffacd0b85a97d-43fe3dfbff5mr66215740f8f.31.1777280595686; 
+ Mon, 27 Apr 2026 02:03:15 -0700 (PDT)
+Received: from localhost ([2001:4090:a246:83ca:1917:a47e:1872:2063])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-43fe4e3a7b4sm73743439f8f.22.2026.04.27.02.03.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 27 Apr 2026 05:53:41 -0700 (PDT)
-From: Alexey Charkov <alchark@flipper.net>
-Date: Mon, 27 Apr 2026 16:53:22 +0400
-Subject: [PATCH] rockchip: rk3576: Properly handle USB controller takeover
- from BootROM
+ Mon, 27 Apr 2026 02:03:15 -0700 (PDT)
+From: "Markus Schneider-Pargmann (TI)" <msp@baylibre.com>
+Subject: [PATCH v7 00/14] arm: am335x: Switch to upstream devicetree
+Date: Mon, 27 Apr 2026 11:01:16 +0200
+Message-Id: <20260427-topic-am33-evm-oftree-v2026-01-v7-0-7e6cd1a805a1@baylibre.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260427-rk3576-usb-gadget-v1-1-982fd1de08db@flipper.net>
-X-B4-Tracking: v=1; b=H4sIAEFc72kC/x3MQQ5AMBBA0avIrE1SQytcRSzQaU0kSItIxN01l
- m/x/wORg3CENnsg8CVRtjWhyDOY5mH1jGKTgRQZVVGNYSl1bfCMI/rBej6wcUZpamxZEEPq9sB
- O7v/Z9e/7AcxX/jVjAAAA
-X-Change-ID: 20260427-rk3576-usb-gadget-9f60529d312e
-To: u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
- Philipp Tomsich <philipp.tomsich@vrull.eu>, 
- Kever Yang <kever.yang@rock-chips.com>, Jonas Karlman <jonas@kwiboo.se>, 
- Anton Burticica <mouse@ya.ru>, Alexey Charkov <alchark@flipper.net>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2259; i=alchark@flipper.net;
- h=from:subject:message-id; bh=x5QZoKCT7SF4HRdQNrsHLyrK41+s/8Dz9gNQg9SVD8Y=;
- b=owGbwMvMwCW2adGNfoHIK0sZT6slMWS+jwn4VXC/KNSw8+GnOKFK/nbj0GnHo/vdpfqOJ2ibe
- Wc+dTvXMZGFQYyLwVJMkWXutyW2U434Zu3y8PgKM4eVCWSItEgDAxCwMPDlJuaVGukY6ZlqG+oZ
- GukY6xgxcHEKwFT/cWb4H8Q+I2vLvFdF3xYLyc7hKHupn2FW13UiInT1/fBY9f9czgz/NN7MnB5
- eM0nmi30Rx2728/MMrs/OXFnFyy0r+ld7r1QHHwA=
-X-Developer-Key: i=alchark@flipper.net; a=openpgp;
- fpr=9DF6A43D95320E9ABA4848F5B2A2D88F1059D4A5
+X-B4-Tracking: v=1; b=H4sIANwl72kC/43SzWrDMAwH8FcJPs/D8mec095j9GArympYmi7J0
+ pbSd5/TUlpKIDvKgp8s9D+zgfpEA6uKM+tpSkPqdrlwbwXDbdh9EU91rpkU0gBAycdun5CHVil
+ OU8u7ZuyJ+JT7lgvgFJwAEqopsWEZ2ffUpON1wOcm19s0jF1/us6bYH79Nz0BF9wDEii0Fkh+x
+ HD6TrGnd+xaNuuTfBLluiizqGUorVJCa18uiOohSqFXRZVFVYOxFknX6BZEfRetAOlWRZ1FUYc
+ 6CgcCaUk0D1GDWBXNvHX06AIGQYoWRPssmlXRzpfRWJPSPkYBL+LlFoSefn5zwMZbGlgMA/Hcb
+ 9NYFYAQmwjYKB1jlME4cBSt9waNEV5J5xuvNLDnYFbFy864Hw58OKQRt/ffOb6j48hLTxIaWUu
+ tbZWDt7lc/gAV4O8O/AIAAA==
+X-Change-ID: 20251118-topic-am33-evm-oftree-v2026-01-ea701e03f8cf
+To: u-boot@lists.denx.de, Marc Murphy <marc.murphy@sancloud.com>
+Cc: Tom Rini <trini@konsulko.com>, Rasmus Villemoes <ravi@prevas.dk>, 
+ Kory Maincent <kory.maincent@bootlin.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Romain Gantois <romain.gantois@bootlin.com>, 
+ Parvathi Pudi <parvathi@couthit.com>, 
+ Basharath Hussain Khaja <basharath@couthit.com>, 
+ Paul Barker <paul.barker@sancloud.com>, "Andrew F. Davis" <afd@ti.com>, 
+ Simon Glass <sjg@chromium.org>, Anshul Dalal <anshuld@ti.com>, 
+ Michael Trimarchi <michael@amarulasolutions.com>, 
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, 
+ Patrice Chotard <patrice.chotard@foss.st.com>, 
+ Svyatoslav Ryhel <clamor95@gmail.com>, 
+ Tien Fong Chee <tien.fong.chee@altera.com>, 
+ Frieder Schrempf <frieder.schrempf@kontron.de>, 
+ Johan Jonker <jbx6244@gmail.com>, Brian Sune <briansune@gmail.com>, 
+ Hai Pham <hai.pham.ud@renesas.com>, 
+ Bernhard Messerklinger <bernhard.messerklinger@at.abb.com>, 
+ Emanuele Ghidoli <emanuele.ghidoli@toradex.com>, 
+ Parth Pancholi <parth.pancholi@toradex.com>, 
+ =?utf-8?q?Jonas_Schw=C3=B6bel?= <jonasschwoebel@yahoo.de>, 
+ Paul Kocialkowski <contact@paulk.fr>, 
+ Andre Przywara <andre.przywara@arm.com>, Paresh Bhagat <p-bhagat@ti.com>, 
+ Ion Agorria <ion@agorria.com>, Peng Fan <peng.fan@nxp.com>, 
+ "Markus Schneider-Pargmann (TI)" <msp@baylibre.com>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=6838; i=msp@baylibre.com;
+ h=from:subject:message-id; bh=S3xSOJ6cB9HdMWE21CofpkDU/Ik4Y7ld9JjNTDD0Kxg=;
+ b=owGbwMvMwCXWejAsc4KoVzDjabUkhsz3qg9i795jfH96u0+E2vxvzw6EOJZ98/cTDUq9KqAsP
+ nVRxJqzHaUsDGJcDLJiiiydiaFp/+V3HktetGwzzBxWJpAhDFycAjARZz6G/2W3sjZF9UiZxxUY
+ K3Sc4plp+OjCc1e9P9Nl2+IrrwVd2cnw3//0jd9HE9qbbES1r3+ZLpkpxWO7X+jW+vqddt8yWu5
+ EsQEA
+X-Developer-Key: i=msp@baylibre.com; a=openpgp;
+ fpr=BADD88DB889FDC3E8A3D5FE612FA6A01E0A45B41
+X-Mailman-Approved-At: Mon, 27 Apr 2026 14:54:41 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -113,73 +135,136 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Anton Burticica <mouse@ya.ru>
+The series is split into two logical groups:
 
-When booting via USB download mode (Maskrom), the BootROM leaves the
-USB3OTG0 controller in an active state. U-Boot must properly reset
-the controller before reinitializing it for fastboot or other USB
-gadget functions.
+- Patches 1-3: Fixes for am335x-evm to boot and support the LCD panel
+  with the current u-boot devicetree.
+- Patches 4-14: Make upstream devicetree working with uboot. This
+  adds tick-timer, adds compatibility of the board code for different
+  USB probing, makes SPL smaller and updates the defconfig.
 
-Without this change, USB gadget mode commands such as fastboot and ums
-fail when U-Boot is loaded via Maskrom USB download because the
-controller state is inconsistent.
+The series has been tested on am335x-evm. Note that I don't have all
+other boards built with the am335x_*evm_*defconfig, so tests are
+appreciated. buildman reports builds are working.
 
-Signed-off-by: Anton Burticica <mouse@ya.ru>
-[Removed unrelated changes, adjusted the commit description]
-Signed-off-by: Alexey Charkov <alchark@flipper.net>
+Dependencies:
+  - net: cpsw: Add cpsw-switch DT binding support
+      https://lore.kernel.org/r/20260410-topic-cpsw-switch-v2026-07-next-v1-0-c914724b13e4@baylibre.com
+
+Best,
+Markus
+
+Signed-off-by: Markus Schneider-Pargmann (TI) <msp@baylibre.com>
 ---
- arch/arm/mach-rockchip/rk3576/rk3576.c | 18 ++++++++++++++++++
- 1 file changed, 18 insertions(+)
+Changes in v7:
+- Squash tick-timer patch for am335x-bonegreen-eco-u-boot into the patch
+  that adds tick-timer for all other boards.
+- Remove dependency on (SPL_)CLK for (SPL_)SIMPLE_PM_BUS as clocks are
+  optional now. Note I kept your reviewed-bys @Simon @Kory as I felt
+  like this is a small change of the patch
+- Fixup USB probing for OF_UPSTREAM. Initial version of the patch probed
+  USB host and USB gadget devices unconditionally. This is not necessary
+  and also not what the old code did. The old code probed the
+  ti-musb-wrapper driver which bound the usb host and usb gadget
+  drivers, but it did not probe them.
+- Add CONFIG_PHANDLE_CHECK_SEQ to defconfig as many of the devices in
+  the upstream devicetree have names like mmc@0 because they are within
+  ti-sysc device nodes. The config symbol should help sorting them
+  consistently anyways.
+- Link to v6: https://lore.kernel.org/r/20260415-topic-am33-evm-oftree-v2026-01-v6-0-94cde349bb01@baylibre.com
 
-diff --git a/arch/arm/mach-rockchip/rk3576/rk3576.c b/arch/arm/mach-rockchip/rk3576/rk3576.c
-index c17ba418ced5..84618ad5acb7 100644
---- a/arch/arm/mach-rockchip/rk3576/rk3576.c
-+++ b/arch/arm/mach-rockchip/rk3576/rk3576.c
-@@ -7,6 +7,8 @@
- 
- #include <dm.h>
- #include <misc.h>
-+#include <linux/bitops.h>
-+#include <linux/delay.h>
- #include <asm/armv8/mmu.h>
- #include <asm/arch-rockchip/bootrom.h>
- #include <asm/arch-rockchip/hardware.h>
-@@ -39,6 +41,10 @@
- #define USB_GRF_BASE		0x2601E000
- #define USB3OTG0_CON1		0x0030
- 
-+#define TOP_CRU_BASE		0x27200000
-+#define TOP_CRU_SOFTRST_CON47	0x0abc
-+#define SOFTRST47_ARESETN_USB3OTG0	BIT(5)
-+
- enum {
- 	BROM_BOOTSOURCE_FSPI0 = 3,
- 	BROM_BOOTSOURCE_FSPI1_M1 = 6,
-@@ -189,6 +195,18 @@ int arch_cpu_init(void)
- 	 */
- 	writel(0xffffff00, SYS_SGRF_BASE + SYS_SGRF_SOC_CON20);
- 
-+	/* If the controller was left running by the boot ROM, reset it */
-+	if (read_brom_bootsource_id() == BROM_BOOTSOURCE_USB) {
-+		/* Assert USB3OTG0 reset */
-+		writel(RK_SETBITS(SOFTRST47_ARESETN_USB3OTG0),
-+		       TOP_CRU_BASE + TOP_CRU_SOFTRST_CON47);
-+		udelay(1000);
-+		/* De-assert USB3OTG0 reset */
-+		writel(RK_CLRBITS(SOFTRST47_ARESETN_USB3OTG0),
-+		       TOP_CRU_BASE + TOP_CRU_SOFTRST_CON47);
-+		udelay(1000);
-+	}
-+
- 	/* Disable USB3OTG0 U3 port, later enabled by USBDP PHY driver */
- 	writel(0xffff0188, USB_GRF_BASE + USB3OTG0_CON1);
- 
+Changes in v6:
+- Add patch to add am335x-bonegreen-eco-u-boot.dtsi which sets
+  tick-timer
+- Add patch to remove all devicetrees that were moved to OF_UPSTREAM
+- Link to v5: https://lore.kernel.org/r/20260410-topic-am33-evm-oftree-v2026-01-v5-0-4b9c7aca0e3e@baylibre.com
+
+Changes in v5:
+- Add patch to add lcdc on beagle bone black to all boot phases. Without
+  this patch booting uboot on bbb fails.
+- Add patch to split SIMPLE_PM_BUS into two, one for SPL and one for
+  normal u-boot. This was done to reduce the size of SPL.
+- Link to v4: https://lore.kernel.org/r/20260127-topic-am33-evm-oftree-v2026-01-v4-0-0dadb0710ce7@baylibre.com
+
+Changes in v4:
+- Add patch to enable SPL_OPTIMIZE_INLINING to reduce size and fix the
+  build
+- Link to v3: https://lore.kernel.org/r/20251204-topic-am33-evm-oftree-v2026-01-v3-0-3d1566ce4dc7@baylibre.com
+
+Changes in v3:
+- Add patch to unify all config variants for the am335x-evm and similar
+  boards. This also updates the upstream defconfig enablement patch to
+  effectively switch all config variants to OF_UPSTREAM.
+- Link to v2: https://lore.kernel.org/r/20251128-topic-am33-evm-oftree-v2026-01-v2-0-42a863304498@baylibre.com
+
+Changes in v2:
+- Most of the independent patches were extracted in smaller series
+- Added patch to add vidconsole for am335x-evm
+- Add chosen tick-timer to all devicetrees that are used with the
+  am335x_evm_defconfig
+- Link to v1: https://lore.kernel.org/r/20251118-topic-am33-evm-oftree-v2026-01-v1-0-91ce13c661e2@baylibre.com
 
 ---
-base-commit: 9f61fd5b80a43ae20ba115e3a2933d47d720ab82
-change-id: 20260427-rk3576-usb-gadget-9f60529d312e
+Markus Schneider-Pargmann (TI) (14):
+      arm: dts: am335x-evm: Add backlight to the panel
+      configs: am335x_evm_defconfig: Enable panel
+      include: configs: am335x_evm: Enable vidconsole
+      configs: am335x_evm: Enable SPL_OPTIMIZE_INLINING
+      configs: am335x_evm: Unify evm board defconfigs
+      am33xx: Avoid hard failure on USB probe issue
+      arm: dts: am335x-*-u-boot: Add chosen tick-timer
+      arm: dts: am335x-boneblack-u-boot: Add lcdc to all boot phases
+      am33xx: Fix comment about config symbols
+      am33xx: Support upstream devicetree USB device
+      dm: core: Split SIMPLE_PM_BUS into phases
+      configs: am335x_evm_defconfig: Switch to upstream devicetree
+      arm: dts: am335x: Remove unused uboot devicetrees
+      dm: core: Remove dependency on CLK
+
+ arch/arm/dts/Makefile                              |  11 -
+ arch/arm/dts/am335x-bone-common-u-boot.dtsi        |  14 +
+ arch/arm/dts/am335x-bone-u-boot.dtsi               |   6 +
+ arch/arm/dts/am335x-bone.dts                       |  23 -
+ arch/arm/dts/am335x-boneblack-u-boot.dtsi          |  17 +
+ arch/arm/dts/am335x-boneblack.dts                  | 174 -----
+ arch/arm/dts/am335x-bonegreen-eco-u-boot.dtsi      |   6 +
+ arch/arm/dts/am335x-bonegreen-eco.dts              |  53 --
+ arch/arm/dts/am335x-bonegreen-u-boot.dtsi          |   6 +
+ arch/arm/dts/am335x-bonegreen.dts                  |  14 -
+ arch/arm/dts/am335x-evm-u-boot.dtsi                |   6 +
+ arch/arm/dts/am335x-evm.dts                        | 766 ---------------------
+ arch/arm/dts/am335x-evmsk-u-boot.dtsi              |   6 +
+ arch/arm/dts/am335x-evmsk.dts                      | 730 --------------------
+ arch/arm/dts/am335x-icev2-u-boot.dtsi              |   4 +
+ arch/arm/dts/am335x-icev2.dts                      | 486 -------------
+ arch/arm/dts/am335x-pocketbeagle-u-boot.dtsi       |   6 +
+ arch/arm/dts/am335x-pocketbeagle.dts               | 237 -------
+ arch/arm/dts/am335x-sancloud-bbe-common.dtsi       |  67 --
+ .../am335x-sancloud-bbe-extended-wifi-u-boot.dtsi  |   6 +
+ arch/arm/dts/am335x-sancloud-bbe-extended-wifi.dts | 113 ---
+ arch/arm/dts/am335x-sancloud-bbe-lite.dts          |  50 --
+ arch/arm/dts/am335x-sancloud-bbe.dts               |  53 --
+ arch/arm/mach-omap2/am33xx/board.c                 |  23 +-
+ configs/am335x_evm.config                          |  87 +++
+ configs/am335x_evm_defconfig                       |  96 +--
+ configs/am335x_evm_spiboot_defconfig               |  85 +--
+ configs/am335x_hs_evm.config                       |  14 +
+ configs/am335x_hs_evm_defconfig                    |  95 +--
+ configs/am335x_hs_evm_uart_defconfig               |  94 +--
+ drivers/core/Kconfig                               |  10 +-
+ drivers/core/Makefile                              |   2 +-
+ include/configs/am335x_evm.h                       |   2 +
+ 33 files changed, 227 insertions(+), 3135 deletions(-)
+---
+base-commit: 1c1bfb1cf34bbb2a5717eb6995c55093279f9341
+change-id: 20251118-topic-am33-evm-oftree-v2026-01-ea701e03f8cf
+prerequisite-change-id: 20260410-topic-cpsw-switch-v2026-07-next-89e21f2d2446:v1
+prerequisite-patch-id: 896e00f13956d28e056dd63764ad8906a0b626ef
+prerequisite-patch-id: f612a9425d5a466c7585decbd8990d497a02cdfb
+prerequisite-patch-id: 9b18f917297f98b76a75f3d16536283b4c1bc76b
+prerequisite-patch-id: 2baa422fb10baa29bf4274a658eb7afba8c7b489
 
 Best regards,
 -- 
-Alexey Charkov <alchark@flipper.net>
+Markus Schneider-Pargmann (TI) <msp@baylibre.com>
 
