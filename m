@@ -4,78 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5FE6DFF8862
-	for <u-boot@archiver.kernel.org>; Mon, 27 Apr 2026 12:55:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B850FF885E
+	for <u-boot@archiver.kernel.org>; Mon, 27 Apr 2026 12:55:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C6FBF842D7;
-	Mon, 27 Apr 2026 14:54:44 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 244C684307;
+	Mon, 27 Apr 2026 14:54:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20251104.gappssmtp.com header.i=@baylibre-com.20251104.gappssmtp.com header.b="giBX0iDb";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20251104.gappssmtp.com header.i=@baylibre-com.20251104.gappssmtp.com header.b="AjNCzQf3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0BE2D8420C; Mon, 27 Apr 2026 11:03:29 +0200 (CEST)
-Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
- [IPv6:2a00:1450:4864:20::434])
+ id AB56A84150; Mon, 27 Apr 2026 11:03:29 +0200 (CEST)
+Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
+ [IPv6:2a00:1450:4864:20::32d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0798E84119
- for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 11:03:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 409E3839D9
+ for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 11:03:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=msp@baylibre.com
-Received: by mail-wr1-x434.google.com with SMTP id
- ffacd0b85a97d-43d03db7f87so6798656f8f.3
- for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 02:03:24 -0700 (PDT)
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-488b0e1b870so168102135e9.2
+ for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 02:03:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20251104.gappssmtp.com; s=20251104; t=1777280603; x=1777885403;
+ d=baylibre-com.20251104.gappssmtp.com; s=20251104; t=1777280605; x=1777885405;
  darn=lists.denx.de; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=mqD8wg/o3aOjH74OKLk9h8N1R36H89YNGYkFQoWJ5kI=;
- b=giBX0iDb31vwZkiZUzOVzcZVx2CN944cVXxS5ajcXuzrbwWvrOjyMfuR5iAVfVLEPY
- 3W+o8V/snpHuDaug26A/9fi/Z2RreXgwkl2znf6kkGgph5gZqzbUjITl6T55uwsa9MKE
- x4V0vHt3H0Z9S1PHP9NBWYQuqN6KaGfN37UW+IhbV7avE4zlvXdQFmQSa0i/geWs5iT6
- iecy60ZP7hROl1Dr9nWe+HR0WDFVyWfHh75UqTVYVHMveLHDloCWnm5+sz10OlCpNHXT
- Emx/ADOHzBYJO6J5KDh7aSIWgr9u81rE6E5Kfw6+bojvffPF2SEh8Yy6+qP3bOfdjsL0
- kS4A==
+ :reply-to; bh=kzgS9ECsukh3yS0wLILuc+D3766rgurcuPFDikdoUY4=;
+ b=AjNCzQf3XyeEHBVtxWXVe3yw4VqZvjnHatvR/twmlVScOaTLdmKGZLCU/9EB37ISzc
+ wX9vslA1Ek9m60o8GCpg/XxYI0u92cwpUKA2Viplxn13hZzcPrBy+MB5M3kPjuTgW543
+ MuyUIBl+ilboCFK07qLFpXxaYw0WE2ID8njIGdc/Qpu2xgihRqspVFfu+Ac02h9E3P+Q
+ 6RHyd83wQCATEI2UqN0tPX54quNDVDNo1Q2TLuJtTwYZMLgO+t81KPkcKFwndAgbUT9l
+ 9+zfjkXI+AYJQsUqFH8XK0Pb1AmP4wUrisb/i1yl9wzuRkQ8iyrvE7qaemV7kOUJBu0R
+ oNDg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777280603; x=1777885403;
+ d=1e100.net; s=20251104; t=1777280605; x=1777885405;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=mqD8wg/o3aOjH74OKLk9h8N1R36H89YNGYkFQoWJ5kI=;
- b=T5NPHMAmDrmRMdrNBnKUsss8IA1fpN1flA2qlZlOI27e4XcdRCt0PP5t6IyQkQYMmx
- lOx1Qlo+5NVb9JREElinBFggx2kI6dj6eHdlF9Hi9lHKzXxAfQewPRbKWO0Uc/QRRF8R
- r1UpMBfIEX1YtBmE9mHxsJVlZuVDAheIVlRulQ23x2d81JaQNMdjEvVAn0qZaen227mv
- o+PTSv4DNxpgjrV5zu9pJVm/jTolXDr+9IJnqkqksWXBarfKch0WTZFNj3+vuBsdzF+9
- LoyuTqJkmdveoxRgdJktvFoq0BWMzPC16BqOs/0eED/kMsHj3l6aNnZWRUieHbe1cBda
- wzOw==
-X-Gm-Message-State: AOJu0YyTpZBPqRKqjWQly8vfWs3d6hHKUZ8pdNcOQ2V6NnIBdTTLpq6G
- B8obNz4fckGBF1MQnaFlK64ARUO+G+uCOsJP9aywHGt2gSAJ0J4j5/FgwvrXCObMM2M=
-X-Gm-Gg: AeBDiesMzWMw2ch+4DoD4joH5jBmsC7hH7sXP8t71IjQEsYNH1QgIWrfS7+ZbqNEAGN
- JnMtRkFT5ib2So7ehcWnumz+fAdoCScyia4mXlmgnZ/LQOyWHLhw8ccI/04yuYShffpRyUpLAve
- NkhHukujAe06iLNi01Rsqst+N+8AJkDb56X9aJz9IZWavcc+021N2ZT/VtwI31jC0KSYT+g6uCO
- 9jkut6b322XWwo3d7juGn373GAwg+XoMTeIClUmngxu8pBbZCLADdR3cO4C1r6pXkqaljMMgZBs
- zJtwPO4xKcE/NoCv15nskB8haVTuPJMW0iD/bx1YuISIwmZ7i+RvAYCyd2fWtzDb35zPF5M8UUZ
- TA9O7zTZwR+dw+YA9WHKVpDY87Tvo4819oj9gg8ypptuCmFTHRL4BNNtqw6oqWFm4sPp2zQdGJf
- g9YmN0rUoE3lXpuVT5DZJFZpa/Q/jtf2Pnq1w/f5c5dg==
-X-Received: by 2002:a05:6000:26cf:b0:43f:dfbc:8c71 with SMTP id
- ffacd0b85a97d-43fe3dfbd89mr63367732f8f.25.1777280603335; 
- Mon, 27 Apr 2026 02:03:23 -0700 (PDT)
+ bh=kzgS9ECsukh3yS0wLILuc+D3766rgurcuPFDikdoUY4=;
+ b=nEe+CK/lTo060ko3SSKRteUdP6zJc3wswDOYf0gJYyLZfrrI8PnSs30g/tjxbl55GN
+ byet8ZfxI0x8vOQgSHBJPFK06HyE58QaNPk8xHSzoRMMxVmq4suYwsRLhxfeZY7PLijR
+ AkhlWyr3sUoVnM427qJN1c35+Tx+URqmlGeFiMSRqQS9j0VKPAb+uLxnK+SdEPfRLjiC
+ pdlLUUFnSean+plNjfFlVWRMmVoS5yZ8kPqSRSc95ROvxy2mXvV0xOQJ8qhqBM7lIVn0
+ pVGAw8cetQMOtdpPlgKcBmjJfM47d3mz9tjtnydMBIKzq7ZsINahleC2XxWJymTTZj89
+ mwtQ==
+X-Gm-Message-State: AOJu0YyeQ5aOUHFGR9hf/yM7KZwbN+Mdl1KD6fN87aDpPosX2+Ya36Q3
+ v/df1HOE2cC/aPPIpNno5zdp7RUt6pHsze5Rm80cZtkt8we5alH0uWfm4ytHollDhBU=
+X-Gm-Gg: AeBDietHsC0uelp8ilTw6hpXNivxrG7cBVQPBc4dePrdMl62WfqIRjx3goKTCa8Kyqj
+ FCHvyJT5FNpeXYCWbUtoubRh4uxZ94UlZ/2deXI8ajjZuSDJtVa2AzpYnoTuWDyKoQRRQ+OHHjT
+ JUSRuHafuJFmD3b0zycR4NtE/xB5xpDSezUcxdiciruk7MY5CkaYwDP22Q7ivC/3pck2l6811Db
+ KXqWQ5vnhpGee2IN4GaCVBYyTRIAhp1gl2lEIDxgHM4ChDZS+AF1u0rMrPeZ2R5YuuB1G9buycI
+ 3YwCf54Xlh3le4aekqV26p8XfYt/dLfLyCP+mPtTX7epRNzjhRn6NGTO03MSwf6Me2KCDJTrn0D
+ l2/NCjf+r3QYwhz9TBJsQduE7+eomI5BMazkzrxy7bxkRY8CVH7j4e+uXdpaIpYqciDdnoXYNjy
+ +kAKW/O6QLCrc1eT0w+cvynyhY8cgGLV4=
+X-Received: by 2002:a05:600c:3053:b0:48a:53ea:140b with SMTP id
+ 5b1f17b1804b1-48a53ea1526mr238553075e9.28.1777280604476; 
+ Mon, 27 Apr 2026 02:03:24 -0700 (PDT)
 Received: from localhost ([2001:4090:a246:83ca:1917:a47e:1872:2063])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-43fe4cc07bbsm83939048f8f.11.2026.04.27.02.03.22
+ 5b1f17b1804b1-48a4b329542sm861275625e9.3.2026.04.27.02.03.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 27 Apr 2026 02:03:22 -0700 (PDT)
+ Mon, 27 Apr 2026 02:03:24 -0700 (PDT)
 From: "Markus Schneider-Pargmann (TI)" <msp@baylibre.com>
-Date: Mon, 27 Apr 2026 11:01:22 +0200
-Subject: [PATCH v7 06/14] am33xx: Avoid hard failure on USB probe issue
+Date: Mon, 27 Apr 2026 11:01:23 +0200
+Subject: [PATCH v7 07/14] arm: dts: am335x-*-u-boot: Add chosen tick-timer
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260427-topic-am33-evm-oftree-v2026-01-v7-6-7e6cd1a805a1@baylibre.com>
+Message-Id: <20260427-topic-am33-evm-oftree-v2026-01-v7-7-7e6cd1a805a1@baylibre.com>
 References: <20260427-topic-am33-evm-oftree-v2026-01-v7-0-7e6cd1a805a1@baylibre.com>
 In-Reply-To: <20260427-topic-am33-evm-oftree-v2026-01-v7-0-7e6cd1a805a1@baylibre.com>
 To: u-boot@lists.denx.de, Marc Murphy <marc.murphy@sancloud.com>
@@ -104,12 +104,12 @@ Cc: Tom Rini <trini@konsulko.com>, Rasmus Villemoes <ravi@prevas.dk>,
  Ion Agorria <ion@agorria.com>, Peng Fan <peng.fan@nxp.com>, 
  "Markus Schneider-Pargmann (TI)" <msp@baylibre.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1212; i=msp@baylibre.com;
- h=from:subject:message-id; bh=a9mNtkme71PbyJwqoxXU2jtKAgHiQS6mJbF3mtWckVE=;
- b=owGbwMvMwCXWejAsc4KoVzDjabUkhsz3ahp5pYu3he8rveKidF/5UsdpaQMGo1t67DbvP8k9r
- Jji7v69o5SFQYyLQVZMkaUzMTTtv/zOY8mLlm2GmcPKBDKEgYtTACaSLMHI0P+qyPqGtswOjSl3
- hPbrf7FT7Sj+xFR6+E2eqtqWSIZ1Ggz/a59d/PhUZP73pL6wvct7OLexFWWXG0v/6g74cPL4x6s
- 2nAA=
+X-Developer-Signature: v=1; a=openpgp-sha256; l=5571; i=msp@baylibre.com;
+ h=from:subject:message-id; bh=XwiSNNuRwCiAY3tQ8wARBVsJ0usYVWkkf1Og3rTmWdk=;
+ b=owGbwMvMwCXWejAsc4KoVzDjabUkhsz3arrp8xTFuB4ce/txVtDly8znLGdkCYaq8tU+nz7Fq
+ Nj5lLFsRwkLgxgXg6yYIktnYmjaf/mdx5IXLdsMM4eVCWQIAxenAExEQ5/hx+1XemFrlU4svhzY
+ /F61VfeGLGu46a2qK9sq5rIrKM2uZPhfdCjBumwft2T50knC5jbWTwPOcU/fNNuvpXNiEBPrt1l
+ MAA==
 X-Developer-Key: i=msp@baylibre.com; a=openpgp;
  fpr=BADD88DB889FDC3E8A3D5FE612FA6A01E0A45B41
 X-Mailman-Approved-At: Mon, 27 Apr 2026 14:54:41 +0200
@@ -129,41 +129,165 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Currently if USB fails to probe, U-Boot does not reach the console.
-
-This patch does not fail if USB fails to probe making it easier to debug
-in case of issues.
+Upstream devicetrees do not have a binding for the tick-timer. Add it
+for all boards built with the am335x_evm_defconfig.
 
 Reviewed-by: Kory Maincent <kory.maincent@bootlin.com>
 Signed-off-by: Markus Schneider-Pargmann (TI) <msp@baylibre.com>
 ---
- arch/arm/mach-omap2/am33xx/board.c | 9 +++++++--
- 1 file changed, 7 insertions(+), 2 deletions(-)
+ arch/arm/dts/am335x-bone-common-u-boot.dtsi                | 14 ++++++++++++++
+ arch/arm/dts/am335x-bone-u-boot.dtsi                       |  6 ++++++
+ arch/arm/dts/am335x-boneblack-u-boot.dtsi                  |  6 ++++++
+ arch/arm/dts/am335x-bonegreen-eco-u-boot.dtsi              |  6 ++++++
+ arch/arm/dts/am335x-bonegreen-u-boot.dtsi                  |  6 ++++++
+ arch/arm/dts/am335x-evm-u-boot.dtsi                        |  6 ++++++
+ arch/arm/dts/am335x-evmsk-u-boot.dtsi                      |  6 ++++++
+ arch/arm/dts/am335x-icev2-u-boot.dtsi                      |  4 ++++
+ arch/arm/dts/am335x-pocketbeagle-u-boot.dtsi               |  6 ++++++
+ arch/arm/dts/am335x-sancloud-bbe-extended-wifi-u-boot.dtsi |  6 ++++++
+ 10 files changed, 66 insertions(+)
 
-diff --git a/arch/arm/mach-omap2/am33xx/board.c b/arch/arm/mach-omap2/am33xx/board.c
-index 4e9ad8935e3b5020c4ed1d022ae4846a2dc9486f..90b341303c7309dc21b34cc01020db997f53c8f3 100644
---- a/arch/arm/mach-omap2/am33xx/board.c
-+++ b/arch/arm/mach-omap2/am33xx/board.c
-@@ -266,12 +266,17 @@ int arch_misc_init(void)
- 	struct udevice *dev;
- 	int ret;
+diff --git a/arch/arm/dts/am335x-bone-common-u-boot.dtsi b/arch/arm/dts/am335x-bone-common-u-boot.dtsi
+new file mode 100644
+index 0000000000000000000000000000000000000000..0fa2a311514b7776631797bb99d0d7f299df04bd
+--- /dev/null
++++ b/arch/arm/dts/am335x-bone-common-u-boot.dtsi
+@@ -0,0 +1,14 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * am335x-bone-common U-Boot Additions
++ *
++ * Common u-boot configuration for all BeagleBone variants
++ */
++
++#include "am33xx-u-boot.dtsi"
++
++/ {
++	chosen {
++		tick-timer = &timer2;
++	};
++};
+diff --git a/arch/arm/dts/am335x-bone-u-boot.dtsi b/arch/arm/dts/am335x-bone-u-boot.dtsi
+new file mode 100644
+index 0000000000000000000000000000000000000000..11264707882b62749779aeb0a12e4471c8ace999
+--- /dev/null
++++ b/arch/arm/dts/am335x-bone-u-boot.dtsi
+@@ -0,0 +1,6 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * am335x-bone U-Boot Additions
++ */
++
++#include "am335x-bone-common-u-boot.dtsi"
+diff --git a/arch/arm/dts/am335x-boneblack-u-boot.dtsi b/arch/arm/dts/am335x-boneblack-u-boot.dtsi
+new file mode 100644
+index 0000000000000000000000000000000000000000..e2afc77d9edc539323c73dee03511a9cd62d8ca8
+--- /dev/null
++++ b/arch/arm/dts/am335x-boneblack-u-boot.dtsi
+@@ -0,0 +1,6 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * am335x-boneblack U-Boot Additions
++ */
++
++#include "am335x-bone-common-u-boot.dtsi"
+diff --git a/arch/arm/dts/am335x-bonegreen-eco-u-boot.dtsi b/arch/arm/dts/am335x-bonegreen-eco-u-boot.dtsi
+new file mode 100644
+index 0000000000000000000000000000000000000000..e348f84d9be9a858596d5f5e1a7127e7d8c1e7d3
+--- /dev/null
++++ b/arch/arm/dts/am335x-bonegreen-eco-u-boot.dtsi
+@@ -0,0 +1,6 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * am335x-bonegreen-eco U-Boot Additions
++ */
++
++#include "am335x-bone-common-u-boot.dtsi"
+diff --git a/arch/arm/dts/am335x-bonegreen-u-boot.dtsi b/arch/arm/dts/am335x-bonegreen-u-boot.dtsi
+new file mode 100644
+index 0000000000000000000000000000000000000000..47e371a816faa4c0f9625d0313109fadafaf8459
+--- /dev/null
++++ b/arch/arm/dts/am335x-bonegreen-u-boot.dtsi
+@@ -0,0 +1,6 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * am335x-bonegreen U-Boot Additions
++ */
++
++#include "am335x-bone-common-u-boot.dtsi"
+diff --git a/arch/arm/dts/am335x-evm-u-boot.dtsi b/arch/arm/dts/am335x-evm-u-boot.dtsi
+index 72402c82928a72abe3847bfcc0771dabc571d8e6..2ebf60bf7d6ce007e033b75a25a10c60a83e218e 100644
+--- a/arch/arm/dts/am335x-evm-u-boot.dtsi
++++ b/arch/arm/dts/am335x-evm-u-boot.dtsi
+@@ -5,6 +5,12 @@
  
-+	/*
-+	 * Trigger probe of the UCLASS_MISC device which is a USB wrapper driver
-+	 * ti-musb-wrapper that handles all usb host and gadget devices.
-+	 */
- 	ret = uclass_first_device_err(UCLASS_MISC, &dev);
- 	if (ret)
--		return ret;
-+		printf("Failed probing USB %d, continue without USB\n", ret);
+ #include "am33xx-u-boot.dtsi"
  
- #if defined(CONFIG_DM_ETH) && defined(CONFIG_USB_ETHER)
--	usb_ether_init();
-+	if (!ret)
-+		usb_ether_init();
- #endif
++/ {
++	chosen {
++		tick-timer = &timer2;
++	};
++};
++
+ &l4_per {
+ 	bootph-all;
+ 	segment@300000 {
+diff --git a/arch/arm/dts/am335x-evmsk-u-boot.dtsi b/arch/arm/dts/am335x-evmsk-u-boot.dtsi
+index 669cb6bf165575c7e688e49fe15732c97c9c0121..06ee1eb7c3ed68e6ccc8630d209b50add20e4d20 100644
+--- a/arch/arm/dts/am335x-evmsk-u-boot.dtsi
++++ b/arch/arm/dts/am335x-evmsk-u-boot.dtsi
+@@ -7,6 +7,12 @@
  
- 	return 0;
+ #include "am33xx-u-boot.dtsi"
+ 
++/ {
++	chosen {
++		tick-timer = &timer2;
++	};
++};
++
+ &l4_per {
+ 
+ 	segment@300000 {
+diff --git a/arch/arm/dts/am335x-icev2-u-boot.dtsi b/arch/arm/dts/am335x-icev2-u-boot.dtsi
+index ac1feaa9d9f69b79211f34c44af1008a5aed30ca..4ae100a3a7fb6bbb4b618849a15eb370a10dde2a 100644
+--- a/arch/arm/dts/am335x-icev2-u-boot.dtsi
++++ b/arch/arm/dts/am335x-icev2-u-boot.dtsi
+@@ -6,6 +6,10 @@
+ #include "am33xx-u-boot.dtsi"
+ 
+ / {
++	chosen {
++		tick-timer = &timer2;
++	};
++
+ 	xtal25mhz: xtal25mhz {
+ 		compatible = "fixed-clock";
+ 		#clock-cells = <0>;
+diff --git a/arch/arm/dts/am335x-pocketbeagle-u-boot.dtsi b/arch/arm/dts/am335x-pocketbeagle-u-boot.dtsi
+new file mode 100644
+index 0000000000000000000000000000000000000000..52c4bc26e128b6f463659bba070de515e7997efe
+--- /dev/null
++++ b/arch/arm/dts/am335x-pocketbeagle-u-boot.dtsi
+@@ -0,0 +1,6 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * am335x-pocketbeagle U-Boot Additions
++ */
++
++#include "am335x-bone-common-u-boot.dtsi"
+diff --git a/arch/arm/dts/am335x-sancloud-bbe-extended-wifi-u-boot.dtsi b/arch/arm/dts/am335x-sancloud-bbe-extended-wifi-u-boot.dtsi
+new file mode 100644
+index 0000000000000000000000000000000000000000..17b86bdba3e43e7e9881e87a3ca0d3a36557c755
+--- /dev/null
++++ b/arch/arm/dts/am335x-sancloud-bbe-extended-wifi-u-boot.dtsi
+@@ -0,0 +1,6 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * am335x-sancloud-bbe-extended-wifi U-Boot Additions
++ */
++
++#include "am335x-sancloud-bbe-u-boot.dtsi"
 
 -- 
 2.53.0
