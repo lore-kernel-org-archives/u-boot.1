@@ -4,58 +4,123 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34A94FF885E
-	for <u-boot@archiver.kernel.org>; Mon, 27 Apr 2026 13:47:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C58C2FF8860
+	for <u-boot@archiver.kernel.org>; Mon, 27 Apr 2026 13:53:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7CC5083AA9;
-	Mon, 27 Apr 2026 15:47:55 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id 1C21683AA9;
+	Mon, 27 Apr 2026 15:53:44 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=arm.com header.i=@arm.com header.b="HOTCGjvk";
+	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="CCX1heWx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7514883C14; Mon, 27 Apr 2026 15:47:53 +0200 (CEST)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 0108080433
- for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 15:47:49 +0200 (CEST)
+ id C8F228410D; Mon, 27 Apr 2026 15:53:42 +0200 (CEST)
+Received: from AS8PR04CU009.outbound.protection.outlook.com
+ (mail-westeuropeazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::3])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 28B3683693
+ for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 15:53:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=arm.com
+ dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andre.przywara@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id A02AB1684;
- Mon, 27 Apr 2026 06:47:43 -0700 (PDT)
-Received: from [10.41.150.145] (e142021.arm.com [10.41.150.145])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id E4E233F763;
- Mon, 27 Apr 2026 06:47:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
- t=1777297669; bh=sAcRz+s3VxC9fd5JEExM2aP/iGSA30kK6d0brEQHyjA=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=HOTCGjvktW2ZGTkIMMhQczavzTSioHMm9krf+a1MqWK4vGDeU0ncuyv4fpmR8Y0ln
- hoWkzEbaEouSm64oTduC+a7mb+CYt2GP3P6yo3jtEZGiqMhekeBF+ESA4b97+hTG6C
- XmKINObFsYx4A9A8TNbMABHImVS9uAXWGvizlav4=
-Message-ID: <86b9f145-e94d-44f7-b8d5-8ced07f478d9@arm.com>
-Date: Mon, 27 Apr 2026 15:47:44 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 0/5] mtd: rawnand: sunxi: Fix user data length for H6
-To: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Cc: Richard Genoud <richard.genoud@bootlin.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Tom Rini <trini@konsulko.com>, Andrew Goodbody <andrew.goodbody@linaro.org>,
- Miquel Raynal <miquel.raynal@bootlin.com>,
- James Hilliard <james.hilliard1@gmail.com>,
- Boris Brezillon <bbrezillon@kernel.org>,
- Thomas Petazzoni <thomas.petazzoni@bootlin.com>, u-boot@lists.denx.de
-References: <20260327140508.3680105-1-richard.genoud@bootlin.com>
- <fb530fbd-6dac-4f37-8447-dc15e9b0b0fd@arm.com>
- <CAOf5uwkUXrsX6w_1LYiLK+f5HFsefx3t6Qp5urxEu_N-15KZ7g@mail.gmail.com>
-Content-Language: en-US
-From: Andre Przywara <andre.przywara@arm.com>
-In-Reply-To: <CAOf5uwkUXrsX6w_1LYiLK+f5HFsefx3t6Qp5urxEu_N-15KZ7g@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+ spf=pass smtp.mailfrom=mikhail.kshevetskiy@genexis.eu
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=gNx78LBIyRUEA6qEf0aY+9CSM3iifTGR0eat6JYe4HcrR7Jg3ace3oz5Qtnuw+Dc5xEIEj0n7WddEpnAL9HjhUk/0PAjQdlXa8cCZwpq4l0AUOoroWcwvbp1f/oH5SosvHMp8JU1kkqt/aahHnO0KWEk5fFJKQSUBgyYjtJ1E4av8NADQ0lyvATPiAu9cEb2mWikLv6SbQfMJZIg4aJP+UBMkgaEfjS++Bt4dJU1Jftog2f7z165TZyWglpKnKlLxdscr+HSgFitWV1FGfH+iYwMV3GQFXjYMYWsoiwddzfkqffqvHdMNJcZVxK5u8a6600bxoBp7SH7qjGVsFLp9g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=ZwGe5PCB2tX46TrPMTb6aMK+dy+xWmSJuYkaHQymUCY=;
+ b=Hyq/9XRMuTGZ4NmlwAZMmuH6uRqFgm699/S3mWfoeDgR7uyyG96d/Rjg8f1Rovt6AXBXiuGVKlzE3hGk0w63PjyLhRRm9DVAiyz/7l8yKMoDJ9c+5HPJPTo6Kx8lGbPUPuGHGK83cQDDKPeyMfiPAjROGIET6hMw+0mjAYyNZM8QfEqbQrL8xeMDMlou0ILjYEYxlpNtJtCHsRcA6se6uiO1c9YPNKn3aqtAZrSMLeoQX046noicytPpyQjuF4N2c4N6crmKr75kFmfL4c7YiijIoR1qG8szSPU4r15CgnIC4ztDY1WrinPRA6DNor95jfiRHverD/nl24ysPDM4rA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=genexis.eu; dmarc=pass action=none header.from=iopsys.eu;
+ dkim=pass header.d=iopsys.eu; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iopsys.eu; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=ZwGe5PCB2tX46TrPMTb6aMK+dy+xWmSJuYkaHQymUCY=;
+ b=CCX1heWxlpLP+HRxGjT3IrhXdVwVoo3SinyDc/PHOqh/E4iHSEQf115oacj3ezU9rj2wRG2aDWyCkjBmHHBYgExXxPnHdL1G3DyyX8UImET4MW5LEf2TmUYSNCXPyR++3PSm4/81x7FbPAAe7TCm0icLEwHxfQkOfZpPHGgMELJA/DFuZI9pxmRNK3Bm99nz/alxIVYx4jIzg2s/Wec1328sTQ27FJSSHabH0LSgiRZ29T6SYhOIr7ZuUSxPNGhF5ZC+U4S4F1KnOuVwW4a+hrC98ulbRikLKJtlwPr8z3p+o7fJV8Qzlie6GvBKfZDlt2RF3UI1omiKkkAOYIXa+w==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=iopsys.eu;
+Received: from DU2PR08MB10037.eurprd08.prod.outlook.com (2603:10a6:10:49a::20)
+ by GV2PR08MB11519.eurprd08.prod.outlook.com (2603:10a6:150:2b1::13)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9846.25; Mon, 27 Apr
+ 2026 13:53:36 +0000
+Received: from DU2PR08MB10037.eurprd08.prod.outlook.com
+ ([fe80::3c7:6d2e:8afe:e4dc]) by DU2PR08MB10037.eurprd08.prod.outlook.com
+ ([fe80::3c7:6d2e:8afe:e4dc%5]) with mapi id 15.20.9846.025; Mon, 27 Apr 2026
+ 13:53:36 +0000
+From: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+To: Christian Marangi <ansuelsmth@gmail.com>, Tom Rini <trini@konsulko.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
+Cc: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+Subject: [PATCH 1/2] configs: airoha: an7581: enable position independent code
+Date: Mon, 27 Apr 2026 16:53:25 +0300
+Message-ID: <20260427135326.773903-2-mikhail.kshevetskiy@iopsys.eu>
+X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20260427135326.773903-1-mikhail.kshevetskiy@iopsys.eu>
+References: <20260427135326.773903-1-mikhail.kshevetskiy@iopsys.eu>
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: ZR2P278CA0079.CHEP278.PROD.OUTLOOK.COM
+ (2603:10a6:910:65::18) To DU2PR08MB10037.eurprd08.prod.outlook.com
+ (2603:10a6:10:49a::20)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DU2PR08MB10037:EE_|GV2PR08MB11519:EE_
+X-MS-Office365-Filtering-Correlation-Id: d64a04bd-a90b-4d9f-74c5-08dea46460c0
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|52116014|376014|366016|1800799024|38350700014|22082099003|18002099003|56012099003;
+X-Microsoft-Antispam-Message-Info: Kje8oo2temFtuCi3NK/SBl0nfzD1ErA9lC8qTG34fKaAN4NjU2W+xNsthx7MIpliY0ELyZTGap1fYrYR2+e3ujprXC9dY5l+xkvaQRGLKkGTVMJon5nwk/Taly/PeZ6nD2Yj+PfOAqjwxvBEuSfJbgBAgTKSAE6zCEXFP4ewpv1Kn8WKBowDVmyCTjVa0U99qXbZw66w1tbGI5qzQvQvLM1KaPonuQx+GImUi6mYcxdvEoFtGdi644wNecOfrjqdNJKN/7CBJ45s8vmpRWrD0WDsBFvqri1YO+hOZ2YSQMe5xEavspedJroNmK7X5kPBJiGoOEjzwkUfVccOA6kLUPpiNc36UnpMw+4/LxgARgmGN3bllBjcy51Tf70Eer6MPz4CnDVqzS7ftInntKSJQRO4pq9tDqTaOugMdi8oMHHsMiRq0l2Jkqi3coXeuvL7TLB6eQ46UsZDCEkPokkB7/sL43RijWjRooyuOFfTqFXv2KVyUGIJ5i38jdD6KZv9aYbGreJYvKFjzCzJw5HvDL7jU4QO6DDaorCNGXeVySJiHqb5OuCsEXp5ozCmwSUipNbex5DPqpczCc21Zzs+d9XY1WEpC7WW5VDG+f86qCA9MKqj5NhVRiTiDiLFkaSML+lPJ1PrCmHMXESJjUni6MvBEM9qsombIgsRHhy+3TKIfJqp8LfxdUEx+z5MEGttCu1CZ7A1bI5oYxq/WXW0uU0BKbPRLTsE4hE2mLUpML1x/0+ImQ/IHJmVImff3yTlMm6wSUKQI6pEfXPSkGXV489VyQGU+DFM/yYjxZxrh1E=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DU2PR08MB10037.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(52116014)(376014)(366016)(1800799024)(38350700014)(22082099003)(18002099003)(56012099003);
+ DIR:OUT; SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?4eLM1Avy9xL+f/FA4gly+ucQYIkNha0jrPOI+wDMQGWteL8wxLJAAM9jn12P?=
+ =?us-ascii?Q?kebTDhoi2dko30e3v9kqgE+Paj4kLGCD39M1e+jdiBlosIV2J43abtSZsjl4?=
+ =?us-ascii?Q?unwE5khkoLG6RNoKgR2FKriWLty8vzcJkwXhPJqteQhtO4AWTyDmDmYzbwPi?=
+ =?us-ascii?Q?ficpAc7Nk92bC6uEy/lB0CEtkvjMJakApig02IGWR786d8rWQIOOBVVQbecP?=
+ =?us-ascii?Q?pHQ/fQzaJ/Fjkp1aSEztPhwYea9TAFKeNcFIY4vGGUmhNo+mvlJJB1gmo8Px?=
+ =?us-ascii?Q?C0L/io15R1dutf4TIwZdnC5wfI7I+64n4/T19M03U2LWH+P3B+1KpK6oblfp?=
+ =?us-ascii?Q?p6tT09DmQJ3DwEZeLbEUVNKzjY4lW4rVCFkHz1Ii0eH2hFBeV2ZuTRF6NlNa?=
+ =?us-ascii?Q?RrX9J9HLfa6BN1EoD+bolFlLFC4cHN6RoVUjGfXiRWQOadnj6rxE9fHrGrZk?=
+ =?us-ascii?Q?GRGzJqH2AC3N7RWS8ZYh328uTOe1BeytfXzBzgY3erB59qgdP+AmaXNJ26NM?=
+ =?us-ascii?Q?Uq6aoktojWm2IynVuqKKTfFbxFRtEt3WB1mQxK64omI9PsXMH0iUIbLHIuLP?=
+ =?us-ascii?Q?e9xB+fm2kiblNFZl694LiwYjPMtV54xJ1t/UbGWGFOSUHG0wFxgJNBklKVq2?=
+ =?us-ascii?Q?0CVoynxhILm8O/Cq+YxmxISOrGOtJSUIZi9aZNsg7/V619dot1mkrt60zV6u?=
+ =?us-ascii?Q?S30HY3HFtuBjvEZskY8Jo/spLyJu/ndUrIuNexhMps6SRA3a6GwHwna7vizk?=
+ =?us-ascii?Q?O5Cv1q/sxIL4umazLr3sMQ8nDtOFKwlsGTqpeLCEM1IP/kOJJ4YcRWVz5Lw5?=
+ =?us-ascii?Q?6/489XyuJ2cGCl7ERudh8DIbQAp6YkxNfrgz6c3SDbzBTUH5fid2EpGTWiyn?=
+ =?us-ascii?Q?irE35lOlT25ft8vUK6YW4rTI4z+zsB/xfEQ+H5RCrVQvpKYx0/qs7z4VRoZm?=
+ =?us-ascii?Q?E50ObAL3LMyhAXZtb7WuEVYoX0K+Z3YRMjC6ybPDvXz6WLc2isipLAUbGyYb?=
+ =?us-ascii?Q?Nl7yyXpVkm3HLsdH0SKWu54VpGfi5FrslXB5gFjnphoCHDcSh0qUJLtTVsT+?=
+ =?us-ascii?Q?yh+iXVpjJYi2nZo5ug+hW3Nvs9pVdgk2mQXLHhwmYZecDU8yWDu8ETUmsJT+?=
+ =?us-ascii?Q?Dw2WyXwJKG2VWwGlO/kqFPTHkPjexzTe89KqT60VYMw5ywuGaRqPQj9x1L7y?=
+ =?us-ascii?Q?G2ZLx4E38ng16nCoaLMzZ+DMWasyMB3TLLuCnMuDZ7f+AMT98/lWORwg2h8H?=
+ =?us-ascii?Q?u2t0e1EYfMB/GH3WcIL/OguFxc0W9vvgZ5aC56cpEf0oEFA2eMZGc6W2Njga?=
+ =?us-ascii?Q?Phj221aSgakQg27i74Vdcvcu4kIHH1pyHpiCtW1VzKm9JiabVSsrRuKsRIO1?=
+ =?us-ascii?Q?sDUNdyFSrPDcAmIyOB3ADb1a7SC7/2UUElosWozHhiLh6oZedkk5I9fIVcXq?=
+ =?us-ascii?Q?QUHRr8bpUa3g3VQITwulJv46tMfigT21G/MUsYJB8mvjbxfEC5ptq1iUIRMg?=
+ =?us-ascii?Q?LhrUGfHh2EyNUYdc0sGVr3XfUufX21xXV301SIP8XHd7mMo2q9tVMl3jqDvY?=
+ =?us-ascii?Q?iSaNQ4id+Qx3ipZYHfF7Ac/DrN4xRHubAef8LnbGnToDek5NgyABdm3C0wrn?=
+ =?us-ascii?Q?6GvJDGMlywcjptA4icbr86LUjFj0MohFUAowi3O2H7/OYl8AX+3p9qCHELGn?=
+ =?us-ascii?Q?pdfM7gz3F10l0t7qySSX8RBPHNPYYgzmEcK625zd9TAhv8p97j3pC6k0FgUY?=
+ =?us-ascii?Q?SwYh2xI5ghZtKSy1Qb6wW896SE6zP5k=3D?=
+X-OriginatorOrg: iopsys.eu
+X-MS-Exchange-CrossTenant-Network-Message-Id: d64a04bd-a90b-4d9f-74c5-08dea46460c0
+X-MS-Exchange-CrossTenant-AuthSource: DU2PR08MB10037.eurprd08.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Apr 2026 13:53:36.2111 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8d891be1-7bce-4216-9a99-bee9de02ba58
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: bccPusNruaXEKf5bxO7Muo4phh/iPxQGKDTkks0VtFaHsEzAxx6bCq9zoZqfPNi14ySno2obG4ZRzi957m98PkG2KnLXy0NKNINgF8rVew4=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV2PR08MB11519
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,95 +137,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Michael,
+This enables U-Boot loading from any 4K aligned address.
+It makes U-Boot debugging a bit simpler.
 
-On 4/27/26 14:31, Michael Nazzareno Trimarchi wrote:
-> Hi Andre
-> 
-> On Mon, Apr 27, 2026 at 2:28 PM Andre Przywara <andre.przywara@arm.com 
-> <mailto:andre.przywara@arm.com>> wrote:
-> 
->     Dario, Michael,
-> 
->     are you going to take those patches eventually, or are they supposed to
->     go through the sunxi tree? Somehow patchwork put this on my plate, but
->     MAINTAINERS says it's yours.
-> 
->     I will have a final look at those patches, but I think they are fine
->     since their counterparts passed the kernel reviews ;-)
-> 
-> 
-> Company projects are stressing me out. I will check today with Dario
+Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+---
+ configs/an7581_evb_defconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
-Sorry to hear that! I can easily take care of this series, if you are 
-fine with that. It would touch only those sunxi specific files anyway.
-
-Cheers,
-Andre
-
-> Michael
-> 
->     Cheers,
->     Andre
-> 
->     On 3/27/26 15:05, Richard Genoud wrote:
->      > This series introduces the correct usage of user data length for
->      > H6/H616.
->      > If the older SoCs must use a fixed value of 4 user data bytes for
->     each
->      > ECC step, the H6 can have a different value for each step.
->      >
->      > In the first round, the behavior was kept as the one used by A10.
->      > But we have multiple choices:
->      > - do like A10 like before (and not use all OOB)
->      > - do like the vendor kernel (different from A10, but not using
->     all OOB)
->      > - use the whole OOB for user data bytes
->      >
->      > In this second round, the third approach is implemented.
->      >
->      > All patches but the 4th are code cleaning.
->      > The 4th patch enables using a variable user data length for H6/H616
->      > along with maximizing it.
->      >
->      > A similar series has been accepted for Linux:
->      > https://lore.kernel.org/lkml/20260317142437.580204-1-
->     richard.genoud@bootlin.com/ <https://lore.kernel.org/
->     lkml/20260317142437.580204-1-richard.genoud@bootlin.com/>
->      >
->      > Changes from v1:
->      > - gather reviewed-by
->      > - clean sunxi_nand_chip_init()
->      > - use all possible remaining OOB space for user data bytes
->      >
->      > Richard Genoud (5):
->      >    mtd: rawnand: sunxi: Replace hard coded value by a define
->      >    mtd: rawnand: sunxi: make the code mode self-explanatory
->      >    mtd: rawnand: sunxi: clean sunxi_nand_chip_init()
->      >    mtd: rawnand: sunxi: introduce variable user data length
->      >    mtd: nand: raw: sunxi_spl: remove user data length reset
->      >
->      >   drivers/mtd/nand/raw/sunxi_nand.c     | 292 ++++++++++++++++++
->     +-------
->      >   drivers/mtd/nand/raw/sunxi_nand.h     |   3 +
->      >   drivers/mtd/nand/raw/sunxi_nand_spl.c | 129 +++++++++---
->      >   3 files changed, 324 insertions(+), 100 deletions(-)
->      >
->      >
->      > base-commit: ba7bf918dafcd093ad733b07ba490baeb20cf5da
-> 
-> 
-> 
-> -- 
-> Michael Nazzareno Trimarchi
-> Co-Founder & Chief Executive Officer
-> M. +39 347 913 2170
-> michael@amarulasolutions.com <mailto:michael@amarulasolutions.com>
-> __________________________________
-> 
-> Amarula Solutions BV
-> Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
-> T. +31 (0)85 111 9172
-> info@amarulasolutions.com <mailto:info@amarulasolutions.com>
-> www.amarulasolutions.com <http://www.amarulasolutions.com>
+diff --git a/configs/an7581_evb_defconfig b/configs/an7581_evb_defconfig
+index a94730cf564..16100d00f98 100644
+--- a/configs/an7581_evb_defconfig
++++ b/configs/an7581_evb_defconfig
+@@ -1,4 +1,5 @@
+ CONFIG_ARM=y
++CONFIG_POSITION_INDEPENDENT=y
+ CONFIG_ARCH_AIROHA=y
+ CONFIG_TARGET_AN7581=y
+ CONFIG_TEXT_BASE=0x81E00000
+-- 
+2.53.0
 
