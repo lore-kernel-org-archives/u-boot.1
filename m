@@ -4,87 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45E6FFF885E
-	for <u-boot@archiver.kernel.org>; Mon, 27 Apr 2026 10:09:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD235FF8861
+	for <u-boot@archiver.kernel.org>; Mon, 27 Apr 2026 10:09:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4CAD083693;
-	Mon, 27 Apr 2026 12:08:53 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 900EF841DF;
+	Mon, 27 Apr 2026 12:08:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="mRHnjF3u";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="DpkTP2T+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7342684178; Mon, 27 Apr 2026 12:08:52 +0200 (CEST)
-Received: from mail-lj1-x22c.google.com (mail-lj1-x22c.google.com
- [IPv6:2a00:1450:4864:20::22c])
+ id F2F968423D; Mon, 27 Apr 2026 12:08:58 +0200 (CEST)
+Received: from mail-lj1-x22f.google.com (mail-lj1-x22f.google.com
+ [IPv6:2a00:1450:4864:20::22f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2B20A80433
- for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 12:08:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id ED302839D9
+ for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 12:08:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lj1-x22c.google.com with SMTP id
- 38308e7fff4ca-38ccde812ecso98278371fa.0
- for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 03:08:50 -0700 (PDT)
+Received: by mail-lj1-x22f.google.com with SMTP id
+ 38308e7fff4ca-38a01c80c34so97665171fa.0
+ for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 03:08:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1777284529; x=1777889329; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1777284534; x=1777889334; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=sOVOfOQIbVfM7hlfoBdXKZYK6qEJROqtwbm2aVGMDs0=;
- b=mRHnjF3u/NDbsdj06IB5JbLXLlJ3VbJ5WEUxEmSYTaJf56/rzC2h5RHSbx4zj6t4ER
- Gx8LJ+C1wxMZ4F6UNnBU7gfHxe8gT1QRut9CHboE/k64Eg2vfPGaNhOPwwXK7jfkvz3T
- IICHIqenn5isX+w/ydB40PPk83fedawM2+1zTZMF/KxmbJOeSKJvaWQ374a1hDvaAs/q
- ZhNUAbp4KgBCVc1k/17M42qPeNQNebXLXVGlSh1e+Nk4o/qJQRPKKI5FxmcZyW5SxPRG
- Mv2zW0xAefrzUWDScOvL1iS+eHitpw0V5TbR42HtCLiIw1+0OHdFfuevW1TfNnUcJ/6/
- rULg==
+ bh=981fWpuAbK2bvrnCZZVrwADu5/ky6PA26Iw6kXj799M=;
+ b=DpkTP2T+PSsn6QALxoPN4NVGU3WiB/3RATJ5Cy7QEnXpZpBm3uP3PjMRNc9WPyRbK5
+ Pqx5b07rPuGT5gIXkN8CXVI7JoD9ffNdN4xUYbW96EhYFCVHb6UrzIX/tr14W5Wf6yEY
+ zqOdE69yfGTTm4t9l3mDzWNw6WcCbobnx7RX54z0LMweUJzLabYGglUwlrr+XE/xEK7l
+ H0YLKkUWCGJGm22BOmFtghM0+PDsYL6HikEkg9Lmxez7hYBykNjgt2Ji0IVeXlgHn/4I
+ xa18YHu8ja+DVL2ob7d8TZdz3u5THOeZ6wTrUffxb8P6c2FNnnpAZwwssEp7IcovodmC
+ aB/Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777284529; x=1777889329;
+ d=1e100.net; s=20251104; t=1777284534; x=1777889334;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=sOVOfOQIbVfM7hlfoBdXKZYK6qEJROqtwbm2aVGMDs0=;
- b=pe9kxCYTckS5F3O4gEJJBaQ9CjTf3MKy9KKgq/f3+qtM6V9mpn9ApKjFFW66BUYIAo
- YLp9ZSD4m8RTSu3HeCU4tPukSIwJC7vtdQAFC3W3u88kcVlZI5A86iqpY748gyWKTvK3
- ZXB8OkgwuvtNHUDcArqxT0fa+hZpiJK1AxMh0KtitlVwccHBd7AVARUYKCEazm/T/HnI
- d3coAZV9qFlOm9yG4aD7LGfBF4f4o7E2jy2tIaiLvjs5V8N8GtlEUajOPGu5Cl15wq9L
- cbmcS6Lq9SmYvo7s9q2ymUNjYObkVNOumKCz+0ho13NKVlIxFQuxuCerJE0eCrqwgEqy
- BuPA==
+ bh=981fWpuAbK2bvrnCZZVrwADu5/ky6PA26Iw6kXj799M=;
+ b=BIwM8ZyOoVK9OMyg++do6PRkhxyQGd2gViKq5SJtEOURES+3AnOJM7U5WeK93j22OB
+ f0pDZfgC+63BMrC6QDd9tpWx9jsxI+7Wy9wJ4C0NFAtvG8UxR/K2D5d0IxclAwybA4qN
+ 7AezYhb5ZbUTuxVoAYU8c2xOKQXtG7acAvSs5QDIzRuUNEBSVKCbuevd2zHPn7rQHbQA
+ BU3DrzdF2STG9kze7nuNfEHDx4Io3Z8uhZw/wIVFTehvKtolWMu1Rr77rAIlaxEKGx2B
+ uwEN+oMk3jhRIRKOaEwdh/npZUCSZsAn63EhzWwkZxZ/RfPlLXkFWf3Ka+NuWDP+PaeB
+ 8ZBg==
 X-Forwarded-Encrypted: i=1;
- AFNElJ/MsPzfg+HE33+ynBNEYIxQnWLIIoX0afE+ElurckK3I8exElifGX5YZNCiPTsFsYG/fSqOuN4=@lists.denx.de
-X-Gm-Message-State: AOJu0YzlV/LlaEH28jUVTSrEdiSYOKfqRO5M93GsAmXlS6+XuUW7sfmi
- iqc8LmJZfKo2xny1Aktx73i93Bbaeqed9038hMci6YCjeRSyWXvvDigEyEH2FlffwqE=
-X-Gm-Gg: AeBDies6Dauo22+fpFS+86xP3gx76YfZBQDLy7u/27AL1XpLnPUvOZk4ZZ2OCpdJwMA
- AqcJHaMrohCz4FAbpvPWcS7Qskp6uuF23jJl4idgF6LIAUFpfEZdaoFV+G3eYBlYDYpRL+/UE6e
- rpmHwZdCyLC+Uav4XzSW9olybTUZGQshyfO33yk134maP2Zqzt7esxo+n2U6NK0wW5B6mtnFzyN
- /SCe7CvRkRZSoxfCp9GF/t+RQUZYQhEiHyPGZ0YC9qQcZMRo+oafAHRSjC/kdVSbUQbCcXD8CTA
- nAEi+fFQUfHSLLeY6dlYs//bdsnQEpO8/3fhSSXDzvXXwMVm6c6vmAuAzyZLNo8W+Q2hDEd7BoJ
- GWGVZgL7cY7tN3PUgoqY0r6aM0Fpq+MgTrl1OZ89Qkydu2Q6c4fhxYCKjqHGglliPChwKTg0E55
- U80B5IsRMQiCbRU6Ls288xD8kqwmBcNb1ZO4eE/NXYi5zv9goEi8QGO+QieChfvHuW3/Xj/yI9s
- +ZMFjNP7JqBtbdUZsYhKac62cIGplF85prG1lppUX5uawZ310E+KCHm7rnqHcxvZxmPX42VQXi2
- b4SHTo/37ob19aQNCRGibPxp3EbxCc27ZW0LPu5mY422vsJ9Rw+qloHbNnnWZktIITMFIBRfNjB
- lYZdS0if+FiZOXQBFXWMvEkcwomc9ySijVEoiCWaN9vWxIvhsmXC6HfNXJAnm/GSoh2yjOPc0vm
- IoMxJpNHF+za8JzjE0djogfQvs9d/RkuYv3Xt1ik6jhe0A7bpYJkVlpjxfCzJ9l1YnLpLjczNVX
- mPAkFL+++wbMsOmndy24JuJdOGzenTGHtVcb7052hLo/YQ=
-X-Received: by 2002:a2e:a58d:0:b0:38b:f0f0:e39b with SMTP id
- 38308e7fff4ca-38ec94f600cmr142691981fa.10.1777284529192; 
- Mon, 27 Apr 2026 03:08:49 -0700 (PDT)
+ AFNElJ9xPB9LDgQ5C+WjjqbVejcXIm4sPDr7dDSpvzE2+JgGR5fT158rTH0bhJAATLfhQ1cy8hMDLGA=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx8KuvegeQqrKX61hnOR1FTs664y3bMpheA8QgBhLgcIAz6S9Xa
+ l5p+rin2bxZwzLdIOk8anF70vPhSqSs806NzQyvKlFY8wKCbtwX9MO1v7Qx1AOIHuVU=
+X-Gm-Gg: AeBDietrUvfPBmYW8bifKlC/B3haMX4c2djbeOrwSqz2yChSsfj6vvMHniP308e1845
+ XQtCLJ8FG9wncWQSemp+qwHuZi8uvRty84wl1/FRmdicWwWdojQMDYpLKvO8QtKAz4wo+Eh7ZFW
+ 2eqoPsgnA5tfEMLVel9UKrTvaqGsSevkeR3oHgfHebZpNgq2wXzDHVWJUE8xOtXSaIT4Tx4l9aA
+ +C2n6BqYPIFh2hKX3GUFtt8KqDOBoU0gwPxnrNK87LFIPDo7tHOxC5vYpLPXibkAvdRfp4EWThM
+ +u97UkCPX0Fo74ZfyySU7/0z68fMqCvQiK8DtoWeR4HQW8GAxRwjO7oTuYTAsyuxFW5EdsKmn0S
+ lJpJTHIQLrclaelkpe+po9N1WEElJ/CpZLJt77PFh6JfNEo5UukFXL/Yov4bUjBq4GzeKHFBYHM
+ ySKaFWWzvceV57J49Q+f0T/wVnENKuVbKUIrn5IABUmEmepyb22mgQaAuYe2mAnuRNVByIP77IV
+ 90F1bAU2Y86xcS/Xy7MUarv3LomgSG2RmLshQIs3Svzdt9HZAT6M0DBAAGbrHrIcewlKn9ccXgi
+ P2JO/l7xc6P7/52WS+NGkRurH646Lb0kj2ZfmUPlAxLTVI8y7R52H1l4xaY2rXt76WIzax66MWD
+ VaAus3U2sodFG1C5VahtyYTds4kiH2rS2Jf9KfgMHjECVdaZJc+5PcFPBXVPSTyEAwkG+/n3SqI
+ Ak8jx9Rvzb+bQ1PO7LjtpORhF1Ani4Y5xuwgXSuiD6I+oyp8sBfbvwxqx/MK5OrCsXStVwp4y8L
+ e1bSoiIOIDVKl3fv6JylZQm/yg/V2+kXQ/y
+X-Received: by 2002:a05:651c:b29:b0:38e:a181:9e41 with SMTP id
+ 38308e7fff4ca-38ec78353b0mr146692181fa.12.1777284533984; 
+ Mon, 27 Apr 2026 03:08:53 -0700 (PDT)
 Received: from hera ([94.131.143.12]) by smtp.gmail.com with ESMTPSA id
- 38308e7fff4ca-38ecb6f0b88sm68554791fa.27.2026.04.27.03.08.47
+ 38308e7fff4ca-38ecb6f0b88sm68554791fa.27.2026.04.27.03.08.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 27 Apr 2026 03:08:48 -0700 (PDT)
+ Mon, 27 Apr 2026 03:08:53 -0700 (PDT)
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 To: trini@konsulko.com
 Cc: marek.vasut+renesas@mailbox.org, jonas@kwiboo.se, anshuld@ti.com,
  sjg@chromium.org, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- u-boot@lists.denx.de
-Subject: [PATCH v3 2/6] fdtdec: Introduce fdtdec_setup_mem_ram_top() to
- determine end of topmost DRAM bank
-Date: Mon, 27 Apr 2026 13:08:23 +0300
-Message-ID: <20260427100832.581887-3-ilias.apalodimas@linaro.org>
+ Michal Simek <michal.simek@amd.com>, u-boot@lists.denx.de
+Subject: [PATCH v3 4/6] common: move ram_base calculation to independent
+ INITCALL()
+Date: Mon, 27 Apr 2026 13:08:25 +0300
+Message-ID: <20260427100832.581887-5-ilias.apalodimas@linaro.org>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260427100832.581887-1-ilias.apalodimas@linaro.org>
 References: <20260427100832.581887-1-ilias.apalodimas@linaro.org>
@@ -106,79 +106,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Currently, ram_base is calculated within setup_dest_addr().
+However, upcoming patches that enable U-Boot relocation to the highest
+DRAM bank require ram_base to be initialized earlier.
 
-Introduce function fdtdec_setup_mem_ram_top(), which determines the topmost
-address in the last DRAM bank, to be assigned into gd->ram_top in order to
-relocate U-Boot to the actual end of all DRAM. This makes use of iterator
-function fdtdec_setup_mem_for_each_bank() introduced in previous commit.
+The default dram_init_banksize() definition relies on ram_base
+to calculate the start of the first bank. But following patches
+will move that function to execute immediately before setup_dest_addr().
 
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+So let's split the ram_base initialization in its own INITCALL.
+
 Reviewed-by: Simon Glass <sjg@chromium.org>
-Reviewed-by: Anshul Dalal <anshuld@ti.com>
-Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Tested-by: Anshul Dalal <anshuld@ti.com>
+Tested-by: Michal Simek <michal.simek@amd.com> # Versal Gen 2 Vek385
+Reviewed-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
- include/fdtdec.h | 16 ++++++++++++++++
- lib/fdtdec.c     | 18 ++++++++++++++++++
- 2 files changed, 34 insertions(+)
+ common/board_f.c | 12 +++++++++---
+ 1 file changed, 9 insertions(+), 3 deletions(-)
 
-diff --git a/include/fdtdec.h b/include/fdtdec.h
-index 46eaa0da63c6..c43e78de4147 100644
---- a/include/fdtdec.h
-+++ b/include/fdtdec.h
-@@ -973,6 +973,22 @@ int fdtdec_setup_mem_size_base(void);
-  */
- int fdtdec_setup_mem_size_base_lowest(void);
- 
-+/**
-+ * fdtdec_setup_mem_ram_top() - decode and setup gd->ram_top to highest address
-+ * available in any memory bank
-+ *
-+ * Decode the /memory 'reg' property to determine the highest end of the memory
-+ * bank and populate the global data ram_top with it.
-+ *
-+ * This function should be called from a boards board_get_usable_ram_top().
-+ * This helper function allows for boards to query the device tree for topmost
-+ * DRAM address.
-+ *
-+ * Return: 0 if OK, -EINVAL if the /memory node or reg property is missing or
-+ * invalid
-+ */
-+int fdtdec_setup_mem_ram_top(void);
-+
- /**
-  * fdtdec_setup_memory_banksize() - decode and populate gd->bd->bi_dram
-  *
-diff --git a/lib/fdtdec.c b/lib/fdtdec.c
-index 01be5edf7484..288966936606 100644
---- a/lib/fdtdec.c
-+++ b/lib/fdtdec.c
-@@ -1184,6 +1184,24 @@ int fdtdec_setup_mem_size_base_lowest(void)
- 	return fdtdec_setup_mem_for_each_bank(fdtdec_setup_mem_size_base_lowest_bankfn);
+diff --git a/common/board_f.c b/common/board_f.c
+index f0d07cb6f593..ac4dbf89a2e4 100644
+--- a/common/board_f.c
++++ b/common/board_f.c
+@@ -328,6 +328,14 @@ __weak int arch_setup_dest_addr(void)
+ 	return 0;
  }
- 
-+static void fdtdec_setup_mem_ram_top_bankfn(struct resource *res, int bank)
+
++static int setup_ram_base(void)
 +{
-+	if ((res->end + 1) > gd->ram_top)
-+		gd->ram_top = res->end + 1;
++#ifdef CFG_SYS_SDRAM_BASE
++	gd->ram_base = CFG_SYS_SDRAM_BASE;
++#endif
++	return 0;
 +}
 +
-+int fdtdec_setup_mem_ram_top(void)
-+{
-+	phys_addr_t old_top = gd->ram_top;
-+	int ret;
-+
-+	ret = fdtdec_setup_mem_for_each_bank(fdtdec_setup_mem_ram_top_bankfn);
-+	if (ret)
-+		gd->ram_top = old_top;
-+
-+	return ret;
-+}
-+
- static int uncompress_blob(const void *src, ulong sz_src, void **dstp)
+ static int setup_dest_addr(void)
  {
- #if CONFIG_IS_ENABLED(MULTI_DTB_FIT_GZIP) ||\
--- 
+ 	debug("Monitor len: %08x\n", gd->mon_len);
+@@ -347,9 +355,6 @@ static int setup_dest_addr(void)
+ 	 * get fixed.
+ 	 */
+ 	gd->ram_size -= CONFIG_SYS_MEM_TOP_HIDE;
+-#endif
+-#ifdef CFG_SYS_SDRAM_BASE
+-	gd->ram_base = CFG_SYS_SDRAM_BASE;
+ #endif
+ 	gd->ram_top = gd->ram_base + get_effective_memsize();
+ 	gd->ram_top = board_get_usable_ram_top(gd->mon_len);
+@@ -968,6 +973,7 @@ static void initcall_run_f(void)
+ 	 *  - monitor code
+ 	 *  - board info struct
+ 	 */
++	INITCALL(setup_ram_base);
+ 	INITCALL(setup_dest_addr);
+ #if CONFIG_IS_ENABLED(OF_BOARD_FIXUP) && \
+     !CONFIG_IS_ENABLED(OF_INITIAL_DTB_READONLY)
+--
 2.53.0
 
