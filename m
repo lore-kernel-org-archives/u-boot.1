@@ -4,94 +4,104 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68ECFFF8864
-	for <u-boot@archiver.kernel.org>; Tue, 28 Apr 2026 03:09:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7216DFF8867
+	for <u-boot@archiver.kernel.org>; Tue, 28 Apr 2026 03:10:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E13B383693;
-	Tue, 28 Apr 2026 05:09:00 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id D098083BC4;
+	Tue, 28 Apr 2026 05:10:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20251104.gappssmtp.com header.i=@baylibre-com.20251104.gappssmtp.com header.b="hpnmF7m1";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="mCU+Qx4Z";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C3FCF8421D; Tue, 28 Apr 2026 05:08:58 +0200 (CEST)
-Received: from mail-oi1-x231.google.com (mail-oi1-x231.google.com
- [IPv6:2607:f8b0:4864:20::231])
+ id 183FA84099; Tue, 28 Apr 2026 05:10:50 +0200 (CEST)
+Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
+ [IPv6:2a00:1450:4864:20::62b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 767B483BC4
- for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 05:08:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C0CCC83693
+ for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 05:10:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dlechner@baylibre.com
-Received: by mail-oi1-x231.google.com with SMTP id
- 5614622812f47-4756e74f8edso7635673b6e.1
- for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 20:08:56 -0700 (PDT)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-ej1-x62b.google.com with SMTP id
+ a640c23a62f3a-baa8c78ac7fso1020396866b.0
+ for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 20:10:47 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1777345847; cv=none;
+ d=google.com; s=arc-20240605;
+ b=EgvUg8ndvCLtX5sbJDC8j9GvP/ZCDOvOQavvVbQEGj80tRZZ2PxB3z4sVDSnpaLziq
+ JnatP7WAuFnBzT4NVJf2w8y/G/cP7wjIq0E783W1mZ5Z0XwL0G5w4q5W4t6npxgxtnqQ
+ k3A5EzsdTrK9Nwbmq/50FVbdNSBXQlJcwe+bGFZuvLMGHyU0X+HIr5P74NaZgLDPagv3
+ 2SoDpUQecMj865p8Ioqfk3h6uEy45EWn73lAcoqpu3Xerev0eXKuEb7My2IBoTfUBxx4
+ QpmYr8X4fSY3J8/kCeC3ZOP46xkVV5+Gp41SpGp3Uy6qWZQe2exi3H3NBRcfL3R+WJKG
+ yGcQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=Os8ltA/2MY5HDo6RFb1mU9veYKrqWsTIWM9mlrYnMVU=;
+ fh=WXe6DZf5BtAyNMJMA5zN1aIq60LfyWKNemHb+LeqHlY=;
+ b=Ib36LSGdt0sbg0Vw2+rr5D0ozqAE6ZNA35knKe5A4Na/+aj6iM9cUK2qob3YopiOKB
+ 41jWq1lmXMvmowdYEgnrBBE95psX+dfxd1r62CKsgPPt0RoZLKA0tJ75V2TMb+mWQuL2
+ WPgxH0eK8yKeaG0Jh5iU4ux/emE1oKxZ14p3+MSZTxf7RktP2k53MzQsPDOyeCMe6+pv
+ uxowPmUyFTAbksg4ZBJcPQAwLqXZuLMstPzZV4j52aciKgbUEbiAPCm/CxGkYLXwohki
+ oUN4YzMrJTY1PEDAgbtuU/WxpafLzZ/YrMzojXswPe/JlCKXYCjjzDfb7d4wgt7zUBAf
+ V8Tw==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20251104.gappssmtp.com; s=20251104; t=1777345735; x=1777950535;
- darn=lists.denx.de; 
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=7mgDB1eD+lNRL3Xx161jwV2GMbbLih1BSF97C+IktJU=;
- b=hpnmF7m1UtxFxg0ySHCXVDWGX5pzsZXi9aR4wZERY8Yv6pDcmCkTS9QCxT57+FwE7h
- 9r94prlPn3qaVcJvIsOOC2/y2a4GGHN1IJ3UHx2zVmBPRgSZLGOUuVL7paboGSZD3nsY
- DDnEswindYOaDNk6DbkopPJW6qdk87vLCdTjBhKFUFIm8h1ZwfBjUnd8lCsHpPN6kcCe
- upyQRiSANjp29W3igVtEoSIEGYKoLONcycHvuf+2/sVhLBDV1QwucFDGyjQ/s4hm72/8
- cR+2QkbzazxClm/vJMksEktUVU/2wkMcQC+jumq3bdV3XoEMOMXe49zT7fvjluz54lrE
- Pa8w==
+ d=gmail.com; s=20251104; t=1777345847; x=1777950647; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Os8ltA/2MY5HDo6RFb1mU9veYKrqWsTIWM9mlrYnMVU=;
+ b=mCU+Qx4ZvCm+rfoPyKGVcTUsRoih6ntUcAsYI9pvFgsTRqQNy+gadnvfwazIcdlRd8
+ 7eSdv9BX/I8M/V0s9MrMJ7YuOuj8nVIGuGJTxTF1Jt+ONVvlscGv3tWWWgIYHXHw+EXo
+ yaPsoDRzitPaw08zyzvYHi+9KMMVlP6g8RFQgzCI7p3v7MTwtX2FRHNb5OcnZnKKgXKE
+ Q5q3fzvQvTQByEZYYvD4b/ygaVMmE53DcItM+Gnx3Muu3S0gAN53aKK4TM0Cofb228qB
+ GTpCaEsKN/lR0cD+5UiUxYJf/WVo7KQTswOsjwgg8QhdxcdlCenBonBzHRJUWinC2brn
+ N7rQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777345735; x=1777950535;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=7mgDB1eD+lNRL3Xx161jwV2GMbbLih1BSF97C+IktJU=;
- b=EyHjcW2D4I+X+m5cpn64WdzrXqHvqRYFN+dv9IOzyGPiKN4wEWyX9i+Umr4l/AOlP3
- IeruP77l7jGPRPFLx5xiz4fLu8mKpWsy1O0R/vB8A5P8fDU8WgCNjd6e6T6AG5cZUcfW
- DZlOV2Hs7ahhZjHANO5nykSXoJhiQAlqrQK/zF3FjXVvqq76gthpeCxilHbVTD6py2nr
- onQ2OKCkprAtSnWEN2aezAX4ln/5pNh+1tHcoCuKFoTBRXjcckW0wJ/xDVRnK1DgGCNK
- i36suzLIpKufMAW1rL5/AkAeh2WAW9RVH3rJL4i/Smm0Gp7Kx9T8j1Z6LzegmuI6k73E
- DEiA==
+ d=1e100.net; s=20251104; t=1777345847; x=1777950647;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=Os8ltA/2MY5HDo6RFb1mU9veYKrqWsTIWM9mlrYnMVU=;
+ b=AddqFK4IV1JbsymLFCRxEKIvIS+AysExn2gSgPpq+N7rpzPqHDedwCMGRHHqynKqSD
+ x78PZ6IRoyq23mCkNQbiX6DQ/QgtdDSRGBAS0Z9MXE4WjUhP5iV8OI6MqZEayTGpVld3
+ V7zvCWPNldzPlbITC9qhGDJrFnt+D27D3r3m4RJywITUVWM58ONRjsW+/Lt0A09NjWBN
+ BMBZwiL4Ax4rJ8JPAu7fQfcxOn//UPVkLcaoahOo7U/EC6AAF/Aj8EPpwAJ1ItZ0TgbC
+ kTJOIYp5faRHqK9x2xHvwHknXDW7U/zXBZDD0g0ReWzKm+5Y6bM/lK391cJGmpiyk63X
+ 6jMA==
 X-Forwarded-Encrypted: i=1;
- AFNElJ90Hxa/AE6DTISDvdozU976qEGO27vUF8aBJ2Gm8PcrLj+EdWLPBnKQbUF1XMlr5nrYCKdytz0=@lists.denx.de
-X-Gm-Message-State: AOJu0YwK19ksSqF+UpoU+cckIUKVnnW46vw0QiPMQgzGDOdRI/jAiB29
- PE+cmCczu36I6TUQdOlCokI3/rlzyh1PqTBSRCsdzUiHLK+hoAEEVUs59XUF2bVrxN4qPwdZiFP
- 3ES9m
-X-Gm-Gg: AeBDiet10oBynRAnRyR9geA0JHrUCZw4yy5cpHZInRXVUhJbIr0SMZ62bSSD8L0hnoO
- kVu2oFOxUE7+l8f+JeefWjIT5eH/l0mwJgJbHETshkUCpCtMaryJ6f6IMDZwY/geaaHo+Ydz3aE
- FwvmkdUgA+bRE3jG0jP4MbZKYuNWxCfl2dHPYvYSel8vRKWV7oBpXHnXNOaIPnsCvWm9nWXTWhE
- Yc0WvYmZnuxate8iZIffjehbT14lpROwSaT/iLlSqCnJNv/7K+mMoGNyKMbNDh1PSKnGL72/eR1
- Lxkuq/ScvZ0UANnnR5xkXjLYmHox3WmVkjmmTk8Kww3pURpLkvxLPYaKRA51pFVqPboVMVCcynz
- mED68miwVdOHJBqcuG0w+SwrTN/QWPFRbwT0HHltbWq3kyl3c59+L0jfIU2LdeMKvI3cCG6j0cv
- Mx3g/IKuXcFMJyeq+PopwTvjFXwrj2LPz+aidr40Vviv5LsgvtsrS7hrJgmnRJnO7jnZRxuT7TY
- noZgCsiCwignOourpobVzg=
-X-Received: by 2002:a05:6808:144c:b0:479:fbe5:3a4a with SMTP id
- 5614622812f47-47c291c5283mr419205b6e.46.1777330670040; 
- Mon, 27 Apr 2026 15:57:50 -0700 (PDT)
-Received: from ?IPV6:2600:8803:e7e4:500:efba:bc47:a81b:dd0f?
- ([2600:8803:e7e4:500:efba:bc47:a81b:dd0f])
- by smtp.gmail.com with ESMTPSA id
- 5614622812f47-47c291bb1fdsm320180b6e.13.2026.04.27.15.57.48
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 27 Apr 2026 15:57:48 -0700 (PDT)
-Message-ID: <ff1c773a-fa47-43a2-920a-31b215536f3d@baylibre.com>
-Date: Mon, 27 Apr 2026 17:57:48 -0500
+ AFNElJ+oMv1TI00XwlIp7DrNl5LrjGDjTTIAMviS6Ayh1Swyy6HzhsQjZsBlGSv5zF0zbZvpi8fhUxQ=@lists.denx.de
+X-Gm-Message-State: AOJu0Yzyz32wU21Tw8yG2/3DFLvjK0PAQWZxpISN0kjMCvShdU0jXs4+
+ BAlhYMBdfVZS+jMwxT9+ppWNzE3sX/r77BUVvorotbnRDFk3FTTVdccJJBctEVxlGsS/Qkob87Y
+ RLDmcJLuZDHpz1v+eYJzzjAekdWvCAyEqGMyi
+X-Gm-Gg: AeBDiev0ldUNZU0JIBQ5JigJ2Dstvh45Up4wjeyLkfx079xGBBK0Er2xuIp3dKfEs0x
+ A2GkB4OZd9inOg/Q2Uw6I25yNEFIDGjG2EiYQeUFb3ijZlr+zFroXZsCirL0eRcUf14NtilRGrW
+ /9smllfHz+/jddVaWb/BvbdILKQuca4WiFPTjx2Z9kwsAuBegi5gi23pupPKf3sxcAFqm7QvdJg
+ /cnN75hmi4ay+Xwl1780+D58StjL6zVKAX4douPlhbwurb3G/IEVFnOLMZpM4OT8CDqYx8lj9zA
+ oJ1C5Apk3diJArDaKCYuGFtoi+Awr/PtAtXp+vKs6vmM2tBWL3FGgOJsEiyGFkoqISM20MDN24v
+ iywI7pg==
+X-Received: by 2002:ac2:4c54:0:b0:5a4:1672:59d0 with SMTP id
+ 2adb3069b0e04-5a74660dbdemr204932e87.19.1777326491667; Mon, 27 Apr 2026
+ 14:48:11 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] configs: mt7622: remove empty header file
-To: Weijie Gao <weijie.gao@mediatek.com>, u-boot@lists.denx.de
-Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- Tom Rini <trini@konsulko.com>, Julien Stephan <jstephan@baylibre.com>,
- Macpaul Lin <macpaul.lin@mediatek.com>, Julien Masson <jmasson@baylibre.com>
-References: <20260421085627.78213-1-weijie.gao@mediatek.com>
-Content-Language: en-US
-From: David Lechner <dlechner@baylibre.com>
-In-Reply-To: <20260421085627.78213-1-weijie.gao@mediatek.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+References: <20260422094649.57611-1-brian.ruley@gehealthcare.com>
+ <20260422094649.57611-2-brian.ruley@gehealthcare.com>
+In-Reply-To: <20260422094649.57611-2-brian.ruley@gehealthcare.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Mon, 27 Apr 2026 18:47:59 -0300
+X-Gm-Features: AVHnY4JKFTr9Dl4WVrZABjQajdofHWqqed0YgAuzFl_ULINuB_zHuMgTLeG0q7Q
+Message-ID: <CAOMZO5CF2Bt2+SzGWYOKwqFgEAVFe1PNEGM6DXaAqDm9xc8ikQ@mail.gmail.com>
+Subject: Re: [PATCH 2/5] clk: imx6q: add missing pll bypasses
+To: Brian Ruley <brian.ruley@gehealthcare.com>
+Cc: Lukasz Majewski <lukma@denx.de>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,18 +118,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 4/21/26 3:56 AM, Weijie Gao wrote:
-> Remove the empty include/configs/mt7622.h header file as it is not needed.
-> The Kconfig entry that referenced it is also removed.
-> 
-> Signed-off-by: Weijie Gao <weijie.gao@mediatek.com>
-> ---
->  arch/arm/mach-mediatek/Kconfig |  1 -
->  include/configs/mt7622.h       | 12 ------------
->  2 files changed, 13 deletions(-)
->  delete mode 100644 include/configs/mt7622.h
+On Wed, Apr 22, 2026 at 9:42=E2=80=AFAM Brian Ruley
+<brian.ruley@gehealthcare.com> wrote:
 
-We also need to remove this file from:
+> +static const char *pll7_bypass_sels[] =3D {
+> +       "pll7",
+> +       "pll7_bypass_src",
+> +};
 
-board/mediatek/mt7622/MAINTAINERS
+This causes a warning that breaks CI:
 
+arm: + kp_imx6q_tpc
++drivers/clk/imx/clk-imx6q.c:145:20: error: 'pll7_bypass_sels' defined
+but not used [-Werror=3Dunused-variable]
++ 145 | static const char *pll7_bypass_sels[] =3D {
++ | ^~~~~~~~~~~~~~~~
++drivers/clk/imx/clk-imx6q.c:133:20: error: 'pll4_bypass_sels' defined
+but not used [-Werror=3Dunused-variable]
++ 133 | static const char *pll4_bypass_sels[] =3D {
++drivers/clk/imx/clk-imx6q.c:121:20: error: 'pll1_bypass_sels' defined
+but not used [-Werror=3Dunused-variable]
++ 121 | static const char *pll1_bypass_sels[] =3D {
++cc1: all warnings being treated as errors
++make[4]: *** [scripts/Makefile.build:272: drivers/clk/imx/clk-imx6q.o] Err=
+or 1
++make[3]: *** [scripts/Makefile.build:497: drivers/clk/imx] Error 2
++make[2]: *** [scripts/Makefile.build:497: drivers/clk] Error 2
++make[1]: *** [Makefile:2206: drivers] Error 2
++make: *** [Makefile:189: __sub-make] Error 2
+arm: w+ imx6qdl_icore_mmc
+
+https://source.denx.de/u-boot/custodians/u-boot-imx/-/jobs/1434015
+
+Please fix it, run it through CI, and resubmit.
