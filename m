@@ -4,102 +4,104 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1767EFF8868
-	for <u-boot@archiver.kernel.org>; Mon, 27 Apr 2026 16:30:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D314FF8868
+	for <u-boot@archiver.kernel.org>; Mon, 27 Apr 2026 16:44:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 82F4283BC4;
-	Mon, 27 Apr 2026 18:30:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 21A9183BC4;
+	Mon, 27 Apr 2026 18:44:20 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=flipper.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="o9VLDlCo";
+	dkim=pass (2048-bit key; unprotected) header.d=flipper.net header.i=@flipper.net header.b="MoZV5GJX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7E57983BC4; Mon, 27 Apr 2026 18:12:58 +0200 (CEST)
-Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
- [IPv6:2a00:1450:4864:20::62e])
+ id 1114683BC4; Mon, 27 Apr 2026 18:44:18 +0200 (CEST)
+Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
+ [IPv6:2a00:1450:4864:20::52c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9648B83AA9
- for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 18:12:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B9C1B83AA9
+ for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 18:44:15 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=flipper.net
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sebasjosue84@gmail.com
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-ba922426c5cso727444566b.3
- for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 09:12:55 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1777306374; cv=none;
+ spf=pass smtp.mailfrom=alchark@flipper.net
+Received: by mail-ed1-x52c.google.com with SMTP id
+ 4fb4d7f45d1cf-678a1642a81so5346785a12.0
+ for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 09:44:15 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1777308255; cv=none;
  d=google.com; s=arc-20240605;
- b=ePiSkFGwesjjS4REi5ICwPioc3RfpQqHX2Kl3SXTj5+uhYlY+SlHU1BGJG15rD5A6u
- b9TyOr2ditU1JoJx/haglPgttPsrM3tlUz/Jm5u+MRnKp3KTnUj6B9Z8elOUwGlInjqy
- tMofquA/FZL8Hqo9mb63XOcCieTYBfwc/EB4m2iOr8yGfYejeGo3queraoUYwvdF1Z54
- p5YD2HyUTinFz1Z49zxtPhJD1mD/lNili84v2nNbrG//CjbwW7kJcYTgmqGNuiA60FZL
- Eb6OwapAZqneqQ9zsW956SwnAPYXScSdtwcRpzJ4d70C9krbwZYZ7/0PQ7ZYsFvXnAAr
- jVsw==
+ b=Qi7h3/6BXOGX1Oy8JM9vaoOBGncKbeIslt8vpAs7F88MxS0sVvtasS5JndsNiNKtF0
+ J2jmywUcK3xYmRaozPvzAJSYl2kG+3TDdFNuWycMXrX+0dL1HMooYNG6vD6IUhxlULtb
+ aC9eAuY9z7F9AhHcGYFPrPv60M2Em6M5i1sFxbICQmwNFZqiXh7h2OytIZXY1yFY3L7J
+ xCcVOuont6Zou3NjRpaE+4dcPywcd2Rklsgv3sUAorfHt6WhQr1Lv51aZVHvUnNqSKbl
+ qloKk5UeIl4YdDLjPtiYgzCLzvbdBfusenvGfyf09TXwDlRvOapxgontT4kuQimSLJ6/
+ 3M6Q==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=JI9gLvGwKMShBy6VCIgyB2QFqC0rDqqyhOjiSmVT5Hk=;
- fh=0vTB6WDZAGeR9Y8d7CYreXA+SC8xMKymREvy/g+8Pt4=;
- b=hkUNDPBzbj+Bl7Vw0r3FAG4YlQhcUQH0Se06xuQrBwwyLbhqA8lSqOa2BKF/azUHSJ
- NV9lr1SS/CWn8kY+Qkcxh122w40D4ByDn1lj73VQZd1lC205DuoNc6nkKBGsIws703kP
- xFQQJiMP7vcLNxvW+Rk/qqhFQPeJZv772iNYFTccnabcq6Mag3naLhnOBOLYBn76u0wH
- pSFeGdKnDUSF30hI4OGNy34uXRkIDuQjsUGyt0eb/fJ3DoeKTm9AlpUYtx40gxM3jv1p
- iUsEjH066JBFg6KNYFLukGpww6XR9MKP7w4uFkxuIA3zbZGpFxJK/tpg/eQzl43mJWnI
- 7LpQ==; darn=lists.denx.de
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=IcMOk0bQs3fFZ2f1sxpPzneKF9uvZiSLfYZax3BRaX0=;
+ fh=+e7v11kZUJPEr6vVUwChYaU7WaWjk8k8IRERu/pygqg=;
+ b=iItYbIcB12hyh++Vn5RaF5oA5Bdj3rTNKjjY8xO9f84SOOd50N9GFgP797IqVTh15E
+ 8NrW8DLxUDkzDTDRk3cawrZ24qqol/pgXbx3Cj1ACx1DrFrjcq+trQtoWxmgKDmsHwGz
+ zhokQqaOTO/QGzdI8tIIIqmRUpdFgFEC7KCSsS9cXzkYAHitVLUnGca1auzSMvxAoRSf
+ +2vEJRz1uFqpFWApjeV5OBcNj4B7z2BEecS3zZpB9tgHbkamUFAcbMe0BpGMGRpLbixl
+ 7KkHeIXk9dvpsPbEzSl6y/TL1xSczYpW2cjHqie2n7x3BBcAdThWBgkOLKarSSyxabrd
+ nZaA==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1777306374; x=1777911174; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=JI9gLvGwKMShBy6VCIgyB2QFqC0rDqqyhOjiSmVT5Hk=;
- b=o9VLDlCotYflToOzglgNEX0gdkUtrxoJJA6W6wA6QaUC6jqkkXJ3o6nnAxZgEqLiK2
- 1BfeDgfdI/blO2+YFGM6VJJIeT8Iug4z57tOVxNg20zuaQb5GmptuQNGj/i8F7ME/8Vb
- XiCjtjNyovULWRHWbSVTD8ITGD652WhrDo+Ky0uzs6ytbLoggCgPAl4P1BA9EfF1sdgl
- v50Z5n+pwqINJD1Ecl7KTpAjvao8VXRzuUzuCoCpLkrjfzLRAk53urnVNJBpxrQjeUZC
- 0q2QW9ol0O+rxhdQNpXfHLK2bqNGzvUMiMlm16qXABxY9IzKibqymmtbOZ7deN4grruu
- UtlQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777306374; x=1777911174;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=flipper.net; s=google; t=1777308255; x=1777913055; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=JI9gLvGwKMShBy6VCIgyB2QFqC0rDqqyhOjiSmVT5Hk=;
- b=qDv8IsUPs1FOX0zzvjWp47cauaSSKkl4y6wuNE9W3GbmjAWfwUNzN/MushZmb7omig
- vQfp7dSOJ2AXJluRGgWNFyvpyY9Gk2ACKjVKOwuMcKjVFEltoadud5rhuXcUJ24R3YaI
- u/2WwRVhWkLxOmR3WMCuCbiuIRypHWe355/XoK5CIsipP0grUFJexNY7XBa/VeuOHXm/
- EcVSB5l7OzAPf19yJk4XcH499T46V7VDGtjA9koXtLNpqPaqRQ/0QKiZKe8fbwXdegKn
- oA4jnXnZVXbgSWU6xFG3gbekJtDJPxACuQyIiwO90n1W4alNrVIoYh2Z9z3ze/+saIJL
- GYAA==
-X-Gm-Message-State: AOJu0YwwD465klUdJwRVcOgZzmDZXMaSAFJhTVwAcuipCy32bRXPOnoi
- vljDcVi3fr3nAzn7///QLw8jNSf5VTaRdOtgOWPInJROvwGeTXiCEF0XW4Wdg/1CeO5+Aql+4SO
- CGvofW5N9xOGLdVtyJvPq9FjE+/w4cDs=
-X-Gm-Gg: AeBDiess9FA/YmpGf+XnoVt0A4aiEfR4JTbr8/Ck9BrrBYkvmv1Zh+IbTuuEL2yCCX1
- w67Ce1AxSlyiQGRnx+tPyvCHmU5iDVYCwgl1Yd4LiWknCaWgicZNp/RIRijvBV00OWEW9m46ZDT
- qGGurSdKBWHhkBXQLH9PmezI3ooJRtuCs0gDWyIZ00Ci5daT184kWGNTsBvTVfN76uMsKrL/b/i
- Al10ORinWSKtUltfv54V2GscM/auzeNPgWAYHxi8og2DFfV0q6vKpGg6mM0Au3+q0IK5wt9NLRr
- vixRRUDyeNAIZ1NL4YwDcktEcSeK1A==
-X-Received: by 2002:a17:906:9fd1:b0:ba7:b198:7d25 with SMTP id
- a640c23a62f3a-ba7b19881a3mr1822324366b.21.1777306373932; Mon, 27 Apr 2026
- 09:12:53 -0700 (PDT)
+ bh=IcMOk0bQs3fFZ2f1sxpPzneKF9uvZiSLfYZax3BRaX0=;
+ b=MoZV5GJX+qS4WKhQQXBsgRolA0A9PijimAqBVOzjFmV0GwHFsSiUGatOOPG3w1zQVh
+ pb8zYBfAcvGe4b1huiyr5lyWNy3xQYrfG5rG1zy83Mm2Sx9eCGp1W+36nKPKWhSCnvYV
+ 9v11o5y9G1xI6+YJztJQsNT5gh9VlNmXAPXa3NJL8vhTiJxC2kjXkNL8b36MANGUBdms
+ c5/ZlBZW2MIPdiGGVkZLxY42SZpKgJCzwVdTV1ioKHrHmSsEDOEzrar57ptQeuDgmpoB
+ xzy/f7MD+X/WPdb5jrtRObTC3YdpcyJdmBUE15pXtreeBcp5MJcUoIMR99cJlyEoCKNR
+ vsng==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1777308255; x=1777913055;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=IcMOk0bQs3fFZ2f1sxpPzneKF9uvZiSLfYZax3BRaX0=;
+ b=Ab3bkqBCdhaejFGWOn9H/Z1VSJ9gnVnP9joVvUjhsFqAwJBMySnta++XY7Iekrf+9m
+ HNNLIB4X/52O757Ardn1+8ZCwB5cnqMHLFegrQH1xZZzdlRvO7A4TP1nx/prRmmilUhD
+ BR8LQev7mOj6vW6y5C63E613bOIsFnM1AuxinCKrsagV4JM8fDDygzjLgzY/7uMxs9ng
+ TXFC3jNYZi9b7EmWi7sdnz+3Rjw59kFLlxxpkMAF0upz//iEPr5+GvlukyUZ3/yo2b3C
+ DV4nko2Pth4UKMw3MTwLxFIUjxpv79beIboB8N8e8acIyVX0Q9gAHgOqOqcNagKWvPry
+ wPbQ==
+X-Gm-Message-State: AOJu0Yw1DTXydXJMy7yQS6ihtoB7I0IuQkhGSYR/TqSbL4ZtZ26FL/Q0
+ uSlGYvCFkXePvZbxFye7zXSk20ObslrBw1hNvGqt9oob8wGSTPuZv3sK2XKeBMXeioNbfKqEZL1
+ hz7GNvI0RrRGwf8gIJHM/yWImTyutk5l4xnLDS522EQ==
+X-Gm-Gg: AeBDieujQ/tWhDJykkH5KFXz8TOTiqeC/S0llmgAXPWqpqkiP+4dMOGOalaZ/1e+XP6
+ FBY2UemKA04YOIM3RmKvizI+9rIqg7Pct9/Dw2dvGezh9aNuE5IdJLOsQr04sqYg/sSthvSsTZE
+ 9NWwBYVZH3HWd6XdIwZriVS8nSNR/6VVcnJHrKwnLqH+IeGG/fnJvWaWJ+hw8JocMQKSE6/bnlc
+ jUs2+qym3QihH9qA7DrptiUEcoFs75No7afxWmUNxD5Ylh9T8hNm7wbpMOXVIzuFav804vfXq0b
+ K65EiIi6spJFT9F5VQ==
+X-Received: by 2002:a17:907:7213:b0:bae:5939:e5c8 with SMTP id
+ a640c23a62f3a-bae5939e60cmr602879566b.36.1777308254913; Mon, 27 Apr 2026
+ 09:44:14 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260409164440.323405-1-sebasjosue84@gmail.com>
- <2a90ad52-4a9f-451b-acb9-b9b576fb348a@arm.com>
-In-Reply-To: <2a90ad52-4a9f-451b-acb9-b9b576fb348a@arm.com>
-From: =?UTF-8?Q?Sebasti=C3=A1n_Alba?= <sebasjosue84@gmail.com>
-Date: Mon, 27 Apr 2026 10:12:41 -0600
-X-Gm-Features: AVHnY4Jl-3ZQEQCtYCboj9kkZqSj0MTnJVdhZp2fqHId-0xC102NdexXyPHb2xU
-Message-ID: <CAJD=UNdkXtgNPr+hfweiC2yZ7_5euA=SxgThARLtU0er0+9bFA@mail.gmail.com>
-Subject: Re: [PATCH] net: nfs: fix buffer overflow in nfs_readlink_reply()
-To: Jerome Forissier <jerome.forissier@arm.com>
-Cc: u-boot@lists.denx.de, trini@konsulko.com, jerome.forissier@linaro.org, 
- stable@vger.kernel.org, nd@arm.com
-X-Mailman-Approved-At: Mon, 27 Apr 2026 18:30:18 +0200
+References: <20260427-rk3576-usb-gadget-v1-1-982fd1de08db@flipper.net>
+ <c2d737f0-a17e-44e4-8e07-53ce3fa0e543@cherry.de>
+In-Reply-To: <c2d737f0-a17e-44e4-8e07-53ce3fa0e543@cherry.de>
+From: Alexey Charkov <alchark@flipper.net>
+Date: Mon, 27 Apr 2026 20:44:02 +0400
+X-Gm-Features: AVHnY4IqH_CjNPXihM07AGICUUu0-nhlL_GyR0GkFCbv7o3gg7xNoABv4SuKJoc
+Message-ID: <CAKTNdwGo434ShEsP=e=uUAbJzVxfQPPfNPeTxOOqwbuoCyzRjw@mail.gmail.com>
+Subject: Re: [PATCH] rockchip: rk3576: Properly handle USB controller takeover
+ from BootROM
+To: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>, 
+ Kever Yang <kever.yang@rock-chips.com>, Jonas Karlman <jonas@kwiboo.se>, 
+ Anton Burticica <mouse@ya.ru>, Marek Vasut <marex@denx.de>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -116,82 +118,122 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jerome,
+Hi Quentin,
 
-Thank you for the review and for adding the patch to your net queue!
+On Mon, Apr 27, 2026 at 6:43=E2=80=AFPM Quentin Schulz <quentin.schulz@cher=
+ry.de> wrote:
+>
+> Hi Alexey,
+>
+> On 4/27/26 2:53 PM, Alexey Charkov wrote:
+> > From: Anton Burticica <mouse@ya.ru>
+> >
+> > When booting via USB download mode (Maskrom), the BootROM leaves the
+> > USB3OTG0 controller in an active state. U-Boot must properly reset
+> > the controller before reinitializing it for fastboot or other USB
+> > gadget functions.
+> >
+> > Without this change, USB gadget mode commands such as fastboot and ums
+> > fail when U-Boot is loaded via Maskrom USB download because the
+> > controller state is inconsistent.
+> >
+> > Signed-off-by: Anton Burticica <mouse@ya.ru>
+> > [Removed unrelated changes, adjusted the commit description]
+> > Signed-off-by: Alexey Charkov <alchark@flipper.net>
+> > ---
+> >   arch/arm/mach-rockchip/rk3576/rk3576.c | 18 ++++++++++++++++++
+> >   1 file changed, 18 insertions(+)
+> >
+> > diff --git a/arch/arm/mach-rockchip/rk3576/rk3576.c b/arch/arm/mach-roc=
+kchip/rk3576/rk3576.c
+> > index c17ba418ced5..84618ad5acb7 100644
+> > --- a/arch/arm/mach-rockchip/rk3576/rk3576.c
+> > +++ b/arch/arm/mach-rockchip/rk3576/rk3576.c
+> > @@ -7,6 +7,8 @@
+> >
+> >   #include <dm.h>
+> >   #include <misc.h>
+> > +#include <linux/bitops.h>
+> > +#include <linux/delay.h>
+> >   #include <asm/armv8/mmu.h>
+> >   #include <asm/arch-rockchip/bootrom.h>
+> >   #include <asm/arch-rockchip/hardware.h>
+> > @@ -39,6 +41,10 @@
+> >   #define USB_GRF_BASE                0x2601E000
+> >   #define USB3OTG0_CON1               0x0030
+> >
+> > +#define TOP_CRU_BASE         0x27200000
+> > +#define TOP_CRU_SOFTRST_CON47        0x0abc
+> > +#define SOFTRST47_ARESETN_USB3OTG0   BIT(5)
+> > +
+> >   enum {
+> >       BROM_BOOTSOURCE_FSPI0 =3D 3,
+> >       BROM_BOOTSOURCE_FSPI1_M1 =3D 6,
+> > @@ -189,6 +195,18 @@ int arch_cpu_init(void)
+> >        */
+> >       writel(0xffffff00, SYS_SGRF_BASE + SYS_SGRF_SOC_CON20);
+> >
+> > +     /* If the controller was left running by the boot ROM, reset it *=
+/
+> > +     if (read_brom_bootsource_id() =3D=3D BROM_BOOTSOURCE_USB) {
+> > +             /* Assert USB3OTG0 reset */
+> > +             writel(RK_SETBITS(SOFTRST47_ARESETN_USB3OTG0),
+> > +                    TOP_CRU_BASE + TOP_CRU_SOFTRST_CON47);
+> > +             udelay(1000);
+> > +             /* De-assert USB3OTG0 reset */
+> > +             writel(RK_CLRBITS(SOFTRST47_ARESETN_USB3OTG0),
+> > +                    TOP_CRU_BASE + TOP_CRU_SOFTRST_CON47);
+> > +             udelay(1000);
+> > +     }
+> > +
+>
+> Uh... Wouldn't the issue rather be that the U-Boot driver doesn't
+> actually reset the device?
+>
+> Can you try with
+>
+> diff --git a/drivers/usb/dwc3/dwc3-generic.c
+> b/drivers/usb/dwc3/dwc3-generic.c
+> index 22b9ef0b24e..1b7d845bc75 100644
+> --- a/drivers/usb/dwc3/dwc3-generic.c
+> +++ b/drivers/usb/dwc3/dwc3-generic.c
+> @@ -604,6 +604,9 @@ static int dwc3_glue_reset_init(struct udevice *dev,
+>                  * have slower sleep clocks so we'll play it safe.
+>                  */
+>                 udelay(500);
+> +       } else if (device_is_compatible(dev, "rockchip,rk3576-dwc3")) {
+> +               reset_assert_bulk(&glue->resets);
+> +               udelay(1000);
+>         }
+>         ret =3D reset_deassert_bulk(&glue->resets);
+>         if (ret) {
+>
+> maybe? Hunch is that every variant of this driver actually needs to do
+> this to avoid to rely on the device being out of reset already, but the
+> delay is likely silicon-implementation-specific? The driver in the Linux
+> kernel doesn't actually assert it either before deasserting it, so who
+> knows. Adding Marek in Cc.
 
-Regarding CVE assignment: the GitHub mirror does not have Security
-Advisories enabled, and Tom indicated the submitter should request one.
-Would it be possible for you or the U-Boot project to request a CVE through
-your CNA channel (ARM/Linaro or otherwise)?
+This snippet doesn't work unfortunately, I'm getting the following
+(the same result as without any patches):
 
-Thanks again.
+=3D> ums 0 mmc 0
+UMS: LUN 0, dev mmc 0, hwpart 0, sector 0x0, count 0x3a63e00
+rockchip_udphy phy@2b010000: cmn ana lcpll lock timeout
+rockchip_udphy phy@2b010000: failed to init usbdp combophy
+rockchip_udphy phy@2b010000: PHY: Failed to init phy@2b010000: -110.
+rockchip_udphy phy@2b010000: cmn ana lcpll lock timeout
+rockchip_udphy phy@2b010000: failed to init usbdp combophy
+rockchip_udphy phy@2b010000: PHY: Failed to init phy@2b010000: -110.
+No USB device found
+Couldn't init USB controller.
+
+> Otherwise, for sure we do not want to de-assert the signal in the rk3576
+> SoC C file, we don't know if the driver is even built and we should let
+> it do it if need be.
+
+Indeed, dropping the de-assertion (or rather leaving it to the driver)
+still gets it to work properly, thanks!
 
 Best regards,
-Sebasti=C3=A1n Alba Vives
-
-
-El mar, 14 abr 2026 a las 10:03, Jerome Forissier (<jerome.forissier@arm.co=
-m>)
-escribi=C3=B3:
-
-> On 09/04/2026 18:44, Sebastian Alba Vives wrote:
-> > From: Sebastian Josue Alba Vives <sebasjosue84@gmail.com>
-> >
-> > nfs_readlink_reply() validates rlen only against the incoming packet
-> > length (inherited from CVE-2019-14195), but not against the destination
-> > buffer nfs_path_buff[2048]. A malicious NFS server can send a valid
-> > READLINK reply where pathlen + rlen exceeds sizeof(nfs_path_buff),
-> > overflowing the BSS buffer into adjacent memory.
-> >
-> > The recent fix in fd6e3d34097f addressed the same overflow class in
-> > net/lwip/nfs.c but left the legacy path in net/nfs-common.c unpatched.
-> >
-> > Add bounds checks before both memcpy calls in nfs_readlink_reply():
-> > - relative path branch: reject if pathlen + rlen >=3D sizeof(nfs_path_b=
-uff)
-> > - absolute path branch: reject if rlen >=3D sizeof(nfs_path_buff)
-> >
-> > Fixes: cf3a4f1e86 ("net: nfs: Fix CVE-2019-14195")
-> > Cc: stable@vger.kernel.org
-> > Signed-off-by: Sebastian Alba Vives <sebasjosue84@gmail.com>
-> > ---
-> >  net/nfs-common.c | 4 ++++
-> >  1 file changed, 4 insertions(+)
-> >
-> > diff --git a/net/nfs-common.c b/net/nfs-common.c
-> > index 4fbde67a..72d8fd82 100644
-> > --- a/net/nfs-common.c
-> > +++ b/net/nfs-common.c
-> > @@ -674,11 +674,15 @@ static int nfs_readlink_reply(uchar *pkt, unsigne=
-d
-> int len)
-> >
-> >               strcat(nfs_path, "/");
-> >               pathlen =3D strlen(nfs_path);
-> > +             if (pathlen + rlen >=3D sizeof(nfs_path_buff))
-> > +                     return -NFS_RPC_DROP;
-> >               memcpy(nfs_path + pathlen,
-> >                      (uchar *)&rpc_pkt.u.reply.data[2 +
-> nfsv3_data_offset],
-> >                      rlen);
-> >               nfs_path[pathlen + rlen] =3D 0;
-> >       } else {
-> > +             if (rlen >=3D sizeof(nfs_path_buff))
-> > +                     return -NFS_RPC_DROP;
-> >               memcpy(nfs_path,
-> >                      (uchar *)&rpc_pkt.u.reply.data[2 +
-> nfsv3_data_offset],
-> >                      rlen);
->
-> Reviewed-by: Jerome Forissier <jerome.forissier@arm.com>
->
-> Added to my net queue, thanks!
->
-> --
-> Jerome
->
-
-
---=20
-Sebasti=C3=A1n Alba
+Alexey
