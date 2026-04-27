@@ -4,141 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3704FF885E
-	for <u-boot@archiver.kernel.org>; Mon, 27 Apr 2026 11:51:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D361FF885E
+	for <u-boot@archiver.kernel.org>; Mon, 27 Apr 2026 11:54:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 450D783693;
-	Mon, 27 Apr 2026 13:51:18 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
+	by phobos.denx.de (Postfix) with ESMTP id 8583E83693;
+	Mon, 27 Apr 2026 13:54:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="NpR8lHCN";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ecLwv/hn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EEA9283AA9; Mon, 27 Apr 2026 13:51:16 +0200 (CEST)
-Received: from AM0PR83CU005.outbound.protection.outlook.com
- (mail-westeuropeazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id E1AF780433; Mon, 27 Apr 2026 13:54:25 +0200 (CEST)
+Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
+ [IPv6:2a00:1450:4864:20::629])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0BA2080433
- for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 13:51:15 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
+ by phobos.denx.de (Postfix) with ESMTPS id 57F6480433
+ for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 13:54:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quentin.schulz@cherry.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=H/xfIVU8JXBlvEd0swP3kQ3ecdN519Hv48/NGkCx8CQFqi6f9vyAOSwkjU3zksPsp5GGZWFoaFxZ0wZmY0poZaUbEEUA2gt0a+HMyAg0ozXnHH5KfFOkt0wZ7fOcdFcetET6k1GUZ3wJoZZ1vvz7hcd8wnleDME3kwo59CuM6lfZVpm+54wmxVVuL79GCTFK1fFula6PeZ1rCOEnbTJC2KnKwBm0hd8P9H8z6n0j1My3lsdLLm/EONKhJPs0bGh5OqNlQO+t9golhgEQWW42rEQtg+9RGeN/KM+obGT1RALuEwYL9Cken2koOY0fDE1ixHJ3+/8HJshb4oK5f6fjUQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=WxA0wlelWRgZrj3Gfvftvt9n8/4lGyfwQaw6n3r5gI8=;
- b=B0QRH2+OESMqE3owMSfWH5oBGsOTnClSGRBhtsJOAaOo5q9bDSvA/C9NYqFeq1NsEPJIJ9D+/SdSSi/Mcp4jD6awU5G83vFE4z/W+LKLOOlFnxH98qxgXldXhaCMWNYO26fbiQNwd+5dWOvQEs6dgD3pG2rjK/43RIB9aZcNBRj+0s+o3QO64Wgsv6q0olRYTkJncyJJJxBj+0N1F9S/DriZGI5JCSu9t66vBu/sjQjF708ZnooH2fPaDvhsGUaq+ZmiCZEXVZ3WuF/7tPqPimfTrzohVCMG1FaP9wuOkWcum9bZDfZgfOYzdyXbZwnl5hZfoYOUoMlNzwW3xF+bRg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=WxA0wlelWRgZrj3Gfvftvt9n8/4lGyfwQaw6n3r5gI8=;
- b=NpR8lHCNwG7T2e5rC0jYZmvABbxJ68H3F3DACcv/59zU/bRvBnW72aayTZ0SVrw6TlRcVbms6ZS7h+NnC2M/wzaQL1U2Y7Yb1Rok6MSnT7cOnOQiGwhf4T0hJ0Eu+NY3RhTD700sPywj+5cv2N1GH9cXWb5b16M3PT04gDDdXoU=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from PA4PR04MB7743.eurprd04.prod.outlook.com (2603:10a6:102:b8::20)
- by PA4PR04MB7646.eurprd04.prod.outlook.com (2603:10a6:102:f3::18)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9846.26; Mon, 27 Apr
- 2026 11:51:12 +0000
-Received: from PA4PR04MB7743.eurprd04.prod.outlook.com
- ([fe80::9a4e:252f:2fd:97b7]) by PA4PR04MB7743.eurprd04.prod.outlook.com
- ([fe80::9a4e:252f:2fd:97b7%6]) with mapi id 15.20.9846.016; Mon, 27 Apr 2026
- 11:51:12 +0000
-Message-ID: <46bdc381-d2b5-4fef-8b2e-50f0fa1cfb05@cherry.de>
-Date: Mon, 27 Apr 2026 13:51:10 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: Couple of clang warnings for Rockchip boards
-To: Tom Rini <trini@konsulko.com>
-Cc: Simon Glass <sjg@chromium.org>, U-Boot Mailing List
- <u-boot@lists.denx.de>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>, Jonas Karlman <jonas@kwiboo.se>,
- Xuhui Lin <xuhui.lin@rock-chips.com>, Heiko Stuebner <heiko@sntech.de>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Sebastian Reichel <sebastian.reichel@collabora.com>
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-ba7a1cc0380so1648019266b.2
+ for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 04:54:23 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1777290863; cv=none;
+ d=google.com; s=arc-20240605;
+ b=UH+ZdlNY3SBpX4wA3ZsjMkxWra+Ddfl8nWqemYcy8vaLo/EoFBHxO9uEQ2L7PwQzee
+ zcZLTF3+YcTxfztaYZwgN5w83+dYJq5pGVeynMLOP4LQdBiuYnUCRzwovuBE6yfMKN86
+ d+oepCdBTcNPGJiYy+nKhop92C1KA73Wi6G03E5CsA00Uu9ZcL+CAlRg0jQyV8KTWkVR
+ EredvSIRVz9LxUlLK29fxCM1ibRK3ZWMCyIFFX80q0ALZK2g/y+jBugp27OmNJOomZCD
+ JZQ4bNW+Zko6cye6s8Vljv0sCOECW8tJM7rlO1nyFJIh8YE8E33THqjQNDZeufVLNa/k
+ Exhw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=Wpw9O2wJ5n3o8zSORG/tAAsUqcKpiKOPT+3GYjffMIo=;
+ fh=gXGkhr1MrhK2wEDleHYXVHAigNGe1Sk0dnbdYi9qgxA=;
+ b=NCcHIqxxz7zWAHgxcftQrnP7NNxOQUOwnVeByzNxiLGRDFkU+f4QLzKSo/dN+MWtZA
+ 8tvWDXPo2iaOlBTqT4wwZtxi+HS/mmPLzj/JGUhbcULKRlBjWLdS2J74qA3Vel1Wg3/a
+ Gax3xkk7/Ha/APkpFAsDM9urUMWvt2jIY7yLStTl6aa/RatSfV3qA+2I2J1F6KIUJYXt
+ C1JEXXcWhwIXbIvlb0xwKDg+1J2vQDq9n0bmQyHFS267psQf+y9lWQdy6MxxrmA5qYny
+ rgHpHasZGb1Uq15d3YoGYsblWDxdlNpXCybEIwhch4K+UHWwhiCmEANnxatwljVPmYEC
+ +ccQ==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1777290863; x=1777895663; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=Wpw9O2wJ5n3o8zSORG/tAAsUqcKpiKOPT+3GYjffMIo=;
+ b=ecLwv/hngyTU0AwMs2lyKkSDe7vKa+75arN6G46OW2wWa+3rRDaW/OX7eQEKunTseb
+ RaaX8gvSwe8RcAiUBBP9fuZuKJNUfLk3JKF1BLZH+1gKsrDcsONj4QSc6H5xy461Rxpc
+ LCziiWljDYECxI4QTXtqRzDgqJ9ninUWVanVw=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1777290863; x=1777895663;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Wpw9O2wJ5n3o8zSORG/tAAsUqcKpiKOPT+3GYjffMIo=;
+ b=hM3gUjAsv3HJ4kxrBadrmb+Chr7XzYzWCzM02w792sglav90Dww489jTecWvkfzquB
+ TGMsh0tRIdOfoE9VLJgcs8+Hr6FKY6XmEQkdItE/fyNARPqf9DqlMXWPzrMZBASpZI+L
+ X4sZx4qkmjftvSHo7YDJ426xre0Y29ZlE0DMq/xJCiVf4OOY80v9GCrr6O6mRvXNxGvK
+ mT/ARD1j/Gdz1V+xtu6GNuYTqcq0eMlWagcwHIKaLjF9iXSO6Iq5DHlowdYpzti3P3OU
+ BEghP1oQmwjJh5D6pIQscMkb11VT9usWbnCYlaxok1+3Jxx3+5670epHD3jVWeplGO39
+ kdPg==
+X-Gm-Message-State: AOJu0YzUElUYQVydXiTjxHYn2sUjLdDPp12KG8LtXkThfYchMQXi9SXt
+ eixp0iCKkTcTx30PuJkhFzcP9dJsT/aLs3PDjP5mquZyPJeMLZTmaQr0YlQKO7UVeLlelp5NXny
+ pTky1mDUi6Q7AHWaQBkhJwDAzA2ktrUnEon2T5ZjCgj0X7DA0uDFRWA==
+X-Gm-Gg: AeBDievKg5abRGkfhWzVxZSV3vUwD2QrjuqX9PY17FqirV8y7pnxBT0zqH1F3rlrk3Y
+ KPKh08dnWOM9CigIcfGuQtNZF4a+y+rSW7di8D53zpbMXXJFHIH3TpDl7dVDapZOYgEdx5Grc6b
+ nD+CfwEF1nVnNjpoUo5hZnMOeuFMJRYjWIBapnyz5KcycLbn3U2AKjFw3tscVEyxcPLXTs+ccy0
+ 03i4I69d/WIM67NHZZwJMIC+A5CvZCHOpJLAquUwOEY6k83B6WQ2mPFxhzV6rl+2OXDg/3JdHS/
+ SR5vPLnDyNTglRzRvmXjYcqOpJ+blg==
+X-Received: by 2002:a17:907:d641:b0:b9b:e619:a73a with SMTP id
+ a640c23a62f3a-ba41b3e2885mr2020222966b.46.1777290862639; Mon, 27 Apr 2026
+ 04:54:22 -0700 (PDT)
+MIME-Version: 1.0
 References: <f8f4e639-0e73-4d14-828a-92dbfe5526ba@cherry.de>
  <CAFLszTjWZ9DBKVui_2EE-nSg8K+5eC9V8jvwp638dLeyp_p6vw@mail.gmail.com>
  <175e1198-2ac4-48de-b68a-c29f786832cc@cherry.de>
- <20260423192013.GH41863@bill-the-cat>
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <20260423192013.GH41863@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: WA2P291CA0002.POLP291.PROD.OUTLOOK.COM
- (2603:10a6:1d0:1e::22) To PA4PR04MB7743.eurprd04.prod.outlook.com
- (2603:10a6:102:b8::20)
-MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PA4PR04MB7743:EE_|PA4PR04MB7646:EE_
-X-MS-Office365-Filtering-Correlation-Id: cb419141-b791-4900-4da4-08dea4534792
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|366016|1800799024|376014|7416014|10070799003|56012099003|18002099003|22082099003;
-X-Microsoft-Antispam-Message-Info: pIE1xoW2mpHjqVlqSf6t0ZeJ8ATKL+KXeR8UCXpmwDtDgjZRYHwpE7CVtlNM5ZqGV91CcU9FmOavGS0qPNZxuTe5lViuv3vef7hZZGa7ouoRNoxol4g2EgXr+kHtnqF7JMferLfQamzgc7hjEIFfA8D2e+ccA0kp5QAEMxCrfd9nhOo7N3Dtsop7Kv8//Q+MgoLOovtCD+YZIroL4O605VRaJ+W4h5dzp+l5kdiEPp2zD6UPt2Bo/55KGurKdJKNABg8UO1snTeOGTJ4fAhbNYW0F9Pka+Rc/xAFOh30FSs4TlIcjgcKL+YI0CImB+uI6UutrOtoS/8LxQYhhD64popjSSj+OnkkmhcUlqdG3vipUaj9p7cdwxAMfVHC0jSvVIFX/dUn3oUwlUI/o0yBvukCx3GILORJdot/T8roaG1ScdO5w2F3egsARpbazPscY75DboImJv5D9E+GMd7ElhfK9Frol/4DkEZJYFrMl+bnC4lWwr0qWkTZqrKF1OeL3AtvXV1zCbHleGidOQqzG9fK+b0GP0sGRXHInWbNDUH2XWu8rGMVTI+sUoh5IDeeB70lXXtanMNqRwytwf1dPLrFmZj9iwN8T9MoTLQA/CbkMKR/dhTSkQ5Ntoiv+GhxwFaeTbARaq4SlIYVM6DdL44778IAstXEowtWu2RY5eCkiDRRe4oG19GATWQ4teeZm+inQ2ZGSm1IFSTb/k1MurI9RfXFNVVZbwC/LqhE6Og=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PA4PR04MB7743.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(1800799024)(376014)(7416014)(10070799003)(56012099003)(18002099003)(22082099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?U2paUElmYkRzNFg4NXVRRmRTdVo3VElnK0lPNXJTUmNUVS90b1FRUFg4a1lp?=
- =?utf-8?B?ZVlERTEveW0vbVV0dTl5bUNTblhaVFpOcFVwNWx3U2lQY0E4UWlMY3NvaXY1?=
- =?utf-8?B?b1RoN2FNRjRiZCtFMzBVVlpra3ZVdW9OWXM2dmV0ckFueDYvd3M1SVUvRXRn?=
- =?utf-8?B?dkcxaTZkWmtveHdZVHZ0NHFYSFFZTXJiYnBZQkRZdms4RFhBdjlramhvZmxi?=
- =?utf-8?B?RGxCYXJDTDZyTE0vaHArNlNJU1dNWVBKbEM2WmtMMzhaKy92UUNONVRyQ2ta?=
- =?utf-8?B?djM0a2FQTWlPRVdRK3dKWHJ5MnJucnVueUVwSEdkWlV2eXJWZWYyQ21ZbXpo?=
- =?utf-8?B?NlhQM3RVazdud0FqOHJQcnNVTmhTM01UNFAwMWUvZWhDNEt2MVpmUWFDc0hu?=
- =?utf-8?B?RUdnaVRZVUZJNVdoVVV3TzE1NUJab1FPUGxLZEZpR3JRZ0s0SkNSTzFFLzFJ?=
- =?utf-8?B?TFJETEFZaGdxMjBQTVY5NnNKZVg5YXgyUUtlQlltRTlnb094djVMZ3lDdWJ2?=
- =?utf-8?B?RURsbGt2S0RzVjNCNnF0ZUh0Y0JvTWNDaWNWSFEwUkxneHFBS1BiLzdLYlN5?=
- =?utf-8?B?OVdtVXVXanpkUll6c2NneVZMcmI2UmczNkFDdHA4RS9TSXpYaVBvU2FnNHM5?=
- =?utf-8?B?b0haOXhwUUNHNUdpeXRFUGl3aTZpNUdVQ0g0RVh2N2VMdEU0aDFkcHlIcTFv?=
- =?utf-8?B?Q0h5dTBJYUVCeUZLUkFIcG5Tem5UZjJTSlVFdTlvNnJCcUJORjkva2xPWFJG?=
- =?utf-8?B?akJFcWE0bmdUU3RocGo2ZkN1K3RqWDlQUmFaeHJHUVh5Y2REZ0FMMS9BdERu?=
- =?utf-8?B?YnFwVXBqODFLcDhlRncrVE1Xb04ybVNTZGpRcmYvckErVkZGeFU4Zm9ndGpX?=
- =?utf-8?B?QTdicVREUnkrQTJ4MDZYVU42NkNleDR5RUJuY2Y4TnFscTdjL3pZS0JFL3B5?=
- =?utf-8?B?T0hEQmxMTlYzYmN1VFlqSXFueGJ3eFdUTGRvUGF4RWtqNnV4eEwyMlJJY1M5?=
- =?utf-8?B?SjdOQVdjc2FrZHVnckZVaHIvckppWWNPUThDY1YyUUpZOWVLc3I2V1FYNWQ1?=
- =?utf-8?B?eUUwdXk5aDIyNjAzdnVrMlNycnlBVjA2MXdobkREYUhuTmV1SERxNlZQWmw5?=
- =?utf-8?B?RXJSSVBkbWQvb3BkQVdzZ1FSZW5qMWtMcHdPNldyVHg4Um5MTVpOYktsQ2N4?=
- =?utf-8?B?NDZWakxiY3loSXMvSS9lV0ZKaXRNellqak9SdmNURThEREJxTm5INHUveHpt?=
- =?utf-8?B?M1M1TC9idVFMcDJtZ1pPY01MOVQ0NnNtTk1mYmFxY09WNGxBWWFvOVFOZ1Zn?=
- =?utf-8?B?eGpCNVcvdmYwMGlCZHRMRUVYdlJKbklhdnFQTXRNWjQ3ZkZzMGxGc1pXMERU?=
- =?utf-8?B?amlKSUtQYm1SV0R6WnVsRnV6aEd3c0ljcVAvbVlzT290aldpeXhTZFJvVmlh?=
- =?utf-8?B?dWtLTHhwbkhVbzlDbUx1cXVESXgzdGdzeFBEdUVYVm9DeFRHTVE4bFp6R0kx?=
- =?utf-8?B?WlJ5UmEzTm5vR2pzcit4UnJld1haeU1RWGtpd2pnV29KUHEyQW9ycHJlYmNx?=
- =?utf-8?B?bG5NazFQdHFVcVRxbngraEsvdjBIMklkNWlEcmFOMWdkSUNlVFlwTDBJUGRn?=
- =?utf-8?B?T1RvVGgydGljTVFRRzA3OTZ6ektFZVZrdlBtNjRwci94WmlEV3dIdmRPNzYx?=
- =?utf-8?B?VEw2Z0pPcVlETG9PS25yOUFvYm1JSFZSUFZINzRSajZZRHgvMGUxalRyMlBT?=
- =?utf-8?B?WWpkcExkWVVEOHFrWTM4aTRMcXhHWGlxRmNhaVdDdXNCRXpHWE9BMFNRWjll?=
- =?utf-8?B?ODlVM2JUUWhOTDhBNGZEeFZIZXZadVZseEZlL1RVNDRPTEJ3SzdFWExWVUpP?=
- =?utf-8?B?Vit4dXFlbVNMdWFQQUl2SUFtNDByQU16cEJGMGNZVzh6MUFxQUdNWEt3MDY4?=
- =?utf-8?B?cFl4UVNVRWEyTFZJRUZqWXdUc0t4UzJMZGxCTTVZQVNKNlM1eFR4dU9IMVd1?=
- =?utf-8?B?clFHWFYxWXp5VFZLb012Mk9ROGZzZkNPeWpFNTBZckJtbEorUVNHYTlIYjBp?=
- =?utf-8?B?SjNzdDVFRXBtY0J1R05kYWlad3J0Uk1SUGpJdkNadEdLV0R2MHFKYlIxZjVx?=
- =?utf-8?B?d2Z5NXZDckRrbGg0ajkrTFYyUEJnOXQ4eUtUaWQ4cFppRk95WmhYV0JXVVhN?=
- =?utf-8?B?cmpZK2VvS0llSGg4M2Y3QVplYlJ4ZUFuMHh5aDl0Uzc1bHBqc0hHNWhpUWIv?=
- =?utf-8?B?UHZUbmQvOFJmUDNTbWk1eDczaCswYkJ6QncyY01hN0hDd2JMWHlmcFpBUStt?=
- =?utf-8?B?dktPOERtMkxuOG9CNGlDb3ZWTm5iS3dJYndFUm4zakdGdlFSc2Fjc2c2WWJi?=
- =?utf-8?Q?vL+WU9AbD7I2dbAD7cyYrqAI9F6MWXSGRxfbA?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: cb419141-b791-4900-4da4-08dea4534792
-X-MS-Exchange-CrossTenant-AuthSource: PA4PR04MB7743.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Apr 2026 11:51:12.4760 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: nxblxbsd2apotc2Dvv4rLwcgUXtZUxHSXmEm8CID1Nktaaq8CBkn0hvX3WIFC7XJStN/zUD3mrjB1eanNQ6dCuCdcCVehRBeiZeTjUEjfzo=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA4PR04MB7646
+In-Reply-To: <175e1198-2ac4-48de-b68a-c29f786832cc@cherry.de>
+From: Simon Glass <sjg@chromium.org>
+Date: Mon, 27 Apr 2026 23:54:09 +1200
+X-Gm-Features: AVHnY4JFRbeEHih58bP6Yife7PREjivXrJfuryZf5l0XiA3h5PTjAxiNDJQvchQ
+Message-ID: <CAFLszThQ+kyCkojFm2=VNtLTtLDYT4iVmpqnto8awiMVqsct0Q@mail.gmail.com>
+Subject: Re: Couple of clang warnings for Rockchip boards
+To: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>, 
+ Jonas Karlman <jonas@kwiboo.se>, Xuhui Lin <xuhui.lin@rock-chips.com>, 
+ Heiko Stuebner <heiko@sntech.de>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Sebastian Reichel <sebastian.reichel@collabora.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -155,41 +114,265 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi Quentin,
 
-On 4/23/26 9:20 PM, Tom Rini wrote:
-> On Thu, Apr 23, 2026 at 12:24:13PM +0200, Quentin Schulz wrote:
->> Hi Simon,
->>
->> On 4/22/26 11:57 PM, Simon Glass wrote:
->>> Hi Quentin,
->>>
->>> On Thu, 23 Apr 2026 at 01:26, Quentin Schulz <quentin.schulz@cherry.de> wrote:
-[...]
->> Also, FYI, enabling CONFIG_WERROR doesn't apply the -Werror flag to the host
->> tools, which I believe is an oversight. I see buildman sets
->> HOSTCFLAGS=-Werror, maybe we should do that in the appropriate place based
->> on CONFIG_WERROR as well?
-> 
-> What does the linux kernel do here? We're just borrowing logic again.
-> 
+On Thu, 23 Apr 2026 at 22:24, Quentin Schulz <quentin.schulz@cherry.de> wrote:
+>
+> Hi Simon,
+>
+> On 4/22/26 11:57 PM, Simon Glass wrote:
+> > Hi Quentin,
+> >
+> > On Thu, 23 Apr 2026 at 01:26, Quentin Schulz <quentin.schulz@cherry.de> wrote:
+> >>
+> >> Hi all,
+> >>
+> >> I'm looking into force-enabling CONFIG_WERROR for all Rockchip SoCs.
+> >> First, let me know if this is a bad idea :)
+> >
+> > I don't like it, as it makes development slower. I like to see all the
+> > warnings created by a change and tend to fix them iteratively. We
+> > already have a warning check in CI. A better approach is to
+> >
+> > Can you use: KCFLAGS=-Werror
+> >
+> > either in your environment or on the 'make' cmdline?
+> >
+>
+> Well, if it's during development, you can always disable WERROR? The
+> fact that I've never actually enabled -Werror locally in about a decade
+> in U-Boot probably isn't a good sign. One of the things that make me
+> wary though is compiler updates with new warnings. I've tested with
+> clang 22, don't know when clang 23 is planned to be released. GCC 16 is
+> about to be released as well.
+>
+> By having the check in CI, we have a longer-than-necessary feedback loop
+> for contributors. Has this been an issue in the past? /me shrugs
 
-27758d8c2583 ("kbuild: enable -Werror for hostprogs") and 7ded7d37e5f5 
-("scripts/Makefile.extrawarn: Respect CONFIG_WERROR / W=e for 
-hostprogs") (available in v6.18), set
+This is strange though, because people should see the warnings during
+development. I wonder if it is scrolling off the screen.
 
-ifneq ($(findstring e, $(KBUILD_EXTRA_WARN))$(CONFIG_WERROR),)
-[...]
-# While hostprog flags are used during build bootstrapping (thus should not
-# depend on CONFIG_ symbols), -Werror is disruptive and should be opted 
-into.
-# Only apply -Werror to hostprogs built after the initial Kconfig stage.
-KBUILD_HOSTCFLAGS       += -Werror
-KBUILD_HOSTLDFLAGS      += -Wl,--fatal-warnings
-KBUILD_HOSTRUSTFLAGS    += -Dwarnings
-endif
+One my bugbears is non-actionable output. When the build succeeds
+(with no warnings) I see no output, using 'buildman -I --board xxx -w
+-o /tmp/b/xxx' or in fact these days 'um build xxx'. This uses 'make
+-s' under the hood, so that it doesn't print a huge list of filenames,
+etc. I also sometimes do a 'fresh' build with 'um build -F xxx' to
+check everything is clean ('buildman -m' does something similar).
 
-so they do it.
+Note that buildman returns exit code 101 if there are any warnings, so
+the build basically fails.
 
-Cheers,
-Quentin
+>
+> No defconfig seems to be setting this option, not sure exactly why that is.
+
+To me this is a difference between 'functionality' options and
+development options. Putting development options in Kconfig makes it
+harder to turn them on and off, since you must either edit the
+defconfig or edit the .config file. It is easier to just pass an
+environment variable.
+
+>
+> Also, FYI, enabling CONFIG_WERROR doesn't apply the -Werror flag to the
+> host tools, which I believe is an oversight. I see buildman sets
+> HOSTCFLAGS=-Werror, maybe we should do that in the appropriate place
+> based on CONFIG_WERROR as well?
+
+Yes, that seems to be an oversight.
+
+>
+> >>
+> >> gcc version 15.2.1 20250808 (Red Hat Cross 15.2.1-1) (GCC) for both ARM
+> >> and Aarch64 machines report no warnings (built with a config fragment
+> >> enabling CONFIG_WERROR).
+> >>
+> >> For clang, I went for cross-compiling using either
+> >> make HOSTCC=clang CROSS_COMPILE=arm-linux-gnu- CC=clang O=build/ ...
+> >> or
+> >> make HOSTCC=clang CROSS_COMPILE=aarch64-linux-gnu- CC=clang O=build/ ...
+> >>
+> >> First things first, I can't even build any of the Aarch32/ARM with clang
+> >> for some reason, so this only applies for Aarch64 Rockchip platforms.
+> >>
+> >> Some platforms couldn't be built due to hitting the max TPL limit (e.g.
+> >> PX30).
+> >
+> > It's interesting that clang code is larger than gcc. There was a time
+> > that I thought clang would replace gcc. But clang is much slower and
+> > if it doesn't provide code-size benefits, I'm not sure that will
+> > happen. We all use it as an lsp though, at least.
+> >
+>
+>  From what I've gathered, clang can cross-compile to many different
+> archs with a single binary, GCC goes for separate toolchains, which
+> kinda is a pain to be honest.
+
+Yes it seems so. I've never actually tried it though, have you? For my
+workflow, buildman handles the toolchains.
+
+>
+> Also, it's nice for build systems like Buildroot or Yocto to only need a
+> single toolchain (either clang or GCC, but not both) for everything. So
+> in an ideal world if you want to use clang for everything, you could.
+> Last time I checked, you cannot build TF-A on RK3399 with clang only.
+> I'm also not entirely sure how far we are from building the kernel with
+> clang, or maybe it's already fully supported.
+
+I don't know either. I wonder how it handles linker scripts?
+
+>
+> >>
+> >> clang version 21.1.8 (Fedora 21.1.8-4.fc43) (or clang version 22.1.1
+> >> (Fedora 22.1.1-2.fc44), doesn't matter) issues three warnings:
+> >>
+> >> 1. Chromebooks EC fails to build:
+> >> In file included from
+> >> /home/qschulz/work/upstream/u-boot/drivers/misc/cros_ec.c:21:
+> >> In file included from
+> >> /home/qschulz/work/upstream/u-boot/include/cros_ec.h:12:
+> >> /home/qschulz/work/upstream/u-boot/include/ec_commands.h:3578:2: error:
+> >> field  within 'struct ec_params_charge_state' is less aligned than
+> >> 'union ec_params_charge_state::(anonymous at
+> >> /home/qschulz/work/upstream/u-boot/include/ec_commands.h:3578:2)' and is
+> >> usually due to 'struct ec_params_charge_state' being packed, which can
+> >> lead to unaligned accesses [-Werror,-Wunaligned-access]
+> >>    3578 |         union {
+> >>         |         ^
+> >>
+> >> The following
+> >>
+> >> diff --git a/include/ec_commands.h b/include/ec_commands.h
+> >> index 23597d28b2c..c5f9777c0c7 100644
+> >> --- a/include/ec_commands.h
+> >> +++ b/include/ec_commands.h
+> >> @@ -3575,7 +3575,7 @@ enum charge_state_params {
+> >>
+> >>    struct __ec_todo_packed ec_params_charge_state {
+> >>          uint8_t cmd;                            /* enum charge_state_command */
+> >> -       union {
+> >> +       union __ec_todo_packed {
+> >>                  struct __ec_align1 {
+> >>                          /* no args */
+> >>                  } get_state;
+> >>
+> >> seems to fix it. The upstream EC git repo
+> >> (https://chromium.googlesource.com/chromiumos/platform/ec) has a commit
+> >> with more changes, see 65da9cc08766 ("include/ec_commands.h: Fix
+> >> unaligned access warnings"). It doesn't apply cleanly (and I haven't
+> >> looked into other patches to backport for this to apply cleanly). I'm
+> >> not sure what we're supposed to do here? I also don't have a Chromebook
+> >> to test.
+> >
+> > It should be possible to backport this, to avoid divergence. I could
+> > look at that if you like.
+> >
+>
+> That'd be nice :) Maybe the solution would be a sync with upstream
+> instead of backporting select patches? I have no experience with CrOS EC
+> so no clue what we're supposed to do here, especially since if I
+> understood correctly, they switched to Zephyr somewhat recently, so
+> maybe the API changed and isn't backward compatible (I don't think the
+> Rockchip Chromebooks were migrated to that).
+
+Yes, I led that effort in the distant past - we changed from a
+home-grown OS to Zephyr. But it still uses the same protocol.
+
+https://chromium.googlesource.com/chromiumos/platform/ec/+/HEAD/docs/zephyr/README.md
+
+>
+> > For now you could use a #pragma just around the header include, or in cros_ec.c
+> >
+>
+> I'd rather not silence warnings if we're planning on fixing them soon-ish :)
+
+Indeed, I'll take a look at updating the file.
+
+>
+> > I don't think you need to worry about the struct going wrong, so long
+> > as the size remains the same. There are two Chromebooks in the SJG lab
+> > you can try it with: bob and kevin
+> >
+>
+> Well, if we pack it, it may change the size, that's the whole point of
+> packing no? Or you meant checking that the current size of the struct is
+> the same after packing it to make clang happy?
+>
+> But also, are we doing anything with this? Like some CrOS EC checks in
+> labgrid for example? I cannot see any test for the crosec command in
+> test/py/tests/ for example. No test specific to a chromebook either (git
+> grep chromebook test/py/tests).
+
+It is used for the sandbox keyboard, for example.
+
+>
+> >>
+> >> 2. RK3528, RK3576 and RK3588 boards fail with (replace rk3528 in path
+> >> for the other SoCs)
+> [...]
+> >> I tried casting CONFIG_COUNTER_FREQUENCY into a u64 and it builds and no
+> >> magic smoke when booting a board. Whether this is the proper fix, I
+> >> don't know, but the warning is then gone. We could also decide to ignore
+> >> the warning like for Android's Little Kernel (where and how much this is
+> >> used is unclear as the repo isn't seeing much activity).
+> >>
+> >> The register documentation indicates this is not used by the hardware at
+> >> all, so even if it was broken, we probably wouldn't see a difference?
+> >
+> > Similar to what Tom says...does this work?:
+> >
+> > asm volatile("msr cntfrq_el0, %0" : : "r"
+> >    ((u64)CONFIG_COUNTER_FREQUENCY));
+> >
+>
+> Yes this was among the things I tried (see paragraph with the magic
+> smoke not happening). I should probably start practicing condensing my
+> mails :)
+
+Ah OK, missed that sorry.
+
+>
+> >>
+> >> 3. Boards building USB TCPM fail with
+> >>
+> >> In file included from
+> >> /home/qschulz/work/upstream/u-boot/drivers/usb/tcpm/tcpm-uclass.c:12:
+> >> In file included from
+> >> /home/qschulz/work/upstream/u-boot/include/usb/tcpm.h:12:
+> >> /home/qschulz/work/upstream/u-boot/include/usb/pd.h:212:2: error: field
+> >> within 'struct pd_message' is less aligned than 'union
+> >> pd_message::(anonymous at
+> >> /home/qschulz/work/upstream/u-boot/include/usb/pd.h:212:2)' and is
+> >> usually due to 'struct pd_message' being packed, which can lead to
+> >> unaligned accesses [-Werror,-Wunaligned-access]
+> >>     212 |         union {
+> >>         |         ^
+> >>
+> >> This file is apparently adapted from upstream Linux, where the code is
+> >> identical for that struct. So not sure what to do here.
+> >
+> > Maybe add __packed ?
+> >
+>
+> We could, but if upstream (Linux) didn't fix it, maybe there's a reason
+> and we should discuss it there first?
+>
+> So, looking a bit more into this, the kernel actually silences a bunch
+> of warnings when not passing W=N to `make`, one of them being
+> unaligned-access, see
+> https://elixir.bootlin.com/linux/v7.0/source/scripts/Makefile.warn#L155.
+> So maybe we need to sync some of those back to U-Boot as well?
+>
+> Our scripts/Makefile.extrawarn is claimed[1] to be loosely based on
+> Linux 6.1's, but it is actually quite different. So not sure how much we
+> should be backporting and how.
+
+In most cases it would be better to line up with the Linux version as
+much as possible. But for unaligned-access, I suspect we have good
+reason to warn about that since it can cause some boards to fail to
+boot.
+
+Regards,
+Simon
+
+
+
+> [1] bd3f9ee679b4 ("kbuild: Bump the build system to 6.1")
