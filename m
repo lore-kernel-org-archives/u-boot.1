@@ -4,53 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0454FF8868
-	for <u-boot@archiver.kernel.org>; Mon, 27 Apr 2026 15:05:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB625FF8860
+	for <u-boot@archiver.kernel.org>; Mon, 27 Apr 2026 15:08:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8DA3E841DF;
-	Mon, 27 Apr 2026 17:05:00 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=siemens.com
+	by phobos.denx.de (Postfix) with ESMTP id 319328407E;
+	Mon, 27 Apr 2026 17:08:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=free.fr
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=siemens.com header.i=ludwig.nussel@siemens.com header.b="Z7r4MD58";
+	dkim=pass (2048-bit key; unprotected) header.d=free.fr header.i=@free.fr header.b="rsq/i4+M";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1C3CA8419E; Mon, 27 Apr 2026 17:04:59 +0200 (CEST)
-Received: from mta-65-226.siemens.flowmailer.net
- (mta-65-226.siemens.flowmailer.net [185.136.65.226])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 5FE5483693; Mon, 27 Apr 2026 17:08:44 +0200 (CEST)
+Received: from smtp6-g21.free.fr (smtp6-g21.free.fr [IPv6:2a01:e0c:1:1599::15])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BBEA98410D
- for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 17:04:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6266583693
+ for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 17:08:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=siemens.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ludwig.nussel@siemens.com
-Received: by mta-65-226.siemens.flowmailer.net with ESMTPSA id
- 202604271504537c79a7c91e00020743 for <u-boot@lists.denx.de>;
- Mon, 27 Apr 2026 17:04:53 +0200
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm2;
- d=siemens.com; i=ludwig.nussel@siemens.com;
- h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc:References:In-Reply-To;
- bh=xKfh1LqiXZWINGwprlhclp8hRf7/leQkgw70DQiJ9rM=;
- b=Z7r4MD58maQW7HarKpZK2xYQt7Hb5lhDXEdzsBnoNOHYkvY9o8jOKGH+fwWn3MqRGsAj3c
- b1BL38k8OdmtfWBO/v8aqsHh0qTwA9jjPH11zqMm+ZMeg6TqxqxDSJN7itcR8zK0lqirsLdw
- O8d0z3WHr34GZDe8Q5Lb7DJwkhBTkUhu3mH/0O8zZmGJoHSG4KOQbKeG7BnGSo3zbLYnTv0F
- Tl459I2BGroiE7oY1sUZW1/vCok787GPpBCLGsKi4WAzP6JDPMTYMLghYaYPWFbJIb+aLd5l
- 4hfNuIXPYgSxoNn+qf8yuZwqERVeRnRthHFtLJgOLtmsY/0/NGlSiRnQ==;
-From: Ludwig Nussel <ludwig.nussel@siemens.com>
+ dmarc=pass (p=quarantine dis=none) header.from=free.fr
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=vjardin@free.fr
+Received: from localhost.localdomain (unknown
+ [IPv6:2a01:e0a:98a:56a0:e0ee:b353:5249:f120])
+ (Authenticated sender: vjardin@free.fr)
+ by smtp6-g21.free.fr (Postfix) with ESMTPSA id 4E4F378034D;
+ Mon, 27 Apr 2026 17:08:28 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=free.fr;
+ s=smtp-20201208; t=1777302521;
+ bh=zUghVHmGktXdZGFAMQ56Plg4V5Ef3hnnivwQzd1ULIc=;
+ h=From:To:Cc:Subject:Date:From;
+ b=rsq/i4+MSsLZzreh6ygeBbsv1Ht5Em0WnAtowOcZQzK0msJbsw/h8f04UIyz1A0ux
+ /XzfnUG6zrTZYXzb6jKdo98qQFpHJY7RBeHiI517Yn4+2jl5t6fa92f0LvX8gTcyN4
+ YIb7rXdwnMqsj64gTB+3MfV54nxNsL/TWZiWnAokZlz64qS3ehmP/nyOqSOJKdKZwl
+ XvjicN3XoYyq7Ob2G/IrrbC4N0Co2UAf44QjEqTglaJKrSl0AuP2YO4K3L1s0OkhPC
+ E1YwaoOn8/qOVXQqlTBLApmnE5Odx/7oMGaLPmsOBGdri9uofQzvNHS3IRyrFLUJ6r
+ ujyAVbx0urRMw==
+From: Vincent Jardin <vjardin@free.fr>
 To: u-boot@lists.denx.de
-Cc: Ludwig Nussel <ludwig.nussel@siemens.com>,
- Simon Glass <simon.glass@canonical.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 4/4] image-fit-sig: require signatures
-Date: Mon, 27 Apr 2026 17:03:41 +0200
-Message-ID: <20260427150409.400914-4-ludwig.nussel@siemens.com>
-In-Reply-To: <20260427150409.400914-1-ludwig.nussel@siemens.com>
-References: <20260427150409.400914-1-ludwig.nussel@siemens.com>
+Cc: Vignesh R <vigneshr@ti.com>,
+ Takahiro Kuwano <takahiro.kuwano@infineon.com>,
+ Tom Rini <trini@konsulko.com>, Tudor Ambarus <tudor.ambarus@linaro.org>,
+ Ssunk <ssunkkan@gmail.com>, Jeffrey Yu <jeyu@issi.com>,
+ Flaviu Nistor <flaviu.nistor@gmail.com>,
+ Chen Huei Lok <chen.huei.lok@altera.com>,
+ Christoph Reiter <christoph.reiter@evk.biz>,
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
+ Shiji Yang <yangshiji66@outlook.com>, David Lechner <dlechner@baylibre.com>
+Subject: [PATCH] mtd: spi-nor: Add gd55lb02gf chips
+Date: Mon, 27 Apr 2026 17:08:07 +0200
+Message-ID: <20260427150808.17319-1-vjardin@free.fr>
+X-Mailer: git-send-email 2.50.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Flowmailer-Platform: Siemens
-Feedback-ID: 519:519-1328817:519-21489:flowmailer
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -67,62 +72,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Signature nodes in the device tree are mandatory if u-boot is compiled
-with signature verification. Allowing signature verification to pass
-if those nodes are missing would leave the system fail open.
+Same die as gd55lb02g but a distinct JEDEC ID (memtype byte
+0x60 vs 0x67), so the existing entry does not match.
 
-Signed-off-by: Ludwig Nussel <ludwig.nussel@siemens.com>
+Quad-read flag left disabled until QE bring-up is sorted; the
+chip ships with QE = 0 and lighting it requires a controller
+fixup that is not yet wired.
+
+Signed-off-by: Vincent Jardin <vjardin@free.fr>
 ---
+ drivers/mtd/spi/spi-nor-ids.c | 2 ++
+ 1 file changed, 2 insertions(+)
 
- boot/image-fit-sig.c | 12 ++++--------
- 1 file changed, 4 insertions(+), 8 deletions(-)
-
-diff --git a/boot/image-fit-sig.c b/boot/image-fit-sig.c
-index 433df20281f..b89b82ee58e 100644
---- a/boot/image-fit-sig.c
-+++ b/boot/image-fit-sig.c
-@@ -618,7 +618,6 @@ static int fit_config_verify_required_keys(const void *fit, int conf_noffset,
- 	int noffset;
- 	int key_node;
- 	int verified = 0;
--	int reqd_sigs = 0;
- 	bool reqd_policy_all = true;
- 	const char *reqd_mode;
- 
-@@ -639,9 +638,8 @@ static int fit_config_verify_required_keys(const void *fit, int conf_noffset,
- 	/* Work out what we need to verify */
- 	key_node = fdt_subnode_offset(key_blob, 0, FIT_SIG_NODENAME);
- 	if (key_node < 0) {
--		debug("%s: No signature node found: %s\n", __func__,
--		      fdt_strerror(key_node));
--		return 0;
-+		log_err("No signature node found: %s\n", fdt_strerror(key_node));
-+		return -EPERM;
- 	}
- 
- 	/* Get required-mode policy property from DTB */
-@@ -668,8 +666,6 @@ static int fit_config_verify_required_keys(const void *fit, int conf_noffset,
- 		if (!required || strcmp(required, "conf"))
- 			continue;
- 
--		reqd_sigs++;
--
- 		ret = fit_config_verify_key(fit, conf_noffset, key_blob,
- 					    noffset);
- 		if (ret) {
-@@ -685,8 +681,8 @@ static int fit_config_verify_required_keys(const void *fit, int conf_noffset,
- 		}
- 	}
- 
--	if (reqd_sigs && !verified) {
--		printf("Failed to verify 'any' of the required signature(s)\n");
-+	if (!verified) {
-+		log_err("Failed to verify 'any' of the required signature(s)\n");
- 		return -EPERM;
- 	}
- 
+diff --git a/drivers/mtd/spi/spi-nor-ids.c b/drivers/mtd/spi/spi-nor-ids.c
+index c0fa98424aa..a29bc98d027 100644
+--- a/drivers/mtd/spi/spi-nor-ids.c
++++ b/drivers/mtd/spi/spi-nor-ids.c
+@@ -191,6 +191,8 @@ const struct flash_info spi_nor_ids[] = {
+ 	SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_4B_OPCODES)},
+ 	{INFO("gd55lb02g", 0xc8671C, 0, 64 * 1024, 4096,	SECT_4K |
+ 	SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_4B_OPCODES)},
++	{INFO("gd55lb02gf", 0xc8601C, 0, 64 * 1024, 4096,	SECT_4K |
++	/* SPI_NOR_QUAD_READ | */ SPI_NOR_HAS_LOCK | SPI_NOR_4B_OPCODES)},
+ 	{INFO("gd25lf80", 0xc86314, 0, 64 * 1024, 16,	SECT_4K |
+ 	SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK)},
+ 	{INFO("gd25lf16", 0xc86315, 0, 64 * 1024, 32,	SECT_4K |
 -- 
-2.43.0
+2.50.1 (Apple Git-155)
 
-base-commit: 9f61fd5b80a43ae20ba115e3a2933d47d720ab82
-branch: us-qemu-signatures
