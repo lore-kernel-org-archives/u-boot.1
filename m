@@ -4,157 +4,148 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54C36FF8860
-	for <u-boot@archiver.kernel.org>; Mon, 27 Apr 2026 16:49:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E96C6FF8860
+	for <u-boot@archiver.kernel.org>; Mon, 27 Apr 2026 16:54:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BC83384329;
-	Mon, 27 Apr 2026 18:49:49 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7654983BC4;
+	Mon, 27 Apr 2026 18:54:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="IXaULY39";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="OykzlatO";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="Qu/xwNLH";
+	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="aEYO76ZH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5365B842FD; Mon, 27 Apr 2026 18:49:48 +0200 (CEST)
+ id EA12383C14; Mon, 27 Apr 2026 18:54:36 +0200 (CEST)
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
  [205.220.168.131])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AE58C83AA9
- for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 18:49:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 628BE83AA9
+ for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 18:54:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=balaji.selvanathan@oss.qualcomm.com
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
+Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 63RFLPL9440983
- for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 16:49:43 GMT
+ 63RCpGGC2383117
+ for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 16:54:32 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- bKTNut5MYN7zaMJcZ5dGiMukrlfeaBRK1UQX6x2x2Cc=; b=IXaULY39DOz224SN
- OgNEQ+VUyq9LjZJO+5GHKH+xREAboTztbvpPRnr7SgYqRxqjzNj+wl0uwMbHjTjf
- EYmFKI2yr2Ol4aGYWpebW0Q/m3Ok/6fCPv5LHVLqioYuRYm1zv9D+dj+CBNzcpNd
- pWaAuAkssptOvMwnJumWyFM7S7GyHZ5vCVPiculi/bSI7rmnCUCApyAR5ElW+wdi
- 6dqSHMxR2FjezFA2O30ZnS7iURyruxTvHL/kYIPRrNWDlRkiA+++ysXOuntlFBJO
- obhlmPQfSDCEZO2Wvsjbv4KaxX8Pbcd8CPFDzDGEvft/pHGTk+UcOQw7oS+aT/LR
- 1XDgwA==
-Received: from mail-pj1-f69.google.com (mail-pj1-f69.google.com
- [209.85.216.69])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4dtac40an3-1
+ 8tvda4PzqpzbDRdN0XDSpvtvSk5L2KQPPzzADYksGw4=; b=Qu/xwNLHwPKlzBwX
+ rsILwVPKQ80d4nlF5lFPdgV7rYC2lz57J6IfOlp6JlG48a1K28UV86CsCzTtClRD
+ iiYjNBV+pd47/7mJv9iKvwQw5dE3v9FQE/WOg7/dHANHTHKWcze+h52zKLTe4TLa
+ s/qEN2rRgMl1fuYvs3NSwP/48pb29jq+ALyC01E9l48c8ilM8Vi/2+ZU8y8IDUsr
+ gQ6ZWq+PYrN4C8jJL+ZzNiwClZwI37vCMIohw1B8BznUy88YIFQu5diUucDymsda
+ yaCQi980Gc/8FcgFvNfc7KTG5U1LLYXyNG5O+skBNYjrDzSHu0DrUTU8eBpiPZC5
+ x7x38Q==
+Received: from mail-pg1-f197.google.com (mail-pg1-f197.google.com
+ [209.85.215.197])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4dt85xrxeu-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 16:49:43 +0000 (GMT)
-Received: by mail-pj1-f69.google.com with SMTP id
- 98e67ed59e1d1-35da86144daso9963532a91.3
- for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 09:49:43 -0700 (PDT)
+ for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 16:54:32 +0000 (GMT)
+Received: by mail-pg1-f197.google.com with SMTP id
+ 41be03b00d2f7-c798fc1a426so3883370a12.2
+ for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 09:54:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1777308583; x=1777913383; darn=lists.denx.de; 
+ d=oss.qualcomm.com; s=google; t=1777308872; x=1777913672; darn=lists.denx.de; 
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=bKTNut5MYN7zaMJcZ5dGiMukrlfeaBRK1UQX6x2x2Cc=;
- b=OykzlatOeX0QWU7DGs36zHACAZzzCf0HdhE+DseVodqLVOmejD2Cv916eGfheuYTov
- 3i9WS1pc2dfH/6mPiEdtPGhJFdH45uGdtRCwGdVdkuuwARcenasUOINhKuCXTsY/g3F9
- d89r9ibZ4j8zly4/y5EcvfNF6p0V4uDFnQpgOpWwvmTY7UGKlkq1n9u29tO8dIYp8mBT
- hYW6uGsnIHta0njxwHfJ41mg/p42OBbg8lJw6L8FHpXW8TakYoIwNtAdraGwe845nmIx
- 55LE7UmiMLi6ZsqNKgF2rVbtQjumhYvVDCyuRGtghJHWQsVfvcB1f7RFSb1ZTlo9sjxJ
- qrkg==
+ bh=8tvda4PzqpzbDRdN0XDSpvtvSk5L2KQPPzzADYksGw4=;
+ b=aEYO76ZHZoouMx8FO5M4H3X6xiwzHW/BnJh8uFhumkIvlM8Kq408pQ9nxgJGiRFLZP
+ Dks1GAYJS7NGxLBM5P3NwXWP9NQb4Djm6zYhdgyLWkjv4mpdsyoVxkDa5retRiC9oJGv
+ JHaLZ5Ekq4gB0Zp0fA5uBwsUmpd+HrKBn/521nGjWVqWvfUIuNsilxLAcOneiUAug/4c
+ wbXMTVv/ibmKNrxoqCWUWf0ZAiI2bpiNlsRkuzLhiXFVqYGglC58SAN2woZhilFpXiKp
+ sd6IRGoathKNrDthX/9HImrL/ph3myZV3FokTFwjqzkkBxnkU9C2g5JEq8NfsExv5/wb
+ Vkog==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777308583; x=1777913383;
+ d=1e100.net; s=20251104; t=1777308872; x=1777913672;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=bKTNut5MYN7zaMJcZ5dGiMukrlfeaBRK1UQX6x2x2Cc=;
- b=sOdP7YGz3EvpqdvEwKHloGIfpZRhmpY0BZF5I8b4b9DeBQW+IRvMJYDdJbegWsJK/q
- tzoagGR43RAFVZnqrMcXD4qOB/i4Lio2/wEjRIYX+jPoDhsx8uL5MSePuu0IbW/MsN1L
- 9hz1+T67S8H2/LbDPEKRF1v/zly/F7SgYbxO2cQTxNfYtBbeF5lmn1ew2gTmHawMqtwz
- eblDb+qHiXy2MG7sqW8DwbA4bHz9QjMpv8VEEkcW+81jmqhy2CN09YMi1ooYAYRrisLT
- OqPirX9vyEn94mj5JeV229m38tuHbTVFLmXIw6KTE5dr9lW5806BaoOi3dw+0VRJs7HK
- rahw==
-X-Gm-Message-State: AOJu0Yw9+AdKTVs1mlKRECQnqys7oFgGcIdCNjTamqiDklB0WCjb98yy
- p/9PUBfGxX/YxPxZ0zmOGZiubv3ndsH3wJtbHFn5jc1uXgU5wVnGnRJNfzVzPOhj8zFBUvVD3eV
- O1MwOnEW5EEoVfMZO/l0Px/6rAXoK51MrSoJIaSujBMV0QJLsd767RvlnTUU3HylV
-X-Gm-Gg: AeBDievL6PjJqrA2CMwn1qtaEIxfEVt0PAPj6KfShLXRWxfxdM6KUPDANYqKisEHAW5
- EuCpHKONCp++H+kMC+p/Fx09L6nfO/iqRWf17bO6LpJY7+UD82ngaWhbN9UwnY/mLyqd0tAZuU/
- n5YWyTikuIKWLYhbhwk4X53tfrUpVxHPORkGVfjF+MfQ2DFblddKf6809yNgTu86wR1giCRPTyk
- RAO9oNlSKC10kXSBJUKncSZXVYfjQq4sVVfHM50Um3V8oMeqb0I0NRfRrL9ktDUglg+0ypxkOFD
- j0rVaQZr4D8/wwfVFjuhFSZ16dez5DtXu22Q3KbpiQXTecmpDCD2kjFCRC12Y+MbKFbRJVhevUl
- PfAJL1jsKYvWsZvl41NGS4rDEThS3NVgpT8PRjs243xZ8iv5Fgfc+zscLkkDJUj46OQp1
-X-Received: by 2002:a17:90b:1d50:b0:35e:599f:aef0 with SMTP id
- 98e67ed59e1d1-361404254c0mr41155824a91.11.1777308582849; 
- Mon, 27 Apr 2026 09:49:42 -0700 (PDT)
-X-Received: by 2002:a17:90b:1d50:b0:35e:599f:aef0 with SMTP id
- 98e67ed59e1d1-361404254c0mr41155785a91.11.1777308582206; 
- Mon, 27 Apr 2026 09:49:42 -0700 (PDT)
+ bh=8tvda4PzqpzbDRdN0XDSpvtvSk5L2KQPPzzADYksGw4=;
+ b=hb627/W3nHEjP2/adRbZW2HW5NdO20rkzj2obBA8J2gK4DxkRzyfgQtKeWJl06pLZg
+ kX/9mHmCevwD+NKgG1QPCrYV+quSzpPrmLhEMAnbaTGtzXgqMv3E0TV+B8ZmH/qooXfR
+ RYSgBwBMPwstyptyEyjiOsv2g3w2oULYb2tUzIUmptYfnzURaNNkW2EuVaufxlom3jxh
+ QWXIjKn3/LHsQ0PnIP5/Ngxwd1mO95knzThUiVT+ko1ZEfSwOP6EWIJ/mrWGJ6BYrb03
+ trpBcGqb8xSXYKDrJt/53uTJP0gLVDVIqBTSaGiSk55tG03IiRAdsGo9LmN+lJUjpXY+
+ TRIg==
+X-Gm-Message-State: AOJu0YxIFVelRzz/AWsr0VSK+JLi7vOUmlTf7+1fjor54ombaEPKz+7m
+ wMwEdZHdlQmpUn2jXGz5uhPmd3BIb1hSz5dQt+O2nK7zyTVR1x/lojP+UFtfzlQPu2EtCgyV22/
+ LGAKJijwD8bwFEe9joYTVC3GIvM3ebLzSTT0QU5pXumKDbbLGthHyZy6c
+X-Gm-Gg: AeBDiet2iYidZtxM0XgH0CGh76qbB8kapETSrn3VmkBNqpQr1p11HPsu3BnFgmedIl2
+ uUTSjk+x999/h6aBrBttDO7iMQZl3H6LAzs/RzSXEyz0h02/s5zmZt9YN5TkfbHEYVRRPsx67KG
+ Y2pwVNEJWJyGq38Yyl508tQIxihZNQHbfpdDgnkvtfcuZpFguSUkFPItaCFEw9Xf6lu5R+v1iGt
+ 4KqmZuEd5R0Q4mJck7nm7hApv0nAdmxUSuTrJeYObyt04LAQIEghs/czGRws0raFF8wEtKwxNMA
+ IOblHWkh4+ZjNdUjiXckAoCo6hGHLcGehjZMprtOwsA//ucMf4krNyviHU6r0yOTRyBq9kvQD75
+ joS6d1c/nL7JPbyp076BLAD84iw6j0E9x0ad8uOOvijSh2iwVDz99L4jtIj/3XJRf02F5
+X-Received: by 2002:a05:6a21:328f:b0:3a1:90ef:7e46 with SMTP id
+ adf61e73a8af0-3a398df6a33mr178351637.33.1777308871479; 
+ Mon, 27 Apr 2026 09:54:31 -0700 (PDT)
+X-Received: by 2002:a05:6a21:328f:b0:3a1:90ef:7e46 with SMTP id
+ adf61e73a8af0-3a398df6a33mr178305637.33.1777308870861; 
+ Mon, 27 Apr 2026 09:54:30 -0700 (PDT)
 Received: from [192.168.0.3] ([49.206.96.228])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-3613fa91d31sm17099169a91.2.2026.04.27.09.49.32
+ 41be03b00d2f7-c797702faaesm24881363a12.23.2026.04.27.09.54.24
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 27 Apr 2026 09:49:41 -0700 (PDT)
-Message-ID: <cd81616a-0d04-4a3e-93a2-b8ab35093ea7@oss.qualcomm.com>
-Date: Mon, 27 Apr 2026 22:19:30 +0530
+ Mon, 27 Apr 2026 09:54:30 -0700 (PDT)
+Message-ID: <f80c70eb-feac-4f1d-ad56-5ba757c81b00@oss.qualcomm.com>
+Date: Mon, 27 Apr 2026 22:24:23 +0530
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 0/5] Add partition type GUID support for environment
+Subject: Re: [PATCH 5/5] drivers: ufs: qcom: Initialize and enable clocks
+ before hardware access
 To: Sumit Garg <sumit.garg@kernel.org>
-Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io, Tom Rini <trini@konsulko.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Javier Tia <javier.tia@linaro.org>,
- Varadarajan Narayanan <quic_varada@quicinc.com>,
- Rasmus Villemoes <ravi@prevas.dk>,
- Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
- Javier Martinez Canillas <javierm@redhat.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>,
- =?UTF-8?Q?Jo=C3=A3o_Marcos_Costa?= <joaomarcos.costa@bootlin.com>,
- Tien Fong Chee <tien.fong.chee@altera.com>,
- Richard Genoud <richard.genoud@bootlin.com>,
- Jan Kiszka <jan.kiszka@siemens.com>, David Lechner <dlechner@baylibre.com>,
+Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io,
+ Lukasz Majewski <lukma@denx.de>, Tom Rini <trini@konsulko.com>,
  Casey Connolly <casey.connolly@linaro.org>,
- Simon Glass <simon.glass@canonical.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Christian Marangi <ansuelsmth@gmail.com>,
- Michael Walle <mwalle@kernel.org>,
- Sumit Garg <sumit.garg@oss.qualcomm.com>,
  Neil Armstrong <neil.armstrong@linaro.org>,
+ David Wronek <david.wronek@mainlining.org>,
+ Luca Weiss <luca.weiss@fairphone.com>,
+ Jorge Ramirez-Ortiz <jorge.ramirez@oss.qualcomm.com>,
+ Swathi Tamilselvan <swathi.tamilselvan@oss.qualcomm.com>,
  Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
- Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>,
- Simon Glass <sjg@chromium.org>, Mattijs Korpershoek
- <mkorpershoek@kernel.org>, Jerome Forissier <jerome.forissier@arm.com>
-References: <20260419-type-v3-0-ec49acd6870e@oss.qualcomm.com>
- <aeYsA_UOFIg0BZOx@sumit-xelite>
+ Bhupesh Sharma <bhupesh.linux@gmail.com>,
+ Neha Malcom Francis <n-francis@ti.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Julien Stephan <jstephan@baylibre.com>
+References: <20260319-ufs_probe_clk-v1-0-08c085d6b15d@oss.qualcomm.com>
+ <20260319-ufs_probe_clk-v1-5-08c085d6b15d@oss.qualcomm.com>
+ <acI0Flg4gUKmP2FQ@sumit-xelite>
 Content-Language: en-US
 From: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-In-Reply-To: <aeYsA_UOFIg0BZOx@sumit-xelite>
+In-Reply-To: <acI0Flg4gUKmP2FQ@sumit-xelite>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Proofpoint-GUID: TMFyRdoav8hxSOlb51ve1Ob4iBv1hfVN
-X-Authority-Analysis: v=2.4 cv=D7J37PRj c=1 sm=1 tr=0 ts=69ef93a7 cx=c_pps
- a=vVfyC5vLCtgYJKYeQD43oA==:117 a=mDd7tLh7uscPtaIqipyRMw==:17
+X-Authority-Analysis: v=2.4 cv=Zs3d7d7G c=1 sm=1 tr=0 ts=69ef94c8 cx=c_pps
+ a=rz3CxIlbcmazkYymdCej/Q==:117 a=mDd7tLh7uscPtaIqipyRMw==:17
  a=IkcTkHD0fZMA:10 a=A5OVakUREuEA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
- a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=j6C6XyAvxkBI0hqv__UA:9 a=QEXdDO2ut3YA:10
- a=rl5im9kqc5Lf4LNbBjHf:22
-X-Proofpoint-ORIG-GUID: TMFyRdoav8hxSOlb51ve1Ob4iBv1hfVN
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNDI3MDE3OCBTYWx0ZWRfX2v1eSNA3Qhhb
- hi9a71sIXt4MXZaLdL31TfvZOWqi8+bYIwz3PqlxqtV8oHo/izzOqelGYaPYqqQ2ggnKbrwqadX
- yS8KUQiaANiu+vdciKS3jpmGhQy8/1I/3Zb7YbwgJoqg5Wad52nP2vf4CrJoEuRLGqD+c2pAbUh
- uJlpnO6eanqObrACqX0cFEBUYKfECLSfID16FSt1sJDVyFOPZ7SLfxyyu8C7x5xhf/t1P0hmMVL
- L7RQzifeLUC6FhLoMGzUKleMwZMiYubVj5bvk3sj8UFWr+4KHdKMWFCBR/gn+KIvY5Z905nMoCy
- WYazVfw9KaaTItG3zciLPFkUgA0Oi5WumHerFqeiq2bEJMzlnz22vb2ehc/R9ELZ2QaaE5POPbb
- DEvN0DTCmBZdSGpq3H8kMj4Wkk52Hv+B1XqfHDytHMOl3VKLrtRkSNkK9JOwAe2hp5BEoc4NMJU
- Lr2LSRHVjQoovljrA3g==
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=4tWuYj6Pz0fy1KoJoJkA:9 a=QEXdDO2ut3YA:10
+ a=bFCP_H2QrGi7Okbo017w:22
+X-Proofpoint-ORIG-GUID: -vdyrMZDSzNffdsEFce2IzCfC_LG9nuO
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNDI3MDE3OSBTYWx0ZWRfX8wQeDTxfZLc6
+ QsDxmksAC84Kpa9tra2LLKlnOBJsBiYC58+knKoVaxFSNeGZ+vmKNIFO/nstLaRxZtXoZKeMi8Z
+ aJzCsfB4AsFMsrksyUbDeV0iJ99/Nmuo81B00qbmKa7qqCQd7qa7TRnaZTOYEwRwNpVrCZLLPWu
+ pR7PDWTdEAbVfXiWyvucqAuUSPiGy+ijUWwG1kdEbUOrMVblQ5KbCgPnbb8YAWECB2xFmK3CvHk
+ 5DXRxMbTcXjyD65jJYZ156lCpj3xuVmIc1gJC/ayV+ok5NuENDznXZ81RapyxF3uxagysgndRXp
+ gQIKRRTx+pIRC+TmoLBb83GXDVlzX5ICO3gl4e1jWlvDluUrjMHSUUpNrsuoZrMez1I8J1Lom+9
+ RwQA3Eui31fuE+buDYMpDuVEGEo3P9Wkskbwg1L0ecoQQC/v0+B9tCXbgVqJSzZFOxGkenA6JsX
+ eTxRqQm7Zi1w5tDjyJw==
+X-Proofpoint-GUID: -vdyrMZDSzNffdsEFce2IzCfC_LG9nuO
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
  definitions=2026-04-27_04,2026-04-21_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 bulkscore=0 phishscore=0 lowpriorityscore=0 spamscore=0
- priorityscore=1501 suspectscore=0 clxscore=1015 adultscore=0 malwarescore=0
+ priorityscore=1501 lowpriorityscore=0 phishscore=0 bulkscore=0 malwarescore=0
+ impostorscore=0 adultscore=0 suspectscore=0 spamscore=0 clxscore=1015
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2604200000 definitions=main-2604270178
+ reason=mlx scancount=1 engine=8.22.0-2604200000 definitions=main-2604270179
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -172,77 +163,136 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-On 4/20/2026 7:07 PM, Sumit Garg wrote:
-> On Sun, Apr 19, 2026 at 03:54:02PM +0530, Balaji Selvanathan wrote:
->> This series adds support for locating partitions using GPT partition
->> type GUID instead of unique partition UUID. This enables the saveenv
->> command to work with partitions identified by their type rather than
->> unique identifiers, providing flexibility for systems where partition
->> UUIDs may vary across devices but types remain constant.
-> Why don't we rather rely on partition name/label instead? That can be
-> common across platforms too. I would rather prefer a config fragment for
-> eg. UFS based environment or eMMC based environment and so on.
->
-> -Sumit
+On 3/24/2026 12:19 PM, Sumit Garg wrote:
+> On Thu, Mar 19, 2026 at 03:07:42PM +0530, Balaji Selvanathan wrote:
+>> Move UFS clock initialization and enabling before hardware setup
+>> to ensure clocks are running when accessing UFS registers.
+>>
+>> Previously, U-Boot depended on earlier bootloader stages to
+>> initialize UFS clocks. When these bootloaders failed to do so,
+>> UFS registers became inaccessible, causing initialization to fail.
+>> This change makes U-Boot initialize and enable UFS clocks early
+>> in the init sequence, removing the dependency on previous
+>> bootloaders.
+>>
+>> Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+>> ---
+>>   drivers/ufs/ufs-qcom.c | 45 +++++++++++++++++++++++++++++++++++++--------
+>>   1 file changed, 37 insertions(+), 8 deletions(-)
+>>
+>> diff --git a/drivers/ufs/ufs-qcom.c b/drivers/ufs/ufs-qcom.c
+>> index dc40ee62daf..c63e550c881 100644
+>> --- a/drivers/ufs/ufs-qcom.c
+>> +++ b/drivers/ufs/ufs-qcom.c
+>> @@ -30,6 +30,7 @@
+>>   #define UFS_CPU_MAX_BANDWIDTH	819200
+>>   
+>>   static void ufs_qcom_dev_ref_clk_ctrl(struct ufs_hba *hba, bool enable);
+>> +static u32 ufs_qcom_get_core_clk_unipro_max_freq(struct ufs_hba *hba);
+>>   
+>>   static int ufs_qcom_enable_clks(struct ufs_qcom_priv *priv)
+>>   {
+>> @@ -49,12 +50,34 @@ static int ufs_qcom_enable_clks(struct ufs_qcom_priv *priv)
+>>   
+>>   static int ufs_qcom_init_clks(struct ufs_qcom_priv *priv)
+>>   {
+>> -	int err;
+>>   	struct udevice *dev = priv->hba->dev;
+>> +	struct clk clk;
+>> +	int err;
+>> +	long rate;
+>> +	u32 max_freq;
+>> +
+>> +	/* Get maximum frequency for core_clk_unipro from device tree */
+>> +	max_freq = ufs_qcom_get_core_clk_unipro_max_freq(priv->hba);
+>> +
+>> +	/* Get and configure core_clk_unipro */
+>> +	err = clk_get_by_name(dev, "core_clk_unipro", &clk);
+>> +	if (err) {
+>> +		dev_err(dev, "Failed to get core_clk_unipro: %d\n", err);
+>> +		return err;
+>> +	}
+>> +
+>> +	rate = clk_set_rate(&clk, max_freq);
+>> +
+>> +	if (rate < 0) {
+>> +		dev_err(dev, "Failed to set core_clk_unipro rate to %u Hz: %ld\n",
+>> +			max_freq, rate);
+>> +	}
+>>   
+>>   	err = clk_get_bulk(dev, &priv->clks);
+>> -	if (err)
+>> +	if (err) {
+>> +		dev_err(dev, "clk_get_bulk failed: %d\n", err);
+>>   		return err;
+>> +	}
+>>   
+>>   	return 0;
+>>   }
+>> @@ -561,6 +584,18 @@ static int ufs_qcom_init(struct ufs_hba *hba)
+>>   
+>>   	priv->hba = hba;
+>>   
+>> +	err = ufs_qcom_init_clks(priv);
+> I would just drop this wrapper and directly invoke clk_get_bulk() here.
 
 Hi Sumit,
 
-Using type GUIDs as they offer following advantages: they are 
-standardized across vendors (e.g., ChromeOS kernel GUID, Linux 
-filesystem GUID) unlike arbitrary partition names that vary by OEM or 
-firmware version, they are immutable and set at partition creation, 
-making them more robust than easily-modified partition names.
+Implemented this in v2: 
+https://lore.kernel.org/u-boot/20260427-ufs_clk-v2-6-36e10a7c0ef6@oss.qualcomm.com/
 
-Regards,
+>
+>> +	if (err) {
+>> +		dev_err(hba->dev, "failed to initialize clocks, err:%d\n", err);
+>> +		return err;
+>> +	}
+>> +
+>> +	err = ufs_qcom_enable_clks(priv);
+> There is already a comment related to this API:
+>
+> /*
+>   * The PHY PLL output is the source of tx/rx lane symbol
+>   * clocks, hence, enable the lane clocks only after PHY
+>   * is initialized.
+>   */
+>
+> Shouldn't PHY be initialized before clocks being enabled?
+
+We can enable CBCRs of the tx/rx clks before we initiatize the PHYs. 
+Once the PHY is turned on, these clks are enabled automatically.
+
+The same process is followed in XBL/UEFI codes.
+
+>
+>> +	if (err) {
+>> +		dev_err(hba->dev, "failed to enable clocks, err:%d\n", err);
+>> +		return err;
+>> +	}
+>> +
+>>   	/* setup clocks */
+>>   	ufs_qcom_setup_clocks(hba, true, PRE_CHANGE);
+>>   
+>> @@ -579,12 +614,6 @@ static int ufs_qcom_init(struct ufs_hba *hba)
+>>   		 priv->hw_ver.minor,
+>>   		 priv->hw_ver.step);
+>>   
+>> -	err = ufs_qcom_init_clks(priv);
+>> -	if (err) {
+>> -		dev_err(hba->dev, "failed to initialize clocks, err:%d\n", err);
+>> -		return err;
+>> -	}
+>> -
+>>   	ufs_qcom_advertise_quirks(hba);
+>>   	ufs_qcom_setup_clocks(hba, true, POST_CHANGE);
+> While at it, I see this POST_CHANGE setup invoked twice. Can you check
+> as to why that is needed?
+
+Implemented this in v2: 
+https://lore.kernel.org/u-boot/20260427-ufs_clk-v2-7-36e10a7c0ef6@oss.qualcomm.com/
+
+Thanks,
 
 Balaji
 
 >
->> Patch 1 adds part_get_info_by_type_guid() function support
->> Patch 2 adds scsi_get_blk_by_type_guid() function support
->> Patch 3 adds support for partition type GUID based environment
->> Patch 4 enables partition type GUID configs for QCM6490 and QCS615
->> Patch 5 adds unit test for the partition type GUID lookup functionality
->>
->> Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
->> ---
->> Changes in v3:
->> - Addressed minor corrections in Patch 1 in part_get_info_by_type_guid function
->> - Refactor env_scsi_get_part and env_scsi_load functions based
->>    on the choice configs in Patch 3
->> - Add unit test for the partition type GUID lookup functionality in Patch 5
->> - Link to v2: https://lore.kernel.org/u-boot/20260109070912.4106466-1-balaji.selvanathan@oss.qualcomm.com/
->>
->> Changes in v2:
->> - Compute blk_find_max_devnum(UCLASS_SCSI) only once in scsi_get_blk_by_type_guid()
->> - Introduce a Kconfig choice config to select between UUID-based
->> and type GUID-based partition lookup methods.
->> - Enable above new config in qcom_qcs615_defconfig and qcm6490_defconfig
->> - Link to v1: https://lore.kernel.org/u-boot/20260108064947.3237361-1-balaji.selvanathan@oss.qualcomm.com/
->>
->> ---
->> Balaji Selvanathan (5):
->>        disk: Add partition lookup by type GUID functionality
->>        scsi: Add partition lookup by type GUID for SCSI devices
->>        env: scsi: Add support for partition type GUID based environment
->>        configs: Enable partition type GUID for QCM6490 and QCS615 boards
->>        test: dm: Add partition type GUID lookup test
->>
->>   configs/qcm6490_defconfig     |  5 +++++
->>   configs/qcom_qcs615_defconfig |  5 +++++
->>   disk/part.c                   | 37 +++++++++++++++++++++++++++++++
->>   drivers/scsi/scsi-uclass.c    | 28 ++++++++++++++++++++++--
->>   env/Kconfig                   | 51 ++++++++++++++++++++++++++++++++++++-------
->>   env/scsi.c                    | 45 +++++++++++++++++++++++---------------
->>   include/part.h                | 21 ++++++++++++++++++
->>   include/scsi.h                | 11 ++++++++++
->>   test/dm/part.c                | 48 ++++++++++++++++++++++++++++++++++++++++
->>   9 files changed, 223 insertions(+), 28 deletions(-)
->> ---
->> base-commit: e3405917a1806971d9e72a94186b299f05581e1a
->> change-id: 20260419-type-c6a48a1c273d
->>
->> Best regards,
->> -- 
->> Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
->>
+> -Sumit
