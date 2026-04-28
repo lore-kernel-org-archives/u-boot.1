@@ -4,93 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC9A3FF885A
-	for <u-boot@archiver.kernel.org>; Tue, 28 Apr 2026 18:08:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1792EFF885A
+	for <u-boot@archiver.kernel.org>; Tue, 28 Apr 2026 18:09:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 45FFA8467E;
-	Tue, 28 Apr 2026 20:08:36 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9D2608467E;
+	Tue, 28 Apr 2026 20:09:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="lgznVTK/";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="J360DbE/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 024B58467E; Tue, 28 Apr 2026 20:08:35 +0200 (CEST)
-Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
- [IPv6:2a00:1450:4864:20::635])
+ id 023A584669; Tue, 28 Apr 2026 20:09:19 +0200 (CEST)
+Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
+ [IPv6:2a00:1450:4864:20::535])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 46CC58467F
- for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 20:08:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CB95984693
+ for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 20:09:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x635.google.com with SMTP id
- a640c23a62f3a-b886fc047d5so2100066466b.3
- for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 11:08:32 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1777399712; cv=none;
+Received: by mail-ed1-x535.google.com with SMTP id
+ 4fb4d7f45d1cf-6764e36dc88so149950a12.1
+ for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 11:09:12 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1777399752; cv=none;
  d=google.com; s=arc-20240605;
- b=bLlCO58iVKctlPF+1a9GzqLm2LQI/HVSsqoAAqtS9TZ1DSr3CdeY4RPNAXBGikTbcI
- 071ofEpGMW7hKQrF3ooYxeLHpfh6KqCKB40Wjz3L3ENu6JBK+frIX8oK5W/2qjL9aXDp
- fw3Km635x6c1yEqahGRoe77drR7Ivg7PXd8sjb136lhsRJv0GjMcVxlGcEPUzU9zizhf
- Xa61ID/gK/CO6cJWpPg/FBf9ouNy+pcF9/qpy7vE/PC8yAV0NZwp9hCa+lFowv7zegZp
- 2VYSoPiZtnrAqL35TArHDnh/z1RLSpc9Z0NviR26qWtIyB1vBHxrJowP5GKRlgaEIgij
- NANw==
+ b=abHL6Zyusb9f4zNTrKFbxV2ccuXbe6JQoPxlkY5i8hHyZ3WPHit925SwWytLprpe49
+ AKt7CyD6db0XzpSivkuzjsZbwIZAdSqEnRkneOeVi/TIwlcvsdOaEa5z1XGtqryL6PML
+ N2LnOcSLm3LhXYgyEBXY98yRAunnW5tyw6ENZK6+6T0AsqFEuxfCYSk6ajaNcU3ImwnK
+ JIAiiek2TusN4UkMeclcye/3Pm6k0gMRBhK/bMRohCzRnjPTxbyw3BQA2aJM76IGgJSL
+ saCFb3VVkZySwOOwU4MpigrMvEG/WXwhLw//CMukboRZxM7xLkUB/Nrf+p948wA5BYny
+ EHQA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=+3vBP387zf1jia1OQ45saMcFfzzBrKHmgyCEDnXvPho=;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=KdJLbWJlY4gmdRZ/MXFVdLRZBibe6kC81WYF8dlWuAk=;
  fh=GYIekQEhESPWanXHuipF/cx0w9AeOdHDaa7vPtUoRvA=;
- b=NnsbjrOsO3GBAkQ3SYvwCMmGzMeU8g2hckPRqFHvBjvWFVxUI/zhzvB7GM+M+da8Ia
- t/Nh1guaK2E1UpUb2ltAkA7xr9PJWkS4uhv7p6SveyHpi7AoOHW6llqT27K9iyNowESL
- gxH/kzqsRuGyYQwaMqbOo4GbP7mBj7KGi1kft4sreT4/vAwGUqQbzPjlNKFODdNer6On
- cryW811BQU5JxdJb+j5bbZ4uhitaTc7lUpw1Ki8YBNandyp5EWIYbvQtfoDSTpv/Awl8
- 0kqjFFk2lot9Jj9VVQpVEgE/GltzAuBd319wXXc07TIo6eWA/TWzTXA/8CLsiaHXBjFH
- rTIQ==; darn=lists.denx.de
+ b=Ev04WfujL5wwe/TNXEn0H5GIAYpbRGMCkkqn+jP9JBVSuBsn3zGPFTE4VE+e4tl9pj
+ hD1zqfcHb/x5mxaf1uUEpPJ5EoPoNQV5iSmggn3HzlowBNT0TcRTwDlT/C13BXH36cf7
+ 92UPeAVPL+YQR3sSN7q7Hj0oD3wbBgOeO2NzJ/CkUURYa+aOkHgbvakBbFFbLb57FiVO
+ xGhExzLPJVEYtsMbsuo6L1NIvtzsyvBZBbI3cDguJSmGl0qYKJ1F8gCHY3VTRFlX9X0K
+ +z5YrDzN4mtobf1V82QCv19Hi1B+y37YfjkY9ODAHuZeuNmIISAN2r6niw5QfnH52Xlq
+ 3vWw==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1777399712; x=1778004512; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=+3vBP387zf1jia1OQ45saMcFfzzBrKHmgyCEDnXvPho=;
- b=lgznVTK/RsoMWPOtvn6ERTA3ZBAbh3+NTseoAbFcOJPTPSTqU6cpjUIIVGNWINaNBr
- 5A185M6f6MPFByeOuTqYKh0SvKtr6cZb3JnOOQnLlU12V4XOoVqBi9nWocAfP8DsNam2
- eg+XWZiYaADaJu4TgKFTYu62cl1NLepW+522U=
+ d=chromium.org; s=google; t=1777399752; x=1778004552; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=KdJLbWJlY4gmdRZ/MXFVdLRZBibe6kC81WYF8dlWuAk=;
+ b=J360DbE/vsecUWf6UUw4KvKOKNmu81bFkuO1A9kXVsLmI9kYNo4X35UKpA0AcQ2H/I
+ i3c2/XUAkmy7fls9lyX5jfWnm4bwUWVwW/Kw3wYsOlxGokmFJk5lUqLdJIY3toAf+39o
+ uKn0gWRqoEGnBRu3/d3yK4UhinlNrJMEQLLS4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777399712; x=1778004512;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=+3vBP387zf1jia1OQ45saMcFfzzBrKHmgyCEDnXvPho=;
- b=ULBOdXLPCHIBqXsIPNNz3InGuT39glIMq+O66Cgox4wjlmY0InkWuwJcw3IOfNSPcy
- p5HvbIqZ0dZgMPw3YcWqseiAQhxevRP6bx7rFJAQWXYXhOGzD3tHMe7uYCVQ9PY3NRQA
- DS+INrm0kiuVb3cuHrwSkbAMBxH3hxN/bwfu8DPWgxX+waZkAvsU8meBY4wKptyMILuo
- YcXQF8VRi2WXigIVSPO2w2rF2Omf2iMQxStmRv6WeDN9hplEXLdpaY+jrDVvaIY/azs3
- aJsAbyJvdKy4alGMUtZAPlR60JeuBU344WWT9dEkqH0bFwaqyGCD2xqHjyoN5l5j9Rce
- Yxyg==
-X-Gm-Message-State: AOJu0YyBP9kZPFYYRTombbRincaBUvwxJm9lX3HEQa4ek1pc2RaVHsz1
- GxxjB58t+9Dj44xMwFA7KPH3sFaxS6VmJJc2H85bdzYWZCpq5NYPqYbu59M2ChKtD77atl8KQt7
- 0dD81sTnqxfQY3qHxsGd3OYaNE3uaBbTG8eCBkK3v2y2QKs/EotQ=
-X-Gm-Gg: AeBDiesRU495Vpb2PA4ZZbPNLisaMYcEHUQ5NCcFbWVHu2u8+Jp1CMOoVzLQtjhpcEj
- FqKI8Ypi2JrtmIzaYeIBCyO3ivJzG29PxnonDa439mAN1pgCfjcP8WedFyulLVoVu6YzlzGTfQr
- nIf5JmdCIJNEExXC0iGLpAOW99Q7i8OPUt1MqA1WqBIQYYPWMuUPfzJxijJJdNLJfZ9MGiL4Xws
- Ln4AgIizocbWfH9RHcuuqh9WyG+DvKcloYfXiMdHlRIc1vFRS/uwNiYYNaH9oFDD8jQhkLeH9a6
- 0Pr+kswkksJA7a/7
-X-Received: by 2002:a17:906:ef05:b0:bad:8491:85f3 with SMTP id
- a640c23a62f3a-bb804c32754mr247504066b.34.1777399711656; Tue, 28 Apr 2026
- 11:08:31 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1777399752; x=1778004552;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=KdJLbWJlY4gmdRZ/MXFVdLRZBibe6kC81WYF8dlWuAk=;
+ b=pdSL+fzXJJ1J451nkKl1HX46fammgBIOMlnkXzc0R7pT6Md5dfRU2YrfdJx2lpYco8
+ u7Ui0s2VaQklvHXZp2WQfrpR+VexxkCS7gL1kE6MgxxVGIzrSyTdEyqRfR9bret5qNz2
+ RJi4n3ehpq5ZNd1Wo0+cNdUe3w2c7rJfPx66L/FWXzjh3yvQYg9ZtDPFPVPmIOryMFk2
+ H5LqIX4otg4L9KGBt7ZUuGQHzNWNlWNOdOguJhiaYkmnD9uP1wfcAWedSfUua+1+zUTK
+ 4MbdBu8E9fibqcDlSwPjPQyn6L7CxCUFvTq1dxBl7aQtT3odMcXgqY5y5amMv9ljY72N
+ AdOQ==
+X-Gm-Message-State: AOJu0Yz5i1i7BuQ3uQxQeEsPNV7lw9wjY08sutWGrgo4tXfroFkMPLkZ
+ oo7rtyUy24WGM4dtrrcKUE/LrE77NqH68YVeFfdO674c27ALS9ICUpSmeus2D17oVjHbTaOi8JO
+ IHDD6pwklA+czmu/HEvIUNE/vurnKlEtZnf54ooQdsAjVCLhNpnU=
+X-Gm-Gg: AeBDieuM9z3OoUh8xQKoziz+b73ngqhFJMvDHMq49VNurqfp6bOKvm6qqS4yoonki2S
+ jb+5o/zT+6hgbkWcn4dsmcE7uy690ULArM/DHWYuWq29droxFJ3hsqtpfr2c8tRNwN5TuYa7B7U
+ EDTh5onzdYzWsyXQmzmRwvwQGLXv3mJod/BpdB5CZMy8isQHOawHWVto0njEGQ7oVOHos4O5RX4
+ YEkSH7UVR8F0RZdknFIq5S2QHxrsbGHAR3rAz3kI40NqLlU6uuT/2xYKt7xc2A8jBtQWIveqRlp
+ NQ5GlkmHBjuFLV61
+X-Received: by 2002:a17:906:9fc4:b0:b9d:14e9:d06d with SMTP id
+ a640c23a62f3a-bb951349e86mr4596166b.8.1777399751847; Tue, 28 Apr 2026
+ 11:09:11 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260424173151.371134-1-harsimransingh.tungal@arm.com>
- <20260424173151.371134-11-harsimransingh.tungal@arm.com>
-In-Reply-To: <20260424173151.371134-11-harsimransingh.tungal@arm.com>
+ <20260424173151.371134-2-harsimransingh.tungal@arm.com>
+In-Reply-To: <20260424173151.371134-2-harsimransingh.tungal@arm.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 28 Apr 2026 12:08:18 -0600
-X-Gm-Features: AVHnY4ILs_FLW6y5A_Mt3MSjr1uXEFSjTscpZqOta7n4PgkYey8gA8DNq-jOqNc
-Message-ID: <CAFLszTjvRPPY4Cb3X7CmKDwZNke6=mZGnFJ-H0+j1Ex5pXVCyw@mail.gmail.com>
-Subject: Re: [PATCH 10/12] doc: arm64: document FF-A runtime path for EFI
- variables
+Date: Tue, 28 Apr 2026 12:08:59 -0600
+X-Gm-Features: AVHnY4JxFXL0nPgFa_313x58T9nX2YX3cMAwxQMcLSpTYJXbnJaFHtuAElYp6wI
+Message-ID: <CAFLszTgfKTVFxj6Z93dbecjHeY=oAGoGtUmBhYiC8EtrOzVsdg@mail.gmail.com>
+Subject: Re: [PATCH 01/12] efi_loader: add runtime memset helper
 To: harsimransingh.tungal@arm.com
 Cc: u-boot@lists.denx.de, Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>, 
  Tom Rini <trini@konsulko.com>,
@@ -99,7 +97,6 @@ Cc: u-boot@lists.denx.de, Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
  Hugues Kamba Mpiana <hugues.kambampiana@arm.com>, 
  Simon Glass <sjg@chromium.org>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -120,87 +117,70 @@ Hi Harsimran,
 
 On 2026-04-24T17:31:50, Harsimran Singh Tungal
 <harsimransingh.tungal@arm.com> wrote:
-> doc: arm64: document FF-A runtime path for EFI variables
+> efi_loader: add runtime memset helper
 >
-> Document how EFI runtime variables use FF-A MM communication
+> Add efi_memset_runtime() for EFI runtime paths
 >
-> Describe the FF-A runtime layer on arm64 and how EFI variable
-> runtime services use the FF-A transport and shared MM buffer.
-> Also clarify armffa command scope and link to the FF-A doc.
+> This keeps buffer initialization in runtime-resident code after
+> ExitBootServices() and avoids relying on non-runtime helpers.
 >
 > Signed-off-by: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
 >
-> doc/arch/arm64.ffa.rst   | 92 +++++++++++++++++++++++++++++++++++++++++++=
-+----
->  doc/usage/cmd/armffa.rst | 11 ++++++
->  2 files changed, 96 insertions(+), 7 deletions(-)
+> include/efi_loader.h         |  3 +++
+>  lib/efi_loader/efi_runtime.c | 21 +++++++++++++++++++++
+>  2 files changed, 24 insertions(+)
 
-> diff --git a/doc/arch/arm64.ffa.rst b/doc/arch/arm64.ffa.rst
-> @@ -15,10 +15,10 @@ application in S-EL0, or a Trusted OS in S-EL1.
-> +U-Boot's FF-A bus support exposes an optional transport that EFI runtime
-> +services can use to communicate with Secure Partitions. Through this
-> +interface, EFI services (such as variable access) can request or exchang=
-e
-> +data with the Secure World using FF-A.
-
-The rest of this file uses lower-case 'Secure world' (see lines 12 and
-16). Please keep the capitalisation consistent throughout the new
-prose =E2=80=94 also at the 'Secure World' in the runtime section below.
-
-> diff --git a/doc/arch/arm64.ffa.rst b/doc/arch/arm64.ffa.rst
-> @@ -158,6 +164,77 @@ they want to use (32-bit vs 64-bit). Selecting the p=
-rotocol means using
-> +- The communication buffer is located at CONFIG_FFA_SHARED_MM_BUF_ADDR a=
-nd
-> +  sized by CONFIG_FFA_SHARED_MM_BUF_SIZE.
-> +- CONFIG_FFA_SHARED_MM_BUF_OFFSET is sent in the FF-A direct message pay=
-load
-> +  to indicate where the data begins.
-> +- The buffer is filled by memcpy(), the cache is flushed before notifyin=
-g the
-> +  MM SP, and later the buffer is reused directly with only the shared-bu=
-ffer
-> +  range invalidated (invalidate_dcache_range()) to avoid whole-cache
-> +  invalidation.
-
-This level of cache-maintenance detail is an implementation note and
-will go stale the moment the code is touched (and patch 12 is already
-touching it in this very series). I'd drop the third bullet and let
-the source comments have that, or move it under a clearly marked
-'Implementation notes' sub-heading so readers know it is informative
-rather than contractual.
-
-> diff --git a/doc/arch/arm64.ffa.rst b/doc/arch/arm64.ffa.rst
-> @@ -158,6 +164,77 @@ they want to use (32-bit vs 64-bit). Selecting the p=
-rotocol means using
-> +- get_comm_buf() switches to the static shared buffer
-> +- mm_communicate_runtime() selects FF-A transport when the runtime conte=
-xt
-> +  is enabled
-> +- ffa_mm_communicate_runtime() issues FFA_MSG_SEND_DIRECT_{REQ,RESP} thr=
-ough
-> +  ffa_sync_send_receive_runtime()
-
-Naming specific static helpers in a public document ties the doc to
-current internal names. If one is renamed or refactored later, the doc
-silently lies. Please describe the flow at one level higher (e.g. 'the
-runtime path uses a static shared buffer and dispatches direct FF-A
-messages') and leave the function names to the source.
-
+> diff --git a/include/efi_loader.h b/include/efi_loader.h
+> @@ -1151,6 +1151,9 @@ void efi_memcpy_runtime(void *dest, const void *src, size_t n);
+>  /* runtime implementation of memcmp() */
+>  int efi_memcmp_runtime(const void *s1, const void *s2, size_t n);
 >
->     doc: arm64: document FF-A runtime path for EFI variables
->
->     Document how EFI runtime variables use FF-A MM communication
->
->     Describe the FF-A runtime layer on arm64 and how EFI variable
->     runtime services use the FF-A transport and shared MM buffer.
->     Also clarify armffa command scope and link to the FF-A doc.
+> +/* runtime implementation of memset */
+> +__efi_runtime void *efi_memset_runtime(void *dest, int c, size_t n);
+> +
 
-The single-line paragraph just restates the subject and the next
-paragraph. U-Boot convention is to open with the motivation/problem -
-please replace this with a sentence explaining why the doc was
-previously incomplete (the previous text said runtime support was a
-future development) and what readers gain from the new sections.
+Two inconsistencies with the neighbouring declarations: the comment
+should say memset() to match memcpy() / memcmp() above, and the
+section attribute does not belong in the prototype, as
+efi_memcpy_runtime() and efi_memcmp_runtime() carry __efi_runtime only
+on the definition. Please drop it from the header.
+
+> diff --git a/lib/efi_loader/efi_runtime.c b/lib/efi_loader/efi_runtime.c
+> @@ -233,6 +233,27 @@ int __efi_runtime efi_memcmp_runtime(const void *s1, const void *s2, size_t n)
+> +/**
+> + * efi_memset_runtime() - fill a memory region with a byte value
+> + *
+> + * At runtime memset() is not available.
+> + *
+> + * @dest:   pointer to the block of memory to fill.
+> + * @c:      value to be set. The value is passed as an int, but the
+> + *          function fills the block of memory using the u8 conversion of this value.
+> + * @n:      number of bytes to be set to the value.
+> + * Return:  dest is returned
+> + */
+> +__efi_runtime void *efi_memset_runtime(void *dest, int c, size_t n)
+
+Please match the kernel-doc style of the two helpers above: tabs after
+the ':' in the parameter list, no trailing periods, one-line @c
+description. The @c line is also over 80 columns. Flip the attribute
+to 'void * __efi_runtime efi_memset_runtime(...)' to match
+efi_memcpy_runtime() / efi_memcmp_runtime() in this same file.
+
+> diff --git a/lib/efi_loader/efi_runtime.c b/lib/efi_loader/efi_runtime.c
+> @@ -233,6 +233,27 @@ int __efi_runtime efi_memcmp_runtime(const void *s1, const void *s2, size_t n)
+> +__efi_runtime void *efi_memset_runtime(void *dest, int c, size_t n)
+> +{
+> +     u8 *d = dest;
+> +
+> +     for (; n; --n)
+> +             *d++ = c;
+> +
+> +     return dest;
+> +}
+
+Just to check, was there a reason not to mask 'c' to a byte (i.e.
+'*d++ = (u8)c') as the doc comment promises? An explicit cast matches
+the comment and silences future -Wconversion noise.
 
 Regards,
 Simon
