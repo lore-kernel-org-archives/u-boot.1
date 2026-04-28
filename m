@@ -4,54 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FADDFF8868
-	for <u-boot@archiver.kernel.org>; Tue, 28 Apr 2026 09:55:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D307FF8868
+	for <u-boot@archiver.kernel.org>; Tue, 28 Apr 2026 09:59:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8A01184659;
-	Tue, 28 Apr 2026 11:55:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
+	by phobos.denx.de (Postfix) with ESMTP id C77B484668;
+	Tue, 28 Apr 2026 11:59:10 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="N7G64aAG";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 68FED84669; Tue, 28 Apr 2026 11:55:26 +0200 (CEST)
-Received: from mx.nabladev.com (mx.nabladev.com [178.251.229.89])
+ id BE5F18466F; Tue, 28 Apr 2026 11:59:09 +0200 (CEST)
+Received: from mail.3ffe.de (0001.3ffe.de [159.69.201.130])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5A09E84658
- for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 11:55:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=nabladev.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@nabladev.com
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id CBF9B112D53; Tue, 28 Apr 2026 11:55:22 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
- s=dkim; t=1777370123;
- h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:content-language:in-reply-to:references;
- bh=4ISnnAaEg4+nyke7Eh7a9f981z0OR4h1wU/DmWR5JIw=;
- b=N7G64aAG+XXFpbNvr/g7lHzuvEN7+P3QRkPoVbmxYNqBL9E7ItOVem9dTsUJSXiH3+vbD0
- aI2zFLddMc0Nxhh7wvDmsasrPaQZ6LSJ6muO9beYuamam1MgrXUQGoLrkIwkZROzfBUDSI
- z+TZGxPCmHpyW3Kudc1621dL/ftln538bKoPogz8pd+ejrvIrDBLxQS1jDxqmogGpn8su2
- Xw0xbmkm30vEnLRiiVLEXZ7mgoDdOGKASJr5wTNaEFh2jNFFRVU9pVU0l6ucsOAQvU5x3Q
- 1VSQmiZwzm9JHTo9p/vQJ4wuMcbibLv21snfwse6MIPQV9waM88olgrZIr61wA==
-Message-ID: <41960ee3-8645-4d79-0a01-e9642b674a6b@nabladev.com>
-Date: Tue, 28 Apr 2026 11:55:08 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.2.0
-Subject: Re: [PATCH] i2c: imx_lpi2c: Fix MSR status check issue in STOP
-Content-Language: en-US
-To: Ye Li <ye.li@nxp.com>, festevam@gmail.com, u-boot@lists.denx.de,
- peng.fan@nxp.com
-Cc: uboot-imx@nxp.com
-References: <20260428085312.1808358-1-ye.li@nxp.com>
-From: Heiko Schocher <hs@nabladev.com>
-In-Reply-To: <20260428085312.1808358-1-ye.li@nxp.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Last-TLS-Session-Version: TLSv1.3
+ by phobos.denx.de (Postfix) with ESMTPS id 5D23284658
+ for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 11:59:04 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
+ header.from=kernel.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=michael@walle.cc
+Received: from localhost (unknown [IPv6:2a02:810b:4320:1000:4685:ff:fe12:5967])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mail.3ffe.de (Postfix) with ESMTPSA id CB9C727F;
+ Tue, 28 Apr 2026 11:59:03 +0200 (CEST)
+Mime-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Date: Tue, 28 Apr 2026 11:59:03 +0200
+Message-Id: <DI4P7BNPXKYW.37JP7FIR13OW2@kernel.org>
+Cc: "trini@konsulko.com" <trini@konsulko.com>, "chuanhua.han@nxp.com"
+ <chuanhua.han@nxp.com>
+From: "Michael Walle" <mwalle@kernel.org>
+To: "Tomas Alvarez Vanoli" <tomas.alvarez-vanoli@hitachienergy.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Subject: Re: [PATCH 0/1] spi: fsl_espi: fix din offset
+X-Mailer: aerc 0.20.0
+References: <20260324170212.481394-1-tomas.alvarez-vanoli@hitachienergy.com>
+ <DI3XUWVXNGP3.2TI0N0LDP7ZJ4@kernel.org>
+ <DB9PR06MB7849FF9D7AFDD1CD3C3304B7C2362@DB9PR06MB7849.eurprd06.prod.outlook.com>
+In-Reply-To: <DB9PR06MB7849FF9D7AFDD1CD3C3304B7C2362@DB9PR06MB7849.eurprd06.prod.outlook.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -68,64 +59,193 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Ye Li,
+Hi,
 
-On 28.04.26 10:53, Ye Li wrote:
-> In bus_i2c_stop, the MSR SDF is checked in a loop after stop command
-> is sent. Meanwhile, some error status in MSR is also checked by
-> imx_lpci2c_check_clear_error. But the imx_lpci2c_check_clear_error
-> will clear the MSR.
-> 
-> It causes problem in below situation:
-> In current loop, SDF does not set, but error status is found by
-> imx_lpci2c_check_clear_error (for example, NDF), then NDF will be cleared
-> and result has NDF error. However, because SDF does not set in this loop,
-> it goes not next loop. When SDF is set in next loop,
-> imx_lpci2c_check_clear_error is re-executed, but as the MSR is cleared,
-> the result is 0. Then the stop return 0. But it should return NDF error.
-> 
-> Signed-off-by: Ye Li <ye.li@nxp.com>
-> ---
->   drivers/i2c/imx_lpi2c.c | 4 +++-
->   1 file changed, 3 insertions(+), 1 deletion(-)
-> 
-> diff --git a/drivers/i2c/imx_lpi2c.c b/drivers/i2c/imx_lpi2c.c
-> index a309fd6f07c..e2b4fd334ec 100644
-> --- a/drivers/i2c/imx_lpi2c.c
-> +++ b/drivers/i2c/imx_lpi2c.c
-> @@ -239,7 +239,6 @@ static int bus_i2c_stop(struct udevice *bus)
->   	start_time = get_timer(0);
->   	while (1) {
->   		status = readl(&regs->msr);
-> -		result = imx_lpci2c_check_clear_error(regs);
+On Mon Apr 27, 2026 at 5:00 PM CEST, Tomas Alvarez Vanoli wrote:
+>>What kind of issues do you see? And how does your patch resolves
+>>this? I guess we can assume the code was working correctly once.
+>
+> The problem was that when calling spi_xfer like so:
+>
+> `spi_xfer(spi_slv, bitlen, &dout, &din, SPI_XFER_ONCE);`
+>
+> To read a read only part of chip with known values, I was getting garbage=
+.
+>
+> Digging deeper into the driver and adding print statements I was able to
+> determine that:
+>
+> - fsl_espi_rx was getting the expected data and putting it in the correct
+> address (local din)
+>
+> - The memcpy later in the code was taking data from a different address
+> (buffer + 2 * cmd_len) and putting it in the user pointer (the &din from =
+my
+> call)
+>
+>>Honestly, I don't understand that code either. ...
+>
+> The switch at the start of the function determines the buffer and offset =
+setup.
+> To be fair I only focused on my issue, SPI_XFER_ONCE which is the same as
+> SPI_XFER_BEGIN | SPI_XFER_END, and in a small transaction.
+>
+> Inside the ONCE case, the driver allocates a buffer of double the transac=
+tion,
+> because it puts the tx data in the first half, and then will write the rx=
+ data
+> in the second half.
 
-Wouldn;t it be better to evaluate bits in result too, and return
-if error bits found?
+I mean:
 
->   		/* stop detect flag */
->   		if (status & LPI2C_MSR_SDF_MASK) {
->   			/* clear stop flag */
-> @@ -250,10 +249,13 @@ static int bus_i2c_stop(struct udevice *bus)
->   
->   		if (get_timer(start_time) > LPI2C_NACK_TOUT_MS) {
->   			debug("stop timeout\n");
-> +			result = imx_lpci2c_check_clear_error(regs);
->   			return -ETIMEDOUT;
->   		}
->   	}
->   
-> +	result = imx_lpci2c_check_clear_error(regs);
-> +
->   	return result;
->   }
->   
-> 
+Why is there an split between cmd and data (cmd_buf, cmd_len etc.)
+although there is not such distinction in the SPI context. Why is
+the first xfer (i.e. only SPI_XFER_BEGIN is set), delayed? What is
+that mysterious "(*buffer =3D=3D 0x0b)".
+Why is the max transfer length 0xfff0. Presumably, because there is
+an assumption that the "command" is <=3D 16 bytes. Then that matches
+the 16bit length field in the ESPI peripheral ("TRANLEN"). Although
+there is no check that the "command" is really less than 16 bytes..
 
-bye,
-Heiko
--- 
-Nabla Software Engineering
-HRB 40522 Augsburg
-Phone: +49 821 45592596
-E-Mail: office@nabladev.com
-Geschäftsführer : Stefano Babic
+> The case of only "SPI_XFER_END" is a bit more "cryptic" to put it nicely,=
+ and I
+> did not properly debug it if I am being honest.
+
+Yeah but that's the crux here, isn't it? Esp. because there the
+buffer length isn't multiplied by two. Only the "cmd_len" is. Hmm.
+Also, either data_in or data_out is handled. Ok. I *guess* that
+driver supports only half duplex operations, that is probably also
+the reason of that command/data split. Command is always output,
+after that, there is either data in *or* data out. Doh. In your
+case, i.e. SPI_XFER_ONCE, it's actually a full duplex operation, or
+at least it can be, if data_in !=3D NULL and data_out !=3D NULL.
+
+Funny enough, SPI_XFER_ONCE with data_out =3D=3D NULL is not handled.
+Maybe that can't happen in u-boot. Dunno.
+
+Also, the CS handling is probably wrong, as it will change on every
+transfer, though that is what SPI_XFER_{BEGIN,END} is for.
+
+> However, for my case of the ONCE transfer, if you look at the start of th=
+e while
+> loop:
+>
+> ```
+> 	while (num_chunks--) {
+> 		if (data_in)
+> 			din =3D buffer + rx_offset;
+> ```
+>
+> This means that if the user passed a pointer to get the read data back, t=
+hen
+> we set a local "din" to the buffer we allocated at the start plus rx_offs=
+et.
+> In the "ONCE" case, this is the second half of the buffer. In the END cas=
+e, this
+> "cmd_len".
+>
+> This din pointer is what is passed to "fsl_espi_rx", where I had corrobor=
+ated
+> that the chip data read was the expected.
+>
+> When we get to later in the while loop, there's this:
+>
+> ```
+> 		if (data_in) {
+> 			memcpy(data_in, buffer + 2 * cmd_len, tran_len);
+> 			if (*buffer =3D=3D 0x0b) {
+> 				data_in +=3D tran_len;
+> 				data_len -=3D tran_len;
+> 				*(int *)buffer +=3D tran_len;
+> 			}
+> 		}
+> ```
+>
+> where I made my change, in the memcpy source pointer. This is the code in=
+ charge
+> of copying the data back to the caller/user.
+
+Yeah but why was there the "2 * cmd_len" in the first place. I mean
+you've probably fixed the ONCE case, but broke the usual case (as
+MTD/spi-mem is using it). rx_offset "1*cmd_len" and the actual
+data is at 2*cmd_len because the second cmd spot is where the data
+is received that you'll get when sending the "cmd".
+
+Also, isn't the tx path sending garbage in the non-ONCE case, when
+reading data? It seems it will send the data it was receiving
+beforehand because dout is always pointing to the allocated buffer.
+Thus after cmd_len, it will send the data fsl_espi_rx() was
+receiving before.
+
+> As you can see, for the ONCE case, cmd_len is 0, so it is taking the data=
+ at the
+> start of buffer (my tx data, not the rx data). Hopefully the bug I was
+> experiencing is clearer with this explanation.
+>
+> As I mentally traced this code I realized of a better fix, hopefully you =
+can
+> review this and/or test in on your board too.
+>
+> Given that for the ONCE transfer cmd_len is 0, what could be changed is a=
+lso:
+>
+> diff --git a/drivers/spi/fsl_espi.c b/drivers/spi/fsl_espi.c
+> index b1586d12912..ef2ebd5840b 100644
+> --- a/drivers/spi/fsl_espi.c
+> +++ b/drivers/spi/fsl_espi.c
+> @@ -287,13 +287,13 @@ int spi_xfer(struct spi_slave *slave, unsigned int =
+bitlen, const void *data_out,
+>                 break;
+>         case SPI_XFER_BEGIN | SPI_XFER_END:
+>                 len =3D data_len;
+> -               buffer =3D (unsigned char *)malloc(len * 2);
+> +               buffer =3D (unsigned char *)malloc(len);
+>                 if (!buffer) {
+>                         debug("SF: Failed to malloc memory.\n");
+>                         return 1;
+>                 }
+>                 memcpy(buffer, data_out, len);
+> -               rx_offset =3D len;
+> +               rx_offset =3D 0;
+>                 cmd_len =3D 0;
+>                 break;
+>         }
+>
+> This theoretically should work and should also not affect the "END" case.
+>
+> The two things that support this are that:
+>
+> - The loop always writes out first, so the rx data can safely overwrite t=
+he tx
+> - cmd_len is set to 0 for the ONCE case, so data_in memcpy would take the=
+ rx
+> data from the right rx_offset (0)
+
+Yeah, I get to the same conclusion. Another possible solution would
+be to check for cmd_len =3D=3D 0 and use rx_offset, otherwise cmd_len *
+2.
+
+Will you prepare a patch or should I include one in my larger "fix
+NXP PPC boards" series I'm about to send today or tomorrow?
+
+> Hopefully this explanation and my proposed alternative fix are helpful, I=
+'m glad
+> someone else was able to test this, I had cc'ed someone from nxp hoping t=
+hey
+> could shine some light on the code but their email does not exist anymore=
+.
+>
+> It would be good to know what flags the flash probe is passing to the dri=
+ver,
+> to know if the problem actualyl arises from the switch statement at the s=
+tart
+> or handling multiple chunks/blks. I can say for certain that for a single
+> chunk and signle block, the ONCE transfer was not working correctly for m=
+e.
+
+I don't have the board at hand right now. But I'm pretty sure, it's
+split between SPI_XFER_BEGIN and SPI_XFER_END, see
+https://elixir.bootlin.com/u-boot/v2026.04/source/drivers/spi/spi-mem.c#L41=
+8
+
+-michael
