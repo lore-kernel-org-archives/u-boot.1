@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 432B8FF886D
-	for <u-boot@archiver.kernel.org>; Tue, 28 Apr 2026 20:25:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD569FF885A
+	for <u-boot@archiver.kernel.org>; Tue, 28 Apr 2026 20:26:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6222B846AC;
+	by phobos.denx.de (Postfix) with ESMTP id 9AFA1846B2;
 	Tue, 28 Apr 2026 22:25:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=valla.it
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=antispam.mailspamprotection.com header.i=@antispam.mailspamprotection.com header.b="Pqz6/Gep";
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=valla.it header.i=@valla.it header.b="mf5yOlpd";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=antispam.mailspamprotection.com header.i=@antispam.mailspamprotection.com header.b="sYuM6PZC";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=valla.it header.i=@valla.it header.b="h0AEL8bm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A5B488467A; Tue, 28 Apr 2026 22:25:27 +0200 (CEST)
+ id 49D9D8467A; Tue, 28 Apr 2026 22:25:28 +0200 (CEST)
 Received: from delivery.antispam.mailspamprotection.com
- (delivery.antispam.mailspamprotection.com [185.56.87.1])
+ (delivery.antispam.mailspamprotection.com [185.56.87.3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D79C884687
- for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 22:25:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B4B7A84699
+ for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 22:25:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=valla.it
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=francesco@valla.it
 ARC-Seal: i=1; cv=none; a=rsa-sha256;
- d=outgoing.instance-europe-west4-fh50.prod.antispam.mailspamprotection.com;
- s=arckey; t=1777407924; 
- b=W1rIjnKTODt+byIfkw6vIvF9E6g72ucPpZZ39yzmXrqrl5eYVE4Zm2r+tr/WXYomzgGaVYk/7m
- LXPin/GfebGdwP8neKsCqMRDIguNEYLXnuEh1H05vZ8mOn04NXmmn/lJWMVWySGUJFW/w+x58u
- pu3YWfsSMhL64gHkADxee0PB9C90NH56hc5Xq5ngictYmWP9atvFieixWtIT9SCKYxZxznd1Dk
- X9bePp8YrORX0xp2yrMtUpnUx5U7VMRXbL2lSlhsPemCxQl8Jre1POp1EO3BEDUOk7Qo+18lso
- kiLzUlaCMTAVcvjo6w43PfRAwauwr0pcRb5HpWW6Rdta/w==;
+ d=outgoing.instance-europe-west4-czb4.prod.antispam.mailspamprotection.com;
+ s=arckey; t=1777407925; 
+ b=NMuRmD/wpPCgnsxyHk2Rku19OEJJ6bmqVsFBGnzHMVn8g+j1omhMLXRWyF4GUn8F8UQSe4NEKK
+ BtlEpkrv4XCadc96FAHNL1dAohPJc5J18HnjoCmKYFA6nLfuf8fvVqcjL0xMuKaKMmlWPMX2Fg
+ 3wpq5HaZUfFMxG/hCg195eYUY3wD/hQwa0dDxZkNpDYz88munqQQCqLG2Z5ZkI70yUV96H8Eqn
+ fwc7XroIvxWSVhELTnFvM3IVIzP4ftVt3BrMUCugwrtOT6DlU08Wpwg47KoFDZZY2Tx+SkYVjv
+ 7pCCJKRGILf8+dmMUzS04gl1xDahLK4BkUieKtUvLwUc2w==;
 ARC-Authentication-Results: i=1;
- outgoing.instance-europe-west4-fh50.prod.antispam.mailspamprotection.com;
+ outgoing.instance-europe-west4-czb4.prod.antispam.mailspamprotection.com;
  smtp.remote-ip=35.214.173.214; 
  iprev=pass (214.173.214.35.bc.googleusercontent.com)
  smtp.remote-ip=35.214.173.214; 
@@ -44,46 +44,47 @@ ARC-Authentication-Results: i=1;
  dkim=pass header.d=valla.it header.s=default header.a=rsa-sha256;
  arc=none
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed;
- d=outgoing.instance-europe-west4-fh50.prod.antispam.mailspamprotection.com;
- s=arckey; t=1777407924; 
- bh=kLiTZHQPHoHZHRSuQ+rBFfNN4bcx52MMED4PjMnx64k=;
+ d=outgoing.instance-europe-west4-czb4.prod.antispam.mailspamprotection.com;
+ s=arckey; t=1777407925; 
+ bh=Vtkw1d13pgCGzFx5/iuZVSpPpLbmnOa0KmKp9dj2oUA=;
  h=Cc:To:In-Reply-To:References:Message-ID:Content-Transfer-Encoding:
  Content-Type:MIME-Version:Subject:Date:From:DKIM-Signature:DKIM-Signature;
- b=D5c0NlEY2EVnVwyR/mGP7YhGbtfpA0bXkptXeeGyzAkPsmUGIpV4MQmSBZz1HyEV8brz0/e81b
- H005j9tDhsQj/6LHkGsh3wpzuzZgrZvlWqLnB4c593WP2ZxeGDJ/XXfSVh2hhHG3/5bkJSRPua
- 87OvnPr4lR7LQOTYiT5eKerqS5Z4u3XLDRCq1i+UxUJEghqeYpmuJ7aDuHnzwKm3fTRgt7eOXd
- a2IuwmP5Dpz0bGqw4umIHCiV16PxLaVIb8MDLBY08MI8Nj3d7wIHDZkGXyXsNTzjv2EXfxeICk
- 9aoqyEfKdkWL/G18G7Zezw6XylhLPrGPSlgijeQd/cSHAg==;
+ b=tHizEMN1lhQdhNpZ9w+WAl1nugBGDTb07rQo+WFdSLc6g5eG85UGhWWFfRacb8RIdhhrVO/EHh
+ QGWIIurFMF87znruAq9sLi/hS9TSd8d1WYwje3qOSYryfRcUW64DlpFkWN2NnsYaOHU/Au9Sxs
+ jiGYPtkH26yfMFdu0pg6gv+PhM9HK7H36dJu+N4383LujgvwBLYI2nWb0niJErfFV6iZyhVOdy
+ CsKLLKraXlJ1dDT21n8dA+rMQcXNYnHHHvcBIt+PezmykGfyy/G1xkyAqogdo+1fbK7EDLZ/gJ
+ zpUVUihhvd5ofOlTWYOXAxof8GZQrpF50YGRDv5X1j6tZA==;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=antispam.mailspamprotection.com; s=default; h=CFBL-Feedback-ID:CFBL-Address
  :Cc:To:Message-Id:Content-Transfer-Encoding:Content-Type:MIME-Version:Subject
  :Date:From:Reply-To:List-Unsubscribe;
- bh=U3jdgXV8LVJawgNt2EHe6KBeotwTlzyQe9xFp8Plj8k=; b=Pqz6/GepTJlg6iMv/87SPpZaXh
- wbh8iek3Vxx8AFvRODYVZ01dwsy2n86jLicJZe4hn+mnGtmX3hvyDOkWHqS8Jig7FGzbYSfSXm7Du
- xq/aa/6UtlIt7DbBpghDm8v121rbmE2WW07YJDA+vUbJ6QvtPyk1PiDs/66aq9Fq3fV0=;
+ bh=ON75lvKOMG0aSPat7B2byBU8/0wkSVDxhSjtQfTDfdU=; b=sYuM6PZCPCq5Xm6XlIARambQJ3
+ Foqkp111o1VU4tYJHRPxutr7CczedaPoyIG8VTBGuWivu6elWQLu/WiD74FUpWT4zgBnbUH/Q+rqN
+ FjkRP61l13gpO9/1qiRD4/ez8KX8s2/lre2qlaBhu17cN/kASi9aVUMHJRRIIVhT/p8U=;
 Received: from 214.173.214.35.bc.googleusercontent.com ([35.214.173.214]
  helo=esm19.siteground.biz)
- by instance-europe-west4-fh50.prod.antispam.mailspamprotection.com with
+ by instance-europe-west4-czb4.prod.antispam.mailspamprotection.com with
  esmtpsa (TLS1.3) tls TLS_AES_256_GCM_SHA384 (Exim 4.99.1)
- (envelope-from <francesco@valla.it>) id 1wHozh-00000006wWx-2t6u
- for u-boot@lists.denx.de; Tue, 28 Apr 2026 20:25:24 +0000
+ (envelope-from <francesco@valla.it>) id 1wHozj-00000004yDJ-0DgP
+ for u-boot@lists.denx.de; Tue, 28 Apr 2026 20:25:25 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=valla.it;
  s=default; h=Cc:To:Subject:Date:From:list-help:list-unsubscribe:
  list-subscribe:list-post:list-owner:list-archive;
- bh=U3jdgXV8LVJawgNt2EHe6KBeotwTlzyQe9xFp8Plj8k=; b=mf5yOlpdTU06VBZ4oH2yMJHsCz
- hqt/irnUci5w+ULDc5gS4A11uKh8huLYCUscNlknXcNHBQfv4URnzD5Bu96EXP9vClt2Z4CPXcwit
- 5mL1ffRUHeSjRTHGf10R8SGTURK8xNnzn/ZCgRJ/OEfnx9gKkrUd0BUTPIeVorhngnvQ=;
+ bh=ON75lvKOMG0aSPat7B2byBU8/0wkSVDxhSjtQfTDfdU=; b=h0AEL8bmlYwvYj4mCjpsCcjMT4
+ 3bFsaRFePG596XboNfCRbUnt9mk21Md5NXveoMEjFOzMsME6jCLRh0D3nuEKHBWNZRM0kFI9GC0G/
+ a86XP88YA14C0zFGiUvbyEk3vd+xLaCNGylCWwHWp+ONRBJq9RbE3QIxA/Qz5u7ERbj0=;
 Received: from [95.248.129.24] (port=64167 helo=[192.168.178.175])
  by esm19.siteground.biz with essmtpa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
  (Exim 4.99.1) (envelope-from <francesco@valla.it>)
- id 1wHozL-000000002Bh-0ff1; Tue, 28 Apr 2026 20:24:59 +0000
+ id 1wHozN-000000002Bh-1ttc; Tue, 28 Apr 2026 20:25:01 +0000
 From: Francesco Valla <francesco@valla.it>
-Date: Tue, 28 Apr 2026 22:24:43 +0200
-Subject: [PATCH 2/5] boot: fit: decompress kernel when in SPL
+Date: Tue, 28 Apr 2026 22:24:45 +0200
+Subject: [PATCH 4/5] spl: call ft_board_setup() and ft_system_setup() if
+ enabled
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260428-spl_fit_full-v1-2-dde63beeaab1@valla.it>
+Message-Id: <20260428-spl_fit_full-v1-4-dde63beeaab1@valla.it>
 References: <20260428-spl_fit_full-v1-0-dde63beeaab1@valla.it>
 In-Reply-To: <20260428-spl_fit_full-v1-0-dde63beeaab1@valla.it>
 To: u-boot@lists.denx.de
@@ -106,12 +107,12 @@ Cc: Tom Rini <trini@konsulko.com>, Quentin Schulz <quentin.schulz@cherry.de>,
  Wolfgang Wallner <wolfgang.wallner@at.abb.com>, 
  David Lechner <dlechner@baylibre.com>, Francesco Valla <francesco@valla.it>
 X-Mailer: b4 0.16-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1183; i=francesco@valla.it;
- h=from:subject:message-id; bh=kLiTZHQPHoHZHRSuQ+rBFfNN4bcx52MMED4PjMnx64k=;
- b=owGbwMvMwCX2aH1OUIzHTgbG02pJDJkfxad36FidLzURye6cbnJRYOu3Kl3V2feLGw4yfZ6zf
- V+jTUtjRykLgxgXg6yYIkvIuhv39sw1/5a2gfERzBxWJpAhDFycAjARRXFGhlcZczusvjD/OuAR
- p9Ra5nUp4Eb6RalJp4zKE3db7fC7f47hn24bK4uu08G59TcO1792sj7+rb3B+uSDItcte/qsufM
- 4mQE=
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1081; i=francesco@valla.it;
+ h=from:subject:message-id; bh=Vtkw1d13pgCGzFx5/iuZVSpPpLbmnOa0KmKp9dj2oUA=;
+ b=owGbwMvMwCX2aH1OUIzHTgbG02pJDJkfxad3P7p5S07FT0KVY/n52n2zhJ7NiPc7uf2P7PRyn
+ w6dk09tO0pZGMS4GGTFFFlC1t24t2eu+be0DYyPYOawMoEMYeDiFICJHD3M8E9XW1Ejcdf/B2Gn
+ WtclH9n2+rOrh14Yk2/GVNM8X2n9iQqMDA8/ab7Y653YX+e0I/dXhuSBj4nZSdPOFuvcuaN1vYN
+ Rlg0A
 X-Developer-Key: i=francesco@valla.it; a=openpgp;
  fpr=CC70CBC9AA13257C6CCED8669601767CA07CA0EA
 X-AntiAbuse: This header was added to track abuse,
@@ -123,15 +124,15 @@ X-AntiAbuse: Sender Address Domain - valla.it
 X-Source: 
 X-Source-Args: 
 X-Source-Dir: 
-X-SGantispam-id: 2635baf9abae5644e309f13066cb6682
-X-AntiAbuse: ID - 2635baf9abae5644e309f13066cb6682
+X-SGantispam-id: 6315f20a0d3262df70362e1ed68a01d3
+X-AntiAbuse: ID - 6315f20a0d3262df70362e1ed68a01d3
 AntiSpam-DLS: false
 AntiSpam-DLSP: 
 AntiSpam-DLSRS: 
 AntiSpam-TS: 1.0
 CFBL-Address: feedback@antispam.mailspamprotection.com; report=arf
-CFBL-Feedback-ID: 1wHozh-00000006wWx-2t6u-feedback@antispam.mailspamprotection.com
-Authentication-Results: outgoing.instance-europe-west4-fh50.prod.antispam.mailspamprotection.com; 
+CFBL-Feedback-ID: 1wHozj-00000004yDJ-0DgP-feedback@antispam.mailspamprotection.com
+Authentication-Results: outgoing.instance-europe-west4-czb4.prod.antispam.mailspamprotection.com; 
  iprev=pass (214.173.214.35.bc.googleusercontent.com)
  smtp.remote-ip=35.214.173.214; 
  auth=pass (LOGIN) smtp.auth=esm19.siteground.biz;
@@ -153,35 +154,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-During the esecution of fit_image_load() in full U-Boot, the kernel is
-not decompressed as this step is typically performed by the bootm
-command logic afterward. This is not however true when doing a falcon
-boot from SPL; enable the decompression in this case (i.e., if
-CONFIG_SPL_OS_BOOT is set).
+If board and system FDT setups are enabled by the corresponding
+configuration options, perform them also in SPL. This aligns the
+behavior of FIT loading from SPL and U-Boot proper in this aspect,
+reducing the need for custom code in falcon boot setups.
 
 Signed-off-by: Francesco Valla <francesco@valla.it>
 ---
- boot/image-fit.c | 7 ++++---
- 1 file changed, 4 insertions(+), 3 deletions(-)
+ common/spl/spl.c | 16 ++++++++++++++++
+ 1 file changed, 16 insertions(+)
 
-diff --git a/boot/image-fit.c b/boot/image-fit.c
-index 9aa165a38cd9..f3ddee940dbd 100644
---- a/boot/image-fit.c
-+++ b/boot/image-fit.c
-@@ -2291,9 +2291,10 @@ int fit_image_load(struct bootm_headers *images, ulong addr,
- 	if (!fit_image_get_comp(fit, noffset, &comp) &&
- 	    comp != IH_COMP_NONE &&
- 	    load_op != FIT_LOAD_IGNORED &&
--	    !(image_type == IH_TYPE_KERNEL ||
--	      image_type == IH_TYPE_KERNEL_NOLOAD ||
--	      image_type == IH_TYPE_RAMDISK)) {
-+	    image_type != IH_TYPE_RAMDISK &&
-+	    (CONFIG_IS_ENABLED(OS_BOOT) ||
-+	     image_type != IH_TYPE_KERNEL ||
-+	     image_type != IH_TYPE_KERNEL_NOLOAD)) {
- 		ulong max_decomp_len = len * 20;
+diff --git a/common/spl/spl.c b/common/spl/spl.c
+index 722b18c98edc..a09ebac62c2a 100644
+--- a/common/spl/spl.c
++++ b/common/spl/spl.c
+@@ -156,6 +156,22 @@ void spl_fixup_fdt(void *fdt_blob)
+ 		printf(PHASE_PROMPT "arch_fixup_fdt err - %d\n", err);
+ 		return;
+ 	}
++
++	if (IS_ENABLED(CONFIG_OF_BOARD_SETUP)) {
++		err = ft_board_setup(fdt_blob, gd->bd);
++		if (err) {
++			printf(PHASE_PROMPT "ft_board_setup err - %d\n", err);
++			return;
++		}
++	}
++
++	if (IS_ENABLED(CONFIG_OF_SYSTEM_SETUP)) {
++		err = ft_system_setup(fdt_blob, gd->bd);
++		if (err) {
++			printf(PHASE_PROMPT "ft_system_setup err - %d\n", err);
++			return;
++		}
++	}
+ #endif
+ }
  
- 		log_debug("decompressing image\n");
 
 -- 
 2.54.0
