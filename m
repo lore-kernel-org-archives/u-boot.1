@@ -4,103 +4,109 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87AA9FF886F
-	for <u-boot@archiver.kernel.org>; Tue, 28 Apr 2026 16:00:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C26FAFF8868
+	for <u-boot@archiver.kernel.org>; Tue, 28 Apr 2026 16:00:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0C9E684119;
-	Tue, 28 Apr 2026 18:00:00 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4D7308464E;
+	Tue, 28 Apr 2026 18:00:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20251104.gappssmtp.com header.i=@baylibre-com.20251104.gappssmtp.com header.b="Zibsv/FD";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20251104.gappssmtp.com header.i=@baylibre-com.20251104.gappssmtp.com header.b="NA2eDSGn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5B5C084255; Tue, 28 Apr 2026 17:59:59 +0200 (CEST)
-Received: from mail-oi1-x234.google.com (mail-oi1-x234.google.com
- [IPv6:2607:f8b0:4864:20::234])
+ id 504EA8464E; Tue, 28 Apr 2026 18:00:40 +0200 (CEST)
+Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
+ [IPv6:2a00:1450:4864:20::635])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2FBF783A91
- for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 17:59:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3CD1984612
+ for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 18:00:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dlechner@baylibre.com
-Received: by mail-oi1-x234.google.com with SMTP id
- 5614622812f47-47bfa080d93so1667782b6e.1
- for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 08:59:56 -0700 (PDT)
+ spf=pass smtp.mailfrom=jstephan@baylibre.com
+Received: by mail-ej1-x635.google.com with SMTP id
+ a640c23a62f3a-b8f97c626aaso1007964466b.2
+ for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 09:00:38 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1777392038; cv=none;
+ d=google.com; s=arc-20240605;
+ b=R7OxWbm6VqGNW51LuSSYs429dtaafbwjz24dv1V3TivonpNZd2S8N1gTIZlhboXhEd
+ 3sV5/76t3TX3aR6CIFcqrhUOvpztU/NOZwwxY5JZxiIkU3dbRZSgkdf0liGGxlNL2qyh
+ dG/0LjRZhyf+hDjsDiXN7etnm1D1tGilf5XPLvQ6Lrl7RTk35roGkL6col4X946M7HvT
+ zEPu97uoLNE8YMSYb1oOWHj/wkXQGzYmCYDpPXsvwOHcJsHh87wgk+i53q0Lf41H4ZPy
+ lCekzyK0Yis7mIrSigxyoF5NFuedFJhisCtIm6GJi++B5wZ/jOgI5McAmiI/rclhIWxA
+ MVIQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=h8jXIpUbuVwyJYX5U7o/o5rm0R0tWDH/OCYFKQQV6Zc=;
+ fh=nUUDrYGu+cmQLZST/hhP5jN7Qd36lXfxYyl2tFOuJf0=;
+ b=W8xnWxzQZzdUMZ602gMqOL4uedhfs135KN+dRWjvu9rkya/mvho+KIeFO0tCeWFYMz
+ Z0lNAky5kZTB3Oi0VJ3f0yl1+aUEApGm2KKwupBKC/UeLF8IvOC3WlCduvSzcTq0hpas
+ c0nB8CYaCj+IaVCytpPM8bmUUR5/XU1P/Fx5nKudZnQoCwDJ9shk+7xgN/yPcKr2jIUi
+ tkPcHWttRPLD8HDsYu77rT9b3ZT6F5XBvHw02lULM2p8LEk42oIoSlAT/U7eG9Qmbfkq
+ AlFZMC0RFq7h/VQx6d1JnjWc54c0wqz6dcgQAsRMQ0wNW3hvqbeqh4nImNslEo2EQrne
+ Pr8A==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20251104.gappssmtp.com; s=20251104; t=1777391995; x=1777996795;
+ d=baylibre-com.20251104.gappssmtp.com; s=20251104; t=1777392038; x=1777996838;
  darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=+k29gyCPdO8dwAm6RBpRkjt+LiHfKQIInPDtMWAVFgc=;
- b=Zibsv/FDsXSs0vF0ibiblOp/bYCMjC4ItsoAfGkSn1KXOTnUp+ckydvbXU7cH7PS86
- VAHBaE1uOmezLArpZJkXzUEofsBgk3nlSqM25d/JPPHwuvl75nmgKba8vL1bBU0ZcWba
- yFoB2HqpQ1HwJ9PEUjISU3GF/t6t0lLz47cXLffCocqd/KInIKBJEJRq1LUAGmr51wBQ
- tbINvG8kPmuWLk6jaY6ZWzuV/4CfbEcPPZzaLlIUmWIWImawMFLWEEzmY2MuB4wvJZtp
- kcSdnxFM2drnEROG/PIiGb0m8OwEQj4JRB1cj2iBBmofU5pdvRFb64+pIACv+u3wEcZ9
- ytHg==
+ bh=h8jXIpUbuVwyJYX5U7o/o5rm0R0tWDH/OCYFKQQV6Zc=;
+ b=NA2eDSGnwe7CdwxKjV50xA2/f+xf+JaqlmAVrK9oRxeYNV7agZZOzDWzDMJ3y0aJmi
+ 2yP4Q7j+KzDPc09mt2bx885ia6OJfFppAzcs0YzafbZF1TLElAIbnog3B0ix8zUwKcYC
+ 6p8zxOaocWDBDgapnTUwh6mB0rG0xkk+p27Qpq53vfa4JYEsOVFAPl6XGZNKTCdbiOva
+ NOBt+8ghF8Rmfz8HaDvyI3jIDDPtv1chVBLrqRKBhJWykqmGcEOENOcLEfzyRSOuh2Nx
+ omECe/29pKW0U5x3cl5A39JKiw99AK/9zGOz1HckTOwnO3Fq+E3xj151mInfhnLQVL4R
+ LDcw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777391995; x=1777996795;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
+ d=1e100.net; s=20251104; t=1777392038; x=1777996838;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=+k29gyCPdO8dwAm6RBpRkjt+LiHfKQIInPDtMWAVFgc=;
- b=SNGxdasXh6uaE6nuJ8Br8Pq1/AeSr4zBs0MHO8LwJePF2sZyZ4ECh3Ca7kmTrAA6tw
- 5cfKG1M09pSV4Cw2TmsEBMwhaj9kXVNi5jS1IHi5rPseJghQit7ZYL44ZQPAJD2meCzV
- 3j0UjF/9sGkR2dM4/KtCEr7rRe3JABkBLnuEW+XQrxS6FS8xugAPt62y6rcIC9Eh9jIS
- 0esozI1YnrQVvyG4VKDZ1Il5XERwlpm1MhCxT6q5SDGp7c8Br8oaf6csW5n4cylHdEBs
- 1aWpKRDAjWyBX2/ffa+FAnfJwMGL3FbUjMNP7gzDRpCWISXi6AH23RIvuYIx+1dwfBxg
- zH7w==
+ bh=h8jXIpUbuVwyJYX5U7o/o5rm0R0tWDH/OCYFKQQV6Zc=;
+ b=UC0plLWc/bWu03WPIuB/+Br75BqYD1KtzGBdzJQo5ht2U7h5F6yQmVZy6ch9ShxSvM
+ 4LDBAWeOLRKfwp9tO2lwwZWL3G/XbmOjpjFg3ocabjwuIPvQPCJt0nMFhyvIJ8oKGPGb
+ RoGuMI6IufwWhAPMdHwgjBbb4lQ9BKnqJPn9yliOPpDs5b1mOyl58c1tubIbgeyF6mKl
+ cfltGZBqrFBIVSVWZap4HQRW2mbzGpVDbo+N56Qewuf4qXWGPfa36/U+WDHrGtnpycZZ
+ efGqceIkYaT8yCY0jJLQRS5AdGa2ImTqfInjEZKJYgls0e5sc3AZ71YrTBhs+KL8rQyR
+ zDNw==
 X-Forwarded-Encrypted: i=1;
- AFNElJ9W91xyHCd5lfqgnhOrDT3yCC5rDtVrA2grvYPUqBVIVoxLowjoQpS/ExQawipST/UziSqZUwQ=@lists.denx.de
-X-Gm-Message-State: AOJu0YyRGu3I6E9EJorhjPY45ExKRTvwtMI+nQ0Ua38ULCx3JYK5TQFY
- Hghvj0/RQUJ6mn1CzcFBdfnLp+qyBv5MdhGricVyMtGYUM4100xRlRYgDdaRL80Fc1zxTVDuXA2
- E2BLd
-X-Gm-Gg: AeBDiev804S11nvWFGFhKnbXDYfQuGd7ddgVNk86Po9jfR6vhvtlkfuqmbPtoZYnzC3
- /z5ZU6P/OejssBc+lyaCF1nxChgQKYmB8zCD8h0igbYL6xOIVXdYi47WPuVY2xWYE6Yh6n2ATCr
- G9sZ87nFt44tXidRcsrhHnOgvHOeUmhof/qSJmJ5KbLsomuO2z5IgjqYZnHrEarjd78tM9n2XrS
- pnJY14GbwWlnj81V00yli047js6yjhzj6JTXMNkydFEZKGn6aOHb3eCEu5lawRzyP7jwdKm8Qj7
- U0RSA9IWNRi2lb0Ne+TWFpPlf11msse3vjF7rI6dMMJ6CZ8nGxoETrY0rsbX7aiWdIiNkooYcXY
- 1x9s94qss3QV7ZqZ3AD+6IJiYOIO+Ei23+8Rmv1HyiP/49zaDAuKYvNQS046MIyal1Ps9R/7N/s
- IE9G7cimAROoCirkrgE40zYC7pp3EiBeg64qaostg=
-X-Received: by 2002:a05:6808:1790:b0:479:d57b:83b0 with SMTP id
- 5614622812f47-47c28f63784mr1783025b6e.22.1777391994922; 
- Tue, 28 Apr 2026 08:59:54 -0700 (PDT)
-Received: from [127.0.1.1] ([2600:8803:e7e4:500:efba:bc47:a81b:dd0f])
- by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7de9871ceeasm2014593a34.27.2026.04.28.08.59.54
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 28 Apr 2026 08:59:54 -0700 (PDT)
-From: David Lechner <dlechner@baylibre.com>
-To: Julien Masson <jmasson@baylibre.com>, Tom Rini <trini@konsulko.com>, 
- Macpaul Lin <Macpaul.Lin@mediatek.com>, 
- David Lechner <dlechner@baylibre.com>
-Cc: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de
-In-Reply-To: <20260421-mtk-configs-remove-ident-string-v1-0-66d5fc3d67be@baylibre.com>
-References: <20260421-mtk-configs-remove-ident-string-v1-0-66d5fc3d67be@baylibre.com>
-Subject: Re: [PATCH 0/5] configs: mediatek: remove CONFIG_IDENT_STRING
-Message-Id: <177739198411.3382222.8213846855382011998.b4-ty@b4>
-Date: Tue, 28 Apr 2026 10:59:44 -0500
+ AFNElJ/vEszWAGGfLT9NlUJLjltuy2J/ZZiPSsnzkciWguRp6dwyFddGKrUOFRBjyfwQ4QWYIUgYSws=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx6EtxVYLkn7dqaV6gJ18eobkbOiFtsa0lzhPpSMDSoqEzYxD8Y
+ wFyjRhC2ezn5lK+b7Zio0D6ZL4Vs1AywFDnDETRcJMV3a8ypCo0w2BoXCCuRZzf388KXj/umKEB
+ YkfQFay7YuvBjFmf9FrbiuSWEhVo3nEsgw8OoaLPjTw==
+X-Gm-Gg: AeBDietkEjRHNXIrW43GeZ4CvZGo2WlAN5F6coO9GoLAx/Owm/undfnldHBXA1lkDdY
+ QpI1IWPimAufOptTt/fMYgK76fT7E1qFwdftnpLW2bgosroUIsStVCLP4faWe6aJmHpk4I1c3mz
+ w52/3M9OKsZMSMlRYtvd22juicgR6xDDpQ1C9SDla1vbJauAycaMgtpCWI8Us/67DP7JzhuqiHz
+ AXn4ipvAOGOT9WxyFLeBQEW9Y5CQWyVIcRUUgyya8Ps8fC1X9kaCzJNRZhz3RypRNF9zAvdqhpu
+ +LDh5rRZqdweksRVelqDUpqomRNLMUCzAL9nDZe77VTe06NG4aTKb5zfszMu4oG+GF6mZUWu3Yr
+ 3/U72LxGcLoLIQhV1qNP7xe70AA63wKMI2Ks0mrS70zlGQM8=
+X-Received: by 2002:a17:907:a4c:b0:bb8:a6e8:f93 with SMTP id
+ a640c23a62f3a-bb8a6f75d34mr133059566b.12.1777392037523; Tue, 28 Apr 2026
+ 09:00:37 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.16-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1440; i=dlechner@baylibre.com; 
- h=from:subject:message-id;
- bh=17sQdqxOrLmTIYgx0zLTw/o3+IsRut9CHEjJJUD8oO4=; 
- b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBp8NlzGxyZRk48siAJb9FW9KkqoLXsDE4T4hGEr
- hZurdCdsgSJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCafDZcxYcZGxlY2huZXJA
- YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AsB0H/iLdhcF9ZdOR/HQaOakUmnrS6TySJ6MwAC6ESez
- z9f//9XzzxUAZ7rHjWTehvD6/1wwSrpxrZaUIpsR6JzgOEpizIX9c+7KFXHTio6S3xrAs1cVB2Q
- 5AP5baO4WGIJBQJSVRT/zSCtpMZogcyGuYtwx+pUlaT5PJdaGkg1AhMlIQYtzfYHpYtWuhb0/hB
- 9HeqxTPHgyTrpgM0UR9LJQfmQzaNVMbMU+G5Le35J8KiyDLJcL/gzYWwaY5z0vOOHaL7L+YFoWi
- aWx8bGvsua2yiqXQYwXNGARjAABhGa2BJyA+GVMzYrAj8HK601pzIE4Kac98b9de0uRSbj1QS2W
- nTp4=
-X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
- fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
+References: <20260406-mtk-spi-nor-improvements-v1-0-66f675cbbd3e@baylibre.com>
+In-Reply-To: <20260406-mtk-spi-nor-improvements-v1-0-66f675cbbd3e@baylibre.com>
+From: Julien Stephan <jstephan@baylibre.com>
+Date: Tue, 28 Apr 2026 18:00:22 +0200
+X-Gm-Features: AVHnY4KGTxIfv6siASIepSlUuaWli41HRXBGYJ16AtmjfvHmRhjlDsPXtcloTK4
+Message-ID: <CAEHHSvaUe5cWmAUBvrjowWVAuPJ0yN7F8HP9wtzu4+BYxKK46Q@mail.gmail.com>
+Subject: Re: [PATCH 0/8] spi: mtk_snor: various fixes and improvements
+To: David Lechner <dlechner@baylibre.com>
+Cc: Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
+ Chunfeng Yun <chunfeng.yun@mediatek.com>, 
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
+ Tom Rini <trini@konsulko.com>, 
+ u-boot@lists.denx.de, "Noah.Shen" <noah.shen@mediatek.com>, 
+ Macpaul Lin <macpaul.lin@mediatek.com>, Meiker Gao <ot_meiker.gao@mediatek.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -117,36 +123,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 21 Apr 2026 09:09:33 -0500, David Lechner wrote:
-> configs: mediatek: remove CONFIG_IDENT_STRING
-> 
-> Until recently, MediaTek defconfigs didn't set CONFIG_IDENT_STRING.
-> mt8365 added this and then it was copied to some recently added
-> defconfigs.
-> 
-> This is just appending extra text to the version string that gets
-> printed, so it has no functional impact. To keep things consistent for
-> all MediaTek defconfigs, let's just remove it from all of them. This
-> also frees up the CONFIG_IDENT_STRING option for use by downstream users
-> that may want to add their own custom string to the version output to
-> help identify their custom builds.
-> 
-> [...]
+Le lun. 6 avr. 2026 =C3=A0 22:14, David Lechner <dlechner@baylibre.com> a =
+=C3=A9crit :
+>
+> This series contains some downstream patches that I have split up into
+> logical commits. I have tested these patches on Genio 720 EVK by reading
+> and writing the environment from the flash memory on the EVK.
+>
+> Signed-off-by: David Lechner <dlechner@baylibre.com>
+> ---
+> Macpaul Lin (1):
+>       spi: mtk_snor: fix zeroed data in DMA read bounce path
+>
+> Meiker Gao (1):
+>       spi: mtk_snor: Remove status register write procedure in probe()
+>
+> Noah.Shen (6):
+>       spi: mtk_snor: clean up comments
+>       spi: mtk_snor: avoid alloc in mtk_snor_cmd_program()
+>       spi: mtk_snor: conditionally copy tx/rx data
+>       spi: mtk_snor: check return value of mtk_snor_cmd_exec()
+>       spi: mtk-snor: add bounds checking in mtk_snor_cmd_program()
+>       spi: mtk_snor: support newer SOCs
+>
+>  drivers/spi/mtk_snor.c | 196 ++++++++++++++++++++++++++++++++-----------=
+------
+>  1 file changed, 129 insertions(+), 67 deletions(-)
+> ---
+> base-commit: 1c1bfb1cf34bbb2a5717eb6995c55093279f9341
+> change-id: 20260403-mtk-spi-nor-improvements-dba489fad981
+>
+> Best regards,
+> --
+> David Lechner <dlechner@baylibre.com>
+>
 
-Applied to mediatek-for-master, thanks!
+With the nitpick addressed (or ignored), the series looks good:
 
-[1/5] configs: mediatek: mt8365_evk: remove CONFIG_IDENT_STRING
-      commit: ba97dd5c107a844115b8b6a7f63c5e0b773204fb
-[2/5] configs: mediatek: mt8370_genio_510_evk: remove CONFIG_IDENT_STRING
-      commit: 4c435a7ffb104ef4f13c6c29d784d6a6be247f1e
-[3/5] configs: mediatek: mt8390_genio_700_evk: remove CONFIG_IDENT_STRING
-      commit: 9b471cb9b2e9c070d27b1ee6c7bd658f5289d31e
-[4/5] configs: mediatek: mt8395_genio_1200_evk: remove CONFIG_IDENT_STRING
-      commit: eb1551fddc6b50e3053c850814d16d95cf542559
-[5/5] configs: mediatek: mt8395_genio_1200_evk_ufs: remove CONFIG_IDENT_STRING
-      commit: 95c06da44f83f5db523433d04b5518b4fe62f906
-
-Best regards,
--- 
-David Lechner <dlechner@baylibre.com>
-
+Reviewed-by: Julien Stephan <jstephan@baylibre.com>
