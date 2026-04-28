@@ -4,95 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25005FF886D
-	for <u-boot@archiver.kernel.org>; Tue, 28 Apr 2026 18:24:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76D3CFF885A
+	for <u-boot@archiver.kernel.org>; Tue, 28 Apr 2026 18:25:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AD406846A8;
-	Tue, 28 Apr 2026 20:23:59 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 182E5846A8;
+	Tue, 28 Apr 2026 20:25:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="K8DDELDT";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="COL+eMxX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1242E846A8; Tue, 28 Apr 2026 20:23:58 +0200 (CEST)
-Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
- [IPv6:2a00:1450:4864:20::634])
+ id 63C4D846AF; Tue, 28 Apr 2026 20:25:48 +0200 (CEST)
+Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
+ [IPv6:2a00:1450:4864:20::636])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 53C7C8468E
- for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 20:23:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 96466846A4
+ for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 20:25:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-b941762394aso1617202266b.1
- for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 11:23:55 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1777400635; cv=none;
+Received: by mail-ej1-x636.google.com with SMTP id
+ a640c23a62f3a-b9d9971d059so1659620766b.2
+ for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 11:25:45 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1777400745; cv=none;
  d=google.com; s=arc-20240605;
- b=Vf19QilNp1As479jEUjH7intom9NWXUSG5F0tChsFYKzKRWJmN0uJ45j5ZAr7dP5fc
- iC7eA4f9dhv+JjQqQLQNm28FRTNDvVVnV2jOZ4W3eP8VN8mebjO8cQNYhIFtMReVvHc8
- vksJHXsXmQAD4wWRZmFErRtfHxy3nYwlYGhvdIHbV5+vBjk5pRJYnjhkBlRQp+GxD4/M
- NryF+Y2HExp1mIvZq+7IgWM8LldteH92rt6J9jKRzgDkGLIQcu3q1r42maDWTNh/8CUh
- xLBi7d8roydT8Mr4nxe07bwppToSy34ETIUbPwbKfn5oZ5aVoEuBLvzEnuXKefgCuMBp
- wI3w==
+ b=OW7AzLmCeDgYER7+t09lq0Gr6SGuVy6eMqJ583FkqhIhIDeD6j2t46dwNA9KUxpRng
+ 2mi4E7usbjqBT45MvFa2TdQtaJyBjwb+IOgm3I2RCTNf0bbAb0nTJNiE+OWpP2dVoqE3
+ fL7d+GdxCtFe4CQm64Kme0od/ETa0WzC1b7dO6BLtKPYq8ejGOlOc+Um9oqUDSyQWaqI
+ jCYMN9UOY2ekQr0tJgPuDNraZXJf0QleLu3jPalvr92FzVuIAzd1wNZGL+F/cyuY9GsX
+ TpzbcFf2mZABTlT6DzDezXGJ4KGkYZmkF35GePhY1SAFK848jPrlj8AUrOqzG57RytS8
+ hj+g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=HZzA+tWF6Ts8EB1Qb7SPrPqPbTNy9tt3OjjkPDJKUu0=;
- fh=roScgQRs/1XQwKZoJDPK2CRWP0QTsH47L7/m3Rpzqtw=;
- b=T1ijfSAm5+kCeYI09/cYMLzn0xhNRr9Q7nSf6g/iFgEhuPXHJqS+2ek42iK0Z+2vsx
- C63vHPhf8X1+HSa4fEFMEeoPg4+3MgsLsk3JcLMvDmoukiPtPoZ5QR9WNHXvY8MbYBHn
- PBiOvP6K8MHwpMfq3JqmNLjmDkSrWPR2gdeDZ/T6gRiLdMvIdMFjS5c/Zb/nxr+awulX
- Myw1IRN2Zzo6VsObuCrq07p8ruyt72KR2SxLMLBeCDpUpXwWdKHFgljqgVvzqcobLrab
- Vs52Pg/j0sP8KveVJaAyKHjZjQW7/m9noEkcJijUH91DJrU8hRiPu9y4DpiSSmhM0PZ9
- Ep3w==; darn=lists.denx.de
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=x+VVZfLECzB0P8v7r0H1uWPy2+kMtEWMbXSMDoyGAfc=;
+ fh=GYIekQEhESPWanXHuipF/cx0w9AeOdHDaa7vPtUoRvA=;
+ b=Z8UIoppmjc++kQr72Gl0quuBzg4mn1Cduj0+vNtCpzyux0p2rd5+G502IYI5Dx62YT
+ nzWiq6xD0MzekAjx060lWQYfbOdbeV1Qkgg43WnaJix7hxsPHc8EvitrHu9x9ubZmxs1
+ vRTkuGJUVF5YJSU2Z8kZg5rPr0AguHjmQZdcXKnpvWuAP/U+UCE9vuWbyrFCrCo7Beph
+ OZt6jDCHLxrbYbfoouW7FacRa0Vk5pCK+DCBPbYQAiQ6Mqbr/8dhQJea6CepELBc4q4E
+ t/GhWXEHNRaJfsPObvWSb1SRX+6i6XsKdiYXIj4Ixdm9RHBLG8IDU1Dhrw4PkZNfYIEZ
+ XKIQ==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1777400635; x=1778005435; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=HZzA+tWF6Ts8EB1Qb7SPrPqPbTNy9tt3OjjkPDJKUu0=;
- b=K8DDELDT7ZLmv5CcPQVsVUsHQn/aU9S2zCEc2eu6EQEzEUz9MACycGOLl7hfxcDbkp
- lb14nQuFhetP9/DaGpuvOk4yKqkgk6Ip4xOr92fJ7G0tRL1qfJ2mjEGHXuREbjA6ZZzl
- 1vkFdCRtT0db7mXKH4jiW9OgVu+3Dx5PkrFcI=
+ d=chromium.org; s=google; t=1777400745; x=1778005545; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=x+VVZfLECzB0P8v7r0H1uWPy2+kMtEWMbXSMDoyGAfc=;
+ b=COL+eMxXEIuJf/e38AyC0Wag6vDFlmr8flEL/+EUKwS5BdQ+FiIZDTym5YYzh01jlt
+ 5L35vmcGNtJiLlyK4Vxs+sW1Giudcui2CulGaoi9OAVl0BJfql2nGH9sp/VOShoA2g8W
+ EfYEMU85oBMl7LI+Go4LkSCZiq7vpqUYQGkdA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777400635; x=1778005435;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=HZzA+tWF6Ts8EB1Qb7SPrPqPbTNy9tt3OjjkPDJKUu0=;
- b=F9LIGuVnQoReI462brrzCrGEEFToW62kKD0FbFYueqYZKRDoiYM2f5F5TKl78AHX57
- RCpoKqZCUDsBJdKHNFJsyb2Q5s+rE8LQS/StqdV6gPwKAWvNE8vDldQ1W4YisCmQ/1Z9
- EpCIkprwVf+UNj3LpJhzBAATFTwGi9ykExWLkDPObx9+b9J6I5YVHw7DaUOncLDD0KyK
- NqXfp0idAxMwjeKmEdfR+SyRLfa+LYxmm3DxFXK4VVzxPJfZriQfx8j51dEA3x14q413
- asjJEjj1YfKtmSxY5/DEz06VLVJztIXeybECZkgM/VdLGlfNfQo+qyR/f8/MAmhN5deu
- P37g==
-X-Gm-Message-State: AOJu0Yyd77aYt4vT/CifJiu6pmf2wF2wi/nqWJb2y+oT0Bb0I0N4InuX
- LdVDK356Tu0RPHDUqAnsSICy+BAN055+yEXt2eycVzyjYtIh5BgUqFgFJnyTJrTTVNlc7o2EIz3
- n4lfPIETlPnyueEMqJVeHyEA8L6RlkklQQcsXXp2I
-X-Gm-Gg: AeBDietjUoMUCb0k+Sy1ameWN1quLbkomfV+P76as8X8o+G+8WLqIYqFJHY8QMF6gY7
- LFBeqOOMP/7gBRNy9JCIp2GsHn+9XaSegkoyh+4SELfkstsuUfBqCgHua5HQ8/osNXSr4bTf4UK
- uvsD2c8xTCnHnCzcgLrQD3bQfhitR+u33rIKKWb3h+YMYpIz1rjmLUhgg1fA2JRTXALBm5Z0q7C
- XmVGDxR/4E8uAfGzqiBX6f/9D7Rcp3jndpjW2mrAOxzYNKhIJvssOiDaDghlAXnYKAYFPUuMJCy
- v9S5vHpoTrNCJkmq
-X-Received: by 2002:a17:907:c48d:b0:baa:2e75:8cd5 with SMTP id
- a640c23a62f3a-bb8023b8ad7mr277480466b.15.1777400634784; Tue, 28 Apr 2026
- 11:23:54 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1777400745; x=1778005545;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=x+VVZfLECzB0P8v7r0H1uWPy2+kMtEWMbXSMDoyGAfc=;
+ b=ozylcIt7CjQXA7JpCX10fKwLYv7XcMYi3KIWkmO82NsQQVEhY7uMiPrzXku6gFogtC
+ UfS6gGVyuB2SYJFRYlrxnGYzKB2WnrNu6WWENbC05w3QHVKg82sIg7ADCRZPfvpCtaYq
+ sMi/DJblovDs/u9/EXhNQhh7oy+LBYLIbJDOJRH7MvJGZy1dk7bAMrce21AblIY9lvXN
+ P1A3nXaRdEl8woPZUFccXV2znUXPwfsKkk1Sh8MB3fZuThGagBSmrJk22JDkebifZP0r
+ /+g0sWjQGWpbADbVdycJfJm4WqcS6+gnmCXYh/9h4p5WzScG98GZoaSM4IDN441tVpr2
+ vWJA==
+X-Gm-Message-State: AOJu0Ywy65vz7Le0I4X6GXvMSeXhZEYzIGBhWg7G3Q6JU5ssrIsBLSy+
+ yfsc+h9HWEy+p0O76WazX7nTR7EOkjVDmNUhhnru6UmqBBS0xFPyDsM1gUZdVbxEjUMpOrJZT8S
+ jM0ivSUtVY5ew3B+CE1UPOx3abCk6Tl97ZmbLP4Rn
+X-Gm-Gg: AeBDievjbVva/5EDVi5nrK6Mes8cbnCLyyuEi6GPI8m7uLcwnJS0kx6MBGiZYvtNzBt
+ NHVzsSfWeJIloUdsKn0zQL1EA5t28i9clJ9HuRVxhEuL9MCsRmOynzpJWBCfGTDQgrT+XRiwuY3
+ bgSpqqkJDlMKaTaRAGTOpiEb99paMffgBOfvo+w++RPYafSPOY66gxYUdVhvpdOopNr5uJBwmth
+ uKsn3NqmHTHYP0hZ2QH+Zg4ggVAE/+mU5rITuNUIlrjOQgZ+Fjxz6BD78ReFdNA/fvwGgjL4Epr
+ Z3tNcFQrBNjaSUUk
+X-Received: by 2002:a17:907:1c98:b0:b9d:6d06:b78a with SMTP id
+ a640c23a62f3a-bb93ce8c877mr30267966b.17.1777400744905; Tue, 28 Apr 2026
+ 11:25:44 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260427-fb_gpt-v2-0-9e7fe3c1649a@oss.qualcomm.com>
-In-Reply-To: <20260427-fb_gpt-v2-0-9e7fe3c1649a@oss.qualcomm.com>
+References: <20260424173151.371134-1-harsimransingh.tungal@arm.com>
+ <20260424173151.371134-6-harsimransingh.tungal@arm.com>
+In-Reply-To: <20260424173151.371134-6-harsimransingh.tungal@arm.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 28 Apr 2026 12:23:42 -0600
-X-Gm-Features: AVHnY4Lm39jODnpjePwsIgAuApsvgKOAkcD_e8bRkJqIrM8QC04qOIhIbyY5kN0
-Message-ID: <CAFLszTi4jAGOHa6qUXNq3qu3ViVteFT4gW6nMb=yn2OKDNiGnQ@mail.gmail.com>
-Subject: Re: [v2,0/4] fastboot: block: Add GPT/MBR and device selection
-To: balaji.selvanathan@oss.qualcomm.com
-Cc: u-boot@lists.denx.de
+Date: Tue, 28 Apr 2026 12:25:33 -0600
+X-Gm-Features: AVHnY4KKYtJ47ae-LRZA28LmL0OoqEGTYOsIyDtHKKO9eJlFuhDzMiEoXwkBpdI
+Message-ID: <CAFLszTj-Fdj0juQLA=1ohBesS2EO=Pg8vyvvEFc8VYeLyT_AZg@mail.gmail.com>
+Subject: Re: [PATCH 05/12] efi_loader: move runtime GetVariable() helpers to
+ efi_variable.c
+To: harsimransingh.tungal@arm.com
+Cc: u-boot@lists.denx.de, Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>, 
+ Tom Rini <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Hugues Kamba Mpiana <hugues.kambampiana@arm.com>, 
+ Simon Glass <sjg@chromium.org>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -109,32 +114,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Balaji,
+Hi Harsimran,
 
-On 2026-04-27T12:06:41, Balaji Selvanathan
-<balaji.selvanathan@oss.qualcomm.com> wrote:
+On 2026-04-24T17:31:50, Harsimran Singh Tungal
+<harsimransingh.tungal@arm.com> wrote:
+> efi_loader: move runtime GetVariable() helpers to efi_variable.c
+>
+> Consolidate runtime GetVariable helpers to avoid duplicates
+>
+> The functions efi_get_variable_runtime() and
+> efi_get_next_variable_name_runtime() were implemented in
+> efi_variable_tee.c as part of the FF-A runtime variable handling work.
+> However, default implementations for these same runtime helpers also
+> exist in efi_var_common.c. This results in duplicate symbol definitions.
+> To resolve the conflict and centralize the runtime API, this patch moves
+> the default implementations of the two runtime GetVariable() helpers
+> from efi_var_common.c to efi_variable.c. This ensures that:
+>
+>  - only a single definition of each runtime helper exists,
+>  - backend-specific implementations can override these cleanly,
+>  - the EFI runtime variable service table continues to reference the
+>    correct functions.
+>
+> No functional changes are introduced; this is a structural cleanup to
+> avoid build-time conflicts and consolidate EFI runtime variable support
+> [...]
+>
+> lib/efi_loader/efi_var_common.c | 24 ------------------------
+>  lib/efi_loader/efi_variable.c   | 24 ++++++++++++++++++++++++
+>  2 files changed, 24 insertions(+), 24 deletions(-)
 
-> Patch 2 adds fastboot_flash_gpt_partition_table() and
-> fastboot_flash_mbr_partition_table() helper functions that handle
-> flashing of GPT and MBR partition tables to block devices.
+> diff --git a/lib/efi_loader/efi_variable.c b/lib/efi_loader/efi_variable.c
+> @@ -579,6 +579,30 @@ efi_set_variable_runtime(u16 *variable_name, const efi_guid_t *vendor,
+> +efi_status_t __efi_runtime EFIAPI
+> +efi_get_variable_runtime(u16 *variable_name, const efi_guid_t *guid,
+> +                      u32 *attributes, efi_uintn_t *data_size, void *data)
 
-Patch 2 also refactors fb_mmc.c to use the new helpers =E2=80=94 please
-mention the MMC conversion here in v3.
+Just to clarify the commit message: this is a relocation, not pure
+deduplication. efi_var_common.c is always built, while efi_variable.c
+is only built when CONFIG_EFI_MM_COMM_TEE is unset, so the move is
+what actually resolves the conflict with the new efi_variable_tee.c
+definitions. Please reword to make that clear, and drop 'default
+implementations for these same runtime helpers also exist in
+efi_var_common.c. This results in duplicate symbol definitions' -
+there is no duplicate today; the duplicate is what patches 3 and 4
+introduce earlier in this series, right?
 
-> Patch 1 implements device selection syntax allowing users to specify the
-> target block device using 'N:partition' format
+>     efi_loader: move runtime GetVariable() helpers to efi_variable.c
+>
+>     Consolidate runtime GetVariable helpers to avoid duplicates
 
-Since you are adding a new feature (the N:partition parser, plus
-GPT/MBR flashing on the block backend), please add test coverage. See
-test/dm/fastboot.c which already exercises
-fastboot_mmc_get_part_info() - you can add cases there for the block
-path: a successful '0:foo' parse, the bare 'foo' fallback to the
-default device, and rejection of a leading-colon name like ':gpt'.
-Otherwise the parser and is_partition_table_name() interaction are
-easy to break in future refactors.
-
-BTW the v2 changelog has 'Seperate' (twice) and 'fot' - please tidy this up=
-.
+The subject and the one-line summary mention only GetVariable(), but
+efi_get_next_variable_name_runtime() is also moved. Please broaden the
+wording e.g. 'move runtime variable read helpers'.
 
 Regards,
 Simon
