@@ -4,83 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74CB1FF886C
-	for <u-boot@archiver.kernel.org>; Tue, 28 Apr 2026 22:49:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A591FF886C
+	for <u-boot@archiver.kernel.org>; Tue, 28 Apr 2026 22:49:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B0FA7846D0;
+	by phobos.denx.de (Postfix) with ESMTP id EEB70846D5;
 	Wed, 29 Apr 2026 00:48:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20251104.gappssmtp.com header.i=@baylibre-com.20251104.gappssmtp.com header.b="fPkGvUrc";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20251104.gappssmtp.com header.i=@baylibre-com.20251104.gappssmtp.com header.b="qGXveXwX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 120CD8469A; Tue, 28 Apr 2026 20:45:13 +0200 (CEST)
-Received: from mail-oa1-x35.google.com (mail-oa1-x35.google.com
- [IPv6:2001:4860:4864:20::35])
+ id 4480E8469A; Tue, 28 Apr 2026 21:00:18 +0200 (CEST)
+Received: from mail-oa1-x29.google.com (mail-oa1-x29.google.com
+ [IPv6:2001:4860:4864:20::29])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A4F4584698
- for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 20:45:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2391084698
+ for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 21:00:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=dlechner@baylibre.com
-Received: by mail-oa1-x35.google.com with SMTP id
- 586e51a60fabf-415b23dd6e5so4165500fac.3
- for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 11:45:09 -0700 (PDT)
+Received: by mail-oa1-x29.google.com with SMTP id
+ 586e51a60fabf-4303eb92930so1879314fac.3
+ for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 12:00:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20251104.gappssmtp.com; s=20251104; t=1777401908; x=1778006708;
+ d=baylibre-com.20251104.gappssmtp.com; s=20251104; t=1777402805; x=1778007605;
  darn=lists.denx.de; 
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=3ajd3bjKJho7MAPMDJTioinWOwTs0o30VzapgztIU8U=;
- b=fPkGvUrc5Bc+nsBoiYhNWWekNB4RrGpesQOhwKy4OJ56rMi3lbOmOjYVqnHKZj+QOs
- uprbubehgFjswkz9Z9hDzoYcndAgEk5So0Dt79AanjFq/82D3KKr7oSPg6IZlh7DxMab
- DxOuCKXOPJCkcg9RzLNkLSrE+YR3pOI/VZgGicNPHMr8qkhwSQBujTG2AJOqqEyl5HMl
- p3WNHWg22WhF3K4ozhLDW+Qfp7Lr166BpOLYJEFuvr/JfbbgU8Yg5fThLA9WmZMFTy9J
- MDwJnc1hi5ta2iieVfB+ZvowQLobyeETFlOl6mKdN8dhlQwJ3cfsI/1HLbZ6A/8RU7W0
- Maug==
+ bh=ajfFDTo/ard7eUnJJqDy1rOYVdBe5jB5N8PtsNEfxbs=;
+ b=qGXveXwXfi5GTxo4yMLJ7JMOb5V31k2jnNN1U/6yCVGhBhI3aaC2rITrQwSLKco1u8
+ l7yo7eTlRFN/Tagau752DjbBootyiMX7LxnOGm5ElF7OKpPcSY8+iqr2ToWa7nI7QMJH
+ CNgZPqkOrN2cRaKK654DjNKAWWeys9h+WF/O79mk98+KfFX0J60ZjfAMret9vbVvMHdh
+ LxvraMdri5dlqLafiIfxvzXG/j+OBeJI0i1CTXOK1Byz9ebZ9NhhpErnJFvl1zce93pe
+ vumouBTl8ejXGTaB/kE95eQIPmOlZlTzkKeUFEbMeRdLlJYV4mT1YoFzz8ZWQLOtTsaZ
+ lvDQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777401908; x=1778006708;
+ d=1e100.net; s=20251104; t=1777402805; x=1778007605;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=3ajd3bjKJho7MAPMDJTioinWOwTs0o30VzapgztIU8U=;
- b=Ozp1Roa3GEWD4DgFroCf72wIMiI1n6vRUVAqGh2pqt0nTwGl5v+8v70hHI5m24B+8f
- j0ckGP+vz7wkplEAWQPgmnN28Dm7T0/TN/f9dQ1xFo77vMtTo7nxANJRhIrCg5vzLkqo
- nFOpoOTLbdXuvCF19GiqQndliwF+SqH4Ps++iwOKr06m3pnCn5IUPhkB6sf6hGzovBPD
- Lr3znbFUyv2D87UWz1KTGzZ3IKcL8amNatjPCNJuc3yHmYbfQALRqa4c8cKypoi6rSkb
- e7p9n7VJPVsK60EXDS080XB8DBQDhbGwVsupV5sigzS7RWwr1dtLK3OdltW9gt822tC9
- qJyg==
+ bh=ajfFDTo/ard7eUnJJqDy1rOYVdBe5jB5N8PtsNEfxbs=;
+ b=MkqOO0kbrmDK4RnkMLnYSWm3HKxBTCXCLNhL0j3QPOgEu4Z5yhWGlAeXDiGx8z+ZCF
+ IVmRCYsK2nMrRoyM/qqcAJSB+NmD1iVvIPtQRHsADP6R6apO35Lk3e5H+wAqVDqIvxqC
+ OGFha/FCv58mdrXIvuOAk1fgNwulPNRVkFINwce5pNQpaNl71Jo0Z+MoubGXKAz1iJxV
+ 1u4/o2JxDlzusRpn4kLZ6ssSyNtUsWAk+66GptH8IKBF6/+NEBj/n7001sK5iDdsCuPK
+ KROFs4enn1qyBqxOtCLQXpFr6HDXFtwbpgndh3J5cWQCLoYU177CbAZROG/s5guEyL+Q
+ xueA==
 X-Forwarded-Encrypted: i=1;
- AFNElJ/nQsJbFWxHDAytH6ZhZ0tAhIT3U38ES3CcPDZIEHb/nTAZu5wqXjV8C3IrHgf7iC8Bg3KnS4I=@lists.denx.de
-X-Gm-Message-State: AOJu0YzL2Ni9HvaK7kwga8IwhGcA1riUhmgjeNCTORSiPhWdt7Lw1Bgz
- WNNWm2nS9gdhnaDT77g018oBJFicSuVowE2EyCSnAS5biy3vorZVLRs5WG6DeWIrooo=
-X-Gm-Gg: AeBDieutrw5adDNadD1xmxVL3HhBHG6FaHoebtYfxWxgVyckV2YEY0qPHr+cFtibCsU
- RDF9SWsLFSmD5WoUuE3PyF5ZPzNpGWs6UdZDSF/b71+vJ7GVWy/VK1bg2bKe5lsoJZVlBlK0Y7k
- YE2Hm85n4aX9j754hzmksHhRam6JSm6FyDWiTiQwMLyAzTqMmtnx+qn/igFznxYXw+Wgkq1Te3M
- CJvh79q0FbSGpo5F0ZSCja5yeG7WPbHeQjBrQ1/eZbJLBGhd596pbqFFg1EZRmLmyMZeCDDucr4
- ymHpIDEuUYVpORYpCvFYHRKSbd/u//mpHUnZ9cVtoOBRQZCvzDu553SF9MdXNMaGGTiz4T6F5iB
- /MkmBh2ZPn6rZX8vsmTTSWZjR1Wei66zBMDIFtGVxLSACQiyi2YZ3Ju5JA+hINaLnAcymtNujnW
- pyI6IZMbLAPTa+M8A617NKHb/mYWeLnYI3L2QYklE639m9vM0Uf3xwaKz/rdv05eqkFWaZsd06p
- fto2KzMRfEfdTPdeLq60Dg=
-X-Received: by 2002:a05:6870:f10b:b0:42c:13f4:d4d0 with SMTP id
- 586e51a60fabf-433f387ad7amr2325478fac.1.1777401907914; 
- Tue, 28 Apr 2026 11:45:07 -0700 (PDT)
+ AFNElJ9Lbz3zqNqKvEay5cD6dja0NUUKg13yxHKIA4HDlGDCnNbIsWxGMndAz2jc/RBtTOAOkXFa7SA=@lists.denx.de
+X-Gm-Message-State: AOJu0YwMBCFkEmMOxI6lphd50afaqgWiilsce+tna2NFdDW5+pLmCYJY
+ 4eyb+hHCRUwdAprB8cF1o8c7VuaDUFckDsEnnrhzj/FVfvy6j56W/GU3Ji9w7Wn3Lt0=
+X-Gm-Gg: AeBDieu5/Y+oPlgICBckVSRY3ah5l2srgMkvkDio1zBrcsbthmDUUHlZSFWqgZivbnO
+ BOhQCLDKyLb63v3K0ydtU/2xR6lDfTDpWZ/oNNEfc0hjQPThnMSM4VnXaP5mtrM7271FP7v7fxl
+ oqTJfWcEinFV37ZqnvBKpmspuQ3bJ49QVY4SGziQGEQCrFkmHKQTNdJ7RSbM2++jtJDflrXloqV
+ xsMr5k/w1viT359lxHRg28ImBL5H0Zx10QyQnUmGfEox/dIjDc+Ya4wZ2v/XOOPCc064jn4k9mq
+ 8c/5g9yOif58h0Qj2f3ghMbTcMgmwJXAoWokWTvLYjNQhEqJ4+DyYnkB3yoQp5sMjpg9QIGdQ1M
+ 12BLVdPpe+et8HmZLGnYAlffNTE9889Zv3AdN5SuMQeX/6G0Pc5+Spcg60PFKZuNNomXmntOj3P
+ v0lUBr3D1LdfIU1kw1FRbkDQKKNaF/mfAw4abici3sJc3u0cxtv6b5uB1ieMRpcQqHY4tSrjeG6
+ 7XQwzL5mm8HtSuSpXoZJQg=
+X-Received: by 2002:a05:6870:c03:b0:422:e938:6b49 with SMTP id
+ 586e51a60fabf-433f3b8d5f8mr2509926fac.38.1777402805444; 
+ Tue, 28 Apr 2026 12:00:05 -0700 (PDT)
 Received: from ?IPV6:2600:8803:e7e4:500:efba:bc47:a81b:dd0f?
  ([2600:8803:e7e4:500:efba:bc47:a81b:dd0f])
  by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-4340d4a9618sm95749fac.5.2026.04.28.11.45.06
+ 586e51a60fabf-4340d841467sm93954fac.16.2026.04.28.12.00.03
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 28 Apr 2026 11:45:07 -0700 (PDT)
-Message-ID: <9902b8d2-7c28-41f9-a6d0-36c6bf7456db@baylibre.com>
-Date: Tue, 28 Apr 2026 13:45:05 -0500
+ Tue, 28 Apr 2026 12:00:05 -0700 (PDT)
+Message-ID: <ade67190-4a3b-4a86-92e5-5f4a4376db2c@baylibre.com>
+Date: Tue, 28 Apr 2026 14:00:03 -0500
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 5/9] net: phy: air_phy_lib: Factorize BuckPBus register
+Subject: Re: [PATCH v2 7/9] net: dwc_eth_qos: Add mediatek support
 To: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de
 Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
  Jerome Forissier <jerome.forissier@arm.com>, Tom Rini <trini@konsulko.com>,
@@ -118,10 +118,10 @@ Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
  Leo Yu-Chi Liang <ycliang@andestech.com>, Tommy Shih
  <tommy.shih@airoha.com>, Kevin-KW Huang <kevin-kw.huang@airoha.com>
 References: <20260428-add-ethernet-support-for-genio-520-720-v2-0-9cf2f0884bd8@baylibre.com>
- <20260428-add-ethernet-support-for-genio-520-720-v2-5-9cf2f0884bd8@baylibre.com>
+ <20260428-add-ethernet-support-for-genio-520-720-v2-7-9cf2f0884bd8@baylibre.com>
 Content-Language: en-US
 From: David Lechner <dlechner@baylibre.com>
-In-Reply-To: <20260428-add-ethernet-support-for-genio-520-720-v2-5-9cf2f0884bd8@baylibre.com>
+In-Reply-To: <20260428-add-ethernet-support-for-genio-520-720-v2-7-9cf2f0884bd8@baylibre.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-Mailman-Approved-At: Wed, 29 Apr 2026 00:48:15 +0200
@@ -142,56 +142,125 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 4/28/26 8:17 AM, Julien Stephan wrote:
-> In preparation of Airoha AN8801R PHY support, move the BuckPBus
-> register accessors and definitions, present in air_en8811h driver,
-> into the Airoha PHY shared code (air_phy_lib), so they will be usable
-> by the new driver without duplicating them.
-> Also, update air_en8811h driver to use the new function names.
+> Synopsys DWC Ethernet QOS device support for MediaTek SoCs.
+> in particular this initial commit adds support for Genio 520/720 and
+> Genio 510/700 EVKs
 > 
-> Adapted from [1].
-> 
-> [1]: https://lore.kernel.org/all/20260326-add-airoha-an8801-support-v2-2-1a42d6b6050f@collabora.com/
-> 
+> Signed-off-by: fanyi zhang <fanyi.zhang@mediatek.com>
 > Signed-off-by: Julien Stephan <jstephan@baylibre.com>
 > ---
->  MAINTAINERS                          |   2 +-
->  drivers/net/phy/airoha/Kconfig       |   6 +
->  drivers/net/phy/airoha/Makefile      |   1 +
->  drivers/net/phy/airoha/air_en8811.c  | 304 ++++++++---------------------------
->  drivers/net/phy/airoha/air_phy_lib.c | 216 +++++++++++++++++++++++++
->  drivers/net/phy/airoha/air_phy_lib.h |  39 +++++
->  6 files changed, 329 insertions(+), 239 deletions(-)
-> 
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index 40ba3542ca3..4bda6b9e8c4 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -61,7 +61,7 @@ F:	lib/acpi/
->  AIROHA PHY
->  M:	Tommy Shih <tommy.shih@airoha.com>
->  S:	Maintained
-> -F:	drivers/net/phy/airoha/air_en8811.c
-> +F:	drivers/net/phy/airoha/
->  
->  ALIST
->  M:	Simon Glass <sjg@chromium.org>
-> diff --git a/drivers/net/phy/airoha/Kconfig b/drivers/net/phy/airoha/Kconfig
-> index da8747939e3..2a2f4f05bb2 100644
-> --- a/drivers/net/phy/airoha/Kconfig
-> +++ b/drivers/net/phy/airoha/Kconfig
-> @@ -7,6 +7,12 @@ config PHY_AIROHA_EN8811
->  	depends on PHY_AIROHA
->  	depends on SUPPORTS_FW_LOADER
->  	select FW_LOADER
-> +	select PHY_AIRONA_PHYLIB
->  	help
->  	  AIROHA EN8811H supported.
->  	  AIROHA AN8811HB supported.
+
+...
+
+> +static int mtk_config_dt(struct udevice *dev)
+> +{	struct eth_pdata *pdata = dev_get_plat(dev);
+> +	struct eqos_mtk_priv *mtk_pdata = pdata->priv_pdata;
+> +	struct ofnode_phandle_args args;
+> +	u32 tx_delay_ps, rx_delay_ps;
+> +	int ret;
 > +
-> +config PHY_AIRONA_PHYLIB
+> +	if (!dev_read_u32(dev, "mediatek,tx-delay-ps", &tx_delay_ps)) {
+> +		if (tx_delay_ps > DELAY_MAX_PS) {
+> +			pr_err("%s: dev=%p Invalid TX clock delay: %dps\n",
+> +			       __func__, dev, tx_delay_ps);
+> +			return -EINVAL;
+> +		}
+> +	}
+> +
+> +	if (!dev_read_u32(dev, "mediatek,rx-delay-ps", &rx_delay_ps)) {
+> +		if (rx_delay_ps > DELAY_MAX_PS) {
+> +			pr_err("%s: dev=%p Invalid RX clock delay: %dps\n",
+> +			       __func__, dev, rx_delay_ps);
+> +			return -EINVAL;
+> +		}
+> +	}
+> +
+> +	mtk_pdata->tx_delay_stage = tx_delay_ps / DELAY_PS_PER_STAGE;
+> +	mtk_pdata->rx_delay_stage = rx_delay_ps / DELAY_PS_PER_STAGE;
 
-Spelling: s/AIRONA/AIROHA/
+Possible uninitialized use of tx_delay_ps and rx_delay_ps.
 
-> +	tristate
-> +	help
-> +	  Airoha Ethernet PHY common library
+> +
+> +	mtk_pdata->tx_inv = dev_read_bool(dev, "mediatek,txc-inverse");
+> +	mtk_pdata->rx_inv = dev_read_bool(dev, "mediatek,rxc-inverse");
+> +	mtk_pdata->rmii_clk_from_mac = dev_read_bool(dev, "mediatek,rmii-clk-from-mac");
+> +	mtk_pdata->rmii_rxc = dev_read_bool(dev, "mediatek,rmii-rxc");
+> +
+> +	ret = dev_read_phandle_with_args(dev, "mediatek,pericfg", NULL, 0, 0, &args);
+> +	if (ret) {
+> +		pr_err("Failed to get mediatek,pericfg property: %d\n", ret);
+> +		return ret;
+> +	}
+> +
+> +	mtk_pdata->peri_regmap = syscon_node_to_regmap(args.node);
+> +	if (IS_ERR(mtk_pdata->peri_regmap)) {
+> +		pr_err("%s: dev=%p Invalid perif_cfg reg\n", __func__, dev);
+
+This error message is a bit misleading. The actual problem is that
+syscon_node_to_regmap() failed.
+
+> +		return -EINVAL;
+
+Why not return PTR_ERR(mtk_pdata->peri_regmap)?
+
+> +	}
+> +
+> +	return 0;
+> +}
+> +
+> +static int eqos_probe_resources_mtk(struct udevice *dev)
+> +{
+> +	struct eqos_priv *eqos = dev_get_priv(dev);
+> +	struct eth_pdata *pdata = dev_get_plat(dev);
+> +	struct eqos_mtk_priv *mtk_pdata;
+> +	int ret;
+> +
+> +	debug("%s(dev=%p):\n", __func__, dev);
+> +
+> +	ret = eqos_get_base_addr_dt(dev);
+> +	if (ret) {
+> +		dev_err(dev, "eqos_get_base_addr_dt failed: %d\n", ret);
+> +		return ret;
+> +	}
+> +
+> +	mtk_pdata = calloc(1, sizeof(struct eqos_mtk_priv));
+> +	if (!mtk_pdata)
+> +		return -ENOMEM;
+> +
+> +	pdata->priv_pdata = mtk_pdata;
+> +
+> +	ret = mtk_config_dt(dev);
+> +	if (ret) {
+> +		dev_err(dev, "mtk config dt failed: %d\n", ret);
+> +		goto err;
+> +	}
+> +
+> +	ret = mtk_clk_init(dev);
+> +	if (ret)
+> +		goto err;
+> +
+> +	pdata->phy_interface = eqos->config->interface(dev);
+> +	if (pdata->phy_interface == PHY_INTERFACE_MODE_NA) {
+> +		dev_err(dev, "Invalid PHY interface\n");
+> +		ret = -EINVAL;
+> +		goto err;
+> +	}
+> +
+> +	ret = mtk_set_interface(dev);
+> +	if (ret)
+> +		goto err;
+> +
+> +	ret = mtk_set_delay(dev);
+> +	if (ret)
+> +		goto err;
+> +
+> +	debug("%s: OK\n", __func__);
+
+FWIW, log_msg_ret() is good for debugging return values.
+
+> +	return 0;
+> +err:
+> +	free(mtk_pdata);
+> +	return ret;
+> +}
+> +
