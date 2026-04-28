@@ -4,99 +4,101 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C1E4FF885A
-	for <u-boot@archiver.kernel.org>; Tue, 28 Apr 2026 14:28:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C3CCFF885A
+	for <u-boot@archiver.kernel.org>; Tue, 28 Apr 2026 14:34:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D34588426E;
-	Tue, 28 Apr 2026 16:28:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id E72698426E;
+	Tue, 28 Apr 2026 16:34:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="iqTYm7SN";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="MJcNIzuN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CD0C4842A2; Tue, 28 Apr 2026 16:28:56 +0200 (CEST)
-Received: from smtp-relay-internal-1.canonical.com
- (smtp-relay-internal-1.canonical.com [185.125.188.123])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 967FE842C7; Tue, 28 Apr 2026 16:34:05 +0200 (CEST)
+Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
+ [IPv6:2607:f8b0:4864:20::32a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BEB7984255
- for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 16:28:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
- [209.85.128.70])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 41DCA3F861
- for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 14:28:54 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1777386534;
- bh=Qit23yoT/JLBtdiKkJqUQVtxZxvk5uZWi+AI+UC0yf4=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=iqTYm7SNsok9L0DPnDTjgxw1D+Of5qaR3QctCJWCQoh+KKbUKY/J37XsjBoV9J7Y7
- gKvU1qazI0zazhAXav1vCuJv2SETikJkJNdwqEhMZA3M+0F9fAkWSvHSswks6w5izr
- HpTdv2VD6XTrOYNrdEkuVBQh3nxFOhgH41VchJQ/Fg7CxYoCMA0xEk5eLd7qzl8G5n
- m4nqUmbx7HKzCWd/pf6OeuJYLkVHXiRPVIyAYr8xmDj+w7f3OfzdFoNj+IOjhTBVsF
- nXyu+IX6MuZprvSBCY5VBIGR6DAn/WjXBRbVJ8OHQ4LcvPs10EPzr/jQNkFCqixVSa
- qkQwzNs+5MW3tVodcOyNkYo2H0wBAGGOACGWWUFcmQYPl3ven6dVp43XbGUyv0XIaE
- r7NUn/b1m7drXDGmRrfZAsxD892jCN92kCOLhULXCMQQ7X3B3BkleVutY5K+iV2SRn
- slE+VZkWuI2pnx7lbJqpMRGMsbdS6mXUrgLf4yZVzyk4pZRSqfzoy9L4BIwsJ70qm0
- GXH9ZHpqOOl42BA4f6CuujQg+Knu7TxlN3ENLYkKRxkHVILT81leSZnYfdAuzs40ik
- JJf2RVCD4DyQz0y6d3YnIyHgqFPMqXS98ARyMP0NQ1wf3Ss7ddYOV68t6rrbO7lBP0
- RoD4ufnZ2vV3hS9/kpsoU2dI=
-Received: by mail-wm1-f70.google.com with SMTP id
- 5b1f17b1804b1-488c0120047so68000455e9.0
- for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 07:28:54 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777386534; x=1777991334;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ by phobos.denx.de (Postfix) with ESMTPS id 0FD2E84255
+ for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 16:34:03 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=briansune@gmail.com
+Received: by mail-ot1-x32a.google.com with SMTP id
+ 46e09a7af769-7dbe437b072so6555424a34.2
+ for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 07:34:03 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1777386842; cv=none;
+ d=google.com; s=arc-20240605;
+ b=aFNunH+4nW6Zg0Xa0oir4lqEai5xE7QJ7gokqdW+pJhJboHLDhJKf4MxMf4k5PlYd+
+ dHCd0TrXqZW2mIsWJU1+2wOe55A1059vYCzIOhW46/nZaDN0JUtJNoWgKRi4JeaoXFmG
+ ADxVghjsNj/98e1tx4lxCTgqwkt4Shmrh4zBKCDruzCZuYvECxjN7xdeRGIQh5g3Dkx5
+ fwQHUJTPyopXKjEFfBfb3fNHPRVgLpnKBsNksO/JAi3hSMaccLmpE76l6U255P4tQkyR
+ ta+wxYOLzWdlUXGaEzIKaf23pyZ7qKOwrhvXYD81cnVeDoJgFrxVE5fPu0sHFvVpTy5H
+ xIOg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=ex3pL7sstC6XQWeR9NibKcG1hxhEdJJ9DoIshOMOmEo=;
+ fh=hxgwr6lottpQV6gabjiqtX7m958ne43urJfyaoL4cZk=;
+ b=XTnswy2tLziXgKeie0jUtXs3PD8MqVN5NcXubTkZb+I+MeM808ZFXWyeDxQkpPqiuD
+ YVewSupHvw5FIQqFJz0JBzJ2AfAsvPK+TJd/yQTnKuRG4L6vkr0+D+9d61/CUv041sFU
+ b7prh3JYXKEutwQfI/xLQOGHRSXjbROOZz5PpRxSdu1ZYMUzIBf2ZySQ+/yHwZuRscr+
+ E4tXOQGheinXMaF2LDGB7qUtfUquTmIzYqAtUpSwU+6c/D/Va0BZ0QMlUYmx4FcfbgzI
+ jK0AEdOQanNHbmdd/2ZLH5VeyAgumcKn5R1XJblrUJfqGlzAEM+SZ/wDVYbNcoulyxtl
+ YPbw==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1777386842; x=1777991642; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Qit23yoT/JLBtdiKkJqUQVtxZxvk5uZWi+AI+UC0yf4=;
- b=aEhZy5Hy3F1u9khwLtSLaLzRbpPQozswD81ijEnkr+s3NF0Hd4YxZPM3GZ19qtcheH
- XWZWiHntLWGrgmGgsd1CZgggmo/QdS0rKblIlX02EL+MhDYH8oyFe53ZL3QpC9/NDR+N
- mtopl5+1Wg5tRW31uIEGDPIM46kixT5otrLyHXEc2hpsGR2Y7hup3UJaWjWwuWerPxrW
- ApMAJdh+B2JERvn3QPlq6NziA8MqAXzsLmh0Cm1/QvXusEAhW1zf/5Tp5gnINWc94poJ
- nHvdXII59jt35egpC6W1aW+cXYVzC/ZNYvlB+GXm7h3MtCUDxJPvjTB2n4BRvZga3XoT
- sjbg==
-X-Forwarded-Encrypted: i=1;
- AFNElJ/eKqsDO0E1ZM6LTo/fHXJQObK3OXWVJR9VdLIbabYayALH3Bem5rDlShxglL6h5kVa6pkYp0Y=@lists.denx.de
-X-Gm-Message-State: AOJu0YyH/0kSOcVQxxJ9qlSo+XAVUEPcc+qA5yTPI5QwibncD1l3spaO
- sJori5D22Z0ffLWHWIEwhcp7P+gZDtT1t6XCmhyigcvG7GeoblXy4wOfSIf3cPzZlrg3Lpbo5lg
- BIMzcO1YGmL0wgcjKa0+/2X6k7IYjWNjt5N5oOAl+JXSGRypNcYc4Q6IOWbc8dQdk7MHStd8=
-X-Gm-Gg: AeBDietuQoib7/DZ2SCc5aUW8725BZPqr1L1z9sBarDzwfpylFB+jAowYGt7wlOKVty
- bygBkmrvAf3PDcRxVveRjG62YvlN++sJloAmDmilOYyP6UVhZSzaIAx9BnmvgIB5HkcT/SJFEjU
- VqPlMzSXfIDbZI+E7NPm1Bv9FpFsGBi4W84I8cz3np32PvKi3saP6lj4BYwppVJQxSZ+kJ1LOFO
- PNOaafpsL+ynBEk3ARgMA/dB1FQMM8Bf/AXzM+BFpdGRcqhLefNFWk6gyKv2NjqKlU+bxKT6n3b
- F3d7O2L8CV0F78T4w8PJYBO4qotctnYUfB1ewAPiNfxfF6C818Yz2UQynuBxCXOY1ZaPQcD1UcE
- ZbRJ8XE7TRORDaFOvyFDIgLPwEDZ3Q1r2GvgbbfmzmD62BkRkIJEm9eA0u7H+y4K2MEqGvwpYOd
- +hPXdwtftKPkvWseH8/isypuPUwGJQXPFon1X9FzQXKRT7TxALWs6e2hQ2rk5y
-X-Received: by 2002:a05:600c:8109:b0:488:c530:48a0 with SMTP id
- 5b1f17b1804b1-48a77b24190mr60865655e9.24.1777386533722; 
- Tue, 28 Apr 2026 07:28:53 -0700 (PDT)
-X-Received: by 2002:a05:600c:8109:b0:488:c530:48a0 with SMTP id
- 5b1f17b1804b1-48a77b24190mr60865095e9.24.1777386533242; 
- Tue, 28 Apr 2026 07:28:53 -0700 (PDT)
-Received: from workstation5 (ip-176-199-115-125.um44.pools.vodafone-ip.de.
- [176.199.115.125]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-48a774c3ddfsm46391335e9.2.2026.04.28.07.28.52
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 28 Apr 2026 07:28:52 -0700 (PDT)
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: Javier Tia <floss@jetm.me>, Simon Glass <sjg@chromium.org>,
- u-boot@lists.denx.de, Quentin Schulz <quentin.schulz@cherry.de>,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH v2 1/1] .clang-format: add U-Boot specific for each macros
-Date: Tue, 28 Apr 2026 16:28:48 +0200
-Message-ID: <20260428142848.48156-1-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.53.0
+ bh=ex3pL7sstC6XQWeR9NibKcG1hxhEdJJ9DoIshOMOmEo=;
+ b=MJcNIzuNAkq7GYV5MtJcMWWIt+0utm/U3M6Uahcj8lCLZVjYLr4Gz/3790dVhJgZY2
+ qZPMI+EHD0Ia3f0xlG+6WxTNSJPtfFB4YzPm2i1HgQ+zYE4Uy0Ll57xNhJVI7lshPQns
+ iF6cdwIvStQB1PABz00nnT7oPBP3gr2rtVvkDCc3W7QrC/79CqhhiQJ7zHf0dk+AQO+9
+ ubJQn99H+HdSXi3K6uVznYCK/MfWYHlr3SgMTchEold4Y5eNh1yLEB1v0SxDUb3Yf+IR
+ XE3vfpJaXs8REHneqJXQkIfmbimN5Ejd3IAd8t0AdLAs3r4etQqDeQQpg5cCJB5Lm/hG
+ OKQg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1777386842; x=1777991642;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=ex3pL7sstC6XQWeR9NibKcG1hxhEdJJ9DoIshOMOmEo=;
+ b=JZlsxDREa23JJWY8TY+2jKZTyfL9eoDZAtREF1kpu7fWN+lMcBFKjOm3VeZLlTh2hk
+ egBxKBFFkK9hFp2DcRVHSyVPYM8d9W0p12Ys63Ai1IoU/60gRI+z1vXZ0duUhRImf3S2
+ 3t4rz+LBf3zNgOgjOYjb5XXiGHzl2TFBUdJybq31SSF296iZ08/Hm25dJ3mLJUimzMam
+ zvwb4E3yQJ54SehymuG3R5gFmrXcBYLsTni4zw4C6Cre1eq0Tf2u1U2NQ7i7/vwcgDKT
+ 6SpMqdeomDJbx+bfiaNa3Z+hjXti6eLV82xdcmxiUftuWKPW+2wYgvPqIQg0XHAF6bos
+ z3Gw==
+X-Gm-Message-State: AOJu0YyjQu4j6ZB3iunsvWXB5qW/yNCJ6JvZfpJwDPzF6NrGwKBrbJjm
+ 3g6ea+QnYgXqkKkQxFCScGh8wkMk9+/wliYQOsz+CQDH0gIBw2bDEYolcZ+3+ixXuM7yloM+KsJ
+ B6i0Tf5fOuA+u3K10Ikx3SYAF7N//9GQ87GPG2+w=
+X-Gm-Gg: AeBDieu+VYHFTDwqd/9YeSsPoDOszikKyjmbksSHJZL+iWDpIeiDP0Dw+qGRUIQTy+P
+ kACDYg8Hi0G7b8sGeoR1zvnG8bXuXxZGqgMZKwB/w57cAO1TYaFCWOwtajbX5rJaa3g2bjS65Mz
+ wmyleOdEIea1JMrUDpa2ggzMMUaQ5O8+IXPMF2RAHWbcRSOYVujUPtk+mg1LqBsF/uh2n78I7zN
+ 869BeXD6/ugGkDH6E/AgzRxryhzoGjZ8N6F3w3lvavFINfP73dtpiaFwal/5mE5rPeMCN98CaNh
+ Jr/LvEWqg4Fw3TBzAc8=
+X-Received: by 2002:a05:6830:264a:b0:7dc:c7aa:22c7 with SMTP id
+ 46e09a7af769-7de99c5261dmr1980267a34.0.1777386841464; Tue, 28 Apr 2026
+ 07:34:01 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20260423042824.3480-1-briansune@gmail.com>
+ <CAFLszThg=EamyRohxNA7V+nk+OMVK356nUjAVSbu4+kokOJpdA@mail.gmail.com>
+In-Reply-To: <CAFLszThg=EamyRohxNA7V+nk+OMVK356nUjAVSbu4+kokOJpdA@mail.gmail.com>
+From: Sune Brian <briansune@gmail.com>
+Date: Tue, 28 Apr 2026 22:33:49 +0800
+X-Gm-Features: AVHnY4LVI_lrJV14Y91ulvIU4tsnepHMmwwJpibvB3I5mIMrda9T-l5oVOQ3kXY
+Message-ID: <CAN7C2SAdg1MX3ZfEt5-68iiw3pdjyqva48F_uJjNwsHAhdmY3Q@mail.gmail.com>
+Subject: Re: [PATCH v6] Improve handoff prepare on SoCFPGA
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de, Chee Tien Fong <tien.fong.chee@altera.com>, 
+ Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -113,87 +115,79 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Formatting via clang-format is controlled by .clang-format.
-For each statements should be formatted with a brace at the line end:
+On Tue, Apr 28, 2026 at 10:04=E2=80=AFPM Simon Glass <sjg@chromium.org> wro=
+te:
+>
+> Hi Brian,
+>
+> On 2026-04-23T04:28:24, Sune Brian <briansune@gmail.com> wrote:
+> > Improve handoff prepare on SoCFPGA
+> >
+> > Ensure qts folder header files are properly updated by isolating
+> > the Python execution environment. This prevents partial or failed
+> > script runs from corrupting the target directory.
+> >
+> > Changelog v5 -> v6:
+> >  - Clean HANDOFF_KEEP comments.
+> >
+> > Changelog v4 -> v5:
+> >  - Change HANDOFF_KEEP condition to if [ '$${HANDOFF_KEEP:-0}' !=3D '0'=
+ ]
+> >  - Add HANDOFF_KEEP and HANDOFF_PATH comments in config.mk
+> >
+> > Changes:
+> >  - Implement a temp folder for Python script execution.
+> >  - Clean temp folder automatically despite execution failures.
+> >  - Gate the file replacement process on the successful exit of
+> >    the Python scripts.
+> >  - Execute the replacement (with or without keep) only upon script
+> >    success via the NEW HANDOFF_KEEP=3Dxxx variable.
+> > [...]
+> >
+> > arch/arm/mach-socfpga/config.mk | 39 ++++++++++++++++++++++++++++++++++=
+++---
+> >  1 file changed, 36 insertions(+), 3 deletions(-)
+>
 
-    for_each() {
-    }
 
-This requires clang-format to know that the symbol is not a function
-but a for each macro. We use some for each macros which don't exist in
-Linux. Add these to file .clang-format.
+Dear Simon,
 
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
-v2:
-	search all directories (not only /include) for definitions
-	sort alphabetically
----
- .clang-format | 51 +++++++++++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 51 insertions(+)
+B.C. the server is down and I don't expect Google to have an auto fail
+mailing recovery.
 
-diff --git a/.clang-format b/.clang-format
-index 48405c54ef2..e86a17da147 100644
---- a/.clang-format
-+++ b/.clang-format
-@@ -748,6 +748,57 @@ ForEachMacros:
-   - 'ynl_attr_for_each_nested'
-   - 'ynl_attr_for_each_payload'
-   - 'zorro_for_each_dev'
-+  # U-Boot specific
-+  - '__for_each_child_of_node'
-+  - '__usbhs_for_each_pipe'
-+  - '__usbhsg_for_each_uep'
-+  - '_for_each_zynqmp_part'
-+  - 'alist_for_each'
-+  - 'alist_for_each_filter'
-+  - 'cvmx_coremask_for_each_core'
-+  - 'cvmx_coremask_for_each_node'
-+  - 'dev_for_each_property'
-+  - 'dev_for_each_subnode'
-+  - 'expr_list_for_each_sym'
-+  - 'fdt_for_each_node_by_compatible'
-+  - 'fdt_for_each_property_offset'
-+  - 'fdt_for_each_subnode'
-+  - 'for_each_bin_hdr_v0'
-+  - 'for_each_bl_params_node'
-+  - 'for_each_child_withdel'
-+  - 'for_each_console_dev'
-+  - 'for_each_ext_hdr_v0'
-+  - 'for_each_label'
-+  - 'for_each_label_withdel'
-+  - 'for_each_marker'
-+  - 'for_each_marker_of_type'
-+  - 'for_each_memory_map_entry_reversed'
-+  - 'for_each_mmc_mode_by_pref'
-+  - 'for_each_opt_hdr_v1'
-+  - 'for_each_property_withdel'
-+  - 'for_each_sd_mode_by_pref'
-+  - 'for_each_supported_width'
-+  - 'for_each_tpm_device'
-+  - 'for_each_w1_device'
-+  - 'for_each_zynqmp_image'
-+  - 'for_each_zynqmp_part'
-+  - 'for_each_zynqmp_part_in_image'
-+  - 'mtd_for_each_device'
-+  - 'ofnode_for_each_compatible_node'
-+  - 'ofnode_for_each_prop'
-+  - 'ofnode_for_each_subnode'
-+  - 'pko_for_each_port'
-+  - 'sfi_for_each_mentry'
-+  - 'ubi_for_each_free_peb'
-+  - 'ubi_for_each_protected_peb'
-+  - 'ubi_for_each_scrub_peb'
-+  - 'ubi_for_each_used_peb'
-+  - 'ubi_rb_for_each_entry'
-+  - 'usbhs_for_each_dfifo'
-+  - 'usbhs_for_each_pipe'
-+  - 'usbhs_for_each_pipe_with_dcp'
-+  - 'usbhsg_for_each_uep'
-+  - 'usbhsg_for_each_uep_with_dcp'
- 
- IncludeBlocks: Preserve
- IncludeCategories:
--- 
-2.53.0
+> I see 6 copies of this v6 patch in patchwork, so I wonder if I got the
+> right one?
 
+I will try to respond to this email as politely as possible.
+Please reference from "patchwork.ozlabs.org" list.
+
+> The per-version changelogs belong below the '---' separator, not in
+> the commit body. Also U-Boot convention is 'Changes in vN:' rather
+> than 'Changelog vN -> vN+1:'.
+>
+> You could try using 'patman' which will get this right for you automatica=
+lly:
+>
+> https://docs.u-boot.org/en/latest/develop/patman.html
+>
+
+1) I only do basic software
+2) I used ./script/checkpatch.pl There are no errors, warnings etc.
+3) There is nothing to do with the patch itself either the software
+nor the file itself.
+4) I am not too familiar with patman
+5) There are many better things to do rather than complaining about
+the patch headers.
+
+So forgive me I really don't give a damn on whatever the header requirement=
+s.
+If you feel this is not passing the patch standard simply reject or
+label all patches to
+"Changes Requested".
+
+With all respect,
+Brian
+
+>
+> Regards,
+> Simon
