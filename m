@@ -4,55 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4470FF885A
-	for <u-boot@archiver.kernel.org>; Tue, 28 Apr 2026 22:48:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5439FF885A
+	for <u-boot@archiver.kernel.org>; Tue, 28 Apr 2026 22:48:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D5DEA846C1;
-	Wed, 29 Apr 2026 00:48:17 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5934F846C8;
+	Wed, 29 Apr 2026 00:48:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="ImZkt/zk";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="JEgxlUAv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F31C384664; Tue, 28 Apr 2026 20:04:52 +0200 (CEST)
-Received: from sea.source.kernel.org (sea.source.kernel.org
- [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
+ id 031F88465E; Tue, 28 Apr 2026 20:04:53 +0200 (CEST)
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7DC3984674
+ by phobos.denx.de (Postfix) with ESMTPS id 69CF584669
  for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 20:04:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=devnull+christian.dreher.nanoxplore.com@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id F3DF0441D7;
+ by sea.source.kernel.org (Postfix) with ESMTP id E164244064;
  Tue, 28 Apr 2026 18:04:46 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id D7170C2BCB9;
+Received: by smtp.kernel.org (Postfix) with ESMTPS id C7BDBC2BCB7;
  Tue, 28 Apr 2026 18:04:46 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=k20201202; t=1777399486;
- bh=mrlGr/d8yy87uKVmydZvefXxDFcwk2ymAz8fKV2K0bw=;
+ bh=cFFsDEuRX70J4rTHrmbPpO8/BDkt34P6VLGK/RvMGhw=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
- b=ImZkt/zk2eByNImLHBxftCqzf0E9leO3vl2FAmgtggKty+U7jEWDOvGGK79uxy542
- 8GkcAWR0w1CNmhRgPH9KvgtQFtWWe99Hstrx6EQnPmVWxXAn+kLn3Vl4zooLY6e92T
- KJNkos8iVTgqu8sXIE8yskO+SmykifKpEAxDEyT74/z4oBYKTljj2BUG85RiTDDjsd
- /HbS9FxntURZlgyPJAUuYafnG1tM1kXzaF6MRY38AUUM1eFdqeezCdjbNfHeTcSkDq
- xwTxOWHP7yrHTITn8N3iii9WmPA+QO/HBMKNZF+b4C7G3bgKt2HfHQIIwwIGUc+HYh
- BbajxUVW3rumw==
+ b=JEgxlUAv+RF2gdvtWL0zfXmo/ExB1A68gbgfH3koQ5N0jjJ8kiimj9KlP1zm7Nm0M
+ nuTQgIKb2V08ETFpZ+tS5s2/dq9SH5mJ50PLp6O8RHbI4V9tHH583sJn0B13qvmqs4
+ OAxDDWEhlUsX5FHZmXa3nCuKNeKhzWBk9Ykl2rBEJnta3luOvUGSeQzSH0x0CmoAvn
+ m+ycq2ta3SRcpHG7cgE+LoIycsH3xlPtCrtO3U5/H+4tdiTUpA3xhEx159BaTEnJvY
+ 1Hdo9Q+9aDwXPn840/z9Ce4qhPi+/HHDkg1zGvM/fEKKdoS/zeJrWzh3NQxQhgyxiv
+ xPvnd7EYY0x8Q==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id D0CC4FF885A;
+ by smtp.lore.kernel.org (Postfix) with ESMTP id C013EFF886D;
  Tue, 28 Apr 2026 18:04:46 +0000 (UTC)
 From: Christian DREHER via B4 Relay
  <devnull+christian.dreher.nanoxplore.com@kernel.org>
-Date: Tue, 28 Apr 2026 20:04:08 +0200
-Subject: [PATCH 4/4] net: macb: add gigabit implementation for fixed-link
+Date: Tue, 28 Apr 2026 20:04:07 +0200
+Subject: [PATCH 3/4] net: macb: do not set user_io when it does not exist
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260428-net-macb-support-for-feature-lite-instances-v1-4-480e4cecac01@nanoxplore.com>
+Message-Id: <20260428-net-macb-support-for-feature-lite-instances-v1-3-480e4cecac01@nanoxplore.com>
 References: <20260428-net-macb-support-for-feature-lite-instances-v1-0-480e4cecac01@nanoxplore.com>
 In-Reply-To: <20260428-net-macb-support-for-feature-lite-instances-v1-0-480e4cecac01@nanoxplore.com>
 To: u-boot@lists.denx.de
@@ -60,11 +59,11 @@ Cc: Jerome Forissier <jerome.forissier@arm.com>,
  Tom Rini <trini@konsulko.com>, 
  Christian DREHER <christian.dreher@nanoxplore.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1777399485; l=2337;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1777399485; l=3683;
  i=christian.dreher@nanoxplore.com; s=20260428; h=from:subject:message-id;
- bh=C5Nzv11Bwryz9D8hZGO5arZ3cYSEIEx4tJZcH1tjt9k=;
- b=jktcw76AUqrFYKKOIov1SKJ23gxal8xRE0YBkgG50FZIBR4mdRJZsK8jjIR2cQPFCWoh3Y3BN
- o5eaMDjjG9MDcqWV8tqYZEfo2cSU8lloghIB16pmZDz/Ik3W1TktCsG
+ bh=azfemyGZY4URq8jSKvMACBdrUxtdTLkpvC20Z3LnAS4=;
+ b=3XnWTuEJnfLwpj/f0+sHJTsXq0+k8Anw9xnbR4N9uvZGXSIyIp+2ksxRLnNO7AJ42frj4sBjx
+ 1nNnix1yrvtCzn3kTZmRZlN/2CNS1nbRsR5/cj2SBIGi6kqP4ZJ5wxS
 X-Developer-Key: i=christian.dreher@nanoxplore.com; a=ed25519;
  pk=id7EcKmXLV2xNgNiCIcsPjkoMQHM/qxTYqEqMhidSAU=
 X-Endpoint-Received: by B4 Relay for
@@ -90,78 +89,103 @@ X-Virus-Status: Clean
 
 From: Christian DREHER <christian.dreher@nanoxplore.com>
 
-A fixed gigabit link on a non-gigabit controller is only rejected
-during PHY init (even though there is no PHY to init), because, on
-device-tree parsing, the controller is not probed, and it is still
-unknown whether it is gigabit-capable.
+Cadence Ethernet MAC has a feature named user_io, which provides
+some input and some output signals for arbitrary purpose in the SoC.
+From the driver code, I understand that, on Atmel SoC, it is used to
+drive the PHY mode.
 
-This code was only tested on emulator with a full-duplex RGMII
-interface, but is expected to work in GMII or half-duplex as well.
+At least on Cadence IP7014 r1p12, this feature is optional, and I am
+working on a SoC that does not instantiate it. The presence of this
+feature is advertised in DCFG1, this patch merely disables the access
+to the user_io register based on this information.
+
+I did not apply this change to the non-gigabit capable versions of
+the IP, as I do not have documentation for them, and a new non-gigabit
+instance is unlikely to appear. I prefer avoiding regressions on old
+systems.
 
 Signed-off-by: Christian DREHER <christian.dreher@nanoxplore.com>
 ---
- drivers/net/macb.c | 32 ++++++++++++++++++++++++++++----
- 1 file changed, 28 insertions(+), 4 deletions(-)
+ drivers/net/macb.c | 51 ++++++++++++++++++++++++++++++++-------------------
+ drivers/net/macb.h |  2 ++
+ 2 files changed, 34 insertions(+), 19 deletions(-)
 
 diff --git a/drivers/net/macb.c b/drivers/net/macb.c
-index 5cc29ecb214..bea1dfed892 100644
+index 807a038e071..5cc29ecb214 100644
 --- a/drivers/net/macb.c
 +++ b/drivers/net/macb.c
-@@ -772,18 +772,40 @@ static int macb_phy_init(struct udevice *dev, const char *name)
- 			lpa);
- 	} else {
- 		/* if macb port is a fixed link */
--		/* TODO : manage gigabit capable processors */
-+		const char *human_readable_speed;
-+
- 		speed = macb->speed;
- 		duplex = macb->duplex;
-+		switch (speed) {
-+		case 2:
-+			human_readable_speed = "1000";
-+			break;
-+		case 1:
-+			human_readable_speed = "100";
-+			break;
-+		case 0:
-+			human_readable_speed = "10";
-+			break;
-+		default:
-+			printf("%s: speed %d not supported\n", name, speed);
-+			return -EINVAL;
-+		}
- 		printf("%s: link up, %sMbps %s-duplex\n",
- 			name,
--			speed ? "100" : "10",
-+			human_readable_speed,
- 			duplex ? "full" : "half");
- 	}
+@@ -927,26 +927,39 @@ static int _macb_init(struct udevice *dev, const char *name)
+ 		/* Check the multi queue and initialize the queue for tx */
+ 		gmac_init_multi_queues(macb);
  
- 	ncfgr = macb_readl(macb, NCFGR);
- 	ncfgr &= ~(MACB_BIT(SPD) | MACB_BIT(FD) | GEM_BIT(GBE));
--	if (speed) {
-+	if (speed == 2) {
-+		if (!gem_is_gigabit_capable(macb)) {
-+			printf("%s: is not gigabit Ethernet capable\n", name);
-+			return -EINVAL;
+-		/*
+-		 * When the GMAC IP with GE feature, this bit is used to
+-		 * select interface between RGMII and GMII.
+-		 * When the GMAC IP without GE feature, this bit is used
+-		 * to select interface between RMII and MII.
++		/* This driver uses the user I/O to select the PHY features,
++		 * but some GEM instances come with a fixed configuration and
++		 * no USERIO.
+ 		 */
+-		if (macb->phy_interface == PHY_INTERFACE_MODE_RGMII ||
+-		    macb->phy_interface == PHY_INTERFACE_MODE_RGMII_ID ||
+-		    macb->phy_interface == PHY_INTERFACE_MODE_RGMII_RXID ||
+-		    macb->phy_interface == PHY_INTERFACE_MODE_RGMII_TXID)
+-			val = macb->config->usrio->rgmii;
+-		else if (macb->phy_interface == PHY_INTERFACE_MODE_RMII)
+-			val = macb->config->usrio->rmii;
+-		else if (macb->phy_interface == PHY_INTERFACE_MODE_MII)
+-			val = macb->config->usrio->mii;
+-
+-		if (macb->config->caps & MACB_CAPS_USRIO_HAS_CLKEN)
+-			val |= macb->config->usrio->clken;
+-
+-		gem_writel(macb, USRIO, val);
++		if (gem_readl(macb, DCFG1) & GEM_BIT(USERIO)) {
++			/*
++			 * When the GMAC IP with GE feature, this bit is used to
++			 * select interface between RGMII and GMII.
++			 * When he GMAC IP without GE feature, this bit is used
++			 * to select interface between RMII and MII.
++			 */
++			switch (macb->phy_interface) {
++			case PHY_INTERFACE_MODE_RGMII:
++			case PHY_INTERFACE_MODE_RGMII_ID:
++			case PHY_INTERFACE_MODE_RGMII_RXID:
++			case PHY_INTERFACE_MODE_RGMII_TXID:
++				val = macb->config->usrio->rgmii;
++				break;
++			case PHY_INTERFACE_MODE_RMII:
++				val = macb->config->usrio->rmii;
++				break;
++			case PHY_INTERFACE_MODE_MII:
++				val = macb->config->usrio->mii;
++				break;
++			default:
++				break;
++			}
++
++			if (macb->config->caps & MACB_CAPS_USRIO_HAS_CLKEN)
++				val |= macb->config->usrio->clken;
++
++			gem_writel(macb, USRIO, val);
 +		}
-+		ncfgr |= GEM_BIT(GBE);
-+		ret = macb_linkspd_cb(dev, _1000BASET);
-+	} else if (speed == 1) {
- 		ncfgr |= MACB_BIT(SPD);
- 		ret = macb_linkspd_cb(dev, _100BASET);
- 	} else {
-@@ -1329,7 +1351,9 @@ static int macb_eth_of_to_plat(struct udevice *dev)
- 		macb->phy_addr = PHY_MAX_ADDR + 1;
- 		macb->duplex = fdtdec_get_bool(blob, fl_node, "full-duplex");
- 		speed_fdt = fdtdec_get_int(blob, fl_node, "speed", 0);
--		if (speed_fdt == 100) {
-+		if (speed_fdt == 1000) {
-+			macb->speed = 2;
-+		} else if (speed_fdt == 100) {
- 			macb->speed = 1;
- 		} else if (speed_fdt == 10) {
- 			macb->speed = 0;
+ 
+ 		if (macb->phy_interface == PHY_INTERFACE_MODE_SGMII) {
+ 			unsigned int ncfgr = macb_readl(macb, NCFGR);
+diff --git a/drivers/net/macb.h b/drivers/net/macb.h
+index 0eb90574618..002d5bd31b2 100644
+--- a/drivers/net/macb.h
++++ b/drivers/net/macb.h
+@@ -443,6 +443,8 @@
+ #define MACB_REV_SIZE				16
+ 
+ /* Bitfields in DCFG1. */
++#define GEM_USERIO_OFFSET			9
++#define GEM_USERIO_SIZE				1
+ #define GEM_IRQCOR_OFFSET			23
+ #define GEM_IRQCOR_SIZE				1
+ #define GEM_DBWDEF_OFFSET			25
 
 -- 
 2.47.3
