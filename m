@@ -4,91 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1BDECFF885A
-	for <u-boot@archiver.kernel.org>; Tue, 28 Apr 2026 14:10:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D14CFF885A
+	for <u-boot@archiver.kernel.org>; Tue, 28 Apr 2026 14:11:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A1DC184150;
-	Tue, 28 Apr 2026 16:10:19 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1457E84693;
+	Tue, 28 Apr 2026 16:11:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="h06WVX7+";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="J6mcQ3Qh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 368B7843B6; Tue, 28 Apr 2026 16:10:18 +0200 (CEST)
-Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
- [IPv6:2a00:1450:4864:20::636])
+ id 298FF84605; Tue, 28 Apr 2026 16:11:57 +0200 (CEST)
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [IPv6:2a00:1450:4864:20::632])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3B70883FB5
- for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 16:10:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id ACFD88466D
+ for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 16:11:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x636.google.com with SMTP id
- a640c23a62f3a-ba7fd666666so1064129666b.3
- for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 07:10:15 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1777385415; cv=none;
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-ba6838e76f2so1187522166b.2
+ for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 07:11:52 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1777385512; cv=none;
  d=google.com; s=arc-20240605;
- b=ikkXsxFWSA5+Z1MKpDKzFlz5UkAlcCVbfasmtBj+tqAU7LKXMZbLgygr0L/pABFnkd
- jPX9+H4OkWWceqdC43+w8vC9TIyxXI3yhDLUcMIc/tIpbwt2dlinepVXtZp9TtLHpbEy
- MsWLk63Uvqr46arXqFHciJr9EWKHUVnsojg3w6dSsrCJMMhHJSfLZzo9hS2ltq6u7as9
- aCCoEzQc7UdoXqJQhXCckPhVDWKoYU0W6fhZR1ESMuRbGePZAYok8p78RDqS00ew1zmM
- FGY+jMEhYYnNxIl+d+dvUaSaq+Ft/I4C98cAQO+iwqUPs8rhb+mEfwO/wlVWv8WsSJCN
- jGqQ==
+ b=e5m8o23a6OOjc9RICfWvJBt/Jg7Col0YCX3QL/8XjOHLeCAvCl47j0VfEHYWMd9CDn
+ PWWV3BotAUvVU+k6nWikCuEct5ak1WPoccvqhVf65+PKecM1Uv1c+II8tjAUUxHT4LRp
+ d7B+J1gQgIjqCj366v4NNQgCp2ZMxKKsYtKQedb3Y22GWJZG2wAwd8sOka/E1z2MidZe
+ 8xnPqrKxaihZCXgyiR+6vRadlE4nzfiTuAJlLsYqaE4U49hSsiGBYm/nxQBkAzuD2Tcj
+ 4i9zUrx61g0YSvPo4UYXcRxZ1xKb/rrZSHQQttnlHs/6Es6eaySszy7gss8fBO6s7ioy
+ i/jw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=6YMu3axVWkIX7+rV9F14G3P8TtHtqZcRDj0U6GbjgUA=;
+ bh=kE6qjtL466KvQxFJ/b88spzGuIBVeojkJgJNr3iWeoo=;
  fh=fJAGB8LvxCJalDRE+ziaXIW21+gD5jSCb0B1QEwHsvE=;
- b=UbdPE52/Qxg5KC+Nbg3JQV/Hn/eO2mV5x1mw1JQ+F5sJGYlgrFud0Fde3DCtCFfbjV
- 9B7KQnkjpja2bBeI1RPvexYhpR5dUHx+BDGq6s2dIUpKFywVT/UL66CaLBGWeS9lGx/9
- LpdNNBv4kz/PBd9M6451kWEerwcQJviH1JFGNcOkjxGTl/6wD9Ozas6lHbOWBqq+n2qH
- o4BPc0o0q+SHYVayuUINBJwiXa8b794IlWDHUe1w709qHADQEDs4dJZU7I6/9Xx7s6Sa
- 9Gmu8BhSsjVgMooL8Jdo0IbvD3rq0gA5oeGPMq0OjOxBRmFd/bd2JyiGDJYxbSgQ5iab
- awhQ==; darn=lists.denx.de
+ b=H1Z32lmtPtLrLwkGjdR87v+g5FP4Qf3A6F5oPG95n3PzSu+EyTGJ41MoTNukjR+otw
+ 7Gw3OSSkHd8wDeErc6880JDh78PX2jskfxYjaf+n9S5ZOyiBgdpoTitPD7erDvZ+Jav8
+ 2EYw6NvfcfQ7XLnT5Ws5tGsLDs7+a7VL5ZUhQIac6vtJyQNgRt7mY1VMWlzbW54Lf180
+ FihO+wjiAyJdyko9Py1aa45iWfPRMwhQwtu2FfgCER351euGgOTkiDcAUUz1k+LHdHgh
+ z6LUauytFnYNVT5aca4dJ6xOztM8Hn8yN3aHVunpkPXvFhQo+e9vT+qe1GsZvAhkNSFc
+ C7Tg==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1777385415; x=1777990215; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1777385512; x=1777990312; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=6YMu3axVWkIX7+rV9F14G3P8TtHtqZcRDj0U6GbjgUA=;
- b=h06WVX7+V/JfwQY3K5Nngn5t0amddjMLgWlyR8ogE3EGJaO6TnOCpOhHV/m7FNn5yv
- j9nrM+A5SfGjWjzU5xKIQ3luJxN+9GeUjkcBFDKjKclcgtxKHs04NXyfqjfUkPXECiya
- PTsZYVXoKIlxb/OQ1m02dj9qKqU/dfPZEHEgA=
+ bh=kE6qjtL466KvQxFJ/b88spzGuIBVeojkJgJNr3iWeoo=;
+ b=J6mcQ3Qhb1sjctVB/GygOKvhyMWKLh3l25754+n2OEc7kH3r52ZFKIgfFszdBFPMNa
+ TiDIKvJxCZKNFRCQ2iv16d2Km724HpZbaneNd15WQQfjRPMxqmRtZW9wALFosk+O6Lnw
+ HUaG+o8MIWWfyb3ZCygNU8lNpDCmmJn2R2PLg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777385415; x=1777990215;
+ d=1e100.net; s=20251104; t=1777385512; x=1777990312;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=6YMu3axVWkIX7+rV9F14G3P8TtHtqZcRDj0U6GbjgUA=;
- b=iGQk90rL9vu8fFM7HxmfEmhoSjl/QyGAJDxBQfbVFZhGrenOJmSz733Asb8me58Ke8
- fcfPG0BsTLJM1MHYU89K0c61HfylDNJJSX212SP7JmkfGGTZO5G+yoT+budNzS9fe1L7
- POSjgK2/h7xye1QYVOki7daekE3/e4JDzu41Rl4+2kOIYvxb9gFq6zMPJxmb21wQVl9t
- XBdujpOyjRUuCW9AN1af4bk25k6zIToAL5ZqKdy3sb0jz3yxDhjeLoypLkvm9o3l48a7
- qWsyTrE2yhd9Fmi1OgPh+M3TvGApwdK3v08F3Dy3m5zadrBazorwXeLbKTQNLjAztcjc
- 3dtw==
-X-Gm-Message-State: AOJu0YzQLrXqnxxgDfHraX7R2B2WZtS3oTYV1F8Ew2dxSFTdqQlytFdy
- 4ZHGrY8PAa/iWv2PRyKB46RzxbB+a1h+oCGSwjNzcNLQSvuajdT8ON+W7WHOCcMeEr/5HGsN9Oe
- cTrNh+4OZb6USe72ObkCQbsywGRQoNTkcS4MBTj4g5zJedLKak3Y=
-X-Gm-Gg: AeBDies0HXDr1hcPwJOwpYqdmPIhu5eqhLg/FnNBoCfhJZu5Kw8PajXQJ3NfINhsAMa
- VqnHz+k5HVsTBIOWoxMznZqZhv/zk7EgwSAwUeUS60f7K1y4peOSd/1p7twaEBL1GbIfr4Ft7Ws
- PmqKETGnqculamj6KjLO/SUrIO11u0Jhs13AzvLT2ZbSVkbvrn5mVO1vkT7lEfTt/aGTAv/pCQn
- F2iW3IV6G2MM+Dj1w5ekr4rcmQDQ23xZei8J7r7LGLxHrpeVp4RcnyYWBQHWNx94bIHXKpwSjQG
- HTqu3YMkuPusA4H5
-X-Received: by 2002:a17:907:e112:b0:ba9:1431:8b7f with SMTP id
- a640c23a62f3a-bb8029bf618mr144487266b.18.1777385414630; Tue, 28 Apr 2026
- 07:10:14 -0700 (PDT)
+ bh=kE6qjtL466KvQxFJ/b88spzGuIBVeojkJgJNr3iWeoo=;
+ b=Ej4TS5beCxz1pXDIgl5RnYjzErXvmvTb9PnZ0bF2ecRlgI6hCDljZMzBfzVAoXgDRC
+ QjEPvUIT+ExtOwdjbEfryK6vzMZY1WMxDqEnjeTxXheJ0QwAqxTzzgMkIm5GIbXl1949
+ cFMTQpJP3AyhBZOJL0EbYTYGniN2EK0EB+TU+gkqymdq85ByM9s1mHM8e3paKN85awFD
+ BG2C/hGmEJw/gX/EnlylZflEgJWn0v41xi8/2btEbUdD6PBTjoFLMR27MY2fWksjPDxW
+ 8Ys/SEOgxwbRr77G1RnY4GlFUOIkyOgRUHqPNMhci9Cy7oa3SvsHyw1xiwS7HcvWf/K6
+ 772g==
+X-Gm-Message-State: AOJu0Yx8FdYM9U+24Dff+zcNfJuHAQrXlUVJAURft1HTKoKOZhyaUXlI
+ Y0KkS1P30/VC4A69kfRfGuNbw2TUWdmHpqO77RM3Cjs5fr5nqJUUU+b5L+izfcOuptLL3WJG6qZ
+ etYHfjarS5nUQLQUeFDYnPkGgrKTUBy1qUOalu2ft2qtGb8P0JLo=
+X-Gm-Gg: AeBDieuB6tmkONw+NVvkRw8txQaf0YvRoTBbLzqa/7j36P8TcQPVa4AKDNGdpnfJFdx
+ 1jnZMcZLZJpzEXnnuA8MdqlxJV+3prg0h4ZONn/5aMg4Tl6Oj4psRW76SaGZmhXFJ7/R0+RWgTS
+ B7Upl0tDMdeDT95geI0wv13YTrahqyMBeVKxW2SW4gbqDE1zeRxt7yrheypC5S7ocuYSpBnVBPJ
+ 3lQ0Ipvojh3baLhlsmY09r0jDv5oiK4IrXziK3GU5JTDFSf2ub64v3RMOEQ+LN8QKsGDap8WcEg
+ 8Gr4zUSwz6CE/ScWTvnmDRAKVCM=
+X-Received: by 2002:a17:906:4796:b0:baa:93ac:bd94 with SMTP id
+ a640c23a62f3a-bb801ad7130mr195909066b.16.1777385512079; Tue, 28 Apr 2026
+ 07:11:52 -0700 (PDT)
 MIME-Version: 1.0
 References: <cover.1777272283.git.weijie.gao@mediatek.com>
- <e9ca310e07d0e591339e0dbf3c1b893a1c43a03b.1777272283.git.weijie.gao@mediatek.com>
-In-Reply-To: <e9ca310e07d0e591339e0dbf3c1b893a1c43a03b.1777272283.git.weijie.gao@mediatek.com>
+ <d7ec0e5d655f8c2f1d159908f74d00927d7a0776.1777272283.git.weijie.gao@mediatek.com>
+In-Reply-To: <d7ec0e5d655f8c2f1d159908f74d00927d7a0776.1777272283.git.weijie.gao@mediatek.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 28 Apr 2026 08:10:01 -0600
-X-Gm-Features: AVHnY4KRI1oC_orG9qhBHXkV6XFdmEmphZBj2qkTC3yLHxy7YQikkcC9-ESMDB8
-Message-ID: <CAFLszTjjde593ZKoZcSTTkKndC2XBKXCFLJzcYTafdD+1tZT-g@mail.gmail.com>
-Subject: Re: [PATCH v3 06/10] cmd: ubi: reorganize command messages
+Date: Tue, 28 Apr 2026 08:11:40 -0600
+X-Gm-Features: AVHnY4IDUf_zF6BwmofM3mNzhKN1zkQQOo7FlxhwoaEm9x2FYd0x445IHMK1-GQ
+Message-ID: <CAFLszTgnQuEN3m8yyC_upE=tucO93O4Lb9SwMmBzqAxE9TuDQA@mail.gmail.com>
+Subject: Re: [PATCH v3 10/10] env: ubi: add support to create environment
+ volume if it does not exist
 To: weijie.gao@mediatek.com
 Cc: u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
@@ -111,92 +112,65 @@ X-Virus-Status: Clean
 Hi Weijie,
 
 On 2026-04-27T07:09:11, Weijie Gao <weijie.gao@mediatek.com> wrote:
-> cmd: ubi: reorganize command messages
+> env: ubi: add support to create environment volume if it does not exist
 >
-> This patch moves normal subcommand messages into the main command function.
-> This will allow current and potential api functions being called with clean
-> output.
->
-> A new function ubi_require_volume() is added for finding and printing error
-> message if volume not found. The original ubi_find_volume() will be silent
-> for being an api function.
+> Add an option to allow environment volume being auto created if not
+> exist.
 >
 > Signed-off-by: Weijie Gao <weijie.gao@mediatek.com>
 >
-> cmd/ubi.c | 109 +++++++++++++++++++++++++++++++++++++++++++++-----------------
->  1 file changed, 79 insertions(+), 30 deletions(-)
+> env/Kconfig | 11 +++++++++++
+>  env/ubi.c   | 35 ++++++++++++++++++++++++++++++++++-
+>  2 files changed, 45 insertions(+), 1 deletion(-)
 
-> diff --git a/cmd/ubi.c b/cmd/ubi.c
-> @@ -806,31 +805,65 @@ static int do_ubi(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
->       if (strncmp(argv[1], 'remove', 6) == 0) {
->               /* E.g., remove volume */
-> -             if (argc == 3)
-> -                     return ubi_remove_vol(argv[2]);
-> +             if (argc == 3) {
-> +                     int vol_id;
-> +
-> +                     vol = ubi_find_volume(argv[2]);
-> +                     if (!vol)
-> +                             return 0;
-> +
-> +                     vol_id = vol->vol_id;
-> +
-> +                     ret = ubi_remove_vol(argv[2]);
+> diff --git a/env/Kconfig b/env/Kconfig
+> @@ -699,6 +699,17 @@ config ENV_UBI_VOLUME_REDUND
+> +config ENV_UBI_VOLUME_CREATE
+> +     bool "Create UBI volume if not exist"
+> +     depends on ENV_IS_IN_UBI
+> +     help
+> +       This option is useful if u-boot will be booted from a fresh device
+> +       where environment volume hasn't been created in the UBI partition.
+> +       This is a common case where factory UBI image contains only volumes
+> +       with valid data.
+> +       By enabling this option, environment volume(s) will be created before
+> +       loading if not exist.
 
-This seems wrong - previously 'ubi remove nonexistent' printed an
-error via ubi_find_volume() and returned ENODEV; now it silently
-returns 0. I think you should use ubi_require_volume() here.
+Please use 'U-Boot' rather than 'u-boot' and tidy the grammar (e.g.
+'if it does not exist', 'where the environment volume has not been
+created', 'any missing environment volumes will be created before
+loading'). Also mention that with CONFIG_ENV_REDUNDANT both volumes
+are created.
 
-> diff --git a/cmd/ubi.c b/cmd/ubi.c
-> @@ -806,31 +805,65 @@ static int do_ubi(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
->               if (argc == 3) {
-> +                     if (!size) {
-> +                             vol = ubi_require_volume(argv[3]);
-> +                             if (!vol)
-> +                                     return 1;
-> +
-> +                             printf("No size specified -> Using max size (%lld)\n",
-> +                                    vol->used_bytes);
-> +                             size = vol->used_bytes;
-> +                     }
-> +
-> +                     ret = ubi_volume_read(argv[3], (void *)addr, 0, size);
-
-When size is 0 the volume is now looked up twice,. i.e. here and again
-inside ubi_volume_read() - can you drop the fallback in
-ubi_volume_read() or move the 'No size specified' print back there
-guarded by a verbose flag.
-
-> diff --git a/cmd/ubi.c b/cmd/ubi.c
-> @@ -806,31 +805,65 @@ static int do_ubi(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
-> -     if (IS_ENABLED(CONFIG_CMD_UBI_RENAME) && !strncmp(argv[1], 'rename', 6))
-> -             return ubi_rename_vol(argv[2], argv[3]);
-> +     if (IS_ENABLED(CONFIG_CMD_UBI_RENAME) && !strncmp(argv[1], 'rename', 6)) {
-> +             ret = ubi_rename_vol(argv[2], argv[3]);
-> +             if (!ret) {
-> +                     printf("UBI volume %s renamed to %s\n", argv[2],
-> +                            argv[3]);
+> diff --git a/env/ubi.c b/env/ubi.c
+> @@ -134,6 +151,15 @@ static int env_ubi_load(void)
+> +     if (IS_ENABLED(CONFIG_ENV_UBI_VOLUME_CREATE)) {
+> +             create1_fail = env_ubi_volume_create(CONFIG_ENV_UBI_VOLUME);
+> +             create2_fail = env_ubi_volume_create(CONFIG_ENV_UBI_VOLUME_REDUND);
+> +             if (create1_fail && create2_fail) {
+> +                     env_set_default(NULL, 0);
+> +                     return -ENODEV;
 > +             }
-> +
-> +             return ret;
 > +     }
 
-While you are here, please add an 'argc == 4' check to fix a
-pre-existing bug - i.e. argv[2]/argv[3] are dereferenced
-unconditionally.
+Just to clarify the intent: if only one creation fails, this falls
+through and the subsequent ubi_volume_read() prints 'Unable to read
+redundant env from ...' which is confusing on a fresh device. Clearer
+to fail (or print a dedicated message) as soon as either creation
+fails - what do you think?
 
-> diff --git a/cmd/ubi.c b/cmd/ubi.c
-> @@ -806,31 +805,65 @@ static int do_ubi(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
-> +                     else if (ret == -EEXIST)
-> +                             printf("Volume %s already exists!\n", argv[2]);
-> +
-> +                     return ret;
+> diff --git a/env/ubi.c b/env/ubi.c
+> @@ -105,12 +105,29 @@ static int env_ubi_save(void)
+> +     ret = ubi_create_vol(volume, CONFIG_ENV_SIZE, true, UBI_VOL_NUM_AUTO,
+> +                          false);
 
-Just to check: ubi_create_volume() returns -EEXIST, but
-verify_mkvol_req() returns positive errnos, so name-too-long or
-bad-alignment failures get no friendly message here. What do you think
-about handling the verify_mkvol_req() errors here too, or making that
-helper silent like ubi_find_volume()?
+The dynamic flag is hard-coded to true. Sensible default, but please
+mention the choice in the commit message or Kconfig help.
+
+The commit message is quite terse - normally we like to see a
+motivation (fresh device with a factory UBI image lacking the env
+volume) - also note that for CONFIG_ENV_REDUNDANT both volumes are
+created.
 
 Regards,
 Simon
