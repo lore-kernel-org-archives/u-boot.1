@@ -4,83 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24800FF885A
-	for <u-boot@archiver.kernel.org>; Tue, 28 Apr 2026 15:01:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5CD6FF885A
+	for <u-boot@archiver.kernel.org>; Tue, 28 Apr 2026 15:02:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B800B843D4;
-	Tue, 28 Apr 2026 17:00:44 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 338C08460B;
+	Tue, 28 Apr 2026 17:00:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20251104.gappssmtp.com header.i=@baylibre-com.20251104.gappssmtp.com header.b="WRBI4Wa+";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20251104.gappssmtp.com header.i=@baylibre-com.20251104.gappssmtp.com header.b="Yd6e+S6g";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 145E284255; Tue, 28 Apr 2026 15:17:25 +0200 (CEST)
-Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com
- [IPv6:2a00:1450:4864:20::432])
+ id 3FC1C84119; Tue, 28 Apr 2026 15:17:34 +0200 (CEST)
+Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
+ [IPv6:2a00:1450:4864:20::32d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 15C6484150
- for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 15:17:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 37A0184150
+ for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 15:17:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jstephan@baylibre.com
-Received: by mail-wr1-x432.google.com with SMTP id
- ffacd0b85a97d-43cfbd17589so8959875f8f.0
- for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 06:17:23 -0700 (PDT)
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-4896c22fcbaso85793445e9.0
+ for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 06:17:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20251104.gappssmtp.com; s=20251104; t=1777382242; x=1777987042;
+ d=baylibre-com.20251104.gappssmtp.com; s=20251104; t=1777382252; x=1777987052;
  darn=lists.denx.de; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=JHdXH/OXUceNboGPWKDqrUgr/h8EL4kfl0FgGMreXUY=;
- b=WRBI4Wa+xguJKLBv/jZQxCZiqU3bIS8jmp610BjR9p4K1AXYEJHPwU0zjLW6s+CnoC
- Ejyg35d7R61DUcrSRWyPYCfIawcGDxazCa5/4/MRW5+v2zAYCO0sa4NQIl1++IL9NBHZ
- vtfpf7eI4pmXmBDrJN1dloRP7XLzQtPaFu1MO7xJgGkqB9cNvIybAAfFZ3Z19b95l/nu
- uo1OFlzoOJOXKvdBEepiqkm9zFyU9Zhk2duTZzuZOjhi0YgcZGfM+Xo9Cr9DOi/k6iD9
- jDxjUHhm8xWC/DZfJUoRPFq7UsVAtG+S5Sk+RoL9xyMsX7vNDyqKWZNB/g9iX2papGtu
- Z88A==
+ :reply-to; bh=qQEmXp6qXUCvvn116a+QPA/U24ZJCdS1jQoE/q4Z+/Y=;
+ b=Yd6e+S6geHT69tw/JP7d/XXwlhdtzoCfTTsGbjQ2Z4AplbcBPxjlOSILagO/AOhLKe
+ 3Q/8wy4NVQlO9qvpdc+mz7wKhN6WsqpJTCDNtrKNQ0iNSYqKiRWFZ7RKbWD3FrLZzsPy
+ 45JT0qQx82x1H+dflh4Oduf3CciEr4o3hq+Gqhtxv//gOfTiNrNguI5OhMAKZkdBrFiE
+ 1i/N2Uxk3XqXHz6TwGuDIH1jl0wnrGgnHZtgTN8Sn71Q12vnDwytwEQ0xFjx0Di9hvJv
+ EM14ohule6ZHLUV5UpRUAXQwAep/9LjqAmoB8yxHJJXSIE1frv9UDEi7KElTtPMgs04o
+ i9iw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777382242; x=1777987042;
+ d=1e100.net; s=20251104; t=1777382252; x=1777987052;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=JHdXH/OXUceNboGPWKDqrUgr/h8EL4kfl0FgGMreXUY=;
- b=bBu/wz/lcbx+AInfT62GYanUjDMtNzxAgZpjoNOmGhv7epguvmK7mZxKSraVpFwlZd
- 4gHv1wpXBzefjbAeydcv7jbCU5wAC+wQR6RRRetKjJQzs7ODz/XtOvhv5IwjbTFz5aof
- 290Y/CxW6wyHmnK1N5sUGX1vlbkQyGfSWOLcrY/d2u/1cf/ss6oN++DntJwgaLwEVoH+
- 1eb3oVvmjEhwgLjpEFgLsjBnyLDJ9hx8vucI/jbXKElTnapXIHTfphEKfxPa8ePG36+j
- J/l+tQp5qtoAqzqFQTF6fTMIO/U/o3O3uZam6uxidkyWoDkO92Kapk2DqyAOgNzFkbfZ
- hJUQ==
-X-Gm-Message-State: AOJu0YwKlYrznAXr1lyRILk2aG/+8AaLWQw1hhBJ1PTqL3mFnrow8vYW
- wPfxeNF157Xaq90YqKviP4ZQYb6VfpXowFLdzaR7381izmfEk1adJJM5lwNiewPXwqo=
-X-Gm-Gg: AeBDieu5Vk/uR4NGuHGTKiBJqATw1LVEsIQQt5Y18Tt/LnS4OZ7Mo7XIKAL/BdSDtCB
- 6UrG6OuReauw/rrLYVaBn/zPvr8kszm89VFohl25bwB/5tM9WpxUnBLbW7XlmK0xMWTAIfuDScG
- GDii3+enTsP8hiIEBhXlfgdBzkyspbGrx1u/Elpwn+AIMzV9l/9ORMP1GdWnn/ve39+hwx+evZF
- 2F2lbNc4/IM3kABSxZYMZz6VgLvYC3vqXq19y2JtFNg1GNgYaqgcvfmGDUHijZ6HLaqv/UbRJN1
- 0oVN3l2PCR2nPkeVmkbIatMaAVFP/SHshUewRJVc2XT/fatlnxsxjd0gOiQcvSVYC/Yam/Kj8rD
- cW3T1RsLCZfj88bGA/qS3T69TKK6oblTFy58FJkmogKXuhEjJyG6RiDfjKoAgy/P4Y4fNAKA67/
- UdNDodcMAgkTOJaE7/3fVtQhaDzjwrcIKOoCg/+mUfuB/4/sjeJB48u61vG+W2y5mE9McAEy/fd
- eFfnFn7ujxV6quUxEHSrCnpfYlqrdtnLa//6Q+tPC8L00zNvNs34E1hepOKMb3qa9tQboq+3ovF
- 1BzFVfHbYotzgg/5sQtHjOYppHvP
-X-Received: by 2002:a05:6000:18a6:b0:43f:e22f:606 with SMTP id
- ffacd0b85a97d-4464761c2c0mr5762436f8f.2.1777382242274; 
- Tue, 28 Apr 2026 06:17:22 -0700 (PDT)
+ bh=qQEmXp6qXUCvvn116a+QPA/U24ZJCdS1jQoE/q4Z+/Y=;
+ b=FaVUeXDKGxnxBpg2CU+yklAqu493o/ed+Fm3gaxdWGPq/zVsvOw/JUMvKoTlemrFHY
+ u8xLYR0UoPkwf1v67993+BDVhwe06yR688C50a/Ab2v0V8n3tmw2D0SNacaH5Psrd96z
+ fZqiBL0wQrT+pcm+ALCHw+SrQ842gay1FFUIYQ8V2IQL8j0YkNlAEghAu9M+ZXroVQP1
+ vniNcLtmABMOK1yF0JPVFEjH646P8GWo8v9l1+FO0qas/MRIVs0Qz8Fzo2syUdqGJiNX
+ ZA777NlTGfBJYe3CPFCiIUee1tMaymp8Zfk7ZPedUOel1GBYv/bUEvcSVgu5gASHveTf
+ J02A==
+X-Gm-Message-State: AOJu0YxX6wucqd7BNLtrYbayz4k+gg2sk7jNp16M1LNAxkJAxwTWq/MH
+ jKDoJ38DnkvJ5HSLOHF7XeMZ/UYPNQ6vEES9VgLz440BnaqWy/o88+ZwEU8tdWY3YSg=
+X-Gm-Gg: AeBDieuYYtcxg6i/Hzq6nHmYpIrjdn+02jO0xjBIFOT+6UkCfmzNYnL+KHjAnJEiPfk
+ U/RDhItI2Tiz46JiFIh847xp4HEp3asmlk49URcr4iPUBHGUGxoKEKu2IHW/Y3lGGUxxznxrqt2
+ KDSw1nZbWQjNKRqzXUvjU65kcyDFYDNVle8dS7UXry3cG95lqAr35yjn0hPqU49LJ30g2p4jh0v
+ vhcp9WoQwWIiNqUvv6VrnEwnS6W907r54AegBmvPbl2uICpslqRhvMi2nqm5vzsxpIVlA/wzesv
+ hm5mV1+sBtsA6lLL9LZGsnR5YAsJ2rPJXvp01Bmp4UBbXKeSe8D+FrYBmmv52c9K+9fvr9ffwu1
+ JfstYSj4080CIrYxPfFklTyhPJ3trwE7JCSRTykP/VSqumNkl6iNWfHm71hGAidisy35+nMY6/o
+ /PM15aKMEdH9yzamm+MoLn+lLLn3wx4XtroRVTdF0zXM+EMIoEC9XLopwKhVahOPC62C3wJDxUT
+ xvq5H6g34trMMGfVWcRyyP7Uc5oL0ICMQxQtE/Q4dlh0jWZuKyTJNr8FoILgszqqJi4L9zvKp5w
+ +R+KP9Uo1K7l/mjSVg==
+X-Received: by 2002:a05:600c:5299:b0:489:1f97:6b1d with SMTP id
+ 5b1f17b1804b1-48a77b24d7fmr49690815e9.28.1777382251580; 
+ Tue, 28 Apr 2026 06:17:31 -0700 (PDT)
 Received: from [192.168.1.100]
  (2a02-842a-d52e-6101-1bf9-06eb-939c-90d1.rev.sfr.net.
  [2a02:842a:d52e:6101:1bf9:6eb:939c:90d1])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-4463d5ee9ecsm7139599f8f.16.2026.04.28.06.17.18
+ ffacd0b85a97d-4463d5ee9ecsm7139599f8f.16.2026.04.28.06.17.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 28 Apr 2026 06:17:19 -0700 (PDT)
+ Tue, 28 Apr 2026 06:17:28 -0700 (PDT)
 From: Julien Stephan <jstephan@baylibre.com>
-Date: Tue, 28 Apr 2026 15:17:09 +0200
-Subject: [PATCH v2 2/9] MAINTAINERS: add maintainer entry for air_en8811 driver
+Date: Tue, 28 Apr 2026 15:17:11 +0200
+Subject: [PATCH v2 4/9] net: Fix alphabetical ordering in drivers/net/Kconfig
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260428-add-ethernet-support-for-genio-520-720-v2-2-9cf2f0884bd8@baylibre.com>
+Message-Id: <20260428-add-ethernet-support-for-genio-520-720-v2-4-9cf2f0884bd8@baylibre.com>
 References: <20260428-add-ethernet-support-for-genio-520-720-v2-0-9cf2f0884bd8@baylibre.com>
 In-Reply-To: <20260428-add-ethernet-support-for-genio-520-720-v2-0-9cf2f0884bd8@baylibre.com>
 To: u-boot@lists.denx.de
@@ -142,29 +142,69 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a new entry for drivers/net/phy/airoha/air_en8811.c  driver.
+Reorder entries under DWC_ETH_QOS to maintain alphabetical sorting by
+CONFIG_ names:
+- Move CONFIG_DWC_ETH_QOS_QCOM before CONFIG_DWC_ETH_QOS_ROCKCHIP
+- Move CONFIG_DWC_ETH_QOS_STARFIVE after CONFIG_DWC_ETH_QOS_ROCKCHIP
 
 Signed-off-by: Julien Stephan <jstephan@baylibre.com>
 ---
- MAINTAINERS | 5 +++++
- 1 file changed, 5 insertions(+)
+ drivers/net/Kconfig | 28 ++++++++++++++--------------
+ 1 file changed, 14 insertions(+), 14 deletions(-)
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 9d68e8e3bb7..40ba3542ca3 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -58,6 +58,11 @@ F:	cmd/acpi.c
- F:	include/acpi/
- F:	lib/acpi/
+diff --git a/drivers/net/Kconfig b/drivers/net/Kconfig
+index ed07e286676..81d6e7cc2b1 100644
+--- a/drivers/net/Kconfig
++++ b/drivers/net/Kconfig
+@@ -246,6 +246,13 @@ config DWC_ETH_QOS_INTEL
+ 	  The Synopsys Designware Ethernet QOS IP block with the specific
+ 	  configuration used in the Intel Elkhart-Lake soc.
  
-+AIROHA PHY
-+M:	Tommy Shih <tommy.shih@airoha.com>
-+S:	Maintained
-+F:	drivers/net/phy/airoha/air_en8811.c
++config DWC_ETH_QOS_QCOM
++	bool "Synopsys DWC Ethernet QOS device support for Qcom SoCs"
++	depends on DWC_ETH_QOS
++	help
++	  The Synopsys Designware Ethernet QOS IP block with specific
++	  configuration used in Qcom QCS404 SoC.
 +
- ALIST
- M:	Simon Glass <sjg@chromium.org>
- S:	Maintained
+ config DWC_ETH_QOS_ROCKCHIP
+ 	bool "Synopsys DWC Ethernet QOS device support for Rockchip SoCs"
+ 	depends on DWC_ETH_QOS && ARCH_ROCKCHIP
+@@ -254,6 +261,13 @@ config DWC_ETH_QOS_ROCKCHIP
+ 	  The Synopsys Designware Ethernet QOS IP block with specific
+ 	  configuration used in Rockchip SoCs.
+ 
++config DWC_ETH_QOS_STARFIVE
++	bool "Synopsys DWC Ethernet QOS device support for STARFIVE"
++	depends on DWC_ETH_QOS
++	help
++	  The Synopsys Designware Ethernet QOS IP block with specific
++	  configuration used in STARFIVE  JH7110 soc.
++
+ config DWC_ETH_QOS_STM32
+ 	bool "Synopsys DWC Ethernet QOS device support for STM32"
+ 	depends on DWC_ETH_QOS && ARCH_STM32MP
+@@ -271,20 +285,6 @@ config DWC_ETH_QOS_TEGRA186
+ 	  The Synopsys Designware Ethernet QOS IP block with specific
+ 	  configuration used in NVIDIA's Tegra186 chip.
+ 
+-config DWC_ETH_QOS_QCOM
+-	bool "Synopsys DWC Ethernet QOS device support for Qcom SoCs"
+-	depends on DWC_ETH_QOS
+-	help
+-	  The Synopsys Designware Ethernet QOS IP block with specific
+-	  configuration used in Qcom QCS404 SoC.
+-
+-config DWC_ETH_QOS_STARFIVE
+-	bool "Synopsys DWC Ethernet QOS device support for STARFIVE"
+-	depends on DWC_ETH_QOS
+-	help
+-	  The Synopsys Designware Ethernet QOS IP block with specific
+-	  configuration used in STARFIVE  JH7110 soc.
+-
+ config E1000
+ 	bool "Intel PRO/1000 Gigabit Ethernet support"
+ 	depends on PCI
 
 -- 
 2.52.0
