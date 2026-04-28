@@ -4,96 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D99FFF886D
-	for <u-boot@archiver.kernel.org>; Tue, 28 Apr 2026 13:59:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E016AFF886D
+	for <u-boot@archiver.kernel.org>; Tue, 28 Apr 2026 13:59:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E8D9F84150;
-	Tue, 28 Apr 2026 15:59:45 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 43507842A2;
+	Tue, 28 Apr 2026 15:59:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="eX1WZKwH";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="H4orNz6X";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1B01584255; Tue, 28 Apr 2026 15:59:43 +0200 (CEST)
-Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
- [IPv6:2a00:1450:4864:20::533])
+ id 537BB84119; Tue, 28 Apr 2026 15:59:51 +0200 (CEST)
+Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
+ [IPv6:2a00:1450:4864:20::536])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BD0E584119
- for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 15:59:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C1471843B6
+ for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 15:59:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x533.google.com with SMTP id
- 4fb4d7f45d1cf-671ae79e617so14700502a12.3
- for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 06:59:39 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1777384779; cv=none;
+Received: by mail-ed1-x536.google.com with SMTP id
+ 4fb4d7f45d1cf-671d60ef9c6so15850556a12.2
+ for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 06:59:48 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1777384788; cv=none;
  d=google.com; s=arc-20240605;
- b=RDRPwy1dySd8sBlk+rmhNvF/zY5i4e0PC0DHfuzk8LkIPcakFLpXG419ON5+0R2vR/
- IQRbw7NYdoIqjp+gfSC1Q3jbh+Y4YLXNBjE7AFOU/Dzm8Nl7MHbtD4lLsTC3KRmFR7iD
- Uq+HNvQbW5eSACUGQ2sVIFJScPYrSpJFbauD95fSG4Ou9NajO0tvYehBP7SLcl4/keLl
- kAqSakwws0KMWL9U3YltjX+aLEzqd4mK2vpAAFDLOtD7EsIs/wIdXvAUM2nbEP5WKHiD
- uoU6+Bi3RjLMNAUwtAba3gzhaAGLxLksM3m4ZZft0pn/5uzHq7Pb/1BqnhKNBeh8A4uE
- M0Ow==
+ b=AtyMgTz8dqbVQmTN1xh22rSIq8Di/OWeMUyqB5iPm+mg+jztPlhu5e3MAegtuKsNtK
+ jI2ZbVDg9HuwZYvRtAoyRDsLFPTeRZ0hw6dbObTZn7esq4H9rk5p9lDAhtJbOFtoe6py
+ YJSAEFrPpBGQVVeWwEUQWoa34rBbl2v1tVfPsoNstNyne+Lxm01NeK4qeDTTj2vx9utE
+ eDbZDpg30tSJmluNUbTZ+XlQu8GM9gjZzxGJuKgF8pACLLiSCy9cZJnhdF27wpK+JgFW
+ OT2K2BjJMijKTTxLbNHtMGz0e0eI+pvPke5kPkKdiVd+8INyu37zY3zkJoS1aqBFSCHt
+ kqng==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=IeClgwuc2ejmQVQeGTDuKLXRISVd1EVBBjfdIl2bhi0=;
- fh=WJrT4so2P2TQNu7RsbFk17g04p7+9AUNy/luZnGNCxM=;
- b=QW3rigQ2l4sbN+vFZ3QZb7XDgX7AKwEcealqG3vN1KzvvhLkvS7oBhwF0yNHaqMguk
- KV06uo0Qq7sPDq4WAZB0zHt6nfXGNVvGOGv8+cCMdGOB3Rf8U+pGN7VFkiXtT1RkXl7/
- e9g+QcgpMJpuUa2KQc0ys1VBzgF1znZ4m3iwbMn81mknJykSSsK874LIiHowL5unmud4
- 53wEj/E+6669SHH2E/bViI1aRlxz1cNXRRHVMrYHq83ZwrXtZKvKfUvYbKRBqIRhu3Au
- TCC8lv2j50qlB/IkWGovrJ4mdtS2HXfQMUV07jfSlXTvskTMyGkZxA1oF3+K1/XQdrrN
- KE+g==; darn=lists.denx.de
+ bh=1kHx+2zuFfpu2BIdpjj5sFgAS3aUWzFwb5BdBv7jUuI=;
+ fh=LyWXhRk7bL3vLuuO414j+hAh1yGFrGrsN40daxgJ+Cg=;
+ b=fW8i6ntMooTTfeL+NTFhoQKjw+CDJsU+J8Tg68yXxCP9yTZQV4LxLkP+R+dCh0vLtA
+ gIkftgQy2/YuzJVsfP5fUOyr0Vri4pDK3cO4dFLAl9urA/f+Sk5INjYN3NSolpqbGr+T
+ FAONcJQSJAW1vdbi+xZlgHPWB+1ePHK8uO65OzWR7tX7MO20k2bC5+aUUmQEvvuer4kS
+ x5lltw8sVeLodoK9Rp0gcAqspNhXiK7rk1vm5qpenVnwgVQTJURv44bmk9fJGVUS48//
+ 6YW8fZY7tgPnA+8m9EqIdcSRdZK/8buStIEmB5N9cXymJJdX7Dns7hfWLHgNhdnIpvPP
+ ERQQ==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1777384779; x=1777989579; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1777384788; x=1777989588; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=IeClgwuc2ejmQVQeGTDuKLXRISVd1EVBBjfdIl2bhi0=;
- b=eX1WZKwH4yHdcix66/kUEoCa3fIESviYZhE2PczVsMf8SL3JW93R+viTp6uAhzkdN6
- crVb/aawNjCkpKB545u54aMYpwBLseY+Cwz7Yj+YdTRK6qpzoJc8x0YAdsMjRfcQDBX+
- U4h15wmRSoqIkILKvwciLU2ZtTXwi0096DIjY=
+ bh=1kHx+2zuFfpu2BIdpjj5sFgAS3aUWzFwb5BdBv7jUuI=;
+ b=H4orNz6Xq251lDf8zkbMM3S2odsUF7aHKohdQ8GjMCCrD4cT1a4aeFEh7tua4aXsp9
+ 73KHFCgyGT+1bYzG+uDfJRD2CnnXPqR7g4xw8kNQbkbhIEBN7CmleidKm1WKi/6qY9Od
+ eboz7M41K9t88G3Ohj1Ra4Xyd410aFUo5TrKE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777384779; x=1777989579;
+ d=1e100.net; s=20251104; t=1777384788; x=1777989588;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=IeClgwuc2ejmQVQeGTDuKLXRISVd1EVBBjfdIl2bhi0=;
- b=V1MS1BCtH6/y6Tg5nAQQ3b8Ve8NdsYh+UbF/E20PPg7b3T6K4rPM4EWoWi4MsdxC+8
- ZNcordZpKKMgZAQH4rhe8vG4CKZbvINHoobMYVsQM5LqkhfQyZSiLdwrpaPpOfsIrP5b
- bxSfc7ZwMp7BqeKaKzZYp4fDhiQrDKdZ0/hbZ3VgTEbximQwUShy0NJjul64mIhdvZ7W
- NHHy33iHfdEnh/PCaeqQalN0hgzG9nay5o9WAEUMHvlj06hV+qadq7IE4SL/R9f4xsZl
- EuUO/51E4qiIrZa3yImxAdNZl6d97Y4Dd5IyzuHDqq2x1qtYUvdHHkLELD0oPBE6qvTe
- O1sg==
+ bh=1kHx+2zuFfpu2BIdpjj5sFgAS3aUWzFwb5BdBv7jUuI=;
+ b=qi5LYYjmKkTmlTGUEn42Qq5BOR8HbrYVupsqkNBq8AIXNntbNmMJzsmzJxMn9NgXJ1
+ GXo7/G8IRGCqkZeSS29NgBdmivxQ9rX+iFsqe8F+ywQfLNhcZyed5RIC/mOPoFZBfMi/
+ qC6Ylxpf1A7bn0tGsrlGLkiFBv4GG6UGc3a0By+uLyjHxRPC6vtIzXewuaSVMnIJP1kv
+ z1G19jTbMELehXGan6hVV706wQVmd1broBODd/WT4s/CMOL7mD4E0hkLPpcCio6qElzZ
+ LttenZlS0t36F/Z3SCM8TLuNIzD7oOjC5fd8sw7Wbgs4508iJHF2GSGeybr1ziDRW/0V
+ zsxQ==
 X-Forwarded-Encrypted: i=1;
- AFNElJ/0147R6lydhXCQkAv9iMMzTJ/y1W/C06y3Bw4Ex/LRulR0OqbJkAtvGxI2uPPy98pLGpvBbbA=@lists.denx.de
-X-Gm-Message-State: AOJu0YxsV0vaBEV5akNaRK1vSNfS3SDim9AL2tDsmVgwlIRfOevXiko+
- cEM0mjJB2c6L2fr1aajPM36jSmeC0e41lmbeIzgfAV4guMIhw6IBci+z3oPbZM3DgZTsj+wVb4w
- J5+oai/VBAMI68qcK/75n5mMJA1z1a5yMknmW8Oci
-X-Gm-Gg: AeBDiet0ux5o3fbFueyAIEAyC8GP5Ltd1hhJvQaLOWcEMLsSSYXxfkYKg/SCfDkEtFF
- 1FYNEyB0uHABTldY6YWTqdaErnQEZVempWw3OY4FowFvww6zCfSFAiSQ9jQxt9Wp/APoDNja5Ua
- qhxJIiul0LoNybMs+FwJ2uerp8iwCI5A9C4+vIqD2n0IKjQA8Ik5PkCNKp00dB2bGxNjbC8Kt+t
- lhemvULzwnpV7NFR005NcGb4biId6LAnrIbLbBzmxt8kKaGXG2laptHQpy4DrKN1NLoSsV1ixm5
- Af9vi77zJpqPhrmO
-X-Received: by 2002:a17:907:7256:b0:bab:e742:aba with SMTP id
- a640c23a62f3a-bb804e229ebmr201776566b.42.1777384779001; Tue, 28 Apr 2026
- 06:59:39 -0700 (PDT)
+ AFNElJ+nuL/kKY8KjZsKZi/Mf1dKtU0URGt1+xlDEAzW6K2xvPOzP5lgb4eM00Etk+uvzsGlMuDGXmo=@lists.denx.de
+X-Gm-Message-State: AOJu0YzrpiqazNUPggc48NJGgogk6EV6ne4RwTUr9R1sA8CjA3O3KWdq
+ SDqVtYtNTf3OmnofF8JphDk8AlwvCSbyvzLkdBGptI97ANTiKcJpMEDJw95Pt+1TNtvc3iThaZD
+ 88Rc3xNnnZuZzHTGGJpK2OmQwMcXlFXyxNVH6/ksK
+X-Gm-Gg: AeBDiety5bfDMVGeYDSdprAqovkLRRMcDarUikvlg9xD9R/7XjyphGEnqTY0Y4IJRed
+ 7GTCg6cPXsUbvTykTZtTwbKRxhVbrINW75Z3oCapabf6Mb4E4lZwviyWTt+d/JeyS5tGHMrwHwD
+ IowR9x74vtfDa9JgRRs3Sklz/r4GiXYMD/kiVB+hLmy5p2dtosQV/H2F5NIRFeLJYVaDa8koPMf
+ GZPApAwZ87aBV34G1k/Ow8NH2pV6B79bGZxEzI3i5dqDMQav02Ns9imR2SdVeIjO2N81LZoqMqj
+ 27s97dz+9998J3+t47VVYDY8isM=
+X-Received: by 2002:a17:907:3cd4:b0:ba6:be92:a58f with SMTP id
+ a640c23a62f3a-bb804e21da9mr189835966b.44.1777384788152; Tue, 28 Apr 2026
+ 06:59:48 -0700 (PDT)
 MIME-Version: 1.0
-References: <DI3DOZXB8ES4.12PBN3MVHW911@archcloudlabs.com>
-In-Reply-To: <DI3DOZXB8ES4.12PBN3MVHW911@archcloudlabs.com>
+References: <20260416093927.602613-1-daniel@thingy.jp>
+ <20260416093927.602613-3-daniel@thingy.jp>
+In-Reply-To: <20260416093927.602613-3-daniel@thingy.jp>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 28 Apr 2026 07:59:25 -0600
-X-Gm-Features: AVHnY4JR_lOQcpqXzH9LJDmCsZ9qeYH1LbUsBdpkIa9mq0UG0ZOad-GqIchDg2c
-Message-ID: <CAFLszTg4YXgn3-=Lr55h9GLiicAZ_63EOCzoQ_t6p6+YTDEA8w@mail.gmail.com>
-Subject: Re: [PATCH] fs/squashfs fix overflow in sqfs_find_inode()
-To: dllcoolj@archcloudlabs.com
-Cc: trini@konsulko.com, joaomarcos.costa@bootlin.com, 
- richard.genoud@bootlin.com, thomas.petazzoni@bootlin.com, 
- miquel.raynal@bootlin.com, u-boot@lists.denx.de
+Date: Tue, 28 Apr 2026 07:59:33 -0600
+X-Gm-Features: AVHnY4I4Xg8V7S9GhWla9C6U8JWIFIbsSqzwWIymXlDaTHGgUs2XJPLtXWJWFa0
+Message-ID: <CAFLszTh+do28YYV76bPb4dpmfEhamRtLqk7VoQsF8NYmJY-ttA@mail.gmail.com>
+Subject: Re: [PATCH v5 2/8] rtc: goldfish: Use __raw_readl() and __raw_writel()
+To: daniel@thingy.jp
+Cc: visitorckw@gmail.com, angelo@kernel-space.org, bmeng.cn@gmail.com, 
+ sjg@chromium.org, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -111,44 +111,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jared,
-
-On 2026-04-26T20:45:15, Jared Stroud <dllcoolj@archcloudlabs.com> wrote:
-> adding overflow check for offset calculation
+On 2026-04-16T09:39:20, Daniel Palmer <daniel@thingy.jp> wrote:
+> rtc: goldfish: Use __raw_readl() and __raw_writel()
 >
-> Signed-off-by: Jared Stroud <dllcoolj@archcloudlabs.com>
+> In QEMU, the Goldfish RTC is explicitly instantiated as a big-endian
+> device on the m68k virt machine (via the 'big-endian=true' property).
+> Currently, this driver uses ioread32() and iowrite32(), which works
+> by luck because the underlying readl() and writel() are currently
+> broken on m68k.
 >
-> fs/squashfs/sqfs_inode.c | 3 +++
->  1 file changed, 3 insertions(+)
-
-> diff --git a/fs/squashfs/sqfs_inode.c b/fs/squashfs/sqfs_inode.c
-> @@ -135,6 +135,9 @@ void *sqfs_find_inode(void *inode_table, int inode_number, __le32 inode_count,
->               if (sz < 0)
->                       return NULL;
+> Use __raw_readl() and __raw_writel() instead to avoid breaking this
+> driver when the endianness of readl() and writel() is fixed.
 >
-> +             if (__builtin_add_overflow(offset, sz, &offset))
-> +                     return NULL;
-> +
->               offset += sz;
->       }
+> Signed-off-by: Kuan-Wei Chiu <visitorckw@gmail.com>
+> Tested-by: Daniel Palmer <daniel@thingy.jp>
+> Signed-off-by: Daniel Palmer <daniel@thingy.jp>
+>
+> drivers/rtc/goldfish_rtc.c | 8 ++++----
+>  1 file changed, 4 insertions(+), 4 deletions(-)
 
-This double-adds sz. __builtin_add_overflow() already stores offset +
-sz into offset on success, then the existing offset += sz adds it
-again, so every successful iteration walks twice as far through the
-inode table. Either drop the trailing offset += sz, or use a temporary
-destination and assign on success.
-
-The three new lines also have a leading space before the tab please
-run patman or checkpatch to check the patch.
-
-Please use a subsystem prefix and imperative mood on the subject, e.g.
-'fs: squashfs: Add overflow check in sqfs_find_inode()', and add a
-short body explaining what input triggers the overflow and the
-consequence without the check. A Fixes: tag pointing at the original
-commit would help too.
-
-Just to check, is there a reproducer (e.g. a crafted squashfs image)
-you can mention?
-
-Regards,
-Simon
+Reviewed-by: Simon Glass <sjg@chromium.org>
