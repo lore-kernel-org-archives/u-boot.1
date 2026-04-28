@@ -4,100 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76D3CFF885A
-	for <u-boot@archiver.kernel.org>; Tue, 28 Apr 2026 18:25:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3BDA0FF885A
+	for <u-boot@archiver.kernel.org>; Tue, 28 Apr 2026 19:53:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 182E5846A8;
-	Tue, 28 Apr 2026 20:25:49 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 67EBA84682;
+	Tue, 28 Apr 2026 21:53:03 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="COL+eMxX";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20251104.gappssmtp.com header.i=@baylibre-com.20251104.gappssmtp.com header.b="Uyis97+x";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 63C4D846AF; Tue, 28 Apr 2026 20:25:48 +0200 (CEST)
-Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
- [IPv6:2a00:1450:4864:20::636])
+ id BDA7F84687; Tue, 28 Apr 2026 21:53:02 +0200 (CEST)
+Received: from mail-oa1-x2a.google.com (mail-oa1-x2a.google.com
+ [IPv6:2001:4860:4864:20::2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 96466846A4
- for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 20:25:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 935BC8466B
+ for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 21:53:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x636.google.com with SMTP id
- a640c23a62f3a-b9d9971d059so1659620766b.2
- for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 11:25:45 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1777400745; cv=none;
- d=google.com; s=arc-20240605;
- b=OW7AzLmCeDgYER7+t09lq0Gr6SGuVy6eMqJ583FkqhIhIDeD6j2t46dwNA9KUxpRng
- 2mi4E7usbjqBT45MvFa2TdQtaJyBjwb+IOgm3I2RCTNf0bbAb0nTJNiE+OWpP2dVoqE3
- fL7d+GdxCtFe4CQm64Kme0od/ETa0WzC1b7dO6BLtKPYq8ejGOlOc+Um9oqUDSyQWaqI
- jCYMN9UOY2ekQr0tJgPuDNraZXJf0QleLu3jPalvr92FzVuIAzd1wNZGL+F/cyuY9GsX
- TpzbcFf2mZABTlT6DzDezXGJ4KGkYZmkF35GePhY1SAFK848jPrlj8AUrOqzG57RytS8
- hj+g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=x+VVZfLECzB0P8v7r0H1uWPy2+kMtEWMbXSMDoyGAfc=;
- fh=GYIekQEhESPWanXHuipF/cx0w9AeOdHDaa7vPtUoRvA=;
- b=Z8UIoppmjc++kQr72Gl0quuBzg4mn1Cduj0+vNtCpzyux0p2rd5+G502IYI5Dx62YT
- nzWiq6xD0MzekAjx060lWQYfbOdbeV1Qkgg43WnaJix7hxsPHc8EvitrHu9x9ubZmxs1
- vRTkuGJUVF5YJSU2Z8kZg5rPr0AguHjmQZdcXKnpvWuAP/U+UCE9vuWbyrFCrCo7Beph
- OZt6jDCHLxrbYbfoouW7FacRa0Vk5pCK+DCBPbYQAiQ6Mqbr/8dhQJea6CepELBc4q4E
- t/GhWXEHNRaJfsPObvWSb1SRX+6i6XsKdiYXIj4Ixdm9RHBLG8IDU1Dhrw4PkZNfYIEZ
- XKIQ==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=dlechner@baylibre.com
+Received: by mail-oa1-x2a.google.com with SMTP id
+ 586e51a60fabf-415e568a7ecso4549337fac.0
+ for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 12:53:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1777400745; x=1778005545; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=x+VVZfLECzB0P8v7r0H1uWPy2+kMtEWMbXSMDoyGAfc=;
- b=COL+eMxXEIuJf/e38AyC0Wag6vDFlmr8flEL/+EUKwS5BdQ+FiIZDTym5YYzh01jlt
- 5L35vmcGNtJiLlyK4Vxs+sW1Giudcui2CulGaoi9OAVl0BJfql2nGH9sp/VOShoA2g8W
- EfYEMU85oBMl7LI+Go4LkSCZiq7vpqUYQGkdA=
+ d=baylibre-com.20251104.gappssmtp.com; s=20251104; t=1777405979; x=1778010779;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:to:subject:user-agent:mime-version:date:message-id:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=AN5+Nc4ZOUaBcZA6boVYUMV4wmUM6XPWFOwD6rZ2y0M=;
+ b=Uyis97+xV5zoJI6PzMeaHanq/6zQgJEdxdvWUf3gGQZHW2dRbpK051zZpEORNyxNBM
+ ShNqUI4MNy4Q/bco2eAzquTcji7Qt8ZrIHepKqitlm0L2+phg+SAAYkKw7U1/92xv/EI
+ Q4pj6lHSnd2JIniKCQTMabr2StLpAV14hmLSD5YUy+kNOFkXuBWmylEdqLSZQxQ0UTHd
+ IDgwpvIMGU4ReaIW9ZnllMa/4EL4V87wojvoa05EtVN5Ry//1amWAYm5TqXMZKyeTFuD
+ VtQevWdl8yPIUCnR9Jr1J6moorptJiyRcjTs837jDRTqo2Gpv7PjO4wtyskDaF4POaG5
+ nQ/A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777400745; x=1778005545;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=x+VVZfLECzB0P8v7r0H1uWPy2+kMtEWMbXSMDoyGAfc=;
- b=ozylcIt7CjQXA7JpCX10fKwLYv7XcMYi3KIWkmO82NsQQVEhY7uMiPrzXku6gFogtC
- UfS6gGVyuB2SYJFRYlrxnGYzKB2WnrNu6WWENbC05w3QHVKg82sIg7ADCRZPfvpCtaYq
- sMi/DJblovDs/u9/EXhNQhh7oy+LBYLIbJDOJRH7MvJGZy1dk7bAMrce21AblIY9lvXN
- P1A3nXaRdEl8woPZUFccXV2znUXPwfsKkk1Sh8MB3fZuThGagBSmrJk22JDkebifZP0r
- /+g0sWjQGWpbADbVdycJfJm4WqcS6+gnmCXYh/9h4p5WzScG98GZoaSM4IDN441tVpr2
- vWJA==
-X-Gm-Message-State: AOJu0Ywy65vz7Le0I4X6GXvMSeXhZEYzIGBhWg7G3Q6JU5ssrIsBLSy+
- yfsc+h9HWEy+p0O76WazX7nTR7EOkjVDmNUhhnru6UmqBBS0xFPyDsM1gUZdVbxEjUMpOrJZT8S
- jM0ivSUtVY5ew3B+CE1UPOx3abCk6Tl97ZmbLP4Rn
-X-Gm-Gg: AeBDievjbVva/5EDVi5nrK6Mes8cbnCLyyuEi6GPI8m7uLcwnJS0kx6MBGiZYvtNzBt
- NHVzsSfWeJIloUdsKn0zQL1EA5t28i9clJ9HuRVxhEuL9MCsRmOynzpJWBCfGTDQgrT+XRiwuY3
- bgSpqqkJDlMKaTaRAGTOpiEb99paMffgBOfvo+w++RPYafSPOY66gxYUdVhvpdOopNr5uJBwmth
- uKsn3NqmHTHYP0hZ2QH+Zg4ggVAE/+mU5rITuNUIlrjOQgZ+Fjxz6BD78ReFdNA/fvwGgjL4Epr
- Z3tNcFQrBNjaSUUk
-X-Received: by 2002:a17:907:1c98:b0:b9d:6d06:b78a with SMTP id
- a640c23a62f3a-bb93ce8c877mr30267966b.17.1777400744905; Tue, 28 Apr 2026
- 11:25:44 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1777405979; x=1778010779;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=AN5+Nc4ZOUaBcZA6boVYUMV4wmUM6XPWFOwD6rZ2y0M=;
+ b=fufyodHn17f7qlCS8MVor94uuTE519MX48O4EJZscztgeKz5wHAfLZCVzQYx+i+nP0
+ i/Q3sOsFreCvxRhwkgoUT+Oabq6NtcId9mnjRvjBHttoMii0hKbfRpa1GqqSIi2OidPk
+ 4qa0EIkVAUexf0Ps3oiZhjFnMZUTgLnmmM9lZ4C8uDMtAVps6fdjphbYr88GrwTzb6sK
+ nZZ4LqeelPfQKs25MqrslumXbt99b2pFu3hemvwztXOSKKRk2VfnNtxFotyfXQoax/G5
+ BC7pL5EUvculw+5OkSqyrF95CGf4i5tmuo7GebiTGa8cvScIo9xCSjugva8MSmzLm/v+
+ zvJw==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ8JJ/nWFGq8007nqOgLeJmjWCune013QRv4QpYB0r8IHFQGGBAMhI00SbWlO8CJwPljGZ21a/4=@lists.denx.de
+X-Gm-Message-State: AOJu0YxB/6nqF0g297UxNuUqAROE1YLtkGUf6SOJ+fSk/w4oBniQaqfu
+ 0Cd6Jaz2UKLBL5xCQTG5N53FQ1s0yeKe9AKvQtG/3Ukq+wHOnxEkvypn28tM2mUimFU=
+X-Gm-Gg: AeBDiety/NLpGCwed/VE2yeHkiSJJUcKobG+nmmOt4D3EzfXLvKlCBQkkqwCjpu6JUj
+ RFe2cbGzfCTlid5R7hQDz30s2eF+1R7Fc8NBDCfBHlzqySTOoSNk7tiereTqxaHrroYQhD0pE/u
+ v/mjQezg0ZrFQZaqnzgLDZbI52s0pDLaBDBEVdhLxoLPD4Nu/M+qqPVkuTcNjfrFQBDsAm0jstx
+ uGeqMpY8DSqIDI2O6vag7/ktYjDIgpp03OhqrsBwjgv0VeQH7sVvdV0900LNF2x8uMBtcEuqvpt
+ tZXkiOJsu9xZtC5ii/Q1pb60OE8/4CarmbwUPxWp1OmDAwA7zhKtHLAIf/HBYBXHpoIkjXpqHGr
+ MWGYM01CQXO3ujrjqE3z7XHbpWfUpOBqkiOIGtynfAif2VhVMVH23ArYWDc/0Kgs7v7iq0SCAZA
+ gthkFOK6Dh/WcQ3Vvj36OyJ3AQoAtE3sQkVoU2OL7mtUFIrXsxm8/M/4lnFXfHztfL7jQZCM4yN
+ eWEzgip48g1
+X-Received: by 2002:a05:6870:a101:b0:434:98c:d935 with SMTP id
+ 586e51a60fabf-434098d5682mr806739fac.2.1777405979289; 
+ Tue, 28 Apr 2026 12:52:59 -0700 (PDT)
+Received: from ?IPV6:2600:8803:e7e4:500:1770:76c1:cfc7:3a0c?
+ ([2600:8803:e7e4:500:1770:76c1:cfc7:3a0c])
+ by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-4340e98d29asm84611fac.15.2026.04.28.12.52.58
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 28 Apr 2026 12:52:58 -0700 (PDT)
+Message-ID: <8c84d587-beaf-42c5-b08f-fcc6ad9dd09c@baylibre.com>
+Date: Tue, 28 Apr 2026 14:52:58 -0500
 MIME-Version: 1.0
-References: <20260424173151.371134-1-harsimransingh.tungal@arm.com>
- <20260424173151.371134-6-harsimransingh.tungal@arm.com>
-In-Reply-To: <20260424173151.371134-6-harsimransingh.tungal@arm.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Tue, 28 Apr 2026 12:25:33 -0600
-X-Gm-Features: AVHnY4KKYtJ47ae-LRZA28LmL0OoqEGTYOsIyDtHKKO9eJlFuhDzMiEoXwkBpdI
-Message-ID: <CAFLszTj-Fdj0juQLA=1ohBesS2EO=Pg8vyvvEFc8VYeLyT_AZg@mail.gmail.com>
-Subject: Re: [PATCH 05/12] efi_loader: move runtime GetVariable() helpers to
- efi_variable.c
-To: harsimransingh.tungal@arm.com
-Cc: u-boot@lists.denx.de, Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>, 
- Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Hugues Kamba Mpiana <hugues.kambampiana@arm.com>, 
- Simon Glass <sjg@chromium.org>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 1/6] pinctrl: add missed pinconf/pinctrl definitions
+To: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+ Tom Rini <trini@konsulko.com>, Christian Marangi <ansuelsmth@gmail.com>,
+ Simon Glass <sjg@chromium.org>, Marek Vasut
+ <marek.vasut+renesas@mailbox.org>, Peng Fan <peng.fan@nxp.com>,
+ Sean Anderson <sean.anderson@linux.dev>, Yao Zi <me@ziyao.cc>,
+ Michal Simek <michal.simek@amd.com>, Anis Chali <chalianis1@gmail.com>,
+ u-boot@lists.denx.de, Lorenzo Bianconi <lorenzo@kernel.org>,
+ Markus Gothe <markus.gothe@genexis.eu>,
+ Matheus Sampaio Queiroga <srherobrine20@gmail.com>,
+ Benjamin Larsson <benjamin.larsson@genexis.eu>
+References: <20260428153448.980150-1-mikhail.kshevetskiy@iopsys.eu>
+ <20260428153448.980150-2-mikhail.kshevetskiy@iopsys.eu>
+Content-Language: en-US
+From: David Lechner <dlechner@baylibre.com>
+In-Reply-To: <20260428153448.980150-2-mikhail.kshevetskiy@iopsys.eu>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -114,59 +114,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Harsimran,
+In the subject, I would say "more" instead of "missed".
 
-On 2026-04-24T17:31:50, Harsimran Singh Tungal
-<harsimransingh.tungal@arm.com> wrote:
-> efi_loader: move runtime GetVariable() helpers to efi_variable.c
->
-> Consolidate runtime GetVariable helpers to avoid duplicates
->
-> The functions efi_get_variable_runtime() and
-> efi_get_next_variable_name_runtime() were implemented in
-> efi_variable_tee.c as part of the FF-A runtime variable handling work.
-> However, default implementations for these same runtime helpers also
-> exist in efi_var_common.c. This results in duplicate symbol definitions.
-> To resolve the conflict and centralize the runtime API, this patch moves
-> the default implementations of the two runtime GetVariable() helpers
-> from efi_var_common.c to efi_variable.c. This ensures that:
->
->  - only a single definition of each runtime helper exists,
->  - backend-specific implementations can override these cleanly,
->  - the EFI runtime variable service table continues to reference the
->    correct functions.
->
-> No functional changes are introduced; this is a structural cleanup to
-> avoid build-time conflicts and consolidate EFI runtime variable support
-> [...]
->
-> lib/efi_loader/efi_var_common.c | 24 ------------------------
->  lib/efi_loader/efi_variable.c   | 24 ++++++++++++++++++++++++
->  2 files changed, 24 insertions(+), 24 deletions(-)
 
-> diff --git a/lib/efi_loader/efi_variable.c b/lib/efi_loader/efi_variable.c
-> @@ -579,6 +579,30 @@ efi_set_variable_runtime(u16 *variable_name, const efi_guid_t *vendor,
-> +efi_status_t __efi_runtime EFIAPI
-> +efi_get_variable_runtime(u16 *variable_name, const efi_guid_t *guid,
-> +                      u32 *attributes, efi_uintn_t *data_size, void *data)
+On 4/28/26 10:34 AM, Mikhail Kshevetskiy wrote:
+> The code was taken from linux-7.0
 
-Just to clarify the commit message: this is a relocation, not pure
-deduplication. efi_var_common.c is always built, while efi_variable.c
-is only built when CONFIG_EFI_MM_COMM_TEE is unset, so the move is
-what actually resolves the conflict with the new efi_variable_tee.c
-definitions. Please reword to make that clear, and drop 'default
-implementations for these same runtime helpers also exist in
-efi_var_common.c. This results in duplicate symbol definitions' -
-there is no duplicate today; the duplicate is what patches 3 and 4
-introduce earlier in this series, right?
+The commit message should also explain why we need these changes
+in U-Boot.
 
->     efi_loader: move runtime GetVariable() helpers to efi_variable.c
->
->     Consolidate runtime GetVariable helpers to avoid duplicates
+And in this case an explanation of why you chose the locations
+for the code would be helpful.
 
-The subject and the one-line summary mention only GetVariable(), but
-efi_get_next_variable_name_runtime() is also moved. Please broaden the
-wording e.g. 'move runtime variable read helpers'.
+Since the code is taken from Linux, it is odd that some goes in
+a U-Boot dm/ header while the other goes in a linux/ header.
 
-Regards,
-Simon
+The patch itself seems OK to me, but I wouldn't mind hearing from
+someone who has been working on U-Boot more than me to say what best
+practices are on copying code from Linux.
