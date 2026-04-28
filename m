@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 098C5FF8868
-	for <u-boot@archiver.kernel.org>; Tue, 28 Apr 2026 12:41:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77DC6FF885D
+	for <u-boot@archiver.kernel.org>; Tue, 28 Apr 2026 12:42:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CDE2284656;
-	Tue, 28 Apr 2026 14:41:03 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 130018465C;
+	Tue, 28 Apr 2026 14:41:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gehealthcare.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gehealthcare.com header.i=@gehealthcare.com header.b="jQLtOUDH";
+	dkim=pass (2048-bit key; unprotected) header.d=gehealthcare.com header.i=@gehealthcare.com header.b="jymVPkUn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6888184661; Tue, 28 Apr 2026 10:51:36 +0200 (CEST)
-Received: from DM5PR21CU001.outbound.protection.outlook.com
- (mail-centralusazlp170110009.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c111::9])
+ id 69FB984664; Tue, 28 Apr 2026 10:51:36 +0200 (CEST)
+Received: from SN4PR0501CU005.outbound.protection.outlook.com
+ (mail-southcentralusazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c10d::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4A52E84669
+ by phobos.denx.de (Postfix) with ESMTPS id D38558466F
  for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 10:51:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=gehealthcare.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=Brian.Ruley@gehealthcare.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Qq8u1iEC2dWB7AqRDpNuy5l7x6vl4Xv3dC6aJ0d5UGXb0SFZ7yfufNemL+ORrHNGraPdvfbF6r54giz/eMU8vWZyUZbZ1wZ6WDoJxMigDy3PHIKTTJoH5GvK5XeEWA4khPBKbWuwNGeP7lkJ9qi2aDTiBEAAAOpD+95+OD2ApMeYeEHX69GpWCpIjleGzU/p07Ug1m0JBDN3iuvMnoXrzsDAM9guYrkSV4WNayDPmxWjoJvT2YFqeabFcbSg/fzznpF/UJDGllwMtS2b66tjTHW60oad4vfjWRjJBM9OZ5bbJGcL4Kr2fYP3SEBR4DqsYfbzHBMoYfNWDKsduxQ04g==
+ b=thN7bJXaW4UT02ckbg58kbYIelBvytBsTSRJHpx4Gepj+Jl4FUtAtp6mZUpNmGsuF/wbWnevIri4Z40eJnDghG4hUVYXmKzDlbDPwW0IwMe8ojI9y6RvK/b1yYkDg0ukfqbdvO5oIxkxPdIFLOUhxCH6ZcEKtIJ2PSzOpzewulNNIzVND255Utw2IQxzZqeQiDj73dwThq31SDW6DFZIALsKgfNFvILloP99g0R18qWZmGMtCTZ9YBw86MHzlNzdbAtg/6sey9k59epk1CHZ5W2Qd0QqHiELSuzH0ydouPYT313Ao3mQfoK9H7JiPsQaPWD5VHOfGIZjLEXoDl5IAA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=au0wH+29IsqmeHMD69OsdoMPZz+5TY0a0WHz6Adybt4=;
- b=U4sCrnYDwXdee3DL1P0DNw86Fib5zkqAovYnVGZdzbiAJTyLtlmHns+b6gMgPszE06pz574BKGepzYpusP8rNsIaMLLGg9QXxj3udFxK4KFvwyH3Y9eS5aCpEJpHDD+OW9OEwq5GRCLzgbu8XPfL/3o3axbOBKJoL1PwtOU4yV9QYK8MGQrwavETtqhr9EuKm1PcLT0MRr0v+X3aNtDT8931FcsMYIG6B3UMdTxx2kaNjtm6nls1C7FcU4IyLD5BkSek/7PRkJYTvpgnow6NWCKzssKHgtDC6LKdorKwFPjnPp/mPGvKS4OguKUsHZAGElWJwM8h1Zts4H/J7c0lIg==
+ bh=glV0maNZAgmGEQ0iE4DmMwKCD2+TEp45OOgdX9j69oY=;
+ b=tAf/g0m+/4AI/S4/BpmX4Kx/6wCfYlKy3WeqbApOUwGC9KPwNG5PXnAG1HYrtX8xFFDU+svcm/760hUAQSAGEhZdyws16e4ryaxPbIv8du//pctiE2GqR8SVqne1NnEEbY9DaJ2X8Oqla5eqZg6dyQgzpJuVwuW96mRBoyCrzU78DM+pN+zIdBpWsHhjD9udE6vQx1fXxiD253G8VQgNux9S2yvTZWgJHwzkMDE+g9UjoiyT7yj9Z7mhLCLs8acff1GDt7vcFJW2L9drCjvvBme+N/AFcpnCvu9i3n4y9wKJ2pf/rbiIVuPAAjdvZ9dptkIH/7o+/XEzCCVYXjBk8Q==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
  165.85.157.49) smtp.rcpttodomain=lists.denx.de
  smtp.mailfrom=gehealthcare.com; dmarc=fail (p=quarantine sp=quarantine
@@ -42,18 +42,18 @@ ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gehealthcare.com;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=au0wH+29IsqmeHMD69OsdoMPZz+5TY0a0WHz6Adybt4=;
- b=jQLtOUDHiLnwSzm9ksPcE1C5I4TzszZevA+JVbLlwhAsFP9H0ReEW2jS0NKv3Hh9xmOsN1pf2SYz80DcvbdhzJCJfBCnN3nJ84nSkXwVlJGYTu/siwg/n85Q0r5HiV7b4iKqwqlyagAK4+6E4BpaWqGA+ipnkoPdtRRVe82nNU79RIK1XA31Pfn3DicTCeOfWjJLMcuT4A+n7QvhMYPIVZW38iIQAAqbP+pBYqhKVhiNmmAdxyIVLHqogKIqn48w7fx4jmI1HyCRvzk/BVqc0PnFWzCWMDLu3SBXqELXapwHMUpgiHXESitbOwRIT9/BjZWYYtUTzEoYQsj8Ss9E0g==
-Received: from BN9PR03CA0697.namprd03.prod.outlook.com (2603:10b6:408:ef::12)
- by SJ2PR22MB4716.namprd22.prod.outlook.com (2603:10b6:a03:583::18)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9846.28; Tue, 28 Apr
- 2026 08:51:27 +0000
+ bh=glV0maNZAgmGEQ0iE4DmMwKCD2+TEp45OOgdX9j69oY=;
+ b=jymVPkUnqvcM30n7dSmzYxDThJ2M2oUX1VSrd8E7evpaYxFRJfp99M3M6oeIgsL1j6Mx025d3vGz54oVnyY4Y87l5k9ksgUiLukJHn5pxDCI4zbHtLcNRy2iCaas2v5xXcb6GvVr4lq1d4wkDJh+lEOlUCixHfZmfWdIqKNiQ+RHe4S9qfPJOdZGlSHw5DtpPKt8SRiNUL5BZ5f1qORvunUSYpvnpQGDOklX9063sprm38/H6me4lKtKqRrwlqgJu4b3W0UAaFmWmXzwoMHQ75cY/DxRVqXhTvZeSrCdE6c5rvT8l1qP6CZKw2zS/0GK8f87TYXk7QH+hmqNl20JkQ==
+Received: from BN9PR03CA0693.namprd03.prod.outlook.com (2603:10b6:408:ef::8)
+ by IA2PR22MB5586.namprd22.prod.outlook.com (2603:10b6:208:4ac::6) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9846.26; Tue, 28 Apr
+ 2026 08:51:28 +0000
 Received: from BN1PEPF00004683.namprd03.prod.outlook.com
- (2603:10b6:408:ef:cafe::f7) by BN9PR03CA0697.outlook.office365.com
- (2603:10b6:408:ef::12) with Microsoft SMTP Server (version=TLS1_3,
+ (2603:10b6:408:ef:cafe::e8) by BN9PR03CA0693.outlook.office365.com
+ (2603:10b6:408:ef::8) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.20.9846.26 via Frontend Transport; Tue,
- 28 Apr 2026 08:51:26 +0000
+ 28 Apr 2026 08:51:28 +0000
 X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 165.85.157.49)
  smtp.mailfrom=gehealthcare.com; dkim=none (message not signed)
  header.d=none;dmarc=fail action=quarantine header.from=gehealthcare.com;
@@ -64,19 +64,24 @@ Received-SPF: Fail (protection.outlook.com: domain of gehealthcare.com does
 Received: from mkerelay1.compute.ge-healthcare.net (165.85.157.49) by
  BN1PEPF00004683.mail.protection.outlook.com (10.167.243.89) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9846.18 via Frontend Transport; Tue, 28 Apr 2026 08:51:26 +0000
+ 15.20.9846.18 via Frontend Transport; Tue, 28 Apr 2026 08:51:27 +0000
 Received: from zoo11.fihel.lab.ge-healthcare.net
  (zoo11.fihel.lab.ge-healthcare.net [10.168.174.93])
- by builder1.fihel.lab.ge-healthcare.net (Postfix) with ESMTP id 4AA481290C;
- Tue, 28 Apr 2026 11:51:24 +0300 (EEST)
+ by builder1.fihel.lab.ge-healthcare.net (Postfix) with ESMTP id 9E47E1290B;
+ Tue, 28 Apr 2026 11:51:23 +0300 (EEST)
 From: Brian Ruley <brian.ruley@gehealthcare.com>
-To: festevam@gmail.com, Lukasz Majewski <lukma@denx.de>,
- Tom Rini <trini@konsulko.com>
+To: festevam@gmail.com, Stefano Babic <sbabic@nabladev.com>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Tom Rini <trini@konsulko.com>,
+ Heiko Schocher <hs@nabladev.com>,
+ "Huan 'Kitty' Wang" <HuanWang@gehealthcare.com>,
+ Ian Ray <ian.ray@gehealthcare.com>,
+ Martyn Welch <martyn.welch@collabora.com>
 Cc: brian.ruley@gehealthcare.com,
+	lukma@denx.de,
 	u-boot@lists.denx.de
-Subject: [PATCH v2 4/7] clk: imx6q: configure ldb clock selectors
-Date: Tue, 28 Apr 2026 11:51:09 +0300
-Message-ID: <20260428085117.402523-4-brian.ruley@gehealthcare.com>
+Subject: [PATCH v2 3/7] imx6: clock: allow different clock sources for ldb
+Date: Tue, 28 Apr 2026 11:51:08 +0300
+Message-ID: <20260428085117.402523-3-brian.ruley@gehealthcare.com>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20260428085117.402523-1-brian.ruley@gehealthcare.com>
 References: <20260428085117.402523-1-brian.ruley@gehealthcare.com>
@@ -84,31 +89,31 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN1PEPF00004683:EE_|SJ2PR22MB4716:EE_
+X-MS-TrafficTypeDiagnostic: BN1PEPF00004683:EE_|IA2PR22MB5586:EE_
 Content-Type: text/plain
-X-MS-Office365-Filtering-Correlation-Id: 874bebee-3b24-4315-f436-08dea5035560
+X-MS-Office365-Filtering-Correlation-Id: b4597328-c090-4fbc-6e76-08dea503561a
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|376014|36860700016|82310400026|18002099003|22082099003|56012099003;
-X-Microsoft-Antispam-Message-Info: 5j0uYhe8mOIeMVteNbonXgjYs2RwTJWGfKg2jlfE3Pmq4990f/ihmyqim+iP+7oqhm5epUFMiudsVqA/xDZvm2qGeS6MiWgrXGXpOHzzmpMinZ8Qledy4oyvdf5bHy9Wc/0numEVRUPtaT4yZEVdM2zQpnINiWowxNOplLNfrBeKUplVu6VZJiuxSEPpAIbSS5ePy7C4DTQCslmFpaKrH4CjVHaTCQKibXZZ0OxSWFLZjYADbFu/8EnuXgUfUwR+gun6BxuuIHoqUKUomgkz+wl325RV80KGGIUzH/B1hyh35WUVtBMQoVHj4BkiZrSKHAQETJLk10CIC3MDJx7gyhUPz7W1sz+O3PhiO7Mpi8y1L2Dugws1+dIn+XRR2hIeQ3AKhDlAfveitBxDVYDCz/ArDfd9CL/fTcDygolnbIOsGXpwJ3p7KLohgzrh75WTaPqXZnojlwsaaUWVIpz4WSr311BQVC57CvgZSdl6+JcAQY4wQayb7C1lJc0H+EcvJsfozvJJF0EImptLDedbetKa9CupCDUnldDKuDNdKsjCdlVGQWwFXRIiPo5XHm8RmoVHQTl7k5p+7RFsjRdOtG2LBJfKNOAW0FRJi0zYFM/GFoPoZueJlqW/jWDGDDVi6jzUxRIHemJcPanDoRQHPY3/YqFQSpSzfcex50GA60GbNjXyZ08KtyA1WmOfthX241wdEO+AhVMZfhKz+mOP5rbR8OZh5Zn65rDjEdthfBcel5wJdEy0YBarSOA2fTlRdVqxIe2txERTrhm6STg8GQ==
+ ARA:13230040|1800799024|82310400026|36860700016|376014|22082099003|56012099003|18002099003;
+X-Microsoft-Antispam-Message-Info: zxYv3LfvJ6Ma385/vkZtPfgngeeH58tDDoJnsb6V+JhbNAwp9faUJZOmfXTnQpn1k9yWK2MywaACzPqnmLvIy9SzDGC+rUi8lucB95dCx46ZIY9k3KYyNDf13XnBspp7RZnLygsqg9iIj92Hj224ij7uSL8tYzgIjrUw0/xM+Q1yrdCaiMLMprTr+NK/jzkvC+hNa8XK8fzb6VVmIML9Cm7hSfMDoUYB2czHv6B8U1Y779QlVXf8hSsu8lc84YsDYs7Py/RNQSJw7Myfc/otWNngsf1XuKVnZHGrIE7LdWIAgPtyCGAVj6zqYbXlRhRChTbD7jgPN5XAillrg7mSg9ARGQ2St8fiCPNhdXPx2S7EeRDIEsR2Kd/TasuGOiTqKidYuPb2I8ZrznezrQJqu4vJ1zt5Vh7Zna0LjHthRNDgBQC9h1qj2Pka9AgiU34Hxnf5QwNp5eFlvkaBwyv8BMqqyquoxUst1Bx9wns/4jGdbwHdMz899Ix350WlOCV97PTTui2CS6piDRROJReDrNUhJaf4rZBDG18xtGzAAEGA81+BAMgOnwREOC0vwtqejtAaVLvxhSlyBR3sGI40SfjGm160Aa2cdprey37Pm3J906zsg5v89BczMuLyJrmH84xVmmq46bfGXxSguk1IaYEv/0AUqXi6Q2V6TihvICDvyXCz+Dh3TerntpqApYKjqy6mcoiogfkpWTQky/4bpuWgFZDn44NQuiIzYKqq/xHY6oI0PzgYfgtsHnQMueJrxBOvTM7abvsUfx+4n2dgag==
 X-Forefront-Antispam-Report: CIP:165.85.157.49; CTRY:US; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:mkerelay1.compute.ge-healthcare.net;
  PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(36860700016)(82310400026)(18002099003)(22082099003)(56012099003);
+ SFS:(13230040)(1800799024)(82310400026)(36860700016)(376014)(22082099003)(56012099003)(18002099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: MOoJBR4ry3FSC3Ydw7wo9sBg4X0xso5yqjAQMFTk7jvXSVixhtjrUAKg6vGMXtvtaoGC/RaTx+QYtWmYD3KtuD4LsSx62IqBtYUhoqZfIbiuDJNYJ+LkmS6xrzajuAKl1npDvSMRjStcO4G9+C385ZcQJYnVVG9BkW68YEsn7EjUQcv0k5cU8M96YRcnXasZ62OmsEkiDCZ+5JhVZbN0tqmICJnWbITHd6dNNkqEa8K1qhhz+xVfIdVs1RjpsZV8LmMmuJFn/F8MG89pOqppyaaXKkzdZ7UOlkDemLTC9EsfFJMgBzzOKbXQ8OdPy2kjOBF36YQPX2nrAUKUzebXQ3rwREyZGs0Xl3mt7Rvw3KVta9QPObgtxfFmuypRSz5/4xIN+bwgbDTI8WIXizlVwOS/H3SjHbwMNHduT8Bi0INBcDnnIjzWuhl367wzUvU8
+X-MS-Exchange-AntiSpam-MessageData-0: wHVC67OJiLdRgVkomQpGdnshN8+9szUC5KP6FcBNXczUtWFdVUX8avoVIKYzY+btw/aDAyGsPPgt71y7pgmf5SiySvJB3zwGdv9gbJW9bpjnoxXL3fm5UIVNEB59Lm6GqEFTZZo0Qvh0zY/f/Zk3nlBULtikL/bUAozl0XkI2S58i3RN4IoMQgbO7o6Xrf4M/cdAo9+cjjWbFvl1OumfeDmPEVMJ6s/rh7t003U9d5z+udMsBUHxhzcLGAMIvDGxVzWqwPUCNZzXU6PL8+5hyktjU1ucvWC9wjvGEjQSzXrVOVdoazLaJnX/p5LOz9mx4YlEOAEda05UVBZFYi40hvy51a6+0utoirjHkvECovd7ihhsQ2agOH3OKQ3GTu4MFc/e5NXIuM7R24hPL/6hAJNVgWjKXfXQmlqtgtE+oQFMkvM4U0kMclca/xp8U7tf
 X-OriginatorOrg: gehealthcare.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Apr 2026 08:51:26.6132 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 874bebee-3b24-4315-f436-08dea5035560
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Apr 2026 08:51:27.9412 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: b4597328-c090-4fbc-6e76-08dea503561a
 X-MS-Exchange-CrossTenant-Id: 9a309606-d6ec-4188-a28a-298812b4bbbf
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=9a309606-d6ec-4188-a28a-298812b4bbbf; Ip=[165.85.157.49];
  Helo=[mkerelay1.compute.ge-healthcare.net]
 X-MS-Exchange-CrossTenant-AuthAs: Internal
 X-MS-Exchange-CrossTenant-AuthSource: TreatMessagesAsInternal-BN1PEPF00004683.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ2PR22MB4716
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA2PR22MB5586
 X-Mailman-Approved-At: Tue, 28 Apr 2026 14:41:00 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -126,162 +131,97 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-A hardware bug prevents LDB clock selectors from being configured later
-on non-plus i.MX6QD variants, so let's set the desired configuration in
-the probe before we register them.
+The LDB clock sources don't have to be the same, so allow DI1 clock to
+be configured separately.
+
+Unlikely to be significant, but the reason will become apparent in the
+following commit.
 
 Signed-off-by: Brian Ruley <brian.ruley@gehealthcare.com>
 ---
- drivers/clk/imx/clk-imx6q.c | 121 +++++++++++++++++++++++++++++++++++-
- 1 file changed, 119 insertions(+), 2 deletions(-)
+ arch/arm/include/asm/arch-mx6/clock.h | 2 +-
+ arch/arm/mach-imx/mx6/clock.c         | 6 +++---
+ board/aristainetos/aristainetos.c     | 2 +-
+ board/ge/b1x5v2/b1x5v2.c              | 2 +-
+ board/ge/bx50v3/bx50v3.c              | 2 +-
+ 5 files changed, 7 insertions(+), 7 deletions(-)
 
-diff --git a/drivers/clk/imx/clk-imx6q.c b/drivers/clk/imx/clk-imx6q.c
-index 6dadfd9b59c..ba039e56227 100644
---- a/drivers/clk/imx/clk-imx6q.c
-+++ b/drivers/clk/imx/clk-imx6q.c
-@@ -9,6 +9,7 @@
- #include <log.h>
- #include <asm/arch/clock.h>
- #include <asm/arch/imx-regs.h>
-+#include <dm/of_access.h>
- #include <dt-bindings/clock/imx6qdl-clock.h>
- 
- #include "clk.h"
-@@ -140,6 +141,121 @@ static const char *const pll6_bypass_sels[] = {
- 
- static unsigned int share_count_mipi_core_cfg;
- 
-+static void of_assigned_ldb_sels(struct udevice *dev, int *ldb_di0_sel,
-+				 int *ldb_di1_sel)
-+{
-+	struct ofnode_phandle_args clk_args, parent_args;
-+	ofnode node = dev_ofnode(dev);
-+	int count, err;
-+
-+	count = dev_count_phandle_with_args(dev, "assigned-clocks",
-+					    "#clock-cells", 0);
-+	if (count <= 0) {
-+		if (count == 0)
-+			debug("%s: no assigned_clocks found\n", dev->name);
-+		else
-+			pr_err("%s: failed to get phandle count (%d)\n",
-+			       dev->name, count);
-+		return;
-+	}
-+
-+	for (int i = 0; i < count; i++) {
-+		err = dev_read_phandle_with_args(dev, "assigned-clocks",
-+						 "#clock-cells", 0, i,
-+						 &clk_args);
-+		if (err == -ENOENT)
-+			/* Skip empty handles */
-+			continue;
-+		else if (err < 0)
-+			return;
-+
-+		if (!ofnode_equal(clk_args.node, node) ||
-+		    clk_args.args[0] >= IMX6QDL_CLK_END) {
-+			pr_err("%s: clock %d not in ccm\n", dev->name, i);
-+			return;
-+		}
-+
-+		err = dev_read_phandle_with_args(dev, "assigned-clock-parents",
-+						 "#clock-cells", 0, i,
-+						 &parent_args);
-+		if (err < 0)
-+			return;
-+
-+		if (!ofnode_equal(parent_args.node, node) ||
-+		    parent_args.args[0] >= IMX6QDL_CLK_END) {
-+			pr_err("%s: parent clock %d not in ccm\n", dev->name,
-+			       i);
-+			return;
-+		}
-+
-+		if (clk_args.args[0] == IMX6QDL_CLK_LDB_DI0_SEL)
-+			*ldb_di0_sel = parent_args.args[0];
-+		else if (clk_args.args[0] == IMX6QDL_CLK_LDB_DI1_SEL)
-+			*ldb_di1_sel = parent_args.args[0];
-+	}
-+}
-+
-+static void imx6q_init_ldb_clks(struct udevice *dev)
-+{
-+	int ldb_di_sel[] = { IMX6QDL_CLK_END, IMX6QDL_CLK_END };
-+	enum ldb_di_clock ldb_di_clk[] = { MXC_MMDC_CH1_CLK, MXC_MMDC_CH1_CLK };
-+
-+	of_assigned_ldb_sels(dev, &ldb_di_sel[0], &ldb_di_sel[1]);
-+	for (int i = 0; i < 2; i++) {
-+		switch (ldb_di_sel[i]) {
-+		case IMX6QDL_CLK_PLL5_VIDEO_DIV:
-+			ldb_di_clk[i] = MXC_PLL5_CLK;
-+			break;
-+		case IMX6QDL_CLK_PLL2_PFD0_352M:
-+			ldb_di_clk[i] = MXC_PLL2_PFD0_CLK;
-+			break;
-+		case IMX6QDL_CLK_PLL2_PFD2_396M: {
-+			struct clk *clk, *parent;
-+
-+			int err = clk_get_by_id(IMX6QDL_CLK_PERIPH_PRE, &clk);
-+
-+			if (err) {
-+				pr_err("%s: failed to get periph_pre clock "
-+				       "(%d)\n",
-+				       dev->name, err);
-+				return;
-+			}
-+
-+			err = clk_get_by_id(IMX6QDL_CLK_PLL2_PFD2_396M,
-+					    &parent);
-+			if (err) {
-+				pr_err("%s: failed to get pll2_pfd2_396m clock"
-+				       " (%d)\n",
-+				       dev->name, err);
-+				return;
-+			}
-+
-+			if (parent == clk) {
-+				pr_err("%s: ldb_di%d_sel: couldn't disable "
-+				       "pll2_pfd2_396m clock\n",
-+				       dev->name, i);
-+				return;
-+			}
-+
-+			ldb_di_clk[i] = MXC_PLL2_PFD2_CLK;
-+			break;
-+		}
-+		case IMX6QDL_CLK_MMDC_CH1_AXI:
-+		case IMX6QDL_CLK_END:
-+			/* use the default clock */
-+			break;
-+		case IMX6QDL_CLK_PLL3_USB_OTG:
-+			ldb_di_clk[i] = MXC_PLL3_SW_CLK;
-+			break;
-+		default:
-+			pr_err("%s: invalid LDB clock parent\n", dev->name);
-+			return;
-+		}
-+	}
-+
-+	select_ldb_di_clock_source(ldb_di_clk[0], ldb_di_clk[1]);
-+}
-+
- static int imx6q_clk_probe(struct udevice *dev)
+diff --git a/arch/arm/include/asm/arch-mx6/clock.h b/arch/arm/include/asm/arch-mx6/clock.h
+index 81af89c631f..9c5f3090bd8 100644
+--- a/arch/arm/include/asm/arch-mx6/clock.h
++++ b/arch/arm/include/asm/arch-mx6/clock.h
+@@ -82,7 +82,7 @@ int enable_lcdif_clock(u32 base_addr, bool enable);
+ void enable_qspi_clk(int qspi_num);
+ void enable_thermal_clk(void);
+ void mxs_set_lcdclk(u32 base_addr, u32 freq);
+-void select_ldb_di_clock_source(enum ldb_di_clock clk);
++void select_ldb_di_clock_source(enum ldb_di_clock clk0, enum ldb_di_clock clk1);
+ void enable_eim_clk(unsigned char enable);
+ int do_mx6_showclocks(struct cmd_tbl *cmdtp, int flag, int argc,
+ 		      char *const argv[]);
+diff --git a/arch/arm/mach-imx/mx6/clock.c b/arch/arm/mach-imx/mx6/clock.c
+index b5aa606b8d0..828a101ba05 100644
+--- a/arch/arm/mach-imx/mx6/clock.c
++++ b/arch/arm/mach-imx/mx6/clock.c
+@@ -1452,7 +1452,7 @@ static void enable_ldb_di_clock_sources(void)
+  * Try call this function as early in the boot process as possible since the
+  * function temporarily disables PLL2 PFD's, PLL3 PFD's and PLL5.
+  */
+-void select_ldb_di_clock_source(enum ldb_di_clock clk)
++void select_ldb_di_clock_source(enum ldb_di_clock clk0, enum ldb_di_clock clk1)
  {
- 	void *base;
-@@ -350,9 +466,10 @@ static int imx6q_clk_probe(struct udevice *dev)
- 				   ldb_di_sels, ARRAY_SIZE(ldb_di_sels)));
- 	} else {
- 		/*
--		 * Need to set these as read-only due to a hardware bug.
--		 * Keeping default mux values. Fixed on the i.MX6 QuadPlus
-+		 * Need to set the clocks now and make them read-only due to a
-+		 * hardware bug. Fixed on the i.MX6 QuadPlus
- 		 */
-+		imx6q_init_ldb_clks(dev);
- 		clk_dm(IMX6QDL_CLK_LDB_DI0_SEL,
- 		       imx_clk_mux_flags(dev, "ldb_di0_sel", base + 0x2c, 9, 3,
- 					 ldb_di_sels, ARRAY_SIZE(ldb_di_sels),
+ 	struct mxc_ccm_reg *mxc_ccm = (struct mxc_ccm_reg *)CCM_BASE_ADDR;
+ 	int reg;
+@@ -1525,8 +1525,8 @@ void select_ldb_di_clock_source(enum ldb_di_clock clk)
+ 	reg = readl(&mxc_ccm->cs2cdr);
+ 	reg &= ~(MXC_CCM_CS2CDR_LDB_DI1_CLK_SEL_MASK
+ 	      | MXC_CCM_CS2CDR_LDB_DI0_CLK_SEL_MASK);
+-	reg |= ((clk << MXC_CCM_CS2CDR_LDB_DI1_CLK_SEL_OFFSET)
+-	      | (clk << MXC_CCM_CS2CDR_LDB_DI0_CLK_SEL_OFFSET));
++	reg |= ((clk0 << MXC_CCM_CS2CDR_LDB_DI1_CLK_SEL_OFFSET)
++	      | (clk1 << MXC_CCM_CS2CDR_LDB_DI0_CLK_SEL_OFFSET));
+ 	writel(reg, &mxc_ccm->cs2cdr);
+ 
+ 	/* Unbypass pll3_sw_clk */
+diff --git a/board/aristainetos/aristainetos.c b/board/aristainetos/aristainetos.c
+index 8cfac9fbb34..4a2349e165b 100644
+--- a/board/aristainetos/aristainetos.c
++++ b/board/aristainetos/aristainetos.c
+@@ -218,7 +218,7 @@ static void set_gpr_register(void)
+ 
+ int board_early_init_f(void)
+ {
+-	select_ldb_di_clock_source(MXC_PLL5_CLK);
++	select_ldb_di_clock_source(MXC_PLL5_CLK, MXC_PLL5_CLK);
+ 	set_gpr_register();
+ 
+ 	/*
+diff --git a/board/ge/b1x5v2/b1x5v2.c b/board/ge/b1x5v2/b1x5v2.c
+index ddb7304d493..f7751fd6fb1 100644
+--- a/board/ge/b1x5v2/b1x5v2.c
++++ b/board/ge/b1x5v2/b1x5v2.c
+@@ -320,7 +320,7 @@ int overwrite_console(void)
+ 
+ int board_early_init_f(void)
+ {
+-	select_ldb_di_clock_source(MXC_PLL5_CLK);
++	select_ldb_di_clock_source(MXC_PLL5_CLK, MXC_PLL5_CLK);
+ 
+ 	return 0;
+ }
+diff --git a/board/ge/bx50v3/bx50v3.c b/board/ge/bx50v3/bx50v3.c
+index e1d08475e94..9fc5f604a49 100644
+--- a/board/ge/bx50v3/bx50v3.c
++++ b/board/ge/bx50v3/bx50v3.c
+@@ -383,7 +383,7 @@ int board_early_init_f(void)
+ 
+ #if defined(CONFIG_VIDEO_IPUV3)
+ 	/* Set LDB clock to Video PLL */
+-	select_ldb_di_clock_source(MXC_PLL5_CLK);
++	select_ldb_di_clock_source(MXC_PLL5_CLK, MXC_PLL5_CLK);
+ #endif
+ 	return 0;
+ }
 -- 
 2.47.3
 
