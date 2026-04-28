@@ -4,91 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D507FFF886D
-	for <u-boot@archiver.kernel.org>; Tue, 28 Apr 2026 18:06:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06280FF886D
+	for <u-boot@archiver.kernel.org>; Tue, 28 Apr 2026 18:07:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6D5FF84676;
-	Tue, 28 Apr 2026 20:06:17 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5FC0584669;
+	Tue, 28 Apr 2026 20:07:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="GdOT7cvy";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="BwlqCdoa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6CA398466B; Tue, 28 Apr 2026 20:06:15 +0200 (CEST)
-Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
- [IPv6:2a00:1450:4864:20::629])
+ id E9E4D8466B; Tue, 28 Apr 2026 20:07:36 +0200 (CEST)
+Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
+ [IPv6:2a00:1450:4864:20::62c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 972B984660
- for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 20:06:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id ECDCD84660
+ for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 20:07:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-bad54961385so919318166b.2
- for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 11:06:12 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1777399572; cv=none;
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-ba6b39871a3so19089866b.0
+ for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 11:07:34 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1777399654; cv=none;
  d=google.com; s=arc-20240605;
- b=PAv8jHee7aV6UpYmK1peyV6di9ma+pRVQd5y7+JAMD/t9rVkEiqr5tsx5diHmsgMMf
- WkA8Y4LtjdKZhRi11KgxwEuSBeTCO1MyBxEJncoPo59hwW4U/iI/OlZ3K22DXiCsteou
- qYvL7e1oZH4+n7Vkv7h8QLx188Nzz81jfYobNh+Df3wB/XAsqMfsFEd6KoiY2m2lJGvl
- 39hBY4af19QmxjUI58QOpLdZpCaaLUB/RL1h4ixhCvYvViFJh6wzmY1rQEsI67bE7Bw0
- 4nXjKTL2Ma9AK9zAMKbcfW9V1mg6BfQ1dnOz08Z46zQ+qpAKhmrVvtSg5gl2sUOCSG7l
- 9Yow==
+ b=Qzt+6slmyGKsYoltutAQIA7MIL3d8uww65+jCU14aEBEUkl6T6WFTbkG8y3SXsbzzN
+ MMohVrxIfuvxJmf2RTmC+MvM6e3jB61j/a+lU+vq+d5wbIeel6PFPnXSS8+rNUsIP4UO
+ pt3Zg4U8xDkRDmHtw84LQwLFb84SLhTDeGIZ3F75QI1yHE/muo28EOA8ZiNA1SoUvvFT
+ noK1ZkYTZUp+Gy4lBVZZbcSnd3lo3KaB/B0BbI6UoGZHUUQBCZj9gJf8Kued63SWsR6G
+ +CYaDeVij9S0iBNF4mO4c5bZT+N1hPnxf9HBjW/eQBf6H2HjfwkHA/yJzuT518Ut48cl
+ hnQA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=XFnDy9utoVaO/PgEt5jX8X2D6aFSAtJ1FBSF1ubhen8=;
+ bh=ATKKj2XQ8n1OlchcFuYJur5vGCnuh7ZH1jLyS20mNx8=;
  fh=GYIekQEhESPWanXHuipF/cx0w9AeOdHDaa7vPtUoRvA=;
- b=P5N1OHhEWQ9bi1LsG5QrM6zlhaPTOQAYBz44snHzg3nSmef/JqN39htGCNnM6DYUqu
- ob4m1/JguAmbQCnazsn6DUaHU/w+l2YWH+RUm3QBhBL8Mkw4jHxw1c2GjXWIEHCIZjHJ
- XwAP9e/S/RhXUX5+hcMJq5EwUInN3FaHxu6qu04hzlAeRnLV7OwaJB8a+EDlsL7htYic
- suCjUjAhkJR1bPau9pnjQrbcLDogse00nJt9Bmp53I9TfU5LHjnh+leSkITcuhU0H/OD
- NYulYXGw0PivqGaIrqfngZSa/SNp36vPRcObuaeSJuIgEff9ASPXheL0F2Z0iiRAE92T
- KAsg==; darn=lists.denx.de
+ b=jgxksMevXVfIfw1z27oZIBAxujcPcIGeB0f71hYbp3ar2NuNQ/dgR37pye3uj/AEIc
+ rmQqB97luHhKgTQpSu9Is1s0H436RIYgKVHFQogByWqJMnlesOU76GunGHo79w3Ft7Hw
+ xO9PJCtz4nCerSxbu5WqKJp+dKDNuA0PE7x46Yjw7V9ik7mzPQ99hb5ChwYMesEMEpa9
+ mf44p3b8koDnbkaOB1xcuAvZQb7ITdIhfzaMwMdzE7zCLovO3lRG36qbVRCmP6LoX1Th
+ fYyAr+2FHXm02RIn0a64GSIxWch4rNz1tV8G6f1k5uzYPP1Tg4oCrXzFtYdvnlqINd9v
+ JSDg==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1777399572; x=1778004372; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1777399654; x=1778004454; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=XFnDy9utoVaO/PgEt5jX8X2D6aFSAtJ1FBSF1ubhen8=;
- b=GdOT7cvyQe0yY2ccZgkbrUnenMw+G3rBICgj5yZCECjKPKvfU+wLz6GDfxk7ZAzPSp
- Siw0ulDCNo/ePYkg85HF4ACHNqgfFciDDZgzcAPbfksay+iyNLcJLRz0El6qEA1IBqxF
- lXB8owU6B9DQRsbLjr4Uc5Ljn8DRZltKE9QaM=
+ bh=ATKKj2XQ8n1OlchcFuYJur5vGCnuh7ZH1jLyS20mNx8=;
+ b=BwlqCdoa/L5nlql/QYjLpjpfq+68QV6QYlSwRwDdNcl9sjPz4nzw2HxW1wjr0rTrLi
+ rGrigStMzZHDknKyNKFHyWPqyrmbissikbsbZ9Om8pr6BJipZWIj2oJMZL7CV4b8LNzV
+ UBU0WU5JLp2vPGL9feak7QoA9T9+whyBmGLfc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777399572; x=1778004372;
+ d=1e100.net; s=20251104; t=1777399654; x=1778004454;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=XFnDy9utoVaO/PgEt5jX8X2D6aFSAtJ1FBSF1ubhen8=;
- b=jnlsQde5xWkuRetsDo7TzIzAXPWu7cV4u6LGXpCxOstRAzVccKy0ithSAzX2mB1AYa
- kMvh/SNIEx126Bxr03jTgtC4hNJrlgGRflZBiFdsUilFUpaZUwhVwuCpEQL6ly+I9N3+
- yy9cnf7sX7L5qMNZlxomEGrCbDLMvZ8jkRETiE845HZkb/foAs3jPRdklxNDuw6iKfMI
- sCm0qgc4wUydztZdGF30hzp6JUPWNq8q0hfrHsnke1qddl7OezHM5amspSfurscsk5c8
- aVUn727bDjxswBatovcvddcNH29UBc/9FMcOnkGqCz3P8wAlXT9et9FCPnt6uXcdAG5R
- nosA==
-X-Gm-Message-State: AOJu0Yzd9Sx59i2wcDbKp9QN3yLvBUP9LoAXgOQ3sFzq+0nEWgGcUmpG
- ZjedDIr3tdYSFa6+cxlKroKIrFZJrzGwb0xexUqdej/2z4Mc2GCtEPotLRjmbnki5qUR5RpiOzQ
- AOLkP4PhcaPJWiqX5Ut5Z1M8/0261qZYE94q3EDhh
-X-Gm-Gg: AeBDiesckt3jacigh0r+ZRS6FEa/4Svv0Ptn6JOxRk2/G1Xkk056d9o4wpZR5b+DzpJ
- 8sQtITQMxMHHByeXqDQnCjtKiBXXMxxRTNj0P6jB9nlBZjvqyR0cJDAniCnSNWJpnxX/LCpDMLV
- x6NEd2qWL225eKdxE7r1XBWC9ikXtcIXHeo6DAP5CEiJSgU8XCmG8GtdRbfYab+PH+Utv87EKI2
- 5JxJBqtwaESnB6xc2GVJZJyDhGTQblGtNVE7j/0qawqDHhJ0EAJHCCW9F3AJOByesIOunywx78W
- m2PdmOckphrSbifN
-X-Received: by 2002:a17:907:26c9:b0:b97:ce8f:b9db with SMTP id
- a640c23a62f3a-bb8018de02bmr241924466b.10.1777399571951; Tue, 28 Apr 2026
- 11:06:11 -0700 (PDT)
+ bh=ATKKj2XQ8n1OlchcFuYJur5vGCnuh7ZH1jLyS20mNx8=;
+ b=pjfohA7E4x47TvE/bO5+8v562iOlSqdMGbXezAqITMrVBcTHeePukZJwk/U7uUq5iM
+ LgQBjSEtPdGf2iRKB7o2gbqm8riGq8XXamgcxmwyZVQTBDg9MGtd9OnPBEXRt2EnWTka
+ Rl2hoyjndQsSWCEkIzQCJ21kXuNyAQfS4E7a8DUEk/ByLxkg2DI15twB7Wbbyfqt8wxD
+ 5BfmsUeV65MfxCLJM0osr1PkiC97tWjTJaVnCxt36V/NqMR3jjOSLrgMZY34rtNPOjad
+ jPr5lcV7isNapC3Lyw8iOpa7I9qqkPXjMlaIRpGqDr/lUV3siKTagUTklT5QuQAjd4K9
+ iR2g==
+X-Gm-Message-State: AOJu0YwG6PgZbgnyD3SGBUdXrhyg/vCM8GmCjEHhO4i0r0czl5tLs7LP
+ C1eyADNgi1O/niYI8hiczn3773Ctmuvtcd4z7q1Inw9dOc7+P1ze54oqOgrr04L4oJLwteD5muc
+ HaCLwh4a202qoxxL9pCaXVgaIjAnNDwWabff3vukV
+X-Gm-Gg: AeBDiesRn0B7NnHGFXkgyBG3syAFlXW3USPub3NTT8OJgSkEU2E4xrLb/mwEyzCD/T7
+ bpmFFjzNtozuknITcQ0hDeCul3t+TatdpbQouqci7/fQD5A5eUgpAZv7sQqkq3G+xa8ECLNwACD
+ Z68tuy7+cBPat4SYm2UfHK3M+ojUCmVTsY1K+sHUHwSh/oncOjMMyFLEMtWxqFWUxVtIuf/rpwX
+ pZu77nTyPJKeTHRUy4g2axWCxMoquz+ku7eKaX0s2HCvl71lvQx+/vjKFTK34rkww8AKdvgO4Ck
+ LrWv5XbfazFa+hQ0
+X-Received: by 2002:a17:907:9602:b0:ba9:30a4:537b with SMTP id
+ a640c23a62f3a-bb952a5a45bmr2450366b.18.1777399654220; Tue, 28 Apr 2026
+ 11:07:34 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260424173151.371134-1-harsimransingh.tungal@arm.com>
- <20260424173151.371134-9-harsimransingh.tungal@arm.com>
-In-Reply-To: <20260424173151.371134-9-harsimransingh.tungal@arm.com>
+ <20260424173151.371134-10-harsimransingh.tungal@arm.com>
+In-Reply-To: <20260424173151.371134-10-harsimransingh.tungal@arm.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 28 Apr 2026 12:05:59 -0600
-X-Gm-Features: AVHnY4LKtGs3UneEQuIMFS1eVOqLzSFm4dW4z5Kc-l2M4Juj5fOfICFaA4sOkG4
-Message-ID: <CAFLszTge4-kNpmh0q26KhRRrN_DK2134qbLi8KqRgwdB+mAaSw@mail.gmail.com>
-Subject: Re: [PATCH 08/12] test: dm: add sandbox FF-A runtime transport tests
+Date: Tue, 28 Apr 2026 12:07:22 -0600
+X-Gm-Features: AVHnY4LFXGuAwj1pV9y9ZMfz59wJC0ToDNjgTpIOq6fsqbbg2CcZu99zHR4l1yU
+Message-ID: <CAFLszTiDRK-OZV-rqXs+NpJZd+ZSoxjKuAgyXJ4nH3sUYLqk7A@mail.gmail.com>
+Subject: Re: [PATCH 09/12] sandbox: ffa: share synthetic partition metadata
+ via macros
 To: harsimransingh.tungal@arm.com
 Cc: u-boot@lists.denx.de, Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>, 
  Tom Rini <trini@konsulko.com>,
@@ -117,81 +118,94 @@ Hi Harsimran,
 
 On 2026-04-24T17:31:50, Harsimran Singh Tungal
 <harsimransingh.tungal@arm.com> wrote:
-> test: dm: add sandbox FF-A runtime transport tests
+> sandbox: ffa: share synthetic partition metadata via macros
 >
-> Exercise FF-A runtime helpers via sandbox DM tests
+> Reuse sandbox FF-A partition constants in emulator tests
 >
-> Add driver-model unit tests that exercise the FF-A runtime helpers on
-> sandbox. The new tests reuse the sandbox emulator to validate both the
-> positive direct-request flow and failure handling, priming the emulator
-> state so the runtime path can be executed.
+> Allow the sandbox FF-A emulator test to use execution-context and property
+> constants defined in sandbox_arm_ffa.h
 >
 > Signed-off-by: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
 >
-> arch/sandbox/include/asm/sandbox_arm_ffa.h | 16 +++++-
->  test/dm/Makefile                           |  3 +-
->  test/dm/ffa_runtime.c                      | 82 ++++++++++++++++++++++++++++++
->  3 files changed, 99 insertions(+), 2 deletions(-)
+> drivers/firmware/arm-ffa/ffa-emul-uclass.c | 36 +++++++++++++++++++++---------
+>  1 file changed, 26 insertions(+), 10 deletions(-)
 
-> diff --git a/test/dm/ffa_runtime.c b/test/dm/ffa_runtime.c
-> @@ -0,0 +1,82 @@
-> +static int dm_test_ffa_runtime_nack(struct unit_test_state *uts)
-> +{
-> +     struct ffa_send_direct_data msg = {0};
-> +     u16 sp_id;
-> +
-> +     ut_assertok(ffa_runtime_get_sp_id(uts, &sp_id));
-> +
-> +     ffa_copy_runtime_priv(&(struct ffa_priv_runtime){
-> +             .id = NS_PHYS_ENDPOINT_ID,
-> +     });
-> +     ffa_enable_runtime_context();
-> +
-> +     /* Ensure runtime context is available before attempting runtime-only paths */
-> +     ut_assert(ffa_get_status_runtime_context());
-> +
-> +     /* Invalid partition IDs must be rejected and mapped to -EINVAL */
-> +     ut_asserteq(-EINVAL, ffa_sync_send_receive_runtime(0, &msg, true));
+> diff --git a/drivers/firmware/arm-ffa/ffa-emul-uclass.c b/drivers/firmware/arm-ffa/ffa-emul-uclass.c
+> @@ -19,41 +19,57 @@
+>  /* The partitions (SPs) table */
+>  static struct ffa_partition_desc sandbox_partitions[SANDBOX_PARTITIONS_CNT] = {
+>       {
+> -             .info = { .id = SANDBOX_SP1_ID, .exec_ctxt = 0x5687, .properties = 0x89325621 },
+> +             .info = {
+> +                     .id = SANDBOX_SP1_ID,
+> +                     .exec_ctxt = SANDBOX_SP1_EXEC_CTXT,
+> +                     .properties = SANDBOX_SP1_PROPERTIES,
+> +             },
+>               .sp_uuid = {
+>                       .a1 = SANDBOX_SERVICE1_UUID_A1,
+> ...
+>       {
+> -             .info = { .id = SANDBOX_SP3_ID, .exec_ctxt = 0x7687, .properties = 0x23325621 },
+> +             .info = {
+> +                     .id = SANDBOX_SP2_ID,
+> +                     .exec_ctxt = SANDBOX_SP2_EXEC_CTXT,
+> +                     .properties = SANDBOX_SP2_PROPERTIES,
+> +             },
+>               .sp_uuid = {
+>                       .a1 = SANDBOX_SERVICE2_UUID_A1,
+> ...
+>       {
+> -             .info = { .id = SANDBOX_SP2_ID, .exec_ctxt = 0x9587, .properties = 0x45325621 },
+> +             .info = {
+> +                     .id = SANDBOX_SP3_ID,
+> +                     .exec_ctxt = SANDBOX_SP3_EXEC_CTXT,
+> +                     .properties = SANDBOX_SP3_PROPERTIES,
+> +             },
+>               .sp_uuid = {
+>                       .a1 = SANDBOX_SERVICE1_UUID_A1,
 
-sp_id is fetched here but never used - the test sends to id 0
-directly. Please drop the call to ffa_runtime_get_sp_id() in this
-test, or use the discovered id for a positive comparison.
+This is not a pure refactor. Index 1 and 2 swap, so SP2 moves from
+SERVICE1 to SERVICE2, and SP3 moves from SERVICE2 to SERVICE1. The
+existing test in test/dm/ffa.c queries by UUID and walks the matching
+SPs, so the set of IDs returned for each service changes.
 
-> diff --git a/test/dm/ffa_runtime.c b/test/dm/ffa_runtime.c
-> @@ -0,0 +1,82 @@
-> +static int dm_test_ffa_runtime_ack(struct unit_test_state *uts)
-> +{
-> +     struct ffa_send_direct_data msg = {0};
-> +     u16 sp_id;
-> +     u8 cnt;
-> +
-> +     ut_assertok(ffa_runtime_get_sp_id(uts, &sp_id));
-> +
-> +     ffa_copy_runtime_priv(&(struct ffa_priv_runtime){
-> +             .id = NS_PHYS_ENDPOINT_ID,
-> +     });
-> +     ffa_enable_runtime_context();
+If the reorder is deliberate (e.g. so the table reads SP1..SP4 in
+numeric order), please call it out in the commit message and confirm
+no downstream test relies on the previous SP-to-UUID mapping.
+Otherwise keep the .id fields where they were and only substitute in
+the macros.
 
-ffa_enable_runtime_context() flips a global static flag in
-arm-ffa-runtime.c that is never reset. Once either test has run,
-ffa_get_status_runtime_context() returns true for the rest of the
-process, which leaks state into other tests and means a
-missing-context path can never be reached. Please add a case that
-calls ffa_sync_send_receive_runtime() before enabling the context and
-verifies it returns -EPERM (that branch is currently untested) and
-provide a way to reset the runtime priv between tests.
+> diff --git a/drivers/firmware/arm-ffa/ffa-emul-uclass.c b/drivers/firmware/arm-ffa/ffa-emul-uclass.c
+> @@ -19,41 +19,57 @@
+> +             .info = {
+> +                     .id = SANDBOX_SP1_ID,
+> +                     .exec_ctxt = SANDBOX_SP1_EXEC_CTXT,
+> +                     .properties = SANDBOX_SP1_PROPERTIES,
+> +             },
 
-> diff --git a/test/dm/ffa_runtime.c b/test/dm/ffa_runtime.c
-> @@ -0,0 +1,82 @@
-> +     /* Validate FF-A error to errno translation helpers */
-> +     ut_asserteq(-EINVAL, ffa_to_std_errno(-INVALID_PARAMETERS));
-> +     ut_asserteq(-EOPNOTSUPP, ffa_to_std_errno(-NOT_SUPPORTED));
+The macros being substituted in here are added in patch 8, and nothing
+else in this patch uses them - they exist solely to be consumed by
+this patch. Can you squash 9 into 8 so the macro definitions and their
+first user land together.
 
-Just to clarify, ffa_to_std_errno() is a pure helper unrelated to the
-messaging round-trip - please split this into its own dm_test, so a
-regression in the table doesn't look like a transport failure, and add
-coverage for at least the boundary cases (e.g. 0, MAX_NUMBER_FFA_ERR,
-an out-of-range value) which all should map to -EINVAL.
+> Author: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
+
+>
+>     sandbox: ffa: share synthetic partition metadata via macros
+>
+>     Reuse sandbox FF-A partition constants in emulator tests
+>
+>     Allow the sandbox FF-A emulator test to use execution-context and property
+>     constants defined in sandbox_arm_ffa.h
+
+The body reads like two competing subject lines followed by a one-line
+restatement, and none of it explains the motivation. Also, the file
+changed is the emulator itself (ffa-emul-uclass.c), not a test, so 'in
+emulator tests' / 'emulator test' is misleading. Please rewrite to say
+what problem is being solved (e.g. the runtime tests added in 8 need
+to reference the same exec_ctxt/properties values, so the magic
+numbers are pulled out into shared macros) and drop the duplicate
+sentence.
 
 Regards,
 Simon
