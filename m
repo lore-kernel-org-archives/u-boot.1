@@ -4,106 +4,105 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9597FFF886F
-	for <u-boot@archiver.kernel.org>; Tue, 28 Apr 2026 04:27:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF5D3FF885A
+	for <u-boot@archiver.kernel.org>; Tue, 28 Apr 2026 05:15:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BA3C684314;
-	Tue, 28 Apr 2026 06:27:14 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
+	by phobos.denx.de (Postfix) with ESMTP id BDECC84106;
+	Tue, 28 Apr 2026 07:15:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="I8KHogbA";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="mvr+VdLQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A82EC84106; Tue, 28 Apr 2026 06:07:19 +0200 (CEST)
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 0868A84106; Tue, 28 Apr 2026 07:15:17 +0200 (CEST)
+Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
+ [IPv6:2607:f8b0:4864:20::333])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 10F1084099
- for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 06:07:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=redhat.com
+ by phobos.denx.de (Postfix) with ESMTPS id E048E83A91
+ for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 07:15:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ekovsky@redhat.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1777349235;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=rdryLV0YICc5YlOEF8rPDK88n8gF0YpIBPdngbQcTrI=;
- b=I8KHogbAt0yhsD2amZgyq+GtQ5W7GEE3VFh+TjYsbMBdD025eXTL0Dy7UT3WcPUhQo4x+N
- tN4AMXSG/jlLWOgCLqaFTd2gaq66qwAkjLrOkrBonjn+JH/+evfLudjo+g/6hKaTq7L5BJ
- GU7tCqKbL4ZuvUVwINiUIhU61jAED2Y=
-Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com
- [209.85.222.198]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-473-HNi5QMUGP-iknkec-5UHWQ-1; Mon, 27 Apr 2026 16:43:43 -0400
-X-MC-Unique: HNi5QMUGP-iknkec-5UHWQ-1
-X-Mimecast-MFC-AGG-ID: HNi5QMUGP-iknkec-5UHWQ_1777322623
-Received: by mail-qk1-f198.google.com with SMTP id
- af79cd13be357-8eaf1ce4a9bso1504818085a.1
- for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 13:43:43 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=briansune@gmail.com
+Received: by mail-ot1-x333.google.com with SMTP id
+ 46e09a7af769-7dcd8ef572aso4018696a34.1
+ for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 22:15:14 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1777353313; cv=none;
+ d=google.com; s=arc-20240605;
+ b=SlnRHSUdjhPYfwZ599xC1GwWapHF61Kb8Q2XfJ/waTMhR0pZ85J9LZNpIWbTps+yBm
+ +JfQauOQOcwSnjGqwQIP1FsKwENFoZMyjcCZOVsEXAv9PwFZTrVDiub5hvQSIe7Q5etl
+ Xz7B1T0StiRohMDY2duqpRxjdEml+214kBvx4otmVoJShdBfKYBTeO077jDSDIEcLebN
+ T0xDKJnQOLrIxvCytRvG0Z067O7WazGqwOoEunJ6t+WcbQYlB/EfILZ+cdsH2QBb1Gn0
+ 502p6Eie5rr/ogGQFHKi49KFhlslJzxgb3QMnlqLs7SD47zCC/y5/SpQ433+pyw4w8Ll
+ EteQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=0lfuwFkuvxwzFtHO8MoQWFeJmT02YiZPsvmxx9tAgGk=;
+ fh=QMZdvVsxvWCHNNEpcAbJd4pzxODbhoOY9yjXiTqL0Z0=;
+ b=AZ7zMZR82K4Fo+vPxh1CERFXM0KM5pt9nlLKzUxCZRXZfpkAiFaCXPWIvcfnHA9/9w
+ OV4l8AIU1GWByj+JdtMbZyrNlq6uZaoPjcHO0NiOnM54epY87nBipOvasbELBSOIwx/P
+ 11JKfG8O46Rn1gCmRt8MagXG+XDlYD7MiaBoR68ZVuVaNXLOgIcG7wWRsep1/AdRFo9i
+ XRzUfJN4HZemwAxjLBxgKJ1FJ0OIs6KjoVsFjMYsuHo4o6wa2yqZ6Cm7XoYB555PNiIe
+ a47F1WVjzTlfkP/HwltZlZnqP7cSsLUU5THFy9vUEEXoTJ6CbtJ+KH4yAT1gHLfd+rvn
+ h9+A==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1777353313; x=1777958113; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=0lfuwFkuvxwzFtHO8MoQWFeJmT02YiZPsvmxx9tAgGk=;
+ b=mvr+VdLQB4qcAYU5ftbdexqHdypYGVdHFDn/RMZtDAst9rz0k/vxfypcFdPpdEmNfx
+ BB61H2+8/Lqq+qA27XvaBoOcvdjR1NzBUpLoZtvJDPsdsug38g2+LVWskjBlgFfQkNS5
+ eg+6FYtkPN7UmZt7OHhT7NIETGGFoLlGfH7aiCgGtUvev/Cp77/LiaW3at7V3rExe8/P
+ JIi0Unn3tquhNko3GJyEYaq+KXxafy1azQ2lMGmgdp5WGp07fVK2rIUuWTAwA8muUq+R
+ cVO0z413U1EwbDzatKRVGQ/E8mPWvwerumPZOiqrIryr0Y+wr1McjAd+cSHw9ilW4T3z
+ Ij2g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777322623; x=1777927423;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:date:from:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=rdryLV0YICc5YlOEF8rPDK88n8gF0YpIBPdngbQcTrI=;
- b=ZY3ZApmDAG+SruZN7RmhL+8ygezMQhfU7pD2e7NQHvZ8pc014Yqcb5wI+K9f1OiNc1
- nHPbgXzd+lz5r8t43GRcguHd8nwKxHU/Sj3YZjm/LbtdHpvspUKcCGfqJ/0+eYhMg8JU
- Lhiusk4XDwbcHCgY0dutc9D7XeAPyVJyJ214iyG+iXn2mjjJbgnzy4bs32KKQ4nkRfai
- aNVaQmn8j4LYh6SCCyCGbEgtfXBDbluYlF3V8Rd8qVOwbHcLMuYL62X9HN4vKh8dpceB
- D726mONi4YmfIW2SuuZFbek2HGFgubkmqZ2uznyiRHJzqcB613sF8NzU02JAmmN3GPwz
- h6oQ==
-X-Forwarded-Encrypted: i=1;
- AFNElJ+i4eGS9Drb5OVhhm3TSZZEsZpIjyz0dfJWzLhn0Ue+NJpmlz2xKS5PdwGt9/5vkoCE/pY9zQo=@lists.denx.de
-X-Gm-Message-State: AOJu0YyRDz/CtMhY63mqIKT/M2cswrlg2hESwQyuNebpf99kJjafP4gF
- M8W8wuyD69pxZu0+XdJfYZNguVJye1k6dVc+2cYBO6qArZtxCL6igN9T8/HGGYcKl0cTGTQiWjV
- 2vHF3dKUXnTqa2eo0A8I5gpkJEKxSLYokz3jSnfuNoNbtqYJVg7j9z+c=
-X-Gm-Gg: AeBDietnBhX2T3F3wJUDenryLG4BsTnnczLtvu9PEFLrBuUbBQeuTSaE9fVMJRpBFJy
- 8l23vnbTjqOIl95FMg74vcQ4xrKRzjC7NWEaZLCMunMqAdFkG4+1z1z0K5O4OvUpZ6PZUE9RpJH
- dpwo3s2zQLrTGaaTNM+QTVcMppvcZcOD1vpy/tBqvLrvwm6OcCc+WPPfi/kVxW538LKdY6WsZC0
- Uc2mPAQcOuHOIwhIbPUyNJ+mieuCcp9/ceKGjtW9TrQXYf+fWKsOIsvrsCq+d4cqqODl4b4T6T9
- HBh8qUzmH68avZgEO/PN2CpdEmDigjirtdR+utQNmRPPI64fYD48znnoI76U/MykAFZxPEVQ3nf
- OVUzCtiOEEj2iHjq2VtZ6yka9oZY=
-X-Received: by 2002:a05:620a:170c:b0:8f1:7ce7:5aff with SMTP id
- af79cd13be357-8f7ccfa6b37mr47643885a.1.1777322622946; 
- Mon, 27 Apr 2026 13:43:42 -0700 (PDT)
-X-Received: by 2002:a05:620a:170c:b0:8f1:7ce7:5aff with SMTP id
- af79cd13be357-8f7ccfa6b37mr47639185a.1.1777322622340; 
- Mon, 27 Apr 2026 13:43:42 -0700 (PDT)
-Received: from localhost ([38.246.12.206]) by smtp.gmail.com with ESMTPSA id
- af79cd13be357-8f7c8a97f3esm22383585a.47.2026.04.27.13.43.41
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 27 Apr 2026 13:43:41 -0700 (PDT)
-From: Eddie Kovsky <ekovsky@redhat.com>
-X-Google-Original-From: Eddie Kovsky <ewk@edkovsky.org>
-Date: Mon, 27 Apr 2026 14:43:40 -0600
-To: Tom Rini <trini@konsulko.com>
-Cc: Eddie Kovsky <ekovsky@redhat.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Tobias Olausson <tobias@eub.se>,
- Paul HENRYS <paul.henrys_ext@softathome.com>,
- Simon Glass <sjg@chromium.org>, Jan Stancek <jstancek@redhat.com>,
- Enric Balletbo i Serra <eballetb@redhat.com>,
- a.fatoum@pengutronix.de, mark.kettenis@xs4all.nl, u-boot@lists.denx.de
-Subject: Re: [PATCH v3] Add support for OpenSSL Provider API
-Message-ID: <ae_KfGqNrsWZ1rfQ@daedalus>
-References: <20260120164524.253188-1-ekovsky@redhat.com>
- <87ikckmbbi.fsf@kernel.org> <aZc_efHFk1Q-iWvP@daedalus>
- <20260219172836.GN3233182@bill-the-cat> <aaHWNU0LQqJ0zNDD@daedalus>
- <20260227174744.GW1593142@bill-the-cat> <ac2WqaHYgLslig_a@daedalus>
- <20260402162704.GG41863@bill-the-cat> <admdwS1tuX_ZdPFF@daedalus>
- <20260413181258.GD41863@bill-the-cat>
+ d=1e100.net; s=20251104; t=1777353313; x=1777958113;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=0lfuwFkuvxwzFtHO8MoQWFeJmT02YiZPsvmxx9tAgGk=;
+ b=i0BPA1Dmg/O4EZHVAlnqeYSMiJkP76ADli+M2J0UiKZDtIpflrTYIR1q4GVN/sWAkO
+ N+sJCb+awgvTD/4VHkeznTevXY9UETIoZRIz75ku7ol/jJR19IvGOFLOPx5rVEXAUXIr
+ Y8dz2AjpONpm+cVVdcWMf8Bb81WmfVUaVUy6p7t2NzgRmEDcvNTghbROdHZyW810p4YE
+ 1mkxBRsgYGhzv9DrbWdX00/8p10x/aVAdnzo9rr0WuTO2RNWyOeHkxSgfR6YXMpLnMkf
+ MmqHGKt7PrL8YJ78KCMLTXsEHByYk0OhaKPIrbuC4B3+2cMWnoAMW2ZQPIzG83qW3QS+
+ JMeQ==
+X-Gm-Message-State: AOJu0YyslDYEpBoLhhBBS2w8e9Fr0m5UEeDPje4M3fpWEn7fbuSy20ny
+ HSQEoealayJS5oAGjv/s7AcX530FYEXcVLNmaXMI71WlxHs0ds+FW33tibLqrKziPJ7uJ2C5LlJ
+ JJ9uMgpX9NNpaOB0RAP/3SBMFsRr1N4g=
+X-Gm-Gg: AeBDieua7io17IDqL0idZPoisL1t8iW3AT4Nt4m+bioENWPbpknEu8EZKQpwH+8ewtU
+ fSAqrw+/6gF1yLu2g6I270kFED5ohP+gRcA7wpRHv2t9S0tif/SZ9agIck0HVjm5k3fD7LEqkNv
+ qgZlRny7xssHsoxtIJ9G/hJFc+MnmuM1IDE8KBWq76MpMeBD3LHu4Nr+Mi8y7b2TnY1qHMzreMP
+ oD/m689PCQtLXFylEQhPSAQg6inmOYjzA6KALZZiQkAzkMun7mIJA9ivUsAcNGAONAQAvEkZuhc
+ 0qazU7il22TDzjO0vZUDw/s0AIA3bQ==
+X-Received: by 2002:a05:6830:6d4e:b0:7d9:d2b6:1568 with SMTP id
+ 46e09a7af769-7de9a0cb4f8mr1037082a34.17.1777353313476; Mon, 27 Apr 2026
+ 22:15:13 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20260413181258.GD41863@bill-the-cat>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: UlaqZbUgNwC4mq-Y1VDTn3SQTtKUeXavh-gIuLcFyuU_1777322623
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-X-Mailman-Approved-At: Tue, 28 Apr 2026 06:27:12 +0200
+References: <20260428033230.7777-1-alif.zakuan.yuslaimi@altera.com>
+ <20260428033230.7777-2-alif.zakuan.yuslaimi@altera.com>
+In-Reply-To: <20260428033230.7777-2-alif.zakuan.yuslaimi@altera.com>
+From: Sune Brian <briansune@gmail.com>
+Date: Tue, 28 Apr 2026 13:15:01 +0800
+X-Gm-Features: AVHnY4KHaUXgJme3jAO8pr-1U-Fy8UW0FZvXjwLU9JlCkp6YdVNET0ZFjvDV_qE
+Message-ID: <CAN7C2SAx=J6a=z7TyrVW2PcZT14wtOvqSQDkFRBhxPJ_xgazHg@mail.gmail.com>
+Subject: Re: [PATCH v2 1/3] arm: socfpga: Consolidate dram_bank_mmu_setup()
+To: alif.zakuan.yuslaimi@altera.com
+Cc: u-boot@lists.denx.de, Marek Vasut <marex@denx.de>, 
+ Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>, 
+ Tien Fong Chee <tien.fong.chee@altera.com>, Tom Rini <trini@konsulko.com>,
+ Yao Zi <me@ziyao.cc>, 
+ Patrice Chotard <patrice.chotard@foss.st.com>, Peng Fan <peng.fan@nxp.com>, 
+ Simon Glass <sjg@chromium.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -120,89 +119,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 04/13/26, Tom Rini wrote:
-> On Fri, Apr 10, 2026 at 07:02:57PM -0600, Eddie Kovsky wrote:
-> > --->8
-> > > > I finally got to the bottom of this. Debian/Ubuntu ship OpenSSL backends
-> > > > separately. The CI environment is missing the 'pkcs11-provider'
-> > > > package, which is causing the binman tests to fail.
-> > > > 
-> > > >     $ apt show pkcs11-provider
-> > > >     Package: pkcs11-provider
-> > > >     Version: 1.0-3
-> > > >     Priority: optional
-> > > >     Section: libs
-> > > >     Maintainer: Luca Boccassi <bluca@debian.org>
-> > > >     Installed-Size: 410 kB
-> > > >     Depends: libc6 (>= 2.34), libssl3t64 (>= 3.0.7~)
-> > > >     Homepage: https://github.com/latchset/pkcs11-provider
-> > > >     Download-Size: 125 kB
-> > > >     APT-Manual-Installed: yes
-> > > >     APT-Sources: http://ftp.debian.org/debian stable/main amd64 Packages
-> > > >     Description: OpenSSL 3 provider for PKCS11
-> > > >     With this provider for OpenSSL you can use the OpenSSL library
-> > > >     (version 3) and command line tools with any PKCS11 implementation as
-> > > >     backend for the crypto operations.
-> > > > 
-> > > > With this package installed the SSL errors logged on Azure are no longer reproducible.
-> > > > 
-> > > > The results from the first pipeline expired while I was investigating
-> > > > this. I reran the CI job so you can see the error messages.
-> > > > 
-> > > >     https://dev.azure.com/u-boot/u-boot/_build/results?buildId=13035&view=logs&j=c59aff74-743b-5f08-f408-4a608a489153&t=f2ea3536-b291-5a39-ad92-0220c9b8101a
-> > > > 
-> > > > I have looked into the .azure-pipelines.yml file, but it's not clear to
-> > > > me how to configure the CI to install extra packages.
-> > > 
-> > > Ah, OK. So the package needs to be added to tools/docker/Dockerfile (and
-> > > doc/build/gcc.rst). For testing changes out, you can then modify
-> > > .azure-pipelines.yml to point at your image, rather than the default
-> > > image. Or hack in a "sudo apt-get update && sudo apt-get install ..." to
-> > > the job.
-> > > 
-> > > -- 
-> > > Tom
-> > 
-> > Hi Tom
-> > 
-> > Updating the dockerfile and documentation was easy enough, but I was
-> > still seeing the Azure pipeline fail with the same errors. It seems to
-> > be ignoring the updated dockerfile.
-> > 
-> > After digging through the pipeline logs I noticed that Azure is using
-> > the Windows Subsystem for Linux with Arch Linux to set up the test
-> > environment. The package name 'pkcs11-provider' is even the same on
-> > Arch, so I added that to .azure-pipelines.yml.
-> > 
-> >     https://archlinux.org/packages/extra/x86_64/pkcs11-provider/
-> > 
-> > And the Azure pipeline now fails because it reports the package doesn't
-> > exist.
-> > 
-> >     https://dev.azure.com/u-boot/u-boot/_build/results?buildId=13066&view=logs&j=8222cf02-b5ce-5040-5def-6173bf341f71&t=5f6e674b-07e4-5ce5-77ac-ecaae7331dd8
-> > 
-> > I am not an expert in these CI systems, so I'm not sure what else can be
-> > done to change the test environment.
-> 
-> So, I see two problems. One is the failure on Windows hosts. Perhaps
-> https://www.msys2.org/docs/package-management/ has some hints on how to
-> find out where it's looking for packages and if that's packaged in turn?
-> The other is that the binman test suites are still failing, on Linux.
-> 
-> -- 
-> Tom
+On Tue, Apr 28, 2026 at 11:32=E2=80=AFAM <alif.zakuan.yuslaimi@altera.com> =
+wrote:
+>
+> From: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
+>
+> Relocate the dram_bank_mmu_setup() implementation from misc_arria10.c to
+> the common socfpga misc.c and update the function to correctly handle bot=
+h
+> pre-relocation and post-relocation cases for DRAM cache enabling for
+> consistent MMU/dcache setup across Arria10 and CycloneV platforms.
+>
+> These changes help to improve maintainability and consistency of DRAM
+> initialization as well as MMU configuration for Arria10 and CycloneV
+> platforms.
+>
+> New Kconfig is introduced to enable this implementation only on the defau=
+lt
+> Arria10 and CycloneV boards as this will increase the SPL size which
+> will exceed some Gen5 devices' SPL size limit.
+>
+> Fixes: e26ecebc684b ("socfpga: arria10: Allow dcache_enable before reloca=
+tion")
+>
+> Signed-off-by: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
+> ---
 
-Okay, I see now that MSYS2 is really a package management tool for
-Windows that happens to reuse some of the tools from Arch Linux. But it
-doesn't package pkcs11-provider. The only pkcs11 package available is
-pkcs11-helper, which is a different upstream and does not resolve the
-binman failures on Azure.
+For GEN5 cyclone V:
+Custom board
+512x16 DDR3 die x 3
+ECC supported to max Cyclone V allowed
+No boot issue on soft / hard reset
 
-    https://packages.msys2.org/base/mingw-w64-pkcs11-helper
+log:
+U-Boot SPL 2026.07-rc1-dirty (Apr 28 2026 - 13:09:08 +0800)
+DDRCAL: Scrubbing ECC RAM (2048 MiB).
+DDRCAL: SDRAM-ECC initialized success with 1057 ms
+Trying to boot from MMC1
 
-I will include the Dockerfile update adding pkcs11-provider when I send
-v4, which should resolve the errors on Linux. But at this point I've
-done all I can to resolve the issues with CI.
 
-Eddie
+U-Boot 2026.07-rc1-dirty (Apr 28 2026 - 13:09:08 +0800)
 
+Tested-by: Brian Sune <briansune@gmail.com>
+
+>  arch/arm/mach-socfpga/Kconfig        |  1 +
+>  arch/arm/mach-socfpga/misc.c         | 31 ++++++++++++++++++++++++++++
+
+>  3 files changed, 32 insertions(+), 26 deletions(-)
