@@ -4,31 +4,31 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1BADEFF885A
-	for <u-boot@archiver.kernel.org>; Tue, 28 Apr 2026 16:43:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B76B5FF8868
+	for <u-boot@archiver.kernel.org>; Tue, 28 Apr 2026 16:44:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 753C58467E;
+	by phobos.denx.de (Postfix) with ESMTP id AF8D884686;
 	Tue, 28 Apr 2026 18:43:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=lst.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 89B69845E3; Tue, 28 Apr 2026 18:39:32 +0200 (CEST)
+ id ADF97845D8; Tue, 28 Apr 2026 18:39:35 +0200 (CEST)
 Received: from verein.lst.de (verein.lst.de [213.95.11.211])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 860B3842D7
- for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 18:39:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B3DB9842D7
+ for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 18:39:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=lst.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=duwe@lst.de
 Received: by verein.lst.de (Postfix, from userid 2005)
- id 3501268D0D; Tue, 28 Apr 2026 18:39:29 +0200 (CEST)
-Subject: [PATCH v2 4/9] pci: brcmstb: Add RPi5 reset facilities
+ id 5540868D0F; Tue, 28 Apr 2026 18:39:32 +0200 (CEST)
+Subject: [PATCH v2 5/9] pci: brcmstb: Add RPi5 rescal reset facilities
 To: Peter Robinson <pbrobinson@gmail.com>, Matthias Brugger <mbrugger@suse.com>
 Cc: Tom Rini <trini@konsulko.com>,"Jan Čermák" <sairon@sairon.cz>,Andrea della Porta <andrea.porta@suse.com>,"Ivan T. Ivanov" <iivanov@suse.de>, Stanimir Varbanov <stanimir.varbanov@suse.com>, Oleksii Moisieiev <Oleksii_Moisieiev@epam.com>, Volodymyr Babchuk <volodymyr_babchuk@epam.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>,Paul Barker <paul.barker.ct@bp.renesas.com>,Patrice Chotard <patrice.chotard@foss.st.com>,Christian Marangi <ansuelsmth@gmail.com>,Patrick Delaunay <patrick.delaunay@foss.st.com>,Huan Zhou <me@per1cycle.org>,Gabriel Fernandez <gabriel.fernandez@foss.st.com>,Kever Yang <kever.yang@rock-chips.com>,Jonas Karlman <jonas@kwiboo.se>,Joseph Chen <chenjh@rock-chips.com>,Elaine Zhang <zhangqing@rock-chips.com>, Pedro Falcato <pfalcato@suse.de>,u-boot@lists.denx.de
 In-Reply-To: <20260428162319.99B4268B05@verein.lst.de>
-Message-Id: <20260428163929.3501268D0D@verein.lst.de>
-Date: Tue, 28 Apr 2026 18:39:29 +0200 (CEST)
+Message-Id: <20260428163932.5540868D0F@verein.lst.de>
+Date: Tue, 28 Apr 2026 18:39:32 +0200 (CEST)
 From: duwe@lst.de (Torsten Duwe)
 X-Mailman-Approved-At: Tue, 28 Apr 2026 18:43:21 +0200
 X-BeenThere: u-boot@lists.denx.de
@@ -49,45 +49,45 @@ X-Virus-Status: Clean
 
 From: Torsten Duwe <duwe@suse.de>
 
-A driver for Broadcom reset controllers ported from
-linux/drivers/reset/reset-brcmstb.c to U-Boot.
+A driver for Broadcom rescal reset controllers ported from
+linux/drivers/reset/reset-brcmstb-rescal.c to U-Boot.
 
 Signed-off-by: Torsten Duwe <duwe@suse.de>
 Co-authored-by: Oleksii Moisieiev <oleksii_moisieiev@epam.com>
 Tested-by: Pedro Falcato <pfalcato@suse.de>
 
 ---
- configs/rpi_arm64_defconfig   |  1 +
- drivers/reset/Kconfig         |  7 +++
- drivers/reset/Makefile        |  1 +
- drivers/reset/reset-brcmstb.c | 97 +++++++++++++++++++++++++++++++++++
- 4 files changed, 106 insertions(+)
- create mode 100644 drivers/reset/reset-brcmstb.c
+ configs/rpi_arm64_defconfig          |   1 +
+ drivers/reset/Kconfig                |   7 ++
+ drivers/reset/Makefile               |   1 +
+ drivers/reset/reset-brcmstb-rescal.c | 103 +++++++++++++++++++++++++++
+ 4 files changed, 112 insertions(+)
+ create mode 100644 drivers/reset/reset-brcmstb-rescal.c
 
 diff --git a/configs/rpi_arm64_defconfig b/configs/rpi_arm64_defconfig
-index 69e8e72c5d7..153d7ed301e 100644
+index 153d7ed301e..38af5029403 100644
 --- a/configs/rpi_arm64_defconfig
 +++ b/configs/rpi_arm64_defconfig
-@@ -44,6 +44,7 @@ CONFIG_BCMGENET=y
- CONFIG_PCI_BRCMSTB=y
+@@ -45,6 +45,7 @@ CONFIG_PCI_BRCMSTB=y
  CONFIG_PINCTRL=y
  # CONFIG_PINCTRL_GENERIC is not set
-+CONFIG_RESET_BRCMSTB=y
+ CONFIG_RESET_BRCMSTB=y
++CONFIG_RESET_BRCMSTB_RESCAL=y
  CONFIG_DM_RNG=y
  CONFIG_RNG_IPROC200=y
  # CONFIG_REQUIRE_SERIAL_CONSOLE is not set
 diff --git a/drivers/reset/Kconfig b/drivers/reset/Kconfig
-index 66911199c8b..e0561df8058 100644
+index e0561df8058..b4237bf98bf 100644
 --- a/drivers/reset/Kconfig
 +++ b/drivers/reset/Kconfig
-@@ -64,6 +64,13 @@ config RESET_BCM6345
- 	help
- 	  Support reset controller on BCM6345.
+@@ -71,6 +71,13 @@ config RESET_BRCMSTB
+ 	  If you wish to use reset resources managed by the Broadcom
+ 	  Reset Controller, say Y here. Otherwise, say N.
  
-+config RESET_BRCMSTB
-+	bool "Generic Reset controller driver for Broadcom"
++config RESET_BRCMSTB_RESCAL
++	bool "Generic Rescal Reset controller driver for Broadcom"
 +	help
-+	  This enables reset controller for Broadcom devices.
++	  Support rescal reset controller on Broadcom.
 +	  If you wish to use reset resources managed by the Broadcom
 +	  Reset Controller, say Y here. Otherwise, say N.
 +
@@ -95,119 +95,125 @@ index 66911199c8b..e0561df8058 100644
  	bool "Reset controller driver for UniPhier SoCs"
  	depends on ARCH_UNIPHIER
 diff --git a/drivers/reset/Makefile b/drivers/reset/Makefile
-index 088545c6473..ad5fe6b6184 100644
+index ad5fe6b6184..c369bdb3d6c 100644
 --- a/drivers/reset/Makefile
 +++ b/drivers/reset/Makefile
-@@ -13,6 +13,7 @@ obj-$(CONFIG_RESET_AIROHA) += reset-airoha.o
- obj-$(CONFIG_RESET_TI_SCI) += reset-ti-sci.o
+@@ -14,6 +14,7 @@ obj-$(CONFIG_RESET_TI_SCI) += reset-ti-sci.o
  obj-$(CONFIG_RESET_HSDK) += reset-hsdk.o
  obj-$(CONFIG_RESET_BCM6345) += reset-bcm6345.o
-+obj-$(CONFIG_RESET_BRCMSTB) += reset-brcmstb.o
+ obj-$(CONFIG_RESET_BRCMSTB) += reset-brcmstb.o
++obj-$(CONFIG_RESET_BRCMSTB_RESCAL) += reset-brcmstb-rescal.o
  obj-$(CONFIG_RESET_UNIPHIER) += reset-uniphier.o
  obj-$(CONFIG_RESET_AST2500) += reset-ast2500.o
  obj-$(CONFIG_RESET_AST2600) += reset-ast2600.o
-diff --git a/drivers/reset/reset-brcmstb.c b/drivers/reset/reset-brcmstb.c
+diff --git a/drivers/reset/reset-brcmstb-rescal.c b/drivers/reset/reset-brcmstb-rescal.c
 new file mode 100644
-index 00000000000..7861f7c9baf
+index 00000000000..fc8fcfa8b3f
 --- /dev/null
-+++ b/drivers/reset/reset-brcmstb.c
-@@ -0,0 +1,97 @@
++++ b/drivers/reset/reset-brcmstb-rescal.c
+@@ -0,0 +1,103 @@
 +// SPDX-License-Identifier: GPL-2.0
 +/*
 + * Broadcom STB generic reset controller
 + *
 + * Copyright (C) 2024 EPAM Systems
-+ *
 + * Moved from linux kernel:
-+ * Author: Florian Fainelli <f.fainelli@gmail.com>
-+ * Copyright (C) 2018 Broadcom
++ * Copyright (C) 2018-2020 Broadcom
 + */
 +
 +#include <asm/io.h>
 +#include <dm.h>
++#include <dm/device_compat.h>
 +#include <errno.h>
 +#include <linux/bitops.h>
 +#include <linux/delay.h>
++#include <linux/iopoll.h>
 +#include <log.h>
 +#include <malloc.h>
 +#include <reset-uclass.h>
 +
-+struct brcmstb_reset {
++#define BRCM_RESCAL_START 0x0
++#define BRCM_RESCAL_START_BIT BIT(0)
++#define BRCM_RESCAL_CTRL 0x4
++#define BRCM_RESCAL_STATUS 0x8
++#define BRCM_RESCAL_STATUS_BIT BIT(0)
++
++struct brcm_rescal_reset {
 +	void __iomem *base;
 +};
 +
-+#define SW_INIT_SET 0x00
-+#define SW_INIT_CLEAR 0x04
-+#define SW_INIT_STATUS 0x08
-+
-+#define SW_INIT_BIT(id) BIT((id) & 0x1f)
-+#define SW_INIT_BANK(id) ((id) >> 5)
-+
-+#define usleep_range(a, b) udelay((b))
-+
-+/* A full bank contains extra registers that we are not utilizing but still
-+ * qualify as a single bank.
-+ */
-+#define SW_INIT_BANK_SIZE 0x18
-+
-+static int brcmstb_reset_assert(struct reset_ctl *rst)
++/* Also doubles a deassert */
++static int brcm_rescal_reset_set(struct reset_ctl *rst)
 +{
-+	unsigned int off = SW_INIT_BANK(rst->id) * SW_INIT_BANK_SIZE;
-+	struct brcmstb_reset *priv = dev_get_priv(rst->dev);
++	struct brcm_rescal_reset *data = dev_get_priv(rst->dev);
++	void __iomem *base = data->base;
++	u32 reg;
++	int ret;
 +
-+	writel_relaxed(SW_INIT_BIT(rst->id), priv->base + off + SW_INIT_SET);
++	reg = readl(base + BRCM_RESCAL_START);
++	writel(reg | BRCM_RESCAL_START_BIT, base + BRCM_RESCAL_START);
++	reg = readl(base + BRCM_RESCAL_START);
++	if (!(reg & BRCM_RESCAL_START_BIT)) {
++		dev_err(rst->dev, "failed to start SATA/PCIe rescal\n");
++		return -EIO;
++	}
++
++	ret = readl_poll_timeout(base + BRCM_RESCAL_STATUS, reg,
++				 (reg & BRCM_RESCAL_STATUS_BIT), 100);
++	if (ret) {
++		dev_err(rst->dev, "time out on SATA/PCIe rescal\n");
++		return ret;
++	}
++
++	reg = readl(base + BRCM_RESCAL_START);
++	writel(reg & ~BRCM_RESCAL_START_BIT, base + BRCM_RESCAL_START);
++
++	dev_dbg(rst->dev, "SATA/PCIe rescal success\n");
 +	return 0;
 +}
 +
-+static int brcmstb_reset_deassert(struct reset_ctl *rst)
++/* A dummy function - deassert/reset does all the work */
++static int brcm_rescal_reset_assert(struct reset_ctl *rst)
 +{
-+	unsigned int off = SW_INIT_BANK(rst->id) * SW_INIT_BANK_SIZE;
-+	struct brcmstb_reset *priv = dev_get_priv(rst->dev);
-+
-+	writel_relaxed(SW_INIT_BIT(rst->id), priv->base + off + SW_INIT_CLEAR);
-+	/* Maximum reset delay after de-asserting a line and seeing block
-+	 * operation is typically 14us for the worst case, build some slack
-+	 * here.
-+	 */
-+	usleep_range(100, 200);
 +	return 0;
 +}
 +
-+static int brcmstb_reset_status(struct reset_ctl *rst)
++static int brcm_rescal_reset_xlate(struct reset_ctl *reset_ctl,
++				   struct ofnode_phandle_args *args)
 +{
-+	unsigned int off = SW_INIT_BANK(rst->id) * SW_INIT_BANK_SIZE;
-+	struct brcmstb_reset *priv = dev_get_priv(rst->dev);
-+
-+	return readl_relaxed(priv->base + off + SW_INIT_STATUS) &
-+			SW_INIT_BIT(rst->id);
++	/* This is needed if #reset-cells == 0. */
++	return 0;
 +}
 +
-+struct reset_ops brcmstb_reset_reset_ops = {
-+	.rst_assert = brcmstb_reset_assert,
-+	.rst_deassert = brcmstb_reset_deassert,
-+	.rst_status = brcmstb_reset_status};
++static const struct reset_ops brcm_rescal_reset_ops = {
++	.rst_deassert = brcm_rescal_reset_set,
++	.rst_assert = brcm_rescal_reset_assert,
++	.of_xlate = brcm_rescal_reset_xlate,
++};
 +
-+static int brcmstb_reset_probe(struct udevice *dev)
++static int brcm_rescal_reset_probe(struct udevice *dev)
 +{
-+	struct brcmstb_reset *priv = dev_get_priv(dev);
++	struct brcm_rescal_reset *data = dev_get_priv(dev);
 +
-+	priv->base = dev_remap_addr(dev);
-+	if (!priv->base)
++	data->base = dev_remap_addr(dev);
++	if (!data->base)
 +		return -EINVAL;
 +
 +	return 0;
 +}
 +
-+static const struct udevice_id brcmstb_reset_ids[] = {
-+	{.compatible = "brcm,brcmstb-reset"}, {/* sentinel */}};
++static const struct udevice_id brcm_rescal_reset_of_match[] = {
++	{.compatible = "brcm,bcm7216-pcie-sata-rescal"},
++	{},
++};
 +
-+U_BOOT_DRIVER(brcmstb_reset) = {
-+	.name = "brcmstb-reset",
++U_BOOT_DRIVER(brcmstb_reset_rescal) = {
++	.name = "brcmstb-reset-rescal",
 +	.id = UCLASS_RESET,
-+	.of_match = brcmstb_reset_ids,
-+	.ops = &brcmstb_reset_reset_ops,
-+	.probe = brcmstb_reset_probe,
-+	.priv_auto = sizeof(struct brcmstb_reset),
++	.of_match = brcm_rescal_reset_of_match,
++	.ops = &brcm_rescal_reset_ops,
++	.probe = brcm_rescal_reset_probe,
++	.priv_auto = sizeof(struct brcm_rescal_reset),
 +};
 -- 
 2.54.0
