@@ -4,96 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A25E9FF886F
-	for <u-boot@archiver.kernel.org>; Tue, 28 Apr 2026 05:16:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A87D9FF886F
+	for <u-boot@archiver.kernel.org>; Tue, 28 Apr 2026 05:16:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 202B784106;
-	Tue, 28 Apr 2026 07:16:09 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2BA5B841F2;
+	Tue, 28 Apr 2026 07:16:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="pAjR3PGT";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="EA7WV+/F";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5126E84150; Tue, 28 Apr 2026 07:16:07 +0200 (CEST)
-Received: from mail-oa1-x2a.google.com (mail-oa1-x2a.google.com
- [IPv6:2001:4860:4864:20::2a])
+ id A91FC8421D; Tue, 28 Apr 2026 07:16:56 +0200 (CEST)
+Received: from mail-oa1-x35.google.com (mail-oa1-x35.google.com
+ [IPv6:2001:4860:4864:20::35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3DD1983BC4
- for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 07:16:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9105784106
+ for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 07:16:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=briansune@gmail.com
-Received: by mail-oa1-x2a.google.com with SMTP id
- 586e51a60fabf-40ea611d1a4so3930853fac.2
- for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 22:16:05 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1777353364; cv=none;
+Received: by mail-oa1-x35.google.com with SMTP id
+ 586e51a60fabf-42fdab683a9so3719350fac.1
+ for <u-boot@lists.denx.de>; Mon, 27 Apr 2026 22:16:54 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1777353413; cv=none;
  d=google.com; s=arc-20240605;
- b=RrEcvOihSfU6eCZlqOYR1khxe3DKKOcfh2C4O9KbUAvtfGYTM4RiGuIZSeWEDu+HvD
- BYScSyPOKCYqWUW8cUubYqSQeTWfkZIORr2XfvyBeC7DtyceXPdWh/klDbDSV4H0LbLe
- LHH1OdAr90mjCrtozRpRUd/4Wv/rPmaNslvjFlLn1du3BVgKZFnJeB9N6cMIW29XyXUx
- PTdBWJsANX7DOvFew6PysnKmveMEE+nracbZm3CECjNhq9tbxFv3lMUO6ER3/VhpxWmU
- LXCujVE7pu0mJium0ELSI7eaW7haWSo+qw/llaXjMqUpeXfFgaUD47mcXClLlXXSmML2
- hx9Q==
+ b=CG2fUbk2A/D89nYdraB26F+s2YB+c06/1mHZHwF5rZss2+bY/LoaMGZ3roZyCRxPha
+ fqHRzbOUL0uCx737PmkGohbWA0dzqMD/Ct9yX2sVpKhJvtx6O1K00vgRITr1QhMZHEH7
+ CqVyYQOTJ+g/1reLPEwGlRsPPD78kinlz7ldW9o74utu5ZGwJydBheeOB/5cammTXp8p
+ NgQhZ6MFfbRsjOD7pgwH+dy6+KjlxDtSp7gPl0fYeaCPUD7bWflzHZwqvVjUKmpyvQkN
+ vY71X3blvc+NuNSFnUH0oVuvjGB6amNyJD6++FAMF8qVOptHU1D65KnTQ08YA3sTsUh+
+ f3Vg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:dkim-signature;
- bh=ojATx/eUP5fuiKZeOuUTTcXBj8c5IZqTJVfzQrd69+o=;
+ bh=CHCxe+qoa6R+cO8Qyce4PxcS/aY4VoDfnkTUo1rPeYs=;
  fh=QMZdvVsxvWCHNNEpcAbJd4pzxODbhoOY9yjXiTqL0Z0=;
- b=T5Wft8xzugctZgzTIDadBBZ8iJXegio3bTEDTD7J1i2jJzk9QRAsvWphwUAfJpKv3L
- +n7mBcqv34/MVjAV0Epo9CrIzidVI5C4CtgP3b/MJqhFdVTfUtMBkmO/2ZxbU3nGd4dW
- kDI/EPR/G+cmP9q0zYPL2mExP1BpX8Zv2etW8nv6dzIBIkL45ETkwni2/nr1hO53UPrt
- hBJYKiv2HMwsLYHEgLQSpK/kaxb4AaSgmUYNPDxsCkghZf3DUGdgm1xoymwD+QhghAIT
- cw5A3TEhyCOfZ3GgSqu+sZ+XkxCYYc9v+wlGKpR6pnku7R9IQkIzcJzYm6IJmVGqiYGI
- I0xA==; darn=lists.denx.de
+ b=hAqccQTbJ5DKmSQR8CPiBTLd/SvQdWI3uayiuJAvHI4k4JMeRTPqw65iqtQH9qJSCx
+ tBNa0rMh9FvagCmtD1qcbwq18Ary5uaHau/IIoNbI0nBmR6UCzlxC3ZFZ/ln4Z21p+Xd
+ hHZeB9fW6lWWmp0A0pgkoqdfVtC1s0YZq9cZZwCSjZGo1uLGO0PTgeuo3w7aeZkBRPFL
+ bOQMV622oXdMkaJ2x/iQ7o+bPBXn/RL3l5XkYLh0PCfBm9NZrLsmxp6CDK/88XtrSDBq
+ Z/rUze5cnXYf5qxACcQQTk4a1HgAjHj93QHeTlRryBylyt6b0BKfJtrZUaaSui2lw5RT
+ o52Q==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1777353364; x=1777958164; darn=lists.denx.de;
+ d=gmail.com; s=20251104; t=1777353413; x=1777958213; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ojATx/eUP5fuiKZeOuUTTcXBj8c5IZqTJVfzQrd69+o=;
- b=pAjR3PGT3gPtiQ1c+UqGjk/Hy39RuH/+RPBgZmeqyRadfLZptQ9QLelw8p1sTJ1Nwp
- +mOvaiA/tNtW5AQ74gs6HbaA3ktGsxLmCLDcbr5ZS1w7rxTgGCnWd9HkRfr4QD9yfny3
- APPKz2h8TdTXbLwrQzzzy5dWds5fM16nuSsK35ZTmYzXza5hu/H+H/X9qXmPl16j6ZUS
- xx1OEH5clQcTdFvIibqKj3xI08DhDVWpNf0nQKpi0byiaEy/CYXgl1lzuRxpAG2/ZQ8s
- KJPzd9moxNseCC6/zLakwQNKgkJ23gLrUJuQPwALwVzMHtMOFraeX/aHMvv1X+WnpYek
- uDsg==
+ bh=CHCxe+qoa6R+cO8Qyce4PxcS/aY4VoDfnkTUo1rPeYs=;
+ b=EA7WV+/FpsyPhIQNWLEkO2vLXPPzrNZGUAWK8PJp6ow1rJNi+9kUEaW5MduiI35Uu1
+ FtCwTSRunxc+euMNid6Yw+4MfQmo5aEavSRxFvsUDRGAs3jvfHY9nKkHuE5qSBWb525q
+ P++4jBl2lN5B31KOsjnXZpcfXr0ytgx2YbuaHtpPAE4inI8AapAV1tbKX8yVd9O6QTXc
+ vKaE+L/B3llqei1SOsBmXb0oJYfvrWZxZlHr9+nppJnrvnoUQLvWc/upIY4UsEIOu9j4
+ XlFB0QMTMgRA45mklQtJPLkZ0+sgUuOPpQQPGywJn5f278NgPGn3qNJB5X7rlrNpWt+3
+ Ds6Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777353364; x=1777958164;
+ d=1e100.net; s=20251104; t=1777353413; x=1777958213;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=ojATx/eUP5fuiKZeOuUTTcXBj8c5IZqTJVfzQrd69+o=;
- b=lq1uYEwV7bxCoXStM3ys+GVzEI5Cd8ss798yhbEYPwU85bTLLl+Svv8+fGkmvYYJoY
- 9bB7Uj4pdoc863CyvxJ2HT40ve2LGoHtS1bXEstBe06LxuFeTfm4iu12E1dzKqVTM9om
- TNC1qScukGy7KsS+9fPBwbdKVFx+hcsXjP/XyXgUt/l6I6sbu9gfTzzhOQFy/1UlI76i
- Y1fHgHGxLMDpA0D92AJ/MyjH+4EIcIIIRQIdHnQ94nwp1/9K09omUwRFBcEEziDdcxpP
- YKsBWZQAWZ8KmX4ojQLboI/TgtB6mXb7pBXkJhdEqHMojcpk3M0BTbCEabLTn5RpdLt3
- WUJA==
-X-Gm-Message-State: AOJu0YyYakoN6TwefbPZ45v3ziy12qGndUJHtKYKySEgnnCCHYle4p68
- S35kdFBV/kb1uO7L6XeM3YTIq50O4c9K9z5u5QEhdqr68wxsOcNX0MFPJn56R2Wq/M8XeI19fg5
- rDWS0LEBzThV8E0pk4m78ocib4V5uJvM=
-X-Gm-Gg: AeBDiet1T2EzTFIU72Gh160mF7WUsbA45SCOiUR3sMRF4L81NBSzFpXtT09DT01Ub8m
- 1tw3YvJRdDxdKcmdQgSP5OIWA3YCOYQM3lxnjDZJ2Fhry4YCbDOsqq5TSJYQYwB96iiyWtwiLPc
- LrKR7ucgBRy3v48YckIqEhQKPLwOJgA5mb96a5jEMXoFQMlADtLLvwFaAgW9VIAFMgXVDCmTegT
- 3X+YEGCb9i2CpDxt6T7Uc6d9ilpHauIG9gH2w3BstQfRf3KbYLForel/BC0EQ3MDDW4z+wO/Wxv
- Yk/QiT0cqcVDfcnHxlk=
-X-Received: by 2002:a05:6871:50cb:b0:42c:dea:d370 with SMTP id
- 586e51a60fabf-433f38dd398mr635722fac.12.1777353363890; Mon, 27 Apr 2026
- 22:16:03 -0700 (PDT)
+ bh=CHCxe+qoa6R+cO8Qyce4PxcS/aY4VoDfnkTUo1rPeYs=;
+ b=jsbp9iEhZ8WftOACOpVAJQnkTDGLnwE7cA+rzNeCXP3J1L0z/rr7kzJUzSM+rwFHKI
+ EPhJthhcSDx5Z01iPLIIjj9eiCtTrKbl7Tg/Ko4eruYYY3aXYAY+KWSDmiPo8O0/LNK4
+ v4QuAj94sIZ2stoTth8aWH1Ad8eRGq058GTaZCyY02mWW0hpm0h6UZBp4dSZ6W7PYDDj
+ +wSh7a9zHriJoCx3zGBfgA/vx2byimeCaHG5Em1YwfRvyHcPpZWWGIodl5jUNBKL+UEE
+ 69Hp+lcU+Y6Cw1S7MFRaICNNkt8HjYiw1xxFJ0nHveKwb7HLUhEM3F1NowQTYojUIwJ5
+ 4qYw==
+X-Gm-Message-State: AOJu0Yy7PBXfxMzNwweJcVoFwpC0cVfPYGXIN+6P3fwmlsP3OezKGPEr
+ 8AyP1TOQ9DaCFqBMOWg+OVsMhu15f42YTqrpXSmSUX1FEWVkV26rp55PZx/xN0h/MHQlaxWrv/E
+ 1Lx2yIYNiL9Ao+GR2zTpnEiRFt8tK83g=
+X-Gm-Gg: AeBDieu5i8+wy319Vn9deRXZRfDJ4F3dFKlg0UzkOmkZQqOMho/yf0/p7PI++SjaTUJ
+ nHLI6HPtmQgA1cheH4oGfyOGNLjE76DrCzMx0jhoQeZVbt1DN6QPl1k0JY1/dSNe7LRI1o8YB8N
+ yWeDOJ9yaeQEMLf8PwqSQqAte6QFMOpVfYIa1jNgfj52Bdls5IryZNPKPjZhBKyro2NjHB00cmY
+ RVhVfMur0/c9+CbJ4R8XuRMUfyqWLRglP8w2alPFvLXN8d9QtiktbS7w/fhNhAY5DeBCftz4ejg
+ eWuZvOHm5pC6B3gbNaU=
+X-Received: by 2002:a05:6871:eb08:b0:41c:ccd1:78b4 with SMTP id
+ 586e51a60fabf-433f38e339dmr795803fac.10.1777353413263; Mon, 27 Apr 2026
+ 22:16:53 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260428033230.7777-1-alif.zakuan.yuslaimi@altera.com>
- <20260428033230.7777-3-alif.zakuan.yuslaimi@altera.com>
-In-Reply-To: <20260428033230.7777-3-alif.zakuan.yuslaimi@altera.com>
+ <20260428033230.7777-4-alif.zakuan.yuslaimi@altera.com>
+In-Reply-To: <20260428033230.7777-4-alif.zakuan.yuslaimi@altera.com>
 From: Sune Brian <briansune@gmail.com>
-Date: Tue, 28 Apr 2026 13:15:52 +0800
-X-Gm-Features: AVHnY4LkBR7It9pKgpOjOK0yibMW8QD7s8q6VcwMBO1EIYHOYERGKXqXPvXNowc
-Message-ID: <CAN7C2SBfT34ZZ28rv4c1Uh2mkM6+_ed6944X8-BVg76jdmFxmw@mail.gmail.com>
-Subject: Re: [PATCH v2 2/3] ddr: altera: gen5: Add DRAM size checking
+Date: Tue, 28 Apr 2026 13:16:41 +0800
+X-Gm-Features: AVHnY4J0NOsxrtB7Xw-aDXY1Szl9f23DXz-Gvo7DzWpH61DRaKQqnGuVjuOg-jk
+Message-ID: <CAN7C2SCzZLTa3Qbz=kTsX4g=UXwTd-eVUFSudfF-CYaG410UOg@mail.gmail.com>
+Subject: Re: [PATCH v2 3/3] ddr: socfpga: Add ECC DRAM scrubbing support for
+ Gen5/Arria10
 To: alif.zakuan.yuslaimi@altera.com
 Cc: u-boot@lists.denx.de, Marek Vasut <marex@denx.de>, 
  Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>, 
@@ -124,27 +125,26 @@ wrote:
 >
 > From: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
 >
-> Add DRAM size checking compare between size from device tree and actual
-> hardware.
+> The SDRAM must first be rewritten by zeroes if ECC is used to initialize
+> the ECC metadata. Make the CPU overwrite the DRAM with zeroes in such a
+> case.
 >
-> Trigger hang if DRAM size from device tree is greater than actual hardwar=
-e.
-> Display warning message if DRAM size mismatch between device tree and
-> actual hardware.
+> This implementation turns the caches on temporarily, then overwrites the
+> whole RAM with zeroes, flushes the caches and turns them off again.
+> This provides satisfactory performance.
 >
-> get_ram_size() uses size from device tree. So, it has consistency with
-> other device families.
+> Move common code sdram_init_ecc_bits() to new common file sdram_soc32.c.
+> Preparation for Gen5 uses the same memory initialization function as
+> Arria10.
 >
 > New Kconfig is introduced to enable this implementation only on the defau=
 lt
-> CycloneV board as this will increase the SPL size which will exceed some
-> Gen5 devices' SPL size limit.
+> Arria10 and CycloneV boards as this will increase the SPL size which
+> will exceed some Gen5 devices' SPL size limit.
 >
+> Signed-off-by: Tien Fong Chee <tien.fong.chee@altera.com>
 > Signed-off-by: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
 > ---
->  arch/arm/mach-socfpga/Kconfig   |  9 +++++++++
->  drivers/ddr/altera/sdram_gen5.c | 27 +++++++++++++++++++++++++++
->  2 files changed, 36 insertions(+)
 
 For GEN5 cyclone V:
 Custom board
@@ -162,3 +162,12 @@ Trying to boot from MMC1
 U-Boot 2026.07-rc1-dirty (Apr 28 2026 - 13:09:08 +0800)
 
 Tested-by: Brian Sune <briansune@gmail.com>
+
+>  arch/arm/mach-socfpga/Kconfig      | 13 ++++-
+
+>  arch/arm/mach-socfpga/spl_gen5.c   | 17 ++++++
+>  drivers/ddr/altera/Makefile        |  4 +-
+
+>  drivers/ddr/altera/sdram_gen5.c    | 41 ++++++++++++--
+>  drivers/ddr/altera/sdram_soc32.c   | 85 ++++++++++++++++++++++++++++++
+>  drivers/ddr/altera/sdram_soc32.h   | 15 ++++++
