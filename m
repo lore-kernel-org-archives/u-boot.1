@@ -4,65 +4,103 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 779FFFF885A
-	for <u-boot@archiver.kernel.org>; Tue, 28 Apr 2026 15:56:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87AA9FF886F
+	for <u-boot@archiver.kernel.org>; Tue, 28 Apr 2026 16:00:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2773C84605;
-	Tue, 28 Apr 2026 17:56:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=0leil.net
+	by phobos.denx.de (Postfix) with ESMTP id 0C9E684119;
+	Tue, 28 Apr 2026 18:00:00 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=0leil.net header.i=@0leil.net header.b="Sfz3M2c/";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20251104.gappssmtp.com header.i=@baylibre-com.20251104.gappssmtp.com header.b="Zibsv/FD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 63CF88460E; Tue, 28 Apr 2026 17:55:58 +0200 (CEST)
-Received: from smtp-42ab.mail.infomaniak.ch (smtp-42ab.mail.infomaniak.ch
- [84.16.66.171])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 5B5C084255; Tue, 28 Apr 2026 17:59:59 +0200 (CEST)
+Received: from mail-oi1-x234.google.com (mail-oi1-x234.google.com
+ [IPv6:2607:f8b0:4864:20::234])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 354CF845CE
- for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 17:55:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2FBF783A91
+ for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 17:59:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=0leil.net
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=foss+uboot@0leil.net
-Received: from smtp-4-0001.mail.infomaniak.ch (smtp-4-0001.mail.infomaniak.ch
- [10.7.10.108])
- by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4g4lQg4n1xzGL8;
- Tue, 28 Apr 2026 17:55:55 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=0leil.net;
- s=20231125; t=1777391755;
- bh=yGLHFYVVI/ci2d53+5V8GC3iDdL2yJnX+IXWBfgxe34=;
- h=From:Date:Subject:To:Cc:From;
- b=Sfz3M2c/dVOaYzUV5hMKcQ2ICfWscrOJ+NOcorfBwCzcnmvAkCdNlxOYRnTqcXRU0
- LOByMEP0ulsgbMNXiKuXqmyOamIv8DxHK5ycZQUk7o1YXQfbLlfJLV/zOoIZ2NItOI
- w9sSTLWnSp7srHZyP5RY+g2/YzAxLGmjuEEVGzCdL2YoSw7la0ek2AH/2gA0FYKuHd
- Rh+RH7dpzXFF2EIT6ghUxN1JGM3MTbUqSJVsBZ33IGQbKj5U80+/MYGLMagPskrKZG
- yn8FUzocV2PLEl7p3rE7SA6oZzvajya26OOM1ftYm2uN4W9YM5Wm32PkwUv5pXBvae
- cwLGw29TKI7+A==
-Received: from unknown by smtp-4-0001.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4g4lQf2FKTzPRH; Tue, 28 Apr 2026 17:55:54 +0200 (CEST)
-From: Quentin Schulz <foss+uboot@0leil.net>
-Date: Tue, 28 Apr 2026 17:55:42 +0200
-Subject: [PATCH] test: wget: validate URI for lwIP
+ spf=pass smtp.mailfrom=dlechner@baylibre.com
+Received: by mail-oi1-x234.google.com with SMTP id
+ 5614622812f47-47bfa080d93so1667782b6e.1
+ for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 08:59:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20251104.gappssmtp.com; s=20251104; t=1777391995; x=1777996795;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=+k29gyCPdO8dwAm6RBpRkjt+LiHfKQIInPDtMWAVFgc=;
+ b=Zibsv/FDsXSs0vF0ibiblOp/bYCMjC4ItsoAfGkSn1KXOTnUp+ckydvbXU7cH7PS86
+ VAHBaE1uOmezLArpZJkXzUEofsBgk3nlSqM25d/JPPHwuvl75nmgKba8vL1bBU0ZcWba
+ yFoB2HqpQ1HwJ9PEUjISU3GF/t6t0lLz47cXLffCocqd/KInIKBJEJRq1LUAGmr51wBQ
+ tbINvG8kPmuWLk6jaY6ZWzuV/4CfbEcPPZzaLlIUmWIWImawMFLWEEzmY2MuB4wvJZtp
+ kcSdnxFM2drnEROG/PIiGb0m8OwEQj4JRB1cj2iBBmofU5pdvRFb64+pIACv+u3wEcZ9
+ ytHg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1777391995; x=1777996795;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=+k29gyCPdO8dwAm6RBpRkjt+LiHfKQIInPDtMWAVFgc=;
+ b=SNGxdasXh6uaE6nuJ8Br8Pq1/AeSr4zBs0MHO8LwJePF2sZyZ4ECh3Ca7kmTrAA6tw
+ 5cfKG1M09pSV4Cw2TmsEBMwhaj9kXVNi5jS1IHi5rPseJghQit7ZYL44ZQPAJD2meCzV
+ 3j0UjF/9sGkR2dM4/KtCEr7rRe3JABkBLnuEW+XQrxS6FS8xugAPt62y6rcIC9Eh9jIS
+ 0esozI1YnrQVvyG4VKDZ1Il5XERwlpm1MhCxT6q5SDGp7c8Br8oaf6csW5n4cylHdEBs
+ 1aWpKRDAjWyBX2/ffa+FAnfJwMGL3FbUjMNP7gzDRpCWISXi6AH23RIvuYIx+1dwfBxg
+ zH7w==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ9W91xyHCd5lfqgnhOrDT3yCC5rDtVrA2grvYPUqBVIVoxLowjoQpS/ExQawipST/UziSqZUwQ=@lists.denx.de
+X-Gm-Message-State: AOJu0YyRGu3I6E9EJorhjPY45ExKRTvwtMI+nQ0Ua38ULCx3JYK5TQFY
+ Hghvj0/RQUJ6mn1CzcFBdfnLp+qyBv5MdhGricVyMtGYUM4100xRlRYgDdaRL80Fc1zxTVDuXA2
+ E2BLd
+X-Gm-Gg: AeBDiev804S11nvWFGFhKnbXDYfQuGd7ddgVNk86Po9jfR6vhvtlkfuqmbPtoZYnzC3
+ /z5ZU6P/OejssBc+lyaCF1nxChgQKYmB8zCD8h0igbYL6xOIVXdYi47WPuVY2xWYE6Yh6n2ATCr
+ G9sZ87nFt44tXidRcsrhHnOgvHOeUmhof/qSJmJ5KbLsomuO2z5IgjqYZnHrEarjd78tM9n2XrS
+ pnJY14GbwWlnj81V00yli047js6yjhzj6JTXMNkydFEZKGn6aOHb3eCEu5lawRzyP7jwdKm8Qj7
+ U0RSA9IWNRi2lb0Ne+TWFpPlf11msse3vjF7rI6dMMJ6CZ8nGxoETrY0rsbX7aiWdIiNkooYcXY
+ 1x9s94qss3QV7ZqZ3AD+6IJiYOIO+Ei23+8Rmv1HyiP/49zaDAuKYvNQS046MIyal1Ps9R/7N/s
+ IE9G7cimAROoCirkrgE40zYC7pp3EiBeg64qaostg=
+X-Received: by 2002:a05:6808:1790:b0:479:d57b:83b0 with SMTP id
+ 5614622812f47-47c28f63784mr1783025b6e.22.1777391994922; 
+ Tue, 28 Apr 2026 08:59:54 -0700 (PDT)
+Received: from [127.0.1.1] ([2600:8803:e7e4:500:efba:bc47:a81b:dd0f])
+ by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7de9871ceeasm2014593a34.27.2026.04.28.08.59.54
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 28 Apr 2026 08:59:54 -0700 (PDT)
+From: David Lechner <dlechner@baylibre.com>
+To: Julien Masson <jmasson@baylibre.com>, Tom Rini <trini@konsulko.com>, 
+ Macpaul Lin <Macpaul.Lin@mediatek.com>, 
+ David Lechner <dlechner@baylibre.com>
+Cc: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de
+In-Reply-To: <20260421-mtk-configs-remove-ident-string-v1-0-66d5fc3d67be@baylibre.com>
+References: <20260421-mtk-configs-remove-ident-string-v1-0-66d5fc3d67be@baylibre.com>
+Subject: Re: [PATCH 0/5] configs: mediatek: remove CONFIG_IDENT_STRING
+Message-Id: <177739198411.3382222.8213846855382011998.b4-ty@b4>
+Date: Tue, 28 Apr 2026 10:59:44 -0500
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260428-wget-test-lwip-v1-1-f611cea0c5ee@cherry.de>
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMywqDMBBG4VeRWTugQSX2VYoLjb92SrGSiRcQ3
- 920Lr/FOQcpvEDpkRzksYrKd4rI04Tcq51GsPTRZDJTZYWxvI0IHKCBP5vMXCO3rS1dZ4aaYjR
- 7DLL/h8/mti7dGy78LnSeF6qnxG9yAAAA
-X-Change-ID: 20260428-wget-test-lwip-9e18a85cb2f9
-To: u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Simon Glass <sjg@chromium.org>, Peter Robinson <pbrobinson@gmail.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Dinesh Maniyam <dinesh.maniyam@altera.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Sughosh Ganu <sughosh.ganu@arm.com>, 
- Quentin Schulz <quentin.schulz@cherry.de>
-X-Mailer: b4 0.15-dev-47773
-X-Infomaniak-Routing: alpha
+X-Mailer: b4 0.16-dev
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1440; i=dlechner@baylibre.com; 
+ h=from:subject:message-id;
+ bh=17sQdqxOrLmTIYgx0zLTw/o3+IsRut9CHEjJJUD8oO4=; 
+ b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBp8NlzGxyZRk48siAJb9FW9KkqoLXsDE4T4hGEr
+ hZurdCdsgSJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCafDZcxYcZGxlY2huZXJA
+ YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AsB0H/iLdhcF9ZdOR/HQaOakUmnrS6TySJ6MwAC6ESez
+ z9f//9XzzxUAZ7rHjWTehvD6/1wwSrpxrZaUIpsR6JzgOEpizIX9c+7KFXHTio6S3xrAs1cVB2Q
+ 5AP5baO4WGIJBQJSVRT/zSCtpMZogcyGuYtwx+pUlaT5PJdaGkg1AhMlIQYtzfYHpYtWuhb0/hB
+ 9HeqxTPHgyTrpgM0UR9LJQfmQzaNVMbMU+G5Le35J8KiyDLJcL/gzYWwaY5z0vOOHaL7L+YFoWi
+ aWx8bGvsua2yiqXQYwXNGARjAABhGa2BJyA+GVMzYrAj8HK601pzIE4Kac98b9de0uRSbj1QS2W
+ nTp4=
+X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
+ fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,65 +117,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Quentin Schulz <quentin.schulz@cherry.de>
+On Tue, 21 Apr 2026 09:09:33 -0500, David Lechner wrote:
+> configs: mediatek: remove CONFIG_IDENT_STRING
+> 
+> Until recently, MediaTek defconfigs didn't set CONFIG_IDENT_STRING.
+> mt8365 added this and then it was copied to some recently added
+> defconfigs.
+> 
+> This is just appending extra text to the version string that gets
+> printed, so it has no functional impact. To keep things consistent for
+> all MediaTek defconfigs, let's just remove it from all of them. This
+> also frees up the CONFIG_IDENT_STRING option for use by downstream users
+> that may want to add their own custom string to the version output to
+> help identify their custom builds.
+> 
+> [...]
 
-We've had wget support in lwIP for almost a year now, so let's do *some*
-checks in the form of validating URIs.
+Applied to mediatek-for-master, thanks!
 
-The other test in test/cmd/wget.c currently requires structures only
-defined for CONFIG_NET_LEGACY so it's left out for now until someone
-ports the test to lwIP.
-
-This was tested with:
-
-./test/py/test.py --bd sandbox64_lwip --build -k net_test_wget
-
-Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
----
- test/cmd/Makefile | 2 --
- test/cmd/wget.c   | 2 ++
- 2 files changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/test/cmd/Makefile b/test/cmd/Makefile
-index 5f2815b1bb6..28bb8a82ca4 100644
---- a/test/cmd/Makefile
-+++ b/test/cmd/Makefile
-@@ -39,9 +39,7 @@ obj-$(CONFIG_CMD_PWM) += pwm.o
- obj-$(CONFIG_CMD_READ) += rw.o
- obj-$(CONFIG_CMD_SETEXPR) += setexpr.o
- obj-$(CONFIG_CMD_TEMPERATURE) += temperature.o
--ifdef CONFIG_NET_LEGACY
- obj-$(CONFIG_CMD_WGET) += wget.o
--endif
- obj-$(CONFIG_ARM_FFA_TRANSPORT) += armffa.o
- endif
- obj-$(CONFIG_CMD_SPAWN) += spawn.o
-diff --git a/test/cmd/wget.c b/test/cmd/wget.c
-index 1005392b952..15c2a854e09 100644
---- a/test/cmd/wget.c
-+++ b/test/cmd/wget.c
-@@ -23,6 +23,7 @@
- #include <test/test.h>
- #include <test/ut.h>
- 
-+#if CONFIG_IS_ENABLED(NET_LEGACY)
- #define SHIFT_TO_TCPHDRLEN_FIELD(x) ((x) << 4)
- #define LEN_B_TO_DW(x) ((x) >> 2)
- #define GET_TCP_HDR_LEN_IN_BYTES(x) ((x) >> 2)
-@@ -241,6 +242,7 @@ static int net_test_wget(struct unit_test_state *uts)
- 	return 0;
- }
- CMD_TEST(net_test_wget, UTF_CONSOLE);
-+#endif
- 
- static int net_test_wget_uri_validate(struct unit_test_state *uts)
- {
-
----
-base-commit: 4433253ecf2041f9362a763bb6cb79960921ac7e
-change-id: 20260428-wget-test-lwip-9e18a85cb2f9
+[1/5] configs: mediatek: mt8365_evk: remove CONFIG_IDENT_STRING
+      commit: ba97dd5c107a844115b8b6a7f63c5e0b773204fb
+[2/5] configs: mediatek: mt8370_genio_510_evk: remove CONFIG_IDENT_STRING
+      commit: 4c435a7ffb104ef4f13c6c29d784d6a6be247f1e
+[3/5] configs: mediatek: mt8390_genio_700_evk: remove CONFIG_IDENT_STRING
+      commit: 9b471cb9b2e9c070d27b1ee6c7bd658f5289d31e
+[4/5] configs: mediatek: mt8395_genio_1200_evk: remove CONFIG_IDENT_STRING
+      commit: eb1551fddc6b50e3053c850814d16d95cf542559
+[5/5] configs: mediatek: mt8395_genio_1200_evk_ufs: remove CONFIG_IDENT_STRING
+      commit: 95c06da44f83f5db523433d04b5518b4fe62f906
 
 Best regards,
---  
-Quentin Schulz <quentin.schulz@cherry.de>
+-- 
+David Lechner <dlechner@baylibre.com>
 
