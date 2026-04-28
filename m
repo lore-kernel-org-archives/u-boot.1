@@ -4,107 +4,121 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 138AFFF885D
-	for <u-boot@archiver.kernel.org>; Tue, 28 Apr 2026 09:03:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2984FF8868
+	for <u-boot@archiver.kernel.org>; Tue, 28 Apr 2026 09:05:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9A059845E3;
-	Tue, 28 Apr 2026 11:03:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 12426845CE;
+	Tue, 28 Apr 2026 11:05:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="HA9ch525";
+	dkim=pass (2048-bit key; unprotected) header.d=nxp.com header.i=@nxp.com header.b="gGv3KNq+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1620B845E3; Tue, 28 Apr 2026 11:03:32 +0200 (CEST)
-Received: from mail-yx1-xb131.google.com (mail-yx1-xb131.google.com
- [IPv6:2607:f8b0:4864:20::b131])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 26B31845D0; Tue, 28 Apr 2026 11:05:50 +0200 (CEST)
+Received: from DUZPR83CU001.outbound.protection.outlook.com
+ (mail-northeuropeazlp170120005.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::5])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B12FB845D0
- for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 11:03:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4712584324
+ for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 11:05:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yx1-xb131.google.com with SMTP id
- 956f58d0204a3-6579254f996so1780951d50.1
- for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 02:03:26 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1777367005; cv=none;
- d=google.com; s=arc-20240605;
- b=EcctNk9cnwvJP1ADOihisrvcXexGZGvGhLGITw/nVjXGYO/FJGfWh/7yNg/X/hYJry
- tz8xtS+Aj2fNkX4UrrAt0uf1Pnl9FX7swtp3/XHDXau1RyROZSr2lEgSM6YRuynyuWff
- t8p43XEAD0yRnVZc/+baFuCG1fqsUi9MaQlEyRNYUfaES9h/p2fXS3/z/ITFrLrPmTHA
- EaHaotXkINmO+VMS65CfDN6gu6T8NrnRWFBfC1ifDQiQrTaP4qgVl4RyJYXPPS7slFWY
- r44iWhFhplVeoq4nxQXAn5e4gFubAEimUQvIroyRSGCJ3/2imCi3QUWCnI2s0L6NA+hC
- WVJA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=Bx7ru0zSOCgiEboKHjZP53TQNaG/DuzgA3qQQBs5Tzc=;
- fh=zWfFTWCuXvOjM3LDz/lM7B2RDNqudaMbYcPQVJofaSo=;
- b=lUUGMQc5BsQm2Z0sldSUJmJV/S68aF7TFgfYw33x0ULYaBkqfa+9y2NzGthsN8gIM5
- RbNXiBsHUaVXkBH3GGXJCIXav0G4FjWvhMHjueo/whmX+jrB0NjCQo3fw1omsm5bpzx/
- V0s8+PctS+nURdgQrS02a3Nhj81N1KFTexp+AGGXoKx+qQcTTlNgnevJ/UJqA8avO0Gy
- aoj6+xv8S0l3FuZi5yWl5jvrNKoZ9IwzjnUVohQ8UpROHGyvfhB0G/Kj/aC4NyqNms0+
- m9Nut3Jve2S5BNxt+O6TrgY2xIxhVLZu7mPcPMUZTTVo93uCKKHpSiPOYg/EZ/1YDwy8
- PHhA==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1777367005; x=1777971805; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Bx7ru0zSOCgiEboKHjZP53TQNaG/DuzgA3qQQBs5Tzc=;
- b=HA9ch525VKLRP2x9r/cL4dJywwmq1QPoaQPX2GiIjGCR/HplNFbPzUGCeOHId75FoW
- uXRq/Jh0ODSDCQC0acxU42cJSuST435FYKh0K0eIzL9Q5ivsloWUbx6lW/vIrjMFtwjW
- MpBjxKiEefYevgaGnT0tEIzMOWvbTalHy7++JKAO0NNheTI2WmQkfa4JJKgJRj7Si89v
- M9km68BJb585BGwaxiPNTuK87RHMndPVPBSEZNRA1oRs5622HTBf7lMw5XgtXh2jBjAw
- y7lKIQ7h2FJCZcnlVz2JXYbBiXRce3fhSC3i1BY3EuCBLvnfv+krYaKhR29n0uaTEHSy
- L/Vg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777367005; x=1777971805;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Bx7ru0zSOCgiEboKHjZP53TQNaG/DuzgA3qQQBs5Tzc=;
- b=hYHl3EtL7I8aeGTCSjm9zA6TmXYkWF41RP+fHLvylPpHsPxWGMbijsLPht/gGDBnRY
- EwVqqmLHESVQ+y1DH1/TB9uBHV6WutwYn8QbAKyian+FTqEnYB0J7gvaoN+DdA+pxWU6
- EaVMZ2s98YXOSk37IBLiWHPhXPGr0pgNtz8jcDRDhUnk2ErXYJnKJdja9RGW0LnIAlQ3
- FcPPGyjvi5vPIkSjnqHC/Cdy8J3V1zxA+Iq0StmJ25y5npfofHmtFDBrDj2fNC9KI4jE
- Kr2N4sarNW5gQM4uowBe32tLelSyZQXFSFDvh+pCIvbui0AGEDcUvYQzVvLeHjOvYseh
- tuSQ==
-X-Forwarded-Encrypted: i=1;
- AFNElJ+rUheizQPs9nsz17Wcqi1etTJJdkCELnpCO96uQCOae5s2jidE5BcELZBjqBEb7IiSJxahStE=@lists.denx.de
-X-Gm-Message-State: AOJu0YwT7vrW9ZB+nSqBrAoAarmbvQwz91t/0uymxdvJgN8sL7aE1ixd
- phf2CwTrECHRiAjh0cfcGssuJJkRzG5+zqLQtXCPdX3v02v1hidUtxnZXvyfT0mBgypwfuyzLn/
- 4DnhNR3VQmYhAbSnk5CGlLO457OMqfb4e28FhIcLs0Q==
-X-Gm-Gg: AeBDiesWdhQKAYxBSIJx+Bl6pnrQkv/kj900AV17puhD/mMW7dANQjOmC1EMLvx69zz
- w8w0aGoQwfTYcB/eYEY9jaSK5wTq1ypeZ3fJU2RnIF8OOdep9Iv8TLcUatwYD2ECTIx8FYcpDPD
- DiGZvbPVJp+fDy5W2aD3UCOdPb7UW/HD8o70NYjBSrGCGjOORZoAp+JEQ7zTb4RVt1LNKXh+bOF
- BzTyq6MQNcXaNv792CkTnCBZCMDFH4Oj964I7VXqk3ay77f1XsQrqyNPp6aTxH/M39uBlQkZGwq
- F/cOCjATviWvi/yhduxJIPMoTfPTdjTRrBwWtcooWviAlwSMxjg/2L07jDulhwDKmkTUjcBZo7B
- Vcp/R6YeHoE+ehLb/7WFl/ZaL0Kzh40jm1t5xy6zhQ4PUTLNyw36hg6T3YYty0wZG8Wi5DRPLdT
- EktsSv2H8lNAkxHuin+t+L/6OItBbgaiqwWr/V4h9QXcFnZvwxV9JpCN4onBv+rMGpMI3NhCan3
- BuDkn4NWGmUBYTZXAivwYBOoqrHN0KYNYpqox35eD9KhXLHblFh06jKsMioLQkrO+JvthPALJkJ
- 3X9CiSz51270QPLK9bqsrKulEyHT5VF84jB6qEwn5fpV8vtVEUCHdCS6sRyC0yunq7jh8JM1cjD
- BDEF9zikgGHjH075YPBVDba65avg=
-X-Received: by 2002:a05:690e:1919:b0:651:c024:5733 with SMTP id
- 956f58d0204a3-65beed6074cmr1756721d50.13.1777367004854; Tue, 28 Apr 2026
- 02:03:24 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=nxp.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=ye.li@nxp.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=Y+sd/KNjP/fl61t+RVR77Bl5VGUnGVqG6MXVnuvmQnzol74vUMAGT5wbTPtFTutzqZXCMhcZvwsNlHVyct0NWInqxWlx2AVNjI9NW89TvjWnzuZewf/GyWIrErtcXRdFkW38v/qk3FqwsuLCeikP6afgHTxpHZx2xC/nW5kvTXsCa3HdSxmJxHQQwPBZWWfnQB522XamhCqdz/6qw52El5b0mTVoWv8saY4SvkoMncKPNpMil/A7ov5c8BK5NAuyPZLWqV7Y0uLPwx0WBzep2soUYnOLFZAN+SEMF87qcKOYjuOpjhxQT5YWln7N30qWAMN28maaLLmwMasbI2xR7g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=bV1/Ki4Zz4wSHpu7zjZ1CU1wqCziIG2TxS9V0YouRPI=;
+ b=y2vQBZriQFvd16RwO/L4g2vunN3ASXb2jzjPR8ycZU8HwDn7DHgqQzUo5AExtwfSXvdmTnAam1KXTyjAqURWQqZPCNmeNovKGAyxgE0nd4WyxztMbILSjnnmrBDqoayNT7gC7CCOBYsBFeDL9mZceVsr/CJT7SGTi0qJgMOm4aXTcNKWHuiwC9BxHzDC65U8Xw6LT+NB3MT8BhsXrrOKOwHbMT6Eb1a7/6qbL9y97clg8LIWh0K9lfQVg0jxkHfVI5ASdFaCOhkEPlkuWScTRDSj2HadWLxZY4VKbijgaZ0SW5pHU/ZjVyFPH1fRET0rhVwY7EUTu6gVJ9O9Oq+7wA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nxp.com; dmarc=pass action=none header.from=nxp.com; dkim=pass
+ header.d=nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nxp.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=bV1/Ki4Zz4wSHpu7zjZ1CU1wqCziIG2TxS9V0YouRPI=;
+ b=gGv3KNq+oezMoEDT7EbA5HX70/XZavS398PXaAsPe1VMs4GiQOuNUmacL9wq4bKnW/Z2vVWeA4y+nj0pR07wDZohoQBvvjiq00NFGgl73K5FRtFeRyedKq+pwSt6LpL1OMGCMDegmDn1zsFFD0ol7TSaRoHRJlEWQx7+AMgYL0bBn6/V1g7Aycn525RrAENKlqX/nihVTBibotn9usZMUEYo6OaPtRXAXjgsXboECVojyGeNCQnz3VBGFF0F6WslCa0CixBNpapn72dAMRdTAjAV5EtYbhqLxfZ3Z+k7qK1g2xQ83I+95JRxn72Z3mIsoKphKxCiIiq2btwF2estJw==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nxp.com;
+Received: from AM0PR04MB12051.eurprd04.prod.outlook.com
+ (2603:10a6:20b:743::24) by DU4PR04MB12064.eurprd04.prod.outlook.com
+ (2603:10a6:10:63f::18) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9846.26; Tue, 28 Apr
+ 2026 09:05:47 +0000
+Received: from AM0PR04MB12051.eurprd04.prod.outlook.com
+ ([fe80::5839:856:e138:4029]) by AM0PR04MB12051.eurprd04.prod.outlook.com
+ ([fe80::5839:856:e138:4029%6]) with mapi id 15.20.9846.025; Tue, 28 Apr 2026
+ 09:05:47 +0000
+From: Ye Li <ye.li@nxp.com>
+To: festevam@gmail.com,
+	u-boot@lists.denx.de
+Cc: peng.fan@nxp.com,
+	uboot-imx@nxp.com,
+	ye.li@oss.nxp.com
+Subject: [PATCH] imx9: clock: Fix missing break in get_clk_src_rate
+Date: Tue, 28 Apr 2026 17:07:55 +0800
+Message-Id: <20260428090755.1809366-1-ye.li@nxp.com>
+X-Mailer: git-send-email 2.37.1
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: MA5P287CA0165.INDP287.PROD.OUTLOOK.COM
+ (2603:1096:a01:1ba::7) To AM0PR04MB12051.eurprd04.prod.outlook.com
+ (2603:10a6:20b:743::24)
 MIME-Version: 1.0
-References: <20260422170946.3394481-1-rs@ti.com>
- <DI49CY1ANPIG.2ZJXQ5B7QUPFK@ti.com>
-In-Reply-To: <DI49CY1ANPIG.2ZJXQ5B7QUPFK@ti.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Tue, 28 Apr 2026 12:02:48 +0300
-X-Gm-Features: AVHnY4LZ3z2knmCvJ8GHahgJVcBdAV9KyZgWg6wx-7CS5EeFWwS4pnwMzApPAf0
-Message-ID: <CAC_iWjL20WKWT0FZ4VNLxM5XSONPYPFsE9Ms4h6ad=iu-9kGeQ@mail.gmail.com>
-Subject: Re: [PATCHv5 0/6] various memory related fixups
-To: Randolph Sapp <rs@ti.com>
-Cc: robertcnelson@gmail.com, ayush@beagleboard.org, 
- Erik.Welsh@octavosystems.com, anshuld@ti.com, bb@ti.com, trini@konsulko.com, 
- afd@ti.com, xypron.glpk@gmx.de, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AM0PR04MB12051:EE_|DU4PR04MB12064:EE_
+X-MS-Office365-Filtering-Correlation-Id: d7ae3f19-b985-42d0-137f-08dea50554e5
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|376014|52116014|42112799006|366016|19092799006|1800799024|56012099003|18002099003|38350700014;
+X-Microsoft-Antispam-Message-Info: fghg79bAC7Zi7K9xgpbLsLEgYyUzwRaNRyJfJRC5nr7MvSncDbFbmuyRAd64wP6+UVdSMGpYlO3QnMWxOAIfgvV6idJ7FERL2DNevsRddkTqHKGUxlLYWhLRK0aLwGSphkp2MmyYz5XgV3EnYWoObDB4WHZU2++FindlAiYWLrFjHmomIyY5VOZ/YUGnGt1lvthhXdL6R6JlIKgxvdGzERgr7fM9kBporvu/CkDBor9TeEFiuTd385qbQ/KbWpGMEQ2dpixKTiPXy7CY6Shl+Wfvc6CjlR8/ky1AhzYNtTLULvRM6m08NsZODEL/Ntbyh0jmJkHFDjnerbGrQc0uAvzUbYdJNb/2mTPgyC3JKddkdgPQnM3dsPhIQ2BI/iCITJIOAIvKBEe7plZ9C2BnDN7d6QK+w3sERCieLNG3uWO+HQN8UYSkmT0yAPtHMcTiB8NnvdACFWWCN9UfyPWvvbIrlrQ91J11XQNtNd6+gg0YECaxpAVJlcsm2sGv+B+HhzlJ3aAUL3ZnHoLIvNu7hOw/oXqHA7rXHnRW+kFxn1bSvqchyc6yk5JTOEBStNOnKBXp8RSloy1sJHog2Iq/qkmZfVLGFzdLdH6Yw4nymEs4AQGCITnVcearOTfN0ZVZq73KcVFbOMIavWlZKhKw1OWD3TfjEEc74fDZaea6li8KbhFxfzkT7vFiCaONBmgGZYhXe2u4yUzCDAbsK0WRAdren7R+J3cnATCm0g+YUULQFWtBqpxE5eNnk6A6Yhm0g2JSq+dG82ROYTyBdg44RtBlFs+MqYoPiUeQ36T53KM=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AM0PR04MB12051.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(52116014)(42112799006)(366016)(19092799006)(1800799024)(56012099003)(18002099003)(38350700014);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?BDWpZW1z/lYYw40thK+XmjiQvzNHFiLXpzD4agtFV5rZ69zTS9he/w9M6m7X?=
+ =?us-ascii?Q?GKtWgIYEjY0JCTbpw/ey8CRE7iVLkQ5cukEfewO9SGwVYgKSNx5RsG6wrQTm?=
+ =?us-ascii?Q?dz2o3+Z3vxIZpH0EDj6ZsnuhLR5ua7UTR6KG4MbQmZoFxpliKDu6VZlTyVld?=
+ =?us-ascii?Q?wBqPMyXZ+DNd4FLhxYYCmu2jV35Rzjl6UyX3Np6F1ohF9AI5yK4UW0wEL6Yd?=
+ =?us-ascii?Q?j0CMn0TCTCQsXwx6HfBO3ndVUQnxQmms7KTFezqBZcgSQkdNy7bzYGz2/vvY?=
+ =?us-ascii?Q?E0cFoQFIkbFEEtqbBNolwbqkTFd3j/8VJInBrAX+1jV8Lg5uuA2WhnZABNZX?=
+ =?us-ascii?Q?KiwwmdYuzEpS7P7GH/ToANlGXhsU/nrjPOTrd8GbZcbQ2E3B9L4+sjz78UKY?=
+ =?us-ascii?Q?ICX006ZIM+cOiXMfPM3CfeUCyW5HUNczUlv/N04qx/vtwxyj6MnrAfyIbCBY?=
+ =?us-ascii?Q?+UZC3eC3bc7cJByAufJ3UfwKRE6jP2WwZNtuQCqpduxkIrL2jpjKxKWF+T0H?=
+ =?us-ascii?Q?kdHNrwNGVSuqi8+ELltSdk6I2wCnQL7EzZOdXaiiCCO1A3OS8QHTg+24vk6o?=
+ =?us-ascii?Q?3QHQfD7qBszseCJn3+mC5W7TNm8LiXZQWSJzjajmRQ2oXE38eFzW5LjlAVMM?=
+ =?us-ascii?Q?bTcl9cC4jZLRl7diF/L2RhiTY9X+mQ2d6QLma0PdtMfB7mNfxfMB/8RpGhoD?=
+ =?us-ascii?Q?fDofcuGvfyTfHlgtWI/BaZq2bjtagy05dHS6hLDccgE/IRNO+2L7/SM+Su/I?=
+ =?us-ascii?Q?xU/k+3OU6KZXSgGKnic07tO0BkrKfO0uwHgct2vEiAIGXP7h1Iz182bCzky3?=
+ =?us-ascii?Q?DRe7dk9pYJZmJV/krnGs2UkjNI5Zo9uR9TZVolhtlN0svV0fJfel/1inLHNg?=
+ =?us-ascii?Q?35Rr90CoEygzyvUa218O0IudgA9oE7UHVlN44bF1s+H67SntC44iFCM2Ha2d?=
+ =?us-ascii?Q?mkb9ddFkudfEWdKH+6b7cjg/SjASvpvZvIKWtOT2rnRhyfuaLXm5q8P0s4n7?=
+ =?us-ascii?Q?JfhpE7AdfWGGbQ8Jlunl6p5kVc1thr8n378dgf8CG9EWNj3Yh75hsUHnMndf?=
+ =?us-ascii?Q?0jbV0Na0vlU82wxtM84m/gtn9xkRNNCIiTgQse51jBYl1E7OiZc1Q+YD5krN?=
+ =?us-ascii?Q?yqYuaMNu87QvzPAQ3zXxQo+w5MuK8ZSRvG28NyvAvB0+LM8UGEKp3Ol0Rdvs?=
+ =?us-ascii?Q?qBJLn50yECZ2C9M8Sh+K1RF9P92GLGDZ5+CbXiWOm3vOk9+vbY+WdT1FXFuK?=
+ =?us-ascii?Q?/sANjmpBeqiZ7pB/zqJPqAj2A1IEf+5Poa7O5NALs3zgYAQ7UTqWDvk1NLcz?=
+ =?us-ascii?Q?hI3YmaP+pqD1yZSFlGLoYUY1YeRDY6a1Swvzp56FZSx3hRFbaPuTenn4psGc?=
+ =?us-ascii?Q?SIXpkcJh3NqaeAt2qqHFDKTixVc0NintWT/Yg13Ov8GP7MwcALpDp/kBc2ae?=
+ =?us-ascii?Q?zbu8FFud0BwIURDnNhIErXEtig35o/KNHg2Vvpw9Y7eUZwXcfhguMp2x+YUd?=
+ =?us-ascii?Q?rTZCzJSr0422UOXjgwU9Hj0ZagR63ZB1xVIsovogSQMFOZzgo7thy0hUSA2V?=
+ =?us-ascii?Q?ND/9quI1vlhvCzPGor8P4ZL8AumJuM7qSo8xmYsMfK2k4hHpm+P+vowP3Rlm?=
+ =?us-ascii?Q?twvBobvHVvI92YCF6pPXhoM1/c4+Iglt4ZEVkSpg2hoYIjFVJU/mEO/eIDge?=
+ =?us-ascii?Q?vxx616HZoXYU0ZUkwKWBzglqz+JDHzHCVX+9+wdNN6ECiDvt?=
+X-OriginatorOrg: nxp.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: d7ae3f19-b985-42d0-137f-08dea50554e5
+X-MS-Exchange-CrossTenant-AuthSource: AM0PR04MB12051.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Apr 2026 09:05:46.9510 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: NAZB1spvJyYaNN1qPeqiFvpbIe2aicZq8U3J5QJQIhKstvFiBuWyrcHIuo8/x8RQ
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU4PR04MB12064
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -121,71 +135,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 28 Apr 2026 at 00:34, Randolph Sapp <rs@ti.com> wrote:
->
-> On Wed Apr 22, 2026 at 12:09 PM CDT, rs wrote:
-> > From: Randolph Sapp <rs@ti.com>
-> >
-> > Nitpicks and fixes from the discovery thread on adding PocketBeagle2 support
-> > [1]. This does a lot of general setup required for the device, but these
-> > modifications themselves aren't device specific. For those specifically
-> > interested in PocketBeagle2 support and don't care about these details, my
-> > development branch is public [2].
-> >
-> > That second patch may provoke some opinions, but honestly if that warning was
-> > still present I wouldn't have spent a week poking holes in both the EFI and LMB
-> > allocations systems. Please let me know if there is a specific usecase that it
-> > breaks though.
-> >
-> > [1] https://lore.kernel.org/all/DHHC66BBMD27.YHGIH43C6XBK@ti.com/
-> > [2] https://github.com/StaticRocket/u-boot/tree/feature/pocketbeagle2
-> >
-> > v2:
-> >       - Remove additional increment and decrement in lmb_free_fdt_regions
-> >       - Drop the patch to backfill EFI_CONVENTIONAL_MEMORY
-> >       - Adjust the removal loop nitpick patch description
-> >       - Change the reserve memory patch to use new end_addr_sp
-> > v3:
-> >       - Update lmb flags to use the macro documentation for constants
-> >       - Change efi_mem_sort to use list_for_each_entry_safe
-> > v4:
-> >       - Fix typos in LMB allocation flags macro documentation
-> >       - Rename end_addr_sp to initial_relocaddr
-> >       - Keep the map_sysmem dance in the efi u-boot reservation
-> >       - Use the active device tree pointed to by gd->fdt_blob to clean up old
-> >         reservations
-> > v5:
-> >       - Keep return value as long in boot_fdt_reserve_region
-> >       - Fix formatting in initial_relocaddr patch
-> >
-> >
-> > Randolph Sapp (6):
-> >   lmb: allocation flags macro documentation
-> >   boot_fdt_add_mem_rsv_regions: free old dtb reservations
-> >   efi_dt_fixup: use fdtdec_get_bool
-> >   efi_selftest_memory: check for duplicates first
-> >   efi_mem_sort: use list_for_each_entry_safe instead
-> >   memory: reserve from start_addr_sp to initial_relocaddr
-> >
-> >  arch/mips/lib/bootm.c                  |  2 +-
-> >  boot/bootm.c                           |  2 +-
-> >  boot/bootm_os.c                        |  2 +-
-> >  boot/image-board.c                     |  2 +-
-> >  boot/image-fdt.c                       | 55 ++++++++++++++++++--------
-> >  common/board_f.c                       |  9 ++++-
-> >  include/asm-generic/global_data.h      |  7 ++++
-> >  include/image.h                        |  2 +-
-> >  include/lmb.h                          | 30 +++++++++++---
-> >  lib/efi_loader/efi_dt_fixup.c          |  3 +-
-> >  lib/efi_loader/efi_memory.c            | 49 ++++++++---------------
-> >  lib/efi_selftest/efi_selftest_memory.c | 21 +++++-----
-> >  lib/lmb.c                              | 41 ++++---------------
-> >  13 files changed, 118 insertions(+), 107 deletions(-)
->
-> Any more comments on this series?
+The break is missed for ARM_PLL_CLK in get_clk_src_rate.
 
-Seen the emails, i got limited time to take a closer look. I'll try
-doing it withing the week
+Signed-off-by: Ye Li <ye.li@nxp.com>
+---
+ arch/arm/mach-imx/imx9/clock.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-Cheers
-/Ilias
+diff --git a/arch/arm/mach-imx/imx9/clock.c b/arch/arm/mach-imx/imx9/clock.c
+index 14a2bdf5762..4ccff67b7ab 100644
+--- a/arch/arm/mach-imx/imx9/clock.c
++++ b/arch/arm/mach-imx/imx9/clock.c
+@@ -478,6 +478,7 @@ u32 get_clk_src_rate(enum ccm_clk_src source)
+ 	switch (source) {
+ 	case ARM_PLL_CLK:
+ 		ctrl = readl(&ana_regs->arm_pll.ctrl.reg);
++		break;
+ 	case AUDIO_PLL_CLK:
+ 		ctrl = readl(&ana_regs->audio_pll.ctrl.reg);
+ 		break;
+-- 
+2.37.1
+
