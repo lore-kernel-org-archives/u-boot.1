@@ -4,107 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 007F8FF885A
-	for <u-boot@archiver.kernel.org>; Tue, 28 Apr 2026 18:18:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F1B0FF885A
+	for <u-boot@archiver.kernel.org>; Tue, 28 Apr 2026 18:19:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9A7728467F;
-	Tue, 28 Apr 2026 20:18:15 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id DCB7184686;
+	Tue, 28 Apr 2026 20:18:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20251104.gappssmtp.com header.i=@baylibre-com.20251104.gappssmtp.com header.b="nMF3fCAD";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="k6cnUu4Q";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8F8C484682; Tue, 28 Apr 2026 20:18:14 +0200 (CEST)
-Received: from mail-oa1-x30.google.com (mail-oa1-x30.google.com
- [IPv6:2001:4860:4864:20::30])
+ id 27FB28468B; Tue, 28 Apr 2026 20:18:58 +0200 (CEST)
+Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
+ [IPv6:2a00:1450:4864:20::62a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6B5D580433
- for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 20:18:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 74A9E8467F
+ for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 20:18:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dlechner@baylibre.com
-Received: by mail-oa1-x30.google.com with SMTP id
- 586e51a60fabf-4042fe53946so5271160fac.3
- for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 11:18:11 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x62a.google.com with SMTP id
+ a640c23a62f3a-b8f9568e074so1937315966b.0
+ for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 11:18:55 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1777400335; cv=none;
+ d=google.com; s=arc-20240605;
+ b=Nvs4fsgClEfHXJCIVAcpFJMlSchWcxlSwvAq8vdp4/EwS/9IyxsBAMFvYd2Hs79Lup
+ oLOINp4mWx5GPVbjOOM048IWOHxJGcKn+Q2u28W744R64qUaS38funY69YdYTligoHJU
+ A4bMDK28Mp+5GvJOJwg1I1Xv8Nms4aSKWYWhSiXQp7rrW/JX4GQHBXbbedRdt6d3Djo/
+ buo54FwUhAT/qsZuU5b3A/7Zhhjne8UREdF+OFOCT5G78P7zdZk8WRpxp+CQiYlJhnN6
+ TDl1CCEMPm15c9KfROX5qRBF4oGGGiQkbKRDau1LHwJfgAB6peBuK7KItBsrOed6cweG
+ 3WGw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=DPl8QXStgdaY/Qx08CT86mKN4XwM83IDIULAxJEdELg=;
+ fh=FSZLg1kBZKtmq7hkO96s8J8bywdf/NrVlQg027zGQAY=;
+ b=Vn6aE1ZmVfVoJ16nJ5BRpHlFPFy0vdVEgKvEfU/yAf6SZ8A0U/pYLgHBzL8CQjQWo8
+ xmISXk2pn3HFm24J29wRrpg4KfWcaYeqS8pV8qKYhh+q+f08ZJexXQPuJ5NVVM/7v4+V
+ 895YLH98KyWfMI3GlV2rbdDwRWRZvolhqixkll16u8rLCgnI3lTvQ1DnXxZwXf9X1m61
+ hq738oTpykC26BEqy2BQ15LZe2bbmj0R4a6ItpszdWRcycNVi4OIqCuH+IN0BiqcUjd+
+ WkYI7InjnKSSn2rmQq7MhncbMy40hG45YRRIMGTa3mSQ6vS1l4maisRtUpAPOFMgzYJ7
+ W3kQ==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20251104.gappssmtp.com; s=20251104; t=1777400290; x=1778005090;
- darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=sSqS+suLQj0cf9riz4Q4EUObH6yvVsT/LhycWg1aM6w=;
- b=nMF3fCADAknAGwsvi5X2YHrNNnBt1XyRU7+Ehp/gd6NF8PN9bc+dhQWdynHHnLkSa2
- ceaESWy9n4/KAzeDPP9brhfJnKniH68I+LYBu5ZXNGjMJiWimaYEW9/Bg+9Q+T34ALQJ
- eegC5FlWJO/6Yr0EZtt5A2Z2A5NX45P+UyYSKJ77d6UypOIL4Y4ivfawrAENPc0ndFqU
- 7AQK4QKYaJmVMPbRKnMlnDMzWG3Kzh6tDw1VrZM3MDEpSvNFN8wx29pZ8iy+/dQ/I5eQ
- OQPdL79rCC5OnEELcceIOlTgvGSTHom+jmAUB3x+zRabi47TI4LTuJ161bLnznogrN0s
- ZP4A==
+ d=chromium.org; s=google; t=1777400335; x=1778005135; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=DPl8QXStgdaY/Qx08CT86mKN4XwM83IDIULAxJEdELg=;
+ b=k6cnUu4QvP9C6dzgebmATjnS2t/3oV4s5SfkfHqnnnH7Du3UeL8dX4e0BX7jzg4mwt
+ cG5L0BvAQhfNmuAuXmXH22CKziDEOVyN/+7YK+Vk4yfoM40UQM7wb4GEjeGnkBHRnQ8d
+ PVHFODj9i9ijkpEeSfXoC75jTAm1BskdbJe10=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777400290; x=1778005090;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=sSqS+suLQj0cf9riz4Q4EUObH6yvVsT/LhycWg1aM6w=;
- b=Yw9iVCvahiyZPpyuKb2Gch+bhOctnel1+mrJCotKKQom5fZ77gZ4uMnpcKisIPYcqo
- l7NTQ6Sa0QMyqLGKBNmbj/RDfdVt3HP/o2OihkiYn7IRD9f8kfza0HElDty+4pyMTmX8
- U4+VN4K/2kTgX4QvwEtdNpvQsg/gzkBxK7Qe1MBoEdRUpAjfciLH7VPOYmsFp8WhZkgX
- iMsjshC5fSwl0/oK8qSRQ5TvWxjaY6pHdFeSCuFl30wQDDkuOh+upQFlmnPwz0ldzTNr
- WtpaeIMT7rdRGhaIbn71msxpMq//WjqttHZMx1nYR3+nc5dYmcP1t6OKngbf8S26rwxe
- iEfA==
-X-Forwarded-Encrypted: i=1;
- AFNElJ8QHg6F4VQWpB2SMCPd9x6Yb29Invm8M2+g3e70DzlCPB5dOq/fS0FseNpqVwzMf8jaSDTbsDI=@lists.denx.de
-X-Gm-Message-State: AOJu0YzPBPc0j/OjJRI+loJ++q6FwzItg7bOu9jWDn3nZQIRze5l9rFI
- lzwSzjbCdXM0nMjWWq4I+r5NzpSISfNfjxLcanH9bROxHkK+7TaHlY9rT2DzT2w4eiQ=
-X-Gm-Gg: AeBDiesf+u+okvRynO4H19wi9l3jXDbCaHsSLpaKQPlNtNPDI4EPBjQxxtWGK5Dqegi
- WLCCNRY3HJ8wnYkY1Y1UcW2UvDVd0q+c2rkYU7GOm+1m88+vuKTVqLRUXE/Hx1MUA5GK4QZCwp5
- DSw0c+MoRp7JbhrpXqCoGwsSvrVB6F4UiYvVU3PfJ+VRJ02XXZLIFNxfxJHKwBgC3K9sY1HkR/a
- Cj7W5tdBKylsOmCzDzlwDI2ZWCtUUXvlKzqYF86rVvy4g8vEc5S+vYgLInd6xgolNzzlLVnyMlm
- AVdYRAaXHxpc+ezKNQK1Q4qfK/Gik11vtVkqNSS/kq0H2aAR3rIxr9mhms/r9hbDYljKKVSMEk2
- jrMUjD+PEjhph8wuK3VL8A65ArZDOrx8KgQGUeMZBF+YVo+ESV3YZJuauJ/7w25Mq7B7aWlMHVe
- yZhruW9dTE4twbo58dtrfD223FoRmeZY0ay4D+Dr8=
-X-Received: by 2002:a05:6871:e78f:b0:42f:ba47:36f5 with SMTP id
- 586e51a60fabf-433f396963emr2385752fac.17.1777400290144; 
- Tue, 28 Apr 2026 11:18:10 -0700 (PDT)
-Received: from [127.0.1.1] ([2600:8803:e7e4:500:efba:bc47:a81b:dd0f])
- by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-4340d333d15sm44884fac.1.2026.04.28.11.18.09
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 28 Apr 2026 11:18:09 -0700 (PDT)
-From: David Lechner <dlechner@baylibre.com>
-To: Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
- Chunfeng Yun <chunfeng.yun@mediatek.com>, 
- Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
- Tom Rini <trini@konsulko.com>, David Lechner <dlechner@baylibre.com>
-Cc: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de, 
- "Noah.Shen" <noah.shen@mediatek.com>, 
- Macpaul Lin <macpaul.lin@mediatek.com>, 
- Meiker Gao <ot_meiker.gao@mediatek.com>
-In-Reply-To: <20260406-mtk-spi-nor-improvements-v1-0-66f675cbbd3e@baylibre.com>
-References: <20260406-mtk-spi-nor-improvements-v1-0-66f675cbbd3e@baylibre.com>
-Subject: Re: [PATCH 0/8] spi: mtk_snor: various fixes and improvements
-Message-Id: <177740027770.3382222.17634141846940816734.b4-ty@b4>
-Date: Tue, 28 Apr 2026 13:17:57 -0500
+ d=1e100.net; s=20251104; t=1777400335; x=1778005135;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=DPl8QXStgdaY/Qx08CT86mKN4XwM83IDIULAxJEdELg=;
+ b=TB4W9vqpPscbFFskc/yRc+fOCpsYSaDYsqYk0w7NAkuRAkZ+PK+J6UIvDmdqZMeRI4
+ b6dJ/ZhiMzf0t5nGRd3Eg9unklvVY+psjygospuJFMSruDRsPSuvl50axOZ4SUeVJ2I6
+ J5ueFXmhOCjYjpfbXwn0i6VLAOy7RTpbSueRyqqQQ0rhDfZ8tKHQ9CQqA57JzsLybqq3
+ yapVsLdE1ejwmgHL6yCC1ime4WkxRBRIMNbdHglyFlo2+NPqaV/9LPf0M/leRmJkE4nZ
+ dg+kdi62TWFeBBh3aJofL1DahkBnjtEVMKCBrwLmFO5DAbhKBiMgrB7qOWkwnV4kZ73l
+ lTog==
+X-Gm-Message-State: AOJu0YzXhvjc+YKWba7FpxKH4hh2Qp3nDjbMpvs/CNnbXSb31I29Wokx
+ KxS0upXg6YxWV5RPCcM2vve2O/45JxwxmwNFgg7g+4Icem63wNehoEIc2TMYe/7ztUtCFQi04uv
+ wM2ynt9bYGihupOoH1fGigQRJYzqjnZs6sTB73049
+X-Gm-Gg: AeBDieu1/iTFPvu1YHL0/1Idl6075sHjoN085re7AceVh6MhzQ27abnJVuHlaKyUBVI
+ 09hShtn8KdUncrX4tekMN56hghxY5g13WyrwUzs7NFDNFB+zQjo1Z3huFKd6BiMEF2MDIOTLU1j
+ xKtmbgovyDR4bMDuke9+wvHDO0xjDEvTHMCNlGLBLJBHt23X0OqFT/CmSnZdEF+mfvr0WplAsvw
+ wVm3S0GBjp8Y5aSJ/8sYxjNSGM0Ciz+SyGPF3c3S5r3AkHwfEn8YsqOo4Yi7iGKnJYJymb80Xqt
+ /hl6fIFqS4a/Ggoc
+X-Received: by 2002:a17:907:e146:b0:bac:6d85:255c with SMTP id
+ a640c23a62f3a-bb801bce7d6mr176655966b.21.1777400334809; Tue, 28 Apr 2026
+ 11:18:54 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.16-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1356; i=dlechner@baylibre.com; 
- h=from:subject:message-id;
- bh=rYKVRpGoNAx6Gv80XJLeDViuaFjNwwxfdRRCVzGhtjA=; 
- b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBp8PnZS89kMM1tGYPOd0PSY4lxv9W9brBo3kVo1
- j1M9LoWmZqJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCafD52RYcZGxlY2huZXJA
- YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AU00H/iL1AcMvt1VRlJdZ5IAi3sGvbDCFMVgzzVw8XA1
- hGiHSXdKgP/Lp6r9xIzrc9nlzy3XCuKxe+BNE4z/UqPz4vhSf1oc4GcA7K0t3Vvg7qJmo2Hb+5i
- j/x0/tA1zkliRQHQ0Wn6Wcga7oGMB8i52/ZM77iRyo+Yyxzdd9aZQQ7Rc1QDFrb5h0PjI339xGv
- c6LYRFrgoaq1ktMNr+mr9urdf9R2phrbGrW+TF9FJwNBuiFZaLbDQ9j9D3WMIkv3LO0RTPStec5
- rVcj3erNxzE+nE8ukwFP99hz413iOeLL/fc2M4hJF3eh3UxVpn+EtGiwPzQmLlUh7qOKuvFfhAf
- x/Ms=
-X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
- fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
+References: <20260427-fb_gpt-v2-0-9e7fe3c1649a@oss.qualcomm.com>
+ <20260427-fb_gpt-v2-1-9e7fe3c1649a@oss.qualcomm.com>
+In-Reply-To: <20260427-fb_gpt-v2-1-9e7fe3c1649a@oss.qualcomm.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Tue, 28 Apr 2026 12:18:42 -0600
+X-Gm-Features: AVHnY4If9Cs7KEYoc175YfIk6wqZmbNHZBSvc_kxvbPcbLgraIquDcClKH89xbo
+Message-ID: <CAFLszTjRoWbfF2tTt8zzsu6UdWU9fkHzn24WZ8LgDx8Nn+hzyw@mail.gmail.com>
+Subject: Re: [PATCH v2 1/4] fastboot: block: Add device selection syntax
+To: balaji.selvanathan@oss.qualcomm.com
+Cc: u-boot@lists.denx.de, Mattijs Korpershoek <mkorpershoek@kernel.org>, 
+ Tom Rini <trini@konsulko.com>, Heiko Schocher <hs@nabladev.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Dmitrii Merkurev <dimorinny@google.com>, 
+ Adrian Freihofer <adrian.freihofer@siemens.com>, Peng Fan <peng.fan@nxp.com>, 
+ Jaehoon Chung <jh80.chung@samsung.com>, 
+ "Ariel D'Alessandro" <ariel.dalessandro@collabora.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -121,36 +114,79 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 06 Apr 2026 15:13:26 -0500, David Lechner wrote:
-> spi: mtk_snor: various fixes and improvements
-> 
-> This series contains some downstream patches that I have split up into
-> logical commits. I have tested these patches on Genio 720 EVK by reading
-> and writing the environment from the flash memory on the EVK.
-> 
-> 
-> [...]
+Hi Balaji,
 
-Applied to mediatek-for-master, thanks!
+On 2026-04-27T12:06:41, Balaji Selvanathan
+<balaji.selvanathan@oss.qualcomm.com> wrote:
+> fastboot: block: Add device selection syntax
+>
+> Implement device selection syntax allowing users to specify the
+> target block device using 'N:partition' format, where N is the
+> device number. When no device is specified, the default from
+> CONFIG_FASTBOOT_FLASH_BLOCK_DEVICE_ID is used.
+>
+> Modify fastboot_block_get_part_info() to use the new parsing
+> function, enabling operations like "fastboot flash 0:boot boot.img"
+> to write to specific devices while maintaining backward compatibility
+> with the existing "fastboot flash boot boot.img" syntax.
+>
+> Example usage:
+>   fastboot flash 0:boot boot.img      # Flash to device 0
+>   fastboot flash 1:system system.img  # Flash to device 1
+>   fastboot flash boot boot.img        # Use default device
+>
+> Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+>
+> drivers/fastboot/fb_block.c | 53 +++++++++++++++++++++++++++++++++++++++++----
+>  1 file changed, 49 insertions(+), 4 deletions(-)
 
-[1/8] spi: mtk_snor: clean up comments
-      commit: 4f9842e4799c6c3c98cc27c723ba223b42d739d8
-[2/8] spi: mtk_snor: avoid alloc in mtk_snor_cmd_program()
-      commit: 4eac47d4eb661c019b84723628bab2f0c826403f
-[3/8] spi: mtk_snor: conditionally copy tx/rx data
-      commit: 3b0a037052a24f8449c9fafd02034307e30a3c97
-[4/8] spi: mtk_snor: check return value of mtk_snor_cmd_exec()
-      commit: 55944a68d550d00df494a5c75685f00cbf0998f0
-[5/8] spi: mtk-snor: add bounds checking in mtk_snor_cmd_program()
-      commit: 78950bb20707417657d9122d50325bda9c9aa8b9
-[6/8] spi: mtk_snor: support newer SOCs
-      commit: 1cfcd7100d54b706b7d4ee17dd016b83e5eb88ff
-[7/8] spi: mtk_snor: fix zeroed data in DMA read bounce path
-      commit: 28bd63967784d1dbeff75289560e71fd1deac902
-[8/8] spi: mtk_snor: Remove status register write procedure in probe()
-      commit: 655daae25ea6cd54264e1acaac2dfa8528a10fa7
+> diff --git a/drivers/fastboot/fb_block.c b/drivers/fastboot/fb_block.c
+> @@ -133,25 +172,31 @@ int fastboot_block_get_part_info(const char *part_name,
+>       *dev_desc = blk_get_dev(interface, device);
+> -     if (!dev_desc) {
+> +     if (!*dev_desc) {
+>               fastboot_fail("no such device", response);
+>               return -ENODEV;
+>       }
 
-Best regards,
--- 
-David Lechner <dlechner@baylibre.com>
+This is a real bug fix - the old test could never fail since dev_desc
+is the address of a local pointer - but it is unrelated to the
+device-selection syntax. Please split it into its own patch at the
+start of the series so it is easy to backport.
 
+> diff --git a/drivers/fastboot/fb_block.c b/drivers/fastboot/fb_block.c
+> @@ -124,6 +125,44 @@ static lbaint_t fb_block_sparse_reserve(struct sparse_storage *info,
+> +     /* Override if device:partition format detected */
+> +     if (colon_pos && colon_pos > part_name) {
+> +             *device = simple_strtoul(part_name, NULL, 10);
+
+simple_strtoul() with a NULL endp silently accepts anything -
+'foo:boot' parses as device 0 and quietly writes to the default
+device, which is exactly the surprise the new syntax is meant to
+avoid. Please pass an endp and reject input where the consumed length
+doesn't reach colon_pos, so a malformed prefix becomes -EINVAL.
+dectoul() is preferred over simple_strtoul(..., 10) in new code.
+
+> diff --git a/drivers/fastboot/fb_block.c b/drivers/fastboot/fb_block.c
+> @@ -124,6 +125,44 @@ static lbaint_t fb_block_sparse_reserve(struct sparse_storage *info,
+> +static int parse_device_partition(const char *part_name, int *device,
+> +                               const char **partition_name)
+
+U-Boot already uses dev:partnum for partition numbers
+(part_get_info_by_dev_and_name_or_num() - '0:1' means device 0,
+partition 1) and dev#partname for names. Reusing ':' for a name lookup
+means '0:1' becomes ambiguous on boards that label partitions
+numerically. How about '#' instead, to match the rest of the disk
+layer?
+
+> diff --git a/drivers/fastboot/fb_block.c b/drivers/fastboot/fb_block.c
+> @@ -124,6 +125,44 @@ static lbaint_t fb_block_sparse_reserve(struct sparse_storage *info,
+> + * @partition_name: Output partition name pointer (can be NULL)
+
+Just to clarify, the kernel-doc says partition_name can be NULL but
+every caller in this patch passes non-NULL - the NULL handling only
+becomes useful in patch 3, so please move it to the patch that needs
+it, so each patch is self-contained.
+
+Regards,
+Simon
