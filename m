@@ -4,120 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66CC8FF885D
-	for <u-boot@archiver.kernel.org>; Tue, 28 Apr 2026 08:35:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1E1EFF885D
+	for <u-boot@archiver.kernel.org>; Tue, 28 Apr 2026 08:37:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D41E684150;
-	Tue, 28 Apr 2026 10:35:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=nxp.com
+	by phobos.denx.de (Postfix) with ESMTP id 3F7F184150;
+	Tue, 28 Apr 2026 10:37:20 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=mediatek.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=nxp.com header.i=@nxp.com header.b="Uibj4Kox";
+	dkim=pass (1024-bit key; unprotected) header.d=mediatek.com header.i=@mediatek.com header.b="HNm+0tng";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C41CE842C7; Tue, 28 Apr 2026 10:35:29 +0200 (CEST)
-Received: from MRWPR03CU001.outbound.protection.outlook.com
- (mail-francesouthazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c207::3])
+ id BD062845CE; Tue, 28 Apr 2026 10:37:18 +0200 (CEST)
+Received: from mailgw02.mediatek.com (unknown [210.61.82.184])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E36ED84119
- for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 10:35:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5FC8084119
+ for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 10:37:11 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=mediatek.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=nxp.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=ye.li@nxp.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=CAURNzxX5akwc5Jc7O8VPDSXrTs7gPZfcQKmxu4gKfZmXqCtUt1BCMpOF6TpQjrqPPMDISztoPBeK/0p8fXfzxCdXiOFovQK6JHII9VcFsFpYkEXa6ZWleLFrL4w4KrZlCGWijrhKB9mvyXCg4Rs1JKK0GB4iDxgenPeiNmqF6oRQnKFQsCbWnHqP+qDXUnjPxHkiH7AzSsB0XzXyQ+u/02Udb9cRlbxEP8lb0ZlBTAUKBVtq4YFMxDmP/wGMahgPDFAgWbGPJSJBO8QepG0yri4RqO6FZU13CTnyIJ5RmCso7STJPQKcOhzBMgdYETBDUfugosIwrvB05BHcE7/og==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Wl86grqD+O4+FPqJ9LAIuvrccnhQaG/IJwd4Qto/iUg=;
- b=sfQgEkTd03O3GDh5UiNW/K5yf/ma/WRzVWZ4a9qRDJKo6V7GB2sBggatcCmWxvuxjPh7RvgEBYtDXRABG1CK4osoIMPtzL4IxbBSnHVfNrJS69FTmaehRRDm6dAy1ahU956ss5oLh/sKHDygtmqe3jAGtuUtP7qonn/NP4GOc+/X7JTi03d32wQXIp0iOw/yJoeZ/mvQTkVph3ktsZhgJBjN+P4eyhKRrvNGrBdi4huSGq00L00YCSXO+QlqTTfFOthCSVh2yYYBcgD/AHNabgZs9BXSNnXdceVi7t9iS+8bhdAOBQNCjDRhrpzrxdzanM1bgxi5diap676xJjJ1eA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nxp.com; dmarc=pass action=none header.from=nxp.com; dkim=pass
- header.d=nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nxp.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Wl86grqD+O4+FPqJ9LAIuvrccnhQaG/IJwd4Qto/iUg=;
- b=Uibj4KoxoPFwVOCmvMnB14VWDBYFOIhxC46EnJL67sRRNs/pRDV5/aDyZItLst+K8cJkz2PPgdQza/X8lo3RRLRsU9h79UhjGSHAD/w4sFmWJ+g090ZY32M/hx0pldfbxauZmgyowiZM1SDq82Abk+onRmU/C7aBaxOvLWrSm5kH2D+uYd4uCaJFz/CYwK2R8unGuNEcWlEufh5FKYUCA8NOXTYUbBPwEFK1VfHVCkFGDR0K3xteNPhHopp4nnUMQzcbCQed/WRlY4nSVC49JOeGkBJ+ppA6nMfyQElZ6y73f3qi0+IZWXRXIQxm6nzBNg8aSyTarnreXEfpahEMZQ==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nxp.com;
-Received: from AM0PR04MB12051.eurprd04.prod.outlook.com
- (2603:10a6:20b:743::24) by PA1PR04MB11336.eurprd04.prod.outlook.com
- (2603:10a6:102:4ee::7) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9846.26; Tue, 28 Apr
- 2026 08:35:26 +0000
-Received: from AM0PR04MB12051.eurprd04.prod.outlook.com
- ([fe80::5839:856:e138:4029]) by AM0PR04MB12051.eurprd04.prod.outlook.com
- ([fe80::5839:856:e138:4029%6]) with mapi id 15.20.9846.025; Tue, 28 Apr 2026
- 08:35:26 +0000
-From: Ye Li <ye.li@nxp.com>
-To: radu-nicolae.pirea@oss.nxp.com,
-	u-boot@lists.denx.de
-Cc: peng.fan@nxp.com,
-	uboot-imx@nxp.com
-Subject: [PATCH] net: phy: nxp-c45-tja11xx: Fix incorrect usage of devm_kzalloc
-Date: Tue, 28 Apr 2026 16:37:33 +0800
-Message-Id: <20260428083733.1803100-1-ye.li@nxp.com>
-X-Mailer: git-send-email 2.37.1
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: MA5PR01CA0143.INDPRD01.PROD.OUTLOOK.COM
- (2603:1096:a01:1b9::6) To AM0PR04MB12051.eurprd04.prod.outlook.com
- (2603:10a6:20b:743::24)
+ spf=pass smtp.mailfrom=weijie.gao@mediatek.com
+X-UUID: 6f3fdce842dd11f19a16598d5ca7f8ec-20260428
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mediatek.com;
+ s=dk; 
+ h=Content-Transfer-Encoding:MIME-Version:Content-Type:References:In-Reply-To:Date:CC:To:From:Subject:Message-ID;
+ bh=PI3KPTVhaa5o4Z9XrclLRGNfaxNo5ZO0RmE3KBnI/2c=; 
+ b=HNm+0tnghgUCWJD6b3zuLi2F65ZJKpmXY3+49SV6SeIoe27NJzV6actBgn93ItLLCIN+XDnx7VXHTPkJyaZhV+Vhf8xxMjHQ9sUY8iORw4dtetEORRamsiUm6UxdyIqTj72IEtYu6cx301+h21sAcWrcJNR8Ds27vkDcbkezF18=;
+X-CID-P-RULE: Release_Ham
+X-CID-O-INFO: VERSION:1.3.12, REQID:5945e7d4-a54b-4c2e-bcdf-9e9b8a8733be, IP:0,
+ U
+ RL:0,TC:0,Content:0,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTION:
+ release,TS:0
+X-CID-META: VersionHash:e7bac3a, CLOUDID:2647a270-3b7f-4b26-b2f9-40f0deecb36d,
+ B
+ ulkID:nil,BulkQuantity:0,Recheck:0,SF:80|81|82|83|102|836|865|888|898,TC:-
+ 5,Content:0|15|50,EDM:-3,IP:nil,URL:99|80|1,File:130,RT:0,Bulk:nil,QS:nil,
+ BEC:-1,COL:0,OSI:0,OSA:0,AV:0,LES:1,SPR:NO,DKR:0,DKP:0,BRR:0,BRE:0,ARC:0
+X-CID-BVR: 2,SSN|SDN
+X-CID-BAS: 2,SSN|SDN,0,_
+X-CID-FACTOR: TF_CID_SPAM_ULS,TF_CID_SPAM_SNR
+X-CID-RHF: D41D8CD98F00B204E9800998ECF8427E
+X-UUID: 6f3fdce842dd11f19a16598d5ca7f8ec-20260428
+Received: from mtkmbs13n1.mediatek.inc [(172.21.101.193)] by
+ mailgw02.mediatek.com (envelope-from <weijie.gao@mediatek.com>)
+ (Generic MTA with TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384 256/256)
+ with ESMTP id 761948465; Tue, 28 Apr 2026 16:37:04 +0800
+Received: from mtkmbs13n1.mediatek.inc (172.21.101.193) by
+ mtkmbs13n2.mediatek.inc (172.21.101.108) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.29; Tue, 28 Apr 2026 16:37:03 +0800
+Received: from mcddlt001.gcn.mediatek.inc (10.19.240.15) by
+ mtkmbs13n1.mediatek.inc (172.21.101.73) with Microsoft SMTP Server id
+ 15.2.2562.29 via Frontend Transport; Tue, 28 Apr 2026 16:37:02 +0800
+Message-ID: <5be181eabf090169f9df89d86d34347a8b4bd276.camel@mediatek.com>
+Subject: Re: [PATCH 6/6] mtd: spi-nor-ids: Add support for Winbond
+ W25Q256JV/W25Q512JV
+From: Weijie Gao <weijie.gao@mediatek.com>
+To: Miquel Raynal <miquel.raynal@bootlin.com>
+CC: <u-boot@lists.denx.de>, GSS_MTK_Uboot_upstream
+ <GSS_MTK_Uboot_upstream@mediatek.com>, Tom Rini <trini@konsulko.com>, Vignesh
+ R <vigneshr@ti.com>, Takahiro Kuwano <takahiro.kuwano@infineon.com>, Marek
+ Vasut <marek.vasut+renesas@mailbox.org>, Tudor Ambarus
+ <tudor.ambarus@linaro.org>, Jeffrey Yu <jeyu@issi.com>, Christoph Reiter
+ <christoph.reiter@evk.biz>, Venkatesh Yadav Abbarapu
+ <venkatesh.abbarapu@amd.com>, Shiji Yang <yangshiji66@outlook.com>, Bernhard
+ Messerklinger <bernhard.messerklinger@at.abb.com>, Vaishnav Achath
+ <vaishnav.a@ti.com>, Prasad Kummari <prasad.kummari@amd.com>
+Date: Tue, 28 Apr 2026 16:37:02 +0800
+In-Reply-To: <871pfzfs03.fsf@bootlin.com>
+References: <cover.1777345877.git.weijie.gao@mediatek.com>
+ <a953087c1d0ff8429d64aa014ddb5612d2799b50.1777345877.git.weijie.gao@mediatek.com>
+ <871pfzfs03.fsf@bootlin.com>
+Content-Type: text/plain; charset="UTF-8"
+X-Mailer: Evolution 3.28.5-0ubuntu0.18.04.2 
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AM0PR04MB12051:EE_|PA1PR04MB11336:EE_
-X-MS-Office365-Filtering-Correlation-Id: 2dacefce-6db8-4bb8-b1d1-08dea50118c5
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|42112799006|1800799024|19092799006|366016|376014|52116014|38350700014|18002099003|56012099003;
-X-Microsoft-Antispam-Message-Info: sDx2jMHwp3UVNwSfclTxcvAGOIdD1Rr0txXYtZlEkbWegAnqT43rNDj/qRjN5uI73FeDxCOoAGdQtGS74t50DDa7FnvwR47SHXq7fD5RUrL8bxovZC2+V23fDSy7UsxqnThRcxgc8U+0guRV4TLWC9PIGQFL5dhcAW3RqhaOKv1Yvybf/jTwIpHTU18y+Vs+IVz8GUUq1rFsFlq3QXt99vuZOZ4ZnVQOvVfzttVVztjOZDicMoWppKdrX0o4EPfDN24vpkPqftttGUMn2uHmJ+qdCx4TqpRr4FXLs2c5Y1gZwRMkHq6bXoIOYxp+5AgbX1sBQBWEBjZ9j1dy6tdOXOoG2Sy3TmK/mNW56ozJgHuomtZ9hdkyZ07jSXPBJXAkx42SBFyvW7IocvRYZeAc4fOonnkVrx4ymr75XgnNc9T4aLi+dmvROjlwQgUjLzz4O+7LslwO66bc8l/SgOxSJmkgHjPmgnCNYGhSfOazuHc7i0ggd9rgvyy28rB9LKtd1TlqwdZJvD8FTeHlMRYzlEduRIixkDrhqBtSn6DCfP1LwfPqRSJ9e2BZuIGGGrxdjK3QNoulkjwn3RFmT2pm53SeWXIla0Ea4KtTmWOYBpJS0xAg8rGdmAZQAqDfzof8iDhvsG3a6yn1WormOfrk68nxoHWg8jLwh6FI2xNhRTL1j3ZK34qxDXdvnBdubh3eNtsfpbns7tPr+dUBpoJL6yT6/uZpgwo3k7hwYYxQVSPRT5Gw7Kkh8qLyw1AHEeh8lPwUQ8qf2xHxkcCIz8Vx7PMV0ATtyKkwhOD+oGo7QTI=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AM0PR04MB12051.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(42112799006)(1800799024)(19092799006)(366016)(376014)(52116014)(38350700014)(18002099003)(56012099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?yPFR0XXfNFQOTeYAMj5QDLnw+/Y2EsjRThOdBAARdcwuIOsTOgKLtFesenMu?=
- =?us-ascii?Q?/RGlZQUH3SmxtUIJXxqa1Oi7xnIvwOZnv9EDNQZ9fEhPhISmVl61BTBAGRmy?=
- =?us-ascii?Q?z1dH2pJOSH8yVQvcWlrTIe1bakF+o9lxWNcCJFHAoA8nZGIvwHOeY8VKHkLI?=
- =?us-ascii?Q?l7X6cLbMHNkvijHsPJvC86itUwojhPHqqgorfSSobBYuttiYric7oGB8ipDt?=
- =?us-ascii?Q?ABeDqxf6ixbtIrZReYEahsTg7GwVBOUxG/aH3yVYqag0f2JySwP2pwh2ck7T?=
- =?us-ascii?Q?pLEnUtBUWR3H5GQC3Swqu5vqSVtttiRjrB6OWIt09XddpwxTfsvjVvMkStVM?=
- =?us-ascii?Q?HSTPPQi8LhvfCXM0CpVZZpdEYYZtv2pAYCiFG0s8KgTyIygCceRZbsX8b4GE?=
- =?us-ascii?Q?AAPo56KAykTtDIeO0wi3ZvZYfGYtOdmg0vb6SRAuX8OOgkETFwMn4L6SunqO?=
- =?us-ascii?Q?r0F0VxT6B1k+nzAV9UWqhlNXqtZN886nccZ1NQo2m2WrNn5vRZ92JquZgcg6?=
- =?us-ascii?Q?Ool6d1Lquu8mKU8//uZ6w4btF53swHwbQXXbBZHokIGHDw4Zzte5WisKbjoT?=
- =?us-ascii?Q?2Zy3y3HX1jiZIHC/8fJWr4Qd68GzGXsrlRiIurRTDFnZI7TMvN+6WakWC7JE?=
- =?us-ascii?Q?thoymyedvrcC106N6NwjevJa89KQs5kUNzuJiTkXPuSXB2l0EUH9JtuYRus0?=
- =?us-ascii?Q?1Lh/4o/S7eLafvy1hwcHTweeIg5i1LMYdscsRV4cxBH3FRlR0uaKv8Xwy2oh?=
- =?us-ascii?Q?g7ROX3outehRz9DLHEw2p/EFwBYioYALo8D0jd4d/iYxmVzLlv1KL0tTRoQt?=
- =?us-ascii?Q?7bKyoCI+jnQjyaJ/76X6jGe3boSl2YZaXegFEZSo4/1KYUiiJmKvM3BRl2Ib?=
- =?us-ascii?Q?HQ65blGck0asjBQLNGeuan6vN5lSqWfN07xGYRmptarZiDMtYYbN9YSwgQ7y?=
- =?us-ascii?Q?u+TRG1kGoTIYfvTnAbh3Maevv6SXZnYuvDE0IXfmFabEoCm4kLeIahnpvPRH?=
- =?us-ascii?Q?vOmJ+S+5f/vH/taWqDnUlogPWU6iA6KSQXdbKXcfvPT9haB310dh4FSqyKRp?=
- =?us-ascii?Q?sH+Ebj5X0ID3fOD2Lb13eIOpxCgBgDnTV9u410Dq2CK1kLbiqwHj+e56qCg2?=
- =?us-ascii?Q?ufcuv9My9oEKR5J3TpbjnuzNns/GYaHHFxBhNAxygzS3unq//47YQ46vqymE?=
- =?us-ascii?Q?Et6sXdqEpRAJc6f0U8Hrn+zZ/SQ1Kp+flkvBcKICemzfy1BNf9g1UhokYHxP?=
- =?us-ascii?Q?U6Jjexw3vqoog20eR/Xnzev9CCY8WSAjf8zPvyWOBmQRTY5/JtwLgebmrQfX?=
- =?us-ascii?Q?WE75N1z1RQ7OxP9SZdTzsdZk6u8I7obTltA/jyPeTLHE24WcqETkTcBsJ3pb?=
- =?us-ascii?Q?2RJ5vniS8y5sDDFW/5/rd2Rlma4xGLuul8vN9LjMxAEiQlP9w4YRe5Kebb0A?=
- =?us-ascii?Q?EQfIGIiHLFXQyKt+kJCEefsFBa7/UQgoEOS0K5wxsd3lduO+AV68CXQPxyDf?=
- =?us-ascii?Q?SDe8gTM1m1RCwUfNS1007+RDziLOeuoT4oPpYPxb2QDq8awP+5cvmKpa/PMB?=
- =?us-ascii?Q?X8rAzOMDmihOqOPHc/zOFm2mJyul5z7sZPaZNmgv2Z/z/n0Zrq1ZNtRiyXBY?=
- =?us-ascii?Q?+2aneSK49LHgPUn9M54lOUiicZwJS8dxr0B2lhW9rumFaRWgkczv3odoavj7?=
- =?us-ascii?Q?X0E/+jRZBNM8pzcwyZUSwel1zxecX+co3bpG0cNNNwzxPd/B?=
-X-OriginatorOrg: nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2dacefce-6db8-4bb8-b1d1-08dea50118c5
-X-MS-Exchange-CrossTenant-AuthSource: AM0PR04MB12051.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Apr 2026 08:35:26.4885 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: NJEWuUuquCt4UBzlIIcp+63/fr7MJlH4+g39HgXrK2FgqMcy+Amq1Mc7cU/eQt3S
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA1PR04MB11336
+Content-Transfer-Encoding: 8bit
+X-MTK: N
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -134,29 +97,80 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-devm_kzalloc needs to pass udevice for first parameter, this phy driver
-wrongly pass the priv in phy_device. And because the dev in phy_device
-is only valid after phy_connect, in probe phase this dev is NULL, so
-we can't use devm_kzalloc, replace it with kzalloc.
+On Tue, 2026-04-28 at 09:45 +0200, Miquel Raynal wrote:
+> On 28/04/2026 at 11:32:13 +08, Weijie Gao <weijie.gao@mediatek.com>
+> wrote:
+> 
+> > Datasheets can be found here:
+> > 
+https://urldefense.com/v3/__https://www.winbond.com/resource-files/W25Q256JV*20DTR*20RevK*2010202025*20Plus.pdf__;JSUlJQ!!CTRNKA9wMg0ARbw!hPu0SggaVM2sVfZIIpmauqFfldb_a2CUsdY8EXtlYmCrlPsgfbAHiUVQjb7RsCxDyHKNzQ_IeQino7kbe_I8YtAtzN5pOGJalR6BUZ0$
+> >  
+> > 
+https://urldefense.com/v3/__https://www.winbond.com/resource-files/W25Q512JV*20DTR*20RevD*2006292020*20133.pdf__;JSUlJQ!!CTRNKA9wMg0ARbw!hPu0SggaVM2sVfZIIpmauqFfldb_a2CUsdY8EXtlYmCrlPsgfbAHiUVQjb7RsCxDyHKNzQ_IeQino7kbe_I8YtAtzN5pOGJaaukqJvM$
+> >  
+> > 
+> > Signed-off-by: Weijie Gao <weijie.gao@mediatek.com>
+> > ---
+> >  drivers/mtd/spi/spi-nor-ids.c | 10 ++++++++++
+> >  1 file changed, 10 insertions(+)
+> > 
+> > diff --git a/drivers/mtd/spi/spi-nor-ids.c b/drivers/mtd/spi/spi-
+> > nor-ids.c
+> > index 492411a90f5..dc62a0e034a 100644
+> > --- a/drivers/mtd/spi/spi-nor-ids.c
+> > +++ b/drivers/mtd/spi/spi-nor-ids.c
+> > @@ -609,11 +609,21 @@ const struct flash_info spi_nor_ids[] = {
+> >  			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ
+> > |
+> >  			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
+> >  	},
+> > +	{
+> > +		INFO("w25q256jv", 0xef7019, 0, 64 * 1024, 512,
+> > +			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ
+> > |
+> > +			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
+> > +	},
+> >  	{
+> >  		INFO("w25q256jw", 0xef6019, 0, 64 * 1024, 512,
+> >  			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ
+> > |
+> >  			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
+> >  	},
+> > +	{
+> > +		INFO("w25q512jv", 0xef7020, 0, 64 * 1024, 1024,
+> 
+> This is JV-M (here and above).
 
-Signed-off-by: Ye Li <ye.li@nxp.com>
----
- drivers/net/phy/nxp-c45-tja11xx.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Of course. I didn't test the -Q version but I already saw related parts
+like w25q512jvq existed.
 
-diff --git a/drivers/net/phy/nxp-c45-tja11xx.c b/drivers/net/phy/nxp-c45-tja11xx.c
-index a1e4c3d053b..9814ac498ed 100644
---- a/drivers/net/phy/nxp-c45-tja11xx.c
-+++ b/drivers/net/phy/nxp-c45-tja11xx.c
-@@ -343,7 +343,7 @@ static int nxp_c45_probe(struct phy_device *phydev)
- {
- 	struct nxp_c45_phy *priv;
- 
--	priv = devm_kzalloc(phydev->priv, sizeof(*priv), GFP_KERNEL);
-+	priv = kzalloc(sizeof(*priv), GFP_KERNEL);
- 	if (!priv)
- 		return -ENOMEM;
- 
--- 
-2.37.1
+Perhaps naming these -M series with 'm' suffix is better.
+
+> 
+> These chips also happen to conflict with W25QxxRV-M chips. Is this
+> support for these new chips that you are targeting?
+
+I didn't use RV series now. w25q256jv/w25q512jv are tested on
+MediaTek's filogic platform.
+
+As winbond doesn't provide the actual contents of the SFDP table, I'm
+not sure if there's a way to distinguish between these two families.
+
+> 
+> > +			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ
+> > |
+> > +			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
+> > +	},
+> >  	{
+> >  		INFO("w25q512nwq", 0xef6020, 0, 64 * 1024, 1024,
+> >  			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ
+> > |
+> 
+> I would rather group them by family (ef60xx then ef70xx).
+
+It's OK.
+
+> 
+> Thanks,
+> Miquèl
 
