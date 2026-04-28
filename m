@@ -4,100 +4,101 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62DD7FF885A
-	for <u-boot@archiver.kernel.org>; Tue, 28 Apr 2026 18:14:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ABF21FF885A
+	for <u-boot@archiver.kernel.org>; Tue, 28 Apr 2026 18:14:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EE98B84679;
-	Tue, 28 Apr 2026 20:14:18 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 452D28469A;
+	Tue, 28 Apr 2026 20:14:52 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="A2y6fiAP";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="FblNJrqw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ABC8284688; Tue, 28 Apr 2026 20:14:17 +0200 (CEST)
-Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
- [IPv6:2a00:1450:4864:20::536])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id ABCC8846A8; Tue, 28 Apr 2026 20:14:51 +0200 (CEST)
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0954684664
- for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 20:14:15 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x536.google.com with SMTP id
- 4fb4d7f45d1cf-672645dbfeaso13215162a12.0
- for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 11:14:15 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1777400054; cv=none;
- d=google.com; s=arc-20240605;
- b=UsORa/Z7HDfN9hgB9FPLc1oj8tb5oG74lhqdRfVf/htRcZEEUdrINVdgX741RsCdkD
- wyLUHRjDMdAjGCc6Ov+A3r91eyFW+FVmOVBFXKC257Bu5Pom8DD0n8/6WAR5nL+4Pfmm
- C+dP3NKeS6+cBXuNUY/zFOAFushZoMeAehd5edQ7GXpZsJr7GS/cwgSQ8fQPj/8gkZJx
- PKbupEhW+NA6Tju3TUUkz/eD8rgHM+cakh8sa3qZj2hSnF1/QJJoSnC2LNsybxYv7XoP
- 2bn2ynDrvs/fHvjOx7dfSq42q2Hvdwhsg0AIs52IMWkns8VCBdsruA4K4TPFCgOkXYSf
- h1DQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=IjuMrMk+Es2D4rI3g/XLy2C9tkt7bvV7qr0d+3jzFkE=;
- fh=GYIekQEhESPWanXHuipF/cx0w9AeOdHDaa7vPtUoRvA=;
- b=NkaUz8yQxnl58dn0trX2E+5wjMHt2wopz209rqqsSc1kvalNaftJ9pzSk/usGwIljw
- 6AWQizHpwNbuGId6YJ8zY2QfM30yWNNaZoomBQp+1z96g8btwFuT3cNcI7W63gxB+WfK
- qCeMAvx9Ubg5cFu75JsH/3RJtLui1XIMPdW54DVswruxnkWhFkKgVghQfMsH4IGZwc4Q
- UkislvG72R/VklGtfCPqIlpRBG2YSgkkecz9KTLZHi4BMNK/XfZexSGX0pGzX74P7Edj
- UPiYNY7MD2ClnUwq0GNoBeQrqQKZK7oZbZjuXJfpw70WgXx94qi4UtHtK3QI0FeQLEpg
- q4lg==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1777400054; x=1778004854; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=IjuMrMk+Es2D4rI3g/XLy2C9tkt7bvV7qr0d+3jzFkE=;
- b=A2y6fiAPvocGohEtOs5syXu0JZwH6xhEe1RCm29FtaHTGZNWTF2KgTpxZRs1CVOuIr
- iKmPUvxskm7i0MhuwpLju6eFrTrUJ/8ep3TtnIRuYCOOmbQCcCKLRCJalc/p8JFq0gi+
- 1bz0T8Qxs2+4BM2G6y0E7vkQM2O8UrlFd+sCg=
+ by phobos.denx.de (Postfix) with ESMTPS id 73F8B8469A
+ for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 20:14:48 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
+ [209.85.128.70])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 110233F858
+ for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 18:14:48 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20251003; t=1777400088;
+ bh=2+IW5ZWV6XpKdl13CFBbC71aJkeTADsVoKbXwUCbhEQ=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=FblNJrqwt+p3LUKyWha3YsZ2boWm+k7CuHwuvPfBBG2+DjFj4m3e2oIBsmnSvOzDG
+ bc5oUCxhr+aM1e3XaOXpd/AXCzQXY8mim8v4yCx7MGdiR/EY40GC1gOyxlc1s/YokB
+ snyIjLupfpgJSVpsxksY2K6+DD5SFYtb4L/WLtHgg8c5/jQIS83Q/69xzxOiGouycd
+ OXPkMgG7/fSXXwx/QKz5jGAZwrEzyB/mKmOQOOwOp28j8PIroJjzVg0o+KjZBdKRju
+ r67TQiVxyleZtK8WbG4hI8o7dBdWX6OpuP1x8LcXeUi0I4UDqN83hMW32iBFu+7ol2
+ UYCiuK5d9VGFnw3a65GrYYn+Wii4if3X4KS4oKTZiHiofCaxVg+CRhFuWjSut8tiqE
+ knTg3rM1+bssLDsNIAyMoUgMVGH+H1yFHBvnR4VUNBMVlS8Wp77obNCK0yu7lGwu+z
+ flexY+frLCwJp8rBI1eUgnZL6T6673W+0bsbtp7Mjqn80S7oe7jX06xBa8juW/5XH7
+ i4zUsuJ5lb5R4SNfr5Xv2weofKCJjrYkDYTTwqNWeBRL5YW/bbYC5t8vklVWW6DrSg
+ 1NqEBJiMLZE5o8i0T/5XEbh/vel6MiOweGZr0gZbR/oKUqtYfyW9Iczm+nQsrWGJdU
+ jgxpr+FdlwF7fj2zb12XOrEk=
+Received: by mail-wm1-f70.google.com with SMTP id
+ 5b1f17b1804b1-488c0120047so71078685e9.0
+ for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 11:14:48 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777400054; x=1778004854;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=1e100.net; s=20251104; t=1777400087; x=1778004887;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=IjuMrMk+Es2D4rI3g/XLy2C9tkt7bvV7qr0d+3jzFkE=;
- b=nzVz17mPAW/0mNLCQ9236XvpRw+usVFw0q5TeGmuNsr6nvIZkyeViSxV5fXjz0C0TQ
- yscpHLJBZZ3UB4RRo7Bs8kCNKWpRG9ahAl03k7d+KguMmtBaGugv6JH+MvBKyd3XDlMo
- IizHVaMEy40k8TjTiY5rVGjy5gOjJ2DiZPP9kAz07uggz3B8uN4DxsEk+r55D1i/nVm4
- oxJuhigOg06bP0EfFWTodstVDlvc1FWeTKnKhVQa43huF5bRbiRqanVQfpqaNp15wtY+
- mFOxrVwsGr9HgWqiLTjxjykk/rVXQk3KdI7MPeR7E6qk51X6ekYqPn3dgbCxjJZc9nve
- 5C0A==
-X-Gm-Message-State: AOJu0YwYHhETenHLZ2ESvefyqUmDy3pkdLDB1Q0q2mH+HoaJfcxntHMs
- ne9ChspGdPnVsFUnwVTzkZ6HVbLFqlR8nVtlarpj4uddc4LSrtOLNNKxJ5tQUGsueLaYh8oymFE
- YzHSnEE/Gx4XEvbjCHsU5SLqwGIXd9XkdRcn5RR7+
-X-Gm-Gg: AeBDievua8nDhOrD5dk9XOO3Q1bSMzLwRgfRWgYMD7hzAPMoTrrwBwCtmUY3fZD+YnK
- 97I14V2i2Yo6k2mvgX/x0AshLgLIiLInLfVZd7gX8uzqjSzJZj/ENjnoHCxBuJcfORnMFomUSEE
- 24nEApoEIjSeXYAk8XuDyUb/CwiLdfiMLmQnRPHZz1cievgvmDb+eqUWxdawpjVJdUfCN2p4Bws
- 08lt0NVBRrCnD2DgUZA0BzrDeWl1Au/bbZhBrm9IQNjd8zJSaw1vs7Co75On7EYLqTIBH5xAk7T
- wjU0aCNEaLv/5Lqk
-X-Received: by 2002:a17:907:c285:b0:ba4:a871:27de with SMTP id
- a640c23a62f3a-bb93c79d643mr32380366b.3.1777400054419; Tue, 28 Apr 2026
- 11:14:14 -0700 (PDT)
+ bh=2+IW5ZWV6XpKdl13CFBbC71aJkeTADsVoKbXwUCbhEQ=;
+ b=ARblSOJbdyLsBvCggZrlmxZ87F40fHY28/O7XYdYt0AfrsJ521sdI0arQNNXokzhuw
+ mW96WhTpQJ8OS2x5Quik9SOaBFJ7wqzPxCi1SFuaUW1wcivhEMHWwohgLUvtEKB/qi36
+ HXxXjaGy9bQWYEdfatJu7fas/KGfTZ3IIeeI2PyLXrfMY/CXcEe2JtSvr+LA8jogm+WR
+ aToRSTjmF0TTRKSDM0goiuBKJ3FH1YJM5rVGCyqH2wFIwf5bOl0K0RwnB15ioUCo1RtQ
+ pMvEmhvLe+1wNKeoY6nrXOcB3x+vMvYOUXn3jirM7MGojR8M3OmZlP3t96l0mh5GNUrP
+ OJSg==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ+bfvID1OiXy5uTcr7ItLKyt3JVaC9ZpZTKUxBMd0Eh6ktranmq/XkpGM9dhY5bh+NlluatkaY=@lists.denx.de
+X-Gm-Message-State: AOJu0YxdVIYJU+ic+v4V6wpUWEnhgALMMwcDhxyOdxrUJGB812YG0SxD
+ YXWhfetOm3kYjt/Fyceijov2ONBaqwRlUyp2HuNWJqq4zS38e8fkSkJN9Hi96pg299RqTboB0++
+ JdGj/Sj7iQ5SRi9qVdvkJi+sqAvzS7ou49kPxuP/RVhGpLfyCr0HH5z59HqfH+GfrcetreUrYC+
+ f9YCM=
+X-Gm-Gg: AeBDiesn5If7t5kQBpwNfSIUMjR2DjlPIiRumpEetoWpqrTwVf9UWxyNbn4PeSGdmQN
+ QJHxS4g6viRQ8PTvGMtxcUBkvTnFcZd4jdm2vbqQhrAyL0MPjP1u3evMH7WdhIs+IuujTVHVVCV
+ h/AivA662jMLzyulcupEbtDTX90LQz+qfytrcLiezdiMyQE2aIY6DfIhA62eAhspwO7LLUE9lx1
+ frAOLqroAyRf3/Y/u3b5LbPu8/6dynRXnbTiq+M5wrO1XBhRzVVnE6X7wryhG4IPF5Rt6xJyf/q
+ KSYVqi35vEYOvlekDOO9NyWOPWGQHisUN8wx9/wLyMAmedizKJd1z6anpHTTggKhT+mpTvgMKe+
+ wzYO0eKdsffaUn7B7uXWwShwIq47BWpyWFMkGvfhhwuo2yp9juekxebl2qOi/NWbIyTa1Mj2HPJ
+ muLfARd2f63R+R7Qt+1W5HmQfV+cazjnlSYZAwo+5wxqGNHskd5XEGvsyOSByq
+X-Received: by 2002:a05:600c:524e:b0:488:ac01:72b6 with SMTP id
+ 5b1f17b1804b1-48a77b2409fmr70000885e9.21.1777400087491; 
+ Tue, 28 Apr 2026 11:14:47 -0700 (PDT)
+X-Received: by 2002:a05:600c:524e:b0:488:ac01:72b6 with SMTP id
+ 5b1f17b1804b1-48a77b2409fmr70000565e9.21.1777400087044; 
+ Tue, 28 Apr 2026 11:14:47 -0700 (PDT)
+Received: from workstation5 (ip-176-199-115-125.um44.pools.vodafone-ip.de.
+ [176.199.115.125]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-4463d02f35csm9551802f8f.11.2026.04.28.11.14.46
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 28 Apr 2026 11:14:46 -0700 (PDT)
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Jerome Forissier <jerome.forissier@arm.com>
+Cc: Tom Rini <trini@konsulko.com>, Sughosh Ganu <sughosh.ganu@arm.com>,
+ Tim Harvey <tharvey@gateworks.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH 0/3] net: lwip/wget: correct diagnostic output
+Date: Tue, 28 Apr 2026 20:14:31 +0200
+Message-ID: <20260428181434.179888-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
-References: <20260424173151.371134-1-harsimransingh.tungal@arm.com>
- <20260424173151.371134-12-harsimransingh.tungal@arm.com>
-In-Reply-To: <20260424173151.371134-12-harsimransingh.tungal@arm.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Tue, 28 Apr 2026 12:14:01 -0600
-X-Gm-Features: AVHnY4KudFVQfQyp4lV67OcdTU4mszn2qihVSYz6e8GBGKuvfReMl3ZMkPnaFmc
-Message-ID: <CAFLszThZM7CRO3shhMOMYTipehB7HS4GjfK0SadZCSzhdbLz5g@mail.gmail.com>
-Subject: Re: [PATCH 11/12] doc: bootefi: note two-phase runtime variables
- selftest
-To: harsimransingh.tungal@arm.com
-Cc: u-boot@lists.denx.de, Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>, 
- Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Hugues Kamba Mpiana <hugues.kambampiana@arm.com>, 
- Simon Glass <sjg@chromium.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -114,61 +115,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Harsimran,
+* Add a missing linefeed
+* Don't print content size twice
+* Don't print progress bar when silent
 
-On 2026-04-24T17:31:50, Harsimran Singh Tungal
-<harsimransingh.tungal@arm.com> wrote:
-> doc: bootefi: note two-phase runtime variables selftest
->
-> Explain how the runtime variable selftest runs in two phases
->
-> Document that the "variables at runtime" selftest runs in two
-> phases when CONFIG_EFI_RT_VOLATILE_STORE is not enabled, and
-> show how to select it with efi_selftest.
->
-> Signed-off-by: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
->
-> doc/usage/cmd/bootefi.rst | 12 ++++++++++++
->  1 file changed, 12 insertions(+)
+Heinrich Schuchardt (3):
+  net: lwip/wget: missing linefeed in diagnostic output
+  net: lwip/wget: don't print content size twice
+  net: lwip/wget: don't print progress bar when silent
 
-> diff --git a/doc/usage/cmd/bootefi.rst b/doc/usage/cmd/bootefi.rst
-> @@ -167,6 +177,8 @@ To use the *bootefi* command you must specify CONFIG_CMD_BOOTEFI=y.
->  The *bootefi bootmgr* sub-command requries CMD_BOOTEFI_BOOTMGR=y.
->  The *bootefi hello* sub-command requries CMD_BOOTEFI_HELLO=y.
->  The *bootefi selftest* sub-command depends on CMD_BOOTEFI_SELFTEST=y.
-> +The *variables at runtime* selftest runs in two phases when
-> +CONFIG\_EFI\_RT\_VOLATILE\_STORE is not enabled.
+ net/lwip/wget.c | 18 +++++++++---------
+ 1 file changed, 9 insertions(+), 9 deletions(-)
 
-Please drop this addition. It duplicates what you wrote a few lines
-above and the Configuration section is for build-time CONFIG_ options,
-not runtime test behaviour. Also the backslash-escaped underscores are
-not needed in rST and produce inconsistent rendering compared to the
-plain CONFIG_EFI_RT_VOLATILE_STORE used in the paragraph above.
+-- 
+2.53.0
 
-> diff --git a/doc/usage/cmd/bootefi.rst b/doc/usage/cmd/bootefi.rst
-> @@ -160,6 +160,16 @@ environment variable to match one of the listed identifiers
->  Some of the tests execute the ExitBootServices() UEFI boot service and will not
->  return to the command line but require a board reset.
->
-> +The test *variables at runtime* runs in two phases when
-> +CONFIG_EFI_RT_VOLATILE_STORE is not enabled. Run it once to create a
-> +runtime-accessible variable in non-volatile storage, reboot, then run it
-> +again to validate, append, and delete that variable.
-
-It would help to also say what happens when
-CONFIG_EFI_RT_VOLATILE_STORE is enabled (single phase, no reboot
-needed) so readers know which path applies to their build. A one-line
-note is enough.
-
->     Explain how the runtime variable selftest runs in two phases
->
->     Document that the "variables at runtime" selftest runs in two
->     phases when CONFIG_EFI_RT_VOLATILE_STORE is not enabled, and
->     show how to select it with efi_selftest.
-
-The first paragraph just restates the subject - please drop it and
-lead with the motivation, then describe what the patch adds. Lines are
-also wrapping well short of 72 columns.
-
-Regards,
-Simon
