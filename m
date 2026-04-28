@@ -4,109 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3024BFF8868
-	for <u-boot@archiver.kernel.org>; Tue, 28 Apr 2026 15:54:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 779FFFF885A
+	for <u-boot@archiver.kernel.org>; Tue, 28 Apr 2026 15:56:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AA252845CE;
-	Tue, 28 Apr 2026 17:54:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 2773C84605;
+	Tue, 28 Apr 2026 17:56:03 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20251104.gappssmtp.com header.i=@baylibre-com.20251104.gappssmtp.com header.b="N082F+G5";
+	dkim=pass (2048-bit key; unprotected) header.d=0leil.net header.i=@0leil.net header.b="Sfz3M2c/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3AEDC845D0; Tue, 28 Apr 2026 17:54:47 +0200 (CEST)
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
- [IPv6:2a00:1450:4864:20::633])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 63CF88460E; Tue, 28 Apr 2026 17:55:58 +0200 (CEST)
+Received: from smtp-42ab.mail.infomaniak.ch (smtp-42ab.mail.infomaniak.ch
+ [84.16.66.171])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0DF00843D4
- for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 17:54:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 354CF845CE
+ for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 17:55:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=reject dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jstephan@baylibre.com
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-ba7fd666666so1080904266b.3
- for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 08:54:44 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1777391684; cv=none;
- d=google.com; s=arc-20240605;
- b=gJSKAWuYXC6uOqjNxK2mOP1xETKpZ8kG3sw0DM+QaJZXsO9+SUvdU4YSZbMtrf5Npy
- tPY3EYh4OGHhz+52Tqiumh4KZCrNDvJF45tj8azyRO570MeCo0lPlSWYqetecVPjXUBe
- PIb5BCrygsyKfvlUeyXuYi/iJeg7Pbpr1Crbb8srQRPLT805r7ibCxMur7aQfQSm8vos
- Gb7dXjn2ljh40sLcpwT/LxSCiDVokhQoEAGLD9j+BudbUyfbK/CuMPyVfwodW5DYTUyj
- W0qDwT2QbdJ1FTYbOmuG3cU8Wbb6chl3WvYwfYgl2ZST0Vz2jt7KPtTj0migLQ6Mldin
- +CCQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=8K+Hc0awZr+cNu8bSvq843Da76UkhTjbLUSVzMIygYc=;
- fh=QWtOvaSB67uDq/43mmxYDdb7Xf1X8DBG9Ym1wbIURTA=;
- b=a3wHYrGFrVU48KuYbWWdIjIunfhh9XwpRXt2pGzu11f2Affzzm53O1WXx+dpni2wKK
- 5wtxY2UOOXYMojmfujLaWjyjIVt4SBD4T5ZYZ5RMv8TatAtI3aJEcQEuLsTAQM0ttUlR
- oIb3dkQ1Z5IfqZ8q1uH4RyPmukUKrI8Kv/QqmXMq6kHaoVja0kaR4XXoICvRjY6Ec1uM
- XkDs9KkNIcM+XffEDVFnhWZb3ACtcz4UOWnAc1MIj6UP12WGJDjrJ17/LGsr44IvGE7g
- Au/n1NFT9LB6TBPZRtmGnWI/sARNxn9blHNcOGlWP6eUR9+b3qdfj5jNUHoFf7bpYGdc
- KSfA==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20251104.gappssmtp.com; s=20251104; t=1777391684; x=1777996484;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=8K+Hc0awZr+cNu8bSvq843Da76UkhTjbLUSVzMIygYc=;
- b=N082F+G5MC1+uxcHQgXZdK71moqd/b0g0J6+4TUm5k+4mtkRwlRRSmZPTMdOlq20HY
- ySGxxmq8Tbh/KySyxiohHOuYOX68wn86SXY8q4OcIcy8rGOjQbibzVRSATfqcjqzclyT
- upWkWvCd5RGAnO2TTgANgfEE56cZNFvo7BsjGKQX9E2pz/6/EMb6Es3jxLQ4LT/WdSx9
- cRN6UlVkoyuUdMQX+6QlECuIMNVnSkXzWR1fIxMPnCQVTfsMex1dxmyf6pG2JGsBk50y
- ZJBETp0CzLDSY7MRaqXD6J+OQFIantD5fN2DkJKdInp+MeAzd+L3bKcSR3OrYBgrBHO7
- 5xRg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777391684; x=1777996484;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=8K+Hc0awZr+cNu8bSvq843Da76UkhTjbLUSVzMIygYc=;
- b=bPUCcaYrk5Nkc4HLZc/qkaihwOkmml0/WYC8q/h1batyxnQjRemTUg8smV0zAZFazV
- i6gCLbHAezJEoNQhYygfIliMbYaViQJOEwH+fkz754+MkNFwTC3whheQ1etxIevsinrb
- hOFTSX/TR5E+H40WPcf1KWhjzxjuttAn/PKAHYDTxwT3SFaSyfZm7GwUK9XKDVA0xY8Y
- XaLNoBLLcZljEvconEceiQUgTkJuZl06xfKErrCxZlnaSRf5rkReI4INOTuYLHlo96Dp
- Ur5NS3uVxM1T27zKUT/tllSDAohMt7vOXviplYnM0E1IBukRLqoKalQvvcaey3mDaYQj
- jCMg==
-X-Forwarded-Encrypted: i=1;
- AFNElJ+DXCV/F6vYd1tfdlJ3dGUO+hqDdipiDvtA3SIqouRWAHyEfgyGCOXfK3ru/W1Xc4RjI0oDGPw=@lists.denx.de
-X-Gm-Message-State: AOJu0YxXYkfz/Xyt8r7ax5ZHtdFaMl+GO3ZgzP6/eCXxOZS08srHHCyJ
- q8/UnLhWhrrkTrH46lh9HimoTe/0+4P8GsLyRod3gxqA4SCUN7y0rMpPzl1gxI6NQNkAWticE0i
- 8+SQbnAPK0pRyrjHuvcK0yiLqX7ediKnQ2hk1A6RT2w==
-X-Gm-Gg: AeBDiesWUrwHZcx2sT9V7BQ25mkR6tF1WCAWAnkKBCtZBxqoOyYEzNfzG4Aq8afWwFo
- pd+zLxhgJAJ3c/NKvUMJjUXDfeoZuoAbdTVi37U+EdTObkEUoNg+DdEcHn7lbLZFyKjYcsgHoss
- JQBrS/Cp/7Xr+nMI7GxNoW1o9CP5b+DBROI2u93TizD7bs6UZhWeCgaeG4RQJYMm9OyRgQ/RBkT
- s3feb8rjz7YlQnSC8JnyohougA3FzwyJL9SfFULz6HzjVmaetKpD8OFF7uIb3NcYLUG6mll/B6A
- /oGkPfLgDeq1BMAkvavSx3ATYzjAIyyi1MHIpgj/dbgvEXcLjlsDiqX1oMug4YaqerPJOTnVhQd
- p1TYiOkuDh07T4Dhn45b9MPXGrU5kOGP93VTf
-X-Received: by 2002:a17:906:7304:b0:baa:f6c9:51b2 with SMTP id
- a640c23a62f3a-bb80443c9bcmr248114366b.23.1777391683358; Tue, 28 Apr 2026
- 08:54:43 -0700 (PDT)
+ spf=pass smtp.mailfrom=foss+uboot@0leil.net
+Received: from smtp-4-0001.mail.infomaniak.ch (smtp-4-0001.mail.infomaniak.ch
+ [10.7.10.108])
+ by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4g4lQg4n1xzGL8;
+ Tue, 28 Apr 2026 17:55:55 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=0leil.net;
+ s=20231125; t=1777391755;
+ bh=yGLHFYVVI/ci2d53+5V8GC3iDdL2yJnX+IXWBfgxe34=;
+ h=From:Date:Subject:To:Cc:From;
+ b=Sfz3M2c/dVOaYzUV5hMKcQ2ICfWscrOJ+NOcorfBwCzcnmvAkCdNlxOYRnTqcXRU0
+ LOByMEP0ulsgbMNXiKuXqmyOamIv8DxHK5ycZQUk7o1YXQfbLlfJLV/zOoIZ2NItOI
+ w9sSTLWnSp7srHZyP5RY+g2/YzAxLGmjuEEVGzCdL2YoSw7la0ek2AH/2gA0FYKuHd
+ Rh+RH7dpzXFF2EIT6ghUxN1JGM3MTbUqSJVsBZ33IGQbKj5U80+/MYGLMagPskrKZG
+ yn8FUzocV2PLEl7p3rE7SA6oZzvajya26OOM1ftYm2uN4W9YM5Wm32PkwUv5pXBvae
+ cwLGw29TKI7+A==
+Received: from unknown by smtp-4-0001.mail.infomaniak.ch (Postfix) with ESMTPA
+ id 4g4lQf2FKTzPRH; Tue, 28 Apr 2026 17:55:54 +0200 (CEST)
+From: Quentin Schulz <foss+uboot@0leil.net>
+Date: Tue, 28 Apr 2026 17:55:42 +0200
+Subject: [PATCH] test: wget: validate URI for lwIP
 MIME-Version: 1.0
-References: <20260406-mtk-spi-nor-improvements-v1-0-66f675cbbd3e@baylibre.com>
- <20260406-mtk-spi-nor-improvements-v1-7-66f675cbbd3e@baylibre.com>
-In-Reply-To: <20260406-mtk-spi-nor-improvements-v1-7-66f675cbbd3e@baylibre.com>
-From: Julien Stephan <jstephan@baylibre.com>
-Date: Tue, 28 Apr 2026 17:54:28 +0200
-X-Gm-Features: AVHnY4JiPtI4b6uF8TSt30mpeB2WnkhIFgkDXGq-YYFHg3cNb0zUze8o6IPHjF4
-Message-ID: <CAEHHSvbhrO2QuF8coX-dzXo9M9Z3z3i-9ph75daKbAkoSeTs5A@mail.gmail.com>
-Subject: Re: [PATCH 7/8] spi: mtk_snor: fix zeroed data in DMA read bounce path
-To: David Lechner <dlechner@baylibre.com>
-Cc: Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
- Chunfeng Yun <chunfeng.yun@mediatek.com>, 
- Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- Tom Rini <trini@konsulko.com>, 
- u-boot@lists.denx.de, Macpaul Lin <macpaul.lin@mediatek.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260428-wget-test-lwip-v1-1-f611cea0c5ee@cherry.de>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMywqDMBBG4VeRWTugQSX2VYoLjb92SrGSiRcQ3
+ 920Lr/FOQcpvEDpkRzksYrKd4rI04Tcq51GsPTRZDJTZYWxvI0IHKCBP5vMXCO3rS1dZ4aaYjR
+ 7DLL/h8/mti7dGy78LnSeF6qnxG9yAAAA
+X-Change-ID: 20260428-wget-test-lwip-9e18a85cb2f9
+To: u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Simon Glass <sjg@chromium.org>, Peter Robinson <pbrobinson@gmail.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Dinesh Maniyam <dinesh.maniyam@altera.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Sughosh Ganu <sughosh.ganu@arm.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>
+X-Mailer: b4 0.15-dev-47773
+X-Infomaniak-Routing: alpha
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -123,72 +79,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Le lun. 6 avr. 2026 =C3=A0 22:14, David Lechner <dlechner@baylibre.com> a =
-=C3=A9crit :
->
-> From: Macpaul Lin <macpaul.lin@mediatek.com>
->
-> Implement proper bounce buffer handling for the read path to fix zeroed
-> data when using DMA. In the bounce path, map the bounce buffer with
-> dma_map_single(), perform DMA using bounce_dma, then copy data from the
-> bounce buffer to the user buffer, and finally unmap with
-> dma_unmap_single().
->
-> Signed-off-by: Macpaul Lin <macpaul.lin@mediatek.com>
-> Signed-off-by: David Lechner <dlechner@baylibre.com>
-> ---
->  drivers/spi/mtk_snor.c | 17 ++++++++++++++---
->  1 file changed, 14 insertions(+), 3 deletions(-)
->
-> diff --git a/drivers/spi/mtk_snor.c b/drivers/spi/mtk_snor.c
-> index 649bca5716c..21ac115e3c3 100644
-> --- a/drivers/spi/mtk_snor.c
-> +++ b/drivers/spi/mtk_snor.c
-> @@ -274,6 +274,7 @@ static int mtk_snor_read_bounce(struct mtk_snor_priv =
-*priv,
->  {
->         unsigned int rdlen;
->         int ret;
-> +       dma_addr_t bounce_dma;
->
->         if (op->data.nbytes & MTK_NOR_DMA_ALIGN_MASK)
->                 rdlen =3D (op->data.nbytes + MTK_NOR_DMA_ALIGN) &
-> @@ -281,11 +282,21 @@ static int mtk_snor_read_bounce(struct mtk_snor_pri=
-v *priv,
->         else
->                 rdlen =3D op->data.nbytes;
->
-> -       ret =3D mtk_snor_dma_exec(priv, op->addr.val, rdlen,
-> -                               (dma_addr_t)priv->buffer);
-> +       /* Map bounce buffer for DMA */
-> +       bounce_dma =3D dma_map_single(priv->buffer, rdlen, DMA_FROM_DEVIC=
-E);
-> +       if (dma_mapping_error(priv->dev, bounce_dma)) {this
+From: Quentin Schulz <quentin.schulz@cherry.de>
 
-nitpick: do we really need this?
-In u-boot dma_mapping_error is defined as a stub always returning 0...
-unless this patch is a direct port from a kernel patch?
+We've had wget support in lwIP for almost a year now, so let's do *some*
+checks in the form of validating URIs.
 
+The other test in test/cmd/wget.c currently requires structures only
+defined for CONFIG_NET_LEGACY so it's left out for now until someone
+ports the test to lwIP.
 
-> +               dev_err(priv->dev, "bounce buffer dma map failed\n");
-> +               return -EINVAL;
-> +       }
->
-> -       if (!ret)
-> +       ret =3D mtk_snor_dma_exec(priv, op->addr.val, rdlen, bounce_dma);
-> +       /* Ensure DMA writes are visible to CPU and copy the requested by=
-tes */
-> +       if (!ret) {
-> +               /* Synchronize cached data to CPU visible memory if neede=
-d */
->                 memcpy(op->data.buf.in, priv->buffer, op->data.nbytes);
-> +       }
-> +       /* Unmap bounce buffer regardless of success/failure */
-> +       dma_unmap_single(bounce_dma, rdlen, DMA_FROM_DEVICE);
->
->         return ret;
->  }
->
-> --
-> 2.43.0
->
+This was tested with:
+
+./test/py/test.py --bd sandbox64_lwip --build -k net_test_wget
+
+Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
+---
+ test/cmd/Makefile | 2 --
+ test/cmd/wget.c   | 2 ++
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/test/cmd/Makefile b/test/cmd/Makefile
+index 5f2815b1bb6..28bb8a82ca4 100644
+--- a/test/cmd/Makefile
++++ b/test/cmd/Makefile
+@@ -39,9 +39,7 @@ obj-$(CONFIG_CMD_PWM) += pwm.o
+ obj-$(CONFIG_CMD_READ) += rw.o
+ obj-$(CONFIG_CMD_SETEXPR) += setexpr.o
+ obj-$(CONFIG_CMD_TEMPERATURE) += temperature.o
+-ifdef CONFIG_NET_LEGACY
+ obj-$(CONFIG_CMD_WGET) += wget.o
+-endif
+ obj-$(CONFIG_ARM_FFA_TRANSPORT) += armffa.o
+ endif
+ obj-$(CONFIG_CMD_SPAWN) += spawn.o
+diff --git a/test/cmd/wget.c b/test/cmd/wget.c
+index 1005392b952..15c2a854e09 100644
+--- a/test/cmd/wget.c
++++ b/test/cmd/wget.c
+@@ -23,6 +23,7 @@
+ #include <test/test.h>
+ #include <test/ut.h>
+ 
++#if CONFIG_IS_ENABLED(NET_LEGACY)
+ #define SHIFT_TO_TCPHDRLEN_FIELD(x) ((x) << 4)
+ #define LEN_B_TO_DW(x) ((x) >> 2)
+ #define GET_TCP_HDR_LEN_IN_BYTES(x) ((x) >> 2)
+@@ -241,6 +242,7 @@ static int net_test_wget(struct unit_test_state *uts)
+ 	return 0;
+ }
+ CMD_TEST(net_test_wget, UTF_CONSOLE);
++#endif
+ 
+ static int net_test_wget_uri_validate(struct unit_test_state *uts)
+ {
+
+---
+base-commit: 4433253ecf2041f9362a763bb6cb79960921ac7e
+change-id: 20260428-wget-test-lwip-9e18a85cb2f9
+
+Best regards,
+--  
+Quentin Schulz <quentin.schulz@cherry.de>
+
