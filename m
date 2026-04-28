@@ -4,101 +4,101 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44F50FF885A
-	for <u-boot@archiver.kernel.org>; Tue, 28 Apr 2026 20:42:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E49AFF886D
+	for <u-boot@archiver.kernel.org>; Tue, 28 Apr 2026 20:43:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CC7B58466E;
-	Tue, 28 Apr 2026 22:42:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 1FB3E84688;
+	Tue, 28 Apr 2026 22:43:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20251104.gappssmtp.com header.i=@baylibre-com.20251104.gappssmtp.com header.b="HiVLueII";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Huh0XK5D";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7B81384671; Tue, 28 Apr 2026 22:42:37 +0200 (CEST)
-Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
- [IPv6:2607:f8b0:4864:20::32c])
+ id C7DA68468B; Tue, 28 Apr 2026 22:43:10 +0200 (CEST)
+Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
+ [IPv6:2a00:1450:4864:20::534])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E78E48466D
- for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 22:42:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 26B158466E
+ for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 22:43:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dlechner@baylibre.com
-Received: by mail-ot1-x32c.google.com with SMTP id
- 46e09a7af769-7d55b97f358so7788814a34.3
- for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 13:42:33 -0700 (PDT)
+ spf=pass smtp.mailfrom=pbrobinson@gmail.com
+Received: by mail-ed1-x534.google.com with SMTP id
+ 4fb4d7f45d1cf-66ba9dfe83bso14767427a12.3
+ for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 13:43:08 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1777408987; cv=none;
+ d=google.com; s=arc-20240605;
+ b=V4suxI1LmGDC+7e5wwsgxApr6bngffPqn54nz/shJe4figgDfcnOZZZwUA7hJpD7dq
+ 1QRX3nADUz1QcfIGrWrjO5/ZmvfW0aputs3vhfp3/Uz9cAgsG14nWfpdohJ8FV1MwGuF
+ +2I3QKL5hLmLEyV0fCx9Wb44pPsZgvlY/kguKhn66oPv27nSthg8qc7Qc0/ipx9TzC3m
+ MrCov2QDhAYEkTYgu4M+BwaEafRElh83QbTKYp7JRNhRhRWmysmZ6fBCuds16GLisjiH
+ 2e+zg3/N1yx3+fK7ChoVo7eYQ3Gi7tSIk1ODrCzzEJ3TFfultvX6uK6H3RBPIUtBBzK5
+ BAsQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=SzQPJAto1TPH1bTUIFDc/FngCXm3rYxKk99qxyROXoo=;
+ fh=6TEP5omQ+5OtGMjwhgAtbJ923P4JwJkqB0/Q6RJ994w=;
+ b=WJr071zWC+7WwX8fHQFi088+2jZJvYH/Mwo4QNAMwOU6ostwHEeXGnUkjxfTew3LQn
+ 7gg6w7k9mzi+2ek5WaTy6ZYtBa7DkPaIkkTtIC6+yQilvbrdoZSYMs6b1rNJvNjuDEZy
+ B9jzB36N4/KQJFRaejUAdFR40j7nnkUg73XukrhHSEgOlhjg1YQMOedViTP0Yh/HwTof
+ EMPviyM7M3uuRAOrbcnBmhr90AVTKrfwU/UgDo4tvPAz/bNFF/AKy+hrdqXajV17xJsm
+ av1aKfJMacR7TWfgdCuQZQjq6Tfd7v3N7zxluyAdNlf/8XkWbyX3Y6oh0C4faXKLB7rp
+ qCdQ==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20251104.gappssmtp.com; s=20251104; t=1777408952; x=1778013752;
- darn=lists.denx.de; 
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:to:subject:user-agent:mime-version:date:message-id:from
- :to:cc:subject:date:message-id:reply-to;
- bh=hT/o/JLJ0ZE5zyDZIzqyrYDKMnHWGDQ+ucv4oZZMN8U=;
- b=HiVLueII0w9e5XLyzSSCa0X/4LoiDnFnRdtGm1tKRwZTvHcencVCBR84uk+rTMQAcd
- dAPglh1vqS+gYmz0t41jM0M3HevZOoBRmOpS0qC8p1YsqH6qDkbUsGUX3qvXFnJhQsJu
- VcBIovZhAHoypKKV3X5HieL+WrOhsBGztY1wNl1k9gCrit//GfgepxOYGY4hlfatrKDP
- YtSb2HFtm4H0WelPodvPlx1gKb8tlgPBK1lUsvfUrWexfArAAjYhDmgU2x2Rrj09kCAu
- ufDaNKbAVTHCoDD0M0+f/C9a6K2fP4MdfO98yojKwGKtxdHeejSF4bH52QQ92eBbXCT6
- GNkg==
+ d=gmail.com; s=20251104; t=1777408987; x=1778013787; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=SzQPJAto1TPH1bTUIFDc/FngCXm3rYxKk99qxyROXoo=;
+ b=Huh0XK5DI5oYulCvxS3GZAq8HW4uN6ybKctNoPAOTF9cLPwH8/oDQYHU0Cj4iVAabm
+ KohElwlGzibMFlc6ST9fZS1XDAtwVD5XQA6aLTlGKH9diV3ZtqgKcp3s6LzcM/5cbvRe
+ pxUGgrA6QlhtDtTEEQnX4BAFujkr8EPehFAdPv/icSoiMdPNjYh0MfUed7uHrJOrSOeO
+ lyOxa73IouAEIV44g8OgNCk+XtdZ+pevmN4CR+nLcteXUQ5NxQ+GkAAq+bVrabMo8Fb2
+ txjKSRCYhEPGkgLE+f3S8NHCN/H4mNQDXGjCbDIG5+BxUEz9jFRGBD89NT6wz6u7FPYH
+ gjiQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777408952; x=1778013752;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:to:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=hT/o/JLJ0ZE5zyDZIzqyrYDKMnHWGDQ+ucv4oZZMN8U=;
- b=Kx1tndfQaLNi8RvijPQkzhPQnl0NF7EPEjavmDI8+8ZLQaw8qclkB9KHjh6TRxCfLi
- cMxo+OKDBsP9lXr27RTmm7JILpLpkvHj/A34jqXCbdR04ux7LLT9y/H7iXk+dpWQnC56
- Kc5xR6I4pMz08XLV1XD1tdGc4irCwXH8l+j4MI3qxDw4loz+UzBLeucdp6h2cK3XDVlP
- IrgE5vvJMMxCz1KNC+69jlTbNKScsXwTqB2NBvdmSBaYwnGb6Nrq9Vb6KOP9O3LFV0SM
- GiosZn9typtVCLB8OfTtkwPl5gdPHLOFXDVFZ4zvMKJkSotSebWWyEoC7xUBzoxI/6e1
- UbIw==
-X-Forwarded-Encrypted: i=1;
- AFNElJ/okzZfOZMVoHnjJrqRw46Ib8tHwbVtS/49zAKNNF+VSEGGbmU8jy43Zwv1utE4fmMqPYtDMkQ=@lists.denx.de
-X-Gm-Message-State: AOJu0YwwbjQjZ9+0ct/kI0WCNDU3FCSnLQhK4l4h5DzzRuyYKdVsya3o
- bbEaPw+y+9jNZUQJxaRQ2TUuSzbC3znybMYtyuYyCQ+OpSFUWTb81fiS8OGl4SdGjgw=
-X-Gm-Gg: AeBDievEdRboRVX/+XcrxlrorXxa51TTnNeh6JhP3TTsXGcr7ixL3xp//BHU402+lV8
- t5e6VLQGIWUbegkkrEIpK7fWBGdsOlJWqGPKRhqyWOLdORjJEXSr0lclGw1T/isbh8Zq2XlwBi7
- 8BtxiMpi1gqEGDYzxu8TPQWfSVAgnoWA8KB924iCwoKO6ah/yBBZU24bj49DnS2s7WJxE4bwQ/s
- 1YWoegqNNvUiBRwMSDjfto9bwzL38Z6/hywI7oRR0sj6qzRqqWXrWC+5T4D1asQPhwndZz4z3dC
- +PFompiIFBWg1kfV0HsRO5crHP/GzPbuQ53kvVxFxWiIGy9o2ZAJP66nLuSH/wh5yfxleAq1GM5
- +Z3/M/hfxZApcBClsEubqkHdr3mR694OBFvnqRQcOb9dNDhgMylT3km8aHmagPeakOwiI9ZkVQY
- jCV4I8Ufkdxo1wfVtRpFDXMomUzfSoqSkpJpOEgX245mn91Pg/RT8/owcsIDFvcM6YZdXnVWW3p
- +QhOXiaz5q3
-X-Received: by 2002:a05:6830:4195:b0:7dc:db3c:1d82 with SMTP id
- 46e09a7af769-7dea65a47f4mr847757a34.10.1777408952441; 
- Tue, 28 Apr 2026 13:42:32 -0700 (PDT)
-Received: from ?IPV6:2600:8803:e7e4:500:1770:76c1:cfc7:3a0c?
- ([2600:8803:e7e4:500:1770:76c1:cfc7:3a0c])
- by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7deab242f01sm5618a34.24.2026.04.28.13.42.31
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 28 Apr 2026 13:42:31 -0700 (PDT)
-Message-ID: <5f524c23-d21f-49f6-8b26-778654c41a42@baylibre.com>
-Date: Tue, 28 Apr 2026 15:42:31 -0500
+ d=1e100.net; s=20251104; t=1777408987; x=1778013787;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=SzQPJAto1TPH1bTUIFDc/FngCXm3rYxKk99qxyROXoo=;
+ b=r2fMN2CgW3cluN7ZHeKQjRqTGQ16rVy4uDnldhP0P1vq1OhyFaVWORIfnHHaCVBduu
+ kaqTM+MRofnyGwlC8uJLFfo8HgEY98ccW9BZqmCjpSPUps1xDKC+ZSZXhNpbuLywCCWm
+ g8g/GBUgHRJhlM9cayVpqGO7Dd8tAp4n07F2DVdf9bNAEOMR5IHjBAvrtMmNcixgPtOj
+ lkyLgP8WCx74AHXTxdeFgK/38jZF28kegQZcJFYdy84MaoN1drjrSBnAHXWFrNidTM/j
+ csSnmay+hwB2+9eoFPZKtb2K4UyV8poo5XYkHXbJ+cp77WsF2oXTn13GH2yyYFHL7Lir
+ ymlw==
+X-Gm-Message-State: AOJu0YyKnCMURw3PEDBFqeXhdGZ2aZt7FbHW22FRV4rGxDIiBfLTHASl
+ VNZxmkki+tjSqAG6y68lx5Egj3ysSw4SgtxWE5ilN1fprX3eUTfxjp4UeRJ9+YebCYhwDgMxRXr
+ HswriOSkEnksWCVfdFwS8T2oPFYePY24=
+X-Gm-Gg: AeBDietrAn0dfGqO2A5AicuL1zVd10vgcSfEIQxq06lOtNSxzJ/8myHHo4RNRBIBZk0
+ pRZ6WINogLbQxzjb5zzDn0JIIlwvhtkVxVCGkdVJgkqJNuHe/9tRrnCo/OFDuYap6YW5rFYaFQ6
+ VYPgetlhNfBhGU+IVqJj7FJLdq+4kuWGIKVfdDNkVT2f1/SBSZ/qHVxVDhmidFGuDKsu3XPqING
+ 8254ZkhoBUq5k4Gm81dUkyO3paX966d6qpirrJM6Ueg6HfhwZdYqiKFEgmcNj3iAr3oDBsp7gtJ
+ aC7iEilS5FoHrwTVx9YK/tEUnErSSgVAxj0kGd8pPLjKOtaHyaMHD02N0xPic3gWM6AnXhIHbaZ
+ VurH493n95QpYggAGp0maypMlnpIYfIFGnB37MZGMjBLYxV8qie/vN4fBXOc=
+X-Received: by 2002:a05:6402:1e89:b0:66e:6ac4:2c01 with SMTP id
+ 4fb4d7f45d1cf-679bb03de71mr2559773a12.2.1777408987173; Tue, 28 Apr 2026
+ 13:43:07 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/6] pinctrl: airoha: add pin controller and gpio
- driver for AN7581 SoC
-To: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
- Tom Rini <trini@konsulko.com>, Christian Marangi <ansuelsmth@gmail.com>,
- Simon Glass <sjg@chromium.org>, Marek Vasut
- <marek.vasut+renesas@mailbox.org>, Peng Fan <peng.fan@nxp.com>,
- Sean Anderson <sean.anderson@linux.dev>, Yao Zi <me@ziyao.cc>,
- Michal Simek <michal.simek@amd.com>, Anis Chali <chalianis1@gmail.com>,
- u-boot@lists.denx.de, Lorenzo Bianconi <lorenzo@kernel.org>,
- Markus Gothe <markus.gothe@genexis.eu>,
- Matheus Sampaio Queiroga <srherobrine20@gmail.com>,
- Benjamin Larsson <benjamin.larsson@genexis.eu>
-References: <20260428153448.980150-1-mikhail.kshevetskiy@iopsys.eu>
- <20260428153448.980150-3-mikhail.kshevetskiy@iopsys.eu>
-Content-Language: en-US
-From: David Lechner <dlechner@baylibre.com>
-In-Reply-To: <20260428153448.980150-3-mikhail.kshevetskiy@iopsys.eu>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+References: <20260428183924.27824-1-beniaminsandu@gmail.com>
+In-Reply-To: <20260428183924.27824-1-beniaminsandu@gmail.com>
+From: Peter Robinson <pbrobinson@gmail.com>
+Date: Tue, 28 Apr 2026 21:42:54 +0100
+X-Gm-Features: AVHnY4LGcHA135ABTuLP8mGksILfwtGrQLOCOuNm5_oE9Eo5ACsqoSr5uaNVzhU
+Message-ID: <CALeDE9Mh=i5ssks7247BDSkHCnx38FPjfu_zpTMRUdQQAA9JBg@mail.gmail.com>
+Subject: Re: [PATCH] pci: add support for Broadcom BCM2712 SoC PCIe controller
+To: Beniamin Sandu <beniaminsandu@gmail.com>
+Cc: u-boot@lists.denx.de, mbrugger@suse.com, trini@konsulko.com, 
+ bmeng.cn@gmail.com, andrew.goodbody@linaro.org, 
+ marek.vasut+renesas@mailbox.org, pranav.sanwal@amd.com, 
+ michael@amarulasolutions.com, michal.simek@amd.com, ye.li@nxp.com
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -115,864 +115,780 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 4/28/26 10:34 AM, Mikhail Kshevetskiy wrote:
-> The driver based on official linux airoha pinctrl and gpio driver with
-> Matheus Sampaio Queiroga <srherobrine20@gmail.com> changes.
-> The changes:
->  * Separate code for each SoC and keep some of the functions in
->    common between them,
->  * Add pinctrl driver for EN7523 SoC.
+On Tue, 28 Apr 2026 at 19:39, Beniamin Sandu <beniaminsandu@gmail.com> wrote:
+>
+> Tested on a RPI5 with an M2 hat:
 
-These comments above seem more approiate for the cover letter.
-I can keep the cover letter in the git history when I pick this up if
-we think that is important.
+That's not an appropriate commit message.
 
-> 
-> The original Matheus Sampaio Queiroga driver can be taken from the repo:
->   https://sirherobrine23.com.br/airoha_an7523/kernel/commits/branch/airoha_an7523_pinctrl
-> 
-> This patch adds U-Boot pin controller and gpio driver for Airoha AN7581 SoC.
-> 
-> Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+> U-Boot> nvme scan
+> U-Boot> nvme info
+> Device 0: Vendor: 0x144d Rev: 2B2QKXG7 Prod: S7U5NU0YB20649N
+>             Type: Hard Disk
+>             Capacity: 953869.7 MB = 931.5 GB (1953525168 x 512)
+> U-Boot> nvme part
+>
+> Partition Map for nvme device 0  --   Partition Type: DOS
+>
+> Part    Start Sector    Num Sectors     UUID            Type
+>   1     8192            524288          a4192dbd-01     0c Boot
+> U-Boot> ls nvme 0:1 /
+>  31064576   Image
+>     78231   bcm2712-rpi-5-b.dtb
+>     78945   bcm2712-rpi-cm5-cm4io.dtb
+>     79011   bcm2712-rpi-cm5-cm5io.dtb
+>     78986   bcm2712-rpi-cm5l-cm4io.dtb
+>     79052   bcm2712-rpi-cm5l-cm5io.dtb
+>     52476   bootcode.bin
+>        90   cmdline.txt
+>      2592   config.txt
+>      7325   fixup.dat
+>      5456   fixup4.dat
+>      3230   fixup4cd.dat
+>      8449   fixup4db.dat
+>      8449   fixup4x.dat
+>      3230   fixup_cd.dat
+>     10294   fixup_db.dat
+>     10290   fixup_x.dat
+>    713432   kernel_2712.img
+>   2988128   start.elf
+>   2263968   start4.elf
+>    814140   start4cd.elf
+>   3762408   start4db.elf
+>   3011592   start4x.elf
+>    814140   start_cd.elf
+>   4834408   start_db.elf
+>   3735336   start_x.elf
+>             overlays/
+
+This is irrelevant for a commit message.
+
+> 26 file(s), 1 dir(s)
+>
+> Signed-off-by: Beniamin Sandu <beniaminsandu@gmail.com>
+
+Have you looked at or tested Thorsten's series, have you reached out
+to him on it?
+
 > ---
->  drivers/pinctrl/Kconfig                 |    1 +
->  drivers/pinctrl/Makefile                |    1 +
->  drivers/pinctrl/airoha/Kconfig          |   16 +
->  drivers/pinctrl/airoha/Makefile         |    5 +
->  drivers/pinctrl/airoha/airoha-common.h  |  513 +++++++++++
->  drivers/pinctrl/airoha/pinctrl-airoha.c |  691 +++++++++++++++
->  drivers/pinctrl/airoha/pinctrl-an7581.c | 1060 +++++++++++++++++++++++
-
-Let's split out an7581 support into a separate patch too and have
-this patch just be the core/shared code.
-
->  7 files changed, 2287 insertions(+)
->  create mode 100644 drivers/pinctrl/airoha/Kconfig
->  create mode 100644 drivers/pinctrl/airoha/Makefile
->  create mode 100644 drivers/pinctrl/airoha/airoha-common.h
->  create mode 100644 drivers/pinctrl/airoha/pinctrl-airoha.c
->  create mode 100644 drivers/pinctrl/airoha/pinctrl-an7581.c
-> 
-> diff --git a/drivers/pinctrl/Kconfig b/drivers/pinctrl/Kconfig
-> index 578edbf8168..46a95a1ab6b 100644
-> --- a/drivers/pinctrl/Kconfig
-> +++ b/drivers/pinctrl/Kconfig
-> @@ -405,6 +405,7 @@ config SPL_PINCTRL_ZYNQMP
->  
->  endif
->  
-> +source "drivers/pinctrl/airoha/Kconfig"
->  source "drivers/pinctrl/broadcom/Kconfig"
->  source "drivers/pinctrl/exynos/Kconfig"
->  source "drivers/pinctrl/intel/Kconfig"
-> diff --git a/drivers/pinctrl/Makefile b/drivers/pinctrl/Makefile
-> index 29fb9b484d0..b03e838ab39 100644
-> --- a/drivers/pinctrl/Makefile
-> +++ b/drivers/pinctrl/Makefile
-> @@ -24,6 +24,7 @@ obj-$(CONFIG_PINCTRL_PIC32)	+= pinctrl_pic32.o
->  obj-$(CONFIG_PINCTRL_EXYNOS)	+= exynos/
->  obj-$(CONFIG_PINCTRL_K210)	+= pinctrl-k210.o
->  obj-$(CONFIG_PINCTRL_MESON)	+= meson/
-> +obj-$(CONFIG_PINCTRL_AIROHA)	+= airoha/
-
-Alphabetical order?
-
->  obj-$(CONFIG_PINCTRL_MTK)	+= mediatek/
->  obj-$(CONFIG_PINCTRL_MSCC)	+= mscc/
->  obj-$(CONFIG_ARCH_MVEBU)	+= mvebu/
-> diff --git a/drivers/pinctrl/airoha/Kconfig b/drivers/pinctrl/airoha/Kconfig
+>  .../mach-bcm283x/include/mach/acpi/bcm2711.h  |   2 +-
+>  .../mach-bcm283x/include/mach/acpi/bcm2712.h  |  44 +++
+>  arch/arm/mach-bcm283x/init.c                  |  13 +-
+>  drivers/nvme/nvme.c                           |  62 +++-
+>  drivers/pci/Kconfig                           |   3 +-
+>  drivers/pci/pcie_brcmstb.c                    | 334 +++++++++++++++---
+>  6 files changed, 390 insertions(+), 68 deletions(-)
+>  create mode 100644 arch/arm/mach-bcm283x/include/mach/acpi/bcm2712.h
+>
+> diff --git a/arch/arm/mach-bcm283x/include/mach/acpi/bcm2711.h b/arch/arm/mach-bcm283x/include/mach/acpi/bcm2711.h
+> index a86875b1833..d9d3c2e3c9c 100644
+> --- a/arch/arm/mach-bcm283x/include/mach/acpi/bcm2711.h
+> +++ b/arch/arm/mach-bcm283x/include/mach/acpi/bcm2711.h
+> @@ -93,7 +93,7 @@
+>  #define PCIE_MEM_WIN0_LIMIT_HI(win)    \
+>          PCIE_MISC_CPU_2_PCIE_MEM_WIN0_LIMIT_HI + ((win) * 8)
+>
+> -#define PCIE_MISC_HARD_PCIE_HARD_DEBUG            0x4204
+> +#define PCIE_MISC_HARD_PCIE_HARD_DEBUG_BCM2711            0x4204
+>  #define  PCIE_HARD_DEBUG_SERDES_IDDQ_MASK         0x08000000
+>
+>  #define PCIE_INTR2_CPU_STATUS                 0x4300
+> diff --git a/arch/arm/mach-bcm283x/include/mach/acpi/bcm2712.h b/arch/arm/mach-bcm283x/include/mach/acpi/bcm2712.h
 > new file mode 100644
-> index 00000000000..986d23c2e3d
+> index 00000000000..ff675de1a07
 > --- /dev/null
-> +++ b/drivers/pinctrl/airoha/Kconfig
-> @@ -0,0 +1,16 @@
-> +# SPDX-License-Identifier: GPL-2.0-only
+> +++ b/arch/arm/mach-bcm283x/include/mach/acpi/bcm2712.h
+> @@ -0,0 +1,44 @@
+> +/* SPDX-License-Identifier: GPL-2.0 */
+> +/* Copyright (C) 2026, Beniamin Sandu <beniaminsandu@gmail.com */
 > +
-> +config PINCTRL_AIROHA
-> +	depends on ARCH_AIROHA
-> +	select PINCTRL_FULL
-> +	select PINCTRL_GENERIC
-> +	select PINMUX
-> +	select PINCONF
-> +	select REGMAP
-> +	select SYSCON
-> +	bool
+> +#ifndef BCM2712_H__
+> +#define BCM2712_H__
 > +
-> +config PINCTRL_AIROHA_AN7581
-> +	tristate "AN7581 pin controller and gpio driver"
-> +	depends on TARGET_AN7581
-> +	select PINCTRL_AIROHA
-> diff --git a/drivers/pinctrl/airoha/Makefile b/drivers/pinctrl/airoha/Makefile
-> new file mode 100644
-> index 00000000000..909bd9a04d9
-> --- /dev/null
-> +++ b/drivers/pinctrl/airoha/Makefile
-> @@ -0,0 +1,5 @@
-> +# SPDX-License-Identifier: GPL-2.0
+> +/* PCIe registers */
+> +#define PCIE_MISC_HARD_PCIE_HARD_DEBUG_BCM2712         0x4304
 > +
-> +obj-$(CONFIG_PINCTRL_AIROHA)		+= pinctrl-airoha.o
+> +#define PCIE_MISC_PCIE_CTRL                            0x4064
+> +#define PCIE_MISC_PCIE_CTRL_PERST_MASK                 0x4
 > +
-> +obj-$(CONFIG_PINCTRL_AIROHA_AN7581)	+= pinctrl-an7581.o
-> diff --git a/drivers/pinctrl/airoha/airoha-common.h b/drivers/pinctrl/airoha/airoha-common.h
-> new file mode 100644
-> index 00000000000..21bc9f50083
-> --- /dev/null
-> +++ b/drivers/pinctrl/airoha/airoha-common.h
-> @@ -0,0 +1,513 @@
-
-
-...
-
-> +#define AIROHA_PINCTRL_PHY_LED0(variant, gpio, mux_val, map_mask, map_val)	\
-
-Might look nicer to just use space instead of tab before \ on this first line.
-
-> +	{								\
-> +		.name = (gpio),						\
-> +		.regmap[0] = {						\
-> +			AIROHA_FUNC_MUX,				\
-> +			variant##_REG_GPIO_2ND_I2C_MODE,				\
-
-Indent of \ seems off on this one.
-
-> +			(mux_val),					\
-> +			(mux_val),					\
-> +		},							\
-> +		.regmap[1] = {						\
-> +			AIROHA_FUNC_MUX,				\
-> +			REG_LAN_LED0_MAPPING,				\
-> +			(map_mask),					\
-> +			(map_val),					\
-> +		},							\
-> +		.regmap_size = 2,					\
-> +	}
+> +#define PCIE_RC_PL_PHY_CTL_15                          0x184c
+> +#define PCIE_RC_PL_PHY_CTL_15_PM_CLK_PERIOD_MASK       0xff
 > +
-> +#define AIROHA_PINCTRL_PHY_LED1(variant, gpio, mux_val, map_mask, map_val)	\
-> +	{								\
-> +		.name = (gpio),						\
-> +		.regmap[0] = {						\
-> +			AIROHA_FUNC_MUX,				\
-> +			variant##_REG_GPIO_2ND_I2C_MODE,				\
-
-Same as 2 comments above.
-
-> +			(mux_val),					\
-> +			(mux_val),					\
-> +		},							\
-> +		.regmap[1] = {						\
-> +			AIROHA_FUNC_MUX,				\
-> +			REG_LAN_LED1_MAPPING,				\
-> +			(map_mask),					\
-> +			(map_val),					\
-> +		},							\
-> +		.regmap_size = 2,					\
-> +	}
+> +#define MISC_CTRL_PCIE_RCB_MPS_MODE_MASK               0x400
+> +#define MISC_CTRL_PCIE_RCB_64B_MODE_MASK               0x80
+> +#define MISC_CTRL_MAX_BURST_SIZE_512                   (BURST_SIZE_512 << 20)
+> +#define PCIE_MISC_RC_BAR_CONFIG_LO(idx) \
+> +               (PCIE_MISC_RC_BAR1_CONFIG_LO + 8 * ((idx) - 1))
+> +#define PCIE_MISC_UBUS_BAR_CONFIG_REMAP(idx)           (0x40ac + 8 * ((idx) - 1))
+> +#define UBUS_BAR_CONFIG_REMAP_ACCESS_EN                BIT(0)
 > +
-
-...
-
-> +enum airoha_pinctrl_confs_type {
-> +	AIROHA_PINCTRL_CONFS_PULLUP,
-> +	AIROHA_PINCTRL_CONFS_PULLDOWN,
-> +	AIROHA_PINCTRL_CONFS_DRIVE_E2,
-> +	AIROHA_PINCTRL_CONFS_DRIVE_E4,
-> +	AIROHA_PINCTRL_CONFS_PCIE_RST_OD,
+> +#define PCIE_MISC_RC_CONFIG_RETRY_TIMEOUT              0x405c
 > +
-> +	AIROHA_PINCTRL_CONFS_MAX,
-
-No comma on this one since it must always be last.
-
-> +};
+> +#define PCIE_MISC_CTRL_1                               0x40a0
+> +#define PCIE_MISC_CTRL_1_EN_VDM_QOS_CONTROL_MASK       BIT(5)
 > +
-> +struct airoha_pinctrl {
-> +	struct udevice *dev;
-> +	struct airoha_pinctrl_match_data *data;
+> +#define PCIE_MISC_UBUS_CTRL                            0x40a4
+> +#define UBUS_CTRL_PCIE_REPLY_ERR_DIS_MASK              BIT(13)
+> +#define UBUS_CTRL_PCIE_REPLY_DECERR_DIS_MASK           BIT(19)
 > +
-> +	struct regmap *chip_scu;
-> +	struct regmap *regmap;
+> +#define PCIE_MISC_UBUS_TIMEOUT                         0x40a8
 > +
-> +	struct airoha_pinctrl_gpiochip gpiochip;
-> +};
+> +#define PCIE_MISC_AXI_INTF_CTRL                                0x416c
+> +#define AXI_REQFIFO_EN_QOS_PROPAGATION                 BIT(7)
+> +#define AXI_DIS_QOS_GATING_IN_MASTER                   BIT(11)
+> +#define AXI_EN_QOS_UPDATE_TIMING_FIX                   BIT(12)
+> +#define AXI_EN_RCLK_QOS_ARRAY_FIX                      BIT(13)
+> +#define AXI_MASTER_MAX_OUTSTANDING_REQUESTS_MASK       0x3f
 > +
-> +struct airoha_pinctrl_match_data {
-> +	const int gpio_offs;
-> +	const int gpio_pin_cnt;
-> +	const struct pinctrl_pin_desc *pins;
-> +	const unsigned int num_pins;
-> +	const struct pingroup *grps;
-> +	const unsigned int num_grps;
-> +	const struct airoha_pinctrl_func *funcs;
-> +	const unsigned int num_funcs;
-> +	const struct airoha_pinctrl_confs_info confs_info[AIROHA_PINCTRL_CONFS_MAX];
-> +};
+> +#define PCIE_MISC_AXI_READ_ERROR_DATA                  0x4170
 > +
-> +extern const struct pinctrl_ops airoha_pinctrl_ops;
-> +
-> +int airoha_pinctrl_probe(struct udevice *dev);
-> +int airoha_pinctrl_bind(struct udevice *dev);
-> +
-> +#endif
-> diff --git a/drivers/pinctrl/airoha/pinctrl-airoha.c b/drivers/pinctrl/airoha/pinctrl-airoha.c
-> new file mode 100644
-> index 00000000000..c8a22792d51
-> --- /dev/null
-> +++ b/drivers/pinctrl/airoha/pinctrl-airoha.c
-> @@ -0,0 +1,691 @@
-> +// SPDX-License-Identifier: GPL-2.0-only
+> +#endif /* BCM2712_H__ */
+> diff --git a/arch/arm/mach-bcm283x/init.c b/arch/arm/mach-bcm283x/init.c
+> index 7a1de22e0ae..726031793ae 100644
+> --- a/arch/arm/mach-bcm283x/init.c
+> +++ b/arch/arm/mach-bcm283x/init.c
+> @@ -18,7 +18,7 @@
+>  #ifdef CONFIG_ARM64
+>  #include <asm/armv8/mmu.h>
+>
+> -#define MEM_MAP_MAX_ENTRIES (4)
+> +#define MEM_MAP_MAX_ENTRIES (5)
+>
+>  static struct mm_region bcm283x_mem_map[MEM_MAP_MAX_ENTRIES] = {
+>         {
+> @@ -91,6 +91,17 @@ static struct mm_region bcm2712_mem_map[MEM_MAP_MAX_ENTRIES] = {
+>                 .attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
+>                          PTE_BLOCK_NON_SHARE |
+>                          PTE_BLOCK_PXN | PTE_BLOCK_UXN
+> +       }, {
+> +               /*
+> +                * PCIe1 + PCIe2 outbound windows (covers both 32-bit and
+> +                * 64-bit ranges of both controllers from the bcm2712 dts).
+> +                */
+> +               .virt = 0x1800000000UL,
+> +               .phys = 0x1800000000UL,
+> +               .size = 0x0800000000UL,
+> +               .attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
+> +                        PTE_BLOCK_NON_SHARE |
+> +                        PTE_BLOCK_PXN | PTE_BLOCK_UXN
+>         }, {
+>                 /* List terminator */
+>                 0,
+> diff --git a/drivers/nvme/nvme.c b/drivers/nvme/nvme.c
+> index 2b14437f69c..e64ccb9bad6 100644
+> --- a/drivers/nvme/nvme.c
+> +++ b/drivers/nvme/nvme.c
+> @@ -12,6 +12,7 @@
+>  #include <log.h>
+>  #include <malloc.h>
+>  #include <memalign.h>
+> +#include <pci.h>
+>  #include <time.h>
+>  #include <dm/device-internal.h>
+>  #include <linux/compat.h>
+> @@ -27,6 +28,31 @@
+>  #define IO_TIMEOUT             30
+>  #define MAX_PRP_POOL           512
+>
 > +/*
-> + * Author: Lorenzo Bianconi <lorenzo@kernel.org>
-> + * Author: Benjamin Larsson <benjamin.larsson@genexis.eu>
-> + * Author: Markus Gothe <markus.gothe@genexis.eu>
-> + * Author: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+> + * Translate a host address into the PCI bus address. On systems where the
+> + * host bridge defines `dma-ranges` with a non-zero offset (e.g. the BCM2712 PCIe
+> + * controller), the bus and CPU views of system memory differ. Passing raw CPU
+> + * addresses to the controller results in master-aborts.
+> + *
+> + * For NVMe controllers attached to a non-PCI bus, `pci_get_controller()`
+> + * returns the device itself, no dma-ranges are found, and we fall back
+> + * to the identity translation.
 > + */
-> +#include <dm.h>
-> +#include <dm/device_compat.h>
-> +#include <dm/device-internal.h>
-> +#include <dm/lists.h>
-> +#include <dm/ofnode.h>
-> +#include <asm-generic/gpio.h>
-> +#include <dt-bindings/pinctrl/mt65xx.h>
-> +#include <regmap.h>
-> +
-> +#include <syscon.h>
-> +#include <asm/arch/scu-regmap.h>
-> +
-> +#include "airoha-common.h"
-> +
-> +//#define PINCTRL_GET_STATE
-> +
-
-Drop commented/dead code. If there is a good reason to keep
-airoha_pinctrl_get_conf(), the make a comment there, otherwise
-drop it.
-
-
-> +static int airoha_gpiochip_register(struct udevice *parent)
+> +static u64 nvme_phys_to_bus(struct udevice *udev, u64 phys)
 > +{
-> +	struct airoha_pinctrl *pinctrl;
-> +	struct uclass_driver *drv;
-> +	struct udevice *dev;
-> +	int ret;
-> +	ofnode node;
+> +       struct udevice *ctlr = pci_get_controller(udev);
+> +       struct pci_region region;
+> +       int i;
 > +
-> +	drv = lists_uclass_lookup(UCLASS_GPIO);
-> +	if (!drv)
-> +		return -ENOENT;
+> +       for (i = 0; pci_get_dma_regions(ctlr, &region, i) == 0; i++) {
+> +               if (phys >= region.phys_start &&
+> +                   phys < region.phys_start + region.size)
+> +                       return region.bus_start + (phys - region.phys_start);
+> +       }
 > +
-> +	/*
-> +	 * Support upstream linux DTSI that define gpio-controller
-> +	 * in the root node (instead of a dedicated subnode)
-> +	 */
-> +	if (dev_read_bool(parent, "gpio-controller")) {
-> +		node = dev_ofnode(parent);
-> +		goto bind;
-
-Why do we need goto instead of moving the code below into the if
-statement?
-
-> +	}
-> +
-> +	ret = -ENOENT;
-> +	dev_for_each_subnode(node, parent)
-> +		if (ofnode_read_bool(node, "gpio-controller")) {
-> +			ret = 0;
-> +			break;
-> +		}
-> +
-> +	if (ret)
-> +		return ret;
-> +
-> +bind:
-> +	ret = device_bind_with_driver_data(parent, &airoha_pinctrl_gpio_driver,
-> +					   "airoha_pinctrl_gpio", 0, node,
-> +					   &dev);
-> +	if (ret)
-> +		return ret;
-> +
-> +	pinctrl = dev_get_priv(parent);
-> +	pinctrl->gpiochip.dev = dev;
-> +
-> +	return 0;
+> +       return phys;
 > +}
 > +
-
-...
-
-> +#if defined(PINCTRL_GET_STATE)
-> +static int airoha_pinctrl_get_conf(struct airoha_pinctrl *pinctrl,
-> +				   enum airoha_pinctrl_confs_type conf_type,
-> +				   int pin, u32 *val)
-> +{
-> +	const struct airoha_pinctrl_confs_info *confs_info;
-> +	const struct airoha_pinctrl_reg *reg;
-> +
-> +	confs_info = &pinctrl->data->confs_info[conf_type];
-> +
-> +	reg = airoha_pinctrl_get_conf_reg(confs_info->confs,
-> +					  confs_info->num_confs,
-> +					  pin);
-> +	if (!reg)
-> +		return -EINVAL;
-> +
-> +	if (regmap_read(pinctrl->chip_scu, reg->offset, val))
-> +		return -EINVAL;
-> +
-> +	*val = (*val & reg->mask) >> __ffs(reg->mask);
-
-Linux recently got field_get() that is like FIELD_GET() but allows
-non-constant mask. Maybe time to bring that to U-Boot?
-
-
-> +
-> +	return 0;
-> +}
-> +#endif
-> +
-> +static int airoha_pinctrl_set_conf(struct airoha_pinctrl *pinctrl,
-> +				   enum airoha_pinctrl_confs_type conf_type,
-> +				   int pin, u32 val)
-> +{
-> +	const struct airoha_pinctrl_confs_info *confs_info;
-> +	const struct airoha_pinctrl_reg *reg = NULL;
-> +
-> +	confs_info = &pinctrl->data->confs_info[conf_type];
-> +
-> +	reg = airoha_pinctrl_get_conf_reg(confs_info->confs,
-> +					  confs_info->num_confs,
-> +					  pin);
-> +	if (!reg)
-> +		return -EINVAL;
-> +
-> +	if (regmap_update_bits(pinctrl->chip_scu, reg->offset, reg->mask,
-> +			       val << __ffs(reg->mask)))
-
-Similar here, field_prep().
-
-There are already 2 other drivers that locally #define field_prep() that
-could benifit.
-
-> +		return -EINVAL;
-> +
-> +	return 0;
-> +}
-> +
-
-
-
-> +static int airoha_pinmux_group_set(struct udevice *dev, unsigned group_selector,
-> +				   unsigned func_selector)
-> +{
-> +	struct airoha_pinctrl *pinctrl = dev_get_priv(dev);
-> +
-> +	dev_info(dev, "enabling %s function for pin group %s\n",
-
-dev_info() seems a bit verbose for this. Should this (and all others) be
-dev_dbg() instead?
-
-> +		airoha_get_func_name(dev, func_selector),
-> +		airoha_get_group_name(dev, group_selector));
-> +
-> +	return airoha_pinmux_set_mux(pinctrl, func_selector, group_selector);
-> +}
-> +
-> +static int airoha_pinmux_set(struct udevice *dev, unsigned pin_selector,
-> +			     unsigned func_selector)
-> +{
-> +	struct airoha_pinctrl *pinctrl = dev_get_priv(dev);
-> +	const struct airoha_pinctrl_match_data *data = pinctrl->data;
-> +	const char *pin_name;
-> +	unsigned selector;
-> +
-> +	pin_name = data->pins[pin_selector].name;
-> +
-> +	/* find group matching the pin_name */
-> +	for (selector = 0; selector < data->num_grps; selector++) {
-> +		if (!strcmp(pin_name, data->grps[selector].name))
-> +			return airoha_pinmux_group_set(dev, selector,
-> +						       func_selector);
-> +	}
-> +
-> +	return -ENOENT;
-> +}
-> +
-> +static const struct pinconf_param airoha_pinconf_params[] = {
-> +	{ "bias-disable",     PIN_CONFIG_BIAS_DISABLE,     0 },
-> +	{ "bias-pull-up",     PIN_CONFIG_BIAS_PULL_UP,     1 },
-> +	{ "bias-pull-down",   PIN_CONFIG_BIAS_PULL_DOWN,   1 },
-> +	{ "drive-strength",   PIN_CONFIG_DRIVE_STRENGTH,   0 },
-> +	{ "drive-open-drain", PIN_CONFIG_DRIVE_OPEN_DRAIN, 0 },
-> +	{ "output-enable",    PIN_CONFIG_OUTPUT_ENABLE,    1 },
-> +	{ "input-enable",     PIN_CONFIG_INPUT_ENABLE,     1 },
+>  static int nvme_wait_csts(struct nvme_dev *dev, u32 mask, u32 val)
+>  {
+>         int timeout;
+> @@ -66,7 +92,7 @@ static int nvme_setup_prps(struct nvme_dev *dev, u64 *prp2,
+>                 dma_addr += (page_size - offset);
+>
+>         if (length <= page_size) {
+> -               *prp2 = dma_addr;
+> +               *prp2 = nvme_phys_to_bus(dev->udev, dma_addr);
+>                 return 0;
+>         }
+>
+> @@ -91,16 +117,17 @@ static int nvme_setup_prps(struct nvme_dev *dev, u64 *prp2,
+>         i = 0;
+>         while (nprps) {
+>                 if ((i == (prps_per_page - 1)) && nprps > 1) {
+> -                       *(prp_pool + i) = cpu_to_le64((ulong)prp_pool +
+> -                                       page_size);
+> +                       *(prp_pool + i) = cpu_to_le64(nvme_phys_to_bus(dev->udev,
+> +                                       (ulong)prp_pool + page_size));
+>                         i = 0;
+>                         prp_pool += page_size;
+>                 }
+> -               *(prp_pool + i++) = cpu_to_le64(dma_addr);
+> +               *(prp_pool + i++) = cpu_to_le64(nvme_phys_to_bus(dev->udev,
+> +                                                                dma_addr));
+>                 dma_addr += page_size;
+>                 nprps--;
+>         }
+> -       *prp2 = (ulong)dev->prp_pool;
+> +       *prp2 = nvme_phys_to_bus(dev->udev, (ulong)dev->prp_pool);
+>
+>         flush_dcache_range((ulong)dev->prp_pool, (ulong)dev->prp_pool +
+>                            num_pages * page_size);
+> @@ -393,8 +420,10 @@ static int nvme_configure_admin_queue(struct nvme_dev *dev)
+>         dev->ctrl_config |= NVME_CC_IOSQES | NVME_CC_IOCQES;
+>
+>         writel(aqa, &dev->bar->aqa);
+> -       nvme_writeq((ulong)nvmeq->sq_cmds, &dev->bar->asq);
+> -       nvme_writeq((ulong)nvmeq->cqes, &dev->bar->acq);
+> +       nvme_writeq(nvme_phys_to_bus(dev->udev, (ulong)nvmeq->sq_cmds),
+> +                   &dev->bar->asq);
+> +       nvme_writeq(nvme_phys_to_bus(dev->udev, (ulong)nvmeq->cqes),
+> +                   &dev->bar->acq);
+>
+>         result = nvme_enable_ctrl(dev);
+>         if (result)
+> @@ -420,7 +449,8 @@ static int nvme_alloc_cq(struct nvme_dev *dev, u16 qid,
+>
+>         memset(&c, 0, sizeof(c));
+>         c.create_cq.opcode = nvme_admin_create_cq;
+> -       c.create_cq.prp1 = cpu_to_le64((ulong)nvmeq->cqes);
+> +       c.create_cq.prp1 = cpu_to_le64(nvme_phys_to_bus(dev->udev,
+> +                                                       (ulong)nvmeq->cqes));
+>         c.create_cq.cqid = cpu_to_le16(qid);
+>         c.create_cq.qsize = cpu_to_le16(nvmeq->q_depth - 1);
+>         c.create_cq.cq_flags = cpu_to_le16(flags);
+> @@ -437,7 +467,8 @@ static int nvme_alloc_sq(struct nvme_dev *dev, u16 qid,
+>
+>         memset(&c, 0, sizeof(c));
+>         c.create_sq.opcode = nvme_admin_create_sq;
+> -       c.create_sq.prp1 = cpu_to_le64((ulong)nvmeq->sq_cmds);
+> +       c.create_sq.prp1 = cpu_to_le64(nvme_phys_to_bus(dev->udev,
+> +                                                       (ulong)nvmeq->sq_cmds));
+>         c.create_sq.sqid = cpu_to_le16(qid);
+>         c.create_sq.qsize = cpu_to_le16(nvmeq->q_depth - 1);
+>         c.create_sq.sq_flags = cpu_to_le16(flags);
+> @@ -453,19 +484,21 @@ int nvme_identify(struct nvme_dev *dev, unsigned nsid,
+>         u32 page_size = dev->page_size;
+>         int offset = dma_addr & (page_size - 1);
+>         int length = sizeof(struct nvme_id_ctrl);
+> +       u64 bus_addr = nvme_phys_to_bus(dev->udev, dma_addr);
+>         int ret;
+>
+>         memset(&c, 0, sizeof(c));
+>         c.identify.opcode = nvme_admin_identify;
+>         c.identify.nsid = cpu_to_le32(nsid);
+> -       c.identify.prp1 = cpu_to_le64(dma_addr);
+> +       c.identify.prp1 = cpu_to_le64(bus_addr);
+>
+>         length -= (page_size - offset);
+>         if (length <= 0) {
+>                 c.identify.prp2 = 0;
+>         } else {
+>                 dma_addr += (page_size - offset);
+> -               c.identify.prp2 = cpu_to_le64(dma_addr);
+> +               c.identify.prp2 =
+> +                       cpu_to_le64(nvme_phys_to_bus(dev->udev, dma_addr));
+>         }
+>
+>         c.identify.cns = cpu_to_le32(cns);
+> @@ -490,7 +523,7 @@ int nvme_get_features(struct nvme_dev *dev, unsigned fid, unsigned nsid,
+>         memset(&c, 0, sizeof(c));
+>         c.features.opcode = nvme_admin_get_features;
+>         c.features.nsid = cpu_to_le32(nsid);
+> -       c.features.prp1 = cpu_to_le64(dma_addr);
+> +       c.features.prp1 = cpu_to_le64(nvme_phys_to_bus(dev->udev, dma_addr));
+>         c.features.fid = cpu_to_le32(fid);
+>
+>         ret = nvme_submit_admin_cmd(dev, &c, result);
+> @@ -516,7 +549,7 @@ int nvme_set_features(struct nvme_dev *dev, unsigned fid, unsigned dword11,
+>
+>         memset(&c, 0, sizeof(c));
+>         c.features.opcode = nvme_admin_set_features;
+> -       c.features.prp1 = cpu_to_le64(dma_addr);
+> +       c.features.prp1 = cpu_to_le64(nvme_phys_to_bus(dev->udev, dma_addr));
+>         c.features.fid = cpu_to_le32(fid);
+>         c.features.dword11 = cpu_to_le32(dword11);
+>
+> @@ -785,7 +818,8 @@ static ulong nvme_blk_rw(struct udevice *udev, lbaint_t blknr,
+>                 c.rw.slba = cpu_to_le64(slba);
+>                 slba += lbas;
+>                 c.rw.length = cpu_to_le16(lbas - 1);
+> -               c.rw.prp1 = cpu_to_le64(temp_buffer);
+> +               c.rw.prp1 = cpu_to_le64(nvme_phys_to_bus(dev->udev,
+> +                                                        temp_buffer));
+>                 c.rw.prp2 = cpu_to_le64(prp2);
+>                 status = nvme_submit_sync_cmd(dev->queues[NVME_IO_Q],
+>                                 &c, NULL, IO_TIMEOUT);
+> diff --git a/drivers/pci/Kconfig b/drivers/pci/Kconfig
+> index 39df0e776df..b77b4302357 100644
+> --- a/drivers/pci/Kconfig
+> +++ b/drivers/pci/Kconfig
+> @@ -425,8 +425,7 @@ config PCI_BRCMSTB
+>         help
+>           Say Y here if you want to enable support for PCIe controller
+>           on Broadcom set-top-box (STB) SoCs.
+> -         This driver currently supports only BCM2711 SoC and RC mode
+> -         of the controller.
+> +         This driver supports the BCM2711 and BCM2712 SoCs in RC mode.
+>
+>  config PCIE_UNIPHIER
+>         bool "Socionext UniPhier PCIe driver"
+> diff --git a/drivers/pci/pcie_brcmstb.c b/drivers/pci/pcie_brcmstb.c
+> index f089c48f028..a243ff8f161 100644
+> --- a/drivers/pci/pcie_brcmstb.c
+> +++ b/drivers/pci/pcie_brcmstb.c
+> @@ -13,17 +13,20 @@
+>   */
+>
+>  #include <asm/arch/acpi/bcm2711.h>
+> +#include <asm/arch/acpi/bcm2712.h>
+>  #include <errno.h>
+>  #include <dm.h>
+>  #include <dm/ofnode.h>
+>  #include <pci.h>
+>  #include <asm/io.h>
+>  #include <linux/bitfield.h>
+> +#include <linux/bitops.h>
+>  #include <linux/log2.h>
+>  #include <linux/iopoll.h>
+>
+>  /* PCIe parameters */
+>  #define BRCM_NUM_PCIE_OUT_WINS                         4
+> +#define BRCM_NUM_PCIE_IN_WINS                          3
+>
+>  /* MDIO registers */
+>  #define MDIO_PORT0                                     0x0
+> @@ -49,18 +52,34 @@
+>  #define SSC_STATUS_PLL_LOCK_MASK                       0x800
+>  #define SSC_STATUS_PLL_LOCK_SHIFT                      11
+>
+> +enum brcm_pcie_type {
+> +       BRCM_PCIE_BCM2711,
+> +       BRCM_PCIE_BCM2712,
 > +};
 > +
-> +static int airoha_pinconf_set_handler(struct udevice *dev, unsigned pin_selector,
-> +				      unsigned param, unsigned argument)
-> +{
-> +	struct airoha_pinctrl *pinctrl = dev_get_priv(dev);
-> +	unsigned long configs[1] = { param };
-> +	unsigned int pin = pinctrl->data->pins[pin_selector].number;
-
-Can we be sure that pin_selector is not out of bounds?
-
-> +
-> +	dev_info(dev, "enabling %s=%d property for pin %s\n",
-> +		airoha_pinconf_params[param].property, argument,
-> +		airoha_get_pin_name(dev, pin_selector));
-
-Is this supposed to do something with `argument`? Strange to print it
-but not pass it to airoha_pinconf_set().
-
-> +
-> +	return airoha_pinconf_set(pinctrl, pin, configs, 1);
-
-Better would be ARRAY_SIZE(configs) instead of 1.
-
-Or change the type of `param` and pass &param instead.
-
-> +}
-> +
-> +static int airoha_pinconf_group_set_handler(struct udevice *dev, unsigned group_selector,
-> +					    unsigned param, unsigned argument)
-> +{
-> +	struct airoha_pinctrl *pinctrl = dev_get_priv(dev);
-> +	unsigned long configs[1] = { param };
-> +
-> +	dev_info(dev, "enabling %s=%d property for pin group %s\n",
-> +		airoha_pinconf_params[param].property, argument,
-> +		airoha_get_group_name(dev, group_selector));
-> +
-> +	return airoha_pinconf_group_set(pinctrl, group_selector, configs, 1);
-> +}
-> +
-> +const struct pinctrl_ops airoha_pinctrl_ops = {
-> +	.get_pins_count		= airoha_get_pins_count,
-> +	.get_pin_name		= airoha_get_pin_name,
-> +	.get_groups_count	= airoha_get_groups_count,
-> +	.get_group_name		= airoha_get_group_name,
-> +	.get_functions_count	= airoha_get_funcs_count,
-> +	.get_function_name	= airoha_get_func_name,
-> +	.pinmux_set		= airoha_pinmux_set,
-> +	.pinmux_group_set	= airoha_pinmux_group_set,
-> +
-> +	.pinconf_num_params	= ARRAY_SIZE(airoha_pinconf_params),
-> +	.pinconf_params		= airoha_pinconf_params,
-> +	.pinconf_set		= airoha_pinconf_set_handler,
-> +	.pinconf_group_set	= airoha_pinconf_group_set_handler,
-> +
-> +	.set_state		= pinctrl_generic_set_state,
+> +/**
+> + * struct brcm_pcie_cfg - per-SoC configuration data
+> + * @type: SoC type, used to branch on quirks at runtime
+> + * @hard_debug: Offset of the PCIE_MISC_HARD_PCIE_HARD_DEBUG register
+> + */
+> +struct brcm_pcie_cfg {
+> +       enum brcm_pcie_type     type;
+> +       unsigned int            hard_debug;
 > +};
 > +
-> +int airoha_pinctrl_probe(struct udevice *dev)
-> +{
-> +	struct airoha_pinctrl *pinctrl = dev_get_priv(dev);
-> +
-> +	pinctrl->dev = dev;
-> +	pinctrl->data = (struct airoha_pinctrl_match_data *)dev_get_driver_data(dev);
-
-nit: casting isn't needed here (leaving it out makes it more readable)
-
-> +
-> +	pinctrl->regmap = syscon_node_to_regmap(dev_ofnode(dev->parent));
-> +	if (IS_ERR(pinctrl->regmap))
-> +		return PTR_ERR(pinctrl->regmap);
-> +
-> +	pinctrl->chip_scu = airoha_get_chip_scu_regmap();
-> +	if (IS_ERR(pinctrl->chip_scu))
-> +		return PTR_ERR(pinctrl->chip_scu);
-> +
-> +	pinctrl->gpiochip.data   = gpio_data_regs;
-> +	pinctrl->gpiochip.dir    = gpio_dir_regs;
-> +	pinctrl->gpiochip.out    = gpio_out_regs;
-> +	pinctrl->gpiochip.status = irq_status_regs;
-> +	pinctrl->gpiochip.level  = irq_level_regs;
-> +	pinctrl->gpiochip.edge   = irq_edge_regs;
-> +
-> +	return 0;
-> +}
-> +
-> +int airoha_pinctrl_bind(struct udevice *dev)
-> +{
-> +	/*
-> +	 * Make sure that the pinctrl driver gets probed after binding
-> +	 * as on EN7523/AN7581/AN7583 the pinctrl driver is the one that
-> +	 * is also registering the GPIO one during probe, so if its not
-> +	 * probed GPIO-s are not registered as well.
-
-s/GPIO-s/GPIOs/
-
-> +	 */
-> +	dev_or_flags(dev, DM_FLAG_PROBE_AFTER_BIND);
-> +
-> +	return airoha_gpiochip_register(dev);
-> +}
-> diff --git a/drivers/pinctrl/airoha/pinctrl-an7581.c b/drivers/pinctrl/airoha/pinctrl-an7581.c
-> new file mode 100644
-> index 00000000000..c70952e9ba8
-> --- /dev/null
-> +++ b/drivers/pinctrl/airoha/pinctrl-an7581.c
-> @@ -0,0 +1,1060 @@
-> +// SPDX-License-Identifier: GPL-2.0-only
+>  /**
+>   * struct brcm_pcie - the PCIe controller state
+>   * @base: Base address of memory mapped IO registers of the controller
+> + * @cfg: Pointer to per-SoC configuration
+>   * @gen: Non-zero value indicates limitation of the PCIe controller operation
+>   *       to a specific generation (1, 2 or 3)
+>   * @ssc: true indicates active Spread Spectrum Clocking operation
+>   */
+>  struct brcm_pcie {
+> -       void __iomem            *base;
+> -
+> -       int                     gen;
+> -       bool                    ssc;
+> +       void __iomem                    *base;
+> +       const struct brcm_pcie_cfg      *cfg;
+> +       int                             gen;
+> +       bool                            ssc;
+>  };
+>
+>  /**
+> @@ -345,6 +364,156 @@ static void brcm_pcie_set_outbound_win(struct brcm_pcie *pcie,
+>         writel(tmp, base + PCIE_MEM_WIN0_LIMIT_HI(win));
+>  }
+>
 > +/*
-> + * Author: Lorenzo Bianconi <lorenzo@kernel.org>
-> + * Author: Benjamin Larsson <benjamin.larsson@genexis.eu>
-> + * Author: Markus Gothe <markus.gothe@genexis.eu>
+> + * Assert (or de-assert) the PCIe fundamental reset (PERST#).
+> + *
+> + * On BCM2711 PERST# is bit 0 of PCIE_RGR1_SW_INIT_1; setting the bit asserts
+> + * reset. On BCM2712 PERST# moved to PCIE_MISC_PCIE_CTRL with inverted
+> + * polarity (the bit is high when reset is de-asserted).
 > + */
-> +#include "airoha-common.h"
+> +static void brcm_pcie_perst_set(struct brcm_pcie *pcie, bool assert)
+> +{
+> +       void __iomem *base = pcie->base;
+> +       u32 tmp;
 > +
-> +static const int en7581_pon_pins[] = { 49, 50, 51, 52, 53, 54 };
-> +static const int en7581_pon_tod_1pps_pins[] = { 46 };
-> +static const int en7581_gsw_tod_1pps_pins[] = { 46 };
-> +static const int en7581_sipo_pins[] = { 16, 17 };
-> +static const int en7581_sipo_rclk_pins[] = { 16, 17, 43 };
-> +static const int en7581_mdio_pins[] = { 14, 15 };
-> +static const int en7581_uart2_pins[] = { 48, 55 };
-> +static const int en7581_uart2_cts_rts_pins[] = { 46, 47 };
-> +static const int en7581_hsuart_pins[] = { 28, 29 };
-> +static const int en7581_hsuart_cts_rts_pins[] = { 26, 27 };
-> +static const int en7581_uart4_pins[] = { 38, 39 };
-> +static const int en7581_uart5_pins[] = { 18, 19 };
-> +static const int en7581_i2c0_pins[] = { 2, 3 };
-> +static const int en7581_i2c1_pins[] = { 14, 15 };
-> +static const int en7581_jtag_udi_pins[] = { 16, 17, 18, 19, 20 };
-> +static const int en7581_jtag_dfd_pins[] = { 16, 17, 18, 19, 20 };
-> +static const int en7581_i2s_pins[] = { 26, 27, 28, 29 };
-> +static const int en7581_pcm1_pins[] = { 22, 23, 24, 25 };
-> +static const int en7581_pcm2_pins[] = { 18, 19, 20, 21 };
-> +static const int en7581_spi_quad_pins[] = { 32, 33 };
-> +static const int en7581_spi_pins[] = { 4, 5, 6, 7 };
-> +static const int en7581_spi_cs1_pins[] = { 34 };
-> +static const int en7581_pcm_spi_pins[] = { 18, 19, 20, 21, 22, 23, 24, 25 };
-> +static const int en7581_pcm_spi_int_pins[] = { 14 };
-> +static const int en7581_pcm_spi_rst_pins[] = { 15 };
-> +static const int en7581_pcm_spi_cs1_pins[] = { 43 };
-> +static const int en7581_pcm_spi_cs2_pins[] = { 40 };
-> +static const int en7581_pcm_spi_cs2_p128_pins[] = { 40 };
-> +static const int en7581_pcm_spi_cs2_p156_pins[] = { 40 };
-> +static const int en7581_pcm_spi_cs3_pins[] = { 41 };
-> +static const int en7581_pcm_spi_cs4_pins[] = { 42 };
-> +static const int en7581_emmc_pins[] = {
-> +	4, 5, 6, 30, 31, 32, 33, 34, 35, 36, 37
-> +};
-> +static const int en7581_pnand_pins[] = { 4,  5,	 6,  7,	 30, 31, 32, 33, 34,
-> +					 35, 36, 37, 38, 39, 40, 41, 42 };
-...
-
-> +static const char *const pon_groups[] = { "pon" };
-> +static const char *const tod_1pps_groups[] = { "pon_tod_1pps", "gsw_tod_1pps" };
-> +static const char *const sipo_groups[] = { "sipo", "sipo_rclk" };
-> +static const char *const mdio_groups[] = { "mdio" };
+> +       if (pcie->cfg->type == BRCM_PCIE_BCM2712) {
+> +               tmp = readl(base + PCIE_MISC_PCIE_CTRL);
+> +               if (assert)
+> +                       tmp &= ~PCIE_MISC_PCIE_CTRL_PERST_MASK;
+> +               else
+> +                       tmp |= PCIE_MISC_PCIE_CTRL_PERST_MASK;
+> +               writel(tmp, base + PCIE_MISC_PCIE_CTRL);
+> +       } else if (assert) {
+> +               setbits_le32(base + PCIE_RGR1_SW_INIT_1,
+> +                            PCIE_RGR1_SW_INIT_1_PERST_MASK);
+> +       } else {
+> +               clrbits_le32(base + PCIE_RGR1_SW_INIT_1,
+> +                            PCIE_RGR1_SW_INIT_1_PERST_MASK);
+> +       }
+> +}
 > +
-> +static const char *const uart_groups[] = { "uart2",  "uart2_cts_rts",
-> +					   "hsuart", "hsuart_cts_rts",
-> +					   "uart4",  "uart5" };
-> +static const char *const i2c_groups[] = { "i2c1" };
-> +static const char *const jtag_groups[] = { "jtag_udi", "jtag_dfd" };
-> +static const char *const pcm_groups[] = { "pcm1", "pcm2" };
-> +static const char *const spi_groups[] = { "spi_quad", "spi_cs1" };
-> +static const char *const pcm_spi_groups[] = {
-> +	"pcm_spi",	    "pcm_spi_int",	"pcm_spi_rst", "pcm_spi_cs1",
-> +	"pcm_spi_cs2_p156", "pcm_spi_cs2_p128", "pcm_spi_cs3", "pcm_spi_cs4"
+> +/*
+> + * Set up one inbound DMA window on BCM2712.
+> + *
+> + * The PCIe-side address goes into PCIE_MISC_RC_BAR{idx}_CONFIG_LO/HI; the
+> + * matching CPU-side address goes into PCIE_MISC_UBUS_BAR{idx}_CONFIG_REMAP
+> + * (low 12 bits are reserved for flags, hence the 4 KiB alignment).
+> + */
+> +static void brcm_pcie_set_inbound_win(struct brcm_pcie *pcie, int idx,
+> +                                     u64 cpu_addr, u64 pcie_addr, u64 size)
+> +{
+> +       void __iomem *base = pcie->base;
+> +       u32 tmp;
+> +
+> +       tmp = lower_32_bits(pcie_addr);
+> +       u32p_replace_bits(&tmp, brcm_pcie_encode_ibar_size(size),
+> +                         RC_BAR2_CONFIG_LO_SIZE_MASK);
+> +       writel(tmp, base + PCIE_MISC_RC_BAR_CONFIG_LO(idx));
+> +       writel(upper_32_bits(pcie_addr),
+> +              base + PCIE_MISC_RC_BAR_CONFIG_LO(idx) + 4);
+> +
+> +       tmp = lower_32_bits(cpu_addr) & ~0xfff;
+> +       tmp |= UBUS_BAR_CONFIG_REMAP_ACCESS_EN;
+> +       writel(tmp, base + PCIE_MISC_UBUS_BAR_CONFIG_REMAP(idx));
+> +       writel(upper_32_bits(cpu_addr),
+> +              base + PCIE_MISC_UBUS_BAR_CONFIG_REMAP(idx) + 4);
+> +}
+> +
+> +/*
+> + * BCM2712 post-setup: feed the PHY a 54 MHz refclk and program the
+> + * L1SS PM clock period for that source.
+> + *
+> + * Must be called after the bridge is out of reset but before PERST# is
+> + * de-asserted, otherwise the link will not train.
+> + */
+> +static int brcm_pcie_post_setup_bcm2712(struct brcm_pcie *pcie)
+> +{
+> +       static const u16 mdio_data[] = { 0x50b9, 0xbda1, 0x0094, 0x97b4,
+> +                                        0x5030, 0x5030, 0x0007 };
+> +       static const u8 mdio_regs[] = { 0x16, 0x17, 0x18, 0x19,
+> +                                       0x1b, 0x1c, 0x1e };
+> +       void __iomem *base = pcie->base;
+> +       u32 tmp;
+> +       int i, ret;
+> +
+> +       ret = brcm_pcie_mdio_write(base, MDIO_PORT0, SET_ADDR_OFFSET, 0x1600);
+> +       if (ret < 0)
+> +               return ret;
+> +
+> +       for (i = 0; i < ARRAY_SIZE(mdio_regs); i++) {
+> +               ret = brcm_pcie_mdio_write(base, MDIO_PORT0,
+> +                                          mdio_regs[i], mdio_data[i]);
+> +               if (ret < 0)
+> +                       return ret;
+> +       }
+> +
+> +       udelay(200);
+> +
+> +       /*
+> +        * Set L1SS sub-state timers to avoid lengthy state transitions,
+> +        * PM clock period is 18.52ns (1/54MHz, round down).
+> +        */
+> +       tmp = readl(base + PCIE_RC_PL_PHY_CTL_15);
+> +       tmp &= ~PCIE_RC_PL_PHY_CTL_15_PM_CLK_PERIOD_MASK;
+> +       tmp |= 0x12;
+> +       writel(tmp, base + PCIE_RC_PL_PHY_CTL_15);
+> +
+> +       /*
+> +        * The UBUS-AXI bridge raises bus errors on PCIe accesses that
+> +        * miss (e.g. probing during enumeration). Suppress those and
+> +        * have failed reads return all-ones, so the PCI uclass sees a
+> +        * regular missing-device pattern instead of an aborted access.
+> +        */
+> +       tmp = readl(base + PCIE_MISC_UBUS_CTRL);
+> +       tmp |= UBUS_CTRL_PCIE_REPLY_ERR_DIS_MASK |
+> +              UBUS_CTRL_PCIE_REPLY_DECERR_DIS_MASK;
+> +       writel(tmp, base + PCIE_MISC_UBUS_CTRL);
+> +       writel(0xffffffff, base + PCIE_MISC_AXI_READ_ERROR_DATA);
+> +
+> +       /*
+> +        * Many NVMe controllers reply with CRS for hundreds of ms after
+> +        * PERST# de-assertion while their firmware initialises. The
+> +        * default UBUS / RC retry timeouts terminate the request before
+> +        * CRS clears, so config reads come back as 0xffffffff. Bump
+> +        * both to ~250ms (units are 750MHz cycles).
+> +        */
+> +       writel(0xb2d0000, base + PCIE_MISC_UBUS_TIMEOUT);
+> +       writel(0xaba0000, base + PCIE_MISC_RC_CONFIG_RETRY_TIMEOUT);
+> +
+> +       /*
+> +        * Production 2712D0 silicon needs these chicken bits set in the
+> +        * AXI interface control register; the QoS-propagation bit must
+> +        * also be cleared because the matching forwarding logic is
+> +        * broken in HW.
+> +        */
+> +       tmp = readl(base + PCIE_MISC_AXI_INTF_CTRL);
+> +       tmp &= ~AXI_REQFIFO_EN_QOS_PROPAGATION;
+> +       tmp |= AXI_EN_RCLK_QOS_ARRAY_FIX |
+> +              AXI_EN_QOS_UPDATE_TIMING_FIX |
+> +              AXI_DIS_QOS_GATING_IN_MASTER;
+> +       writel(tmp, base + PCIE_MISC_AXI_INTF_CTRL);
+> +
+> +       /*
+> +        * Older 2712C1 silicon (and single-lane RC variants) leave
+> +        * AXI_EN_QOS_UPDATE_TIMING_FIX as reserved-0, in which case
+> +        * the chicken-bit fix above doesn't take. Fall back to
+> +        * throttling the number of in-flight AXI requests to SDRAM.
+> +        */
+> +       tmp = readl(base + PCIE_MISC_AXI_INTF_CTRL);
+> +       if (!(tmp & AXI_EN_QOS_UPDATE_TIMING_FIX)) {
+> +               tmp &= ~AXI_MASTER_MAX_OUTSTANDING_REQUESTS_MASK;
+> +               tmp |= 15;
+> +               writel(tmp, base + PCIE_MISC_AXI_INTF_CTRL);
+> +       }
+> +
+> +       /* No traffic-class shaping in U-Boot; keep VDM reception off. */
+> +       tmp = readl(base + PCIE_MISC_CTRL_1);
+> +       tmp &= ~PCIE_MISC_CTRL_1_EN_VDM_QOS_CONTROL_MASK;
+> +       writel(tmp, base + PCIE_MISC_CTRL_1);
+> +
+> +       return 0;
+> +}
+> +
+>  static int brcm_pcie_probe(struct udevice *dev)
+>  {
+>         struct udevice *ctlr = pci_get_controller(dev);
+> @@ -354,19 +523,19 @@ static int brcm_pcie_probe(struct udevice *dev)
+>         struct pci_region region;
+>         bool ssc_good = false;
+>         int num_out_wins = 0;
+> -       u64 rc_bar2_offset, rc_bar2_size;
+> -       unsigned int scb_size_val;
+>         int i, ret;
+>         u16 nlw, cls, lnksta;
+>         u32 tmp;
+>
+>         /*
+> -        * Reset the bridge, assert the fundamental reset. Note for some SoCs,
+> -        * e.g. BCM7278, the fundamental reset should not be asserted here.
+> -        * This will need to be changed when support for other SoCs is added.
+> +        * Reset the bridge and assert PERST#. For BCM2711 PERST# lives in
+> +        * RGR1_SW_INIT_1 alongside the bridge reset; for BCM2712 it lives
+> +        * in PCIE_MISC_PCIE_CTRL, so the two are written separately.
+>          */
+>         setbits_le32(base + PCIE_RGR1_SW_INIT_1,
+> -                    PCIE_RGR1_SW_INIT_1_INIT_MASK | PCIE_RGR1_SW_INIT_1_PERST_MASK);
+> +                    PCIE_RGR1_SW_INIT_1_INIT_MASK);
+> +       brcm_pcie_perst_set(pcie, true);
+> +
+>         /*
+>          * The delay is a safety precaution to preclude the reset signal
+>          * from looking like a glitch.
+> @@ -376,45 +545,80 @@ static int brcm_pcie_probe(struct udevice *dev)
+>         /* Take the bridge out of reset */
+>         clrbits_le32(base + PCIE_RGR1_SW_INIT_1, PCIE_RGR1_SW_INIT_1_INIT_MASK);
+>
+> -       clrbits_le32(base + PCIE_MISC_HARD_PCIE_HARD_DEBUG,
+> +       clrbits_le32(base + pcie->cfg->hard_debug,
+>                      PCIE_HARD_DEBUG_SERDES_IDDQ_MASK);
+>
+>         /* Wait for SerDes to be stable */
+>         udelay(100);
+>
+> -       /* Set SCB_MAX_BURST_SIZE, CFG_READ_UR_MODE, SCB_ACCESS_EN */
+> -       clrsetbits_le32(base + PCIE_MISC_MISC_CTRL,
+> -                       MISC_CTRL_MAX_BURST_SIZE_MASK,
+> -                       MISC_CTRL_SCB_ACCESS_EN_MASK |
+> -                       MISC_CTRL_CFG_READ_UR_MODE_MASK |
+> -                       MISC_CTRL_MAX_BURST_SIZE_128);
+> -
+> -       pci_get_dma_regions(dev, &region, 0);
+> -       rc_bar2_offset = region.bus_start - region.phys_start;
+> -       rc_bar2_size = 1ULL << fls64(region.size - 1);
+> -
+> -       tmp = lower_32_bits(rc_bar2_offset);
+> -       u32p_replace_bits(&tmp, brcm_pcie_encode_ibar_size(rc_bar2_size),
+> -                         RC_BAR2_CONFIG_LO_SIZE_MASK);
+> -       writel(tmp, base + PCIE_MISC_RC_BAR2_CONFIG_LO);
+> -       writel(upper_32_bits(rc_bar2_offset),
+> -              base + PCIE_MISC_RC_BAR2_CONFIG_HI);
+> -
+> -       scb_size_val = rc_bar2_size ?
+> -                      ilog2(rc_bar2_size) - 15 : 0xf; /* 0xf is 1GB */
+> -
+> -       tmp = readl(base + PCIE_MISC_MISC_CTRL);
+> -       u32p_replace_bits(&tmp, scb_size_val,
+> -                         MISC_CTRL_SCB0_SIZE_MASK);
+> -       writel(tmp, base + PCIE_MISC_MISC_CTRL);
+> -
+> -       /* Disable the PCIe->GISB memory window (RC_BAR1) */
+> -       clrbits_le32(base + PCIE_MISC_RC_BAR1_CONFIG_LO,
+> -                    RC_BAR1_CONFIG_LO_SIZE_MASK);
+> -
+> -       /* Disable the PCIe->SCB memory window (RC_BAR3) */
+> -       clrbits_le32(base + PCIE_MISC_RC_BAR3_CONFIG_LO,
+> -                    RC_BAR3_CONFIG_LO_SIZE_MASK);
+> +       /*
+> +        * Set SCB_MAX_BURST_SIZE, CFG_READ_UR_MODE, SCB_ACCESS_EN. BCM2712
+> +        * needs a larger burst size (512 B) and the RCB MPS / 64-byte mode
+> +        * bits enabled to operate correctly.
+> +        */
+> +       if (pcie->cfg->type == BRCM_PCIE_BCM2712)
+> +               clrsetbits_le32(base + PCIE_MISC_MISC_CTRL,
+> +                               MISC_CTRL_MAX_BURST_SIZE_MASK,
+> +                               MISC_CTRL_SCB_ACCESS_EN_MASK |
+> +                               MISC_CTRL_CFG_READ_UR_MODE_MASK |
+> +                               MISC_CTRL_MAX_BURST_SIZE_512 |
+> +                               MISC_CTRL_PCIE_RCB_MPS_MODE_MASK |
+> +                               MISC_CTRL_PCIE_RCB_64B_MODE_MASK);
+> +       else
+> +               clrsetbits_le32(base + PCIE_MISC_MISC_CTRL,
+> +                               MISC_CTRL_MAX_BURST_SIZE_MASK,
+> +                               MISC_CTRL_SCB_ACCESS_EN_MASK |
+> +                               MISC_CTRL_CFG_READ_UR_MODE_MASK |
+> +                               MISC_CTRL_MAX_BURST_SIZE_128);
+> +
+> +       if (pcie->cfg->type == BRCM_PCIE_BCM2712) {
+> +               /*
+> +                * BCM2712 maps each dma-range to its own RC inbound BAR
+> +                * starting at BAR1; iterate the device tree dma-ranges
+> +                * and program one BAR + UBUS remap per entry. The dts
+> +                * deliberately places inbound windows at PCIe addresses
+> +                * disjoint from the outbound windows, so an EP DMA never
+> +                * gets mis-claimed as a downstream access.
+> +                */
+> +               for (i = 0; i < BRCM_NUM_PCIE_IN_WINS; i++) {
+> +                       if (pci_get_dma_regions(dev, &region, i))
+> +                               break;
+> +                       brcm_pcie_set_inbound_win(pcie, i + 1,
+> +                                                 region.phys_start,
+> +                                                 region.bus_start,
+> +                                                 region.size);
+> +               }
+> +       } else {
+> +               u64 rc_bar2_offset, rc_bar2_size;
+> +               unsigned int scb_size_val;
+> +
+> +               pci_get_dma_regions(dev, &region, 0);
+> +               rc_bar2_offset = region.bus_start - region.phys_start;
+> +               rc_bar2_size = 1ULL << fls64(region.size - 1);
+> +
+> +               tmp = lower_32_bits(rc_bar2_offset);
+> +               u32p_replace_bits(&tmp, brcm_pcie_encode_ibar_size(rc_bar2_size),
+> +                                 RC_BAR2_CONFIG_LO_SIZE_MASK);
+> +               writel(tmp, base + PCIE_MISC_RC_BAR2_CONFIG_LO);
+> +               writel(upper_32_bits(rc_bar2_offset),
+> +                      base + PCIE_MISC_RC_BAR2_CONFIG_HI);
+> +
+> +               scb_size_val = rc_bar2_size ?
+> +                              ilog2(rc_bar2_size) - 15 : 0xf; /* 0xf is 1GB */
+> +
+> +               tmp = readl(base + PCIE_MISC_MISC_CTRL);
+> +               u32p_replace_bits(&tmp, scb_size_val,
+> +                                 MISC_CTRL_SCB0_SIZE_MASK);
+> +               writel(tmp, base + PCIE_MISC_MISC_CTRL);
+> +
+> +               /* Disable the PCIe->GISB memory window (RC_BAR1) */
+> +               clrbits_le32(base + PCIE_MISC_RC_BAR1_CONFIG_LO,
+> +                            RC_BAR1_CONFIG_LO_SIZE_MASK);
+> +
+> +               /* Disable the PCIe->SCB memory window (RC_BAR3) */
+> +               clrbits_le32(base + PCIE_MISC_RC_BAR3_CONFIG_LO,
+> +                            RC_BAR3_CONFIG_LO_SIZE_MASK);
+> +       }
+>
+>         /* Mask all interrupts since we are not handling any yet */
+>         writel(0xffffffff, base + PCIE_MSI_INTR2_MASK_SET);
+> @@ -425,9 +629,17 @@ static int brcm_pcie_probe(struct udevice *dev)
+>         if (pcie->gen)
+>                 brcm_pcie_set_gen(pcie, pcie->gen);
+>
+> +       /* BCM2712 needs PHY tuning before the link is brought up. */
+> +       if (pcie->cfg->type == BRCM_PCIE_BCM2712) {
+> +               ret = brcm_pcie_post_setup_bcm2712(pcie);
+> +               if (ret) {
+> +                       printf("PCIe BRCM: PHY tuning failed (%d)\n", ret);
+> +                       return ret;
+> +               }
+> +       }
+> +
+>         /* Unassert the fundamental reset */
+> -       clrbits_le32(pcie->base + PCIE_RGR1_SW_INIT_1,
+> -                    PCIE_RGR1_SW_INIT_1_PERST_MASK);
+> +       brcm_pcie_perst_set(pcie, false);
+>
+>         /*
+>          * Wait for 100ms after PERST# deassertion; see PCIe CEM specification
+> @@ -514,10 +726,10 @@ static int brcm_pcie_remove(struct udevice *dev)
+>         void __iomem *base = pcie->base;
+>
+>         /* Assert fundamental reset */
+> -       setbits_le32(base + PCIE_RGR1_SW_INIT_1, PCIE_RGR1_SW_INIT_1_PERST_MASK);
+> +       brcm_pcie_perst_set(pcie, true);
+>
+>         /* Turn off SerDes */
+> -       setbits_le32(base + PCIE_MISC_HARD_PCIE_HARD_DEBUG,
+> +       setbits_le32(base + pcie->cfg->hard_debug,
+>                      PCIE_HARD_DEBUG_SERDES_IDDQ_MASK);
+>
+>         /* Shutdown bridge */
+> @@ -533,12 +745,23 @@ static int brcm_pcie_of_to_plat(struct udevice *dev)
+>         u32 max_link_speed;
+>         int ret;
+>
+> +       pcie->cfg = (const struct brcm_pcie_cfg *)dev_get_driver_data(dev);
+> +       if (!pcie->cfg)
+> +               return -ENODEV;
+> +
+>         /* Get the controller base address */
+>         pcie->base = dev_read_addr_ptr(dev);
+>         if (!pcie->base)
+>                 return -EINVAL;
+>
+> -       pcie->ssc = ofnode_read_bool(dn, "brcm,enable-ssc");
+> +       /*
+> +        * BCM2712's MDIO register map differs enough from BCM2711 that the
+> +        * SSC programming sequence in brcm_pcie_set_ssc() is invalid; the
+> +        * downstream Linux driver tags this with CFG_QUIRK_NO_SSC. Force SSC
+> +        * off here regardless of what the device tree requests.
+> +        */
+> +       pcie->ssc = pcie->cfg->type != BRCM_PCIE_BCM2712 &&
+> +                   ofnode_read_bool(dn, "brcm,enable-ssc");
+>
+>         ret = ofnode_read_u32(dn, "max-link-speed", &max_link_speed);
+>         if (ret < 0 || max_link_speed > 4)
+> @@ -554,8 +777,19 @@ static const struct dm_pci_ops brcm_pcie_ops = {
+>         .write_config   = brcm_pcie_write_config,
+>  };
+>
+> +static const struct brcm_pcie_cfg bcm2711_cfg = {
+> +       .type           = BRCM_PCIE_BCM2711,
+> +       .hard_debug     = PCIE_MISC_HARD_PCIE_HARD_DEBUG_BCM2711,
 > +};
 > +
-> +static const char *const i2s_groups[] = { "i2s" };
-> +static const char *const emmc_groups[] = { "emmc" };
-> +static const char *const pnand_groups[] = { "pnand" };
-> +static const char *const pcie_reset_groups[] = { "pcie_reset0", "pcie_reset1",
-> +						 "pcie_reset2" };
-> +
-> +static const char *const pwm_groups[] = {
-> +	"gpio0",  "gpio1",  "gpio2",  "gpio3",	"gpio4",  "gpio5",  "gpio6",
-> +	"gpio7",  "gpio8",  "gpio9",  "gpio10", "gpio11", "gpio12", "gpio13",
-> +	"gpio14", "gpio15", "gpio16", "gpio17", "gpio18", "gpio19", "gpio20",
-> +	"gpio21", "gpio22", "gpio23", "gpio24", "gpio25", "gpio26", "gpio27",
-> +	"gpio28", "gpio29", "gpio30", "gpio31", "gpio36", "gpio37", "gpio38",
-> +	"gpio39", "gpio40", "gpio41", "gpio42", "gpio43", "gpio44", "gpio45",
-> +	"gpio46", "gpio47"
-> +};
-> +static const char *const phy1_led0_groups[] = { "gpio33", "gpio34", "gpio35",
-> +						"gpio42", "gpio43", "gpio44", "gpio45", "gpio46" };
-> +static const char *const phy2_led0_groups[] = { "gpio33", "gpio34", "gpio35",
-> +						"gpio42", "gpio43", "gpio44", "gpio45", "gpio46" };
-> +static const char *const phy3_led0_groups[] = { "gpio33", "gpio34", "gpio35",
-> +						"gpio42", "gpio43", "gpio44", "gpio45", "gpio46" };
-> +static const char *const phy4_led0_groups[] = { "gpio33", "gpio34", "gpio35",
-> +						"gpio42", "gpio43", "gpio44", "gpio45", "gpio46" };
-> +static const char *const phy1_led1_groups[] = { "gpio43", "gpio44", "gpio45",
-> +						"gpio46" };
-> +static const char *const phy2_led1_groups[] = { "gpio43", "gpio44", "gpio45",
-> +						"gpio46" };
-> +static const char *const phy3_led1_groups[] = { "gpio43", "gpio44", "gpio45",
-> +						"gpio46" };
-> +static const char *const phy4_led1_groups[] = { "gpio43", "gpio44", "gpio45",
-> +						"gpio46" };
-
-I would wrap these like this to be more readable:
-
-static const char *const phy4_led1_groups[] = {
-	"gpio43", "gpio44", "gpio45", "gpio46"
-};
-
-Same applies to other stuff above like uart_groups.
-
-> +
-> +static const struct airoha_pinctrl_conf en7581_pinctrl_drive_e2_conf[] = {
-> +	PINCTRL_CONF_DESC(0, REG_I2C_SDA_E2, UART1_TXD_E2_MASK),
-> +	PINCTRL_CONF_DESC(1, REG_I2C_SDA_E2, UART1_RXD_E2_MASK),
-> +	PINCTRL_CONF_DESC(2, REG_I2C_SDA_E2, I2C_SDA_E2_MASK),
-> +	PINCTRL_CONF_DESC(3, REG_I2C_SDA_E2, I2C_SCL_E2_MASK),
-> +	PINCTRL_CONF_DESC(4, REG_I2C_SDA_E2, SPI_CS0_E2_MASK),
-> +	PINCTRL_CONF_DESC(5, REG_I2C_SDA_E2, SPI_CLK_E2_MASK),
-> +	PINCTRL_CONF_DESC(6, REG_I2C_SDA_E2, SPI_MOSI_E2_MASK),
-> +	PINCTRL_CONF_DESC(7, REG_I2C_SDA_E2, SPI_MISO_E2_MASK),
-> +	PINCTRL_CONF_DESC(13, REG_GPIO_L_E2, BIT(0)),
-> +	PINCTRL_CONF_DESC(14, REG_GPIO_L_E2, BIT(1)),
-> +	PINCTRL_CONF_DESC(15, REG_GPIO_L_E2, BIT(2)),
-> +	PINCTRL_CONF_DESC(16, REG_GPIO_L_E2, BIT(3)),
-> +	PINCTRL_CONF_DESC(17, REG_GPIO_L_E2, BIT(4)),
-> +	PINCTRL_CONF_DESC(18, REG_GPIO_L_E2, BIT(5)),
-> +	PINCTRL_CONF_DESC(19, REG_GPIO_L_E2, BIT(6)),
-> +	PINCTRL_CONF_DESC(20, REG_GPIO_L_E2, BIT(7)),
-> +	PINCTRL_CONF_DESC(21, REG_GPIO_L_E2, BIT(8)),
-> +	PINCTRL_CONF_DESC(22, REG_GPIO_L_E2, BIT(9)),
-> +	PINCTRL_CONF_DESC(23, REG_GPIO_L_E2, BIT(10)),
-> +	PINCTRL_CONF_DESC(24, REG_GPIO_L_E2, BIT(11)),
-> +	PINCTRL_CONF_DESC(25, REG_GPIO_L_E2, BIT(12)),
-> +	PINCTRL_CONF_DESC(26, REG_GPIO_L_E2, BIT(13)),
-> +	PINCTRL_CONF_DESC(27, REG_GPIO_L_E2, BIT(14)),
-> +	PINCTRL_CONF_DESC(28, REG_GPIO_L_E2, BIT(15)),
-> +	PINCTRL_CONF_DESC(29, REG_GPIO_L_E2, BIT(16)),
-> +	PINCTRL_CONF_DESC(30, REG_GPIO_L_E2, BIT(17)),
-> +	PINCTRL_CONF_DESC(31, REG_GPIO_L_E2, BIT(18)),
-> +	PINCTRL_CONF_DESC(32, REG_GPIO_L_E2, BIT(18)),
-
-Is this supposed to be BIT(19)?
-
-> +	PINCTRL_CONF_DESC(33, REG_GPIO_L_E2, BIT(20)),
-> +	PINCTRL_CONF_DESC(34, REG_GPIO_L_E2, BIT(21)),
-> +	PINCTRL_CONF_DESC(35, REG_GPIO_L_E2, BIT(22)),
-> +	PINCTRL_CONF_DESC(36, REG_GPIO_L_E2, BIT(23)),
-> +	PINCTRL_CONF_DESC(37, REG_GPIO_L_E2, BIT(24)),
-> +	PINCTRL_CONF_DESC(38, REG_GPIO_L_E2, BIT(25)),
-> +	PINCTRL_CONF_DESC(39, REG_GPIO_L_E2, BIT(26)),
-> +	PINCTRL_CONF_DESC(40, REG_GPIO_L_E2, BIT(27)),
-> +	PINCTRL_CONF_DESC(41, REG_GPIO_L_E2, BIT(28)),
-> +	PINCTRL_CONF_DESC(42, REG_GPIO_L_E2, BIT(29)),
-> +	PINCTRL_CONF_DESC(43, REG_GPIO_L_E2, BIT(30)),
-> +	PINCTRL_CONF_DESC(44, REG_GPIO_L_E2, BIT(31)),
-> +	PINCTRL_CONF_DESC(45, REG_GPIO_H_E2, BIT(0)),
-> +	PINCTRL_CONF_DESC(46, REG_GPIO_H_E2, BIT(1)),
-> +	PINCTRL_CONF_DESC(47, REG_GPIO_H_E2, BIT(2)),
-> +	PINCTRL_CONF_DESC(48, REG_GPIO_H_E2, BIT(3)),
-> +	PINCTRL_CONF_DESC(49, REG_GPIO_H_E2, BIT(4)),
-> +	PINCTRL_CONF_DESC(50, REG_GPIO_H_E2, BIT(5)),
-> +	PINCTRL_CONF_DESC(51, REG_GPIO_H_E2, BIT(6)),
-> +	PINCTRL_CONF_DESC(52, REG_GPIO_H_E2, BIT(7)),
-> +	PINCTRL_CONF_DESC(53, REG_GPIO_H_E2, BIT(8)),
-> +	PINCTRL_CONF_DESC(54, REG_GPIO_H_E2, BIT(9)),
-> +	PINCTRL_CONF_DESC(55, REG_GPIO_H_E2, BIT(10)),
-> +	PINCTRL_CONF_DESC(56, REG_GPIO_H_E2, BIT(11)),
-> +	PINCTRL_CONF_DESC(57, REG_GPIO_H_E2, BIT(12)),
-> +	PINCTRL_CONF_DESC(58, REG_GPIO_H_E2, BIT(13)),
-> +	PINCTRL_CONF_DESC(59, REG_GPIO_H_E2, BIT(14)),
-> +	PINCTRL_CONF_DESC(61, REG_I2C_SDA_E2, PCIE0_RESET_E2_MASK),
-> +	PINCTRL_CONF_DESC(62, REG_I2C_SDA_E2, PCIE1_RESET_E2_MASK),
-> +	PINCTRL_CONF_DESC(63, REG_I2C_SDA_E2, PCIE2_RESET_E2_MASK),
+> +static const struct brcm_pcie_cfg bcm2712_cfg = {
+> +       .type           = BRCM_PCIE_BCM2712,
+> +       .hard_debug     = PCIE_MISC_HARD_PCIE_HARD_DEBUG_BCM2712,
 > +};
 > +
-> +static const struct airoha_pinctrl_conf en7581_pinctrl_drive_e4_conf[] = {
-> +	PINCTRL_CONF_DESC(0, REG_I2C_SDA_E4, UART1_TXD_E4_MASK),
-> +	PINCTRL_CONF_DESC(1, REG_I2C_SDA_E4, UART1_RXD_E4_MASK),
-> +	PINCTRL_CONF_DESC(2, REG_I2C_SDA_E4, I2C_SDA_E4_MASK),
-> +	PINCTRL_CONF_DESC(3, REG_I2C_SDA_E4, I2C_SCL_E4_MASK),
-> +	PINCTRL_CONF_DESC(4, REG_I2C_SDA_E4, SPI_CS0_E4_MASK),
-> +	PINCTRL_CONF_DESC(5, REG_I2C_SDA_E4, SPI_CLK_E4_MASK),
-> +	PINCTRL_CONF_DESC(6, REG_I2C_SDA_E4, SPI_MOSI_E4_MASK),
-> +	PINCTRL_CONF_DESC(7, REG_I2C_SDA_E4, SPI_MISO_E4_MASK),
-> +	PINCTRL_CONF_DESC(13, REG_GPIO_L_E4, BIT(0)),
-> +	PINCTRL_CONF_DESC(14, REG_GPIO_L_E4, BIT(1)),
-> +	PINCTRL_CONF_DESC(15, REG_GPIO_L_E4, BIT(2)),
-> +	PINCTRL_CONF_DESC(16, REG_GPIO_L_E4, BIT(3)),
-> +	PINCTRL_CONF_DESC(17, REG_GPIO_L_E4, BIT(4)),
-> +	PINCTRL_CONF_DESC(18, REG_GPIO_L_E4, BIT(5)),
-> +	PINCTRL_CONF_DESC(19, REG_GPIO_L_E4, BIT(6)),
-> +	PINCTRL_CONF_DESC(20, REG_GPIO_L_E4, BIT(7)),
-> +	PINCTRL_CONF_DESC(21, REG_GPIO_L_E4, BIT(8)),
-> +	PINCTRL_CONF_DESC(22, REG_GPIO_L_E4, BIT(9)),
-> +	PINCTRL_CONF_DESC(23, REG_GPIO_L_E4, BIT(10)),
-> +	PINCTRL_CONF_DESC(24, REG_GPIO_L_E4, BIT(11)),
-> +	PINCTRL_CONF_DESC(25, REG_GPIO_L_E4, BIT(12)),
-> +	PINCTRL_CONF_DESC(26, REG_GPIO_L_E4, BIT(13)),
-> +	PINCTRL_CONF_DESC(27, REG_GPIO_L_E4, BIT(14)),
-> +	PINCTRL_CONF_DESC(28, REG_GPIO_L_E4, BIT(15)),
-> +	PINCTRL_CONF_DESC(29, REG_GPIO_L_E4, BIT(16)),
-> +	PINCTRL_CONF_DESC(30, REG_GPIO_L_E4, BIT(17)),
-> +	PINCTRL_CONF_DESC(31, REG_GPIO_L_E4, BIT(18)),
-> +	PINCTRL_CONF_DESC(32, REG_GPIO_L_E4, BIT(18)),
-
-Is this supposed to be BIT(19)?
-
-> +	PINCTRL_CONF_DESC(33, REG_GPIO_L_E4, BIT(20)),
-> +	PINCTRL_CONF_DESC(34, REG_GPIO_L_E4, BIT(21)),
-> +	PINCTRL_CONF_DESC(35, REG_GPIO_L_E4, BIT(22)),
-> +	PINCTRL_CONF_DESC(36, REG_GPIO_L_E4, BIT(23)),
-> +	PINCTRL_CONF_DESC(37, REG_GPIO_L_E4, BIT(24)),
-> +	PINCTRL_CONF_DESC(38, REG_GPIO_L_E4, BIT(25)),
-> +	PINCTRL_CONF_DESC(39, REG_GPIO_L_E4, BIT(26)),
-> +	PINCTRL_CONF_DESC(40, REG_GPIO_L_E4, BIT(27)),
-> +	PINCTRL_CONF_DESC(41, REG_GPIO_L_E4, BIT(28)),
-> +	PINCTRL_CONF_DESC(42, REG_GPIO_L_E4, BIT(29)),
-> +	PINCTRL_CONF_DESC(43, REG_GPIO_L_E4, BIT(30)),
-> +	PINCTRL_CONF_DESC(44, REG_GPIO_L_E4, BIT(31)),
-> +	PINCTRL_CONF_DESC(45, REG_GPIO_H_E4, BIT(0)),
-> +	PINCTRL_CONF_DESC(46, REG_GPIO_H_E4, BIT(1)),
-> +	PINCTRL_CONF_DESC(47, REG_GPIO_H_E4, BIT(2)),
-> +	PINCTRL_CONF_DESC(48, REG_GPIO_H_E4, BIT(3)),
-> +	PINCTRL_CONF_DESC(49, REG_GPIO_H_E4, BIT(4)),
-> +	PINCTRL_CONF_DESC(50, REG_GPIO_H_E4, BIT(5)),
-> +	PINCTRL_CONF_DESC(51, REG_GPIO_H_E4, BIT(6)),
-> +	PINCTRL_CONF_DESC(52, REG_GPIO_H_E4, BIT(7)),
-> +	PINCTRL_CONF_DESC(53, REG_GPIO_H_E4, BIT(8)),
-> +	PINCTRL_CONF_DESC(54, REG_GPIO_H_E4, BIT(9)),
-> +	PINCTRL_CONF_DESC(55, REG_GPIO_H_E4, BIT(10)),
-> +	PINCTRL_CONF_DESC(56, REG_GPIO_H_E4, BIT(11)),
-> +	PINCTRL_CONF_DESC(57, REG_GPIO_H_E4, BIT(12)),
-> +	PINCTRL_CONF_DESC(58, REG_GPIO_H_E4, BIT(13)),
-> +	PINCTRL_CONF_DESC(59, REG_GPIO_H_E4, BIT(14)),
-> +	PINCTRL_CONF_DESC(61, REG_I2C_SDA_E4, PCIE0_RESET_E4_MASK),
-> +	PINCTRL_CONF_DESC(62, REG_I2C_SDA_E4, PCIE1_RESET_E4_MASK),
-> +	PINCTRL_CONF_DESC(63, REG_I2C_SDA_E4, PCIE2_RESET_E4_MASK),
-> +};
-> +
-
-...
-
-> +static const struct airoha_pinctrl_func_group phy4_led1_func_group[] = {
-> +	AIROHA_PINCTRL_PHY_LED1(AN7581, "gpio43", GPIO_LAN0_LED1_MODE_MASK,
-> +				LAN0_LED_MAPPING_MASK, LAN0_PHY_LED_MAP(2)),
-> +	AIROHA_PINCTRL_PHY_LED1(AN7581, "gpio44", GPIO_LAN1_LED1_MODE_MASK,
-> +				LAN1_LED_MAPPING_MASK, LAN1_PHY_LED_MAP(2)),
-> +	AIROHA_PINCTRL_PHY_LED1(AN7581, "gpio45", GPIO_LAN2_LED1_MODE_MASK,
-> +				LAN2_LED_MAPPING_MASK, LAN2_PHY_LED_MAP(2)),
-> +	AIROHA_PINCTRL_PHY_LED1(AN7581, "gpio46", GPIO_LAN3_LED1_MODE_MASK,
-> +				LAN3_LED_MAPPING_MASK, LAN3_PHY_LED_MAP(2)),
-> +};
-
-Should these be LANX_PHY_LED_MAP(3) instead of 2?
-
-> +static const struct airoha_pinctrl_conf en7581_pinctrl_pullup_conf[] = {
-> +	PINCTRL_CONF_DESC(0, REG_I2C_SDA_PU, UART1_TXD_PU_MASK),
-> +	PINCTRL_CONF_DESC(1, REG_I2C_SDA_PU, UART1_RXD_PU_MASK),
-> +	PINCTRL_CONF_DESC(2, REG_I2C_SDA_PU, I2C_SDA_PU_MASK),
-> +	PINCTRL_CONF_DESC(3, REG_I2C_SDA_PU, I2C_SCL_PU_MASK),
-> +	PINCTRL_CONF_DESC(4, REG_I2C_SDA_PU, SPI_CS0_PU_MASK),
-> +	PINCTRL_CONF_DESC(5, REG_I2C_SDA_PU, SPI_CLK_PU_MASK),
-> +	PINCTRL_CONF_DESC(6, REG_I2C_SDA_PU, SPI_MOSI_PU_MASK),
-> +	PINCTRL_CONF_DESC(7, REG_I2C_SDA_PU, SPI_MISO_PU_MASK),
-> +	PINCTRL_CONF_DESC(13, REG_GPIO_L_PU, BIT(0)),
-> +	PINCTRL_CONF_DESC(14, REG_GPIO_L_PU, BIT(1)),
-> +	PINCTRL_CONF_DESC(15, REG_GPIO_L_PU, BIT(2)),
-> +	PINCTRL_CONF_DESC(16, REG_GPIO_L_PU, BIT(3)),
-> +	PINCTRL_CONF_DESC(17, REG_GPIO_L_PU, BIT(4)),
-> +	PINCTRL_CONF_DESC(18, REG_GPIO_L_PU, BIT(5)),
-> +	PINCTRL_CONF_DESC(19, REG_GPIO_L_PU, BIT(6)),
-> +	PINCTRL_CONF_DESC(20, REG_GPIO_L_PU, BIT(7)),
-> +	PINCTRL_CONF_DESC(21, REG_GPIO_L_PU, BIT(8)),
-> +	PINCTRL_CONF_DESC(22, REG_GPIO_L_PU, BIT(9)),
-> +	PINCTRL_CONF_DESC(23, REG_GPIO_L_PU, BIT(10)),
-> +	PINCTRL_CONF_DESC(24, REG_GPIO_L_PU, BIT(11)),
-> +	PINCTRL_CONF_DESC(25, REG_GPIO_L_PU, BIT(12)),
-> +	PINCTRL_CONF_DESC(26, REG_GPIO_L_PU, BIT(13)),
-> +	PINCTRL_CONF_DESC(27, REG_GPIO_L_PU, BIT(14)),
-> +	PINCTRL_CONF_DESC(28, REG_GPIO_L_PU, BIT(15)),
-> +	PINCTRL_CONF_DESC(29, REG_GPIO_L_PU, BIT(16)),
-> +	PINCTRL_CONF_DESC(30, REG_GPIO_L_PU, BIT(17)),
-> +	PINCTRL_CONF_DESC(31, REG_GPIO_L_PU, BIT(18)),
-> +	PINCTRL_CONF_DESC(32, REG_GPIO_L_PU, BIT(18)),
-
-Is this supposed to be BIT(19)?
-
-> +	PINCTRL_CONF_DESC(33, REG_GPIO_L_PU, BIT(20)),
-> +	PINCTRL_CONF_DESC(34, REG_GPIO_L_PU, BIT(21)),
-> +	PINCTRL_CONF_DESC(35, REG_GPIO_L_PU, BIT(22)),
-> +	PINCTRL_CONF_DESC(36, REG_GPIO_L_PU, BIT(23)),
-> +	PINCTRL_CONF_DESC(37, REG_GPIO_L_PU, BIT(24)),
-> +	PINCTRL_CONF_DESC(38, REG_GPIO_L_PU, BIT(25)),
-> +	PINCTRL_CONF_DESC(39, REG_GPIO_L_PU, BIT(26)),
-> +	PINCTRL_CONF_DESC(40, REG_GPIO_L_PU, BIT(27)),
-> +	PINCTRL_CONF_DESC(41, REG_GPIO_L_PU, BIT(28)),
-> +	PINCTRL_CONF_DESC(42, REG_GPIO_L_PU, BIT(29)),
-> +	PINCTRL_CONF_DESC(43, REG_GPIO_L_PU, BIT(30)),
-> +	PINCTRL_CONF_DESC(44, REG_GPIO_L_PU, BIT(31)),
-> +	PINCTRL_CONF_DESC(45, REG_GPIO_H_PU, BIT(0)),
-> +	PINCTRL_CONF_DESC(46, REG_GPIO_H_PU, BIT(1)),
-> +	PINCTRL_CONF_DESC(47, REG_GPIO_H_PU, BIT(2)),
-> +	PINCTRL_CONF_DESC(48, REG_GPIO_H_PU, BIT(3)),
-> +	PINCTRL_CONF_DESC(49, REG_GPIO_H_PU, BIT(4)),
-> +	PINCTRL_CONF_DESC(50, REG_GPIO_H_PU, BIT(5)),
-> +	PINCTRL_CONF_DESC(51, REG_GPIO_H_PU, BIT(6)),
-> +	PINCTRL_CONF_DESC(52, REG_GPIO_H_PU, BIT(7)),
-> +	PINCTRL_CONF_DESC(53, REG_GPIO_H_PU, BIT(8)),
-> +	PINCTRL_CONF_DESC(54, REG_GPIO_H_PU, BIT(9)),
-> +	PINCTRL_CONF_DESC(55, REG_GPIO_H_PU, BIT(10)),
-> +	PINCTRL_CONF_DESC(56, REG_GPIO_H_PU, BIT(11)),
-> +	PINCTRL_CONF_DESC(57, REG_GPIO_H_PU, BIT(12)),
-> +	PINCTRL_CONF_DESC(58, REG_GPIO_H_PU, BIT(13)),
-> +	PINCTRL_CONF_DESC(59, REG_GPIO_H_PU, BIT(14)),
-> +	PINCTRL_CONF_DESC(61, REG_I2C_SDA_PU, PCIE0_RESET_PU_MASK),
-> +	PINCTRL_CONF_DESC(62, REG_I2C_SDA_PU, PCIE1_RESET_PU_MASK),
-> +	PINCTRL_CONF_DESC(63, REG_I2C_SDA_PU, PCIE2_RESET_PU_MASK),
-> +};
-> +
-> +static const struct airoha_pinctrl_conf en7581_pinctrl_pulldown_conf[] = {
-> +	PINCTRL_CONF_DESC(0, REG_I2C_SDA_PD, UART1_TXD_PD_MASK),
-> +	PINCTRL_CONF_DESC(1, REG_I2C_SDA_PD, UART1_RXD_PD_MASK),
-> +	PINCTRL_CONF_DESC(2, REG_I2C_SDA_PD, I2C_SDA_PD_MASK),
-> +	PINCTRL_CONF_DESC(3, REG_I2C_SDA_PD, I2C_SCL_PD_MASK),
-> +	PINCTRL_CONF_DESC(4, REG_I2C_SDA_PD, SPI_CS0_PD_MASK),
-> +	PINCTRL_CONF_DESC(5, REG_I2C_SDA_PD, SPI_CLK_PD_MASK),
-> +	PINCTRL_CONF_DESC(6, REG_I2C_SDA_PD, SPI_MOSI_PD_MASK),
-> +	PINCTRL_CONF_DESC(7, REG_I2C_SDA_PD, SPI_MISO_PD_MASK),
-> +	PINCTRL_CONF_DESC(13, REG_GPIO_L_PD, BIT(0)),
-> +	PINCTRL_CONF_DESC(14, REG_GPIO_L_PD, BIT(1)),
-> +	PINCTRL_CONF_DESC(15, REG_GPIO_L_PD, BIT(2)),
-> +	PINCTRL_CONF_DESC(16, REG_GPIO_L_PD, BIT(3)),
-> +	PINCTRL_CONF_DESC(17, REG_GPIO_L_PD, BIT(4)),
-> +	PINCTRL_CONF_DESC(18, REG_GPIO_L_PD, BIT(5)),
-> +	PINCTRL_CONF_DESC(19, REG_GPIO_L_PD, BIT(6)),
-> +	PINCTRL_CONF_DESC(20, REG_GPIO_L_PD, BIT(7)),
-> +	PINCTRL_CONF_DESC(21, REG_GPIO_L_PD, BIT(8)),
-> +	PINCTRL_CONF_DESC(22, REG_GPIO_L_PD, BIT(9)),
-> +	PINCTRL_CONF_DESC(23, REG_GPIO_L_PD, BIT(10)),
-> +	PINCTRL_CONF_DESC(24, REG_GPIO_L_PD, BIT(11)),
-> +	PINCTRL_CONF_DESC(25, REG_GPIO_L_PD, BIT(12)),
-> +	PINCTRL_CONF_DESC(26, REG_GPIO_L_PD, BIT(13)),
-> +	PINCTRL_CONF_DESC(27, REG_GPIO_L_PD, BIT(14)),
-> +	PINCTRL_CONF_DESC(28, REG_GPIO_L_PD, BIT(15)),
-> +	PINCTRL_CONF_DESC(29, REG_GPIO_L_PD, BIT(16)),
-> +	PINCTRL_CONF_DESC(30, REG_GPIO_L_PD, BIT(17)),
-> +	PINCTRL_CONF_DESC(31, REG_GPIO_L_PD, BIT(18)),
-> +	PINCTRL_CONF_DESC(32, REG_GPIO_L_PD, BIT(18)),
-
-Is this supposed to be BIT(19)?
-
-> +	PINCTRL_CONF_DESC(33, REG_GPIO_L_PD, BIT(20)),
-> +	PINCTRL_CONF_DESC(34, REG_GPIO_L_PD, BIT(21)),
-> +	PINCTRL_CONF_DESC(35, REG_GPIO_L_PD, BIT(22)),
-
-
-...
-
-> +U_BOOT_DRIVER(airoha_pinctrl) = {
-
-We are aiming to be able to compile all drivers at the same time for static
-analysis, so include an7581 in the driver identifier (airoha_an7581_pinctrl).
-
-> +	.name = "airoha-an7581-pinctrl",
-> +	.id = UCLASS_PINCTRL,
-> +	.of_match = of_match_ptr(airoha_pinctrl_of_match),
-> +	.probe = airoha_pinctrl_probe,
-> +	.bind = airoha_pinctrl_bind,
-> +	.priv_auto = sizeof(struct airoha_pinctrl),
-> +	.ops = &airoha_pinctrl_ops,
-> +};
-
+>  static const struct udevice_id brcm_pcie_ids[] = {
+> -       { .compatible = "brcm,bcm2711-pcie" },
+> +       { .compatible = "brcm,bcm2711-pcie", .data = (ulong)&bcm2711_cfg },
+> +       { .compatible = "brcm,bcm2712-pcie", .data = (ulong)&bcm2712_cfg },
+>         { }
+>  };
+>
+> --
+> 2.48.1
+>
