@@ -4,49 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02558FF8877
-	for <u-boot@archiver.kernel.org>; Tue, 28 Apr 2026 17:39:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C725FF885A
+	for <u-boot@archiver.kernel.org>; Tue, 28 Apr 2026 17:49:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 32611845C8;
-	Tue, 28 Apr 2026 19:39:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=sys-base.io
+	by phobos.denx.de (Postfix) with ESMTP id 68A05845E3;
+	Tue, 28 Apr 2026 19:49:03 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="hUYuixzc";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5C862845E3; Tue, 28 Apr 2026 19:39:57 +0200 (CEST)
-Received: from leonov.paulk.fr (leonov.paulk.fr [185.233.101.22])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 027A78460E; Tue, 28 Apr 2026 19:49:03 +0200 (CEST)
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [IPv6:2a00:1450:4864:20::632])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5C4228432A
- for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 19:39:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BFEA1845C8
+ for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 19:48:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=sys-base.io
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=paulk@sys-base.io
-Received: from laika.paulk.fr (12.234.24.109.rev.sfr.net [109.24.234.12])
- by leonov.paulk.fr (Postfix) with ESMTPS id 992D41F8005A
- for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 17:39:52 +0000 (UTC)
-Received: by laika.paulk.fr (Postfix, from userid 65534)
- id 2FBDDB40475; Tue, 28 Apr 2026 17:39:51 +0000 (UTC)
-Received: from collins (unknown [192.168.1.1])
- by laika.paulk.fr (Postfix) with ESMTPSA id 37EAFB40471;
- Tue, 28 Apr 2026 17:39:50 +0000 (UTC)
-Date: Tue, 28 Apr 2026 19:39:48 +0200
-From: Paul Kocialkowski <paulk@sys-base.io>
-To: Andre Przywara <andre.przywara@arm.com>
-Cc: u-boot@lists.denx.de, Jernej Skrabec <jernej.skrabec@gmail.com>,
- Philippe Simons <simons.philippe@gmail.com>, linux-sunxi@lists.linux.dev,
- Mikhail Kalashnikov <iuncuim@gmail.com>,
- Cody Eksal <masterr3c0rd@epochal.quest>
-Subject: Re: [PATCH v3 2/2] sunxi: H616: dram: drop default TPR6 Kconfig value
-Message-ID: <afDw5Mar9Cemsa9s@collins>
-References: <20260427135819.2577234-1-andre.przywara@arm.com>
- <20260427135819.2577234-3-andre.przywara@arm.com>
- <afCCmxMrYHnC9An9@collins>
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-ba51e69988aso1600372466b.0
+ for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 10:48:59 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1777398539; cv=none;
+ d=google.com; s=arc-20240605;
+ b=PvnfKMEV8KWAOmDBp5gMHERGN8EUQQFwXqupuM106uOZxymCMCPcOEx1YM8AQr8TxI
+ 0N9MHd/lH0ysd4fSSsP9dKanIPtxdcfER6gHwcS1XIcj2V92QqZPdMUfNIQuqjGXz7Yl
+ JKNGV5vEjRN1V+7zNK1lxe/hgz0kApnNB2kxFTOJeB0sM4lFruamC9Sbs+ywpKNZO2mk
+ Le463ZJN3p+tg23x9ne+S7xqUZCgecZB7NmmERvVXCnhkOZDj6oxpdWsroX4j71hdTRU
+ 5JVYf6Tav1Fp9XsKCTspKPTNZdxnEohy7OCqIN+/J7qsl5uLgfUh6Oejy5A0n4hWicor
+ Deqg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=XYrqYE/OWNLExYq5rzq4iK9feJcUNno4vgBQa7tvaJI=;
+ fh=PHYpmq63auI3PadAP5qlNh68HzX/hvBt3gD/xOLyMGY=;
+ b=QbBaYj1CRI7q/21gBdLYpblT8i7XXb2Rgr/ducmQOvqZLdl+ztA0Sv6nmhjS628FCE
+ IzXOh9Dnk93FXvEqg0Iw63z4xeeuHfvACUw5lNCaIbSE19JXYurKFIJcCNgoZWU2S6Kx
+ pV85ifFx8tCUGw97fqTmi8wr4SEjcApVim+5I/cRQ1SvhQuwUPeA6o1FUuE8Og+iUUNG
+ XsvSv97GmmQhafU9GiMDz+jDwssZSRqI2hHxoMv4xDj4+5T4wDIpv4bxMD2odCvnacyF
+ o59iC0b27xU2rspXw5a0BClVi9IOsZq9BnkvQOAbN/5qugY8udiFYpsIFpjOFEUjhxxZ
+ RAbA==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1777398539; x=1778003339; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=XYrqYE/OWNLExYq5rzq4iK9feJcUNno4vgBQa7tvaJI=;
+ b=hUYuixzcIRNOfg0yGQmJ9k1770cGbld6Rte9Xa21sR+uRyFYxauYi0ctWA7FbqtJ98
+ ZL/Jqrf0+m5J9eGjRAo06pAwc5dKrfKP8FTufLrtF16FQ1ak0vBjJH3U1jT8NVBXUtoF
+ O9Jk0lCndYCUS1bDF7cnUJQLFkzge9fu5V340=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1777398539; x=1778003339;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=XYrqYE/OWNLExYq5rzq4iK9feJcUNno4vgBQa7tvaJI=;
+ b=oaWEnM/m6iP5fgPy9uotE1tmnb/UlYjI8NUerr0PuEKw/bBAHIvhB9i9ZzTQzKhEu5
+ L7e/cFGVduQSTHSH+eq4p6MwdMXvwwLi58N33juX7UDDBH6D43h2625bWFJe5EOWZb/P
+ B8ZKazwrn0BNgN1FTHFzbvCF8aZjPjrKBKeMlfBpIM1HZyhnftrhpDOSHPLnDqJrSOqY
+ Qz61T3KYLRojjug7OcEU6clbFex6uPs84AhiPxpyNtiApYFsx+PijXReEGv+nRNAmEjD
+ gFRphDqDNbwSfAeJKfn8m0ANLtZWEeqpho97QmNd1QHv4IoIpAkZkztaCSL9pwzTSi7V
+ tUIw==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ8yTu8LKavfs0eKP6I78qwXMsrVuDFhL185SSQruG0S4/poGGULr68owIusCaxLb1Atw7+Rw6Q=@lists.denx.de
+X-Gm-Message-State: AOJu0YwiWWzr0dcIpixEAAYHPJgCYsTBAEy1SovXEXd0UG9t4JbSbMQD
+ Kw04D1Lsg7RvtHYHE1e14PxYPlTfKDkoI/siMQaWGLEPxK9fZ5MmpaCrlpmUd5oX2kaQO1PPClF
+ dzdIUEbvWQoZKEl/KZR3q6TxmYB4tn5ZMLWwn+EKN
+X-Gm-Gg: AeBDievHR+9Fh5mz163QZq22MIUEpMo87yW666aZxFBbTO6x+UcMSPBVVji0VCkR31J
+ DaneBldWmqzqUO8K4dlfyxNTei3Tz+muJd8VXC27t9kZEm0eX5QvllwtzvJ9paJ8BjNuJ8UUrpe
+ NSNCqxtUZO9WXFkSyCgkrCi5OUoJQuZdUNBSGElJMakj6zH7oMs4K7P1wyugKjGNMdWApvvaBLV
+ CUtms2OZlig/ZOLmu+q//TsK9aAuQHhdBtEiGlDMTdsUYy++pakeRVahZCoTN3uCPaYkJJuZxm5
+ EEU8JOdwPO2Cq+9L
+X-Received: by 2002:a17:906:f598:b0:ba8:28de:697 with SMTP id
+ a640c23a62f3a-bb801dd5b2emr263888666b.9.1777398539148; Tue, 28 Apr 2026
+ 10:48:59 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="JVSmNFh8U316prLP"
-Content-Disposition: inline
-In-Reply-To: <afCCmxMrYHnC9An9@collins>
+References: <20260427100832.581887-1-ilias.apalodimas@linaro.org>
+ <20260427100832.581887-7-ilias.apalodimas@linaro.org>
+In-Reply-To: <20260427100832.581887-7-ilias.apalodimas@linaro.org>
+From: Simon Glass <sjg@chromium.org>
+Date: Tue, 28 Apr 2026 11:48:47 -0600
+X-Gm-Features: AVHnY4K16IyFiNC-_45aVJpV-LyWEfBzWuC0OWCM6WRx_Bn8ubaKmm3Is7ZM17M
+Message-ID: <CAFLszThyTj9FKQrWHkegH8hrbpca=Jf4ZY04V8yRTNyuGFGM-A@mail.gmail.com>
+Subject: Re: [PATCH v3 6/6] common: Add an option to relocate on ram top
+To: ilias.apalodimas@linaro.org
+Cc: trini@konsulko.com, marek.vasut+renesas@mailbox.org, jonas@kwiboo.se, 
+ anshuld@ti.com, sjg@chromium.org, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -63,158 +111,108 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Ilias,
 
---JVSmNFh8U316prLP
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 2026-04-27T10:08:21, Ilias Apalodimas <ilias.apalodimas@linaro.org> wrote:
+> common: Add an option to relocate on ram top
+>
+> Right now we only relocate u-boot to the top of the first
+> memory bank unless the board specific code overwrites it.
+> This is problematic when loading big binaries as it
+> fragments the contiguous memory space for no apparent reason.
+>
+> On certain platforms, it is currently not possible to relocate U-Boot
+> above the 32bit boundary, due to various dependencies on content located
+> below the 32bit boundary. One such example is ethernet, where the packet
+> buffer built into U-Boot binary is placed below the 32bit boundary and
+> allows loading of data via ethernet even above 32bit boundary due to
+> memory copy from the packet buffer to the destination location.
+>
+> A previous patch moves the bi_dram[] info from bd to gd and make
+> the memory bank information available early. So move the
+> dram_init_banksize() INITCALL before the relocation address calculation
+> and use it to derive the address.
+>
+> Also add a Kconfig option and allow the common code to relocate U-Boot
+> [...]
+>
+> Kconfig          | 12 ++++++++++++
+>  common/board_f.c | 32 ++++++++++++++++++++++++++------
+>  2 files changed, 38 insertions(+), 6 deletions(-)
 
-Hi again,
+> diff --git a/Kconfig b/Kconfig
+> @@ -491,6 +491,18 @@ config SKIP_RELOCATE_CODE_DATA_OFFSET
+> +config RELOC_ADDR_TOP
+> +     bool "Relocate to the topmost memory address"
+> +     depends on EXPERT
+> +     help
+> +       When U-Boot relocates, it chooses the end of the first memory bank.
+> +       Enable this if you have multiple banks and want U-Boot to relocate
+> +       to the topmost memory address. This will use the information of the
+> +       board memory banks configured with dram_init_banksize() to calculate
+> +       the relocation address.
+> +       Use this if you are certain all of the devices can access memory
+> +       above the 32bit boundary.
 
-Le Tue 28 Apr 26, 11:49, Paul Kocialkowski a =C3=A9crit :
-> Hi Andre,
->=20
-> Le Mon 27 Apr 26, 15:58, Andre Przywara a =C3=A9crit :
-> > CONFIG_DRAM_SUNXI_TPR6 is the only DRAM config parameter that has a
-> > non-zero default value. Since we need to provide a value for all the
-> > other parameters anyway, avoiding TPR6 makes no real difference.
-> > To make matters worse, TPR6 is a compound value covering multiple DRAM
-> > types, but also spans over three SoCs, which makes it hard to find one
-> > good default value.
-> >=20
-> > Drop the default from Kconfig, and put some explicit values in the
-> > defconfigs for the few boards that were relying on the default so far.
-> > The value is taken from one BSP, only the lower byte matters anyway for
-> > those boards, all using DDR3 DRAM.
->=20
-> It looks like this change is missing some boards that we support (e.g.
-> liontron-h-a133l). Is this intentional?
->=20
-> The TPR6 value is still used for all DRAM types, so I think we need to
-> define it for all the boards we currently support.
+The help text mentions the 32-bit boundary as the hazard but never
+explains why. Please spell out the DMA aspect, e.g. something like
+'devices that can only DMA below 4GiB will misbehave because their
+buffers may be allocated above the 32-bit boundary after relocation'
 
-Nevermind this, these other boards already have TPR6 in their config,
-lost sight of that. Then this is:
+> diff --git a/common/board_f.c b/common/board_f.c
+> @@ -339,7 +340,28 @@ static int setup_ram_base(void)
+> +     if (CONFIG_IS_ENABLED(RELOC_ADDR_TOP)) {
+> +             int bank;
+> +             phys_size_t total_size = 0;
+> +             phys_addr_t top;
+> +
+> +             for (bank = 0; bank < CONFIG_NR_DRAM_BANKS; bank++) {
+> +                     if (gd->ram_top <= gd->dram[bank].start)
+> +                             gd->ram_top = gd->dram[bank].start +
+> +                                             gd->dram[bank].size;
+> +                     total_size += gd->dram[bank].size;
+> +             }
+> +             gd->ram_size = total_size;
+> +
+> +             top = get_mem_top(gd->ram_base, gd->ram_size, 0, (void *)gd->fdt_blob);
+> +             if (top)
+> +                     gd->ram_top = top;
 
-Reviewed-by: Paul Kocialkowski <paulk@sys-base.io>
+A few things to figure out here:
 
-Thanks for picking this up!
+First, the loop only updates ram_top when gd->ram_top <=
+gd->dram[bank].start - that assumes banks are populated in ascending
+order of start address. Is that, guaranteed? If so, we should indicate
+this somewhere. Or maybe use gd->ram_top = max(gd->ram_top,
+gd->dram[bank].start + gd->dram[bank].size) ?
 
-All the best,
+Second, summing gd->dram[bank].size into total_size and then calling
+get_mem_top(gd->ram_base, gd->ram_size, 0, ...) presents the banks as
+a single contiguous region from ram_base of length total_size, but if
+the banks are not contiguous (the main motivation for this feature?),
+holes between banks are now treated as usable RAM. See common/memtop.c
+- get_mem_top() does a single add_mem_region(&free_mem, ram_start,
+ram_size)
 
-Paul
+Third, the cover letter says "Use get_mem_top() instead ... That
+function will account for the reserved memory regions and exclude
+them". It does not seem to do that here. With size=0, find_ram_top()
+computes base = rgnbase + rgnsize - size (the byte past the last RAM
+byte) and region_overlap_check() with size=0 reduces to whether
+rgnbase_res < base && base <= r_end, which is false for every reserved
+region within the RAM extent. The call ends up being a no-op for
+reserved-memory exclusion, i.e. gd->ram_top ends up at the very end of
+the topmost bank regardless of /reserved-memory or /memreserve. For
+exclusion you need a non-zero size - see board/xilinx/common/board.c
+for example.
 
-> > Signed-off-by: Andre Przywara <andre.przywara@arm.com>
-> > ---
-> >  arch/arm/mach-sunxi/Kconfig         | 1 -
-> >  configs/orangepi_zero2_defconfig    | 1 +
-> >  configs/transpeed-8k618-t_defconfig | 1 +
-> >  configs/x96_mate_defconfig          | 1 +
-> >  configs/x96q_defconfig              | 1 +
-> >  5 files changed, 4 insertions(+), 1 deletion(-)
-> >=20
-> > diff --git a/arch/arm/mach-sunxi/Kconfig b/arch/arm/mach-sunxi/Kconfig
-> > index 284458ad9a5..18123e685dc 100644
-> > --- a/arch/arm/mach-sunxi/Kconfig
-> > +++ b/arch/arm/mach-sunxi/Kconfig
-> > @@ -151,7 +151,6 @@ config DRAM_SUNXI_TPR3
-> > =20
-> >  config DRAM_SUNXI_TPR6
-> >  	hex "DRAM TPR6 parameter"
-> > -	default 0x3300c080
-> >  	help
-> >  	  TPR6 value from vendor DRAM settings.
-> > =20
-> > diff --git a/configs/orangepi_zero2_defconfig b/configs/orangepi_zero2_=
-defconfig
-> > index b387b4795ad..afd1535052d 100644
-> > --- a/configs/orangepi_zero2_defconfig
-> > +++ b/configs/orangepi_zero2_defconfig
-> > @@ -5,6 +5,7 @@ CONFIG_SPL=3Dy
-> >  CONFIG_DRAM_SUNXI_DX_ODT=3D0x08080808
-> >  CONFIG_DRAM_SUNXI_DX_DRI=3D0x0e0e0e0e
-> >  CONFIG_DRAM_SUNXI_CA_DRI=3D0x0e0e
-> > +CONFIG_DRAM_SUNXI_TPR6=3D0x33808080
-> >  CONFIG_DRAM_SUNXI_TPR10=3D0xf83438
-> >  CONFIG_MACH_SUN50I_H616=3Dy
-> >  CONFIG_SUNXI_DRAM_H616_DDR3_1333=3Dy
-> > diff --git a/configs/transpeed-8k618-t_defconfig b/configs/transpeed-8k=
-618-t_defconfig
-> > index e4bf5e8efd3..e672d8f8df9 100644
-> > --- a/configs/transpeed-8k618-t_defconfig
-> > +++ b/configs/transpeed-8k618-t_defconfig
-> > @@ -7,6 +7,7 @@ CONFIG_DRAM_SUNXI_DX_ODT=3D0x03030303
-> >  CONFIG_DRAM_SUNXI_DX_DRI=3D0x0e0e0e0e
-> >  CONFIG_DRAM_SUNXI_CA_DRI=3D0x1f12
-> >  CONFIG_DRAM_SUNXI_TPR0=3D0xc0001002
-> > +CONFIG_DRAM_SUNXI_TPR6=3D0x33808080
-> >  CONFIG_DRAM_SUNXI_TPR10=3D0x2f1107
-> >  CONFIG_DRAM_SUNXI_TPR11=3D0xddddcccc
-> >  CONFIG_DRAM_SUNXI_TPR12=3D0xeddc7665
-> > diff --git a/configs/x96_mate_defconfig b/configs/x96_mate_defconfig
-> > index c0628370df9..1b7d9338c02 100644
-> > --- a/configs/x96_mate_defconfig
-> > +++ b/configs/x96_mate_defconfig
-> > @@ -6,6 +6,7 @@ CONFIG_DRAM_SUNXI_DX_ODT=3D0x03030303
-> >  CONFIG_DRAM_SUNXI_DX_DRI=3D0x0e0e0e0e
-> >  CONFIG_DRAM_SUNXI_CA_DRI=3D0x1c12
-> >  CONFIG_DRAM_SUNXI_TPR0=3D0xc0000c05
-> > +CONFIG_DRAM_SUNXI_TPR6=3D0x33808080
-> >  CONFIG_DRAM_SUNXI_TPR10=3D0x2f0007
-> >  CONFIG_DRAM_SUNXI_TPR11=3D0xffffdddd
-> >  CONFIG_DRAM_SUNXI_TPR12=3D0xfedf7557
-> > diff --git a/configs/x96q_defconfig b/configs/x96q_defconfig
-> > index 59f01aae4eb..068aee3fd1e 100644
-> > --- a/configs/x96q_defconfig
-> > +++ b/configs/x96q_defconfig
-> > @@ -8,6 +8,7 @@ CONFIG_DRAM_SUNXI_DX_DRI=3D0x0e0e0e0e
-> >  CONFIG_DRAM_SUNXI_CA_DRI=3D0x1f12
-> >  CONFIG_DRAM_SUNXI_TPR0=3D0xc0001002
-> >  CONFIG_DRAM_SUNXI_TPR2=3D0x00000100
-> > +CONFIG_DRAM_SUNXI_TPR6=3D0x33808080
-> >  CONFIG_DRAM_SUNXI_TPR10=3D0x002f0107
-> >  CONFIG_DRAM_SUNXI_TPR11=3D0xddddcccc
-> >  CONFIG_DRAM_SUNXI_TPR12=3D0xeddc7665
-> > --=20
-> > 2.43.0
-> >=20
->=20
-> --=20
-> Paul Kocialkowski,
->=20
-> Independent contractor - sys-base - https://www.sys-base.io/
-> Free software developer - https://www.paulk.fr/
->=20
-> Expert in multimedia, graphics and embedded hardware support with Linux.
+Lastly (as Marek mentioned) this path skips board_get_usable_ram_top()
+entirely. Boards that override it to carve off secure-world regions,
+framebuffer etc. will have those silently ignored when RELOC_ADDR_TOP
+is enabled. After a bit more thought, we really should support it,
+e.g. look at board_get_usable_ram_top() and only override if it
+returns the unmodified value. Or perhaps change its function signature
+so it returns an error code indicating whether anything changed.
 
-
-
---=20
-Paul Kocialkowski,
-
-Independent contractor - sys-base - https://www.sys-base.io/
-Free software developer - https://www.paulk.fr/
-
-Expert in multimedia, graphics and embedded hardware support with Linux.
-
---JVSmNFh8U316prLP
-Content-Type: application/pgp-signature; name=signature.asc
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCgAdFiEEAbcMXZQMtj1fphLChP3B6o/ulQwFAmnw8OQACgkQhP3B6o/u
-lQxKPA/9Ffp2RSL8ZYGC7nijyJQkxuYJxT4YSK89Z9i5UYEHXKYSOO764rYhqznZ
-dAp8Us0bcg6EiJUWrBz0bFyaCHU0TqOAWgNrFwujVVuogo8FlWc3kKXDwnOkpBKs
-Vyo8/7nhRaIKbprxwTjqpkiZKwVgPBwn9Y9u/e9BfG/phrK+Vaz/Lns8CHm7eGu/
-84+YjgAlqflyVOR4RI39WkLg6NLStTxte3GOsAum8/TG33fldPLOW91x8ZDwY8Vv
-ugzcsIyYR7TtCJe54zfvskWKmuY9MhuBnP9SE4Vqf4pymBIqOKFPg05nCquPyqZU
-zzU75bqnzf7q4Y04y33zT4rKQijaUgyyAU3xwqW0eA8+SKBAKKI713Vg1wiofzSJ
-EVZVdB7XNEQuuXGGcUqzr5b12qnvpZPo0k7j8/6oPEhbfU2FNiONw20PyItdxo/t
-gSf1WbGZNdVnKDnIaCRNbOsRN47WlCGkcyO7iBEAM2NrsLBIi+Mnr7LThi9l/329
-46hPKgbGxB5DJv+nYM3Lh3Rr6j75rvmVE3cOPz3y6HU/Uo3Eca2BbIU+gXxP3cgS
-d9udBoxDUZXHFLxzoflwAur6KWC/i0mBk51Zi6vY5FtmWTnVmx2IIQEeRnO4BRcy
-BJ/zlRGHK7+5YUUAellYQ8QuCSAgrS37jMSgk0WWj8nePGMY5Ns=
-=DXIm
------END PGP SIGNATURE-----
-
---JVSmNFh8U316prLP--
+Regards,
+Simon
