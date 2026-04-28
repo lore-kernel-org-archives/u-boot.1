@@ -4,119 +4,107 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB86FFF886C
-	for <u-boot@archiver.kernel.org>; Tue, 28 Apr 2026 09:03:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 138AFFF885D
+	for <u-boot@archiver.kernel.org>; Tue, 28 Apr 2026 09:03:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 358598432A;
-	Tue, 28 Apr 2026 11:03:17 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=nxp.com
+	by phobos.denx.de (Postfix) with ESMTP id 9A059845E3;
+	Tue, 28 Apr 2026 11:03:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=nxp.com header.i=@nxp.com header.b="BIfKqJKF";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="HA9ch525";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F2ABD845C8; Tue, 28 Apr 2026 11:03:14 +0200 (CEST)
-Received: from PA4PR04CU001.outbound.protection.outlook.com
- (mail-francecentralazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c20a::7])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 1620B845E3; Tue, 28 Apr 2026 11:03:32 +0200 (CEST)
+Received: from mail-yx1-xb131.google.com (mail-yx1-xb131.google.com
+ [IPv6:2607:f8b0:4864:20::b131])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4D8B884324
- for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 11:03:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B12FB845D0
+ for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 11:03:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=nxp.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=ye.li@nxp.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Y8S0O+OeWOE+dZwvcjgo3u+c4IbrsKSVQsqiD70GwnH3NDySpS/vT2QDUCvN62RJ2xq4YdsSTZOuLjLTlBqJPzgSPC02Bl5RRyvYzD3vdUioTyCOmTh3C4wujAV5UBgMABvLLGbab9/CE/3OA8+ONrM+WQOXZOEnpCtQ/fn866G+uZjyilLE5w+gqnYnYo6/5sS8QmYd4xG7+CnY7SNwOnhf7zPPcGa+2sXOnb/mH8SBm6RsBQdHl34c5ScQyt7EqGbmF/u14gLF8G1J4JF3mlyDLOZ9y7s0ddUPjTAnzscx4510nNLPOuUE+qdA4mHUpT0npFIV7RGkPEYlX5cyhg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=gRnyuGW/CC+8RvTnYB0bevJ+8Aoqmo/S2DwCXaOmmw0=;
- b=rmDAQt4v4MeLo6EWOD0Vqx/MmPEUOe6EFhd/Ncu9C+s4sItcy+qlY/u++LFPRkyk1+yECkIXAjSNyCotCXx3aK+DRXqyt2KUCU6XW4g3YvGYv6rkLU0F5AxBfNN5bZ0ezlN7BkznKoQSsDa5HiPEOhb1n9Px32+9+6RRCB6Vm7hUw1YlvM0I0j3PmSPZGnZ0XKO3QbVnVhscR5YxfIP6hgn9dMIODy14xMIaAbJQdPDTPVYW+9CrMtgxW+YnIeoJ5nMwDYp52xFumD8jHqAWpV4js7yrWoeEhuXryLvgNWNqeVBDzh/zo3CY8aS+tf2R0b8/3+X/6/bPxeh+Klnm2w==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nxp.com; dmarc=pass action=none header.from=nxp.com; dkim=pass
- header.d=nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nxp.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=gRnyuGW/CC+8RvTnYB0bevJ+8Aoqmo/S2DwCXaOmmw0=;
- b=BIfKqJKFPHfg/PmEl5CaUGckti7ZKtptyRz79LTSFOa18w8vbrRl1ZMjaGmc7gTAweAk0ZhfEK6qEUYx9HBFUyiW7KZ6kUlqORZGusOc1anazU4CdubsdzsG+j6BEZXbwOdftTPUoChOms+PqyAMZHuW3JAStUi+N2AV/OlLrHCg6aUbAgSe1xGuariINCKd1IzILmYkmqwEeSAFbKfrIMKC9iBD0Wfw9m8ijeAFIQ8BLWxU7cP5MVUAFoWiUAhk5Yp3X63uMKxgbuDcm+cxm94vnODixCyjFOH1CaNbunW5JLhED+hn1/dN0KQMKUhHTBt0m2fr2ZoeI2wMo0U/xw==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nxp.com;
-Received: from AM0PR04MB12051.eurprd04.prod.outlook.com
- (2603:10a6:20b:743::24) by DUYPR04MB12689.eurprd04.prod.outlook.com
- (2603:10a6:10:661::14) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9846.26; Tue, 28 Apr
- 2026 09:03:07 +0000
-Received: from AM0PR04MB12051.eurprd04.prod.outlook.com
- ([fe80::5839:856:e138:4029]) by AM0PR04MB12051.eurprd04.prod.outlook.com
- ([fe80::5839:856:e138:4029%6]) with mapi id 15.20.9846.025; Tue, 28 Apr 2026
- 09:03:07 +0000
-From: Ye Li <ye.li@nxp.com>
-To: festevam@gmail.com,
-	u-boot@lists.denx.de
-Cc: peng.fan@nxp.com, uboot-imx@nxp.com, ping.bai@nxp.com, ye.li@oss.nxp.com
-Subject: [PATCH] imx8mp_evk: Fix the ND mode VDD_SOC voltage
-Date: Tue, 28 Apr 2026 17:05:17 +0800
-Message-Id: <20260428090517.1808814-1-ye.li@nxp.com>
-X-Mailer: git-send-email 2.37.1
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: MA5P287CA0255.INDP287.PROD.OUTLOOK.COM
- (2603:1096:a01:1f1::8) To AM0PR04MB12051.eurprd04.prod.outlook.com
- (2603:10a6:20b:743::24)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yx1-xb131.google.com with SMTP id
+ 956f58d0204a3-6579254f996so1780951d50.1
+ for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 02:03:26 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1777367005; cv=none;
+ d=google.com; s=arc-20240605;
+ b=EcctNk9cnwvJP1ADOihisrvcXexGZGvGhLGITw/nVjXGYO/FJGfWh/7yNg/X/hYJry
+ tz8xtS+Aj2fNkX4UrrAt0uf1Pnl9FX7swtp3/XHDXau1RyROZSr2lEgSM6YRuynyuWff
+ t8p43XEAD0yRnVZc/+baFuCG1fqsUi9MaQlEyRNYUfaES9h/p2fXS3/z/ITFrLrPmTHA
+ EaHaotXkINmO+VMS65CfDN6gu6T8NrnRWFBfC1ifDQiQrTaP4qgVl4RyJYXPPS7slFWY
+ r44iWhFhplVeoq4nxQXAn5e4gFubAEimUQvIroyRSGCJ3/2imCi3QUWCnI2s0L6NA+hC
+ WVJA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=Bx7ru0zSOCgiEboKHjZP53TQNaG/DuzgA3qQQBs5Tzc=;
+ fh=zWfFTWCuXvOjM3LDz/lM7B2RDNqudaMbYcPQVJofaSo=;
+ b=lUUGMQc5BsQm2Z0sldSUJmJV/S68aF7TFgfYw33x0ULYaBkqfa+9y2NzGthsN8gIM5
+ RbNXiBsHUaVXkBH3GGXJCIXav0G4FjWvhMHjueo/whmX+jrB0NjCQo3fw1omsm5bpzx/
+ V0s8+PctS+nURdgQrS02a3Nhj81N1KFTexp+AGGXoKx+qQcTTlNgnevJ/UJqA8avO0Gy
+ aoj6+xv8S0l3FuZi5yWl5jvrNKoZ9IwzjnUVohQ8UpROHGyvfhB0G/Kj/aC4NyqNms0+
+ m9Nut3Jve2S5BNxt+O6TrgY2xIxhVLZu7mPcPMUZTTVo93uCKKHpSiPOYg/EZ/1YDwy8
+ PHhA==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1777367005; x=1777971805; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=Bx7ru0zSOCgiEboKHjZP53TQNaG/DuzgA3qQQBs5Tzc=;
+ b=HA9ch525VKLRP2x9r/cL4dJywwmq1QPoaQPX2GiIjGCR/HplNFbPzUGCeOHId75FoW
+ uXRq/Jh0ODSDCQC0acxU42cJSuST435FYKh0K0eIzL9Q5ivsloWUbx6lW/vIrjMFtwjW
+ MpBjxKiEefYevgaGnT0tEIzMOWvbTalHy7++JKAO0NNheTI2WmQkfa4JJKgJRj7Si89v
+ M9km68BJb585BGwaxiPNTuK87RHMndPVPBSEZNRA1oRs5622HTBf7lMw5XgtXh2jBjAw
+ y7lKIQ7h2FJCZcnlVz2JXYbBiXRce3fhSC3i1BY3EuCBLvnfv+krYaKhR29n0uaTEHSy
+ L/Vg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1777367005; x=1777971805;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Bx7ru0zSOCgiEboKHjZP53TQNaG/DuzgA3qQQBs5Tzc=;
+ b=hYHl3EtL7I8aeGTCSjm9zA6TmXYkWF41RP+fHLvylPpHsPxWGMbijsLPht/gGDBnRY
+ EwVqqmLHESVQ+y1DH1/TB9uBHV6WutwYn8QbAKyian+FTqEnYB0J7gvaoN+DdA+pxWU6
+ EaVMZ2s98YXOSk37IBLiWHPhXPGr0pgNtz8jcDRDhUnk2ErXYJnKJdja9RGW0LnIAlQ3
+ FcPPGyjvi5vPIkSjnqHC/Cdy8J3V1zxA+Iq0StmJ25y5npfofHmtFDBrDj2fNC9KI4jE
+ Kr2N4sarNW5gQM4uowBe32tLelSyZQXFSFDvh+pCIvbui0AGEDcUvYQzVvLeHjOvYseh
+ tuSQ==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ+rUheizQPs9nsz17Wcqi1etTJJdkCELnpCO96uQCOae5s2jidE5BcELZBjqBEb7IiSJxahStE=@lists.denx.de
+X-Gm-Message-State: AOJu0YwT7vrW9ZB+nSqBrAoAarmbvQwz91t/0uymxdvJgN8sL7aE1ixd
+ phf2CwTrECHRiAjh0cfcGssuJJkRzG5+zqLQtXCPdX3v02v1hidUtxnZXvyfT0mBgypwfuyzLn/
+ 4DnhNR3VQmYhAbSnk5CGlLO457OMqfb4e28FhIcLs0Q==
+X-Gm-Gg: AeBDiesWdhQKAYxBSIJx+Bl6pnrQkv/kj900AV17puhD/mMW7dANQjOmC1EMLvx69zz
+ w8w0aGoQwfTYcB/eYEY9jaSK5wTq1ypeZ3fJU2RnIF8OOdep9Iv8TLcUatwYD2ECTIx8FYcpDPD
+ DiGZvbPVJp+fDy5W2aD3UCOdPb7UW/HD8o70NYjBSrGCGjOORZoAp+JEQ7zTb4RVt1LNKXh+bOF
+ BzTyq6MQNcXaNv792CkTnCBZCMDFH4Oj964I7VXqk3ay77f1XsQrqyNPp6aTxH/M39uBlQkZGwq
+ F/cOCjATviWvi/yhduxJIPMoTfPTdjTRrBwWtcooWviAlwSMxjg/2L07jDulhwDKmkTUjcBZo7B
+ Vcp/R6YeHoE+ehLb/7WFl/ZaL0Kzh40jm1t5xy6zhQ4PUTLNyw36hg6T3YYty0wZG8Wi5DRPLdT
+ EktsSv2H8lNAkxHuin+t+L/6OItBbgaiqwWr/V4h9QXcFnZvwxV9JpCN4onBv+rMGpMI3NhCan3
+ BuDkn4NWGmUBYTZXAivwYBOoqrHN0KYNYpqox35eD9KhXLHblFh06jKsMioLQkrO+JvthPALJkJ
+ 3X9CiSz51270QPLK9bqsrKulEyHT5VF84jB6qEwn5fpV8vtVEUCHdCS6sRyC0yunq7jh8JM1cjD
+ BDEF9zikgGHjH075YPBVDba65avg=
+X-Received: by 2002:a05:690e:1919:b0:651:c024:5733 with SMTP id
+ 956f58d0204a3-65beed6074cmr1756721d50.13.1777367004854; Tue, 28 Apr 2026
+ 02:03:24 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AM0PR04MB12051:EE_|DUYPR04MB12689:EE_
-X-MS-Office365-Filtering-Correlation-Id: 70992fc6-bd52-4395-4ef0-08dea504f704
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|366016|19092799006|42112799006|376014|52116014|56012099003|18002099003|38350700014;
-X-Microsoft-Antispam-Message-Info: Aavd99oz7alU8Jb2JQ8XQRgkYUUkCDT+EKtGk/MPkkORsnEH0HBlAKNzRpc1yf5KT8rDO6qeLTNyM5Hkb1elnD7aJxl8GGrRHv8OdcmVhxMGSzsxYjOLzmYJcmc7cge4BZa/3dWSxKwjT8ydROQ5atnXYgib+lyhjtUAXZJOQyDGV3a6pkp/GwIIVwLKvYOASmk5hpmooYFIwvffqm9Uu0OrtoGMSQIbZcproiLauP1cgMu+WmGkN0oPLahpS9fRS6AP2LfaZeRS+BuUyuO8QO1Bc8ir5nwoExnhaQB4FiBEyRMYOd7VtnMWzgK0Wg+iggh79bNrcW3uDhZgyGtx/p6gGZuJFy6/5m0j6NT2jv6EfxII+SxvdhdmDfnqWHvHcz25F6X3iPB6l0ZvEMblb0h1ZjceJxfowgtQfKbUblEl3F5CysNd/orW6zlbezwUD/y+ICHS3bAkfR8FisfBdFJF/6ZF2GbNraCzmoXWo2cHq+v/12Ftki0PLwbBKHAIzzTe0zpNRqHQ1Xmcs+X2gDOM3fjEFzAj+Ta331Pcl7+u9+K004DwuMOCEBZ73DENCz1Hj9gtkjm2GYNRrgl3eHSr6cDfkgIFmVanVpY505fVw+xNgCxFhgfgjzkUM//pOdy+U67esNHwtOPiBStd6sGFQkx0DmQCQCa5IaAj4O2eFJnmn/hvlO8i8UemUwuUdFnPYLVvT5cdbrpNN0VGghsNTTCLZnZlb4uytD3qTjQdXfUvQ1nx/CtHt8kAQ6ikshcJq03GLGieQTy6yTDym3QQQWwFbjzAHsRjMbh5a/A=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AM0PR04MB12051.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(366016)(19092799006)(42112799006)(376014)(52116014)(56012099003)(18002099003)(38350700014);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?tXesM4of55MuDjtxMzRAJIu10yJYcN6Y67KVH6Ttv0AX9U7HKP0tvX43VSBw?=
- =?us-ascii?Q?BRW5pcUrOFS/TKrJky8b9QR5BDJ/QUJJYMLvN3K84Z8RDmpDUhVtL//YyMCr?=
- =?us-ascii?Q?9CNmAJCK9r8lqUNmY6QHjKUObr2zVxKGZMUkVhLKhFdHO1a3xsBQc/54gD/5?=
- =?us-ascii?Q?oG0OV0dQQBrETPqGstCMV/VDG9hUyfIHTyUhxNdjHTomBZOEaufwUcj+EboJ?=
- =?us-ascii?Q?IkfwZGIFmvNFoj0wfIHLWbSGHsHGvi78vqwn6a8cKqhHICu+uPyDM8AI1u7Y?=
- =?us-ascii?Q?HOHIRVkDpbJnnhmmMLd0ZlOb3YLcY1gPbXii30Iik4xuEKsSxJv/ZNmhT+ak?=
- =?us-ascii?Q?pxdcpiSbQ7dySz7CC/PcHYpu+AwPkGIrhP3JdZGLZ9VhQ04dgcIhFMd0qnFR?=
- =?us-ascii?Q?P0uiKnCA3L4dPZ3DtAi4PZXdVQEkglC87usuitVadwndER/I2cLGY8nGTKRi?=
- =?us-ascii?Q?gQQeM1TV8g/Ynj/ZyyGo2twNbcNb3SNT9Ch6izwX1vnNua/1Grs6e5j+4Hbl?=
- =?us-ascii?Q?8GyOSIwCsP+Z3SXUsVqk5blTFYcVnlcrUmOyLE66wf/StwxK0vekCWzPBLFz?=
- =?us-ascii?Q?c//Dy5BdN2GdleiF5aOpCIcX6SXcwTj0h7sYULlK3CnTjh+iwQCZ33U97Nlj?=
- =?us-ascii?Q?4RoStIKLE/qh2vkimlTQRnbFDKz5Dsp+KllTMrbb2v33h6gL3mHk1oCrjwwp?=
- =?us-ascii?Q?Wi7Y/oXaCnQsxtiM/tZ5zJXQLbwX0yPmM0MDX/xIsamyWE9R6y0vL3i18Sb7?=
- =?us-ascii?Q?dhyyhBoxs7JwsMNvjghh4H6NxLdqToLxHuAe40jfgGZVfGOwp1E5uWBl9xf2?=
- =?us-ascii?Q?BxQzlpxVd2W+WHnTCRDHAoIOYvFNLFwEUDpdJGBffFz7ZNidPO4ZiY01jiS7?=
- =?us-ascii?Q?a3VBe8XapL8G8c9g7y4Q3imNpTfZFajP37r51GO2Dh4lWx92p9A8Fn5Q/TdN?=
- =?us-ascii?Q?hBgIZgL1vMbj5J2q90lAOU5ytMGzktxr6o/W1Ut7S8QYYMPB3AjduoHOt0HQ?=
- =?us-ascii?Q?/D6KpSGO11veBoMZyYWAihtQoYSGXYp8SrnV9bodpsRlEXUokq+VntYOscz7?=
- =?us-ascii?Q?sW2SBseZoterXBrsd1IfF+H63WNLVFJAoFgFmnFIqC/uWgg4HWmuOU3XgefY?=
- =?us-ascii?Q?2QjPAcoaZgcKzOLpXp5rpNdbOU4KmCRSlFXzKpcClMxvlWDT/EliWg0K4AKI?=
- =?us-ascii?Q?DpmcT8WFwNjVrik1C2i5eGl0sberTOk8i0g1lnHh+4EcqF6QUO1CfxjoWgdM?=
- =?us-ascii?Q?RzHDGGK3Z6GRrS8UUGw9Qggf1w6LD4qlxbWbhBt19e0Q4f0u09gix8Vpv5si?=
- =?us-ascii?Q?KXUoXbDBoOBstX2ZgFCW8LhxjpqGnUj7tD+Lo82pIrV256jyVFBrrvuLJzZn?=
- =?us-ascii?Q?dhPcUM198PHjJaWYAEHTFWIpJ0HbfWrYs5jsw8FLsnEI2fwMelrztaaSZLMC?=
- =?us-ascii?Q?p3/aRmZ+/P0hoQaP5mnwAkXK93kSXdcDItQefs4qQJSG9ArmX3KX81Db0eOs?=
- =?us-ascii?Q?rNXN/sZg8iQibGQfiY/uI+CueNXKYkbrV6iZ2WMmanRzLl/wO1rhw4dtKdp+?=
- =?us-ascii?Q?M4BKa37UZDbADHC3Lpe/dkqvtzykuPlyQI4PoFvTvRZDeQ+2RjAMEata3JQB?=
- =?us-ascii?Q?gJpoHFsoeK0ydq00hqmj66SD1ioc7MPdyenKky4qROhRzD0NKA6TfsMo6XIQ?=
- =?us-ascii?Q?glG8vbSRstBoS3KE4LBxOEq6oaZR70Y5vu3R2pzzKWbNGgkG?=
-X-OriginatorOrg: nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 70992fc6-bd52-4395-4ef0-08dea504f704
-X-MS-Exchange-CrossTenant-AuthSource: AM0PR04MB12051.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Apr 2026 09:03:07.7284 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: lDDYYJl9g0v5udF/a4E19mfootGvUhOnG9meJYpDeTWCzUX3/5rtnTlhRcQ8ovE+
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DUYPR04MB12689
+References: <20260422170946.3394481-1-rs@ti.com>
+ <DI49CY1ANPIG.2ZJXQ5B7QUPFK@ti.com>
+In-Reply-To: <DI49CY1ANPIG.2ZJXQ5B7QUPFK@ti.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Tue, 28 Apr 2026 12:02:48 +0300
+X-Gm-Features: AVHnY4LZ3z2knmCvJ8GHahgJVcBdAV9KyZgWg6wx-7CS5EeFWwS4pnwMzApPAf0
+Message-ID: <CAC_iWjL20WKWT0FZ4VNLxM5XSONPYPFsE9Ms4h6ad=iu-9kGeQ@mail.gmail.com>
+Subject: Re: [PATCHv5 0/6] various memory related fixups
+To: Randolph Sapp <rs@ti.com>
+Cc: robertcnelson@gmail.com, ayush@beagleboard.org, 
+ Erik.Welsh@octavosystems.com, anshuld@ti.com, bb@ti.com, trini@konsulko.com, 
+ afd@ti.com, xypron.glpk@gmx.de, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -133,31 +121,71 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Jacky Bai <ping.bai@nxp.com>
+On Tue, 28 Apr 2026 at 00:34, Randolph Sapp <rs@ti.com> wrote:
+>
+> On Wed Apr 22, 2026 at 12:09 PM CDT, rs wrote:
+> > From: Randolph Sapp <rs@ti.com>
+> >
+> > Nitpicks and fixes from the discovery thread on adding PocketBeagle2 support
+> > [1]. This does a lot of general setup required for the device, but these
+> > modifications themselves aren't device specific. For those specifically
+> > interested in PocketBeagle2 support and don't care about these details, my
+> > development branch is public [2].
+> >
+> > That second patch may provoke some opinions, but honestly if that warning was
+> > still present I wouldn't have spent a week poking holes in both the EFI and LMB
+> > allocations systems. Please let me know if there is a specific usecase that it
+> > breaks though.
+> >
+> > [1] https://lore.kernel.org/all/DHHC66BBMD27.YHGIH43C6XBK@ti.com/
+> > [2] https://github.com/StaticRocket/u-boot/tree/feature/pocketbeagle2
+> >
+> > v2:
+> >       - Remove additional increment and decrement in lmb_free_fdt_regions
+> >       - Drop the patch to backfill EFI_CONVENTIONAL_MEMORY
+> >       - Adjust the removal loop nitpick patch description
+> >       - Change the reserve memory patch to use new end_addr_sp
+> > v3:
+> >       - Update lmb flags to use the macro documentation for constants
+> >       - Change efi_mem_sort to use list_for_each_entry_safe
+> > v4:
+> >       - Fix typos in LMB allocation flags macro documentation
+> >       - Rename end_addr_sp to initial_relocaddr
+> >       - Keep the map_sysmem dance in the efi u-boot reservation
+> >       - Use the active device tree pointed to by gd->fdt_blob to clean up old
+> >         reservations
+> > v5:
+> >       - Keep return value as long in boot_fdt_reserve_region
+> >       - Fix formatting in initial_relocaddr patch
+> >
+> >
+> > Randolph Sapp (6):
+> >   lmb: allocation flags macro documentation
+> >   boot_fdt_add_mem_rsv_regions: free old dtb reservations
+> >   efi_dt_fixup: use fdtdec_get_bool
+> >   efi_selftest_memory: check for duplicates first
+> >   efi_mem_sort: use list_for_each_entry_safe instead
+> >   memory: reserve from start_addr_sp to initial_relocaddr
+> >
+> >  arch/mips/lib/bootm.c                  |  2 +-
+> >  boot/bootm.c                           |  2 +-
+> >  boot/bootm_os.c                        |  2 +-
+> >  boot/image-board.c                     |  2 +-
+> >  boot/image-fdt.c                       | 55 ++++++++++++++++++--------
+> >  common/board_f.c                       |  9 ++++-
+> >  include/asm-generic/global_data.h      |  7 ++++
+> >  include/image.h                        |  2 +-
+> >  include/lmb.h                          | 30 +++++++++++---
+> >  lib/efi_loader/efi_dt_fixup.c          |  3 +-
+> >  lib/efi_loader/efi_memory.c            | 49 ++++++++---------------
+> >  lib/efi_selftest/efi_selftest_memory.c | 21 +++++-----
+> >  lib/lmb.c                              | 41 ++++---------------
+> >  13 files changed, 118 insertions(+), 107 deletions(-)
+>
+> Any more comments on this series?
 
-The 'CONFIG_IS_ENBLAED' check only works when there is a
-CONFIG_SPL_IMX8M_VDD_SOC_850MV config a option is defined and enabled.
-So use the 'IS_ENABLED' macro instead to fix the ND mode VDD_SOC voltage.
+Seen the emails, i got limited time to take a closer look. I'll try
+doing it withing the week
 
-Signed-off-by: Jacky Bai <ping.bai@nxp.com>
-Signed-off-by: Ye Li <ye.li@nxp.com>
----
- board/nxp/imx8mp_evk/spl.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/board/nxp/imx8mp_evk/spl.c b/board/nxp/imx8mp_evk/spl.c
-index 27cd82e745a..cd7d79b382d 100644
---- a/board/nxp/imx8mp_evk/spl.c
-+++ b/board/nxp/imx8mp_evk/spl.c
-@@ -65,7 +65,7 @@ int power_init_board(void)
- 	 * Enable DVS control through PMIC_STBY_REQ and
- 	 * set B1_ENMODE=1 (ON by PMIC_ON_REQ=H)
- 	 */
--	if (CONFIG_IS_ENABLED(IMX8M_VDD_SOC_850MV))
-+	if (IS_ENABLED(CONFIG_IMX8M_VDD_SOC_850MV))
- 		pmic_reg_write(dev, PCA9450_BUCK1OUT_DVS0, 0x14);
- 	else
- 		pmic_reg_write(dev, PCA9450_BUCK1OUT_DVS0, 0x1C);
--- 
-2.37.1
-
+Cheers
+/Ilias
