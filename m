@@ -4,83 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76081FF885A
-	for <u-boot@archiver.kernel.org>; Tue, 28 Apr 2026 22:49:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C60CFF886C
+	for <u-boot@archiver.kernel.org>; Tue, 28 Apr 2026 22:49:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3C7AC846DC;
+	by phobos.denx.de (Postfix) with ESMTP id 76E0D846E5;
 	Wed, 29 Apr 2026 00:48:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20251104.gappssmtp.com header.i=@baylibre-com.20251104.gappssmtp.com header.b="KcIsjDWO";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20251104.gappssmtp.com header.i=@baylibre-com.20251104.gappssmtp.com header.b="WVqW3pvX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 313768465A; Tue, 28 Apr 2026 21:30:27 +0200 (CEST)
-Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
- [IPv6:2607:f8b0:4864:20::336])
+ id 7C9EC84698; Tue, 28 Apr 2026 23:23:32 +0200 (CEST)
+Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
+ [IPv6:2607:f8b0:4864:20::32c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4470B8464E
- for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 21:30:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5363F84682
+ for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 23:23:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=dlechner@baylibre.com
-Received: by mail-ot1-x336.google.com with SMTP id
- 46e09a7af769-7d4be94eeacso12127672a34.2
- for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 12:30:24 -0700 (PDT)
+Received: by mail-ot1-x32c.google.com with SMTP id
+ 46e09a7af769-7de7c57b52cso2314580a34.3
+ for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 14:23:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20251104.gappssmtp.com; s=20251104; t=1777404622; x=1778009422;
+ d=baylibre-com.20251104.gappssmtp.com; s=20251104; t=1777411409; x=1778016209;
  darn=lists.denx.de; 
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=onRYY76VstwkCVcdHmgsVkUTTDr+Km21NhP5JD3LXxw=;
- b=KcIsjDWOpIjOjCDpS0fuSns3bxcvtw5UUoJxQDI06vxGKwlgLzT9iWCjM88fjQdiFB
- 9DedHSoj9UUeCydfKyGpgEUciyJM2JQxQ6qxbRX9OZO+72kZn56pQfWrs9lljyYivxT2
- idHMjCxq5l+D5mvUQuMAuj0JqvwvmsmwH9wTkVia9B4dkmov2Mf8zfrExJ8CTXczP4sR
- xi7q6ldq4DagCifUyXlOqNBDbwBzRPnndYk/+1LnCruU98ssRvMbnuMHxNymqZaQJTQW
- FbvvrQGqYOM7yrKccLOxCiQTtC2ywb5UPurtz329nJQUrEYwYhwJpkSwtMM3NhaxN7NC
- BpWg==
+ bh=zNf4103342y93JMpyUya/qPjqxeZwfghaI7mXYo+YhI=;
+ b=WVqW3pvXkqv6gV0rOX1Bex6yvIEm5Ykx/KYRZJmOJbdvr1Ai364QvAgSWZb6DTSpMN
+ PO4TqIIVYaPa36DAY1H5XfxJrGrKondvV6gDPE6zur9M7vzv0nzc+h1/DF5Qa5UppIme
+ 2Y16yMFEVRviLYUwGT5vSUL5ZALG3z44blfwXfmzmv+Q2BHyYZCfZpdoNTayw/UDB3vE
+ y+RRGgpVc950/QmKpGsUuMqcXauQ79EWUjIs+/6KwXyzM3wV3UwSaif14dZOQ/JkoC/b
+ P22X3hK/kh4SkvMaACaoxgz8c452cOO5VoPHOzq0t6LY0Vyk8hrjz580/VWua2i7b+YO
+ C/1w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777404622; x=1778009422;
+ d=1e100.net; s=20251104; t=1777411409; x=1778016209;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=onRYY76VstwkCVcdHmgsVkUTTDr+Km21NhP5JD3LXxw=;
- b=Fz9MX6Uy9Np+JRwqfDhi+IxhzKPWLn2tfbRprgJRkroTI33lC6k/vpne1FeoZkwPLY
- Ako85+oZ/abyhENEfzAfPuT0ZFn3yQWQ8Z26bX9vfifm8g+GL+tUfukxksaNtFyQODrE
- RQ/OUtPgmgt23+/FaqB4mzlP9sX02SStGu+sL0Fywf9AQFueTuSZnPLeogbjlowfcO4S
- tz3Pt3JCwZgn1aRkpZvHCc27cNAaZVYpMgFXBKtDMshNz6flJ1hVAeqmdHYegfIBxCdW
- +g9SNbkXrCDQe6z2wu7Xd+IGg3j9WQwD2SQhUfJqQaE52My2Agbb+dIQ0IL3a4oDdvls
- OUVA==
+ bh=zNf4103342y93JMpyUya/qPjqxeZwfghaI7mXYo+YhI=;
+ b=KSJDuNKNRIlWXH3rPpDyGBm5AbMeVwa5FVYpBw6LKSvOLXx4EQ26CnetN5qET3bdOv
+ yEVrTXUy0ZxWdCSwK96h9ZZhyk90fY4X3uG7onsZjIG88FCa3idB233AkzuTUlVm6PKI
+ VeD2mQezzjaZKe7kekUmNjVECzMmoiKBJN9kSUfcjm4niPqu10MHJLlWey3aQHKSbENi
+ ySurozizO11bIHCM9FuT9dXb34j3o1OA52vSNs//jDrTvp5ENQGjIr9UjPHXjk/t1XIl
+ /vOzdJccAZOHC1AQI8plMkppqGYBBnLSrPByaEEQSG3d2RLUDY/Aig2mb45e+lqHJ8NU
+ oWyQ==
 X-Forwarded-Encrypted: i=1;
- AFNElJ/IGLGtyvPMGencrBNuHQFRbEehl7Mg71eM4AcXH+sHzfFMod3gabz8Qt86jyyTh6z6gOFKzBc=@lists.denx.de
-X-Gm-Message-State: AOJu0YzIPPZLU3Ab7T2xm8I9t1GJl8dHiunqqMNdmhFSfa3ELv33PXJ/
- zgb4URr5sVugAcduS/4kXHpjlS0SAcLenFDwSXgtaoNQOmrfxG2pojMqZyTD2IgucPA=
-X-Gm-Gg: AeBDiesblN1vj6HdSSNe4EwvonNY1ibIdJdAPtiVIG6G9jK9IsFJl/Wge3XZIVYfDEy
- SMQn3BNwbgAqAqB+1wB1n7QN324VxcgiZbX9EFl+o0wUFm0g471EcxBRSLoaRO7J8NpJGFMhc2y
- lk3Ba/PPVsPqkrXRdqnT+Y7PAkNih+tfsoFtvJbsCTHLdRsOJUhzfJFhXJbzmsK1OIl3zBfP4Dp
- 9KRhmEBWw5XBRxuJD1HYdPfk7FSDTWAZ36gWShyXuLnKyWEUYvNrXICFeJ7DhFfdrq9noH16id0
- m9RaMySgGf76VLdjIwjiYytvvD8fTQycx6hwb4WUGdQwZrYCHquv33YmjpxcRrAxe9r69MbsYw0
- 55jhE0tWHbeYWyH4Dvyb6jXmnkCLuehaSRd0pbK2ii7s6dyXXaDuCirb7BfkoJF/FYK3VJmKSSb
- ITTSwLnL628a4t18FFaO62ppUenAEmMpB7jkbCmwtAcvXkNh/1b/mzlmN8tYGaLqq2BmJ6UmRJ4
- KXF9cXQKT47
-X-Received: by 2002:a05:6830:6aad:b0:7cf:da97:57d6 with SMTP id
- 46e09a7af769-7dea64f0c55mr610266a34.6.1777404621594; 
- Tue, 28 Apr 2026 12:30:21 -0700 (PDT)
+ AFNElJ/qkS3HJWnQasZ0fZliDfGuWIYxlBgZbHsvihHVKGZCjhyS8QjDaenhE10tH22Thh7+G4+eCw4=@lists.denx.de
+X-Gm-Message-State: AOJu0Yyf4+VTfN521JRfmRTNGj3FGNV9H0alzqxm3hQRMiThmAgqawbV
+ PKqiVp6yF6+OTUa78OptjgFNoyeuOFmEpBlOhO9hQ0c2TwAYpCeYGqFCKDbozSLdeb0=
+X-Gm-Gg: AeBDieuvzy0UW47rwr2U4o/NQ/XvMMo/zAt4jwMJnYdzbYxKzbM/mJnXLZzF4/NDKQf
+ y6OJwQn/PUprIunV6hfOnMNu4fACgg5kcjq3/lTZrBegMdoe5nHfHQd/CR2wfF03xwImqfPKZYS
+ YMzpNBdCwjHPJqX+5Ef5pkHbaLc4SpruLdCiM90qFq2OJGFAu/NniX0UhV/46H5id73zWsHkwNo
+ 3QZx7DpMksPOoeN6hzs55wm9Vw2+6VAwTg/lBD23IWERNu5aNC/gf/fKv7f36q1FDPWmpzJa7Bp
+ q5Z/Cel+QHk8D6Yg9eoqB/Ii6ayU7n7fGPGLLgEEisl+0R0ic2yLPJDrtygRNpJ8ivV0Y+U6Dcr
+ l4vbSpHrhHPYkGpc2w+AnFrClMS8Tz7HXZ9flBzhF4zFImGjxpYMZ2ucRwFlqRLFJJxo4ky5Dr6
+ hArxt6yFpxywSgpJvnbbomb1b3zcMoUBeyMnqcCdi/+1d7Wf4O5sO5RphK4w7OHXoZtJtmxonwn
+ d549zQK+bey
+X-Received: by 2002:a05:6830:67e8:b0:7d7:f031:37bf with SMTP id
+ 46e09a7af769-7dea687bdb7mr1000908a34.19.1777411409061; 
+ Tue, 28 Apr 2026 14:23:29 -0700 (PDT)
 Received: from ?IPV6:2600:8803:e7e4:500:1770:76c1:cfc7:3a0c?
  ([2600:8803:e7e4:500:1770:76c1:cfc7:3a0c])
  by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7de986a5601sm2328150a34.19.2026.04.28.12.30.20
+ 46e09a7af769-7deab98e220sm5199a34.18.2026.04.28.14.23.26
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 28 Apr 2026 12:30:21 -0700 (PDT)
-Message-ID: <38365eb6-00e3-4cfd-88f3-edb4f36fc420@baylibre.com>
-Date: Tue, 28 Apr 2026 14:30:19 -0500
+ Tue, 28 Apr 2026 14:23:27 -0700 (PDT)
+Message-ID: <a55cc0cd-cf68-4dea-bfd8-74e67a6c10ac@baylibre.com>
+Date: Tue, 28 Apr 2026 16:23:26 -0500
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 6/9] net: phy: Add airoha AN8801 ethernet phy driver
+Subject: Re: [PATCH v2 8/9] arm: dts: mt8189: Add ethernet support for Genio
+ 520/720 boards
 To: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de
 Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
  Jerome Forissier <jerome.forissier@arm.com>, Tom Rini <trini@konsulko.com>,
@@ -118,10 +119,10 @@ Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
  Leo Yu-Chi Liang <ycliang@andestech.com>, Tommy Shih
  <tommy.shih@airoha.com>, Kevin-KW Huang <kevin-kw.huang@airoha.com>
 References: <20260428-add-ethernet-support-for-genio-520-720-v2-0-9cf2f0884bd8@baylibre.com>
- <20260428-add-ethernet-support-for-genio-520-720-v2-6-9cf2f0884bd8@baylibre.com>
+ <20260428-add-ethernet-support-for-genio-520-720-v2-8-9cf2f0884bd8@baylibre.com>
 Content-Language: en-US
 From: David Lechner <dlechner@baylibre.com>
-In-Reply-To: <20260428-add-ethernet-support-for-genio-520-720-v2-6-9cf2f0884bd8@baylibre.com>
+In-Reply-To: <20260428-add-ethernet-support-for-genio-520-720-v2-8-9cf2f0884bd8@baylibre.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-Mailman-Approved-At: Wed, 29 Apr 2026 00:48:15 +0200
@@ -142,95 +143,7 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 4/28/26 8:17 AM, Julien Stephan wrote:
-> Add Airoha AN8801 Ethernet PHY driver (air_an8801.c).
-> Implement CL22/CL45 MDIO access, LED control, and RGMII delay
-> configuration. Provide probe, initialization, LED setup, and status
-> handling. Expose DTS properties for clock delays. Register driver with
-> PHY framework and trigger on startup.
+> Add Ethernet support for MediaTek MT8189-based Genio 520 and Genio 720
+> development boards.
 > 
-
-...
-
-> +struct air_led_cfg {
-> +	u16 en;		/* LED Enable */
-> +	u16 gpio;	/* GPIO */
-> +	u16 pol;	/* LED Polarity */
-> +	u16 on_cfg;	/* LED On */
-> +	u16 blk_cfg;	/* LED Blink */
-> +};
-> +
-
-nit: make the variable names longer so that we don't need
-comments to explain them
-
-> +static int an8801r_rgmii_delay_config(struct phy_device *phydev)
-> +{
-> +	struct an8801r_priv *priv = phydev_cfg(phydev);
-> +	int ret;
-> +
-> +	switch (phydev->interface) {
-> +	case PHY_INTERFACE_MODE_RGMII_TXID:
-> +		return an8801r_rgmii_txdelay(phydev, AIR_RGMII_DELAY_STEP_4);
-> +	case PHY_INTERFACE_MODE_RGMII_RXID:
-> +		return an8801r_rgmii_rxdelay(phydev, AIR_RGMII_DELAY_NOSTEP, true);
-> +	case PHY_INTERFACE_MODE_RGMII_ID:
-> +		ret = an8801r_rgmii_txdelay(phydev, AIR_RGMII_DELAY_STEP_4);
-> +		if (ret)
-> +			return ret;
-> +		return an8801r_rgmii_rxdelay(phydev, AIR_RGMII_DELAY_NOSTEP, true);
-> +	case PHY_INTERFACE_MODE_RGMII:
-> +	default:
-> +		if (priv->rxdelay_force) {
-> +			ret = an8801r_rgmii_rxdelay(phydev, priv->rxdelay_step,
-> +						    priv->rxdelay_align);
-> +			if (ret)
-> +				return ret;
-> +		}
-> +		if (priv->txdelay_force)
-> +			return an8801r_rgmii_txdelay(phydev, priv->txdelay_step);
-> +		break;
-
-nit: Could just return 0; here.
-
-> +	}
-> +	return 0;
-> +}
-> +
-
-...
-
-> +static int an8801r_phy_probe(struct phy_device *phydev)
-> +{
-> +	struct an8801r_priv *priv;
-> +	u32 phy_id;
-> +	int ret;
-> +
-> +	ret = get_phy_id(phydev->bus, phydev->addr, MDIO_DEVAD_NONE, &phy_id);
-> +	if (ret)
-> +		return ret;
-> +
-> +	if (phy_id != AN8801R_PHY_ID) {
-> +		dev_err(phydev->dev,
-> +			"AN8801R can't be detected (id=0x%08x).\n", phy_id);
-> +		return -ENODEV;
-> +	}
-> +
-> +	priv = calloc(1, sizeof(struct an8801r_priv));
-
-Why calloc() for 1 item?
-
-I think usual would be:
-
-	priv = malloc(sizeof(*priv));
-
-> +	if (!priv)
-> +		return -ENOMEM;
-> +
-> +	*priv = an8801r_priv_defaults;
-> +
-> +	phydev->priv = priv;
-> +
-> +	return 0;
-> +}
-> +
-
+This does not apply cleanly (conflicts with USB changes).
