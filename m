@@ -4,33 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27B03FF8868
-	for <u-boot@archiver.kernel.org>; Tue, 28 Apr 2026 16:44:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02558FF8877
+	for <u-boot@archiver.kernel.org>; Tue, 28 Apr 2026 17:39:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8FC1D846A2;
-	Tue, 28 Apr 2026 18:43:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=lst.de
+	by phobos.denx.de (Postfix) with ESMTP id 32611845C8;
+	Tue, 28 Apr 2026 19:39:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=sys-base.io
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3186A84656; Tue, 28 Apr 2026 18:39:54 +0200 (CEST)
-Received: from verein.lst.de (verein.lst.de [213.95.11.211])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 5C862845E3; Tue, 28 Apr 2026 19:39:57 +0200 (CEST)
+Received: from leonov.paulk.fr (leonov.paulk.fr [185.233.101.22])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3CC6284612
- for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 18:39:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5C4228432A
+ for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 19:39:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=lst.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=duwe@lst.de
-Received: by verein.lst.de (Postfix, from userid 2005)
- id 9BB2668D09; Tue, 28 Apr 2026 18:39:50 +0200 (CEST)
-Subject: [PATCH v2 9/9] pci: brcmstb: Adapt to AXI bridge
-To: Peter Robinson <pbrobinson@gmail.com>, Matthias Brugger <mbrugger@suse.com>
-Cc: Tom Rini <trini@konsulko.com>,"Jan Čermák" <sairon@sairon.cz>,Andrea della Porta <andrea.porta@suse.com>,"Ivan T. Ivanov" <iivanov@suse.de>, Stanimir Varbanov <stanimir.varbanov@suse.com>, Oleksii Moisieiev <Oleksii_Moisieiev@epam.com>, Volodymyr Babchuk <volodymyr_babchuk@epam.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>,Paul Barker <paul.barker.ct@bp.renesas.com>,Patrice Chotard <patrice.chotard@foss.st.com>,Christian Marangi <ansuelsmth@gmail.com>,Patrick Delaunay <patrick.delaunay@foss.st.com>,Huan Zhou <me@per1cycle.org>,Gabriel Fernandez <gabriel.fernandez@foss.st.com>,Kever Yang <kever.yang@rock-chips.com>,Jonas Karlman <jonas@kwiboo.se>,Joseph Chen <chenjh@rock-chips.com>,Elaine Zhang <zhangqing@rock-chips.com>, Pedro Falcato <pfalcato@suse.de>,u-boot@lists.denx.de
-In-Reply-To: <20260428162319.99B4268B05@verein.lst.de>
-Message-Id: <20260428163950.9BB2668D09@verein.lst.de>
-Date: Tue, 28 Apr 2026 18:39:50 +0200 (CEST)
-From: duwe@lst.de (Torsten Duwe)
-X-Mailman-Approved-At: Tue, 28 Apr 2026 18:43:21 +0200
+ dmarc=none (p=none dis=none) header.from=sys-base.io
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=paulk@sys-base.io
+Received: from laika.paulk.fr (12.234.24.109.rev.sfr.net [109.24.234.12])
+ by leonov.paulk.fr (Postfix) with ESMTPS id 992D41F8005A
+ for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 17:39:52 +0000 (UTC)
+Received: by laika.paulk.fr (Postfix, from userid 65534)
+ id 2FBDDB40475; Tue, 28 Apr 2026 17:39:51 +0000 (UTC)
+Received: from collins (unknown [192.168.1.1])
+ by laika.paulk.fr (Postfix) with ESMTPSA id 37EAFB40471;
+ Tue, 28 Apr 2026 17:39:50 +0000 (UTC)
+Date: Tue, 28 Apr 2026 19:39:48 +0200
+From: Paul Kocialkowski <paulk@sys-base.io>
+To: Andre Przywara <andre.przywara@arm.com>
+Cc: u-boot@lists.denx.de, Jernej Skrabec <jernej.skrabec@gmail.com>,
+ Philippe Simons <simons.philippe@gmail.com>, linux-sunxi@lists.linux.dev,
+ Mikhail Kalashnikov <iuncuim@gmail.com>,
+ Cody Eksal <masterr3c0rd@epochal.quest>
+Subject: Re: [PATCH v3 2/2] sunxi: H616: dram: drop default TPR6 Kconfig value
+Message-ID: <afDw5Mar9Cemsa9s@collins>
+References: <20260427135819.2577234-1-andre.przywara@arm.com>
+ <20260427135819.2577234-3-andre.przywara@arm.com>
+ <afCCmxMrYHnC9An9@collins>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="JVSmNFh8U316prLP"
+Content-Disposition: inline
+In-Reply-To: <afCCmxMrYHnC9An9@collins>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -47,128 +63,158 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Torsten Duwe <duwe@suse.de>
 
-Fix-ups for the BCM root complex when it is located behind an AXI
-bridge and clocked with 54MHz.  Some are from kernel commit
-377bced88c326, some where picked by Oleksii off a now-stale older
-branch. All reworked for the simpler setup code in U-Boot.
+--JVSmNFh8U316prLP
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Torsten Duwe <duwe@suse.de>
-Co-authored-by: Oleksii Moisieiev <oleksii_moisieiev@epam.com>
-Tested-by: Pedro Falcato <pfalcato@suse.de>
+Hi again,
 
----
- .../mach-bcm283x/include/mach/acpi/bcm2711.h  |  1 +
- drivers/pci/pcie_brcmstb.c                    | 64 ++++++++++++++++++-
- 2 files changed, 64 insertions(+), 1 deletion(-)
+Le Tue 28 Apr 26, 11:49, Paul Kocialkowski a =C3=A9crit :
+> Hi Andre,
+>=20
+> Le Mon 27 Apr 26, 15:58, Andre Przywara a =C3=A9crit :
+> > CONFIG_DRAM_SUNXI_TPR6 is the only DRAM config parameter that has a
+> > non-zero default value. Since we need to provide a value for all the
+> > other parameters anyway, avoiding TPR6 makes no real difference.
+> > To make matters worse, TPR6 is a compound value covering multiple DRAM
+> > types, but also spans over three SoCs, which makes it hard to find one
+> > good default value.
+> >=20
+> > Drop the default from Kconfig, and put some explicit values in the
+> > defconfigs for the few boards that were relying on the default so far.
+> > The value is taken from one BSP, only the lower byte matters anyway for
+> > those boards, all using DDR3 DRAM.
+>=20
+> It looks like this change is missing some boards that we support (e.g.
+> liontron-h-a133l). Is this intentional?
+>=20
+> The TPR6 value is still used for all DRAM types, so I think we need to
+> define it for all the boards we currently support.
 
-diff --git a/arch/arm/mach-bcm283x/include/mach/acpi/bcm2711.h b/arch/arm/mach-bcm283x/include/mach/acpi/bcm2711.h
-index 6eb5389b858..869482eaffe 100644
---- a/arch/arm/mach-bcm283x/include/mach/acpi/bcm2711.h
-+++ b/arch/arm/mach-bcm283x/include/mach/acpi/bcm2711.h
-@@ -54,6 +54,7 @@
- #define  MISC_CTRL_CFG_READ_UR_MODE_MASK          0x2000
- #define  MISC_CTRL_MAX_BURST_SIZE_MASK            0x300000
- #define  MISC_CTRL_MAX_BURST_SIZE_128             0x0
-+#define  MISC_CTRL_MAX_BURST_SIZE_128_2712		0x100000
- #define  MISC_CTRL_SCB0_SIZE_MASK                 0xf8000000
- 
- #define PCIE_MISC_CPU_2_PCIE_MEM_WIN0_LO          0x400c
-diff --git a/drivers/pci/pcie_brcmstb.c b/drivers/pci/pcie_brcmstb.c
-index 05b80a45b50..f0b0f1cc117 100644
---- a/drivers/pci/pcie_brcmstb.c
-+++ b/drivers/pci/pcie_brcmstb.c
-@@ -551,6 +551,30 @@ static void brcm_pcie_set_inbound_windows(struct udevice *dev)
- 	}
- }
- 
-+static void brcm_pcie_munge_pll(struct brcm_pcie *pcie)
-+{
-+	u32 tmp;
-+	int ret, i;
-+	u8 regs[] =  { 0x16,   0x17,   0x18,   0x19,   0x1b,   0x1c,   0x1e };
-+	u16 data[] = { 0x50b9, 0xbda1, 0x0094, 0x97b4, 0x5030, 0x5030, 0x0007 };
-+
-+	ret = brcm_pcie_mdio_write(pcie->base, MDIO_PORT0, SET_ADDR_OFFSET,
-+				   0x1600);
-+	for (i = 0; i < ARRAY_SIZE(regs); i++) {
-+		brcm_pcie_mdio_read(pcie->base, MDIO_PORT0, regs[i], &tmp);
-+		debug("PCIE MDIO pre_refclk 0x%02x = 0x%04x\n",
-+		      regs[i], tmp);
-+	}
-+	for (i = 0; i < ARRAY_SIZE(regs); i++) {
-+		brcm_pcie_mdio_write(pcie->base, MDIO_PORT0, regs[i], data[i]);
-+		brcm_pcie_mdio_read(pcie->base, MDIO_PORT0, regs[i], &tmp);
-+		debug("PCIE MDIO post_refclk 0x%02x = 0x%04x\n",
-+		      regs[i], tmp);
-+	}
-+
-+	udelay(200);
-+}
-+
- static int brcm_pcie_probe(struct udevice *dev)
- {
- 	struct udevice *ctlr = pci_get_controller(dev);
-@@ -592,12 +616,27 @@ static int brcm_pcie_probe(struct udevice *dev)
- 	/* Wait for SerDes to be stable */
- 	udelay(100);
- 
-+	if (pcie->pcie_cfg->type == BCM2712) {
-+		/* Allow a 54MHz (xosc) refclk source */
-+		brcm_pcie_munge_pll(pcie);
-+		/* Fix for L1SS errata */
-+		tmp = readl(base + PCIE_RC_PL_PHY_CTL_15);
-+		tmp &= ~PCIE_RC_PL_PHY_CTL_15_PM_CLK_PERIOD_MASK;
-+		/* PM clock period is 18.52ns (round down) */
-+		tmp |= 0x12;
-+		writel(tmp, base + PCIE_RC_PL_PHY_CTL_15);
-+	}
-+
-+	tmp = (pcie->pcie_cfg->type == BCM2712) ?
-+			MISC_CTRL_MAX_BURST_SIZE_128_2712 :
-+			MISC_CTRL_MAX_BURST_SIZE_128;
- 	/* Set SCB_MAX_BURST_SIZE, CFG_READ_UR_MODE, SCB_ACCESS_EN */
- 	clrsetbits_le32(base + PCIE_MISC_MISC_CTRL,
- 			MISC_CTRL_MAX_BURST_SIZE_MASK,
- 			MISC_CTRL_SCB_ACCESS_EN_MASK |
- 			MISC_CTRL_CFG_READ_UR_MODE_MASK |
--			MISC_CTRL_MAX_BURST_SIZE_128);
-+			MISC_CTRL_PCIE_RCB_MPS_MODE_MASK |
-+			tmp);
- 
- 	tmp = readl(base + PCIE_MISC_MISC_CTRL);
- 	if (pcie->pcie_cfg->type == BCM2712) {
-@@ -617,6 +656,29 @@ static int brcm_pcie_probe(struct udevice *dev)
- 	}
- 	writel(tmp, base + PCIE_MISC_MISC_CTRL);
- 
-+	if (pcie->pcie_cfg->type == BCM2712) {
-+		/* Suppress AXI error responses and return 1s for read failures */
-+		tmp = readl(base + PCIE_MISC_UBUS_CTRL);
-+		u32p_replace_bits(&tmp, 1, PCIE_MISC_UBUS_CTRL_UBUS_PCIE_REPLY_ERR_DIS_MASK);
-+		u32p_replace_bits(&tmp, 1, PCIE_MISC_UBUS_CTRL_UBUS_PCIE_REPLY_DECERR_DIS_MASK);
-+		writel(tmp, base + PCIE_MISC_UBUS_CTRL);
-+		writel(0xffffffff, base + PCIE_MISC_AXI_READ_ERROR_DATA);
-+
-+		/*
-+		 * Adjust timeouts. The UBUS timeout also affects CRS
-+		 * completion retries, as the request will get terminated if
-+		 * either timeout expires, so both have to be a large value
-+		 * (in clocks of 750MHz).
-+		 * Set UBUS timeout to 250ms, then set RC config retry timeout
-+		 * to be ~240ms.
-+		 *
-+		 * Setting CRSVis=1 will stop the core from blocking on a CRS
-+		 * response, but does require the device to be well-behaved...
-+		 */
-+		writel(0xB2D0000, base + PCIE_MISC_UBUS_TIMEOUT);
-+		writel(0xABA0000, base + PCIE_MISC_RC_CONFIG_RETRY_TIMEOUT);
-+	}
-+
- 	/* Disable the PCIe->GISB memory window (RC_BAR1) */
- 	clrbits_le32(base + PCIE_MISC_RC_BAR1_CONFIG_LO,
- 		     RC_BAR1_CONFIG_LO_SIZE_MASK);
--- 
-2.54.0
+Nevermind this, these other boards already have TPR6 in their config,
+lost sight of that. Then this is:
 
+Reviewed-by: Paul Kocialkowski <paulk@sys-base.io>
+
+Thanks for picking this up!
+
+All the best,
+
+Paul
+
+> > Signed-off-by: Andre Przywara <andre.przywara@arm.com>
+> > ---
+> >  arch/arm/mach-sunxi/Kconfig         | 1 -
+> >  configs/orangepi_zero2_defconfig    | 1 +
+> >  configs/transpeed-8k618-t_defconfig | 1 +
+> >  configs/x96_mate_defconfig          | 1 +
+> >  configs/x96q_defconfig              | 1 +
+> >  5 files changed, 4 insertions(+), 1 deletion(-)
+> >=20
+> > diff --git a/arch/arm/mach-sunxi/Kconfig b/arch/arm/mach-sunxi/Kconfig
+> > index 284458ad9a5..18123e685dc 100644
+> > --- a/arch/arm/mach-sunxi/Kconfig
+> > +++ b/arch/arm/mach-sunxi/Kconfig
+> > @@ -151,7 +151,6 @@ config DRAM_SUNXI_TPR3
+> > =20
+> >  config DRAM_SUNXI_TPR6
+> >  	hex "DRAM TPR6 parameter"
+> > -	default 0x3300c080
+> >  	help
+> >  	  TPR6 value from vendor DRAM settings.
+> > =20
+> > diff --git a/configs/orangepi_zero2_defconfig b/configs/orangepi_zero2_=
+defconfig
+> > index b387b4795ad..afd1535052d 100644
+> > --- a/configs/orangepi_zero2_defconfig
+> > +++ b/configs/orangepi_zero2_defconfig
+> > @@ -5,6 +5,7 @@ CONFIG_SPL=3Dy
+> >  CONFIG_DRAM_SUNXI_DX_ODT=3D0x08080808
+> >  CONFIG_DRAM_SUNXI_DX_DRI=3D0x0e0e0e0e
+> >  CONFIG_DRAM_SUNXI_CA_DRI=3D0x0e0e
+> > +CONFIG_DRAM_SUNXI_TPR6=3D0x33808080
+> >  CONFIG_DRAM_SUNXI_TPR10=3D0xf83438
+> >  CONFIG_MACH_SUN50I_H616=3Dy
+> >  CONFIG_SUNXI_DRAM_H616_DDR3_1333=3Dy
+> > diff --git a/configs/transpeed-8k618-t_defconfig b/configs/transpeed-8k=
+618-t_defconfig
+> > index e4bf5e8efd3..e672d8f8df9 100644
+> > --- a/configs/transpeed-8k618-t_defconfig
+> > +++ b/configs/transpeed-8k618-t_defconfig
+> > @@ -7,6 +7,7 @@ CONFIG_DRAM_SUNXI_DX_ODT=3D0x03030303
+> >  CONFIG_DRAM_SUNXI_DX_DRI=3D0x0e0e0e0e
+> >  CONFIG_DRAM_SUNXI_CA_DRI=3D0x1f12
+> >  CONFIG_DRAM_SUNXI_TPR0=3D0xc0001002
+> > +CONFIG_DRAM_SUNXI_TPR6=3D0x33808080
+> >  CONFIG_DRAM_SUNXI_TPR10=3D0x2f1107
+> >  CONFIG_DRAM_SUNXI_TPR11=3D0xddddcccc
+> >  CONFIG_DRAM_SUNXI_TPR12=3D0xeddc7665
+> > diff --git a/configs/x96_mate_defconfig b/configs/x96_mate_defconfig
+> > index c0628370df9..1b7d9338c02 100644
+> > --- a/configs/x96_mate_defconfig
+> > +++ b/configs/x96_mate_defconfig
+> > @@ -6,6 +6,7 @@ CONFIG_DRAM_SUNXI_DX_ODT=3D0x03030303
+> >  CONFIG_DRAM_SUNXI_DX_DRI=3D0x0e0e0e0e
+> >  CONFIG_DRAM_SUNXI_CA_DRI=3D0x1c12
+> >  CONFIG_DRAM_SUNXI_TPR0=3D0xc0000c05
+> > +CONFIG_DRAM_SUNXI_TPR6=3D0x33808080
+> >  CONFIG_DRAM_SUNXI_TPR10=3D0x2f0007
+> >  CONFIG_DRAM_SUNXI_TPR11=3D0xffffdddd
+> >  CONFIG_DRAM_SUNXI_TPR12=3D0xfedf7557
+> > diff --git a/configs/x96q_defconfig b/configs/x96q_defconfig
+> > index 59f01aae4eb..068aee3fd1e 100644
+> > --- a/configs/x96q_defconfig
+> > +++ b/configs/x96q_defconfig
+> > @@ -8,6 +8,7 @@ CONFIG_DRAM_SUNXI_DX_DRI=3D0x0e0e0e0e
+> >  CONFIG_DRAM_SUNXI_CA_DRI=3D0x1f12
+> >  CONFIG_DRAM_SUNXI_TPR0=3D0xc0001002
+> >  CONFIG_DRAM_SUNXI_TPR2=3D0x00000100
+> > +CONFIG_DRAM_SUNXI_TPR6=3D0x33808080
+> >  CONFIG_DRAM_SUNXI_TPR10=3D0x002f0107
+> >  CONFIG_DRAM_SUNXI_TPR11=3D0xddddcccc
+> >  CONFIG_DRAM_SUNXI_TPR12=3D0xeddc7665
+> > --=20
+> > 2.43.0
+> >=20
+>=20
+> --=20
+> Paul Kocialkowski,
+>=20
+> Independent contractor - sys-base - https://www.sys-base.io/
+> Free software developer - https://www.paulk.fr/
+>=20
+> Expert in multimedia, graphics and embedded hardware support with Linux.
+
+
+
+--=20
+Paul Kocialkowski,
+
+Independent contractor - sys-base - https://www.sys-base.io/
+Free software developer - https://www.paulk.fr/
+
+Expert in multimedia, graphics and embedded hardware support with Linux.
+
+--JVSmNFh8U316prLP
+Content-Type: application/pgp-signature; name=signature.asc
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCgAdFiEEAbcMXZQMtj1fphLChP3B6o/ulQwFAmnw8OQACgkQhP3B6o/u
+lQxKPA/9Ffp2RSL8ZYGC7nijyJQkxuYJxT4YSK89Z9i5UYEHXKYSOO764rYhqznZ
+dAp8Us0bcg6EiJUWrBz0bFyaCHU0TqOAWgNrFwujVVuogo8FlWc3kKXDwnOkpBKs
+Vyo8/7nhRaIKbprxwTjqpkiZKwVgPBwn9Y9u/e9BfG/phrK+Vaz/Lns8CHm7eGu/
+84+YjgAlqflyVOR4RI39WkLg6NLStTxte3GOsAum8/TG33fldPLOW91x8ZDwY8Vv
+ugzcsIyYR7TtCJe54zfvskWKmuY9MhuBnP9SE4Vqf4pymBIqOKFPg05nCquPyqZU
+zzU75bqnzf7q4Y04y33zT4rKQijaUgyyAU3xwqW0eA8+SKBAKKI713Vg1wiofzSJ
+EVZVdB7XNEQuuXGGcUqzr5b12qnvpZPo0k7j8/6oPEhbfU2FNiONw20PyItdxo/t
+gSf1WbGZNdVnKDnIaCRNbOsRN47WlCGkcyO7iBEAM2NrsLBIi+Mnr7LThi9l/329
+46hPKgbGxB5DJv+nYM3Lh3Rr6j75rvmVE3cOPz3y6HU/Uo3Eca2BbIU+gXxP3cgS
+d9udBoxDUZXHFLxzoflwAur6KWC/i0mBk51Zi6vY5FtmWTnVmx2IIQEeRnO4BRcy
+BJ/zlRGHK7+5YUUAellYQ8QuCSAgrS37jMSgk0WWj8nePGMY5Ns=
+=DXIm
+-----END PGP SIGNATURE-----
+
+--JVSmNFh8U316prLP--
