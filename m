@@ -4,111 +4,159 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D0BEFF885A
-	for <u-boot@archiver.kernel.org>; Tue, 28 Apr 2026 07:32:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D4DEFF885A
+	for <u-boot@archiver.kernel.org>; Tue, 28 Apr 2026 07:33:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DA6D8845D0;
-	Tue, 28 Apr 2026 09:32:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 192748464E;
+	Tue, 28 Apr 2026 09:32:43 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="i/li4xU+";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="LJ81THF6";
+	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="kY671Z9x";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 19EAD842D7; Tue, 28 Apr 2026 09:32:40 +0200 (CEST)
-Received: from mail-yx1-xb132.google.com (mail-yx1-xb132.google.com
- [IPv6:2607:f8b0:4864:20::b132])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id C83B783FB5; Tue, 28 Apr 2026 09:32:41 +0200 (CEST)
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
+ [205.220.168.131])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 10AE48465D
- for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 09:32:36 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yx1-xb132.google.com with SMTP id
- 956f58d0204a3-651b4d09141so14768167d50.1
- for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 00:32:36 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1777361555; cv=none;
- d=google.com; s=arc-20240605;
- b=Gke1j/G7zISS0fvYBXLKSR+Zw2dKaUWz1Yo0CUHZgd/gnV0OxbtuYB6kaZSHKbsuP4
- QRxlPfp2e+Oi57UDoYS7PRgjB1RuyVjy9My+U3C3nGajR4CbtMdW0MahR5VnBzWB3VPv
- tlUIznhz8ZncoN/pfBtOutGT+F77GummmnxRZLNdOa2BjEtT04zXz4ulSkGgVQdJIbJO
- 5Mf8SZvavE9DkzoiFjSq08o/mn8mGDpXDB4G1vlvHJL/Usu9KRDagHIcrkqOueTjTGyu
- 0tcBLcRU34l9Q41PWmNMKEKXJwDWmxFF+CxpRWLUFe3q72aMoZhS6Xen1SA+C7v0LdJj
- O/Hg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=auGA8e8dgARaA025uqFpHRfczPwdur2SlCqPboDW8w4=;
- fh=ptrbFVqF3Hhnpc2XaP/T4NwIdIEfzCU0650LUDM8IqA=;
- b=IfpAto0qQ+h1cRC2GBmHQNVvCwDZTGmoWHVF7PiuTb/N1mTDl8B5P2+N7CElklPnCv
- 6gl2lsGBGSDKb5ci/o8I6o81Jj1lWmsjbkP0a8BYUamcmcUouFjnHh1cEyzhJLHb7uie
- p8pBWLubR92HNlq6DyeR/r75Kj4D4kZZoLWQyLRpO3ZqHevZp8udGBBRdOHczJcmvwPA
- Qd5+noXiaBCda9eDRjBu+cGfBmGgmwl7m5DYgoB6FsCugSzvxPKszASY4FnxQ4nwH8PS
- 6kKBTNEP52I2vk5tF6vZi/KO8j2ai8YoiTThfttdccnqjF5J1t5CbOLm+X6AhsRG+DO5
- nV6Q==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ by phobos.denx.de (Postfix) with ESMTPS id 8174B8460E
+ for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 09:32:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=oss.qualcomm.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=balaji.selvanathan@oss.qualcomm.com
+Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 63S7FBDI440889
+ for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 07:32:37 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ hMyL4vN+blJm8kEQYB6iduylN6qL6lhy/KZowRcO01s=; b=LJ81THF6eKKydUPN
+ +VCrDttgRnWrzpJQjp8uqagbxGVUVKtEbXbVs0tsEvmXgbSiK3TECIYcjv/Anuzu
+ 0falyTLhq2J5zz7Wsj8g4p6+Z24MGN+BtmzNPggEzvDNa1FQPuZBHRaD3jZnShzl
+ mSOmuZrgFNxeXOzPgOyIzQWnurNnvXOkHxT/Li+uMhWsOZo/S67QOwjAtqp2O8SX
+ flsOQQv9ElS34rdvPkqVL9bp4VQzomZrcYzGVvegML1lV0NCJWcUuBZngXn004HU
+ sEcmKkkSsKsVKuiEU/0mN0gt0PPU6YJ/0n9ZMxYvfRxqW3VrCszuqa5PJSt69USU
+ gt6Tew==
+Received: from mail-pl1-f200.google.com (mail-pl1-f200.google.com
+ [209.85.214.200])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4dtac43841-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 07:32:37 +0000 (GMT)
+Received: by mail-pl1-f200.google.com with SMTP id
+ d9443c01a7336-2b2ead99f5dso138197785ad.0
+ for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 00:32:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1777361555; x=1777966355; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=auGA8e8dgARaA025uqFpHRfczPwdur2SlCqPboDW8w4=;
- b=i/li4xU+K29YzerIM0blKOIxYhEAiyqGgO0pvWstJyecC+d8Wcu9KSdw5A8PXEa7qZ
- ny1OSKN094U7Z39YEALZ5x8Z6oYhZvnem5PpfRNmm98zEQr1+p95lWcKyXDU7C6hkYUR
- lglS2BKxyH/pYSfMqzi2uRPcfVB4vpi9YD2jWK5WxETjf0/q4X7YGGC//uNhgSnVMxOC
- WYTfHRnnlhV53qYU2/BJl+AudWbx2U8XoNv45h5T2KKSYYLWXFqOnQxLxkIq18W8z/Na
- CkqUSLMpRAnuCJobTc9bcU4hdG2vnHqpVPbFygb2RWNrEXRWnL8bxB5wSZRk3hyVerML
- DeQg==
+ d=oss.qualcomm.com; s=google; t=1777361557; x=1777966357; darn=lists.denx.de; 
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=hMyL4vN+blJm8kEQYB6iduylN6qL6lhy/KZowRcO01s=;
+ b=kY671Z9xFzVYLbIHrSGEaifCcIT5lQT5JGZzOqY8xFQKz19eqKqH1xr/CqFJ6wVnVA
+ z6TusP5dK89ejWX1wbDQNpOstid2+Mm8uyXAw5aIjIWaPO0oB8Sdye2oAR2nPTCdWAXm
+ F1p8O9nflBEeIE5HaIRcVjcy4OxtgNbdIIoO7X1g5MbWJbRTx3bM4CxknoENVAxibqJY
+ gkX2tk0HnSGQjTdO7E8Pmn3HQHm+bb5xGBVI1xxa21IhnWvjRMrMpJE+nSDQ2NlTPGY7
+ Lo9pexpcPoAZZI+dvlBd2uNpPv007ToghmJuGVKOeac+wxuN6C1nEpAAy4xgam6cBqpj
+ 4B5w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777361555; x=1777966355;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=auGA8e8dgARaA025uqFpHRfczPwdur2SlCqPboDW8w4=;
- b=SYg6t5qtLVi3JJ5pXxZqVc1Sh7s+NfGhSBadkn+DkbpCttLHGFPt57XiEDVRhLsQiN
- OXjBylbjykFCcspPoCtD5B7Ax7+e8wOuYm1jyAR7ldweoRLsXjgK+IVq46Vf3PFAlwGa
- rmXZy92AV5xOqJufwOivxdxmgWPnOlJhgb42XZxd8/b27Z6roNu8X95JctztafCfqCPr
- C1e7s5obO28gP5LGsJZeirfMsQKkxCqtAVAYyUqcfIey5Bd43hXVHbfbGiakJ50xMSkq
- gw/ldXtiIdTAu/sadX2ARxlUCO42S7cilulauDRIQ9bn9kKG9Q+LwKj7yr0LtBK84//4
- qAEQ==
-X-Forwarded-Encrypted: i=1;
- AFNElJ/FqwwiGcBbRtKx3kH5FLUdRkbarB1cDJkDHZTBk4j4kwdtyMhklu5DynNWOlCjgkWl1rx1O94=@lists.denx.de
-X-Gm-Message-State: AOJu0YxTDSRTlGdumFAYWQBWXRnpBHkdgyViS7j0lzmhnDPnjYbyP410
- HgBHBTduRGen/2FRqn3LGOaH98q7cbs60DTql6SfFIub4pxSGEabsihg0D4OwmxIfk3/pjvC3cn
- rwArW9+YgcuAIyArTx4TxK4kYkmLk5CCYCWejYRgOa0WFcqk1Zl3Kl9o=
-X-Gm-Gg: AeBDievnr8t3gsIhYFQSDNLlSK8s5THBp39/smV+fcsQI2vSfA1dJCgGtY8ITb9UCww
- /DfkWLB0ktlkDaruZ4xtAfWHSWztx9WAAzzzCHHbqAtGKuNZsYq4szS2RBeNqzrowvSqg3asTUi
- h7xaD6X+9eoEjd+bW96ZsivVxzZWJEqYYWdCFVjem43eehHxmML3tmHEZpxXTjqZL5+oy9rrYMS
- Igp6YYXSjEb2wzEbDfnewe/U7L0BjEsL8F7HG+dF1P30rXtzV3z9rUUxTaiVC45Yao1HU6gqXk9
- tafKCn9VaqrFqU+0WHHaIC2wpJOEsQOALqjXAB5BMhrHjJwuVfzumvO3iol+jJiSbs5wvssmM6e
- kCTLF0t8HRTNK2mZzzA/cKtzLFyHDvYWZTdXbYOdg/ohvNKW/lTPh+VQjMQBjDUwvF+rajQxGB0
- KId1IaizZdMBoJlAx2XMel390jsiqG3ivNRkdWK/O63yu1Hz/KLm9QWi/6vFOVC913nwqFsORLq
- yPoUwjjP+Pg5fhTpZmuReKmMxzFdCD6tsSZtfpYywUhFNkMRbJhddoVuyr8DSVQpuLxrM03d3fv
- yFWgpfT+2WhcfT0y/h+ywFsrDT3aYBp5vPINUCgPp9gLV5IxPe6yuGv87yZSIFI1ist2Iy9LalY
- Ewm35fhHGJkKOPDPk
-X-Received: by 2002:a05:690e:42ce:b0:654:3fca:3515 with SMTP id
- 956f58d0204a3-65bee3e6f3cmr924608d50.30.1777361554742; Tue, 28 Apr 2026
- 00:32:34 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1777361557; x=1777966357;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=hMyL4vN+blJm8kEQYB6iduylN6qL6lhy/KZowRcO01s=;
+ b=KxvQtNqJ3Ke77BLJVjY/ywXnXtG8se4ZLXqsagO5b8YAORaAYlN+Zc7gTL/3RZO6RA
+ sQXjJyf+15rXocyWAamX3ndXgtV08/mAbTtbk9UVKm/9+Uja2vzu2i2WCEsk4tiTQ0wd
+ gUpl/+eYBxI0U4EyrWA/hvBf+HqMN6G9AnKE9lndL0f4+jwY0V1u3gk/mW4YA9l8dYDO
+ JL/r6KoOcGHDtshsj0qeLRxkYS5BX4XLu1nUlzMdr8oHQOJykyXlez6YC0Far6pC8CoV
+ L0O28HoV4g8YdH2ggcASmTEXad5rB9sIbMpPOU4NDXxeeHPyZ490H+9MU7QqwhUd4PbV
+ 819g==
+X-Gm-Message-State: AOJu0YzfNcXlaiaM06IVnTkKZpc6t15YnmpHZb9igLojhJs0p89HF7h6
+ BNCQw4uMvQ4ON/zSys1PtuJeJGTtuhb0YrjJdwLuKK/q7YT/6rGrRE+nRAmkYBmJNil2/zjKMl3
+ 4qz6vuhKel50TmhP24VPgH8itpGtoiOZzLuLsbNJIMCqbzUJFvqTophIe
+X-Gm-Gg: AeBDiesyQWdlQ1ddyYR2gE+FHrYA6/BdpJcTq0B+IoHuCqPgl9TxuX90TH0XRZXsq3b
+ os9TegEIWcCz9AtFZ1efHKmkdgg5VnLxHBqXzbqY8s3+C2qHh3gIQPs/hEvjeQXiKXhgeT+HJ8n
+ 5avpQn1njAPM6P5ypeoqzPjDgkjjNz8ko1mDhSsBESq8wENswbQb5SRxiT8Hx/2oCPetkHdRtim
+ Wq7i1O8m2N6SxhYwEBSB13BSqYXc84tB+prAlAf6lCMkXXR/9LGruuEYQF8qRTTLdKTsouyTWee
+ Jj+aYVIHfMvfY2CbBGFs8gj7aZjqdihiw39EtNV8+If0G3JHArpMMofAZ8qR1QbA+FFQPKWgKBW
+ 0N5p3QCaNCeSawsFqELGdo52NF1RMGoNrLyDdaz0Cxa3l0EoCwnUjBAge0G1yFcAeO+Nb6wRIrE
+ f7lWP0TCUM9Kp00wdbNI7P0HvjhyTdXCz3BnasmMn03A55DNHX4A1OC9iBFVdf
+X-Received: by 2002:a17:902:d582:b0:2b9:4c05:5417 with SMTP id
+ d9443c01a7336-2b97c47f84bmr20866745ad.32.1777361556863; 
+ Tue, 28 Apr 2026 00:32:36 -0700 (PDT)
+X-Received: by 2002:a17:902:d582:b0:2b9:4c05:5417 with SMTP id
+ d9443c01a7336-2b97c47f84bmr20866305ad.32.1777361556326; 
+ Tue, 28 Apr 2026 00:32:36 -0700 (PDT)
+Received: from hu-bselvana-blr.qualcomm.com
+ (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-2b97aabaecfsm16054405ad.36.2026.04.28.00.32.29
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 28 Apr 2026 00:32:36 -0700 (PDT)
+From: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+Date: Tue, 28 Apr 2026 13:01:47 +0530
+Subject: [PATCH v4 5/8] env: scsi: Add partition type GUID support and
+ choice-based selection
 MIME-Version: 1.0
-References: <20260416055948.130041-1-ilias.apalodimas@linaro.org>
- <20260416055948.130041-7-ilias.apalodimas@linaro.org>
- <6944f28f-131f-4a08-9ef9-aae812926f4b@mailbox.org>
- <CAC_iWj+ufWdroVDCh9qNAYfsjON5r_pdfOUgyB=h=b2b_rMVKg@mail.gmail.com>
- <8b87df2b-1904-4f2c-862d-924daff649e6@mailbox.org>
- <CAC_iWj+1PNaGjX5DH3hA4iednKruydKjy-0YoXuWTCJHmPVCDA@mail.gmail.com>
- <73312691-c9a1-45a6-be3d-232949432b60@mailbox.org>
-In-Reply-To: <73312691-c9a1-45a6-be3d-232949432b60@mailbox.org>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Tue, 28 Apr 2026 10:31:58 +0300
-X-Gm-Features: AVHnY4I40m-G_TxsjtKeVHXxMiO_pWqAap-LmWdK_OD5QeyV0eo5YhMrg6Uea4c
-Message-ID: <CAC_iWj+bT0Ab_MuGWa5seQBQ4WaAGSqWnPvZ=D9G2SgBH0X0Dg@mail.gmail.com>
-Subject: Re: [PATCH v2 6/6] common: Add an option to relocate on ram top
-To: Marek Vasut <marek.vasut@mailbox.org>
-Cc: trini@konsulko.com, marek.vasut+renesas@mailbox.org, jonas@kwiboo.se, 
- anshuld@ti.com, sjg@chromium.org, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260428-type-v4-5-b7051dc45a88@oss.qualcomm.com>
+References: <20260428-type-v4-0-b7051dc45a88@oss.qualcomm.com>
+In-Reply-To: <20260428-type-v4-0-b7051dc45a88@oss.qualcomm.com>
+To: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>,
+ u-boot-qcom@groups.io
+Cc: Tom Rini <trini@konsulko.com>, Quentin Schulz <quentin.schulz@cherry.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Rasmus Villemoes <ravi@prevas.dk>, Simon Glass <sjg@chromium.org>,
+ Javier Tia <floss@jetm.me>,
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+ Varadarajan Narayanan <quic_varada@quicinc.com>,
+ Javier Martinez Canillas <javierm@redhat.com>,
+ Richard Genoud <richard.genoud@bootlin.com>,
+ Jan Kiszka <jan.kiszka@siemens.com>, David Lechner <dlechner@baylibre.com>,
+ Casey Connolly <casey.connolly@linaro.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Michael Walle <mwalle@kernel.org>,
+ Sumit Garg <sumit.garg@oss.qualcomm.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
+ Jerome Forissier <jerome.forissier@arm.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1777361510; l=4724;
+ i=balaji.selvanathan@oss.qualcomm.com; s=20260213; h=from:subject:message-id; 
+ bh=OPIW8rft62NN0XKDVX7iQkwgiyd4nzFZHnVhZykyLnU=;
+ b=YO5xVDxyYlHDgiXlPXCEjwDYUTOoVO7C121bT2EnjnbViprhFgnCPYoS1Al+H90c2f4f198TZ
+ WAsr0AqAW/FA+Aa6mHryl+V7dtmAUjJ96MXvp1OeTEETvlIjtWSKWDl
+X-Developer-Key: i=balaji.selvanathan@oss.qualcomm.com; a=ed25519;
+ pk=CDpYiUU3SH7KGEtsBvY2tBGPiWfMxqWJF0p2LftOfnc=
+X-Proofpoint-GUID: UxQ89cFW5auS4EgCsq9LAjDPQ5-XpT_J
+X-Authority-Analysis: v=2.4 cv=D7J37PRj c=1 sm=1 tr=0 ts=69f06295 cx=c_pps
+ a=IZJwPbhc+fLeJZngyXXI0A==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+ a=IkcTkHD0fZMA:10 a=A5OVakUREuEA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
+ a=cm27Pg_UAAAA:8 a=EUspDBNiAAAA:8 a=UtjBXWsYNgS_f0zzo0EA:9 a=QEXdDO2ut3YA:10
+ a=uG9DUKGECoFWVXl0Dc02:22
+X-Proofpoint-ORIG-GUID: UxQ89cFW5auS4EgCsq9LAjDPQ5-XpT_J
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNDI4MDA2OSBTYWx0ZWRfX0hIn/TKOPoXI
+ QdniPFbydV0w9npDxvYi8zhsNXtZY8mggrNLiU80a9zTe24CuCcNBllDclpPYSfOhKz4CCwXoxp
+ DPN0Y3xt45Jay44dlfUYPNTcPunTNbK5Fd4ZjctLw+1QNxPPFjOIrgT765aBtntz5ge/CAHO1g7
+ Lx/JnWhvLtEvy9ETP6dG2sDqiVjB6Rnmm2ghDPZqsJLNQP9igDFQ6OWkK8pmUCbarZavahhhNkj
+ 6gL16h/YtMQr0UBdHjwYJoZaJHXfxytNiUD0wTacjdr78NTU+FczG3lQzik6Zi+ema6VAq/hSVX
+ oI6I8p8SX+hClqOTD53Y27w484kmHP6t0Gl6lBetul9FhRetveFcZsHceksUEdvVrzGGmL115sT
+ sBgz21NrNtqN3TY7GN/1lhcxU8FHd9QDBdYSPZRvidUzPIdoACfBmKAwDTzRInc4+wqetHKhO5J
+ sNRWbpZBUHrHsKPE0Kg==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
+ definitions=2026-04-28_01,2026-04-21_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ impostorscore=0 bulkscore=0 phishscore=0 lowpriorityscore=0 spamscore=0
+ priorityscore=1501 suspectscore=0 clxscore=1015 adultscore=0 malwarescore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2604200000 definitions=main-2604280069
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -125,59 +173,135 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 28 Apr 2026 at 09:43, Marek Vasut <marek.vasut@mailbox.org> wrote:
->
-> On 4/27/26 4:33 PM, Ilias Apalodimas wrote:
->
-> [...]
->
-> >>>>> +++ b/common/board_f.c
-> >>>>> @@ -339,7 +339,22 @@ static int setup_ram_base(void)
-> >>>>>     static int setup_ram_config(void)
-> >>>>>     {
-> >>>>>         debug("Monitor len: %08x\n", gd->mon_len);
-> >>>>> -#if CONFIG_VAL(SYS_MEM_TOP_HIDE)
-> >>>>> +
-> >>>>> +     if (CONFIG_IS_ENABLED(RELOC_ADDR_TOP)) {
-> >>>>> +             int bank;
-> >>>>> +             phys_size_t total_size = 0;
-> >>>>> +
-> >>>>> +             for (bank = 0; bank < CONFIG_NR_DRAM_BANKS; bank++) {
-> >>>>> +                     if (gd->ram_top <= gd->bi_dram[bank].start)
-> >>>>> +                             gd->ram_top = gd->bi_dram[bank].start +
-> >>>>> +                                             gd->bi_dram[bank].size;
-> >>>>> +                     total_size += gd->bi_dram[bank].size;
-> >>>>> +             }
-> >>>>> +             gd->ram_size = total_size;
-> >>>>
-> >>>> Shouldn't this also apply board_get_usable_ram_top() to be consistent ?
-> >>>
-> >>> Simon asked the same thing. I'd rather keep this option strict for now
-> >>> and always relocate to the upper memory boundary fnor now. Once I do
-> >>> further cleanups, I can either add it or remove the function entirely
-> >>> since dram_init_banksize() (which hs also board specific) runs really
-> >>> early now.
-> >>
-> >> Maybe the default board_get_usable_ram_top() can return the ram top if
-> >> CONFIG_IS_ENABLED(RELOC_ADDR_TOP) ? That would still allow users to use
-> >> board_get_usable_ram_top() consistently to reduce the ram top.
-> >
-> > dram_init_banksize() can be used instead now to reduce that and we can
-> > remove this option eventually. Is there anything that we can't achieve
-> > with only that ?
-> I think I might be confused, but it seems board_get_usable_ram_top() is
-> used to set gd->ram_top , which is U-Boot's top of RAM and may not be
-> the same as physical top of RAM . So no, dram_init_banksize() has to
-> configure the correct physical RAM topology, board_get_usable_ram_top()
-> can be used to make space at ram_top unavailable to U-Boot .
+Add support for locating SCSI environment partition using GPT type
+GUID.
 
-I don't think you are confused but what I am trying to do with this
-option here is make the process of relocating to the last bank
-standard. So people that want U-Boot to calculate the reloc address
-based on the information they initalized on dram_init_banksize() _ the
-reserved DT regions should enable this option. if they have their own
-per board calculation logic, they can leave it as is, in which case
-we'll still call board_get_usable_ram_top().
+Introduce a Kconfig choice statement to select between three
+mutually exclusive partition lookup methods: UUID-based (default),
+type GUID-based, and hardware partition number.
 
-Cheers
-/Ilias
+Reorganize existing configs to depend on their respective choice
+options. Update ENV_IS_IN_SCSI help text to document the
+new configuration structure.
+
+Reviewed-by: Simon Glass <sjg@chromium.org>
+Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+---
+Changes in v4:
+ - Has only changes related to introducing choice configs
+
+Changes in v3:
+- Introduce a new choice config: ENV_SCSI_PART_USE_HW for
+  ENV_SCSI_HW_PARTITION
+- Refactor env_scsi_get_part and env_scsi_load functions based
+  on the choice configs
+
+Changes in v2:
+- Introduce a Kconfig choice config to select between UUID-based
+and type GUID-based partition lookup methods.
+---
+ env/Kconfig | 68 ++++++++++++++++++++++++++++++++++++++++++++++++-------------
+ 1 file changed, 54 insertions(+), 14 deletions(-)
+
+diff --git a/env/Kconfig b/env/Kconfig
+index 71a27894f90..f59b2acb7e6 100644
+--- a/env/Kconfig
++++ b/env/Kconfig
+@@ -299,16 +299,20 @@ config ENV_IS_IN_SCSI
+ 	  The size of the partition where the environment is stored in bytes. Must
+ 	  be a multiple of the partition block size.
+ 
+-	  - CONFIG_ENV_SCSI_HW_PARTITION:
++	  The partition selection method is configured via a choice statement:
+ 
+-	  Specifies which SCSI partition the environment is stored in. If not
+-	  set, defaults to partition 0, the user area. Common values might be
+-	  1 (first SCSI boot partition), 2 (second SCSI boot partition). Ignored
+-	  if CONFIG_ENV_SCSI_PART_UUID is set to non-empty string.
++	  - ENV_SCSI_PART_USE_UUID: Use the partition's unique UUID to identify
++	    the SCSI partition for environment storage.
+ 
+-	  - CONFIG_ENV_SCSI_PART_UUID:
++	  - ENV_SCSI_PART_USE_TYPE_GUID: Use the partition type GUID to identify
++	    the SCSI partition for environment storage. The first partition
++	    matching the specified type GUID will be used.
+ 
+-	  UUID of the SCSI partition where the environment is stored.
++	  - ENV_SCSI_PART_USE_HW: Use the hardware device number to identify
++	    the SCSI device for environment storage. Specifies which SCSI
++	    partition the environment is stored in. If not set, defaults to
++	    partition 0, the user area. Common values might be 1 (first SCSI
++	    boot partition), 2 (second SCSI boot partition).
+ 
+ 
+ config ENV_RANGE
+@@ -780,9 +784,51 @@ config ENV_MMC_USE_DT
+ 	  The 2 defines CONFIG_ENV_OFFSET, CONFIG_ENV_OFFSET_REDUND
+ 	  are not used as fallback.
+ 
++choice
++	prompt "SCSI partition selection method"
++	depends on ENV_IS_IN_SCSI
++	default ENV_SCSI_PART_USE_UUID
++	help
++	  Select the method to identify the SCSI partition for environment storage.
++
++config ENV_SCSI_PART_USE_UUID
++	bool "Use partition UUID"
++	help
++	  Use the partition's unique UUID to identify the SCSI partition
++	  for environment storage.
++
++config ENV_SCSI_PART_USE_TYPE_GUID
++	bool "Use partition type GUID"
++	select PARTITION_TYPE_GUID
++	help
++	  Use the partition type GUID to identify the SCSI partition
++	  for environment storage. The first partition matching the
++	  specified type GUID will be used.
++
++config ENV_SCSI_PART_USE_HW
++	bool "Use hardware partition number"
++	help
++	  Use the hardware device number to identify the SCSI device
++	  for environment storage.
++
++endchoice
++
++config ENV_SCSI_PART_UUID
++	string "SCSI partition UUID for saving environment"
++	depends on ENV_SCSI_PART_USE_UUID
++	help
++	  UUID of the SCSI partition that you want to store the environment in.
++
++config ENV_SCSI_PART_TYPE_GUID
++	string "SCSI partition type GUID for saving environment"
++	depends on ENV_SCSI_PART_USE_TYPE_GUID
++	help
++	  Type GUID of the SCSI partition to store the environment in.
++	  Uses the first partition matching this type GUID.
++
+ config ENV_SCSI_HW_PARTITION
+ 	string "SCSI hardware partition number"
+-	depends on ENV_IS_IN_SCSI
++	depends on ENV_SCSI_PART_USE_HW
+ 	default "0"
+ 	help
+ 	  SCSI hardware partition device number on the platform where the
+@@ -791,12 +837,6 @@ config ENV_SCSI_HW_PARTITION
+ 	  partition 0 or the first boot partition, which is 1 or some other defined
+ 	  partition.
+ 
+-config ENV_SCSI_PART_UUID
+-	string "SCSI partition UUID for saving environment"
+-	depends on ENV_IS_IN_SCSI
+-	help
+-	  UUID of the SCSI partition that you want to store the environment in.
+-
+ config ENV_USE_DEFAULT_ENV_TEXT_FILE
+ 	bool "Create default environment from file"
+ 	depends on !COMPILE_TEST
+
+-- 
+2.34.1
+
