@@ -4,159 +4,144 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 283D9FF885D
-	for <u-boot@archiver.kernel.org>; Tue, 28 Apr 2026 07:33:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34722FF885A
+	for <u-boot@archiver.kernel.org>; Tue, 28 Apr 2026 07:38:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2EB8684671;
-	Tue, 28 Apr 2026 09:33:17 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
+	by phobos.denx.de (Postfix) with ESMTP id B214E84255;
+	Tue, 28 Apr 2026 09:38:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="PmliukNW";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="EMsJ2A1J";
+	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="FJ9Lm5Pu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 047E984671; Tue, 28 Apr 2026 09:33:16 +0200 (CEST)
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
- [205.220.168.131])
+ id 38FAB84106; Tue, 28 Apr 2026 07:21:00 +0200 (CEST)
+Received: from DM1PR04CU001.outbound.protection.outlook.com
+ (mail-centralusazlp170100005.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c111::5])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2887284698
- for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 09:33:01 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=oss.qualcomm.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=balaji.selvanathan@oss.qualcomm.com
-Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 63S5lWWQ1625526
- for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 07:33:00 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- aZT/3kcC0XBZBfsWeqjvxSDEPV91XcnzwQrJtysXgh0=; b=PmliukNWJZROa50/
- bj5tvphlVEKKIdDHPo+QpymWGCY6Z5k1LLGv7PFwiSBanhrnL40Pr1t7LXpY20+I
- HXfpIUtl4Y7/ja9JkuvKABJG+GN10EKMxWjFG6m4VZRAM7b8IjLchqOz2223McXA
- u3VJgyepVXq7IxVIlG6TmG7wNo81jbEYoqyIRbi5+ZcT9h/xL1rNrLnh845a+QeI
- Wkq4smo2wNs+KWgxe4Wps9355Cuz14M/3teA7XoUvRyqPo5BQP3Sg5lvXS3qfXNt
- duQ9qdFTGEgYkiscmB9xtRozDBJyXFP61fzrWNEE1zZ1TXpRH//lf7B/KdsNtpz4
- uo7Ffg==
-Received: from mail-pl1-f198.google.com (mail-pl1-f198.google.com
- [209.85.214.198])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4dtgms9rtr-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 07:33:00 +0000 (GMT)
-Received: by mail-pl1-f198.google.com with SMTP id
- d9443c01a7336-2b465bf993cso113609245ad.1
- for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 00:33:00 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1777361579; x=1777966379; darn=lists.denx.de; 
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=aZT/3kcC0XBZBfsWeqjvxSDEPV91XcnzwQrJtysXgh0=;
- b=EMsJ2A1J3sanf5QWVhbR8YxVqCcfiesdUTHL286fw5JROlqQxFRwHXq88TgnFcSRIa
- 2uXELgEGebR5iAEmZNWOTjbquPD4ERUquf0SdPY2phRcHjgJNPiGBgBetP/t3VmFcl5p
- B6vT2pSdAtyReq/8IMNzeyMpEze3O9JJjMoFfm2QleILfUhWGqNGwNYelRjlmvQfAKtg
- CbNtM5Bi6b4HepbXiZyg95DYJ6qqaDpn5MECVUUM1txWa51VHUQbVYfYBZVxMY5xet5i
- MlbHPdEVKFXJYTR/ifWuxLTwKgBeEUkmopj2f6CplIUb5lGbjyFdClwhTx123ilFcK/1
- bbEQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777361579; x=1777966379;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=aZT/3kcC0XBZBfsWeqjvxSDEPV91XcnzwQrJtysXgh0=;
- b=Lx73L4NvfAC2wRZRvQdQOJezeOep8VA6G1QSG464kfUko2TLsRZdoWn9s/qoK1dlWa
- 9+FoRJrdvURZ6hFi/LsbxdtXU60mVPsaqGRVwwqtkh4qpGFlN/hrpD+mI7hqywNGMptf
- j/Bcfy0b0syuga3TWnj4A+eW0P5g62j0SgXN7tCpk/q3j7pMhxD76Yw8mvg+mw+lKaAk
- 734uHOqXXImC5t6pciPM3n79POC3UEFcdaCp0dX2mMMBy4ghIWb9komIAhf3UDuAhkD/
- B4A6r+N3A+wkXJmtyL4YKU/h9fnErQjf475HttzxpkENCY98PTabDP/ERNmbADtCI0hu
- vOzg==
-X-Gm-Message-State: AOJu0YwKDM5bLRf8vV4unRkee1nJrQCS7oiRaEhBiK6N5LTmmRbEDFtS
- u6zjwFCbQM1TsyZaGdClSA513dKmRo99o39kIZiDC+iGJkrJ4d+mbtSmezFnpeam6Wr2Owopyd7
- 5n/PGmhq8SAx3gfsp4Rw2nK2Yi86VRdf/Oi0WIkDF2pk4nrANDA0zySBM
-X-Gm-Gg: AeBDietH44xSk4RzeRKzg31Cj95lceZukTI+2LQEoHWuarHDMx73rwzZFA6jjVVVrXT
- lNLcYjm6jFtk434I1joEYiIlQOUKkQwIzyUAmYCFqJbbih4PR1fwK2nyELJSvDLMbGh6W4P0KI2
- tbPF9t2kVUOw7/gJq1ZCOYf3ACYwcrwYyjwFw/oV1NPAETI81XCmvaa2XhLlNHJJpXHMR5SDZgi
- RSrr3g3ygLv9yEHhK7UrTJt5BsQQXAxt6Z70uIu1U2uWHdQuAHbKMGGQuK+D7Xt5IWe0YXeIGVF
- Xxs9qbqZx4wDpUN5Mq48Yt6j9UQTskooe2gXlaT0jWovny9LYS1hqf7GrdGgz+iCfQpspF5RjDs
- dVnu+uXRdQPDAF1bTv5D+tT4Y6G+FqAuqvEqpISfelj//Z205U3Hmu9Fop11qR5EXrUFN+NlGsb
- /oeBMobRpSQVUdrYVbv7fGph653cqERb5Z9yylyC4JZnDm2pf4mWAzrVAOAaGr
-X-Received: by 2002:a17:903:298f:b0:2b2:680c:2193 with SMTP id
- d9443c01a7336-2b97c456f5bmr20785185ad.31.1777361579491; 
- Tue, 28 Apr 2026 00:32:59 -0700 (PDT)
-X-Received: by 2002:a17:903:298f:b0:2b2:680c:2193 with SMTP id
- d9443c01a7336-2b97c456f5bmr20784645ad.31.1777361578977; 
- Tue, 28 Apr 2026 00:32:58 -0700 (PDT)
-Received: from hu-bselvana-blr.qualcomm.com
- (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2b97aabaecfsm16054405ad.36.2026.04.28.00.32.51
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 28 Apr 2026 00:32:58 -0700 (PDT)
-From: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-Date: Tue, 28 Apr 2026 13:01:50 +0530
-Subject: [PATCH v4 8/8] test: dm: Add partition type GUID lookup test
+ by phobos.denx.de (Postfix) with ESMTPS id 2282883A91
+ for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 07:20:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=reject dis=none) header.from=altera.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=chen.huei.lok@altera.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=sbhymLfPFQDzVivIO6aCpqstkvluW5f7okv4AnaF1ybw4g6Ge+818mPsNr4uw/GxLlhZgqWisvoa1c8H/HGyNPaTL2zqCBWxR9/y5JK8UowpZxIqoFdQmPbggDVmvmNqJYK1Uz+LT0I3YcQQ2DRbm05jkKhduskU8x8aemh5/QX4Gs1f5bDRYSWhfpVUN3cE1ONLrDJriZNHFZ94JIIIMjbNRCza4+uJTaMcpiI8dYtWU3/e77oVY2931MhmQJ0tXFS6fua590tpTUJ1z95KGHSLyixkzd+jdo3K4RkKkhoIvZ6lRmHJhSDLu/f0B/ZSVeNPqdD9ffF8jLrwqm8ZrA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=qZqVj/dw3JlZYXfwDet3BJfH7hR6yPZyOGzY+CkH3ME=;
+ b=ihDe1ycs7FaD36ZDDKwmjlz2DRmMJEMujNeRRhUE2xTvywN1cHjbCGeJZ1FDQa3zjFlnF46ZlwAcqlxqRNWEsB7PvwMlLZKsafzZZN6MSqBFuGAKPGvNCQ2u9CRxofeKpdOWiYiBe+6/36z1N4cB7jvgKfOo7QWRt9VKEWTfjPC+NusHklwjbLuZW8MmcWccMiNePIOupHoAoeqNydTT2TL7ezls7FAseEtAwQI6rHG7rJasmoctoDVawFZ+9FdvsnyO+R+nk0ENsbk+DxptnnxOPFi80nsDuf+HgzP2ZGBVuTSCN91Z5B/Wj82gQClGDS46mv2/FUU+qGa7R9drlw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
+ dkim=pass header.d=altera.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=qZqVj/dw3JlZYXfwDet3BJfH7hR6yPZyOGzY+CkH3ME=;
+ b=FJ9Lm5Pu8pF1MV4n6t597iNjSZ4Z1tbGHtO8yMhF4+BrFbOFmM9TplIdnHQC029crGOYEkF8H8Yns786bRrm8EGpk9t5nwj8pmlT2+mbUnsQQ5gprH56IhA9DsHiQhFRII1HE8Gg+Ra6Iq8wCyQ2okbPmznDM08W+XmMT+n+HA1SP0sSBhOiYg+ozVvrRFAvMZ/4zRV/4I5kYpqpk7xL91WZo4rh9K7X5c2oN0cOWq4HvhRyKya482eWhQNJWs8Kd1ZLI4lci50wulanvhBuMu5aI7m7cviwfh6GV1yNthlXytJwJG1hYPai839C3CaA9iH5Utpd1BPWuHOCN6XDfw==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=altera.com;
+Received: from IA3PR03MB8021.namprd03.prod.outlook.com (2603:10b6:208:502::17)
+ by PH0PR03MB5893.namprd03.prod.outlook.com (2603:10b6:510:32::6) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9846.20; Tue, 28 Apr
+ 2026 05:20:49 +0000
+Received: from IA3PR03MB8021.namprd03.prod.outlook.com
+ ([fe80::3016:b672:c683:f7ad]) by IA3PR03MB8021.namprd03.prod.outlook.com
+ ([fe80::3016:b672:c683:f7ad%4]) with mapi id 15.20.9846.025; Tue, 28 Apr 2026
+ 05:20:49 +0000
+Message-ID: <d7eb4c12-7789-4ee3-bd3d-d8d618e13567@altera.com>
+Date: Tue, 28 Apr 2026 13:20:40 +0800
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3] drivers: fpga: Use SOC64 conditional instead of
+ Agilex/Stratix10
+Content-Language: en-US
+References: <778084f8-3688-4133-a64b-5f58f33a9653@altera.com>
+To: "Chee, Tien Fong" <tien.fong.chee@altera.com>, u-boot@lists.denx.de
+Cc: Michal Simek <michal.simek@amd.com>, Alexander Dahl <ada@thorsis.com>,
+ Tom Rini <trini@konsulko.com>,
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
+ Dinesh Maniyam <dinesh.maniyam@altera.com>,
+ Boon Khai Ng <boon.khai.ng@altera.com>,
+ Kok Kiang Hea <kok.kiang.hea@altera.com>,
+ drosdi <danish.ahmad.rosdi@altera.com>, chen.huei.lok@altera.com
+From: "Lok, Chen Huei" <chen.huei.lok@altera.com>
+In-Reply-To: <778084f8-3688-4133-a64b-5f58f33a9653@altera.com>
+X-Forwarded-Message-Id: <778084f8-3688-4133-a64b-5f58f33a9653@altera.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: SI2PR02CA0052.apcprd02.prod.outlook.com
+ (2603:1096:4:196::18) To IA3PR03MB8021.namprd03.prod.outlook.com
+ (2603:10b6:208:502::17)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260428-type-v4-8-b7051dc45a88@oss.qualcomm.com>
-References: <20260428-type-v4-0-b7051dc45a88@oss.qualcomm.com>
-In-Reply-To: <20260428-type-v4-0-b7051dc45a88@oss.qualcomm.com>
-To: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>,
- u-boot-qcom@groups.io
-Cc: Tom Rini <trini@konsulko.com>, Quentin Schulz <quentin.schulz@cherry.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Rasmus Villemoes <ravi@prevas.dk>, Simon Glass <sjg@chromium.org>,
- Javier Tia <floss@jetm.me>,
- Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
- Varadarajan Narayanan <quic_varada@quicinc.com>,
- Javier Martinez Canillas <javierm@redhat.com>,
- Richard Genoud <richard.genoud@bootlin.com>,
- Jan Kiszka <jan.kiszka@siemens.com>, David Lechner <dlechner@baylibre.com>,
- Casey Connolly <casey.connolly@linaro.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Christian Marangi <ansuelsmth@gmail.com>,
- Michael Walle <mwalle@kernel.org>,
- Sumit Garg <sumit.garg@oss.qualcomm.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
- Jerome Forissier <jerome.forissier@arm.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1777361510; l=2783;
- i=balaji.selvanathan@oss.qualcomm.com; s=20260213; h=from:subject:message-id; 
- bh=dBaG+OJDeLWGNa9VgU86TC+TvQKnP5VOmLc+3QK5eK0=;
- b=vXKFQRfMrYEwDkLC3Hika62IIJfnA/LBPiyg9tM1BMvDjQafG0J1CGDID3h8bjBeWFo7Nk4Pi
- znm4GsE8X72DOuOWKPMgf8mpn+l1unrEBE3MZZAxHj3neuJjIGrmWoL
-X-Developer-Key: i=balaji.selvanathan@oss.qualcomm.com; a=ed25519;
- pk=CDpYiUU3SH7KGEtsBvY2tBGPiWfMxqWJF0p2LftOfnc=
-X-Proofpoint-GUID: Leu868vrjpK7N5LhqvykADUT-4r9eU8M
-X-Authority-Analysis: v=2.4 cv=R4gz39RX c=1 sm=1 tr=0 ts=69f062ac cx=c_pps
- a=MTSHoo12Qbhz2p7MsH1ifg==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
- a=IkcTkHD0fZMA:10 a=A5OVakUREuEA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
- a=cm27Pg_UAAAA:8 a=EUspDBNiAAAA:8 a=QOCIwyBpk6KF-oVkDwMA:9 a=QEXdDO2ut3YA:10
- a=GvdueXVYPmCkWapjIL-Q:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNDI4MDA2OSBTYWx0ZWRfX7u3QpOSIB4gY
- CQ5ZR3Ewhs0N1CD+oP0Yo13Lw6dwRZgP2Cz351kJA5qu3q/Rt/WxfCzwXP0K7pDFEhzCJ9Qnp4b
- kaPS+JmlS6xQLXXR5DmqDCedV4EoRTmyW/16TZD3LHfndo1eaWk8iPPa7pcJ3WBqqEfcTVpjH+F
- XIZpGFXbVfeI8WV0yuK/Nv3dKGvnC81FFr4u/uv1/BV0HKKhwsBL4U77esu1eYQERkHnNHQh76r
- yQw8MmWv272wbXDgLybPt1gJz/aLA6qGqwMs9bIjButKeTlDZG0PGOG3bamm0fCY4OWAIDa2pDM
- UX3Q9w/m0Y35fHCCMXB9dZPMpu67IndBW1REC//PODbdw4lX1Bt72tfYMOVFszGkYwXRvUPDUDG
- 2dLz/r70JQu4ai8d0+ZIZ0c5H1vfFeRzacubkl2aQPVuU/2QpnDJhvvk1a/GsE6yL6D/srkMicF
- r1UQFw2hhR3Z58Dkenw==
-X-Proofpoint-ORIG-GUID: Leu868vrjpK7N5LhqvykADUT-4r9eU8M
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
- definitions=2026-04-28_01,2026-04-21_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 priorityscore=1501 malwarescore=0 clxscore=1015
- impostorscore=0 spamscore=0 adultscore=0 bulkscore=0 phishscore=0
- lowpriorityscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2604200000
- definitions=main-2604280069
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: IA3PR03MB8021:EE_|PH0PR03MB5893:EE_
+X-MS-Office365-Filtering-Correlation-Id: dd5eab5a-c978-450e-a606-08dea4e5e85e
+X-MS-Exchange-AtpMessageProperties: SA
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|366016|1800799024|376014|18002099003|56012099003|22082099003|55112099003;
+X-Microsoft-Antispam-Message-Info: TBSfXy0Wa+Ra5K/tWLqdJv42/7b61+ioC1k/4m7LPUqlE3UWXSel7IvTorc5gDCApT7B84sRDAGR1QS+n43EKT8SbU0At2j8wAagII21qQ0Ky01wzIJdHreXUBV5M3Sue066oysSGh11ckJNY8Edn/DtWjyKQAsZTZu644y5jFvbZ4OvdgkNz17mP1gtqVySHkIVCNkXAcVCxGIVegAoL2DvwNY0dIo6TpCJ+WF1q6u9qu3zNFMNp/ReBULq2gvvZglBhxMyGAeg8adBIvM2Yh6TTnzeJbV1uLGuv5uxjkv+q6qgZxEpKSI7Joedhoka3EfCcNUr7WyQOStwc9rwvjx1d12SELkm2kAQvotF0Xf17QHOYOIAUzDMgacDkQMJQ9w20xKyLk978N2If7zQf9JOUgxK/WjBx2JBDXiajFwAuxt2/dvsSGlDbGtiXYTjn14zrD+EWeNkLzLA+QFGjBCOFl6j8cg1JK2iwPva9fwA4NLLZ6YccYYbMnCuDuKRtga/msiMO8lEC7GSZ5YCeFHNXHbXuvUKMCbqr0SW9tHl2Seuxz8pxvAR05Jxly3FmARWXh/ODJ2dx8kz5Xmh0iFHlL3hPd0aXdDO21uX4lNDvip3Dm7+gEjhbgGLLLF4OWjZB/mAnXpIDXRlQiFpfuhZvJvaVhm66fgp0s0rwIslVVJYFz4NPOsfHIrnP5ZdbTK44+to3ra/zcvkPPv3RhdWBmnGD0qSpCIXSS5txWA=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:IA3PR03MB8021.namprd03.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(1800799024)(376014)(18002099003)(56012099003)(22082099003)(55112099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?SVRyOCsvSmlMMTRBTUJIT0kxUnpXKzRwclhycWdPWnc2c3hMdFpIMWJnU1Vl?=
+ =?utf-8?B?WTBEUUJyL3RhN2ZSeGNFSWdKWnB1dVRtMGtVNXk0RU5nQmxxOWZrYzUxYldR?=
+ =?utf-8?B?MmJEWGE5U2hVb01TbmIyOXB2NWdDc0IxSUxpQ0FaYWxwQ2tqN3VnMlc5d2NP?=
+ =?utf-8?B?M1VCMVNjTGMwd0xaOHBWWGpDcDlBMmc3cFdHNVVpaWtvbUVoWkdrVXVqMWNv?=
+ =?utf-8?B?alBZOWxqdTQreVVkbjdOM09jNitWTTc4Y1d3bEIvNWZleDY1M2g2RFFhMjBm?=
+ =?utf-8?B?Vzd5K1Y4cFFLdWl5S3d5YmVrSnBCRzl0YzNhdmhCeFhRRko4bXNvblNmbmVr?=
+ =?utf-8?B?WXRUS1RXaW1oZnFGZmwwZ29neVlvcnRmL3lmWHBOME85TlV6cE1Ua0tLTDlJ?=
+ =?utf-8?B?dW9qSUFvQ0dRaU1iLytlYy93RDU0dWx3bHduV0JmY0YzaUo0WS9RQ1JLTXFn?=
+ =?utf-8?B?UDhoYno0RG92YTZUb1RKT202L1FCa25IdjhEM2tNbkU2bldVOGlGbitVVkxx?=
+ =?utf-8?B?Z1UzeHF2dEY5Yk54OFpVQXpzN3pSTG1SYzQyZ0U5RHBiK0ZZVXJib3JVYjhq?=
+ =?utf-8?B?Mm96UmFMQ1JmZ3RZUlB6R3Z1d3ppMG9Uano0a29jNUNxcnBkdWRYbmQrb01a?=
+ =?utf-8?B?OHkyMStvdStYVnk2OXlaQ0pqQk4wWXRvZHJFemd6M2h0dmhzZmlnVGZmWUhC?=
+ =?utf-8?B?WGdFTjlBK2IrRWVET21rdU4xak00M3lBbjduLzhQcXVyT2tVUVNvcG9zZ0Zv?=
+ =?utf-8?B?NW9sVkJJZVIwSW8vT0pDUng5YlJyZDNDZWN0TnJqVjZkdE1BejdEa1Qza2Jp?=
+ =?utf-8?B?NjRoVmxLYXRmL2xodHdYYW5mQ0grNGoyaktxZjErVlJ1aEo1ZDZyREY2bU0v?=
+ =?utf-8?B?QzZ4SzdhODZiSnBtK2YvWmRyQkg3RFJ3MmVETVlMRElNK04rVU9oYzlnclJJ?=
+ =?utf-8?B?VmdYaGZOdHFObU1wamY5UTdvanJXQW1KSGZzWFNvMSt1Qm1PTFMrcU00dmlL?=
+ =?utf-8?B?K3R1U0FiNTl0Rmh2UVVsdVIzNFJ1bjA4MUZpNUk2SWQ2WHlnY2o2NG1RRzhp?=
+ =?utf-8?B?TFBiZVYweG5RakdNQnpkMjgrKzkrYlpQUm5ObVYwZmVmbVVZa3FmTmE5VjEv?=
+ =?utf-8?B?VTh6L0F3VXNORkZrczIzek01ZVphTWczVk92VVArdjlsanFHcldSLzk0UklC?=
+ =?utf-8?B?WHo3WUk1YjczYWxEMyswRHF4ZWkzdVdKR0gvT1RDb2VxZnE0WUNweVMxZGVW?=
+ =?utf-8?B?WmlIcGtyYjFuZUY5TUEyOXQ1L2JuTFlDN0Z5UjFyMENsWDNBcEZCMXlBS2hD?=
+ =?utf-8?B?QWxZOGRRZHZiT0FxbVJ6TDNBcFZ4K2RkWVF5RlpiVmFUc1dORTg4VE5Jd2w4?=
+ =?utf-8?B?NHp2Z1FqdHh5akVVTDdHNjU1RWV6NDVqaXFVakREby9ZN1JJeEdubGdmbW1E?=
+ =?utf-8?B?TDJEUjJwM3dGUGJ6SmtXdXpIWDFhSnZYN0Rqc1JvWU0vNjBwZXJ1ckk0ZWJM?=
+ =?utf-8?B?TWVpZHBJMGZ1dGdYVW1sNmRCeEMxclpDdVpTSXFUbU5pR3R5RkE1QlNuY2xE?=
+ =?utf-8?B?TXJYYjNHWllaOVoxQkp5SE5iVUxFTXVHcDlqbmtydzRKT2VRSDROZFZCV1Fl?=
+ =?utf-8?B?cFhVbktHdmUwVmpNQjgyYUkwZzY0OEFxWlIrRk1xWWFPNDFHc0EzS2dUd1RG?=
+ =?utf-8?B?Q2l4bW03emxhQmxkNXdZMGFGaCtUcFBNUFFhT3B5UmR2bTAxTjhDU1pRZmVw?=
+ =?utf-8?B?QkNZYzRJK2trTGpOUzY5ZjBjTkpBQU96KzZhNjd2WlBzanV6cGw4WXZtTjE4?=
+ =?utf-8?B?RG9jVkF6eHRTM21maXVvNDRjejJmZUVkaXdETVNqeXZRVWVONE9lSzFDNGt1?=
+ =?utf-8?B?ckdmZi8zV1R6cUg4VlIvSnJxWUZtcFVvNXhRM2ZqNVE5M2JqN1loYmxtdExw?=
+ =?utf-8?B?TVVHN0lhdkNaN3JJYjhhblpjejNLNHhYb1dVaTczZmhBV3hWVFRxdEpNb1M0?=
+ =?utf-8?B?djNGSnl0MGpxbUJXb2dnaWZKZHR0TE45S3N4M1M2YWVad0wzWWtxSjVuUWs2?=
+ =?utf-8?B?dEVJYW1OclZ0dmZsREdTcjhTQVVrU2RxT2txbHFNV2VyU3B4cE9tTWJFTlJq?=
+ =?utf-8?B?RU1QUkorTlZGbjBkM2RHZnNDK0g5V256R3dNZ1hiRnhtdnI1WmJSSlNTQkJq?=
+ =?utf-8?B?T3lxaWhKbEFQV3M3SmZqZHFjSVhEZWNobWljZmNFWlU4YXY3VnoxZ0tCaWtV?=
+ =?utf-8?B?V1FaYkxEMVZtY1laYTErRWVFR01RaVFMOEtIQVBQcGlwbUZOOFRmQ1N1WGpj?=
+ =?utf-8?B?QUZFb0l6M2ErNlhkMVN3N3J2SUhVeFRkNjRNeC9NdXl1YjVqQWRhR2lkVmZ2?=
+ =?utf-8?Q?jYZIRUxl4Fl1dm8Q=3D?=
+X-OriginatorOrg: altera.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: dd5eab5a-c978-450e-a606-08dea4e5e85e
+X-MS-Exchange-CrossTenant-AuthSource: IA3PR03MB8021.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Apr 2026 05:20:49.0353 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: nemcscm6OGlJgbgr3Xse7NvxbeUH6E2jw/dujU/vMw54Qv+LdMZmgj3BnxvoioTKcTsZv5GITahROuh/3HN6uBuDSdG0DMYNpmcu5l/K/4c=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH0PR03MB5893
+X-Mailman-Approved-At: Tue, 28 Apr 2026 09:38:07 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -173,91 +158,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a unit test for the partition type GUID lookup functionality. The
-test verifies that partitions can be correctly identified by their type
-GUID, specifically testing the ChromeOS kernel partition lookup.
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
-Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
----
-Changes in v4:
-- Return -EAGAIN instead of EOPNOTSUPP
-- Add extra asserts for kernel partition
+Hi Tien Fong,
 
-Changes in v3:
-- Add unit test for the partition type GUID lookup functionality
----
- test/dm/part.c | 49 +++++++++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 49 insertions(+)
+>>
+>> -#if IS_ENABLED(CONFIG_ARCH_SOCFPGA_AGILEX) || \
+>> -    IS_ENABLED(CONFIG_ARCH_SOCFPGA_STRATIX10)
+>> +#if IS_ENABLED(CONFIG_ARCH_SOCFPGA_SOC64)
+>
+>
+> The guard is now CONFIG_ARCH_SOCFPGA_SOC64, but N5X is SOC64 yet does 
+> not select FPGA_INTEL_SDM_MAILBOX (confirmed from Kconfig).
+>
+> So the comment says "SDM Mailbox based devices" but the guard now also 
+> covers N5X which is not SDM Mailbox based.
+>
+> An alternative guard that is more semantically precise would be:
+>
+> #if IS_ENABLED(CONFIG_FPGA_INTEL_SDM_MAILBOX)
+>
+> What do you think?
+>
+>
+CONFIG_FPGA_INTEL_SDM_MAILBOX is the more precise guard here.
 
-diff --git a/test/dm/part.c b/test/dm/part.c
-index caae23bd4aa..7a427d3d41d 100644
---- a/test/dm/part.c
-+++ b/test/dm/part.c
-@@ -8,9 +8,13 @@
- #include <mmc.h>
- #include <part.h>
- #include <part_efi.h>
-+#include <asm/global_data.h>
-+#include <dm/lists.h>
- #include <dm/test.h>
- #include <test/ut.h>
- 
-+DECLARE_GLOBAL_DATA_PTR;
-+
- static int do_test(struct unit_test_state *uts, int expected,
- 		   const char *part_str, bool whole)
- {
-@@ -195,3 +199,48 @@ static int dm_test_part_get_info_by_type(struct unit_test_state *uts)
- 	return 0;
- }
- DM_TEST(dm_test_part_get_info_by_type, UTF_SCAN_PDATA | UTF_SCAN_FDT);
-+
-+static int dm_test_part_get_info_by_type_guid(struct unit_test_state *uts)
-+{
-+	struct udevice *dev, *blk_dev;
-+	struct blk_desc *desc;
-+	struct disk_partition info;
-+	ofnode root, node;
-+	int partnum;
-+
-+	if (!IS_ENABLED(CONFIG_PARTITION_TYPE_GUID))
-+		return -EAGAIN;
-+
-+	/* Bind the mmc5 node (ChromeOS image with type GUIDs) */
-+	root = oftree_root(oftree_default());
-+	node = ofnode_find_subnode(root, "mmc5");
-+	ut_assert(ofnode_valid(node));
-+	ut_assertok(lists_bind_fdt(gd->dm_root, node, &dev, NULL, false));
-+
-+	/* Get the MMC device (probes it), then walk MMC -> BLK parent link */
-+	ut_assertok(uclass_get_device_by_seq(UCLASS_MMC, 5, &dev));
-+	ut_assertok(blk_get_from_parent(dev, &blk_dev));
-+	desc = dev_get_uclass_plat(blk_dev);
-+	ut_assert(desc);
-+
-+	/*
-+	 * Test: look up the first ChromeOS kernel partition by type GUID.
-+	 * In the ChromeOS image KERN_A is the first partition carrying the
-+	 * ChromeOS kernel type GUID (fe3a2a5d-...). This is partition 2.
-+	 */
-+	partnum = part_get_info_by_type_guid(desc,
-+					     "FE3A2A5D-4F32-41A7-B725-ACCC3285A309",
-+					     &info);
-+	ut_asserteq(2, partnum);
-+	ut_asserteq_str("KERN_A", info.name);
-+
-+	/* Test: non-existent GUID must return -ENOENT */
-+	ut_asserteq(-ENOENT,
-+		    part_get_info_by_type_guid(desc,
-+					       "00000000-0000-0000-0000-000000000000",
-+					       &info));
-+
-+	return 0;
-+}
-+
-+DM_TEST(dm_test_part_get_info_by_type_guid, UTF_SCAN_PDATA | UTF_SCAN_FDT);
+The functions being protected (fpga_is_partial_data and 
+fpga_loadbitstream) are specifically for SDM Mailbox based devices,
 
--- 
-2.34.1
+as the comment inside already states, and N5X does not select 
+FPGA_INTEL_SDM_MAILBOX despite being SOC64.
+
+I'll send a v4 with that fix.
+
+Thanks.
+
+
+best regards,
+
+Lok
 
