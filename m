@@ -4,90 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4248DFF885A
-	for <u-boot@archiver.kernel.org>; Tue, 28 Apr 2026 14:06:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C17AEFF885A
+	for <u-boot@archiver.kernel.org>; Tue, 28 Apr 2026 14:08:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CB6EF84150;
-	Tue, 28 Apr 2026 16:06:15 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 5B79E84150;
+	Tue, 28 Apr 2026 16:08:20 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="QC2gqlxA";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="aoA9g3WR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C9FEB8426E; Tue, 28 Apr 2026 16:06:13 +0200 (CEST)
-Received: from mail-ot1-x344.google.com (mail-ot1-x344.google.com
- [IPv6:2607:f8b0:4864:20::344])
+ id CB95484255; Tue, 28 Apr 2026 16:08:19 +0200 (CEST)
+Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
+ [IPv6:2a00:1450:4864:20::636])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 62CC883FB5
- for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 16:06:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CFB7F83FB5
+ for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 16:08:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x344.google.com with SMTP id
- 46e09a7af769-7dcd17e19b6so4800815a34.1
- for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 07:06:11 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x636.google.com with SMTP id
+ a640c23a62f3a-b941762394aso1574091766b.1
+ for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 07:08:17 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1777385297; cv=none;
+ d=google.com; s=arc-20240605;
+ b=Ysb4bRskkqkW736tqy1O9evxarBW13mAUxwomLmbCcYgKEg1H1Y7iyBlkWNb6pQHZB
+ A8SkTbNMsx9fK2/DwywhgbAuhiu4HeAK5T/5GH1GhooghGpY2ojYq7rr5UUoNLOdSZE9
+ uvZuTm4wkf9/Wb1SDAsbaU137ABKBFsYvwdbu88j7Fe1jQNFvMbKLdh1kCffrn1EN3dI
+ oN/07RZfxUgLtSDKe4PEmDrd/FHaqIR4bpdHE5ztnwM+3N4LfaMJF688VvIS8sffXTTy
+ aSM34q/Rti2hT5HLAiVJ1R/brh4JU6MhQn2BbWX4T2kPcUVkqVTgvdYcObSV0uSbNTbV
+ wvYw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=k5TcjNjxERFq6XEmN/dCFs7IU3BVqoH0Db+cUsIq6R8=;
+ fh=fJAGB8LvxCJalDRE+ziaXIW21+gD5jSCb0B1QEwHsvE=;
+ b=A99AMfXezqa0cfpfDAcog4kn/kqqQb6WX6pAVU3YmahNMqrsQeppK95P2P8U7WDXid
+ QqNqDjldJzzp64DVvgBgdFGT6RylZlDErvEevKl5f4M1hF43q7xO+sMAVPs3qsnyazWD
+ GDsD1xy4Xfnt8Bk5DmFbC8v4GmeeQ+UBlZuredJTtS3fb9/xwbx8mvauRlrMA1hqBPnm
+ JY9kcsmt2QRgsothki1J0zz6fpLE36Pf9Zg2bVjAoSvPCFaWTeCwkRyxmzUhaeXW7mag
+ NvEb0ZPfo1m39MRPQLLpVntvRSekLpWxVYm1z1nr/308IT8AtZwMrEr//dr3GlbtZdoe
+ 10dQ==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1777385170; x=1777989970; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=VhecRkFsiwa4bqd8Q6UAch9uEbaU0KMf19eywZgWEgY=;
- b=QC2gqlxALxt0iEhQ7fZUQIddZVjSw2OE3rXzAJ3Z1Pts6YThKviC7l2Qvh0TGUItgp
- FaHKPagDZSoEwPhYyMbPlhod0OTOzPS0jEMScxP1gqm+WcE9r+la5+F4Q+R2Kh2EPPFw
- r0SCjim1CPmvjW4eUiKu0fBPLkXQmnyhDQ5Ho=
+ d=chromium.org; s=google; t=1777385297; x=1777990097; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=k5TcjNjxERFq6XEmN/dCFs7IU3BVqoH0Db+cUsIq6R8=;
+ b=aoA9g3WRP/O5dWO05V7Ozy2Fr8xD3UReou1m+nPaj53VaOIz7JsdIqk7+3xDOm4QdU
+ bgl4S4zZtdvd0ULPyf+zcy0+APeXGTpgZiNqDMuh72YriwoN0/I1iF2d4T5Mt0tWabWl
+ P3RSHZRD/e7FqECjHIUGYd7ioU5GpXnzpwMwQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777385170; x=1777989970;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=VhecRkFsiwa4bqd8Q6UAch9uEbaU0KMf19eywZgWEgY=;
- b=rJ5XKEC3EmpNrBdO885jP/QJrhAeE10O/Qre8QAA1lCx41bbtZ+hj357woaXneji1C
- HdVH/acKvYxR0tMnvNfWeg5wvdTkgcVLFL99R8YqfXcgqIyyZKbZd/zcWaGztN8k2Kzg
- l8vUsWNwZstmV1fN62bS40ykcSyv6q1GzmiH3lqoamjMIybpopEArBIIgHbeq3EdZBHJ
- nIaK4cw6lf3bgUIzHIzJ46HPHz90wF+FtaUa+Vq69a1WYMWHXzhtBfn7DWrGuy5sQXhY
- rQl2ab9zTjPkN1NUzvSo5Wvl5GW89ZnfdKfOLzUxooOPk8fJpTat0iaJ1bVikl0HRvFq
- QN5A==
-X-Forwarded-Encrypted: i=1;
- AFNElJ89vSFH2au+9QW4K9UXxedYhebRYQOB8eVZd4/6tWsTcUMlJkhwpXLjzrlJ9myRv7YDJQ/fdzg=@lists.denx.de
-X-Gm-Message-State: AOJu0YwWngYP1ZYwSe7WMDtir/HaHR6M+37UQPfa4LVjCaUo1Xto9Du4
- 2eEEiJKyfH8iMDLVGAo8e8pyxg8Bpi/fdYnFT9nRTbMlzV4k60eEjEsj/ooYTyxpf48=
-X-Gm-Gg: AeBDieuoJMuXGBlfyI8yA3zTFgtlrjQgsXMJMBlhGsqLWyAEkGML77EABkfiIBLAmGq
- w4HocCfQg5/nQx9ANGf0vkxx5Tcy4/9rXG6XUfyp+0824LciTGFsZpZLQOXx8J1hq9gKxqX5qZu
- jb3kcnqNk1gotxX4a3hyrdPtem4SxPZiLGE/sQA8I06XEKOOQJIOjnptanCP789CgJgdUnVK5fy
- FUkZ/IjFcy0H8+pFS6nBAHfZhInor4L67Nd8D0L4ZkNAX1MrSZGNZ9NaSYfAPL1DWRxjmHWd8jf
- RoxdKGN44jOywvRVWu9jAtHH9x1V7me+QALcyHgKfr69LtyM8gy6cPhxQKTerXUTTV+oUE5J+P/
- wdqxjDtTU/3LTqAUFUTNU8O33e68/xh7gSM0z/PIPcCI3iMM2dl+Q6WyEBp+fjw7SDGVPv41ifl
- w41mjaS54PG2UHwiZgWX4D3L5bi4tYJk/OjpsZaMJcblb5EHh7LUsgrTNFoFnpHKP3n3GsWYv7S
- WUSjeA+EIxO69J0y0VIQ9uLqx+OvPEhGZ0T6QWv2sPF7iU9MGbuLuW96ri/KeaJCwc/d4y7
-X-Received: by 2002:a05:6830:82b8:b0:7dc:cd0b:58af with SMTP id
- 46e09a7af769-7de99f83abcmr1631061a34.6.1777385169759; 
- Tue, 28 Apr 2026 07:06:09 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
- [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7de9866be1esm1834496a34.18.2026.04.28.07.06.08
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 28 Apr 2026 07:06:09 -0700 (PDT)
-Date: Tue, 28 Apr 2026 08:06:06 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Beleswar Prasad Padhi <b-padhi@ti.com>
-Cc: Simon Glass <sjg@chromium.org>, afd@ti.com, bb@ti.com, anshuld@ti.com,
- hnagalla@ti.com, jm@ti.com, nm@ti.com, n-francis@ti.com,
- u-kumar1@ti.com, u-boot@lists.denx.de
-Subject: Re: [PATCH v4 01/11] spl: Use FIT data address as fallback when
- 'load' property is absent
-Message-ID: <20260428140606.GR41863@bill-the-cat>
-References: <20260425033742.1519298-1-b-padhi@ti.com>
- <20260425033742.1519298-2-b-padhi@ti.com>
- <20260427195405.GL41863@bill-the-cat>
- <9863b81f-e6ad-41cb-8e02-4f22377d0137@ti.com>
+ d=1e100.net; s=20251104; t=1777385297; x=1777990097;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=k5TcjNjxERFq6XEmN/dCFs7IU3BVqoH0Db+cUsIq6R8=;
+ b=Lu/BULjOmZMEGl092n537rnZTF/abWrZd4SjHEUg5iJpFKC2cALyB/02qRnOcUh2w/
+ rg5Bxz4xkgrJ2c5FPzmacWFWQD01D9YD2XnlxzuIrMuozlsiVfcXSTv9kynDGA1vtHi3
+ hRZ7/fy9Ub2MvLbXilxsKbCv4AEEGgY5BryyHFvR94vMhzU29JXNkj6IS+thV6CtY2mV
+ /9KExxBZ/lqHCeiRM0GsLqnnNPnwwGdTjBw/AAsieqEln4RWutyUNa1pxkF83wwJWlmX
+ sjs6verAj9/111+NBEzta3KgjMK9Rol0reyYqQWg4z3br73oKlMLeTDjanvxATI510Pz
+ sMOg==
+X-Gm-Message-State: AOJu0YydlZEO516UyLq3TV9lPNzQSxRpAyUFiY2S2HNDTX4pltxRnSYD
+ j997EihuptsE0CpZ/8tE/2XJ1Vwm+Z+oqeokLKbNVK5WD8Cj0eybNLHqx5yXW0MttN+sGpKDmon
+ ec3V+MRjGCbasFWw0Dpc4pyXfVTv1l5qbhn7XjYvvQ/je+DsoYX4=
+X-Gm-Gg: AeBDievhRIpHCteNwW7JxSbB66hyw/C1wA0Q82UNz/nAhYhfuSW7+WyGvRIx/QVEr5S
+ o19p2DFbW6iPSsMRVRQy5rRHIwA8UqdXDWLCx9cWrlmCwxescsjaGxIQ4u/nnB0ffl7GZxJNk1T
+ EybuvCHwFhqgS2igprZ4Pzg14MYSogPkiVt/ECF9zO40pza8yR50UkSuUK0IhZlnnkwIlOHsmLn
+ N2AVCjQY9mIuJKYEYbmo98/YnrXqHETaRuYie1z4PD0aHFl21hQO5IgyZNrL+1EHX3i6akdKUbR
+ cZAmbd4IIUfdLPFW
+X-Received: by 2002:a17:907:874b:b0:ba8:e7d5:6a7a with SMTP id
+ a640c23a62f3a-bb804537637mr175179266b.40.1777385297197; Tue, 28 Apr 2026
+ 07:08:17 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="/jYIVM8tSl6xXAux"
-Content-Disposition: inline
-In-Reply-To: <9863b81f-e6ad-41cb-8e02-4f22377d0137@ti.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <cover.1777272283.git.weijie.gao@mediatek.com>
+ <dd48da7aa5d821b56528824bfd4b57e014947a03.1777272283.git.weijie.gao@mediatek.com>
+In-Reply-To: <dd48da7aa5d821b56528824bfd4b57e014947a03.1777272283.git.weijie.gao@mediatek.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Tue, 28 Apr 2026 08:08:05 -0600
+X-Gm-Features: AVHnY4L4GXKp3qM7-VVdRd8fUCTgRT75oXyITBRiMxwwskAxDTi03nqc9dAEjdA
+Message-ID: <CAFLszThT-jyw5OjAkZGWpKKi0d0NARL8O1f6etR7YUCOvWc_vQ@mail.gmail.com>
+Subject: Re: [PATCH v3 09/10] ubi: add comments for exported ubi API functions
+To: weijie.gao@mediatek.com
+Cc: u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,100 +108,90 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Weijie,
 
---/jYIVM8tSl6xXAux
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 2026-04-27T07:09:11, Weijie Gao <weijie.gao@mediatek.com> wrote:
+> ubi: add comments for exported ubi API functions
+>
+> This patch adds comments for exported ubi command API functions.
+>
+> Signed-off-by: Weijie Gao <weijie.gao@mediatek.com>
+>
+> include/ubi_uboot.h | 86 +++++++++++++++++++++++++++++++++++++++++++++++++++++
+>  1 file changed, 86 insertions(+)
 
-On Tue, Apr 28, 2026 at 04:26:31PM +0530, Beleswar Prasad Padhi wrote:
-> Hi Tom,
->=20
-> On 28/04/26 01:24, Tom Rini wrote:
-> > On Sat, Apr 25, 2026 at 09:07:32AM +0530, Beleswar Padhi wrote:
-> >> In cases where the 'load' property is not defined in a FIT image node,
-> >> fallback to using the data address returned by `fit_image_get_data()`.
-> >> This enables FIT images to omit the 'load' property during FIT creatio=
-n.
-> >>
-> >> Signed-off-by: Beleswar Padhi <b-padhi@ti.com>
-> >> ---
-> >> Cc: Simon Glass <sjg@chromium.org>
-> >>
-> >> v4: Changelog:
-> >> 1. None
-> >>
-> >> Link to v3:
-> >> https://lore.kernel.org/all/20251231173621.1069988-2-b-padhi@ti.com/
-> >>
-> >> v3: Changelog:
-> >> 1. None
-> >>
-> >> Link to v2:
-> >> https://lore.kernel.org/all/20250506104202.16741-3-b-padhi@ti.com/
-> >>
-> >> v2: Changelog:
-> >> 1. New patch. Add support to load images without 'load' property.
-> >>
-> >>  common/spl/spl_fit.c | 16 +++++++++++++++-
-> >>  1 file changed, 15 insertions(+), 1 deletion(-)
-> >>
-> >> diff --git a/common/spl/spl_fit.c b/common/spl/spl_fit.c
-> >> index 46ebcabe56a..87d01b8b8e6 100644
-> >> --- a/common/spl/spl_fit.c
-> >> +++ b/common/spl/spl_fit.c
-> >> @@ -799,6 +799,8 @@ int spl_load_simple_fit(struct spl_image_info *spl=
-_image,
-> >>  {
-> >>  	struct spl_image_info image_info;
-> >>  	struct spl_fit_info ctx;
-> >> +	const void *fit_image_loadaddr;
-> >> +	size_t fit_image_size;
-> >>  	int node =3D -1;
-> >>  	int ret;
-> >>  	int index =3D 0;
-> >> @@ -889,7 +891,19 @@ int spl_load_simple_fit(struct spl_image_info *sp=
-l_image,
-> >>  		if (firmware_node =3D=3D node)
-> >>  			continue;
-> >> =20
-> >> -		image_info.load_addr =3D 0;
-> >> +		/*
-> >> +		 * If the 'load' property is not present in the image node,
-> >> +		 * use the FIT image's data address as the fallback load
-> >> +		 * address. This allows flexibility in omitting the load address
-> >> +		 * during FIT creation time.
-> >> +		 */
-> >> +		ret =3D fit_image_get_data(ctx.fit, node,
-> >> +					 &fit_image_loadaddr, &fit_image_size);
-> >> +		if (ret < 0)
-> >> +			panic("Error accessing node =3D %d in FIT (%d)\n", node,
-> >> +			      ret);
-> >> +
-> >> +		image_info.load_addr =3D (ulong)fit_image_loadaddr;
-> >>  		ret =3D load_simple_fit(info, offset, &ctx, node, &image_info);
-> >>  		if (ret < 0 && ret !=3D -EBADSLT) {
-> >>  			printf("%s: can't load image loadables index %d (ret =3D %d)\n",
-> > I guess the real question here is, does the spec allow this to be
-> > omitted like that?
->=20
->=20
-> Could you please point me to the spec? I could not find it.
+> diff --git a/include/ubi_uboot.h b/include/ubi_uboot.h
+> @@ -47,14 +47,100 @@
+> + * ubi_part() - attach UBI to MTD partition
+> + * @part_name: name of the MTD partition to attach
+> + * @vid_header_offset: VID header offset (string)
+> + *
+> + * This function detaches any existing UBI device, then probes for the
+> + * specified MTD partition, and then scans it to initialize UBI.
+> + *
+> + * @vid_header_offset is optional and is usually set to NULL.
+> + *
+> + * Return: 0 on success, 1 if partition not found, or -ve on error.
+> + */
+> int ubi_part(const char *part_name, const char *vid_header_offset);
 
-Sure: https://github.com/open-source-firmware/flat-image-tree/
+Most error paths in this file return positive errno values, so '-ve on
+error' is not quite right. Please double-check and document the actual
+convention.
 
---=20
-Tom
+> diff --git a/include/ubi_uboot.h b/include/ubi_uboot.h
+> @@ -47,14 +47,100 @@
+> + * ubi_volume_read() - read data from UBI volume
+> + * @volume: name of the volume to read from
+> + * @buf: buffer to hold the read data
+> + * @offset: start offset for reading
+> + * @size: number of bytes to read
+> + *
+> + * This function reads data from the specified UBI volume. If @size is zero,
+> + * the function reads the entire volume content starting from @offset.
+> + *
+> + * Return: 0 on success, or -ve on error.
+> + */
+> int ubi_volume_read(const char *volume, void *buf, loff_t offset, size_t size);
 
---/jYIVM8tSl6xXAux
-Content-Type: application/pgp-signature; name="signature.asc"
+Same here early-exit paths return positive errno (ENODEV, EBUSY,
+EBADF, ENOMEM) while the read loop negates ubi_eba_read_leb()'s error.
+Better to normalise to one convention, and please be consistent across
+all of these.
 
------BEGIN PGP SIGNATURE-----
+> diff --git a/include/ubi_uboot.h b/include/ubi_uboot.h
+> @@ -47,14 +47,100 @@
+> + * This function creates a new UBI volume with the specified parameters.
+> + * If @size is negative, all available spaces will be used.
+> + * if @vol_id is negative, volume ID will be selected and assigned by UBI.
+> + *
+> + * Return: 0 on success, or -ve on error.
+> + */
+> int ubi_create_vol(const char *volume, int64_t size, bool dynamic, int vol_id,
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCafC+zgAKCRAr4qD1Cr/k
-CuCBAP4n5j3EWIqfez21c9BNVQf/Rd1rTuSj5iXi+Ah4vT5ahAEA8aOvjirz/U0L
-Y2rGV7SR+D0jb7KL3+0AE1e8uy5+Gwk=
-=HkW8
------END PGP SIGNATURE-----
+>                  bool skipcheck);
 
---/jYIVM8tSl6xXAux--
+Capitlal I on 'If'. Also 'all available spaces' reads better as 'all
+available space'. Also worth mentioning that @vol_id should be
+UBI_VOL_NUM_AUTO for auto-assignment.
+
+> diff --git a/include/ubi_uboot.h b/include/ubi_uboot.h
+> @@ -47,14 +47,100 @@
+> + * ubi_detach() - detach UBI from MTD partition
+> + *
+> + * This function performs the cleanup of the UBI subsystem to make sure the
+> + * MTD partition can be safely used by other purpose, or be attached again
+> + * with ubi_part().
+> + *
+> + * Any mounted UBIFS will be unmounted automatically.
+> + *
+> + * Return: 0 on success.
+> + */
+> int ubi_detach(void);
+
+'used by other purpose' should be 'used for another purpose'. Since
+this only ever returns 0, you could say 'Return: 0' and drop 'on
+success'.
+
+Regards,
+Simon
