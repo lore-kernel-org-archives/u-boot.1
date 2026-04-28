@@ -4,30 +4,31 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F025AFF8868
-	for <u-boot@archiver.kernel.org>; Tue, 28 Apr 2026 16:43:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2DE10FF886D
+	for <u-boot@archiver.kernel.org>; Tue, 28 Apr 2026 16:43:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 862BF8460E;
+	by phobos.denx.de (Postfix) with ESMTP id BE23F84658;
 	Tue, 28 Apr 2026 18:43:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=lst.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 53EAA842C7; Tue, 28 Apr 2026 18:23:24 +0200 (CEST)
+ id 65D5F845D8; Tue, 28 Apr 2026 18:39:24 +0200 (CEST)
 Received: from verein.lst.de (verein.lst.de [213.95.11.211])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 620B4845E3
- for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 18:23:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 81D7A842C7
+ for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 18:39:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=lst.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=duwe@lst.de
 Received: by verein.lst.de (Postfix, from userid 2005)
- id 99B4268B05; Tue, 28 Apr 2026 18:23:19 +0200 (CEST)
-Subject: [PATCH v2 0/9] ARM: RPi5: Enable PCIe
+ id C5D4268C4E; Tue, 28 Apr 2026 18:39:18 +0200 (CEST)
+Subject: [PATCH v2 1/9] ARM: bcm283x: Add bcm2712 PCIe memory window
 To: Peter Robinson <pbrobinson@gmail.com>, Matthias Brugger <mbrugger@suse.com>
 Cc: Tom Rini <trini@konsulko.com>,"Jan Čermák" <sairon@sairon.cz>,Andrea della Porta <andrea.porta@suse.com>,"Ivan T. Ivanov" <iivanov@suse.de>, Stanimir Varbanov <stanimir.varbanov@suse.com>, Oleksii Moisieiev <Oleksii_Moisieiev@epam.com>, Volodymyr Babchuk <volodymyr_babchuk@epam.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>,Paul Barker <paul.barker.ct@bp.renesas.com>,Patrice Chotard <patrice.chotard@foss.st.com>,Christian Marangi <ansuelsmth@gmail.com>,Patrick Delaunay <patrick.delaunay@foss.st.com>,Huan Zhou <me@per1cycle.org>,Gabriel Fernandez <gabriel.fernandez@foss.st.com>,Kever Yang <kever.yang@rock-chips.com>,Jonas Karlman <jonas@kwiboo.se>,Joseph Chen <chenjh@rock-chips.com>,Elaine Zhang <zhangqing@rock-chips.com>, Pedro Falcato <pfalcato@suse.de>,u-boot@lists.denx.de
-Message-Id: <20260428162319.99B4268B05@verein.lst.de>
-Date: Tue, 28 Apr 2026 18:23:19 +0200 (CEST)
+In-Reply-To: <20260428162319.99B4268B05@verein.lst.de>
+Message-Id: <20260428163918.C5D4268C4E@verein.lst.de>
+Date: Tue, 28 Apr 2026 18:39:18 +0200 (CEST)
 From: duwe@lst.de (Torsten Duwe)
 X-Mailman-Approved-At: Tue, 28 Apr 2026 18:43:21 +0200
 X-BeenThere: u-boot@lists.denx.de
@@ -46,37 +47,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi all,
+From: Torsten Duwe <duwe@suse.de>
 
-Version 2 should no longer break USB on Raspberry Pi 4;
-patch 8 (rework iBAR handling) has received alternate
-code for the 2711. The rest is functionally unchanged.
+Add a mapping region for the PCIe bus address spaces to the BCM2712
+memory controller setup. Generously merging the PCIe address spaces
+works sufficiently well for a boot loader.
 
-Andrea della Porta (1):
-  pci: brcmstb: Fix PCIe bus numbers
+Signed-off-by: Torsten Duwe <duwe@suse.de>
+Co-authored-by: Oleksii Moisieiev <oleksii_moisieiev@epam.com>
+Tested-by: Pedro Falcato <pfalcato@suse.de>
+---
+ arch/arm/mach-bcm283x/init.c | 10 +++++++++-
+ 1 file changed, 9 insertions(+), 1 deletion(-)
 
-Torsten Duwe (8):
-  ARM: bcm283x: Add bcm2712 PCIe memory window
-  pci: brcmstb: Support different variants using a cfg struct
-  pci: brcmstb: Add RPi5 reset facilities
-  pci: brcmstb: Add RPi5 rescal reset facilities
-  pci: brcmstb: Get and use bridge and rescal reset properties
-  pci: brcmstb: Fix iBAR size calculation
-  pci: brcmstb: rework iBAR handling
-  pci: brcmstb: Adapt to AXI bridge
-
- .../mach-bcm283x/include/mach/acpi/bcm2711.h  |   7 +-
- arch/arm/mach-bcm283x/init.c                  |  10 +-
- configs/rpi_arm64_defconfig                   |   2 +
- drivers/pci/pcie_brcmstb.c                    | 391 ++++++++++++++++--
- drivers/reset/Kconfig                         |  14 +
- drivers/reset/Makefile                        |   2 +
- drivers/reset/reset-brcmstb-rescal.c          | 103 +++++
- drivers/reset/reset-brcmstb.c                 |  97 +++++
- 8 files changed, 588 insertions(+), 38 deletions(-)
- create mode 100644 drivers/reset/reset-brcmstb-rescal.c
- create mode 100644 drivers/reset/reset-brcmstb.c
-
+diff --git a/arch/arm/mach-bcm283x/init.c b/arch/arm/mach-bcm283x/init.c
+index 7a1de22e0ae..7a2faaa4de6 100644
+--- a/arch/arm/mach-bcm283x/init.c
++++ b/arch/arm/mach-bcm283x/init.c
+@@ -18,7 +18,7 @@
+ #ifdef CONFIG_ARM64
+ #include <asm/armv8/mmu.h>
+ 
+-#define MEM_MAP_MAX_ENTRIES (4)
++#define MEM_MAP_MAX_ENTRIES (5)
+ 
+ static struct mm_region bcm283x_mem_map[MEM_MAP_MAX_ENTRIES] = {
+ 	{
+@@ -83,6 +83,14 @@ static struct mm_region bcm2712_mem_map[MEM_MAP_MAX_ENTRIES] = {
+ 		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
+ 			 PTE_BLOCK_NON_SHARE |
+ 			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
++	}, {
++		/* Whole PCIe section */
++		.virt = 0x1800000000UL,
++		.phys = 0x1800000000UL,
++		.size = 0x0800000000UL,
++		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
++			 PTE_BLOCK_NON_SHARE |
++			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
+ 	}, {
+ 		/* SoC bus */
+ 		.virt = 0x107c000000UL,
 -- 
 2.54.0
 
