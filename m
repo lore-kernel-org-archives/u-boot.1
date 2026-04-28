@@ -4,101 +4,105 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E2DAFF886D
-	for <u-boot@archiver.kernel.org>; Tue, 28 Apr 2026 18:20:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1774FF886D
+	for <u-boot@archiver.kernel.org>; Tue, 28 Apr 2026 18:21:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9A48084692;
-	Tue, 28 Apr 2026 20:20:56 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 5A000846C6;
+	Tue, 28 Apr 2026 20:21:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="nh0yD/nA";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20251104.gappssmtp.com header.i=@baylibre-com.20251104.gappssmtp.com header.b="AbFtcmsK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 93B23846B2; Tue, 28 Apr 2026 20:20:55 +0200 (CEST)
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
- [IPv6:2a00:1450:4864:20::633])
+ id 4376884692; Tue, 28 Apr 2026 20:21:22 +0200 (CEST)
+Received: from mail-oi1-x22d.google.com (mail-oi1-x22d.google.com
+ [IPv6:2607:f8b0:4864:20::22d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0182F84686
- for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 20:20:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5F390846C6
+ for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 20:21:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-bb91b426e40so48385966b.0
- for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 11:20:52 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1777400452; cv=none;
- d=google.com; s=arc-20240605;
- b=k2qdhyULWocQZPfmYor+guCGYgrodprMVK7uKY6ypVgZ6XODbSRmIAuL5SKLFBS+xX
- LEFqPKlWELNJfnKdFW9rFzUYiu4W5myDdbq46tojNe8ai3Ht/mLxSHRB1Wx2gMWy9Srb
- KrkHB3XXaDewtme6UfoojTL4Jm1JwFPMAcU9z3peotB7l1SFYzyJG4lvEJRfmb0CCPQR
- J9UuoGC9NrkLAM5MaxCL6mJg+Ddof4rtak19qGifQVQiz49nEUqQeAUKxtDCing9XPcM
- XnRxxnrKgrzpDoRhoHv94LMY2dJNje2QnapRQTzM/3qLEfEz+5xv6PI8NtHN7ltG0ip8
- l68g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=1pDTqgmjCa3ONi2WbpVOWSkNavIsxiYxP3cjbaMgikc=;
- fh=FSZLg1kBZKtmq7hkO96s8J8bywdf/NrVlQg027zGQAY=;
- b=Dwhwv4Baj11XzVXxAZarorvihf/nxkRA6ODzP+KQjpHMogoEgWFGdg5ND4OezAFX/G
- a+Di/cY5BcXZLFrnl5VobT/2pKB8O/1vXYEvV5zoRuvX+1WOs0rIG7+774YyocyTpDG4
- LM390xp1zbfsGjnieH9iGSUSgk6zoQTKn90kny2+OACq5I7jae4jQcNdSaoOMymLzfRR
- SIoZoMNImtdspij1Fifvlg7+ynYL8ohoD+4sYB46Q3RJB631IFhyYeS8ZmEIDJVm5hGR
- mqz3/08Z1pyzpNU8wjKt+tqwUtZ2nZv1bmjVKCTSwCO1yk9zaVLRpBQonW2RNxhqX4Lh
- 7mgg==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=dlechner@baylibre.com
+Received: by mail-oi1-x22d.google.com with SMTP id
+ 5614622812f47-4756e74f8edso8189577b6e.1
+ for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 11:21:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1777400452; x=1778005252; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=1pDTqgmjCa3ONi2WbpVOWSkNavIsxiYxP3cjbaMgikc=;
- b=nh0yD/nAATvzH6lj9rRzjsIt9xZnPG/Tfd+lFuLVpuBaX5B5u+qByMSTmVeTKC1Vgd
- GFCJxbPmFtwlvkXGupz8mdW3nAeiV0CHbDvYr7ZlJIjJWAEuWra8iEpgVJT4YGVkJlLT
- vMjLp6Q7m5Nm/Ej3dmou0ipVqUenhWKGxHqeA=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777400452; x=1778005252;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=baylibre-com.20251104.gappssmtp.com; s=20251104; t=1777400478; x=1778005278;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=1pDTqgmjCa3ONi2WbpVOWSkNavIsxiYxP3cjbaMgikc=;
- b=pH4GvUeqE2AztHsSVuhbNZJwW0v3YT0eBmFVf8wnQIfbL8RXNxUky/0wJvAY68G3GY
- N8qY7HOc+d8p3s+pbR3KUPzY0sf2/Ap8gCT1FrqrwpBzg5cFFXSEL43RRZCA+vVxc4oK
- +DU0nGpWf2osdd/G6BYXFBHT0EUu2D5cRiVSQ+wcgPbADaUpt1qompl9xp3lmLyrKECQ
- mAig2QEHfhTL8YJiCardbWZmoX9ewUJ32WgKg0XWgpbw1wYYn3SfJL/3nZcWJtf56D04
- 3FnbX35uLQY/+hbhLYCBZgQr/fHyCcwiOC8qPaAXt/qBTSUjPKO1j5uNxMrauTwGWkP/
- /VOw==
-X-Gm-Message-State: AOJu0YzlywaB6yqNEKoVnswPIHwP6pwZL0K6SBpMZf6VA2IM6v+OjyVR
- JfREqCJhBJGpcoJzNpS0eWZJfQbk+Q5nb8GErwJaslFymaQwHl8pxiyQhWgdAegysUssoreUXzE
- pTYZKEf50u1jjO/6EnTN1slmWmBbaKN/8IeE/wCHs
-X-Gm-Gg: AeBDiesVRxqNQOF6nk9Q53ypGU3iQ/7p2HG4yPVYHCHCl01QU1LoVWO7R/e9uKc/Z2p
- IJQU5056Ph26SfZzWNcvpD7x8eYiGQLdvckF0tiKBOKYONlS8jMhV7jatILVSlVPCIiwzcGfFmN
- WYPWpJd+/2AvsxwuCVOwKtfaTbh59tMvXENCzVlVDpyUjaoiUSUFv9YxOkKsoFQlV8VtaaSxXg/
- vfVwFeBuxkGc8SyBH1Kj8XqAZVLIhChHq0eAnMPzrf3rVtggx5ENnb0asHTvqxwj30N1xY+sdv+
- p2ul8W3fOvkmvnuW
-X-Received: by 2002:a17:907:93c3:b0:ba7:f5fd:edd2 with SMTP id
- a640c23a62f3a-bb93eb5124dmr21485266b.42.1777400452349; Tue, 28 Apr 2026
- 11:20:52 -0700 (PDT)
+ bh=8MXCE/iIPNSxOv+kt/V51Y8CggbPVH2B5rc7LCk04dw=;
+ b=AbFtcmsKWpirJjAS2GwXZVHIzSpQyv+3zb5ZxAIav43LT3TEWPU6dOo6itxBm0cxDk
+ KP6K9AiCiXmwjXDZ7HhnYKINtXAunVT4HRrmwBE1ZWxRRdliwXH8EBLMME3xK/6eIuJS
+ hsS4hqvdsPVyacdo6Eeyv4XOC3vFaBPq/+6L/z6dY2ZJMJW3p/SE+dKIPzXQ4HSaHev0
+ V2pWWXFycdGzAJKBTEW/u0ZbRSH4cGW9t1aQJ4wo64Hse1pVkqC1fUmjPKShRwYxHwhe
+ v2i2YzTWjqYXIAd9EPAcVbFibfB9DHP+yOrPvopp99NPKVmobo4EyDm2APMGrx0jSMnj
+ S6KA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1777400478; x=1778005278;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=8MXCE/iIPNSxOv+kt/V51Y8CggbPVH2B5rc7LCk04dw=;
+ b=JSEZQ0ALGLKnNEpipIw9aursUG/Kw5W9dV4/iP9vDt6VG5ukxwwPZxpjtIsJiae+Vu
+ hAE+Up5sMfjVE6MnXGG6Ec5WKaH2tYlroH882I3gsosX4C0c6KdCjaA1SCr/7OEqXzqF
+ QLk1StGVst/jOKAsurCEmCA/sq7AfuOMD3DOxCZOrBZ5zUrobbMJRyiOTFSyogqJBS2Y
+ Ajk1KzeCZOzrxKqaTCqjks/LuQIAYH2jucWR6KM9e4iGmTKQ7UzKF46BkwV6aUccFb0S
+ UsGwFX5R4Mfw6kZqjuD0ZeGS0xOHR/8uEoBqZnwiC3g4pFWe1gjSL0lkqo3EW6mQv0Sh
+ mKcw==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ8lsCOYDxcmhhhxTuvV7FbG9OSy5+q2y9we6ulTdzFKXvbnfkQvrM+l/6xWk3bWtws/MBV7du4=@lists.denx.de
+X-Gm-Message-State: AOJu0YyFhcxrp3J8hWHeSnAP3BNc5tXZ4a/k54M5KwlXk6VMYoLsn4bE
+ cGAHofrKa0+7FFWE+LKFUXkY1vHgmPbl64VVlr3KBpdXpvL/QxcxCCI4bXGKuxk68BI=
+X-Gm-Gg: AeBDieuDICPcSQtpy279JkmhuWdmS5jKEF5ypHVct4dv9YOkutvY9cjFVEj+ipy8iAG
+ CM9rUA4LewmKnU8/K90WzkF89YeTHa6pZ5aFI9+szYmtvEmMapsZv+NlKg+qx5WuAii+/wNr4Xs
+ SbXCkDdr0Eco2cz5OsAWF9+hEkvLLZ3grZjWpD/H0yhFMDJrxHFP1vR9knV7LVvbaeUassX3YhZ
+ 2P+WzjmSxbOzuQY5EYDf3FQMkO9tZYz8A8QL2Wh++y1yK+A/Ggej/8GrlHEwCpkhZBcvHMMV96U
+ Xd3kZqff15XbPzOY0TyIlavWMkgT3TCayZo02ZrfsnU6sT1VLYFz1pGbh0VMdGeFxI0MfXvjI3K
+ 1J3xUQtFGfB0eLshkls3snXBStAm0nll5voMZ1ktc+JAQn0rPm0aB4bF/Jn4Lrw7pf13CY5jvDc
+ e5gZBz9FGw+kYfi0RaJKuQGLGo0lG22Aq5himv/oDJLruXLuvqYg==
+X-Received: by 2002:a05:6808:2216:b0:479:da60:7dd4 with SMTP id
+ 5614622812f47-47c3db2b543mr316807b6e.30.1777400478038; 
+ Tue, 28 Apr 2026 11:21:18 -0700 (PDT)
+Received: from [127.0.1.1] ([2600:8803:e7e4:500:efba:bc47:a81b:dd0f])
+ by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7de984bdde3sm2331173a34.2.2026.04.28.11.21.17
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 28 Apr 2026 11:21:17 -0700 (PDT)
+From: David Lechner <dlechner@baylibre.com>
+To: Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
+ Chunfeng Yun <chunfeng.yun@mediatek.com>, 
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
+ Tom Rini <trini@konsulko.com>, Macpaul Lin <macpaul.lin@mediatek.com>, 
+ David Lechner <dlechner@baylibre.com>
+Cc: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de
+In-Reply-To: <20260406-mtk-genio-720-snor-v1-0-cbfd5fc4e59a@baylibre.com>
+References: <20260406-mtk-genio-720-snor-v1-0-cbfd5fc4e59a@baylibre.com>
+Subject: Re: [PATCH 0/2] arm: mediatek: enable SNOR on Genio 520/720 EVK
+Message-Id: <177740046658.3382222.457526816346541368.b4-ty@b4>
+Date: Tue, 28 Apr 2026 13:21:06 -0500
 MIME-Version: 1.0
-References: <20260427-fb_gpt-v2-0-9e7fe3c1649a@oss.qualcomm.com>
- <20260427-fb_gpt-v2-2-9e7fe3c1649a@oss.qualcomm.com>
-In-Reply-To: <20260427-fb_gpt-v2-2-9e7fe3c1649a@oss.qualcomm.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Tue, 28 Apr 2026 12:20:40 -0600
-X-Gm-Features: AVHnY4LzCiSBJPtnzOfQSQcawaZVtaiMDef1jEH-jL2IekXwcrs20RL3s6rAx-M
-Message-ID: <CAFLszTgHEW8ywXEtAqOs7rHHUPYFGXRmurAJFqVdORxr2vBGBQ@mail.gmail.com>
-Subject: Re: [PATCH v2 2/4] fastboot: Add GPT/MBR partition table flashing
- helper functions
-To: balaji.selvanathan@oss.qualcomm.com
-Cc: u-boot@lists.denx.de, Mattijs Korpershoek <mkorpershoek@kernel.org>, 
- Tom Rini <trini@konsulko.com>, Heiko Schocher <hs@nabladev.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>,
- Dmitrii Merkurev <dimorinny@google.com>, 
- Adrian Freihofer <adrian.freihofer@siemens.com>, Peng Fan <peng.fan@nxp.com>, 
- Jaehoon Chung <jh80.chung@samsung.com>, 
- "Ariel D'Alessandro" <ariel.dalessandro@collabora.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.16-dev
+X-Developer-Signature: v=1; a=openpgp-sha256; l=898; i=dlechner@baylibre.com; 
+ h=from:subject:message-id;
+ bh=MSaSFDt52C4IKyHCBGSCPIKoXRYL9NNKXJ4iWuF608Y=; 
+ b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBp8PqV6dDMCTZzeDUv2lIPRmAdM5vTk/qyICR/3
+ EhodbrHH52JAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCafD6lRYcZGxlY2huZXJA
+ YmF5bGlicmUuY29tAAoJEMLMIAH/AY/ADaMH/jWqQtLQBYxeT59mNLF0OxyR65FtwYFMBWxitWb
+ X8XDxyub3TSguuCKLElRokND5QHBc4svVRYIn86oBrjQCeCKbcoBqwiZH6WVLs9sZwIpmV1bSvP
+ cjDVD8F8pVStgrcdI6uFVp7C0ilSePEPQ1r2zSN8P3oRKjCQJZw5cGVIRloxzAyJevilqYpyGc6
+ k35LN2ICKYpf7kQk34q4Dz4eEwnOXmU8/LgviSmSOqjErBrTm03hMD8mIEA4pFsYphGCikTYI6A
+ ArmvCTS3mFgWKz2/eXcDBc+RaHEQZlpX5FekTbbNCBeUCSlS89pmNGTuy+YKOmfu8NWN1TtPMr8
+ F3Ck=
+X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
+ fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -115,98 +119,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Balaji,
+On Mon, 06 Apr 2026 15:37:08 -0500, David Lechner wrote:
+> arm: mediatek: enable SNOR on Genio 520/720 EVK
+> 
+> Add required devicetree nodes and configuration options to enable SNOR
+> on Genio 520 and 720 EVKs.
+> 
+> For now, the common config for these boards is in the mt8189.config
+> file since there aren't any other boards using it. If more boards are
+> added in the future, we may want to split some of that out. I think it
+> is better to wait to do that though so it is more clear what is common
+> and what is not.
+> 
+> [...]
 
-On 2026-04-27T12:06:41, Balaji Selvanathan
-<balaji.selvanathan@oss.qualcomm.com> wrote:
-> fastboot: Add GPT/MBR partition table flashing helper functions
->
-> Add fastboot_flash_gpt_partition_table() and
-> fastboot_flash_mbr_partition_table() helper functions that handle
-> flashing of GPT and MBR partition tables to block devices.
->
-> The MMC backend now uses these helper functions for GPT and MBR
-> operations, simplifying the code while maintaining the same
-> functionality.
->
-> Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
->
-> drivers/fastboot/fb_common.c | 94 ++++++++++++++++++++++++++++++++++++++++++++
->  drivers/fastboot/fb_mmc.c    | 49 ++++-------------------
->  include/fastboot-internal.h  | 30 ++++++++++++++
->  3 files changed, 131 insertions(+), 42 deletions(-)
+Applied to mediatek-for-master, thanks!
 
-> diff --git a/drivers/fastboot/fb_common.c b/drivers/fastboot/fb_common.c
-> @@ -245,3 +245,97 @@ void fastboot_init(void *buf_addr, u32 buf_size)
-> +     dev_desc = blk_get_dev(interface, device);
-> +     if (!dev_desc) {
-> +             fastboot_fail("no such device", response);
-> +             return;
-> +     }
+[1/2] arm: dts: mediatek: add Genio 520/720 SNOR support
+      commit: f1b077c512b566a3a7bf1cf89ecb1ff49791ebd1
+[2/2] configs: mediatek: add required config for SNOR on Genio 520/720 EVK
+      commit: 8c15436fb2191294162deaf2c94fbe030fee9455
 
-Looks like a regression for the MMC path: the current
-fastboot_mmc_get_dev() rejects dev_desc->type == DEV_TYPE_UNKNOWN (mmc
-driver present but no card) and reports 'invalid mmc device'. That
-check is gone after this refactor, so an unprobed mmc falls through to
-is_valid_gpt_buf() / write_mbr_and_gpt_partitions() with an unusable
-dev_desc  - please add the DEV_TYPE_UNKNOWN check in both helpers so
-the common path is at least as strict as the code it replaces.
+Best regards,
+-- 
+David Lechner <dlechner@baylibre.com>
 
-> diff --git a/drivers/fastboot/fb_common.c b/drivers/fastboot/fb_common.c
-> @@ -245,3 +245,97 @@ void fastboot_init(void *buf_addr, u32 buf_size)
-> +#if CONFIG_IS_ENABLED(EFI_PARTITION)
-> +/**
-> + * fastboot_flash_gpt_partition_table() - Flash GPT partition table
-> + * @interface: Block interface name (e.g., 'mmc', 'scsi')
-> + * @device: Device number
-> + * @download_buffer: Buffer containing GPT data
-> + * @response: Fastboot response buffer
-> + */
-> +void fastboot_flash_gpt_partition_table(const char *interface,
-> +                                     int device,
-> +                                     void *download_buffer,
-> +                                     char *response)
-
-The two helpers are almost identical - only is_valid_*_buf(),
-write_mbr_*() and a couple of printed strings differ. Please factor
-the common parts (interface check, blk_get_dev(), DEV_TYPE_UNKNOWN
-check, part_init() + okay) and have the GPT and MBR variants supply
-just the validate/write step. As written, the fail-paths are
-duplicated and will drift over time.
-
-> diff --git a/drivers/fastboot/fb_common.c b/drivers/fastboot/fb_common.c
-> @@ -245,3 +245,97 @@ void fastboot_init(void *buf_addr, u32 buf_size)
-> +     if (is_valid_gpt_buf(dev_desc, download_buffer)) {
-> +             printf("%s: invalid GPT - refusing to write to flash\n", __func__);
-
-fb_common.c does not include <part.h> or <blk.h> even though it now
-calls blk_get_dev(), is_valid_gpt_buf(),
-write_mbr_and_gpt_partitions(), is_valid_dos_buf(), write_mbr_sector()
-and part_init(). It builds today via a transitive include, but let's
-add explicit includes.
-
-> diff --git a/drivers/fastboot/fb_mmc.c b/drivers/fastboot/fb_mmc.c
-> @@ -343,7 +343,7 @@ int fastboot_mmc_get_part_info(const char *part_name,
-> -static struct blk_desc *fastboot_mmc_get_dev(char *response)
-> +static struct blk_desc __maybe_unused *fastboot_mmc_get_dev(char *response)
-
-The convention is 'static __maybe_unused struct blk_desc
-*fastboot_mmc_get_dev(...)'
-
-> diff --git a/drivers/fastboot/fb_common.c b/drivers/fastboot/fb_common.c
-> @@ -245,3 +245,97 @@ void fastboot_init(void *buf_addr, u32 buf_size)
-> +     if (!interface || !strcmp(interface, "")) {
-> +             fastboot_fail("block interface isn't provided", response);
-> +             return;
-> +     }
-
-The MMC caller passes the literal 'mmc', so this branch is dead on
-that path. The check is really for the block backend in patch 3, where
-the interface comes from CONFIG_FASTBOOT_FLASH_BLOCK_INTERFACE_NAME.
-That validation belongs in the block caller (alongside the
-parse_device_partition() call), not duplicated in both common helpers
-- same reason fastboot_block_get_part_info() already does the check
-itself.
-
-Regards,
-Simon
