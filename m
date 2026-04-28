@@ -4,93 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52A53FF885A
-	for <u-boot@archiver.kernel.org>; Tue, 28 Apr 2026 14:05:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E1D7FF885A
+	for <u-boot@archiver.kernel.org>; Tue, 28 Apr 2026 14:05:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 33E06845D0;
-	Tue, 28 Apr 2026 16:05:04 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 806168426E;
+	Tue, 28 Apr 2026 16:05:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="BbZIi4eI";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="cXLmziKA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 51F3383FB5; Tue, 28 Apr 2026 16:05:02 +0200 (CEST)
-Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
- [IPv6:2a00:1450:4864:20::52d])
+ id 0317284663; Tue, 28 Apr 2026 16:05:18 +0200 (CEST)
+Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
+ [IPv6:2a00:1450:4864:20::62f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C23E3843D4
- for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 16:04:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7551984659
+ for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 16:05:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52d.google.com with SMTP id
- 4fb4d7f45d1cf-6764e36dc88so13150697a12.1
- for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 07:04:57 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1777385097; cv=none;
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-ba699316b42so1446512166b.3
+ for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 07:05:15 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1777385115; cv=none;
  d=google.com; s=arc-20240605;
- b=f05Yfml0idnsND/kRmVmD5uHiEx2ZpwU99wBPcOA/cya1TVT+GiTeOTr/CRR5eETAK
- J1gGJDsVb1DhBLz9th1aTnRY8nEKHeBguyJRmn4aHv80wOFFfTKZQC+5/xza/5W5TQLv
- kKR/cdmm3P7aS5vFXej9NlP2uLi/r493DhAb/b7oE17zk1HgMzl0AlB0XygM2lva5wVD
- rksBWXOwPRtLscmBuHTXxQu13zqxL8W11jnKS1fmujO7zj2NELf68TtP909U9roBbwvY
- sK1wlEDZ1GqYSaOG6PlQZyPeEwPQOLfE2dzDQxNH+9f38KPmn4Uwa9IsMe18pN8c91aV
- ML/Q==
+ b=bg01mN2PDvqbbEORc8iohXWWH07ypLTRzk8sQbvljdVGKCWevHp6ccVxff4tdKnnk4
+ nuc9r3Pp4DuXAvpoCHUEG02JsyipfApLVENYrcYEVuasci9YfznXVVWjmJI9G/cQ8yF9
+ oNW71LJYG5OxS3BWtQ4hlyL2vIjf0tn9K644Hp1Bpxmhlw1/216Eedb2flr600v5FxXa
+ un03WBuvxVy0a1FDV8I+byKNTbAZnThYeuItQbOVP1psBtuCxCqUjPhn7ah6zuhCXb6x
+ ULJypfp8IklwCGJsOBfysaTmb1k4M2AyAzMWFnH64mgZ2o5oTkefVep7boY9HAjgq0be
+ rqPw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=Xv56g3TyS4TBIOHG630aNUZzftz+y73ZsEgylgkxJjo=;
- fh=PHo6SxFQeYGijuQxNVj6Mu5BE7imZMp7yjwDYBEMLIQ=;
- b=Uy6V9DQa+HJUaVq7xyTK9f2xBeI1JMHY6CrjT9mX9k+EPed6EsNgBxFA//TcFaq8WL
- GR6SaDUy5NiVJLN/PueecWRF4FFE19QthBbdz61WdvczDpbtXizdWERaPjo0bEihpLm9
- 2ZFB6evAkF9XdzNX+ItijwUt5ZlxWRi+c0XOZiLe1em4Cmbekdp0nAAbFJmGPrReTc2H
- O7BVaIuc/FrDxS2rRbghCuzuo87glB3Kne/4Rkwg+bWMkqqT4FrCCqLu0Kpd19xNYEDu
- KmQrtDeZBLWEVwq0omLuFTcXaX+rbkTmuZ5P0r/Qp+1i4zi+44fOUnt/Lsj/y2jYUOkS
- BlvQ==; darn=lists.denx.de
+ bh=724eTrWAjWJSDYCxI92kY4mhJ8R/8+XJjG2LmphXjxY=;
+ fh=fJAGB8LvxCJalDRE+ziaXIW21+gD5jSCb0B1QEwHsvE=;
+ b=KqUuK55LCYhUqC/XRaJgIKf9TQFI7NCRp8tln96G9Bp5vyd2ps2lgqdjcq9qKFah8b
+ 7pmhFCgbgqZro/sltTXb5pnDI9ZJYL2jCM7qUSlNuE+h2D+LVnPlt1cfXr1nDoC3io+5
+ TtDDldKW4aez/3/bLOnG+xQNT6bzGEi6jDxa4KQeNr5voYc45AmZ+qoxFLWJsYzE9MEy
+ GCo8A/ZqpD/LQ5KuAJA6bE83IP1PNS5XIP1huw2JtbQZNCdqg+OSgrg5Xor/RM0oGQTW
+ 4343RNO2ZTakb0b/PALvZd7Tf6O8H413iYivSuGe0wLG6VR4Jzhd3PFxeH+fpZT3rNNr
+ 7tqQ==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1777385097; x=1777989897; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1777385115; x=1777989915; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Xv56g3TyS4TBIOHG630aNUZzftz+y73ZsEgylgkxJjo=;
- b=BbZIi4eIbbYBtDPJtLqLKW+3vo500Md1iWQ4YaJckMn3nqYpvDcvCi/ACMJYloRXse
- LbtdQpBbL/Pj6+EnS7D2Vz78t14KoPL3szMmwDA6RZWDEGJVC5lN/P9lCmWs2fgIvEQn
- w+qOgpAfI3OxjaanHJyeMGRjGqHTzv0gXn6dg=
+ bh=724eTrWAjWJSDYCxI92kY4mhJ8R/8+XJjG2LmphXjxY=;
+ b=cXLmziKAVXqJFkjtxhPuSBPOfiEfuK6DaRagZjcojY4J3F4dD07Sye6rWNcNVj4QrK
+ 9fnTGmtmA9YX91Wd7haHwfEq/+J/YPQ0fU5c69hAWz++xor6dNGr+cXqj8Rs+wKwkyuY
+ IqRCk9Tiq+7q/UFtA9oj4+4aG9CXWv5Io4+yw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777385097; x=1777989897;
+ d=1e100.net; s=20251104; t=1777385115; x=1777989915;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Xv56g3TyS4TBIOHG630aNUZzftz+y73ZsEgylgkxJjo=;
- b=GNYRxGOfdFs0pBza5/40ij1FHDC5ztTX+pEdTOKL0OYPUAlKY2VENBrKkhy8HRk4oU
- vn94i4fiqtOd6XbSYIUNAW5kDHj4eTMnGZ60jrt8fnkERrzgmnAYnyQE+carUee1jdVp
- UzNYyRciX5YPV62r+EM+0UxVV966hvefW+N7DYXow4usUvdZ0LBZszz/M8B10OUsus/p
- 3sz6zYqWegoO2BRbvTP0pKEoUgOrPyJK3mDyxdWlz0iz9Nu0doLWJGhD71OMVk4UfPkx
- ky3RO61vofoZ2nFlo1FZq/Qu9r334NHI/Z83ThTauQ19xUtuCnVVu8ZcdVPAVM9kHtzP
- b7Fg==
-X-Gm-Message-State: AOJu0YwKaOln4BosotgUrQG9+Tt0F4/0RgrqEEvKyFYvKpWn3SejhBuY
- q8dqKVDp74vcSsg8wT6oWS++DSrf1vK9WO+uaCFg0wEnRxdBfBC7VrUSfbOMKBFxB6dSBXf//rF
- ZokqUZ7D/v7N1cqH97lPXdTrUR1bJS/dz7jEF6AtYUGQQyDZzeyg=
-X-Gm-Gg: AeBDietSrKNnEmXcbWoqwlDXxidF3tdgosOJJvsZitXWwC3ZnYC5Jdd1xkWbWAObM6Q
- U0uXcIWkSNX6ABIPYUGJmjRCGJQ+CvBkWQDMfZh5bl1JxkAc5j3kONC0tAFl/L0XBXSgi2Myke+
- E0fmJ1zseTAW3RtrRL+I1PIPZTtx7c1ph3l15hgFiT+YjoTUtDaEo4vb55qVVtQpR8wQjgOuVz7
- R6qe4wpxomAxoWMEN8KzoO1maXUhZ2CTYAjjEtFZhg/tBFNrgTMmaLCniT5pvCXdOoK2uiYpPSD
- ruKol3Vw4fAsW7uq6V8rDs0zV2k=
-X-Received: by 2002:a17:907:7fa1:b0:ba2:5314:f979 with SMTP id
- a640c23a62f3a-bb845a2f2a1mr136818166b.6.1777385097033; Tue, 28 Apr 2026
- 07:04:57 -0700 (PDT)
+ bh=724eTrWAjWJSDYCxI92kY4mhJ8R/8+XJjG2LmphXjxY=;
+ b=TGgp1nRDyznA2aXWlaC8kB21fgV7vuNlpItRzKmllykUHfzKqrPFiJ7SbWGXMBOaA8
+ GF+U5nYb46wFXJr2KP+wsctlYFDwXvtTF6/l/668WPXPQ5BBOEEx8qrmHkLJzbF55orJ
+ MhoodXDAVPSdWdUYugvbMcUYfrY3lEPua1jrz6flQQNSAf0njDjXDcx1j/sz8t4qxprL
+ y2IIirN1N61OcDnTm3vIFzgNWHlIVfmVS+9LjMtY+HyVNIW29RekZ/SUtSLAUxJnG/Bk
+ 27Xo/T0Mk9KLQIVRop/hb3yUwlpLK9S/f3++HRvcKBsFykErCM1M9PlmtwwuVpGcgh3V
+ seUw==
+X-Gm-Message-State: AOJu0YzUV9Xobp1FJObrlL26G1nWpmiOHkY2pdgVtcHsX8ozbLA9+O9I
+ M7D3Ilg3iR8nUwqf5XbRrQIIcjyUI9CsgdTy8G5ws+iv1gbkpcdN97Ih3sOHYJUWhaHz0Wtk8dP
+ KA7mOAwy80VwgSKUMWjz2UWLeW/RsIv9R+9jiGyPI8jYXRF4sSWg=
+X-Gm-Gg: AeBDiettHXFLulTUfpvg25Kps81fG1K4/rma5EdHJQWijOo3Rn27YNeTCtn0cwGOluc
+ gguwOV/B4Uak3hJq6VKI1KnyasgFYApmFXWn574n+VHWT6J4KBfwspP7ez+hu4vw+xzEoIBKx5F
+ 88Dwynk+xxTFp5YebjatA3VKETKb2akehcj1/51JF0tFhfFjzOaDRywq4BZyLT9J1houmTLkEPm
+ 9FZI9pZxUuqweJua3LkGEqCnVzWJdJyNI25mF/52h6uMT4WcUdnpZs1mlTovqxWd0N1Ixlgnjvb
+ iuIkNFAbF2g3SaG9
+X-Received: by 2002:a17:907:5c7:b0:ba8:2ebd:dfb6 with SMTP id
+ a640c23a62f3a-bb80377e0bcmr207001166b.23.1777385113234; Tue, 28 Apr 2026
+ 07:05:13 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260423042824.3480-1-briansune@gmail.com>
-In-Reply-To: <20260423042824.3480-1-briansune@gmail.com>
+References: <cover.1777272283.git.weijie.gao@mediatek.com>
+ <d43df5c2427cf4d03b441aa8a9e34800fe20be8f.1777272283.git.weijie.gao@mediatek.com>
+In-Reply-To: <d43df5c2427cf4d03b441aa8a9e34800fe20be8f.1777272283.git.weijie.gao@mediatek.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 28 Apr 2026 08:04:43 -0600
-X-Gm-Features: AVHnY4LL-RH2k78ZEYbDFJd3FQuNAYVmDj5tiIKt2JhefgWIGXAafaZ1LNve5dQ
-Message-ID: <CAFLszThg=EamyRohxNA7V+nk+OMVK356nUjAVSbu4+kokOJpdA@mail.gmail.com>
-Subject: Re: [PATCH v6] Improve handoff prepare on SoCFPGA
-To: briansune@gmail.com
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Chee Tien Fong <tien.fong.chee@altera.com>, Simon Glass <sjg@chromium.org>
+Date: Tue, 28 Apr 2026 08:05:00 -0600
+X-Gm-Features: AVHnY4LGnWXPdew6ldmq3idAiq4xfzT9U4oT6hts1b089MB-8o--MHijco_E9Hs
+Message-ID: <CAFLszTjj4-SoCoygUij19cOiXVy5VLZt3-nPAJew0w4NB2eO1Q@mail.gmail.com>
+Subject: Re: [PATCH v3 05/10] cmd: ubi: change the type of parameter dynamic
+ to bool
+To: weijie.gao@mediatek.com
+Cc: u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -108,44 +109,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Brian,
-
-On 2026-04-23T04:28:24, Sune Brian <briansune@gmail.com> wrote:
-> Improve handoff prepare on SoCFPGA
+On 2026-04-27T07:09:11, Weijie Gao <weijie.gao@mediatek.com> wrote:
+> cmd: ubi: change the type of parameter dynamic to bool
 >
-> Ensure qts folder header files are properly updated by isolating
-> the Python execution environment. This prevents partial or failed
-> script runs from corrupting the target directory.
+> This patch changes the type of the 'dynamic' parameter of ubi_create_vol()
+> to bool as it's used as a boolean.
 >
-> Changelog v5 -> v6:
->  - Clean HANDOFF_KEEP comments.
+> Signed-off-by: Weijie Gao <weijie.gao@mediatek.com>
 >
-> Changelog v4 -> v5:
->  - Change HANDOFF_KEEP condition to if [ '$${HANDOFF_KEEP:-0}' != '0' ]
->  - Add HANDOFF_KEEP and HANDOFF_PATH comments in config.mk
->
-> Changes:
->  - Implement a temp folder for Python script execution.
->  - Clean temp folder automatically despite execution failures.
->  - Gate the file replacement process on the successful exit of
->    the Python scripts.
->  - Execute the replacement (with or without keep) only upon script
->    success via the NEW HANDOFF_KEEP=xxx variable.
-> [...]
->
-> arch/arm/mach-socfpga/config.mk | 39 ++++++++++++++++++++++++++++++++++++---
->  1 file changed, 36 insertions(+), 3 deletions(-)
+> cmd/ubi.c | 6 +++---
+>  1 file changed, 3 insertions(+), 3 deletions(-)
 
-The per-version changelogs belong below the '---' separator, not in
-the commit body. Also U-Boot convention is 'Changes in vN:' rather
-than 'Changelog vN -> vN+1:'.
-
-You could try using 'patman' which will get this right for you automatically:
-
-https://docs.u-boot.org/en/latest/develop/patman.html
-
-I see 6 copies of this v6 patch in patchwork, so I wonder if I got the
-right one?
-
-Regards,
-Simon
+Reviewed-by: Simon Glass <sjg@chromium.org>
