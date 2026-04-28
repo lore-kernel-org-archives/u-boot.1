@@ -4,61 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D487CFF886F
-	for <u-boot@archiver.kernel.org>; Tue, 28 Apr 2026 07:01:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B60FFF886F
+	for <u-boot@archiver.kernel.org>; Tue, 28 Apr 2026 07:26:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 36C2183BC4;
-	Tue, 28 Apr 2026 09:01:34 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+	by phobos.denx.de (Postfix) with ESMTP id DC02A83FB5;
+	Tue, 28 Apr 2026 09:26:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=mediatek.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="WYkoua/x";
+	dkim=pass (1024-bit key; unprotected) header.d=mediatek.com header.i=@mediatek.com header.b="pqS8wpHO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3D82184106; Tue, 28 Apr 2026 09:01:33 +0200 (CEST)
-Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
+ id 4472584255; Tue, 28 Apr 2026 09:26:45 +0200 (CEST)
+Received: from mailgw01.mediatek.com (unknown [60.244.123.138])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D683F83A91
- for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 09:01:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6BD5983A91
+ for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 09:26:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=mediatek.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=bootlin.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=richard.genoud@bootlin.com
-Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-02.galae.net (Postfix) with ESMTPS id 64A741A3467;
- Tue, 28 Apr 2026 07:01:28 +0000 (UTC)
-Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id 3065C601D0;
- Tue, 28 Apr 2026 07:01:28 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id CF20710728063; 
- Tue, 28 Apr 2026 09:01:25 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1777359687; h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:content-language:in-reply-to:references;
- bh=+EuQ6EHWOiCnJcxawrEt8VLL47MTJHNMTXKxrd7+Gtk=;
- b=WYkoua/xBfyi9wiM13SC9JmhQhi/mQTPwMr57NWazOcrywnL9K/haxmShM+Wdt8hEVK8IJ
- O1cSb6Z67bE0llXCiEdF9s3+l7ePDaBUpyXW/L9tZl3gl0XlQiLQryvJByb/HA/nGDTUWS
- LMc0I/ahiSf+t7iagu23yFnQhmu4IlwJhM/MhlFm9Kj4MgCmX4x3cQkv8zAwitmbWqDypf
- Gbb59qOc+Z8www/JQp97b/9bgvfkHsz6QH0sHOmRTPQQ3oloX/xvUGSfhdThlplOd7H3Ch
- hEcBB9iszodOGOkhlL3xrpRO8OmEqRpAiN3jhjl42B2858LGxG2XE+HhUqS5WQ==
-Message-ID: <0e0d12e7-f318-4500-b242-cca9cf1cf709@bootlin.com>
-Date: Tue, 28 Apr 2026 09:01:25 +0200
+ spf=pass smtp.mailfrom=weijie.gao@mediatek.com
+X-UUID: 962c730c42d311f19781c1a04af40193-20260428
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mediatek.com;
+ s=dk; 
+ h=Content-Transfer-Encoding:MIME-Version:Content-Type:References:In-Reply-To:Date:CC:To:From:Subject:Message-ID;
+ bh=AZ018JQxaxphSuz2r+kgN3ZVXalzPSdMexFIIzSwW/Q=; 
+ b=pqS8wpHO0zpqTynemG4j6rZB/tyRSe/0xN8/bc9IIUciP7BAivuIgNSrZ4XBFpubwt2egHipOb3v/5PMU2+2zvf0ugBTV8ySeUUfEIjcEDiXqZ43VYbNDTSMf2In8An5wEmmvI88RmALdGancquGoxwPbZAQHB/bjW/R2wYGFYA=;
+X-CID-P-RULE: Release_Ham
+X-CID-O-INFO: VERSION:1.3.12, REQID:d11a1450-6ade-46cc-975d-1d900d833291, IP:0,
+ U
+ RL:0,TC:0,Content:0,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTION:
+ release,TS:0
+X-CID-META: VersionHash:e7bac3a, CLOUDID:be69ca44-8360-4d24-8500-9b9380fa4b0d,
+ B
+ ulkID:nil,BulkQuantity:0,Recheck:0,SF:80|81|82|83|102|836|865|888|898,TC:-
+ 5,Content:0|15|50,EDM:-3,IP:nil,URL:99|80|1,File:130,RT:0,Bulk:nil,QS:nil,
+ BEC:-1,COL:0,OSI:0,OSA:0,AV:0,LES:1,SPR:NO,DKR:0,DKP:0,BRR:0,BRE:0,ARC:0
+X-CID-BVR: 2,SSN|SDN
+X-CID-BAS: 2,SSN|SDN,0,_
+X-CID-FACTOR: TF_CID_SPAM_SNR,TF_CID_SPAM_ULS
+X-CID-RHF: D41D8CD98F00B204E9800998ECF8427E
+X-UUID: 962c730c42d311f19781c1a04af40193-20260428
+Received: from mtkmbs13n1.mediatek.inc [(172.21.101.193)] by
+ mailgw01.mediatek.com (envelope-from <weijie.gao@mediatek.com>)
+ (Generic MTA with TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384 256/256)
+ with ESMTP id 1730139994; Tue, 28 Apr 2026 15:26:35 +0800
+Received: from mtkmbs11n2.mediatek.inc (172.21.101.187) by
+ mtkmbs11n1.mediatek.inc (172.21.101.185) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.29; Tue, 28 Apr 2026 15:26:33 +0800
+Received: from mcddlt001.gcn.mediatek.inc (10.19.240.15) by
+ mtkmbs11n2.mediatek.inc (172.21.101.73) with Microsoft SMTP Server id
+ 15.2.2562.29 via Frontend Transport; Tue, 28 Apr 2026 15:26:32 +0800
+Message-ID: <eff9b72a02eb3ae4e5953cf80f76c238027ce336.camel@mediatek.com>
+Subject: Re: [PATCH 4/6] mtd: spi-nor-ids: Add 4K page support for Macronix
+ MX25L25635E
+From: Weijie Gao <weijie.gao@mediatek.com>
+To: Miquel Raynal <miquel.raynal@bootlin.com>
+CC: <u-boot@lists.denx.de>, GSS_MTK_Uboot_upstream
+ <GSS_MTK_Uboot_upstream@mediatek.com>, Tom Rini <trini@konsulko.com>, Vignesh
+ R <vigneshr@ti.com>, Takahiro Kuwano <takahiro.kuwano@infineon.com>, Marek
+ Vasut <marek.vasut+renesas@mailbox.org>, Tudor Ambarus
+ <tudor.ambarus@linaro.org>, Jeffrey Yu <jeyu@issi.com>, Christoph Reiter
+ <christoph.reiter@evk.biz>, Venkatesh Yadav Abbarapu
+ <venkatesh.abbarapu@amd.com>, Shiji Yang <yangshiji66@outlook.com>, Bernhard
+ Messerklinger <bernhard.messerklinger@at.abb.com>, Vaishnav Achath
+ <vaishnav.a@ti.com>, Prasad Kummari <prasad.kummari@amd.com>
+Date: Tue, 28 Apr 2026 15:26:32 +0800
+In-Reply-To: <87cxzjft1x.fsf@bootlin.com>
+References: <cover.1777345877.git.weijie.gao@mediatek.com>
+ <5fd1dfc2637fdc2f33b8ba68b46a35f8f320a6d1.1777345877.git.weijie.gao@mediatek.com>
+ <87cxzjft1x.fsf@bootlin.com>
+Content-Type: text/plain; charset="UTF-8"
+X-Mailer: Evolution 3.28.5-0ubuntu0.18.04.2 
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] adding check to prevent overflow in sqfs_find_inode
-To: Jared Stroud <dllcoolj@archcloudlabs.com>, u-boot@lists.denx.de
-Cc: joaomarcos.costa@bootlin.com, thomas.petazzoni@bootlin.com,
- miquel.raynal@bootlin.com, trini@konsulko.com
-References: <20260428003100.123201-1-dllcoolj@archcloudlabs.com>
-From: Richard GENOUD <richard.genoud@bootlin.com>
-Content-Language: en-US, fr
-Organization: Bootlin
-In-Reply-To: <20260428003100.123201-1-dllcoolj@archcloudlabs.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Last-TLS-Session-Version: TLSv1.3
+X-MTK: N
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,98 +97,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jared,
+On Tue, 2026-04-28 at 09:22 +0200, Miquel Raynal wrote:
+> Hi,
+> 
+> On 28/04/2026 at 11:32:03 +08, Weijie Gao <weijie.gao@mediatek.com>
+> wrote:
+> 
+> > The datasheet can be found here:
+> > 
+https://urldefense.com/v3/__https://www.mxic.com.tw/Lists/Datasheet/Attachments/8592/MX25L25635E,*203V,*20256Mb,*20v1.3.pdf__;JSUl!!CTRNKA9wMg0ARbw!lYeaxwC-knJH61lKpIB1VNkNkvLBAAyzS5JwtDo-x9YDy7jngWucI28Yjx2wnzvEsuVLYPR4LkWiSKXNWrnIq93KhJw$
+> >  
+> 
+> You can be a little more verbose here, about the why we need this?
+> 
+> > @@ -330,7 +330,7 @@ const struct flash_info spi_nor_ids[] = {
+> >  	{ INFO("mx25u51245g", 0xc2253a, 0, 64 * 1024, 1024, SECT_4K |
+> >  	       SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
+> > SPI_NOR_4B_OPCODES) },
+> >  	{ INFO("mx25l12855e", 0xc22618, 0, 64 * 1024, 256, 0) },
+> > -	{ INFO("mx25l25635e", 0xc22019, 0, 64 * 1024, 512,
+> > SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
+> > +	{ INFO("mx25l25635e", 0xc22019, 0, 64 * 1024, 512, SECT_4K |
+> > SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
+> 
+> Is this something you really need to flag? Isn't it already provided
+> by
+> the SFDP tables?
 
-Le 28/04/2026 à 02:31, Jared Stroud a écrit :
-> While fuzzing attributes of the squashfs_reg_inode structure, if the file_size attribute is a large value,
-> &base->inode_number within the sqfs_find_inode function will jump to an arbitrary location
-> in memory resulting in a invalid memory access and crash.
-> This bug is similar to CVE-2024-57254 in that memory operations are occurring based on inode values.
-> I applied a similar fixed via the commmit c8e929e5758999933f9e905049ef2bf3fe6b140d.
-
-The commit message should be wrapped between at 75 characters (the rule 
-can be bent for log messages like the one bellow, but for the 
-description, it's the preferred way)
-You can use scripts/checkpatch.pl to help you with.
+I need to use this without enabling SFDP to save some space. So it's
+still necessary to add this flag. I can add this description to the
+commit message.
 
 > 
-> Prior to the fix, the bug was triggered via the following commands from
-> the U-Boot shell:
+> >  	{ INFO("mx25u25635f", 0xc22539, 0, 64 * 1024, 512, SECT_4K |
+> > SPI_NOR_4B_OPCODES) },
+> >  	{ INFO("mx25v8035f",  0xc22314, 0, 64 * 1024,  16, SECT_4K |
+> > SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
+> >  	{ INFO("mx25r1635f",  0xc22815, 0, 64 * 1024,  32, SECT_4K |
+> > SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
 > 
-> ```
-> => host bind 0 random3.sqfs
-> => ls host 0 /
-> AddressSanitizer:DEADLYSIGNAL
-> =================================================================
-> ==122741==ERROR: AddressSanitizer: SEGV on unknown address 0x0000670e4716 (pc 0x55a504b86ea6 bp 0x000019af1280 sp 0x7fff04b3b740 T0)
-> ==122741==The signal is caused by a READ memory access.
->      #0 0x55a504b86ea6 in sqfs_find_inode fs/squashfs/sqfs_inode.c:131
->      #1 0x55a504b7f17e in sqfs_search_dir fs/squashfs/sqfs.c:489
->      #2 0x55a504b80ffb in sqfs_opendir_nest fs/squashfs/sqfs.c:977
->      #3 0x55a504b426e9 in fs_opendir fs/fs.c:669
->      #4 0x55a504b42a6d in fs_ls_generic fs/fs.c:66
->      #5 0x55a504b42dc8 in fs_ls fs/fs.c:537
->      #6 0x55a504b42dc8 in do_ls fs/fs.c:881
->      #7 0x55a504b42dc8 in do_ls.isra.0 fs/fs.c:870
->      #8 0x55a504a0eb40 in cmd_call common/command.c:582
->      #9 0x55a504a0eb40 in cmd_process common/command.c:637
->      #10 0x55a5049f00c4 in run_pipe_real common/cli_hush.c:1672
->      #11 0x55a5049f00c4 in run_list_real common/cli_hush.c:1868
->      #12 0x55a5049f0800 in run_list common/cli_hush.c:2017
->      #13 0x55a5049f0800 in parse_stream_outer common/cli_hush.c:3207
->      #14 0x55a50492efcc in parse_file_outer common/cli_hush.c:3299
->      #15 0x55a50492efcc in cli_loop common/cli.c:306
->      #16 0x55a50492efcc in main_loop common/main.c:86
->      #17 0x55a50492efcc in run_main_loop common/board_r.c:584
->      #18 0x55a50492efcc in initcall_run_r common/board_r.c:776
->      #19 0x55a50492efcc in board_init_r common/board_r.c:806
->      #20 0x55a50492efcc in sandbox_main arch/sandbox/cpu/start.c:584
->      #21 0x7f60aa6276c0  (/usr/lib/libc.so.6+0x276c0) (BuildId: ca0db5ab57a36507d61bbcf4988d344974331f19)
->      #22 0x7f60aa6277f8 in __libc_start_main (/usr/lib/libc.so.6+0x277f8) (BuildId: ca0db5ab57a36507d61bbcf4988d344974331f19)
->      #23 0x55a50491e414 in _start (/usr/src/u-boot/u-boot+0x285414) (BuildId: 964ae5120238bc46d7af63402fa25331ca86b3b4)
-> 
-> ==122741==Register values:
-> rax = 0x00000000670e470a  rbx = 0x000055a504ef7100  rcx = 0x0000000000020000  rdx = 0x0000000000000000
-> rdi = 0x0000000000006fd5  rsi = 0x0000000000007abd  rbp = 0x0000000019af1280  rsp = 0x00007fff04b3b740
->   r8 = 0x000000004d5f348a   r9 = 0x00000000670e4716  r10 = 0x0000000000000501  r11 = 0x0000000000000001
-> r12 = 0x0000000000000002  r13 = 0x0000000000000001  r14 = 0x00000000199caa00  r15 = 0x0000000000000001
-> AddressSanitizer can not provide additional info.
-> SUMMARY: AddressSanitizer: SEGV fs/squashfs/sqfs_inode.c:131 in sqfs_find_inode
-> ```
-> 
-> 
-> Post-patch, the following behavior is observed:
-> => host bind 0 random3.sqfs
-> => ls host 0 /
-> Error while searching inode: unknown type.
-> 
-> 
-> Signed-off-by: Jared Stroud <dllcoolj@archcloudlabs.com>
-> ---
->   fs/squashfs/sqfs_inode.c | 3 +++
->   1 file changed, 3 insertions(+)
-> 
-> diff --git a/fs/squashfs/sqfs_inode.c b/fs/squashfs/sqfs_inode.c
-> index ce9a8ff8e2a..d2efc07c78e 100644
-> --- a/fs/squashfs/sqfs_inode.c
-> +++ b/fs/squashfs/sqfs_inode.c
-> @@ -135,6 +135,9 @@ void *sqfs_find_inode(void *inode_table, int inode_number, __le32 inode_count,
->   		if (sz < 0)
->   			return NULL;
->   
-> +		if (__builtin_add_overflow(offset, sz, &offset))
-> +			return NULL;
-> +
-I'm a little confused by the fix.
-If there's no overflow, we will have offset += sz above (in the 
-__builtin_add_overflow)
->   		offset += sz;
-...and again here ^^
-So, sz will be added 2 times instead of one.
-
->   	}
->   
-
-Regards,
-Richard
+> Thanks,
+> Miquèl
 
