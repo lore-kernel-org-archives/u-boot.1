@@ -4,97 +4,99 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A36B0FF886D
-	for <u-boot@archiver.kernel.org>; Tue, 28 Apr 2026 17:58:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91B5FFF886D
+	for <u-boot@archiver.kernel.org>; Tue, 28 Apr 2026 18:01:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3467684659;
-	Tue, 28 Apr 2026 19:58:29 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 16CCD8465E;
+	Tue, 28 Apr 2026 20:01:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="l/Ur+Ngd";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Yt2Bany7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4BCD88465A; Tue, 28 Apr 2026 19:58:28 +0200 (CEST)
-Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
- [IPv6:2a00:1450:4864:20::52d])
+ id 4F4F684662; Tue, 28 Apr 2026 20:01:23 +0200 (CEST)
+Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
+ [IPv6:2a00:1450:4864:20::633])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 44F188460E
- for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 19:58:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4126B84659
+ for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 20:01:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52d.google.com with SMTP id
- 4fb4d7f45d1cf-67389cf78b0so20360107a12.2
- for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 10:58:25 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1777399105; cv=none;
+Received: by mail-ej1-x633.google.com with SMTP id
+ a640c23a62f3a-b9382e59c0eso868355666b.0
+ for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 11:01:20 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1777399280; cv=none;
  d=google.com; s=arc-20240605;
- b=UNU5A0bUGmeg4fCnRnvUhJuLp2g3ce88WSyy8llit8x03D0JTl7rN+al/+64XK1V8q
- k7Efc+PinDlhBP1wExnY8EOThrLRDYR8wCbJndWbKvNxp7HhECYVKA3OaONWYb6qxNCM
- zYvJDHgY5t29wXHGbCfGtuWC+tMVZBG8modAKOWpwWWC09/cPmuEWezUeP2zREWVWKoJ
- 4SxQlprUTy/y66SOgDKaN3Uxa1yi40s3oLAZeVARFyoRps1dTUiHSsNZfJOJ0Gcqg/Dq
- IiPtyeKZSA3TJ9tzOc2zQTDaEn2bQ5oAT0Gg5GKW4YyHZO1OEKxMxMo/sTX+sbpMmWDC
- dDig==
+ b=TDjle7I+ybcarrq3e/NXeL6x/1IZJhvTu/DXkDXTbKLaHGtvCf78FZHn1IQxx1fdIH
+ 2EWxYX7BHoK8ELqh3csWOy48Zq4UZjHUg1EXfdqDhtrDyBzyF+6I9bExIZvHrdX1O0PN
+ EalYQybmN7BQNRQyEVXdNDYGjOKYp4BjOTX/4k6FvrdFrYws2u4bcQC0+RAT2bZrprer
+ moEyzjJNScg58lacUa7/Yk+vDcqlWEVMdmH/+gxJpNP+lnEZVkk4DfT6xI8kxFmcbFo2
+ 2WVuG7LzBqQ6kGUKjWLl15aqce0PiIecB533oqHi0RJQgbFvDMj9S4NzoX8HQVEXt2Hi
+ 5DoQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=/0g4MSYEXVP3zTWaEE1wiaeJ7c3dm4uf7QXApVxZWzQ=;
- fh=tI/u//27UWCQW8f0bxvI2Rif5Q2rVLBUBzmF2xkjV7s=;
- b=QnfH1BtUoZG5QYHqPEpBBVClRkM5xmwD+CGYkTxMthwuWuECE1w8H5WxSs3vOwGuyI
- quZmMdcRdmCMPFwI3yRZ2fBkyl48Lj11uvepR7CYvErjbtBSfM+PBA/dK1/lbnnh+C7S
- 9Fte6cKFRtsAZRZ3+GOIbDjlxQjXSBzAWvPgehHiFThfOnO7IIRNfrvJtGAcIHtH2kq0
- 5vWvFGyuzBHpTJYF5vLFTROKgjSkLjWY4X72Pn0wU7ywBNrAxi8a1b2kVN1MxZt4OhHg
- OWawOHuAeSVSVEMBl4ejVRtir8sWqRCkvouYB2qWpaZASG2fuHOG+6v0jV0J/+cCsUfe
- zy7Q==; darn=lists.denx.de
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=IWRgGHbGzpfozRR84Xutj3ss8ue5QUrm9uvqT7xnBZI=;
+ fh=GYIekQEhESPWanXHuipF/cx0w9AeOdHDaa7vPtUoRvA=;
+ b=Lf/TCeua/Y3pX6XySiFto6pFASqCKxpV/FmmLVEkpwmRTDajEc5uS/loNOPDIuaZch
+ ox024En3V2SsvUJNACYrNcwfQ9MTvO10dZVbl3SyTc60BLSTPJCEgTtkzF458BP05Nxc
+ ic8EtX15p4SxDc3B9vD35Gmi9FCeVN8kQbqcN3NmjgY/UJ4TzKzTcXsxki5MBI3FuOzL
+ 3Dr5JYwJ2BBgJPTRIZdRmTlpODB0vBVR4EtafZMjw2Qca3RWnu7qMc1LleSAUi09C14f
+ GenVeMaWfb4phHroSACuWZnh7laP6FlK4m+4KoOBwg0hBMNva94FuOGq54pW6xvrK3e0
+ w8RQ==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1777399105; x=1778003905; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=/0g4MSYEXVP3zTWaEE1wiaeJ7c3dm4uf7QXApVxZWzQ=;
- b=l/Ur+Ngdv1DY1TOcHrq9N0C21/HdKM090JzfC6dv5QmuLaboi3204gUsM4145XzLmh
- xEIyEWZDcoJxsqIyNMgOCZdvk5Bt+ojQGa/fexbupP+Cdahn91AJMHGItuu79+p1evDX
- LvCziQo9nPuimGP5/CSbByKwCORtnyvrbHT0A=
+ d=chromium.org; s=google; t=1777399280; x=1778004080; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=IWRgGHbGzpfozRR84Xutj3ss8ue5QUrm9uvqT7xnBZI=;
+ b=Yt2Bany7AUPLzKFXY9pKUTMb08qD/JeB13rWfRzzYSH1t7CCdMUVeqWWwiM0R/W9r7
+ NhlHhGkBBihCTZ1b9HO+8wWSW2sEXNfe8UQxraY5Xac8SRdafbZNfSTEMgMQAh6TCSnx
+ unR05+qQX0T3bq3Nkx9W6jzBIiWUNoebnNdjk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777399105; x=1778003905;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=/0g4MSYEXVP3zTWaEE1wiaeJ7c3dm4uf7QXApVxZWzQ=;
- b=MDqMJvQPgyuBph0dyj3bfUt3b+iF6f8yIvpb3s37ctqXjjAXk7JJMXEaPYZPAtp4AY
- d1sR7EMdkbgT/CKOIfMbCZf6LumEUikE5m8CA8ua/FDwoOC3u6tDYlQ5i3sRjEJNth7S
- uNI4hrZx5wF3zXN30tKfqy4cxQXRZZr7hhTM/lTo9cOUemksaJiNHEydU+Hk5rkEaqLp
- vjyC6hTYOev3TPNcOUa9pKvtsHtu0Yvh2EUNNPzSarHlwhCEEFRpauMZSrvirWJwrCmS
- S/IjM8fbXED/xSHUFfSfTjb5HXzObvcEmFK+I1JzEqz6pRpHKV+SbVnl147aJ6mh6yZW
- klGg==
-X-Forwarded-Encrypted: i=1;
- AFNElJ+8gHqpdZR4S18h3CNtFYuU8VRAM90+ktH+abNkSbyeUaVKxKAx8O98GDZbrLLheklCBAg7Fy4=@lists.denx.de
-X-Gm-Message-State: AOJu0YxtHvNZiD7QyUNldKqihSfzZAuvt2iILsaOT7kx5FtRvFvlmEts
- JDkj6sRtJQlJPpPk4G7poIc4yyLd60mluJ/Kw0SikwEexqd78Sp1omZY/DPwSIxH/jIdCbU5+1z
- NqAeFmDRoc2tnR3/PQr5QZGbb+zZqN2pyaOaxxKCxG0OBHnkNBkE=
-X-Gm-Gg: AeBDievDEAylBf1XT6CmRNK40o7SMTDMMBOLm46lnNmrGWbAYg4MF/4CsKte89DJpTP
- GyhyqZ7mch7MdQseX5r7iIpCLOB+UKxjHGhlMDPpcfycs0cqKW1X+m/vNrQLLqf78mTj8GqqN++
- QMJ0/xij+/Udit75SLiDFCptHS7//bxNIuF/VYm8J7mR9KxTkNTeGSQUsQxrnaO/mafSfZBZFeb
- wfi8BawdDAn/mBjbTZ+ZkaWc/EdjQhZarQMgdepXOq5bytBcF08923+4j8fqTh2Wu31aSJky6M9
- v9rBPYH79K3TDV6lxYnUfxHp/54=
-X-Received: by 2002:a17:907:8745:b0:ba7:670b:f076 with SMTP id
- a640c23a62f3a-bb8020c9f60mr281846566b.2.1777399104566; Tue, 28 Apr 2026
- 10:58:24 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1777399280; x=1778004080;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=IWRgGHbGzpfozRR84Xutj3ss8ue5QUrm9uvqT7xnBZI=;
+ b=f7QhXLDd4UnrzX2k7JsxaEeRaM38wiXwMJJ/XySy1RSuG0perCTMmaBXUEZBrXCwrE
+ n2HMRfaMDmdWXALzO2NbJCHhLPOyLfsRtJ6ylOw1IbZN9g8GC1PrdYIF9Kki/DVb4XVz
+ ZCQ0QQg4SCZiR1MjSGPlx0eCn09dpvmhtYewt7a1AmIjFHrYlYX7Yo6Wcnau/dtTKXzj
+ buSFj7KXzJmiqDSVMJDdbxfzi0RhcEj0AixJpFe85+u67+1pu7SxgeCZZHowiiCiyj2g
+ UDQXytedkz08z/Og1cGQf0nOWBcS+yuyEVY9pQZzK2wn+YTPp2i3YXKuR79egpakvLfU
+ s1ew==
+X-Gm-Message-State: AOJu0YxN00q06ynlbNiKdODuc6iITFJ2Bl/zo7v8hj8/R8B/JKYfoY0I
+ X4GvXYqjrot7GVJ8q58n4JjjcVFYwljZQwW3U9CRpm28Zp+4ssGIB/lXwvwgU10o71AarRx9DM9
+ E7g72t30iaB5QnKx3XAdDhx+sUJFpWS2+edF5nzp3
+X-Gm-Gg: AeBDietI8kbP1upMBIQp706yzJP4PKzyoH2yY5o0bR5zcOgmr5J6S15yDQKMN0xFbZN
+ EaX64DRo4Hr5B1nTvYK8BfvHO4TEnxSUvzuN0DlDpgho1j5QEypLddfwZ1ftPQzGYz6NCn1jfzv
+ G46BfyGTDWEltcWsdy9vzwfwOEB8Egtdw/iCbJmP3F43RiAaiDRLVQv3DgPGVILfiWuPjG+tINl
+ k1xhY2WFSAZ5fQQpXURw0RqQkSIIrzSdQv+yv9d8hPJSkjFThDG4vOSO0RnEB9NLqkQMTV5JObN
+ oiWxGMoqDL6/eSvo
+X-Received: by 2002:a17:907:cb81:b0:ba7:b198:7d35 with SMTP id
+ a640c23a62f3a-bb8023b8a56mr289097366b.19.1777399279540; Tue, 28 Apr 2026
+ 11:01:19 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260422091949.1684616-1-s-tripathi1@ti.com>
-In-Reply-To: <20260422091949.1684616-1-s-tripathi1@ti.com>
+References: <20260424173151.371134-1-harsimransingh.tungal@arm.com>
+ <20260424173151.371134-7-harsimransingh.tungal@arm.com>
+In-Reply-To: <20260424173151.371134-7-harsimransingh.tungal@arm.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 28 Apr 2026 11:58:11 -0600
-X-Gm-Features: AVHnY4LZiwXKFnZe5fdmavhq__08XMbTsq58rJMhh9MI6_uYdedQNO8luufZ49I
-Message-ID: <CAFLszTi0VKwL6uNY0ONfKob1NN+9-7-m=Basvd_iw18O6955DA@mail.gmail.com>
-Subject: Re: [PATCH] doc: board: ti: k3: Add fTPM support documentation
-To: s-tripathi1@ti.com
-Cc: trini@konsulko.com, vigneshr@ti.com, bb@ti.com, u-boot@lists.denx.de
+Date: Tue, 28 Apr 2026 12:01:05 -0600
+X-Gm-Features: AVHnY4L4CJ2cOJhJmfz10noxHc5zjx86jkhtFkG9BsFEvk45i0OC0hISzq0BqS0
+Message-ID: <CAFLszThtGo1n_fpMF4S8EYvUGPpaUu4mDwbjt8P5RF++pBo4UQ@mail.gmail.com>
+Subject: Re: [PATCH 06/12] corstone1000: enable bootefi selftest
+To: harsimransingh.tungal@arm.com
+Cc: u-boot@lists.denx.de, Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>, 
+ Tom Rini <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Hugues Kamba Mpiana <hugues.kambampiana@arm.com>, 
+ Simon Glass <sjg@chromium.org>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -111,83 +113,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Shiva,
+Hi Harsimran,
 
-On 2026-04-22T09:19:49, Shiva Tripathi <s-tripathi1@ti.com> wrote:
-> doc: board: ti: k3: Add fTPM support documentation
+On 2026-04-24T17:31:50, Harsimran Singh Tungal
+<harsimransingh.tungal@arm.com> wrote:
+> corstone1000: enable bootefi selftest
 >
-> Add fTPM support documentation including an overview, configuration
-> steps for RPMB provisioning, OP-TEE TA build instructions, and
-> verification procedure.
+> Enable UEFI selftest command in Corstone-1000 defconfig
 >
-> Signed-off-by: Shiva Tripathi <s-tripathi1@ti.com>
+> Turn on CONFIG_CMD_BOOTEFI_SELFTEST in the Corstone-1000 defconfig
+> so the board can run the built-in UEFI self-test suite during
+> development and validation.
 >
-> doc/board/ti/k3.rst | 83 ++++++++++++++++++++++++++++++++++++++++++++++++=
-+++++
->  1 file changed, 83 insertions(+)
+> Signed-off-by: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
+>
+> configs/corstone1000_defconfig | 3 +++
+>  1 file changed, 3 insertions(+)
 
-> diff --git a/doc/board/ti/k3.rst b/doc/board/ti/k3.rst
-> @@ -1258,3 +1258,86 @@ Currently, OpenOCD does not support tracing for K3=
- platforms. Tracing
-> +Enabling fTPM in U-Boot
-> +^^^^^^^^^^^^^^^^^^^^^^^
-> +
-> +The following are the steps to enable fTPM in uboot:
+> diff --git a/configs/corstone1000_defconfig b/configs/corstone1000_defconfig
+> @@ -63,6 +65,7 @@ CONFIG_SYSRESET=y
+>  CONFIG_SYSRESET_PSCI=y
+>  CONFIG_TEE=y
+>  CONFIG_OPTEE=y
+> +# CONFIG_CMD_POWEROFF is not set
+>  CONFIG_USB=y
 
-The section is titled 'Enabling fTPM in U-Boot' but the three steps
-only cover building OP-TEE =E2=80=94 nothing tells the reader which U-Boot
-options to enable (CONFIG_TPM_V2, CONFIG_TEE, CONFIG_OPTEE,
-CONFIG_TPM2_FTPM_TEE, plus the relevant tpm2 command configs) or how
-to wire the fTPM node into the board's device tree. Please can you add
-a step covering the U-Boot side. Also 'uboot' should be 'U-Boot' here
-and further down ('u-boot prompt').
+Why is this disabled? It's not mentioned in the commit message and
+looks unrelated to enabling the bootefi selftest. If it's a stray
+byproduct of 'make savedefconfig' please drop it; if intentional it
+should be a separate patch with its own justification.
 
-> diff --git a/doc/board/ti/k3.rst b/doc/board/ti/k3.rst
-> @@ -1258,3 +1258,86 @@ Currently, OpenOCD does not support tracing for K3=
- platforms. Tracing
-> +Since fTPM uses RPMB for persistent storage, the eMMC RPMB must be
-> +provisioned with an authentication key on first boot. This requires
-> +building optee_os with the `CFG_RPMB_WRITE_KEY=3Dy flag
+> diff --git a/configs/corstone1000_defconfig b/configs/corstone1000_defconfig
+> @@ -32,6 +32,8 @@ CONFIG_SYS_PROMPT="corstone1000# "
+>  # CONFIG_CMD_CONSOLE is not set
+>  CONFIG_CMD_FWU_METADATA=y
+>  CONFIG_CMD_BOOTZ=y
+> +# CONFIG_CMD_BOOTEFI_HELLO is not set
+> +CONFIG_CMD_BOOTEFI_SELFTEST=y
 
-Missing full stop. Same with the paragraph ending 'OP-TEE fTPM Github
-repository' below.
+The commit message says only that selftest is being enabled, but
+you're also explicitly disabling CMD_BOOTEFI_HELLO (which would
+otherwise default to y once SELFTEST is set). Please mention this, and
+ideally state the real motivation - that this is needed so patch 7 of
+the series can run the runtime variable selftest on this board, right?
 
-> diff --git a/doc/board/ti/k3.rst b/doc/board/ti/k3.rst
-> @@ -1258,3 +1258,86 @@ Currently, OpenOCD does not support tracing for K3=
- platforms. Tracing
-> +2. Generate fTPM TA binary
-> +""""""""""""""""""""""""""
-> +
-> +To generate fTPM TA binary, follow the
-> +Building the TA <https://github.com/OP-TEE/optee_ftpm#building-the-ta>`_
-> +steps mentioned in the OP-TEE fTPM Github repository
-> +
-> +3. Build OP-TEE with TA:
-> +""""""""""""""""""""""""
+> Enable UEFI selftest command in Corstone-1000 defconfig
 
-Please drop the trailing colon on step 3's heading for consistency
-with steps 1 and 2.
+>
+> Turn on CONFIG_CMD_BOOTEFI_SELFTEST in the Corstone-1000 defconfig
+> so the board can run the built-in UEFI self-test suite during
+> development and validation.
 
-> diff --git a/doc/board/ti/k3.rst b/doc/board/ti/k3.rst
-> @@ -1258,3 +1258,86 @@ Currently, OpenOCD does not support tracing for K3=
- platforms. Tracing
-> +Expected Outcome
-> +^^^^^^^^^^^^^^^^
-> +
-> +To verify fTPM support is working, run tpm2 commands in u-boot prompt:
-> +
-> +.. code-block:: console
-> +
-> +  =3D> tpm2 info
-> +  Microsoft OP-TEE fTPM
-> +  =3D> tpm2 init
-
-'tpm2 init' needs to run before 'tpm2 info' will talk to the device,
-so the ordering is backwards. Also, showing 'tpm2 init' with no output
-tells the reader nothing about what success looks like please include
-the expected response (empty?), and ideally a 'tpm2 startup
-TPM2_SU_CLEAR' / 'tpm2 get_capability' round-trip so readers can
-confirm the stack is working end-to-end.
+The first paragraph just restates the subject. Please drop it and keep
+the second paragraph, which actually explains the change. Referencing
+the runtime-variable selftest added later in the series would also
+help, since that is the real reason for enabling it now.
 
 Regards,
 Simon
