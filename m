@@ -4,59 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8ECCEFF885D
-	for <u-boot@archiver.kernel.org>; Tue, 28 Apr 2026 09:40:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9F2CFF8868
+	for <u-boot@archiver.kernel.org>; Tue, 28 Apr 2026 09:40:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 34A8E8465A;
+	by phobos.denx.de (Postfix) with ESMTP id 6559384676;
 	Tue, 28 Apr 2026 11:39:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=mediatek.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=mediatek.com header.i=@mediatek.com header.b="ER2PjQsH";
+	dkim=pass (1024-bit key; unprotected) header.d=mediatek.com header.i=@mediatek.com header.b="hT56ssQx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3B1AD84669; Tue, 28 Apr 2026 11:39:44 +0200 (CEST)
+ id 426708466B; Tue, 28 Apr 2026 11:39:45 +0200 (CEST)
 Received: from mailgw01.mediatek.com (unknown [60.244.123.138])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B8FD6842A2
- for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 11:39:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AECD784653
+ for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 11:39:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=mediatek.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=weijie.gao@mediatek.com
-X-UUID: 2ca0d37042e611f19781c1a04af40193-20260428
+X-UUID: 2b57cdd442e611f19781c1a04af40193-20260428
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mediatek.com;
  s=dk; 
  h=Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:CC:To:From;
- bh=OIJJBiJ4nrOvpTXHvNoHApbOpzfWikUXeRu8LQbKTVo=; 
- b=ER2PjQsHrSdhuFFbF0lOQeT4AdT038tocEIqruraS6ygGzw/pAwrmcucicXzlX4rmVTOBM4dOzadEiL1V/54edQ2f304/QxrUJ2adrsqQQw/dVcYEOWDyxte/ONSav5f6UwipObZJ3m5qsxe91Y6HSWBhXJkifPaPjIdwjaG2qc=;
+ bh=UPsLkD0178b1SFjrnQbf4fBEefwxUzhGQJ1wCOK7MAk=; 
+ b=hT56ssQxlqKlCAJVLJbp0i1qo+YC1eN5TyWvrp3LuT/ZDt03pGEx877/WJh2kW8pFDE4eKkhJA7BK3dgp2vh08tzJQ7NdbWsZsjHPSdCfnFlSTd6iIBJf7i89vjBQneGGmIWkFc+QGKR86uCbf58mYWCKCQpBwdjHnjun/ng6UI=;
 X-CID-P-RULE: Release_Ham
-X-CID-O-INFO: VERSION:1.3.12, REQID:cc0c4b98-5e60-411c-a136-3d5d167c790a, IP:0,
+X-CID-O-INFO: VERSION:1.3.12, REQID:4c771894-ac11-4694-85ec-fba36f97993d, IP:0,
  U
- RL:0,TC:0,Content:-5,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTION
- :release,TS:-5
-X-CID-META: VersionHash:e7bac3a, CLOUDID:6048a370-3b7f-4b26-b2f9-40f0deecb36d,
+ RL:0,TC:0,Content:-25,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTIO
+ N:release,TS:-25
+X-CID-META: VersionHash:e7bac3a, CLOUDID:c9a0cc44-8360-4d24-8500-9b9380fa4b0d,
  B
  ulkID:nil,BulkQuantity:0,Recheck:0,SF:81|82|102|836|865|888|898,TC:-5,Cont
- ent:0|15|50,EDM:-3,IP:nil,URL:99|1,File:130,RT:0,Bulk:nil,QS:nil,BEC:-1,CO
- L:0,OSI:0,OSA:0,AV:0,LES:1,SPR:NO,DKR:0,DKP:0,BRR:0,BRE:0,ARC:0
+ ent:0|15|50,EDM:-3,IP:nil,URL:0,File:130,RT:0,Bulk:nil,QS:nil,BEC:-1,COL:0
+ ,OSI:0,OSA:0,AV:0,LES:1,SPR:NO,DKR:0,DKP:0,BRR:0,BRE:0,ARC:0
 X-CID-BVR: 2,SSN|SDN
 X-CID-BAS: 2,SSN|SDN,0,_
-X-CID-FACTOR: TF_CID_SPAM_SNR,TF_CID_SPAM_ULS
+X-CID-FACTOR: TF_CID_SPAM_SNR
 X-CID-RHF: D41D8CD98F00B204E9800998ECF8427E
-X-UUID: 2ca0d37042e611f19781c1a04af40193-20260428
-Received: from mtkmbs13n1.mediatek.inc [(172.21.101.193)] by
+X-UUID: 2b57cdd442e611f19781c1a04af40193-20260428
+Received: from mtkmbs09n2.mediatek.inc [(172.21.101.94)] by
  mailgw01.mediatek.com (envelope-from <weijie.gao@mediatek.com>)
  (Generic MTA with TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384 256/256)
- with ESMTP id 75242252; Tue, 28 Apr 2026 17:39:38 +0800
+ with ESMTP id 1986445592; Tue, 28 Apr 2026 17:39:36 +0800
 Received: from mtkmbs13n1.mediatek.inc (172.21.101.193) by
- MTKMBS14N2.mediatek.inc (172.21.101.76) with Microsoft SMTP Server
+ mtkmbs10n2.mediatek.inc (172.21.101.183) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.29; Tue, 28 Apr 2026 17:39:37 +0800
+ 15.2.2562.29; Tue, 28 Apr 2026 17:39:34 +0800
 Received: from mcddlt001.gcn.mediatek.inc (10.19.240.15) by
  mtkmbs13n1.mediatek.inc (172.21.101.73) with Microsoft SMTP Server id
- 15.2.2562.29 via Frontend Transport; Tue, 28 Apr 2026 17:39:36 +0800
+ 15.2.2562.29 via Frontend Transport; Tue, 28 Apr 2026 17:39:33 +0800
 From: Weijie Gao <weijie.gao@mediatek.com>
 To: <u-boot@lists.denx.de>
 CC: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, Tom Rini
@@ -68,10 +68,10 @@ CC: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, Tom Rini
  <yangshiji66@outlook.com>, Bernhard Messerklinger
  <bernhard.messerklinger@at.abb.com>, Vaishnav Achath <vaishnav.a@ti.com>,
  Prasad Kummari <prasad.kummari@amd.com>, Weijie Gao <weijie.gao@mediatek.com>
-Subject: [PATCH v2 7/7] mtd: spi-nor-ids: Add support for Winbond
- W25Q256JV-M/W25Q512JV-M
-Date: Tue, 28 Apr 2026 17:39:35 +0800
-Message-ID: <2ffa5e880e117b14434ab1ca80bcff3388eb7baa.1777368885.git.weijie.gao@mediatek.com>
+Subject: [PATCH v2 6/7] mtd: spi-nor-ids: Reorder winbond parts with part
+ families
+Date: Tue, 28 Apr 2026 17:39:33 +0800
+Message-ID: <3ac593a8c6893151f6f86eafcc4b9b3e3f9f1ebf.1777368885.git.weijie.gao@mediatek.com>
 X-Mailer: git-send-email 2.17.0
 In-Reply-To: <cover.1777368885.git.weijie.gao@mediatek.com>
 References: <cover.1777368885.git.weijie.gao@mediatek.com>
@@ -94,35 +94,218 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-These two parts does not support DTR.
-Both tested on MediaTek's filogic platform.
+This patch reorders winbond parts with families (0xef20xx, 0xef30xx, ...).
+Also, parts in the same family are sorted by size.
+Some parts are renamed to match their families.
 
-Datasheets can be found here:
-https://www.winbond.com/resource-files/W25Q256JV%20DTR%20RevK%2010202025%20Plus.pdf
-https://www.winbond.com/resource-files/W25Q512JV%20DTR%20RevD%2006292020%20133.pdf
+Renamed parts:
+
+1. Removed suffixes due to multiple suffixes matches with the same ID:
+w25q80bl -> w25q80
+w25q16cl -> w25q16
+w25q64cv -> w25q64
+
+2. Add suffix to match their family:
+w25q80 -> w25q80bw
+w25q01jv -> w25q01jv-q
+w25q256jw -> w25q256jw-q
+w25q16jv -> w25q16jv-m
+w25q32jv -> w25q32jv-m
+w25q128jv -> w25q128jv-m
+w25q02jv -> w25q02jv-m
+w25q128jw -> w25q128jw-m
+
+3. Change to uniform suffix:
+w25q01nw-iq -> w25q01nw-q
+w25q01jvfim -> w25q01jv-m
+w25q01nw-im -> w25q01nw-m
+w25q02nw-im -> w25q02nw-m
 
 Signed-off-by: Weijie Gao <weijie.gao@mediatek.com>
 ---
-v2: refactored with previous patch. updated commit message
+v2: new
 ---
- drivers/mtd/spi/spi-nor-ids.c | 4 ++++
- 1 file changed, 4 insertions(+)
+ drivers/mtd/spi/spi-nor-ids.c | 157 +++++++++++-----------------------
+ 1 file changed, 50 insertions(+), 107 deletions(-)
 
 diff --git a/drivers/mtd/spi/spi-nor-ids.c b/drivers/mtd/spi/spi-nor-ids.c
-index befe6d69e0b..3229dcecc8f 100644
+index 492411a90f5..befe6d69e0b 100644
 --- a/drivers/mtd/spi/spi-nor-ids.c
 +++ b/drivers/mtd/spi/spi-nor-ids.c
-@@ -590,6 +590,10 @@ const struct flash_info spi_nor_ids[] = {
- 	       SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB) },
- 	{ INFO("w25q128jv-m", 0xef7018, 0, 64 * 1024, 256,
- 	       SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB) },
-+	{ INFO("w25q256jv-m", 0xef7019, 0, 64 * 1024, 512,
+@@ -551,123 +551,66 @@ const struct flash_info spi_nor_ids[] = {
+ 	{ INFO("w25x40", 0xef3013, 0, 64 * 1024,  8,  SECT_4K) },
+ 	{ INFO("w25x16", 0xef3015, 0, 64 * 1024,  32, SECT_4K) },
+ 	{ INFO("w25x32", 0xef3016, 0, 64 * 1024,  64, SECT_4K) },
+-	{ INFO("w25q20cl", 0xef4012, 0, 64 * 1024,  4, SECT_4K) },
+-	{ INFO("w25q20bw", 0xef5012, 0, 64 * 1024,  4, SECT_4K) },
+-	{ INFO("w25q20ew", 0xef6012, 0, 64 * 1024,  4, SECT_4K) },
+-	{
+-		INFO("w25q16dw", 0xef6015, 0, 64 * 1024,  32,
+-			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
+-			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
+-	},
+-	{
+-		INFO("w25q32dw", 0xef6016, 0, 64 * 1024,  64,
+-			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
+-			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
+-	},
+-	{
+-		INFO("w25q16jv", 0xef7015, 0, 64 * 1024,  32,
+-			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ)
+-	},
+-	{
+-		INFO("w25q32jv", 0xef7016, 0, 64 * 1024,  64,
+-			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
+-			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
+-	},
+-	{
+-		INFO("w25q32jwm", 0xef8016, 0, 64 * 1024,  64,
+-			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
+-			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
+-	},
+-	{
+-		INFO("w25q256jwm", 0xef8019, 0, 64 * 1024, 512,
+-			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
+-			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
+-	},
+ 	{ INFO("w25x64", 0xef3017, 0, 64 * 1024, 128, SECT_4K) },
+-	{
+-		INFO("w25q64dw", 0xef6017, 0, 64 * 1024, 128,
+-			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
+-			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
+-	},
+-	{
+-		INFO("w25q64jv", 0xef7017, 0, 64 * 1024, 128,
+-			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
+-			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
+-	},
+-	{
+-		INFO("w25q128fw", 0xef6018, 0, 64 * 1024, 256,
+-			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
+-			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
+-	},
+-	{
+-		INFO("w25q128jv", 0xef7018, 0, 64 * 1024, 256,
+-			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
+-			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
+-	},
+-	{
+-		INFO("w25q128jw", 0xef8018, 0, 64 * 1024, 256,
+-			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
+-			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
+-	},
+-	{
+-		INFO("w25q256jw", 0xef6019, 0, 64 * 1024, 512,
+-			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
+-			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
+-	},
+-	{
+-		INFO("w25q512nwq", 0xef6020, 0, 64 * 1024, 1024,
+-			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
+-			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
+-	},
+-	{
+-		INFO("w25q512nwm", 0xef8020, 0, 64 * 1024, 1024,
+-			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
+-			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
+-	},
+-	{
+-		INFO("w25q512jvq", 0xef4020, 0, 64 * 1024, 1024,
+-		     SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
+-		     SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
+-	},
+-	{
+-		INFO("w25q01jv", 0xef4021, 0, 64 * 1024, 2048,
+-			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
+-			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
+-	},
+-	{
+-		INFO("w25q01jvfim", 0xef7021, 0, 64 * 1024, 2048,
+-			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
+-			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
+-	},
+-	{
+-		INFO("w25q02jv", 0xef7022, 0, 64 * 1024, 4096,
+-			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
+-			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
+-	},
+-	{ INFO("w25q80", 0xef5014, 0, 64 * 1024,  16, SECT_4K) },
+-	{ INFO("w25q80bl", 0xef4014, 0, 64 * 1024,  16, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
+-	{
+-		INFO("w25q16cl", 0xef4015, 0, 64 * 1024,  32,
+-			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
+-			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
+-	},
++	{ INFO("w25q20cl", 0xef4012, 0, 64 * 1024,  4, SECT_4K) },
++	{ INFO("w25q80", 0xef4014, 0, 64 * 1024,  16, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
++	{ INFO("w25q16", 0xef4015, 0, 64 * 1024,  32,
 +	       SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB) },
-+	{ INFO("w25q512jv-m", 0xef7020, 0, 64 * 1024, 1024,
+ 	{ INFO("w25q32", 0xef4016, 0, 64 * 1024,  64, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
+-	{ INFO("w25q64cv", 0xef4017, 0, 64 * 1024,  128, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
++	{ INFO("w25q64", 0xef4017, 0, 64 * 1024,  128, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
+ 	{ INFO("w25q128", 0xef4018, 0, 64 * 1024, 256,
+-			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
+-			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
+-	},
 +	       SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB) },
- 	{ INFO("w25q01jv-m", 0xef7021, 0, 64 * 1024, 2048,
- 	       SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB) },
- 	{ INFO("w25q02jv-m", 0xef7022, 0, 64 * 1024, 4096,
+ 	{ INFO("w25q256", 0xef4019, 0, 64 * 1024, 512, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
++	{ INFO("w25q512jv-q", 0xef4020, 0, 64 * 1024, 1024,
++	       SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB) },
++	{ INFO("w25q01jv-q", 0xef4021, 0, 64 * 1024, 2048,
++	       SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB) },
++	{ INFO("w25q20bw", 0xef5012, 0, 64 * 1024,  4, SECT_4K) },
++	{ INFO("w25q80bw", 0xef5014, 0, 64 * 1024,  16, SECT_4K) },
++	{ INFO("w25q20ew", 0xef6012, 0, 64 * 1024,  4, SECT_4K) },
++	{ INFO("w25q16dw", 0xef6015, 0, 64 * 1024,  32,
++	        SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB) },
++	{ INFO("w25q32dw", 0xef6016, 0, 64 * 1024,  64,
++	        SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB) },
++	{ INFO("w25q64dw", 0xef6017, 0, 64 * 1024, 128,
++	       SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB) },
++	{ INFO("w25q128fw", 0xef6018, 0, 64 * 1024, 256,
++	       SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB) },
++	{ INFO("w25q256jw-q", 0xef6019, 0, 64 * 1024, 512,
++	       SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB) },
++	{ INFO("w25q512nw-q", 0xef6020, 0, 64 * 1024, 1024,
++	       SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB) },
++	{ INFO("w25q01nw-q", 0xef6021, 0, 64 * 1024, 2048, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
+ 	{ INFO("w25m512jw", 0xef6119, 0, 64 * 1024, 1024, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
++	{ INFO("w25q16jv-m", 0xef7015, 0, 64 * 1024,  32,
++	       SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
++	{ INFO("w25q32jv-m", 0xef7016, 0, 64 * 1024,  64,
++	       SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB) },
++	{ INFO("w25q64jv-m", 0xef7017, 0, 64 * 1024, 128,
++	       SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB) },
++	{ INFO("w25q128jv-m", 0xef7018, 0, 64 * 1024, 256,
++	       SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB) },
++	{ INFO("w25q01jv-m", 0xef7021, 0, 64 * 1024, 2048,
++	       SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB) },
++	{ INFO("w25q02jv-m", 0xef7022, 0, 64 * 1024, 4096,
++	       SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB) },
+ 	{ INFO("w25m512jv", 0xef7119, 0, 64 * 1024, 1024, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
++	{ INFO("w25q32jw-m", 0xef8016, 0, 64 * 1024,  64,
++	       SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB) },
++	{ INFO("w25q128jw-m", 0xef8018, 0, 64 * 1024, 256,
++	       SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB) },
++	{ INFO("w25q256jw-m", 0xef8019, 0, 64 * 1024, 512,
++	      SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB) },
++	{ INFO("w25q512nw-m", 0xef8020, 0, 64 * 1024, 1024,
++	       SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB) },
++	{ INFO("w25q01nw-m", 0xef8021, 0, 64 * 1024, 2048, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
++	{ INFO("w25q02nw-m", 0xef8022, 0, 64 * 1024, 4096, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
+ 	{ INFO("w25h02jv", 0xef9022, 0, 64 * 1024, 4096, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
+ 	{ INFO("w25h512nw-am", 0xefa020, 0, 64 * 1024, 1024, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
+ 	{ INFO("w25h01nw-am", 0xefa021, 0, 64 * 1024, 2048, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
+ 	{ INFO("w25h02nw-am", 0xefa022, 0, 64 * 1024, 4096, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
+-	{ INFO("w25q01nw-iq", 0xef6021, 0, 64 * 1024, 2048, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
+-	{ INFO("w25q01nw-im", 0xef8021, 0, 64 * 1024, 2048, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
+-	{ INFO("w25q02nw-im", 0xef8022, 0, 64 * 1024, 4096, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
+-	{ INFO("w77q51nw", 0xef8a1a, 0, 64 * 1024, 1024, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
++	{ INFO("w77q51nw", 0xef8a1a, 0, 64 * 1024, 1024,
++	       SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
+ #endif
+ #ifdef CONFIG_SPI_FLASH_XMC
+ 	/* XMC (Wuhan Xinxin Semiconductor Manufacturing Corp.) */
 -- 
 2.45.2
 
