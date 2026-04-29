@@ -4,83 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B3F0FF8873
-	for <u-boot@archiver.kernel.org>; Wed, 29 Apr 2026 21:16:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3613CFF8873
+	for <u-boot@archiver.kernel.org>; Wed, 29 Apr 2026 21:16:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 098CB84903;
-	Wed, 29 Apr 2026 23:15:51 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4A43C8490D;
+	Wed, 29 Apr 2026 23:15:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20251104.gappssmtp.com header.i=@baylibre-com.20251104.gappssmtp.com header.b="o08LqhYm";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20251104.gappssmtp.com header.i=@baylibre-com.20251104.gappssmtp.com header.b="Tp4SQXJB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C141C84862; Wed, 29 Apr 2026 15:59:24 +0200 (CEST)
-Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
- [IPv6:2a00:1450:4864:20::333])
+ id 42DBE84862; Wed, 29 Apr 2026 15:59:27 +0200 (CEST)
+Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
+ [IPv6:2a00:1450:4864:20::430])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E89F084832
- for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 15:59:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2184084855
+ for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 15:59:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jstephan@baylibre.com
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-4896c22fcbaso96719255e9.0
- for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 06:59:21 -0700 (PDT)
+Received: by mail-wr1-x430.google.com with SMTP id
+ ffacd0b85a97d-43d7e23defbso7378828f8f.0
+ for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 06:59:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20251104.gappssmtp.com; s=20251104; t=1777471161; x=1778075961;
+ d=baylibre-com.20251104.gappssmtp.com; s=20251104; t=1777471163; x=1778075963;
  darn=lists.denx.de; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=ou+kxqqVupP6mcMqGz+1DYN/l8k68LTl+x2Yj2AWySA=;
- b=o08LqhYmGsXHZGr1WMnQ9ghfpaf++P4knywPDBaKMSRIW+dwmUqakKb6SRE1UiHOVW
- Algdv1RDRwR5606vCW7+aq3xOGWoiBAyxRjejFtVlm/kCRhux7KQCyLbA69QRcVXwnC+
- cpPjvXqfeR/lzh6GMZ/rDLTJD9kmGroznRIwZK4PB/OUZgxuSgYDLYo+IpayJRg576JK
- X3DmXyvSpRNRKtserXzyfEhpixUzl5I8iREqDK8D0G0r2tjYIeKtNDpMSqTGgrGbL1Qt
- grfqTplQuM1q5LzMP0U3wCi6OeqV1CI4jMy878SzknI1CEDG8yvUXXxCQOQ2JDP448R2
- O1sQ==
+ :reply-to; bh=ZiNZkaAL5zMA9YEh/crXokP4skSUkvBz1ZF0HnRK9rI=;
+ b=Tp4SQXJBJ9jJbGz2y0DXTNF+HJv2wjLxcONZ1zuRJOh5u1AvX2x5KdBew6H6IgWQSN
+ l6Gc2FkPrKR2Spj+H1uPTfL3Ri609xAZ2INrJOVcVxzxtvbLr11FiTTq/eLHQmpA8HKJ
+ qWY7l7p8qLZqpXdzR3gXVUMgCyo5OWxwmiPjZBGuoKTUDH0H+xkUGef2PgJD3vrlCvnD
+ Aw3oRBmnesTeyNGq39kdtWyaWPRgxiWkX9MWVCZncjHf8Hm6BQsiiTX6buaeKZpXwqUf
+ qGYXce7IFq5X14zhcuFOsemZRk5ZyWIQy5u4eF2BP09k4eWlmoZ0aRTwp2tx5t861v/s
+ DI9A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777471161; x=1778075961;
+ d=1e100.net; s=20251104; t=1777471163; x=1778075963;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=ou+kxqqVupP6mcMqGz+1DYN/l8k68LTl+x2Yj2AWySA=;
- b=NPEuPQvjM4SbsEC7A7lpj13c09RSXboucq5ShIAwy99irF1kwbRy4AarIVfmwuHd5H
- JrG3fcCxFybDZeRVO7BvuOdFjlS4HNfLiHNbU6Jv0ZjudN2FaNnxk1z4anEewZwNNJHo
- rD5Doqfi6TuigXfWq926ZImO3C6fGYPfNqDTPXSaDq6X2cs5Wb955LddQ9QzHSHt2eaM
- xl+Spt/KggE8sGFWzK1V+Xvt7PddulMxsgzmSWbUq4XQ2iErrBdPuF6dknCtZmuYwWEe
- S2ebXVbXZcfijxkfKFP2UhKZiIIY0fLJ5ZTgnIonl94OctAB/shovU4iB8iACq4Wt8F7
- sa2A==
-X-Gm-Message-State: AOJu0YzUQ5WkvfdGWs+tDQb8DZzd2AQidO2GRyBa/hwkG8ZQnzlL5CJJ
- U1oZf9Shy+S8x5hJnQ7jz72AuC5R/CPtjQcN/xUe1Q918GIf0IdnMncfUuFibZSMi0g=
-X-Gm-Gg: AeBDiestBAdrQZCOLytE0OZiB5/+seH3jyPN4KE9EJncm+NoYYCyG5jhiZ5ajaNAz1D
- pp0voMBF22/xmzn0Dkvg2nI8XDJ9bCu7yxDhhx1ywu889PquiE/CiS9mXM4VQFx7LIq/rU4twKJ
- sFpBUor9UijjiX1ukyVTZRBbr0VAGSPfROK11IC1vHShpbiunlq3QH8YW6rNcFUEaB/m7kauZin
- CU/dCgNNDu4jAZokwPxTW3knsc6yc030T3Ew5+6cDnapQJdJ6opho4zGp3yZ71bYJ7S9A4xRuue
- Md03nEU1PCvfSvi6ER6NEi3Veiii5ZLEq04JZFer/86Oz4hugZAAwu5ykBZE5M08pSfFuVe28bO
- hW+7CTOBfxCr1sA/4WYsj5mgllhpAYDkol7O1PS+H+3/COzRJ/RgnpWi3TWMjVbH3F2h0M9DHn2
- PlK+uziZRzRblBKy74waNFO0Ry2YaQc4973E0NiSwn+uzC21vzeG+6n3Wgj3x2kRMmRceo96lbe
- BNi23c8cPuJAN5t0tp3Y1se1GkBWFMb6lmIIJDbRI6BLhJT137dBkuBcKn84J07fTF0XZmUCmJl
- Nh2ZEUX7kOtyYlf6uuo=
-X-Received: by 2002:a05:600c:3e83:b0:489:1fa5:997f with SMTP id
- 5b1f17b1804b1-48a77aed616mr123518225e9.9.1777471161072; 
- Wed, 29 Apr 2026 06:59:21 -0700 (PDT)
+ bh=ZiNZkaAL5zMA9YEh/crXokP4skSUkvBz1ZF0HnRK9rI=;
+ b=IIHhUzEWmNNj90HXAtx9V0pkqjhIGUlRa4Wan7fyJIM4nHXNfbd+nVoeOeBMkLomd3
+ DR+pqmTzOC8AA1oc8P+D7h6ALWux1ET5Sj7qyW9GX2oBvVuenXxrphBAsBrDK3Jd4Rn+
+ 1gfEcVsp+w0IQ9J5E6wvxxWl9ODkN32L1JF7skYA79VAZQvltetBz/0ygdgMyBqgKxhz
+ hn6FlRzJu/aAgpeEioraT1WDR8dQZMnA6EKkkqeZKU0Lh2j6Ja5uKGI6VBliX0Au15bb
+ T1hWVnmVE74OoX3+4YdqZ32pVeiaC3kjA4kphuzA7M6nIYHMmZ3ZOSJ52Xrvmsz0WBOI
+ ipiQ==
+X-Gm-Message-State: AOJu0Yzs4poG2A1z9axSHVrbiiDUcGUQe29dCVtAC9U+yw/TLLBiIbOL
+ b+aOcfSwg+gurpcd1MOFhyGQaaWiN3CnV2Clx9If0d9De3yIZ6SXLh2k7TTjJ+K/xqQ=
+X-Gm-Gg: AeBDiesv2NMRybfjC97ty/yeUWP9cRHXit7pmLKAiiS4eK7ZSpGHm+VsfXWdongz97f
+ EIdKDcSfyKu7PVWeBFeWKox81FxtUvHSw6BV9jucNd7lTdwwDMJIRKK59daX9ZUzcTyrfkaOoq5
+ Rhtx9weAQAIsRSY8tl7VpWLgUqmix7NBjgIm3nRIFjiLp1aF6CalEuE6vg8N54Pm3V2Z9gPqQM6
+ UpxuYBahRrYNeCi9vOVuQZkl7sfX8Yslx/Se1y44iQ/l93Wh0uyVNDd4Yq/47PLNSGGBb38t3fe
+ 2epC804eSjJiD6OL0HmQtlhZT6r2L/mGkeK8GgSeGyIn/7MIHOBAsCOKS+gahm335D+ZIhtl7A7
+ d8vZ/HpiL99xqm1zMgLoW55EF+2nQOO+c98VgfZzbEJoR0HOh2xM/F+vo2Yu4rPwtdBcX6CPJDe
+ ciL6d+iD/tLSS+0bUxL2nb3tKGxDmngs9AC6ecIO15ZjcwgNgBadOsE+eCz+SVlFWSWf67AfS3N
+ 3gwrN3e11wqoPL26Xoa1j4z5r9Ws64YV2axtHx8ftRBfCKx1wkaxhpf+yfNYcAyaWjMDYVY4SOk
+ 5sxIZg80W4IAFxNj/6Q=
+X-Received: by 2002:a05:6000:200e:b0:43f:dd94:3c30 with SMTP id
+ ffacd0b85a97d-44648b51105mr14259017f8f.14.1777471163257; 
+ Wed, 29 Apr 2026 06:59:23 -0700 (PDT)
 Received: from [192.168.1.100]
  (2a02-842a-d52e-6101-6f8f-5617-c4b6-8627.rev.sfr.net.
  [2a02:842a:d52e:6101:6f8f:5617:c4b6:8627])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-447b7ca64ffsm6289675f8f.37.2026.04.29.06.59.19
+ ffacd0b85a97d-447b7ca64ffsm6289675f8f.37.2026.04.29.06.59.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 29 Apr 2026 06:59:20 -0700 (PDT)
+ Wed, 29 Apr 2026 06:59:22 -0700 (PDT)
 From: Julien Stephan <jstephan@baylibre.com>
-Date: Wed, 29 Apr 2026 15:58:59 +0200
-Subject: [PATCH v4 6/9] net: phy: Add airoha AN8801 ethernet phy driver
+Date: Wed, 29 Apr 2026 15:59:00 +0200
+Subject: [PATCH v4 7/9] net: dwc_eth_qos: Add mediatek support
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260429-add-ethernet-support-for-genio-520-720-v4-6-be54e17239b7@baylibre.com>
+Message-Id: <20260429-add-ethernet-support-for-genio-520-720-v4-7-be54e17239b7@baylibre.com>
 References: <20260429-add-ethernet-support-for-genio-520-720-v4-0-be54e17239b7@baylibre.com>
 In-Reply-To: <20260429-add-ethernet-support-for-genio-520-720-v4-0-be54e17239b7@baylibre.com>
 To: u-boot@lists.denx.de
@@ -143,660 +143,544 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add Airoha AN8801 Ethernet PHY driver (air_an8801.c).
-Implement CL22/CL45 MDIO access, LED control, and RGMII delay
-configuration. Provide probe, initialization, LED setup, and status
-handling. Expose DTS properties for clock delays. Register driver with
-PHY framework and trigger on startup.
+Synopsys DWC Ethernet QOS device support for MediaTek SoCs.
+in particular this initial commit adds support for Genio 520/720 and
+Genio 510/700 EVKs
 
-Signed-off-by: Yanqing Wang <ot_yanqing.wang@mediatek.com>
+Signed-off-by: fanyi zhang <fanyi.zhang@mediatek.com>
 Signed-off-by: Julien Stephan <jstephan@baylibre.com>
 ---
- MAINTAINERS                         |   1 +
- drivers/net/phy/airoha/Kconfig      |   7 +
- drivers/net/phy/airoha/Makefile     |   1 +
- drivers/net/phy/airoha/air_an8801.c | 594 ++++++++++++++++++++++++++++++++++++
- 4 files changed, 603 insertions(+)
+ MAINTAINERS                   |   1 +
+ drivers/net/Kconfig           |   7 +
+ drivers/net/Makefile          |   1 +
+ drivers/net/dwc_eth_qos.c     |   6 +
+ drivers/net/dwc_eth_qos.h     |   2 +
+ drivers/net/dwc_eth_qos_mtk.c | 442 ++++++++++++++++++++++++++++++++++++++++++
+ 6 files changed, 459 insertions(+)
 
 diff --git a/MAINTAINERS b/MAINTAINERS
-index 735ecc36210..165994cd72f 100644
+index 165994cd72f..9b65bb43d8f 100644
 --- a/MAINTAINERS
 +++ b/MAINTAINERS
-@@ -60,6 +60,7 @@ F:	lib/acpi/
+@@ -442,6 +442,7 @@ F:	drivers/clk/mediatek/
+ F:	drivers/cpu/mtk_cpu.c
+ F:	drivers/i2c/mtk_i2c.c
+ F:	drivers/mmc/mtk-sd.c
++F:	drivers/net/dwc_eth_qos_mtk.c
+ F:	drivers/net/mtk_eth/
+ F:	drivers/net/phy/mediatek/
+ F:	drivers/phy/phy-mtk-*
+diff --git a/drivers/net/Kconfig b/drivers/net/Kconfig
+index 15a4b3b7705..cd868731d11 100644
+--- a/drivers/net/Kconfig
++++ b/drivers/net/Kconfig
+@@ -246,6 +246,13 @@ config DWC_ETH_QOS_INTEL
+ 	  The Synopsys Designware Ethernet QOS IP block with the specific
+ 	  configuration used in the Intel Elkhart-Lake soc.
  
- AIROHA PHY
- M:	Tommy Shih <tommy.shih@airoha.com>
-+M:	Kevin-KW Huang <kevin-kw.huang@airoha.com>
- S:	Maintained
- F:	drivers/net/phy/airoha/
- 
-diff --git a/drivers/net/phy/airoha/Kconfig b/drivers/net/phy/airoha/Kconfig
-index 5b109d5c6b4..eb267ac0a40 100644
---- a/drivers/net/phy/airoha/Kconfig
-+++ b/drivers/net/phy/airoha/Kconfig
-@@ -2,6 +2,13 @@
- menuconfig PHY_AIROHA
- 	bool "Airoha Ethernet PHYs support"
- 
-+config PHY_AIROHA_AN8801
-+	bool "Airoha Ethernet AN8801 support"
-+	depends on PHY_AIROHA
-+	select PHY_AIROHA_PHYLIB
++config DWC_ETH_QOS_MTK
++	bool "Synopsys DWC Ethernet QOS device support for MediaTek SoCs"
++	depends on DWC_ETH_QOS && ARCH_MEDIATEK
 +	help
-+	  Currently support AIROHA AN8801 1G PHY.
++	  The Synopsys Designware Ethernet QOS IP block with the specific
++	  configuration used in MediaTek SoCs.
 +
- config PHY_AIROHA_EN8811
- 	bool "Airoha Ethernet EN8811H support"
- 	depends on PHY_AIROHA
-diff --git a/drivers/net/phy/airoha/Makefile b/drivers/net/phy/airoha/Makefile
-index 59051caecef..25e44004cfd 100644
---- a/drivers/net/phy/airoha/Makefile
-+++ b/drivers/net/phy/airoha/Makefile
-@@ -1,4 +1,5 @@
- # SPDX-License-Identifier: GPL-2.0
- 
-+obj-$(CONFIG_PHY_AIROHA_AN8801) += air_an8801.o
- obj-$(CONFIG_PHY_AIROHA_EN8811) += air_en8811.o
- obj-$(CONFIG_PHY_AIROHA_PHYLIB) += air_phy_lib.o
-diff --git a/drivers/net/phy/airoha/air_an8801.c b/drivers/net/phy/airoha/air_an8801.c
-new file mode 100644
-index 00000000000..9d9958fc665
---- /dev/null
-+++ b/drivers/net/phy/airoha/air_an8801.c
-@@ -0,0 +1,594 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * air_an8801.c - PHY driver for Airoha AN8801.
-+ * Copyright (c) 2026 Airoha Technology Corp.
-+ * Copyright (C) 2026 BayLibre, SAS.
-+ * Author: Kevin-KW Huang <kevin-kw.huang@airoha.com>
-+ *         Sita Huang <sita.huang@airoha.com>
-+ *         Julien Stephan <jstephan@baylibre.com>
-+ */
-+
-+#include <malloc.h>
-+#include <phy.h>
-+#include <dm/device_compat.h>
-+
-+#include "air_phy_lib.h"
-+
-+#define AN8801R_PHY_ID1			0xc0ff
-+#define AN8801R_PHY_ID2			0x0421
-+#define AN8801R_PHY_ID			((u32)((AN8801R_PHY_ID1 << 16) | AN8801R_PHY_ID2))
-+
-+#define AN8801R_MAX_LED_SIZE		3
-+
-+/* MII Registers - Airoha Page 4 */
-+#define AN8801_PBUS_ACCESS		BIT(28)
-+
-+/* BPBUS Registers */
-+#define AN8801_BPBUS_REG_LED_GPIO	0x54
-+#define AN8801_BPBUS_REG_LED_ID_SEL	0x58
-+#define  LED_ID_GPIO_SEL(led, gpio)	((led) << ((gpio) * 3))
-+
-+#define AN8801_BPBUS_REG_GPIO_MODE	0x70
-+
-+#define AN8801_BPBUS_REG_LINK_MODE	0x5054
-+#define  AN8801_BPBUS_LINK_MODE_1000	BIT(0)
-+
-+#define AN8801_BPBUS_REG_BYPASS_PTP	0x21c004
-+#define   AN8801_BYP_PTP_RGMII_TO_GPHY	BIT(0)
-+
-+#define AN8801_BPBUS_REG_TXDLY_STEP	0x21c024
-+#define  RGMII_DELAY_STEP_MASK		GENMASK(2, 0)
-+#define  AIR_RGMII_DELAY_NOSTEP		0
-+#define  AIR_RGMII_DELAY_STEP_1		1
-+#define  AIR_RGMII_DELAY_STEP_2		2
-+#define  AIR_RGMII_DELAY_STEP_3		3
-+#define  AIR_RGMII_DELAY_STEP_4		4
-+#define  AIR_RGMII_DELAY_STEP_5		5
-+#define  AIR_RGMII_DELAY_STEP_6		6
-+#define  AIR_RGMII_DELAY_STEP_7		7
-+#define  RGMII_TXDELAY_FORCE_MODE	BIT(24)
-+
-+#define AN8801_BPBUS_REG_RXDLY_STEP	0x21c02c
-+#define  RGMII_RXDELAY_ALIGN		BIT(4)
-+#define  RGMII_RXDELAY_FORCE_MODE	BIT(24)
-+
-+#define AN8801_BPBUS_REG_EFIFO_CTL(x)	(0x270004 + (0x100 * (x))) /* 0..2 */
-+#define   AN8801_EFIFO_ALL_EN		GENMASK(7, 0)
-+#define   AN8801_EFIFO_RX_EN		BIT(0)
-+#define   AN8801_EFIFO_TX_EN		BIT(1)
-+#define   AN8801_EFIFO_RX_CLK_EN	BIT(2)
-+#define   AN8801_EFIFO_TX_CLK_EN	BIT(3)
-+#define   AN8801_EFIFO_RX_EEE_EN	BIT(4)
-+#define   AN8801_EFIFO_TX_EEE_EN	BIT(5)
-+#define   AN8801_EFIFO_RX_ODD_NIBBLE_EN	BIT(6)
-+#define   AN8801_EFIFO_TX_ODD_NIBBLE_EN	BIT(7)
-+
-+#define AN8801_BPBUS_REG_HWRST_DE_GLITCH	0xc8
-+#define  AN8801_DE_GLITCH_EN			BIT(2)
-+#define  AN8801_11_CYCLE_XTAL_PERIOD_DE_GLITCH	GENMASK(1, 0)
-+
-+#define LED_BCR				0x21
-+#define  LED_BCR_MODE_MASK		GENMASK(1, 0)
-+#define  LED_BCR_TIME_TEST		BIT(2)
-+#define  LED_BCR_CLK_EN			BIT(3)
-+#define  LED_BCR_EVT_ALL		BIT(4)
-+#define  LED_BCR_EXT_CTRL		BIT(15)
-+#define LED_BCR_MODE_DISABLE		0
-+#define LED_BCR_MODE_2LED		1
-+#define LED_BCR_MODE_3LED_1		2
-+#define LED_BCR_MODE_3LED_2		3
-+
-+#define LED_ON_DUR			0x22
-+#define LED_ON_DUR_MASK			GENMASK(15, 0)
-+
-+#define LED_BLINK_DUR			0x23
-+#define LED_BLINK_DUR_MASK		GENMASK(15, 0)
-+
-+#define LED_ON_CTRL(i)			(0x024 + ((i) * 2))
-+#define  LED_ON_EVT_MASK		GENMASK(6, 0)
-+#define  LED_ON_EVT_LINK_1000M		BIT(0)
-+#define  LED_ON_EVT_LINK_100M		BIT(1)
-+#define  LED_ON_EVT_LINK_10M		BIT(2)
-+#define  LED_ON_EVT_LINK_DN		BIT(3)
-+#define  LED_ON_EVT_FDX			BIT(4)
-+#define  LED_ON_EVT_HDX			BIT(5)
-+#define  LED_ON_EVT_FORCE		BIT(6)
-+#define  LED_ON_POL			BIT(14)
-+#define  LED_ON_EN			BIT(15)
-+
-+#define LED_BLINK_CTRL(i)		(0x025 + ((i) * 2))
-+#define  LED_BLINK_EVT_MASK		GENMASK(9, 0)
-+#define  LED_BLINK_EVT_1000M_TX		BIT(0)
-+#define  LED_BLINK_EVT_1000M_RX		BIT(1)
-+#define  LED_BLINK_EVT_100M_TX		BIT(2)
-+#define  LED_BLINK_EVT_100M_RX		BIT(3)
-+#define  LED_BLINK_EVT_10M_TX		BIT(4)
-+#define  LED_BLINK_EVT_10M_RX		BIT(5)
-+#define  LED_BLINK_EVT_FORCE		BIT(9)
-+
-+#define UNIT_LED_BLINK_DURATION		780
-+#define LED_BLINK_DURATION(f)		(UNIT_LED_BLINK_DURATION << (f))
-+
-+/* Link on(1G/100M/10M), no activity */
-+#define AIR_LED0_ON \
-+	(LED_ON_EVT_LINK_1000M | LED_ON_EVT_LINK_100M | LED_ON_EVT_LINK_10M)
-+#define AIR_LED0_BLINK			0x0
-+/* No link on, activity(1G/100M/10M TX/RX) */
-+#define AIR_LED1_ON			0x0
-+#define AIR_LED1_BLINK \
-+	(LED_BLINK_EVT_1000M_TX | LED_BLINK_EVT_1000M_RX | \
-+	LED_BLINK_EVT_100M_TX | LED_BLINK_EVT_100M_RX | \
-+	LED_BLINK_EVT_10M_TX | LED_BLINK_EVT_10M_RX)
-+/* Link on(100M/10M), activity(100M/10M TX/RX) */
-+#define AIR_LED2_ON \
-+	(LED_ON_EVT_LINK_100M | LED_ON_EVT_LINK_10M)
-+#define AIR_LED2_BLINK \
-+	(LED_BLINK_EVT_100M_TX | LED_BLINK_EVT_100M_RX | \
-+	LED_BLINK_EVT_10M_TX | LED_BLINK_EVT_10M_RX)
-+
-+#define INVALID_DATA			GENMASK(31, 0)
-+
-+#define AN8801_REG_PHY_INTERNAL0	0x600
-+#define AN8801_REG_PHY_INTERNAL1	0x601
-+
-+#define AN8801_LED_ENABLE		1
-+
-+enum air_led_gpio_pin {
-+	AIR_LED_GPIO1 = 1,
-+	AIR_LED_GPIO2,
-+	AIR_LED_GPIO3
-+};
-+
-+enum air_led {
-+	AIR_LED0 = 0,
-+	AIR_LED1,
-+	AIR_LED2,
-+	AIR_LED3
-+};
-+
-+enum air_led_blink_dut {
-+	AIR_LED_BLINK_DUR_32M = 0,
-+	AIR_LED_BLINK_DUR_64M,
-+	AIR_LED_BLINK_DUR_128M,
-+	AIR_LED_BLINK_DUR_256M,
-+	AIR_LED_BLINK_DUR_512M,
-+	AIR_LED_BLINK_DUR_1024M,
-+	AIR_LED_BLINK_DUR_LAST
-+};
-+
-+enum air_led_polarity {
-+	AIR_ACTIVE_LOW = 0,
-+	AIR_ACTIVE_HIGH,
-+};
-+
-+enum air_led_mode {
-+	AIR_LED_MODE_DISABLE = 0,
-+	AIR_LED_MODE_USER_DEFINE,
-+	AIR_LED_MODE_LAST
-+};
-+
-+struct air_led_cfg {
-+	u16 led_en;
-+	u16 gpio;
-+	u16 led_polarity;
-+	u16 led_on_cfg;
-+	u16 led_blk_cfg;
-+};
-+
-+struct an8801r_priv {
-+	struct air_led_cfg	led_cfg[AN8801R_MAX_LED_SIZE];
-+	u32			led_blink_cfg;
-+	u8			rxdelay_force;
-+	u8			txdelay_force;
-+	u16			rxdelay_step;
-+	u8			rxdelay_align;
-+	u16			txdelay_step;
-+};
-+
-+#define phydev_cfg(phy)		((struct an8801r_priv *)(phy)->priv)
-+
-+/*
-+ *	GPIO1 <-> LED0,
-+ *	GPIO2 <-> LED1,
-+ *	GPIO3 <-> LED2,
-+ */
-+static const struct an8801r_priv an8801r_priv_defaults = {
-+	.led_cfg = {
-+		/* LED Enable, GPIO, LED Polarity, LED ON, LED Blink */
-+		{AN8801_LED_ENABLE, AIR_LED_GPIO1, AIR_ACTIVE_LOW,  AIR_LED0_ON, AIR_LED0_BLINK},
-+		{AN8801_LED_ENABLE, AIR_LED_GPIO2, AIR_ACTIVE_HIGH, AIR_LED1_ON, AIR_LED1_BLINK},
-+		{AN8801_LED_ENABLE, AIR_LED_GPIO3, AIR_ACTIVE_HIGH, AIR_LED2_ON, AIR_LED2_BLINK},
+ config DWC_ETH_QOS_QCOM
+ 	bool "Synopsys DWC Ethernet QOS device support for Qcom SoCs"
+ 	depends on DWC_ETH_QOS
+diff --git a/drivers/net/Makefile b/drivers/net/Makefile
+index c485068e5d2..761f7f0f451 100644
+--- a/drivers/net/Makefile
++++ b/drivers/net/Makefile
+@@ -21,6 +21,7 @@ obj-$(CONFIG_DWC_ETH_QOS) += dwc_eth_qos.o
+ obj-$(CONFIG_DWC_ETH_QOS_ADI) += dwc_eth_qos_adi.o
+ obj-$(CONFIG_DWC_ETH_QOS_IMX) += dwc_eth_qos_imx.o
+ obj-$(CONFIG_DWC_ETH_QOS_INTEL) += dwc_eth_qos_intel.o
++obj-$(CONFIG_DWC_ETH_QOS_MTK) += dwc_eth_qos_mtk.o
+ obj-$(CONFIG_DWC_ETH_QOS_QCOM) += dwc_eth_qos_qcom.o
+ obj-$(CONFIG_DWC_ETH_QOS_ROCKCHIP) += dwc_eth_qos_rockchip.o
+ obj-$(CONFIG_DWC_ETH_QOS_STARFIVE) += dwc_eth_qos_starfive.o
+diff --git a/drivers/net/dwc_eth_qos.c b/drivers/net/dwc_eth_qos.c
+index 0f31d646845..b7e6299c307 100644
+--- a/drivers/net/dwc_eth_qos.c
++++ b/drivers/net/dwc_eth_qos.c
+@@ -1658,6 +1658,12 @@ static const struct udevice_id eqos_ids[] = {
+ 		.compatible = "adi,sc59x-dwmac-eqos",
+ 		.data = (ulong)&eqos_adi_config
+ 	},
++#endif
++#if IS_ENABLED(CONFIG_DWC_ETH_QOS_MTK)
++	{
++		.compatible = "mediatek,mt8189-gmac",
++		.data = (ulong)&eqos_mtk_config
 +	},
-+	.led_blink_cfg = AIR_LED_BLINK_DUR_64M,
-+	.rxdelay_force = false,
-+	.txdelay_force = false,
-+	.rxdelay_step = AIR_RGMII_DELAY_NOSTEP,
-+	.rxdelay_align = false,
-+	.txdelay_step = AIR_RGMII_DELAY_NOSTEP,
+ #endif
+ 	{ }
+ };
+diff --git a/drivers/net/dwc_eth_qos.h b/drivers/net/dwc_eth_qos.h
+index ba16f1a37cb..978b848b46e 100644
+--- a/drivers/net/dwc_eth_qos.h
++++ b/drivers/net/dwc_eth_qos.h
+@@ -97,6 +97,7 @@ struct eqos_mac_regs {
+ #define EQOS_MAC_MDIO_ADDRESS_PA_MASK			GENMASK(25, 21)
+ #define EQOS_MAC_MDIO_ADDRESS_RDA_MASK			GENMASK(20, 16)
+ #define EQOS_MAC_MDIO_ADDRESS_CR_MASK			GENMASK(11, 8)
++#define EQOS_MAC_MDIO_ADDRESS_CR_60_100			0
+ #define EQOS_MAC_MDIO_ADDRESS_CR_100_150		1
+ #define EQOS_MAC_MDIO_ADDRESS_CR_20_35			2
+ #define EQOS_MAC_MDIO_ADDRESS_CR_150_250		4
+@@ -316,3 +317,4 @@ extern struct eqos_config eqos_stm32mp15_config;
+ extern struct eqos_config eqos_stm32mp25_config;
+ extern struct eqos_config eqos_jh7110_config;
+ extern struct eqos_config eqos_adi_config;
++extern struct eqos_config eqos_mtk_config;
+diff --git a/drivers/net/dwc_eth_qos_mtk.c b/drivers/net/dwc_eth_qos_mtk.c
+new file mode 100644
+index 00000000000..43e1085dfe5
+--- /dev/null
++++ b/drivers/net/dwc_eth_qos_mtk.c
+@@ -0,0 +1,442 @@
++// SPDX-License-Identifier: GPL-2.0-only
++/*
++ * Copyright (c) 2026 BayLibre, SAS.
++ * Author: Julien Stephan <jstephan@baylibre.com>
++ */
++
++#include <dm.h>
++#include <dm/device_compat.h>
++#include <linux/bitfield.h>
++#include <net.h>
++#include <phy.h>
++#include <regmap.h>
++#include <syscon.h>
++
++#include "dwc_eth_qos.h"
++
++/*
++ * Peri Configuration register is SoC specific,
++ * so add a SoC specific prefix.
++ */
++#define MT8189_PERI_ETH_CTRL0		0x270
++#define MT8189_PERI_ETH_CTRL1		0x274
++#define MT8189_PERI_ETH_CTRL2		0x278
++
++#define EQOS_MTK_RMII_CLK_SRC_INTERNAL	BIT(28)
++#define EQOS_MTK_RMII_CLK_SRC_RXC	BIT(27)
++#define EQOS_MTK_ETH_INTF_SEL		GENMASK(26, 24)
++#define EQOS_MTK_PHY_INTF_MII		0
++#define EQOS_MTK_PHY_INTF_RGMII		1
++#define EQOS_MTK_PHY_INTF_RMII		4
++#define EQOS_MTK_RGMII_TXC_PHASE_CTRL	BIT(22)
++#define EQOS_MTK_EXT_PHY_MODE		BIT(21)
++#define EQOS_MTK_TXC_OUT_OP		BIT(20)
++#define EQOS_MTK_DLY_GTXC_INV		BIT(12)
++#define EQOS_MTK_DLY_GTXC_STAGE_FINE	GENMASK(11, 6)
++#define EQOS_MTK_DLY_GTXC_ENABLE	BIT(5)
++#define EQOS_MTK_DLY_GTXC_STAGES	GENMASK(4, 0)
++
++#define EQOS_MTK_DLY_RXC_INV		BIT(25)
++#define EQOS_MTK_DLY_RXC_ENABLE		BIT(18)
++#define EQOS_MTK_DLY_RXC_STAGES		GENMASK(17, 13)
++#define EQOS_MTK_DLY_TXC_INV		BIT(12)
++#define EQOS_MTK_DLY_TXC_ENABLE		BIT(5)
++#define EQOS_MTK_DLY_TXC_STAGES		GENMASK(4, 0)
++
++#define EQOS_MTK_DLY_RMII_RXC_INV	BIT(25)
++#define EQOS_MTK_DLY_RMII_RXC_ENABLE	BIT(18)
++#define EQOS_MTK_DLY_RMII_RXC_STAGES	GENMASK(17, 13)
++#define EQOS_MTK_DLY_RMII_TXC_INV	BIT(12)
++#define EQOS_MTK_DLY_RMII_TXC_ENABLE	BIT(5)
++#define EQOS_MTK_DLY_RMII_TXC_STAGES	GENMASK(4, 0)
++
++#define DELAY_MAX_PS			9800
++#define DELAY_PS_PER_STAGE		290
++
++struct eqos_mtk_priv {
++	struct regmap *peri_regmap;
++	bool rmii_clk_from_mac;
++	bool rmii_rxc;
++	u32 tx_delay_stage;
++	u32 rx_delay_stage;
++	bool tx_inv;
++	bool rx_inv;
 +};
 +
-+static int an8801_buckpbus_reg_rmw(struct phy_device *phydev,
-+				   u32 addr, u32 mask, u32 set)
++static int mtk_clk_init(struct udevice *dev)
 +{
-+	return air_phy_buckpbus_reg_modify(phydev,
-+					  addr | AN8801_PBUS_ACCESS,
-+					  mask, set);
-+}
-+
-+static int an8801_buckpbus_reg_set_bits(struct phy_device *phydev,
-+					u32 addr, u32 mask)
-+{
-+	return air_phy_buckpbus_reg_modify(phydev,
-+					  addr | AN8801_PBUS_ACCESS,
-+					  mask, mask);
-+}
-+
-+static int an8801_buckpbus_reg_clear_bits(struct phy_device *phydev,
-+					  u32 addr, u32 mask)
-+{
-+	return air_phy_buckpbus_reg_modify(phydev,
-+					  addr | AN8801_PBUS_ACCESS,
-+					  mask, 0);
-+}
-+
-+static int an8801_buckpbus_reg_write(struct phy_device *phydev, u32 addr, u32 data)
-+{
-+	return air_phy_buckpbus_reg_write(phydev, addr | AN8801_PBUS_ACCESS, data);
-+}
-+
-+static int an8801r_led_set_usr_def(struct phy_device *phydev, u8 entity,
-+				   u16 polar, u16 on_evt, u16 blk_evt)
-+{
++	struct eqos_priv *eqos = dev_get_priv(dev);
 +	int ret;
 +
-+	if (polar == AIR_ACTIVE_HIGH)
-+		on_evt |= LED_ON_POL;
-+	else
-+		on_evt &= ~LED_ON_POL;
-+
-+	on_evt |= LED_ON_EN;
-+
-+	ret = phy_write_mmd(phydev, MDIO_MMD_VEND2, LED_ON_CTRL(entity), on_evt);
-+	if (ret)
-+		return ret;
-+
-+	return phy_write_mmd(phydev, MDIO_MMD_VEND2, LED_BLINK_CTRL(entity), blk_evt);
-+}
-+
-+static int an8801r_led_set_blink(struct phy_device *phydev, u16 blink)
-+{
-+	int ret;
-+
-+	ret = phy_write_mmd(phydev, MDIO_MMD_VEND2, LED_BLINK_DUR,
-+			    LED_BLINK_DURATION(blink));
-+	if (ret)
-+		return ret;
-+
-+	return phy_write_mmd(phydev, MDIO_MMD_VEND2, LED_ON_DUR,
-+			     LED_BLINK_DURATION(blink) / 2);
-+}
-+
-+static int an8801r_led_set_mode(struct phy_device *phydev, u8 mode)
-+{
-+	int ret;
-+
-+	ret = phy_read_mmd(phydev, MDIO_MMD_VEND2, LED_BCR);
-+	if (ret < 0)
-+		return ret;
-+
-+	switch (mode) {
-+	case AIR_LED_MODE_DISABLE:
-+		ret &= ~LED_BCR_EXT_CTRL;
-+		ret &= ~LED_BCR_MODE_MASK;
-+		ret |= LED_BCR_MODE_DISABLE;
-+		break;
-+	case AIR_LED_MODE_USER_DEFINE:
-+		ret |= LED_BCR_EXT_CTRL | LED_BCR_CLK_EN;
-+		break;
-+	}
-+	return phy_write_mmd(phydev, MDIO_MMD_VEND2, LED_BCR, ret);
-+}
-+
-+static int an8801r_led_set_state(struct phy_device *phydev, u8 entity, u8 state)
-+{
-+	int ret;
-+
-+	ret = phy_read_mmd(phydev, MDIO_MMD_VEND2, LED_ON_CTRL(entity));
-+	if (ret < 0)
-+		return ret;
-+
-+	if (state)
-+		ret |= LED_ON_EN;
-+	else
-+		ret &= ~LED_ON_EN;
-+
-+	return phy_write_mmd(phydev, MDIO_MMD_VEND2, LED_ON_CTRL(entity), ret);
-+}
-+
-+static int an8801r_led_init(struct phy_device *phydev)
-+{
-+	struct an8801r_priv *priv = phydev_cfg(phydev);
-+	struct air_led_cfg *led_cfg = priv->led_cfg;
-+	u16 led_blink_cfg = priv->led_blink_cfg;
-+	int ret, led_id;
-+
-+	ret = an8801r_led_set_blink(phydev, led_blink_cfg);
-+	if (ret)
-+		return ret;
-+
-+	ret = an8801r_led_set_mode(phydev, AIR_LED_MODE_USER_DEFINE);
++	ret = clk_get_by_name(dev, "mac_main", &eqos->clk_tx);
 +	if (ret) {
-+		dev_err(phydev->dev, "AN8801R: Fail to set LED mode, ret %d!\n", ret);
++		dev_err(dev, "clk_get_by_name(mac_main) failed: %d", ret);
 +		return ret;
 +	}
 +
-+	for (led_id = AIR_LED0; led_id < AN8801R_MAX_LED_SIZE; led_id++) {
-+		ret = an8801r_led_set_state(phydev, led_id, led_cfg[led_id].led_en);
-+		if (ret) {
-+			dev_err(phydev->dev, "AN8801R: Fail to set LED%d state, ret %d!\n",
-+				led_id, ret);
-+			return ret;
-+		}
-+
-+		if (!led_cfg[led_id].led_en)
-+			continue;
-+
-+		ret = an8801_buckpbus_reg_set_bits(phydev, AN8801_BPBUS_REG_LED_GPIO,
-+						   BIT(led_cfg[led_id].gpio));
-+		if (ret)
-+			return ret;
-+
-+		ret = an8801_buckpbus_reg_set_bits(phydev, AN8801_BPBUS_REG_LED_ID_SEL,
-+						   LED_ID_GPIO_SEL(led_id,
-+								   led_cfg[led_id].gpio));
-+		if (ret)
-+			return ret;
-+
-+		ret = an8801_buckpbus_reg_clear_bits(phydev, AN8801_BPBUS_REG_GPIO_MODE,
-+						     BIT(led_cfg[led_id].gpio));
-+		if (ret)
-+			return ret;
-+
-+		ret = an8801r_led_set_usr_def(phydev, led_id,
-+					      led_cfg[led_id].led_polarity,
-+					      led_cfg[led_id].led_on_cfg,
-+					      led_cfg[led_id].led_blk_cfg);
-+		if (ret) {
-+			dev_err(phydev->dev, "AN8801R: Fail to set LED%d, ret %d!\n",
-+				led_id, ret);
-+			return ret;
-+		}
-+	}
-+	return 0;
-+}
-+
-+static int an8801r_of_init(struct phy_device *phydev)
-+{
-+	struct an8801r_priv *priv = phydev_cfg(phydev);
-+	ofnode node = phy_get_ofnode(phydev);
-+	u32 val = 0;
-+	int ret;
-+
-+	if (!ofnode_valid(node))
-+		return -EINVAL;
-+
-+	if (ofnode_has_property(node, "airoha,rxclk-delay")) {
-+		ret = ofnode_read_u32(node, "airoha,rxclk-delay", &val);
-+		if (ret) {
-+			dev_err(phydev->dev, "airoha,rxclk-delay value is invalid.\n");
-+			return ret;
-+		}
-+		if (val > AIR_RGMII_DELAY_STEP_7) {
-+			dev_err(phydev->dev, "airoha,rxclk-delay value %u out of range.\n", val);
-+			return -EINVAL;
-+		}
-+		priv->rxdelay_force = true;
-+		priv->rxdelay_step = val;
-+		priv->rxdelay_align = ofnode_read_bool(node,
-+						       "airoha,rxclk-delay-align");
-+	}
-+
-+	if (ofnode_has_property(node, "airoha,txclk-delay")) {
-+		ret = ofnode_read_u32(node, "airoha,txclk-delay", &val);
-+		if (ret) {
-+			dev_err(phydev->dev, "airoha,txclk-delay value is invalid.\n");
-+			return ret;
-+		}
-+		if (val > AIR_RGMII_DELAY_STEP_7) {
-+			dev_err(phydev->dev, "airoha,txclk-delay value %u out of range.\n", val);
-+			return -EINVAL;
-+		}
-+		priv->txdelay_force = true;
-+		priv->txdelay_step = val;
-+	}
-+	return 0;
-+}
-+
-+static int an8801r_rgmii_rxdelay(struct phy_device *phydev, u16 delay, u8 align)
-+{
-+	u32 reg_val = delay & RGMII_DELAY_STEP_MASK;
-+	int ret;
-+
-+	if (align) {
-+		reg_val |= RGMII_RXDELAY_ALIGN;
-+		debug("AN8801R: Rxdelay align\n");
-+	}
-+	reg_val |= RGMII_RXDELAY_FORCE_MODE;
-+	ret = an8801_buckpbus_reg_write(phydev, AN8801_BPBUS_REG_RXDLY_STEP, reg_val);
-+	if (ret)
++	ret = clk_get_by_name(dev, "ptp_ref", &eqos->clk_ptp_ref);
++	if (ret) {
++		dev_err(dev, "clk_get_by_name(ptp_ref) failed: %d", ret);
 +		return ret;
++	}
 +
-+	debug("AN8801R: Force rxdelay = %d(0x%x)\n", delay, reg_val);
 +	return 0;
 +}
 +
-+static int an8801r_rgmii_txdelay(struct phy_device *phydev, u16 delay)
++static int mtk_set_delay(struct udevice *dev)
 +{
-+	u32 reg_val = delay & RGMII_DELAY_STEP_MASK;
-+	int ret;
++	struct eth_pdata *pdata = dev_get_plat(dev);
++	struct eqos_mtk_priv *mtk_pdata = pdata->priv_pdata;
++	u32 gtxc_delay_val = 0, delay_val = 0, rmii_delay_val = 0;
 +
-+	reg_val |= RGMII_TXDELAY_FORCE_MODE;
-+	ret = an8801_buckpbus_reg_write(phydev, AN8801_BPBUS_REG_TXDLY_STEP, reg_val);
-+	if (ret)
-+		return ret;
++	switch (pdata->phy_interface) {
++	case PHY_INTERFACE_MODE_MII:
++		delay_val |= FIELD_PREP(EQOS_MTK_DLY_TXC_ENABLE,
++					!!mtk_pdata->tx_delay_stage);
++		delay_val |= FIELD_PREP(EQOS_MTK_DLY_TXC_STAGES, mtk_pdata->tx_delay_stage);
++		delay_val |= FIELD_PREP(EQOS_MTK_DLY_TXC_INV, mtk_pdata->tx_inv);
 +
-+	debug("AN8801R: Force txdelay = %d(0x%x)\n", delay, reg_val);
-+	return 0;
-+}
++		delay_val |= FIELD_PREP(EQOS_MTK_DLY_RXC_ENABLE,
++					!!mtk_pdata->rx_delay_stage);
++		delay_val |= FIELD_PREP(EQOS_MTK_DLY_RXC_STAGES, mtk_pdata->rx_delay_stage);
++		delay_val |= FIELD_PREP(EQOS_MTK_DLY_RXC_INV, mtk_pdata->rx_inv);
++		break;
++	case PHY_INTERFACE_MODE_RMII:
++		if (mtk_pdata->rmii_clk_from_mac) {
++			/* case 1: mac provides the rmii reference clock,
++			 * and the clock output to TXC pin.
++			 * The egress timing can be adjusted by RMII_TXC delay macro circuit.
++			 * The ingress timing can be adjusted by RMII_RXC delay macro circuit.
++			 */
++			rmii_delay_val |= FIELD_PREP(EQOS_MTK_DLY_RMII_TXC_ENABLE,
++						     !!mtk_pdata->tx_delay_stage);
++			rmii_delay_val |= FIELD_PREP(EQOS_MTK_DLY_RMII_TXC_STAGES,
++						     mtk_pdata->tx_delay_stage);
++			rmii_delay_val |= FIELD_PREP(EQOS_MTK_DLY_RMII_TXC_INV,
++						     mtk_pdata->tx_inv);
 +
-+static int an8801r_rgmii_delay_config(struct phy_device *phydev)
-+{
-+	struct an8801r_priv *priv = phydev_cfg(phydev);
-+	int ret;
-+
-+	switch (phydev->interface) {
-+	case PHY_INTERFACE_MODE_RGMII_TXID:
-+		return an8801r_rgmii_txdelay(phydev, AIR_RGMII_DELAY_STEP_4);
-+	case PHY_INTERFACE_MODE_RGMII_RXID:
-+		return an8801r_rgmii_rxdelay(phydev, AIR_RGMII_DELAY_NOSTEP, true);
-+	case PHY_INTERFACE_MODE_RGMII_ID:
-+		ret = an8801r_rgmii_txdelay(phydev, AIR_RGMII_DELAY_STEP_4);
-+		if (ret)
-+			return ret;
-+		return an8801r_rgmii_rxdelay(phydev, AIR_RGMII_DELAY_NOSTEP, true);
++			rmii_delay_val |= FIELD_PREP(EQOS_MTK_DLY_RMII_RXC_ENABLE,
++						     !!mtk_pdata->rx_delay_stage);
++			rmii_delay_val |= FIELD_PREP(EQOS_MTK_DLY_RMII_RXC_STAGES,
++						     mtk_pdata->rx_delay_stage);
++			rmii_delay_val |= FIELD_PREP(EQOS_MTK_DLY_RMII_RXC_INV,
++						     mtk_pdata->rx_inv);
++		} else {
++			/* case 2: the rmii reference clock is from external phy,
++			 * and the property "rmii_rxc" indicates which pin(TXC/RXC)
++			 * the reference clk is connected to. The reference clock is a
++			 * received signal, so rx_delay_stage/rx_inv are used to indicate
++			 * the reference clock timing adjustment
++			 */
++			if (mtk_pdata->rmii_rxc) {
++				/* the rmii reference clock from outside is connected
++				 * to RXC pin, the reference clock will be adjusted
++				 * by RXC delay macro circuit.
++				 */
++				delay_val |= FIELD_PREP(EQOS_MTK_DLY_RXC_ENABLE,
++							!!mtk_pdata->rx_delay_stage);
++				delay_val |= FIELD_PREP(EQOS_MTK_DLY_RXC_STAGES,
++							mtk_pdata->rx_delay_stage);
++				delay_val |= FIELD_PREP(EQOS_MTK_DLY_RXC_INV,
++							mtk_pdata->rx_inv);
++			} else {
++				/* the rmii reference clock from outside is connected
++				 * to TXC pin, the reference clock will be adjusted
++				 * by TXC delay macro circuit.
++				 */
++				delay_val |= FIELD_PREP(EQOS_MTK_DLY_TXC_ENABLE,
++							!!mtk_pdata->rx_delay_stage);
++				delay_val |= FIELD_PREP(EQOS_MTK_DLY_TXC_STAGES,
++							mtk_pdata->rx_delay_stage);
++				delay_val |= FIELD_PREP(EQOS_MTK_DLY_TXC_INV,
++							mtk_pdata->rx_inv);
++			}
++		}
++		break;
 +	case PHY_INTERFACE_MODE_RGMII:
++	case PHY_INTERFACE_MODE_RGMII_TXID:
++	case PHY_INTERFACE_MODE_RGMII_RXID:
++	case PHY_INTERFACE_MODE_RGMII_ID:
++		gtxc_delay_val |= FIELD_PREP(EQOS_MTK_DLY_GTXC_ENABLE,
++					     !!mtk_pdata->tx_delay_stage);
++		gtxc_delay_val |= FIELD_PREP(EQOS_MTK_DLY_GTXC_STAGES,
++					     mtk_pdata->tx_delay_stage);
++		gtxc_delay_val |= FIELD_PREP(EQOS_MTK_DLY_GTXC_INV, mtk_pdata->tx_inv);
++		gtxc_delay_val |= EQOS_MTK_DLY_GTXC_STAGE_FINE;
++
++		delay_val |= FIELD_PREP(EQOS_MTK_DLY_RXC_ENABLE,
++					!!mtk_pdata->rx_delay_stage);
++		delay_val |= FIELD_PREP(EQOS_MTK_DLY_RXC_STAGES, mtk_pdata->rx_delay_stage);
++		delay_val |= FIELD_PREP(EQOS_MTK_DLY_RXC_INV, mtk_pdata->rx_inv);
++
++		break;
 +	default:
-+		if (priv->rxdelay_force) {
-+			ret = an8801r_rgmii_rxdelay(phydev, priv->rxdelay_step,
-+						    priv->rxdelay_align);
-+			if (ret)
-+				return ret;
-+		}
-+		if (priv->txdelay_force)
-+			return an8801r_rgmii_txdelay(phydev, priv->txdelay_step);
-+		return 0;
++		dev_err(dev, "phy interface not supported\n");
++		return -EINVAL;
 +	}
-+}
 +
-+static int an8801r_config_init(struct phy_device *phydev)
-+{
-+	int ret;
++	regmap_update_bits(mtk_pdata->peri_regmap,
++			   MT8189_PERI_ETH_CTRL0,
++			   EQOS_MTK_RGMII_TXC_PHASE_CTRL |
++			   EQOS_MTK_DLY_GTXC_ENABLE |
++			   EQOS_MTK_DLY_GTXC_INV |
++			   EQOS_MTK_DLY_GTXC_STAGE_FINE |
++			   EQOS_MTK_DLY_GTXC_STAGES,
++			   gtxc_delay_val);
++	regmap_write(mtk_pdata->peri_regmap, MT8189_PERI_ETH_CTRL1, delay_val);
++	regmap_write(mtk_pdata->peri_regmap, MT8189_PERI_ETH_CTRL2, rmii_delay_val);
 +
-+	ret = an8801r_of_init(phydev);
-+	if (ret < 0)
-+		return ret;
-+
-+	ret = an8801_buckpbus_reg_write(phydev, AN8801_BPBUS_REG_HWRST_DE_GLITCH,
-+					AN8801_DE_GLITCH_EN |
-+					AN8801_11_CYCLE_XTAL_PERIOD_DE_GLITCH);
-+	if (ret)
-+		return ret;
-+
-+	ret = phy_write_mmd(phydev, MDIO_MMD_VEND2, AN8801_REG_PHY_INTERNAL0, 0x1e);
-+	if (ret)
-+		return ret;
-+
-+	ret = phy_write_mmd(phydev, MDIO_MMD_VEND2, AN8801_REG_PHY_INTERNAL1, 0x02);
-+	if (ret)
-+		return ret;
-+
-+	ret = phy_write_mmd(phydev, MDIO_MMD_AN, MDIO_AN_EEE_ADV, 0x0);
-+	if (ret)
-+		return ret;
-+
-+	ret = an8801_buckpbus_reg_write(phydev, AN8801_BPBUS_REG_BYPASS_PTP,
-+					AN8801_BYP_PTP_RGMII_TO_GPHY);
-+	if (ret)
-+		return ret;
-+
-+	ret = an8801_buckpbus_reg_write(phydev, AN8801_BPBUS_REG_EFIFO_CTL(0),
-+					AN8801_EFIFO_RX_EN |
-+					AN8801_EFIFO_TX_EN |
-+					AN8801_EFIFO_RX_CLK_EN |
-+					AN8801_EFIFO_TX_CLK_EN |
-+					AN8801_EFIFO_RX_EEE_EN |
-+					AN8801_EFIFO_TX_EEE_EN);
-+	if (ret)
-+		return ret;
-+
-+	ret = an8801_buckpbus_reg_write(phydev, AN8801_BPBUS_REG_EFIFO_CTL(1),
-+					AN8801_EFIFO_ALL_EN);
-+	if (ret)
-+		return ret;
-+
-+	ret = an8801_buckpbus_reg_write(phydev, AN8801_BPBUS_REG_EFIFO_CTL(2),
-+					AN8801_EFIFO_ALL_EN);
-+	if (ret)
-+		return ret;
-+
-+	ret = an8801r_rgmii_delay_config(phydev);
-+	if (ret)
-+		return ret;
-+
-+	ret = an8801r_led_init(phydev);
-+	if (ret) {
-+		dev_err(phydev->dev, "AN8801R: LED initialize fail, ret %d!\n", ret);
-+		return ret;
-+	}
 +	return 0;
 +}
 +
-+static int an8801r_phy_probe(struct phy_device *phydev)
++static int mtk_set_interface(struct udevice *dev)
 +{
-+	struct an8801r_priv *priv;
-+	u32 phy_id;
-+	int ret;
++	struct eth_pdata *pdata = dev_get_plat(dev);
++	struct eqos_mtk_priv *mtk_pdata = pdata->priv_pdata;
++	int rmii_clk_from_mac = mtk_pdata->rmii_clk_from_mac ? EQOS_MTK_RMII_CLK_SRC_INTERNAL : 0;
++	int rmii_rxc = mtk_pdata->rmii_rxc ? EQOS_MTK_RMII_CLK_SRC_RXC : 0;
++	u32 intf_val = 0;
 +
-+	ret = get_phy_id(phydev->bus, phydev->addr, MDIO_DEVAD_NONE, &phy_id);
-+	if (ret)
-+		return ret;
-+
-+	if (phy_id != AN8801R_PHY_ID) {
-+		dev_err(phydev->dev,
-+			"AN8801R can't be detected (id=0x%08x).\n", phy_id);
-+		return -ENODEV;
++	/* select phy interface in top control domain */
++	switch (pdata->phy_interface) {
++	case PHY_INTERFACE_MODE_MII:
++		intf_val |= FIELD_PREP(EQOS_MTK_ETH_INTF_SEL, EQOS_MTK_PHY_INTF_MII);
++		break;
++	case PHY_INTERFACE_MODE_RMII:
++		intf_val |= (rmii_rxc | rmii_clk_from_mac);
++		intf_val |= FIELD_PREP(EQOS_MTK_ETH_INTF_SEL, EQOS_MTK_PHY_INTF_RMII);
++		break;
++	case PHY_INTERFACE_MODE_RGMII:
++	case PHY_INTERFACE_MODE_RGMII_TXID:
++	case PHY_INTERFACE_MODE_RGMII_RXID:
++	case PHY_INTERFACE_MODE_RGMII_ID:
++		intf_val |= FIELD_PREP(EQOS_MTK_ETH_INTF_SEL, EQOS_MTK_PHY_INTF_RGMII);
++		break;
++	default:
++		dev_err(dev, "phy interface not supported\n");
++		return -EINVAL;
 +	}
 +
-+	priv = malloc(sizeof(*priv));
-+	if (!priv)
++	/* only support external PHY */
++	intf_val |= EQOS_MTK_EXT_PHY_MODE;
++
++	intf_val |= EQOS_MTK_TXC_OUT_OP;
++
++	regmap_write(mtk_pdata->peri_regmap, MT8189_PERI_ETH_CTRL0, intf_val);
++
++	return 0;
++}
++
++static int mtk_config_dt(struct udevice *dev)
++{	struct eth_pdata *pdata = dev_get_plat(dev);
++	struct eqos_mtk_priv *mtk_pdata = pdata->priv_pdata;
++	struct ofnode_phandle_args args;
++	u32 tx_delay_ps = 0, rx_delay_ps = 0;
++	int ret;
++
++	if (!dev_read_u32(dev, "mediatek,tx-delay-ps", &tx_delay_ps)) {
++		if (tx_delay_ps > DELAY_MAX_PS) {
++			dev_err(dev, "Invalid TX clock delay: %dps\n", tx_delay_ps);
++			return -EINVAL;
++		}
++	}
++
++	if (!dev_read_u32(dev, "mediatek,rx-delay-ps", &rx_delay_ps)) {
++		if (rx_delay_ps > DELAY_MAX_PS) {
++			dev_err(dev, "Invalid RX clock delay: %dps\n", rx_delay_ps);
++			return -EINVAL;
++		}
++	}
++
++	mtk_pdata->tx_delay_stage = tx_delay_ps / DELAY_PS_PER_STAGE;
++	mtk_pdata->rx_delay_stage = rx_delay_ps / DELAY_PS_PER_STAGE;
++
++	mtk_pdata->tx_inv = dev_read_bool(dev, "mediatek,txc-inverse");
++	mtk_pdata->rx_inv = dev_read_bool(dev, "mediatek,rxc-inverse");
++	mtk_pdata->rmii_clk_from_mac = dev_read_bool(dev, "mediatek,rmii-clk-from-mac");
++	mtk_pdata->rmii_rxc = dev_read_bool(dev, "mediatek,rmii-rxc");
++
++	ret = dev_read_phandle_with_args(dev, "mediatek,pericfg", NULL, 0, 0, &args);
++	if (ret) {
++		dev_err(dev, "Failed to get mediatek,pericfg property: %d\n", ret);
++		return ret;
++	}
++
++	mtk_pdata->peri_regmap = syscon_node_to_regmap(args.node);
++	if (IS_ERR(mtk_pdata->peri_regmap)) {
++		dev_err(dev, "fail to get regmap: %d\n", (int)PTR_ERR(mtk_pdata->peri_regmap));
++		return PTR_ERR(mtk_pdata->peri_regmap);
++	}
++
++	return 0;
++}
++
++static int eqos_probe_resources_mtk(struct udevice *dev)
++{
++	struct eqos_priv *eqos = dev_get_priv(dev);
++	struct eth_pdata *pdata = dev_get_plat(dev);
++	struct eqos_mtk_priv *mtk_pdata;
++	int ret;
++
++	debug("%s(dev=%p):\n", __func__, dev);
++
++	ret = eqos_get_base_addr_dt(dev);
++	if (ret) {
++		dev_err(dev, "eqos_get_base_addr_dt failed: %d\n", ret);
++		return ret;
++	}
++
++	mtk_pdata = calloc(1, sizeof(struct eqos_mtk_priv));
++	if (!mtk_pdata)
 +		return -ENOMEM;
 +
-+	*priv = an8801r_priv_defaults;
++	pdata->priv_pdata = mtk_pdata;
 +
-+	phydev->priv = priv;
++	ret = mtk_config_dt(dev);
++	if (ret) {
++		dev_err(dev, "mtk config dt failed: %d\n", ret);
++		goto err;
++	}
 +
++	ret = mtk_clk_init(dev);
++	if (ret)
++		goto err;
++
++	pdata->phy_interface = eqos->config->interface(dev);
++	if (pdata->phy_interface == PHY_INTERFACE_MODE_NA) {
++		dev_err(dev, "Invalid PHY interface\n");
++		ret = -EINVAL;
++		goto err;
++	}
++
++	ret = mtk_set_interface(dev);
++	if (ret)
++		goto err;
++
++	ret = mtk_set_delay(dev);
++	if (ret)
++		goto err;
++
++	debug("%s: OK\n", __func__);
++	return 0;
++err:
++	free(mtk_pdata);
++	return ret;
++}
++
++static int eqos_remove_resources_mtk(struct udevice *dev)
++{
++	struct eth_pdata *pdata = dev_get_plat(dev);
++	struct eqos_mtk_priv *mtk_pdata = pdata->priv_pdata;
++
++	debug("%s(dev=%p):\n", __func__, dev);
++
++	free(mtk_pdata);
++
++	debug("%s: OK\n", __func__);
 +	return 0;
 +}
 +
-+static int an8801r_read_status(struct phy_device *phydev)
++static int eqos_stop_clks_mtk(struct udevice *dev)
 +{
-+	u32 data;
++	struct eqos_priv *eqos = dev_get_priv(dev);
 +
-+	if (!phydev->link)
-+		return 0;
++	debug("%s(dev=%p):\n", __func__, dev);
 +
-+	debug("AN8801R: SPEED %d\n", phydev->speed);
-+	data = phydev->speed == SPEED_1000 ? AN8801_BPBUS_LINK_MODE_1000 : 0;
++	clk_disable(&eqos->clk_ptp_ref);
++	clk_disable(&eqos->clk_tx);
 +
-+	return an8801_buckpbus_reg_rmw(phydev, AN8801_BPBUS_REG_LINK_MODE,
-+				       AN8801_BPBUS_LINK_MODE_1000, data);
++	debug("%s: OK\n", __func__);
++	return 0;
 +}
 +
-+static int an8801r_startup(struct phy_device *phydev)
++static int eqos_start_clks_mtk(struct udevice *dev)
 +{
++	struct eqos_priv *eqos = dev_get_priv(dev);
 +	int ret;
 +
-+	ret = genphy_startup(phydev);
-+	if (ret)
-+		return ret;
++	debug("%s(dev=%p):\n", __func__, dev);
 +
-+	return an8801r_read_status(phydev);
++	ret = clk_enable(&eqos->clk_tx);
++	if (ret < 0) {
++		dev_err(dev, "clk_enable(mac_main) failed: %d", ret);
++		goto err;
++	}
++
++	ret = clk_enable(&eqos->clk_ptp_ref);
++	if (ret < 0) {
++		dev_err(dev, "clk_enable(ptp_ref) failed: %d", ret);
++		goto err_disable_clk_mac_main;
++	}
++
++	debug("%s: OK\n", __func__);
++	return 0;
++
++err_disable_clk_mac_main:
++	clk_disable(&eqos->clk_tx);
++err:
++	debug("%s: FAILED: %d\n", __func__, ret);
++	return ret;
 +}
 +
-+U_BOOT_PHY_DRIVER(an8801r) = {
-+	.name = "Airoha AN8801R",
-+	.uid = AN8801R_PHY_ID,
-+	.mask = 0x0ffffff0,
-+	.features = PHY_GBIT_FEATURES,
-+	.probe = &an8801r_phy_probe,
-+	.config = &an8801r_config_init,
-+	.read_page = &air_phy_read_page,
-+	.write_page = &air_phy_write_page,
-+	.startup = &an8801r_startup,
-+	.shutdown = &genphy_shutdown,
++static int eqos_fix_mac_speed_mtk(struct udevice *dev)
++{
++	struct eqos_priv *eqos = dev_get_priv(dev);
++	struct eth_pdata *pdata = dev_get_plat(dev);
++	struct eqos_mtk_priv *mtk_pdata = pdata->priv_pdata;
++
++	debug("%s(dev=%p):\n", __func__, dev);
++
++	switch (pdata->phy_interface) {
++	case PHY_INTERFACE_MODE_RGMII:
++	case PHY_INTERFACE_MODE_RGMII_TXID:
++	case PHY_INTERFACE_MODE_RGMII_RXID:
++	case PHY_INTERFACE_MODE_RGMII_ID:
++		if (eqos->phy->speed == SPEED_1000)
++			regmap_update_bits(mtk_pdata->peri_regmap,
++					   MT8189_PERI_ETH_CTRL0,
++					   EQOS_MTK_RGMII_TXC_PHASE_CTRL |
++					   EQOS_MTK_DLY_GTXC_ENABLE |
++					   EQOS_MTK_DLY_GTXC_INV |
++					   EQOS_MTK_DLY_GTXC_STAGE_FINE |
++					   EQOS_MTK_DLY_GTXC_STAGES,
++					   EQOS_MTK_RGMII_TXC_PHASE_CTRL);
++		else
++			mtk_set_delay(dev);
++		break;
++	default:
++		debug("%s: dev=%p no need to adjust mac delay\n", __func__, dev);
++		break;
++	}
++
++	debug("%s: OK\n", __func__);
++	return 0;
++}
++
++static struct eqos_ops eqos_mtk_ops = {
++	.eqos_inval_desc = eqos_inval_desc_generic,
++	.eqos_flush_desc = eqos_flush_desc_generic,
++	.eqos_inval_buffer = eqos_inval_buffer_generic,
++	.eqos_flush_buffer = eqos_flush_buffer_generic,
++	.eqos_probe_resources = eqos_probe_resources_mtk,
++	.eqos_remove_resources = eqos_remove_resources_mtk,
++	.eqos_stop_resets = eqos_null_ops,
++	.eqos_start_resets = eqos_null_ops,
++	.eqos_stop_clks = eqos_stop_clks_mtk,
++	.eqos_start_clks = eqos_start_clks_mtk,
++	.eqos_calibrate_pads = eqos_null_ops,
++	.eqos_disable_calibration = eqos_null_ops,
++	.eqos_set_tx_clk_speed = eqos_fix_mac_speed_mtk,
++	.eqos_get_enetaddr = eqos_null_ops,
++};
++
++struct eqos_config eqos_mtk_config = {
++	.reg_access_always_ok = false,
++	.mdio_wait = 10000,
++	.swr_wait = 10,
++	.config_mac = EQOS_MAC_RXQ_CTRL0_RXQ0EN_ENABLED_DCB,
++	.config_mac_mdio = EQOS_MAC_MDIO_ADDRESS_CR_60_100,
++	.axi_bus_width = EQOS_AXI_WIDTH_64,
++	.interface = dev_read_phy_mode,
++	.ops = &eqos_mtk_ops
 +};
 
 -- 
