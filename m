@@ -4,63 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19354CCFA13
-	for <u-boot@archiver.kernel.org>; Wed, 29 Apr 2026 16:08:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C6B8FF887E
+	for <u-boot@archiver.kernel.org>; Wed, 29 Apr 2026 16:21:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 64705848B0;
-	Wed, 29 Apr 2026 18:08:32 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id CA0F4848C1;
+	Wed, 29 Apr 2026 18:21:00 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="urkOdEYA";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ogI+tG3/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7DA43848BD; Wed, 29 Apr 2026 18:08:31 +0200 (CEST)
-Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 9061A848C3; Wed, 29 Apr 2026 18:20:59 +0200 (CEST)
+Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
+ [IPv6:2a00:1450:4864:20::434])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 19E9D8489D
- for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 18:08:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AAFFA848B0
+ for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 18:20:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4g5Mff5st8z9scC;
- Wed, 29 Apr 2026 18:08:26 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1777478906;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=XSFac0u7rQ/vvO+IlzZjwGkvh1yZPxl8b1BYZ1ZjgZQ=;
- b=urkOdEYAhHFdZIUS/Ke9eyrOLRQI1XnUoR52LtsRfyhbfc5e/NiXMGru146/Z5YQqWStG+
- mPZSv1HfB/HRym1L6rvpBdmWpLKJrlha/7y4NpD0CtSe8JnOWspwsRGj49FUSwkcaXErkS
- ILcLafsjZ0bHNyK6xWY3c3pVMiN6bY41Difa7W0GByXqq9kh6XL1ssEEU2Jpn4leQMt3r4
- SCqBeWGc+T/3fMzR3ESLcy2XXCo8wZ6VPF+i/yvxP/FpZ9D21rvcsyEMtHkww39BAw4/Xa
- vNP1fqxu6SX0jTp4ZL7gWMu7MeVU6VczjSVU5fKonTBEkYIAmN2qIv1rggZNYA==
-Message-ID: <e037306a-86f6-4df8-8486-73902792a914@mailbox.org>
-Date: Wed, 29 Apr 2026 18:08:24 +0200
+ spf=pass smtp.mailfrom=jernej.skrabec@gmail.com
+Received: by mail-wr1-x434.google.com with SMTP id
+ ffacd0b85a97d-43d43e09de5so652f8f.1
+ for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 09:20:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1777479657; x=1778084457; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=vImslMwyXcASfDEei180MXXimfMtSB52kRlkM75F8jo=;
+ b=ogI+tG3/v7s9DZRwSqadCyN3TYa76rFPGOJeK8G/8gfU1EXIEppL3PbMB3LOqUkvhT
+ GUIYH8BDgntOSIIHPvBsE1NlxwmAz53jIlTUpyO7+VztyHHrYXI5251LYWTIbPo0L/Z0
+ 7zTm4H4lEoyJYE3mv6d9ETERoEWnMtE3veOjOw6mQflnwtb02D8Qq1aTApdlCaupzFGW
+ nbxO0ZwMijVrPDxqp3x91K5eNqoF0BLLR4CuGFRSlB41UZTgkwkKU4m0ASsyQ9ilMnpQ
+ KuE/Q+VZS4wnf59zeMk7YflYLqmrAutnQ2GEyofft+QKB/NftIk7Ql/4Jy0/T1T0sKjT
+ jtuw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1777479657; x=1778084457;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=vImslMwyXcASfDEei180MXXimfMtSB52kRlkM75F8jo=;
+ b=HwSwrzTIh4BDmlicQyS/9Yzi/yJr46di1l5+jWemPq8hWHkWNMpF7MLVWuR16MGJv8
+ TVQqcxT6UW0Bnie6Lc/miwNxxvrpL4gUecDYxmKAFe1a2Zn1+z3DKQxNoU5f00/0OHGN
+ EztRP5vbCLkeZvgbv74/eUD4/RBcNhxDjGzYy4MNC4dHc38SbywUuxDcWQPaucQuLiHy
+ SChwdRFxV33cd96WZQ65MFi7GJsToww+8BxApuJKg0ooTbE2dpEBfADDvhLtfirCrbWz
+ m+N0TY5XLTAcW+IYbnXwmfZNDEG3BrN7AaU2CmfQyh8i3JQbHS+oWk1P6ePeBCKfpUJt
+ 1/1Q==
+X-Gm-Message-State: AOJu0Ywfb6i/ZzagC9kp+3NIezH7t0Q4ExcW5nxvftmrTMovZH8eM5s6
+ AREenHLJgexlWWcF15Zxw3Uj/7Aw4q3kZKM9h+x13fCNPpgobOfjBNZuzCqmzJRh
+X-Gm-Gg: AeBDieuCxVc7y0huduiwp1KKJ4eH9N4m/kFC+mKz/J5QPloJjRjC0H/W7f+g++4sx+M
+ 2owQXEWA1dZwkI6lbRIGaXhWQiLILksVTE+1NQdc2n0zBHmtr+1bY9ixxO25Ed10sfBb2UmUWQz
+ aUy4oTyc6r9hWe4bLleK7BX4G0U57KFtKr0SdAJJdEf4IR3ZV9moJ4x8TVYqwB0EPNlw1Y/zjY+
+ YKLG+aJrcChk5ncxujPNbgYXm9+9+nnDRvxpdrik3+qEXVPiK8JJ3/zIIPaYxSR/rlEAV78SBic
+ +k/XCYJ88SAtRuIhVQDp1NpHuI30RVz+7LIPXXzH4HyRe0yg1Zgop278bnkc8a19VdRiAYxVxf7
+ d+KULA2UFnhY1mFfB3+PFslSJxLJHj7nrSAbMNobB9W3oQvipxDZlRUEAzsJyvDxWQ7TM7gPsa8
+ huT7b6/3QLbT1IbxaZqlYFhD+PNEeASWxg34tUteWAGAbgv2X/to2lVZ0vv1Tpv29lbw==
+X-Received: by 2002:a05:6000:178b:b0:43d:1bf6:30f2 with SMTP id
+ ffacd0b85a97d-4479009bb44mr8106156f8f.20.1777479656792; 
+ Wed, 29 Apr 2026 09:20:56 -0700 (PDT)
+Received: from jernej-laptop.localnet ([188.159.248.16])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-447b7217c56sm6742489f8f.20.2026.04.29.09.20.55
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 29 Apr 2026 09:20:56 -0700 (PDT)
+From: Jernej =?UTF-8?B?xaBrcmFiZWM=?= <jernej.skrabec@gmail.com>
+To: u-boot@lists.denx.de, Yixun Lan <dlan@gentoo.org>
+Cc: linux-sunxi@lists.linux.dev, Andre Przywara <andre.przywara@arm.com>,
+ Jagan Teki <jagan@amarulasolutions.com>, Tom Rini <trini@konsulko.com>,
+ Yixun Lan <dlan@gentoo.org>
+Subject: Re: [PATCH] spi: sunxi: wait for TX/RX fifo reset done
+Date: Wed, 29 Apr 2026 18:20:54 +0200
+Message-ID: <aWjBFp42SZOUo6dm7CAJWA@gmail.com>
+In-Reply-To: <20260421-02-spi-fifo-reset-v1-1-e2cdd4bd474d@gentoo.org>
+References: <20260421-02-spi-fifo-reset-v1-1-e2cdd4bd474d@gentoo.org>
 MIME-Version: 1.0
-Subject: Re: [PATCH] scripts/dtc: drop yaml in DT validation
-To: Quentin Schulz <quentin.schulz@cherry.de>,
- =?UTF-8?Q?Jo=C3=A3o_Marcos_Costa?= <joaomarcos.costa@bootlin.com>,
- u-boot@lists.denx.de, Greg Malysa <malysagreg@gmail.com>,
- David Lechner <dlechner@baylibre.com>
-Cc: thomas.petazzoni@bootlin.com
-References: <20260429144615.142350-1-joaomarcos.costa@bootlin.com>
- <01c1fa30-6dcc-443d-a217-b032a0a8b53b@cherry.de>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <01c1fa30-6dcc-443d-a217-b032a0a8b53b@cherry.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: kx77yhbzmn69npp9pqyzcgqa1a8fjy6e
-X-MBO-RS-ID: 3e47bb2ce051f7d06ac
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,30 +99,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 4/29/26 4:59 PM, Quentin Schulz wrote:
-> Hi Joaõ,
-> 
-> On 4/29/26 4:46 PM, João Marcos Costa wrote:
->> The build issues found in dtc/yamltree were partially mitigated by a
->> previous commit (807bcd844a: "scripts/dtc: Fix pkg-config behavior under
->> sysroot"), but upstream dtc simply disabled yaml, and the same should be
->> done here in order to permanently avoid those issues.
->>
->> Backport the change below from Linux v5.18 [1]:
->>
-> 
-> I'm kinda worried we've been missing other patches since our last sync 
-> claims we bumped to 6.1 so we should have had this commit.
+Dne torek, 21. april 2026 ob 06:47:50 Srednjeevropski poletni =C4=8Das je Y=
+ixun Lan napisal(a):
+> Once reset SPI TX or RX fifo, the underlying hardware need to take
+> some time to actually settle down, the two bits will automatically
+> clear to 0, so use a poll mechanism to check status bits to make sure
+> it's done correctly.
+>=20
+> Signed-off-by: Yixun Lan <dlan@gentoo.org>
+> ---
+> On Cubie A7A board which using A733 SoC, we encoutered a SPI nor flash
+> timeout issue, it turns out that the SPI fifo reset take a few time to
+> settle down, Add a loop to poll the status.
+>=20
+> This was the error message shows on A7A board once this issue happened.
+>=20
+> =3D> sf probe
+> ERROR: sun4i_spi: Timeout transferring data
+> Failed to initialize SPI flash at 0:0 (error -2)
 
-The last DTC sync should put U-Boot at Linux 6.17.y , see:
+Reviewed-by: Jernej Skrabec <jernej.skrabec@gmail.com>
 
-0535e46d55d7 ("scripts/dtc: Update to upstream version 
-v1.7.2-35-g52f07dcca47c")
+Best regards,
+Jernej
 
-So I wonder how this patch got missed or slipped through the cracks.
 
-> It'd be nice to know which (if any) issues you encountered when 
-> backporting the patch (e.g. things you didn't backport on purpose and why).
-
-I agree, and it would be very helpful to check for any other missing 
-patches.
