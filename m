@@ -4,48 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C389FFF8875
-	for <u-boot@archiver.kernel.org>; Wed, 29 Apr 2026 13:08:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17475FF8867
+	for <u-boot@archiver.kernel.org>; Wed, 29 Apr 2026 13:08:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F17D3846FD;
-	Wed, 29 Apr 2026 15:08:09 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 46D8F84855;
+	Wed, 29 Apr 2026 15:08:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=sys-base.io
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3EEFE84707; Wed, 29 Apr 2026 15:08:09 +0200 (CEST)
+ id 670EE84843; Wed, 29 Apr 2026 15:08:25 +0200 (CEST)
 Received: from leonov.paulk.fr (leonov.paulk.fr [185.233.101.22])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 820CF846FA
- for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 15:08:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E566484857
+ for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 15:08:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=sys-base.io
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=paulk@sys-base.io
 Received: from laika.paulk.fr (12.234.24.109.rev.sfr.net [109.24.234.12])
- by leonov.paulk.fr (Postfix) with ESMTPS id 626201F8005A
- for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 13:08:04 +0000 (UTC)
+ by leonov.paulk.fr (Postfix) with ESMTPS id 8583F1F8004F
+ for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 13:08:21 +0000 (UTC)
 Received: by laika.paulk.fr (Postfix, from userid 65534)
- id 95869B404A0; Wed, 29 Apr 2026 13:08:02 +0000 (UTC)
+ id 76DD0B404A2; Wed, 29 Apr 2026 13:08:20 +0000 (UTC)
 Received: from shepard (unknown [192.168.1.1])
- by laika.paulk.fr (Postfix) with ESMTPSA id BC82BB4049D;
- Wed, 29 Apr 2026 13:08:00 +0000 (UTC)
-Date: Wed, 29 Apr 2026 15:07:58 +0200
+ by laika.paulk.fr (Postfix) with ESMTPSA id 5AD55B4049D;
+ Wed, 29 Apr 2026 13:08:19 +0000 (UTC)
+Date: Wed, 29 Apr 2026 15:08:16 +0200
 From: Paul Kocialkowski <paulk@sys-base.io>
 To: Andre Przywara <andre.przywara@arm.com>
 Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
  Quentin Schulz <quentin.schulz@cherry.de>,
  Jernej Skrabec <jernej.skrabec@gmail.com>, linux-sunxi@lists.linux.dev
-Subject: Re: [PATCH v2 1/3] sunxi: spl: fix SPL_SUNXI_LED active low
- configuration
-Message-ID: <afICrnsK3Frmp7Hp@shepard>
+Subject: Re: [PATCH v2 2/3] sunxi: configs: enable power LEDs on 32-bit boards
+Message-ID: <afICwNHV2rY4sO5H@shepard>
 References: <20260429092828.3076719-1-andre.przywara@arm.com>
- <20260429092828.3076719-2-andre.przywara@arm.com>
+ <20260429092828.3076719-3-andre.przywara@arm.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="l3/hIRm247/+OaIU"
+ protocol="application/pgp-signature"; boundary="pmiThV5x9vjF8zfe"
 Content-Disposition: inline
-In-Reply-To: <20260429092828.3076719-2-andre.przywara@arm.com>
+In-Reply-To: <20260429092828.3076719-3-andre.przywara@arm.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -63,7 +62,7 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---l3/hIRm247/+OaIU
+--pmiThV5x9vjF8zfe
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
@@ -71,26 +70,19 @@ Content-Transfer-Encoding: quoted-printable
 Hi Andre,
 
 On Wed 29 Apr 26, 11:28, Andre Przywara wrote:
-> The newly introduced Allwinner SPL LED "framework" defined a
-> SPL_SUNXI_LED_STATUS_STATE Kconfig symbol, that was supposed to denote
-> the active-low vs. active-high polarity of the LED. However this is
-> a bool symbol, so it will simply vanish if not defined, and we cannot use
-> it directly inside a C statement.
+> We recently gained a simple way to enable a power LED very early in the
+> SPL boot, through simple Kconfig variables.
 >=20
-> Filter the symbol through the IS_ENABLED() macro, which will return 0 if
-> the symbol is not defined, which is the intended value here.
+> Add those symbols to those boards' defconfigs where the DT indicates a
+> default-on power LED. The number used is <port bank> * 32 + <pin no>,
+> an active low setup means CONFIG_SPL_SUNXI_LED_STATUS_ACTIVE_HIGH must be
+> undefined. Since its default is "high", we can skip the symbol in the
+> defconfig in this case.
 >=20
-> Since the STATUS_STATE name is a bit confusing, rename it to ACTIVE_HIGH
-> on the way, because that is its real meaning. Also the LED_STATUS_BIT
-> name for the GPIO number is similarly a remnant of the old status LED
-> code, so rename it to LED_STATUS_GPIO as well.
+> This will light up the power LED very early in the (SPL) boot phase on
+> those 32-bit boards.
 >=20
-> This fixes configuring LEDs with active-low polarity.
->
-> Fixes: 256557dd9aae ("sunxi: remove usage of legacy LED API")
 > Signed-off-by: Andre Przywara <andre.przywara@arm.com>
-
-Thanks for your work!
 
 Reviewed-by: Paul Kocialkowski <paulk@sys-base.io>
 
@@ -99,68 +91,289 @@ All the best,
 Paul
 
 > ---
->  arch/arm/mach-sunxi/Kconfig | 10 ++++++----
->  board/sunxi/board.c         |  4 ++--
->  configs/pinephone_defconfig |  3 +--
->  3 files changed, 9 insertions(+), 8 deletions(-)
+>  configs/A13-OLinuXinoM_defconfig         | 2 ++
+>  configs/Bananapi_M2_Ultra_defconfig      | 2 ++
+>  configs/Bananapi_m2m_defconfig           | 3 +++
+>  configs/Mele_A1000G_quad_defconfig       | 2 ++
+>  configs/Mele_A1000_defconfig             | 2 ++
+>  configs/Mele_M9_defconfig                | 2 ++
+>  configs/bananapi_m1_plus_defconfig       | 2 ++
+>  configs/bananapi_m2_berry_defconfig      | 2 ++
+>  configs/bananapi_m2_zero_defconfig       | 3 +++
+>  configs/beelink_x2_defconfig             | 2 ++
+>  configs/icnova-a20-adb4006_defconfig     | 2 ++
+>  configs/nanopi_duo2_defconfig            | 2 ++
+>  configs/nanopi_neo_air_defconfig         | 2 ++
+>  configs/orangepi_2_defconfig             | 2 ++
+>  configs/orangepi_lite_defconfig          | 2 ++
+>  configs/orangepi_one_defconfig           | 2 ++
+>  configs/orangepi_pc_defconfig            | 2 ++
+>  configs/orangepi_zero_defconfig          | 2 ++
+>  configs/orangepi_zero_plus2_h3_defconfig | 2 ++
+>  19 files changed, 40 insertions(+)
 >=20
-> diff --git a/arch/arm/mach-sunxi/Kconfig b/arch/arm/mach-sunxi/Kconfig
-> index 89f0e77bcdb..07d7ea2b7ad 100644
-> --- a/arch/arm/mach-sunxi/Kconfig
-> +++ b/arch/arm/mach-sunxi/Kconfig
-> @@ -1245,15 +1245,17 @@ config SPL_SUNXI_LED_STATUS
-> =20
->  if SPL_SUNXI_LED_STATUS
-> =20
-> -config SPL_SUNXI_LED_STATUS_BIT
-> +config SPL_SUNXI_LED_STATUS_GPIO
->  	int "GPIO number for GPIO status LED"
->  	help
->  	  GPIO number for the GPIO controlling the GPIO status LED in SPL.
-> =20
-> -config SPL_SUNXI_LED_STATUS_STATE
-> -	bool "GPIO status LED initial state is on"
-> +config SPL_SUNXI_LED_STATUS_ACTIVE_HIGH
-> +	bool "GPIO status LED is active high"
-> +	default y
->  	help
-> -	  Whether the initial state of the status LED in SPL must be on or off.
-> +	  Whether the GPIO of the status LED must be set high or low to turn
-> +	  the LED on.
-> =20
->  endif # SPL_SUNXI_LED_STATUS
-> =20
-> diff --git a/board/sunxi/board.c b/board/sunxi/board.c
-> index d7722d1858a..3d1afec7c66 100644
-> --- a/board/sunxi/board.c
-> +++ b/board/sunxi/board.c
-> @@ -563,8 +563,8 @@ static void sunxi_spl_store_dram_size(phys_addr_t dra=
-m_size)
->  static void status_led_init(void)
->  {
->  #if CONFIG_IS_ENABLED(SUNXI_LED_STATUS)
-> -	unsigned int state =3D CONFIG_SPL_SUNXI_LED_STATUS_STATE;
-> -	unsigned int gpio =3D CONFIG_SPL_SUNXI_LED_STATUS_BIT;
-> +	unsigned int state =3D IS_ENABLED(CONFIG_SPL_SUNXI_LED_STATUS_ACTIVE_HI=
-GH);
-> +	unsigned int gpio =3D CONFIG_SPL_SUNXI_LED_STATUS_GPIO;
-> =20
->  	gpio_request(gpio, "gpio_led");
->  	gpio_direction_output(gpio, state);
-> diff --git a/configs/pinephone_defconfig b/configs/pinephone_defconfig
-> index ed7dbc1852b..3a4f4ec51cf 100644
-> --- a/configs/pinephone_defconfig
-> +++ b/configs/pinephone_defconfig
-> @@ -9,8 +9,7 @@ CONFIG_DRAM_ZQ=3D3881949
->  CONFIG_MMC_SUNXI_SLOT_EXTRA=3D2
->  CONFIG_PINEPHONE_DT_SELECTION=3Dy
->  CONFIG_SPL_SUNXI_LED_STATUS=3Dy
-> -CONFIG_SPL_SUNXI_LED_STATUS_BIT=3D114
-> -CONFIG_SPL_SUNXI_LED_STATUS_STATE=3Dy
-> +CONFIG_SPL_SUNXI_LED_STATUS_GPIO=3D114
+> diff --git a/configs/A13-OLinuXinoM_defconfig b/configs/A13-OLinuXinoM_de=
+fconfig
+> index f547635302f..6c5a1b33194 100644
+> --- a/configs/A13-OLinuXinoM_defconfig
+> +++ b/configs/A13-OLinuXinoM_defconfig
+> @@ -10,6 +10,8 @@ CONFIG_VIDEO_VGA_VIA_LCD=3Dy
+>  CONFIG_VIDEO_VGA_VIA_LCD_FORCE_SYNC_ACTIVE_HIGH=3Dy
+>  CONFIG_VIDEO_LCD_POWER=3D"PB10"
+>  CONFIG_VIDEO_LCD_BL_PWM=3D"PB2"
+> +CONFIG_SPL_SUNXI_LED_STATUS=3Dy
+> +CONFIG_SPL_SUNXI_LED_STATUS_GPIO=3D201
 >  # CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
->  CONFIG_CMD_PSTORE=3Dy
->  CONFIG_CMD_PSTORE_MEM_ADDR=3D0x61000000
+>  CONFIG_SYS_I2C_MVTWSI=3Dy
+>  CONFIG_SYS_I2C_SLAVE=3D0x7f
+> diff --git a/configs/Bananapi_M2_Ultra_defconfig b/configs/Bananapi_M2_Ul=
+tra_defconfig
+> index 375b0063c1a..750868033be 100644
+> --- a/configs/Bananapi_M2_Ultra_defconfig
+> +++ b/configs/Bananapi_M2_Ultra_defconfig
+> @@ -5,6 +5,8 @@ CONFIG_DRAM_CLK=3D576
+>  CONFIG_SPL=3Dy
+>  CONFIG_MACH_SUN8I_R40=3Dy
+>  CONFIG_MMC_SUNXI_SLOT_EXTRA=3D2
+> +CONFIG_SPL_SUNXI_LED_STATUS=3Dy
+> +CONFIG_SPL_SUNXI_LED_STATUS_GPIO=3D244
+>  # CONFIG_HAS_ARMV7_SECURE_BASE is not set
+>  CONFIG_AHCI=3Dy
+>  # CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
+> diff --git a/configs/Bananapi_m2m_defconfig b/configs/Bananapi_m2m_defcon=
+fig
+> index 0c20cce49ea..f75e3e09d03 100644
+> --- a/configs/Bananapi_m2m_defconfig
+> +++ b/configs/Bananapi_m2m_defconfig
+> @@ -7,6 +7,9 @@ CONFIG_MACH_SUN8I_A33=3Dy
+>  CONFIG_DRAM_ZQ=3D15291
+>  CONFIG_DRAM_ODT_EN=3Dy
+>  CONFIG_MMC_SUNXI_SLOT_EXTRA=3D2
+> +CONFIG_SPL_SUNXI_LED_STATUS=3Dy
+> +CONFIG_SPL_SUNXI_LED_STATUS_GPIO=3D355
+> +# CONFIG_SPL_SUNXI_LED_STATUS_ACTIVE_HIGH is not set
+>  # CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
+>  CONFIG_FASTBOOT_CMD_OEM_FORMAT=3Dy
+>  CONFIG_USB_EHCI_HCD=3Dy
+> diff --git a/configs/Mele_A1000G_quad_defconfig b/configs/Mele_A1000G_qua=
+d_defconfig
+> index 1f4739e0005..ee6c902970a 100644
+> --- a/configs/Mele_A1000G_quad_defconfig
+> +++ b/configs/Mele_A1000G_quad_defconfig
+> @@ -4,6 +4,8 @@ CONFIG_DEFAULT_DEVICE_TREE=3D"sun6i-a31-mele-a1000g-quad"
+>  CONFIG_SPL=3Dy
+>  CONFIG_MACH_SUN6I=3Dy
+>  CONFIG_DRAM_ZQ=3D120
+> +CONFIG_SPL_SUNXI_LED_STATUS=3Dy
+> +CONFIG_SPL_SUNXI_LED_STATUS_GPIO=3D237
+>  # CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
+>  CONFIG_PHY_REALTEK=3Dy
+>  CONFIG_ETH_DESIGNWARE=3Dy
+> diff --git a/configs/Mele_A1000_defconfig b/configs/Mele_A1000_defconfig
+> index 93e73ebe3f1..48679265650 100644
+> --- a/configs/Mele_A1000_defconfig
+> +++ b/configs/Mele_A1000_defconfig
+> @@ -5,6 +5,8 @@ CONFIG_SPL=3Dy
+>  CONFIG_MACH_SUN4I=3Dy
+>  CONFIG_VIDEO_VGA=3Dy
+>  CONFIG_VIDEO_COMPOSITE=3Dy
+> +CONFIG_SPL_SUNXI_LED_STATUS=3Dy
+> +CONFIG_SPL_SUNXI_LED_STATUS_GPIO=3D244
+>  CONFIG_AHCI=3Dy
+>  # CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
+>  CONFIG_SPL_I2C=3Dy
+> diff --git a/configs/Mele_M9_defconfig b/configs/Mele_M9_defconfig
+> index 9b1bb97eedd..293e00db1b0 100644
+> --- a/configs/Mele_M9_defconfig
+> +++ b/configs/Mele_M9_defconfig
+> @@ -4,6 +4,8 @@ CONFIG_DEFAULT_DEVICE_TREE=3D"sun6i-a31-m9"
+>  CONFIG_SPL=3Dy
+>  CONFIG_MACH_SUN6I=3Dy
+>  CONFIG_DRAM_ZQ=3D120
+> +CONFIG_SPL_SUNXI_LED_STATUS=3Dy
+> +CONFIG_SPL_SUNXI_LED_STATUS_GPIO=3D237
+>  # CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
+>  CONFIG_PHY_REALTEK=3Dy
+>  CONFIG_ETH_DESIGNWARE=3Dy
+> diff --git a/configs/bananapi_m1_plus_defconfig b/configs/bananapi_m1_plu=
+s_defconfig
+> index 22b69aa88cb..14ecaf759b5 100644
+> --- a/configs/bananapi_m1_plus_defconfig
+> +++ b/configs/bananapi_m1_plus_defconfig
+> @@ -6,6 +6,8 @@ CONFIG_SPL=3Dy
+>  CONFIG_MACH_SUN7I=3Dy
+>  CONFIG_VIDEO_COMPOSITE=3Dy
+>  CONFIG_GMAC_TX_DELAY=3D3
+> +CONFIG_SPL_SUNXI_LED_STATUS=3Dy
+> +CONFIG_SPL_SUNXI_LED_STATUS_GPIO=3D249
+>  CONFIG_AHCI=3Dy
+>  # CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
+>  CONFIG_SPL_I2C=3Dy
+> diff --git a/configs/bananapi_m2_berry_defconfig b/configs/bananapi_m2_be=
+rry_defconfig
+> index b406d519684..b9975211362 100644
+> --- a/configs/bananapi_m2_berry_defconfig
+> +++ b/configs/bananapi_m2_berry_defconfig
+> @@ -4,6 +4,8 @@ CONFIG_DEFAULT_DEVICE_TREE=3D"sun8i-v40-bananapi-m2-berry"
+>  CONFIG_DRAM_CLK=3D576
+>  CONFIG_SPL=3Dy
+>  CONFIG_MACH_SUN8I_R40=3Dy
+> +CONFIG_SPL_SUNXI_LED_STATUS=3Dy
+> +CONFIG_SPL_SUNXI_LED_STATUS_GPIO=3D244
+>  # CONFIG_HAS_ARMV7_SECURE_BASE is not set
+>  CONFIG_AHCI=3Dy
+>  # CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
+> diff --git a/configs/bananapi_m2_zero_defconfig b/configs/bananapi_m2_zer=
+o_defconfig
+> index 337bafecd47..5041802ea8c 100644
+> --- a/configs/bananapi_m2_zero_defconfig
+> +++ b/configs/bananapi_m2_zero_defconfig
+> @@ -4,4 +4,7 @@ CONFIG_DEFAULT_DEVICE_TREE=3D"sun8i-h2-plus-bananapi-m2-z=
+ero"
+>  CONFIG_DRAM_CLK=3D408
+>  CONFIG_SPL=3Dy
+>  CONFIG_MACH_SUN8I_H3=3Dy
+> +CONFIG_SPL_SUNXI_LED_STATUS=3Dy
+> +CONFIG_SPL_SUNXI_LED_STATUS_GPIO=3D362
+> +# CONFIG_SPL_SUNXI_LED_STATUS_ACTIVE_HIGH is not set
+>  # CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
+> diff --git a/configs/beelink_x2_defconfig b/configs/beelink_x2_defconfig
+> index 3b0be26f063..16a37da521d 100644
+> --- a/configs/beelink_x2_defconfig
+> +++ b/configs/beelink_x2_defconfig
+> @@ -5,6 +5,8 @@ CONFIG_DRAM_CLK=3D567
+>  CONFIG_SPL=3Dy
+>  CONFIG_MACH_SUN8I_H3=3Dy
+>  CONFIG_MMC_SUNXI_SLOT_EXTRA=3D2
+> +CONFIG_SPL_SUNXI_LED_STATUS=3Dy
+> +CONFIG_SPL_SUNXI_LED_STATUS_GPIO=3D362
+>  # CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
+>  CONFIG_SUN8I_EMAC=3Dy
+>  CONFIG_USB_EHCI_HCD=3Dy
+> diff --git a/configs/icnova-a20-adb4006_defconfig b/configs/icnova-a20-ad=
+b4006_defconfig
+> index 507e330612e..dcb6457fe71 100644
+> --- a/configs/icnova-a20-adb4006_defconfig
+> +++ b/configs/icnova-a20-adb4006_defconfig
+> @@ -4,6 +4,8 @@ CONFIG_DEFAULT_DEVICE_TREE=3D"sun7i-a20-icnova-a20-adb400=
+6"
+>  CONFIG_DRAM_CLK=3D384
+>  CONFIG_SPL=3Dy
+>  CONFIG_MACH_SUN7I=3Dy
+> +CONFIG_SPL_SUNXI_LED_STATUS=3Dy
+> +CONFIG_SPL_SUNXI_LED_STATUS_GPIO=3D245
+>  CONFIG_AHCI=3Dy
+>  # CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
+>  CONFIG_SPL_I2C=3Dy
+> diff --git a/configs/nanopi_duo2_defconfig b/configs/nanopi_duo2_defconfig
+> index 41b5502d24e..9b0fbecff60 100644
+> --- a/configs/nanopi_duo2_defconfig
+> +++ b/configs/nanopi_duo2_defconfig
+> @@ -5,6 +5,8 @@ CONFIG_DRAM_CLK=3D408
+>  CONFIG_SPL=3Dy
+>  CONFIG_MACH_SUN8I_H3=3Dy
+>  # CONFIG_VIDEO_DE2 is not set
+> +CONFIG_SPL_SUNXI_LED_STATUS=3Dy
+> +CONFIG_SPL_SUNXI_LED_STATUS_GPIO=3D362
+>  # CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
+>  CONFIG_CONSOLE_MUX=3Dy
+>  CONFIG_USB_EHCI_HCD=3Dy
+> diff --git a/configs/nanopi_neo_air_defconfig b/configs/nanopi_neo_air_de=
+fconfig
+> index 3b8cbbfcdba..110bb1e864c 100644
+> --- a/configs/nanopi_neo_air_defconfig
+> +++ b/configs/nanopi_neo_air_defconfig
+> @@ -5,6 +5,8 @@ CONFIG_DRAM_CLK=3D408
+>  CONFIG_SPL=3Dy
+>  CONFIG_MACH_SUN8I_H3=3Dy
+>  # CONFIG_VIDEO_DE2 is not set
+> +CONFIG_SPL_SUNXI_LED_STATUS=3Dy
+> +CONFIG_SPL_SUNXI_LED_STATUS_GPIO=3D362
+>  # CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
+>  CONFIG_CONSOLE_MUX=3Dy
+>  CONFIG_USB_EHCI_HCD=3Dy
+> diff --git a/configs/orangepi_2_defconfig b/configs/orangepi_2_defconfig
+> index 88433808538..43f3ab512f1 100644
+> --- a/configs/orangepi_2_defconfig
+> +++ b/configs/orangepi_2_defconfig
+> @@ -5,6 +5,8 @@ CONFIG_DEFAULT_DEVICE_TREE=3D"sun8i-h3-orangepi-2"
+>  CONFIG_DRAM_CLK=3D672
+>  CONFIG_SPL=3Dy
+>  CONFIG_MACH_SUN8I_H3=3Dy
+> +CONFIG_SPL_SUNXI_LED_STATUS=3Dy
+> +CONFIG_SPL_SUNXI_LED_STATUS_GPIO=3D362
+>  # CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
+>  CONFIG_SPL_I2C=3Dy
+>  CONFIG_SPL_SYS_I2C_LEGACY=3Dy
+> diff --git a/configs/orangepi_lite_defconfig b/configs/orangepi_lite_defc=
+onfig
+> index ea1548f0fcd..499ffd8ace5 100644
+> --- a/configs/orangepi_lite_defconfig
+> +++ b/configs/orangepi_lite_defconfig
+> @@ -4,6 +4,8 @@ CONFIG_DEFAULT_DEVICE_TREE=3D"sun8i-h3-orangepi-lite"
+>  CONFIG_DRAM_CLK=3D672
+>  CONFIG_SPL=3Dy
+>  CONFIG_MACH_SUN8I_H3=3Dy
+> +CONFIG_SPL_SUNXI_LED_STATUS=3Dy
+> +CONFIG_SPL_SUNXI_LED_STATUS_GPIO=3D362
+>  # CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
+>  CONFIG_USB_EHCI_HCD=3Dy
+>  CONFIG_USB_OHCI_HCD=3Dy
+> diff --git a/configs/orangepi_one_defconfig b/configs/orangepi_one_defcon=
+fig
+> index e4de13de26b..637eb41207e 100644
+> --- a/configs/orangepi_one_defconfig
+> +++ b/configs/orangepi_one_defconfig
+> @@ -4,6 +4,8 @@ CONFIG_DEFAULT_DEVICE_TREE=3D"sun8i-h3-orangepi-one"
+>  CONFIG_DRAM_CLK=3D672
+>  CONFIG_SPL=3Dy
+>  CONFIG_MACH_SUN8I_H3=3Dy
+> +CONFIG_SPL_SUNXI_LED_STATUS=3Dy
+> +CONFIG_SPL_SUNXI_LED_STATUS_GPIO=3D362
+>  # CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
+>  CONFIG_SUN8I_EMAC=3Dy
+>  CONFIG_USB_EHCI_HCD=3Dy
+> diff --git a/configs/orangepi_pc_defconfig b/configs/orangepi_pc_defconfig
+> index f857d7fa203..01195b68621 100644
+> --- a/configs/orangepi_pc_defconfig
+> +++ b/configs/orangepi_pc_defconfig
+> @@ -4,6 +4,8 @@ CONFIG_DEFAULT_DEVICE_TREE=3D"sun8i-h3-orangepi-pc"
+>  CONFIG_DRAM_CLK=3D624
+>  CONFIG_SPL=3Dy
+>  CONFIG_MACH_SUN8I_H3=3Dy
+> +CONFIG_SPL_SUNXI_LED_STATUS=3Dy
+> +CONFIG_SPL_SUNXI_LED_STATUS_GPIO=3D362
+>  # CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
+>  CONFIG_SPL_I2C=3Dy
+>  CONFIG_SPL_SYS_I2C_LEGACY=3Dy
+> diff --git a/configs/orangepi_zero_defconfig b/configs/orangepi_zero_defc=
+onfig
+> index e128f5fcdb3..49a1f4d03da 100644
+> --- a/configs/orangepi_zero_defconfig
+> +++ b/configs/orangepi_zero_defconfig
+> @@ -6,6 +6,8 @@ CONFIG_SPL=3Dy
+>  CONFIG_MACH_SUN8I_H3=3Dy
+>  # CONFIG_VIDEO_DE2 is not set
+>  CONFIG_SPL_SPI_SUNXI=3Dy
+> +CONFIG_SPL_SUNXI_LED_STATUS=3Dy
+> +CONFIG_SPL_SUNXI_LED_STATUS_GPIO=3D362
+>  # CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
+>  CONFIG_CONSOLE_MUX=3Dy
+>  CONFIG_MTD=3Dy
+> diff --git a/configs/orangepi_zero_plus2_h3_defconfig b/configs/orangepi_=
+zero_plus2_h3_defconfig
+> index caf515c7026..63335b404da 100644
+> --- a/configs/orangepi_zero_plus2_h3_defconfig
+> +++ b/configs/orangepi_zero_plus2_h3_defconfig
+> @@ -6,6 +6,8 @@ CONFIG_SPL=3Dy
+>  CONFIG_MACH_SUN8I_H3=3Dy
+>  # CONFIG_DRAM_ODT_EN is not set
+>  CONFIG_MMC_SUNXI_SLOT_EXTRA=3D2
+> +CONFIG_SPL_SUNXI_LED_STATUS=3Dy
+> +CONFIG_SPL_SUNXI_LED_STATUS_GPIO=3D362
+>  # CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
+>  CONFIG_SUN8I_EMAC=3Dy
+>  CONFIG_USB_EHCI_HCD=3Dy
 > --=20
 > 2.43.0
 >=20
@@ -173,24 +386,24 @@ Free software developer - https://www.paulk.fr/
 
 Expert in multimedia, graphics and embedded hardware support with Linux.
 
---l3/hIRm247/+OaIU
+--pmiThV5x9vjF8zfe
 Content-Type: application/pgp-signature; name=signature.asc
 
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAEBCgAdFiEEAbcMXZQMtj1fphLChP3B6o/ulQwFAmnyAq4ACgkQhP3B6o/u
-lQweBw/9FExtC6hps+5dTSc7XP1GphCFA5ObGS/SHeBB6FX0e6x1owTrMo2tgo1t
-Ecxeosenphxj4fxYmiV50f+7dgRz238ox3wHNq3QKXFpm0Gb8bLxEBFFG6YwiSwv
-crIVfQtFIiQ5Ii5mipHRG3fsha/p30Og1XuhCVw6Wps/bLJx1HDj2PHlcwWLv8nH
-4RWAgqDYv5LogStjo+j4GWPm2CHF6oCcNYYAs9cc3zJYGbLSjCDgQgx9E/DUM9lQ
-FX/cBXqepZ/XoclFkmVugXl68MAK8lMGfCJpPFtqL6rGE/Cx8aAbJ2SclpolKna+
-AAsZekQtmYT49HZT6F3ghR8ydx/9ZIJj1I8FZ5/aNSu94QFhnQ26lpPy0XiwPC78
-TfxRaI7e4k0UPjbiBEva9SM3ZqW0cwA3yx+3dt7uUVUTdd59mo1IwjdSKNgYaHWM
-R2m+qqswg3qzChrYd9qZ9HEUIm/9rxKGrT1saKCG4iEKHiQfP3CuGt32TwUK4sg7
-7qlDO2EzDCf0mEAqEMUrHr/oKoxcu1fPGxqIM4iPS8gjHpxfQPF3IGKv7KsdfCHH
-/ecNiG5BjO8DZshJOA4TH1ds+xkDHOHR0ojQNmUGhNB+agEaC7VX5uisvSslsnp8
-zUJSsw8KST+Be7QaXJ3tNhADKvRS3O9yKNT4d9hTL0F2/awjGmg=
-=JYf0
+iQIzBAEBCgAdFiEEAbcMXZQMtj1fphLChP3B6o/ulQwFAmnyAsAACgkQhP3B6o/u
+lQxduA//aQ6UvrsQxh2H5dKECR4524f6gLIsSrRRZDKbpZxMprHXEBxo3IrBvgW5
+1FxPGNWhr1HLGMfhTmWYnuNkRpZ0lPaA7gep1B3JRkjEtQvPEA2YwFfQy7os2kx8
+puVewRLm6Balni+hhrqnZdTGDqnDExOWDjERJkHIsR1Prz0VrhwjBA8miIRfUe5P
+dkFNVOPRf8eD9UYu3qvaDidYCo+zuAofBesSOIjsjIlMUHyvwQtWSUGmpDW4qe4a
+7fBdwAPSow8Os44LuBFvRP9WiRYNcbWFxSwPkvBkpe7/XnGNJ7ArI43q8FndSWei
++XILzIsNvdGu2ld6r/SQPzxCI9aFlJ57zFCrPbvppBr9y0dpYFo02t+dxP7fGV1S
+2n+NagXUE49fCGiql6AJjspBYTbKeVvGm16W6EiuIEJx/Wm6VFSZVTbVIywTNOTB
+4pNa6CfYw86CQcNgaL/UGgYokJP6q/7AO0F3wJDA+4q40II4ILypQbxMI9wbqTT+
+P2Xrw80SUGPPFq6kS9fgPt1xILxwtYj+rSaMdL0ljQMvLsg92L9OgegLc3AFAQwI
+Hulg+zeraVMveQQiWGz7jYsIRfxG5Wd+4EeVvYfgcIulTU4jRBM9K0VnOkS4Tcv9
+xG6AV6oEpqZ8OCIJJa4bAwnb9N8YHPz3d7WseyH/Bf5L2v7luEc=
+=3cCq
 -----END PGP SIGNATURE-----
 
---l3/hIRm247/+OaIU--
+--pmiThV5x9vjF8zfe--
