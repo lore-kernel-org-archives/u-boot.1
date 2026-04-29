@@ -4,83 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3CD5CFF8875
-	for <u-boot@archiver.kernel.org>; Wed, 29 Apr 2026 12:40:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6258CFF8867
+	for <u-boot@archiver.kernel.org>; Wed, 29 Apr 2026 12:41:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 353DD84852;
+	by phobos.denx.de (Postfix) with ESMTP id 6E16C8485A;
 	Wed, 29 Apr 2026 14:40:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20251104.gappssmtp.com header.i=@baylibre-com.20251104.gappssmtp.com header.b="ET+7lADN";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20251104.gappssmtp.com header.i=@baylibre-com.20251104.gappssmtp.com header.b="MA9RUmi1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AA38884705; Wed, 29 Apr 2026 11:17:27 +0200 (CEST)
-Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
- [IPv6:2a00:1450:4864:20::32d])
+ id EA32584705; Wed, 29 Apr 2026 11:17:30 +0200 (CEST)
+Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
+ [IPv6:2a00:1450:4864:20::332])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6C92D84711
- for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 11:17:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0250784705
+ for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 11:17:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jstephan@baylibre.com
-Received: by mail-wm1-x32d.google.com with SMTP id
- 5b1f17b1804b1-4838c15e3cbso112745435e9.3
- for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 02:17:25 -0700 (PDT)
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-48909558b3aso123654075e9.0
+ for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 02:17:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20251104.gappssmtp.com; s=20251104; t=1777454245; x=1778059045;
+ d=baylibre-com.20251104.gappssmtp.com; s=20251104; t=1777454247; x=1778059047;
  darn=lists.denx.de; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=vDks7obpZyJiKiMiHdoRgyzLZdypXIIMbIZYpp1RNJo=;
- b=ET+7lADNBvlJ4Pcl2TADtu9tQhtLIfBcyA2DXoDkfQajhglfnmNGBZSD9s5SIxHI7c
- TZUCi9Up3mVWLYKCCb4HH8fCiQGpe4vOJVwdupsoV+iwKsBUtqTwPtGprJYYDmnxpyKL
- kxQANIVVgVNBKAUuw70z365lCp3pAoVI6CbJ38Z93QMp+jn0DWYvFwLyjhYel0HcQFd/
- loR1Juy2o6E0V1G6APbziZyi/JJs5h49KTyjff1W0VXnJMXQwp+ZqVeCawRf3VDdPWvM
- tQrJqjQ3rUA3ck77tnCJ0LdzwkkEWqypUjhVPL0T1ylrw2ES1g8q+KMPsXjCZZmcTMOf
- JmDw==
+ :reply-to; bh=F580oyhz2uHlMsW9XS0EQv3NtI7Y8wjVpQml6aR8e/o=;
+ b=MA9RUmi1eiGAyAMjj+8GIztP2PyLMEdQidZH/yVQ6ahiNA5Gh6mFWTNotBFqxiUGND
+ XYq/fQ0Q36eRvcgz+9rWLQESbivJCnmSIr33300zCwkQ/y9PU3cByFoNKxrT2xByQw5f
+ 8yBos/qB6sgoSVugyFZJriXd8IqnxDWg/ANMYLw6jYP26jHfiyI5doL93L88m4ouUGNh
+ 453Wl81Po5gqR3N2sVu4SqQ0ai4k0T8jccBPZP3A67MDzyUr595cJenhAjRlTDPrMcKT
+ pAhR6TlNCsewPkWIw5rnjsgV7ebVkEoxph56B//BgoyerwnF5adQwidDg6VneODhc7MC
+ FUOg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777454245; x=1778059045;
+ d=1e100.net; s=20251104; t=1777454247; x=1778059047;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=vDks7obpZyJiKiMiHdoRgyzLZdypXIIMbIZYpp1RNJo=;
- b=SEvtAvWMCw02XZe5Y4heEaLsubv9lJDyjkHK8G50ZuT+9gI8ycBQHpac/bDqIyvB9c
- EFvZSHFn5y0WAexFdQ1HeYwUyMiHaQmhVBRirw6JBQ/wWoEBY7SptdAC6BpHxLd+VlVs
- IE6KGyXKSC1Vw8gE2vaqGi02dfidnRbuhPDrdOX2YM0JGr+ye9e0GBYaDxkWyhR/iB2D
- 7mdAbKB5A6JTawMp/a5yGWD+iSc03wdG2QdS2itdqJ2nW5OOAu+db893VABBLc62cqgt
- EgjT9FFS+qA4rO3q29aWDqn0c+q+PE/tWYUkPt99IaG0nx/PRLyZux8f16cDnT9Vhr7P
- rM8Q==
-X-Gm-Message-State: AOJu0YwKLrSV4KwhcMYVRiji36iZ/IlIno7rFrRkZkk52C6ir78vg1+x
- tNjwU9FQ6OaIWd8muxz9QAklerklmayAYtLnR60z6WPTA0hhTM7P6gU2MyhGXTvIh8w=
-X-Gm-Gg: AeBDievaPXe3hsAbVESmlcw+3kUXMVRt4Sl6M8KP5TRRkLee9qIieS6xrGioHaDotr9
- uYO/0PovNER/fWQxoMl3wYHdg8vDWcwhKqOKz/mj26k4uSlLm0FOCV3Z+QNkYlLIZPRmK4zkYqu
- K9c5IATfjrY75KbnZDzKMM4EZiJwR8LHweiMQvpzGuKVZ9qNpkrPG98Lz7vmVJYwYRMcOcfBSkD
- w7kgE1trAq0o0OiahORhTFHggHNIMrXEbDwkHRFM6DXQEEq/VRs0qwwGATaH/6gpTzZEx56rPop
- NeowDprtCHOEmDW265xCqEdhB109kOoN7LNLTVpY4/+F5mVRL+pNEHGemguZX26nYiBU9Uhuute
- 6Nfq/4HAF5tREyPHFzsszPTFzjunb4ec/+y71hCh+RAQJAyUf3KOOav4LY0wygnH8P+h3ztBOPi
- I+Up4eKZ6UANFP10lG8uj5VDT6jAVk18JfimKRLUXWGXuYIcIcEJVHLENqhv34GkDySQHhjwTKa
- MvDJnAzPiX/K4NHttOTiBxGOLPxnG6YRO+hXb0Fv/x+bg1sQ8lS+HRJvuD4vmrYM51LyHRCYn7J
- WLqqRf5usES518VmNTjHHBaPv3k=
-X-Received: by 2002:a05:600c:1d0a:b0:48a:5342:36b5 with SMTP id
- 5b1f17b1804b1-48a77b1e8b0mr113952555e9.21.1777454244689; 
- Wed, 29 Apr 2026 02:17:24 -0700 (PDT)
+ bh=F580oyhz2uHlMsW9XS0EQv3NtI7Y8wjVpQml6aR8e/o=;
+ b=il64jP4sjeSdSCTh8iPSnn0XSP6WbYkuGFV8e09SZRVxAR0ObSZGp3UznY7WTb4xLp
+ 0LVoUoNam9/Hew8oPjwBd/VsMlJgZWCGgqXoZ45Z/IbNbCTGtfYhp7gRwlewxocehUtO
+ 6qrg+W0i9toU/beynP4KwB2RBOnrY1Hs3fjd25OJZGveS+he2H+bV+HgSLnc6lRj1Y37
+ VTkxi7Cr+DZS2cMRklW4XlikFuSmA/9BUanwFZyGOA743KYhTCFYXVYDl2Z0POG/CbPL
+ BeUKPuMQf4UanMAntDSQBc+uQEhsijFK53DnT+6w/7Y0bLNrdrxfVurn+JoEgdsbW8SR
+ yeyQ==
+X-Gm-Message-State: AOJu0YyTivpTlLl4CcFT9WCTI6QzA3956OqZwIasb6r20jpcWCcl8OqI
+ Y1eoXrUG6VzbZCSPuJyiOX6sEXkzzQLvG6I60HsjhJROi8t7i8uHg70R4eelhVfytuo=
+X-Gm-Gg: AeBDiessqezcY3sa1LqzqT/t+NUdTQQUGo70S8oKL9nGe05VA6df6yv8eFmkCn9hn2P
+ 1unm3HXbFFNCP6lleYaAAEp6rxurPVamZifdT9OmhqNhMfcNEQxdGE5qECFVJNC4Rh94AGkCSKU
+ 4NjBoKnaDfdRosoB1Ng8BYMaei0QoZ56udCcYg0NJrw1CzDNTkYHBTCyVV5j92hJ2K1wzFJcT6F
+ 6/2fWwH2AhRfbIdNImuEv6r2JVQwQJ9NJdSD/V8KNY62bc1hYckLUVlG9p3tPhkzdLolB/tA/wR
+ deiWOyEuMoyCcpxSZSYMHDoNO8B7WTyfc0j7sENX0wuekaUDNXdyWZH8uLvv2gbuv5LfXFfSN0u
+ 8AOnCVov7fy0/LymVgsrKThMMasBxs2FvO7x0PjVhDIhzuKaAkjI9rdPHDtYlm2nPP2vDSMX5S6
+ YhJZqof99ozcONlpg8Gjf2bNlHUSy2GZ3oG84U4WDJGRkZ6IH5zl4S2x7GdMznV5bzfouciCbqS
+ 40vGkWFG4+H+P22PRsTtXVlpgBZYvt4b2epB0c6j7HYjWNdJmprdhp4cyVHdOgSfE208liN63Nz
+ V6y/Jypiq1KpeH9/
+X-Received: by 2002:a05:600c:a118:b0:488:ae6c:42c0 with SMTP id
+ 5b1f17b1804b1-48a7b51c1f3mr38751395e9.7.1777454247246; 
+ Wed, 29 Apr 2026 02:17:27 -0700 (PDT)
 Received: from [192.168.1.64]
  (2a02-842a-d52e-6101-6fd0-06c4-5d68-f0a5.rev.sfr.net.
  [2a02:842a:d52e:6101:6fd0:6c4:5d68:f0a5])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-48a7b9dee18sm44478375e9.0.2026.04.29.02.17.22
+ 5b1f17b1804b1-48a7b9dee18sm44478375e9.0.2026.04.29.02.17.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 29 Apr 2026 02:17:24 -0700 (PDT)
+ Wed, 29 Apr 2026 02:17:26 -0700 (PDT)
 From: Julien Stephan <jstephan@baylibre.com>
-Date: Wed, 29 Apr 2026 11:17:09 +0200
-Subject: [PATCH v3 1/9] MAINTAINERS: remove trailing colons from section titles
+Date: Wed, 29 Apr 2026 11:17:10 +0200
+Subject: [PATCH v3 2/9] MAINTAINERS: add maintainer entry for air_en8811 driver
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260429-add-ethernet-support-for-genio-520-720-v3-1-1f65e18d4f54@baylibre.com>
+Message-Id: <20260429-add-ethernet-support-for-genio-520-720-v3-2-1f65e18d4f54@baylibre.com>
 References: <20260429-add-ethernet-support-for-genio-520-720-v3-0-1f65e18d4f54@baylibre.com>
 In-Reply-To: <20260429-add-ethernet-support-for-genio-520-720-v3-0-1f65e18d4f54@baylibre.com>
 To: u-boot@lists.denx.de
@@ -142,45 +142,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-For consistency, remove trailing colons for the three following
-sections: ACPI, ALIST, and INTERCONNECT.
+Add a new entry for drivers/net/phy/airoha/air_en8811.c  driver.
 
 Signed-off-by: Julien Stephan <jstephan@baylibre.com>
 ---
- MAINTAINERS | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ MAINTAINERS | 5 +++++
+ 1 file changed, 5 insertions(+)
 
 diff --git a/MAINTAINERS b/MAINTAINERS
-index 0dcc7243124..ce4e9d58037 100644
+index ce4e9d58037..105590ffad0 100644
 --- a/MAINTAINERS
 +++ b/MAINTAINERS
-@@ -50,7 +50,7 @@ so much easier [Ed]
- Maintainers List (try to look for most precise areas first)
- 
- 		-----------------------------------
--ACPI:
-+ACPI
- M:	Simon Glass <sjg@chromium.org>
- S:	Maintained
- F:	board/emulation/configs/acpi.config
-@@ -58,7 +58,7 @@ F:	cmd/acpi.c
+@@ -58,6 +58,11 @@ F:	cmd/acpi.c
  F:	include/acpi/
  F:	lib/acpi/
  
--ALIST:
-+ALIST
++AIROHA PHY
++M:	Tommy Shih <tommy.shih@airoha.com>
++S:	Maintained
++F:	drivers/net/phy/airoha/air_en8811.c
++
+ ALIST
  M:	Simon Glass <sjg@chromium.org>
  S:	Maintained
- F:	include/alist.h
-@@ -1279,7 +1279,7 @@ S:	Maintained
- F:	drivers/timer/goldfish_timer.c
- F:	include/goldfish_timer.h
- 
--INTERCONNECT:
-+INTERCONNECT
- M:	Neil Armstrong <neil.armstrong@linaro.org>
- S:	Maintained
- T:	git https://source.denx.de/u-boot/u-boot.git
 
 -- 
 2.52.0
