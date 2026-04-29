@@ -4,99 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 537BEFF8875
-	for <u-boot@archiver.kernel.org>; Wed, 29 Apr 2026 23:55:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA1BCFF8875
+	for <u-boot@archiver.kernel.org>; Wed, 29 Apr 2026 23:56:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D0CD0848FD;
-	Thu, 30 Apr 2026 01:55:35 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 638F584912;
+	Thu, 30 Apr 2026 01:56:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="hZvyj70N";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MnSD/IBF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6707C848FD; Thu, 30 Apr 2026 01:55:34 +0200 (CEST)
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
- [IPv6:2a00:1450:4864:20::633])
+ id BD8BB8491D; Thu, 30 Apr 2026 01:56:34 +0200 (CEST)
+Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
+ [IPv6:2a00:1450:4864:20::529])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 33328848F3
- for <u-boot@lists.denx.de>; Thu, 30 Apr 2026 01:55:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 75D1C84910
+ for <u-boot@lists.denx.de>; Thu, 30 Apr 2026 01:56:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-bb662d56b5aso60906366b.1
- for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 16:55:32 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1777506932; cv=none;
+Received: by mail-ed1-x529.google.com with SMTP id
+ 4fb4d7f45d1cf-678a1642a81so504790a12.0
+ for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 16:56:32 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1777506992; cv=none;
  d=google.com; s=arc-20240605;
- b=DfTS0fWSKtV1vCstOErDt8U4YancF+OYuwFBI0cPvTVOBpkk0NtZLo0wdnDFNCLBy+
- i9KS7Dozv3p0xlUo2Nq2jg0uOPhXuY1apaCtxlO/IG+RdspyPFABZR8HqR3hxdWJBIvD
- nampYG2akS/zP1ZzIywRkh0twPjZiG1yF3hNdUBm6erENXtpUrNlBg5LZq8mU/unX0wG
- aqAnBuQOkemZCaXnsCsQN4PULAOWBNcgfHciTSdo6idLY1VfWEuujvYo9/JSN9ceIaai
- ky1q0Hj0AA1tKMtbb5gvX7YBqj+btRx9Pdp/Q049WZPLXuWfqIZuwimfd+TuexL4D12m
- 0pnw==
+ b=G7DrwT8uzGZmdwQUVWNXkPKJrJ/cEsyTt1mahbStpKze3Jqc1wWQFrbl6TFp3abH8y
+ 59cUiKRFKcl496cBRsjEEb2ZSiqRjKU8b85CaXSKrtvVtcS/lHX5GsH9vagqzDjSHLHc
+ XtNnh4my66g7Ne7xCraWUdfgU+s/8DYiY8eDZ6ePMQuOKawRgNKT8GJK/vyIfUDhxF4c
+ RouGJpjIxMyxvTrWBCp624W3guQC1NaG29BBoAOMLWiTBVy/i8FTnJKNCj8uvjMygaZ8
+ lMbftFa+UF5z9uZ9MGvxGEcQIhcaNjM5mU0vCYl5TnN2qVzbF3nPbtBCzaakmmnnLj2i
+ 8vuA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=WgAqhuxP3nwmIeu1aGUsqnJ9B3KVf4HCyFgqE9kBEhU=;
- fh=W+98wJVgelTEn3G0vWkRNFn3JWtAlkgbLGlCypg//J0=;
- b=fC4nOx8a8IbdC1oFCQkR8sCV8oMhttnF/4j4wcaLA4MeJrki9XLc1LmU45lME2SLGG
- Kax44vLc2b5d5Af4I31xh+Sy066XbbSgMHwUwUH49Eu7vw30ZK3beH6jYgJ/2wEw5CRB
- tYmKTuxv4E3B13MIB8Ba/QStlj8/shgjjpyK5qfxi7et8kRCcHQX/fDZUGrmxcy2Yie3
- 3/UOblWGXtTNnkRbTnqg/uwfIc8EbF+qhs7+Cq3HSUhbVyNYx62KwmYpGpkl+f7MORhi
- X9EJWPzMc/biB9q4KNhvLti7o/DZsMlNepxWycIlRozZoYEK0bDJaF1mN9bx/UzG1XFu
- mdhw==; darn=lists.denx.de
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=T8tXI7wb0u5eJZ8z7MpL29Va7cGTABCxblT1t6UJbXc=;
+ fh=I7GiAdneCkBThil64KmQY67lpX8rQQKv/vWT7AXWZ1o=;
+ b=iZ8EszNBkvyrQTQ0Y7ruDuT0doOmv7DcXZFf3knwBCSdgj2fvPfxFGb4XFR9S0nrX1
+ 8Pyxa0VwkToI+vxw8j4/jYpXwU6t78z8V8uV7leRD1HbtU17FYf3EGhlwpDpdYHM6GEa
+ +ImrdGywHM7gXfn5Cv9jjkbBpbmUegeqh6H2ZTpO+QnjPRHIrnNnB8Fglg1WPx7iI/Su
+ VL/Pg3HNyrQuxezSi64TCKJsOPXR+Vg9cZwXA2dFAkDLJePYlHbpUNnEmv/B81DLoOUA
+ scjani7A1WMGhxIzJlVIWSrTZcxlb1s0Mao2rxgB/obAqFWgtWxDKYVlpcBHNI8StTBz
+ xHRw==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1777506932; x=1778111732; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=WgAqhuxP3nwmIeu1aGUsqnJ9B3KVf4HCyFgqE9kBEhU=;
- b=hZvyj70NWWi5WpOCAmcrjy9TCcogokC7tCNqApmeCJ3SoJSAEwlMV4I0VoIrNl3CB3
- OAEY1XigMwjylkhv9OFseOMWq1POi2vQZehZqtA34lHDfqwgs/Z+op6DLe6LWxU2ugGP
- H0k4jMl+dU6R9aEvgLEoMrfkTj5DrIt88k2Lw=
+ d=chromium.org; s=google; t=1777506992; x=1778111792; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=T8tXI7wb0u5eJZ8z7MpL29Va7cGTABCxblT1t6UJbXc=;
+ b=MnSD/IBF5uAFLuFAx+mUq3c7afml4CpA6VNMKW/44zqjFAjxMjcBQBlC4tFnAAxtrC
+ kLlvruiQmuKVjN72ThOtK4H8YIt8lK3GXV3wtdN9MNiXKjSwIYRE4ONf8joBoDV9YEQp
+ oyGX95LSXs+8nelcmVo8dJZcgpW+bqtBDO8gU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777506932; x=1778111732;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=WgAqhuxP3nwmIeu1aGUsqnJ9B3KVf4HCyFgqE9kBEhU=;
- b=n4qMxqJ2cBIq+LfNiy3Il+qJxcNg2MOHcO0rKTr+DAF9kgZaX7MfsLeWtxcdOaLMKE
- RY3V309GdM95W+Gx3AB07smN44NfrkMh6N8PbJmwXicQqGLHxOhv/DRH/hlix2IhiSU4
- Is2refTJuqfPOPuMaVDoe2D27pSw37gwP/ceLMRG2meaLH2bWtB41hVqYMp57+BNfbmQ
- BKcFas0om5k1tUrRmoBeheoDh0if6YY4sqFYC80ObmzqhZhfZF2A0lU6xNrsSFFYTHnu
- GF7jmNNbgpSuk9QcDdSSUU6FvBad7UKYIUPtuoQ3j1tmm2H+hajuCHWmUefCvg67rZOC
- KGkA==
+ d=1e100.net; s=20251104; t=1777506992; x=1778111792;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=T8tXI7wb0u5eJZ8z7MpL29Va7cGTABCxblT1t6UJbXc=;
+ b=WT+11K8jQGnw+lVESiWSYgh4cWOlT2CvnIVoBTKlloqvfW/KpvYAuIJRgI/wiPFxDZ
+ djdS2spoAPwWVpOaTHWuQiTZZI50lUpu4OiRnwes5RcyXJ8UmbbNwTxwFdk8IbIc+yvQ
+ BbHRFuL5yJNyeeOS0riFLG4bljgR3UsIGBKH7oyaYVoKDezbMm7HHMjGmEpTB0Nty8Ky
+ AewzpBgnd8EoRQdO8SbgBi5IQSjaIUQh5lxl5nMWHUoPNrK++cB4BqDkRLawGVnQEn4o
+ WRHTYMwiVwXtPGwIhzpZ2tUfkMauhZ1OhhudlDah1WlKa7dDisvVX8Rhre52oQekw2R7
+ w7Ag==
 X-Forwarded-Encrypted: i=1;
- AFNElJ+rxZl/8NygcUTyAEvMatauDWa7H1UH8dVQb6p9g/bjtMDxhSwk954JnnwYqP5FlLuhl7iT6E4=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz0R819sZIT7ZT+WkZGhNwt9tTmY/j0VyPEAGNE8DHd9P4gx8fj
- 99BpcxY2aia/ohdydNOdAELxFXVevHsV7TlmgJbk5il4xKkDq3FZeDZPgn182Rdm4zlC4019xvW
- 6/lOFnGtpY1G5o4mkrTGafoIyGnXNeuDM3jOf2IcM
-X-Gm-Gg: AeBDietgO1ya6USjZunArO6BVIhe8joEEbLAXCSlHca5F3hnbM4i3DOVKxlZu09uAjm
- vL17g8KpUf0RhBu8Sgj7Lju4/O3orHluauYOvF8gGY/+THLJyVTNVtIR2KYMltEUn8QdJahOR2e
- DkCkcQme8r1/oHBGyu9Rbr4SrM01AI7kn3JTMPoyChzKhryRVKCTQaIRhpqrOiBwQ4ZERhJ7JUf
- ZHmsZPdGjf3kKTt9bAs2TJgVJ9XjBMDGmeRam4pcsRv3hTi9baIf6E2dRXgF4UqQiER8pBzcxxJ
- AtZc1RwwNMunPTTM
-X-Received: by 2002:a17:906:6a12:b0:b9e:8d2:1eb6 with SMTP id
- a640c23a62f3a-bbb98a71a68mr6579666b.27.1777506931642; Wed, 29 Apr 2026
- 16:55:31 -0700 (PDT)
+ AFNElJ9dudWi0lQQfchFlAbJaa4sJP04HDEQhOzL34t1BQlZzaJmjVo9U6/rgew7NdoyoZ8mn9YMopM=@lists.denx.de
+X-Gm-Message-State: AOJu0YxgnjNT3ItqMSJEk1HyroCcm9EuXXywlSxqAul7LWyd0ovdC4e6
+ 9Kqyc4oCvqHHyyJklZOQgdYiRa2NQfOPdGu7pvHN6y17dkrJiugk6xPPidrw9vRC8DKWwy48hEJ
+ o1N6Wq/JBRHU0RUCTaxlcwm03DXnCgQJx1t5r0qlD
+X-Gm-Gg: AeBDietyBrHZ4JOTI0aP/PZFpV33v1Ogvi30C4MMzJ7fgDsTVJA1nHVbohy+A7141zB
+ AIr5zSs/HHs6VUe+GCAHTYtq0Z7lwGXS0FW65MnnXGwvaEd1gXitTBB4s/WRD0P6wnb7HUDNJsn
+ Gt6bLQgtPmdk1cnzGnDdXcd7XuEYGtxAda73gm2Sa74LowT0b1c6TMKFMFXlmdJVQR6nHmUbFQr
+ 9OppJKI9Dqa8si4chridnqlly0AywS+pKq5ly//cOM3uKuWLSMNMIV4gjw/2ezPSWrMHltbKOCC
+ 7DYzCCgQ7eEHdWSZ4CtMKK8/sDE=
+X-Received: by 2002:a17:907:70e:b0:b9b:7bf8:800b with SMTP id
+ a640c23a62f3a-bbac8279d61mr40333866b.40.1777506991932; Wed, 29 Apr 2026
+ 16:56:31 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260425033742.1519298-1-b-padhi@ti.com>
- <20260425033742.1519298-8-b-padhi@ti.com>
-In-Reply-To: <20260425033742.1519298-8-b-padhi@ti.com>
+ <20260425033742.1519298-9-b-padhi@ti.com>
+In-Reply-To: <20260425033742.1519298-9-b-padhi@ti.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 29 Apr 2026 17:55:19 -0600
-X-Gm-Features: AVHnY4LWXq0bjojQC5K_HfnZiKHVnQl0r_lkD7H8D75zyTjZWiSQhsDEL3obHrw
-Message-ID: <CAFLszTjkWWv4AsKusuD3nMm23UBdc2izkZONnqr25ZM0D84WpA@mail.gmail.com>
-Subject: Re: [PATCH v4 07/11] binman: openssl: Add boot and load extensions to
- x509 cert
+Date: Wed, 29 Apr 2026 17:56:19 -0600
+X-Gm-Features: AVHnY4JNacOSQ82O84eGmEsNkEdrLMTNT2qZ5TcMiycX-w36zGlZ6_bwFqTUU-g
+Message-ID: <CAFLszTjTh0yZ+K_E1A6bXHFUgZNN8jEjHC=E9JFvBkH5Ky-MyQ@mail.gmail.com>
+Subject: Re: [PATCH v4 08/11] tools: binman: Add a test for boot and load
+ extensions
 To: b-padhi@ti.com
 Cc: trini@konsulko.com, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -116,97 +114,48 @@ X-Virus-Status: Clean
 Hi Beleswar,
 
 On 2026-04-25T03:37:39, Padhi, Beleswar <b-padhi@ti.com> wrote:
-> binman: openssl: Add boot and load extensions to x509 cert
+> tools: binman: Add a test for boot and load extensions
 >
-> The boot and load extensions in the x509 certificate are required for
-> requesting the secure entity (TIFS) to boot a core. These fields are
-> defined in the binman node for each core that must be booted by TIFS
-> and must be included when generating the signed certificate.
->
-> Add support to parse the boot and load extension properties from the
-> binman node and populate them into the certificate. If any of the
-> mandatory properties for an extension are missing, that respective
-> extension section is NOT added to the certificate.
+> Add test coverage for the boot and load extension functionality in
+> ti-secure certificates. This verifies that a certificate can be
+> generated having boot and load extensions.
 >
 > Signed-off-by: Beleswar Padhi <b-padhi@ti.com>
 >
-> tools/binman/btool/openssl.py   | 49 ++++++++++++++++++++++++++++++++++++=
-+----
->  tools/binman/etype/ti_secure.py | 18 +++++++++++++++
->  tools/binman/etype/x509_cert.py |  4 +++-
->  3 files changed, 66 insertions(+), 5 deletions(-)
+> tools/binman/ftest.py                              | 10 ++++++++++
+>  .../binman/test/vendor/ti_secure_boot_load_ext.dts | 23 ++++++++++++++++++++++
+>  2 files changed, 33 insertions(+)
 
-> diff --git a/tools/binman/btool/openssl.py b/tools/binman/btool/openssl.p=
-y
-> @@ -101,12 +102,52 @@ imageSize              =3D INTEGER:{len(indata)}
-> +        if boot_ext_data is not None:
-> +            boot_ext =3D f'''
-> +[ sysfw_boot_seq ]
-> +bootCore =3D INTEGER:{boot_ext_data['proc_id']}
-> +bootCoreOpts_set =3D INTEGER:{boot_ext_data['flags_set']}
-> +bootCoreOpts_clr =3D INTEGER:{boot_ext_data['flags_clr']}
-> +resetVec =3D FORMAT:HEX,OCT:{boot_ext_data['reset_vector']:08x}
+> diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
+> @@ -7270,6 +7270,16 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+> +    def testPackTiSecureBootLoadExt(self):
+> +        """Test that an image with TI secured binary having boot & load extensions can be created"""
+> +        keyfile = self.TestFile('security/key.key')
+> +        entry_args = {
+> +            'keyfile': keyfile,
+> +        }
+> +        data = self._DoReadFileDtb('vendor/ti_secure_boot_load_ext.dts',
+> +                                   entry_args=entry_args)[0]
+> +        self.assertGreater(len(data), len(TI_UNSECURE_DATA))
 
-Does this section actually make it into the certificate? The test in
-patch 8 only checks the file is non-empty, so it would not catch this.
+This only asserts that the resulting blob is larger than the unsecured
+input, which is true for any signed output and tells us nothing about
+the new code paths in patch 7. Please verify the actual behaviour -
+e.g. read back the generated config.* file (or parse the cert) and
+check that the sysfw_boot_seq and sysfw_image_load sections contain
+the expected bootCore, resetVec, destAddr and authInPlace values from
+the DTS. Otherwise this would happily pass even if
+ReadLoadableCoreNode() returned None for both extensions.
 
-> diff --git a/tools/binman/btool/openssl.py b/tools/binman/btool/openssl.p=
-y
-> @@ -101,12 +102,52 @@ imageSize              =3D INTEGER:{len(indata)}
-> +rsvd1 =3D INTEGER:0x00
-> +rsdv2 =3D INTEGER:0x00
-> +rsdv3 =3D INTEGER:0x00
+> diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
+> @@ -7270,6 +7270,16 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+> +    def testPackTiSecureBootLoadExt(self):
 
-rsdv2 / rsdv3 should be rsvd2 / rsvd3 to match rsvd1 above.
-
-> diff --git a/tools/binman/etype/ti_secure.py b/tools/binman/etype/ti_secu=
-re.py
-> @@ -116,6 +116,7 @@ class Entry_ti_secure(Entry_x509_cert):
->          if auth_in_place:
->              self.firewall_cert_data['auth_in_place'] =3D auth_in_place
->              self.ReadFirewallNode()
-> +        self.ReadLoadableCoreNode()
-
-The new properties (proc_id, flags_set, flags_clr, reset_vector,
-dest_addr, auth_type) are not described in the Entry_ti_secure
-docstring. Please document them alongside auth-in-place, including
-whether each group is optional and what the values mean.
-
-> diff --git a/tools/binman/etype/ti_secure.py b/tools/binman/etype/ti_secu=
-re.py
-> @@ -126,6 +127,23 @@ class Entry_ti_secure(Entry_x509_cert):
-> +    def ReadLoadableCoreNode(self):
-> +        boot_ext_props =3D ['proc_id', 'flags_set', 'flags_clr', 'reset_=
-vector']
-> +        load_ext_props =3D ['dest_addr', 'auth_type']
-> +
-> +        self.boot_ext =3D self.ReadDictFromList(boot_ext_props)
-> +        self.load_ext =3D self.ReadDictFromList(load_ext_props)
-> +
-> +    def ReadDictFromList(self, props):
-> +        props_dict =3D dict.fromkeys(props)
-> +        for prop in props:
-> +            val =3D fdt_util.GetInt(self._node, prop)
-> +            if val is None:
-> +                return None
-> +            else:
-> +                props_dict[prop] =3D val
-> +        return props_dict
-
-A few things:
-
-- ReadDictFromList() is a misleading name as it reads from a node,
-using a list of property names, into a dict. How about ReadIntProps()
-?
-- Drop the else after 'return None' =E2=80=94 just fall through, that's the
-usual Python style.
-- Silently returning None on the first missing prop means a
-partially-specified set (e.g. user provides proc_id and flags_set but
-forgets reset_vector) is treated identically to "no boot extension
-wanted". That is going to be very hard to debug. Best to raise an
-explicit error listing the missing properties (similar to what
-Firewall.ensure_props() does) when some but not all of the group are
-present. Then you can test it too.
+Since ReadDictFromList() in patch 7 returns None as soon as any single
+property is missing, please add at least one negative case, like a DTS
+with proc_id only, to confirm that boot_ext ends up None and the
+certificate falls back to the firewall authInPlace branch. As it
+stands, only the all-properties-present path is exercised here.
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
 
