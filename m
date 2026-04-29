@@ -4,96 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64D5AFF8867
-	for <u-boot@archiver.kernel.org>; Wed, 29 Apr 2026 14:20:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F08CCFF8873
+	for <u-boot@archiver.kernel.org>; Wed, 29 Apr 2026 14:21:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DDC108488A;
-	Wed, 29 Apr 2026 16:20:47 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 849018489E;
+	Wed, 29 Apr 2026 16:21:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="GLucb/vK";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="eJqg3SLh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B32A884897; Wed, 29 Apr 2026 16:20:47 +0200 (CEST)
-Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
- [IPv6:2a00:1450:4864:20::635])
+ id 56AE4848A1; Wed, 29 Apr 2026 16:21:37 +0200 (CEST)
+Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
+ [IPv6:2a00:1450:4864:20::534])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A8C4C84874
- for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 16:20:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 299B48488A
+ for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 16:21:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x635.google.com with SMTP id
- a640c23a62f3a-ba51e69988aso1750437466b.0
- for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 07:20:45 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1777472445; cv=none;
+Received: by mail-ed1-x534.google.com with SMTP id
+ 4fb4d7f45d1cf-676fec7e946so11389988a12.3
+ for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 07:21:35 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1777472494; cv=none;
  d=google.com; s=arc-20240605;
- b=VVIfZolKuHHXUVcp3cWhvDPztZXFNhkqd/g/9WyzQG+I/YQAs37s4vz4LM4uKT5tLu
- Vq7JU2hyWMVxcL324Y8ghOMfXZQ5j9tUCGII+X812yNl7gaUkSAntZi7gU1gj68a03yu
- 6RU6gctg52+R83V9Tij5bXsxZshwib1ZhIvT+GdxKFYzsc0aMIf6qgGnkngDhFL2WuYU
- /TJa2lRh3D2mU4lNbyK0Dh/UK/KKK5J/JWJTbXIbQU0gpNhwh2Jd+QL/janGoV8tp7fb
- VqGXMQdtsENf2CVcuodcWVBtwyiYq/e4JmZZfoZw4+u5OkeItYrWCbhTko7NC7xSsq0Z
- yjow==
+ b=Ei+w8+jvDYyy+Xp7ohv3UlBsg0u4ur1EPCyg7xZbnFkfsD2QsI2CKS9/nMGAOwefGI
+ imRq7/pdJ1t9vssV3cvvjjuV96Z4BHRSg1SStpjwSwR6R4otuNK/K/FRhfOClmp1/mGJ
+ 0Q2pQ9kcvXU/50FqYIuklGaj2xRicsWtDRhL0iPrluCNSyiIlA5XgKCe8bPaoRtg/abD
+ OWQQzN7tsvfB2qDwOrbGMNu+SduQsA9LZ32YQKLdQNm4fcyHKu4a6GF2w3U699t6FVr2
+ Ohtd6FjjcxLCtgQNZfyBw8jXbblksiIMP+Kl5I17wuUc4yAwbjswznh0djLF+eoHcUN1
+ RyQw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:dkim-signature;
- bh=a+AeE0//5V/SGxEQbgscVP/JdHLIp/w4UIk0ocNxjr4=;
- fh=IX/vxJtcOuW42bjJFlvnnr3CYhWZhtsB6OJ4I+752uM=;
- b=XjdpXE0DEqtsEI8mNC8FjcSU1TIkzvl9VMS0JYcRHtc69/XO1qkTUs+ofhda0AWHjk
- J4aF6q+boZ5BlLXG6EgIfxUbGApt6qHff1KSi21X3RobAJjV9C0zr/7UU0xhsVa4KGg+
- tooMfGnaHaw74TK61W5YDhGvNdd70XjJ16cPZ4mmHPhPllloA7UED+gFvxnpDtSstg2i
- q6qzErBmnlnhcbH7Pu4TpqVsutAHMWiRqpcfkBkjlI+qDWUBzS1Yu4pdoCACl+SIx5G+
- Xii5DvbwslQnUvqDkbLZbx73yDCJQRCA8RUthVsJsACVWcaJNup1vtOP0AF7n7Llzj2r
- oAEQ==; darn=lists.denx.de
+ bh=/Bvs9MqhN+hvS5dQXwIW1MGj+bxbuAP0eH7f0sr21I0=;
+ fh=SPi/X0WlztfyTm38DRlSkfy/6oW86yZLUHiv9TSsvno=;
+ b=Ki61DH6FvjQtanBH1cxMHfqJ89uvyVNTXRwMDDRngF1ph130sJerPwgXTTuP4cyx7j
+ ptZqNWIKsR6U42u1I5brJj3+nnZkLy0D+CEauedmH50luA/nPWuoQeAWzMR06HWIeifT
+ 6bWLvAu7bORW0W/5RhL9E6vYqLCiyJxoKRCtGMtsqwrty+RF77W9qDgQtKYBC712qIgv
+ QPXmnsyeKiEWHAD/rP2RRkJYkbADxLtlF0y0UzX3gtfEuov4T+QnvFlSNir/OFLBUt36
+ QeEbnXjbsxSMNXr5+/X7C26yKY6QQv1Y1fDiAWkfIJm91CaQWiUmhGiGqLmO9QI2WR7t
+ HwZA==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1777472445; x=1778077245; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1777472494; x=1778077294; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=a+AeE0//5V/SGxEQbgscVP/JdHLIp/w4UIk0ocNxjr4=;
- b=GLucb/vKpMjkzz3D4J+wzNvc3/daHh/mVSWBfbKez84zQrgQJNfAHo5VfaQ9hjjVGG
- RjaYkDB++gPg5MLXppJn/B6tEQZrML3mTPX3lHbqKrfNt8VxcvC/+QPCRF3YJMwjSX34
- 0IxBC0IFpmhPkS7twprIwlhKFie/G/sXvAWxQ=
+ bh=/Bvs9MqhN+hvS5dQXwIW1MGj+bxbuAP0eH7f0sr21I0=;
+ b=eJqg3SLhHazdU2D7Omx3Y/TqNWZ9P9xn0BAkHGsgX1+M32dzVKf+eVorvmqAP1DZJO
+ /XoDl/l0NwW1WO5AuGwg0V5WadPP2w2EW4+p4ma+naEQsYHGaLtffjg0UM/DFXTfLhMD
+ IXxtOqBrH/k0UpW4x0eLVYcDXoalWya8EvJ8U=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777472445; x=1778077245;
+ d=1e100.net; s=20251104; t=1777472494; x=1778077294;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=a+AeE0//5V/SGxEQbgscVP/JdHLIp/w4UIk0ocNxjr4=;
- b=dgXLawDsDVclw6eAysTR/uzhr+AUIp+1yFfPuWl88RWM6nO09HxcT58VopTZl9ee3c
- 2Rrvf/s73SSM6Vc8Mx2C8crwzeojx1FGdQ4+964003LUp7vCjCFlsoTx7NI+YDiZvQDJ
- YtwPSUNnyfSCfz4ixIYyL1qsaMui9U0N/mnnkPbLYB4zMYwqnHeegLCD+zwWWwkCzt0d
- zgIREyBlFnz4bgKxWoQAeBvCxTr+krFkbPxY+qsTAjM5lYidSZRDpTNf8yFkGovVEuft
- UAZJdMIvX3eXM4R1jn5PT88qq8V7dq8cDH34BBeqSGvCOhIV9B9GGwuXy3DWVFc6C3Yk
- t1xw==
-X-Gm-Message-State: AOJu0YyTSrfkSuoqZRjMWIyuckwkryjJAJYyqsgJ2/euYB3nOD1V9BNJ
- oVrq4j6uHJv/UbcWBmcOw/shiEfDe+1l/kKevOSFOTtlOx59tfbp8yz1Dyj51kaHlt2hTIJZYx7
- NZgE30ylqOo0bm//qT1PSLYJNa7HRRgcamC6DitdGmoC2jWDCO6A=
-X-Gm-Gg: AeBDiesNGLks/U/jMqaQeNn4e4l93hHP2hBFO7JLEYSUgy5IUiuKbhWVI4OzGrRsQQN
- hiPScgVf4aWOB3aOcGlf1cFr87R7RcWNIiUgCqi+2WMmsXOTv0sniSJCQU0Jr4YAKwvWYt0cVDR
- 660Hr2LEJDY6PPktOCJxoNjI/+CR8Aq/3Q44qkR6Nfygtvd1DaRtt6IQuntkexRKnmMiVuJIp8e
- VRLAoOMAk7spby9BhF0OnUTqo6Sd0nOkGeXtvkxStKYxffyOtWqJCmqBFLPGs+Vx9YAh/IMrxvL
- gQJogfqyP6S/wFh1
-X-Received: by 2002:a17:907:720b:b0:baa:8895:735d with SMTP id
- a640c23a62f3a-bb7ff068b92mr436773766b.0.1777472444868; Wed, 29 Apr 2026
- 07:20:44 -0700 (PDT)
+ bh=/Bvs9MqhN+hvS5dQXwIW1MGj+bxbuAP0eH7f0sr21I0=;
+ b=JTQfUzfmnf9H9CbzSCJ/sDT9yXsMAGglTOPLn2IeIQAkaThcGywt2mf7Lq2Vg3ejgH
+ AY0V3yfjwHabWwPw4iV6KNjwVIxqIFeFjNP0FNM/bscvUTDzyrv8nc2y6HBSgYlW7lk/
+ v5n0zjx8VODEqzBCBbK9AesNwc8SBAJQbOa/JnfyNLdqhWf/ZuSe1k5F5j4Vz7NvsEPj
+ gjoZMMm1lqe0TYwPtUGDujxPUF2ehKeTPt5/jgYKAJ4REGCwO6U80kr4147rtMedHqEk
+ /1urCijNf55fjE9fq0Avj+yoRDQM1BZLHzQQONECbPQgWVtWLClPVYTf6m1BVmXER5U2
+ o7Tg==
+X-Gm-Message-State: AOJu0YzFfSZDiZsREq8GGzXJOs5xeyw3x6kwJr6j7NN+sIdIpIPC7oqp
+ 9Zv5tnKFpVUELiIRC9BSGsZbNNeZLCo9NI2l4y+hUuMDW+8HMQRO053ka4PLgRqaxkh7MXmr652
+ YFps7bkI4uq4zp+2j9cfIn4xbCFjyNAf2N9+5voW7
+X-Gm-Gg: AeBDietew/h7YPMSc5AMmH6ki0jbZKYVP193UZFa7OLvYaNYPOYryjIqoJhRS+aUebX
+ RcYo+bRkQQ3QbnbHSpL5MJ6MQmIP0qDJglpMHOE9Ghs3DBwg/J46wTIzUlkhm2SlHMQaan63fI5
+ C5pEbbz5g/06oPsw3aLDrjHroQXav5t2NSiHxvmqRAejc0jv+baUs5PfX+NwOrKHwFyQ20/XcUc
+ 7UgZZblQWqmELyZmdlWi26pbqFW5gXdwYprrY6ZXTwzg4vtiWlMk6Onxk3fyd+MLksjqzDpAW+Q
+ gdeDZGo5tNFLBjuGTL0E90D0d4s=
+X-Received: by 2002:a17:906:8d8d:b0:ba7:ade5:8605 with SMTP id
+ a640c23a62f3a-bb93c79d3d7mr267025966b.6.1777472494622; Wed, 29 Apr 2026
+ 07:21:34 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260428133612.669105-1-ludwig.nussel@siemens.com>
-In-Reply-To: <20260428133612.669105-1-ludwig.nussel@siemens.com>
+References: <20260423042824.3480-1-briansune@gmail.com>
+ <CAFLszThg=EamyRohxNA7V+nk+OMVK356nUjAVSbu4+kokOJpdA@mail.gmail.com>
+ <CAN7C2SAdg1MX3ZfEt5-68iiw3pdjyqva48F_uJjNwsHAhdmY3Q@mail.gmail.com>
+In-Reply-To: <CAN7C2SAdg1MX3ZfEt5-68iiw3pdjyqva48F_uJjNwsHAhdmY3Q@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 29 Apr 2026 08:20:32 -0600
-X-Gm-Features: AVHnY4KtkKAPc69GSXyzwNI_TdqZqR1m2g6dVmpKqlRvxcMhBolWXU_J7ABMsJI
-Message-ID: <CAFLszTjT691ZQudD_tJ-Os-pVnsLQjto2QeYv32tS5Us7wLWRA@mail.gmail.com>
-Subject: Re: [PATCH] virtio: ignore ENODEV for boot device hunting
-To: ludwig.nussel@siemens.com
-Cc: u-boot@lists.denx.de, Adam Lackorzynski <adam@l4re.org>,
- Bin Meng <bmeng.cn@gmail.com>, 
- =?UTF-8?Q?Christian_P=C3=B6tzsch?= <christian.poetzsch@kernkonzept.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>
+Date: Wed, 29 Apr 2026 08:21:20 -0600
+X-Gm-Features: AVHnY4Ji7F69Qz_bZOicfSX8lSx6mTBLQVtpP8kOYiTuc4a1Ujqf7RHk197sJiE
+Message-ID: <CAFLszTgouk66AOaL2o8PvH9EKNFabE=pjxpa9QpC_F--VhE9cQ@mail.gmail.com>
+Subject: Re: [PATCH v6] Improve handoff prepare on SoCFPGA
+To: Sune Brian <briansune@gmail.com>
+Cc: u-boot@lists.denx.de, Chee Tien Fong <tien.fong.chee@altera.com>, 
+ Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -112,60 +112,90 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ludwig,
+Hi Brian,
 
-On 2026-04-28T13:36:02, Ludwig Nussel <ludwig.nussel@siemens.com> wrote:
-> virtio: ignore ENODEV for boot device hunting
+On Tue, 28 Apr 2026 at 08:34, Sune Brian <briansune@gmail.com> wrote:
 >
-> 'Commit 70101c3217ae ("virtio: mmio: Return error codes on probe
-> failures")' returns -ENODEV in some situations. That breaks boot device
-> discovery. Ignoring that error seems to fix the issue. Not sure it's the
-> correct thing to do though.
+> On Tue, Apr 28, 2026 at 10:04=E2=80=AFPM Simon Glass <sjg@chromium.org> w=
+rote:
+> >
+> > Hi Brian,
+> >
+> > On 2026-04-23T04:28:24, Sune Brian <briansune@gmail.com> wrote:
+> > > Improve handoff prepare on SoCFPGA
+> > >
+> > > Ensure qts folder header files are properly updated by isolating
+> > > the Python execution environment. This prevents partial or failed
+> > > script runs from corrupting the target directory.
+> > >
+> > > Changelog v5 -> v6:
+> > >  - Clean HANDOFF_KEEP comments.
+> > >
+> > > Changelog v4 -> v5:
+> > >  - Change HANDOFF_KEEP condition to if [ '$${HANDOFF_KEEP:-0}' !=3D '=
+0' ]
+> > >  - Add HANDOFF_KEEP and HANDOFF_PATH comments in config.mk
+> > >
+> > > Changes:
+> > >  - Implement a temp folder for Python script execution.
+> > >  - Clean temp folder automatically despite execution failures.
+> > >  - Gate the file replacement process on the successful exit of
+> > >    the Python scripts.
+> > >  - Execute the replacement (with or without keep) only upon script
+> > >    success via the NEW HANDOFF_KEEP=3Dxxx variable.
+> > > [...]
+> > >
+> > > arch/arm/mach-socfpga/config.mk | 39 ++++++++++++++++++++++++++++++++=
+++++---
+> > >  1 file changed, 36 insertions(+), 3 deletions(-)
+> >
 >
-> Signed-off-by: Ludwig Nussel <ludwig.nussel@siemens.com>
 >
-> drivers/virtio/virtio-uclass.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+> Dear Simon,
+>
+> B.C. the server is down and I don't expect Google to have an auto fail
+> mailing recovery.
+>
+> > I see 6 copies of this v6 patch in patchwork, so I wonder if I got the
+> > right one?
+>
+> I will try to respond to this email as politely as possible.
+> Please reference from "patchwork.ozlabs.org" list.
+>
+> > The per-version changelogs belong below the '---' separator, not in
+> > the commit body. Also U-Boot convention is 'Changes in vN:' rather
+> > than 'Changelog vN -> vN+1:'.
+> >
+> > You could try using 'patman' which will get this right for you automati=
+cally:
+> >
+> > https://docs.u-boot.org/en/latest/develop/patman.html
+> >
+>
+> 1) I only do basic software
+> 2) I used ./script/checkpatch.pl There are no errors, warnings etc.
+> 3) There is nothing to do with the patch itself either the software
+> nor the file itself.
+> 4) I am not too familiar with patman
+> 5) There are many better things to do rather than complaining about
+> the patch headers.
+>
+> So forgive me I really don't give a damn on whatever the header requireme=
+nts.
+> If you feel this is not passing the patch standard simply reject or
+> label all patches to
+> "Changes Requested".
 
->     'Commit 70101c3217ae ("virtio: mmio: Return error codes on probe
->     failures")' returns -ENODEV in some situations. That breaks boot devi=
-ce
->     discovery. Ignoring that error seems to fix the issue. Not sure it's =
-the
->     correct thing to do though.
+That's up to whoever applies this patch. I am just a reviewer :-)
 
-Will need to firm up this commit message :-) Also drop the quotes
-around the leading Commit reference =E2=80=94 the convention is just:
+The reason for the formatting rules is mostly so that maintainers can
+apply them without manually redoing the patch, etc.
 
-   Commit 70101c3217ae ("virtio: mmio: Return error codes on probe
-failures") ...
+There is also this which might help (although you might not want more readi=
+ng):
 
-A Fixes: tag pointing to it would be useful too.
-
-> diff --git a/drivers/virtio/virtio-uclass.c b/drivers/virtio/virtio-uclas=
-s.c
-> @@ -382,7 +382,7 @@ static int virtio_bootdev_hunt(struct bootdev_hunter =
-*info, bool show)
->       ret =3D uclass_probe_all(UCLASS_VIRTIO);
-> -     if (ret && ret !=3D -ENOENT)
-> +     if (ret && ret !=3D -ENOENT && ret !=3D -ENODEV)
->               return log_msg_ret('vir', ret);
-
-I don't think this is the right layer. uclass_probe_all() walks every
-device in the uclass and returns whichever error came back last, so a
-single bogus mmio slot poisons the result for every other working
-virtio device. -ENXIO is also returned from virtio_mmio_probe() for an
-unsupported version and would still bail out here, which is
-inconsistent with what you are trying to achieve.
-
-As I understand it, the placeholder/empty mmio slots should not be
-reaching probe at all, i.e. the bind step should reject them - or
-virtio_mmio_probe() should keep returning 0 for the 'no device
-present' case (wrong magic, ID 0) and let DM treat that as nothing to
-probe. The unsupported-version case is the only real error.
-
-Could you take another look at 70101c3217ae and see whether the fix
-belongs there (or in the bind path) instead?
+https://docs.u-boot.org/en/latest/develop/sending_patches.html#commit-messa=
+ge-conventions
 
 Regards,
 Simon
