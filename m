@@ -4,98 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39ACCFF8867
-	for <u-boot@archiver.kernel.org>; Wed, 29 Apr 2026 14:46:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C44ECCFA13
+	for <u-boot@archiver.kernel.org>; Wed, 29 Apr 2026 14:46:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CA89384894;
-	Wed, 29 Apr 2026 16:46:12 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 1E714848BF;
+	Wed, 29 Apr 2026 16:46:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="fIsU83wi";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="uZkIW3KQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4F072848B4; Wed, 29 Apr 2026 16:46:11 +0200 (CEST)
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [IPv6:2a00:1450:4864:20::632])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 9877D848C5; Wed, 29 Apr 2026 16:46:43 +0200 (CEST)
+Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 69CE5841D7
- for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 16:46:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 171F1848BF
+ for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 16:46:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-baebe98afa0so741251366b.3
- for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 07:46:09 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1777473969; cv=none;
- d=google.com; s=arc-20240605;
- b=QU1ZclFrYKKb8eQMRR1a7O0/QXcRjGmacuWbMwcBM5xSyn/ys/Wsknq/B69oR9rd6P
- 14QuNq+4Tm3vp6tZolsW0b6XffSPXZCSIkZqwMAqUpJuxfLeBSJ0x2ISGtjGng8Rl8la
- h3FPgbXbnVjPNGtMydStm3VeO1wg6Cx4dROu+kgGBy/GT9O5NUdCN9IdLgYVKdznvozb
- TbUKQpyi0gSHhkpn+PpTtl4CH7eMPALkN/ZAgikDFsNTiilj9GWYw34c3DElOeb2RV0M
- 8KyzBe1O4Hefq6kzO0wzOjuH803UD5psQaGlcpn8EeUlT/toDRQ229KLWnyE2pp5lKak
- wYMQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=JDiJ7u/7VQtGyvXRNslL5D1lLFSODnAtsUgUDlLSYrE=;
- fh=RcQxRqe7UycvZcV76VWjauwHMbRaiieYSPPzjcGeqlY=;
- b=VlfDAqo8X/rSeU2Uqv3p8W/lHa0Dhube5w9eUTH9z4w59XhEwu2k+RgwwxAVQssFO7
- y3QVUWu27HnqPZ9cSWv2laZE54q/OoVi2jskqbltmh717tdElM3PQNKzjM97/Cyc6U/2
- HiTv3rMyhMx3t5Y52b6/ISgbBn87pfC/fHSmV976A6NAsf39ZwOtLZoQyDVd6mPzKHNf
- X6UHE1Di44Fu+bsRnKlUfPXTom98MxN29XrU0SEdioH15RvM3H+MgIpkUepdjfR3uNwu
- oESt9FBFNVC+WpD6z2OzWskDWW+JWF8NKpfYtL4triw8+sW4dDCs08A7j3Rozjau6cNU
- qnGw==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1777473969; x=1778078769; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=JDiJ7u/7VQtGyvXRNslL5D1lLFSODnAtsUgUDlLSYrE=;
- b=fIsU83wiFqHEZAJUqc5QVKBNCJmj3kqn2VQe60iQ0Nm9UIiACit6gmgwZfctyICHTU
- JXp9DrtIQf66ZDhLHgMaTVjgsiegHozx5l2KUvquQAs1zb7YEu3Mw1uuLnZxgoiPIbOO
- C7mQ5uVyFgY7wpaxxFSgp3lBL00VCc0Ok/sYc=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777473969; x=1778078769;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=JDiJ7u/7VQtGyvXRNslL5D1lLFSODnAtsUgUDlLSYrE=;
- b=GELbcwDi/AEWEspwkvO0s4ufto1Ju2d/lPcOCUW21ad4ruHhFtQfKQqWwsRgAAVg0N
- /GXZ3y05YrtbHSlbTBAZG9ajilMzMgV2mDhGh5emTDi65S+Ii0nMszZhj+fafLyGPgLt
- 6tmr0hw7DHUATlra25kYHSFMEf/OGvZFSHbH2cMYSZ8/XE+6oZ+rS26lkAq8XnWPcM1j
- EZc68rTqBB4019hlsQzzMqEQfxINdlpzoQtj2g7XgaaK8QjH0lGZP8HVQ8m23vNBPZNC
- 8Fg533oSLBgsB4loqO7a3upLC0vAZJ9eLvEG4ZQgsIK65RmVnfxBgKF1AgrEInFYg75V
- JwUQ==
-X-Forwarded-Encrypted: i=1;
- AFNElJ8/RLCUUndnCm1M+ZfxeqRkauYuOIi8vbJpSzMaeTU1wAOp+V3GzI8MokzRhVAYyg+3EqITXsU=@lists.denx.de
-X-Gm-Message-State: AOJu0YyvQ2Pquwg76ePz7h3YLPQjyduIMqGhLx4milqLJimo5JPRYxp4
- BCHs4WlIjnCuNwv9wmR275g3wWZMGogyDpvghX03DlEMFFxGC/vgkxju1SATVwQNOevR0WFnrgQ
- BZURzOufdZ6zvLRSPvMiUfoeQPPOFg+k74R2SDAzT8XYf7LH+nHetrw==
-X-Gm-Gg: AeBDievSfML3YJCygnwJI+PLR9F/IutM+zx3ASnRZNMgZpDMUCTG9cFW/1q7HcaaX3z
- 1yYJgqyEPNM1XZzKUHCnoWd82zD46QwWpvWrc0baZjAFjtOvzJsyJDQIKmoyJWXQaQ+e1zXcCdc
- RDYYzkutcxXRuH1DDw8d5e7XG+XAtWe6EzqolsJqLNyPMBJg9oG5ZtvwXCYFQAgkaYNX3Pay3rE
- EPeHzmw7Ty5iC5r16H7cK+i5IXBjUXN4OSFckKd0Mn3hufLfLKsZn/wie6JnVvWOa9yqTDBF+r1
- TaedF8wF9gW7mLma
-X-Received: by 2002:a17:907:3e9a:b0:ba8:a21f:9c4e with SMTP id
- a640c23a62f3a-bb93ce89d43mr262565366b.11.1777473968858; Wed, 29 Apr 2026
- 07:46:08 -0700 (PDT)
+ dmarc=pass (p=reject dis=none) header.from=bootlin.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=joaomarcos.costa@bootlin.com
+Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
+ by smtpout-04.galae.net (Postfix) with ESMTPS id CF89CC5EF2A
+ for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 14:47:24 +0000 (UTC)
+Received: from mail.galae.net (mail.galae.net [212.83.136.155])
+ by smtpout-01.galae.net (Postfix) with ESMTPS id 9AE06601DF;
+ Wed, 29 Apr 2026 14:46:40 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 0797410729F63; 
+ Wed, 29 Apr 2026 16:46:38 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
+ t=1777473999; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding; bh=Y/AgHeXrmyda9GTcDIbQ262lNG8IfGJLIDQkjT+gQoM=;
+ b=uZkIW3KQoimINfN66pHGczkq/70eyLZHwPWVpyIlXfO6YV7//uvyP6MaUWq+JT10sy0G8+
+ df4CcM5UCKhRe75IUrM+DirVI6wNAAA4Qj6tQtrKMqa6sAyAB+vq9wZJRYYqJAgrIcZ4Hc
+ acpa0P/6MCO/iGg9LgCEk9w9wPGs7oOWlD2shN+PxdOg9wa4z9VblVZ8WQugT5X3k3JGG/
+ En+kfKFQgJwoNXNE/g08cHeugSU5Zj+nINmdv2Galb41U4ba0L2SJ8wOO3FeqWw4Thb8cv
+ aSbDr/hNS5yPXOtcwoexCPJSxrOZC+SIi2xCTZTOrw0AH2RrrSKDAMVs5aJeAA==
+From: =?UTF-8?q?Jo=C3=A3o=20Marcos=20Costa?= <joaomarcos.costa@bootlin.com>
+To: u-boot@lists.denx.de
+Cc: thomas.petazzoni@bootlin.com, quentin.schulz@cherry.de,
+ marek.vasut@mailbox.org,
+ =?UTF-8?q?Jo=C3=A3o=20Marcos=20Costa?= <joaomarcos.costa@bootlin.com>
+Subject: [PATCH] scripts/dtc: drop yaml in DT validation
+Date: Wed, 29 Apr 2026 16:46:15 +0200
+Message-ID: <20260429144615.142350-1-joaomarcos.costa@bootlin.com>
+X-Mailer: git-send-email 2.47.0
 MIME-Version: 1.0
-References: <20260428142848.48156-1-heinrich.schuchardt@canonical.com>
- <CAFLszTgKkn0cwfv97FBVDK+FdCM-6BfasCvsA2oDe5qdzeuS4g@mail.gmail.com>
- <db5d98f7-1036-4842-b70c-b6c1e3625ded@canonical.com>
-In-Reply-To: <db5d98f7-1036-4842-b70c-b6c1e3625ded@canonical.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Wed, 29 Apr 2026 08:45:56 -0600
-X-Gm-Features: AVHnY4JFImAs1DtBG8n1fnPZhPcel_6iwNuf0kFvOAsQbwkN7Yikei-ino2vDCM
-Message-ID: <CAFLszTjQMuaCxOTD-ecZZBe6nC6R2s-xE_w7x00K2HO=G4mg6w@mail.gmail.com>
-Subject: Re: [PATCH v2 1/1] .clang-format: add U-Boot specific for each macros
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Tom Rini <trini@konsulko.com>, Javier Tia <floss@jetm.me>,
- u-boot@lists.denx.de, Quentin Schulz <quentin.schulz@cherry.de>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -112,49 +71,78 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+The build issues found in dtc/yamltree were partially mitigated by a
+previous commit (807bcd844a: "scripts/dtc: Fix pkg-config behavior under
+sysroot"), but upstream dtc simply disabled yaml, and the same should be
+done here in order to permanently avoid those issues.
 
-On Wed, 29 Apr 2026 at 08:42, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
->
-> On 4/29/26 16:21, Simon Glass wrote:
-> > Hi Heinrich,
-> >
-> > On 2026-04-28T14:28:48, Heinrich Schuchardt
-> > <heinrich.schuchardt@canonical.com> wrote:
-> >> .clang-format: add U-Boot specific for each macros
-> >>
-> >> Formatting via clang-format is controlled by .clang-format.
-> >> For each statements should be formatted with a brace at the line end:
-> >>
-> >>      for_each() {
-> >>      }
-> >>
-> >> This requires clang-format to know that the symbol is not a function
-> >> but a for each macro. We use some for each macros which don't exist in
-> >> Linux. Add these to file .clang-format.
-> >>
-> >> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> >>
-> >> .clang-format | 51 +++++++++++++++++++++++++++++++++++++++++++++++++++
-> >>   1 file changed, 51 insertions(+)
-> >
-> > Reviewed-by: Simon Glass <sjg@chromium.org>
-> >
-> >> diff --git a/.clang-format b/.clang-format
-> >> @@ -748,6 +748,57 @@ ForEachMacros:
-> >> +  # U-Boot specific
-> >> +  - '__for_each_child_of_node'
-> >
-> > Should the 'git grep' recipe include drivers/ and arch/ as well?
->
-> Thanks for reviewing.
->
-> What I did was removing the directory restriction completely.
->
-> If we really need a comment, it would have to be in the # U-Boot section.
+Backport the change below from Linux v5.18 [1]:
 
-It doesn't seem important. I was referring to the '# Taken from:' comment.
+ef8795f3f1c ("dt-bindings: kbuild: Use DTB files for validation")
 
-Regards,
-Simon
+I tested this patch with a couple Yocto builds: u-boot and u-boot-tools,
+using the current master branch (rev. "c53b0708f9"), having removed
+libyaml-native from u-boot-tools's dependencies.
+
+[1] https://git.kernel.org/linus/ef8795f3f1ce
+
+Signed-off-by: João Marcos Costa <joaomarcos.costa@bootlin.com>
+---
+ scripts/Makefile.lib             | 6 ------
+ scripts/dtc/Makefile             | 8 --------
+ scripts/dtc/update-dtc-source.sh | 2 +-
+ 3 files changed, 1 insertion(+), 15 deletions(-)
+
+diff --git a/scripts/Makefile.lib b/scripts/Makefile.lib
+index b8969b7de54..d66f1ed13b1 100644
+--- a/scripts/Makefile.lib
++++ b/scripts/Makefile.lib
+@@ -86,12 +86,6 @@ base-dtb-y := $(foreach m, $(multi-dtb-y), $(firstword $(call suffix-search, $m,
+ extra-y				+= $(dtb-y)
+ extra-$(CONFIG_OF_ALL_DTBS)	+= $(dtb-)
+ 
+-# U-Boot specific
+-ifneq ($(CHECK_DTBS),)
+-extra-y += $(patsubst %.dtb,%.dt.yaml, $(dtb-y))
+-extra-$(CONFIG_OF_ALL_DTBS) += $(patsubst %.dtb,%.dt.yaml, $(dtb-))
+-endif
+-
+ # Add subdir path
+ 
+ extra-y		:= $(addprefix $(obj)/,$(extra-y))
+diff --git a/scripts/dtc/Makefile b/scripts/dtc/Makefile
+index 6f309b37e08..2ba8dba03be 100644
+--- a/scripts/dtc/Makefile
++++ b/scripts/dtc/Makefile
+@@ -17,15 +17,7 @@ fdtoverlay-objs	:= $(libfdt) fdtoverlay.o util.o
+ # Source files need to get at the userspace version of libfdt_env.h to compile
+ HOST_EXTRACFLAGS := -I$(srctree)/$(src)/libfdt
+ 
+-ifeq ($(wildcard $(PKG_CONFIG_SYSROOT_DIR)/usr/include/yaml.h),)
+ HOST_EXTRACFLAGS += -DNO_YAML
+-else
+-dtc-objs	+= yamltree.o
+-# To include <yaml.h> installed in a non-default path
+-HOSTCFLAGS_yamltree.o := $(shell pkg-config --cflags yaml-0.1)
+-# To link libyaml installed in a non-default path
+-HOSTLDLIBS_dtc	:= $(shell pkg-config --libs yaml-0.1)
+-endif
+ 
+ # Generated files need one more search path to include headers in source tree
+ HOSTCFLAGS_dtc-lexer.lex.o := -I$(src)
+diff --git a/scripts/dtc/update-dtc-source.sh b/scripts/dtc/update-dtc-source.sh
+index 32ff17ffd08..94627541533 100755
+--- a/scripts/dtc/update-dtc-source.sh
++++ b/scripts/dtc/update-dtc-source.sh
+@@ -32,7 +32,7 @@ DTC_UPSTREAM_PATH=`pwd`/../dtc
+ DTC_LINUX_PATH=`pwd`/scripts/dtc
+ 
+ DTC_SOURCE="checks.c data.c dtc.c dtc.h flattree.c fstree.c livetree.c srcpos.c \
+-		srcpos.h treesource.c util.c util.h version_gen.h yamltree.c \
++		srcpos.h treesource.c util.c util.h version_gen.h \
+ 		dtc-lexer.l dtc-parser.y"
+ LIBFDT_SOURCE="fdt.c fdt.h fdt_addresses.c fdt_empty_tree.c \
+ 		fdt_overlay.c fdt_ro.c fdt_rw.c fdt_strerror.c fdt_sw.c \
+-- 
+2.47.0
+
