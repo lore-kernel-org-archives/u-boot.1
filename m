@@ -4,95 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B6CBFF8867
-	for <u-boot@archiver.kernel.org>; Wed, 29 Apr 2026 14:14:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB6D0FF8873
+	for <u-boot@archiver.kernel.org>; Wed, 29 Apr 2026 14:14:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F255A846BA;
-	Wed, 29 Apr 2026 16:14:07 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7AD8584882;
+	Wed, 29 Apr 2026 16:14:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="EqzOJ6eU";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="FQDL78On";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 933E584894; Wed, 29 Apr 2026 16:14:06 +0200 (CEST)
-Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
- [IPv6:2a00:1450:4864:20::62e])
+ id 61B09848A0; Wed, 29 Apr 2026 16:14:44 +0200 (CEST)
+Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
+ [IPv6:2a00:1450:4864:20::635])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9CB1284658
- for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 16:14:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5C9C4846BA
+ for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 16:14:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-ba67b332bbaso1544326566b.0
- for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 07:14:04 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1777472044; cv=none;
+Received: by mail-ej1-x635.google.com with SMTP id
+ a640c23a62f3a-ba8472c1613so1848716266b.0
+ for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 07:14:42 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1777472082; cv=none;
  d=google.com; s=arc-20240605;
- b=k6aEPBD1R/zbyKkbctN4tB3jZIJvuqppd89Hc1YyGuAZFSghRiNAhhbYgh56lfjGFr
- KWqxJm8CdRg45phAsBMCTyHh8x3Uc25u8igU7ngq6Q5MFBRk0IUPb7eifNa9yWLVdBAL
- JVu5B8mYJTko2oW1mwQTswLB4MggoYdPim6/r7EjuTpT2dKH12zEEmh7mjsFpqmpvUj3
- RXoxlSoF9qCXH0Op1NBbMFa3bimBcejHNM4jZswXulrPWZN3M7MQxjtMG2zFfdyOUr4j
- PuleG01xQJ7+uFSoGfKL0+naPcJhiVQ6zN2822ot3he82HY7Tf/25hfvGW/iBXwm0coc
- 7ANg==
+ b=Foz24GNYRnt5YSt4HqitbE7YUcSF51y0KDraGAjQLxnGa3tywt0/Zch2yc5ER9ZLKD
+ v6DUGxe1n3mRNdm8WxDY9Yz7Z1shgFpvy40+/CawU3VR3t7J3jTbBnLkmbD0SObK3N25
+ iXtcHkLcTBwJlbuV2HXLnUJ4ockO97al6D204fnR/DsJkrqFD5XuH169PnQRCCKVCwB7
+ EVn4v0hHEdZsQysC9jOgKM+RZP3bs3mlD6eclw32q4zaaXloSFxK1krPlg0sYvoal5jI
+ 19FaMgGdRlVQsQ8X/DeeciebnP/8rSqsI7kwbgnrQGrO2q/shEvGOqJ5V2rHkspW5B6c
+ NnoQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=iz+LftIWeghlqd1jI5NcM/nIih2dGG5bVP0TaB6YI8I=;
- fh=OF00omt3W5XkTWoy8yz+VALjHs5aNJpNm30/GdQrL1I=;
- b=KVpXf5gxJbtIFdl2/AYko64AyuqsZZvJ/3b38vnCPTuayrpWmgTGbraqmkKoon+E6v
- 0jJDNkL/Ct2ewsXRGWJuZqlGVUSItOMBy6lMbH8j9mVGojxlwGf8s090c1Tx7jbJs7p4
- fehn5MfPHDa+42uN9qoshiayTvH3WEWojYlgE5gWoB9sNeLA+HBY+23Y8X551DFDic2R
- eE2dwRQJhOPncrgbgTIbxp1YfHkzwA8K+fRJmqC78lU9tUxUXcyPM55FKgbyjvp8zfcq
- auRQAwFL+HB9/S8XDQsKktIt63CFcPfqoFd4Joh/XIDorxAR6R/nxvdu6eKUlIX9hoUD
- OzSg==; darn=lists.denx.de
+ bh=Y1MjXVTQFUnLVm36bSBya06/3dkWUPRvCDClVs5pQP8=;
+ fh=Pxf4OEzlPrqi1OIjLsU8Uii8jKBvtXCinaJy1tLkUBk=;
+ b=YM2fEVtMBnxU8q2HVyekJHTeWujmyYTbZF/YiGVFRoN/W6janOGNggX2lHsLGCTcto
+ geH5JAFcRa6C2Ggz0t3vcIibQPpRce+IQlPxFXtOvUnBjt3Ds4bBPWeIETKSPUM46GGt
+ hqXd8dcD6QloqjctiEUlziheSthdk6f2p296xD1ryIv3Y4Z2L4ppvyLjoNxaofryh1SA
+ zb4fg4/97pJ1tfEFjwGP8SgOpY0f9/Aw+y9A0zr3IkIjryu8C8kfxwhTDO9L2C4QYkVk
+ E1oOV+aITvSYiyQYKz+jd/xkNcAfQJFOT1vvk+jTvaondG7fu03uimKQZKZA7oFDmSga
+ F2qw==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1777472044; x=1778076844; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1777472082; x=1778076882; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=iz+LftIWeghlqd1jI5NcM/nIih2dGG5bVP0TaB6YI8I=;
- b=EqzOJ6eUt4S9uLoNATydEU2IJ7A3XZ92CyT8AFURUR5owTZK4rxt7LEX1J4NIizcq2
- /hZuWXxrTXzwWgfF0G6JUEF5UXFPH9hX/m7KEJqdTPjvxSsCSukXUDJIisjMz7kh2x7X
- TQUF7dbV/ofwsA/EKoU/95N0HcmkXbgh28ECg=
+ bh=Y1MjXVTQFUnLVm36bSBya06/3dkWUPRvCDClVs5pQP8=;
+ b=FQDL78On5PsD1D+sKxaxkxBAiTKorVphwOY5s60cXOY0ursy9yBcXJsTlkpgh4wZ3b
+ 7hWDokgf02fIffjVlp26U7LGWJmoczGCKsWmk4W0+XTbRVFdXBKgItZTUQ5CDj5vcIp4
+ /sD3V9zxFEXEzaGmkQIfjm6bvXE2FDESJx0hY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777472044; x=1778076844;
+ d=1e100.net; s=20251104; t=1777472082; x=1778076882;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=iz+LftIWeghlqd1jI5NcM/nIih2dGG5bVP0TaB6YI8I=;
- b=XNu+GNEWOXbEht3psiJGaMtxFiPU27qSHUJPeCHn4KjnI19fnAJKYO92y+i9SP4SPx
- Grt+m2U2UhJ+y4FlBSj9kbYYVbY683WTjQhRF2x6Fj+/2A/FCjsV983y3e1E7JU8AtcW
- Ax+s6iUrGDQyzimeWwAV+WB2os078HDDOyROvi6HjISlk9jAn3v0d2y1OITLk70f4I+O
- tom5xwRybicu5Lm9kkoS4cOpNKjdDjEUo+cXHPMF9f7cNUs8XQzRL6h9DbIi19PvizPc
- YILWsoCFn72oL9Ntx0mLCO5cK3ALni3S3Io9XD5BOFpMDzh8Z8wybIUsi27C8mHNGD5D
- K17Q==
-X-Gm-Message-State: AOJu0Yy8HDZMHuZLnwY+N+vPxUMsqoHASxLPy60K00kvqV+fccsQHDbf
- PO90ggnnIexpF/5r5D+hC2zXJPRCvpfjknApcZ9xACuG1Y+q0E19/yAapDHmU1ufZxm4ZGb+8z0
- amEEyBCLoBVo5Jh7nyl4DgFhP5wkpifo9DcEv5uod
-X-Gm-Gg: AeBDiev2i8Qyc0I9wabG2fJMiTvBetdQ6YUD5SuDHn7tfg49C2+oy9fRjdPuaAHBEAZ
- JgciquruYwv721vHitdjfVx0jE+5AZIO87uLMTxRkMerd4xPO3l40pLekrvIoowNFWMeTi3aNwU
- CJ8+mwvuaIvG9C0nX8IrF743iDhIbRyvi3ob2DLAlcjIlwPi0qLEwSDZUsalEc5FjWNSLzw3OYs
- Q4f3y17Z75+NHi9rYdb+FCnlTdYS7BwOYe3nlaKFZTdK1PN5G72R1Rci6sgFHqnC6OAhmtwumrf
- Jqr3DEpN749LKLF+
-X-Received: by 2002:a17:907:1c29:b0:ba3:cacd:b9f6 with SMTP id
- a640c23a62f3a-bb93c4a30e4mr284468466b.7.1777472043930; Wed, 29 Apr 2026
- 07:14:03 -0700 (PDT)
+ bh=Y1MjXVTQFUnLVm36bSBya06/3dkWUPRvCDClVs5pQP8=;
+ b=DeqJE8+/zey8ww42llzfwhd8HusaNIF3TAq1+waKMLKeByWEEfuBAKfTAoVMRYvKvX
+ vug2Hei9BKkrTIA08pPYDuTK35jkdehwR468Titj9hOru+93NmoT4rBo0Dw9pXlqxBcQ
+ /g1ApKbL1HA8FRwEXUvYqsuILL7YRbeFssue6z1WGqlFJQcayDQXtIDDG/y++CQcH/2K
+ R/sx5g3yOo19q/unAyEv2N34pnZ0/FCaAydMlvWlEvtRN59MszFKhks6YUPvLSMlYsha
+ ZU/3Las1Z1A/lPBLHHbdAncaOlm3YDnC1bEXJO4XS4xHMVY2c87VyvbgD6ZnPbngGl8t
+ DPpQ==
+X-Gm-Message-State: AOJu0Yz0XhYBmt/zlNkNfmX0AVq7glrhzcANSKOjd1skTSIjiIwW1pge
+ NnX06sVVSxF622ZbDccjpHNq1dQpblHlS2um4Mw0mVh4b8RI1HMFAEn50SuzBw1M4UP5gvaiJoF
+ CYknmAJpSWt7xBfhnqTX/o5ZOWuuA7y2WQ/pNFvI1
+X-Gm-Gg: AeBDieuWufjWmx47S9fGoHgzn9AfNY51zYwKlzVDpHD4dL13VJbY4nwb+4AP6EqMBam
+ r0JYxIMwp3Qj1PbOgLT5p5UUxp3KZqIxjh4IPZimT03qWJMA9PIkJAMbDa6qrozNIOq+ga1F2Jh
+ R6GqPdgA55RY2GSI2F5J9EImDNkcyei14aldEhUOax7TkU8DD8iUDTgxExqEzBA/1d3/m3xHhLz
+ SyqveuudNRCILpp5/XUfW6kZZQuXaoJyK9sHRmhAroaK6IEG4mpxoH30cxBtrUlzqyuv/lLzwP7
+ fsd5J8Gncm0e+/OE
+X-Received: by 2002:a17:907:c91f:b0:ba8:4dc2:a661 with SMTP id
+ a640c23a62f3a-bb8015ef71amr335754266b.7.1777472081795; Wed, 29 Apr 2026
+ 07:14:41 -0700 (PDT)
 MIME-Version: 1.0
 References: <cover.1776954004.git.jcethrid@gmail.com>
- <5d645926dd3c38d172b6bf28b4ee7ff8981ad865.1776954004.git.jcethrid@gmail.com>
-In-Reply-To: <5d645926dd3c38d172b6bf28b4ee7ff8981ad865.1776954004.git.jcethrid@gmail.com>
+ <dd31cfe89b1d2d8d207d5c91a2a5e9783c917ab4.1776954004.git.jcethrid@gmail.com>
+In-Reply-To: <dd31cfe89b1d2d8d207d5c91a2a5e9783c917ab4.1776954004.git.jcethrid@gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 29 Apr 2026 08:13:52 -0600
-X-Gm-Features: AVHnY4LcQae-H8HUQgpvSOqKAUQcgzCdNH8EPY5pAMjJNAUI_N9BV4Atzx_Dfn0
-Message-ID: <CAFLszTjUJrBzOkBr=pKrxZz2s4RU5SWnS8wpLJZFyNrFxfULUw@mail.gmail.com>
-Subject: Re: [PATCH v5 11/15] configs: sc5xx: Set default bootcmd to SPI boot
+Date: Wed, 29 Apr 2026 08:14:28 -0600
+X-Gm-Features: AVHnY4LpRQOtpQzfKxzLsWegUcwgUoY_LHHMtpVtBy7iOl_XsjRgHjAwQQVdyFg
+Message-ID: <CAFLszTiFnbpGQH7RwbqhGVdkX+9kV=Bc3rkbmeX8aMYm40w+YQ@mail.gmail.com>
+Subject: Re: [PATCH v5 12/15] arm: sc5xx: Remove SC5XX_LOADADDR
 To: jcethrid@gmail.com
 Cc: u-boot@lists.denx.de, malysagreg@gmail.com, trini@konsulko.com, 
  linux@analog.com, philip@philipmolloy.com, sjg@chromium.org, 
- Caleb Ethridge <caleb.ethridge@analog.com>
+ Caleb Ethridge <caleb.ethridge@analog.com>,
+ Ozan Durgut <ozan.durgut@analog.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -110,49 +111,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Caleb,
-
 On 2026-04-23T14:24:50, Caleb Ethridge <jcethrid@gmail.com> wrote:
-> configs: sc5xx: Set default bootcmd to SPI boot
+> arm: sc5xx: Remove SC5XX_LOADADDR
 >
-> Align configs to use the same default bootcommand.
+> Remove the SC5XX_LOADADDR Kconfig option, replace its users with
+> CONFIG_SYS_LOAD_ADDR, and update the ADI boot environment to use
+> loadaddr.
 >
+> SC5XX_LOADADDR was an ADI-specific duplicate of standard U-Boot
+> load address handling. U-Boot already uses CONFIG_SYS_LOAD_ADDR
+> for the default load address and loadaddr for boot commands,
+> so keeping separate SC5XX-specific names is redundant.
+>
+> Signed-off-by: Ozan Durgut <ozan.durgut@analog.com>
 > Signed-off-by: Caleb Ethridge <caleb.ethridge@analog.com>
 >
-> configs/sc589-ezkit_defconfig          | 2 +-
->  configs/sc589-mini_defconfig           | 2 +-
->  configs/sc594-som-ezkit-spl_defconfig  | 2 +-
->  configs/sc594-som-ezlite-spl_defconfig | 2 +-
->  4 files changed, 4 insertions(+), 4 deletions(-)
-
-> diff --git a/configs/sc589-ezkit_defconfig b/configs/sc589-ezkit_defconfig
-> @@ -22,7 +22,7 @@ CONFIG_FIT=y
-> -CONFIG_BOOTCOMMAND="run ramboot"
-> +CONFIG_BOOTCOMMAND="run spiboot"
-
-The commit message says "Align configs to use the same default
-bootcommand", but after this patch sc573-ezlite and sc584-ezkit still
-have CONFIG_BOOTCOMMAND="run ramboot". Both define USE_SPI, so spiboot
-is available there too. Please update those defconfigs as well, or
-mention this in the commit message.
-
-Also worth noting the motivation, that with the environment no longer
-stored in SPI (patch 1) and the new SPI partitioning from patch 3, SPI
-is now the intended default boot medium.
-
-> diff --git a/configs/sc594-som-ezkit-spl_defconfig b/configs/sc594-som-ezkit-spl_defconfig
-> @@ -15,7 +15,7 @@ CONFIG_FIT=y
-> -CONFIG_BOOTCOMMAND="run ospiboot"
-> +CONFIG_BOOTCOMMAND="run spiboot"
-
-Just to check - patch 3 keeps a distinct ospiboot target (with its own
-ospiargs setting sfdev to the OSPI bus/SSEL), so switching the sc594
-SOM boards from ospiboot to spiboot now points them at the SPI bus
-instead of OSPI. Is that intentional on these OSPI-equipped SOMs, or
-should the bootcmd remain "run ospiboot"? Please spell this out in the
-commit message.
+> arch/arm/mach-sc5xx/Kconfig                     |  6 ------
+>  board/adi/sc573-ezlite/sc573-ezlite.env         |  3 ---
+>  board/adi/sc584-ezkit/sc584-ezkit.env           |  3 ---
+>  board/adi/sc589-ezkit/sc589-ezkit.env           |  3 ---
+>  board/adi/sc589-mini/sc589-mini.env             |  3 ---
+>  board/adi/sc594-som-ezkit/sc594-som-ezkit.env   |  3 ---
+>  board/adi/sc594-som-ezlite/sc594-som-ezlite.env |  3 ---
+>  board/adi/sc598-som-ezkit/sc598-som-ezkit.env   |  3 ---
+>  board/adi/sc598-som-ezlite/sc598-som-ezlite.env |  2 --
+>  configs/sc573-ezlite_defconfig                  |  2 +-
+>  configs/sc584-ezkit_defconfig                   |  2 +-
+>  configs/sc589-ezkit_defconfig                   |  2 +-
+>  configs/sc589-mini_defconfig                    |  2 +-
+>  configs/sc594-som-ezkit-spl_defconfig           |  2 +-
+>  configs/sc594-som-ezlite-spl_defconfig          |  2 +-
+>  configs/sc598-som-ezkit-spl_defconfig           |  2 +-
+>  configs/sc598-som-ezlite-spl_defconfig          |  2 +-
+>  include/env/adi/adi_boot.env                    | 24 +++++++++++-------------
+>  18 files changed, 19 insertions(+), 50 deletions(-)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
-
-Regards,
-Simon
