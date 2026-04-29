@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7D49FF8867
-	for <u-boot@archiver.kernel.org>; Wed, 29 Apr 2026 06:08:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23874FF8867
+	for <u-boot@archiver.kernel.org>; Wed, 29 Apr 2026 06:10:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 46AFF846E2;
-	Wed, 29 Apr 2026 08:08:30 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8E6B48482E;
+	Wed, 29 Apr 2026 08:10:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="IXGb7FcR";
+	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="d7leZm3V";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B3ADC846E7; Wed, 29 Apr 2026 08:08:28 +0200 (CEST)
+ id 0C40C847B0; Wed, 29 Apr 2026 08:10:38 +0200 (CEST)
 Received: from mx.nabladev.com (mx.nabladev.com [178.251.229.89])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D73AE83FB5
- for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 08:08:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F20A584706
+ for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 08:10:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=nabladev.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@nabladev.com
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 620BF114E88; Wed, 29 Apr 2026 08:08:24 +0200 (CEST)
+ with ESMTPSA id 8E8B91147AF; Wed, 29 Apr 2026 08:10:31 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
- s=dkim; t=1777442905;
+ s=dkim; t=1777443033;
  h=from:subject:date:message-id:to:cc:mime-version:content-type:
  content-transfer-encoding:content-language:in-reply-to:references;
- bh=Pb/8Xj8Z0n+dgCfgQhz9gRgK0hJZcj2p/+EuR1QwQZA=;
- b=IXGb7FcRnmFndqmuGdFTXBCDf7L0Qi3VBJ2Cz9BZXJPP/61z/5hlYOfqF7ovJL2cSZHJkf
- yi5Co4nkvfYUgugJ4ZmuD0C1VG4x3ovjKgGg/L2Bry8NHOrRYGggl6CTvM6JhvCw3q9+xc
- eEW8KfqS7SdAtQC+E73xuLX4AD8GW0Fl9HDCiEdc4pF0Wxzqc3t3QMWFchPTSdzjbRAxDn
- EP+tki07S9x04o0/HOwRfHEJ38b4PrS2kwWaFFMXL+Y69q0wnc7BinK/JoCXl3sqKNyIbs
- DaMNf2UqF8uxXl/Ru2l/otXADWOLTQn7Fu+8wBClxZ3/zaDB0pXn8CYYNvev+w==
-Message-ID: <26477419-5e85-c1da-738b-80dee4dbd73e@nabladev.com>
-Date: Wed, 29 Apr 2026 08:08:09 +0200
+ bh=mqWq3SMe8UaX5YCkgA0c1v7n4IYEU1eDL0xHcvIH1+s=;
+ b=d7leZm3V+Prn87yPuY0dQRjrEkjR0LDpq7BHRex0P2AFo4Lk/ZANoSvvDMdSLzEddIL588
+ ujeOoSTY/Up3w+kSlWIGUKbOEuqEgUE1cdkZ9oX2LhKDvoCN//uBzxDXBBt6ZxzAKEiB53
+ DyO6stOPicjbGRTxk/s/qlveHfcddlcrkBxkOjcIDU9A+QspLDxuGqcmpW8VwbmfcnuDNo
+ taDA94l4yuSKL6Cc8YM45FIdXd+SacKXiB9CrYBsDCfXs/Omm/9R61R6oyNC5vVTQFUtlM
+ lgUjwlY16ASY0KgPyQy4Jn2vZGrsC0yfBXXitXGwNYIY4s9z9a5Fs3dDTieJOw==
+Message-ID: <df8f5a31-8ea8-b1cb-6807-4b1bb78cdf03@nabladev.com>
+Date: Wed, 29 Apr 2026 08:10:16 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
  Thunderbird/91.2.0
-Subject: Re: [PATCH 1/3] arm: dts: a10: Correct i2c scl falling time
+Subject: Re: [PATCH 2/3] i2c: designware_i2c: Remove clk disabled codes
 Content-Language: en-US
 To: dinesh.maniyam@altera.com, u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>, Dinh Nguyen <dinguyen@kernel.org>,
@@ -52,9 +52,9 @@ Cc: Tom Rini <trini@konsulko.com>, Dinh Nguyen <dinguyen@kernel.org>,
  Tien Fong <tien.fong.chee@altera.com>, Kok Kiang <kok.kiang.hea@altera.com>,
  Boon Khai <boon.khai.ng@altera.com>
 References: <cover.1777439293.git.dinesh.maniyam@altera.com>
- <11ad4489fcd6747099ee82feac2e4613df26192c.1777439293.git.dinesh.maniyam@altera.com>
+ <2e5bd18743849a8be91ad4690075a545fa56177c.1777439293.git.dinesh.maniyam@altera.com>
 From: Heiko Schocher <hs@nabladev.com>
-In-Reply-To: <11ad4489fcd6747099ee82feac2e4613df26192c.1777439293.git.dinesh.maniyam@altera.com>
+In-Reply-To: <2e5bd18743849a8be91ad4690075a545fa56177c.1777439293.git.dinesh.maniyam@altera.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-Last-TLS-Session-Version: TLSv1.3
@@ -79,39 +79,38 @@ Hello Dinesh,
 On 29.04.26 07:11, dinesh.maniyam@altera.com wrote:
 > From: Dinesh Maniyam <dinesh.maniyam@altera.com>
 > 
-> The value set for i2c-scl-falling-time-ns in Linux DTS is not
-> compatible for the i2c driver in U-Boot. The value is updated
-> to the max value specified in the HW spec.
+> l4_sp_clk is disabled when i2c device is removed, this would
+> causing unexpected failing behavior for other peripherals which
+> are still running with l4_sp_clk. The patch removes the codes
+> implementation for disabling the lp_spl_clk.
 > 
 > Signed-off-by: Tien Fong Chee <tien.fong.chee@altera.com>
 > Signed-off-by: Dinesh Maniyam <dinesh.maniyam@altera.com>
 > ---
->   arch/arm/dts/socfpga_arria10_socdk-u-boot.dtsi | 5 +++++
->   1 file changed, 5 insertions(+)
+>   drivers/i2c/designware_i2c.c | 4 ----
+>   1 file changed, 4 deletions(-)
+> 
+> diff --git a/drivers/i2c/designware_i2c.c b/drivers/i2c/designware_i2c.c
+> index 8ad716f410e..40153c72545 100644
+> --- a/drivers/i2c/designware_i2c.c
+> +++ b/drivers/i2c/designware_i2c.c
+> @@ -807,10 +807,6 @@ int designware_i2c_remove(struct udevice *dev)
+>   {
+>   	struct dw_i2c *priv = dev_get_priv(dev);
+>   
+> -#if CONFIG_IS_ENABLED(CLK)
+> -	clk_disable(&priv->clk);
+> -#endif
 
-Thanks!
-
-Reviewed-by: Heiko Schocher <hs@nabladev.com>
+Hmm... clock framework should have a counter how many times clock
+is enabled... with your patch, clock never gets disabled...
 
 bye,
 Heiko
-> 
-> diff --git a/arch/arm/dts/socfpga_arria10_socdk-u-boot.dtsi b/arch/arm/dts/socfpga_arria10_socdk-u-boot.dtsi
-> index 56d50ecee30..4857939ce1a 100644
-> --- a/arch/arm/dts/socfpga_arria10_socdk-u-boot.dtsi
-> +++ b/arch/arm/dts/socfpga_arria10_socdk-u-boot.dtsi
-> @@ -12,6 +12,11 @@
->   	};
->   };
+> -
+>   	return reset_release_bulk(&priv->resets);
+>   }
 >   
-> +&i2c1 {
-> +	/* Max value set according to HW spec */
-> +	i2c-scl-falling-time-ns = <300>;
-> +};
-> +
->   &uart1 {
->   	bootph-all;
->   };
 > 
 
 -- 
