@@ -4,91 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07C53FF887E
-	for <u-boot@archiver.kernel.org>; Wed, 29 Apr 2026 17:15:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E78CFF887E
+	for <u-boot@archiver.kernel.org>; Wed, 29 Apr 2026 17:16:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 99161848E3;
-	Wed, 29 Apr 2026 19:15:55 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E7381848D1;
+	Wed, 29 Apr 2026 19:16:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="WpOo3iD4";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="XRra5dXs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 056D7848DA; Wed, 29 Apr 2026 19:15:54 +0200 (CEST)
-Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
- [IPv6:2a00:1450:4864:20::62a])
+ id 081E0848D4; Wed, 29 Apr 2026 19:16:46 +0200 (CEST)
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
+ [IPv6:2a00:1450:4864:20::62e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 22B6F848E3
- for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 19:15:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0A1E2848CE
+ for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 19:16:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-b93698bb57aso12802366b.0
- for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 10:15:52 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1777482951; cv=none;
+Received: by mail-ej1-x62e.google.com with SMTP id
+ a640c23a62f3a-ba3115fe0d5so213059566b.1
+ for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 10:16:44 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1777483003; cv=none;
  d=google.com; s=arc-20240605;
- b=EGg2uDdHIltCO1shUJ8qNz0jUoV61l48P037VimNN+JC8rLcTeZDqBoDFJbU90hSN0
- LZhOA/nwPib9jPDVIgLT3FFaqW6qieYfRCX+cKBmAXZe9M41EniNgAE9So/6wiBBl0aa
- D1XdnhS1c3ccdMcV9GlWhqZtQnMTTHJJJbyQN4wUEv/H6FcBSFMQY400I3nIGMenMZMX
- Yzc7c6XWzmbGxMmVrpbO+oj4jeP1TZ9Ouhpyre4jCLBlc/kMW66+95Ng66rAlS7HTUTd
- jvYsNRkQhZNlO0odvQPlFt8nR7z4KQfSz1twuO+Gmy0eCKz5uQ4bK/hyBWmvBLfRMIFn
- D05A==
+ b=jUpQUryvTzDBxwr2kNv08LScZxGJ4Hum6mmJb/TyEZ5XMEnZJ5n8zL4tJtSpPZ57/s
+ 9x6f5fDUsiavV6OgQp/GX8HxsBtxNsGWzHLBDeT+g76Kjo23PteV4osuk9SFH6KIlOww
+ jBbWB7Oaw9UpAdEwL5ECs6vt1BR51NYDAeHJAmbPMnUqKeNmE51DYVM364TslLf3DjUh
+ tYaX2MKn2+cIRJq7zE+pvWXqTsSRX9h0VEnFDPGWAgYC+rQpLxtt3diVDdfXg1zAfUf1
+ QSVDz1ErFhpw0e95j+pEutxvsVUo9dmfVQ97BaE+9AFQk5KxrzA035YQE7WPtsOscPWa
+ AO+A==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=LKZt+EUDNDlqVqpI5cAP28h2ZHC5stxPvVoU6xcUKk0=;
+ bh=frbBwfaCJ+D9pSOsJ8IGHPA8MHOp6ENYp/STkSqhdYU=;
  fh=+/pNFDyGYsDJMoXpsFeigOK5l3QyGzKdfAevrQne9bY=;
- b=hctVe6Mjt/1eVhcxnUwNufgL/Ik08tbf130MnrIBp2BZk+SzWm7BynmEEmuLmW9UQE
- PVN5s+DL6nZ4OcZUPLx+/Sd/x4I7n0HNY0q0kgQNqKBke17PTPSqlJXI06n2+tmn7zr8
- PvZRKmP6QA/WB0TSPPsaUVAOKwMSia7OLwlxRIdioxyg5Zp7tPQUOD9dqvEQlQXWc7RB
- 4FAncgKZWZRPyswwpyEdrzxc9khT2V6SUFGi7tgssPl2H5zZpmIz0Rx+2gLNSLcZic8W
- bzJTiTQJDJG1zk4k6XFH4pds9naHN5CwF832Yu47HVjCvPBdO1ihzMyoDkT5cFyMvygh
- GkVA==; darn=lists.denx.de
+ b=I0+D7eincEeHhs/TuoghtBwUpMPEGfYUqJRhgCJ6CCX8VHyoBh6c9BMt5yfe/LHNWK
+ LHTQiXc9a58F/ORigKl74C51tH62BJI709Udb/lMHHy/3o+5VT2+xUy29Cfhzgj43J+c
+ /YsxifsFfvvdpS/3/1++d4dK7nK//h9P/Xe8TMiBCpnMEaVxGgSuhOHtdXf7ngMgru4r
+ N+4rqcUjGzbE/aqaWQnt/Sksf8k8Lwywn2DnK/be7iFESCyMndcnVOJtVvU3cwbABOaO
+ v1a32NeelcTz9PcctCEVDorNalHBawx4PSc64oCRejSeJILB5maqq34Xv2769Uftcs3I
+ 6qKA==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1777482951; x=1778087751; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1777483003; x=1778087803; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=LKZt+EUDNDlqVqpI5cAP28h2ZHC5stxPvVoU6xcUKk0=;
- b=WpOo3iD4NIcciOSjt2ySBmyTOT3wljCOxyHvCQ0oKl0ETfN4NMilniSiwmw+9PUZxF
- 0DMwcGCR7vqU/H51vDp8wwPNjPy6Bk+3RbjgkBALXJSYY1x65T6bcq2VInn4GLTaoLoW
- ThQYHR7vms8ReiNn5mXO9ke0IdAqGztqka3k0=
+ bh=frbBwfaCJ+D9pSOsJ8IGHPA8MHOp6ENYp/STkSqhdYU=;
+ b=XRra5dXs5cfOxoDrAxYqSV0K1K74ZI7xJkUGY8aQrgAOMgkXFWioKiXy2A8qe/baw2
+ /+yYohx0HuQVwgTLpsEU2qOP6CUlE5FKxJuh2jbNbZRLw62DagS/gD2G0OnCF7Ssx+Lz
+ 0JWR7o0TmToXJt2kzOuPfdNvcRsZPp/+FP7f4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777482951; x=1778087751;
+ d=1e100.net; s=20251104; t=1777483003; x=1778087803;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=LKZt+EUDNDlqVqpI5cAP28h2ZHC5stxPvVoU6xcUKk0=;
- b=oi9iFp9SM6Q4KKVDzSDdCLkaqPRzktwKYxs+AJfD2cWt3+hUuubOf7b9L+hp+fkJeu
- tPMKMot1LY/Li9weasB0LWdxDJNbJ/KHoJDs7adNvCNOHG6zUnxTwLLGxcbHEFvQCKqJ
- UIgQLAHdCDo8pblSaxkVTIDMkVQ5RkFmnSc9XyTVdPNle7bJcvQgYG33ww15jl5wXqR4
- 9mc8Czd/BXlxMu0OnbVRs4/pqu1mIdgGjw7nmve162U3/XSCY9hZlQOvPgbDBiBXR4c9
- 8LQO/rOd2D3MNNqpVOz70+z0ym6JIastU5K/knsLf99qVoM2j7MLGwmj2xrgfcBzl19B
- ldNg==
-X-Gm-Message-State: AOJu0YxdIjcVy2FKekoO7LBQSLBJv/Nafu/VhFqO2TrOdnM0/myl1hNk
- o/zpXBIWGymClOr4h7rOxkXu2Glxh+azq9/cSGeY+xdykWa9Z1v9QeQNX7XuRNqcr4+FiNpa7FI
- 74YhZNcszS4p8VB07utwD1hPGL9tuVXm8xveSWtNXbqyxHRf9cBvrkw==
-X-Gm-Gg: AeBDievqVteeE7M9JBFaCTG/fEbiy8314hG2iDvXB2R/jB+hU9izT+qUPdw0jdJzcfV
- Wrtit2dNdNGmokv7b3sTnODHeWAWvC2cMbBq90X07nQThLZFhgmJYyJFoGIxxOu06KptXnFp2eR
- 7wIQ0H8RuMd16s6DC2IwRbcEUP65grRY0jjFa04iK+NXO0leobkiRIzruaFtZdIii/EJYbu2QeK
- 5mwfNjlXr4LsonTeHnrOAcvtLGZ4KQAbF5SMDJuzQh3pdykJu2/O7hzeFcEyU2Vt+5pmOoNSdzK
- TfYlr4d+SoHzzIetPXqge4RHc9TekMfNw5CBY0zKfavhW2c/tVVf
-X-Received: by 2002:a17:907:3e9c:b0:b9c:ba09:db7d with SMTP id
- a640c23a62f3a-bb9596ccc76mr224071566b.20.1777482951577; Wed, 29 Apr 2026
- 10:15:51 -0700 (PDT)
+ bh=frbBwfaCJ+D9pSOsJ8IGHPA8MHOp6ENYp/STkSqhdYU=;
+ b=e+/ALjZ+orEIZzGvJPYgdec/8j3iEHKGz04bNgSr8/xy5i3BbYzDz+lTP+OaDBMWVI
+ mUH2qq15MvPp916bklRQbXI17FtP9Arwjo5IQKdshQyC9f34jGyKQvm2vyivjyJw4HWJ
+ HF7u5gRjA5z5xQuob8KZ0d7SkrFWheyLxRs7+Nhkg9j2I6TjYugcLiANK3J4axUKDq+o
+ Gdjjb1CwgHLBSCvK2UjCCxb4VPMWDbBgMqwsI7IjCZfeEUO41WzVcCRa/k7mXhVN8hIV
+ wvMsA28hl5abl6vSBS5tjfZNr2HZGBheviRpcDH6M1YoNw2d96wBCvOFROEWGjk7C1m0
+ u6cQ==
+X-Gm-Message-State: AOJu0YwycHglC61Grnme1aINU+XJPlsfXCnpmnIDCEx15dJ271lLS/xN
+ mRARpbspNRJ9smHxKeRXig9VIW66LV4K5G9x7vBkxkWtq7SnKwbT1qZtuW25Q/pCwZIrRHT7LNm
+ Ri+W/KduEjf3A5nmqIuRJk7JwlJHe9hNbtFBGvlR2
+X-Gm-Gg: AeBDieuoapc7G7jp2S942MpQgKU5+PQNowL9sQb0j9+c1mlWNGldeVIZ8hKHxrn+1F4
+ SbnNDlQBwS8anuzRIJY/xx1rNotgmCSCF1/bQPaBWTszMCAIFyDMB4e2hz9BycAH7H4I/qsyZoo
+ REBIVPtEvvsUvy7nQApgz4NxnRhFQKas+1UFaafgPVell3Q7llSYSGTEUxCyKKvibmriisDMf2w
+ NU1aZ4i1Zc7Kk3w8PMoXEzSZCnbu+fa2rzhsUhyUJW2e/h3TclvftSfaK6RLclsvNiDaIlftRpl
+ NeV62/7xc2k7DFk/kZQwTRHj0i0QhWASSJDHa1YFm5U3xsRBAICz
+X-Received: by 2002:a17:907:7f8e:b0:b9c:48d9:9025 with SMTP id
+ a640c23a62f3a-bb96ab9e65emr218378066b.13.1777483003459; Wed, 29 Apr 2026
+ 10:16:43 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260429-sys_rx_eth_buffer-no-net-v1-0-396ef37ae93c@cherry.de>
- <20260429-sys_rx_eth_buffer-no-net-v1-4-396ef37ae93c@cherry.de>
-In-Reply-To: <20260429-sys_rx_eth_buffer-no-net-v1-4-396ef37ae93c@cherry.de>
+ <20260429-sys_rx_eth_buffer-no-net-v1-5-396ef37ae93c@cherry.de>
+In-Reply-To: <20260429-sys_rx_eth_buffer-no-net-v1-5-396ef37ae93c@cherry.de>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 30 Apr 2026 05:15:39 +1200
-X-Gm-Features: AVHnY4L9QOhVGc1X9_AfGtvZITB0QS5-O73ORYthZp15WQXhJFx211r1Hrcyo6Y
-Message-ID: <CAFLszTgYEUuvDtVK0z2UOqx_q8xNiganUjjCowNmVS9uXJXTfw@mail.gmail.com>
-Subject: Re: [PATCH RFC next 4/5] net: guard SYS_RX_ETH_BUFFER with NET
+Date: Thu, 30 Apr 2026 05:16:32 +1200
+X-Gm-Features: AVHnY4IaYGV4GY9N2Dx77eJaqYIntnnjM_ZJM8Nxo_QUwMtZY5Hh-0sNKtHS6RA
+Message-ID: <CAFLszTiKqWPOFP-Kd14kVbtnGX+_SGmxpcR0zkQ0khM+Gb8S-A@mail.gmail.com>
+Subject: Re: [PATCH RFC next 5/5] net: SYS_RX_ETH_BUFFER defaults to 8 when
+ CONFIG_FSL_ENETC=y
 To: foss+uboot@0leil.net
 Cc: u-boot@lists.denx.de, Tang Yuantian <andy.tang@nxp.com>,
  Tom Rini <trini@konsulko.com>, 
@@ -117,31 +118,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Quentin,
+
 On 2026-04-29T10:35:00, Quentin Schulz <foss+uboot@0leil.net> wrote:
-> net: guard SYS_RX_ETH_BUFFER with NET
+> net: SYS_RX_ETH_BUFFER defaults to 8 when CONFIG_FSL_ENETC=y
 >
-> SYS_RX_ETH_BUFFER represents the number of Ethernet receive packet
-> buffers. It therefore doesn't make sense it's reachable if NET isn't
-> enabled.
+> drivers/net/fsl_enetc.h specifies ENETC_BD_CNT "buffer descriptors count
+> must be a multiple of 8". This constant is set to
+> CONFIG_SYS_RX_ETH_BUFFER which defaults to 4.
 >
-> Direct users of SYS_RX_ETH_BUFFER are:
-> - drivers/net/rtl8169.c, only compiled if CONFIG_RTL8169=y, depends on
->   CONFIG_NETDEVICES=y, depends on CONFIG_NET=y,
-> - drivers/net/fsl_enetc.h, via ENETC_BD_CNT, included in
->     drivers/net/{fsl_enetc.c,fsl_enetc_mdio.c,mscc_eswitch/felix_switch.c}
->   First two only compiled if CONFIG_FSL_ENETC=y, latter with
->   CONFIG_MSCC_FELIX_SWITCH=y. Both symbols depends on
->   CONFIG_NETDEVICES=y, depends on CONFIG_NET=y.
-> - include/net-common.h via PKTBUFSRX,
+> All defconfigs enabling CONFIG_FSL_ENETC fortunately have it set to 8,
+> according to
+> ./tools/qconfig.py -l -f CONFIG_FSL_ENETC '~CONFIG_SYS_RX_ETH_BUFFER=8'.
 >
-> Indirect users via PKTBUFSRX:
-> - arch/sandbox/include/asm/eth.h
->   - according to ./tools/qconfig.py -l -f CONFIG_SANDBOX CONFIG_NO_NET,
->     all sandbox defconfigs have network enabled so ignore this for now,
-> [...]
+> Let's make sure the default is sane by having it set to 8 when this
+> driver is enabled. Note that originally[1] it was said EEPRO100 and 405
+> EMAC should be 8 or higher. 405 (PPC405?) support seems to have been
+> dropped in commit b5e7c84f72ee ("ppc4xx: remove ASH405 board"), 11 years
+> ago. Maybe there's something we can do for EEPRO100 though?
 >
-> include/net-common.h | 4 ++++
->  net/Kconfig          | 4 ++++
->  2 files changed, 8 insertions(+)
+> [1] commit 53cf9435ccf9 ("- CFG_RX_ETH_BUFFER added.")
+> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
+>
+> net/Kconfig | 1 +
+>  1 file changed, 1 insertion(+)
+
+> diff --git a/net/Kconfig b/net/Kconfig
+> @@ -250,6 +250,7 @@ if NET
+>
+>  config SYS_RX_ETH_BUFFER
+>          int "Number of receive packet buffers"
+> +     default 8 if FSL_ENETC
+>          default 4
+
+Maybe convert the spaces here to tab?
+
+Also suggest a note in the help text mentioning that FSL_ENETC needs
+ENETC_BD_CNT to be a multiple of 8.
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
+
+Regards,
+Simon
