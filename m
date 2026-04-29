@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC119FF8867
-	for <u-boot@archiver.kernel.org>; Wed, 29 Apr 2026 08:13:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30F4FFF8864
+	for <u-boot@archiver.kernel.org>; Wed, 29 Apr 2026 08:13:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0C1AB846EC;
-	Wed, 29 Apr 2026 10:13:34 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 42DC2846F5;
+	Wed, 29 Apr 2026 10:13:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=mediatek.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=mediatek.com header.i=@mediatek.com header.b="cuWL3v3M";
+	dkim=pass (1024-bit key; unprotected) header.d=mediatek.com header.i=@mediatek.com header.b="RYGjWCc1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 765ED846F8; Wed, 29 Apr 2026 10:13:33 +0200 (CEST)
+ id 2248A846FA; Wed, 29 Apr 2026 10:13:35 +0200 (CEST)
 Received: from mailgw02.mediatek.com (unknown [210.61.82.184])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CE301846EB
- for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 10:13:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1A850846F4
+ for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 10:13:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=mediatek.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=weijie.gao@mediatek.com
-X-UUID: 475f6baa43a311f19a16598d5ca7f8ec-20260429
+X-UUID: 4b58a4c443a311f19a16598d5ca7f8ec-20260429
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mediatek.com;
  s=dk; 
  h=Content-Type:MIME-Version:Message-ID:Date:Subject:CC:To:From;
- bh=1Rp7HrIKsYMliS7lGXDetJKdASfT/0e4/lkbsmtJXq4=; 
- b=cuWL3v3MSKcBpbXIggT0aLgrpFG2MzrzhZspz+ntO4BjqFI9OFHu+okeqUZZqGJ+B+3X1nIqx0Wy70+gwDlnOqEgzCLmoCJ6RzBzT8iltfawdlLM7I09fgOckFL/Mp9Hj7yLmF8n4SPBH5HghdWYSGccbvzNiW6ouaXI6JTStsQ=;
+ bh=Kv8+xQbk9ysEOiGJFXTH5uHatPQaodnv7t9asiw1L8g=; 
+ b=RYGjWCc1HfsEsSv3HObUUB8GoG+CJE96+4GhaYc+NXyiLaurP/gwU/6XC4knXg4vD9vWguIoEqtC6OVnxCJ+1VBCqEdOrJxLdkJGUDIwzziAGkvQakG9Et6BA2l74eG7PATmEwhiKFa2m75z0oXTQYfcIXDW5ayElVPcpyVpWiA=;
 X-CID-P-RULE: Release_Ham
-X-CID-O-INFO: VERSION:1.3.12, REQID:5c485fd4-03c6-4dd8-a333-83a4dbfbd8b2, IP:0,
+X-CID-O-INFO: VERSION:1.3.12, REQID:0f26c0e5-5dc8-4d9c-b147-2990dfd25333, IP:0,
  U
  RL:0,TC:0,Content:-25,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTIO
  N:release,TS:-25
-X-CID-META: VersionHash:e7bac3a, CLOUDID:c4e2b070-3b7f-4b26-b2f9-40f0deecb36d,
+X-CID-META: VersionHash:e7bac3a, CLOUDID:c63cda44-8360-4d24-8500-9b9380fa4b0d,
  B
  ulkID:nil,BulkQuantity:0,Recheck:0,SF:102|836|865|888|898,TC:-5,Content:0|
  15|50,EDM:-3,IP:nil,URL:99|1,File:130,RT:0,Bulk:nil,QS:nil,BEC:-1,COL:0,OS
@@ -45,31 +45,29 @@ X-CID-BVR: 2,SSN|SDN
 X-CID-BAS: 2,SSN|SDN,0,_
 X-CID-FACTOR: TF_CID_SPAM_SNR,TF_CID_SPAM_ULS
 X-CID-RHF: D41D8CD98F00B204E9800998ECF8427E
-X-UUID: 475f6baa43a311f19a16598d5ca7f8ec-20260429
-Received: from mtkmbs10n2.mediatek.inc [(172.21.101.183)] by
+X-UUID: 4b58a4c443a311f19a16598d5ca7f8ec-20260429
+Received: from mtkmbs10n1.mediatek.inc [(172.21.101.34)] by
  mailgw02.mediatek.com (envelope-from <weijie.gao@mediatek.com>)
  (Generic MTA with TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384 256/256)
- with ESMTP id 147404402; Wed, 29 Apr 2026 16:13:18 +0800
+ with ESMTP id 1186633032; Wed, 29 Apr 2026 16:13:24 +0800
 Received: from mtkmbs13n2.mediatek.inc (172.21.101.108) by
- mtkmbs10n2.mediatek.inc (172.21.101.183) with Microsoft SMTP Server
+ MTKMBS14N1.mediatek.inc (172.21.101.75) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.29; Wed, 29 Apr 2026 16:13:16 +0800
+ 15.2.2562.29; Wed, 29 Apr 2026 16:13:23 +0800
 Received: from mcddlt001.gcn.mediatek.inc (10.19.240.15) by
  mtkmbs13n2.mediatek.inc (172.21.101.73) with Microsoft SMTP Server id
- 15.2.2562.29 via Frontend Transport; Wed, 29 Apr 2026 16:13:15 +0800
+ 15.2.2562.29 via Frontend Transport; Wed, 29 Apr 2026 16:13:22 +0800
 From: Weijie Gao <weijie.gao@mediatek.com>
 To: <u-boot@lists.denx.de>
 CC: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, Tom Rini
  <trini@konsulko.com>, Dario Binacchi <dario.binacchi@amarulasolutions.com>,
  Michael Trimarchi <michael@amarulasolutions.com>, Frieder Schrempf
  <frieder.schrempf@kontron.de>, Mikhail Kshevetskiy
- <mikhail.kshevetskiy@iopsys.eu>, Tianling Shen <cnsztl@gmail.com>, Miquel
- Raynal <miquel.raynal@bootlin.com>, Cheng Ming Lin
- <chengminglin@mxic.com.tw>, Takahiro Kuwano <Takahiro.Kuwano@infineon.com>,
- Weijie Gao <weijie.gao@mediatek.com>
-Subject: [PATCH] mtd: spinand: add support for Etron SPI-NAND flashes
-Date: Wed, 29 Apr 2026 16:13:13 +0800
-Message-ID: <20260429081313.151656-1-weijie.gao@mediatek.com>
+ <mikhail.kshevetskiy@iopsys.eu>, Tianling Shen <cnsztl@gmail.com>, Weijie Gao
+ <weijie.gao@mediatek.com>
+Subject: [PATCH] mtd: spinand: add support for FudanMicro FM25S01BI3
+Date: Wed, 29 Apr 2026 16:13:19 +0800
+Message-ID: <20260429081319.151702-1-weijie.gao@mediatek.com>
 X-Mailer: git-send-email 2.17.0
 MIME-Version: 1.0
 Content-Type: text/plain
@@ -90,185 +88,74 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This patch adds some Etron SPI-NAND flashes from 1Gb to 8Gb with
-4-bits/8-bits On-die ECC support.
+Add support for FudanMicro FM25S01BI3 SPI-NAND.
 
-EM73C044VCF/EM73D044VCO/EM73E044VCE/EM73F044VCA are tested on MediaTek
-filogic MT7988 reference board.
+This driver is ported from linux kernel with fix:
+This SPI-NAND does not support 1S-4S-4S and 1S-2S-2S modes.
+https://lore.kernel.org/linux-mtd/20251127195900.2562-1-csharper2005@gmail.com/
 
-Datasheets:
-https://etron.com/wp-content/uploads/2024/08/EM73C044VCF-SPI-NAND-Flash_Rev-1.03.pdf
-https://etron.com/wp-content/uploads/2022/04/EM73D044VCOR-SPI-NAND-Flash_Rev-1.00.pdf
-https://etron.com/wp-content/uploads/2022/04/EM78DE044VC-SPI-NAND-Flash_Rev-1.01.pdf
-https://etron.com/wp-content/uploads/2024/08/EM73E044VCEG-SPI-NAND-Flash_Rev-1.00.pdf
-https://etron.com/wp-content/uploads/2022/04/EM738F044VCA-SPI-NAND-Flash_Rev-1.02.pdf
+Datasheet link:
+https://www.fmsh.com/nvm/FM25S01BI3_ds_eng.pdf
+
+Tested on MediaTek's filogic platform reference board.
 
 Signed-off-by: Weijie Gao <weijie.gao@mediatek.com>
 ---
- drivers/mtd/nand/spi/Makefile |   5 +-
- drivers/mtd/nand/spi/core.c   |   1 +
- drivers/mtd/nand/spi/etron.c  | 240 ++++++++++++++++++++++++++++++++++
- include/linux/mtd/spinand.h   |   1 +
- 4 files changed, 245 insertions(+), 2 deletions(-)
- create mode 100644 drivers/mtd/nand/spi/etron.c
+ drivers/mtd/nand/spi/fmsh.c | 77 +++++++++++++++++++++++++++++++++++++
+ 1 file changed, 77 insertions(+)
 
-diff --git a/drivers/mtd/nand/spi/Makefile b/drivers/mtd/nand/spi/Makefile
-index a7a0b2cb4b9..4664280c8d6 100644
---- a/drivers/mtd/nand/spi/Makefile
-+++ b/drivers/mtd/nand/spi/Makefile
-@@ -1,6 +1,7 @@
- # SPDX-License-Identifier: GPL-2.0
+diff --git a/drivers/mtd/nand/spi/fmsh.c b/drivers/mtd/nand/spi/fmsh.c
+index 80837b7dd42..6740f30689f 100644
+--- a/drivers/mtd/nand/spi/fmsh.c
++++ b/drivers/mtd/nand/spi/fmsh.c
+@@ -11,6 +11,13 @@
+ #endif
+ #include <linux/mtd/spinand.h>
  
- spinand-objs := core.o otp.o
--spinand-objs += alliancememory.o ato.o esmt.o fmsh.o foresee.o gigadevice.o macronix.o
--spinand-objs += micron.o paragon.o skyhigh.o toshiba.o winbond.o xtx.o
-+spinand-objs += alliancememory.o ato.o esmt.o etron.o fmsh.o foresee.o
-+spinand-objs += gigadevice.o macronix.o micron.o paragon.o skyhigh.o toshiba.o
-+spinand-objs += winbond.o xtx.o
- obj-$(CONFIG_MTD_SPI_NAND) += spinand.o
-diff --git a/drivers/mtd/nand/spi/core.c b/drivers/mtd/nand/spi/core.c
-index 14af4264612..b032b0fec24 100644
---- a/drivers/mtd/nand/spi/core.c
-+++ b/drivers/mtd/nand/spi/core.c
-@@ -1227,6 +1227,7 @@ static const struct spinand_manufacturer *spinand_manufacturers[] = {
- 	&alliancememory_spinand_manufacturer,
- 	&ato_spinand_manufacturer,
- 	&esmt_c8_spinand_manufacturer,
-+	&etron_spinand_manufacturer,
- 	&fmsh_spinand_manufacturer,
- 	&foresee_spinand_manufacturer,
- 	&gigadevice_spinand_manufacturer,
-diff --git a/drivers/mtd/nand/spi/etron.c b/drivers/mtd/nand/spi/etron.c
-new file mode 100644
-index 00000000000..35d60180b34
---- /dev/null
-+++ b/drivers/mtd/nand/spi/etron.c
-@@ -0,0 +1,240 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/*
-+ * Copyright (c) 2020 Etron Technology, Inc.
-+ *
-+ */
-+#ifndef __UBOOT__
-+#include <linux/device.h>
-+#include <linux/kernel.h>
-+#endif
-+#include <linux/mtd/spinand.h>
++#define FM25S01BI3_STATUS_ECC_MASK		(7 << 4)
++	#define FM25S01BI3_STATUS_ECC_NO_BITFLIPS	(0 << 4)
++	#define FM25S01BI3_STATUS_ECC_1_3_BITFLIPS	(1 << 4)
++	#define FM25S01BI3_STATUS_ECC_UNCOR_ERROR	(2 << 4)
++	#define FM25S01BI3_STATUS_ECC_4_6_BITFLIPS	(3 << 4)
++	#define FM25S01BI3_STATUS_ECC_7_8_BITFLIPS	(5 << 4)
 +
-+#define SPINAND_MFR_ETRON		0xD5
-+
-+#define STATUS_ECC_LIMIT_BITFLIPS	(3 << 4)
-+
-+static SPINAND_OP_VARIANTS(read_cache_variants,
-+		SPINAND_PAGE_READ_FROM_CACHE_1S_4S_4S_OP(0, 1, NULL, 0, 0),
+ #define SPINAND_MFR_FMSH		0xA1
+ 
+ static SPINAND_OP_VARIANTS(read_cache_variants,
+@@ -21,6 +28,12 @@ static SPINAND_OP_VARIANTS(read_cache_variants,
+ 		SPINAND_PAGE_READ_FROM_CACHE_FAST_1S_1S_1S_OP(0, 1, NULL, 0, 0),
+ 		SPINAND_PAGE_READ_FROM_CACHE_1S_1S_1S_OP(0, 1, NULL, 0, 0));
+ 
++static SPINAND_OP_VARIANTS(fm25s01bi3_read_cache_variants,
 +		SPINAND_PAGE_READ_FROM_CACHE_1S_1S_4S_OP(0, 1, NULL, 0, 0),
-+		SPINAND_PAGE_READ_FROM_CACHE_1S_2S_2S_OP(0, 1, NULL, 0, 0),
 +		SPINAND_PAGE_READ_FROM_CACHE_1S_1S_2S_OP(0, 1, NULL, 0, 0),
 +		SPINAND_PAGE_READ_FROM_CACHE_FAST_1S_1S_1S_OP(0, 1, NULL, 0, 0),
 +		SPINAND_PAGE_READ_FROM_CACHE_1S_1S_1S_OP(0, 1, NULL, 0, 0));
 +
-+static SPINAND_OP_VARIANTS(write_cache_variants,
-+		SPINAND_PROG_LOAD_1S_1S_4S_OP(true, 0, NULL, 0),
-+		SPINAND_PROG_LOAD_1S_1S_1S_OP(true, 0, NULL, 0));
-+
-+static SPINAND_OP_VARIANTS(update_cache_variants,
-+		SPINAND_PROG_LOAD_1S_1S_4S_OP(false, 0, NULL, 0),
-+		SPINAND_PROG_LOAD_1S_1S_1S_OP(false, 0, NULL, 0));
-+
-+static int etron_ecc4_ooblayout_ecc(struct mtd_info *mtd, int section,
-+				    struct mtd_oob_region *region)
+ static SPINAND_OP_VARIANTS(write_cache_variants,
+ 		SPINAND_PROG_LOAD_1S_1S_4S_OP(true, 0, NULL, 0),
+ 		SPINAND_PROG_LOAD_1S_1S_1S_OP(true, 0, NULL, 0));
+@@ -47,11 +60,65 @@ static int fm25s01a_ooblayout_free(struct mtd_info *mtd, int section,
+ 	return 0;
+ }
+ 
++static int fm25s01bi3_ecc_get_status(struct spinand_device *spinand, u8 status)
 +{
-+	struct spinand_device *spinand = mtd_to_spinand(mtd);
-+
-+	if (section >= spinand->base.memorg.pagesize / mtd->ecc_step_size)
-+		return -ERANGE;
-+
-+	region->offset = (8 * section) + 32;
-+	region->length = 8;
-+
-+	return 0;
-+}
-+
-+static int etron_ecc4_ooblayout_free(struct mtd_info *mtd, int section,
-+				     struct mtd_oob_region *region)
-+{
-+	struct spinand_device *spinand = mtd_to_spinand(mtd);
-+
-+	if (section >= spinand->base.memorg.pagesize / mtd->ecc_step_size)
-+		return -ERANGE;
-+
-+	if (section) {
-+		region->offset = 8 * section;
-+		region->length = 8;
-+	} else {
-+		/* section 0 has two bytes reserved for bad block mark */
-+		region->offset = 2;
-+		region->length = 6;
-+	}
-+
-+	return 0;
-+}
-+
-+static const struct mtd_ooblayout_ops etron_ecc4_ooblayout = {
-+	.ecc = etron_ecc4_ooblayout_ecc,
-+	.rfree = etron_ecc4_ooblayout_free,
-+};
-+
-+static int etron_ecc8_ooblayout_ecc(struct mtd_info *mtd, int section,
-+				    struct mtd_oob_region *region)
-+{
-+	struct spinand_device *spinand = mtd_to_spinand(mtd);
-+
-+	if (section >= spinand->base.memorg.pagesize / mtd->ecc_step_size)
-+		return -ERANGE;
-+
-+	region->offset = (14 * section) + 72;
-+	region->length = 14;
-+
-+	return 0;
-+}
-+
-+static int etron_ecc8_ooblayout_free(struct mtd_info *mtd, int section,
-+				     struct mtd_oob_region *region)
-+{
-+	struct spinand_device *spinand = mtd_to_spinand(mtd);
-+
-+	if (section >= spinand->base.memorg.pagesize / mtd->ecc_step_size)
-+		return -ERANGE;
-+
-+	if (section) {
-+		region->offset = 18 * section;
-+		region->length = 18;
-+	} else {
-+		/* section 0 has two bytes reserved for bad block mark */
-+		region->offset = 2;
-+		region->length = 16;
-+	}
-+
-+	return 0;
-+}
-+
-+static const struct mtd_ooblayout_ops etron_ecc8_ooblayout = {
-+	.ecc = etron_ecc8_ooblayout_ecc,
-+	.rfree = etron_ecc8_ooblayout_free,
-+};
-+
-+static int etron_ecc_get_status(struct spinand_device *spinand, u8 status)
-+{
-+	struct nand_device *nand = spinand_to_nand(spinand);
-+
-+	switch (status & STATUS_ECC_MASK) {
-+	case STATUS_ECC_NO_BITFLIPS:
++	switch (status & FM25S01BI3_STATUS_ECC_MASK) {
++	case FM25S01BI3_STATUS_ECC_NO_BITFLIPS:
 +		return 0;
 +
-+	case STATUS_ECC_UNCOR_ERROR:
++	case FM25S01BI3_STATUS_ECC_UNCOR_ERROR:
 +		return -EBADMSG;
 +
-+	case STATUS_ECC_HAS_BITFLIPS:
-+		return nand->eccreq.strength >> 1;
++	case FM25S01BI3_STATUS_ECC_1_3_BITFLIPS:
++		return 3;
 +
-+	case STATUS_ECC_LIMIT_BITFLIPS:
-+		return nand->eccreq.strength;
++	case FM25S01BI3_STATUS_ECC_4_6_BITFLIPS:
++		return 6;
++
++	case FM25S01BI3_STATUS_ECC_7_8_BITFLIPS:
++		return 8;
 +
 +	default:
 +		break;
@@ -277,125 +164,60 @@ index 00000000000..35d60180b34
 +	return -EINVAL;
 +}
 +
-+static const struct spinand_info etron_spinand_table[] = {
-+	/* EM73C 1Gb 3.3V */
-+	SPINAND_INFO("EM73C044VCF",
-+		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_ADDR, 0x25),
-+		     NAND_MEMORG(1, 2048, 64, 64, 1024, 20, 1, 1, 1),
-+		     NAND_ECCREQ(4, 512),
-+		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
-+					      &write_cache_variants,
-+					      &update_cache_variants),
-+		     SPINAND_HAS_QE_BIT,
-+		     SPINAND_ECCINFO(&etron_ecc4_ooblayout,
-+				     etron_ecc_get_status)),
-+	/* EM7xD 2Gb */
-+	SPINAND_INFO("EM73D044VCR",
-+		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_ADDR, 0x41),
-+		     NAND_MEMORG(1, 2048, 64, 64, 2048, 40, 1, 1, 1),
-+		     NAND_ECCREQ(4, 512),
-+		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
-+					      &write_cache_variants,
-+					      &update_cache_variants),
-+		     SPINAND_HAS_QE_BIT,
-+		     SPINAND_ECCINFO(&etron_ecc4_ooblayout,
-+				     etron_ecc_get_status)),
-+	SPINAND_INFO("EM73D044VCO",
-+		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_ADDR, 0x3A),
-+		     NAND_MEMORG(1, 2048, 128, 64, 2048, 40, 1, 1, 1),
-+		     NAND_ECCREQ(8, 512),
-+		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
-+					      &write_cache_variants,
-+					      &update_cache_variants),
-+		     SPINAND_HAS_QE_BIT,
-+		     SPINAND_ECCINFO(&etron_ecc8_ooblayout,
-+				     etron_ecc_get_status)),
-+	SPINAND_INFO("EM78D044VCM",
-+		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_ADDR, 0x8E),
-+		     NAND_MEMORG(1, 2048, 128, 64, 2048, 40, 1, 1, 1),
-+		     NAND_ECCREQ(8, 512),
-+		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
-+					      &write_cache_variants,
-+					      &update_cache_variants),
-+		     SPINAND_HAS_QE_BIT,
-+		     SPINAND_ECCINFO(&etron_ecc8_ooblayout,
-+				     etron_ecc_get_status)),
-+	/* EM7xE 4Gb */
-+	SPINAND_INFO("EM73E044VCG",
-+		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_ADDR, 0x42),
-+		     NAND_MEMORG(1, 2048, 64, 64, 4096, 80, 1, 1, 1),
-+		     NAND_ECCREQ(4, 512),
-+		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
-+					      &write_cache_variants,
-+					      &update_cache_variants),
-+		     SPINAND_HAS_QE_BIT,
-+		     SPINAND_ECCINFO(&etron_ecc4_ooblayout,
-+				     etron_ecc_get_status)),
-+	SPINAND_INFO("EM73E044VCE",
-+		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_ADDR, 0x3B),
-+		     NAND_MEMORG(1, 2048, 128, 64, 4096, 80, 1, 1, 1),
-+		     NAND_ECCREQ(8, 512),
-+		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
-+					      &write_cache_variants,
-+					      &update_cache_variants),
-+		     SPINAND_HAS_QE_BIT,
-+		     SPINAND_ECCINFO(&etron_ecc8_ooblayout,
-+				     etron_ecc_get_status)),
-+	SPINAND_INFO("EM78E044VCD",
-+		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_ADDR, 0x8F),
-+		     NAND_MEMORG(1, 2048, 128, 64, 4096, 80, 1, 1, 1),
-+		     NAND_ECCREQ(8, 512),
-+		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
-+					      &write_cache_variants,
-+					      &update_cache_variants),
-+		     SPINAND_HAS_QE_BIT,
-+		     SPINAND_ECCINFO(&etron_ecc8_ooblayout,
-+				     etron_ecc_get_status)),
-+	/* EM7xF 8Gb */
-+	SPINAND_INFO("EM73F044VCA",
-+		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0x2D),
-+		     NAND_MEMORG(1, 4096, 256, 64, 4096, 80, 1, 1, 1),
-+		     NAND_ECCREQ(8, 512),
-+		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
-+					      &write_cache_variants,
-+					      &update_cache_variants),
-+		     SPINAND_HAS_QE_BIT,
-+		     SPINAND_ECCINFO(&etron_ecc8_ooblayout,
-+				     etron_ecc_get_status)),
-+	SPINAND_INFO("EM78F044VCA",
-+		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0x8D),
-+		     NAND_MEMORG(1, 4096, 256, 64, 4096, 80, 1, 1, 1),
-+		     NAND_ECCREQ(8, 512),
-+		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
-+					      &write_cache_variants,
-+					      &update_cache_variants),
-+		     SPINAND_HAS_QE_BIT,
-+		     SPINAND_ECCINFO(&etron_ecc8_ooblayout,
-+				     etron_ecc_get_status)),
++static int fm25s01bi3_ooblayout_ecc(struct mtd_info *mtd, int section,
++				    struct mtd_oob_region *region)
++{
++	if (section)
++		return -ERANGE;
++
++	region->offset = 64;
++	region->length = 64;
++
++	return 0;
++}
++
++static int fm25s01bi3_ooblayout_free(struct mtd_info *mtd, int section,
++				     struct mtd_oob_region *region)
++{
++	if (section > 3)
++		return -ERANGE;
++
++	region->offset = (16 * section) + 4;
++	region->length = 12;
++
++	return 0;
++}
++
+ static const struct mtd_ooblayout_ops fm25s01a_ooblayout = {
+ 	.ecc = fm25s01a_ooblayout_ecc,
+ 	.rfree = fm25s01a_ooblayout_free,
+ };
+ 
++static const struct mtd_ooblayout_ops fm25s01bi3_ooblayout = {
++	.ecc = fm25s01bi3_ooblayout_ecc,
++	.rfree = fm25s01bi3_ooblayout_free,
 +};
 +
-+static const struct spinand_manufacturer_ops etron_spinand_manuf_ops = {
-+};
-+
-+const struct spinand_manufacturer etron_spinand_manufacturer = {
-+	.id = SPINAND_MFR_ETRON,
-+	.name = "Etron",
-+	.chips = etron_spinand_table,
-+	.nchips = ARRAY_SIZE(etron_spinand_table),
-+	.ops = &etron_spinand_manuf_ops,
-+};
-diff --git a/include/linux/mtd/spinand.h b/include/linux/mtd/spinand.h
-index e9561c0a395..8f46c31a427 100644
---- a/include/linux/mtd/spinand.h
-+++ b/include/linux/mtd/spinand.h
-@@ -361,6 +361,7 @@ struct spinand_manufacturer {
- extern const struct spinand_manufacturer alliancememory_spinand_manufacturer;
- extern const struct spinand_manufacturer ato_spinand_manufacturer;
- extern const struct spinand_manufacturer esmt_c8_spinand_manufacturer;
-+extern const struct spinand_manufacturer etron_spinand_manufacturer;
- extern const struct spinand_manufacturer fmsh_spinand_manufacturer;
- extern const struct spinand_manufacturer foresee_spinand_manufacturer;
- extern const struct spinand_manufacturer gigadevice_spinand_manufacturer;
+ static const struct spinand_info fmsh_spinand_table[] = {
+ 	SPINAND_INFO("FM25S01A",
+ 		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0xE4),
+@@ -62,6 +129,16 @@ static const struct spinand_info fmsh_spinand_table[] = {
+ 					      &update_cache_variants),
+ 		     0,
+ 		     SPINAND_ECCINFO(&fm25s01a_ooblayout, NULL)),
++	SPINAND_INFO("FM25S01BI3",
++		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0xD4),
++		     NAND_MEMORG(1, 2048, 128, 64, 1024, 20, 1, 1, 1),
++		     NAND_ECCREQ(8, 512),
++		     SPINAND_INFO_OP_VARIANTS(&fm25s01bi3_read_cache_variants,
++					      &write_cache_variants,
++					      &update_cache_variants),
++		     SPINAND_HAS_QE_BIT,
++		     SPINAND_ECCINFO(&fm25s01bi3_ooblayout,
++				     fm25s01bi3_ecc_get_status)),
+ };
+ 
+ static const struct spinand_manufacturer_ops fmsh_spinand_manuf_ops = {
 -- 
 2.45.2
 
