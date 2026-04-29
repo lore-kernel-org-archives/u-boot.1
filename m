@@ -4,43 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C48BFF8875
-	for <u-boot@archiver.kernel.org>; Wed, 29 Apr 2026 12:18:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8DF85FF8875
+	for <u-boot@archiver.kernel.org>; Wed, 29 Apr 2026 12:18:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 96B608484F;
-	Wed, 29 Apr 2026 14:18:37 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1FC4784843;
+	Wed, 29 Apr 2026 14:18:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="B92klnHb";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="C8IUHWUp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 47BFD84847; Wed, 29 Apr 2026 14:18:36 +0200 (CEST)
-Received: from tor.source.kernel.org (tor.source.kernel.org
- [IPv6:2600:3c04:e001:324:0:1991:8:25])
+ id 4357684858; Wed, 29 Apr 2026 14:18:41 +0200 (CEST)
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5A55E84841
- for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 14:18:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E972984841
+ for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 14:18:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mwalle@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 57DD860128;
+ by sea.source.kernel.org (Postfix) with ESMTP id 7FC154445C;
+ Wed, 29 Apr 2026 12:18:37 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7B14AC19425;
  Wed, 29 Apr 2026 12:18:33 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 36364C19425;
- Wed, 29 Apr 2026 12:18:29 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1777465113;
- bh=lTnHaOQcsWOnAuKtW8Io4vrC0JDZOZDoom1Y1F/UPeY=;
+ s=k20201202; t=1777465117;
+ bh=OxWeBK6+omHTBQWsZqNdx29ThafambMb+5RYuMfpqnc=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=B92klnHbNwfW01zIdg0BRZOKuyzvf8cGEgdbb210aWJ6ao2gIEFaux9Pl2IRLFiDf
- tEbQfmDiCpbERSMilJrj+bd8MuJW4vNDhbj81tS1Coes+0QXhjIXDwDNGR6q+7fQIz
- EuhCmkFVsITIocWqJ726glz617RGPIULY9P2WFravVhcOsu02S0KVVfI8W8Z04eHYw
- JN803CJ48bz3lzUPlaS52XgFX5GKkM61y5xTeFoh02hZqpen9i+Bu5iIm7SGTrpYCZ
- OzFZ8B/QXFkymbiJL/900Q2jRVBeVGMLGCdXF8GCfWlvH1XQeZKwa0ONkL3LaXF3kr
- T6J49CweMRjYQ==
+ b=C8IUHWUps36b7U+MvZqAGjPn+hzZ4TYcuU0j7TK2Zfmbc5/TyX76NeeC9NKfjXY5B
+ fJWrAP3Ju1n/e4D6Sf2c7n2L8aTroIIHKkVFJQIn6Rplu7jcjGyGqF5enR6D7mKkct
+ Md9/XNrRXZbHHDPxksytQcHkwAwhVSbUu4sJ+v+bSlQgj4koN1nH2YTLIw4V54RwD8
+ ym+b74M5V7YKBXDL1cRfuzt76pqaomlAoYEAeIEomfTzf2Zv/wT3CtV5p5PtkIkt/j
+ PdztydMxHVxoiqJK86dB7dxn0lvMYy25xbz4XyK9VC5Iej8wkRmzbaBrOxBWjoo+Sj
+ n6+pq+XIQbSgQ==
 From: Michael Walle <mwalle@kernel.org>
 To: =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>,
  Tom Rini <trini@konsulko.com>, Pramod Kumar <pramod.kumar_1@nxp.com>,
@@ -55,9 +54,9 @@ To: =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>,
 Cc: Tomas Alvarez Vanoli <tomas.alvarez-vanoli@hitachienergy.com>,
  Jerome Forissier <jerome.forissier@arm.com>, u-boot@lists.denx.de,
  Michael Walle <mwalle@kernel.org>
-Subject: [PATCH 01/10] powerpc: fix call to cpu_init_r
-Date: Wed, 29 Apr 2026 14:17:15 +0200
-Message-ID: <20260429121816.1026326-2-mwalle@kernel.org>
+Subject: [PATCH 02/10] caam: don't write memory at 0 on PPC
+Date: Wed, 29 Apr 2026 14:17:16 +0200
+Message-ID: <20260429121816.1026326-3-mwalle@kernel.org>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20260429121816.1026326-1-mwalle@kernel.org>
 References: <20260429121816.1026326-1-mwalle@kernel.org>
@@ -79,33 +78,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Commit 6c171f7a184c ("common: board: make initcalls static") broke the
-call to cpu_init_r. That is because PPC is already defined to 1, see:
+For non-secure boot environments pamu_init() isn't called but the CAAM
+will still call sec_config_pamu_table() -> config_pamu() which then uses
+an uninitialized ppaact variable. In fact, that variable is initialized
+with 0, so the config_pamu() will happily assume the structure is there
+and will operate on that memory. Call pamu_init() in the non-secure boot
+case, too.
 
-  powerpc-linux-gnu-gcc -dM -E - < /dev/null
-
-This will conflict with the CONFIG_IS_ENABLED(PPC). Change it to
-IS_ENABLED(CONFIG_PPC).
-
-Fixes: 6c171f7a184c ("common: board: make initcalls static")
 Signed-off-by: Michael Walle <mwalle@kernel.org>
 ---
- common/board_r.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ arch/powerpc/cpu/mpc85xx/cpu_init.c | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/common/board_r.c b/common/board_r.c
-index 5d37345ca09..9b6ba9d8e56 100644
---- a/common/board_r.c
-+++ b/common/board_r.c
-@@ -687,7 +687,7 @@ static void initcall_run_r(void)
- 	INITCALL(initr_flash);
+diff --git a/arch/powerpc/cpu/mpc85xx/cpu_init.c b/arch/powerpc/cpu/mpc85xx/cpu_init.c
+index 739d14f8002..478ab648948 100644
+--- a/arch/powerpc/cpu/mpc85xx/cpu_init.c
++++ b/arch/powerpc/cpu/mpc85xx/cpu_init.c
+@@ -41,8 +41,8 @@
+ #ifdef CONFIG_FSL_CAAM
+ #include <fsl_sec.h>
  #endif
- 	WATCHDOG_RESET();
--#if CONFIG_IS_ENABLED(PPC) || CONFIG_IS_ENABLED(M68K) || CONFIG_IS_ENABLED(X86)
-+#if IS_ENABLED(CONFIG_PPC) || CONFIG_IS_ENABLED(M68K) || CONFIG_IS_ENABLED(X86)
- 	/* initialize higher level parts of CPU like time base and timers */
- 	INITCALL(cpu_init_r);
+-#if defined(CONFIG_NXP_ESBC) && defined(CONFIG_FSL_CORENET)
+ #include <asm/fsl_pamu.h>
++#if defined(CONFIG_NXP_ESBC) && defined(CONFIG_FSL_CORENET)
+ #include <fsl_secboot_err.h>
  #endif
+ #ifdef CONFIG_SYS_QE_FMAN_FW_IN_NAND
+@@ -899,6 +899,8 @@ int cpu_init_r(void)
+ #if defined(CONFIG_NXP_ESBC) && defined(CONFIG_FSL_CORENET)
+ 	if (pamu_init() < 0)
+ 		fsl_secboot_handle_error(ERROR_ESBC_PAMU_INIT);
++#else
++	pamu_init();
+ #endif
+ 
+ #ifdef CONFIG_FSL_CAAM
 -- 
 2.47.3
 
