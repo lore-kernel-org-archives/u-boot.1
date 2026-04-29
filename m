@@ -4,105 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10852FF8873
-	for <u-boot@archiver.kernel.org>; Wed, 29 Apr 2026 14:18:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64D5AFF8867
+	for <u-boot@archiver.kernel.org>; Wed, 29 Apr 2026 14:20:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9557284874;
-	Wed, 29 Apr 2026 16:18:33 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id DDC108488A;
+	Wed, 29 Apr 2026 16:20:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="oItxzd4J";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="GLucb/vK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4670F8487C; Wed, 29 Apr 2026 16:18:32 +0200 (CEST)
-Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
- [IPv6:2a00:1450:4864:20::532])
+ id B32A884897; Wed, 29 Apr 2026 16:20:47 +0200 (CEST)
+Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
+ [IPv6:2a00:1450:4864:20::635])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BE53784869
- for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 16:18:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A8C4C84874
+ for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 16:20:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x532.google.com with SMTP id
- 4fb4d7f45d1cf-67b32c695efso676033a12.1
- for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 07:18:29 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1777472309; cv=none;
+Received: by mail-ej1-x635.google.com with SMTP id
+ a640c23a62f3a-ba51e69988aso1750437466b.0
+ for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 07:20:45 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1777472445; cv=none;
  d=google.com; s=arc-20240605;
- b=IVVfOM34tw2/SeNd9Y1ow/pogiSDdDxB/neH9B+X3IuD0ih8MA9vidudwKJV3MiykO
- t90Du03gOnJ5HeI+8iCPU1SVOKQJ1UyCJBSB6pm1A/tpMafE0MKSjNWX4q8aIdo42xN4
- SwEzKsUF75+BCxQ7zjgtTh5zF4bmqBDsq5nOdngHRkE4wTj/BpEOH0OeCTUohVIOT32n
- HQOcAMgbi9G3SVguuKKWxL0FEjh9g+QUqheN8a4qcSJA0JQVpLTT9ry5ubmCMsUtVCCs
- iLTpw0YON/hOY56kD/ItimB9Q1youuVP/y+CrCrBuCI+gRL2yi51lbHlG8GWfH9A92Ha
- 4/MA==
+ b=VVIfZolKuHHXUVcp3cWhvDPztZXFNhkqd/g/9WyzQG+I/YQAs37s4vz4LM4uKT5tLu
+ Vq7JU2hyWMVxcL324Y8ghOMfXZQ5j9tUCGII+X812yNl7gaUkSAntZi7gU1gj68a03yu
+ 6RU6gctg52+R83V9Tij5bXsxZshwib1ZhIvT+GdxKFYzsc0aMIf6qgGnkngDhFL2WuYU
+ /TJa2lRh3D2mU4lNbyK0Dh/UK/KKK5J/JWJTbXIbQU0gpNhwh2Jd+QL/janGoV8tp7fb
+ VqGXMQdtsENf2CVcuodcWVBtwyiYq/e4JmZZfoZw4+u5OkeItYrWCbhTko7NC7xSsq0Z
+ yjow==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=8qG+pQdS5HNHUL22qTDQ4T13L4fRqlqlAeNTu6QcxOc=;
- fh=svZgl15q5OtEe2wktK+LWJIgZCf65obVTtlH38DM9o8=;
- b=EfKsqsOm3YjmyCwuFoX9dlJ3xcxRtPf6vjbhhZraY69r24tmYRk5nq7bi6CQReeX/O
- N58pkiutTAOlSCUlIqsi32GM0BjMEfRLC+QnhzMwI67yQFIJSfyd/Yhnh3f33gpJ+0KH
- 8+xtYNWIEY+ytKtAJutSXINueNIm/2W9dkTFu7olSSEGkxesJt6VJSf9XPSzOTyhEDUs
- KmCRBleL0dEGO865Z3uhzaTDGu1zL9TNetiVOEVSeMd5kOvI2I0f1MjkovhVnUe5hlV7
- hti4Yo7d6mf0wtdJ0rHmS4rgzzC4vME0RtcQ8yfo+dTU6SZm/MLoEWQRyg67rs2VKOHx
- sZ4Q==; darn=lists.denx.de
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=a+AeE0//5V/SGxEQbgscVP/JdHLIp/w4UIk0ocNxjr4=;
+ fh=IX/vxJtcOuW42bjJFlvnnr3CYhWZhtsB6OJ4I+752uM=;
+ b=XjdpXE0DEqtsEI8mNC8FjcSU1TIkzvl9VMS0JYcRHtc69/XO1qkTUs+ofhda0AWHjk
+ J4aF6q+boZ5BlLXG6EgIfxUbGApt6qHff1KSi21X3RobAJjV9C0zr/7UU0xhsVa4KGg+
+ tooMfGnaHaw74TK61W5YDhGvNdd70XjJ16cPZ4mmHPhPllloA7UED+gFvxnpDtSstg2i
+ q6qzErBmnlnhcbH7Pu4TpqVsutAHMWiRqpcfkBkjlI+qDWUBzS1Yu4pdoCACl+SIx5G+
+ Xii5DvbwslQnUvqDkbLZbx73yDCJQRCA8RUthVsJsACVWcaJNup1vtOP0AF7n7Llzj2r
+ oAEQ==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1777472309; x=1778077109; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=8qG+pQdS5HNHUL22qTDQ4T13L4fRqlqlAeNTu6QcxOc=;
- b=oItxzd4JxXJamkBeUNZIy8VUeOm5xaaPpr7gjAUL044TW2usXdhZ2H7nUOGZakg5bX
- 5YLorqc1NmkCchD0PJR2A/IeNspUXXp8SYZzcegXbDzf1mfUYLUH1NjrnYVubDgNFZhG
- XdknP6z+T1V4vBz+vxuWHTtLziPm5SRffpD0c=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777472309; x=1778077109;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=chromium.org; s=google; t=1777472445; x=1778077245; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=8qG+pQdS5HNHUL22qTDQ4T13L4fRqlqlAeNTu6QcxOc=;
- b=KZy581Exl7FZkgTxUMggZDuPcSIQz6vYUuKEuZE5O4c5GaZAhwrRuQBhJuOyEobYtB
- 8UE3uyUCu7V3xwUcNEvJfByM9uqXTUy+v6aBw7GfSYqH281P5WqdcLnMtUkjqPGbqotl
- 1FUSPNv6qLakaiBjpZrh4EMj4wNd9of9Tdg+MTkOTvCMGZwcyoxqGOHTcX/ThwHcJstR
- bJpYRLIYTZ+pp91FZ5kV8Bs9dpJG8vIPTpX9T+uhNNEfr9g0MF/Yy755hY2hrfl+m9Cv
- cgF7PniMV87+1e2sdkoHDOKFOVVQhC3cHRuQIWx7t9c+3dMstw6UlR+GbZcP5dVRk2zR
- YNFg==
-X-Forwarded-Encrypted: i=1;
- AFNElJ8+PYBmDuCwfT9wlafHDR5dsBJ3JdpgXFw42FbYm2tMi8KfRowZHnH1kmbErbDEs4/RyZJIHRg=@lists.denx.de
-X-Gm-Message-State: AOJu0YwYzFgepI128+i++/gxp4jzUWv81O3HpSmbvfiQgjXR4UkYtI01
- VjaAWFdB/Rth4xdKJlUXrnCPWApGpdLmXDcips1t6qzdzLDX5m3NAO7GTCMK6ajquPlOzlD6H3j
- AB+TPBz+ogtbpdPefb4EQAWwOa+9CAO6K7dKYSIc3
-X-Gm-Gg: AeBDietqM/nuQptDTL8jxPKsyF5Tlsjq0pVh5e33GevS+MvHR8Z5iu3m2y1m5VytC0M
- 73zyCr2bWVBbb7apXeJztshoicFFRYuSoG/k+tw6qSuZ66u0evQ24UPZjSsZ9jgSbCknVgnG+It
- 8iYVlksoovUx/nuCLf7ekwJjvoMAInWg9w8Lislf5WYynFTc4q72skKy0zevZ+3Tkbspj0h+BG1
- YCA94rTSbYKSVxzkYsxZJW9WEcmVGZd9xeLxd64eOJbcrcmCG+c9/wl4SP/RjygJJh38tYdXdL+
- PyErg8ylZiECDIzK
-X-Received: by 2002:a17:906:9fc4:b0:ba6:79c0:c743 with SMTP id
- a640c23a62f3a-bb9582bbb5cmr203832266b.11.1777472309207; Wed, 29 Apr 2026
- 07:18:29 -0700 (PDT)
+ bh=a+AeE0//5V/SGxEQbgscVP/JdHLIp/w4UIk0ocNxjr4=;
+ b=GLucb/vKpMjkzz3D4J+wzNvc3/daHh/mVSWBfbKez84zQrgQJNfAHo5VfaQ9hjjVGG
+ RjaYkDB++gPg5MLXppJn/B6tEQZrML3mTPX3lHbqKrfNt8VxcvC/+QPCRF3YJMwjSX34
+ 0IxBC0IFpmhPkS7twprIwlhKFie/G/sXvAWxQ=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1777472445; x=1778077245;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=a+AeE0//5V/SGxEQbgscVP/JdHLIp/w4UIk0ocNxjr4=;
+ b=dgXLawDsDVclw6eAysTR/uzhr+AUIp+1yFfPuWl88RWM6nO09HxcT58VopTZl9ee3c
+ 2Rrvf/s73SSM6Vc8Mx2C8crwzeojx1FGdQ4+964003LUp7vCjCFlsoTx7NI+YDiZvQDJ
+ YtwPSUNnyfSCfz4ixIYyL1qsaMui9U0N/mnnkPbLYB4zMYwqnHeegLCD+zwWWwkCzt0d
+ zgIREyBlFnz4bgKxWoQAeBvCxTr+krFkbPxY+qsTAjM5lYidSZRDpTNf8yFkGovVEuft
+ UAZJdMIvX3eXM4R1jn5PT88qq8V7dq8cDH34BBeqSGvCOhIV9B9GGwuXy3DWVFc6C3Yk
+ t1xw==
+X-Gm-Message-State: AOJu0YyTSrfkSuoqZRjMWIyuckwkryjJAJYyqsgJ2/euYB3nOD1V9BNJ
+ oVrq4j6uHJv/UbcWBmcOw/shiEfDe+1l/kKevOSFOTtlOx59tfbp8yz1Dyj51kaHlt2hTIJZYx7
+ NZgE30ylqOo0bm//qT1PSLYJNa7HRRgcamC6DitdGmoC2jWDCO6A=
+X-Gm-Gg: AeBDiesNGLks/U/jMqaQeNn4e4l93hHP2hBFO7JLEYSUgy5IUiuKbhWVI4OzGrRsQQN
+ hiPScgVf4aWOB3aOcGlf1cFr87R7RcWNIiUgCqi+2WMmsXOTv0sniSJCQU0Jr4YAKwvWYt0cVDR
+ 660Hr2LEJDY6PPktOCJxoNjI/+CR8Aq/3Q44qkR6Nfygtvd1DaRtt6IQuntkexRKnmMiVuJIp8e
+ VRLAoOMAk7spby9BhF0OnUTqo6Sd0nOkGeXtvkxStKYxffyOtWqJCmqBFLPGs+Vx9YAh/IMrxvL
+ gQJogfqyP6S/wFh1
+X-Received: by 2002:a17:907:720b:b0:baa:8895:735d with SMTP id
+ a640c23a62f3a-bb7ff068b92mr436773766b.0.1777472444868; Wed, 29 Apr 2026
+ 07:20:44 -0700 (PDT)
 MIME-Version: 1.0
-References: <f8f4e639-0e73-4d14-828a-92dbfe5526ba@cherry.de>
- <CAFLszTjWZ9DBKVui_2EE-nSg8K+5eC9V8jvwp638dLeyp_p6vw@mail.gmail.com>
- <175e1198-2ac4-48de-b68a-c29f786832cc@cherry.de>
- <CAFLszThQ+kyCkojFm2=VNtLTtLDYT4iVmpqnto8awiMVqsct0Q@mail.gmail.com>
- <20260427144630.GG41863@bill-the-cat>
-In-Reply-To: <20260427144630.GG41863@bill-the-cat>
+References: <20260428133612.669105-1-ludwig.nussel@siemens.com>
+In-Reply-To: <20260428133612.669105-1-ludwig.nussel@siemens.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 29 Apr 2026 08:18:14 -0600
-X-Gm-Features: AVHnY4JT4H0s5V-8J1ZdxCdyqET2iXMiS1VheB2gathVEOq0f_K4Bm9aoNAZqHg
-Message-ID: <CAFLszTgga6eFp2aPF-MzJEqeqcEV-bMJhb4_ph_bE-1Dv4e_Cg@mail.gmail.com>
-Subject: Re: Couple of clang warnings for Rockchip boards
-To: Tom Rini <trini@konsulko.com>
-Cc: Quentin Schulz <quentin.schulz@cherry.de>,
- U-Boot Mailing List <u-boot@lists.denx.de>, 
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>, 
- Jonas Karlman <jonas@kwiboo.se>, Xuhui Lin <xuhui.lin@rock-chips.com>, 
- Heiko Stuebner <heiko@sntech.de>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Sebastian Reichel <sebastian.reichel@collabora.com>
+Date: Wed, 29 Apr 2026 08:20:32 -0600
+X-Gm-Features: AVHnY4KtkKAPc69GSXyzwNI_TdqZqR1m2g6dVmpKqlRvxcMhBolWXU_J7ABMsJI
+Message-ID: <CAFLszTjT691ZQudD_tJ-Os-pVnsLQjto2QeYv32tS5Us7wLWRA@mail.gmail.com>
+Subject: Re: [PATCH] virtio: ignore ENODEV for boot device hunting
+To: ludwig.nussel@siemens.com
+Cc: u-boot@lists.denx.de, Adam Lackorzynski <adam@l4re.org>,
+ Bin Meng <bmeng.cn@gmail.com>, 
+ =?UTF-8?Q?Christian_P=C3=B6tzsch?= <christian.poetzsch@kernkonzept.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -119,83 +112,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi Ludwig,
 
-On Mon, 27 Apr 2026 at 08:46, Tom Rini <trini@konsulko.com> wrote:
+On 2026-04-28T13:36:02, Ludwig Nussel <ludwig.nussel@siemens.com> wrote:
+> virtio: ignore ENODEV for boot device hunting
 >
-> On Mon, Apr 27, 2026 at 11:54:09PM +1200, Simon Glass wrote:
-> > Hi Quentin,
-> >
-> > On Thu, 23 Apr 2026 at 22:24, Quentin Schulz <quentin.schulz@cherry.de> wrote:
-> > >
-> > > Hi Simon,
-> > >
-> > > On 4/22/26 11:57 PM, Simon Glass wrote:
-> > > > Hi Quentin,
-> > > >
-> > > > On Thu, 23 Apr 2026 at 01:26, Quentin Schulz <quentin.schulz@cherry.de> wrote:
-> > > >>
-> > > >> Hi all,
-> > > >>
-> > > >> I'm looking into force-enabling CONFIG_WERROR for all Rockchip SoCs.
-> > > >> First, let me know if this is a bad idea :)
-> > > >
-> > > > I don't like it, as it makes development slower. I like to see all the
-> > > > warnings created by a change and tend to fix them iteratively. We
-> > > > already have a warning check in CI. A better approach is to
-> > > >
-> > > > Can you use: KCFLAGS=-Werror
-> > > >
-> > > > either in your environment or on the 'make' cmdline?
-> > > >
-> > >
-> > > Well, if it's during development, you can always disable WERROR? The
-> > > fact that I've never actually enabled -Werror locally in about a decade
-> > > in U-Boot probably isn't a good sign. One of the things that make me
-> > > wary though is compiler updates with new warnings. I've tested with
-> > > clang 22, don't know when clang 23 is planned to be released. GCC 16 is
-> > > about to be released as well.
-> > >
-> > > By having the check in CI, we have a longer-than-necessary feedback loop
-> > > for contributors. Has this been an issue in the past? /me shrugs
-> >
-> > This is strange though, because people should see the warnings during
-> > development. I wonder if it is scrolling off the screen.
-> >
-> > One my bugbears is non-actionable output. When the build succeeds
-> > (with no warnings) I see no output, using 'buildman -I --board xxx -w
-> > -o /tmp/b/xxx' or in fact these days 'um build xxx'. This uses 'make
-> > -s' under the hood, so that it doesn't print a huge list of filenames,
-> > etc. I also sometimes do a 'fresh' build with 'um build -F xxx' to
-> > check everything is clean ('buildman -m' does something similar).
-> >
-> > Note that buildman returns exit code 101 if there are any warnings, so
-> > the build basically fails.
-> >
-> > >
-> > > No defconfig seems to be setting this option, not sure exactly why that is.
-> >
-> > To me this is a difference between 'functionality' options and
-> > development options. Putting development options in Kconfig makes it
-> > harder to turn them on and off, since you must either edit the
-> > defconfig or edit the .config file. It is easier to just pass an
-> > environment variable.
+> 'Commit 70101c3217ae ("virtio: mmio: Return error codes on probe
+> failures")' returns -ENODEV in some situations. That breaks boot device
+> discovery. Ignoring that error seems to fix the issue. Not sure it's the
+> correct thing to do though.
 >
-> The point of a configuration is that it configures the build. Stuff in
-> environment (directly or make FOO=bar) is a workaround and anti-pattern.
-> Having to run one of the config front-end to change the config is a
-> feature, and good thing.
+> Signed-off-by: Ludwig Nussel <ludwig.nussel@siemens.com>
+>
+> drivers/virtio/virtio-uclass.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 
-To give an example, we have boards which enable LTO, but it is
-sometimes useful to disable it during development - it used to be a
-huge time sync but something seems to have changed recently, as I
-don't see much of a performance gap now. We don't want people
-disabling LTO in the defconfig, though. The same applies for things
-like V=1
+>     'Commit 70101c3217ae ("virtio: mmio: Return error codes on probe
+>     failures")' returns -ENODEV in some situations. That breaks boot devi=
+ce
+>     discovery. Ignoring that error seems to fix the issue. Not sure it's =
+the
+>     correct thing to do though.
 
-So I think there are build features which are of no use to end-users,
-but are helpful for development. That is the distinction we have had
-for a while and it would be a shame to lose it.
+Will need to firm up this commit message :-) Also drop the quotes
+around the leading Commit reference =E2=80=94 the convention is just:
+
+   Commit 70101c3217ae ("virtio: mmio: Return error codes on probe
+failures") ...
+
+A Fixes: tag pointing to it would be useful too.
+
+> diff --git a/drivers/virtio/virtio-uclass.c b/drivers/virtio/virtio-uclas=
+s.c
+> @@ -382,7 +382,7 @@ static int virtio_bootdev_hunt(struct bootdev_hunter =
+*info, bool show)
+>       ret =3D uclass_probe_all(UCLASS_VIRTIO);
+> -     if (ret && ret !=3D -ENOENT)
+> +     if (ret && ret !=3D -ENOENT && ret !=3D -ENODEV)
+>               return log_msg_ret('vir', ret);
+
+I don't think this is the right layer. uclass_probe_all() walks every
+device in the uclass and returns whichever error came back last, so a
+single bogus mmio slot poisons the result for every other working
+virtio device. -ENXIO is also returned from virtio_mmio_probe() for an
+unsupported version and would still bail out here, which is
+inconsistent with what you are trying to achieve.
+
+As I understand it, the placeholder/empty mmio slots should not be
+reaching probe at all, i.e. the bind step should reject them - or
+virtio_mmio_probe() should keep returning 0 for the 'no device
+present' case (wrong magic, ID 0) and let DM treat that as nothing to
+probe. The unsupported-version case is the only real error.
+
+Could you take another look at 70101c3217ae and see whether the fix
+belongs there (or in the bind path) instead?
 
 Regards,
 Simon
