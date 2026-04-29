@@ -4,127 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6AC3DFF8875
-	for <u-boot@archiver.kernel.org>; Wed, 29 Apr 2026 21:17:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8C4AFF8875
+	for <u-boot@archiver.kernel.org>; Wed, 29 Apr 2026 21:17:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4022784934;
+	by phobos.denx.de (Postfix) with ESMTP id 83E5C8493E;
 	Wed, 29 Apr 2026 23:15:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Fa+c+ZcS";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="USGwrGux";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 466B2848A9; Wed, 29 Apr 2026 16:22:40 +0200 (CEST)
-Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
- [IPv6:2a00:1450:4864:20::52e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id E2868848BE; Wed, 29 Apr 2026 20:03:20 +0200 (CEST)
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D208A8489E
- for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 16:22:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9BFA3848BB
+ for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 20:03:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=redhat.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52e.google.com with SMTP id
- 4fb4d7f45d1cf-67b32c695efso684035a12.1
- for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 07:22:36 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1777472556; cv=none;
- d=google.com; s=arc-20240605;
- b=aRVKQJzNOJixS6IoRT6Zcp+uVVbzx5qdukMrPYU6PlivJaxzmugMelE9uXVdoLoFVC
- AlJx3k2PGOi9I+phI9z9qpkNQ2lAHthde4rZ0Uhy5WS4ubkVOH/bEjEaVBREd/jNN72+
- vmS3/EYRLmfFKo6JmP0H7Wb0YFfCHMEc4SfzPV6JKvEVUUYlQyYSMeT4SSkJFFiaVDae
- agMamsu1kBknZW3m5d5MBr/sBh39hPmED+UffjcPaj5IHMUpB+QZ1DqGZXPIQG3T8qIC
- 64fV/lMYfMQnjp7zv/H7k4P9xP+O5IySinq/b8XQUB67slCV6q/yDpj2M9fDjLcSmYhL
- kaOA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=8+sLIDdcu6lXOkK82tMRbShyw4OC9gV6dGitGprffPI=;
- fh=CcNfW6dIjL9WUdVhhW/ZJ0mqXisjz2Ordk1F8mJ+6zw=;
- b=lMwyEEoe/TQ6p8hLYYcDbvB9IBGzpTe9RcLHBAsa+pYR+Jcb/geLd/jzXWIW6ZD7GX
- 925WqJI9AVOJkz3JyRw7Z17Tcfr5m3JjcyiDknUDvVpm48H5Y1HdJHf/j+xqLE6xXHGr
- B/yZLWSVJRENMWr1ibcikzWqhyZH36LSupHOf9A0bLPsg+SbMNHPyE8DwVYaJDK6lKz/
- LtxiqJjE1NvE0t4tzOb7aUEPnLxX1vR4HG5+TnG4c6yDYpFU4xXlo7nPPgkXLAlv8xag
- ChdpUQ95sxSq47AL4Hj/d/TBDmYcqBR8xJ0TjCSkPHQr0WD9mhFEZaUmOKk+lYaQYpPr
- gYhQ==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1777472556; x=1778077356; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=8+sLIDdcu6lXOkK82tMRbShyw4OC9gV6dGitGprffPI=;
- b=Fa+c+ZcSVOn9PvMTSvFmxrsQHry8D2ANHdle58HV0F41PGDvwOeVeLAeW6xDk0fZSp
- NSaWBI7tg8FA5DWOzsjYvXE30Jh6RIwKdMjnJasm3952OFs5Q2wMaB6LQaOUj5/Oa4J6
- bZG+XwAzZeJsqSRPq1/dslUTcMlKPw67IaGtI=
+ spf=pass smtp.mailfrom=ekovsky@redhat.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1777485796;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=rtUp6EUTw/L0WsomPESPwF+V+SaNbN8BDmpKNBc4ZJ4=;
+ b=USGwrGuxNAgjR0ZqQcn6MSG8eG/S9kMBqaQFJTx6xVUBklUr2RNiFfHzBeC82mRimgP10d
+ /2+0M4UPiAbOMo1893BEJ19Soact0CeuM8WSTG+ZarBcuj+WMPPQ+nqBND1rOtiXgp1pei
+ 26X03yILya6p8Y8aaSFWZUaTuGRoLLA=
+Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com
+ [209.85.222.199]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-611-gNtshNtoMfOrrMUQwfoSzQ-1; Wed, 29 Apr 2026 14:03:15 -0400
+X-MC-Unique: gNtshNtoMfOrrMUQwfoSzQ-1
+X-Mimecast-MFC-AGG-ID: gNtshNtoMfOrrMUQwfoSzQ_1777485794
+Received: by mail-qk1-f199.google.com with SMTP id
+ af79cd13be357-8eb21daf7ddso12719285a.1
+ for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 11:03:14 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777472556; x=1778077356;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=1e100.net; s=20251104; t=1777485794; x=1778090594;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=8+sLIDdcu6lXOkK82tMRbShyw4OC9gV6dGitGprffPI=;
- b=HrAIACsUf9tKcyWTH7Q6QnkLsGP/r88gUGWOcEORcfFM1GrkkiLVwsVBM0LfWBv+dr
- ddeCCaZQrG0CBqvgIhcauwoOkWALQwYnjtfYSyqLAiZ4/haJG0qN41scHwNTISBtZJIB
- 8UKJN0hwmcDRiCbZ/gE201xpJ9tcxxNVLnXcH3nD/v/j6cS1ozL+Ge9DC7Kfd0Xelksr
- ufKS94KZSS778eDLpOOyESAJnf+nzeMM/bU6pZTvZXXpuclHSy03uPdMIilUEWJTiH42
- OzTTwoNPQ6B28pOJPoTwGx4chfwf9F9DXBMc6RpZv4k9SosEfgNUTmhKRQQq2S81TuuB
- Jz2w==
-X-Gm-Message-State: AOJu0YxRksV5AVDUHQQAW9edBbafXNe8IzsQnORV0GGYR2gZ0GrkaRyH
- GvNBZ1xreWmJ0f8PPlxP+mGSGkakkb6BEK5XVfAyTAOaiz2gCtMy9FOlRpoHW4vAkde6cDQhdfe
- D8qtETnInnWHVnxspQKLKxcx9L+59Z0omYd5rOU2s
-X-Gm-Gg: AeBDiesvw6+D5eJv1kn1OG4hjoPsB38jhLM+CtlY/81wjB/7m+XCjjSPWtey4hcCkYZ
- IkLrsY17kzzZmW4v8Oecq22BRhR/x9a05MpeFk+UrgBRoTxexluIcVD8RX/aXvAiAAshP2je7k5
- xjxUQmQsZmqohiUY7RXMOBuqy5NWmWACGeVsh8q4jAgdGIx4XOTTbt4CB/Z3WsjMwss7AlfrGbP
- AaDTsy7ZVSF1X0gHdOfqxgUmIQyfNS3mBqPmY+URlYix8AxnhhY7avd+HFynWWaLZpJoXt3MGum
- 8g1aAqbYGGb1eIoA
-X-Received: by 2002:a17:907:80e:b0:ba3:7d65:c373 with SMTP id
- a640c23a62f3a-bb957ec5208mr205607466b.10.1777472556221; Wed, 29 Apr 2026
- 07:22:36 -0700 (PDT)
+ bh=rtUp6EUTw/L0WsomPESPwF+V+SaNbN8BDmpKNBc4ZJ4=;
+ b=lUlTpKNPeO5xurzMN+w+QKDsjiQrMERwSdDkD7wX8BfS/arNKFtfdB7SaoJsmNgG1F
+ UthCa6BNR5Hx1s9Vj5qKGN9C7POJW+KLoZayo4nfdg3O9AEbXLTwPabiag7Ls0LBQAqA
+ EIqdkHLKhif6n2vJgPbI+mwFwo0zb+pl0GW0DoAiriqJHL6+c3uNHPaQWA6y8aRvEGlr
+ qmIDJmVBbjcnHQfJEA8+vQiWqgouOkHkLbXbBf5tf0EJMjviGHxFbbPJ4/Q5Dry8Mw4c
+ 76xZDWinWcA+Q620YSG93BcZeSSXBXMcKL3R0RhzgDu/6rexEP9AfLzW9mpfePj1UYo2
+ u+gQ==
+X-Gm-Message-State: AOJu0YxiHcN1VyBn4KMJSAyGabCxEkcWpmrDk+WDsGdvvNGcoIGEXBet
+ tTU+pc+juiO2wBJLeL1eTXSlny/yTw8SCgwZw/pV6dc/5e6zwpj6/SLD7yVi6jq+oTk3g+hrSUl
+ E1Di8jRZoqIsGHcgbjII/mVqgXBM1XTj9xlkShBGne7FxAOiIkJDEEPo=
+X-Gm-Gg: AeBDievXvQTQ1KF4cRsOdLATth6AUCSwSIkZpkE8+Sp5oviT+MHCDsn/2HcMaKuMqH1
+ cS21tidocjnlgZRKBJ+w+B1q9byf5QNZv3ktI4TCvjwChP6W/UFR/EMGwh5aQPrxZq73rPqe8Og
+ +Lbnp39a50a7CyuTkXekQmPrN0ToHLo9GFkc6gxtfIXTmzA3lhyzr3w94A4owlDsiIAzWCDA/7u
+ OTt/vRAigjNva6mgaurM73XW4dyu0BfOQUc8tXgmajaUA0U8j99Nza25FrCHk8ar3VcxvA8xg7B
+ v72gY62puJaauRqeIpc+9wPd6eU2MECnK0kJdZtEICgQ7JJzbNoQWZH9KGD5zE5/xx6uaCl/DrL
+ WYDqbyIiK1jn2mk+tH7D7y6gRsqk=
+X-Received: by 2002:a05:620a:1792:b0:8eb:f3c7:2230 with SMTP id
+ af79cd13be357-8f7d9501f41mr1173377085a.42.1777485794053; 
+ Wed, 29 Apr 2026 11:03:14 -0700 (PDT)
+X-Received: by 2002:a05:620a:1792:b0:8eb:f3c7:2230 with SMTP id
+ af79cd13be357-8f7d9501f41mr1173371985a.42.1777485793433; 
+ Wed, 29 Apr 2026 11:03:13 -0700 (PDT)
+Received: from localhost ([38.246.12.206]) by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-8f94073200asm260474385a.46.2026.04.29.11.03.12
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 29 Apr 2026 11:03:13 -0700 (PDT)
+From: Eddie Kovsky <ekovsky@redhat.com>
+To: Tom Rini <trini@konsulko.com>, Tobias Olausson <tobias@eub.se>,
+ Paul HENRYS <paul.henrys_ext@softathome.com>,
+ Simon Glass <sjg@chromium.org>, Jan Stancek <jstancek@redhat.com>,
+ Enric Balletbo i Serra <eballetb@redhat.com>, a.fatoum@pengutronix.de,
+ mark.kettenis@xs4all.nl, Mattijs Korpershoek <mkorpershoek@kernel.org>
+Cc: u-boot@lists.denx.de
+Subject: [PATCH v4] Add support for OpenSSL Provider API
+Date: Wed, 29 Apr 2026 12:02:45 -0600
+Message-ID: <20260429180247.83091-1-ekovsky@redhat.com>
+X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
-References: <20260426-qcom_spl-v4-0-8cf4133ff883@seznam.cz>
- <20260426-qcom_spl-v4-7-8cf4133ff883@seznam.cz>
-In-Reply-To: <20260426-qcom_spl-v4-7-8cf4133ff883@seznam.cz>
-From: Simon Glass <sjg@chromium.org>
-Date: Wed, 29 Apr 2026 08:22:23 -0600
-X-Gm-Features: AVHnY4KyUGJbYu4j_wuE9T331bGdMoHuqEaJDi6V7uMIksQJs2iQmqRDhxKTIhI
-Message-ID: <CAFLszThQv6SoP941hy1mjZcP9_kKhiqPhEd4tbAgLM74bCAYFQ@mail.gmail.com>
-Subject: Re: [PATCH v4 07/11] mach-snapdragon: Kconfig: changes / additions to
- support SPL
-To: michael.srba@seznam.cz
-Cc: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>,
- u-boot-qcom@groups.io, 
- Tom Rini <trini@konsulko.com>, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@arm.com>,
- Anshul Dalal <anshuld@ti.com>, 
- Peng Fan <peng.fan@nxp.com>, Mattijs Korpershoek <mkorpershoek@kernel.org>, 
- Quentin Schulz <quentin.schulz@cherry.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Andrew Davis <afd@ti.com>, 
- Hrushikesh Salunke <h-salunke@ti.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
- Ye Li <ye.li@nxp.com>, Andre Przywara <andre.przywara@arm.com>, 
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
- Leo Yu-Chi Liang <ycliang@andestech.com>, 
- Andrew Goodbody <andrew.goodbody@linaro.org>, Dhruva Gole <d-gole@ti.com>, 
- Kaustabh Chakraborty <kauschluss@disroot.org>,
- Jerome Forissier <jerome.forissier@arm.com>, 
- Heiko Schocher <hs@nabladev.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Lukasz Majewski <lukma@denx.de>,
- Mateusz Kulikowski <mateusz.kulikowski@gmail.com>, 
- Dinesh Maniyam <dinesh.maniyam@altera.com>,
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Patrice Chotard <patrice.chotard@foss.st.com>, 
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Michal Simek <michal.simek@amd.com>, 
- Yao Zi <me@ziyao.cc>, Peter Korsgaard <peter@korsgaard.com>, 
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>, 
- Casey Connolly <casey.connolly@linaro.org>,
- Tingting Meng <tingting.meng@altera.com>, 
- Tien Fong Chee <tien.fong.chee@altera.com>, Alice Guo <alice.guo@nxp.com>, 
- George Chan <gchan9527@gmail.com>, 
- Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
- Alexey Charkov <alchark@gmail.com>, Ronald Wahl <ronald.wahl@legrand.com>,
- Michael Trimarchi <michael@amarulasolutions.com>
-Content-Type: text/plain; charset="UTF-8"
+X-Mimecast-Spam-Score: 0
+X-Mimecast-MFC-PROC-ID: UGDFD6zeyMT_34bn4AhboCUDMjPQu8a3FBXg4lsMb6o_1777485794
+X-Mimecast-Originator: redhat.com
+Content-Transfer-Encoding: 8bit
+content-type: text/plain; charset="US-ASCII"; x-default=true
 X-Mailman-Approved-At: Wed, 29 Apr 2026 23:15:47 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -142,80 +109,348 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Michael,
+The Engine API has been deprecated since the release of OpenSSL 3.0. End
+users have been advised to migrate to the new Provider interface.
+Several distributions have already removed support for engines, which is
+preventing U-Boot from being compiled in those environments.
 
-On 2026-04-25T23:26:13, Michael Srba <michael.srba@seznam.cz> wrote:
-> mach-snapdragon: Kconfig: changes / additions to support SPL
->
-> An SoC to target has to be selected, e.g. TARGET_SDM845.
-> This will enable the per-SoC boot0.h.
->
-> Signed-off-by: Michael Srba <Michael.Srba@seznam.cz>
->
-> arch/arm/Kconfig                 | 34 +++++++++++++++++++++++++++++++++-
->  arch/arm/mach-snapdragon/Kconfig | 31 ++++++++++++++++++++++++++++---
->  2 files changed, 61 insertions(+), 4 deletions(-)
+Add support for the Provider API while continuing to support the existing
+Engine API on distros shipping older releases of OpenSSL.
 
-> diff --git a/arch/arm/mach-snapdragon/Kconfig b/arch/arm/mach-snapdragon/Kconfig
-> @@ -42,4 +39,32 @@ config SYS_CONFIG_NAME
-> +choice
-> +     prompt "Qualcomm SoC select"
-> +     default TARGET_NONE if !SPL
-> +     help
-> +       While U-Boot on Qualcomm platforms doesn't generally need compile-time
-> +       adjustment based on the target SoC, there are a few exceptions to this.
-> +       Currently this concerns boot0.h discrimination.
-> +
-> +config TARGET_NONE
-> +     bool "Generic build"
-> +     help
-> +       Select this if you're not building SPL. U-Boot proper builds are currently
-> +       generic across all SoCs.
-> +
-> +config TARGET_SDM845
-> +     bool "SPL targeting the sdm845 SoC"
-> +     help
-> +       Select this if you are building u-boot SPL for sdm845.
-> +       Currently this gates sdm845-specific boot0.h (only used in SPL).
-> +
-> +endchoice
+This is based on similar work contributed by Jan Stancek updating Linux
+to use the Provider interface.
 
-A few things:
+    commit 558bdc45dfb2669e1741384a0c80be9c82fa052c
+    Author: Jan Stancek <jstancek@redhat.com>
+    Date:   Fri Sep 20 19:52:48 2024 +0300
 
-- TARGET_NONE only exists to give the choice a default for !SPL. Can
-you instance make the choice 'optional' and drop TARGET_NONE, so a
-U-Boot proper build simply has no SoC selected?
-- Neither option is gated, so a user can pick TARGET_NONE with SPL=y
-or TARGET_SDM845 with SPL=n, both of which contradict the help. So
-TARGET_SDM845 should at least have 'depends on SPL'.
-- TARGET_* is conventionally a board identifier (TARGET_RPI_4,
-TARGET_SNOW, ...), not an SoC. SOC_SDM845 would match the existing
-pattern and avoid colliding with a future SDM845 board target.
+        sign-file,extract-cert: use pkcs11 provider for OPENSSL MAJOR >= 3
 
-Also please expand the commit message to cover the choice mechanism,
-why SYSRESET_PSCI is excluded for SPL (EL3 / no PSCI provider), and
-why SUPPORT_SPL is now selected unconditionally.
+The changes have been tested with the FIT signature verification vboot
+tests on Fedora 42 and Debian 13. All 30 tests pass with both the legacy
+Engine library installed and with the Provider API.
 
-> diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
-> @@ -1124,6 +1124,7 @@ config ARCH_SNAPDRAGON
->       bool "Qualcomm Snapdragon SoCs"
->       select ARM64
->       select DM
-> +     select DM_EVENT if USB_DWC3_GENERIC || SPL_USB_DWC3_GENERIC
+Tested-by Enric Balletbo i Serra <eballetb@redhat.com>
+Tested-by Mark Kettenis <mark.kettenis@xs4all.nl>
+Signed-off-by: Eddie Kovsky <ekovsky@redhat.com>
+---
+Changes in v4:
+- Add comment that @engine pointer is null when using pkcs11 provider
+- Remove extra line break
+- Add pkcs11-provider package to build dependencies
+v3: https://lore.kernel.org/u-boot/20260120164524.253188-1-ekovsky@redhat.com/
 
-DM_EVENT is the U-Boot-proper symbol, so SPL_USB_DWC3_GENERIC will
-pull it into U-Boot proper as well - the SPL side is already covered
-by 'select SPL_EVENT if SPL_USB_DWC3_GENERIC' below. You should be
-able to drop the SPL_USB_DWC3_GENERIC term here.
+Changes in v3:
+- Removed Kconfig option
+- Changed macro symbol from CONFIG_OPENSSL_NO_DEPRECATED to
+    USE_PKCS11_PROVIDER or USE_PKCS11_ENGINE
+v2: https://lore.kernel.org/u-boot/20251027195834.71109-1-ekovsky@redhat.com/
 
-> diff --git a/arch/arm/mach-snapdragon/Kconfig b/arch/arm/mach-snapdragon/Kconfig
-> @@ -42,4 +39,32 @@ config SYS_CONFIG_NAME
-> +config SPL_SHARES_INIT_SP_ADDR
-> +     default n
+Changes in v2:
+- Remove default for new Kconfig option
+- Use #ifdef instead of IS_ENABLED macro
+- Remove comment after #endif
+- Remove unrelated checkpatch cleanup of 'sslErr' variable name
+v1: https://lore.kernel.org/u-boot/20251017171329.255689-1-ekovsky@redhat.com/
+---
+ doc/build/gcc.rst       |   4 +-
+ lib/aes/aes-encrypt.c   |   4 +-
+ lib/rsa/rsa-sign.c      | 102 ++++++++++++++++++++++++++++++++++++++--
+ tools/docker/Dockerfile |   1 +
+ 4 files changed, 103 insertions(+), 8 deletions(-)
 
-'n' is already the default for a bool, so this is a no-op - please
-drop it, or add a comment if the intent is to override the 'default y'
-in common/spl/Kconfig.
+diff --git a/doc/build/gcc.rst b/doc/build/gcc.rst
+index 1fef718ceecb..29a6a632e7e3 100644
+--- a/doc/build/gcc.rst
++++ b/doc/build/gcc.rst
+@@ -25,8 +25,8 @@ Depending on the build targets further packages maybe needed
+ 
+     sudo apt-get install bc bison build-essential coccinelle \
+       device-tree-compiler dfu-util efitools flex gdisk graphviz imagemagick \
+-      libgnutls28-dev libguestfs-tools libncurses-dev \
+-      libpython3-dev libsdl2-dev libssl-dev lz4 lzma lzma-alone openssl \
++      libgnutls28-dev libguestfs-tools libncurses-dev libpython3-dev \
++      libsdl2-dev libssl-dev lz4 lzma lzma-alone openssl pkcs11-provider \
+       pkg-config python3 python3-asteval python3-coverage python3-filelock \
+       python3-pkg-resources python3-pycryptodome python3-pyelftools \
+       python3-pytest python3-pytest-xdist python3-sphinxcontrib.apidoc \
+diff --git a/lib/aes/aes-encrypt.c b/lib/aes/aes-encrypt.c
+index 90e1407b4f09..4fc4ce232478 100644
+--- a/lib/aes/aes-encrypt.c
++++ b/lib/aes/aes-encrypt.c
+@@ -16,7 +16,9 @@
+ #include <openssl/err.h>
+ #include <openssl/ssl.h>
+ #include <openssl/evp.h>
+-#include <openssl/engine.h>
++#if !defined(OPENSSL_NO_ENGINE) && !defined(OPENSSL_NO_DEPRECATED_3_0)
++# include <openssl/engine.h>
++#endif
+ #include <uboot_aes.h>
+ 
+ #if OPENSSL_VERSION_NUMBER >= 0x10000000L
+diff --git a/lib/rsa/rsa-sign.c b/lib/rsa/rsa-sign.c
+index 0e38c9e802fd..f456f3c58e65 100644
+--- a/lib/rsa/rsa-sign.c
++++ b/lib/rsa/rsa-sign.c
+@@ -19,7 +19,47 @@
+ #include <openssl/err.h>
+ #include <openssl/ssl.h>
+ #include <openssl/evp.h>
+-#include <openssl/engine.h>
++#if OPENSSL_VERSION_MAJOR >= 3
++# define USE_PKCS11_PROVIDER
++# include <err.h>
++# include <openssl/provider.h>
++# include <openssl/store.h>
++#else
++# if !defined(OPENSSL_NO_ENGINE) && !defined(OPENSSL_NO_DEPRECATED_3_0)
++#  define USE_PKCS11_ENGINE
++#  include <openssl/engine.h>
++# endif
++#endif
++
++#ifdef USE_PKCS11_PROVIDER
++#define ERR(cond, fmt, ...)				\
++	do {						\
++		bool __cond = (cond);			\
++		drain_openssl_errors(__LINE__, 0);	\
++		if (__cond) {				\
++			errx(1, fmt, ## __VA_ARGS__);	\
++		}					\
++	} while (0)
++
++static void drain_openssl_errors(int l, int silent)
++{
++	const char *file;
++	char buf[120];
++	int e, line;
++
++	if (ERR_peek_error() == 0)
++		return;
++	if (!silent)
++		fprintf(stderr, "At main.c:%d:\n", l);
++
++	while ((e = ERR_peek_error_line(&file, &line))) {
++		ERR_error_string(e, buf);
++		if (!silent)
++			fprintf(stderr, "- SSL %s: %s:%d\n", buf, file, line);
++		ERR_get_error();
++	}
++}
++#endif
+ 
+ static int rsa_err(const char *msg)
+ {
+@@ -94,10 +134,11 @@ err_cert:
+  *
+  * @keydir:	Key prefix
+  * @name	Name of key
+- * @engine	Engine to use
++ * @engine	Engine to use or NULL when using pkcs11 provider
+  * @evpp	Returns EVP_PKEY object, or NULL on failure
+  * Return: 0 if ok, -ve on error (in which case *evpp will be set to NULL)
+  */
++#ifdef USE_PKCS11_ENGINE
+ static int rsa_engine_get_pub_key(const char *keydir, const char *name,
+ 				  ENGINE *engine, EVP_PKEY **evpp)
+ {
+@@ -157,21 +198,24 @@ static int rsa_engine_get_pub_key(const char *keydir, const char *name,
+ 
+ 	return 0;
+ }
++#endif
+ 
+ /**
+  * rsa_get_pub_key() - read a public key
+  *
+  * @keydir:	Directory containing the key (PEM file) or key prefix (engine)
+  * @name	Name of key file (will have a .crt extension)
+- * @engine	Engine to use
++ * @engine	Engine to use or NULL when using pkcs11 provider
+  * @evpp	Returns EVP_PKEY object, or NULL on failure
+  * Return: 0 if ok, -ve on error (in which case *evpp will be set to NULL)
+  */
+ static int rsa_get_pub_key(const char *keydir, const char *name,
+ 			   ENGINE *engine, EVP_PKEY **evpp)
+ {
++#ifdef USE_PKCS11_ENGINE
+ 	if (engine)
+ 		return rsa_engine_get_pub_key(keydir, name, engine, evpp);
++#endif
+ 	return rsa_pem_get_pub_key(keydir, name, evpp);
+ }
+ 
+@@ -207,13 +251,44 @@ static int rsa_pem_get_priv_key(const char *keydir, const char *name,
+ 		return -ENOENT;
+ 	}
+ 
++#ifdef USE_PKCS11_PROVIDER
++	EVP_PKEY *private_key = NULL;
++	OSSL_STORE_CTX *store;
++
++	if (!OSSL_PROVIDER_try_load(NULL, "pkcs11", true))
++		ERR(1, "OSSL_PROVIDER_try_load(pkcs11)");
++	if (!OSSL_PROVIDER_try_load(NULL, "default", true))
++		ERR(1, "OSSL_PROVIDER_try_load(default)");
++
++	store = OSSL_STORE_open(path, NULL, NULL, NULL, NULL);
++	ERR(!store, "OSSL_STORE_open");
++
++	while (!OSSL_STORE_eof(store)) {
++		OSSL_STORE_INFO *info = OSSL_STORE_load(store);
++
++		if (!info) {
++			drain_openssl_errors(__LINE__, 0);
++			continue;
++		}
++		if (OSSL_STORE_INFO_get_type(info) == OSSL_STORE_INFO_PKEY) {
++			private_key = OSSL_STORE_INFO_get1_PKEY(info);
++			ERR(!private_key, "OSSL_STORE_INFO_get1_PKEY");
++		}
++		OSSL_STORE_INFO_free(info);
++		if (private_key)
++			break;
++	}
++	OSSL_STORE_close(store);
++
++	*evpp = private_key;
++#else
+ 	if (!PEM_read_PrivateKey(f, evpp, NULL, path)) {
+ 		rsa_err("Failure reading private key");
+ 		fclose(f);
+ 		return -EPROTO;
+ 	}
+ 	fclose(f);
+-
++#endif
+ 	return 0;
+ }
+ 
+@@ -226,6 +301,7 @@ static int rsa_pem_get_priv_key(const char *keydir, const char *name,
+  * @evpp	Returns EVP_PKEY object, or NULL on failure
+  * Return: 0 if ok, -ve on error (in which case *evpp will be set to NULL)
+  */
++#ifdef USE_PKCS11_ENGINE
+ static int rsa_engine_get_priv_key(const char *keydir, const char *name,
+ 				   const char *keyfile,
+ 				   ENGINE *engine, EVP_PKEY **evpp)
+@@ -293,22 +369,25 @@ static int rsa_engine_get_priv_key(const char *keydir, const char *name,
+ 
+ 	return 0;
+ }
++#endif
+ 
+ /**
+  * rsa_get_priv_key() - read a private key
+  *
+  * @keydir:	Directory containing the key (PEM file) or key prefix (engine)
+  * @name	Name of key
+- * @engine	Engine to use for signing
++ * @engine	Engine to use or NULL when using pkcs11 provider
+  * @evpp	Returns EVP_PKEY object, or NULL on failure
+  * Return: 0 if ok, -ve on error (in which case *evpp will be set to NULL)
+  */
+ static int rsa_get_priv_key(const char *keydir, const char *name,
+ 			    const char *keyfile, ENGINE *engine, EVP_PKEY **evpp)
+ {
++#ifdef USE_PKCS11_ENGINE
+ 	if (engine)
+ 		return rsa_engine_get_priv_key(keydir, name, keyfile, engine,
+ 					       evpp);
++#endif
+ 	return rsa_pem_get_priv_key(keydir, name, keyfile, evpp);
+ }
+ 
+@@ -325,6 +404,7 @@ static int rsa_init(void)
+ 	return 0;
+ }
+ 
++#ifdef USE_PKCS11_ENGINE
+ static int rsa_engine_init(const char *engine_id, ENGINE **pe)
+ {
+ 	const char *key_pass;
+@@ -380,6 +460,7 @@ static void rsa_engine_remove(ENGINE *e)
+ 		ENGINE_free(e);
+ 	}
+ }
++#endif
+ 
+ static int rsa_sign_with_key(EVP_PKEY *pkey, struct padding_algo *padding_algo,
+ 			     struct checksum_algo *checksum_algo,
+@@ -480,11 +561,13 @@ int rsa_sign(struct image_sign_info *info,
+ 	if (ret)
+ 		return ret;
+ 
++#ifdef USE_PKCS11_ENGINE
+ 	if (info->engine_id) {
+ 		ret = rsa_engine_init(info->engine_id, &e);
+ 		if (ret)
+ 			return ret;
+ 	}
++#endif
+ 
+ 	ret = rsa_get_priv_key(info->keydir, info->keyname, info->keyfile,
+ 			       e, &pkey);
+@@ -496,16 +579,21 @@ int rsa_sign(struct image_sign_info *info,
+ 		goto err_sign;
+ 
+ 	EVP_PKEY_free(pkey);
++
++#ifdef USE_PKCS11_ENGINE
+ 	if (info->engine_id)
+ 		rsa_engine_remove(e);
++#endif
+ 
+ 	return ret;
+ 
+ err_sign:
+ 	EVP_PKEY_free(pkey);
+ err_priv:
++#ifdef USE_PKCS11_ENGINE
+ 	if (info->engine_id)
+ 		rsa_engine_remove(e);
++#endif
+ 	return ret;
+ }
+ 
+@@ -645,11 +733,13 @@ int rsa_add_verify_data(struct image_sign_info *info, void *keydest)
+ 	ENGINE *e = NULL;
+ 
+ 	debug("%s: Getting verification data\n", __func__);
++#ifdef USE_PKCS11_ENGINE
+ 	if (info->engine_id) {
+ 		ret = rsa_engine_init(info->engine_id, &e);
+ 		if (ret)
+ 			return ret;
+ 	}
++#endif
+ 	ret = rsa_get_pub_key(info->keydir, info->keyname, e, &pkey);
+ 	if (ret)
+ 		goto err_get_pub_key;
+@@ -726,8 +816,10 @@ done:
+ err_get_params:
+ 	EVP_PKEY_free(pkey);
+ err_get_pub_key:
++#ifdef USE_PKCS11_ENGINE
+ 	if (info->engine_id)
+ 		rsa_engine_remove(e);
++#endif
+ 
+ 	if (ret)
+ 		return ret;
+diff --git a/tools/docker/Dockerfile b/tools/docker/Dockerfile
+index 73bf6cdd2c52..50e98e83dc20 100644
+--- a/tools/docker/Dockerfile
++++ b/tools/docker/Dockerfile
+@@ -122,6 +122,7 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
+ 	openssl \
+ 	picocom \
+ 	parted \
++	pkcs11-provider \
+ 	pkg-config \
+ 	python-is-python3 \
+ 	python3 \
+-- 
+2.53.0
 
-Regards,
-Simon
