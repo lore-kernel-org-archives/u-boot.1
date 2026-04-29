@@ -4,84 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7733AFF8867
-	for <u-boot@archiver.kernel.org>; Wed, 29 Apr 2026 12:42:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D6B1FF8867
+	for <u-boot@archiver.kernel.org>; Wed, 29 Apr 2026 12:42:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8CA0D8489C;
+	by phobos.denx.de (Postfix) with ESMTP id DF18D848A0;
 	Wed, 29 Apr 2026 14:40:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20251104.gappssmtp.com header.i=@baylibre-com.20251104.gappssmtp.com header.b="U9dpJXKx";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20251104.gappssmtp.com header.i=@baylibre-com.20251104.gappssmtp.com header.b="czvWdr+z";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D85D484713; Wed, 29 Apr 2026 11:17:46 +0200 (CEST)
-Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
- [IPv6:2a00:1450:4864:20::333])
+ id 2AA9C84711; Wed, 29 Apr 2026 11:17:49 +0200 (CEST)
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [IPv6:2a00:1450:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 65C1E84705
- for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 11:17:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3F77984705
+ for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 11:17:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jstephan@baylibre.com
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-488b150559bso96572085e9.1
- for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 02:17:44 -0700 (PDT)
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-488b3f8fa2bso6194345e9.1
+ for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 02:17:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20251104.gappssmtp.com; s=20251104; t=1777454264; x=1778059064;
+ d=baylibre-com.20251104.gappssmtp.com; s=20251104; t=1777454267; x=1778059067;
  darn=lists.denx.de; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=f6quaoxQhjr9s3rbFQ1AfbME3klMiGPKGJ3Ars8yRck=;
- b=U9dpJXKx9XEYSLOT1Emb9YeF34E8jlmIFjp1iuHgXJcheTYWIVK8HU97DcXSWXs08R
- 4R9IJdbivi4mgoaBPINDUMWR3otxDl2mKYo7E5MmbMsx/DxDxD0+hi8n704NJ3sDmIME
- MtolS7fhg5c2Gabl7Qp1nVqhiMciG2CClIFVe6Y6dAtBk8Fgtf3aph0dMfRhlUoyVMR2
- j/F1jzJVodaOZuhcNxTVHhx32i8iGlAvMhFtfkKAbLf1Ld8Rc/RcQIig8WqZWt6IvP6P
- 2i4dz3YO5lT8Ohe5VQCpP7pRrAt1b6N6nHAMoqio48Pe2pYaclMogfAnSjksguzAlP8U
- O82w==
+ :reply-to; bh=PKZajtnxuquByd82zKC7xi3sY6wzeZyzPF0oTBC4qiY=;
+ b=czvWdr+zyJCYsi9rRR5x3Zb85XiiSXWdOYuwjzacVrsU36ibmlDcsxf/Ia8rMJobOD
+ gefw3q/j9c8y7Wd134T/bimc+5hfgPZzGogcZ9L8c93CSyRAGlFvygd2dNU8IifRFr9S
+ gsAI8bT/UXEjdVKeQ90YtW0tI01NBm/fohv2FwBzr9bKYqWrrcv8mnaz7SM5889bOLQP
+ 2UQA1PiKlkjjbLhWEkgKZkF1rYlIznUUH+i7pM11+CG/enWe2CUIbnmoQmi7mvhvQlvS
+ RaZGoGA9D3FRwTBH0/8mPd6u63mM3XJwW0GFaNaXoB5T15fVwv3JWB55bLTlZdazodv2
+ PCOg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777454264; x=1778059064;
+ d=1e100.net; s=20251104; t=1777454267; x=1778059067;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=f6quaoxQhjr9s3rbFQ1AfbME3klMiGPKGJ3Ars8yRck=;
- b=cY6MzZTeMy7hI5Un7kRH4WgP4O+mBUM9LNsPjEbQPzQh+2I+C0Zbdh0kJCyJMF9fiW
- J70lahChiahKMm3I48qhX9UVoViyLahslWbUWiFouojHv7bujgIO2Bul8QK/APP/SUrU
- JN05kB3sOT78LLR4eqA4O6Fssynz1US71GMQCdseblGwhRCA5gnoDbvoyFm6JIga5X8D
- /5BemrDjNcAN6RI2jXjPI1zIxUqcvtwOX1ORnPFvJeocAYq3kzXqdznITxZ76qGBlwkF
- j556XhSh1jHqlAAemF3ntPhHailSDyMi2EsTl93BXfZOt9RQdOHUWeP24zfjxcPmy76C
- 2dWQ==
-X-Gm-Message-State: AOJu0Yw2Cz1QyXJr/VzIIb2/PrTOCDUr+SXDoeosOaKFa3p0nubsqDel
- SZkCfVG5cxGPe0NsScZsKDr4ebou1qS/gfiUxqYTPmSyx9s/tGWmWf2OdFG7ssRGy/k=
-X-Gm-Gg: AeBDies0suIZTEnvdNP6B2Xc1F9+8IhoV6DprWueeNcW6Z5xoCytE3lFtZra1iQXJzZ
- nhoTuz+CNTP3oktZX9JWgyKFSRDTF9MeAxV3zx8LhChSGw8PVhJ+N+4oxQUiSsHHnQinWLXzCet
- OwA7eEMFwLXGwhQz+yZiBuGFnnYj379A7C4kGiNXQg4fUM+htto4tgtDhMoPQRVkWrNSME5IHAv
- jSybILmu05z8ItFgicVd6JCmHHlsIdgmdeZ9K+gEb+jLPXdSBX/nDpkt5d7Ma++TnBFyNyXsfaZ
- ij908U6GU0Zm8UE+RBlN+Zj/3GXLhLunoMYWEtXMFZJaeaTy6bH54gy4EGjnjNLE9eFJ6aYF5BL
- 3pOcJPEBbfO6tLIpSeMwkz8ra+5ooOcbcKNxjf9LrHE4TjgfU4T+qvgYrRxJWN2WfcTrZh74i+o
- jwlatSATSU0fljLY7NaJTpTZycjtaGECChEjvQvkfJvGF4jegnHcLXkgiy5GmT4+fHuOJW3ZnMi
- /ZdxEaFmh1EXQU22FCO8xnD9AxIVJyZbZcTczw0CPjJFRuapQ6MBFVDh0pJEpFG3uDZW1xAJEFN
- dJ7za+McW7lit1QN
-X-Received: by 2002:a05:600c:3b0f:b0:489:1c32:210d with SMTP id
- 5b1f17b1804b1-48a77b0a507mr103135645e9.15.1777454263686; 
- Wed, 29 Apr 2026 02:17:43 -0700 (PDT)
+ bh=PKZajtnxuquByd82zKC7xi3sY6wzeZyzPF0oTBC4qiY=;
+ b=fLK1SZTCDdOnyNKWi53+RQG64OZf5ksIEPlvtsn9M6u8mi2HgEpE8rpCqjHuYfeYVp
+ b38EcQzHIZC2/00Ar5/d6sUAbEuSJnZ61mAqlgzMT4IsvbMnWPUH6D3bELAnxL+4FH64
+ di6WMYKzvm56xmcLqgGzQtXHPNTJJHF/FZ2bwm40WRCCOuD9B6jJ9/59uyDUlC5HZxyg
+ xytm3Px7Z7hmQhSksJwj/kOQpRh8tpgKOsP5pvNWKvEpwlYvMyfAFKcQivTfnUgGIyJ8
+ x9MXg7T6DsKm3i4fBtAi0SzuddBZuEQQd6vihD5gq264cuIflA8ORK6gZIZsOv0ogrK5
+ YhCw==
+X-Gm-Message-State: AOJu0Yz52LqNIjTGCj9phUjJDOgQwySaGJuuwL4Xo+lo67R5GmkOKhut
+ a3GinCtZK5Fv9lBdDKUFFU8IaK25C9wooFcEBNcPHf1gIGYD+5LF2+O3xcbrxATCkUQ=
+X-Gm-Gg: AeBDietNnjAD8JdnJY0wL+xjoZVZOYG/RGj7pkDjP3YNHYyA2ds/myi43+8tM+LvHCw
+ DgZySNYyUjkGhqtJFLpE5/PssTXFKbpccjUHz9b56YBcg20/RrweLX+YfPy/98V1oXvarGP5sSX
+ PQiGFwAgKcKQRUAymNpPPQ3GGD8jRYQPqSqiEJzOrrPZpRlI6SA2dL7BjOvUR2EyFbFJ9CmVpZN
+ 6Sj+wcnkFL9CjPC/Wcy5/5bfN33kzWXitFeXPCaRv5HvJKkWpwHP1CevUq3i0QaiH8qH7eeVbYR
+ fdfR/Q22jR2Xc4CV+KY0xENXyMHjwOZ6wZWbRLevrrsyOnP5qbH4l/UVlCh5rJd0mKzq/FkiXt0
+ r+gUGk6ie5qtvNf0QGaMuTlMhfMn1e4w2LLDO8WIHE9DDzJEnlpHGSZ9CijmKm6F0BDqeLdcNox
+ e2BU4bsvgAdxTo9H7b9FJ9MW0ND8i1TTESEuYLWkjtum0cYodLVLt0deVBxi/EpRlI9Cx0yyWvC
+ /hSB3WvRfLCtWI4jAmtf11edi0MRh7dJnHv2oCP+Lb+PvfjcabIdcJJjudHQ6QBJWWJZn/5nmtN
+ thrxzYLhY4nXZ3kH
+X-Received: by 2002:a05:600c:1f96:b0:485:3cef:d6ea with SMTP id
+ 5b1f17b1804b1-48a7bfc4834mr34890225e9.13.1777454266445; 
+ Wed, 29 Apr 2026 02:17:46 -0700 (PDT)
 Received: from [192.168.1.64]
  (2a02-842a-d52e-6101-6fd0-06c4-5d68-f0a5.rev.sfr.net.
  [2a02:842a:d52e:6101:6fd0:6c4:5d68:f0a5])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-48a7b9dee18sm44478375e9.0.2026.04.29.02.17.40
+ 5b1f17b1804b1-48a7b9dee18sm44478375e9.0.2026.04.29.02.17.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 29 Apr 2026 02:17:43 -0700 (PDT)
+ Wed, 29 Apr 2026 02:17:45 -0700 (PDT)
 From: Julien Stephan <jstephan@baylibre.com>
-Date: Wed, 29 Apr 2026 11:17:16 +0200
-Subject: [PATCH v3 8/9] arm: dts: mt8189: Add ethernet support for Genio
- 520/720 boards
+Date: Wed, 29 Apr 2026 11:17:17 +0200
+Subject: [PATCH v3 9/9] configs: mt8189: Enable ethernet support
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260429-add-ethernet-support-for-genio-520-720-v3-8-1f65e18d4f54@baylibre.com>
+Message-Id: <20260429-add-ethernet-support-for-genio-520-720-v3-9-1f65e18d4f54@baylibre.com>
 References: <20260429-add-ethernet-support-for-genio-520-720-v3-0-1f65e18d4f54@baylibre.com>
 In-Reply-To: <20260429-add-ethernet-support-for-genio-520-720-v3-0-1f65e18d4f54@baylibre.com>
 To: u-boot@lists.denx.de
@@ -143,210 +142,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add Ethernet support for MediaTek MT8189-based Genio 520 and Genio 720
-development boards.
-
-The ethernet interface is disabled by default in the SoC dtsi and
-enabled in the board-specific configuration with proper PHY settings.
-
-The ethernet related nodes are not part of current dt submission on the
-kernel [1] and come from downstream u-boot. When switching to
-OF_UPSTREAM we should add them back.
-
-[1]: https://lore.kernel.org/all/20251203-add-mediatek-genio-520-720-evk-v1-3-df794b2a30ae@collabora.com/
+Enable configs needed to support ethernet on MT8189-based boards.
 
 Signed-off-by: Julien Stephan <jstephan@baylibre.com>
 ---
- arch/arm/dts/mt8189.dtsi              | 77 ++++++++++++++++++++++++++++++++
- arch/arm/dts/mt8371-genio-common.dtsi | 83 +++++++++++++++++++++++++++++++++++
- 2 files changed, 160 insertions(+)
+ configs/mt8189.config | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-diff --git a/arch/arm/dts/mt8189.dtsi b/arch/arm/dts/mt8189.dtsi
-index e550745ac5d..d4ee268a298 100644
---- a/arch/arm/dts/mt8189.dtsi
-+++ b/arch/arm/dts/mt8189.dtsi
-@@ -364,6 +364,83 @@
- 			#reset-cells = <1>;
- 		};
- 
-+		eth: ethernet@1101a000 {
-+			compatible = "mediatek,mt8189-gmac", "snps,dwmac-5.10a";
-+			reg = <0 0x1101a000 0 0x4000>;
-+			interrupts = <GIC_SPI 475 IRQ_TYPE_LEVEL_HIGH 0>;
-+			interrupt-names = "macirq";
-+			clock-names = "mac_main",
-+				      "ptp_ref";
-+			clocks = <&topckgen_clk CLK_TOP_ETH_250M_SEL>,
-+				 <&topckgen_clk CLK_TOP_ETH_62P4M_PTP_SEL>;
-+			assigned-clocks = <&topckgen_clk CLK_TOP_ETH_250M_SEL>,
-+					  <&topckgen_clk CLK_TOP_ETH_62P4M_PTP_SEL>,
-+					  <&topckgen_clk CLK_TOP_ETH_50M_RMII_SEL>;
-+			assigned-clock-parents = <&topckgen_clk CLK_TOP_ETHPLL_D2>,
-+						 <&topckgen_clk CLK_TOP_ETHPLL_D8>,
-+						 <&topckgen_clk CLK_TOP_ETHPLL_D10>;
-+			mediatek,pericfg = <&pericfg_ao_clk>;
-+			snps,axi-config = <&stmmac_axi_setup>;
-+			snps,mtl-rx-config = <&mtl_rx_setup>;
-+			snps,mtl-tx-config = <&mtl_tx_setup>;
-+			snps,txpbl = <16>;
-+			snps,rxpbl = <16>;
-+			clk-csr = <4>;
-+			status = "disabled";
-+
-+			stmmac_axi_setup: stmmac-axi-config {
-+				snps,wr-osr-lmt = <0x7>;
-+				snps,rd-osr-lmt = <0x7>;
-+				snps,blen = <0 0 0 0 16 8 4>;
-+			};
-+
-+			mtl_rx_setup: rx-queues-config {
-+				snps,rx-queues-to-use = <4>;
-+				snps,rx-sched-sp;
-+				queue0 {
-+					snps,dcb-algorithm;
-+					snps,map-to-dma-channel = <0x0>;
-+				};
-+				queue1 {
-+					snps,dcb-algorithm;
-+					snps,map-to-dma-channel = <0x0>;
-+				};
-+				queue2 {
-+					snps,dcb-algorithm;
-+					snps,map-to-dma-channel = <0x0>;
-+				};
-+				queue3 {
-+					snps,dcb-algorithm;
-+					snps,map-to-dma-channel = <0x0>;
-+				};
-+			};
-+
-+			mtl_tx_setup: tx-queues-config {
-+				snps,tx-queues-to-use = <4>;
-+				snps,tx-sched-wrr;
-+				queue0 {
-+					snps,weight = <0x10>;
-+					snps,dcb-algorithm;
-+					snps,priority = <0x0>;
-+				};
-+				queue1 {
-+					snps,weight = <0x11>;
-+					snps,dcb-algorithm;
-+					snps,priority = <0x1>;
-+				};
-+				queue2 {
-+					snps,weight = <0x12>;
-+					snps,dcb-algorithm;
-+					snps,priority = <0x2>;
-+				};
-+				queue3 {
-+					snps,weight = <0x13>;
-+					snps,dcb-algorithm;
-+					snps,priority = <0x3>;
-+				};
-+			};
-+		};
-+
- 		topckgen_clk: clock-controller@10000000 {
- 			compatible = "mediatek,mt8189-topckgen", "syscon";
- 			reg = <0 0x10000000 0 0x1000>;
-diff --git a/arch/arm/dts/mt8371-genio-common.dtsi b/arch/arm/dts/mt8371-genio-common.dtsi
-index 046e9d57752..1376a4c378c 100644
---- a/arch/arm/dts/mt8371-genio-common.dtsi
-+++ b/arch/arm/dts/mt8371-genio-common.dtsi
-@@ -281,6 +281,68 @@
- 			bias-pull-up;
- 		};
- 	};
-+
-+	eth_default_pins: eth-default-pins {
-+		txd-pins {
-+			pinmux = <PINMUX_GPIO119__FUNC_GBE_TXD3>,
-+				 <PINMUX_GPIO120__FUNC_GBE_TXD2>,
-+				 <PINMUX_GPIO121__FUNC_GBE_TXD1>,
-+				 <PINMUX_GPIO122__FUNC_GBE_TXD0>;
-+			drive-strength = <MTK_DRIVE_8mA>;
-+		};
-+		cc-pins {
-+			pinmux = <PINMUX_GPIO127__FUNC_GBE_TXC>,
-+				 <PINMUX_GPIO130__FUNC_GBE_TXEN>,
-+				 <PINMUX_GPIO129__FUNC_GBE_RXDV>,
-+				 <PINMUX_GPIO128__FUNC_GBE_RXC>;
-+			drive-strength = <MTK_DRIVE_8mA>;
-+		};
-+		rxd-pins {
-+			pinmux = <PINMUX_GPIO123__FUNC_GBE_RXD3>,
-+				 <PINMUX_GPIO124__FUNC_GBE_RXD2>,
-+				 <PINMUX_GPIO125__FUNC_GBE_RXD1>,
-+				 <PINMUX_GPIO126__FUNC_GBE_RXD0>;
-+			drive-strength = <MTK_DRIVE_8mA>;
-+		};
-+		mdio-pins {
-+			pinmux = <PINMUX_GPIO131__FUNC_GBE_MDC>,
-+				 <PINMUX_GPIO132__FUNC_GBE_MDIO>;
-+			drive-strength = <MTK_DRIVE_8mA>;
-+			input-enable;
-+		};
-+		power-pins {
-+			pinmux = <PINMUX_GPIO133__FUNC_GPIO133>,
-+				 <PINMUX_GPIO134__FUNC_GPIO134>;
-+			output-high;
-+		};
-+	};
-+
-+	eth_sleep_pins: eth-sleep-pins {
-+		txd-pins {
-+			pinmux = <PINMUX_GPIO119__FUNC_GPIO119>,
-+				 <PINMUX_GPIO120__FUNC_GPIO120>,
-+				 <PINMUX_GPIO121__FUNC_GPIO121>,
-+				 <PINMUX_GPIO122__FUNC_GPIO122>;
-+		};
-+		cc-pins {
-+			pinmux = <PINMUX_GPIO127__FUNC_GPIO127>,
-+				 <PINMUX_GPIO130__FUNC_GPIO130>,
-+				 <PINMUX_GPIO129__FUNC_GPIO129>,
-+				 <PINMUX_GPIO128__FUNC_GPIO128>;
-+		};
-+		rxd-pins {
-+			pinmux = <PINMUX_GPIO123__FUNC_GPIO123>,
-+				 <PINMUX_GPIO124__FUNC_GPIO124>,
-+				 <PINMUX_GPIO125__FUNC_GPIO125>,
-+				 <PINMUX_GPIO126__FUNC_GPIO126>;
-+		};
-+		mdio-pins {
-+			pinmux = <PINMUX_GPIO131__FUNC_GPIO131>,
-+				 <PINMUX_GPIO132__FUNC_GPIO132>;
-+			input-disable;
-+			bias-disable;
-+		};
-+	};
- };
- 
- &pmic {
-@@ -311,3 +373,24 @@
- 	vbus-supply = <&usb_p4_vbus>;
- 	status = "okay";
- };
-+
-+&eth {
-+	/*
-+	 * TX clock is provided by MAC
-+	 */
-+	phy-mode = "rgmii-rxid";
-+	phy-handle = <&phy>;
-+	pinctrl-names = "default", "sleep";
-+	pinctrl-0 = <&eth_default_pins>;
-+	pinctrl-1 = <&eth_sleep_pins>;
-+	status = "okay";
-+	mdio {
-+		compatible = "snps,dwmac-mdio";
-+		#address-cells = <1>;
-+		#size-cells = <0>;
-+		phy: phy@0 {
-+			compatible = "ethernet-phy-idc0ff.0421";
-+			reg = <0>;
-+		};
-+	};
-+};
+diff --git a/configs/mt8189.config b/configs/mt8189.config
+index ecf8c5f4b4b..f86bb50bb5c 100644
+--- a/configs/mt8189.config
++++ b/configs/mt8189.config
+@@ -23,6 +23,11 @@ CONFIG_CLK=y
+ # CONFIG_MMC_QUIRKS is not set
+ CONFIG_MMC_HS200_SUPPORT=y
+ CONFIG_MMC_MTK=y
++CONFIG_DWC_ETH_QOS=y
++CONFIG_DWC_ETH_QOS_MTK=y
++CONFIG_PHY_AIROHA=y
++CONFIG_PHY_AIROHA_AN8801=y
++CONFIG_PHY_ETHERNET_ID=y
+ CONFIG_PHY=y
+ CONFIG_PHY_MTK_TPHY=y
+ CONFIG_PHY_MTK_XSPHY=y
 
 -- 
 2.52.0
