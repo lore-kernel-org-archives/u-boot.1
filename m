@@ -4,100 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99DDDFF887E
-	for <u-boot@archiver.kernel.org>; Wed, 29 Apr 2026 14:44:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39ACCFF8867
+	for <u-boot@archiver.kernel.org>; Wed, 29 Apr 2026 14:46:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 311F2848B4;
-	Wed, 29 Apr 2026 16:44:25 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id CA89384894;
+	Wed, 29 Apr 2026 16:46:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="nnSa/vdm";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="fIsU83wi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1A73B848AA; Wed, 29 Apr 2026 16:44:22 +0200 (CEST)
-Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
- [IPv6:2a00:1450:4864:20::62d])
+ id 4F072848B4; Wed, 29 Apr 2026 16:46:11 +0200 (CEST)
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [IPv6:2a00:1450:4864:20::632])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AEEB984894
- for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 16:44:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 69CE5841D7
+ for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 16:46:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-bb962ce4dcfso147167766b.1
- for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 07:44:19 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1777473859; cv=none;
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-baebe98afa0so741251366b.3
+ for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 07:46:09 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1777473969; cv=none;
  d=google.com; s=arc-20240605;
- b=Pu2hVwZe3x6wjEsTdL2lkfRbyZHwYh103OeoEL4oxABsNoAFuyVSHVfr0AQvQlZ6AV
- pW6HdBkZUbbauyyHfg1qoewLo09/r37txyK8dFWcMxqvGAFqeLNR4XNFMxGsoJdnixeV
- aaEVetTRjbxvOo5PXe3cbXYJwF3lrH53r/NoPiSSmnGT5FLVnPhc+uGCgzPkjLSwkKpc
- Jn9/AUGTGSRWdeqxdZqAlLWX+zZgtL89OlsJr91OLJLBXTn9hpb4NkdySTByn4qDYFjQ
- OfWMJcIt76nqXG3FbemZGu+L3vGG7eNlKjlXsVaCgOb5AwytrVK4EeHDShyVca27/cm0
- plzw==
+ b=QU1ZclFrYKKb8eQMRR1a7O0/QXcRjGmacuWbMwcBM5xSyn/ys/Wsknq/B69oR9rd6P
+ 14QuNq+4Tm3vp6tZolsW0b6XffSPXZCSIkZqwMAqUpJuxfLeBSJ0x2ISGtjGng8Rl8la
+ h3FPgbXbnVjPNGtMydStm3VeO1wg6Cx4dROu+kgGBy/GT9O5NUdCN9IdLgYVKdznvozb
+ TbUKQpyi0gSHhkpn+PpTtl4CH7eMPALkN/ZAgikDFsNTiilj9GWYw34c3DElOeb2RV0M
+ 8KyzBe1O4Hefq6kzO0wzOjuH803UD5psQaGlcpn8EeUlT/toDRQ229KLWnyE2pp5lKak
+ wYMQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=4NOLjY+Fa1Y3+atw8EIYG0USzqspBOyzujtYoi+/pHM=;
- fh=SPi/X0WlztfyTm38DRlSkfy/6oW86yZLUHiv9TSsvno=;
- b=ZYQ2QpF/6bVzxcZoBAImQoKi5MDTzFCFx32qb0jo9mDYUw6Z06Ov7xMIRiBn6vfNWR
- jvXiw9tMuQdLuazHPrMZr0/xvGAW+qEo+R41DmOyeAgtPwiLpqCCQr0HeFw9XHftzSnJ
- aKneR7LfCBWinCcgxPORT6nuRi5itlGCBN36mnQq9Vc6Kjy59DsklAUc2mPDNE0toJi8
- PRQLxfiBorzpyfPaGy5vUuOH6uTBB67bhbOWpfsd1zyvsRb0XmpPNhl6hMXgp7wp/bVF
- DqTYvghDZIpf7beHxP1DHzbWFPagGLkUnhK6v3FoxkU9AO49sxNKFxJaSmYWGuWIslSJ
- ZEag==; darn=lists.denx.de
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=JDiJ7u/7VQtGyvXRNslL5D1lLFSODnAtsUgUDlLSYrE=;
+ fh=RcQxRqe7UycvZcV76VWjauwHMbRaiieYSPPzjcGeqlY=;
+ b=VlfDAqo8X/rSeU2Uqv3p8W/lHa0Dhube5w9eUTH9z4w59XhEwu2k+RgwwxAVQssFO7
+ y3QVUWu27HnqPZ9cSWv2laZE54q/OoVi2jskqbltmh717tdElM3PQNKzjM97/Cyc6U/2
+ HiTv3rMyhMx3t5Y52b6/ISgbBn87pfC/fHSmV976A6NAsf39ZwOtLZoQyDVd6mPzKHNf
+ X6UHE1Di44Fu+bsRnKlUfPXTom98MxN29XrU0SEdioH15RvM3H+MgIpkUepdjfR3uNwu
+ oESt9FBFNVC+WpD6z2OzWskDWW+JWF8NKpfYtL4triw8+sW4dDCs08A7j3Rozjau6cNU
+ qnGw==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1777473859; x=1778078659; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=4NOLjY+Fa1Y3+atw8EIYG0USzqspBOyzujtYoi+/pHM=;
- b=nnSa/vdmJbVpUc7jnXtMGo4Fx6ktLy4keo+DaznJNTnP4I1z1CfJ8fDdcxTaHDFQ6b
- Ct2JVm3XMNagfPNWx6mS301ru3CBTFh6M4qqEbgl76Nj33XStj1WPqyyO5OPtd9/Y4ch
- s3c5mQjMLGCwTtjLTr1qqsM2YldpsaiuM673w=
+ d=chromium.org; s=google; t=1777473969; x=1778078769; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=JDiJ7u/7VQtGyvXRNslL5D1lLFSODnAtsUgUDlLSYrE=;
+ b=fIsU83wiFqHEZAJUqc5QVKBNCJmj3kqn2VQe60iQ0Nm9UIiACit6gmgwZfctyICHTU
+ JXp9DrtIQf66ZDhLHgMaTVjgsiegHozx5l2KUvquQAs1zb7YEu3Mw1uuLnZxgoiPIbOO
+ C7mQ5uVyFgY7wpaxxFSgp3lBL00VCc0Ok/sYc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777473859; x=1778078659;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=4NOLjY+Fa1Y3+atw8EIYG0USzqspBOyzujtYoi+/pHM=;
- b=RlVB3TyEhKSbI/TdqD3dxAgwIhW3q14rB340Cce2YVx9sIIYgrDQKsAPyHHS7R3g52
- d/V6RydOIsyjAmZqP4N+S2WkU4il16TcsXgfbAZKj/wtUzU/5xIg8MHRiD3ot3gRMoo1
- TAd/eucyH/lmoQM1W6pZpGeKcr2lwfCt6hv9ri+S7xvinKye7t8LbJ9I7+KmnfawW6Ts
- 0Iu+3p6/YMp84wRvY1L0/oKUuJiw56r5+hoVgqC5VfHQHb+HFlJhrBwb7q7dsDSEFr96
- 0DBhNDJ7Q15cTWKfx8P8aKXAOnjhfhNqDtLSgciqJu7VkPepBv4RhDasY0Hrx34kmCWH
- Y48Q==
-X-Gm-Message-State: AOJu0YwaTxcNTvdBQtwQucE9KT1vSyuLFSNusOlK8lZ319jvyFCxneLz
- Qvm0izToM/xijaFQ2MyyB2bIi5bvEgIeBIR//5r6pJC5x8Mbe4ALCos78GedCJ/qHaTOAlLMa6C
- DLEpwDqmH9dnITPaCApssJit24YKAZkoWgM6j41NV
-X-Gm-Gg: AeBDietB7lBbnbEyZO7v+a26u0GM/6j8l+I6dJGED8w2DB2aDRId1/T32sEnzOsidbO
- E/k/a5MG6fC+D1L3Dt7o/o/7nSbmwjHUqGH2eXn6+v5taEiIo+IROrEeZIvzyk7Xm2FyEEXLjTk
- EHfxcMltG4P1Ky54mzXUpkqL1Q+mYoEENQ4C808G0n/96zaKboDf+81rD+MUanl8Ob5DHJ2kfv/
- g35BikBO3xWK29htYlQzDr6G8of47GmApIdvexcUUzuoYiOjwkuPZaFCrKvBwQbjca4EvjcWn+d
- 8YpZUYKEKDmLavlQ
-X-Received: by 2002:a17:907:c311:b0:bb7:c32d:c34b with SMTP id
- a640c23a62f3a-bb804f1b0c2mr499716766b.45.1777473859097; Wed, 29 Apr 2026
- 07:44:19 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1777473969; x=1778078769;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=JDiJ7u/7VQtGyvXRNslL5D1lLFSODnAtsUgUDlLSYrE=;
+ b=GELbcwDi/AEWEspwkvO0s4ufto1Ju2d/lPcOCUW21ad4ruHhFtQfKQqWwsRgAAVg0N
+ /GXZ3y05YrtbHSlbTBAZG9ajilMzMgV2mDhGh5emTDi65S+Ii0nMszZhj+fafLyGPgLt
+ 6tmr0hw7DHUATlra25kYHSFMEf/OGvZFSHbH2cMYSZ8/XE+6oZ+rS26lkAq8XnWPcM1j
+ EZc68rTqBB4019hlsQzzMqEQfxINdlpzoQtj2g7XgaaK8QjH0lGZP8HVQ8m23vNBPZNC
+ 8Fg533oSLBgsB4loqO7a3upLC0vAZJ9eLvEG4ZQgsIK65RmVnfxBgKF1AgrEInFYg75V
+ JwUQ==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ8/RLCUUndnCm1M+ZfxeqRkauYuOIi8vbJpSzMaeTU1wAOp+V3GzI8MokzRhVAYyg+3EqITXsU=@lists.denx.de
+X-Gm-Message-State: AOJu0YyvQ2Pquwg76ePz7h3YLPQjyduIMqGhLx4milqLJimo5JPRYxp4
+ BCHs4WlIjnCuNwv9wmR275g3wWZMGogyDpvghX03DlEMFFxGC/vgkxju1SATVwQNOevR0WFnrgQ
+ BZURzOufdZ6zvLRSPvMiUfoeQPPOFg+k74R2SDAzT8XYf7LH+nHetrw==
+X-Gm-Gg: AeBDievSfML3YJCygnwJI+PLR9F/IutM+zx3ASnRZNMgZpDMUCTG9cFW/1q7HcaaX3z
+ 1yYJgqyEPNM1XZzKUHCnoWd82zD46QwWpvWrc0baZjAFjtOvzJsyJDQIKmoyJWXQaQ+e1zXcCdc
+ RDYYzkutcxXRuH1DDw8d5e7XG+XAtWe6EzqolsJqLNyPMBJg9oG5ZtvwXCYFQAgkaYNX3Pay3rE
+ EPeHzmw7Ty5iC5r16H7cK+i5IXBjUXN4OSFckKd0Mn3hufLfLKsZn/wie6JnVvWOa9yqTDBF+r1
+ TaedF8wF9gW7mLma
+X-Received: by 2002:a17:907:3e9a:b0:ba8:a21f:9c4e with SMTP id
+ a640c23a62f3a-bb93ce89d43mr262565366b.11.1777473968858; Wed, 29 Apr 2026
+ 07:46:08 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260423042824.3480-1-briansune@gmail.com>
- <CAFLszThg=EamyRohxNA7V+nk+OMVK356nUjAVSbu4+kokOJpdA@mail.gmail.com>
- <CAN7C2SAdg1MX3ZfEt5-68iiw3pdjyqva48F_uJjNwsHAhdmY3Q@mail.gmail.com>
- <CAFLszTgouk66AOaL2o8PvH9EKNFabE=pjxpa9QpC_F--VhE9cQ@mail.gmail.com>
- <CAN7C2SC-MuqHK2+0vaZzZFi-up1L7=KcOSRedF6f6F3D9Uoceg@mail.gmail.com>
-In-Reply-To: <CAN7C2SC-MuqHK2+0vaZzZFi-up1L7=KcOSRedF6f6F3D9Uoceg@mail.gmail.com>
+References: <20260428142848.48156-1-heinrich.schuchardt@canonical.com>
+ <CAFLszTgKkn0cwfv97FBVDK+FdCM-6BfasCvsA2oDe5qdzeuS4g@mail.gmail.com>
+ <db5d98f7-1036-4842-b70c-b6c1e3625ded@canonical.com>
+In-Reply-To: <db5d98f7-1036-4842-b70c-b6c1e3625ded@canonical.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 29 Apr 2026 08:44:07 -0600
-X-Gm-Features: AVHnY4Ia1Ev1tPM31ZHyiJn8AYht7R1XaXIhqi0np_Ln8U6-iD-RxP4PmfxKfSo
-Message-ID: <CAFLszTjz5SMpFMPjVd6tX5Lk9DKv3MMX+_qtkSgt6fztGceHFA@mail.gmail.com>
-Subject: Re: [PATCH v6] Improve handoff prepare on SoCFPGA
-To: Sune Brian <briansune@gmail.com>
-Cc: u-boot@lists.denx.de, Chee Tien Fong <tien.fong.chee@altera.com>, 
- Tom Rini <trini@konsulko.com>
+Date: Wed, 29 Apr 2026 08:45:56 -0600
+X-Gm-Features: AVHnY4JFImAs1DtBG8n1fnPZhPcel_6iwNuf0kFvOAsQbwkN7Yikei-ino2vDCM
+Message-ID: <CAFLszTjQMuaCxOTD-ecZZBe6nC6R2s-xE_w7x00K2HO=G4mg6w@mail.gmail.com>
+Subject: Re: [PATCH v2 1/1] .clang-format: add U-Boot specific for each macros
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Tom Rini <trini@konsulko.com>, Javier Tia <floss@jetm.me>,
+ u-boot@lists.denx.de, Quentin Schulz <quentin.schulz@cherry.de>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -114,115 +112,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Sune,
+Hi Heinrich,
 
-On Wed, 29 Apr 2026 at 08:34, Sune Brian <briansune@gmail.com> wrote:
+On Wed, 29 Apr 2026 at 08:42, Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
 >
-> On Wed, Apr 29, 2026 at 10:21=E2=80=AFPM Simon Glass <sjg@chromium.org> w=
-rote:
+> On 4/29/26 16:21, Simon Glass wrote:
+> > Hi Heinrich,
 > >
-> > Hi Brian,
+> > On 2026-04-28T14:28:48, Heinrich Schuchardt
+> > <heinrich.schuchardt@canonical.com> wrote:
+> >> .clang-format: add U-Boot specific for each macros
+> >>
+> >> Formatting via clang-format is controlled by .clang-format.
+> >> For each statements should be formatted with a brace at the line end:
+> >>
+> >>      for_each() {
+> >>      }
+> >>
+> >> This requires clang-format to know that the symbol is not a function
+> >> but a for each macro. We use some for each macros which don't exist in
+> >> Linux. Add these to file .clang-format.
+> >>
+> >> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> >>
+> >> .clang-format | 51 +++++++++++++++++++++++++++++++++++++++++++++++++++
+> >>   1 file changed, 51 insertions(+)
 > >
-> > On Tue, 28 Apr 2026 at 08:34, Sune Brian <briansune@gmail.com> wrote:
-> > >
-> > > On Tue, Apr 28, 2026 at 10:04=E2=80=AFPM Simon Glass <sjg@chromium.or=
-g> wrote:
-> > > >
-> > > > Hi Brian,
-> > > >
-> > > > On 2026-04-23T04:28:24, Sune Brian <briansune@gmail.com> wrote:
-> > > > > Improve handoff prepare on SoCFPGA
-> > > > >
-> > > > > Ensure qts folder header files are properly updated by isolating
-> > > > > the Python execution environment. This prevents partial or failed
-> > > > > script runs from corrupting the target directory.
-> > > > >
-> > > > > Changelog v5 -> v6:
-> > > > >  - Clean HANDOFF_KEEP comments.
-> > > > >
-> > > > > Changelog v4 -> v5:
-> > > > >  - Change HANDOFF_KEEP condition to if [ '$${HANDOFF_KEEP:-0}' !=
-=3D '0' ]
-> > > > >  - Add HANDOFF_KEEP and HANDOFF_PATH comments in config.mk
-> > > > >
-> > > > > Changes:
-> > > > >  - Implement a temp folder for Python script execution.
-> > > > >  - Clean temp folder automatically despite execution failures.
-> > > > >  - Gate the file replacement process on the successful exit of
-> > > > >    the Python scripts.
-> > > > >  - Execute the replacement (with or without keep) only upon scrip=
-t
-> > > > >    success via the NEW HANDOFF_KEEP=3Dxxx variable.
-> > > > > [...]
-> > > > >
-> > > > > arch/arm/mach-socfpga/config.mk | 39 ++++++++++++++++++++++++++++=
-++++++++---
-> > > > >  1 file changed, 36 insertions(+), 3 deletions(-)
-> > > >
-> > >
-> > >
-> > > Dear Simon,
-> > >
-> > > B.C. the server is down and I don't expect Google to have an auto fai=
-l
-> > > mailing recovery.
-> > >
-> > > > I see 6 copies of this v6 patch in patchwork, so I wonder if I got =
-the
-> > > > right one?
-> > >
-> > > I will try to respond to this email as politely as possible.
-> > > Please reference from "patchwork.ozlabs.org" list.
-> > >
-> > > > The per-version changelogs belong below the '---' separator, not in
-> > > > the commit body. Also U-Boot convention is 'Changes in vN:' rather
-> > > > than 'Changelog vN -> vN+1:'.
-> > > >
-> > > > You could try using 'patman' which will get this right for you auto=
-matically:
-> > > >
-> > > > https://docs.u-boot.org/en/latest/develop/patman.html
-> > > >
-> > >
-> > > 1) I only do basic software
-> > > 2) I used ./script/checkpatch.pl There are no errors, warnings etc.
-> > > 3) There is nothing to do with the patch itself either the software
-> > > nor the file itself.
-> > > 4) I am not too familiar with patman
-> > > 5) There are many better things to do rather than complaining about
-> > > the patch headers.
-> > >
-> > > So forgive me I really don't give a damn on whatever the header requi=
-rements.
-> > > If you feel this is not passing the patch standard simply reject or
-> > > label all patches to
-> > > "Changes Requested".
+> > Reviewed-by: Simon Glass <sjg@chromium.org>
 > >
-> > That's up to whoever applies this patch. I am just a reviewer :-)
+> >> diff --git a/.clang-format b/.clang-format
+> >> @@ -748,6 +748,57 @@ ForEachMacros:
+> >> +  # U-Boot specific
+> >> +  - '__for_each_child_of_node'
+> >
+> > Should the 'git grep' recipe include drivers/ and arch/ as well?
 >
-> Hi Simon,
+> Thanks for reviewing.
 >
-> I am going to ignore all your mail in the future.
-> So review whatever you like, don't care.
-> There are many patch not following whatever rules or guidelines you
-> mentioned.
-> Just review those as well. What a waste of time on your emails.
+> What I did was removing the directory restriction completely.
 >
-> As politely as possible!!!
+> If we really need a comment, it would have to be in the # U-Boot section.
 
-Oh, sorry about that and also the server being down, etc.. The
-maintainer for SoCFPGA will handle applying this in any case.
+It doesn't seem important. I was referring to the '# Taken from:' comment.
 
-> Brian
->
-> >
-> > The reason for the formatting rules is mostly so that maintainers can
-> > apply them without manually redoing the patch, etc.
-> >
-> > There is also this which might help (although you might not want more r=
-eading):
-> >
-> > https://docs.u-boot.org/en/latest/develop/sending_patches.html#commit-m=
-essage-conventions
-
-- Simon
+Regards,
+Simon
