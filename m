@@ -4,50 +4,136 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 690D7FF8864
-	for <u-boot@archiver.kernel.org>; Wed, 29 Apr 2026 09:29:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0E3FFF8875
+	for <u-boot@archiver.kernel.org>; Wed, 29 Apr 2026 09:49:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 913F884852;
-	Wed, 29 Apr 2026 11:28:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id 1CABD8470B;
+	Wed, 29 Apr 2026 11:49:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=arm.com header.i=@arm.com header.b="hJ+CsmpG";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="PZlLZZV/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3BA0484836; Wed, 29 Apr 2026 11:28:49 +0200 (CEST)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 92CF484832
- for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 11:28:43 +0200 (CEST)
+ id CBA1584711; Wed, 29 Apr 2026 11:49:20 +0200 (CEST)
+Received: from AM0PR83CU005.outbound.protection.outlook.com
+ (mail-westeuropeazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 70DDA84709
+ for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 11:49:18 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=arm.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andre.przywara@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 75D8732F8;
- Wed, 29 Apr 2026 02:28:37 -0700 (PDT)
-Received: from e142021.munich.arm.com (e142021.arm.com [10.41.150.154])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 97F1A3F62B;
- Wed, 29 Apr 2026 02:28:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
- t=1777454922; bh=071RWP6ewF/63GW+GWmNI5WIc7T0DIrwuRMH/3HtaE0=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=hJ+CsmpGsXeZ3H3OHog+uDguPJ2PLRieXqxfy8ALSiPCKEGTUasXjcTU/qdz8/wN5
- sQKQcILCxprnzzSdGEBQRfKQeJj6hsjsHVrZOeGgv2bre3qRgoAMG7/KMOCTNfQTXv
- kuEF+n8EH0+QPENZCH7axGv9Cm61D1WWvrtxGbvc=
-From: Andre Przywara <andre.przywara@arm.com>
-To: u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, Quentin Schulz <quentin.schulz@cherry.de>,
- Jernej Skrabec <jernej.skrabec@gmail.com>,
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=cN+i4kBwhXWOI8f+D36wDdHnx/VKlbJHIpYvAJsgkg9pAfri0dAmaWjG+Yo/JM/XdT5ED4GPa/Q+dydX0ezGYr2V739jviC2aoo6nYELJeUoIC/4q/AwWg9hLUloPuiMX8PdkppOsY6yk81Lk/GO3a18fQDMLBS6d7c84tdiLkt9ofMzcfiuuJV0DUUtCuR6ExuH/LZ8WNxyL1l34htNqp255Kkseh46JQSR3G5QIwfGuNaNQ6mTgCBz7Vi9xVoeOLPXKS3SILwAWwXZvXOAiGDPl1dFtBOmnoKKWeG3pkRQnn3JWyhtuscfzTJD/9DyQpEKxVfv3VOmRqkpg0IB4Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=kHtWRwENf4vn5D6HKX2S/myNngtxJqyeT4H4aNgES9s=;
+ b=kUrib5rz0cNQuhl3kAe9d9PBH9Biq+M85RKygB3poKGXamu9Zh5uBe0u0Pl01NZ4IDYA90hbMBAp7SYDY2znD4mPpx9ljKlQBDEMjn3hqJr5XmGWqB/jA8l1Y9La6vofgRvbSKUK7TInGZFjTrWJGNqij0Z4SP4FJFqbPVjNzllg0WgD9udqo9MibqUOlv5QbMWC+LhXaPzYiBkDsEQOCg8upy9oTZ54yoYvlCk5u6dwjzUoEkBIlRf1l7zAZnQFF+/JN+PgSW/yYPXTnuMqn2aQ3vPpF3x4I+0ndME4YKNKEq6Tg+rqzGi7nPlpdaGYCFINsxHAZ1LNDWs5ZNyoMA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=kHtWRwENf4vn5D6HKX2S/myNngtxJqyeT4H4aNgES9s=;
+ b=PZlLZZV/zVdTzz6CHMfUeZeNXX0Ne0v4BBdFITmP6P29FPaj9d8GES8r3PtfKYiaLWo40tR5O+F+Pm7YFCm1++omhjYLRWjBH00wux6uQsF4DyAR5PuF/oD3dCHA2qXZh0u1arc2JK6AZRx9GxgjBoJjrmO5XEyshsiHEUtXkfI=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from DBBPR04MB7737.eurprd04.prod.outlook.com (2603:10a6:10:1e5::22)
+ by VI0PR04MB10807.eurprd04.prod.outlook.com (2603:10a6:800:25a::22)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9846.26; Wed, 29 Apr
+ 2026 09:49:15 +0000
+Received: from DBBPR04MB7737.eurprd04.prod.outlook.com
+ ([fe80::5960:fb4b:9313:2b00]) by DBBPR04MB7737.eurprd04.prod.outlook.com
+ ([fe80::5960:fb4b:9313:2b00%4]) with mapi id 15.20.9846.025; Wed, 29 Apr 2026
+ 09:49:14 +0000
+Message-ID: <3ace7546-3f98-4a14-9b8e-98be2b9c044a@cherry.de>
+Date: Wed, 29 Apr 2026 11:49:12 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 1/3] sunxi: spl: fix SPL_SUNXI_LED active low
+ configuration
+To: Andre Przywara <andre.przywara@arm.com>, u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, Jernej Skrabec <jernej.skrabec@gmail.com>, 
  Paul Kocialkowski <paulk@sys-base.io>, linux-sunxi@lists.linux.dev
-Subject: [PATCH v2 3/3] sunxi: configs: enable power LEDs on 64-bit boards
-Date: Wed, 29 Apr 2026 11:28:28 +0200
-Message-ID: <20260429092828.3076719-4-andre.przywara@arm.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260429092828.3076719-1-andre.przywara@arm.com>
 References: <20260429092828.3076719-1-andre.przywara@arm.com>
+ <20260429092828.3076719-2-andre.przywara@arm.com>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <20260429092828.3076719-2-andre.przywara@arm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: FR2P281CA0117.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:9d::7) To DBBPR04MB7737.eurprd04.prod.outlook.com
+ (2603:10a6:10:1e5::22)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DBBPR04MB7737:EE_|VI0PR04MB10807:EE_
+X-MS-Office365-Filtering-Correlation-Id: c4512160-2dcb-4079-ec20-08dea5d492ae
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|366016|10070799003|376014|22082099003|56012099003|18002099003;
+X-Microsoft-Antispam-Message-Info: s/Y1YpO8LG+L24JPs+d44ClaWuOuubslfJnfmirNDjrvAqPZ2Rv8SvDwgpGswAsKe+sPSYdOjYJ4dTGa90aZ+6ID5rTBC7smv1BIXg2ZnacV0a6d1l/N3XSlsoB2QE3TK7iCxYHRXo334NlDSVlD/FZ4qNZOoct7R8WpGYoybzw9/cC2BzL8QdDLBNr7YqZVin0Gf4A1IC9vl+1WA9NKXVeCpeLaZN8kw0Q9fA/WlpIQnYiiIjdIT9mxIsHCFMjez4e0xOx3aetOODOsR+i+a/I0qozt97P1REZZ8LtfM2hADxUgMJoFBgUIlFr5fwmGV+yfivDhdLezCcBc3BmInM6xKcPKxmaOtEBLTHFqHdgupgAUWuX3nzeIPAUWZG6Kzgh6NNFi+7ByO+Gl+PWtmcn/ufesaea2sE/TtNzAo0iIO+FKylBod/ErnXmFf0TBRo0Mu0Bpl0ZihcPaAZ/RNRMzw18OY2lp897KztLIf6Nr54smoPBn5kDaf239zaS48ytO5k1ixND0F5gw3uBrPvdXFt7T37icfF174KeL5VRDkQjalpOJvO+rf5oFWp9HeZwRHT3sifAeZtLOje+XhAcFxaRWUBMxg5OzPTRWMS3YbLssY8e4efxfao5G/lHDetwJUFLql6s3gYY60rtV69g2QidWlb1WZmEpkcyXoLZ0j6oX68dgO8+zsRUbF09Bwk6Z1F+OV0M7eSe2B3IF+is7FkwwQxHTPhFuSZUvPjE=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DBBPR04MB7737.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(366016)(10070799003)(376014)(22082099003)(56012099003)(18002099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?NmEwZzQ5K3NTbTUrK0hOQXF0WE91cnNTMXhheEEwTzlUeXk2ZHhSZFdKa0Fq?=
+ =?utf-8?B?YVU5Ym5oSjEvcFk5Q00yQldZUUxFL3QvVTBmVXhRdjE5OWhZN1VSRmxIbnNt?=
+ =?utf-8?B?UXVWL3BMeUswUjZtYVRUYmZPTytKSnd4NnpvZUpoMnZzazkrRnIxdC9tWFhY?=
+ =?utf-8?B?OVZVQUZSakRlbHdHVDR2eFFMUEZHUlRQSUhyVFZMUy9WekVJUTZ3NHVtVVB5?=
+ =?utf-8?B?NDBsWnQrR2J2Nmx5Nm5DZFkrN2wxVEJ2QXV0SDcrc2twZitKV2Y5bUs5SHNu?=
+ =?utf-8?B?cVhuTE8va25zakFoYU01OU5ROUptSVI0eUszQzZ5TFI4OVNhaWVZV2pybTYy?=
+ =?utf-8?B?cEtVWlFvZW5PVSt6NzRnK2haeWtteGROZURQNi9qWGMrcHd5dVQ3TUlqemxG?=
+ =?utf-8?B?dTh5VWF1RHhEZjNFanFlb0x5bXYzbWZBSDZLNzVXN0ZqeHRWTm50OUc1LzV4?=
+ =?utf-8?B?a2NwNUkrSWRhVHJsUVYxZU5Tckd1b0N0TDRBZUs3Q3QrMkVMQndGN3lkbkJj?=
+ =?utf-8?B?eXBIckxRbTVDRWtZcWkySUZMNjg2Q3VrZ0VMb1NyN2E3Z0tpeVprVkRoY3Np?=
+ =?utf-8?B?TDJrMFBrcVBlVkE2bG01dEpTcWRTUjcyL1J0bVBNNUhreGxXNndaaERlMEZW?=
+ =?utf-8?B?QmxUSHpXdGhVOWZ4Rms0SkhIMWhhQTBNYlZFeWhXWkI0bEZ4c3IrdTNUT3c2?=
+ =?utf-8?B?bUN3eGNYMDE2Nnc3NGJ1NUJBMWhmYWx2K2hoL05tYndrWXpUUGpWSUNzZ3BK?=
+ =?utf-8?B?RElxd09YSW9ORVIyL2MrWW8rSmtJcS9MTVpnRWp2aDVCRy9tei9xZ0EwUkhK?=
+ =?utf-8?B?MlpQb0lOallSeGpKWGVRZzlPVnIyY3RyQUhCeW1ZNVF5QVV1Rk9IcGlrVm9j?=
+ =?utf-8?B?bkhuY1Z4Wkd2VG5jK2RQYmRFUzEyWTJaVG1BdnpsdnNTZ0ZBcjJId1pLenQr?=
+ =?utf-8?B?SHY3Qngzd3hlaE1ZbUFySldOQkpDT0ROSzAyZXpxMUtrei9SWjlZZWNQMTls?=
+ =?utf-8?B?V3NWMDdEZ2VrM2VoZk5oRVpLME1TSS84cTFldmxFMEhOUUpFY1N6R2MxRmhs?=
+ =?utf-8?B?SUxJTUpQMDlIOHN5TFRHRFY0STZlY1hCdmdxTDZYTXh1cWZQZWN6R2l4Zi9q?=
+ =?utf-8?B?dzNBd1JYUE1UTnlLWkZ0d2VZVlpLZzZ0Mk15QU9IdGJkc3VKTDNjQW9BbldF?=
+ =?utf-8?B?YVBFVU1DN1l1MUg1MnVJZUVqRjQzQ21xMm00aFBvMkM3Z0taTEtHL05OaFJk?=
+ =?utf-8?B?bk5zRFZzRkhhZngrN01QNXlrTWxQZXN1LzlWcnozeFlDeW1GTDBWbzFGV1Ju?=
+ =?utf-8?B?b2hrREFlR3ViR0VTaXBuS3c5UGx4eWZxWDBsbmo2bjJsTWxYRERRdlQ4WGtQ?=
+ =?utf-8?B?YXpxejBnYkdKY2h5cTlHMW5WY2dkMmVCQzFmeUhtbU9Ddmo2dlpZQWVIZnBE?=
+ =?utf-8?B?N0dsKzhIL2dBNjIvSGZvNUtJSHo2UXFoLzBTd0lsZExVTTIyRHpSQ2tQaGhr?=
+ =?utf-8?B?Ym1CZnJZUG1meHI2QVdSTkVwbDJGNy9mRlZLZ2wwWEZnSmYxdmtFeWVVWHpm?=
+ =?utf-8?B?Z3krTkpoZlphVTd4bk8zeGk1MG9rL1loYW5mNjQreTRYa2Zpc2FhV2dFL3VQ?=
+ =?utf-8?B?R2cxUUM5SVRHblNGbjVlY3VseHZndmZXcWF2MG5KZ1k0SkNUVXZQMVJISFFX?=
+ =?utf-8?B?NnFDaC9meU9VaWVxN0JYL2VzUjVYVGxtZE42WjZiY0RQTmVTVUJxb1k4WTFE?=
+ =?utf-8?B?UXJCWEdNVUlNZUZ2ZkRtdTRzQXJKMmtVb2E5Vlg0OCs1UGdvays1WmFJQnha?=
+ =?utf-8?B?Q0J3aENodjdGNnByRWlVWTEzVHFLa2I3SDIzeVE0WkZ3WXZ2OC9sVGhhQkE2?=
+ =?utf-8?B?czJGdW8rUzFYYU1CREpVNmREZ250K2t4eEtpdjUzLzV3b3ZhUUR3OEVRUU4v?=
+ =?utf-8?B?ZVZiYmhMVGNwclM5RjQ0ZmVUSjB3aVBRZnRQamZHc05OaEpoMzQzWm9Lb1VI?=
+ =?utf-8?B?cmFGSHBkS0dsc3dZTS96aUhNZXVTRkFoZCtvM3BXcmI0dXBjc0xSbjdxdXlD?=
+ =?utf-8?B?KzJRdGU5aEx2Ymw0TWVZcFBkOW9XMWFJSm1RR05raXNQaUJzK3JiNzVIclQ4?=
+ =?utf-8?B?QnQrK1RzRmJjeEpIOGZxMnJ6QW9hZnlDajk0SnhNNGUydHIwcW0wdmlHQW9j?=
+ =?utf-8?B?YlV2VGlzY25LWC9jTVExT0dxMHVmak1zUmhnSXFBOC85d1N6dXczRGJQakhE?=
+ =?utf-8?B?OFFzZTQ0dkh1OG9kcjlyN3B5SVlTY0FSdVdPeHkwWGR5RGJFVVVYVGt6eUFj?=
+ =?utf-8?B?TjY1bzE0Tm5veW04Vm01dGJqdk1BWkNpMktOZVpncSs2aHdDbGtBZVl4eC9K?=
+ =?utf-8?Q?c0dqhzlsXBJarh/zKY075zy3NcF4tzl8yCG/l?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: c4512160-2dcb-4079-ec20-08dea5d492ae
+X-MS-Exchange-CrossTenant-AuthSource: DBBPR04MB7737.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Apr 2026 09:49:14.8354 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: sv1qaR6BJmrG42Pg96eHad6ZM5Mj4sy1D1ryi3gP7tB2H34ECL91fP/jf+/+rOnSJntW0jL6wqaP6QBztg0XaA/9/wFjTltifyKKXrwwoAA=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI0PR04MB10807
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -64,233 +150,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-We recently gained a simple way to enable a power LED very early in the
-SPL boot, through simple Kconfig variables.
+Hi Andre,
 
-Add those symbols to those boards' defconfigs where the DT indicates a
-default-on power LED. The number used is <port bank> * 32 + <pin no>,
-an active low setup means CONFIG_SPL_SUNXI_LED_STATUS_ACTIVE_HIGH must be
-undefined.
+On 4/29/26 11:28 AM, Andre Przywara wrote:
+> The newly introduced Allwinner SPL LED "framework" defined a
+> SPL_SUNXI_LED_STATUS_STATE Kconfig symbol, that was supposed to denote
+> the active-low vs. active-high polarity of the LED. However this is
+> a bool symbol, so it will simply vanish if not defined, and we cannot use
+> it directly inside a C statement.
+> 
+> Filter the symbol through the IS_ENABLED() macro, which will return 0 if
+> the symbol is not defined, which is the intended value here.
+> 
+> Since the STATUS_STATE name is a bit confusing, rename it to ACTIVE_HIGH
+> on the way, because that is its real meaning. Also the LED_STATUS_BIT
+> name for the GPIO number is similarly a remnant of the old status LED
+> code, so rename it to LED_STATUS_GPIO as well.
+> 
+> This fixes configuring LEDs with active-low polarity.
+> 
 
-This will light up the power LED very early in the (SPL) boot phase on
-those 64-bit boards.
+Individual patches would have been better.
 
-Signed-off-by: Andre Przywara <andre.przywara@arm.com>
----
- configs/anbernic_rg35xx_h700_defconfig | 2 ++
- configs/bananapi_m64_defconfig         | 2 ++
- configs/beelink_gs1_defconfig          | 2 ++
- configs/liontron-h-a133l_defconfig     | 3 +++
- configs/nanopi_neo2_defconfig          | 2 ++
- configs/nanopi_neo_plus2_defconfig     | 2 ++
- configs/orangepi_3_defconfig           | 2 ++
- configs/orangepi_lite2_defconfig       | 2 ++
- configs/orangepi_pc2_defconfig         | 2 ++
- configs/orangepi_prime_defconfig       | 2 ++
- configs/orangepi_zero2_defconfig       | 2 ++
- configs/orangepi_zero_plus2_defconfig  | 2 ++
- configs/orangepi_zero_plus_defconfig   | 2 ++
- configs/radxa-cubie-a5e_defconfig      | 3 +++
- configs/tanix_tx1_defconfig            | 2 ++
- 15 files changed, 32 insertions(+)
+> Fixes: 256557dd9aae ("sunxi: remove usage of legacy LED API")
 
-diff --git a/configs/anbernic_rg35xx_h700_defconfig b/configs/anbernic_rg35xx_h700_defconfig
-index 2fa57cbecce..2abea94e979 100644
---- a/configs/anbernic_rg35xx_h700_defconfig
-+++ b/configs/anbernic_rg35xx_h700_defconfig
-@@ -16,6 +16,8 @@ CONFIG_DRAM_SUNXI_PHY_ADDR_MAP_1=y
- CONFIG_MACH_SUN50I_H616=y
- CONFIG_SUNXI_DRAM_H616_LPDDR4=y
- CONFIG_R_I2C_ENABLE=y
-+CONFIG_SPL_SUNXI_LED_STATUS=y
-+CONFIG_SPL_SUNXI_LED_STATUS_GPIO=268
- CONFIG_SPL_I2C=y
- CONFIG_SPL_SYS_I2C_LEGACY=y
- CONFIG_SYS_I2C_MVTWSI=y
-diff --git a/configs/bananapi_m64_defconfig b/configs/bananapi_m64_defconfig
-index d957071cb13..3d1f5d27e5d 100644
---- a/configs/bananapi_m64_defconfig
-+++ b/configs/bananapi_m64_defconfig
-@@ -4,6 +4,8 @@ CONFIG_DEFAULT_DEVICE_TREE="sun50i-a64-bananapi-m64"
- CONFIG_SPL=y
- CONFIG_MACH_SUN50I=y
- CONFIG_MMC_SUNXI_SLOT_EXTRA=2
-+CONFIG_SPL_SUNXI_LED_STATUS=y
-+CONFIG_SPL_SUNXI_LED_STATUS_GPIO=120
- # CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
- CONFIG_SUPPORT_EMMC_BOOT=y
- CONFIG_SUN8I_EMAC=y
-diff --git a/configs/beelink_gs1_defconfig b/configs/beelink_gs1_defconfig
-index de46d205453..ebac032915f 100644
---- a/configs/beelink_gs1_defconfig
-+++ b/configs/beelink_gs1_defconfig
-@@ -5,6 +5,8 @@ CONFIG_SPL=y
- CONFIG_MACH_SUN50I_H6=y
- CONFIG_SUNXI_DRAM_H6_LPDDR3=y
- CONFIG_MMC_SUNXI_SLOT_EXTRA=2
-+CONFIG_SPL_SUNXI_LED_STATUS=y
-+CONFIG_SPL_SUNXI_LED_STATUS_GPIO=356
- # CONFIG_PSCI_RESET is not set
- # CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
- CONFIG_LED=y
-diff --git a/configs/liontron-h-a133l_defconfig b/configs/liontron-h-a133l_defconfig
-index 831d5b56e3a..836e8d12ff0 100644
---- a/configs/liontron-h-a133l_defconfig
-+++ b/configs/liontron-h-a133l_defconfig
-@@ -23,6 +23,9 @@ CONFIG_MACH_SUN50I_A133=y
- CONFIG_SUNXI_DRAM_A133_LPDDR4=y
- CONFIG_MMC_SUNXI_SLOT_EXTRA=2
- CONFIG_R_I2C_ENABLE=y
-+CONFIG_SPL_SUNXI_LED_STATUS=y
-+CONFIG_SPL_SUNXI_LED_STATUS_GPIO=240
-+# CONFIG_SPL_SUNXI_LED_STATUS_ACTIVE_HIGH is not set
- # CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
- CONFIG_SPL_I2C=y
- CONFIG_SPL_SYS_I2C_LEGACY=y
-diff --git a/configs/nanopi_neo2_defconfig b/configs/nanopi_neo2_defconfig
-index 6704a24a880..63fa6bac9ba 100644
---- a/configs/nanopi_neo2_defconfig
-+++ b/configs/nanopi_neo2_defconfig
-@@ -6,6 +6,8 @@ CONFIG_SPL=y
- CONFIG_MACH_SUN50I_H5=y
- CONFIG_DRAM_ZQ=3881977
- # CONFIG_DRAM_ODT_EN is not set
-+CONFIG_SPL_SUNXI_LED_STATUS=y
-+CONFIG_SPL_SUNXI_LED_STATUS_GPIO=362
- # CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
- CONFIG_SUN8I_EMAC=y
- CONFIG_USB_EHCI_HCD=y
-diff --git a/configs/nanopi_neo_plus2_defconfig b/configs/nanopi_neo_plus2_defconfig
-index e80e32a63d4..9d1b783476d 100644
---- a/configs/nanopi_neo_plus2_defconfig
-+++ b/configs/nanopi_neo_plus2_defconfig
-@@ -7,6 +7,8 @@ CONFIG_MACH_SUN50I_H5=y
- CONFIG_DRAM_ZQ=3881977
- # CONFIG_DRAM_ODT_EN is not set
- CONFIG_MMC_SUNXI_SLOT_EXTRA=2
-+CONFIG_SPL_SUNXI_LED_STATUS=y
-+CONFIG_SPL_SUNXI_LED_STATUS_GPIO=362
- # CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
- CONFIG_SUN8I_EMAC=y
- CONFIG_USB_EHCI_HCD=y
-diff --git a/configs/orangepi_3_defconfig b/configs/orangepi_3_defconfig
-index 125137bc321..409fa705a06 100644
---- a/configs/orangepi_3_defconfig
-+++ b/configs/orangepi_3_defconfig
-@@ -6,6 +6,8 @@ CONFIG_MACH_SUN50I_H6=y
- CONFIG_SUNXI_DRAM_H6_LPDDR3=y
- CONFIG_MMC_SUNXI_SLOT_EXTRA=2
- CONFIG_BLUETOOTH_DT_DEVICE_FIXUP="brcm,bcm4345c5"
-+CONFIG_SPL_SUNXI_LED_STATUS=y
-+CONFIG_SPL_SUNXI_LED_STATUS_GPIO=356
- # CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
- CONFIG_PHY_SUN50I_USB3=y
- CONFIG_USB_XHCI_HCD=y
-diff --git a/configs/orangepi_lite2_defconfig b/configs/orangepi_lite2_defconfig
-index 577f7436c15..5d72d34eb9d 100644
---- a/configs/orangepi_lite2_defconfig
-+++ b/configs/orangepi_lite2_defconfig
-@@ -4,6 +4,8 @@ CONFIG_DEFAULT_DEVICE_TREE="sun50i-h6-orangepi-lite2"
- CONFIG_SPL=y
- CONFIG_MACH_SUN50I_H6=y
- CONFIG_SUNXI_DRAM_H6_LPDDR3=y
-+CONFIG_SPL_SUNXI_LED_STATUS=y
-+CONFIG_SPL_SUNXI_LED_STATUS_GPIO=356
- # CONFIG_PSCI_RESET is not set
- # CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
- CONFIG_USB_EHCI_HCD=y
-diff --git a/configs/orangepi_pc2_defconfig b/configs/orangepi_pc2_defconfig
-index d856a25814b..464b34f4ec0 100644
---- a/configs/orangepi_pc2_defconfig
-+++ b/configs/orangepi_pc2_defconfig
-@@ -6,6 +6,8 @@ CONFIG_SPL=y
- CONFIG_MACH_SUN50I_H5=y
- CONFIG_DRAM_ZQ=3881977
- CONFIG_SPL_SPI_SUNXI=y
-+CONFIG_SPL_SUNXI_LED_STATUS=y
-+CONFIG_SPL_SUNXI_LED_STATUS_GPIO=362
- # CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
- CONFIG_SPL_I2C=y
- CONFIG_SPL_SYS_I2C_LEGACY=y
-diff --git a/configs/orangepi_prime_defconfig b/configs/orangepi_prime_defconfig
-index e93154cc0e9..e5e9009378c 100644
---- a/configs/orangepi_prime_defconfig
-+++ b/configs/orangepi_prime_defconfig
-@@ -6,6 +6,8 @@ CONFIG_SPL=y
- CONFIG_MACH_SUN50I_H5=y
- CONFIG_DRAM_ZQ=3881977
- # CONFIG_DRAM_ODT_EN is not set
-+CONFIG_SPL_SUNXI_LED_STATUS=y
-+CONFIG_SPL_SUNXI_LED_STATUS_GPIO=362
- # CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
- CONFIG_SUN8I_EMAC=y
- CONFIG_USB_EHCI_HCD=y
-diff --git a/configs/orangepi_zero2_defconfig b/configs/orangepi_zero2_defconfig
-index 831bfe66e25..b387b4795ad 100644
---- a/configs/orangepi_zero2_defconfig
-+++ b/configs/orangepi_zero2_defconfig
-@@ -10,6 +10,8 @@ CONFIG_MACH_SUN50I_H616=y
- CONFIG_SUNXI_DRAM_H616_DDR3_1333=y
- CONFIG_R_I2C_ENABLE=y
- CONFIG_SPL_SPI_SUNXI=y
-+CONFIG_SPL_SUNXI_LED_STATUS=y
-+CONFIG_SPL_SUNXI_LED_STATUS_GPIO=76
- # CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
- CONFIG_SPL_I2C=y
- CONFIG_SPL_SYS_I2C_LEGACY=y
-diff --git a/configs/orangepi_zero_plus2_defconfig b/configs/orangepi_zero_plus2_defconfig
-index c4d9800975c..9758ffd385e 100644
---- a/configs/orangepi_zero_plus2_defconfig
-+++ b/configs/orangepi_zero_plus2_defconfig
-@@ -7,6 +7,8 @@ CONFIG_MACH_SUN50I_H5=y
- CONFIG_DRAM_ZQ=3881977
- # CONFIG_DRAM_ODT_EN is not set
- CONFIG_MMC_SUNXI_SLOT_EXTRA=2
-+CONFIG_SPL_SUNXI_LED_STATUS=y
-+CONFIG_SPL_SUNXI_LED_STATUS_GPIO=362
- # CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
- CONFIG_SUN8I_EMAC=y
- CONFIG_USB_EHCI_HCD=y
-diff --git a/configs/orangepi_zero_plus_defconfig b/configs/orangepi_zero_plus_defconfig
-index 4b6491dc846..bb159428a14 100644
---- a/configs/orangepi_zero_plus_defconfig
-+++ b/configs/orangepi_zero_plus_defconfig
-@@ -6,6 +6,8 @@ CONFIG_SPL=y
- CONFIG_MACH_SUN50I_H5=y
- CONFIG_DRAM_ZQ=3881977
- # CONFIG_DRAM_ODT_EN is not set
-+CONFIG_SPL_SUNXI_LED_STATUS=y
-+CONFIG_SPL_SUNXI_LED_STATUS_GPIO=362
- # CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
- CONFIG_SUN8I_EMAC=y
- CONFIG_USB_EHCI_HCD=y
-diff --git a/configs/radxa-cubie-a5e_defconfig b/configs/radxa-cubie-a5e_defconfig
-index 9d204ef5548..84bc4e3d4a9 100644
---- a/configs/radxa-cubie-a5e_defconfig
-+++ b/configs/radxa-cubie-a5e_defconfig
-@@ -15,6 +15,9 @@ CONFIG_DRAM_SUNXI_TPR12=0x3533302f
- CONFIG_MACH_SUN55I_A523=y
- CONFIG_MMC_SUNXI_SLOT_EXTRA=2
- CONFIG_R_I2C_ENABLE=y
-+CONFIG_SPL_SUNXI_LED_STATUS=y
-+CONFIG_SPL_SUNXI_LED_STATUS_GPIO=356
-+# CONFIG_SPL_SUNXI_LED_STATUS_ACTIVE_HIGH is not set
- # CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
- CONFIG_SPL_I2C=y
- CONFIG_SPL_SYS_I2C_LEGACY=y
-diff --git a/configs/tanix_tx1_defconfig b/configs/tanix_tx1_defconfig
-index 1bd167ce0f6..03b18701859 100644
---- a/configs/tanix_tx1_defconfig
-+++ b/configs/tanix_tx1_defconfig
-@@ -14,6 +14,8 @@ CONFIG_MACH_SUN50I_H616=y
- CONFIG_SUNXI_DRAM_H616_LPDDR3=y
- CONFIG_MMC_SUNXI_SLOT_EXTRA=2
- CONFIG_R_I2C_ENABLE=y
-+CONFIG_SPL_SUNXI_LED_STATUS=y
-+CONFIG_SPL_SUNXI_LED_STATUS_GPIO=231
- # CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
- CONFIG_SPL_I2C=y
- CONFIG_SPL_SYS_I2C_LEGACY=y
--- 
-2.43.0
+Reported-by: Paul Kocialkowski <paulk@sys-base.io>
+Closes: https://lore.kernel.org/u-boot/adfMQBPdntWy1KIq@shepard/
 
+Acked-by: Quentin Schulz <quentin.schulz@cherry.de>
+
+Thanks!
+Quentin
