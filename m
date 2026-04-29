@@ -4,74 +4,125 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30F4FFF8864
-	for <u-boot@archiver.kernel.org>; Wed, 29 Apr 2026 08:13:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46A31FF8864
+	for <u-boot@archiver.kernel.org>; Wed, 29 Apr 2026 08:15:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 42DC2846F5;
-	Wed, 29 Apr 2026 10:13:36 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=mediatek.com
+	by phobos.denx.de (Postfix) with ESMTP id B3859846F2;
+	Wed, 29 Apr 2026 10:15:40 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=mediatek.com header.i=@mediatek.com header.b="RYGjWCc1";
+	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="ZBA+P3tK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2248A846FA; Wed, 29 Apr 2026 10:13:35 +0200 (CEST)
-Received: from mailgw02.mediatek.com (unknown [210.61.82.184])
+ id E21DE846F5; Wed, 29 Apr 2026 10:15:39 +0200 (CEST)
+Received: from PH7PR06CU001.outbound.protection.outlook.com
+ (mail-westus3azlp170100009.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c107::9])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1A850846F4
- for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 10:13:31 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=mediatek.com
+ by phobos.denx.de (Postfix) with ESMTPS id BB58D846EC
+ for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 10:15:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=weijie.gao@mediatek.com
-X-UUID: 4b58a4c443a311f19a16598d5ca7f8ec-20260429
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mediatek.com;
- s=dk; 
- h=Content-Type:MIME-Version:Message-ID:Date:Subject:CC:To:From;
- bh=Kv8+xQbk9ysEOiGJFXTH5uHatPQaodnv7t9asiw1L8g=; 
- b=RYGjWCc1HfsEsSv3HObUUB8GoG+CJE96+4GhaYc+NXyiLaurP/gwU/6XC4knXg4vD9vWguIoEqtC6OVnxCJ+1VBCqEdOrJxLdkJGUDIwzziAGkvQakG9Et6BA2l74eG7PATmEwhiKFa2m75z0oXTQYfcIXDW5ayElVPcpyVpWiA=;
-X-CID-P-RULE: Release_Ham
-X-CID-O-INFO: VERSION:1.3.12, REQID:0f26c0e5-5dc8-4d9c-b147-2990dfd25333, IP:0,
- U
- RL:0,TC:0,Content:-25,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTIO
- N:release,TS:-25
-X-CID-META: VersionHash:e7bac3a, CLOUDID:c63cda44-8360-4d24-8500-9b9380fa4b0d,
- B
- ulkID:nil,BulkQuantity:0,Recheck:0,SF:102|836|865|888|898,TC:-5,Content:0|
- 15|50,EDM:-3,IP:nil,URL:99|1,File:130,RT:0,Bulk:nil,QS:nil,BEC:-1,COL:0,OS
- I:0,OSA:0,AV:0,LES:1,SPR:NO,DKR:0,DKP:0,BRR:0,BRE:0,ARC:0
-X-CID-BVR: 2,SSN|SDN
-X-CID-BAS: 2,SSN|SDN,0,_
-X-CID-FACTOR: TF_CID_SPAM_SNR,TF_CID_SPAM_ULS
-X-CID-RHF: D41D8CD98F00B204E9800998ECF8427E
-X-UUID: 4b58a4c443a311f19a16598d5ca7f8ec-20260429
-Received: from mtkmbs10n1.mediatek.inc [(172.21.101.34)] by
- mailgw02.mediatek.com (envelope-from <weijie.gao@mediatek.com>)
- (Generic MTA with TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384 256/256)
- with ESMTP id 1186633032; Wed, 29 Apr 2026 16:13:24 +0800
-Received: from mtkmbs13n2.mediatek.inc (172.21.101.108) by
- MTKMBS14N1.mediatek.inc (172.21.101.75) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.29; Wed, 29 Apr 2026 16:13:23 +0800
-Received: from mcddlt001.gcn.mediatek.inc (10.19.240.15) by
- mtkmbs13n2.mediatek.inc (172.21.101.73) with Microsoft SMTP Server id
- 15.2.2562.29 via Frontend Transport; Wed, 29 Apr 2026 16:13:22 +0800
-From: Weijie Gao <weijie.gao@mediatek.com>
-To: <u-boot@lists.denx.de>
-CC: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, Tom Rini
- <trini@konsulko.com>, Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Michael Trimarchi <michael@amarulasolutions.com>, Frieder Schrempf
- <frieder.schrempf@kontron.de>, Mikhail Kshevetskiy
- <mikhail.kshevetskiy@iopsys.eu>, Tianling Shen <cnsztl@gmail.com>, Weijie Gao
- <weijie.gao@mediatek.com>
-Subject: [PATCH] mtd: spinand: add support for FudanMicro FM25S01BI3
-Date: Wed, 29 Apr 2026 16:13:19 +0800
-Message-ID: <20260429081319.151702-1-weijie.gao@mediatek.com>
-X-Mailer: git-send-email 2.17.0
-MIME-Version: 1.0
+ dmarc=pass (p=reject dis=none) header.from=altera.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=alif.zakuan.yuslaimi@altera.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=yIvc5WvqUl7QsFRHLWbC5+b+3nBZowLfjaaSNhShlzZOEKZL+z2jau9j+tvPS1k0n28PkZFwL1INvEaVyFL4nK1QuTsQIPkoos8jQgBQeyqFkWLa3d1mXCmVKIVM6Banwle/w71HZk2F8jiS5l6skrsbkLOgxk/J1RlhAZYMDyoiX2eSlIaq82YPhL0vfT9AcOBPbTKoj0pAWMh8V14OevY2oouVhMqJfFMNanONLuqKDiQwnHhT8aTdeBmM1K+9UGtYQh9d4BOJnHFzXigVxJEObMx9AbBr8YFQVR7E3A9E+hmEz6AjH3mZhqLompbMdT7RGW1se7KIUc9pxKzbTg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=h2zjgRXLazJCh+nTUbgjoyrIOE+V9kZmrKBKHnirBUI=;
+ b=Vhuhi/fMGbEVQa0+VCNXnk2Zb8K9473UMIgq7LxAnxcbo91ZJ+xGgCtZKo/UcOQcv7SevZ6Bc8rTOc+HkEdzra2YHVev+RTSq4v7Ak0GosV0c1EFxAO8Vq8IM9nuTnfic7CWde6I8VBUp+9q6vqbzemWzMxi/wbCDOmWeBYYPceDqaG2TmHja0coPJ3alYgYowtN/iHNPpSjVWiSTcwr0jkmscYBq7KkpU6XPo64gRFD7nyd1zB4KSPr/o+xFVWs4Uz0yo6ZQvRpmRdY6ckDztfxjzw57C1VDPbRwF4llPkcVGJ2NL0ms+HIswLTjC5wB3Ijjx9Wt2DO9ugRGVb3Iw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
+ dkim=pass header.d=altera.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=h2zjgRXLazJCh+nTUbgjoyrIOE+V9kZmrKBKHnirBUI=;
+ b=ZBA+P3tKkU/qB8Q0kPVWxFlfJt1Jg6C8BPUnjsrNPVAoHaFjFGgdUAE5LpVMCyCKzLyAcJS18ipkUC7Wd42LN7/qSnihYVkrBi8jSqvj+vKNtzThiM643Aj0BnmGnAD5zuCl/IBePURh1xiUrh8+O0QLYHwp4q8Q6tx7NR7HVRVIlwKgP5DZ4VtG77R+gMYAm6SOdEslH+eWRry56vi+hiCIDtWhVB+DVht/WWKqgEKgsODu71nWH7epVHktAZDbIzyrxKhl1lKoEzXlzTJx/7hNocgARit1doNlmevJ6LdTNmJWdeABEYm3q+I2kV4KSpxRsF9KdKW5CvP1fK40tw==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=altera.com;
+Received: from PH7PR03MB7063.namprd03.prod.outlook.com (2603:10b6:510:2a4::6)
+ by DSWPR03MB989143.namprd03.prod.outlook.com (2603:10b6:8:361::14)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9870.19; Wed, 29 Apr
+ 2026 08:15:34 +0000
+Received: from PH7PR03MB7063.namprd03.prod.outlook.com
+ ([fe80::f6cf:4203:1cbc:cd21]) by PH7PR03MB7063.namprd03.prod.outlook.com
+ ([fe80::f6cf:4203:1cbc:cd21%4]) with mapi id 15.20.9846.025; Wed, 29 Apr 2026
+ 08:15:34 +0000
+From: alif.zakuan.yuslaimi@altera.com
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marex@denx.de>,
+ Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
+ Tien Fong Chee <tien.fong.chee@altera.com>, Tom Rini <trini@konsulko.com>,
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
+Subject: [PATCH] arch: arm: dts: agilex: Disable gmac2 node for Agilex7M
+Date: Wed, 29 Apr 2026 01:15:29 -0700
+Message-ID: <20260429081529.5713-1-alif.zakuan.yuslaimi@altera.com>
+X-Mailer: git-send-email 2.43.7
+Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-MTK: N
+X-ClientProxiedBy: SJ0P220CA0030.NAMP220.PROD.OUTLOOK.COM
+ (2603:10b6:a03:41b::6) To PH7PR03MB7063.namprd03.prod.outlook.com
+ (2603:10b6:510:2a4::6)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PH7PR03MB7063:EE_|DSWPR03MB989143:EE_
+X-MS-Office365-Filtering-Correlation-Id: 56562319-7f14-4f80-3542-08dea5c77c82
+X-MS-Exchange-AtpMessageProperties: SA
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|376014|1800799024|366016|18002099003|56012099003|55112099003; 
+X-Microsoft-Antispam-Message-Info: B67480rvOZXwW/fmmMyJn/X2yPLU19x4rbFSJD7IYnu7PmfbJIHjsZUWg0XfXOOWMOncMZI7+TrNWwyLQ61gvg+nSDea0uQKmz3ivPFA9OjmdxOjfF6q79VA2MRVD4glHurGca0/aav0qxEJVbwKzZF55aAn5DrQQSjxCT0wMvq8zq+Hjjr9moGJT/VPweBsjdnpfKI812i4w/hvkWJStfY6pke7W+tro9i+00uBV979FmMikqcy2P/7s+Ws2/wosKmDfveb1/hUB24ZkKdbdX/GNG69+4LDZdwEzgeKX2OqbI8CQO/axTtEx9XtwirfkQHtQW1VhXaIryrP0HSuF/q1DmABWTRJXYvVFbzKW0oQmWo49iBBU3Qgc+EuaGlcNYUkZOAp7zqhS+I1l2lNC5ZHiRURpYv32JsX7N6J4kwTFy+Dhgwa47z/yffADeYZULK3Kqov0fJkXrLsWqJ8VfHBZJNR+tDlFHXzxoUKE8JncApJNB7CSWqsdUZpBoyBZ9KA5qOjZI3Rmuc/DrKvhYXeXqI3MvVBGsx5MJ5BtFd806mEgbVLNKI/q7Yw0ALcX91t8qaYAJPeU4Lf3F+wM+a8PymCTjw4WQHJT7/STep9Si/L/gKMhYHHeJIhLRIW5wenPpq1KtcCQPNt/5vdSl13X1joFBfj8/ZDA8BnkVwHkL+xf5DIYIc1FB2ycUVRipdNok25CVBgCJykxcYLVE9cN/bbWWyzmgH9e4uAccc=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PH7PR03MB7063.namprd03.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(1800799024)(366016)(18002099003)(56012099003)(55112099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?qziA3ppmgWsGY4f5IrTtWk0gy8PRivwNo14mra6d064u/k25T1wZvgv8CPKu?=
+ =?us-ascii?Q?Z+1NRnFKbUcFgLzpiQFo5V31Db19EJ/RFBnVgYMPuOh1VU6OJr17EQ9LiYtj?=
+ =?us-ascii?Q?Ura+JPdDZahPgl/IwegP6G9pJ78VJh3R9ejpKrAiZS38mXTquaOOitl9EN3Y?=
+ =?us-ascii?Q?NRkp21iTlGSpdNpBuzvNx+6cY3AzH8YwI9a74ZdOitMLQEfjTwwF+RTcGjOI?=
+ =?us-ascii?Q?5E+X8I3eVe7IOj2TqZe2YXL/8vn8WrKSRi8/70HoUi8S+vIT5Y+0Q9Se/AMW?=
+ =?us-ascii?Q?b/l5zOjgSPoVHO4iKt9Pwkcxo6hUqjn+mxJslXRd7tCVTQgJSdHovJeiB+Va?=
+ =?us-ascii?Q?IhekZ15WRxJDKxwuFqpFsVVedN8HyFCRwQfof/niKx8DVjjIQlc4PmQtkGHZ?=
+ =?us-ascii?Q?EgXOUQQuYD+3szTenTl2fKOqF4Ej25dtUoSiBj1BTF64Gm2YJDQeiI534nZZ?=
+ =?us-ascii?Q?Ff7T3NqRVlwOtOy6Tt8TmuX/i7T/tlmfoe+mnGDkbLgZIHr92in/+0VxsB3d?=
+ =?us-ascii?Q?XWiVrBxdcwLbL4cDQ5/cTl5c5u9l6zUKUQXtSKZlYSIy0cIT6pCG5p3Y253Y?=
+ =?us-ascii?Q?VZJuFwIm9coFOiHOgvdlCSq+UyJyh3begMSWcLpuWbbJ2MwhxWw6IlgRGTYV?=
+ =?us-ascii?Q?J5ttSVTz/FQPNdYkQnzy+OyBuew+3IYQk4O2OEB7i1mK5N3lxraO7aksdkEb?=
+ =?us-ascii?Q?SP7isw4w48x6KCyYZmxdllAiqVDwhGG8cjot5BkVhU6YrY3MEE0b/aOz97cH?=
+ =?us-ascii?Q?Xb9voI+nNpe98dgfa5Exvk4O8frKFCig4S9VrzCMaFxJVSYcVC5ad+JIbk8C?=
+ =?us-ascii?Q?E967OU8lyb72dg/Ub/79pFtmKnXCP1c2LN5Q5uoSjiB91XB19kIE0BytzqBg?=
+ =?us-ascii?Q?TrUHWP6bOXCjLdXCVsIV9I3srXHDx3haux3C35STb5eVVYhR2TdEwOnfZADx?=
+ =?us-ascii?Q?GhzyhhK6bTqUWfJZF+J1NCQCobwl3fSOkLJ3eUMyoGR/s8XTKj2NYHjm8/ZQ?=
+ =?us-ascii?Q?jF/9fDzYh9T4hHO+h2U1VZ2o311AQnclHevgxS5egZvqBH0fBJKtRtS4ateI?=
+ =?us-ascii?Q?ReX1qM088xt0R4T/MRKCYa91Ia9pAQ07ilyXHNvFIZZbdPN42mC/mZ/AEbFR?=
+ =?us-ascii?Q?6GDfx1NJ94x9oIXIo13QgpZHI/ZgYqb5YrhBf65BBPjwYz7LBs3fukZRvouo?=
+ =?us-ascii?Q?2j20Vvjg1YiYBcPMvindDKICpN5mcaCbfD1wXF5TeYvJFUDx8NdA7aHQcRyj?=
+ =?us-ascii?Q?IbUhz08RgD1tuHY6Ihpdx6MGgG391DXxQ03r041h5At4ay4k5hOs1jYKXKcM?=
+ =?us-ascii?Q?bf8XSLuw05yUWwK+V/10N/3DhqwxEqbFTs48FxW7LHYiEUAlnqR3d8PFYZdu?=
+ =?us-ascii?Q?FXoW8CAuRcNEww4vFneg9fwCmbrtaqbZ2D0gNURroOK+L4XJ9rpeIAeA6vAY?=
+ =?us-ascii?Q?7fb2tZGIAd28/jy3rCGrD1wiZ/asR69vEu59SdnxNIVCNj6P5rcoOzz73Pmt?=
+ =?us-ascii?Q?s7ZHHwOx6I7MPNQfuENV5mZPemw2T9Tj3z/UMMqySL3LVSoxdejowNDDqlgY?=
+ =?us-ascii?Q?iAFIMAcEgqdnT77X5hvst7vpPxjL1WeTyJTP+roMcrS0+1mfVscfWCca4+ly?=
+ =?us-ascii?Q?LxlcPOn8QR9CcctLbJM8N8HNp9++aZhUpsIHStjRmuPGXt9L6qMbU36ut+S0?=
+ =?us-ascii?Q?oGrYk/HZleYxg07jfeH+rXJfEuus4EohWKJ7+TxatI/FRg8q+K4mHt/KpuEq?=
+ =?us-ascii?Q?ObQwSnF2jWFz28LpBFrjerIABjEWSLs=3D?=
+X-OriginatorOrg: altera.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 56562319-7f14-4f80-3542-08dea5c77c82
+X-MS-Exchange-CrossTenant-AuthSource: PH7PR03MB7063.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Apr 2026 08:15:34.1026 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: iW1g6gFs0QIwJhb3EnI3NQIkFfA+4oXVYXN3V5KFn2c4e2EI6UsfFadHaceLORPhEFKk0C2hobtNwhj2kysIaK7AKOELSRjTsXvk22TdDr0=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DSWPR03MB989143
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,136 +139,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add support for FudanMicro FM25S01BI3 SPI-NAND.
+From: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
 
-This driver is ported from linux kernel with fix:
-This SPI-NAND does not support 1S-4S-4S and 1S-2S-2S modes.
-https://lore.kernel.org/linux-mtd/20251127195900.2562-1-csharper2005@gmail.com/
+Disable gmac2 node with the incorrect settings to only enable gmac0 as
+default for the standard reference Agilex7M devkit.
 
-Datasheet link:
-https://www.fmsh.com/nvm/FM25S01BI3_ds_eng.pdf
+The gmac2 node can be enabled and configured with the correct
+board-specific settings for other Agilex7M board variants in the Linux
+device tree.
 
-Tested on MediaTek's filogic platform reference board.
-
-Signed-off-by: Weijie Gao <weijie.gao@mediatek.com>
+Signed-off-by: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
 ---
- drivers/mtd/nand/spi/fmsh.c | 77 +++++++++++++++++++++++++++++++++++++
- 1 file changed, 77 insertions(+)
+ arch/arm/dts/socfpga_agilex_socdk-u-boot.dtsi | 30 -------------------
+ 1 file changed, 30 deletions(-)
 
-diff --git a/drivers/mtd/nand/spi/fmsh.c b/drivers/mtd/nand/spi/fmsh.c
-index 80837b7dd42..6740f30689f 100644
---- a/drivers/mtd/nand/spi/fmsh.c
-+++ b/drivers/mtd/nand/spi/fmsh.c
-@@ -11,6 +11,13 @@
- #endif
- #include <linux/mtd/spinand.h>
- 
-+#define FM25S01BI3_STATUS_ECC_MASK		(7 << 4)
-+	#define FM25S01BI3_STATUS_ECC_NO_BITFLIPS	(0 << 4)
-+	#define FM25S01BI3_STATUS_ECC_1_3_BITFLIPS	(1 << 4)
-+	#define FM25S01BI3_STATUS_ECC_UNCOR_ERROR	(2 << 4)
-+	#define FM25S01BI3_STATUS_ECC_4_6_BITFLIPS	(3 << 4)
-+	#define FM25S01BI3_STATUS_ECC_7_8_BITFLIPS	(5 << 4)
-+
- #define SPINAND_MFR_FMSH		0xA1
- 
- static SPINAND_OP_VARIANTS(read_cache_variants,
-@@ -21,6 +28,12 @@ static SPINAND_OP_VARIANTS(read_cache_variants,
- 		SPINAND_PAGE_READ_FROM_CACHE_FAST_1S_1S_1S_OP(0, 1, NULL, 0, 0),
- 		SPINAND_PAGE_READ_FROM_CACHE_1S_1S_1S_OP(0, 1, NULL, 0, 0));
- 
-+static SPINAND_OP_VARIANTS(fm25s01bi3_read_cache_variants,
-+		SPINAND_PAGE_READ_FROM_CACHE_1S_1S_4S_OP(0, 1, NULL, 0, 0),
-+		SPINAND_PAGE_READ_FROM_CACHE_1S_1S_2S_OP(0, 1, NULL, 0, 0),
-+		SPINAND_PAGE_READ_FROM_CACHE_FAST_1S_1S_1S_OP(0, 1, NULL, 0, 0),
-+		SPINAND_PAGE_READ_FROM_CACHE_1S_1S_1S_OP(0, 1, NULL, 0, 0));
-+
- static SPINAND_OP_VARIANTS(write_cache_variants,
- 		SPINAND_PROG_LOAD_1S_1S_4S_OP(true, 0, NULL, 0),
- 		SPINAND_PROG_LOAD_1S_1S_1S_OP(true, 0, NULL, 0));
-@@ -47,11 +60,65 @@ static int fm25s01a_ooblayout_free(struct mtd_info *mtd, int section,
- 	return 0;
- }
- 
-+static int fm25s01bi3_ecc_get_status(struct spinand_device *spinand, u8 status)
-+{
-+	switch (status & FM25S01BI3_STATUS_ECC_MASK) {
-+	case FM25S01BI3_STATUS_ECC_NO_BITFLIPS:
-+		return 0;
-+
-+	case FM25S01BI3_STATUS_ECC_UNCOR_ERROR:
-+		return -EBADMSG;
-+
-+	case FM25S01BI3_STATUS_ECC_1_3_BITFLIPS:
-+		return 3;
-+
-+	case FM25S01BI3_STATUS_ECC_4_6_BITFLIPS:
-+		return 6;
-+
-+	case FM25S01BI3_STATUS_ECC_7_8_BITFLIPS:
-+		return 8;
-+
-+	default:
-+		break;
-+	}
-+
-+	return -EINVAL;
-+}
-+
-+static int fm25s01bi3_ooblayout_ecc(struct mtd_info *mtd, int section,
-+				    struct mtd_oob_region *region)
-+{
-+	if (section)
-+		return -ERANGE;
-+
-+	region->offset = 64;
-+	region->length = 64;
-+
-+	return 0;
-+}
-+
-+static int fm25s01bi3_ooblayout_free(struct mtd_info *mtd, int section,
-+				     struct mtd_oob_region *region)
-+{
-+	if (section > 3)
-+		return -ERANGE;
-+
-+	region->offset = (16 * section) + 4;
-+	region->length = 12;
-+
-+	return 0;
-+}
-+
- static const struct mtd_ooblayout_ops fm25s01a_ooblayout = {
- 	.ecc = fm25s01a_ooblayout_ecc,
- 	.rfree = fm25s01a_ooblayout_free,
+diff --git a/arch/arm/dts/socfpga_agilex_socdk-u-boot.dtsi b/arch/arm/dts/socfpga_agilex_socdk-u-boot.dtsi
+index f2150b7eb7b..9dc2c66f6f1 100644
+--- a/arch/arm/dts/socfpga_agilex_socdk-u-boot.dtsi
++++ b/arch/arm/dts/socfpga_agilex_socdk-u-boot.dtsi
+@@ -69,36 +69,6 @@
+ 	};
  };
  
-+static const struct mtd_ooblayout_ops fm25s01bi3_ooblayout = {
-+	.ecc = fm25s01bi3_ooblayout_ecc,
-+	.rfree = fm25s01bi3_ooblayout_free,
-+};
-+
- static const struct spinand_info fmsh_spinand_table[] = {
- 	SPINAND_INFO("FM25S01A",
- 		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0xE4),
-@@ -62,6 +129,16 @@ static const struct spinand_info fmsh_spinand_table[] = {
- 					      &update_cache_variants),
- 		     0,
- 		     SPINAND_ECCINFO(&fm25s01a_ooblayout, NULL)),
-+	SPINAND_INFO("FM25S01BI3",
-+		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0xD4),
-+		     NAND_MEMORG(1, 2048, 128, 64, 1024, 20, 1, 1, 1),
-+		     NAND_ECCREQ(8, 512),
-+		     SPINAND_INFO_OP_VARIANTS(&fm25s01bi3_read_cache_variants,
-+					      &write_cache_variants,
-+					      &update_cache_variants),
-+		     SPINAND_HAS_QE_BIT,
-+		     SPINAND_ECCINFO(&fm25s01bi3_ooblayout,
-+				     fm25s01bi3_ecc_get_status)),
+-&gmac2 {
+-	status = "okay";
+-	phy-mode = "rgmii";
+-	phy-handle = <&phy0>;
+-
+-	max-frame-size = <3800>;
+-
+-	mdio2 {
+-		#address-cells = <1>;
+-		#size-cells = <0>;
+-		compatible = "snps,dwmac-mdio";
+-		phy2: ethernet-phy@2 {
+-			reg = <4>;
+-
+-			txd0-skew-ps = <0>; /* -420ps */
+-			txd1-skew-ps = <0>; /* -420ps */
+-			txd2-skew-ps = <0>; /* -420ps */
+-			txd3-skew-ps = <0>; /* -420ps */
+-			rxd0-skew-ps = <420>; /* 0ps */
+-			rxd1-skew-ps = <420>; /* 0ps */
+-			rxd2-skew-ps = <420>; /* 0ps */
+-			rxd3-skew-ps = <420>; /* 0ps */
+-			txen-skew-ps = <0>; /* -420ps */
+-			txc-skew-ps = <1860>; /* 960ps */
+-			rxdv-skew-ps = <420>; /* 0ps */
+-			rxc-skew-ps = <1680>; /* 780ps */
+-		};
+-	};
+-};
+-
+ &qspi {
+ 	status = "disabled";
  };
- 
- static const struct spinand_manufacturer_ops fmsh_spinand_manuf_ops = {
 -- 
-2.45.2
+2.43.7
 
