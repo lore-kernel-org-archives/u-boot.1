@@ -4,96 +4,101 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE294FF8873
-	for <u-boot@archiver.kernel.org>; Wed, 29 Apr 2026 14:21:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74B7FFF8867
+	for <u-boot@archiver.kernel.org>; Wed, 29 Apr 2026 14:24:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C65FE848BE;
-	Wed, 29 Apr 2026 16:21:43 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 07FF5848A0;
+	Wed, 29 Apr 2026 16:24:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="fHAGgCSH";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="CO+UUTx9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DA72A848CF; Wed, 29 Apr 2026 16:21:42 +0200 (CEST)
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [IPv6:2a00:1450:4864:20::632])
+ id C4658848A9; Wed, 29 Apr 2026 16:24:08 +0200 (CEST)
+Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
+ [IPv6:2a00:1450:4864:20::52f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F3EE9848BD
- for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 16:21:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8B3088489E
+ for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 16:24:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-bb91b426e40so211250866b.0
- for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 07:21:40 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1777472500; cv=none;
+Received: by mail-ed1-x52f.google.com with SMTP id
+ 4fb4d7f45d1cf-671ae79e617so16208499a12.3
+ for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 07:24:06 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1777472646; cv=none;
  d=google.com; s=arc-20240605;
- b=NY47c1ZaaPaQ45nS/eThpe7Hz6WxbBw7c430ejtqR6PzHCUOksmFFF1na+TRXBmBTK
- jCZfDe7WCTcRAViNb6vlZDBn1k2aDxlDHEAh8B0/5xz+zsFhUvKe8KDDY+e4u0CVIJzT
- /eN8MCiJqlPgjVM2wrljJa0u+zekvqCXbQyhOEsyEaV03nXLKxceKt0q11LwAWm42ws9
- RwFvWih2Q/MayGzO6mdNSqHhBR7q9SJH0mvK8VRMHwrf70MqZK97F6fF+wBKZpZniF15
- NWw6eoFFJXATCVYFnrwD/D/Hg3mHjI94d6CdNs6AWBa+8bbd4k8QIvBJFZyDfyMc7JYm
- 3oGg==
+ b=lnP0qycG1fQbIQ3ovTxxPGesx6aEH4Duwi0KxCuG4BbUoVR7F4ddQ+3i6Jp7nRQHce
+ hqxb32wN4SxY7+8IBCVgv8kUyYLi1pb5vJ9Z296QRPDRu9+TqbznRIly67QAPECQrriU
+ Ajq2SDEIN813nfNhCG+t5W6a7gGlRWEZ+PFgp1X9bGwcUpy5x54EvSV0/bP9m4+b7XS0
+ ZlTeB7WkIF9OO/4E4Kp2fBfxwkFV08SnsKpNDK6nKXf5PomcblxYC9mfTjheYDompHPd
+ kbyW43SsVB6kxCTo5Qi7LbA/BjHKyahjGElzVC7aPKCQHdFXkowRLv0tLQVi6r0D1XZJ
+ HCdg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=E23U+c6Fyqj2bO9ovOOl0hc+xFd9hL7CNO1HTC2iB+4=;
- fh=AkkFQGgex4/uJFFEvqZIjF/kHc3dyQYXt0MIVYfaUkA=;
- b=EhJAhGd/m9dYhaFO18HKdACnb9SI4/eMltMbGcBF7MzGzeclRTr2jI7ODJTc+jzCp6
- 9NsRyd3vfQjStSK9+ubCd8QcWpaMuVRCoV9fRRGcWD5ZfH0Aasjq7Hu2M1Mxssr6MZpv
- vJMhnsOk28pHbphtFstk+e/ZXPJH1LBr46F6eQ+6UAgrcEQkCoNnOKgBdUgCbDliyRbS
- T9Vcvxu9MITUcyBZad8ZZNKv9WCkM8NiywMYC0RG8QVMVbtMWxQUAdLXG1JcC8vFQjCi
- KfK6jOHiY44ADcoNv3hVHZh2S3yJGlI/piorApqtebIEKMFJ2enqm2G8hlI7TJ1A1KMo
- PaZQ==; darn=lists.denx.de
+ bh=+yg51scI8XVFo5DX3YOkteK35ztzxduU6L3M6fbNOYk=;
+ fh=ogTju0zVNNdWq7fLA5CcYqbgIfSAakEYKqfLLenscwQ=;
+ b=OB4ruWPd21+/rzyhYygLVWz1qV6wl8LWvPnbila6AuvlX2uYw4TrOr62/mbHinb8bN
+ /SCKhRaBqdSnOTVfjbx2amC60flWxbzcLmJ07wD/TQpLNF5qGHrrtcRv51Qth2qAGM8v
+ hrmc0CHcINaezNE1bfvqT/AOdIoqs2j1aFm1IMSjV8oB7bGXFnbidiGqgJhpjicUQ1cM
+ zzw1g1NIbvQqGEdi2mLPzdEnJEt8czfaHhRKYysmtAc4Z8jMRopuePW9JGfcj0O4AYjO
+ D64QBmS9QugK2lyYwjsW5+xLhagxuHpBtRPqVIX/ojpvCfu7NADYje8QUXSSSYNc9cxl
+ uB7g==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1777472500; x=1778077300; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1777472646; x=1778077446; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=E23U+c6Fyqj2bO9ovOOl0hc+xFd9hL7CNO1HTC2iB+4=;
- b=fHAGgCSHY7Lt9lFR0lzQWotoR1T7MHGU4bxG0myvTxRdCtM5dU7uXB+q3aXayo5EtK
- D7YFfh6A1CLYr0usM0qxPuaNk3uIcWe2mBRFOyxOz4Uj5DwQVbfdZe7llmrH1htCdBk0
- l5KPdvLFVV0NSyLCDupNmACGyqEmUJh5c09p0=
+ bh=+yg51scI8XVFo5DX3YOkteK35ztzxduU6L3M6fbNOYk=;
+ b=CO+UUTx9eMq0/EUkuVGN5AJkT7NJgCXCUfseo6+TefnIkkdO6yJ0qzQxFR7YPCw97G
+ sxvFEl2UITFYgRGy4rEz4wr2VOCQslwozWcFEyh7gaNHRD6NgN5UHQvr73A3SnVnuEvv
+ hQeROdgphThuUWjapXqzVn7ZHr7w1y1xpSurA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777472500; x=1778077300;
+ d=1e100.net; s=20251104; t=1777472646; x=1778077446;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=E23U+c6Fyqj2bO9ovOOl0hc+xFd9hL7CNO1HTC2iB+4=;
- b=gdD9VfA9IvUpgrQcnFYfKjzvxDZBBdoMhhG35mxAFNub6EkL0opugvd5ie3meOSWz+
- w/daHiBkDMIdbKoNnE/9Yrp01VmGU+jGmpnkjqcROo7dZ018C6RI7eMWG26Ux/Iud8+8
- VcINOs7iKUgiPccSCQHLfztMluuX3iryUlSKzP60hF6Gi2b5POMxsXN1psedyfmQRmsQ
- CK4GNx+yV3sbj9k/sasFsWcrfi2yWz43wEbyv566qM14fYoW1Fs7NrrSVoboeDzwBYJ1
- dhBbHKl8R1hQCBd+G4gHaEY16CdrWTSkFfslhwuMpXBaet56nbZDq3cIMdGXkSTVuUnc
- Pz3Q==
+ bh=+yg51scI8XVFo5DX3YOkteK35ztzxduU6L3M6fbNOYk=;
+ b=i/QHs090sYqyHQIM5onmr7eSw6zi0+wWdW7XwS2Vu61Xd/C9u9tkXfTzS3dOaveeGa
+ WE/u2CztyCKrrUV0ySHNYYLBW9S0DzIcWtWaHo+QM0iHJb2LMZlAughfhf9tZXTi6RxS
+ IUyt2uT8/RVbPGvOtev86DMmmNulIvMxMMF+FHJkyXGdpZRIljGQBHekp8M6JXnTq8Ef
+ 6a4veFAryPcIWS6vc9p2BmzLfza8d5iK38d4ud1xwhRxosH6OwoQA4W3Jl9GHMfGk/bI
+ U6OMS9aNCQMDNu7ig4mdCGMngIIofYjHznW9Z9rOCRReKNTixFdrYZjVyfRCwFOR4h8x
+ AZJQ==
 X-Forwarded-Encrypted: i=1;
- AFNElJ8bjMdPZzOCtgQG0klCEBR9woQIWAfBxhZXyDlrd/vuxCSVLuMeJhzEgtofq8T2gxHoyDXXIwg=@lists.denx.de
-X-Gm-Message-State: AOJu0YyTrGyAo0I3u6CFCO994v1BZ7w1MLoS0jlsWmabuwAvqhS2dK2s
- iPv2PJtpYTq4VVDWZ2ObtJnXfe2rpPS8wjCWYojTAprDRyA2RotCFTKUxl9LjPEUc46+5T71TrU
- uMZU5YP/02ghL87tHzdypZtHZUIvm/NGMW9j526Lb
-X-Gm-Gg: AeBDiesDIlkjNlNdyiQEfWNw19tCr4ZK6+9GwC721wvX/fczQylLOnW4+oYajGy1ooW
- 2GhwoQrPwEzOmjDnH3QxqOldt81ksemhtExzuK8E5Zfr+zzXFw1OVYcppqwhce5Ql1RZ30z+7p2
- GNSqctwgI/Lwvr0gc2tFIpN2luhdo6TDcd334yJBd7dYUPKcKeRtFbSX7wF9LDWNc3UFtb0qono
- 41HtjGJyIxBYfLOVR8yp0haSj1JCkiaOuyBX7NNLzCRhMQj3uUyzs4/EcT7cxcinbH/oM2ESSn4
- ijrtD457tfC/4QZ8
-X-Received: by 2002:a17:906:f590:b0:ba9:aeaa:fd01 with SMTP id
- a640c23a62f3a-bb93ee51c1fmr261147866b.43.1777472500397; Wed, 29 Apr 2026
- 07:21:40 -0700 (PDT)
+ AFNElJ8BQjYtFzOwmnxblr52m+WOYYa9IrJNRZ5GHzN6QNclS+tLZ6HJ7QRPtFQ70Lb7IrCdOntcJyU=@lists.denx.de
+X-Gm-Message-State: AOJu0YwJGXNCTqt8rDjUtKBH7exmKNOP2Xju79ixYX17oiIMm6UvvQqw
+ AiIZeFB2mRlnA1pctXcgSJsiyvN7A78SpHiebQtoRGz0gBsL5xRu0ltdJNXiFMlYoaJHRaQezSg
+ 3pvzaiQAceSR5ZT4QzRWlWufnyn9p3TQYNqWoEHZ2
+X-Gm-Gg: AeBDiet9HE3nwK1P6oTwcEFm98j44LIG48n1VifP4cBEDci4+/fGsgARWdfNg1wNwA+
+ w7dDk8h9cJq/VPHNjC8x471HQSmVXQAeZ2D0ew3E3OuQpPRGBmqji+x7xrWwYfAHFLUNG/Nxqb1
+ kbAtNSV5dBGMSURJinN6U8FTTNx5zhWhemVoWyXJj+LD0LJhxg9tSfV2IWw4yRZhX15xjf4GHOK
+ qLc0DpVVaMG7EgtTVyEolAYiJI7TjIXF1qSVXNTl/YTQ7FjxPA4R4+ZPHZn9YrCYxGOKFQIL3Dr
+ nqG/rRD9JUJoYcdF
+X-Received: by 2002:a17:907:8dcc:b0:ba3:5d15:502 with SMTP id
+ a640c23a62f3a-bb8022c26e5mr535256566b.9.1777472645956; Wed, 29 Apr 2026
+ 07:24:05 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260428142848.48156-1-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20260428142848.48156-1-heinrich.schuchardt@canonical.com>
+References: <20260425033742.1519298-1-b-padhi@ti.com>
+ <20260425033742.1519298-2-b-padhi@ti.com>
+ <20260427195405.GL41863@bill-the-cat>
+ <9863b81f-e6ad-41cb-8e02-4f22377d0137@ti.com>
+ <20260428140606.GR41863@bill-the-cat>
+In-Reply-To: <20260428140606.GR41863@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 29 Apr 2026 08:21:26 -0600
-X-Gm-Features: AVHnY4KGf6-XmJ7zkekVDunrqsPDHpgOIwUrhwwRXnDb-iU8Jo5zNHr9tZ9MvjY
-Message-ID: <CAFLszTgKkn0cwfv97FBVDK+FdCM-6BfasCvsA2oDe5qdzeuS4g@mail.gmail.com>
-Subject: Re: [PATCH v2 1/1] .clang-format: add U-Boot specific for each macros
-To: heinrich.schuchardt@canonical.com
-Cc: Tom Rini <trini@konsulko.com>, Javier Tia <floss@jetm.me>,
- Simon Glass <sjg@chromium.org>, 
- u-boot@lists.denx.de, Quentin Schulz <quentin.schulz@cherry.de>
+Date: Wed, 29 Apr 2026 08:23:53 -0600
+X-Gm-Features: AVHnY4L_iJOBk9Q0thAGPqyH8UH0PJ2Iqk3_uyQnf3uhbSCmmy5omKuiwxOEBZE
+Message-ID: <CAFLszTgBzgYYF8s9u_5=-4Yd-zV5Z+wNF5SzP6M+MSowRreJOA@mail.gmail.com>
+Subject: Re: [PATCH v4 01/11] spl: Use FIT data address as fallback when
+ 'load' property is absent
+To: Tom Rini <trini@konsulko.com>
+Cc: Beleswar Prasad Padhi <b-padhi@ti.com>, afd@ti.com, bb@ti.com,
+ anshuld@ti.com, hnagalla@ti.com, 
+ jm@ti.com, nm@ti.com, n-francis@ti.com, u-kumar1@ti.com, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -111,35 +116,88 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+Hi,
 
-On 2026-04-28T14:28:48, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
-> .clang-format: add U-Boot specific for each macros
+On Tue, 28 Apr 2026 at 08:06, Tom Rini <trini@konsulko.com> wrote:
 >
-> Formatting via clang-format is controlled by .clang-format.
-> For each statements should be formatted with a brace at the line end:
+> On Tue, Apr 28, 2026 at 04:26:31PM +0530, Beleswar Prasad Padhi wrote:
+> > Hi Tom,
+> >
+> > On 28/04/26 01:24, Tom Rini wrote:
+> > > On Sat, Apr 25, 2026 at 09:07:32AM +0530, Beleswar Padhi wrote:
+> > >> In cases where the 'load' property is not defined in a FIT image node,
+> > >> fallback to using the data address returned by `fit_image_get_data()`.
+> > >> This enables FIT images to omit the 'load' property during FIT creation.
+> > >>
+> > >> Signed-off-by: Beleswar Padhi <b-padhi@ti.com>
+> > >> ---
+> > >> Cc: Simon Glass <sjg@chromium.org>
+> > >>
+> > >> v4: Changelog:
+> > >> 1. None
+> > >>
+> > >> Link to v3:
+> > >> https://lore.kernel.org/all/20251231173621.1069988-2-b-padhi@ti.com/
+> > >>
+> > >> v3: Changelog:
+> > >> 1. None
+> > >>
+> > >> Link to v2:
+> > >> https://lore.kernel.org/all/20250506104202.16741-3-b-padhi@ti.com/
+> > >>
+> > >> v2: Changelog:
+> > >> 1. New patch. Add support to load images without 'load' property.
+> > >>
+> > >>  common/spl/spl_fit.c | 16 +++++++++++++++-
+> > >>  1 file changed, 15 insertions(+), 1 deletion(-)
+> > >>
+> > >> diff --git a/common/spl/spl_fit.c b/common/spl/spl_fit.c
+> > >> index 46ebcabe56a..87d01b8b8e6 100644
+> > >> --- a/common/spl/spl_fit.c
+> > >> +++ b/common/spl/spl_fit.c
+> > >> @@ -799,6 +799,8 @@ int spl_load_simple_fit(struct spl_image_info *spl_image,
+> > >>  {
+> > >>    struct spl_image_info image_info;
+> > >>    struct spl_fit_info ctx;
+> > >> +  const void *fit_image_loadaddr;
+> > >> +  size_t fit_image_size;
+> > >>    int node = -1;
+> > >>    int ret;
+> > >>    int index = 0;
+> > >> @@ -889,7 +891,19 @@ int spl_load_simple_fit(struct spl_image_info *spl_image,
+> > >>            if (firmware_node == node)
+> > >>                    continue;
+> > >>
+> > >> -          image_info.load_addr = 0;
+> > >> +          /*
+> > >> +           * If the 'load' property is not present in the image node,
+> > >> +           * use the FIT image's data address as the fallback load
+> > >> +           * address. This allows flexibility in omitting the load address
+> > >> +           * during FIT creation time.
+> > >> +           */
+> > >> +          ret = fit_image_get_data(ctx.fit, node,
+> > >> +                                   &fit_image_loadaddr, &fit_image_size);
+> > >> +          if (ret < 0)
+> > >> +                  panic("Error accessing node = %d in FIT (%d)\n", node,
+> > >> +                        ret);
+> > >> +
+> > >> +          image_info.load_addr = (ulong)fit_image_loadaddr;
+> > >>            ret = load_simple_fit(info, offset, &ctx, node, &image_info);
+> > >>            if (ret < 0 && ret != -EBADSLT) {
+> > >>                    printf("%s: can't load image loadables index %d (ret = %d)\n",
+> > > I guess the real question here is, does the spec allow this to be
+> > > omitted like that?
+> >
+> >
+> > Could you please point me to the spec? I could not find it.
 >
->     for_each() {
->     }
->
-> This requires clang-format to know that the symbol is not a function
-> but a for each macro. We use some for each macros which don't exist in
-> Linux. Add these to file .clang-format.
->
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
->
-> .clang-format | 51 +++++++++++++++++++++++++++++++++++++++++++++++++++
->  1 file changed, 51 insertions(+)
+> Sure: https://github.com/open-source-firmware/flat-image-tree/
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+It is mandatory for kernel and firmware images. Instead of allowing it
+to be optional for 'kernel', we created 'kernel_noload' some years
+back.
 
-> diff --git a/.clang-format b/.clang-format
-> @@ -748,6 +748,57 @@ ForEachMacros:
-> +  # U-Boot specific
-> +  - '__for_each_child_of_node'
-
-Should the 'git grep' recipe include drivers/ and arch/ as well?
+Which image type are you using in your case?
 
 Regards,
 Simon
