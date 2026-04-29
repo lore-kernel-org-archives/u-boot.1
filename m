@@ -4,55 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80BE7FF8867
-	for <u-boot@archiver.kernel.org>; Wed, 29 Apr 2026 12:13:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8A25FF8877
+	for <u-boot@archiver.kernel.org>; Wed, 29 Apr 2026 12:18:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C6752847C6;
-	Wed, 29 Apr 2026 14:13:37 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
+	by phobos.denx.de (Postfix) with ESMTP id 0EE7484837;
+	Wed, 29 Apr 2026 14:18:34 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="AfTB4Mbk";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="WyWcilFd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 68C15847C7; Wed, 29 Apr 2026 14:13:36 +0200 (CEST)
-Received: from mx.nabladev.com (mx.nabladev.com
- [IPv6:2a00:f820:417:0:178:251:229:89])
+ id EA95A8483A; Wed, 29 Apr 2026 14:18:32 +0200 (CEST)
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 37682847B0
- for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 14:13:34 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=nabladev.com
+ by phobos.denx.de (Postfix) with ESMTPS id 5B5638482E
+ for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 14:18:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marex@nabladev.com
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 74292112780; Wed, 29 Apr 2026 14:13:25 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
- s=dkim; t=1777464809; h=from:subject:date:message-id:to:cc:mime-version:
- content-transfer-encoding; bh=aY0Y8iNl/knmPE3pSPdTSzkWG4UjAFJrHwSYSCwnln4=;
- b=AfTB4MbkoXhY+mqpVlnpjxRKkTYKHynqBwUwC1yVf1tHL0vKjooNUNRmu0TpAnoWHF13m3
- JN/fjD1qocu3g0ZnQNtAXEih2VM0Vo9K3IfQN26Y+COcT7vN+qKov91K5bw6w65n9S64Kf
- xLJgBUL2pjs1riQV5MeVGqtlQMAfVOImD6kXyixs1xW1DJI2KeDQxlTrw+lWLsV033kX2P
- 2YZKhsv4jhfVNMtYOOmhdElQtJWu4xILKsCeMDywX2NUHRfF3BtIyc9A2h4QZfi/WgWAPs
- ya6lcOWY/Z4BUSU9Yb39pQsOQA3K2GgUhfpFmURgRwJiUlyaOdOe9wNugLnAIg==
-From: Marek Vasut <marex@nabladev.com>
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marex@nabladev.com>, Jaehoon Chung <jh80.chung@samsung.com>,
- Jasper Orschulko <jasper@fancydomain.eu>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Michael Heimpold <mhei@heimpold.de>, Michael Walle <mwalle@kernel.org>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Peng Fan <peng.fan@nxp.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH] env: mmc: Use correct eMMC HW partition size when calculating
- end of HW partition
-Date: Wed, 29 Apr 2026 14:13:06 +0200
-Message-ID: <20260429121324.391457-1-marex@nabladev.com>
-X-Mailer: git-send-email 2.53.0
+ spf=pass smtp.mailfrom=mwalle@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by tor.source.kernel.org (Postfix) with ESMTP id 138E86012B;
+ Wed, 29 Apr 2026 12:18:29 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E0FCFC2BCC7;
+ Wed, 29 Apr 2026 12:18:24 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1777465108;
+ bh=Q9y+gCrVuaadC+OBIFpJtZOD+kbEYRpvSUxoCDccn0c=;
+ h=From:To:Cc:Subject:Date:From;
+ b=WyWcilFdreUJpqM6vUBqm/bJlziH6vRiPtCIT+NIgyGZER+mt+9+pNOhTSOllWN79
+ rmuPdb0591aLv09MCuX1RTX8ycaXkz5TxQHH3hXx0n+ilXkGXWLuDt3aYOHIHNmHiz
+ 9doasj2eQ5ySj3uMxwy/J9pgA40ftUrZcYhmuKqhVI/UAQR1d4F8iC8ggv8BsN0BPk
+ RzNaxbZl7EJQr45n3OCGMsdxFpTUDNobXCUhMADaUhageO4Oe2xSQncNGxU/Krtn7J
+ kTblH/seS1jM6BDhMhr7ajFloWH8G7ic1wRnQp0CDwhZaGNxmI04I4oMzWbfd/UUch
+ Q8oF+6ptHqDMQ==
+From: Michael Walle <mwalle@kernel.org>
+To: =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>,
+ Tom Rini <trini@konsulko.com>, Pramod Kumar <pramod.kumar_1@nxp.com>,
+ Vladimir Oltean <olteanv@gmail.com>, Alison Wang <alison.wang@nxp.com>,
+ Tang Yuantian <andy.tang@nxp.com>, Mingkai Hu <mingkai.hu@nxp.com>,
+ Priyanka Jain <priyanka.jain@nxp.com>, Wasim Khan <wasim.khan@nxp.com>,
+ Meenakshi Aggarwal <meenakshi.aggarwal@nxp.com>,
+ TsiChung Liew <Tsi-Chung.Liew@nxp.com>,
+ Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>,
+ "NXP i . MX U-Boot Team" <uboot-imx@nxp.com>, Peng Fan <peng.fan@nxp.com>,
+ Shengzhou Liu <Shengzhou.Liu@nxp.com>
+Cc: Tomas Alvarez Vanoli <tomas.alvarez-vanoli@hitachienergy.com>,
+ Jerome Forissier <jerome.forissier@arm.com>, u-boot@lists.denx.de,
+ Michael Walle <mwalle@kernel.org>
+Subject: [PATCH 00/10] Generic powerpc fixes and NXP board cleanup
+Date: Wed, 29 Apr 2026 14:17:14 +0200
+Message-ID: <20260429121816.1026326-1-mwalle@kernel.org>
+X-Mailer: git-send-email 2.47.3
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,48 +76,108 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When calculating the end of eMMC HW partition, it is necessary to
-use the length of that eMMC HW partition, not the length of the
-eMMC HW USER partition unconditionally, otherwise the end of e.g.
-eMMC HW BOOT partition will be way past the actual end of that eMMC
-HW BOOT partition. Add the missing distinction. eMMC HW GP partitions
-are not supported, so those are not considered here.
+While working on an ancient P2041 based board, I've encountered
+several issues.
 
-Signed-off-by: Marek Vasut <marex@nabladev.com>
----
-Cc: Jaehoon Chung <jh80.chung@samsung.com>
-Cc: Jasper Orschulko <jasper@fancydomain.eu>
-Cc: Joe Hershberger <joe.hershberger@ni.com>
-Cc: Michael Heimpold <mhei@heimpold.de>
-Cc: Michael Walle <mwalle@kernel.org>
-Cc: Patrice Chotard <patrice.chotard@foss.st.com>
-Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
-Cc: Peng Fan <peng.fan@nxp.com>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
----
- env/mmc.c | 8 ++++++--
- 1 file changed, 6 insertions(+), 2 deletions(-)
+cpu_init_r wasn't called anymore, but u-boot was still somehow
+working. CAAM was reading/writing on address 0 because pamu_init()
+is never called if secure boot isn't enabled.
 
-diff --git a/env/mmc.c b/env/mmc.c
-index 1eddba3b0f8..4c1448bd05e 100644
---- a/env/mmc.c
-+++ b/env/mmc.c
-@@ -239,8 +239,12 @@ __weak int mmc_get_env_addr(struct mmc *mmc, int copy, u32 *env_addr)
- 		return -ENOENT;
- 	}
- 
--	if (offset < 0)
--		offset += mmc->capacity;
-+	if (offset < 0) {
-+		if (CONFIG_ENV_MMC_EMMC_HW_PARTITION)
-+			offset += mmc->capacity_boot;
-+		else
-+			offset += mmc->capacity;
-+	}
- 
- 	*env_addr = offset;
- 
+Since legacy ethernet was removed, board_eth_init() and
+fdt_fixup_board_enet() won't be called anymore, but the functions
+are still defined. I've just removed the ones for the NXP boards,
+though I think the code there did something useful. But given that
+it wasn't called for two years now and nobody complained, it can't
+be that important.
+
+Lastly, because I have a p2041rdb, move that to a upstream DTS.
+Keep in mind, that the uboot dts doesn't define an UART, so any
+output was broken since the move to DM provided serial support.
+
+Michael Walle (10):
+  powerpc: fix call to cpu_init_r
+  caam: don't write memory at 0 on PPC
+  spi: fsl_espi: fix read transactions
+  boards: remove dead fman code
+  boards/nxp: remove board_eth_init()
+  boards/nxp: remove empty fdt_fixup_board_enet()
+  p2041rdb: use the upstream device tree
+  p2041rdb: support SDcard boot
+  p2041rdb: update README and fix typos
+  p2041rdb: remove NAND defconfig
+
+ arch/powerpc/cpu/mpc85xx/cpu_init.c           |   4 +-
+ arch/powerpc/dts/p2041.dtsi                   | 138 ----
+ arch/powerpc/dts/p2041rdb-u-boot.dtsi         |  19 +
+ arch/powerpc/dts/p2041rdb.dts                 | 127 ---
+ arch/powerpc/dts/p2041si-post.dtsi            |  43 --
+ board/nxp/ls1012afrdm/eth.c                   |  10 -
+ board/nxp/ls1012ardb/eth.c                    |  12 -
+ board/nxp/ls1021atsn/ls1021atsn.c             |   5 -
+ board/nxp/ls1021atwr/ls1021atwr.c             |   5 -
+ board/nxp/ls1028a/ls1028a.c                   |   5 -
+ board/nxp/ls1043aqds/Makefile                 |   3 -
+ board/nxp/ls1043aqds/eth.c                    | 501 ------------
+ board/nxp/ls1043aqds/ls1043aqds.c             |   4 -
+ board/nxp/ls1043ardb/Makefile                 |   1 -
+ board/nxp/ls1043ardb/eth.c                    |  77 --
+ board/nxp/ls1046afrwy/eth.c                   |  57 --
+ board/nxp/ls1046aqds/Makefile                 |   3 -
+ board/nxp/ls1046aqds/eth.c                    | 431 -----------
+ board/nxp/ls1046aqds/ls1046aqds.c             |   4 -
+ board/nxp/ls1046ardb/eth.c                    |  71 --
+ board/nxp/ls2080ardb/eth_ls2080rdb.c          |  19 -
+ board/nxp/lx2160a/eth_lx2160aqds.c            |  18 -
+ board/nxp/lx2160a/eth_lx2160ardb.c            |  17 -
+ board/nxp/lx2160a/eth_lx2162aqds.c            |  18 -
+ board/nxp/m5253demo/m5253demo.c               |   7 -
+ board/nxp/mx6sxsabreauto/mx6sxsabreauto.c     |  52 --
+ board/nxp/mx6sxsabresd/mx6sxsabresd.c         |  78 --
+ board/nxp/p2041rdb/Makefile                   |   1 -
+ board/nxp/p2041rdb/README                     |  34 +-
+ board/nxp/p2041rdb/eth.c                      | 210 -----
+ board/nxp/p2041rdb/p2041rdb_rcw_sd.cfg        |  11 +
+ ...{rcw_p2041rdb.cfg => p2041rdb_rcw_spi.cfg} |   0
+ board/nxp/t102xrdb/Makefile                   |   1 -
+ board/nxp/t102xrdb/eth_t102xrdb.c             | 149 ----
+ board/nxp/t102xrdb/t102xrdb.c                 |   1 -
+ board/nxp/t102xrdb/t102xrdb.h                 |   1 -
+ board/nxp/t104xrdb/Makefile                   |   1 -
+ board/nxp/t104xrdb/eth.c                      |  91 ---
+ board/nxp/t104xrdb/t104xrdb.h                 |   1 -
+ board/nxp/t208xqds/Makefile                   |   2 +-
+ board/nxp/t208xqds/eth_t208xqds.c             | 723 ------------------
+ board/nxp/t208xrdb/eth_t208xrdb.c             |   5 -
+ board/nxp/t208xrdb/t208xrdb.c                 |   1 -
+ board/nxp/t208xrdb/t208xrdb.h                 |   1 -
+ board/nxp/t4rdb/Makefile                      |   1 -
+ board/nxp/t4rdb/eth.c                         | 152 ----
+ board/nxp/t4rdb/t4240rdb.c                    |   1 -
+ board/nxp/t4rdb/t4rdb.h                       |   1 -
+ common/board_r.c                              |   2 +-
+ configs/P2041RDB_NAND_defconfig               | 117 ---
+ configs/P2041RDB_SDCARD_defconfig             |   3 +-
+ configs/P2041RDB_SPIFLASH_defconfig           |   6 +-
+ configs/P2041RDB_defconfig                    |   4 +-
+ drivers/spi/fsl_espi.c                        |   6 +-
+ include/configs/P2041RDB.h                    |   2 +
+ 55 files changed, 61 insertions(+), 3196 deletions(-)
+ delete mode 100644 arch/powerpc/dts/p2041.dtsi
+ create mode 100644 arch/powerpc/dts/p2041rdb-u-boot.dtsi
+ delete mode 100644 arch/powerpc/dts/p2041rdb.dts
+ delete mode 100644 arch/powerpc/dts/p2041si-post.dtsi
+ delete mode 100644 board/nxp/ls1043aqds/eth.c
+ delete mode 100644 board/nxp/ls1043ardb/eth.c
+ delete mode 100644 board/nxp/ls1046aqds/eth.c
+ delete mode 100644 board/nxp/p2041rdb/eth.c
+ create mode 100644 board/nxp/p2041rdb/p2041rdb_rcw_sd.cfg
+ rename board/nxp/p2041rdb/{rcw_p2041rdb.cfg => p2041rdb_rcw_spi.cfg} (100%)
+ delete mode 100644 board/nxp/t102xrdb/eth_t102xrdb.c
+ delete mode 100644 board/nxp/t104xrdb/eth.c
+ delete mode 100644 board/nxp/t208xqds/eth_t208xqds.c
+ delete mode 100644 board/nxp/t4rdb/eth.c
+ delete mode 100644 configs/P2041RDB_NAND_defconfig
+
 -- 
-2.53.0
+2.47.3
 
