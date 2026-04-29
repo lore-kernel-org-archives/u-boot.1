@@ -4,89 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8109FF8875
-	for <u-boot@archiver.kernel.org>; Wed, 29 Apr 2026 21:15:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3465FF8875
+	for <u-boot@archiver.kernel.org>; Wed, 29 Apr 2026 21:15:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E645984868;
-	Wed, 29 Apr 2026 23:15:48 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 690D2848C5;
+	Wed, 29 Apr 2026 23:15:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20251104.gappssmtp.com header.i=@baylibre-com.20251104.gappssmtp.com header.b="hWLZvf8w";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20251104.gappssmtp.com header.i=@baylibre-com.20251104.gappssmtp.com header.b="XDtn6+6d";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 25D068485D; Wed, 29 Apr 2026 15:59:11 +0200 (CEST)
-Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
- [IPv6:2a00:1450:4864:20::430])
+ id 14E0D84837; Wed, 29 Apr 2026 15:59:13 +0200 (CEST)
+Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
+ [IPv6:2a00:1450:4864:20::435])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B42C184832
- for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 15:59:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CB55784855
+ for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 15:59:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jstephan@baylibre.com
-Received: by mail-wr1-x430.google.com with SMTP id
- ffacd0b85a97d-43d77f60944so9020829f8f.3
- for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 06:59:08 -0700 (PDT)
+Received: by mail-wr1-x435.google.com with SMTP id
+ ffacd0b85a97d-43cfbd17589so9835387f8f.0
+ for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 06:59:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20251104.gappssmtp.com; s=20251104; t=1777471148; x=1778075948;
+ d=baylibre-com.20251104.gappssmtp.com; s=20251104; t=1777471150; x=1778075950;
  darn=lists.denx.de; 
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:from:to:cc:subject:date:message-id:reply-to;
- bh=zotNIFmN8B+vmR/7+z7d7PxLFTI4SFkLCdgte/voq9A=;
- b=hWLZvf8wQGU8jPh3JyZ7pvyRVPWWEP5bMzt5nK8mOQv+3fSiGyl7xZfyO52EuQ15E+
- dC5IwnuLfnihFaVohxkrQPVV+kV4/D40bOlEakDYX1w65PD9KE3UBoj0pe6gjow/P47U
- /k4E0Qm2+/VtQZKABu30RZmcNuivm4EK3IDGNY1LV3mWB07bBAp6ChXogay6hVpU0zKj
- jcFDexJTcivKXnKULgQqf6D+Nlt5TJkum8Sx0bq8UcgGE2H3Q3BaOa0wzUP7sXXETUSY
- q4P4SPDPR4obPfTYf8ds0jyIWrcdqGsf2b56mfbbuZRbMQD/ciygJBAsi5RSLpuxsi6f
- XgAw==
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=vDks7obpZyJiKiMiHdoRgyzLZdypXIIMbIZYpp1RNJo=;
+ b=XDtn6+6dnqRaB4Jl5miI7PEQbECok+GzXY6G8uXqF9M6B1e58K5RONOcVEgM1FM6dR
+ Dmo96vFsFNDfDMU83JOuTtlxDX8kDjD2a7gk7gdJBdTZ4gRDH/6Pdva9D4S5IKicmokX
+ AiKUukdJIaWWWJl8thcpmUCXMtTzOxjbo9+ylWkbSfy8VChld8IGljhjzk9dXSRkMwOn
+ iR3YkBTHbFr4KLyrLVIjz6u7DMryKspAlsyUxL/7+UgkokFoJ6138OAkvY3KhOQuGfA/
+ No9GdI7u+T6II62DsQgqWL/tvnuSHZ9efglai9AiarNB79OrltnvHPK16dZPkG3XeIGR
+ O59A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777471148; x=1778075948;
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=zotNIFmN8B+vmR/7+z7d7PxLFTI4SFkLCdgte/voq9A=;
- b=SFAgMuszXOlw932sO839zrDUWzjEz8SdOaZTv+s4jqjjDUS/GzPRCMOalIOHkRCzjz
- 4hl+IwKsVrOtDB/NgJlLdfljKgPgNRWOIQ3Uz53yn6hBDwscau3T5siNG0pObNF7uY3R
- h+fNTPnecYGkx5CmUb3X1aPDKeYYy6qUjsGnls4Nc/N4KAcuJdR+NDulA+C8StDtebSf
- sdclVZ3wHTYspAN6LOafa6C8e22DLR/QCGRf4cIXBoDQME9v6xGcs14f4NvZjGStgIb1
- 6bjwNDlVjptx/aiKozONVrjjMRmWoJFqUF26U0UcuXY7fUkpEhNsFGLjExGDF1xC71uU
- PzSQ==
-X-Gm-Message-State: AOJu0YxIvZ6koj6DfWA9UbkT/BozaG0DqWSLkJSVm81DsVk6E8YDQmDF
- GVdi38EneMbLNfMc8hC4J7mYlp9IzmjW4v/cK+j9hxQj7x7SIpBS6PaVyS/HE8YKnPs=
-X-Gm-Gg: AeBDievYeXmc8ZhDHXRSdYTwvVmYqU+pmLsVnnX+VDzqGJ7V5qnJujTFI/Gv0tzkOGw
- W9b84ia8sgmsR0OvJVUOn7d0CDPJYGalWHOrwkALl8+GMg0iW3KwU6cwq2UbreFPEmimlkE8E72
- YfSxyMqs62AKH3fOagpgqBoOAINT+UTNZPm+qxTfbsJYwLQT/Zodu2lN/zGH9kVhjhQ41SnihMO
- DpTee7juc9UNpfC6BGM2j8oAKJaxRyIDMdsjAq+IeVAEIQqameXa9eTtMuSgvxPmtzvhppraonk
- CBo0fhrsxTtT5C6SMIeziXW8rZR14QN1zTyOdtKlgOWHeUp04xtoafTv+W87RAw0S8uqgPJW+1F
- gY634MtCN7gWlc4CFd5N7dNaHwoQElnFVZ/FHJOiOIt1G5cUaPamXJP1zG/COVkk9VN9HP95JUh
- /qIpS4KAXmVQ1UCRY809v2Rp8TrI0e2/Mcr0RdAiisA3duzPu21o+8zCQlmuxi0CU9uvZD5KT0p
- XaUsnk1R4ia0fhKLPfnQ86+4fO9BbqTdvrzsy8kDSDi1fYEI1+lue6f6Tmo3KK5CVCUp/4pXBmb
- qVSiMW88I6eAZ4pb96E=
-X-Received: by 2002:a05:6000:2088:b0:43d:714:34e5 with SMTP id
- ffacd0b85a97d-44790473b34mr6992070f8f.24.1777471147940; 
- Wed, 29 Apr 2026 06:59:07 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1777471150; x=1778075950;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=vDks7obpZyJiKiMiHdoRgyzLZdypXIIMbIZYpp1RNJo=;
+ b=kRbea35g3JV4bJRMEnNiJaC1gCvYNoHX0WxR1ScnUR+rBgOZ6fe6htQ7JbqlJCORBy
+ 3R5sqdjQ2ec/MTgTiYO3YnRdvyT3zq7cgpAHOe+8o40z5gJZCVfw92YqGtkUqgdOnzWe
+ M+Vbf/GyWnsFlyagvWfY6ceaXMOuHy1QUKJLKG6YjvNxrSQhA3gYoMck2BFhC/EAbJGW
+ /q2sQzOd/8VzTP+p+yrN6GYhFwXl1zL4QBHlno09kvvWP089obh6FRLIJc1/AtKh35vA
+ ZtG/dnLMevHOfztfabPAa2mSPfQp0+HfajxzXdwSUrpGvPK3pDbH6e6cBdYtvNK9ij6F
+ 7vKA==
+X-Gm-Message-State: AOJu0YxqlbC6+NJnCSpldAcp+T4Qt+fsI7qmrmgmVi0+ADJJ58pP3GXV
+ teyQY86n6LlztMLNrMU8aOw8+fdxBrjsAdBbS2Gj9mFW6j9lWQPka+8Ns9JfzQDyHuw=
+X-Gm-Gg: AeBDievF7qvrOZ5h+KMpTd1PqNgCKNuhP8+HncWHvqhH10I2AK1W64Cn9hrQy3xq+uk
+ yqme7ndyVL87voNR36oWMYdUBmof3WOHOlcO0rhGFcj81pKsQL4pUncpRrWZJEgkwJzBdVfsh4z
+ Fp9H5cPv+yO94CV0zzMO2VjpQ/UUcgxONVwIYx00rNQ+l5k5TGs5VsTOWJg/+4DWNMIfvpHMEZL
+ R3meCmUm5U6BChdzqo4lHhBPCUfXk2xa5BTaOG61ti6bRGtROyuKkvd5L0OxYoZqvVP4INQLa3u
+ C4pSn8dtYLEB83/RTpXEd5qtPmXyFSe7nnrz3NtM4IjZ3Kq1bgbmkQvcEEdwuSuIRB4RKLQt98I
+ a6GetaKlfnAQbu7H1VTqBY/oO2BnyE288gvfpw/dHQAZrXlmABpCU2FAJIl7Xd480E9jlximq+O
+ ARecZ9J7iQUjCTgrPUL9ir19CHT4ETuYhwqTcz5c6MqYikeg9wFq5VW1/OkjEupsjXR32f8ej04
+ bOvAU4Grk8sshPgYnh+Th8LEbsVOvUT2/eospbCSi6iY2oO7iNjlkNLfCGZUXKzSdOvUxsulrRX
+ haHhkrFZPfb0xC2yl3g=
+X-Received: by 2002:a05:6000:438a:b0:43c:f52b:8003 with SMTP id
+ ffacd0b85a97d-44649ba199dmr14175480f8f.36.1777471150075; 
+ Wed, 29 Apr 2026 06:59:10 -0700 (PDT)
 Received: from [192.168.1.100]
  (2a02-842a-d52e-6101-6f8f-5617-c4b6-8627.rev.sfr.net.
  [2a02:842a:d52e:6101:6f8f:5617:c4b6:8627])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-447b7ca64ffsm6289675f8f.37.2026.04.29.06.59.05
+ ffacd0b85a97d-447b7ca64ffsm6289675f8f.37.2026.04.29.06.59.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 29 Apr 2026 06:59:07 -0700 (PDT)
+ Wed, 29 Apr 2026 06:59:09 -0700 (PDT)
 From: Julien Stephan <jstephan@baylibre.com>
-Subject: [PATCH v4 0/9] Add ethernet support for genio 520/720 EVK boards
-Date: Wed, 29 Apr 2026 15:58:53 +0200
-Message-Id: <20260429-add-ethernet-support-for-genio-520-720-v4-0-be54e17239b7@baylibre.com>
+Date: Wed, 29 Apr 2026 15:58:54 +0200
+Subject: [PATCH v4 1/9] MAINTAINERS: remove trailing colons from section titles
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/43NvQ6CMBSG4VshnT2mf0Bx8j6MQ6Gn0EQpaSuRG
- O7dahyMcWA4w3eG532QiMFhJIfiQQLOLjo/5iF3BekGPfYIzuRNOOUVlawCbQxgGjCMmCDepsm
- HBNYH6HF0HkpOoc5HkUthNUpRa5KxKaB193fodM57cDH5sLy7M3t9PwkutiZmBhRk3emGKaSU1
- cdWLxfXBtx3/kpelZl/y2qzzLPcdJZbqpRsjfoji2+52SyLLDNblciUkbaUP/K6rk/sJDJtkwE
- AAA==
-X-Change-ID: 20260416-add-ethernet-support-for-genio-520-720-0e243fae437a
+Message-Id: <20260429-add-ethernet-support-for-genio-520-720-v4-1-be54e17239b7@baylibre.com>
+References: <20260429-add-ethernet-support-for-genio-520-720-v4-0-be54e17239b7@baylibre.com>
+In-Reply-To: <20260429-add-ethernet-support-for-genio-520-720-v4-0-be54e17239b7@baylibre.com>
 To: u-boot@lists.denx.de
 Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
  Jerome Forissier <jerome.forissier@arm.com>, Tom Rini <trini@konsulko.com>, 
@@ -147,83 +143,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This series adds ethernet support for genio 520/720 boards.
-
-Particularly, it adds the following components:
-- PHY driver for Airoha AN8801 (air_an8801.c).
-- Synopsys DWC Ethernet QOS device support for MediaTek SoCs
-
-This has been tested with a genio-520 evk board with the following
-commands:
-
-=> dhcp
-DHCP client bound to address 192.168.1.44 (2246 ms)
-=> ping 8.8.8.8
-Using ethernet@1101a000 device
-host 8.8.8.8 is alive
-
-The series also add a new entry in MAINTAINERS file for
-drivers/net/phy/airoha/ drivers.
-
-I also took the opportunity to do some cleanup on MAINTAINERS
-drivers/net/Makefile and drivers/net/Kconfig files
+For consistency, remove trailing colons for the three following
+sections: ACPI, ALIST, and INTERCONNECT.
 
 Signed-off-by: Julien Stephan <jstephan@baylibre.com>
 ---
-Changes in v4:
-- Fix missing typo in  config name PHY_AIROHA_PHYLIB  in
-  drivers/net/phy/airoha/Makefile
-- Link to v3: https://lore.kernel.org/r/20260429-add-ethernet-support-for-genio-520-720-v3-0-1f65e18d4f54@baylibre.com
+ MAINTAINERS | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-Changes in v3:
-- Rebased on mediatek-for-master to fix conflicts
-- Fix possible uninitialized use of tx_delay_ps and rx_delay_ps.
-- Fix typo in  config name PHY_AIROHA_PHYLIB
-- Use consistent dev_err isntead of mixed dev_err/pr_err
-- Replace calloc(1, ...) by malloc()
-- Update error message and return value for syscon_node_to_regmap()
-- Update some variable name to save useless comments
-- Link to v2: https://lore.kernel.org/r/20260428-add-ethernet-support-for-genio-520-720-v2-0-9cf2f0884bd8@baylibre.com
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 0dcc7243124..ce4e9d58037 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -50,7 +50,7 @@ so much easier [Ed]
+ Maintainers List (try to look for most precise areas first)
+ 
+ 		-----------------------------------
+-ACPI:
++ACPI
+ M:	Simon Glass <sjg@chromium.org>
+ S:	Maintained
+ F:	board/emulation/configs/acpi.config
+@@ -58,7 +58,7 @@ F:	cmd/acpi.c
+ F:	include/acpi/
+ F:	lib/acpi/
+ 
+-ALIST:
++ALIST
+ M:	Simon Glass <sjg@chromium.org>
+ S:	Maintained
+ F:	include/alist.h
+@@ -1279,7 +1279,7 @@ S:	Maintained
+ F:	drivers/timer/goldfish_timer.c
+ F:	include/goldfish_timer.h
+ 
+-INTERCONNECT:
++INTERCONNECT
+ M:	Neil Armstrong <neil.armstrong@linaro.org>
+ S:	Maintained
+ T:	git https://source.denx.de/u-boot/u-boot.git
 
-Changes in v2:
-- various code cleanup as requested by David in v1 such as: tempalte
-  name, removed unnecessary defines, properly propagate error codes, fix
-  indentation.. No functional changes introduced.
-- Link to v1: https://lore.kernel.org/r/20260423-add-ethernet-support-for-genio-520-720-v1-0-47ca918e0017@baylibre.com
-
----
-Julien Stephan (9):
-      MAINTAINERS: remove trailing colons from section titles
-      MAINTAINERS: add maintainer entry for air_en8811 driver
-      net: Fix alphabetical ordering in drivers/net/Makefile
-      net: Fix alphabetical ordering in drivers/net/Kconfig
-      net: phy: air_phy_lib: Factorize BuckPBus register
-      net: phy: Add airoha AN8801 ethernet phy driver
-      net: dwc_eth_qos: Add mediatek support
-      arm: dts: mt8189: Add ethernet support for Genio 520/720 boards
-      configs: mt8189: Enable ethernet support
-
- MAINTAINERS                           |  13 +-
- arch/arm/dts/mt8189.dtsi              |  77 +++++
- arch/arm/dts/mt8371-genio-common.dtsi |  83 +++++
- configs/mt8189.config                 |   5 +
- drivers/net/Kconfig                   |  35 +-
- drivers/net/Makefile                  |  11 +-
- drivers/net/dwc_eth_qos.c             |   6 +
- drivers/net/dwc_eth_qos.h             |   2 +
- drivers/net/dwc_eth_qos_mtk.c         | 442 +++++++++++++++++++++++++
- drivers/net/phy/airoha/Kconfig        |  13 +
- drivers/net/phy/airoha/Makefile       |   2 +
- drivers/net/phy/airoha/air_an8801.c   | 594 ++++++++++++++++++++++++++++++++++
- drivers/net/phy/airoha/air_en8811.c   | 304 ++++-------------
- drivers/net/phy/airoha/air_phy_lib.c  | 216 +++++++++++++
- drivers/net/phy/airoha/air_phy_lib.h  |  39 +++
- 15 files changed, 1582 insertions(+), 260 deletions(-)
----
-base-commit: 6c881e9980594a468e9f875187e5e4d30a22bcbd
-change-id: 20260416-add-ethernet-support-for-genio-520-720-0e243fae437a
-
-Best regards,
 -- 
-Julien Stephan <jstephan@baylibre.com>
+2.52.0
 
