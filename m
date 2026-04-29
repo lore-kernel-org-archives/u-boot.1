@@ -4,66 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A690FF8867
-	for <u-boot@archiver.kernel.org>; Wed, 29 Apr 2026 10:36:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6AE4FF8867
+	for <u-boot@archiver.kernel.org>; Wed, 29 Apr 2026 11:43:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8DD928485A;
-	Wed, 29 Apr 2026 12:35:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=0leil.net
+	by phobos.denx.de (Postfix) with ESMTP id 0B519847C6;
+	Wed, 29 Apr 2026 13:43:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=0leil.net header.i=@0leil.net header.b="QPdxGS19";
+	dkim=pass (2048-bit key; secure) header.d=siemens.com header.i=ludwig.nussel@siemens.com header.b="GoGvMFVe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 230DB8483E; Wed, 29 Apr 2026 12:35:21 +0200 (CEST)
-Received: from smtp-8fa9.mail.infomaniak.ch (smtp-8fa9.mail.infomaniak.ch
- [83.166.143.169])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id DC27B847C4; Wed, 29 Apr 2026 13:43:10 +0200 (CEST)
+Received: from mta-64-226.siemens.flowmailer.net
+ (mta-64-226.siemens.flowmailer.net [185.136.64.226])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0799384848
- for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 12:35:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C123F84715
+ for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 13:43:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=0leil.net
+ dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=foss+uboot@0leil.net
-Received: from smtp-4-0000.mail.infomaniak.ch (smtp-4-0000.mail.infomaniak.ch
- [10.7.10.107])
- by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4g5DGF5FzKzCrF;
- Wed, 29 Apr 2026 12:35:17 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=0leil.net;
- s=20231125; t=1777458917;
- bh=B15bT149NZ1gEGqcciEaPwYruyNJAqGD3R4MtlYDjsU=;
- h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
- b=QPdxGS19bRZxoQY/b+IU3S4DGMUjw9yoN7PykSjvWjimT74t8GCeIT9dWTWmvIn30
- RkTUEemtRmO6fKclHc6hlDkop91B5MBEyFbbjByJ73JWSliMSSnoiehRA/Cb3ck1kY
- 3KsOtRaNiGfxlnezN5CAW47yY36uuBdJP9hp4wBfN1POG2zefS6ovCO2XegSsyufLK
- 1wXq/TviqG0CYRfSdUlx+/DL9n3wpDbFXE7zlb9LnjB3scVcTGGqO34IDE93pYlGtf
- qQyDh/plZuRnQ9SZm3gmGg3l92iPwOVz0frQ0qHeZ1OfZ53d8CuCuGqVrjbEcwyyim
- HXJ3uyUStCaKA==
-Received: from unknown by smtp-4-0000.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4g5DGD4tSkzYX6; Wed, 29 Apr 2026 12:35:16 +0200 (CEST)
-From: Quentin Schulz <foss+uboot@0leil.net>
-Date: Wed, 29 Apr 2026 12:35:05 +0200
-Subject: [PATCH RFC next 5/5] net: SYS_RX_ETH_BUFFER defaults to 8 when
- CONFIG_FSL_ENETC=y
-MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260429-sys_rx_eth_buffer-no-net-v1-5-396ef37ae93c@cherry.de>
-References: <20260429-sys_rx_eth_buffer-no-net-v1-0-396ef37ae93c@cherry.de>
-In-Reply-To: <20260429-sys_rx_eth_buffer-no-net-v1-0-396ef37ae93c@cherry.de>
+ spf=pass smtp.mailfrom=ludwig.nussel@siemens.com
+Received: by mta-64-226.siemens.flowmailer.net with ESMTPSA id
+ 202604291143074a8ba6bf56000207eb for <u-boot@lists.denx.de>;
+ Wed, 29 Apr 2026 13:43:07 +0200
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm2;
+ d=siemens.com; i=ludwig.nussel@siemens.com;
+ h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
+ bh=dvyG2Sk6pzVgnao8E75mlczw4+77ScXYTCtSGRjUEFs=;
+ b=GoGvMFVeR04qqSN8MwNRQCszKHKV6bzVN5b09U0SfaE98EMuEKZGKZML7ODex71Uizm/en
+ lV0vssm08X3JPrVl8uaRio+YU4gWCy6T1P6Uj/pe1ffT4XpbJyIZyQyrLpZZlf56PDylR1Ab
+ ETAQRQPQR2YbeLtjrDSIo8N83/RfYM0wpVPM8abblZonJgiRvsdYo8EqTQQHJGV3crQqEBQM
+ KbVJ2coXmK74/0QdBIgzL8D9Lg+VTLhk3wx4c9nFMtrhrNQehRLlk1W0FM/A10vKeLPQg8f0
+ aY6nh5GsWt14DYvnSYphBxj+/wXpklMoLWovmtff5SWNAqjk84rBbtMA==;
+From: Ludwig Nussel <ludwig.nussel@siemens.com>
 To: u-boot@lists.denx.de
-Cc: Tang Yuantian <andy.tang@nxp.com>, Tom Rini <trini@konsulko.com>, 
- Fabio Estevam <festevam@gmail.com>, Alice Guo <alice.guo@nxp.com>, 
- Jerome Forissier <jerome.forissier@arm.com>, 
- Peter Robinson <pbrobinson@gmail.com>, Simon Glass <sjg@chromium.org>, 
- Andrew Goodbody <andrew.goodbody@linaro.org>, 
- Benjamin Hahn <B.Hahn@phytec.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- =?utf-8?q?Alvin_=C5=A0ipraga?= <alvin@pqrs.dk>, 
- Quentin Schulz <quentin.schulz@cherry.de>
-X-Mailer: b4 0.15-dev-47773
-X-Infomaniak-Routing: alpha
+Cc: Ludwig Nussel <ludwig.nussel@siemens.com>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Anshul Dalal <anshuld@ti.com>, Aristo Chen <jj251510319013@gmail.com>,
+ Benjamin ROBIN <dev@benjarobin.fr>, George Chan <gchan9527@gmail.com>,
+ Heiko Schocher <hs@nabladev.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jerome Forissier <jerome.forissier@arm.com>,
+ =?UTF-8?q?Jo=C3=A3o=20Paulo=20Gon=C3=A7alves?= <joao.goncalves@toradex.com>,
+ "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Martin Schwan <m.schwan@phytec.de>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, Peng Fan <peng.fan@nxp.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>,
+ Sughosh Ganu <sughosh.ganu@arm.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH 0/3] Improve U-Boot's TPM handling in the non-EFI case
+Date: Wed, 29 Apr 2026 13:41:40 +0200
+Message-ID: <20260429114250.791663-1-ludwig.nussel@siemens.com>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+X-Flowmailer-Platform: Siemens
+Feedback-ID: 519:519-1328817:519-21489:flowmailer
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,41 +77,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Quentin Schulz <quentin.schulz@cherry.de>
+U-Boot might be the first component to start the event log, eg when
+used in qemu. So allocate and attach the TPM event log to the TPM
+device if not initialized yet. The address is copied into the device
+tree for the kernel so the event log is accessible from Linux
+userspace too.
 
-drivers/net/fsl_enetc.h specifies ENETC_BD_CNT "buffer descriptors count
-must be a multiple of 8". This constant is set to
-CONFIG_SYS_RX_ETH_BUFFER which defaults to 4.
+I am not sure the allocation is the right way to do it for stuff
+that gets passed to the kernel though. Advice welcome.
 
-All defconfigs enabling CONFIG_FSL_ENETC fortunately have it set to 8,
-according to
-./tools/qconfig.py -l -f CONFIG_FSL_ENETC '~CONFIG_SYS_RX_ETH_BUFFER=8'.
 
-Let's make sure the default is sane by having it set to 8 when this
-driver is enabled. Note that originally[1] it was said EEPRO100 and 405
-EMAC should be 8 or higher. 405 (PPC405?) support seems to have been
-dropped in commit b5e7c84f72ee ("ppc4xx: remove ASH405 board"), 11 years
-ago. Maybe there's something we can do for EEPRO100 though?
 
-[1] commit 53cf9435ccf9 ("- CFG_RX_ETH_BUFFER added.")
-Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
----
- net/Kconfig | 1 +
- 1 file changed, 1 insertion(+)
+Ludwig Nussel (3):
+  test: include mapmem.h explicitly
+  tpm: make pcr_read command more useful
+  tpm: allocate tpm event log if missing
 
-diff --git a/net/Kconfig b/net/Kconfig
-index 171a88f8ed2..80f0872e0f5 100644
---- a/net/Kconfig
-+++ b/net/Kconfig
-@@ -281,6 +281,7 @@ config TFTP_BLOCKSIZE
- 
- config SYS_RX_ETH_BUFFER
-         int "Number of receive packet buffers"
-+	default 8 if FSL_ENETC
-         default 4
-         help
-           Defines the number of Ethernet receive buffers. On some Ethernet
+ boot/Kconfig            |   1 +
+ boot/bootm.c            |  18 +++----
+ boot/image-fdt.c        |  67 ++++++++++++++++++++++++++
+ cmd/tpm-v2.c            |  54 ++++++++++++++-------
+ include/tpm-common.h    |   1 +
+ include/tpm_tcg2.h      |   9 ++--
+ lib/tpm_tcg2.c          | 101 +++++++++++++++++++++++++++++++---------
+ test/boot/measurement.c |   1 +
+ 8 files changed, 197 insertions(+), 55 deletions(-)
 
 -- 
-2.54.0
+2.43.0
 
+base-commit: 70cb0b8232246c5157802cc26536258a1a446603
+branch: us-tpm
