@@ -4,103 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3808FF887E
-	for <u-boot@archiver.kernel.org>; Wed, 29 Apr 2026 18:02:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2660DFF8875
+	for <u-boot@archiver.kernel.org>; Wed, 29 Apr 2026 19:42:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3CB0D848BB;
-	Wed, 29 Apr 2026 20:02:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 57213848A9;
+	Wed, 29 Apr 2026 21:42:16 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20251104.gappssmtp.com header.i=@baylibre-com.20251104.gappssmtp.com header.b="QxYrP3V4";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="bSCXq/zg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CE8E4848BD; Wed, 29 Apr 2026 20:02:19 +0200 (CEST)
-Received: from mail-ot1-x331.google.com (mail-ot1-x331.google.com
- [IPv6:2607:f8b0:4864:20::331])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 9A5FA848B9; Wed, 29 Apr 2026 21:42:14 +0200 (CEST)
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 96831848B7
- for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 20:02:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dlechner@baylibre.com
-Received: by mail-ot1-x331.google.com with SMTP id
- 46e09a7af769-7dcd89701acso76131a34.1
- for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 11:02:16 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20251104.gappssmtp.com; s=20251104; t=1777485735; x=1778090535;
- darn=lists.denx.de; 
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:to:subject:user-agent:mime-version:date:message-id:from
- :to:cc:subject:date:message-id:reply-to;
- bh=9L5PKnF8A6WpJrZmtMbg1QxIVqDtIGUsYnJ+GYfqmKk=;
- b=QxYrP3V4Lb8J9dp1fO2TG/FnMsGFJlNdfcSJDDdWkN6b6laN4BJ8h1Idlupk6zo6s1
- 2Y/EsrAjtwJCEblRmO0qkmxMx5k/ht+WFw4xSJh5lT1VHcM6kRZUxI3u/6QNB9frUoL6
- JO7YYxBd8vqiMeuaFBuvPlZm6rOQyPS1IHNkr8z0FU2jEdP0EIiW6zcsi/tDkWbBLyrv
- +pMoFkq5bdrpp+qwXA3MfRXIs8RmEAzcHQDF6QhxADExfwYoszpj9RtvL5zmfsNcJpsX
- vy/e0Lr8KhTjXEven30qx/EWQ6J0yLqhv1wLqWRW06qdtOx06VihkoMQS6GYfSKWhcbJ
- 03jg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777485735; x=1778090535;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:to:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=9L5PKnF8A6WpJrZmtMbg1QxIVqDtIGUsYnJ+GYfqmKk=;
- b=IxUdJlfIJfkQJnKJPdEF2jCNXAz7ceMpxEAEa7EPqjzPjtPcx5xP6bAcnHyX8Oane+
- OpUaVVSASjTyEjVCmOLiVhNIO/GBdDFRhmnHVGEnLwM4t0B1i80mGf3F2IwEQf9VxrPj
- OX2/ijvVUBNMy0DQywcTf7CeomWbpR2nrAwNWEPQ3HottRybr+LrRCVCssan5fAhHmM4
- exHrCpJemouMAhu1JgoAQtD/W585FDF6Mrxk53pXmQjml2spy+7bOKZh/6dYqFJRE7jj
- NCstqPS7UOcaMErUi/q/pgmWMm6TbPGWdbx85Je31sVj/axV00L8jWzVnDWRBt5B4Gq1
- +dSQ==
-X-Forwarded-Encrypted: i=1;
- AFNElJ+rRYZmi49l/82ms8cdoCIzdVSyRbGKFMFDJt/dSaolQZ6jQ7ci+Ve5hgWIbISo0vgF/jiYzpg=@lists.denx.de
-X-Gm-Message-State: AOJu0YypBf3SITqQquGCImLyptBhAE2Rl8vVv7NPLj+YoQAotR+GMbIU
- AMa00YkaPea1XcGTs6se/1HAR+6ZPPzy0QH+vjj1de9G2/eXSc4CCsx3BJxzc9ucYAM=
-X-Gm-Gg: AeBDieu+TgjzD9Zp8gFbH6rWJ21QQt1lqTz0Hoh0RmrLB76MAHVXmH6l1XHSvhhjQFw
- rU4KVcalEex+fvLm91rZC1ioHYmanfJ3TraU7DfMqTeRWNo2/PDbye6l7fdt2MF990trK+IdNJ/
- EzxekGN8UCUZGwLfexNHzzrkOgeKYp2boX5Awny4AW+0eOq8JMKCEwLiN836N3e3Brc7Cl9zMJp
- Z8NS+K09MAUx6+UuRKO0sMjvg4z5J6b3zz158K6vqoGV0aJkfUe+C/+JsMfEThnDk3gCrTkJiuA
- cKQ9Ja1nnGF+psTZbt2uRQRKfyrQUFfOHMUuJt8jFZcxAO5mX97+0FLdD0wbdnAHgFtOFAMnhxi
- eyqyIjPbcpDi6WwL064rul5y5z81RkjN5RByNfxa2uk6Y7tt2UTJPYFfGGwUEjPejkv+ek2pqmT
- zUgfnOv9N0hYDKW7P7YlzAH4uBU7iA+ulNvMltCVdM+3WWbN/oNJOW6b0A2Rsh7Ia/ICtlnxy+s
- O5OaKa/F+dH
-X-Received: by 2002:a05:6830:6a97:b0:7de:649d:f2ab with SMTP id
- 46e09a7af769-7dea67106b8mr2958562a34.13.1777485735089; 
- Wed, 29 Apr 2026 11:02:15 -0700 (PDT)
-Received: from ?IPV6:2600:8803:e7e4:500:1770:76c1:cfc7:3a0c?
- ([2600:8803:e7e4:500:1770:76c1:cfc7:3a0c])
- by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7deab8062b6sm1736792a34.8.2026.04.29.11.02.14
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 29 Apr 2026 11:02:14 -0700 (PDT)
-Message-ID: <c1926ac9-e810-4909-945b-a2cf2a824685@baylibre.com>
-Date: Wed, 29 Apr 2026 13:02:13 -0500
+ by phobos.denx.de (Postfix) with ESMTPS id 8ADD5848A2
+ for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 21:42:11 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=conor@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by tor.source.kernel.org (Postfix) with ESMTP id 61FA56015B;
+ Wed, 29 Apr 2026 19:42:10 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A08AFC19425;
+ Wed, 29 Apr 2026 19:42:06 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1777491730;
+ bh=hklisgrTPkfIAJnn/udCbotXl3+bQaW64k1kUu2UyrQ=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=bSCXq/zghhamAsaTnIgAA7xLq1I6YmWCp2oMmkgDxSHafzVCp/jYEv/OXA2p3Cqqe
+ kqFaKm26PG+v/MewRn+hddvdftS2Tu6vf8GoH+LLyE9GgFmOFAcKeblsjD6dLGzDdY
+ LPcO2ziHUCe+rWk9MqQE0Bq1Ucud1w9aC+XKYkXDwdRrWd6eD0ed2tN+hVidUxxmEC
+ tGn7lQ5Wy9GubbuB3YDFff7NL97npwEaDWwAcrnDqkcQ7fw9H63TV3k1CKdnpXua3Y
+ 2Ys/tTWmdH6Xgi4qNxhiTz9EhEx/xMLDtbzmbS0MnKwlDo+pr1cbbra6TBapZNN4yg
+ Dnhic0uTBr5AA==
+Date: Wed, 29 Apr 2026 20:42:04 +0100
+From: Conor Dooley <conor@kernel.org>
+To: Raymond Mao <raymondmaoca@gmail.com>
+Cc: u-boot@lists.denx.de, uboot@riscstar.com, u-boot-spacemit@groups.io,
+ raymond.mao@riscstar.com, rick@andestech.com, ycliang@andestech.com,
+ trini@konsulko.com, lukma@denx.de, hs@nabladev.com,
+ jh80.chung@samsung.com, peng.fan@nxp.com, xypron.glpk@gmx.de,
+ randolph@andestech.com, dlan@gentoo.org, junhui.liu@pigmoral.tech,
+ neil.armstrong@linaro.org, quentin.schulz@cherry.de, samuel@sholland.org
+Subject: Re: [PATCH 16/16] spacemit: k1: rename device tree prefix from "k1-"
+ to "k1_"
+Message-ID: <20260429-doorbell-envision-46acf9988b40@spud>
+References: <20260422143112.1329478-1-raymondmaoca@gmail.com>
+ <20260422143112.1329478-17-raymondmaoca@gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/6] pinctrl: airoha: add pin controller and gpio
- driver for AN7581 SoC
-To: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
- Tom Rini <trini@konsulko.com>, Christian Marangi <ansuelsmth@gmail.com>,
- Simon Glass <sjg@chromium.org>, Marek Vasut
- <marek.vasut+renesas@mailbox.org>, Peng Fan <peng.fan@nxp.com>,
- Sean Anderson <sean.anderson@linux.dev>, Yao Zi <me@ziyao.cc>,
- Michal Simek <michal.simek@amd.com>, Anis Chali <chalianis1@gmail.com>,
- u-boot@lists.denx.de, Lorenzo Bianconi <lorenzo@kernel.org>,
- Markus Gothe <markus.gothe@genexis.eu>,
- Matheus Sampaio Queiroga <srherobrine20@gmail.com>,
- Benjamin Larsson <benjamin.larsson@genexis.eu>
-References: <20260428153448.980150-1-mikhail.kshevetskiy@iopsys.eu>
- <20260428153448.980150-3-mikhail.kshevetskiy@iopsys.eu>
- <5f524c23-d21f-49f6-8b26-778654c41a42@baylibre.com>
- <bb3d92fd-0ef4-468f-a3d7-f663f59b5251@iopsys.eu>
-Content-Language: en-US
-From: David Lechner <dlechner@baylibre.com>
-In-Reply-To: <bb3d92fd-0ef4-468f-a3d7-f663f59b5251@iopsys.eu>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="+w9DBN4lt+v13/WV"
+Content-Disposition: inline
+In-Reply-To: <20260422143112.1329478-17-raymondmaoca@gmail.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -117,105 +74,126 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 4/29/26 12:09 PM, Mikhail Kshevetskiy wrote:
-> 
-> On 4/28/26 23:42, David Lechner wrote:
->> On 4/28/26 10:34 AM, Mikhail Kshevetskiy wrote:
->>> The driver based on official linux airoha pinctrl and gpio driver with
->>> Matheus Sampaio Queiroga <srherobrine20@gmail.com> changes.
->>> The changes:
->>>  * Separate code for each SoC and keep some of the functions in
->>>    common between them,
->>>  * Add pinctrl driver for EN7523 SoC.
->> These comments above seem more approiate for the cover letter.
->> I can keep the cover letter in the git history when I pick this up if
->> we think that is important.
-> ok
->>> The original Matheus Sampaio Queiroga driver can be taken from the repo:
->>>   https://sirherobrine23.com.br/airoha_an7523/kernel/commits/branch/airoha_an7523_pinctrl
->>>
->>> This patch adds U-Boot pin controller and gpio driver for Airoha AN7581 SoC.
->>>
->>> Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
->>> ---
->>>  drivers/pinctrl/Kconfig                 |    1 +
->>>  drivers/pinctrl/Makefile                |    1 +
->>>  drivers/pinctrl/airoha/Kconfig          |   16 +
->>>  drivers/pinctrl/airoha/Makefile         |    5 +
->>>  drivers/pinctrl/airoha/airoha-common.h  |  513 +++++++++++
->>>  drivers/pinctrl/airoha/pinctrl-airoha.c |  691 +++++++++++++++
->>>  drivers/pinctrl/airoha/pinctrl-an7581.c | 1060 +++++++++++++++++++++++
->> Let's split out an7581 support into a separate patch too and have
->> this patch just be the core/shared code.
-> ok
->>
->>>  7 files changed, 2287 insertions(+)
->>>  create mode 100644 drivers/pinctrl/airoha/Kconfig
->>>  create mode 100644 drivers/pinctrl/airoha/Makefile
->>>  create mode 100644 drivers/pinctrl/airoha/airoha-common.h
->>>  create mode 100644 drivers/pinctrl/airoha/pinctrl-airoha.c
->>>  create mode 100644 drivers/pinctrl/airoha/pinctrl-an7581.c
->>>
->>> diff --git a/drivers/pinctrl/Kconfig b/drivers/pinctrl/Kconfig
->>> index 578edbf8168..46a95a1ab6b 100644
->>> --- a/drivers/pinctrl/Kconfig
->>> +++ b/drivers/pinctrl/Kconfig
->>> @@ -405,6 +405,7 @@ config SPL_PINCTRL_ZYNQMP
->>>  
->>>  endif
->>>  
->>> +source "drivers/pinctrl/airoha/Kconfig"
->>>  source "drivers/pinctrl/broadcom/Kconfig"
->>>  source "drivers/pinctrl/exynos/Kconfig"
->>>  source "drivers/pinctrl/intel/Kconfig"
->>> diff --git a/drivers/pinctrl/Makefile b/drivers/pinctrl/Makefile
->>> index 29fb9b484d0..b03e838ab39 100644
->>> --- a/drivers/pinctrl/Makefile
->>> +++ b/drivers/pinctrl/Makefile
->>> @@ -24,6 +24,7 @@ obj-$(CONFIG_PINCTRL_PIC32)	+= pinctrl_pic32.o
->>>  obj-$(CONFIG_PINCTRL_EXYNOS)	+= exynos/
->>>  obj-$(CONFIG_PINCTRL_K210)	+= pinctrl-k210.o
->>>  obj-$(CONFIG_PINCTRL_MESON)	+= meson/
->>> +obj-$(CONFIG_PINCTRL_AIROHA)	+= airoha/
->> Alphabetical order?
-> Could you provide your vision or more details?
-> What is the best sorting strategy?
-> 
-> Should it be sorted by CONFIG_* usage or by corresponding filename?
-> Should be files and directories sorted repeatedly?
 
-I was just expecting it to be added before broadcom like in the Kconfig.
-I didn't look at this file beyond this context shown here though, so
-maybe it is just a mess already and not sorted well.
+--+w9DBN4lt+v13/WV
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-In general though, sorting by CONFIG_* probably makes the most sense
-since it is easy to mechanically sort it then.
+On Wed, Apr 22, 2026 at 10:31:12AM -0400, Raymond Mao wrote:
+> From: Raymond Mao <raymond.mao@riscstar.com>
+>=20
+> This change replaces the hyphen ("-") in the DTS prefix with an
+> underscore ("_") for consistency with other prefixes in the
+> Spacemit K1 SoC platform.
 
+Doesn't this inconsistency only exist because you added files that made
+it inconsistent? Using hyphens is the norm anyway, right?
 
->>> +//#define PINCTRL_GET_STATE
->>> +
->> Drop commented/dead code. If there is a good reason to keep
->> airoha_pinctrl_get_conf(), the make a comment there, otherwise
->> drop it.
->>
-> This code allows reading current pinmux/pinconf settings out of hardware.
-> It might be very useful for debugging reasons, so I prefer keep it.  
+>=20
+> Signed-off-by: Raymond Mao <raymond.mao@riscstar.com>
+> ---
+>  arch/riscv/dts/Makefile                                   | 2 +-
+>  arch/riscv/dts/{k1-bananapi-f3.dts =3D> k1_bananapi-f3.dts} | 2 +-
+>  arch/riscv/dts/{k1-muse-pi-pro.dts =3D> k1_muse-pi-pro.dts} | 0
+>  arch/riscv/dts/{k1-pinctrl.dtsi =3D> k1_pinctrl.dtsi}       | 0
+>  arch/riscv/dts/{k1-spl.dts =3D> k1_spl.dts}                 | 0
+>  board/spacemit/k1/spl.c                                   | 2 +-
+>  configs/spacemit_k1_defconfig                             | 4 ++--
+>  7 files changed, 5 insertions(+), 5 deletions(-)
+>  rename arch/riscv/dts/{k1-bananapi-f3.dts =3D> k1_bananapi-f3.dts} (99%)
+>  rename arch/riscv/dts/{k1-muse-pi-pro.dts =3D> k1_muse-pi-pro.dts} (100%)
+>  rename arch/riscv/dts/{k1-pinctrl.dtsi =3D> k1_pinctrl.dtsi} (100%)
+>  rename arch/riscv/dts/{k1-spl.dts =3D> k1_spl.dts} (100%)
+>=20
+> diff --git a/arch/riscv/dts/Makefile b/arch/riscv/dts/Makefile
+> index 22b62e25d4d..3827ff72215 100644
+> --- a/arch/riscv/dts/Makefile
+> +++ b/arch/riscv/dts/Makefile
+> @@ -9,7 +9,7 @@ dtb-$(CONFIG_TARGET_LICHEERV_NANO) +=3D sg2002-licheerv-n=
+ano-b.dtb
+>  dtb-$(CONFIG_TARGET_QEMU_VIRT) +=3D qemu-virt32.dtb qemu-virt64.dtb
+>  dtb-$(CONFIG_TARGET_OPENPITON_RISCV64) +=3D openpiton-riscv64.dtb
+>  dtb-$(CONFIG_TARGET_SIPEED_MAIX) +=3D k210-maix-bit.dtb
+> -dtb-$(CONFIG_TARGET_SPACEMIT_K1) +=3D k1-bananapi-f3.dtb k1-muse-pi-pro.=
+dtb k1-spl.dtb
+> +dtb-$(CONFIG_TARGET_SPACEMIT_K1) +=3D k1_bananapi-f3.dtb k1_muse-pi-pro.=
+dtb k1_spl.dtb
+>  dtb-$(CONFIG_TARGET_XILINX_MBV) +=3D xilinx-mbv32.dtb
+>  dtb-$(CONFIG_TARGET_XILINX_MBV) +=3D xilinx-mbv64.dtb
+>  dtb-$(CONFIG_TARGET_XILINX_MBV) +=3D xilinx-binman.dtb
+> diff --git a/arch/riscv/dts/k1-bananapi-f3.dts b/arch/riscv/dts/k1_banana=
+pi-f3.dts
+> similarity index 99%
+> rename from arch/riscv/dts/k1-bananapi-f3.dts
+> rename to arch/riscv/dts/k1_bananapi-f3.dts
+> index ea11029c182..bcb5be5f1bc 100644
+> --- a/arch/riscv/dts/k1-bananapi-f3.dts
+> +++ b/arch/riscv/dts/k1_bananapi-f3.dts
+> @@ -5,7 +5,7 @@
+> =20
+>  #include "k1.dtsi"
+>  #include "binman.dtsi"
+> -#include "k1-pinctrl.dtsi"
+> +#include "k1_pinctrl.dtsi"
+> =20
+>  / {
+>  	model =3D "Banana Pi BPI-F3";
+> diff --git a/arch/riscv/dts/k1-muse-pi-pro.dts b/arch/riscv/dts/k1_muse-p=
+i-pro.dts
+> similarity index 100%
+> rename from arch/riscv/dts/k1-muse-pi-pro.dts
+> rename to arch/riscv/dts/k1_muse-pi-pro.dts
+> diff --git a/arch/riscv/dts/k1-pinctrl.dtsi b/arch/riscv/dts/k1_pinctrl.d=
+tsi
+> similarity index 100%
+> rename from arch/riscv/dts/k1-pinctrl.dtsi
+> rename to arch/riscv/dts/k1_pinctrl.dtsi
+> diff --git a/arch/riscv/dts/k1-spl.dts b/arch/riscv/dts/k1_spl.dts
+> similarity index 100%
+> rename from arch/riscv/dts/k1-spl.dts
+> rename to arch/riscv/dts/k1_spl.dts
+> diff --git a/board/spacemit/k1/spl.c b/board/spacemit/k1/spl.c
+> index 2556dfe047a..b8e1327dc57 100644
+> --- a/board/spacemit/k1/spl.c
+> +++ b/board/spacemit/k1/spl.c
+> @@ -374,7 +374,7 @@ int board_fit_config_name_match(const char *name)
+> =20
+>  	memset(fdt_name, 0, I2C_BUF_SIZE);
+>  	if (!strncmp(product_name, "k1-x_", 5)) {
+> -		snprintf(fdt_name, I2C_BUF_SIZE, "%s-%s", "k1",
+> +		snprintf(fdt_name, I2C_BUF_SIZE, "%s_%s", "k1",
+>  			 &product_name[5]);
+>  	}
+>  	for (i =3D 0; i < I2C_BUF_SIZE; i++) {
+> diff --git a/configs/spacemit_k1_defconfig b/configs/spacemit_k1_defconfig
+> index 13f055cdf53..ddd0c959c12 100644
+> --- a/configs/spacemit_k1_defconfig
+> +++ b/configs/spacemit_k1_defconfig
+> @@ -3,8 +3,8 @@ CONFIG_SYS_MALLOC_LEN=3D0x1000000
+>  CONFIG_NR_DRAM_BANKS=3D2
+>  CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=3Dy
+>  CONFIG_CUSTOM_SYS_INIT_SP_ADDR=3D0x1000000
+> -CONFIG_DEFAULT_DEVICE_TREE=3D"k1-spl"
+> -CONFIG_OF_LIST=3D"k1-bananapi-f3 k1-muse-pi-pro"
+> +CONFIG_DEFAULT_DEVICE_TREE=3D"k1_spl"
+> +CONFIG_OF_LIST=3D"k1_bananapi-f3 k1_muse-pi-pro"
+>  CONFIG_SPL=3Dy
+>  CONFIG_SPL_TEXT_BASE=3D0xc0801000
+>  CONFIG_SPL_MAX_SIZE=3D0x33000
+> --=20
+> 2.25.1
+>=20
 
-OK. FYI, I did something similar with mtk_pinconf_get() recently
-so that it prints the current config in the `pinmux` command. Then
-debugging can be done without modifying the source code.
+--+w9DBN4lt+v13/WV
+Content-Type: application/pgp-signature; name="signature.asc"
 
->>> +int airoha_pinctrl_probe(struct udevice *dev)
->>> +{
->>> +	struct airoha_pinctrl *pinctrl = dev_get_priv(dev);
->>> +
->>> +	pinctrl->dev = dev;
->>> +	pinctrl->data = (struct airoha_pinctrl_match_data *)dev_get_driver_data(dev);
->> nit: casting isn't needed here (leaving it out makes it more readable)
-> 
-> Yes, it will be a bit better readable. Unfortunately dev_get_driver_data() returns ulong,
-> but pinctrl->data is a pointer. The compiler might print warning.
+-----BEGIN PGP SIGNATURE-----
 
-Ah right, I forgot that. I usually do (void *) in that case since it
-is shorter, but leaving it the way it is is fine too.
+iHUEABYKAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCafJfDAAKCRB4tDGHoIJi
+0sDbAP40ugu9lrzWGlzP3kjACQ4GeIiWhoQEUXI4zfsymPRgPgD/f763cxDVGzw6
+/HcT6c2+v/lNx3MTut1XnDj+KkFGVwA=
+=FtX8
+-----END PGP SIGNATURE-----
 
+--+w9DBN4lt+v13/WV--
