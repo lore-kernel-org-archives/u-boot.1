@@ -4,92 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E96F9CCFA13
-	for <u-boot@archiver.kernel.org>; Wed, 29 Apr 2026 17:15:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 242D4CCFA13
+	for <u-boot@archiver.kernel.org>; Wed, 29 Apr 2026 17:15:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8168D848C3;
-	Wed, 29 Apr 2026 19:15:15 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D0026848DA;
+	Wed, 29 Apr 2026 19:15:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="c2YEmasA";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="W+fCu6Nv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F301E848C5; Wed, 29 Apr 2026 19:15:13 +0200 (CEST)
-Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
- [IPv6:2a00:1450:4864:20::62f])
+ id 0403F848D7; Wed, 29 Apr 2026 19:15:19 +0200 (CEST)
+Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
+ [IPv6:2a00:1450:4864:20::52b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 18FF9848B6
- for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 19:15:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 87F3B848D1
+ for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 19:15:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62f.google.com with SMTP id
- a640c23a62f3a-bb962ce4dcfso173219266b.1
- for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 10:15:12 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1777482911; cv=none;
+Received: by mail-ed1-x52b.google.com with SMTP id
+ 4fb4d7f45d1cf-67929ff6dbfso34248a12.2
+ for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 10:15:16 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1777482916; cv=none;
  d=google.com; s=arc-20240605;
- b=N1Y/JRzEcW/jrb4wrUEvMcSGPJIvlY5P+ZpJJrHweqqWKAqKyjivjYap1487j9TISn
- xZjYQa/Ag7ci5rMoZFpDhYwoLfzC8rQ0brmEBq0hRyIGMPwRQKU5ZS8VF7GP6pirEPnk
- 6EwQvlSintLUHdaRnQm89iJjtxh+r9ftH5tG87QhP1vmf0a1fTQ9qm4OtbRbuduTcMRE
- ofiTWkvZjVCLLiNPb6uewbs5NsBadVaw/aGDLckUZqqvoLv2MZnTRRQYo52lQIBNkKy5
- /cPiEftnP7fkh8qm8eEvEJsk3Iy28XQEZhXOZgamwBveXBnbZ3BeeHcAnHmpZFSz+yBS
- wjPw==
+ b=ZmvTFlyevq/Uiy3hGnyExihqORruNhXlvfPgVO9/I/xfzj69EAW8EVLqurRT1Zj82v
+ C8YMyxC+CCK/ztIlVSmIJ7m4I69Ccw07UCh05os6tz9kx4PT8JmYyfUEHTgbmhKlsbHy
+ 0E1ruGTcaUuUY7jHxNmONdCj82fDrmxKWq36f6HX9cLNunuJKnHmDpiN39REtASksjVL
+ b5DRcNXhoqYO8oTkl4lDk2PS9IOLYCBSXWB8RcOa3xoKMoEdTPP0/J4+x9ucXMnmKwE7
+ gWjTpmNN8620bYeWGHiJcgd51dJLlrwMHKjsH9ihUz25iplhEecdI9pMcv9Jh6/xaTNR
+ 73vw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=stIoPaBQ2ySWsfc+zh8kFUZrrJKDrRsXOfTYMlUjWZQ=;
+ bh=xrYVZgGt2X/jMtx5ZLzsA9yQqKFR1rwtHwv0uQy6CeI=;
  fh=+/pNFDyGYsDJMoXpsFeigOK5l3QyGzKdfAevrQne9bY=;
- b=lT1pWgMuItbKs8N0IAVPZ17Gc143Dl6VMeaS2YU9jf6pbNz9yW6HnHWPWpb/Fd3eWb
- yZDQhOIHx5KUQ0CmXujaIPkN8V1uBEj2jBcs23TMEjK+FybzcfAilL9sP+8+KalPZPza
- XbxHy1E4dSmXZWjZM127/JFboXwUazLaYs8WYvfLXiyDjr6kvfBaG7+XKqJL8tW6f2vu
- xtNQG/obaG9BpI4+3F+F+szSA5RX+2HSH3OIwMYTURgcr9nT97DG1xRmEazrMxrCRL9W
- OqFMfH4BpRWgwMhbOWDe+DYRvvfu5GdsBz3sdGa8fnZKd8ARnyZdKhfZH004SJvDvk0N
- vpig==; darn=lists.denx.de
+ b=WfyH+RuopW4qlvcLF2A3A7dTGJhoEdqo4z0vLcjp5mpB5KBvo0fIBV/rtkXiz/jq2a
+ Hd84nzeMm9qWwgRxlIQcy2Tp+5TfxpRR5ZKy76YcietZtxqzdCA+d3hoDwr5S9vsRiqE
+ j5hJf3apR1ESLBmvT0CEzCJNxe1d4LDyyBw5X+s2i2tDjGcJoIWQZdY4IqCpTPgrtsbM
+ GhDCSlCO2GE2TUflR40P0hjsrxAJRa+S9pnAgyQihL8I7oLE5XoOn+gF2jl9iEP0VPiq
+ rf5a8YqSztApLyMFmRhDIwYBtCfQNvZ0pZS/4fMQbQ1DKB2isOTtnjOUMHFyrwrlT1BT
+ fgyA==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1777482911; x=1778087711; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1777482916; x=1778087716; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=stIoPaBQ2ySWsfc+zh8kFUZrrJKDrRsXOfTYMlUjWZQ=;
- b=c2YEmasA5L/tgRLEUq1bNSIr/l0Zffni1aUdcfUy/o7LRJljEIRGMzUlVQSMe1+IkK
- vBz+84VFwRTcjmO256gN2Jbiepcs5i+jTt0q3cClfeksBVvv5WRxomZnQRDdYBDcLhX+
- CfAaxIBq+bO1x3WlhE7u3gwI7FroBXSaNr89A=
+ bh=xrYVZgGt2X/jMtx5ZLzsA9yQqKFR1rwtHwv0uQy6CeI=;
+ b=W+fCu6NvKUJpI2IbZw8hoXzik06WjoeCxxyrZtQoM7FJVQy+MCTlfslE56qJmt8xBM
+ nynln3JhQh28Ww6gCSfQvffcY+N9XILu/cXZhq3dyisCFpRwxn/pDwKkvzVYe7bRc9q1
+ +HxfrzMJgYEfXrtmLGoFUEYlEh2zLUL3O6KDk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777482911; x=1778087711;
+ d=1e100.net; s=20251104; t=1777482916; x=1778087716;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=stIoPaBQ2ySWsfc+zh8kFUZrrJKDrRsXOfTYMlUjWZQ=;
- b=alfvO6BaFnFaVo6gZ4QVPNAi6YBQVaEciziOXdmcBnRdh/wlb7WOpu/shShINe+f5e
- hmdlZv54qcUGK1RSnSlA+QXXSLujuR3CPbltLmX3MW1MENOYjnGsDHfaBO8d2JlZL2DT
- 3h4y7JC1B+XyhFsHdw/cwbCkHl6qQA5hZKrWcg+c0n52zSMJuZoToYLrbacZHkG3XXBm
- dtURKR8ac3MLmJoPxDWVEZwHbjAymvgQnt8Ddrj6b4ktC8TEEELd5JyguTYaeEVm2ylw
- HAkGL1JWb06UokbKVEPSp2dlSIMdOYtBykC4J0co5YTezkJVlNf6j0jZ6aIYyNwCHnLF
- lkyQ==
-X-Gm-Message-State: AOJu0Yy/obCvB2LF1eBlQLqLHymrNQcHQqWdwGyDJtNR2bRPEmhNTmBU
- 3kTFveKF0l86ftNI18V+fb8Q4QJqfqEuYRLGycVQZthzus/zHuDtd3WWYvTF9FdlqpSUVy2/rR6
- UBRpHPbj4s+dO6T8YExtf3wz3bjR3gjaUyIpoc0FG
-X-Gm-Gg: AeBDievjmY1PbnGyUSN22d01MwHFRv1fRMPelsO/tHgYPRHXRiqJ3SOink+yeYOblGk
- 0KmxHi5x96FgPWTQKh3SQ3vcInOJ7233851OALxRQdYC1ePz/ROThCsH7yBCedtU8S9zot2SA7k
- M/8gv78WR1ogR6ulfAq3TALB5NhFrXwbkP+Qcc8ZcAbkpGtaUIA1kFaqjVnNWt6bgia0vG5vpLI
- U/zZb6h1bbugoIzXGQwmhNZcpRQLwdFRXS2HFw63o5YhpTrrDIy+2tC3uTKWuOkwgsnIkBv2v90
- P4bA8g+K0n8NwQbYdBatzo43Tpu5U630zH/ICdugn7egXO+4uiJ+
-X-Received: by 2002:a17:907:960a:b0:ba2:e022:c146 with SMTP id
- a640c23a62f3a-bb804f1a82amr564871366b.43.1777482911446; Wed, 29 Apr 2026
- 10:15:11 -0700 (PDT)
+ bh=xrYVZgGt2X/jMtx5ZLzsA9yQqKFR1rwtHwv0uQy6CeI=;
+ b=juap39P6UGUy8uVouR6zsLuGdIdyn/hkiI8nGeql4nQ6GTRVp8CH/vPyjJMsKQU70u
+ a3vqYWabDPP456AZR9UuAjcLlXCJyRl8CeUNRomhIiAQK9m6bQEAwHvpICg7S5dn3UWZ
+ 834GGbIn0EuyH1uQfC4hilBLvCb3QSPUuJdZEdUovdjT+2TryzRTvaMGBXR0wEsxN9xU
+ vVPKCCS+m1glZqnP/zrUiCvCXif1C3p4DDwO05MfLJZVJ7Cf7zQNM3jbhP1Pkb3g52sU
+ 9uzshcbm0c9qC8lGjl45i+b9jpr9m4FWqJQ/YySIKSW6boAh6RZZDXl/TmOSQv7UqTwK
+ GyWg==
+X-Gm-Message-State: AOJu0YwCPyLCBNHlxisA4qgtSdPWNxFgQY6N32ncmgF6n5nu0F7Zlrym
+ WofUTVc4WN2v9mc6OGMYTVLsJUyhdcEO9syaVC15/sLp6ZD5vOm1+iNU4D5BMQaSEYPDP5ssttj
+ YVwAczMxNJtEKwmFW4otmqwwPOJiDrt5cfEEg/R/A
+X-Gm-Gg: AeBDiev0+az0jtCw2tM5gGNGTTvVJzqTeddvTmnGT8UW5QcHa7S8d6NcrsyCNEzlUyb
+ shButZDBFGuDdP3c9Y1ciSv37gJytp2NYq8y2D7MvcM1ldLQ0lzJ9DGg2rqHfC9E75cvySkln2v
+ Q86CMggXY/qAXiZo0IUTab9c/AdSN0Eg9iDfMAMWdz10B1NsLVM49GJXZ+9dsubl1kGMmcYyHkq
+ q8zG45653drSAy/T3nbujZaal7dERdDOruSMlIIU8jZIiORbkn3hPzq65xt/5kI9RTIkoOMTrqO
+ KcIoRIM2qrr9jQXWaEITmN5smQPUiLr6AUYzDapP3C0SpD3ri+p8
+X-Received: by 2002:a17:907:1c98:b0:b9d:6d06:b78a with SMTP id
+ a640c23a62f3a-bb93ce8c877mr297571166b.17.1777482915920; Wed, 29 Apr 2026
+ 10:15:15 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260429-sys_rx_eth_buffer-no-net-v1-0-396ef37ae93c@cherry.de>
- <20260429-sys_rx_eth_buffer-no-net-v1-1-396ef37ae93c@cherry.de>
-In-Reply-To: <20260429-sys_rx_eth_buffer-no-net-v1-1-396ef37ae93c@cherry.de>
+ <20260429-sys_rx_eth_buffer-no-net-v1-2-396ef37ae93c@cherry.de>
+In-Reply-To: <20260429-sys_rx_eth_buffer-no-net-v1-2-396ef37ae93c@cherry.de>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 30 Apr 2026 05:14:56 +1200
-X-Gm-Features: AVHnY4KU6dPBGmy2hDB--3kxnGV-qRsnR6t296XxvyhoGFSj2_aGKkAGxymOUyk
-Message-ID: <CAFLszTgre7DW4p910s7O5mr2PA2ZDNm1MjOF2cm5ZfcrtsfMuA@mail.gmail.com>
-Subject: Re: [PATCH RFC next 1/5] ls1028a: only include drivers/net/fsl_enetc.h
- when driver is compiled
+Date: Thu, 30 Apr 2026 05:15:00 +1200
+X-Gm-Features: AVHnY4K2zwGjjubQ9IV6nPv1OPmWRY8mNQTB7yQHX_ICa0JIOgUteOy3648-fmg
+Message-ID: <CAFLszTgrCEuPBsqfRREZ_qeH69e9Bf9MmGJetC3HJbfqnHGU-Q@mail.gmail.com>
+Subject: Re: [PATCH RFC next 2/5] arm: ls102xa: use platform data to check
+ Ethernet interface is not SGMII
 To: foss+uboot@0leil.net
 Cc: u-boot@lists.denx.de, Tang Yuantian <andy.tang@nxp.com>,
  Tom Rini <trini@konsulko.com>, 
@@ -119,24 +119,20 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 2026-04-29T10:35:00, Quentin Schulz <foss+uboot@0leil.net> wrote:
-> ls1028a: only include drivers/net/fsl_enetc.h when driver is compiled
+> arm: ls102xa: use platform data to check Ethernet interface is not SGMII
 >
-> As hinted by its path, it's not really meant to be included outside of
-> the driver itself. This header uses CONFIG_SYS_RX_ETH_BUFFER which we
-> are trying to move under CONFIG_NET dependency. This file here can be
-> compiled without network support so make sure this only gets included
-> when needed.
+> tsec_private should, as its name suggests, be private. In the next
+> commit, it'll be moved from a publicly available header file to the C
+> file that requires it. ls102xa currently does not allow us to do that
+> because it uses the structure.
 >
-> The function from that header (fdt_fixup_enetc_mac) is already guarded
-> by CONFIG_FSL_ENETC so simply guard the inclusion of the header the same
-> way.
->
-> This was tested by building ls1028aqds_tfa_defconfig with
-> CONFIG_MSCC_FELIX_SWITCH and CONFIG_FSL_ENETC disabled.
+> The flag is actually set if the Ethernet PHY interface is SGMII in
+> drivers/net/tsec.c, so simply replace the current check with the same
+> check made in drivers/net/tsec.c to set the flag.
 >
 > Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 >
-> board/nxp/ls1028a/ls1028a.c | 2 ++
->  1 file changed, 2 insertions(+)
+> arch/arm/cpu/armv7/ls102xa/fdt.c | 7 +++----
+>  1 file changed, 3 insertions(+), 4 deletions(-)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
