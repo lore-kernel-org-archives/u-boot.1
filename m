@@ -4,105 +4,131 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9482FF8864
-	for <u-boot@archiver.kernel.org>; Wed, 29 Apr 2026 05:04:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48A69FF8864
+	for <u-boot@archiver.kernel.org>; Wed, 29 Apr 2026 05:12:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3AB42846CB;
-	Wed, 29 Apr 2026 07:04:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 722AF846DE;
+	Wed, 29 Apr 2026 07:12:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="otUhdbgL";
+	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="D+WSScDB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 81119846D2; Wed, 29 Apr 2026 07:04:56 +0200 (CEST)
-Received: from mail-yx1-xb136.google.com (mail-yx1-xb136.google.com
- [IPv6:2607:f8b0:4864:20::b136])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 94C40846DD; Wed, 29 Apr 2026 07:12:11 +0200 (CEST)
+Received: from DM5PR21CU001.outbound.protection.outlook.com
+ (mail-centralusazlp170110009.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c111::9])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B8331846C3
- for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 07:04:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6D8FC846CB
+ for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 07:12:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yx1-xb136.google.com with SMTP id
- 956f58d0204a3-65890a6ca20so3348832d50.0
- for <u-boot@lists.denx.de>; Tue, 28 Apr 2026 22:04:52 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1777439091; cv=none;
- d=google.com; s=arc-20240605;
- b=W8EYHYymPEfCGB9mAD7TbOHmGBcnJLtN4gEFrlKyV2ZxeseGKe7nAcqHHDjuWs99A8
- hzPdAzCebFOhbXY4ytcnfEarTBV2f5GVD9rK6sEACcrgLaf21pvcHFvpBGUCDR5SeloF
- tQ2U8TXmfIMBNPXdRKP0EcXoCKCWqbpKurTI5ji8II3JbH8TjF+6rxz4CPWPP8slzu2c
- UJWdyuPHNAqDEM7I9qXNmNG6lAa0lbLiTsrw0AwkVpJJtAWM5TnuxeR2hQcNpMzrGsRx
- BNrU6n4MBuPHmhCA6ePOGik4xT4VIo1AOT0hXaJ6vOx/axnDC+M5TFcpH6Nt6Wl6NfY7
- vqbw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=8DEJKeQHnrjdLQVh2ii0HTN4k3m29MwqF/9i7iI3oR4=;
- fh=RdGkvKMvuRusWJvZUna/mKxw9cwzaobPq8+52GVNl1g=;
- b=hoqevAaXakFcerxXipEsdqirVxpBZxaPI01lyc1rEramtlmSoKPsU/yFwFGGfhVnDk
- AsmUQleOPaOUtfZoVEBwc2JeIFR+rAC1ltY6mGWrrKFN4mSDxY4BencXB/ksTE0HfmdQ
- 15jvzopd8TPCpyxiHNir3ReNv3q3fJeDCiqX7qNrvi8D2PS3IFmp5TbsHjZoXgXqkxmx
- YFiZ/YcciH8ttCE+i6c6wPsQZA4jOScVVAQ5n9Qu+pd9baRKmKN0h+UMi1+fkIFFLDHT
- RES9QMSu2ZcmcbBSWyVI7nSM5NvFSGS8mWIycfbLTY7aQYUBUky7RUl48SmSpz8mOQ9L
- hzlQ==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1777439091; x=1778043891; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=8DEJKeQHnrjdLQVh2ii0HTN4k3m29MwqF/9i7iI3oR4=;
- b=otUhdbgLRHdPdYR+eNFJrvPYdhFbF2ki1d6MQzjeBU47HR/aQQ/moy4853/h3g6elx
- Itze1WR9wJCN5bu+iCHHX6LtL17k3ZO1y1RtzpogfWZokiF2h814UKweQhZtgf80260i
- aotgl4PbyNdpZKyaBeGeTwH6K3+VvD1m6aG8oQOVOtMzzA7XxtTKBI53OZlqTexD+FzN
- Xab35BAHRRUkkmV7eLLL7SAapaRgLG6J02sFKqTvKAK6x3SreFYm0QV3eEG47vQjEZ7p
- 0DxsnaVCSuwP4TCLqhzHJUmrLJ/U50AZp0a6tGy6SJJ8DHU2DClbVhyNtxCFBq5qSr+Y
- 0K8A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777439091; x=1778043891;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=8DEJKeQHnrjdLQVh2ii0HTN4k3m29MwqF/9i7iI3oR4=;
- b=LLfFY1PTMcj5IDYjljbzVqd/zC0FBuA+3wQY0Th7BcA3h4ijuJCxUNs82HX9leG/+v
- 92scw64oMxTfog/6kG/F2HufMr6ZbsU26C9B0c6a52eJvGpUiLUxMM+4JchCmON1GH0U
- EKWSJMzhpylLtO8Q2lE0Iy8FoB7a584AiEuXB6qd7nPJwJ6UAxjU2yo/1/VQ4jb8RGFM
- SJ1eQVNgJ40iSB0bg66rAptXKkTevs/gSxrL43SDjAiZx1GENqTShNqXSBjfcXoImwAS
- sBoFDikwbR31dSWSaHF2vIeTVSA394P1b3uaSYp/c06pzMC3xfWg/nd0nqSW2nfP7uPV
- TNxQ==
-X-Gm-Message-State: AOJu0Yx8SqKOZQBS2OR6uSEm7/oaLZ5v81xygybinI85j4ZIiLs/Dkb1
- 20eQ18jeC1K2oY3zYSoXsR9f8w3HDKKmaJXvHgV6Yv9xutG+Nk7kuvOYKJ/ISATu3k48HS5KXDb
- JRtC37FV+jxK+kuy/Gnm2SQSEGIS1cfAj/+DblmTTMQ==
-X-Gm-Gg: AeBDiesTpyEArO8b6M6xczhSnMtlFw548C6oi7FoAJ+52PfQm9OQT4X+rlm2CwyYbaL
- ksiQxX7Tn+/SuDsMC7o0nYwddzBf5L4c8iAYUaCqrss3N9ytzBHC3eokimx4koiCY6c3cSKYVjm
- sU01A99pimJDLqJ+nRh4HUdKJJVi5aU+ZB2kTl2v33xE4qqsEmvzbphZCH62TIuckEf7D9XaYfK
- VsrJIjviu/ejrn57cUZFviDMzlpScB+/Q9MRAWoWzmTdqoJ2Fc3P+bP4ALQjpsl6DHRWv2cZxw7
- BZyh/ISyFigJnsnY/7kH0hIxM7+ZkHzqtF09+cFWARvnn4kPMEvr1EMxCF9vlfTUQTF+R/7DNMk
- YseCYDqtTE22MS/5OVsmBjO61p8gnQjmOVFfalfzT88wqS/shZHz6CBuFoKTolgkTuvCtM6y5MK
- T5AvEJWSInleif95VXY4VuAP2/fipkZp86v3Qy+gQYHV0VsAcGLGxP4R0NlsGZWs+aAmO9toD4J
- bZlSf16k9uH+LBdzqJAZbRettG7sZGSKjsk5wIhb5ATyeKJVPH9huoJxxR9aYZe7Q/VpWSb4DcM
- eX+faUQk5+TExN4XD3MEz6itjeqWehOspxi8U9a/zE6fkr4MNFfqPMNW4gtxjaQxtfyzLI7a79s
- AzshCexHYsogA/1d9
-X-Received: by 2002:a05:690e:448:b0:651:b234:87a1 with SMTP id
- 956f58d0204a3-65bfb880546mr2014856d50.58.1777439091280; Tue, 28 Apr 2026
- 22:04:51 -0700 (PDT)
+ spf=pass smtp.mailfrom=dinesh.maniyam@altera.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=r/e6dwZuFv1+7CjRtm4dJP1VrVdN1CRZRy2rKn/KEcQmxoOrh4ZeGOjGsBKu4JX1n6apQ2Db+Ps91+ZyPjin0qPrHBaEdP+CuEDUjKlvkQZ8ABPHUwr6HeYYUjOGgTdG3ARnrZ86yIRPkFQADGTT9kAo4ZgZx1HBsqTqI0gK6dVSXxrP64UKjRddkyl/KPF8sUZFDyyofVLUBSunPcosj42Y6Z2G58i2R7nOp3O75tS7/QJq9wXBUII9M5JP4BZp11saHyt4uEMKrTZQIS2BzNwvDn/hnujJ7TYyML5Oo4pLxNrTOrS6HUupTCDwB04rHptcZmS7kDCY+0vptrsP1A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=+lVw39HBXcZPSyf+lWfRmgdYogvXP50ug+GzdcyqpMU=;
+ b=aGGc86b6dbdIinFxLmnJOjmj+s9k0oeaTsW47n9GGIAor3if7vFfsN12reDs0gUpAD9rwhM7NnN5t0iYGKfCv76xEhLjEhxqivqdFtUKeBB+CNhsYf3J/czS06lRzXyS1dwpnqELA8eHRZdaqD85zLLkfLsST7H7kzv1fALk0uD2k8iSys1ugOucK1FbrxAQq4WTS9kRsO7NdmT6WuFIruIT/Zir/A1j351f56tJjt7OrXWF/pUkhg6GgJ3MhGsV0udxWJsmAodGkMCxUpHG0gQ/DwwqbqRevrfwzuYx8kun4r+yvz0hf0ljgkxbxvbR1gIOpIoyhFl++lOwUbODMg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
+ dkim=pass header.d=altera.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=+lVw39HBXcZPSyf+lWfRmgdYogvXP50ug+GzdcyqpMU=;
+ b=D+WSScDBTqnihZevxzIX8a/Va1UWwNTj4TWGTCY/rtmCdT+a/tMRdudea+DlHFEIkx4jKNDXIl4UAZ5yMhar0di0Kk4RfWE64zbLg/r9CKPlVq1Epn/7+6NPPVFyS+TyN23u8RyQENO9/ie3hteYbxXFi5m99DT8T+cQ5/hdTsHagnmiWImv91PwROXM3Dek657qSRNNC807KbaequfCOnNzCFaxx8JSUKr55AEBrqmyNrxeVI3cvDdl7b30UCB/UvqmljNTZ166AJK+4DVCRbQctLaKc+mCuFDqT3Wm0Q/ITiEefTxZhbx0SvvdPWRyIQmjo4NVBFztch79Ss4Xmw==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=altera.com;
+Received: from PH7PR03MB6942.namprd03.prod.outlook.com (2603:10b6:510:157::18)
+ by DM6PR03MB5259.namprd03.prod.outlook.com (2603:10b6:5:245::12) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9846.26; Wed, 29 Apr
+ 2026 05:12:06 +0000
+Received: from PH7PR03MB6942.namprd03.prod.outlook.com
+ ([fe80::8f8a:2a94:f5a8:ea1a]) by PH7PR03MB6942.namprd03.prod.outlook.com
+ ([fe80::8f8a:2a94:f5a8:ea1a%3]) with mapi id 15.20.9870.016; Wed, 29 Apr 2026
+ 05:12:05 +0000
+From: dinesh.maniyam@altera.com
+To: u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, Dinh Nguyen <dinguyen@kernel.org>,
+ Heiko Schocher <hs@nabladev.com>,
+ Dinesh Maniyam <dinesh.maniyam@altera.com>,
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
+ Peng Fan <peng.fan@nxp.com>,
+ Wojciech Szamocki <wojciech.szamocki@nokia.com>,
+ Maksim Kiselev <bigunclemax@gmail.com>,
+ Chen Huei Lok <chen.huei.lok@altera.com>,
+ Tien Fong <tien.fong.chee@altera.com>,
+ Kok Kiang <kok.kiang.hea@altera.com>, Boon Khai <boon.khai.ng@altera.com>
+Subject: [PATCH 0/3] arm: socfpga: arria10: Enable and fix I2C support
+Date: Wed, 29 Apr 2026 13:11:15 +0800
+Message-ID: <cover.1777439293.git.dinesh.maniyam@altera.com>
+X-Mailer: git-send-email 2.43.7
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: SJ0PR03CA0064.namprd03.prod.outlook.com
+ (2603:10b6:a03:331::9) To PH7PR03MB6942.namprd03.prod.outlook.com
+ (2603:10b6:510:157::18)
 MIME-Version: 1.0
-References: <20260427100832.581887-1-ilias.apalodimas@linaro.org>
- <CAFLszTj2hm=bGA6N==mt5pC2iyWMdj2q1A1zqPfx7OnMhNYAyw@mail.gmail.com>
-In-Reply-To: <CAFLszTj2hm=bGA6N==mt5pC2iyWMdj2q1A1zqPfx7OnMhNYAyw@mail.gmail.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 29 Apr 2026 08:04:15 +0300
-X-Gm-Features: AVHnY4I07VzfqC0VZJcomcvc4d4kZ_LFPFEaGVKwx6bylq0FjYmjPAdv2KYnE18
-Message-ID: <CAC_iWjLUXLHyvuiCpepg7=YZNdoHs8_JJ4sbQTUbqD4aejRVTw@mail.gmail.com>
-Subject: Re: [v3,0/6] Relocate U-Boot in the last bank
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PH7PR03MB6942:EE_|DM6PR03MB5259:EE_
+X-MS-Office365-Filtering-Correlation-Id: 7821acee-d56f-409e-6455-08dea5adda53
+X-MS-Exchange-AtpMessageProperties: SA
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|376014|1800799024|366016|55112099003|18002099003|56012099003; 
+X-Microsoft-Antispam-Message-Info: U5eZVz1j60JAkgP0oJWkrlkA8zVmeKlMYAMZfrVKiLD8sq4OcuymcQXorFWP0N2GMfAlV9L2dzJh4/rC2JPEbLv2hl6oX4b3afIkjLL9Dtm3fUlaigGootH87VXiVh7TLaNWZq7k2kTNgR0qk94UXtWLj5m/Zz72+ziQEA24+f8tc9zXZaoRLO/fLul2KyGGKv6Rs48QhQi4zd097gK5YAsi6nbSwoquJAmlXVlneCv8jSe/fRQSV3qOYBaJVDV+v2XfV4z+BK+M4qOBhzrkbGn9LsG/Oi7lT5Kp+nYKDLQHCttGinPcByv5FFoDYu/DW+ixylAdCfv9O8Yc1mZ1YTYEzcNCYSzuc9Jatk22c0flKhfamQ02ikzeVuL/uA74Zy+5gBncEi/lcRN7mEGciHj64IE1dzzq0WrJjKrOKhzZENS4AXYA+Sf7kwdKSO+9danXqdT4DpNbUzwhj2lbXtkMUPZNiYZbTlcBoHACFdy5fLqB4MSgyKSUxggCcH0Gfg96uIljKXQWdbhbZGn7P2g28dT0HDVtTqUgOMEZ//EB067NvWlxzBudZsMvKoxJdubL3HNZCTskSmB37qQQVm3Q0IWCxxjakGH9DojxotEsMkQLnPgLo0R3xeXPTNz8G6XAcvaUzpVQFfBoyxpD1eobgrMdW4ENPG/4m0QMVvoncsxmOlX8juG20rarA0BUnZokJqbTewmSYJOZ2rtL1nrWJMdFx71/0OkCzeLCzrI=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PH7PR03MB6942.namprd03.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(1800799024)(366016)(55112099003)(18002099003)(56012099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?9QtcM+zOWK9dcwm+1xBmtKS+iMYx1LrB38OdSw0Fv0R0W5pcWNp7mbl3cp7Q?=
+ =?us-ascii?Q?dDb9DGTmaCTaI2cSBQZicKTZI4p+pgO+fQqU9S/Tc8dikvImQqIodYtm7PAV?=
+ =?us-ascii?Q?Zqble2NDTUILXNUzOoI2BlAuE1Da2oI9SBArgohL6+hbbmX2pOavkOSBff5X?=
+ =?us-ascii?Q?6UdS1Opj40S6A+vl5J/pzvR6+ngZEH8KnJjk8LwNvkrcwSnFyM70ywcfuy9Z?=
+ =?us-ascii?Q?zEQUztyDcPqXKfvQP+IUv5Y/1crSSQj8l8kUYZq6vhs+G7lsTPoTDRWiBvF8?=
+ =?us-ascii?Q?odXNjVc28EsOlAmJfSbU+yvhGgRlCU98kmi35mZwkTM7DtwyZ4uSC9Dq9KvG?=
+ =?us-ascii?Q?cKlOmCE1zHf7IFGF2bkMY9KAYxam1B4ZDi9/ukJeTwqA6ua8wi+qfYV5UMcV?=
+ =?us-ascii?Q?QrdXlqMae7SAKPdiMPNfVt0S6dbLS8oUEDDgB5oVooesgOPsNo6X5iEMYW8I?=
+ =?us-ascii?Q?cdDZj8YtkAVMS9Gq2eN/CLbMzj9Oo3rK/mLZKrQ4/IXaJpvNlE2svFEptdbO?=
+ =?us-ascii?Q?RfKabg4UIxCapoCCsbpK6rWr0Ih+NMbxC6qHFstGAPlAlXbww2yOTriB4lyc?=
+ =?us-ascii?Q?W1USwRJc05eUTsAzQ3VKxRuwihyweiJAPkBjay5eDZBImqmLYdGit5h64XBr?=
+ =?us-ascii?Q?bphLwt3txaLuEp+oUnEwSuYm9zd9jBky6f6uSNjEwDaeJrqZL6nyCMtxpuTD?=
+ =?us-ascii?Q?xCsHTiHuoEGexPK9/ssUbEVXHDdMSbLHxfP2AH+PpxT1Taiz+4ggPpsjLx4H?=
+ =?us-ascii?Q?NUYx2tdtBHIgzOai87PqvdoU89DA7WDY3YIMFHY28CwKqNYofzWPKhG1I4Ni?=
+ =?us-ascii?Q?q5kfOBSR1lTROkeC3/RDiny6NiucKJZX6UgFEWW/3FtEZ82OqT7SaPDl0Gis?=
+ =?us-ascii?Q?qLtORYU+y1RHNxZTwssYDH6XRJ6wJV10fbXNbXtA9hbJwCM8BzB05bZylz7Y?=
+ =?us-ascii?Q?tNeUYd8vKKGQ8tF5mw72+KX0N6gIUgAmKyIYL6cxFr7TCbgLPClYnPxOjgQ4?=
+ =?us-ascii?Q?tIT6cv7n+7OBCvG1tqmO5taaeMFRiyBjb13eEEK9ngtM1XSgRnMOUz9ARsai?=
+ =?us-ascii?Q?EtazE1XpgB157xlHZJx66lwCXNS44N58K6YG1tiQYez0pbacF9HethkpaO47?=
+ =?us-ascii?Q?yQq6ud9JLqNgL7+81SCpMOSk/gQZ6tqE40JhgL+dpYx2TxE2xmttwcvDOjtp?=
+ =?us-ascii?Q?o7E/KpPWl5Y09vg3F0P65N7A2PCR0clAztZ5GXhEuAPflGWAc/6Fqt4/LbVX?=
+ =?us-ascii?Q?Y56HYa1Tx6zga6EnR6NKPh7q70FL11kBc+vFBR+8bsaksYwlT8a4whcUWAPQ?=
+ =?us-ascii?Q?qvlRikz0N+EH8cLpEZdPBJEI4qWRUmHlpljPnVlGYFVKkJGGXuH6V+lO1lSb?=
+ =?us-ascii?Q?T5BlgqsNH87bsin9iLLzLUjnASLao5T8OAiDqVwUcvklFisdPB8rlFZ2c/LQ?=
+ =?us-ascii?Q?Nzbx7eGjG6vrtTJfU1gMQqa934zrZF+dhod9ApmQKZU2vAyuOYUHB9olQYgv?=
+ =?us-ascii?Q?F/yWQIg3ul9T1kItWdP0dB+L7ky6jjKg13JpezN1yCKrej3joPdNRzd7RKAI?=
+ =?us-ascii?Q?ofLhSuadh2CdDmfrC9lfY78kHKEi5HEhfRYtKp/eFxFixW3ezIdFrCNZ2IAP?=
+ =?us-ascii?Q?l9XeTridlzd0FZmPiGbxP791ESjO3lg9A8S9iTkEZN96BUvZCT3VvRNMJWGP?=
+ =?us-ascii?Q?EXLwGRxXrX1CUOmYWt3cWPyu+TTxCNEwJuNaFxO4SYKskhwhmcyTvMp1sCWa?=
+ =?us-ascii?Q?4E7Ikf42Hh8kfAd56JWnaFIKN05uNfI=3D?=
+X-OriginatorOrg: altera.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 7821acee-d56f-409e-6455-08dea5adda53
+X-MS-Exchange-CrossTenant-AuthSource: PH7PR03MB6942.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Apr 2026 05:12:05.1170 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: ksRPj29i0K5tjTYZtHROMnTggJK9Cvr8LwXDX6p0mQKsRJGxZwcJGFwzKvr2eW/fPFo4sKR9EAkdxRPOu4iJOsruVDtEA1gs2GNL9lsm8ts=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR03MB5259
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -119,66 +145,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 28 Apr 2026 at 20:49, Simon Glass <sjg@chromium.org> wrote:
->
-> Hi Ilias,
->
-> On 2026-04-27T10:08:21, Ilias Apalodimas <ilias.apalodimas@linaro.org> wr=
-ote:
->
-> > # RELOCATE_LAST_BANK not set
-> > # RELOCATE_LAST_BANK enabled
->
-> The Kconfig symbol added in patch #6 is RELOC_ADDR_TOP, not
-> RELOCATE_LAST_BANK. Please can you update the cover letter and the
-> bdinfo annotations to match.
+From: Dinesh Maniyam <dinesh.maniyam@altera.com>
 
-Sure
+This series enables I2C support on the Intel Arria 10 SoCDK and fixes
+two related issues observed when the I2C controller is actually used:
 
->
-> > Patch #2 - Introduce fdtdec_setup_mem_ram_top() from Marek
->
-> fdtdec_setup_mem_ram_top() is added in patch 2 with a docstring saying
-> it should be called from board_get_usable_ram_top(), but nothing in
-> the series calls it - I think you should convert at least one
-> board_get_usable_ram_top() to use it.
+  1. The Linux DTS sets i2c-scl-falling-time-ns to a value that the
+     U-Boot designware_i2c driver cannot consume on Arria 10. Override
+     it in the U-Boot SoC dtsi to the maximum value allowed by the HW
+     spec so the driver computes correct timings.
 
-I can try to add qemu, which is the usual safe choice.
+  2. The designware_i2c remove() callback disables l4_sp_clk, which is
+     shared with several other peripherals on Arria 10/Cyclone V/etc.
+     Disabling it on i2c removal corrupts those peripherals. Drop the
+     clk_disable() call.
 
->
-> Patch #6 moves dram_init_banksize() much earlier in initcall_run_f() =E2=
-=80=94
-> before setup_ram_config() and setup_dest_addr(), rather than after the
-> reservations. That is a significant ordering change for every board
-> with a custom dram_init_banksize(), and it is unconditional (not gated
-> on RELOC_ADDR_TOP). Please mention it in the cover so reviewers of
-> board-specific code know to look. The Tested-by tags only cover a
-> couple of platforms.
+  3. Enable CONFIG_SYS_I2C_DW (which selects DM_I2C) and CONFIG_CMD_I2C
+     in socfpga_arria10_defconfig so the driver is actually built and
+     exercised by U-Boot's CI.
 
-I went through enough of the platforms, but didn't spot any place this
-could cause a problem. I'll mention it regardless
+The patches originate from the Altera SoCFPGA downstream tree and
+have been carried internally for several years. Tested on Arria 10
+SoCDK (sdmmc boot variant); SPL/U-Boot build clean. 'make
+savedefconfig' shows no diff introduced by these patches.
 
->
-> There is no doc/ update for RELOC_ADDR_TOP. Given the 32-bit DMA
-> hazard, a short note in doc/develop/ explaining when to enable it
-> would help platform maintainers.
+Dinesh Maniyam (3):
+  arm: dts: a10: Correct i2c scl falling time
+  i2c: designware_i2c: Remove clk disabled codes
+  configs: socfpga_arria10_defconfig: Enable I2C as default
 
-Sure
+ arch/arm/dts/socfpga_arria10_socdk-u-boot.dtsi | 5 +++++
+ configs/socfpga_arria10_defconfig              | 2 ++
+ drivers/i2c/designware_i2c.c                   | 4 ----
+ 3 files changed, 7 insertions(+), 4 deletions(-)
 
->
-> Is there any way to test this logic? We could perhaps have a sandbox
-> test which tries the various combinations of RAM banks and calls
-> functions to see what happens.
+-- 
+2.43.7
 
-It depends on how sandbox initializes from dram_init_banksize(). We
-can certianly test it with QEMU, by passing different memory layouts
-and DTs with reserved nodes.
-TBH I was trying to get this in for 2026.07, but since it's changing
-the boot process a lot, I'll aim for -next and see if i can add a
-test.
-
-Thanks
-/Ilias
->
-> Regards,
-> Simon
