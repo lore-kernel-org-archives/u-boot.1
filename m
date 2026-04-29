@@ -4,106 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CAA29FF8873
-	for <u-boot@archiver.kernel.org>; Wed, 29 Apr 2026 14:24:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D08F5FF8867
+	for <u-boot@archiver.kernel.org>; Wed, 29 Apr 2026 14:25:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6135E848BE;
-	Wed, 29 Apr 2026 16:24:17 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 64179848AA;
+	Wed, 29 Apr 2026 16:25:55 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20251104.gappssmtp.com header.i=@baylibre-com.20251104.gappssmtp.com header.b="cldBEvgG";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="kyXDtug8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BB573848BA; Wed, 29 Apr 2026 16:24:16 +0200 (CEST)
-Received: from mail-oi1-x230.google.com (mail-oi1-x230.google.com
- [IPv6:2607:f8b0:4864:20::230])
+ id 7C9EB848AA; Wed, 29 Apr 2026 16:25:54 +0200 (CEST)
+Received: from mail-ot1-x332.google.com (mail-ot1-x332.google.com
+ [IPv6:2607:f8b0:4864:20::332])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 63854848CC
- for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 16:24:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 29541848A0
+ for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 16:25:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dlechner@baylibre.com
-Received: by mail-oi1-x230.google.com with SMTP id
- 5614622812f47-479dc6d26e3so5514015b6e.0
- for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 07:24:14 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x332.google.com with SMTP id
+ 46e09a7af769-7de4e6c5a30so4866276a34.0
+ for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 07:25:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20251104.gappssmtp.com; s=20251104; t=1777472653; x=1778077453;
- darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ptfECCtQYvh4ua8cuuB/1VEb+gWvTJcNzprX90ej/1M=;
- b=cldBEvgGbHbcMW6t7v7XV+1Ua5CKAGGvPmCqfYP8My5Q42qfKDoZ4rEDjqqWWzvyKe
- XVs+ZtlnyebTwsm2QImU8JLnh5UFdYHrh8bdAhZz4eWPg85v06ETNDcISlg57faJLX3J
- hd1RA1g/rQqvTasxoaCGF3sK0eVyZjert2cDJq3C0q/sNSWylZYoExCTEDlwCHsjqs6g
- bz8K4acS9PVfUQGiHLPHo2J828BYsrAraBsw7NtWhHjmGhaa9EXr5TUgs/Pg9LT9jr33
- /oTNlsjS8sW/Luta+wYGdzhoDp/MQOKGQYJkGibc71hc3DQCSA7NzO7iIZIaDXzRTDBw
- /jbQ==
+ d=konsulko.com; s=google; t=1777472751; x=1778077551; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=QRF2WWzCoVODPZLfnTpyCFyx+tAwSbsNdvSluyYyuak=;
+ b=kyXDtug8pximWOdYQgw6/SUB3OtFs+q+Kf/V7uO3W0dhZSdp63TF6Qt+vZgbxE+e2X
+ wGb4UF/Mo8al+IezxM4haJuu+yLZqexb4yK42Y1ToE4ye+wcja4tqX2+QA5+zQ9ucvQT
+ AV9KojHW5GuyS559xKLcTSP7Hb+BrztFnMm7E=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777472653; x=1778077453;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=ptfECCtQYvh4ua8cuuB/1VEb+gWvTJcNzprX90ej/1M=;
- b=Zm3ohi5LS52vagqdp9Ica/HMu52pXbauiSvfEBMgXIauqRQWmf2wXn/So8rJn7GXy5
- C9jqzRASU5eKkGeb1jh+HkZO/a8ZJ02fO2bQRWNBsoufcbNzuTY9Mt+TBfRO9uD+C8zX
- n5MPhvF93nDIW5Q5hbiLhmAOuHerOE+ti+xc8qijsJ6SeFUKx78UDW5NfbMQ5d8eVxmx
- 92iHXXxjGkBa3cnzcz/BUwegJ7fC2ccbncqVDabPqouAxEOeWjZ0j+9ukHxYTW5oLXxc
- mISEzBhyhhgivcOlS8aqCSAlB/jM4VWBOF6U7jeoKgJwgcVX5edyzNTQeq2gpAJvoHrm
- b3Qg==
+ d=1e100.net; s=20251104; t=1777472751; x=1778077551;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=QRF2WWzCoVODPZLfnTpyCFyx+tAwSbsNdvSluyYyuak=;
+ b=nH0GD+/CBqr39cRGFCykHPBUuujGj2PD9vY81J8SzrzKf28CqY8QH1DJ+5+jp1FbE7
+ E/HQYbSA+r4GjNbOdICDzJ6YqdHMCzB7d9y392PsgfjRMi7euG7Wz1v9TYp/60anhnxv
+ zXphCDz3LmtwT0gJmCKxS5KtCx/pQUWng4u2s2uXlEORHUOqX5UtjleNbwauk5xcprZa
+ IOH3C1tumEZZOYuRB8FRM0jM9z+p/Thh7aDpaiVro7YsMN/y44OVcQecvSkdS8R55xDW
+ 2pxQimuMDctXFUgoAJiD8CRrHIos4rJFQQZ6uFdYjKyy3ghm4+XEFUnnmJfwAIi4Wx0t
+ M9+g==
 X-Forwarded-Encrypted: i=1;
- AFNElJ8su0nRIz4qRP8cx8FLYZEAsOdTclGCUwOpCXEJvfPMu8/VhLEEPwMf+Dq1tbz4xtMdw1dHZIo=@lists.denx.de
-X-Gm-Message-State: AOJu0Ywj7TrS/KQ9gUyUmJ7ciMHwvLzrj0O4sPgdWwYS/xtdg5+gYq9d
- GnG9/9Y7grEOQADFeyqNEHCk+wjN2Zp5Eg8Jubhod+raVEL9KtrI8+/Pl6NdqC4KQsw=
-X-Gm-Gg: AeBDiesBx74GkafZSLyx8HTYB8RRNxkopjc/Rennvs4Kyq3boNxjyR1/uO7viBfUKMg
- PVznZPIORKfBWhCAVVN8Gu/6ou/pX9iKwgQ0rTymB+tYttRqKxwReUuSDSyezsXexH5fzyW0chv
- CReK/Hc4Y1OMZErE7NkHXNAXFRnG3RnwdifVjxjy6O3qLiMAIrHjfheB2VucIGGQFv3o6p5sAoG
- Tea/Hb3YeDOqW7fKo1S16nVnx7EvgVVRr4ZP4ww+MAdKn6kHFMDKLdycLkJvCnfKpX6CV3fxgwU
- g0a9c17OlNW2aJ6lDAfkZZqBkHUoV+EaNeLn9SYyy8awqdFEk0QhoVX9vmJFUkzH/nc7SHkstLm
- 8vuftr3/nhVynAVo609NyNap3F1xBEKU/jGKH7DNiQLo0jqTtVI2B6g0T1wpuYILXWl1LFlfAG5
- tQdBhR8WK+jqq6qHi0JFLuB32C5p2RQFz/itEi4iE=
-X-Received: by 2002:a05:6808:e684:b0:46a:cf7e:4b5e with SMTP id
- 5614622812f47-47c3dc65957mr1455689b6e.43.1777472652990; 
- Wed, 29 Apr 2026 07:24:12 -0700 (PDT)
-Received: from [127.0.1.1] ([2600:8803:e7e4:500:1770:76c1:cfc7:3a0c])
- by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-4340e987d73sm2074676fac.14.2026.04.29.07.24.11
+ AFNElJ/wyUhzNKs0mitcP5Av4lHiR56wrTKRE4/qNKLaQytcyMZM9pK2KNC/J8BIFxTp1roAjuv7p3g=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy3SNXNsIvqLXwH+3xwPXGugfHut+zipHmDkpIDavN8JtKcIe3M
+ jCKRKE2blZKJmT42hZVMKlJ5vZ+2uGjQLSe0NKnWUVjPXsZiU0l3fwcsura84OSQUgY=
+X-Gm-Gg: AeBDievNSHmmYw+5ib6M497J3LUmKUTZqhnHumG/q2HE56qwN4/pefuH8QdoGCSs8bA
+ a8EngaRl7XiCFNphQ1XKxC+/kVjCQOEhI68PZAxW2/fnS06FlMLOIVAY5flCVYaU445RY1SEOEe
+ /QMBEAl/wNrz3bx/qgk63L4wpB3SzqDCxP2acP41+wZ5mWvpjcAuUdkTBpx5N6S+uj2/X/5bCNo
+ wtUgkIb8qGzl66BI34PDyU7uIARz6inrpk++fHPTOeiVF1DJld6J7ltVRwFYcA6JBrlEFMRl/AD
+ P5cUjZwuV+Fu60MYATeObZ7EIhZQ1IEqvLYY24hGd6iC/VnNRsNOPyY7y6SqMzrWw9d/1Gn0Fss
+ jLSik4NBFpKgP2eD6rC0p3BoUSflt30a/04fN0c3hvZG///JXzIwUzM2dVnFE8u5n7eYpL2KRo8
+ ymdZFLULuxRg8CVAtbMFCHqq5Ced/hBl7OYXrQ0xSnNzg/Ecu5g5K7R2TtezUA9YbWhchqKJg7u
+ F2nBrx2OTYH9SAal/RSL3wUqeS7BMOtJiuIc53w6ZenZFO8wOLtr/92fFk8TQ==
+X-Received: by 2002:a05:6820:160c:b0:694:9fa0:aa4a with SMTP id
+ 006d021491bc7-696684da3b9mr1869460eaf.44.1777472750771; 
+ Wed, 29 Apr 2026 07:25:50 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
+ [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-6966be5fa1fsm1249313eaf.12.2026.04.29.07.25.49
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 29 Apr 2026 07:24:12 -0700 (PDT)
-From: David Lechner <dlechner@baylibre.com>
-To: Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
- Chunfeng Yun <chunfeng.yun@mediatek.com>, 
- Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
- Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>, 
- Tom Rini <trini@konsulko.com>, David Lechner <dlechner@baylibre.com>
-Cc: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de, 
- Macpaul Lin <macpaul.lin@mediatek.com>
-In-Reply-To: <20260409-mtk-pmic-fixes-v2-0-73e83aa6345b@baylibre.com>
-References: <20260409-mtk-pmic-fixes-v2-0-73e83aa6345b@baylibre.com>
-Subject: Re: [PATCH v2 0/8] power: pmic: mtk-pwrap: add more capability flags
-Message-Id: <177747260853.2560708.16176609841938006096.b4-ty@b4>
-Date: Wed, 29 Apr 2026 09:23:28 -0500
+ Wed, 29 Apr 2026 07:25:49 -0700 (PDT)
+Date: Wed, 29 Apr 2026 08:25:47 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: Quentin Schulz <quentin.schulz@cherry.de>,
+ U-Boot Mailing List <u-boot@lists.denx.de>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Xuhui Lin <xuhui.lin@rock-chips.com>, Heiko Stuebner <heiko@sntech.de>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Sebastian Reichel <sebastian.reichel@collabora.com>
+Subject: Re: Couple of clang warnings for Rockchip boards
+Message-ID: <20260429142547.GT41863@bill-the-cat>
+References: <f8f4e639-0e73-4d14-828a-92dbfe5526ba@cherry.de>
+ <CAFLszTjWZ9DBKVui_2EE-nSg8K+5eC9V8jvwp638dLeyp_p6vw@mail.gmail.com>
+ <175e1198-2ac4-48de-b68a-c29f786832cc@cherry.de>
+ <CAFLszThQ+kyCkojFm2=VNtLTtLDYT4iVmpqnto8awiMVqsct0Q@mail.gmail.com>
+ <20260427144630.GG41863@bill-the-cat>
+ <CAFLszTgga6eFp2aPF-MzJEqeqcEV-bMJhb4_ph_bE-1Dv4e_Cg@mail.gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.16-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1550; i=dlechner@baylibre.com; 
- h=from:subject:message-id;
- bh=4VvBmnQnFU2ysqBfy1YABbuXWgZ6AqmkebNzg9EW9l4=; 
- b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBp8hSEsOmZmP2/cPVbuFhJNhED+ZB6+K7uGZbzS
- zjTM2pbmxKJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCafIUhBYcZGxlY2huZXJA
- YmF5bGlicmUuY29tAAoJEMLMIAH/AY/Ai18H/3VofeCakChCOP4Dzn3rFFROV/dXSuAURYmgjhO
- MXhiW5oUTlvL/zvlz2YP5lhZa1om6Yz4dhSObrA58mob4thQ6uV1Tsa8+EA6zDCtLGu7OYU31AY
- XKBAxlRvBHgYiYfP0h04ohu4PI5xmVdbh+yhehbgfWLp5FPMV/O7eUViE8JWsqqs0zyWCU3v59V
- MxheYXa94MSeEXI8QTvAC3DJbXzcPMZ6sXJ5EYzIHdqTEyqq9n6d1WyYaBVLSRSnacfwrHBc0u8
- NAnvNWM7a2cJ8Cg50CjUMyFrTAmhvheuttI8Rjv/zjWDjwiNs4DMRLO3OkOxEg+ucw7wmlKdGx7
- h7IU=
-X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
- fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="VQnliRVCy5ueKvE/"
+Content-Disposition: inline
+In-Reply-To: <CAFLszTgga6eFp2aPF-MzJEqeqcEV-bMJhb4_ph_bE-1Dv4e_Cg@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -120,38 +109,115 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 09 Apr 2026 15:30:32 -0500, David Lechner wrote:
-> power: pmic: mtk-pwrap: add more capability flags
-> 
-> After using the mtk-pwrap driver a bit, we noticed that there were a few
-> places where it was writing to registers that were not defined on all
-> platforms. The undefined registers are treated as 0, which is the DONE2
-> register on the affected platforms. This could cause the DONE2 register
-> to have an incorrect value, which could cause Linux to re-initialize the
-> PMIC unnecessarily.
-> 
-> [...]
 
-Applied to mediatek-for-master, thanks!
+--VQnliRVCy5ueKvE/
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-[1/8] power: pmic: mtk-pwrap: fix file description
-      commit: 0f50131f99a68b53c08c3c41c1a2e3e421d6fdad
-[2/8] power: pmic: mtk-pwrap: add PWRAP_CAP_WDT_SRC flag
-      commit: 8fac923a5f15c3edd66bde274a80612387bb7bf8
-[3/8] power: pmic: mtk-pwrap: add init capability flag
-      commit: 6fbc2ca84ec33df70a464e9a12d64115f1a2844c
-[4/8] power: pmic: mtk-pwrap: drop PWRAP_SLV_CAP_DUALIO on mt6359
-      commit: 804e6702f3b33f8cfef15cdf45aafe77661c1a23
-[5/8] power: pmic: mtk-pwrap: remove interrupt related code
-      commit: 095458ef73672857d1b09c666375679dd399e4d1
-[6/8] power: pmic: mtk-pwrap: use pmic compatible to select child info
-      commit: 5f73fe49317db5ee348ee4daeadec3c082345e04
-[7/8] power: pmic: mtk-pwrap: use tabs for alignment
-      commit: 3dede5fed1ec9847daabee87da61e162abda7ecc
-[8/8] power: pmic: mtk-pwrap: add MT8195 support
-      commit: 4ddb07e24e7a13b0b9280c7cc6e0e2c816f32d25
+On Wed, Apr 29, 2026 at 08:18:14AM -0600, Simon Glass wrote:
+> Hi Tom,
+>=20
+> On Mon, 27 Apr 2026 at 08:46, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > On Mon, Apr 27, 2026 at 11:54:09PM +1200, Simon Glass wrote:
+> > > Hi Quentin,
+> > >
+> > > On Thu, 23 Apr 2026 at 22:24, Quentin Schulz <quentin.schulz@cherry.d=
+e> wrote:
+> > > >
+> > > > Hi Simon,
+> > > >
+> > > > On 4/22/26 11:57 PM, Simon Glass wrote:
+> > > > > Hi Quentin,
+> > > > >
+> > > > > On Thu, 23 Apr 2026 at 01:26, Quentin Schulz <quentin.schulz@cher=
+ry.de> wrote:
+> > > > >>
+> > > > >> Hi all,
+> > > > >>
+> > > > >> I'm looking into force-enabling CONFIG_WERROR for all Rockchip S=
+oCs.
+> > > > >> First, let me know if this is a bad idea :)
+> > > > >
+> > > > > I don't like it, as it makes development slower. I like to see al=
+l the
+> > > > > warnings created by a change and tend to fix them iteratively. We
+> > > > > already have a warning check in CI. A better approach is to
+> > > > >
+> > > > > Can you use: KCFLAGS=3D-Werror
+> > > > >
+> > > > > either in your environment or on the 'make' cmdline?
+> > > > >
+> > > >
+> > > > Well, if it's during development, you can always disable WERROR? The
+> > > > fact that I've never actually enabled -Werror locally in about a de=
+cade
+> > > > in U-Boot probably isn't a good sign. One of the things that make me
+> > > > wary though is compiler updates with new warnings. I've tested with
+> > > > clang 22, don't know when clang 23 is planned to be released. GCC 1=
+6 is
+> > > > about to be released as well.
+> > > >
+> > > > By having the check in CI, we have a longer-than-necessary feedback=
+ loop
+> > > > for contributors. Has this been an issue in the past? /me shrugs
+> > >
+> > > This is strange though, because people should see the warnings during
+> > > development. I wonder if it is scrolling off the screen.
+> > >
+> > > One my bugbears is non-actionable output. When the build succeeds
+> > > (with no warnings) I see no output, using 'buildman -I --board xxx -w
+> > > -o /tmp/b/xxx' or in fact these days 'um build xxx'. This uses 'make
+> > > -s' under the hood, so that it doesn't print a huge list of filenames,
+> > > etc. I also sometimes do a 'fresh' build with 'um build -F xxx' to
+> > > check everything is clean ('buildman -m' does something similar).
+> > >
+> > > Note that buildman returns exit code 101 if there are any warnings, so
+> > > the build basically fails.
+> > >
+> > > >
+> > > > No defconfig seems to be setting this option, not sure exactly why =
+that is.
+> > >
+> > > To me this is a difference between 'functionality' options and
+> > > development options. Putting development options in Kconfig makes it
+> > > harder to turn them on and off, since you must either edit the
+> > > defconfig or edit the .config file. It is easier to just pass an
+> > > environment variable.
+> >
+> > The point of a configuration is that it configures the build. Stuff in
+> > environment (directly or make FOO=3Dbar) is a workaround and anti-patte=
+rn.
+> > Having to run one of the config front-end to change the config is a
+> > feature, and good thing.
+>=20
+> To give an example, we have boards which enable LTO, but it is
+> sometimes useful to disable it during development - it used to be a
+> huge time sync but something seems to have changed recently, as I
+> don't see much of a performance gap now. We don't want people
+> disabling LTO in the defconfig, though. The same applies for things
+> like V=3D1
+>=20
+> So I think there are build features which are of no use to end-users,
+> but are helpful for development. That is the distinction we have had
+> for a while and it would be a shame to lose it.
 
-Best regards,
--- 
-David Lechner <dlechner@baylibre.com>
+Yes, the LTO thing is a good example of something we shouldn't have done
+really. Outside of sandbox you cannot just disable it.
 
+--=20
+Tom
+
+--VQnliRVCy5ueKvE/
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCafIU5wAKCRAr4qD1Cr/k
+ClzRAP9ezjtknLNjFpWXxS+jFCSlDdBP5uRxpzTZWvwv5QaW7wEAiXOY+4oFdKfg
+3mU37FbckHMjSSMuGY28/qcc0IpEHgU=
+=Ztui
+-----END PGP SIGNATURE-----
+
+--VQnliRVCy5ueKvE/--
