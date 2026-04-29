@@ -4,91 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 178BDFF8873
-	for <u-boot@archiver.kernel.org>; Wed, 29 Apr 2026 14:08:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C668FF8873
+	for <u-boot@archiver.kernel.org>; Wed, 29 Apr 2026 14:09:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5F8D584872;
-	Wed, 29 Apr 2026 16:08:05 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B4DA784875;
+	Wed, 29 Apr 2026 16:09:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="TdD6H2FG";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="jQ/jrl60";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3194D84874; Wed, 29 Apr 2026 16:08:04 +0200 (CEST)
-Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
- [IPv6:2a00:1450:4864:20::52e])
+ id 0B3A684876; Wed, 29 Apr 2026 16:09:12 +0200 (CEST)
+Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
+ [IPv6:2a00:1450:4864:20::62d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 29B1584862
- for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 16:08:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E976384872
+ for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 16:09:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52e.google.com with SMTP id
- 4fb4d7f45d1cf-65c4152313fso17382651a12.1
- for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 07:08:02 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1777471681; cv=none;
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-bb662d56b5aso164665966b.1
+ for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 07:09:09 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1777471748; cv=none;
  d=google.com; s=arc-20240605;
- b=WT9FqeEaaexTmIbV9r8dZ4++amscqXUGGKAp2AHXgIdaokNjVyC8/L66IvDhE8Kzna
- iLD3nbiBPA+BndVc8/Yl0INcU/t3ocY0F/61Cpp6E7X4vCKKb9jyqDm5Hg+RieLdUz+r
- 3L1BQCjSQtbTK8j9w4ZcGMtx8fjUqwlVCJlMAeV5lZ2BCfZePSOgI06iK+GeQAb0Q+eM
- auR+3FfOMHyR0i2N4TQ9d6dGr6U+QGDxEHPGhjQfzIzDKSYKCMK0vzI1zofoniFWl8Z3
- oZRatgU06i/pN43irbkOxtmJXUR/s+eWlI1/x0jejKB9vyH46k2R9K5lZTofgA4F6ey9
- 5P7g==
+ b=HodnTEqoMitkVZfn7zUaTXfXgQPd+FU406locYFHCXKoWg1+RJnohvIhuw4l7ncUBf
+ JOSBFuDJIEr5myc3uyp5T0WBsZaD/6RhBKamVoHCpBR74LpDCYNIk/anZJKThTos+tce
+ tlAev7OU5LoYADjmgt2thAiIa9Lz6esCqDPmKBGdn5mtH7QS5GOUu133h7l+RHNQgokR
+ H1uUnIdDL/ml8MyD0mvde8HLvFLZ/eusxPfvtKhMJ2nBQ8+SFlR+1wimpKO71coH9GJb
+ /EsB91OIjQJCkeHMP59h2BwOsOPLoEP2AqSZgGsCmAqj9alFezKcExs17A9U1uWWb8QA
+ Z21A==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=25ccK4hs2UGZtdteqt6ctH/kCbQdFSIbAh/gfUx+cVQ=;
+ bh=qnZLcRv6kmDcnBqQ6TIKVBCifsbVQQfIeiVRh9Z3Wl8=;
  fh=OF00omt3W5XkTWoy8yz+VALjHs5aNJpNm30/GdQrL1I=;
- b=icFZreE0Eu6nBGvR1JypFy1ZcCnkoDbhWGIG+Wtxmw6VdrLiX1CWWvY0xmqhRHRpt4
- dJjPsbq1VFEdoi2+lY3EkIvYkN6Fc9JzQX106W4j0Ayv6e+HfXzcSV9WQnn/cps2eveY
- bjfsTXh7bVAvLfZ7WeKhrH4BSxTFferppPLKsz5Q8G/0iio6mv/uWXgMV1eLshbmn+6R
- go7t5AYacqQ9H+grnhNjWgnZDoWpfAzSV2gbFLKiHv3BHP2i3+qfqAVlZX12B6gPes9s
- rVEIFaP9n8oQFJYCdqD2eTDqR6HEimCTsRKZtR05di7CV/9ls+H2HCabnPLhOfYtJ4F/
- YIiA==; darn=lists.denx.de
+ b=DgQ64snzL0EspwuVdITt1wvdDRGJ0G3oT+f0Ii7Fuk8zjf+y5gAzIiQ2jQPGaSvPJw
+ yzp/F66M/+pKtjOuZcQP6ZI4W7s4AXqWmksXPePs+pWReH95KjN8mOWA+8Eq0wjjwuFr
+ ZDw8urz70gWWyLeday7whO0NLlXdNkhwsD8e+8d+AnExonH3brsN+BIimA5OwS8AMXFC
+ 0qMQIp66c8E3WwQ4gmNLl7Z4Ewf77B226DeYa10xOLerDJHP9uDvyhdRnA9tAN9ZM5Mx
+ LavPkF1SO9x4Xl8F5F0PSMx3nrdYjHZy2tQAOI4MdM0LwHZiKAAaRKsd881v/BkjwUIu
+ gpRw==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1777471681; x=1778076481; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1777471748; x=1778076548; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=25ccK4hs2UGZtdteqt6ctH/kCbQdFSIbAh/gfUx+cVQ=;
- b=TdD6H2FG6sqM6zmRvzc3lPcvqlVDwu+gv/vY4oxU0dcjrS4G2lWkAgP5Zw1YXpqvdY
- 9BTuEaYco3U6d1ttBLRU0EdZ2GAbeh57cZFpBwAJjjlNrWOXDM3EWHKmkFHfnbfmSVcm
- TAXROH6iuECKYyy/w36YLFsg0+AkRojUjoRng=
+ bh=qnZLcRv6kmDcnBqQ6TIKVBCifsbVQQfIeiVRh9Z3Wl8=;
+ b=jQ/jrl60mNa8xYyiCHGY7CFfuj9UTWOB++HEfZCMCg3xy/tG4xD9TC/7NaMoGxkNxw
+ 75k8t7R56VknyzibOZ3U71DsO29qjsukOHYRYw1yF9U3QvfqNru2gqVvXCmMU2hPnJ2T
+ GNwILVY7fyHfvEH4HuZFzyNZIFodbnTA7wa0I=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777471681; x=1778076481;
+ d=1e100.net; s=20251104; t=1777471748; x=1778076548;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=25ccK4hs2UGZtdteqt6ctH/kCbQdFSIbAh/gfUx+cVQ=;
- b=Xu4JTiy1JW5l7isQjHHGefv1y6F1qsPCuDysMZ7bI67oysAkjisnleiZuTV/sfgKH9
- +3uDxVAfrcHF6f/nayzjin1duzjJlvWqFL9th6LUmDdOEzR2+de+etz21pnmA/hsnmCI
- cxhaepUxT0JOURdndlrd3zQ+C70XlSXz6f/rFmTt1LUogU2NOP4S6GNOKF4InmFjJOHo
- dKvcWGuK2nPxMBiujDj2d7N/h68HnejWifnvqaTbgy+689kB443Yvl9kqnFdQK1k1Iai
- 6QJWMY2x98ZL4QFRrfjpjzTLiFK9B5nFqiRl1EMPDozvkctrqouUsNKP6hLN4JzsfFWm
- ruPw==
-X-Gm-Message-State: AOJu0YxnQVI8nqWVcZZCAvGsBSQTnTv6Ta7FxTq1uOkeuqh1Pq2wDXKK
- P9sDQf0GcIDOzDO4uyYv/zG09I6fD61q00itZFikxX1S0gNRXw+z5JbE6hjf9A+Q1bUOMvE0Ka4
- mtsfV+g3B+evgBfBVKHOhS9OkZ7ejAhrOhhWvzf+Y
-X-Gm-Gg: AeBDieshVDYnlDV9nOHoEaAvK+WiCX6ebxzvyy3CnVONKvS8IjAHQu3rjVWuVxMZ4//
- KYxajAGG2APlAjIMnBozAyJ6Sqk0Kxygx9prC7jI2PFwds3HgrtoFtqZC+H/msje5OcjyBuO3JJ
- F0QIFyFq4nenEo3DHdITvk+yrZ23G3/zb7FN5xCrG/MnORVTcNc0j20D2UVCChsVQe1PUFkBEE4
- smJV6Xm+Po+zIBXqgUsrNnr0sBp98LGXzRhVIcx1795CFHYhIHPxOyudvOpwG2M/BHlV6LEUDzc
- EEvZXzHURjEv1ARx
-X-Received: by 2002:a17:907:84c:b0:ba5:bef2:2aa9 with SMTP id
- a640c23a62f3a-bb804c31c08mr453657366b.35.1777471681535; Wed, 29 Apr 2026
- 07:08:01 -0700 (PDT)
+ bh=qnZLcRv6kmDcnBqQ6TIKVBCifsbVQQfIeiVRh9Z3Wl8=;
+ b=jIktw/rN4A0lPRHJZMfr4qnqiN4aM7Lup1pm6mF5bJpTuxeO2596WAzGyZP1Mr2XmM
+ KJBwVE75mYGPAc4HDiew4HDdDFgkbR9Bl1SlnBU+TyhFTMqqZyYSIF/OBpEXwBfHaDtc
+ 51OUsWm/kOnCuzDXVt1BYoFRx/qrCag4AGBWMDcXJeOdsHc1IQp67BK0xAr5OwMEi24q
+ q91Jx2W+DWRW5HCAmdtk6kNuQXwn/QekWwEXz8cLgypHOnEggxCvMLcRJNA4mgNyaZAL
+ y6CV8PbOPRjCOSjj3w9ml6jHx1YMJlVDR9/Aw18HtszqWDjcrUzqUhmD++66f8rL2s1L
+ RYEQ==
+X-Gm-Message-State: AOJu0YxoywTv69hYbaXDM6nfxtM6kTCeOKN9w2Zk3DD+ELsEg6GFi+d0
+ vCp7zZDoppn/k8L9LajU83G9ZTD/5zQkSrOygQ5ttEbuA61U1kwob4mdvMct2v6qPVVeh43BSFX
+ LXSy9K++LTWiJX9BLNHdkXOLm6eW49iOAW4EI2MOu
+X-Gm-Gg: AeBDiev1xU1m4g5E3TiPyhrQdZdG47BW/FsEtrm8a0EN3vQdmjA2VHEAFKqRL4tLrUK
+ A1/veO5KAG4HfhezeEWHvJ2yJoBe4NTdtSNPudTb474jAorbMFzh3k+iRk+euHg/9UjKDo3/DyZ
+ uZiskPchZyticMf4ptfj6IhIt4GQ7GIRHpRBi0AcpmYJyPbVS75Az3JW1V+z80FHisVCck6+3zL
+ CbRRynibagCCB5capvfnjbV6hOJtQQ43O+MV3ANRODs6FkwwsBl1bISP6ttcZPrpCBqPJmzvOfQ
+ CF6kzyD/gXTpeeIr
+X-Received: by 2002:a17:907:6eab:b0:ba3:bc3e:d5f3 with SMTP id
+ a640c23a62f3a-bb969ebd0ffmr179912366b.5.1777471748189; Wed, 29 Apr 2026
+ 07:09:08 -0700 (PDT)
 MIME-Version: 1.0
 References: <cover.1776954004.git.jcethrid@gmail.com>
- <7771d2ff3f10bcb9a2453849b51a195f9301bc21.1776954004.git.jcethrid@gmail.com>
-In-Reply-To: <7771d2ff3f10bcb9a2453849b51a195f9301bc21.1776954004.git.jcethrid@gmail.com>
+ <39d4e7e75c543754563f36b265ae584889211d57.1776954004.git.jcethrid@gmail.com>
+In-Reply-To: <39d4e7e75c543754563f36b265ae584889211d57.1776954004.git.jcethrid@gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 29 Apr 2026 08:07:49 -0600
-X-Gm-Features: AVHnY4INJrk1oBFv5Zg6RWUC373na6pgpTVpGVVXtk_G7wuM2gb1YwKflXVpcdM
-Message-ID: <CAFLszTgG1+cW+1-uKnkX8w0pY4Y=S=EPwCSxdc-q2BXrEGm9xw@mail.gmail.com>
-Subject: Re: [PATCH v5 03/15] mach-sc5xx: Update boot commands
+Date: Wed, 29 Apr 2026 08:08:56 -0600
+X-Gm-Features: AVHnY4LyiHDPYZ7Xx63gpWAVA-j_fcj4EKvp--qqVZdA0KL-PXsBEIJK4Ym4CqY
+Message-ID: <CAFLszTjEgzORULHxybLqDRyOFWaz5O4ka7KmhoX0BHk51pNUiQ@mail.gmail.com>
+Subject: Re: [PATCH v5 04/15] mach-sc5xx: Switch from tftp to wget
 To: jcethrid@gmail.com
 Cc: u-boot@lists.denx.de, malysagreg@gmail.com, trini@konsulko.com, 
  linux@analog.com, philip@philipmolloy.com, sjg@chromium.org, 
@@ -113,81 +113,50 @@ X-Virus-Status: Clean
 Hi Caleb,
 
 On 2026-04-23T14:24:50, Caleb Ethridge <jcethrid@gmail.com> wrote:
-> mach-sc5xx: Update boot commands
+> mach-sc5xx: Switch from tftp to wget
 >
-> Update the default boot commands to match the expected
-> bootargs in Linux and new SPI partitioning scheme.
+> Switch the nfsboot and other relevant commands to use
+> wget instead of tftp. This also includes the addition of
+> the httpdstp variable for selecting the wget port.
+>
+> The default port is set to 8000 instead of the usual 80
+> to allow for use with an unprivileged web server.
 >
 > Signed-off-by: Caleb Ethridge <caleb.ethridge@analog.com>
 >
-> board/adi/sc573-ezkit/sc573-ezkit.env           |  2 +-
->  board/adi/sc584-ezkit/sc584-ezkit.env           |  2 +-
->  board/adi/sc589-ezkit/sc589-ezkit.env           |  2 +-
->  board/adi/sc589-mini/sc589-mini.env             |  2 +-
->  board/adi/sc594-som-ezkit/sc594-som-ezkit.env   |  2 +-
->  board/adi/sc594-som-ezlite/sc594-som-ezlite.env |  2 +-
->  board/adi/sc598-som-ezkit/sc598-som-ezkit.env   |  2 +-
->  board/adi/sc598-som-ezlite/sc598-som-ezlite.env |  2 +-
->  configs/sc573-ezkit_defconfig                   |  1 -
->  configs/sc584-ezkit_defconfig                   |  1 -
->  configs/sc589-ezkit_defconfig                   |  1 -
->  configs/sc589-mini_defconfig                    |  1 -
->  configs/sc594-som-ezkit-spl_defconfig           |  1 +
->  configs/sc594-som-ezlite-spl_defconfig          |  1 +
->  configs/sc598-som-ezkit-spl_defconfig           |  1 +
->  configs/sc598-som-ezlite-spl_defconfig          |  1 +
->  include/env/adi/adi_boot.env                    | 16 ++++++++++------
->  17 files changed, 22 insertions(+), 18 deletions(-)
-
-> diff --git a/configs/sc594-som-ezkit-spl_defconfig b/configs/sc594-som-ezkit-spl_defconfig
-> @@ -74,3 +74,4 @@ CONFIG_SPL_TIMER=y
->  CONFIG_USB=y
->  CONFIG_USB_DWC2=y
->  CONFIG_USB_STORAGE=y
-> +CONFIG_SC5XX_LOADADDR=0xA2000000
-
-Adding CONFIG_SC5XX_LOADADDR to the four sc594/sc598 SPL defconfigs
-seems like it doesn't relate to "update boot commands" - maybe have
-its own patch.
+> include/env/adi/adi_boot.env | 11 +++++------
+>  1 file changed, 5 insertions(+), 6 deletions(-)
 
 > diff --git a/include/env/adi/adi_boot.env b/include/env/adi/adi_boot.env
-> @@ -40,23 +40,27 @@ nfsboot=run init_ethernet;
->  #if defined(USE_SPI) || defined(USE_OSPI)
-> -spiargs=setenv bootargs root=/dev/mtdblock4 rw rootfstype=jffs2 ${adi_bootargs}
-> +#if defined(USE_SPI)
-> +spiargs=setenv bootargs root=/dev/mtdblock4 rw rootfstype=jffs2 ${adi_bootargs}; setenv sfdev CONFIG_SC_BOOT_SPI_BUS:CONFIG_SC_BOOT_SPI_SSEL
-
-Cramming setenv sfdev onto the end of spiargs makes the variable name
-confusing - I'm not sure if there is a better way.
-
-> diff --git a/include/env/adi/adi_boot.env b/include/env/adi/adi_boot.env
-> @@ -40,23 +40,27 @@ nfsboot=run init_ethernet;
->  spiboot=run spiargs;
->       sf probe ${sfdev};
-> -     sf read ${loadaddr} ${adi_image_offset} ${imagesize};
-> +     sf read ${loadaddr} ${adi_image_offset} 0xF00000;
+> @@ -27,15 +28,14 @@ adi_bootargs=EARLY_PRINTK console=ttySC0,CONFIG_BAUDRATE vmalloc=512M
+>  /* Boot modes are selectable and should be defined in the board env before including */
+>  #if defined(USE_NFS)
+> -// rootpath is set by CONFIG_ROOTPATH
+>  nfsargs=setenv bootargs root=/dev/nfs rw nfsroot=${serverip}:${rootpath},tcp,nfsvers=3 ${adi_bootargs}
+> -nfsboot=run init_ethernet;
+> -     tftp ${loadaddr} ${tftp_dir_prefix}${imagefile};
+> -     run nfsargs;
+> +nfsboot= run nfsargs;
+>       run addip;
+> +     wget ${loadaddr} ${serverip}:/fitImage;
 >       bootm ${loadaddr}
 
-Hardcoding 0xf00000 (please use lower case) loses the previous
-${imagesize} indirection - please explain in the commit message why a
-fixed read length is correct for every board if needed. Also the new
-ospiboot is now a verbatim copy of spiboot with only sfdev differing -
-previously it was a one-line 'run spiboot'. Don't you want to keep the
-de-duplication, e.g. by setting sfdev in ospiboot and then 'run
-spiboot' ?
+A few thoughts:
 
-> diff --git a/include/env/adi/adi_boot.env b/include/env/adi/adi_boot.env
-> @@ -40,23 +40,27 @@ nfsboot=run init_ethernet;
-> -mmcargs=setenv bootargs root=/dev/mmcblk0p1 rw rootfstype=ext4 rootwait ${adi_bootargs}
-> +mmcargs=setenv bootargs root=/dev/mmcblk0p2 rw rootfstype=ext4 rootwait ${adi_bootargs}
->  mmcboot=mmc rescan;
-> -     ext4load mmc 0:1 ${loadaddr} /boot/${imagefile};
-> +     ext4load mmc 0:1 ${loadaddr} /fitImage;
+1. Dropping init_ethernet is a behavioural change: there is no longer
+a dhcp or setenv serverip ${tftpserverip} before the wget. wget will
+not auto-DHCP, so a user with no static IP will see this fail. Either
+keep a network-bring-up step or call this out explicitly in the commit
+message.
 
-The shift from mmcblk0p1 to mmcblk0p2 silently changes the on-disk
-layout assumption - please mention this in the commit message so users
-updating from older builds know they need to repartition. Same for
-dropping ${imagefile} in favour of a hardcoded /fitImage path.
+2. 'nfsboot= run nfsargs;' has a stray leading space after '=' (same
+in 'ramboot= wget ...' below). Please drop it.
+
+3. The image path is now hard-coded to /fitImage instead of
+${tftp_dir_prefix}${imagefile}. The commit message suggetss this is a
+pure tftp->wget switch, but it also removes the user-configurable
+filename/prefix. If that is intentional, please say so; otherwise keep
+${imagefile} and let boards override it.
 
 Regards,
 Simon
