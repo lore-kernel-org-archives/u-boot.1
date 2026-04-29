@@ -4,51 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B235FF8867
-	for <u-boot@archiver.kernel.org>; Wed, 29 Apr 2026 10:35:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A690FF8867
+	for <u-boot@archiver.kernel.org>; Wed, 29 Apr 2026 10:36:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5D82684852;
+	by phobos.denx.de (Postfix) with ESMTP id 8DD928485A;
 	Wed, 29 Apr 2026 12:35:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=0leil.net header.i=@0leil.net header.b="jYEo8aef";
+	dkim=pass (2048-bit key; unprotected) header.d=0leil.net header.i=@0leil.net header.b="QPdxGS19";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7234484836; Wed, 29 Apr 2026 12:35:20 +0200 (CEST)
-Received: from smtp-42ab.mail.infomaniak.ch (smtp-42ab.mail.infomaniak.ch
- [IPv6:2001:1600:7:10::42ab])
+ id 230DB8483E; Wed, 29 Apr 2026 12:35:21 +0200 (CEST)
+Received: from smtp-8fa9.mail.infomaniak.ch (smtp-8fa9.mail.infomaniak.ch
+ [83.166.143.169])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C6E4584836
- for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 12:35:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0799384848
+ for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 12:35:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=foss+uboot@0leil.net
 Received: from smtp-4-0000.mail.infomaniak.ch (smtp-4-0000.mail.infomaniak.ch
  [10.7.10.107])
- by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4g5DGC60WFzCCs;
- Wed, 29 Apr 2026 12:35:15 +0200 (CEST)
+ by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4g5DGF5FzKzCrF;
+ Wed, 29 Apr 2026 12:35:17 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=0leil.net;
- s=20231125; t=1777458915;
- bh=4uywroN9PVnqErnP9mV025LuSI5epUWA0OmnBuQ81E0=;
+ s=20231125; t=1777458917;
+ bh=B15bT149NZ1gEGqcciEaPwYruyNJAqGD3R4MtlYDjsU=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
- b=jYEo8aefdl4j1WOQhaN8WE2hAvQ+tqU47PXQuHX9L9AnYRxEzvmkbXzqWaXljsUlf
- jKpUmq/ZOKoR7oroQd3wRAUJgvptoGQhqU0kM9Bpme8iyJlf6x0BQ/H1dDY+NmtxJ3
- 6Imk1TmWwqcpN1qocefU7iJlrScK7yHx9JriQZTzbfphcATH5ctpTlz/+OAVOl2uDs
- 5mPdY71qma23LOLSstFLrDv3ftFk6awoBl8i0LtzztPMRLrv1BZ65lB6t727TNIUO4
- wZPUyeF5ADhr6UdUaNBkbm4v4HDn2MKDdzjhoFaHNziB0ct+JEbB8K39/8HOPM2RAH
- s4SJZCwCAOjEw==
+ b=QPdxGS19bRZxoQY/b+IU3S4DGMUjw9yoN7PykSjvWjimT74t8GCeIT9dWTWmvIn30
+ RkTUEemtRmO6fKclHc6hlDkop91B5MBEyFbbjByJ73JWSliMSSnoiehRA/Cb3ck1kY
+ 3KsOtRaNiGfxlnezN5CAW47yY36uuBdJP9hp4wBfN1POG2zefS6ovCO2XegSsyufLK
+ 1wXq/TviqG0CYRfSdUlx+/DL9n3wpDbFXE7zlb9LnjB3scVcTGGqO34IDE93pYlGtf
+ qQyDh/plZuRnQ9SZm3gmGg3l92iPwOVz0frQ0qHeZ1OfZ53d8CuCuGqVrjbEcwyyim
+ HXJ3uyUStCaKA==
 Received: from unknown by smtp-4-0000.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4g5DGB6L18zXtg; Wed, 29 Apr 2026 12:35:14 +0200 (CEST)
+ id 4g5DGD4tSkzYX6; Wed, 29 Apr 2026 12:35:16 +0200 (CEST)
 From: Quentin Schulz <foss+uboot@0leil.net>
-Date: Wed, 29 Apr 2026 12:35:03 +0200
-Subject: [PATCH RFC next 3/5] net: tsec: make tsec_private a private structure
+Date: Wed, 29 Apr 2026 12:35:05 +0200
+Subject: [PATCH RFC next 5/5] net: SYS_RX_ETH_BUFFER defaults to 8 when
+ CONFIG_FSL_ENETC=y
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260429-sys_rx_eth_buffer-no-net-v1-3-396ef37ae93c@cherry.de>
+Message-Id: <20260429-sys_rx_eth_buffer-no-net-v1-5-396ef37ae93c@cherry.de>
 References: <20260429-sys_rx_eth_buffer-no-net-v1-0-396ef37ae93c@cherry.de>
 In-Reply-To: <20260429-sys_rx_eth_buffer-no-net-v1-0-396ef37ae93c@cherry.de>
 To: u-boot@lists.denx.de
@@ -81,76 +82,38 @@ X-Virus-Status: Clean
 
 From: Quentin Schulz <quentin.schulz@cherry.de>
 
-Move the definition of tsec_private within the only file that makes use
-of it.
+drivers/net/fsl_enetc.h specifies ENETC_BD_CNT "buffer descriptors count
+must be a multiple of 8". This constant is set to
+CONFIG_SYS_RX_ETH_BUFFER which defaults to 4.
 
-This adds the benefit of include/tsec.h not referencing PKTBUFSRX (which
-is set to CONFIG_SYS_RX_ETH_BUFFER, which we're trying to move to be
-under CONFIG_NET dependency) anymore. Considering drivers/net/tsec.c is
-only built if CONFIG_NET=y, this is fine.
+All defconfigs enabling CONFIG_FSL_ENETC fortunately have it set to 8,
+according to
+./tools/qconfig.py -l -f CONFIG_FSL_ENETC '~CONFIG_SYS_RX_ETH_BUFFER=8'.
 
+Let's make sure the default is sane by having it set to 8 when this
+driver is enabled. Note that originally[1] it was said EEPRO100 and 405
+EMAC should be 8 or higher. 405 (PPC405?) support seems to have been
+dropped in commit b5e7c84f72ee ("ppc4xx: remove ASH405 board"), 11 years
+ago. Maybe there's something we can do for EEPRO100 though?
+
+[1] commit 53cf9435ccf9 ("- CFG_RX_ETH_BUFFER added.")
 Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 ---
- drivers/net/tsec.c | 17 +++++++++++++++++
- include/tsec.h     | 17 -----------------
- 2 files changed, 17 insertions(+), 17 deletions(-)
+ net/Kconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/drivers/net/tsec.c b/drivers/net/tsec.c
-index bd4ebdd745a..d03368b9408 100644
---- a/drivers/net/tsec.c
-+++ b/drivers/net/tsec.c
-@@ -37,6 +37,23 @@
- 		)
- #endif /* CFG_TSEC_TBICR_SETTINGS */
+diff --git a/net/Kconfig b/net/Kconfig
+index 171a88f8ed2..80f0872e0f5 100644
+--- a/net/Kconfig
++++ b/net/Kconfig
+@@ -281,6 +281,7 @@ config TFTP_BLOCKSIZE
  
-+struct tsec_private {
-+	struct txbd8 __iomem txbd[TX_BUF_CNT];
-+	struct rxbd8 __iomem rxbd[PKTBUFSRX];
-+	struct tsec __iomem *regs;
-+	struct tsec_mii_mng __iomem *phyregs_sgmii;
-+	struct phy_device *phydev;
-+	phy_interface_t interface;
-+	struct mii_dev *bus;
-+	uint phyaddr;
-+	uint tbiaddr;
-+	char mii_devname[16];
-+	u32 flags;
-+	uint rx_idx;	/* index of the current RX buffer */
-+	uint tx_idx;	/* index of the current TX buffer */
-+	struct udevice *dev;
-+};
-+
- /* Configure the TBI for SGMII operation */
- static void tsec_configure_serdes(struct tsec_private *priv)
- {
-diff --git a/include/tsec.h b/include/tsec.h
-index 153337837a9..f5ced38f3fc 100644
---- a/include/tsec.h
-+++ b/include/tsec.h
-@@ -350,23 +350,6 @@ struct tsec_data {
- 	u32 mdio_regs_off;
- };
- 
--struct tsec_private {
--	struct txbd8 __iomem txbd[TX_BUF_CNT];
--	struct rxbd8 __iomem rxbd[PKTBUFSRX];
--	struct tsec __iomem *regs;
--	struct tsec_mii_mng __iomem *phyregs_sgmii;
--	struct phy_device *phydev;
--	phy_interface_t interface;
--	struct mii_dev *bus;
--	uint phyaddr;
--	uint tbiaddr;
--	char mii_devname[16];
--	u32 flags;
--	uint rx_idx;	/* index of the current RX buffer */
--	uint tx_idx;	/* index of the current TX buffer */
--	struct udevice *dev;
--};
--
- struct tsec_info_struct {
- 	struct tsec __iomem *regs;
- 	struct tsec_mii_mng __iomem *miiregs_sgmii;
+ config SYS_RX_ETH_BUFFER
+         int "Number of receive packet buffers"
++	default 8 if FSL_ENETC
+         default 4
+         help
+           Defines the number of Ethernet receive buffers. On some Ethernet
 
 -- 
 2.54.0
