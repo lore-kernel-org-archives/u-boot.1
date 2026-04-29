@@ -4,99 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4B46FF8864
-	for <u-boot@archiver.kernel.org>; Wed, 29 Apr 2026 08:50:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C16EFF8867
+	for <u-boot@archiver.kernel.org>; Wed, 29 Apr 2026 08:50:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B873184836;
-	Wed, 29 Apr 2026 10:50:15 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1D523847C3;
+	Wed, 29 Apr 2026 10:50:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="K3vw3H+1";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="BFnOxrn8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8AC3E84839; Wed, 29 Apr 2026 10:50:12 +0200 (CEST)
-Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
- [IPv6:2a00:1450:4864:20::331])
+ id 5599B84712; Wed, 29 Apr 2026 10:50:25 +0200 (CEST)
+Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
+ [IPv6:2a00:1450:4864:20::333])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3D31F84701
- for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 10:50:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 254EA847C3
+ for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 10:50:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-4852a9c6309so111556545e9.0
- for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 01:50:09 -0700 (PDT)
+Received: by mail-wm1-x333.google.com with SMTP id
+ 5b1f17b1804b1-48334ee0aeaso126002385e9.1
+ for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 01:50:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1777452609; x=1778057409; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1777452622; x=1778057422; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=tP8S2vCnPUOTHCdSLjF83sI5WzpncuQq+LerM+aCeQI=;
- b=K3vw3H+1wHXouhbU5bnXIQ0ZBylRYL9qKpABE3HThGIGNJOE6F5qUDY/s9BXDoADom
- 8WpAPLR4ahdveVkoBZ6nb6ldpyh6q0SwkbZtCcEZuamiVrm+z+IaKPqNOA5FXyG4AZrE
- y1vtECQBDc6It+N/htTfKM5LEri3P5Pa+mbAK0D9EpkVHIqAnJI4tcy6MmyKayipQQqv
- fu8G4k5uP896JTMZ9V/UTReIHKpIsGrP2o2UJUUL/pm6/50Y1mLAt2R9vWuJcoTqwfFJ
- rY4PizwZYFJt7h//SRlcdX9fYCFajU5LKs2dFm5gNP/LICSSwP/CLLXYTcPVaXWdt5Rv
- bCZQ==
+ bh=gXiswBwjfJN5UHPIIUzkHSv3u4FjAaBgmiudyaPDMk4=;
+ b=BFnOxrn8wZNqejX5c0vTbx7dRL8LqdOrbS9Nvf6+SdocNcUE5XAqZIlunPcZXf2TCw
+ RbvZf9EtZPVezxsRgLM7e/gV6VMy42PrQHFfabzsYWiLTd5oBFCuESTohZ3dQK7Si9j2
+ DRPcHOr/2PW5SaqQBigl2Aj7PrO7j/Fgu/TbEDFe1fMZFbMpo9Ij5wXUgpx8AipRhl8t
+ dWJY2R3deqemn7JrTfwKILTZ2L1znS3T+60b9/NdciKoNEy0jR8KMNTeUcsluUSSq1oM
+ ZmQ8c3iHtVek9L4t60xSXnVrIhz0k6XOhsy7B5agUiueQsnIfATxhZSVlBbtDrtkXwPY
+ Dmrg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777452609; x=1778057409;
+ d=1e100.net; s=20251104; t=1777452622; x=1778057422;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=tP8S2vCnPUOTHCdSLjF83sI5WzpncuQq+LerM+aCeQI=;
- b=OKHTHtMNjlGct8IIZzzCvEAP1v4D9M6Ii8B5k26tYmVtHTCQoIWJlZWKpYJqHwIsqF
- q4kQ4EacUNo/CEkDdiORiTvBfLnByN3AenVw+kp9Wyj4VbLuEwa/8ZFAPjRKT4ilgHe9
- H0ZqtPW8nU4QmTCPvgIQyp3g7a1dmBOqhp1hLXyUK/gJfWVyon6v7VW9Ok35sHXesAg+
- whRlZSqHwrxuGA1aZeGsCMg+djnZaPUB9It1JlPqGYvCgBhLQ+KFLJkJhNu0Tpxjt4B7
- ZX/VphADhBLbR4igMJdHmAynRn0O+ca5HYfBx28ygc8toL85Zv1QrNDKzj1LHPKTQajg
- 3Elw==
-X-Gm-Message-State: AOJu0Yx4iqO+76eGMZPX3EShbjJOdDPwgzAsRMTfgJ3MNAJPJvCCwNf5
- 5qQ+lrLdbHm3CcktLjT7KsA7+AFIOs2JApJ/iUQ3ziSNzuoi9+rwAr9JNh6Tk34Rno0=
-X-Gm-Gg: AeBDievZyqOHi8Z221H/VQfqSlVI5h2QZAyTjDPGBHBv32pfL9fO0PREThF1hya8LHd
- sCQrilWFfMOjUBICaUyOXo5BMGPVUZm2OzTdMh6w7DEbUarRUDo86HNTZ04f5EUmSDQOkLQE4Dw
- CUTp/f4c95k3FRAiu1QZWvQ3OnTDoq0jTuAm/DwlyPN1oLlOpr0eXfjbjDK4RHV6Lmdtu4njUCm
- 8ZyZ0Dw0I2eHwpmmYsO8km/eswmTlFX1R+NUOoQ6BTmNEFmmZ1dcweP2e8gaZg2Vgu1DyrM152o
- 5g+RVE1z6mbFsSJaU6AM1ajBRC+lMZO7rmWypQgGO1zUmJwT/3D3j2Yk0KWYrQvbw0Dj+ZvbQ5I
- d7EzLEHuvX54IlgukcXAXvygh//qARZCg6dF4pXHgOYkvNjIqJVuko+lB5qy0Eaksi3iXbM3K5h
- pUy6pVEUbGfVxfbSw9LjIVdLt2pTxk1IvR7zmoCTBk3ZGlOrSCFWNQrCzkdCt3q97XtfFRoO/ss
- CgT+A0=
-X-Received: by 2002:a05:600c:30d3:b0:485:3ff1:d5ed with SMTP id
- 5b1f17b1804b1-48a782dbab7mr56656825e9.1.1777452608904; 
- Wed, 29 Apr 2026 01:50:08 -0700 (PDT)
+ bh=gXiswBwjfJN5UHPIIUzkHSv3u4FjAaBgmiudyaPDMk4=;
+ b=RILbaRdfpOwshzd/hMNJwppnPqzkZjtvalwUenEyZa8kp+XpP3HRw2EXc+0LyzMJci
+ i37ZATDSjeJ2IC/jSiRniv58AE9CkCmwpiz3TUS8vWUCpMpKKn3SJAq+QiUJ2C5zN5Kr
+ UdirPnSADlsBrmF86+B7XJ7+MhqTCQqSmNrIqinc9g9+TD3QhbfWojnc3Z0S8DiY9jks
+ o/0PbPSwtGdeu3cPR6V5PO8eCqvF2zJIa6wxu041Yp8I6RyVHZPeF68IoQz2msKitjlQ
+ 4/lRIze/Rq3kTjtg5Yc/rPLend1enf9TNL6adjwObzhwjJqpmBUw1cjv4EKR0e3fXhEG
+ 9EDg==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ9T/pKcwzngmtGozIPcSNWs4MY5ME+K+QUrK8np/Lo7cYJ8FOB1N4qXbQra7SBe+E0PiehtNaE=@lists.denx.de
+X-Gm-Message-State: AOJu0YxsJ/8f30wU9GamlsU1PGWgxL9Uvv9q3l2eRA91ccd9MQAHe4Eu
+ 0FeHk7aVqI29+Xe9jpVGxZdMdYt0MBhVPeFvvCQfFAF7sBJq7XCQPPhJbO+ddB66U2Q=
+X-Gm-Gg: AeBDievgE6USjer4G4mwp6welYfHxkkrFLF2Kr33l9ZsoNyiHTW4GGRm03aINqKSWMS
+ EZsaNfKONvFd6Hzlv28y1ntom8FZXAfkSYeXie2hEiT0ruPdAETi/K6rq3OWZvx/GKon8GkC+Oi
+ u1g7Ct9rLrS56ZRhRICKWaNixtMfoRaOgIsVCz14zQkIoy1b2rELXUJH3cnuAIF0/peTsoiiS7H
+ sBl3fHA1ViTCKqVwlDWbYfEXHfvzwZFK6bhH9D+BCMnR2eNTT6ZYpx7sSXYIVRxh+A+9zuO7wdK
+ hr5BSW6y5izP/xMBf3c1bAyhUbB0wInTBfLBdQzSjTExzBaqQM/L+Aid94JOrI1DRDmo0gNxV6x
+ 5bCc03HENgJ0kU1coYf7YmASdUyi2ozB9siURS+KM9T2RSTv9ZxVNK47DuJbDpZbtqG4B7vMLHf
+ kc02Y/EkC6P8DL2yqOSQoO8Z8CVkV2Jj4DCunLRPxx0Q1lnEDrDZxt5pyBeZMULiEu+YRxbFO6t
+ q0AR5M=
+X-Received: by 2002:a05:600c:a119:b0:488:b8bc:6a32 with SMTP id
+ 5b1f17b1804b1-48a7b5473c7mr36832405e9.23.1777452622478; 
+ Wed, 29 Apr 2026 01:50:22 -0700 (PDT)
 Received: from lion.localdomain (p4fc3dd86.dip0.t-ipconnect.de.
  [79.195.221.134]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-48a7c2f2eb8sm21729005e9.6.2026.04.29.01.50.07
+ 5b1f17b1804b1-48a7c326873sm13923465e9.34.2026.04.29.01.50.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 29 Apr 2026 01:50:08 -0700 (PDT)
+ Wed, 29 Apr 2026 01:50:21 -0700 (PDT)
 From: Casey Connolly <casey.connolly@linaro.org>
-To: u-boot@lists.denx.de, u-boot-qcom@groups.io, 
- Aswin Murugan <aswin.murugan@oss.qualcomm.com>
-Cc: trini@konsulko.com, sumit.garg@kernel.org, jh80.chung@samsung.com, 
- peng.fan@nxp.com, neil.armstrong@linaro.org, tien.fong.chee@altera.com, 
- miquel.raynal@bootlin.com, msp@baylibre.com, 
- alif.zakuan.yuslaimi@altera.com, balaji.selvanathan@oss.qualcomm.com, 
- w.egorov@phytec.de, varadarajan.narayanan@oss.qualcomm.com, 
- rui.silva@linaro.org, ilias.apalodimas@linaro.org, me@samcday.com, 
- marek.vasut+renesas@mailbox.org
-In-Reply-To: <20260213111009.1254360-1-aswin.murugan@oss.qualcomm.com>
-References: <20260213111009.1254360-1-aswin.murugan@oss.qualcomm.com>
-Subject: Re: [PATCH v8 0/4] Add QCOM RPMH Power Domain Driver Support
-Message-Id: <177745260108.126665.6273956382353740536.b4-ty@b4>
-Date: Wed, 29 Apr 2026 10:50:01 +0200
+To: Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io, 
+ u-boot@lists.denx.de, Antony Kurniawan Soemardi <linux@smankusors.com>
+Cc: Tom Rini <trini@konsulko.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, Sam Day <me@samcday.com>, 
+ Sughosh Ganu <sughosh.ganu@arm.com>, George Chan <gchan9527@gmail.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, phone-devel@vger.kernel.org
+In-Reply-To: <20260217-qcom-fdt-overlay-v1-1-d0fa0e70d738@smankusors.com>
+References: <20260217-qcom-fdt-overlay-v1-1-d0fa0e70d738@smankusors.com>
+Subject: Re: [PATCH] mach-snapdragon: allocate memory for DT overlays
+Message-Id: <177745261543.126665.11547624657879722362.b4-ty@b4>
+Date: Wed, 29 Apr 2026 10:50:15 +0200
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
 X-Mailer: b4 0.16-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1280;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=554;
  i=casey.connolly@linaro.org; h=from:subject:message-id;
- bh=cHwaDmjlYwnrDH4mvDLNh4d7pAA/r2kAUXi+VE60c/Q=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhsyPx+zjTzRd/LlnxkVb7YrrucvlM1/1ubncd3nZFbqhM
- uKw5Zu8jlIWBkEOBlkxRRbxE8ssm9ZettfYvuACzBxWJpAhDFycAjCRzZ6MDMs/S73Z9OnmwXv8
- njHv5ZbJflq8bNO/zNW7igUN/3//OruN4TfrWUZG32knI4qbO/o6vvElWf/VTmD0DjvsttniTOJ
- Ek1gA
+ bh=V5gwdc39n8AjwUInVNfi/JKLV76E69c7Ygir2k1Dvaw=;
+ b=kA0DAAgReTBFn7kwMhcByyZiAGnxxk2gNp7r1VLDXNSk/oPihjpKOvbcmwNOhFb9ZCU9+sgNr
+ Yh0BAARCAAdFiEEF8imOYKt0z8ot6DQeTBFn7kwMhcFAmnxxk0ACgkQeTBFn7kwMhdLbAD1GN96
+ gCg17qB3On4/0NtIPQErZOBR76ZxwaB3tHyFaQD/UMxznwLdzHfCB5x0sV2RoVvlpHe64A449Jf
+ LNTTJLVQ=
 X-Developer-Key: i=casey.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -116,15 +115,8 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-On Fri, 13 Feb 2026 16:40:05 +0530, Aswin Murugan wrote:
-> Add QCOM RPMH Power Domain Driver Support
-> 
-> This patch series adds support for the Qualcomm RPMH power domain
-> driver, responsible for managing power domains on Qualcomm SoCs.
-> The driver is ported from the Linux kernel and adapted for
-> U-Boot to enable proper power domain control on SA8775P platform.
-> 
-> [...]
+On Tue, 17 Feb 2026 08:51:34 +0000, Antony Kurniawan Soemardi wrote:
+> mach-snapdragon: allocate memory for DT overlays
 
 Applied, thanks!
 
@@ -133,14 +125,8 @@ First and last time I use b4 review, the commit shas are wrong but you can find 
 Apologies
 
 
-[1/4] power-domain: Add QCOM RPMH Power Domain Driver Support
-      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/e0ddd3e72ced
-[2/4] power-domain: Add warning when power-domain driver is missing
-      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/e00528ba122c
-[3/4] mach-snapdragon: Remove RPMH power domain DT fixup code
-      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/4ab832742202
-[4/4] qcom_defconfig: Add QCOM_RPMH_POWER_DOMAIN config
-      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/43c5913549bf
+[1/1] mach-snapdragon: allocate memory for DT overlays
+      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/b7c1703b55cb
 
 Best regards,
 -- 
