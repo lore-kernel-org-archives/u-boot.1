@@ -4,102 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C67D5FF8864
-	for <u-boot@archiver.kernel.org>; Wed, 29 Apr 2026 08:49:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05D68FF8867
+	for <u-boot@archiver.kernel.org>; Wed, 29 Apr 2026 08:49:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5C8C08470F;
-	Wed, 29 Apr 2026 10:49:34 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9A26A847B0;
+	Wed, 29 Apr 2026 10:49:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ZeVTZADp";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ELrc8B/A";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8124584711; Wed, 29 Apr 2026 10:49:32 +0200 (CEST)
-Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
- [IPv6:2a00:1450:4864:20::32c])
+ id 0DE16847B1; Wed, 29 Apr 2026 10:49:50 +0200 (CEST)
+Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
+ [IPv6:2a00:1450:4864:20::330])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4A4C38470E
- for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 10:49:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 79E33847AF
+ for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 10:49:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-4896c22fcbaso94191855e9.0
- for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 01:49:30 -0700 (PDT)
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-488a88aeec9so149622865e9.2
+ for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 01:49:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1777452569; x=1778057369; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1777452587; x=1778057387; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=1J+hvmcCCYi5C4QG76jOsPiikEpZh6p0Y+Ly9DTZxtM=;
- b=ZeVTZADpq5Y6dW1YIpJWG+1UGyam0CeI6NbAANO4V8xynTv3zrM5DA5of5U1u+K46N
- CxopzlW/2cbiuBXXyPjl4s53Ynj4f26E94/UlOczXcS2jB+ZlAdJR8FQqJLY6kRtrtuR
- MPbAT3EiE29LWp+QJ/9qCjQ9Q/nVBqyo6BEbSI3kRnKN+b77OGM+1grJUu+mcrgIyP+V
- FbvfX9Z1ojo62a7GJZY4ouzW/Q7nyoD9Tw1oLuLTgZ+wrv1cJmSja8zcioWjAe3QcSdK
- yDEVTvffBPwgUjLAODLn6OVyKoBE6FxgdCMM/qxX+/cyQmsFj5mHSWl0HDVcdKdu4hWv
- phRw==
+ :reply-to; bh=vVBor77bgXqxUp4Nu4gczRHRkWYWFmANfcXQHrQXwyo=;
+ b=ELrc8B/A5s8XtUsyoCEVN9D2UjsP5zKFsCtJbetZ3Kj17mkLvKTkRR9/rnnbYXge9L
+ sQPI4ksB4SeGznam46lIOD3ahqGanOBrxuXm+Rmu9k2anRYYXbreKwgQvp6xLu8gIimo
+ z4Lw4tFd0dArSod2iDvABsU0QB67F2WIkj0gog26hruBwYNxlVf73OPK2bs3HOFJRM1/
+ CDzAqzeHwuME8bs02E4YVd+J7I05iitTsDxlEFQ7z+WvxhJFLrhMitK09g/dR5kVaSc1
+ znIRtlHk8/gaJ6IDaTET5LB/2H9qoPWWAj8RIeYtN7dFdkTnnKL0dxlGyXwc/tyCMnwI
+ nBBQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777452569; x=1778057369;
+ d=1e100.net; s=20251104; t=1777452587; x=1778057387;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:to:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=1J+hvmcCCYi5C4QG76jOsPiikEpZh6p0Y+Ly9DTZxtM=;
- b=CdxAj6QIxD/X2/Q2+Oz/tO94EykWb48M0I6guDSYvoDN7ky0/IkdXatcX3rjbYtCw0
- tkD/wyZ47yfQ74iBKrJHslyV9XeHPnyObjt/gZiBQDCiA1fZPxZpEGvOR+0jYUQGAi1L
- HoNa5NIrsCKzhTyDTjWi0IOdOj64vqgxarzSsNeRmOVteJRQaH/agYEeU48QwNCu3jwp
- GejRPBeCJcSITe3gJbYC8vyVvBUGMoGvYVy2pRDmFOBLClzS9fQsiUAK2eCwZIARecUq
- nWvTHtnws+rHAQZ8rHw3uhhDUcHKkuB4huw4+GKlj+wPvX541eBURCrkyjVvlCPnOsXP
- s7YA==
+ bh=vVBor77bgXqxUp4Nu4gczRHRkWYWFmANfcXQHrQXwyo=;
+ b=LyvcwQgMqqvyjpZ7c+Dv0TzSqbuL4z8NYrQ+fX/awe9x5VSKZnWggSygxobU+CPTt4
+ 0PaPXj90lIXAZjx5V5xpARlYesMFKWZQdv6qwPnDhmLUCocJDOl1SC7zkFLXt9fErLEp
+ Cy8F1WDeYPj9HKI3VqQS+H+6RJ0SgDwiWs2KpbG9tG9uOzJYg+qheGXlxkghQMY82yI3
+ TV4mzmULLJpRFgpbyLe7HQICkzW3JLw6oUOCCYHZqferMW6VaiblcPL9LwBz4aT5iNip
+ bRyacuiFoflzzTwkBSJ6ZSpBt6fK2bkICTc1qs7izx53GEEpZJHXLUa9XO+5Ll5BfxUO
+ PoUg==
 X-Forwarded-Encrypted: i=1;
- AFNElJ89x6OGTf8B0jzaRB3sfd0p3urHSVCkPDf5aI+9qcRTytrnY8oBzwRAHWyHcCQWBvhFOdDAP5A=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz2vA3Davq5xs6KfnaVQq51TDifj+Idtm4IHqBGX0DYVDltR4nU
- 0syYswlQO94zLjHfFCiPxQ29GwAOvvmEnqjyriwltk0TZwIwWbe5Lv3QgiWmMfoHYDc=
-X-Gm-Gg: AeBDievtmqWMyoiSzZv/N9OuiIP8ecY7nWeXlc5styNMGhu8ghE9ZVh6R8VKdOZYgG6
- 0wkIxW3BAxdjR/wkQdolfPCw/jCn4QswXaKA2tkNpxkevBEZ1CgvBRKhRFkVJ+zIoAZg2hEKdfD
- 9kRvDOD1N/CU2w4xllKPIUz3rDBAfEsVfrUhTIDIIps804Ux/KXLDL9Y81oaew3uPlY28sd7w6V
- Qqcu1TeOLkH95Az37CuoUhPB2WRkJnm4Uc5/bU9nSuNWKS7/j6alultGE+DP+LZ6Hhabj1xiH/o
- 75wfbplyifiy1NqwJy0sz/MY0V+6deG4TJGBgocCw719BpscsdGbWmLPCTX8PRI1m5jJaRkJ1fl
- K5js9Dw2THqz74qNcxNJ2Su+qDGN+XG6SRVStx9wjc/l9WPAYqz9j8UQikWOs5fc1UO1yBlIf5/
- DWX9lT6LAEuaSPJSJN18ZMvR8Li/JYKpbmrFHCgC32TB2+vb3W2NycrcP+J7cNpF1Rit88r8+ZC
- AF2bIU=
-X-Received: by 2002:a05:600c:3e83:b0:489:1fa5:997f with SMTP id
- 5b1f17b1804b1-48a77aed616mr104358335e9.9.1777452569435; 
- Wed, 29 Apr 2026 01:49:29 -0700 (PDT)
+ AFNElJ/2wVGNGeSVITMGypcJb81lOZ4eKFfutTBpCB2WRNrRg23TLO4Bf/lbTEytoXUILuCMDrA1IK8=@lists.denx.de
+X-Gm-Message-State: AOJu0YwlvT+IW9oWiUpjp2KhQji7GFXkSHdgSwTktxje2bOmu64UyVVZ
+ mxT94jXNV+kpbe9VWSmwr6oiqJ9VfxpEY8/qjRewz7xo10IfbhvPFRKrukH/3rvxH2Y=
+X-Gm-Gg: AeBDievqB3GWHkGJFyUEDnlW3HYme5tO/eI9rLuBngrVFLy59805xInu3infOxcBe5w
+ GnXusCoUZY9bjwQ4TLZmoXs5GPQxyMYxl7byM1P5uwJ/k1ks1IT8sI9krd+0g/YnvmI8UTZBsVk
+ MgA5fZIkY7kd9ihaBPorK05ce5CN6n+p0AOBNlDDrne9KA4bUQ2aKYQu7FN9cTnK8D62E/6BRaP
+ 3YZBe/SuITImNMT9Ie2TVDXGQKND9NitR/nfMNjb5WG53Uw0CUmwyLM3u93X8isNbH23L7VdOlG
+ Ckp01iNqbsiqf9UwMk8wg7sqzS3uzWa8sVF/Sm1MLd9XWKRATqhBlVGMJqCFGPF61n6GkpF2XXP
+ G3GtJvUwRE0N5T2v0Whpx3GP3xzReoGfWycmQ/h1l9PyS00z3QmsFOBeBwo2HbQ7WWKyY7QOxb5
+ /VmKeycx+bydY+jHB8PAy+FuBevT0K6MgpQJqTrGmCdWCFqlK3jmf0WT2wmM4+gQ6RI8cMghROK
+ YbnH4A=
+X-Received: by 2002:a05:600c:6d8:b0:480:1d0b:2d32 with SMTP id
+ 5b1f17b1804b1-48a77ae89ccmr58069435e9.12.1777452586741; 
+ Wed, 29 Apr 2026 01:49:46 -0700 (PDT)
 Received: from lion.localdomain (p4fc3dd86.dip0.t-ipconnect.de.
  [79.195.221.134]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-447b3d47ff1sm4374696f8f.6.2026.04.29.01.49.26
+ 5b1f17b1804b1-48a7bc80454sm42715245e9.13.2026.04.29.01.49.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 29 Apr 2026 01:49:27 -0700 (PDT)
+ Wed, 29 Apr 2026 01:49:46 -0700 (PDT)
 From: Casey Connolly <casey.connolly@linaro.org>
 To: trini@konsulko.com, neil.armstrong@linaro.org, sumit.garg@kernel.org, 
- lukma@denx.de, seanga2@gmail.com, marex@denx.de, malysagreg@gmail.com, 
- vasileios.bimpikas@analog.com, utsav.agarwal@analog.com, 
- arturs.artamonovs@analog.com, nathan.morrison@timesys.com, peng.fan@nxp.com, 
- kory.maincent@bootlin.com, patrice.chotard@foss.st.com, sjg@chromium.org, 
- stefan.roese@mailbox.org, mkorpershoek@kernel.org, 
- alif.zakuan.yuslaimi@altera.com, hs@nabladev.com, rui.silva@linaro.org, 
- ilias.apalodimas@linaro.org, luca.weiss@fairphone.com, 
- quic_varada@quicinc.com, u-boot@lists.denx.de, u-boot-qcom@groups.io, 
- Jerome Forissier <jerome.forissier@arm.com>, Yao Zi <me@ziyao.cc>, 
- Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-In-Reply-To: <20251203110735.1959862-1-balaji.selvanathan@oss.qualcomm.com>
-References: <20251203110735.1959862-1-balaji.selvanathan@oss.qualcomm.com>
-Subject: Re: [PATCH v3 0/6] Enable USB3 Super-Speed support for QCM6490/SC7280
-Message-Id: <177745255938.126665.16625119085748603933.b4-ty@b4>
-Date: Wed, 29 Apr 2026 10:49:19 +0200
+ marek.vasut+renesas@mailbox.org, ilias.apalodimas@linaro.org, 
+ me@samcday.com, aswin.murugan@oss.qualcomm.com, clamor95@gmail.com, 
+ michal.simek@amd.com, u-boot@lists.denx.de, u-boot-qcom@groups.io, 
+ Jerome Forissier <jerome.forissier@arm.com>, 
+ Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
+In-Reply-To: <20260121063920.1500293-1-varadarajan.narayanan@oss.qualcomm.com>
+References: <20260121063920.1500293-1-varadarajan.narayanan@oss.qualcomm.com>
+Subject: Re: [PATCH v6 0/5] Implement reset to EDL for qcs9100
+Message-Id: <177745257538.126665.2656997891353052864.b4-ty@b4>
+Date: Wed, 29 Apr 2026 10:49:35 +0200
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
 X-Mailer: b4 0.16-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1624;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3523;
  i=casey.connolly@linaro.org; h=from:subject:message-id;
- bh=VhIQeHBaM7qppghA6I8vVKWlWK6qelk1PlBUlVznPY8=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhsyPx8T+rfX5HXqrf5/Mi8/xrZxe5Q2HOxzi+2SdOz11D
- V6X7+HvKGVhEORgkBVTZBE/scyyae1le43tCy7AzGFlAhnCwMUpABM5u4Hhn8WtlV0JjuIyr8W5
- mhSXfFwyJfLSMq2NpTJOflo1/q/apzAyTG08bnhNVujgJr/LVoJt65WM3VnFhK/fvZRb4lByTdf
- 9FAA=
+ bh=1qFovll+xhI4MoZdi1CN5FwxBFCkMubaSRrZeFGjvss=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhsyPxzSrjhcfeZDbo2RrEa+w40HaKieRhHzvwjqxwC9f3
+ O61SvB2lLIwCHIwyIopsoifWGbZtPayvcb2BRdg5rAygQxh4OIUgIlk3mL4nyiz8rlT3WHFBWqP
+ HjxhkzfXnCT8gO+HM7Pv7gnn9/tpZjIyTH1j3LaJU2OHr0plpFvG7XjmMFWbEzn12/63chxn11t
+ aDgA=
 X-Developer-Key: i=casey.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -119,14 +114,45 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-On Wed, 03 Dec 2025 16:37:29 +0530, Balaji Selvanathan wrote:
-> Enable USB3 Super-Speed support for QCM6490/SC7280
+On Wed, 21 Jan 2026 12:09:15 +0530, Varadarajan Narayanan wrote:
+> Implement reset to EDL for qcs9100
 > 
-> This series enables USB3 Super-Speed functionality on QCM6490 and SC7280
-> platforms by adding support for the QMP USB3-DP Combo PHY. The combo PHY
-> is a dual-mode PHY that can operate in either USB3 or DisplayPort mode,
-> and this implementation focuses on USB3 mode to enable Super-Speed USB
-> support.
+> Using the 'reboot edl' command in Linux, the platform can reboot to the
+> Emergency Download mode. Implement the same for U-Boot.
+> 
+> v6: * Add r-b Sumit
+>     * Wrap the new code inside CONFIG_SYSRESET_CMD_RESET_ARGS
+>     * Size change details
+> ------------------------
+> qcom_qcs9100
+> ------------------------
+> Building 2 commits for 1 boards (1 thread, 16 jobs per thread)
+> 01: Merge tag 'u-boot-imx-master-20260117' of https://gitlab.denx.de/u-boot/custodians/u-boot-imx
+> 07: qcom_defconfig: enable psci based sysreset
+>     2    0    0 /2              qcom_qcs9100
+> Completed: 2 total built, 2 newly), duration 0:00:25, rate 0.08
+> /tmp/qcom_qcs9100/tot/boards.cfg is up to date. Nothing to do.
+> Summary of 2 commits for 1 boards (1 thread, 16 jobs per thread)
+> 01: Merge tag 'u-boot-imx-master-20260117' of https://gitlab.denx.de/u-boot/custodians/u-boot-imx
+> 07: qcom_defconfig: enable psci based sysreset
+>    aarch64: (for 1/1 boards) all +145.0 data -40.0 rodata +89.0 text +96.0
+>             qcom_qcs9100   : all +145 data -40 rodata +89 text +96
+>                u-boot: add: 9/0, grow: 4/0 bytes: 656/0 (656)
+>                  function                                   old     new   delta
+>                  sysreset_walk_arg                            -     124    +124
+>                  _u_boot_list_2_driver_2_qcom_psci_sysreset       -     120    +120
+>                  qcom_psci_sysreset_request_arg               -      84     +84
+>                  smc_call                                     -      68     +68
+>                  do_reset                                   100     160     +60
+>                  psci_system_reset2                           -      44     +44
+>                  psci_features                                -      44     +44
+>                  sysreset_request_arg                         -      32     +32
+>                  qcom_psci_sysreset_ops                       -      32     +32
+>                  psci_bind                                  188     212     +24
+>                  qcom_pshold_ops                             24      32      +8
+>                  qcom_psci_sysreset_get_status                -       8      +8
+>                  psci_sysreset_ops                           24      32      +8
+> (no errors to report)
 > 
 > [...]
 
@@ -137,18 +163,16 @@ First and last time I use b4 review, the commit shas are wrong but you can find 
 Apologies
 
 
-[1/6] drivers: clk: qcom: sc7280: Add USB3 PHY pipe clock
-      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/c91a35ea6ec2
-[2/6] drivers: usb: dwc3: Add delay after core soft reset
-      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/f69a20002995
-[3/6] drivers: phy: qcom: Add QMP USB3-DP Combo PHY driver
-      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/1811eae79f52
-[4/6] arch: arm: mach-snapdragon: Auto-detect USB SSPHY driver support
-      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/d7a4a156fce6
-[5/6] configs: qcm6490: Enable super-speed USB support
-      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/450d50e25a02
-[6/6] MAINTAINERS: Add entry for Qualcomm PHY drivers
-      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/78e0bcbb6cd9
+[1/5] arm: psci: Add API to check for support of specific PSCI function
+      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/a612b3e91439
+[2/5] drivers: sysreset: Add sysreset op that can take arguments
+      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/c74ea771aa53
+[3/5] sysreset: Implement PSCI based reset to EDL mode for QCOM SoCs
+      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/9562f10216a6
+[4/5] cmd: boot: Add '-edl' option to reset command documentation
+      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/9db72d4b767f
+[5/5] qcom_defconfig: enable psci based sysreset
+      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/929d794c99bd
 
 Best regards,
 -- 
