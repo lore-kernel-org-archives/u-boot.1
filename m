@@ -4,94 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12D54FF887E
-	for <u-boot@archiver.kernel.org>; Wed, 29 Apr 2026 23:47:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1775FF8875
+	for <u-boot@archiver.kernel.org>; Wed, 29 Apr 2026 23:47:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 60949848D7;
-	Thu, 30 Apr 2026 01:47:16 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id ADC7F848DF;
+	Thu, 30 Apr 2026 01:47:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="e7+4AMYV";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="k7BY4aqh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C2ADF848DA; Thu, 30 Apr 2026 01:47:15 +0200 (CEST)
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
- [IPv6:2a00:1450:4864:20::630])
+ id BC409848EE; Thu, 30 Apr 2026 01:47:19 +0200 (CEST)
+Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
+ [IPv6:2a00:1450:4864:20::52f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 26B7A8487F
- for <u-boot@lists.denx.de>; Thu, 30 Apr 2026 01:47:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D62EE848DD
+ for <u-boot@lists.denx.de>; Thu, 30 Apr 2026 01:47:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-ba51e69988aso42245166b.0
- for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 16:47:12 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1777506431; cv=none;
+Received: by mail-ed1-x52f.google.com with SMTP id
+ 4fb4d7f45d1cf-67845996252so608267a12.3
+ for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 16:47:17 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1777506437; cv=none;
  d=google.com; s=arc-20240605;
- b=Sj3swFNkkr+Xz2ChEBxmlUvCH5dS79QdsxQ/BkePXQKGg+v4qbgDPBInVfBumrd2HG
- y5U0uTuAJCX+84bnV4sEPQM/qwWSyW9WnkNMPODbFeiY7qGJTYUt3XPhFvRgXdsls8EU
- pZMFVulncAyHmSrANBaGM2rGYLJgG98pdHvlNPJt5lUgF7ZI8+Cy/L0iVHkWNK5HgYHq
- Fct/vy+ggLuewEEl2ppfOvui4bC04dcXHBpRGD9UlBQIoFjUll/BZDpOYugS3Ze/6bHl
- APncD32v7gVHGhLKkDu4QCJwXg9hVIqDcOamHJLAy7S9IOC+/gooGlGxQcgd4a7jVlcC
- Uumw==
+ b=lMSi0wbb5qeSTJcFas6nNiklVsn6h6u4TQPuKHqFPzDDXoRJ32jaYfsSHMoexdBroK
+ tbPa3KWkEO0VQ7aaKUOafMIkW28hPyEJNktc9ojkSYLgX4l9nE5kRix5A8kVkqD9wtHG
+ g+v16iXB0tv2czBcvWqqTkqZ1t8N1i/D+XoDv8wjQRW5eeGtDuxzS0MfpnS2qg4VTlvy
+ mHWjF93yxpfSvrznJR9zvN0bksNijpvXnElXBYjvyEoEm4uDZFOlltdtnWmfMilERYxJ
+ uIaIhfXasA6dQjVvODREJ5n7D2x/DpmEIZZyOTVARADalxWxjMprEtnSjoZwxfSYZ0n6
+ DoxA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=8U3iPlPxJNFGGqGMXTI3oYqSZfoq7GEFrEJaNGiBKaQ=;
- fh=qrOaaotlfj7rJTEoVec3VuIUj43QdfbQVBhf16G8DcM=;
- b=g/6pC3ixHe3dVva3t+O47M5AVjKXRcf9Wcxce1sKCpO0NgP7SbY4zHIqer6bPympqV
- DGe6A4TvjYCG1eon9yDx0ocqrbb4od2hFe0GTlmmQcNDvqwZSZYQyY4IHRP+q22+Ih05
- /WvDcvvB9JfgNdj/G4XLHhlHpNh7LTlUi2KCQzyosX0daSPVykdbbd7hHlviLD47oMSa
- ymECjewRnLGjN4kLK5Xhgz68Lnoa01damfcGglaGgNlP0ye3VEi7hcW8GXwDCq2Xj5o9
- A/xQv4Q+Q7QmpL2iec80EyP/TzLcF/fXqoq5TqgAVvvgfAb3AwXWfn7ksNDMDan5QD2G
- 5NtQ==; darn=lists.denx.de
+ bh=z8WqKfntjqsKRzB1jOCnJc4F/c+UrCCAz+R5TWVdVNg=;
+ fh=Prvn1fe1rDKzBIL6lkWTf+pyVG+Vv1XKXJVwhTRbLUU=;
+ b=FM01vvvyTWRoetFQslJPQlDWWeEGotFvC9B2M0qILYwDEuSW1+IBcOOmkkdWvxlU3n
+ jDmE7ZUqBcOMy3WOLhXTM3MiHAg4BEiaoSv00iUBGo4Mj17heyQJmFZMAEV+TkhYTA+t
+ 4hQkurHzxaBJ8VhNbAQ4owT5HDHvrJOPUE7LvYptoLiWtzEP5cXNkLUutQh/8GKQGnnz
+ q2oOsKXjFnYimZqzvTFmiyKy6MB0hGhWGUEokmXgxXgMqK8vRq1Xxf3V7eYxOSUUpVok
+ mV/faKDNc0HXs+nW0wT94tPanPp4fD4ZiSR5jZva/QAW6U0KL2Mtvq7EdvCQR0MnTh6Y
+ Dvhg==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1777506431; x=1778111231; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1777506437; x=1778111237; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=8U3iPlPxJNFGGqGMXTI3oYqSZfoq7GEFrEJaNGiBKaQ=;
- b=e7+4AMYVFxB96U7WtKpnvlgY7pfa0ui0qnvEMFm+2+Wf++uDzMNlhe4JQcnoRFcarz
- lXjvQMoF+jC0tveTtTuRdP5nPX/O1dK+/C81uxDEf3wBZRMQcQ37j+1duXNjrrwni/M2
- /FYAhJkX0WRfNEoCpCWiuC39boUTuJ1vPL/mw=
+ bh=z8WqKfntjqsKRzB1jOCnJc4F/c+UrCCAz+R5TWVdVNg=;
+ b=k7BY4aqhXN0Jpbq2t7i/lmqM5A2YVaNgbDy8JTFihyzwChrn9Y9+R2hOzHiEp7AZSl
+ Syj4n/kneLvrMk+LnbqhVYG5TJuxjYyonm8IuuRARtPGnJGiSeYLrbdrdV8Kv7okqxWe
+ rnGd9qk+kgPSYqZNuiqtCafnrvo5eYjjDsSJk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777506431; x=1778111231;
+ d=1e100.net; s=20251104; t=1777506437; x=1778111237;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=8U3iPlPxJNFGGqGMXTI3oYqSZfoq7GEFrEJaNGiBKaQ=;
- b=naqXWKAoqQLKyLlix60iDACSvGvtvH4WMKaveE19Mg6vVv/Vk1lpRaMTTYBJtcgYpk
- dvwLdnXbmwId1UPjfJLZDIajHXIQB9xAuyEeOCYixKeMaQkx98hZP6Hi56XvfzsC/sWM
- DcYUSRddjHix6PtXsrca1frar9QNtfAI2M1hLW7kE67pHZ3my3mNy91tih4VWTC5JAwX
- 63V24W/40xEtns9b5uKgEaMRHTAKwz/v4iY8m56nk2rzmA7F+DjKEVfiER43wW7/cf9X
- Ayw/LSbRdqtU99Cb5iMFBQa7nUy/kxg7cGzQAjNxzS0oRHUNCkp5UUeU9iAOzVGVNzor
- zFWg==
+ bh=z8WqKfntjqsKRzB1jOCnJc4F/c+UrCCAz+R5TWVdVNg=;
+ b=OAwtO7IOtTjXd1gGzcv6mKDW3EUSKf13DBG6ZG6+r4jZ0EPuJ2vQXuZa455XY5WrmC
+ 9VJKAF4xtDFwgnzPGba6eldqbhnU2iOrXwJkm7ZULcDIDM18+4z2CVXiF2gw4eMQiNzP
+ ZBVaVijDAjgmTeXKReEJTNo801kbiqxyZnzB8ovtv9Kj7CLPT/Holf7x/qFo/fkSh1m3
+ 9ASrinPtI0D2OP93euKkW+/WBB0N2mqhYyaYpzmFxRN9sRUqxTc5Mkl87E9xKMpXTHkS
+ UEMudYnmtmbvORuPHatDOk/yXsyM01FAXjEw1puuFgKmLtiriZdPWtGDudWwgbeKgWaS
+ yezw==
 X-Forwarded-Encrypted: i=1;
- AFNElJ9SNLIgYdwemtMDJ/QR+DGT9AhK4k/ut236NtHbR128IW/qitz7KUXaQrvznmFXIjtjiqnzbsU=@lists.denx.de
-X-Gm-Message-State: AOJu0YxrQz0lrRxg0b+EDB9W1Wb9G6AzbmIXN9ZqcI4Xbrjk99eOEdBF
- S0WayTbr9LaRRuCdlqAko2BqerZMfRB47JCFJWek1Bos9XrIZO3UpgXMAGb1JrtFZ2qUw3TRjpT
- 2Jpa7FDCoSTRwDbl+12A7FpkrIm0MUJ/FwIMBeqCq9qFcWqLBmp9QLQ==
-X-Gm-Gg: AeBDietEO0NyuvjTxqhgAg8dymFdW/Tf0LV8l3haISjwMJVj+5sosjz26WdVeOIwqdf
- cOk72AskpIyZJoQkt3TfkYoaI5C8cEoTWj7m4O1kVdFE9Il6NmUgvXsGvBpYB4lu/DM+WTjh7kC
- uIXr3RFXDqnRh2r4f9lcXhVNwiZX8NiRORoxaI+xK07QalSzMzXPlOLQdZt0yvnvmiv8PLdz2/5
- S6LwgaDtr/YlQTUGGrTMtmxJbtQpUCvyBtwzLVevTXy8npurCXieizamK6xz8RJAadlvGEbFbM0
- q/86HnEU8I+tCaUw
-X-Received: by 2002:a17:906:f58e:b0:ba6:5855:1cc0 with SMTP id
- a640c23a62f3a-bbac5bcbc94mr44490566b.2.1777506431547; Wed, 29 Apr 2026
- 16:47:11 -0700 (PDT)
+ AFNElJ+ikjwfX+imXPwckhF8vERT432M1z/gGa3Id3fKbVdP+CZhEJ93sEddRlQroZ+jrnYII0q5q2Q=@lists.denx.de
+X-Gm-Message-State: AOJu0YyTO/AJK7uXlzA6gnp6/UMP6BCXNgKeOY2CzrDzzTuE3jZIjCCy
+ 4LwFgBOM94/MZn9X+s2mpOJ1F+wB4zlRullw2iT1EumdhrLIY3X7Afl4kPJh9I68BXI2wvQMd/c
+ kMDB9EhyoYsWyoz82RPTF9Lvplfw4EdvSAJhj+QLq
+X-Gm-Gg: AeBDieuVJ+OetVAcgQkeoHuGkCgP/iEIh7Ai799dow3zJx+f8fUtcoWTSdS96BR4kJp
+ frRpT5mmNdCNtbw9fOrYclaSy4dmrrMV01Xm+gQIdV8EFw6k208fFs/doYy21HKDZrEbVWz4nY5
+ D1atfQsRZq6P9+BfkOeS3/TrdZn4dWjkGH/yCOytlaAGK2UKGytHl4jCPUwe/wKJSIOjHZ35tma
+ X6T9Mo7mOaTK12yI0eejIE5L3cDjZKIf48YVCB6zatvwamtw0ooFVkxPqoF/02PfOlsfulvlo0V
+ UDkQnbIqQGvoB+Bt
+X-Received: by 2002:a17:907:94c9:b0:ba7:670b:f074 with SMTP id
+ a640c23a62f3a-bbac49d2559mr44345366b.2.1777506437291; Wed, 29 Apr 2026
+ 16:47:17 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260425033742.1519298-1-b-padhi@ti.com>
- <20260425033742.1519298-5-b-padhi@ti.com>
-In-Reply-To: <20260425033742.1519298-5-b-padhi@ti.com>
+ <20260425033742.1519298-4-b-padhi@ti.com>
+In-Reply-To: <20260425033742.1519298-4-b-padhi@ti.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 29 Apr 2026 17:46:58 -0600
-X-Gm-Features: AVHnY4K9GIeESwTc8r7tdLtPTzitXKXMo6LhA3UF6Duxre-c2MxMN5p_RrV77Pk
-Message-ID: <CAFLszTjFFDBSbVtvjeSmiM8TB6bwsZJ0fiv3TtfboajPqn9YuA@mail.gmail.com>
-Subject: Re: [PATCH v4 04/11] arm: mach-k3: Add config option for packaging
- HSM firmware
+Date: Wed, 29 Apr 2026 17:47:05 -0600
+X-Gm-Features: AVHnY4JRbqGSYAFnpuEFwCO8ZZnobhIYsbsP4jxBiQj8w9_Pmv_51IAm7ODQSz8
+Message-ID: <CAFLszThq7yub=hHTZg7oofU-Kb6AJwuS2cwbq-6y47t+XMOTfg@mail.gmail.com>
+Subject: Re: [PATCH v4 03/11] arm: mach-k3: Explicitly identify TIFSSTUB
+ images when discarding buffers
 To: b-padhi@ti.com
 Cc: trini@konsulko.com, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
@@ -111,36 +111,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Beleswar,
-
 On 2026-04-25T03:37:39, Padhi, Beleswar <b-padhi@ti.com> wrote:
-> arm: mach-k3: Add config option for packaging HSM firmware
+> arm: mach-k3: Explicitly identify TIFSSTUB images when discarding buffers
 >
-> Some K3 SoCs like J721S2, and J784S4 have a HSM (High Security Module)
-> M4F core in the Wakeup Voltage Domain which could be used to run secure
-> services like Authentication. Add a config option which indicates that
-> the SoC has a HSM core and the firmware for the core is available.
+> The board_fit_image_post_process() function assumes that all TIFSSTUB
+> images appear at the end of the image_os_match[] array by using
+> the condition:
+>
+>         i < IMAGE_AMT && i > IMAGE_ID_DM_FW
+>
+> However, this assumption breaks when new image types are appended to the
+> enum and the array, causing unintended image types to match this
+> condition and having their buffer sizes incorrectly set to 0 with:
+>
+>         *p_size = 0
+>
+> To avoid this issue, replace the range-based check with an explicit
+> match for TIFSSTUB image IDs.
 >
 > Signed-off-by: Beleswar Padhi <b-padhi@ti.com>
 >
-> arch/arm/mach-k3/Kconfig | 7 +++++++
->  1 file changed, 7 insertions(+)
-
-> diff --git a/arch/arm/mach-k3/Kconfig b/arch/arm/mach-k3/Kconfig
-> @@ -198,6 +198,13 @@ config K3_REMOTEPROC_PRU
-> +config K3_HSM_FW
-> +     bool "Package firmware for HSM core"
-> +     help
-> +       Enabling this will indicate that the system has a HSM (High Security
-> +       Module) M4 Core and the firmware for the core is available. When
-> +       enabled, the firmware for HSM core will be packaged inside tispl.bin.
-
-Since this option only makes sense on SoCs that actually have an HSM
-core, a 'depends on SOC_K3_J721S2 || SOC_K3_J784S4 || SOC_K3_J722S'
-would prevent it from being offered on unrelated K3 configurations -
-compare to how K3_DM_FW gates itself. What do you think?
+> arch/arm/mach-k3/r5/common.c | 3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
-
-Regards,
-Simon
