@@ -4,94 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ABA9BFF887E
-	for <u-boot@archiver.kernel.org>; Wed, 29 Apr 2026 23:51:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18515FF887E
+	for <u-boot@archiver.kernel.org>; Wed, 29 Apr 2026 23:52:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 30E23848DC;
-	Thu, 30 Apr 2026 01:51:43 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 798B2848F3;
+	Thu, 30 Apr 2026 01:52:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Bpfvtji7";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="IVHlStuO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4E20E848EA; Thu, 30 Apr 2026 01:51:42 +0200 (CEST)
-Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
- [IPv6:2a00:1450:4864:20::52b])
+ id 9AA4D848FB; Thu, 30 Apr 2026 01:52:32 +0200 (CEST)
+Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
+ [IPv6:2a00:1450:4864:20::533])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5F87A848D7
- for <u-boot@lists.denx.de>; Thu, 30 Apr 2026 01:51:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AC75B848E7
+ for <u-boot@lists.denx.de>; Thu, 30 Apr 2026 01:52:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52b.google.com with SMTP id
- 4fb4d7f45d1cf-676d8582a13so645344a12.0
- for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 16:51:40 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1777506700; cv=none;
+Received: by mail-ed1-x533.google.com with SMTP id
+ 4fb4d7f45d1cf-6794b8699b8so526892a12.1
+ for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 16:52:30 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1777506750; cv=none;
  d=google.com; s=arc-20240605;
- b=QmATIa/Dj+N3RqVHZv7b3x4uNHrmAnCMeuYLuZPzoxhUVEzRubEeqMRyCA/Pd72NwN
- je8INwrCn5fN18l0mKSA3CWxixYba+rM7UN3iAQl+6liRzBvFQv8+R17lTvRw0v6pgiM
- Y6PyoKVo8JW4W+I4S1T4+6lKUUQpkMdJvkwKV3LOZNpznX+Z3v4UNXGuVtiT8pDy7ziE
- RWixIw5mYV4nJSeSZAZXdHJyJ91eLUH1dDJdK0YwmhQ0ng6RNDgWfd2KfgefEHT88TZJ
- FyqKQzIjih7yZAZkfJ3zHH3v9DgNPCdgUb/E9y7j1aADzJ1CrPu0rrICHYwT/XExTCoB
- Y6Jw==
+ b=SLNs9CPlrl7N92Ttj3Zpcbk3FDSi82XgZEo4FzRIR+orj3xkQvx/iQSoN2k07lSW+Z
+ DNfVl4Wo9KgPINdwOzC/7R4NND/3jwsDs5cy/zFPlASLo0DJrmkZL/7AWqNX+AQj8ZB1
+ jbzwA5xTLLtJ5bWQfEOn6M7qla4bqBOr6SjIRGGG+Fo+ZBOmgvFITpUIyWy4+dBNTKPB
+ N2MqH1nzbB8Pj0RJfM7NItlcLX7vzj1yek6pR7gBPZvpAyRRXOIpqo7dYGOAZEPHArbd
+ JRNIeszrCbnuEQ1RZ8zZbb67+p1s/C8uUyxQGjLxhUWFL7EyYG3DBRHAc8aQvHF7ICfq
+ m4Eg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=bcpSMMBfoXcWtSQaAuviIpilp51lWVifQcdq7WXhONA=;
- fh=qkBxHS+BEhONbDGUcKJiGV4SxHaK5mIDY4uf78y3Cx4=;
- b=SjSEjmg5FA3cQZnCWdwVFCmrnyTCdnzpqSINkaxQwOzxcQSocishzBMFW7SfkVoOge
- fR00FVFq7E+HEE37VrDw86NV1HcADaaU4reWVKOV4fWkryM8HHT0vc6ZWYKMgVXDbPFm
- YSersVtCUgOvZzHOd+FfAzmrt+qyqdHBvZBHLd2S6fN0KORbK1av1VCG6diSeLPfR+6p
- WHDJJ82Rli9nLX5eK8fD0Ha5fdf8C7klN9MJvSnoHjMoc1ZrsdYyTtUADiu6anjf8CBC
- DNHfZcuDEMddmj8WyZjWwJLWzbFd0+fG0HUT/y4qxt4COJRNGYXrs4WwDoo5lyIFPot5
- axTw==; darn=lists.denx.de
+ bh=YkYwHKtnI4wHAmUqqAhewbzu1jtDlGd83UAw0aBeM7E=;
+ fh=rA9GEoD1zm6JhCbXhHp8ezb4eePUUbom26L9AO8HtBk=;
+ b=OKQrmeEiO2uk8dIdMJ+V/phTI03DLqcwetwwW2aWmX+P06rTv4aSj3AEN/SiNazdLd
+ 3ndslr20KpZzX5R4hFngUV0UuXr/+xwcRs8RxCffhdcl9vXr9+5ntM3vBv/RN+wiOJad
+ teDeCNdjkDyV/AkhYQkgkWmpZmDfsI9pz3ny+kdrTs5ws9hYvWrYKV7g/Ejam88cYtp4
+ M8YurcRvvFrJKksUljxUzJdEhKQtFTHyzDeMJjd6rTI5SD5YSsfHpHOc43Ofvpex8KhF
+ QDr2IeD6Ntf0dZJ/3Rf/8+me4ho2gzud2ZQ34R2YE6/gfaMtg77NFhBcxV8rxgod4QwE
+ f1SQ==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1777506700; x=1778111500; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1777506750; x=1778111550; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=bcpSMMBfoXcWtSQaAuviIpilp51lWVifQcdq7WXhONA=;
- b=Bpfvtji7eDRZT9jbNhmbAllvMql+oxnfiB6wYPxIiQAkVpTNCb9WXpMLPUBfg8aSev
- +G1KpM+UzLTf4IUZ4jrs7Jhmb9YPTbAm8QJjyrIy9eSq3SQir9uEY1leWgpyym83Wslr
- /SH9+PCVnPDdYKj89YLjIbqnld/8e9OKjOt+Q=
+ bh=YkYwHKtnI4wHAmUqqAhewbzu1jtDlGd83UAw0aBeM7E=;
+ b=IVHlStuOZMyLOKi8AXbXVGZ9SgHayHe9BRBlEO3fV8SQCNO+NcMQjgMzD5B1Ta1UJ8
+ NouxyZh7p346PXwcuhtBEsT2i0PYGvMCCJYg4bQAI5wFCQQL4MvCdK+PxvLk4GxWbOfG
+ o3XvrpK8j9pcbJDsv3zDFZaoCEgpi9uAoehtg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777506700; x=1778111500;
+ d=1e100.net; s=20251104; t=1777506750; x=1778111550;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=bcpSMMBfoXcWtSQaAuviIpilp51lWVifQcdq7WXhONA=;
- b=X/Nk42Co6G6rnAuuodExkXewdhenkVPjt11ipfab60BDxhkNz11jcSVDYHXHM/BAGu
- HUlrUZdFfQqVNhVkdao18pubOkifTRdIdX6jgC05aeJgAGeh4ugU1bclYy6gnU6CuA/E
- uEbnTmHpgSJj4z27o3oesor5PHr+4/M6xTc4udpDDbUBWOAfvBfe85m2g4reZcOqgoK/
- aYsONgwC9YP57uS+3PEimm5a0HrAEzra/QghRHViDJlt04pCXRtvwGDKUbBG7ZltoxFU
- OCCu+CLKlDk5xdMrBe1Qh3mXrAsL2tFxk6gukBQktonBbMNCcX60F2Fx2uKYJ1TXNrN0
- Yilw==
+ bh=YkYwHKtnI4wHAmUqqAhewbzu1jtDlGd83UAw0aBeM7E=;
+ b=RSYIAxDFvJsFur0nOxHcvJ8cyPgvgb7WZbqwB+y4Qh/aho5BMTwPT9V/1W8XoP0JEp
+ CR0O/YQPuI8yu6XuF+beKoQwwtiXxS2lD5TGhT2LgKPU+vgP9ZxhpmRWDpl/g3q06RMJ
+ 2jsv87TyA+cPG0Wi9W1YosrZQ487Z1TmPqWEWgkwMDozKjBVhhucsFcbH3bxzctl6WY5
+ IewYUAq27/vi6K/Cx6K6stfy/ABOY7HGLzjH3NCRzpVv+lt6jNRXam2VPHKgsBuqXpGr
+ KWIeY52UO2kgX0K7Lw++R6vjLSug5qvQlorwi2NGLvwU6mNK47eyCGHG8XYp2hbwz1tK
+ /gzA==
 X-Forwarded-Encrypted: i=1;
- AFNElJ8g1ZPCBnLu9ZFL4jfcOjC/RqYey0G3t5RUw9vc+Fb/4DnUkOx/1wRzjzi6DZxhP14dw6X3c48=@lists.denx.de
-X-Gm-Message-State: AOJu0Yxuflq1VFeIyBevxi7gFwVatTp8loYWynsPVEk5p8/42eu6w+P+
- MI4UammRID8y8s0nPw7yw7/JycKbn6jUMDM32uq06wQkKjdNJuNGhht9GiJWm6MSsuFDaBRVUUs
- Dp4cpq7xfOmtFDmZnAkxVvub+Yu26aWZIrMPWNrF/
-X-Gm-Gg: AeBDieutsBpgAIgJYG9antpEmdqDNGwdADzdNFMOvsvu8cVcrqkUvoTTbCYqlvk1BP0
- U8Cu48a43Sb4zNdI2VWfqk/Y9aOVRZavL1U6v00cBa3Wr4jGK8z8GeHA86bcBxMc+Hxr7A82VIH
- Jy/Or4TTOG4kQPpSaR+dsx6907Bdma91AGWwXA3gdspnIKBNHjkAFwn8JOyE7s3UXrx+Rg2NRKc
- yTHSWiR6dfXGyP3seSves875Nk6N+d0McR5hWSqVnlyZ4v6cv5EbLXzu8HnXmRIzyfV4kqIVCd1
- BiNjlY5bEcAIg99/
-X-Received: by 2002:a17:907:c1a:b0:bad:ad5:300a with SMTP id
- a640c23a62f3a-bbac67c27acmr49162766b.26.1777506699857; Wed, 29 Apr 2026
- 16:51:39 -0700 (PDT)
+ AFNElJ/pvi9ZlDSZ2vZqouLXDHxDdLBKofXZ3FQSAPWY+e5n9E75EHZTVvpPl9NYz/yAGQ0Nse8wek4=@lists.denx.de
+X-Gm-Message-State: AOJu0YzCw0fu5o1fn2wdx/ZVehBHztcyjqizWTSaeRg2/64pts71ES6w
+ w4em6SnTADTYHxSLAvFHHXYuHxOrJlL7j2rXRHdxeE0uV8rzJ+DNlEVvCQhQIld1yd03FR+SfT5
+ rqB/3BPVpqx2Sv83zwhkjMHtSKA0hLqW4Agx6BTSl
+X-Gm-Gg: AeBDievP8n94CveMRO7b3jXMQKDFrqtqYlQUFqQaDEwXaR+ui/eagfQ9/3ruTgLEfeh
+ PadduFRgtVbaqtpIAbVcHIQiDuTaF0dCvQ8aacXNOtUUkKrcISHmY1E6Ce0rpTs4mwIw/h9paoZ
+ mC7GFjvbPlm26mBLd1gl2ZDwXD2mALfxEuZBRR0686498bjcGLL23M++DkB8TQ92so6HEXi63HK
+ TPNKncIHnbKBlSkrj4SB8y9k32CGSAaPQg80WwjVll8dtT/GsiIMgkCcaCrhih6+XJd5OoEqsWP
+ mKPmUnMuOQJ6LInS
+X-Received: by 2002:a17:907:e102:b0:ba6:689e:2f48 with SMTP id
+ a640c23a62f3a-bbac7997c5dmr24425566b.25.1777506750091; Wed, 29 Apr 2026
+ 16:52:30 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260425033742.1519298-1-b-padhi@ti.com>
- <20260425033742.1519298-6-b-padhi@ti.com>
-In-Reply-To: <20260425033742.1519298-6-b-padhi@ti.com>
+ <20260425033742.1519298-7-b-padhi@ti.com>
+In-Reply-To: <20260425033742.1519298-7-b-padhi@ti.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 29 Apr 2026 17:51:28 -0600
-X-Gm-Features: AVHnY4Ki6olieWzwtDfqfpVLLvmhgMR1b3o2b2JQjK8XfWxhpQny5jAESQ8k1AE
-Message-ID: <CAFLszTiJBdkSEgk3UipouAOTz61yhZF8cUYRUSEcLq=E2Z40LA@mail.gmail.com>
-Subject: Re: [PATCH v4 05/11] arm: dts: k3-binman: Add template for packing
- HSM firmware
+Date: Wed, 29 Apr 2026 17:52:18 -0600
+X-Gm-Features: AVHnY4Jx9ZUJ-fin3XG1hNutLKxnB2i_1oiuiE9hJvhp4daTyUenCXk9QlP4m58
+Message-ID: <CAFLszTj0VhzA64FWAZ6Rtw5twMOug1QYD0h5NEKrD2UTX-exmA@mail.gmail.com>
+Subject: Re: [PATCH v4 06/11] arm: dts: k3-{j721s2/j722s/j784s4}-binman: Pack
+ HSM firmware inside tispl.bin
 To: b-padhi@ti.com
 Cc: trini@konsulko.com, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
@@ -114,70 +114,36 @@ X-Virus-Status: Clean
 Hi Beleswar,
 
 On 2026-04-25T03:37:39, Padhi, Beleswar <b-padhi@ti.com> wrote:
-> arm: dts: k3-binman: Add template for packing HSM firmware
+> arm: dts: k3-{j721s2/j722s/j784s4}-binman: Pack HSM firmware inside tispl.bin
 >
-> The HSM M4 core needs to be booted at R5 SPL stage so that it can be
-> used for further Authentication and security services. Therefore, the
-> firmware for the HSM core needs to be packed in tispl.bin fit image so
-> that it can be used by R5 SPL to boot the HSM core.
->
-> Add a template for packing the HSM firmware in tispl.bin. The template
-> also contains necessary fields which will be populated in the boot
-> extension and load extension in the x509 certificate for HSM firmware.
-> This is required as the HSM firmware needs to be signed before invoking
-> TIFS to authenticate and load the blob to HSM core.
+> Pack the HSM firmware in tispl.bin fit image so that it can be unloaded
+> and used by R5 SPL to boot the HSM core. By default, point to the
+> firmware for HS-SE device type. This needs to be changed to point to
+> appropriate firmware when using a different device type.
 >
 > Signed-off-by: Beleswar Padhi <b-padhi@ti.com>
 >
-> arch/arm/dts/k3-binman.dtsi | 20 ++++++++++++++++++++
->  1 file changed, 20 insertions(+)
+> arch/arm/dts/k3-j721s2-binman.dtsi | 12 ++++++++++++
+>  arch/arm/dts/k3-j722s-binman.dtsi  | 12 ++++++++++++
+>  arch/arm/dts/k3-j784s4-binman.dtsi | 14 ++++++++++++++
+>  3 files changed, 38 insertions(+)
 
-> diff --git a/arch/arm/dts/k3-binman.dtsi b/arch/arm/dts/k3-binman.dtsi
-> @@ -297,6 +297,26 @@
-> +                                     ti-secure {
-> +                                             content = <&hsm_fw>;
-> +                                             keyfile = 'custMpk.pem';
-> +                                             proc_id = <0x80>;
-> +                                             flags_set = <0x04>;
-> +                                             flags_clr = <0x00>;
-> +                                             reset_vector = <0x00>;
-> +                                             dest_addr = <0x43C00000>;
-> +                                             auth_type = <0xFD00>;
-> +                                     };
-
-We should use hyphens in DT property names. The existing ti-secure
-properties (auth-in-place, firewall-cert-data) already follow this
-convention; the python side can still expose them as proc_id etc after
-the usual hyphen-to-underscore translation.
-
-> diff --git a/arch/arm/dts/k3-binman.dtsi b/arch/arm/dts/k3-binman.dtsi
-> @@ -297,6 +297,26 @@
-> +                                             proc_id = <0x80>;
-> +                                             flags_set = <0x04>;
-> +                                             flags_clr = <0x00>;
-> +                                             reset_vector = <0x00>;
-> +                                             dest_addr = <0x43C00000>;
-> +                                             auth_type = <0xFD00>;
-
-Please use lower case hex. Also these could use a short comment above
-the node (or alongside each value) describing what proc-id 0x80 names,
-what bits flags-set 0x04 selects, and what auth-type 0xFD00 means. A
-reference to the TIFS interface doc would also help.
-
-> diff --git a/arch/arm/dts/k3-binman.dtsi b/arch/arm/dts/k3-binman.dtsi
-> @@ -297,6 +297,26 @@
+> diff --git a/arch/arm/dts/k3-j784s4-binman.dtsi b/arch/arm/dts/k3-j784s4-binman.dtsi
+> @@ -154,6 +154,16 @@
+>               fit {
+>                       images {
+> +
 > +#ifdef CONFIG_K3_HSM_FW
 > +                             hsm {
-> +                                     description = "HSM binary";
-> +                                     type = 'standalone';
-> +                                     compression = 'none';
-> +                                     os = 'hsm';
+> +                                     hsm_fw: blob-ext {
+> +                                             filename = 'ti-hsm/hsm-demo-firmware-j784s4-hs.bin';
+> +                                     };
+> +                             };
+> +
+> +#endif
+> +
 
-The os = 'hsm' string is what r5/common.c keys on via
-image_os_match[IMAGE_ID_HSM] to identify this image. Please mention
-that coupling in the commit message (or add a brief comment) so it is
-clear this string is not free-form - i.e. changing it silently breaks
-the post-process matcher.
+Note that the whitespace here is inconsistent with the j721s2 and j722s changes.
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
 
