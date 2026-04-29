@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C26C7FF8867
-	for <u-boot@archiver.kernel.org>; Wed, 29 Apr 2026 12:19:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D62B5FF8867
+	for <u-boot@archiver.kernel.org>; Wed, 29 Apr 2026 12:20:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BCA0B8488C;
-	Wed, 29 Apr 2026 14:19:10 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 500D884882;
+	Wed, 29 Apr 2026 14:19:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="ryWeZ/5L";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Xl2IC5dF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D14268488B; Wed, 29 Apr 2026 14:19:09 +0200 (CEST)
-Received: from sea.source.kernel.org (sea.source.kernel.org
- [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
+ id 3A25B84876; Wed, 29 Apr 2026 14:19:12 +0200 (CEST)
+Received: from tor.source.kernel.org (tor.source.kernel.org
+ [IPv6:2600:3c04:e001:324:0:1991:8:25])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 38FB684882
- for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 14:19:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1728784882
+ for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 14:19:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mwalle@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id AB3CE44506;
+ by tor.source.kernel.org (Postfix) with ESMTP id 29E5060128;
+ Wed, 29 Apr 2026 12:19:09 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 06492C19425;
  Wed, 29 Apr 2026 12:19:04 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B51DAC19425;
- Wed, 29 Apr 2026 12:19:00 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1777465144;
- bh=y4M2brzoJZlct4xZ+C83wmqbrbWBRPn3kxi1huTxHp4=;
+ s=k20201202; t=1777465148;
+ bh=/8kxnCfYMmeO6bsvt0JYV8lUah7jgxnPA4/Jd2WU9EE=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=ryWeZ/5LGBZT3JBOOAnVGj96pV2Ua+Jvdx5F5aNm/1gzGeFSzpgbNjgotFRAK3fB4
- hkxQ6aylfU/QgIYtulcc9o53eWzGQ96XbCaj32A63E8/meyHBxjEciF3OY4CejhGD/
- QUvZy4H57IVGK27kKfeOL3AGPDFIx9NJ8xvrhNFbupCUZuQRfWYbzymVl1B4xtystJ
- Tt/qbA5Npd+NtvoDmiL86R9RZapGEvxhj89vadpeJ5sqdQEiCIkwiKtTnAvEHKzDD5
- EUT+PfhTH7JVbxYaQ9nQcn4gvCAj1ftTFRp9zgFETAXP3YFjihUbNDFQ9Gv4dmW1S/
- 9lkSXiRmIj3UQ==
+ b=Xl2IC5dFBVJ1Ls7ajExcewxE3/046krS6JqGLp7uU86ohYTvGAvwUGqAeTjD28UsP
+ NavMq2U+D8afujE6zK1HYdMHN4SXUTgG0CR824kHQADINcteKuPI1/IlqwyIDtQq03
+ i4WeoHU9mVt+riLUfiMMNfp22Yp2kFtUKOaKdZGmNS+ehr9PwqZ2V+Snw5VHXTO9YI
+ pNdayyCIeE/wEiEUGO+vi+MG8ZgL0lNnjXYFbSzl1EUFvNf/WL1JpFWcpGqcGe6PU6
+ VQ9cN2RJfBs8GH6XeinjsbGhs2com5wQMDj8DX7h6Ys3eoLWkobBUFzpNNkNjLiB+g
+ fgha+7z+nKeOg==
 From: Michael Walle <mwalle@kernel.org>
 To: =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>,
  Tom Rini <trini@konsulko.com>, Pramod Kumar <pramod.kumar_1@nxp.com>,
@@ -55,9 +55,9 @@ To: =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>,
 Cc: Tomas Alvarez Vanoli <tomas.alvarez-vanoli@hitachienergy.com>,
  Jerome Forissier <jerome.forissier@arm.com>, u-boot@lists.denx.de,
  Michael Walle <mwalle@kernel.org>
-Subject: [PATCH 08/10] p2041rdb: support SDcard boot
-Date: Wed, 29 Apr 2026 14:17:22 +0200
-Message-ID: <20260429121816.1026326-9-mwalle@kernel.org>
+Subject: [PATCH 09/10] p2041rdb: update README and fix typos
+Date: Wed, 29 Apr 2026 14:17:23 +0200
+Message-ID: <20260429121816.1026326-10-mwalle@kernel.org>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20260429121816.1026326-1-mwalle@kernel.org>
 References: <20260429121816.1026326-1-mwalle@kernel.org>
@@ -79,75 +79,74 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The RCW was just supporting SPI boot. Add a second one for the SDcard
-boot. While at it, use the same naming scheme as for the other NXP
-boards.
+Nowadays, u-boot can build the pbl image itself. Refer to that image in
+the documentation. Also fix some typos.
 
 Signed-off-by: Michael Walle <mwalle@kernel.org>
 ---
- board/nxp/p2041rdb/p2041rdb_rcw_sd.cfg                | 11 +++++++++++
- .../{rcw_p2041rdb.cfg => p2041rdb_rcw_spi.cfg}        |  0
- configs/P2041RDB_SDCARD_defconfig                     |  3 ++-
- configs/P2041RDB_SPIFLASH_defconfig                   |  2 +-
- 4 files changed, 14 insertions(+), 2 deletions(-)
- create mode 100644 board/nxp/p2041rdb/p2041rdb_rcw_sd.cfg
- rename board/nxp/p2041rdb/{rcw_p2041rdb.cfg => p2041rdb_rcw_spi.cfg} (100%)
+ board/nxp/p2041rdb/README | 34 ++++++++++++----------------------
+ 1 file changed, 12 insertions(+), 22 deletions(-)
 
-diff --git a/board/nxp/p2041rdb/p2041rdb_rcw_sd.cfg b/board/nxp/p2041rdb/p2041rdb_rcw_sd.cfg
-new file mode 100644
-index 00000000000..f22f3335e73
---- /dev/null
-+++ b/board/nxp/p2041rdb/p2041rdb_rcw_sd.cfg
-@@ -0,0 +1,11 @@
-+#
-+# Default RCW for P2041RDB.
-+#
-+
-+#PBL preamble and RCW header
-+aa55aa55 010e0100
-+#64 bytes RCW data
-+12600000 00000000 241C0000 00000000
-+649FA0C1 C3C02000 68000000 40000000
-+00000000 00000000 00000000 D0030F07
-+00000000 00000000 00000000 00000000
-diff --git a/board/nxp/p2041rdb/rcw_p2041rdb.cfg b/board/nxp/p2041rdb/p2041rdb_rcw_spi.cfg
-similarity index 100%
-rename from board/nxp/p2041rdb/rcw_p2041rdb.cfg
-rename to board/nxp/p2041rdb/p2041rdb_rcw_spi.cfg
-diff --git a/configs/P2041RDB_SDCARD_defconfig b/configs/P2041RDB_SDCARD_defconfig
-index ad04e2a1172..02ad42170c9 100644
---- a/configs/P2041RDB_SDCARD_defconfig
-+++ b/configs/P2041RDB_SDCARD_defconfig
-@@ -1,6 +1,7 @@
- CONFIG_PPC=y
- CONFIG_TEXT_BASE=0xFFF40000
- CONFIG_SYS_MALLOC_LEN=0x100000
-+CONFIG_SYS_MALLOC_F_LEN=0x600
- CONFIG_SF_DEFAULT_SPEED=10000000
- CONFIG_ENV_SIZE=0x2000
- CONFIG_ENV_OFFSET=0xCF400
-@@ -28,7 +29,7 @@ CONFIG_FIT=y
- CONFIG_FIT_VERBOSE=y
- CONFIG_RAMBOOT_PBL=y
- CONFIG_SYS_FSL_PBL_PBI="board/nxp/p2041rdb/pbi.cfg"
--CONFIG_SYS_FSL_PBL_RCW="board/nxp/p2041rdb/rcw_p2041rdb.cfg"
-+CONFIG_SYS_FSL_PBL_RCW="board/nxp/p2041rdb/p2041rdb_rcw_sd.cfg"
- CONFIG_BOOTDELAY=10
- CONFIG_OF_BOARD_SETUP=y
- CONFIG_OF_STDOUT_VIA_ALIAS=y
-diff --git a/configs/P2041RDB_SPIFLASH_defconfig b/configs/P2041RDB_SPIFLASH_defconfig
-index 465b3ee7dc7..fc187eb311c 100644
---- a/configs/P2041RDB_SPIFLASH_defconfig
-+++ b/configs/P2041RDB_SPIFLASH_defconfig
-@@ -31,7 +31,7 @@ CONFIG_FIT_VERBOSE=y
- CONFIG_RAMBOOT_PBL=y
- CONFIG_SPIFLASH=y
- CONFIG_SYS_FSL_PBL_PBI="board/nxp/p2041rdb/pbi.cfg"
--CONFIG_SYS_FSL_PBL_RCW="board/nxp/p2041rdb/rcw_p2041rdb.cfg"
-+CONFIG_SYS_FSL_PBL_RCW="board/nxp/p2041rdb/p2041rdb_rcw_spi.cfg"
- CONFIG_BOOTDELAY=10
- CONFIG_OF_BOARD_SETUP=y
- CONFIG_OF_STDOUT_VIA_ALIAS=y
+diff --git a/board/nxp/p2041rdb/README b/board/nxp/p2041rdb/README
+index ae770277372..c2a2f0ed9e5 100644
+--- a/board/nxp/p2041rdb/README
++++ b/board/nxp/p2041rdb/README
+@@ -43,20 +43,16 @@ Boot from SDCard
+ 	make P2041RDB_SDCARD_config
+ 	make all
+ 
+-2. Generate PBL imge
+-   Use PE tool to produce a image used to be programed to
+-   SDCard which contains RCW and U-Boot image.
+-
+-3. Program the PBL image to SDCard
+-	=> tftp 1000000 pbl_sd.bin
+-	=> mmcinfo
++2. Program the PBL image to SDCard
++	=> tftp 1000000 u-boot.pbl
++	=> mmc info
+ 	=> mmc write 1000000 8 672
+ 
+-4. Program FMAN Firmware ucode
++3. Program FMAN Firmware ucode
+ 	=> tftp 1000000 ucode.bin
+ 	=> mmc write 1000000 690 10
+ 
+-5. Change DIP-switch
++4. Change DIP-switch
+ 	SW1[1-5] = 01100
+ 	Note: 1 stands for 'on', 0 stands for 'off'
+ 
+@@ -66,22 +62,16 @@ Boot from SPI flash
+ 	make P2041RDB_SPIFLASH_config
+ 	make all
+ 
+-2. Generate PBL imge
+-   Use PE tool to produce a image used to be programed to
+-   SPI flash which contains RCW and U-Boot image.
++2. Program the PBL image to SPI flash
++	=> tftp 1000000 u-boot.pbl
++	=> sf probe 0
++	=> sf update $fileaddr 0 $filesize
+ 
+-3. Program the PBL image to SPI flash
+-	=> tftp 1000000 pbl_spi.bin
+-	=> spi probe 0
+-	=> sf erase 0 100000
+-	=> sf write 1000000 0 $filesize
+-
+-4. Program FMAN Firmware ucode
++3. Program FMAN Firmware ucode
+ 	=> tftp 1000000 ucode.bin
+-	=> sf erase 110000 10000
+-	=> sf write 1000000 110000 $filesize
++	=> sf update $fileaddr 110000 $filesize
+ 
+-5. Change DIP-switch
++4. Change DIP-switch
+ 	SW1[1-5] = 10100
+ 	Note: 1 stands for 'on', 0 stands for 'off'
+ 
 -- 
 2.47.3
 
