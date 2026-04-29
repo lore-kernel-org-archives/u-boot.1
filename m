@@ -4,94 +4,104 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74C98FF8873
-	for <u-boot@archiver.kernel.org>; Wed, 29 Apr 2026 14:17:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10852FF8873
+	for <u-boot@archiver.kernel.org>; Wed, 29 Apr 2026 14:18:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 06F12848C1;
-	Wed, 29 Apr 2026 16:17:19 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9557284874;
+	Wed, 29 Apr 2026 16:18:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="aPjZoSVO";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="oItxzd4J";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A3C68848A1; Wed, 29 Apr 2026 16:17:17 +0200 (CEST)
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
- [IPv6:2a00:1450:4864:20::633])
+ id 4670F8487C; Wed, 29 Apr 2026 16:18:32 +0200 (CEST)
+Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
+ [IPv6:2a00:1450:4864:20::532])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A5055848C0
- for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 16:17:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BE53784869
+ for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 16:18:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-b8f9568e074so2089397566b.0
- for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 07:17:15 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1777472235; cv=none;
+Received: by mail-ed1-x532.google.com with SMTP id
+ 4fb4d7f45d1cf-67b32c695efso676033a12.1
+ for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 07:18:29 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1777472309; cv=none;
  d=google.com; s=arc-20240605;
- b=h76YoGIJ08rfxqEbQuQPsCXTb7CSA4A+C/J5kySNsukrm4LfixE1GRceZq5iMG1MG6
- kE57ZkbGOcmcYvBGOqXjUFRg1sRcd7DRKp1oENEoM6s+9qJVZ9HhcFQlVwDVS/AVPY58
- tvfmFlHudB4bZhYPN+RenN+USzlu5D9e511b6e5bpmpEbtJ/2mgJNQ3jJmMBWaD2DUfp
- VWRxAyEHK8LUhRSsLAOTuwgB2BQn7PN6HjvwrIoSG1RvOgRB7Fmz1kJd360NMAWO2eXp
- 74SF7gfuiYc3DZ2YYIMepCOzPeClnQITWSzljUmnFPGEubbkIPbGE6IBV9XXqrPeo+Hy
- YDpQ==
+ b=IVVfOM34tw2/SeNd9Y1ow/pogiSDdDxB/neH9B+X3IuD0ih8MA9vidudwKJV3MiykO
+ t90Du03gOnJ5HeI+8iCPU1SVOKQJ1UyCJBSB6pm1A/tpMafE0MKSjNWX4q8aIdo42xN4
+ SwEzKsUF75+BCxQ7zjgtTh5zF4bmqBDsq5nOdngHRkE4wTj/BpEOH0OeCTUohVIOT32n
+ HQOcAMgbi9G3SVguuKKWxL0FEjh9g+QUqheN8a4qcSJA0JQVpLTT9ry5ubmCMsUtVCCs
+ iLTpw0YON/hOY56kD/ItimB9Q1youuVP/y+CrCrBuCI+gRL2yi51lbHlG8GWfH9A92Ha
+ 4/MA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=jnirWSun7s9YZzs3frfETtKacXRL9VHuCF6IeqnP5NI=;
- fh=FQ2ggemV3oWkRQKn7KPV5Ohm32+M634w9oqGWHJ9TyA=;
- b=PJ4NdTII3XwxKkiW6Lic15ky8565elH0ow3KfCyWjfDu5xG+IH4ISSOM0OWxhXLWDc
- foan3A4TEfouj6A2fyy7/DvM+u8UBYxd64/hkaHg/1wWkUMrSe4ReWQyz6nFsq3tKYse
- 0uFKJATJnoM3Ptqxsyw1UyxC0pxePGGpApCtzAeEWL2ZzSjEKb1m/WuFtpWpanIawC9Z
- 2KWpx/FgLseWq5OQ43+TaS5J+9fvmugo1GXEt0oYh82VJDZwtGjD6U32mDp+qvq6nifn
- Shku1pu0JSKO9nuMJ6mJgcrYfTM4t4jDXw+1Fq6dVLwVDzkPrjI5PNb3OkBj2G9hMVch
- NGxA==; darn=lists.denx.de
+ bh=8qG+pQdS5HNHUL22qTDQ4T13L4fRqlqlAeNTu6QcxOc=;
+ fh=svZgl15q5OtEe2wktK+LWJIgZCf65obVTtlH38DM9o8=;
+ b=EfKsqsOm3YjmyCwuFoX9dlJ3xcxRtPf6vjbhhZraY69r24tmYRk5nq7bi6CQReeX/O
+ N58pkiutTAOlSCUlIqsi32GM0BjMEfRLC+QnhzMwI67yQFIJSfyd/Yhnh3f33gpJ+0KH
+ 8+xtYNWIEY+ytKtAJutSXINueNIm/2W9dkTFu7olSSEGkxesJt6VJSf9XPSzOTyhEDUs
+ KmCRBleL0dEGO865Z3uhzaTDGu1zL9TNetiVOEVSeMd5kOvI2I0f1MjkovhVnUe5hlV7
+ hti4Yo7d6mf0wtdJ0rHmS4rgzzC4vME0RtcQ8yfo+dTU6SZm/MLoEWQRyg67rs2VKOHx
+ sZ4Q==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1777472235; x=1778077035; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1777472309; x=1778077109; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=jnirWSun7s9YZzs3frfETtKacXRL9VHuCF6IeqnP5NI=;
- b=aPjZoSVOZ6vUeb27O1J8EpGtA8rPy1fLAlVPBJkPtV+LU5ZCYrPF1dmpYUdWd+xpT6
- C2t5HVbzaSospyBiMVxIGtuB5MjBzeZk7maP9LUYquIq8CM5oBIhplXaVj/GP/Pq/6ob
- h5AjWDzjllyct9wsEb9NXpWhuvMmTFVKvHMCI=
+ bh=8qG+pQdS5HNHUL22qTDQ4T13L4fRqlqlAeNTu6QcxOc=;
+ b=oItxzd4JxXJamkBeUNZIy8VUeOm5xaaPpr7gjAUL044TW2usXdhZ2H7nUOGZakg5bX
+ 5YLorqc1NmkCchD0PJR2A/IeNspUXXp8SYZzcegXbDzf1mfUYLUH1NjrnYVubDgNFZhG
+ XdknP6z+T1V4vBz+vxuWHTtLziPm5SRffpD0c=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777472235; x=1778077035;
+ d=1e100.net; s=20251104; t=1777472309; x=1778077109;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=jnirWSun7s9YZzs3frfETtKacXRL9VHuCF6IeqnP5NI=;
- b=X4SjqNbueDXanV9gZ0mV++rDJ1bib9vUdXddC8GvbZedAMaWz4Rex08I3lxly3f2V6
- jabusduercLfjqj4CXodxOFjrHyP6lJGVH9bOVEP0kWTtonpPcrYvPz1SGvZat9n+xpB
- Zy2M4WYKfTnFfBV6TpLCvMr3HadhWZaHKDWMklC0SuKs7t1eir5FKjW+X9lEvPFUjPMv
- MpTEPfkndO9r/EA650kHPlziuu55w5jOoQ6FwoSwslLZ5Wg3rjk0Teek3vfFmi+iblXC
- 2ybQTOqX3u60ED+bGkgD7XAtdDynWXbJC2TD03hXFF0zJNAzMPtIJssFa1R/wVZhBk8l
- bscw==
-X-Gm-Message-State: AOJu0YzBmJX0kZdPIMYD8sADvsCb0AGZIB8ILyEbtDLDT0wayxfHqiDd
- vRw/HtFsV7wsrguMW+haK/gELESe3w5NIdeJqTYz8bL2q6uEETrsSo8BunKUKpMxPhYk0eGXjMq
- nQMpup1b0s0rxTF6XNYYkPaFgQm/NKZ872u2SlwRv
-X-Gm-Gg: AeBDies7YD9QXjVtIBnTP4i1od/MJ/nrjeBPnySGNHBctfvMnjv8hFXPrzlsmkEdfD6
- eezk0zIxgKJvqPkgC/zV26UMMgJHrhGrHqzA2GRods3jF7ndiW5eDqkmRKEoUP/OE2f9tiJg4fd
- Zt1b3N9ghL/23FbkAW08G5+FG5aAh6+88xYYh7hEvx4FwEfluPzevF8pcFknvg+He3PGOPGtqX4
- pCaBFgP8vI0agxXdXvBVPD/YPOk8lb//DNxh6FhKbSStbSyoojov84L03FDWsRmUJIWnQ/PH4Kj
- K5aWBCwObDxiEcoU
-X-Received: by 2002:a17:907:7210:b0:b94:a1d4:ceff with SMTP id
- a640c23a62f3a-bb803d6577amr480644166b.35.1777472235087; Wed, 29 Apr 2026
- 07:17:15 -0700 (PDT)
+ bh=8qG+pQdS5HNHUL22qTDQ4T13L4fRqlqlAeNTu6QcxOc=;
+ b=KZy581Exl7FZkgTxUMggZDuPcSIQz6vYUuKEuZE5O4c5GaZAhwrRuQBhJuOyEobYtB
+ 8UE3uyUCu7V3xwUcNEvJfByM9uqXTUy+v6aBw7GfSYqH281P5WqdcLnMtUkjqPGbqotl
+ 1FUSPNv6qLakaiBjpZrh4EMj4wNd9of9Tdg+MTkOTvCMGZwcyoxqGOHTcX/ThwHcJstR
+ bJpYRLIYTZ+pp91FZ5kV8Bs9dpJG8vIPTpX9T+uhNNEfr9g0MF/Yy755hY2hrfl+m9Cv
+ cgF7PniMV87+1e2sdkoHDOKFOVVQhC3cHRuQIWx7t9c+3dMstw6UlR+GbZcP5dVRk2zR
+ YNFg==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ8+PYBmDuCwfT9wlafHDR5dsBJ3JdpgXFw42FbYm2tMi8KfRowZHnH1kmbErbDEs4/RyZJIHRg=@lists.denx.de
+X-Gm-Message-State: AOJu0YwYzFgepI128+i++/gxp4jzUWv81O3HpSmbvfiQgjXR4UkYtI01
+ VjaAWFdB/Rth4xdKJlUXrnCPWApGpdLmXDcips1t6qzdzLDX5m3NAO7GTCMK6ajquPlOzlD6H3j
+ AB+TPBz+ogtbpdPefb4EQAWwOa+9CAO6K7dKYSIc3
+X-Gm-Gg: AeBDietqM/nuQptDTL8jxPKsyF5Tlsjq0pVh5e33GevS+MvHR8Z5iu3m2y1m5VytC0M
+ 73zyCr2bWVBbb7apXeJztshoicFFRYuSoG/k+tw6qSuZ66u0evQ24UPZjSsZ9jgSbCknVgnG+It
+ 8iYVlksoovUx/nuCLf7ekwJjvoMAInWg9w8Lislf5WYynFTc4q72skKy0zevZ+3Tkbspj0h+BG1
+ YCA94rTSbYKSVxzkYsxZJW9WEcmVGZd9xeLxd64eOJbcrcmCG+c9/wl4SP/RjygJJh38tYdXdL+
+ PyErg8ylZiECDIzK
+X-Received: by 2002:a17:906:9fc4:b0:ba6:79c0:c743 with SMTP id
+ a640c23a62f3a-bb9582bbb5cmr203832266b.11.1777472309207; Wed, 29 Apr 2026
+ 07:18:29 -0700 (PDT)
 MIME-Version: 1.0
-References: <cover.1776949417.git.jcethrid@gmail.com>
-In-Reply-To: <cover.1776949417.git.jcethrid@gmail.com>
+References: <f8f4e639-0e73-4d14-828a-92dbfe5526ba@cherry.de>
+ <CAFLszTjWZ9DBKVui_2EE-nSg8K+5eC9V8jvwp638dLeyp_p6vw@mail.gmail.com>
+ <175e1198-2ac4-48de-b68a-c29f786832cc@cherry.de>
+ <CAFLszThQ+kyCkojFm2=VNtLTtLDYT4iVmpqnto8awiMVqsct0Q@mail.gmail.com>
+ <20260427144630.GG41863@bill-the-cat>
+In-Reply-To: <20260427144630.GG41863@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 29 Apr 2026 08:17:02 -0600
-X-Gm-Features: AVHnY4JQ8RmXMD9E3Z04hg5Ra3g6rYg77R5hqEAx3Bp-StwPrr9sZyx4V0IaS94
-Message-ID: <CAFLszThGOgq=H_CuVbo1eSV6=XreLwjFbMeDVYRNUWpcGVHAyg@mail.gmail.com>
-Subject: Re: [PATCH v5 00/15] sc5xx Environment Cleanup and Fixes
-To: Caleb Ethridge <jcethrid@gmail.com>
-Cc: u-boot@lists.denx.de, malysagreg@gmail.com, trini@konsulko.com, 
- linux@analog.com, philip@philipmolloy.com, 
- Caleb Ethridge <caleb.ethridge@analog.com>
+Date: Wed, 29 Apr 2026 08:18:14 -0600
+X-Gm-Features: AVHnY4JT4H0s5V-8J1ZdxCdyqET2iXMiS1VheB2gathVEOq0f_K4Bm9aoNAZqHg
+Message-ID: <CAFLszTgga6eFp2aPF-MzJEqeqcEV-bMJhb4_ph_bE-1Dv4e_Cg@mail.gmail.com>
+Subject: Re: Couple of clang warnings for Rockchip boards
+To: Tom Rini <trini@konsulko.com>
+Cc: Quentin Schulz <quentin.schulz@cherry.de>,
+ U-Boot Mailing List <u-boot@lists.denx.de>, 
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>, 
+ Jonas Karlman <jonas@kwiboo.se>, Xuhui Lin <xuhui.lin@rock-chips.com>, 
+ Heiko Stuebner <heiko@sntech.de>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Sebastian Reichel <sebastian.reichel@collabora.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -109,96 +119,83 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Caleb,
+Hi Tom,
 
-On Thu, 23 Apr 2026 at 08:25, Caleb Ethridge <jcethrid@gmail.com> wrote:
+On Mon, 27 Apr 2026 at 08:46, Tom Rini <trini@konsulko.com> wrote:
 >
-> This series performs a general cleanup of the default U-boot environment
-> for sc5xx boards, stemming from the decision to no longer store the
-> environment in the SPI flash. The environments for each board have been
-> edited to contain the minimum number of commands needed for all supported
-> boot modes to avoid confusion, and the default boot command synced to spi
-> for all boards that support it. The filesystem for the SPI flash has also
-> been changed from jffs2 to ubifs.
+> On Mon, Apr 27, 2026 at 11:54:09PM +1200, Simon Glass wrote:
+> > Hi Quentin,
+> >
+> > On Thu, 23 Apr 2026 at 22:24, Quentin Schulz <quentin.schulz@cherry.de> wrote:
+> > >
+> > > Hi Simon,
+> > >
+> > > On 4/22/26 11:57 PM, Simon Glass wrote:
+> > > > Hi Quentin,
+> > > >
+> > > > On Thu, 23 Apr 2026 at 01:26, Quentin Schulz <quentin.schulz@cherry.de> wrote:
+> > > >>
+> > > >> Hi all,
+> > > >>
+> > > >> I'm looking into force-enabling CONFIG_WERROR for all Rockchip SoCs.
+> > > >> First, let me know if this is a bad idea :)
+> > > >
+> > > > I don't like it, as it makes development slower. I like to see all the
+> > > > warnings created by a change and tend to fix them iteratively. We
+> > > > already have a warning check in CI. A better approach is to
+> > > >
+> > > > Can you use: KCFLAGS=-Werror
+> > > >
+> > > > either in your environment or on the 'make' cmdline?
+> > > >
+> > >
+> > > Well, if it's during development, you can always disable WERROR? The
+> > > fact that I've never actually enabled -Werror locally in about a decade
+> > > in U-Boot probably isn't a good sign. One of the things that make me
+> > > wary though is compiler updates with new warnings. I've tested with
+> > > clang 22, don't know when clang 23 is planned to be released. GCC 16 is
+> > > about to be released as well.
+> > >
+> > > By having the check in CI, we have a longer-than-necessary feedback loop
+> > > for contributors. Has this been an issue in the past? /me shrugs
+> >
+> > This is strange though, because people should see the warnings during
+> > development. I wonder if it is scrolling off the screen.
+> >
+> > One my bugbears is non-actionable output. When the build succeeds
+> > (with no warnings) I see no output, using 'buildman -I --board xxx -w
+> > -o /tmp/b/xxx' or in fact these days 'um build xxx'. This uses 'make
+> > -s' under the hood, so that it doesn't print a huge list of filenames,
+> > etc. I also sometimes do a 'fresh' build with 'um build -F xxx' to
+> > check everything is clean ('buildman -m' does something similar).
+> >
+> > Note that buildman returns exit code 101 if there are any warnings, so
+> > the build basically fails.
+> >
+> > >
+> > > No defconfig seems to be setting this option, not sure exactly why that is.
+> >
+> > To me this is a difference between 'functionality' options and
+> > development options. Putting development options in Kconfig makes it
+> > harder to turn them on and off, since you must either edit the
+> > defconfig or edit the .config file. It is easier to just pass an
+> > environment variable.
 >
-> A bug with the Ethernet reset line on the sc594 has been fixed, and the
-> sc573 has been renamed from the EZKIT to the EZLITE to match the name of the
-> publically available board. EZKIT was only used internally before release.
-> Preliminary binman support for sc5xx boards has been removed as it was unused
-> and full support never added.
->
-> Signed-off-by: Caleb Ethridge <caleb.ethridge@analog.com>
->
-> Changes in v5:
-> - Updated several commit messages for clarity
-> - Corrected load addresses for sc594-ezlite
-> - Added sc584-ezkit to USB support
-> - Removed now unused Kconfig options including SC5XX_FITIMAGE_OFFSET
->
-> Caleb Ethridge (14):
->   configs: sc5xx: Do not store environment in SPI flash
->   mach-sc5xx: Remove update commands from default environment
->   mach-sc5xx: Update boot commands
->   mach-sc5xx: Switch from tftp to wget
->   mach-sc5xx: Add USB boot command
->   mach-sc5xx: Remove preliminary binman support
->   dts: sc594: Fix gige-reset line on EZKIT
->   mach-sc5xx: sc573: Rename EZKIT board to EZLITE
->   mach-sc5xx: Update image load address
->   mach-sc5xx: Update SPI bootargs for ubifs
->   configs: sc5xx: Set default bootcmd to SPI boot
->   arm: sc5xx: Remove SC5XX_LOADADDR
->   arm: sc5xx: Add fdt_addr_r, kernel_addr_r, and ramdisk_addr_r
->   mach-sc5xx: Remove unused image offset Kconfig options
->
-> Ozan Durgut (1):
->   arm: sc5xx: add missing boot env selectors
->
->  arch/arm/dts/Makefile                         |   2 +-
->  .../dts/{sc573-ezkit.dts => sc573-ezlite.dts} |   4 +-
->  arch/arm/dts/sc594-som-ezkit.dts              |   2 +-
->  arch/arm/dts/sc5xx.dtsi                       |  41 -------
->  arch/arm/mach-sc5xx/Kconfig                   |  71 +-----------
->  arch/arm/mach-sc5xx/init/dmcinit.c            |   2 +-
->  board/adi/sc573-ezkit/sc573-ezkit.env         |  17 ---
->  .../adi/{sc573-ezkit => sc573-ezlite}/Kconfig |   8 +-
->  .../{sc573-ezkit => sc573-ezlite}/Makefile    |   2 +-
->  .../sc573-ezlite.c}                           |   0
->  board/adi/sc573-ezlite/sc573-ezlite.env       |  16 +++
->  board/adi/sc584-ezkit/sc584-ezkit.env         |   9 +-
->  board/adi/sc589-ezkit/sc589-ezkit.env         |   9 +-
->  board/adi/sc589-mini/sc589-mini.env           |   9 +-
->  board/adi/sc594-som-ezkit/sc594-som-ezkit.env |   9 +-
->  .../adi/sc594-som-ezlite/sc594-som-ezlite.env |   8 +-
->  board/adi/sc598-som-ezkit/sc598-som-ezkit.env |   9 +-
->  .../adi/sc598-som-ezlite/sc598-som-ezlite.env |  14 ++-
->  ...ezkit_defconfig => sc573-ezlite_defconfig} |   9 +-
->  configs/sc584-ezkit_defconfig                 |  10 +-
->  configs/sc589-ezkit_defconfig                 |  12 +-
->  configs/sc589-mini_defconfig                  |  12 +-
->  configs/sc594-som-ezkit-spl_defconfig         |   7 +-
->  configs/sc594-som-ezlite-spl_defconfig        |   7 +-
->  configs/sc598-som-ezkit-spl_defconfig         |   5 +-
->  configs/sc598-som-ezlite-spl_defconfig        |   5 +-
->  .../arm/adi/adi,sc5xx.yaml                    |   2 +-
->  .../configs/{sc573-ezkit.h => sc573-ezlite.h} |   4 +-
->  include/env/adi/adi_boot.env                  | 104 +++++-------------
->  29 files changed, 106 insertions(+), 303 deletions(-)
->  rename arch/arm/dts/{sc573-ezkit.dts => sc573-ezlite.dts} (98%)
->  delete mode 100644 board/adi/sc573-ezkit/sc573-ezkit.env
->  rename board/adi/{sc573-ezkit => sc573-ezlite}/Kconfig (92%)
->  rename board/adi/{sc573-ezkit => sc573-ezlite}/Makefile (79%)
->  rename board/adi/{sc573-ezkit/sc573-ezkit.c => sc573-ezlite/sc573-ezlite.c} (100%)
->  create mode 100644 board/adi/sc573-ezlite/sc573-ezlite.env
->  rename configs/{sc573-ezkit_defconfig => sc573-ezlite_defconfig} (88%)
->  rename include/configs/{sc573-ezkit.h => sc573-ezlite.h} (79%)
->
-> --
-> 2.34.1
->
+> The point of a configuration is that it configures the build. Stuff in
+> environment (directly or make FOO=bar) is a workaround and anti-pattern.
+> Having to run one of the config front-end to change the config is a
+> feature, and good thing.
 
-This looks good to me. I've given it another look through and made a
-few more minor comments.
+To give an example, we have boards which enable LTO, but it is
+sometimes useful to disable it during development - it used to be a
+huge time sync but something seems to have changed recently, as I
+don't see much of a performance gap now. We don't want people
+disabling LTO in the defconfig, though. The same applies for things
+like V=1
+
+So I think there are build features which are of no use to end-users,
+but are helpful for development. That is the distinction we have had
+for a while and it would be a shame to lose it.
 
 Regards,
-SImon
+Simon
