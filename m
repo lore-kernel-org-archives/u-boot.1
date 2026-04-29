@@ -4,98 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C16EFF8867
-	for <u-boot@archiver.kernel.org>; Wed, 29 Apr 2026 08:50:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4ACAFF8864
+	for <u-boot@archiver.kernel.org>; Wed, 29 Apr 2026 08:50:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1D523847C3;
-	Wed, 29 Apr 2026 10:50:27 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5BEC48483F;
+	Wed, 29 Apr 2026 10:50:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="BFnOxrn8";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="HBym5zYN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5599B84712; Wed, 29 Apr 2026 10:50:25 +0200 (CEST)
-Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
- [IPv6:2a00:1450:4864:20::333])
+ id 0DE188482F; Wed, 29 Apr 2026 10:50:37 +0200 (CEST)
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [IPv6:2a00:1450:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 254EA847C3
- for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 10:50:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8AEE384840
+ for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 10:50:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-48334ee0aeaso126002385e9.1
- for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 01:50:23 -0700 (PDT)
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-488ad135063so111833135e9.0
+ for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 01:50:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1777452622; x=1778057422; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1777452634; x=1778057434; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=gXiswBwjfJN5UHPIIUzkHSv3u4FjAaBgmiudyaPDMk4=;
- b=BFnOxrn8wZNqejX5c0vTbx7dRL8LqdOrbS9Nvf6+SdocNcUE5XAqZIlunPcZXf2TCw
- RbvZf9EtZPVezxsRgLM7e/gV6VMy42PrQHFfabzsYWiLTd5oBFCuESTohZ3dQK7Si9j2
- DRPcHOr/2PW5SaqQBigl2Aj7PrO7j/Fgu/TbEDFe1fMZFbMpo9Ij5wXUgpx8AipRhl8t
- dWJY2R3deqemn7JrTfwKILTZ2L1znS3T+60b9/NdciKoNEy0jR8KMNTeUcsluUSSq1oM
- ZmQ8c3iHtVek9L4t60xSXnVrIhz0k6XOhsy7B5agUiueQsnIfATxhZSVlBbtDrtkXwPY
- Dmrg==
+ bh=TGM7jTMdiZvshLZ8M3KyCCF2RR9pPetfR27OfhuJkmY=;
+ b=HBym5zYNMcnmOHSqt1TzprQGh+XVSgxX6meXzQ0nUehGZS7orRoKBB11o61oOk5pdl
+ 6++Rq0QFo3bkkWKgK1smvUTdwunidkXRvz/8qR2kgoSp5WA4gt5diaD67RkpzvBJlbOB
+ tithpYq9SRBH8ujQFYoZqhS/In0pwOO2K7XXhFETOcy6ROBZyV669Jw4KSo5d4/Ksv2d
+ nTZk/xPrafVlpURJanM7tyQGLrqAuTmArBF/JaZseUU5zbW0Woz6I6IIHdAyZSvuWBxZ
+ KEUy8bZjezhTRjEaJ8F46l6sJywWz5QW6uKNgj/MkTgobPp4+fl4NBEdoUglj5VTI9q8
+ MR9A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777452622; x=1778057422;
+ d=1e100.net; s=20251104; t=1777452634; x=1778057434;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=gXiswBwjfJN5UHPIIUzkHSv3u4FjAaBgmiudyaPDMk4=;
- b=RILbaRdfpOwshzd/hMNJwppnPqzkZjtvalwUenEyZa8kp+XpP3HRw2EXc+0LyzMJci
- i37ZATDSjeJ2IC/jSiRniv58AE9CkCmwpiz3TUS8vWUCpMpKKn3SJAq+QiUJ2C5zN5Kr
- UdirPnSADlsBrmF86+B7XJ7+MhqTCQqSmNrIqinc9g9+TD3QhbfWojnc3Z0S8DiY9jks
- o/0PbPSwtGdeu3cPR6V5PO8eCqvF2zJIa6wxu041Yp8I6RyVHZPeF68IoQz2msKitjlQ
- 4/lRIze/Rq3kTjtg5Yc/rPLend1enf9TNL6adjwObzhwjJqpmBUw1cjv4EKR0e3fXhEG
- 9EDg==
-X-Forwarded-Encrypted: i=1;
- AFNElJ9T/pKcwzngmtGozIPcSNWs4MY5ME+K+QUrK8np/Lo7cYJ8FOB1N4qXbQra7SBe+E0PiehtNaE=@lists.denx.de
-X-Gm-Message-State: AOJu0YxsJ/8f30wU9GamlsU1PGWgxL9Uvv9q3l2eRA91ccd9MQAHe4Eu
- 0FeHk7aVqI29+Xe9jpVGxZdMdYt0MBhVPeFvvCQfFAF7sBJq7XCQPPhJbO+ddB66U2Q=
-X-Gm-Gg: AeBDievgE6USjer4G4mwp6welYfHxkkrFLF2Kr33l9ZsoNyiHTW4GGRm03aINqKSWMS
- EZsaNfKONvFd6Hzlv28y1ntom8FZXAfkSYeXie2hEiT0ruPdAETi/K6rq3OWZvx/GKon8GkC+Oi
- u1g7Ct9rLrS56ZRhRICKWaNixtMfoRaOgIsVCz14zQkIoy1b2rELXUJH3cnuAIF0/peTsoiiS7H
- sBl3fHA1ViTCKqVwlDWbYfEXHfvzwZFK6bhH9D+BCMnR2eNTT6ZYpx7sSXYIVRxh+A+9zuO7wdK
- hr5BSW6y5izP/xMBf3c1bAyhUbB0wInTBfLBdQzSjTExzBaqQM/L+Aid94JOrI1DRDmo0gNxV6x
- 5bCc03HENgJ0kU1coYf7YmASdUyi2ozB9siURS+KM9T2RSTv9ZxVNK47DuJbDpZbtqG4B7vMLHf
- kc02Y/EkC6P8DL2yqOSQoO8Z8CVkV2Jj4DCunLRPxx0Q1lnEDrDZxt5pyBeZMULiEu+YRxbFO6t
- q0AR5M=
-X-Received: by 2002:a05:600c:a119:b0:488:b8bc:6a32 with SMTP id
- 5b1f17b1804b1-48a7b5473c7mr36832405e9.23.1777452622478; 
- Wed, 29 Apr 2026 01:50:22 -0700 (PDT)
+ bh=TGM7jTMdiZvshLZ8M3KyCCF2RR9pPetfR27OfhuJkmY=;
+ b=ea/FZpCH3b2wHWB5AZTbXb77Qp2sXPtep4gvC7qE7lPGsZgzvh3Uc375iLVGSECzGY
+ OOQLworzZtqjhpqZWBvGlfAJkJL8UH6/JwAU97xcNMcj+UOHh3oMrqY77YS+rf2MpjZ4
+ wVYRSoJ1TivK2n9eUCMZnE/iVX/rpRiwucpAURTKeFiZATFWHisWEQP3H8fLlemzazZA
+ FdZzB1TiO8liDlwPizyyyHctVUjFzmC8Pd7rAsdnSKgvfwCRWuDlHTYNwQxPCKLWSUTK
+ UXTzq9W/HC/BQVgKF7v5rJO27ctpLu+PU1ECeCtLoYPEamgWEL5oJXFjvUMkeqPXAUCt
+ RsuQ==
+X-Gm-Message-State: AOJu0YycXSw2JOOAT7DYrAdgJmvvMRegxG2j38RZKocTQUjv4SIHHqGb
+ ZXinEsT7Nkn7s712+R+ek2eqgJf9DHjltji6UChSnF53YZJf/4F36phhpBAOjQkc7jQ=
+X-Gm-Gg: AeBDieuJS8gX2MEwwS6i6CQyoV6a22rPjV2XpVkuttx5DvuWrE5OJ2NPIbGxh+NTAGo
+ asNcbPCUabREpXRs52nCPCt5UR9qNudy80uTihTaJmyE6FfH4xk4bS6/xBe9swoSFX214ZhWSwa
+ O8TBDyNgpquh2nI+JGDgY245GRM9w2mjMJALX34BhOi4yA5C3x4fkOK3KThBAqJTLgPeDGQfNni
+ ixaXfbBCunVydA1wUZQIN3uemSUZ/pRHFO5DTCrqN9ZzNl/B4gJ+fwf4c1jBpcGCWHzdMXQYF+O
+ Q48Bu6dv4sEmGNAOMORYyY32d8+0KDjniuXV/BQAyiWFOxGCbwyYtrsm7/t3XO8igGw4tvZyulL
+ S34gDr4D/LCG8G0H6NS3Kcj3zhaD++nOKGbHSqb7ncpqCtSDty4qvhIoG57VF6JDVHqDjnzI115
+ t/iNcIqezUBbEDZIClG3scAHoVRjAx/zALlh0oEZt8kOjJEYtYJ5MRvz/iIiOCKCUeV/6eQPjHE
+ sss1/I=
+X-Received: by 2002:a05:600c:3f14:b0:488:af7f:775f with SMTP id
+ 5b1f17b1804b1-48a7b535a0dmr45719125e9.18.1777452633857; 
+ Wed, 29 Apr 2026 01:50:33 -0700 (PDT)
 Received: from lion.localdomain (p4fc3dd86.dip0.t-ipconnect.de.
  [79.195.221.134]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-48a7c326873sm13923465e9.34.2026.04.29.01.50.21
+ 5b1f17b1804b1-48a7bc80310sm37545395e9.12.2026.04.29.01.50.32
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 29 Apr 2026 01:50:21 -0700 (PDT)
+ Wed, 29 Apr 2026 01:50:33 -0700 (PDT)
 From: Casey Connolly <casey.connolly@linaro.org>
-To: Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io, 
- u-boot@lists.denx.de, Antony Kurniawan Soemardi <linux@smankusors.com>
-Cc: Tom Rini <trini@konsulko.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>, Sam Day <me@samcday.com>, 
- Sughosh Ganu <sughosh.ganu@arm.com>, George Chan <gchan9527@gmail.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, phone-devel@vger.kernel.org
-In-Reply-To: <20260217-qcom-fdt-overlay-v1-1-d0fa0e70d738@smankusors.com>
-References: <20260217-qcom-fdt-overlay-v1-1-d0fa0e70d738@smankusors.com>
-Subject: Re: [PATCH] mach-snapdragon: allocate memory for DT overlays
-Message-Id: <177745261543.126665.11547624657879722362.b4-ty@b4>
-Date: Wed, 29 Apr 2026 10:50:15 +0200
+To: u-boot@lists.denx.de, u-boot-qcom@groups.io, 
+ Ajit Singh <blfizzyy@gmail.com>
+Cc: Lukasz Majewski <lukma@denx.de>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Sumit Garg <sumit.garg@kernel.org>, Tom Rini <trini@konsulko.com>, 
+ Luca Weiss <luca.weiss@fairphone.com>
+In-Reply-To: <20260226193217.82657-1-blfizzyy@gmail.com>
+References: <20260226193217.82657-1-blfizzyy@gmail.com>
+Subject: Re: [PATCH] clk: qcom: sc7280: add missing SDCC1 clocks
+Message-Id: <177745262536.126665.8834334087489413826.b4-ty@b4>
+Date: Wed, 29 Apr 2026 10:50:25 +0200
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
 X-Mailer: b4 0.16-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=554;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=529;
  i=casey.connolly@linaro.org; h=from:subject:message-id;
- bh=V5gwdc39n8AjwUInVNfi/JKLV76E69c7Ygir2k1Dvaw=;
- b=kA0DAAgReTBFn7kwMhcByyZiAGnxxk2gNp7r1VLDXNSk/oPihjpKOvbcmwNOhFb9ZCU9+sgNr
- Yh0BAARCAAdFiEEF8imOYKt0z8ot6DQeTBFn7kwMhcFAmnxxk0ACgkQeTBFn7kwMhdLbAD1GN96
- gCg17qB3On4/0NtIPQErZOBR76ZxwaB3tHyFaQD/UMxznwLdzHfCB5x0sV2RoVvlpHe64A449Jf
- LNTTJLVQ=
+ bh=8h3ySeCs+9gT0gJ47nceRXsjLHLEoY816Q23xWG4inw=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhsyPxyKcd1k7+V6Z15sVXsaYqPG3qcpI3mtZ9cvn3xrax
+ a6mljR1lLIwCHIwyIopsoifWGbZtPayvcb2BRdg5rAygQxh4OIUgIlc+sXwi+nhxRVX70YYL7i/
+ 33fmhe2pys9rmsxazl/IO3g0d/Ll168Z/udmPHq+zmk1T9e0bo3jEWKrlMPkIlsTDO1viP0J9P7
+ afgkA
 X-Developer-Key: i=casey.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -115,8 +113,8 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-On Tue, 17 Feb 2026 08:51:34 +0000, Antony Kurniawan Soemardi wrote:
-> mach-snapdragon: allocate memory for DT overlays
+On Fri, 27 Feb 2026 01:02:17 +0530, Ajit Singh wrote:
+> clk: qcom: sc7280: add missing SDCC1 clocks
 
 Applied, thanks!
 
@@ -125,8 +123,8 @@ First and last time I use b4 review, the commit shas are wrong but you can find 
 Apologies
 
 
-[1/1] mach-snapdragon: allocate memory for DT overlays
-      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/b7c1703b55cb
+[1/1] clk: qcom: sc7280: add missing SDCC1 clocks
+      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/e3da8a860343
 
 Best regards,
 -- 
