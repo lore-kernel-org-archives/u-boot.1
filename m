@@ -4,83 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3613CFF8873
-	for <u-boot@archiver.kernel.org>; Wed, 29 Apr 2026 21:16:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3FF83FF8875
+	for <u-boot@archiver.kernel.org>; Wed, 29 Apr 2026 21:17:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4A43C8490D;
+	by phobos.denx.de (Postfix) with ESMTP id 8169E84912;
 	Wed, 29 Apr 2026 23:15:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20251104.gappssmtp.com header.i=@baylibre-com.20251104.gappssmtp.com header.b="Tp4SQXJB";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20251104.gappssmtp.com header.i=@baylibre-com.20251104.gappssmtp.com header.b="jbv4G4Io";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 42DBE84862; Wed, 29 Apr 2026 15:59:27 +0200 (CEST)
-Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
- [IPv6:2a00:1450:4864:20::430])
+ id A13C284855; Wed, 29 Apr 2026 15:59:29 +0200 (CEST)
+Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
+ [IPv6:2a00:1450:4864:20::332])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2184084855
- for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 15:59:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 146BC84837
+ for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 15:59:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jstephan@baylibre.com
-Received: by mail-wr1-x430.google.com with SMTP id
- ffacd0b85a97d-43d7e23defbso7378828f8f.0
- for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 06:59:24 -0700 (PDT)
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-4891c0620bcso87237125e9.1
+ for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 06:59:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20251104.gappssmtp.com; s=20251104; t=1777471163; x=1778075963;
+ d=baylibre-com.20251104.gappssmtp.com; s=20251104; t=1777471165; x=1778075965;
  darn=lists.denx.de; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=ZiNZkaAL5zMA9YEh/crXokP4skSUkvBz1ZF0HnRK9rI=;
- b=Tp4SQXJBJ9jJbGz2y0DXTNF+HJv2wjLxcONZ1zuRJOh5u1AvX2x5KdBew6H6IgWQSN
- l6Gc2FkPrKR2Spj+H1uPTfL3Ri609xAZ2INrJOVcVxzxtvbLr11FiTTq/eLHQmpA8HKJ
- qWY7l7p8qLZqpXdzR3gXVUMgCyo5OWxwmiPjZBGuoKTUDH0H+xkUGef2PgJD3vrlCvnD
- Aw3oRBmnesTeyNGq39kdtWyaWPRgxiWkX9MWVCZncjHf8Hm6BQsiiTX6buaeKZpXwqUf
- qGYXce7IFq5X14zhcuFOsemZRk5ZyWIQy5u4eF2BP09k4eWlmoZ0aRTwp2tx5t861v/s
- DI9A==
+ :reply-to; bh=f6quaoxQhjr9s3rbFQ1AfbME3klMiGPKGJ3Ars8yRck=;
+ b=jbv4G4IoPK7UKSoMrdbuj9TXQSya/fQFR+DVNBhEHL9U3HhBenWx/C5bdR5RdHT71h
+ /r4Loi1uTZYjb1KWIWC3UBUSCnrOSzOIUFoXwoicL+4yN55kYoFIje4NQQxImDL+S7OS
+ alF/H/4eZRPznbofGZ+r3GG21423zFbMhn6sID9tk67ItHv0I6tnTf/VwceMateYDIzS
+ 3+QAc1w98MREey0P6cASxWXnQrQRzTM1V3mftVS7HOjF8pmQwIDaz5h2FCqp4fgCh6nE
+ rZ6LGcODKO9u3ndR5mneuuoaXrqEpUfdGMk4pVPhbk9/K8F8qagw+TfYJQU959HK9XQO
+ Mx3Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777471163; x=1778075963;
+ d=1e100.net; s=20251104; t=1777471165; x=1778075965;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=ZiNZkaAL5zMA9YEh/crXokP4skSUkvBz1ZF0HnRK9rI=;
- b=IIHhUzEWmNNj90HXAtx9V0pkqjhIGUlRa4Wan7fyJIM4nHXNfbd+nVoeOeBMkLomd3
- DR+pqmTzOC8AA1oc8P+D7h6ALWux1ET5Sj7qyW9GX2oBvVuenXxrphBAsBrDK3Jd4Rn+
- 1gfEcVsp+w0IQ9J5E6wvxxWl9ODkN32L1JF7skYA79VAZQvltetBz/0ygdgMyBqgKxhz
- hn6FlRzJu/aAgpeEioraT1WDR8dQZMnA6EKkkqeZKU0Lh2j6Ja5uKGI6VBliX0Au15bb
- T1hWVnmVE74OoX3+4YdqZ32pVeiaC3kjA4kphuzA7M6nIYHMmZ3ZOSJ52Xrvmsz0WBOI
- ipiQ==
-X-Gm-Message-State: AOJu0Yzs4poG2A1z9axSHVrbiiDUcGUQe29dCVtAC9U+yw/TLLBiIbOL
- b+aOcfSwg+gurpcd1MOFhyGQaaWiN3CnV2Clx9If0d9De3yIZ6SXLh2k7TTjJ+K/xqQ=
-X-Gm-Gg: AeBDiesv2NMRybfjC97ty/yeUWP9cRHXit7pmLKAiiS4eK7ZSpGHm+VsfXWdongz97f
- EIdKDcSfyKu7PVWeBFeWKox81FxtUvHSw6BV9jucNd7lTdwwDMJIRKK59daX9ZUzcTyrfkaOoq5
- Rhtx9weAQAIsRSY8tl7VpWLgUqmix7NBjgIm3nRIFjiLp1aF6CalEuE6vg8N54Pm3V2Z9gPqQM6
- UpxuYBahRrYNeCi9vOVuQZkl7sfX8Yslx/Se1y44iQ/l93Wh0uyVNDd4Yq/47PLNSGGBb38t3fe
- 2epC804eSjJiD6OL0HmQtlhZT6r2L/mGkeK8GgSeGyIn/7MIHOBAsCOKS+gahm335D+ZIhtl7A7
- d8vZ/HpiL99xqm1zMgLoW55EF+2nQOO+c98VgfZzbEJoR0HOh2xM/F+vo2Yu4rPwtdBcX6CPJDe
- ciL6d+iD/tLSS+0bUxL2nb3tKGxDmngs9AC6ecIO15ZjcwgNgBadOsE+eCz+SVlFWSWf67AfS3N
- 3gwrN3e11wqoPL26Xoa1j4z5r9Ws64YV2axtHx8ftRBfCKx1wkaxhpf+yfNYcAyaWjMDYVY4SOk
- 5sxIZg80W4IAFxNj/6Q=
-X-Received: by 2002:a05:6000:200e:b0:43f:dd94:3c30 with SMTP id
- ffacd0b85a97d-44648b51105mr14259017f8f.14.1777471163257; 
- Wed, 29 Apr 2026 06:59:23 -0700 (PDT)
+ bh=f6quaoxQhjr9s3rbFQ1AfbME3klMiGPKGJ3Ars8yRck=;
+ b=pDweIVPj2nxwSvf9el2/9k4kgRwL08i1x2T6lLSrCBUMYsUQsLQQdDNNiiTMLJAbKd
+ eeSjCwKx2UpknCP9srWkrDcjEgVxLjkQZ64ZdiuUT/kV+2dmrf4edAL3tJFFDCH41gUE
+ N5L0UgHRImL8O/aeMWhfyO9MWFXepmocYHpL/7cmDVtx9w2CVDIP7pBkWKpR5nIjjIjh
+ MCDopRbxFgAxEx1LBaA3fBExemLQg8rx6Sj4a/7HiUa+o7Ld7B975spGa+rmg8+SR5de
+ Prbmfx3f4TT9L7o1cfpRTQqpCm0pY3SwYncTG3keWogcva3dtfXVDEM0+EelqjwNVsQs
+ 5Jtg==
+X-Gm-Message-State: AOJu0Ywv//PxzgcmGp3E9pzPXYoTIXyoAOUnA4r92DysjFnM0JTDm17c
+ CJKW0bZhfKtrdFpKMrSkHBLtZ73oMw4zGhHjpRse1Voa0bjlAcWPLgXRJEbMInovn08=
+X-Gm-Gg: AeBDietzI/5zfxm96joM3hsNTky3DSzDRzGj/OiL2Dq9i7L8FO5CxPOS5IHZw48Fq+o
+ O2+k5neNinMC1bnsbOR5kz4JFVhZeCqd9Pi/ER29c11tSof/uEQq5msciZ1rAiO2MsPDb6JmsQ0
+ bI+Iz3JR09zwKiky29nAh6wg5IjjjP+Ze3cUqUI4LvKi4QEwo3yMAtt76BMUYU9x7N8P2rMub1A
+ Zlms+ZCLbSztQ8XCknyeBZUW54w+LCkF1Qec1KrGHBNgoQ3rSWb6V7tXd8A9xRp9JBV9/n8eO/W
+ suDlSr/2wdDjLaiw4N6QicROcRYvi9bPy9rCo+ReEYI3sKnhqFwl8w8btY+AGE9kM4jzeZ4tr+w
+ Xq0BV9ExlThch7lTtzKtO6sEuj9H5rwyPNFsQrBd7oJfW3tDy+ppWRP0WJ+n2rl9UTffzx84uv/
+ W2xBP/yGsc3p26KIBCUsiWfQhTDh/6RK18a527q0ubx46sXTh5LijWX+4qtAqeQBM/o/0FXwyQP
+ 66KqrZZRE15Cx9mdAuV3DRLoLEivlD/pthTi7Lfbbo/KUft3uxb/xz5gBqRu/DFHS/LYEJEx3MJ
+ OhOZCS339skNSKZnmf8=
+X-Received: by 2002:a05:600c:5299:b0:489:1d74:56d with SMTP id
+ 5b1f17b1804b1-48a77b25324mr131213935e9.29.1777471165341; 
+ Wed, 29 Apr 2026 06:59:25 -0700 (PDT)
 Received: from [192.168.1.100]
  (2a02-842a-d52e-6101-6f8f-5617-c4b6-8627.rev.sfr.net.
  [2a02:842a:d52e:6101:6f8f:5617:c4b6:8627])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-447b7ca64ffsm6289675f8f.37.2026.04.29.06.59.21
+ ffacd0b85a97d-447b7ca64ffsm6289675f8f.37.2026.04.29.06.59.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 29 Apr 2026 06:59:22 -0700 (PDT)
+ Wed, 29 Apr 2026 06:59:25 -0700 (PDT)
 From: Julien Stephan <jstephan@baylibre.com>
-Date: Wed, 29 Apr 2026 15:59:00 +0200
-Subject: [PATCH v4 7/9] net: dwc_eth_qos: Add mediatek support
+Date: Wed, 29 Apr 2026 15:59:01 +0200
+Subject: [PATCH v4 8/9] arm: dts: mt8189: Add ethernet support for Genio
+ 520/720 boards
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260429-add-ethernet-support-for-genio-520-720-v4-7-be54e17239b7@baylibre.com>
+Message-Id: <20260429-add-ethernet-support-for-genio-520-720-v4-8-be54e17239b7@baylibre.com>
 References: <20260429-add-ethernet-support-for-genio-520-720-v4-0-be54e17239b7@baylibre.com>
 In-Reply-To: <20260429-add-ethernet-support-for-genio-520-720-v4-0-be54e17239b7@baylibre.com>
 To: u-boot@lists.denx.de
@@ -143,544 +144,209 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Synopsys DWC Ethernet QOS device support for MediaTek SoCs.
-in particular this initial commit adds support for Genio 520/720 and
-Genio 510/700 EVKs
+Add Ethernet support for MediaTek MT8189-based Genio 520 and Genio 720
+development boards.
 
-Signed-off-by: fanyi zhang <fanyi.zhang@mediatek.com>
+The ethernet interface is disabled by default in the SoC dtsi and
+enabled in the board-specific configuration with proper PHY settings.
+
+The ethernet related nodes are not part of current dt submission on the
+kernel [1] and come from downstream u-boot. When switching to
+OF_UPSTREAM we should add them back.
+
+[1]: https://lore.kernel.org/all/20251203-add-mediatek-genio-520-720-evk-v1-3-df794b2a30ae@collabora.com/
+
 Signed-off-by: Julien Stephan <jstephan@baylibre.com>
 ---
- MAINTAINERS                   |   1 +
- drivers/net/Kconfig           |   7 +
- drivers/net/Makefile          |   1 +
- drivers/net/dwc_eth_qos.c     |   6 +
- drivers/net/dwc_eth_qos.h     |   2 +
- drivers/net/dwc_eth_qos_mtk.c | 442 ++++++++++++++++++++++++++++++++++++++++++
- 6 files changed, 459 insertions(+)
+ arch/arm/dts/mt8189.dtsi              | 77 ++++++++++++++++++++++++++++++++
+ arch/arm/dts/mt8371-genio-common.dtsi | 83 +++++++++++++++++++++++++++++++++++
+ 2 files changed, 160 insertions(+)
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 165994cd72f..9b65bb43d8f 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -442,6 +442,7 @@ F:	drivers/clk/mediatek/
- F:	drivers/cpu/mtk_cpu.c
- F:	drivers/i2c/mtk_i2c.c
- F:	drivers/mmc/mtk-sd.c
-+F:	drivers/net/dwc_eth_qos_mtk.c
- F:	drivers/net/mtk_eth/
- F:	drivers/net/phy/mediatek/
- F:	drivers/phy/phy-mtk-*
-diff --git a/drivers/net/Kconfig b/drivers/net/Kconfig
-index 15a4b3b7705..cd868731d11 100644
---- a/drivers/net/Kconfig
-+++ b/drivers/net/Kconfig
-@@ -246,6 +246,13 @@ config DWC_ETH_QOS_INTEL
- 	  The Synopsys Designware Ethernet QOS IP block with the specific
- 	  configuration used in the Intel Elkhart-Lake soc.
+diff --git a/arch/arm/dts/mt8189.dtsi b/arch/arm/dts/mt8189.dtsi
+index e550745ac5d..d4ee268a298 100644
+--- a/arch/arm/dts/mt8189.dtsi
++++ b/arch/arm/dts/mt8189.dtsi
+@@ -364,6 +364,83 @@
+ 			#reset-cells = <1>;
+ 		};
  
-+config DWC_ETH_QOS_MTK
-+	bool "Synopsys DWC Ethernet QOS device support for MediaTek SoCs"
-+	depends on DWC_ETH_QOS && ARCH_MEDIATEK
-+	help
-+	  The Synopsys Designware Ethernet QOS IP block with the specific
-+	  configuration used in MediaTek SoCs.
++		eth: ethernet@1101a000 {
++			compatible = "mediatek,mt8189-gmac", "snps,dwmac-5.10a";
++			reg = <0 0x1101a000 0 0x4000>;
++			interrupts = <GIC_SPI 475 IRQ_TYPE_LEVEL_HIGH 0>;
++			interrupt-names = "macirq";
++			clock-names = "mac_main",
++				      "ptp_ref";
++			clocks = <&topckgen_clk CLK_TOP_ETH_250M_SEL>,
++				 <&topckgen_clk CLK_TOP_ETH_62P4M_PTP_SEL>;
++			assigned-clocks = <&topckgen_clk CLK_TOP_ETH_250M_SEL>,
++					  <&topckgen_clk CLK_TOP_ETH_62P4M_PTP_SEL>,
++					  <&topckgen_clk CLK_TOP_ETH_50M_RMII_SEL>;
++			assigned-clock-parents = <&topckgen_clk CLK_TOP_ETHPLL_D2>,
++						 <&topckgen_clk CLK_TOP_ETHPLL_D8>,
++						 <&topckgen_clk CLK_TOP_ETHPLL_D10>;
++			mediatek,pericfg = <&pericfg_ao_clk>;
++			snps,axi-config = <&stmmac_axi_setup>;
++			snps,mtl-rx-config = <&mtl_rx_setup>;
++			snps,mtl-tx-config = <&mtl_tx_setup>;
++			snps,txpbl = <16>;
++			snps,rxpbl = <16>;
++			clk-csr = <4>;
++			status = "disabled";
 +
- config DWC_ETH_QOS_QCOM
- 	bool "Synopsys DWC Ethernet QOS device support for Qcom SoCs"
- 	depends on DWC_ETH_QOS
-diff --git a/drivers/net/Makefile b/drivers/net/Makefile
-index c485068e5d2..761f7f0f451 100644
---- a/drivers/net/Makefile
-+++ b/drivers/net/Makefile
-@@ -21,6 +21,7 @@ obj-$(CONFIG_DWC_ETH_QOS) += dwc_eth_qos.o
- obj-$(CONFIG_DWC_ETH_QOS_ADI) += dwc_eth_qos_adi.o
- obj-$(CONFIG_DWC_ETH_QOS_IMX) += dwc_eth_qos_imx.o
- obj-$(CONFIG_DWC_ETH_QOS_INTEL) += dwc_eth_qos_intel.o
-+obj-$(CONFIG_DWC_ETH_QOS_MTK) += dwc_eth_qos_mtk.o
- obj-$(CONFIG_DWC_ETH_QOS_QCOM) += dwc_eth_qos_qcom.o
- obj-$(CONFIG_DWC_ETH_QOS_ROCKCHIP) += dwc_eth_qos_rockchip.o
- obj-$(CONFIG_DWC_ETH_QOS_STARFIVE) += dwc_eth_qos_starfive.o
-diff --git a/drivers/net/dwc_eth_qos.c b/drivers/net/dwc_eth_qos.c
-index 0f31d646845..b7e6299c307 100644
---- a/drivers/net/dwc_eth_qos.c
-+++ b/drivers/net/dwc_eth_qos.c
-@@ -1658,6 +1658,12 @@ static const struct udevice_id eqos_ids[] = {
- 		.compatible = "adi,sc59x-dwmac-eqos",
- 		.data = (ulong)&eqos_adi_config
- 	},
-+#endif
-+#if IS_ENABLED(CONFIG_DWC_ETH_QOS_MTK)
-+	{
-+		.compatible = "mediatek,mt8189-gmac",
-+		.data = (ulong)&eqos_mtk_config
-+	},
- #endif
- 	{ }
++			stmmac_axi_setup: stmmac-axi-config {
++				snps,wr-osr-lmt = <0x7>;
++				snps,rd-osr-lmt = <0x7>;
++				snps,blen = <0 0 0 0 16 8 4>;
++			};
++
++			mtl_rx_setup: rx-queues-config {
++				snps,rx-queues-to-use = <4>;
++				snps,rx-sched-sp;
++				queue0 {
++					snps,dcb-algorithm;
++					snps,map-to-dma-channel = <0x0>;
++				};
++				queue1 {
++					snps,dcb-algorithm;
++					snps,map-to-dma-channel = <0x0>;
++				};
++				queue2 {
++					snps,dcb-algorithm;
++					snps,map-to-dma-channel = <0x0>;
++				};
++				queue3 {
++					snps,dcb-algorithm;
++					snps,map-to-dma-channel = <0x0>;
++				};
++			};
++
++			mtl_tx_setup: tx-queues-config {
++				snps,tx-queues-to-use = <4>;
++				snps,tx-sched-wrr;
++				queue0 {
++					snps,weight = <0x10>;
++					snps,dcb-algorithm;
++					snps,priority = <0x0>;
++				};
++				queue1 {
++					snps,weight = <0x11>;
++					snps,dcb-algorithm;
++					snps,priority = <0x1>;
++				};
++				queue2 {
++					snps,weight = <0x12>;
++					snps,dcb-algorithm;
++					snps,priority = <0x2>;
++				};
++				queue3 {
++					snps,weight = <0x13>;
++					snps,dcb-algorithm;
++					snps,priority = <0x3>;
++				};
++			};
++		};
++
+ 		topckgen_clk: clock-controller@10000000 {
+ 			compatible = "mediatek,mt8189-topckgen", "syscon";
+ 			reg = <0 0x10000000 0 0x1000>;
+diff --git a/arch/arm/dts/mt8371-genio-common.dtsi b/arch/arm/dts/mt8371-genio-common.dtsi
+index 046e9d57752..1376a4c378c 100644
+--- a/arch/arm/dts/mt8371-genio-common.dtsi
++++ b/arch/arm/dts/mt8371-genio-common.dtsi
+@@ -281,6 +281,68 @@
+ 			bias-pull-up;
+ 		};
+ 	};
++
++	eth_default_pins: eth-default-pins {
++		txd-pins {
++			pinmux = <PINMUX_GPIO119__FUNC_GBE_TXD3>,
++				 <PINMUX_GPIO120__FUNC_GBE_TXD2>,
++				 <PINMUX_GPIO121__FUNC_GBE_TXD1>,
++				 <PINMUX_GPIO122__FUNC_GBE_TXD0>;
++			drive-strength = <MTK_DRIVE_8mA>;
++		};
++		cc-pins {
++			pinmux = <PINMUX_GPIO127__FUNC_GBE_TXC>,
++				 <PINMUX_GPIO130__FUNC_GBE_TXEN>,
++				 <PINMUX_GPIO129__FUNC_GBE_RXDV>,
++				 <PINMUX_GPIO128__FUNC_GBE_RXC>;
++			drive-strength = <MTK_DRIVE_8mA>;
++		};
++		rxd-pins {
++			pinmux = <PINMUX_GPIO123__FUNC_GBE_RXD3>,
++				 <PINMUX_GPIO124__FUNC_GBE_RXD2>,
++				 <PINMUX_GPIO125__FUNC_GBE_RXD1>,
++				 <PINMUX_GPIO126__FUNC_GBE_RXD0>;
++			drive-strength = <MTK_DRIVE_8mA>;
++		};
++		mdio-pins {
++			pinmux = <PINMUX_GPIO131__FUNC_GBE_MDC>,
++				 <PINMUX_GPIO132__FUNC_GBE_MDIO>;
++			drive-strength = <MTK_DRIVE_8mA>;
++			input-enable;
++		};
++		power-pins {
++			pinmux = <PINMUX_GPIO133__FUNC_GPIO133>,
++				 <PINMUX_GPIO134__FUNC_GPIO134>;
++			output-high;
++		};
++	};
++
++	eth_sleep_pins: eth-sleep-pins {
++		txd-pins {
++			pinmux = <PINMUX_GPIO119__FUNC_GPIO119>,
++				 <PINMUX_GPIO120__FUNC_GPIO120>,
++				 <PINMUX_GPIO121__FUNC_GPIO121>,
++				 <PINMUX_GPIO122__FUNC_GPIO122>;
++		};
++		cc-pins {
++			pinmux = <PINMUX_GPIO127__FUNC_GPIO127>,
++				 <PINMUX_GPIO130__FUNC_GPIO130>,
++				 <PINMUX_GPIO129__FUNC_GPIO129>,
++				 <PINMUX_GPIO128__FUNC_GPIO128>;
++		};
++		rxd-pins {
++			pinmux = <PINMUX_GPIO123__FUNC_GPIO123>,
++				 <PINMUX_GPIO124__FUNC_GPIO124>,
++				 <PINMUX_GPIO125__FUNC_GPIO125>,
++				 <PINMUX_GPIO126__FUNC_GPIO126>;
++		};
++		mdio-pins {
++			pinmux = <PINMUX_GPIO131__FUNC_GPIO131>,
++				 <PINMUX_GPIO132__FUNC_GPIO132>;
++			input-disable;
++			bias-disable;
++		};
++	};
  };
-diff --git a/drivers/net/dwc_eth_qos.h b/drivers/net/dwc_eth_qos.h
-index ba16f1a37cb..978b848b46e 100644
---- a/drivers/net/dwc_eth_qos.h
-+++ b/drivers/net/dwc_eth_qos.h
-@@ -97,6 +97,7 @@ struct eqos_mac_regs {
- #define EQOS_MAC_MDIO_ADDRESS_PA_MASK			GENMASK(25, 21)
- #define EQOS_MAC_MDIO_ADDRESS_RDA_MASK			GENMASK(20, 16)
- #define EQOS_MAC_MDIO_ADDRESS_CR_MASK			GENMASK(11, 8)
-+#define EQOS_MAC_MDIO_ADDRESS_CR_60_100			0
- #define EQOS_MAC_MDIO_ADDRESS_CR_100_150		1
- #define EQOS_MAC_MDIO_ADDRESS_CR_20_35			2
- #define EQOS_MAC_MDIO_ADDRESS_CR_150_250		4
-@@ -316,3 +317,4 @@ extern struct eqos_config eqos_stm32mp15_config;
- extern struct eqos_config eqos_stm32mp25_config;
- extern struct eqos_config eqos_jh7110_config;
- extern struct eqos_config eqos_adi_config;
-+extern struct eqos_config eqos_mtk_config;
-diff --git a/drivers/net/dwc_eth_qos_mtk.c b/drivers/net/dwc_eth_qos_mtk.c
-new file mode 100644
-index 00000000000..43e1085dfe5
---- /dev/null
-+++ b/drivers/net/dwc_eth_qos_mtk.c
-@@ -0,0 +1,442 @@
-+// SPDX-License-Identifier: GPL-2.0-only
-+/*
-+ * Copyright (c) 2026 BayLibre, SAS.
-+ * Author: Julien Stephan <jstephan@baylibre.com>
-+ */
-+
-+#include <dm.h>
-+#include <dm/device_compat.h>
-+#include <linux/bitfield.h>
-+#include <net.h>
-+#include <phy.h>
-+#include <regmap.h>
-+#include <syscon.h>
-+
-+#include "dwc_eth_qos.h"
-+
-+/*
-+ * Peri Configuration register is SoC specific,
-+ * so add a SoC specific prefix.
-+ */
-+#define MT8189_PERI_ETH_CTRL0		0x270
-+#define MT8189_PERI_ETH_CTRL1		0x274
-+#define MT8189_PERI_ETH_CTRL2		0x278
-+
-+#define EQOS_MTK_RMII_CLK_SRC_INTERNAL	BIT(28)
-+#define EQOS_MTK_RMII_CLK_SRC_RXC	BIT(27)
-+#define EQOS_MTK_ETH_INTF_SEL		GENMASK(26, 24)
-+#define EQOS_MTK_PHY_INTF_MII		0
-+#define EQOS_MTK_PHY_INTF_RGMII		1
-+#define EQOS_MTK_PHY_INTF_RMII		4
-+#define EQOS_MTK_RGMII_TXC_PHASE_CTRL	BIT(22)
-+#define EQOS_MTK_EXT_PHY_MODE		BIT(21)
-+#define EQOS_MTK_TXC_OUT_OP		BIT(20)
-+#define EQOS_MTK_DLY_GTXC_INV		BIT(12)
-+#define EQOS_MTK_DLY_GTXC_STAGE_FINE	GENMASK(11, 6)
-+#define EQOS_MTK_DLY_GTXC_ENABLE	BIT(5)
-+#define EQOS_MTK_DLY_GTXC_STAGES	GENMASK(4, 0)
-+
-+#define EQOS_MTK_DLY_RXC_INV		BIT(25)
-+#define EQOS_MTK_DLY_RXC_ENABLE		BIT(18)
-+#define EQOS_MTK_DLY_RXC_STAGES		GENMASK(17, 13)
-+#define EQOS_MTK_DLY_TXC_INV		BIT(12)
-+#define EQOS_MTK_DLY_TXC_ENABLE		BIT(5)
-+#define EQOS_MTK_DLY_TXC_STAGES		GENMASK(4, 0)
-+
-+#define EQOS_MTK_DLY_RMII_RXC_INV	BIT(25)
-+#define EQOS_MTK_DLY_RMII_RXC_ENABLE	BIT(18)
-+#define EQOS_MTK_DLY_RMII_RXC_STAGES	GENMASK(17, 13)
-+#define EQOS_MTK_DLY_RMII_TXC_INV	BIT(12)
-+#define EQOS_MTK_DLY_RMII_TXC_ENABLE	BIT(5)
-+#define EQOS_MTK_DLY_RMII_TXC_STAGES	GENMASK(4, 0)
-+
-+#define DELAY_MAX_PS			9800
-+#define DELAY_PS_PER_STAGE		290
-+
-+struct eqos_mtk_priv {
-+	struct regmap *peri_regmap;
-+	bool rmii_clk_from_mac;
-+	bool rmii_rxc;
-+	u32 tx_delay_stage;
-+	u32 rx_delay_stage;
-+	bool tx_inv;
-+	bool rx_inv;
-+};
-+
-+static int mtk_clk_init(struct udevice *dev)
-+{
-+	struct eqos_priv *eqos = dev_get_priv(dev);
-+	int ret;
-+
-+	ret = clk_get_by_name(dev, "mac_main", &eqos->clk_tx);
-+	if (ret) {
-+		dev_err(dev, "clk_get_by_name(mac_main) failed: %d", ret);
-+		return ret;
-+	}
-+
-+	ret = clk_get_by_name(dev, "ptp_ref", &eqos->clk_ptp_ref);
-+	if (ret) {
-+		dev_err(dev, "clk_get_by_name(ptp_ref) failed: %d", ret);
-+		return ret;
-+	}
-+
-+	return 0;
-+}
-+
-+static int mtk_set_delay(struct udevice *dev)
-+{
-+	struct eth_pdata *pdata = dev_get_plat(dev);
-+	struct eqos_mtk_priv *mtk_pdata = pdata->priv_pdata;
-+	u32 gtxc_delay_val = 0, delay_val = 0, rmii_delay_val = 0;
-+
-+	switch (pdata->phy_interface) {
-+	case PHY_INTERFACE_MODE_MII:
-+		delay_val |= FIELD_PREP(EQOS_MTK_DLY_TXC_ENABLE,
-+					!!mtk_pdata->tx_delay_stage);
-+		delay_val |= FIELD_PREP(EQOS_MTK_DLY_TXC_STAGES, mtk_pdata->tx_delay_stage);
-+		delay_val |= FIELD_PREP(EQOS_MTK_DLY_TXC_INV, mtk_pdata->tx_inv);
-+
-+		delay_val |= FIELD_PREP(EQOS_MTK_DLY_RXC_ENABLE,
-+					!!mtk_pdata->rx_delay_stage);
-+		delay_val |= FIELD_PREP(EQOS_MTK_DLY_RXC_STAGES, mtk_pdata->rx_delay_stage);
-+		delay_val |= FIELD_PREP(EQOS_MTK_DLY_RXC_INV, mtk_pdata->rx_inv);
-+		break;
-+	case PHY_INTERFACE_MODE_RMII:
-+		if (mtk_pdata->rmii_clk_from_mac) {
-+			/* case 1: mac provides the rmii reference clock,
-+			 * and the clock output to TXC pin.
-+			 * The egress timing can be adjusted by RMII_TXC delay macro circuit.
-+			 * The ingress timing can be adjusted by RMII_RXC delay macro circuit.
-+			 */
-+			rmii_delay_val |= FIELD_PREP(EQOS_MTK_DLY_RMII_TXC_ENABLE,
-+						     !!mtk_pdata->tx_delay_stage);
-+			rmii_delay_val |= FIELD_PREP(EQOS_MTK_DLY_RMII_TXC_STAGES,
-+						     mtk_pdata->tx_delay_stage);
-+			rmii_delay_val |= FIELD_PREP(EQOS_MTK_DLY_RMII_TXC_INV,
-+						     mtk_pdata->tx_inv);
-+
-+			rmii_delay_val |= FIELD_PREP(EQOS_MTK_DLY_RMII_RXC_ENABLE,
-+						     !!mtk_pdata->rx_delay_stage);
-+			rmii_delay_val |= FIELD_PREP(EQOS_MTK_DLY_RMII_RXC_STAGES,
-+						     mtk_pdata->rx_delay_stage);
-+			rmii_delay_val |= FIELD_PREP(EQOS_MTK_DLY_RMII_RXC_INV,
-+						     mtk_pdata->rx_inv);
-+		} else {
-+			/* case 2: the rmii reference clock is from external phy,
-+			 * and the property "rmii_rxc" indicates which pin(TXC/RXC)
-+			 * the reference clk is connected to. The reference clock is a
-+			 * received signal, so rx_delay_stage/rx_inv are used to indicate
-+			 * the reference clock timing adjustment
-+			 */
-+			if (mtk_pdata->rmii_rxc) {
-+				/* the rmii reference clock from outside is connected
-+				 * to RXC pin, the reference clock will be adjusted
-+				 * by RXC delay macro circuit.
-+				 */
-+				delay_val |= FIELD_PREP(EQOS_MTK_DLY_RXC_ENABLE,
-+							!!mtk_pdata->rx_delay_stage);
-+				delay_val |= FIELD_PREP(EQOS_MTK_DLY_RXC_STAGES,
-+							mtk_pdata->rx_delay_stage);
-+				delay_val |= FIELD_PREP(EQOS_MTK_DLY_RXC_INV,
-+							mtk_pdata->rx_inv);
-+			} else {
-+				/* the rmii reference clock from outside is connected
-+				 * to TXC pin, the reference clock will be adjusted
-+				 * by TXC delay macro circuit.
-+				 */
-+				delay_val |= FIELD_PREP(EQOS_MTK_DLY_TXC_ENABLE,
-+							!!mtk_pdata->rx_delay_stage);
-+				delay_val |= FIELD_PREP(EQOS_MTK_DLY_TXC_STAGES,
-+							mtk_pdata->rx_delay_stage);
-+				delay_val |= FIELD_PREP(EQOS_MTK_DLY_TXC_INV,
-+							mtk_pdata->rx_inv);
-+			}
-+		}
-+		break;
-+	case PHY_INTERFACE_MODE_RGMII:
-+	case PHY_INTERFACE_MODE_RGMII_TXID:
-+	case PHY_INTERFACE_MODE_RGMII_RXID:
-+	case PHY_INTERFACE_MODE_RGMII_ID:
-+		gtxc_delay_val |= FIELD_PREP(EQOS_MTK_DLY_GTXC_ENABLE,
-+					     !!mtk_pdata->tx_delay_stage);
-+		gtxc_delay_val |= FIELD_PREP(EQOS_MTK_DLY_GTXC_STAGES,
-+					     mtk_pdata->tx_delay_stage);
-+		gtxc_delay_val |= FIELD_PREP(EQOS_MTK_DLY_GTXC_INV, mtk_pdata->tx_inv);
-+		gtxc_delay_val |= EQOS_MTK_DLY_GTXC_STAGE_FINE;
-+
-+		delay_val |= FIELD_PREP(EQOS_MTK_DLY_RXC_ENABLE,
-+					!!mtk_pdata->rx_delay_stage);
-+		delay_val |= FIELD_PREP(EQOS_MTK_DLY_RXC_STAGES, mtk_pdata->rx_delay_stage);
-+		delay_val |= FIELD_PREP(EQOS_MTK_DLY_RXC_INV, mtk_pdata->rx_inv);
-+
-+		break;
-+	default:
-+		dev_err(dev, "phy interface not supported\n");
-+		return -EINVAL;
-+	}
-+
-+	regmap_update_bits(mtk_pdata->peri_regmap,
-+			   MT8189_PERI_ETH_CTRL0,
-+			   EQOS_MTK_RGMII_TXC_PHASE_CTRL |
-+			   EQOS_MTK_DLY_GTXC_ENABLE |
-+			   EQOS_MTK_DLY_GTXC_INV |
-+			   EQOS_MTK_DLY_GTXC_STAGE_FINE |
-+			   EQOS_MTK_DLY_GTXC_STAGES,
-+			   gtxc_delay_val);
-+	regmap_write(mtk_pdata->peri_regmap, MT8189_PERI_ETH_CTRL1, delay_val);
-+	regmap_write(mtk_pdata->peri_regmap, MT8189_PERI_ETH_CTRL2, rmii_delay_val);
-+
-+	return 0;
-+}
-+
-+static int mtk_set_interface(struct udevice *dev)
-+{
-+	struct eth_pdata *pdata = dev_get_plat(dev);
-+	struct eqos_mtk_priv *mtk_pdata = pdata->priv_pdata;
-+	int rmii_clk_from_mac = mtk_pdata->rmii_clk_from_mac ? EQOS_MTK_RMII_CLK_SRC_INTERNAL : 0;
-+	int rmii_rxc = mtk_pdata->rmii_rxc ? EQOS_MTK_RMII_CLK_SRC_RXC : 0;
-+	u32 intf_val = 0;
-+
-+	/* select phy interface in top control domain */
-+	switch (pdata->phy_interface) {
-+	case PHY_INTERFACE_MODE_MII:
-+		intf_val |= FIELD_PREP(EQOS_MTK_ETH_INTF_SEL, EQOS_MTK_PHY_INTF_MII);
-+		break;
-+	case PHY_INTERFACE_MODE_RMII:
-+		intf_val |= (rmii_rxc | rmii_clk_from_mac);
-+		intf_val |= FIELD_PREP(EQOS_MTK_ETH_INTF_SEL, EQOS_MTK_PHY_INTF_RMII);
-+		break;
-+	case PHY_INTERFACE_MODE_RGMII:
-+	case PHY_INTERFACE_MODE_RGMII_TXID:
-+	case PHY_INTERFACE_MODE_RGMII_RXID:
-+	case PHY_INTERFACE_MODE_RGMII_ID:
-+		intf_val |= FIELD_PREP(EQOS_MTK_ETH_INTF_SEL, EQOS_MTK_PHY_INTF_RGMII);
-+		break;
-+	default:
-+		dev_err(dev, "phy interface not supported\n");
-+		return -EINVAL;
-+	}
-+
-+	/* only support external PHY */
-+	intf_val |= EQOS_MTK_EXT_PHY_MODE;
-+
-+	intf_val |= EQOS_MTK_TXC_OUT_OP;
-+
-+	regmap_write(mtk_pdata->peri_regmap, MT8189_PERI_ETH_CTRL0, intf_val);
-+
-+	return 0;
-+}
-+
-+static int mtk_config_dt(struct udevice *dev)
-+{	struct eth_pdata *pdata = dev_get_plat(dev);
-+	struct eqos_mtk_priv *mtk_pdata = pdata->priv_pdata;
-+	struct ofnode_phandle_args args;
-+	u32 tx_delay_ps = 0, rx_delay_ps = 0;
-+	int ret;
-+
-+	if (!dev_read_u32(dev, "mediatek,tx-delay-ps", &tx_delay_ps)) {
-+		if (tx_delay_ps > DELAY_MAX_PS) {
-+			dev_err(dev, "Invalid TX clock delay: %dps\n", tx_delay_ps);
-+			return -EINVAL;
-+		}
-+	}
-+
-+	if (!dev_read_u32(dev, "mediatek,rx-delay-ps", &rx_delay_ps)) {
-+		if (rx_delay_ps > DELAY_MAX_PS) {
-+			dev_err(dev, "Invalid RX clock delay: %dps\n", rx_delay_ps);
-+			return -EINVAL;
-+		}
-+	}
-+
-+	mtk_pdata->tx_delay_stage = tx_delay_ps / DELAY_PS_PER_STAGE;
-+	mtk_pdata->rx_delay_stage = rx_delay_ps / DELAY_PS_PER_STAGE;
-+
-+	mtk_pdata->tx_inv = dev_read_bool(dev, "mediatek,txc-inverse");
-+	mtk_pdata->rx_inv = dev_read_bool(dev, "mediatek,rxc-inverse");
-+	mtk_pdata->rmii_clk_from_mac = dev_read_bool(dev, "mediatek,rmii-clk-from-mac");
-+	mtk_pdata->rmii_rxc = dev_read_bool(dev, "mediatek,rmii-rxc");
-+
-+	ret = dev_read_phandle_with_args(dev, "mediatek,pericfg", NULL, 0, 0, &args);
-+	if (ret) {
-+		dev_err(dev, "Failed to get mediatek,pericfg property: %d\n", ret);
-+		return ret;
-+	}
-+
-+	mtk_pdata->peri_regmap = syscon_node_to_regmap(args.node);
-+	if (IS_ERR(mtk_pdata->peri_regmap)) {
-+		dev_err(dev, "fail to get regmap: %d\n", (int)PTR_ERR(mtk_pdata->peri_regmap));
-+		return PTR_ERR(mtk_pdata->peri_regmap);
-+	}
-+
-+	return 0;
-+}
-+
-+static int eqos_probe_resources_mtk(struct udevice *dev)
-+{
-+	struct eqos_priv *eqos = dev_get_priv(dev);
-+	struct eth_pdata *pdata = dev_get_plat(dev);
-+	struct eqos_mtk_priv *mtk_pdata;
-+	int ret;
-+
-+	debug("%s(dev=%p):\n", __func__, dev);
-+
-+	ret = eqos_get_base_addr_dt(dev);
-+	if (ret) {
-+		dev_err(dev, "eqos_get_base_addr_dt failed: %d\n", ret);
-+		return ret;
-+	}
-+
-+	mtk_pdata = calloc(1, sizeof(struct eqos_mtk_priv));
-+	if (!mtk_pdata)
-+		return -ENOMEM;
-+
-+	pdata->priv_pdata = mtk_pdata;
-+
-+	ret = mtk_config_dt(dev);
-+	if (ret) {
-+		dev_err(dev, "mtk config dt failed: %d\n", ret);
-+		goto err;
-+	}
-+
-+	ret = mtk_clk_init(dev);
-+	if (ret)
-+		goto err;
-+
-+	pdata->phy_interface = eqos->config->interface(dev);
-+	if (pdata->phy_interface == PHY_INTERFACE_MODE_NA) {
-+		dev_err(dev, "Invalid PHY interface\n");
-+		ret = -EINVAL;
-+		goto err;
-+	}
-+
-+	ret = mtk_set_interface(dev);
-+	if (ret)
-+		goto err;
-+
-+	ret = mtk_set_delay(dev);
-+	if (ret)
-+		goto err;
-+
-+	debug("%s: OK\n", __func__);
-+	return 0;
-+err:
-+	free(mtk_pdata);
-+	return ret;
-+}
-+
-+static int eqos_remove_resources_mtk(struct udevice *dev)
-+{
-+	struct eth_pdata *pdata = dev_get_plat(dev);
-+	struct eqos_mtk_priv *mtk_pdata = pdata->priv_pdata;
-+
-+	debug("%s(dev=%p):\n", __func__, dev);
-+
-+	free(mtk_pdata);
-+
-+	debug("%s: OK\n", __func__);
-+	return 0;
-+}
-+
-+static int eqos_stop_clks_mtk(struct udevice *dev)
-+{
-+	struct eqos_priv *eqos = dev_get_priv(dev);
-+
-+	debug("%s(dev=%p):\n", __func__, dev);
-+
-+	clk_disable(&eqos->clk_ptp_ref);
-+	clk_disable(&eqos->clk_tx);
-+
-+	debug("%s: OK\n", __func__);
-+	return 0;
-+}
-+
-+static int eqos_start_clks_mtk(struct udevice *dev)
-+{
-+	struct eqos_priv *eqos = dev_get_priv(dev);
-+	int ret;
-+
-+	debug("%s(dev=%p):\n", __func__, dev);
-+
-+	ret = clk_enable(&eqos->clk_tx);
-+	if (ret < 0) {
-+		dev_err(dev, "clk_enable(mac_main) failed: %d", ret);
-+		goto err;
-+	}
-+
-+	ret = clk_enable(&eqos->clk_ptp_ref);
-+	if (ret < 0) {
-+		dev_err(dev, "clk_enable(ptp_ref) failed: %d", ret);
-+		goto err_disable_clk_mac_main;
-+	}
-+
-+	debug("%s: OK\n", __func__);
-+	return 0;
-+
-+err_disable_clk_mac_main:
-+	clk_disable(&eqos->clk_tx);
-+err:
-+	debug("%s: FAILED: %d\n", __func__, ret);
-+	return ret;
-+}
-+
-+static int eqos_fix_mac_speed_mtk(struct udevice *dev)
-+{
-+	struct eqos_priv *eqos = dev_get_priv(dev);
-+	struct eth_pdata *pdata = dev_get_plat(dev);
-+	struct eqos_mtk_priv *mtk_pdata = pdata->priv_pdata;
-+
-+	debug("%s(dev=%p):\n", __func__, dev);
-+
-+	switch (pdata->phy_interface) {
-+	case PHY_INTERFACE_MODE_RGMII:
-+	case PHY_INTERFACE_MODE_RGMII_TXID:
-+	case PHY_INTERFACE_MODE_RGMII_RXID:
-+	case PHY_INTERFACE_MODE_RGMII_ID:
-+		if (eqos->phy->speed == SPEED_1000)
-+			regmap_update_bits(mtk_pdata->peri_regmap,
-+					   MT8189_PERI_ETH_CTRL0,
-+					   EQOS_MTK_RGMII_TXC_PHASE_CTRL |
-+					   EQOS_MTK_DLY_GTXC_ENABLE |
-+					   EQOS_MTK_DLY_GTXC_INV |
-+					   EQOS_MTK_DLY_GTXC_STAGE_FINE |
-+					   EQOS_MTK_DLY_GTXC_STAGES,
-+					   EQOS_MTK_RGMII_TXC_PHASE_CTRL);
-+		else
-+			mtk_set_delay(dev);
-+		break;
-+	default:
-+		debug("%s: dev=%p no need to adjust mac delay\n", __func__, dev);
-+		break;
-+	}
-+
-+	debug("%s: OK\n", __func__);
-+	return 0;
-+}
-+
-+static struct eqos_ops eqos_mtk_ops = {
-+	.eqos_inval_desc = eqos_inval_desc_generic,
-+	.eqos_flush_desc = eqos_flush_desc_generic,
-+	.eqos_inval_buffer = eqos_inval_buffer_generic,
-+	.eqos_flush_buffer = eqos_flush_buffer_generic,
-+	.eqos_probe_resources = eqos_probe_resources_mtk,
-+	.eqos_remove_resources = eqos_remove_resources_mtk,
-+	.eqos_stop_resets = eqos_null_ops,
-+	.eqos_start_resets = eqos_null_ops,
-+	.eqos_stop_clks = eqos_stop_clks_mtk,
-+	.eqos_start_clks = eqos_start_clks_mtk,
-+	.eqos_calibrate_pads = eqos_null_ops,
-+	.eqos_disable_calibration = eqos_null_ops,
-+	.eqos_set_tx_clk_speed = eqos_fix_mac_speed_mtk,
-+	.eqos_get_enetaddr = eqos_null_ops,
-+};
-+
-+struct eqos_config eqos_mtk_config = {
-+	.reg_access_always_ok = false,
-+	.mdio_wait = 10000,
-+	.swr_wait = 10,
-+	.config_mac = EQOS_MAC_RXQ_CTRL0_RXQ0EN_ENABLED_DCB,
-+	.config_mac_mdio = EQOS_MAC_MDIO_ADDRESS_CR_60_100,
-+	.axi_bus_width = EQOS_AXI_WIDTH_64,
-+	.interface = dev_read_phy_mode,
-+	.ops = &eqos_mtk_ops
+ 
+ &pmic {
+@@ -311,3 +373,24 @@
+ 	vbus-supply = <&usb_p4_vbus>;
+ 	status = "okay";
+ };
++
++&eth {
++	/*
++	 * TX clock is provided by MAC
++	 */
++	phy-mode = "rgmii-rxid";
++	phy-handle = <&phy>;
++	pinctrl-names = "default", "sleep";
++	pinctrl-0 = <&eth_default_pins>;
++	pinctrl-1 = <&eth_sleep_pins>;
++	status = "okay";
++	mdio {
++		compatible = "snps,dwmac-mdio";
++		#address-cells = <1>;
++		#size-cells = <0>;
++		phy: phy@0 {
++			compatible = "ethernet-phy-idc0ff.0421";
++			reg = <0>;
++		};
++	};
 +};
 
 -- 
