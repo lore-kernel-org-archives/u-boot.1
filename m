@@ -4,97 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05D68FF8867
-	for <u-boot@archiver.kernel.org>; Wed, 29 Apr 2026 08:49:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1CCDFF8867
+	for <u-boot@archiver.kernel.org>; Wed, 29 Apr 2026 08:50:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9A26A847B0;
-	Wed, 29 Apr 2026 10:49:51 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 40636847C6;
+	Wed, 29 Apr 2026 10:50:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ELrc8B/A";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="OlnOCJYh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0DE16847B1; Wed, 29 Apr 2026 10:49:50 +0200 (CEST)
-Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
- [IPv6:2a00:1450:4864:20::330])
+ id 00132847C6; Wed, 29 Apr 2026 10:50:01 +0200 (CEST)
+Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
+ [IPv6:2a00:1450:4864:20::336])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 79E33847AF
- for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 10:49:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8172484701
+ for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 10:49:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-488a88aeec9so149622865e9.2
- for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 01:49:47 -0700 (PDT)
+Received: by mail-wm1-x336.google.com with SMTP id
+ 5b1f17b1804b1-488b0e1b870so211803785e9.2
+ for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 01:49:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1777452587; x=1778057387; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1777452599; x=1778057399; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=vVBor77bgXqxUp4Nu4gczRHRkWYWFmANfcXQHrQXwyo=;
- b=ELrc8B/A5s8XtUsyoCEVN9D2UjsP5zKFsCtJbetZ3Kj17mkLvKTkRR9/rnnbYXge9L
- sQPI4ksB4SeGznam46lIOD3ahqGanOBrxuXm+Rmu9k2anRYYXbreKwgQvp6xLu8gIimo
- z4Lw4tFd0dArSod2iDvABsU0QB67F2WIkj0gog26hruBwYNxlVf73OPK2bs3HOFJRM1/
- CDzAqzeHwuME8bs02E4YVd+J7I05iitTsDxlEFQ7z+WvxhJFLrhMitK09g/dR5kVaSc1
- znIRtlHk8/gaJ6IDaTET5LB/2H9qoPWWAj8RIeYtN7dFdkTnnKL0dxlGyXwc/tyCMnwI
- nBBQ==
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=84m2gbFg97u5bev6axfyvHcLljMtBi2T/mqls701Z60=;
+ b=OlnOCJYhqehmhNQHt4xEqBqkSarcwevdr3rh2Wz84aNdF9drHhto5XJzz07TqHLrE9
+ yNTccvKr2kzPlmWOfjWqvFeQ6DbRjQ2j7EXBTgwWrGh3nsoQ8XjakTNVYxhPs2TAL54J
+ VH/GqFl92Xfi7BaDWAR/pLe8l4sZZzoThgAiSjtdbSUTHu4lV5+zngEzbIBRBV18o0Cr
+ qQORqK8PXSQUD9xWa9RzJdQwVtcCbWcfgt99VIGNHgm1/HLxK+tpmcK7ubxaVDM5V2Ux
+ c27CcjYrNyL4WtnV2MqNNuKH1ZYj9czxOaRVppETGa/nKOtOD5zpweR6P1SaQSkiiOT6
+ x27w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777452587; x=1778057387;
+ d=1e100.net; s=20251104; t=1777452599; x=1778057399;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=vVBor77bgXqxUp4Nu4gczRHRkWYWFmANfcXQHrQXwyo=;
- b=LyvcwQgMqqvyjpZ7c+Dv0TzSqbuL4z8NYrQ+fX/awe9x5VSKZnWggSygxobU+CPTt4
- 0PaPXj90lIXAZjx5V5xpARlYesMFKWZQdv6qwPnDhmLUCocJDOl1SC7zkFLXt9fErLEp
- Cy8F1WDeYPj9HKI3VqQS+H+6RJ0SgDwiWs2KpbG9tG9uOzJYg+qheGXlxkghQMY82yI3
- TV4mzmULLJpRFgpbyLe7HQICkzW3JLw6oUOCCYHZqferMW6VaiblcPL9LwBz4aT5iNip
- bRyacuiFoflzzTwkBSJ6ZSpBt6fK2bkICTc1qs7izx53GEEpZJHXLUa9XO+5Ll5BfxUO
- PoUg==
+ :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=84m2gbFg97u5bev6axfyvHcLljMtBi2T/mqls701Z60=;
+ b=iZqP8Bt9Gb4veJ0uIUKcjshV0iHj10eYkftg1sPor6tw8HFLNGZYumCqsIQDE/4qQR
+ sFnBB3GXHZCSSJm0VCLpF8B4Uh4B6QwYCa9rtN0iqDLSWnwN6GX7HCdZdcuSNPob+Wtq
+ kufdXzCOFI5NIAwUaSqM8z+cfQacFhI4ilMYhkkFyF3tThe3fMndVGgpM8WvL5QtXH51
+ V8dKGeo6UVdhIoSRjOkxCMMU+MEgai9dAJjYDr/ObPnGWISve163KT7kCgNMRCirerdM
+ oolIz0+Y+dfbin8lE8+y9W7WSQEULRXG9JnLTnr6ZKlAE9CFtel6NJKkeXjhGvEU20Mz
+ gnHQ==
 X-Forwarded-Encrypted: i=1;
- AFNElJ/2wVGNGeSVITMGypcJb81lOZ4eKFfutTBpCB2WRNrRg23TLO4Bf/lbTEytoXUILuCMDrA1IK8=@lists.denx.de
-X-Gm-Message-State: AOJu0YwlvT+IW9oWiUpjp2KhQji7GFXkSHdgSwTktxje2bOmu64UyVVZ
- mxT94jXNV+kpbe9VWSmwr6oiqJ9VfxpEY8/qjRewz7xo10IfbhvPFRKrukH/3rvxH2Y=
-X-Gm-Gg: AeBDievqB3GWHkGJFyUEDnlW3HYme5tO/eI9rLuBngrVFLy59805xInu3infOxcBe5w
- GnXusCoUZY9bjwQ4TLZmoXs5GPQxyMYxl7byM1P5uwJ/k1ks1IT8sI9krd+0g/YnvmI8UTZBsVk
- MgA5fZIkY7kd9ihaBPorK05ce5CN6n+p0AOBNlDDrne9KA4bUQ2aKYQu7FN9cTnK8D62E/6BRaP
- 3YZBe/SuITImNMT9Ie2TVDXGQKND9NitR/nfMNjb5WG53Uw0CUmwyLM3u93X8isNbH23L7VdOlG
- Ckp01iNqbsiqf9UwMk8wg7sqzS3uzWa8sVF/Sm1MLd9XWKRATqhBlVGMJqCFGPF61n6GkpF2XXP
- G3GtJvUwRE0N5T2v0Whpx3GP3xzReoGfWycmQ/h1l9PyS00z3QmsFOBeBwo2HbQ7WWKyY7QOxb5
- /VmKeycx+bydY+jHB8PAy+FuBevT0K6MgpQJqTrGmCdWCFqlK3jmf0WT2wmM4+gQ6RI8cMghROK
- YbnH4A=
-X-Received: by 2002:a05:600c:6d8:b0:480:1d0b:2d32 with SMTP id
- 5b1f17b1804b1-48a77ae89ccmr58069435e9.12.1777452586741; 
- Wed, 29 Apr 2026 01:49:46 -0700 (PDT)
+ AFNElJ9yax711R9jZUuRBAbXPCIPSFJJZ6WT3Y7HhO0iuM5t6fJgV2z7/my8XrTQ5DXnpaVhzDgWexE=@lists.denx.de
+X-Gm-Message-State: AOJu0YzUVY4yBXE51pMEmQCFX/2Gk0dAiduJ3vlO9CyiQNQPyuO56q5C
+ 5NUoPlefaxzx9fY7VRXRvm6ea5kQNK5daUuq1ts1OdOzhmsyhigz3lIcFILfOK/yXH8=
+X-Gm-Gg: AeBDieuy9eu+c8ikl2vS1UK76ieWvTtgiUkb1KJsZilc9mSeO0az+aXzkipWsJAMD4Q
+ UkNzy2ODL3xrBaWpHS0Ew7H/I05b35bZxyZqzIXYE1qUGQP/OUuUQwpl4lldrhSKxcegC+LEOg7
+ zTIeo5FttwUdzbdEF3XuNr4BJky4kkM9VnTQyu+d8zl5AtFLvGKVMcW4ccdMUcuTkDpgNbWUpJl
+ Nk4aHUTifslNyAHGXeITUALJKha+7pqP5zwdYHmrawxEKrdhPrGxPcJiOJQZUQOLZByblIP37/x
+ EvttnnH+PDeMfzZnqYxeEJYyD6idBF0FUP5XLOdVuoKSSJ/Qkpexsb31AkSjniMpOGJjoCZn1F5
+ 4nFbq9nb8i199S8xnluiqjMkhbV7CNGniyzMSXhmAFEIx562vx0scIUJRhwi4PVVQdNYh63nXYY
+ KRWaImDLvnFCohK1mLwWslqj5cEHZp4NcvqmkRBHWZxbCnJWdQ4wQoEyfgCBhMvucxGPTmNrEYR
+ 0OVsjk=
+X-Received: by 2002:a05:600c:c84:b0:489:1a65:dd6e with SMTP id
+ 5b1f17b1804b1-48a7b51c37bmr50983655e9.8.1777452598825; 
+ Wed, 29 Apr 2026 01:49:58 -0700 (PDT)
 Received: from lion.localdomain (p4fc3dd86.dip0.t-ipconnect.de.
  [79.195.221.134]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-48a7bc80454sm42715245e9.13.2026.04.29.01.49.45
+ 5b1f17b1804b1-48a7bc23f4asm46380095e9.7.2026.04.29.01.49.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 29 Apr 2026 01:49:46 -0700 (PDT)
+ Wed, 29 Apr 2026 01:49:57 -0700 (PDT)
 From: Casey Connolly <casey.connolly@linaro.org>
-To: trini@konsulko.com, neil.armstrong@linaro.org, sumit.garg@kernel.org, 
- marek.vasut+renesas@mailbox.org, ilias.apalodimas@linaro.org, 
- me@samcday.com, aswin.murugan@oss.qualcomm.com, clamor95@gmail.com, 
- michal.simek@amd.com, u-boot@lists.denx.de, u-boot-qcom@groups.io, 
- Jerome Forissier <jerome.forissier@arm.com>, 
- Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
-In-Reply-To: <20260121063920.1500293-1-varadarajan.narayanan@oss.qualcomm.com>
-References: <20260121063920.1500293-1-varadarajan.narayanan@oss.qualcomm.com>
-Subject: Re: [PATCH v6 0/5] Implement reset to EDL for qcs9100
-Message-Id: <177745257538.126665.2656997891353052864.b4-ty@b4>
-Date: Wed, 29 Apr 2026 10:49:35 +0200
+To: u-boot-qcom@groups.io, u-boot@lists.denx.de, 
+ Sumit Garg <sumit.garg@kernel.org>
+Cc: trini@konsulko.com, neil.armstrong@linaro.org, 
+ jens.wiklander@linaro.org, ilias.apalodimas@linaro.org, 
+ jorge.ramirez@oss.qualcomm.com, varadarajan.narayanan@oss.qualcomm.com, 
+ tonyh@qti.qualcomm.com, Sumit Garg <sumit.garg@oss.qualcomm.com>
+In-Reply-To: <20260127062341.723966-1-sumit.garg@kernel.org>
+References: <20260127062341.723966-1-sumit.garg@kernel.org>
+Subject: Re: [PATCH v3 0/3] mach-snapdragon: Enable OP-TEE support
+Message-Id: <177745259132.126665.11352532849405386941.b4-ty@b4>
+Date: Wed, 29 Apr 2026 10:49:51 +0200
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
 X-Mailer: b4 0.16-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3523;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1168;
  i=casey.connolly@linaro.org; h=from:subject:message-id;
- bh=1qFovll+xhI4MoZdi1CN5FwxBFCkMubaSRrZeFGjvss=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhsyPxzSrjhcfeZDbo2RrEa+w40HaKieRhHzvwjqxwC9f3
- O61SvB2lLIwCHIwyIopsoifWGbZtPayvcb2BRdg5rAygQxh4OIUgIlk3mL4nyiz8rlT3WHFBWqP
- HjxhkzfXnCT8gO+HM7Pv7gnn9/tpZjIyTH1j3LaJU2OHr0plpFvG7XjmMFWbEzn12/63chxn11t
- aDgA=
+ bh=oX6Ed+/MhVaCwaTzh4O9K4U/I1pt0LvSX3/AScJKgs0=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhsyPx0z2S9XynLSQ8li0JuTvRu0D/3dvePJVVtar1N5zc
+ oVBz+mNHaUsDIIcDLJiiiziJ5ZZNq29bK+xfcEFmDmsTCBDGLg4BWAiTfoMPxl7gsIu9href835
+ 5pb58qpDlzcv0di9WfB7vNE9E7H7XxsY/kdPWhGSs+KskNbPsw4KvIYr113bpy26ubuytjDRfFm
+ fAzMA
 X-Developer-Key: i=casey.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -114,45 +115,16 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-On Wed, 21 Jan 2026 12:09:15 +0530, Varadarajan Narayanan wrote:
-> Implement reset to EDL for qcs9100
+On Tue, 27 Jan 2026 11:53:38 +0530, Sumit Garg wrote:
+> mach-snapdragon: Enable OP-TEE support
 > 
-> Using the 'reboot edl' command in Linux, the platform can reboot to the
-> Emergency Download mode. Implement the same for U-Boot.
+> From: Sumit Garg <sumit.garg@oss.qualcomm.com>
 > 
-> v6: * Add r-b Sumit
->     * Wrap the new code inside CONFIG_SYSRESET_CMD_RESET_ARGS
->     * Size change details
-> ------------------------
-> qcom_qcs9100
-> ------------------------
-> Building 2 commits for 1 boards (1 thread, 16 jobs per thread)
-> 01: Merge tag 'u-boot-imx-master-20260117' of https://gitlab.denx.de/u-boot/custodians/u-boot-imx
-> 07: qcom_defconfig: enable psci based sysreset
->     2    0    0 /2              qcom_qcs9100
-> Completed: 2 total built, 2 newly), duration 0:00:25, rate 0.08
-> /tmp/qcom_qcs9100/tot/boards.cfg is up to date. Nothing to do.
-> Summary of 2 commits for 1 boards (1 thread, 16 jobs per thread)
-> 01: Merge tag 'u-boot-imx-master-20260117' of https://gitlab.denx.de/u-boot/custodians/u-boot-imx
-> 07: qcom_defconfig: enable psci based sysreset
->    aarch64: (for 1/1 boards) all +145.0 data -40.0 rodata +89.0 text +96.0
->             qcom_qcs9100   : all +145 data -40 rodata +89 text +96
->                u-boot: add: 9/0, grow: 4/0 bytes: 656/0 (656)
->                  function                                   old     new   delta
->                  sysreset_walk_arg                            -     124    +124
->                  _u_boot_list_2_driver_2_qcom_psci_sysreset       -     120    +120
->                  qcom_psci_sysreset_request_arg               -      84     +84
->                  smc_call                                     -      68     +68
->                  do_reset                                   100     160     +60
->                  psci_system_reset2                           -      44     +44
->                  psci_features                                -      44     +44
->                  sysreset_request_arg                         -      32     +32
->                  qcom_psci_sysreset_ops                       -      32     +32
->                  psci_bind                                  188     212     +24
->                  qcom_pshold_ops                             24      32      +8
->                  qcom_psci_sysreset_get_status                -       8      +8
->                  psci_sysreset_ops                           24      32      +8
-> (no errors to report)
+> Introduce TF-A and OP-TEE config fragment
+> 
+> Recently upstream TF-A/OP-TEE has started gaining support for Qcom
+> platforms. RB3Gen2 being the first one and more to come. U-Boot in
+> corresponding boot flow is packaged as a position independent executable.
 > 
 > [...]
 
@@ -163,16 +135,12 @@ First and last time I use b4 review, the commit shas are wrong but you can find 
 Apologies
 
 
-[1/5] arm: psci: Add API to check for support of specific PSCI function
-      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/a612b3e91439
-[2/5] drivers: sysreset: Add sysreset op that can take arguments
-      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/c74ea771aa53
-[3/5] sysreset: Implement PSCI based reset to EDL mode for QCOM SoCs
-      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/9562f10216a6
-[4/5] cmd: boot: Add '-edl' option to reset command documentation
-      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/9db72d4b767f
-[5/5] qcom_defconfig: enable psci based sysreset
-      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/929d794c99bd
+[1/3] tee: optee: Export OP-TEE message UID check API
+      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/145a2bcea9c8
+[2/3] mach-snapdragon: of_fixup: Add OP-TEE DT fixup support
+      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/43ade570091d
+[3/3] board/qualcomm: Introduce TF-A and OP-TEE config fragment
+      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/845a1750c973
 
 Best regards,
 -- 
