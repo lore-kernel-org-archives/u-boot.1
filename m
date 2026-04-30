@@ -4,60 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2BF9CCFA13
-	for <u-boot@archiver.kernel.org>; Thu, 30 Apr 2026 21:28:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89BADCD13D2
+	for <u-boot@archiver.kernel.org>; Thu, 30 Apr 2026 21:30:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6D37D803C6;
-	Thu, 30 Apr 2026 23:28:44 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 183D883FB5;
+	Thu, 30 Apr 2026 23:30:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=jannau.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=jannau.net header.i=@jannau.net header.b="BqRm/9hO";
-	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="SSkWdv0m";
+	dkim=pass (2048-bit key; unprotected) header.d=jannau.net header.i=@jannau.net header.b="jgJ4t9hT";
+	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="RZgOJN2l";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4D4FC83693; Thu, 30 Apr 2026 23:28:43 +0200 (CEST)
+ id 59D6984099; Thu, 30 Apr 2026 23:30:11 +0200 (CEST)
 Received: from fout-b4-smtp.messagingengine.com
  (fout-b4-smtp.messagingengine.com [202.12.124.147])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0CF5380086
- for <u-boot@lists.denx.de>; Thu, 30 Apr 2026 23:28:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 29AE880086
+ for <u-boot@lists.denx.de>; Thu, 30 Apr 2026 23:30:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=jannau.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=j@jannau.net
-Received: from phl-compute-02.internal (phl-compute-02.internal [10.202.2.42])
- by mailfout.stl.internal (Postfix) with ESMTP id EEE621D0007E;
- Thu, 30 Apr 2026 17:28:39 -0400 (EDT)
+Received: from phl-compute-01.internal (phl-compute-01.internal [10.202.2.41])
+ by mailfout.stl.internal (Postfix) with ESMTP id 1129E1D00094;
+ Thu, 30 Apr 2026 17:30:08 -0400 (EDT)
 Received: from phl-frontend-03 ([10.202.2.162])
- by phl-compute-02.internal (MEProxy); Thu, 30 Apr 2026 17:28:40 -0400
+ by phl-compute-01.internal (MEProxy); Thu, 30 Apr 2026 17:30:08 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=jannau.net; h=cc
  :cc:content-transfer-encoding:content-type:content-type:date
  :date:from:from:in-reply-to:message-id:mime-version:reply-to
- :subject:subject:to:to; s=fm1; t=1777584519; x=1777670919; bh=Yv
- WSI2/ndxKUkI08JOEW8G0U5uWqcJHyyf8IZOkLKUc=; b=BqRm/9hOaFjG8jXJB9
- My9EAtCsMz+BNI32qvTRDiHIP5fUQwp1nbUR5Xpd/+TaaJBxlQRebQIWEAL1TiCD
- LTjFMng5tu7iSXsJgo8zq63G3gmDV5R8rpWVwRDoiykc14BTZ+fD3Kp9KmHia8+U
- 4UWms5f/UK9NuH3Uan4DWzjJgKP5bmvw1voaYbPiO77JBHCIwj55TwQZ5rJd/C7l
- YYJ8ncaUxv/dPcLVwi8xkS5MQbqcJUK5SGaVRgD1VXrEw6j+hwFJO+JKHL0ue+HX
- bJTAOEPkBjIb9atG0j34aU9mIG+nd0KsFlqMGdNfSY0Eqr5vHoWEOP27YQJ4J9fV
- rprg==
+ :subject:subject:to:to; s=fm1; t=1777584607; x=1777671007; bh=Pv
+ 88ei5e8TO617Zpb1XGDzeNqMnZRdn+rzAU25XDGkw=; b=jgJ4t9hTQA9957w4Qu
+ E1IGx6UPC79ZHvynhtkGF76X4jJRG4D+Fl57+R4IW3zVTzOJZ9nRs6AnUhbUNLzF
+ ZHAu7hBJqUmpYylPkrCtHDfqd+hHFX3X96fg7FRagW1DtkN68pZlR/7/j6Dhx/uH
+ Gt8b4fd7pR2cIxHrYR3DXpi3OjwpkODWzFclfPusmJ/1E8SuesCkPIQ800Y2vPG9
+ ucfQ8TjLjOnyUtXGMI+GqvAjbls2yb4QyOdzZdrPXRAowr33I/iZh9qUSpT3IU9K
+ SSJTRw+7Ad4q4x3g7GgZEJ8Skue/UqVjmq4Rr0FV1BkocZrYFhYI/YTGd9Hhui9U
+ WdgA==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
  messagingengine.com; h=cc:cc:content-transfer-encoding
  :content-type:content-type:date:date:feedback-id:feedback-id
  :from:from:in-reply-to:message-id:mime-version:reply-to:subject
  :subject:to:to:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
- fm2; t=1777584519; x=1777670919; bh=YvWSI2/ndxKUkI08JOEW8G0U5uWq
- cJHyyf8IZOkLKUc=; b=SSkWdv0mlH0OqtFURitGMrV5DuQ0U5sSQhvuP/7h6bHS
- k7RHlsSc3wH1RcdWr0uJ/tdE55igKTQ2QcxMHFyUDaaOJS3BD6umQhGIYXY0BiOu
- 68bwTCmmrpNk0fpBU4ncCDnkb8BPfj3qJdrCBtJ3V/3noMXZKeuC9uGqcq/TH9fL
- ujT6xsw7+FdOGkkXmAJvUpDMaJc1BWl64N/WGMBs/bmlY+i/UNyrni0WUunJuXWY
- ULt7jhzAaqTsWa02vaK+aLiCh6tIb3DKvTbSVjt0coB2JvuupZlzCSNuS2WqShDL
- JrUQgqu9ibs9zIo1uWUSIXajN/N5fpSkyZbZ948Ofw==
-X-ME-Sender: <xms:h8nzaTb9FGURdkeaa4J6oq_N3SEdxFJuX62HU17iKQFv5VmOWHJb_w>
- <xme:h8nzaZQ6Y0KhRDeJZHvTYuifdCbYtFTZyaMSS52ULow3Chapmiq385FUylYrWpxr0
- dvKlaZyNnyzv04pPPz0a3Tlxw5rk_-JJNHCF6ViM6oZ3oYYJswvYfs>
-X-ME-Received: <xmr:h8nzaeR7Y2Ye8GUFn6yUp5xRPAgJr0xn-Sm9j0XssOLaN38zmhFu9NXCAvOyrTI4NmtC6K3WDn0e0qYH1EsT3Oiffq3Z1RtUmfRdAA>
+ fm2; t=1777584607; x=1777671007; bh=Pv88ei5e8TO617Zpb1XGDzeNqMnZ
+ Rdn+rzAU25XDGkw=; b=RZgOJN2l98FLzrL3aoPpvpId8e0RHbOp52c3LGn05g8N
+ 8gBMToNMlvKkE9pDWsv5cWI7MvIDGBk3dzvhUuoQmolp0TKH1RT+nsSAhHEP3Iux
+ CyCGh63be86FSjZqz1ifhVImu9LJ6G8vqlsB8vrb04ClfAFiPWPWOKC4gQqdMTnb
+ sPvEveO7Zn+mfIMQG9c6dJ9OER1Go/ZMIZgj29K2FyWocINj44C8iPe6HMiuLuV3
+ +Rex0jUEgYpoO5Fekh4TEBmmNB3TpYGS04I+7JkaoaSScnDyKqW61sJnsFeGWp2C
+ 8+Sn3YEXebs3irmngKHFI09gaQ7vO316cQBAWe08rg==
+X-ME-Sender: <xms:38nzaaRCHT4eg9SFQxEmwNzCGkIUwo837MzAsqfi2fjGIfTFihk43A>
+ <xme:38nzaWx4s8Y-1moAJFnDlFybXLtooZXcTh-qh0KQ1p1a4EghZmcPMqLLlbeoJsd_F
+ 4GRx9dyFTZrWnpAU-kxSEdTKQEV2caJJoxp9wPGtB33w3Ruqqz0z2c>
+X-ME-Received: <xmr:38nzac1bFfJdw_da9BOHUUI5eMkTbkWiu3wx3ENRdf9hKGGjpVNFUwzaiazqptt3k-MX9oNI3mhj3lmIEdq7pzEPn9itmJQ09LYCUQ>
 X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefhedrtddtgdekkeegtdcutefuodetggdotefrod
  ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpuffrtefokffrpgfnqfghnecuuegr
  ihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfjug
@@ -65,41 +65,41 @@ X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefhedrtddtgdekkeegtdcutefuodetgg
  uhhnrghuuceojhesjhgrnhhnrghurdhnvghtqeenucggtffrrghtthgvrhhnpeefheeltd
  ehfeetjeefvdehteeutddtteelgeduueetjeevteeifeeuvdefffdvieenucffohhmrghi
  nhepkhgvrhhnvghlrdhorhhgnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpe
- hmrghilhhfrhhomhepjhesjhgrnhhnrghurdhnvghtpdhnsggprhgtphhtthhopeehpdhm
- ohguvgepshhmthhpohhuthdprhgtphhtthhopehkvghtthgvnhhishesohhpvghnsghsug
- drohhrghdprhgtphhtthhopegsmhgvnhhgrdgtnhesghhmrghilhdrtghomhdprhgtphht
- thhopehjsehjrghnnhgruhdrnhgvthdprhgtphhtthhopehuqdgsohhotheslhhishhtsh
- druggvnhigrdguvgdprhgtphhtthhopehtrhhinhhisehkohhnshhulhhkohdrtghomh
-X-ME-Proxy: <xmx:h8nzaVTCe22bYuXHZFljMN193Ih4OWJii6B9FZPmk-Dq4jRvtBR2sQ>
- <xmx:h8nzab7yzgDDmxV_9GHasF8_s-Mdhdfqf__PNLA6LwW1kasOWJA4QQ>
- <xmx:h8nzaZ1oWNVZq6nDkGfIuZwNaQT1loOPydNsDYZuCH99v3seaGgJWA>
- <xmx:h8nzaeDgljE0o8ivlIhy9o-9MzLwZC38-Rbvg-q3L0_5d6Y3Cg5xUw>
- <xmx:h8nzabT6ZnifYg3gff5IvhnoXsHPSXCt9EUfq0J__wW_tjc4sr5Aw2NT>
+ hmrghilhhfrhhomhepjhesjhgrnhhnrghurdhnvghtpdhnsggprhgtphhtthhopeegpdhm
+ ohguvgepshhmthhpohhuthdprhgtphhtthhopehjsehjrghnnhgruhdrnhgvthdprhgtph
+ htthhopehkvghtthgvnhhishesohhpvghnsghsugdrohhrghdprhgtphhtthhopehtrhhi
+ nhhisehkohhnshhulhhkohdrtghomhdprhgtphhtthhopehuqdgsohhotheslhhishhtsh
+ druggvnhigrdguvg
+X-ME-Proxy: <xmx:38nzaU5SroM9uyRXcumk6UBg7HM_yBiHGEJ0pM_BLIRRrRc1hibCSw>
+ <xmx:38nzafVUVOBvVyp5NAXhTrPwl8u8qW80j0uIgNiCArAjVx43ObIvlg>
+ <xmx:38nzaTCYrl67WdcwO018a7M8XZRCUTZw1gJZptyE2frx8Qnk9zixsQ>
+ <xmx:38nzae7_PKE5j5j8xC6QPNRHbmO8JKgfzj4yf9ShvFFEv2KfGjHgog>
+ <xmx:38nzaaz-oUe-WXE9kgRNZKsTUKWkcGLBiFJeed_S5pZUApuTi6oZr3h4>
 Feedback-ID: i47b949f6:Fastmail
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Thu,
- 30 Apr 2026 17:28:39 -0400 (EDT)
+ 30 Apr 2026 17:30:05 -0400 (EDT)
 From: Janne Grunau <j@jannau.net>
-Date: Thu, 30 Apr 2026 23:28:36 +0200
-Subject: [PATCH] nvme: apple: add "apple,t8103-nvme-ans2" compatible
+Date: Thu, 30 Apr 2026 23:29:55 +0200
+Subject: [PATCH] pinctrl: apple: Add "apple,t8103-pinctrl" compatible
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260430-apple-compat-nvme-v1-1-52c1e6e93aa6@jannau.net>
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/x3MTQqAIBBA4avIrBtQ+6OuEi3EphooFQ0JorsnL
- b/Few8kikwJRvFApMyJvStQlQC7G7cR8lIMWupONrVEE8JBaP0ZzIUun4S9snql3rSqGaB0IdL
- K9/+c5vf9AGlQhD9jAAAA
-X-Change-ID: 20260430-apple-compat-nvme-71c2fe7a5149
+Message-Id: <20260430-apple-compat-pinctrl-v1-1-f214a79616a2@jannau.net>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/x3MQQqEMAxA0atI1gbSOhTxKuKi1HQmoDW0IkLx7
+ pZZvsX/FQpn4QJTVyHzJUWO1GD6DsLPpy+jrM1gyTr6DIRedWMMx67+RJUUzryhc2Q9RcPRjNB
+ SzRzl/m/n5XlecyPUFmYAAAA=
+X-Change-ID: 20260430-apple-compat-pinctrl-6602a0f1ef18
 To: u-boot@lists.denx.de
-Cc: Mark Kettenis <kettenis@openbsd.org>, Bin Meng <bmeng.cn@gmail.com>, 
- Tom Rini <trini@konsulko.com>, Janne Grunau <j@jannau.net>
+Cc: Mark Kettenis <kettenis@openbsd.org>, Tom Rini <trini@konsulko.com>, 
+ Janne Grunau <j@jannau.net>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1280; i=j@jannau.net;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1300; i=j@jannau.net;
  s=yk2025; h=from:subject:message-id;
- bh=0Y70vYnmI5PrApJSXdnAnl/pnAhex+4s190LJ7TjpI8=;
- b=owGbwMvMwCW2UNrmdq9+ahrjabUkhszPJ9tSoxNdGJhOTJobF1B+8NHlu85GgR4VzOc+PWSq9
- BaWXxTVUcrCIMbFICumyJKk/bKDYXWNYkztgzCYOaxMIEMYuDgFYCJKlxj+lx2ZtnhXxuuvNoZ7
- wlsDl7ydLB3tNvlI1ErT+0enaVU8NmJkaN217cjflT5Lbxjc1r9dmqd4+ULmV699tZ/TdJpnv09
- j4QQA
+ bh=fPi9kvj7xM+zW/Sh613IUs8PnkNbPwiY8R9G5XubCLk=;
+ b=owGbwMvMwCW2UNrmdq9+ahrjabUkhszPJ2+seLFytkv1itAi89D2x5pi26uj5svM2cC2Kj/hX
+ 4ur7uG6jlIWBjEuBlkxRZYk7ZcdDKtrFGNqH4TBzGFlAhnCwMUpABP5epqRoetI3kM+w50TPm06
+ d2OejQDTwjPXtEU4purtuLVGtaZu2XaGf/oX+JV9OPb4r/jhGRnkmDaz5KxkhTRzwa80E/P+Xdf
+ 38QMA
 X-Developer-Key: i=j@jannau.net; a=openpgp;
  fpr=8B336A6BE4E5695E89B8532B81E806F586338419
 X-BeenThere: u-boot@lists.denx.de
@@ -119,35 +119,35 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 After discussion with the devicetree maintainers we agreed to not extend
-lists with the generic compatible "apple,nvme-ans2" anymore [1]. Add
-"apple,t8103-nvme-ans2" as fallback compatible as this is the SoC the
-driver and bindings were originally written for.
+lists with the generic compatible "apple,pinctrl" anymore [1]. Use
+"apple,t8103-pinctrl" as fallback compatible as it is the SoC driver and
+bindings were originally written for.
 The t602x (M2 Pro/Max/Ultra) devicetrees submitted in [2] use this
-compatible as fallback instead of "apple,t8103-nvme-ans2".
+compatible as fallback instead of "apple,t8103-pinctrl".
 
 Link: https://lore.kernel.org/asahi/12ab93b7-1fc2-4ce0-926e-c8141cfe81bf@kernel.org/ [1]
 Link: https://lore.kernel.org/asahi/20250828-dt-apple-t6020-v1-0-507ba4c4b98e@jannau.net/ [2]
 Signed-off-by: Janne Grunau <j@jannau.net>
 ---
- drivers/nvme/nvme_apple.c | 1 +
+ drivers/pinctrl/pinctrl-apple.c | 1 +
  1 file changed, 1 insertion(+)
 
-diff --git a/drivers/nvme/nvme_apple.c b/drivers/nvme/nvme_apple.c
-index 7e7538553e3..48f82bc826c 100644
---- a/drivers/nvme/nvme_apple.c
-+++ b/drivers/nvme/nvme_apple.c
-@@ -287,6 +287,7 @@ static const struct nvme_ops apple_nvme_ops = {
+diff --git a/drivers/pinctrl/pinctrl-apple.c b/drivers/pinctrl/pinctrl-apple.c
+index f373afde58e..083ea6d6cd5 100644
+--- a/drivers/pinctrl/pinctrl-apple.c
++++ b/drivers/pinctrl/pinctrl-apple.c
+@@ -192,6 +192,7 @@ static struct pinctrl_ops apple_pinctrl_ops = {
  };
  
- static const struct udevice_id apple_nvme_ids[] = {
-+	{ .compatible = "apple,t8103-nvme-ans2" },
- 	{ .compatible = "apple,nvme-ans2" },
+ static const struct udevice_id apple_pinctrl_ids[] = {
++	{ .compatible = "apple,t8103-pinctrl" },
+ 	{ .compatible = "apple,pinctrl" },
  	{ /* sentinel */ }
  };
 
 ---
 base-commit: 88dc2788777babfd6322fa655df549a019aa1e69
-change-id: 20260430-apple-compat-nvme-71c2fe7a5149
+change-id: 20260430-apple-compat-pinctrl-6602a0f1ef18
 
 Best regards,
 -- 
