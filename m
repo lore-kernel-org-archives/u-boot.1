@@ -4,135 +4,153 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5BC52FF8875
-	for <u-boot@archiver.kernel.org>; Thu, 30 Apr 2026 05:08:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0212AFF8875
+	for <u-boot@archiver.kernel.org>; Thu, 30 Apr 2026 05:18:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D803C83693;
-	Thu, 30 Apr 2026 07:08:36 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 488958063E;
+	Thu, 30 Apr 2026 07:18:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="nPk78EoI";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="iyssahVL";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="IcWyHatr";
+	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="dU5xhrQE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F195683FB5; Thu, 30 Apr 2026 07:08:34 +0200 (CEST)
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
- [205.220.168.131])
+ id 90388842D7; Thu, 30 Apr 2026 06:40:30 +0200 (CEST)
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
+ [205.220.180.131])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B27FF80433
- for <u-boot@lists.denx.de>; Thu, 30 Apr 2026 07:08:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 57A4B80086
+ for <u-boot@lists.denx.de>; Thu, 30 Apr 2026 06:40:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=varadarajan.narayanan@oss.qualcomm.com
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
+Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 63TMFBYq3885246
- for <u-boot@lists.denx.de>; Thu, 30 Apr 2026 05:08:30 GMT
+ 63TNebFW831724
+ for <u-boot@lists.denx.de>; Thu, 30 Apr 2026 04:40:26 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-type:date:from:in-reply-to:message-id:mime-version
- :references:subject:to; s=qcppdkim1; bh=TihfNXbUuC5IeIOJTDBPOPqB
- HFNnjmWJIfIoo0b+IFg=; b=nPk78EoIr0+bqmsIZkZe0EIL/nAOGFCRbvF7N0vK
- C7/t9iaIdR1mssfE4t8MFoTQTU/lzZQwZcKrHl1bP6nzmzWX/W1C8LQFEo6GMXj3
- Trn4oFdT117/GWGNGY1HA8XWlydXhWVlin4MG+X1Zf3D9hGbgbOhFiJZUMDQcM7U
- DcKQcugp9z8wnK+hSxJI5o64UMPqYE+Fezrg8fJ1Zb7sMUT4uMUP+bmlWVIQwE5O
- joVSN0mT6bbX/T2U3s/MOlTaHimZdXxOMwpYFEKzFpT1tBy2dRPZND9PhJ7Guhsc
- xgWW5073NWV/b0TeRkoaXGaUY+rGH0TZiaf772xHo9GCQQ==
-Received: from mail-pj1-f69.google.com (mail-pj1-f69.google.com
- [209.85.216.69])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4dutmah2d3-1
+ :references:subject:to; s=qcppdkim1; bh=x7wlDcJxAasvptI84SNE9ZNO
+ OXXIpp+KqjC2GCG5rgs=; b=IcWyHatrNTkfWz/AIZEu9mKqZs9bb1ufaXhRgb5j
+ TIxk1T9LVgYF7vIfFoajhd12t0ZS4auv6T8edU4zoB9+DKhn3vk11d3A4YH+2E0O
+ iQr+FB+g2EeNgcALrP//J++xMiilIEFfx/U7NJ/MZGXYC1OU2J3PAUgfYzgUw2GQ
+ ILBy/M0kKqvGzOm4+R70xP70kve3EdR9XizqfGAy9a8Wh9frMA0MKE5mtqCFWVvc
+ s++6S109GnDbebl6GO0A/n8D1ZOiYMDXcBlIt1YJrjCpZkcGy+NhFHqqgdhKoAcn
+ Fv4RHfBhmGIpj3azY8xN5O0WHlD8mTAVb35hspAsL+uYzw==
+Received: from mail-pj1-f71.google.com (mail-pj1-f71.google.com
+ [209.85.216.71])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4duuvb0tud-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Thu, 30 Apr 2026 05:08:30 +0000 (GMT)
-Received: by mail-pj1-f69.google.com with SMTP id
- 98e67ed59e1d1-35842aa350fso972836a91.0
- for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 22:08:30 -0700 (PDT)
+ for <u-boot@lists.denx.de>; Thu, 30 Apr 2026 04:40:25 +0000 (GMT)
+Received: by mail-pj1-f71.google.com with SMTP id
+ 98e67ed59e1d1-35d9278587bso618176a91.2
+ for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 21:40:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1777525710; x=1778130510; darn=lists.denx.de; 
+ d=oss.qualcomm.com; s=google; t=1777524025; x=1778128825; darn=lists.denx.de; 
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=TihfNXbUuC5IeIOJTDBPOPqBHFNnjmWJIfIoo0b+IFg=;
- b=iyssahVL+NDoJ2VRR1KVhIJTvpMTZHioIw2OKLv7+028LLg3J3SiKQslNixohW6Rkc
- C7X+OmsmqF+Lv8hGeajAQl1LN7UIUved1AphpAVrwlhASmGu9TWznLJKpa1YjqLEhHQz
- V4NE2l4jQv9i95Gj37gWEbrkddLSdMTZtSCZmL7w8Hgf+ABGvhaUK91k8SyGGb2vaRO4
- UThf+t9++7Cayh9KSCDc3Zs6N6o3PnFwA+SA+D0pZPWy18M7YCEtEHXV7yOHHdpWbuDu
- 8K8UKMaWu5tLWHEvfnM/y8zsS+qGoSzETKVJRGhWKnS88poFkab0VFJEd5ILVyPV5Nbp
- vFTQ==
+ bh=x7wlDcJxAasvptI84SNE9ZNOOXXIpp+KqjC2GCG5rgs=;
+ b=dU5xhrQE0eZ5IVH1k6CIL4KXk1rpQFNHQK7DZpwgewWU3EZExU7dOBt7+003zsumhI
+ NsVbv9qZBtVJFOVszm3M6bdLT6ulsL219ljHrNAaMY1MLRvtZuuNAXLAJ/7hQJPfHypG
+ UDkWr+41sbFPRqTVGcipbuiAUq4voTnCklm71TVA26vAcnSaoDWX0B/nUvV6P0gSaTPA
+ 3gd6OWKZS0czxLPjrHTsJJENPBDkB3rIo3o/HKzP+7jZqpTtaNmzN5jwHauy+365/Jn8
+ 1NQvWWh2ogRDb2CQ03ENO2U7m3dEa0nTcnckjhJP4MHQnJC9mp0B8l/Db/c9akxKrD6i
+ P0+w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777525710; x=1778130510;
+ d=1e100.net; s=20251104; t=1777524025; x=1778128825;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=TihfNXbUuC5IeIOJTDBPOPqBHFNnjmWJIfIoo0b+IFg=;
- b=kGWw/EiW/FtMTFT9SIZFY0fl7VlGeg+5X06k31KmegHi+FuUG+kzPApuIdopQWb0Qi
- +JGgJ0hdjzrDYv5DiOMTc15932QW7BVqR08cFCbdbtUjtfWM8SZ3gypcK/DVOsI/aYYe
- wSPwqPcsrKitLW9UGsoaHmVdE/QFDja7rUo7N5j0KnZY+Ce6lFbfscK6QXbwtplwkGXu
- BBWahbNPR5nM1a1ijw4BDUGYkF7Ywr49Mtidj2WGgirJnEjQ74XgWOGrQd+J6jztEl1x
- 71syky+L1vo8chcnxD5558Y3fOYnC/nDT74WLZAcEd51CpmjXfgR9sMrHu/tQfs2yMlT
- vQGQ==
+ bh=x7wlDcJxAasvptI84SNE9ZNOOXXIpp+KqjC2GCG5rgs=;
+ b=B4nTSyWrptrmYT1Cwiq9oLQRM69BdY/ygJLNMByoN8X1uQxKpPQJ0kNHaob+14C6RT
+ Yo/M9b5Uj0dMpNGn/KsiQXFxejnVgfmQH5dLV5ucHaYK+rAzkcIlTuID1g76E2lCrpxB
+ SutOzhLRv/QaleRbV/dUPK398KIa0OP8zK3REKfFejysF0TNMdvjL00OEGGV6Gz9fYLc
+ x08ziUwd1/4oxJ0p45vxKo33SPJnylyHbOnaH0XA2nUI3QY5xhqTW/qB14qzhorS7nvS
+ 2GLiGhvbXedFvn4ygjXY7xr4RMETxthUNVzfkDtAzjXBucvziWSfwPwcpkQtIgIChuiL
+ I2ZQ==
 X-Forwarded-Encrypted: i=1;
- AFNElJ+5+lLXuOXbNSd7RZ49zpVxXYG5qyFh71DahxjqXtPG9fXbJgSOd5bdyqXdAqYaU2ZWuhqbluM=@lists.denx.de
-X-Gm-Message-State: AOJu0YzAvmH4R3jZ887TY/hwRw6fpJzPlCi7HriWTMnZ3C85bGKti8i2
- Z0JdYL6dD4hvDvENHHOSLf3Nkk6pQMJg2uEF/OmnjctU/mdcHCmHboO919n4iNEm+1Ri08juepC
- hW+LqIwNtDC6T01ImkWqHySt1OHEFJcL7i5K9KSkEcXMa1sr4Ok7UBUHF
-X-Gm-Gg: AeBDiesyXHp9w+S3hut77JyWpNsxzK0AK/s4b+YZCHbDSORH9lcug+JRqz79gTHmqJT
- X0nDgCF+86eOITI/7F5dMmNcbhcwMNEzmpv0DBU/3xp84GEI3jCIBo+lyi74zbhgAUrhOEMv+5A
- mIiD39uy1QwwUz3EF2mpik70HZUcCVqaVA+hVNiBtZmfUaHdc4+2Y3TsrAEEwx5oUaIxa4vgIEn
- JA5/+lWYNVGOR3GxTTqH1+vlZjKfY4xKrPJDevOULl41V8Fw5bv25/3CDDbTawLn51qukYT8p3k
- ve7YCiJKpzAitHEP974nV2eVMnTVWVfh5Ur4HMsq8610um7qBjV06wBRa8CcFIh+fWdFk4T/xr8
- 35xeox/ibaYX1rYDeTznyMrTuW6l8hrRrcG8rGJUTGktv45IZuGm0i5h3WJHSiY1dtpJBSeWurr
- B8hObD2MmzuucjBKoocEcW3riFwQNAsH/WMCYgrsBiraTP4D+C1c7nKnYuxYoAAg==
-X-Received: by 2002:a17:90b:4ac7:b0:35f:b306:5d47 with SMTP id
- 98e67ed59e1d1-364c2f14e9emr1292608a91.1.1777525710045; 
- Wed, 29 Apr 2026 22:08:30 -0700 (PDT)
-X-Received: by 2002:a17:90b:4ac7:b0:35f:b306:5d47 with SMTP id
- 98e67ed59e1d1-364c2f14e9emr1292572a91.1.1777525709518; 
- Wed, 29 Apr 2026 22:08:29 -0700 (PDT)
+ AFNElJ+moyrfF0rNU+/8IJnOXWJ/nol1lk+1lvFOw/DzGyK+1lBqxrwLoEuF/poJIjcxIIeeTussa1g=@lists.denx.de
+X-Gm-Message-State: AOJu0YwOveQvC04Uwu9nZHwcq9QKd6QosTqiEqGUBJFkjZXxwS3QUcy6
+ OEXN/OHNMAE34Y1Ic8sLJyfP03EeZqAZYYjp6MAmRsxSNshIgMPPvLyYlMtyLjxyZmlvPWpJO1X
+ O0iB0jogeE+dFu2wOTueGE07TGCiKvTNZPmHxs2FN4ewkf1UnmCCtzaF2
+X-Gm-Gg: AeBDieuy6GgqDaOGEdONQIn8iM6RWXJDNZnjDCPSIxiLLLf3VXJcK5upwxdbajeZ2ZD
+ nbzuXlZO6N2cIQNGKiWmLk2g/ZIReWBt8J7jpWWMfg1q2kmU93ct4w/h0qWG/MHjxxVPMUHicpE
+ 6tztC9mF71ug8LHYB1EgVq+bcxrmeQ/5Jgx4pHprcAFCr/wQbwHJW1WMmhMdRrRvWa64JPFHPAx
+ ncIyg0O2dAxqh6M6v5H1tyhMeAtomcbNZm2116Wa8rLnUt9Ra2DR0zgfHe/vsCDvT2BuVPLGBMf
+ mECveH4O9VjPKQ8Y9EECA67UUNW6axrpyUxNti9vrGOwl1kBOCZxASNQX1H6c5d8Kcrppqi3HPF
+ B027FjVOEINsACSvTboSy1vnOtunpPTJckF1dU3aLO3ehg6uXplp2ygphAsN9a46xqDNSafqM5R
+ NyQSBhJ+tqJAIWWxBoOnme+Ywzo233TQsTDi4rU78vQymGwy+s9GdHSPRTzFDUyA==
+X-Received: by 2002:a17:90b:1643:b0:35f:bb33:d721 with SMTP id
+ 98e67ed59e1d1-364c2f2301amr1209825a91.5.1777524024617; 
+ Wed, 29 Apr 2026 21:40:24 -0700 (PDT)
+X-Received: by 2002:a17:90b:1643:b0:35f:bb33:d721 with SMTP id
+ 98e67ed59e1d1-364c2f2301amr1209795a91.5.1777524024142; 
+ Wed, 29 Apr 2026 21:40:24 -0700 (PDT)
 Received: from hu-varada-blr.qualcomm.com
  (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-364bdf2aa41sm1644516a91.4.2026.04.29.22.08.27
+ 98e67ed59e1d1-364c1ed8676sm430399a91.1.2026.04.29.21.40.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 29 Apr 2026 22:08:29 -0700 (PDT)
-Date: Thu, 30 Apr 2026 10:38:24 +0530
+ Wed, 29 Apr 2026 21:40:23 -0700 (PDT)
+Date: Thu, 30 Apr 2026 10:10:09 +0530
 From: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
-To: Quentin Schulz <foss+uboot@0leil.net>
-Cc: Casey Connolly <casey.connolly@linaro.org>,
- Sumit Garg <sumit.garg@oss.qualcomm.com>, u-boot@lists.denx.de,
- Tom Rini <trini@konsulko.com>, Quentin Schulz <quentin.schulz@cherry.de>
-Subject: Re: [PATCH] doc: usage: cmd: reset: specify when the -edl option is
- available
-Message-ID: <afLjyE2dNZSi/NGy@hu-varada-blr.qualcomm.com>
-References: <20260428-doc-sysreset-qcom-v1-1-964df4ee79f9@cherry.de>
+To: Simon Glass <sjg@chromium.org>
+Cc: rayagonda.kokatanur@broadcom.com, trini@konsulko.com,
+ casey.connolly@linaro.org, neil.armstrong@linaro.org,
+ sumit.garg@kernel.org, peng.fan@nxp.com, jh80.chung@samsung.com,
+ lukma@denx.de, tien.fong.chee@altera.com, tingting.meng@altera.com,
+ anshuld@ti.com, alif.zakuan.yuslaimi@altera.com, alice.guo@nxp.com,
+ quentin.schulz@cherry.de, ilias.apalodimas@linaro.org,
+ mkorpershoek@kernel.org, h-salunke@ti.com, alchark@gmail.com,
+ dario.binacchi@amarulasolutions.com, ye.li@nxp.com,
+ andre.przywara@arm.com, dinesh.maniyam@altera.com,
+ luca.weiss@fairphone.com, danila@jiaxyga.com,
+ aswin.murugan@oss.qualcomm.com, balaji.selvanathan@oss.qualcomm.com,
+ adrian@mainlining.org, n-francis@ti.com, wens@kernel.org,
+ jamie.gibbons@microchip.com, justin@tidylabs.net,
+ ycliang@andestech.com, david.wronek@mainlining.org,
+ james.hilliard1@gmail.com, richard.genoud@bootlin.com,
+ michael@amarulasolutions.com, philip.molloy@analog.com,
+ sughosh.ganu@arm.com, u-boot@lists.denx.de, u-boot-qcom@groups.io
+Subject: Re: [PATCH v3 08/10] mach-snapdragon: Add commands to create wrapper
+ ELF
+Message-ID: <afLdKXgUwb/OI2Lu@hu-varada-blr.qualcomm.com>
+References: <20260416053928.2834699-1-varadarajan.narayanan@oss.qualcomm.com>
+ <20260416053928.2834699-9-varadarajan.narayanan@oss.qualcomm.com>
+ <CAFLszThnBSX2vOdH+ieE_DXub0UuJNknq8Y_0X3AjfQSYDoLig@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20260428-doc-sysreset-qcom-v1-1-964df4ee79f9@cherry.de>
-X-Proofpoint-ORIG-GUID: OtZVZvMCEIA-VVnebHP6i2qY5Za-EGG7
-X-Proofpoint-GUID: OtZVZvMCEIA-VVnebHP6i2qY5Za-EGG7
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNDMwMDA0OSBTYWx0ZWRfX/xy1b3OJLTHl
- N3o2OmBbzuzUKk6jrfDEgxHzIlfB2ma+3FxcZD3qGrlaFV9holKI7E7eUjezpxGoyRzInsblLM4
- jiDoC797ZQqxhvt2Sgi+8hGBBdeDy+f41mayPlO4JMk8ejCHQoiDE4Msx69BTECAxMaU69Z21II
- EusxX4nf+ESMd4LBIjJv8PiKzAMPRpX2xZt216Ic5JDNob4b2e/5WeBuLOsESiahSC9QSZplmr1
- X6Wg93YbCkrao+HkLUNGc7ED+l8XBeX9xvmWZSnXSIGUYUJPwWCfa9LG163i0U9msF7GiJTM2MB
- D9VSWPDkwASXsvYrjMrVMKPDrRKJtOKsGj5rQzVfNBygwn7+pu+hIHImZeSdYBhn6PTn02Q3HmA
- kQ8l3iRv94FODNT7L42w8TzhbgQugU09UUOW1969Z/aY3nLvFgEM5lKtR6nXvvAXYkF5xvVjbj/
- t/S2v9vn2ehyWGLgv2g==
-X-Authority-Analysis: v=2.4 cv=Fpo1OWrq c=1 sm=1 tr=0 ts=69f2e3ce cx=c_pps
- a=vVfyC5vLCtgYJKYeQD43oA==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+In-Reply-To: <CAFLszThnBSX2vOdH+ieE_DXub0UuJNknq8Y_0X3AjfQSYDoLig@mail.gmail.com>
+X-Proofpoint-GUID: 9M05D8YFXhvDUBz3Q9CxNkyhjYvqXu0P
+X-Proofpoint-ORIG-GUID: 9M05D8YFXhvDUBz3Q9CxNkyhjYvqXu0P
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNDMwMDA0MyBTYWx0ZWRfX4P9e4cPURxiY
+ F/9NQkEI+dL+Pvi+COstXB296+EUQBsTHyPbrOUDwe8F2OCYM0+hU/JmY5g6jsry56gQ4ERH1tQ
+ KZ8jHf//tqE0rl/3GbIsMH8Ma73BL6Ye6iygO1hm2x3nEeL8UcfTmjigKY+CYUuvaDwqhOFTjhJ
+ fEerM6GThUzb7I8XlNmPaOcIesXO3LmumaYrJrwa5zAu8jQfNh1pM6VC45O+9H+QX7SniAQ/UMN
+ K3zyCbszRUj+df42we3M/vZzk5Xbp/DrQLaco9EMn/ovCfAH9N34hKIpWMSUOqxjgGI7Ry3QpFY
+ 06tonvlX15Ze3Cnnt/kmyuv7PTvnkTSPTmiekUP5p1IeSOyFZnumzN0q9mbpXZqsgBvB9GM6TGA
+ 1Zrm+HJWapwGP4JxxvDqLSVDD3KWIBPfIHsds9Sj6SDhbpYYGl8eAOklGhLuB2mU+nZRPfsbTq9
+ sOE7MMH1A60CATP3ZEQ==
+X-Authority-Analysis: v=2.4 cv=V+JNF+ni c=1 sm=1 tr=0 ts=69f2dd39 cx=c_pps
+ a=UNFcQwm+pnOIJct1K4W+Mw==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
  a=kj9zAlcOel0A:10 a=A5OVakUREuEA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
- a=EUspDBNiAAAA:8 a=AieNkoFbs6YUqXfQS_YA:9 a=CjuIK1q_8ugA:10
- a=rl5im9kqc5Lf4LNbBjHf:22
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
+ a=EUspDBNiAAAA:8 a=vl_p0DwEg2HlECmP8hwA:9 a=CjuIK1q_8ugA:10
+ a=uKXjsCUrEbL0IQVhDsJ9:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
  definitions=2026-04-30_01,2026-04-28_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- adultscore=0 impostorscore=0 suspectscore=0 malwarescore=0 spamscore=0
- clxscore=1015 lowpriorityscore=0 bulkscore=0 phishscore=0 priorityscore=1501
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2604200000 definitions=main-2604300049
+ clxscore=1015 spamscore=0 suspectscore=0 malwarescore=0 bulkscore=0
+ lowpriorityscore=0 impostorscore=0 adultscore=0 priorityscore=1501
+ phishscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2604200000
+ definitions=main-2604300043
+X-Mailman-Approved-At: Thu, 30 Apr 2026 07:18:40 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -149,42 +167,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Apr 28, 2026 at 12:26:08PM +0200, Quentin Schulz wrote:
-> From: Quentin Schulz <quentin.schulz@cherry.de>
+On Fri, Apr 17, 2026 at 08:54:23AM +1200, Simon Glass wrote:
+> Hi Varadarajan,
 >
-> The option is only available when CONFIG_SYSRESET_QCOM_PSCI is enabled,
-> so let's make that explicit in the boot cmd documentation.
+> On 2026-04-16T05:39:18, Varadarajan Narayanan
+> <varadarajan.narayanan@oss.qualcomm.com> wrote:
+> > mach-snapdragon: Add commands to create wrapper ELF
+> >
+> > The IPQ5210 boot ROM expects the SPL binary image to be embedded within
+> > an ELF along with additional binaries. Hence add the relevant commands
+> > and linker script needed to convert u-boot-spl.bin to the expected
+> > format.
+> >
+> > Signed-off-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
+> >
+> > arch/arm/mach-snapdragon/Kconfig                  |  7 +++++++
+> >  arch/arm/mach-snapdragon/ipq5210-spl-wrap-elf.lds | 18 +++++++++++++++++
+> >  scripts/Makefile.xpl                              | 24 +++++++++++++++++++++++
+> >  3 files changed, 49 insertions(+)
 >
-> Fixes: ef06c5d76ff4 ("cmd: boot: Add '-edl' option to reset command documentation")
-> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
-> ---
->  doc/usage/cmd/reset.rst | 3 ++-
->  1 file changed, 2 insertions(+), 1 deletion(-)
+> > +ifeq ($(CONFIG_ARCH_SNAPDRAGON),y)
+> > +INPUTS-$(CONFIG_SPL_WRAPPER_ELF) += spl/u-boot-spl.wrap-elf
+> > +endif
 >
-> diff --git a/doc/usage/cmd/reset.rst b/doc/usage/cmd/reset.rst
-> index 366b17eea16..54767fea241 100644
-> --- a/doc/usage/cmd/reset.rst
-> +++ b/doc/usage/cmd/reset.rst
-> @@ -23,7 +23,8 @@ DDR and peripherals, on some boards also resets external PMIC.
->      Do warm WARM, reset CPU but keep peripheral/DDR/PMIC active.
->
->  -edl
-> -    Boot to Emergency DownLoad mode on supported Qualcomm platforms.
-> +    Boot to Emergency DownLoad mode on supported Qualcomm platforms and only
-> +    when CONFIG_SYSRESET_QCOM_PSCI=y.
->
->  Return value
->  ------------
->
-> ---
-> base-commit: 4433253ecf2041f9362a763bb6cb79960921ac7e
-> change-id: 20260428-doc-sysreset-qcom-f5d21aa84142
->
-> Best regards,
-> --
-> Quentin Schulz <quentin.schulz@cherry.de>
->
+> Please can you use $(obj)/$(SPL_BIN).wrap-elf here to follow the
+> convention used elsewhere in this file. The hardcoded path would break
+> out-of-tree builds.
 
-Thanks for posting the patch. Somehow missed your comment.
+Ok.
 
-Reviewed-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
+>
+> > +/*
+> > + * SPDX-License-Identifier: GPL-2.0
+>
+> U-Boot convention for new files is GPL-2.0+ - is that OK, or do you need 2.0 ?
+
+Sorry for the delay. Had to check with our legal team.
+
+The present guidance is to use GPL-2.0 and not GPL-2.0+. If that is not
+accpetable to the U-Boot project, then I have to get back to them and
+try to find how to proceed.
+
+Please let me know.
+
+Thanks
+Varada
