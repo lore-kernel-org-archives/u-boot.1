@@ -4,57 +4,128 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3407DCD13D3
-	for <u-boot@archiver.kernel.org>; Thu, 30 Apr 2026 17:26:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3BFC5CD13D3
+	for <u-boot@archiver.kernel.org>; Thu, 30 Apr 2026 17:29:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DE51B803C6;
-	Thu, 30 Apr 2026 19:26:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=grimler.se
+	by phobos.denx.de (Postfix) with ESMTP id 19532803C6;
+	Thu, 30 Apr 2026 19:29:02 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; secure) header.d=grimler.se header.i=@grimler.se header.b="iNOtzVSk";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="f4JgkP9o";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AD12E80433; Thu, 30 Apr 2026 19:26:53 +0200 (CEST)
-Received: from out-177.mta0.migadu.com (out-177.mta0.migadu.com
- [IPv6:2001:41d0:1004:224b::b1])
+ id 0248C83693; Thu, 30 Apr 2026 19:29:01 +0200 (CEST)
+Received: from BL2PR02CU003.outbound.protection.outlook.com
+ (mail-eastusazlp17011000f.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c100::f])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 49D3680086
- for <u-boot@lists.denx.de>; Thu, 30 Apr 2026 19:26:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=grimler.se
+ by phobos.denx.de (Postfix) with ESMTPS id CF64F80086
+ for <u-boot@lists.denx.de>; Thu, 30 Apr 2026 19:28:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=henrik@grimler.se
-Date: Thu, 30 Apr 2026 19:26:38 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=grimler.se; s=key1;
- t=1777570009;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=6IqAZOjyNpHQ9weGtmta/kKo4bxsSZ8BGGB5ZRAqNW0=;
- b=iNOtzVSkDsztLsrrj4f560jFKgQ64FK0cfkNqrAxJu+pZy8IyFsnSLGnEPG/2NcLslW/8G
- bnfor3tlidWUJWFpvYyH75OvE1AXNcNNPqnDbLIPc7nqNeF+uSdAvPW1Wu+MK+jmEkPLNP
- YpbWIJOfs7FCZXpZUnbVN/luKGVbtfw=
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
- include these headers.
-From: Henrik Grimler <henrik@grimler.se>
-To: Kaustabh Chakraborty <kauschluss@disroot.org>
-Cc: Peng Fan <peng.fan@nxp.com>, u-boot@lists.denx.de,
- Minkyu Kang <mk7.kang@samsung.com>, Tom Rini <trini@konsulko.com>,
- Jaehoon Chung <jh80.chung@samsung.com>, Anand Moon <linux.amoon@gmail.com>,
- Sam Protsenko <semen.protsenko@linaro.org>,
- Lukas Timmermann <uboot@timmermann.space>
-Subject: Re: [PATCH 1/4] mmc: exynos_dw_mmc: add proper init sequence for
- HS400 support
-Message-ID: <20260430172638.GA17167@localhost>
-References: <20260427-dwmmc-exynos-hs400-es-v1-0-3495df40a9ac@disroot.org>
- <20260427-dwmmc-exynos-hs400-es-v1-1-3495df40a9ac@disroot.org>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=L+dlYI5gNIkHdtIY/Z6YGLquzczaZSQB+pq2OFPKVGB+2eGUAMTLs+lcqqNCeYBy2Zgt6dQW3fGF/7RbT+aAx9Z++rDM6Azdd7NJ+/evm+Upcp9yywabwmuvIs1XWqbe1zZuefyfnch0cAtnvjinpMHX387c8pTPtMAkX/d6PrBI98gGWtnvP4n/5+oLw41XykWmcJS0gRUTE9Ptv83QPiudshlJfHBxdpHzRIszdrYQgRaNBM+5niIgmq3KUh1WhfSz8jGcFYglxWU8DHsMaSUvlZiNCCr0Zw1qY0/yeU1Nu9FNgIaY/g5CG6Y2H8NiiS0pBSp1W7yz9TX6dCFSEA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=jFpJtU6flT8fQxqopAvSINQwpn0byQXGVPRtO8rSLuk=;
+ b=QqvY429YDB4sBCkduNZdkmed1DNSpDC5QlgcRW//8ueXUhiNw9RRWlnVDEPdwV5xIPBxBOWUw2Lo15HClrzSHuXg5vlka4XKSUQCvvkA3vK7JN42jQ7FfpaOgHekyWwl0Z+jWYPCkp3OHrMUW/zlMZ8YiVOxsjcJhXZz1cu0X5Sd1ek4d0hTfp/xNyJ2kFu6aJ6OQiHmDPUfp+4TwvkZE9pxNbLoYmsgniXl652kmmdTUjxNT6Qg0jhR08zLNBYcnK0uJOhBcp2VNdEwsgicglBU7tgzlyJIoKRcV+hjwIKW78kFTbRUr4LMhzOY+dUynYxyvCL37XVrgyHF5bqazw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.23.195) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
+ dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=jFpJtU6flT8fQxqopAvSINQwpn0byQXGVPRtO8rSLuk=;
+ b=f4JgkP9oJYMWS2Osq9G2MtqLSZODWVibfkkFIhfK1aohvmGRuE4OeEM9I/A8pUa/ttrOtqLxLd2yitknE8XglFrEmqnGzHv89z21tA3tBw/6BudfrM676powKrwAKffsvd/sTA7spwKQ5ea7JdU4LwGcEfs8okT12QaJtTNnKEg=
+Received: from BN0PR04CA0122.namprd04.prod.outlook.com (2603:10b6:408:ed::7)
+ by DM6PR10MB4283.namprd10.prod.outlook.com (2603:10b6:5:219::23) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9870.20; Thu, 30 Apr
+ 2026 17:28:54 +0000
+Received: from BN1PEPF0000468B.namprd05.prod.outlook.com
+ (2603:10b6:408:ed:cafe::95) by BN0PR04CA0122.outlook.office365.com
+ (2603:10b6:408:ed::7) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9870.21 via Frontend Transport; Thu,
+ 30 Apr 2026 17:28:53 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.195)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.23.195 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.23.195; helo=lewvzet201.ext.ti.com; pr=C
+Received: from lewvzet201.ext.ti.com (198.47.23.195) by
+ BN1PEPF0000468B.mail.protection.outlook.com (10.167.243.136) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9870.22 via Frontend Transport; Thu, 30 Apr 2026 17:28:53 +0000
+Received: from DLEE206.ent.ti.com (157.170.170.90) by lewvzet201.ext.ti.com
+ (10.4.14.104) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Thu, 30 Apr
+ 2026 12:28:52 -0500
+Received: from DLEE209.ent.ti.com (157.170.170.98) by DLEE206.ent.ti.com
+ (157.170.170.90) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Thu, 30 Apr
+ 2026 12:28:48 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE209.ent.ti.com
+ (157.170.170.98) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Thu, 30 Apr 2026 12:28:48 -0500
+Received: from [10.249.42.149] ([10.249.42.149])
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 63UHSlg01596095;
+ Thu, 30 Apr 2026 12:28:47 -0500
+Message-ID: <af7ef143-2bfb-424c-b1cf-a49fc02f9192@ti.com>
+Date: Thu, 30 Apr 2026 12:28:47 -0500
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260427-dwmmc-exynos-hs400-es-v1-1-3495df40a9ac@disroot.org>
-X-Migadu-Flow: FLOW_OUT
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 20/20] arm: dts: k3-j7200: Extend firewall for ATF region
+ to TIFS
+To: "Richard Genoud (TI)" <richard.genoud@bootlin.com>, Tom Rini
+ <trini@konsulko.com>, Manorit Chawdhry <m-chawdhry@ti.com>, Apurva Nandan
+ <a-nandan@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>, Bryan Brattlof
+ <bb@ti.com>, Vaishnav Achath <vaishnav.a@ti.com>, Jayesh Choudhary
+ <j-choudhary@ti.com>, Simon Glass <sjg@chromium.org>, Alper Nebi Yasak
+ <alpernebiyasak@gmail.com>
+CC: Markus Schneider-Pargmann <msp@baylibre.com>, Udit Kumar
+ <u-kumar1@ti.com>, Abhash Kumar <a-kumar2@ti.com>, Thomas Richard
+ <thomas.richard@bootlin.com>, Gregory CLEMENT <gregory.clement@bootlin.com>,
+ Thomas Petazzoni <thomas.petazzoni@bootlin.com>, <u-boot@lists.denx.de>
+References: <20260430084414.1354490-1-richard.genoud@bootlin.com>
+ <20260430084414.1354490-21-richard.genoud@bootlin.com>
+Content-Language: en-US
+From: Andrew Davis <afd@ti.com>
+In-Reply-To: <20260430084414.1354490-21-richard.genoud@bootlin.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BN1PEPF0000468B:EE_|DM6PR10MB4283:EE_
+X-MS-Office365-Filtering-Correlation-Id: 64c490d7-f40e-4880-6add-08dea6ddf36c
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|36860700016|82310400026|1800799024|376014|921020|56012099003|22082099003|18002099003;
+X-Microsoft-Antispam-Message-Info: bl23ntVJGlgXD6p7B02l1H+B7RGzfPyt2qmjlERbe1LZTwAbyIGh3RW24taGS0WwhppcVp6Ir9I0pbHzRTfV5LLPMymf9vSyvs4oTfrXRn2uTnSVuJ/Ek6z9PZ0M2ScTPa0gmkd9G99c4P824QR05GHiSKIY7MVqiqq7uaEkTgXdd2M0DMZ+Xjy7aVpFVjWiIQRuwtOjEj1dOugQfgn8g6I14WD13NVBUJPaDu670yEYaWbzRrfWMWd4mRxjMdSlVC2+3pJ/rbtujFR06mpBojz+4qxjVv/fJHkf1xaAdugPcM0UTBHThUBJL/XXwHPSDxoaDYpYxEr6jHtE6MGo+XdCjHSY8xC3lpe8W3GEsJ0g7g2j8/OQChAoUluCZytVzU6KyBPJEYv0jSIyNGLE3BoX/7ngQoD8ffF1P0rA4AfwjMOC43VppL4k8PeblzZcgPxGDKMXyqFnyTzaHt/at1tnQmtF+Pqe3Shd2LvVqX8mfAl4J0ree7GCfANj3sgZra9WSjWcLx+rhRNmf76w8u0cTSkqeYy9/Waqtfrk/xmj6d4OvYupLPw68XNj/w2JVlMge83flKWci1ocdqd5QljHSb1dSmKSrOj4zRJ1xZ6BL0i16KNyhcmNVGeLAL7EhdQMK3G45eWg6Z95jxYHmajEByk/CEyEbriSguzsAl8SDgzkskXUtabf+frTdlB4z5dFVdQXGch4hNImKVEYnTiImpf2t4qi0ZK7lkAw+2XDBxsgGUkw1U/xqMnVUPkqGw/uAiIq3GiD5nk++pq56A==
+X-Forefront-Antispam-Report: CIP:198.47.23.195; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:lewvzet201.ext.ti.com; PTR:InfoDomainNonexistent;
+ CAT:NONE;
+ SFS:(13230040)(36860700016)(82310400026)(1800799024)(376014)(921020)(56012099003)(22082099003)(18002099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: drPmxSoR3EuaNFPGYrxHyfsDF4N3iKBOy8zluXwUk3rFWhUZQONZqdryDL2VyD0b18A8AckR+MfOH08+tDCYzDZw7MHz4P5ZOGEatvDa7ZchUjUEOnQcGk3vBPpQpdYYcyFOSBqojj2ZOcC6dUcdf/ZfbwBfAEqwONd4zlcz6WdOWjGrGYO/Pq7kNIPDS5dwFJ+e7CJmFudmxGIrE/dUdIkk2FvOxPJAYdLcwvuabiS0XxsMYqvD+aQgdK4qsktnUBAsofjF2D8WL03TqSZHu5EQbBcofkcO1F6JIanfxxnqicjPYzQZRMCvFky+sCk2MsrJDiJXOwsKVTXeSYt09g//7WNmigoct6Je0Qnaoe2ADwpVlB9WClocjQSVSsRowmQWX5WTy9WJ/UanBug68/hJtS3MSr3ZZ7RmbDf/4saqyu9KtSmVc/2qjDhOeLCx
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Apr 2026 17:28:53.3988 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 64c490d7-f40e-4880-6add-08dea6ddf36c
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.195];
+ Helo=[lewvzet201.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: BN1PEPF0000468B.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR10MB4283
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,166 +142,101 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Kaustabh,
-
-On Mon, Apr 27, 2026 at 11:22:49AM +0530, Kaustabh Chakraborty wrote:
-> HS400 support was added, but configuration necessary for HS400 support
-> was left out. Add necessary changes, which includes:
-> - Device tree properties, such as "samsung,dw-mshc-hs400-timing" and
->   "samsung,read-strobe-delay", which function as per dt-bindings.
-> - Registers related to HS400, which are necessary to enable HS400+ support.
-> - Appropriate timing tunings for the HS400 mode.
+On 4/30/26 3:44 AM, Richard Genoud (TI) wrote:
+> From: Prasanth Babu Mantena <p-mantena@ti.com>
 > 
-> Note that these changes are loosely based off of its Linux kernel
-> counterpart.
+> Extend the access to SRAM region of ATF to TIFS as well. This is
+> needed for TIFS for encryption and decryption of ATF as a part of
+> low power mode sequence. TIFS encrypts the ATF while entering into
+> low power mode and decrypts it back while resuming back.
+> So, giving permissions for TIFS to access this region.
 > 
-> Fixes: bbe3b9fa0922 ("mmc: exynos_dw_mmc: add support for MMC HS200 and HS400 modes")
-> Signed-off-by: Kaustabh Chakraborty <kauschluss@disroot.org>
+> Signed-off-by: Prasanth Babu Mantena <p-mantena@ti.com>
 > ---
->  arch/arm/mach-exynos/include/mach/dwmmc.h |  5 ++
->  drivers/mmc/exynos_dw_mmc.c               | 80 +++++++++++++++++++++++++++++++
->  2 files changed, 85 insertions(+)
+>   arch/arm/dts/k3-binman.dtsi       | 18 ++++++++++++++++--
+>   arch/arm/dts/k3-j7200-binman.dtsi |  4 ++--
+>   arch/arm/dts/k3-security.h        |  1 +
+>   3 files changed, 19 insertions(+), 4 deletions(-)
 > 
-> diff --git a/arch/arm/mach-exynos/include/mach/dwmmc.h b/arch/arm/mach-exynos/include/mach/dwmmc.h
-> index 4432deedef7..50081326c25 100644
-> --- a/arch/arm/mach-exynos/include/mach/dwmmc.h
-> +++ b/arch/arm/mach-exynos/include/mach/dwmmc.h
-> @@ -15,6 +15,11 @@
->  #define DWMCI_SET_DRV_CLK(x)		((x) << 16)
->  #define DWMCI_SET_DIV_RATIO(x)		((x) << 24)
->  
-> +/* HS400 Related Registers */
-> +#define DWMCI_HS400_DQS_EN		0x180
-> +#define DWMCI_HS400_ASYNC_FIFO_CTRL	0x184
-> +#define DWMCI_HS400_DLINE_CTRL		0x188
-> +
->  /* Protector Register */
->  #define DWMCI_EMMCP_BASE		0x1000
->  #define EMMCP_MPSECURITY		(DWMCI_EMMCP_BASE + 0x0010)
-> diff --git a/drivers/mmc/exynos_dw_mmc.c b/drivers/mmc/exynos_dw_mmc.c
-> index 7ccd113bd79..d5e90a9bd5c 100644
-> --- a/drivers/mmc/exynos_dw_mmc.c
-> +++ b/drivers/mmc/exynos_dw_mmc.c
-> @@ -8,6 +8,7 @@
->  #include <dwmmc.h>
->  #include <asm/global_data.h>
->  #include <malloc.h>
-> +#include <mmc.h>
->  #include <errno.h>
->  #include <asm/arch/dwmmc.h>
->  #include <asm/arch/clk.h>
-> @@ -30,6 +31,14 @@
->  #define CLKSEL_UP_SAMPLE(x, y)		(((x) & ~CLKSEL_CCLK_SAMPLE(7)) | \
->  					 CLKSEL_CCLK_SAMPLE(y))
->  
-> +/* RCLK_EN register defines */
-> +#define DATA_STROBE_EN			BIT(0)
-> +#define AXI_NON_BLOCKING_WR	BIT(7)
-> +
-> +/* DLINE_CTRL register defines */
-> +#define DQS_CTRL_RD_DELAY(x, y)		(((x) & ~0x3FF) | ((y) & 0x3FF))
-> +#define DQS_CTRL_GET_RD_DELAY(x)	((x) & 0x3FF)
-> +
->  /**
->   * DOC: Quirk flags for different Exynos DW MMC blocks
->   *
-> @@ -71,6 +80,11 @@ struct dwmci_exynos_priv_data {
->  	struct clk clk;
->  	u32 sdr_timing;
->  	u32 ddr_timing;
-> +	u32 hs400_timing;
-> +	u32 tuned_sample;
-> +	u32 dqs_delay;
-> +	u32 saved_dqs_en;
-> +	u32 saved_strobe_ctrl;
->  	const struct exynos_dwmmc_variant *chip;
->  };
->  
-> @@ -162,6 +176,27 @@ static u8 exynos_dwmmc_get_ciu_div(struct dwmci_host *host)
->  				& DWMCI_DIVRATIO_MASK) + 1;
->  }
->  
-> +static void exynos_config_hs400(struct dwmci_host *host, enum bus_mode mode)
-> +{
-> +	struct dwmci_exynos_priv_data *priv = exynos_dwmmc_get_priv(host);
-> +	u32 dqs, strobe;
-> +
-> +	dqs = priv->saved_dqs_en;
-> +	strobe = priv->saved_strobe_ctrl;
-> +
-> +	switch (mode) {
-> +	case MMC_HS_400:
-> +		dqs |= DATA_STROBE_EN;
-> +		strobe = DQS_CTRL_RD_DELAY(strobe, priv->dqs_delay);
-> +		break;
-> +	default:
-> +		dqs &= ~DATA_STROBE_EN;
-> +	}
-> +
-> +	dwmci_writel(host, DWMCI_HS400_DQS_EN, dqs);
-> +	dwmci_writel(host, DWMCI_HS400_DLINE_CTRL, strobe);
-> +}
-> +
->  /* Configure CLKSEL register with chosen timing values */
->  static int exynos_dwmci_clksel(struct dwmci_host *host)
->  {
-> @@ -170,6 +205,9 @@ static int exynos_dwmci_clksel(struct dwmci_host *host)
->  	u32 timing;
->  
->  	switch (host->mmc->selected_mode) {
-> +	case MMC_HS_400:
-> +		timing = CLKSEL_UP_SAMPLE(priv->hs400_timing, priv->tuned_sample);
-> +		break;
->  	case MMC_DDR_52:
->  		timing = priv->ddr_timing;
->  		break;
-> @@ -186,6 +224,8 @@ static int exynos_dwmci_clksel(struct dwmci_host *host)
->  
->  	dwmci_writel(host, priv->chip->clksel, timing);
->  
-> +	exynos_config_hs400(host, host->mmc->selected_mode);
-> +
+> diff --git a/arch/arm/dts/k3-binman.dtsi b/arch/arm/dts/k3-binman.dtsi
+> index 0fd93f9536a2..4ffd8ec9e1c1 100644
+> --- a/arch/arm/dts/k3-binman.dtsi
+> +++ b/arch/arm/dts/k3-binman.dtsi
+> @@ -479,7 +479,21 @@
+>   		start_address = <0x0 CONFIG_K3_ATF_LOAD_ADDR>;
+>   		end_address = <0x0 (CONFIG_K3_ATF_LOAD_ADDR + 0x1ffff)>;
+>   	};
+> -	firewall_armv8_optee_fg: template-8 {
+> +	firewall_armv8_atf_tifs_fg: template-8 {
+> +		control = <(FWCTRL_EN | FWCTRL_LOCK |
+> +					FWCTRL_CACHE)>;
+> +		permissions = <((FWPRIVID_ARMV8 << FWPRIVID_SHIFT) |
+> +						FWPERM_SECURE_PRIV_RWCD |
+> +						FWPERM_SECURE_USER_RWCD)>,
+> +					<((FWPRIVID_TIFS << FWPRIVID_SHIFT) |
+> +						FWPERM_SECURE_PRIV_RWCD |
+> +						FWPERM_SECURE_USER_RWCD |
+> +						FWPERM_NON_SECURE_PRIV_RWCD |
+> +						FWPERM_NON_SECURE_USER_RWCD)>;
+> +		start_address = <0x0 0x70000000>;
 
-This breaks emmc in Linux for existing devices without hs400 support:
-exynos_config_hs400 is run no matter if the dt has the hs400
-parameters, meaning 0x0 is written to DWMCI_HS400_DQS_EN and
-DWMCI_HS400_DLINE_CTRL. U-boot does not seem to care, it loads the
-kernel and initramfs without issues, but Linux later gives errors:
+Should this be using CONFIG_K3_ATF_LOAD_ADDR like the other templates?
 
-```
-[   20.741025] mmc_host mmc0: Bus speed (slot 0) = 50000000Hz (slot req 400000Hz, actual 396825HZ div = 63)
-[   20.886686] mmc_host mmc0: Bus speed (slot 0) = 50000000Hz (slot req 52000000Hz, actual 50000000HZ div = 0)
-[   20.895138] mmc_host mmc0: Bus speed (slot 0) = 200000000Hz (slot req 200000000Hz, actual 200000000HZ div = 0)
-[   20.905990] mmc_host mmc0: Bus speed (slot 0) = 50000000Hz (slot req 52000000Hz, actual 50000000HZ div = 0)
-[   20.914988] mmc_host mmc0: Bus speed (slot 0) = 400000000Hz (slot req 200000000Hz, actual 200000000HZ div = 1)
-[   21.099546] I/O error, dev mmcblk0, sector 1000001 op 0x1:(WRITE) flags 0x800 phys_seg 16 prio class 2
-[   21.099853] I/O error, dev mmcblk0, sector 1000825 op 0x1:(WRITE) flags 0x800 phys_seg 8 prio class 2
-[   21.107443] Buffer I/O error on dev mmcblk0p2, logical block 0, lost async page write
-[   21.107473] Buffer I/O error on dev mmcblk0p2, logical block 1, lost async page write
-[   21.116657] Buffer I/O error on dev mmcblk0p2, logical block 824, lost async page write
-[   21.124408] Buffer I/O error on dev mmcblk0p2, logical block 2, lost async page write
-[   21.132206] Buffer I/O error on dev mmcblk0p2, logical block 825, lost async page write
-[   21.140178] Buffer I/O error on dev mmcblk0p2, logical block 3, lost async page write
-[   21.147973] Buffer I/O error on dev mmcblk0p2, logical block 826, lost async page write
-[   21.155960] Buffer I/O error on dev mmcblk0p2, logical block 4, lost async page write
-[   21.163749] Buffer I/O error on dev mmcblk0p2, logical block 827, lost async page write
-[   21.171720] Buffer I/O error on dev mmcblk0p2, logical block 5, lost async page write
-[   21.200708] I/O error, dev mmcblk0, sector 1000873 op 0x1:(WRITE) flags 0x800 phys_seg 8 prio class 2
-[   21.201043] I/O error, dev mmcblk0, sector 1000929 op 0x1:(WRITE) flags 0x800 phys_seg 8 prio class 2
-[   21.218287] I/O error, dev mmcblk0, sector 1000945 op 0x1:(WRITE) flags 0x800 phys_seg 80 prio class 2
-[   21.218623] I/O error, dev mmcblk0, sector 1001033 op 0x1:(WRITE) flags 0x800 phys_seg 24 prio class 2
-[   21.236813] I/O error, dev mmcblk0, sector 1001097 op 0x1:(WRITE) flags 0x800 phys_seg 8 prio class 2
-[   21.237146] I/O error, dev mmcblk0, sector 1001121 op 0x1:(WRITE) flags 0x800 phys_seg 24 prio class 2
-[   21.255370] I/O error, dev mmcblk0, sector 1001161 op 0x1:(WRITE) flags 0x800 phys_seg 56 prio class 2
-[   21.256253] I/O error, dev mmcblk0, sector 1001249 op 0x1:(WRITE) flags 0x800 phys_seg 8 prio class 2
-```
+Might be easier to just update the existing `firewall_armv8_atf_fg`
+template to also always allow TIFS. TIFS is the security root and
+if it really wanted to it could just update firewalls to let itself
+in, not like anything is really protected from TIFS to begin with.
+(if we are not locking the firewalls that is)
 
-Specifically it seems to be writing 0x0 to DWMCI_HS400_DQS_EN that is
-the issue, if I comment out that line it works also for my odroid-xu4
-in non-hs400 mode.
+Andrew
 
-Tested on odroid-xu4 with odroid-xu3_defconfig after applying the
-entire series, without any other changes.
+> +		end_address = <0x0 0x7001ffff>;
+> +	};
+> +	firewall_armv8_optee_fg: template-9 {
+>   		control = <(FWCTRL_EN | FWCTRL_LOCK |
+>   					FWCTRL_CACHE)>;
+>   		permissions = <((FWPRIVID_ARMV8 << FWPRIVID_SHIFT) |
+> @@ -489,7 +503,7 @@
+>   		end_address = <0x0 (CONFIG_K3_OPTEE_LOAD_ADDR + 0x17fffff)>;
+>   	};
+>   
+> -	ti_falcon_template: template-9 {
+> +	ti_falcon_template: template-10 {
+>   		filename = "tifalcon.bin";
+>   		pad-byte = <0xff>;
+>   
+> diff --git a/arch/arm/dts/k3-j7200-binman.dtsi b/arch/arm/dts/k3-j7200-binman.dtsi
+> index c2b86339d593..68ce4aa0ff12 100644
+> --- a/arch/arm/dts/k3-j7200-binman.dtsi
+> +++ b/arch/arm/dts/k3-j7200-binman.dtsi
+> @@ -259,7 +259,7 @@
+>   
+>   						firewall-4760-1 {
+>   							/* nb_slv0__mem0 Foreground Firewall */
+> -							insert-template = <&firewall_armv8_atf_fg>;
+> +							insert-template = <&firewall_armv8_atf_tifs_fg>;
+>   							id = <4760>;
+>   							region = <1>;
+>   						};
+> @@ -272,7 +272,7 @@
+>   
+>   						firewall-4761-1 {
+>   							/* nb_slv1__mem0 Foreground Firewall */
+> -							insert-template = <&firewall_armv8_atf_fg>;
+> +							insert-template = <&firewall_armv8_atf_tifs_fg>;
+>   							id = <4761>;
+>   							region = <1>;
+>   						};
+> diff --git a/arch/arm/dts/k3-security.h b/arch/arm/dts/k3-security.h
+> index 33609caa8fb5..3e066bca6ad7 100644
+> --- a/arch/arm/dts/k3-security.h
+> +++ b/arch/arm/dts/k3-security.h
+> @@ -7,6 +7,7 @@
+>   #define DTS_ARM64_TI_K3_FIREWALL_H
+>   
+>   #define FWPRIVID_ALL    0xc3
+> +#define FWPRIVID_TIFS   0xca
+>   #define FWPRIVID_ARMV8  1
+>   #define FWPRIVID_SHIFT  16
+>   
 
-Best regards,
-Henrik Grimler
