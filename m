@@ -4,101 +4,101 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A554CCFA13
-	for <u-boot@archiver.kernel.org>; Thu, 30 Apr 2026 21:26:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 084CDCCFA13
+	for <u-boot@archiver.kernel.org>; Thu, 30 Apr 2026 21:26:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0367783936;
-	Thu, 30 Apr 2026 23:26:04 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5987A842C7;
+	Thu, 30 Apr 2026 23:26:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=jannau.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=jannau.net header.i=@jannau.net header.b="JLORckLp";
-	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="QwTkSNHp";
+	dkim=pass (2048-bit key; unprotected) header.d=jannau.net header.i=@jannau.net header.b="kpUicvvX";
+	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="bDcFd4gH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9B7DC83A91; Thu, 30 Apr 2026 23:25:57 +0200 (CEST)
+ id 8045284255; Thu, 30 Apr 2026 23:26:06 +0200 (CEST)
 Received: from fout-b4-smtp.messagingengine.com
  (fout-b4-smtp.messagingengine.com [202.12.124.147])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 58DE2803C6
- for <u-boot@lists.denx.de>; Thu, 30 Apr 2026 23:25:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8AEFA84198
+ for <u-boot@lists.denx.de>; Thu, 30 Apr 2026 23:26:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=jannau.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=j@jannau.net
-Received: from phl-compute-05.internal (phl-compute-05.internal [10.202.2.45])
- by mailfout.stl.internal (Postfix) with ESMTP id E964B1D00081;
- Thu, 30 Apr 2026 17:25:53 -0400 (EDT)
-Received: from phl-frontend-03 ([10.202.2.162])
- by phl-compute-05.internal (MEProxy); Thu, 30 Apr 2026 17:25:54 -0400
+Received: from phl-compute-04.internal (phl-compute-04.internal [10.202.2.44])
+ by mailfout.stl.internal (Postfix) with ESMTP id 68E7F1D00081;
+ Thu, 30 Apr 2026 17:25:58 -0400 (EDT)
+Received: from phl-frontend-04 ([10.202.2.163])
+ by phl-compute-04.internal (MEProxy); Thu, 30 Apr 2026 17:25:58 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=jannau.net; h=cc
  :cc:content-transfer-encoding:content-type:content-type:date
- :date:from:from:in-reply-to:message-id:mime-version:reply-to
- :subject:subject:to:to; s=fm1; t=1777584353; x=1777670753; bh=AP
- S/lJNFBlUwr6zKeYSRx9QBFfR2IXDp6v9ewE6uJig=; b=JLORckLpZMFW4P0zz9
- Zs+JDd3LeAabmzlsg/MNSUEAyfuFtiNX93eRBSNJ+CiQMS/P/xAXQV2ThpGvPN84
- CAyUvU8Oatt1vBTDE4ez3vx6R+pnD1yfKxfcTMu+9unoMoD0b39ZxP7OF5qXPVGq
- z2X0GSw+OaOpcPqrgX/dIPFe0biNn2mV9hWU3opU7X4rkn7ORkU1hL2UgF3F+ADb
- AN93npvYeGADRE+EMcYCh9Zce5hX+NFNk7KTvOqfrSEd0kiSGFOm/s6zLNwnbVGU
- Q9AOWO4TWQaLfpjyc0KLRcjg7cPXNgvHwpY2GzcMlmT9wexheMvJeVW2ftkCulRu
- atLA==
+ :date:from:from:in-reply-to:in-reply-to:message-id:mime-version
+ :references:reply-to:subject:subject:to:to; s=fm1; t=1777584358;
+ x=1777670758; bh=N8FF64AQ1sH/Alk14qRuCVJVQjDcaxyydredNqJhHPo=; b=
+ kpUicvvXgM6qssIC+cVd0srsMXE3iGRnhdZYNUyxQzNZ/h5OzG4w0Od2Mb2Jzg8J
+ sqBHLMScdeuCxQV6AHi1rdq8jOzT73soJSRGfUjGFRDuNNdM8lB3CaUOEkFqMpOG
+ fDLUFF7vsSKF3sB0r4X7obZzX8AKnbkrJZtGT331PtVPTwkXFiXZBx9N8fF2Q6eh
+ 7+w8eCzF7ptlFFUcYdoep7b0AKlv39bI2hiIlJ0Dj/KgpzsZdWKydG6WGp7mjrJK
+ uJAFbr2giqF5eNXIhtpYyaE0F6Bhd/clRgH9yQZQjTAeemcLP3wxm8o9IMmVXLLN
+ 20imPWj/+0YfUU/Ah0B0Yw==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
  messagingengine.com; h=cc:cc:content-transfer-encoding
  :content-type:content-type:date:date:feedback-id:feedback-id
- :from:from:in-reply-to:message-id:mime-version:reply-to:subject
- :subject:to:to:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
- fm2; t=1777584353; x=1777670753; bh=APS/lJNFBlUwr6zKeYSRx9QBFfR2
- IXDp6v9ewE6uJig=; b=QwTkSNHpxGMNGlew62CqTx3dyGbJy24F5RXPpHFKzJnT
- poQMuBN3WS6cuQYi2jtKu3nlsTgNzwnKd6u+HTRR9/e1pTpghTh476xE8f6bqARX
- BJYnTQ2hnrNxSssgX2y09r9UR1SiMKBtW7wcRRzu1JkKzOU08J5TLTYh96Le8E6g
- /DEPt9Osphmto4Cgr3P7YP7RwqckavQfiUaVa2Sxj7MZHzqoRI9CIeemP9rBDnxm
- BdUa/tB7LH6wOIBhyXuc5NG2ZLOJQYmMKh3/CZG/qjG8T0eoYNGw0KH2PKFUvxKp
- qoNo3ZnLun05D1BAcqIEn/UNcLmn5zAyWBHZRCsg7g==
-X-ME-Sender: <xms:4cjzaQfFxhF-xjatFf-ioHZoahTbtrGuc1v6ULyTLZs4Qw4dc-j0Ow>
- <xme:4cjzaZPuSD7Fk9leoUbYiKCx_QYy5Fv9_lkGonlvGwgfYMya40sCg7F_Q6v7pPRom
- pioyRuS1SoaZoIRaglplcPlAjp22U8OMOHAPZPbzsyBcoFmCprvVZo>
-X-ME-Received: <xmr:4cjzaWi00-Iek-YJNHcItO6M2NOjyac7vnFJPGzUxMRY2zIDIJk0Sej6Aom1aDCh2HOt39hM38lGBiL_2SIPO2NDaZsgfIvYioVwpg>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefhedrtddtgdekkeegtdcutefuodetggdotefrod
+ :from:from:in-reply-to:in-reply-to:message-id:mime-version
+ :references:reply-to:subject:subject:to:to:x-me-proxy
+ :x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=1777584358; x=
+ 1777670758; bh=N8FF64AQ1sH/Alk14qRuCVJVQjDcaxyydredNqJhHPo=; b=b
+ DcFd4gHKGcjrPxnH6vZbVlgCFwS4SwLHmP1GpQJMFQPqrP3+RU4EnJw+28iDVasH
+ 7ntIex+UngxF45/HMmpzVvCwxovOArkusCejWsiQlfj7c5KTZSlS64Nop3gW5Bnz
+ NaX12Wp1IXu27tm6vTxuR4YdY8pj6JLebAab/hG9M6oFe+qUrCXnWyq4HFv92X9D
+ vNROYKFY/5aYTtyirO97G+SEBsrudXP35Z8ciaNX56z+XepsA+CMINYiU3dJTHfc
+ PHxV7J6aCx24FR88Fa6mDZGXxALaEFz2c+0CYYOBnJBiQJcP6eSH2Tz+xG7cwf3c
+ Rjqy5AAdecfFFnok1c+qw==
+X-ME-Sender: <xms:5sjzaZrx26CJUBHPwGQ5Q6h5V5-5DHx6Epk9RlBCxej2jERLqTvj7Q>
+ <xme:5sjzaSr73MEXIJCG68qM6OJ5FHvNrIcdoTK2RTFnI2pOo3PECae4uaO-5dQA2Wlfm
+ upwNUD1Q1IbHjbZk4EMPNFflGoHh21eAxPxurNO2T1vnWuMOcXD_yY>
+X-ME-Received: <xmr:5sjzabO6YHk2ZEsfpkkeMxtxz5y9kIbwIU_2NH8EL_kCj6k7xnRpoRB8PbcIk-GKC1zxTIU1OGw8e1SJ0Dm6ds5cwS9GGjOupF1wmA>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefhedrtddtgdekkeeflecutefuodetggdotefrod
  ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpuffrtefokffrpgfnqfghnecuuegr
  ihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfjug
- hrpefhufffkfggtgfgvfevofesthejredtredtjeenucfhrhhomheplfgrnhhnvgcuifhr
- uhhnrghuuceojhesjhgrnhhnrghurdhnvghtqeenucggtffrrghtthgvrhhnpefhtdeuud
- eljeffuddvheekuedtfefhtddvieeigeehffelfeevvdfhgeeggefffeenucevlhhushht
- vghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpehjsehjrghnnhgruhdrnh
- gvthdpnhgspghrtghpthhtohepgedpmhhouggvpehsmhhtphhouhhtpdhrtghpthhtohep
- khgvthhtvghnihhssehophgvnhgsshgurdhorhhgpdhrtghpthhtohepjhesjhgrnhhnrg
- hurdhnvghtpdhrtghpthhtohepthhrihhniheskhhonhhsuhhlkhhordgtohhmpdhrtghp
- thhtohepuhdqsghoohhtsehlihhsthhsrdguvghngidruggv
-X-ME-Proxy: <xmx:4cjzaU1OOSGiPHTQ_rgEuNirJz9FE3CXUowoGCRx1GLGs28QU8rNZw>
- <xmx:4cjzaYi6_ENPWwskyfo6hcglaYtgGPDb7q5Pe1LSPKRB95b6WA11rQ>
- <xmx:4cjzacfpJzaWzV0T6Gxe9_hBPifp_L2UyVkq9PiNKi_GaMQAE17sew>
- <xmx:4cjzaTlnZojssyifD_7t1xoZ5L7WQqhg1mIr9xxKH6VN8PDUVJDapQ>
- <xmx:4cjzaXK9VMgVM2IeO159ohwhuONKjaAOt1MHOD0vJ6LKlQMlfEioW2Rh>
+ hrpefhfffugggtgffkfhgjvfevofesthejredtredtjeenucfhrhhomheplfgrnhhnvgcu
+ ifhruhhnrghuuceojhesjhgrnhhnrghurdhnvghtqeenucggtffrrghtthgvrhhnpeefhe
+ ehieeludffheetiefhvddtleffuddtleduudeiudetvdefffehkeehgfettdenucevlhhu
+ shhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpehjsehjrghnnhgruh
+ drnhgvthdpnhgspghrtghpthhtohepgedpmhhouggvpehsmhhtphhouhhtpdhrtghpthht
+ ohepkhgvthhtvghnihhssehophgvnhgsshgurdhorhhgpdhrtghpthhtohepjhesjhgrnh
+ hnrghurdhnvghtpdhrtghpthhtohepthhrihhniheskhhonhhsuhhlkhhordgtohhmpdhr
+ tghpthhtohepuhdqsghoohhtsehlihhsthhsrdguvghngidruggv
+X-ME-Proxy: <xmx:5sjzaTxeEMbPdDQnOr8XNpDAuMwyV_GcRIuYZhvzVFxd6lFaoxqX0Q>
+ <xmx:5sjzaUs9M548EF8TX3RCHlcm5U7PGRvAGPnFxTnWZzu6wQdDYnbbZg>
+ <xmx:5sjzac7InD7w-xjEIJFkkvehhJ2_Cq79sm9LG71sDYFMuu-lebt9mQ>
+ <xmx:5sjzaTSn_c47QaCyOFYqfiW9sJfoeYeBsn_SJm-A0Mv8D0zQDZi82g>
+ <xmx:5sjzaWL8_HCGOI61Ut5uKbscC_Qt10wo6rxo_-K_8bTSt0zSlGp3f92V>
 Feedback-ID: i47b949f6:Fastmail
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Thu,
- 30 Apr 2026 17:25:52 -0400 (EDT)
+ 30 Apr 2026 17:25:56 -0400 (EDT)
 From: Janne Grunau <j@jannau.net>
-Subject: [PATCH 0/3] Switch Apple silicon boards to upstream device trees
-Date: Thu, 30 Apr 2026 23:25:45 +0200
-Message-Id: <20260430-apple-dt-upstream-v1-0-dda66c16e0da@jannau.net>
+Date: Thu, 30 Apr 2026 23:25:46 +0200
+Subject: [PATCH 1/3] doc: board: apple: Mention M2 and M2 Pro/Max/Ultra
+ SoCs
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/x3MQQqAIBBA0avErBsYi4K6SrSQHGugTLQiEO+et
- HyL/xNEDsIRxipB4EeinK5A1RUsm3Yro5hiaKjpSdGA2vud0Vx4+3gF1gf2RltqO0WWFyidD2z
- l/Z/TnPMHk+1zhWMAAAA=
-X-Change-ID: 20260109-apple-dt-upstream-6daf03510fec
+Message-Id: <20260430-apple-dt-upstream-v1-1-dda66c16e0da@jannau.net>
+References: <20260430-apple-dt-upstream-v1-0-dda66c16e0da@jannau.net>
+In-Reply-To: <20260430-apple-dt-upstream-v1-0-dda66c16e0da@jannau.net>
 To: u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>, Mark Kettenis <kettenis@openbsd.org>, 
  Janne Grunau <j@jannau.net>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2527; i=j@jannau.net;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1431; i=j@jannau.net;
  s=yk2025; h=from:subject:message-id;
- bh=81a4m9X7WPfYIWehc4Cj6FS29ATHldjJcFPioyVrFe8=;
- b=owGbwMvMwCW2UNrmdq9+ahrjabUkhszPJ+52fWISmV3gquK4KMry+5PPkau1zu51TeflP90ZV
- VV52MOvo5SFQYyLQVZMkSVJ+2UHw+oaxZjaB2Ewc1iZQIYwcHEKwEQqzjD8j1Fft9365+JZ9qJ1
- Z+R3Kelm7n/ot6pQ1Joj4krz3+02Wxn+qX7cOG/fnq+iabNOpB6OuXjc4s4mQT71/U5Gq5RMl1Y
- uYAQA
+ bh=7gR771XhGK3bPYBsW1AC/hFewXJPLUFpB96dkcUdegc=;
+ b=owGbwMvMwCW2UNrmdq9+ahrjabUkhszPJ+5+mt74KK1K6GyryM2dx07ePj/HOP2rpnv+vKQNx
+ wMnfqz731HKwiDGxSArpsiSpP2yg2F1jWJM7YMwmDmsTCBDGLg4BWAiAnaMDHt9V9wwlHqxt3a3
+ oFTrGeu1Ni94P8zkXGH+xDE5me2cbA/DPwsPg9e/7vzVTPd7fLTvw90fRlHFnxxMGfhW/9jNsoW
+ thgEA
 X-Developer-Key: i=j@jannau.net; a=openpgp;
  fpr=8B336A6BE4E5695E89B8532B81E806F586338419
 X-BeenThere: u-boot@lists.denx.de
@@ -117,53 +117,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The Linux device trees for Apple silicon devices cover now most of the
-hardware as u-boot's internal device trees for M1 devices. Linux has in
-addition device trees M2 and M1 and M2 Pro/Max/Ultra devices which were
-never added in u-boot.
-The most common use case for u-boot on Apple silicon devices does not
-use DTBs from u-boot but passes runtime modified device trees from an
-earlier boot loader (m1n1).
-This change regresses support for the DWC3 based USB-C ports and the SPI
-based keyboard on M1 and M1 Pro/Max notebooks. The regression for the
-USB-C ports will be fixed when dts/upstream is synced to Linux v7.0.
-The dt-bindings and device tree nodes for the SPI keyboard has still to
-be submitted upstream.
-These regression are in my opinion acceptable due to the limited use of
-u-boot's DTBs for these targets.
+These SoCs are supported since 2022/2023 but were never added to the
+documentation. The devices very similar to the equivalent M1 devices.
+The biggest difference is that the M2 and M2 Pro/Max based laptops no
+longer use SPI for the keyboard.
 
 Signed-off-by: Janne Grunau <j@jannau.net>
 ---
-Janne Grunau (3):
-      doc: board: apple: Mention M2 and M2 Pro/Max/Ultra SoCs
-      doc: device-tree-bindings: Remove apple,pinctrl.yaml
-      arm: dts: Switch Apple silicon devices to dts/upstream
+ doc/board/apple/m1.rst | 10 +++++++---
+ 1 file changed, 7 insertions(+), 3 deletions(-)
 
- arch/arm/Kconfig                                   |    1 +
- arch/arm/dts/Makefile                              |    7 -
- arch/arm/dts/t8103-j274-u-boot.dtsi                |    1 -
- arch/arm/dts/t8103-j274.dts                        |  129 ---
- arch/arm/dts/t8103-j293-u-boot.dtsi                |    1 -
- arch/arm/dts/t8103-j293.dts                        |  116 --
- arch/arm/dts/t8103-j313-u-boot.dtsi                |    1 -
- arch/arm/dts/t8103-j313.dts                        |  111 --
- arch/arm/dts/t8103-j456-u-boot.dtsi                |    1 -
- arch/arm/dts/t8103-j456.dts                        |  117 --
- arch/arm/dts/t8103-j457-u-boot.dtsi                |    1 -
- arch/arm/dts/t8103-j457.dts                        |  105 --
- arch/arm/dts/t8103-jxxx.dtsi                       |  143 ---
- arch/arm/dts/t8103-pmgr.dtsi                       | 1138 --------------------
- arch/arm/dts/t8103-u-boot.dtsi                     |   25 -
- arch/arm/dts/t8103.dtsi                            |  696 ------------
- configs/apple_m1_defconfig                         |    2 +-
- doc/board/apple/m1.rst                             |   15 +-
- .../pinctrl/apple,pinctrl.yaml                     |  106 --
- 19 files changed, 11 insertions(+), 2705 deletions(-)
----
-base-commit: 88dc2788777babfd6322fa655df549a019aa1e69
-change-id: 20260109-apple-dt-upstream-6daf03510fec
+diff --git a/doc/board/apple/m1.rst b/doc/board/apple/m1.rst
+index 8fa7637629e..5d2cf750fde 100644
+--- a/doc/board/apple/m1.rst
++++ b/doc/board/apple/m1.rst
+@@ -8,14 +8,18 @@ developed by the Asahi Linux project.  At this point the machines with
+ the following SoCs work:
+ 
+  - Apple M1 SoC (t8103)
++ - Apple M2 SoC (t8112)
+  - Apple M1 Pro SoC (t6000)
+  - Apple M1 Max SoC (t6001)
+  - Apple M1 Ultra SoC (t6002)
++ - Apple M2 Pro SoC (t6020)
++ - Apple M2 Max SoC (t6021)
++ - Apple M2 Ultra SoC (t6022)
+ 
+ On these SoCs the following hardware is supported:
+ 
+  - S5L serial port
+- - SPI keyboard (on laptops)
++ - SPI keyboard (on M1 laptops)
+  - Framebuffer
+  - NVMe storage
+  - USB 3.1 Type-C ports
+@@ -77,7 +81,7 @@ supported SoCs.
+ 
+    * - SoC
+      - Base Address
+-   * - M1 (t8103)
++   * - M1 (t8103) and M2 (t8112)
+      - 0x235200000
+-   * - M1 Pro/Max/Ultra (t6000/t6001/t6002)
++   * - M1 Pro/Max/Ultra (t6000/t6001/t6002) and M2 Pro/Max/Ultra (t6020/t6021/t6022)
+      - 0x39b200000
 
-Best regards,
 -- 
-Janne Grunau <j@jannau.net>
+2.53.0
 
