@@ -4,81 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1003BFF886F
-	for <u-boot@archiver.kernel.org>; Thu, 30 Apr 2026 22:56:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30910FF886F
+	for <u-boot@archiver.kernel.org>; Thu, 30 Apr 2026 22:56:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9AE1B803C6;
-	Fri,  1 May 2026 00:56:48 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id DF99383E36;
+	Fri,  1 May 2026 00:56:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="dmB9TD2J";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="tvZAKFk2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3282684227; Fri,  1 May 2026 00:56:48 +0200 (CEST)
-Received: from mail-oi1-x22a.google.com (mail-oi1-x22a.google.com
- [IPv6:2607:f8b0:4864:20::22a])
+ id D107D843B6; Fri,  1 May 2026 00:56:48 +0200 (CEST)
+Received: from mail-oa1-x2e.google.com (mail-oa1-x2e.google.com
+ [IPv6:2001:4860:4864:20::2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 16975803C6
+ by phobos.denx.de (Postfix) with ESMTPS id BF5DF83A91
  for <u-boot@lists.denx.de>; Fri,  1 May 2026 00:56:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22a.google.com with SMTP id
- 5614622812f47-479d68a9063so554993b6e.0
+Received: by mail-oa1-x2e.google.com with SMTP id
+ 586e51a60fabf-404254ffe8aso1242522fac.0
  for <u-boot@lists.denx.de>; Thu, 30 Apr 2026 15:56:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=konsulko.com; s=google; t=1777589805; x=1778194605; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=pUnyyey1eatiK+ojg7AgkvLw9A4FEltVUMdGrZz/eoc=;
- b=dmB9TD2JoIrb1sqb5cicgb3BpuwWM2V2xjdo3sEd7cTsI3g495gG1ovB2Ap9nASSd1
- Gw48lIy1loCb9C3tUE8i5ZG+DVYXlg4fJn+4Xj+n5k1AKXQpYmWj+wBs7JUOgQ551eoM
- pkb8dTU5U5ibBSzF7pfXCje3q4DJKrhDQ3wI4=
+ bh=sKrzlCNo8szSn7Y75nGQlpqY5c/gtFQiY7HacihuaWk=;
+ b=tvZAKFk2Bxab7UrafKfVdWpNQX6s8aDVdj0Rz//i4zstWuPWi1j8YrZNOqDbwtSAFn
+ L+327gJ25VspIECfZy3QS4chLQ04uebLwxLF8F2t1Rn8/G8m4fwOYDGfBMoQiTJYnPe3
+ v5eum+LNIrrMIGGf0VlBlnlEVInxp4rWBvh5w=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20251104; t=1777589805; x=1778194605;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=pUnyyey1eatiK+ojg7AgkvLw9A4FEltVUMdGrZz/eoc=;
- b=Tf9P1mE85EXTVHUIjHOiOf5qx/lXQwYHELT59h8DHyWiUaA7fD4rYdOJYEHHkCeNf9
- DyF3/N9sRdFRkVpgGwLDUrkXQcDPXN4HoQPXTmYeLVOhB9NgpzsQamt/ufbtC8n43sA0
- buhurXJoJTLnQZlnqx4oqxRdnDFyL24w3xEa4iTkzfa0O8FYdnE68qs8xT0eqF0xD7q1
- QqRdSQVZSMsVNUZ2rFFluUp8CmSt/zQlInw4TraeBP7+uqQ/ucD+OsKC1AQi1I1IBocA
- F0jY+g6NayZ6c8iMAEdqn4qX+71hfYBE3R4ewWuz2ynP0TjXWQk0lxuyqwAhuAyEfEjV
- MYcQ==
-X-Gm-Message-State: AOJu0Yxlhq/ldicHsHzys4nt3pAWIDwp5PWdQSJsuLyJ1C9earJQ1lRJ
- 1n/2rrzOAL1aNzpjcozshslgE8fpKCU4pM8d/DfDmd8BNnVi2FJ6mHRhD/Z30g/pzOZOKzWK/0O
- VMUTGYltRt9jh
-X-Gm-Gg: AeBDiev6YHMfSnWbTSjATqI0sZQi6A4d3UNFslZdwKr2KddnWKkeSm2/L51XKmoGtjo
- RN+uydQJwMokwAPqufYEbulOgUXgKiAc7ZB1/mLPCT03DDHRrm2LN2EsEwYWBlJUrKIJ3xwu2Kv
- OzOoN2b99PNvhskZU6FgNR0w/yu7/KMpcZqJ5YkttuJCqJS+tFEM/XaQeyUtsKo3mBL2jqjBRij
- +zV0R730HuG0dqewAMWpj28t3R6DOFUb9T4vemq/R8pQcIrTAvi0Ts+9+ilZ3zpkuWdf258mHas
- g90uW+zzJnVhMszLLLnibcumeZhPsc3cZRfV3S9s0ioy58H/0V9wXAaRRUwyBfL3f2LZA00KUEJ
- XEmJD4onBMOUjsI8Sx8PeRHBwWWQcaRdf9f2yZywGbFy5nlmh7lXOqiUoy2Kd3z8t2mUXXjBFxY
- NRTLdgeuikKEVhx6+pcL4lhk6Fw8oiH4nLIfvhS90+h+YvgvIcuPJRJrd8koBK8YW2ZJgqbYVWp
- oobUCReSW9Xv3SU77OKnrlCibBuRY7wn3OB/wfIWC5iVKEbrGtvEhJsULAx
-X-Received: by 2002:a05:6870:1589:b0:42f:d09d:1fc9 with SMTP id
- 586e51a60fabf-4345c51cfc1mr308225fac.32.1777589804827; 
- Thu, 30 Apr 2026 15:56:44 -0700 (PDT)
+ bh=sKrzlCNo8szSn7Y75nGQlpqY5c/gtFQiY7HacihuaWk=;
+ b=r8eoBF5oxDMtWy545D3mlAh3wWX0glZt2UwKfzo++fuw9vfV0E9W0Jh1iCBRc6Wy9f
+ Acd6b5XsWdWCS8l5WYiPfrh2VIdUK1bZx1rRuFqBbunZSI5j1fI6+u0PM7EMUyU/L/WZ
+ IaD3BpWR4kYPQWo66a77Ij5AlbJDkpwN+UbFmQe0/u9eexFRWe0n13xFkB9irFNqbYgX
+ vo3MSLWOCwHF+JzIKev/2JbQr7aRVHsshlJb/DYAjRcD5q/qdEHEu5v33hFu3wDu7T6E
+ ZDTxWp02adxL4JQkf4BZlSyyLCTWD4EYJE8cqvplpzsIEif1V9RTKqnkcNYARAe3V0FH
+ MYpA==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ8leupxucd6r6Lj0vqAao5MFkYRZnbRrCKvAaTWIhZ6fg6sEEtwo1HRlHwW7mjgL8bzTvPIAVI=@lists.denx.de
+X-Gm-Message-State: AOJu0YybJ+UJDd9JP6NQcm1LU7446eq/lt5XzQgSGyu9Eq8Gwyk79opk
+ 50U7yb3e/ws+sjLU4Cgj6l/pYsOyJgbAsQWK/GwwJqWDziYIY91wYGU3d2cpiba0qmuRIOC/NZ6
+ Fg4KqIn1rm918
+X-Gm-Gg: AeBDieuV69HelvRV2ErwIFk6nbr5kJfVJJv+r5QtnTP9QLS1g5sxsySChBXS8bMciSt
+ XY/wfwhmeKifrWqCl5jUxdsvm385GbCgEqXKh3HKLNeilH8cmfg1fPtKKm1MtFAiiY83PL59DsT
+ b4cb1tPHZZJGtG2TPfdjIFBlbPLIQJlMeo9xz9krOg7kl0+yyLtFj1OWgUR9FAL6al7t0iC9Mqo
+ aehDMK/GYwIHQxCuF1uocetzV+BFSCdL+SYfcCEUA9nd2Zy4OLmd7uabigCjJnYSFox2Ys8K9fx
+ E96uRl7TLFvbOrBxg6QYSR28gPt2vdXChX4foyivGt949FGAsnZmROiW6Hkp3cw53E+dr0dSwep
+ XWboHdtndV8DGMD/L7BF4kXaOAS3H5ur44bh0D4t/q9G8xytzvSFklAcAfIR00GYtvkXwo9Wnf6
+ DrtzSI0XSwm9zO3Ch0PUk8rPJp9aW2cRgyzCntBP4a95gGiS0tHRoX2+bKtFsEjDLJsuby3ly/E
+ vEJWRK+9rsAV7GijpHkgyAGqd6ojkyNPeSFs84lyu1AltxuGmCaC+BUe65W
+X-Received: by 2002:a05:6871:b29:b0:433:cb0d:7702 with SMTP id
+ 586e51a60fabf-43438ad0772mr1973647fac.13.1777589805544; 
+ Thu, 30 Apr 2026 15:56:45 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-106-235.totalplay.net.
  [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-43454966f3csm919444fac.8.2026.04.30.15.56.43
+ 586e51a60fabf-43454966f3csm919444fac.8.2026.04.30.15.56.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 30 Apr 2026 15:56:44 -0700 (PDT)
+ Thu, 30 Apr 2026 15:56:45 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Chanhong Jung <happycpu@gmail.com>
-Cc: Simon Glass <sjg@chromium.org>, Peng Fan <peng.fan@nxp.com>
-In-Reply-To: <20260422140538.1730608-1-happycpu@gmail.com>
-References: <20260421080847.235789-1-happycpu@gmail.com>
- <20260422140538.1730608-1-happycpu@gmail.com>
-Subject: Re: [PATCH v2] gpio: 74x164: use dev_read_* APIs for live-tree
- compatibility
-Message-Id: <177758980396.1739800.2796729709260609314.b4-ty@konsulko.com>
-Date: Thu, 30 Apr 2026 16:56:43 -0600
+To: Francesco Dolcini <francesco@dolcini.it>
+Cc: Francesco Dolcini <francesco.dolcini@toradex.com>, u-boot@lists.denx.de
+In-Reply-To: <20260424084546.260786-1-francesco@dolcini.it>
+References: <20260424084546.260786-1-francesco@dolcini.it>
+Subject: Re: [PATCH] rtc: ds1307: Remove legacy non-DM code
+Message-Id: <177758980496.1739800.15658738727683378992.b4-ty@konsulko.com>
+Date: Thu, 30 Apr 2026 16:56:44 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -99,22 +99,17 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 22 Apr 2026 23:05:38 +0900, Chanhong Jung wrote:
+On Fri, 24 Apr 2026 10:45:44 +0200, Francesco Dolcini wrote:
 
-> With CONFIG_OF_LIVE=y, dev_of_offset(dev) does not return a valid
-> flat-FDT offset, so fdtdec_get_int(gd->fdt_blob, offset, ...) inside
-> gen_74x164_probe() fails to locate the "registers-number" property and
-> always falls back to the default value of 1. This results in a 4-chip
-> 74HC595 daisy chain being exposed as only 8 GPIOs instead of 32, and
-> any consumer referencing offsets >= 8 fails to bind with -ENOENT
-> ("GPIO ... not found" / Error -22).
+> The DS1307 driver depends on DM_RTC since commit d425d6056e01 ("rtc: Add
+> DM support to ds1307"), remove the related obsolete code.
 > 
-> [...]
+> 
 
 Applied to u-boot/master, thanks!
 
-[1/1] gpio: 74x164: use dev_read_* APIs for live-tree compatibility
-      commit: b52670d37bc855f6c8da63eb51bf84bce4dad90b
+[1/1] rtc: ds1307: Remove legacy non-DM code
+      commit: b5633dddbd9d3d17e36e4129cd37b05beedc325a
 -- 
 Tom
 
