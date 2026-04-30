@@ -4,87 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78617CD13DE
-	for <u-boot@archiver.kernel.org>; Thu, 30 Apr 2026 22:55:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F43ACD13DE
+	for <u-boot@archiver.kernel.org>; Thu, 30 Apr 2026 22:55:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ED95284227;
-	Fri,  1 May 2026 00:55:32 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=fastmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 3D89A843B6;
+	Fri,  1 May 2026 00:55:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=seznam.cz
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=fastmail.com header.i=@fastmail.com header.b="BxHPtehZ";
-	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="meoV/CJq";
+	dkim=pass (2048-bit key; secure) header.d=seznam.cz header.i=@seznam.cz header.b="ZAF//jvp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 609B380F0E; Thu, 30 Apr 2026 22:31:42 +0200 (CEST)
-Received: from fout-b4-smtp.messagingengine.com
- (fout-b4-smtp.messagingengine.com [202.12.124.147])
+ id 2E03883A91; Fri,  1 May 2026 00:39:03 +0200 (CEST)
+Received: from mxd-2-a03.seznam.cz (mxd-2-a03.seznam.cz
+ [IPv6:2a02:598:64:8a00::1000:a03])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D207B80433
- for <u-boot@lists.denx.de>; Thu, 30 Apr 2026 22:31:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C4160803C6
+ for <u-boot@lists.denx.de>; Fri,  1 May 2026 00:38:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=fastmail.com
+ dmarc=pass (p=none dis=none) header.from=seznam.cz
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=gmcastil@fastmail.com
-Received: from phl-compute-03.internal (phl-compute-03.internal [10.202.2.43])
- by mailfout.stl.internal (Postfix) with ESMTP id 86D7E1D0006F;
- Thu, 30 Apr 2026 16:31:37 -0400 (EDT)
-Received: from phl-frontend-04 ([10.202.2.163])
- by phl-compute-03.internal (MEProxy); Thu, 30 Apr 2026 16:31:37 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fastmail.com; h=
- cc:cc:content-type:content-type:date:date:from:from:in-reply-to
- :message-id:mime-version:reply-to:subject:subject:to:to; s=fm2;
- t=1777581097; x=1777667497; bh=GWVsYo5HLwQJZyVAKsW1sn9N6DM1C1+e
- LMJaldN0YUI=; b=BxHPtehZy6EW3gQvAS249TkY/S8NFl2jAtd6xUDQPbBZj+ak
- YxAsUVmdvkEObj4tLQDXXlsEyX+DewKw2CITy6w/308lZkpxgeEdj/dke9sIv1mA
- 4pp/tl5JDXJye6J6Mn2dbWQrxkY77tFtmuaZR08VX0uexJN+vWsEYONndBs/fxsm
- w88Ttyq7u9rjlX8nirFSqDd4hVsEznqUFPHGnDx9VRjGwEH3y1srNTMACz1Rvu1F
- iSVdNetqkz8zQ6qoyDt1eK/B2wmW+x9PwlTXUX9rFxqgG01yePeA4ZngFcBI36y6
- /OR8BGmOON++FTryJ999Au8KqmbDikQAD+9jQA==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- messagingengine.com; h=cc:cc:content-type:content-type:date:date
- :feedback-id:feedback-id:from:from:in-reply-to:message-id
- :mime-version:reply-to:subject:subject:to:to:x-me-proxy
- :x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=1777581097; x=
- 1777667497; bh=GWVsYo5HLwQJZyVAKsW1sn9N6DM1C1+eLMJaldN0YUI=; b=m
- eoV/CJq+7MzjMEfladY4ectOCGFSC+DPEjdF+3impriIrfgHK2jCyViDa4gDQMyD
- hqoIOKu6Ikp0gC+fTobdOPszpvrCSI/H986Cnb6fh/GodSB6kXjZ/5TpgQezK7ug
- RIrvBq28ou7Iyq6wQkW3lsiv/VegRVWhAxVN7N9u93KYz3xNlieqrUUcitKC7oQO
- KcwQdqDzzlM1Od/CzwqOK9Qcgr7NP2R31OkEkGd5mgmdeTxNZSY56ZF/2vVR0Hlo
- YXgXaeXE2Em7Ld6r5MnkB5HBI6vKoT+cyvmBhI1ieeCkuOEUcsKRfAQru5IjjB7S
- 2MV38TE50gZTnQwrFwTAA==
-X-ME-Sender: <xms:KbzzaXWe1J1598f1H-wXCcw7xHdUxtW7z_pmYxi4O2HStaIEuKaTMQ>
- <xme:KbzzaVk1VJyv0ySutfUQH-Q5N38G9AS0L-ibfcqICpm5lzhlzZpBxwgLXHzwNmI3h
- GDBifwc7SeJBQWrpGKoiiqpSqdSe1vvCuofpfV3zPRPKLuXqHkoUg>
-X-ME-Received: <xmr:KbzzaRCjHcjwKXHL9GMdUfyUrRtq_vliCgoAA_KpRxQXWw9YrBd3WxoXyDH58orNwWTfO48jQezMwA>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefhedrtddtgdekkedvlecutefuodetggdotefrod
- ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpuffrtefokffrpgfnqfghnecuuegr
- ihhlohhuthemuceftddtnecunecujfgurhepfffhvfevuffkgggtugesthdtredttddtvd
- enucfhrhhomhepifgvohhrghgvucevrghsthhilhhlohcuoehgmhgtrghsthhilhesfhgr
- shhtmhgrihhlrdgtohhmqeenucggtffrrghtthgvrhhnpeejgfevffeutdeffeehfeehge
- duiedvuddvteffieeglefgledvheefleelveejgfenucevlhhushhtvghrufhiiigvpedt
- necurfgrrhgrmhepmhgrihhlfhhrohhmpehgmhgtrghsthhilhesfhgrshhtmhgrihhlrd
- gtohhmpdhnsggprhgtphhtthhopedvpdhmohguvgepshhmthhpohhuthdprhgtphhtthho
- pehuqdgsohhotheslhhishhtshdruggvnhigrdguvgdprhgtphhtthhopehmihgthhgrlh
- drshhimhgvkhesrghmugdrtghomh
-X-ME-Proxy: <xmx:KbzzadcWuS-ZmLJUKbWNZFl00VfFC0hxKjLQBrKq011YSwl9qsXGyQ>
- <xmx:KbzzaUJhTgY0ZbE5kMMUfHjGWLvRtZ4OoVMPEFCjT9GZIoREc09kCQ>
- <xmx:KbzzaYegMJ3-bQXwHLUJm7YdQ71TqvGl4bDB3QewgAnNJ2IFdIku3Q>
- <xmx:KbzzaT1W9odY1I3Y_RG0jBDTlOT3avS3u6wZbmMUIn-LBiasx-sm4A>
- <xmx:KbzzaegNQQ8iyZo_qJmjHw7iDwRO3fgJfbDs-H1Z7kJowEwzjsHY6Uzn>
-Feedback-ID: i14a94276:Fastmail
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Thu,
- 30 Apr 2026 16:31:36 -0400 (EDT)
-Date: Thu, 30 Apr 2026 14:31:34 -0600
-From: George Castillo <gmcastil@fastmail.com>
-To: u-boot@lists.denx.de
-Cc: michal.simek@amd.com
-Subject: Zynq: Arty Z7-20 board support
-Message-ID: <afO8JoulesgQeAF_@caprica-dev.lab.local>
+ spf=pass smtp.mailfrom=Michael.Srba@seznam.cz
+Received: from email.seznam.cz by smtpc-mxd-5f4d8d5f6f-w7th8
+ (smtpc-mxd-5f4d8d5f6f-w7th8 [2a02:598:64:8a00::1000:a03])
+ id 41c6d92b1ac88d42406f1575; Fri, 01 May 2026 00:38:13 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=seznam.cz; s=szn1;
+ t=1777588693; bh=JCzD4yDvlNeCkKW9x2DSEQ+Jts1+QKHQcn6H01HNTQM=;
+ h=Message-ID:Date:MIME-Version:User-Agent:Subject:To:Cc:
+ Content-Language:From:Content-Type:Content-Transfer-Encoding;
+ b=ZAF//jvpn+akSrnsbN4H5JBKw504MrKKMixC/wIE66jGw9q7S/r9CLHOTkDq7scqO
+ TCnh6VWkIXUA86KHKFhEhPBE2cd7NQYVgyaibcts/vEOtBgumhbQSnJmncyb+A8oNs
+ KQ5cZVXK0nGE6ExMBn3edPEA/KzQBgXniSaqxClgi/yJ2cNue4tVmH8RVdZEy/K6qJ
+ o2A63S6i7RA0anVV5BC9W3CSqfG+qOjszeaZL0SruEN4MV3m18/WqzXhnlbR9EaYHg
+ vHq/Zhl8SCNd19mC47arW6M2+znvXhG1f0KlByB3+dE1fR0D5QQMmnoA+V0QqaZjIV
+ LzlybuqW9peJQ==
+Received: from [192.168.0.240] (ip-111-27.static.ccinternet.cz
+ [147.161.27.111])
+ by smtpd-relay-6597cc8696-kmkls (szn-email-smtpd/2.0.72) with ESMTPA
+ id b4cdc01f-4c85-4b39-8207-b3e10e99df99;
+ Fri, 01 May 2026 00:37:56 +0200
+Message-ID: <55d7f857-c36a-44f7-bb26-77cfbfee96f7@seznam.cz>
+Date: Fri, 1 May 2026 00:37:55 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 2/9] doc: board/qualcomm: Update RDP build instructions
+To: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>,
+ Sumit Garg <sumit.garg@kernel.org>
+Cc: rayagonda.kokatanur@broadcom.com, trini@konsulko.com,
+ casey.connolly@linaro.org, neil.armstrong@linaro.org, peng.fan@nxp.com,
+ jh80.chung@samsung.com, lukma@denx.de, tien.fong.chee@altera.com,
+ anshuld@ti.com, alif.zakuan.yuslaimi@altera.com, tingting.meng@altera.com,
+ alice.guo@nxp.com, quentin.schulz@cherry.de, ilias.apalodimas@linaro.org,
+ xypron.glpk@gmx.de, mkorpershoek@kernel.org, h-salunke@ti.com,
+ alchark@gmail.com, dario.binacchi@amarulasolutions.com, ye.li@nxp.com,
+ andre.przywara@arm.com, afd@ti.com, dinesh.maniyam@altera.com,
+ balaji.selvanathan@oss.qualcomm.com, danila@jiaxyga.com,
+ aswin.murugan@oss.qualcomm.com, luca.weiss@fairphone.com,
+ adrian@mainlining.org, justin@tidylabs.net, n-francis@ti.com,
+ wens@kernel.org, jamie.gibbons@microchip.com, david.wronek@mainlining.org,
+ alexeymin@postmarketos.org, james.hilliard1@gmail.com,
+ michael@amarulasolutions.com, richard.genoud@bootlin.com,
+ philip.molloy@analog.com, sughosh.ganu@arm.com, u-boot@lists.denx.de,
+ u-boot-qcom@groups.io
+References: <20260410091154.1001021-1-varadarajan.narayanan@oss.qualcomm.com>
+ <20260410091154.1001021-3-varadarajan.narayanan@oss.qualcomm.com>
+ <aeYpRSg2S6p8dNZt@sumit-xelite> <afMmNjz2u37Xy1yl@hu-varada-blr.qualcomm.com>
+Content-Language: en-US
+From: Michael Srba <Michael.Srba@seznam.cz>
+In-Reply-To: <afMmNjz2u37Xy1yl@hu-varada-blr.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-Mailman-Approved-At: Fri, 01 May 2026 00:55:30 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -102,11 +92,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-I'm preparing a board support patch for the Arty Z7-20, using the
-Zybo Z7 as a reference. The device tree is complete and I have the
-FSBL + U-Boot boot flow working in hardware. Is a working ps7_init_gpl.c
-and SPL boot path required for an initial submissions, or is that
-acceptable as a follow on patch?
+Hi,
 
-~ George
+On 4/30/26 11:51, Varadarajan Narayanan wrote:
+> On Mon, Apr 20, 2026 at 06:55:25PM +0530, Sumit Garg wrote:
+>> Adding Michael
+>>
+>> On Fri, Apr 10, 2026 at 02:41:47PM +0530, Varadarajan Narayanan wrote:
+>>> Add details about the SPL & U-Boot proper build steps, converting to
+>>> flashable images, source URLs for the needed binaries and scripts.
+>>>
+>>> Signed-off-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
+>>> ---
+>>>   doc/board/qualcomm/rdp.rst | 69 ++++++++++++++++++++++++++++++++++++++
+>>>   1 file changed, 69 insertions(+)
+>>>
+>>> diff --git a/doc/board/qualcomm/rdp.rst b/doc/board/qualcomm/rdp.rst
+>>> index 99cf8eba57c..d09dba52044 100644
+>>> --- a/doc/board/qualcomm/rdp.rst
+>>> +++ b/doc/board/qualcomm/rdp.rst
+>>> @@ -42,6 +42,67 @@ on your device with::
+>>>
+>>>   U-Boot should be running after a reboot (``reset``).
+>>>
+>>> +Build steps for IPQ5210 based Qualcomm Dragonwing F8 & N8 Platforms:
+>>> +====================================================================
+>> Rather than just the build steps, please describe the overall boot flow.
+>> And since you have created a common SPL file for all the Qcom platforms,
+>> can you ellaborate on how the boot flow is going to be reused across
+>> Qcom platforms. Maybe we just need a dedicated spl.rst document here.
+> Ok.
+>
+>> Also, how does this series align with one for SPL support on SDM845 here
+>> [1]? Are there things that both SPL ports can reuse from each other?
+>>
+>> [1] https://lore.kernel.org/all/20260411-qcom_spl-v2-0-9609557cf562@seznam.cz/
+> As I understand, board_spl.c and spl.c (in arch/arm/mach-snapdragon) of
+> Michael's patch and mine can reuse spl_boot_device() to include
+> BOOT_DEVICE_DFU and reset_cpu().
+>
+> However, I still have to figure under which conditions spl_boot_device()
+> can return BOOT_DEVICE_DFU.
+I'm 99% sure there is a register somewhere that can be read to determine
+if the device booted via EDL. I think that's exactly when we would
+want to load u-boot proper over usb, other than that it could possibly
+also be used as a fallback if booting from ufs/emmc fails.
+>
+> Thanks
+> -Varada
+>
+> [ . . . ]
 
