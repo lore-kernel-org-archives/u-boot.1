@@ -4,85 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5468BCD13D3
-	for <u-boot@archiver.kernel.org>; Thu, 30 Apr 2026 19:55:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A492CD13DA
+	for <u-boot@archiver.kernel.org>; Thu, 30 Apr 2026 19:55:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5A510842FC;
-	Thu, 30 Apr 2026 21:54:41 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6F5E9844CF;
+	Thu, 30 Apr 2026 21:54:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="kmb/90gz";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="tICipuFI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5734C80433; Thu, 30 Apr 2026 21:28:45 +0200 (CEST)
-Received: from mail-qt1-x843.google.com (mail-qt1-x843.google.com
- [IPv6:2607:f8b0:4864:20::843])
+ id BC02E80433; Thu, 30 Apr 2026 21:29:12 +0200 (CEST)
+Received: from mail-qk1-x741.google.com (mail-qk1-x741.google.com
+ [IPv6:2607:f8b0:4864:20::741])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9A62280086
- for <u-boot@lists.denx.de>; Thu, 30 Apr 2026 21:28:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F3A7D80086
+ for <u-boot@lists.denx.de>; Thu, 30 Apr 2026 21:29:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jcethrid@gmail.com
-Received: by mail-qt1-x843.google.com with SMTP id
- d75a77b69052e-50d87610513so11214821cf.3
- for <u-boot@lists.denx.de>; Thu, 30 Apr 2026 12:28:42 -0700 (PDT)
+Received: by mail-qk1-x741.google.com with SMTP id
+ af79cd13be357-8ee9ec26edaso137430485a.2
+ for <u-boot@lists.denx.de>; Thu, 30 Apr 2026 12:29:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1777577321; x=1778182121; darn=lists.denx.de;
+ d=gmail.com; s=20251104; t=1777577349; x=1778182149; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=YszaYLo8lCrz+C+AIeRc8M8XI18B45A1oe3Vj3yxF5I=;
- b=kmb/90gzxylQDBP6CHaxqql2MwXU+ZYK8tOWaKMKZGJAhGXOAt8gV0pT4T67HrIdfG
- c2jPFuh57lIpq6tEEqviCVmjqlQUuXVzgrwRQiFrB/c2JRAaYB7CkwTmk0dHwZmSISwP
- mwy4fnwdRfTlGv4AZ0eQiAqO0GythmS4Vm3FYM4IFuSMcbEBFVNbuTwkyIS/a5zY1gwN
- JDDSudo6EF7i6t39BoFC6vOzNkQodANh6V1mWbxBGik1zE0NUZX/brmXhiFmRQn3Y7A8
- i8DpGBKAnzkyJOceHoGMtZXlmDRkARSeZ9YhxaNJ08AgheznqztfcOHv9TCxWNMG+VIt
- 0hOg==
+ bh=Ll7SLmnATBkjqyUObu7V8IUx7+FzP6hu30+5iarwBqc=;
+ b=tICipuFIYYQOhg0ITCczK16MQQ1niK1p5bDCCMqVHu7FtAkWq31b96AsLmHQLKgXIi
+ yLpwQmq46LLHThOvl1UPdgv5DuZ2MpKonnbmkBTIoAOdilMz2Gl9GAei7TR53VlEbcBz
+ Za3oOXr+q4X39X5hFE1hPFVserOX1GEnbzeb0SeikuMojtpnofKBvfsKH2hstzv0DVNm
+ BLhiLJ3BgBQt8RoWCJ1FZOHmibZQbGlS0V2wqp4T79SrmokP2/dIabTTtzYW1T+p4081
+ KLE0GKd58sV/skaXayMStSW7qy9kHMtRpRJI/wHFiyNg3WOUTFxxlFkT9BRRLdtv/B/D
+ OiIQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777577321; x=1778182121;
+ d=1e100.net; s=20251104; t=1777577349; x=1778182149;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=YszaYLo8lCrz+C+AIeRc8M8XI18B45A1oe3Vj3yxF5I=;
- b=WL3rFtWrsNnofwc/bMWKPtOJN+a4F8UQeRKfKAsi106UW5BPcdJ2z+eXpyh/kEWjSg
- azJZeNA8eT2p3b0btDGIn/1A4N/+x4XczxH3IrckBc/IRkCLP782TGp/ixos5r/KyUuj
- Z786DN1sCiwrA4C8NKHWsx/qDWhJZ4JB8ikb3Gflxa1GYus+nI0P2KZ8gmRlilEeUsqV
- uZzGVm49FpkgXCsI1+c8Aexpe+WVN4K1etmC4dvfddC0AMo2e+IC8Dz8Ne5wdto4m2HX
- 6Nax+rl4+yhvEOqJSB2ZZpt/nMh1VDzfEn6sN1er5TfLrFv9+LJoNPQEtBBLg0l/KYmP
- 5L6w==
+ bh=Ll7SLmnATBkjqyUObu7V8IUx7+FzP6hu30+5iarwBqc=;
+ b=nJEaJ3Bi/xH2ih+CFKYSorepx69x2F5LcAOTaMOXiGkBHjyHvXaEpW8XwlK5epgIHm
+ JDKoTEBIaDoyW1ulXSqm4BoSUdW+V3WbiRkcfKh5mpJ/efEbhMcoZriTuGGjaxm8ewmr
+ ofQgCPTcUid36lV6rgSuVxFEnd7R72smMWZbsTMvnU21V74MRhv3YJePQXcTiqHd9Nt3
+ 7j8hLAsYZt6gpBrQUTUe85Lpw5M97Wp9v1BXHP5caepI2zCyfYNtWX21e6JfTaoiq3Iy
+ pFzGtn6D+WMcsqTyYdarifTd5YO9Bev7uij0iGYflWul/W2UOatYoau1x+t7F4TpWmTy
+ 7jNw==
 X-Forwarded-Encrypted: i=1;
- AFNElJ85wt1oBTNfBz91ZfdIqy8PGy6Oi7NJfrHa7Yg0SX3cBZtzFHHZSFIMMJXMocxW6qMuTvi53AU=@lists.denx.de
-X-Gm-Message-State: AOJu0YzgV5MUw9NAU+iv4DXtQnBN0QY1ZFT5jz0lLtTOL0NDKDVeX40G
- IfrRR4ILo93zvZUVlHkmmZyMvv6CUOI2mflMbzPsRqXhpkn0j3kEc0IM
-X-Gm-Gg: AeBDievv/t7voEFpAW5LmYJUQ4mKqDgLsV5oRoe55KuWVCNE3VOpgo8lmMYJRJK6nxl
- WiBs0IeOYrH+uzYS7Eom601+39KnFKpIiZ5nwAbzZEb8LeTRMZZlqNRYzAVxYFW+SDFFL8ra0bI
- eQg6bJdTFlqOvS8m2IzcR4fTM/NW6rX4bJhDjvdrk/jNxMbUJH+ypZrbTXcnEl1YHwop4rcY1rQ
- nCGlEByL2Pry5yyKTCzP98xcaui7Amb4lBBYuZvGGX5FzFGs3LcNV9+8tklBKTU8pB+Rbrb/L0v
- 1iBo8X6UmmiVUwqqQkI52BKsfaN/AiBnTpF+91Bf6P7YgZlIJoF5KaRkBXRt0qcrghDGI/Cuomk
- ky64F94Jl6e2Y/rw1gQSoRcmeJ5qGzUHGdOqCtm9r9rm1SZB5B50bipey2srkGFrOUakrRaD2MN
- prxqbdDu+j62zdhEGFJANZ2/2560QT3tcU8cqNgXWVIS2Hvoee
-X-Received: by 2002:ac8:7e94:0:b0:50f:ccdd:13f1 with SMTP id
- d75a77b69052e-5102ab04e3cmr62182301cf.16.1777577321542; 
- Thu, 30 Apr 2026 12:28:41 -0700 (PDT)
+ AFNElJ+A1SfOFVRjN9azpLt1mNwfBoYhR8UTS6MhiN4qIBz76UF5P09Dd1kgLPk0KT33g/8cq5qhvXI=@lists.denx.de
+X-Gm-Message-State: AOJu0YxkXF6tFNejGl9Qlx2w2808OY/lS834pVxwfycsRq6q0JDQ03pQ
+ a8WKLCbUWpKsXrROoMgFrbSq4JamFb8oC4PU5UUfXWJrsT4W7u1UIICK
+X-Gm-Gg: AeBDiesUt9brPQ5z+6eWsG9px+kiCMyOVPg7cQYjaDefUfm0Lkqbjl+NybSV2wR5Zf4
+ sTk/S9UwW4KAQCKIJz7xB6aX0j3jVKRe4BAFuBaZiZAKtsmkJIOzfnZJT7fmJ/x5+BAuOev41Y8
+ P1y6nnpBng8ZY7L9M+QAT02y1CBZFBYvl87N9DjWNG4dHmMwg/hC56jUa3DIHUVaBKSbDPX5WiS
+ YHdJ7+XKu3tCAWWW1ChvwbwnmpbYMWaKpou2sj9arfFOoYTMgExpENK6bFkp9NoBEBG1bJTiGzb
+ nQ+HytOi6GClzSRZkXO7JWrIOD40Fl4Q4VZEtuIIw0JF9RFpJuuXeghxqsdJsq0uGABZF6AoTeT
+ BtilIDKCJNIUzHGl2X0P4lNdV9BKP+f70790aa6ufwyLPIqdvPTOKuKlwEQtU/4/DNakZVNqekS
+ NeDiqD1xGbvk/PTfi51gU6iUzFLiFPYxlyxfBTAmMuvGZ0qJr/XevBMzbNGLI=
+X-Received: by 2002:a05:620a:3713:b0:8ee:9f5e:e13c with SMTP id
+ af79cd13be357-8fa86db7e62mr695864385a.21.1777577348828; 
+ Thu, 30 Apr 2026 12:29:08 -0700 (PDT)
 Received: from cethr-l01.localdomain ([136.56.120.109])
  by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-5103d3371adsm2822671cf.29.2026.04.30.12.28.40
+ af79cd13be357-8fbb4217728sm61805585a.40.2026.04.30.12.29.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 30 Apr 2026 12:28:41 -0700 (PDT)
+ Thu, 30 Apr 2026 12:29:08 -0700 (PDT)
 From: Caleb Ethridge <jcethrid@gmail.com>
 To: sjg@chromium.org
 Cc: caleb.ethridge@analog.com, jcethrid@gmail.com, linux@analog.com,
  malysagreg@gmail.com, philip@philipmolloy.com, trini@konsulko.com,
  u-boot@lists.denx.de
-Subject: Re: [PATCH v5 05/15] mach-sc5xx: Add USB boot command
-Date: Thu, 30 Apr 2026 15:28:39 -0400
-Message-Id: <20260430192839.4918-1-jcethrid@gmail.com>
+Subject: Re: [PATCH v5 14/15] arm: sc5xx: Add fdt_addr_r, kernel_addr_r,
+ and ramdisk_addr_r
+Date: Thu, 30 Apr 2026 15:29:06 -0400
+Message-Id: <20260430192906.4945-1-jcethrid@gmail.com>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <CAFLszTiZRVXXtg_e1FimCOGvB4xNUxCAg3nd8Jq+QBk=TkmwYg@mail.gmail.com>
-References: <CAFLszTiZRVXXtg_e1FimCOGvB4xNUxCAg3nd8Jq+QBk=TkmwYg@mail.gmail.com>
+In-Reply-To: <CAFLszTi5QJUZ5uKAc7W1nATXSc_yv_WHaFXhzcgrpF2bhupzRw@mail.gmail.com>
+References: <CAFLszTi5QJUZ5uKAc7W1nATXSc_yv_WHaFXhzcgrpF2bhupzRw@mail.gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Thu, 30 Apr 2026 21:54:39 +0200
@@ -104,10 +105,32 @@ X-Virus-Status: Clean
 
 Hi Simon,
 
-> Just to check...should the partition for the fitImage match the rootfs
-> convention used by mmcboot (load from p1, root on p2)?
 
-That is correct, the USB and eMMC have the same partition layout.
+> The other 32-bit boards in this patch leave ~16
+> MiB. Is that intentional?
+
+No, this looks to be a typo in the ramdisk_addr_r, all of the boards 
+allocate the same space for the kernel image in the load. This will be fixed
+in the next revision.
+
+> How about picking a distinct value now so
+> the future booti patch doesn't have to touch every board file again?
+
+I'm not sure I follow your meaning here? Ultimately when booting a user would 
+choose to either use the fitImage with bootm or the booti approach with 
+everything loaded individually, and there is the potential that once booti
+support is added we will deprecate and completely replace the bootm commands with booti
+versions.
+
+Also, currently when we build the fitImage, we place the ramdisk and kernel 
+offset in the fitImage so that when loaded to CONFIG_SYS_LOAD_ADDR, they would appear
+at the addresses from the environment for the ramdisk and kernel. So if you were to 
+load the fdt, kernel and ramdisk to these addresses, then create a fitImage with our
+build system with those same images and load it at CONFIG_SYS_LOAD_ADDR, nothing in the
+RAM would change.
+
+Does this make sense? It would not ultimately matter if you loaded the fitImage or the 
+pieces individually, as they would be loaded to the same locations in memory.
 
 Thanks,
 
