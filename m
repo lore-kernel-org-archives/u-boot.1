@@ -4,119 +4,117 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29D37CD13D3
-	for <u-boot@archiver.kernel.org>; Thu, 30 Apr 2026 06:59:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0B61CD13D3
+	for <u-boot@archiver.kernel.org>; Thu, 30 Apr 2026 06:59:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F1CDB83FB5;
-	Thu, 30 Apr 2026 08:59:01 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 265848432A;
+	Thu, 30 Apr 2026 08:59:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="ECj2PER0";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="XvqKaDVf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B571684198; Thu, 30 Apr 2026 08:58:59 +0200 (CEST)
-Received: from PA4PR04CU001.outbound.protection.outlook.com
- (mail-francecentralazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c20a::7])
+ id 741EF845C8; Thu, 30 Apr 2026 08:59:33 +0200 (CEST)
+Received: from AM0PR83CU005.outbound.protection.outlook.com
+ (mail-westeuropeazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 97F8E80433
- for <u-boot@lists.denx.de>; Thu, 30 Apr 2026 08:58:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3F2658432A
+ for <u-boot@lists.denx.de>; Thu, 30 Apr 2026 08:59:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=patrice.chotard@foss.st.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=bwckFtcftoYJpBbs5t9o+zl66sSd9aVKhGtQgMrmx/3CRrTO6p9+L2imLSv/NfuXceT0tkyGDds5gDYLclcjNg4UIxkS3rXtsCMIjTNdWHgsO3FhRvnHXHhDobbeg3XfE9L2LXoJ/1XCA7/6jZpZOj84mmWX2zCgnpGSLIl8UWxQfz8GvT1zYvOFxYpnVkW99u5Rb0lvI3HKS+tVU/WJdtn0o3mKttwMM88JLaKc+Q2c6lo8qUGr3xgbib1U9MUQM+D8U0D1f/NyihXAu4fbP7aaj5Pwq4EpW0QUWJ4KDAXM7sK68Mt3uId44+ZxUVXggUuikcrvlFM0bH2GsupDBg==
+ b=gdfhWWtXVpDocjx2ueM93vaDj+ebx3FPODd4GV0uZbnGkjbC8Lh5D9HnYxNG5q3Mv+KOgNG8cSTtMFHwYJ/9HRPLv7vsf07ugC9QqMErB7uHmboUZDI/QDrhJcm3VCK1+vkPqJKIQi9atRIoFOnaym7UG74xJC/opSYg2CtysFTMKSHBa70T1ZeOD8cEXcG/2B5E07SVUXK90Lb4N+Q+fwnqKt4Q3Sxe2dwW5qc8s/4WRAto4/Id5psDaW+Ly6ZnepvG5sZIVcH2HKOn5KrXZc4ERjW7KMfain8nitkfmnhjzw/yc4GQxHgBsJjuLTnjn0CT9XHxzjNKhWr4i3EH0Q==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=vZ0nIVbg+F8fii6M8uJ9RmV53XevAbunDeT69B42PZM=;
- b=xQnyjs3MDARO+SW5vBvaAVhKqwhOe3+FZ0ZqqLFCpsvdJldHTpQptip5ljEY+t9anszm+dWR0pJvb7WtcyNmrU4gXX3QIXADCyzKsDcMhQE8a7E6K2ymVgB17spfoUxOc19YJMvvJ1Nqtl+ROaHiqhVER05lRaVtO1SUalFBQQxn83LjAXb3qw2sUE/PMSdVA9bdnWJ3Qb0uYUW+wnhysOvA/qPKxpLISYBTb7LYw0An+B4FwMx7xpKfaaBxU/WE0Ytd8or9I8BWWYLQeqa7roX5lAp6aCSYdaY5i2SrFSdVFFPodM41ZYtrvkuovh3lRjVWHp3Vucz1zedmuYdumw==
+ bh=NJM/bD5EIupNrZ07eGTzn2cNyP6a/5uNcsChONKEFd8=;
+ b=E7wrTPs+vMjIBpVoebsuuCyWq3lDi0nCGUqXOuRoxLiIGY8PdZRS31fAbCWBbPSzeu3lCBT8pkua/agfAlfIh/a7EnGFGplx3eZ8fOYm5Wq1q1xNLkejY//oAFO2hKM4M5C3leR/wwubowHByWGsoxMBZVm29MJKTD6bYVYj2bWjsTOcuH5t0M6/8c64euUb3SjSLCZJkTML3l4AidQ4VcDzdEZO42KmDCCpkL0XXfSeSOSMZCZUr4pRUjl51e8OkUvMIVKrx1vABwwoRkI5is071W4l2RNcI2j+hfYUzXO7FziIfDA0VjZwhtqIBohz2gf8xJwsHVCDMkdYsiLWyg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
- 164.130.1.60) smtp.rcpttodomain=gmail.com smtp.mailfrom=foss.st.com;
+ 164.130.1.59) smtp.rcpttodomain=gmail.com smtp.mailfrom=foss.st.com;
  dmarc=fail (p=none sp=none pct=100) action=none header.from=foss.st.com;
  dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=vZ0nIVbg+F8fii6M8uJ9RmV53XevAbunDeT69B42PZM=;
- b=ECj2PER0BlYw6ZBMVPWVgKLP8UlDg6Y8pb+p7BeAVVeoTXZG5HuvKhjB+5A7DFaNu3jk1NmQPC6lqI72gjWg2CM07lyfULQhcAp/rP7R/Wo9/Zyqx3UEvkIzl2hH6RRKXOQMQxkuaoYDWY9homZGVqn76YJG0t59TaN0PFcO3O3mkyDoSkUTRQ+YuavyQllM6djdjtRiVs8DQRoL9ijQxX5waFDV6188aBz0pGzi+ivGK+49W3JtmKcYmRJLs5y1etCxrtaXXPzaxTeVlaYMIP9pLvykYkY2/7QBHohwQp5zpoZI7mwMSeVeIWuO8hjP2ZR+vDD1enHhj4NnMTYhTQ==
-Received: from DU6P191CA0022.EURP191.PROD.OUTLOOK.COM (2603:10a6:10:540::13)
- by VI1PR10MB3215.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:803:12f::23) with
- Microsoft SMTP Server (version=TLS1_2,
+ bh=NJM/bD5EIupNrZ07eGTzn2cNyP6a/5uNcsChONKEFd8=;
+ b=XvqKaDVfHfMvrGBM84ZqXH5y8FrenMbJh4ijriXAlyRR5+E9W0qxaJ6sNWAjFpLfoieT0M0oHTM4s+z91e3DmolqEfSihvVYbTqr3bqVNYwj9HXbjQd7PTs6hIUNYaP08XVU/a2Y5M2oWbip6NlkCAORBOIfXpmfu+vfVrzj8QDX9+RK95sD6D2zEXhH6AtpbN8PO1ZYz5mdf1oOU+ec2A/ovTVod11I85mo9aYijJR0BlwhPGZtuQQBZXAFrCNxjyDs8VPatIPXrhGiMK0wuSZQtcLt2kyUk4UIn8R47UNqX6TAQOGB2BvLirk3+SO/uzk2tunW97MKT/ExI/TR5w==
+Received: from CWLP265CA0400.GBRP265.PROD.OUTLOOK.COM (2603:10a6:400:1d6::10)
+ by DU0PR10MB6201.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:3e9::13)
+ with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9870.20; Thu, 30 Apr
- 2026 06:58:51 +0000
-Received: from DB3PEPF00008860.eurprd02.prod.outlook.com
- (2603:10a6:10:540:cafe::b7) by DU6P191CA0022.outlook.office365.com
- (2603:10a6:10:540::13) with Microsoft SMTP Server (version=TLS1_3,
+ 2026 06:59:27 +0000
+Received: from DB5PEPF00014B91.eurprd02.prod.outlook.com
+ (2603:10a6:400:1d6:cafe::3b) by CWLP265CA0400.outlook.office365.com
+ (2603:10a6:400:1d6::10) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.20.9846.30 via Frontend Transport; Thu,
- 30 Apr 2026 06:58:51 +0000
-X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.60)
+ 30 Apr 2026 06:59:27 +0000
+X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.59)
  smtp.mailfrom=foss.st.com; dkim=none (message not signed)
  header.d=none;dmarc=fail action=none header.from=foss.st.com;
 Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
- designate 164.130.1.60 as permitted sender) receiver=protection.outlook.com;
- client-ip=164.130.1.60; helo=smtpO365.st.com;
-Received: from smtpO365.st.com (164.130.1.60) by
- DB3PEPF00008860.mail.protection.outlook.com (10.167.242.11) with Microsoft
+ designate 164.130.1.59 as permitted sender) receiver=protection.outlook.com;
+ client-ip=164.130.1.59; helo=smtpO365.st.com;
+Received: from smtpO365.st.com (164.130.1.59) by
+ DB5PEPF00014B91.mail.protection.outlook.com (10.167.8.229) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9846.18 via Frontend Transport; Thu, 30 Apr 2026 06:58:51 +0000
-Received: from STKDAG1NODE1.st.com (10.75.128.132) by smtpO365.st.com
- (10.250.44.72) with Microsoft SMTP Server (version=TLS1_2,
+ 15.20.9846.18 via Frontend Transport; Thu, 30 Apr 2026 06:59:26 +0000
+Received: from STKDAG1NODE1.st.com (10.75.128.132) by smtpo365.st.com
+ (10.250.44.71) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.29; Thu, 30 Apr
- 2026 09:02:03 +0200
+ 2026 09:02:59 +0200
 Received: from [10.48.87.93] (10.48.87.93) by STKDAG1NODE1.st.com
  (10.75.128.132) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.29; Thu, 30 Apr
- 2026 08:58:50 +0200
-Message-ID: <fbc2d28f-7ad3-4e18-9229-f83fc54a05d6@foss.st.com>
-Date: Thu, 30 Apr 2026 08:58:50 +0200
+ 2026 08:59:25 +0200
+Message-ID: <b2ee1f0b-9999-4c88-bb4d-8310eddd9607@foss.st.com>
+Date: Thu, 30 Apr 2026 08:59:25 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [Uboot-stm32] [PATCH] board: stm32pm1: Fix board_check_usb_power()
-To: =?UTF-8?Q?Rapha=C3=ABl_Gallais-Pou?= <rgallaispou@gmail.com>,
- <uboot-stm32@st-md-mailman.stormreply.com>, <u-boot@lists.denx.de>
-CC: Patrick Delaunay <patrick.delaunay@foss.st.com>, Tom Rini
- <trini@konsulko.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>, "Kory
- Maincent" <kory.maincent@bootlin.com>
-References: <20260414-fix_usb_adc_meausurement-v1-1-8cdbd4c10dd8@foss.st.com>
- <255b4c39-eff9-46cd-9e18-8e1b47ecabac@gmail.com>
-Content-Language: en-US
+Subject: Re: [PATCH] video: stm32: dsi: fix unchecked return values
 From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <255b4c39-eff9-46cd-9e18-8e1b47ecabac@gmail.com>
+To: Raphael Gallais-Pou <rgallaispou@gmail.com>, Patrick Delaunay
+ <patrick.delaunay@foss.st.com>, <uboot-stm32@st-md-mailman.stormreply.com>,
+ <u-boot@lists.denx.de>
+CC: Anatolij Gustschin <ag.dev.uboot@gmail.com>, Tom Rini <trini@konsulko.com>
+References: <20260412-master-v1-1-d7a8e742233c@gmail.com>
+ <848b503c-a908-4ad2-8d4b-560f3e0ceeaf@foss.st.com>
+Content-Language: en-US
+In-Reply-To: <848b503c-a908-4ad2-8d4b-560f3e0ceeaf@foss.st.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 X-Originating-IP: [10.48.87.93]
 X-ClientProxiedBy: STKCAS1NODE1.st.com (10.75.128.134) To STKDAG1NODE1.st.com
  (10.75.128.132)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DB3PEPF00008860:EE_|VI1PR10MB3215:EE_
-X-MS-Office365-Filtering-Correlation-Id: 4f32b7a6-8845-4e7c-639c-08dea685ef79
-X-LD-Processed: 75e027c9-20d5-47d5-b82f-77d7cd041e8f,ExtAddr
+X-MS-TrafficTypeDiagnostic: DB5PEPF00014B91:EE_|DU0PR10MB6201:EE_
+X-MS-Office365-Filtering-Correlation-Id: 59f2f7f1-aed7-4f15-7700-08dea68604c4
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|82310400026|36860700016|376014|56012099003|18002099003|22082099003;
-X-Microsoft-Antispam-Message-Info: FmknOh93KM7FnT2dk5yZS/G+GI65x2mFieibPx1YnoDfCsJ3GY5wGR1KzB79wM1U5eoSg0dwbglTRzOkUk5QVdPo+qxDG4L4YachyhHQPy7t5wnZIRCCuVWPepLsqx7NeBMOpwmBJ7Qua0JALtfsrjgo7mAHC/ylCX3/LlKQguXDttSU05rmYKy2c6QJwEFkmW9XCh9VM3SS5dvyydkXokK/JUEA9SAZDL1D89e3iSZNF/qwdXnd0bRI1U02keEbDMlkXvidFbwwazCB/Otk7LI4Ihhk8R5GfkkJeeHCQKAQvi06n7oENqQltqOt3QK0gAzOuGmtsF5HacmynVgE8Pv3g/JAK1ZsM6CAEwdH/9tfJ/S92c/hV/zKZsGKqehyrfjmrMEtlUzGWdQK/6wU6/GnSld1YxqU8XrDvSJFsLwf8gRHFXDQOWJJBy+lbt+HX3p+TXEMhr047QsjlpfhBeK7rjIaay6IQ4dpdEe4gXTQg0WgQQrPr/yxvI1Msdk5sBbvnd7WBeq7EQgObMlbgNqwYt2I375EiR3X4sff7z0VDoWZtYHRTvBtbXUhm/6Qiyzl192VeyV0FfAm348xTnsQXBszzJeaNkj8xvEwOQ6SN+NaBF0TBFSBOzfZyNuwvmYhW0z+r1EgbpWR7USgX3Io79oh5O/VMIsMDNoMG8iLrMNgE9aTKQ61qHRenAR+6JJ6uz/lfBKjLzt5emen3d1rAzGm3elZdfNChlxJM4D9i59pnkMqGllo97HIakC3YwnqQ2OPT61/QZFyN0prBQ==
-X-Forefront-Antispam-Report: CIP:164.130.1.60; CTRY:IT; LANG:en; SCL:1; SRV:;
+ ARA:13230040|36860700016|82310400026|376014|1800799024|18002099003|56012099003|22082099003;
+X-Microsoft-Antispam-Message-Info: aIwScAz3TTWEUKxuzXjgXY1rvuqHF0ix7hZkPya8TLswBKLv5d5VhfRed2YW+Bea22Qn4cibR7lue0Bk08fl5Me6+e21z/CFjCP9Xm4Umkm9XVmPTNWBRcggLSYnTGyK/DlhPvlftPJWHGd4zRkrWFG13z1N7vuU3Bf/lCCL50bMIr1DXCB59acZHW5mslfIXk6nS1jszreWNgZykyHnVD2Ywn0cHIDw9/aLVBGHUeFCA2rUI2Wi1HYqtRTLNcw2mMCWqYHKU1+SukNfE7plJvEMkfpmMxOLne2ASh9/pgV7EJYSkvdS7/wQBFpMjvMcMLZQPg5ldueEz5tOfpmwLfxwcS21b6qg+nH7i6V1YoZgUH+0y0u00rLagQh0D9XAYistXgNtKLeAJ4o8icZ8eYhuogp+MTWtEk1Eh2cGTx1ymcZuHSyEB14v2YzNjAJs/ZTA1kJrzzi1hURzW5qPrZNqu10et2CD0BYaWhIsZfi0fZz2VKOPVh0qMLqctZ35XgbVeH8pwIbry+FtxZ9IQWctmqFz1WlNKIS0rxMjtVR3dm2KWZhaHENxsFoVg8Ks2r7ucoisY21RKJzPGi6tnM24fXIGYgZvhqjV5oPkGt8lfSwexs3YtEt/FuamAodHmIHEbokNxGeDEUbDfU0OQl80Dx7c8Vp+SV9e4hFfSiagjrXrpr4XqH+YYDMAggpyVncC8121GbHDCmaHDvVn9RiXsrg4P8cAfm3TDZzXESkN9zmHTKJZxzC5U0XdyHeMclGlRH4ijWubCvPZm4hTjQ==
+X-Forefront-Antispam-Report: CIP:164.130.1.59; CTRY:IT; LANG:en; SCL:1; SRV:;
  IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(1800799024)(82310400026)(36860700016)(376014)(56012099003)(18002099003)(22082099003);
+ SFS:(13230040)(36860700016)(82310400026)(376014)(1800799024)(18002099003)(56012099003)(22082099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: yiWBmhc7FaHXA1u1KWUx7DlyvCwP+8aHAH4kAkpQ+ykO8vLPT3iNSHbdq1UCMEatHLh60ntwZh8GSvA3mvtsfpCKr0P/Y6SRcP8IaihLCYuzItiyFxLEZhmtbisS9GzTrAp4A3vs0IYujOD/DcstKd2oh68wCjDSYCkMPulZrAK+0oQhtPKxxSHsJeQ5nb+vHMRwTm8DPVNGu/RKX1TeS/s6+cCx9FrWxA52MAM+7iE6lOFe9FPAP+p5x6TEfO2KOskUSLCHKoaF4Tn8kSE06eAQOrBgLKsiYdtrQXDKtG4rFg/0WFZsNeCHgK5XohtHHQQ5jBVBdICnCHCx3vwurykCNfJMByUTMq4iiqYnXamAunek89/TJ0hOJTinDGbq8p60h++zF+XFyW2yoi+egJwvbunzIb2ltXbi59lTEffL3HM5tMZF9ygo3mZRt7XR
+X-MS-Exchange-AntiSpam-MessageData-0: sTyMxgL0eUa7JWhpB8q0IalE/yEAZ8/ka8OjCxDmwOtlXSBMmQb450xEOS07VeHSt3rVMyhEnqWOv+pyyQxnsAdqwbqDF9hguydsCyuPeEh/pUVADXJ0HuOfUNgn7p1Go0eIVOsDwTQTdqZUkZnDvbW+72t9kpyFkqdhP+X5QlE1lGTpPRbLidWwunO2LY1KckQIK5KipIfqyzgAqe0ebjtoPhcZ1ViyzJANUrALTTE6H2AJpu78wA+OBSfi3Z2HUZrRKV85NWodb01DGJybntDifxPu8aeaC0OD5Zr40Tq7w2p3E4fSNMje6NuXb4qJaQnhGlk9S6vmI6KsO33yvJIhBieMldhIsjhB+tix5zBJeXWaerkYC7JpVfAvAagALnZDVsqj7IIi/81EYqBfGKLd+Ikeg9GpthI2X9P+J1f0C40tLdiciG+wzqPJ3DUm
 X-OriginatorOrg: foss.st.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Apr 2026 06:58:51.0647 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 4f32b7a6-8845-4e7c-639c-08dea685ef79
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Apr 2026 06:59:26.7871 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 59f2f7f1-aed7-4f15-7700-08dea68604c4
 X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.60];
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.59];
  Helo=[smtpO365.st.com]
-X-MS-Exchange-CrossTenant-AuthSource: DB3PEPF00008860.eurprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: DB5PEPF00014B91.eurprd02.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR10MB3215
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU0PR10MB6201
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -135,42 +133,59 @@ X-Virus-Status: Clean
 
 
 
-On 4/29/26 11:12, Raphaël Gallais-Pou wrote:
+On 4/29/26 09:06, Patrice CHOTARD wrote:
 > 
 > 
-> On 4/14/26 11:06, Patrice Chotard wrote:
->> Depending of plugged power source (computer, wall charger, ...) it can
->> happen that we got the following message:
+> On 4/12/26 21:07, Raphael Gallais-Pou wrote:
+>> Fix the following errors yielded by Coverity Scan:
 >>
->> "****************************************************"
->> "*      USB TYPE-C charger not compliant with       *"
->> "*                   specification                  *"
->> "****************************************************"
->> ""
->> "### ERROR ### Please RESET the board ###"
+>> CID 644836:         Error handling issues  (CHECKED_RETURN)
+>> Calling device_chld_unbind without checking return value (as is done elsewhere 6 out of 7 times)
+>> CID 644834:         Error handling issues  (CHECKED_RETURN)
+>> Calling device_chld_remove without checking return value (as is done elsewhere 4 out of 5 times).
 >>
->> This issue has been detected on STM32MP135f-DK board.
+>> Link: https://lore.kernel.org/r/20260309212331.GF1388590@bill-the-cat/
+>> Fixes: a6d047c0a86b ("video: stm32: remove all child of DSI bridge when its probe failed")
 >>
->> It's due to max_uV and min_uV value are initialized at beginning of
->> board_check_usb_power() and can then be used for the 2 iteration of
->> adc_measurement().
->> max_uV/min_uV values issued of the first adc_measurement() iteration
->> are used as input of the second adc_measurement() iteration, which
->> can lead to incoherent pair of min_uV/max_uV values.
->>
->> To ensure that adc_measurement() returns coherent value for max_uV and
->> min_uV, initialize max_uV and min_uV at each loop start.
->>
->> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+>> Signed-off-by: Raphael Gallais-Pou <rgallaispou@gmail.com>
 >> ---
+>>  drivers/video/stm32/stm32_dsi.c | 7 +++++--
+>>  1 file changed, 5 insertions(+), 2 deletions(-)
+>>
+>> diff --git a/drivers/video/stm32/stm32_dsi.c b/drivers/video/stm32/stm32_dsi.c
+>> index 65a91f5cff7a..5c4d8d2aab51 100644
+>> --- a/drivers/video/stm32/stm32_dsi.c
+>> +++ b/drivers/video/stm32/stm32_dsi.c
+>> @@ -493,8 +493,11 @@ static int stm32_dsi_probe(struct udevice *dev)
+>>  	    priv->hw_version != HWVER_131) {
+>>  		dev_err(dev, "DSI version 0x%x not supported\n", priv->hw_version);
+>>  		dev_dbg(dev, "remove and unbind all DSI child\n");
+>> -		device_chld_remove(dev, NULL, DM_REMOVE_NORMAL);
+>> -		device_chld_unbind(dev, NULL);
+>> +		ret = device_chld_remove(dev, NULL, DM_REMOVE_NORMAL);
+>> +		if (!ret)
+>> +			ret = device_chld_unbind(dev, NULL);
+>> +		if (ret)
+>> +			dev_err(dev, "Unbinding from %s failed %d\n", dev->name, ret);
+>>  		ret = -ENODEV;
+>>  		goto err_clk;
+>>  	}
+>>
+>> ---
+>> base-commit: e2fa3e570f83ab0f9ce667ddaec9dc738bcf05b9
+>> change-id: 20260412-master-8be67866e096
+>>
+>> Best regards,
+>> --  
+>> Raphael Gallais-Pou <rgallaispou@gmail.com>
+>>
 > 
-> Hi Patrice,
+> Hi Raphael
 > 
-> Reviewed-by: Raphaël Gallais-Pou <rgallaispou@gmail.com>
+> Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
 > 
-> Best regards,
-> Raph
-> 
+> Thanks
+> Patrice
 Applied to u-boot-stm32/master
 
 Thanks
