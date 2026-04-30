@@ -4,110 +4,135 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51D99FF8875
-	for <u-boot@archiver.kernel.org>; Thu, 30 Apr 2026 04:42:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5BC52FF8875
+	for <u-boot@archiver.kernel.org>; Thu, 30 Apr 2026 05:08:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D3DDB83FDB;
-	Thu, 30 Apr 2026 06:42:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id D803C83693;
+	Thu, 30 Apr 2026 07:08:36 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="KR+XCBeb";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="nPk78EoI";
+	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="iyssahVL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AB60E84099; Thu, 30 Apr 2026 06:42:55 +0200 (CEST)
-Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
- [IPv6:2607:f8b0:4864:20::32c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id F195683FB5; Thu, 30 Apr 2026 07:08:34 +0200 (CEST)
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
+ [205.220.168.131])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2BF3483FB5
- for <u-boot@lists.denx.de>; Thu, 30 Apr 2026 06:42:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=briansune@gmail.com
-Received: by mail-ot1-x32c.google.com with SMTP id
- 46e09a7af769-7de7dc85b74so487195a34.2
- for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 21:42:53 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1777524172; cv=none;
- d=google.com; s=arc-20240605;
- b=PlW29mnVdWEBVgP1GVOBoiX4U0NplE5FbOWS09BZVlUQNHuqSMleOUZZ/bO9TIP+F+
- +M2+cNFKcsgIH12B+3qmhR0rEzK9BxJvdAQYJUhGUL0VO62sXSah1yr51uEIFtbNbwgf
- CAe/vMufejcqqp5EwT21fL0rPgD+rPYLTLjH4hp6Jd+TliC/4Y2n1XP/4yGus+x7iom7
- En8PYuk9KD28l8PBm92ANtwv8wopjlyDg7bYFXETHoSeopN60gVDthEd0qa7mjmOaXOL
- c7decktqm4qqz8FAC9Ne22vSkgSNEtHeEgkNqx2GyKbn29X06a199LQTVEsODoJGED5M
- 5Z7Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=SgAAFbc/J1MF/6jjNGE3cSh4oiCyA5ebCieF70GRygQ=;
- fh=Oh5RlFq2dK+N666cySmFijARU4xnFUs7EsHB2nUn/W0=;
- b=JmUlH435gdatq0s1NcYLhm2iQauVmgp0qV5sSALQaoayKEbqadzyxKjzVzKvAy53K+
- I+oPB+34Pj7RA+KzhPukX2Rcmqu26C1kGb8JhXHVo6qn52Kdn/d/uvPrPujsi+tE8HOP
- w4zAqEzwl+tlOpvMxssOavDcnIdHHj7Wjy9cIaS0wjNb3wusMmgUN020dNmt/wKbMx5v
- cyFPxIjrCOFwseEkSs4hcpPC66l5E6UybEXRKazJ8QfFDhohIQrZLA4C+I/0jzoULgr7
- 2uMKjvDdMAhGQU7EpbOMsy9OvBOy7g4dwoAMzVK+t6Ttag8k8vz3LXLxYKgZ1E5dBG5+
- tQeQ==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ by phobos.denx.de (Postfix) with ESMTPS id B27FF80433
+ for <u-boot@lists.denx.de>; Thu, 30 Apr 2026 07:08:32 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=oss.qualcomm.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=varadarajan.narayanan@oss.qualcomm.com
+Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 63TMFBYq3885246
+ for <u-boot@lists.denx.de>; Thu, 30 Apr 2026 05:08:30 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-type:date:from:in-reply-to:message-id:mime-version
+ :references:subject:to; s=qcppdkim1; bh=TihfNXbUuC5IeIOJTDBPOPqB
+ HFNnjmWJIfIoo0b+IFg=; b=nPk78EoIr0+bqmsIZkZe0EIL/nAOGFCRbvF7N0vK
+ C7/t9iaIdR1mssfE4t8MFoTQTU/lzZQwZcKrHl1bP6nzmzWX/W1C8LQFEo6GMXj3
+ Trn4oFdT117/GWGNGY1HA8XWlydXhWVlin4MG+X1Zf3D9hGbgbOhFiJZUMDQcM7U
+ DcKQcugp9z8wnK+hSxJI5o64UMPqYE+Fezrg8fJ1Zb7sMUT4uMUP+bmlWVIQwE5O
+ joVSN0mT6bbX/T2U3s/MOlTaHimZdXxOMwpYFEKzFpT1tBy2dRPZND9PhJ7Guhsc
+ xgWW5073NWV/b0TeRkoaXGaUY+rGH0TZiaf772xHo9GCQQ==
+Received: from mail-pj1-f69.google.com (mail-pj1-f69.google.com
+ [209.85.216.69])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4dutmah2d3-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <u-boot@lists.denx.de>; Thu, 30 Apr 2026 05:08:30 +0000 (GMT)
+Received: by mail-pj1-f69.google.com with SMTP id
+ 98e67ed59e1d1-35842aa350fso972836a91.0
+ for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 22:08:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1777524172; x=1778128972; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=SgAAFbc/J1MF/6jjNGE3cSh4oiCyA5ebCieF70GRygQ=;
- b=KR+XCBeb0XUy8c1AcM65f6vLakxg6yOylWkhY02OcbKv6gGMpskFjln9zaplG9ivt7
- cJdK6FVrgEb9N2qL0txXM/+9IO31hnpSYFuMhWM9AOAfF2CFUzN6EEjuFG/nTFNtQ2sh
- SYrI6DaLywmfT2sr+iOjmlfBBbielyPmPmJ/VmplUlYGfdYLrx+ITBp6PtRjOqNDvcU2
- l6oQXoH27hD92toIykITf1YF+101MLo+OYei+XuiX22uNcHLEAXqxY8h8yOIxqGAAwEV
- uYQjAP4lKYVroES/R73BaiIARLHx6yOvpKdFvHfG+HQQjGmho0SCZ+CXuwZuLkvGwQby
- kCrw==
+ d=oss.qualcomm.com; s=google; t=1777525710; x=1778130510; darn=lists.denx.de; 
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=TihfNXbUuC5IeIOJTDBPOPqBHFNnjmWJIfIoo0b+IFg=;
+ b=iyssahVL+NDoJ2VRR1KVhIJTvpMTZHioIw2OKLv7+028LLg3J3SiKQslNixohW6Rkc
+ C7X+OmsmqF+Lv8hGeajAQl1LN7UIUved1AphpAVrwlhASmGu9TWznLJKpa1YjqLEhHQz
+ V4NE2l4jQv9i95Gj37gWEbrkddLSdMTZtSCZmL7w8Hgf+ABGvhaUK91k8SyGGb2vaRO4
+ UThf+t9++7Cayh9KSCDc3Zs6N6o3PnFwA+SA+D0pZPWy18M7YCEtEHXV7yOHHdpWbuDu
+ 8K8UKMaWu5tLWHEvfnM/y8zsS+qGoSzETKVJRGhWKnS88poFkab0VFJEd5ILVyPV5Nbp
+ vFTQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777524172; x=1778128972;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=SgAAFbc/J1MF/6jjNGE3cSh4oiCyA5ebCieF70GRygQ=;
- b=ckJApb0LwKIDcNQSmsUYgTlFUGArPcL9pg2nUAz+GpBFgzt+RLy21U7S4goWql8eC7
- X9A5AdSxaQsgGxvlO9uwS7zK2LZqg4Fi2uGAWcoIJnrdgcehaWEcIohWRYdwtB7N3zP8
- 0Z4mar5twzHCo9/lhmFJknuCt5iVLqfmTqBnS2qQrOAwuhWtWOVApgqHu0MYNcHQvtjP
- TsrU9+K3HwVfyhwELsuvCG6CVCzaKR0eVTtHCFHvJIP8nuBBLlKxUTawnLuWvoQ7xTVb
- aJSM6rN15W5KHr2LWNlL/qg545HkXDrrobDTxLw4rSQ5mRAqCsNtYePkSnQVX+HaM43v
- vlJg==
+ d=1e100.net; s=20251104; t=1777525710; x=1778130510;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=TihfNXbUuC5IeIOJTDBPOPqBHFNnjmWJIfIoo0b+IFg=;
+ b=kGWw/EiW/FtMTFT9SIZFY0fl7VlGeg+5X06k31KmegHi+FuUG+kzPApuIdopQWb0Qi
+ +JGgJ0hdjzrDYv5DiOMTc15932QW7BVqR08cFCbdbtUjtfWM8SZ3gypcK/DVOsI/aYYe
+ wSPwqPcsrKitLW9UGsoaHmVdE/QFDja7rUo7N5j0KnZY+Ce6lFbfscK6QXbwtplwkGXu
+ BBWahbNPR5nM1a1ijw4BDUGYkF7Ywr49Mtidj2WGgirJnEjQ74XgWOGrQd+J6jztEl1x
+ 71syky+L1vo8chcnxD5558Y3fOYnC/nDT74WLZAcEd51CpmjXfgR9sMrHu/tQfs2yMlT
+ vQGQ==
 X-Forwarded-Encrypted: i=1;
- AFNElJ/SCnqSn0UKfmwP4QOhToWSX7nfgxHowasiUaEwwn0pSZR+uL6Gu3w7T8MPFitcPOS78ynhpnY=@lists.denx.de
-X-Gm-Message-State: AOJu0YysS1G2uo2bP1zEI7Fn9qLCvIB3gnnxQ6iUlbAdqU4Bk8IaSjcB
- 4nL6q04/B/Wdag+X8EyFU5lJtkP0k+7pHTKqQ1RW4gsyJbFx2qukYSCawXOVkA8PxIE9WvyhPSh
- BqFdaPFNKjjVRZfElufD8Mio3C5z1U6I=
-X-Gm-Gg: AeBDievbTJFuQqcoi5+Ywe4qdJmqwMUcmpiPVPr4XU8Ep1lb8tl5CG9NH+zTXMfiwJ6
- 0Dp0IWkjGMW+t5deG5vyJh5m1fgApvSq2qEb1d8CYBrFyH+jTaxJl2qNS66YqvSN7lHrJ9Yat/T
- Zoxzwa52l5AF8d7RZeqcp5I/KsWOHAm2MBmllW6K0oAvBSUHayv/cwN/bzL/9Hs/84GfFfoMWc1
- HRGScyx35422e87183YbTyccyEcJw0TdcvixjSu8KF/lAr1gS9uWuhN/vNxe+jnDQT1y+BcQfA4
- M1j4KEIxup21OdYfnQ==
-X-Received: by 2002:a05:6830:378a:b0:7d7:b841:c6dd with SMTP id
- 46e09a7af769-7deba185859mr929875a34.11.1777524171789; Wed, 29 Apr 2026
- 21:42:51 -0700 (PDT)
+ AFNElJ+5+lLXuOXbNSd7RZ49zpVxXYG5qyFh71DahxjqXtPG9fXbJgSOd5bdyqXdAqYaU2ZWuhqbluM=@lists.denx.de
+X-Gm-Message-State: AOJu0YzAvmH4R3jZ887TY/hwRw6fpJzPlCi7HriWTMnZ3C85bGKti8i2
+ Z0JdYL6dD4hvDvENHHOSLf3Nkk6pQMJg2uEF/OmnjctU/mdcHCmHboO919n4iNEm+1Ri08juepC
+ hW+LqIwNtDC6T01ImkWqHySt1OHEFJcL7i5K9KSkEcXMa1sr4Ok7UBUHF
+X-Gm-Gg: AeBDiesyXHp9w+S3hut77JyWpNsxzK0AK/s4b+YZCHbDSORH9lcug+JRqz79gTHmqJT
+ X0nDgCF+86eOITI/7F5dMmNcbhcwMNEzmpv0DBU/3xp84GEI3jCIBo+lyi74zbhgAUrhOEMv+5A
+ mIiD39uy1QwwUz3EF2mpik70HZUcCVqaVA+hVNiBtZmfUaHdc4+2Y3TsrAEEwx5oUaIxa4vgIEn
+ JA5/+lWYNVGOR3GxTTqH1+vlZjKfY4xKrPJDevOULl41V8Fw5bv25/3CDDbTawLn51qukYT8p3k
+ ve7YCiJKpzAitHEP974nV2eVMnTVWVfh5Ur4HMsq8610um7qBjV06wBRa8CcFIh+fWdFk4T/xr8
+ 35xeox/ibaYX1rYDeTznyMrTuW6l8hrRrcG8rGJUTGktv45IZuGm0i5h3WJHSiY1dtpJBSeWurr
+ B8hObD2MmzuucjBKoocEcW3riFwQNAsH/WMCYgrsBiraTP4D+C1c7nKnYuxYoAAg==
+X-Received: by 2002:a17:90b:4ac7:b0:35f:b306:5d47 with SMTP id
+ 98e67ed59e1d1-364c2f14e9emr1292608a91.1.1777525710045; 
+ Wed, 29 Apr 2026 22:08:30 -0700 (PDT)
+X-Received: by 2002:a17:90b:4ac7:b0:35f:b306:5d47 with SMTP id
+ 98e67ed59e1d1-364c2f14e9emr1292572a91.1.1777525709518; 
+ Wed, 29 Apr 2026 22:08:29 -0700 (PDT)
+Received: from hu-varada-blr.qualcomm.com
+ (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
+ by smtp.gmail.com with ESMTPSA id
+ 98e67ed59e1d1-364bdf2aa41sm1644516a91.4.2026.04.29.22.08.27
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 29 Apr 2026 22:08:29 -0700 (PDT)
+Date: Thu, 30 Apr 2026 10:38:24 +0530
+From: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
+To: Quentin Schulz <foss+uboot@0leil.net>
+Cc: Casey Connolly <casey.connolly@linaro.org>,
+ Sumit Garg <sumit.garg@oss.qualcomm.com>, u-boot@lists.denx.de,
+ Tom Rini <trini@konsulko.com>, Quentin Schulz <quentin.schulz@cherry.de>
+Subject: Re: [PATCH] doc: usage: cmd: reset: specify when the -edl option is
+ available
+Message-ID: <afLjyE2dNZSi/NGy@hu-varada-blr.qualcomm.com>
+References: <20260428-doc-sysreset-qcom-v1-1-964df4ee79f9@cherry.de>
 MIME-Version: 1.0
-References: <20260423042824.3480-1-briansune@gmail.com>
- <CAFLszThg=EamyRohxNA7V+nk+OMVK356nUjAVSbu4+kokOJpdA@mail.gmail.com>
- <CAN7C2SAdg1MX3ZfEt5-68iiw3pdjyqva48F_uJjNwsHAhdmY3Q@mail.gmail.com>
- <CAFLszTgouk66AOaL2o8PvH9EKNFabE=pjxpa9QpC_F--VhE9cQ@mail.gmail.com>
- <CAN7C2SC-MuqHK2+0vaZzZFi-up1L7=KcOSRedF6f6F3D9Uoceg@mail.gmail.com>
- <CAFLszTjz5SMpFMPjVd6tX5Lk9DKv3MMX+_qtkSgt6fztGceHFA@mail.gmail.com>
- <CAFLszThDv=YcuXUanOJd4MPeNdSiHSL2zH9jXAtbu+-8fRzF2w@mail.gmail.com>
- <0b5fc175-76be-4b64-bd8b-48c9f502c8bc@altera.com>
- <CAN7C2SD0pHpYx_66WikFB1vjQrni8NyHL-t29keZU3EksJE3nA@mail.gmail.com>
-In-Reply-To: <CAN7C2SD0pHpYx_66WikFB1vjQrni8NyHL-t29keZU3EksJE3nA@mail.gmail.com>
-From: Sune Brian <briansune@gmail.com>
-Date: Thu, 30 Apr 2026 12:42:40 +0800
-X-Gm-Features: AVHnY4K24Q-lyik4s550V0p_8it341cVuQPgF6p80iQGSxWnfVLtH4eBdvVxy-U
-Message-ID: <CAN7C2SBCrNm8ojLq6p82e_B4F=ffy9BP5KXQPEDiBS6zdE4RAA@mail.gmail.com>
-Subject: Re: [PATCH v6] Improve handoff prepare on SoCFPGA
-To: Tom Rini <trini@konsulko.com>
-Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de, 
- "Chee, Tien Fong" <tien.fong.chee@altera.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260428-doc-sysreset-qcom-v1-1-964df4ee79f9@cherry.de>
+X-Proofpoint-ORIG-GUID: OtZVZvMCEIA-VVnebHP6i2qY5Za-EGG7
+X-Proofpoint-GUID: OtZVZvMCEIA-VVnebHP6i2qY5Za-EGG7
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNDMwMDA0OSBTYWx0ZWRfX/xy1b3OJLTHl
+ N3o2OmBbzuzUKk6jrfDEgxHzIlfB2ma+3FxcZD3qGrlaFV9holKI7E7eUjezpxGoyRzInsblLM4
+ jiDoC797ZQqxhvt2Sgi+8hGBBdeDy+f41mayPlO4JMk8ejCHQoiDE4Msx69BTECAxMaU69Z21II
+ EusxX4nf+ESMd4LBIjJv8PiKzAMPRpX2xZt216Ic5JDNob4b2e/5WeBuLOsESiahSC9QSZplmr1
+ X6Wg93YbCkrao+HkLUNGc7ED+l8XBeX9xvmWZSnXSIGUYUJPwWCfa9LG163i0U9msF7GiJTM2MB
+ D9VSWPDkwASXsvYrjMrVMKPDrRKJtOKsGj5rQzVfNBygwn7+pu+hIHImZeSdYBhn6PTn02Q3HmA
+ kQ8l3iRv94FODNT7L42w8TzhbgQugU09UUOW1969Z/aY3nLvFgEM5lKtR6nXvvAXYkF5xvVjbj/
+ t/S2v9vn2ehyWGLgv2g==
+X-Authority-Analysis: v=2.4 cv=Fpo1OWrq c=1 sm=1 tr=0 ts=69f2e3ce cx=c_pps
+ a=vVfyC5vLCtgYJKYeQD43oA==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+ a=kj9zAlcOel0A:10 a=A5OVakUREuEA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
+ a=EUspDBNiAAAA:8 a=AieNkoFbs6YUqXfQS_YA:9 a=CjuIK1q_8ugA:10
+ a=rl5im9kqc5Lf4LNbBjHf:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
+ definitions=2026-04-30_01,2026-04-28_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ adultscore=0 impostorscore=0 suspectscore=0 malwarescore=0 spamscore=0
+ clxscore=1015 lowpriorityscore=0 bulkscore=0 phishscore=0 priorityscore=1501
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2604200000 definitions=main-2604300049
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -124,173 +149,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Apr 30, 2026 at 12:32=E2=80=AFPM Sune Brian <briansune@gmail.com> w=
-rote:
+On Tue, Apr 28, 2026 at 12:26:08PM +0200, Quentin Schulz wrote:
+> From: Quentin Schulz <quentin.schulz@cherry.de>
 >
-> On Thu, Apr 30, 2026 at 12:28=E2=80=AFPM Chee, Tien Fong
-> <tien.fong.chee@altera.com> wrote:
-> >
-> > Hi Brian,
-> >
-> >
-> > On 30/4/2026 1:14 am, Simon Glass wrote:
-> > > [CAUTION: This email is from outside your organization. Unless you tr=
-ust the sender, do not click on links or open attachments as it may be a fr=
-audulent email attempting to steal your information and/or compromise your =
-computer.]
-> > >
-> > > On Thu, 30 Apr 2026 at 02:44, Simon Glass <sjg@chromium.org> wrote:
-> > >> Hi Sune,
-> > >>
-> > >> On Wed, 29 Apr 2026 at 08:34, Sune Brian <briansune@gmail.com> wrote=
-:
-> > >>> On Wed, Apr 29, 2026 at 10:21=E2=80=AFPM Simon Glass <sjg@chromium.=
-org> wrote:
-> > >>>> Hi Brian,
-> > >>>>
-> > >>>> On Tue, 28 Apr 2026 at 08:34, Sune Brian <briansune@gmail.com> wro=
-te:
-> > >>>>> On Tue, Apr 28, 2026 at 10:04=E2=80=AFPM Simon Glass <sjg@chromiu=
-m.org> wrote:
-> > >>>>>> Hi Brian,
-> > >>>>>>
-> > >>>>>> On 2026-04-23T04:28:24, Sune Brian <briansune@gmail.com> wrote:
-> > >>>>>>> Improve handoff prepare on SoCFPGA
-> > >>>>>>>
-> > >>>>>>> Ensure qts folder header files are properly updated by isolatin=
-g
-> > >>>>>>> the Python execution environment. This prevents partial or fail=
-ed
-> > >>>>>>> script runs from corrupting the target directory.
-> > >>>>>>>
-> > >>>>>>> Changelog v5 -> v6:
-> > >>>>>>>   - Clean HANDOFF_KEEP comments.
-> > >>>>>>>
-> > >>>>>>> Changelog v4 -> v5:
-> > >>>>>>>   - Change HANDOFF_KEEP condition to if [ '$${HANDOFF_KEEP:-0}'=
- !=3D '0' ]
-> > >>>>>>>   - Add HANDOFF_KEEP and HANDOFF_PATH comments in config.mk
-> > >>>>>>>
-> > >>>>>>> Changes:
-> > >>>>>>>   - Implement a temp folder for Python script execution.
-> > >>>>>>>   - Clean temp folder automatically despite execution failures.
-> > >>>>>>>   - Gate the file replacement process on the successful exit of
-> > >>>>>>>     the Python scripts.
-> > >>>>>>>   - Execute the replacement (with or without keep) only upon sc=
-ript
-> > >>>>>>>     success via the NEW HANDOFF_KEEP=3Dxxx variable.
-> > >>>>>>> [...]
-> > >>>>>>>
-> > >>>>>>> arch/arm/mach-socfpga/config.mk | 39 ++++++++++++++++++++++++++=
-++++++++++---
-> > >>>>>>>   1 file changed, 36 insertions(+), 3 deletions(-)
-> > >>>>>
-> > >>>>> Dear Simon,
-> > >>>>>
-> > >>>>> B.C. the server is down and I don't expect Google to have an auto=
- fail
-> > >>>>> mailing recovery.
-> > >>>>>
-> > >>>>>> I see 6 copies of this v6 patch in patchwork, so I wonder if I g=
-ot the
-> > >>>>>> right one?
-> > >>>>> I will try to respond to this email as politely as possible.
-> > >>>>> Please reference from "patchwork.ozlabs.org" list.
-> > >>>>>
-> > >>>>>> The per-version changelogs belong below the '---' separator, not=
- in
-> > >>>>>> the commit body. Also U-Boot convention is 'Changes in vN:' rath=
-er
-> > >>>>>> than 'Changelog vN -> vN+1:'.
-> > >>>>>>
-> > >>>>>> You could try using 'patman' which will get this right for you a=
-utomatically:
-> > >>>>>>
-> > >>>>>> https://docs.u-boot.org/en/latest/develop/patman.html
-> > >>>>>>
-> > >>>>> 1) I only do basic software
-> > >>>>> 2) I used ./script/checkpatch.pl There are no errors, warnings et=
-c.
-> > >>>>> 3) There is nothing to do with the patch itself either the softwa=
-re
-> > >>>>> nor the file itself.
-> > >>>>> 4) I am not too familiar with patman
-> > >>>>> 5) There are many better things to do rather than complaining abo=
-ut
-> > >>>>> the patch headers.
-> > >>>>>
-> > >>>>> So forgive me I really don't give a damn on whatever the header r=
-equirements.
-> > >>>>> If you feel this is not passing the patch standard simply reject =
-or
-> > >>>>> label all patches to
-> > >>>>> "Changes Requested".
-> > >>>> That's up to whoever applies this patch. I am just a reviewer :-)
-> > >>> Hi Simon,
-> > >>>
-> > >>> I am going to ignore all your mail in the future.
-> > >>> So review whatever you like, don't care.
-> > >>> There are many patch not following whatever rules or guidelines you
-> > >>> mentioned.
-> > >>> Just review those as well. What a waste of time on your emails.
-> > >>>
-> > >>> As politely as possible!!!
-> > >> Oh, sorry about that and also the server being down, etc.. The
-> > >> maintainer for SoCFPGA will handle applying this in any case.
-> > >>
-> > >>> Brian
-> > >>>
-> > >>>> The reason for the formatting rules is mostly so that maintainers =
-can
-> > >>>> apply them without manually redoing the patch, etc.
-> > >>>>
-> > >>>> There is also this which might help (although you might not want m=
-ore reading):
-> > >>>>
-> > >>>> https://docs.u-boot.org/en/latest/develop/sending_patches.html#com=
-mit-message-conventions
-> >
-> >
-> > I have reviewed this patch.
-> >
-> >
-> > While the functional change appears reasonable, the patch cannot be
-> > applied in its current form because the commit message and version
-> > history do not follow U-Boot patch submission conventions. Specifically=
-:
-> >
-> > - Per-version change history must be placed below the '---' separator.
-> > - The required format is 'Changes in vN:'. Custom formats such as
-> >    'Changelog vN -> vN+1:' are not acceptable.
-> >
-> > Maintainers rely on these conventions so patches can be applied directl=
-y
-> > using git am without manual rework. I will not correct the commit histo=
-ry
-> > on behalf of the contributor.
-> >
-> > Please resend the patch with the commit message formatted correctly.
-> > Further review or application will only proceed once this requirement i=
-s
-> > met.
+> The option is only available when CONFIG_SYSRESET_QCOM_PSCI is enabled,
+> so let's make that explicit in the boot cmd documentation.
 >
-> Hi T.F.,
+> Fixes: ef06c5d76ff4 ("cmd: boot: Add '-edl' option to reset command documentation")
+> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
+> ---
+>  doc/usage/cmd/reset.rst | 3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
 >
-> Drop this, I don't care.
+> diff --git a/doc/usage/cmd/reset.rst b/doc/usage/cmd/reset.rst
+> index 366b17eea16..54767fea241 100644
+> --- a/doc/usage/cmd/reset.rst
+> +++ b/doc/usage/cmd/reset.rst
+> @@ -23,7 +23,8 @@ DDR and peripherals, on some boards also resets external PMIC.
+>      Do warm WARM, reset CPU but keep peripheral/DDR/PMIC active.
 >
-> Thanks,
-> Brian
+>  -edl
+> -    Boot to Emergency DownLoad mode on supported Qualcomm platforms.
+> +    Boot to Emergency DownLoad mode on supported Qualcomm platforms and only
+> +    when CONFIG_SYSRESET_QCOM_PSCI=y.
 >
-> >
-> > Best regards,
-> >
-> > Tien Fong
-> >
+>  Return value
+>  ------------
+>
+> ---
+> base-commit: 4433253ecf2041f9362a763bb6cb79960921ac7e
+> change-id: 20260428-doc-sysreset-qcom-f5d21aa84142
+>
+> Best regards,
+> --
+> Quentin Schulz <quentin.schulz@cherry.de>
+>
 
-Dear Tom,
+Thanks for posting the patch. Somehow missed your comment.
 
-Sorry for the trouble.
-Please reject this patch series.
-
-Thanks,
-Brian
+Reviewed-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
