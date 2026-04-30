@@ -4,45 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED35DCCFA13
-	for <u-boot@archiver.kernel.org>; Thu, 30 Apr 2026 08:46:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6026FF8875
+	for <u-boot@archiver.kernel.org>; Thu, 30 Apr 2026 08:46:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0AC3B846A3;
-	Thu, 30 Apr 2026 10:44:57 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5A40B846B2;
+	Thu, 30 Apr 2026 10:45:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="NPZU3y0R";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="V1ghUU/d";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4E070846A0; Thu, 30 Apr 2026 10:44:56 +0200 (CEST)
+ id 44C5C846B5; Thu, 30 Apr 2026 10:44:59 +0200 (CEST)
 Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B21EE8460D
- for <u-boot@lists.denx.de>; Thu, 30 Apr 2026 10:44:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 71AB18460D
+ for <u-boot@lists.denx.de>; Thu, 30 Apr 2026 10:44:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=richard.genoud@bootlin.com
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-03.galae.net (Postfix) with ESMTPS id 597844E42B8A;
- Thu, 30 Apr 2026 08:44:53 +0000 (UTC)
+ by smtpout-03.galae.net (Postfix) with ESMTPS id 20C5B4E42B8A;
+ Thu, 30 Apr 2026 08:44:56 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id 2D38B60495;
- Thu, 30 Apr 2026 08:44:53 +0000 (UTC)
+ by smtpout-01.galae.net (Postfix) with ESMTPS id D7FAD60495;
+ Thu, 30 Apr 2026 08:44:55 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 8760A1072B7B3; 
- Thu, 30 Apr 2026 10:44:49 +0200 (CEST)
+ with ESMTPSA id 167A91072B7A6; 
+ Thu, 30 Apr 2026 10:44:51 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1777538691; h=from:subject:date:message-id:to:cc:mime-version:
+ t=1777538694; h=from:subject:date:message-id:to:cc:mime-version:
  content-transfer-encoding:in-reply-to:references;
- bh=GAvjFm130tg6VrUdljIqQg8Qiz3mDlXSJnDjAoVVobc=;
- b=NPZU3y0RTY5BTbBZoSjjrDtGMF++yaJ2WKTI4t5QqJeRGhRgdT3g5ohaJr+5e0YmAkre7+
- ZJjNHU4LTvMs2ndyg5BQ2VEggly/mUF5JtUif6DG6zUzhOIn1yk8BHSau/E8ZnVpMGVA+e
- UfghM97NyjD24oN1C/JJ0zvZuLk8JG7oprNirfQ7lKZTuXz5qPHPLMtSOrTlRmIqxgR+Tz
- 4XXr6Gh//jai6WOamxxu+X2J8YKyldiDjwWxcJfhOsqZDCY5zhBZEOo54eLKB3PB8xJFEv
- 1Pd6Tgax1Wju45fp7XSuQ7FpzwWGXyCaTKkymJlqyejQ3r3BkhePwguwTDufhQ==
+ bh=2K4M6p2l59BpMlosSRnfhdxpC8PULctHsyTqbp8u5yY=;
+ b=V1ghUU/dQQW43JQ3Vvv/01vaMOfAqiH85pcXgIAdl/5MwvK8vazxghGth1X20LpTXeR+ed
+ Ks2yBD7KAeBH1+JhoMoh4tKPiWEntDtJfwIHgVgp6IkglRvDP3y1seDRmJulZb3HJwq/2D
+ pcXWXTgfZpAdwLCNR9AN/fKcNSh07gN08geUdr99gTcMQQGQxawXGzJpckmGqwCT2WmzWr
+ 45xpvlM8mno/QfzMlXV4BYfu+fJuR+LwdLZYFavgfNU+Q4yX1a+cwu+V1e6kght74PMbJ+
+ X33OFbsnC/7Bz1Uk8OZAhTLY6UmXkDoTEuCQaCgbis0dgzyCJqh6FBiL8ExfdA==
 From: "Richard Genoud (TI)" <richard.genoud@bootlin.com>
 To: Tom Rini <trini@konsulko.com>, Manorit Chawdhry <m-chawdhry@ti.com>,
  Apurva Nandan <a-nandan@ti.com>, "Andrew F . Davis" <afd@ti.com>,
@@ -55,9 +55,10 @@ Cc: Markus Schneider-Pargmann <msp@baylibre.com>, Udit Kumar <u-kumar1@ti.com>,
  Gregory CLEMENT <gregory.clement@bootlin.com>,
  Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
  Richard Genoud <richard.genoud@bootlin.com>, u-boot@lists.denx.de
-Subject: [PATCH 10/20] firmware: ti_sci: add low power mode operations
-Date: Thu, 30 Apr 2026 10:44:03 +0200
-Message-ID: <20260430084414.1354490-11-richard.genoud@bootlin.com>
+Subject: [PATCH 11/20] mach-k3: r5: common: add helper functions needed in LPM
+ resume sequence
+Date: Thu, 30 Apr 2026 10:44:04 +0200
+Message-ID: <20260430084414.1354490-12-richard.genoud@bootlin.com>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20260430084414.1354490-1-richard.genoud@bootlin.com>
 References: <20260430084414.1354490-1-richard.genoud@bootlin.com>
@@ -82,469 +83,397 @@ X-Virus-Status: Clean
 
 From: Prasanth Babu Mantena <p-mantena@ti.com>
 
-From: Prasanth Babu Mantena <p-mantena@ti.com>
+Add helper functions that are used by respective SoCs in LPM resume flow.
 
-On TI-k3 platform, at resume, uboot SPL needs to do several tasks:
-- restore TIFS minimal context from DDR
-- send DDR save address to TIFS
-- load TFA and its context in MSMC
-- set TFA resume vector to its warm_entrypoint
-- authenticate certificates and apply firewalls
+- lpm_process() is called at boot time to:
+  - retrieve the LPM memory region from DTS
+  - save ATF/OPTEE certificates information and DM code in this memory
+    region
+  - Forward the LPM address to TIFS via TISCI_MSG_LPM_SAVE_ADDR
+TIFS will use this address to save TFA context and its own minimal
+context just before suspend.
 
-All those operations are now done by TIFS with those messages:
-ti_sci_cmd_min_context_restore
-ti_sci_cmd_decrypt_tfa
-ti_sci_cmd_core_resume
-ti_sci_cmd_lpm_save_addr
-ti_sci_cmd_proc_auth_apply_fwls
+- do_resume() is called at resume, just after bringing the DDR out of
+  retention to:
+  - retrieve the LPM memory region from DTS
+  - authenticate certificates from LPM memory region and apply firewalls
+  - ask TIFS to restore TFA and its own minimal context
+  - start TFA on remote proc
+  - load and jump to DM
 
-https://software-dl.ti.com/tisci/esd/latest/2_tisci_msgs/pm/lpm.html
-https://software-dl.ti.com/tisci/esd/latest/2_tisci_msgs/security/PROC_BOOT.html
+https://software-dl.ti.com/tisci/esd/latest/2_tisci_msgs/pm/lpm.html#lpm-msg-lpm-save-addr
 
 Signed-off-by: Prasanth Babu Mantena <p-mantena@ti.com>
 Co-developed-by: Richard Genoud (TI) <richard.genoud@bootlin.com>
 Signed-off-by: Richard Genoud (TI) <richard.genoud@bootlin.com>
 ---
- arch/arm/mach-k3/include/mach/security.h |   1 +
- arch/arm/mach-k3/security.c              |  64 ++++++++
- drivers/firmware/ti_sci.c                | 179 +++++++++++++++++++++++
- drivers/firmware/ti_sci.h                |  92 ++++++++++++
- include/linux/soc/ti/ti_sci_protocol.h   |   8 +
- 5 files changed, 344 insertions(+)
+ arch/arm/mach-k3/common.h        |  16 +++
+ arch/arm/mach-k3/lpm-common.h    |  15 ++
+ arch/arm/mach-k3/r5/Kconfig      |   4 +
+ arch/arm/mach-k3/r5/Makefile     |   1 +
+ arch/arm/mach-k3/r5/common.c     |  17 +--
+ arch/arm/mach-k3/r5/lpm-common.c | 228 +++++++++++++++++++++++++++++++
+ 6 files changed, 269 insertions(+), 12 deletions(-)
+ create mode 100644 arch/arm/mach-k3/lpm-common.h
+ create mode 100644 arch/arm/mach-k3/r5/lpm-common.c
 
-diff --git a/arch/arm/mach-k3/include/mach/security.h b/arch/arm/mach-k3/include/mach/security.h
-index 8502b57bd80a..d9f31e1500a1 100644
---- a/arch/arm/mach-k3/include/mach/security.h
-+++ b/arch/arm/mach-k3/include/mach/security.h
-@@ -9,3 +9,4 @@
- #include <linux/types.h>
+diff --git a/arch/arm/mach-k3/common.h b/arch/arm/mach-k3/common.h
+index e970076d08ec..50e670f845e3 100644
+--- a/arch/arm/mach-k3/common.h
++++ b/arch/arm/mach-k3/common.h
+@@ -8,6 +8,7 @@
  
- void ti_secure_image_post_process(void **p_image, size_t *p_size);
-+void ti_secure_image_auth_apply_fwls(void **p_image, size_t *p_size);
-diff --git a/arch/arm/mach-k3/security.c b/arch/arm/mach-k3/security.c
-index c7017bba99ab..752912c6930a 100644
---- a/arch/arm/mach-k3/security.c
-+++ b/arch/arm/mach-k3/security.c
-@@ -133,3 +133,67 @@ void ti_secure_image_post_process(void **p_image, size_t *p_size)
- 	      spl_boot_device() == BOOT_DEVICE_UART))
- 		printf("Authentication passed\n");
- }
+ #include <asm/armv7_mpu.h>
+ #include <asm/hardware.h>
++#include <image.h>
+ #include <mach/security.h>
+ 
+ /* keep ram_top in the 32-bit address space */
+@@ -16,6 +17,21 @@
+ #define K3_FIREWALL_BACKGROUND_BIT	(8)
+ #define K3_SPEED_GRADE_UNKNOWN		'\0'
+ 
++#if IS_ENABLED(CONFIG_SYS_K3_SPL_ATF)
++enum {
++	IMAGE_ID_ATF,
++	IMAGE_ID_OPTEE,
++	IMAGE_ID_SPL,
++	IMAGE_ID_DM_FW,
++	IMAGE_ID_TIFSSTUB_HS,
++	IMAGE_ID_TIFSSTUB_FS,
++	IMAGE_ID_TIFSSTUB_GP,
++	IMAGE_AMT,
++};
 +
-+void ti_secure_image_auth_apply_fwls(void **p_image, size_t *p_size)
++extern struct image_info fit_image_info[IMAGE_AMT];
++#endif
++
+ struct fwl_data {
+ 	const char *name;
+ 	u16 fwl_id;
+diff --git a/arch/arm/mach-k3/lpm-common.h b/arch/arm/mach-k3/lpm-common.h
+new file mode 100644
+index 000000000000..2b360e6f03f3
+--- /dev/null
++++ b/arch/arm/mach-k3/lpm-common.h
+@@ -0,0 +1,15 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++/*
++ * K3: LPM Architecture common definitions
++ *
++ * Copyright (C) 2026 Texas Instruments Incorporated - https://www.ti.com/
++ * Copyright (C) 2026 Bootlin
++ */
++
++#ifndef _LPM_COMMON_H_
++#define _LPM_COMMON_H_
++
++void __noreturn do_resume(void);
++void lpm_process(void);
++
++#endif
+diff --git a/arch/arm/mach-k3/r5/Kconfig b/arch/arm/mach-k3/r5/Kconfig
+index 12335880e106..7a9c005a6d7c 100644
+--- a/arch/arm/mach-k3/r5/Kconfig
++++ b/arch/arm/mach-k3/r5/Kconfig
+@@ -1,6 +1,10 @@
+ config K3_LOAD_SYSFW
+ 	bool
+ 
++config K3_LPM
++	bool
++	default y if SOC_K3_J721E || SOC_K3_J7200 || SOC_K3_J784S4 || SOC_K3_J722S || SOC_K3_J721S2
++
+ config K3_OPP_LOW
+ 	depends on ARCH_K3 && K3_AVS0
+ 	bool "Enable OPP_LOW on supported TI K3 SoCs"
+diff --git a/arch/arm/mach-k3/r5/Makefile b/arch/arm/mach-k3/r5/Makefile
+index 074e3b61a262..ccededbc0d60 100644
+--- a/arch/arm/mach-k3/r5/Makefile
++++ b/arch/arm/mach-k3/r5/Makefile
+@@ -13,6 +13,7 @@ obj-$(CONFIG_SOC_K3_J722S) += j722s/
+ obj-$(CONFIG_SOC_K3_J784S4) += j784s4/
+ 
+ obj-y += common.o
++obj-$(CONFIG_K3_LPM) += lpm-common.o
+ obj-y += lowlevel_init.o
+ obj-y += r5_mpu.o
+ 
+diff --git a/arch/arm/mach-k3/r5/common.c b/arch/arm/mach-k3/r5/common.c
+index 03638366046b..a80e903de85a 100644
+--- a/arch/arm/mach-k3/r5/common.c
++++ b/arch/arm/mach-k3/r5/common.c
+@@ -18,19 +18,9 @@
+ #include <elf.h>
+ 
+ #include "../common.h"
++#include "../lpm-common.h"
+ 
+ #if IS_ENABLED(CONFIG_SYS_K3_SPL_ATF)
+-enum {
+-	IMAGE_ID_ATF,
+-	IMAGE_ID_OPTEE,
+-	IMAGE_ID_SPL,
+-	IMAGE_ID_DM_FW,
+-	IMAGE_ID_TIFSSTUB_HS,
+-	IMAGE_ID_TIFSSTUB_FS,
+-	IMAGE_ID_TIFSSTUB_GP,
+-	IMAGE_AMT,
+-};
+-
+ #if CONFIG_IS_ENABLED(FIT_IMAGE_POST_PROCESS)
+ static const char *image_os_match[IMAGE_AMT] = {
+ 	"arm-trusted-firmware",
+@@ -43,7 +33,7 @@ static const char *image_os_match[IMAGE_AMT] = {
+ };
+ #endif
+ 
+-static struct image_info fit_image_info[IMAGE_AMT];
++struct image_info fit_image_info[IMAGE_AMT];
+ 
+ void init_env(void)
+ {
+@@ -170,6 +160,9 @@ void __noreturn jump_to_image(struct spl_image_info *spl_image)
+ 	if (ret)
+ 		panic("%s: ATF failed to load on rproc (%d)\n", __func__, ret);
+ 
++	if (IS_ENABLED(CONFIG_K3_LPM))
++		lpm_process();
++
+ #if CONFIG_IS_ENABLED(FIT_IMAGE_POST_PROCESS)
+ 	/* Authenticate ATF */
+ 	void *image_addr = (void *)fit_image_info[IMAGE_ID_ATF].image_start;
+diff --git a/arch/arm/mach-k3/r5/lpm-common.c b/arch/arm/mach-k3/r5/lpm-common.c
+new file mode 100644
+index 000000000000..c39d85a43fd2
+--- /dev/null
++++ b/arch/arm/mach-k3/r5/lpm-common.c
+@@ -0,0 +1,228 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * K3: R5 Common LPM Architecture initialization
++ *
++ * Copyright (C) 2023-2026 Texas Instruments Incorporated - https://www.ti.com/
++ * Copyright (C) 2026 Bootlin
++ */
++
++#include <clk.h>
++#include <dm/read.h>
++#include <elf.h>
++#include <linux/printk.h>
++#include <linux/soc/ti/ti_sci_protocol.h>
++#include <power-domain.h>
++#include <remoteproc.h>
++#include <mach/security.h>
++
++#include "../common.h"
++#include "../lpm-common.h"
++
++#define FW_IMAGE_SIZE 0x80000
++
++struct lpm_addr_info {
++	u32 *context_save_addr;
++	u32 *atf_cert_addr;
++	u32 *optee_cert_addr;
++	u32 *dm_save_addr;
++	u32 size;
++};
++
++struct lpm_addr_info mem_addr_lpm;
++
++__weak bool j7xx_board_is_resuming(void)
 +{
-+	struct ti_sci_handle *ti_sci = get_ti_sci_handle();
-+	struct ti_sci_proc_ops *proc_ops = &ti_sci->ops.proc_ops;
-+	u64 image_addr;
-+	u32 image_size, backup_size;
++	return false;
++}
++
++static int extract_lpm_region(void)
++{
++	ofnode node;
++	fdt_addr_t lpm_reg_addr;
++	fdt_size_t lpm_reg_size;
++
++	node = ofnode_path("/reserved-memory/lpm-memory");
++	if (!ofnode_valid(node)) {
++		printf("lpm will not be functional\n");
++		return -ENODEV;
++	}
++
++	lpm_reg_addr = ofnode_get_addr(node);
++	if (lpm_reg_addr == FDT_ADDR_T_NONE) {
++		printf("Can't find a valid reserved node!\n");
++		return -ENODEV;
++	}
++
++	lpm_reg_size = ofnode_get_size(node);
++	if (lpm_reg_size == FDT_ADDR_T_NONE) {
++		printf("Can't find a valid reserved node!\n");
++		return -ENODEV;
++	}
++
++	mem_addr_lpm.context_save_addr = (u32 *)lpm_reg_addr;
++	mem_addr_lpm.atf_cert_addr = mem_addr_lpm.context_save_addr + FW_IMAGE_SIZE;
++	mem_addr_lpm.optee_cert_addr = mem_addr_lpm.atf_cert_addr + FW_IMAGE_SIZE;
++	mem_addr_lpm.dm_save_addr = mem_addr_lpm.optee_cert_addr + (2 * FW_IMAGE_SIZE);
++	mem_addr_lpm.size = lpm_reg_size;
++
++	return 0;
++}
++
++static int save_certificate(void)
++{
 +	int ret;
 +
-+	image_size = *p_size;
-+	backup_size = image_size;
-+	if (!image_size) {
-+		debug("%s: Image size is %d\n", __func__, image_size);
-+		return;
++	if (!fit_image_info[IMAGE_ID_ATF].image_start ||
++	    !fit_image_info[IMAGE_ID_OPTEE].image_start ||
++	    !fit_image_info[IMAGE_ID_DM_FW].image_start) {
++		pr_err("Invalid images to save\n");
++		return -EINVAL;
 +	}
 +
-+	if (get_device_type() == K3_DEVICE_TYPE_GP)
-+		return;
-+
-+	if (get_device_type() != K3_DEVICE_TYPE_HS_SE &&
-+	    !ti_secure_cert_detected(*p_image)) {
-+		printf("Warning: Did not detect image signing certificate. "
-+		       "Skipping authentication to prevent boot failure. "
-+		       "This will fail on Security Enforcing(HS-SE) devices\n");
-+		return;
-+	}
-+
-+	/* Clean out image so it can be seen by system firmware */
-+	image_addr = dma_map_single(*p_image, *p_size, DMA_BIDIRECTIONAL);
-+
-+	debug("Authenticating image at address 0x%016llx\n", image_addr);
-+	debug("Authenticating image of size %d bytes\n", image_size);
-+
-+	/* Authenticate image */
-+	ret = proc_ops->proc_auth_apply_fwls(ti_sci, &image_addr, &image_size);
++	ret = extract_lpm_region();
 +	if (ret) {
-+		printf("Authentication failed..but assume pass!\n");
-+		hang();
++		pr_err("Cannot find valid LPM address range..\n");
++		return -ENOMEM;
 +	}
 +
-+	/* Invalidate any stale lines over data written by system firmware */
-+	if (backup_size)
-+		dma_unmap_single(image_addr, backup_size, DMA_BIDIRECTIONAL);
++	memcpy(mem_addr_lpm.atf_cert_addr,
++	       (void *)fit_image_info[IMAGE_ID_ATF].image_start,
++	       fit_image_info[IMAGE_ID_ATF].image_len);
++
++	memcpy(mem_addr_lpm.optee_cert_addr,
++	       (void *)fit_image_info[IMAGE_ID_OPTEE].image_start,
++	       fit_image_info[IMAGE_ID_OPTEE].image_len);
++
++	memcpy(mem_addr_lpm.dm_save_addr,
++	       (void *)fit_image_info[IMAGE_ID_DM_FW].image_start,
++	       fit_image_info[IMAGE_ID_DM_FW].image_len);
++
++	return 0;
++}
++
++void lpm_process(void)
++{
++	int ret = 0;
++	unsigned long save_addr;
++	struct ti_sci_handle *ti_sci = get_ti_sci_handle();
++
++	ret = save_certificate();
++	if (ret)
++		return;
++	save_addr = (unsigned long)mem_addr_lpm.context_save_addr;
++	ret = ti_sci->ops.lpm_ops.lpm_save_addr(ti_sci, save_addr,
++						mem_addr_lpm.size);
++	if (ret)
++		pr_err("TIFS lpm save addr fail\n");
++}
++
++static u32 resume_to_dm_f(void)
++{
++	struct ti_sci_handle *ti_sci = get_ti_sci_handle();
++	u32 loadaddr = 0, save_addr = 0;
++	int ret = 0;
++
++	loadaddr = (u32)mem_addr_lpm.dm_save_addr;
++	if (!valid_elf_image(loadaddr))
++		panic("%s: DM-Firmware image is not valid, it cannot be loaded\n",
++		      __func__);
++
++	loadaddr = load_elf_image_phdr(loadaddr);
++	save_addr = (uintptr_t)mem_addr_lpm.context_save_addr;
++	ret = ti_sci->ops.lpm_ops.lpm_save_addr(ti_sci, save_addr, mem_addr_lpm.size);
++	if (ret)
++		panic("TIFS lpm save addr fail : %x\n", ret);
 +
 +	/*
-+	 * The image_size returned may be 0 when the authentication process has
-+	 * moved the image. When this happens no further processing on the
-+	 * image is needed or often even possible as it may have also been
-+	 * placed behind a firewall when moved.
++	 * TIFS minimal context restore
++	 * This restores also the firewall
 +	 */
-+	*p_size = backup_size;
++	ret = ti_sci->ops.lpm_ops.min_context_restore(ti_sci, 0);
++	if (ret)
++		panic("TIFS restore_context failed (%d)\n", ret);
 +
 +	/*
-+	 * Output notification of successful authentication to re-assure the
-+	 * user that the secure code is being processed as expected. However
-+	 * suppress any such log output in case of building for SPL and booting
-+	 * via YMODEM. This is done to avoid disturbing the YMODEM serial
-+	 * protocol transactions.
++	 * Restore TFA in msmc memory
 +	 */
-+	if (!(IS_ENABLED(CONFIG_XPL_BUILD) &&
-+	      IS_ENABLED(CONFIG_SPL_YMODEM_SUPPORT) &&
-+	      spl_boot_device() == BOOT_DEVICE_UART))
-+		printf("Certificate replay passed\n");
++	ret = ti_sci->ops.lpm_ops.decrypt_tfa(ti_sci,
++					      CONFIG_K3_ATF_LOAD_ADDR);
++	if (ret)
++		panic("%s: TIFS failed to decrytp TFA : %x\n", __func__, ret);
++
++	/* restore TFA resume vectore address in main core */
++	ret = ti_sci->ops.lpm_ops.core_resume(ti_sci);
++	if (ret)
++		panic("ATF failed to resume (%d)\n", ret);
++
++	return loadaddr;
 +}
-diff --git a/drivers/firmware/ti_sci.c b/drivers/firmware/ti_sci.c
-index c015bd3cc245..a40f2918d75f 100644
---- a/drivers/firmware/ti_sci.c
-+++ b/drivers/firmware/ti_sci.c
-@@ -2014,6 +2014,62 @@ static int ti_sci_cmd_set_proc_boot_ctrl(const struct ti_sci_handle *handle,
- 	return ret;
- }
- 
-+/**
-+ * ti_sci_cmd_proc_auth_apply_fwls() - Command to authenticate certificate and
-+ *				       apply the firewalls present in it.
-+ * @handle:	Pointer to TI SCI handle
-+ * @image_addr:	Memory address at which payload image and certificate is
-+ *		located in memory, this is updated if the image data is
-+ *		moved during authentication.
-+ * @image_size: This is updated with the final size of the image after
-+ *		authentication.
-+ *
-+ * Return: 0 if all went well, else returns appropriate error value.
-+ */
-+static int ti_sci_cmd_proc_auth_apply_fwls(const struct ti_sci_handle *handle,
-+					   u64 *image_addr, u32 *image_size)
++
++static void resume_rproc_f(void)
 +{
-+	struct ti_sci_msg_req_proc_auth_boot_image req;
-+	struct ti_sci_msg_resp_proc_auth_boot_image *resp;
-+	struct ti_sci_info *info;
-+	struct ti_sci_xfer *xfer;
-+	int ret = 0;
++	struct power_domain rproc_pwrdmn;
++	unsigned long gtc_rate;
++	struct udevice *dev;
++	struct clk gtc_clk;
++	void *gtc_base;
++	int ret;
 +
-+	if (IS_ERR(handle))
-+		return PTR_ERR(handle);
-+	if (!handle)
-+		return -EINVAL;
++	ret = uclass_get_device_by_seq(UCLASS_REMOTEPROC, 1, &dev);
++	if (ret)
++		panic("Unknown remote processor 1 (%d)\n", ret);
 +
-+	info = handle_to_ti_sci_info(handle);
++	ret = power_domain_get_by_index(dev, &rproc_pwrdmn, 1);
++	if (ret)
++		panic("power_domain_get_rproc() failed: %d\n", ret);
 +
-+	xfer = ti_sci_setup_one_xfer(info, TISCI_MSG_PROC_AUTH_APPLY_FWLS,
-+				     TI_SCI_FLAG_REQ_ACK_ON_PROCESSED,
-+				     (u32 *)&req, sizeof(req), sizeof(*resp));
-+	if (IS_ERR(xfer)) {
-+		ret = PTR_ERR(xfer);
-+		printf("%s Error making the tisci command\n", __func__);
-+		return ret;
-+	}
-+	req.cert_addr_low = *image_addr & TISCI_ADDR_LOW_MASK;
-+	req.cert_addr_high = (*image_addr & TISCI_ADDR_HIGH_MASK) >>
-+				TISCI_ADDR_HIGH_SHIFT;
++	ret = clk_get_by_index(dev, 0, &gtc_clk);
++	if (ret)
++		panic("clk_get failed: %d\n", ret);
 +
-+	ret = ti_sci_do_xfer(info, xfer);
-+	if (ret) {
-+		printf("%s Error sending the tisci command\n", __func__);
-+		return ret;
-+	}
++	gtc_base = dev_read_addr_ptr(dev);
++	if (!gtc_base)
++		panic("Get GTC address failed\n");
 +
-+	resp = (struct ti_sci_msg_resp_proc_auth_boot_image *)xfer->tx_message.buf;
++	gtc_rate = clk_get_rate(&gtc_clk);
 +
-+	*image_addr = (resp->image_addr_low & TISCI_ADDR_LOW_MASK) |
-+			(((u64)resp->image_addr_high <<
-+			  TISCI_ADDR_HIGH_SHIFT) & TISCI_ADDR_HIGH_MASK);
-+	*image_size = resp->image_size;
++#define GTC_CNTCR_REG	0x0
++#define GTC_CNTFID0_REG	0x20
++#define GTC_CNTR_EN	0x3
++	/* TFA expect the Global Timebase Counter to be set-up */
++	writel((u32)gtc_rate, gtc_base + GTC_CNTFID0_REG);
++	writel(GTC_CNTR_EN, gtc_base + GTC_CNTCR_REG);
 +
-+	return ret;
++	ret = power_domain_on(&rproc_pwrdmn);
++	if (ret)
++		panic("power_domain_on failed: %d\n", ret);
 +}
 +
- /**
-  * ti_sci_cmd_proc_auth_boot_image() - Command to authenticate and load the
-  *			image and then set the processor configuration flags.
-@@ -2745,6 +2801,125 @@ static int ti_sci_cmd_min_context_restore(const struct ti_sci_handle *handle, u6
- 	return ret;
- }
- 
-+/**
-+ * ti_sci_cmd_decrypt_tfa() - Request for decrypting TFA to specific address.
-+ * @handle:    pointer to TI SCI handle
-+ * @unencrypted_address: Address where the unencrypted TFA will be restored to.
-+ *
-+ * Return: 0 if all went well, else returns appropriate error value.
-+ */
-+static int ti_sci_cmd_decrypt_tfa(const struct ti_sci_handle *handle,
-+				  u64 unencrypted_address)
++typedef void __noreturn (*image_entry_noargs_t)(void);
++
++void __noreturn do_resume(void)
 +{
-+	struct ti_sci_msg_decrypt_tfa_req req;
-+	struct ti_sci_msg_decrypt_tfa_resp *resp;
-+	struct ti_sci_info *info;
-+	struct ti_sci_xfer *xfer;
-+	int ret = 0;
++	image_entry_noargs_t image_entry;
++	u32 loadaddr, size_int = FW_IMAGE_SIZE;
++	void *image_addr;
++	int ret;
 +
-+	if (IS_ERR(handle))
-+		return PTR_ERR(handle);
-+	if (!handle)
-+		return -EINVAL;
++	ret = extract_lpm_region();
++	if (ret)
++		panic("Cannot find valid LPM address range..LPM resume failed\n");
 +
-+	info = handle_to_ti_sci_info(handle);
++	image_addr = mem_addr_lpm.atf_cert_addr;
++	ret = rproc_load(1, (ulong)image_addr, 0x200);
++	if (ret)
++		panic("rproc failed to be initialized (%d)\n", ret);
 +
-+	xfer = ti_sci_setup_one_xfer(info, TISCI_MSG_LPM_DECRYPT,
-+				     TI_SCI_FLAG_REQ_ACK_ON_PROCESSED,
-+				     (u32 *)&req, sizeof(req), sizeof(*resp));
-+	if (IS_ERR(xfer)) {
-+		ret = PTR_ERR(xfer);
-+		return ret;
-+	}
++	ti_secure_image_auth_apply_fwls(&image_addr, &size_int);
 +
-+	req.unencrypted_address = unencrypted_address;
++	image_addr = mem_addr_lpm.optee_cert_addr;
++	ti_secure_image_auth_apply_fwls(&image_addr, &size_int);
 +
-+	ret = ti_sci_do_xfer(info, xfer);
++	loadaddr = resume_to_dm_f();
++	printf("Starting ATF on ARM64 core...\n\n");
++	resume_rproc_f();
 +
-+	return ret;
++	image_entry = (image_entry_noargs_t)loadaddr;
++	image_entry();
 +}
-+
-+/**
-+ * ti_sci_cmd_core_resume() - Request for resuming TFA.
-+ *
-+ * The TIFS will launch the TFA from the entrypoint saved via the ENTER_SLEEP
-+ * message.
-+ *
-+ * @handle:    pointer to TI SCI handle
-+ *
-+ * Return: 0 if all went well, else returns appropriate error value.
-+ */
-+static int ti_sci_cmd_core_resume(const struct ti_sci_handle *handle)
-+{
-+	struct ti_sci_msg_core_resume_req req;
-+	struct ti_sci_msg_core_resume_resp *resp;
-+	struct ti_sci_info *info;
-+	struct ti_sci_xfer *xfer;
-+	int ret = 0;
-+
-+	if (IS_ERR(handle))
-+		return PTR_ERR(handle);
-+	if (!handle)
-+		return -EINVAL;
-+
-+	info = handle_to_ti_sci_info(handle);
-+
-+	xfer = ti_sci_setup_one_xfer(info, TISCI_MSG_CORE_RESUME,
-+				     TI_SCI_FLAG_REQ_ACK_ON_PROCESSED,
-+				     (u32 *)&req, sizeof(req), sizeof(*resp));
-+	if (IS_ERR(xfer)) {
-+		ret = PTR_ERR(xfer);
-+		return ret;
-+	}
-+
-+	ret = ti_sci_do_xfer(info, xfer);
-+
-+	return ret;
-+}
-+
-+/**
-+ * ti_sci_cmd_lpm_save_addr() - Message to inform TIFS about the context save address.
-+ *
-+ * By restoring its context, TIFS will restore its firewall.
-+ *
-+ * @handle:    pointer to TI SCI handle
-+ * @ctx_addr:  address where the context will be store to and restored from
-+ * @size:	   Size of the context save region
-+ *
-+ * Return: 0 if all went well, else returns appropriate error value.
-+ */
-+static int ti_sci_cmd_lpm_save_addr(const struct ti_sci_handle *handle,
-+				    u64 context_addr, u32 size)
-+{
-+	struct tisci_msg_lpm_save_ctx_addr_req req;
-+	struct tisci_msg_lpm_save_ctx_addr_resp *resp;
-+	struct ti_sci_info *info;
-+	struct ti_sci_xfer *xfer;
-+	int ret = 0;
-+
-+	if (IS_ERR(handle))
-+		return PTR_ERR(handle);
-+	if (!handle)
-+		return -EINVAL;
-+
-+	info = handle_to_ti_sci_info(handle);
-+
-+	xfer = ti_sci_setup_one_xfer(info, TISCI_MSG_LPM_SAVE_ADDR,
-+				     TI_SCI_FLAG_REQ_ACK_ON_PROCESSED,
-+				     (u32 *)&req, sizeof(req), sizeof(*resp));
-+	if (IS_ERR(xfer)) {
-+		ret = PTR_ERR(xfer);
-+		return ret;
-+	}
-+
-+	req.ctx_addr = context_addr;
-+	req.size = size;
-+
-+	ret = ti_sci_do_xfer(info, xfer);
-+
-+	return ret;
-+}
-+
- /*
-  * ti_sci_setup_ops() - Setup the operations structures
-  * @info:	pointer to TISCI pointer
-@@ -2813,6 +2988,7 @@ static void ti_sci_setup_ops(struct ti_sci_info *info)
- 	pops->set_proc_boot_cfg = ti_sci_cmd_set_proc_boot_cfg;
- 	pops->set_proc_boot_ctrl = ti_sci_cmd_set_proc_boot_ctrl;
- 	pops->proc_auth_boot_image = ti_sci_cmd_proc_auth_boot_image;
-+	pops->proc_auth_apply_fwls = ti_sci_cmd_proc_auth_apply_fwls;
- 	pops->get_proc_boot_status = ti_sci_cmd_get_proc_boot_status;
- 	pops->proc_shutdown_no_wait = ti_sci_cmd_proc_shutdown_no_wait;
- 
-@@ -2833,6 +3009,9 @@ static void ti_sci_setup_ops(struct ti_sci_info *info)
- 	fw_ops->query_dm_cap = ti_sci_cmd_query_dm_cap;
- 
- 	lpm_ops->min_context_restore = ti_sci_cmd_min_context_restore;
-+	lpm_ops->decrypt_tfa = ti_sci_cmd_decrypt_tfa;
-+	lpm_ops->core_resume = ti_sci_cmd_core_resume;
-+	lpm_ops->lpm_save_addr = ti_sci_cmd_lpm_save_addr;
- }
- 
- /**
-diff --git a/drivers/firmware/ti_sci.h b/drivers/firmware/ti_sci.h
-index 68908c6c8c46..8fb519b62dbd 100644
---- a/drivers/firmware/ti_sci.h
-+++ b/drivers/firmware/ti_sci.h
-@@ -57,6 +57,7 @@
- #define TISCI_MSG_PROC_AUTH_BOOT_IMAGE	0xc120
- #define TISCI_MSG_GET_PROC_BOOT_STATUS	0xc400
- #define TISCI_MSG_WAIT_PROC_BOOT_STATUS	0xc401
-+#define TISCI_MSG_PROC_AUTH_APPLY_FWLS	0xc402
- 
- /* Resource Management Requests */
- #define TI_SCI_MSG_GET_RESOURCE_RANGE	0x1500
-@@ -85,6 +86,24 @@
- #define TISCI_MSG_FWL_GET		0x9001
- #define TISCI_MSG_FWL_CHANGE_OWNER	0x9002
- 
-+/* LPM requests */
-+#define TISCI_MSG_SYNC_RESUME			(0x0302U)
-+#define TISCI_MSG_CONTINUE_RESUME		(0x0303U)
-+#define TISCI_MSG_CORE_RESUME			(0x0304U)
-+#define TISCI_MSG_ABORT_ENTER_SLEEP		(0x0305U)
-+#define TISCI_MSG_LPM_WAKE_REASON		(0x0306U)
-+#define TISCI_MSG_SET_IO_ISOLATION		(0x0307U)
-+#define TISCI_MSG_MIN_CONTEXT_RESTORE		(0x0308U)
-+#define TISCI_MSG_LPM_SET_DEVICE_CONSTRAINT	(0x0309U)
-+#define TISCI_MSG_LPM_SET_LATENCY_CONSTRAINT	(0x030AU)
-+#define TISCI_MSG_LPM_GET_DEVICE_CONSTRAINT	(0x030BU)
-+#define TISCI_MSG_LPM_GET_LATENCY_CONSTRAINT	(0x030CU)
-+#define TISCI_MSG_LPM_GET_NEXT_SYS_MODE		(0x030DU)
-+#define TISCI_MSG_LPM_GET_NEXT_HOST_STATE	(0x030EU)
-+#define TISCI_MSG_LPM_ENCRYPT			(0x030FU)
-+#define TISCI_MSG_LPM_DECRYPT			(0x0310U)
-+#define TISCI_MSG_LPM_SAVE_ADDR			(0x0313U)
-+
- /**
-  * struct ti_sci_msg_hdr - Generic Message Header for All messages and responses
-  * @type:	Type of messages: One of TI_SCI_MSG* values
-@@ -1588,4 +1607,77 @@ struct ti_sci_msg_min_restore_context_req {
- 	u32			ctx_hi;
- } __packed;
- 
-+/*
-+ * struct ti_sci_msg_core_resume_req - Request for TISCI_MSG_CORE_RESUME.
-+ *
-+ * @hdr:			Generic Header
-+ *
-+ * This message is to be sent to start the TFA on the main core.
-+ * The TIFS will launch the TFA from the entrypoint saved via the ENTER_SLEEP
-+ * message.
-+ */
-+struct ti_sci_msg_core_resume_req {
-+	struct ti_sci_msg_hdr	hdr;
-+} __packed;
-+
-+/**
-+ * struct ti_sci_msg_core_resume_resp - Response for TISCI_MSG_CORE_RESUME.
-+ *
-+ * @hdr:			Generic Header
-+ */
-+struct ti_sci_msg_core_resume_resp {
-+	struct ti_sci_msg_hdr	hdr;
-+} __packed;
-+
-+/**
-+ * struct ti_sci_msg_decrypt_tfa_req - Request for TISCI_MSG_LPM_DECRYPT.
-+ *
-+ * @hdr:			Generic Header
-+ * @unencrypted_address:	Address where the TFA should be decrypted
-+ * @encrypted_address:		Address where the TFA lies encrypted
-+ *
-+ * This message is to be sent when the system is resuming from suspend, in order
-+ * to restore the TFA.
-+ * The TIFS will decrypt the TFA at specified location and restore it in SRAM.
-+ */
-+struct ti_sci_msg_decrypt_tfa_req {
-+	struct ti_sci_msg_hdr	hdr;
-+	u64			unencrypted_address;
-+} __packed;
-+
-+/**
-+ * struct ti_sci_msg_decrypt_tfa_resp - Response for TISCI_MSG_LPM_DECRYPT.
-+ *
-+ * @hdr:			Generic Header
-+ */
-+struct ti_sci_msg_decrypt_tfa_resp {
-+	struct ti_sci_msg_hdr	hdr;
-+} __packed;
-+
-+/**
-+ * struct tisci_msg_lpm_save_ctx_addr_req - Request for TISCI_MSG_LPM_SAVE_ADDR.
-+ *
-+ * @hdr:			Generic Header
-+ * @ctx_addr:	Address where the LPM data is to be saved
-+ * @size:		Size of the context save memory region
-+ *
-+ * This message is sent to TIFS to inform it about the addresse where it
-+ * will save the context to in case of system suspend and where to get the
-+ * context back from when resuming the system
-+ */
-+struct tisci_msg_lpm_save_ctx_addr_req {
-+	struct ti_sci_msg_hdr	hdr;
-+	u64			ctx_addr;
-+	u32			size;
-+} __packed;
-+
-+/**
-+ * struct tisci_msg_lpm_save_ctx_addr_resp - Response for TISCI_MSG_SAVE_ADDR.
-+ *
-+ * @hdr:			Generic Header
-+ */
-+struct tisci_msg_lpm_save_ctx_addr_resp {
-+	struct ti_sci_msg_hdr	hdr;
-+} __packed;
-+
- #endif /* __TI_SCI_H */
-diff --git a/include/linux/soc/ti/ti_sci_protocol.h b/include/linux/soc/ti/ti_sci_protocol.h
-index 6b1dd801f5f8..1d0a6340e1ee 100644
---- a/include/linux/soc/ti/ti_sci_protocol.h
-+++ b/include/linux/soc/ti/ti_sci_protocol.h
-@@ -336,6 +336,8 @@ struct ti_sci_proc_ops {
- 				    u32 *sts_flags);
- 	int (*proc_shutdown_no_wait)(const struct ti_sci_handle *handle,
- 				     u8 pid);
-+	int (*proc_auth_apply_fwls)(const struct ti_sci_handle *handle,
-+				    u64 *image_addr, u32 *image_size);
- };
- 
- #define TI_SCI_RING_MODE_RING			(0)
-@@ -635,9 +637,15 @@ struct ti_sci_fwl_ops {
- /**
-  * struct ti_sci_lpm_ops - Low Power Mode operations
-  * @min_context_restore: Request restoring context from DDR.
-+ * @decrypt_tfa: Request for decrypting TFA at specific address.
-+ * @core_resume: Request for resuming TFA once decrypted.
-+ * @lpm_save_addr: Send DDR Save address to TIFS
-  */
- struct ti_sci_lpm_ops {
- 	int (*min_context_restore)(const struct ti_sci_handle *handle, u64 ctx_addr);
-+	int (*decrypt_tfa)(const struct ti_sci_handle *handle,	u64 unencrypted_address);
-+	int (*core_resume)(const struct ti_sci_handle *handle);
-+	int (*lpm_save_addr)(const struct ti_sci_handle *handle, u64 context_addr, u32 size);
- };
- 
- /**
