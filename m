@@ -4,50 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BFF07FF886F
-	for <u-boot@archiver.kernel.org>; Thu, 30 Apr 2026 22:34:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0E3BFF886F
+	for <u-boot@archiver.kernel.org>; Thu, 30 Apr 2026 22:55:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3A9EE8464E;
-	Fri,  1 May 2026 00:34:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=netcube.li
+	by phobos.denx.de (Postfix) with ESMTP id 3FAE7803C6;
+	Fri,  1 May 2026 00:55:32 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=samsung.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=netcube.li header.i=@netcube.li header.b="HrxdV1tS";
+	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="gY7WlJsj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 553F08464E; Fri,  1 May 2026 00:34:02 +0200 (CEST)
-Received: from mail.netcube.li (mail.netcube.li [173.249.15.149])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+ id 4D4EA80F0E; Thu, 30 Apr 2026 22:16:05 +0200 (CEST)
+Received: from mailout1.w1.samsung.com (mailout1.w1.samsung.com
+ [210.118.77.11])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2C65C845E9
- for <u-boot@lists.denx.de>; Fri,  1 May 2026 00:34:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7BD1F803C6
+ for <u-boot@lists.denx.de>; Thu, 30 Apr 2026 22:15:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=netcube.li
+ dmarc=pass (p=none dis=none) header.from=samsung.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=lukas.schmid@netcube.li
-dkim-signature: v=1; a=rsa-sha256; d=netcube.li; s=s1;
- c=relaxed/relaxed; q=dns/txt;
- h=From:Subject:Date:Message-ID:To:CC:MIME-Version:Content-Transfer-Encoding:In-Reply-To:References;
- bh=xefSctjPuuAIiDQIo2+rCMrMoGaL2bChSeJJ0RrE7XU=;
- b=HrxdV1tS6DMOotAUohcBDHGiK8z/jc4lhOypRS8mdTJfOV1D90pf26ycH3yv6fKZM67wDYqcBcv7DC1U2ti9OVG76W26dnuWb7pOsijKyWWgNUwU7U2c0NhCNx87eajB4bAlQ+/K9r8tmgZ+GyXfw0WLaS9RnUaFO4mZ9irr/z0=
-Received: from lukas-hpz440workstation.lan.sk100508.local
- (193-80-178-216.hdsl.highway.telekom.at [193.80.178.216])
- by mail.netcube.li with ESMTPA ; Fri, 1 May 2026 00:33:50 +0200
-From: Lukas Schmid <lukas.schmid@netcube.li>
-To: Andre Przywara <andre.przywara@arm.com>, Tom Rini <trini@konsulko.com>,
- Hans de Goede <hdegoede@redhat.com>,
- Jerome Forissier <jerome.forissier@arm.com>
-Cc: Lukas Schmid <lukas.schmid@netcube.li>,
-	u-boot@lists.denx.de
-Subject: [PATCH v2 6/6] sunxi: add support for NetCube Systems Nagami and
- associated carrier boards
-Date: Fri,  1 May 2026 00:33:05 +0200
-Message-ID: <20260430223319.2663939-7-lukas.schmid@netcube.li>
+ spf=pass smtp.mailfrom=l.stelmach@samsung.com
+Received: from eucas1p2.samsung.com (unknown [182.198.249.207])
+ by mailout1.w1.samsung.com (KnoxPortal) with ESMTP id
+ 20260430201557euoutp0116d276aec7bdb479eef87bad047106d1~rO7wcaL861021310213euoutp01J
+ for <u-boot@lists.denx.de>; Thu, 30 Apr 2026 20:15:57 +0000 (GMT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mailout1.w1.samsung.com
+ 20260430201557euoutp0116d276aec7bdb479eef87bad047106d1~rO7wcaL861021310213euoutp01J
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
+ s=mail20170921; t=1777580157;
+ bh=0TiLTJl5VB7HDVP70zHSlpGOs61To0k0dW2SJ50GU30=;
+ h=From:To:Cc:Subject:Date:References:From;
+ b=gY7WlJsj+BHzcR26ZakF8diD+vZRcfo1ICW+TDV/taweWVFgFMl+zGkMPWvD0a69W
+ dpVJB7WFVGgKC9NGJj/2AS5RSKtWy0i+vpDEgqhYHqRggrxbNsKNALxRNDQAEfdSSf
+ 7Xx8G5opiC0lPXu1+vqs2cNVVz1BcGbCqhl9qnBE=
+Received: from eusmtip1.samsung.com (unknown [203.254.199.221]) by
+ eucas1p2.samsung.com (KnoxPortal) with ESMTPA id
+ 20260430201556eucas1p21ad12913ce5c83e8bf5cef3c4f50d81b~rO7wCOCV71435814358eucas1p2e;
+ Thu, 30 Apr 2026 20:15:56 +0000 (GMT)
+Received: from localhost (unknown [106.120.51.111]) by eusmtip1.samsung.com
+ (KnoxPortal) with ESMTPA id
+ 20260430201556eusmtip1f8f39edb0d6794800177afe0ddd2a51c~rO7v_yfv31351913519eusmtip1E;
+ Thu, 30 Apr 2026 20:15:56 +0000 (GMT)
+From: =?UTF-8?q?=C5=81ukasz=20Stelmach?= <l.stelmach@samsung.com>
+To: u-boot@lists.denx.de
+Cc: Marek Szyprowski <m.szyprowski@samsung.com>,
+ =?UTF-8?q?=C5=81ukasz=20Stelmach?= <l.stelmach@samsung.com>
+Subject: [PATCH] fastboot: read fastboot buffer address from fastboot_addr_r
+Date: Thu, 30 Apr 2026 22:14:52 +0200
+Message-ID: <20260430201503.320359-1-l.stelmach@samsung.com>
 X-Mailer: git-send-email 2.47.3
-In-Reply-To: <20260430223319.2663939-1-lukas.schmid@netcube.li>
-References: <20260430223319.2663939-1-lukas.schmid@netcube.li>
 MIME-Version: 1.0
+Organization: Samsung R&D Institute Poland
 Content-Transfer-Encoding: 8bit
+X-CMS-MailID: 20260430201556eucas1p21ad12913ce5c83e8bf5cef3c4f50d81b
+X-Msg-Generator: CA
+Content-Type: text/plain; charset="utf-8"
+X-RootMTR: 20260430201556eucas1p21ad12913ce5c83e8bf5cef3c4f50d81b
+X-EPHeader: CA
+X-CMS-RootMailID: 20260430201556eucas1p21ad12913ce5c83e8bf5cef3c4f50d81b
+References: <CGME20260430201556eucas1p21ad12913ce5c83e8bf5cef3c4f50d81b@eucas1p2.samsung.com>
+X-Mailman-Approved-At: Fri, 01 May 2026 00:55:30 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -64,201 +82,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-NetCube Systems Nagami is a system-on-module based on the Allwinner
-T113-S3 and T113-S4 series chips.
+Following the previous advice (link below) check fastbooot_addr_r
+environment variable for fastboot buffer address.
 
-Its features include:
-* Dual ARM Cortex-A7 @ 1.2 GHz
-* 128/256 MiB DDR3 memory, 4 GiB eMMC
-* 10/100 Ethernet PHY
-* 1x USB 2.0 OTG, 1x USB 2.0 host
-* 1x SPI interface with HOLD/WP
-* Up to 5 UARTs (2 with RTS/CTS)
-* Up to 4 I2C interfaces
-* Up to 2 CAN 2.0B interfaces
-* Up to 2 I2S/PCM interfaces
-* Up to 1 SPDIF input and output
-* I2C extension interface with INT
-
-Add defconfigs for the basic carrier and keypad carrier variants,
-plus a secure-boot example defconfig for the basic carrier.
-
-The basic carrier brings out the SD interface to a microSD slot, the
-USB host to USB-A, and USB OTG to micro-B. It has an Ethernet
-MagJack and exposes CAN, I2C, SPI, I2S and GPIO signals on pin
-headers.
-
-The keypad carrier adds an I2C-connected PN532 NFC reader, a 4x3
-keypad, Ethernet with PoE, a USB mini-B diagnostics port, and a
-two-colour status LED.
-
-Signed-off-by: Lukas Schmid <lukas.schmid@netcube.li>
+Link: https://lore.kernel.org/u-boot/aWiWFrdwvy7-IK63@sumit-xelite/
+Signed-off-by: Łukasz Stelmach <l.stelmach@samsung.com>
 ---
- .../netcube_nagami_basic_carrier_defconfig    | 43 +++++++++++++++
- ..._nagami_basic_carrier_secureboot_defconfig | 52 +++++++++++++++++++
- .../netcube_nagami_keypad_carrier_defconfig   | 43 +++++++++++++++
- 3 files changed, 138 insertions(+)
- create mode 100644 configs/netcube_nagami_basic_carrier_defconfig
- create mode 100644 configs/netcube_nagami_basic_carrier_secureboot_defconfig
- create mode 100644 configs/netcube_nagami_keypad_carrier_defconfig
+ drivers/fastboot/fb_common.c | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/configs/netcube_nagami_basic_carrier_defconfig b/configs/netcube_nagami_basic_carrier_defconfig
-new file mode 100644
-index 00000000000..ab56479545d
---- /dev/null
-+++ b/configs/netcube_nagami_basic_carrier_defconfig
-@@ -0,0 +1,43 @@
-+CONFIG_ARM=y
-+CONFIG_ARCH_SUNXI=y
-+CONFIG_DEFAULT_DEVICE_TREE="allwinner/sun8i-t113s-netcube-nagami-basic-carrier"
-+CONFIG_DRAM_CLK=792
-+CONFIG_SPL=y
-+CONFIG_DRAM_SUNXI_ODT_EN=0
-+CONFIG_DRAM_SUNXI_TPR0=0x004a2195
-+CONFIG_DRAM_SUNXI_TPR11=0x340000
-+CONFIG_DRAM_SUNXI_TPR12=0x46
-+CONFIG_DRAM_SUNXI_TPR13=0x34000100
-+CONFIG_MACH_SUN8I_R528=y
-+CONFIG_DRAM_ZQ=8092667
-+CONFIG_SUNXI_MINIMUM_DRAM_MB=128
-+CONFIG_MMC_SUNXI_SLOT_EXTRA=2
-+# CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
-+CONFIG_BOOTDELAY=1
-+CONFIG_PREBOOT="gpio set PD9"
-+# CONFIG_SYS_DEVICE_NULLDEV is not set
-+# CONFIG_SYS_MMCSD_FS_BOOT is not set
-+CONFIG_SYS_PROMPT="Nagami> "
-+CONFIG_CMD_EEPROM=y
-+CONFIG_SYS_I2C_EEPROM_BUS=1
-+CONFIG_CMD_I2C=y
-+CONFIG_CMD_USB_MASS_STORAGE=y
-+CONFIG_ENV_IS_IN_MMC=y
-+CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
-+CONFIG_USE_HOSTNAME=y
-+CONFIG_HOSTNAME="nagami"
-+CONFIG_VERSION_VARIABLE=y
-+# CONFIG_USB_FUNCTION_FASTBOOT is not set
-+CONFIG_SYS_I2C_MVTWSI=y
-+CONFIG_MISC=y
-+CONFIG_NVMEM=y
-+CONFIG_I2C_EEPROM=y
-+CONFIG_SYS_I2C_EEPROM_ADDR=0x50
-+CONFIG_SUPPORT_EMMC_BOOT=y
-+CONFIG_RMII=y
-+CONFIG_SUN8I_EMAC=y
-+CONFIG_CONS_INDEX=4
-+CONFIG_USB_EHCI_HCD=y
-+CONFIG_USB_OHCI_HCD=y
-+CONFIG_USB_MUSB_GADGET=y
-+CONFIG_USB_GADGET_DOWNLOAD=y
-diff --git a/configs/netcube_nagami_basic_carrier_secureboot_defconfig b/configs/netcube_nagami_basic_carrier_secureboot_defconfig
-new file mode 100644
-index 00000000000..65bf42299f8
---- /dev/null
-+++ b/configs/netcube_nagami_basic_carrier_secureboot_defconfig
-@@ -0,0 +1,52 @@
-+CONFIG_ARM=y
-+CONFIG_ARCH_SUNXI=y
-+CONFIG_DEFAULT_DEVICE_TREE="allwinner/sun8i-t113s-netcube-nagami-basic-carrier"
-+CONFIG_DRAM_CLK=792
-+CONFIG_SPL=y
-+CONFIG_DRAM_SUNXI_ODT_EN=0
-+CONFIG_DRAM_SUNXI_TPR0=0x004a2195
-+CONFIG_DRAM_SUNXI_TPR11=0x340000
-+CONFIG_DRAM_SUNXI_TPR12=0x46
-+CONFIG_DRAM_SUNXI_TPR13=0x34000100
-+CONFIG_MACH_SUN8I_R528=y
-+CONFIG_DRAM_ZQ=8092667
-+CONFIG_SUNXI_MINIMUM_DRAM_MB=128
-+CONFIG_MMC_SUNXI_SLOT_EXTRA=2
-+CONFIG_SPL_IMAGE_TYPE_SUNXI_TOC0=y
-+# CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
-+CONFIG_FIT_VERBOSE=y
-+CONFIG_SPL_FIT_PRINT=y
-+CONFIG_SPL_FIT_SIGNATURE=y
-+CONFIG_SPL_LOAD_FIT=y
-+CONFIG_LEGACY_IMAGE_FORMAT=y
-+CONFIG_BOOTDELAY=1
-+CONFIG_PREBOOT="gpio set PD9"
-+# CONFIG_SYS_DEVICE_NULLDEV is not set
-+CONFIG_SPL_MAX_SIZE=0x17fa0
-+CONFIG_SPL_LEGACY_IMAGE_FORMAT=y
-+# CONFIG_SYS_MMCSD_FS_BOOT is not set
-+CONFIG_SYS_PROMPT="Nagami> "
-+CONFIG_CMD_EEPROM=y
-+CONFIG_SYS_I2C_EEPROM_BUS=1
-+CONFIG_CMD_I2C=y
-+CONFIG_CMD_USB_MASS_STORAGE=y
-+CONFIG_SPL_OF_CONTROL=y
-+CONFIG_ENV_IS_IN_MMC=y
-+CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
-+CONFIG_USE_HOSTNAME=y
-+CONFIG_HOSTNAME="nagami"
-+CONFIG_VERSION_VARIABLE=y
-+# CONFIG_USB_FUNCTION_FASTBOOT is not set
-+CONFIG_SYS_I2C_MVTWSI=y
-+CONFIG_MISC=y
-+CONFIG_NVMEM=y
-+CONFIG_I2C_EEPROM=y
-+CONFIG_SYS_I2C_EEPROM_ADDR=0x50
-+CONFIG_SUPPORT_EMMC_BOOT=y
-+CONFIG_RMII=y
-+CONFIG_SUN8I_EMAC=y
-+CONFIG_CONS_INDEX=4
-+CONFIG_USB_EHCI_HCD=y
-+CONFIG_USB_OHCI_HCD=y
-+CONFIG_USB_MUSB_GADGET=y
-+CONFIG_USB_GADGET_DOWNLOAD=y
-diff --git a/configs/netcube_nagami_keypad_carrier_defconfig b/configs/netcube_nagami_keypad_carrier_defconfig
-new file mode 100644
-index 00000000000..c4d44e9dddc
---- /dev/null
-+++ b/configs/netcube_nagami_keypad_carrier_defconfig
-@@ -0,0 +1,43 @@
-+CONFIG_ARM=y
-+CONFIG_ARCH_SUNXI=y
-+CONFIG_DEFAULT_DEVICE_TREE="allwinner/sun8i-t113s-netcube-nagami-keypad-carrier"
-+CONFIG_DRAM_CLK=792
-+CONFIG_SPL=y
-+CONFIG_DRAM_SUNXI_ODT_EN=0
-+CONFIG_DRAM_SUNXI_TPR0=0x004a2195
-+CONFIG_DRAM_SUNXI_TPR11=0x340000
-+CONFIG_DRAM_SUNXI_TPR12=0x46
-+CONFIG_DRAM_SUNXI_TPR13=0x34000100
-+CONFIG_MACH_SUN8I_R528=y
-+CONFIG_DRAM_ZQ=8092667
-+CONFIG_SUNXI_MINIMUM_DRAM_MB=128
-+CONFIG_MMC_SUNXI_SLOT_EXTRA=2
-+# CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
-+CONFIG_BOOTDELAY=1
-+CONFIG_PREBOOT="gpio set PD9"
-+# CONFIG_SYS_DEVICE_NULLDEV is not set
-+# CONFIG_SYS_MMCSD_FS_BOOT is not set
-+CONFIG_SYS_PROMPT="Nagami> "
-+CONFIG_CMD_EEPROM=y
-+CONFIG_SYS_I2C_EEPROM_BUS=1
-+CONFIG_CMD_I2C=y
-+CONFIG_CMD_USB_MASS_STORAGE=y
-+CONFIG_ENV_IS_IN_MMC=y
-+CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
-+CONFIG_USE_HOSTNAME=y
-+CONFIG_HOSTNAME="nagami"
-+CONFIG_VERSION_VARIABLE=y
-+# CONFIG_USB_FUNCTION_FASTBOOT is not set
-+CONFIG_SYS_I2C_MVTWSI=y
-+CONFIG_MISC=y
-+CONFIG_NVMEM=y
-+CONFIG_I2C_EEPROM=y
-+CONFIG_SYS_I2C_EEPROM_ADDR=0x50
-+CONFIG_SUPPORT_EMMC_BOOT=y
-+CONFIG_RMII=y
-+CONFIG_SUN8I_EMAC=y
-+CONFIG_CONS_INDEX=4
-+CONFIG_USB_EHCI_HCD=y
-+CONFIG_USB_OHCI_HCD=y
-+CONFIG_USB_MUSB_GADGET=y
-+CONFIG_USB_GADGET_DOWNLOAD=y
+diff --git a/drivers/fastboot/fb_common.c b/drivers/fastboot/fb_common.c
+index 68f92c4b887..4579f30b52e 100644
+--- a/drivers/fastboot/fb_common.c
++++ b/drivers/fastboot/fb_common.c
+@@ -226,7 +226,9 @@ void fastboot_set_progress_callback(void (*progress)(const char *msg))
+  */
+ void fastboot_init(void *buf_addr, u32 buf_size)
+ {
+-	fastboot_buf_addr = buf_addr ? buf_addr :
++	void *_buf_addr = (void *)env_get_hex("fastboot_addr_r", 0);
++
++	fastboot_buf_addr = buf_addr ? buf_addr : _buf_addr ? _buf_addr :
+ 				       (void *)CONFIG_FASTBOOT_BUF_ADDR;
+ 	fastboot_buf_size = buf_size ? buf_size : CONFIG_FASTBOOT_BUF_SIZE;
+ 	fastboot_set_progress_callback(NULL);
 -- 
 2.47.3
-
 
