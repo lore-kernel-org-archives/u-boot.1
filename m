@@ -4,103 +4,102 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06015CCFA13
-	for <u-boot@archiver.kernel.org>; Thu, 30 Apr 2026 21:31:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97AF0CCFA13
+	for <u-boot@archiver.kernel.org>; Thu, 30 Apr 2026 21:33:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 922D483FB5;
-	Thu, 30 Apr 2026 23:31:37 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3210A83A91;
+	Thu, 30 Apr 2026 23:33:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=jannau.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=jannau.net header.i=@jannau.net header.b="CuQ85OoV";
-	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="uPIrJ7s8";
+	dkim=pass (2048-bit key; unprotected) header.d=jannau.net header.i=@jannau.net header.b="WACrN6M5";
+	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="QEkxeu0h";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4EBDF84198; Thu, 30 Apr 2026 23:31:35 +0200 (CEST)
+ id 89B93841D7; Thu, 30 Apr 2026 23:33:33 +0200 (CEST)
 Received: from fout-b4-smtp.messagingengine.com
  (fout-b4-smtp.messagingengine.com [202.12.124.147])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1A28D80086
- for <u-boot@lists.denx.de>; Thu, 30 Apr 2026 23:31:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1538A83936
+ for <u-boot@lists.denx.de>; Thu, 30 Apr 2026 23:33:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=jannau.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=j@jannau.net
 Received: from phl-compute-06.internal (phl-compute-06.internal [10.202.2.46])
- by mailfout.stl.internal (Postfix) with ESMTP id E83641D0005D;
- Thu, 30 Apr 2026 17:31:31 -0400 (EDT)
-Received: from phl-frontend-03 ([10.202.2.162])
- by phl-compute-06.internal (MEProxy); Thu, 30 Apr 2026 17:31:32 -0400
+ by mailfout.stl.internal (Postfix) with ESMTP id EE3E51D00091;
+ Thu, 30 Apr 2026 17:33:29 -0400 (EDT)
+Received: from phl-frontend-04 ([10.202.2.163])
+ by phl-compute-06.internal (MEProxy); Thu, 30 Apr 2026 17:33:30 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=jannau.net; h=cc
  :cc:content-transfer-encoding:content-type:content-type:date
  :date:from:from:in-reply-to:message-id:mime-version:reply-to
- :subject:subject:to:to; s=fm1; t=1777584691; x=1777671091; bh=fV
- 7ND8lCfHA8AbXjobBXZpgI/7XRSoWskhFRK2TN6OQ=; b=CuQ85OoVLSrf/FwnQa
- U00eqMV91Sue7b683R8wF78Qd0L7NFFjO2fwS/f/oUHA1W0NnqB/asBQukB1T0lv
- tsTeUEXD1SgYeHUkjd75IqBCS0wozBgzWQeVc+TPLWvLodKubeSInU0gTU4TM1cA
- JFwZCzzIjq8L2jFfO9ze11OcktVpwJ3qcLoLU59BC7nZWuYskXZXa06cgN/vhMUs
- XMq77D5JmDQleqPNTgUF3fRThD50093jgLPg8aYAqspYTKa83ywIqITh4V6ZASwq
- Kqh8nnyvDz+p0AjspqMtk2+I7PaBFOjmNdsTqkwffS8E0cOSgcNz72Sbe3aWTXj/
- STtQ==
+ :subject:subject:to:to; s=fm1; t=1777584809; x=1777671209; bh=ub
+ Kf6xI9bXRuuxmYMF6cyH7Rr2x39Yay8o2o6GYX1TE=; b=WACrN6M5JXhvDvG+xD
+ bbgzaNLeq2kTxFBVamspE4vB6LduTMF3rpKNZqc9SaO9guM/ELD8kAKEWgw+n6IF
+ 5qFwLZIv3YGzaSsWvUp9fETHhFuNj2InNxzAIOI17ifpPBnVRTdr7LiiLgC70TlP
+ 8T9x/p/0ZfiGLgApqZVmpRHWkZnJYkOGWU78diiInOGcoqSABO+kJGWoW7BIxgj6
+ RgV4/0EYYPGb4n73aFB7yHGo33M8MOHRhOy6Xa41ICpDj781BhrmfOKnp4ViIvEl
+ RbL7+ZV39X3rFGBDNxB6Bk/6IeKZoDQPbi7a3MNeHppYvEgIT2yB5OI7W6bIU+vV
+ Pxiw==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
  messagingengine.com; h=cc:cc:content-transfer-encoding
  :content-type:content-type:date:date:feedback-id:feedback-id
  :from:from:in-reply-to:message-id:mime-version:reply-to:subject
  :subject:to:to:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
- fm2; t=1777584691; x=1777671091; bh=fV7ND8lCfHA8AbXjobBXZpgI/7XR
- SoWskhFRK2TN6OQ=; b=uPIrJ7s8A84ND20eB/XOAz/m+jmUlg1KKVEdSGI/H6Bu
- GO7nsGLdejegxm3V8GcP5+jvej9WN7oTflDCPSuuqIpNqBhMtd7nAafFcut+DNm/
- 3k34P/f3cZJmN7e4iTMLq0/A67niWPVAEode1oUOlqcSDPAio5EskmZSS1km8dAG
- uP/sQnBQQMM8pb13CESLfjMawadchSa9bEIfXnEgZe0gOtr7jyOkLcr9+Ra4/2h2
- MNKGz27oh9aBuh411CXptSkoJKaLuFIls/4wIzBCN9Hk72ebHBnze3bF3dNKyFjC
- nJHgCGbiaJN25qWtqad/vRl1UWcqOQ4s0U68tTXO8Q==
-X-ME-Sender: <xms:M8rzaaPfxMuoT53V1FNlvzojQOaeOWvSDFBsMkIhLeXsUOAfR1i6tg>
- <xme:M8rzaf2QMENb2QmIlVvMrtYFstuwUqnKDbXgpay80oLbTM1BZaDP6nwQyRBo0M4Jv
- 1fEG03zdE1wlLfnQQlwIlEAUWrLyKIASi1kxniXXHe-3MwSWG4L_iw>
-X-ME-Received: <xmr:M8rzaZmcP_DdbFJNDGUgG61GlxSphc4slZ8Vv3nYn6m2ImO6_wBdPrAO8G2-RrKFkZmUSiE-TIo0Idv68qdA8xzq0lpAusItq9v25A>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefhedrtddtgdekkeegtdcutefuodetggdotefrod
+ fm2; t=1777584809; x=1777671209; bh=ubKf6xI9bXRuuxmYMF6cyH7Rr2x3
+ 9Yay8o2o6GYX1TE=; b=QEkxeu0hCxZMNrTHyqMKIUW6M1vYWZwyzL+1hOaPVTSi
+ nDUSA7R/v9gvBOKsiG6W8VE5YGjUe5yZkxRrDkjnmGQMqb70NFMkV/KWWMU6lyeI
+ TSSsQI+ETMZqctwfSk8fIFkXHJ6OVVFi6hXXBCfOGi/qfyl9qeUq+3O7OACMQjJb
+ kM2VfvjC3YHiFikIP2T+nLYppQblLcv59OQJGLlvv/qcvlcvf5gvvEOvCg+EQh5n
+ toG6yaophChFtUEyZmdq71RKKxZwhf7hkOhLST3PhZj6lFjdUVSxAiTLtNW+gA2D
+ 1Z95WcoOV8GKfVx+eAALT8b4TDQB0aoPlEdc7S08eg==
+X-ME-Sender: <xms:qcrzadpv4MOa-_cABGm9sPrjCLpO7nx0X67t480LmSt6VjNjIz9gZA>
+ <xme:qcrzaWo8NJeMnsE-8-sQ-xhfkG9Z6imRnnK9zrUjjRH-DV0xgjBh3Olvzbcqzj0QA
+ F5CB5pLT8vOdTmu9qe-LucZGO45pUM7HdeQOCZnPCJhEenWqUJDxBw>
+X-ME-Received: <xmr:qcrzafMCJ1sr3di5DXSv41J5gcLMqtyKexIlbcGk16PXorUp4VJL-Y1he43byHzaaerrO3ete1K8cxDiOE9z9IlaA4zAI090dGN2jQ>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefhedrtddtgdekkeegudcutefuodetggdotefrod
  ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpuffrtefokffrpgfnqfghnecuuegr
  ihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfjug
  hrpefhfffugggtgffkvfevofesthejredtredtjeenucfhrhhomheplfgrnhhnvgcuifhr
  uhhnrghuuceojhesjhgrnhhnrghurdhnvghtqeenucggtffrrghtthgvrhhnpeefheeltd
  ehfeetjeefvdehteeutddtteelgeduueetjeevteeifeeuvdefffdvieenucffohhmrghi
  nhepkhgvrhhnvghlrdhorhhgnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpe
- hmrghilhhfrhhomhepjhesjhgrnhhnrghurdhnvghtpdhnsggprhgtphhtthhopeehpdhm
- ohguvgepshhmthhpohhuthdprhgtphhtthhopehpvghnghdrfhgrnhesnhigphdrtghomh
- dprhgtphhtthhopehuqdgsohhotheslhhishhtshdruggvnhigrdguvgdprhgtphhtthho
- pehjsehjrghnnhgruhdrnhgvthdprhgtphhtthhopehtrhhinhhisehkohhnshhulhhkoh
- drtghomhdprhgtphhtthhopehjhhektddrtghhuhhnghesshgrmhhsuhhnghdrtghomh
-X-ME-Proxy: <xmx:M8rzaWVNdAJNvKfmYhB5GP3SN0KmBSifz0tpvm_e4pTiGwro6yW9qg>
- <xmx:M8rzaftuP61Bm_PklOuz35_z4ri0shukjJhf56XwvEESR6UaebCK6A>
- <xmx:M8rzaZYcGL_TwBTYS4irMKkC2RQg4E1dA0NA-28e0tAuuwQUQpeKGw>
- <xmx:M8rzaeU3dMtnjtgVZT-A_OQaLvKLtgZZpriUCYMwQYa_4w2Az1Vrrw>
- <xmx:M8rzadl_bmbKGUCcUTVVdB0LY9fKM4pLGVbIWbnvQPEXo6Nue2fYGUqm>
+ hmrghilhhfrhhomhepjhesjhgrnhhnrghurdhnvghtpdhnsggprhgtphhtthhopeegpdhm
+ ohguvgepshhmthhpohhuthdprhgtphhtthhopehtrhhinhhisehkohhnshhulhhkohdrtg
+ homhdprhgtphhtthhopehuqdgsohhotheslhhishhtshdruggvnhigrdguvgdprhgtphht
+ thhopehkvghtthgvnhhishesohhpvghnsghsugdrohhrghdprhgtphhtthhopehjsehjrg
+ hnnhgruhdrnhgvth
+X-ME-Proxy: <xmx:qcrzaXyhZic4R2-fzgNpomZ0DsJE2pytHd8NMVXULAZPva2GDfq3sg>
+ <xmx:qcrzaYtfWQ-THyVxkJs6B9pie-OWwAE7ReHjs5rOB2QqPy8D7xqdrA>
+ <xmx:qcrzaQ7ensE51zF76FaZeCy_l3PW1FCgC_y-yJjBKCCOtNmZ1QXmIg>
+ <xmx:qcrzaXQz-IyFk9pBD2_6y8FMaRFwIy6UBvtzKpTT2zPMCLvKTUHbBg>
+ <xmx:qcrzaaJCS0Ka_W16emRKNhXUElkxJnKFwkj6jJSSWV9QRiRZi8Mgc9cU>
 Feedback-ID: i47b949f6:Fastmail
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Thu,
- 30 Apr 2026 17:31:30 -0400 (EDT)
+ 30 Apr 2026 17:33:29 -0400 (EDT)
 From: Janne Grunau <j@jannau.net>
-Date: Thu, 30 Apr 2026 23:31:28 +0200
-Subject: [PATCH] power: domain: apple: Add "apple,t8103-pmgr-pwrstate"
- compatible
+Date: Thu, 30 Apr 2026 23:33:25 +0200
+Subject: [PATCH] spi: apple: Add "apple,t8103-spi" compatible
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260430-apple-compat-power-v1-1-0889d4334a7f@jannau.net>
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/x3MSwqAMAwA0atI1gbqhyJeRVyEmmpAbWhFBfHuF
- pdvMfNA4iicoC8eiHxKkrBnVGUBbqF9ZpQpG2pTW9M2Bkl1ZXRhUzpQw8URyRny3lJn2UEONbK
- X+58O4/t+z0sYpWQAAAA=
-X-Change-ID: 20260430-apple-compat-power-ac0aff6a86ec
+Message-Id: <20260430-apple-compat-spi-v1-1-6fb3a6fc499c@jannau.net>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/x3MSwqAMAwA0atI1gaqFkWvIi5CTTXgJ7QigvTuF
+ pdvMfNC5CAcYSheCHxLlPPIqMoC3ErHwihzNtSmbo1tDJLqxujOXenCqIJkfd93rvXeEuRMA3t
+ 5/uU4pfQBL+x1QGIAAAA=
+X-Change-ID: 20260430-apple-compat-spi-a4f997c6ff4a
 To: u-boot@lists.denx.de
-Cc: Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>, 
- Tom Rini <trini@konsulko.com>, Janne Grunau <j@jannau.net>
+Cc: Tom Rini <trini@konsulko.com>, Mark Kettenis <kettenis@openbsd.org>, 
+ Janne Grunau <j@jannau.net>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1342; i=j@jannau.net;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1226; i=j@jannau.net;
  s=yk2025; h=from:subject:message-id;
- bh=mGfkA6M41rBOWCT8aBVHaVgpD11fUdRPgxMjkss+20o=;
- b=owGbwMvMwCW2UNrmdq9+ahrjabUkhszPpwxfBu+yiPknVyzy9MSv89UFkVZMbb9T36zdEt6+X
- mjnpz33OkpZGMS4GGTFFFmStF92MKyuUYypfRAGM4eVCWQIAxenAEzk9w9GhrW7vYPmqvHmsb/d
- 97HQd5bvm1u2yjusNPXyMudwi0+98pfhf+oTpb7D+0x9s/NnppQYzWtZ+enX6wXX9+nz8b3sXiJ
- 7ngEA
+ bh=2O1qab8j0MiJpT7XPgOQgkNNi1dJK4EAvwIxsmVCJAc=;
+ b=owGbwMvMwCW2UNrmdq9+ahrjabUkhszPp5bP3ePlf3ZWSugH9T1V554WFt3i+KTYv9z6usfOD
+ Ulej371dZSyMIhxMciKKbIkab/sYFhdoxhT+yAMZg4rE8gQBi5OAZhIUArD/7p2v5TiUvOag9p7
+ V1rt+rd0d1ViJYezgcnKhUUVDRcFORn+J6+wLbBp/1XUs236a5eCwO8BG5MNJzFyzBG4d5rNXe4
+ dNwA=
 X-Developer-Key: i=j@jannau.net; a=openpgp;
  fpr=8B336A6BE4E5695E89B8532B81E806F586338419
 X-BeenThere: u-boot@lists.denx.de
@@ -120,35 +119,35 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 After discussion with the devicetree maintainers we agreed to not extend
-lists with the generic compatible "apple,pmgr-pwrstate" anymore [1]. Use
-"apple,t8103-pmgr-pwrstate" as base compatible as it is the SoC driver
-and bindings were originally written for.
+lists with the generic compatible "apple,spi" anymore [1]. Use
+"apple,t8103-spi" as base compatible as it is the SoC driver and
+bindings were originally written for.
 The t602x (M2 Pro/Max/Ultra) devicetrees submitted in [2] use this
-compatible as fallback instead of "apple,pmgr-pwrstate".
+compatible as fallback instead of "apple,spi".
 
 Link: https://lore.kernel.org/asahi/12ab93b7-1fc2-4ce0-926e-c8141cfe81bf@kernel.org/ [1]
 Link: https://lore.kernel.org/asahi/20250828-dt-apple-t6020-v1-0-507ba4c4b98e@jannau.net/ [2]
 Signed-off-by: Janne Grunau <j@jannau.net>
 ---
- drivers/power/domain/apple-pmgr.c | 1 +
+ drivers/spi/apple_spi.c | 1 +
  1 file changed, 1 insertion(+)
 
-diff --git a/drivers/power/domain/apple-pmgr.c b/drivers/power/domain/apple-pmgr.c
-index bf9940621ee..71fedb405da 100644
---- a/drivers/power/domain/apple-pmgr.c
-+++ b/drivers/power/domain/apple-pmgr.c
-@@ -110,6 +110,7 @@ static int apple_pmgr_of_xlate(struct power_domain *power_domain,
+diff --git a/drivers/spi/apple_spi.c b/drivers/spi/apple_spi.c
+index 5f94e9f7a74..088d02e3b90 100644
+--- a/drivers/spi/apple_spi.c
++++ b/drivers/spi/apple_spi.c
+@@ -270,6 +270,7 @@ static int apple_spi_probe(struct udevice *dev)
  }
  
- static const struct udevice_id apple_pmgr_ids[] = {
-+	{ .compatible = "apple,t8103-pmgr-pwrstate" },
- 	{ .compatible = "apple,pmgr-pwrstate" },
+ static const struct udevice_id apple_spi_of_match[] = {
++	{ .compatible = "apple,t8103-spi" },
+ 	{ .compatible = "apple,spi" },
  	{ /* sentinel */ }
  };
 
 ---
 base-commit: 88dc2788777babfd6322fa655df549a019aa1e69
-change-id: 20260430-apple-compat-power-ac0aff6a86ec
+change-id: 20260430-apple-compat-spi-a4f997c6ff4a
 
 Best regards,
 -- 
