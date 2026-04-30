@@ -4,93 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E20A3FF887E
-	for <u-boot@archiver.kernel.org>; Thu, 30 Apr 2026 00:02:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2EE6FF8875
+	for <u-boot@archiver.kernel.org>; Thu, 30 Apr 2026 01:09:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 74D9C8493F;
-	Thu, 30 Apr 2026 02:02:47 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 0F6D0848E3;
+	Thu, 30 Apr 2026 03:09:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Hv81nFtl";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="rTvee4Um";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6015284942; Thu, 30 Apr 2026 02:02:46 +0200 (CEST)
-Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
- [IPv6:2a00:1450:4864:20::52b])
+ id 9ACE5848FB; Thu, 30 Apr 2026 03:09:25 +0200 (CEST)
+Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
+ [IPv6:2607:f8b0:4864:20::336])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7214C84936
- for <u-boot@lists.denx.de>; Thu, 30 Apr 2026 02:02:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8182B848DA
+ for <u-boot@lists.denx.de>; Thu, 30 Apr 2026 03:09:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52b.google.com with SMTP id
- 4fb4d7f45d1cf-6720c7968e4so702527a12.0
- for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 17:02:44 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1777507363; cv=none;
- d=google.com; s=arc-20240605;
- b=RfSIoIReOzvOa3ejk2O0pI7zRG7czay9A4wyzOg3AnjQlUVdNge3vB0THUeLrU+RVi
- Ua6eJAjziovlEzfoYB3j3tSKyDRvwOUsZJIjIXt2wpglK3DNsd2bsHOCe+O7Gh8485Ci
- wvinYzwOfUtfOd55Uekb3foWTfJGt9qilEKyn9TdGxF91GTaEBHH9DSkOGCMB3LPKBNe
- nL7DSk8Z2oSloqF91AuFUNPST6fn6HqOT4/oiIzpDVZn5Q083szQPsGwO3NCScD6OfPS
- jzns3tnWslQznlURO8SLknCEhDh6yQh1bimfgypjBi6mk1aK+9vSaZM7kVu+2emuoSnG
- qQ5g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=cane7yuaFfxmoA72d/LcQwZMLfyk3tC3nPzvNP2P3L0=;
- fh=pP/Ie95w8nJZLbC+xDsByMDxNdw3oub9m+xBA2tN5ek=;
- b=ShSXTUJV807tHjCXbnJ91MxepUjjAQzj0ctKMRhoQxNRa9uZTj9N51wiCSgW2KdPie
- p1PwSpqOJBIp6YBL3rKL7SgKrMotEn1dMxOOprEf7pCkrsGlATu8oAnbqfy59v2qBQeF
- QzJBOLkqQML6CVdRatpADM7l2MreywifHyAkRhnOTSSTy/xWgY+jZMG55rOnGHsXvZpB
- 9ClvL0c5vu9MayG6ZrcyNlw1t7nmcKLONkNWkIEFm6XFQdZJWU/Xy38c5wW1bRsm/02e
- kSEEPLIEX7jodfSOSMAE0pR5MhRvl04b6ngPUg4E78tf40hjUSeljasJZrEOmqBPd0I7
- 6G8w==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x336.google.com with SMTP id
+ 46e09a7af769-7dbec19732eso327571a34.3
+ for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 18:09:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1777507363; x=1778112163; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=cane7yuaFfxmoA72d/LcQwZMLfyk3tC3nPzvNP2P3L0=;
- b=Hv81nFtl+SM+47RcxXiK0XKHGCGN4oH/SH39z2TrM+zBJWloVZQJ8KcnIXXPfN98jy
- 7H9Jw+fiWSydDJvFSA31Z3WxSSnD/ylZvUetQNZt5qObzV59oP9zfIWbNQwUgRLer/90
- BqRNyKUUYh2Pfb9wdgLUExWkeZwlPdrvcksD8=
+ d=konsulko.com; s=google; t=1777511362; x=1778116162; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=f/7JXr7iL6gs4EJurJd5XIn3oqkCEIAPYZCn/VHt36w=;
+ b=rTvee4UmGmX9muoXAwPANr8Q+PmiYBpEFgOXgiZzOqTwiBdFylPlPwE48x7hOfQ+rp
+ WpTOquCUOIa3a5XmA8zMORGwI3RqpyGdjjnC4WP0vTAx+4c3X/sKX4si2xzY0FOvyG4m
+ wj+CIQX3w6cmX4WMw9BFL+PktkcYStMkFklG0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777507363; x=1778112163;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=1e100.net; s=20251104; t=1777511362; x=1778116162;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=cane7yuaFfxmoA72d/LcQwZMLfyk3tC3nPzvNP2P3L0=;
- b=aROFDpRGMyO3zvmk3lgbVtW32owCfiwy80QLuqPKHSF6O5TxIZKhu5ZPjqBpDiUpwa
- DtiZPfe5MhUWv2Cl8jQvTwkWJDv3ASF0BdY+snbU2+r8HN8kWhHEfuFXkS9EQ/kRx71a
- cxa0tfKZbii5lwG+h52+64e+TTUD9PXu9N7++L15JqAVy8nvn8925B4CMH4IE4wcJkDO
- zJxXMzxY8YZSTuzCBCjNGfhPuU0dSO22v9gjpyQq6Hm+mHH2fs0McrKZEk3l2tRP7qtz
- +CQjeA8TstLmcFusv4cOdrJetcsUjuUzHM0yE3vdaRbkLFmWHFSxLIZQHIB9k5nh3dMI
- kSEw==
-X-Gm-Message-State: AOJu0YwWeUs23+7l1l56+G5oFtZQIRLjUQBL42W7Fo9r7mV87b2feaeX
- x/VjKa/GHBTyk+zL4kCSGwxew4mg2X+gi9Fr/l2Mvw43bhFcolRi9o7XiAgilNE4YIXtBWorqh0
- idD1MNOV2t/q7kcL7RGWXWcz064dWCfI/UvTIUQNI
-X-Gm-Gg: AeBDiethiZPX4pPCZ0+DOsRWlquE6vyscAzKrHxhr7H4Gjjm9t0oYyHmF9Ng1F+td9I
- T+M2PLQRVzrX/DmVKjG6uj7oUi4TkXQQLGdSbm+Evi1yFX/frtLVoUvC60C9w8xSkdvtfkvg/uW
- KDoaM55+pRB5A9lMKr5uHsxC2OFYPsKCUKU781hqF7/lBZS9DubmX/0gK1JVXIywUSvvCq2hiMe
- vfT1e0alG4r1xT2Jcf6mj26W71BzI0MEyhK/uCKMA2yLOezkrlpyc1cpBSrxa/FXq3RMqnc00J6
- kCSyT1ltXkl2rDfq
-X-Received: by 2002:a17:907:704:b0:ba3:961e:d5e4 with SMTP id
- a640c23a62f3a-bbb96fadc25mr9093666b.1.1777507363457; Wed, 29 Apr 2026
- 17:02:43 -0700 (PDT)
+ bh=f/7JXr7iL6gs4EJurJd5XIn3oqkCEIAPYZCn/VHt36w=;
+ b=V1+IiqRNf/uvRb2Pjhg1e4QKTnqa4bilYwm2a3rrVoP2tVb/JpCUY2JH2F5+WYV5U/
+ Ado8OjF7aslZSb7JsfUa80xBOSX0kqUjNI5IwGZ50hxLprkj4467dTBUmU69E8/rOBUC
+ eqU97Ja/1ZtqLboGpM/tLJzq3L2oNJzH/wYimEjMxg9SFPnMZl8zUc+Jtv0hbdAqsesw
+ LY/cvVpLRfq3tpgBzi3DkucK/XVMXUFW7275j7/bkDQqFh7dnCofGwXwNi1qEgepy/Ij
+ WVhwS3iTAJtikPrkIGZNhvdlHvDVmgSfZd6bXlfr/RzQKID/Ul7/3qWnTR4J3Wfn8dkM
+ kqIQ==
+X-Gm-Message-State: AOJu0YxPmRmArzLCAn6zLRu09P8MuGg07TbUrFZJIf13jvmDNHyKG0WT
+ aNb0SCFP5N0RwQc8ljBnGqVf8ElS0Gs6pzIVOIciH3gh7/BvhtAGHMnRcJgdCAw8fM92ZRl6j/B
+ CqVDKgpln/A==
+X-Gm-Gg: AeBDiev/EuCu8xqxysjmJ2fq/xhOGK6p/Iw1tmoHITX4TjohGKKieELZbBPp+oY2Csx
+ Ueem8BH0w7UH7XB/bvvnR9V0UQ+4y8Ty3PXro57bGt1cUhs8hXuLu8XkbB49UftQ0gnQdvhwSfh
+ rwQtYx3Aul/4JOO0ivIbhvGxouykATkCrZ0hbFpG+wCeApW6LBC3yoUh6h5z5NvdymdMQafMAXa
+ VktyP6gscIOQwPPDRpaDaGh4X7bLtRUN0ENbtAPEPum6CBaBQBcm7B6dlIiX550uMjbtNlGg30y
+ fy/Lbq/csSyhcGvmxWbkw6v2vqJcO4+1ZeRkAZ1jxa/4UJXI+pbJn36thKBo3fqG+yXi7s7ChPA
+ L5vFHulMdCOl68m8KtK588+DgZIU6chA4DgmWVU72ozxcgw7cxDHWoS2etxJCLD3OSKEXqTjIVK
+ oD4fuguACDHoK/5sMfidqwjgU/sqNH9RvjlmpXMTFNmyQbzG4cfX47zkDjKP5kGUO4q6hAlxeQ+
+ GJmWKcym0r4pibWP583f1rrffC5ebtqxnPUnf1m/r8xfTh9K6yGalkCCjMfOWBM
+X-Received: by 2002:a05:6820:f011:b0:694:a362:4b8f with SMTP id
+ 006d021491bc7-6967a4a0839mr503220eaf.6.1777511362199; 
+ Wed, 29 Apr 2026 18:09:22 -0700 (PDT)
+Received: from bill-the-cat.. (fixed-189-203-106-235.totalplay.net.
+ [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-6966bb9e1f6sm2248041eaf.3.2026.04.29.18.09.21
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 29 Apr 2026 18:09:21 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marex@nabladev.com>,
+ Tien Fong Chee <tien.fong.chee@altera.com>
+Subject: [PATCH 1/1] socfpga: vining: Enable LTO
+Date: Wed, 29 Apr 2026 19:09:18 -0600
+Message-ID: <20260430010918.1450541-1-trini@konsulko.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20260425033742.1519298-1-b-padhi@ti.com>
-In-Reply-To: <20260425033742.1519298-1-b-padhi@ti.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Wed, 29 Apr 2026 18:02:32 -0600
-X-Gm-Features: AVHnY4LVlBEW3JoqR54a2oFsr5mcGsLm7QRKQTyCNwRLuv6BQ988WxgCiFKGses
-Message-ID: <CAFLszTiwtioRRMCNEWTJLAQX=L2pXwoMjY7n1TcHn8YsrpHZyQ@mail.gmail.com>
-Subject: Re: [v4,00/11] Add support to boot TI K3 HSM M4 core
-To: b-padhi@ti.com
-Cc: u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,13 +94,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Beleswar,
+This platform is often close to the binary size limit and minor changes
+lead to exceeding image size. Enable LTO for this platform.
 
-On 2026-04-25T03:37:39, Padhi, Beleswar <b-padhi@ti.com> wrote:
+Signed-off-by: Tom Rini <trini@konsulko.com>
+---
+Cc: Marek Vasut <marex@nabladev.com>
+Cc: Tien Fong Chee <tien.fong.chee@altera.com>
+---
+ configs/socfpga_vining_fpga_defconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
-> This series adds support to boot HSM M4 core from R5 SPL stage.
+diff --git a/configs/socfpga_vining_fpga_defconfig b/configs/socfpga_vining_fpga_defconfig
+index f698b86e59fa..a280869e2085 100644
+--- a/configs/socfpga_vining_fpga_defconfig
++++ b/configs/socfpga_vining_fpga_defconfig
+@@ -16,6 +16,7 @@ CONFIG_SPL_TEXT_BASE=0xFFFF0000
+ CONFIG_SYS_BOOTM_LEN=0x2000000
+ CONFIG_TARGET_SOCFPGA_SOFTING_VINING_FPGA=y
+ CONFIG_ENV_OFFSET_REDUND=0x110000
++CONFIG_LTO=y
+ CONFIG_TIMESTAMP=y
+ CONFIG_FIT=y
+ CONFIG_DISTRO_DEFAULTS=y
+-- 
+2.43.0
 
-Could we have something in doc/ for this series?
-
-Regards,
-Simon
