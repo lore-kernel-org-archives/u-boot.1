@@ -4,83 +4,120 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA31FCCFA13
-	for <u-boot@archiver.kernel.org>; Thu, 30 Apr 2026 11:40:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F279AFF8875
+	for <u-boot@archiver.kernel.org>; Thu, 30 Apr 2026 11:58:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CD8E78460D;
-	Thu, 30 Apr 2026 13:39:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 7917380433;
+	Thu, 30 Apr 2026 13:58:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="mba1ADDn";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="PTCux8Rj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D0BEE84653; Thu, 30 Apr 2026 13:39:55 +0200 (CEST)
-Received: from mail-oi1-x233.google.com (mail-oi1-x233.google.com
- [IPv6:2607:f8b0:4864:20::233])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 525EB8063E; Thu, 30 Apr 2026 13:58:23 +0200 (CEST)
+Received: from MW6PR02CU001.outbound.protection.outlook.com
+ (mail-westus2azlp170120002.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c007::2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 591D8845E9
- for <u-boot@lists.denx.de>; Thu, 30 Apr 2026 13:39:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0029D803C6
+ for <u-boot@lists.denx.de>; Thu, 30 Apr 2026 13:58:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oi1-x233.google.com with SMTP id
- 5614622812f47-4645dde00a7so1332548b6e.1
- for <u-boot@lists.denx.de>; Thu, 30 Apr 2026 04:39:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1777549191; x=1778153991; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=OrRYGTdyq7s0A31ABfvjf4Ro2tkXeUzCc7DLYN9Tp98=;
- b=mba1ADDnzCjkTFOiSJ1Tg6MRsCeG60kuUFydmK57UXSu0QmBW8jox+3neEbP7BEY2W
- b25B/Gd80Y+j18rMEpHK6NyJRKOG0HDubGABBuek9ltblYQxYx5jxZICSW1OWM4wnuQ9
- 8jcXukySQK+O1E4gz1q4iyp0mNvm+bSbwywMs=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777549191; x=1778153991;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=OrRYGTdyq7s0A31ABfvjf4Ro2tkXeUzCc7DLYN9Tp98=;
- b=onEW+AK+bJm1/Vmd1+Tw9mGsgLfuSA6TzHLyPMqFW2GP5eGrQvU0ZIVV4DVZaMxVqH
- EYAf/SWohZ+07aFnASckQnADeZX7N7iASMKnpYQThu+A3x+6N8QnytvMJiuspGw3Fka+
- SHOVdNCAJCU7r9LWRrXaSlUnv3oc9kZybYT6Rbi1BjoTTJ/UbQVdEvt2vBk6/2lsxEAm
- Z+H9YQe5TgLh2elZcmwQxR1A1JjmJkDlDPm1lkiiExsUw0To9xBv0/s4VMv1mWCogLlL
- O4okdlVeSrxKx1wNfTWb3Z/pHGbEyzm/DehFi4s2Nq+VlcuTiSxh5KlKBKYX0qizzRjd
- M7uw==
-X-Gm-Message-State: AOJu0YwS3XTCJZq+nDPmPHSuHB+fV8z3t8t3Kg6ipsgovGXXor7lmOvc
- LDRQeY+0rJeM08eKmp67HNEeYawjw+BfektbrBFsTYRJQ4HspgKHmtJAqJf47EgX+a+CgJRSY/k
- zmoLDwg==
-X-Gm-Gg: AeBDiev+UmlQPDvDm16/4YbI40wNeA5KiC2tisC++FdT/GIwJ9CZpuZkKlwXdJuQDA9
- V9m5jjb+KHcc5Z5cjf8Ex9KHGpUliRjtwRyLD7ipj3GTxs3UF6TY13FFl2yldi0s3bR50mes8wN
- 3Q4LhJQQOFbi6wtXNTBGZREceSZv0dSkxRUAK9LBIvsscwA89mLmtGB7GjNVMkRkPdFJ2wURe2q
- k29iL8Xh4I+L+w7kOjBNm0j5yJtKqzgEFjXM1Fk3vyCIm1lZW+53wMXCq9XXUsfQN72f/GUnpIN
- Pk03rOEUlzonnJOd2BVTj8hym6RgcVAjjYQ1MEBX9dHsxP0gnUm1/G2V9HshZGmgW1JOaLJLxLR
- LucFR/tUmRIkbwHoV//k53EO6GRwPpw5LsQE1XvpENxKLHWPzj0sxdP4YEHlM/XEyffvXO4JQ/T
- yaqvyAi2sop2IO8cc6pYS0MV+VHg/N
-X-Received: by 2002:a05:6808:8489:b0:47b:d07b:ec9a with SMTP id
- 5614622812f47-47c6208140bmr583516b6e.15.1777549191433; 
- Thu, 30 Apr 2026 04:39:51 -0700 (PDT)
-Received: from chromium.org ([174.51.25.52]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-47c43ee0400sm2715523b6e.7.2026.04.30.04.39.48
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 30 Apr 2026 04:39:49 -0700 (PDT)
-From: Simon Glass <sjg@chromium.org>
-To: u-boot@lists.denx.de
-Cc: Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>,
- Heiko Schocher <hs@nabladev.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH 1/2] bitops: Guard GENMASK and GENMASK_ULL against prior
- defines
-Date: Thu, 30 Apr 2026 05:38:33 -0600
-Message-ID: <20260430113937.1274693-2-sjg@chromium.org>
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
+Authentication-Results: phobos.denx.de;
+ spf=fail smtp.mailfrom=michal.simek@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=Dz07k9UhvFaB4T+HJ1cUuxgQoWFJjPGO/I0CR8svxUWHOV2bQz9oRlyRSFUYBLLePFcnVWSk4npX0VVyhIZMnnoRWsTkXeDZWkq5zCE5E8Dy5gqBa6AiuybYCHFlWg1NRO33CJOQ3msBsEuYWeBiKTdQBKILXRR+wZkr0XfjeJVo8f4i8gdVW+cZfECavZq6kFwWd3upvYb8Sw1ZS+klrde8CgtseqL0Xp3nCbKnf3ppOqYBlVt/Mk6O1gevC30CsGMxTPgImZ3oKbbw6oZVgDoiZR6Db3F11hM/hRpS5cshsP7eUR27fmU6vStoXz0zqBIIMnjTJXHIpyxA3R/WwA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=22fYcog4NbGI2rv6siJr/bcUv0d71IrRlWfRt5Ly2gA=;
+ b=Nu5ww3NzkoU9iigfPGZFXZh747+SSSVhRn5OLk2JCJGvqg+rPPbJb78Qz5o+//o06Tb0i7cIEsiGRr9w4FTm1DRkEN+zITy0ZRMMECyqtbc0x7IODQ/K5eNQMmkwimoRBZv4XqOUWB24Xj7B2BZhq/Umo4PjELzLi7ld/kFFKzU6h5dPo9mwZ6ZkchmvZufkt+O+svphCMFZsgt5ft5rtllPwxNf7L86W6xWPpmJzbLcdlS2r4NDsbSU4BnSKt82Z6vkgvOYBLO7rLbxppg3FiuxVXuDj6YperrgdiNZUCVDJIH89Y7tV3FKf5C4xYuhfOwv8fdkSqfYn7BzQXwQxw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=22fYcog4NbGI2rv6siJr/bcUv0d71IrRlWfRt5Ly2gA=;
+ b=PTCux8Rjpp3nMsg3tuOM23RT+/q55Mk+YPLhP+4zFW+kpw8lcx0EzvfMplu229au5ZXhbIDx0eTvi+0yfXXUULCicS1fA9FOZJ1MEzcSJ4hdCM9lvflkBAdJJbpsVijE+PZ2INXoY0zYXi9g4+4Jvuj9V4NosauT3mUqOKdkPls=
+Received: from BY3PR05CA0017.namprd05.prod.outlook.com (2603:10b6:a03:254::22)
+ by DS7PR12MB8290.namprd12.prod.outlook.com (2603:10b6:8:d8::15) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9870.22; Thu, 30 Apr
+ 2026 11:58:16 +0000
+Received: from SJ1PEPF000026C4.namprd04.prod.outlook.com
+ (2603:10b6:a03:254:cafe::9c) by BY3PR05CA0017.outlook.office365.com
+ (2603:10b6:a03:254::22) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9870.22 via Frontend Transport; Thu,
+ 30 Apr 2026 11:58:16 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
+Received: from satlexmb08.amd.com (165.204.84.17) by
+ SJ1PEPF000026C4.mail.protection.outlook.com (10.167.244.101) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9846.18 via Frontend Transport; Thu, 30 Apr 2026 11:58:15 +0000
+Received: from satlexmb10.amd.com (10.181.42.219) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Thu, 30 Apr
+ 2026 06:58:06 -0500
+Received: from satlexmb07.amd.com (10.181.42.216) by satlexmb10.amd.com
+ (10.181.42.219) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Thu, 30 Apr
+ 2026 06:58:05 -0500
+Received: from localhost (10.180.168.240) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17 via Frontend
+ Transport; Thu, 30 Apr 2026 06:58:05 -0500
+From: Michal Simek <michal.simek@amd.com>
+To: <u-boot@lists.denx.de>, <git@amd.com>
+CC: Leo <ycliang@andestech.com>, Rick Chen <rick@andestech.com>, Tom Rini
+ <trini@konsulko.com>, Yao Zi <me@ziyao.cc>
+Subject: [PATCH] riscv: Skip riscv_cpu_setup() when CPU driver is disabled
+Date: Thu, 30 Apr 2026 13:57:51 +0200
+Message-ID: <0d875f98e9d81b68265ea26c379dae8ce5b1f5a9.1777550269.git.michal.simek@amd.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260430113937.1274693-1-sjg@chromium.org>
-References: <20260430113937.1274693-1-sjg@chromium.org>
 MIME-Version: 1.0
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1156; i=michal.simek@amd.com;
+ h=from:subject:message-id; bh=YcOmvJ59+RZkOab8sdBBWksZCzSV+b9SX6JtP/Tnf88=;
+ b=owGbwMvMwCG2mv3fB7+vgl8ZT6slMWR+dj5UoZW6cl/M7abzW9dIrr1qkqgY06R8/e9OIQN56
+ clbogLCOkpZGMQ4GGTFFFmmM+k4rPl2banY8sh8mDmsTCBDGLg4BWAicq8ZGfZ+ey105cX5ld/7
+ bXZrHd31MbN9xYHoWwp6R++4N0Q+ag5mZLgR9UJ7S1Dain4ThTyTNt8VNb9OKFWy7vvl7pf/M6u
+ Hkx8A
+X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
+ fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SJ1PEPF000026C4:EE_|DS7PR12MB8290:EE_
+X-MS-Office365-Filtering-Correlation-Id: fbe1c8f5-f554-4040-8035-08dea6afc35c
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|36860700016|376014|82310400026|18002099003|56012099003;
+X-Microsoft-Antispam-Message-Info: /vzhz3lQg9j4lntjhEH8uZx5Gmkxg1a6BcvRXGpi837QS5t8KaYgSDTU4RUu6T3TnSAunZq1LVrm3I6DIFZ8sGzCbEBFZTe43T1AbA/aNtHFKVe2W12UEPi9tda4zWDXXbKSPAZkHv2AkZe/dNP5NGTcGzP1giDBWMoIMEk8xq3mX2Lc7dx37IUb2J8cqJBPeNzBscPgA/nCfmD5/zBwr5jGIsMTFadJH9IWwyq3abLrrajrvUR05xTLLSPCdjwVkGpfmWkKdHo3RZ3Kfc3G8CQNqkZoYlCjs1y8MWBlVlayyJCtbr8OEiFGilldaGz+qSMkrSm0sjtjlpnre0RfUkvtd6cTf5Ij8ZzdYiAat5H8AQkNmCXS7dPkn0z66rJQQ5GXuU378GqtLgVn5mKAQh7yj5h2XncjGk/fAVa4dka759fvtGztOjKYfGufDeXgjpSlKLd0KNJdEyY0A79OtXrpB4AMSFnFDdN4E19aNOTK7sguX5qCuXuBFLmctXOnVCtTktFH+D1rVljQ8w6Zvyr7GWODFZLU+EJGqf/uTzDZQjtEWGHZ8FM+HoVaXGEb8VUq7rv+Z2/xuAyCIVfw7BTo3m69/hpC7+DYHPli2pQZRCzfrpn/7uIfFSnmpeQ1PbkX9bq8zK+xCxhyIPvOgSXrUaIdgtVehMLGbbHa/DDxx7BR8xCRMinP0ahkKG9tdZX0SsyuuyM5AUMyuvBRyMXLCOJphrVeedMTJt+dtJafrIyUUE8cH37aSKPCFWyWT+znQLCTzPNqEKLZriOHzw==
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:satlexmb08.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(1800799024)(36860700016)(376014)(82310400026)(18002099003)(56012099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: bmbFfhiBqxwOkdHyDYziZuNO//6l7bYqbHAttqI3xHnCJZBWnJNXAkMt4R6nH1AmT8c5ybdgrYoT8qC/yDr9Gm1YwU0KG+lbp7jZs2HhotUyEFwq/Hvu1jw46aI1S+bemdvVde4ezcrrLR2XK9SGjCioJXMzJDK5Er2M3mhN7Uk+HZPLvswFIolxcNh4PgrDkWlGmuh2llI3WweeI3Ipv1fOX6QRnXwJ7AiX1vz9eLhJ7e7UHUgKItezFsfC0p9/xLBIqQ3wzbkECPRwTrUo2RtTlPN50SMFJ2t5lmgryLmbbjmQoHSdKiz62YXUJLXXZNbeC3hYGeCGtXT/U1bVrT1HHmd1P5TpApckL/Josu18TrKxQtJ3vZZtYcos7FOOGHHAZHzc+QDw/rLrjmkLHkmYItH+cIEwc6NyOdqedn9FmY5gHrKMcDTGkSj//Ex9
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Apr 2026 11:58:15.8951 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: fbe1c8f5-f554-4040-8035-08dea6afc35c
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[satlexmb08.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: SJ1PEPF000026C4.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS7PR12MB8290
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,46 +134,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Some headers - notably the ec_commands.h synced from upstream
-Chrome OS EC - define GENMASK and GENMASK_ULL themselves before
-linux/bitops.h is pulled in. The unguarded definitions here then trigger
-a 'redefined' warning at the second site, even though both spellings
-produce the same mask.
+Building on commit c64fc632a86a ("riscv: cpu: Use CONFIG_IS_ENABLED(CPU)
+instead of plain ifdef"), add an early return in riscv_cpu_setup() when
+CONFIG_CPU is not enabled. This allows platforms to save code space in
+SPL by disabling CONFIG_SPL_CPU.
 
-Wrap the two macros in '#ifndef' guards so a pre-existing definition
-wins. The U-Boot expressions are unchanged.
+The compiler's dead-code elimination combined with --gc-sections
+removes the unreachable code and all associated static data,
+achieving significant size reduction without preprocessor guards:
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
+  spl/u-boot-spl:all -4332 spl/u-boot-spl:rodata -2872
+  spl/u-boot-spl:text -1460
+
+Signed-off-by: Michal Simek <michal.simek@amd.com>
 ---
 
- include/linux/bitops.h | 4 ++++
- 1 file changed, 4 insertions(+)
+ arch/riscv/cpu/cpu.c | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/include/linux/bitops.h b/include/linux/bitops.h
-index 29e0da48de8..8b381c916cf 100644
---- a/include/linux/bitops.h
-+++ b/include/linux/bitops.h
-@@ -26,6 +26,7 @@
-  * position @h. For example
-  * GENMASK_ULL(39, 21) gives us the 64bit vector 0x000000ffffe00000.
-  */
-+#ifndef GENMASK
- #ifdef CONFIG_SANDBOX
- #define GENMASK(h, l) \
- 	(((~0UL) << (l)) & (~0UL >> (CONFIG_SANDBOX_BITS_PER_LONG - 1 - (h))))
-@@ -33,9 +34,12 @@
- #define GENMASK(h, l) \
- 	(((~0UL) << (l)) & (~0UL >> (BITS_PER_LONG - 1 - (h))))
- #endif
-+#endif
+diff --git a/arch/riscv/cpu/cpu.c b/arch/riscv/cpu/cpu.c
+index bbadd0c9a469..3bec7c7cb6d0 100644
+--- a/arch/riscv/cpu/cpu.c
++++ b/arch/riscv/cpu/cpu.c
+@@ -638,6 +638,9 @@ int riscv_cpu_setup(void)
+ 	const char *isa, **exts;
+ 	struct udevice *dev;
  
-+#ifndef GENMASK_ULL
- #define GENMASK_ULL(h, l) \
- 	(((~0ULL) << (l)) & (~0ULL >> (BITS_PER_LONG_LONG - 1 - (h))))
-+#endif
- 
- /*
-  * ffs: find first bit set. This is defined the same way as
++	if (!CONFIG_IS_ENABLED(CPU))
++		return 0;
++
+ 	uclass_find_first_device(UCLASS_CPU, &dev);
+ 	if (!dev) {
+ 		debug("unable to find the RISC-V cpu device\n");
 -- 
 2.43.0
 
+base-commit: ab9f3cb4de54c65bde394e31469c75ec89b18d5b
