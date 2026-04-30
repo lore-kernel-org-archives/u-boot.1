@@ -4,109 +4,140 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 028E8FF8875
-	for <u-boot@archiver.kernel.org>; Thu, 30 Apr 2026 04:33:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E97AFF8875
+	for <u-boot@archiver.kernel.org>; Thu, 30 Apr 2026 04:34:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7D50484119;
-	Thu, 30 Apr 2026 06:33:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id CB0CF84227;
+	Thu, 30 Apr 2026 06:34:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="KSyQS4L0";
+	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="TrXAj40o";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 39AE984150; Thu, 30 Apr 2026 06:33:07 +0200 (CEST)
-Received: from mail-oa1-x2f.google.com (mail-oa1-x2f.google.com
- [IPv6:2001:4860:4864:20::2f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 20FD584255; Thu, 30 Apr 2026 06:34:11 +0200 (CEST)
+Received: from PH8PR06CU001.outbound.protection.outlook.com
+ (mail-westus3azlp170120001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c107::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9C31D84099
- for <u-boot@lists.denx.de>; Thu, 30 Apr 2026 06:33:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B245884099
+ for <u-boot@lists.denx.de>; Thu, 30 Apr 2026 06:34:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=briansune@gmail.com
-Received: by mail-oa1-x2f.google.com with SMTP id
- 586e51a60fabf-40ee9b945d5so508605fac.0
- for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 21:33:04 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1777523583; cv=none;
- d=google.com; s=arc-20240605;
- b=YxP0T0zu7rm4krIx57EovjQ76oI+JG7r3BXh0WhGzxwAcRIG9aI1IZ6/L707yK7j+F
- 9Cj1K3a3jpr/UKDdJoKr25Gj3lzdnHnE3E30rEN0dhL7tLJgth/RncviXSUEMtDbdJnO
- +ruh9yy4Hfhcvus9dEMxO4qHeeQ82pcM4NF2TQXJk03mm3wL7PJ9amZ120kZPjLzsvIj
- k8z+e7tvC6sI5xFyu4WU7SfxUoSifgDZLdZhepkuMmSde2Z8YWQWzO+jkCk9zSamL0ya
- ahXqq6GG57ec+hu678jePx8/y+ZcW0LeO/KRHilcV8nmwgsgTWBT+IU1C5FtAKgrrZfR
- 3xJA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=LfA4x/5HwJW1INgyOwYv2avkQlp+g08YW5VhBweEFAE=;
- fh=sLmCnAy7HsE3/uV5iNe4toUcSMQ+UPv3pnM0TnHchu0=;
- b=EZo+ocI9nEd2kwzqezqfStD+BffBN7jfz98vTd0l6xxf53lFwejSfPvw7l4+gtCn/G
- UDQqr4p9t9/Q72JtKZORxTqDuh8fqgJYGRZMeOIEenDqxioozrIuhxOSw07kiCvWiBZq
- KVRaJGASCdq+lhBh6TOM9MS/ykC3GQ4bBQlg9W7JICIFt3zFrgSUfHU1yyQIzx8y9h6a
- Be74yaF+4kFD8f6PrkxAbys74pvm+4JTdnC/qkaVdvKLsLVo2+ex79be3D6PNtAI1YGg
- LLNQ8d9PgW5ulZNsF7OyYKx2m5RFh7pZ1d65bxrggXcZm+1ZQrvRqnL3spP87Nmx3kC1
- 73NQ==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1777523583; x=1778128383; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=LfA4x/5HwJW1INgyOwYv2avkQlp+g08YW5VhBweEFAE=;
- b=KSyQS4L07JDeDpU/JTG2JvNMIF2V63bwSq3qCsal5MNgyAkOLELEdWMbIMx8T63rYp
- NCa9CGbpOL+aUdnMr6snBOX2i1aDS3IhTOURWzRkrvhQW7JCkQUmPhnpLLlcdEQEA/1w
- 68lJJHrf/7Vw7odbNMxGIz2F3sLaRPwjzqCbv7BAlN/S43a48p9szG364Zf03uX/JWO3
- wmzgTw7fTfDUshW/oXQNzY7WONerN+Z+N5n2p2FvRimBvWCikW460YQMhlF0mPIW/Mnw
- McdZ/B6HbGrrHvCqTDRlLpQEoVdBRJnOEFU0RiuacjO3/byPSYnlz5DBtvGWE56Ahmdp
- x1aA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777523583; x=1778128383;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=LfA4x/5HwJW1INgyOwYv2avkQlp+g08YW5VhBweEFAE=;
- b=pts8pPRvBdaDYHj2Ahzcck8/JZta2gU7ftTBh7lGL38neyywkKtFGqhZfiwBmU4Nws
- WCc43b7gpOo9Y1/eAXG3DTsXFILa5lodAztj/1tPOmLaygTz0icM2/AkpVrdRZXMcm3N
- poPpxIEs3k390iGEgWZu3Gh9J2BBXx3ZEsG5VnaIx33RMB1I2vKXnt7njLxyu0t3FpUP
- Q8UOk8vJDxwDFNeJk0iwI+kVQxJp8WQnWVixIIPZTgHYnEdGnnRLUXuMUTclMnltC8k3
- InAz8CTUFcLx2rthhfFZpbk34IQgVRsMyckHEIA4KLf2N5uaqoAMBto/Gfa1Kis4QW0i
- OkpQ==
-X-Forwarded-Encrypted: i=1;
- AFNElJ/9WhyTiQ3y+j3WulmZNMl5nfy4jLZTU+XRKex7+CrLSj0RiccWW0zyMvaPzPJqcR0EAS+GPGY=@lists.denx.de
-X-Gm-Message-State: AOJu0YwMJDFpazQlcb6nc63qCtkkJSSu8BC7gN9mhvJ1RrJQWH308rXe
- xo1XLzS+Uai+ghTw9FlvtVQiSdxfJz52nWd4piHW2xgQ8xji8RBB8PA2uo5bRbYWBssgNWK8bIC
- r7m/4UL4O02e+8TVOpwMItyxv6PKaQlA=
-X-Gm-Gg: AeBDiev1+CyBAZ+FFsE5UcZDeWRXO60IutJaztQqfQ0pZwT66wONlxc6+aAwJINF+jC
- BzL0laqanqIrjKlAi8NBqMsK/icBlB4wVIVG9TDFRtmBF5eTOlTDkNs7wWVThT0zxdUqrByxSJJ
- 8Mz3y00/RhkTLWEeVtugDET7aY96RKfr6Ajun0tFc+Aq2yuZLvXTnzUgUM5Q8hpnGrT5lFdaV/x
- bbCCabHuGnHBaomqXRBtAuAbKXTT3ov3VQle+TGNMas1waollmqLLmnSzMPi3Dt+LMyoXmczlAQ
- YZSZNRlYdXZtLubKbA==
-X-Received: by 2002:a05:6808:690b:b0:479:faf5:ef56 with SMTP id
- 5614622812f47-47c5fa50907mr703047b6e.5.1777523583139; Wed, 29 Apr 2026
- 21:33:03 -0700 (PDT)
+ spf=pass smtp.mailfrom=tien.fong.chee@altera.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=zGKh39fXe74goNV9ScLhGjB0U7tA5LAFGDUbHc60zPu1igg470lzfezoXCjBvuF/UxCIvcqprQqYha3B1ozmT210ADHAV06m6bn0+oMh171n0+z/6EmEAljSsvRkKnHbn9rVe0OKjlfq5OGGZ7Duu+0IVZ48ic9c/eYlb3qjLqIbjihy4qlG91F/50AtfVDF4YJVnEGK1/Ssc4orzbcN8CytBakXymvnV68yPkB8vXyZ7pKRWbgsOUXhJSpUdtUkFsAITf2mJ3vePNlG7nqYvXYwwAtYgEhehKLqLiIvrPdizt185eP7U2oih6TBLgMCscolfzVtbxJO0hmPjPIcyw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=pg5fltZj1mY0uWwUD0hGGeB0k1qE3hqCHkx10r3SeYw=;
+ b=zSUXXuGWIOBhwys84a/sdzEyIrtx9cpiudkwmrr50R5cbE5jFEHDgHEcou3t5JRet9nqkj98CMFCrdoP3KLN05H9Qjn3m6zWwQO/97f/0wuNskhcqZpUzT5eSzE/vxhPwAEpIQWY21Q2bealjK3DBqzxjLRPBXAlrq6bNuOGp70os7+8Mg2MIzxjPWvmIITPRAgJ4cjO1d4y/Y3qtye9LPivX4OtE57TeGWpEKapUCVvpFVuPa9doC62/+J8KeEU3VlSCSe9nA30TJPRZ7IdDLvBeZoUtqQSn1CwrmSkSdyDCFUs4MS41kPZVNygjGVNnEnT46SZrxcLInYQRjQa7Q==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
+ dkim=pass header.d=altera.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=pg5fltZj1mY0uWwUD0hGGeB0k1qE3hqCHkx10r3SeYw=;
+ b=TrXAj40oBG70a9oV4oy4GZaU44doI5EGkDJOgOqpYsM4eoCad5jK98wVNbC4hGpYBGDy6uo6GSXajaGPLLOZQeHdX9iVOPNag9Svz1i7qhxkOtbHOQW/2jxfaw2ReDDO5+pQJhh8Lhj55zD6LRjYvJqSMvaeOLdFK4uJIEZHbnuJzdYFm7baf19NLX5Ab64fyAt/Jln7t/pici2o7BP4KMVcx/QJIsBM55NtswIAFRNvcQiZucXCGlF1q9l0G/WNLR7k2vyPbTsERJoCqfJ7Msi6+OXt5R1WUKe1VL9I8MrFAoVsWUHPLini8yqGyOYScp7hKqzkyjBd67wsL4g44Q==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=altera.com;
+Received: from CY1PR03MB8121.namprd03.prod.outlook.com (2603:10b6:930:106::16)
+ by BY1PR03MB7994.namprd03.prod.outlook.com (2603:10b6:a03:5b0::15)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9870.20; Thu, 30 Apr
+ 2026 04:33:54 +0000
+Received: from CY1PR03MB8121.namprd03.prod.outlook.com
+ ([fe80::fe3c:a06b:8724:fab0]) by CY1PR03MB8121.namprd03.prod.outlook.com
+ ([fe80::fe3c:a06b:8724:fab0%6]) with mapi id 15.20.9846.021; Thu, 30 Apr 2026
+ 04:33:54 +0000
+Message-ID: <79aa67cc-52ea-41be-bed2-95aeaf6f8d5d@altera.com>
+Date: Thu, 30 Apr 2026 12:33:48 +0800
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] drivers: clk: altera: arria10: Fix wrong API used for
+ memory free
+To: dinesh.maniyam@altera.com, u-boot@lists.denx.de
+Cc: Marek Vasut <marex@denx.de>,
+ Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
+ Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
+ Kok Kiang <kok.kiang.hea@altera.com>, Boon Khai <boon.khai.ng@altera.com>,
+ Alif <alif.zakuan.yuslaimi@altera.com>
+References: <20260415051016.3316-1-dinesh.maniyam@altera.com>
+Content-Language: en-US
+From: "Chee, Tien Fong" <tien.fong.chee@altera.com>
+In-Reply-To: <20260415051016.3316-1-dinesh.maniyam@altera.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: SI2PR01CA0044.apcprd01.prod.exchangelabs.com
+ (2603:1096:4:193::8) To CY1PR03MB8121.namprd03.prod.outlook.com
+ (2603:10b6:930:106::16)
 MIME-Version: 1.0
-References: <20260423042824.3480-1-briansune@gmail.com>
- <CAFLszThg=EamyRohxNA7V+nk+OMVK356nUjAVSbu4+kokOJpdA@mail.gmail.com>
- <CAN7C2SAdg1MX3ZfEt5-68iiw3pdjyqva48F_uJjNwsHAhdmY3Q@mail.gmail.com>
- <CAFLszTgouk66AOaL2o8PvH9EKNFabE=pjxpa9QpC_F--VhE9cQ@mail.gmail.com>
- <CAN7C2SC-MuqHK2+0vaZzZFi-up1L7=KcOSRedF6f6F3D9Uoceg@mail.gmail.com>
- <CAFLszTjz5SMpFMPjVd6tX5Lk9DKv3MMX+_qtkSgt6fztGceHFA@mail.gmail.com>
- <CAFLszThDv=YcuXUanOJd4MPeNdSiHSL2zH9jXAtbu+-8fRzF2w@mail.gmail.com>
- <0b5fc175-76be-4b64-bd8b-48c9f502c8bc@altera.com>
-In-Reply-To: <0b5fc175-76be-4b64-bd8b-48c9f502c8bc@altera.com>
-From: Sune Brian <briansune@gmail.com>
-Date: Thu, 30 Apr 2026 12:32:51 +0800
-X-Gm-Features: AVHnY4IGqePoHz6VwIYG4jBu-w0vaGFfrm6Jzv2Y7c6t1kMHVY7D_nEx5zCv0Go
-Message-ID: <CAN7C2SD0pHpYx_66WikFB1vjQrni8NyHL-t29keZU3EksJE3nA@mail.gmail.com>
-Subject: Re: [PATCH v6] Improve handoff prepare on SoCFPGA
-To: "Chee, Tien Fong" <tien.fong.chee@altera.com>
-Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
- Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CY1PR03MB8121:EE_|BY1PR03MB7994:EE_
+X-MS-Office365-Filtering-Correlation-Id: 190b8c0b-0862-42e9-42ef-08dea671afe8
+X-MS-Exchange-AtpMessageProperties: SA
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|366016|1800799024|376014|56012099003|22082099003|18002099003|55112099003;
+X-Microsoft-Antispam-Message-Info: rn6KLAz+mc0ZtlPz07/SyJeRLHJPtAVf7/7w2mKBJl3+22lKHGJwEwhwlbOv7dLNPdcomvTtWDaOJiMcpnepWsaGt05jDo0pAOXTyOAD+30PToxXiHVnoETkAiWmGPEvqlnuELa7I7k9M2FzoHLIDd5NphVW9ivI8KKUIA/xjF8IH9vWTXcX2zhgMd7eOpNC5td5UEgjBBpNRhLxajsjgTH764LK8sIbGSmE7dbuZDFxF18wj4t8uGfinlHQ+Dm+rGG27nbNmQ84g9g88xZXmNZRLuoVw6y1DWTJxb32SYUGWcLaCE8nzq/4O5sz3uqKUWSJrFPDS2IE5b2wdLTLwIItZcOP8w1RVISTDOmjxwv6cPKAtzwAiM0jy80WuqB8BvE992D2ZviGAPYNkNTvbw+LutdzOTZ5a/U7vgRGRQ1PtAH8cgT+I5mnVmDfKkAnXQKLa7GW/7/2SHBLwO5wYrL92D8nu1S+421PZbrskEdjQZO2Uh3A8YgpH7aYmHmTMcGh1y5GVvUUiKVHJ0Wdyz++zvPW4Tzv/9XPtt7YitDAe8NPPq7Sl4RX1Jd3RT+TitjA8N+ro53ZtzVVP/BOFwO4CZvp31CRPLzETsgFNpfpuJI4V8sMFkv2TdH+vuIC0Huqb7nrF6QldT1VZBVidVyceEGsvdv39WINIE9J3t6EUnR2U30azYRibOcHYMNtToUBvgVMEgXk55AMExKagF0/DUDN4pT3AkD2pnIvqww=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:CY1PR03MB8121.namprd03.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(1800799024)(376014)(56012099003)(22082099003)(18002099003)(55112099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?Y1BrUWdqRlMrd2hrVWhRMHdpNW05N0JDNmF5SmxiNVhTNW1lMG9VTCt3RFJx?=
+ =?utf-8?B?OEZDbHJtNUZyMTVyMDhRd01QSEpUWWxrTE9FSlh1bktLRGhoNEludWxnWk9D?=
+ =?utf-8?B?Skl3eDEvVW9ock8xcDMvTWl5bUFDaFFzenRDbFVkcjNjSElFeUNkejdWZXNB?=
+ =?utf-8?B?MUlBb0swMVFQd0xnMWtld0RvdDVCUHpDMUUzUVZUaE01OW9uVGxvdGlkVGtH?=
+ =?utf-8?B?U2IxaCthSnRjK0tyMHNHWVhCQzdESDR0ZllkRTM3V3Z5ZTIvZWE4RUhvM0lZ?=
+ =?utf-8?B?SjZGYUdJWW1LUjRFRDF0cGlGM0J5bTRkMW1XdXNoTk1HaS9pZVNGRUJ6YTMv?=
+ =?utf-8?B?U1FneVA2TUlIa2lGZDM2eUJIaHA0S1VibFBPeVBLRHgzNlRDNlVocm8vSFZ2?=
+ =?utf-8?B?ZGVUdTJ5dm4vUmlNQm9YSnc5YVBJaFRicVIwVXhaWDJJeHk2cmErWmlNTXNC?=
+ =?utf-8?B?Y0grc0h5Uk90UU0vRU1DK2o4bnp3YmorTXZ1dFY2VE5VQXc0ZXRybjQwVm5y?=
+ =?utf-8?B?ZXN3L24zOUUvVzVEWjFZUTRGVURON1Nxa2diYjV5SUxRZGViWWhSRkdNeGln?=
+ =?utf-8?B?UjkySUFuUFBDKzhjRFVKMExsZEFJQW9oNThlSE9MUS8rTzR4aTAxMlNtWnQv?=
+ =?utf-8?B?OUpVcjJQbVhLU09FaUhtSUJEWVNTS0JwOFZPdkR4dkpwMlBoSmxSbmRlVEJo?=
+ =?utf-8?B?SkV5U1pGL09iTURXeHdwSXM3YllEWFR5N1NQS2xjaHF0Q29GWG9McFlEWUQz?=
+ =?utf-8?B?aTlnSkV3dDZRTnY3eTdiY2hRNlUwVmNJYm1Ic1NiMVFzQ2t0SzdmNytoSjlZ?=
+ =?utf-8?B?ZXdKT0JyS0VuNjlXVjdGb3BabG1sVmQ2V0NJaUhhbkYvQ0pOY3ZWSEd2VUJP?=
+ =?utf-8?B?MVh0SDlDR2tIZzBZNnRrVlBZRkRXaVYrdUQyTnZ4bGg5M21NRGh0Y2laRjFt?=
+ =?utf-8?B?bUlMeVJvc3FURVVUczA1b3MvMWJMc2RRWkRPNmpFcys5YXhTMm8wcjNYRUly?=
+ =?utf-8?B?MEt4VWZNM0dIaHByWGliK3ZzVk1MM3dyU2MrWnhsdWEzV21HK1BHVWE3NnRK?=
+ =?utf-8?B?djUycjVLc0FDNHo2KzB3V2xmcGFCVCtvVTVOcE9XSlorcm5FUmpFTnYyZlZn?=
+ =?utf-8?B?b0FCR1h0WEV6dDVmWGFwRmY3cHIvRnVRRjlxYkpPZW43Mjl2dzNTc3lNc0Jr?=
+ =?utf-8?B?Z05oOFFsR1BvQmJOQ2wwRkk4MkNyRXdHUU5XVDU2YTVNNlRHcmZhbkxFTi9p?=
+ =?utf-8?B?M054ZXJQbGpwTEJja0RJMHV0RjVDNyttUVh3bGppaXVwa2VEak9QSXdqK3dB?=
+ =?utf-8?B?bEJTN3RxRVVpbVUvOE5FamM3TFJ0bTJaU0xWbmQ1dnZFTytEd1QrQWNKVDMv?=
+ =?utf-8?B?Q3JsTEpTNEt1MVMwdnYyUnliUWxxblBJQURiUERJMmJ2czBFRFJ2QmhaUEFM?=
+ =?utf-8?B?d21FUndKNUViWE5nUDBVRjloWFd0d2dhVFhwSDJlNVRQT3JwOXlIdFViUkhh?=
+ =?utf-8?B?K3Y1YSszQW8wSUxGSnBJZFRzbkxWTjkvNHdGVVB5M08vanRiT1JEKzZ1UzE5?=
+ =?utf-8?B?ZXg0V0JhZkllVHAzNHRreS83ZzRsZEJuZ0tHYWZSVHBRbW54ZGdlUWYxOU04?=
+ =?utf-8?B?WCt4K0w4M2pzYk9RMW5zSnBMRDE2UWQ0T1l1cXE3VHBENXZwL3pWenJKbkh1?=
+ =?utf-8?B?eXU2cUl6U296M3RLYm5TT2V4S2E3MGNScloxekxTa2cxcFpUeGp1Q3ozc0Vi?=
+ =?utf-8?B?aUJGSU4ySFpPbU5TcmVCWXNKaitycDNNdjFpR3JsaEE2c0VZT0FRenBlMXZX?=
+ =?utf-8?B?ZlcwOFAwL291U1lEMGttQzVhZUZNRGlubmw3blNkbFVlaDRIdFBkM0k5dWNa?=
+ =?utf-8?B?V09maXNlZGFTcVdmakpkTi9rcFU2MURSOVhodWtRMjBjb1pjN21CSnZabENp?=
+ =?utf-8?B?NWQ4WVc4YjI2RWNiRWhFSmtEOFBrS1hmSFd1dUNrWnlaem9HZVFyNkR1YWlV?=
+ =?utf-8?B?RHZEMDlEckFob1BJNmpmTzNuVm81cndHQmVGcUZiR0d5ZTRCenRCc3NrczJ5?=
+ =?utf-8?B?am1WYmFBK2dyQ05lTGw1b1lqU1VPay9aTmFKUUdqdlZJZmp0eWtobVJWTXpJ?=
+ =?utf-8?B?S0paRWx0WWZIZVJWUUVIaGZJU0pINjlEN1Y5N2VUeUJQSWQ0a0RPdExsWjdE?=
+ =?utf-8?B?N1NjU3R4TGlEL3pkVkp5aVpqMmI4ai9Pb3ZFL2YzR0tDTEZHSnVpUDhPRHNR?=
+ =?utf-8?B?NmUxQ2hZdExVQVFReUxLUDE2ZXQxSXJNTXdsVUFQaDZLK1F6TFRFL256UTlP?=
+ =?utf-8?B?VC9lRDc1YWpJR2c4cEpSYWdnWXVYdEpPNVVLYURvRk9qZm43TXNPQmdtNWhU?=
+ =?utf-8?Q?F+kv8e5mDiJO5WuA=3D?=
+X-OriginatorOrg: altera.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 190b8c0b-0862-42e9-42ef-08dea671afe8
+X-MS-Exchange-CrossTenant-AuthSource: CY1PR03MB8121.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Apr 2026 04:33:54.7423 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: sOSfW5L5IMytKswd3isJfWWlX7wfyeRlUqWu0sQH9MwZyt96YlYA1Al63+DPnzTbMNnLzmNFkp0iwbh47L/j4NBrfyVYldzgJmwmdfgtQOE=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY1PR03MB7994
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -123,150 +154,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Apr 30, 2026 at 12:28=E2=80=AFPM Chee, Tien Fong
-<tien.fong.chee@altera.com> wrote:
+On 15/4/2026 1:10 pm, dinesh.maniyam@altera.com wrote:
+> From: Dinesh Maniyam <dinesh.maniyam@altera.com>
 >
-> Hi Brian,
+> Fix the wrong API used for memory free.
 >
+> Signed-off-by: Dinesh Maniyam <dinesh.maniyam@altera.com>
+> ---
+>   drivers/clk/altera/clk-arria10.c | 7 +++++--
+>   1 file changed, 5 insertions(+), 2 deletions(-)
 >
-> On 30/4/2026 1:14 am, Simon Glass wrote:
-> > [CAUTION: This email is from outside your organization. Unless you trus=
-t the sender, do not click on links or open attachments as it may be a frau=
-dulent email attempting to steal your information and/or compromise your co=
-mputer.]
-> >
-> > On Thu, 30 Apr 2026 at 02:44, Simon Glass <sjg@chromium.org> wrote:
-> >> Hi Sune,
-> >>
-> >> On Wed, 29 Apr 2026 at 08:34, Sune Brian <briansune@gmail.com> wrote:
-> >>> On Wed, Apr 29, 2026 at 10:21=E2=80=AFPM Simon Glass <sjg@chromium.or=
-g> wrote:
-> >>>> Hi Brian,
-> >>>>
-> >>>> On Tue, 28 Apr 2026 at 08:34, Sune Brian <briansune@gmail.com> wrote=
-:
-> >>>>> On Tue, Apr 28, 2026 at 10:04=E2=80=AFPM Simon Glass <sjg@chromium.=
-org> wrote:
-> >>>>>> Hi Brian,
-> >>>>>>
-> >>>>>> On 2026-04-23T04:28:24, Sune Brian <briansune@gmail.com> wrote:
-> >>>>>>> Improve handoff prepare on SoCFPGA
-> >>>>>>>
-> >>>>>>> Ensure qts folder header files are properly updated by isolating
-> >>>>>>> the Python execution environment. This prevents partial or failed
-> >>>>>>> script runs from corrupting the target directory.
-> >>>>>>>
-> >>>>>>> Changelog v5 -> v6:
-> >>>>>>>   - Clean HANDOFF_KEEP comments.
-> >>>>>>>
-> >>>>>>> Changelog v4 -> v5:
-> >>>>>>>   - Change HANDOFF_KEEP condition to if [ '$${HANDOFF_KEEP:-0}' !=
-=3D '0' ]
-> >>>>>>>   - Add HANDOFF_KEEP and HANDOFF_PATH comments in config.mk
-> >>>>>>>
-> >>>>>>> Changes:
-> >>>>>>>   - Implement a temp folder for Python script execution.
-> >>>>>>>   - Clean temp folder automatically despite execution failures.
-> >>>>>>>   - Gate the file replacement process on the successful exit of
-> >>>>>>>     the Python scripts.
-> >>>>>>>   - Execute the replacement (with or without keep) only upon scri=
-pt
-> >>>>>>>     success via the NEW HANDOFF_KEEP=3Dxxx variable.
-> >>>>>>> [...]
-> >>>>>>>
-> >>>>>>> arch/arm/mach-socfpga/config.mk | 39 ++++++++++++++++++++++++++++=
-++++++++---
-> >>>>>>>   1 file changed, 36 insertions(+), 3 deletions(-)
-> >>>>>
-> >>>>> Dear Simon,
-> >>>>>
-> >>>>> B.C. the server is down and I don't expect Google to have an auto f=
-ail
-> >>>>> mailing recovery.
-> >>>>>
-> >>>>>> I see 6 copies of this v6 patch in patchwork, so I wonder if I got=
- the
-> >>>>>> right one?
-> >>>>> I will try to respond to this email as politely as possible.
-> >>>>> Please reference from "patchwork.ozlabs.org" list.
-> >>>>>
-> >>>>>> The per-version changelogs belong below the '---' separator, not i=
-n
-> >>>>>> the commit body. Also U-Boot convention is 'Changes in vN:' rather
-> >>>>>> than 'Changelog vN -> vN+1:'.
-> >>>>>>
-> >>>>>> You could try using 'patman' which will get this right for you aut=
-omatically:
-> >>>>>>
-> >>>>>> https://docs.u-boot.org/en/latest/develop/patman.html
-> >>>>>>
-> >>>>> 1) I only do basic software
-> >>>>> 2) I used ./script/checkpatch.pl There are no errors, warnings etc.
-> >>>>> 3) There is nothing to do with the patch itself either the software
-> >>>>> nor the file itself.
-> >>>>> 4) I am not too familiar with patman
-> >>>>> 5) There are many better things to do rather than complaining about
-> >>>>> the patch headers.
-> >>>>>
-> >>>>> So forgive me I really don't give a damn on whatever the header req=
-uirements.
-> >>>>> If you feel this is not passing the patch standard simply reject or
-> >>>>> label all patches to
-> >>>>> "Changes Requested".
-> >>>> That's up to whoever applies this patch. I am just a reviewer :-)
-> >>> Hi Simon,
-> >>>
-> >>> I am going to ignore all your mail in the future.
-> >>> So review whatever you like, don't care.
-> >>> There are many patch not following whatever rules or guidelines you
-> >>> mentioned.
-> >>> Just review those as well. What a waste of time on your emails.
-> >>>
-> >>> As politely as possible!!!
-> >> Oh, sorry about that and also the server being down, etc.. The
-> >> maintainer for SoCFPGA will handle applying this in any case.
-> >>
-> >>> Brian
-> >>>
-> >>>> The reason for the formatting rules is mostly so that maintainers ca=
-n
-> >>>> apply them without manually redoing the patch, etc.
-> >>>>
-> >>>> There is also this which might help (although you might not want mor=
-e reading):
-> >>>>
-> >>>> https://docs.u-boot.org/en/latest/develop/sending_patches.html#commi=
-t-message-conventions
->
->
-> I have reviewed this patch.
->
->
-> While the functional change appears reasonable, the patch cannot be
-> applied in its current form because the commit message and version
-> history do not follow U-Boot patch submission conventions. Specifically:
->
-> - Per-version change history must be placed below the '---' separator.
-> - The required format is 'Changes in vN:'. Custom formats such as
->    'Changelog vN -> vN+1:' are not acceptable.
->
-> Maintainers rely on these conventions so patches can be applied directly
-> using git am without manual rework. I will not correct the commit history
-> on behalf of the contributor.
->
-> Please resend the patch with the commit message formatted correctly.
-> Further review or application will only proceed once this requirement is
-> met.
+> diff --git a/drivers/clk/altera/clk-arria10.c b/drivers/clk/altera/clk-arria10.c
+> index 1840f73beee..081f8f2b7aa 100644
+> --- a/drivers/clk/altera/clk-arria10.c
+> +++ b/drivers/clk/altera/clk-arria10.c
+> @@ -222,8 +222,11 @@ static void socfpga_a10_handoff_workaround(struct udevice *dev)
+>   		return;
+>   
+>   	ret = clk_request(dev, &bulk->clks[0]);
+> -	if (ret)
+> -		free(bulk->clks);
+> +	if (ret) {
+> +		devm_kfree(dev, bulk->clks);
+> +		bulk->clks = NULL;
+> +		bulk->count = 0;
+> +	}
+>   }
+>   
+>   static int socfpga_a10_clk_bind(struct udevice *dev)
 
-Hi T.F.,
 
-Drop this, I don't care.
+Reviewed-by: Tien Fong Chee <tien.fong.chee@altera.com>
 
-Thanks,
-Brian
 
->
-> Best regards,
->
-> Tien Fong
->
+Best regards,
+Tien Fong
+
