@@ -4,68 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63ED7CD13D3
-	for <u-boot@archiver.kernel.org>; Thu, 30 Apr 2026 07:25:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E796CD13D3
+	for <u-boot@archiver.kernel.org>; Thu, 30 Apr 2026 07:54:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D3900843B6;
-	Thu, 30 Apr 2026 09:25:08 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9765E84255;
+	Thu, 30 Apr 2026 09:54:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="adPbXv70";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="JvOvCygd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4E534845C8; Thu, 30 Apr 2026 09:25:07 +0200 (CEST)
-Received: from tor.source.kernel.org (tor.source.kernel.org
- [IPv6:2600:3c04:e001:324:0:1991:8:25])
+ id EEFD7845C8; Thu, 30 Apr 2026 09:54:39 +0200 (CEST)
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4BEF684198
- for <u-boot@lists.denx.de>; Thu, 30 Apr 2026 09:25:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C9CFE84198
+ for <u-boot@lists.denx.de>; Thu, 30 Apr 2026 09:54:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mwalle@kernel.org
+ spf=pass smtp.mailfrom=mkorpershoek@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 3687C61145;
- Thu, 30 Apr 2026 07:25:03 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 852C1C2BCC4;
- Thu, 30 Apr 2026 07:25:02 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id 36D9D4391B;
+ Thu, 30 Apr 2026 07:54:36 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9A6A9C2BCB3;
+ Thu, 30 Apr 2026 07:54:35 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1777533902;
- bh=RP+vo8MXKcHDwnCMSi6uYFW4LkYqG8FWq2yAlPUbI44=;
- h=Date:Subject:Cc:From:To:References:In-Reply-To:From;
- b=adPbXv7004nwNUrCZnF1xBd3N9biGb7moEw8SvKLNGdoPbIgGr56GpfrSGqcxsi1O
- 7SsuPeoCI92vBsB7e9AUS5kdTvjn9Vyt5b1Bwhg7Jme4ZNc1o+YMh/P2qcBcQjt7Bu
- xUgutCvGPAEyLDsZwMD5gz6iVfHwgbuZOhkZgEpm0SCHW+n7GsooOiCsgGKRhYREEJ
- LPii/7Pdm+xOiOsnn/IcaWi08reQcY1+zNHySo4g/5dNFJMt7mBVuPtzGjooHQLWJT
- vzdgRWGTeJl8/7MRpM8eNBufbamELhPApfLDpvKHj505+toSCwu5hkY1yzZB50ewyD
- X4SGZwbBF0A9Q==
-Mime-Version: 1.0
-Content-Type: multipart/signed;
- boundary=f77fd9e2784eff03c6031d8b4553b925447d8cac3e789eb8f6305d309e4c;
- micalg=pgp-sha384; protocol="application/pgp-signature"
-Date: Thu, 30 Apr 2026 09:24:52 +0200
-Message-Id: <DI6B6D3I859S.1EP7GRA58V940@kernel.org>
-Subject: Re: [PATCH 09/10] p2041rdb: update README and fix typos
-Cc: =?utf-8?q?Marek_Beh=C3=BAn?= <kabel@kernel.org>, "Pramod Kumar"
- <pramod.kumar_1@nxp.com>, "Vladimir Oltean" <olteanv@gmail.com>, "Alison
- Wang" <alison.wang@nxp.com>, "Tang Yuantian" <andy.tang@nxp.com>, "Mingkai
- Hu" <mingkai.hu@nxp.com>, "Priyanka Jain" <priyanka.jain@nxp.com>, "Wasim
- Khan" <wasim.khan@nxp.com>, "Meenakshi Aggarwal"
- <meenakshi.aggarwal@nxp.com>, "TsiChung Liew" <Tsi-Chung.Liew@nxp.com>,
- "Stefano Babic" <sbabic@nabladev.com>, "Fabio Estevam"
- <festevam@gmail.com>, "NXP i . MX U-Boot Team" <uboot-imx@nxp.com>, "Peng
- Fan" <peng.fan@nxp.com>, "Shengzhou Liu" <Shengzhou.Liu@nxp.com>, "Tomas
- Alvarez Vanoli" <tomas.alvarez-vanoli@hitachienergy.com>, "Jerome
- Forissier" <jerome.forissier@arm.com>, <u-boot@lists.denx.de>
-From: "Michael Walle" <mwalle@kernel.org>
-To: "Tom Rini" <trini@konsulko.com>
-X-Mailer: aerc 0.20.0
-References: <20260429121816.1026326-1-mwalle@kernel.org>
- <20260429121816.1026326-10-mwalle@kernel.org>
- <20260429152859.GW41863@bill-the-cat>
-In-Reply-To: <20260429152859.GW41863@bill-the-cat>
+ s=k20201202; t=1777535676;
+ bh=qlAoV6V7+JIUog1ZjGZn5CWWDtKNiJxlaJbs3t+O79A=;
+ h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+ b=JvOvCygd/VpDgN+dWThxBb6mKqW+1xPS7/GqlnKMSJePbeHx6FTeLuRblRRvL2uEU
+ RrKcWjoCRfDfPhWZ0tUFg8ahBEOtoSFgKLFNpD5eYIsxN0iOxb7UUjwHHv3LccrxNC
+ 2K1y7U9FUA+fKQTt8vZNng171ljB/7AdXlh+q+Rwga00y4/DkPbj4yB4SABCJoboBu
+ m1VrA8Z4GaWJqVu0IL07DaiexvJg1ea5fykdFBtGAK0aUsxXhp9yccP5LGDUpMR4n+
+ FuaOpC6ZZdarogVHp4hADkXif9pzwjlUbRRVhKnq9HdvFeuGip3Wj6AK56M6xbKOGJ
+ QNVS5kbBTtF3A==
+From: Mattijs Korpershoek <mkorpershoek@kernel.org>
+To: Eddie Kovsky <ekovsky@redhat.com>, Tom Rini <trini@konsulko.com>, Tobias
+ Olausson <tobias@eub.se>, Paul HENRYS <paul.henrys_ext@softathome.com>,
+ Simon Glass <sjg@chromium.org>, Jan Stancek <jstancek@redhat.com>, Enric
+ Balletbo i Serra <eballetb@redhat.com>, a.fatoum@pengutronix.de,
+ mark.kettenis@xs4all.nl, Mattijs Korpershoek <mkorpershoek@kernel.org>
+Cc: u-boot@lists.denx.de
+Subject: Re: [PATCH v4] Add support for OpenSSL Provider API
+In-Reply-To: <20260429180247.83091-1-ekovsky@redhat.com>
+References: <20260429180247.83091-1-ekovsky@redhat.com>
+Date: Thu, 30 Apr 2026 09:54:33 +0200
+Message-ID: <87cxzgevd2.fsf@kernel.org>
+MIME-Version: 1.0
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,39 +70,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
---f77fd9e2784eff03c6031d8b4553b925447d8cac3e789eb8f6305d309e4c
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
+Hi Eddie,
 
-On Wed Apr 29, 2026 at 5:28 PM CEST, Tom Rini wrote:
-> On Wed, Apr 29, 2026 at 02:17:23PM +0200, Michael Walle wrote:
+Thank you for the patch.
+
+On Wed, Apr 29, 2026 at 12:02, Eddie Kovsky <ekovsky@redhat.com> wrote:
+
+> The Engine API has been deprecated since the release of OpenSSL 3.0. End
+> users have been advised to migrate to the new Provider interface.
+> Several distributions have already removed support for engines, which is
+> preventing U-Boot from being compiled in those environments.
 >
->> Nowadays, u-boot can build the pbl image itself. Refer to that image in
->> the documentation. Also fix some typos.
->>=20
->> Signed-off-by: Michael Walle <mwalle@kernel.org>
->> ---
->>  board/nxp/p2041rdb/README | 34 ++++++++++++----------------------
->>  1 file changed, 12 insertions(+), 22 deletions(-)
+> Add support for the Provider API while continuing to support the existing
+> Engine API on distros shipping older releases of OpenSSL.
 >
-> Thanks for getting this all working again. Would you mind doing a
-> follow-up to convert this to rST?
+> This is based on similar work contributed by Jan Stancek updating Linux
+> to use the Provider interface.
+>
+>     commit 558bdc45dfb2669e1741384a0c80be9c82fa052c
+>     Author: Jan Stancek <jstancek@redhat.com>
+>     Date:   Fri Sep 20 19:52:48 2024 +0300
+>
+>         sign-file,extract-cert: use pkcs11 provider for OPENSSL MAJOR >= 3
+>
+> The changes have been tested with the FIT signature verification vboot
+> tests on Fedora 42 and Debian 13. All 30 tests pass with both the legacy
+> Engine library installed and with the Provider API.
+>
+> Tested-by Enric Balletbo i Serra <eballetb@redhat.com>
+> Tested-by Mark Kettenis <mark.kettenis@xs4all.nl>
+> Signed-off-by: Eddie Kovsky <ekovsky@redhat.com>
 
-Sure, I'll send it either if the series is picked or if there is a
-new version, I'll include it there.
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
 
--michael
-
---f77fd9e2784eff03c6031d8b4553b925447d8cac3e789eb8f6305d309e4c
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iKgEABMJADAWIQTIVZIcOo5wfU/AngkSJzzuPgIf+AUCafMDxRIcbXdhbGxlQGtl
-cm5lbC5vcmcACgkQEic87j4CH/iOTwGA3PYelE1P3O7lWCKNxZV5mn+HBmXx7ky7
-0PzVJK/nuqFIyXamHx7mP97lpppwMV5OAX9wrJP0l3Fy+r5EmsT1JvZ5NX/Dgzmq
-x/Ourd8IOEspdSdgCFHUdcPFdizeLV+bupg=
-=dWgU
------END PGP SIGNATURE-----
-
---f77fd9e2784eff03c6031d8b4553b925447d8cac3e789eb8f6305d309e4c--
+> ---
