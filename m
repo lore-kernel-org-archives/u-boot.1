@@ -4,81 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2068CD13D3
-	for <u-boot@archiver.kernel.org>; Thu, 30 Apr 2026 19:54:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00A33CD13DA
+	for <u-boot@archiver.kernel.org>; Thu, 30 Apr 2026 19:54:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 03610803C6;
+	by phobos.denx.de (Postfix) with ESMTP id 3D95B83A91;
 	Thu, 30 Apr 2026 21:54:40 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20251104.gappssmtp.com header.i=@baylibre-com.20251104.gappssmtp.com header.b="M3c4z7MW";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="i8EjYhgo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8ACAF80433; Thu, 30 Apr 2026 21:13:15 +0200 (CEST)
-Received: from mail-vs1-xe35.google.com (mail-vs1-xe35.google.com
- [IPv6:2607:f8b0:4864:20::e35])
+ id 62FC480433; Thu, 30 Apr 2026 21:27:30 +0200 (CEST)
+Received: from mail-qt1-x842.google.com (mail-qt1-x842.google.com
+ [IPv6:2607:f8b0:4864:20::842])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B432980086
- for <u-boot@lists.denx.de>; Thu, 30 Apr 2026 21:13:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3D07780086
+ for <u-boot@lists.denx.de>; Thu, 30 Apr 2026 21:27:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=hfranco@baylibre.com
-Received: by mail-vs1-xe35.google.com with SMTP id
- ada2fe7eead31-61399bdd395so450874137.2
- for <u-boot@lists.denx.de>; Thu, 30 Apr 2026 12:13:12 -0700 (PDT)
+ spf=pass smtp.mailfrom=jcethrid@gmail.com
+Received: by mail-qt1-x842.google.com with SMTP id
+ d75a77b69052e-50fb8e9a4edso14334141cf.1
+ for <u-boot@lists.denx.de>; Thu, 30 Apr 2026 12:27:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20251104.gappssmtp.com; s=20251104; t=1777576391; x=1778181191;
- darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=lzLMHj+3ZW1p7OV0Ew3fHb+iGR9/DgMb4/uacI89Skg=;
- b=M3c4z7MWGEbJxpKFC6p4XbCwtEtioHiP3hT90Vbj7bBngaeeCydkSqClXam50JzctW
- qP/BanEvDKtrM6YK5dbOv1JSBMO+zTvaP89kOdfJw5CLzE6xwdNnq5Cbx8t5AZG1C3g6
- TCUBjdvf5SCJtfeVsgGUj3pj9CZmcRJ6rBXwG5QwAur3HDzEEG9PP3JmNxFb2vA3ns0J
- Dpr9ct5Qzjvvtj0ghYlK6NfCimkniU8cs8Lsms2crcjnTpix1SFo6rAA1pkAlp0rcweX
- ofs4MuLdhiFuGWPhf2z91XlbQich9qwvZkxowEZ2CyqhtoLQV4zJjnTKPu5SRy69LmbI
- JCCw==
+ d=gmail.com; s=20251104; t=1777577245; x=1778182045; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=DdR859gHuPIoNxRK1sh5uveWeTEkqpZ2cVCVEZbTZH8=;
+ b=i8EjYhgoPh6mJGtAIX8hBlVCIgYPlUWDsRjaU70t/dc4IsSJx3tBYJuaE0ZDDq0LmQ
+ kX7lA8OAjh8ZX6P55voY0oRb0z8e11NpHLjjU2H9/L7bGckQjZqP38Nw5wgXRevy4Fwz
+ pXE9cttBrYhPSXh/LcZB8Qm0UHtGALBmRgwhY7VxILpNtQRRALovm8HR4NwZxBikGWQA
+ kR1yqIoJpa3cwGxpHIOZwCZ3c4AE1mLnPyDEoJyN/5RML5SqoyaUmzvovd80YK64Me9T
+ u8n6MDMiL/Cw0TdH6fD7dTHho0iIKpjfTq4ZJCO2daJqoqY+C/b8v7bX5EWESPFuJBH4
+ 3RMw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777576391; x=1778181191;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=lzLMHj+3ZW1p7OV0Ew3fHb+iGR9/DgMb4/uacI89Skg=;
- b=mSYLuyG1iOCptlE4DOAxYBN2RWVcfYHOXZmd71ciG0zf+lGYk8owm0+rKNxaarf+gb
- YchlHAPvwzso2w6oc8Osxpf3wx95qldplFR93ls1bfuE4783Z1ZRSwWRzVmen7PY4gfk
- IQLM6QfHgsrHH4RUpKYWs9tfVQHRpxCAW9QSLqnsho2s6gi8SXXRRoiIu3TfWZWVSXb+
- hoIhbS3dUVk+I8GA7ds/CCeQMSFmYRuwDTo1vJhsVgjYkx8JcSqEtXA0l0q+tPnYScMo
- CFL25aOFyPDkgtfidlG3FQioUrAWd5mt8Xgiq0BbXws5dgeibVavGZaoZ87P1Jhm4tbq
- Frqw==
-X-Gm-Message-State: AOJu0YxwI1RNmpOGRof4MulD2eGNbJCTuFaYsouIgroSQODerLJvY0XZ
- wYdv9uPy0SbrIwZMVea4ecslUjGywQmiBPiypPj71I8nYjF251IdydPTlUOZ7DxQHgLZzPlqm+K
- BR+VDYZA=
-X-Gm-Gg: AeBDievSWypVDVL03TQPfEfa5HB7YHf0xspEhibDOVnIWI/l91tbBT1b6OjWEOICo8N
- /wMd7WcM97JvNEXajT5VTe91Ir6/JaEr8B9uUbBfE76WDspjv96WUV10JjOQuuKVcEbfs4G0cRp
- Grsg5A4+30q2mxymZmFq0mQ9qa/cRfnLvHEglQQeusLxP69GJBvlgrgYanwKXAqZpl/1oJcHTx6
- Ow6Lze2xHCFVkofJfjnaihXhU875HT2W2Gz2cuJP3YuID+ZHH+7SVtS9fk2OdFtBUsoZETDjiCQ
- HL9cMdSCnSFKzucDddUAYm8AxHELBYgg5XxA1mV9a5QCCxbb4NcUHF9swLwq+4qnp8k+rvwtL3H
- TZAWGKtv96PTg1J6lRng/d8uL5aSk3gLFYC0nQPdKsdRC3hkQzfyqNvh+ozGtzw5kEGdXheJ0JY
- YxTwxkBwuxFGdhqX3kFU/bqpBFbrjy6b7ucIobvouKfGryKVREp/O/DmF9R2ovf+p4EaYJo5IxM
- tXo1bWgoPMV0G0=
-X-Received: by 2002:a05:6102:32ce:b0:602:7a74:fbbe with SMTP id
- ada2fe7eead31-62ada94f75amr2641008137.9.1777576391270; 
- Thu, 30 Apr 2026 12:13:11 -0700 (PDT)
-Received: from localhost.localdomain ([2804:14c:4c5:9534::3545])
+ d=1e100.net; s=20251104; t=1777577245; x=1778182045;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=DdR859gHuPIoNxRK1sh5uveWeTEkqpZ2cVCVEZbTZH8=;
+ b=K1t0NA4BPYawO5A68oIAYi/8t25yNmtlS44rjbE1giuhHFmkMvyxY3YZgxZ48i+Pt4
+ +7f6XbUUqB27FoOfHHLR4aDXshlBlkKPk5A6I/+hnwv56+JG7O61BgG094WcSJL/jhBp
+ B5FHElbmZsH8OBqC7n8R31HAQnzpgutQD4V/4ElHQdTvTgDCuFIbveZJJw3cO3ntpLPE
+ +Eagkj5rhgmQcDgFBOzvaNuN0C9DjmTHUXnAbcUs0zqmFhBetjn51nzkzG5jaoO96jvf
+ HoQNpnt5U8QPxl0U1lXSlNOE2K+1GC1/oACxO8vEaezYAqcYI0mY8UnwPankgFpbewv8
+ 4/GA==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ+TuzYpLxr1DAjhBIv0AS/MCiMgkKLIlXQLtcjDOmRkrLIZPV6WNm76m//OPvJI9V4+18HZ4as=@lists.denx.de
+X-Gm-Message-State: AOJu0YyWsXH6M6lm1Bpn/97A3tjschKfSEtcW3+sRKCPFaC9mdAV6aHA
+ TpvaNDt+wMsgRjdnZa+92nV8I2iwjwg/MYz4cn2oKuX0WpDU+yJpk1ak
+X-Gm-Gg: AeBDietaQ8+1wkSCA1GbnmwVr6KS0pIE9U7107Lbpzv7WRL9MGuDaia2mbWwxx9UiRm
+ 9g2wcQ0cYGID5ixkg6CaCkDX2dYleNCUUG2pTtEwj0YEdPEpItcmcJeublsaPlMTGqGPugLHTak
+ CYVqKV0lQetE7GQE3ssNiSVQmqYZMy6FZU5oZXA1QiEtxoMI37J6X1MzfsJGuykWvyR3DYnSCNb
+ NpfjpBZDro+s/HOwNnR80wcW8xVjI/E1FNHhYrCqzYPeNl+5WBqyWGbHM1B70ygIaMEp1BGzII9
+ N5hLmdeMNhT2X8nT27wcVNEqnZOQXLZjxRD0uj04qn8M6Nrg4cyIBLJG++HPTSf056oSDLaqYTg
+ WR12vDUH/ERY7kINEiC3zAZSrHmRtIYXOsfk7fGoOb9MpGoKKf3t6jQqJuYqqQvBx1gD/5vvdo1
+ WWtz3aZD+SD5cakuHP5JBNMORiWhvSxPn+BI/DUBhgQxDquTM15OBs1y4fucM=
+X-Received: by 2002:ac8:7d05:0:b0:50d:84a7:72d0 with SMTP id
+ d75a77b69052e-5102ad9b157mr59720281cf.36.1777577244937; 
+ Thu, 30 Apr 2026 12:27:24 -0700 (PDT)
+Received: from cethr-l01.localdomain ([136.56.120.109])
  by smtp.gmail.com with ESMTPSA id
- a1e0cc1a2514c-95ce0897ee7sm340213241.3.2026.04.30.12.13.09
- for <u-boot@lists.denx.de>
+ d75a77b69052e-5103d3371adsm2794491cf.29.2026.04.30.12.27.22
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 30 Apr 2026 12:13:10 -0700 (PDT)
-From: Hiago De Franco <hfranco@baylibre.com>
-To: u-boot@lists.denx.de
-Subject: [PATCH] doc: sophgo: licheerv_nano: fix incorrect step numbering
-Date: Thu, 30 Apr 2026 16:13:06 -0300
-Message-ID: <20260430191306.64628-1-hfranco@baylibre.com>
-X-Mailer: git-send-email 2.47.3
+ Thu, 30 Apr 2026 12:27:24 -0700 (PDT)
+From: Caleb Ethridge <jcethrid@gmail.com>
+To: sjg@chromium.org
+Cc: caleb.ethridge@analog.com, jcethrid@gmail.com, linux@analog.com,
+ malysagreg@gmail.com, philip@philipmolloy.com, trini@konsulko.com,
+ u-boot@lists.denx.de
+Subject: Re: [PATCH v5 03/15] mach-sc5xx: Update boot commands
+Date: Thu, 30 Apr 2026 15:27:21 -0400
+Message-Id: <20260430192721.4833-1-jcethrid@gmail.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <CAFLszTgG1+cW+1-uKnkX8w0pY4Y=S=EPwCSxdc-q2BXrEGm9xw@mail.gmail.com>
+References: <CAFLszTgG1+cW+1-uKnkX8w0pY4Y=S=EPwCSxdc-q2BXrEGm9xw@mail.gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Thu, 30 Apr 2026 21:54:39 +0200
@@ -98,29 +102,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Steps 2 and 3 are incorrectly numbered. Fix them.
+Hi Simon,
 
-Signed-off-by: Hiago De Franco <hfranco@baylibre.com>
----
- doc/board/sophgo/licheerv_nano.rst | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+>Adding CONFIG_SC5XX_LOADADDR to the four sc594/sc598 SPL defconfigs
+>seems like it doesn't relate to "update boot commands" - maybe have
+>its own patch.
 
-diff --git a/doc/board/sophgo/licheerv_nano.rst b/doc/board/sophgo/licheerv_nano.rst
-index a75c6a37dc5..a3b1171287d 100644
---- a/doc/board/sophgo/licheerv_nano.rst
-+++ b/doc/board/sophgo/licheerv_nano.rst
-@@ -43,9 +43,9 @@ To run u-boot.bin on top of FSBL, follow these steps:
-    FSBL, OpenSBI, and U-Boot.
-    Note that you will have to use the file cv181x.bin as the FSBL.
- 
--2. Place the generated fip.bin file into the FAT partition of the SD card.
-+4. Place the generated fip.bin file into the FAT partition of the SD card.
- 
--3. Insert the SD card into the board and power it on.
-+5. Insert the SD card into the board and power it on.
- 
- The board will automatically execute the FSBL from the fip.bin file.
- Subsequently, it will transition to OpenSBI, and finally, OpenSBI will invoke
--- 
-2.47.3
+I have moved these changes to their own commit, it will be reflected along
+with the other commit changes in the next version of the patch series.
 
+> Don't you want to keep the de-duplication, e.g. by setting sfdev in ospiboot
+> and then 'run spiboot' ?
+
+I would prefer to keep them separate, we have kept them separate in our older 
+versions of our U-boot fork as well. De-duplication is good but at this point
+with new boards in the sc5xx family being developed and  released,
+I believe keeping the flexibility to easily change either of these commands 
+without affecting the other is better. 
+
+Thanks,
+
+Caleb Ethridge
