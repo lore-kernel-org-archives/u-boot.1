@@ -4,117 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41C38CD13D2
-	for <u-boot@archiver.kernel.org>; Thu, 30 Apr 2026 22:00:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3EF8ECCFA13
+	for <u-boot@archiver.kernel.org>; Thu, 30 Apr 2026 22:00:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DCBA08432A;
-	Thu, 30 Apr 2026 23:59:59 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=jannau.net
+	by phobos.denx.de (Postfix) with ESMTP id C7C2284198;
+	Fri,  1 May 2026 00:00:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=jannau.net header.i=@jannau.net header.b="kok77oBT";
-	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="oJtNNTeB";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="H7s1Kt8E";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 965A480086; Thu, 30 Apr 2026 23:59:58 +0200 (CEST)
-Received: from fhigh-b8-smtp.messagingengine.com
- (fhigh-b8-smtp.messagingengine.com [202.12.124.159])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 2EE8D842C7; Fri,  1 May 2026 00:00:24 +0200 (CEST)
+Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
+ [IPv6:2a00:1450:4864:20::634])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 87B0D843D4
- for <u-boot@lists.denx.de>; Thu, 30 Apr 2026 23:59:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 93B2883693
+ for <u-boot@lists.denx.de>; Fri,  1 May 2026 00:00:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=jannau.net
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=j@jannau.net
-Received: from phl-compute-01.internal (phl-compute-01.internal [10.202.2.41])
- by mailfhigh.stl.internal (Postfix) with ESMTP id DEDF17A00E4;
- Thu, 30 Apr 2026 17:59:54 -0400 (EDT)
-Received: from phl-frontend-03 ([10.202.2.162])
- by phl-compute-01.internal (MEProxy); Thu, 30 Apr 2026 17:59:55 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=jannau.net; h=cc
- :cc:content-transfer-encoding:content-type:content-type:date
- :date:from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:subject:subject:to:to; s=fm1; t=1777586394;
- x=1777672794; bh=afB0Jke/YbB/cQC+hhQEJC+LzpRK2IqMhDmlNm3v6b0=; b=
- kok77oBT1ZHXWn/VhykSgtfAJO3D5Y6JRDcbqkxXmdyTsXIVeYOV6160Rh2dGiCz
- f19bEYBi+108T+j5e4utQGfZiLaxD4gRqd2tAydvTKNWE/seiMsTfMmsL9X3Pf6I
- bfny0vQTPWrsOPPawvGjKfc68iT6bkJqandIwRXQp0ycuCq7Riju/WbtvifVhiHX
- dU06PVymithq+o4ZYaGDRtCgGVTujN9UNR9UQfyDXjwTm5A3q3ArYTKgrzRG6SG2
- Axf5DFyb5FSHODJxB3xOaTe3p0c5Kj5296Hb7VCCacrwWiHjX3zFsKXmFmMiZ0FU
- tG+fRLW7RJXloEGmkIcdAQ==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- messagingengine.com; h=cc:cc:content-transfer-encoding
- :content-type:content-type:date:date:feedback-id:feedback-id
- :from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:subject:subject:to:to:x-me-proxy
- :x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=1777586394; x=
- 1777672794; bh=afB0Jke/YbB/cQC+hhQEJC+LzpRK2IqMhDmlNm3v6b0=; b=o
- JtNNTeBl09+sZL/CVyKFD7GHiQ9vE6vZdtt68iAIBcq1Z2brqT91hDzbs5VNUCQL
- 2uBczhzR3fFsJWPNYPZ4Hgy7sM5u+GGZ1EgzgBZw5bPBoihXY71j1feq/mxD7N5j
- UwXuc9O9eXBcXksEKvskt3Vv8Cx0bV3wJdQKbj/XUyVV5UGdaFaoJTxkH8zGIyWT
- bATncMOt7/TL/s0NPC/kiuk1jXDFiezK26FJnm3JUHpYA0UDssW11QgeAY3zXxhT
- shxvNdvzP7c9ju6Vr9jmB511tgBk9IoWn0slkpR9cPXlQ5JZrFciaIa8POtZU3lt
- LbQynhWhkh+pOvQKxm3DA==
-X-ME-Sender: <xms:2tDzae-tMVBGghA3Ln373FkK9xWkD-NIZLlWJV-e5NtZKYcwxr7kTw>
- <xme:2tDzaYEUJjMRfDAgzJKShnZ4iLA7WqAu0oH6l2PtYSUk5ZJgTDUV-h50MyqmY4F8N
- 3UuhuAdQHlnCD77kKuRftuu4kpMoysgDJog5XJRWpXI2PoqunPsC8E>
-X-ME-Received: <xmr:2tDzacjejZL7a2mtmBeXqK--d1cEbsEhCM1m6zfW3d_w6OxY7LQhSKbLfGEV-NJc-fPjQ2JbKrUkO7zR5mqaTiPX0y9BHGGohMAOHA>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefhedrtddtgdekkeegiecutefuodetggdotefrod
- ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpuffrtefokffrpgfnqfghnecuuegr
- ihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfjug
- hrpefhfffugggtgffkfhgjvfevofesthejredtredtjeenucfhrhhomheplfgrnhhnvgcu
- ifhruhhnrghuuceojhesjhgrnhhnrghurdhnvghtqeenucggtffrrghtthgvrhhnpeefhe
- ehieeludffheetiefhvddtleffuddtleduudeiudetvdefffehkeehgfettdenucevlhhu
- shhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpehjsehjrghnnhgruh
- drnhgvthdpnhgspghrtghpthhtohepudejpdhmohguvgepshhmthhpohhuthdprhgtphht
- thhopehsjhhgsegthhhrohhmihhumhdrohhrghdprhgtphhtthhopehprghtrhhitggvrd
- gthhhothgrrhgusehfohhsshdrshhtrdgtohhmpdhrtghpthhtohepqhhuvghnthhinhdr
- shgthhhulhiisegthhgvrhhrhidruggvpdhrtghpthhtohepshhtvghfrghnrdhrohgvsh
- gvsehmrghilhgsohigrdhorhhgpdhrtghpthhtohepmhgvseiiihihrghordgttgdprhgt
- phhtthhopehjsehjrghnnhgruhdrnhgvthdprhgtphhtthhopehtrhhinhhisehkohhnsh
- hulhhkohdrtghomhdprhgtphhtthhopehuqdgsohhotheslhhishhtshdruggvnhigrdgu
- vgdprhgtphhtthhopehphhhilhhiphdrmhholhhlohihsegrnhgrlhhoghdrtghomh
-X-ME-Proxy: <xmx:2tDzaV8JKOlgpKYEx6O-y5NBV4AzbUPjL0jZh0JBDY7UOkhvgawKTQ>
- <xmx:2tDzaUZduCLBmC_LrEKMb3h_6OtaN-_OIXyMbT7HA9hEzGp-dWIvWg>
- <xmx:2tDzabtkVsp6QNgXY83R1IBcape8-oMb5CQBaahwdj0RfAVNq59lFg>
- <xmx:2tDzaQmIooUDy0opXmWFF_LBTq4Xm08UmHBGsBkx0yRBJXAxBr4obg>
- <xmx:2tDzaTLMi5hWPuaNC0dhkuJK9hHK5XH5CI42xKZodDSP00Lj-JjXP6a2>
-Feedback-ID: i47b949f6:Fastmail
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Thu,
- 30 Apr 2026 17:59:53 -0400 (EDT)
-From: Janne Grunau <j@jannau.net>
-Date: Thu, 30 Apr 2026 23:59:37 +0200
-Subject: [PATCH 2/2] MAINTAINERS: Add Janne Grunau as reviewer for Apple M1
- SoC support
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x634.google.com with SMTP id
+ a640c23a62f3a-b9c9d03524cso191160166b.3
+ for <u-boot@lists.denx.de>; Thu, 30 Apr 2026 15:00:21 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1777586421; cv=none;
+ d=google.com; s=arc-20240605;
+ b=VqlOhdWWPbJeFRa85P1b75WkLMxfFINGeubeo5BcV49jQqUl1L3XLW3VLSN0xnb7G2
+ b9o97+BdPRYl5hP4gp3Gks9xvpVoMBehoIUL3JHF6hBBsLyuBtFH8H6EChMpZ+F9K5oT
+ 9uGWPqv6PxNcMAg9IQ5HUKwZyWkK+ZMM0KSpLAKJ6BI+vKrmIE2PTctUgcbtfAL/CSBv
+ rOf1fUl9XqwzInS4i2ThYZ6N520PM1hUNA2q/OeWlTplMRv5oHQk7M2IvCkqn/eviPUH
+ HZup5rvRa7rCeMEetw42MV+mb1Qald/oLed2ZIWNw2FU2wAKsermgOlRXxnSQbFtnV3k
+ ZdqQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=zQvLQyvIGvgj12WHXPTvHDI5PiQ0Wh31GY9IVkVqgSU=;
+ fh=6J/MNr/sU5br7Y0Rao8dp8Fd7Z4c/OI3V2XIga8rWl8=;
+ b=grVLgcLAHQQOBzCdGCrSS85VddILXDReJNI1r0hweFWtGFCI6vZc4Ce6W7AqMJ1Bzf
+ tyAAPr5Joi0r+6UqAGPSFeeqbQP1DHkGUzwNe1sWgcLcGyeW2uhVE6qsnbyDotxMXtEH
+ nxDAGRhKK49vdIsOSRl3rlPCz12oJHX5fUH5ZfSaRdPy1gsbYwcRzl+BZqL9GvmXBYqy
+ 3rIDbd9Ha84Upl5DYmhK4rGnf8d+YzcUIbdxRjzb/Ce8xiOaE0Fs/PueygXGbQFE7dYC
+ fFnf6jRH2/03/tFP3jRHTVnR7+A0w8oSkTI/4fqDy2u3BmXCB+bq8lpcfnmYrn9tHcjN
+ GZVA==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1777586421; x=1778191221; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=zQvLQyvIGvgj12WHXPTvHDI5PiQ0Wh31GY9IVkVqgSU=;
+ b=H7s1Kt8EACPbYw3K9IILIGMu2Tw7nkVCas1agLrszgRQKhCOQgMKESk/EBwiXSXblL
+ zBI4LE7+CHD8TId69Gds6/tVsQY9YvS+3rxBq9p7UuvVr01itnrxpHgsb1P2ivKBedjB
+ +k3Hn+t5OD3eiNNZ1hwcZUULll3ZstyvOIT6s=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1777586421; x=1778191221;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=zQvLQyvIGvgj12WHXPTvHDI5PiQ0Wh31GY9IVkVqgSU=;
+ b=SDNzRE61cZkNvXOHt9SfsgjVTeErMOceu2ncIA4Trw+Q87NadCHb1YLeKy5IzZYjjq
+ vj92ScnMkaXk+948n0yL6x++W4UWQO7L237C8ycMHLITjcZmDI0AqaOVo5pIMRCweaGx
+ bHh4Ph63tfGikos9qQ7HCcOfKLtvn0bWMQVCqs6+syJ9fkUsJxv3+jRQuX14EwIvQ+DM
+ 5UQ2s1NJiZru9VfDc8l225Is5kzFlJHvrm68bnSsbRezH5RxCUAgjKBdrwi38Ou8njEL
+ BdyTepyTaQJ6p8WjRAE6u2gEgUn8YXzHMmpnrsKLC0jwQc/6ztUfhw4OGpNd+z9uGnAK
+ 8jmw==
+X-Gm-Message-State: AOJu0YwuLmSfO2Rq+1AYrVRjmAZVFip3N3vTLqyQKejVn2MDNrg4rQFk
+ wkuqYdT+XemDMt2Qog1In3LVqIUuS1A36Kyg0UKbPrInZt6YghLAjp9ph4wiY7TlsKm5LAf1J1+
+ zyOCSIhfotOB31OF9+8XpT+fO8uIjnIC+GAC901HPqpEncvUIhusLGw==
+X-Gm-Gg: AeBDievicOL0q/EF3xqXQ+zDqXhdblhl6UqtTULTiqUBoAYku1fwxMWmpJ/1zSm7/mO
+ aWs0esqkj5LANxheL7XOQvKZrlMydKSoTCpWceEI0H/q1EzGlshBanSYD4BXbsFMmrc/j6VCKlF
+ HXLrBIUf9sP2efHiCUdJv3/AaBMtpcDXPxEm/A5GqlyUBQHtbL/9MEkBh8zmbsQwhB/tGbRtQS8
+ 3vmu4QG++ClVNrRoXCVERuLV06smBYy23+5UF0T1BVKs1e375nAOI3jxdY5e1IBB149+wkrfDYf
+ QhEJHp+JVSGxsn7H
+X-Received: by 2002:a17:907:980d:b0:ba6:be92:a58f with SMTP id
+ a640c23a62f3a-bbac7c9223emr322927366b.44.1777586421012; Thu, 30 Apr 2026
+ 15:00:21 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260430-maintainers-apple-v1-2-43382ca4d780@jannau.net>
-References: <20260430-maintainers-apple-v1-0-43382ca4d780@jannau.net>
-In-Reply-To: <20260430-maintainers-apple-v1-0-43382ca4d780@jannau.net>
-To: u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, Mark Kettenis <kettenis@openbsd.org>, 
- Simon Glass <sjg@chromium.org>, Neil Armstrong <neil.armstrong@linaro.org>, 
- Yao Zi <me@ziyao.cc>, Patrice Chotard <patrice.chotard@foss.st.com>, 
- Kuan-Wei Chiu <visitorckw@gmail.com>, 
- "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>, 
- Jerome Forissier <jerome.forissier@arm.com>, Peng Fan <peng.fan@nxp.com>, 
- Raymond Mao <raymond.mao@riscstar.com>, 
- Quentin Schulz <quentin.schulz@cherry.de>, 
- Stefan Roese <stefan.roese@mailbox.org>, 
- Philip Molloy <philip.molloy@analog.com>, 
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>, 
- Janne Grunau <j@jannau.net>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=openpgp-sha256; l=598; i=j@jannau.net; s=yk2025; 
- h=from:subject:message-id;
- bh=4m7LLxioj/SGkLRR/rCzuuqiP6hk8gVzxN/2iiO+kYU=; 
- b=owGbwMvMwCW2UNrmdq9+ahrjabUkhszPFy4des9a4v1uoss27mWOv/NXnCpaqrlmgtRRm7seT
- 0WOTJi1uKOUhUGMi0FWTJElSftlB8PqGsWY2gdhMHNYmUCGMHBxCsBEpmxgZPhtnD1XTKMvXmLy
- hdIet8Wynx9IORXrrl/PsJPtF2//Uz5GhhWV3OxL7C9FfpO8tUzR/Kr4+pQDv7fP2CT3YWqrXuW
- jGj4A
-X-Developer-Key: i=j@jannau.net; a=openpgp;
- fpr=8B336A6BE4E5695E89B8532B81E806F586338419
+References: <20260428133612.669105-1-ludwig.nussel@siemens.com>
+ <CAFLszTjT691ZQudD_tJ-Os-pVnsLQjto2QeYv32tS5Us7wLWRA@mail.gmail.com>
+ <ca01a914-2308-4274-b538-0359ecb29632@siemens.com>
+In-Reply-To: <ca01a914-2308-4274-b538-0359ecb29632@siemens.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Thu, 30 Apr 2026 16:00:06 -0600
+X-Gm-Features: AVHnY4KKSllY6K8GYE1oC9gwaSJtOA8CY7ZbzgaqqEL2vjPr-5l_JPKLtPP5arQ
+Message-ID: <CAFLszThMDg+w+rCOLHnFNQwsFHa18mVB2NkzqJwddSR=iv-VMA@mail.gmail.com>
+Subject: Re: [PATCH] virtio: ignore ENODEV for boot device hunting
+To: Ludwig Nussel <ludwig.nussel@siemens.com>
+Cc: u-boot@lists.denx.de, Adam Lackorzynski <adam@l4re.org>,
+ Bin Meng <bmeng.cn@gmail.com>, 
+ =?UTF-8?Q?Christian_P=C3=B6tzsch?= <christian.poetzsch@kernkonzept.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -131,27 +112,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-I'm one of the co-maintainers of Apple silicon support in the Linux
-kernel and have contributed to u-boot's Apple SoC support.
+Hi Ludwig,
 
-Signed-off-by: Janne Grunau <j@jannau.net>
----
- MAINTAINERS | 1 +
- 1 file changed, 1 insertion(+)
+On Thu, 30 Apr 2026 at 03:01, Ludwig Nussel <ludwig.nussel@siemens.com> wrote:
+>
+> On 4/29/26 16:20, Simon Glass wrote:
+> > [...]
+> >> diff --git a/drivers/virtio/virtio-uclass.c b/drivers/virtio/virtio-uclass.c
+> >> @@ -382,7 +382,7 @@ static int virtio_bootdev_hunt(struct bootdev_hunter *info, bool show)
+> >>        ret = uclass_probe_all(UCLASS_VIRTIO);
+> >> -     if (ret && ret != -ENOENT)
+> >> +     if (ret && ret != -ENOENT && ret != -ENODEV)
+> >>                return log_msg_ret('vir', ret);
+> >
+> > I don't think this is the right layer. uclass_probe_all() walks every
+> > device in the uclass and returns whichever error came back last, so a
+> > single bogus mmio slot poisons the result for every other working
+> > virtio device. -ENXIO is also returned from virtio_mmio_probe() for an
+> > unsupported version and would still bail out here, which is
+> > inconsistent with what you are trying to achieve.
+> >
+> > As I understand it, the placeholder/empty mmio slots should not be
+> > reaching probe at all, i.e. the bind step should reject them - or
+> > virtio_mmio_probe() should keep returning 0 for the 'no device
+> > present' case (wrong magic, ID 0) and let DM treat that as nothing to
+> > probe. The unsupported-version case is the only real error.
+> >
+> > Could you take another look at 70101c3217ae and see whether the fix
+> > belongs there (or in the bind path) instead?
+>
+> I don't know the first thing about that :) Naively changing the function
+> to be called in bind() instead makes u-boot crash. It would be possible
+> to change the return value in the probe function to ENOENT instead.
+> The driver claims to be ported from Linux. In Linux the return value in
+> question is ENODEV though.
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 2fc41a79dac..5bcc8607901 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -128,6 +128,7 @@ F:	drivers/mmc/snps_dw_mmc.c
- 
- APPLE M1 SOC SUPPORT
- M:	Mark Kettenis <kettenis@openbsd.org>
-+R:	Janne Grunau <j@jannau.net>
- S:	Maintained
- F:	arch/arm/include/asm/arch-apple/
- F:	arch/arm/mach-apple/
+U-Boot is a little different from Linux in that it has a 'bind' stage.
+We use -ENODEV in driver model to indicate that there is no device.
+Standard boot uses it to indicate there are no more devices (see
+BF_NO_MORE_DEVICES).
 
--- 
-2.53.0
+Checking for -ENODEV in a device doesn't really make any sense since
+there is clearly a device (you just called the probe() method!)
 
+I think -ENOENT would work.
+
+>
+> Maybe it makes sense to make virtio_bootdev_hunt() ignore all errors
+> instead?
+>
+
+I'm not sure about that, but I see it as a last resort, since we try
+to report errors where possible.
+
+Regards,
+Simon
