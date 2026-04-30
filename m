@@ -4,45 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08364FF8875
-	for <u-boot@archiver.kernel.org>; Thu, 30 Apr 2026 08:44:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED167FF8875
+	for <u-boot@archiver.kernel.org>; Thu, 30 Apr 2026 08:45:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 532B88467A;
-	Thu, 30 Apr 2026 10:44:39 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8BEC88468A;
+	Thu, 30 Apr 2026 10:44:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="Ck8TQvM+";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="n/SBex5J";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D0FF78466E; Thu, 30 Apr 2026 10:44:37 +0200 (CEST)
+ id 6BCB684693; Thu, 30 Apr 2026 10:44:41 +0200 (CEST)
 Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 69E2D8466C
- for <u-boot@lists.denx.de>; Thu, 30 Apr 2026 10:44:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 883008468A
+ for <u-boot@lists.denx.de>; Thu, 30 Apr 2026 10:44:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=richard.genoud@bootlin.com
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-03.galae.net (Postfix) with ESMTPS id 126754E42B79;
- Thu, 30 Apr 2026 08:44:35 +0000 (UTC)
+ by smtpout-03.galae.net (Postfix) with ESMTPS id 83C9D4E42B79;
+ Thu, 30 Apr 2026 08:44:38 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id D514060495;
- Thu, 30 Apr 2026 08:44:34 +0000 (UTC)
+ by smtpout-01.galae.net (Postfix) with ESMTPS id 5A19660495;
+ Thu, 30 Apr 2026 08:44:38 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 64BAC1072B7AE; 
- Thu, 30 Apr 2026 10:44:31 +0200 (CEST)
+ with ESMTPSA id B3A221072B7B0; 
+ Thu, 30 Apr 2026 10:44:33 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1777538673; h=from:subject:date:message-id:to:cc:mime-version:
+ t=1777538676; h=from:subject:date:message-id:to:cc:mime-version:
  content-transfer-encoding:in-reply-to:references;
- bh=sk7iOm9SBxYXoB7YlV4H5UFOinc75XKNo0qOlhBVsNo=;
- b=Ck8TQvM+7MlMErtz0nPBGfjrDBl5tCH8v9ixaznWBrCv7kbEITTuQk/uGXNuFtuuUTlB+c
- m766cl3IAy9duMobJ4yiqkW+jSmgSZOAGpHSigE8xpQ38Zdwxn9FOx0D7aLgqVgwjeBnBa
- 8igcIlSfvSoQ9nvySYIDwmoBL7nB7Ux0N0z0sxgnSDKalvMp3C98JBSfIyl5EKyO31i9sj
- GAEF2kSa46BSAic9hYLB87ZyfxzCzHD08x6g4j1k08QAhFs0ClR/L3AvJp9SzxQGRAo8Fd
- qAQXrWME8Yn/Zv/nQZ4ymjWbcKA/Xw1colUgXTsrCXofRtkzBvzcu6AKS1qhzw==
+ bh=j50AFHKHSG/4n6Q0BJeNl5KVpKNHVcj3/V5rqo/Dlqg=;
+ b=n/SBex5JOiH6JmYp/QJBRoQqp6bfowM7LD/TuzYypzAPb667l7Vbd6Z14cpoKUNgz/2BR1
+ I6lsRmpFQS/xmh1JBbMpGfjbSrn+giDfkegrApYsKlpo7cwm2V2XVuV+uRdTzUj0RhaKVZ
+ bV6CqN9lUrZ3yVufnGpi1XfVaMw0RutZVryvS46zA3h8dX1mF/pCcpscdqPH7I62SlHq1f
+ L7e1tW+fXBYWY5eX0Qpx38HSjtFr0pd07Dwopz8B7+mynCLXGJ5z61Mep99auFFABNLMug
+ JBEapw6NU0WmOtcYRxK4b0SQGTjVEy/CwfK5swXoor1mYAdWUtrFBoBNz+wiAg==
 From: "Richard Genoud (TI)" <richard.genoud@bootlin.com>
 To: Tom Rini <trini@konsulko.com>, Manorit Chawdhry <m-chawdhry@ti.com>,
  Apurva Nandan <a-nandan@ti.com>, "Andrew F . Davis" <afd@ti.com>,
@@ -55,9 +55,9 @@ Cc: Markus Schneider-Pargmann <msp@baylibre.com>, Udit Kumar <u-kumar1@ti.com>,
  Gregory CLEMENT <gregory.clement@bootlin.com>,
  Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
  Richard Genoud <richard.genoud@bootlin.com>, u-boot@lists.denx.de
-Subject: [PATCH 03/20] board: ti: j721e: Add resume detection for J721e/J7200
-Date: Thu, 30 Apr 2026 10:43:56 +0200
-Message-ID: <20260430084414.1354490-4-richard.genoud@bootlin.com>
+Subject: [PATCH 04/20] board: ti: j784s4: Add resume detection
+Date: Thu, 30 Apr 2026 10:43:57 +0200
+Message-ID: <20260430084414.1354490-5-richard.genoud@bootlin.com>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20260430084414.1354490-1-richard.genoud@bootlin.com>
 References: <20260430084414.1354490-1-richard.genoud@bootlin.com>
@@ -80,93 +80,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: "Thomas Richard (TI)" <thomas.richard@bootlin.com>
-
 Add the capability to detect a resume. This overrides the weak
-function j7xx_board_is_resuming(void).
+function j7xx_board_is_resuming().
 To detect the resume, SPL searches a magic value (0xBA) in a register
-of PMICA.
+of PMIC.
 This value is set by DM-Firmware during the suspend sequence.
 
-Signed-off-by: Thomas Richard (TI) <thomas.richard@bootlin.com>
-Co-developed-by: Gregory CLEMENT (TI) <gregory.clement@bootlin.com>
-Signed-off-by: Gregory CLEMENT (TI) <gregory.clement@bootlin.com>
-Co-developed-by: Richard Genoud (TI) <richard.genoud@bootlin.com>
+NB: As this is called in board_init_f(), there's no BSS, so we can't
+use global/static variables.
+
 Signed-off-by: Richard Genoud (TI) <richard.genoud@bootlin.com>
 ---
- board/ti/common/k3-lpm.h | 17 +++++++++++++++++
- board/ti/j721e/evm.c     | 37 +++++++++++++++++++++++++++++++++++++
- 2 files changed, 54 insertions(+)
- create mode 100644 board/ti/common/k3-lpm.h
+ board/ti/j784s4/evm.c | 38 ++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 38 insertions(+)
 
-diff --git a/board/ti/common/k3-lpm.h b/board/ti/common/k3-lpm.h
-new file mode 100644
-index 000000000000..a2141a0c25a8
---- /dev/null
-+++ b/board/ti/common/k3-lpm.h
-@@ -0,0 +1,17 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+/*
-+ * Copyright (C) 2026, Texas Instruments Incorporated - https://www.ti.com/
-+ * Copyright (C) 2026, Bootlin
-+ */
-+
-+#ifndef __K3_LPM_H
-+#define __K3_LPM_H
-+
-+/* Magic value in PMIC register to indicate the suspend state (SOC_OFF) */
-+#define K3_LPM_MAGIC_SUSPEND 0xba
-+
-+/* PMIC register where the magic value resides */
-+#define K3_LPM_SCRATCH_PAD_REG 0xcb
-+
-+#endif /* __K3_LPM_H */
-+
-diff --git a/board/ti/j721e/evm.c b/board/ti/j721e/evm.c
-index 881392bd963a..67ff13828514 100644
---- a/board/ti/j721e/evm.c
-+++ b/board/ti/j721e/evm.c
-@@ -17,9 +17,11 @@
+diff --git a/board/ti/j784s4/evm.c b/board/ti/j784s4/evm.c
+index cabb3017ee14..4a74024fe4fe 100644
+--- a/board/ti/j784s4/evm.c
++++ b/board/ti/j784s4/evm.c
+@@ -12,7 +12,9 @@
+ #include <init.h>
  #include <spl.h>
- #include <dm.h>
  #include <asm/arch/k3-ddr.h>
 +#include <power/pmic.h>
- 
- #include "../common/board_detect.h"
  #include "../common/fdt_ops.h"
 +#include "../common/k3-lpm.h"
  
- #define board_is_j721e_som()	(board_ti_k3_is("J721EX-PM1-SOM") || \
- 				 board_ti_k3_is("J721EX-PM2-SOM"))
-@@ -469,6 +471,41 @@ err_free_gpio:
- 	}
- }
+ DECLARE_GLOBAL_DATA_PTR;
  
-+#if (IS_ENABLED(CONFIG_SPL_BUILD) && IS_ENABLED(CONFIG_TARGET_J7200_R5_EVM))
+@@ -61,6 +63,42 @@ int board_late_init(void)
+ }
+ #endif
+ 
++#if (IS_ENABLED(CONFIG_SPL_BUILD) && IS_ENABLED(CONFIG_TARGET_J784S4_R5_EVM))
 +
++/* in board_init_f(), there's no BSS, so we can't use global/static variables */
 +bool j7xx_board_is_resuming(void)
 +{
-+	struct udevice *pmica;
-+	int ret;
++	struct udevice *pmic;
++	int err;
 +
 +	if (gd_k3_resuming() != K3_RESUME_STATE_UNKNOWN)
 +		goto end;
 +
-+	ret = uclass_get_device_by_name(UCLASS_PMIC,
-+					"pmic@48", &pmica);
-+	if (ret) {
-+		printf("Getting PMICA init failed: %d\n", ret);
++	err = uclass_get_device_by_name(UCLASS_PMIC,
++					"pmic@48", &pmic);
++	if (err) {
++		printf("Getting PMIC init failed: %d\n", err);
 +		goto end;
 +	}
-+	debug("%s: PMICA is detected (%s)\n", __func__, pmica->name);
++	debug("%s: PMIC is detected (%s)\n", __func__, pmic->name);
 +
-+	if (pmic_reg_read(pmica, K3_LPM_SCRATCH_PAD_REG) == K3_LPM_MAGIC_SUSPEND) {
++	if (pmic_reg_read(pmic, K3_LPM_SCRATCH_PAD_REG) == K3_LPM_MAGIC_SUSPEND) {
 +		debug("%s: board is resuming\n", __func__);
 +		gd_set_k3_resuming(K3_RESUME_STATE_RESUMING);
 +
 +		/* clean magic suspend */
-+		if (pmic_reg_write(pmica, K3_LPM_SCRATCH_PAD_REG, 0))
-+			printf("Failed to clean magic value for suspend detection in PMICA\n");
++		if (pmic_reg_write(pmic, K3_LPM_SCRATCH_PAD_REG, 0))
++			printf("Failed to clean magic value for suspend detection in PMIC\n");
 +	} else {
 +		debug("%s: board is booting (no resume detected)\n", __func__);
 +		gd_set_k3_resuming(K3_RESUME_STATE_BOOTING);
@@ -175,7 +146,7 @@ index 881392bd963a..67ff13828514 100644
 +	return gd_k3_resuming() == K3_RESUME_STATE_RESUMING;
 +}
 +
-+#endif /* CONFIG_SPL_BUILD && CONFIG_TARGET_J7200_R5_EVM */
++#endif /* CONFIG_SPL_BUILD && CONFIG_TARGET_J784s4_R5_EVM */
 +
  void spl_board_init(void)
  {
