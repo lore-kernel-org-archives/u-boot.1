@@ -4,45 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9AC57FF8875
-	for <u-boot@archiver.kernel.org>; Thu, 30 Apr 2026 08:47:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9B86CCFA13
+	for <u-boot@archiver.kernel.org>; Thu, 30 Apr 2026 08:47:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4D48A846D8;
+	by phobos.denx.de (Postfix) with ESMTP id 8C546846DF;
 	Thu, 30 Apr 2026 10:45:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="UL5oAra2";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="IxbCj1un";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 09C21846D2; Thu, 30 Apr 2026 10:45:15 +0200 (CEST)
+ id 86881846A1; Thu, 30 Apr 2026 10:45:17 +0200 (CEST)
 Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EDF98846A1
- for <u-boot@lists.denx.de>; Thu, 30 Apr 2026 10:45:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 72F97846D7
+ for <u-boot@lists.denx.de>; Thu, 30 Apr 2026 10:45:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=richard.genoud@bootlin.com
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-02.galae.net (Postfix) with ESMTPS id A34711A3490;
- Thu, 30 Apr 2026 08:45:12 +0000 (UTC)
+ by smtpout-02.galae.net (Postfix) with ESMTPS id 27DF41A347D;
+ Thu, 30 Apr 2026 08:45:15 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id 786EE60495;
- Thu, 30 Apr 2026 08:45:12 +0000 (UTC)
+ by smtpout-01.galae.net (Postfix) with ESMTPS id F15CF60495;
+ Thu, 30 Apr 2026 08:45:14 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 922831072B7B7; 
- Thu, 30 Apr 2026 10:45:08 +0200 (CEST)
+ with ESMTPSA id B523B1072B7BE; 
+ Thu, 30 Apr 2026 10:45:11 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1777538711; h=from:subject:date:message-id:to:cc:mime-version:
+ t=1777538713; h=from:subject:date:message-id:to:cc:mime-version:
  content-transfer-encoding:in-reply-to:references;
- bh=4gHhbwbWyaY5AAPlO2PDTM3Rc79WvTr6O2lZ09lykFI=;
- b=UL5oAra2d2iO7u++r2bOFD8Wt+1IhQa7aC6rZhubfNGZMcDDOqv2SNyXoCFOSts7uo2Ypl
- 47UeCisS4rqHhSB78fv/qJEmfPuPQv66BItB38FKRqACKRX7bi31dhYcuK28M4qRKSjvff
- Xy3afhILFkSwJGJEqzCxgQlBh+wfcjRXPaHIQHQ+9qsl9BsR9PWcLFeSLZRJbaQRSyUx37
- qhn5LJaaSJ/DFTu49mSLUTol0f+K8B3v6uw4eNb3r7AbkLSpkz3Uc5QJZmS7z8jNqrfXOk
- lY1aRXX4bxTSEcHJST/9DFMLSSOiOi55PaYzV0LxmWVBILmjFUI8KA5fytyglA==
+ bh=S+2t3tvNvlZPlC8WNLXjRpR92IZZMA1OQx1yiioO/uE=;
+ b=IxbCj1unIZawwGI/0wbQ0rBRn5uzQfU5OXDipqilLzO/CHXzfW+Sgg+UJKtTOGA6blAVaM
+ /nuoD2EtK387HVfYcKqlpAzbd/4Y+d1e7NAP1n1MVcAc5SJgSKFIBZKkdduu/6bwXLDasq
+ IzUgYKfmCiWd/SZOzpnRroqovOeoey6de7BFlJLerFJQlZN3wbpUnusbtA5i32/SVktT3n
+ ECqtV2BrRptldxgq0eZryhgXp1PD53H2IUj806SLiunIbpDLqZI8vD87r6OzFPzpyDvhaw
+ awG0uLaoORjOi5ZAJmdWl0uwatFDC/PoHxkA8igkdYbBYINXghnhAaclsMY2UQ==
 From: "Richard Genoud (TI)" <richard.genoud@bootlin.com>
 To: Tom Rini <trini@konsulko.com>, Manorit Chawdhry <m-chawdhry@ti.com>,
  Apurva Nandan <a-nandan@ti.com>, "Andrew F . Davis" <afd@ti.com>,
@@ -55,10 +55,9 @@ Cc: Markus Schneider-Pargmann <msp@baylibre.com>, Udit Kumar <u-kumar1@ti.com>,
  Gregory CLEMENT <gregory.clement@bootlin.com>,
  Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
  Richard Genoud <richard.genoud@bootlin.com>, u-boot@lists.denx.de
-Subject: [PATCH 17/20] board: evm: Enable de-isolation of IOs at resume for
- j7200 and j784s4
-Date: Thu, 30 Apr 2026 10:44:10 +0200
-Message-ID: <20260430084414.1354490-18-richard.genoud@bootlin.com>
+Subject: [PATCH 18/20] board: ti: evm: Store wakeup reason on scratchpad memory
+Date: Thu, 30 Apr 2026 10:44:11 +0200
+Message-ID: <20260430084414.1354490-19-richard.genoud@bootlin.com>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20260430084414.1354490-1-richard.genoud@bootlin.com>
 References: <20260430084414.1354490-1-richard.genoud@bootlin.com>
@@ -83,174 +82,153 @@ X-Virus-Status: Clean
 
 From: Abhash Kumar Jha <a-kumar2@ti.com>
 
-When resuming from IO_ONLY_PLUS_DDR low power mode, the IOs are
-isolated. Remove that isolation in resume sequence.
+While resuming from suspend, the wakeup reason need to be stored
+and this will be used by the Linux kernel once its up.
 
-On j7200, The canuart IOs are isolated whereas on j784s4, the
-mcu_general IOs are isolated.
+Use the 32 bytes of MCU_PSRAM0_RAM area (addr = 0x40280000) to
+store the wakeup reason.
+
+Read the value as soon as it starts and store it internally.
 
 Signed-off-by: Abhash Kumar Jha <a-kumar2@ti.com>
 ---
- .../arm/mach-k3/include/mach/j721e_hardware.h | 11 +++++++
- .../mach-k3/include/mach/j784s4_hardware.h    | 10 +++++++
- board/ti/j721e/evm.c                          | 29 ++++++++++++++++++
- board/ti/j784s4/evm.c                         | 30 +++++++++++++++++++
- 4 files changed, 80 insertions(+)
+ arch/arm/mach-k3/include/mach/j721e_hardware.h  | 1 +
+ arch/arm/mach-k3/include/mach/j784s4_hardware.h | 1 +
+ board/ti/common/k3-lpm.h                        | 5 +++++
+ board/ti/j721e/evm.c                            | 9 +++++++++
+ board/ti/j784s4/evm.c                           | 9 +++++++++
+ 5 files changed, 25 insertions(+)
 
 diff --git a/arch/arm/mach-k3/include/mach/j721e_hardware.h b/arch/arm/mach-k3/include/mach/j721e_hardware.h
-index 5bef309af0a4..587dd10eb1ea 100644
+index 587dd10eb1ea..d58e2b3e1bb2 100644
 --- a/arch/arm/mach-k3/include/mach/j721e_hardware.h
 +++ b/arch/arm/mach-k3/include/mach/j721e_hardware.h
-@@ -15,6 +15,17 @@
- #define MCU_CTRL_MMR0_BASE				0x40f00000
- #define CTRL_MMR0_BASE					0x00100000
+@@ -47,6 +47,7 @@
  
-+#define PMCTRL_IO_1						(DMSC_PWRCTRL_BASE + 0x88)
-+#define DMSC_PWRCTRL_BASE				0x44130000
-+#define CANUART_WAKE_CTRL				0x18300
-+#define CANUART_WAKE_STAT0				0x18308
-+#define CANUART_WAKE_STAT1				0x1830C
-+
-+#define IO_ISO_MAGIC_VAL			0x55555554
-+#define IO_ISO_STATUS				BIT(25)
-+#define CANUART_WAKE_STAT1_CANUART_IO_MODE	BIT(0)
-+#define DEISOLATION_TIMEOUT_MS			10
-+
- #define CTRLMMR_MAIN_DEVSTAT				(CTRL_MMR0_BASE + 0x30)
- #define MAIN_DEVSTAT_BOOT_MODE_B_MASK		BIT(0)
- #define MAIN_DEVSTAT_BOOT_MODE_B_SHIFT		0
+ /* MCU SCRATCHPAD usage */
+ #define TI_SRAM_SCRATCH_BOARD_EEPROM_START	CONFIG_SYS_K3_MCU_SCRATCHPAD_BASE
++#define TI_SRAM_SCRATCH_LPM_START		0x40280000
+ 
+ #if defined(CONFIG_SYS_K3_SPL_ATF) && !defined(__ASSEMBLY__)
+ 
 diff --git a/arch/arm/mach-k3/include/mach/j784s4_hardware.h b/arch/arm/mach-k3/include/mach/j784s4_hardware.h
-index 29a894baed34..dd51473419dd 100644
+index dd51473419dd..2fc81902f879 100644
 --- a/arch/arm/mach-k3/include/mach/j784s4_hardware.h
 +++ b/arch/arm/mach-k3/include/mach/j784s4_hardware.h
-@@ -15,6 +15,16 @@
- #define MCU_CTRL_MMR0_BASE				0x40f00000
- #define CTRL_MMR0_BASE					0x00100000
+@@ -46,6 +46,7 @@
  
-+#define PMCTRL_IO_0					0x14084
-+#define MCU_GEN_WAKE_CTRL				0x18310
-+#define MCU_GEN_WAKE_STAT0				0x18318
-+#define MCU_GEN_WAKE_STAT1				0x1831C
+ /* MCU SCRATCHPAD usage */
+ #define TI_SRAM_SCRATCH_BOARD_EEPROM_START	CONFIG_SYS_K3_MCU_SCRATCHPAD_BASE
++#define TI_SRAM_SCRATCH_LPM_START		0x40280000
+ 
+ #if defined(CONFIG_SYS_K3_SPL_ATF) && !defined(__ASSEMBLY__)
+ 
+diff --git a/board/ti/common/k3-lpm.h b/board/ti/common/k3-lpm.h
+index a2141a0c25a8..dfd8f8486f08 100644
+--- a/board/ti/common/k3-lpm.h
++++ b/board/ti/common/k3-lpm.h
+@@ -13,5 +13,10 @@
+ /* PMIC register where the magic value resides */
+ #define K3_LPM_SCRATCH_PAD_REG 0xcb
+ 
++struct lpm_scratch_space {
++	u16 wake_src;
++	u16 reserved;
++} __packed;
 +
-+#define IO_ISO_MAGIC_VAL				0x55555554
-+#define IO_ISO_STATUS					BIT(25)
-+#define MCU_GEN_WAKE_STAT1_MCU_GEN_IO_MODE		BIT(0)
-+#define DEISOLATION_TIMEOUT_MS				10
-+
- #define CTRLMMR_MAIN_DEVSTAT				(CTRL_MMR0_BASE + 0x30)
- #define MAIN_DEVSTAT_BOOT_MODE_B_MASK			BIT(0)
- #define MAIN_DEVSTAT_BOOT_MODE_B_SHIFT			0
+ #endif /* __K3_LPM_H */
+ 
 diff --git a/board/ti/j721e/evm.c b/board/ti/j721e/evm.c
-index 67ff13828514..41eea1bdea95 100644
+index 41eea1bdea95..a9f469fea1f7 100644
 --- a/board/ti/j721e/evm.c
 +++ b/board/ti/j721e/evm.c
-@@ -18,6 +18,7 @@
- #include <dm.h>
- #include <asm/arch/k3-ddr.h>
- #include <power/pmic.h>
-+#include <wait_bit.h>
- 
- #include "../common/board_detect.h"
- #include "../common/fdt_ops.h"
-@@ -473,14 +474,42 @@ err_free_gpio:
+@@ -474,6 +474,9 @@ err_free_gpio:
  
  #if (IS_ENABLED(CONFIG_SPL_BUILD) && IS_ENABLED(CONFIG_TARGET_J7200_R5_EVM))
  
-+static void clear_isolation(void)
-+{
-+	int ret;
-+	const void *wait_reg = (const void *)(WKUP_CTRL_MMR0_BASE + CANUART_WAKE_STAT1);
++#define LPM_WAKE_SOURCE_PMIC_GPIO 0x91
++#define LPM_WAKE_SOURCE_MAIN_IO   0x80
 +
-+	/* un-set the magic word for canuart IOs */
-+	writel(IO_ISO_MAGIC_VAL, WKUP_CTRL_MMR0_BASE + CANUART_WAKE_CTRL);
-+	writel((IO_ISO_MAGIC_VAL + 0x1), WKUP_CTRL_MMR0_BASE + CANUART_WAKE_CTRL);
-+	writel(IO_ISO_MAGIC_VAL, WKUP_CTRL_MMR0_BASE + CANUART_WAKE_CTRL);
-+
-+	/* wait for CANUART_IO_MODE bit to be cleared */
-+	ret = wait_for_bit_32(wait_reg,
-+			      CANUART_WAKE_STAT1_CANUART_IO_MODE,
-+			      false,
-+			      DEISOLATION_TIMEOUT_MS,
-+			      false);
-+	if (ret < 0)
-+		pr_err("Deisolation timeout");
-+}
-+
- bool j7xx_board_is_resuming(void)
+ static void clear_isolation(void)
+ {
+ 	int ret;
+@@ -498,12 +501,15 @@ bool j7xx_board_is_resuming(void)
  {
  	struct udevice *pmica;
-+	u32 pmctrl_val = readl(PMCTRL_IO_1);
+ 	u32 pmctrl_val = readl(PMCTRL_IO_1);
++	struct lpm_scratch_space *lpm_scratch;
  	int ret;
  
  	if (gd_k3_resuming() != K3_RESUME_STATE_UNKNOWN)
  		goto end;
  
-+	if ((pmctrl_val & IO_ISO_STATUS) == IO_ISO_STATUS) {
-+		clear_isolation();
-+		gd_set_k3_resuming(K3_RESUME_STATE_RESUMING);
-+		debug("Resuming from IO_DDR mode\n");
-+		goto end;
-+	}
-+
- 	ret = uclass_get_device_by_name(UCLASS_PMIC,
- 					"pmic@48", &pmica);
- 	if (ret) {
++	lpm_scratch = (struct lpm_scratch_space *)TI_SRAM_SCRATCH_LPM_START;
+ 	if ((pmctrl_val & IO_ISO_STATUS) == IO_ISO_STATUS) {
++		lpm_scratch->wake_src = LPM_WAKE_SOURCE_MAIN_IO;
+ 		clear_isolation();
+ 		gd_set_k3_resuming(K3_RESUME_STATE_RESUMING);
+ 		debug("Resuming from IO_DDR mode\n");
+@@ -520,6 +526,7 @@ bool j7xx_board_is_resuming(void)
+ 
+ 	if (pmic_reg_read(pmica, K3_LPM_SCRATCH_PAD_REG) == K3_LPM_MAGIC_SUSPEND) {
+ 		debug("%s: board is resuming\n", __func__);
++		lpm_scratch->wake_src = LPM_WAKE_SOURCE_PMIC_GPIO;
+ 		gd_set_k3_resuming(K3_RESUME_STATE_RESUMING);
+ 
+ 		/* clean magic suspend */
+@@ -527,6 +534,8 @@ bool j7xx_board_is_resuming(void)
+ 			printf("Failed to clean magic value for suspend detection in PMICA\n");
+ 	} else {
+ 		debug("%s: board is booting (no resume detected)\n", __func__);
++		lpm_scratch->wake_src = 0;
++		lpm_scratch->reserved = 0;
+ 		gd_set_k3_resuming(K3_RESUME_STATE_BOOTING);
+ 	}
+ end:
 diff --git a/board/ti/j784s4/evm.c b/board/ti/j784s4/evm.c
-index 57c2f7018323..eef56556a33c 100644
+index eef56556a33c..b94ec7f3653b 100644
 --- a/board/ti/j784s4/evm.c
 +++ b/board/ti/j784s4/evm.c
-@@ -13,8 +13,10 @@
- #include <spl.h>
- #include <asm/arch/k3-ddr.h>
- #include <power/pmic.h>
-+#include <wait_bit.h>
- #include "../common/fdt_ops.h"
- #include "../common/k3-lpm.h"
-+#include "../common.h"
- 
- DECLARE_GLOBAL_DATA_PTR;
- 
-@@ -66,15 +68,43 @@ int board_late_init(void)
+@@ -68,6 +68,9 @@ int board_late_init(void)
  #if (IS_ENABLED(CONFIG_SPL_BUILD) && (IS_ENABLED(CONFIG_TARGET_J784S4_R5_EVM) || \
  				      IS_ENABLED(CONFIG_TARGET_J742S2_R5_EVM)))
  
-+static void clear_isolation(void)
-+{
-+	int ret;
-+	const void *wait_reg = (const void *)(WKUP_CTRL_MMR0_BASE + MCU_GEN_WAKE_STAT1);
++#define LPM_WAKE_SOURCE_PMIC_GPIO 0x91
++#define LPM_WAKE_SOURCE_MCU_IO    0x81
 +
-+	/* un-set the magic word for MCU_GENERAL IOs */
-+	writel(IO_ISO_MAGIC_VAL, WKUP_CTRL_MMR0_BASE + MCU_GEN_WAKE_CTRL);
-+	writel((IO_ISO_MAGIC_VAL + 0x1), WKUP_CTRL_MMR0_BASE + MCU_GEN_WAKE_CTRL);
-+	writel(IO_ISO_MAGIC_VAL, WKUP_CTRL_MMR0_BASE + MCU_GEN_WAKE_CTRL);
-+
-+	/* wait for MCU_GEN_IO_MODE bit to be cleared */
-+	ret = wait_for_bit_32(wait_reg,
-+			      MCU_GEN_WAKE_STAT1_MCU_GEN_IO_MODE,
-+			      false,
-+			      DEISOLATION_TIMEOUT_MS,
-+			      false);
-+	if (ret < 0)
-+		pr_err("Deisolation timeout");
-+}
-+
- /* in board_init_f(), there's no BSS, so we can't use global/static variables */
- bool j7xx_board_is_resuming(void)
+ static void clear_isolation(void)
+ {
+ 	int ret;
+@@ -93,12 +96,15 @@ bool j7xx_board_is_resuming(void)
  {
  	struct udevice *pmic;
-+	u32 pmctrl_val = readl(WKUP_CTRL_MMR0_BASE + PMCTRL_IO_0);
+ 	u32 pmctrl_val = readl(WKUP_CTRL_MMR0_BASE + PMCTRL_IO_0);
++	struct lpm_scratch_space *lpm_scratch;
  	int err;
  
  	if (gd_k3_resuming() != K3_RESUME_STATE_UNKNOWN)
  		goto end;
  
-+	if ((pmctrl_val & IO_ISO_STATUS) == IO_ISO_STATUS) {
-+		clear_isolation();
-+		gd_set_k3_resuming(K3_RESUME_STATE_RESUMING);
-+		debug("board is resuming from IO_DDR mode\n");
-+		goto end;
-+	}
-+
- 	err = uclass_get_device_by_name(UCLASS_PMIC,
- 					"pmic@48", &pmic);
- 	if (err) {
++	lpm_scratch = (struct lpm_scratch_space *)TI_SRAM_SCRATCH_LPM_START;
+ 	if ((pmctrl_val & IO_ISO_STATUS) == IO_ISO_STATUS) {
++		lpm_scratch->wake_src = LPM_WAKE_SOURCE_MCU_IO;
+ 		clear_isolation();
+ 		gd_set_k3_resuming(K3_RESUME_STATE_RESUMING);
+ 		debug("board is resuming from IO_DDR mode\n");
+@@ -115,6 +121,7 @@ bool j7xx_board_is_resuming(void)
+ 
+ 	if (pmic_reg_read(pmic, K3_LPM_SCRATCH_PAD_REG) == K3_LPM_MAGIC_SUSPEND) {
+ 		debug("%s: board is resuming\n", __func__);
++		lpm_scratch->wake_src = LPM_WAKE_SOURCE_PMIC_GPIO;
+ 		gd_set_k3_resuming(K3_RESUME_STATE_RESUMING);
+ 
+ 		/* clean magic suspend */
+@@ -122,6 +129,8 @@ bool j7xx_board_is_resuming(void)
+ 			printf("Failed to clean magic value for suspend detection in PMIC\n");
+ 	} else {
+ 		debug("%s: board is booting (no resume detected)\n", __func__);
++		lpm_scratch->wake_src = 0;
++		lpm_scratch->reserved = 0;
+ 		gd_set_k3_resuming(K3_RESUME_STATE_BOOTING);
+ 	}
+ end:
