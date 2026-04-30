@@ -4,114 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1F02CD13DA
-	for <u-boot@archiver.kernel.org>; Thu, 30 Apr 2026 15:08:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3407DCD13D3
+	for <u-boot@archiver.kernel.org>; Thu, 30 Apr 2026 17:26:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 323FE8063E;
-	Thu, 30 Apr 2026 17:08:20 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id DE51B803C6;
+	Thu, 30 Apr 2026 19:26:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=grimler.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="BWMzEN3P";
+	dkim=pass (1024-bit key; secure) header.d=grimler.se header.i=@grimler.se header.b="iNOtzVSk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8F34180086; Thu, 30 Apr 2026 17:08:18 +0200 (CEST)
-Received: from DU2PR03CU002.outbound.protection.outlook.com
- (mail-northeuropeazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::3])
+ id AD12E80433; Thu, 30 Apr 2026 19:26:53 +0200 (CEST)
+Received: from out-177.mta0.migadu.com (out-177.mta0.migadu.com
+ [IPv6:2001:41d0:1004:224b::b1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 26C9180F0E
- for <u-boot@lists.denx.de>; Thu, 30 Apr 2026 17:08:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 49D3680086
+ for <u-boot@lists.denx.de>; Thu, 30 Apr 2026 19:26:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=grimler.se
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=patrice.chotard@foss.st.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=LwLsGPBPeEskzfAI260OO6WpicxIIV2X+Ax7riHPDhifglt57vsfKkX+IGYqWQa7X9IFAdAron0g2eELiORyK4TeCKizMsOATbVFSQsLI8uz0CmF9zGeUCA4r8MMSaMbYVmxZQIYNzLZIdoCSXDFeEgL/xfD9WqIYGbU+KZMiWaX4QiEww4K8rBXo6um10l+LFy+DygLqtphHyxKbDJWV3zJMWc2+onxpcHWXy81F3WoEHr7kP0WBEnqjOhaKc8O35L1avMVvJMYKfdLz/hz+KndB7fPrqwmwSxFLZ749pzKy2pfo30iqQ1BFP2Ty4vRM7BYCwhwzv1rwlwPAUZ0fg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ZuXfD5b701g7uC6fGXivw1TFf6pK6lbN5wmMdU0cP8A=;
- b=OLIodHEmkQto5ZOFV2igNVXLpwydFv4xi40aAPyl1zEapPIU8DBST2JfrCXYW1ot2Rvv7rOnbpiVjUtA+jtPXcwvCj43pGyZ9ndOszgdUkmWNtffLohjbFmqNM+mpwbjjxAz+r4/3Vdcvn4dVUz7gYvIDFkk6kMi/wBkkoggncz5Y5ZCO36z28YTdt5bNB1ZpDJDlTs9J+heEimNwMasTXT4GRwV/MRLTBIDmkn+/TQkvLP0juVr8A+gFBjdYtUFepy4JKXpKFL0tlBPlb07CZ0Mi75kzdqglep19+X9NGO5rHkkxyQXAsGgGMi/sPRObOKxnbZ903DGT479uKuZyw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
- 164.130.1.59) smtp.rcpttodomain=konsulko.com smtp.mailfrom=foss.st.com;
- dmarc=fail (p=none sp=none pct=100) action=none header.from=foss.st.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ZuXfD5b701g7uC6fGXivw1TFf6pK6lbN5wmMdU0cP8A=;
- b=BWMzEN3P6+LnmuyUBXsePQ+YKC1I95o9CtT0h3h75KVfNQHIxKD7l/THk8+ddFcYCUDwJYvJBtW6AfXEOoyv2krcsi0Aew02nOjTVFoshG9+e//53V6PhfehkHG69xNo3qE3bDjD22v5mRHCNAudFH+NNju1CL5NQZEJhQ75xDMMfgTzBkS72MU5Zher1vKcNEEnokwTzrU5cbEerMGAOzYKnwq5H9llitRwje9xqdQp1kqc1B3BNSSMfz7vHNfCm1vtn4MyVbtOv+94ZCy162l4GShYHrg2dqW3+NjK4PVVr/FUsICXD6zHr3bIrK5WcDiGpr14ynRD6DJajH2NCw==
-Received: from CWLP265CA0398.GBRP265.PROD.OUTLOOK.COM (2603:10a6:400:1d6::20)
- by DU0PR10MB6778.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:472::12)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9870.18; Thu, 30 Apr
- 2026 15:08:12 +0000
-Received: from AMS0EPF00000195.eurprd05.prod.outlook.com
- (2603:10a6:400:1d6:cafe::b) by CWLP265CA0398.outlook.office365.com
- (2603:10a6:400:1d6::20) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9846.30 via Frontend Transport; Thu,
- 30 Apr 2026 15:08:11 +0000
-X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.59)
- smtp.mailfrom=foss.st.com; dkim=none (message not signed)
- header.d=none;dmarc=fail action=none header.from=foss.st.com;
-Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
- designate 164.130.1.59 as permitted sender) receiver=protection.outlook.com;
- client-ip=164.130.1.59; helo=smtpO365.st.com;
-Received: from smtpO365.st.com (164.130.1.59) by
- AMS0EPF00000195.mail.protection.outlook.com (10.167.16.215) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9846.18 via Frontend Transport; Thu, 30 Apr 2026 15:08:11 +0000
-Received: from STKDAG1NODE1.st.com (10.75.128.132) by smtpo365.st.com
- (10.250.44.71) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.29; Thu, 30 Apr
- 2026 17:11:44 +0200
-Received: from [10.48.87.93] (10.48.87.93) by STKDAG1NODE1.st.com
- (10.75.128.132) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.29; Thu, 30 Apr
- 2026 17:08:10 +0200
-Message-ID: <b595bf2b-7076-48dc-adbf-c77349f4e250@foss.st.com>
-Date: Thu, 30 Apr 2026 17:08:10 +0200
+ spf=pass smtp.mailfrom=henrik@grimler.se
+Date: Thu, 30 Apr 2026 19:26:38 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=grimler.se; s=key1;
+ t=1777570009;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=6IqAZOjyNpHQ9weGtmta/kKo4bxsSZ8BGGB5ZRAqNW0=;
+ b=iNOtzVSkDsztLsrrj4f560jFKgQ64FK0cfkNqrAxJu+pZy8IyFsnSLGnEPG/2NcLslW/8G
+ bnfor3tlidWUJWFpvYyH75OvE1AXNcNNPqnDbLIPc7nqNeF+uSdAvPW1Wu+MK+jmEkPLNP
+ YpbWIJOfs7FCZXpZUnbVN/luKGVbtfw=
+X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
+ include these headers.
+From: Henrik Grimler <henrik@grimler.se>
+To: Kaustabh Chakraborty <kauschluss@disroot.org>
+Cc: Peng Fan <peng.fan@nxp.com>, u-boot@lists.denx.de,
+ Minkyu Kang <mk7.kang@samsung.com>, Tom Rini <trini@konsulko.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>, Anand Moon <linux.amoon@gmail.com>,
+ Sam Protsenko <semen.protsenko@linaro.org>,
+ Lukas Timmermann <uboot@timmermann.space>
+Subject: Re: [PATCH 1/4] mmc: exynos_dw_mmc: add proper init sequence for
+ HS400 support
+Message-ID: <20260430172638.GA17167@localhost>
+References: <20260427-dwmmc-exynos-hs400-es-v1-0-3495df40a9ac@disroot.org>
+ <20260427-dwmmc-exynos-hs400-es-v1-1-3495df40a9ac@disroot.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: en-US
-CC: dario Binacchi <dario.binacchi@amarulasolutions.com>, Patrick DELAUNAY
- <patrick.delaunay@foss.st.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-Subject: [PULL] Pull request for u-boot master / v2026.07 =
- u-boot-stm32-20260430
-To: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.48.87.93]
-X-ClientProxiedBy: STKCAS1NODE1.st.com (10.75.128.134) To STKDAG1NODE1.st.com
- (10.75.128.132)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AMS0EPF00000195:EE_|DU0PR10MB6778:EE_
-X-MS-Office365-Filtering-Correlation-Id: 4a80ae12-56e9-4b86-ba77-08dea6ca4b90
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|1800799024|36860700016|82310400026|56012099003|18002099003|13003099007;
-X-Microsoft-Antispam-Message-Info: IXHVdadmqpkXb7T0kIFyEMSQp8pQd0n6YpSCJhs0sUbBbkCD2HC7pU4Lr71i4Amt2rcMfi49271MYrGKWkJ/YwJ1aQbfGKbLiJ2911xgA68a0Yt49UhSM8urBMM0Yavp1gM6NTyN/yBZlR5jgFFmkR7dgz62uLZdu14T9liGp+39tu8Zr85eYGtTMYAaQT8EqqVOgo0VGDr1crm77fFa2crms4Hh2NORTdudnlVxzodDwYmN1h1dH2LLMWNC1EdcVOUrNQhIvgVjQnypdspS89ov+kTuYpcMTXN1D73dSIOCgo6SkU6aEzQLFZ9QHeTEL3vUp51/1lTnJ6X1/jNmsrc3Kv5VB2ptCUdFDqTdNCUAEoeJXOsERJcruddqlHuejjdAkXZj5WCKO006zY7lIP+ZL32jiQQt190SyswkT29px4G7mAOZ0aUfiQajejdGlhtw4lUnvkCzoG2STSzWEfAtOn9hKuYmZaDaiSnm9Nc6BRctDQKalnY+K3MXCUUSROK27otRMSzSg/PsOJAh220marjiPD7st/G72+2ZHVWsUM6XmkQiiS7qEksROoNS9l9zNOVB/yh1/uT6ZHIB22aaDQPNeWv5UvXfcDaFtIlC4ywAQUubgpWYeVkGOe4L2RoCVhzM2Ah+fQFHaUAY26W431HlgNflupf1kzRNtlDvsPkOP4PM+OjYVZevPm5Fo5K71j4tVA7V71B3BpI3Y5R3x5fPEMheyi+S+RPuUjM=
-X-Forefront-Antispam-Report: CIP:164.130.1.59; CTRY:IT; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(376014)(1800799024)(36860700016)(82310400026)(56012099003)(18002099003)(13003099007);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 0UBY6A8l3owfCFzUJwLUYY7UptWmJVJUIJkXPB1KxryqYe24qNLX3RJL/kalDtJXnXrXMn41Awvd3XAB21gDXoN4aGzTYVZk/0f10Qf36UEI+sGfBqt1efRZONcColzNZkFFE3ZIa3FXOltIW87gduLoh16uxsXjcsN0Ae7rQBK5nSjvfJLo0I618n9845yudAOl7A6wz5IfpsmHpfVtPqIXaD3WgYIzIvazAsqHh8YtSY+8A+Dqw4H3T1cxogY4bv7PSzRY9ylQ4hh7t+d9vxm14C+iX27aQs6s2itTsl5s4CkmetCmQXj2PpJW1pH5GzSIvNA4ie6L0E8BBjYneSJqNpp+txSpuYwcv2jbPXLmdNJNXJ+02DjpD9VH+mKVE+AaGD0lyxjOJVxGkNQ3hq6WyDLjwbuATWE8qrfI7K37B4XEGxBPg58u3jtJjLnD
-X-OriginatorOrg: foss.st.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Apr 2026 15:08:11.3610 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 4a80ae12-56e9-4b86-ba77-08dea6ca4b90
-X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.59];
- Helo=[smtpO365.st.com]
-X-MS-Exchange-CrossTenant-AuthSource: AMS0EPF00000195.eurprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU0PR10MB6778
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260427-dwmmc-exynos-hs400-es-v1-1-3495df40a9ac@disroot.org>
+X-Migadu-Flow: FLOW_OUT
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -128,91 +71,166 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom
+Hi Kaustabh,
 
-Please pull the STM32 related patches for u-boot/master, v2026.07 = u-boot-stm32-20260430
+On Mon, Apr 27, 2026 at 11:22:49AM +0530, Kaustabh Chakraborty wrote:
+> HS400 support was added, but configuration necessary for HS400 support
+> was left out. Add necessary changes, which includes:
+> - Device tree properties, such as "samsung,dw-mshc-hs400-timing" and
+>   "samsung,read-strobe-delay", which function as per dt-bindings.
+> - Registers related to HS400, which are necessary to enable HS400+ support.
+> - Appropriate timing tunings for the HS400 mode.
+> 
+> Note that these changes are loosely based off of its Linux kernel
+> counterpart.
+> 
+> Fixes: bbe3b9fa0922 ("mmc: exynos_dw_mmc: add support for MMC HS200 and HS400 modes")
+> Signed-off-by: Kaustabh Chakraborty <kauschluss@disroot.org>
+> ---
+>  arch/arm/mach-exynos/include/mach/dwmmc.h |  5 ++
+>  drivers/mmc/exynos_dw_mmc.c               | 80 +++++++++++++++++++++++++++++++
+>  2 files changed, 85 insertions(+)
+> 
+> diff --git a/arch/arm/mach-exynos/include/mach/dwmmc.h b/arch/arm/mach-exynos/include/mach/dwmmc.h
+> index 4432deedef7..50081326c25 100644
+> --- a/arch/arm/mach-exynos/include/mach/dwmmc.h
+> +++ b/arch/arm/mach-exynos/include/mach/dwmmc.h
+> @@ -15,6 +15,11 @@
+>  #define DWMCI_SET_DRV_CLK(x)		((x) << 16)
+>  #define DWMCI_SET_DIV_RATIO(x)		((x) << 24)
+>  
+> +/* HS400 Related Registers */
+> +#define DWMCI_HS400_DQS_EN		0x180
+> +#define DWMCI_HS400_ASYNC_FIFO_CTRL	0x184
+> +#define DWMCI_HS400_DLINE_CTRL		0x188
+> +
+>  /* Protector Register */
+>  #define DWMCI_EMMCP_BASE		0x1000
+>  #define EMMCP_MPSECURITY		(DWMCI_EMMCP_BASE + 0x0010)
+> diff --git a/drivers/mmc/exynos_dw_mmc.c b/drivers/mmc/exynos_dw_mmc.c
+> index 7ccd113bd79..d5e90a9bd5c 100644
+> --- a/drivers/mmc/exynos_dw_mmc.c
+> +++ b/drivers/mmc/exynos_dw_mmc.c
+> @@ -8,6 +8,7 @@
+>  #include <dwmmc.h>
+>  #include <asm/global_data.h>
+>  #include <malloc.h>
+> +#include <mmc.h>
+>  #include <errno.h>
+>  #include <asm/arch/dwmmc.h>
+>  #include <asm/arch/clk.h>
+> @@ -30,6 +31,14 @@
+>  #define CLKSEL_UP_SAMPLE(x, y)		(((x) & ~CLKSEL_CCLK_SAMPLE(7)) | \
+>  					 CLKSEL_CCLK_SAMPLE(y))
+>  
+> +/* RCLK_EN register defines */
+> +#define DATA_STROBE_EN			BIT(0)
+> +#define AXI_NON_BLOCKING_WR	BIT(7)
+> +
+> +/* DLINE_CTRL register defines */
+> +#define DQS_CTRL_RD_DELAY(x, y)		(((x) & ~0x3FF) | ((y) & 0x3FF))
+> +#define DQS_CTRL_GET_RD_DELAY(x)	((x) & 0x3FF)
+> +
+>  /**
+>   * DOC: Quirk flags for different Exynos DW MMC blocks
+>   *
+> @@ -71,6 +80,11 @@ struct dwmci_exynos_priv_data {
+>  	struct clk clk;
+>  	u32 sdr_timing;
+>  	u32 ddr_timing;
+> +	u32 hs400_timing;
+> +	u32 tuned_sample;
+> +	u32 dqs_delay;
+> +	u32 saved_dqs_en;
+> +	u32 saved_strobe_ctrl;
+>  	const struct exynos_dwmmc_variant *chip;
+>  };
+>  
+> @@ -162,6 +176,27 @@ static u8 exynos_dwmmc_get_ciu_div(struct dwmci_host *host)
+>  				& DWMCI_DIVRATIO_MASK) + 1;
+>  }
+>  
+> +static void exynos_config_hs400(struct dwmci_host *host, enum bus_mode mode)
+> +{
+> +	struct dwmci_exynos_priv_data *priv = exynos_dwmmc_get_priv(host);
+> +	u32 dqs, strobe;
+> +
+> +	dqs = priv->saved_dqs_en;
+> +	strobe = priv->saved_strobe_ctrl;
+> +
+> +	switch (mode) {
+> +	case MMC_HS_400:
+> +		dqs |= DATA_STROBE_EN;
+> +		strobe = DQS_CTRL_RD_DELAY(strobe, priv->dqs_delay);
+> +		break;
+> +	default:
+> +		dqs &= ~DATA_STROBE_EN;
+> +	}
+> +
+> +	dwmci_writel(host, DWMCI_HS400_DQS_EN, dqs);
+> +	dwmci_writel(host, DWMCI_HS400_DLINE_CTRL, strobe);
+> +}
+> +
+>  /* Configure CLKSEL register with chosen timing values */
+>  static int exynos_dwmci_clksel(struct dwmci_host *host)
+>  {
+> @@ -170,6 +205,9 @@ static int exynos_dwmci_clksel(struct dwmci_host *host)
+>  	u32 timing;
+>  
+>  	switch (host->mmc->selected_mode) {
+> +	case MMC_HS_400:
+> +		timing = CLKSEL_UP_SAMPLE(priv->hs400_timing, priv->tuned_sample);
+> +		break;
+>  	case MMC_DDR_52:
+>  		timing = priv->ddr_timing;
+>  		break;
+> @@ -186,6 +224,8 @@ static int exynos_dwmci_clksel(struct dwmci_host *host)
+>  
+>  	dwmci_writel(host, priv->chip->clksel, timing);
+>  
+> +	exynos_config_hs400(host, host->mmc->selected_mode);
+> +
 
-CI status: https://source.denx.de/u-boot/custodians/u-boot-stm/-/pipelines/29940
+This breaks emmc in Linux for existing devices without hs400 support:
+exynos_config_hs400 is run no matter if the dt has the hs400
+parameters, meaning 0x0 is written to DWMCI_HS400_DQS_EN and
+DWMCI_HS400_DLINE_CTRL. U-boot does not seem to care, it loads the
+kernel and initramfs without issues, but Linux later gives errors:
 
-!!! Regarding the CI status, for socfpga_vining_fpga, spl/u-boot-spl.bin exceeds size limit
+```
+[   20.741025] mmc_host mmc0: Bus speed (slot 0) = 50000000Hz (slot req 400000Hz, actual 396825HZ div = 63)
+[   20.886686] mmc_host mmc0: Bus speed (slot 0) = 50000000Hz (slot req 52000000Hz, actual 50000000HZ div = 0)
+[   20.895138] mmc_host mmc0: Bus speed (slot 0) = 200000000Hz (slot req 200000000Hz, actual 200000000HZ div = 0)
+[   20.905990] mmc_host mmc0: Bus speed (slot 0) = 50000000Hz (slot req 52000000Hz, actual 50000000HZ div = 0)
+[   20.914988] mmc_host mmc0: Bus speed (slot 0) = 400000000Hz (slot req 200000000Hz, actual 200000000HZ div = 1)
+[   21.099546] I/O error, dev mmcblk0, sector 1000001 op 0x1:(WRITE) flags 0x800 phys_seg 16 prio class 2
+[   21.099853] I/O error, dev mmcblk0, sector 1000825 op 0x1:(WRITE) flags 0x800 phys_seg 8 prio class 2
+[   21.107443] Buffer I/O error on dev mmcblk0p2, logical block 0, lost async page write
+[   21.107473] Buffer I/O error on dev mmcblk0p2, logical block 1, lost async page write
+[   21.116657] Buffer I/O error on dev mmcblk0p2, logical block 824, lost async page write
+[   21.124408] Buffer I/O error on dev mmcblk0p2, logical block 2, lost async page write
+[   21.132206] Buffer I/O error on dev mmcblk0p2, logical block 825, lost async page write
+[   21.140178] Buffer I/O error on dev mmcblk0p2, logical block 3, lost async page write
+[   21.147973] Buffer I/O error on dev mmcblk0p2, logical block 826, lost async page write
+[   21.155960] Buffer I/O error on dev mmcblk0p2, logical block 4, lost async page write
+[   21.163749] Buffer I/O error on dev mmcblk0p2, logical block 827, lost async page write
+[   21.171720] Buffer I/O error on dev mmcblk0p2, logical block 5, lost async page write
+[   21.200708] I/O error, dev mmcblk0, sector 1000873 op 0x1:(WRITE) flags 0x800 phys_seg 8 prio class 2
+[   21.201043] I/O error, dev mmcblk0, sector 1000929 op 0x1:(WRITE) flags 0x800 phys_seg 8 prio class 2
+[   21.218287] I/O error, dev mmcblk0, sector 1000945 op 0x1:(WRITE) flags 0x800 phys_seg 80 prio class 2
+[   21.218623] I/O error, dev mmcblk0, sector 1001033 op 0x1:(WRITE) flags 0x800 phys_seg 24 prio class 2
+[   21.236813] I/O error, dev mmcblk0, sector 1001097 op 0x1:(WRITE) flags 0x800 phys_seg 8 prio class 2
+[   21.237146] I/O error, dev mmcblk0, sector 1001121 op 0x1:(WRITE) flags 0x800 phys_seg 24 prio class 2
+[   21.255370] I/O error, dev mmcblk0, sector 1001161 op 0x1:(WRITE) flags 0x800 phys_seg 56 prio class 2
+[   21.256253] I/O error, dev mmcblk0, sector 1001249 op 0x1:(WRITE) flags 0x800 phys_seg 8 prio class 2
+```
 
-I noticed that you recently encountered the same issue which lead you to submit the patch 
-13b3502157ea ("socfpga: vining: Enable LTO")
+Specifically it seems to be writing 0x0 to DWMCI_HS400_DQS_EN that is
+the issue, if I comment out that line it works also for my odroid-xu4
+in non-hs400 mode.
 
-But unfortunately we again reach the spl size limit for this platform.
+Tested on odroid-xu4 with odroid-xu3_defconfig after applying the
+entire series, without any other changes.
 
-
-Thanks
-Patrice
-
-The following changes since commit 4433253ecf2041f9362a763bb6cb79960921ac7e:
-
-  Prepare v2026.07-rc1 (2026-04-27 17:03:18 -0600)
-
-are available in the Git repository at:
-
-  https://source.denx.de/u-boot/custodians/u-boot-stm.git tags/u-boot-stm32-20260430
-
-for you to fetch changes up to ae1966e2436e69c4bce24c03ed4e77bf2e0ac971:
-
-  arm/mach-stm32: don't select non-existent STM32_RESET (2026-04-30 08:01:12 +0200)
-
-----------------------------------------------------------------
-arm; stm32mp2: Factorize TAMP_FWU_BOOT_IDX_MASK/OFFSET definition
-arm: stm32mp: Drop unnecessary BOARD_EARLY_INIT_F usage
-board: stm32mp25: support dynamic A/B bank bootup
-board: stm32pm1: Fix board_check_usb_power()
-clk: stm32: Add STM32MP23 support
-video: stm32: dsi: fix unchecked return values
-video: support Rocktech RK050HR345-CT106A panel
-Remove non-existent STM32_RESET flag
-
-----------------------------------------------------------------
-Dario Binacchi (9):
-      spi: add support for bits-per-word setting
-      spi: sandbox_spi: support wordlen setup
-      test: spi: add sandbox_spi_get_wordlen interface
-      test: dm: spi: add testcase for spi_set_wordlen()
-      spi: stm32: clean up buffer length assignment
-      spi: stm32: add stm32_spi_is_enabled() helper
-      spi: stm32: add support for bits-per-word setting
-      spi: stm32: extend support to STM32MP25
-      video: support Rocktech RK050HR345-CT106A panel
-
-Heinrich Schuchardt (1):
-      arm/mach-stm32: don't select non-existent STM32_RESET
-
-Patrice Chotard (4):
-      board: stm32pm1: Fix board_check_usb_power()
-      spi: add STM32MP23 OSPI support
-      clk: stm32: Add STM32MP23 support
-      ARM: stm32mp2: Factorize TAMP_FWU_BOOT_IDX_MASK/OFFSET definition
-
-Raphael Gallais-Pou (1):
-      video: stm32: dsi: fix unchecked return values
-
-Tom Rini (1):
-      arm: stm32mp: Drop unnecessary BOARD_EARLY_INIT_F usage
-
- arch/arm/mach-stm32/Kconfig                  |   3 ---
- arch/arm/mach-stm32mp/Kconfig                |   4 ---
- arch/arm/mach-stm32mp/include/mach/stm32.h   |   8 +++---
- arch/arm/mach-stm32mp/stm32mp1/spl.c         |  15 +++++------
- arch/sandbox/include/asm/test.h              |   8 ++++++
- board/engicam/stm32mp1/spl.c                 |   6 -----
- board/st/stm32h750-art-pi/stm32h750-art-pi.c |   5 ----
- board/st/stm32mp1/stm32mp1.c                 |   7 ++++--
- configs/stm32h750-art-pi_defconfig           |   1 -
- drivers/clk/stm32/Kconfig                    |   2 +-
- drivers/spi/Kconfig                          |   2 +-
- drivers/spi/sandbox_spi.c                    |  17 +++++++++++++
- drivers/spi/spi-uclass.c                     |  22 +++++++++++++++-
- drivers/spi/stm32_spi.c                      |  71 ++++++++++++++++++++++++++++++++++++++++++++--------
- drivers/video/Kconfig                        |   8 ++++++
- drivers/video/Makefile                       |   1 +
- drivers/video/ilitek-ili9806e.c              | 356 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
- drivers/video/stm32/stm32_dsi.c              |   7 ++++--
- include/spi.h                                |  14 +++++++++++
- test/dm/spi.c                                |  16 ++++++++++++
- 20 files changed, 523 insertions(+), 50 deletions(-)
- create mode 100644 drivers/video/ilitek-ili9806e.c
+Best regards,
+Henrik Grimler
