@@ -4,87 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 153A7FF886F
-	for <u-boot@archiver.kernel.org>; Thu, 30 Apr 2026 07:01:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82613FF886F
+	for <u-boot@archiver.kernel.org>; Thu, 30 Apr 2026 07:01:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9173B8460B;
-	Thu, 30 Apr 2026 09:00:58 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E2DC3842C7;
+	Thu, 30 Apr 2026 09:01:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="ZQDnS7ss";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="JYTMc4M/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B7263842C7; Thu, 30 Apr 2026 09:00:57 +0200 (CEST)
-Received: from AM0PR83CU005.outbound.protection.outlook.com
- (mail-westeuropeazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::1])
+ id 3C74A80433; Thu, 30 Apr 2026 09:01:28 +0200 (CEST)
+Received: from AS8PR04CU009.outbound.protection.outlook.com
+ (mail-westeuropeazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E3B5B8460C
- for <u-boot@lists.denx.de>; Thu, 30 Apr 2026 09:00:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D7099845D8
+ for <u-boot@lists.denx.de>; Thu, 30 Apr 2026 09:01:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=patrice.chotard@foss.st.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=isOoA+7/VNiXDcvbQ7O17mWmaqJCa1r+pJiyuja1ebFka/1DekK3PfToLhP+2Pb+5dLg+4g5aoqLjHiPnZ8xEyTQ0d2ewbQMj4JzEUiPqtFcOsaEvmbtVgUIdOWy+T+ChNkMrNaYxY+/C0S7UHn49kFZVNcBeh6/5W4C1hGw9tgLkgt7H+vsX0EOqYjrFSMb9+RNNhGNjOa8l6yPJyGJxSurCzmEH14tTBlbpobrVCtIpsz2rv7EyPzcWd8TeYv20IElkjYrlyg/HQ4HsBBAJZzCP+kc+EM7/0eqivpmkhJBJOJ17HgxZ73rkK37x55QQ22Gxuw8l4sCitfVG9O0fg==
+ b=eHTJOVu+HVegLcnI/OXaDccGXlhXXKuVDGiMbi1JtepZ73BtJ5KNjNBvBdS7uslgREk267zpR+Xi3vXMjxiTsrj7JUjD6E+H5K/xa+ttDk90MTap/pGz3HKoYcHLqDoZbTioVj/DX9RpTEAdzErgUiEIvOJONgXbIktF++XE2orq0kXcEqn1BOKnhGZwGHe8+S13QPs2ioZrA4A9bQZAhuig9UPn5cM5DbHMw2Tni8hJqQ7vroiNBBNGBhI5GT8aeYN6kSnbOg15aq9PcBr+jvlBPynFWf9+d9fVD/K9llP4jcMLThHA6t52MYuU/CKyFPYMjXAqenYGV63lYlGuPw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=+lO3KCHMrLkzscSSNclLyJ/WOyr62ZQSDRME48wZGks=;
- b=PRV0mg79fid2nlucyH6vAIzDOSbMMrS2GtTtAz2SCwJaLwpOGaF35AAGWTIpj5WG0RVoilBPwDg1EfzqtlYx9G6Zfhj0N9zNOFAedBLea9krd40OxRNhyTm8lJkj+WtPrTWcdqB4Yk3qIDRqbV/gRcWZtdgFSyvMbs3z1J7rpEOyu2CFrhKW17nZZY/MNzjAu1w90kOdmhjeQZ5KNMfqw9DutaGtVfUMsm0lVFyHlEUEz2aJHhr3V3TjFrVs4YT6hS+GhKhMYWgj4FDqTfD6UvFrsevzvOwTji/Gi9eBfWgtxS1k9PVn/6IiUmI7FXidPbU1n7HpgGfuo9Ykz/FHMw==
+ bh=4fXkwGl7SEkZr1J+Zspzm8uDdFbILhEmc323/I9j90g=;
+ b=todX6/2KuI6Zj3lCA/ijYb6PKv8qps4b5X4mc7Lw+4O2NwhpSsXP6VaH+aRfAMjqsZ4RNoKATOBLNUemUfkQxWqdlxPmzJF2lyPahpvjreQ6Xv8RurQTkmBcD+3lOoYR6uG1BEENAlHebOZ+cAt4AcZSxBpOIrhnqEWMbFApPpKPzGMl0dLzWhZoI9DNjCVDXKvafdfW34r62YH7Z0SACM7ZSq9NdyR3BNN+E47qP2q3c+jfqxo9V3ND88LMakbBfXLYThDJFC01UYeBmdayoYF+rK8dUTyEiHZS+m1RgclBmjeh00vX84XUIT2fM0ZVgXZw+P0mfgKgaoq0UnySLA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
- 164.130.1.60) smtp.rcpttodomain=st-md-mailman.stormreply.com
- smtp.mailfrom=foss.st.com; dmarc=fail (p=none sp=none pct=100) action=none
- header.from=foss.st.com; dkim=none (message not signed); arc=none (0)
+ 164.130.1.59) smtp.rcpttodomain=konsulko.com smtp.mailfrom=foss.st.com;
+ dmarc=fail (p=none sp=none pct=100) action=none header.from=foss.st.com;
+ dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=+lO3KCHMrLkzscSSNclLyJ/WOyr62ZQSDRME48wZGks=;
- b=ZQDnS7ss2CrpgLOBNpW+A9X9QEnzNf8OS+QNhmGlQHcxjQjoHvxR4RgTQLHyiv+jJhnrXbfdc7Qpc11IoYdcCQShAo99OgBykwu3zGpFgNkA9tYbmQpBpWtY4oHa/o2irlYGomvuco5Q+hWuYhZFl9RhFgrlT38i7ICZTiJcAu71J/rp+hdGVY3CXUhoZdjjIyzNnufNOizHKzzZU+gyYT6H5wkrlDOdcgiHUG/TgKTGjh8sN1i3EBMROKK34ajzk7A+CXbd/RLWfkpU5mcse8Kr/eCJ6u72BEAmmdUxZVqaYKMUrw5hEfW0FtStP/1yTiiO466hSQOgxPkjpxZL/Q==
-Received: from AM8P189CA0023.EURP189.PROD.OUTLOOK.COM (2603:10a6:20b:218::28)
- by PA1PR10MB9457.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:102:4f8::7)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9870.19; Thu, 30 Apr
- 2026 07:00:50 +0000
-Received: from DB3PEPF0000885D.eurprd02.prod.outlook.com
- (2603:10a6:20b:218:cafe::c4) by AM8P189CA0023.outlook.office365.com
- (2603:10a6:20b:218::28) with Microsoft SMTP Server (version=TLS1_3,
+ bh=4fXkwGl7SEkZr1J+Zspzm8uDdFbILhEmc323/I9j90g=;
+ b=JYTMc4M/quolThk2/mtApmeGUo9KHZxHGQOxiXdCgc1RPk6Z2EM3FjCI1iBTZhuGdOBE+TLDmD1t7laWr0td04xgtdqYN5ZfwXVC+AzN64TGLIL1CE9Wp2hC5m41c8KD/ufracww6LEIsQWMNOBNuJ8VYcgtzFWaAAXlMzZv6O4bk04gNTHl2jHw7oWvKPrO2PmreCtm68YHSJ9++31ezwn4zsUCJduNwRrjlsa8DlwgmsJfEqmKGOGfljuwVq2+F3tmwap0GE7b/zbiHKAnBdD6I1zPmxoVfqagtoBExWjEdwfQ0melzKP+MjwOkvoPGP0dvCWtyR3W73kA3UOh0w==
+Received: from DU7P250CA0018.EURP250.PROD.OUTLOOK.COM (2603:10a6:10:54f::31)
+ by GV1PR10MB7978.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:150:8a::10) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9870.20; Thu, 30 Apr
+ 2026 07:01:19 +0000
+Received: from DB5PEPF00014B93.eurprd02.prod.outlook.com
+ (2603:10a6:10:54f:cafe::25) by DU7P250CA0018.outlook.office365.com
+ (2603:10a6:10:54f::31) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.20.9846.30 via Frontend Transport; Thu,
- 30 Apr 2026 07:00:50 +0000
-X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.60)
+ 30 Apr 2026 07:01:19 +0000
+X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.59)
  smtp.mailfrom=foss.st.com; dkim=none (message not signed)
  header.d=none;dmarc=fail action=none header.from=foss.st.com;
 Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
- designate 164.130.1.60 as permitted sender) receiver=protection.outlook.com;
- client-ip=164.130.1.60; helo=smtpO365.st.com;
-Received: from smtpO365.st.com (164.130.1.60) by
- DB3PEPF0000885D.mail.protection.outlook.com (10.167.242.8) with Microsoft
+ designate 164.130.1.59 as permitted sender) receiver=protection.outlook.com;
+ client-ip=164.130.1.59; helo=smtpO365.st.com;
+Received: from smtpO365.st.com (164.130.1.59) by
+ DB5PEPF00014B93.mail.protection.outlook.com (10.167.8.231) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9846.18 via Frontend Transport; Thu, 30 Apr 2026 07:00:50 +0000
-Received: from STKDAG1NODE1.st.com (10.75.128.132) by smtpO365.st.com
- (10.250.44.72) with Microsoft SMTP Server (version=TLS1_2,
+ 15.20.9846.18 via Frontend Transport; Thu, 30 Apr 2026 07:01:18 +0000
+Received: from STKDAG1NODE1.st.com (10.75.128.132) by smtpo365.st.com
+ (10.250.44.71) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.29; Thu, 30 Apr
- 2026 09:04:02 +0200
+ 2026 09:04:51 +0200
 Received: from [10.48.87.93] (10.48.87.93) by STKDAG1NODE1.st.com
  (10.75.128.132) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.29; Thu, 30 Apr
- 2026 09:00:49 +0200
-Message-ID: <912fab7c-327d-427b-8bc5-6f24e8fdf26a@foss.st.com>
-Date: Thu, 30 Apr 2026 09:00:49 +0200
+ 2026 09:01:18 +0200
+Message-ID: <95c62e0a-1f47-4256-8312-8e7efe534157@foss.st.com>
+Date: Thu, 30 Apr 2026 09:01:18 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] ARM: stm32mp2: Factorize TAMP_FWU_BOOT_IDX_MASK/OFFSET
- definition
-To: <uboot-stm32@st-md-mailman.stormreply.com>, <u-boot@lists.denx.de>
-CC: Tom Rini <trini@konsulko.com>, Patrick Delaunay
- <patrick.delaunay@foss.st.com>, Marek Vasut <marek.vasut@mailbox.org>, "Dario
- Binacchi" <dario.binacchi@amarulasolutions.com>
-References: <20260401-factorize_tamp_fwu_boot_defines-v1-1-ebecaf20ad6b@foss.st.com>
-Content-Language: en-US
+Subject: Re: [Uboot-stm32] [PATCH] arm: stm32mp: Drop unnecessary
+ BOARD_EARLY_INIT_F usage
 From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20260401-factorize_tamp_fwu_boot_defines-v1-1-ebecaf20ad6b@foss.st.com>
+To: Tom Rini <trini@konsulko.com>, <u-boot@lists.denx.de>
+CC: Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ <uboot-stm32@st-md-mailman.stormreply.com>, Dillon Min
+ <dillon.minfei@gmail.com>, Jagan Teki <jagan@amarulasolutions.com>, "Matteo
+ Lisi" <matteo.lisi@engicam.com>
+References: <20260325190027.3428596-1-trini@konsulko.com>
+ <f6c27c74-1188-4062-9082-d0f3639d3ce0@foss.st.com>
+Content-Language: en-US
+In-Reply-To: <f6c27c74-1188-4062-9082-d0f3639d3ce0@foss.st.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 X-Originating-IP: [10.48.87.93]
@@ -92,29 +94,29 @@ X-ClientProxiedBy: STKCAS1NODE1.st.com (10.75.128.134) To STKDAG1NODE1.st.com
  (10.75.128.132)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DB3PEPF0000885D:EE_|PA1PR10MB9457:EE_
-X-MS-Office365-Filtering-Correlation-Id: 50bf9608-0a4c-49e8-6730-08dea686368d
+X-MS-TrafficTypeDiagnostic: DB5PEPF00014B93:EE_|GV1PR10MB7978:EE_
+X-MS-Office365-Filtering-Correlation-Id: 6b09a31b-7966-4343-0fe6-08dea68647a3
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
  ARA:13230040|1800799024|376014|82310400026|36860700016|56012099003|22082099003|18002099003;
-X-Microsoft-Antispam-Message-Info: KbFG3+Wkn21Sjy4Knm788K1MXks/XIMcFzuDF19Nez5NXZY+dTbb28qPIZGL/oBq+Cs87hdAXgKv93BtlPpxfYOoHSkLmcJS+t0M9lrNMS8QWsCiH/Y9Ie5PDc9R4Cpnq5Qenawk0FKTkZIVBYTu3jyXICvTUrJyKnDAoxVI6f9lvkZZPYD5QgkPPJXgpG7ENVZOEvofKvBDfnVBCAfinXLn8GamHZluDDij1QHD03klnh6te0rS+I42N4Z2+dRngCjVfdemB7Qnb7/pXkBikd2PR8ghT70Sh2Ay26eBxqYZck8XaTpFBqfhc1cq4fKspdPER4+VRWGUfx3scGqxgksuzy4o5TMgVNZtK39GIKdNhLNucNUZfZzJalsXz75At3ddJKkawR+2nGixGbEmkxCyIm/WmVfwFSxjzZd1UcECQK0SYW36+YFmG5TE+Lvqekeb5NvV7qg2zrLahtrVRVvXKpVm43iz3tzpkIsFNrxq663X8EptzqFNThQ5JCPo7+R7+Fc2GYYZagTuN1vmvKZsE4ygWL9q/n/RMwFSRpDuv7nlO23DCohdBs3gt4brN/CKpI7+4MCFP6glORCr5mz9F65Vu5bFAPLVwQQP/qfle64R5bcUbMzUwLjyZ+4OEOAAT3XD2CyuBEgDflNhuJ56h8jMiXLg6e/zsUec7+DTNJntm4jDQEfDEC8BJyLeuOagatNcrMLsUu1vOkFYW3KgTna47jByvuOqob1XgOFNB1bWjAejX52Rl9d3peb74MPAhlOGmdAKLVlv511QKw==
-X-Forefront-Antispam-Report: CIP:164.130.1.60; CTRY:IT; LANG:en; SCL:1; SRV:;
+X-Microsoft-Antispam-Message-Info: GKy8IyJKb2Aed4wNK9vTJTPHKyC6PSS1cvJ/m0UCYLpSMwa10Vyifzuy/hDGlq1G6i04+jdiyGoh9hCT9FOuNyQXCjyEwTicY9XXJc+yxtzbJMqXaj003/juCtHv20lNm5Nkd4dAsaSXV/x32D6cs/qc8XnAuo+dgnwfbnntA44INhjEtIEt0xfu4k5jW0256gOPitQJHybA5KglrL8pJoMJkLZ5vCH47j3rLL7dXxivR2XxtYccB59GUIbPmA+UNzPTHFMxmQ78C5hyX0HOrIrXfUtFg8KLRPYYt4nKyE0fxqSw5UnzARFMUlsKvWp3ZWZmq7F6yHjv1g7hWbos8mRtEyCOl2pGO4XXQNH+Y+ywzFlHK+gdNkqD6tTJ5RVW+fP+J5+5WT5GNYiDFSoKUyQ7oBrfQr7jjHlMWxIMkbThus8FN446vnreNroiets0x7J1X1DQ/BVylMCSKP4AnvM6jGUwfTDUD3DL3ZVurvzPYXpKH+ZOYcPZfRnGay6Yl5ammOXzdTNczlisByIV3D/1odKw83FVfVIzK0HdKKxuaTy2ypScOgMQZa9wmjPF6n2kF38SgxNeMxKM6T285Xpl20aD6iVyQpzE77CRxbxrL9Sd9m1GofNVGJuQfUMvq8c5sGzTO9Z/dnq4WEjfSIdReVmbjzhEb9K8jzOmZNGha1tT9xr8JyrENEFCaBAJGCpF55c5wUi1IU6GNVtem3qryYU4NC6P0fJJ6/Q3KcDXe8kEGGJpO0vae6d+UbqfuauWOv59gxzCEokj4khMvw==
+X-Forefront-Antispam-Report: CIP:164.130.1.59; CTRY:IT; LANG:en; SCL:1; SRV:;
  IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
  SFS:(13230040)(1800799024)(376014)(82310400026)(36860700016)(56012099003)(22082099003)(18002099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: PVLShFRqBFM6LSKhpQzasGgWltcoYra0nik9Yg5fIRcHUZ+X7KsZP6iAsNGRo4xtUOx4RQWmvXnMpUbzA4JiJ3eUrhVxdcZxotEVY6J3wTmLB2nLMCGa+LIh1lF6LIQYkcCDCPXXmCI9oLjd9I/cMjwbMV25lfAdFWscHtgijKwL7tTHMWy5Wx8uFvRSBHVMdu/xPFli1LqPennLCBTrTS+Jo6rvy4LSY+Q8fWnRT+LigwlynezmbuWRSdFlN9oMkrSOYLO3sQUvB/Ow9R2bZcDqRjoIYT/xG1ov5R5Q9Xw9a/+Da3sgLiYXp7adOY5rToSQWgHdoXHppUYNwsS+bKQEgpVvgGYjPl2JGzqy+MQPbLvttJK36dDyGlFwzXrMt26WOgGd/zIg9ba3l/OKEaS9YkDLveSDChx1oQ1v2w56sgsyh4EMhjyrIcvpYOPL
+X-MS-Exchange-AntiSpam-MessageData-0: 3M/ljWIdO6cb4ZFWmvk8Y9gb1Db5GV233sDcIoTv0ZyyyS+/9hqwuvkeNTmG/fC3FtjRnKGFO/FMQSo97iWsY7hGFUps859AlutR/j4hfC/PsrMMJjEt4CTTXbuO9alRDqeVwygODCt8JPwzRnsbTS+oRU3Czkc596t3A/0nMOFgDHCK0KM9p3l8uU4is+WAmL3KETvdRlnvk9QuXBQ4MSWvum9E0lwYRB3CH/RR+N59D5wzQydO0GzkD7wQ2QdXBwidowMFkt1zvfLj5Xe4OB4+9/O8HYSgkN2jjQKc3sPfw02coNbiPQxpP/TJW+ZA5qB15GreLW3Wtguqdz8IwXnhPNnQdPOLgjEme6cF47NgLVQYveGm0fDDsKITJ1h6kpavrDxI7xsz9H5zdfsdiabt7xSCjIkc0kbj69pkT7PxF/2q5QJh63eqtGpK6IEx
 X-OriginatorOrg: foss.st.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Apr 2026 07:00:50.3012 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 50bf9608-0a4c-49e8-6730-08dea686368d
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Apr 2026 07:01:18.9755 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 6b09a31b-7966-4343-0fe6-08dea68647a3
 X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.60];
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.59];
  Helo=[smtpO365.st.com]
-X-MS-Exchange-CrossTenant-AuthSource: DB3PEPF0000885D.eurprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: DB5PEPF00014B93.eurprd02.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA1PR10MB9457
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV1PR10MB7978
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -133,54 +135,117 @@ X-Virus-Status: Clean
 
 
 
-On 4/1/26 09:48, Patrice Chotard wrote:
-> Factorize TAMP_FWU_BOOT_IDX_MASK and TAMP_FWU_BOOT_IDX_OFFSET
-> definition which are common to STM32MP1 and STM32MP2 SoCs family.
+On 3/26/26 10:42, Patrice CHOTARD wrote:
 > 
-> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
-> ---
->  arch/arm/mach-stm32mp/include/mach/stm32.h | 8 +++-----
->  1 file changed, 3 insertions(+), 5 deletions(-)
 > 
-> diff --git a/arch/arm/mach-stm32mp/include/mach/stm32.h b/arch/arm/mach-stm32mp/include/mach/stm32.h
-> index 7f349f3b68d..42e3735847a 100644
-> --- a/arch/arm/mach-stm32mp/include/mach/stm32.h
-> +++ b/arch/arm/mach-stm32mp/include/mach/stm32.h
-> @@ -135,6 +135,9 @@ enum forced_boot_mode {
->  /* TAMP registers */
->  #define TAMP_BACKUP_REGISTER(x)		(STM32_TAMP_BASE + 0x100 + 4 * x)
->  
-> +#define TAMP_FWU_BOOT_IDX_MASK		GENMASK(3, 0)
-> +#define TAMP_FWU_BOOT_IDX_OFFSET	0
-> +
->  #ifdef CONFIG_STM32MP15X
->  #define TAMP_BACKUP_MAGIC_NUMBER	TAMP_BACKUP_REGISTER(4)
->  #define TAMP_BACKUP_BRANCH_ADDRESS	TAMP_BACKUP_REGISTER(5)
-> @@ -144,9 +147,6 @@ enum forced_boot_mode {
->  #define TAMP_BOOT_CONTEXT		TAMP_BACKUP_REGISTER(20)
->  #define TAMP_BOOTCOUNT			TAMP_BACKUP_REGISTER(21)
->  
-> -#define TAMP_FWU_BOOT_IDX_MASK		GENMASK(3, 0)
-> -
-> -#define TAMP_FWU_BOOT_IDX_OFFSET	0
->  #define TAMP_COPRO_STATE_OFF		0
->  #define TAMP_COPRO_STATE_INIT		1
->  #define TAMP_COPRO_STATE_CRUN		2
-> @@ -196,8 +196,6 @@ enum forced_boot_mode {
->  /* TAMP registers zone 3 RIF 1 (RW) at 96*/
->  #define TAMP_BOOT_CONTEXT		TAMP_BACKUP_REGISTER(96)
->  
-> -#define TAMP_FWU_BOOT_IDX_MASK		GENMASK(3, 0)
-> -#define TAMP_FWU_BOOT_IDX_OFFSET	0
->  #endif /* defined(CONFIG_STM32MP21X) || defined(CONFIG_STM32MP23X) || defined(CONFIG_STM32MP25X) */
->  
->  /* offset used for BSEC driver: misc_read and misc_write */
+> On 3/25/26 20:00, Tom Rini wrote:
+>> All of these platforms enable CONFIG_BOARD_EARLY_INIT_F and then have a
+>> do-nothing board_early_init_f function. Change to not enabling the
+>> option and so not needing an empty function.
+>>
+>> Signed-off-by: Tom Rini <trini@konsulko.com>
+>> ---
+>> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+>> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+>> Cc: Jagan Teki <jagan@amarulasolutions.com>
+>> Cc: Matteo Lisi <matteo.lisi@engicam.com>
+>> Cc: Dillon Min <dillon.minfei@gmail.com>
+>> Cc: uboot-stm32@st-md-mailman.stormreply.com
+>> ---
+>>  arch/arm/mach-stm32mp/stm32mp1/spl.c         | 15 ++++++---------
+>>  board/engicam/stm32mp1/spl.c                 |  6 ------
+>>  board/st/stm32h750-art-pi/stm32h750-art-pi.c |  5 -----
+>>  configs/stm32h750-art-pi_defconfig           |  1 -
+>>  4 files changed, 6 insertions(+), 21 deletions(-)
+>>
+>> diff --git a/arch/arm/mach-stm32mp/stm32mp1/spl.c b/arch/arm/mach-stm32mp/stm32mp1/spl.c
+>> index e63bdaaf42fd..d2e41b8e65ff 100644
+>> --- a/arch/arm/mach-stm32mp/stm32mp1/spl.c
+>> +++ b/arch/arm/mach-stm32mp/stm32mp1/spl.c
+>> @@ -90,11 +90,6 @@ void spl_display_print(void)
+>>  }
+>>  #endif
+>>  
+>> -__weak int board_early_init_f(void)
+>> -{
+>> -	return 0;
+>> -}
+>> -
+>>  uint32_t stm32mp_get_dram_size(void)
+>>  {
+>>  	struct ram_info ram;
+>> @@ -204,10 +199,12 @@ void board_init_f(ulong dummy)
+>>  	/* enable console uart printing */
+>>  	preloader_console_init();
+>>  
+>> -	ret = board_early_init_f();
+>> -	if (ret) {
+>> -		log_debug("board_early_init_f() failed: %d\n", ret);
+>> -		hang();
+>> +	if (IS_ENABLED(CONFIG_BOARD_EARLY_INIT_F)) {
+>> +		ret = board_early_init_f();
+>> +		if (ret) {
+>> +			log_debug("board_early_init_f() failed: %d\n", ret);
+>> +			hang();
+>> +		}
+>>  	}
+>>  
+>>  	ret = uclass_get_device(UCLASS_RAM, 0, &dev);
+>> diff --git a/board/engicam/stm32mp1/spl.c b/board/engicam/stm32mp1/spl.c
+>> index bb2bd446aa8c..19e5ab0180f9 100644
+>> --- a/board/engicam/stm32mp1/spl.c
+>> +++ b/board/engicam/stm32mp1/spl.c
+>> @@ -15,9 +15,3 @@ void board_vddcore_init(u32 voltage_mv)
+>>  	if (IS_ENABLED(CONFIG_PMIC_STPMIC1) && CONFIG_IS_ENABLED(POWER))
+>>  		opp_voltage_mv = voltage_mv;
+>>  }
+>> -
+>> -int board_early_init_f(void)
+>> -{
+>> -	return 0;
+>> -}
+>> -
+>> diff --git a/board/st/stm32h750-art-pi/stm32h750-art-pi.c b/board/st/stm32h750-art-pi/stm32h750-art-pi.c
+>> index 244bb5eefb3a..8b1b23337790 100644
+>> --- a/board/st/stm32h750-art-pi/stm32h750-art-pi.c
+>> +++ b/board/st/stm32h750-art-pi/stm32h750-art-pi.c
+>> @@ -32,11 +32,6 @@ int dram_init_banksize(void)
+>>  	return 0;
+>>  }
+>>  
+>> -int board_early_init_f(void)
+>> -{
+>> -	return 0;
+>> -}
+>> -
+>>  int board_late_init(void)
+>>  {
+>>  	return 0;
+>> diff --git a/configs/stm32h750-art-pi_defconfig b/configs/stm32h750-art-pi_defconfig
+>> index 971d5c00d88f..0d0dca2511b7 100644
+>> --- a/configs/stm32h750-art-pi_defconfig
+>> +++ b/configs/stm32h750-art-pi_defconfig
+>> @@ -24,7 +24,6 @@ CONFIG_DEFAULT_FDT_FILE="stm32h750i-art-pi"
+>>  CONFIG_SYS_CBSIZE=256
+>>  CONFIG_SYS_PBSIZE=282
+>>  # CONFIG_DISPLAY_CPUINFO is not set
+>> -CONFIG_BOARD_EARLY_INIT_F=y
+>>  # CONFIG_BOARD_INIT is not set
+>>  CONFIG_BOARD_LATE_INIT=y
+>>  CONFIG_SYS_PROMPT="U-Boot > "
 > 
-> ---
-> base-commit: ba7bf918dafcd093ad733b07ba490baeb20cf5da
-> change-id: 20260401-factorize_tamp_fwu_boot_defines-205eed07ad1e
+> Hi Tom
 > 
-> Best regards,
+> Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
+> 
+> Thanks
+> Patrice
+> _______________________________________________
+> Uboot-stm32 mailing list
+> Uboot-stm32@st-md-mailman.stormreply.com
+> https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+
+
 Applied to u-boot-stm32/master
 
 Thanks
