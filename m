@@ -4,149 +4,119 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8EC8AFF8875
-	for <u-boot@archiver.kernel.org>; Thu, 30 Apr 2026 05:22:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29D37CD13D3
+	for <u-boot@archiver.kernel.org>; Thu, 30 Apr 2026 06:59:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0DACC84099;
-	Thu, 30 Apr 2026 07:22:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id F1CDB83FB5;
+	Thu, 30 Apr 2026 08:59:01 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="Y+SP1K80";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="ECj2PER0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EFBD584198; Thu, 30 Apr 2026 07:22:20 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
+ id B571684198; Thu, 30 Apr 2026 08:58:59 +0200 (CEST)
+Received: from PA4PR04CU001.outbound.protection.outlook.com
+ (mail-francecentralazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20a::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F3BD180433
- for <u-boot@lists.denx.de>; Thu, 30 Apr 2026 07:22:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 97F8E80433
+ for <u-boot@lists.denx.de>; Thu, 30 Apr 2026 08:58:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1777526526; x=1778131326; i=xypron.glpk@gmx.de;
- bh=esW2PQWUSc3PgSH9cVzL95dw72qdELNqa95xnaynDdQ=;
- h=X-UI-Sender-Class:Date:From:To:CC:Subject:In-Reply-To:References:
- Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:cc:
- content-transfer-encoding:content-type:date:from:message-id:
- mime-version:reply-to:subject:to;
- b=Y+SP1K80zvEHVizK8PZSUpy3RGJflycXEhpuAr8AnFXN7XsfgR9NXojjYlsNbMz8
- dni4eZWG8k0MixyPiLxKpk89XVDWZbhmwWaZdVWPuZSrdM+vloZrkKQ6QKXONNRpi
- qXpgR2J1C2c3C08KI6qYra/KLVXw3mF6F7PpSVJmEs0YI+PzQS9Zo3cEAvE32pQoz
- JxL/NQQcS9FRJwrr8fOsxCoJVURXo+qSC9etRrtCeAzMGSLBToaP/oiDgJ2r07eMh
- gOLipwvdYitUFtvCIsaYkMPTloEh4oPeQyfn5kgyFMtHXMfvEp3K6dwnDz4dnMrqp
- x0RqKaGTnHgAiKNQVg==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from client.hidden.invalid by mail.gmx.net (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1M7sHy-1wDNtc0kM6-00BViG; Thu, 30
- Apr 2026 07:22:06 +0200
-Date: Thu, 30 Apr 2026 07:21:58 +0200
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-To: Yao Zi <me@ziyao.cc>, Conor Dooley <conor@kernel.org>,
- Raymond Mao <raymondmaoca@gmail.com>
-CC: u-boot@lists.denx.de, uboot@riscstar.com, u-boot-spacemit@groups.io,
- raymond.mao@riscstar.com, rick@andestech.com, ycliang@andestech.com,
- trini@konsulko.com, lukma@denx.de, hs@nabladev.com, jh80.chung@samsung.com,
- peng.fan@nxp.com, randolph@andestech.com, dlan@gentoo.org,
- junhui.liu@pigmoral.tech, neil.armstrong@linaro.org,
- quentin.schulz@cherry.de, samuel@sholland.org
-Subject: =?US-ASCII?Q?Re=3A_=5BPATCH_04/16=5D_dts=3A_k1=3A_import_p?=
- =?US-ASCII?Q?inctrl_dts_file_from_upstream_folder?=
-User-Agent: Thunderbird for Android
-In-Reply-To: <afKvzj0yoJ85-5VI@pie>
-References: <20260422143112.1329478-1-raymondmaoca@gmail.com>
- <20260422143112.1329478-5-raymondmaoca@gmail.com>
- <20260429-glare-anybody-16c98d01184e@spud> <afKvzj0yoJ85-5VI@pie>
-Message-ID: <6562F314-D379-42C4-8371-0184E48B8592@gmx.de>
+ spf=pass smtp.mailfrom=patrice.chotard@foss.st.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=bwckFtcftoYJpBbs5t9o+zl66sSd9aVKhGtQgMrmx/3CRrTO6p9+L2imLSv/NfuXceT0tkyGDds5gDYLclcjNg4UIxkS3rXtsCMIjTNdWHgsO3FhRvnHXHhDobbeg3XfE9L2LXoJ/1XCA7/6jZpZOj84mmWX2zCgnpGSLIl8UWxQfz8GvT1zYvOFxYpnVkW99u5Rb0lvI3HKS+tVU/WJdtn0o3mKttwMM88JLaKc+Q2c6lo8qUGr3xgbib1U9MUQM+D8U0D1f/NyihXAu4fbP7aaj5Pwq4EpW0QUWJ4KDAXM7sK68Mt3uId44+ZxUVXggUuikcrvlFM0bH2GsupDBg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=vZ0nIVbg+F8fii6M8uJ9RmV53XevAbunDeT69B42PZM=;
+ b=xQnyjs3MDARO+SW5vBvaAVhKqwhOe3+FZ0ZqqLFCpsvdJldHTpQptip5ljEY+t9anszm+dWR0pJvb7WtcyNmrU4gXX3QIXADCyzKsDcMhQE8a7E6K2ymVgB17spfoUxOc19YJMvvJ1Nqtl+ROaHiqhVER05lRaVtO1SUalFBQQxn83LjAXb3qw2sUE/PMSdVA9bdnWJ3Qb0uYUW+wnhysOvA/qPKxpLISYBTb7LYw0An+B4FwMx7xpKfaaBxU/WE0Ytd8or9I8BWWYLQeqa7roX5lAp6aCSYdaY5i2SrFSdVFFPodM41ZYtrvkuovh3lRjVWHp3Vucz1zedmuYdumw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
+ 164.130.1.60) smtp.rcpttodomain=gmail.com smtp.mailfrom=foss.st.com;
+ dmarc=fail (p=none sp=none pct=100) action=none header.from=foss.st.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=vZ0nIVbg+F8fii6M8uJ9RmV53XevAbunDeT69B42PZM=;
+ b=ECj2PER0BlYw6ZBMVPWVgKLP8UlDg6Y8pb+p7BeAVVeoTXZG5HuvKhjB+5A7DFaNu3jk1NmQPC6lqI72gjWg2CM07lyfULQhcAp/rP7R/Wo9/Zyqx3UEvkIzl2hH6RRKXOQMQxkuaoYDWY9homZGVqn76YJG0t59TaN0PFcO3O3mkyDoSkUTRQ+YuavyQllM6djdjtRiVs8DQRoL9ijQxX5waFDV6188aBz0pGzi+ivGK+49W3JtmKcYmRJLs5y1etCxrtaXXPzaxTeVlaYMIP9pLvykYkY2/7QBHohwQp5zpoZI7mwMSeVeIWuO8hjP2ZR+vDD1enHhj4NnMTYhTQ==
+Received: from DU6P191CA0022.EURP191.PROD.OUTLOOK.COM (2603:10a6:10:540::13)
+ by VI1PR10MB3215.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:803:12f::23) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9870.20; Thu, 30 Apr
+ 2026 06:58:51 +0000
+Received: from DB3PEPF00008860.eurprd02.prod.outlook.com
+ (2603:10a6:10:540:cafe::b7) by DU6P191CA0022.outlook.office365.com
+ (2603:10a6:10:540::13) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9846.30 via Frontend Transport; Thu,
+ 30 Apr 2026 06:58:51 +0000
+X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.60)
+ smtp.mailfrom=foss.st.com; dkim=none (message not signed)
+ header.d=none;dmarc=fail action=none header.from=foss.st.com;
+Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
+ designate 164.130.1.60 as permitted sender) receiver=protection.outlook.com;
+ client-ip=164.130.1.60; helo=smtpO365.st.com;
+Received: from smtpO365.st.com (164.130.1.60) by
+ DB3PEPF00008860.mail.protection.outlook.com (10.167.242.11) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9846.18 via Frontend Transport; Thu, 30 Apr 2026 06:58:51 +0000
+Received: from STKDAG1NODE1.st.com (10.75.128.132) by smtpO365.st.com
+ (10.250.44.72) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.29; Thu, 30 Apr
+ 2026 09:02:03 +0200
+Received: from [10.48.87.93] (10.48.87.93) by STKDAG1NODE1.st.com
+ (10.75.128.132) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.29; Thu, 30 Apr
+ 2026 08:58:50 +0200
+Message-ID: <fbc2d28f-7ad3-4e18-9229-f83fc54a05d6@foss.st.com>
+Date: Thu, 30 Apr 2026 08:58:50 +0200
 MIME-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:sRFRDHTShzx5uszj40dyAolFGk4yzZasvf/AOjRx4+cJHcJpHgO
- eDn45ocX2EfbtoG4MR7hA+Vgua3CFkwV5snaO+ZRueiQbD/XWWbTSYH6qflIg0fBRt0pTPw
- eOaf35lkfb4dp2p1s/JYSKWh9OGn1cNSmavbsWkPox8fgPBCakiT9B765QLfqO8OxIJDYPP
- 6yU0GNgWIhKDYPAN6EJAA==
-UI-OutboundReport: notjunk:1;M01:P0:AX0Y0Rh/QlQ=;mnxWwtT6pqBCuHGj/E1ensP+toS
- 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
- UgyJjA==
+User-Agent: Mozilla Thunderbird
+Subject: Re: [Uboot-stm32] [PATCH] board: stm32pm1: Fix board_check_usb_power()
+To: =?UTF-8?Q?Rapha=C3=ABl_Gallais-Pou?= <rgallaispou@gmail.com>,
+ <uboot-stm32@st-md-mailman.stormreply.com>, <u-boot@lists.denx.de>
+CC: Patrick Delaunay <patrick.delaunay@foss.st.com>, Tom Rini
+ <trini@konsulko.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>, "Kory
+ Maincent" <kory.maincent@bootlin.com>
+References: <20260414-fix_usb_adc_meausurement-v1-1-8cdbd4c10dd8@foss.st.com>
+ <255b4c39-eff9-46cd-9e18-8e1b47ecabac@gmail.com>
+Content-Language: en-US
+From: Patrice CHOTARD <patrice.chotard@foss.st.com>
+In-Reply-To: <255b4c39-eff9-46cd-9e18-8e1b47ecabac@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+X-Originating-IP: [10.48.87.93]
+X-ClientProxiedBy: STKCAS1NODE1.st.com (10.75.128.134) To STKDAG1NODE1.st.com
+ (10.75.128.132)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DB3PEPF00008860:EE_|VI1PR10MB3215:EE_
+X-MS-Office365-Filtering-Correlation-Id: 4f32b7a6-8845-4e7c-639c-08dea685ef79
+X-LD-Processed: 75e027c9-20d5-47d5-b82f-77d7cd041e8f,ExtAddr
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|82310400026|36860700016|376014|56012099003|18002099003|22082099003;
+X-Microsoft-Antispam-Message-Info: FmknOh93KM7FnT2dk5yZS/G+GI65x2mFieibPx1YnoDfCsJ3GY5wGR1KzB79wM1U5eoSg0dwbglTRzOkUk5QVdPo+qxDG4L4YachyhHQPy7t5wnZIRCCuVWPepLsqx7NeBMOpwmBJ7Qua0JALtfsrjgo7mAHC/ylCX3/LlKQguXDttSU05rmYKy2c6QJwEFkmW9XCh9VM3SS5dvyydkXokK/JUEA9SAZDL1D89e3iSZNF/qwdXnd0bRI1U02keEbDMlkXvidFbwwazCB/Otk7LI4Ihhk8R5GfkkJeeHCQKAQvi06n7oENqQltqOt3QK0gAzOuGmtsF5HacmynVgE8Pv3g/JAK1ZsM6CAEwdH/9tfJ/S92c/hV/zKZsGKqehyrfjmrMEtlUzGWdQK/6wU6/GnSld1YxqU8XrDvSJFsLwf8gRHFXDQOWJJBy+lbt+HX3p+TXEMhr047QsjlpfhBeK7rjIaay6IQ4dpdEe4gXTQg0WgQQrPr/yxvI1Msdk5sBbvnd7WBeq7EQgObMlbgNqwYt2I375EiR3X4sff7z0VDoWZtYHRTvBtbXUhm/6Qiyzl192VeyV0FfAm348xTnsQXBszzJeaNkj8xvEwOQ6SN+NaBF0TBFSBOzfZyNuwvmYhW0z+r1EgbpWR7USgX3Io79oh5O/VMIsMDNoMG8iLrMNgE9aTKQ61qHRenAR+6JJ6uz/lfBKjLzt5emen3d1rAzGm3elZdfNChlxJM4D9i59pnkMqGllo97HIakC3YwnqQ2OPT61/QZFyN0prBQ==
+X-Forefront-Antispam-Report: CIP:164.130.1.60; CTRY:IT; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(1800799024)(82310400026)(36860700016)(376014)(56012099003)(18002099003)(22082099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: yiWBmhc7FaHXA1u1KWUx7DlyvCwP+8aHAH4kAkpQ+ykO8vLPT3iNSHbdq1UCMEatHLh60ntwZh8GSvA3mvtsfpCKr0P/Y6SRcP8IaihLCYuzItiyFxLEZhmtbisS9GzTrAp4A3vs0IYujOD/DcstKd2oh68wCjDSYCkMPulZrAK+0oQhtPKxxSHsJeQ5nb+vHMRwTm8DPVNGu/RKX1TeS/s6+cCx9FrWxA52MAM+7iE6lOFe9FPAP+p5x6TEfO2KOskUSLCHKoaF4Tn8kSE06eAQOrBgLKsiYdtrQXDKtG4rFg/0WFZsNeCHgK5XohtHHQQ5jBVBdICnCHCx3vwurykCNfJMByUTMq4iiqYnXamAunek89/TJ0hOJTinDGbq8p60h++zF+XFyW2yoi+egJwvbunzIb2ltXbi59lTEffL3HM5tMZF9ygo3mZRt7XR
+X-OriginatorOrg: foss.st.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Apr 2026 06:58:51.0647 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4f32b7a6-8845-4e7c-639c-08dea685ef79
+X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.60];
+ Helo=[smtpO365.st.com]
+X-MS-Exchange-CrossTenant-AuthSource: DB3PEPF00008860.eurprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR10MB3215
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -163,70 +133,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Am 30=2E April 2026 03:26:38 MESZ schrieb Yao Zi <me@ziyao=2Ecc>:
->On Wed, Apr 29, 2026 at 08:48:39PM +0100, Conor Dooley wrote:
->> On Wed, Apr 22, 2026 at 10:31:00AM -0400, Raymond Mao wrote:
->> > From: Raymond Mao <raymond=2Emao@riscstar=2Ecom>
->> >=20
->> > Import k1-pinctrl=2Edtsi from upstream folder=2E
->>=20
->> Why doesn't the platform just use the upstream dts directly?
->
->AFAIK, U-Boot's reset driver for SpacemiT K1 predates land of the
->kernel side driver, and follows a complete different (and to me,
->broken since it combines completely unrelated MMIO regions) ABI=2E
-
-Shouldn't we first correct the reset drivers and switch to the upstream ke=
-rnel device-tree before adding anything new? - This would reduce future rew=
-ork=2E
-
-Best regards
-
-Heinrich
 
 
+On 4/29/26 11:12, Raphaël Gallais-Pou wrote:
+> 
+> 
+> On 4/14/26 11:06, Patrice Chotard wrote:
+>> Depending of plugged power source (computer, wall charger, ...) it can
+>> happen that we got the following message:
+>>
+>> "****************************************************"
+>> "*      USB TYPE-C charger not compliant with       *"
+>> "*                   specification                  *"
+>> "****************************************************"
+>> ""
+>> "### ERROR ### Please RESET the board ###"
+>>
+>> This issue has been detected on STM32MP135f-DK board.
+>>
+>> It's due to max_uV and min_uV value are initialized at beginning of
+>> board_check_usb_power() and can then be used for the 2 iteration of
+>> adc_measurement().
+>> max_uV/min_uV values issued of the first adc_measurement() iteration
+>> are used as input of the second adc_measurement() iteration, which
+>> can lead to incoherent pair of min_uV/max_uV values.
+>>
+>> To ensure that adc_measurement() returns coherent value for max_uV and
+>> min_uV, initialize max_uV and min_uV at each loop start.
+>>
+>> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+>> ---
+> 
+> Hi Patrice,
+> 
+> Reviewed-by: Raphaël Gallais-Pou <rgallaispou@gmail.com>
+> 
+> Best regards,
+> Raph
+> 
+Applied to u-boot-stm32/master
 
-
->
->U-Boot's version,
->
->	reset: reset-controller@d4050000 {
->		compatible =3D "spacemit,k1-reset";
->		reg =3D <0x0 0xd4050000 0x0 0x209c>,
->		      <0x0 0xd4282800 0x0 0x400>,
->		      <0x0 0xd4015000 0x0 0x1000>,
->		      <0x0 0xd4090000 0x0 0x1000>,
->		      <0x0 0xd4282c00 0x0 0x400>,
->		      <0x0 0xd8440000 0x0 0x98>,
->		      <0x0 0xc0000000 0x0 0x4280>,
->		      <0x0 0xf0610000 0x0 0x20>;
->		      reg-names =3D "mpmu", "apmu", "apbc", "apbs", "ciu", "dciu", "ddr=
-c", "apbc2";
->		      #reset-cells =3D <1>;
->		      status =3D "disabled";
->	};
->
->Kernel's version,
->
->	syscon_apmu: system-controller@d4282800 {
->		compatible =3D "spacemit,k1-syscon-apmu";
->		reg =3D <0x0 0xd4282800 0x0 0x400>;
->		clocks =3D <&osc_32k>, <&vctcxo_1m>, <&vctcxo_3m>,
->			 <&vctcxo_24m>;
->		clock-names =3D "osc", "vctcxo_1m", "vctcxo_3m",
->			 "vctcxo_24m";
->		#clock-cells =3D <1>;
->		#power-domain-cells =3D <1>;
->		#reset-cells =3D <1>;
->	};
->
->	(and many other independent system-controller nodes, each for a
->	 distinct MMIO region)
->
->I suspect we have to deal with the difference before switching to
->upstream devicetree, since I2C controllers introduced in this series
->do depend on resets=2E
->
->Regards,
->Yao Zi
-
+Thanks
+Patrice
