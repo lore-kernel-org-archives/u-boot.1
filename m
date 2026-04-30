@@ -4,62 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D2C2CCFA13
-	for <u-boot@archiver.kernel.org>; Thu, 30 Apr 2026 21:54:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D54ACD13D2
+	for <u-boot@archiver.kernel.org>; Thu, 30 Apr 2026 21:55:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 01568803C6;
-	Thu, 30 Apr 2026 23:54:46 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9AB73803C6;
+	Thu, 30 Apr 2026 23:55:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=xs4all.nl
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=xs4all.nl header.i=@xs4all.nl header.b="rSqko0Wb";
+	dkim=pass (2048-bit key; secure) header.d=xs4all.nl header.i=@xs4all.nl header.b="JuqEfR3X";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8AE198063E; Thu, 30 Apr 2026 23:54:44 +0200 (CEST)
-Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.183])
+ id BA66583936; Thu, 30 Apr 2026 23:55:19 +0200 (CEST)
+Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.185])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9AB1480086
- for <u-boot@lists.denx.de>; Thu, 30 Apr 2026 23:54:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 794AC80086
+ for <u-boot@lists.denx.de>; Thu, 30 Apr 2026 23:55:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=xs4all.nl
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mark.kettenis@xs4all.nl
-X-KPN-MessageId: 30bf0a4d-44df-11f1-bea8-005056992ed3
+X-KPN-MessageId: 463bd8ec-44df-11f1-8ff3-005056999439
 Received: from smtp.kpnmail.nl (unknown [10.31.155.8])
  by ewsoutbound.so.kpn.org (Halon) with ESMTPS
- id 30bf0a4d-44df-11f1-bea8-005056992ed3;
- Thu, 30 Apr 2026 23:54:41 +0200 (CEST)
+ id 463bd8ec-44df-11f1-8ff3-005056999439;
+ Thu, 30 Apr 2026 23:55:17 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=xs4all.nl; s=xs4all01;
  h=subject:to:from:message-id:date;
- bh=csepfKb/hLQx0xLRCFqiZI1KiVAN9Hc7H1Lk9AcuYpw=;
- b=rSqko0WbQWkuajesUc/6x0xTrxLfszkiydkEtao2khqrS5+M8M4uMu5t/qIz36f5NJNgnBj1mm2KK
- dxAt+v/CnjBttGDdVnV2ZdOwO12/hxrj+m4QRL3z7n9iv0mX69dedcLhnQRxZpvwnlRavMPvhoAJnE
- +kLmf/VAaZ9Pyy6fx3D32WBfXZVr+4BZYOC36P+GJrdfV3C+ji4wzIh2M/0Oh2tfZy0qyqNbUuG6BS
- fVubsaZc9g1l8qQLLROVGzbKk510rE6tN/Kt2a3w1QSSx2Rs4ItXlMOz2M+5CyodZFSsEBqU+nZ+D9
- koLLWrTyS8+tqfmq6ZUnuMImgzO1isw==
-X-KPN-MID: 33|1g8/ztXWVYs4qjaPjwDRstw2UBPTvLFA2MU74AdRNjQgTB5dnzTxZ/3hgZ9b3n5
- Fwp4305NL8Cs2pQtOFUi0K2cFUFbXEvmoE9MlP14j+AE=
+ bh=EbmfcKBIqQ+UFSdH0vjYB+JlhjU5AoLoZ4JFtJ91Ppk=;
+ b=JuqEfR3Xd/HdgT4SNz3l6AYb9akZ6hiuGA8a6eVdoH6tSpoQGIxV7ExaAb1V3jGg7LDAIrKlVDHrg
+ 4QThAB6JSniJQeO9GLVSA4kC2gsgdafQzpDY90yYPe6yBoDYlWUMOLvONIPIcO48UyxMLbmWymZuFB
+ TlBsxZdlDVx9J6xl5Pt/ekLZV+hFwlC6vaukvrz0KkqOD5X+uWTOTfns2hOJHFzNJwRhQ3X0MBqeZ2
+ 3sTlghc6mk9OTpunGYXuq+XTTTRDcxTdbkdrR66WG6+Q5e7i9G03PR0jDykLS9tpjmkGW8lrN7sIjJ
+ hjsQdEloXrjqd5HqxSDOOd6hEBBXUXA==
+X-KPN-MID: 33|reZvrZfceXlNtAZdMSBMhEHELm0uN4CT3BiJJQcvesN5pgx6Hu7oVkjLeaDtEzQ
+ 76Z+SpZpFgikLVRZtO79Tj0h3EWWl7AliUxbTHHUMNvA=
 X-KPN-VerifiedSender: Yes
-X-CMASSUN: 33|KQ5oM+px7Qm0xG7n7pKTQmKymj0O0FdwUiTcJsAHVrLLemyPjvoihJ91hjvaIrM
- gj5daTz/L1XBHLFyEoXkE5A==
+X-CMASSUN: 33|QlwG/EuLqQ+8/gnl4MWyPKqTFytndbyGRRA34FWunGkIfwmCyN2AP5TBp0al9/A
+ 98SPem9ipU17s8AOrCorz/Q==
 X-Originating-IP: 80.61.163.207
 Received: from bloch.sibelius.xs4all.nl (80-61-163-207.fixed.kpn.net
  [80.61.163.207]) by smtp.xs4all.nl (Halon) with ESMTPSA
- id 304eed13-44df-11f1-9c0c-00505699d6e5;
- Thu, 30 Apr 2026 23:54:41 +0200 (CEST)
-Date: Thu, 30 Apr 2026 23:54:40 +0200
-Message-Id: <87fr4c8673.fsf@bloch.sibelius.xs4all.nl>
+ id 45b04716-44df-11f1-9c0c-00505699d6e5;
+ Thu, 30 Apr 2026 23:55:17 +0200 (CEST)
+Date: Thu, 30 Apr 2026 23:55:16 +0200
+Message-Id: <87ecjw8663.fsf@bloch.sibelius.xs4all.nl>
 From: Mark Kettenis <mark.kettenis@xs4all.nl>
 To: Janne Grunau <j@jannau.net>
 Cc: u-boot@lists.denx.de, trini@konsulko.com, kettenis@openbsd.org,
  j@jannau.net
-In-Reply-To: <20260430-apple-dt-upstream-v1-1-dda66c16e0da@jannau.net>
- (message from Janne Grunau on Thu, 30 Apr 2026 23:25:46 +0200)
-Subject: Re: [PATCH 1/3] doc: board: apple: Mention M2 and M2 Pro/Max/Ultra
- SoCs
+In-Reply-To: <20260430-apple-dt-upstream-v1-2-dda66c16e0da@jannau.net>
+ (message from Janne Grunau on Thu, 30 Apr 2026 23:25:47 +0200)
+Subject: Re: [PATCH 2/3] doc: device-tree-bindings: Remove apple,pinctrl.yaml
 References: <20260430-apple-dt-upstream-v1-0-dda66c16e0da@jannau.net>
- <20260430-apple-dt-upstream-v1-1-dda66c16e0da@jannau.net>
+ <20260430-apple-dt-upstream-v1-2-dda66c16e0da@jannau.net>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,55 +76,131 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 > From: Janne Grunau <j@jannau.net>
-> Date: Thu, 30 Apr 2026 23:25:46 +0200
+> Date: Thu, 30 Apr 2026 23:25:47 +0200
 > 
-> These SoCs are supported since 2022/2023 but were never added to the
-> documentation. The devices very similar to the equivalent M1 devices.
-> The biggest difference is that the M2 and M2 Pro/Max based laptops no
-> longer use SPI for the keyboard.
+> Remove outdated apple,pinctrl.yaml. The dts/upstream contains the
+> current version of this binding.
 > 
 > Signed-off-by: Janne Grunau <j@jannau.net>
 
 Acked-by: Mark Kettenis <kettenis@openbsd.org>
 
 > ---
->  doc/board/apple/m1.rst | 10 +++++++---
->  1 file changed, 7 insertions(+), 3 deletions(-)
+>  .../pinctrl/apple,pinctrl.yaml                     | 106 ---------------------
+>  1 file changed, 106 deletions(-)
 > 
-> diff --git a/doc/board/apple/m1.rst b/doc/board/apple/m1.rst
-> index 8fa7637629e..5d2cf750fde 100644
-> --- a/doc/board/apple/m1.rst
-> +++ b/doc/board/apple/m1.rst
-> @@ -8,14 +8,18 @@ developed by the Asahi Linux project.  At this point the machines with
->  the following SoCs work:
->  
->   - Apple M1 SoC (t8103)
-> + - Apple M2 SoC (t8112)
->   - Apple M1 Pro SoC (t6000)
->   - Apple M1 Max SoC (t6001)
->   - Apple M1 Ultra SoC (t6002)
-> + - Apple M2 Pro SoC (t6020)
-> + - Apple M2 Max SoC (t6021)
-> + - Apple M2 Ultra SoC (t6022)
->  
->  On these SoCs the following hardware is supported:
->  
->   - S5L serial port
-> - - SPI keyboard (on laptops)
-> + - SPI keyboard (on M1 laptops)
->   - Framebuffer
->   - NVMe storage
->   - USB 3.1 Type-C ports
-> @@ -77,7 +81,7 @@ supported SoCs.
->  
->     * - SoC
->       - Base Address
-> -   * - M1 (t8103)
-> +   * - M1 (t8103) and M2 (t8112)
->       - 0x235200000
-> -   * - M1 Pro/Max/Ultra (t6000/t6001/t6002)
-> +   * - M1 Pro/Max/Ultra (t6000/t6001/t6002) and M2 Pro/Max/Ultra (t6020/t6021/t6022)
->       - 0x39b200000
+> diff --git a/doc/device-tree-bindings/pinctrl/apple,pinctrl.yaml b/doc/device-tree-bindings/pinctrl/apple,pinctrl.yaml
+> deleted file mode 100644
+> index d50571affd1..00000000000
+> --- a/doc/device-tree-bindings/pinctrl/apple,pinctrl.yaml
+> +++ /dev/null
+> @@ -1,106 +0,0 @@
+> -# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
+> -%YAML 1.2
+> ----
+> -$id: http://devicetree.org/schemas/pinctrl/apple,pinctrl.yaml#
+> -$schema: http://devicetree.org/meta-schemas/core.yaml#
+> -
+> -title: Apple GPIO controller
+> -
+> -maintainers:
+> -  - Mark Kettenis <kettenis@openbsd.org>
+> -
+> -description: |
+> -  The Apple GPIO controller is a simple combined pin and GPIO
+> -  controller present on Apple ARM SoC platforms, including various
+> -  iPhone and iPad devices and the "Apple Silicon" Macs.
+> -
+> -properties:
+> -  compatible:
+> -    items:
+> -      - const: apple,t8103-pinctrl
+> -      - const: apple,pinctrl
+> -
+> -  reg:
+> -    maxItems: 1
+> -
+> -  clocks:
+> -    maxItems: 1
+> -
+> -  gpio-controller: true
+> -
+> -  '#gpio-cells':
+> -    const: 2
+> -
+> -  gpio-ranges:
+> -    maxItems: 1
+> -
+> -  interrupts:
+> -    description: One interrupt for each of the (up to 7) interrupt
+> -      groups supported by the controller sorted by interrupt group
+> -      number in ascending order.
+> -    minItems: 1
+> -    maxItems: 7
+> -
+> -  interrupt-controller: true
+> -
+> -patternProperties:
+> -  '-pins$':
+> -    type: object
+> -    $ref: pinmux-node.yaml#
+> -
+> -    properties:
+> -      pinmux:
+> -        description:
+> -          Values are constructed from pin number and alternate function
+> -          configuration number using the APPLE_PINMUX() helper macro
+> -          defined in include/dt-bindings/pinctrl/apple.h.
+> -
+> -    required:
+> -      - pinmux
+> -
+> -    additionalProperties: false
+> -
+> -required:
+> -  - compatible
+> -  - reg
+> -  - gpio-controller
+> -  - '#gpio-cells'
+> -  - gpio-ranges
+> -
+> -additionalProperties: false
+> -
+> -examples:
+> -  - |
+> -    #include <dt-bindings/interrupt-controller/apple-aic.h>
+> -    #include <dt-bindings/pinctrl/apple.h>
+> -
+> -    soc {
+> -      #address-cells = <2>;
+> -      #size-cells = <2>;
+> -
+> -      pinctrl: pinctrl@23c100000 {
+> -        compatible = "apple,t8103-pinctrl", "apple,pinctrl";
+> -        reg = <0x2 0x3c100000 0x0 0x100000>;
+> -        clocks = <&gpio_clk>;
+> -
+> -        gpio-controller;
+> -        #gpio-cells = <2>;
+> -        gpio-ranges = <&pinctrl 0 0 212>;
+> -
+> -        interrupt-controller;
+> -        interrupt-parent = <&aic>;
+> -        interrupts = <AIC_IRQ 16 IRQ_TYPE_LEVEL_HIGH>,
+> -                     <AIC_IRQ 17 IRQ_TYPE_LEVEL_HIGH>,
+> -                     <AIC_IRQ 18 IRQ_TYPE_LEVEL_HIGH>,
+> -                     <AIC_IRQ 19 IRQ_TYPE_LEVEL_HIGH>,
+> -                     <AIC_IRQ 20 IRQ_TYPE_LEVEL_HIGH>,
+> -                     <AIC_IRQ 21 IRQ_TYPE_LEVEL_HIGH>,
+> -                     <AIC_IRQ 22 IRQ_TYPE_LEVEL_HIGH>;
+> -
+> -        pcie_pins: pcie-pins {
+> -          pinmux = <APPLE_PINMUX(150, 1)>,
+> -                   <APPLE_PINMUX(151, 1)>,
+> -                   <APPLE_PINMUX(32, 1)>;
+> -        };
+> -      };
+> -    };
 > 
 > -- 
 > 2.53.0
