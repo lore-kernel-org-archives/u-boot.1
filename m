@@ -4,60 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AAEAFCD13D2
-	for <u-boot@archiver.kernel.org>; Thu, 30 Apr 2026 22:00:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C1BECD13D2
+	for <u-boot@archiver.kernel.org>; Thu, 30 Apr 2026 22:16:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 419B8845E9;
-	Fri,  1 May 2026 00:00:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=xs4all.nl
+	by phobos.denx.de (Postfix) with ESMTP id BBCF1839D5;
+	Fri,  1 May 2026 00:16:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=xs4all.nl header.i=@xs4all.nl header.b="vKzTHc3K";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="El3uZSMT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BE387845E3; Fri,  1 May 2026 00:00:37 +0200 (CEST)
-Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.185])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id D6A0E83A91; Fri,  1 May 2026 00:16:50 +0200 (CEST)
+Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
+ [IPv6:2a00:1450:4864:20::52c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CF42C845C8
- for <u-boot@lists.denx.de>; Fri,  1 May 2026 00:00:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E586E803C6
+ for <u-boot@lists.denx.de>; Fri,  1 May 2026 00:16:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=xs4all.nl
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mark.kettenis@xs4all.nl
-X-KPN-MessageId: 03ebeeae-44e0-11f1-8ff3-005056999439
-Received: from smtp.kpnmail.nl (unknown [10.31.155.6])
- by ewsoutbound.so.kpn.org (Halon) with ESMTPS
- id 03ebeeae-44e0-11f1-8ff3-005056999439;
- Fri, 01 May 2026 00:00:35 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=xs4all.nl; s=xs4all01;
- h=subject:to:from:message-id:date;
- bh=CvWERdNVs8CQN3AAXyGLcx26hJ4j6ECW3s60P1XKp/Q=;
- b=vKzTHc3K3j7tPMzR1wO0BlfliGfUCtLEQuMj7yLvozt/XHedzF99so+g5WdZpXHrQ6YE6TMaPN+U5
- 7gitEqlMsTiSt1JjdmcHCzMTMA/NlRPRpD9Doh1eIs4XC+qfmHUVPvFNdXcE4TN+NRw5L87uXU7gyo
- PzBt4bsx3pZ5lacRm+rc4/ZSG7/ELzNgmIMsshh8qafS+q1IGLKGD/rh5524ZBp6l1bpinoWtHdlG9
- TDJrDCehJ3kVq/XEJyGmOgrPPdJJ28pmIzlB1A1lRUy0zD0daOjYMnQm5EOFnE8MbE5QYlds6M+Wrd
- dRevIo0y/dCCzrEFO70RdszC+bg+Q/A==
-X-KPN-MID: 33|5LIKcoMi4QNVtO4AtTDoBpnCnke1yE7XFKCF3joQRYo/8V1nxBUJZO8GuOh/2Vc
- db0dy197FiG/GEdPWzdWjTV3DpUOlMHSL7R8tSFPdOXA=
-X-KPN-VerifiedSender: Yes
-X-CMASSUN: 33|6bmgynLlXxS7c+r3k5Be5hYHqXXYgziAxVep6ckZT3/xeJv4ezxKETW+y6fsRE+
- rDBEDzcvgEyxhmRnz7rBhXg==
-X-Originating-IP: 80.61.163.207
-Received: from bloch.sibelius.xs4all.nl (80-61-163-207.fixed.kpn.net
- [80.61.163.207]) by smtp.xs4all.nl (Halon) with ESMTPSA
- id 0374595f-44e0-11f1-bffa-00505699772e;
- Fri, 01 May 2026 00:00:35 +0200 (CEST)
-Date: Fri, 01 May 2026 00:00:34 +0200
-Message-Id: <87bjf085x9.fsf@bloch.sibelius.xs4all.nl>
-From: Mark Kettenis <mark.kettenis@xs4all.nl>
-To: Janne Grunau <j@jannau.net>
-Cc: u-boot@lists.denx.de, trini@konsulko.com, kettenis@openbsd.org,
- j@jannau.net
-In-Reply-To: <20260430-apple-dt-upstream-v1-0-dda66c16e0da@jannau.net>
- (message from Janne Grunau on Thu, 30 Apr 2026 23:25:45 +0200)
-Subject: Re: [PATCH 0/3] Switch Apple silicon boards to upstream device trees
-References: <20260430-apple-dt-upstream-v1-0-dda66c16e0da@jannau.net>
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ed1-x52c.google.com with SMTP id
+ 4fb4d7f45d1cf-671ae79e617so1854321a12.3
+ for <u-boot@lists.denx.de>; Thu, 30 Apr 2026 15:16:48 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1777587408; cv=none;
+ d=google.com; s=arc-20240605;
+ b=XQU8CfD2CHRxYvcdpVbHcf3w+feENVEhJtwpcCco+aRMBl9FJOjApKhbm02ZL8hkwW
+ QAJT+F48KolzJ/wZ93LYUnoCpuB3BpoXvQqz6RORofRVfmlqhfO2MBW1Qf6wRIE3nzS4
+ 7egBVPrLGPtlXh2cMs3Ff0HlLTT45Hvid5Z3Fg7WWek3A891RcSVsuxRYWzTp1tIg+/F
+ CSDDK8r2DxVoa44eSLKzK0oXBZy2Z+/5CwOrbPe2F1yncv3012vbvQ6tvm+Ntr9b/u2Z
+ 1vAlEkOWGwiZRlkJAhyszN94DRsJgubAq3iDv9CrxM1/otvNBuhzslwGOsj0HpK5Y61k
+ mBdQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=0fBfSdXGzdhAxsV/xS/R0MmHEDZCRDsmDyO9+MqX0Ok=;
+ fh=JojmjFcMDF/AUVh0pdAK1ViDQN4c6LuWC9IGLVncDp0=;
+ b=C9OAqiYFE5uZdwNkJP847cX4ORR88hYW38/6tqNnr1PQlKCgg5/4Khhi+0+pavCege
+ G3WawMaD2w+Tghg3Uhy9z/s1X/mnkVwQUT73WQRMV6A9MihrsQZUL4ipv3RMYt/7WTIg
+ Kdi/yKK/+Edrp7X3utGXJo4e96GF8Mf4hFlb0OMWflorTxW1dcbJFMCgqixSebCDZK37
+ SpBRlEomRiezsWLnVZteKGyVaYlu0c2fjnXGW/kQDLbTrH3SX+qFMV/ZUsbPT0jzn4Ta
+ +wWembO0I9wAuzE0l7oPlYR/Vki1arPxKlwaL5SQqq5cIk0/ZJnwzShxZwOweLs+bj9J
+ 9xGA==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1777587408; x=1778192208; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=0fBfSdXGzdhAxsV/xS/R0MmHEDZCRDsmDyO9+MqX0Ok=;
+ b=El3uZSMTyu9DH2LidEEh5oefU5jWEcz7E2Y2zEL7WYk2A/tZTD6oLSCSkI8PgkfeOb
+ Q7fkGXMK4OFXywpfRkaSG9cFrCBAI4EXFpriucIWvEzGmbOQzzJe2y/8Zwfu4hGv1Oc9
+ hlq6sSSfbLYKgf3xrZy4e4it++Q1W3lRKoLBo=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1777587408; x=1778192208;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=0fBfSdXGzdhAxsV/xS/R0MmHEDZCRDsmDyO9+MqX0Ok=;
+ b=Aq2VTkjzllHZYh7C5eJaVxhOoV/seUa2IF8b1VpGpi6TtxzmQ5z9mexAHyI2coL1KZ
+ qylC45d38RJTL2wAFbenlACUV7BKoMiuv5MB55dk4keAv0qRSdVuO8CBQjHMBYMCKMOY
+ RrxWm2xF9s4ox9kDt7cCVujg4JmgC10KifhSV/VmyjvsTf7TZ0U6sACOQ6CMzlbRCgtT
+ PZk8jdKmlRDZrOPCqK60auvg8y9OsR1XoYyG00PXPpZnC+H3Cm2S5WvQ01T0gU2Qvu1u
+ Su37ezIXu3Jo82xmt9hxzw7GcCZPq8hdpWt1eJp4danbaWd4xVvUzX6g0nfxilNfd+Da
+ rIdg==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ+so7/v7z7EHD/urIdnqZsWLtt/r/4xstagz1R5WvDD70PBpmyfp6U6zKtS/g/lDOpYGkIDS8g=@lists.denx.de
+X-Gm-Message-State: AOJu0YyWk6QySOE6u6aQKE+5zwYkb9KHuq8absxw3LuNJmiDdHtuE+cO
+ m7NSggnt61LKsjMWdRi5djYlPl+ZyKguBtZ0dYsxBmSB11tnAPfYiOu35Cr8riQjX+O/W47CPvp
+ A0zcRNcLi1SrEPpu4eVfz714mfZ93q2PJDB93ydx8
+X-Gm-Gg: AeBDieuLMejtD2MOBdREh16mWkxIYS+gIxtfOyWug+nG/ndUxLdUuXed51d/G2Rjh4/
+ Y66nNsXh0YAnicz6OqsWDw9o4LMXJx/nZMtBHAND0dLbYNNvLDGDGjn3BpxOcRwgNKXpivcx+R8
+ xjQLLoLWh0IK7i5njxWlIiPCQg8dPdJWWMDyBpZIS3JTdFw3xwuup+l6CqxuNyHIYdtwJygcIOx
+ L17B6DUueu7zBf/QknQDdWgax372GKdSE72eECFAFnCEbJpmwREoJ0jNSLlsa8xqXWltzR1XaMi
+ zdO84DLCdNsiLaEA
+X-Received: by 2002:a17:907:5cb:b0:ba5:a3a0:4a3f with SMTP id
+ a640c23a62f3a-bbac7997242mr325128966b.35.1777587408295; Thu, 30 Apr 2026
+ 15:16:48 -0700 (PDT)
+MIME-Version: 1.0
+References: <CAFLszTi5QJUZ5uKAc7W1nATXSc_yv_WHaFXhzcgrpF2bhupzRw@mail.gmail.com>
+ <20260430192906.4945-1-jcethrid@gmail.com>
+In-Reply-To: <20260430192906.4945-1-jcethrid@gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Thu, 30 Apr 2026 16:16:36 -0600
+X-Gm-Features: AVHnY4Kh8rjzyWirAQqy8UHETQWTa8mjP1OyhM5J1bTQsG9E8PY1Nm737CP9Ce8
+Message-ID: <CAFLszTiHm9MbuFNQa4+SZdUCKSoqePokQaHTFY8R8KiPf=1=tA@mail.gmail.com>
+Subject: Re: [PATCH v5 14/15] arm: sc5xx: Add fdt_addr_r, kernel_addr_r,
+ and ramdisk_addr_r
+To: Caleb Ethridge <jcethrid@gmail.com>
+Cc: caleb.ethridge@analog.com, linux@analog.com, malysagreg@gmail.com, 
+ philip@philipmolloy.com, trini@konsulko.com, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,63 +112,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> From: Janne Grunau <j@jannau.net>
-> Date: Thu, 30 Apr 2026 23:25:45 +0200
-> 
-> The Linux device trees for Apple silicon devices cover now most of the
-> hardware as u-boot's internal device trees for M1 devices. Linux has in
-> addition device trees M2 and M1 and M2 Pro/Max/Ultra devices which were
-> never added in u-boot.
-> The most common use case for u-boot on Apple silicon devices does not
-> use DTBs from u-boot but passes runtime modified device trees from an
-> earlier boot loader (m1n1).
-> This change regresses support for the DWC3 based USB-C ports and the SPI
-> based keyboard on M1 and M1 Pro/Max notebooks. The regression for the
-> USB-C ports will be fixed when dts/upstream is synced to Linux v7.0.
-> The dt-bindings and device tree nodes for the SPI keyboard has still to
-> be submitted upstream.
-> These regression are in my opinion acceptable due to the limited use of
-> u-boot's DTBs for these targets.
-> 
-> Signed-off-by: Janne Grunau <j@jannau.net>
+Hi Caleb,
 
-Thanks Janne,
+On Thu, 30 Apr 2026 at 13:29, Caleb Ethridge <jcethrid@gmail.com> wrote:
+>
+> Hi Simon,
+>
+>
+> > The other 32-bit boards in this patch leave ~16
+> > MiB. Is that intentional?
+>
+> No, this looks to be a typo in the ramdisk_addr_r, all of the boards
+> allocate the same space for the kernel image in the load. This will be fixed
+> in the next revision.
+>
+> > How about picking a distinct value now so
+> > the future booti patch doesn't have to touch every board file again?
+>
+> I'm not sure I follow your meaning here? Ultimately when booting a user would
+> choose to either use the fitImage with bootm or the booti approach with
+> everything loaded individually, and there is the potential that once booti
+> support is added we will deprecate and completely replace the bootm commands with booti
+> versions.
+>
+> Also, currently when we build the fitImage, we place the ramdisk and kernel
+> offset in the fitImage so that when loaded to CONFIG_SYS_LOAD_ADDR, they would appear
+> at the addresses from the environment for the ramdisk and kernel. So if you were to
+> load the fdt, kernel and ramdisk to these addresses, then create a fitImage with our
+> build system with those same images and load it at CONFIG_SYS_LOAD_ADDR, nothing in the
+> RAM would change.
+>
+> Does this make sense? It would not ultimately matter if you loaded the fitImage or the
+> pieces individually, as they would be loaded to the same locations in memory.
 
-This was on my list of things to do, but never quite reached the top
-of the TODO list.
+Ah yes that makes sense, thanks.
 
-> ---
-> Janne Grunau (3):
->       doc: board: apple: Mention M2 and M2 Pro/Max/Ultra SoCs
->       doc: device-tree-bindings: Remove apple,pinctrl.yaml
->       arm: dts: Switch Apple silicon devices to dts/upstream
-> 
->  arch/arm/Kconfig                                   |    1 +
->  arch/arm/dts/Makefile                              |    7 -
->  arch/arm/dts/t8103-j274-u-boot.dtsi                |    1 -
->  arch/arm/dts/t8103-j274.dts                        |  129 ---
->  arch/arm/dts/t8103-j293-u-boot.dtsi                |    1 -
->  arch/arm/dts/t8103-j293.dts                        |  116 --
->  arch/arm/dts/t8103-j313-u-boot.dtsi                |    1 -
->  arch/arm/dts/t8103-j313.dts                        |  111 --
->  arch/arm/dts/t8103-j456-u-boot.dtsi                |    1 -
->  arch/arm/dts/t8103-j456.dts                        |  117 --
->  arch/arm/dts/t8103-j457-u-boot.dtsi                |    1 -
->  arch/arm/dts/t8103-j457.dts                        |  105 --
->  arch/arm/dts/t8103-jxxx.dtsi                       |  143 ---
->  arch/arm/dts/t8103-pmgr.dtsi                       | 1138 --------------------
->  arch/arm/dts/t8103-u-boot.dtsi                     |   25 -
->  arch/arm/dts/t8103.dtsi                            |  696 ------------
->  configs/apple_m1_defconfig                         |    2 +-
->  doc/board/apple/m1.rst                             |   15 +-
->  .../pinctrl/apple,pinctrl.yaml                     |  106 --
->  19 files changed, 11 insertions(+), 2705 deletions(-)
-> ---
-> base-commit: 88dc2788777babfd6322fa655df549a019aa1e69
-> change-id: 20260109-apple-dt-upstream-6daf03510fec
-> 
-> Best regards,
-> -- 
-> Janne Grunau <j@jannau.net>
-> 
-> 
+Regards,
+Simon
