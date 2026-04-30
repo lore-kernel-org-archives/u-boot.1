@@ -4,87 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0B61CD13D3
-	for <u-boot@archiver.kernel.org>; Thu, 30 Apr 2026 06:59:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13DA8CD13D3
+	for <u-boot@archiver.kernel.org>; Thu, 30 Apr 2026 07:00:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 265848432A;
-	Thu, 30 Apr 2026 08:59:35 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 897F2845CE;
+	Thu, 30 Apr 2026 09:00:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="XvqKaDVf";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="Y6H0g/4B";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 741EF845C8; Thu, 30 Apr 2026 08:59:33 +0200 (CEST)
-Received: from AM0PR83CU005.outbound.protection.outlook.com
- (mail-westeuropeazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::1])
+ id 9F7C780433; Thu, 30 Apr 2026 09:00:09 +0200 (CEST)
+Received: from GVXPR05CU001.outbound.protection.outlook.com
+ (mail-swedencentralazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c202::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3F2658432A
- for <u-boot@lists.denx.de>; Thu, 30 Apr 2026 08:59:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 32EE28460D
+ for <u-boot@lists.denx.de>; Thu, 30 Apr 2026 09:00:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=patrice.chotard@foss.st.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=gdfhWWtXVpDocjx2ueM93vaDj+ebx3FPODd4GV0uZbnGkjbC8Lh5D9HnYxNG5q3Mv+KOgNG8cSTtMFHwYJ/9HRPLv7vsf07ugC9QqMErB7uHmboUZDI/QDrhJcm3VCK1+vkPqJKIQi9atRIoFOnaym7UG74xJC/opSYg2CtysFTMKSHBa70T1ZeOD8cEXcG/2B5E07SVUXK90Lb4N+Q+fwnqKt4Q3Sxe2dwW5qc8s/4WRAto4/Id5psDaW+Ly6ZnepvG5sZIVcH2HKOn5KrXZc4ERjW7KMfain8nitkfmnhjzw/yc4GQxHgBsJjuLTnjn0CT9XHxzjNKhWr4i3EH0Q==
+ b=dX6nJ5+NjECNhjTEKkSuI8le5QZx7Rbsw6Xat+GvUp5nXZNKV0eTed8/eAlzZeVeiJd8qfJ49VNa5L0H8eV5WoKhCC6nSxOQP0SZ228kV5uMbmLXRwtPd2oyVvViAfT9vCbBM/cDYPWruYB6SYrmdNc5N2avNpjpk8C0hjac1+eGMrh76TpgYGPDX/y5q953yB2BQ6mBnsFyyS/WNV3a1xhLGC6Kg0k9dYg9fCXq0CpM/rxz7tqPLLcrAQV7d8GZSrBCWNBLcTpQoVR0vEiRkMPUE+Iw9p+GpPPCsukMNbTU6d595lvbgRHCwfOPvmN2bF2dyb6X1lQ0i4cv2/636g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=NJM/bD5EIupNrZ07eGTzn2cNyP6a/5uNcsChONKEFd8=;
- b=E7wrTPs+vMjIBpVoebsuuCyWq3lDi0nCGUqXOuRoxLiIGY8PdZRS31fAbCWBbPSzeu3lCBT8pkua/agfAlfIh/a7EnGFGplx3eZ8fOYm5Wq1q1xNLkejY//oAFO2hKM4M5C3leR/wwubowHByWGsoxMBZVm29MJKTD6bYVYj2bWjsTOcuH5t0M6/8c64euUb3SjSLCZJkTML3l4AidQ4VcDzdEZO42KmDCCpkL0XXfSeSOSMZCZUr4pRUjl51e8OkUvMIVKrx1vABwwoRkI5is071W4l2RNcI2j+hfYUzXO7FziIfDA0VjZwhtqIBohz2gf8xJwsHVCDMkdYsiLWyg==
+ bh=UVkAA7lM+o8HefohnJya+uoCy8dtjJbppIphLIkJQO0=;
+ b=u1gw8Cj4AzhRysqH+RLxaC3Vme1UGCS/1SpOC9xr83AzejIeipC7ojeQKaq0rPHnvoVJx/ImyuireqRb2d9IYDBMj8q9U1Y9ZlQTMCMHIMEOTLVlW0xsZu1iwUoqJ3EvQRrrzv+Vd+rtsHJdKHLQ2GdGfPz5JSzqeE9bmCIGLMBCZXQ4OPKDP7KNDal3pR6ou5mZ58zeg1YnWAABxDMN73GPzVN64jezz2/UaVWfCm8mmK/PFdFBEqi7MlxsiN9JXF2IDHPUVlS5WCVOTT/5ztxcdU//SXrzxPj/Cf1TzucQw/Y7DAjDHrG+3s/F8NKlGGLjRXW0/i3o1I/RSyHPMw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
- 164.130.1.59) smtp.rcpttodomain=gmail.com smtp.mailfrom=foss.st.com;
+ 164.130.1.60) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=foss.st.com;
  dmarc=fail (p=none sp=none pct=100) action=none header.from=foss.st.com;
  dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=NJM/bD5EIupNrZ07eGTzn2cNyP6a/5uNcsChONKEFd8=;
- b=XvqKaDVfHfMvrGBM84ZqXH5y8FrenMbJh4ijriXAlyRR5+E9W0qxaJ6sNWAjFpLfoieT0M0oHTM4s+z91e3DmolqEfSihvVYbTqr3bqVNYwj9HXbjQd7PTs6hIUNYaP08XVU/a2Y5M2oWbip6NlkCAORBOIfXpmfu+vfVrzj8QDX9+RK95sD6D2zEXhH6AtpbN8PO1ZYz5mdf1oOU+ec2A/ovTVod11I85mo9aYijJR0BlwhPGZtuQQBZXAFrCNxjyDs8VPatIPXrhGiMK0wuSZQtcLt2kyUk4UIn8R47UNqX6TAQOGB2BvLirk3+SO/uzk2tunW97MKT/ExI/TR5w==
-Received: from CWLP265CA0400.GBRP265.PROD.OUTLOOK.COM (2603:10a6:400:1d6::10)
- by DU0PR10MB6201.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:3e9::13)
- with Microsoft SMTP Server (version=TLS1_2,
+ bh=UVkAA7lM+o8HefohnJya+uoCy8dtjJbppIphLIkJQO0=;
+ b=Y6H0g/4B+LQFGf+2sYDqQtzqWmcqM0YgtBXBpmIueAzOjsAi1gXxQDcQN0A643b0y7pBRfM36evS7xoZFJBScpFnSUsCvio/jBJfn1f3qriP09zhwyV4JdWRXUju/IFxwxzQH9BhmG3ViNmDC9Z6ZaQrFbR95Ic2x1k+43TZ8upxvAmuv0rOAGelgimdDlq4FhPYW7QjTHwJYSr7yZXetggfF/AO5SsaQlfjFwc1CAUu2U92sHmsE/FsJAq2sADVfZrI97J2iviANpgh+2eVOSQetJW6UMVVv4GZdvcHr6A2GLqjTQmzQ2J8ScnyuRGRmBJYGCsxFseR914WutiffA==
+Received: from DU6P191CA0070.EURP191.PROD.OUTLOOK.COM (2603:10a6:10:53e::18)
+ by GV2PR10MB6211.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:150:7a::16) with
+ Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9870.20; Thu, 30 Apr
- 2026 06:59:27 +0000
-Received: from DB5PEPF00014B91.eurprd02.prod.outlook.com
- (2603:10a6:400:1d6:cafe::3b) by CWLP265CA0400.outlook.office365.com
- (2603:10a6:400:1d6::10) with Microsoft SMTP Server (version=TLS1_3,
+ 2026 07:00:01 +0000
+Received: from DB3PEPF0000885F.eurprd02.prod.outlook.com
+ (2603:10a6:10:53e:cafe::ca) by DU6P191CA0070.outlook.office365.com
+ (2603:10a6:10:53e::18) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.20.9846.30 via Frontend Transport; Thu,
- 30 Apr 2026 06:59:27 +0000
-X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.59)
+ 30 Apr 2026 07:00:01 +0000
+X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.60)
  smtp.mailfrom=foss.st.com; dkim=none (message not signed)
  header.d=none;dmarc=fail action=none header.from=foss.st.com;
 Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
- designate 164.130.1.59 as permitted sender) receiver=protection.outlook.com;
- client-ip=164.130.1.59; helo=smtpO365.st.com;
-Received: from smtpO365.st.com (164.130.1.59) by
- DB5PEPF00014B91.mail.protection.outlook.com (10.167.8.229) with Microsoft
+ designate 164.130.1.60 as permitted sender) receiver=protection.outlook.com;
+ client-ip=164.130.1.60; helo=smtpO365.st.com;
+Received: from smtpO365.st.com (164.130.1.60) by
+ DB3PEPF0000885F.mail.protection.outlook.com (10.167.242.10) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9846.18 via Frontend Transport; Thu, 30 Apr 2026 06:59:26 +0000
-Received: from STKDAG1NODE1.st.com (10.75.128.132) by smtpo365.st.com
- (10.250.44.71) with Microsoft SMTP Server (version=TLS1_2,
+ 15.20.9846.18 via Frontend Transport; Thu, 30 Apr 2026 07:00:01 +0000
+Received: from STKDAG1NODE1.st.com (10.75.128.132) by smtpO365.st.com
+ (10.250.44.72) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.29; Thu, 30 Apr
- 2026 09:02:59 +0200
+ 2026 09:03:13 +0200
 Received: from [10.48.87.93] (10.48.87.93) by STKDAG1NODE1.st.com
  (10.75.128.132) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.29; Thu, 30 Apr
- 2026 08:59:25 +0200
-Message-ID: <b2ee1f0b-9999-4c88-bb4d-8310eddd9607@foss.st.com>
-Date: Thu, 30 Apr 2026 08:59:25 +0200
+ 2026 08:59:59 +0200
+Message-ID: <ac874a36-8798-47da-8f5b-912b49089e0e@foss.st.com>
+Date: Thu, 30 Apr 2026 08:59:59 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] video: stm32: dsi: fix unchecked return values
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-To: Raphael Gallais-Pou <rgallaispou@gmail.com>, Patrick Delaunay
- <patrick.delaunay@foss.st.com>, <uboot-stm32@st-md-mailman.stormreply.com>,
- <u-boot@lists.denx.de>
-CC: Anatolij Gustschin <ag.dev.uboot@gmail.com>, Tom Rini <trini@konsulko.com>
-References: <20260412-master-v1-1-d7a8e742233c@gmail.com>
- <848b503c-a908-4ad2-8d4b-560f3e0ceeaf@foss.st.com>
+Subject: Re: [PATCH] spi: add STM32MP23 OSPI support
+To: <u-boot@lists.denx.de>
+CC: Tom Rini <trini@konsulko.com>, Patrick Delaunay
+ <patrick.delaunay@foss.st.com>, Boon Khai Ng <boon.khai.ng@altera.com>,
+ Stefan Roese <sr@denx.de>, Christian Marangi <ansuelsmth@gmail.com>, "Ralph
+ Siemsen" <ralph.siemsen@linaro.org>
+References: <20260401-add_stm32mp23_ospi_support-v1-1-4c73550eae3e@foss.st.com>
 Content-Language: en-US
-In-Reply-To: <848b503c-a908-4ad2-8d4b-560f3e0ceeaf@foss.st.com>
+From: Patrice CHOTARD <patrice.chotard@foss.st.com>
+In-Reply-To: <20260401-add_stm32mp23_ospi_support-v1-1-4c73550eae3e@foss.st.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 X-Originating-IP: [10.48.87.93]
@@ -92,29 +92,29 @@ X-ClientProxiedBy: STKCAS1NODE1.st.com (10.75.128.134) To STKDAG1NODE1.st.com
  (10.75.128.132)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DB5PEPF00014B91:EE_|DU0PR10MB6201:EE_
-X-MS-Office365-Filtering-Correlation-Id: 59f2f7f1-aed7-4f15-7700-08dea68604c4
+X-MS-TrafficTypeDiagnostic: DB3PEPF0000885F:EE_|GV2PR10MB6211:EE_
+X-MS-Office365-Filtering-Correlation-Id: d01f726e-e6be-4881-f402-08dea686192d
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700016|82310400026|376014|1800799024|18002099003|56012099003|22082099003;
-X-Microsoft-Antispam-Message-Info: aIwScAz3TTWEUKxuzXjgXY1rvuqHF0ix7hZkPya8TLswBKLv5d5VhfRed2YW+Bea22Qn4cibR7lue0Bk08fl5Me6+e21z/CFjCP9Xm4Umkm9XVmPTNWBRcggLSYnTGyK/DlhPvlftPJWHGd4zRkrWFG13z1N7vuU3Bf/lCCL50bMIr1DXCB59acZHW5mslfIXk6nS1jszreWNgZykyHnVD2Ywn0cHIDw9/aLVBGHUeFCA2rUI2Wi1HYqtRTLNcw2mMCWqYHKU1+SukNfE7plJvEMkfpmMxOLne2ASh9/pgV7EJYSkvdS7/wQBFpMjvMcMLZQPg5ldueEz5tOfpmwLfxwcS21b6qg+nH7i6V1YoZgUH+0y0u00rLagQh0D9XAYistXgNtKLeAJ4o8icZ8eYhuogp+MTWtEk1Eh2cGTx1ymcZuHSyEB14v2YzNjAJs/ZTA1kJrzzi1hURzW5qPrZNqu10et2CD0BYaWhIsZfi0fZz2VKOPVh0qMLqctZ35XgbVeH8pwIbry+FtxZ9IQWctmqFz1WlNKIS0rxMjtVR3dm2KWZhaHENxsFoVg8Ks2r7ucoisY21RKJzPGi6tnM24fXIGYgZvhqjV5oPkGt8lfSwexs3YtEt/FuamAodHmIHEbokNxGeDEUbDfU0OQl80Dx7c8Vp+SV9e4hFfSiagjrXrpr4XqH+YYDMAggpyVncC8121GbHDCmaHDvVn9RiXsrg4P8cAfm3TDZzXESkN9zmHTKJZxzC5U0XdyHeMclGlRH4ijWubCvPZm4hTjQ==
-X-Forefront-Antispam-Report: CIP:164.130.1.59; CTRY:IT; LANG:en; SCL:1; SRV:;
+ ARA:13230040|376014|1800799024|36860700016|82310400026|56012099003|18002099003|22082099003;
+X-Microsoft-Antispam-Message-Info: S0s2eqvV+oxS68eij5NwRVNnegtvfjaMJH7iPTb8GpINk4a9oFClR2L0QCx4A8b+Goc3z/7VpvjUi+sAzr3DlyhTrcyayrBrQgzMLgbmOp7kSgIbJ4hvjuvQbBfq/I+bj+BrURqcswW+hc+3mcAOWCriQUvCwY4BFTtbTYdIcszcYzyDCYmtmrZj14yoewQQZKdGhnV1Zyte2E23RlwmkhES/1bZ1dzDp1DlFfk7eErpBaVaMCNKD2e+Tpb94D5b4DiXIPXYXLCuScFU0dL3+CasN4rTh/5vhNeq4QJgwfaSnQ84UqbFNoMmjIz+s8j/pLlVw9ECoB01VpPWSvp2cX1G1xBNIu9MZ87XjWjNFp7nAXIPzjV7tICveSc4f2zRHZWdgPnGsihBFV9kbr8oDRa3QHRHEFBXCcCraDBMHyXG/8U2xVXXLbaxCBfm2jhwLrglDgZLFrm8h1vSbi+aNDXTBi26djrDmeYmMyvl96MuqZ0FVg60dyQhEkruCtwFd23lW/fF4ldtVtPrzyIpLXpMAIC/gX7E3hGYZQIOetMxEjUXtZsRbAZVX0y52WjcbphBgzbx/pUhzeRDmaxKcyfYJo1xqLBZ78b62szdftAeIElykvbuh62ksvcLdyEMh7yDqqaNjozig/ftlI0LxqUmpRfH3om4zE3+ybIReu7m6WdCSxlJcZ31J7+SEfY0/iR6qOg/qtptg4oZnPki+j3OYNrIR2yzwUbWcQHnY8mUg9yq6YYvY2+tCrtOp/igvK2vQwE6db1Dxi5r4Fe8xA==
+X-Forefront-Antispam-Report: CIP:164.130.1.60; CTRY:IT; LANG:en; SCL:1; SRV:;
  IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(36860700016)(82310400026)(376014)(1800799024)(18002099003)(56012099003)(22082099003);
+ SFS:(13230040)(376014)(1800799024)(36860700016)(82310400026)(56012099003)(18002099003)(22082099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: sTyMxgL0eUa7JWhpB8q0IalE/yEAZ8/ka8OjCxDmwOtlXSBMmQb450xEOS07VeHSt3rVMyhEnqWOv+pyyQxnsAdqwbqDF9hguydsCyuPeEh/pUVADXJ0HuOfUNgn7p1Go0eIVOsDwTQTdqZUkZnDvbW+72t9kpyFkqdhP+X5QlE1lGTpPRbLidWwunO2LY1KckQIK5KipIfqyzgAqe0ebjtoPhcZ1ViyzJANUrALTTE6H2AJpu78wA+OBSfi3Z2HUZrRKV85NWodb01DGJybntDifxPu8aeaC0OD5Zr40Tq7w2p3E4fSNMje6NuXb4qJaQnhGlk9S6vmI6KsO33yvJIhBieMldhIsjhB+tix5zBJeXWaerkYC7JpVfAvAagALnZDVsqj7IIi/81EYqBfGKLd+Ikeg9GpthI2X9P+J1f0C40tLdiciG+wzqPJ3DUm
+X-MS-Exchange-AntiSpam-MessageData-0: XkkjXY46xcv6M8yohr5rZ5hJyymfsdUCHQiPp4OSgYlP8FP+KsVXhUC7EUzWsTantxLPNCnDjxFpC+88/wFLRcXcIlKSHapSQpxyABMaeCrJgvLTa2wkROLTPeNrHScphZ9F8VtPUTuSuZ4lk/DJtwHcdPpw3MXAc8OBt+/AMqSEAL9C0sMLlH4Fc5d+tI1A0dq0+j+ZI8xqMIe+1FOmKmHtcaKNMzTsF+VGQnWThuqB6umADBEewrJEhJHiwyuPb43ZSTCat5CXTe2nFOgaJ48/3zItozJfwi/aysZeyEi+WUJvyFJAznicTq/KcIvhBgX0J9T/trmDZY6qDVAte9TAsXa8dO7fFbIo0d/gQXind8cf6qWHjm25pvxKn1QyKsRdXgJaASb067BPMWswpo5u11Rcm/4xTBAC1MI5Ddo0iECvnLmT2UgvhvHAYq5r
 X-OriginatorOrg: foss.st.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Apr 2026 06:59:26.7871 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 59f2f7f1-aed7-4f15-7700-08dea68604c4
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Apr 2026 07:00:01.0214 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: d01f726e-e6be-4881-f402-08dea686192d
 X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.59];
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.60];
  Helo=[smtpO365.st.com]
-X-MS-Exchange-CrossTenant-AuthSource: DB5PEPF00014B91.eurprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: DB3PEPF0000885F.eurprd02.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU0PR10MB6201
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV2PR10MB6211
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -133,59 +133,33 @@ X-Virus-Status: Clean
 
 
 
-On 4/29/26 09:06, Patrice CHOTARD wrote:
+On 4/1/26 11:36, Patrice Chotard wrote:
+> Add STM32MP23 OSPI support.
 > 
+> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+> ---
+>  drivers/spi/Kconfig | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 > 
-> On 4/12/26 21:07, Raphael Gallais-Pou wrote:
->> Fix the following errors yielded by Coverity Scan:
->>
->> CID 644836:         Error handling issues  (CHECKED_RETURN)
->> Calling device_chld_unbind without checking return value (as is done elsewhere 6 out of 7 times)
->> CID 644834:         Error handling issues  (CHECKED_RETURN)
->> Calling device_chld_remove without checking return value (as is done elsewhere 4 out of 5 times).
->>
->> Link: https://lore.kernel.org/r/20260309212331.GF1388590@bill-the-cat/
->> Fixes: a6d047c0a86b ("video: stm32: remove all child of DSI bridge when its probe failed")
->>
->> Signed-off-by: Raphael Gallais-Pou <rgallaispou@gmail.com>
->> ---
->>  drivers/video/stm32/stm32_dsi.c | 7 +++++--
->>  1 file changed, 5 insertions(+), 2 deletions(-)
->>
->> diff --git a/drivers/video/stm32/stm32_dsi.c b/drivers/video/stm32/stm32_dsi.c
->> index 65a91f5cff7a..5c4d8d2aab51 100644
->> --- a/drivers/video/stm32/stm32_dsi.c
->> +++ b/drivers/video/stm32/stm32_dsi.c
->> @@ -493,8 +493,11 @@ static int stm32_dsi_probe(struct udevice *dev)
->>  	    priv->hw_version != HWVER_131) {
->>  		dev_err(dev, "DSI version 0x%x not supported\n", priv->hw_version);
->>  		dev_dbg(dev, "remove and unbind all DSI child\n");
->> -		device_chld_remove(dev, NULL, DM_REMOVE_NORMAL);
->> -		device_chld_unbind(dev, NULL);
->> +		ret = device_chld_remove(dev, NULL, DM_REMOVE_NORMAL);
->> +		if (!ret)
->> +			ret = device_chld_unbind(dev, NULL);
->> +		if (ret)
->> +			dev_err(dev, "Unbinding from %s failed %d\n", dev->name, ret);
->>  		ret = -ENODEV;
->>  		goto err_clk;
->>  	}
->>
->> ---
->> base-commit: e2fa3e570f83ab0f9ce667ddaec9dc738bcf05b9
->> change-id: 20260412-master-8be67866e096
->>
->> Best regards,
->> --  
->> Raphael Gallais-Pou <rgallaispou@gmail.com>
->>
+> diff --git a/drivers/spi/Kconfig b/drivers/spi/Kconfig
+> index 8c6c095a8cf..51909e3a8ff 100644
+> --- a/drivers/spi/Kconfig
+> +++ b/drivers/spi/Kconfig
+> @@ -550,7 +550,7 @@ config SPI_SUNXI
+>  
+>  config STM32_OSPI
+>  	bool "STM32MP2 OSPI driver"
+> -	depends on STM32MP25X && STM32_OMM
+> +	depends on (STM32MP23X || STM32MP25X) && STM32_OMM
+>  	help
+>  	  Enable the STM32MP2 Octo-SPI (OSPI) driver. This driver can be
+>  	  used to access the SPI NOR flash chips on platforms embedding
 > 
-> Hi Raphael
+> ---
+> base-commit: ba7bf918dafcd093ad733b07ba490baeb20cf5da
+> change-id: 20260401-add_stm32mp23_ospi_support-1cd96f39a5f0
 > 
-> Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
-> 
-> Thanks
-> Patrice
+> Best regards,
 Applied to u-boot-stm32/master
 
 Thanks
