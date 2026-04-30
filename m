@@ -4,88 +4,103 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D687BCD13D2
-	for <u-boot@archiver.kernel.org>; Thu, 30 Apr 2026 21:19:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A554CCFA13
+	for <u-boot@archiver.kernel.org>; Thu, 30 Apr 2026 21:26:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 04C7D8063E;
-	Thu, 30 Apr 2026 23:19:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 0367783936;
+	Thu, 30 Apr 2026 23:26:04 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=jannau.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="HOYlPTjf";
+	dkim=pass (2048-bit key; unprotected) header.d=jannau.net header.i=@jannau.net header.b="JLORckLp";
+	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="QwTkSNHp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CF03E83693; Thu, 30 Apr 2026 23:19:55 +0200 (CEST)
-Received: from mail-ot1-x335.google.com (mail-ot1-x335.google.com
- [IPv6:2607:f8b0:4864:20::335])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 9B7DC83A91; Thu, 30 Apr 2026 23:25:57 +0200 (CEST)
+Received: from fout-b4-smtp.messagingengine.com
+ (fout-b4-smtp.messagingengine.com [202.12.124.147])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8C173803C6
- for <u-boot@lists.denx.de>; Thu, 30 Apr 2026 23:19:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 58DE2803C6
+ for <u-boot@lists.denx.de>; Thu, 30 Apr 2026 23:25:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x335.google.com with SMTP id
- 46e09a7af769-7de431da8fbso1280523a34.1
- for <u-boot@lists.denx.de>; Thu, 30 Apr 2026 14:19:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1777583992; x=1778188792; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=+wD/dk7lFV4oLrSC5psD/ZWEC/K6khko3MtkbjbfTrY=;
- b=HOYlPTjflVtbULOn8ed+3AIaCqQClckuM1zHDmolxxXcy2LM8w1jvnJqM/ME92xy8D
- OY/gJxZzxZDF6wpupDttnJV0Y0AvD+AS2ncwPPzO/WF05Vywv795bXBgbagaUsHXullj
- JrjhhRiP0BghgWYW2IlJ4dx3MBfgSdcrj7MWc=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777583992; x=1778188792;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=+wD/dk7lFV4oLrSC5psD/ZWEC/K6khko3MtkbjbfTrY=;
- b=rX0zuqSJGobtzSPf64ve7uh1Cx0s770yvsXCMJYrwXcS3GwNysLFWhcYgmDEf5Uzhj
- eLA5Xhmmkw7JrqhoPF3mLB0+XssQ8XBuHhlForp/+vpYp8S8FvPk934qlpkDCWSdmQoy
- LDJyUTPJpuOaEfn2CdYMCHcqIp+mNl0I5pV356kqbkO0yFruaIJsFj30Vn9+PNub/kZU
- N7q6SkcBPziyx7kLTGzau7f5jVLeNUA2j8bPsMIWiVRsj1l2ZM//xqdVK1aogzza9vdS
- NveHOpywbEABesW2Ky/dFoD6PP6esKzxRsThzCLIBlvr/F1Y0DpjSibjOCqcdRxAMkLN
- 7CUw==
-X-Gm-Message-State: AOJu0YxqSC+2ijqIt2AB6hZyyb03i8PN2r+njzgOVLnTim8kVRXyJyQV
- 8S/Ef4N8zuOUckvgKmMbDqRRXNszBo6lOGY4cdAOrBYw9YB8sewW69c3m08pEHZHz3I=
-X-Gm-Gg: AeBDievxo9mPy88evAOUMQJOywx1Si/L8nsjvomJrJTOpbgINlL1odzM1aVHGLLDrS1
- h5HwVe9bm5FmfdFhdB+YOVIJhD2Kz2ulmYS0fWHCqYg8YIUtjYKDc1VK9EipBuXFjoSZhpy1XCG
- WxM7LFpWP6YX/Efgwl8E8njtimr4V7dewV4NkNy8kmlsntjv9FhYPeyvME7fsgqmatVjNFLoLEg
- 5FlshRG3ilGUwsfFCa2lNCF4LB0DFqoWhVWdSBKmdF1kAWxDknDUQHfhJdsCduqgDFS0s+SMM0X
- Yy+8FdxGXcQDzQLLGHHZa0phU91v2jOJHZBCclJrDXhW0FG51Nr8muLetV0qTnPlLkhS1PU2g/9
- PPOz/XfpnBk7i20I9//UOy7LC5LK8fCzKsEYYONUU1WqbNAeJQPTosHXZIwKcDa2L4OAVQV53mN
- i68L30kqA/AG59oOQzyyN5hKTzCa1KrdSVZaMT/G48oos9OfICX3lROC9l4QCbB4XYcF62w4IlV
- 6uyaPqQlNSi01NZBlL25rCUbA3RV5+iwo6IsTtBxe4j8UvtBJdb7nAF8yMG7SdnujDJOjcn
-X-Received: by 2002:a05:6830:25d5:b0:7d9:7201:1acf with SMTP id
- 46e09a7af769-7ded07f5387mr268332a34.5.1777583992205; 
- Thu, 30 Apr 2026 14:19:52 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
- [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7deca80d5b7sm695774a34.9.2026.04.30.14.19.50
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 30 Apr 2026 14:19:51 -0700 (PDT)
-Date: Thu, 30 Apr 2026 15:19:48 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Parvathi Pudi <parvathi@couthit.com>
-Cc: u-boot@lists.denx.de, Maarten.Brock@sttls.nl, kory.maincent@bootlin.com,
- msp@baylibre.com, sbellary@baylibre.com, romain.gantois@bootlin.com,
- pratheesh@ti.com, j-rameshbabu@ti.com, praneeth@ti.com,
- vigneshr@ti.com, srk@ti.com, rogerq@ti.com, danishanwar@ti.com,
- m-malladi@ti.com, krishna@couthit.com, mohan@couthit.com,
- pmohan@couthit.com, basharath@couthit.com
-Subject: Re: [PATCH v3] board: ti: am335x: Conditional MDIO PAD configuration
- instead of static for AM335_ICE
-Message-ID: <20260430211948.GA1717275@bill-the-cat>
-References: <20260422123353.2902537-1-parvathi@couthit.com>
+ dmarc=none (p=none dis=none) header.from=jannau.net
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=j@jannau.net
+Received: from phl-compute-05.internal (phl-compute-05.internal [10.202.2.45])
+ by mailfout.stl.internal (Postfix) with ESMTP id E964B1D00081;
+ Thu, 30 Apr 2026 17:25:53 -0400 (EDT)
+Received: from phl-frontend-03 ([10.202.2.162])
+ by phl-compute-05.internal (MEProxy); Thu, 30 Apr 2026 17:25:54 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=jannau.net; h=cc
+ :cc:content-transfer-encoding:content-type:content-type:date
+ :date:from:from:in-reply-to:message-id:mime-version:reply-to
+ :subject:subject:to:to; s=fm1; t=1777584353; x=1777670753; bh=AP
+ S/lJNFBlUwr6zKeYSRx9QBFfR2IXDp6v9ewE6uJig=; b=JLORckLpZMFW4P0zz9
+ Zs+JDd3LeAabmzlsg/MNSUEAyfuFtiNX93eRBSNJ+CiQMS/P/xAXQV2ThpGvPN84
+ CAyUvU8Oatt1vBTDE4ez3vx6R+pnD1yfKxfcTMu+9unoMoD0b39ZxP7OF5qXPVGq
+ z2X0GSw+OaOpcPqrgX/dIPFe0biNn2mV9hWU3opU7X4rkn7ORkU1hL2UgF3F+ADb
+ AN93npvYeGADRE+EMcYCh9Zce5hX+NFNk7KTvOqfrSEd0kiSGFOm/s6zLNwnbVGU
+ Q9AOWO4TWQaLfpjyc0KLRcjg7cPXNgvHwpY2GzcMlmT9wexheMvJeVW2ftkCulRu
+ atLA==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ messagingengine.com; h=cc:cc:content-transfer-encoding
+ :content-type:content-type:date:date:feedback-id:feedback-id
+ :from:from:in-reply-to:message-id:mime-version:reply-to:subject
+ :subject:to:to:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
+ fm2; t=1777584353; x=1777670753; bh=APS/lJNFBlUwr6zKeYSRx9QBFfR2
+ IXDp6v9ewE6uJig=; b=QwTkSNHpxGMNGlew62CqTx3dyGbJy24F5RXPpHFKzJnT
+ poQMuBN3WS6cuQYi2jtKu3nlsTgNzwnKd6u+HTRR9/e1pTpghTh476xE8f6bqARX
+ BJYnTQ2hnrNxSssgX2y09r9UR1SiMKBtW7wcRRzu1JkKzOU08J5TLTYh96Le8E6g
+ /DEPt9Osphmto4Cgr3P7YP7RwqckavQfiUaVa2Sxj7MZHzqoRI9CIeemP9rBDnxm
+ BdUa/tB7LH6wOIBhyXuc5NG2ZLOJQYmMKh3/CZG/qjG8T0eoYNGw0KH2PKFUvxKp
+ qoNo3ZnLun05D1BAcqIEn/UNcLmn5zAyWBHZRCsg7g==
+X-ME-Sender: <xms:4cjzaQfFxhF-xjatFf-ioHZoahTbtrGuc1v6ULyTLZs4Qw4dc-j0Ow>
+ <xme:4cjzaZPuSD7Fk9leoUbYiKCx_QYy5Fv9_lkGonlvGwgfYMya40sCg7F_Q6v7pPRom
+ pioyRuS1SoaZoIRaglplcPlAjp22U8OMOHAPZPbzsyBcoFmCprvVZo>
+X-ME-Received: <xmr:4cjzaWi00-Iek-YJNHcItO6M2NOjyac7vnFJPGzUxMRY2zIDIJk0Sej6Aom1aDCh2HOt39hM38lGBiL_2SIPO2NDaZsgfIvYioVwpg>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefhedrtddtgdekkeegtdcutefuodetggdotefrod
+ ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpuffrtefokffrpgfnqfghnecuuegr
+ ihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfjug
+ hrpefhufffkfggtgfgvfevofesthejredtredtjeenucfhrhhomheplfgrnhhnvgcuifhr
+ uhhnrghuuceojhesjhgrnhhnrghurdhnvghtqeenucggtffrrghtthgvrhhnpefhtdeuud
+ eljeffuddvheekuedtfefhtddvieeigeehffelfeevvdfhgeeggefffeenucevlhhushht
+ vghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpehjsehjrghnnhgruhdrnh
+ gvthdpnhgspghrtghpthhtohepgedpmhhouggvpehsmhhtphhouhhtpdhrtghpthhtohep
+ khgvthhtvghnihhssehophgvnhgsshgurdhorhhgpdhrtghpthhtohepjhesjhgrnhhnrg
+ hurdhnvghtpdhrtghpthhtohepthhrihhniheskhhonhhsuhhlkhhordgtohhmpdhrtghp
+ thhtohepuhdqsghoohhtsehlihhsthhsrdguvghngidruggv
+X-ME-Proxy: <xmx:4cjzaU1OOSGiPHTQ_rgEuNirJz9FE3CXUowoGCRx1GLGs28QU8rNZw>
+ <xmx:4cjzaYi6_ENPWwskyfo6hcglaYtgGPDb7q5Pe1LSPKRB95b6WA11rQ>
+ <xmx:4cjzacfpJzaWzV0T6Gxe9_hBPifp_L2UyVkq9PiNKi_GaMQAE17sew>
+ <xmx:4cjzaTlnZojssyifD_7t1xoZ5L7WQqhg1mIr9xxKH6VN8PDUVJDapQ>
+ <xmx:4cjzaXK9VMgVM2IeO159ohwhuONKjaAOt1MHOD0vJ6LKlQMlfEioW2Rh>
+Feedback-ID: i47b949f6:Fastmail
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Thu,
+ 30 Apr 2026 17:25:52 -0400 (EDT)
+From: Janne Grunau <j@jannau.net>
+Subject: [PATCH 0/3] Switch Apple silicon boards to upstream device trees
+Date: Thu, 30 Apr 2026 23:25:45 +0200
+Message-Id: <20260430-apple-dt-upstream-v1-0-dda66c16e0da@jannau.net>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="asavWXHJ33YBBROV"
-Content-Disposition: inline
-In-Reply-To: <20260422123353.2902537-1-parvathi@couthit.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/x3MQQqAIBBA0avErBsYi4K6SrSQHGugTLQiEO+et
+ HyL/xNEDsIRxipB4EeinK5A1RUsm3Yro5hiaKjpSdGA2vud0Vx4+3gF1gf2RltqO0WWFyidD2z
+ l/Z/TnPMHk+1zhWMAAAA=
+X-Change-ID: 20260109-apple-dt-upstream-6daf03510fec
+To: u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, Mark Kettenis <kettenis@openbsd.org>, 
+ Janne Grunau <j@jannau.net>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2527; i=j@jannau.net;
+ s=yk2025; h=from:subject:message-id;
+ bh=81a4m9X7WPfYIWehc4Cj6FS29ATHldjJcFPioyVrFe8=;
+ b=owGbwMvMwCW2UNrmdq9+ahrjabUkhszPJ+52fWISmV3gquK4KMry+5PPkau1zu51TeflP90ZV
+ VV52MOvo5SFQYyLQVZMkSVJ+2UHw+oaxZjaB2Ewc1iZQIYwcHEKwEQqzjD8j1Fft9365+JZ9qJ1
+ Z+R3Kelm7n/ot6pQ1Joj4krz3+02Wxn+qX7cOG/fnq+iabNOpB6OuXjc4s4mQT71/U5Gq5RMl1Y
+ uYAQA
+X-Developer-Key: i=j@jannau.net; a=openpgp;
+ fpr=8B336A6BE4E5695E89B8532B81E806F586338419
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,44 +117,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+The Linux device trees for Apple silicon devices cover now most of the
+hardware as u-boot's internal device trees for M1 devices. Linux has in
+addition device trees M2 and M1 and M2 Pro/Max/Ultra devices which were
+never added in u-boot.
+The most common use case for u-boot on Apple silicon devices does not
+use DTBs from u-boot but passes runtime modified device trees from an
+earlier boot loader (m1n1).
+This change regresses support for the DWC3 based USB-C ports and the SPI
+based keyboard on M1 and M1 Pro/Max notebooks. The regression for the
+USB-C ports will be fixed when dts/upstream is synced to Linux v7.0.
+The dt-bindings and device tree nodes for the SPI keyboard has still to
+be submitted upstream.
+These regression are in my opinion acceptable due to the limited use of
+u-boot's DTBs for these targets.
 
---asavWXHJ33YBBROV
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Janne Grunau <j@jannau.net>
+---
+Janne Grunau (3):
+      doc: board: apple: Mention M2 and M2 Pro/Max/Ultra SoCs
+      doc: device-tree-bindings: Remove apple,pinctrl.yaml
+      arm: dts: Switch Apple silicon devices to dts/upstream
 
-On Wed, Apr 22, 2026 at 06:03:03PM +0530, Parvathi Pudi wrote:
+ arch/arm/Kconfig                                   |    1 +
+ arch/arm/dts/Makefile                              |    7 -
+ arch/arm/dts/t8103-j274-u-boot.dtsi                |    1 -
+ arch/arm/dts/t8103-j274.dts                        |  129 ---
+ arch/arm/dts/t8103-j293-u-boot.dtsi                |    1 -
+ arch/arm/dts/t8103-j293.dts                        |  116 --
+ arch/arm/dts/t8103-j313-u-boot.dtsi                |    1 -
+ arch/arm/dts/t8103-j313.dts                        |  111 --
+ arch/arm/dts/t8103-j456-u-boot.dtsi                |    1 -
+ arch/arm/dts/t8103-j456.dts                        |  117 --
+ arch/arm/dts/t8103-j457-u-boot.dtsi                |    1 -
+ arch/arm/dts/t8103-j457.dts                        |  105 --
+ arch/arm/dts/t8103-jxxx.dtsi                       |  143 ---
+ arch/arm/dts/t8103-pmgr.dtsi                       | 1138 --------------------
+ arch/arm/dts/t8103-u-boot.dtsi                     |   25 -
+ arch/arm/dts/t8103.dtsi                            |  696 ------------
+ configs/apple_m1_defconfig                         |    2 +-
+ doc/board/apple/m1.rst                             |   15 +-
+ .../pinctrl/apple,pinctrl.yaml                     |  106 --
+ 19 files changed, 11 insertions(+), 2705 deletions(-)
+---
+base-commit: 88dc2788777babfd6322fa655df549a019aa1e69
+change-id: 20260109-apple-dt-upstream-6daf03510fec
 
-> This patch removes the static MDIO pinmux configuration from
-> rmii1_pin_mux[] and instead configures the MDIO pins conditionally
-> during board_init(). Previously, the MDIO_CLK and MDIO_DATA pins
-> were always configured for CPSW in mux.c, which could lead to
-> unnecessary pin ownership and conflicts in scenarios where CPSW
-> is not used.
->=20
-> With this change, the MDIO pins are configured only when required,
-> ensuring that CPSW Ethernet functionality in U-Boot remains unaffected.
-> This approach keeps Ethernet boot behavior intact and provides cleaner
-> separation between CPSW and other Ethernet use cases.
->=20
-> Reviewed-by: Markus Schneider-Pargmann (TI) <msp@baylibre.com>
-> Signed-off-by: Parvathi Pudi <parvathi@couthit.com>
+Best regards,
+-- 
+Janne Grunau <j@jannau.net>
 
-This leads to failure to build on:
-am335x_evm_spiboot am335x_hs_evm am335x_hs_evm_spi am335x_hs_evm_uart
-
---=20
-Tom
-
---asavWXHJ33YBBROV
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCafPHcQAKCRAr4qD1Cr/k
-Cj0JAP40/6A3NnV0jCigQZAwyydwdjl39djtewy6KBlwQcxGJAEAv9maeR0fm51D
-ex5VhJyp/6xAZWQCzOR9vkepSIYPDgM=
-=Sf8z
------END PGP SIGNATURE-----
-
---asavWXHJ33YBBROV--
