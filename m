@@ -4,51 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9440FFF8875
-	for <u-boot@archiver.kernel.org>; Thu, 30 Apr 2026 13:59:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66418FF8875
+	for <u-boot@archiver.kernel.org>; Thu, 30 Apr 2026 14:33:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F16F0842C7;
-	Thu, 30 Apr 2026 15:58:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id 45A7580433;
+	Thu, 30 Apr 2026 16:33:35 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=arm.com header.i=@arm.com header.b="iKBHjy6J";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ArF07a1K";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F3E6B8063E; Thu, 30 Apr 2026 15:58:49 +0200 (CEST)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 78D32803C6
- for <u-boot@lists.denx.de>; Thu, 30 Apr 2026 15:58:47 +0200 (CEST)
+ id 26074803C6; Thu, 30 Apr 2026 16:33:34 +0200 (CEST)
+Received: from mail-ot1-x331.google.com (mail-ot1-x331.google.com
+ [IPv6:2607:f8b0:4864:20::331])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 016B280433
+ for <u-boot@lists.denx.de>; Thu, 30 Apr 2026 16:33:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=arm.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andre.przywara@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 50BD632C5;
- Thu, 30 Apr 2026 06:58:41 -0700 (PDT)
-Received: from e142021.fritz.box (usa-sjc-mx-foss1.foss.arm.com [172.31.20.19])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id A820E3F7B4;
- Thu, 30 Apr 2026 06:58:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
- t=1777557526; bh=drWJpcSE0TJcdgZ7vlQSxAWArtbiJCMXBwRn1bvPmw8=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=iKBHjy6JZRmicJsCA62Twj3XuO1tTyKwIqbE4Z6vTZ/n2JfeI6P/Doa5znWhhXeGQ
- MxvcF2wX7aYyAaZiQxBX93gDpLpXjjEvRAAREle85SnVrqdYyqKHEGXsWDze8+/Xfi
- unBKwiimiweyqsyVlwqEl2Wc66EWofDHtiOwFPZ8=
-From: Andre Przywara <andre.przywara@arm.com>
-To: Paul Kocialkowski <paulk@sys-base.io>,
-	u-boot@lists.denx.de
-Cc: Jernej Skrabec <jernej.skrabec@gmail.com>, Chen-Yu Tsai <wens@kernel.org>,
- linux-sunxi@lists.linux.dev
-Subject: [PATCH v2 2/2] sunxi: A133: dram: Add NSI arbiter configuration
- support
-Date: Thu, 30 Apr 2026 15:58:38 +0200
-Message-ID: <20260430135838.3438728-3-andre.przywara@arm.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260430135838.3438728-1-andre.przywara@arm.com>
-References: <20260430135838.3438728-1-andre.przywara@arm.com>
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x331.google.com with SMTP id
+ 46e09a7af769-7dbca22dbfeso535789a34.1
+ for <u-boot@lists.denx.de>; Thu, 30 Apr 2026 07:33:31 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1777559610; x=1778164410; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=4Er3H5d6P7qgVF59QvMxTBjDAsg4gdZFergMqym91jE=;
+ b=ArF07a1KPi0yMtiHJWFoP62VHkllT8eqoxsrIKZ0ijl0/ONSxBHPtnvJWQ78tfss2R
+ RMCV49FfP9dx8vOK1peuTYENYOs/KBXNGddndQUb9X3L1plY7PQ3vmWN3lTRwcBL8ALy
+ qnJXZkQk8JgoF3jjtplZncrpAdCrV8SpHP+40=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1777559610; x=1778164410;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=4Er3H5d6P7qgVF59QvMxTBjDAsg4gdZFergMqym91jE=;
+ b=nLYg3WzxFDYadtHHF+vWDc4xUF+J0Nif95N+IZoy4mhOs5NAlB2hE3s1Y28c20UKt2
+ fA2KBnA0O1alJ6aHKrSdAASDJ39uix3QXwPCftcIKeJg0XYqGYsjGYTSPBWMdiWxb9MF
+ LWtke4c/JCI/7U5TrlcigeG3oAf4ct1pDomX9Pru3nBBX2C8dA0O7lcxBW9MPBt25pfs
+ nVxsYDcUDo7CF4obweCEQIBAj3Vs9nWAtCq09tg3oFDaovaNylrsTG1/qYC+PhUO/HCL
+ n60asV/eF9e4PC9+4xSdHRsql/yTX7aEB04B55pA/alhsl+v8o7uGrrVCZUIuAjbuH3A
+ HQVw==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ9joDIKjCYfYyLZh7ulaSAkH16jjCf5VpANpGZoOSpCfTVktihIuCgqZrjLhqT1DMbq/mcWWX4=@lists.denx.de
+X-Gm-Message-State: AOJu0YwYoTurbyfAETL4GZb8xPz0AxBuHMvZV2EsS1Mn3qt8Gfis8QqE
+ QPC+e5cnOtW/y/EwusiFWfNKbAHU5RpzV2U7Ef9d+QkhtCUQ3W7ZWdRItuVC/BbzXXc=
+X-Gm-Gg: AeBDietzxc/TsjX+Rg2khPnetDJwgdd4TX0/SPXma1pINJgQPbMPqFlslSX3KAl8NzK
+ mVeNOlJDH0kbjgimdNhqj4IDOHHoIIBkEfVM/Ywqk/rZrmr7eK7Vw0YeEmf9+d3wiVQBftPDtKy
+ L78LNY8Fs9/U1NQtTW5BwoMtHbXBuyuWYmCopZwfhAnRxuBO5A/1rEn4kUmEvrJfjBzbnI9Xwfw
+ jQyAZ4460UsqpTuMKBLs2Alsb3/3e+j+KZiaALAThDaoHid4RHeDaqzGYWPwLTUxiJ5oirkTvzl
+ oXxQm2Zk50R62AfPvMWFzX2CH3KIHR7hZh1sIdvaQwyE4IqoSJY8RpIjCSmgT0ocD2I1+kuqw+K
+ l1NLGDOFm9G55V+//svno6j/2EHKPfA3od0QofXO7AjSTVfu/KUeQ/qRPFrRqNWKDuKHh85oqgc
+ rzVUIbc0pgacvaHW9wzcKVPvBBuMRUoolFp81+Ilu8qLZdq09B4se53o7vQR6f0fW7fY2ZjNicW
+ qqocUPNEKqC5AXMxRx5SIrG+CGp0RVkXaQNFYEtoqdzS6g4Mkbw+eSotFnpsg==
+X-Received: by 2002:a05:6830:6008:b0:7de:44a5:51ea with SMTP id
+ 46e09a7af769-7deba07072emr1759942a34.6.1777559610488; 
+ Thu, 30 Apr 2026 07:33:30 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
+ [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7decac26313sm15740a34.14.2026.04.30.07.33.28
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 30 Apr 2026 07:33:29 -0700 (PDT)
+Date: Thu, 30 Apr 2026 08:33:26 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Yao Zi <me@ziyao.cc>, Conor Dooley <conor@kernel.org>,
+ Raymond Mao <raymondmaoca@gmail.com>, u-boot@lists.denx.de,
+ uboot@riscstar.com, u-boot-spacemit@groups.io,
+ raymond.mao@riscstar.com, rick@andestech.com, ycliang@andestech.com,
+ lukma@denx.de, hs@nabladev.com, jh80.chung@samsung.com,
+ peng.fan@nxp.com, randolph@andestech.com, dlan@gentoo.org,
+ junhui.liu@pigmoral.tech, neil.armstrong@linaro.org,
+ quentin.schulz@cherry.de, samuel@sholland.org
+Subject: Re: [PATCH 04/16] dts: k1: import pinctrl dts file from upstream
+ folder
+Message-ID: <20260430143326.GA1614990@bill-the-cat>
+References: <20260422143112.1329478-1-raymondmaoca@gmail.com>
+ <20260422143112.1329478-5-raymondmaoca@gmail.com>
+ <20260429-glare-anybody-16c98d01184e@spud> <afKvzj0yoJ85-5VI@pie>
+ <6562F314-D379-42C4-8371-0184E48B8592@gmx.de>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="rIvcGXLcDd4D8miE"
+Content-Disposition: inline
+In-Reply-To: <6562F314-D379-42C4-8371-0184E48B8592@gmx.de>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -65,166 +109,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Paul Kocialkowski <contact@paulk.fr>
 
-The Allwinner DRAM controllers contains logic to assign priorities to
-various DRAM DMA masters. Configuring this DRAM port arbitration priority
-correctly is important to make sure that critical masters are not starved
-by other less important ones. This is especially the case with the display
-engine that needs to be able to fetch pixels in time for scanout and can
-easily be starved by CPU or GPU access.
+--rIvcGXLcDd4D8miE
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Add support for configuring the NSI arbiter in the A133 DRAM init code,
-using the recently refactored NSI code already used on the A523.
-The list and order of available ports are highly SoC-specific and the
-default config values are set to match the BSP's defaults.
+On Thu, Apr 30, 2026 at 07:21:58AM +0200, Heinrich Schuchardt wrote:
+> Am 30. April 2026 03:26:38 MESZ schrieb Yao Zi <me@ziyao.cc>:
+> >On Wed, Apr 29, 2026 at 08:48:39PM +0100, Conor Dooley wrote:
+> >> On Wed, Apr 22, 2026 at 10:31:00AM -0400, Raymond Mao wrote:
+> >> > From: Raymond Mao <raymond.mao@riscstar.com>
+> >> >=20
+> >> > Import k1-pinctrl.dtsi from upstream folder.
+> >>=20
+> >> Why doesn't the platform just use the upstream dts directly?
+> >
+> >AFAIK, U-Boot's reset driver for SpacemiT K1 predates land of the
+> >kernel side driver, and follows a complete different (and to me,
+> >broken since it combines completely unrelated MMIO regions) ABI.
+>=20
+> Shouldn't we first correct the reset drivers and switch to the upstream k=
+ernel device-tree before adding anything new? - This would reduce future re=
+work.
 
-Signed-off-by: Paul Kocialkowski <paulk@sys-base.io>
-[Andre: using new generic NSI function]
-Signed-off-by: Andre Przywara <andre.przywara@arm.com>
-Sponsored-by: MEC Electronics GmbH <https://www.mec.at/>
----
- .../include/asm/arch-sunxi/cpu_sun50i_h6.h    |  4 ++
- .../include/asm/arch-sunxi/dram_sun50i_a133.h | 23 ++++++++++
- arch/arm/mach-sunxi/Makefile                  |  2 +-
- arch/arm/mach-sunxi/dram_sun50i_a133.c        | 43 ++++++++++++++++++-
- 4 files changed, 70 insertions(+), 2 deletions(-)
+Exactly. That's a condition of bringing stuff in to U-Boot before it's
+accepted to the kernel. It *must* be updated once the kernel folks have
+provided feedback, we do not diverge.
 
-diff --git a/arch/arm/include/asm/arch-sunxi/cpu_sun50i_h6.h b/arch/arm/include/asm/arch-sunxi/cpu_sun50i_h6.h
-index b0f2d3f4656..c31437f9acc 100644
---- a/arch/arm/include/asm/arch-sunxi/cpu_sun50i_h6.h
-+++ b/arch/arm/include/asm/arch-sunxi/cpu_sun50i_h6.h
-@@ -17,6 +17,10 @@
- 
- #define SUNXI_GIC400_BASE		0x03020000
- 
-+#ifdef CONFIG_MACH_SUN50I_A133
-+#define SUNXI_NSI_BASE			0x03100000
-+#endif
-+
- #ifdef CONFIG_MACH_SUN50I_H6
- #define SUNXI_DRAM_COM_BASE		0x04002000
- #define SUNXI_DRAM_CTL0_BASE		0x04003000
-diff --git a/arch/arm/include/asm/arch-sunxi/dram_sun50i_a133.h b/arch/arm/include/asm/arch-sunxi/dram_sun50i_a133.h
-index 01f2214cd15..1e8e0f7ab96 100644
---- a/arch/arm/include/asm/arch-sunxi/dram_sun50i_a133.h
-+++ b/arch/arm/include/asm/arch-sunxi/dram_sun50i_a133.h
-@@ -24,6 +24,29 @@ static inline int ns_to_t(int nanoseconds)
- 	return DIV_ROUND_UP(ctrl_freq * nanoseconds, 1000);
- }
- 
-+enum sunxi_nsi_port {
-+	SUNXI_NSI_PORT_CPU	= 0,
-+	SUNXI_NSI_PORT_GPU,
-+	SUNXI_NSI_PORT_SD1,
-+	SUNXI_NSI_PORT_MSTG,
-+	SUNXI_NSI_PORT_GMAC0,
-+	SUNXI_NSI_PORT_GMAC1,
-+	SUNXI_NSI_PORT_USB0,
-+	SUNXI_NSI_PORT_USB1,
-+	SUNXI_NSI_PORT_NDFC,
-+	SUNXI_NSI_PORT_DMAC,
-+	SUNXI_NSI_PORT_CE,
-+	SUNXI_NSI_PORT_DE0,
-+	SUNXI_NSI_PORT_DE1,
-+	SUNXI_NSI_PORT_VE,
-+	SUNXI_NSI_PORT_CSI,
-+	SUNXI_NSI_PORT_ISP,
-+	SUNXI_NSI_PORT_G2D,
-+	SUNXI_NSI_PORT_EINK,
-+	SUNXI_NSI_PORT_IOMMU,
-+	SUNXI_NSI_PORT_CPUS,
-+};
-+
- /* MBUS part is largely the same as in H6, except for one special register */
- #define MCTL_COM_UNK_008	0x008
- /* NOTE: This register has the same importance as mctl_ctl->clken in H616 */
-diff --git a/arch/arm/mach-sunxi/Makefile b/arch/arm/mach-sunxi/Makefile
-index 3ef0113ea43..30cce7d1784 100644
---- a/arch/arm/mach-sunxi/Makefile
-+++ b/arch/arm/mach-sunxi/Makefile
-@@ -48,7 +48,7 @@ obj-$(CONFIG_DRAM_SUN50I_H6)	+= dram_sun50i_h6.o dram_dw_helpers.o
- obj-$(CONFIG_DRAM_SUN50I_H6)	+= dram_timings/
- obj-$(CONFIG_DRAM_SUN50I_H616)	+= dram_sun50i_h616.o dram_dw_helpers.o
- obj-$(CONFIG_DRAM_SUN50I_H616)	+= dram_timings/
--obj-$(CONFIG_DRAM_SUN50I_A133)	+= dram_sun50i_a133.o
-+obj-$(CONFIG_DRAM_SUN50I_A133)	+= dram_sun50i_a133.o sunxi_nsi.o
- obj-$(CONFIG_DRAM_SUN50I_A133)	+= dram_timings/
- obj-$(CONFIG_MACH_SUN55I_A523)	+= dram_sun55i_a523.o dram_dw_helpers.o sunxi_nsi.o
- obj-$(CONFIG_DRAM_SUN55I_A523)	+= dram_timings/
-diff --git a/arch/arm/mach-sunxi/dram_sun50i_a133.c b/arch/arm/mach-sunxi/dram_sun50i_a133.c
-index ca3e2513c69..433044e1e2b 100644
---- a/arch/arm/mach-sunxi/dram_sun50i_a133.c
-+++ b/arch/arm/mach-sunxi/dram_sun50i_a133.c
-@@ -21,6 +21,7 @@
- #include <asm/arch/cpu.h>
- #include <asm/arch/dram.h>
- #include <asm/arch/prcm.h>
-+#include <asm/arch/sunxi_nsi.h>
- #include <asm/io.h>
- #include <init.h>
- #include <linux/bitops.h>
-@@ -69,6 +70,41 @@ static const u8 phy_init[] = {
- };
- #endif
- 
-+static void nsi_set_master_priority(void)
-+{
-+	struct {
-+		unsigned int port;
-+		u8 pri;
-+		u8 qos_sel;
-+	} ports[] = {
-+		NSI_CONF(CPU,	LOWEST,		INPUT),
-+		NSI_CONF(GPU,	LOWEST,		INPUT),
-+		NSI_CONF(SD1,	LOWEST,		OUTPUT),
-+		NSI_CONF(MSTG,	LOWEST,		OUTPUT),
-+		NSI_CONF(GMAC0,	LOWEST,		OUTPUT),
-+		NSI_CONF(GMAC1,	LOWEST,		OUTPUT),
-+		NSI_CONF(USB0,	LOWEST,		OUTPUT),
-+		NSI_CONF(USB1,	LOWEST,		OUTPUT),
-+		NSI_CONF(NDFC,	LOWEST,		OUTPUT),
-+		NSI_CONF(DMAC,	LOWEST,		OUTPUT),
-+		NSI_CONF(CE,	LOWEST,		OUTPUT),
-+		NSI_CONF(DE0,	HIGH,		INPUT),
-+		NSI_CONF(DE1,	HIGH,		INPUT),
-+		NSI_CONF(VE,	LOWEST,		INPUT),
-+		NSI_CONF(CSI,	HIGH,		INPUT),
-+		NSI_CONF(ISP,	HIGH,		INPUT),
-+		NSI_CONF(G2D,	LOWEST,		INPUT),
-+		NSI_CONF(EINK,	LOWEST,		OUTPUT),
-+		NSI_CONF(IOMMU,	HIGHEST,	INPUT),
-+		NSI_CONF(CPUS,	LOWEST,		OUTPUT),
-+	};
-+	unsigned int i;
-+
-+	for (i = 0; i < ARRAY_SIZE(ports); i++)
-+		nsi_configure_port(ports[i].port, ports[i].pri,
-+				   ports[i].qos_sel);
-+}
-+
- static void mctl_clk_init(u32 clk)
- {
- 	void * const ccm = (void *)SUNXI_CCM_BASE;
-@@ -1205,6 +1241,7 @@ static const struct dram_para para = {
- unsigned long sunxi_dram_init(void)
- {
- 	struct dram_config config;
-+	unsigned long size;
- 
- 	/* Writing to undocumented SYS_CFG area, according to user manual. */
- 	setbits_le32(0x03000160, BIT(8));
-@@ -1221,5 +1258,9 @@ unsigned long sunxi_dram_init(void)
- 	      1U << config.bankgrps, 1U << config.ranks,
- 	      16U << config.bus_full_width);
- 
--	return calculate_dram_size(&config);
-+	size = calculate_dram_size(&config);
-+
-+	nsi_set_master_priority();
-+
-+	return size;
- }
--- 
-2.43.0
+--=20
+Tom
 
+--rIvcGXLcDd4D8miE
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCafNoMwAKCRAr4qD1Cr/k
+ClEXAPwKLs7R7X3R+k5NNRzG2p1ZEnyiD6bXcZMXdShFTidn2wD/UmjXo71fAXvs
+tUvU45rw6Q7jO4boaoVcW1crgKhzUgY=
+=fTAs
+-----END PGP SIGNATURE-----
+
+--rIvcGXLcDd4D8miE--
