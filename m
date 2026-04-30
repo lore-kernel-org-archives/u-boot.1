@@ -4,94 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2F81FF8875
-	for <u-boot@archiver.kernel.org>; Wed, 29 Apr 2026 23:58:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8478EFF887E
+	for <u-boot@archiver.kernel.org>; Thu, 30 Apr 2026 00:00:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1EB0A848FD;
-	Thu, 30 Apr 2026 01:58:10 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9784884924;
+	Thu, 30 Apr 2026 02:00:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ShhqbIhN";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Fc2b7/Bs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A6F8384912; Thu, 30 Apr 2026 01:58:08 +0200 (CEST)
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [IPv6:2a00:1450:4864:20::632])
+ id 8567C848FD; Thu, 30 Apr 2026 02:00:38 +0200 (CEST)
+Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
+ [IPv6:2a00:1450:4864:20::62c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1B21083FB5
- for <u-boot@lists.denx.de>; Thu, 30 Apr 2026 01:58:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7D3E3848FD
+ for <u-boot@lists.denx.de>; Thu, 30 Apr 2026 02:00:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-bb962ce4dcfso41782166b.1
- for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 16:58:05 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1777507084; cv=none;
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-ba7fd666666so33627366b.3
+ for <u-boot@lists.denx.de>; Wed, 29 Apr 2026 17:00:36 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1777507236; cv=none;
  d=google.com; s=arc-20240605;
- b=h+2So24t+7R3ooki5OYGBJxTPieFBic9K3tVAdT8TA8PE9gcf8KEaRmQJwq0+vTz0G
- m04314WdeCHd6rKAzdfFvvQIsklS9xkP/KNv58+1vdZ/+bHa7CUq9bWxUAsyEc4i+wWh
- xC4npPr39BAWKVhr81lLd2pwM++NH8Fv4Uzi9BHZmQgG/Rzb3efVepMjcliiwvC15nQ8
- gXw2gWDaobZu+IuVf8g7evOxB0KNRsovvBKO9qXK3Y4A0MvpJ8sHGq9ouD5+d38I/VWr
- IthmDhXv19L7mbXsIsHBG3J5g29kF43j+m7uYlGD36Kl+mge6WCAppOmQmQ8IxhO+f6y
- hpfA==
+ b=Rf8zj7qQ6iQs8hVh+GAAzH2E+Loowx47op6hKlP0JJQWl2+T8gI7Z53hSpwHqKjq5a
+ OzFRvXFOKzjiwZxE9gHy07D3qUwVEiUW3ju1k1RH9HM/h5Z6A/mp66Id2jK3DgEH7+Ko
+ y8syCEuNLF2zbQfkGbnawuNtMQCbhILuULlL2OwmNyURz5qsTE2MNCaue/aMNlbyqapp
+ 2xIvhCxpG4mnBO5lPmj8dozy/Crcu7aYw4SCb7DQRds12fyqmU1Mbn6nG//HwL6MVkGB
+ 3bjDVzlbehXZ34vkcOudWvm3fWlOB+LueqI/qvIckk/GG4I8+SUXw9KeNPZ7bLZk8ODD
+ nGnQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=c1H12in2obwCaMxhs2ukuBQs898YghF/QGqAjLfdEg4=;
- fh=KG08Ovd/aJI9kucTHYzGVlynOtNtt/RIqzZZpPDsNLA=;
- b=bLIIyFaLm32lOzFHVaMJUz7rzi1XfIhECVRaxAVQEEmri7RNSxLARK04b2R0is6Fat
- 7EecZJgjeOUs01pyJmIc4dKsMXL+oFfQx5kKS5Yao+/2IippRnx9GeGcJdmAotL2RQvu
- 5lRrjN7wyt2COstkC4EZkhGZ962ay0dO4RjC2XkQONlqShTIVlaBEUQaWIM/7ALnasdT
- NCZzyyg6srsCH5r4KojqmhFxR1sVcYBTmmjnWbVBL2iuljIXHePjIH38Vl40saI+PwjB
- yTLxP9WkrxpSh6DSfDURGRjNi2Cy2mKKerkfIlKLJYRde68g57EzS1mcuKleHNdCISRo
- oaxg==; darn=lists.denx.de
+ bh=zCKTXZxFXj+nJqOhH6o1i3WbRcZ2Pb+BJ+JGSQcfuJY=;
+ fh=pa6Kd4uSmLweEFdENia2bCYf6/LV+ehPOHxWvcn8Sms=;
+ b=LaYjbljN2Zk9cuMeRly4FhRyERayu2dyQ1xN2h/OwLvLNJzLX8BOZDoSSzA+ZQIA84
+ kIAj/NjY7Lx9MClXmwzTX8GFzRA9UBetIlzGds+Gcf0ZIQ2LS/03YQJW9xPmxputcPiP
+ 9hlJaAiE+8eFdQZ2zYDmnW4LnpiL6TxpdIY0BtmTtSF6xrKHnIG8FnjiVukmkD73Kqvi
+ Sxjr11Z1yui0tZ/riaZN8I1fGCErZ4Q+hxpCJQxJzvuMZ4lZqQpIeV0T+ytPoY6ur8pD
+ bpb/GCaREmMDohohLLP69EwrU4xL3QRWeixdYLg2/OuPzJOZ5wbG+oHCassPYremvk81
+ iy9Q==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1777507084; x=1778111884; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1777507236; x=1778112036; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=c1H12in2obwCaMxhs2ukuBQs898YghF/QGqAjLfdEg4=;
- b=ShhqbIhNbEQhc7SR+G85+ms8+5Z4HhTAzxiH4bCbnHAi+N4btoB6EgxIdG38DOWrAL
- XeCXG/LI6hP5cC2gJ3zYBmPO1718jNW9A8Xpxl8uHeGRtCU/DQAGIuaG+LBjJKM033Rc
- t3JDfRuLr2h1i2/c7R0GfFjvlvAVCHA0Q4+Ck=
+ bh=zCKTXZxFXj+nJqOhH6o1i3WbRcZ2Pb+BJ+JGSQcfuJY=;
+ b=Fc2b7/BsQ8WXb1w6VIFItv8JL2L4Q4wJPO+XV5hAComyu3mNQ4jmkF87NiZDDcM57E
+ UkUMMLZF0G3DxBW1eAipZe7/n647Z0E2Un7QTMPPLYYncnniHwJkzDlM3n0ij76bCOi4
+ 8iL7K697FAcMxJAAQOd/9YYFaRK8kq41y4T3A=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777507084; x=1778111884;
+ d=1e100.net; s=20251104; t=1777507236; x=1778112036;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=c1H12in2obwCaMxhs2ukuBQs898YghF/QGqAjLfdEg4=;
- b=cWw/1Txnzdty/LAAhOjkVpbqMNp2ihbX8w9MS+v4aPVoa9JgPx4vbZvRqYUGisarTO
- coUdqFSqFDAVpuZDqrBn56eCN/KnjUHsp7xDg/59PUSfgRYbKw3bc3Y2FUomzc2Nb6el
- iTUcoe6MHf29JosgV0gX4O6+XULFwOFXuOspZeZbSaxd3DLD12I87Jozb9zupnUx2lH9
- GGrx6nmXsVc7atv8qqwMx4U1FHdnryZWJU2k30c6c+qm8OPUQ7JQPqxi9s2XKH/ZDGw3
- QY54wN/M9AmJrppXzhXx6dxuiP3RwZJdoNhz8jUk6aqi4mULBzMmeEnybvivhtPg7vvy
- YUZg==
+ bh=zCKTXZxFXj+nJqOhH6o1i3WbRcZ2Pb+BJ+JGSQcfuJY=;
+ b=pK4Q3PamNTmW/KTOjMeyYlaT0qyorT4kHLzoSyjYa60Tunr9k16R3QYByXZ2Qdf3oW
+ lIsTyUymSMq3Du25CpUuVtPeSUj35R9kdNfheJSjaSy8T23tHFDAgq6SNbUHeYrY76EP
+ kE2O5OX5o2XAKxnj6EyW9tMsVhyvvZGDLro/bzcXpQbQ0V2wuJcjrtz9kJuaaE4J9mQO
+ 6sxb0zqODpHZqJ7yWYM/r4Vr8cy9+TvbDocqfuWikknXqrdpXJLjSlyZHfKA9i/Z1wY5
+ VdVCI5gK7M7Vcqi8yDTaC5dQvRhjpkYhjg5FDzSwUxAZ7dBJ+fGO1NJyZbPEYdlvB3zk
+ KdHg==
 X-Forwarded-Encrypted: i=1;
- AFNElJ+p1LUlR4f3pnSmPLP4x1PGe284ezg85Mbg6o+OeXejxA9iG+rKV/xz6uno2xmHm3YkFceTas8=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx6Pg5FBl5J9fz5SLa9SqOcSCmTxWnvf5Ag2GSkAVkt3HKJcK0Z
- q8/mAWtrZpx0sNh5LT65BiZ6GynPM3fxhnQ5Acnys5D709MHG2wA2w5n/v4dE6H7NoMyk48hokX
- 64uRykA/3YvhhRX/P+8Sepett2yvrj63/sHHJ42VQ
-X-Gm-Gg: AeBDievFgFjch8aTIVeald5B/Rao2ihKm9rShSqDdG7iSOWXcbiKkJ7Nw8OYaZJXoN7
- 0Jw7nK2QVyw0uKvvk3dxxB2n1a7i84CmN8RxY3U07cEzwOdCU+D1OFtD6zri/y/JlmArFvaoXiN
- jsBBZuq4bkUnQuGCj8vFaL0pbmE9mW2cLqBkZjuJfNBvSBIfsyG1ZDGm90zi/ZdDuW+in2ZlMI9
- Hi0GLjFr2VlI5kFNVwEvUtsxJSg8Z+jfbJUtMH5qwCDEvfhVjzIaIVI35MPk/v+rGlyGEPeR3M6
- 0pSRriXXFoKxwfZm
-X-Received: by 2002:a17:907:980d:b0:bab:f5f6:d700 with SMTP id
- a640c23a62f3a-bbac7c92172mr39729566b.38.1777507084554; Wed, 29 Apr 2026
- 16:58:04 -0700 (PDT)
+ AFNElJ9O6u/7KzPrbilklVRnEX6Q3JtX+gJ+wt3MM3waCjbCc/6sZplMJo25Zp21kcqBAzLY6gISAq8=@lists.denx.de
+X-Gm-Message-State: AOJu0YzjE4NHBLv75QpPAOJFWBluxDqv9EzFsbv0wOZ17nko4M47ezxH
+ yM3VRfL4EcEC/BeP63ql+45gvzpLLYxoWqS4X8qbIX0u18uRK9Znxc7QlQXO2tuGuvLImMkvrWa
+ 2GbFaQIgYWWoX6cKdMPw83KgDgs96nEraVEb5SmQnaRd7pny9Kpxgow==
+X-Gm-Gg: AeBDiesTx6uhvDII64Q1Q9iV8OMcHP9n8gL//kyMl7bYukWTOCreo1U7LUm/ot7IgLU
+ 4tBZC4Njv2hsZQNrbouYiMn8/Kf0Iq04o+VMcHdvtxX6l4G4JkFo40iLzMF6SgbPA4VXb2Lg4vx
+ MIi/KGVX3wzHqqWiOXYr2HuDTXl9bQmB1OwL5ctsfdVcSkHfR3zSbbSxPYoVZzfHURzPeNBfjH0
+ H2grE9StOG4McT8DFLfxGF+PnksCWyoFKU5/gr0BhAVmMI77teuHBhetz2kAEaU28AFXQ3eaAdv
+ 0zEPyKmAvbfjBF4m
+X-Received: by 2002:a17:907:1c19:b0:bb8:c3d9:3a33 with SMTP id
+ a640c23a62f3a-bbac52dcf9cmr40524866b.12.1777507235820; Wed, 29 Apr 2026
+ 17:00:35 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260425033742.1519298-1-b-padhi@ti.com>
- <20260425033742.1519298-10-b-padhi@ti.com>
-In-Reply-To: <20260425033742.1519298-10-b-padhi@ti.com>
+ <20260425033742.1519298-11-b-padhi@ti.com>
+In-Reply-To: <20260425033742.1519298-11-b-padhi@ti.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 29 Apr 2026 17:57:52 -0600
-X-Gm-Features: AVHnY4J1bX1Gr0F_VJggFZ0oVEX1C69S4fQ3f0ft0mUZwft0yHvo9I3CAAkzmIA
-Message-ID: <CAFLszTgxJnLFQiUW7zsOP2iqVOCF1i5=LLw1e66xHjHU_fRjpQ@mail.gmail.com>
-Subject: Re: [PATCH v4 09/11] arm: dts: k3-{j721s2/j722s/j784s4}-r5.dtsi:
- Enable HSM core
+Date: Wed, 29 Apr 2026 18:00:24 -0600
+X-Gm-Features: AVHnY4KwzCpnTJzP4ACEFqCEmdgYVwuH6jf-BK8Lz9ghoKL4qZtSRdFkJVypPaM
+Message-ID: <CAFLszTiT=GA2GP1NhxTFFZtky7vPWQ+OJnwOJw3ycS2jCg8y3A@mail.gmail.com>
+Subject: Re: [PATCH v4 10/11] remoteproc: k3-hsm: Introduce a remoteproc
+ driver for K3 HSM core
 To: b-padhi@ti.com
 Cc: trini@konsulko.com, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
@@ -114,43 +114,119 @@ X-Virus-Status: Clean
 Hi Beleswar,
 
 On 2026-04-25T03:37:39, Padhi, Beleswar <b-padhi@ti.com> wrote:
-> arm: dts: k3-{j721s2/j722s/j784s4}-r5.dtsi: Enable HSM core
+> remoteproc: k3-hsm: Introduce a remoteproc driver for K3 HSM core
 >
-> The HSM M4F node is disabled by default in the device tree. Enable the
-> node here as we have to load and boot the core in R5 SPL stage. Assign
-> the alias of 'remoteproc2' to the hsm node. This assigns the sequence
-> number '2' to HSM core which can be used during rproc_load() and
-> rproc_start() calls.
+> Some K3 SoCs like J721S2, J784S4, J722S, AM62X and AM62PX have a HSM
+> (High Security Module) M4F core in the Wakeup Voltage Domain which could
+> be used to run secure services like Authentication. Boot flow for HSM M4
+> core is different than the general purpose M4F cores, and is as below:
+>
+> 1. Request control of HSM M4F remote processor.
+> 2. Assert Reset on the HSM M4F remote processor.
+> 3. For HS devices, Request Secure Entity to Authenticate and Load HSM
+>    firmware into core's internal SRAM memory region. For GP devices,
+>    load the unsigned firmware manually.
+> 4. Deassert Reset on the HSM M4F remote processor.
+> 5. Release control of HSM M4F remote processor.
+>
+> Add a new remoteproc driver to support this boot flow for HSM M4F core.
 >
 > Signed-off-by: Beleswar Padhi <b-padhi@ti.com>
 >
-> arch/arm/dts/k3-j721s2-r5.dtsi | 5 +++++
->  arch/arm/dts/k3-j722s-r5.dtsi  | 5 +++++
->  arch/arm/dts/k3-j784s4-r5.dtsi | 4 ++++
->  3 files changed, 14 insertions(+)
+> MAINTAINERS                          |   1 +
+>  drivers/remoteproc/Kconfig           |  10 ++
+>  drivers/remoteproc/Makefile          |   1 +
+>  drivers/remoteproc/ti_k3_hsm_rproc.c | 252 +++++++++++++++++++++++++++++++++++
+>  4 files changed, 264 insertions(+)
 
-> diff --git a/arch/arm/dts/k3-j721s2-r5.dtsi b/arch/arm/dts/k3-j721s2-r5.dtsi
-> @@ -102,3 +103,7 @@
-> +&hsm {
-> +     status = 'okay';
-> +};
+> diff --git a/drivers/remoteproc/ti_k3_hsm_rproc.c b/drivers/remoteproc/ti_k3_hsm_rproc.c
+> @@ -0,0 +1,252 @@
+> +static int k3_hsm_load(struct udevice *dev, ulong addr, ulong size)
+> +{
+> +     struct k3_hsm_privdata *hsm = dev_get_priv(dev);
+> +     size_t image_size = size;
+> +     int ret;
+> +
+> +     ret = ti_sci_proc_request(&hsm->tsp);
+> +     if (ret)
+> +             return ret;
+> +
+> +     ret = ti_sci_proc_set_control(&hsm->tsp,
+> +                                   PROC_BOOT_CTRL_RESET_FLAG_HSM_M4, 0);
+> +     if (ret)
+> +             goto proc_release;
+> +
+> +     ti_secure_image_post_process((void *)&addr, &image_size);
 
-Does this have or need bootph-pre-ram here so that the node is present in SPL?
+Better to pass a proper 'void *image_addr = (void *)addr' here.
+Casting &addr (a ulong *) to void ** happens to work on a 32-bit R5
+SPL but it relies on sizeof(ulong) == sizeof(void *) and on the
+compiler being willing to alias-write a void * back through that ulong
+storage.
 
-> diff --git a/arch/arm/dts/k3-j721s2-r5.dtsi b/arch/arm/dts/k3-j721s2-r5.dtsi
-> @@ -11,6 +11,7 @@
->       aliases {
->               remoteproc0 = &sysctrler;
->               remoteproc1 = &a72_0;
-> +             remoteproc2 = &hsm;
->       };
+> diff --git a/drivers/remoteproc/ti_k3_hsm_rproc.c b/drivers/remoteproc/ti_k3_hsm_rproc.c
+> @@ -0,0 +1,252 @@
+> +     if (image_size == size) {
+> +             debug("Loading HSM GP binary into SRAM0_0\n");
+> +             memcpy((void *)hsm->mem[0].cpu_addr, (void *)(u32)addr, size);
+> +             flush_dcache_range((unsigned long)hsm->mem[0].cpu_addr,
+> +                                (unsigned long)(hsm->mem[0].cpu_addr + size));
+> +     }
 
-Hard-coding sequence 2 in the alias and then using a literal '2' in
-jump_to_image() (patch 11) is not great - anyone adding a remoteproc
-later, or building without HSM enabled on a board that adds another
-rproc, will quietly shift the index. Can you look it up by compatible
-or phandle in the caller, or at least add a comment in both this file
-and arch/arm/mach-k3/r5/common.c explaining this connection.
+A few things on this block:
+
+1. Detecting "this is a GP device, do the manual load" by comparing
+image_size against the original size is brittle - e.g. on HS-FS
+without a certificate, ti_secure_image_post_process() also returns
+with the size unchanged (after printing a warning), so we would
+silently fall into the GP path. Can you add a check for test
+get_device_type() == K3_DEVICE_TYPE_GP explicitly - that would match
+the commit message and the debug() line.
+
+2. The (u32)addr cast truncates addr on any 64-bit build. R5 SPL is
+32-bit today, but please drop the (u32) and just do (void *)addr so
+the code is correct independent of target width.
+
+3. There is no check that size fits in hsm->mem[0].size before the
+memcpy(). If a malformed FIT delivers an oversized image, this
+scribbles past SRAM0_0. A simple bounds test with an error return
+would help.
+
+> diff --git a/drivers/remoteproc/ti_k3_hsm_rproc.c b/drivers/remoteproc/ti_k3_hsm_rproc.c
+> @@ -0,0 +1,252 @@
+> +static int k3_hsm_stop(struct udevice *dev)
+> +{
+> +     struct k3_hsm_privdata *hsm = dev_get_priv(dev);
+> +     int ret;
+> +
+> +     ti_sci_proc_request(&hsm->tsp);
+> +
+> +     ret = ti_sci_proc_set_control(&hsm->tsp,
+> +                                   PROC_BOOT_CTRL_RESET_FLAG_HSM_M4, 0);
+> +
+> +     ti_sci_proc_release(&hsm->tsp);
+> +
+> +     return ret;
+> +}
+
+The return value of ti_sci_proc_request() is silently dropped. If the
+request fails, the set_control() call below will also fail and the
+user gets a misleading error. Please check it and bail early like the
+rest of the driver does.
+
+> diff --git a/drivers/remoteproc/ti_k3_hsm_rproc.c b/drivers/remoteproc/ti_k3_hsm_rproc.c
+> @@ -0,0 +1,252 @@
+> +     tsp->dev_id = dev_read_u32_default(dev, 'ti,sci-dev-id',
+> +                                        TI_SCI_RESOURCE_NULL);
+> +     if (tsp->dev_id == TI_SCI_RESOURCE_NULL) {
+> +             dev_err(dev, "Device ID not populated %d\n", ret);
+> +             return -ENODEV;
+> +     }
+
+ret is 0 here (last set by the successful dev_read_u32_array() call),
+so the %d is meaningless. I realise this was copied from
+ti_k3_m4_rproc.c, but please drop the %d and the argument while
+introducing a new copy.
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
 
