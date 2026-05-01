@@ -4,81 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6F7ECD3424
-	for <u-boot@archiver.kernel.org>; Fri,  1 May 2026 14:46:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B70DCD3423
+	for <u-boot@archiver.kernel.org>; Fri,  1 May 2026 15:06:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3D44C845E3;
-	Fri,  1 May 2026 16:46:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id A8DD8803C6;
+	Fri,  1 May 2026 17:05:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="gNNC8I+l";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="lsKmx1qL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6F52883E36; Fri,  1 May 2026 16:39:00 +0200 (CEST)
-Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
- [IPv6:2607:f8b0:4864:20::32b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 2A2B680F0E; Fri,  1 May 2026 17:05:58 +0200 (CEST)
+Received: from smtp-relay-canonical-0.canonical.com
+ (smtp-relay-canonical-0.canonical.com [185.125.188.120])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2B6CC80086
- for <u-boot@lists.denx.de>; Fri,  1 May 2026 16:38:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=bdklingerman@gmail.com
-Received: by mail-ot1-x32b.google.com with SMTP id
- 46e09a7af769-7dbccf6a23dso1759188a34.2
- for <u-boot@lists.denx.de>; Fri, 01 May 2026 07:38:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1777646337; x=1778251137; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=zfUpncIfzzuXgfETeePOpi86eUzr1jVAz91urQ+ue3Q=;
- b=gNNC8I+lBWkElb0jRo/zo1J8/CJdC/7h0TLTp8jXs8Qzfk45Jnie+JrIPYzUpM18pk
- zgzm+lRJIMGTgrJKF9BI9Q2BTLJqHgVPXAVoGVGd1pYeeB8p5N1KPkeJ0f1uwtlP1yuC
- wPjteAnduWEFIYPG2rVl/C+iuNk5qZt5vy/7Q57UECuH71m3+3EUVawpiV9Hs1ScFTdp
- h8Fj28xoHD5FRHa249VP+dt+kowAlG1z8yS5G24xgPWM/1kiXyB165ySUZALvMWz110M
- 64zloQSmo0k4Bj4yaVRjsbK90hBMgWbbTBdwKKZUm3IstDzee6P7w9Yz+6WwdU0ucu9X
- kWNg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777646337; x=1778251137;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=zfUpncIfzzuXgfETeePOpi86eUzr1jVAz91urQ+ue3Q=;
- b=sxZ+XV1FeKB43XXV3k9ENLd7o9BuN8CwLgcV29FvFc8r3pjFTQF7LSbxoMhGM2ioR5
- eEeo6ZZ6BCVtVm1LLOBZLnIwiacAZ6+srnkP+NUo/0wyuew626nTfsAjM0/wnEu99Aoo
- Wl41/ICrPoM7PdVnoaeyxvoK8Oum9/iyW0Bmaj0BGsCwa89xsbfKDLMr75OjmhN/HZW6
- DgEr9cNwbvfWneU1yXlr8ZDgbJCkAqdZ3mNTs+jm4lXYoFjCyf1yQplodsiIlvOGqQyT
- z8aEwZTLr1J+q7bRFTTyFgRAD4zmqdwK8AQGQ1fEt8FdHKxNvDUeCPEw/f+JmewFo9tI
- 7owQ==
-X-Gm-Message-State: AOJu0Ywr5QnbvjRZVztcDdjQlfFuCn1eAdnDuxMyyebjuSY22qKT+HBF
- iZ6WkQ3V8+uUSBmiBdO6bEgq8fPMX5bYIuTy5B5h6+Klt4CrI4imTIweO4JE4A==
-X-Gm-Gg: AeBDieu7snJQHyTb/CwZ39qSZanUxEGpc0MnynBB30oXf3IKiTLUMtuKs4AEqHN89Um
- uCZy9ELoEdZ6IhFlmGEuFUaTWL2YJu2JBSLQFFwUibQM5i+4JhZVg8x+dCJvhdstz2Aw7URwKdE
- 7DeZ+lgcgO65nd5or1NrB//jMaj4BBamXNzSH59d8svJ2JixPn5KyscUpR0Tr8UbY56rPt9fAwe
- t7hjkNg0afZwHGLDgfb/8jcF+6X91BsKdCJLP9YuTC9g1QzxQhTyKe4ShmbhhUouRfacKtQIG1m
- hOlAFB9E0IXc/Vpl6Wz/Ot1D+hQbbCx6hIoYF70xU14IS+9LKIfw3LfazUPia7IX9+7tVpuc9aH
- N0iTrcYIZj2NF7onQyWVRSLNOoXoR7jqnmHvUqFqr4EHguI4LFgKDdEa5YvdvnZYXUnqXWAvy5w
- dKGt+D4jxgPw7CArCMnC6NdNqn
-X-Received: by 2002:a05:6830:6b03:b0:7d9:71fa:3079 with SMTP id
- 46e09a7af769-7debdd624damr3920415a34.10.1777646336704; 
- Fri, 01 May 2026 07:38:56 -0700 (PDT)
-Received: from xps ([97.86.254.41]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7deca7a5e6asm2332675a34.3.2026.05.01.07.38.55
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 01 May 2026 07:38:56 -0700 (PDT)
-From: Brad Klingerman <bdklingerman@gmail.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
-Subject: [PATCH] Makefile: remove block from conv=block,
- sync in SPL alignment dd
-Date: Fri,  1 May 2026 09:38:50 -0500
-Message-ID: <20260501143850.2714779-1-bdklingerman@gmail.com>
+ by phobos.denx.de (Postfix) with ESMTPS id 2A3CF80086
+ for <u-boot@lists.denx.de>; Fri,  1 May 2026 17:05:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from LT03 (1.general.zfsdt.uk.vpn [10.172.194.136])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id 494253F043; 
+ Fri,  1 May 2026 15:05:55 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20251003; t=1777647955;
+ bh=k1/2UwV7je0oy3tY5VHVZFHU9ASS2ild4YFsSfxWQbw=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=lsKmx1qLcb3dbrdPABwN5NWzQbqhLnBlZeKWoP9RrBPDQvjGLMebIpXglDy3Eq4ii
+ lkFKwzCu2U2NooGEBs/QPq23SMIZb1qNn1VaFMe7ZGG40h/ei854vuF/z4FaPlVDVD
+ cbimfFbsr40bfcRQF9YUhnvJzRsbPUyv2udKUOq2sroPrRM9lPYOGwcqO2dbmn5q6W
+ TPxc4WHQ9Lxl78CXWkPvmPBc4dUB9WXrfHplG3X+jE84gAMXkjQLcid21+T/o9+/yq
+ ZbWhMLfVfXXPwFvrR7Mp0Rkri+MUgvDodDM2z0kW6j7frNTW/Nu9kj8PIPIjY7LSwk
+ wp7Yp/vrrFJcNmA8c03MWesHDQiGCySmXVrXdbnkpDfFf0zCRtClfX1PK2jH056WMq
+ /B/PPUXS/4p6sIDtkpQLM0yB959ouwIDES0sOvEd/coBu/p9JRl9hHRyE0pj7xp+Uz
+ w21xNmZwEwHKq41wsWE2vxDL35m93UjkO9/IQKV552DKWKqwLLUcJLOm97IzJOQz9D
+ MjsHe+/2NXjhMSjInSjQi2DWOuLfsL75BQ2oLeKAy9MF16yVXD/GjMZIS6lc3CdTMG
+ nLa7M4q2r3J9JG2NTqbZ0snUJONJdQF7s4aip049wJrFQk4zJkwUJg8SJXCpD4wXl/
+ BEUHKwMYnN7wHWOpj1M9IiMQ=
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>, Yao Zi <me@ziyao.cc>,
+ Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>,
+ u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/1] efi_loader: set correct frame buffer address
+Date: Fri,  1 May 2026 17:05:50 +0200
+Message-ID: <20260501150550.228937-1-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Fri, 01 May 2026 16:46:21 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,51 +76,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The line that produces $(SPL_BIN)-align.bin invokes dd with
-conv=block,sync but no cbs= operand. The result of dd conv=block
-without cbs= is unspecified. GNU coreutils outputs anyway, but
-uutils (default in Ubuntu 26.04 LTS) errors out for files with
-newlines, including SPL binaries, producing:
+If we use video copy, bit image transfers need to write to the in memory
+copy of the physical frame buffer. Damage control will sync the changes
+to the physical frame buffer.
 
-    dd: conv=block or conv=ubnblock specified without cbs=N
+Cyclic video copy will catch all changes done by EFI applications directly
+accessing the frame buffer copy.
 
-Either the block operand must be removed, or cbs=N must be added.
-conv=block is for converting newline-terminated variable-length
-records to fixed-length space-padded ones, which is meaningless
-for a binary SPL image. The intent of the rule is 4-byte
-alignment, which conv=sync alone provides by padding the final
-block to bs= bytes with NULs.
+gopobj->mode.fb_base must be a valid pointer to memory and not a virtual
+sandbox address.
 
-During build, u-boot-spl-align.bin errors silently due to '@'.
+With this change the block image transfer test works again on the sandbox.
 
-Reproduced with uutils dd 0.8.0:
+    setenv efi_selftest block image transfer
+    bootefi selftest
 
-    $ dd if=/dev/urandom of=/tmp/in bs=1 count=10000
-    $ dd if=/tmp/in of=/tmp/out conv=block,sync bs=4
-    dd: conv=block or conv=unblock specified without cbs=N
-    $ dd if=/tmp/in of=/tmp/out conv=sync bs=4
-    [succeeds]
-
-Output is byte-identical to GNU dd's output for binary input.
-
-Signed-off-by: Brad Klingerman <bdklingerman@gmail.com>
+Fixes: a75cf70d23ac ("efi: Correct handling of frame buffer")
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
- scripts/Makefile.xpl | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ lib/efi_loader/efi_gop.c | 7 +++----
+ 1 file changed, 3 insertions(+), 4 deletions(-)
 
-diff --git a/scripts/Makefile.xpl b/scripts/Makefile.xpl
-index 862a8e6f231..a3fd3e1375f 100644
---- a/scripts/Makefile.xpl
-+++ b/scripts/Makefile.xpl
-@@ -257,7 +257,7 @@ MKIMAGEFLAGS_boot.bin = -T zynqmpimage -R $(srctree)/$(CONFIG_BOOT_INIT_FILE) \
- endif
+diff --git a/lib/efi_loader/efi_gop.c b/lib/efi_loader/efi_gop.c
+index 9403e09691e..ae44d140289 100644
+--- a/lib/efi_loader/efi_gop.c
++++ b/lib/efi_loader/efi_gop.c
+@@ -471,7 +471,7 @@ efi_status_t efi_gop_register(void)
+ {
+ 	struct efi_gop_obj *gopobj;
+ 	u32 bpix, format, col, row;
+-	u64 fb_base, fb_size;
++	u64 fb_size;
+ 	efi_status_t ret;
+ 	struct udevice *vdev;
+ 	struct video_priv *priv;
+@@ -490,7 +490,6 @@ efi_status_t efi_gop_register(void)
+ 	row = video_get_ysize(vdev);
  
- $(obj)/$(SPL_BIN)-align.bin: $(obj)/$(SPL_BIN).bin
--	@dd if=$< of=$@ conv=block,sync bs=4 2>/dev/null;
-+	@dd if=$< of=$@ conv=sync bs=4 2>/dev/null;
+ 	plat = dev_get_uclass_plat(vdev);
+-	fb_base = IS_ENABLED(CONFIG_VIDEO_COPY) ? plat->copy_base : plat->base;
+ 	fb_size = plat->size;
  
- spl/boot.bin: $(obj)/$(SPL_BIN)-align.bin FORCE
- 	$(call if_changed,mkimage)
+ 	switch (bpix) {
+@@ -528,7 +527,7 @@ efi_status_t efi_gop_register(void)
+ 	gopobj->mode.info = &gopobj->info;
+ 	gopobj->mode.info_size = sizeof(gopobj->info);
+ 
+-	gopobj->mode.fb_base = fb_base;
++	gopobj->mode.fb_base = (uintptr_t)priv->fb;
+ 	gopobj->mode.fb_size = fb_size;
+ 
+ 	gopobj->info.version = 0;
+@@ -553,7 +552,7 @@ efi_status_t efi_gop_register(void)
+ 	}
+ 	gopobj->info.pixels_per_scanline = col;
+ 	gopobj->bpix = bpix;
+-	gopobj->fb = map_sysmem(fb_base, fb_size);
++	gopobj->fb = priv->fb;
+ 	gopobj->vdev = vdev;
+ 
+ 	return EFI_SUCCESS;
 -- 
 2.53.0
 
