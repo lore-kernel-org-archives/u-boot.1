@@ -4,60 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D200CCFA13
-	for <u-boot@archiver.kernel.org>; Fri,  1 May 2026 12:20:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B387DCCFA13
+	for <u-boot@archiver.kernel.org>; Fri,  1 May 2026 12:26:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5D515803C6;
-	Fri,  1 May 2026 14:20:55 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ziyao.cc
+	by phobos.denx.de (Postfix) with ESMTP id 33CFF80F0E;
+	Fri,  1 May 2026 14:26:09 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gentoo.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ziyao.cc header.i=me@ziyao.cc header.b="qHPRuv3u";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DAEB881E18; Fri,  1 May 2026 14:20:53 +0200 (CEST)
-Received: from sender4-op-o17.zoho.com (sender4-op-o17.zoho.com
- [136.143.188.17])
+ id 17C0783A91; Fri,  1 May 2026 14:26:08 +0200 (CEST)
+Received: from smtp.gentoo.org (woodpecker.gentoo.org [140.211.166.183])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 621A780086
- for <u-boot@lists.denx.de>; Fri,  1 May 2026 14:20:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=ziyao.cc
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=me@ziyao.cc
-ARC-Seal: i=1; a=rsa-sha256; t=1777638047; cv=none; 
- d=zohomail.com; s=zohoarc; 
- b=ZDEgSIn30aH//eDdPE3iXD0WXF3+PU72tf0Mas1wEZ9+pGLgiJGJTa9JWvui5gf5GrZ/OqpkK72XEUmko5riUHprX1zUAMj705XIZbUDkABmqx8yF0LKew1Yy878RMGBbeFzLqZg2KoCQHny5KBFgq8FmXQq74knMXAllSHYIqA=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
- s=zohoarc; t=1777638047;
- h=Content-Type:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To;
- bh=/vJP7rXawwn844+U301DuHJSl1F68+A/ftagc+6vu8g=; 
- b=aVka0fu+9ZpNB8l6pcwlpaJlxJ8xFJabJ7fGAOwZnoQJjkjGCwddY9frWcGRukuLp/GR0vaG4YWjkQVrw5/FpwWIJztxAhtXZX7Dut6pEv8hSy44KVti7AXpXSnLLPvZIwBrRyUjWeCgOAYrk+C7z4jyYgiJ274w2cSUze8oQRs=
-ARC-Authentication-Results: i=1; mx.zohomail.com; dkim=pass  header.i=ziyao.cc;
- spf=pass  smtp.mailfrom=me@ziyao.cc;
- dmarc=pass header.from=<me@ziyao.cc>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1777638047; 
- s=zmail; d=ziyao.cc; i=me@ziyao.cc;
- h=Date:Date:From:From:To:To:Cc:Cc:Subject:Subject:Message-ID:References:MIME-Version:Content-Type:In-Reply-To:Message-Id:Reply-To;
- bh=/vJP7rXawwn844+U301DuHJSl1F68+A/ftagc+6vu8g=;
- b=qHPRuv3u6qOsstcggYHTjuZflSumU4V+NxgXYbPO80PaDG3MCNCo7iNZTHINd4yn
- HQLvvMQ6iteyb/8myF23auMlQ2Ls6EuumtiMjdr1xHaoz/Za06ewDZ2vFgsJWIhTp+n
- K/Sc993d9Sne+J2oJ4JXXcvNpKjL/RuLkntIW7Qg=
-Received: by mx.zohomail.com with SMTPS id 1777638043392557.1548888916449;
- Fri, 1 May 2026 05:20:43 -0700 (PDT)
-Date: Fri, 1 May 2026 12:20:37 +0000
-From: Yao Zi <me@ziyao.cc>
-To: Michal Simek <michal.simek@amd.com>, <u-boot@lists.denx.de>, <git@amd.com>
-Cc: Ben Dooks <ben.dooks@codethink.co.uk>, Leo <ycliang@andestech.com>,
- Rick Chen <rick@andestech.com>, Tom Rini <trini@konsulko.com>
-Subject: Re: [PATCH] riscv: Disable -fpic for SPL builds
-Message-ID: <afSalS7aSMP1MHIV@pie>
-References: <6ada697cef076eaed1971c4877c402a91ad5cb48.1777550346.git.michal.simek@amd.com>
+ by phobos.denx.de (Postfix) with ESMTPS id D0D1080086
+ for <u-boot@lists.denx.de>; Fri,  1 May 2026 14:26:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=fail (p=none dis=none) header.from=gentoo.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=dlan@gentoo.org
+Received: from localhost (unknown [116.232.124.22])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange x25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested) (Authenticated sender: dlan)
+ by smtp.gentoo.org (Postfix) with ESMTPSA id 6897D34205F;
+ Fri, 01 May 2026 12:26:02 +0000 (UTC)
+Date: Fri, 1 May 2026 12:25:51 +0000
+From: Yixun Lan <dlan@gentoo.org>
+To: Andre Przywara <andre.przywara@arm.com>
+Cc: u-boot@lists.denx.de, linux-sunxi@lists.linux.dev,
+ Jagan Teki <jagan@amarulasolutions.com>, Tom Rini <trini@konsulko.com>,
+ Jernej Skrabec <jernej.skrabec@gmail.com>
+Subject: Re: [PATCH] spi: sunxi: wait for TX/RX fifo reset done
+Message-ID: <20260501122551-GYB3258572@gentoo.org>
+References: <20260421-02-spi-fifo-reset-v1-1-e2cdd4bd474d@gentoo.org>
+ <e10c1362-59d2-46bf-914f-ef5163336e1f@arm.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <6ada697cef076eaed1971c4877c402a91ad5cb48.1777550346.git.michal.simek@amd.com>
-X-ZohoMailClient: External
+In-Reply-To: <e10c1362-59d2-46bf-914f-ef5163336e1f@arm.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,35 +57,89 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Apr 30, 2026 at 01:59:07PM +0200, Michal Simek wrote:
-> When building U-Boot SPL for RISC-V with position-independent code
-> (-fpic), the linker fails with relocation errors like:
-> 
->   relocation truncated to fit: R_RISCV_PCREL_HI20 against `symbol'
-> 
-> This occurs because SPL's linker script places .bss in a separate
-> memory region (.bss_mem) from .text/.data (.spl_mem). With -fpic,
-> accessing global variables uses PC-relative GOT addressing, which
-> fails when the distance between code and data exceeds the 20-bit
-> signed offset limit of R_RISCV_PCREL_HI20.
+Hi Andre,
 
-This sounds strange. R_RISCV_GOT_HI20 instead of R_RISCV_PCREL_HI20
-should be used when addressing a variable through GOT in code. Thus I
-suspect in your case, the compiler decides to address the .bss variable
-PC-relatively, bypassing the GOT, possibly because it's static thus
-considered non-preemptible.
-
-Might you provide a reproducer for the problem so we could dig it
-further and confirm the root cause?
-
-Best regards,
-Yao Zi
-
-> The main U-Boot binary requires -fpic for runtime relocation support,
-> but SPL runs from a fixed address and doesn't need position-independent
-> code. Disable -fpic for SPL builds while keeping it enabled for the
-> main U-Boot image.
+On 11:54 Thu 30 Apr     , Andre Przywara wrote:
+> Hi,
 > 
->    spl/u-boot-spl: all -1187 bss +4 data -2631 rodata +2440 text -1000
+> On 4/21/26 06:47, Yixun Lan wrote:
+> > Once reset SPI TX or RX fifo, the underlying hardware need to take
+> > some time to actually settle down, the two bits will automatically
+> > clear to 0, so use a poll mechanism to check status bits to make sure
+> > it's done correctly.
 > 
-> Signed-off-by: Michal Simek <michal.simek@amd.com>
+> Ah, interesting, thanks for posting this!
+> I looked into some manuals, and it seems like this self-clearing 
+> property is already used in the A10, so it's fine to use unconditionally.
+> 
+> > 
+> > Signed-off-by: Yixun Lan <dlan@gentoo.org>
+> 
+> Acked-by: Andre Przywara <andre.przywara@arm.com>
+> 
+> If you don't mind, I would pull the below paragraph into the commit 
+> message, since it's useful to have in the git history.
+> 
+No, feel free to adjust.. And thanks
+I'd assume you will handle all this? so no need from my side to post new version
+
+> Cheers,
+> Andre.
+> 
+> P.S. Just curious if we need a similar fix for Linux, or are we saved by 
+> the Linux code spending more time in setup before doing a transfer?
+> 
+I've not looked into Linux/Kernel side, since this is a hardware feature,
+so yes, we should do something similar (to be safe)
+
+> > ---
+> > On Cubie A7A board which using A733 SoC, we encoutered a SPI nor flash
+> > timeout issue, it turns out that the SPI fifo reset take a few time to
+> > settle down, Add a loop to poll the status.
+> > 
+> > This was the error message shows on A7A board once this issue happened.
+> > 
+> > => sf probe
+> > ERROR: sun4i_spi: Timeout transferring data
+> > Failed to initialize SPI flash at 0:0 (error -2)
+> > ---
+> >   drivers/spi/spi-sunxi.c | 9 ++++++---
+> >   1 file changed, 6 insertions(+), 3 deletions(-)
+> > 
+> > diff --git a/drivers/spi/spi-sunxi.c b/drivers/spi/spi-sunxi.c
+> > index e00532a371b..cf41905c7b7 100644
+> > --- a/drivers/spi/spi-sunxi.c
+> > +++ b/drivers/spi/spi-sunxi.c
+> > @@ -347,7 +347,7 @@ static int sun4i_spi_xfer(struct udevice *dev, unsigned int bitlen,
+> >   	struct sun4i_spi_priv *priv = dev_get_priv(bus);
+> >   	struct dm_spi_slave_plat *slave_plat = dev_get_parent_plat(dev);
+> >   
+> > -	u32 len = bitlen / 8;
+> > +	u32 rst, val, len = bitlen / 8;
+> >   	u8 nbytes;
+> >   	int ret;
+> >   
+> > @@ -363,8 +363,11 @@ static int sun4i_spi_xfer(struct udevice *dev, unsigned int bitlen,
+> >   		sun4i_spi_set_cs(bus, slave_plat->cs[0], true);
+> >   
+> >   	/* Reset FIFOs */
+> > -	setbits_le32(SPI_REG(priv, SPI_FCR), SPI_BIT(priv, SPI_FCR_RF_RST) |
+> > -		     SPI_BIT(priv, SPI_FCR_TF_RST));
+> > +	rst = SPI_BIT(priv, SPI_FCR_RF_RST) | SPI_BIT(priv, SPI_FCR_TF_RST);
+> > +	setbits_le32(SPI_REG(priv, SPI_FCR), rst);
+> > +	ret = readl_poll_timeout(SPI_REG(priv, SPI_FCR), val, !(rst & val), 20);
+> > +	if (ret)
+> > +		return -EBUSY;
+> >   
+> >   	while (len) {
+> >   		/* Setup the transfer now... */
+> > 
+> > ---
+> > base-commit: 88dc2788777babfd6322fa655df549a019aa1e69
+> > change-id: 20260220-02-spi-fifo-reset-25e371314c3f
+> > 
+> > Best regards,
+> 
+
+-- 
+Yixun Lan (dlan)
