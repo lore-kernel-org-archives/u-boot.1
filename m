@@ -4,59 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E75F3FF885A
-	for <u-boot@archiver.kernel.org>; Fri,  1 May 2026 06:59:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1113FFF885A
+	for <u-boot@archiver.kernel.org>; Fri,  1 May 2026 07:01:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 727F784227;
-	Fri,  1 May 2026 08:59:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=grimler.se
+	by phobos.denx.de (Postfix) with ESMTP id 8F69F84099;
+	Fri,  1 May 2026 09:01:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; secure) header.d=grimler.se header.i=@grimler.se header.b="c7IsXE5a";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="YipGYfXn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 209FD841D7; Fri,  1 May 2026 08:59:23 +0200 (CEST)
-Received: from out-183.mta1.migadu.com (out-183.mta1.migadu.com
- [95.215.58.183])
+ id ECD2E841D7; Fri,  1 May 2026 09:01:04 +0200 (CEST)
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 94F00803C6
- for <u-boot@lists.denx.de>; Fri,  1 May 2026 08:59:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A833F80086
+ for <u-boot@lists.denx.de>; Fri,  1 May 2026 09:01:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=grimler.se
+ header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=henrik@grimler.se
-Date: Fri, 1 May 2026 08:58:40 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=grimler.se; s=key1;
- t=1777618760;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=mNQngtuH8M7lh5jWtTuTLt+amxGOgNegZ0HcvThH7J4=;
- b=c7IsXE5adjEEeTwJ+oPJGFizLAxEpM3yuHRB89QdZocwaaLdjHgt8B+EvIrdRQ2+5z/+8G
- ITWlOfVmn6u/+wR+nmY227NG8ZPBKoHkR4zWtK31KSyBtGUYv35Ky1zleMg/AvgCMjh03N
- d7e9KR2xjBWSJCaC/Bc5jRRA5SY3/nM=
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
- include these headers.
-From: Henrik Grimler <henrik@grimler.se>
-To: Kaustabh Chakraborty <kauschluss@disroot.org>
-Cc: Peng Fan <peng.fan@nxp.com>, u-boot@lists.denx.de,
- Minkyu Kang <mk7.kang@samsung.com>, Tom Rini <trini@konsulko.com>,
- Jaehoon Chung <jh80.chung@samsung.com>, Anand Moon <linux.amoon@gmail.com>,
- Sam Protsenko <semen.protsenko@linaro.org>,
- Lukas Timmermann <uboot@timmermann.space>
-Subject: Re: [PATCH 1/4] mmc: exynos_dw_mmc: add proper init sequence for
- HS400 support
-Message-ID: <20260501065840.GA13244@grimfrac.localdomain>
-References: <20260427-dwmmc-exynos-hs400-es-v1-0-3495df40a9ac@disroot.org>
- <20260427-dwmmc-exynos-hs400-es-v1-1-3495df40a9ac@disroot.org>
- <20260430172638.GA17167@localhost>
- <DI6QUD531HSA.2VQ3A6S1JC9BC@disroot.org>
+ spf=pass smtp.mailfrom=ehristev@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by tor.source.kernel.org (Postfix) with ESMTP id 652AB60142;
+ Fri,  1 May 2026 07:01:00 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id DEB27C2BCB7;
+ Fri,  1 May 2026 07:00:57 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1777618860;
+ bh=iDgBba0gNtNrcYS/X2hkfuXvzKNQYNsiYd5fVlYH5qU=;
+ h=From:To:Cc:In-Reply-To:References:Subject:Date:From;
+ b=YipGYfXnKWw3jXtwrb73/09bIgNjlso1M2mGHuQHWyzO/kUftjKqf6W+NZkhwatA/
+ uwUby6l09kokMW4seMYas0XPE1TtTAYFDcbKk23Nk/+sOjUKLdGOLmMOIkIvJYTZ61
+ zLeE8DCf6Vu7l5UvbDGPnCD5WVmdhbB20tEVzgQ2dctWP19W3MXrm2zk2RSbxBFrCe
+ oxztQHj9DaLZmjldB7p40LQSqmXoDx3qJHM2aDHrtss8PsaTXOWB4rteuNw/n1dNc1
+ 1/KLe4uxPJn9tJiN5Ejqj8uuSmv5uLCx8nIfjEKPequxuq5ua/WX38TOiRXNF0dY6e
+ PkxeEFs2QJzeg==
+From: Eugen Hristev <ehristev@kernel.org>
+To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
+Cc: Eugen Hristev <eugen.hristev@linaro.org>, 
+ Stelian Pop <stelian@popies.net>, 
+ Durai Manickam KR <durai.manickamkr@microchip.com>, 
+ Sandeep Sheriker M <sandeep.sheriker@microchip.com>, 
+ Manikandan Muralidharan <manikandan.m@microchip.com>, 
+ Nicolas Ferre <nicolas.ferre@microchip.com>, 
+ Ludovic Desroches <ludovic.desroches@microchip.com>, 
+ Ilko Iliev <iliev@ronetix.at>
+In-Reply-To: <20260325190024.3428545-1-trini@konsulko.com>
+References: <20260325190024.3428545-1-trini@konsulko.com>
+Subject: Re: [PATCH] arm: at91: Drop unnecessary BOARD_EARLY_INIT_F usage
+Message-Id: <177761885759.359357.6960351969788230912.b4-ty@b4>
+Date: Fri, 01 May 2026 10:00:57 +0300
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <DI6QUD531HSA.2VQ3A6S1JC9BC@disroot.org>
-X-Migadu-Flow: FLOW_OUT
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.15.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,199 +75,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Kaustabh,
 
-On Fri, May 01, 2026 at 01:11:29AM +0530, Kaustabh Chakraborty wrote:
-> On 2026-04-30 19:26 +02:00, Henrik Grimler wrote:
-> > Hi Kaustabh,
-> >
-> > On Mon, Apr 27, 2026 at 11:22:49AM +0530, Kaustabh Chakraborty wrote:
-> >> HS400 support was added, but configuration necessary for HS400 support
-> >> was left out. Add necessary changes, which includes:
-> >> - Device tree properties, such as "samsung,dw-mshc-hs400-timing" and
-> >>   "samsung,read-strobe-delay", which function as per dt-bindings.
-> >> - Registers related to HS400, which are necessary to enable HS400+ support.
-> >> - Appropriate timing tunings for the HS400 mode.
-> >> 
-> >> Note that these changes are loosely based off of its Linux kernel
-> >> counterpart.
-> >> 
-> >> Fixes: bbe3b9fa0922 ("mmc: exynos_dw_mmc: add support for MMC HS200 and HS400 modes")
-> >> Signed-off-by: Kaustabh Chakraborty <kauschluss@disroot.org>
-> >> ---
-> >>  arch/arm/mach-exynos/include/mach/dwmmc.h |  5 ++
-> >>  drivers/mmc/exynos_dw_mmc.c               | 80 +++++++++++++++++++++++++++++++
-> >>  2 files changed, 85 insertions(+)
-> >> 
-> >> diff --git a/arch/arm/mach-exynos/include/mach/dwmmc.h b/arch/arm/mach-exynos/include/mach/dwmmc.h
-> >> index 4432deedef7..50081326c25 100644
-> >> --- a/arch/arm/mach-exynos/include/mach/dwmmc.h
-> >> +++ b/arch/arm/mach-exynos/include/mach/dwmmc.h
-> >> @@ -15,6 +15,11 @@
-> >>  #define DWMCI_SET_DRV_CLK(x)		((x) << 16)
-> >>  #define DWMCI_SET_DIV_RATIO(x)		((x) << 24)
-> >>  
-> >> +/* HS400 Related Registers */
-> >> +#define DWMCI_HS400_DQS_EN		0x180
-> >> +#define DWMCI_HS400_ASYNC_FIFO_CTRL	0x184
-> >> +#define DWMCI_HS400_DLINE_CTRL		0x188
-> >> +
-> >>  /* Protector Register */
-> >>  #define DWMCI_EMMCP_BASE		0x1000
-> >>  #define EMMCP_MPSECURITY		(DWMCI_EMMCP_BASE + 0x0010)
-> >> diff --git a/drivers/mmc/exynos_dw_mmc.c b/drivers/mmc/exynos_dw_mmc.c
-> >> index 7ccd113bd79..d5e90a9bd5c 100644
-> >> --- a/drivers/mmc/exynos_dw_mmc.c
-> >> +++ b/drivers/mmc/exynos_dw_mmc.c
-> >> @@ -8,6 +8,7 @@
-> >>  #include <dwmmc.h>
-> >>  #include <asm/global_data.h>
-> >>  #include <malloc.h>
-> >> +#include <mmc.h>
-> >>  #include <errno.h>
-> >>  #include <asm/arch/dwmmc.h>
-> >>  #include <asm/arch/clk.h>
-> >> @@ -30,6 +31,14 @@
-> >>  #define CLKSEL_UP_SAMPLE(x, y)		(((x) & ~CLKSEL_CCLK_SAMPLE(7)) | \
-> >>  					 CLKSEL_CCLK_SAMPLE(y))
-> >>  
-> >> +/* RCLK_EN register defines */
-> >> +#define DATA_STROBE_EN			BIT(0)
-> >> +#define AXI_NON_BLOCKING_WR	BIT(7)
-> >> +
-> >> +/* DLINE_CTRL register defines */
-> >> +#define DQS_CTRL_RD_DELAY(x, y)		(((x) & ~0x3FF) | ((y) & 0x3FF))
-> >> +#define DQS_CTRL_GET_RD_DELAY(x)	((x) & 0x3FF)
-> >> +
-> >>  /**
-> >>   * DOC: Quirk flags for different Exynos DW MMC blocks
-> >>   *
-> >> @@ -71,6 +80,11 @@ struct dwmci_exynos_priv_data {
-> >>  	struct clk clk;
-> >>  	u32 sdr_timing;
-> >>  	u32 ddr_timing;
-> >> +	u32 hs400_timing;
-> >> +	u32 tuned_sample;
-> >> +	u32 dqs_delay;
-> >> +	u32 saved_dqs_en;
-> >> +	u32 saved_strobe_ctrl;
-> >>  	const struct exynos_dwmmc_variant *chip;
-> >>  };
-> >>  
-> >> @@ -162,6 +176,27 @@ static u8 exynos_dwmmc_get_ciu_div(struct dwmci_host *host)
-> >>  				& DWMCI_DIVRATIO_MASK) + 1;
-> >>  }
-> >>  
-> >> +static void exynos_config_hs400(struct dwmci_host *host, enum bus_mode mode)
-> >> +{
-> >> +	struct dwmci_exynos_priv_data *priv = exynos_dwmmc_get_priv(host);
-> >> +	u32 dqs, strobe;
-> >> +
-> >> +	dqs = priv->saved_dqs_en;
-> >> +	strobe = priv->saved_strobe_ctrl;
-> >> +
-> >> +	switch (mode) {
-> >> +	case MMC_HS_400:
-> >> +		dqs |= DATA_STROBE_EN;
-> >> +		strobe = DQS_CTRL_RD_DELAY(strobe, priv->dqs_delay);
-> >> +		break;
-> >> +	default:
-> >> +		dqs &= ~DATA_STROBE_EN;
-> >> +	}
-> >> +
-> >> +	dwmci_writel(host, DWMCI_HS400_DQS_EN, dqs);
-> >> +	dwmci_writel(host, DWMCI_HS400_DLINE_CTRL, strobe);
-> >> +}
-> >> +
-> >>  /* Configure CLKSEL register with chosen timing values */
-> >>  static int exynos_dwmci_clksel(struct dwmci_host *host)
-> >>  {
-> >> @@ -170,6 +205,9 @@ static int exynos_dwmci_clksel(struct dwmci_host *host)
-> >>  	u32 timing;
-> >>  
-> >>  	switch (host->mmc->selected_mode) {
-> >> +	case MMC_HS_400:
-> >> +		timing = CLKSEL_UP_SAMPLE(priv->hs400_timing, priv->tuned_sample);
-> >> +		break;
-> >>  	case MMC_DDR_52:
-> >>  		timing = priv->ddr_timing;
-> >>  		break;
-> >> @@ -186,6 +224,8 @@ static int exynos_dwmci_clksel(struct dwmci_host *host)
-> >>  
-> >>  	dwmci_writel(host, priv->chip->clksel, timing);
-> >>  
-> >> +	exynos_config_hs400(host, host->mmc->selected_mode);
-> >> +
-> >
-> > This breaks emmc in Linux for existing devices without hs400 support:
-> > exynos_config_hs400 is run no matter if the dt has the hs400
-> > parameters, meaning 0x0 is written to DWMCI_HS400_DQS_EN and
-> > DWMCI_HS400_DLINE_CTRL. U-boot does not seem to care, it loads the
-> > kernel and initramfs without issues, but Linux later gives errors:
-> 
-> Is it that the same defconfig is used for two devices, one with and one
-> without HS400 support? If that's the case, guarding the call with
-> HS400_SUPPORT config options won't be a real fix.
+On Wed, 25 Mar 2026 13:00:24 -0600, Tom Rini wrote:
+> All of these platforms enable CONFIG_BOARD_EARLY_INIT_F and then have a
+> do-nothing board_early_init_f function. Change to not enabling the
+> option and so not needing an empty function.
 
-A family of devices are using the same defconfig. I assume the
-hardware in all of them supports hs400, but at the moment only one
-device seems to be configured to use hs400 _in Linux_, and none in
-u-boot.
+Applied, thanks!
 
-Adding a config guard around exynos_config_hs400() would probably
-work. I see Linux uses a check like
-if (priv->ctrl_type >= DW_MCI_TYPE_EXYNOS5420)
-instead.
-
-> mmc_of_parse() in mmc-uclass.h seems promising, this needs to be
-> integrated with dwmci_setup_cfg() in dw_mmc.c, and this change _may_ be
-> regressive in nature, so I may also need to add some safety guards for
-> this.
-> 
-> I will thus add this patch in the next rev. Would you be up to test the patch
-> for the concerned devices too?
-
-Yeah I can test on these older devices.
+[1/1] arm: at91: Drop unnecessary BOARD_EARLY_INIT_F usage
+      commit: 301bad079b15bdcdae1dc7c3f4f7b30cff15ba84
 
 Best regards,
-Henrik Grimler
+-- 
+Eugen Hristev <ehristev@kernel.org>
 
-> >
-> > ```
-> > [   20.741025] mmc_host mmc0: Bus speed (slot 0) = 50000000Hz (slot req 400000Hz, actual 396825HZ div = 63)
-> > [   20.886686] mmc_host mmc0: Bus speed (slot 0) = 50000000Hz (slot req 52000000Hz, actual 50000000HZ div = 0)
-> > [   20.895138] mmc_host mmc0: Bus speed (slot 0) = 200000000Hz (slot req 200000000Hz, actual 200000000HZ div = 0)
-> > [   20.905990] mmc_host mmc0: Bus speed (slot 0) = 50000000Hz (slot req 52000000Hz, actual 50000000HZ div = 0)
-> > [   20.914988] mmc_host mmc0: Bus speed (slot 0) = 400000000Hz (slot req 200000000Hz, actual 200000000HZ div = 1)
-> > [   21.099546] I/O error, dev mmcblk0, sector 1000001 op 0x1:(WRITE) flags 0x800 phys_seg 16 prio class 2
-> > [   21.099853] I/O error, dev mmcblk0, sector 1000825 op 0x1:(WRITE) flags 0x800 phys_seg 8 prio class 2
-> > [   21.107443] Buffer I/O error on dev mmcblk0p2, logical block 0, lost async page write
-> > [   21.107473] Buffer I/O error on dev mmcblk0p2, logical block 1, lost async page write
-> > [   21.116657] Buffer I/O error on dev mmcblk0p2, logical block 824, lost async page write
-> > [   21.124408] Buffer I/O error on dev mmcblk0p2, logical block 2, lost async page write
-> > [   21.132206] Buffer I/O error on dev mmcblk0p2, logical block 825, lost async page write
-> > [   21.140178] Buffer I/O error on dev mmcblk0p2, logical block 3, lost async page write
-> > [   21.147973] Buffer I/O error on dev mmcblk0p2, logical block 826, lost async page write
-> > [   21.155960] Buffer I/O error on dev mmcblk0p2, logical block 4, lost async page write
-> > [   21.163749] Buffer I/O error on dev mmcblk0p2, logical block 827, lost async page write
-> > [   21.171720] Buffer I/O error on dev mmcblk0p2, logical block 5, lost async page write
-> > [   21.200708] I/O error, dev mmcblk0, sector 1000873 op 0x1:(WRITE) flags 0x800 phys_seg 8 prio class 2
-> > [   21.201043] I/O error, dev mmcblk0, sector 1000929 op 0x1:(WRITE) flags 0x800 phys_seg 8 prio class 2
-> > [   21.218287] I/O error, dev mmcblk0, sector 1000945 op 0x1:(WRITE) flags 0x800 phys_seg 80 prio class 2
-> > [   21.218623] I/O error, dev mmcblk0, sector 1001033 op 0x1:(WRITE) flags 0x800 phys_seg 24 prio class 2
-> > [   21.236813] I/O error, dev mmcblk0, sector 1001097 op 0x1:(WRITE) flags 0x800 phys_seg 8 prio class 2
-> > [   21.237146] I/O error, dev mmcblk0, sector 1001121 op 0x1:(WRITE) flags 0x800 phys_seg 24 prio class 2
-> > [   21.255370] I/O error, dev mmcblk0, sector 1001161 op 0x1:(WRITE) flags 0x800 phys_seg 56 prio class 2
-> > [   21.256253] I/O error, dev mmcblk0, sector 1001249 op 0x1:(WRITE) flags 0x800 phys_seg 8 prio class 2
-> > ```
-> >
-> > Specifically it seems to be writing 0x0 to DWMCI_HS400_DQS_EN that is
-> > the issue, if I comment out that line it works also for my odroid-xu4
-> > in non-hs400 mode.
-> >
-> > Tested on odroid-xu4 with odroid-xu3_defconfig after applying the
-> > entire series, without any other changes.
-> >
-> > Best regards,
-> > Henrik Grimler
-> 
