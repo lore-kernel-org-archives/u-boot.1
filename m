@@ -4,79 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5054EFF885A
-	for <u-boot@archiver.kernel.org>; Fri,  1 May 2026 07:57:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0180FF885A
+	for <u-boot@archiver.kernel.org>; Fri,  1 May 2026 08:03:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D1A0C803C6;
-	Fri,  1 May 2026 09:56:58 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 138D5803C6;
+	Fri,  1 May 2026 10:03:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="hamYDEdv";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="pZAbCyxB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 54C8883A91; Fri,  1 May 2026 09:56:58 +0200 (CEST)
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+ id AEC4680F0E; Fri,  1 May 2026 10:03:06 +0200 (CEST)
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D205180086
- for <u-boot@lists.denx.de>; Fri,  1 May 2026 09:56:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0B34F80086
+ for <u-boot@lists.denx.de>; Fri,  1 May 2026 10:03:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=sumit.garg@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 569F260142;
- Fri,  1 May 2026 07:56:54 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 87334C2BCB4;
- Fri,  1 May 2026 07:56:45 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id 54E5C406E3;
+ Fri,  1 May 2026 08:03:02 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 99D68C2BCB4;
+ Fri,  1 May 2026 08:02:54 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1777622214;
- bh=/jsow83Kos95Z9IZgZ30pnayvcHp/71GJNpIioAiqhk=;
+ s=k20201202; t=1777622582;
+ bh=HezqCioWUNnVRs4730KmMrCPEju2S/hmGKajnOnRE94=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=hamYDEdvKIIlQc89zedNgX5gO+yIfK3ToOIf96wyIEFSkE6nR6tQPJCGsCkvjtPBY
- QBgDxV86BvYFnevpu8uMn/2wutxXcAXRFyQ9QOYrkbAiXPwGwJi8rk9FM/Wp3PVc2x
- sAcyRoFYhnDXcrBU2cYrgpI9Pt7ZPrxg/L8/k/0JT3VaSUkjEKEu/vyBOKuFi7374q
- NvVE/UrIN3gHgVV8g2f5ZjU3AgkK2DM2SG1i0Y1ue/mpP311lIWLN86dH/ALFBCerO
- 19SVXrdvQV5u2N/sSYF7H/kpVUTmQaldiKUU1mlpGcMPCyId9+r7GJk2WPRgmlom0k
- +RkeIoAOk/KVw==
-Date: Fri, 1 May 2026 13:26:42 +0530
+ b=pZAbCyxBzIvR6qvP3YZUYdzgpjXI5Nm/1+ekoVq3jCXZcJGK4aJmqm67Iexmei3Du
+ RppyhH43by2XTJCkjK8o6naQorCO7myf/rAM39jgrME3e00JbwioSljj43cGnQyQci
+ QbwFT9zIVjYlWuzCOSlUrZW8fl683wWFgssfbTn/LKquHwWw3HLAuyAFINgl7tgJNH
+ rG9FtaNYZNVfFIn3tLA53Z+1H+AS1B9zi8hjiEvusOrrRd9PqE0/THoABm0Zy1huGL
+ 1wd5BzjDIsAPPZ+pXS7Gay00K4OjYHD/3edpilINWbl/2wxcvzDAzdyQzLA5pOKPmW
+ WVBTZs/dMdrGA==
+Date: Fri, 1 May 2026 13:32:51 +0530
 From: Sumit Garg <sumit.garg@kernel.org>
 To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io, Tom Rini <trini@konsulko.com>,
  Quentin Schulz <quentin.schulz@cherry.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Javier Tia <javier.tia@linaro.org>,
- Varadarajan Narayanan <quic_varada@quicinc.com>,
- Rasmus Villemoes <ravi@prevas.dk>,
+ Rasmus Villemoes <ravi@prevas.dk>, Simon Glass <sjg@chromium.org>,
+ Javier Tia <floss@jetm.me>,
  Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+ Varadarajan Narayanan <quic_varada@quicinc.com>,
  Javier Martinez Canillas <javierm@redhat.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>,
- =?iso-8859-1?Q?Jo=E3o?= Marcos Costa <joaomarcos.costa@bootlin.com>,
- Tien Fong Chee <tien.fong.chee@altera.com>,
  Richard Genoud <richard.genoud@bootlin.com>,
  Jan Kiszka <jan.kiszka@siemens.com>, David Lechner <dlechner@baylibre.com>,
  Casey Connolly <casey.connolly@linaro.org>,
- Simon Glass <simon.glass@canonical.com>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Christian Marangi <ansuelsmth@gmail.com>,
  Michael Walle <mwalle@kernel.org>,
  Sumit Garg <sumit.garg@oss.qualcomm.com>,
  Neil Armstrong <neil.armstrong@linaro.org>,
  Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
- Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>,
- Simon Glass <sjg@chromium.org>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Jerome Forissier <jerome.forissier@arm.com>
-Subject: Re: [PATCH v3 0/5] Add partition type GUID support for environment
-Message-ID: <afRcurpPhg4BAgP0@sumit-xelite>
-References: <20260419-type-v3-0-ec49acd6870e@oss.qualcomm.com>
- <aeYsA_UOFIg0BZOx@sumit-xelite>
- <cd81616a-0d04-4a3e-93a2-b8ab35093ea7@oss.qualcomm.com>
+ Jerome Forissier <jerome.forissier@arm.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>
+Subject: Re: [PATCH v4 7/8] configs: Enable partition type GUID for
+ QCS9100/QCM6490/QCS615 boards
+Message-ID: <afReKzicksgelbPI@sumit-xelite>
+References: <20260428-type-v4-0-b7051dc45a88@oss.qualcomm.com>
+ <20260428-type-v4-7-b7051dc45a88@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <cd81616a-0d04-4a3e-93a2-b8ab35093ea7@oss.qualcomm.com>
+In-Reply-To: <20260428-type-v4-7-b7051dc45a88@oss.qualcomm.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,83 +87,76 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Apr 27, 2026 at 10:19:30PM +0530, Balaji Selvanathan wrote:
+On Tue, Apr 28, 2026 at 01:01:49PM +0530, Balaji Selvanathan wrote:
+> Enable CONFIG_PARTITION_TYPE_GUID and configure SCSI environment
+> partition type GUID for QCS9100, QCM6490 and QCS615 configurations.
+> This allows these platforms to locate the environment partition
+> using GPT type GUID instead of UUID.
 > 
-> On 4/20/2026 7:07 PM, Sumit Garg wrote:
-> > On Sun, Apr 19, 2026 at 03:54:02PM +0530, Balaji Selvanathan wrote:
-> > > This series adds support for locating partitions using GPT partition
-> > > type GUID instead of unique partition UUID. This enables the saveenv
-> > > command to work with partitions identified by their type rather than
-> > > unique identifiers, providing flexibility for systems where partition
-> > > UUIDs may vary across devices but types remain constant.
-> > Why don't we rather rely on partition name/label instead? That can be
-> > common across platforms too. I would rather prefer a config fragment for
-> > eg. UFS based environment or eMMC based environment and so on.
-> > 
-> > -Sumit
+> Reviewed-by: Simon Glass <sjg@chromium.org>
+> Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+> ---
+> Changes in v4:
+> - Add type guid configs to QCS9100 defconfig
 > 
-> Hi Sumit,
+> Changes in v3:
+> - No changes
 > 
-> Using type GUIDs as they offer following advantages: they are standardized
-> across vendors (e.g., ChromeOS kernel GUID, Linux filesystem GUID) unlike
-> arbitrary partition names that vary by OEM or firmware version, they are
-> immutable and set at partition creation, making them more robust than
-> easily-modified partition names.
+> Changes in v2:
+> - Enable above new config in qcom_qcs615_defconfig and qcm6490_defconfig
+> ---
+>  configs/qcm6490_defconfig      | 4 ++++
+>  configs/qcom_qcs615_defconfig  | 4 ++++
+>  configs/qcom_qcs9100_defconfig | 3 ++-
+>  3 files changed, 10 insertions(+), 1 deletion(-)
 > 
+> diff --git a/configs/qcm6490_defconfig b/configs/qcm6490_defconfig
+> index b088367f86c..9560886a37a 100644
+> --- a/configs/qcm6490_defconfig
+> +++ b/configs/qcm6490_defconfig
+> @@ -16,3 +16,7 @@ CONFIG_DEFAULT_DEVICE_TREE="qcom/qcs6490-rb3gen2"
+>  
+>  CONFIG_FASTBOOT_BUF_ADDR=0xd8800000
+>  CONFIG_PHY_QCOM_QMP_COMBO=y
+> +
+> +CONFIG_ENV_IS_IN_SCSI=y
+> +CONFIG_ENV_SCSI_PART_USE_TYPE_GUID=y
+> +CONFIG_ENV_SCSI_PART_TYPE_GUID="bc0330eb-3410-4951-a617-03898dbe3372"
 
-That's fair, let's at least document the partition name used for
-environment in the defconfig such that it's easier for users to know
-that.
+These config options are common among targets, can you rather add an env
+related config fragment which can be included in all these defconfigs.
+
+Also, please add the partition name here as a comment to easily locate the
+partition.
 
 -Sumit
 
+> diff --git a/configs/qcom_qcs615_defconfig b/configs/qcom_qcs615_defconfig
+> index 27666a8129d..d0ffa567619 100644
+> --- a/configs/qcom_qcs615_defconfig
+> +++ b/configs/qcom_qcs615_defconfig
+> @@ -22,3 +22,7 @@ CONFIG_REMAKE_ELF=y
+>  CONFIG_TEXT_BASE=0x9fc00000
+>  
+>  CONFIG_FASTBOOT_BUF_ADDR=0xa1600000
+> +
+> +CONFIG_ENV_IS_IN_SCSI=y
+> +CONFIG_ENV_SCSI_PART_USE_TYPE_GUID=y
+> +CONFIG_ENV_SCSI_PART_TYPE_GUID="bc0330eb-3410-4951-a617-03898dbe3372"
+> diff --git a/configs/qcom_qcs9100_defconfig b/configs/qcom_qcs9100_defconfig
+> index 082106157bb..fbaf21952f2 100644
+> --- a/configs/qcom_qcs9100_defconfig
+> +++ b/configs/qcom_qcs9100_defconfig
+> @@ -11,6 +11,7 @@ CONFIG_REMAKE_ELF=y
+>  CONFIG_FASTBOOT_BUF_ADDR=0xdb300000
+>  CONFIG_DEFAULT_DEVICE_TREE="qcom/qcs9100-ride-r3"
+>  CONFIG_ENV_IS_IN_SCSI=y
+> -CONFIG_ENV_SCSI_PART_UUID="71cb9cd0-acf1-b6cb-ad91-be9572fe11a9"
+> +CONFIG_ENV_SCSI_PART_USE_TYPE_GUID=y
+> +CONFIG_ENV_SCSI_PART_TYPE_GUID="bc0330eb-3410-4951-a617-03898dbe3372"
+>  # CONFIG_ENV_IS_DEFAULT is not set
+>  # CONFIG_ENV_IS_NOWHERE is not set
 > 
-> > 
-> > > Patch 1 adds part_get_info_by_type_guid() function support
-> > > Patch 2 adds scsi_get_blk_by_type_guid() function support
-> > > Patch 3 adds support for partition type GUID based environment
-> > > Patch 4 enables partition type GUID configs for QCM6490 and QCS615
-> > > Patch 5 adds unit test for the partition type GUID lookup functionality
-> > > 
-> > > Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-> > > ---
-> > > Changes in v3:
-> > > - Addressed minor corrections in Patch 1 in part_get_info_by_type_guid function
-> > > - Refactor env_scsi_get_part and env_scsi_load functions based
-> > >    on the choice configs in Patch 3
-> > > - Add unit test for the partition type GUID lookup functionality in Patch 5
-> > > - Link to v2: https://lore.kernel.org/u-boot/20260109070912.4106466-1-balaji.selvanathan@oss.qualcomm.com/
-> > > 
-> > > Changes in v2:
-> > > - Compute blk_find_max_devnum(UCLASS_SCSI) only once in scsi_get_blk_by_type_guid()
-> > > - Introduce a Kconfig choice config to select between UUID-based
-> > > and type GUID-based partition lookup methods.
-> > > - Enable above new config in qcom_qcs615_defconfig and qcm6490_defconfig
-> > > - Link to v1: https://lore.kernel.org/u-boot/20260108064947.3237361-1-balaji.selvanathan@oss.qualcomm.com/
-> > > 
-> > > ---
-> > > Balaji Selvanathan (5):
-> > >        disk: Add partition lookup by type GUID functionality
-> > >        scsi: Add partition lookup by type GUID for SCSI devices
-> > >        env: scsi: Add support for partition type GUID based environment
-> > >        configs: Enable partition type GUID for QCM6490 and QCS615 boards
-> > >        test: dm: Add partition type GUID lookup test
-> > > 
-> > >   configs/qcm6490_defconfig     |  5 +++++
-> > >   configs/qcom_qcs615_defconfig |  5 +++++
-> > >   disk/part.c                   | 37 +++++++++++++++++++++++++++++++
-> > >   drivers/scsi/scsi-uclass.c    | 28 ++++++++++++++++++++++--
-> > >   env/Kconfig                   | 51 ++++++++++++++++++++++++++++++++++++-------
-> > >   env/scsi.c                    | 45 +++++++++++++++++++++++---------------
-> > >   include/part.h                | 21 ++++++++++++++++++
-> > >   include/scsi.h                | 11 ++++++++++
-> > >   test/dm/part.c                | 48 ++++++++++++++++++++++++++++++++++++++++
-> > >   9 files changed, 223 insertions(+), 28 deletions(-)
-> > > ---
-> > > base-commit: e3405917a1806971d9e72a94186b299f05581e1a
-> > > change-id: 20260419-type-c6a48a1c273d
-> > > 
-> > > Best regards,
-> > > -- 
-> > > Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-> > > 
+> -- 
+> 2.34.1
+> 
