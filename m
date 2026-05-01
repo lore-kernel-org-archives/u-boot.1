@@ -4,110 +4,102 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C502ECD13DE
-	for <u-boot@archiver.kernel.org>; Fri,  1 May 2026 01:37:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6CCDFF886F
+	for <u-boot@archiver.kernel.org>; Fri,  1 May 2026 02:10:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1594D8464D;
-	Fri,  1 May 2026 03:36:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=traverse.com.au
+	by phobos.denx.de (Postfix) with ESMTP id E5849839D5;
+	Fri,  1 May 2026 04:10:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=traverse.com.au header.i=@traverse.com.au header.b="Kb0ml6e4";
-	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="hlcRIgKf";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="bNWrM6pU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DEC8B84656; Fri,  1 May 2026 03:36:40 +0200 (CEST)
-Received: from fout-a5-smtp.messagingengine.com
- (fout-a5-smtp.messagingengine.com [103.168.172.148])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id B806783A91; Fri,  1 May 2026 04:10:20 +0200 (CEST)
+Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
+ [IPv6:2a00:1450:4864:20::62c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EB9CB8465A
- for <u-boot@lists.denx.de>; Fri,  1 May 2026 03:36:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=traverse.com.au
+ by phobos.denx.de (Postfix) with ESMTPS id 26C88803C6
+ for <u-boot@lists.denx.de>; Fri,  1 May 2026 04:10:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=matt@traverse.com.au
-Received: from phl-compute-02.internal (phl-compute-02.internal [10.202.2.42])
- by mailfout.phl.internal (Postfix) with ESMTP id 2AEFDEC00DE;
- Thu, 30 Apr 2026 21:36:38 -0400 (EDT)
-Received: from phl-frontend-04 ([10.202.2.163])
- by phl-compute-02.internal (MEProxy); Thu, 30 Apr 2026 21:36:38 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=traverse.com.au;
- h=cc:cc:content-transfer-encoding:content-type:content-type
- :date:date:from:from:in-reply-to:in-reply-to:message-id
- :mime-version:references:reply-to:subject:subject:to:to; s=fm1;
- t=1777599398; x=1777685798; bh=fJEJTV1VESJpu4pWYR55pfygE5d5TX+v
- cLpNffrTK/Q=; b=Kb0ml6e4uF43qF3JldN4yeckpvCxO90RkDpp+rSSMzkRyFJR
- BJdVosTYHYuhjjizJRKDqMAVCPml6+4szo+he1cPBIhkbv75gkus2xEDBhu9zC51
- fTybDu3x8VGVlwmb9IsaadnodY4zMDKgjh3/niWk7DaJEB/O2ssOkd3z4YPpcBIp
- nLeXrDM8FrU65v2MgTUxvR/VFo29uR0HFJz/HJfug8lpy/Qg6uJIlcOh5JKr6bUu
- GzUvbv3o9IOlOOOtbgi0omvUs5kBeFNIkbpnVjshCOxYyqmL8STIz94pLbZftVZo
- eVE1LEYcvYkoGPt15zqIOCtqzBjFdJ8E39yunQ==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- messagingengine.com; h=cc:cc:content-transfer-encoding
- :content-type:content-type:date:date:feedback-id:feedback-id
- :from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:subject:subject:to:to:x-me-proxy
- :x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=1777599398; x=
- 1777685798; bh=fJEJTV1VESJpu4pWYR55pfygE5d5TX+vcLpNffrTK/Q=; b=h
- lcRIgKfByDjuFZn8KqXc3K8mHcCY26Ql74Gt2O4RrF9RpUkPwUyneIWkhvdbpEIL
- z1mED0mBao6vzi7zfMqltJfc5bh0MooLbPa3Hu2+T0Z2JT1F1tk+zC0qidfiMS72
- 1a2vywRL/8ayQI2+62WfPhLFeLpDxMpNsv5Vhhgu7/M8BK6pYm5ljXpFdzbT3HY9
- jYOj8zbgrtBNzE5U2BsKi2Ch/Sh1MEFmzlsUnHje6nkXjHoxJ3eUE8eWp8zY6XTb
- eP6NVNbWLXtX8jqL8Py5ogYXhQkfQddmvxgZOH/SlxbmpSyohSplbSIPZFEZx1Gm
- hBtOnIcdw83U676xAihBw==
-X-ME-Sender: <xms:pgP0aSCsa2ZkxURdLZbouxy1zNUb_TqO0vxsdfGcmll33btEmi5ODQ>
- <xme:pgP0afkKcvad8JzE_Ir4kBzuBUWVnHtRCFb_qCzmjwdUUdunRA3Sn-6JgRgIYTfBV
- 61CO6iwJBv3JdqBLW7OFhwjGCvR4_L7yC44q5xIhxdVdqJXkHL3-5cd>
-X-ME-Received: <xmr:pgP0aQM6FMzKR5_2rXRO5XVNf2hw_dy4Ix7h0M0qXAibHK8XsG4LMEmyrRZsfKGkr4ZFiE9oIObhBrVPrwmXOt4UZW413zZUzHxQnHlA54NE5O3BQmr7QsTe>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefhedrtddtgdekkeeltdcutefuodetggdotefrod
- ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpuffrtefokffrpgfnqfghnecuuegr
- ihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfjug
- hrpefhfffugggtgffkfhgjvfevofesthejredtredtjeenucfhrhhomhepofgrthhhvgif
- ucfotgeurhhiuggvuceomhgrthhtsehtrhgrvhgvrhhsvgdrtghomhdrrghuqeenucggtf
- frrghtthgvrhhnpeffvddthfeklefffffgjeekfeetueehhfeigfffgfekudeujeehffet
- ffeltefgheenucevlhhushhtvghrufhiiigvpedvnecurfgrrhgrmhepmhgrihhlfhhroh
- hmpehmrghtthesthhrrghvvghrshgvrdgtohhmrdgruhdpnhgspghrtghpthhtohepuddt
- pdhmohguvgepshhmthhpohhuthdprhgtphhtthhopehmrghtthesthhrrghvvghrshgvrd
- gtohhmrdgruhdprhgtphhtthhopehluhhkrghsiidrtgiivggthhhofihskhhisehthhgr
- uhhmrghtvggtrdgtohhmpdhrtghpthhtohepshhjghestghhrhhomhhiuhhmrdhorhhgpd
- hrtghpthhtohepuhdqsghoohhtsehlihhsthhsrdguvghngidruggvpdhrtghpthhtohep
- mhhitghhrghlrdhsihhmvghksegrmhgurdgtohhmpdhrtghpthhtohepmhgrrhgvkhdrvh
- grshhuthesmhgrihhlsghogidrohhrghdprhgtphhtthhopehprggumhgrrhgrohdrsggv
- ghgrrhhisegrmhgurdgtohhmpdhrtghpthhtohepphgvnhhgrdhfrghnsehngihprdgtoh
- hmpdhrtghpthhtohepqhhuvghnthhinhdrshgthhhulhiisegthhgvrhhrhidruggv
-X-ME-Proxy: <xmx:pgP0ac_cgf7RCYJYq4TmllBnLSZIAzekpyxfYpeCBjQvCZgDbfXLaA>
- <xmx:pgP0aSFnQa6h6OK-Q-rjtz55tYxWJmQXBZ1F4m5MRKRl0ScOlQ9e3A>
- <xmx:pgP0abifXmfH5qxT8OZSd3I224siflFGAM8tBpRSVjLZP2HURIix4w>
- <xmx:pgP0aXsT5F3010vfNu1LxHpWECLI0atjthuRDM4v2gOB2kbkFky_Jg>
- <xmx:pgP0acfQROgpD42IDj9XnC0PIVox78jajKP1hSleI7ZsGgKVmZCnaFeq>
-Feedback-ID: i426947f3:Fastmail
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Thu,
- 30 Apr 2026 21:36:35 -0400 (EDT)
-From: Mathew McBride <matt@traverse.com.au>
-Date: Fri, 01 May 2026 11:36:09 +1000
-Subject: [PATCH v3 8/8] configs: ten64: add USB start to preboot
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-bba0dde4f43so230187466b.3
+ for <u-boot@lists.denx.de>; Thu, 30 Apr 2026 19:10:18 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1777601417; cv=none;
+ d=google.com; s=arc-20240605;
+ b=KWpraQRk+VhuV2OGN2vkv5R4lBSLsU05zCxnYKstDSZr88PvRSDCjKznHEb66LnJSv
+ J8tkR6BycgNBZtN04p1LF7vPr9of5wGAU3MXTnN6178zgOUSCO7hoz2W73lWtXJA8Fts
+ 16qJrCG4JdtVipvcC0Yf2LC9NrCBacKb5uRpfnXU/pqRT6IVVzsgqu7U5sDZfbPu3ynb
+ mLVWq9kgrxKnQzPPwIc12+yz/44trO7K6ctlo2dxyGMppcztZndzH8w0tGJIVBndWfJm
+ pCRfJRP41BL0fAZW2maBVZv6D+Y2lTyLEK/yKnhpzA5Dyg6FfkjPswTU1ZJYSlRDg4ne
+ 4kaA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=Hr6PqkjodZUo/Kpx6fFyi4zc2VPVxvpXbqf60RmrZ9E=;
+ fh=Ex+UjVdmp8EUah9YaFeOUBIKBBH1Wfq7kqn9NtJ8a0k=;
+ b=JufuUZvTaYVMeLkjrY9XpKvmi1mWvY1XxuG/eUPa3qoWOzCOrQJUqFkD6EJ7Lymkkt
+ 7oTc3T6lsHnlfKwAwnggnRvcoreBzyoIFdnb5rsuZmpEmmDHx9CjnTtfO9eLVSS+88gH
+ Wnu5SLAWJBLcNEForVpnRdgcs7nn9YMsd0ydets6OlVLB4iv0okEc/N964g6DYvDYC3m
+ fpN1aWClagO9+NmHxNTr8F19wZ1p7uw9NXerLVZALu3InCdHNWM9m+SNpZh+BufziRLe
+ KdMdaNojsLraFekA098BQHp+JGfVDav+7mar44Vg13lw7MDsMqjoY13xPcyA+JDvY4m1
+ r6vg==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1777601417; x=1778206217; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=Hr6PqkjodZUo/Kpx6fFyi4zc2VPVxvpXbqf60RmrZ9E=;
+ b=bNWrM6pUyXQpodzYDpntASkha5J7Mp+hYtVSTzDyAyIuXBQeQVKwdZ1YvPuvQ/lgCx
+ e2dnoYWepMGIdpz8ydYOirGdibHgRge/Hve0O+/dKuSrrKuFKHFsnSR4+ctZcrRtxxVP
+ YQwIlOZUu+OJhOm5vScWsjFVxFKYluZfBQibo=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1777601417; x=1778206217;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Hr6PqkjodZUo/Kpx6fFyi4zc2VPVxvpXbqf60RmrZ9E=;
+ b=sN5dkRbLascwVcgysiu60IpXZZRa7SS1Cr6PvDXkMTNBA+feQ6MX3mGhC4qiAVXsTU
+ L8VtD5UN4Lq+aZZpW9mWIEBxgKDdnl+NvUYmw4qNsfSC8nyhgt11G9Co9MZLupj9P0Oc
+ UKNLKzo6+AuYNB7093avCZCtrAmfuXzsv3HtBXR5gGtgTMWqf8UfMvXe7+4bliO319Oc
+ S8vBlWKZfAtNPEqUHICThyN3ceOftCfo0QCdLxciGu8T1qKwEZopQxdSFDiNBnCYCyGU
+ SddCwiiOb5Mf+PI4u7ALbLeJP97CYVnBAYJ15AnGGoXTVF8Guqkt8bgpTT7mcJ7NK/9a
+ KVLg==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ9NInBH04a7FOo4mg3gPNiI1emOfwXQa1ORq3jpeMbJOO/gUpaEQifw4fvzRTqZykSyDthVfOY=@lists.denx.de
+X-Gm-Message-State: AOJu0YwwyMXosh3JtTCw6/VSEQ0zkZxlNs+FyiFhQHCuVTZ1HYSsGuLT
+ OrAWf6kJhUg0JjvzJ6MjtFO9V3Wq9Xw1Gt79/xQo3/bAB9r2iy5ahP/6EmH2nrT2aXQ0KqTaOMC
+ Y86xUo6X2v3Sf8qJLToYg8LHOiZlVpnJiDtxKxFwE
+X-Gm-Gg: AeBDiev9PExHLLPRDKpdyu7xb5w6D9PJp4Ax+FyCj5dTmg2MwIkkiPFuWNV4K32XB0l
+ t2AdcYVMneCtNEzTRWfT0+NK2OgkZlDEyfrTUqFVTbQHsetxQ8dxGLarwdTBy6zYByJwqtM5Mes
+ NPyW+X44jkuaOPKJ8HTMQ6tECfM4EYXekXiHwm6KEDatNYfsYVp/ySCnsiDMPBl2U2YOIlgQ7xj
+ zC8xnsTCDIW8LlbLUNxlbJvsJGycQqDfhQ26rIVjNgmAiUCWT7oPN4W5+iOT+mctcVm8FCXgSmV
+ ihbmrhoAo51ww3oo
+X-Received: by 2002:a17:907:7b8d:b0:ba7:cc67:488b with SMTP id
+ a640c23a62f3a-bbb68d11d42mr304769366b.5.1777601417544; Thu, 30 Apr 2026
+ 19:10:17 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260501-ten64-add-usb5744-v3-8-234c5b2f8c6f@traverse.com.au>
-References: <20260501-ten64-add-usb5744-v3-0-234c5b2f8c6f@traverse.com.au>
-In-Reply-To: <20260501-ten64-add-usb5744-v3-0-234c5b2f8c6f@traverse.com.au>
-To: u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, 
- Lukasz Czechowski <lukasz.czechowski@thaumatec.com>, 
- Quentin Schulz <quentin.schulz@cherry.de>, 
- Michal Simek <michal.simek@amd.com>, Marek Vasut <marek.vasut@mailbox.org>, 
- Padmarao Begari <padmarao.begari@amd.com>, Peng Fan <peng.fan@nxp.com>, 
- Simon Glass <sjg@chromium.org>, Mathew McBride <matt@traverse.com.au>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1777599366; l=851;
- i=matt@traverse.com.au; s=20260115; h=from:subject:message-id;
- bh=TW8BQ06+/ch9UTnBYlGXF6bWnVpV0hsLV+JyBgSCJFc=;
- b=HcFlJkCHHJXzYhj+tptXxNgp4hgf3bt3MmjJxO0CO5oPMjnSiz4MzN8PpCuSFSyzbT8lGETJE
- AUqFdS0htpRAWdpWk92xRrVSJpm4eT9bA/lAB6gXp5e+wPgnA6aU5rd
-X-Developer-Key: i=matt@traverse.com.au; a=ed25519;
- pk=SM+aGm9Y2fPJ2prfH/b5lab73fTBrKL5UsJwdzv7Pbg=
+References: <20260423154536.768603-1-sergio.prado@e-labworks.com>
+ <20260423154536.768603-2-sergio.prado@e-labworks.com>
+ <491f7007-0574-4fa5-897c-59002c7dcaf6@cherry.de>
+In-Reply-To: <491f7007-0574-4fa5-897c-59002c7dcaf6@cherry.de>
+From: Simon Glass <sjg@chromium.org>
+Date: Thu, 30 Apr 2026 20:10:05 -0600
+X-Gm-Features: AVHnY4J1_TdfrHfMLqE-MJDsfQ3xPXo5Zlac-bmK6dX8-txvPkI3b3UJ9_js4v8
+Message-ID: <CAFLszThW0u0SrntCfXFi083petNmszVmSjNgXFc87a38tHyx1Q@mail.gmail.com>
+Subject: Re: [PATCH v3 1/2] binman: bintool: add extra_env parameter to run_cmd
+To: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: Sergio Prado <sergio.prado@e-labworks.com>, u-boot@lists.denx.de,
+ trini@konsulko.com, 
+ alpernebiyasak@gmail.com, ilias.apalodimas@linaro.org, 
+ marek.vasut+renesas@mailbox.org, sughosh.ganu@arm.com, 
+ wolfgang.wallner@at.abb.com, bb@ti.com, y.moog@phytec.de, xypron.glpk@gmx.de, 
+ jerome.forissier@arm.com, afd@ti.com, Wojciech.Dubowik@mt.com
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -124,35 +116,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-There are two reasons why the USB stack needs to be
-started before handing to bootflow or other boot
-sequences:
+Hi Quentin,
 
-1. When a USB hub is present on the board, we need to
-do the required sequences to make it usable
+On Mon, 27 Apr 2026 at 03:48, Quentin Schulz <quentin.schulz@cherry.de> wrote:
+>
+> Hi Sergio,
+>
+> On 4/23/26 5:45 PM, Sergio Prado wrote:
+> > [You don't often get email from sergio.prado@e-labworks.com. Learn why this is important at https://aka.ms/LearnAboutSenderIdentification ]
+> >
+> > Add an optional extra_env dict parameter to run_cmd() and
+> > run_cmd_result(). When provided, the key/value pairs are merged into
+> > the subprocess environment for that invocation only, leaving the parent
+> > process environment unchanged.
+> >
+> > This might be needed by bintools that must inject environment variables
+> > into specific tool calls without polluting the global environment.
+> >
+>
+> Yeah, I'm not convinced this is useful.
+>
+> We would need to propagate this new variable to whatever calls those
+> methods as well. And it quickly balloons.
+>
+> Just mock the environment with
+>
+> with unittest.mock.patch.dict('os.environ', {'MYVAR': 'myval'}): like in
+> testFitSignPKCS11Object for example?
 
-2. To make USB storage devices 'visible' to bootflow
-without further intervention
+While we can mock the environment, it becomes confusing as the mocks
+pile up. The code path in the test effectively differs from the actual
+code path, since the mock is overriding something that it assumes the
+underlying code does, so any changes can cause strange errors.
 
-Signed-off-by: Mathew McBride <matt@traverse.com.au>
----
- configs/ten64_tfa_defconfig | 2 ++
- 1 file changed, 2 insertions(+)
+The normal approach with binman tests is to pass through the settings
+they want. See for example _DoTestFile()
 
-diff --git a/configs/ten64_tfa_defconfig b/configs/ten64_tfa_defconfig
-index 26d41b3f366..7c1aaabfa4e 100644
---- a/configs/ten64_tfa_defconfig
-+++ b/configs/ten64_tfa_defconfig
-@@ -90,6 +90,8 @@ CONFIG_DM_SPI=y
- CONFIG_FSL_DSPI=y
- CONFIG_FSL_QSPI=y
- CONFIG_TPM_ATMEL_TWI=y
-+CONFIG_USE_PREBOOT=y
-+CONFIG_PREBOOT="usb start"
- CONFIG_USB=y
- CONFIG_USB_ONBOARD_HUB=y
- CONFIG_USB_XHCI_HCD=y
+If you look through the tests, there is almost no mocking despite the
+large amount of functionality provided by Binman.
 
--- 
-2.52.0
+>
+> I'm also very skeptical of the need for binman to *set* environment
+> variables to setup openssl.
+>
+> Look at what's been done for testFitSignPKCS11Object, we externally
+> configure openssl and softhsm so that binman doesn't have to know about
+> it. This avoids having to play smart and adding a bunch of new
+> variables. Is it possible to implement something like that for the x509
+> certificates? For FIT, we do use fit,engine,
+> fit,engine-keydir/key-name-hint with mkimage to (possibly) use pkcs11,
+> custom openssl engines, etc..
+>
+> Also, I don't think we should decide for the user whether they are
+> forced to use a provider or an engine based on the presence of the
+> provider? just let them configure openssl to use the one they want
+> externally?
 
+Fair enough. I wonder how the tests deal with something which is
+externally configured, though?
+
+Regards,
+Simon
