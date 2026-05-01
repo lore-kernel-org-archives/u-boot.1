@@ -4,96 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2EEECD3424
-	for <u-boot@archiver.kernel.org>; Fri,  1 May 2026 14:43:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D479CCFA13
+	for <u-boot@archiver.kernel.org>; Fri,  1 May 2026 14:46:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 072D580F0E;
-	Fri,  1 May 2026 16:43:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 7C5C880F0E;
+	Fri,  1 May 2026 16:46:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=seznam.cz
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="GXTMFwzR";
+	dkim=pass (2048-bit key; secure) header.d=seznam.cz header.i=@seznam.cz header.b="ANTim1dS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0788C83E36; Fri,  1 May 2026 16:43:44 +0200 (CEST)
-Received: from mail-oa1-x2c.google.com (mail-oa1-x2c.google.com
- [IPv6:2001:4860:4864:20::2c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id A218583A91; Fri,  1 May 2026 15:05:31 +0200 (CEST)
+Received: from mxd-1-a0f.seznam.cz (mxd-1-a0f.seznam.cz
+ [IPv6:2a02:598:128:8a00::1000:a0f])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B7CC080086
- for <u-boot@lists.denx.de>; Fri,  1 May 2026 16:43:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BA45B80086
+ for <u-boot@lists.denx.de>; Fri,  1 May 2026 15:05:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=seznam.cz
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2c.google.com with SMTP id
- 586e51a60fabf-41576c5c01cso1071872fac.3
- for <u-boot@lists.denx.de>; Fri, 01 May 2026 07:43:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1777646620; x=1778251420; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=/Zn8O9Y8GfjkNa0jkaflwc2/RKa/lZ6spcylb/q9euc=;
- b=GXTMFwzR33SrmM09q1J2sIhc6yB/YbDvABupbd3wNm50CyN4D6Fjc+LtJJfJqHaAiV
- R+J8QY3QJvGLYU9z/DLlB4tzBsIwjGOMbxg254Uz6/uOwA6u5v/vdUtCBNYWJC0eUviI
- go7zRwWMUybiaYgw9E3UVS0lqSOGtffJ7ggWE=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777646620; x=1778251420;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=/Zn8O9Y8GfjkNa0jkaflwc2/RKa/lZ6spcylb/q9euc=;
- b=M+0yhq2XDXXNlKryYQx14BJRaGA+Lfd4da0Azus6OYVtJg1zWWEhr33WDhHVbnSfkq
- ZGtxRvA4Kc/0fx1Pjwi8Q69Wq9bBlqRG3yn6hWmwflTCeXYK7mSLlbfL8OEPZM4zr37o
- tsKS7GrMlX3lGpRfdVPPfHnAqex+LXG9tFdj6qnWxuXHRfaLsAk+Ck1OZIodX/WDNEBl
- sdpuUJEo/kR/U0kQBM/G4ZbnCjzabXPYOEnDoxGaHeaicIMYqfChzD7KysUa4vesuPBa
- 9itjy+QJmKK7Y9Vj4rSpDOQVQZMqo1b/zYZuCKozvLQZ23izEBlHy1tIr+s5CG6rgpR4
- FPnQ==
-X-Gm-Message-State: AOJu0YxFp2rrJFdFKPuTv5r2yTpwfae46+6+ww+IVpq6cf5OtIuovkwM
- zLyMvou39UO0yxAQCs7ORiJvi1vzNcJ7YSJraa77stgzdFQxJpbHtZ32VN2i5NIA3OgkpLoNdR/
- FX02I+FHcjnlg
-X-Gm-Gg: AeBDievpYmVeOwwFeF++AdZRlz9lVQmV+zbZnvqKGwLYkXJrJV+wrvHZurvlazwK9wd
- LRFNzjCrwV25accFgOuLCA8sTJlg+u5Vqt4R5robfy2ON0jcAzgXstZAhHKV6OmyVAYyXVUYjVM
- ju7z+nPh2Rx31l5bGrTvnpM8Tr7bgdIyDfMG+X0/z74JT2olUNIz50Pc9ZLQcX8Obw4tf+VvJ2V
- G+neQymN6cFE2zuM2exq2uE8W1ysLnmdAfwqInHQp10fVBnw0E5UC1jolXCr8VM7x1y1S7rJnMQ
- vi0XHT6LGFqya5eD81Aey1wu9NqIIiAyG5fQCLadMjCLTa5NPUGpqZMyIMVttmU7tctmX5Y2js7
- 3zCPiysM64o03BoIMfddKliCG3oryMTZaNM2hPbUhC1kxRMjKKV+cMVDA80ZbEkMal8OmTqYMt2
- 8mbpopuhGklss/YsNfc1IhASbLN75TcweVxTnED14/gIOT9hzBaNT6UvRtsL+Rbbr+8odQGxcc4
- IGzetXZhxCiH63ic1R95b3tuwA8Z/NgazTzEGgx0XKeg23JExm0LjKLxTDLgw==
-X-Received: by 2002:a05:6870:a0ab:b0:42f:f390:d7 with SMTP id
- 586e51a60fabf-43433ba1777mr4275588fac.21.1777646620403; 
- Fri, 01 May 2026 07:43:40 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
- [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-43454d53a55sm2848401fac.16.2026.05.01.07.43.38
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 01 May 2026 07:43:39 -0700 (PDT)
-Date: Fri, 1 May 2026 08:43:36 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Parvathi Pudi <parvathi@couthit.com>
-Cc: u-boot <u-boot@lists.denx.de>, Maarten Brock <Maarten.Brock@sttls.nl>,
- kory maincent <kory.maincent@bootlin.com>,
- Markus Schneider-Pargmann <msp@baylibre.com>,
- sbellary <sbellary@baylibre.com>,
- romain gantois <romain.gantois@bootlin.com>,
- pratheesh <pratheesh@ti.com>, j-rameshbabu <j-rameshbabu@ti.com>,
- praneeth <praneeth@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>,
- srk <srk@ti.com>, rogerq <rogerq@ti.com>,
- danishanwar <danishanwar@ti.com>, m-malladi <m-malladi@ti.com>,
- krishna <krishna@couthit.com>, mohan <mohan@couthit.com>,
- pmohan <pmohan@couthit.com>, basharath <basharath@couthit.com>
-Subject: Re: [PATCH v3] board: ti: am335x: Conditional MDIO PAD configuration
- instead of static for AM335_ICE
-Message-ID: <20260501144336.GE1614990@bill-the-cat>
-References: <20260422123353.2902537-1-parvathi@couthit.com>
- <20260430211948.GA1717275@bill-the-cat>
- <239785101.1054803.1777630782561.JavaMail.zimbra@couthit.local>
+ spf=pass smtp.mailfrom=Michael.Srba@seznam.cz
+Received: from email.seznam.cz by smtpc-mxd-5f4d8d5f6f-lmwqj
+ (smtpc-mxd-5f4d8d5f6f-lmwqj [2a02:598:128:8a00::1000:a0f])
+ id 7573546a2e7d000374da9834; Fri, 01 May 2026 15:04:41 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=seznam.cz; s=szn1;
+ t=1777640681; bh=h9ccC0VqLVcxOfYvfbKVB0EExFie/lKMDAtMK1j/jS4=;
+ h=Message-ID:Date:MIME-Version:User-Agent:Subject:To:Cc:
+ Content-Language:From:Content-Type:Content-Transfer-Encoding;
+ b=ANTim1dSnF6b7ZrVAV39XMp4F+SoAqqByhOI5uZEqPEdKNojLKIpEeD8Di/0wSeQo
+ JISjjxSEEeA2+1Unh/wtctsc9sSEXYWt6mwk2Rp4hJihyOTIzNddChgQ9Wm6u+DIWQ
+ whmrYg37gsvOlYLZW2Q9aXlECSrgknx6V8p9FIR/Mf8pLPTl9t8+nvHMH3FLqHJMEe
+ SbWHYxPZzLHEeRfEV9DF0v9zaVi6JOaPjvstPZ+QAiON9j34w4NS5/pXZTLp6lg0tm
+ 9CimstdVjemOYBkVC/iwHJjEzgHvOh7clvzbvxIFhSG8lqlnnS5kgKXvBFl94E800q
+ devCpWaoG1/sg==
+Received: from [192.168.0.240] (ip-111-27.static.ccinternet.cz
+ [147.161.27.111])
+ by smtpd-relay-6597cc8696-j2tv7 (szn-email-smtpd/2.0.72) with ESMTPA
+ id a8dd897b-e2ac-40f1-99ec-aa162094c0bd;
+ Fri, 01 May 2026 15:04:24 +0200
+Message-ID: <425e0586-a8f3-4852-88d8-d770d4afd955@seznam.cz>
+Date: Fri, 1 May 2026 15:04:22 +0200
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="hvXMf2/1/L5tMU8Z"
-Content-Disposition: inline
-In-Reply-To: <239785101.1054803.1777630782561.JavaMail.zimbra@couthit.local>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 11/11] dts: add u-boot specific sdm845 .dtsi and a
+ .dtsi for shift-axolotl
+To: Sumit Garg <sumit.garg@kernel.org>
+Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io, Tom Rini
+ <trini@konsulko.com>, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@arm.com>,
+ Anshul Dalal <anshuld@ti.com>, Peng Fan <peng.fan@nxp.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Andrew Davis <afd@ti.com>,
+ Hrushikesh Salunke <h-salunke@ti.com>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>, Ye Li <ye.li@nxp.com>,
+ Andre Przywara <andre.przywara@arm.com>,
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>, Dhruva Gole <d-gole@ti.com>,
+ Kaustabh Chakraborty <kauschluss@disroot.org>,
+ Jerome Forissier <jerome.forissier@arm.com>, Heiko Schocher
+ <hs@nabladev.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Lukasz Majewski <lukma@denx.de>,
+ Mateusz Kulikowski <mateusz.kulikowski@gmail.com>,
+ Dinesh Maniyam <dinesh.maniyam@altera.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Michal Simek <michal.simek@amd.com>, Yao Zi <me@ziyao.cc>,
+ Peter Korsgaard <peter@korsgaard.com>,
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Casey Connolly <casey.connolly@linaro.org>,
+ Tingting Meng <tingting.meng@altera.com>,
+ Tien Fong Chee <tien.fong.chee@altera.com>, Alice Guo <alice.guo@nxp.com>,
+ George Chan <gchan9527@gmail.com>,
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
+ Alexey Charkov <alchark@gmail.com>, Ronald Wahl <ronald.wahl@legrand.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>
+References: <20260426-qcom_spl-v4-0-8cf4133ff883@seznam.cz>
+ <20260426-qcom_spl-v4-11-8cf4133ff883@seznam.cz>
+ <afRXvbwdCbz_TQeb@sumit-xelite>
+Content-Language: en-US
+From: Michael Srba <Michael.Srba@seznam.cz>
+In-Reply-To: <afRXvbwdCbz_TQeb@sumit-xelite>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Mailman-Approved-At: Fri, 01 May 2026 16:46:21 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -111,61 +109,55 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---hvXMf2/1/L5tMU8Z
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
 
-On Fri, May 01, 2026 at 03:49:42PM +0530, Parvathi Pudi wrote:
-> Hi,
->=20
-> > On Wed, Apr 22, 2026 at 06:03:03PM +0530, Parvathi Pudi wrote:
-> >=20
-> >> This patch removes the static MDIO pinmux configuration from
-> >> rmii1_pin_mux[] and instead configures the MDIO pins conditionally
-> >> during board_init(). Previously, the MDIO_CLK and MDIO_DATA pins
-> >> were always configured for CPSW in mux.c, which could lead to
-> >> unnecessary pin ownership and conflicts in scenarios where CPSW
-> >> is not used.
-> >>=20
-> >> With this change, the MDIO pins are configured only when required,
-> >> ensuring that CPSW Ethernet functionality in U-Boot remains unaffected.
-> >> This approach keeps Ethernet boot behavior intact and provides cleaner
-> >> separation between CPSW and other Ethernet use cases.
-> >>=20
-> >> Reviewed-by: Markus Schneider-Pargmann (TI) <msp@baylibre.com>
-> >> Signed-off-by: Parvathi Pudi <parvathi@couthit.com>
-> >=20
-> > This leads to failure to build on:
-> > am335x_evm_spiboot am335x_hs_evm am335x_hs_evm_spi am335x_hs_evm_uart
-> >=20
->=20
-> We tested the patch locally with the mentioned defconfigs (am335x_evm_spi=
-boot,
-> am335x_hs_evm, am335x_hs_evm_spi, am335x_hs_evm_uart), and we get the fol=
-lowing
-> warning:
->=20
-> =E2=80=98rmii1_mdio_pin_mux=E2=80=99 defined but not used [-Wunused-varia=
-ble]
->=20
-> Are you referring to this warning or do you see any other build errors?
+On 5/1/26 09:35, Sumit Garg wrote:
+> On Sun, Apr 26, 2026 at 01:26:13AM +0200, michael.srba@seznam.cz wrote:
+>> From: Michael Srba <Michael.Srba@seznam.cz>
+>>
+>> The board .dtsi just includes the SoC-specific .dtsi, which
+>> adds bootph-all markings to upstream dts nodes which are
+>> needed in SPL.
+>>
+>> Signed-off-by: Michael Srba <Michael.Srba@seznam.cz>
+>> Reviewed-by: Simon Glass <sjg@chromium.org>
+>> ---
+>>   arch/arm/dts/sdm845-shift-axolotl-u-boot.dtsi |  2 ++
+>>   arch/arm/dts/sdm845-u-boot.dtsi               | 16 ++++++++++++++++
+>>   2 files changed, 18 insertions(+)
+>>
+>> diff --git a/arch/arm/dts/sdm845-shift-axolotl-u-boot.dtsi b/arch/arm/dts/sdm845-shift-axolotl-u-boot.dtsi
+>> new file mode 100644
+>> index 00000000000..d41210ab23a
+>> --- /dev/null
+>> +++ b/arch/arm/dts/sdm845-shift-axolotl-u-boot.dtsi
+>> @@ -0,0 +1,2 @@
+>> +// SPDX-License-Identifier: GPL-2.0
+>> +#include "sdm845-u-boot.dtsi"
+>> diff --git a/arch/arm/dts/sdm845-u-boot.dtsi b/arch/arm/dts/sdm845-u-boot.dtsi
+>> new file mode 100644
+>> index 00000000000..b029264555b
+>> --- /dev/null
+>> +++ b/arch/arm/dts/sdm845-u-boot.dtsi
+>> @@ -0,0 +1,16 @@
+>> +// SPDX-License-Identifier: GPL-2.0
+>> +&gcc {
+>> +	bootph-all;
+>> +};
+>> +
+>> +&usb_1_hsphy {
+>> +	bootph-all;
+>> +};
+>> +
+>> +&usb_1_dwc3 {
+>> +	bootph-all;
+>> +};
+>> +
+>> +&rpmhcc {
+>> +	bootph-all;
+>> +};
+> Can we have these DT overrides posted to upstream kernel board DTS?
+fwiw it probably belongs in SoC dts, since there's nothing board specific
+about it, but yes it should eventually go upstream, I just wanted to have
+a self-contained patchset that doesn't need to wait for that + next sync
+> -Sumit
 
-Yes, warnings are treated as errors by CI and so must be fixed before
-being applied.
-
---=20
-Tom
-
---hvXMf2/1/L5tMU8Z
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCafS8FQAKCRAr4qD1Cr/k
-CgGvAP962djUXAmgjXqY1m7G79FfIKx1+BHfkgGBOLRi2gJ6hAEA9Zleske/a6Ur
-uOCK81Ol4YGR4nque6NOXXxt/daYcwA=
-=V80b
------END PGP SIGNATURE-----
-
---hvXMf2/1/L5tMU8Z--
