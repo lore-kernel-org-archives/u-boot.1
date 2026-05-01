@@ -4,55 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7704ECD3423
-	for <u-boot@archiver.kernel.org>; Fri,  1 May 2026 16:27:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9017ECCFA13
+	for <u-boot@archiver.kernel.org>; Fri,  1 May 2026 22:28:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7E5B5803C6;
-	Fri,  1 May 2026 18:27:12 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=siemens.com
+	by phobos.denx.de (Postfix) with ESMTP id 7D9CB840D8;
+	Sat,  2 May 2026 00:28:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=siemens.com header.i=alexander.sverdlin@siemens.com header.b="g3/0MlVK";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="EEWg5dz2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C8DAD80F0E; Fri,  1 May 2026 18:27:10 +0200 (CEST)
-Received: from mta-64-225.siemens.flowmailer.net
- (mta-64-225.siemens.flowmailer.net [185.136.64.225])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id D49B4841D7; Sat,  2 May 2026 00:28:19 +0200 (CEST)
+Received: from mail-qk1-x72c.google.com (mail-qk1-x72c.google.com
+ [IPv6:2607:f8b0:4864:20::72c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 979CC80086
- for <u-boot@lists.denx.de>; Fri,  1 May 2026 18:27:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A8B7C83693
+ for <u-boot@lists.denx.de>; Sat,  2 May 2026 00:28:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=siemens.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=alexander.sverdlin@siemens.com
-Received: by mta-64-225.siemens.flowmailer.net with ESMTPSA id
- 202605011627084ee4ed698b000207c0 for <u-boot@lists.denx.de>;
- Fri, 01 May 2026 18:27:08 +0200
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm2;
- d=siemens.com; i=alexander.sverdlin@siemens.com;
- h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
- bh=ErLmqOVdfZEih4PmNHAab6evMJTfUfsU+J2b/qFzdOE=;
- b=g3/0MlVKU+AK5qK0I8uRRH5sipAKw1fR5yIpogwM5gEtHMoLdGgTNL8+pbVWJov/B+/Qgr
- SFsHtjdVgr1yBtvZA1wST5zYFveZCcblwrfNs6BpZdfM98VspjCQcAwaqh5jfWbRbA9ZPbFc
- r03O65rM5x+yUtDAg6lC1zinL1MLAUex4YENbtOIy87I8bJlefOhZEsYUpCLDjQ6twJE8XqO
- GdYw7s7HLeSb0qP3dwUeLDyxS/rLpaQ2fvkq05Mt9u9CrS646C4bMBgsSWmJfcpIqO6kzY0u
- NHKAzee9XQr9ktU/fabZ4mARmAQh06Fqg7pM4RYCGFRUfkT5xiWLJMDA==;
-From: "A. Sverdlin" <alexander.sverdlin@siemens.com>
+ spf=pass smtp.mailfrom=raymondmaoca@gmail.com
+Received: by mail-qk1-x72c.google.com with SMTP id
+ af79cd13be357-8cb20bcff5aso216010385a.3
+ for <u-boot@lists.denx.de>; Fri, 01 May 2026 15:28:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1777674496; x=1778279296; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=vsgyUU/3UNTOHKVozBCl2pFqT4bdD/OJ1Ag1k46uKEQ=;
+ b=EEWg5dz2GwmbSVi+Ci3CHzwqJ3653BG3TFqkRDTVjSVB2IpzRTIhKAXtfIsSNHMmMG
+ w/OHYBvjMLF8YjV3YgsBbJvxHxX0wHGtrWdJJnbBiH0HAdSKaBtTmIj8wSa6PVqo96+f
+ 0wxd1gXrBr3ffcDhh8jAyR3EXPfNr5ZZwP+GYa84HL3ntv1iPTKhaocMx0CBDCpptoxo
+ qa13fORNOVo8VBH6ak9heeK+iqfx/cIO74nZE6CnwOEzkeq9AegDdR1g4D4yCkxFuEBI
+ 1lfp6RYiWG1u619dJQb8mwkA2k9pnQE2PenH6dLEZN/K4xY7IwHOcBKOw6mPbJtect2K
+ H35g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1777674496; x=1778279296;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=vsgyUU/3UNTOHKVozBCl2pFqT4bdD/OJ1Ag1k46uKEQ=;
+ b=e6cTHL8eBTvHHIHy03b6zVU2i4B0rVfdONW9ZeAfAs7qEsXBQ4m5yherEtE0+wa238
+ ee/NrJMAF2ic1FhZ0OpTw8DAxlBoy+mpuJ0JsAZwlkdn/Pnq8ZOWmU9ZYPGguZNsoYwX
+ ytJSpXAexd7L5CZderFY53NAsWw0F9EnOav5WZyEGlQgdkUgKOj2dQAsZ3i+daDGfawT
+ F6WUzvTHqtNgb+0gCNMOMOR3WNAa942nkcQgQH90sv2YwQynRyJRG2wlhXEQo5v5nSn8
+ GU5iV/HUC7egFIir5oz3WPW0yfSnmMZv5BE/eVoKY4CHnUG/dUEnFz8uvSn5t7PTfxEB
+ tW1A==
+X-Gm-Message-State: AOJu0YwHU7O4cxcmDReNw4SHLZ+hjX0YHKEVLBdfw6xi8HhY0HkrSoO/
+ wMveXtdNbSDdWcwy2Nr4FdirUhuJ7tdhXlAJ9ye9PfjmCeap2xsSvXNJ2pjjPn2VY98=
+X-Gm-Gg: AeBDiesBI3qdBPiCIxAO70zP8zYtYQWoDNXtRCqAKkOtbVkfMWOE01/LTDKfBhv6biA
+ MqyqZsYlgbhwi+nWNMl436rCQNw7GsXzf0AafJBF9+tgfKFsmcjZQsHmw+PKqP4jFKMPfQSjTvY
+ OPY5WJ3PIueVFezj184owQROn/iU/ivndIQRB2LOYzELtkXCrc4MNAJKHEQIqEZ91oLmMR+5kM/
+ TDfYO6aja822LKOij8xdw09v5Az7BWItZJ+XMjHPyyFKlNVH7vwiwQouCTJXgEduNeJ585VYuM0
+ uS7FGfwLOJNc8kn+V01Q0iJrqLTMENTplpxduF+SDmkMoUnGaTHkogHNZALFduKbs0anc3JTGl3
+ viqFNTtYGqDuJjW5UWhfXFJmDpPfiHbnVOK81gRnSCkTLaWuxegsGaOI5w0gwahamuA9bKmDBqV
+ GbqPlGkni48YkzazpijhbEU9bcGObMPPpyOM2uAEEN/ld1z17CVuQUGlTnhH6nydNaH6mEMH5HH
+ 4Bc6kSp4bo4xLQ0TtgWQQ==
+X-Received: by 2002:a05:620a:4891:b0:8da:dc5d:acf5 with SMTP id
+ af79cd13be357-8fd155f2791mr219282185a.12.1777674496150; 
+ Fri, 01 May 2026 15:28:16 -0700 (PDT)
+Received: from ubuntu.localdomain (172-97-209-197.cpe.distributel.net.
+ [172.97.209.197]) by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-8fc2938e7f8sm284458485a.7.2026.05.01.15.28.15
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 01 May 2026 15:28:15 -0700 (PDT)
+From: Raymond Mao <raymondmaoca@gmail.com>
 To: u-boot@lists.denx.de
-Cc: Alexander Sverdlin <alexander.sverdlin@siemens.com>,
- Lukasz Majewski <lukma@denx.de>, Tom Rini <trini@konsulko.com>,
- Ye Li <ye.li@nxp.com>,
- Christoph Niedermaier <cniedermaier@dh-electronics.com>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Peng Fan <peng.fan@nxp.com>
-Subject: [PATCH] clk: imx: don't build i.MX6/RTxxxx code for all users of CCF
-Date: Fri,  1 May 2026 18:27:03 +0200
-Message-ID: <20260501162706.543779-1-alexander.sverdlin@siemens.com>
+Cc: Raymond Mao <raymond.mao@riscstar.com>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>,
+ Alexander Sverdlin <alexander.sverdlin@siemens.com>,
+ Michal Simek <michal.simek@amd.com>, Pranav Sanwal <pranav.sanwal@amd.com>,
+ Casey Connolly <casey.connolly@linaro.org>
+Subject: [PATCH] lib: fdtdec: validate bloblist FDT before consuming libfdt
+ size
+Date: Fri,  1 May 2026 18:28:00 -0400
+Message-Id: <20260501222801.1596650-1-raymondmaoca@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Flowmailer-Platform: Siemens
-Feedback-ID: 519:519-456497:519-21489:flowmailer
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,43 +100,111 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Alexander Sverdlin <alexander.sverdlin@siemens.com>
+From: Raymond Mao <raymond.mao@riscstar.com>
 
-When commit 1d7993d1d0ef
-("clk: Port Linux common clock framework [CCF] for imx6q to U-boot (tag: v5.1.12)")
-introduced the parts of Linux Common Clock Framework, it was done for i.MX6
-only and even had "depends on SPL_CLK_IMX6Q" conditions. Since commit
-ccab06689aa2 ("clk: imx: expose CCF entry for all") the framework can be
-re-used with SoCs of other vendors (say, TI), but NXP SoC-specific code is
-still being build. Is is especially problematic for size-constrained SPL
-images on TI AM62x.
+Coverity Scan defects are observed in fdtdec_apply_bloblist_dtos(),
+since the live FDT taken from the bloblist is passed to libfdt helpers
+which consume header size/offset fields:
+- fdt_open_into()
+- fdt_pack()
+- bloblist_resize(..., fdt_totalsize(...))
 
-Make the build of the i.MX6/RTxxxx code not only dependent on
-CONFIG_$(PHASE_)CLK_CCF, but also on the corresponding CONFIG_ARCH_*
-options taking into account that only two platforms seem to use the code in
-question.
+Add a small helper to validate the FDT header and confirm that the
+advertised totalsize fits within the currently allocated bloblist
+record. Use the sanitized size before calling fdt_open_into(), again
+after overlays are applied before calling fdt_pack(), and once more
+after packing before shrinking the bloblist record.
 
-This saves 2264 bytes on ARM platforms [using CCF].
+This keeps the existing flow unchanged while making the size consumers
+operate on validated FDT metadata.
 
-Signed-off-by: Alexander Sverdlin <alexander.sverdlin@siemens.com>
+Fixes: b70cbbfbf94f ("fdtdec: apply DT overlays from bloblist")
+Addresses-Coverity-ID: CID 645837: (TAINTED_SCALAR)
+Signed-off-by: Raymond Mao <raymond.mao@riscstar.com>
 ---
- drivers/clk/imx/Makefile | 2 ++
- 1 file changed, 2 insertions(+)
+ lib/fdtdec.c | 44 ++++++++++++++++++++++++++++++++++++++++----
+ 1 file changed, 40 insertions(+), 4 deletions(-)
 
-diff --git a/drivers/clk/imx/Makefile b/drivers/clk/imx/Makefile
-index f2fd6ff8ca0..53f07bdf70d 100644
---- a/drivers/clk/imx/Makefile
-+++ b/drivers/clk/imx/Makefile
-@@ -2,7 +2,9 @@
- #
- # SPDX-License-Identifier: GPL-2.0
+diff --git a/lib/fdtdec.c b/lib/fdtdec.c
+index c6e13b6abef..edeaf16af51 100644
+--- a/lib/fdtdec.c
++++ b/lib/fdtdec.c
+@@ -1744,9 +1744,31 @@ static int fdtdec_apply_dto_blob(void **blob, __maybe_unused int size)
+ 	return fdt_overlay_apply_verbose((void *)gd->fdt_blob, *blob);
+ }
  
-+ifeq ($(CONFIG_ARCH_MX6)$(CONFIG_ARCH_IMXRT),y)
- obj-$(CONFIG_$(PHASE_)CLK_CCF) += clk-gate2.o clk-pllv3.o clk-pfd.o
-+endif
- obj-$(CONFIG_$(PHASE_)CLK_IMX6Q) += clk-imx6q.o
- obj-$(CONFIG_$(PHASE_)CLK_IMX6UL) += clk-imx6ul.o
- obj-$(CONFIG_CLK_IMX8) += clk-imx8.o
++static int fdtdec_get_valid_fdt_size(const void *fdt, int alloc_size,
++				     int *fdt_sizep)
++{
++	int ret, fdt_size;
++
++	/*
++	 * Validate the header before libfdt trusts any header offsets/sizes.
++	 * Also make sure the advertised totalsize fits in the bloblist record.
++	 */
++	ret = fdt_check_header(fdt);
++	if (ret)
++		return ret;
++
++	fdt_size = fdt_totalsize(fdt);
++	if (fdt_size > alloc_size)
++		return -FDT_ERR_TRUNCATED;
++
++	*fdt_sizep = fdt_size;
++
++	return 0;
++}
++
+ static int fdtdec_apply_bloblist_dtos(void)
+ {
+-	int ret;
++	int ret, live_fdt_size;
+ 	struct fdt_header *live_fdt;
+ 	int blob_size;
+ 	size_t padded_size, max_size;
+@@ -1760,8 +1782,12 @@ static int fdtdec_apply_bloblist_dtos(void)
+ 	if (live_fdt != gd->fdt_blob)
+ 		return -ENOENT;
+ 
++	ret = fdtdec_get_valid_fdt_size(live_fdt, blob_size, &live_fdt_size);
++	if (ret)
++		return ret;
++
+ 	/* Calculate the allowed padded size */
+-	padded_size = fdt_totalsize(live_fdt) + CONFIG_SYS_FDT_PAD;
++	padded_size = live_fdt_size + CONFIG_SYS_FDT_PAD;
+ 	max_size = bloblist_get_total_size() - bloblist_get_size() + blob_size;
+ 	if (padded_size > max_size)
+ 		padded_size = max_size;
+@@ -1772,6 +1798,7 @@ static int fdtdec_apply_bloblist_dtos(void)
+ 		if (ret)
+ 			return ret;
+ 
++		blob_size = padded_size;
+ 		ret = fdt_open_into(live_fdt, live_fdt, padded_size);
+ 		if (ret)
+ 			return ret;
+@@ -1781,9 +1808,18 @@ static int fdtdec_apply_bloblist_dtos(void)
+ 	if (ret)
+ 		return ret;
+ 
+-	/* Shink the blob to the actual FDT size */
++	ret = fdtdec_get_valid_fdt_size(live_fdt, blob_size, &live_fdt_size);
++	if (ret)
++		return ret;
++
+ 	fdt_pack(live_fdt);
+-	return bloblist_resize(BLOBLISTT_CONTROL_FDT, fdt_totalsize(live_fdt));
++
++	ret = fdtdec_get_valid_fdt_size(live_fdt, blob_size, &live_fdt_size);
++	if (ret)
++		return ret;
++
++	/* Shrink the blob to the actual FDT size */
++	return bloblist_resize(BLOBLISTT_CONTROL_FDT, live_fdt_size);
+ }
+ 
+ int fdtdec_setup(void)
 -- 
-2.52.0
+2.25.1
 
