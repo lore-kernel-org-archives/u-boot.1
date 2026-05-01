@@ -4,67 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7900BFF885A
-	for <u-boot@archiver.kernel.org>; Fri,  1 May 2026 07:48:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7E11FF885A
+	for <u-boot@archiver.kernel.org>; Fri,  1 May 2026 07:54:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DA9CD803C6;
-	Fri,  1 May 2026 09:48:00 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id CC741803C6;
+	Fri,  1 May 2026 09:54:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="njjRyH7o";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="a3hYRHpG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2286E80F0E; Fri,  1 May 2026 09:48:00 +0200 (CEST)
-Received: from sea.source.kernel.org (sea.source.kernel.org
- [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
+ id 173BB81E18; Fri,  1 May 2026 09:54:53 +0200 (CEST)
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 219AD80086
- for <u-boot@lists.denx.de>; Fri,  1 May 2026 09:47:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CED7580086
+ for <u-boot@lists.denx.de>; Fri,  1 May 2026 09:54:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=sumit.garg@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 2F12D43B10;
- Fri,  1 May 2026 07:47:56 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0AB21C2BCB4;
- Fri,  1 May 2026 07:47:50 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id 297C341B0F;
+ Fri,  1 May 2026 07:54:49 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A8B0CC2BCB4;
+ Fri,  1 May 2026 07:54:45 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1777621676;
- bh=/96gMTv6uSTMqR1apjmKBHmejf/DSYDuDODwKVFQxSM=;
+ s=k20201202; t=1777622089;
+ bh=V14rT+qhn0COMChyO0b+UyUMd/VMStcTKNQBhdZuyok=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=njjRyH7ob4EBCUveKdRTf33FOj/wycjOnxjWwCHJcxZxpfj9Fa5ig7wj/nEXgBwI7
- FNiivrya2vzbD/n3yrPQfruqk9tjtr2RMH11WbTEAxl2C+RnQKr1gufMAvSS0Hro0M
- ydxQHcNDHNT8fpXp4b5yNAn2YRMELgfuapVABdvMSATXNShHr8Y8846753FWyr0fNC
- MoDViJZz7TF5oeaYEfftAoR48gQ67pyrxR+sZSIY0GUUmcGfhIwQ7vKS1T8FMZeaqJ
- U3f4J9fqXW6fnmMp5tOyKKjipOQUM4DPuGErwdOIUfU0hw/hKs2WuKlhlA4xdrOg0d
- 5QnmX5x1w52uw==
-Date: Fri, 1 May 2026 13:17:48 +0530
+ b=a3hYRHpGoQZlquxdZ6UcJnTVmhowhVyljlJr1BwwWUbBPq/n+TdZhESl/MvlOAxpD
+ nq7l1fu8mLA3A+EbIzqiFdgANcpuLZUguNCbaSnNXT7cWiNkpuvrV2fLPY7Ng5qVMn
+ eA8jIvg98sY0qjbWsyT9db2sNmVgc7rgAGN2GjkURgETnrMOwXE4G65/I5rj0CYWrN
+ t/ywnljkDcdc2c5+EXOxCpjLZctEuZRMllntcGcD+uhQriNI2vk468lC796fBbk1HR
+ 9/l7r3pauXli9DPsfjHN/PNVjN20mudwDtkfSXqyjrcxrmFUtxTbocDEZxqKIYDe/A
+ xFTswy/jZ73NQ==
+Date: Fri, 1 May 2026 13:24:42 +0530
 From: Sumit Garg <sumit.garg@kernel.org>
 To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io,
- Lukasz Majewski <lukma@denx.de>, Tom Rini <trini@konsulko.com>,
+Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de,
  Casey Connolly <casey.connolly@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- David Wronek <david.wronek@mainlining.org>,
- Jens Reidel <adrian@mainlining.org>, Luca Weiss <luca.weiss@fairphone.com>,
- Swathi Tamilselvan <swathi.tamilselvan@oss.qualcomm.com>,
- Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
- Bhupesh Sharma <bhupesh.linux@gmail.com>,
- Neha Malcom Francis <n-francis@ti.com>,
- Julien Stephan <jstephan@baylibre.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>
-Subject: Re: [PATCH v2 7/7] ufs: qcom: Remove redundant POST_CHANGE clock
- setup call
-Message-ID: <afRapICPq2WZH2GE@sumit-xelite>
-References: <20260427-ufs_clk-v2-0-36e10a7c0ef6@oss.qualcomm.com>
- <20260427-ufs_clk-v2-7-36e10a7c0ef6@oss.qualcomm.com>
+ Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Sam Day <me@samcday.com>,
+ Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+Subject: Re: [PATCH] qcom_defconfig: Switch Qualcomm fastboot flash from MMC
+ to block
+Message-ID: <afRcQlOItA9ZYzu_@sumit-xelite>
+References: <20260216-fb_block-v1-1-4e2d286bae76@oss.qualcomm.com>
+ <aZgk1rZKhCW_7A2F@sumit-xelite>
+ <d62fa57d-d85e-4d25-9d3a-1d656c60491c@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20260427-ufs_clk-v2-7-36e10a7c0ef6@oss.qualcomm.com>
+In-Reply-To: <d62fa57d-d85e-4d25-9d3a-1d656c60491c@oss.qualcomm.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,39 +75,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Apr 27, 2026 at 02:56:11PM +0530, Balaji Selvanathan wrote:
-> The ufs_qcom_init() function was calling ufs_qcom_setup_clocks() with
-> POST_CHANGE twice. The first call after setting PA_TXHSADAPTTYPE
-> correctly enables the device reference clock. The second call after
-> ufs_qcom_advertise_quirks() is redundant as the clock is already
-> enabled.
+On Mon, Apr 27, 2026 at 10:29:39PM +0530, Balaji Selvanathan wrote:
 > 
-> Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-> ---
-> Changes in v2:
-> - Newly added in v2
-> ---
->  drivers/ufs/ufs-qcom.c | 1 -
->  1 file changed, 1 deletion(-)
->
+> On 2/20/2026 2:39 PM, Sumit Garg wrote:
+> > Hi Balaji,
+> > 
+> > On Mon, Feb 16, 2026 at 09:45:49PM +0530, Balaji Selvanathan wrote:
+> > > Replace MMC-specific fastboot flash configuration with generic
+> > > block device support for Qualcomm platforms. This change switches
+> > > from MMC device 0 to SCSI interface with device ID 4, enabling
+> > > fastboot operations on UFS storage instead of eMMC.
+> > I don't think if it's right for qcom generic defconfig to hardcode
+> > fastboot flash device. Can you try to see rather if the fastboot flash
+> > device can be determined at runtime? As otherwise it might end up in
+> > target specific defconfig which we should avoid if we can.
+> 
+> Hi Sumit,
+> 
+> Implemented the runtime determination of fastboot device in : https://lore.kernel.org/u-boot/20260427-fb_gpt-v2-0-9e7fe3c1649a@oss.qualcomm.com/
+> 
+> However, I think we need to assign CONFIG_FASTBOOT_FLASH_BLOCK_DEVICE_ID, so
+> that if user doesnt provide device number in the fastboot commands, then we
+> can use the device mentioned in CONFIG_FASTBOOT_FLASH_BLOCK_DEVICE_ID as
+> default.
 
-Reviewed-by: Sumit Garg <sumit.garg@oss.qualcomm.com>
+Please capture any patch-set dependencies in the comments section. I
+think for this patch it would rather makes sense if you bundle it along
+that fastboot patch-set.
 
 -Sumit
-
-> diff --git a/drivers/ufs/ufs-qcom.c b/drivers/ufs/ufs-qcom.c
-> index ae33f62fbee..f5f5a6eb110 100644
-> --- a/drivers/ufs/ufs-qcom.c
-> +++ b/drivers/ufs/ufs-qcom.c
-> @@ -605,7 +605,6 @@ static int ufs_qcom_init(struct ufs_hba *hba)
->  		 priv->hw_ver.step);
->  
->  	ufs_qcom_advertise_quirks(hba);
-> -	ufs_qcom_setup_clocks(hba, true, POST_CHANGE);
->  
->  	return 0;
->  }
-> 
-> -- 
-> 2.34.1
-> 
