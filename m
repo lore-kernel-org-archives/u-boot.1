@@ -4,86 +4,102 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9017ECCFA13
-	for <u-boot@archiver.kernel.org>; Fri,  1 May 2026 22:28:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1833EFF885A
+	for <u-boot@archiver.kernel.org>; Fri,  1 May 2026 22:35:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7D9CB840D8;
-	Sat,  2 May 2026 00:28:21 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 42591840D8;
+	Sat,  2 May 2026 00:35:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="EEWg5dz2";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="YxQrSQsL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D49B4841D7; Sat,  2 May 2026 00:28:19 +0200 (CEST)
-Received: from mail-qk1-x72c.google.com (mail-qk1-x72c.google.com
- [IPv6:2607:f8b0:4864:20::72c])
+ id 0000184255; Sat,  2 May 2026 00:35:27 +0200 (CEST)
+Received: from mail-vs1-xe34.google.com (mail-vs1-xe34.google.com
+ [IPv6:2607:f8b0:4864:20::e34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A8B7C83693
- for <u-boot@lists.denx.de>; Sat,  2 May 2026 00:28:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0534583693
+ for <u-boot@lists.denx.de>; Sat,  2 May 2026 00:35:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=raymondmaoca@gmail.com
-Received: by mail-qk1-x72c.google.com with SMTP id
- af79cd13be357-8cb20bcff5aso216010385a.3
- for <u-boot@lists.denx.de>; Fri, 01 May 2026 15:28:17 -0700 (PDT)
+Received: by mail-vs1-xe34.google.com with SMTP id
+ ada2fe7eead31-6055a0414d7so663117137.2
+ for <u-boot@lists.denx.de>; Fri, 01 May 2026 15:35:25 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1777674925; cv=none;
+ d=google.com; s=arc-20240605;
+ b=BEH2PG5AILvOpM/EcATw9T9TCK/eETgydP6pbG5JXxoVPHut5pi80YZBLc8Vj3jfz4
+ qIVO0nIBJXPtRKhZ7dNPtAkjosPoDWs8emoE82MXZh2IC9ddnaIYu1d1s+CHsvwUoF3i
+ EuROjNohEoaV75/JGvzqkvafBJ2nVSbHDJZkvRfiLAlwycR6ItA24+ixLb3RVMkwELBL
+ gYm7MePM4Mpea6IB8XeyY5n2N6pp6jiNIua3QYFaMAgYZHk9ZpJwWfuiCXnKHngi7YnG
+ x6XMVwFbtX0wiAjIHo+de/9mJU3+1FsEm05cZKziTUBoAopZs+8IyRSgagBSHy+PEnOF
+ nWVg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=kq4LoG77G0tIyAE5hkiai78t5z0kP3L9OV0gtH5Yxu0=;
+ fh=IO3PX89vpQQt96TTQ9YS2SnMByLH1CqE1jFUfpg3CD8=;
+ b=MK6dPQ4VRhYtgjUX63bF5K0rVY9lOEEQY4khPJ1KhAq8sw5AuC4xvh9BiJW5JDMnrO
+ RliUM1SE7BIhU20MholCp/5Y+Dv9EWURfvzA1t92ZvUmcCKIoy2zxYXBnjwpqRn9x4NL
+ 9NUvmRG4OiMFYRuh8LQ0zuKvLNUssJUo0ldlLMi3HxTkLt5lLBgtujavuDDPwaxNyitu
+ /T5RbVKdqgdmO7JGpnpetorFkvwWumISYI/uMZXEQWLfepY7mpGc6HGWjWzbNz9MJh7+
+ FRrXWYjVpOjgjAjpCOYKWiRnvxlc05g58uLszgSvIuoSEgpIHo5jeiHwMaqEbEGN+190
+ 12ig==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1777674496; x=1778279296; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=vsgyUU/3UNTOHKVozBCl2pFqT4bdD/OJ1Ag1k46uKEQ=;
- b=EEWg5dz2GwmbSVi+Ci3CHzwqJ3653BG3TFqkRDTVjSVB2IpzRTIhKAXtfIsSNHMmMG
- w/OHYBvjMLF8YjV3YgsBbJvxHxX0wHGtrWdJJnbBiH0HAdSKaBtTmIj8wSa6PVqo96+f
- 0wxd1gXrBr3ffcDhh8jAyR3EXPfNr5ZZwP+GYa84HL3ntv1iPTKhaocMx0CBDCpptoxo
- qa13fORNOVo8VBH6ak9heeK+iqfx/cIO74nZE6CnwOEzkeq9AegDdR1g4D4yCkxFuEBI
- 1lfp6RYiWG1u619dJQb8mwkA2k9pnQE2PenH6dLEZN/K4xY7IwHOcBKOw6mPbJtect2K
- H35g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777674496; x=1778279296;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=gmail.com; s=20251104; t=1777674925; x=1778279725; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=vsgyUU/3UNTOHKVozBCl2pFqT4bdD/OJ1Ag1k46uKEQ=;
- b=e6cTHL8eBTvHHIHy03b6zVU2i4B0rVfdONW9ZeAfAs7qEsXBQ4m5yherEtE0+wa238
- ee/NrJMAF2ic1FhZ0OpTw8DAxlBoy+mpuJ0JsAZwlkdn/Pnq8ZOWmU9ZYPGguZNsoYwX
- ytJSpXAexd7L5CZderFY53NAsWw0F9EnOav5WZyEGlQgdkUgKOj2dQAsZ3i+daDGfawT
- F6WUzvTHqtNgb+0gCNMOMOR3WNAa942nkcQgQH90sv2YwQynRyJRG2wlhXEQo5v5nSn8
- GU5iV/HUC7egFIir5oz3WPW0yfSnmMZv5BE/eVoKY4CHnUG/dUEnFz8uvSn5t7PTfxEB
- tW1A==
-X-Gm-Message-State: AOJu0YwHU7O4cxcmDReNw4SHLZ+hjX0YHKEVLBdfw6xi8HhY0HkrSoO/
- wMveXtdNbSDdWcwy2Nr4FdirUhuJ7tdhXlAJ9ye9PfjmCeap2xsSvXNJ2pjjPn2VY98=
-X-Gm-Gg: AeBDiesBI3qdBPiCIxAO70zP8zYtYQWoDNXtRCqAKkOtbVkfMWOE01/LTDKfBhv6biA
- MqyqZsYlgbhwi+nWNMl436rCQNw7GsXzf0AafJBF9+tgfKFsmcjZQsHmw+PKqP4jFKMPfQSjTvY
- OPY5WJ3PIueVFezj184owQROn/iU/ivndIQRB2LOYzELtkXCrc4MNAJKHEQIqEZ91oLmMR+5kM/
- TDfYO6aja822LKOij8xdw09v5Az7BWItZJ+XMjHPyyFKlNVH7vwiwQouCTJXgEduNeJ585VYuM0
- uS7FGfwLOJNc8kn+V01Q0iJrqLTMENTplpxduF+SDmkMoUnGaTHkogHNZALFduKbs0anc3JTGl3
- viqFNTtYGqDuJjW5UWhfXFJmDpPfiHbnVOK81gRnSCkTLaWuxegsGaOI5w0gwahamuA9bKmDBqV
- GbqPlGkni48YkzazpijhbEU9bcGObMPPpyOM2uAEEN/ld1z17CVuQUGlTnhH6nydNaH6mEMH5HH
- 4Bc6kSp4bo4xLQ0TtgWQQ==
-X-Received: by 2002:a05:620a:4891:b0:8da:dc5d:acf5 with SMTP id
- af79cd13be357-8fd155f2791mr219282185a.12.1777674496150; 
- Fri, 01 May 2026 15:28:16 -0700 (PDT)
-Received: from ubuntu.localdomain (172-97-209-197.cpe.distributel.net.
- [172.97.209.197]) by smtp.gmail.com with ESMTPSA id
- af79cd13be357-8fc2938e7f8sm284458485a.7.2026.05.01.15.28.15
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 01 May 2026 15:28:15 -0700 (PDT)
-From: Raymond Mao <raymondmaoca@gmail.com>
-To: u-boot@lists.denx.de
-Cc: Raymond Mao <raymond.mao@riscstar.com>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>,
- Alexander Sverdlin <alexander.sverdlin@siemens.com>,
- Michal Simek <michal.simek@amd.com>, Pranav Sanwal <pranav.sanwal@amd.com>,
- Casey Connolly <casey.connolly@linaro.org>
-Subject: [PATCH] lib: fdtdec: validate bloblist FDT before consuming libfdt
- size
-Date: Fri,  1 May 2026 18:28:00 -0400
-Message-Id: <20260501222801.1596650-1-raymondmaoca@gmail.com>
-X-Mailer: git-send-email 2.25.1
+ bh=kq4LoG77G0tIyAE5hkiai78t5z0kP3L9OV0gtH5Yxu0=;
+ b=YxQrSQsLMTcH94vOS0qpYwA/BmBtAqlhrsQnptVHyp5ntb0xTGD5RdYg3ZMeZQNG1t
+ ytcWGpExmgJigRLqkL828qJO32M22Kfg0mccDpTdd3uDmFq9U4NWQ0gITSiEzTxrNGsR
+ 4mnns+A2CTthFaC4QepsPehedtgvJXbSNdkglmgm6jnnVonJuhsVERtYXY48N/v5Aee3
+ ih7CwTi8Jvx+NmSiGyeqE3vmkkF/HMHOzMEYfsi0SzAXmJGO8TJ+FbX/3ZR17brMej/V
+ g/HmTYCTKxfkIsK2lY6BCdw0dqBmlnF4EsaA1Reh9NLRfGWLY66fJTGaNLtnHtbelBL5
+ BDRg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1777674925; x=1778279725;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=kq4LoG77G0tIyAE5hkiai78t5z0kP3L9OV0gtH5Yxu0=;
+ b=ijLD9CBw9f9a/sM51VsO5el47JHvJwFutg1OTb3iHvFm+SZoL/sTmBq0R3i8airpN7
+ Rla9+NUjysHEdoNh29KWdwsrFIKRKYD/NOcPe5ovdNdLV38thNMmA2R1w+cGoYxE56p+
+ GWEogYjP+zCFf+NqQzGL+nF/YVzgYvpS9uaGf7yJwfozPqamsfnMFQBzsuBcCguAlXtz
+ ABGbartYy/9WM0L1xe2NYS/KIWfo0Yj1OPKXsaP7jOHI3cS1llsXjaXHLptWITDhOkXm
+ gFJ7vaeLn7fFG2fb8lTK3+RTH+Mj4U7/3/PwO8VgvIw9tA4GjV4VrUU346UlRmahFTSQ
+ /wwA==
+X-Gm-Message-State: AOJu0Ywj32E50uAA96w2kqtFPH6BAChiHFadsJYquE44+nW8VOYrrj8C
+ SLMDL7xdIhas+Hp0RCySajRXReRQsQ9LJR1rzyxJ9+JtRkOSPxYUbCB+xduFwXIXPWIPCMUDU9e
+ GHlBclFFrVDO5HXdTv7fm7tbuN+BKALw=
+X-Gm-Gg: AeBDiev2bBXV+uzoToYsc4/Ae/Bf9/DjGodwwDh8lKcoF3upaIX1k7TOEhxBECQKvkh
+ prVUqDE4LXSXtomGgOL77VRWdCsD079eAMiY+ZrGNavcrtBwd4lxILifJ5g1lLWwePQKmujwrf+
+ zx+jD/1xdVgG/nx00TH4QDCHOIl/liUiIgSi22PAdUGXgU2Xljno/LP0LePs8LrGTVN/LATvHd1
+ 7QNbPd3PhZin8zIM6Ic/B0lTpxg6WQPgq8gHZhVkHr5ciB82CJ45Kq3vw7Zgp8RKBjeMyOkBGyb
+ ajB8YQDn4wYl8zv03T0=
+X-Received: by 2002:a05:6102:5241:b0:608:9a34:c8ea with SMTP id
+ ada2fe7eead31-62d85487f17mr601861137.10.1777674924684; Fri, 01 May 2026
+ 15:35:24 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <cffa552d648f84769f4d5d540f419173f10cb86e.1777444191.git.michal.simek@amd.com>
+In-Reply-To: <cffa552d648f84769f4d5d540f419173f10cb86e.1777444191.git.michal.simek@amd.com>
+From: Raymond Mao <raymondmaoca@gmail.com>
+Date: Fri, 1 May 2026 18:35:12 -0400
+X-Gm-Features: AVHnY4IuNwDDanX_aLP3koFXzzHZhHfypKU3v0bWscatkOgad_6mKNCjgfAMaEI
+Message-ID: <CAMDkj5yrn8eVGFK61b7F8LS7YTn03yugJJ62QE80QUDw+QhKPQ@mail.gmail.com>
+Subject: Re: [PATCH] bloblist: fix pointer comparison in bloblist_apply_blobs()
+To: Michal Simek <michal.simek@amd.com>
+Cc: u-boot@lists.denx.de, git@amd.com, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,111 +116,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Raymond Mao <raymond.mao@riscstar.com>
+Hi Michal,
 
-Coverity Scan defects are observed in fdtdec_apply_bloblist_dtos(),
-since the live FDT taken from the bloblist is passed to libfdt helpers
-which consume header size/offset fields:
-- fdt_open_into()
-- fdt_pack()
-- bloblist_resize(..., fdt_totalsize(...))
+On Wed, Apr 29, 2026 at 2:30=E2=80=AFAM Michal Simek <michal.simek@amd.com>=
+ wrote:
+>
+> The rec_from_blob() function returns a pointer, but the code was
+> comparing it using "rec <=3D 0" which is incorrect for pointer types.
+> Pointers should be compared using "=3D=3D NULL" or "!=3D NULL".
+>
+> Addresses-Coverity-ID: CID 645841: Incorrect expression (BAD_COMPARE)
+> Signed-off-by: Michal Simek <michal.simek@amd.com>
+> ---
+>
+>  common/bloblist.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/common/bloblist.c b/common/bloblist.c
+> index afed968ce01d..d084be899588 100644
+> --- a/common/bloblist.c
+> +++ b/common/bloblist.c
+> @@ -300,7 +300,7 @@ int bloblist_apply_blobs(uint tag, int (*func)(void *=
+*data, int size))
+>                         }
+>
+>                         rec =3D rec_from_blob(blob - dat_off);
+> -                       if (rec <=3D 0) {
+> +                       if (!rec) {
+>                                 log_err("Blob corrupted\n");
+>                                 return -ENOENT;
+>                         }
+> --
+> 2.43.0
+>
+> base-commit: e995dcb19c89c5c697b57380831167ff238b0d07
 
-Add a small helper to validate the FDT header and confirm that the
-advertised totalsize fits within the currently allocated bloblist
-record. Use the sanitized size before calling fdt_open_into(), again
-after overlays are applied before calling fdt_pack(), and once more
-after packing before shrinking the bloblist record.
+Thanks for the fix.
+Reviewed-by: Raymond Mao <raymondmaoca@gmail.com>
 
-This keeps the existing flow unchanged while making the size consumers
-operate on validated FDT metadata.
-
-Fixes: b70cbbfbf94f ("fdtdec: apply DT overlays from bloblist")
-Addresses-Coverity-ID: CID 645837: (TAINTED_SCALAR)
-Signed-off-by: Raymond Mao <raymond.mao@riscstar.com>
----
- lib/fdtdec.c | 44 ++++++++++++++++++++++++++++++++++++++++----
- 1 file changed, 40 insertions(+), 4 deletions(-)
-
-diff --git a/lib/fdtdec.c b/lib/fdtdec.c
-index c6e13b6abef..edeaf16af51 100644
---- a/lib/fdtdec.c
-+++ b/lib/fdtdec.c
-@@ -1744,9 +1744,31 @@ static int fdtdec_apply_dto_blob(void **blob, __maybe_unused int size)
- 	return fdt_overlay_apply_verbose((void *)gd->fdt_blob, *blob);
- }
- 
-+static int fdtdec_get_valid_fdt_size(const void *fdt, int alloc_size,
-+				     int *fdt_sizep)
-+{
-+	int ret, fdt_size;
-+
-+	/*
-+	 * Validate the header before libfdt trusts any header offsets/sizes.
-+	 * Also make sure the advertised totalsize fits in the bloblist record.
-+	 */
-+	ret = fdt_check_header(fdt);
-+	if (ret)
-+		return ret;
-+
-+	fdt_size = fdt_totalsize(fdt);
-+	if (fdt_size > alloc_size)
-+		return -FDT_ERR_TRUNCATED;
-+
-+	*fdt_sizep = fdt_size;
-+
-+	return 0;
-+}
-+
- static int fdtdec_apply_bloblist_dtos(void)
- {
--	int ret;
-+	int ret, live_fdt_size;
- 	struct fdt_header *live_fdt;
- 	int blob_size;
- 	size_t padded_size, max_size;
-@@ -1760,8 +1782,12 @@ static int fdtdec_apply_bloblist_dtos(void)
- 	if (live_fdt != gd->fdt_blob)
- 		return -ENOENT;
- 
-+	ret = fdtdec_get_valid_fdt_size(live_fdt, blob_size, &live_fdt_size);
-+	if (ret)
-+		return ret;
-+
- 	/* Calculate the allowed padded size */
--	padded_size = fdt_totalsize(live_fdt) + CONFIG_SYS_FDT_PAD;
-+	padded_size = live_fdt_size + CONFIG_SYS_FDT_PAD;
- 	max_size = bloblist_get_total_size() - bloblist_get_size() + blob_size;
- 	if (padded_size > max_size)
- 		padded_size = max_size;
-@@ -1772,6 +1798,7 @@ static int fdtdec_apply_bloblist_dtos(void)
- 		if (ret)
- 			return ret;
- 
-+		blob_size = padded_size;
- 		ret = fdt_open_into(live_fdt, live_fdt, padded_size);
- 		if (ret)
- 			return ret;
-@@ -1781,9 +1808,18 @@ static int fdtdec_apply_bloblist_dtos(void)
- 	if (ret)
- 		return ret;
- 
--	/* Shink the blob to the actual FDT size */
-+	ret = fdtdec_get_valid_fdt_size(live_fdt, blob_size, &live_fdt_size);
-+	if (ret)
-+		return ret;
-+
- 	fdt_pack(live_fdt);
--	return bloblist_resize(BLOBLISTT_CONTROL_FDT, fdt_totalsize(live_fdt));
-+
-+	ret = fdtdec_get_valid_fdt_size(live_fdt, blob_size, &live_fdt_size);
-+	if (ret)
-+		return ret;
-+
-+	/* Shrink the blob to the actual FDT size */
-+	return bloblist_resize(BLOBLISTT_CONTROL_FDT, live_fdt_size);
- }
- 
- int fdtdec_setup(void)
--- 
-2.25.1
-
+Raymond
