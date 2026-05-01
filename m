@@ -4,53 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69E9FCD3423
-	for <u-boot@archiver.kernel.org>; Fri,  1 May 2026 14:46:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6F7ECD3424
+	for <u-boot@archiver.kernel.org>; Fri,  1 May 2026 14:46:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 04C2F842FC;
+	by phobos.denx.de (Postfix) with ESMTP id 3D44C845E3;
 	Fri,  1 May 2026 16:46:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=arm.com header.i=@arm.com header.b="OE+OX+Oe";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="gNNC8I+l";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7C05083E36; Fri,  1 May 2026 16:38:12 +0200 (CEST)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id DB03380086
- for <u-boot@lists.denx.de>; Fri,  1 May 2026 16:38:09 +0200 (CEST)
+ id 6F52883E36; Fri,  1 May 2026 16:39:00 +0200 (CEST)
+Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
+ [IPv6:2607:f8b0:4864:20::32b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 2B6CC80086
+ for <u-boot@lists.denx.de>; Fri,  1 May 2026 16:38:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=arm.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=harsimransingh.tungal@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id B05B82A9A;
- Fri,  1 May 2026 07:38:03 -0700 (PDT)
-Received: from e132995.arm.com (unknown [10.57.68.2])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 317FB3F7B4;
- Fri,  1 May 2026 07:38:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
- t=1777646289; bh=ttzaPs/bY+ZYQrwjWPTEOd/zSTfEGjsD0HTq5GwWDrc=;
- h=Subject:From:To:Cc:In-Reply-To:References:Date:From;
- b=OE+OX+OeYxjjNp5nJyt/kpDSu5cpJPwaf6NYaUk9RniSjtc6oakY10SP1h8ISuSVO
- cqEJnwqzsuvoZFeMoN4ccf65OyQZHPMQRn7D7Hg8fT/DlATtKgY+E30be7Gb2dC/cf
- eV3xIBLHVkU6YrYFK07OxIHnq8v8K08u9VKBXPt4=
+ spf=pass smtp.mailfrom=bdklingerman@gmail.com
+Received: by mail-ot1-x32b.google.com with SMTP id
+ 46e09a7af769-7dbccf6a23dso1759188a34.2
+ for <u-boot@lists.denx.de>; Fri, 01 May 2026 07:38:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1777646337; x=1778251137; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=zfUpncIfzzuXgfETeePOpi86eUzr1jVAz91urQ+ue3Q=;
+ b=gNNC8I+lBWkElb0jRo/zo1J8/CJdC/7h0TLTp8jXs8Qzfk45Jnie+JrIPYzUpM18pk
+ zgzm+lRJIMGTgrJKF9BI9Q2BTLJqHgVPXAVoGVGd1pYeeB8p5N1KPkeJ0f1uwtlP1yuC
+ wPjteAnduWEFIYPG2rVl/C+iuNk5qZt5vy/7Q57UECuH71m3+3EUVawpiV9Hs1ScFTdp
+ h8Fj28xoHD5FRHa249VP+dt+kowAlG1z8yS5G24xgPWM/1kiXyB165ySUZALvMWz110M
+ 64zloQSmo0k4Bj4yaVRjsbK90hBMgWbbTBdwKKZUm3IstDzee6P7w9Yz+6WwdU0ucu9X
+ kWNg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1777646337; x=1778251137;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=zfUpncIfzzuXgfETeePOpi86eUzr1jVAz91urQ+ue3Q=;
+ b=sxZ+XV1FeKB43XXV3k9ENLd7o9BuN8CwLgcV29FvFc8r3pjFTQF7LSbxoMhGM2ioR5
+ eEeo6ZZ6BCVtVm1LLOBZLnIwiacAZ6+srnkP+NUo/0wyuew626nTfsAjM0/wnEu99Aoo
+ Wl41/ICrPoM7PdVnoaeyxvoK8Oum9/iyW0Bmaj0BGsCwa89xsbfKDLMr75OjmhN/HZW6
+ DgEr9cNwbvfWneU1yXlr8ZDgbJCkAqdZ3mNTs+jm4lXYoFjCyf1yQplodsiIlvOGqQyT
+ z8aEwZTLr1J+q7bRFTTyFgRAD4zmqdwK8AQGQ1fEt8FdHKxNvDUeCPEw/f+JmewFo9tI
+ 7owQ==
+X-Gm-Message-State: AOJu0Ywr5QnbvjRZVztcDdjQlfFuCn1eAdnDuxMyyebjuSY22qKT+HBF
+ iZ6WkQ3V8+uUSBmiBdO6bEgq8fPMX5bYIuTy5B5h6+Klt4CrI4imTIweO4JE4A==
+X-Gm-Gg: AeBDieu7snJQHyTb/CwZ39qSZanUxEGpc0MnynBB30oXf3IKiTLUMtuKs4AEqHN89Um
+ uCZy9ELoEdZ6IhFlmGEuFUaTWL2YJu2JBSLQFFwUibQM5i+4JhZVg8x+dCJvhdstz2Aw7URwKdE
+ 7DeZ+lgcgO65nd5or1NrB//jMaj4BBamXNzSH59d8svJ2JixPn5KyscUpR0Tr8UbY56rPt9fAwe
+ t7hjkNg0afZwHGLDgfb/8jcF+6X91BsKdCJLP9YuTC9g1QzxQhTyKe4ShmbhhUouRfacKtQIG1m
+ hOlAFB9E0IXc/Vpl6Wz/Ot1D+hQbbCx6hIoYF70xU14IS+9LKIfw3LfazUPia7IX9+7tVpuc9aH
+ N0iTrcYIZj2NF7onQyWVRSLNOoXoR7jqnmHvUqFqr4EHguI4LFgKDdEa5YvdvnZYXUnqXWAvy5w
+ dKGt+D4jxgPw7CArCMnC6NdNqn
+X-Received: by 2002:a05:6830:6b03:b0:7d9:71fa:3079 with SMTP id
+ 46e09a7af769-7debdd624damr3920415a34.10.1777646336704; 
+ Fri, 01 May 2026 07:38:56 -0700 (PDT)
+Received: from xps ([97.86.254.41]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7deca7a5e6asm2332675a34.3.2026.05.01.07.38.55
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 01 May 2026 07:38:56 -0700 (PDT)
+From: Brad Klingerman <bdklingerman@gmail.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+Subject: [PATCH] Makefile: remove block from conv=block,
+ sync in SPL alignment dd
+Date: Fri,  1 May 2026 09:38:50 -0500
+Message-ID: <20260501143850.2714779-1-bdklingerman@gmail.com>
+X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-Subject: Re: [PATCH] efi_loader: fix AllocatePages overlap status
-From: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Harsimran Singh Tungal <harsimransingh.tungal@arm.com>, 
- u-boot@lists.denx.de, trini@konsulko.com
-In-Reply-To: <28B9184F-96D7-45AF-84AA-98EB2ECE713A@gmx.de>
-References: <20260427150530.3156000-1-harsimransingh.tungal@arm.com>
- <CAC_iWj+iD0m9JL+A++W85+sYQGYSqVHP287ga7g13dkVevy9AA@mail.gmail.com>
- <28B9184F-96D7-45AF-84AA-98EB2ECE713A@gmx.de>
-Date: Fri, 01 May 2026 15:38:01 +0100
-Message-Id: <177764628159.1446310.9289654256628987669.b4-reply@b4>
-X-Mailer: b4 0.15.2
 X-Mailman-Approved-At: Fri, 01 May 2026 16:46:21 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -68,114 +95,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2026-04-27 19:04 +0200, Heinrich Schuchardt wrote:
-> Am 27. April 2026 17:48:21 MESZ schrieb Ilias Apalodimas <ilias.apalodimas@linaro.org>:
-> >Hi Harsiman,
-> >
-> >On Mon, 27 Apr 2026 at 18:05, Harsimran Singh Tungal
-> ><harsimransingh.tungal@arm.com> wrote:
-> >>
-> >> Return EFI_NOT_FOUND for EFI_ALLOCATE_ADDRESS overlap
-> >>
-> >> When efi_allocate_pages() is called with EFI_ALLOCATE_ADDRESS, UEFI
-> >> expects EFI_NOT_FOUND if the requested address range is already
-> >> allocated or unavailable.
-> >>  U-Boot currently returns
-> >> EFI_OUT_OF_RESOURCES when efi_update_memory_map() detects an overlap
-> >> after a successful lmb_alloc_mem(), which does not match
-> >> EFI_ALLOCATE_ADDRESS semantics.
-> >>
-> >> Return EFI_NOT_FOUND for EFI_ALLOCATE_ADDRESS requests that fail due
-> >> to an overlapping EFI memory descriptor, while keeping
-> >> EFI_OUT_OF_RESOURCES for other allocation types.
-> >>
-> >> The UEFI specification [1] specifies that
-> >> EFI_BOOT_SERVICES.AllocatePages must return EFI_NOT_FOUND when the
-> >> requested address range is unavailable or already allocated;
-> >> EFI_OUT_OF_RESOURCES applies to non‑address‑specific allocation
-> >> failures.
-> >
-> >Where does the EFI spec say that? EDKII indeed returns EFI_NOT_FOUND
-> >for AllocateAddress but looking at the function description, I can't
-> >find anything specific.
-> >
-> >Thanks
-> >/Ilias
-> 
-> Thank you Harsimran for investigating this difference to EDJ II.
-> 
-> The spec has:
-> 
-> EFI_NOT_FOUND
-> The requested pages could not be found.
-> 
-> and
-> 
-> EFI_OUT_OF_RESOURCEST
-> The pages could not be allocated.
-> 
-> Looking at the text one could assume that EFI_NOT_FOUND should be returned if the pages requested with AllocateAddress don't exist in the memory map.
-> 
-> If the pages exist and are already allocated EFI_NOT_FOUND does not look like the right return code according to the spec.
-> 
-> It is unclear if for AllocateMaxAddress a comparison to the memory bottom is required.
-> 
-> The specification should be clarified in the UEFI forum.
-> 
-> Best regards
-> 
-> Heinrich 
-> 
+The line that produces $(SPL_BIN)-align.bin invokes dd with
+conv=block,sync but no cbs= operand. The result of dd conv=block
+without cbs= is unspecified. GNU coreutils outputs anyway, but
+uutils (default in Ubuntu 26.04 LTS) errors out for files with
+newlines, including SPL binaries, producing:
 
-Hi Ilias, Hi Heinrich,
+    dd: conv=block or conv=ubnblock specified without cbs=N
 
-Thanks for the clarification.
+Either the block operand must be removed, or cbs=N must be added.
+conv=block is for converting newline-terminated variable-length
+records to fixed-length space-padded ones, which is meaningless
+for a binary SPL image. The intent of the rule is 4-byte
+alignment, which conv=sync alone provides by padding the final
+block to bs= bytes with NULs.
 
-You are right.
-The AllocatePages() text only lists the generic status codes, and it
-does not explicitly say that an AllocateAddress request on an already
-allocated range must return EFI_NOT_FOUND.
+During build, u-boot-spl-align.bin errors silently due to '@'.
 
-My motivation for this change was tlso he UEFI SCT expectation rather just a 
-direct statement in the UEFI base spec. The SCT AllocatePages tests expect
-EFI_NOT_FOUND for AllocateAddress both with non-existent memory and with
-allocated memory, and that is the behavior I was trying to align U-Boot
-with, which matches with EDK II as well.
+Reproduced with uutils dd 0.8.0:
 
-Is this solution acceptable for now?
+    $ dd if=/dev/urandom of=/tmp/in bs=1 count=10000
+    $ dd if=/tmp/in of=/tmp/out conv=block,sync bs=4
+    dd: conv=block or conv=unblock specified without cbs=N
+    $ dd if=/tmp/in of=/tmp/out conv=sync bs=4
+    [succeeds]
 
-Thanks,
-Harsimran Singh Tungal 
-> 
-> 
-> >
-> >>
-> >> [1] https://uefi.org/specs/UEFI/2.10_A/07_Services_Boot_Services.html
-> >>
-> >> Signed-off-by: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
-> >> ---
-> >>  lib/efi_loader/efi_memory.c | 4 +++-
-> >>  1 file changed, 3 insertions(+), 1 deletion(-)
-> >>
-> >> diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
-> >> index b77c2f980cc..63cf1a7277f 100644
-> >> --- a/lib/efi_loader/efi_memory.c
-> >> +++ b/lib/efi_loader/efi_memory.c
-> >> @@ -510,7 +510,9 @@ efi_status_t efi_allocate_pages(enum efi_allocate_type type,
-> >>                 /* Map would overlap, bail out */
-> >>                 lmb_free(addr, (u64)pages << EFI_PAGE_SHIFT, flags);
-> >>                 unmap_sysmem((void *)(uintptr_t)efi_addr);
-> >> -               return  EFI_OUT_OF_RESOURCES;
-> >> +               if (type == EFI_ALLOCATE_ADDRESS)
-> >> +                       return EFI_NOT_FOUND;
-> >> +               return EFI_OUT_OF_RESOURCES;
-> >>         }
-> >>
-> >>         *memory = efi_addr;
-> >> --
-> >> 2.34.1
-> >>
-> 
-> 
+Output is byte-identical to GNU dd's output for binary input.
 
+Signed-off-by: Brad Klingerman <bdklingerman@gmail.com>
+---
+ scripts/Makefile.xpl | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/scripts/Makefile.xpl b/scripts/Makefile.xpl
+index 862a8e6f231..a3fd3e1375f 100644
+--- a/scripts/Makefile.xpl
++++ b/scripts/Makefile.xpl
+@@ -257,7 +257,7 @@ MKIMAGEFLAGS_boot.bin = -T zynqmpimage -R $(srctree)/$(CONFIG_BOOT_INIT_FILE) \
+ endif
+ 
+ $(obj)/$(SPL_BIN)-align.bin: $(obj)/$(SPL_BIN).bin
+-	@dd if=$< of=$@ conv=block,sync bs=4 2>/dev/null;
++	@dd if=$< of=$@ conv=sync bs=4 2>/dev/null;
+ 
+ spl/boot.bin: $(obj)/$(SPL_BIN)-align.bin FORCE
+ 	$(call if_changed,mkimage)
+-- 
+2.53.0
 
