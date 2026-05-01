@@ -4,88 +4,101 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35210CD3424
-	for <u-boot@archiver.kernel.org>; Fri,  1 May 2026 12:38:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF832CD3424
+	for <u-boot@archiver.kernel.org>; Fri,  1 May 2026 12:38:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4200A84605;
+	by phobos.denx.de (Postfix) with ESMTP id 9C8A08460E;
 	Fri,  1 May 2026 14:38:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=couthit.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="BM8BLKzi";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=couthit.com header.i=@couthit.com header.b="UZ07d2X2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 98EFF80F0E; Fri,  1 May 2026 12:10:52 +0200 (CEST)
-Received: from tor.source.kernel.org (tor.source.kernel.org
- [IPv6:2600:3c04:e001:324:0:1991:8:25])
+ id CF29883E36; Fri,  1 May 2026 12:20:03 +0200 (CEST)
+Received: from server.couthit.com (server.couthit.com [162.240.164.96])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D5A6E803C6
- for <u-boot@lists.denx.de>; Fri,  1 May 2026 12:10:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
+ by phobos.denx.de (Postfix) with ESMTPS id 0E86384198
+ for <u-boot@lists.denx.de>; Fri,  1 May 2026 12:19:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 574846011F;
- Fri,  1 May 2026 10:10:47 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4E7E2C2BCB4;
- Fri,  1 May 2026 10:10:34 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1777630247;
- bh=r5NwoooOWk07WxpAbe94TI0no/Vorw4aKZrg8UCaTeY=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=BM8BLKzi7FncURHPAORSGmOr5bQKpqIgmHurRiQ26NqvWKkF+35LelVitGLi1igWu
- U/C4blSQFGcQTMrDe+hB6ICnOaHmNe0iB69hH6AfyC+ZgOxN6pGQ+SaiJbAaw2Rd6C
- PrvFkbS6JiDHZmiYkWYYNE5ihSEVwn75dMpUGNPmNpCF+7t1AiPofIs5iymzAA/T9m
- JdJMmZTsvxBdbDpJe0HAXiIe451ywWMsfsMZD8Vf+vT/HAmHLFO2zU+lqhpZw+kpEO
- u0h0u9C2pY0VGGvRp2JJdE6eSsqGCoJmZN9+DjwpIhLDtxHLUkzLeU3ADpVEQFSKQQ
- rowsG7X212FDw==
-Date: Fri, 1 May 2026 15:40:31 +0530
-From: Sumit Garg <sumit.garg@kernel.org>
-To: michael.srba@seznam.cz
-Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io, Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@arm.com>,
- Anshul Dalal <anshuld@ti.com>, Peng Fan <peng.fan@nxp.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Andrew Davis <afd@ti.com>,
- Hrushikesh Salunke <h-salunke@ti.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Ye Li <ye.li@nxp.com>, Andre Przywara <andre.przywara@arm.com>,
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>, Dhruva Gole <d-gole@ti.com>,
- Kaustabh Chakraborty <kauschluss@disroot.org>,
- Jerome Forissier <jerome.forissier@arm.com>,
- Heiko Schocher <hs@nabladev.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Lukasz Majewski <lukma@denx.de>,
- Mateusz Kulikowski <mateusz.kulikowski@gmail.com>,
- Dinesh Maniyam <dinesh.maniyam@altera.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Michal Simek <michal.simek@amd.com>, Yao Zi <me@ziyao.cc>,
- Peter Korsgaard <peter@korsgaard.com>,
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Casey Connolly <casey.connolly@linaro.org>,
- Tingting Meng <tingting.meng@altera.com>,
- Tien Fong Chee <tien.fong.chee@altera.com>,
- Alice Guo <alice.guo@nxp.com>, George Chan <gchan9527@gmail.com>,
- Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
- Alexey Charkov <alchark@gmail.com>, Ronald Wahl <ronald.wahl@legrand.com>,
- Michael Trimarchi <michael@amarulasolutions.com>
-Subject: Re: [PATCH v4 04/11] mach-snapdragon: boot0.h: split out
- msm8916_boot0.h
-Message-ID: <afR8F6dVWHz6vrG0@sumit-xelite>
-References: <20260426-qcom_spl-v4-0-8cf4133ff883@seznam.cz>
- <20260426-qcom_spl-v4-4-8cf4133ff883@seznam.cz>
+ dmarc=pass (p=none dis=none) header.from=couthit.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=parvathi@couthit.com
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=couthit.com
+ ; s=default;
+ h=Content-Transfer-Encoding:Content-Type:MIME-Version:Subject:
+ References:In-Reply-To:Message-ID:Cc:To:From:Date:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=g1K+N2fuaWlcHTM1FtV69LP2RMmBNA2w8ouMegDZbxA=; b=UZ07d2X296rp1AhVh1ok4X1ouO
+ 5UhVZeZZU3IHFQ4+D2EtaUSgjs9YKNWJ1ljSnTA/XNs54BeAWNU9USr8IHFMtLFR77CWkI/H6mbGu
+ SboeXISg5Ui9Ky5PQRvHYzK3+6FaT8vcol7A/aBznhmejXrk1w7v/HdTso8ZOrbXNOxLCY/2oZ8IB
+ AEGf3sIY2TEiFliZR3SD05SaOd7xRd36McKT92U+9F/ajd9MxG07tzmssGfIoCXw7gqB8RxeaTfwg
+ jRA64LeS1OmgmV2UYUylRVkHwR4BHCQoWpsL+fVQ3HnyU9IOfdjXQSU3wEjA/e9qbs8GrbxOw/5xS
+ Rc1iemmw==;
+Received: from [115.246.246.98] (port=38472 helo=zimbra.couthit.local)
+ by server.couthit.com with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
+ (Exim 4.99.1) (envelope-from <parvathi@couthit.com>)
+ id 1wIkyN-00000000gh9-4B71; Fri, 01 May 2026 06:19:52 -0400
+Received: from localhost (localhost [127.0.0.1])
+ by zimbra.couthit.local (Postfix) with ESMTP id 40CD01A48E47;
+ Fri,  1 May 2026 15:49:44 +0530 (IST)
+Received: from zimbra.couthit.local ([127.0.0.1])
+ by localhost (zimbra.couthit.local [127.0.0.1]) (amavis, port 10032)
+ with ESMTP id 7g4YPlQPA5jh; Fri,  1 May 2026 15:49:42 +0530 (IST)
+Received: from localhost (localhost [127.0.0.1])
+ by zimbra.couthit.local (Postfix) with ESMTP id BF60D1A48E46;
+ Fri,  1 May 2026 15:49:42 +0530 (IST)
+Received: from zimbra.couthit.local ([127.0.0.1])
+ by localhost (zimbra.couthit.local [127.0.0.1]) (amavis, port 10026)
+ with ESMTP id 33upqqUsDo-Z; Fri,  1 May 2026 15:49:42 +0530 (IST)
+Received: from zimbra.couthit.local (zimbra.couthit.local [10.10.10.103])
+ by zimbra.couthit.local (Postfix) with ESMTP id 9EBEB1A48E47;
+ Fri,  1 May 2026 15:49:42 +0530 (IST)
+Date: Fri, 1 May 2026 15:49:42 +0530 (IST)
+From: Parvathi Pudi <parvathi@couthit.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: Parvathi Pudi <parvathi@couthit.com>, u-boot <u-boot@lists.denx.de>, 
+ Maarten Brock <Maarten.Brock@sttls.nl>, 
+ kory maincent <kory.maincent@bootlin.com>, 
+ Markus Schneider-Pargmann <msp@baylibre.com>, 
+ sbellary <sbellary@baylibre.com>, 
+ romain gantois <romain.gantois@bootlin.com>, 
+ pratheesh <pratheesh@ti.com>, j-rameshbabu <j-rameshbabu@ti.com>, 
+ praneeth <praneeth@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>, 
+ srk <srk@ti.com>, rogerq <rogerq@ti.com>, 
+ danishanwar <danishanwar@ti.com>, m-malladi <m-malladi@ti.com>, 
+ krishna <krishna@couthit.com>, mohan <mohan@couthit.com>, 
+ pmohan <pmohan@couthit.com>, basharath <basharath@couthit.com>
+Message-ID: <239785101.1054803.1777630782561.JavaMail.zimbra@couthit.local>
+In-Reply-To: <20260430211948.GA1717275@bill-the-cat>
+References: <20260422123353.2902537-1-parvathi@couthit.com>
+ <20260430211948.GA1717275@bill-the-cat>
+Subject: Re: [PATCH v3] board: ti: am335x: Conditional MDIO PAD
+ configuration instead of static for AM335_ICE
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260426-qcom_spl-v4-4-8cf4133ff883@seznam.cz>
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-Originating-IP: [10.10.10.233]
+X-Mailer: Zimbra 9.0.0_ZEXTRAS_20240927 (ZimbraWebClient - GC138
+ (Linux)/9.0.0_ZEXTRAS_20240927)
+Thread-Topic: board: ti: am335x: Conditional MDIO PAD configuration instead of
+ static for AM335_ICE
+Thread-Index: K8075A6gvVYzkjPJG2e1SoCRJR2HCQ==
+X-AntiAbuse: This header was added to track abuse,
+ please include it with any abuse report
+X-AntiAbuse: Primary Hostname - server.couthit.com
+X-AntiAbuse: Original Domain - lists.denx.de
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - couthit.com
+X-Get-Message-Sender-Via: server.couthit.com: authenticated_id:
+ smtp@couthit.com
+X-Authenticated-Sender: server.couthit.com: smtp@couthit.com
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 X-Mailman-Approved-At: Fri, 01 May 2026 14:38:15 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -103,156 +116,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, Apr 26, 2026 at 01:26:06AM +0200, michael.srba@seznam.cz wrote:
-> From: Michael Srba <Michael.Srba@seznam.cz>
-> 
-> Prepare for supporting alternative boot0.h per-SoC by splitting out
-> the existing msm8916-specific code.
-> 
-> Signed-off-by: Michael Srba <Michael.Srba@seznam.cz>
-> Reviewed-by: Simon Glass <sjg@chromium.org>
-> ---
->  arch/arm/mach-snapdragon/include/mach/boot0.h      | 57 ++--------------------
->  .../mach-snapdragon/include/mach/msm8916_boot0.h   | 54 ++++++++++++++++++++
->  2 files changed, 59 insertions(+), 52 deletions(-)
-> 
-> diff --git a/arch/arm/mach-snapdragon/include/mach/boot0.h b/arch/arm/mach-snapdragon/include/mach/boot0.h
-> index 953cccad790..44a764788de 100644
-> --- a/arch/arm/mach-snapdragon/include/mach/boot0.h
-> +++ b/arch/arm/mach-snapdragon/include/mach/boot0.h
-> @@ -1,54 +1,7 @@
->  /* SPDX-License-Identifier: GPL-2.0+ */
-> -/*
-> - * Workaround for "PSCI bug" on DragonBoard 410c
-> - * Copyright (C) 2021 Stephan Gerhold <stephan@gerhold.net>
-> - *
-> - * Syscall parameters taken from Qualcomm's LK fork (scm.h):
-> - * Copyright (c) 2011-2015, The Linux Foundation. All rights reserved.
-> - *
-> - * The PSCI implementation in the TrustZone/tz firmware on DragonBoard 410c has
-> - * a bug that starts all other CPU cores in 32-bit mode unless the TZ syscall
-> - * that switches from 32-bit to 64-bit mode is executed at least once.
-> - *
-> - * Normally this happens inside Qualcomm's LK bootloader which runs in 32-bit
-> - * mode and uses the TZ syscall to boot a kernel in 64-bit mode. However, if
-> - * U-Boot is installed to the "aboot" partition (replacing LK) the switch to
-> - * 64-bit mode never happens since U-Boot is already running in 64-bit mode.
-> - *
-> - * A workaround for this "PSCI bug" is to execute the TZ syscall when entering
-> - * U-Boot. That way PSCI is made aware of the 64-bit switch and starts all other
-> - * CPU cores in 64-bit mode as well.
-> - */
-> -#include <linux/arm-smccc.h>
-> -
-> -#define ARM_SMCCC_SIP32_FAST_CALL \
-> -	ARM_SMCCC_CALL_VAL(ARM_SMCCC_FAST_CALL, ARM_SMCCC_SMC_32, ARM_SMCCC_OWNER_SIP, 0)
-> -
-> -	/*
-> -	 * U-Boot might be started in EL2 or EL3 with custom firmware.
-> -	 * In that case, we assume that the workaround is not necessary or is
-> -	 * handled already by the alternative firmware. Using the syscall in EL2
-> -	 * would demote U-Boot to EL1; in EL3 it would probably just crash.
-> -	 */
-> -	mrs	x0, CurrentEL
-> -	cmp	x0, #(1 << 2)	/* EL1 */
-> -	bne	reset
-> -
-> -	/* Prepare TZ syscall parameters */
-> -	mov	x0, #ARM_SMCCC_SIP32_FAST_CALL
-> -	movk	x0, #0x10f	/* SCM_SVC_MILESTONE_CMD_ID */
-> -	mov	x1, #0x12	/* MAKE_SCM_ARGS(0x2, SMC_PARAM_TYPE_BUFFER_READ) */
-> -	adr	x2, el1_system_param
-> -	mov	x3, el1_system_param_end - el1_system_param
-> -
-> -	/* Switch PSCI to 64-bit mode. Resets CPU and returns at el1_elr */
-> -	smc	#0
-> -
-> -	/* Something went wrong, perhaps PSCI is already in 64-bit mode? */
-> +#if defined(CONFIG_SPL_BUILD)
+Hi,
 
-Rather than this SPL build check...
+> On Wed, Apr 22, 2026 at 06:03:03PM +0530, Parvathi Pudi wrote:
+>=20
+>> This patch removes the static MDIO pinmux configuration from
+>> rmii1_pin_mux[] and instead configures the MDIO pins conditionally
+>> during board_init(). Previously, the MDIO_CLK and MDIO_DATA pins
+>> were always configured for CPSW in mux.c, which could lead to
+>> unnecessary pin ownership and conflicts in scenarios where CPSW
+>> is not used.
+>>=20
+>> With this change, the MDIO pins are configured only when required,
+>> ensuring that CPSW Ethernet functionality in U-Boot remains unaffected.
+>> This approach keeps Ethernet boot behavior intact and provides cleaner
+>> separation between CPSW and other Ethernet use cases.
+>>=20
+>> Reviewed-by: Markus Schneider-Pargmann (TI) <msp@baylibre.com>
+>> Signed-off-by: Parvathi Pudi <parvathi@couthit.com>
+>=20
+> This leads to failure to build on:
+> am335x_evm_spiboot am335x_hs_evm am335x_hs_evm_spi am335x_hs_evm_uart
+>=20
 
->  	b	reset
-> -
-> -	.align	3
-> -el1_system_param:
-> -	.quad	0, 0, 0, 0, 0, 0, 0, 0, 0	/* el1_x0-x8 */
-> -	.quad	reset				/* el1_elr */
-> -el1_system_param_end:
-> +#else
-> +/* currently only db410c enables boot0.h in u-boot proper */
-> +#include "msm8916_boot0.h"
+We tested the patch locally with the mentioned defconfigs (am335x_evm_spibo=
+ot,
+am335x_hs_evm, am335x_hs_evm_spi, am335x_hs_evm_uart), and we get the follo=
+wing
+warning:
 
-...add a special Kconfig option for msm8916 too like follows:
+=E2=80=98rmii1_mdio_pin_mux=E2=80=99 defined but not used [-Wunused-variabl=
+e]
 
-	BOOT0_MSM8916_PSCI_WORKAROUND
+Are you referring to this warning or do you see any other build errors?
 
-and enable it for db410c special defconfig.
-
--Sumit
-
-> +#endif
-> diff --git a/arch/arm/mach-snapdragon/include/mach/msm8916_boot0.h b/arch/arm/mach-snapdragon/include/mach/msm8916_boot0.h
-> new file mode 100644
-> index 00000000000..953cccad790
-> --- /dev/null
-> +++ b/arch/arm/mach-snapdragon/include/mach/msm8916_boot0.h
-> @@ -0,0 +1,54 @@
-> +/* SPDX-License-Identifier: GPL-2.0+ */
-> +/*
-> + * Workaround for "PSCI bug" on DragonBoard 410c
-> + * Copyright (C) 2021 Stephan Gerhold <stephan@gerhold.net>
-> + *
-> + * Syscall parameters taken from Qualcomm's LK fork (scm.h):
-> + * Copyright (c) 2011-2015, The Linux Foundation. All rights reserved.
-> + *
-> + * The PSCI implementation in the TrustZone/tz firmware on DragonBoard 410c has
-> + * a bug that starts all other CPU cores in 32-bit mode unless the TZ syscall
-> + * that switches from 32-bit to 64-bit mode is executed at least once.
-> + *
-> + * Normally this happens inside Qualcomm's LK bootloader which runs in 32-bit
-> + * mode and uses the TZ syscall to boot a kernel in 64-bit mode. However, if
-> + * U-Boot is installed to the "aboot" partition (replacing LK) the switch to
-> + * 64-bit mode never happens since U-Boot is already running in 64-bit mode.
-> + *
-> + * A workaround for this "PSCI bug" is to execute the TZ syscall when entering
-> + * U-Boot. That way PSCI is made aware of the 64-bit switch and starts all other
-> + * CPU cores in 64-bit mode as well.
-> + */
-> +#include <linux/arm-smccc.h>
-> +
-> +#define ARM_SMCCC_SIP32_FAST_CALL \
-> +	ARM_SMCCC_CALL_VAL(ARM_SMCCC_FAST_CALL, ARM_SMCCC_SMC_32, ARM_SMCCC_OWNER_SIP, 0)
-> +
-> +	/*
-> +	 * U-Boot might be started in EL2 or EL3 with custom firmware.
-> +	 * In that case, we assume that the workaround is not necessary or is
-> +	 * handled already by the alternative firmware. Using the syscall in EL2
-> +	 * would demote U-Boot to EL1; in EL3 it would probably just crash.
-> +	 */
-> +	mrs	x0, CurrentEL
-> +	cmp	x0, #(1 << 2)	/* EL1 */
-> +	bne	reset
-> +
-> +	/* Prepare TZ syscall parameters */
-> +	mov	x0, #ARM_SMCCC_SIP32_FAST_CALL
-> +	movk	x0, #0x10f	/* SCM_SVC_MILESTONE_CMD_ID */
-> +	mov	x1, #0x12	/* MAKE_SCM_ARGS(0x2, SMC_PARAM_TYPE_BUFFER_READ) */
-> +	adr	x2, el1_system_param
-> +	mov	x3, el1_system_param_end - el1_system_param
-> +
-> +	/* Switch PSCI to 64-bit mode. Resets CPU and returns at el1_elr */
-> +	smc	#0
-> +
-> +	/* Something went wrong, perhaps PSCI is already in 64-bit mode? */
-> +	b	reset
-> +
-> +	.align	3
-> +el1_system_param:
-> +	.quad	0, 0, 0, 0, 0, 0, 0, 0, 0	/* el1_x0-x8 */
-> +	.quad	reset				/* el1_elr */
-> +el1_system_param_end:
-> 
-> -- 
-> 2.53.0
-> 
+Thanks and Regards,
+Parvathi
