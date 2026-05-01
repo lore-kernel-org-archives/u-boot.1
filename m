@@ -4,58 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41D6FCCFA13
-	for <u-boot@archiver.kernel.org>; Fri,  1 May 2026 12:59:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65137CD3424
+	for <u-boot@archiver.kernel.org>; Fri,  1 May 2026 14:00:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9ED4E80F0E;
-	Fri,  1 May 2026 14:59:47 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7D4FA80F0E;
+	Fri,  1 May 2026 15:59:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=arm.com header.i=@arm.com header.b="BG98Zxqe";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=arm.com header.i=@arm.com header.b="SuZ8ZU78";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2775A81E18; Fri,  1 May 2026 14:59:46 +0200 (CEST)
+ id 4AC1281E18; Fri,  1 May 2026 15:59:57 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id A21C280086
- for <u-boot@lists.denx.de>; Fri,  1 May 2026 14:59:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id 6161680086
+ for <u-boot@lists.denx.de>; Fri,  1 May 2026 15:59:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=andre.przywara@arm.com
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 48EDE1650;
- Fri,  1 May 2026 05:59:37 -0700 (PDT)
-Received: from ryzen.lan (usa-sjc-mx-foss1.foss.arm.com [172.31.20.19])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 000753F7B4;
- Fri,  1 May 2026 05:59:40 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 33B9B176B;
+ Fri,  1 May 2026 06:59:48 -0700 (PDT)
+Received: from ryzen.fritz.box (usa-sjc-mx-foss1.foss.arm.com [172.31.20.19])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id
+ 38EE03F62B; Fri,  1 May 2026 06:59:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
- t=1777640382; bh=s/IldEmj7AIiD+mARwLQsaaJAV/Su86zabhbYvuaWBE=;
- h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
- b=BG98ZxqekaaKOIHKHtpHIneE6BjwuHDYBLcWSFYgC8Um9pd+WmI+QUFIQA+/z9Upo
- lPFDTrHrPIHCnMkJSQjStYi6hhgDAcKFHNWiD3Z7nyZ4mtoQOn4spCIlCfNPJ606SF
- 7BbDjeZYXTCLr+IkJUZkBElxWjoIz1sz9Sb0vNKQ=
-Date: Fri, 1 May 2026 14:59:03 +0200
+ t=1777643993; bh=HbZ92LwyzvHwo5mOloPFhGGIZvN0/Mi3JiCkSfFgbPw=;
+ h=From:To:Cc:Subject:Date:From;
+ b=SuZ8ZU78BcrqNcS4RLFxTYuhz64nnXKavzJjRp1clz5WdO/U/imlQVeEFbxBJ7MEv
+ xeqvMtNDtm85c7CfgthbnhvgdfMKtB7dOFRYR20VqtQJm8bkF7fMx8sdBu0a9Fn6a1
+ AeFuCqAQDIK42uYH5EUduRJDLW3OYfuNgYKZ3p3A=
 From: Andre Przywara <andre.przywara@arm.com>
-To: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>, Richard
- Genoud <richard.genoud@bootlin.com>
-Cc: Dario Binacchi <dario.binacchi@amarulasolutions.com>, Tom Rini
- <trini@konsulko.com>, Andrew Goodbody <andrew.goodbody@linaro.org>, Miquel
- Raynal <miquel.raynal@bootlin.com>, James Hilliard
- <james.hilliard1@gmail.com>, Boris Brezillon <bbrezillon@kernel.org>,
- Thomas Petazzoni <thomas.petazzoni@bootlin.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH v2 3/5] mtd: rawnand: sunxi: clean sunxi_nand_chip_init()
-Message-ID: <20260501145903.087f1204@ryzen.lan>
-In-Reply-To: <cfe67c5d-0762-4366-94df-e64728847f0b@arm.com>
-References: <20260327140508.3680105-1-richard.genoud@bootlin.com>
- <20260327140508.3680105-4-richard.genoud@bootlin.com>
- <CAOf5uwnYuZi46ZKijOJ-PLt_55Nwg9BQ5w+3Mtu+VxNvrER1Qw@mail.gmail.com>
- <cfe67c5d-0762-4366-94df-e64728847f0b@arm.com>
-Organization: Arm Ltd.
-X-Mailer: Claws Mail 4.4.0 (GTK 3.24.31; x86_64-slackware-linux-gnu)
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, linux-sunxi@lists.linux.dev,
+ Lukas Schmid <lukas.schmid@netcube.li>,
+ Jernej Skrabec <jernej.skrabec@gmail.com>, Yixun Lan <dlan@gentoo.org>,
+ Richard Genoud <richard.genoud@bootlin.com>
+Subject: [GIT PULL] u-boot-sunxi/master for v2026.07
+Date: Fri,  1 May 2026 15:59:17 +0200
+Message-ID: <20260501135917.9276-1-andre.przywara@arm.com>
+X-Mailer: git-send-email 2.46.4
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,169 +63,105 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 27 Apr 2026 14:35:08 +0200
-Andre Przywara <andre.przywara@arm.com> wrote:
+Hi Tom,
 
-> Hi,
->=20
-> On 3/27/26 15:42, Michael Nazzareno Trimarchi wrote:
-> > Hi Richard
-> >=20
-> > On Fri, Mar 27, 2026 at 3:05=E2=80=AFPM Richard Genoud
-> > <richard.genoud@bootlin.com> wrote: =20
-> >>
-> >> In sunxi_nand_chip_init there's quite a lot of kfree/return, it's easy
-> >> to forget a kfree(), so use a goto/kfree instead.
-> >>
-> >> Signed-off-by: Richard Genoud <richard.genoud@bootlin.com>
-> >> ---
-> >>   drivers/mtd/nand/raw/sunxi_nand.c | 41 ++++++++++++++---------------=
---
-> >>   1 file changed, 18 insertions(+), 23 deletions(-)
-> >>
-> >> diff --git a/drivers/mtd/nand/raw/sunxi_nand.c b/drivers/mtd/nand/raw/=
-sunxi_nand.c
-> >> index 9fc9bc5e0198..ecab9ebc9576 100644
-> >> --- a/drivers/mtd/nand/raw/sunxi_nand.c
-> >> +++ b/drivers/mtd/nand/raw/sunxi_nand.c
-> >> @@ -1600,21 +1600,20 @@ static int sunxi_nand_chip_init(struct udevice=
- *dev, struct sunxi_nfc *nfc,
-> >>                  if (ret) {
-> >>                          dev_err(dev, "could not retrieve reg property=
-: %d\n",
-> >>                                  ret);
-> >> -                       kfree(chip);
-> >> -                       return ret;
-> >> +                       goto out;
-> >>                  }
-> >>
-> >>                  if (tmp > NFC_MAX_CS) {
-> >>                          dev_err(dev,
-> >>                                  "invalid reg value: %u (max CS =3D 7)=
-\n", tmp);
-> >> -                       kfree(chip);
-> >> -                       return -EINVAL;
-> >> +                       ret =3D -EINVAL;
-> >> +                       goto out;
-> >>                  }
-> >>
-> >>                  if (test_and_set_bit(tmp, &nfc->assigned_cs)) {
-> >>                          dev_err(dev, "CS %d already assigned\n", tmp);
-> >> -                       kfree(chip);
-> >> -                       return -EINVAL;
-> >> +                       ret =3D -EINVAL;
-> >> +                       goto out;
-> >>                  }
-> >>
-> >>                  chip->sels[i].cs =3D tmp;
-> >> @@ -1640,15 +1639,13 @@ static int sunxi_nand_chip_init(struct udevice=
- *dev, struct sunxi_nfc *nfc,
-> >>                  dev_err(dev,
-> >>                          "could not retrieve timings for ONFI mode 0: =
-%d\n",
-> >>                          ret);
-> >> -               kfree(chip);
-> >> -               return ret;
-> >> +               goto out;
-> >>          }
-> >>
-> >>          ret =3D sunxi_nand_chip_set_timings(nfc, chip, timings);
-> >>          if (ret) {
-> >>                  dev_err(dev, "could not configure chip timings: %d\n"=
-, ret);
-> >> -               kfree(chip);
-> >> -               return ret;
-> >> +               goto out;
-> >>          }
-> >>
-> >>          nand =3D &chip->nand;
-> >> @@ -1669,10 +1666,8 @@ static int sunxi_nand_chip_init(struct udevice =
-*dev, struct sunxi_nfc *nfc,
-> >>
-> >>          mtd =3D nand_to_mtd(nand);
-> >>          ret =3D nand_scan_ident(mtd, nsels, NULL);
-> >> -       if (ret) {
-> >> -               kfree(chip);
-> >> -               return ret;
-> >> -       }
-> >> +       if (ret)
-> >> +               goto out;
-> >>
-> >>          if (nand->bbt_options & NAND_BBT_USE_FLASH)
-> >>                  nand->bbt_options |=3D NAND_BBT_NO_OOB;
-> >> @@ -1685,34 +1680,34 @@ static int sunxi_nand_chip_init(struct udevice=
- *dev, struct sunxi_nfc *nfc,
-> >>          ret =3D sunxi_nand_chip_init_timings(nfc, chip);
-> >>          if (ret) {
-> >>                  dev_err(dev, "could not configure chip timings: %d\n"=
-, ret);
-> >> -               kfree(chip);
-> >> -               return ret;
-> >> +               goto out;
-> >>          }
-> >>
-> >>          ret =3D sunxi_nand_ecc_init(mtd, &nand->ecc);
-> >>          if (ret) {
-> >>                  dev_err(dev, "ECC init failed: %d\n", ret);
-> >> -               kfree(chip);
-> >> -               return ret;
-> >> +               goto out;
-> >>          }
-> >>
-> >>          ret =3D nand_scan_tail(mtd);
-> >>          if (ret) {
-> >>                  dev_err(dev, "nand_scan_tail failed: %d\n", ret);
-> >> -               kfree(chip);
-> >> -               return ret;
-> >> +               goto out;
-> >>          }
-> >>
-> >>          ret =3D nand_register(devnum, mtd);
-> >>          if (ret) {
-> >>                  dev_err(dev, "failed to register mtd device: %d\n", r=
-et);
-> >> -               kfree(chip);
-> >> -               return ret;
-> >> +               goto out;
-> >>          }
-> >>
-> >>          list_add_tail(&chip->node, &nfc->chips);
-> >>
-> >> -       return 0;
-> >> +out:
-> >> +       if (ret)
-> >> +               kfree(chip);
-> >> +
-> >> +       return ret;
-> >>   }
-> >>
-> >>   static int sunxi_nand_chips_init(struct udevice *dev, struct sunxi_n=
-fc *nfc) =20
-> >=20
-> > I need to go a bit in the code but seems that out can happen even if
-> > there is no error. It's
-> > not so common to have if (ret) if exit condition in case of errot =20
->=20
-> So I think it's fine in this case, ret is always set before we "goto",=20
-> and in the success case "ret" must be 0 from the last check. But I agree=
-=20
-> that the construct is a bit uncommon and fragile, so what about keeping=20
-> the "return 0;" (to use the common pattern and help readability), and=20
-> rename the label to "out_err" or "out_free", to make it more obvious=20
-> that this the error path only, and we expect ret to be set?
+apologies for the delay, but please pull those sunxi changes into
+v2026.07. Nothing earth shattering, mostly minor improvements like
+better SPL power LED support, and fixes to some H616 DRAM setup. Also
+some more forward looking enhancement for the SPI code. I also pulled in
+Richard's raw NAND flash improvements for the H6/H616 SoC, though this
+lacks proper peer testing due to the lack of mainline support for any board
+actually employing those chips.
 
-So FYI, in the interest of moving this patch set forward, I took the
-freedom of changing this as I suggested above. That's gonna be part of
-the PR now.
+Gitlab CI passed, and I booted that briefly on some boards.
 
-Cheers,
+Thanks,
 Andre
 
->=20
-> Cheers,
-> Andre
->=20
-> >=20
-> > Michael =20
->=20
+===========================================================
+The following changes since commit 8ef8dee4f3a2b2021decfefd853dbd2a1632b77f:
 
+  scripts/dtc: drop yaml in DT validation (2026-04-30 12:21:47 -0600)
+
+are available in the Git repository at:
+
+  https://source.denx.de/u-boot/custodians/u-boot-sunxi.git master
+
+for you to fetch changes up to 4c8d2a633ed22e90c6b1954b10b0f74fd678cb23:
+
+  mtd: nand: raw: sunxi_spl: remove user data length reset (2026-05-01 14:49:44 +0200)
+
+----------------------------------------------------------------
+Andre Przywara (4):
+      sunxi: spl: fix SPL_SUNXI_LED active low configuration
+      sunxi: configs: enable power LEDs on 32-bit boards
+      sunxi: configs: enable power LEDs on 64-bit boards
+      sunxi: H616: dram: drop default TPR6 Kconfig value
+
+Heinrich Schuchardt (1):
+      sunxi: use vendor prefix for $fdtfile on RISC-V too
+
+Jernej Skrabec (1):
+      sunxi: H616: dram: fix LPDDR3 TPR6 parsing
+
+Lukas Schmid (1):
+      pinctrl: sunxi: add I2C3 mux for D1/T113-s3 (PG10/PG11)
+
+Richard Genoud (5):
+      mtd: rawnand: sunxi: Replace hard coded value by a define
+      mtd: rawnand: sunxi: make the code mode self-explanatory
+      mtd: rawnand: sunxi: clean sunxi_nand_chip_init()
+      mtd: rawnand: sunxi: introduce variable user data length
+      mtd: nand: raw: sunxi_spl: remove user data length reset
+
+Yixun Lan (1):
+      spi: sunxi: wait for TX/RX fifo reset done
+
+ arch/arm/mach-sunxi/Kconfig              |  11 +-
+ arch/arm/mach-sunxi/dram_sun50i_h616.c   |   2 +-
+ board/sunxi/board.c                      |   4 +-
+ configs/A13-OLinuXinoM_defconfig         |   2 +
+ configs/Bananapi_M2_Ultra_defconfig      |   2 +
+ configs/Bananapi_m2m_defconfig           |   3 +
+ configs/Mele_A1000G_quad_defconfig       |   2 +
+ configs/Mele_A1000_defconfig             |   2 +
+ configs/Mele_M9_defconfig                |   2 +
+ configs/anbernic_rg35xx_h700_defconfig   |   2 +
+ configs/bananapi_m1_plus_defconfig       |   2 +
+ configs/bananapi_m2_berry_defconfig      |   2 +
+ configs/bananapi_m2_zero_defconfig       |   3 +
+ configs/bananapi_m64_defconfig           |   2 +
+ configs/beelink_gs1_defconfig            |   2 +
+ configs/beelink_x2_defconfig             |   2 +
+ configs/icnova-a20-adb4006_defconfig     |   2 +
+ configs/liontron-h-a133l_defconfig       |   3 +
+ configs/nanopi_duo2_defconfig            |   2 +
+ configs/nanopi_neo2_defconfig            |   2 +
+ configs/nanopi_neo_air_defconfig         |   2 +
+ configs/nanopi_neo_plus2_defconfig       |   2 +
+ configs/orangepi_2_defconfig             |   2 +
+ configs/orangepi_3_defconfig             |   2 +
+ configs/orangepi_lite2_defconfig         |   2 +
+ configs/orangepi_lite_defconfig          |   2 +
+ configs/orangepi_one_defconfig           |   2 +
+ configs/orangepi_pc2_defconfig           |   2 +
+ configs/orangepi_pc_defconfig            |   2 +
+ configs/orangepi_prime_defconfig         |   2 +
+ configs/orangepi_zero2_defconfig         |   3 +
+ configs/orangepi_zero_defconfig          |   2 +
+ configs/orangepi_zero_plus2_defconfig    |   2 +
+ configs/orangepi_zero_plus2_h3_defconfig |   2 +
+ configs/orangepi_zero_plus_defconfig     |   2 +
+ configs/pinephone_defconfig              |   3 +-
+ configs/radxa-cubie-a5e_defconfig        |   3 +
+ configs/tanix_tx1_defconfig              |   2 +
+ configs/transpeed-8k618-t_defconfig      |   1 +
+ configs/x96_mate_defconfig               |   1 +
+ configs/x96q_defconfig                   |   1 +
+ drivers/mtd/nand/raw/sunxi_nand.c        | 291 +++++++++++++++++++++++--------
+ drivers/mtd/nand/raw/sunxi_nand.h        |   3 +
+ drivers/mtd/nand/raw/sunxi_nand_spl.c    | 129 +++++++++++---
+ drivers/pinctrl/sunxi/pinctrl-sunxi.c    |   1 +
+ drivers/spi/spi-sunxi.c                  |   9 +-
+ include/configs/sunxi-common.h           |   2 +-
+ 47 files changed, 418 insertions(+), 113 deletions(-)
