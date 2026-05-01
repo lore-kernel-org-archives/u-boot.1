@@ -4,56 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94C90FF8864
-	for <u-boot@archiver.kernel.org>; Fri,  1 May 2026 06:57:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87CD8FF885A
+	for <u-boot@archiver.kernel.org>; Fri,  1 May 2026 06:58:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 098A8803C6;
-	Fri,  1 May 2026 08:57:04 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BC25C803C6;
+	Fri,  1 May 2026 08:58:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="CqQ+/Iz8";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="gW6lX6KQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5570580F0E; Fri,  1 May 2026 08:57:03 +0200 (CEST)
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+ id 3F9AB839D5; Fri,  1 May 2026 08:58:00 +0200 (CEST)
+Received: from sea.source.kernel.org (sea.source.kernel.org
+ [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ABA0E80086
- for <u-boot@lists.denx.de>; Fri,  1 May 2026 08:57:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0B8FD80086
+ for <u-boot@lists.denx.de>; Fri,  1 May 2026 08:57:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=sumit.garg@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 3102D434A8;
- Fri,  1 May 2026 06:56:59 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B26DCC2BCB7;
- Fri,  1 May 2026 06:56:55 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id D5E3A40B89;
+ Fri,  1 May 2026 06:57:56 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 060DBC2BCB7;
+ Fri,  1 May 2026 06:57:50 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1777618619;
- bh=s40IAHFV0EIRywHqDYZbtW6E7VKA3UpLKKRPkYN1pE4=;
+ s=k20201202; t=1777618676;
+ bh=E2cZZ3W/lx3jc6cqZTPNUf0QTl69F90TseKMAKkk8Hs=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=CqQ+/Iz8rjZrWXnkTYc9H2470qGW8SixL0XnNYaOFXg/I3FnK+vi0A9gAaO7LhZiR
- G5vrUVVrf8DVHoKwQ3UcofScpQGysQuScw7KCitdkJTxXCBMEnylYCZ4KYGk7WpJ4R
- d0WpWC3OppjrvymGtoyKvT14S3QUCSACE2GI/OAqaL8NEGPd4/RPVPuhiZDABC7Bzy
- 2+3JPG8ixEVd+6iKTR84/tBYu7uVQddFQWk4PwAYz4u5SyyjB1LWt06bHTyNW39AEr
- bMlUJS+yZLgkgmkwUpFpyrZ3AfrOWjFF8+IzjucRWVhEq7rcvc9wMCAvFkkUufgkV8
- y/7roFhUicE7w==
-Date: Fri, 1 May 2026 12:26:53 +0530
+ b=gW6lX6KQ8BKUgfNF7Y5Wn1l8yP/Uy3FysIM8T/hKHiukIizxmulzPPYVjhpvhHuKm
+ 8ZwULenNhboAk99xESCVwzjUTHoATqWuOMG7If42K9Vwk32ND78Y0hZQ6KKbzYMbiJ
+ muFVWmWpmC0piuMQglJbmzBNjd0U43XYGB31N28xoCzaIGKE1JGEbP6OtaT1wHuaV+
+ 79qYl7yHmw+g9npFPZVXii2Xt6c8kXO21nsu7MTkSuC3t8Kr7r/+3pEfYTsU/r5J/u
+ PyvjUwdFd5w0kNVlN2qpPtEkTkFkxm99RYBRlCmVvfXfLiLxZMp2RGSjZSgGU+HHAR
+ Vpstsg4aws9uw==
+Date: Fri, 1 May 2026 12:27:48 +0530
 From: Sumit Garg <sumit.garg@kernel.org>
-To: Gurumoorthy Santhakumar <gurumoorthy.santhakumar@oss.qualcomm.com>
-Cc: casey.connolly@linaro.org, neil.armstrong@linaro.org,
- trini@konsulko.com, andrew.goodbody@linaro.org,
- quic_timple@quicinc.com, swboyd@chromium.org, u-boot-qcom@groups.io,
- u-boot@lists.denx.de
-Subject: Re: [PATCH v1] serial: msm-geni: configure RX watermark register
-Message-ID: <afROtaRqheyt6yTq@sumit-xelite>
-References: <20260421044555.368486-1-gurumoorthy.santhakumar@oss.qualcomm.com>
+To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de,
+ Lukasz Majewski <lukma@denx.de>,
+ Casey Connolly <casey.connolly@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>,
+ Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
+ Stephan Gerhold <stephan.gerhold@linaro.org>,
+ Varadarajan Narayanan <quic_varada@quicinc.com>,
+ Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
+ Loic Poulain <loic.poulain@oss.qualcomm.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Paul Sajna <sajattack@postmarketos.org>,
+ Abbarapu Venkatesh Yadav <venkyada@qti.qualcomm.com>,
+ Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
+Subject: Re: [PATCH v2 2/3] drivers: mmc: uclass: Set removable flag based on
+ device tree property
+Message-ID: <afRO7KbCEm1SdG0d@sumit-xelite>
+References: <20260421-emmc-v2-0-0ebd3322b676@oss.qualcomm.com>
+ <20260421-emmc-v2-2-0ebd3322b676@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20260421044555.368486-1-gurumoorthy.santhakumar@oss.qualcomm.com>
+In-Reply-To: <20260421-emmc-v2-2-0ebd3322b676@oss.qualcomm.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,66 +83,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Apr 21, 2026 at 10:15:55AM +0530, Gurumoorthy Santhakumar wrote:
-> From: Timple Raj M <quic_timple@quicinc.com>
+On Tue, Apr 21, 2026 at 06:30:09PM +0530, Balaji Selvanathan wrote:
+> The block device removable flag should reflect whether the MMC
+> device is physically removable (SD card) or soldered (eMMC). This
+> information is specified in the device tree via the "non-removable"
+> property and stored in the MMC_CAP_NONREMOVABLE capability flag.
 > 
-> The SE_GENI_RX_WATERMARK_REG was not being programmed in the RX
-> setup paths. Set it to DEF_RX_WM (2) in qcom_geni_serial_start_rx(),
-> msm_geni_serial_setup_rx() and _debug_uart_init() to align with the
-> Linux kernel driver behaviour.
+> Update the removable flag in the block device descriptor during
+> controller probe to properly reflect the device's removable status.
+> This allows the block layer and upper layers (particularly EFI boot
+> manager) to distinguish between eMMC and SD cards for appropriate
+> handling.
 > 
-> Without this, the RX FIFO watermark interrupt threshold is left at
-> its hardware reset value, which may differ from the expected value
-> and can cause RX data loss or missed watermark interrupts.
+> The default removable=1 is set in mmc_bind(), and this change
+> overrides it only for non-removable devices after mmc_of_parse()
+> has set the MMC_CAP_NONREMOVABLE capability from the device tree.
 > 
-> Link: https://lore.kernel.org/all/20200227132223.864425794@linuxfoundation.org/
-> Signed-off-by: Timple Raj M <quic_timple@quicinc.com>
-> Signed-off-by: Gurumoorthy Santhakumar <gurumoorthy.santhakumar@oss.qualcomm.com>
+> Reviewed-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
+> Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 > ---
->  drivers/serial/serial_msm_geni.c | 4 ++++
->  1 file changed, 4 insertions(+)
+> Changes in v2:
+> - Moved removable flag update from generic mmc-uclass.c to platform-
+>   specific msm_sdhci.c driver
 
 Reviewed-by: Sumit Garg <sumit.garg@oss.qualcomm.com>
 
 -Sumit
 
+> ---
+>  drivers/mmc/msm_sdhci.c | 7 +++++++
+>  1 file changed, 7 insertions(+)
 > 
-> diff --git a/drivers/serial/serial_msm_geni.c b/drivers/serial/serial_msm_geni.c
-> index 3dca581f68f..ae4015e0fdc 100644
-> --- a/drivers/serial/serial_msm_geni.c
-> +++ b/drivers/serial/serial_msm_geni.c
-> @@ -55,6 +55,7 @@
->  #define SE_UART_RX_PARITY_CFG	0x2a8
+> diff --git a/drivers/mmc/msm_sdhci.c b/drivers/mmc/msm_sdhci.c
+> index 66f3cf2de4f..13fd4ae8a7d 100644
+> --- a/drivers/mmc/msm_sdhci.c
+> +++ b/drivers/mmc/msm_sdhci.c
+> @@ -189,6 +189,7 @@ static int msm_sdc_probe(struct udevice *dev)
+>  	struct sdhci_host *host = &prv->host;
+>  	u32 core_version, core_minor, core_major;
+>  	struct reset_ctl bcr_rst;
+> +	struct blk_desc *bdesc;
+>  	u32 caps;
+>  	int ret;
 >  
->  #define DEF_TX_WM	2
-> +#define DEF_RX_WM	2
->  /* GENI_FORCE_DEFAULT_REG fields */
+> @@ -252,6 +253,12 @@ static int msm_sdc_probe(struct udevice *dev)
+>  	if (ret)
+>  		return ret;
 >  
->  #define UART_START_READ	0x1
-> @@ -345,6 +346,7 @@ static void qcom_geni_serial_start_rx(struct udevice *dev)
->  
->  	geni_se_setup_s_cmd(priv->base, UART_START_READ, 0);
->  
-> +	writel(DEF_RX_WM, priv->base + SE_GENI_RX_WATERMARK_REG);
->  	setbits_le32(priv->base + SE_GENI_S_IRQ_EN, S_RX_FIFO_WATERMARK_EN | S_RX_FIFO_LAST_EN);
->  	setbits_le32(priv->base + SE_GENI_M_IRQ_EN, M_RX_FIFO_WATERMARK_EN | M_RX_FIFO_LAST_EN);
->  }
-> @@ -373,6 +375,7 @@ static void msm_geni_serial_setup_rx(struct udevice *dev)
->  
->  	geni_se_setup_s_cmd(priv->base, UART_START_READ, 0);
->  
-> +	writel(DEF_RX_WM, priv->base + SE_GENI_RX_WATERMARK_REG);
->  	setbits_le32(priv->base + SE_GENI_S_IRQ_EN, S_RX_FIFO_WATERMARK_EN | S_RX_FIFO_LAST_EN);
->  	setbits_le32(priv->base + SE_GENI_M_IRQ_EN, M_RX_FIFO_WATERMARK_EN | M_RX_FIFO_LAST_EN);
->  }
-> @@ -616,6 +619,7 @@ static inline void _debug_uart_init(void)
->  	phys_addr_t base = CONFIG_VAL(DEBUG_UART_BASE);
->  
->  	geni_serial_init(&init_dev);
-> +	writel(DEF_RX_WM, base + SE_GENI_RX_WATERMARK_REG);
->  	geni_serial_baud(base, CLK_DIV, CONFIG_BAUDRATE);
->  	qcom_geni_serial_start_tx(base);
->  }
+> +	if (plat->cfg.host_caps & MMC_CAP_NONREMOVABLE) {
+> +		bdesc = mmc_get_blk_desc(&plat->mmc);
+> +		if (bdesc)
+> +			bdesc->removable = 0;
+> +	}
+> +
+>  	host->mmc = &plat->mmc;
+>  	host->mmc->dev = dev;
+>  	host->ops = &msm_sdhci_ops;
+> 
 > -- 
 > 2.34.1
 > 
