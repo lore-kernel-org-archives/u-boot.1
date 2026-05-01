@@ -4,60 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0BEACD3423
-	for <u-boot@archiver.kernel.org>; Fri,  1 May 2026 15:16:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7704ECD3423
+	for <u-boot@archiver.kernel.org>; Fri,  1 May 2026 16:27:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 27519803C6;
-	Fri,  1 May 2026 17:16:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 7E5B5803C6;
+	Fri,  1 May 2026 18:27:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="hGzYgfoo";
+	dkim=pass (2048-bit key; secure) header.d=siemens.com header.i=alexander.sverdlin@siemens.com header.b="g3/0MlVK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C9F6981E18; Fri,  1 May 2026 17:16:22 +0200 (CEST)
-Received: from smtp-relay-canonical-0.canonical.com
- (smtp-relay-canonical-0.canonical.com [185.125.188.120])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id C8DAD80F0E; Fri,  1 May 2026 18:27:10 +0200 (CEST)
+Received: from mta-64-225.siemens.flowmailer.net
+ (mta-64-225.siemens.flowmailer.net [185.136.64.225])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1BC2980086
- for <u-boot@lists.denx.de>; Fri,  1 May 2026 17:16:20 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from LT03 (1.general.zfsdt.uk.vpn [10.172.194.136])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id 407C640076; 
- Fri,  1 May 2026 15:16:19 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1777648579;
- bh=XVw6gFQAueT53zRPB+h7ls7RXXfmXmdhJv/Ati8907g=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=hGzYgfoooZYWOuN5Cb5GW53sgFchvVx46Si8m3L3ZRe7rfPV5Csr5Df6jWaCPuy89
- 70Rp+hFQcGu7n/c0sfTET+6P9uVwq7of4jmGdrNSlH92FdZVsjScd7aZ2AjWQWT2Wi
- 9VfRk80WbERDvp0m4p3ouCgUc54e3B9vgGQqf9alWcTipHonJ2viI/j1aEyvLaDkwW
- InWxKdQPaW6y8G1W+EzIGjBdeVRUp5D5T3CcZA2Kt32KCumnqZxlTuUFP8VvyzxpO6
- w7+ObVpFZCAPPqq1TkWMeTeHNKEyyb/+dWuoz2Dtu3/lgst6lyfv/l+9oY4riAMFYD
- kK1isr2IxdLA1+upgnbcgjKvUCkLe1PIL7VRIoPlVhb19b3yOTyvgFc13RXtk2iLGJ
- maNAp6X9qvtD4q+oyhOcs2KHe0HUX0ULup8KOT4mlQFSitXdvjZWutQ65QnwbHkpjm
- kCFyt2Kx1YWMwtuGkQxxb0qubsXD29PxcDN6+oqVHeJ7F+MP/PAtU0eXm1HbbbzljR
- 7YKgchZZp99IiXyfB5qh7f6HuC0vFCYLPR8ZhReU/xoZf4RrlyYBrzFOYYIepfBj6j
- VvLlXRpsv94dC14c4acTKqDmpHIz9bDCJBsiBZYj14pobAaQz7cTFrVu4UAi3wKeOg
- NuBvgOodk7eJFcWv2aizFcrA=
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Anatolij Gustschin <ag.dev.uboot@gmail.com>, Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>, Quentin Schulz <quentin.schulz@cherry.de>,
- u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/1] video: show 'physical' frame buffer on sandbox
-Date: Fri,  1 May 2026 17:16:12 +0200
-Message-ID: <20260501151612.229417-1-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.53.0
+ by phobos.denx.de (Postfix) with ESMTPS id 979CC80086
+ for <u-boot@lists.denx.de>; Fri,  1 May 2026 18:27:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=reject dis=none) header.from=siemens.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=alexander.sverdlin@siemens.com
+Received: by mta-64-225.siemens.flowmailer.net with ESMTPSA id
+ 202605011627084ee4ed698b000207c0 for <u-boot@lists.denx.de>;
+ Fri, 01 May 2026 18:27:08 +0200
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm2;
+ d=siemens.com; i=alexander.sverdlin@siemens.com;
+ h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
+ bh=ErLmqOVdfZEih4PmNHAab6evMJTfUfsU+J2b/qFzdOE=;
+ b=g3/0MlVKU+AK5qK0I8uRRH5sipAKw1fR5yIpogwM5gEtHMoLdGgTNL8+pbVWJov/B+/Qgr
+ SFsHtjdVgr1yBtvZA1wST5zYFveZCcblwrfNs6BpZdfM98VspjCQcAwaqh5jfWbRbA9ZPbFc
+ r03O65rM5x+yUtDAg6lC1zinL1MLAUex4YENbtOIy87I8bJlefOhZEsYUpCLDjQ6twJE8XqO
+ GdYw7s7HLeSb0qP3dwUeLDyxS/rLpaQ2fvkq05Mt9u9CrS646C4bMBgsSWmJfcpIqO6kzY0u
+ NHKAzee9XQr9ktU/fabZ4mARmAQh06Fqg7pM4RYCGFRUfkT5xiWLJMDA==;
+From: "A. Sverdlin" <alexander.sverdlin@siemens.com>
+To: u-boot@lists.denx.de
+Cc: Alexander Sverdlin <alexander.sverdlin@siemens.com>,
+ Lukasz Majewski <lukma@denx.de>, Tom Rini <trini@konsulko.com>,
+ Ye Li <ye.li@nxp.com>,
+ Christoph Niedermaier <cniedermaier@dh-electronics.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Peng Fan <peng.fan@nxp.com>
+Subject: [PATCH] clk: imx: don't build i.MX6/RTxxxx code for all users of CCF
+Date: Fri,  1 May 2026 18:27:03 +0200
+Message-ID: <20260501162706.543779-1-alexander.sverdlin@siemens.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-Flowmailer-Platform: Siemens
+Feedback-ID: 519:519-456497:519-21489:flowmailer
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,35 +69,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-We allow using double buffering for video. This can be accomplished by
-cyclic copies or we may copy 'damaged' areas.
+From: Alexander Sverdlin <alexander.sverdlin@siemens.com>
 
-To inspect the output we must inspect the target frame buffer that models
-the physical frame buffer on the sandbox.
+When commit 1d7993d1d0ef
+("clk: Port Linux common clock framework [CCF] for imx6q to U-boot (tag: v5.1.12)")
+introduced the parts of Linux Common Clock Framework, it was done for i.MX6
+only and even had "depends on SPL_CLK_IMX6Q" conditions. Since commit
+ccab06689aa2 ("clk: imx: expose CCF entry for all") the framework can be
+re-used with SoCs of other vendors (say, TI), but NXP SoC-specific code is
+still being build. Is is especially problematic for size-constrained SPL
+images on TI AM62x.
 
-If double buffering is active, priv->copy_fb is a pointer to the target
-frame buffer.
+Make the build of the i.MX6/RTxxxx code not only dependent on
+CONFIG_$(PHASE_)CLK_CCF, but also on the corresponding CONFIG_ARCH_*
+options taking into account that only two platforms seem to use the code in
+question.
 
-Fixes: 5c8dddadf1c9 ("video: Use cyclic to handle video sync")
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+This saves 2264 bytes on ARM platforms [using CCF].
+
+Signed-off-by: Alexander Sverdlin <alexander.sverdlin@siemens.com>
 ---
- drivers/video/video-uclass.c | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
+ drivers/clk/imx/Makefile | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/drivers/video/video-uclass.c b/drivers/video/video-uclass.c
-index 228d6bacc58..c178027fec4 100644
---- a/drivers/video/video-uclass.c
-+++ b/drivers/video/video-uclass.c
-@@ -516,8 +516,7 @@ int video_sync(struct udevice *vid, bool force)
- 		video_flush_dcache(vid, true);
+diff --git a/drivers/clk/imx/Makefile b/drivers/clk/imx/Makefile
+index f2fd6ff8ca0..53f07bdf70d 100644
+--- a/drivers/clk/imx/Makefile
++++ b/drivers/clk/imx/Makefile
+@@ -2,7 +2,9 @@
+ #
+ # SPDX-License-Identifier: GPL-2.0
  
- #if defined(CONFIG_VIDEO_SANDBOX_SDL)
--	/* to see the copy framebuffer, use priv->copy_fb */
--	sandbox_sdl_sync(priv->fb);
-+	sandbox_sdl_sync(priv->copy_fb ? priv->copy_fb : priv->fb);
- #endif
- 	priv->last_sync = get_timer(0);
- 
++ifeq ($(CONFIG_ARCH_MX6)$(CONFIG_ARCH_IMXRT),y)
+ obj-$(CONFIG_$(PHASE_)CLK_CCF) += clk-gate2.o clk-pllv3.o clk-pfd.o
++endif
+ obj-$(CONFIG_$(PHASE_)CLK_IMX6Q) += clk-imx6q.o
+ obj-$(CONFIG_$(PHASE_)CLK_IMX6UL) += clk-imx6ul.o
+ obj-$(CONFIG_CLK_IMX8) += clk-imx8.o
 -- 
-2.53.0
+2.52.0
 
