@@ -4,105 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BAB90CCFA13
-	for <u-boot@archiver.kernel.org>; Fri,  1 May 2026 22:51:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D528DCD3427
+	for <u-boot@archiver.kernel.org>; Fri,  1 May 2026 23:51:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2C3A383693;
-	Sat,  2 May 2026 00:51:36 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 16FB6842D7;
+	Sat,  2 May 2026 01:51:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="fTNQmt5g";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="J3bKNXEG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F39DE83E36; Sat,  2 May 2026 00:51:34 +0200 (CEST)
-Received: from mail-vk1-xa34.google.com (mail-vk1-xa34.google.com
- [IPv6:2607:f8b0:4864:20::a34])
+ id E35818464E; Sat,  2 May 2026 01:51:19 +0200 (CEST)
+Received: from mail-oi1-x242.google.com (mail-oi1-x242.google.com
+ [IPv6:2607:f8b0:4864:20::242])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A86FA80F0E
- for <u-boot@lists.denx.de>; Sat,  2 May 2026 00:51:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6B3258466B
+ for <u-boot@lists.denx.de>; Sat,  2 May 2026 01:51:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=raymondmaoca@gmail.com
-Received: by mail-vk1-xa34.google.com with SMTP id
- 71dfb90a1353d-56d8d479149so853862e0c.2
- for <u-boot@lists.denx.de>; Fri, 01 May 2026 15:51:31 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1777675890; cv=none;
- d=google.com; s=arc-20240605;
- b=L47dDfOHAd7pJalNuoLuaVNiIOzvsEBACiEHVB64o/eTpcKO7EVwap///RO8N1ylQy
- KFm9rkP23AHXGtSF6wP+36uRMAignYvIAy59p5eOxaXy2DhPzVNVZ9lRCqfBqKLVLf+p
- ETulJG9T8NDk1/hcCE4EgmeScRQRc0E3M17hP4nCjGncWDFLdZV0q8/E4Egy8qCqFj+M
- N63fz2O6DnFHDiCypSuwySPLROOc481McgX7MNQ3lwozlA75l64WajF4S3ZYMjKuIByz
- Ac6BO19zV4VKJnSq+5LzRgy1GOspVy6H+dFtiGzOV3Cf33WqYbIKJg+IaoQanw+B2Jq2
- kGlw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=RYqXkIxbrIJNTw3mN/msctz7wj+X3BOWSrVccUsBbrg=;
- fh=AAfzKCDxc1e/dJvGwugRKl9x1DS6TyFb222UJuOjQmQ=;
- b=UU2803DZIwMme7y5ItnIdL2Pq2e35F1aO7qceULo2Qp6eJhzSbWpxkr3BH2Ri/fKuE
- HzyIVNmb2aoWFAQ+UB6F3K0hA2BspuBTojOhwX/KEVhWOW+UqeXyNEBoaZvAa/XwEuQC
- nX7ofNAoYJW29dA8d5xl++xI5oQKCX1feLeA/DV2+HI09WeVFhGKn1TI/GOKIz6giL/9
- 2ny1HQwudT00LjgMr+fbyop10NJt4i7gvLlvZeDbL8r/2t7krY84g20L2QwMxNzQ/AMw
- naC+th0EDcB+MtIORpACNlymPua6sT+FZILOkLQD80a60ZnP6nolRn7ejVmohcpZAIko
- Rqtw==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x242.google.com with SMTP id
+ 5614622812f47-47bfa080d93so1589177b6e.1
+ for <u-boot@lists.denx.de>; Fri, 01 May 2026 16:51:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1777675890; x=1778280690; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
+ d=konsulko.com; s=google; t=1777679471; x=1778284271; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=RYqXkIxbrIJNTw3mN/msctz7wj+X3BOWSrVccUsBbrg=;
- b=fTNQmt5ghYLPPTd3wizBFCJitrugZSwykKzahRqyNfeyePRfbOM39IVpzoqwFfBCP8
- T1waQkWT03xet0pJt4iMMQV2tF8wjB+xOirkY3R4M4QK2zYTMEMNjZqjdIZeMEy/wq7e
- TbkuafWXsvdSfyyRxS45/J1cfMiw+gcEwKL5lCS7ABNoz32J5n5IWMv0uoeLaaujij/u
- QB0wG5CKspa4zyGlzbwYXgp07VHO3OTyx6r4W73fe5VXry2Lq+9l2MbZjIFaBpIyqVok
- oJUJ9Id8z4A4jMrL4AZmQTaJLFDjfkslRD2Kd45yzcIhsPPGHph/Owf0UbtmgJNWo1g3
- poEg==
+ bh=+Qa59hOb5NB+JFBI7UhKCItTFnRxOGwe2LEQfqZP7z8=;
+ b=J3bKNXEGRN32gfk1EhAyZAj6HCO52TLvMa6upp3tbvaNWIqEpCgXAOlTafzdcOe0R/
+ oaf8ToSdhGjg9JzgN1NOcJ+NYkCl5AwXpuCU11kM0wjS9UkH5TQeAfAukEKLjiRnaFDS
+ 3sETVxe5V+RFZ2PcZySU4ACWXOQsb+uKJP19Y=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777675890; x=1778280690;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ d=1e100.net; s=20251104; t=1777679471; x=1778284271;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=RYqXkIxbrIJNTw3mN/msctz7wj+X3BOWSrVccUsBbrg=;
- b=jCS8STy0H3teub9ZrfVwjjItxrJQOGDZ6YuMaLwGHyLHYB2+aMOKPKfhdJhzz0KI0Y
- dWzXVWSDgX7tQj2uB1fCn2buY0fMEWRvTd1oXRzd+UAQlM0iPh5dnRclrr6hXKrYT9i/
- xdoryKQeAsEghqFtnBXh8CNJuihczG6IT59UT5eIkvgYzS7qATO/xPISFCOl9STimEvw
- 5hb2OGYVNejdlgLaAf6Fsj2W1eM+m1KesOsOrxnTL/aLiGTPztrj1UIBpDVy8Q2ccrZz
- zHtz+OtnHbrbWE/zhXYKZ/aBiPwN7G5Ngjb74bQTGVVJJlHhzbvMObxIhWxWVdUVs+CH
- 5NGg==
-X-Forwarded-Encrypted: i=1;
- AFNElJ8t+qwtc3GIfXvjGE9JGp0NUc8MVzQ7UE0shhR68FIm0j1VksEDIb4ioEQ7VfKOKdMMsKRiJt0=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw1YYxkl8j/cDpaXeZAS3MRrMGIUemO+yHv1gN/O2PabA88SBYM
- vHOsbbMLJPdgIERQhC3blvWQe47YaFvf3iD+mh28f6jRuwW6vXH8IWv/tGllHdhvK8yhsmU6c6o
- B+nB8SEk58ct1T84jGRVn/BC4WXIERG0=
-X-Gm-Gg: AeBDietG6KQ2qtsll4/urL5AKG8x9v1Rv+krqw575E8BvyaOKGF6vDGHLbmKfBHwCLe
- PtxeV4+K0JA8erhjXzC6P+n2vPzFMhNL7ahNYo70cjRvelcD/3hg5tw3fA6nRlPjU4QSRxrVM68
- 9VUSgOb0ag7KjyZaMiAmj6yIKFJQ3AAoU/SsGfTjHFkFkmR7Fl3UWBALgIqayc982s1aERMvYAY
- E6c1taZNzKIQ9blDUqRS8vfzDnPUm33XFq5wkfgg3Yk2JYsG+vtgkYd0rj1QodHHvlruGIFixnI
- JkirJo0QhBTjRaqI4R0=
-X-Received: by 2002:a05:6102:5123:b0:607:798d:8083 with SMTP id
- ada2fe7eead31-62d86b18ee3mr653237137.15.1777675890547; Fri, 01 May 2026
- 15:51:30 -0700 (PDT)
-MIME-Version: 1.0
-References: <20260428140433.GQ41863@bill-the-cat>
- <92fd2c06-8b50-487b-8f42-2e620dd607ed@amd.com>
-In-Reply-To: <92fd2c06-8b50-487b-8f42-2e620dd607ed@amd.com>
-From: Raymond Mao <raymondmaoca@gmail.com>
-Date: Fri, 1 May 2026 18:51:19 -0400
-X-Gm-Features: AVHnY4KQTWarlxvTHNZb-Sy24jrUTW93UIliXkwKZdXlaM10SZMy6YNy9RQ1GXg
-Message-ID: <CAMDkj5xDBUxrSqHCs8e+JHFDmG8=ndkwP=GHzWF=XFjSp1vSzg@mail.gmail.com>
-Subject: Re: Fwd: New Defects reported by Coverity Scan for Das U-Boot
-To: Michal Simek <michal.simek@amd.com>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de, 
+ bh=+Qa59hOb5NB+JFBI7UhKCItTFnRxOGwe2LEQfqZP7z8=;
+ b=da/bKRmBwVWZFkVsfFX0uO1ottUf/K42yXdM9thzRk1Obxs0UxO6qLns3dVvglaGKw
+ h1BG+olvp79lljFdCHcxCSyuTSzvwMy1FePK0xWhYx78jSnIxwjFQu6oqKpJJr1RRBKZ
+ QEBlBVB5IC+ggLyM7/BPTcKgf8vlu8AfAxrZFP1O/JwUx5yPs1hBxbIXxJ/lNKMG0kaE
+ iHSt6cDRWpU82FxmnlBT7991Jzn9iEo0UV9sLwqTLRSVQ965lmyTu9FeKRAK8Wpf3hzW
+ 1/f5pV5WiWhNfgFYbRZNE+VP8p/96iJiqyijHFXsS7Lk+3Jef8bXiPcQ2iGo5dNBtABf
+ NFLg==
+X-Gm-Message-State: AOJu0YyQIFA0js3Q774kbkqkVxgJ5QAhw8VvTlaS3Ms91AR9rsfx/Ol4
+ fkjDt3wShl+8bJ+euKPbtarU2ZRvx+nUpaU5VupKHNusXEqS6m4ykF7HxwqQBDFZwmcnT/cAUeU
+ Z54K9AibzuUS6OEA=
+X-Gm-Gg: AeBDiesY8UX9iBtiofa2pjibmZuNj9JtHtXtIa8IGLpB2kAXYPs9YaenEaRs7rt5NgW
+ 8wU0UVT+LwlmeCCOXcBF4YzWyD9Ll+i/E3daoBo6jGfCuzcVtDO+jcdEH8qDEEU4MOgbweC23Lc
+ jyJZ4ryI0dewRSmJAuZos4RvIjCTW0GpfEOuy8WnhDJw8Jf/0A83QoOeSF+Axwwme0GMxH9pkva
+ ssnT/IsV6FfycheISbndDTfGALC9wOPgO7589vQELpknsUGlqqQAgrKrmcVZ6DnQMHIGwyvhfpD
+ 2FZV2GAR/yWXnbhMRImhoaN1dup28XfOW93RXzV11iMLTTj80+2dGj7z39ObZ87V1kty4vjTbTb
+ gs7W8xtUc/CqechRr41J7UvmjjIIliRNYnuu9qJzmkNgqO1W9nG+qdACgvdtjASHcoYNPMOp8Kt
+ vrEKnRIVI0QxEJuOpFoWQoSJp29XJrG/ua8fcFm7JUdqZrxN1tD6oONigYMUHqxbEyIApdddKD7
+ tJcc7ckkzfHVE8Qgah1p5zkhNstiw8qD3arEsiJ8xjT6kdtyXCs5OMgZyCn
+X-Received: by 2002:a05:6808:4f0c:b0:479:646c:f701 with SMTP id
+ 5614622812f47-47c892e34damr824070b6e.41.1777679471233; 
+ Fri, 01 May 2026 16:51:11 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-189-203-106-235.totalplay.net.
+ [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7ded51a9612sm1967949a34.26.2026.05.01.16.51.10
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 01 May 2026 16:51:10 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, 
  Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- =?UTF-8?Q?Christian_P=C3=B6tzsch?= <christian.poetzsch@kernkonzept.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+ Johannes Krottmayer <krotti83@proton.me>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, 
+ Shiva Tripathi <s-tripathi1@ti.com>
+In-Reply-To: <0ef3c3d7-4255-470e-97e5-951e7351d7b9@gmx.de>
+References: <0ef3c3d7-4255-470e-97e5-951e7351d7b9@gmx.de>
+Subject: Re: Pull request efi-2026-07-rc2
+Message-Id: <177767947038.2064724.11038096082995486582.b4-ty@konsulko.com>
+Date: Fri, 01 May 2026 17:51:10 -0600
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -119,99 +101,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Michal,
+On Fri, 1 May 2026 13:46:01 +0200, Heinrich Schuchardt wrote:
 
-On Wed, Apr 29, 2026 at 2:31=E2=80=AFAM Michal Simek <michal.simek@amd.com>=
- wrote:
->
->
->
-> On 4/28/26 16:04, Tom Rini wrote:
-> > Here's the latest report.
-> >
-> > ---------- Forwarded message ---------
-> > From: <scan-admin@coverity.com>
-> > Date: Mon, Apr 27, 2026, 5:41=E2=80=AFPM
-> > Subject: New Defects reported by Coverity Scan for Das U-Boot
-> > To: <tom.rini@gmail.com>
-> >
-> >
-> > Hi,
-> >
-> > Please find the latest report on new defect(s) introduced to *Das U-Boo=
-t*
-> > found with Coverity Scan.
-> >
-> >     - *New Defects Found:* 9
-> >     - 77 defect(s), reported by Coverity Scan earlier, were marked fixe=
-d in
-> >     the recent build analyzed by Coverity Scan.
-> >     - *Defects Shown:* Showing 9 of 9 defect(s)
-> >
-> > Defect Details
-> >
-> >
-> > ** CID 645841:       Incorrect expression  (BAD_COMPARE)
-> > /common/bloblist.c: 303           in bloblist_apply_blobs()
-> >
-> >
-> > _______________________________________________________________________=
-______________________
-> > *** CID 645841:         Incorrect expression  (BAD_COMPARE)
-> > /common/bloblist.c: 303             in bloblist_apply_blobs()
-> > 297                                   log_err("Failed to apply blob wit=
-h tag %d\n",
-> > 298                                           tag);
-> > 299                                   return ret;
-> > 300                           }
-> > 301
-> > 302                           rec =3D rec_from_blob(blob - dat_off);
-> >>>>      CID 645841:         Incorrect expression  (BAD_COMPARE)
-> >>>>      Comparing pointer "rec" against "NULL" using anything besides "=
-=3D=3D" or "!=3D" is likely to be incorrect.
-> > 303                           if (rec <=3D 0) {
-> > 304                                   log_err("Blob corrupted\n");
-> > 305                                   return -ENOENT;
-> > 306                           }
-> > 307
-> > 308                           /* Mark applied blob record as void */
-> >
->
-> I sent a patch for this one.
->
->
-> > ** CID 645839:       Error handling issues  (CHECKED_RETURN)
-> > /lib/fdtdec.c: 1785           in fdtdec_apply_bloblist_dtos()
-> >
-> >
-> > _______________________________________________________________________=
-______________________
-> > *** CID 645839:         Error handling issues  (CHECKED_RETURN)
-> > /lib/fdtdec.c: 1785             in fdtdec_apply_bloblist_dtos()
-> > 1779
-> > 1780          ret =3D bloblist_apply_blobs(BLOBLISTT_FDT_OVERLAY,
-> > fdtdec_apply_dto_blob);
-> > 1781          if (ret)
-> > 1782                  return ret;
-> > 1783
-> > 1784          /* Shink the blob to the actual FDT size */
-> >>>>      CID 645839:         Error handling issues  (CHECKED_RETURN)
-> >>>>      Calling "fdt_pack" without checking return value (as is done el=
-sewhere 5 out of 6 times).
-> > 1785          fdt_pack(live_fdt);
-> > 1786          return bloblist_resize(BLOBLISTT_CONTROL_FDT,
-> > fdt_totalsize(live_fdt));
-> > 1787     }
-> > 1788
-> > 1789     int fdtdec_setup(void)
-> > 1790     {
-> >
->
-> And this one.
->
+> The following changes since commit b52670d37bc855f6c8da63eb51bf84bce4dad90b:
+> 
+>    gpio: 74x164: use dev_read_* APIs for live-tree compatibility
+> (2026-04-30 13:57:49 -0600)
+> 
+> are available in the Git repository at:
+> 
+>    https://source.denx.de/u-boot/custodians/u-boot-efi.git
+> tags/efi-2026-07-rc2
+> 
+> [...]
 
-Thanks for solving these two.
+Merged into u-boot/master, thanks!
 
-Raymond
+-- 
+Tom
 
-> M
+
