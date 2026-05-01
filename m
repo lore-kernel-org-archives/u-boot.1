@@ -4,100 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E06CBCCFA13
-	for <u-boot@archiver.kernel.org>; Fri,  1 May 2026 12:38:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 321AFCD3425
+	for <u-boot@archiver.kernel.org>; Fri,  1 May 2026 12:38:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3B5C880F0E;
+	by phobos.denx.de (Postfix) with ESMTP id 7F0F884099;
 	Fri,  1 May 2026 14:38:18 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="eMt9z3/b";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="IBuvNqpn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C1E4B839D5; Fri,  1 May 2026 08:09:43 +0200 (CEST)
-Received: from smtp-relay-internal-1.canonical.com
- (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ id 4B91180F0E; Fri,  1 May 2026 09:31:38 +0200 (CEST)
+Received: from sea.source.kernel.org (sea.source.kernel.org
+ [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2AA90803C6
- for <u-boot@lists.denx.de>; Fri,  1 May 2026 08:09:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=canonical.com
+ by phobos.denx.de (Postfix) with ESMTPS id E9E7380086
+ for <u-boot@lists.denx.de>; Fri,  1 May 2026 09:31:35 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=aristo.chen@canonical.com
-Received: from mail-pj1-f69.google.com (unknown [209.85.216.69])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 94EEC3FCFC
- for <u-boot@lists.denx.de>; Fri,  1 May 2026 05:59:24 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1777615192;
- bh=vQrE8AynQ+lTEKI73hKiO2rDE0WillVbWGhlnIL6GTc=;
- h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
- MIME-Version;
- b=eMt9z3/bGM1WuUrgrHYI7ediGrOtLrTbDtKL1sPOzoIxmKPxnIIkELblY0Fm7he5D
- Cf7JQPSewePGQ8wedRVydy/3PfjoPkdciGiYUZrQAwe/30PgumA4KPwLZJnMnKg34a
- 0FYiva5e293bYIII4YQXZXkZB2hAUixVOYhPI8knremVf5oBVh54kIhzx39brWsa07
- bykMHFFkKKjHVwbVt/qVQbI5kMpKqp2BZBZ4axBvhljW3n1k6kCmhL+exeJtwrFnI9
- 8xXPPoLOFJdenoqkjYaADPPFoKteaq7/KMfGW96Esut7AGBM8KpsFNFRj7QLxeWnT4
- RDIMStL6OCrfR5G8cSyCugRW9/20ap87O87AgszUG1eTk/YpZhRR2Y8AuRRVp9Nebg
- SZh+AB15d9E8VcscwAWBiKEfK5SbOr//a5MtTGWCkI+EKMuahxi4bUBl1OI7Ykx8F6
- nr70XrOgmsKljip9m+X8hVWtbsoeVwr6lG9s0QBf8AZujFWvSQv7s0gz9o1EFePAxy
- P2v+wKVIRfY/ZcUFaumB/F7wRCkeMQIu0c9d/hgtNJJ8SbpVDvWpNKpocorDkgQw6h
- UUT+OAkhhCF76/HpAw/209gdIizj3N/8NHGNcmJDQdgU5uYFo08MW+mmqHjKYgh7Fn
- dwNCNGZVYAyprkeNPnZfkilY=
-Received: by mail-pj1-f69.google.com with SMTP id
- 98e67ed59e1d1-364f007d1f3so215357a91.1
- for <u-boot@lists.denx.de>; Thu, 30 Apr 2026 22:59:11 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777614709; x=1778219509;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=vQrE8AynQ+lTEKI73hKiO2rDE0WillVbWGhlnIL6GTc=;
- b=SlUwAvUTqmMRw9KqzXYLuQiF1Lb3/pwipEGQ2AtrNfq+iLwdaVEbeGIRfzcfAgIQrE
- nAcgA16TYdrp8yRug2aDdHs0vPvCHlEZQIOZ23JP11o96nenvJwpB2nsX8pCnS07ulR1
- CmNQ0K2r/kjdWVtOZX53zY/XnUDuduFS555rxyv0ej9ATei6g87Mv+vVcDh2JCUXIUSl
- GgkLZl2Err6Vj5eZkcWrTknSNS6l2jd1y1kN1WhPPiC7G7zaGhcL4ZT2Hj0mCg9v5dfr
- HVbUfGiFXc98t00xcPaHbSiiX/NCIAmXxHOQD4uvPyMLtByEs6mPwbzB0qbaKLWURgsF
- TTzw==
-X-Gm-Message-State: AOJu0YyFxwopVf2aKW+wducxQsUi9b4QgPQEL34yvXWwOfzl8JAkV6lY
- KqLh7sjQwEYBCgtgtFdve75+os5PRnE68HHVdmzJ0uKl6Y5WJv/pHfxoeoSVFiDCV6EoYqr91mB
- fV7IPlwOuC4A6FECJysoYppDqIftAlidojvcY80SXL5ZQZ2RNnw5kPqT/0ehTEBPqf9lp1/bkMd
- 9GHBg=
-X-Gm-Gg: AeBDietpLXp3YNmmFPdt73nnvmDOtqBw0W3yBlderAhQIhdZt+kl8uCSqXAPvSKKlJ3
- KmqBFEquyyju51/h3BjuclwsA2zfXKqRvNa7wonskIfJt6TmvwnZSkNitMkG3bUQr+7e6x5Bh5x
- sJmAvlWNkARb8iEFFs6neUkHUzp7c6FEqjhbJ6HXv/QUdYsN1mH9cUO7Ne5MuW8y+JcjM3xkjzN
- hYpO3b4Aqni0NjomHMtI9WVNsAhN1vTQq3SxbQXEnb+qsN88gBTjxEZacpt8Vl9hQTURl9PlzXB
- vyu5nDeHZlu/jj4rd62qnPjyj/kyy6ipuyNNq4nzg20936uQtZpEQlcr/zzbkmpdJ5ND/TmuIpv
- 3U/wouzz2mJ8U1mDBzlgWrPN7Iax3nSCr/pq0C+e9TshQiqjpB2qkFjVAIU6EdGYpGYztvwLR04
- Pv1XLou4Be8VQk4F+JRKAem5DSkQ==
-X-Received: by 2002:a17:90b:4e8b:b0:35c:195e:112f with SMTP id
- 98e67ed59e1d1-364c49ff8f4mr5466381a91.18.1777614708687; 
- Thu, 30 Apr 2026 22:51:48 -0700 (PDT)
-X-Received: by 2002:a17:90b:4e8b:b0:35c:195e:112f with SMTP id
- 98e67ed59e1d1-364c49ff8f4mr5466359a91.18.1777614708323; 
- Thu, 30 Apr 2026 22:51:48 -0700 (PDT)
-Received: from noble-uboot.tail872496.ts.net
- (124-218-37-86.cm.dynamic.apol.com.tw. [124.218.37.86])
- by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-364bdf2aa41sm6174538a91.4.2026.04.30.22.51.46
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 30 Apr 2026 22:51:47 -0700 (PDT)
-From: Aristo Chen <aristo.chen@canonical.com>
-To: u-boot@lists.denx.de
-Cc: Aristo Chen <aristo.chen@canonical.com>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>
-Subject: [PATCH v2 1/1] test: fit: Use shared make_fname from fit_util
-Date: Fri,  1 May 2026 05:51:04 +0000
-Message-ID: <20260501055112.3966757-1-aristo.chen@canonical.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260420074827.3917463-1-aristo.chen@canonical.com>
-References: <20260420074827.3917463-1-aristo.chen@canonical.com>
+ spf=pass smtp.mailfrom=sumit.garg@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sea.source.kernel.org (Postfix) with ESMTP id 1C86141794;
+ Fri,  1 May 2026 07:31:34 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6285FC2BCB4;
+ Fri,  1 May 2026 07:31:20 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1777620693;
+ bh=YhNghSMov3/hPQyij+pZ9ktXfFdoUKqxHxjfQQrrBWg=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=IBuvNqpnjcAkqB9d41+fcRpxn6mAGlAOTXRUaPvphUe47FS8/wCc7nMpAR0WRqkWF
+ bW9D2/2uzzjeeF2yIirLZrI6Eyn2UzXuCjKhtFBYOifdbaiiTgZUQcT9tqG5te3VLB
+ 9Fm0uQTaoztwer/CSEUPEIGw7Fyjci45JNoFKKbahK03jVd1rzAl8osseMEd+XIzkJ
+ HQkUbdnCHtlxZbuhQ/5FT+jKO2Ko7H/x3YGi32uPuLTVj8cpAHSdt1s0OcHeXk2Q6i
+ qK2YDEZqNh6nyc00P20/tzOUkFGjmAIyOnKiiDX2I/2n7Scs9Ybw+Z9QxEXmoxwi93
+ isvCA+fCTA66A==
+Date: Fri, 1 May 2026 13:01:17 +0530
+From: Sumit Garg <sumit.garg@kernel.org>
+To: michael.srba@seznam.cz
+Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io, Tom Rini <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@arm.com>,
+ Anshul Dalal <anshuld@ti.com>, Peng Fan <peng.fan@nxp.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Andrew Davis <afd@ti.com>,
+ Hrushikesh Salunke <h-salunke@ti.com>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Ye Li <ye.li@nxp.com>, Andre Przywara <andre.przywara@arm.com>,
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>, Dhruva Gole <d-gole@ti.com>,
+ Kaustabh Chakraborty <kauschluss@disroot.org>,
+ Jerome Forissier <jerome.forissier@arm.com>,
+ Heiko Schocher <hs@nabladev.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Lukasz Majewski <lukma@denx.de>,
+ Mateusz Kulikowski <mateusz.kulikowski@gmail.com>,
+ Dinesh Maniyam <dinesh.maniyam@altera.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Michal Simek <michal.simek@amd.com>, Yao Zi <me@ziyao.cc>,
+ Peter Korsgaard <peter@korsgaard.com>,
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Casey Connolly <casey.connolly@linaro.org>,
+ Tingting Meng <tingting.meng@altera.com>,
+ Tien Fong Chee <tien.fong.chee@altera.com>,
+ Alice Guo <alice.guo@nxp.com>, George Chan <gchan9527@gmail.com>,
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
+ Alexey Charkov <alchark@gmail.com>, Ronald Wahl <ronald.wahl@legrand.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>
+Subject: Re: [PATCH v4 07/11] mach-snapdragon: Kconfig: changes / additions
+ to support SPL
+Message-ID: <afRWxQuPPQBjVdPw@sumit-xelite>
+References: <20260426-qcom_spl-v4-0-8cf4133ff883@seznam.cz>
+ <20260426-qcom_spl-v4-7-8cf4133ff883@seznam.cz>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260426-qcom_spl-v4-7-8cf4133ff883@seznam.cz>
 X-Mailman-Approved-At: Fri, 01 May 2026 14:38:15 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -115,90 +103,125 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-test_fit.py declares a local make_fname closure that is byte-identical
-to fit_util.make_fname. Drop the local copy and call the shared helper
-at all seven call sites so there is one definition to maintain.
+On Sun, Apr 26, 2026 at 01:26:09AM +0200, michael.srba@seznam.cz wrote:
+> From: Michael Srba <Michael.Srba@seznam.cz>
+> 
+> An SoC to target has to be selected, e.g. TARGET_SDM845.
+> This will enable the per-SoC boot0.h.
+> 
+> Signed-off-by: Michael Srba <Michael.Srba@seznam.cz>
+> ---
+>  arch/arm/Kconfig                 | 34 +++++++++++++++++++++++++++++++++-
+>  arch/arm/mach-snapdragon/Kconfig | 31 ++++++++++++++++++++++++++++---
+>  2 files changed, 61 insertions(+), 4 deletions(-)
+> 
+> diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
+> index 03416c55265..ddabc23fc9e 100644
+> --- a/arch/arm/Kconfig
+> +++ b/arch/arm/Kconfig
+> @@ -1124,6 +1124,7 @@ config ARCH_SNAPDRAGON
+>  	bool "Qualcomm Snapdragon SoCs"
+>  	select ARM64
+>  	select DM
+> +	select DM_EVENT if USB_DWC3_GENERIC || SPL_USB_DWC3_GENERIC
+>  	select DM_GPIO
+>  	select DM_SERIAL
+>  	select DM_RESET
+> @@ -1138,9 +1139,40 @@ config ARCH_SNAPDRAGON
+>  	select SAVE_PREV_BL_FDT_ADDR if !ENABLE_ARM_SOC_BOOT0_HOOK
+>  	select LINUX_KERNEL_IMAGE_HEADER if !ENABLE_ARM_SOC_BOOT0_HOOK
+>  	select SYSRESET
+> -	select SYSRESET_PSCI
+> +	select SYSRESET_PSCI if !SPL
+>  	select ANDROID_BOOT_IMAGE_IGNORE_BLOB_ADDR
+>  	select MMU_PGPROT
+> +	select SUPPORT_SPL
+> +
+> +	select OF_LIVE if USB_DWC3_GENERIC
+> +	select SPL_OF_LIVE if SPL_USB_DWC3_GENERIC
+> +	select ARMV8_SPL_EXCEPTION_VECTORS if SPL
+> +	select ENABLE_ARM_SOC_BOOT0_HOOK if SPL
+> +	select SPL_DM if SPL
+> +	select SPL_DM_GPIO if SPL
+> +	select SPL_DM_PMIC if SPL
+> +	select SPL_DM_USB_GADGET if SPL
+> +	select SPL_ENV_SUPPORT if SPL
+> +	select SPL_EVENT if SPL_USB_DWC3_GENERIC
+> +	select SPL_GPIO if SPL
+> +	select SPL_HAS_BSS_LINKER_SECTION if SPL
+> +	select SPL_LIBCOMMON_SUPPORT if SPL
+> +	select SPL_LIBDISK_SUPPORT if SPL
+> +	select SPL_LIBGENERIC_SUPPORT if SPL
+> +	select SPL_OF_REAL if SPL
+> +	select SPL_OF_CONTROL if SPL
+> +	select SPL_PINCONF if SPL
+> +	select SPL_PINCTRL if SPL
+> +	select SPL_PINCTRL_FULL if SPL
+> +	select SPL_PINCTRL_GENERIC if SPL
+> +	select SPL_PINCONF_RECURSIVE if SPL
+> +	select SPL_PINMUX if SPL
+> +	select SPL_SPMI if SPL
+> +	select SPL_SPMI_MSM if SPL
+> +	select SPL_SPRINTF if SPL
+> +	select SPL_STRTO if SPL
+> +	select SPL_USB_GADGET if SPL
+> +	imply SPL_MMC if SPL
+>  	imply OF_UPSTREAM
+>  	imply CMD_DM
+>  	imply DM_USB_GADGET
+> diff --git a/arch/arm/mach-snapdragon/Kconfig b/arch/arm/mach-snapdragon/Kconfig
+> index f82cd0d3291..3b5ae6d98fb 100644
+> --- a/arch/arm/mach-snapdragon/Kconfig
+> +++ b/arch/arm/mach-snapdragon/Kconfig
+> @@ -17,9 +17,6 @@ config SYS_MALLOC_F_LEN
+>  config SPL_SYS_MALLOC_F
+>  	default y
+>  
+> -config SPL_SYS_MALLOC_F_LEN
+> -	default 0x2000
+> -
+>  config SYS_MALLOC_LEN
+>  	default 0x800000
+>  
+> @@ -42,4 +39,32 @@ config SYS_CONFIG_NAME
+>  	  Based on this option include/configs/<CONFIG_SYS_CONFIG_NAME>.h header
+>  	  will be used for board configuration.
+>  
+> +config SPL_SHARES_INIT_SP_ADDR
+> +	default n
+> +
+> +config SPL_HAVE_INIT_STACK
+> +	default y
+> +
+> +choice
+> +	prompt "Qualcomm SoC select"
+> +	default TARGET_NONE if !SPL
+> +	help
+> +	  While U-Boot on Qualcomm platforms doesn't generally need compile-time
+> +	  adjustment based on the target SoC, there are a few exceptions to this.
+> +	  Currently this concerns boot0.h discrimination.
+> +
+> +config TARGET_NONE
+> +	bool "Generic build"
+> +	help
+> +	  Select this if you're not building SPL. U-Boot proper builds are currently
+> +	  generic across all SoCs.
+> +
+> +config TARGET_SDM845
+> +	bool "SPL targeting the sdm845 SoC"
+> +	help
+> +	  Select this if you are building u-boot SPL for sdm845.
+> +	  Currently this gates sdm845-specific boot0.h (only used in SPL).
 
-No behavioural change. Both implementations return
-os.path.join(ubman.config.build_dir, basename).
+In Qualcomm ecosystem, we have been avoiding any SoC or board specific
+config options in an effort to try people migrate to use generic platform
+code only.
 
-Signed-off-by: Aristo Chen <aristo.chen@canonical.com>
----
- test/py/tests/test_fit.py | 26 +++++++-------------------
- 1 file changed, 7 insertions(+), 19 deletions(-)
+I think this boot0.h hook code is going to be one exception. Can you
+rather define a special Kconfig option for this saying?
 
-diff --git a/test/py/tests/test_fit.py b/test/py/tests/test_fit.py
-index bcaaa6a5fc4..4f56a1421e1 100755
---- a/test/py/tests/test_fit.py
-+++ b/test/py/tests/test_fit.py
-@@ -140,18 +140,6 @@ class TestFitImage:
-       - run code coverage to make sure we are testing all the code
-     """
- 
--    def make_fname(self, ubman, leaf):
--        """Make a temporary filename
--
--        Args:
--            ubman (ConsoleBase): U-Boot fixture
--            leaf (str): Leaf name of file to create (within temporary directory)
--
--        Return:
--            str: Temporary filename
--        """
--        return os.path.join(ubman.config.build_dir, leaf)
--
-     def filesize(self, fname):
-         """Get the size of a file
- 
-@@ -181,7 +169,7 @@ class TestFitImage:
-         Returns:
-             str: Filename of ramdisk created
-         """
--        fname = self.make_fname(ubman, filename)
-+        fname = fit_util.make_fname(ubman, filename)
-         data = ''
-         for i in range(100):
-             data += f'{text} {i} was seldom used in the middle ages\n'
-@@ -278,33 +266,33 @@ class TestFitImage:
-             'fit_addr' : 0x1000,
- 
-             'kernel' : kernel,
--            'kernel_out' : self.make_fname(ubman, 'kernel-out.bin'),
-+            'kernel_out' : fit_util.make_fname(ubman, 'kernel-out.bin'),
-             'kernel_addr' : 0x40000,
-             'kernel_size' : self.filesize(kernel),
-             'kernel_config' : 'kernel = "kernel-1";',
- 
-             'fdt_data' : fdt_data,
--            'fdt' : self.make_fname(ubman, 'u-boot.dtb'),
--            'fdt_out' : self.make_fname(ubman, 'fdt-out.dtb'),
-+            'fdt' : fit_util.make_fname(ubman, 'u-boot.dtb'),
-+            'fdt_out' : fit_util.make_fname(ubman, 'fdt-out.dtb'),
-             'fdt_addr' : 0x80000,
-             'fdt_size' : self.filesize(fdt_data),
-             'fdt_load' : '',
- 
-             'ramdisk' : ramdisk,
--            'ramdisk_out' : self.make_fname(ubman, 'ramdisk-out.bin'),
-+            'ramdisk_out' : fit_util.make_fname(ubman, 'ramdisk-out.bin'),
-             'ramdisk_addr' : 0xc0000,
-             'ramdisk_size' : self.filesize(ramdisk),
-             'ramdisk_load' : '',
-             'ramdisk_config' : '',
- 
-             'loadables1' : loadables1,
--            'loadables1_out' : self.make_fname(ubman, 'loadables1-out.bin'),
-+            'loadables1_out' : fit_util.make_fname(ubman, 'loadables1-out.bin'),
-             'loadables1_addr' : 0x100000,
-             'loadables1_size' : self.filesize(loadables1),
-             'loadables1_load' : '',
- 
-             'loadables2' : loadables2,
--            'loadables2_out' : self.make_fname(ubman, 'loadables2-out.bin'),
-+            'loadables2_out' : fit_util.make_fname(ubman, 'loadables2-out.bin'),
-             'loadables2_addr' : 0x140000,
-             'loadables2_size' : self.filesize(loadables2),
-             'loadables2_load' : '',
--- 
-2.43.0
+	BOOT0_SDM845_WORKAROUND
 
+which can then be enabled in your special defconfig.
+
+-Sumit
