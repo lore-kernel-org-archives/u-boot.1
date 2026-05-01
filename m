@@ -4,57 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8CC57FF885A
-	for <u-boot@archiver.kernel.org>; Fri,  1 May 2026 05:59:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33114FF885A
+	for <u-boot@archiver.kernel.org>; Fri,  1 May 2026 06:42:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 72D7E803C6;
-	Fri,  1 May 2026 07:59:27 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 65AF6839D5;
+	Fri,  1 May 2026 08:42:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="jjUR/02G";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="bX6uTbH0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 482DF80F0E; Fri,  1 May 2026 07:59:26 +0200 (CEST)
-Received: from tor.source.kernel.org (tor.source.kernel.org
- [IPv6:2600:3c04:e001:324:0:1991:8:25])
+ id 7801583A91; Fri,  1 May 2026 08:42:27 +0200 (CEST)
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D693E80086
- for <u-boot@lists.denx.de>; Fri,  1 May 2026 07:59:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6972E81E18
+ for <u-boot@lists.denx.de>; Fri,  1 May 2026 08:42:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=sumit.garg@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id AB1DE6014C;
- Fri,  1 May 2026 05:59:22 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 83D48C2BCB7;
- Fri,  1 May 2026 05:59:19 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id C4B7343E51;
+ Fri,  1 May 2026 06:42:23 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 34F1FC2BCB7;
+ Fri,  1 May 2026 06:42:19 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1777615162;
- bh=GJ8P3XVddgI13rsfisohkH4IBek67f9+XC9UxkK8vQM=;
+ s=k20201202; t=1777617743;
+ bh=YCvQrwQonDR+N5uSrkhKi0TLiVVFQ+Fa8mI5mYnUhjY=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=jjUR/02GG7Zv5KEFcXhnr9s85br9aOB7ZowHMofNnPiyKRu6uBLLbDooDHTtpnTEM
- cWcnJKSHFWG4mA2npJfHxYEvs9JialyikublK+/rsZaF3nIvnMTTArZv+WD12436z+
- jLH0mmi5+XzIMCY4269H9SxILueQvtOjKqGjh8J9VfB7f1+1JQ9aNkzWvs/2qRtK7b
- 9KGFKi7glyCHni+vo9pHvrUILVaioB1emwJYe++d9Pkyg9IOmFXlQHmy6u/GSXEPEt
- /9Cit7pIk3QSQM5/eEpN+bRY381GfgfpJE2oDCapTDA4bHPLWUiyzFU9wECNKkpVOJ
- xVr2WPh0Bh5ig==
-Date: Fri, 1 May 2026 11:29:16 +0530
+ b=bX6uTbH0jg6El836r6xHGZokt8i5qvAQG6JTvCG9kNJl5/j6LBLHBNZRjwmE8F6+b
+ h2UgqWy2ATuydNaHlUyTrrUKepOMdO6oDMxLyYT5u51gFXjY80YARyX1n4mujhhpaK
+ T0cQLU71+6KtAaY0hPCFNwMcESRyKe4xb8S+QMUo8tJAUf100tjDMX49JXO6uz/FaA
+ s8l3GUWtltdlCFNjcF2xc7jSlJiVbTBu5F5LHs1A8+P9hG84EJdg9a7ENTYe61Mgp5
+ 9GbdDIjXeIDMBrxww9Oog5ylQUDXGgRmuhSJaH78wufwl4mJ1sETs1MoO9fuQz2sbp
+ YRrnzoUbWm4uA==
+Date: Fri, 1 May 2026 12:12:17 +0530
 From: Sumit Garg <sumit.garg@kernel.org>
-To: Casey Connolly <casey.connolly@linaro.org>,
- Aswin Murugan <aswin.murugan@oss.qualcomm.com>
-Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de,
- Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>,
- Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>
-Subject: Re: [PATCH 0/3] Qualcomm: rpmh and regulator fixes
-Message-ID: <afRBNIa6wsFXU2VS@sumit-xelite>
-References: <20260413-casey-qcom-geni-rpmh-fixes-v1-0-2a83a67ac0f1@linaro.org>
+To: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, casey.connolly@linaro.org,
+ neil.armstrong@linaro.org, trini@konsulko.com,
+ quic_varada@quicinc.com, balaji.selvanathan@oss.qualcomm.com,
+ dlechner@baylibre.com, u-boot-qcom@groups.io, u-boot@lists.denx.de
+Subject: Re: [PATCH v1 1/1] configs: Rename qcs9100 defconfig to lemans
+ defconfig
+Message-ID: <afRLSaxbyo8D2yFq@sumit-xelite>
+References: <20260417093924.3357296-1-aswin.murugan@oss.qualcomm.com>
+ <20260417093924.3357296-2-aswin.murugan@oss.qualcomm.com>
+ <0697f98e-a0c5-4d81-873d-1e545ceeb6d0@gmx.de>
+ <ff78baf2-7be6-492c-8a54-1e557cb022ef@oss.qualcomm.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
-In-Reply-To: <20260413-casey-qcom-geni-rpmh-fixes-v1-0-2a83a67ac0f1@linaro.org>
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <ff78baf2-7be6-492c-8a54-1e557cb022ef@oss.qualcomm.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,65 +75,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Casey,
-
-On Mon, Apr 13, 2026 at 01:06:13PM +0200, Casey Connolly wrote:
-> The RPMh API is frustratingly complicated and lacks public
-> documentation. With the Linux drivers being the only available sources
-> but are highly asynchronous and thus hard to translate to U-Boot.
-
-There is new source of synchronous RPMh upstream driver which is being
-pushed to upstream OP-TEE project here [1]. I agree U-Boot single
-threaded execution model requires drivers to be simplified coming from
-highly asynchronous Linux context.
-
-[1] https://github.com/OP-TEE/optee_os/pull/7796
-
+On Fri, Apr 17, 2026 at 03:50:47PM +0530, Aswin Murugan wrote:
 > 
-> The main issue seems to relate to sending multiple commands in a single
-> TCS request, currently this is only done by the interconnect driver and
-> while this may not be the underlying cause it seems to be safer to avoid
-> this for now.
-
-Can you share which particular peripheral is being tested here to
-reproduce the issues you are facing?
-
+> On 4/17/2026 3:20 PM, Heinrich Schuchardt wrote:
+> > On 4/17/26 11:39, Aswin Murugan wrote:
+> > > Rename qcom_qcs9100_defconfig to qcom_lemans_defconfig
+> > > and update the defconfig to select lemans-evk DTS instead
+> > > of qcs9100-ride-r3.
+> > > 
+> > > Signed-off-by: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+> > 
+> > Why do you want to delete qcom_qcs9100_defconfig instead of simply
+> > creating a new defconfig for the different board?
+> > 
+> > Best regards
+> > 
+> > Heinrich
+> > 
+> > > ---
+> > >   configs/{qcom_qcs9100_defconfig => qcom_lemans_defconfig} | 2 +-
+> > >   1 file changed, 1 insertion(+), 1 deletion(-)
+> > >   rename configs/{qcom_qcs9100_defconfig => qcom_lemans_defconfig} (91%)
+> > > 
+> > > diff --git a/configs/qcom_qcs9100_defconfig
+> > > b/configs/qcom_lemans_defconfig
+> > > similarity index 91%
+> > > rename from configs/qcom_qcs9100_defconfig
+> > > rename to configs/qcom_lemans_defconfig
+> > > index 082106157bb..ad40d5206c0 100644
+> > > --- a/configs/qcom_qcs9100_defconfig
+> > > +++ b/configs/qcom_lemans_defconfig
+> > > @@ -9,7 +9,7 @@
+> > >   CONFIG_TEXT_BASE=0xaf000000
+> > >   CONFIG_REMAKE_ELF=y
+> > >   CONFIG_FASTBOOT_BUF_ADDR=0xdb300000
+> > > -CONFIG_DEFAULT_DEVICE_TREE="qcom/qcs9100-ride-r3"
+> > > +CONFIG_DEFAULT_DEVICE_TREE="qcom/lemans-evk"
+> > >   CONFIG_ENV_IS_IN_SCSI=y
+> > > CONFIG_ENV_SCSI_PART_UUID="71cb9cd0-acf1-b6cb-ad91-be9572fe11a9"
+> > >   # CONFIG_ENV_IS_DEFAULT is not set
+> > 
+> Hi Heinrich,
 > 
-> Adjust the bcm-voter driver to avoid sending multiple commands per
-> write, and additionally adjust how we send RPMh requests as well as
-> improve the cleanup we do prior to booting the OS.
+> Lemans EVK is an open evaluation board based on the QCS9100 SoC and is
+> intended to be the default reference platform for the QCS9100 family.
+> Renaming the existing defconfig
+> 
+> aligns with the naming of SoC & avoids maintaining two identical defconfigs
+> for same SoC.
 > 
 
-Aswin,
-
-Is there something you can help Casey with this multiple RPMh requests
-issue?
-
-> Lastly, add a missing piece to the rpmh regulator driver to ensure
-> that when a supply gets enabled we also propagate a vote to its parent
-> supply. This seems to have been missed from the original port (perhaps
-> because the Linux regulator core handles this automatically?) but it is
-> necessary for some peripherals on some boards to work (e.g. to ensure
-> that the spms supplier for an LDO gets enabled).
-> 
-
-Again it will be better if you list down the specific peripherals here.
+Please capture this reasoning as part of the commit message.
 
 -Sumit
-
-> ---
-> Casey Connolly (3):
->       soc/qcom: rpmh: properly fix synchronous requests
->       soc/qcom: rpmh: only allow rpmh writes of a single command
->       power: regulator: qcom-rpmh: propagate votes to parent supplies
-> 
->  drivers/interconnect/qcom/bcm-voter.c         | 16 +++---
->  drivers/power/regulator/qcom-rpmh-regulator.c | 35 +++++++++++++-
->  drivers/soc/qcom/rpmh-rsc.c                   | 70 ++++++++++++++++++++-------
->  drivers/soc/qcom/rpmh.c                       |  6 +++
->  4 files changed, 102 insertions(+), 25 deletions(-)
-> ---
-> base-commit: c704af3c8b0f37929bce8c2a4bba27d6e89919c7
-> 
-> // Casey (she/they)
-> 
