@@ -4,60 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC7DBCD13DA
-	for <u-boot@archiver.kernel.org>; Sat,  2 May 2026 11:58:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50450CD13DA
+	for <u-boot@archiver.kernel.org>; Sat,  2 May 2026 12:00:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6F1B4845E9;
-	Sat,  2 May 2026 13:58:46 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B4046845E9;
+	Sat,  2 May 2026 14:00:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=xs4all.nl
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=xs4all.nl header.i=@xs4all.nl header.b="O4xM+EY/";
+	dkim=pass (2048-bit key; secure) header.d=xs4all.nl header.i=@xs4all.nl header.b="Lx38X/K6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B1ABB8464D; Sat,  2 May 2026 13:58:45 +0200 (CEST)
-Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.184])
+ id 2B4BE8460E; Sat,  2 May 2026 14:00:10 +0200 (CEST)
+Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.185])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 11B9A842D7
- for <u-boot@lists.denx.de>; Sat,  2 May 2026 13:58:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D940F842D7
+ for <u-boot@lists.denx.de>; Sat,  2 May 2026 14:00:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=xs4all.nl
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mark.kettenis@xs4all.nl
-X-KPN-MessageId: 43d11f47-461e-11f1-afe2-005056994fde
-Received: from smtp.kpnmail.nl (unknown [10.31.155.8])
+X-KPN-MessageId: 731164e0-461e-11f1-8ff3-005056999439
+Received: from smtp.kpnmail.nl (unknown [10.31.155.6])
  by ewsoutbound.so.kpn.org (Halon) with ESMTPS
- id 43d11f47-461e-11f1-afe2-005056994fde;
- Sat, 02 May 2026 13:58:42 +0200 (CEST)
+ id 731164e0-461e-11f1-8ff3-005056999439;
+ Sat, 02 May 2026 14:00:01 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=xs4all.nl; s=xs4all01;
  h=subject:to:from:message-id:date;
- bh=HVLFeNrmJ0k8Mt66/3AfVEc9PQPqI13cOWC234PtEts=;
- b=O4xM+EY/jAhpn6+2K8p2mDYiUwzssFZug9Yf6NsFW2Cg5bNYF1Khv3Dv/G4JfO3dS4/0lEldyCOCw
- NOhhmDnqDD37mzPtXsiY7vj6EzZqiZDGftsVrG9HGEaZKX0PxCrHXhj8JOHJ4ajXotogBVhegDBqD6
- z/sEtT3/4Xz+BvgNM3Knx4vXUAcVimHMzi63m7dlXclZf+Bd0D+z1C03eKieXZcdp3zl7f4p+zKuNH
- 3jHN9D/bZx5b7+BFQ6eP2ZML7kwdjkRpk3L5d0m9FKaKIOLxD6AJhjOVir+2RYU/SH4QgyuNBVQ9O3
- Vh5keM4ncDLkBAEFrSaNq8DdrP1YKVA==
-X-KPN-MID: 33|1VNWlWFH11UQoXY56dO3rWhJ7qLiErCTMEW9Ci+C9tFRksVfzJ3yrYEhTIhurS9
- saAh1KJRNDYlnY6h2zp3Q1ncdqDHSLuxdIFPdUEQH4Dk=
+ bh=d3iyc1aq4A/j8dQX22cOs5ERbWXYZ22PumosjgTgiIU=;
+ b=Lx38X/K6tM6DCsIjknimMX32XOpycpLSioiBMJcbO3J12s91yybJYdcouak2qNtg0534brTqNYfEB
+ Viirn7lAkQwfPWbF0Lk9WI/7Y4/asudvkfofs12xnpB2eFUJwDmiWj4T5z1NUm78SVTqpzmRXjBzao
+ 0JR+X1UiOH8NY3rA0BkSugoK0pXH1Lt54mJTBQaSY0CHPhAExjinF7kAJ874mqjRTVVRFkPRxa16kd
+ o7I712st53+JIc5DmbZ1QD9LimfrAtni/GBTjKQyQYhjEn6jgazMz9UQL2FxoeoN2M69LcYR9n3KzU
+ BChS3Rf2dMYG72cYrCNAfzHr7WJz9Rw==
+X-KPN-MID: 33|8LSem0yve9bdc5JAwmZ6izFqk7sEzRyrW0zYHjFBR2k4cbiHcwN68XPKM/iAfsB
+ GqIuGgYeTU2TSGmbCeI8BFQ==
 X-KPN-VerifiedSender: Yes
-X-CMASSUN: 33|zdjgcbSkPf3M++1Q7Az7GyWhHVTi55zIXqGagRkLPwfWSZfRuDYiN39KipWv48A
- xeT7nHXA+b+lDEeKnr26H4g==
+X-CMASSUN: 33|S4AKpXQcCYPtESc0l3Inils7rdbvvIz8V4P/rpoW0mvBbdawa1spwu2qUMevx3k
+ I6iLfMu+XvIXKUrStklMNBQ==
 X-Originating-IP: 80.61.163.207
 Received: from bloch.sibelius.xs4all.nl (80-61-163-207.fixed.kpn.net
  [80.61.163.207]) by smtp.xs4all.nl (Halon) with ESMTPSA
- id 435a7114-461e-11f1-9c0c-00505699d6e5;
- Sat, 02 May 2026 13:58:42 +0200 (CEST)
-Date: Sat, 02 May 2026 13:58:41 +0200
-Message-Id: <87se8ac9am.fsf@bloch.sibelius.xs4all.nl>
+ id 7286c463-461e-11f1-bffa-00505699772e;
+ Sat, 02 May 2026 14:00:01 +0200 (CEST)
+Date: Sat, 02 May 2026 14:00:00 +0200
+Message-Id: <87qznuc98f.fsf@bloch.sibelius.xs4all.nl>
 From: Mark Kettenis <mark.kettenis@xs4all.nl>
 To: Janne Grunau <j@jannau.net>
-Cc: u-boot@lists.denx.de, kettenis@openbsd.org,
- stefan.roese@mailbox.org, trini@konsulko.com, j@jannau.net
-In-Reply-To: <20260430-apple-compat-watchdog-v1-1-dbb6da4cec6a@jannau.net>
- (message from Janne Grunau on Thu, 30 Apr 2026 23:34:43 +0200)
-Subject: Re: [PATCH] watchdog: apple: Add "apple,t8103-wdt" compatible
-References: <20260430-apple-compat-watchdog-v1-1-dbb6da4cec6a@jannau.net>
+Cc: u-boot@lists.denx.de, trini@konsulko.com, kettenis@openbsd.org,
+ sjg@chromium.org, neil.armstrong@linaro.org, me@ziyao.cc,
+ patrice.chotard@foss.st.com, visitorckw@gmail.com,
+ kory.maincent@bootlin.com, jerome.forissier@arm.com,
+ peng.fan@nxp.com, raymond.mao@riscstar.com,
+ quentin.schulz@cherry.de, stefan.roese@mailbox.org,
+ philip.molloy@analog.com, alif.zakuan.yuslaimi@altera.com, j@jannau.net
+In-Reply-To: <20260430-maintainers-apple-v1-1-43382ca4d780@jannau.net>
+ (message from Janne Grunau on Thu, 30 Apr 2026 23:59:36 +0200)
+Subject: Re: [PATCH 1/2] MAINTAINERS: Add missing Apple M1 specific files
+References: <20260430-maintainers-apple-v1-0-43382ca4d780@jannau.net>
+ <20260430-maintainers-apple-v1-1-43382ca4d780@jannau.net>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,44 +81,44 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 > From: Janne Grunau <j@jannau.net>
-> Date: Thu, 30 Apr 2026 23:34:43 +0200
+> Date: Thu, 30 Apr 2026 23:59:36 +0200
 > 
-> After discussion with the devicetree maintainers we agreed to not extend
-> lists with the generic compatible "apple,wdt" anymore [1]. Use
-> "apple,t8103-wdt" as base compatible as it is the SoC driver and
-> bindings were originally written for.
-> The t602x (M2 Pro/Max/Ultra) devicetrees submitted in [2] use this
-> compatible as fallback instead of "apple,wdt".
+> The files weren't added to MAINTAINERS but clearly belong to Apple
+> silicon (M1) support.
 > 
-> Link: https://lore.kernel.org/asahi/12ab93b7-1fc2-4ce0-926e-c8141cfe81bf@kernel.org/ [1]
-> Link: https://lore.kernel.org/asahi/20250828-dt-apple-t6020-v1-0-507ba4c4b98e@jannau.net/ [2]
 > Signed-off-by: Janne Grunau <j@jannau.net>
+
+Sure!
 
 Acked-by: Mark Kettenis <kettenis@openbsd.org>
 
 > ---
->  drivers/watchdog/apple_wdt.c | 1 +
->  1 file changed, 1 insertion(+)
+>  MAINTAINERS | 5 +++++
+>  1 file changed, 5 insertions(+)
 > 
-> diff --git a/drivers/watchdog/apple_wdt.c b/drivers/watchdog/apple_wdt.c
-> index c7307f41cb7..9e998994216 100644
-> --- a/drivers/watchdog/apple_wdt.c
-> +++ b/drivers/watchdog/apple_wdt.c
-> @@ -78,6 +78,7 @@ static const struct wdt_ops apple_wdt_ops = {
->  };
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index d4b527560aa..2fc41a79dac 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -132,11 +132,16 @@ S:	Maintained
+>  F:	arch/arm/include/asm/arch-apple/
+>  F:	arch/arm/mach-apple/
+>  F:	configs/apple_m1_defconfig
+> +F:	doc/board/apple/
+> +F:	drivers/input/apple_spi_kbd.c
+>  F:	drivers/iommu/apple_dart.c
+> +F:	drivers/mailbox/apple-mbox.c
+>  F:	drivers/nvme/nvme_apple.c
+>  F:	drivers/pci/pcie_apple.c
+>  F:	drivers/phy/phy-apple-atc.c
+>  F:	drivers/pinctrl/pinctrl-apple.c
+> +F:	drivers/power/domain/apple-pmgr.c
+> +F:	drivers/spi/apple_spi.c
+>  F:	drivers/watchdog/apple_wdt.c
+>  F:	include/configs/apple.h
 >  
->  static const struct udevice_id apple_wdt_ids[] = {
-> +	{ .compatible = "apple,t8103-wdt" },
->  	{ .compatible = "apple,wdt" },
->  	{ /* sentinel */ }
->  };
 > 
-> ---
-> base-commit: 88dc2788777babfd6322fa655df549a019aa1e69
-> change-id: 20260430-apple-compat-watchdog-3de8a1053b88
-> 
-> Best regards,
 > -- 
-> Janne Grunau <j@jannau.net>
+> 2.53.0
 > 
 > 
