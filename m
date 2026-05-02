@@ -4,61 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5269FCD13DA
-	for <u-boot@archiver.kernel.org>; Sat,  2 May 2026 11:53:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 749EECD13DA
+	for <u-boot@archiver.kernel.org>; Sat,  2 May 2026 11:55:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5E13483642;
-	Sat,  2 May 2026 13:53:51 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id DF4F8842D7;
+	Sat,  2 May 2026 13:55:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=xs4all.nl
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=xs4all.nl header.i=@xs4all.nl header.b="YAlQzw7k";
+	dkim=pass (2048-bit key; secure) header.d=xs4all.nl header.i=@xs4all.nl header.b="OxL8efg2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A329F83642; Sat,  2 May 2026 13:53:49 +0200 (CEST)
-Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.183])
+ id A10D0842FC; Sat,  2 May 2026 13:55:41 +0200 (CEST)
+Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.186])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 689E680F0E
- for <u-boot@lists.denx.de>; Sat,  2 May 2026 13:53:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7476483642
+ for <u-boot@lists.denx.de>; Sat,  2 May 2026 13:55:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=xs4all.nl
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mark.kettenis@xs4all.nl
-X-KPN-MessageId: 91c9c7a3-461d-11f1-bea8-005056992ed3
-Received: from smtp.kpnmail.nl (unknown [10.31.155.7])
+X-KPN-MessageId: d66cac70-461d-11f1-89e5-00505699b430
+Received: from smtp.kpnmail.nl (unknown [10.31.155.8])
  by ewsoutbound.so.kpn.org (Halon) with ESMTPS
- id 91c9c7a3-461d-11f1-bea8-005056992ed3;
- Sat, 02 May 2026 13:53:43 +0200 (CEST)
+ id d66cac70-461d-11f1-89e5-00505699b430;
+ Sat, 02 May 2026 13:55:39 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=xs4all.nl; s=xs4all01;
  h=subject:to:from:message-id:date;
- bh=NndJWdC2XdHsgSMDPHLy5j0UmQGMya3mxxlaUEaFIVA=;
- b=YAlQzw7ksRQ3I2FVU39A8qmUXeDcgpE/BCyQSEQK7U/NS+L6pnbN/xN7zC0NGi1RBfa7tofHQ5IV7
- mB8UDalylfaS69UrfqUW6f6IdmNkCb4KGVo+RylbDax144qDsmYzMre0ruqbCB7rC1jeqIcbslgY+3
- 0Wocqn/+YVYRTfUPokZ5ev015b+9nOt8PILA1A+jjilONW/juhldM73kNDk2JPBH09rkyreHVBof/6
- JtZ9xj5KLcA2D/2qHpKJRGaPz3ZuIFpXUG9nw7p7/f/maWuSS+kKVHvHkEiXCdL6xOyd6MCX5poGix
- xKZq1F6PT2r5rTJc66/PdKgoG1EepRQ==
-X-KPN-MID: 33|Bw0f43nOdSbxyj4kJgouwp/Pf5OP3yuJslcAhZqINEo9+9P6MVoJSOY60RjaxFg
- hjrURGRf8WxCPky/VbUCv2WmbSWPswGFooNTUYSRgZpA=
+ bh=izr0CYZNI7Ps4OaLH32mW65eqNIjIdxLOJYDqgVr6ts=;
+ b=OxL8efg2eYUT6RAmrWzvTE9Vva4F3TH0oTw24jKzt3nI290wGS2drQGsXl5g0ljiQ8Lhy1xKAW5hN
+ Yn5K3/npEoYoR5pLLYR2md3/owZqquIthjOJmTyoj9+6T0WA0VZNj/GAHqn3m/SrIYF/3FfX0dxKIA
+ xdQXjFDSeGCAeKzbcCHEAHAT/Kr8+RtdpipN+EQPSgV5euKw+uiHvcBiSu6dYYW+hrzMRMvaqRiDDT
+ nNCjtDonLAhN9uWz0s6f+jpajrnjLouMSJ6w0Vf7Z7Mu+NjCs8kklYcIc/h0brZ31eh3QOvyTJDIx/
+ ni5zlOtnrsoHxGJmTjDDze6Wrn9A7Yw==
+X-KPN-MID: 33|AsGJ/kvxhJ/xtpGuEic6taVPWWwXx7oV6fF35z5ZPiCoAfgNpMlHFfU3/zNJEAx
+ Wei5CUp0h/oCz9prFllc18cna2GJYReDdw4/IgdSdBCQ=
 X-KPN-VerifiedSender: Yes
-X-CMASSUN: 33|Q45zx/JzG6TGyD3fchD7VCTJ0+bE/3Pt6I4Lt/EwHp4GxfDkQaN9PNdTex/IKZX
- baf8VjPUboJIXCx9IKYuTGA==
+X-CMASSUN: 33|Q3j+k+vWNc+CmMITX32KmOv4QFLKfpXoWnxzAJfeVmmdEwnpuAndJuyOKk/aJGh
+ MVfpzR7YhrkpOJ7Arg8h5Mg==
 X-Originating-IP: 80.61.163.207
 Received: from bloch.sibelius.xs4all.nl (80-61-163-207.fixed.kpn.net
  [80.61.163.207]) by smtp.xs4all.nl (Halon) with ESMTPSA
- id 9150aca5-461d-11f1-86d8-005056998788;
- Sat, 02 May 2026 13:53:43 +0200 (CEST)
-Date: Sat, 02 May 2026 13:53:43 +0200
-Message-Id: <87zf2ic9iw.fsf@bloch.sibelius.xs4all.nl>
+ id d5f51879-461d-11f1-9c0c-00505699d6e5;
+ Sat, 02 May 2026 13:55:38 +0200 (CEST)
+Date: Sat, 02 May 2026 13:55:38 +0200
+Message-Id: <87y0i2c9fp.fsf@bloch.sibelius.xs4all.nl>
 From: Mark Kettenis <mark.kettenis@xs4all.nl>
 To: Janne Grunau <j@jannau.net>
-Cc: u-boot@lists.denx.de, kettenis@openbsd.org, trini@konsulko.com,
- sughosh.ganu@arm.com, ilias.apalodimas@linaro.org,
- mkorpershoek@kernel.org, jerome.forissier@arm.com, j@jannau.net
-In-Reply-To: <20260501-apple-m3-support-v1-1-4165bc2a73f4@jannau.net> (message
- from Janne Grunau on Fri, 01 May 2026 16:07:16 +0200)
-Subject: Re: [PATCH] arm: apple: Add Apple M3 (t8122) support
-References: <20260501-apple-m3-support-v1-1-4165bc2a73f4@jannau.net>
+Cc: u-boot@lists.denx.de, kettenis@openbsd.org, bmeng.cn@gmail.com,
+ trini@konsulko.com, j@jannau.net
+In-Reply-To: <20260430-apple-compat-nvme-v1-1-52c1e6e93aa6@jannau.net>
+ (message from Janne Grunau on Thu, 30 Apr 2026 23:28:36 +0200)
+Subject: Re: [PATCH] nvme: apple: add "apple,t8103-nvme-ans2" compatible
+References: <20260430-apple-compat-nvme-v1-1-52c1e6e93aa6@jannau.net>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,141 +75,41 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 > From: Janne Grunau <j@jannau.net>
-> Date: Fri, 01 May 2026 16:07:16 +0200
-
-Hi Janne,
-
-> Apple's M3 SoC is similar to M1 and M2 but uses a different memory map.
-> The main difference is that RAM starts at 0x100_0000_0000 like on t600x
-> and t602x (M1 and M2 Pro/Max/Ultra). Otherwise IO blocks have been
-> rearranged.
-> U-boot's existing drivers are compatible with the hardware and M3 device
-> trees will carry "apple,t8103-*" compatible strings. Only
-> apple-atcphy-reset might need a new compatible due to USB4 / DisplayPort
-> changes the Linux driver has to deal with.
+> Date: Thu, 30 Apr 2026 23:28:36 +0200
 > 
+> After discussion with the devicetree maintainers we agreed to not extend
+> lists with the generic compatible "apple,nvme-ans2" anymore [1]. Add
+> "apple,t8103-nvme-ans2" as fallback compatible as this is the SoC the
+> driver and bindings were originally written for.
+> The t602x (M2 Pro/Max/Ultra) devicetrees submitted in [2] use this
+> compatible as fallback instead of "apple,t8103-nvme-ans2".
+> 
+> Link: https://lore.kernel.org/asahi/12ab93b7-1fc2-4ce0-926e-c8141cfe81bf@kernel.org/ [1]
+> Link: https://lore.kernel.org/asahi/20250828-dt-apple-t6020-v1-0-507ba4c4b98e@jannau.net/ [2]
 > Signed-off-by: Janne Grunau <j@jannau.net>
+
+Acked-by: Mark Kettenis <kettenis@openbsd.org>
+
 > ---
->  arch/arm/mach-apple/board.c | 71 +++++++++++++++++++++++++++++++++++++++++++++
->  1 file changed, 71 insertions(+)
+>  drivers/nvme/nvme_apple.c | 1 +
+>  1 file changed, 1 insertion(+)
 > 
-> diff --git a/arch/arm/mach-apple/board.c b/arch/arm/mach-apple/board.c
-> index 4cd8979bdc2..914b4581e7d 100644
-> --- a/arch/arm/mach-apple/board.c
-> +++ b/arch/arm/mach-apple/board.c
-> @@ -85,6 +85,75 @@ static struct mm_region t8103_mem_map[] = {
->  	}
+> diff --git a/drivers/nvme/nvme_apple.c b/drivers/nvme/nvme_apple.c
+> index 7e7538553e3..48f82bc826c 100644
+> --- a/drivers/nvme/nvme_apple.c
+> +++ b/drivers/nvme/nvme_apple.c
+> @@ -287,6 +287,7 @@ static const struct nvme_ops apple_nvme_ops = {
 >  };
 >  
-> +/* Apple M3 */
-
-I think it makes more sense to keep things sorted based on the name
-and put M3 after M2 Ultra?  M2 is the odd one out here since it is
-identical to M1.
-
-> +
-> +static struct mm_region t8122_mem_map[] = {
-> +	{
-> +		/* I/O */
-> +		.virt = 0x210000000,
-> +		.phys = 0x210000000,
-> +		.size = 4UL * SZ_1G,
-
-We should try to keep the regions aligned on 1G boundaries with sizes
-that are multiples of 1G as that allows for more efficient page
-tables.
-
-I haven't looked at Apple's device tree for the t8122 (I don't think I
-have ever seen one).  But based on the t8122.dtsi from the asahi-wip
-branch, I'd suggest using two regions
-
-0x200000000: 4UL * SZ_1G
-0x300000000: 1UL * SZ_1G
-
-You could tag the region at 0x300000000 as /* NVME */ if the Apple dts
-doesn't suggest there are non-NVMe things in there.
-
-
-> +		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
-> +			 PTE_BLOCK_NON_SHARE |
-> +			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
-> +	}, {
-> +		/* I/O */
-> +		.virt = 0x700000000,
-> +		.phys = 0x700000000,
-> +		.size = SZ_1G,
-> +		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
-> +			 PTE_BLOCK_NON_SHARE |
-> +			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
-> +	}, {
-> +		/* I/O */
-> +		.virt = 0xb00000000,
-> +		.phys = 0xb00000000,
-> +		.size = SZ_1G,
-> +		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
-> +			 PTE_BLOCK_NON_SHARE |
-> +			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
-> +	}, {
-> +		/* I/O */
-> +		.virt = 0x580000000,
-> +		.phys = 0x580000000,
-> +		.size = SZ_512M,
-> +		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
-> +			 PTE_BLOCK_NON_SHARE |
-> +			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
-> +	}, {
-> +		/* PCIE */
-> +		.virt = 0x5a0000000,
-> +		.phys = 0x5a0000000,
-> +		.size = SZ_512M,
-> +		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRE) |
-> +			 PTE_BLOCK_INNER_SHARE |
-> +			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
-> +	}, {
-> +		/* PCIE */
-> +		.virt = 0x5c0000000,
-> +		.phys = 0x5c0000000,
-> +		.size = SZ_1G,
-> +		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRE) |
-> +			 PTE_BLOCK_INNER_SHARE |
-> +			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
-> +	}, {
-> +		/* RAM */
-> +		.virt = 0x10000000000,
-> +		.phys = 0x10000000000,
-> +		.size = 8UL * SZ_1G,
-> +		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
-> +			 PTE_BLOCK_INNER_SHARE
-> +	}, {
-> +		/* Framebuffer */
-> +		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL_NC) |
-> +			 PTE_BLOCK_INNER_SHARE |
-> +			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
-> +	}, {
-> +		/* List terminator */
-> +		0,
-> +	}
-> +};
-> +
->  /* Apple M1 Pro/Max */
->  
->  static struct mm_region t6000_mem_map[] = {
-> @@ -710,6 +779,8 @@ void build_mem_map(void)
->  	if (of_machine_is_compatible("apple,t8103") ||
->  	    of_machine_is_compatible("apple,t8112"))
->  		mem_map = t8103_mem_map;
-> +	else if (of_machine_is_compatible("apple,t8122"))
-> +		mem_map = t8122_mem_map;
-
-I'd probably move this down as well.
-
->  	else if (of_machine_is_compatible("apple,t6000") ||
->  		 of_machine_is_compatible("apple,t6001"))
->  		mem_map = t6000_mem_map;
+>  static const struct udevice_id apple_nvme_ids[] = {
+> +	{ .compatible = "apple,t8103-nvme-ans2" },
+>  	{ .compatible = "apple,nvme-ans2" },
+>  	{ /* sentinel */ }
+>  };
 > 
 > ---
-> base-commit: 4433253ecf2041f9362a763bb6cb79960921ac7e
-> change-id: 20260501-apple-m3-support-9fc25ab793d4
+> base-commit: 88dc2788777babfd6322fa655df549a019aa1e69
+> change-id: 20260430-apple-compat-nvme-71c2fe7a5149
 > 
 > Best regards,
 > -- 
