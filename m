@@ -4,67 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7F8ECD3423
-	for <u-boot@archiver.kernel.org>; Sat,  2 May 2026 12:00:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 699D3CD3423
+	for <u-boot@archiver.kernel.org>; Sat,  2 May 2026 12:53:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8279D845E9;
-	Sat,  2 May 2026 14:00:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=xs4all.nl
+	by phobos.denx.de (Postfix) with ESMTP id A374283642;
+	Sat,  2 May 2026 14:53:34 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=xs4all.nl header.i=@xs4all.nl header.b="C+5TG3Ge";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="RUvYeSPZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AFB9784659; Sat,  2 May 2026 14:00:46 +0200 (CEST)
-Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.183])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id E805F83693; Sat,  2 May 2026 14:53:33 +0200 (CEST)
+Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
+ [IPv6:2a00:1450:4864:20::531])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B4E20842D7
- for <u-boot@lists.denx.de>; Sat,  2 May 2026 14:00:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B80F280F0E
+ for <u-boot@lists.denx.de>; Sat,  2 May 2026 14:53:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=xs4all.nl
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mark.kettenis@xs4all.nl
-X-KPN-MessageId: 8c4e354e-461e-11f1-bea8-005056992ed3
-Received: from smtp.kpnmail.nl (unknown [10.31.155.5])
- by ewsoutbound.so.kpn.org (Halon) with ESMTPS
- id 8c4e354e-461e-11f1-bea8-005056992ed3;
- Sat, 02 May 2026 14:00:44 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=xs4all.nl; s=xs4all01;
- h=subject:to:from:message-id:date;
- bh=+r6HmPv14NeYUy4txGg1zIwJcktOrtDrfe/prdtQ3UQ=;
- b=C+5TG3GepvF0xuxd7IfKYloYzME+X8qOxdlePfUwY8ni0TrgC2+ry/eeNGuN3HWaR6gdDjQO49P6L
- sE71fJWX3FmZP7MNcobanU5rpZWfTCfgCrlpNmuc10Zjueb3TBwnqJDScJXrkLn6pfiA4DhSORKCoe
- f06EIgUc4ZjnKa1TGtetMuLPhcFssqwRgpC/lr7pL4P5XWZNk2Nw8Bnpn2PxeB2LVU8Dwbhvhf+LY/
- hZJ9CYGNXZReyX6gvi6u8FqwzFLaNNxPhsOI4vwc3Jkn4KAjbOXUj/cTobspFYGfcyLu7zCaKT8pw4
- MgStgE+B7vB7mmlGHhVKRK+T5T8w4qg==
-X-KPN-MID: 33|/FhSpT0EPiIzrbfl4O8pHllbyMDQMQEldI2UNLuqPlSeOP4lqDMrOu1DqwY84es
- BsF3z8pbnydYvFkkcqBKeZiTbODF20cnZQ/nl8wlMN1g=
-X-KPN-VerifiedSender: Yes
-X-CMASSUN: 33|HFUNJ0b18DddewyX+Z8t/LjYnZjkrWvEBbNTT6U0FZ52x2ZRGMcDrnIM/7swXfQ
- vyP6TahOFJAbisN5w9Wd16Q==
-X-Originating-IP: 80.61.163.207
-Received: from bloch.sibelius.xs4all.nl (80-61-163-207.fixed.kpn.net
- [80.61.163.207]) by smtp.xs4all.nl (Halon) with ESMTPSA
- id 8bb944e0-461e-11f1-abaf-00505699b758;
- Sat, 02 May 2026 14:00:44 +0200 (CEST)
-Date: Sat, 02 May 2026 14:00:43 +0200
-Message-Id: <87pl3ec978.fsf@bloch.sibelius.xs4all.nl>
-From: Mark Kettenis <mark.kettenis@xs4all.nl>
-To: Janne Grunau <j@jannau.net>
-Cc: u-boot@lists.denx.de, trini@konsulko.com, kettenis@openbsd.org,
- sjg@chromium.org, neil.armstrong@linaro.org, me@ziyao.cc,
- patrice.chotard@foss.st.com, visitorckw@gmail.com,
- kory.maincent@bootlin.com, jerome.forissier@arm.com,
- peng.fan@nxp.com, raymond.mao@riscstar.com,
- quentin.schulz@cherry.de, stefan.roese@mailbox.org,
- philip.molloy@analog.com, alif.zakuan.yuslaimi@altera.com, j@jannau.net
-In-Reply-To: <20260430-maintainers-apple-v1-2-43382ca4d780@jannau.net>
- (message from Janne Grunau on Thu, 30 Apr 2026 23:59:37 +0200)
-Subject: Re: [PATCH 2/2] MAINTAINERS: Add Janne Grunau as reviewer for Apple M1
- SoC support
-References: <20260430-maintainers-apple-v1-0-43382ca4d780@jannau.net>
- <20260430-maintainers-apple-v1-2-43382ca4d780@jannau.net>
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ed1-x531.google.com with SMTP id
+ 4fb4d7f45d1cf-67bc8609a9bso2214709a12.0
+ for <u-boot@lists.denx.de>; Sat, 02 May 2026 05:53:31 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1777726411; cv=none;
+ d=google.com; s=arc-20240605;
+ b=T1ANlxT5qBwWQa/2gWp+IMnODzOkYluuvOef5cn1ZVv2atQCB2o3UmTMo1UV6GEpI0
+ NUsFqb4hPAIa4+pwFPaD919W/jQd2XTpq4ZHEpR1r/UukYZ6JAXiFb8z4obQCmtlZ5/F
+ vybUzzmy0xqdtKohvMYnpiu0cptB2KlU8WtbU8EjnVRCvpXehwRdY5KzZgoiWS8nYxUD
+ Dry15om1nE6K4mX9ovF33TEsIWZReZLELd14wisz7Pjht/5VAjUh7V6ekCUmqVDCjjpf
+ MY1yUWjZ0r9jcuiENwbg59PSzCrjgsPw3KECNQ6i82h6BdaOYvR76uAgI916+kOmPkg7
+ QfvA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=XKfl4+7CuVLFmtaydWZzrplyvbmiZznGc9MdSGUvP3Q=;
+ fh=lZqAeOhyRklMgzXBK2XO3q47UzoZZQV+k+ZpJ8Gw8pg=;
+ b=GBxCKGBj03aZLQf6yaoA0Be1SzLFH/p1jdbaCduNr7g686tL9aJNhkOUfHgZ4r+19v
+ mHsadat67ASTQ3D++g7oOnrvluNrlhwvkhkWO6N65oGWxSfBJ7CALtN5WAX3lu+CHCKg
+ DhT+rGzTARgfzrJsa89m30JtfXdMtLsmp7gEkZD41s4kW29UdYrR+2Ohz6nVDbsyT1Fs
+ Q0B/MS239tdCK165Wa5e3MHgc3bzMXbUQYHmZmJ62i09hITkwAor8iolNBeTCqwEbIPD
+ GyRseGUSAsuQToZr2gGQ8wtFWLRXvq1SVpwDSUS6QEjJcFRan+XLE3wxnvn3X39Vl6P7
+ ShVQ==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1777726411; x=1778331211; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=XKfl4+7CuVLFmtaydWZzrplyvbmiZznGc9MdSGUvP3Q=;
+ b=RUvYeSPZD1cuDC98RbVtCzEGZ+bkDKFbsZWN5DDr39Wi0R/uVyq412UUKfUOb9iHR5
+ VwE10BZQi/GeoDhZRH5F63jxwfFldKJMR+1z1Iqhsk/aRe5Bouu7XMBQYjizOCkDNQWQ
+ ZSkwyjwO4mvMGnjqUOLPP0q/SyzLdWAp1wwI0=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1777726411; x=1778331211;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=XKfl4+7CuVLFmtaydWZzrplyvbmiZznGc9MdSGUvP3Q=;
+ b=J4Hl9a4DR4OgcFqjjNpjg5mrZnxlp3ZbmPDa79KrBCl5MnE4t1bQEDfoHOgSJcskrm
+ sZ3U1NBJr0sctMTRZJWxV6cTuWEpsnyvMV6YCVtAFGT/K8+PZBeULO7Q7N5zk0+BJ20C
+ FkCwx+RpRbOlCs5teEIKHiOmgk3SHzbDn/2Z+mP3JGvGucbt8+KGLGrAl445QDqtSOV6
+ XcGLetAZD1+/mqcXs5s3PbCmMdvZ7JqB3xXImf4HDOpvDo4OhUo+n035uTcpzB4oQ0vX
+ 0AWVkeFusH+VtsRUeDySvlj4a3Kfp225E1f4vz9ZRhO+3PJ6eUDTNoSJmsfwHJyto4ze
+ c1tw==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ8WreaR0CaOnu8DYTbejxM9WYIGgMDOCmb7xfyilbBJ6iH1kjIqROanyar3V/GZSeJ+unJnUqA=@lists.denx.de
+X-Gm-Message-State: AOJu0YzxOFXtgxtK6zKmoW0xwhiIwwEdUgcnRZZjzv53XzJCL7xMgCLy
+ eTAuDb9PTYe1Q+g4SwWJYYT68mziSZiG/UfdqFXahLKZu3UTMrroAsB71PHOyYkH/xtLpdo84f1
+ RYJuG1wpxdVfTfABQ0mhflZlTeeNZUrXOn87FG7jz
+X-Gm-Gg: AeBDiesNCe0EyiLuVzE5/CDlE4VdgcaX8uXEmeldiYp0BF/mWAysiVPKZbd/Q/kuaVT
+ 9R5MDkZnC+Zdp62+rL7WXCqxDykgZgodtjptpv/wnraDYbfvyS0PLdUcIF27y9JOGLWhHfx+WX+
+ U5BZkAWkZGt0w/BpLPy4Wn5++l9aQOaF0VqD0vXGT/1ysE/KIJ2+xzfSa+WhMz7IXYXQ5rWK1cu
+ YXnjBHpIeS3gCkd97dku5axWZbmr0KG9Kj3mji1aXRmPchp718aetFuRTMMWiS+yzY7RbG5gojw
+ qS6SfcmfH4JWkbjpvHUQ0/rUG0w=
+X-Received: by 2002:a17:906:fe04:b0:bab:8238:63ba with SMTP id
+ a640c23a62f3a-bbff64df965mr138585666b.0.1777726411162; Sat, 02 May 2026
+ 05:53:31 -0700 (PDT)
+MIME-Version: 1.0
+References: <20260429165629.104063-1-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20260429165629.104063-1-heinrich.schuchardt@canonical.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Sat, 2 May 2026 06:53:18 -0600
+X-Gm-Features: AVHnY4IT7vwPV8v7OKLYsKcsI8063T2W7unPvw2dxBwGZ2GEFCTFKj2KA5HGL54
+Message-ID: <CAFLszThCYP4wd37QB4Lc7EJUZBfu4P5UQNaF9WWf4PKCBiifQw@mail.gmail.com>
+Subject: Re: [PATCH 1/1] cmd: eficonfig: adjust struct eficonfig_entry,
+ field key
+To: heinrich.schuchardt@canonical.com
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>, Sughosh Ganu <sughosh.ganu@arm.com>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,36 +112,19 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> From: Janne Grunau <j@jannau.net>
-> Date: Thu, 30 Apr 2026 23:59:37 +0200
-> 
-> I'm one of the co-maintainers of Apple silicon support in the Linux
-> kernel and have contributed to u-boot's Apple SoC support.
+On 2026-04-29T16:56:29, Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
+> cmd: eficonfig: adjust struct eficonfig_entry, field key
+>
+> The number EFICONFIG_ENTRY_NUM_MAX - 1 must be printable
+> to field key of struct eficonfig_entry.
+>
+> Fixes: 1f0583beeb32 ("eficonfig: set EFICONFIG_ENTRY_NUM_MAX to INT_MAX - 1")
+> Fixes: 23aa0502a4b9 ("eficonfig: increase the number of menu entries")
+> Addresses-Coverity-ID: 583414 - Out-of-bounds write
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+>
+> include/efi_config.h | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
 
-Your help is very much appreciated!
-> 
-> Signed-off-by: Janne Grunau <j@jannau.net>
-
-Acked-by: Mark Kettenis <kettenis@openbsd.org>
-
-> ---
->  MAINTAINERS | 1 +
->  1 file changed, 1 insertion(+)
-> 
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index 2fc41a79dac..5bcc8607901 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -128,6 +128,7 @@ F:	drivers/mmc/snps_dw_mmc.c
->  
->  APPLE M1 SOC SUPPORT
->  M:	Mark Kettenis <kettenis@openbsd.org>
-> +R:	Janne Grunau <j@jannau.net>
->  S:	Maintained
->  F:	arch/arm/include/asm/arch-apple/
->  F:	arch/arm/mach-apple/
-> 
-> -- 
-> 2.53.0
-> 
-> 
+Reviewed-by: Simon Glass <sjg@chromium.org>
