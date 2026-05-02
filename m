@@ -4,107 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B73D7CD3424
-	for <u-boot@archiver.kernel.org>; Sat,  2 May 2026 07:29:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38479CD13DA
+	for <u-boot@archiver.kernel.org>; Sat,  2 May 2026 09:00:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F103380F0E;
-	Sat,  2 May 2026 09:29:04 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 3ABC580F0E;
+	Sat,  2 May 2026 11:00:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=jannau.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="BbMjf3Ai";
+	dkim=pass (2048-bit key; unprotected) header.d=jannau.net header.i=@jannau.net header.b="V4CNyLpA";
+	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="KqiXXnY4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3BFCB83693; Sat,  2 May 2026 09:29:02 +0200 (CEST)
-Received: from smtp-relay-internal-1.canonical.com
- (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ id 2A1E783642; Sat,  2 May 2026 11:00:16 +0200 (CEST)
+Received: from fhigh-b6-smtp.messagingengine.com
+ (fhigh-b6-smtp.messagingengine.com [202.12.124.157])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6272080077
- for <u-boot@lists.denx.de>; Sat,  2 May 2026 09:28:59 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
- [209.85.221.72])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 077F63F1CC
- for <u-boot@lists.denx.de>; Sat,  2 May 2026 07:28:59 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1777706939;
- bh=qfQeC77jcppN9Q88H4ZJjMod+lf6yKV2+SV13V9aihI=;
- h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
- In-Reply-To:Content-Type;
- b=BbMjf3AiNi0uewlCJmOv651OhVm1xAUY2dCD2SClWPzvrkUlNW/ITFfu2X8MMmZAF
- zi/UtlqGoUA4CG26GubpmED58h9l7YDvABJfhzVnW67Cy0uhCQjn3bbvbgVgUTieVm
- Q/b9y4jXgyjXRcUUKraDsu5xk4ExGKDA7i3PEgeY3GaQvCTeo8dNkCRlrxINkUZUM2
- ZnOIXvaz2aPPiqf7MDEyBKjL/2piEPXryPNg1nn5HsiPqI61AAk5IHtrDehzw3sATw
- JkcINMqU81nlTSw4l1XbDIshKFtOuQYguCUr9tusU5VNE2ZYqbJsmUyJnxHMInsgew
- 3ipf9qbK1PSorhQk6PUTVUf2kPBuTboE898nXddMsbFf9YwtWb2Nm3zqz+IGYAGfRp
- 0jr2sJcB9gZpEl8n8/Tk+wVI9nbZxHLFJZzrFpRjuTatlrhORoTr8q9b3YTGchAcOO
- iPgjdyM/m2hjCIZkCY/h1p5cIJTUqZcgZEkNe3YG5oE6h1A8gEWz82oHSDSD3fFfkz
- TyYVUbx3UgeWOOduoC7zvO/dn+nwtSeIH/xmjmo2zXgrINcFaApHAez1WI+4oqC2/6
- 3MVRS7YeY9OQd5VTKyDp/7QHcgPZEgByeGi+337CXyzrq5FrNEiSgvoqVzp1Jewuvn
- JHNqm2p+GhYuT/2bkrg2j9aU=
-Received: by mail-wr1-f72.google.com with SMTP id
- ffacd0b85a97d-44a122a5128so1322614f8f.0
- for <u-boot@lists.denx.de>; Sat, 02 May 2026 00:28:59 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777706938; x=1778311738;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=qfQeC77jcppN9Q88H4ZJjMod+lf6yKV2+SV13V9aihI=;
- b=JJhv4ak9LkR0eu3UcCLsNOBGWNe93zy44f6ATTr08VIJlJD+/ZXbyGy3Ef+yrV0fnD
- JmiZ2WdkOXiIOU4Lg0JdybevahBhdF+A1FFRavCIq3wQmE/9fJZxvkvQWzRhCEtngbWY
- 9uO3SqIf6MKoUnvezr1b1xAV9AMzOtqfIdot1Lp3FH+H+7fqP62BfsKC67yuT1hw5o5m
- kpXI0bJ4xqCT12m9/WeshNo03/RaA8A/r0ussb4/rZjQmtfWXZygeCr8YGeQKUPbjdNq
- 8NUmjtu6e0DClKFBUYUUOVgveac9e7Cv2uDa7hYMIXDBcZp4nNRkJeXJ7sM0AK/6ypyP
- AdyA==
-X-Forwarded-Encrypted: i=1;
- AFNElJ82zcLc0vHKMTzA0qJmMw3yz8o2NHLPdWBOjCSpMOk+d7PxkByurDw37U3n3P17UWaIWFZ+gWE=@lists.denx.de
-X-Gm-Message-State: AOJu0YyNEW4nmLvf0v9Hu60D4f/JP7+Vj1Fx0ivWLN4jQIRXl0rI2j/d
- zCDXyRvf4LkY7gHHDQiPn/0ShMLy1CTNj7QgBjollbvLtmy/b1VvaYNLBdCd5G4nu9hWY1cSs5M
- Fa0vxygJYIhozr0AXpAZ2cVFrDC51e2+dd9AO77zTyJxo+YuOIsaFZbHglRsJa/qn/2QIT7Q=
-X-Gm-Gg: AeBDietvQn6pVppGF8B4W6BkqLhIHF6mGD7WqXWKc1pO2gpdRbJrPLE3BF7yspLFo1M
- JwP+6un3kqbAWHoNpn64A+p6jMW+LQAkPDRJqDwvVcfeWlFNyliZVZzWRrf8mP9FtOIFTgSH+2N
- RQNTcz3/6JrT0eU+LMgij+PQYRqMU6DEvM6mV2MbGNlj64cW2NSooxecRWX4iF+KDWt9Gq2zCee
- S8vndaMTpfBfELL+kNtjBw7W8du1d7wtJdKP6pdFw9V83gU3XDsUhsTTazB/9O5usbFwtLSxnF+
- QyB8aMZvKBBNjfMdaC7yiqez+nhyiyA6bxC/XF6gpwWXwYLTvEfY4NeUVIWsOfK4CXrSHpV3mmh
- fKkX48RVJl3gbWUANWwFp1rGDHVt94SFZkyStAkaq3uilwJWYgf1v5PpiBTdqAyoKyLdpYcqD9S
- cjd5fOApFVp10UWwE2M3I5M1wuPdA0CgKVhMK2k5ZlCGszrhPtAdyV+tW7fV7RFwglFCI=
-X-Received: by 2002:a05:6000:220c:b0:448:5ec1:dcb5 with SMTP id
- ffacd0b85a97d-44bb2e2e7cbmr3492048f8f.7.1777706938592; 
- Sat, 02 May 2026 00:28:58 -0700 (PDT)
-X-Received: by 2002:a05:6000:220c:b0:448:5ec1:dcb5 with SMTP id
- ffacd0b85a97d-44bb2e2e7cbmr3492023f8f.7.1777706938201; 
- Sat, 02 May 2026 00:28:58 -0700 (PDT)
-Received: from [192.168.123.154]
- (ip-176-199-115-125.um44.pools.vodafone-ip.de. [176.199.115.125])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-44a8ea7cf97sm11208698f8f.6.2026.05.02.00.28.56
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sat, 02 May 2026 00:28:57 -0700 (PDT)
-Message-ID: <ea87842c-75ce-4d39-9ae4-0f8b3b913ad0@canonical.com>
-Date: Sat, 2 May 2026 09:28:56 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id 5DC7580077
+ for <u-boot@lists.denx.de>; Sat,  2 May 2026 11:00:11 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=none (p=none dis=none) header.from=jannau.net
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=j@jannau.net
+Received: from phl-compute-03.internal (phl-compute-03.internal [10.202.2.43])
+ by mailfhigh.stl.internal (Postfix) with ESMTP id 345FA7A00E6;
+ Sat,  2 May 2026 05:00:09 -0400 (EDT)
+Received: from phl-frontend-04 ([10.202.2.163])
+ by phl-compute-03.internal (MEProxy); Sat, 02 May 2026 05:00:09 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=jannau.net; h=cc
+ :cc:content-type:content-type:date:date:from:from:in-reply-to
+ :in-reply-to:message-id:mime-version:references:reply-to:subject
+ :subject:to:to; s=fm1; t=1777712408; x=1777798808; bh=XIFnpAsjBR
+ XRgLZQQGfwG3DfDjFXeh1nmdkLg+FUCIY=; b=V4CNyLpAL6cLEtp90n1n9ItCKf
+ D6uVVRfMrReJH1gzj4LOc/1o1giHJ5n/qlTaGwTO/6kIEIjou1PKngYVg6hPY24d
+ PgJP03YhEsePffvlQ//fTd4vJZH+w5slFfn28Fi9zcYmUEjYgDGUvq1w52g39Mxi
+ 7mBOst0TRTELtcO/CJMGUcwe3Dzc5SxljT+uqHPhQRzfLOPyuWa7+qcchajGk8Ux
+ Bc933A3pcAiGHZxyQ0PD2kFyrHwDhh430fAOZbifiVdtGMlvX+UHE4C5SdyDhlqV
+ wgGEglsEHOhA48Xo14hxC+x+8EkE3VFH0C0V27TATPMWls+Xt5Xp7B4nm28w==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ messagingengine.com; h=cc:cc:content-type:content-type:date:date
+ :feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
+ :message-id:mime-version:references:reply-to:subject:subject:to
+ :to:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=
+ 1777712408; x=1777798808; bh=XIFnpAsjBRXRgLZQQGfwG3DfDjFXeh1nmdk
+ Lg+FUCIY=; b=KqiXXnY4XH+LumsVxp+gptxVc3+wlwCVe0FPOyRqegavqufUVvE
+ 7ReXI3m/cKTvy2hNUyATfAlU93ykBcPNEY8qOsI+aDhbhYPt8KfMP367PukdAXxN
+ 1bJfFYDwR9hCPEWFcl2+/jFxcBKH8Ilej/HWm7EDhofG7O6nLDNmXbCK++g+I9QM
+ ZBe0sWPr+aI+jdPKyfN8JonfXInj07Mg51zBs0EIx43dn9rl32hdiWkukWECvDE9
+ scRmbMw4uSW6VBexbaWTEZtLT23/CvNrp8/qrVzB7xtv2TrU+K7tSs54iATKLcJS
+ B4XwL9XKT8fr/Xh+Jy3EjmvJzKf+5DJxQfA==
+X-ME-Sender: <xms:GL31aS4GaGn_20j1bpsSBMVjSl_SSR3I5QNaZ5MzbAg1I_2Q8TMTXg>
+ <xme:GL31afL9vSGjHTpuQypzBuz2zv9strTCfptkUDsM0U7XpcQQfjik_lbXFhN5YXIkA
+ poAqWOJ0j5T5jGJ38qLg3KhfFERvWgQO5tbUhED_5GB_4-0kNqpvt8>
+X-ME-Received: <xmr:GL31aa4P7-9-MOLoK1AIxqee2PBp49lYDFofNXiHv7CCY2fFi3KuZVOkI1vSV__TOBvXbyTVzcwMSRy3DPdIA3eYiOx2Pr5KhU8>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefhedrtddtgdelvdeiiecutefuodetggdotefrod
+ ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpuffrtefokffrpgfnqfghnecuuegr
+ ihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfjug
+ hrpeffhffvvefukfhfgggtuggjsehttdertddttdejnecuhfhrohhmpeflrghnnhgvucfi
+ rhhunhgruhcuoehjsehjrghnnhgruhdrnhgvtheqnecuggftrfgrthhtvghrnhepgfdvff
+ evleegudejfeefheehkeehleehfefgjefffeetudegtefhuedufeehfeetnecuvehluhhs
+ thgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomhepjhesjhgrnhhnrghurd
+ hnvghtpdhnsggprhgtphhtthhopeefpdhmohguvgepshhmthhpohhuthdprhgtphhtthho
+ pehuqdgsohhotheslhhishhtshdruggvnhigrdguvgdprhgtphhtthhopehtrhhinhhise
+ hkohhnshhulhhkohdrtghomhdprhgtphhtthhopehkvghtthgvnhhishesohhpvghnsghs
+ ugdrohhrgh
+X-ME-Proxy: <xmx:GL31aax8qbNrGcwFfiBe5yRPImunYytw-tRrf9ivwu4UfMb5yCvMYg>
+ <xmx:GL31aWYeTuYwIKkAJS6F5kvT1Oj4iNskd5ru7_J8nKWDzbdksJzSrA>
+ <xmx:GL31aUSfbSa7C_1vrXaSIJ_BoAcNIgz820mG7W82SEbY2HVaiZcYpw>
+ <xmx:GL31aYyoogdMPPgDxyC05zFoynkxd0OgAg7RnLc1o36uk5CttSIX-Q>
+ <xmx:GL31aXJGwbNHxwvdamePNKCfsUeuKIc5onXK1POKVnYPXbYZ2DVLtg_2>
+Feedback-ID: i47b949f6:Fastmail
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Sat,
+ 2 May 2026 05:00:07 -0400 (EDT)
+Date: Sat, 2 May 2026 11:00:05 +0200
+From: Janne Grunau <j@jannau.net>
+To: u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, Mark Kettenis <kettenis@openbsd.org>
+Subject: Re: [PATCH 3/3] arm: dts: Switch Apple silicon devices to dts/upstream
+Message-ID: <20260502090005.GA219066@robin.jannau.net>
+References: <20260430-apple-dt-upstream-v1-0-dda66c16e0da@jannau.net>
+ <20260430-apple-dt-upstream-v1-3-dda66c16e0da@jannau.net>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/1] efi_loader: set correct frame buffer address
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>, Yao Zi <me@ziyao.cc>,
- Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>,
- u-boot@lists.denx.de
-References: <20260501150550.228937-1-heinrich.schuchardt@canonical.com>
-Content-Language: en-US
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-In-Reply-To: <20260501150550.228937-1-heinrich.schuchardt@canonical.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <20260430-apple-dt-upstream-v1-3-dda66c16e0da@jannau.net>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -121,101 +104,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 5/1/26 17:05, Heinrich Schuchardt wrote:
-> If we use video copy, bit image transfers need to write to the in memory
-> copy of the physical frame buffer. Damage control will sync the changes
-> to the physical frame buffer.
+On Thu, Apr 30, 2026 at 11:25:48PM +0200, Janne Grunau wrote:
+> The device tree on Apple silicon devices is passed from a previous
+> bootloader stage. The bootloader fills in dynamic information so
+> u-boot can not use its own device tree.
+> As documented in doc/board/apple/m1.rst it is possible to build boot
+> bundles (bootloader + device tree + gzipped u-boot binary). These are
+> useful for testing.
+> Instead of using u-boot's own device trees for M1 (t8103) devices use
+> upstream device trees from dts/upstream/src/arm64/apple. The u-boot
+> device trees have not seen updates since 2022. The upstream linux device
+> trees have feature parity for the M1 devices. In addition linux has
+> device trees for M1 Pro/Max/Ultra, M2 and M2 Pro/Max/Ultra devices.
+> Keep t8103-j274 as default device tree to avoid further updates.
 > 
-> Cyclic video copy will catch all changes done by EFI applications directly
-> accessing the frame buffer copy.
-> 
-> gopobj->mode.fb_base must be a valid pointer to memory and not a virtual
-> sandbox address.
-> 
-> With this change the block image transfer test works again on the sandbox.
-> 
->      setenv efi_selftest block image transfer
->      bootefi selftest
-> 
-> Fixes: a75cf70d23ac ("efi: Correct handling of frame buffer")
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> Signed-off-by: Janne Grunau <j@jannau.net>
 > ---
->   lib/efi_loader/efi_gop.c | 7 +++----
->   1 file changed, 3 insertions(+), 4 deletions(-)
-> 
-> diff --git a/lib/efi_loader/efi_gop.c b/lib/efi_loader/efi_gop.c
-> index 9403e09691e..ae44d140289 100644
-> --- a/lib/efi_loader/efi_gop.c
-> +++ b/lib/efi_loader/efi_gop.c
-> @@ -471,7 +471,7 @@ efi_status_t efi_gop_register(void)
->   {
->   	struct efi_gop_obj *gopobj;
->   	u32 bpix, format, col, row;
-> -	u64 fb_base, fb_size;
-> +	u64 fb_size;
->   	efi_status_t ret;
->   	struct udevice *vdev;
->   	struct video_priv *priv;
-> @@ -490,7 +490,6 @@ efi_status_t efi_gop_register(void)
->   	row = video_get_ysize(vdev);
->   
->   	plat = dev_get_uclass_plat(vdev);
-> -	fb_base = IS_ENABLED(CONFIG_VIDEO_COPY) ? plat->copy_base : plat->base;
->   	fb_size = plat->size;
->   
->   	switch (bpix) {
-> @@ -528,7 +527,7 @@ efi_status_t efi_gop_register(void)
->   	gopobj->mode.info = &gopobj->info;
->   	gopobj->mode.info_size = sizeof(gopobj->info);
->   
-> -	gopobj->mode.fb_base = fb_base;
-> +	gopobj->mode.fb_base = (uintptr_t)priv->fb;
+>  arch/arm/Kconfig                    |    1 +
+>  arch/arm/dts/Makefile               |    7 -
+>  arch/arm/dts/t8103-j274-u-boot.dtsi |    1 -
+>  arch/arm/dts/t8103-j274.dts         |  129 ----
+>  arch/arm/dts/t8103-j293-u-boot.dtsi |    1 -
+>  arch/arm/dts/t8103-j293.dts         |  116 ----
+>  arch/arm/dts/t8103-j313-u-boot.dtsi |    1 -
+>  arch/arm/dts/t8103-j313.dts         |  111 ----
+>  arch/arm/dts/t8103-j456-u-boot.dtsi |    1 -
+>  arch/arm/dts/t8103-j456.dts         |  117 ----
+>  arch/arm/dts/t8103-j457-u-boot.dtsi |    1 -
+>  arch/arm/dts/t8103-j457.dts         |  105 ----
+>  arch/arm/dts/t8103-jxxx.dtsi        |  143 -----
+>  arch/arm/dts/t8103-pmgr.dtsi        | 1138 -----------------------------------
+>  arch/arm/dts/t8103-u-boot.dtsi      |   25 -
+>  arch/arm/dts/t8103.dtsi             |  696 ---------------------
+>  configs/apple_m1_defconfig          |    2 +-
+>  doc/board/apple/m1.rst              |    5 +-
+>  18 files changed, 4 insertions(+), 2596 deletions(-)
 
-I discussed the value of FrameBufferBase with Simon.
+snip
 
-The code before the patch is incorrect, as on the sandbox it does not 
-provide a pointer value but a sandbox virtual address. EFI applications 
-may use the pointer for directly writing to the frame buffer. This would 
-lead to a crash on the sandbox.
+> diff --git a/configs/apple_m1_defconfig b/configs/apple_m1_defconfig
+> index 1ce69f2882a..d0cfd5f5591 100644
+> --- a/configs/apple_m1_defconfig
+> +++ b/configs/apple_m1_defconfig
+> @@ -1,6 +1,6 @@
+>  CONFIG_ARM=y
+>  CONFIG_ARCH_APPLE=y
+> -CONFIG_DEFAULT_DEVICE_TREE="t8103-j274"
+> +CONFIG_DEFAULT_DEVICE_TREE="apple/t8103-j274"
 
-For the case of CONFIG_VIDEO_COPY=y it is problematic to pass the memory 
-buffer address here, as Linux has an EFI framebuffer driver and would 
-write to the buffer instead of the physical framebuffer. But our memory 
-buffer is neither reserved memory not is it copied to the physical 
-framebuffer after ExitBootServices.
+in addition we want
 
-If we pass the physical framebuffer address here, then an EFI 
-application might write to it and the cyclic video sync would overwrite 
-the changed pixels.
+CONFIG_OF_UPSTREAM_BUILD_VENDOR=y
+CONFIG_OF_UPSTREAM_VENDOR="apple"
 
-Setting PixelBltOnly in field Mode.PixelFormat forbids EFI applications 
-to directly write to the framebuffer.
+which keeps the current behavior and builds all dtbs
 
-So if plat->copy_base is set we should pass PixelBltOnly as PixelFormat 
-and copy_base as FrameBufferBase.
+I'll send a v2 in the next few days.
 
-We the aforementioned change we will need to change function 
-gop_get_bpp() to not rely on PixelFormat. Instead we need to pass 
-priv->format in a private field of the graphics protocol.
-
-
->   	gopobj->mode.fb_size = fb_size;
->   
->   	gopobj->info.version = 0;
-> @@ -553,7 +552,7 @@ efi_status_t efi_gop_register(void)
->   	}
->   	gopobj->info.pixels_per_scanline = col;
->   	gopobj->bpix = bpix;
-> -	gopobj->fb = map_sysmem(fb_base, fb_size);
-> +	gopobj->fb = priv->fb;
-
-priv->fb is also the value used by the TrueType drivers.
-
-Best regards
-
-Heinrich
-
->   	gopobj->vdev = vdev;
->   
->   	return EFI_SUCCESS;
-
+Janne
