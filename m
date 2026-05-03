@@ -4,77 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33F78FF886F
-	for <u-boot@archiver.kernel.org>; Sun,  3 May 2026 20:50:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90F6ACD3424
+	for <u-boot@archiver.kernel.org>; Sun,  3 May 2026 20:50:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1D9888464E;
-	Sun,  3 May 2026 22:50:23 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 61F4D8465C;
+	Sun,  3 May 2026 22:50:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="eoIeGfZV";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="SPzuK+jd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C391A845E9; Sun,  3 May 2026 22:50:21 +0200 (CEST)
-Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
- [IPv6:2607:f8b0:4864:20::333])
+ id 187558464D; Sun,  3 May 2026 22:50:26 +0200 (CEST)
+Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
+ [IPv6:2607:f8b0:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AD4FA8464E
- for <u-boot@lists.denx.de>; Sun,  3 May 2026 22:50:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A7E248465C
+ for <u-boot@lists.denx.de>; Sun,  3 May 2026 22:50:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ot1-x333.google.com with SMTP id
- 46e09a7af769-7dbd801138eso2096510a34.1
- for <u-boot@lists.denx.de>; Sun, 03 May 2026 13:50:19 -0700 (PDT)
+Received: by mail-ot1-x32e.google.com with SMTP id
+ 46e09a7af769-7df05fc49e5so197985a34.3
+ for <u-boot@lists.denx.de>; Sun, 03 May 2026 13:50:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1777841417; x=1778446217; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1777841422; x=1778446222; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=t22RTy9ow7qG9FVqH3FHklvVYzJiN75+zTsxeybSjdw=;
- b=eoIeGfZVz5ZlXfsQZTvoXvdv6Ucg55hWezVOuof9hQMpVk3Au7hjXEDltK8ehhkInH
- wJrF2hybdnjJfg+IGAwNnHgj0tddHM0PhC3s9hX8FtDbLjRpebtIk4e6EsGGQjuiuKNo
- cFDnfP9/b6wApy255p9Rr1khu0yslcJT/dhbA=
+ bh=5y0MMJ+PALVDpqV2fL5w3ouH0TD4nReMRMutIunEU3E=;
+ b=SPzuK+jdDVKWU/VChpnzL4nCWl2Q9zSOxgUkZagv/nEcB+xPyRgjdm+dUbFNx4aXB1
+ FUhmrPKWlaYEns6Jl7hS1ucHu2YTjrV6kdVGgiPuqwmp7/MY0mACMpvlXu8le30BJzR9
+ fQzfPfaC9gay4sqNpcpwS7eq99iSLusURB1Q4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777841417; x=1778446217;
+ d=1e100.net; s=20251104; t=1777841422; x=1778446222;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=t22RTy9ow7qG9FVqH3FHklvVYzJiN75+zTsxeybSjdw=;
- b=kG6cJHnvkhSAChUVkiNPC9S1V6dYQEqFuE+0viIXOqERTZg2URBHnRxvKiSdcB8207
- vlr0BALQzsvuBaZewG5ADnXUSNyHxHDYomEkLHO7AN4FVCZmGTsbs3rEJqBf2He1QvAQ
- wnMCTxj9jqQJKv7oa6uEicHoYGLAdsaMVKBZrffZLAtSgWsnlnQvspV0qz0tFBXyG3q0
- KUPRUXB2C3gp495JwPH1nBprvIox3r4/NfFlVDGSm+E1llBnodeg4CSiJTiFZq0bh6BT
- CXAs7LgpeQKsLXrTd/mSAuOU6y/ZQhaj282030RHZsoDfyeGwKbSBjKpDDhp8DysFzW0
- ZYwg==
-X-Gm-Message-State: AOJu0YzQJ8cRkwLumAv72XBK0ACTuPy6o5122UaaKBxTY0iaEtMPcWfs
- jsy2Xr1kAiu8NEmTnWiO07K96m4tTWIIVuiCxC0vBMTYG0mdrHmfc9GdDuSveMF8lYyKcn3micT
- 1mCFJvA==
-X-Gm-Gg: AeBDietUj8u6XQU5HRoFcn3fR6pIP1YCky+mIYSeYEgcmTManZR+F72ZZBsZt8/yH6F
- sI/y+nCAVRIY4tB9IvExXfxCkSRJG/Am94BYHxcXDYI0CryJsRZacyvnk8jddswmlQiN0qJM0eQ
- 1lSqGZzBc2rAtEIeeb6Ocb+C4WvW5mrfM86R3hckZ0vc0b5aLhMnMBdfCigKy3W/JHA3EyQR7+W
- pvg0W+Sx6sjn5LoxsfTkASt4xs1rnTz4vlMAmUGVEuKc90aBt2i/s4Zhc7xZ3nxYGoEn8hLQBx3
- cyQwmD9C3L8qAYLq50UKBZqInlPewYZZU0nxAsU/QfnEEbCp+o17eyl9eudFiDLvIyMhOUp/Lw/
- j3SDIMJt6Rrt76LTJJx4hf/LL0U+uKSAHoN4wOwWiOgHOjpNoBMp9uT3LpuoSpHSok3F2+JVVHg
- 3MHoLb+NJar6cbAsMuM7l+rWavgQu2
-X-Received: by 2002:a05:6820:81ca:b0:694:8e28:fd7a with SMTP id
- 006d021491bc7-69696bc9801mr3101368eaf.25.1777841417479; 
- Sun, 03 May 2026 13:50:17 -0700 (PDT)
+ bh=5y0MMJ+PALVDpqV2fL5w3ouH0TD4nReMRMutIunEU3E=;
+ b=Bb2Mysar9f4Eut+/jGR/mLzpdq5qzidfu+BGFlsKf2CxomzcgvM2dG66klZwi9fHjg
+ dg2/7DRD1Z4XZ7/gJ4cdN0RsSgcge7thPpJE2DSfu6lTQ7fVmJ7ClmrgGbS42tpM6FDi
+ Lbxo8E9oe7ZFVNinXn0m//1Tb6PjoCxxF0Mi2jkhTmJ8zu31p7eChGRQgXeutjFZ+PN4
+ gVu73GvNHBX9Ph3VjyVs4ECYmQQAvew/sgwz2yDqY/bGlHk1ei5LyGf7oJG+MWJ2wSQI
+ 3YArabD6m/I/3PRbgt1VHRKEgMBQbq7lp45WCFiD2mvesfRrvkbIRdguE5NszOjQr0vN
+ /gSA==
+X-Gm-Message-State: AOJu0YxYWHUjgC1qojs2Bo1tsMuyxgBwGCOygvDdY+xJW9Kwk4pvY6jF
+ YtcA1/BVwZ0wMoUTeixNflqGLNFhZ7hhgvuWOA1k3wWaSK/OUQuk/jIg9xuWBj7PxBxcEaSzP3P
+ 4g/s58Q==
+X-Gm-Gg: AeBDieuAGQ4VPFGmWRU7aHzZPQM7ZHLqE0X4Rfw3pshhXeW0M+DfeA3ah9vTPAfXQQ8
+ qcXkEo3TIiOhMWqjYk3rA7JyYtpP8edqY3YKklaOWzKHekP/AwDRR9Q0dozhf3HOWiqvIdBBcTo
+ mvQDiP2DSXquUVZKl5tfOpYuFQ+zlGo//GVq1RUwlOIj1/bDIDdCU3OWF0LPqIfcq0Xibg5TfFw
+ f6JfSRM6TUCJ9YsWYsRANZyQw574I+yVwrmiTBItY2YWhH3hOh2GYk3c2XbzDZznycHIbcb37pc
+ BO5jczysMwrQBWq2QzWN6KB/mQVpYQHLS7HMeoJuGjM3uzDsxlOXm7uJTNmbbAu8qh9FogTuCHh
+ r+8EIU1TExjlB08HfjKDmcLPgY5hcsXCNSDgWFc6TTD9kq8tk9WitwdKh9WuIX55Vb9eTILrY/c
+ iTf1/TMSGsvkkSaC5H09B34Qnz08jD
+X-Received: by 2002:a05:6820:1789:b0:694:8428:dfd8 with SMTP id
+ 006d021491bc7-69697c60c77mr3188435eaf.34.1777841421835; 
+ Sun, 03 May 2026 13:50:21 -0700 (PDT)
 Received: from chromium.org ([174.51.25.52]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-696aacbb5bbsm1142940eaf.15.2026.05.03.13.50.14
+ 006d021491bc7-696aacbb5bbsm1142940eaf.15.2026.05.03.13.50.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 03 May 2026 13:50:15 -0700 (PDT)
+ Sun, 03 May 2026 13:50:19 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: u-boot@lists.denx.de
-Cc: Simon Glass <sjg@chromium.org>, Cyril Jean <cyril.jean@microchip.com>,
- Jamie Gibbons <jamie.gibbons@microchip.com>,
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Rasmus Villemoes <ravi@prevas.dk>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 4/6] beaglev_fire: Quote no_of_overlays in design test
-Date: Sun,  3 May 2026 14:49:22 -0600
-Message-ID: <20260503204936.3151124-5-sjg@chromium.org>
+Cc: Simon Glass <sjg@chromium.org>, Lukasz Majewski <lukma@denx.de>,
+ Rasmus Villemoes <ravi@prevas.dk>, Tom Rini <trini@konsulko.com>,
+ =?UTF-8?q?=C5=81ukasz=20Majewski?= <lukma@nabladev.com>
+Subject: [PATCH 5/6] mccmon6: Quote recovery_status in bootcmd test
+Date: Sun,  3 May 2026 14:49:23 -0600
+Message-ID: <20260503204936.3151124-6-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260503204936.3151124-1-sjg@chromium.org>
 References: <20260503204936.3151124-1-sjg@chromium.org>
@@ -96,39 +95,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On beaglev_fire, design_overlays gates an overlay-application loop
-on:
+The mccmon6 bootcmd starts with:
 
-    if test -n ${no_of_overlays}; then ...
+    if test -n ${recovery_status}; then run boot_recovery; ...
 
-The default state is "no overlays", i.e. no_of_overlays unset. The
-expression then expands to 'test -n' with no operand and relies on a
-U-Boot 'test' quirk that treats a missing operand as false to skip
-the loop.
+The default state is "no recovery requested", i.e. recovery_status
+unset.  The expression then expands to 'test -n' with no operand and
+relies on a U-Boot 'test' quirk that treats a missing operand as
+false to skip recovery.
 
-Quote the variable so an unset no_of_overlays expands to 'test -n ""'
+Quote the variable so an unset recovery_status expands to 'test -n ""'
 and the emptiness check is explicit.
 
 Fixes: 8b0619579b22 ("cmd: test: fix handling of single-argument form of test")
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- include/configs/beaglev_fire.h | 2 +-
+ include/configs/mccmon6.h | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/include/configs/beaglev_fire.h b/include/configs/beaglev_fire.h
-index e3ee0f02f2d..8724a71504c 100644
---- a/include/configs/beaglev_fire.h
-+++ b/include/configs/beaglev_fire.h
-@@ -30,7 +30,7 @@
- 
- #define BOOTENV_DESIGN_OVERLAYS \
- 	"design_overlays=" \
--	"if test -n ${no_of_overlays}; then " \
-+	"if test -n \"${no_of_overlays}\"; then " \
- 		"setenv inc 1; " \
- 		"setenv idx 0; " \
- 		"fdt resize ${dtbo_size}; " \
+diff --git a/include/configs/mccmon6.h b/include/configs/mccmon6.h
+index 9f401718bfb..0cf62d6bda8 100644
+--- a/include/configs/mccmon6.h
++++ b/include/configs/mccmon6.h
+@@ -88,7 +88,7 @@
+ 		     "bootm $loadaddr};reset;" \
+ 		"fi\0" \
+ 	"bootcmd=" \
+-		"if test -n ${recovery_status}; then " \
++		"if test -n \"${recovery_status}\"; then " \
+ 		     "run boot_recovery;" \
+ 		"else " \
+ 		     "if test ! -n ${boot_medium}; then " \
 -- 
 2.43.0
 
