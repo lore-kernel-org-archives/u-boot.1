@@ -4,75 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5295DCD3424
-	for <u-boot@archiver.kernel.org>; Sun,  3 May 2026 20:50:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33F78FF886F
+	for <u-boot@archiver.kernel.org>; Sun,  3 May 2026 20:50:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 880138460D;
-	Sun,  3 May 2026 22:50:18 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1D9888464E;
+	Sun,  3 May 2026 22:50:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="YU9RL2hg";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="eoIeGfZV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5BFF48460D; Sun,  3 May 2026 22:50:17 +0200 (CEST)
-Received: from mail-oo1-xc30.google.com (mail-oo1-xc30.google.com
- [IPv6:2607:f8b0:4864:20::c30])
+ id C391A845E9; Sun,  3 May 2026 22:50:21 +0200 (CEST)
+Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
+ [IPv6:2607:f8b0:4864:20::333])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 323818460E
- for <u-boot@lists.denx.de>; Sun,  3 May 2026 22:50:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AD4FA8464E
+ for <u-boot@lists.denx.de>; Sun,  3 May 2026 22:50:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oo1-xc30.google.com with SMTP id
- 006d021491bc7-6949f3eeaf6so1837686eaf.0
- for <u-boot@lists.denx.de>; Sun, 03 May 2026 13:50:15 -0700 (PDT)
+Received: by mail-ot1-x333.google.com with SMTP id
+ 46e09a7af769-7dbd801138eso2096510a34.1
+ for <u-boot@lists.denx.de>; Sun, 03 May 2026 13:50:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1777841413; x=1778446213; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1777841417; x=1778446217; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=CjL/zERxLRKvSiRJOy+ECOsm64FP/vH4t+IFexREaws=;
- b=YU9RL2hgcBgH94vyWvKcugK8bXg/gNZVaDxm+Eg4HuIuf47TRu7lAHL9JHrNvt2HN1
- 2+YoNo6sc5iWyoLtVqcl/RFMHfO1uSK2DTfqNrcY1OFW66tCrQGYxSXEGbWnz6kGjRgO
- FUu7nwC9HhL4edjj9E+02uVqiYiV7Ts0BNAQw=
+ bh=t22RTy9ow7qG9FVqH3FHklvVYzJiN75+zTsxeybSjdw=;
+ b=eoIeGfZVz5ZlXfsQZTvoXvdv6Ucg55hWezVOuof9hQMpVk3Au7hjXEDltK8ehhkInH
+ wJrF2hybdnjJfg+IGAwNnHgj0tddHM0PhC3s9hX8FtDbLjRpebtIk4e6EsGGQjuiuKNo
+ cFDnfP9/b6wApy255p9Rr1khu0yslcJT/dhbA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777841413; x=1778446213;
+ d=1e100.net; s=20251104; t=1777841417; x=1778446217;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=CjL/zERxLRKvSiRJOy+ECOsm64FP/vH4t+IFexREaws=;
- b=XhDxDCeGpqoyu7nxma7STHzD0QiiC1DeBi1vwv2deRMM1uRpoZVIlyBVPfCzx+QiR9
- OggT0kla4QW25zfdiXcWQPe2xgxsaHvtKODP1922SWFnHLb8gGFI6QS9tja8ROzLKyLW
- la9ogsc+pB3LqLdZ40VI9BkPRvl2u0W9R3SU61s8B8hVia16Lltsd5aTJizYntkdk2S6
- ovRTXNC0GuqXEGa4+ZgvgbUHc3szBdE6jTfwK93kKi1LjZAxS64FYG07K9PNKpHMr4SI
- LkTr17BfnLNjbFBGZfy8zcuVFSaT3sVatemp8kjGmLQs8uoZQyVNeV5BOTJdg2cGZlY/
- drJA==
-X-Gm-Message-State: AOJu0YwvKr9gyBnYrJw9D3VAtpaQvcEt55/e3gqjXcpcps93QufRMTdO
- rXpj87o4Zual+2wWkVO093a6J/E3G0T/3zvX6w4YHDuKhJNToMwp//f3dP1zniXcjNZ6joeae3e
- suM2Ttw==
-X-Gm-Gg: AeBDieu0Yfs8YYWq6W98eYlnn3gbEQrBBCc6wtP0jgQduZ3ozUUHgZIhHMfp/p8nqkI
- yhguHmtF+NO4loJbkHZnPJkOvThcRnF5YsGnzmMaa97IHUE30FNx9LOLJJWpIDQRw2wRm0O+qo8
- 7ohUG3PqG0d4+Ho0jCtZp9JnNPubesE2y5ute6TQckMfx+5Z5PHLrdpZTh9vWUXyxm2l5rfbb3h
- LQ/DZIq7VZBp60MNT//LGg0dQiTfnFSIJA0ojXH0S1tdU2KsnPG3Z+XhIDpAJ8aIuxIlkHPQhmq
- 07HhTVakcp3jbrOf36VL0aFEfznLlmh0lRRvWHEAZzG7rnBw/Zu66aDPGTigQUNVqQnriTY7Jsm
- 7X9bUOo99enadqssaayN4idWEIgkO+6eARJzRFAWWA5biWLRxNubqlIcTb1jYvSXpS//XtQrEPr
- 4UaXFWqxIwSfJbujO00RM4JaOuSP4D
-X-Received: by 2002:a05:6820:16ac:b0:694:9910:f78f with SMTP id
- 006d021491bc7-69696b029b3mr2821014eaf.3.1777841413388; 
- Sun, 03 May 2026 13:50:13 -0700 (PDT)
+ bh=t22RTy9ow7qG9FVqH3FHklvVYzJiN75+zTsxeybSjdw=;
+ b=kG6cJHnvkhSAChUVkiNPC9S1V6dYQEqFuE+0viIXOqERTZg2URBHnRxvKiSdcB8207
+ vlr0BALQzsvuBaZewG5ADnXUSNyHxHDYomEkLHO7AN4FVCZmGTsbs3rEJqBf2He1QvAQ
+ wnMCTxj9jqQJKv7oa6uEicHoYGLAdsaMVKBZrffZLAtSgWsnlnQvspV0qz0tFBXyG3q0
+ KUPRUXB2C3gp495JwPH1nBprvIox3r4/NfFlVDGSm+E1llBnodeg4CSiJTiFZq0bh6BT
+ CXAs7LgpeQKsLXrTd/mSAuOU6y/ZQhaj282030RHZsoDfyeGwKbSBjKpDDhp8DysFzW0
+ ZYwg==
+X-Gm-Message-State: AOJu0YzQJ8cRkwLumAv72XBK0ACTuPy6o5122UaaKBxTY0iaEtMPcWfs
+ jsy2Xr1kAiu8NEmTnWiO07K96m4tTWIIVuiCxC0vBMTYG0mdrHmfc9GdDuSveMF8lYyKcn3micT
+ 1mCFJvA==
+X-Gm-Gg: AeBDietUj8u6XQU5HRoFcn3fR6pIP1YCky+mIYSeYEgcmTManZR+F72ZZBsZt8/yH6F
+ sI/y+nCAVRIY4tB9IvExXfxCkSRJG/Am94BYHxcXDYI0CryJsRZacyvnk8jddswmlQiN0qJM0eQ
+ 1lSqGZzBc2rAtEIeeb6Ocb+C4WvW5mrfM86R3hckZ0vc0b5aLhMnMBdfCigKy3W/JHA3EyQR7+W
+ pvg0W+Sx6sjn5LoxsfTkASt4xs1rnTz4vlMAmUGVEuKc90aBt2i/s4Zhc7xZ3nxYGoEn8hLQBx3
+ cyQwmD9C3L8qAYLq50UKBZqInlPewYZZU0nxAsU/QfnEEbCp+o17eyl9eudFiDLvIyMhOUp/Lw/
+ j3SDIMJt6Rrt76LTJJx4hf/LL0U+uKSAHoN4wOwWiOgHOjpNoBMp9uT3LpuoSpHSok3F2+JVVHg
+ 3MHoLb+NJar6cbAsMuM7l+rWavgQu2
+X-Received: by 2002:a05:6820:81ca:b0:694:8e28:fd7a with SMTP id
+ 006d021491bc7-69696bc9801mr3101368eaf.25.1777841417479; 
+ Sun, 03 May 2026 13:50:17 -0700 (PDT)
 Received: from chromium.org ([174.51.25.52]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-696aacbb5bbsm1142940eaf.15.2026.05.03.13.50.10
+ 006d021491bc7-696aacbb5bbsm1142940eaf.15.2026.05.03.13.50.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 03 May 2026 13:50:11 -0700 (PDT)
+ Sun, 03 May 2026 13:50:15 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: u-boot@lists.denx.de
-Cc: Simon Glass <sjg@chromium.org>, Enrico Leto <enrico.leto@siemens.com>,
+Cc: Simon Glass <sjg@chromium.org>, Cyril Jean <cyril.jean@microchip.com>,
+ Jamie Gibbons <jamie.gibbons@microchip.com>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
  Rasmus Villemoes <ravi@prevas.dk>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 3/6] siemens: Quote A/B flags in env tests
-Date: Sun,  3 May 2026 14:49:21 -0600
-Message-ID: <20260503204936.3151124-4-sjg@chromium.org>
+Subject: [PATCH 4/6] beaglev_fire: Quote no_of_overlays in design test
+Date: Sun,  3 May 2026 14:49:22 -0600
+Message-ID: <20260503204936.3151124-5-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260503204936.3151124-1-sjg@chromium.org>
 References: <20260503204936.3151124-1-sjg@chromium.org>
@@ -94,125 +96,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The Siemens am33x-common, env-common and draco-etamin headers gate
-boot-partition selection logic on:
+On beaglev_fire, design_overlays gates an overlay-application loop
+on:
 
-    if test -n ${A}; then ...
-    if test -n ${B}; then ...
+    if test -n ${no_of_overlays}; then ...
 
-A and B are flags that the upgrade machinery sets to mark "the other
-partition just became active".  The default state is unset, in which
-case the expression expands to 'test -n' with no operand and relies
-on a U-Boot 'test' quirk that treats a missing operand as false to
-skip the branch.
+The default state is "no overlays", i.e. no_of_overlays unset. The
+expression then expands to 'test -n' with no operand and relies on a
+U-Boot 'test' quirk that treats a missing operand as false to skip
+the loop.
 
-Quote each variable so an unset A or B expands to 'test -n ""' and
-the emptiness check is explicit.
+Quote the variable so an unset no_of_overlays expands to 'test -n ""'
+and the emptiness check is explicit.
 
 Fixes: 8b0619579b22 ("cmd: test: fix handling of single-argument form of test")
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- include/configs/draco-etamin.h         |  4 ++--
- include/configs/siemens-am33x-common.h | 12 ++++++------
- include/configs/siemens-env-common.h   |  8 ++++----
- 3 files changed, 12 insertions(+), 12 deletions(-)
+ include/configs/beaglev_fire.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/include/configs/draco-etamin.h b/include/configs/draco-etamin.h
-index 6ae85b575b7..b1b403980b1 100644
---- a/include/configs/draco-etamin.h
-+++ b/include/configs/draco-etamin.h
-@@ -99,10 +99,10 @@
- 	"nand_args=run bootargs_defaults;" \
- 		"mtdparts default;" \
- 		"setenv ${partitionset_active} true;" \
--		"if test -n ${A}; then " \
-+		"if test -n \"${A}\"; then " \
- 			"setenv nand_active_ubi_vol ${rootfs_name}_a;" \
- 		"fi;" \
--		"if test -n ${B}; then " \
-+		"if test -n \"${B}\"; then " \
- 			"setenv nand_active_ubi_vol ${rootfs_name}_b;" \
- 		"fi;" \
- 		"setenv nand_root ubi0:${nand_active_ubi_vol} rw " \
-diff --git a/include/configs/siemens-am33x-common.h b/include/configs/siemens-am33x-common.h
-index a918dc1350c..da822556909 100644
---- a/include/configs/siemens-am33x-common.h
-+++ b/include/configs/siemens-am33x-common.h
-@@ -104,11 +104,11 @@
- 				"then " \
- 				"setenv upgrade_available 0;" \
- 				"setenv ${partitionset_active} true;" \
--				"if test -n ${A}; then " \
-+				"if test -n \"${A}\"; then " \
- 					"setenv partitionset_active B; " \
- 					"env delete A; " \
- 				"fi;" \
--				"if test -n ${B}; then " \
-+				"if test -n \"${B}\"; then " \
- 					"setenv partitionset_active A; " \
- 					"env delete B; " \
- 				"fi;" \
-@@ -205,11 +205,11 @@
- 	"nand_args=run bootargs_defaults;" \
- 		"mtdparts default;" \
- 		"setenv ${partitionset_active} true;" \
--		"if test -n ${A}; then " \
-+		"if test -n \"${A}\"; then " \
- 			"setenv nand_active_ubi_vol ${nand_active_ubi_vol_A};" \
- 			"setenv nand_src_addr ${nand_src_addr_A};" \
- 		"fi;" \
--		"if test -n ${B}; then " \
-+		"if test -n \"${B}\"; then " \
- 			"setenv nand_active_ubi_vol ${nand_active_ubi_vol_B};" \
- 			"setenv nand_src_addr ${nand_src_addr_B};" \
- 		"fi;" \
-@@ -279,10 +279,10 @@
- 	"nand_args=run bootargs_defaults;" \
- 		"mtdparts default;" \
- 		"setenv ${partitionset_active} true;" \
--		"if test -n ${A}; then " \
-+		"if test -n \"${A}\"; then " \
- 			"setenv nand_active_ubi_vol ${rootfs_name}_a;" \
- 		"fi;" \
--		"if test -n ${B}; then " \
-+		"if test -n \"${B}\"; then " \
- 			"setenv nand_active_ubi_vol ${rootfs_name}_b;" \
- 		"fi;" \
- 		"setenv nand_root ubi0:${nand_active_ubi_vol} rw " \
-diff --git a/include/configs/siemens-env-common.h b/include/configs/siemens-env-common.h
-index c028823e1eb..8ced77cc5e2 100644
---- a/include/configs/siemens-env-common.h
-+++ b/include/configs/siemens-env-common.h
-@@ -81,12 +81,12 @@
-  */
- #define ENV_FCT_TOGGLE_PARTITION "toggle_partition="\
- 	"setenv ${partitionset_active} true;" \
--	"if test -n ${A}; " \
-+	"if test -n \"${A}\"; " \
- 	"then " \
- 		"setenv partitionset_active B; " \
- 		"env delete A; " \
- 	"fi;" \
--	"if test -n ${B}; "\
-+	"if test -n \"${B}\"; "\
- 	"then " \
- 		"setenv partitionset_active A; " \
- 		"env delete B; " \
-@@ -103,11 +103,11 @@
-  */
- #define ENV_EMMC_FCT_SET_ACTIVE_PARTITION "set_partition=" \
- 	"setenv ${partitionset_active} true;" \
--	"if test -n ${A}; " \
-+	"if test -n \"${A}\"; " \
- 	"then " \
- 		"setenv mmc_part_nr 1;" \
- 	"fi;" \
--	"if test -n ${B}; " \
-+	"if test -n \"${B}\"; " \
- 	"then " \
- 		"setenv mmc_part_nr 2;" \
- 	"fi;" \
+diff --git a/include/configs/beaglev_fire.h b/include/configs/beaglev_fire.h
+index e3ee0f02f2d..8724a71504c 100644
+--- a/include/configs/beaglev_fire.h
++++ b/include/configs/beaglev_fire.h
+@@ -30,7 +30,7 @@
+ 
+ #define BOOTENV_DESIGN_OVERLAYS \
+ 	"design_overlays=" \
+-	"if test -n ${no_of_overlays}; then " \
++	"if test -n \"${no_of_overlays}\"; then " \
+ 		"setenv inc 1; " \
+ 		"setenv idx 0; " \
+ 		"fdt resize ${dtbo_size}; " \
 -- 
 2.43.0
 
