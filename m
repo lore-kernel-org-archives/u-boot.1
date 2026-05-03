@@ -4,59 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3AE88CD3424
-	for <u-boot@archiver.kernel.org>; Sun,  3 May 2026 12:23:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4748ECD3424
+	for <u-boot@archiver.kernel.org>; Sun,  3 May 2026 12:33:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 738F783FEC;
-	Sun,  3 May 2026 14:23:02 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 9B28D83FEC;
+	Sun,  3 May 2026 14:33:35 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=disroot.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="wIrvCVFW";
+	dkim=pass (2048-bit key; secure) header.d=disroot.org header.i=@disroot.org header.b="L0BEyyJn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0AC8484255; Sun,  3 May 2026 14:23:01 +0200 (CEST)
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
+ id D2AFC84255; Sun,  3 May 2026 14:21:34 +0200 (CEST)
+Received: from layka.disroot.org (layka.disroot.org [178.21.23.139])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9C49883EF9
- for <u-boot@lists.denx.de>; Sun,  3 May 2026 14:22:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2DE8383EF9
+ for <u-boot@lists.denx.de>; Sun,  3 May 2026 14:21:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=reject dis=none) header.from=disroot.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=stefan.roese@mailbox.org
-Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4g7kSb2jW1z9try;
- Sun,  3 May 2026 14:22:55 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1777810975;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=b8zievvHAd96O3k8y4tLV4GqIOaUBcomy6r0jgKD1c4=;
- b=wIrvCVFW6mMxjUOhihk/FZ3Pv9DyEhYk3sI97GylATXHJDyAzthk9kxaltllLMn7lf5FUc
- YoSsZL+WvpZe8YXK64plQe81Zm9Lr2rh3w87nc3EP91sf+IOc0YCj7qAR+8RMTinJ+7gXr
- ScWoLLVEznzFRgaU5huVWZL7qwzqg9LdD36lFA0lN1Firu9bP+myrlGrdxMbD9jGxFS/vi
- AdRkyhbxL6vRVSmUoBMrEY9zbFP2UlIcov2EVGqL08ZaGu1LVXZsjrgRw4tdlrTtSqaoVn
- 6MyMx/xIyNcZXbpM1tAB4odvFX6Eqisb6Xm8gM5r34Dh0qteHDxIlJgfWvtFGg==
-Message-ID: <39578a88-0ac2-4d8a-b333-c94b241fff0f@mailbox.org>
-Date: Sun, 3 May 2026 14:22:52 +0200
+ spf=pass smtp.mailfrom=kauschluss@disroot.org
+Received: from mail01.disroot.lan (localhost [127.0.0.1])
+ by disroot.org (Postfix) with ESMTP id D9BE526939;
+ Sun,  3 May 2026 14:21:31 +0200 (CEST)
+Received: from layka.disroot.org ([127.0.0.1])
+ by localhost (disroot.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id NH3nG9WVro-0; Sun,  3 May 2026 14:21:31 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=disroot.org; s=mail;
+ t=1777810891; bh=ogfkMreP1i82U0P0FhqA6qamNz5hmHiFDsN9n+mz2mU=;
+ h=From:Subject:Date:To:Cc;
+ b=L0BEyyJnktoWPTpADuMeSBQaTWGJSDRNWvJcskylGb7QnAmR/fm+YnSgJQ1RUvNvK
+ lW378OwIg9HH01P0lYSgBLAcEIuxYkrWX+YrEMDhEuCUO35WsSwna3djBvtYZw5ny7
+ 0C6azoy8VAXbDH4OLutdETFKUERdMM8Ucd1TGiJNqAGvKAKysBlWrgJmu6eG20GlN2
+ KkvQXWZgwjK/Z48horWDqxK5BH5nv6y5Dpdr2dRSSVANgx84Dx0upeIC+hX4In28yw
+ OR8BPlV7wiQ/9OPeZDsiT3jPvmMDUtN3ClRV97X+d8RqI03mAure6dAyt/nC5LkLqd
+ YHc7xJovKwd1Q==
+From: Kaustabh Chakraborty <kauschluss@disroot.org>
+Subject: [PATCH v2 0/4] HS400 and HS400ES support for Exynos DW-MMC drivers
+Date: Sun, 03 May 2026 17:51:25 +0530
+Message-Id: <20260503-dwmmc-exynos-hs400-es-v2-0-3ff1526142a7@disroot.org>
 MIME-Version: 1.0
-Subject: Re: [PATCH] watchdog: apple: Add "apple,t8103-wdt" compatible
-To: Janne Grunau <j@jannau.net>, u-boot@lists.denx.de
-Cc: Mark Kettenis <kettenis@openbsd.org>, Tom Rini <trini@konsulko.com>
-References: <20260430-apple-compat-watchdog-v1-1-dbb6da4cec6a@jannau.net>
-Content-Language: en-US
-From: Stefan Roese <stefan.roese@mailbox.org>
-In-Reply-To: <20260430-apple-compat-watchdog-v1-1-dbb6da4cec6a@jannau.net>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: edqoexn43ju6rm45q87tsn3gqcs6mrbt
-X-MBO-RS-ID: 284c76dc482b61f285c
+X-B4-Tracking: v=1; b=H4sIAMU992kC/4WNQQ6CMBBFr2Jm7ZihVgFX3sOwKO0ANYGaDiKEc
+ HcBD+DyJe+/P4Nw9CxwO8wQefDiQ7eCOh7ANqarGb1bGRSpK2mVovu0rUUepy4INqKJkAXLNCX
+ KTUaZZVi3r8iVH/fuo/ixvMsn236LbUbjpQ9x2o+HZPP+fQwJEp51fnGVJpMbe3deYgj9KcQai
+ mVZvhjpd0XOAAAA
+X-Change-ID: 20260427-dwmmc-exynos-hs400-es-b77009a808ce
+To: Peng Fan <peng.fan@nxp.com>, u-boot@lists.denx.de
+Cc: Minkyu Kang <mk7.kang@samsung.com>, Tom Rini <trini@konsulko.com>, 
+ Jaehoon Chung <jh80.chung@samsung.com>, Anand Moon <linux.amoon@gmail.com>, 
+ Sam Protsenko <semen.protsenko@linaro.org>, 
+ Lukas Timmermann <uboot@timmermann.space>, 
+ Henrik Grimler <henrik@grimler.se>, 
+ Kaustabh Chakraborty <kauschluss@disroot.org>
+X-Mailman-Approved-At: Sun, 03 May 2026 14:33:33 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,43 +76,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 4/30/26 23:34, Janne Grunau wrote:
-> After discussion with the devicetree maintainers we agreed to not extend
-> lists with the generic compatible "apple,wdt" anymore [1]. Use
-> "apple,t8103-wdt" as base compatible as it is the SoC driver and
-> bindings were originally written for.
-> The t602x (M2 Pro/Max/Ultra) devicetrees submitted in [2] use this
-> compatible as fallback instead of "apple,wdt".
-> 
-> Link: https://lore.kernel.org/asahi/12ab93b7-1fc2-4ce0-926e-c8141cfe81bf@kernel.org/ [1]
-> Link: https://lore.kernel.org/asahi/20250828-dt-apple-t6020-v1-0-507ba4c4b98e@jannau.net/ [2]
-> Signed-off-by: Janne Grunau <j@jannau.net>
+Since upstream dts version v7.0+, Exynos 7870 devices have an explicit
+`bus-width = <8>` property. This results in the U-Boot driver trying to
+initialize the HS400 mode, which appears to fail. The HS400 support
+added in the DW-MMC Exynos driver appears to have an incomplete init
+sequence.
 
-Reviewed-by: Stefan Roese <stefan.roese@mailbox.org>
+This patch series adds the missing pieces to enable HS400 support, and
+additionally adds support for HS400ES too.
 
-Thanks,
-Stefan
+The last patch in the series also enables HS400ES support in the
+exynos-mobile defconfig.
 
-> ---
->   drivers/watchdog/apple_wdt.c | 1 +
->   1 file changed, 1 insertion(+)
-> 
-> diff --git a/drivers/watchdog/apple_wdt.c b/drivers/watchdog/apple_wdt.c
-> index c7307f41cb7..9e998994216 100644
-> --- a/drivers/watchdog/apple_wdt.c
-> +++ b/drivers/watchdog/apple_wdt.c
-> @@ -78,6 +78,7 @@ static const struct wdt_ops apple_wdt_ops = {
->   };
->   
->   static const struct udevice_id apple_wdt_ids[] = {
-> +	{ .compatible = "apple,t8103-wdt" },
->   	{ .compatible = "apple,wdt" },
->   	{ /* sentinel */ }
->   };
-> 
-> ---
-> base-commit: 88dc2788777babfd6322fa655df549a019aa1e69
-> change-id: 20260430-apple-compat-watchdog-3de8a1053b88
-> 
-> Best regards,
+Signed-off-by: Kaustabh Chakraborty <kauschluss@disroot.org>
+---
+Changes in v2:
+- added config guard for calls to exynos_config_hs400() (Henrik Grimler)
+- Link to v1: https://patch.msgid.link/20260427-dwmmc-exynos-hs400-es-v1-0-3495df40a9ac@disroot.org
+
+To: Peng Fan <peng.fan@nxp.com>
+To: Kaustabh Chakraborty <kauschluss@disroot.org>
+To: u-boot@lists.denx.de
+Cc: Minkyu Kang <mk7.kang@samsung.com>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: Jaehoon Chung <jh80.chung@samsung.com>
+Cc: Sam Protsenko <semen.protsenko@linaro.org>
+Cc: Anand Moon <linux.amoon@gmail.com>
+Cc: Lukas Timmermann <uboot@timmermann.space>
+Cc: Henrik Grimler <henrik@grimler.se>
+
+---
+Kaustabh Chakraborty (4):
+      mmc: exynos_dw_mmc: add proper init sequence for HS400 support
+      mmc: dw_mmc: setup set_enhanced_strobe ops in driver
+      mmc: exynos_dw_mmc: add support for HS400ES
+      configs: exynos-mobile: enable support for HS400ES in MMC driver
+
+ arch/arm/mach-exynos/include/mach/dwmmc.h |  5 ++
+ configs/exynos-mobile_defconfig           |  1 +
+ drivers/mmc/dw_mmc.c                      | 19 +++++++
+ drivers/mmc/exynos_dw_mmc.c               | 90 ++++++++++++++++++++++++++++++-
+ include/dwmmc.h                           | 10 ++++
+ 5 files changed, 123 insertions(+), 2 deletions(-)
+---
+base-commit: 9f61fd5b80a43ae20ba115e3a2933d47d720ab82
+change-id: 20260427-dwmmc-exynos-hs400-es-b77009a808ce
+
+Best regards,
+--  
+Kaustabh Chakraborty <kauschluss@disroot.org>
 
