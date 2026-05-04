@@ -4,57 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6EA51FF885A
-	for <u-boot@archiver.kernel.org>; Mon,  4 May 2026 20:09:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0C12FF885A
+	for <u-boot@archiver.kernel.org>; Mon,  4 May 2026 20:17:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D5FE3846A1;
-	Mon,  4 May 2026 22:09:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id ECEA0846A1;
+	Mon,  4 May 2026 22:17:03 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ziyao.cc
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=arm.com header.i=@arm.com header.b="PYZqDm/Q";
+	dkim=pass (1024-bit key; unprotected) header.d=ziyao.cc header.i=me@ziyao.cc header.b="ABf8Wffn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1EF1B846BC; Mon,  4 May 2026 22:03:26 +0200 (CEST)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id ABF53846A0
- for <u-boot@lists.denx.de>; Mon,  4 May 2026 22:03:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=arm.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=harsimransingh.tungal@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 407B51BCB;
- Mon,  4 May 2026 13:03:16 -0700 (PDT)
-Received: from e132995.arm.com (unknown [10.57.68.2])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 0AA5A3F763;
- Mon,  4 May 2026 13:03:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
- t=1777925001; bh=kUGwfpeMq+JuwZeMURWEdB0EJSo1Adwh1hXEtQJ23vQ=;
- h=Subject:From:To:Cc:In-Reply-To:References:Date:From;
- b=PYZqDm/Q4RckZXNyC3A/ir5weFCqQk9n1jjA6FmeG6TI/N9E2Ql36xBbTZurB9QDL
- jE5k+/zCAHsd+BSI2i+cbHBCgw0sMA2FsU6xKMA/XgfaaNDPgZVupjaQkB2AoE5odi
- F/T03rPSX12V7RvNmYvdjP1/q6/vdganJRYY2IJw=
+ id 7A49C846C3; Mon,  4 May 2026 22:17:02 +0200 (CEST)
+Received: from sender4-op-o15.zoho.com (sender4-op-o15.zoho.com
+ [136.143.188.15])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 18BA8846A0
+ for <u-boot@lists.denx.de>; Mon,  4 May 2026 22:16:57 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=ziyao.cc
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=me@ziyao.cc
+ARC-Seal: i=1; a=rsa-sha256; t=1777925814; cv=none; 
+ d=zohomail.com; s=zohoarc; 
+ b=hqxwv4Irn70GcfllCb3+H5HaDrq0Mla5OePHgdpYVL0SY+iNG3ii+VquySDkQF5VAQ3weDPaLm27Q1+cvb0aAouC4tzni/e5mx/WDFzWiJnf3IF1Ph2jzJ9PMw+NUsOxAPZZa8jtGE3Az2KvnyTZ9iPbSym5SPZvu0FJJeuWSDo=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
+ s=zohoarc; t=1777925814;
+ h=Content-Type:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To;
+ bh=hY9ac90sNL2KjdogaZPFtC3wFvzpMIt3C9omHT0eAeM=; 
+ b=oFXwHHmYlMuFbn4LdA7Km3EFlw0WkoyJG3JpTj4OtHgLTYpGfX90eZOoHjLA+NiF7i+c7zgO1sSANb4s2+MqctEZDtngwW/nIfzoFoYabzAyAiBhe9Q22KZyzbDVfZyEEXduusPuntwCRpiyTnRDThDDrxJ082mozHXxKJjK0AU=
+ARC-Authentication-Results: i=1; mx.zohomail.com; dkim=pass  header.i=ziyao.cc;
+ spf=pass  smtp.mailfrom=me@ziyao.cc;
+ dmarc=pass header.from=<me@ziyao.cc>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1777925814; 
+ s=zmail; d=ziyao.cc; i=me@ziyao.cc;
+ h=Date:Date:From:From:To:To:Cc:Cc:Subject:Subject:Message-ID:References:MIME-Version:Content-Type:In-Reply-To:Message-Id:Reply-To;
+ bh=hY9ac90sNL2KjdogaZPFtC3wFvzpMIt3C9omHT0eAeM=;
+ b=ABf8WffnbE+nKqKNhapVGDv+VVjuKbg1Sp4mPJM4vXnKA1ie9wMI9eeGru7ay5QC
+ EZlYGMdU8VdInx0dj11MKbDZauRPkKgGo/ZlsvQkAmQOMSYn5wqFCWiy2tjeC0PquwD
+ 02xVJRQ9iQacnPZweapqJvF4MakMbf1P4Jm/lToA=
+Received: by mx.zohomail.com with SMTPS id 1777925811896362.97701039650326;
+ Mon, 4 May 2026 13:16:51 -0700 (PDT)
+Date: Mon, 4 May 2026 20:16:40 +0000
+From: Yao Zi <me@ziyao.cc>
+To: Michal Simek <michal.simek@amd.com>, u-boot@lists.denx.de, git@amd.com
+Cc: Leo <ycliang@andestech.com>, Rick Chen <rick@andestech.com>,
+ Tom Rini <trini@konsulko.com>
+Subject: Re: [PATCH] riscv: Skip riscv_cpu_setup() when CPU driver is disabled
+Message-ID: <afj-qK8yzyGwn1bi@pie>
+References: <0d875f98e9d81b68265ea26c379dae8ce5b1f5a9.1777550269.git.michal.simek@amd.com>
+ <afRqUJZF81_y5K_O@pie>
+ <45470f5f-f0f6-47f4-b87e-4c4c5d0cc9b8@amd.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Subject: Re: [PATCH 01/12] efi_loader: add runtime memset helper
-From: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: harsimransingh.tungal@arm.com, u-boot@lists.denx.de, 
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>, 
- Tom Rini <trini@konsulko.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Hugues Kamba Mpiana <hugues.kambampiana@arm.com>
-In-Reply-To: <CAFLszTgfKTVFxj6Z93dbecjHeY=oAGoGtUmBhYiC8EtrOzVsdg@mail.gmail.com>
-References: <20260424173151.371134-1-harsimransingh.tungal@arm.com>
- <20260424173151.371134-2-harsimransingh.tungal@arm.com>
- <CAFLszTgfKTVFxj6Z93dbecjHeY=oAGoGtUmBhYiC8EtrOzVsdg@mail.gmail.com>
-Date: Mon, 04 May 2026 21:03:14 +0100
-Message-Id: <177792499454.3275395.17057771256029107703.b4-reply@b4>
-X-Mailer: b4 0.15.2
-X-Mailman-Approved-At: Mon, 04 May 2026 22:09:25 +0200
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <45470f5f-f0f6-47f4-b87e-4c4c5d0cc9b8@amd.com>
+X-ZohoMailClient: External
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,99 +76,92 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2026-04-28 12:08 -0600, Simon Glass wrote:
-> Hi Harsimran,
+On Mon, May 04, 2026 at 11:00:17AM +0200, Michal Simek wrote:
 > 
-> On 2026-04-24T17:31:50, Harsimran Singh Tungal
-> <harsimransingh.tungal@arm.com> wrote:
-> > efi_loader: add runtime memset helper
-> >
-> > Add efi_memset_runtime() for EFI runtime paths
-> >
-> > This keeps buffer initialization in runtime-resident code after
-> > ExitBootServices() and avoids relying on non-runtime helpers.
-> >
-> > Signed-off-by: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
-> >
-> > include/efi_loader.h         |  3 +++
-> >  lib/efi_loader/efi_runtime.c | 21 +++++++++++++++++++++
-> >  2 files changed, 24 insertions(+)
 > 
-> > diff --git a/include/efi_loader.h b/include/efi_loader.h
-> > @@ -1151,6 +1151,9 @@ void efi_memcpy_runtime(void *dest, const void *src, size_t n);
-> >  /* runtime implementation of memcmp() */
-> >  int efi_memcmp_runtime(const void *s1, const void *s2, size_t n);
-> >
-> > +/* runtime implementation of memset */
-> > +__efi_runtime void *efi_memset_runtime(void *dest, int c, size_t n);
-> > +
+> On 5/1/26 10:54, Yao Zi wrote:
+> > On Thu, Apr 30, 2026 at 01:57:51PM +0200, Michal Simek wrote:
+> > > Building on commit c64fc632a86a ("riscv: cpu: Use CONFIG_IS_ENABLED(CPU)
+> > > instead of plain ifdef"), add an early return in riscv_cpu_setup() when
+> > > CONFIG_CPU is not enabled. This allows platforms to save code space in
+> > > SPL by disabling CONFIG_SPL_CPU.
+> > > 
+> > > The compiler's dead-code elimination combined with --gc-sections
+> > > removes the unreachable code and all associated static data,
+> > > achieving significant size reduction without preprocessor guards:
+> > > 
+> > >    spl/u-boot-spl:all -4332 spl/u-boot-spl:rodata -2872
+> > >    spl/u-boot-spl:text -1460
+> > > 
+> > > Signed-off-by: Michal Simek <michal.simek@amd.com>
+> > > ---
+> > > 
+> > >   arch/riscv/cpu/cpu.c | 3 +++
+> > >   1 file changed, 3 insertions(+)
+> > > 
+> > > diff --git a/arch/riscv/cpu/cpu.c b/arch/riscv/cpu/cpu.c
+> > > index bbadd0c9a469..3bec7c7cb6d0 100644
+> > > --- a/arch/riscv/cpu/cpu.c
+> > > +++ b/arch/riscv/cpu/cpu.c
+> > > @@ -638,6 +638,9 @@ int riscv_cpu_setup(void)
+> > >   	const char *isa, **exts;
+> > >   	struct udevice *dev;
+> > > +	if (!CONFIG_IS_ENABLED(CPU))
+> > > +		return 0;
+> > 
+> > Should we return zero here, or -ENOENT like the original behavior when
+> > no UCLASS_CPU device is found?
+
+My bad, the original return value when CONFIG_CPU is disabled should be
+-ENODEV instead of -ENOENT. But in case that CONFIG_CPU is disabled,
+-EOPNOTSUPP might be a better outcome. I don't have a strong opinion on
+this.
+
+> if you put there error value then when CONFIG_CPU is disable you get boot
+> hang which is likely what you don't want to see right?
 > 
-> Two inconsistencies with the neighbouring declarations: the comment
-> should say memset() to match memcpy() / memcmp() above, and the
-> section attribute does not belong in the prototype, as
-> efi_memcpy_runtime() and efi_memcmp_runtime() carry __efi_runtime only
-> on the definition. Please drop it from the header.
->
+> initcall_run_f(): initcall initf_dm() failed
+> ### ERROR ### Please RESET the board ###
 
-Thanks for your feedback.
-I will fix this in patchset v2.
+This should be the original behavior, i.e. U-Boot built with
+CONFIG_CPU=n and CONFIG_EVENT=y is broken without this patch, too,
+right?
 
-Regards
-Harsimran Singh Tungal
+int riscv_cpu_setup(void)
+{
+	int ret = -ENODEV, ext_count, i;
+	const char *isa, **exts;
+        struct udevice *dev;
 
-> > diff --git a/lib/efi_loader/efi_runtime.c b/lib/efi_loader/efi_runtime.c
-> > @@ -233,6 +233,27 @@ int __efi_runtime efi_memcmp_runtime(const void *s1, const void *s2, size_t n)
-> > +/**
-> > + * efi_memset_runtime() - fill a memory region with a byte value
-> > + *
-> > + * At runtime memset() is not available.
-> > + *
-> > + * @dest:   pointer to the block of memory to fill.
-> > + * @c:      value to be set. The value is passed as an int, but the
-> > + *          function fills the block of memory using the u8 conversion of this value.
-> > + * @n:      number of bytes to be set to the value.
-> > + * Return:  dest is returned
-> > + */
-> > +__efi_runtime void *efi_memset_runtime(void *dest, int c, size_t n)
-> 
-> Please match the kernel-doc style of the two helpers above: tabs after
-> the ':' in the parameter list, no trailing periods, one-line @c
-> description. The @c line is also over 80 columns. Flip the attribute
-> to 'void * __efi_runtime efi_memset_runtime(...)' to match
-> efi_memcpy_runtime() / efi_memcmp_runtime() in this same file.
->
+	uclass_find_first_device(UCLASS_CPU, &dev);
+	if (!dev) {
+		debug("unable to find the RISC-V cpu device\n");
+		return ret;
+	}
 
-Sure, I will fix this in patchset v2.
+...
 
-Regards
-Harsimran Singh Tungal
+}
+EVENT_SPY_SIMPLE(EVT_DM_POST_INIT_F, riscv_cpu_setup);
 
-> > diff --git a/lib/efi_loader/efi_runtime.c b/lib/efi_loader/efi_runtime.c
-> > @@ -233,6 +233,27 @@ int __efi_runtime efi_memcmp_runtime(const void *s1, const void *s2, size_t n)
-> > +__efi_runtime void *efi_memset_runtime(void *dest, int c, size_t n)
-> > +{
-> > +     u8 *d = dest;
-> > +
-> > +     for (; n; --n)
-> > +             *d++ = c;
-> > +
-> > +     return dest;
-> > +}
-> 
-> Just to check, was there a reason not to mask 'c' to a byte (i.e.
-> '*d++ = (u8)c') as the doc comment promises? An explicit cast matches
-> the comment and silences future -Wconversion noise.
->
+When CONFIG_CPU is disabled, the call to uclass_find_first_device()
+would always find no device, and riscv_cpu_setup() would return with
+-ENODEV, causing the call to event_notify_null() in dm_init_and_scan()
+to fail. We could fix this by guarding the instantiation of
+EVENT_SPY_SIMPLE() within #if CONFIG_IS_ENABLED(CPU).
 
-Thanks for noticing this.
-No, there was no specific reason to not to mask 'c' to a byte.
-I will do the suggested change in patchset v2.
+I consider returning with error a useful behavior, since there are raw
+calls to this function (board/[starfive,thead]/*/spl.c), in which cases
+a correct return value suggests something goes wrong, thus might help
+debugging, for example, if someone turns off CONFIG_CPU but doesn't
+expect the side effects.
 
-Regards
-Harsimran Singh Tungal
+Anyway, whether you agree on the return value or not, it should be
+mentioned in the commit message that U-Boot built with CONFIG_CPU=n and
+COFNIG_EVENT=y is broken without the patch.
 
-> Regards,
-> Simon
-> 
+> Thanks,
+> Michal
 
-
+Best regards,
+Yao Zi
