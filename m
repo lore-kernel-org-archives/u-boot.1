@@ -4,53 +4,106 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3AA71FF885A
-	for <u-boot@archiver.kernel.org>; Mon,  4 May 2026 20:30:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B1BDFF885A
+	for <u-boot@archiver.kernel.org>; Mon,  4 May 2026 20:30:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 82436846D2;
-	Mon,  4 May 2026 22:30:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=kernel-space.org
+	by phobos.denx.de (Postfix) with ESMTP id C08FC846A1;
+	Mon,  4 May 2026 22:30:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=kernel-space.org header.i=@kernel-space.org header.b="jcz6yStK";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="kzZ2fQtv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6D08B846CE; Mon,  4 May 2026 22:30:21 +0200 (CEST)
-Received: from mail.kernel-space.org (unknown
- [IPv6:2a03:4000:b:d08:14a9:1bff:fedc:75ad])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 19EC6846DB; Mon,  4 May 2026 22:30:24 +0200 (CEST)
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [IPv6:2a00:1450:4864:20::632])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3975A846A0
- for <u-boot@lists.denx.de>; Mon,  4 May 2026 22:30:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=kernel-space.org
+ by phobos.denx.de (Postfix) with ESMTPS id D62A7846A0
+ for <u-boot@lists.denx.de>; Mon,  4 May 2026 22:30:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=angelo@kernel-space.org
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel-space.org;
- s=s1; t=1777926618;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding;
- bh=g/PbHEN15yvlL9SfbqXXRnw4HC6Yf/r4UqY+TAZBcJ8=;
- b=jcz6yStKmi6BUKDO4drZhTk0y3gQDRPdp9I0zvVcxc7NxRGn5Y2wy57odPSJkN8tkCARhd
- D4E0W7aGkyfQ0IhCUcqvX6zjjSo/OWmLaeqIYYb8hMIuj8OF4cWQVcenvJCZTWhJ9GakIp
- AZp2RDvnW43Z8kMQ633YwKm9qYf8vp8=
-Received: from [IPV6:2a07:7e81:7daa:0:62cf:84ff:feee:627] (<unknown>
- [2a07:7e81:7daa:0:62cf:84ff:feee:627])
- by oreshnik (OpenSMTPD) with ESMTPSA id a6cd2641
- (TLSv1.3:TLS_AES_256_GCM_SHA384:256:NO); 
- Mon, 4 May 2026 20:30:18 +0000 (UTC)
-Message-ID: <52347f0a-49e8-46d7-987c-73bb9c2add95@kernel-space.org>
-Date: Mon, 4 May 2026 22:30:17 +0200
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-b93698bb57aso850013666b.0
+ for <u-boot@lists.denx.de>; Mon, 04 May 2026 13:30:21 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1777926621; cv=none;
+ d=google.com; s=arc-20240605;
+ b=CcWEkR4B7fjYEMSP/ee9Ddas12yFY7oMISTHWh0cutjs8V9S9Xy6VSe72advm5ilRV
+ ldppVwaWXMdjhKXBeh64FIzcOOBgD/wZ+TXckXTh80D4iwWFRXZPxUeq64FB7Bl1cfxU
+ dK6MIm3RzvmY15HgA2ZMahLsj2AL8cjucVUnBeOqQoAudJueCvhjfx90LIB88htVeCZO
+ IZiWRFAYzXZN4vHv0J2TPwWJUGz7uFQV8vM8g/eEL1L78IFQvwl/UjvnxQ+N+Pdw1xz7
+ HO1yomEh6HN34zW8KLX2aJzzCr/CZST7S/RoHsM7Et553Yg9kamCMjaKpdBjwJRRit8q
+ h0pA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=QhvG7127G9OsF2+d8tB3ZZsMdqpPU2a7/4ONLjhSAqU=;
+ fh=JDmMtl5m1ONTYAIDZy3RW95Kei7pwM4OcFAim19m6HQ=;
+ b=Z9RNuwbnBJ+I9Yt69c/NSftJli+wQszBJPSPFlIjt5ja8WUvgQRQTjFlvaF8w8/p41
+ tGLJIcDZUCeAPY4frArMYAR1BPRX4XOMYN5+8dGV6dydnC336jmBOSjj5ha4TOYIqvo7
+ GB4RzLq0tymbXoRHu/VTcfgvwlbrEM4taXBXoxJ1+WXENqSn4zaqf0ZPZIso0OGE4S6U
+ 2pGkEuW6H71cWpK4n6SUqaRaWr3nIv9G08B2qq9ciROXvn79tGA1wG9f11+GVT9/eieW
+ SWW1vfDc8hWk1N9mNXYPOucR+UfVKIay6hR4iyH5NzKehnbFc+IIHfIOTXb6QvE0fGDS
+ Ny4Q==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1777926621; x=1778531421; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=QhvG7127G9OsF2+d8tB3ZZsMdqpPU2a7/4ONLjhSAqU=;
+ b=kzZ2fQtvNMg9i5iNhvbaWLZERTd4EQ/ENwTCL11ASloSCDzFB5BpjeCcQ7CiwvEiuu
+ jBSvr60PRR5j+M2n7TxfFCCf4BsUtVK7wN/LLpgyH0xnSe0tP1E0lRdgH1n+xLnfUEEU
+ qUSiwaGSg4zRx2uiR7BI5zhSqpY6GzzUYHmXA=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1777926621; x=1778531421;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=QhvG7127G9OsF2+d8tB3ZZsMdqpPU2a7/4ONLjhSAqU=;
+ b=e8riUrcB0wVDpo1kCYUkWN4EKpwZQkSo3UpCv3oU2ClyYf7iQJOiBCkS+jvMzzN72J
+ kRBOhshXo7P3KvbTqy51YcCquHx6hV4BaldwRLoO5M1Qv/uNrNjOQp29v20q8L6fz/8k
+ wKm6mJbUzo+4zZrRBv9O81PgMxoSkCAcN6RYhMAPXJHQ07nQCR9oaDp9T6/VrpGNCv9E
+ 4Z0P3IEHkllLK/cHASlbWjPtHU8bZST+6+Iz6AfNRIMTDOw9UYbletfJt3ewtDbQepbD
+ SeIhBfuGdWOja7mcjxHNx05UJcNohOhUwjjzRF7p9OmQZItcE+CGp75FeM7s4d4hPGUz
+ adtA==
+X-Gm-Message-State: AOJu0Yx5Y6lsON6ij1jwqeqVacfOXyy/obPvCvqaaRYkVV/porJM/uVk
+ px1HnQe6bR8BAwr4y2NixyN368GYkKwLXoPKl79FHtb+wsvCLUqCBS+N1fl0L8dEaCzz8pE2Kup
+ EhbDERmBFL+jiXTyWvQzHOM4ivEgTb7b/c7CjitGB
+X-Gm-Gg: AeBDievUMin/9xrMl3j92sTqFPj1QJiPEiHasThKDcBh1UGWNc3oJ2KNkAopTKiQq/J
+ IxQ9Dpn6S/O5gzcLxgrGutS4vPIv+2WMzY2wRfMaPimb3OM6LpLQh63qShnPNRPBDWJ6JID4T52
+ 8LVWG+IPA1Q5Vvwe5XrPhiXQGLd3nRrMl0mxHVt9LvLKXCXMjL0Of10mjafpys+khYjJAuVBlGY
+ mI96YmKnSYLcCkohz9kYnmrQ75iPJsU7EaemNz81LBFqfBKNfZNQKtKRZQUOyr6nVl534DvwPJ8
+ t3uIqzP4XhOrE7Bw
+X-Received: by 2002:a17:907:968d:b0:bc1:d3d2:9348 with SMTP id
+ a640c23a62f3a-bc3d143a281mr53401866b.20.1777926621176; Mon, 04 May 2026
+ 13:30:21 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: en-US, it
-To: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>
-Cc: alison.wang@freescale.com, Kuan-Wei Chiu <visitorckw@gmail.com>
-From: Angelo Dureghello <angelo@kernel-space.org>
-Subject: [PULL] Please pull u-boot-coldfire/master
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+References: <20260504-extrawarn-sync-v1-0-b19301d1948a@cherry.de>
+ <20260504-extrawarn-sync-v1-1-b19301d1948a@cherry.de>
+In-Reply-To: <20260504-extrawarn-sync-v1-1-b19301d1948a@cherry.de>
+From: Simon Glass <sjg@chromium.org>
+Date: Mon, 4 May 2026 14:30:08 -0600
+X-Gm-Features: AVHnY4Lwp29UdizwyBjVSwD6Vw_AQZZn44RATZ5fn6hS9YqgbgMwUNfLd_eHclw
+Message-ID: <CAFLszTi8c+CoR1_kuXEeauwae7f_1huRKt6W9daeCHPz63VzrA@mail.gmail.com>
+Subject: Re: [PATCH RFC next 01/18] test/py: add pytest --make-args argument
+ for additional Make arguments
+To: foss+uboot@0leil.net
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ Simon Glass <sjg@chromium.org>, Mattijs Korpershoek <mkorpershoek@kernel.org>, 
+ David Lechner <dlechner@baylibre.com>,
+ Jerome Forissier <jerome.forissier@arm.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Simon Glass <simon.glass@canonical.com>, Raymond Mao <raymondmaoca@gmail.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Michal Simek <michal.simek@amd.com>, 
+ Adriano Cordova <adrianox@gmail.com>, Sughosh Ganu <sughosh.ganu@arm.com>,
+ Yao Zi <me@ziyao.cc>, 
+ Rasmus Villemoes <ravi@prevas.dk>, Quentin Schulz <quentin.schulz@cherry.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -67,40 +120,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The following changes since commit bb0f3eebb3c196d9b6efbbd1e5aa9b16abbb9ad6:
+On 2026-05-04T13:20:27, Quentin Schulz <foss+uboot@0leil.net> wrote:
+> test/py: add pytest --make-args argument for additional Make arguments
+>
+> We manually execute make commands within some tests, sometimes from
+> 'dirty' build directories.
+>
+> One example is the test_env_initial_env_file test which calls
+> make u-boot-initial-env
+> in a build directory that has already been populated possibly before
+> pytest is run (which is the case in our GitLab CI/CD).
+>
+> In "sandbox with clang test.py" and "sandbox64 with clang test.py" we
+> build before pytest with clang-20 but pytest will call make without
+> setting HOSTCC or CC to clang-20, which results in clang flags being
+> used with gcc. Right now, it isn't triggering a build issue because we
+> use cc-disable-warning to disable the warning only if it's available, so
+> the clang flags aren't added. However, in a few commits we'll bump
+> scripts/Makefile.extrawarn to a newer version from the Linux kernel
+> (6.1) and it won't be used anymore, thus triggering fails.
+>
+> Add an option to specify make arguments such that a user can provide
+> HOSTCC and CC for when the build directory to reuse has been built with
+> clang.
+>
+> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
+>
+> test/py/conftest.py                 | 6 ++++--
+>  test/py/tests/test_cleanup_build.py | 4 ++--
+>  test/py/tests/test_env.py           | 4 ++--
+>  3 files changed, 8 insertions(+), 6 deletions(-)
 
-  Merge branch 'master' of https://source.denx.de/u-boot/custodians/u-boot-sunxi (2026-05-01 08:12:31 -0600)
-
-are available in the Git repository at:
-
-  git://git.denx.de/u-boot-coldfire.git master
-
-for you to fetch changes up to 44684aabc2983cabab7056cf5840a04c97c42b1f:
-
-  m68k: set proper u-boot image size for initial boot (2026-05-04 22:19:49 +0200)
-
-----------------------------------------------------------------
-Angelo Dureghello (9):
-      m68k: dts: mcf5441x: add mmc device for mcf5441x
-      m68k: dts: stmark2: enable esdhc
-      board: stmark2: add sd boot command
-      board: stmark2: remove old garbage
-      mmc: Kconfig: allows m68k to use esdhc imx driver
-      configs: stmark2: add support for mmc
-      configs: stmark2: add bdinfo command
-      m68k: mcf5441x: create stub to use imx drivers
-      m68k: set proper u-boot image size for initial boot
-
- arch/m68k/Kconfig                           |  1 +
- arch/m68k/cpu/mcf5445x/start.S              |  3 +--
- arch/m68k/dts/mcf5441x.dtsi                 |  8 ++++++++
- arch/m68k/dts/stmark2.dts                   |  4 ++++
- arch/m68k/include/asm/arch-mcf5445x/clock.h | 19 +++++++++++++++++++
- arch/m68k/lib/Makefile                      |  1 +
- arch/m68k/lib/clock.c                       | 23 +++++++++++++++++++++++
- configs/stmark2_defconfig                   | 19 +++++++++++++------
- drivers/mmc/Kconfig                         |  2 +-
- include/configs/stmark2.h                   |  6 ++++--
- 10 files changed, 75 insertions(+), 11 deletions(-)
- create mode 100644 arch/m68k/include/asm/arch-mcf5445x/clock.h
- create mode 100644 arch/m68k/lib/clock.c
+Reviewed-by: Simon Glass <sjg@chromium.org>
