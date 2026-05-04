@@ -4,95 +4,99 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6BCCFF886F
-	for <u-boot@archiver.kernel.org>; Mon,  4 May 2026 13:00:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08DEAFF885A
+	for <u-boot@archiver.kernel.org>; Mon,  4 May 2026 13:02:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6904484694;
-	Mon,  4 May 2026 15:00:43 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 961FB845E9;
+	Mon,  4 May 2026 15:02:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Zlw5gIu3";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ONsT4Gr2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9813C8469D; Mon,  4 May 2026 15:00:40 +0200 (CEST)
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
- [IPv6:2a00:1450:4864:20::630])
+ id C025980F0E; Mon,  4 May 2026 15:02:40 +0200 (CEST)
+Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
+ [IPv6:2a00:1450:4864:20::629])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B1DB684694
- for <u-boot@lists.denx.de>; Mon,  4 May 2026 15:00:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C05418468B
+ for <u-boot@lists.denx.de>; Mon,  4 May 2026 15:02:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-b9358bc9c50so614100466b.1
- for <u-boot@lists.denx.de>; Mon, 04 May 2026 06:00:38 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1777899638; cv=none;
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-bc1f0830f44so167453066b.0
+ for <u-boot@lists.denx.de>; Mon, 04 May 2026 06:02:38 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1777899758; cv=none;
  d=google.com; s=arc-20240605;
- b=cZhqUssMP66aCSJQWfAZ6n47DSim0GJDvCWmKE59my2ZqAsCY0OEdEw7oNh0vIvQr7
- VGl5ZmXYkylUQJA7Y3uconSEAPdecwMVFtNxgYABCD5bUdLKq0LurVQeRuQARetyiNWT
- IycReE9Cj/dfeMFpzDbj55oNbvLi0rMoa5n2LqY8N4yQYSlgWtXJBnAVO9KHG0F8CWBI
- 1ScR612vwwBI+1rpVw+0BVJL9pAWfFt74x4JqFA7kai9Uafq2kp14xhZgY31CU39L/3y
- ic6SCsbNok1R1lFiOBi5wWjLPNakYpB91W3QIEDY2McYP65JT2OgdQ/orDh6ayi+qIMi
- w8aA==
+ b=Scu5v7V+hL5FlY/fY3Fy3psffgcsHN8/q2EZB8kfjS6rNn5zS1ieWjbJWEshsFUkYu
+ O0FTrkOvr01ejDp6aSZvwBqqRDAIJoNHi7rxLX4yL5bUGDv6PblYmuqpk7DnT8/FIMHo
+ BYvxdyn9vk3ZvxeJCQJ+ZVqooY3jzVzz/b+6IkCoyM9M9L+T/JcNhtjNkE4XIniRpxhr
+ 85+rN/T84onUmJRSKdk8g5RQpDhAQKtdscDPjSXOCz44S4/LJUG85GL4pOVrNg/vRB+E
+ tfZx1GFEScX1+lKuByKJ7eUwqusK3B4+W2bnTOyLZ4dZc1vZFrlSMMyvbg/4RRCmobVH
+ LvMQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=B1J7oSuX7mVJKn2FLI5PySLXlgKU6eYLoILBX3LEUAU=;
- fh=r1FKHKFsmdGawySOdjSszQZccIlP//niBHTy1beuYwY=;
- b=J86i1DD98wHYgBkJRGqjU6+szTt4/y0pWHIpmO57FN1QQMNjBj/uU1g7M/WZ7GUt9l
- acxJgFT14WzKGLLdgmt7RDCYDtnpqd7U8WXj4FmZxzzEceD2hPI6I/hWsiT9BrUaVgbo
- b6JEiTFoKna6cBWq/WMVuLO38d7v2rNW7miDUy+Sjh1eSujd2AFOQ9TX4qanDnpcy3kg
- VTB3tCfsZizrg7nQBDrHSb8EeqaPPYepONWGo3G7PTtByrk5tvsxcj9Oua0l0sp6S1Op
- hqyLI43qbbItSzYI2QDVSUDzsYWM/j5/yxThG9ixIZcFyVw2FRZceFVrHbUZi7XrXgBa
- kibw==; darn=lists.denx.de
+ bh=rMz+t1G6t191fyFHxGhhQ1Cb2uLq1PAIodjwG8TMzv0=;
+ fh=MiPMVlZqbKlw1fatphHz+fPQCRVQHGg4dnQ7ziOy4C8=;
+ b=DfZA0HDA1/BU5s5M9mNPlfz5JRjKrHPu3fiUkE6/QbXeJXtMTGaAx/QkfmEbaK1sAl
+ gBH9yEiMgUaXTdPSYDP/7YdjqQ/lobSGqMcC1D3uP2PME9IYArsdbwP9o004ojFoI7dK
+ tNOtyqZq4FhrCTv3R68UMS8fImjk+W+mlYWaz/Pu3egw/SNKCJrP/CqHW0q/t3vdM+KK
+ 7rJqg/Jq2UrWc6HqkqajtjqEQ3cwh2y0GsZAvFZUxh2rdKwsUhvuqCghJCLkV/oCAZiU
+ XKKLcO0c1SIwhquaXCTVECEaPC+H/9rfolT0fUBDG6E6aEXTIIUAhfvaEniKzzK6MDV4
+ C7pQ==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1777899638; x=1778504438; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1777899758; x=1778504558; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=B1J7oSuX7mVJKn2FLI5PySLXlgKU6eYLoILBX3LEUAU=;
- b=Zlw5gIu39UURwZ7dNHXQP6z4xIFY/DooGuUpirkABs9FyNHKroB815H10ZnAjubJUA
- lNC63Z2O+2J5Ies3sMfLQ63+nqqpUqVFOS0AWpOvoe7UfkBQcUWPmU253Jcn6xw195N0
- YplZF6rm1XtrGmE/+rQC8oJMWlXe7bqt98/rE=
+ bh=rMz+t1G6t191fyFHxGhhQ1Cb2uLq1PAIodjwG8TMzv0=;
+ b=ONsT4Gr2XkpiU/JHS3Ilf0BS1Y2PlYejh8fVIhXGD1wkg0mdKWacJgDsMBK0lBD8Tu
+ QCWCflDUgI/Ov7AuPx+4dXsH9auyZUoQLKHIWeKhmlV9pkQrC2CA2CMyqMMufLbe6WQ2
+ yt1w3go2lp0C49bHuJMJatuEdjUPZku5+XIq0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777899638; x=1778504438;
+ d=1e100.net; s=20251104; t=1777899758; x=1778504558;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=B1J7oSuX7mVJKn2FLI5PySLXlgKU6eYLoILBX3LEUAU=;
- b=Pw+rWZlPfT39b0tqmca8CYImK3T1KlQpEaZHP0v7K/sbs0ykxIUQrLb8klGKEIW1P8
- /AfCX8+7jA8L/qerQFwvGqtc4qXONOxpI7gmzhetEM1R87Du8ulbIMgw7oRzhNS6D+JU
- RIUJhLekl+AU3JtRfbvDSx2TtQjSVN+ehje/9+441U3rqMRPjVlLXAefJXgDUvx405jJ
- REi0xnqW02PkgJnw7XxVmiE4zkUT7ZIN7KBvuO9ZrIxy4lsThJLhDkGP/+W+nNXdT17P
- 26QDs+UEPXoGkZ4U/BFwEj3nSFDMd88mOCn5ZK24CPpGpEbsclS9WZ0w5y3995So5IFW
- Aktw==
-X-Forwarded-Encrypted: i=1;
- AFNElJ/c18cmA5k2XFXN7dyN2qLqLVpYVksOyKpNP2vkYhYwRwrCID4ZtoV/nEGQn1wuksH0LoL4Oxs=@lists.denx.de
-X-Gm-Message-State: AOJu0YwIcNuarKskxvjYWEGpQtDt9fdEeV/vV19iZ4zNMz7ELhdlQsDw
- myx0ppmnwsD19fxHnoUsQ9oelZlMDfZTP/FCJKHd5v5jJd3x9yz+LYbItPwTvMMEWE83cAt/KZj
- J6BHP1ARpoTz3qPUIBYt1Y0A/wPdPJYJsI9edpm3FzjOLmz9OV5Q=
-X-Gm-Gg: AeBDietJp5/2LWrsK7X1UQXu4QK773l4Vubmd6BQrQiNoYO68t/OoHgllo93oxEhQ0m
- QZCANBRpnNo+as2/wN5PFX+QLAUPXw2tMjZLpYiUNWX540IKjuIGs4yEGwupm4eELhnYy4CpTEl
- AtTdVzKIUlgGrKUQ2J/D8lVbLCr2qIG9sVIgNyBDDdMS67wjAasin92QrejUx3fuQnIoZ50Hg4Z
- +niIOHeMnT2dJIWvcQjZF5u9njQNnYEbeecQdZUs3hJ/LUaDeuvx/e1uLugvB7iJAFc6PS75xTf
- aIKdecFkFSOP5c7B
-X-Received: by 2002:a17:907:7b83:b0:b9c:2c55:3384 with SMTP id
- a640c23a62f3a-bbffb846e81mr541791966b.31.1777899637743; Mon, 04 May 2026
- 06:00:37 -0700 (PDT)
+ bh=rMz+t1G6t191fyFHxGhhQ1Cb2uLq1PAIodjwG8TMzv0=;
+ b=hyEQ6V+5cdMfDyNIOtiqLuHJxmG+V5EWaYGEnoNJSBiSHCbRLSdUuhHZUY/hnW6j9S
+ 6nQ4vY6HijHFZyIGC2Ksebe6ddvF09slMECvMSfOrp7ZsouRyvOHUigoM49B2j2Wr/FU
+ rMvJh7jAqI1GvArASrXC/x19cicdRn8VSSf2cvpcli+/rJAhJPMI+ejEy1m+V/NIPILC
+ VJGWi/nU2ITRO+2lhAkdgOPr20GSYR/HCR21ELatxpc7+jiz00spX1olmt4OksuxiF91
+ 69Hl4DXNO/fwPzxmsuUPBgxKPqNRfHXoV4YUXbx7p3PF5Coch+YT4W2mviqJsjWc9uvh
+ XXYQ==
+X-Gm-Message-State: AOJu0YxFDVciswQeGqcXjy3pZf0c0vf8DLt1Fy2Wv0Ms3U1pc3uzYmBI
+ UebcfGQP+1fGuNSi7Wn5uNFYI1y6O0tW+wA0rhDfUfeNqvrvEI/h43o8FN5TE8VYT9Fv1IvZsuP
+ gMVft6O1fqpEcJm4NROAnI3mtXbGqdI+g3V+XU/UIBxMht4QUNxI=
+X-Gm-Gg: AeBDievBo+gqZedyW7trDzbi5j/C817zzshrjS/hsASpX8nwVIUJAjmdK0aU0rczfw4
+ deJAykIbVmSmobasS6ZUXmPIqSdFCo4hCcamuE3x0f3Jwz4UoC44U4ln8POmh/xKIop3Fh0H+pS
+ 2baDEpMRXZGdhEGT3iEfmeY7UGN2sfVfFSPfD/QOXE129zLeJF7LBdDCSb8qx3IfUqqnXklnSCF
+ Affuh6fJeVV8L7XpnVeKzWXQuEK/8Tekfn97t6Pigrpkn1luok3AvMsw0/DWew2GDWtcUKrRDu0
+ hA==
+X-Received: by 2002:a17:907:a01:b0:b9d:14e9:d06d with SMTP id
+ a640c23a62f3a-bbfdef8a89bmr431468766b.8.1777899758000; Mon, 04 May 2026
+ 06:02:38 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260501143850.2714779-1-bdklingerman@gmail.com>
-In-Reply-To: <20260501143850.2714779-1-bdklingerman@gmail.com>
+References: <20260422023131.2813748-1-sjg@chromium.org>
+ <04536c1e-c732-4d55-a98d-c14acf2d8336@cherry.de>
+ <CAFLszTgQxCEYrCTyLkFiEtoDJKPBJKUJqGHFpUK0chb-wCV+DA@mail.gmail.com>
+ <6980d77d-b0d6-4b77-9ade-4201bb88cb87@cherry.de>
+In-Reply-To: <6980d77d-b0d6-4b77-9ade-4201bb88cb87@cherry.de>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 4 May 2026 07:00:23 -0600
-X-Gm-Features: AVHnY4Ia-VIXxNHpjHhQQ-id6w2RA9oLRNnZeW345CkR2VJZ6to34gtpDaUirXs
-Message-ID: <CAFLszTjBqqq9dOW=hOrqCPzQUXpgFwB4e3ZV7tO5y7hyZqZXyQ@mail.gmail.com>
-Subject: Re: [PATCH] Makefile: remove block from conv=block, sync in SPL
- alignment dd
-To: bdklingerman@gmail.com
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+Date: Mon, 4 May 2026 07:02:25 -0600
+X-Gm-Features: AVHnY4J3FrumZcyAy12V854e-hH1JOrRE-8Ub9lbKfd-fqs8kpqKBMt3jXBVbbE
+Message-ID: <CAFLszTis91k0xp6DaiV6aW2OgLYyRhHLEwpTk1jeWv0sD8gXpQ@mail.gmail.com>
+Subject: Re: [PATCH] fdtgrep: Add option to reserve free space in the output
+ FDT
+To: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: u-boot@lists.denx.de, Marek Vasut <marek.vasut@mailbox.org>, 
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -110,39 +114,82 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2026-05-01T14:38:50, Brad Klingerman <bdklingerman@gmail.com> wrote:
-> Makefile: remove block from conv=block, sync in SPL alignment dd
->
-> The line that produces $(SPL_BIN)-align.bin invokes dd with
-> conv=block,sync but no cbs= operand. The result of dd conv=block
-> without cbs= is unspecified. GNU coreutils outputs anyway, but
-> uutils (default in Ubuntu 26.04 LTS) errors out for files with
-> newlines, including SPL binaries, producing:
->
->     dd: conv=block or conv=ubnblock specified without cbs=N
->
-> Either the block operand must be removed, or cbs=N must be added.
-> conv=block is for converting newline-terminated variable-length
-> records to fixed-length space-padded ones, which is meaningless
-> for a binary SPL image. The intent of the rule is 4-byte
-> alignment, which conv=sync alone provides by padding the final
-> block to bs= bytes with NULs.
->
-> During build, u-boot-spl-align.bin errors silently due to '@'.
->
-> Reproduced with uutils dd 0.8.0:
->
->     $ dd if=/dev/urandom of=/tmp/in bs=1 count=10000
->     $ dd if=/tmp/in of=/tmp/out conv=block,sync bs=4
->     dd: conv=block or conv=unblock specified without cbs=N
->     $ dd if=/tmp/in of=/tmp/out conv=sync bs=4
->     [succeeds]
->
-> Output is byte-identical to GNU dd's output for binary input.
->
-> Signed-off-by: Brad Klingerman <bdklingerman@gmail.com>
->
-> scripts/Makefile.xpl | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+Hi Quentin,
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+On Mon, 4 May 2026 at 06:59, Quentin Schulz <quentin.schulz@cherry.de> wrote:
+>
+> Hi Simon,
+>
+> On 5/4/26 2:49 PM, Simon Glass wrote:
+> > Hi Quentin,
+> >
+> > On Mon, 27 Apr 2026 at 03:14, Quentin Schulz <quentin.schulz@cherry.de> wrote:
+> >>
+> >> Hi Simon, Marek,
+> >>
+> >> On 4/22/26 4:31 AM, Simon Glass wrote:
+> >>> When producing a DTB from fdtgrep, there is no way to reserve extra
+> >>> space so that more nodes/properties can be added at runtime without
+> >>> growing totalsize first.
+> >>>
+> >>
+> >> Ok but why is that an issue? What is the actual usecase? What I'm afraid
+> >> of is that you pad enough and you hit random bugs because you forget
+> >> that adding enough properties can now hit the size limit and you forgot
+> >> to add the logic to resize/grow the fdt when it's too small to fit new
+> >> properties.
+> >
+> > I'm going to leave this question to Marek :-)
+> >
+> >>
+> >>> Add a -B/--pad option that appends a caller-specified number of free
+> >>> bytes after the strings section and grows totalsize accordingly. The
+> >>> padding is applied after fdt_pack(), so it is not reclaimed when -r is
+> >>> used.
+> >>>
+> >>> Suggested-by: Marek Vasut <marek.vasut@mailbox.org>
+> >>> Signed-off-by: Simon Glass <sjg@chromium.org>
+> >>> ---
+> >>>
+> >>>    tools/binman/btool/fdtgrep.py |  3 ++-
+> >>>    tools/fdtgrep.c               | 31 ++++++++++++++++++++++++++++++-
+> >>>    2 files changed, 32 insertions(+), 2 deletions(-)
+> >>>
+> >>> diff --git a/tools/binman/btool/fdtgrep.py b/tools/binman/btool/fdtgrep.py
+> >>> index 446b2f4144b..7b393241878 100644
+> >>> --- a/tools/binman/btool/fdtgrep.py
+> >>> +++ b/tools/binman/btool/fdtgrep.py
+> >>> @@ -16,9 +16,10 @@ Output formats are:
+> >>>        dtb - device tree blob (sets -Hmt automatically)
+> >>>        bin - device tree fragment (may not be a valid .dtb)
+> >>>
+> >>> -Options: -[haAc:b:C:defg:G:HIlLmn:N:o:O:p:P:rRsStTvhV]
+> >>> +Options: -[haAB:c:b:C:defg:G:HIlLmn:N:o:O:p:P:rRsStTvhV]
+> >>>      -a, --show-address                 Display address
+> >>>      -A, --colour                       Show all nodes/tags, colour those that match
+> >>> +  -B, --pad <arg>                    Append free space to the output FDT, for later growth
+> >>>      -b, --include-node-with-prop <arg> Include contains containing property
+> >>>      -c, --include-compat <arg>         Compatible nodes to include in grep
+> >>>      -C, --exclude-compat <arg>         Compatible nodes to exclude in grep
+> >>
+> >> I'm tempted to remove this and just tell people to look at the
+> >> documentation in tools/fdtgrep.c. Especially since we don't actually
+> >> allow the user to pass any of those parameters themselves via the
+> >> bintool, so it isn't actually useful.
+> >
+> > I would like fdtgrep to give useful help, though. It is a tool which
+> > can stand alone.
+> >
+>
+> Yes, but this here is docstring for the fdtgrep *Bintool* module which
+> actually doesn't support most of the arguments specified here. So I
+> would say it's more confusing to have it there than not have anything.
+> For sure we want to keep documentation of fdtgrep, the tool as in
+> tools/fdtgrep.c, complete and up-to-date!
+
+Ah yes, I just generated it directly from fdtgrep. So perhaps we
+should have no argument docs here and just mention what the bintool
+actually supports / uses?
+
+Regards,
+Simon
