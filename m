@@ -4,94 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A1E0FF885A
-	for <u-boot@archiver.kernel.org>; Tue,  5 May 2026 02:44:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB3B6CD13DA
+	for <u-boot@archiver.kernel.org>; Tue,  5 May 2026 03:33:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EF5BB84884;
-	Tue,  5 May 2026 04:44:01 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 0FE9684683;
+	Tue,  5 May 2026 05:33:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="r2LPsScd";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="pJTpwjJy";
+	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="AALigvjx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2B2AC8486A; Tue,  5 May 2026 04:44:00 +0200 (CEST)
-Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
+ id 663278468B; Tue,  5 May 2026 05:33:57 +0200 (CEST)
+Received: from mx.nabladev.com (mx.nabladev.com [178.251.229.89])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 834EF84866
- for <u-boot@lists.denx.de>; Tue,  5 May 2026 04:43:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7564F839A8
+ for <u-boot@lists.denx.de>; Tue,  5 May 2026 05:33:55 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=nabladev.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp202.mailbox.org (smtp202.mailbox.org
- [IPv6:2001:67c:2050:b231:465::202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4g8jWc5GXCz9tKj;
- Tue,  5 May 2026 04:43:56 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1777949036;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=SpsXJ8DSLOAbOjiubTrhA2gOlZC4QBroMHb+Ww77DtQ=;
- b=r2LPsScdZRH2PwSEV8KLKwRN2MKGEfqnEQDda9P6i0IKG1ocpQOvemWwylTZNW3lX98axD
- nS4+axBZbRQ+oWEXIjrnXaGXLKVOYbgtEYI68DRG++ujCbLtcHI8nocEhIoq/+3mI05EuL
- dRxwnFtqAfSL0/9mAR4DfP7e3lAySgx1RRcxwUDXrlx5j4x9zQrEYOdDRPq7zPyOcjF87g
- D1ffxgxkx3pcgegElb5eIjBLXRtsUTvHvPOl1GWYkVSWKl+N2Vj1Nr2CpvG+zDXiem6xNH
- ZaUV0Wtw5FlGOrvovT9azO/gDFIZq4EdUCfiy9dWNENvcHNpWuTy6s77OQE6xw==
-Authentication-Results: outgoing_mbo_mout;
- dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=pJTpwjJy;
- spf=pass (outgoing_mbo_mout: domain of marek.vasut@mailbox.org designates
- 2001:67c:2050:b231:465::202 as permitted sender)
- smtp.mailfrom=marek.vasut@mailbox.org
-Message-ID: <fca7dd0f-1037-4b9a-aff9-a490bb1639fb@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1777949035;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=SpsXJ8DSLOAbOjiubTrhA2gOlZC4QBroMHb+Ww77DtQ=;
- b=pJTpwjJy4Yup+i2XS5c5mS9PGZkHHyDc/uF7scAdtQhzntdhOPieqcYue/T5H5jmG6aMhU
- FWY0yA06moi3T1JyxkPPa7k3uiF0LF2S1gS0kv8CJZ6/Na1gxn5iOoAr3f/wojLyMK2N8a
- Cfm/01V/rEQehSkTGUv0f1hKdbsjApGdcddR2WzT3DZpXpt1TR6gblOe+QaYu66zipDyXO
- 6A+qdSiK4YBzcECG1lqnLXN8ivmQT1cWAAjS4afNRpAhtLR6RWWem99FGHWpa29vzhwPes
- rD3v07obVHaglgO73lhm9rTCjXbfSVXnj8fw3vA8QwfewMcQSJC3Ba15Fw8MGg==
-Date: Tue, 5 May 2026 04:43:48 +0200
+ spf=pass smtp.mailfrom=marex@nabladev.com
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 642AA1155E6; Tue,  5 May 2026 05:33:50 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
+ s=dkim; t=1777952034;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:content-language:in-reply-to:references;
+ bh=+RjAwTHGYmjvkJ6tAV9oDV/gQL9M9+mLwqIgqCRrtjA=;
+ b=AALigvjxbBhNJNB0qKcoVrRws3WFuzCNMuhYD00QicLoAGrZ5CuWNhIgaymrHGYQKBKlQd
+ bJid8TmO2jDWCd1fPstAW/PMKRhR0gfoDTTcJ56i0efC6NHMjyULgJyWAv5ecc9Icg7b33
+ bUVjuhX6YnMkPF3o4HXjxQuMID3DtWFxiKvyxq/Mut3fwbmBvUlRTpI8PwuOOJLW0e1j0R
+ iO9zGBvgEQ/fvUJw5N8wHsah9X8nVx0/e7Xm6eV4i1CwgbZJCEabbQhqdsR4ADBQsNvoK6
+ 7h3Ypkm6Rn+B+c2SU7zK6o72mGhr24WBh+jt0zns4z+EjT7LHHoFJyzkX/jvhw==
+Message-ID: <a9e75ef1-a4b4-4d5c-bca5-3a3d233417a1@nabladev.com>
+Date: Mon, 4 May 2026 21:12:32 +0200
 MIME-Version: 1.0
-Subject: Re: [PATCH 00/13] iMX8M: Covert to OF_UPSTREAM
-To: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@lists.denx.de,
- kernel@puri.sm, u-boot@dh-electronics.com
-Cc: Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>,
- Tom Rini <trini@konsulko.com>, "Lukas F. Hartmann" <lukas@mntre.com>,
- Patrick Wildt <patrick@blueri.se>, Ye Li <ye.li@nxp.com>,
- Frieder Schrempf <frieder.schrempf@kontron.de>,
- Benjamin Hahn <B.Hahn@phytec.de>, Alice Guo <alice.guo@nxp.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Marco Franchi <marcofrk@gmail.com>, Alifer Moraes <alifer.wsdm@gmail.com>,
- Angus Ainslie <angus@akkea.ca>, Heiko Thiery <heiko.thiery@gmail.com>,
- Olaf Mandel <o.mandel@menlosystems.com>,
- Jagan Teki <jagan@amarulasolutions.com>,
- Matteo Lisi <matteo.lisi@engicam.com>,
- Manoj Sai <abbaraju.manojsai@amarulasolutions.com>,
- Emanuele Ghidoli <emanuele.ghidoli@toradex.com>,
- Parth Pancholi <parth.pancholi@toradex.com>, Peng Fan <peng.fan@nxp.com>
-References: <20260425-imx8m-of-upstream-v1-0-07527be92e5d@nxp.com>
+User-Agent: Mozilla Thunderbird
+From: Marek Vasut <marex@nabladev.com>
+Subject: Re: [PATCH] env: mmc: Use correct eMMC HW partition size when
+ calculating end of HW partition
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de, Jaehoon Chung <jh80.chung@samsung.com>,
+ Jasper Orschulko <jasper@fancydomain.eu>,
+ Joe Hershberger <joe.hershberger@ni.com>, Michael Heimpold
+ <mhei@heimpold.de>, Michael Walle <mwalle@kernel.org>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, Peng Fan
+ <peng.fan@nxp.com>, Tom Rini <trini@konsulko.com>
+References: <20260429121324.391457-1-marex@nabladev.com>
+ <CAFLszTh8=H20tPnhym5CHsVSVg1LFcxeHLovd0VMVRYsiArmrQ@mail.gmail.com>
 Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20260425-imx8m-of-upstream-v1-0-07527be92e5d@nxp.com>
+In-Reply-To: <CAFLszTh8=H20tPnhym5CHsVSVg1LFcxeHLovd0VMVRYsiArmrQ@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: a2baf2bf967a2eab4d8
-X-MBO-RS-META: eib5m1cjaisy4jjg5fygwyo865j3ns9z
-X-Rspamd-Queue-Id: 4g8jWc5GXCz9tKj
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,47 +75,74 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 4/25/26 2:36 AM, Peng Fan (OSS) wrote:
-> This is an effort to convert i.MX8M Boards to OF_UPSTREAM.
+On 5/4/26 2:22 PM, Simon Glass wrote:
+
+Hello Simon,
+
+>> diff --git a/env/mmc.c b/env/mmc.c
+>> @@ -239,8 +239,12 @@ __weak int mmc_get_env_addr(struct mmc *mmc, int copy, u32 *env_addr)
+>>                return -ENOENT;
+>>        }
+>>
+>> -     if (offset < 0)
+>> -             offset += mmc->capacity;
+>> +     if (offset < 0) {
+>> +             if (CONFIG_ENV_MMC_EMMC_HW_PARTITION)
+>> +                     offset += mmc->capacity_boot;
+>> +             else
+>> +                     offset += mmc->capacity;
+>> +     }
 > 
-> The only left one for i.MX8MQ is:
-> imx8mq-cm.dts
+> Just to clarify the motivation: every caller of mmc_get_env_addr()
+> goes through init_mmc_for_env(), which calls mmc_set_env_part_init()
+> -> blk_select_hwpart_devnum() -> mmc_switch_part() ->
+> mmc_set_capacity(). After that switch mmc->capacity should already
+> equal mmc->capacity_boot when CONFIG_ENV_MMC_EMMC_HW_PARTITION is 1 or
+> 2. Can you describe the path where mmc->capacity is still
+> capacity_user here? Perhaps the fix belongs instead in the
+> partition-switch path?
+
+The mmc_get_env_addr() is a public function, you can not predict the 
+caller, so it should return the correct offset no matter which eMMC HW 
+partition is selected.
+
+>> diff --git a/env/mmc.c b/env/mmc.c
+>> @@ -239,8 +239,12 @@ __weak int mmc_get_env_addr(struct mmc *mmc, int copy, u32 *env_addr)
+>> +             if (CONFIG_ENV_MMC_EMMC_HW_PARTITION)
+>> +                     offset += mmc->capacity_boot;
+>> +             else
+>> +                     offset += mmc->capacity;
 > 
-> The left ones for i.MX8MM are:
-> imx8mm-cl-iot-gate-optee.dts
-> imx8mm-cl-iot-gate.dts
-> imx8mm-phg.dts
-> 
-> The left ones for i.MX8MP are:
-> imx8mp-msc-sm2s.dts
-> imx8mp-rsb3720-a1.dts
-> 
-> These board dts are not in upstream Linux, need give a look to upstream these
-> dts to linux, then move to OF_UPSTREAM.
-> 
-> I checked all the board dts, but I not have the board to test, best effort on
-> this patchset, but this change might break boards. I would appreciate board
-> maintainers to help test.
-> 
-> Signed-off-by: Peng Fan <peng.fan@nxp.com>
-> ---
-> Peng Fan (13):
->        imx8mq: reform2: Switch to OF_UPSTREAM
->        imx8mq: phanbell: Switch OF_UPSTREAM
->        imx8mq: pico: Switch OF_UPSTREAM
->        imx8mq: librem5: Switch to OF_UPSTREAM
->        imx8mq: kontron-pitx-imx8m: Switch OF_UPSTREAM
->        imx8mq: Drop arch/arm/dts/imx8mq.dtsi
->        imx8mm: mx8menlo: Switch OF_UPSTREAM
->        imx8mm/n: Drop unused dtsi
->        imx8mm: data-modul-edm-sbc: Switch OF_UPSTREAM
->        imx8mm: icore-mx8mm: Switch to OF_UPSTREAM
->        imx8mp: dhcom-drc02/picoitx: Switch to OF_UPSTREAM
->        imx8mp: data-modul-edm-sbc: Switch to OF_UPSTREAM
->        imx8mp: icore-mx8mp-edimm2.2: Switch to OF_UPSTREAM
-I have the DH, Data Modul, Menlo boards on my list of boards to switch 
-to OF_UPSTREAM , but I did not get to test the result on real hardware 
-yet. I would very much prefer to avoid switching them to OF_UPSTREAM 
-without any testing on real hardware as that could cause unforeseen 
-breakage, so please either wait with applying those patches until I can 
-test them, or drop those patches from this series for now. Thank you.
+> This seems to do the wrong thing for
+> CONFIG_ENV_MMC_EMMC_HW_PARTITION=3 (RPMB)
+
+I don't think we support env in eMMC RPMB . Also, 
+CONFIG_ENV_MMC_EMMC_HW_PARTITION=3 would be GP0 , not RPMB, which we 
+also do not support.
+
+> - it picks capacity_boot
+> when capacity_rpmb is meant. The Kconfig is a plain int with no upper
+> bound, so this is reachable. If you want to keep the explicit
+> dispatch, you could key it off mmc_get_blk_desc(mmc)->hwpart so all
+> partition kinds (user/boot/rpmb) fall out correctly. What do you
+> think?
+
+I could special-case it this way:
+
+"
+         if (offset < 0) {
+-               if (CONFIG_ENV_MMC_EMMC_HW_PARTITION)
++               if (CONFIG_ENV_MMC_EMMC_HW_PARTITION == 1 ||
++                   CONFIG_ENV_MMC_EMMC_HW_PARTITION == 2) {
+                         offset += mmc->capacity_boot;
+-               else
++               } else if (CONFIG_ENV_MMC_EMMC_HW_PARTITION >= 3 ||
++                          CONFIG_ENV_MMC_EMMC_HW_PARTITION <= 6) {
++                       offset += 
+mmc->capacity_gp[CONFIG_ENV_MMC_EMMC_HW_PARTITION - 3];
++               } else {
+                         offset += mmc->capacity;
++               }
+         }
+"
+[...]
