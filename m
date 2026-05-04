@@ -4,114 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17AFBFF885A
-	for <u-boot@archiver.kernel.org>; Mon,  4 May 2026 19:00:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5241CD3427
+	for <u-boot@archiver.kernel.org>; Mon,  4 May 2026 19:05:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7A417846E6;
-	Mon,  4 May 2026 20:58:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id CFDA5846A1;
+	Mon,  4 May 2026 21:05:37 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="wsP90C4B";
+	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="KH9EQrXk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D0B35846E6; Mon,  4 May 2026 20:58:05 +0200 (CEST)
-Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
- [IPv6:2a00:1450:4864:20::42c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 4EAFF8467B; Mon,  4 May 2026 21:05:37 +0200 (CEST)
+Received: from mx.nabladev.com (mx.nabladev.com [178.251.229.89])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2BD9A846E9
- for <u-boot@lists.denx.de>; Mon,  4 May 2026 20:58:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 39D8984699
+ for <u-boot@lists.denx.de>; Mon,  4 May 2026 21:05:34 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=nabladev.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wr1-x42c.google.com with SMTP id
- ffacd0b85a97d-43fe3e22e33so2452205f8f.0
- for <u-boot@lists.denx.de>; Mon, 04 May 2026 11:58:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1777921081; x=1778525881; darn=lists.denx.de;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=S/7DcN5oXldjQ2j9sj9vg3PcG/T/e1DxcbxwoH5+uJs=;
- b=wsP90C4BPI2MgmAfcn9ij/iUwYJrpCJXrdIl4BiJYq66B9vrpqGom6Ez23QOHNSHTs
- FIm4czQQM0s/Iby2ijSlqpjPooj3GE+Z+QsohNRueBztYD3/LLwlRgVEVJAfTRQKg0CZ
- U1o8dcnd2EMoXCXHfsXcK0Zz47tY6g9YlyDPkcJK5kIVe95jBjI95AncA8U29Q8ZMerr
- 6bM3z01z8Nf+MT05kKxUSG/KLf4qUSq3GN34orOfHN7PT8ffixei0WWquG6yOz6iC6xW
- zIe4TM+N5WhEZoLGvWbe2c9dVt7jVfTBT3q5IrdHMmznql3mzbrP4qnb076prRxtV2Ph
- V1Dw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777921081; x=1778525881;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=S/7DcN5oXldjQ2j9sj9vg3PcG/T/e1DxcbxwoH5+uJs=;
- b=mNeTYQN+hESqMvSvkhjXrFkz9/tq7ymsyn3FmiyJCHC0SklTHfTxPawFGy8k6EGZrU
- MGfL1Qq1UXNAOb/F10wFdiC+rdjFgLGLa7ObDTMulzn+uyYQbDGeQSKsJdNsvVGG3nTl
- wpUDm/bCX+7j4HZwAgISYXuYDCAm4bYkEuXhW2iKi8KGnk0ohBhvNpvhKDTZyQBsBDKr
- +r64vcqCHCm7gGIo+vTeqn8nUKdLEdR2rA6Y4Wln1pvnrhe5veh4zeTv0Jr5NmQXVDpY
- tFhDw4FtRKhCkmBm9eSTeXvFunH07ihbFoMCqezRy3N5mWi48rXR0n0GqvNHYlOyiwip
- er9g==
-X-Gm-Message-State: AOJu0Yy+NhnrIOSD8eUE8CiicR759HlNR9hjzPFITwnuo191ay+gxDHA
- ILojlp346zsaouy8+ZnQMnOJYIJR9UlSQoNZW2Gmn068RSPBT6eiGfg9lZ+EZ4GPeRo=
-X-Gm-Gg: AeBDieucAHne4y1Y3niokmNb+1echemM7dUDnTWObmkxGyuFpBDIuoHVUsP7HQ+QLri
- Su9QYxPuYBBU5MCGt8CdaO23/3cTWFMURrAmXPb5A9WtsWCs9gjpoGQA+UD+XWEHCppC9ghuUN4
- ZkDl/vyw6Z67g0pmJF85ejUzJuzNcHTgZSF2WBLTBu4myzoseHk8RP2O0PLa/EpSmMKyLBKdzLL
- YI7tEP3LYu0geEbrCNzqooGQuQCAFZJI4daoMdxqrP+Pan9B64vh0Eeo7+8Wcb6P1ffZ+7iBEt6
- hix35jZfSAGtEaBXPOTVpo4PsfKLCSpP9XAYN6wKrwnR0YulqJEEsyyp/iBhyM5l0mHLs7tWzMa
- vCftN1mGgoubCkMz2MKGxEFOCYVxMyUHUwq7vfAo/VNvvwQrPhPQlTX3G1sq744sZpy6hx+9D4p
- 6njE5ZPrBu+s8wGm4oIwAPhTyrjqPMKWzsK4NMhx/vSV0RgfJBjHbvfLadsfFpZFKQBeDi2KlkA
- fZbNdg=
-X-Received: by 2002:a05:6000:612:b0:43d:7403:4b65 with SMTP id
- ffacd0b85a97d-45003bf2d75mr289855f8f.6.1777921081580; 
- Mon, 04 May 2026 11:58:01 -0700 (PDT)
-Received: from lion.localdomain (p4fc3dd86.dip0.t-ipconnect.de.
- [79.195.221.134]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-4500f9c2cd5sm2861f8f.23.2026.05.04.11.58.00
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 04 May 2026 11:58:01 -0700 (PDT)
-From: Casey Connolly <casey.connolly@linaro.org>
-Date: Mon, 04 May 2026 20:57:43 +0200
-Subject: [PATCH v2 15/15] configs: add qcom_sm8650_defconfig and debug fragment
+ spf=pass smtp.mailfrom=marex@nabladev.com
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 79F3A1125D6; Mon,  4 May 2026 21:05:32 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
+ s=dkim; t=1777921533; h=from:subject:date:message-id:to:cc:mime-version:
+ content-transfer-encoding; bh=SWsHGGsC3mSRPZ7V4KCvoOwjb9R0XwwMCBLG4uUiYMQ=;
+ b=KH9EQrXkOhHVfA0od+TFUzy8WMPhrfhvNg9n8sAChGM+hmg8UE8/dwSfEYSSWEB6ij4CO5
+ 4QIeqOg7W5MFE1Dhu37dHs+hydMQZziioKkmqFhaaSq0Jef+jzGte4WHJJzkUUrVI8jK5R
+ KdGdoW8yJbxCgrHycQveimz5yJf6KD2eLehN8IT56Y/7Q3jI/9ahzk/LxP1c8eawsJv/8w
+ 3l2Xa5LTrL+7L9qHzf/j0PbqHd2Drf5SnXFbQ8nho2un9EWgoRLo4ApA2EduyNsHPh64o9
+ 9s3WurvjYc3obDuFLrs+q6Q9JHqhlBfNGiJj7fz7GqxJNqYAzLRSmb7keYfeUA==
+From: Marek Vasut <marex@nabladev.com>
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marex@nabladev.com>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v4] binman: add CST backend selection for i.MX8M signing
+Date: Mon,  4 May 2026 21:04:59 +0200
+Message-ID: <20260504190531.103295-1-marex@nabladev.com>
+X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260504-b4-modernise-smem-v2-15-c01ec2ff3886@linaro.org>
-References: <20260504-b4-modernise-smem-v2-0-c01ec2ff3886@linaro.org>
-In-Reply-To: <20260504-b4-modernise-smem-v2-0-c01ec2ff3886@linaro.org>
-To: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>, 
- u-boot-qcom@groups.io
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
- Casey Connolly <casey.connolly@linaro.org>, Peng Fan <peng.fan@nxp.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Alice Guo <alice.guo@nxp.com>, Quentin Schulz <quentin.schulz@cherry.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>, 
- Kuan-Wei Chiu <visitorckw@gmail.com>, 
- Raymond Mao <raymond.mao@riscstar.com>, 
- Stefan Roese <stefan.roese@mailbox.org>, 
- Philip Molloy <philip.molloy@analog.com>, 
- Jerome Forissier <jerome.forissier@arm.com>, 
- Marek Vasut <marek.vasut@mailbox.org>, 
- Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>, 
- Patrice Chotard <patrice.chotard@foss.st.com>, 
- Aswin Murugan <aswin.murugan@oss.qualcomm.com>, 
- Rasmus Villemoes <ravi@prevas.dk>, Heiko Schocher <hs@nabladev.com>, 
- Michal Simek <michal.simek@amd.com>, Sughosh Ganu <sughosh.ganu@arm.com>, 
- Antony Kurniawan Soemardi <linux@smankusors.com>, 
- Luca Weiss <luca.weiss@fairphone.com>, 
- Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-X-Mailer: b4 0.16-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1368;
- i=casey.connolly@linaro.org; h=from:subject:message-id;
- bh=nJSqQlQgYIDyVV4sMBRSZ6oNXxk3DOKau1HlGQElwc0=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhswfb+TnBPS8nmiUGOKoJvGT6ddhX4EMl5WWL9n9pZpzI
- uUmvLzUUcrCIMjBICumyCJ+Ypll09rL9hrbF1yAmcPKBDKEgYtTACZyOJCRYavRQg6OLbN+7lcx
- /KAfYG14PXLeb5nWrTvMVGM7rh/3f8Twz/4723OnhWfWTXidy3Dr8ptry03XFMV1zvtyR9+Nm/F
- S7y8A
-X-Developer-Key: i=casey.connolly@linaro.org; a=openpgp;
- fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
+Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -128,49 +63,114 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a defconfig for running on sm8650 as the first stage bootloader and
-associated debug config fragment.
+Add support for setting the CST backend, both via DT property and
+CST_BACKEND environment variable. The CST currently supports two
+backends, 'ssl' and 'pkcs11', with 'ssl' being the default when
+CST tool is invoked without any -b parameter. Keep 'ssl' backend
+as the default, but explicitly pass it via the '-b' parameter,
+unless the user selects 'pkcs11' via either method.
 
-Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
+Signed-off-by: Marek Vasut <marex@nabladev.com>
 ---
- board/qualcomm/debug-sm8650.config |  5 +++++
- configs/qcom_sm8650_defconfig      | 16 ++++++++++++++++
- 2 files changed, 21 insertions(+)
+Cc: Alper Nebi Yasak <alpernebiyasak@gmail.com>
+Cc: Simon Glass <sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+---
+V2: Fill in documentation for all used DT properties
+V3: Fill third copy of documentation into nxp_imx8mcst.py
+V4: Rebase and resend
+---
+ doc/imx/habv4/guides/mx8m_spl_secure_boot.txt | 30 ++++++++++++-------
+ tools/binman/etype/nxp_imx8mcst.py            | 19 +++++++++++-
+ 2 files changed, 37 insertions(+), 12 deletions(-)
 
-diff --git a/board/qualcomm/debug-sm8650.config b/board/qualcomm/debug-sm8650.config
-new file mode 100644
-index 000000000000..8323bf25e9c1
---- /dev/null
-+++ b/board/qualcomm/debug-sm8650.config
-@@ -0,0 +1,5 @@
-+CONFIG_DEBUG_UART=y
-+CONFIG_DEBUG_UART_ANNOUNCE=y
-+CONFIG_DEBUG_UART_BASE=0x89c000
-+CONFIG_DEBUG_UART_MSM_GENI=y
-+CONFIG_DEBUG_UART_CLOCK=14745600
-diff --git a/configs/qcom_sm8650_defconfig b/configs/qcom_sm8650_defconfig
-new file mode 100644
-index 000000000000..e0a82c460337
---- /dev/null
-+++ b/configs/qcom_sm8650_defconfig
-@@ -0,0 +1,16 @@
-+# Configuration for building U-Boot to be flashed
-+# to the uefi partition of QCM6490 dev boards with
-+# the "Linux Embedded" partition layout (which have
-+# a dedicated "uefi" partition for edk2/U-Boot)
+diff --git a/doc/imx/habv4/guides/mx8m_spl_secure_boot.txt b/doc/imx/habv4/guides/mx8m_spl_secure_boot.txt
+index 1bea091344d..a3ebd397d82 100644
+--- a/doc/imx/habv4/guides/mx8m_spl_secure_boot.txt
++++ b/doc/imx/habv4/guides/mx8m_spl_secure_boot.txt
+@@ -167,17 +167,25 @@ The nxp-imx8mcst etype is configurable using either DT properties or environment
+ variables. The following DT properties and environment variables are supported.
+ Note that environment variables override DT properties.
+ 
+-+--------------------+-----------+------------------------------------------------------------------+
+-| DT property        | Variable  | Description                                                      |
+-+====================+===========+==================================================================+
+-| nxp,loader-address |           | SPL base address                                                 |
+-+--------------------+-----------+------------------------------------------------------------------+
+-| nxp,srk-table      | SRK_TABLE | full path to SRK_1_2_3_4_table.bin                               |
+-+--------------------+-----------+------------------------------------------------------------------+
+-| nxp,csf-crt        | CSF_KEY   | full path to the CSF Key CSF1_1_sha256_4096_65537_v3_usr_crt.pem |
+-+--------------------+-----------+------------------------------------------------------------------+
+-| nxp,img-crt        | IMG_KEY   | full path to the IMG Key IMG1_1_sha256_4096_65537_v3_usr_crt.pem |
+-+--------------------+-----------+------------------------------------------------------------------+
+++--------------------+-------------+------------------------------------------------------------------+
++| DT property        | Variable    | Description                                                      |
+++====================+=============+==================================================================+
++| nxp,loader-address |             | SPL base address                                                 |
+++--------------------+-------------+------------------------------------------------------------------+
++| nxp,srk-table      | SRK_TABLE   | full path to SRK_1_2_3_4_table.bin                               |
+++--------------------+-------------+------------------------------------------------------------------+
++| nxp,csf-crt        | CSF_KEY     | full path to the CSF Key CSF1_1_sha256_4096_65537_v3_usr_crt.pem |
+++--------------------+-------------+------------------------------------------------------------------+
++| nxp,img-crt        | IMG_KEY     | full path to the IMG Key IMG1_1_sha256_4096_65537_v3_usr_crt.pem |
+++--------------------+-------------+------------------------------------------------------------------+
++| nxp,fast-auth      |             | enable fast authentication method                                |
+++--------------------+-------------+------------------------------------------------------------------+
++| nxp,srk-crt        | SRK_KEY     | full path to the SRK Key SRK1_sha256_4096_65537_v3_ca_crt.pem    |
+++--------------------+-------------+------------------------------------------------------------------+
++| nxp,unlock         |             | unlock CAAM in SPL                                               |
+++--------------------+-------------+------------------------------------------------------------------+
++| nxp,cst-backend    | CST_BACKEND | CST tool backend, default is 'ssl', or selectable 'pkcs11'       |
+++--------------------+-------------+------------------------------------------------------------------+
+ 
+ Environment variables can be set as follows to point the build process
+ to external key material:
+diff --git a/tools/binman/etype/nxp_imx8mcst.py b/tools/binman/etype/nxp_imx8mcst.py
+index dd9f226b751..a10f61aa01f 100644
+--- a/tools/binman/etype/nxp_imx8mcst.py
++++ b/tools/binman/etype/nxp_imx8mcst.py
+@@ -65,6 +65,13 @@ class Entry_nxp_imx8mcst(Entry_mkimage):
+ 
+     Properties / Entry arguments:
+         - nxp,loader-address - loader address (SPL text base)
++        - nxp,srk-table - full path to SRK_1_2_3_4_table.bin
++        - nxp,csf-crt - full path to the CSF Key CSF1_1_sha256_4096_65537_v3_usr_crt.pem
++        - nxp,img-crt - full path to the IMG Key IMG1_1_sha256_4096_65537_v3_usr_crt.pem
++        - nxp,fast-auth - enable fast authentication method
++        - nxp,srk-crt - full path to the SRK Key SRK1_sha256_4096_65537_v3_ca_crt.pem
++        - nxp,unlock - unlock CAAM in SPL
++        - nxp,cst-backend - CST tool backend, default is 'ssl', or selectable 'pkcs11'
+     """
+ 
+     def __init__(self, section, etype, node):
+@@ -90,6 +97,10 @@ class Entry_nxp_imx8mcst(Entry_mkimage):
+                 'SRK_KEY', fdt_util.GetString(self._node, 'nxp,srk-crt',
+                                               f'SRK1_{KEY_NAME}.pem'))
+ 
++        self.backend = os.getenv(
++            'CST_BACKEND', fdt_util.GetString(self._node, 'nxp,cst-backend',
++                                              'ssl'))
 +
-+#include "qcom_defconfig"
+         self.unlock = fdt_util.GetBool(self._node, 'nxp,unlock')
+         self.ReadEntries()
+ 
+@@ -161,8 +172,14 @@ class Entry_nxp_imx8mcst(Entry_mkimage):
+         with open(cfg_fname, 'w') as cfgf:
+             config.write(cfgf)
+ 
++        # SSL is the default backend, PKCS11 backend is optional
++        if self.backend == "pkcs11":
++            cst_backend = "pkcs11"
++        else:
++            cst_backend = "ssl"
 +
-+# Otherwise buildman thinks this isn't an ARM platform
-+CONFIG_ARM=y
-+
-+# Address where U-Boot will be loaded
-+CONFIG_TEXT_BASE=0xa7000000
-+CONFIG_REMAKE_ELF=y
-+
-+CONFIG_DEFAULT_DEVICE_TREE="qcom/sm8650-hdk"
-+
-
+         output_fname = tools.get_output_filename(f'nxp.csf-output-blob.{uniq}')
+-        args = ['-i', cfg_fname, '-o', output_fname]
++        args = ['-i', cfg_fname, '-o', output_fname, '-b', cst_backend]
+         if self.cst.run_cmd(*args) is not None:
+             outdata = tools.read_file(output_fname)
+             # fixme: 0x2000 should be CONFIG_CSF_SIZE
 -- 
 2.53.0
 
