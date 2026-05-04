@@ -4,52 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8E09CD3423
-	for <u-boot@archiver.kernel.org>; Mon,  4 May 2026 07:11:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5570FF885A
+	for <u-boot@archiver.kernel.org>; Mon,  4 May 2026 07:43:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 52D7F84255;
-	Mon,  4 May 2026 09:11:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=siemens.com
+	by phobos.denx.de (Postfix) with ESMTP id 4F9AA84255;
+	Mon,  4 May 2026 09:43:57 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=siemens.com header.i=ludwig.nussel@siemens.com header.b="JO4Gr7d5";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ntgJPh4q";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2728B8432A; Mon,  4 May 2026 09:11:24 +0200 (CEST)
-Received: from mta-64-228.siemens.flowmailer.net
- (mta-64-228.siemens.flowmailer.net [185.136.64.228])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 6EA5F8432A; Mon,  4 May 2026 09:08:18 +0200 (CEST)
+Received: from mail-yx1-xb12f.google.com (mail-yx1-xb12f.google.com
+ [IPv6:2607:f8b0:4864:20::b12f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 043DC83EF9
- for <u-boot@lists.denx.de>; Mon,  4 May 2026 09:11:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4C58183EF9
+ for <u-boot@lists.denx.de>; Mon,  4 May 2026 09:08:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=siemens.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ludwig.nussel@siemens.com
-Received: by mta-64-228.siemens.flowmailer.net with ESMTPSA id
- 2026050407112088b69a3dae0002070e for <u-boot@lists.denx.de>;
- Mon, 04 May 2026 09:11:20 +0200
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm2;
- d=siemens.com; i=ludwig.nussel@siemens.com;
- h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
- bh=LThfucZeKYpC6YnkyVKLCVOU0TXulTxDPwfmAtb+AoE=;
- b=JO4Gr7d58v5b5HqPPaqMt+8gF9HuerOmoS7lc2Ea8ASxjP5t/X6cbPQtt+vabC4PjTysse
- zK/kXeO0/yIkVFnp2D8OabxcvJcaUU2hIW+tVKYtqxpEW/TSDlweKDvyxf/zOSNGbvg4vVeQ
- 6rLDjMXE6ULBk+T6MJVV5fqQ1yb93pT4iY/KIBGdAYGfmVz54RLntBkq66Pk3jYWG+0+Tuyq
- Tu0yzf/jPn/PPBD2kcUFGF2ds8DRm0mkO21baL6SAuydW7DE+vN+LHzERswwNf0bJgTxnrW6
- VyDobjfYgr+z/52XCFgYoRLz+39A2v99Dz0F910FuPj7nYKqTn9kkR7Q==;
-From: Ludwig Nussel <ludwig.nussel@siemens.com>
-To: u-boot@lists.denx.de
-Cc: Ludwig Nussel <ludwig.nussel@siemens.com>, Bin Meng <bmeng.cn@gmail.com>,
- Daniel Palmer <daniel@thingy.jp>, Kuan-Wei Chiu <visitorckw@gmail.com>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2] virtio: fix boot device hunting in qemu with virtio
-Date: Mon,  4 May 2026 09:10:23 +0200
-Message-ID: <20260504091023.v2.1.d2ced6516d3db067379940b538830e60968dbf6c@changeid>
+ spf=pass smtp.mailfrom=matteo.guglielmi@gmail.com
+Received: by mail-yx1-xb12f.google.com with SMTP id
+ 956f58d0204a3-64eb84d1e37so2747016d50.2
+ for <u-boot@lists.denx.de>; Mon, 04 May 2026 00:08:16 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1777878495; cv=none;
+ d=google.com; s=arc-20240605;
+ b=RizACS9bSCd1igZQpszN+rJ9Eil90NZ1T8AcPPIPctJABwtImZejK6PzceF07u161L
+ O0AfST9tUExOK7zpL61NbuVoeFoQ/RYeX+y+B4Egu80kk54pvQecPithdGo8VhGcghZW
+ EfLOr6P3dZ9NJ/SB3HrdotDzMi8hFWAYLG5DQYvFOHse2Pz7u/IewFmLCW8oqO81Fe6Y
+ H2TrZfiyiDFrvPb+9brUs/VcJ44hYIQi+8JD5MHEDTwy1bmFtaCgcLJCUt+AHhgOv0/1
+ JYd7EBz1b3qdnxPXTlNprmCBoFvfinlG2a4ee8jGmy7RlR9CFLP61WEZ2Y/rRhjQ+Gy7
+ Aehw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=to:subject:message-id:date:from:mime-version:dkim-signature;
+ bh=cwUb1FWUWw5StYQcqEipWiWNvKV0Pc6TQcFw25SGokA=;
+ fh=ea3Lb1kmqTyoSSOGd3r79PdCdfQHXBjS15GzGXd6hwE=;
+ b=FR4TXaCbJFiIwDPlfmbIjw7OPxTRdTJodCjO0Uim4Vu2WP44DX2FJhg5ne53E+YdRr
+ Q+h8ADoK1nIHQurrDoFURVBjmfRYP9/FAfXGB1TX0e1ZklcycKl2mbTrDx7t8da+Qe/t
+ 8CK1m9JRiUNIs7xYx8wRQRZLSenJx4vKUa+7zTiUgM4EWqqOPI6ByQTzeKHhiYuvV4AN
+ FXcaXFeOhvYneQkMGpXSBN66dbPq1oqecYLDl/Ow3fwIHCPexFcrVk+OKi61JcE3YDEf
+ NnKT8+9IB8gCTWrOz0QoafaEPYwe0lteMYYJ5lF+vT/zugrcf7OY5pzzJnOjWDMq8isx
+ +U7A==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1777878495; x=1778483295; darn=lists.denx.de;
+ h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=cwUb1FWUWw5StYQcqEipWiWNvKV0Pc6TQcFw25SGokA=;
+ b=ntgJPh4qwInkC4jyf0ApvhNWqyEMSJmTZXOQREgM57ViE3MND2DSi5+Gk425apPf70
+ 2VAYvTCA5pG1Z0v2gRZZaHfuBtZhvyHaGTtIvy4uOy7cO3kDsnMzTuSMrlL5i5xgQZmj
+ H7X515CPbxeziq2q68SLMvP41rebtw7vvlXRChh53Myz7ze25jAhz86srkcT7QOyMF8g
+ FktaNtYT0HsGMA3ozsm0LiFjifgZBdLMT7vr9SjAws97wCg7MVTOgCqYNHXmtTY/cjQg
+ poIsoeD78Kb4mGSbwgfC7oNdPeYtyUPJta1DSGk03ME/QZ+vpuwvMufID/hk3K0FavAQ
+ Wnpg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1777878495; x=1778483295;
+ h=to:subject:message-id:date:from:mime-version:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=cwUb1FWUWw5StYQcqEipWiWNvKV0Pc6TQcFw25SGokA=;
+ b=FsdWQ98h8YPchvvpOgBX2zE801MqA9GpAmeXcY1WYO9a/menEEJ2EW8nngLVMkETF0
+ qxp7E9I9Gv2lz9BFbrmq+yaLjXj8+DnNofIKEMhexa+VUYag1gggmgqk+n2SDjwoh0i6
+ EknAQry7LJzOLUv4WzI83rl/wJjjnpgwUXIDLDwt36ydlR7UC2Y4aBwVqbSxijCIY8ek
+ 3L4VV8PwlGGqByIN3g8UPymmjL2Nf24wQbJvc/hfjl4x6mHS69By3rvwrcfKIFOfp15x
+ IkMiMalFi1koXzdwqLs4SwtaIV7k5wMfy8N0MZEo17dq9CyHsATSBNLmkiYIaZD5lIPt
+ UF2w==
+X-Gm-Message-State: AOJu0YxvBuYeKs4UG/AVPXFEQVBLjvzfbc9PexejYp5mBIDHzUtWBT9v
+ wabxWPmVYtPiw/vik6t4W8AljT81/N2DdsrvjcQUubGtzFlzJNrqGX/wmViCT8oD+IoaCdZO4a5
+ 7WAWdAQZU7dCb+mwlAEY7HfcFcdRLLX9FJkoxkFU=
+X-Gm-Gg: AeBDieuGmY9MAlz1ywAnbPU8S0cgzmCJJXkvDhRE8JntpCGRUSFnOE+3p5qihcHJhHQ
+ MHd72iWOJiWbG83MrFvSGoLmOa6TI2kqNg+Uyz/gkATYD4q4XBW/PEObSgLJFbTtONEon4oAybg
+ UYXKofKFXwNHPMhWCyS2gi7OP9P5/i3ayyMAqST32fxlexz2sGi6ZEGXe2DhACgoQ2ylVA15z77
+ P2U0uHTpU6PaFIveBiw5zi3LNYjdzuG3dhrlVFYbcKso+BMzhxTLI9REQcoHTKOQ2ZLJSp8/hwj
+ QNXPjbfMJQJNCpSzxLKx
+X-Received: by 2002:a05:690e:1c08:b0:64e:e896:a86 with SMTP id
+ 956f58d0204a3-65c3db39b1dmr8751137d50.36.1777878495033; Mon, 04 May 2026
+ 00:08:15 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Flowmailer-Platform: Siemens
-Feedback-ID: 519:519-1328817:519-21489:flowmailer
+From: Matteo GUGLIELMI <matteo.guglielmi@gmail.com>
+Date: Mon, 4 May 2026 09:08:03 +0200
+X-Gm-Features: AVHnY4IqBgucdN7i8zcUHjJZX4XB5IQBblrPYrSX51azEQrWHDd25Kue-KnvhpM
+Message-ID: <CABVgzFqe4Wj8DGJHFfwHgYy-As57CnmROXuyOnMhnEBwvJOZdw@mail.gmail.com>
+Subject: Raspberry Pi 4 Model B Revision 1.5 and U-Boot >= 2025.07 stalls
+ issue.
+To: u-boot@lists.denx.de
+X-Mailman-Approved-At: Mon, 04 May 2026 09:43:56 +0200
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -66,39 +109,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Commit 70101c3217ae ("virtio: mmio: Return error codes on probe
-failures") returns -ENODEV where it would return 0 before. That path is
-apparently hit in qemu and breaks boot device discovery
-(virtio_bootdev_hunt() expects only ENOENT). So return -ENOENT in
-that path instead.
-The remaining two error returns in the function are untouched as I
-don't know where they play a role.
+TFTP downloads in U-Boot >= 2025.07 on Raspberry Pi 4 Model B Revision 1.5
+stall during transfer (continuous T output), while the same setup works
+correctly with U-Boot 2025.04.
 
-Signed-off-by: Ludwig Nussel <ludwig.nussel@siemens.com>
+Please note that U-Boot starts correctly, DHCP works, and small TFTP still
+works, but large TFTP stalls (e.g., kernel or initramfs files).
 
----
+On the contrary, Raspberry Pi 4 Model B Revision 1.4 does not have the
+stall issue and can download files correctly up to the latest stable
+version of U-Boot (2026.04).
 
-Changes in v2:
- - return ENOENT in probe()
-
- drivers/virtio/virtio_mmio.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/drivers/virtio/virtio_mmio.c b/drivers/virtio/virtio_mmio.c
-index 62afe609ec0..d90d8309f99 100644
---- a/drivers/virtio/virtio_mmio.c
-+++ b/drivers/virtio/virtio_mmio.c
-@@ -372,7 +372,7 @@ static int virtio_mmio_probe(struct udevice *udev)
- 		 * virtio-mmio device with an ID 0 is a (dummy) placeholder
- 		 * with no function. End probing now with no error reported.
- 		 */
--		return -ENODEV;
-+		return -ENOENT;
- 	}
- 	uc_priv->vendor = readl(priv->base + VIRTIO_MMIO_VENDOR_ID);
- 
--- 
-2.43.0
-
-base-commit: 4433253ecf2041f9362a763bb6cb79960921ac7e
-branch: us-virtio2
+Thank you.
