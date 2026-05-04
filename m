@@ -4,116 +4,139 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6BD1BCD3427
-	for <u-boot@archiver.kernel.org>; Mon,  4 May 2026 15:53:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2211FFF885A
+	for <u-boot@archiver.kernel.org>; Mon,  4 May 2026 16:03:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9BA668464D;
-	Mon,  4 May 2026 17:52:49 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nokia.com
+	by phobos.denx.de (Postfix) with ESMTP id 974A284374;
+	Mon,  4 May 2026 18:03:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=nokia.com header.i=@nokia.com header.b="AWMQ3W5y";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="JuFWunhj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C12708394E; Mon,  4 May 2026 11:37:12 +0200 (CEST)
-Received: from MRWPR03CU001.outbound.protection.outlook.com
- (mail-francesouthazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c207::3])
+ id DBA49845E3; Mon,  4 May 2026 18:03:54 +0200 (CEST)
+Received: from PA4PR04CU001.outbound.protection.outlook.com
+ (mail-francecentralazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20a::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7A61E80F0E
- for <u-boot@lists.denx.de>; Mon,  4 May 2026 11:37:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D448D80F0E
+ for <u-boot@lists.denx.de>; Mon,  4 May 2026 18:03:52 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=nokia.com
-Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=juuso.rinta@nokia.com
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=aZLSajNkZI2bUv5W1wY9w8KhqB0ZbFIpOtrfs5obIaS5+6383rKvHpQFhRtKOw0c8Sua0vinkroXc/0mdLl6LaO1CO65wRaeAiyqLPYAfxTzcqHmbNr9BI4Oaxtti7eDj2UCZo13tFrxKfAs1igL7Gkh9lCZ450ke5H5hCCIP2im+c/WmUORA49qTAOwwqkYnzug/5e8FC2NkWYisTbEdW5t33EdKlLnK+YB1DSBX2XXxA2EbKZD4iumwFYM7/MGLFYp3dTeTWW11XLSBuK+HUwPHn6Oei78n3jK9859TBKaISiGz7kkxVhmBuqQwzPKt1KQJ/PE+hj0ZMihsVbO8g==
+ b=uGLxTxZe34UrfnY5nI43IxNIucU59jF7vAtEpeS9eAhDM2ikXJ0fyLNZhUM5VAHLBqbCkLmbrejfZ/yAp14MsNsUPxweOfvlr3+DrU0EAfpEprXCSif3OAmLvBja59ZGGQlGd0/OzRFM5gPcMHm8OEAGNG6QuUAcZpciywX2Vsdqe4GVb/qsun1XMk92926lVLei1HmD8HbwG1Hcu/g9d4x9zvbX5tY0PkPbJpyFL24OW6ZKHoTT3b0IQmL+XgI+LA7/EKS0Qo2U4Wuuv8ecyanoR4BgAlRkYTFigM+EDvfLs9ixk3KyBcgfLGi25N1PUm5CX7RcRSpUp/Z2SKV1nA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Q7MAYgB+HLBOecQOqUZHr43y3DEOn7301CQ7RoQN/JI=;
- b=XdMAh/gO1SlINhXYCh15qCDda4S4fYsp0CLurehCN+Dx4Juyd83gXaI8ECelByzrYHN+GaXtvv3zvhWCRLMmIIbSSLkAm39obzGyicKh9ptoQTXCQcM8zfwCh3T1eu/phHG0FmAzHRkicHu+CPFy6I1BoUtRgdKw9431/Is4WqZBbrB8Tlb/8iiDXq/0925LPPmGZgK28j69dMNDBKMnrgadlY70wSBrcodGj4hgGARAzpULbxm5UFB6MOfXN9cmMquxFMseBJkmBX/bvBPdjqKiQSHV1EYiG3fUqHbWpULITPWOTJpTkBmBGGiFLWMnJXjSCrr4ljaymfEF5G+bHA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 131.228.6.100) smtp.rcpttodomain=konsulko.com smtp.mailfrom=nokia.com;
- dmarc=pass (p=reject sp=reject pct=100) action=none header.from=nokia.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nokia.com; s=selector1;
+ bh=YMPx2C5HD20wSqEKG6TGrQzhQtA8gLeFQcUYl9cY4iY=;
+ b=j7dU/faJ4nl4ehLhiJZP3SURmNwSaQaWDmYvxbxlL3wglCodrehDpqRpmnM/84TpPdN1ya9fDm9HSwLmxAhLJmmRXdRXP9RFUSwgjwGNKh2gJSx+TpGQ8x/82wi/PD8qFxJBpw2kJglX3TqPJt2/gGmZQam58wZvx0VKjduDtcMqipsgaxeK9GnSilCP9OQVS8eCPqHmgNPjDe1YL4F+HmdxgvJ1t2K9IxxzfzJnGwUth5kMMUI2W+GdM+RYCDJIOTpfZkbEyDsqBwc1YgZD0995isRqDpSaXB5CYIRjnEMOEmuPtJB+JRCDQKK7Q3uAyxn5eGqbZIGYmW+amnGV+A==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Q7MAYgB+HLBOecQOqUZHr43y3DEOn7301CQ7RoQN/JI=;
- b=AWMQ3W5ynlWBT4ft0FJN+hIqF4Hsy3k/JQCijNHjW3+N1+NG4su3Jk/TniPquOIeUj1WUa5EKfzbHMbNJHVxByTneHhVTT3LryJ52TThAy3rCUKanX/D1Tao/f+x309NRSvSTbLSDu1GF1bpA1mLqgtQFN+fzL8HEFbw1UXo38tO15SS0Pzteq9sd4kaCv/Z/poqTTsDPOYxdASISR25HEqNHtyQUOMTFzSkG40c3RHg10wHRb2E4tm9RaNcee6lpKOg665td7GFG26B0SwhuhE22zF0RzRub9ZqJgvLdp3WQ0j6trSqNeFq0Hb9LEZJ1AStHCVpklRMA+1nBEA3YA==
-Received: from AS4P189CA0023.EURP189.PROD.OUTLOOK.COM (2603:10a6:20b:5db::11)
- by AM7PR07MB6373.eurprd07.prod.outlook.com (2603:10a6:20b:13c::13)
+ bh=YMPx2C5HD20wSqEKG6TGrQzhQtA8gLeFQcUYl9cY4iY=;
+ b=JuFWunhjHz3Nthk4fil+srBkqeQb4fxVFLV612bwYk2lv73E2OVeXsK5WwECD/swE81aav7cf1RiQClafIyhubUeY1YlmWiOW339aSe1/gQK2S28FZSgLCHDtIzs1u7qS7yeh5WkyWgtTlyAvHycR2lgNYadtYv7G1W60WjaPyQ=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from DBBPR04MB7737.eurprd04.prod.outlook.com (2603:10a6:10:1e5::22)
+ by VI0PR04MB11784.eurprd04.prod.outlook.com (2603:10a6:800:2ea::12)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9870.25; Mon, 4 May
- 2026 09:37:07 +0000
-Received: from AM4PEPF00027A65.eurprd04.prod.outlook.com
- (2603:10a6:20b:5db:cafe::34) by AS4P189CA0023.outlook.office365.com
- (2603:10a6:20b:5db::11) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9870.25 via Frontend Transport; Mon,
- 4 May 2026 09:37:07 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 131.228.6.100)
- smtp.mailfrom=nokia.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=nokia.com;
-Received-SPF: Pass (protection.outlook.com: domain of nokia.com designates
- 131.228.6.100 as permitted sender) receiver=protection.outlook.com;
- client-ip=131.228.6.100; helo=fr711usmtp2.zeu.alcatel-lucent.com; pr=C
-Received: from fr711usmtp2.zeu.alcatel-lucent.com (131.228.6.100) by
- AM4PEPF00027A65.mail.protection.outlook.com (10.167.16.86) with Microsoft
- SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.20.9891.9
- via Frontend Transport; Mon, 4 May 2026 09:37:07 +0000
-Received: from updev-hifix-1-5g.devops-fwk.dynamic.nsn-net.net
- (10-175-3-186.he-pi-os-dhn-100.nesc.nokia.net [10.175.3.186])
- by fr711usmtp2.zeu.alcatel-lucent.com (Postfix) with ESMTP id 5D6A0680034;
- Mon,  4 May 2026 12:37:07 +0300 (EEST)
-From: Juuso Rinta <juuso.rinta@nokia.com>
-Date: Mon, 04 May 2026 12:36:58 +0300
-Subject: [PATCH RESEND] watchdog: octeontx_wdt: fix DT matches to Marvell
- compatibles
-MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+ 2026 16:03:49 +0000
+Received: from DBBPR04MB7737.eurprd04.prod.outlook.com
+ ([fe80::5960:fb4b:9313:2b00]) by DBBPR04MB7737.eurprd04.prod.outlook.com
+ ([fe80::5960:fb4b:9313:2b00%3]) with mapi id 15.20.9870.023; Mon, 4 May 2026
+ 16:03:49 +0000
+Message-ID: <745d7c15-cd9f-4914-b81e-6e90b0f11d01@cherry.de>
+Date: Mon, 4 May 2026 18:03:46 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] rockchip: clk: clk_rk3576: Add support for RK3576 GMAC
+ 25MHz clock output
+To: Alexey Charkov <alchark@flipper.net>, u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Heiko Stuebner
+ <heiko@sntech.de>, Kever Yang <kever.yang@rock-chips.com>,
+ Lukasz Majewski <lukma@denx.de>, Yao Zi <me@ziyao.cc>,
+ Jonas Karlman <jonas@kwiboo.se>, Peng Fan <peng.fan@nxp.com>
+References: <20260504-rk3576-rgmii-refclk-v1-1-c6604a4b69ac@flipper.net>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <20260504-rk3576-rgmii-refclk-v1-1-c6604a4b69ac@flipper.net>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260504-rinta-octeontx-wdt-compatible-v1-1-660f3800d33a@nokia.com>
-To: u-boot@lists.denx.de
-Cc: Stefan Roese <stefan.roese@mailbox.org>, Tom Rini <trini@konsulko.com>, 
- Bharat Bhushan <bbhushan2@marvell.com>, Juuso Rinta <juuso.rinta@nokia.com>, 
- Aaro Koskinen <aaro.koskinen@nokia.com>
-X-Mailer: b4 0.16-dev
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1777887427; l=1572;
- i=juuso.rinta@nokia.com; s=20260428; h=from:subject:message-id;
- bh=UtMY16NX1UY7vcnmYfyQ5lkDwiO88KqpnnormKBAXWw=;
- b=+B33htj6O5gygZGMmYbav7RDKaaq9gmMqicSM5PcWy2sJabm5IM75PL52xDLQIfUjML3yYYPU
- zD5HuB7+7XnBmdHftrwx67hXQ7K/QRJGAwWUOdlJk4prNak4YhSA6Em
-X-Developer-Key: i=juuso.rinta@nokia.com; a=ed25519;
- pk=CnH7U1WPlQ4t8gHpzhFvPnTjoealqDnbmbLMYEd5GDQ=
-X-EOPAttributedMessage: 0
+X-ClientProxiedBy: VIXP296CA0012.AUTP296.PROD.OUTLOOK.COM
+ (2603:10a6:800:2a9::6) To DBBPR04MB7737.eurprd04.prod.outlook.com
+ (2603:10a6:10:1e5::22)
+MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AM4PEPF00027A65:EE_|AM7PR07MB6373:EE_
-X-MS-Office365-Filtering-Correlation-Id: 711a2f2b-298f-471c-a77f-08dea9c0b594
-X-LD-Processed: 5d471751-9675-428d-917b-70f44f9630b0,ExtAddr
+X-MS-TrafficTypeDiagnostic: DBBPR04MB7737:EE_|VI0PR04MB11784:EE_
+X-MS-Office365-Filtering-Correlation-Id: 2ed8c039-597a-4d3f-f3c2-08dea9f6b9a1
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|82310400026|1800799024|36860700016|376014|13003099007|18002099003|56012099003;
-X-Microsoft-Antispam-Message-Info: sKec7lcA3nxd6XLtPKiyeIVk4xKGqUMZKYbRTCmt1MdFXRBMv52oaOoIF6GQEowZRDEzCJIKBWbRzV8FRB8nGD3cWPozTCeUBvvXEPpkMb1c0Hfizc2qBmUZkKoLduV/B4v5FyOq1rRIktwpIcMzoP5NqVJYaOQlNpUIGjBSxOcuE5F8FRKF12CdL0CxURTLvaZVT+mcKaeFz6l2Bh3QeKAoApFtfbgcwJYntvcvAmoIYilNsnWezP1HWkq9cGNsOLFNujVEQLpunj00P0iUEWhq9t3+ZI/B4OHqhm50ddAIhGUj8JLwljq83j3WUhQuRhoXLoQFfc4EEwiM9bAfOlJmUw4E9u9M3s2wbxsyKOZyE+fCXWaZkAYh7coZxMYAQJ4VMC4StT5HxcDaA7BlKfTGITehXUO3KFhnxQa3FoG+12/RWQsKKZj4/JP70WJ4TILkWF9QRtOP3ijrqwOeuwL935GgxdFwlhiKM3WgQoFpZJrEIImGKFdOBQdFPB5LVwKc/43VlI0Tu6WJG/Hw1YZALzzi2JZG7wBgUIaYnozekUDU28fT1I5SGGy2Gmp+lvtWmMKobrgQwmOaNmcu/QIKyQPXLZy18CzLO55ByZB2YLyy1knhIDeINIyGfGNWICgaXomlneHMXDRHWJyJEBaUAZ4V3HO1+R1WZmys1QLAMrVYQY7sH3mvyFpGzxT+h4LI5sn7NFICWcKtfswBJFZHG+ugXydoyTlGwXgx8Fs=
-X-Forefront-Antispam-Report: CIP:131.228.6.100; CTRY:FI; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:fr711usmtp2.zeu.alcatel-lucent.com;
- PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(82310400026)(1800799024)(36860700016)(376014)(13003099007)(18002099003)(56012099003);
+ ARA:13230040|7416014|376014|1800799024|10070799003|366016|56012099003|18002099003|22082099003;
+X-Microsoft-Antispam-Message-Info: WdvGRcBx4bOD4JfqTa7HDm+T9RXzq+2dGRkbUbY24kI1BI5mQDr1astnevimbMA4IrOI0wyojmSAbYJjTvqSiN9xbr6flMfcNQPnR1ClRovGXovZgRPFDbVaqMHw8rSa9lyK17wFW9V445EvXh9NVDLwJlXmRlevataEHa5rlT98/3xTR0M27BE8VLtheFSX8kjMNimovNBY3h+yQQOct264Rs2wv9v5pRm7+qOPxuYGKZGD/YXKWfJ+wMfud5CEYIqguihJB/B7bctLnxVrut7H2SATpCiV9AnnViAM1kEQ40cjIyU3jsYxJdMSUyO93irDI3/YDDn+fkFPg8x5aB/wWp3F2xsjWybC7BOlg7HUa59w90EPiQ4yJ1La6azXXsmPmSeAzqjPJt26kZMJvnYivPt59Vn6TBpZi9aoIfr3OcuNjR4l8Nw+rZ1CDK059ahNMnsKSjNNIWSN/L8lJqqHYMHie3AIZKd0EFbjn8paCn5Fachr0a4hP4VhPVJV6Enqhg3OWVo79MEZyGs8rxjc7L7wcJVgjNlsOZlqFvtbFXOioXU2QsZoAvlijJeDCAn45o2eCPFNBm0fdImd36+Z1nFOTKOUvS3mx4r35bf2b6Q+AXdg2YYzMZO9HSQbco9LJy1yDBEwyJFZ1XWLM7c6S2fobdj0rxhQw5Dcz0NSnbR7+2DC7i4YbDyLI0Gl
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DBBPR04MB7737.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(7416014)(376014)(1800799024)(10070799003)(366016)(56012099003)(18002099003)(22082099003);
  DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: u1A4Pq4DUmk10dm5esHfWXWTuP69xY4RICXT7RiHJo2TShETznkGvrZdUNf7YOluwpdnqhcZqC+3OkOKzVRrwixGrOUwewYQzyWzhpG8IAZX4HdQ743jMtRMTozYfQHabRy5Q2jH2EhT9OSEm1LheBBjBGwtNvm7gzlBMhYevQFYwncwaUsGkukyJ1zX0p0xpgLiZoiz25DR/L7EvFZxhZiNUXeKIUcIIroB7Dcg82Uz2RaPb+ZkGYtL1ioLzHAPxLObzB3EXKA3d45LPpJoCf3mzCklDy4W5M1/H1dVAbFkM14KiC8O7OY0nisGcejHtOd3mtjubbxmR3V4WVZxNQW3MVU6dPP4Ktq0N8PHvuwA+GIbPQvw3HLqV4pBrxcrCkPJW+H4VPa8MQ0rr3b2TxF29Y29S6LuB6zzfkj7wpnrWoqvvgEdHd83pLVZsfVO
-X-OriginatorOrg: nokia.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 May 2026 09:37:07.7540 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 711a2f2b-298f-471c-a77f-08dea9c0b594
-X-MS-Exchange-CrossTenant-Id: 5d471751-9675-428d-917b-70f44f9630b0
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=5d471751-9675-428d-917b-70f44f9630b0; Ip=[131.228.6.100];
- Helo=[fr711usmtp2.zeu.alcatel-lucent.com]
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 2
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?VWlvTVJUcHpwT2FtUmFXR2xEUUUxaFdDdm1DSGZKTWFnMU44dW5wbUVhcVBO?=
+ =?utf-8?B?bmVzSTB0ZXpIenVlT1Y4c0IvekdQOVg2SGV1Mlp2RFJiY2RPWG5XMHFzQy9p?=
+ =?utf-8?B?aXJkVXVTWHFVOXVZYmJENUx0aXdEQkRDLy9Eb2l3UU1FQzlnck5TRFJPNS9B?=
+ =?utf-8?B?TTRpT3VhbFdsZjRhT25FRTBVR0w0bnYrOG41Tm1YRjF1aEQ2RWNrTVhOQzN4?=
+ =?utf-8?B?akQydXVTWE5EV1VmL0lLVWRBZXFhQnhHV0htWWRBd1g0OFRKTzF6aDZNR25N?=
+ =?utf-8?B?SFdkczY1aURVSEVpRW9kUXF4bHRGZGpGdHBOVTh4dTNKRzBPVWUvTjZLTVVh?=
+ =?utf-8?B?N2w5eWV1WWNFTVY0bHgwN2VvN0ZYeWlwTWZZS3VNMFh4dW45QnpSU1ltQmw0?=
+ =?utf-8?B?YnUzblF1ZUU4dTRFSXNOMXRZNFlOQVFiZWtra0FLZ1hJM1c5S0xNM3pEbkpt?=
+ =?utf-8?B?QytQSGJxaWxaeUVPNWE5Sks2a0pNWHQ4aDIxMzZ0dUoxZURnQTZvMFBEUWRh?=
+ =?utf-8?B?V3k5Z3J6Y1NOcDdWUTk3UG1lKzVsdFhaYTUrZ2tvdkRUenhBV3laRGo3VVJF?=
+ =?utf-8?B?ZFp2aEtTRGRMZENZL0JsZGYxQTBPS2ZpL25pN2NiSGhUT2ZmTlFVM3N6K2hm?=
+ =?utf-8?B?ZWFNK0JyVlZLTktSVStNL2tsL0VPTElkQ29Yek1tY1BnY2tYSzNubEhwdUR2?=
+ =?utf-8?B?YTN3ZUE5RUdNS0VHbEtRYkQzYldUblFKN2FKMDJ6a1h2eHNObkxTVHRjZUZo?=
+ =?utf-8?B?RTQzZTgzQktMWFBiZmlNMVlmNlZwV3NjcVZvSDJTakNhdERDMVZqb2N0ZHRl?=
+ =?utf-8?B?SEhEUnppbFIvSy9nVUw2SWx5bXlRd2wwREhXNElJMUxJR2tmRjZoZ1NNMXdL?=
+ =?utf-8?B?bTh2UzVpcGV6QmpSOWRZUmZkdDRiOFJPMS9pUUY0V2hnYVpCcGs2TlNxWEQz?=
+ =?utf-8?B?QnBqcWxNTGhwQ3BTOGV6a2N1VXZ0MnJwdC9uRDBoZGlVYUFEK2dVaVpkNmw5?=
+ =?utf-8?B?OTVlRzVvTmFSWU1wVnVwbnQyWE9mSlZMMEM1WVVnZjQyVzFuSGFWT3ExWVVU?=
+ =?utf-8?B?L0JvREtoTFFLSjEyTmZpRnV5U1ZaTE5jTWdDMm9CMEd3aUdKdDdtL2ZPVXZk?=
+ =?utf-8?B?N2VlS1RZQ0E1dXFXY29scTQwYlZkMTNWK3dpMUR6eHpvdldjWjYwVVoxNjYv?=
+ =?utf-8?B?Qnc3N1dSdjh4dDI4Z0VXNDhjTWczc09WbFl2QngzcTRmQ1htRWsyOWltZXpC?=
+ =?utf-8?B?M1hBbnpEQVZNcUtxVFpTRXJKQk5vdGtMbUFHWVgxZ1BId1ZyS0IvOWhsNXRt?=
+ =?utf-8?B?UlY4MWxoU3V3cG1kSm1YNjVIL05RWGx6T0xWZ0c1L3JVVUNXLzN5UjYwcE1S?=
+ =?utf-8?B?RWp0QWw1bmRGdk9oUWQ2UGlKLzdDOHhFNURGZ1BybTBOdWNTb1A2ZDBrUDBW?=
+ =?utf-8?B?K2ZIamxqWjcxOEQ4K1I5amdTNm5xN3Y0c2NiY3RoSTlkMDVrMkFiTjMybWdq?=
+ =?utf-8?B?YVB4Tk5vMXdBa0NCZEpQVk5xSHZJSURQSHF0eDNCejVkLzFPZE5zVEFUR1N2?=
+ =?utf-8?B?Z3Rqd3pVaE0vQi9YaXdlSlcwaFp5ejFJY0hVY2ZzWGloL200WVRMb25rWE9Y?=
+ =?utf-8?B?ZXc3Ym5INlJJTDVOOE4wTlpnYVFDWjRsUWJVVDBnSS94RVovakVMcHRvQzVM?=
+ =?utf-8?B?M213ZU5qYyt1K3lhOHFPODVleCtZRjhmSWUxbTUrbjNqUExaUFdFOGhuWm9j?=
+ =?utf-8?B?U2Y5VnJRWXNqeU5BUlN6MWk2dmhzcExYMnFsYWlubjBGWkJrdyt0bVVjNTlp?=
+ =?utf-8?B?dmdJMkYrbFJuVzFtWWZsK0wyVE5lUUF1NmRrWkphazFhemlLQVg2MVdyQWZa?=
+ =?utf-8?B?TloyZ2NCSDVXQnFlaGZuSmtaS1BPQWs2azdmZTl2bkhIN1ZTU1Y0dEtJUlBn?=
+ =?utf-8?B?U28zdzZTVjA1bXVXQSswN3pLOWtINCtyNXVYYXl0eDBRdGJSNUNKbG9Bd1g3?=
+ =?utf-8?B?dzlTS3NDbDk2cXNHc2JsYjJQYVYvT1JEK0d2aW1GTUxQU2p5VzN5cEVWeGIr?=
+ =?utf-8?B?QVZUREh5ckpLVWJSME00OXAyYjhKVUdJckl3WWd2cjAwNDFyQ3oxQnhHKzgw?=
+ =?utf-8?B?RzJEOHFJa2UxMStNNmpWYUlULzBCVnhoTVFsQ0tla3lRWlk3VkR4bWc1a2tv?=
+ =?utf-8?B?UVYweEtXeTExQlNrVUhkd3BBNzIrNTlITjNneDMvK09tTnBLNXE5WE1xUkNL?=
+ =?utf-8?B?dnVFVGJCMmZIa3BRWDBUMDJJdmlNYnlqSW0vM2Zmd0MvakY1T0VrZmcxL1hz?=
+ =?utf-8?B?R3M0Y0srTUNXNllMUXdraG5xN0E4RjJUSkVnYUphNis4Q0pMayttcUt4b3pw?=
+ =?utf-8?Q?egsr17QVArXstubfSq9FILE77PS4tC82ycu9bUu3uOHFW?=
+X-MS-Exchange-AntiSpam-MessageData-1: m+WtHI/3SJtLSsxIYCy3o95HaB53il+kybU=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 2ed8c039-597a-4d3f-f3c2-08dea9f6b9a1
+X-MS-Exchange-CrossTenant-AuthSource: DBBPR04MB7737.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: TreatMessagesAsInternal-AM4PEPF00027A65.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM7PR07MB6373
-X-Mailman-Approved-At: Mon, 04 May 2026 17:52:48 +0200
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 May 2026 16:03:49.3128 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: zx8Th9SCGCiXUCTyjunJe7GYwimJGNf9Sp53riVuF9q+ehqFNl+LA38ep+mwRviH7h0rMcX3UI1Fw9dh0v/7CtwgWXG5+Wcn/2T5Dkvul4o=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI0PR04MB11784
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -130,44 +153,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The OcteonTX watchdog driver currently matches arm,sbsa-gwdt.
-On systems with multiple watchdog devices this can be ambiguous since
-arm,sbsa-gwdt is a generic SBSA binding.
+Hi Alexey,
 
-Replace the SBSA match with SoC-specific Marvell compatibles
-marvell,cn10624-wdt and marvell,cn9670-wdt.
+On 5/4/26 3:45 PM, Alexey Charkov wrote:
+> Rockchip RK3576 SoC has two built-in GMACs which connect to external PHYs
+> via RGMII interface. The RGMII link can be clocked by either the PHY or
+> the SoC. When the SoC is the master, as is the case on the RK3576 EVB1,
+> the output clock needs to be configured in the CRU.
+> 
+> Add the respective logic for getting and setting the RGMII reference clock
+> output for both GMAC0 and GMAC1.
+> 
+> Signed-off-by: Alexey Charkov <alchark@flipper.net>
 
-These compatibles align with the upstream Linux device tree binding:
-https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/Documentation/devicetree/bindings/watchdog/marvell,cn10624-wdt.yaml
+Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
 
-Reviewed-by: Aaro Koskinen <aaro.koskinen@nokia.com>
-Signed-off-by: Juuso Rinta <juuso.rinta@nokia.com>
----
- drivers/watchdog/octeontx_wdt.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+We should think about migrating to FIELD_PREP, FIELD_GET and similar 
+macros to make this a bit more readable and less error-prone though. 
+Some job for future us, not a blocker for sure :)
 
-diff --git a/drivers/watchdog/octeontx_wdt.c b/drivers/watchdog/octeontx_wdt.c
-index c79d9539c13..7299a9f9739 100644
---- a/drivers/watchdog/octeontx_wdt.c
-+++ b/drivers/watchdog/octeontx_wdt.c
-@@ -159,7 +159,8 @@ static const struct octeontx_wdt_data octeon_data = {
- };
- 
- static const struct udevice_id octeontx_wdt_ids[] = {
--	{ .compatible = "arm,sbsa-gwdt", .data = (ulong)&octeontx_data },
-+	{ .compatible = "marvell,cn10624-wdt", .data = (ulong)&octeontx_data },
-+	{ .compatible = "marvell,cn9670-wdt", .data = (ulong)&octeontx_data },
- 	{ .compatible = "cavium,octeon-7890-ciu3", .data = (ulong)&octeon_data },
- 	{}
- };
-
----
-base-commit: 4433253ecf2041f9362a763bb6cb79960921ac7e
-change-id: 20260428-rinta-octeontx-wdt-compatible-0ca7b83e634e
-
-Best regards,
---
-Juuso Rinta <juuso.rinta@nokia.com>
--- 
-Juuso Rinta <juuso.rinta@nokia.com>
-
+Thanks!
+Quentin
