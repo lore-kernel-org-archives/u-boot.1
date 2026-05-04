@@ -4,56 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7FD70CD3423
-	for <u-boot@archiver.kernel.org>; Mon,  4 May 2026 06:34:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8E09CD3423
+	for <u-boot@archiver.kernel.org>; Mon,  4 May 2026 07:11:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F31F283FEC;
-	Mon,  4 May 2026 08:34:34 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
+	by phobos.denx.de (Postfix) with ESMTP id 52D7F84255;
+	Mon,  4 May 2026 09:11:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="NXf/wJDr";
+	dkim=pass (2048-bit key; secure) header.d=siemens.com header.i=ludwig.nussel@siemens.com header.b="JO4Gr7d5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E94D484255; Mon,  4 May 2026 08:34:33 +0200 (CEST)
-Received: from mx.nabladev.com (mx.nabladev.com [178.251.229.89])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 2728B8432A; Mon,  4 May 2026 09:11:24 +0200 (CEST)
+Received: from mta-64-228.siemens.flowmailer.net
+ (mta-64-228.siemens.flowmailer.net [185.136.64.228])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EBF6683EF9
- for <u-boot@lists.denx.de>; Mon,  4 May 2026 08:34:31 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=nabladev.com
+ by phobos.denx.de (Postfix) with ESMTPS id 043DC83EF9
+ for <u-boot@lists.denx.de>; Mon,  4 May 2026 09:11:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=lukma@nabladev.com
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id DC1061140E8; Mon,  4 May 2026 08:34:29 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
- s=dkim; t=1777876471;
- h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:in-reply-to:references;
- bh=GVo57dwymXYjs/PcrghoYn8r13nz1bPvT56qGIJZ9Wo=;
- b=NXf/wJDrW66z8sVCbbn30HFedv0M0rXd87b/g5wjgxziBtvLql/Ya+TrqDCNt/v6eeu6+f
- NDxTQilf1yu+J0G4Oy6ao1YytcVqmJm/IfULxPPdP06NRM8jK4Rb8ShzIB5WBq/Cdz8v5k
- 1EVXrCfVBAJyYVKLzOMg1wA11xOCD6DHuSOIL0MwjVHrd12Df3vNyvo3uPfqVkd005UJp1
- sxQt9tm4/+eMYrWyP4HeOOXFmGb2x0Qlz8zgc87HUiFygglaQXLRNo3OrzMc/Qwv0TslEE
- AKAvsBS6DUWIVG5Evi0wKchEx1RLKKX51mqFeke+0NcZngmyqqh9o6RtzKZD8Q==
-Date: Mon, 4 May 2026 08:34:28 +0200
-From: =?UTF-8?B?xYF1a2Fzeg==?= Majewski <lukma@nabladev.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, Rasmus Villemoes <ravi@prevas.dk>, Tom Rini
- <trini@konsulko.com>, =?UTF-8?B?xYF1a2Fzeg==?= Majewski
- <lukma@nabladev.com>
-Subject: Re: [PATCH 5/6] mccmon6: Quote recovery_status in bootcmd test
-Message-ID: <20260504083428.14b3bc8d@wsk>
-In-Reply-To: <20260503204936.3151124-6-sjg@chromium.org>
-References: <20260503204936.3151124-1-sjg@chromium.org>
- <20260503204936.3151124-6-sjg@chromium.org>
-Organization: Nabla
-X-Mailer: Claws Mail 3.19.0 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
+ dmarc=pass (p=reject dis=none) header.from=siemens.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ludwig.nussel@siemens.com
+Received: by mta-64-228.siemens.flowmailer.net with ESMTPSA id
+ 2026050407112088b69a3dae0002070e for <u-boot@lists.denx.de>;
+ Mon, 04 May 2026 09:11:20 +0200
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm2;
+ d=siemens.com; i=ludwig.nussel@siemens.com;
+ h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
+ bh=LThfucZeKYpC6YnkyVKLCVOU0TXulTxDPwfmAtb+AoE=;
+ b=JO4Gr7d58v5b5HqPPaqMt+8gF9HuerOmoS7lc2Ea8ASxjP5t/X6cbPQtt+vabC4PjTysse
+ zK/kXeO0/yIkVFnp2D8OabxcvJcaUU2hIW+tVKYtqxpEW/TSDlweKDvyxf/zOSNGbvg4vVeQ
+ 6rLDjMXE6ULBk+T6MJVV5fqQ1yb93pT4iY/KIBGdAYGfmVz54RLntBkq66Pk3jYWG+0+Tuyq
+ Tu0yzf/jPn/PPBD2kcUFGF2ds8DRm0mkO21baL6SAuydW7DE+vN+LHzERswwNf0bJgTxnrW6
+ VyDobjfYgr+z/52XCFgYoRLz+39A2v99Dz0F910FuPj7nYKqTn9kkR7Q==;
+From: Ludwig Nussel <ludwig.nussel@siemens.com>
+To: u-boot@lists.denx.de
+Cc: Ludwig Nussel <ludwig.nussel@siemens.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Daniel Palmer <daniel@thingy.jp>, Kuan-Wei Chiu <visitorckw@gmail.com>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2] virtio: fix boot device hunting in qemu with virtio
+Date: Mon,  4 May 2026 09:10:23 +0200
+Message-ID: <20260504091023.v2.1.d2ced6516d3db067379940b538830e60968dbf6c@changeid>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Transfer-Encoding: 8bit
+X-Flowmailer-Platform: Siemens
+Feedback-ID: 519:519-1328817:519-21489:flowmailer
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,52 +66,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun,  3 May 2026 14:49:23 -0600
-Simon Glass <sjg@chromium.org> wrote:
+Commit 70101c3217ae ("virtio: mmio: Return error codes on probe
+failures") returns -ENODEV where it would return 0 before. That path is
+apparently hit in qemu and breaks boot device discovery
+(virtio_bootdev_hunt() expects only ENOENT). So return -ENOENT in
+that path instead.
+The remaining two error returns in the function are untouched as I
+don't know where they play a role.
 
-> The mccmon6 bootcmd starts with:
->=20
->     if test -n ${recovery_status}; then run boot_recovery; ...
->=20
-> The default state is "no recovery requested", i.e. recovery_status
-> unset.  The expression then expands to 'test -n' with no operand and
-> relies on a U-Boot 'test' quirk that treats a missing operand as
-> false to skip recovery.
->=20
-> Quote the variable so an unset recovery_status expands to 'test -n ""'
-> and the emptiness check is explicit.
->=20
-> Fixes: 8b0619579b22 ("cmd: test: fix handling of single-argument form
-> of test") Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
->=20
->  include/configs/mccmon6.h | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->=20
-> diff --git a/include/configs/mccmon6.h b/include/configs/mccmon6.h
-> index 9f401718bfb..0cf62d6bda8 100644
-> --- a/include/configs/mccmon6.h
-> +++ b/include/configs/mccmon6.h
-> @@ -88,7 +88,7 @@
->  		     "bootm $loadaddr};reset;" \
->  		"fi\0" \
->  	"bootcmd=3D" \
-> -		"if test -n ${recovery_status}; then " \
-> +		"if test -n \"${recovery_status}\"; then " \
->  		     "run boot_recovery;" \
->  		"else " \
->  		     "if test ! -n ${boot_medium}; then " \
+Signed-off-by: Ludwig Nussel <ludwig.nussel@siemens.com>
 
-Reviewed-by: =C5=81ukasz Majewski <lukma@nabladev.com>
+---
 
---=20
-Best regards,
+Changes in v2:
+ - return ENOENT in probe()
 
-Lukasz Majewski
+ drivers/virtio/virtio_mmio.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
---
-Nabla Software Engineering GmbH
-HRB 40522 Augsburg
-Phone: +49 821 45592596
-E-Mail: office@nabladev.com
-Managing Director : Stefano Babic
+diff --git a/drivers/virtio/virtio_mmio.c b/drivers/virtio/virtio_mmio.c
+index 62afe609ec0..d90d8309f99 100644
+--- a/drivers/virtio/virtio_mmio.c
++++ b/drivers/virtio/virtio_mmio.c
+@@ -372,7 +372,7 @@ static int virtio_mmio_probe(struct udevice *udev)
+ 		 * virtio-mmio device with an ID 0 is a (dummy) placeholder
+ 		 * with no function. End probing now with no error reported.
+ 		 */
+-		return -ENODEV;
++		return -ENOENT;
+ 	}
+ 	uc_priv->vendor = readl(priv->base + VIRTIO_MMIO_VENDOR_ID);
+ 
+-- 
+2.43.0
+
+base-commit: 4433253ecf2041f9362a763bb6cb79960921ac7e
+branch: us-virtio2
