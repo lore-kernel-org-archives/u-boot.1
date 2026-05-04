@@ -4,97 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82CF2FF885A
-	for <u-boot@archiver.kernel.org>; Tue,  5 May 2026 02:11:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 032E9CD342C
+	for <u-boot@archiver.kernel.org>; Tue,  5 May 2026 02:20:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D16CB846CE;
-	Tue,  5 May 2026 04:11:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=thingy.jp
+	by phobos.denx.de (Postfix) with ESMTP id 39FD2846CE;
+	Tue,  5 May 2026 04:20:36 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=thingy.jp header.i=@thingy.jp header.b="MFh0VINa";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=arm.com header.i=@arm.com header.b="je2Ax22b";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4A91084706; Tue,  5 May 2026 04:11:42 +0200 (CEST)
-Received: from mail-dl1-x1234.google.com (mail-dl1-x1234.google.com
- [IPv6:2607:f8b0:4864:20::1234])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 103F5846C3
- for <u-boot@lists.denx.de>; Tue,  5 May 2026 04:11:38 +0200 (CEST)
+ id 1CF4D846CE; Mon,  4 May 2026 22:25:18 +0200 (CEST)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id 95CE8846A0
+ for <u-boot@lists.denx.de>; Mon,  4 May 2026 22:25:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=thingy.jp
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=daniel@0x0f.com
-Received: by mail-dl1-x1234.google.com with SMTP id
- a92af1059eb24-12c8cc7a77eso3930011c88.1
- for <u-boot@lists.denx.de>; Mon, 04 May 2026 19:11:38 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1777947097; cv=none;
- d=google.com; s=arc-20240605;
- b=JnJDrz4lTnA6gtBzJiU6fnDOXwKG4tcTdFHMz2q3xbFWgxkSQtGLMM1e9Zs6b9zqCs
- C8JGdQStzBHG/50eIovwK0mgsLBPRCxtpAq9etMQOQCo3Ja9bOxr4V0EslKl6i2aFkcf
- OjdTrd6+XH42KDtnqQSOf3uuCzJG8hTH3yq6GTFyGj5H+fM3jB9DrmpFKXQKmC+cobrY
- H/JRJJs8zgUdfqyhBS0xiiqdy8C223YiuhaxQ3BVMV9e2hSM0S1GrvcJzdXn3AvoCmMv
- vaAYgoyDiMumqrhYya4ekMzn7GZmws8fejf7ZpQQnGo1tpzSKMjeGfG2hYlq7JEOMcJ/
- W1LQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=SfONR5o63m7RGQ3QgY5/TbPsrAvvk07nyiSxoipCNXk=;
- fh=BwXst+TRhil+Z/YkvLSkANFR7ZROpHI3zoM43Duz+lQ=;
- b=F2uKqk6oUrDuLFIJAq9VNGSG31D+jp1h0IkAuN/7CpBWgeECcJwggbTdECLTWos6C9
- In00EzmEXfeJPtH2lV3PNWf9eYIwL8gvf+7X2NHQCnkiXL88PuI1hKCsXExyPVJ59LE6
- KHSqZydq6g+nVUj3PIGi2j9fNh1M1O8y7ek7yYECfbjO8XdX8qbYTNGyA985ldZu4+JS
- bydw2R4D/C8SbXfhIccwWn6GoAB0mfrpUHwHnDpg4mS1VEgWKXehD5/c30vKsbolM+To
- MUdyCJlyN1gPVqTGlpzVUFX34X/vJYg5wr2L/TSPhG9TO+XGzJnvMgmrcurNwrhpIRJS
- wFQg==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=thingy.jp; s=google; t=1777947097; x=1778551897; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=SfONR5o63m7RGQ3QgY5/TbPsrAvvk07nyiSxoipCNXk=;
- b=MFh0VINab0wubmLoUHfkiVHYwtBUpjh1KU8eCBr8SR1dI5Ej2xfarGRplWrsEdT+zQ
- zPaoGuVJ08ele5ejk4134QyqU1YJjfRcEXbFmMS57qwDME0CRNzj5Jy5TE6aXDY7EghS
- bwuOj2yh+SPBHGD/znuNfvE9fB/27x/1t4X1c=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777947097; x=1778551897;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=SfONR5o63m7RGQ3QgY5/TbPsrAvvk07nyiSxoipCNXk=;
- b=onoPqBjkHZKMsiUTJEE96B86nFB6mrkXIFhPMeA6/YSLU7t6p+e+Sz5Dt228pGSUM8
- WCV8vpV225bNzOjeDrNU7COqEHI1OFq5MrOqRmrXSKknxGdz5SeELuxJhZ5KRHqlw9Jn
- 8wsYzxswMuYnG2dldMSURXr4bXDZBCQNfWCzSZcQGY93FToPjtG4HQRzo2gKmxEEP/5o
- UI7BDjBydmstp8OfsQJxG36/gULJrCT8tBnu2kB7OFDn33L9EEblpayJd0nUScWb8fLk
- a1oWHif8vz1nJPunQVF9r3L9pkZ0jc+1Dgup9o9zdpZGKOsnoEjeiYsjwcaVQx3DWZ/x
- VaQA==
-X-Forwarded-Encrypted: i=1;
- AFNElJ8UKPN9VW4vppGPTUeBfd/10rrrCn/u1m44Pfphg2B1icI3D3diuEceyrlkfNewUdYyxq2bMvk=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx1v9ugAzzO3s2jwGbAw3ARcl+Ec8z834Y6NP11j7p+ZlDGFG78
- q875FSB8ORk5/b09UCYVLxG3VaW5mqRxvgzQU7D+Sg2t8d2ySzU1IC8/qwRMnu4UouNkj8qyCov
- DXwIKCyPYg4HcsyHmZo8/aU4ZVyvbfHOybowqFRJdyw==
-X-Gm-Gg: AeBDiet3Ub3mv/5wVPJG35DYpPPxdZVq1cshEuhzbzSyvZPezQoMjyXxncFLoZJEXQ7
- wKS7FtuHgCH6rC1vjyGP0hq0Xb5kfdmYm2MbMZRmNkXg2lmd1i9ZzXwZGLOSxqQGoKZiL+YR1bS
- +7vPfihUqd92LPIFAwj6UiYIZVKHXAksZKLn6wAvIhP4DkA1gEg9hMEPR/8s6DHoAQoAuAono3T
- /G5tQH2xpnoaO/sZMaJWdgRlPX8EIHrQIdZ9ecZ9Bpqhr+tN/H04bYds6oBJqFxiezjeBl8lAwG
- 1V/Z28LuRkS9tRMt5QfhZaboZZfrvSM=
-X-Received: by 2002:a05:7022:222:b0:128:d396:f2ea with SMTP id
- a92af1059eb24-130a9aeb59amr893402c88.11.1777947097146; Mon, 04 May 2026
- 19:11:37 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=arm.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=harsimransingh.tungal@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 77D912574;
+ Mon,  4 May 2026 13:25:09 -0700 (PDT)
+Received: from e132995.arm.com (unknown [10.57.68.2])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 6A6303F763;
+ Mon,  4 May 2026 13:25:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
+ t=1777926314; bh=dOmUUMEXKWhpC3a43hr2iMnxYOZRMgA7Qqh4B2H1EjQ=;
+ h=Subject:From:To:Cc:In-Reply-To:References:Date:From;
+ b=je2Ax22boep55WjyFyQ3sdy4l70t0OV3yNxf/JPFjbPsCStCvRFKRj5aHTdHGBEVr
+ YlwTwamM65YZeX8M6JheS+IL3qs548w9hajX2n46EdjoxUSQNPN8ZKyEkh3S3yKKrJ
+ wNa0WfhJp+dCIk7TLEx6rq25XI6A4C7kbeCZUCig=
 MIME-Version: 1.0
-References: <20260416093927.602613-1-daniel@thingy.jp>
- <20260504220957.GM1614990@bill-the-cat>
-In-Reply-To: <20260504220957.GM1614990@bill-the-cat>
-From: Daniel Palmer <daniel@thingy.jp>
-Date: Tue, 5 May 2026 11:11:24 +0900
-X-Gm-Features: AVHnY4InHzYcQEVwwfW8iyWHrR51rfKxGJzHRUXJ8ZMR6m-g6kfIw32oyaBHp80
-Message-ID: <CAFr9PXkDJOP4KF5+=Bmyo-LaPRe0uwU05pgTALOUWPSLCPzULQ@mail.gmail.com>
-Subject: Re: [PATCH v5 0/8] Add virtio-mmio support to m68k virt machine
-To: Tom Rini <trini@konsulko.com>
-Cc: visitorckw@gmail.com, angelo@kernel-space.org, bmeng.cn@gmail.com, 
- sjg@chromium.org, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+Subject: Re: [PATCH 02/12] arm-ffa: add FF-A bus runtime support
+From: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: harsimransingh.tungal@arm.com, u-boot@lists.denx.de, 
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>, 
+ Tom Rini <trini@konsulko.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Hugues Kamba Mpiana <hugues.kambampiana@arm.com>
+In-Reply-To: <CAFLszTiBGiJHiw+mv3y=pr+csA3AQoQ_HOG5-R+ZrPXxbPJL4w@mail.gmail.com>
+References: <20260424173151.371134-1-harsimransingh.tungal@arm.com>
+ <20260424173151.371134-3-harsimransingh.tungal@arm.com>
+ <CAFLszTiBGiJHiw+mv3y=pr+csA3AQoQ_HOG5-R+ZrPXxbPJL4w@mail.gmail.com>
+Date: Mon, 04 May 2026 21:25:03 +0100
+Message-Id: <177792630359.3294147.3175555651353774430.b4-reply@b4>
+X-Mailer: b4 0.15.2
+X-Mailman-Approved-At: Tue, 05 May 2026 04:20:34 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -111,37 +71,231 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
-
-On Tue, 5 May 2026 at 07:10, Tom Rini <trini@konsulko.com> wrote:
->
-> On Thu, Apr 16, 2026 at 06:39:19PM +0900, Daniel Palmer wrote:
->
-> > Lets start making the m68k virt machine support useful.
+On 2026-04-28 12:10 -0600, Simon Glass wrote:
+> Hi Harsimran,
+> 
+> On 2026-04-24T17:31:50, Harsimran Singh Tungal
+> <harsimransingh.tungal@arm.com> wrote:
+> > arm-ffa: add FF-A bus runtime support
 > >
-> > First we need to fix some m68k endian issues.
+> > Enable FF-A runtime transport for EFI services
 > >
-> > Then allow virtio mmio driver instances to be created with
-> > platform data and fix a minor endian issue.
+> > This patch introduces the FF-A runtime infrastructure that enables
+> > U-Boot to use the Arm Firmware Framework for Arm A-profile (FF-A)
+> > transport layer after ExitBootServices().
+> > The runtime transport provides persistent, runtime-safe
+> > implementations of key FF-A functions used by EFI runtime services.
 > >
-> > Finally, add the code for the board to create the instances.
+> > Summary of key changes:
+> > -----------------------
+> >   - Add drivers/firmware/arm-ffa/arm-ffa-runtime.c implementing FF-A
+> >     runtime operations.
+> >   - Introduce include/arm_ffa_runtime.h exporting FF-A runtime
+> >     functions and data structures.
+> >   - Move FF-A error mapping into runtime context.
+> >   - Introduce invoke_ffa_fn_runtime() as runtime safe SMC wrapper.
+> >   - Add runtime SMC wrapper for sandbox emulation.
+> >   - Add ARM_FFA_RT_MODE Kconfig to enable runtime support.
+> > [...]
+> >
+> > drivers/firmware/arm-ffa/Kconfig           |  11 ++
+> >  drivers/firmware/arm-ffa/Makefile          |   4 +-
+> >  drivers/firmware/arm-ffa/arm-ffa-runtime.c | 287 +++++++++++++++++++++++++++++
+> >  drivers/firmware/arm-ffa/arm-ffa-uclass.c  | 111 ++---------
+> >  drivers/firmware/arm-ffa/arm-ffa.c         |  16 +-
+> >  drivers/firmware/arm-ffa/ffa-emul-uclass.c |  12 ++
+> >  include/arm_ffa.h                          |  16 +-
+> >  include/arm_ffa_priv.h                     |  24 ++-
+> >  include/arm_ffa_runtime.h                  | 183 ++++++++++++++++++
+> >  test/dm/ffa.c                              |   6 +-
+> >  10 files changed, 551 insertions(+), 119 deletions(-)
+> 
+> > diff --git a/drivers/firmware/arm-ffa/arm-ffa-runtime.c b/drivers/firmware/arm-ffa/arm-ffa-runtime.c
+> > @@ -0,0 +1,287 @@
+> > +     if (priv)
+> > +             ffa_copy_runtime_priv(&priv->rt);
+> > +     else
+> > +             log_err("FF-A: Entering RT mode without FF-A runtime data information\n");
+> > +
+> > +     ffa_enable_runtime_context();
+> 
+> This enables the runtime context unconditionally, even after logging
+> the priv data is missing. The runtime then comes up with id == 0 and
+> fwk_version == 0 and any later FF-A call silently uses bogus values.
+> Please return after the log_err() so ffa_get_status_runtime_context()
+> keeps returning false on the failure path.
 >
-> We get this in CI:
-> drivers/virtio/virtio_mmio.c:359:15: warning: cast to 'void *' from
->  smaller integer type 'phys_addr_t' (aka 'unsigned int') [-Wint-to-void-pointer-cast]
->   359 |         priv->base = (void __iomem *)plat->base;
->       |                      ^~~~~~~~~~~~~~~~~~~~~~~~~~                                      1 warning generated.
+Thanks for pointing this out.
+I will fix this in patchset v2.
+
+Regards
+Harsimran Singh Tungal
+
+> > diff --git a/drivers/firmware/arm-ffa/arm-ffa-runtime.c b/drivers/firmware/arm-ffa/arm-ffa-runtime.c
+> > @@ -0,0 +1,287 @@
+> > +#include <arm_ffa_runtime.h>
+> > +#include <arm_ffa_priv.h>
+> > +#include <log.h>
+> > +#include <asm/global_data.h>
+> > +#include <linux/errno.h>
+> > +#include <linux/types.h>
+> > +
+> > +DECLARE_GLOBAL_DATA_PTR;
+> 
+> gd doesn't seem to be referenced in this file?
 >
-> With clang, please fix.
 
-That seems to be a 64bit cpu that has 32bit phys_addr_t
-(CONFIG_PHYS_64BIT=n)? Would this be acceptable:
-priv->base = (void __iomem *)(uintptr_t)plat->base
+No. gd is not being referenced.
+gd declaration will be removed in patchset v2.
 
-That would extend plat->base up to 64bits where needed and I guess
-that is ok because if you have a 64bit cpu but a 32bit phys_addr_t you
-don't have anything above 4GB that you want to access?
+Regards
+Harsimran Singh Tungal
 
-Cheers,
+> > diff --git a/drivers/firmware/arm-ffa/arm-ffa-runtime.c b/drivers/firmware/arm-ffa/arm-ffa-runtime.c
+> > @@ -0,0 +1,287 @@
+> > + * after the FF-A bus device has successfully probed and U-Boot’s FF-A
+> 
+> This (and the same line in arm_ffa_runtime.h) should use a normal '
+> instead of the UTF-8 right single quotation mark.
+>
 
-Daniel
+Sure.
+I will fix this in v2.
+
+Regards
+Harsimran Singh Tungal
+
+> > diff --git a/drivers/firmware/arm-ffa/arm-ffa-runtime.c b/drivers/firmware/arm-ffa/arm-ffa-runtime.c
+> > @@ -0,0 +1,287 @@
+> > +#if CONFIG_IS_ENABLED(ARM_FFA_RT_MODE)
+> > +static void EFIAPI ffa_rt_exit_boot_services_notify(struct efi_event *event,
+> > +                                                 void *context)
+> 
+> CONFIG_IS_ENABLED() is only meaningful for symbols with an SPL twin.
+> ARM_FFA_RT_MODE has none, and the uclass side already uses
+> IS_ENABLED(CONFIG_ARM_FFA_RT_MODE) - please use IS_ENABLED() here and
+> in arm_ffa_runtime.h.
+>
+
+Sure. I will be making suggested change in patchset v2.
+
+Regards
+Harsimran Singh Tungal
+
+> > diff --git a/drivers/firmware/arm-ffa/arm-ffa-runtime.c b/drivers/firmware/arm-ffa/arm-ffa-runtime.c
+> > @@ -0,0 +1,287 @@
+> > +     if (is_smc64) {
+> > +             req_mode = FFA_SMC_64(FFA_MSG_SEND_DIRECT_REQ);
+> > +     } else {
+> > +             req_mode = FFA_SMC_32(FFA_MSG_SEND_DIRECT_REQ);
+> > +     }
+> 
+> Single-statement bodies should not be braced. Please run patman or
+> checkpatch.pl on your patches. Also, the two efi_memset_runtime()
+> calls below clear fresh stack variables. Please initialise them at
+> declaration ('ffa_value_t ffa_args_rt = {}') and drop the explicit
+> memset()s; the compiler's zero-init is just as runtime-safe and is
+> what the boot path already does.
+> 
+> Also could you run checkpatch / patman over your patches for v2?
+>
+
+I will keep the brace cleanup in v2, but I can't keep the `= {}`
+initialization for the two local `ffa_value_t` variables.
+
+I tested that variant and it triggers a Linux boot-time runtime warning
+for this EFI runtime path, because the generated code is no longer
+runtime-safe and initializing the way you are suggesting is not allowing
+to map those variable in runtime memory. So, I suggest to restore the
+explicit efi_memset_runtime() calls for those fresh stack variables.
+
+Regards
+Harsimran Singh Tungal
+
+> > diff --git a/drivers/firmware/arm-ffa/arm-ffa-uclass.c b/drivers/firmware/arm-ffa/arm-ffa-uclass.c
+> > @@ -1047,6 +961,11 @@ static int ffa_do_probe(struct udevice *dev)
+> > +     if (IS_ENABLED(CONFIG_ARM_FFA_RT_MODE)) {
+> > +             ret = ffa_setup_efi_exit_boot_services_event(uc_priv);
+> > +             if (ret)
+> > +                     return ret;
+> > +     }
+> 
+> If event creation fails here, the RX/TX buffers mapped above and the
+> partition cache are leaked, i,e. the existing failure path for
+> ffa_cache_partitions_info() at least calls
+> ffa_unmap_rxtx_buffers_hdlr(). Please follow the same pattern, or move
+> event registration before resource allocation.
+>
+
+Thanks for noticing this. This will be fixed in v2.
+
+I will move ffa_setup_efi_exit_boot_services_event() to immediately after
+ffa_get_endpoint_id() in ffa_do_probe(), so event-creation failure
+happens before the later FF-A resource allocation steps.
+
+Regards
+Harsimran Singh Tungal
+
+> > diff --git a/drivers/firmware/arm-ffa/Kconfig b/drivers/firmware/arm-ffa/Kconfig
+> > @@ -41,3 +44,11 @@ config ARM_FFA_TRANSPORT
+> > +config ARM_FFA_RT_MODE
+> > +     bool "Enable FF-A runtime support"
+> > +     depends on ARM_FFA_TRANSPORT && EFI_LOADER
+> > +     default y
+> 
+> Just to check, does every existing FF-A user want this on? 'default y'
+> silently enables a new transport path (and the ExitBootServices
+> callback) for everyone with ARM_FFA_TRANSPORT && EFI_LOADER. I'd
+> suggest defaulting, or at minimum 'default y if CORSTONE1000' or
+> similar, until other boards have opted in.
+>
+
+The intention is for this to be a generic FF-A + EFI capability, not a
+Corstone1000-specific opt-in.
+
+`ARM_FFA_TRANSPORT` already has multiple in-tree users, so I would
+prefer not to tie `ARM_FFA_RT_MODE` to a single board. Under
+`ARM_FFA_TRANSPORT && EFI_LOADER`, this just enables the FF-A runtime
+path and registers the ExitBootServices callback; the runtime transport
+is only used by EFI runtime clients.
+
+So I would prefer to keep `default y`.
+
+Regards
+Harsimran Singh Tungal
+
+> > diff --git a/include/arm_ffa_priv.h b/include/arm_ffa_priv.h
+> > @@ -212,9 +227,8 @@ struct ffa_partitions {
+> > -     u32 fwk_version;
+> > +     struct ffa_priv_runtime rt;
+> >       struct udevice *emul;
+> > -     u16 id;
+> 
+> Just to clarify the model: 'struct ffa_priv' now embeds 'struct
+> ffa_priv_runtime rt' at boot, and at ExitBootServices we copy the
+> whole sub-struct (including 'use_ffa_runtime', always false here) into
+> the resident 'ffa_priv_rt', then immediately overwrite use_ffa_runtime
+> via ffa_enable_runtime_context(). Layering would be clearer if
+> 'use_ffa_runtime' lived only on the resident copy and ffa_priv_runtime
+> carried just the data shipped across the boundary (fwk_version, id).
+> 
+> Regards,
+> Simon
+
+Agreed.
+
+For v2, I split the runtime-enabled state out of `struct ffa_priv_runtime`.
+The copied sub-struct now carries only the boot-time FF-A data that needs
+to cross the `ExitBootServices()` boundary (`fwk_version` and `id`), while
+the resident runtime-ready flag lives separately in the runtime copy and
+is only set by `ffa_enable_runtime_context()`.
+
+This keeps the boundary data limited to what is actually transported into runtime.
+This will be fixed in patchset v2.
+
+Regards
+Harsimran Singh Tungal
+
+>
+
+
