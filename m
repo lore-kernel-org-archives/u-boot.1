@@ -4,95 +4,105 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93B9BFF886F
-	for <u-boot@archiver.kernel.org>; Mon,  4 May 2026 12:14:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A685FF886F
+	for <u-boot@archiver.kernel.org>; Mon,  4 May 2026 12:15:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EEEC983EF9;
-	Mon,  4 May 2026 14:14:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id B76F583EF9;
+	Mon,  4 May 2026 14:15:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="y1glPL73";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ikl35zx0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 76EF48460C; Mon,  4 May 2026 14:14:40 +0200 (CEST)
-Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
- [IPv6:2a00:1450:4864:20::32c])
+ id 23ACC8464D; Mon,  4 May 2026 14:15:26 +0200 (CEST)
+Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
+ [IPv6:2a00:1450:4864:20::636])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3A0938394E
- for <u-boot@lists.denx.de>; Mon,  4 May 2026 14:14:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B8B1D8394E
+ for <u-boot@lists.denx.de>; Mon,  4 May 2026 14:15:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-48984d29fe3so59775865e9.0
- for <u-boot@lists.denx.de>; Mon, 04 May 2026 05:14:38 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x636.google.com with SMTP id
+ a640c23a62f3a-bc1f0830f44so158517766b.0
+ for <u-boot@lists.denx.de>; Mon, 04 May 2026 05:15:23 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1777896923; cv=none;
+ d=google.com; s=arc-20240605;
+ b=jzvMcOD/EuoA8RgXat3tlAnC8hBoBGMeN7AB1aea3XdZogDaT60gAARo14/+b4rvkQ
+ hPscv51RTsJyzeQTHxhAA6NRxFpjXWGWJUWlqse8UA2NOFF2F+SEIjlbY7Lk2FZo6/NC
+ MaGonuzrVIkoHngvcKQDyVgxypg5Ui5N6Agmv1J0pSbzTl3yim47QPS/hz7tIPHfHHn7
+ 80vs6A0HlnLR8RZnyL0wyYs9ZsVg+bOI/OMcefkjkDRPKTRB1onLJuQF/aW/clt8Sc4K
+ EeoVN013cOquC+nBW+HnphnNvdK17CqfX4giJu5n1EYOLeeJrJU4xC2S8NQGvLXsx2zW
+ cCWQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=6LGkRJEysN17YwYs8bV0mp6qYaRDIMS4EgFp5eUUtus=;
+ fh=e2rH7ycBJosHKSsif0WP87up4NnPfdXsHR72MGJpv9o=;
+ b=DYVwYgivX/7hx2H4GBkM6EFfhyhGTdslZmFzicqvLCQaMhgV9JxER+Zmc2S9wwK29x
+ Nd2YPVvbfGOWXPgNLHTnUBFnEPLlznpwOLNubnve0Gux9CutOsgytUm3lqaH/oGbD8Te
+ scU/arY7BuB5DKhS2SyUXxO4fYHUuCLby/QpsvZi4abxsNM1Xo7ZrtwfG3KdtvFxWRhs
+ 60IRCNMK5Hhnh3df/RubbWorA0GIrE7v8re3Ynhjrk0K8e8QUGZgX69kp1B9nTt16DXY
+ UQG5e0yPnUwJ+LyPfqro81IZg7a0wnf/zB3mkgckWcNZIVIR72jFyHs0b0qdFe3Dz6Cx
+ ocpg==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1777896877; x=1778501677; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=B0Qy0bwrMnkpqZIJl5DkVHyMkiY1T/Er7nTpjepyB2Q=;
- b=y1glPL73p0xk5p9G1wIyECnkD/DSGcxgBwltyA8eP5V2k8gzwNqmQs4QSkJYD7WPLl
- YIHIrnWKY7CBEaLSXfDa8HcBWQ+Fi9RtVsTjvNB9q32YIKIZhAHsqSlC+uAbsNkE1wqE
- 6WTKbIDabtw6fmPbLGqDt+37jrjRhIuIrUnVop4P2AQ1fF0WKva2zjV/lLvPwd1AqZ/0
- 78S4Lp4h3grZRChZdbdWwKutk7HIhK8Uh0C0rXZyeTNl0BETKy+1fxPxsd0VjBNd79a0
- yiosOmgZxwTqOIdRYxigmvAFMKEfvmo/DKKusvlE6UGGzAcq6yvVagX7SkJ44ii8sUQE
- hnrw==
+ d=chromium.org; s=google; t=1777896923; x=1778501723; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=6LGkRJEysN17YwYs8bV0mp6qYaRDIMS4EgFp5eUUtus=;
+ b=ikl35zx0ppAtxzI2pAO3bmFnS9oaQfm/KxV4HP2zjPDUaCPIzcKMd6sR67HTOsRC04
+ CRDajMO8sAqvve4/ebRtb7eL2pvf/kVlAfkDN1cP+je3CMirq+51DbEG7d2S9nfzzwDk
+ au5UsabnXmAHuy8VQpGRJoRin/hMl/ERJsJtQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777896877; x=1778501677;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=B0Qy0bwrMnkpqZIJl5DkVHyMkiY1T/Er7nTpjepyB2Q=;
- b=GNDSIWqU1MnmDRHSE1azSlz0Kcv/P9aTCuy9Q5pTVNDcBgmeT6zNMfKvMQhCLcojCe
- o8uypWpzpYvRo3xpBNqODiecqRgekH9dwpTJOyQb92XvKYXu4OQ8qEufpIU7NMKpwzl7
- 2MitRTWI3bwpx62kma/pMWXZR1IICkeEEDIpAyhtj9PPA62t8YafJ5boUMK2AFWr2FkV
- /sYcw4qTpGHOY6fH5f/ddsZG2cTIZNJB6BNRZQDRIYlEtobb8rHOSVTn+6BEOUijMCY5
- HN4QTaNL32c6nt8pAMuUwvDYdAcZ6/i+jbW9wyJKF53GuCJa0ckdYuHiXy4Ba+0K3ybF
- iB+g==
+ d=1e100.net; s=20251104; t=1777896923; x=1778501723;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=6LGkRJEysN17YwYs8bV0mp6qYaRDIMS4EgFp5eUUtus=;
+ b=p8Wx43uS4QF88rGBWzvSt7gmP+ofX97/NPo8VmDFbFB9WnezDDs8UPgG+xdGS5w0o3
+ 6mNeumdw/KYJspHwEAuOPnRLCVn9nHu7pdgXXzWSm15n5Ere7fpN0sOFcvMGvi1ZwTvA
+ sYDq+4IhnCD8YitltY+0XV6ZJYlvEpfU3cGiRAd0l6hE8CZEFfId8VHWG/dUdpjGoYeg
+ 6xIvO/hBqoqGy/4wCg9ABMY1VXs4sVSb/NeQlECgecpa9pPX0pbkPa1Eznul0nTgwA4l
+ INKuAPGjewnb/45h3g1YsIfVFw58FohKHCcS5q7M7P8lOtvX2X42TTwXdQ3Mi1duRxgA
+ pQGQ==
 X-Forwarded-Encrypted: i=1;
- AFNElJ+uWKbV9hK9prU41yOMzc3zY4v7ERQ91NQDwiD4iHr6pICqPC3rFjSjS7mdUWX68Dh1NG54svA=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy1aWQQIWySHNg8lt02VbKTPhGd+n+eKKBxX91Z60xc2cGKNYVT
- 4ZsZ/C7cJ9kx24pflo0VUWQAnO9top6t/BFKjG1/DLRAypNEO1JsfiRwv6ZTGLDdmAY=
-X-Gm-Gg: AeBDietynMnopA6H13xUQQ/3lk6nIZIdWtr776A8KFMNPu1jUO4fCNxYPr6VsOaRTP0
- WN2S+53lv0n41Vj/d0rHFh9L647Q7sBVjxlhmgesV3qCLkHPmKH4uH4p8XHbdEsqBa3UoliPkzv
- wo2YoTSQLAkIVhV+BPefhIiyfm1fiV/cSzEm5qQ0UMqcD+9CdXo2DR7gaIgoeMY4RQqk/cjd5Ux
- VlsXn5R4zWFI/UDqfgvx4BVfrnDdpIzyr/xfm0mv4g39LsmJyOVggIJQF6qIZKVRbNthaBXLi5M
- DmVDqlxU5IuofQ/7VEjzObccYhfuhGP5RC70IcJvLXPM8fLFGht4Cp7b4X+I6CAWTQH2GetmLfB
- S5iYIMBjFV6mp0u83wQEbR5lqi8uwwGUnoQ8KakYnXgSvTJqBzSCUhXGwcRXRb4JozlJE/LkBlG
- jPrAZqpJIGTkIErkOwCqWjgRZP4ZjXvtxmz1L0E/OoaAaYEDAOiEGdZmKScU2sURCzE3C+a9fnC
- E0m
-X-Received: by 2002:a05:600c:8906:b0:48a:52f2:a0f1 with SMTP id
- 5b1f17b1804b1-48a9865e4d4mr107532235e9.18.1777896877443; 
- Mon, 04 May 2026 05:14:37 -0700 (PDT)
-Received: from [192.168.1.36] (p4fc3dd86.dip0.t-ipconnect.de. [79.195.221.134])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-48a8fed8b8dsm108192285e9.4.2026.05.04.05.14.36
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 04 May 2026 05:14:36 -0700 (PDT)
-Message-ID: <3e0b30b9-e1a1-47a4-8e71-5a6e680da547@linaro.org>
-Date: Mon, 4 May 2026 14:14:35 +0200
+ AFNElJ/zV/QjrfsMrmrHQxIKg54MeBpVO3vhafJusqFQkiR+L+Uxidbfv6A/wJcrnaDo/9GDbsjEfCc=@lists.denx.de
+X-Gm-Message-State: AOJu0Yxf6czjiolGzqNIwzpyVbcR9uV7SwVho522AbyYnhbUtg9ovDOX
+ lTheyCJLQ38w11fYn2sq357oEp25yK/clEMtrS8pL9kZZyJphuWxTQsqYroA4e+uGIkfK2F1qvV
+ BXqq4sgJvcnBT9hWU/JAlRBemN6CHkpBM/ZaJ5pQo
+X-Gm-Gg: AeBDiesQIoiUtlKS8g02MSc8/FcWRHOGRDyhJfRCV0MiZWZTRhc65e+nLkVZ7mMwAC+
+ fSm3aWbMcNmE8rXJdYK1OXAw/xPaw7SgExVrZL1H4sRdYUdM0q4mRLl2VXF+Xaf21M4kswGQ62G
+ TEUtcmVMkjEGgXRrzTOGdp7NPBWwHHVKsAr4S2AL02qFJdveNe2Wlc9X+1iTTtnFj/t3hpIrAex
+ Sil2Ls4PbOftqtvXuHO67gPxpuAgBGVSvh6BxmDOAWutwcOajoAmc76HOm39JqBAyftxPS39AU5
+ 1JsBFVJOFFtK3cMy
+X-Received: by 2002:a17:907:3f14:b0:bc1:4e2:854e with SMTP id
+ a640c23a62f3a-bc104e28dedmr305018766b.4.1777896923054; Mon, 04 May 2026
+ 05:15:23 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 0/2] cmd: ufetch: print Net feature when NET_LWIP=y,
- prettyfy if NET=n
-Content-Language: en-US
-To: Quentin Schulz <foss+uboot@0leil.net>, u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Peter Robinson <pbrobinson@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>
-References: <20260428-ufetch-net-v1-0-5d58c7618239@cherry.de>
-From: Casey Connolly <casey.connolly@linaro.org>
-In-Reply-To: <20260428-ufetch-net-v1-0-5d58c7618239@cherry.de>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+References: <20260425033742.1519298-1-b-padhi@ti.com>
+ <20260425033742.1519298-2-b-padhi@ti.com>
+ <20260427195405.GL41863@bill-the-cat>
+ <9863b81f-e6ad-41cb-8e02-4f22377d0137@ti.com>
+ <20260428140606.GR41863@bill-the-cat>
+ <CAFLszTgBzgYYF8s9u_5=-4Yd-zV5Z+wNF5SzP6M+MSowRreJOA@mail.gmail.com>
+ <2eeccc2c-069e-4b91-adca-2917a24372d2@pengutronix.de>
+In-Reply-To: <2eeccc2c-069e-4b91-adca-2917a24372d2@pengutronix.de>
+From: Simon Glass <sjg@chromium.org>
+Date: Mon, 4 May 2026 06:15:08 -0600
+X-Gm-Features: AVHnY4Js49xi3OOi8cWZtLkfM5qMhGzinNHD2db0CYEOts-9Pc9IxHBxxsFOAXw
+Message-ID: <CAFLszTi98wvn5B8vmuzfJHOPWgR3BLto5p6d_C9baCVKkTKqZw@mail.gmail.com>
+Subject: Re: [PATCH v4 01/11] spl: Use FIT data address as fallback when
+ 'load' property is absent
+To: Ahmad Fatoum <a.fatoum@pengutronix.de>
+Cc: Tom Rini <trini@konsulko.com>, Beleswar Prasad Padhi <b-padhi@ti.com>,
+ afd@ti.com, bb@ti.com, 
+ anshuld@ti.com, hnagalla@ti.com, jm@ti.com, nm@ti.com, n-francis@ti.com, 
+ u-kumar1@ti.com, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -109,37 +119,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Ahmad,
 
+On Mon, 4 May 2026 at 02:32, Ahmad Fatoum <a.fatoum@pengutronix.de> wrote:
+>
+> Hello,
+>
+> On 4/29/26 4:23 PM, Simon Glass wrote:
+> > On Tue, 28 Apr 2026 at 08:06, Tom Rini <trini@konsulko.com> wrote:
+> >> On Tue, Apr 28, 2026 at 04:26:31PM +0530, Beleswar Prasad Padhi wrote:
+> >>>> I guess the real question here is, does the spec allow this to be
+> >>>> omitted like that?
+> >>>
+> >>>
+> >>> Could you please point me to the spec? I could not find it.
+> >>
+> >> Sure: https://github.com/open-source-firmware/flat-image-tree/
+> >
+> > It is mandatory for kernel and firmware images. Instead of allowing it
+> > to be optional for 'kernel', we created 'kernel_noload' some years
+> > back.
+> >
+> > Which image type are you using in your case?
+>
+> FWIW, barebox has always interpreted lack of the load property to mean
+> that it should just compute a suitable address itself (i.e. free memory
+> aligned as Linux expects on that platform - same as kernel_noload).
+>
+> Writing that into the spec also allows for Beleswar's use case here,
+> although it doesn't give the guarantee that the address will always be
+> the image address.
+>
+> I think that giving a guarantee about the image address is wrong:
+>
+> - If the code is not relocatable, then its load address can equally well
+> be written into the FIT image node
+>
+> - If the code is relocatable, then forcing the load address to be the
+> image data addresses will make non-external FIT unfeasible for most
+> users, because of code having the wrong alignment and for external FIT,
+> it will mean careful placement of the FIT itself is required, so we
+> don't end up with misbehavior at runtime.
+>
+> I thus suggest, the spec leaves it to bootloaders to select appropriate
+> load addresses if its missing and if the bootloader can't, it should
+> refuse boot (current U-Boot behavior). Future U-Boot behavior will
+> likely need to be adapted, so this loading at image data address is only
+> done for these specific firmware images and not in general as otherwise
+> it would preclude any other use in future.
 
-On 28/04/2026 12:56, Quentin Schulz wrote:
-> Make sure the Net feature is printed when NET_LWIP is enabled, not only
-> when NET_LEGACY is.
-> 
-> Only print comma and following whitespace as separator if there was a
-> feature printed before feature to be printed.
-> 
-> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
+This seems reasonable to me.
 
-As simon pointed out the erroneous ':', with that fixed
+So load becomes optional for all image types, not just kernel_noload/fpga.
 
-Reviewed-by: Casey Connolly <casey.connolly@linaro.org>
+I drafted something here:
 
-> ---
-> Quentin Schulz (2):
->       cmd: ufetch: show net feature when NET_LWIP is selected
->       cmd: ufetch: only show comma separator if there was a previous feature
-> 
->  cmd/ufetch.c | 29 ++++++++++++++++++++---------
->  1 file changed, 20 insertions(+), 9 deletions(-)
-> ---
-> base-commit: 4433253ecf2041f9362a763bb6cb79960921ac7e
-> change-id: 20260428-ufetch-net-1ba7553a20c7
-> 
-> Best regards,
-> --  
-> Quentin Schulz <quentin.schulz@cherry.de>
-> 
+https://github.com/open-source-firmware/flat-image-tree/pull/50
 
--- 
-// Casey (she/her)
-
+Regards,
+Simon
