@@ -4,92 +4,111 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A78ABFF885A
-	for <u-boot@archiver.kernel.org>; Mon,  4 May 2026 12:08:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6686FF885A
+	for <u-boot@archiver.kernel.org>; Mon,  4 May 2026 12:08:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0782A8460D;
-	Mon,  4 May 2026 14:08:15 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5175A84653;
+	Mon,  4 May 2026 14:08:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="GjXs6aoq";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="nnnqs09s";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BE7C880F0E; Mon,  4 May 2026 14:08:13 +0200 (CEST)
-Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
- [IPv6:2a00:1450:4864:20::531])
+ id 9A75184656; Mon,  4 May 2026 14:08:37 +0200 (CEST)
+Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
+ [IPv6:2a00:1450:4864:20::630])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B70548460E
- for <u-boot@lists.denx.de>; Mon,  4 May 2026 14:08:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B9EDA8464E
+ for <u-boot@lists.denx.de>; Mon,  4 May 2026 14:08:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x531.google.com with SMTP id
- 4fb4d7f45d1cf-67c9616b4feso831240a12.1
- for <u-boot@lists.denx.de>; Mon, 04 May 2026 05:08:11 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1777896491; cv=none;
+Received: by mail-ej1-x630.google.com with SMTP id
+ a640c23a62f3a-bc356898256so54056366b.3
+ for <u-boot@lists.denx.de>; Mon, 04 May 2026 05:08:35 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1777896515; cv=none;
  d=google.com; s=arc-20240605;
- b=a/Z9TrZJOSMIpvkP1rg32atvScruiTAJcWPFuW3DJIlU71gB2tJVN2r0571qnzv5HY
- FKFHekCVtm/RIE6vCgVf9HQ12V0RExOTH4m7ZrFJj4xGPFq2TybRRXoRshuG/C+lki8n
- P3TnYOSxDBxO/7WuSfnHbMhZpn04Zjn9Hd8pN0Tdm57mXVaJZVDuF3ZOjxRKuuoIXXq5
- j10iOtMgJdTEKWbbA9WVOPFWUu0Mh2vtumJsBBJVLRfXJI66NqtsxveYBTYwVX2cLg0l
- GUAKEq23UekNnOsL2+3Iph4BdyrVl5+nsSFY6nSkOJp45xwXtGbkig4TDkocZ7bOFJ3K
- QiHQ==
+ b=EB0te0JqslZ1L8SgZlpLcOYoeu66MhXwpRymwJjDc2EOqSyU9k4xySBg3zqhhebFzu
+ g9ViEGghU2QEvg5ZAWmd7LSZqPnGIXOsUQ00Y15Myuf27vh/kymy2/xIslP8pc2lOa0Y
+ qXAoPxjzABu6eKyrVuJEdDKFmg5rU0xfA63rkQhbmD43pmXRjVuIouIhmY/HFLfZ5MNL
+ rnMypCb8+FeM7W22hc4FOuYuyBdDupfXbWEDmcUGys07TfS7A5tomWFYWEa+c8+joQTC
+ g5M9WQWw6494Jia8NfMxsI/rfGGMALvuUEHlP4p6LbcMu4xqWzweW9VdToA96OGjlSNi
+ TjjQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=eEXeZ51QDLLWkAOJhlbJxRdst+KTy+5CASPp1g0DKzQ=;
- fh=riS258wPZhKPiPIwb7TeuHwFio61U2578GVrX1RJA/0=;
- b=U6GAJcUudEQwxxpgLR6tjkgnmJKVyLoacJPBtDUZ4Q6gkdK6II08N1scC/MhuePQqf
- chmRZrH2jVxFFWo5yQim2GvhBydZq6JdUQ+SCJyhwcrAsObZ2odUOUrA/cMEN0SEiz62
- MYjwsw4tStWsVtfeHwhU8NFTGkaS6zlIAeGXlFYVewSgzPOPDW16o4FN45e3vWLXkx0h
- RSaW30JHmtLOTNpJpk4C34PpqwDutXDmQfdNUyolbHZv6Kdu4I/qJVcm5eIgsdX4GABd
- U7g+qpEdGi5d66n4buO4AJhmuPwpLla1GAlB5w/Xsm2O18BDYJd9JdpoH8rTOWmzKzNr
- H3rQ==; darn=lists.denx.de
+ bh=asVWkE2Dwo0vesaM6/Y0NnoGPwfpZ8iFjkEWXIqDl8A=;
+ fh=PvMd4X2mdXT08JWfisjv9stH8Lx5t+gM5zKif/Je664=;
+ b=YgI8+50xdw7ohzYB7N9WCrI/3HEJ6b3oPrxAeJCRVqWfadxKQeIPDX4ZyeLug5/xGZ
+ 9UbOq/RY0gja5vtdDLauuNDvA1//doCPpapnOflMHFgego+RrnFHXIfaIfTtDV581keM
+ KHMkTU9BpSDP0m3MZxfjRiwesvZWE5pNYQD7dX4tQiQUuiEqUAFGRl9LiSzNCxSekBde
+ HFepmMKJ/GSfKQlfUX3Nr6J+7YvfZ62bjMCjOJDm6Q2ox5OuIN1kTOD1+2RU1WQQdMly
+ vyv7bVS/SH71kKUkAIg2Cn3n+5JEaRiHXzaLj807Bbj/Qo28CAjrV2Pup4L/tFxzNMdg
+ i5tA==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1777896491; x=1778501291; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1777896515; x=1778501315; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=eEXeZ51QDLLWkAOJhlbJxRdst+KTy+5CASPp1g0DKzQ=;
- b=GjXs6aoqlC5bh/cuGRwXwE+yIn1OQe3tnGSToO6FdEt4cbStMTXvfLLZcNFIZ0gBsj
- ixefhxPbn3FrYGf1Z1R0otLZFFIHfdkHGimv5biWeahLhrmLL26gLvD5ux8SA6+38bic
- 80b4FtSHAiuf11dH4UUJtYweFhy1iwJFkgWKY=
+ bh=asVWkE2Dwo0vesaM6/Y0NnoGPwfpZ8iFjkEWXIqDl8A=;
+ b=nnnqs09sehLoZ0cgBHMYhHx2vhqNk+MfntIAiEBToBo1rvmIzWbhygRQH/MK29r1iO
+ jlrw8lc361AkImkwK5cHLTP150jAwQu6D27F/rWM6nFDgr8eyv8TfRGhD0qKbvjLHty7
+ HUAy4vOFo3TtAoHEERuIfjkAEhaL3kPE1XDVY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777896491; x=1778501291;
+ d=1e100.net; s=20251104; t=1777896515; x=1778501315;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=eEXeZ51QDLLWkAOJhlbJxRdst+KTy+5CASPp1g0DKzQ=;
- b=Aa/wtVOlfSpNruPejmBgHi87E/Ff6sF3yvj0VVCLcMTh+hKTSdEun/zK8G8tlCIzvk
- 4Vc9lPLCXXNH8YErfICeD4eBFC/0XxDDW6WqsNJkPs03Jh8Yq8AneZh4d/v+K3B+1GhW
- EUIhMK7G/M6EGSVqTmVVl2RCDQQWuqLOLeeRgtbORpuMUNw536YDG7oDxkCVRe7EnVDU
- eW/EYth9YgrFe1uergHhMi223gj5BHrYYfmFEJkfqF7lv1LPCeuR239x2sHrUThek5/R
- zq/z/q0kztALi7yU/5qDy8cuLkaJByFYnp+vBK2kE8MSu0tQShVAGT5+mnk5SQT2/zvu
- 9VJg==
-X-Gm-Message-State: AOJu0YyKKdw2862OWcQFqMx3tGY2+q7RUNjHBkciu5brm1L/ulQNDpen
- KAOQTmdvThb1HnNsBs1GVHjQhIpj8JfNhyp8aH3ATu3ERdccBNLvNdalygqtXxAFtmE230MSC+0
- Rf7b6Q2bfSLGV0Pn4S1wTyBONE1hnJayhNzHQnArz
-X-Gm-Gg: AeBDieu5tvMhL9qsotWqPJZqbg2UUpUGdfhWBhyYIri2xI2imgKgQUkZBrpp9mP7ho7
- 9bfyQNK24QayOmAsr41zQJLT7xyQ/ovGOMSX8bS+wGymwXGrZWPCB1Ohijtz9KADWKRbxGpXoxp
- 1A+0dULxyMef+g9/5PoOXZzqi0ZOO4UlSnPa0knXJDOlxaSke+kCQmH3UoDh4PGd4EhtCj+Ma4y
- h2cnTatiu01fZ5BA/VxBsazW9xG/dkE4z0dpYKBh663DWRo4h1TxsICW/75hxesHlNPdun1tSAl
- ytfT/K0Y4g5S9daY
-X-Received: by 2002:a17:907:6c0e:b0:ba2:3f1b:1314 with SMTP id
- a640c23a62f3a-bbffb961df1mr498774866b.33.1777896490720; Mon, 04 May 2026
- 05:08:10 -0700 (PDT)
+ bh=asVWkE2Dwo0vesaM6/Y0NnoGPwfpZ8iFjkEWXIqDl8A=;
+ b=R/cPPUGFc7SulHJLhVOrKXQEAE34chQmy66DZaFK+ZYCUin+gjoxvWc7a1Tmlalmj4
+ SCLYmruFdgQe3RZegcND+vkYn0Y5w+5Kj5kqX3BQ7zzHukkZKMTmF+0ZbEttnPTrZmYQ
+ 9B8loUBtJENlshmsj1FNUfysggEY2yigZH1cH3xvI1+KXXpAZxuLrL3+1O3GXba48Ddc
+ SRlWpVIX20x8LyaR9Mxn+2/6UFt/5AhNlOBiCE02KDf4J9YMKcIjs8vEHbtu+R6F6aDW
+ fzENKvEbbf+La5SCHkyIeplZfb9YIlpV28MJhQrqAH2QY6dqq4QRqApOru4f6K3tsXNW
+ y67w==
+X-Gm-Message-State: AOJu0YwowNzWsbw4ohH2gAD36zb1OdnlOQ4/GOagXNTQ4IMlSgT+RXUU
+ je/tj3D5bb10Xh4DCMKT8U57NQIESGoBCLU1ox8ta7AVMSLOrLzWSwb2H8HLmR6udD8Dt7dbn1V
+ 8VkswjKpsDSKUhSKXNFGw5OZFiUbT6LIJCbN65WhQ
+X-Gm-Gg: AeBDieskN690P1G2Uh2Ichvt9EuviWDjNYPjhx8INg4SrZoCUw5KQyfofxpqx32uBOY
+ qg5OjUAfaSC52ltA/GockGgjSEo2HH/+8u7GUQwxC8LBcRbtq+7bSlptBMjzhQctvPjvzgzBePv
+ Pcn2BmV8CvQdGsfH3DAaK+6gIhqy5LpiZgxABzrdiM2FPm9Dwv0r71X+E25UiPzc78J86Vn/DC8
+ DxMyXWyxL/DnA7hjb3F0gylnmwrxGgyHHs1YqS8ZV4AFsciqOtzhMZSdkBbDBpOPvp0aPp8N0O5
+ ckd5ui9gjs0JCZor
+X-Received: by 2002:a17:907:198c:b0:bb8:fd88:f400 with SMTP id
+ a640c23a62f3a-bbffb23906cmr449246166b.21.1777896515088; Mon, 04 May 2026
+ 05:08:35 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260428-spl_fit_full-v1-0-dde63beeaab1@valla.it>
-In-Reply-To: <20260428-spl_fit_full-v1-0-dde63beeaab1@valla.it>
+ <20260428-spl_fit_full-v1-1-dde63beeaab1@valla.it>
+In-Reply-To: <20260428-spl_fit_full-v1-1-dde63beeaab1@valla.it>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 4 May 2026 06:07:59 -0600
-X-Gm-Features: AVHnY4JD5-yypRTuojCaCiTieoMU-PQ9PH4_fWLYt3nbcwHWzaiE9pgNfIZX-R0
-Message-ID: <CAFLszTjGTXHbOej36kJdC28Ri0EgPv_0URi5vCm_y4yUYyznzw@mail.gmail.com>
-Subject: Re: [0/5] Enhance the SPL FIT "full" loading logic
+Date: Mon, 4 May 2026 06:08:23 -0600
+X-Gm-Features: AVHnY4JeC-mxjS0W0Q832zCckY5qTbp6Vkc2SlDb1krZvIdym8ZouMZAfhJHSXI
+Message-ID: <CAFLszThmZc-63mY5Dh9y5dZqWJ5KsF5ergCtzbRfyuuo2AYaOA@mail.gmail.com>
+Subject: Re: [PATCH 1/5] boot: fit: fix FIT verification in SPL
 To: francesco@valla.it
-Cc: u-boot@lists.denx.de
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ James Hilliard <james.hilliard1@gmail.com>,
+ Julien Stephan <jstephan@baylibre.com>, 
+ Frank Wunderlich <frank-w@public-files.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Kunihiko Hayashi <hayashi.kunihiko@socionext.com>,
+ Anshul Dalal <anshuld@ti.com>, Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>, 
+ Ronald Wahl <ronald.wahl@legrand.com>, Simon Glass <sjg@chromium.org>,
+ Dhruva Gole <d-gole@ti.com>, 
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+ Rasmus Villemoes <ravi@prevas.dk>, 
+ Michael Walle <mwalle@kernel.org>, Marek Vasut <marek.vasut@mailbox.org>, 
+ Miquel Raynal <miquel.raynal@bootlin.com>,
+ Richard Genoud <richard.genoud@bootlin.com>, 
+ Wolfgang Wallner <wolfgang.wallner@at.abb.com>,
+ David Lechner <dlechner@baylibre.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -107,22 +126,17 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Francesco,
-
 On 2026-04-28T20:24:41, Francesco Valla <francesco@valla.it> wrote:
+> boot: fit: fix FIT verification in SPL
+>
+> Align the behavior of fit_image_verify() called in SPL to the one in
+> full U-Boot. In particular, this function is called when both
+> CONFIG_SPL_LOAD_FIT_FULL and CONFIG_SPL_FIT_SIGNATURE are set (which can
+> happen e.g. in case of secure falcon boot).
+>
+> Signed-off-by: Francesco Valla <francesco@valla.it>
+>
+> boot/image-fit.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 
-> this patch set tries to align the behavior of the SPL FIT 'full' boot
-> flow (i.e., the one obtained enabling SPL_LOAD_FIT_FULL) to the one
-> happening in U-Boot proper through the bootm command.
-
-Please update doc/usage/spl.rst (and the falcon-boot section) to
-mention the newly-supported pieces, i.e. kernel decompression,
-post-processing, ft_board_setup()/ft_system_setup() and the ramdisk.
-
-Please also extend the existing FIT/SPL tests (test/image, or the
-pytests under test/py) to cover the new code paths. At minimum a
-sandbox_spl test for the ramdisk fixup and ft_*_setup() invocation
-would give us some coverage. Let me know if I can help with that.
-
-Regards,
-Simon
+Reviewed-by: Simon Glass <sjg@chromium.org>
