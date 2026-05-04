@@ -4,92 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25FE9FF885A
-	for <u-boot@archiver.kernel.org>; Mon,  4 May 2026 12:27:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5898BFF886F
+	for <u-boot@archiver.kernel.org>; Mon,  4 May 2026 12:27:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8F03484674;
-	Mon,  4 May 2026 14:27:46 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id EA8558466F;
+	Mon,  4 May 2026 14:27:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="kvrwF4Zj";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ewFgkHWx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5EC4F84674; Mon,  4 May 2026 14:27:45 +0200 (CEST)
-Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
- [IPv6:2a00:1450:4864:20::535])
+ id DDC548467F; Mon,  4 May 2026 14:27:50 +0200 (CEST)
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
+ [IPv6:2a00:1450:4864:20::62e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 76D8B83EF9
- for <u-boot@lists.denx.de>; Mon,  4 May 2026 14:27:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0166F8466F
+ for <u-boot@lists.denx.de>; Mon,  4 May 2026 14:27:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-67b7c71c165so4442506a12.0
- for <u-boot@lists.denx.de>; Mon, 04 May 2026 05:27:43 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1777897663; cv=none;
+Received: by mail-ej1-x62e.google.com with SMTP id
+ a640c23a62f3a-ba67b332bbaso574043166b.0
+ for <u-boot@lists.denx.de>; Mon, 04 May 2026 05:27:48 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1777897668; cv=none;
  d=google.com; s=arc-20240605;
- b=kico3Ml1dEIyqVBb8mo2pg8UzFcRWp+/ZT41LsvuOoepKM9eKG663HsvCB6m1LPn8d
- IN/X4pisHZniEXJbvGQPPQ8lkrpPgpJTKLOThJYKfOJE2f1B9EK/pt4/Vptl8UV2tGk7
- RmpmjqDSpEBSrJh9vTNlMhEOQMKZFgOph1VZdkY2u5QLYsQLL5ujKp2WDLMk8L/psl3j
- LwF1TE34ARt1Mg/JZ/amj4BOUpjwBwZN+9OpNj0xQR3XQbS8VWBUryDYOj3Zwe9RoTMm
- ASXG+u1pvvPpyUBjy5la9UxQupqdjGfqBG2pLrhliCyE1KpVdVRAD+cZZp3JINjaoKQh
- w9qQ==
+ b=VV2oj0pzL+zJgevO3ZO301gWMRp3jQl9CB0CdqLQd0OINPDBwwtA55f/fB/6ySzwl2
+ Rb31qtaorWG+G9garxwuruFvarXNXq6IU9Cfn94Fth2w8Va2BaljMzKJxe1vBn9dXmPm
+ WrG6n9Ej74h6Im+9rXRwerWxt7/NP4s6PL7QTbfTGIXGS4/JSCB6Fw9ZaRM0HbYhT7bR
+ KAdKHuqfDMAnYkRix+Lsc9Ph1hKMuTFKba4EeVWlT1Z+Ct8tA3qzmC5/J8MBKieD14hc
+ 5ADjHSMVG11/JjssWzz2jxjy3tb43dVgHYd0fkx9vT97/3DCOXwyVJc5gMpMGHd1GTaP
+ aIJg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=R8EOwhJnLdcq/ONAbdvvlIPzMGyDbBfcowTTYo+UdVM=;
- fh=PKLU0xSNpsrGOfl0gQ17G1VaKViMSq+Ysfr2F1w3zVg=;
- b=YWBxZSkN4EvnYBMgKfH8zgjGO6tL8Ipa8Po0ZMQFV6zFNN1wRcUYKJN48HrIyTApUn
- qdAz0jChC+Ddqwrrd8Lnz81ao+GgkTm/IfWERy4CIlEPmMDY4JFE+MNOfRaAktkmYQvU
- VtGcplRS0bQwXMIt3i06ccQkOEuypOiFwODBPCRV/FRBZYc0HtXfBqaN3IzrBYQSzmym
- 1PMW4qq9K8zXA7m7UqYJivl9WbQEahbL1Rs2wtrMoMhyHwWLBSC+Twq6g9s7+Uy43zMP
- gVGFu72+Q95fcktgEDME1YYHwU6Eb9k3/syO9iGKIvEQpWbpjuzIJfTg11WCVRHO5rlu
- FArQ==; darn=lists.denx.de
+ bh=gTLdJnpwr61y42cL74CtGfTRTFZq/rWPcJGL1ynPJDY=;
+ fh=pCo84Ld/Lls5A+seuHpViQR2DqbA6QvisXP4P/lOPxc=;
+ b=IuOwNitvcF9Uv30My9Uaix84rmg5F9T7uKSiEu5ORGKfpmeg5ocmRrXr4aP0Kr4Dfk
+ op5dcmBJWyirFBRGHhzoivhug80R6C0NuegY7DclPyXo/5yPRXWMCu0IQTyOt8PaiXYs
+ wXkr+BkhhxaAx43WZQ1ihcJDBq37AmBxEIZrWyzmNH9tc/40BZCP6G+q2h7NLpJYfLup
+ +l/d5BE4Ovvx1A/OHh4HaZF3pzv0uvNLhVpYE5qf5Rg9jZNzIT4P8dCdtiu1kpftF9O/
+ 3+9szZ2mEa4t7WgA/tRXC2/OJ3iwGmvGi7blk1KQ/GC/Kv9aKU+PiA/Rn/TolaFdzvZ4
+ vEIQ==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1777897663; x=1778502463; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1777897668; x=1778502468; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=R8EOwhJnLdcq/ONAbdvvlIPzMGyDbBfcowTTYo+UdVM=;
- b=kvrwF4ZjeTNdAxwsbVGEPRiiEVoE7ybs1j0ZvjXwcb5kEgYGSgBDCmfO+oF+f3VD5s
- chW9ygtOUBFKxj8/F0f+S9A5gPMeosvpHN6ggaQoPfEK2OYb4Kkm5zGHXY3cPrJ/vFZ7
- Qx2fr62pZ9voZMCgo0vLV5UZHDO5SkW+59uIM=
+ bh=gTLdJnpwr61y42cL74CtGfTRTFZq/rWPcJGL1ynPJDY=;
+ b=ewFgkHWxFI8ILfBZ06RW5hNMxNZN9sjQTVDtdSlrJYAR6eutXib+ZjxHVeVbbQPvuw
+ v32Ahvppbu/6Gm0z7t8pbE9OalpkboiAdIQfomegMC9OerWiU8/ZOxrecMLogoI1fIsq
+ /VNbAqkdbspZvSdfZuJ5nz1ySpbS6+rppd4Dk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777897663; x=1778502463;
+ d=1e100.net; s=20251104; t=1777897668; x=1778502468;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=R8EOwhJnLdcq/ONAbdvvlIPzMGyDbBfcowTTYo+UdVM=;
- b=e5Z1zB063bhC2HhlIDY5n3PBKMTG9NAdim6ZxiSo6ZdBxRO6MOhiE6LWVFKgHg0si/
- QuHfs9WzXGr7Mkrawgt8kxawAsjADhw3r8a10xvTUOVh6zHV2y4uFeFOUAZqQs/JBMdr
- YA8hYyJsqx8FASITzapiIQcSxBx98RuhZba0XZCUiEZqLE2Rokm/eSBpV7yVkgmyBgVF
- M8tEbfHxfnG8ng+aHWALEb7qedyKSNNgCpNvjPM9h8OEHVGwKQBNJY8Rx6f7miybW2xZ
- 2xAwtHXzTL/Ukb1oWrnX6dwmhe4+E8rOutftRx2JqBLQcBLg9eMdu/K8ArjdjyDfbrPH
- koOw==
-X-Gm-Message-State: AOJu0YzHdJf7/UgEnaAut7+crQvP9sIfyuf9nRR+A0z9/usAe8I68VDJ
- ckXx2/uCHNptLWyF3EklzN+2Q+bHAx9kE+SnW9feE/iH5nnXv+vWoQ3BPSb05lzcDJCgpCIcJmN
- EdUo9duXXS3t0ukfFz3mTGJ6tRtC+fCaxx7s6HACVY/ffPQHyWWQ=
-X-Gm-Gg: AeBDieuyqrJAVF2nppZJEfp9lzOvUPmDys6Rgr4c8mp3Rxvbq0Z3l3EEOplsRvoVhSB
- CT0M5Nt/53CXw/5gplfzjd8tQl5zFUQ9P7x9awZ8um4Xb9FaPMRQcIM2dZH5/q9blYtsk/bBcUp
- Dg/45uHL9tCAPxYbpf0E8wn+KjZ4hriddcUAYLocCpEl0F4Lys5+KT1UAC7QQi/XgseeJmVgpcy
- Hfhpo77X2r+gIbV1KNZySv9P1amqM8yApN2h30mI72r4bP9YDCN8EPAViLhAwfdabqdKm0SfsKC
- o7tGiZpreLUklqd3
-X-Received: by 2002:a17:906:9f8f:b0:bb9:120f:965 with SMTP id
- a640c23a62f3a-bbffab2fb42mr510293266b.7.1777897662872; Mon, 04 May 2026
- 05:27:42 -0700 (PDT)
+ bh=gTLdJnpwr61y42cL74CtGfTRTFZq/rWPcJGL1ynPJDY=;
+ b=WQfJBFmwSkzITs6T6OtDvBy0Q8IlwyWEFVL2Hc23HgMRLHpn5NjOHTK0vmiwGGs503
+ dMs3l2eDu1m28lBCwcLAsgbvcoCZp09WaZQvGpqPPyhF2laMe6qC9nRbFyN5oCQYP/qq
+ ssiptBaYj5gXxJB1dOnZ4Ja+ISLXatYHi/aFL2kC87I+FdK8qoW0oOnFo+slBKBHisPV
+ zHiLGXXxAoKNaiKc5mhn9klf6HXEubRpYCvpzEnbura+1kUwhD0EqisNzV8sbLAE9ASw
+ v43wnfNS3KrSACGQcDpDe7Q15yYseKM6mVhpCYXi4c7750Dht7z8lzQKNISFqhizjKdQ
+ hclw==
+X-Gm-Message-State: AOJu0YwmXNnJjmFXLcGLasMEheiHPPiplwUjmeK/E1OwTeOlWXMUuLra
+ uCicN9qGrmMR82W97IHNm4m6zPIeWj/bF8rJPTB5+B1jC8pZey7CWR1F20hqNe3N2oge/wNIXD+
+ FscblaASOoFhbyPMKm/d7pkd8wXEvlSbzRG/MoxKl/ZOaDqrr9v4=
+X-Gm-Gg: AeBDietmJPfj+kL+FkoDgB2uw+IbMwHvUuooe5WD77YQJp2cDhLEX0Rtgxd8iSdclsl
+ WE9TFBSINj0yTQTf0cDLgxFxGTcRLsMXOdc3ZenXFAgEjzlmr/gKkAIjXB3SEHRzu7ACBBWIrTq
+ 3LejH/ViGcSBWIzr7rUyL6PpPEtgSjtnIlxpCd4t7JyzVRTnga18zCW5TIb8z2kR5yAr7V0c2fD
+ ArSBcmuP/Di+DljVm+u5xBTbVqerYC95gmBzCXsW4m6324TkVDuY7m8NOtpjitj54UM0y5fM2xx
+ gzbr72ntt85RKLjSwIz4f0SW2tQ=
+X-Received: by 2002:a17:906:f595:b0:b9c:4fa:9141 with SMTP id
+ a640c23a62f3a-bbff8dc777amr504343166b.9.1777897668308; Mon, 04 May 2026
+ 05:27:48 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260429114250.791663-1-ludwig.nussel@siemens.com>
-In-Reply-To: <20260429114250.791663-1-ludwig.nussel@siemens.com>
+ <20260429134142.1.20756bff4397b8b9e5cd57e4be96a99118b7c1ba@changeid>
+In-Reply-To: <20260429134142.1.20756bff4397b8b9e5cd57e4be96a99118b7c1ba@changeid>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 4 May 2026 06:27:28 -0600
-X-Gm-Features: AVHnY4LT55kEY9U-oG8WCyLmjZI08YdE7xceMOjItU-ZlOJRE-hggCSi2bTcznE
-Message-ID: <CAFLszTjwGbKPKaVTmVfhNNOsrco7W8VqcmLWvXjk3d6d+Pk8=g@mail.gmail.com>
-Subject: Re: [0/3] Improve U-Boot's TPM handling in the non-EFI case
+Date: Mon, 4 May 2026 06:27:32 -0600
+X-Gm-Features: AVHnY4Las_gFJ31UH9ISuRHXoCcABMTvEMWZezZ0KZiZbk9lnNhBxCf3CXDK3RU
+Message-ID: <CAFLszTisBeG-FsQLTCJEw9VOYsS0sQUV4bwAmaJ3BcGp3k5RjA@mail.gmail.com>
+Subject: Re: [PATCH 1/3] test: include mapmem.h explicitly
 To: ludwig.nussel@siemens.com
-Cc: u-boot@lists.denx.de
+Cc: u-boot@lists.denx.de, Jerome Forissier <jerome.forissier@arm.com>, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, Simon Glass <sjg@chromium.org>, 
+ Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -107,28 +110,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ludwig,
-
 On 2026-04-29T11:41:40, Ludwig Nussel <ludwig.nussel@siemens.com> wrote:
+> test: include mapmem.h explicitly
+>
+> The file uses map_to_sysmem() from mapmem.h but relies on implicit
+> includes which may not work in all circumstances
+>
+> Signed-off-by: Ludwig Nussel <ludwig.nussel@siemens.com>
+>
+> test/boot/measurement.c | 1 +
+>  1 file changed, 1 insertion(+)
 
-> U-Boot might be the first component to start the event log, eg when
-> used in qemu. So allocate and attach the TPM event log to the TPM
-> device if not initialized yet.
-
-Thanks for looking at this. The cover letter should really mention
-patches 1 and 2 - the pcr_read changes are definitely user-visible.
-
-> I am not sure the allocation is the right way to do it for stuff
-> that gets passed to the kernel though. Advice welcome.
-
-Handing devm-allocated memory to the kernel is risky - devres can free
-it on device removal, and the kernel expects the buffer to live
-forever once linux,sml-base points at it. For memory the kernel will
-own you want a reserved-memory region (or at least an lmb_reserve())
-so it isn't reused later in the boot. What do you think?
-
-Can we have a test and a note in doc/usage/ describing the new
-behaviour and the linux,sml-base/linux,sml-size handoff?
-
-Regards,
-Simon
+Reviewed-by: Simon Glass <sjg@chromium.org>
