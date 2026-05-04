@@ -4,119 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C937DCD3427
-	for <u-boot@archiver.kernel.org>; Mon,  4 May 2026 18:08:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E743FFF885A
+	for <u-boot@archiver.kernel.org>; Mon,  4 May 2026 18:37:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 77EEE846A7;
-	Mon,  4 May 2026 20:08:36 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 2EC0E8467B;
+	Mon,  4 May 2026 20:37:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=Philips.onmicrosoft.com header.i=@Philips.onmicrosoft.com header.b="oc83+jaZ";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Wp2ej92j";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E29EF80F0E; Mon,  4 May 2026 19:27:37 +0200 (CEST)
-Received: from OSPPR02CU001.outbound.protection.outlook.com
- (mail-norwayeastazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c20f::7])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 7A6DE8467F; Mon,  4 May 2026 20:37:31 +0200 (CEST)
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [IPv6:2a00:1450:4864:20::32e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3291D83FEC
- for <u-boot@lists.denx.de>; Mon,  4 May 2026 19:27:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id ADFC68467A
+ for <u-boot@lists.denx.de>; Mon,  4 May 2026 20:37:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jhaller@bbl.ms.philips.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=l0ySPCGX+3cDpG5LSpgU0nxip+mHL2uRYqwvsJK5+/hW9tfNKBjleEGEidWzNXh6DYY6PgA4Wh3VHuB+fA4v//7XUBMRCfIiuH0fi2K2FZVYMStii6hRAqVbid15Ncy7n1iDBImcUkejMO0MiGNHQUuC4YKNqyRkQ9eZL0Iht7GA3DQ0B/1+1bRqFHumzPki284bJVCyZsU4xEXq+Yw5cCeh7kUsexie1Ew9x3lrpHa9OF3mx1ZrZC4p8Z8jrSGF/YWFkYxOV2Otag8rS8yfCeSyu15VLo/LxpYOYpCX+u/GB8Oe4CDI8P5ybuJv7WTuQhKeRU6auQpFDLNb6d9h3A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=3Gs3fDXSwVIKsehVjmjc4t1pA8d95eFZfnI3LYAnFfo=;
- b=JPLXIF97vvvb4RyUnJtRRJQcjNk74EdXwm+0b/Z82LJqGjAtZ+Qg0uUj3JzXx50JbO6d8lxnmhUAawkvg9sbWbxymjByzyGsFPNgyKqFQY8hDQS85Hatoevji7SK23N1X3o6cyiUL2rPaBSAN5w9p8bA2lL16xnqTEG0BnSEeAKQAEjRQVMbNrzjbsdD21W385A2gimkV60feP5iZSkfk8eOdKCfHPy9tJOV1gVPNKiyJnQeAvwNWwcBox+hYcR3DMeH1r8VeD5eHc3msescquqBygzZxCDNZjpSH3tqgKzgpPchclbMmu7cnqeXRk8/bpv+NyCQ0Bes+JPbHyxeUA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 3.248.88.141) smtp.rcpttodomain=lists.denx.de
- smtp.mailfrom=bbl.ms.philips.com; dmarc=fail (p=none sp=quarantine pct=100)
- action=none header.from=gmail.com; dkim=none (message not signed); arc=none
- (0)
+ spf=pass smtp.mailfrom=casey.connolly@linaro.org
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-488ad135063so40784165e9.0
+ for <u-boot@lists.denx.de>; Mon, 04 May 2026 11:37:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=Philips.onmicrosoft.com; s=selector2-Philips-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=3Gs3fDXSwVIKsehVjmjc4t1pA8d95eFZfnI3LYAnFfo=;
- b=oc83+jaZJCJv5s7K7pnF4Ur9d1W0qSK20hYTfVdanT6Wos+wv6qten5tLT+WPRk182kwf8x3B934Q2sOfoxRjTS0oQYI3Cffgsbotr0jItLdbAegA3bnF4YhWyOhXhPaSvEc00WvsFybfybecXkwNTwhUa89H5vcekt/6Nin2og=
-Received: from AS4P250CA0015.EURP250.PROD.OUTLOOK.COM (2603:10a6:20b:5df::14)
- by AM7P122MB0232.EURP122.PROD.OUTLOOK.COM (2603:10a6:20b:185::19)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9870.25; Mon, 4 May
- 2026 17:27:32 +0000
-Received: from AM3PEPF00009B9F.eurprd04.prod.outlook.com
- (2603:10a6:20b:5df:cafe::31) by AS4P250CA0015.outlook.office365.com
- (2603:10a6:20b:5df::14) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9870.25 via Frontend Transport; Mon,
- 4 May 2026 17:27:32 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 3.248.88.141)
- smtp.mailfrom=bbl.ms.philips.com; dkim=none (message not signed)
- header.d=none;dmarc=fail action=none header.from=gmail.com;
-Received-SPF: Pass (protection.outlook.com: domain of bbl.ms.philips.com
- designates 3.248.88.141 as permitted sender) receiver=protection.outlook.com; 
- client-ip=3.248.88.141; helo=ext-eur1.smtp.philips.com; pr=C
-Received: from ext-eur1.smtp.philips.com (3.248.88.141) by
- AM3PEPF00009B9F.mail.protection.outlook.com (10.167.16.24) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9891.9 via Frontend Transport; Mon, 4 May 2026 17:27:31 +0000
-Received: from smtprelay-eur1.philips.com ([130.138.84.184])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 256/256 bits)
- (Client did not present a certificate)
- by ext-eur1.smtp.philips.com with ESMTPS
- id JrqBwEZuvtKtZJx4tweUjR; Mon, 04 May 2026 19:27:31 +0200
-Received: from mail.bbl.ms.philips.com ([130.143.87.230])
- by smtprelay-eur1.philips.com with ESMTP
- id Jx4twbNMrUYUNJx4tw1YEW; Mon, 04 May 2026 19:27:31 +0200
-X-CLAM-Verdict: legit
-X-CLAM-Score: ??
-X-CLAM-Description: ??
-Received: from bbl2xr12.bbl.ms.philips.com (bbl2xr12.bbl.ms.philips.com
- [130.143.223.70])
- by mail.bbl.ms.philips.com (Postfix) with ESMTP id 615F41847A7
- for <u-boot@lists.denx.de>; Mon,  4 May 2026 19:27:31 +0200 (CEST)
-Received: by bbl2xr12.bbl.ms.philips.com (Postfix, from userid 1876)
- id 540957C023A; Mon,  4 May 2026 19:27:31 +0200 (CEST)
-From: jhaller.oss@gmail.com
-To: u-boot@lists.denx.de
-Subject: [PATCH 1/2] tools: binman: fit: support engine override via argument
-Date: Mon,  4 May 2026 19:27:30 +0200
-Message-ID: <20260504172731.156719-1-jhaller.oss@gmail.com>
-X-Mailer: git-send-email 2.43.0
+ d=linaro.org; s=google; t=1777919847; x=1778524647; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=ykClgkRhJ3DShhZRfZIFxr6xJ+WHx6TYbtbqntn32/I=;
+ b=Wp2ej92jN3rDvkSSeH+LhPevw9ljHvVU+ezcGGxyEreXxsj14FQ9A7mb7zOt8hyB7P
+ /db91DAy3AmiIPRn1S1p3muVxO0qdZk2HiJb71giDHLB1PxiVa/CFXkcwwbQY0MgR6uQ
+ 2dFmlWtvz0MjpHajjjx5Wt/mZnl5nPjWRXHTweDezCg5dWb6neeJoFdcziQB2frs3nvp
+ 1jVf/biAn2eGVIZLqTlAMRhyGgMeBW+l12YU0vHnIzzArm6MQDB8XTdMV6cgFVPLjiwv
+ dU45HqQ7lfnyJP9JWaR97Xzcl91PJf56rQ/B0MjC2R5QIk6LQsnQJdZ9bjamiu4sYq0k
+ iojQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1777919847; x=1778524647;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ykClgkRhJ3DShhZRfZIFxr6xJ+WHx6TYbtbqntn32/I=;
+ b=pQSsD6udpW4lCQOwKio5E5AUA/ADe29HDzvdqfsQwwpzi8vsoBMCqqXNCF/917j3GO
+ 9J5Ay3JjHj1jnuT170qFjUmurDT/b5lFLNOpnEoaLGUstlk7bNXHSQ70wMorrVMfkoBr
+ 0Ohg2CzIKg77nLKRoMg0r4H4NRVAVSrx4moOywqfelyiL/IuAdMc4wBZxy0DG1QY3bwf
+ cWWmptGbkaErl7TuO8eDgnuoPvT3tCldoCni1RHEsqqm8JrlbpO7ARm0gLH8Hd2C6eRx
+ d00H56MgToj9OVz51EvjD/HgeRUgIITEPJnYtP12XrOqBFPwQJKyDC+ne+Ox6Ix0XqQ8
+ 57nw==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ/BV8/ydMzV04YOwqRCWLInWGvkcgwkEspNfi6+b6hu+4xuQGDYjBteLlYgBfyOy1QApBmw1cQ=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy1NaN7WLgOyMWkU3UvI+W05Vn0yP4I/rBL1wtRJN7b1zBH1GwX
+ uIjLc6BNkLb7xKaAXosFylxfBfaw6uzqmeAhwzP7MgadmnjNr6HRxGYMvQKh4l8hK+0=
+X-Gm-Gg: AeBDieup2Au+8ZyFAylsUP48CSlcVQZTWDU9Iji5ma1q4xyCekqEtJ+Qeb/Sba67voD
+ 2mZXKX8znXeaSkj1DdP755DFk/hXcgONY27pn/+u1IBaYJIwP+WWFo+fenx3M9coGPG+vZgAt5o
+ zxqIAAhWt8E5GFvFe28fWFKOl4gXoeYf5L880UzrcMAbsKjsPNfl1ZRrlM5MaHATicGlv0VJ/Wh
+ 0yy/ROn7oX1ZHp4RBBj/zNFQ2h5Y9NscROl5pm3B6XEC178ymIs5cTGksk0X1ngihdQTVD6HaJi
+ x7QAEQBfrfFB22rjVo01b5YUcqWKmntB18S5oHZxYpGnPq7bZi2VtYfIGZJP5u0Xb40YDNp0W7U
+ 2g2Gx4pG5errASdbAOKc4etHqWSlZuOKBcDylYIbBMymC9BvSobbMnly5K04dewAGhSoSvc6Aic
+ cqlzVmbMr5++0X+ncyDjXOcKvQkASomYmMRybeXg4mtWIBit7MSHryBRGWC+UkREhLMxe37UZWg
+ gDSEp/WKlVgrRA=
+X-Received: by 2002:a05:600c:4f48:b0:487:59c:2bb8 with SMTP id
+ 5b1f17b1804b1-48a988ccc94mr199919925e9.27.1777919846839; 
+ Mon, 04 May 2026 11:37:26 -0700 (PDT)
+Received: from lion.tail248178.ts.net (p4fc3dd86.dip0.t-ipconnect.de.
+ [79.195.221.134]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-44a8ea7d0e7sm26140711f8f.3.2026.05.04.11.37.25
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 04 May 2026 11:37:26 -0700 (PDT)
+From: Casey Connolly <casey.connolly@linaro.org>
+To: Anshul Dalal <anshuld@ti.com>, Casey Connolly <casey.connolly@linaro.org>,
+ Dhruva Gole <d-gole@ti.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Mark Kettenis <kettenis@openbsd.org>, Tom Rini <trini@konsulko.com>
+Cc: u-boot-qcom@groups.io,
+	u-boot@lists.denx.de
+Subject: [PATCH v2] armv8: mmu: support unmapping regions with set_one_region()
+Date: Mon,  4 May 2026 20:37:12 +0200
+Message-ID: <20260504183721.646712-1-casey.connolly@linaro.org>
+X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AM3PEPF00009B9F:EE_|AM7P122MB0232:EE_
-Content-Type: text/plain
-X-MS-Office365-Filtering-Correlation-Id: 9b26ff56-f91e-4ada-8f5c-08deaa026c73
-X-MS-Exchange-SenderADCheck: 0
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|61400799027|82310400026|48200799018|36860700016|376014|7093399015|16102099003|18002099003|56012099003|35450700002;
-X-Microsoft-Antispam-Message-Info: X6YQXSiad8KueEkyeHRmWIBrgLJYY4h3bJyN5eUF23vqQGtY+yXZtfmZPGUbr7r7U3GhJPPsLBr6idHrb0T25kWOWJOyW+f0XLp9GB9IDCKOWvDL7C9hYESFpLAzVcCyiy+rtYR6S1Iij+4P9wmGwpISpfJTeQ+RQpNO2+6GRy4A+2ge49lscvpACmsu8rS+cnPU8fl13kMKDnFYlv98ov2bUB6uplBwr0MtHfpDdDG+vraN095fD4sJ8iVr21S14AshBpi5YbH0HjUQQGs5/hSphycOVofOZFn9yh0Q7WmFNvgqaPjBa+xSMdusrwXcJ7C25ilPOIJpEaiuUmXxHyNg5R87ziJvm8drnOG9Dhjr6DAurDiJFpNAt9xcPgCZf6iLKioGHEKhUXfRk4K536amAfEUbO1F5J4g9Ya/O/fAmhilE3DoX+jX5eONEkj62P50fZ3SKT4UaSoOU+KGWh0paOUvkRkAKhaDI9oyjsKFqQBr8Bn8CwmnIAnaA5wB37Hm1rLYpN2OxQiN/2ttjWwUGuHOXRUFOiNL1VMO/Rc/irjjbuy7P0oO+OBHOzXjeqqJNaPN0yDeNtGgKkEpjpE91qv/mkvX/ezJCSO+H9Gnn3i2JYyCjpFh9f3/9ZMGS/Swt7GHvbnUZPI7CTOnFR2g0yco5aVUXoFy95zp0bP1q7k7i+3HiyJUlijiRaLoCzY9nBQUZG+yC+nqtLF8bqF8AJr0SOULtEDpqw3Iim3exvhUGtXD2NPagnVodXsXMOSKkT/6XA+px2d781uKgpN+izqR/4Dz93mTpTwahQE=
-X-Forefront-Antispam-Report: CIP:3.248.88.141; CTRY:IE; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:ext-eur1.smtp.philips.com; PTR:ext-eur1.smtp.philips.com;
- CAT:NONE;
- SFS:(13230040)(61400799027)(82310400026)(48200799018)(36860700016)(376014)(7093399015)(16102099003)(18002099003)(56012099003)(35450700002);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: a6ly4nR6udXNGQlalKEJV6/xLSHEQeJtCbJdvmRKuj609jjCY8h360kZFuvkKYb+f0BmSlvbgWIsNMeWeo1IKuYrnE8mrikjPHInpsyPrEZVXoeq2KyKVLqdM/0568ZGHqL7v5jnM1tTdroWQyVZZcP+B4y4Q13z/Ph72qGbrm6qhOwBEo55654F73VRYoJOWgN8uzM5W+/4fGqZKzEEPEte3z3kxS1+35id0Na9Mv2R6yoiH3uVJjtHNVVF8PEjeNC6lRUKDc99a8D6YTFPtMnn0sc/dHvHKkPZGE9TLlwn0SbiK7Z6MUUDj0o3LYKcNLb4wds0H751pQjEk2KDb14fNyqqmryOL1QVRhhfkNhcJwTTY1sQbjwhqFzuKe/mX5fyyQnpn3HI687CVMqP9ds+BKuS1XuWA6LaT/d4O88Oc27YQyxahGjsImaIQDpx
-X-OriginatorOrg: ms.philips.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 May 2026 17:27:31.8802 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 9b26ff56-f91e-4ada-8f5c-08deaa026c73
-X-MS-Exchange-CrossTenant-Id: 1a407a2d-7675-4d17-8692-b3ac285306e4
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=1a407a2d-7675-4d17-8692-b3ac285306e4; Ip=[3.248.88.141];
- Helo=[ext-eur1.smtp.philips.com]
-X-MS-Exchange-CrossTenant-AuthSource: AM3PEPF00009B9F.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM7P122MB0232
-X-Mailman-Approved-At: Mon, 04 May 2026 20:08:33 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -128,62 +96,85 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: Julian Haller <julian.haller@philips.com>
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Julian Haller <julian.haller@philips.com>
+Currently set_one_region() implicitly assumes that we want to map a
+region and aggressively splits blocks into tables to do this, but when
+called with PTE_TYPE_FAULT to unmap a currently mapped region it may
+try to unnecessarily split blocks which doesn't make sense if the entire
+block should actually be unmapped. In the end it then has to walk every
+single page and create a bunch of empty tables.
 
-Allow overriding fit,engine and fit,engine-keydir via arguments,
-enabling engine selection at build time without modifying the device
-tree.
+Introduce a check for this kind of behaviour and optimise with a fast
+path, if we're unmapping a region >= the size of this entry then we can
+just unmap the entire PTE and whatever it contains.
 
-Signed-off-by: Julian Haller <julian.haller@philips.com>
+This fixes some bogus empty tables being left behind when carving out
+reserved memory regions on Qualcomm, and should improve the performance
+of the break-before-make in mmu_change_region_attr().
+
+Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
 ---
- Makefile                  |  2 ++
- tools/binman/etype/fit.py | 13 +++----------
- 2 files changed, 5 insertions(+), 10 deletions(-)
+Changes in v2:
+ - Update pte_type() to correctly check the PTE_TYPE_VALID bit
+ - Explicitly unset both bits of PTE_TYPE_MASK to be extra safe
+ - V1: https://lore.kernel.org/u-boot/20260504175511.585797-1-casey.connolly@linaro.org/
+---
+ arch/arm/cpu/armv8/cache_v8.c | 18 +++++++++++++++++-
+ 1 file changed, 17 insertions(+), 1 deletion(-)
 
-diff --git a/Makefile b/Makefile
-index 49d9740327e..ffcc639382b 100644
---- a/Makefile
-+++ b/Makefile
-@@ -1701,6 +1701,8 @@ cmd_binman = $(srctree)/tools/binman/binman $(if $(BINMAN_DEBUG),-D) \
- 		-a vpl-dtb=$(CONFIG_VPL_OF_REAL) \
- 		-a pre-load-key-path=${PRE_LOAD_KEY_PATH} \
- 		-a of-spl-remove-props=$(CONFIG_OF_SPL_REMOVE_PROPS) \
-+		$(if $(FIT_ENGINE),-a fit$(comma)engine=$(FIT_ENGINE)) \
-+		$(if $(FIT_ENGINE_KEYDIR),-a fit$(comma)engine-keydir=$(FIT_ENGINE_KEYDIR)) \
- 		$(BINMAN_$(@F))
+diff --git a/arch/arm/cpu/armv8/cache_v8.c b/arch/arm/cpu/armv8/cache_v8.c
+index 39479df7b21f..b6506e8523be 100644
+--- a/arch/arm/cpu/armv8/cache_v8.c
++++ b/arch/arm/cpu/armv8/cache_v8.c
+@@ -162,9 +162,9 @@ u64 get_tcr(u64 *pips, u64 *pva_bits)
+ #define MAX_PTE_ENTRIES 512
  
- OBJCOPYFLAGS_u-boot.ldr.hex := -I binary -O ihex
-diff --git a/tools/binman/etype/fit.py b/tools/binman/etype/fit.py
-index f28b1e6b4cb..4f429261ccf 100644
---- a/tools/binman/etype/fit.py
-+++ b/tools/binman/etype/fit.py
-@@ -646,17 +646,10 @@ class Entry_fit(Entry_section):
-                              OpenSSL API, as second element of the Tuple. None
-                              if no keydir to pass.
-         """
--        engine = None
-+        engine = self.GetArg('fit,engine', str)
-         engine_keydir = None
--
--        prop = self._fit_props.get('fit,engine')
--        if prop is not None:
--            engine = prop.value
--
--            prop = self._fit_props.get('fit,engine-keydir')
--            if prop is not None:
--                engine_keydir = prop.value
--
-+        if engine is not None:
-+            engine_keydir = self.GetArg('fit,engine-keydir', str)
-         return engine, engine_keydir
+ static int pte_type(u64 *pte)
+ {
+-	return *pte & PTE_TYPE_MASK;
++	return *pte & PTE_TYPE_VALID ? *pte & PTE_TYPE_MASK : PTE_TYPE_FAULT;
+ }
  
-     def BuildSectionData(self, required):
+ /* Returns the LSB number for a PTE on level <level> */
+ static int level2shift(int level)
+@@ -939,8 +939,20 @@ static u64 set_one_region(u64 start, u64 size, u64 attrs, bool flag, int level)
+ 	int levelshift = level2shift(level);
+ 	u64 levelsize = 1ULL << levelshift;
+ 	u64 *pte = find_pte(start, level);
+ 
++	/*
++	 * If we're trying to unmap a region then check if it's already unmapped or if it's bigger
++	 * then the PTE we're looking at right now, in the first case we can do nothing and in the
++	 * second case we just need to unmap this page/block.
++	 * Otherwise we will needlessly create new tables until we have traversed every single page
++	 * in the region.
++	 */
++	if (attrs == PTE_TYPE_FAULT && (pte_type(pte) == PTE_TYPE_FAULT || size >= levelsize)) {
++		*pte &= ~(PMD_ATTRMASK | PTE_TYPE_MASK);
++		return levelsize;
++	}
++
+ 	/* Can we can just modify the current level block PTE? */
+ 	if (is_aligned(start, size, levelsize)) {
+ 		if (flag) {
+ 			*pte &= ~PMD_ATTRMASK;
+@@ -1081,8 +1093,12 @@ void mmu_change_region_attr(phys_addr_t addr, size_t siz, u64 attrs)
+ 	flush_dcache_range(gd->arch.tlb_addr,
+ 			   gd->arch.tlb_addr + gd->arch.tlb_size);
+ 	__asm_invalidate_tlb_all();
+ 
++	/* If we were unmapping a region then we're done! */
++	if (attrs == PTE_TYPE_FAULT)
++		return;
++
+ 	mmu_change_region_attr_nobreak(addr, siz, attrs);
+ }
+ 
+ int pgprot_set_attrs(phys_addr_t addr, size_t size, enum pgprot_attrs perm)
 -- 
-2.43.0
+2.53.0
 
