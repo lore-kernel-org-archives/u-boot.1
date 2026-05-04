@@ -4,101 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C069FF885A
-	for <u-boot@archiver.kernel.org>; Mon,  4 May 2026 12:26:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4CE4FF885A
+	for <u-boot@archiver.kernel.org>; Mon,  4 May 2026 12:26:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0309D83FEC;
-	Mon,  4 May 2026 14:26:44 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4B13884653;
+	Mon,  4 May 2026 14:26:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="CoFxpECc";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="gqUCJVhs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A7B7284659; Mon,  4 May 2026 14:26:42 +0200 (CEST)
-Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
- [IPv6:2a00:1450:4864:20::629])
+ id 8344C84653; Mon,  4 May 2026 14:26:48 +0200 (CEST)
+Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
+ [IPv6:2a00:1450:4864:20::636])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 774868394E
- for <u-boot@lists.denx.de>; Mon,  4 May 2026 14:26:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E98618460E
+ for <u-boot@lists.denx.de>; Mon,  4 May 2026 14:26:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-bc1f0f48351so141969466b.1
- for <u-boot@lists.denx.de>; Mon, 04 May 2026 05:26:40 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1777897600; cv=none;
+Received: by mail-ej1-x636.google.com with SMTP id
+ a640c23a62f3a-bc1f3a393c0so122625666b.0
+ for <u-boot@lists.denx.de>; Mon, 04 May 2026 05:26:45 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1777897605; cv=none;
  d=google.com; s=arc-20240605;
- b=f+XQNC/uoo75YsRFlSXY+obUME0iDJeYh2V7Xk3EQftqQsSxB8dERNEhf1ZWqcjwnX
- K8Yffh23mn2iV3GJrs01erLVrCvPyZSSC6mss33oEwTYkP6qTBpzqqE5bX4qux41dTzF
- vs4Nm/xW46D+x63wdhQwHnMyv3iynK+gd0RaFyhN8g6WyWHG9pfLgbQLR0KYiWmmA6vV
- 26vd0ZtvVmK6SHJmhwga2YlEWvO2vY2pbt726tbCCF6kM17NdV0IY0E/LLc5eV6QKo1h
- s8N+wuAxsKOkqBc/wgwZMnceWDmefbrjs5aVCnrDB66mUughCyr7shxGWvmBjYMuzrHl
- ZZwQ==
+ b=Eoi5F449YwkK2HBWFSdrVlwLP0WwENx7L8rHhfCCRcjvZMd89XB5WXdVB9B1REkJwn
+ mzBBuJc4SC4f4Src6sfGANI+cqRsjggiaFJ4zjpRL9UN28zyIdnVAJWo1PDD2lQ30fn+
+ aIFwZPkxWY8kukodctYLoNOVCoypdvI6ICv5IdqGX5XHfXsyvtMfRPB9bzhot9FNFLbx
+ N9rHbrqJBbsmN+frPjMwz3sg2fVmd/xaoQBZVeBJMQByFC74GUYgdC2RwHRDrfN94TEU
+ bsmYmeQg7tFLHJ5Ou+XW6r75QAXYjiwhbeEFZcHZAqThMly23VoqzdCBGxFDDvQyvu+h
+ yGuw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=y76pDYz/nbN939oGYhl/zfGg/AP8gJjfYX3ESgTpZXE=;
- fh=RsRYtTyPonxadUZAri9iyMFo/cRKZyv4RBBlyQb6vo4=;
- b=NkGqQyKSlo38d7umS20EbeR8V3Q95pS6HqzP3gdSFRVzIFO5fGiZS7V3PmIYOrXPwg
- UmcwwG62eXO57SwQ9GMX19H/BiwA5ioA/PeSTKDXOb6xxEkysyHcbPAFAD0OqeOTEDsQ
- TgR3AVaZZJBQnMxJ+kAEzSiSTsrtP3vGWo0q8Febn6fQNfnGJhQsKWLT/HUBCRDvBqu2
- 3/UpQCJeob6iRIvjxe7qFkstcrtqdDOvNNWXIxfCWT9X967X+E9ixgx2H2GOlWZBpB92
- uaG4QY1iWuQAU97xyyGhEx6iCwynFkJh9lJWdGQH5jGBOWvhioDspCv+sEPKqApEXO0G
- /wrQ==; darn=lists.denx.de
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=1wry64X98SG9xBAVJxGV42uImgP+yFw1rM4aKsQC8jQ=;
+ fh=q+RyNJz05f8xqSoXvECEUnU4L9LdvVSuO3nmPEsLaQ0=;
+ b=PKt6ABI2WbzFw182kd5YP0nEbrY7dNj9xCU3o00H+UtU+bF3WiFHLHQ1PIkVuTtInb
+ ze6yjB/289uYqztj+eOpHciBpilbhPPch9qDKHZNCjv5vx1rDvRjSV1Jm4FjE6RjTsfR
+ Whtwt4KbLJYmwPuj4I0Uk2f1EYifutp2l7buaG9pGFhZRAzQv8y31fGTJgOtOZn+wkv1
+ E/ItC/LEWehkx4wZXXLjFWPbvQLJAD//psSrQNNVJDvv4elHfEWkskVJxYsKv2Nie6/m
+ Ltj2MxmWhja9vhuhhvD534DlOBdpQTzP8msa53+a84VQdfAvK40YnAt/YLzZfnSgSqJi
+ ftCA==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1777897600; x=1778502400; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=y76pDYz/nbN939oGYhl/zfGg/AP8gJjfYX3ESgTpZXE=;
- b=CoFxpECcsfTn9Xc0gY2jeIMe2bwcA6FBI81KhPSinfmgFqttoPFL+cN70ELe+grk2b
- nVmExYRvN3vkelYoRa9+v92LBpIR8isbm2FdDgdHo29utg+ynOItzUJrXMtPrJSF92wi
- s5vNWZikah3RGolWcrry4n9N8TMozH7NaoIEY=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777897600; x=1778502400;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=chromium.org; s=google; t=1777897605; x=1778502405; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=y76pDYz/nbN939oGYhl/zfGg/AP8gJjfYX3ESgTpZXE=;
- b=Wc7XOCxqTQWctbWl24dpUabsz61a7VnURA1qD3TR9c/JOqykK5zS2OGvGbIrT3oQry
- xHNKuH1w5y8p6mmMdJDC2nh+nZmpp36UH5w2uKg9ttXlkXy2xitH7hAJrfWPWx4vHwfe
- ZIUwBif6fOVoWBNcJtWoAyM7+nsezThnHnRpmGGt9SpEQ3CV1JsUJIsQKEbsj2eZpmkY
- lEQa85EakZgcuj5Tf/pAjFaEUkEfd+UcaLiC0h5MSBRGys/7hwwvELwBtYgbxEANVdNN
- dKDeMMCUK0eaCXyuM7dyImMfv2ezdcnoADTCy/RJNue1IFcTPxFlReHf8vpCeOCI/Bv1
- 3qug==
-X-Gm-Message-State: AOJu0YzrifyIfXFWoQt14HmSUPU5/ftLNeg9Nt1yZAMQkt9WqYSWYK+X
- sKQxqbh/hmR4APKBn46I+WN854RjB78afPiOSR2GajfO2QleoRT7AqgwMOr3XQ2YrRfP+nNy/7B
- jLGPq9y69swokk/tiHnX8FdP4Azt1xzGabDudEp7O
-X-Gm-Gg: AeBDieuNfHmDHsSKzVG5z/y/agLIqpXZUtkHcBodr9jLiiWzNwMY2ExF9xn5kHRdk/2
- LQuowdJFyl5qPrldNnoWL8Ha1kO2PwLNG8QFZHQ+dFDFGNxBfSYMNN+TLnGCGC91N/IRIslGC+m
- zHTbFTUlVBv8KuqwRoAKjNv5vRgNBnnkhf1maTyO4bii8x2ZT+TzP5psmfF6WjIksAzaMW+17yR
- W2R93iOUbOu6e375li3/8wpDbDnP7r6BxBgFrrT11hBBdX3/NpYqU0u7iqawTDsSVDCUts381V6
- 35lt/23gls5g1LNc
-X-Received: by 2002:a17:907:ea5:b0:bb7:beb9:b6d5 with SMTP id
- a640c23a62f3a-bbffbf8531fmr532577866b.39.1777897599753; Mon, 04 May 2026
- 05:26:39 -0700 (PDT)
+ bh=1wry64X98SG9xBAVJxGV42uImgP+yFw1rM4aKsQC8jQ=;
+ b=gqUCJVhsoYTWgpugp0Zjs0ZBlUWb595WBbsO7S/ANyN1RUPlCRFtJvEVx+Bd/d+8Vu
+ roFhkKWT7vxbPVV0xdkdvrKUNPhljxcCESExPkDMfhw+azdnatMutgpKcqLF8nvh7IJL
+ 9gQG3o/zUOSaEDVDm5LPrVvhD6SFDpLPBKEF0=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1777897605; x=1778502405;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=1wry64X98SG9xBAVJxGV42uImgP+yFw1rM4aKsQC8jQ=;
+ b=Kcfb+fE6WXvMNua11LwVVdy3VzBLsv806WcDFCXsUKFYKk+Fh7bXAiPVi3g/kTQYDA
+ fFRV+EFSIITrhrxT9trpLrd9XWblSG2gdMR0aCgx4UhNORLCkJcjvHCi7zh9srym803W
+ /s32IuCuKyAHYz18PVpH8OW1eXSBFQ6+A78ctkZJIK+yYaXymhMM55ApLK30iz6OIZcA
+ Xs5UIduDvbJaxce6CJg+l6aF1x70Vzdj9Gm8/M48SKEm5i2Tt2fcL7IUUwUiIJ1DkFxO
+ b2uld/NqmX/ONqTD4RW3C1o6co6eqWqqoAXuy9+bxW1/aNC/N1N5NR285MVvZHXwYJf/
+ Wtaw==
+X-Gm-Message-State: AOJu0YwYo97plnVvZjwVQMHw84fxWIwgEklP/4tzCzOpfUrYmYZ9kdk5
+ 7uo4rXSHHOe9YA7Of2J8OtWggUiHDll7cvcVp19/gjExirYjsxLJFwEvVd0ESGs7sZcgWwAhY9j
+ A8p+dDuSoUtNiY4gPOt3Dph4ahCh44CcTAqJvs+qU
+X-Gm-Gg: AeBDiesVWKeFf/rXTi9TNNi+qLDB2bPfTuPA40JCgaUy4Zxth24FMfgn8toKGu2okAm
+ c6BbkbSu3ZtmG/222inTwY1Ceb9aFn2CfwIowE70P+1og5hpFrHEIygz7GcbFzcqOxAOG6zhpJf
+ kjiM1Ajw8EnmaGdcFqehrkHeW361LRrRlgihP/IhcYFEia3Uqbk4AD651iYtOtrMoHoT22zvXHk
+ ulVr0xqqSsHODQ9ax4fPlR3ag0cM3bl1sT7GqrukkN5ElUSDIQ5nT78ZKLAcAxXuncXNaefTKN3
+ 37x7vpYZwbEQhhLU
+X-Received: by 2002:a17:907:198c:b0:b98:40a3:aa0c with SMTP id
+ a640c23a62f3a-bbffb2403e8mr489332466b.24.1777897605373; Mon, 04 May 2026
+ 05:26:45 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260430122629.606153-1-ludwig.nussel@siemens.com>
- <20260430142602.v2.3.6d1d5d14140677a76a7cd7bb99a9088d8c8f480c@changeid>
-In-Reply-To: <20260430142602.v2.3.6d1d5d14140677a76a7cd7bb99a9088d8c8f480c@changeid>
+ <20260430142602.v2.2.2405ba52fddd2e9ff1bbc24585e1e3140f660637@changeid>
+In-Reply-To: <20260430142602.v2.2.2405ba52fddd2e9ff1bbc24585e1e3140f660637@changeid>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 4 May 2026 06:26:26 -0600
-X-Gm-Features: AVHnY4IzUxAZcTeKryG93lPePb_Hxl42SX9s-CP_8Q61_SHDqTHO0noJijkeDIs
-Message-ID: <CAFLszTgtcho7vXgfAdAv-CDg11UtwJk_MHXS=u=cB-RK-mg2LA@mail.gmail.com>
-Subject: Re: [PATCH v2 3/4] image-fit-sig: Optionally require signatures
+Date: Mon, 4 May 2026 06:26:31 -0600
+X-Gm-Features: AVHnY4Kkm8wFpvSgMKgVVlORWVZzoQ-3nUztm28RY6Vjd1Pt6gFbJDJbMlqfB6s
+Message-ID: <CAFLszThoExQG6KrP0oo9tZ2oC35zzbX9wL8=7PypqVPDKXFEnw@mail.gmail.com>
+Subject: Re: [PATCH v2 2/4] mkimage: define log_err and log_info
 To: ludwig.nussel@siemens.com
-Cc: u-boot@lists.denx.de, Anshul Dalal <anshuld@ti.com>,
- George Chan <gchan9527@gmail.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>, 
- Martin Schwan <m.schwan@phytec.de>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>, 
- Peng Fan <peng.fan@nxp.com>, Quentin Schulz <quentin.schulz@cherry.de>, 
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -118,96 +113,37 @@ X-Virus-Status: Clean
 Hi Ludwig,
 
 On 2026-04-30T12:25:59, Ludwig Nussel <ludwig.nussel@siemens.com> wrote:
-> image-fit-sig: Optionally require signatures
+> mkimage: define log_err and log_info
 >
-> If U-Boot is built with signature verification but no keys are
-> included in the device tree, the boot would still continue.
-> Introduce FIT_SIGNATURE_REQUIRED to avoid a fail-open setup. The
-> default is enabled which may break existing setups that rely on the
-> insecure behavior.
+> Define log_err an log_info centrally in mkimage.h so any file used
+> in this context benefits from it.
 >
 > Signed-off-by: Ludwig Nussel <ludwig.nussel@siemens.com>
 >
-> boot/Kconfig         | 10 ++++++++++
->  boot/image-fit-sig.c | 12 +++++++-----
->  2 files changed, 17 insertions(+), 5 deletions(-)
+> boot/image-pre-load.c | 3 ---
+>  tools/mkimage.h       | 2 ++
+>  2 files changed, 2 insertions(+), 3 deletions(-)
 
-> diff --git a/boot/Kconfig b/boot/Kconfig
-> @@ -124,6 +124,16 @@ config FIT_SIGNATURE
-> +config FIT_SIGNATURE_REQUIRED
-> +     bool "Require signature verification of FIT uImages"
-> +     depends on FIT_SIGNATURE
-> +     default y
-
-I don't think we can flip this to default y in one go. Any board that
-enables FIT_SIGNATURE today without a populated /signature node (or
-without any key marked required='conf') will stop booting after this
-lands, with no build-time warning. How about making default n and let
-boards opt in?
-
-> diff --git a/boot/Kconfig b/boot/Kconfig
-> @@ -124,6 +124,16 @@ config FIT_SIGNATURE
-> +     help
-> +       This option requires that FIT uImages are signed. That
-> +       means the U-Boot device tree must contain public keys for
-> +       verification and all configuration sections must be signed
-> +       using those keys.
-
-"all configuration sections must be signed using those keys" is not
-quite what the code does, i.e. fit_config_verify_required_keys()
-honours the required-mode policy (all vs any), and only keys with
-required='conf' participate. Please reword to match, and mention that
-boot fails when no /signature node is present in the control DT.
-
-> diff --git a/boot/image-fit-sig.c b/boot/image-fit-sig.c
-> @@ -639,9 +639,11 @@ static int fit_config_verify_required_keys(const void *fit, int conf_noffset,
->       key_node = fdt_subnode_offset(key_blob, 0, FIT_SIG_NODENAME);
->       if (key_node < 0) {
-> -             debug("%s: No signature node found: %s\n", __func__,
-> -                   fdt_strerror(key_node));
-> -             return 0;
-> +             log_err("No signature node found: %s\n", fdt_strerror(key_node));
-> +             if (IS_ENABLED(CONFIG_FIT_SIGNATURE_REQUIRED))
-> +                     return -EPERM;
-> +             else
-> +                     return 0;
->       }
-
-With REQUIRED=n we still take this path and now print an error on
-every boot for systems that have FIT_SIGNATURE set but no keys. Please
-only log_err() when REQUIRED is enabled (i.e. when about to fail) and
-keep log_debug() otherwise. The else is also redundant after a return.
-
-> diff --git a/boot/image-fit-sig.c b/boot/image-fit-sig.c
-> @@ -685,8 +687,8 @@ static int fit_config_verify_required_keys(const void *fit, int conf_noffset,
-> -     if (reqd_sigs && !verified) {
-> -             printf("Failed to verify 'any' of the required signature(s)\n");
-> +     if ((reqd_sigs || IS_ENABLED(CONFIG_FIT_SIGNATURE_REQUIRED)) && !verified) {
-> +             log_err("Failed to verify 'any' of the required signature(s)\n");
-
-Just to clarify the new failure mode: with REQUIRED=y and a /signature
-node that has keys but none marked required='conf', we fall through
-with reqd_sigs==0 and verified==0 and now return -EPERM. This is OK,
-but the "any of the required signature(s)" message is misleading since
-none was required. Please use a distinct message for that case so the
-user knows what to fix.
-
-> diff --git a/boot/image-fit-sig.c b/boot/image-fit-sig.c
-> @@ -685,8 +687,8 @@ static int fit_config_verify_required_keys(const void *fit, int conf_noffset,
->               }
->       }
+> diff --git a/tools/mkimage.h b/tools/mkimage.h
+> @@ -31,6 +31,8 @@
+>  #endif /* MKIMAGE_DEBUG */
 >
-> -     if (reqd_sigs && !verified) {
-> -             printf("Failed to verify 'any' of the required signature(s)\n");
-> +     if ((reqd_sigs || IS_ENABLED(CONFIG_FIT_SIGNATURE_REQUIRED)) && !verified) {
-> +             log_err("Failed to verify 'any' of the required signature(s)\n");
->               return -EPERM;
->       }
+>  #define log_debug(fmt, args...)      debug(fmt, ##args)
+> +#define log_info(fmt, args...)       printf(fmt, ##args)
+> +#define log_err(fmt, args...)        fprintf(stderr, fmt, ##args)
 
-The other printf() calls in this function ("Failed to verify required
-signature" inside the loop, and the @-name check above) are left as
-printf(). Since you are converting messages here, we should probably
-convert the neighbours too so the file is consistent.
+This is not purely a refactor: the previous local log_err() in
+image-pre-load.c went to stdout via printf(), and you are switching it
+to stderr. Makes sense, but please mention it in the commit message.
+
+For motivation, this is preparation for patch 3, which adds log_err()
+calls in image-fit-sig.c that need to compile under USE_HOSTCC. Please
+say so.
+
+The commit message has a typo: "Define log_err an log_info" =E2=80=94 shoul=
+d be "and".
+
+Reviewed-by: Simon Glass <sjg@chromium.org>
 
 Regards,
 Simon
