@@ -4,94 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66AE5FF885A
-	for <u-boot@archiver.kernel.org>; Mon,  4 May 2026 12:16:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8DC5FF886F
+	for <u-boot@archiver.kernel.org>; Mon,  4 May 2026 12:16:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0365C84663;
-	Mon,  4 May 2026 14:16:21 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4AA9283EF9;
+	Mon,  4 May 2026 14:16:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="fkOratnx";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="DyqBaJUa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0C8B684664; Mon,  4 May 2026 14:16:20 +0200 (CEST)
-Received: from mail-pj1-x102e.google.com (mail-pj1-x102e.google.com
- [IPv6:2607:f8b0:4864:20::102e])
+ id 5340D84669; Mon,  4 May 2026 14:16:30 +0200 (CEST)
+Received: from mail-pg1-x536.google.com (mail-pg1-x536.google.com
+ [IPv6:2607:f8b0:4864:20::536])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DD20C8394E
- for <u-boot@lists.denx.de>; Mon,  4 May 2026 14:16:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2EE4F8466B
+ for <u-boot@lists.denx.de>; Mon,  4 May 2026 14:16:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pj1-x102e.google.com with SMTP id
- 98e67ed59e1d1-3653cb9c6f8so915404a91.0
- for <u-boot@lists.denx.de>; Mon, 04 May 2026 05:16:17 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1777896976; cv=none;
+Received: by mail-pg1-x536.google.com with SMTP id
+ 41be03b00d2f7-c7ffe8eeaf2so880120a12.0
+ for <u-boot@lists.denx.de>; Mon, 04 May 2026 05:16:28 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1777896986; cv=none;
  d=google.com; s=arc-20240605;
- b=Wpo1RXVhZAYU/E24sJ4xhVJc7fCvO01dsFYMitswQBgw5XuMzTS4r8WsXZJ+tBN9Su
- rvp+QPNU6R67QYI8oDAZbGVU3CrrUg9dxYtfcnnwa84q2ZYSdUjtVziAscakZMIamZ0K
- urLfTo9MeUxOQPir1NS7gShmCL886ueDTbP86WiuGt+rUqK2/XqFOhbl76a8sldPK8Nt
- SLwLp/Uc4YFghK6ZDAJ7r3kqWScuBvbIdoB5PyjPZnJcVzoWn8rcZhuAt4O3sZIlc9oK
- AQoabfs5GJjDLEgadM9H/9nFHj+XK5x88LkwuNJq5frUxgiTyn3covubUPQfyM51JKqe
- gGPQ==
+ b=Pd13ydNLbJJp1uaX/AgFtV7QXLq2UZt6gigwAHBT/k5AW2uqP48Hjzh533lxPIIJ+w
+ o6791kqZVNXyj0ZHZVX31RNSMeT00PjoRljwVrYF7uweHuZKUEscBokfNF1fDug6uZsQ
+ aKPtsJHTduzQV6lknFRuzGtw+8ifpNTV1CEOWF++AKZV00n2q6I1rSBpHj+gP3LTZbrw
+ brWGXn6bTJ0vLJ7H+On+NQzSZ/vEM5nycpFse7FX151D9RZ/kwqAYOfHI4n3p2cxFT4A
+ eQv/OpVNNovXjiBPbVOS1BMIFlXR30izOv8ZSCfkE9xb3Xp+BzazhmI2tgeohkrZSOw1
+ AcSQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=8f5odf7BsX/5B386QBBkaWkQpt3oiALLgfTEMezMYiY=;
- fh=Y2mXGfE5lbF8eqzLCsA8h+FsR1RRnvWoeeAlud6xsDc=;
- b=h1hw9DXO0xoJRYNgBkE9BEtBqlAZras7vhu160T9Ae1kUo89+c2ghkkE7ji2TD0bIz
- 4lZ86LLvEquc9yR1he6RACumGjnVO11oLaIJC62x83hXbTindGOINHhSWqGO2fP/SqqJ
- IDJjAK4X6YsDDi3Q7qPravhs0SBeMJDPyZ6HqlwYZwnGXbJiABNOWBvgAg92nKqVQc1G
- aE4E9zEtEqtEFWkyy2QTKkJH9GhfE/kXRz1NPxz68DOHmHvSPDA6A4braZCWuAwSv7oA
- YJ12dRSDts1eP6rdQsR+wY6L3l5tQAfemsODHjvYwk2hiD4Ls8taAEy6tM5P5G8qMIy9
- yW/A==; darn=lists.denx.de
+ bh=YcqxN7jKw0P8vtlR08mLDWTUwYfYvjX/i9ohWxhxJAg=;
+ fh=ixPjPCx5xgdIUn8LPkrsmUbkXVg64bndNxLiI/trGnw=;
+ b=aM+YGWW3gyowMwTiTOv/+MIXp4qDnSleiebvNgYZPZ8LaS3DXILIpf4suHyiPbG5e4
+ e92EWghF/3ngSETTO1Sy80BOcpnQ2jRTMtKuXdxDaGpjLspbqmyeBFwl8r+s+7ZpODpU
+ LuAYwIGtWTLcWIqH9Kjc6Aahvn83FeVYJveKmUcqKA0TvHJ9lwQPHErXsdyayLFKL9gl
+ klN7AkiEt0p77XVQT4UK15fwHbW0YTDvnrnoDv+I1ElwEHFX/p3c+9d2vqk/UQljA/mb
+ u/OU7SO63nfMSKcn3ug+PpuQcB7xqf+RU6cHVT78PQjQfAeQbn1vQo2RErOnPTFeiIJ0
+ QP/Q==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1777896976; x=1778501776; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1777896986; x=1778501786; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=8f5odf7BsX/5B386QBBkaWkQpt3oiALLgfTEMezMYiY=;
- b=fkOratnx7frURNv2JEWaj0UF7yIcjtITEhmZjctMSMOKdZ4ZO21pSfv0rdiZgv3xo4
- +X/XVBq0r/VGMuMFpEK8ygO8ICF/OXyHuQmhRPnpdBG/dskyZx2Xr6HNiOmQ0WNfRe4I
- y5/KTx9cL5ndwbSH+vqG+YoajFI7ezg4774CY=
+ bh=YcqxN7jKw0P8vtlR08mLDWTUwYfYvjX/i9ohWxhxJAg=;
+ b=DyqBaJUaWYduwgIDqF2ZUNUw7RYTpW7kPpSDqcf2uW+5/gyp5hEIMRDW6qDD5SDgGC
+ Fjdl73k/MVNGV+/qw2tN4D/HN1vyUWFNRzqNF0j2G+uEzYn9W0YjuUbkJGsGMdQcywcw
+ 8WNDH2BpOeCajVVB952bXrn8okrBh9chWM940=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777896976; x=1778501776;
+ d=1e100.net; s=20251104; t=1777896986; x=1778501786;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=8f5odf7BsX/5B386QBBkaWkQpt3oiALLgfTEMezMYiY=;
- b=qQrxQXw9gOFvvdV9r7mLN4Tgad0Ry2YdQTsLdAfiZyc11qz6+4mRxLczAbmlRE4O7k
- MX3EtVH+4vhBgVgpVMV4MFNpxe1E32bf08T4a27Dsb66rwq8SrvxW6hVWve01b2VyK+P
- TIhDELBIBg1EEnkqKEEnP3lzOsxTUMT8FO3Yf/PJvSODbTDC6ujkMQg7biZWb+V4CDXi
- HEB8wwS0GTCVFl6lrSwxDsQ34gngF4afN5pywDG7LrBCtGZVDthY0V5txdhg8zDHH0BM
- k7c6Y8UpwYsrNNC98p5XzM2Ar5nyclsdvaU2NtdrHJgeABRjku5aRKFBmd2YLkQBl/L+
- 1Wxg==
-X-Gm-Message-State: AOJu0YxxoEnaCrr21ldqIhROJfZ0QsRY94SZjtzKMZfYnN90U9E+z+gP
- LeG+jydtWXtkl2uiNP8u+OY0/WDfyx9+0+6dSetukQaKCwLBx55vrr6dgEmX5UHCsKvd8ffITEu
- Va4qTNK2IXB62+7/6j4QH0eLdJ7xDtb8vW/zYPxNt
-X-Gm-Gg: AeBDiesa8EoNrAYA5SbTNgQkewyjoS+j8CQlyrtjdt/eES7ITQ5xLcGM+zWzUCfvd8x
- qc5Pj/ZqywxGPcE69OuE26G3nzNsu+QEVgP0xBx8PotQ4MoYfffiJ6gfeG7+xHMif0xJGYt+RD+
- 4Q4HlVyaCK4gTmO9R+fJMilc80X26fkioZ0Qihxmw6WZlqQKsd30e1/hJNeXVFp9QsWi2+CIMK9
- /aLyQLHfQf2Wfiz26WQfH821VzI968/8hIg8kfby6jxhFm9D6sehBubc/GhBep4yondRAyQFM/w
- sjvYKrznY1WXkUAD
-X-Received: by 2002:a17:90b:3f8d:b0:35d:95eb:879a with SMTP id
- 98e67ed59e1d1-3650ce7e5eamr9514612a91.13.1777896976104; Mon, 04 May 2026
- 05:16:16 -0700 (PDT)
+ bh=YcqxN7jKw0P8vtlR08mLDWTUwYfYvjX/i9ohWxhxJAg=;
+ b=l1+vCzyPPzfAGmMevmbiXBYVSk69ZZPCHZQ2kxv8YJXmIciaaPz+bn+8I0qQW0GfWd
+ nMP+ce+LU5TitHSZ6RnkuNrgvYr0ZWrS2b8CVfhBKx2QyA7jVA4H6F9o3V1IMXoKpblB
+ /lEcKBMJZrzbyiauihKddad+EWise3pjlitdAImXvCjjtLXkFq2CnUIlO9C1tSvoPE0V
+ mYQxUgKW21sz9ez7WlbEHK/GgVetN19m+3ju2LQWj5XS27rP3wlQc3h8Kt91sWL9hcF9
+ m0xC0HrhjV3oVniIMR4GsKiaAhhPdZeobzO+XC334rLSl6RuC/rx9PDFLpxqDPlRbdqz
+ JQwQ==
+X-Gm-Message-State: AOJu0Yz4uvgB28/ZIesCEz9HZH7gPovNZb476vCL+gC4IGAgBjPgDigi
+ +Vf2LuZ5iUyS7tj6nU7DZ6ES3a1G2kTTQvMc/q6sv3asYdmxrpAAkHveogkcNk66FlI3TwVIeh0
+ 67F0b5mmuAD3B3+cRTp1uRYnUhrwQQFzs39ZcL+Rf
+X-Gm-Gg: AeBDievxKNmiSKykJTI//yBNvD57WIYKOWM+0b5u3LzFY5dQ7gvD0eWNXQK2KX7vcxq
+ l2sxKfAybT3rM25MyGigZgrdBLGd284F0WDaOGqreuWRjRIEXIaBcKg6wdXEL/Sc+qc2ZEWiB2m
+ OxLep2qH2M8u4CuAMdqXpazN8jPAdkG+OMThKMRGkTt3laH+a1MvpVu9uUy6BBjZPgPW3LGa41R
+ Bw2k1URtxo9qQtFaGhWBOTQ0E4Y+aP2YH5lhg5gnm5yOs2t1SYXZSuELVPSEqfUWFOlS541PA9T
+ 6gfhFFdPNfr68BrL
+X-Received: by 2002:a05:6a20:7350:b0:398:840d:39aa with SMTP id
+ adf61e73a8af0-3a7f1bc3644mr9798401637.29.1777896985808; Mon, 04 May 2026
+ 05:16:25 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260504091023.v2.1.d2ced6516d3db067379940b538830e60968dbf6c@changeid>
-In-Reply-To: <20260504091023.v2.1.d2ced6516d3db067379940b538830e60968dbf6c@changeid>
+References: <20260503-simplefb-memory-region-prop-v1-1-21828b8cf13a@mainlining.org>
+In-Reply-To: <20260503-simplefb-memory-region-prop-v1-1-21828b8cf13a@mainlining.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 4 May 2026 06:15:22 -0600
-X-Gm-Features: AVHnY4I1Ndn0MpAIA8n-0XjY7QLJcJfZ-MY-Y2iVjqrUf_FYPVdfNaVQqvc3ZVA
-Message-ID: <CAFLszTiSJvS_K_qNxyWD5Lh7j6j4YCxvPsdUQKUz9kJFQ4HqOA@mail.gmail.com>
-Subject: Re: [PATCH v2] virtio: fix boot device hunting in qemu with virtio
-To: Ludwig Nussel <ludwig.nussel@siemens.com>
-Cc: u-boot@lists.denx.de, Bin Meng <bmeng.cn@gmail.com>, 
- Daniel Palmer <daniel@thingy.jp>, Kuan-Wei Chiu <visitorckw@gmail.com>,
- Tom Rini <trini@konsulko.com>
+Date: Mon, 4 May 2026 06:15:39 -0600
+X-Gm-Features: AVHnY4I10sZ38Vlj9Sgc5zJaJ1FW-T4apZODNpgMBuBKGaWQAV955-b5v4jG6D0
+Message-ID: <CAFLszTj2aBqhwawr1F22kSh+MkY8zreb8RAV-_ZqpZ0ffcS3FQ@mail.gmail.com>
+Subject: Re: [PATCH] video: simplefb: Parse memory region from memory-region
+ property
+To: Aelin Reidel <aelin@mainlining.org>
+Cc: u-boot@lists.denx.de, Anatolij Gustschin <ag.dev.uboot@gmail.com>, 
+ Tom Rini <trini@konsulko.com>,
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -109,25 +110,17 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 4 May 2026 at 01:11, Ludwig Nussel <ludwig.nussel@siemens.com> wrote:
+On Sun, 3 May 2026 at 23:09, Aelin Reidel <aelin@mainlining.org> wrote:
 >
-> Commit 70101c3217ae ("virtio: mmio: Return error codes on probe
-> failures") returns -ENODEV where it would return 0 before. That path is
-> apparently hit in qemu and breaks boot device discovery
-> (virtio_bootdev_hunt() expects only ENOENT). So return -ENOENT in
-> that path instead.
-> The remaining two error returns in the function are untouched as I
-> don't know where they play a role.
+> Linux' simplefb driver allows setting the memory-region property to a
+> phandle to a node that describes the memory to be used for the
+> framebuffer. If it is present, it will override the "reg" property.
 >
-> Signed-off-by: Ludwig Nussel <ludwig.nussel@siemens.com>
+> This adds support for parsing the property and prefers it if present.
 >
+> Signed-off-by: Aelin Reidel <aelin@mainlining.org>
 > ---
->
-> Changes in v2:
->  - return ENOENT in probe()
->
->  drivers/virtio/virtio_mmio.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
+>  drivers/video/simplefb.c | 8 +++++++-
+>  1 file changed, 7 insertions(+), 1 deletion(-)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
