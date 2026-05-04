@@ -4,105 +4,99 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D04E2FF885A
-	for <u-boot@archiver.kernel.org>; Mon,  4 May 2026 20:38:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00B45CD3427
+	for <u-boot@archiver.kernel.org>; Mon,  4 May 2026 20:40:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 716F78483F;
-	Mon,  4 May 2026 22:38:50 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8830784836;
+	Mon,  4 May 2026 22:40:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Di86ugfF";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="A7EqkBgM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D9AF88484A; Mon,  4 May 2026 22:38:48 +0200 (CEST)
-Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
- [IPv6:2a00:1450:4864:20::52a])
+ id BDDFC8483F; Mon,  4 May 2026 22:39:59 +0200 (CEST)
+Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
+ [IPv6:2a00:1450:4864:20::633])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EB1A38483F
- for <u-boot@lists.denx.de>; Mon,  4 May 2026 22:38:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id ACD8184706
+ for <u-boot@lists.denx.de>; Mon,  4 May 2026 22:39:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52a.google.com with SMTP id
- 4fb4d7f45d1cf-67b6a6bd7b8so1618677a12.0
- for <u-boot@lists.denx.de>; Mon, 04 May 2026 13:38:46 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1777927126; cv=none;
+Received: by mail-ej1-x633.google.com with SMTP id
+ a640c23a62f3a-b9358dd7f79so710905166b.1
+ for <u-boot@lists.denx.de>; Mon, 04 May 2026 13:39:57 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1777927197; cv=none;
  d=google.com; s=arc-20240605;
- b=HEGEMtbXsnOeYFzPYV1dhmIZFk+aLBX3lpbpLNAjW4OwP71/yu9uCCBZ11lH2ONBrG
- yw+T2zVXHi4HcVCVTJDLKW/XtBmkDhH3fYQYC6EMHRYc6YnIDwcCTgjAnqTEa2pukivv
- VpVwcAJtqFzV64PpBEA4SzK4nmaTQbn8VPykxIbNaWwIGWRAyVks99ACgGmCxH5ybSHC
- kxmc5CDTrVE6NqrpXGhJsUarnS2oFfBX/on1tp3hv0SGcketdN1C4JqTgkoovstAfSUY
- 2ph5Z90Y/xJNMa7ZihXmTAqTXr1movGKmn0T5AlAsk/Jt82f6lswiHCHeTBw6FILlCvv
- Hx3A==
+ b=Ghq9oxDHXS6frPf9BFOFziYFQQu/urLl8BZ3xi2y3JooU+OZMVTAP3xbGCF2qhEodT
+ 9vgeTUgI3Np8bRa0oH1P/SurlGToQlpE7Scm32focOpDeif5/UgOssEFj5R1P4NFdI38
+ 11jhytDmqzbdKs5GDOtzGhc7lkr/bZw3h8ChWnxoeMssM9HPIjzyedBdYhCjTPekAw96
+ 4bC+K5uxhXpifsf1LP0AYkUu4znsOKTUy1BD85wC5BTYSTm26sgTB10jJaND50bKPMkd
+ r3WSGgTmTqIncnixQnfSZJaL2mERoSQt2yqo/fpqHSxC6hjtCjCJBgX6E/F/f8pTkyD9
+ Pivg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=6+OF5OSGCvkRLAzDwoRCTIjhBxwbFl+rh6m4qG2kUhM=;
- fh=JDmMtl5m1ONTYAIDZy3RW95Kei7pwM4OcFAim19m6HQ=;
- b=P1qo3xym/IXGSOnrM8Z7FuQGSA6LlCojsLaEEXQB5qfDCmSs69lpjHVPRn+LTu1kCX
- J5+wpMar5naDMrA2UGZg9miaOAhuDRe031MVeKRLH542FR7MeuRSsrPU0G82p94R0NTU
- VF2fXRUtklKgH7h1yr7BJ+qmkADMTjxez2RBtqOL+vkZp3EdoQFWSVtPAgQyBt0d0Lwu
- Cayjwf5e7youu+7cgOaSynCg+kuYOQMQG9csgZUoQZShkvvVl7hQMgLoA8pOSmky/kNl
- W/DrXONHCAzLrjvWNPmwojUtjSB9FBSPJatiMsj895EfjFszGpgEjW1/6gyjT2DsAOar
- BVvg==; darn=lists.denx.de
+ bh=lHldQmdd9PLvjqnzwA2HjnQme3MB9O4w+mhnBooenKQ=;
+ fh=6sX/JMBB1a9uFLN+GawcERyIrfwFtjkiJ6nSJPOXXGg=;
+ b=AO5eVuCxWLvalAac3VfAmm8+eIoHgHLLykX2RqrJdjzrC/cbf0uvfkpRyCSg8l0p9P
+ zCgR4JiWwJpVhhY/wUe9k3QH4N9yyBgsNqx50pJN8PsNooRg91gwaHbXER0O66ofTBi4
+ rRgZTx+Ltaa50tIhoEv+FtMCMmurPhHgg9nNZx3PfQ5EroFkWNLuqaX4QWNwwb1CntPS
+ Asmu8W0pTBJQHVEfZYS4D/QCHtpkfikEqXVUZ4FEQ4pfufUNauI+4V4j+fmL6TkSxE/V
+ EhZqA4UgNTaYo0OshnleUDLGtG+UJ/wRwNH4SdCEXbsz4WGL41xmRNh1ud1jtJy7jlZ+
+ XhbA==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1777927126; x=1778531926; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1777927197; x=1778531997; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=6+OF5OSGCvkRLAzDwoRCTIjhBxwbFl+rh6m4qG2kUhM=;
- b=Di86ugfFVO6ULYG8NSqcQfAI/ZJzOasB9nFE9M3pLny2QALEVXIa8Jbb9Vu468AePR
- PgUIxpa9v3FPywC4GReISQug8TpE2n2J/E7oER/Mi3Aol7HlbcjBYNrq/Ec0+ccnrqzE
- tArtOWvLyC4cQouzYP8E6JecroFrLFiHJ9uxc=
+ bh=lHldQmdd9PLvjqnzwA2HjnQme3MB9O4w+mhnBooenKQ=;
+ b=A7EqkBgM93gzuaiPuGxSpXxXCNt/9mqVP+tBNqWhrntcqN47Xk1xkR28UuuhysAZ5o
+ vnJ9gHW2lr4y5vHtbyfGbzqBBGzOoh7frXVWccLpM5j3N1rZYs4sX2riPAy7xp124rcm
+ HgiiIIVgqim5tA8fjnsL7JxrNmu6QJ+adLKjk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777927126; x=1778531926;
+ d=1e100.net; s=20251104; t=1777927197; x=1778531997;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=6+OF5OSGCvkRLAzDwoRCTIjhBxwbFl+rh6m4qG2kUhM=;
- b=SdB7pkRHcLRAgb6M7oTbPv8PHpGXHXDjacx7KRHcyCAgo5/QvlAnta9kYBvph2uTPi
- qnpNjJJ+2LFg+u97vdJyuIlhelOSWX/gVFf5cni9IahWGCs/yeTy7m6uvjcxqY4Bjkbx
- MsZV8/QuXPHnK2AD8NmjFggXrE3vb2kx1dtN3l3XVC/NVICz0b5SsQ50ovtUa3hkFoBL
- 6fCoSxzD6BH0UnAkKUo1XqeodCyPjzOr/N/0neyo6cWRbS/bqZSMqMDw3nWw+ePdDUms
- pksW0NgYEAbJRU4oaKDTUWoTYrxIOct41oTSL8lMClxMm6QdjZ3AIX+HK0kvkZsRjadV
- IHYg==
-X-Gm-Message-State: AOJu0Yw9xj0zV2JII2SztZFPMiPPe9sLXkrXuOXpMIyt0FiAuobUoaPH
- HoKxKT7m36plNpqCbA5jjS/EDOw5CbHqsLE08MvfEivhTmXlm+VognX6HhsQtPPmeJgI7ZTI08p
- 0sfbA50OfmlSSuJ80yTxUUDwQI+rbrvmBv/wL2QKO
-X-Gm-Gg: AeBDievPjLu88dnSN1b7ZlR6v3dRJpak7wv3Egj20TyujHZkdT5TAaRf9mcHCbR6QLq
- 29fp/wlE5zvJXzphngVl+bWwQ8t3huUCTMokW1OvUPXWVcE/SikQJanPvJPOULahHqgLua3BB3e
- lXEjDfqiPvb6fWJ/TVhHhIGaA+NU+vmeunDK1Dh+3EZUylPMjkaWRRxTsXE8LbseqTGhus5M5HN
- EtwXwyrHKjqjQBAthOYUNz+gbfVSLkOlk2inm+53mj9VteeUJ4ds5JtW5ODn/SLP++5A6nF/OlW
- OBtYoJCSAp+bNp4sVAG2s+RXnBY=
-X-Received: by 2002:a17:907:c816:b0:bb2:713a:e474 with SMTP id
- a640c23a62f3a-bc3d0653c4cmr68697166b.3.1777927126290; Mon, 04 May 2026
- 13:38:46 -0700 (PDT)
+ bh=lHldQmdd9PLvjqnzwA2HjnQme3MB9O4w+mhnBooenKQ=;
+ b=SfZRIBDd4/8nwqHCAQ28wd3SZjtTbbASFMYVLWLC3oHg3D27BxK1Taun1Y1BER/BK+
+ gsYc6ELpVWE5NNCDhgOP9yuEXZ/eVK29ESHOO07emuKC3vo2lY5FdWq+4NJitztIK9EM
+ Y8VigayBmcvbmQt0VdQq+uu0jOBef6WYka2kd5PzfQvWaf72x/xBITtMBKueiC3pJwgQ
+ tlBsNupzoFDx/Qn7KcqKmNAWJOAFQQwJ/1TrR7VfsJJmaCkxkzcSHP6neZ2WyIj9B/1r
+ UyHgqKbeiaPrh5USmWGJqws+sFWieVEBSO8tzbKYd+bYZ9uBd8E7dt9odXYuNg2/hjyJ
+ b+4Q==
+X-Gm-Message-State: AOJu0YwLUUUxVWzcQRVu8e2vPmWW9qwdjtvfhP1JKag3D8w6veGmYGND
+ sA8XI8mKJ83mc2IGBPonmzu+TvstkD3lxjzLa0obAjkaorXWtGpobM5dwan7UBHu49naBIgqoME
+ b4qskX9SVMWlKl8f02RbJuESII72U6Ea2thsUeMwOinC4l4dKwhuphg==
+X-Gm-Gg: AeBDievXjmdPRgCDoe2EXThYy+Limucdp4ggNRoIgDJ93KaKFYPTSl5sPwz0wQzhOgs
+ KN/mSc0UwYM0zLhq0qXqioYVEuVUvrDVuDYrlUFW45Njh55BR1uVcvSMnxEjBhsDNWBPDHdnoze
+ +p0cpBIyq94YBc8vTbvbeigQP9zuhZTgBd+JX/jHGAOqtsMDK1KvPX/hzg1mBEDrilbako+tFaB
+ EdDbwq4rrLCjipMFwn2rSy41qoakfW+FBWeubkuMTqhHXla4OVsaxTfwGBW5yo3V0WbxMYVoQAi
+ gR283mceX1GUGlCI
+X-Received: by 2002:a17:907:944f:b0:b9d:2fce:308b with SMTP id
+ a640c23a62f3a-bc41173a689mr5975566b.30.1777927197131; Mon, 04 May 2026
+ 13:39:57 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260504-extrawarn-sync-v1-0-b19301d1948a@cherry.de>
- <20260504-extrawarn-sync-v1-18-b19301d1948a@cherry.de>
-In-Reply-To: <20260504-extrawarn-sync-v1-18-b19301d1948a@cherry.de>
+References: <20260504-ufetch-net-v2-0-01bec4ca7169@cherry.de>
+ <20260504-ufetch-net-v2-2-01bec4ca7169@cherry.de>
+In-Reply-To: <20260504-ufetch-net-v2-2-01bec4ca7169@cherry.de>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 4 May 2026 14:38:31 -0600
-X-Gm-Features: AVHnY4KgulmNRqZlBvtLyw85ffygQsScV0moutV8-kRNgVXqCfwKJFJDLpVfLdk
-Message-ID: <CAFLszTjra2Tcsvki4qKz7h6EBshDccUP0M-6QkHpLMKAUYBw+A@mail.gmail.com>
-Subject: Re: [PATCH RFC next 18/18] buildman: set W flag to e to be consistent
- with CONFIG_WERROR
+Date: Mon, 4 May 2026 14:39:45 -0600
+X-Gm-Features: AVHnY4LZzMH2G6GhnsLYxepBn6Pmb6BZRkJSBBg5j40Spjr3M9_eBy4miOkIIWA
+Message-ID: <CAFLszTjsnTWPo+SbxuKqcDnqVWZgm0uiF8rn0syuNsbQaqe=Rw@mail.gmail.com>
+Subject: Re: [PATCH v2 2/2] cmd: ufetch: only show comma separator if there
+ was a previous feature
 To: foss+uboot@0leil.net
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Simon Glass <sjg@chromium.org>, Mattijs Korpershoek <mkorpershoek@kernel.org>, 
- David Lechner <dlechner@baylibre.com>,
- Jerome Forissier <jerome.forissier@arm.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Simon Glass <simon.glass@canonical.com>, Raymond Mao <raymondmaoca@gmail.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Michal Simek <michal.simek@amd.com>, 
- Adriano Cordova <adrianox@gmail.com>, Sughosh Ganu <sughosh.ganu@arm.com>,
- Yao Zi <me@ziyao.cc>, 
- Rasmus Villemoes <ravi@prevas.dk>, Quentin Schulz <quentin.schulz@cherry.de>
+Cc: u-boot@lists.denx.de, Casey Connolly <casey.connolly@linaro.org>, 
+ Tom Rini <trini@konsulko.com>, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Peter Robinson <pbrobinson@gmail.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>, 
+ Quentin Schulz <quentin.schulz@cherry.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -122,35 +116,74 @@ X-Virus-Status: Clean
 
 Hi Quentin,
 
-On 2026-05-04T13:20:27, Quentin Schulz <foss+uboot@0leil.net> wrote:
-> buildman: set W flag to e to be consistent with CONFIG_WERROR
+On 2026-05-04T14:48:27, Quentin Schulz <foss+uboot@0leil.net> wrote:
+> cmd: ufetch: only show comma separator if there was a previous feature
 >
-> Buildman currently only enables Werror for KBUILD_CFLAGS (via KCFLAGS)
-> and KBUILD_HOSTCFLAGS (via HOSTCFLAGS) but nothing else.
->
-> scripts/Makefile.extrawarn now supports --fatal-warnings for the linker
-> and assembler, which are enabled whenever CONFIG_WERROR is set.
->
-> Let's make buildman set this variable to enable even more checks.
-> KBUILD_CFLAGS and KBUILD_HOSTCFLAGS are kept in case buildman is run on
-> a git-range where W=e is not available, it's better than nothing.
+> Currently, if NET is disabled, the next feature to be printed will start
+> with a comma and a space which is not pretty. Add the comma and
+> whitespace only when a previous feature has already been shown.
 >
 > Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 >
-> tools/buildman/builderthread.py | 1 +
->  1 file changed, 1 insertion(+)
+> cmd/ufetch.c | 29 ++++++++++++++++++++---------
+>  1 file changed, 20 insertions(+), 9 deletions(-)
 
-> diff --git a/tools/buildman/builderthread.py b/tools/buildman/builderthread.py
-> @@ -233,6 +233,7 @@ class BuilderThread(threading.Thread):
->          if self.builder.warnings_as_errors:
->              args.append('KCFLAGS=-Werror')
->              args.append('HOSTCFLAGS=-Werror')
-> +            args.append('W=e')
+> diff --git a/cmd/ufetch.c b/cmd/ufetch.c
+> @@ -157,26 +157,37 @@ static int do_ufetch(struct cmd_tbl *cmdtp, int flag, int argc,
+> -             case FEATURES:
+> +             case FEATURES: {
+> +                     bool sep = false;
+> +
+>                       printf('Features:' RESET " ");
+> -                     if (IS_ENABLED(CONFIG_NET))
+> -                             printf('Net');
+> -                     if (IS_ENABLED(CONFIG_EFI_LOADER))
+> -                             printf(", EFI");
+> -                     if (IS_ENABLED(CONFIG_CMD_CAT))
+> -                             printf(", cat :3");
+> +                     if (IS_ENABLED(CONFIG_NET)) {
+> +                             printf('%sNet', sep ? ", " : "");
+> +                             sep = true;
+> +                     }
+> +                     if (IS_ENABLED(CONFIG_EFI_LOADER)) {
+> +                             printf('%sEFI', sep ? ", " : "");
+> +                             sep = true;
+> +                     }
+> +                     if (IS_ENABLED(CONFIG_CMD_CAT)) {
+> +                             printf("%scat :3", sep ? ", " : "");
+> +                             sep = true;
+> +                     }
 
-Please update test_warnings_as_errors() in tools/buildman/func_test.py
-to assert W=e is present in the make args alongside the existing
-KCFLAGS / HOSTCFLAGS checks. Otherwise the new behaviour is silently
-untested.
+Sorry, one more thought: you couldkeep the separator as a string that
+starts empty and becomes ", " after the first print:
+
+    const char *sep = "";
+
+    if (IS_ENABLED(CONFIG_NET)) {
+        printf('%sNet', sep);
+        sep = ", ";
+    }
+
+> diff --git a/cmd/ufetch.c b/cmd/ufetch.c
+> @@ -157,26 +157,37 @@ static int do_ufetch(struct cmd_tbl *cmdtp, int flag, int argc,
+>  #ifdef CONFIG_ARM64
+>                       switch (current_el()) {
+>                       case 2:
+> -                             printf(", VMs");
+> +                             printf('%sVMs', sep ? ", " : "");
+> +                             sep = true;
+>                               break;
+>                       case 3:
+> -                             printf(", full control!");
+> +                             printf("%sfull control!", sep ? ", " : "");
+> +                             sep = true;
+>                               break;
+>                       }
+>  #endif
+
+nit: the sep = true is dead since nothing follows the switch.
+
+Reviewed-by: Simon Glass <sjg@chromium.org>
 
 Regards,
 Simon
