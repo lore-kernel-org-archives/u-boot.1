@@ -4,92 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B1BDFF885A
-	for <u-boot@archiver.kernel.org>; Mon,  4 May 2026 20:30:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 701E0CD3427
+	for <u-boot@archiver.kernel.org>; Mon,  4 May 2026 20:30:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C08FC846A1;
-	Mon,  4 May 2026 22:30:24 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 11D7B846CE;
+	Mon,  4 May 2026 22:30:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="kzZ2fQtv";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="S35wxUWW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 19EC6846DB; Mon,  4 May 2026 22:30:24 +0200 (CEST)
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [IPv6:2a00:1450:4864:20::632])
+ id 74883846A0; Mon,  4 May 2026 22:30:38 +0200 (CEST)
+Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
+ [IPv6:2a00:1450:4864:20::532])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D62A7846A0
- for <u-boot@lists.denx.de>; Mon,  4 May 2026 22:30:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 855DC846E7
+ for <u-boot@lists.denx.de>; Mon,  4 May 2026 22:30:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-b93698bb57aso850013666b.0
- for <u-boot@lists.denx.de>; Mon, 04 May 2026 13:30:21 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1777926621; cv=none;
+Received: by mail-ed1-x532.google.com with SMTP id
+ 4fb4d7f45d1cf-676e62faf2bso1301682a12.1
+ for <u-boot@lists.denx.de>; Mon, 04 May 2026 13:30:36 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1777926636; cv=none;
  d=google.com; s=arc-20240605;
- b=CcWEkR4B7fjYEMSP/ee9Ddas12yFY7oMISTHWh0cutjs8V9S9Xy6VSe72advm5ilRV
- ldppVwaWXMdjhKXBeh64FIzcOOBgD/wZ+TXckXTh80D4iwWFRXZPxUeq64FB7Bl1cfxU
- dK6MIm3RzvmY15HgA2ZMahLsj2AL8cjucVUnBeOqQoAudJueCvhjfx90LIB88htVeCZO
- IZiWRFAYzXZN4vHv0J2TPwWJUGz7uFQV8vM8g/eEL1L78IFQvwl/UjvnxQ+N+Pdw1xz7
- HO1yomEh6HN34zW8KLX2aJzzCr/CZST7S/RoHsM7Et553Yg9kamCMjaKpdBjwJRRit8q
- h0pA==
+ b=BsgfV0F3V6U2KFxgdxvYuGrnQkT+JpAYSY1wGkgB7uEmU4JJ533BRrTbx4G3vI7lnN
+ v8oEfH+N4/wqqaszcbmzn9vR/L1uV0iJY23/bDdx0/wRZqZ+kygaeBg/u2Y9Re2/KlhX
+ 3acqgJTuMU2UuEwyTymaXwrUUSM1HHgeRDRwAvVtwMRmZWhw6E+xpX0T0v9xtQc9FnAT
+ lreyyuQ6OVTqo3JRlKYtdVXKoSEzf8mOp6Yn26d89blL3vR5N7TnucE9268t6s+LWgCR
+ wDM3Q4LL7CySLUXha2bj4M9s5BTZjhSqqEGmRQAR3UpqHeZpzkPz/FX08SQb9YNOMzwn
+ rYkA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=QhvG7127G9OsF2+d8tB3ZZsMdqpPU2a7/4ONLjhSAqU=;
+ bh=mHnkqdPGmDs75xVzX7Lm0+Jw86PgxxFcFs0sPu0EB7A=;
  fh=JDmMtl5m1ONTYAIDZy3RW95Kei7pwM4OcFAim19m6HQ=;
- b=Z9RNuwbnBJ+I9Yt69c/NSftJli+wQszBJPSPFlIjt5ja8WUvgQRQTjFlvaF8w8/p41
- tGLJIcDZUCeAPY4frArMYAR1BPRX4XOMYN5+8dGV6dydnC336jmBOSjj5ha4TOYIqvo7
- GB4RzLq0tymbXoRHu/VTcfgvwlbrEM4taXBXoxJ1+WXENqSn4zaqf0ZPZIso0OGE4S6U
- 2pGkEuW6H71cWpK4n6SUqaRaWr3nIv9G08B2qq9ciROXvn79tGA1wG9f11+GVT9/eieW
- SWW1vfDc8hWk1N9mNXYPOucR+UfVKIay6hR4iyH5NzKehnbFc+IIHfIOTXb6QvE0fGDS
- Ny4Q==; darn=lists.denx.de
+ b=lmDuUBjMy/Uk8QHGfqsrbq5wxIObeYHULzQpsY7XtX8b6OO6SHmFEdhDnBZP0BXnfl
+ 25sWLzMNbu9JjqzS2xdet0orb7pqZFxc7y8xILdBUmp4HETQpy2O00t3EiOTIPEcrnII
+ Kv7hIv5lbmot5jAMa48OST8ugbwaLTmFscG6hx+2aIQSep/UBrM5fUJR4O/saMC9P0CF
+ PURC69Pfg31ca4PTOl8ybbxU1Fcd2+IhhZvu4J5ZcSdNSp/d4s6rbanlAZv/OQ+CvExB
+ Vh7Dlxggm5DtucWBvlGrej730gtTBJejpR3Yp/blls9hgBdWDzlYCsmmvHRcv61TV/f+
+ RClw==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1777926621; x=1778531421; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1777926636; x=1778531436; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=QhvG7127G9OsF2+d8tB3ZZsMdqpPU2a7/4ONLjhSAqU=;
- b=kzZ2fQtvNMg9i5iNhvbaWLZERTd4EQ/ENwTCL11ASloSCDzFB5BpjeCcQ7CiwvEiuu
- jBSvr60PRR5j+M2n7TxfFCCf4BsUtVK7wN/LLpgyH0xnSe0tP1E0lRdgH1n+xLnfUEEU
- qUSiwaGSg4zRx2uiR7BI5zhSqpY6GzzUYHmXA=
+ bh=mHnkqdPGmDs75xVzX7Lm0+Jw86PgxxFcFs0sPu0EB7A=;
+ b=S35wxUWWBiCWvsXLw7Yssd2TYoGt4GkuR787xig7L+Z/hdd8pOTT+xYwVX8JXNxK0K
+ rg5PvZhXoYaveNbV7OqUEIoPpl0g3Ltp4bcBF7TXQfBumDitnpENo1EPa2yqg4y4M6XN
+ UCZo+pc6S2SkmJtCN9x+qj6ev3ZkKhsziAaMc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777926621; x=1778531421;
+ d=1e100.net; s=20251104; t=1777926636; x=1778531436;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=QhvG7127G9OsF2+d8tB3ZZsMdqpPU2a7/4ONLjhSAqU=;
- b=e8riUrcB0wVDpo1kCYUkWN4EKpwZQkSo3UpCv3oU2ClyYf7iQJOiBCkS+jvMzzN72J
- kRBOhshXo7P3KvbTqy51YcCquHx6hV4BaldwRLoO5M1Qv/uNrNjOQp29v20q8L6fz/8k
- wKm6mJbUzo+4zZrRBv9O81PgMxoSkCAcN6RYhMAPXJHQ07nQCR9oaDp9T6/VrpGNCv9E
- 4Z0P3IEHkllLK/cHASlbWjPtHU8bZST+6+Iz6AfNRIMTDOw9UYbletfJt3ewtDbQepbD
- SeIhBfuGdWOja7mcjxHNx05UJcNohOhUwjjzRF7p9OmQZItcE+CGp75FeM7s4d4hPGUz
- adtA==
-X-Gm-Message-State: AOJu0Yx5Y6lsON6ij1jwqeqVacfOXyy/obPvCvqaaRYkVV/porJM/uVk
- px1HnQe6bR8BAwr4y2NixyN368GYkKwLXoPKl79FHtb+wsvCLUqCBS+N1fl0L8dEaCzz8pE2Kup
- EhbDERmBFL+jiXTyWvQzHOM4ivEgTb7b/c7CjitGB
-X-Gm-Gg: AeBDievUMin/9xrMl3j92sTqFPj1QJiPEiHasThKDcBh1UGWNc3oJ2KNkAopTKiQq/J
- IxQ9Dpn6S/O5gzcLxgrGutS4vPIv+2WMzY2wRfMaPimb3OM6LpLQh63qShnPNRPBDWJ6JID4T52
- 8LVWG+IPA1Q5Vvwe5XrPhiXQGLd3nRrMl0mxHVt9LvLKXCXMjL0Of10mjafpys+khYjJAuVBlGY
- mI96YmKnSYLcCkohz9kYnmrQ75iPJsU7EaemNz81LBFqfBKNfZNQKtKRZQUOyr6nVl534DvwPJ8
- t3uIqzP4XhOrE7Bw
-X-Received: by 2002:a17:907:968d:b0:bc1:d3d2:9348 with SMTP id
- a640c23a62f3a-bc3d143a281mr53401866b.20.1777926621176; Mon, 04 May 2026
- 13:30:21 -0700 (PDT)
+ bh=mHnkqdPGmDs75xVzX7Lm0+Jw86PgxxFcFs0sPu0EB7A=;
+ b=WzAOp7Jr+XFbOw8Cv3VHa/QnhLJJOM8MoEgmIwFPU/PFfZuzY8CRHg0ZF3Z2ctuoA2
+ eaokufua3gtNpIoiPYcYwRpCa1tzf5oe6H/fVU149slIlaOU5/mebeDIirS4ZDSMDBWn
+ LjCLo6rNBJUkQudQHXVNvS0o7ogtdATSqnpp22zuTRed22c3C10T0IeykAPqCT4R2hYI
+ aGTIM3IsjdryXm54YGzmLUOK7BFie/eZ3HHCouA0BUlz4CCsbW2e8QakaEh9RGXT/h3J
+ bWWNVJUpw2CGgFE+LyCLjQB5Fv0oyyWYtdC/azXB2A0lOwt24KZ6Yq1829Z1zkJpYYr5
+ S9yA==
+X-Gm-Message-State: AOJu0YyEwTZNMDihTuLcgD9LOOttJBFck3ZbuAnOBWoUFfxKXIwMiIvc
+ wvdQrjxeEQNqx3OoPj89R5LwnuqkENXFVjRbFO6qMbRVuPOrKAnsf372sGbW8ohTbRzIAoBUjTy
+ jqikQnTU3S43JK0u73FuQcBOH3CsTsxYPklajBNQk
+X-Gm-Gg: AeBDieuMo5sYfuSZV91oHjBH3DGGy0HhtlyRzYfufbPTequ+i0gVlhCCU15Z2KrUVfs
+ HtrNzltoGutkam4CE7XhmCAn00LlD+227VyGBQoe7Bv8be0frQdtpzMUt6e07+vePO3eAO4j8xr
+ d2htlJiI4B5Tl/SzUO7ct7HKWn35NFgcTwqSkPpUhsuCcKPk4KU8lRfPz7clWOTf/oVgvM8B57H
+ JD5L97B2CBzf8Yn2zonrLrrJoI96pAbvFHiXhzO57m1h3XhemhuStm9Z/xwkIhbmvRcfhKkw416
+ W5XYQ/HJGyhEjvT3
+X-Received: by 2002:a17:907:7245:b0:ba7:3d21:c137 with SMTP id
+ a640c23a62f3a-bc40fd16f31mr7410666b.17.1777926635892; Mon, 04 May 2026
+ 13:30:35 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260504-extrawarn-sync-v1-0-b19301d1948a@cherry.de>
- <20260504-extrawarn-sync-v1-1-b19301d1948a@cherry.de>
-In-Reply-To: <20260504-extrawarn-sync-v1-1-b19301d1948a@cherry.de>
+ <20260504-extrawarn-sync-v1-2-b19301d1948a@cherry.de>
+In-Reply-To: <20260504-extrawarn-sync-v1-2-b19301d1948a@cherry.de>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 4 May 2026 14:30:08 -0600
-X-Gm-Features: AVHnY4Lwp29UdizwyBjVSwD6Vw_AQZZn44RATZ5fn6hS9YqgbgMwUNfLd_eHclw
-Message-ID: <CAFLszTi8c+CoR1_kuXEeauwae7f_1huRKt6W9daeCHPz63VzrA@mail.gmail.com>
-Subject: Re: [PATCH RFC next 01/18] test/py: add pytest --make-args argument
- for additional Make arguments
+Date: Mon, 4 May 2026 14:30:21 -0600
+X-Gm-Features: AVHnY4IdfZib9d1Y1n-s6CwiI9WLEe33c0fnQSsdKt1KfpIqB4pgl8ZVWAOHo7c
+Message-ID: <CAFLszThzyxYdJGUeh+drdDO77COVDo_PA9ssYHq5jtjLKrT3XA@mail.gmail.com>
+Subject: Re: [PATCH RFC next 02/18] CI: pass clang HOSTCC and CC to pytest
 To: foss+uboot@0leil.net
 Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
  Simon Glass <sjg@chromium.org>, Mattijs Korpershoek <mkorpershoek@kernel.org>, 
@@ -120,35 +119,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Quentin,
+
 On 2026-05-04T13:20:27, Quentin Schulz <foss+uboot@0leil.net> wrote:
-> test/py: add pytest --make-args argument for additional Make arguments
+> CI: pass clang HOSTCC and CC to pytest
 >
-> We manually execute make commands within some tests, sometimes from
-> 'dirty' build directories.
+> test_env_initial_env_file test calls make on the build directory passed
+> with --build-dir parameter which points at UBOOT_TRAVIS_BUILD_DIR which
+> is populated with buildman before pytest is run. For "sandbox with clang
+> test.py" and "sandbox64 with clang test.py" jobs, buildman uses clang-20
+> toolchain, but pytest isn't configured to use that as well, resulting in
+> gcc being used with a configuration made with clang-20 toolchain.
 >
-> One example is the test_env_initial_env_file test which calls
-> make u-boot-initial-env
-> in a build directory that has already been populated possibly before
-> pytest is run (which is the case in our GitLab CI/CD).
->
-> In "sandbox with clang test.py" and "sandbox64 with clang test.py" we
-> build before pytest with clang-20 but pytest will call make without
-> setting HOSTCC or CC to clang-20, which results in clang flags being
-> used with gcc. Right now, it isn't triggering a build issue because we
-> use cc-disable-warning to disable the warning only if it's available, so
-> the clang flags aren't added. However, in a few commits we'll bump
-> scripts/Makefile.extrawarn to a newer version from the Linux kernel
-> (6.1) and it won't be used anymore, thus triggering fails.
->
-> Add an option to specify make arguments such that a user can provide
-> HOSTCC and CC for when the build directory to reuse has been built with
-> clang.
+> Specify the HOSTCC and CC clang make arguments so pytest uses the proper
+> toolchain, this will be required in a few commits when we'll upgrade to
+> a newer version of scripts/Makefile.extrawarn which gets rid of checking
+> whether a clang flag exists (because it's supported by the min clang
+> version the kernel advertises as being supported) which will be an issue
+> since GCC for sure doesn't support all clang flags.
 >
 > Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 >
-> test/py/conftest.py                 | 6 ++++--
->  test/py/tests/test_cleanup_build.py | 4 ++--
->  test/py/tests/test_env.py           | 4 ++--
->  3 files changed, 8 insertions(+), 6 deletions(-)
+> .gitlab-ci.yml | 2 ++
+>  1 file changed, 2 insertions(+)
+
+> diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
+> @@ -288,6 +288,7 @@ sandbox with clang test.py:
+>      - ${HOST}
+>    variables:
+>      TEST_PY_BD: 'sandbox'
+> +    TEST_PY_EXTRA: "--make-args HOSTCC=clang-20 --make-args CC=clang-20"
+>      OVERRIDE: "-O clang-20"
+>      # addr2line in Ubuntu 'Noble' and later are broken.
+>      TEST_PY_TEST_SPEC: "not event_dump"
+> @@ -313,6 +314,7 @@ sandbox64 with clang test.py:
+>      - ${HOST}
+>    variables:
+>      TEST_PY_BD: 'sandbox64'
+> +    TEST_PY_EXTRA: "--make-args HOSTCC=clang-20 --make-args CC=clang-20"
+>      OVERRIDE: "-O clang-20"
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
