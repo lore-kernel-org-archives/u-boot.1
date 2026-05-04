@@ -4,94 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ECE84FF886F
-	for <u-boot@archiver.kernel.org>; Mon,  4 May 2026 12:09:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93B9BFF886F
+	for <u-boot@archiver.kernel.org>; Mon,  4 May 2026 12:14:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7F32E8465E;
-	Mon,  4 May 2026 14:09:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id EEEC983EF9;
+	Mon,  4 May 2026 14:14:42 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="YL0DhEBx";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="y1glPL73";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3986B84659; Mon,  4 May 2026 14:09:53 +0200 (CEST)
-Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
- [IPv6:2a00:1450:4864:20::62f])
+ id 76EF48460C; Mon,  4 May 2026 14:14:40 +0200 (CEST)
+Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
+ [IPv6:2a00:1450:4864:20::32c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 50E1280F0E
- for <u-boot@lists.denx.de>; Mon,  4 May 2026 14:09:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3A0938394E
+ for <u-boot@lists.denx.de>; Mon,  4 May 2026 14:14:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62f.google.com with SMTP id
- a640c23a62f3a-ba8472c1613so725337166b.0
- for <u-boot@lists.denx.de>; Mon, 04 May 2026 05:09:51 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1777896591; cv=none;
- d=google.com; s=arc-20240605;
- b=QoAgvVQ1IL7hJlAnxaSc0vnxfbl3toPeiHtnBpksFi2YdWKdwl1BgOhvFjrn8s8CTW
- t4GTskzflahzfHwJpg2A4ZnA0JU0R1tu3nsLSUzKnWKLygPpAMGaWqu+R5Kv20S9T1yh
- mFfPfdOITfAl25dP0j7LyVtISQYM4ZpV5SI+jtsN2k6Wr4taT7SIzWojw0+Qhiy5tvJa
- +RpWPcL+bK91FbGKN5FLR06Ddb3izS4s7cW5wOaT1RBIjd7oB5oP6SDORGscM5anP2jw
- /hNwPow7QK5l2e2C37jCERz4Bv1WvNx71zYa71x/ydgwuZzyfiy++60l9T+OVGj/d4nV
- EdHw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=ZhzCsm/gVWnUkz0HkuaEozC1e8RDXO0hjmu0pukUFMY=;
- fh=jmbcoFG2RPEOJsmPKSiakkV0VWJqP8RiS13G+yktnmU=;
- b=W/7mxrDCy3St2W6LkqQphXMYihH522CM/wgnZ3EV1rPKnnd30HPgpeQ5jV9xZLcrFr
- uurcE/iN8MwJTGswT9WDfO5NTIcE79cWJZdahpcsAc2XVv8WYKOcB0SX1K/HD7ogMMd9
- JTqZB09VUmAkFJNki5BwrRB338mDLZ2ENfHxlbZM8ofGPtOW2qpsflCZSSNcEsleSU3m
- GSFBlutZiE6KNHQdz0Sv6TBVDz2FLSoF+GtVvZrORXhgCb9qnNKdgUwR4OrxntgU8t+S
- fVbIbY/9xgCuxC2ZvYcZlTc+Gqa0X1WqSXSL8+9KIT+i7A0/mmVQ8hqC07zaBVdVPfd1
- UwNQ==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=casey.connolly@linaro.org
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-48984d29fe3so59775865e9.0
+ for <u-boot@lists.denx.de>; Mon, 04 May 2026 05:14:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1777896591; x=1778501391; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=ZhzCsm/gVWnUkz0HkuaEozC1e8RDXO0hjmu0pukUFMY=;
- b=YL0DhEBxtKDX1KjPQuFIrt72vC/zG6un7+qp9Y/qnF8Zlb62s8xrfYPKs5DvM2Naoq
- lXYyGRNeAXeR0GT6q7dnTkmN9yRttRCu5rVPXlEpT6sf807eCPHQ353e9H4RLzLds7zh
- MHj3+m2viM8WtZ5LDMr9FTMySa0RNrW1LMKCM=
+ d=linaro.org; s=google; t=1777896877; x=1778501677; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=B0Qy0bwrMnkpqZIJl5DkVHyMkiY1T/Er7nTpjepyB2Q=;
+ b=y1glPL73p0xk5p9G1wIyECnkD/DSGcxgBwltyA8eP5V2k8gzwNqmQs4QSkJYD7WPLl
+ YIHIrnWKY7CBEaLSXfDa8HcBWQ+Fi9RtVsTjvNB9q32YIKIZhAHsqSlC+uAbsNkE1wqE
+ 6WTKbIDabtw6fmPbLGqDt+37jrjRhIuIrUnVop4P2AQ1fF0WKva2zjV/lLvPwd1AqZ/0
+ 78S4Lp4h3grZRChZdbdWwKutk7HIhK8Uh0C0rXZyeTNl0BETKy+1fxPxsd0VjBNd79a0
+ yiosOmgZxwTqOIdRYxigmvAFMKEfvmo/DKKusvlE6UGGzAcq6yvVagX7SkJ44ii8sUQE
+ hnrw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777896591; x=1778501391;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ZhzCsm/gVWnUkz0HkuaEozC1e8RDXO0hjmu0pukUFMY=;
- b=bJrBxlTCfpbryAOWS6f7/i3szzoIX7K+tSO6PcTOX+Ml8+vBtzltcqsKwxH5r0rwix
- Wxxvrk/vpszDl0z0Zzab3edC1H0QLHIUO0DuvsA4IOlvKOlHcvCPvOEYFSDzAa8dsLJl
- xwmJd1tqAMHyIPGt6BS9MynpZHpJNFFeoGGrbm7gRl2JKsVpVmwgk/x8sAlBCS198uSU
- GPf/Fi7Nd5QpwyZvkCBDGhKCapBmWYSldLDxUzDXKIMv/oZ1Raa7y4r8oAK34uOjd4wX
- C4+iX9L2RTX+IGYAAglFooVHI3tpp4nf+obqZ0ccQf54YN+JmkNaWn+WcCXo2x/y8Pue
- DmhQ==
-X-Gm-Message-State: AOJu0YwNx9gbQnFftHcX+63MLW/jcqeFJBJqFMewoiL0UEd0tFr/Z5n2
- Fvg1a1NzWLa9zIbtRHOKm4uXwP5sdn8qkS5Hak1GGj3BB2EXwcf5G7d2jTkgKwds1bODGf47+8+
- 0pP1Qb+wh+4Q37ZqqCRa5+rJ1KIn0rfOLxFmz3EIg5UaGzsWPvLM=
-X-Gm-Gg: AeBDieu+8ufcW5F35+mWm3kdpm2Li0DnyVZqlnq0bW2MXPuX6Fkww3cisgRzsIo6BHN
- oBBHMGVUyS6s0ztPsr7MuM7kfbcE5nlMuOHj6iFuS2AHkWtsEo6kK/TqYC2td0JjWSOn5Gkgk00
- UeDH9uelLRDIEDGdhTr3QeXXOGRlYS/+D920y+8NUPxG9s0INSkkVl0pm87dGmiq09lp4rVGrle
- q1JwTM8BqlJKsEebFkncc478szjJJlgcYEqkhuMrzbWF0hyNXEHL7SypQ8+Qq5kZNh/WCOCUbg0
- nIA29xi7f0h1mnfA
-X-Received: by 2002:a17:907:9724:b0:bc3:96fd:389b with SMTP id
- a640c23a62f3a-bc396fd38b9mr12020966b.18.1777896590767; Mon, 04 May 2026
- 05:09:50 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1777896877; x=1778501677;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=B0Qy0bwrMnkpqZIJl5DkVHyMkiY1T/Er7nTpjepyB2Q=;
+ b=GNDSIWqU1MnmDRHSE1azSlz0Kcv/P9aTCuy9Q5pTVNDcBgmeT6zNMfKvMQhCLcojCe
+ o8uypWpzpYvRo3xpBNqODiecqRgekH9dwpTJOyQb92XvKYXu4OQ8qEufpIU7NMKpwzl7
+ 2MitRTWI3bwpx62kma/pMWXZR1IICkeEEDIpAyhtj9PPA62t8YafJ5boUMK2AFWr2FkV
+ /sYcw4qTpGHOY6fH5f/ddsZG2cTIZNJB6BNRZQDRIYlEtobb8rHOSVTn+6BEOUijMCY5
+ HN4QTaNL32c6nt8pAMuUwvDYdAcZ6/i+jbW9wyJKF53GuCJa0ckdYuHiXy4Ba+0K3ybF
+ iB+g==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ+uWKbV9hK9prU41yOMzc3zY4v7ERQ91NQDwiD4iHr6pICqPC3rFjSjS7mdUWX68Dh1NG54svA=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy1aWQQIWySHNg8lt02VbKTPhGd+n+eKKBxX91Z60xc2cGKNYVT
+ 4ZsZ/C7cJ9kx24pflo0VUWQAnO9top6t/BFKjG1/DLRAypNEO1JsfiRwv6ZTGLDdmAY=
+X-Gm-Gg: AeBDietynMnopA6H13xUQQ/3lk6nIZIdWtr776A8KFMNPu1jUO4fCNxYPr6VsOaRTP0
+ WN2S+53lv0n41Vj/d0rHFh9L647Q7sBVjxlhmgesV3qCLkHPmKH4uH4p8XHbdEsqBa3UoliPkzv
+ wo2YoTSQLAkIVhV+BPefhIiyfm1fiV/cSzEm5qQ0UMqcD+9CdXo2DR7gaIgoeMY4RQqk/cjd5Ux
+ VlsXn5R4zWFI/UDqfgvx4BVfrnDdpIzyr/xfm0mv4g39LsmJyOVggIJQF6qIZKVRbNthaBXLi5M
+ DmVDqlxU5IuofQ/7VEjzObccYhfuhGP5RC70IcJvLXPM8fLFGht4Cp7b4X+I6CAWTQH2GetmLfB
+ S5iYIMBjFV6mp0u83wQEbR5lqi8uwwGUnoQ8KakYnXgSvTJqBzSCUhXGwcRXRb4JozlJE/LkBlG
+ jPrAZqpJIGTkIErkOwCqWjgRZP4ZjXvtxmz1L0E/OoaAaYEDAOiEGdZmKScU2sURCzE3C+a9fnC
+ E0m
+X-Received: by 2002:a05:600c:8906:b0:48a:52f2:a0f1 with SMTP id
+ 5b1f17b1804b1-48a9865e4d4mr107532235e9.18.1777896877443; 
+ Mon, 04 May 2026 05:14:37 -0700 (PDT)
+Received: from [192.168.1.36] (p4fc3dd86.dip0.t-ipconnect.de. [79.195.221.134])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-48a8fed8b8dsm108192285e9.4.2026.05.04.05.14.36
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 04 May 2026 05:14:36 -0700 (PDT)
+Message-ID: <3e0b30b9-e1a1-47a4-8e71-5a6e680da547@linaro.org>
+Date: Mon, 4 May 2026 14:14:35 +0200
 MIME-Version: 1.0
-References: <3eeec4427b9ce9bb4abac4e27414ea1cb687e45b.1777443726.git.michal.simek@amd.com>
-In-Reply-To: <3eeec4427b9ce9bb4abac4e27414ea1cb687e45b.1777443726.git.michal.simek@amd.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Mon, 4 May 2026 06:09:38 -0600
-X-Gm-Features: AVHnY4LKjadj2j-DqF2ADFd9q83CL9Z0sPnPUPxg62GjVfc3hKESm_lCe4Qo82w
-Message-ID: <CAFLszTi=aPPOFRG9JEeK++JYr4ygG82RfgyKLDvXaa=YXA40wQ@mail.gmail.com>
-Subject: Re: [PATCH] fdt: check fdt_pack() return value in
- fdtdec_apply_bloblist_dtos()
-To: michal.simek@amd.com
-Cc: u-boot@lists.denx.de, git@amd.com
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 0/2] cmd: ufetch: print Net feature when NET_LWIP=y,
+ prettyfy if NET=n
+Content-Language: en-US
+To: Quentin Schulz <foss+uboot@0leil.net>, u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>
+References: <20260428-ufetch-net-v1-0-5d58c7618239@cherry.de>
+From: Casey Connolly <casey.connolly@linaro.org>
+In-Reply-To: <20260428-ufetch-net-v1-0-5d58c7618239@cherry.de>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,20 +109,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2026-04-29T06:22:08, Michal Simek <michal.simek@amd.com> wrote:
-> fdt: check fdt_pack() return value in fdtdec_apply_bloblist_dtos()
->
-> The fdt_pack() function can return an error code, but its return value
-> was not being checked. Add proper error handling to propagate any
-> failure.
->
-> Also fix typo in comment: 'Shink' -> 'Shrink'.
->
-> Addresses-Coverity-ID: CID 645839: Error handling issues (CHECKED_RETURN)
-> Signed-off-by: Michal Simek <michal.simek@amd.com>
-> Reviewed-by: Alexander Sverdlin <alexander.sverdlin@siemens.com>
->
-> lib/fdtdec.c | 7 +++++--
->  1 file changed, 5 insertions(+), 2 deletions(-)
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+
+On 28/04/2026 12:56, Quentin Schulz wrote:
+> Make sure the Net feature is printed when NET_LWIP is enabled, not only
+> when NET_LEGACY is.
+> 
+> Only print comma and following whitespace as separator if there was a
+> feature printed before feature to be printed.
+> 
+> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
+
+As simon pointed out the erroneous ':', with that fixed
+
+Reviewed-by: Casey Connolly <casey.connolly@linaro.org>
+
+> ---
+> Quentin Schulz (2):
+>       cmd: ufetch: show net feature when NET_LWIP is selected
+>       cmd: ufetch: only show comma separator if there was a previous feature
+> 
+>  cmd/ufetch.c | 29 ++++++++++++++++++++---------
+>  1 file changed, 20 insertions(+), 9 deletions(-)
+> ---
+> base-commit: 4433253ecf2041f9362a763bb6cb79960921ac7e
+> change-id: 20260428-ufetch-net-1ba7553a20c7
+> 
+> Best regards,
+> --  
+> Quentin Schulz <quentin.schulz@cherry.de>
+> 
+
+-- 
+// Casey (she/her)
+
