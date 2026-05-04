@@ -4,94 +4,99 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B104BFF885A
-	for <u-boot@archiver.kernel.org>; Mon,  4 May 2026 12:18:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A065FF886F
+	for <u-boot@archiver.kernel.org>; Mon,  4 May 2026 12:22:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 50F87845E9;
-	Mon,  4 May 2026 14:18:23 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BC93B83FEC;
+	Mon,  4 May 2026 14:22:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="lGXq0/ow";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Y63F14ou";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D91B784656; Mon,  4 May 2026 14:18:22 +0200 (CEST)
-Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
- [IPv6:2a00:1450:4864:20::629])
+ id 286D084255; Mon,  4 May 2026 14:22:31 +0200 (CEST)
+Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
+ [IPv6:2a00:1450:4864:20::633])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 00B06845E3
- for <u-boot@lists.denx.de>; Mon,  4 May 2026 14:18:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2F1398394E
+ for <u-boot@lists.denx.de>; Mon,  4 May 2026 14:22:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-ba67b332bbaso572403866b.0
- for <u-boot@lists.denx.de>; Mon, 04 May 2026 05:18:20 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1777897100; cv=none;
+Received: by mail-ej1-x633.google.com with SMTP id
+ a640c23a62f3a-b79f8f7ea43so634305066b.2
+ for <u-boot@lists.denx.de>; Mon, 04 May 2026 05:22:29 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1777897349; cv=none;
  d=google.com; s=arc-20240605;
- b=iKTS6sB0ZXOKFIC7nisWdCwdDhp8FgdJtkrLEhlFPePC83FUeZG6oYe+KfgJ6mEJTF
- kYHdrL8eInG/yJpquO+24r/QaIL+R75gc6DQD9MClnN/fqAEWxQzitbSxr/TZJi7+ciT
- FaDVG8tzsWDCrEGT1WjkPWhYYveXSy8Yd52O1sWUi20+t+9/Doxo7+xUcn5pMJ8QRkCF
- Qxp5WO1EulEimYhkERaTahFY1YGdsmFy4y0AS2EBEVxNFh/st6TxDkTIeJTr7NRykqtB
- t94gTHJUygAlwUFhPnMXFZ1KuW6z1VLJ8SgzMnFqXhOhf133XbKEm6kk9cU4Sb5ZNHPI
- DfMQ==
+ b=RjNwL91FvRhg9U2afa7wZ+BjPOccN5sQAF4ldf8W+QnVlfpRPTngZ2bj3usFmIjlRn
+ YvAo5Rb2107SRlZXx8C037BhiZBVAFJJ4hqVQ5LZMagnMIiYQ6Hzs4zBzWal61RCHGLh
+ bgnVvujk4qEP+8RR8eK2VG0tydIDbpGjqIIluRT3AP7OI+5h+3BFSrgZINXViqk79u7o
+ t8jAx8FRP+r06snuQhzVDVzu3cxaZaWHhkP3uufjTnkniA0uR3Med9RUuSWlhVaC2FbF
+ T6FTrDMEhvWgQ2CZ5ANJJ/vHEYMCo6ilr90S+JPBKTLAVk3gX+qlA+PDFrtpn4Oz+9Up
+ bsQQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=Pwpdy8Xe6PI7/DAIbw0PnqP214cxn2wIZWtWoCH89VM=;
- fh=jmbcoFG2RPEOJsmPKSiakkV0VWJqP8RiS13G+yktnmU=;
- b=OkTwBcKql+KnlI8YNlKFwEyu1Nc5+yXJtbvnWBiKSOgWoKZd29IGAadlOrvk5hQGDZ
- DxCXXTGqX5WPyw1NF2WcGWr5NF3aVTspTlaY0XkAaac8lH+Qnxt1Op7dlPc2+QU8wlLs
- t0X7Zj3TLciQ67J7BRqwOV50hqbkHV8acp3jAv+0vMdyrgVtH8m6mnibYTxAU4m0+Uc0
- cnx4J61Ij/TdOfR62RGym+PVULppGEVLhS3a4CpzpqHvlQV4ESL3Uvqm9osUHmBUgMzI
- FcjZvr5TcqTfpx7AY1E2xjGdZifp58YQlydxTrEZNFlVw0gZEOhJQfZfdk6dBGA2X1zL
- 3lxA==; darn=lists.denx.de
+ bh=Tr9tuySTHj0lsRpMsYlMQc7h4L+vqjbyfOC0F088ZTc=;
+ fh=73fUgGMxFWjsXTTKKcDPZ5aB/o+hC4jsg2TDPR5JiWI=;
+ b=eySLPKV2nQ43qYI484dmb872cCGEAotg3ZmT/ZVtc6oNuqeYpSpbn+0DdpZ/L7Fdit
+ 8C4eLWKamLXynMlA818xWGA2ffFQmZlPwTuU6k3CVJFJdyaaL5hxzPWeNPOdcGrfszGu
+ DY6EYWPoB1tOKOv3jFEAEiD4RrlJVZDkr0TxhPorPXPeAa1vJN+rmc9anZHPF7q4sPKK
+ hOOVEbU8N90aASxR6FbBptICuEc9qxC5rNwDftNhjjB6fnyLDIP9LTIg4YdLdf0OtD+W
+ orTKJzblnjyCye8S6FI62+OYeEycoTyK8RRdCnVnuJXGW7JaM3u/AQgZna3W12C3BYoJ
+ 24eA==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1777897100; x=1778501900; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1777897349; x=1778502149; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Pwpdy8Xe6PI7/DAIbw0PnqP214cxn2wIZWtWoCH89VM=;
- b=lGXq0/ow47LCWUmE6qdBFnQ982XBeMsfIZctcl3tUx8mrxf5YqliZEWpyExDMkvnly
- wutdV4F3bzb37TNe7AA+/aHReSScCfN2h0muo6SUoITNwSwdS35dGRsRgNGfxoMvCUcm
- YQPrIOtaGwNOT6guTjTm/kvQBl0q15hNuPX/c=
+ bh=Tr9tuySTHj0lsRpMsYlMQc7h4L+vqjbyfOC0F088ZTc=;
+ b=Y63F14ouroXoP7Pp9Hl6swWI3uT6vBYOpC1V/IooscvSxCNvgnG4IIZsTa0Izx8emG
+ KVprxQOvHBB57DjqUJYDTfjblpycEEYvI6vvTi8wWVPZKaVM2gIKMzy1jdwq9y6HpDMb
+ B1pMDU5m/lV3p/o7TslZZEzPB9NthnkaGJlfY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777897100; x=1778501900;
+ d=1e100.net; s=20251104; t=1777897349; x=1778502149;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Pwpdy8Xe6PI7/DAIbw0PnqP214cxn2wIZWtWoCH89VM=;
- b=hbTCceBvapVfkAjYFICVqG2Gn1Qw0+qoqI9FTfgAdvTsUg2s6xOCCLhvS8+BOLxSUn
- W4okEUto6vR+RIQicCqGjCAIvYoRvF+cRZcxs01E3IgvJS2jCioLAotOSenkbAztQMmh
- tFnF4JlKlNnOJUew3PSl+Epp6+yTfa7YXVBV9TXQn3YevXj/eqCWyK/XgPeggyTmIxlI
- ZT1Fei+PPjeLHtol2iDX6FkQfhMQv/hmXTA789m34IrmXFkg59xgo0ZzY4Wedr20BXLv
- yWfR+v6BCYj5TAmyzzr7n/G+pWCkIM5mj1yhIrusNgkob6eSdYpWbi3riH/5ylckFr/n
- ky9Q==
-X-Gm-Message-State: AOJu0YxRe/S+sCV7mrQX6GMIEPfYYTwq7O8zMylAYZOHSHQzz7GvCGlV
- 1/fVLRcH0sObMGXAjpffsHVG/CGvzxj6nQWSNfe7IzCQMWCq2E5rbi46KnUln9pq0nucVykBXIn
- jPv2xOfoh3xey3uA/o30Uf3BYbIlkceTrcQyh852IMAD8wl4Vm1ITcA==
-X-Gm-Gg: AeBDietS6isx0nkFMxw0stkgywG5rkFyE8uaGOnV6cbyyfCen2PHW4cb1H+tw9BBaE/
- ZjbozXaHc51QKQG68++M2ipWUJUu+K3jRblyhNu8yaoTGG+OZV0Np/ZFy1bAbCtq20SekFxUs5M
- ohSbUvPL4aLBCYnSZ7DZlZTp/qpHZPDCVMkzwYzp1BqtLWHLFJ+FchL4x6OMlFZ5g9n9e/P5mQK
- zihETmAglQRS1f9SxlX2FdUcBkiD24DIbUxIhtt5TXOTwkjtqHBkQk0JODvSqQPrFXNeInN9zJE
- nO8w37I76aQGX9za
-X-Received: by 2002:a17:907:9617:b0:ba4:a7a3:d03f with SMTP id
- a640c23a62f3a-bbffaf45fafmr457471266b.27.1777897099367; Mon, 04 May 2026
- 05:18:19 -0700 (PDT)
+ bh=Tr9tuySTHj0lsRpMsYlMQc7h4L+vqjbyfOC0F088ZTc=;
+ b=iDUO7YTlIl/5XKrZfSiYJmNrM7Lz32mk3HkKdPYs47CB+V8Ie6JQ0gzNTsZU63+Aph
+ IuerDxM3AXAOPFlxOGFTI719FerLaJQXc48q/jDwF0LXtfLG/K9+fUSi7d8sQ+vlZ4Dj
+ K1VBIEiHYRm0qjdpK8vJns7jNeHFWh3ynVWLvJaZPeta5IQDZsGo+h+APYBbHR+GblSi
+ 0xqN3Q9noSTy9xANBxz8gDZ22GZ9io+0y0ith8kI8go9oCdIXsoeJ/bxQo9RqyWnQpzi
+ /eu1FhT0sOkvpHr8XH+7XRYVchz8iie+8wCBeVHXvtiZm98l/B3QqS8UvJN9m/mOxixQ
+ lmPw==
+X-Gm-Message-State: AOJu0YzRILUQMy9xmktUoGFfW0fK2EGbA6ZKXU/qaUssKBn41Bx9IV9F
+ h/NA/wnOGh2Eityn8o51M41EfmwjvKbyl8LxDodhM7QbdUxykjiSIVog2JRMxka//kK9o6mGve+
+ i2MhANvUQcrrO0ESKXT3GR4BGT0cIfOIu3lc0RqEW
+X-Gm-Gg: AeBDievT9iBifNe5XxHwpNDag7F/lfup1SnB972E/rpYboyC1NTmFZaYdujDNzwQXMP
+ hCu3pzBRcCCMeaUQ5CxQv3Hblb27sSLG9+tpjuRmfR5tuFXF8K9VRT/5MbIGAwG2+uP3mvVycnr
+ OjEDILhBmo7QU+Bz0k4djM0KRiRS7Q3RjeB+8KZt0qGvUqZnesMp4FNSLLfaZGOP5ySDUdWQed8
+ lzIvJlVvyQjXBTvAZja5K9KPgIGTr2GU6CRnbcOs2TDUPLYORu+tuXzO8XFi+jrkC7CXs2uW+2S
+ ike2A5PShfgK7SPZ
+X-Received: by 2002:a17:906:9f85:b0:b9c:b475:90ff with SMTP id
+ a640c23a62f3a-bbffcd827f6mr532670766b.30.1777897348613; Mon, 04 May 2026
+ 05:22:28 -0700 (PDT)
 MIME-Version: 1.0
-References: <cover.1777551598.git.michal.simek@amd.com>
- <0880332fd0d61e2f4d497da8dd7fd10c9d65dd9a.1777551598.git.michal.simek@amd.com>
-In-Reply-To: <0880332fd0d61e2f4d497da8dd7fd10c9d65dd9a.1777551598.git.michal.simek@amd.com>
+References: <20260429121324.391457-1-marex@nabladev.com>
+In-Reply-To: <20260429121324.391457-1-marex@nabladev.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 4 May 2026 06:18:06 -0600
-X-Gm-Features: AVHnY4ItxfSDjEdXCYboOZqTkP1bEv1KKqoeO3iynjAOr3_Qa2mnSZfpXd4tMZg
-Message-ID: <CAFLszTiA6Xv_i2AOnsei-tosq7D_aSD_D=mBicFCV=vLRqS4jw@mail.gmail.com>
-Subject: Re: [PATCH 3/4] spi: cadence: Use reset_reset_bulk() for proper reset
- cycling
-To: michal.simek@amd.com
-Cc: u-boot@lists.denx.de, git@amd.com
+Date: Mon, 4 May 2026 06:22:16 -0600
+X-Gm-Features: AVHnY4IFVeVAKeOEwGomXxeqTltw1JmRvEK_rOY_SVj0fYI963ydWaLHkhOc5cc
+Message-ID: <CAFLszTh8=H20tPnhym5CHsVSVg1LFcxeHLovd0VMVRYsiArmrQ@mail.gmail.com>
+Subject: Re: [PATCH] env: mmc: Use correct eMMC HW partition size when
+ calculating end of HW partition
+To: marex@nabladev.com
+Cc: u-boot@lists.denx.de, Jaehoon Chung <jh80.chung@samsung.com>, 
+ Jasper Orschulko <jasper@fancydomain.eu>,
+ Joe Hershberger <joe.hershberger@ni.com>, 
+ Michael Heimpold <mhei@heimpold.de>, Michael Walle <mwalle@kernel.org>, 
+ Patrice Chotard <patrice.chotard@foss.st.com>, 
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, Peng Fan <peng.fan@nxp.com>, 
+ Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -109,46 +114,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Michal,
+Hi Marek,
 
-On 2026-04-30T12:20:00, Michal Simek <michal.simek@amd.com> wrote:
-> spi: cadence: Use reset_reset_bulk() for proper reset cycling
+On 2026-04-29T12:13:06, Marek Vasut <marex@nabladev.com> wrote:
+> env: mmc: Use correct eMMC HW partition size when calculating end of HW partition
 >
-> Use the new reset_reset_bulk() API to properly cycle reset signals
-> during probe instead of just deasserting them. This ensures the
-> controller is properly reset before initialization.
+> When calculating the end of eMMC HW partition, it is necessary to
+> use the length of that eMMC HW partition, not the length of the
+> eMMC HW USER partition unconditionally, otherwise the end of e.g.
+> eMMC HW BOOT partition will be way past the actual end of that eMMC
+> HW BOOT partition. Add the missing distinction. eMMC HW GP partitions
+> are not supported, so those are not considered here.
 >
-> Signed-off-by: Michal Simek <michal.simek@amd.com>
+> Signed-off-by: Marek Vasut <marex@nabladev.com>
 >
-> drivers/spi/cadence_qspi.c | 19 ++-----------------
->  1 file changed, 2 insertions(+), 17 deletions(-)
+> env/mmc.c | 8 ++++++--
+>  1 file changed, 6 insertions(+), 2 deletions(-)
 
-> diff --git a/drivers/spi/cadence_qspi.c b/drivers/spi/cadence_qspi.c
-> @@ -255,23 +255,8 @@ static int cadence_spi_probe(struct udevice *bus)
-> -             udelay(10);
-> -
-> -             /* Deassert all OSPI reset lines */
-> -             ret = reset_deassert_bulk(priv->resets);
-> -             if (ret) {
-> -                     dev_err(bus, "Failed to deassert OSPI reset: %d\n", ret);
-> -                     return ret;
-> -             }
-> -     }
-> +     if (priv->resets)
-> +             reset_reset_bulk(priv->resets);
+> env: mmc: Use correct eMMC HW partition size when calculating end of HW partition
 
-This silently drops the 10us delay that commit 834d589b8f1 ('spi:
-cadence_qspi: pulse controller reset at probe') deliberately added
-between assert and deassert. Is that intended?
+nit: subject is 84 chars - please trim to <=72, e.g. "env: mmc: Use
+correct HW partition size for end-relative offset".
 
-> diff --git a/drivers/spi/cadence_qspi.c b/drivers/spi/cadence_qspi.c
-> @@ -255,23 +255,8 @@ static int cadence_spi_probe(struct udevice *bus)
-> +     if (priv->resets)
-> +             reset_reset_bulk(priv->resets);
+> diff --git a/env/mmc.c b/env/mmc.c
+> @@ -239,8 +239,12 @@ __weak int mmc_get_env_addr(struct mmc *mmc, int copy, u32 *env_addr)
+>               return -ENOENT;
+>       }
+>
+> -     if (offset < 0)
+> -             offset += mmc->capacity;
+> +     if (offset < 0) {
+> +             if (CONFIG_ENV_MMC_EMMC_HW_PARTITION)
+> +                     offset += mmc->capacity_boot;
+> +             else
+> +                     offset += mmc->capacity;
+> +     }
 
-The return value is now discarded - is that intended?
+Just to clarify the motivation: every caller of mmc_get_env_addr()
+goes through init_mmc_for_env(), which calls mmc_set_env_part_init()
+-> blk_select_hwpart_devnum() -> mmc_switch_part() ->
+mmc_set_capacity(). After that switch mmc->capacity should already
+equal mmc->capacity_boot when CONFIG_ENV_MMC_EMMC_HW_PARTITION is 1 or
+2. Can you describe the path where mmc->capacity is still
+capacity_user here? Perhaps the fix belongs instead in the
+partition-switch path?
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+> diff --git a/env/mmc.c b/env/mmc.c
+> @@ -239,8 +239,12 @@ __weak int mmc_get_env_addr(struct mmc *mmc, int copy, u32 *env_addr)
+> +             if (CONFIG_ENV_MMC_EMMC_HW_PARTITION)
+> +                     offset += mmc->capacity_boot;
+> +             else
+> +                     offset += mmc->capacity;
+
+This seems to do the wrong thing for
+CONFIG_ENV_MMC_EMMC_HW_PARTITION=3 (RPMB) - it picks capacity_boot
+when capacity_rpmb is meant. The Kconfig is a plain int with no upper
+bound, so this is reachable. If you want to keep the explicit
+dispatch, you could key it off mmc_get_blk_desc(mmc)->hwpart so all
+partition kinds (user/boot/rpmb) fall out correctly. What do you
+think?
 
 Regards,
 Simon
