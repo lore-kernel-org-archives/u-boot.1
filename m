@@ -4,56 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F29AEFF885A
-	for <u-boot@archiver.kernel.org>; Mon,  4 May 2026 13:20:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BFE62FF885A
+	for <u-boot@archiver.kernel.org>; Mon,  4 May 2026 13:20:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 53D1E84673;
+	by phobos.denx.de (Postfix) with ESMTP id 90AA88467E;
 	Mon,  4 May 2026 15:20:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=0leil.net header.i=@0leil.net header.b="AJjYOYD5";
+	dkim=pass (2048-bit key; unprotected) header.d=0leil.net header.i=@0leil.net header.b="lgD7KAro";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6ED3B8466E; Mon,  4 May 2026 15:20:46 +0200 (CEST)
-Received: from smtp-42ab.mail.infomaniak.ch (smtp-42ab.mail.infomaniak.ch
- [84.16.66.171])
+ id D820E84255; Mon,  4 May 2026 15:20:46 +0200 (CEST)
+Received: from smtp-8fab.mail.infomaniak.ch (smtp-8fab.mail.infomaniak.ch
+ [IPv6:2001:1600:7:10::8fab])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DC4DB84255
- for <u-boot@lists.denx.de>; Mon,  4 May 2026 15:20:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C6D6684659
+ for <u-boot@lists.denx.de>; Mon,  4 May 2026 15:20:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=foss+uboot@0leil.net
-Received: from smtp-3-0000.mail.infomaniak.ch (smtp-3-0000.mail.infomaniak.ch
- [10.4.36.107])
- by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4g8Mhq3hxzzhnh;
- Mon,  4 May 2026 15:20:43 +0200 (CEST)
+Received: from smtp-3-0000.mail.infomaniak.ch (unknown
+ [IPv6:2001:1600:4:17::246b])
+ by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4g8Mhr3dv8zdRY;
+ Mon,  4 May 2026 15:20:44 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=0leil.net;
- s=20231125; t=1777900843;
- bh=A3qFKnQ7GrEkn8RWaRJsfvmFIR/ZftoFi61VemZ1EPQ=;
- h=From:Subject:Date:To:Cc:From;
- b=AJjYOYD5FBu53833cY5/Cvvnsjc2E2yw/vEVL9NBUOtrl/VQ9Jzdq+q8lEkQhlDCs
- dCzAVGqhqpQ3xgS62903swpgGkj+nulOEu7WmwWvSFxobBpavrZ+B9ZYo2NRadO51k
- e1mSIHMq0wypqea2PuQVCj80YtmHuarz+daM4QdKNnzJPcYHQklqoAkEgXbOjt6dUe
- ZvkoTcsas85yXDpQBLYB0KCroFYb8/abreVk1RJ4ZE3c7eN2C9yW6Vvwfw2n9LqLU5
- HliJP1nGmJsNGEHDX+PqZ8/C8uzYimatROFBxwkbClZHHf9ZE8h6PtoMl5WDj2AOC3
- 5NE/J4VnBXSDg==
+ s=20231125; t=1777900844;
+ bh=L1UHkRTaGPps6p7I+arPUZJjR7u7sAqOzzbNKrMrKD4=;
+ h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
+ b=lgD7KAromSiZQmKwZp80VTwgXCMRnhso5Ey3KtmcmjG3M07NklwW+zmW+YpoxwfuG
+ LOhD1VRHuDdK0IUP1I0CaeYP31tlPKf1+3/OH3m9zzDUjhNn0XynJvNCSORDms8WYj
+ M/atlt+nwuIk9myW5BTx68DXLdYrTe7HFpO6hE/ZqdrElZ0Z+lOai+nP2O7NOM02SI
+ kBjM+GTl1jCOwoH+6bkrVmkzHJo48iy2MVKN1yGCLW0goB48ajxBl7zVbkyTrpGuMW
+ pJFxI4P77M2m+32AzRz5YD7BLmwuf2Qevp/h3eg9SmiSOTZMEzSI23YrIZNgzAY/u0
+ PBnWvAoDW+M0A==
 Received: from unknown by smtp-3-0000.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4g8Mhm4k6sz9jf; Mon,  4 May 2026 15:20:40 +0200 (CEST)
+ id 4g8Mhq20pDzCQl; Mon,  4 May 2026 15:20:43 +0200 (CEST)
 From: Quentin Schulz <foss+uboot@0leil.net>
-Subject: [PATCH RFC next 00/18] sync scripts/Makefile.extrawarn with 6.1,
- enable WERROR for host tools
-Date: Mon, 04 May 2026 15:20:27 +0200
-Message-Id: <20260504-extrawarn-sync-v1-0-b19301d1948a@cherry.de>
+Date: Mon, 04 May 2026 15:20:28 +0200
+Subject: [PATCH RFC next 01/18] test/py: add pytest --make-args argument
+ for additional Make arguments
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
- vPSU3UzU4B8JSMDIzMDEyNL3dSKkqLE8sSiPN3iyrxkXVMDkzQz0xSjtDQjQyWgpoKi1LTMCrC
- B0UpBbs4KeUANSrEQmeLSpKzU5BKQeUq1tQDNvkahfAAAAA==
-X-Change-ID: 20260429-extrawarn-sync-504f65d2ff21
+Message-Id: <20260504-extrawarn-sync-v1-1-b19301d1948a@cherry.de>
+References: <20260504-extrawarn-sync-v1-0-b19301d1948a@cherry.de>
+In-Reply-To: <20260504-extrawarn-sync-v1-0-b19301d1948a@cherry.de>
 To: u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
  Mattijs Korpershoek <mkorpershoek@kernel.org>, 
@@ -86,138 +84,102 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-I ended up being surprised host tools aren't compiled with -Werror even
-when CONFIG_WERROR is set.
+From: Quentin Schulz <quentin.schulz@cherry.de>
 
-While this is an issue for local builds, buildman (used in CI) adds
--Werror to KCFLAGS and HOSTCFLAGS when passed -E (or
---warnings-as-errors), which we do, see
-'build all platforms in a single job' job and &buildman_and_testpy_dfn
-template.
+We manually execute make commands within some tests, sometimes from
+"dirty" build directories.
 
-It turns out that even though we claim to have synchronized our kbuild
-with Linux kernel v6.1, some of it was stuck to v5.1 +- some partial
-backports. This doesn't attempt to update everything that isn't in sync
-with 6.1 though!
+One example is the test_env_initial_env_file test which calls
+make u-boot-initial-env
+in a build directory that has already been populated possibly before
+pytest is run (which is the case in our GitLab CI/CD).
 
-The first two patches are for fixing pytest calling make directly on a
-"dirty" build directory as generated by buildman using the clang-20
-toolchain, but pytest does not set HOSTCC and CC to clang-20, resulting
-in clang flags being used with gcc).
+In "sandbox with clang test.py" and "sandbox64 with clang test.py" we
+build before pytest with clang-20 but pytest will call make without
+setting HOSTCC or CC to clang-20, which results in clang flags being
+used with gcc. Right now, it isn't triggering a build issue because we
+use cc-disable-warning to disable the warning only if it's available, so
+the clang flags aren't added. However, in a few commits we'll bump
+scripts/Makefile.extrawarn to a newer version from the Linux kernel
+(6.1) and it won't be used anymore, thus triggering fails.
 
-One can simply reproduce it (after backporting up to patch
-"scripts/Makefile.extrawarn: sync with 6.1") by doing so in the
-container:
-
-make HOSTCC=clang-20 CC=clang-20 O=build/sandbox sandbox_defconfig
-make HOSTCC=clang-20 CC=clang-20 O=build/sandbox -j`nproc
-make O=build/sandbox u-boot-initial-env
-
-It'll print:
-gcc: error: unrecognized command-line option '-mno-global-merge'
-gcc: error: unrecognized command-line option '-Wformat-invalid-specifier'
-gcc: error: unrecognized command-line option '-Qunused-arguments'
-
-This is essentially what's run within test_env_initial_env_file in
-test/py/tests/test_env.py.
-
-While I'm not unhappy with the patches to pytest, it feels to me we may
-be missing something else for the u-boot-initial-env make target to
-update the kconfig symbol based on the toolchain being used when called.
-
-While looking at the kernel git history for Makefile and
-scripts/Makefile.extrawarn I also saw a few flags being removed or
-reworked so I took the liberty of backporting some.
-
-Then, scripts/Makefile.extrawarn is directly imported verbatim from v6.1
-which is the version we've claimed to be synced with so far.
-
-Also, patches to apply CONFIG_WERROR to the host tools as well as linker
-and assembler are backported.
-
-kernel-doc is made to ignore KBUILD_EXTRA_WARN since we have too many
-warnings for now and it prevents us from being able to use W=e Make
-variable which is extremely convenient to essentially do the same as
-setting CONFIG_WERROR in Kconfig, just without needing to actually set
-it in the defconfig or in a .config. I don't like it but it is what it
-is. Our kernel-doc has a couple of patches on top of Linux kernel
-v5.11's. The kernel has moved to a Python script this year, so it's
-probably wise to migrate to that before trying to tackle kernel-doc
-warnings.
-
-Finally, buildman is made to use W=e such that the same logic as
-CONFIG_WERROR is applied (instead of manually configuring KCFLAGS and
-HOSTCFLAGS which only modifies host and target cflags and not linker or
-assembler flags like CONFIG_WERROR now does).
-
-RFC because I don't like the commenting of kernel-doc but I think it's
-worth it. RFC also because I think something must be broken in the
-handling of u-boot-initial-env make target which doesn't check the
-compiler vs what's in .config (or maybe some other issue, don't know but
-we shouldn't end up using clang flags with gcc or vice-versa).
-
-CI pipeline here: https://source.denx.de/u-boot/contributors/qschulz/u-boot/-/pipelines/29975
-
-Only change is:
-
- # diff --git a/test/py/conftest.py b/test/py/conftest.py
- # index 8852df2235e..a26aaee7b2f 100644
- # --- a/test/py/conftest.py
- # +++ b/test/py/conftest.py
- # @@ -121,10 +121,9 @@ def run_build(config, source_dir, build_dir, board_type, log):
- #              o_opt = 'O=%s' % build_dir
- #          else:
- #              o_opt = ''
- # -        base_cmd = ['make', *config.getoption('make_args'), o_opt, '-s']
- #          cmds = (
- # -            base_cmd + [board_type + '_defconfig'],
- # -            base_cmd + ['-j{}'.format(os.cpu_count())],
- # +            ['make', *config.getoption('make_args'), o_opt, '-s', board_type + '_defconfig'],
- # +            ['make', *config.getoption('make_args'), o_opt, '-s', '-j{}'.format(os.cpu_count())],
- #          )
- #          name = 'make'
-
-because I changed my mind factoring out the start of the make cmds in
-run_build.
+Add an option to specify make arguments such that a user can provide
+HOSTCC and CC for when the build directory to reuse has been built with
+clang.
 
 Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 ---
-Quentin Schulz (18):
-      test/py: add pytest --make-args argument for additional Make arguments
-      CI: pass clang HOSTCC and CC to pytest
-      scripts/Makefile.extrawarn: migrate -Wvla to a U-Boot-specific file
-      kbuild: re-enable int-in-bool-context warning
-      kbuild: Don't try to add '-fcatch-undefined-behavior' flag
-      Makefile: move deprecated-non-prototype to scripts/Makefile.extrawarn.u-boot
-      scripts/Makefile.extrawarn: handle CONFIG_WERROR in U-Boot-specific file
-      scripts/Makefile.extrawarn: sync with 6.1
-      kbuild: support W=c and W=e shorthands for Kconfig
-      kbuild: align W=e with CONFIG_WERROR
-      kbuild: unify W=e and CONFIG_WERROR
-      scripts/Makefile.extrawarn.u-boot: remove redundant Werror handling
-      kbuild: rust: move `-Dwarnings` handling to `Makefile.extrawarn`
-      kbuild: respect CONFIG_WERROR for linker and assembler
-      kbuild: enable -Werror for hostprogs
-      scripts/Makefile.extrawarn: Respect CONFIG_WERROR / W=e for hostprogs
-      scripts/Makefile.build: do not run kernel-docs with warnings
-      buildman: set W flag to e to be consistent with CONFIG_WERROR
+ test/py/conftest.py                 | 6 ++++--
+ test/py/tests/test_cleanup_build.py | 4 ++--
+ test/py/tests/test_env.py           | 4 ++--
+ 3 files changed, 8 insertions(+), 6 deletions(-)
 
- .gitlab-ci.yml                      |   2 +
- Makefile                            |  17 +++-
- scripts/Makefile.build              |   5 +-
- scripts/Makefile.extrawarn          | 175 +++++++++++++++++++++---------------
- scripts/Makefile.extrawarn.u-boot   |  27 ++++++
- scripts/kconfig/Makefile            |   8 ++
- test/py/conftest.py                 |   6 +-
- test/py/tests/test_cleanup_build.py |   4 +-
- test/py/tests/test_env.py           |   4 +-
- tools/buildman/builderthread.py     |   1 +
- 10 files changed, 165 insertions(+), 84 deletions(-)
----
-base-commit: bb0f3eebb3c196d9b6efbbd1e5aa9b16abbb9ad6
-change-id: 20260429-extrawarn-sync-504f65d2ff21
+diff --git a/test/py/conftest.py b/test/py/conftest.py
+index 215aaa56534..a26aaee7b2f 100644
+--- a/test/py/conftest.py
++++ b/test/py/conftest.py
+@@ -95,6 +95,8 @@ def pytest_addoption(parser):
+         help="Assume that U-Boot is ready and don't wait for a prompt")
+     parser.addoption('--timing', default=False, action='store_true',
+                      help='Show info on test timing')
++    parser.addoption('--make-args', action='append', default=[],
++                     help='Provide arguments to pass to the "make" command, e.g. HOSTCC=clang-20')
+ 
+ 
+ def run_build(config, source_dir, build_dir, board_type, log):
+@@ -120,8 +122,8 @@ def run_build(config, source_dir, build_dir, board_type, log):
+         else:
+             o_opt = ''
+         cmds = (
+-            ['make', o_opt, '-s', board_type + '_defconfig'],
+-            ['make', o_opt, '-s', '-j{}'.format(os.cpu_count())],
++            ['make', *config.getoption('make_args'), o_opt, '-s', board_type + '_defconfig'],
++            ['make', *config.getoption('make_args'), o_opt, '-s', '-j{}'.format(os.cpu_count())],
+         )
+         name = 'make'
+ 
+diff --git a/test/py/tests/test_cleanup_build.py b/test/py/tests/test_cleanup_build.py
+index aca90cb1107..10568a68ef5 100644
+--- a/test/py/tests/test_cleanup_build.py
++++ b/test/py/tests/test_cleanup_build.py
+@@ -32,12 +32,12 @@ def tmp_copy_of_builddir(u_boot_config, tmp_path):
+ 
+ 
+ @pytest.fixture(scope="module")
+-def run_make(u_boot_log):
++def run_make(pytestconfig, u_boot_log):
+     """Provide function to run and log make without connecting to u-boot console."""
+     runner = u_boot_log.get_runner("make", sys.stdout)
+ 
+     def _run_make(build_dir, target):
+-        cmd = ["make", f"O={build_dir}", target]
++        cmd = ["make", *pytestconfig.getoption("make_args"), f"O={build_dir}", target]
+         runner.run(cmd)
+ 
+     yield _run_make
+diff --git a/test/py/tests/test_env.py b/test/py/tests/test_env.py
+index f8713a59ba9..0e52c5d2a13 100644
+--- a/test/py/tests/test_env.py
++++ b/test/py/tests/test_env.py
+@@ -175,7 +175,7 @@ def validate_set(state_test_env, var, value):
+     assert response == ('%s=%s' % (var, value))
+ 
+ @pytest.mark.boardspec('sandbox')
+-def test_env_initial_env_file(ubman):
++def test_env_initial_env_file(pytestconfig, ubman):
+     """Test that the u-boot-initial-env make target works"""
+     builddir = 'O=' + ubman.config.build_dir
+     envfile = ubman.config.build_dir + '/u-boot-initial-env'
+@@ -186,7 +186,7 @@ def test_env_initial_env_file(ubman):
+     except:
+         pass
+ 
+-    utils.run_and_log(ubman, ['make', builddir, 'u-boot-initial-env'])
++    utils.run_and_log(ubman, ['make', *pytestconfig.getoption('make_args'), builddir, 'u-boot-initial-env'])
+ 
+     assert os.path.exists(envfile)
+ 
 
-Best regards,
---  
-Quentin Schulz <quentin.schulz@cherry.de>
+-- 
+2.54.0
 
