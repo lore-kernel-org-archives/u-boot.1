@@ -4,95 +4,104 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2227FF885A
-	for <u-boot@archiver.kernel.org>; Mon,  4 May 2026 12:28:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 812D1FF886F
+	for <u-boot@archiver.kernel.org>; Mon,  4 May 2026 12:29:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8350784664;
-	Mon,  4 May 2026 14:28:08 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id DE16D84664;
+	Mon,  4 May 2026 14:29:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="eFiksFK1";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="XJhSRoz9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B53858466D; Mon,  4 May 2026 14:28:06 +0200 (CEST)
-Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
- [IPv6:2a00:1450:4864:20::636])
+ id C8BC88466F; Mon,  4 May 2026 14:29:01 +0200 (CEST)
+Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
+ [IPv6:2a00:1450:4864:20::62f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EA78684664
- for <u-boot@lists.denx.de>; Mon,  4 May 2026 14:28:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 87F3383FEC
+ for <u-boot@lists.denx.de>; Mon,  4 May 2026 14:28:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x636.google.com with SMTP id
- a640c23a62f3a-b9382e59c0eso641314066b.0
- for <u-boot@lists.denx.de>; Mon, 04 May 2026 05:28:03 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1777897683; cv=none;
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-bba0dde4f43so646732966b.3
+ for <u-boot@lists.denx.de>; Mon, 04 May 2026 05:28:59 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1777897739; cv=none;
  d=google.com; s=arc-20240605;
- b=L56h/vXQSv+dkZGBh9hfSmPpR09KS33wXgwim+zCf1EjYYxK9LHtz7D9FVp+SbhiVv
- arGDMxGMvFHRPvS7ILfnK2iXeimS98zYKxwuFFf9Y9E8swiX9xXyibwlpjK1uM5V+MmE
- 3PXgAkfVb7/D/sEwPiDBhv/RlAwf19s3k5Awdad86DQDFcC3RS5q5jr8iFdwREyyC5HN
- A0/lS19omHC6DyXX0HaQ+0LxNobvUBdWLDShqoxOYrL7U0xAHUw3yewb4jivKxkc80nX
- 9BQKJXDCm3t+O3L6VRncJwkHpKB0biRqf4Xxs8YtG/NiXWzkOKGern+ENv/XR/ZvLdx+
- aMNQ==
+ b=XnpmmMztjFE0MTmYvuThVUMMmQgJ0/BxYi+rIUVRKOHGqAEUbahMovWoRt+vM7XkgS
+ 2XkbAU5/ZeCj5UK005zonJOyiKobNXF1reeWMBIaxOPiy7sf8T6HSQbYqX2LC9x/B76+
+ 4ZpeM1vweppagre//s5J2JS0qEZ2j8qTNKCMOzrokXy53ko2ShMuCfqEcdo8gUw1Yai9
+ sZJdcRpfWQk9sq65NbMLy+QRJD8Tgs+PqF1r+DwQ5m9C/dw5sVyTJ+DqMkNcx6nnlL7A
+ kU8FwtGWcJWWc3r7/InyICEXn52JcBOdBNAE9VQzrdapNhhRgfKt/1MDQ+v8KK0R51Ze
+ BRdA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=7u0CdjLW4CwBvZkTeazF16mMtwbqZKBQ6Fqep+M7rLA=;
- fh=joWFw7uQNAewTc9d3BnbzDW7eparBJAilOzfYIz9J54=;
- b=NjGPaaK0dRwKqDory6rfLC1oxqACpOWWFjI/CVoBjLK2mVrQmxxXKBZn9beoanMcl0
- 6VBQCwETYuWS76cS5/nYIBWGJr75SduoUtvYbY4YCT0L+DyhN8uqkBVxXiUP1+ioIMjw
- EMfhfoe2LkdnIvmjWzyaDkDzLEx+eUx/xv7SrXtq9Tt8/qmpxvKDhSyEiygyidzB6qF6
- Rkjh+6VCojh+5gfso6nlFLn8dUWI96DJvuIh9wbBzoI/XkRbgpHHmv8vXLF2q0epgpFn
- YMlllI+/CQ9e4mBvV50u8n6MQWyE/8mJzWX+YB+wMecQsiDHfR9AfwExO6oo2DMIl62N
- 5/bQ==; darn=lists.denx.de
+ bh=+vdKBymygNLAp+8uCV6J/SFzNs44XwI6oAySA2KF2a0=;
+ fh=DsMtUIjL6u0T9HJtY7KJbKDS0cPi91XNsRYH8TdDrwA=;
+ b=PIcte6iT1wL0WdtGteeGLOGxxYnWo3bt5Vu8lY4Irm6uviNsqOW9QRlEslW4ymXNLB
+ B08bYyqLm4luZG6YLf/m8QU8nu53a8/DoraeSw4zT5NWNnXj6tmOVfbe4sOGajyaYXsv
+ OgrlmGvMEVSYeG+nCXcKvE0dLGkpbRZbMcpvoSOHXgMJrHffACTZwzGrToLF3Wxz/E/0
+ 1/VRu3h4e35BgbU1J7G5FhbRkOLg0Uv6j685Qtk/uqTW8DZVksqPctmxY+X4H3oWCYR5
+ by/KX4+RYo355yX52icAre1CinLqz70HNzc45jvUWtvkq4U9GLyugFNN+mXkqSmeiIwK
+ Sd1g==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1777897683; x=1778502483; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1777897739; x=1778502539; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=7u0CdjLW4CwBvZkTeazF16mMtwbqZKBQ6Fqep+M7rLA=;
- b=eFiksFK1JEZ0LjtNB1VxFIVDGd7zxxyh2xeh4sohkzSSYVY3R52mOU6F+tI7IjG+Dw
- jgf1c9q17ssAhG7fg1fbaHAPWo3zQKkBCml+TkgP6AhhaZSV8ufDXsbrTPZmpeP/3LQV
- MB08R4mQQ0aWDx07m7rqT4aLBZxnhIBuqJzXQ=
+ bh=+vdKBymygNLAp+8uCV6J/SFzNs44XwI6oAySA2KF2a0=;
+ b=XJhSRoz9N7yVZlenoQ+hROFe0ctRctS6+6U+hIQEhy1vGNBzbUXBavmvZFuwIhh/6q
+ f5O//fTEPlujXTrlYKZqi68bYAvwazBbh7l23L9I9OTx5dP4ls9G1dieOXuAZU7G7Ywy
+ 8xtGSK5T5RqDDkKc0bm7DnUBqzl+9XqpdXfr8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777897683; x=1778502483;
+ d=1e100.net; s=20251104; t=1777897739; x=1778502539;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=7u0CdjLW4CwBvZkTeazF16mMtwbqZKBQ6Fqep+M7rLA=;
- b=VKVGLEysrMqZNwWXKOirG/cH3ahgMft3MbRjhjze7YXpWyiuJ0mnskRv4jrK9+BKqM
- jvClEGfPFZVWqCFUZCebKcBACtX7MHSG/xIPrWdDNOxpZwvamy5AaE0Er679i1LFFUkJ
- aio5t3871wL0ONAmL6MCgt3uzZud81W2EeH6EbcngO+zWlpdYdXM5Fz976l7jOeqd5So
- RhBsFaZFh1W8DPWBdkEzsXC26lOTYCOtW8uucaivtPKkE7Lpk+jA5gM967N7XuKVmxdM
- ytwU9W646nVrewYig5MO1aVVBtDLVd74Zh7w/mObj2mGVezHRIsmVt5om4OzERkVHjcR
- a/QQ==
-X-Gm-Message-State: AOJu0YwWJM+uolFgf5kQ3ADwMLgVDER00ww9EzQ++d1+mNX04V+HpGDW
- AZj8aE4qS4d20KKy0DrkczA+MI2wzPjpGYM1jqchyl1IAiBAsWudTHeR4aLG1ucmCurZ8H5YpG8
- gPNliNolFNrVHoLX7TrOIfuvus0JFjc2RAI9mEv9Y
-X-Gm-Gg: AeBDiesdiToq9ErguuHPQ0Bx11m9hVqQsnT2AM8nq/c8yh5+3NhdmYx1A9Y4b05Qjjr
- n5dUGmWH380NC7jXutu0xCLiYlh+A9zH4xvBkSwlQe8RnPTr0BPKOsyFzFHYa+a7UGn7lj4UR5s
- mxSUodd28RsISFIMRcnO19FC8o6ExxhR3qzugyTiEPREhadrWm32YgN6sBN1KA40MTjSLDPk2z9
- jQ0j523LN3cLJ+WxCkneXSzl3Vd8H7eXNMUFrC6lywg2tTha+1peErIV8x74zHnH3eUlMDaf4d2
- 8Eik3c43CkNzcpdd
-X-Received: by 2002:a17:907:7b9f:b0:bc2:e438:dc06 with SMTP id
- a640c23a62f3a-bc2e4392fabmr133895266b.10.1777897683270; Mon, 04 May 2026
- 05:28:03 -0700 (PDT)
+ bh=+vdKBymygNLAp+8uCV6J/SFzNs44XwI6oAySA2KF2a0=;
+ b=DYkkfNQqFOjIzKaZnEGUjTuo6mtwqycwpOHdAf2zYXjHTXctJUsm470yJJqbMd/VNd
+ Z/rHVtUERfh0YwTizcdoG7UiwPsPOBTIVTsn0IWkii0bo796dCNY/egj1mEkndOExwPe
+ DopED/VYSNd2061DLoxtVSxrIx7hTGVM0plXWTXL1ouSOFDsdTpRn5xf6tHEfhhjNqVI
+ lMlK5MWdHwtfn5ylMOhLcudGmKpZg5WQ41um/VOS6rhPGmkNH8zOqYi/DOKnprxEhLnj
+ Y06W+Yl/fZYT1CMSyguVkA1dEAW5IDZilHMBMrlPql2Tj/artutq7CsvzG+fjEdb0V/c
+ eIng==
+X-Gm-Message-State: AOJu0YyBGAvZvpNQWFu4hFe1OEgLSvwXotRTfAcgunLbV/aEZRcE9p9d
+ /6rB4qYKbykveF2fJtmwXlAS+HZHpvlw3m+E5fbPvAyMlGeWd73E2P40saF4uNoaPrd2q9nDFdh
+ 7u5LXQuOJpWotraXGsEqLJdZ8++FZUNc86xFRgNM/
+X-Gm-Gg: AeBDiesYshAUQCfcTwGqHNafgKdc/sI14AGIbuGLOddQJdTiBdA8XSzq3ojJ40ziRNP
+ CgZA5qsNAh99ZtuQk/6PCmu81UAlou4lxySJy5Vh5EOergPeNzaipze0lABUwvFd3LScsrvbhiM
+ GRPLlnO/OOggITOOD12VGiN1chrHFCSjHP8kFHjC7ck1Ey38HFrsQYeiGaJJ7fp9LmG3s+vR1Dl
+ vpiWtS751fcbjIM+4OO2+hNOM7RIblTE9bsp7wqiXjTVHRlQ0TM90I+FnPvLaZlyaU/3FNuaOPu
+ xTxvQKpldpNffJN2
+X-Received: by 2002:a17:907:6d13:b0:b98:50b:e94a with SMTP id
+ a640c23a62f3a-bbffb749e38mr497007166b.16.1777897738966; Mon, 04 May 2026
+ 05:28:58 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260429114250.791663-1-ludwig.nussel@siemens.com>
- <20260429134142.2.25391578ae16ae38c90974bea552726dbe0153aa@changeid>
-In-Reply-To: <20260429134142.2.25391578ae16ae38c90974bea552726dbe0153aa@changeid>
+ <20260429134142.3.db7fbeb8b6e8499f4d031c04cb5cd8175873b643@changeid>
+In-Reply-To: <20260429134142.3.db7fbeb8b6e8499f4d031c04cb5cd8175873b643@changeid>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 4 May 2026 06:27:51 -0600
-X-Gm-Features: AVHnY4ICaG4CONFrattkZtq8V1pkYy3iDbU_OnoHWp206dptHYSWYoxnNyo4zhc
-Message-ID: <CAFLszTjp0dbE6ivZ7CgBF8pEfJacGcV0oRq7Fd7aQzBAN5ggQw@mail.gmail.com>
-Subject: Re: [PATCH 2/3] tpm: make pcr_read command more useful
+Date: Mon, 4 May 2026 06:28:46 -0600
+X-Gm-Features: AVHnY4LyjtpSQOSDFPQUksyeGW8rF7hAy24k0Gsghr_N65Gl5KpXWc9IlyNdrcY
+Message-ID: <CAFLszTgbai8a+VK8TAjuXUJf99JhpuoEaq538qMNwTSJ-KAoog@mail.gmail.com>
+Subject: Re: [PATCH 3/3] tpm: allocate tpm event log if missing
 To: ludwig.nussel@siemens.com
-Cc: u-boot@lists.denx.de, Andrew Goodbody <andrew.goodbody@linaro.org>, 
- Heiko Schocher <hs@nabladev.com>,
+Cc: u-boot@lists.denx.de, Anshul Dalal <anshuld@ti.com>, 
+ Aristo Chen <jj251510319013@gmail.com>, Benjamin ROBIN <dev@benjarobin.fr>, 
+ George Chan <gchan9527@gmail.com>, Heiko Schocher <hs@nabladev.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ =?UTF-8?Q?Jo=C3=A3o_Paulo_Gon=C3=A7alves?= <joao.goncalves@toradex.com>, 
+ "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Martin Schwan <m.schwan@phytec.de>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, 
+ Peng Fan <peng.fan@nxp.com>, Quentin Schulz <quentin.schulz@cherry.de>, 
+ Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@arm.com>,
  Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
@@ -114,103 +123,155 @@ X-Virus-Status: Clean
 Hi Ludwig,
 
 On 2026-04-29T11:41:40, Ludwig Nussel <ludwig.nussel@siemens.com> wrote:
-> tpm: make pcr_read command more useful
+> tpm: allocate tpm event log if missing
 >
-> Output now more similar to Linux userspace tool 'tpm2_pcrread'.
->
-> Without arguments the command now prints contents of all PCR registers
+> Allocate and attach the TPM event log to the TPM device if not
+> initialized yet. The address is copied into the device tree for the
+> kernel so the event log is accessible from Linux userspace too.
 >
 > Signed-off-by: Ludwig Nussel <ludwig.nussel@siemens.com>
 >
-> cmd/tpm-v2.c | 54 ++++++++++++++++++++++++++++++++++++------------------
->  1 file changed, 36 insertions(+), 18 deletions(-)
+> boot/Kconfig         |   1 +
+>  boot/bootm.c         |  18 ++++-----
+>  boot/image-fdt.c     |  67 ++++++++++++++++++++++++++++++++++
+>  include/tpm-common.h |   1 +
+>  include/tpm_tcg2.h   |   9 +++--
+>  lib/tpm_tcg2.c       | 101 ++++++++++++++++++++++++++++++++++++++++-----------
+>  6 files changed, 160 insertions(+), 37 deletions(-)
 
-> diff --git a/cmd/tpm-v2.c b/cmd/tpm-v2.c
-> @@ -150,10 +151,11 @@ static int do_tpm_pcr_read(struct cmd_tbl *cmdtp, int flag, int argc,
->       u32 index, rc;
->       int algo_len;
->       unsigned int updates;
-> -     void *data;
-> +     u8 *data;
->       int ret;
-> +     u32 pcr_start, pcr_end;
+> diff --git a/boot/bootm.c b/boot/bootm.c
+> @@ -973,7 +969,7 @@ unmap_initrd:
 >
-> -     if (argc < 3 || argc > 4)
-> +     if (argc > 4)
->               return CMD_RET_USAGE;
+>  unmap_image:
+>               unmap_sysmem(image_buf);
+> -             tcg2_measurement_term(dev, &elog, ret != 0);
+> +             tcg2_measurement_term(dev, NULL, ret != 0);
 
-Please mention the new behaviour explicitly in the commit message -
-something like "with no arguments all PCRs are read; with only the PCR
-index a buffer is allocated internally."
+This passes NULL for elog, but tcg2_measurement_term() still does if
+(elog->log) unmap_physmem(...) and calls tcg2_measure_event() which
+ends up in tcg2_log_append_check() doing if (!elog->log_size). Both
+deref a NULL pointer. tcg2_measure_data() looks the log up via
+tcg2_platform_get_dev_log() when elog is NULL - so _term and
+tcg2_measure_event() need the same treatment.
 
-The subject is also a bit vague - how about 'tpm: print all PCRs from pcr_read'
+> diff --git a/boot/image-fdt.c b/boot/image-fdt.c
+> @@ -24,6 +24,10 @@
+>  #include <asm/io.h>
+>  #include <dm/ofnode.h>
+>  #include <tee/optee.h>
+> +#if defined(CONFIG_MEASURED_BOOT)
+> +#include <tpm_tcg2.h>
+> +#include <dm/device.h>
+> +#endif
 
-> diff --git a/cmd/tpm-v2.c b/cmd/tpm-v2.c
-> @@ -164,28 +166,44 @@ static int do_tpm_pcr_read(struct cmd_tbl *cmdtp, int flag, int argc,
+Please drop the #if around the includes, and inside the function body
+prefer if (IS_ENABLED(CONFIG_MEASURED_BOOT)) over #if defined(...) so
+the compiler still type-checks the body when the option is off. That
+is the U-Boot convention.
+
+> diff --git a/boot/image-fdt.c b/boot/image-fdt.c
+> @@ -589,6 +593,67 @@ __weak int arch_fixup_fdt(void *blob)
+> +     strlcat(path, '/linux,sml-base', sizeof(path));
+> +     if (fdt_path_offset(blob, path) >= 0) {
+> +             log_warning("kernel dt already defines an event log address at %s\n", path);
+> +             return 0;
+> +     }
+> +     end = strrchr(path, '/');
+> +     *end = 0;
+
+fdt_path_offset() resolves nodes, not properties, so this never
+matches - linux,sml-base is a property of the TPM node. Use
+fdt_getprop() against the node offset you already located above.
+
+> diff --git a/boot/image-fdt.c b/boot/image-fdt.c
+> @@ -589,6 +593,67 @@ __weak int arch_fixup_fdt(void *blob)
+> +     fdt64_t a = cpu_to_fdt64((u64)virt_to_phys(log->log));
+> +     fdt32_t s = cpu_to_fdt32((u32)log->log_position);
+
+linux,sml-size is documented (and used by Linux) as the size of the
+reserved buffer, not the bytes written so far. Otherwise the kernel
+cannot append further entries. This should be log->log_size. Please
+also give the locals descriptive names (sml_base/sml_size).
+
+> diff --git a/boot/image-fdt.c b/boot/image-fdt.c
+> @@ -631,6 +696,8 @@ int image_setup_libfdt(struct bootm_headers *images, void *blob, bool lmb)
+> +     copy_tpm_event_log(blob);
+> +
+
+The return value is silently dropped. At minimum log a warning when it
+fails with anything other than -ENOENT, otherwise misconfigurations
+(e.g. allocation succeeded but fdt_find_and_setprop failed) will be
+invisible.
+
+> diff --git a/lib/tpm_tcg2.c b/lib/tpm_tcg2.c
+> @@ -564,11 +576,29 @@ int tcg2_log_prepare_buffer(struct udevice *dev, struct tcg2_event_log *elog,
+> +     } else if (tcg2_platform_get_dev_log(dev)) {
+> +             return -EEXIST;
+> +     }
 >
->       ret = get_tpm(&dev);
->       if (ret)
-> -             return ret;
-> +             goto out;
->
->       priv = dev_get_uclass_priv(dev);
->       if (!priv)
-> -             return -EINVAL;
-
-...
-> +out:
->       return report_return_code(rc);
-
-rc is never assigned on either of these paths, so report_return_code()
-reads an uninitialised value. Either drop the goto and return
-ret/-EINVAL as before, or assign rc before the jump.
-
-This return -EINVAL bypasses the out: label you just added...
-
-> diff --git a/cmd/tpm-v2.c b/cmd/tpm-v2.c
-> @@ -164,28 +166,44 @@ static int do_tpm_pcr_read(struct cmd_tbl *cmdtp, int flag, int argc,
-> +     if (argc >= 3)
-> +             data = map_sysmem(simple_strtoul(argv[2], NULL, 0), 0);
-> +     else
-> +             data = malloc(algo_len);
-
-malloc() can fail and the result is dereferenced via tpm2_pcr_read()
-without a check. Please bail out cleanly if data is NULL.
-
-> diff --git a/cmd/tpm-v2.c b/cmd/tpm-v2.c
-> @@ -164,28 +166,44 @@ static int do_tpm_pcr_read(struct cmd_tbl *cmdtp, int flag, int argc,
-> +     printf('%8s:\n', tpm2_algorithm_name(algo));
-> +     for (index = pcr_start; index < pcr_end; ++index) {
-> +             rc = tpm2_pcr_read(dev, index, priv->pcr_select_min, algo,
-> +                                data, algo_len, &updates);
-> +             if (!rc) {
-> +                     printf("%6u: 0x", index);
-> +                     for (int i = 0; i < algo_len; ++i)
-> +                             printf('%02X', data[i]);
-> +                     printf(" (%u known updates)\n", updates);
+>       rc = tcg2_platform_get_log(dev, (void **)&log.log, &log.log_size);
+> -     if (!rc) {
+> +     /* no existing event log found and none allocated yet */
+> +     if (rc && !elog) {
+> +             /* magic size value. Same as in acpi_table.c */
+> +             log.log_size = 0x10000;
+> +             log.log = devm_kzalloc(dev, log.log_size, 0);
+> +             if (log.log) {
+> +                     log.allocated = true;
+> +                     ignore_existing_log = true;
+> +             } else {
+> +                     log_err("Failed to allocate %u bytes event log\n", log.log_size);
 > +             }
 > +     }
+> +
+> +     if (log.log) {
 
-A failing read in the middle of the loop is silently swallowed - the
-user sees a gap and then a bogus banner with no error. At minimum
-log_err() the failure, and consider whether to keep going or abort.
-Also rc from the last iteration is what gets reported, which is
-misleading if an earlier PCR failed.
+When tcg2_platform_get_log() fails and elog is non-NULL we fall
+through with log.log uninitialised, then test if (log.log) on stack
+garbage. Either zero-initialise struct tcg2_event_log log = {} at the
+top, or skip the block explicitly.
 
-> diff --git a/cmd/tpm-v2.c b/cmd/tpm-v2.c
-> @@ -548,7 +566,7 @@ U_BOOT_CMD(tpm2, CONFIG_SYS_MAXARGS, 1, do_tpm, "Issue a TPMv2.x command",
->  "    Extend PCR #<pcr> with digest at <digest_addr> with digest_algo.\n"
->  "    <pcr>: index of the PCR\n"
->  "    <digest_addr>: address of digest of digest_algo type (defaults to SHA256)\n"
-> -"pcr_read <pcr> <digest_addr> [<digest_algo>]\n"
-> +"pcr_read [<pcr> [<digest_addr> [<digest_algo>]]]\n"
->  "    Read PCR #<pcr> to memory address <digest_addr> with <digest_algo>.\n"
->  "    <pcr>: index of the PCR\n"
->  "    <digest_addr>: address of digest of digest_algo type (defaults to SHA256)\n"
+For 0x10000, please introduce a named constant (e.g.
+TPM2_EVENT_LOG_SIZE) shared with acpi_table.c rather than duplicating
+the comment.
 
-The description still says "Read PCR #<pcr> to memory address
-<digest_addr>" - please update it to mention that with no <pcr> all
-PCRs are printed, and that <digest_addr> is now optional.
+> diff --git a/lib/tpm_tcg2.c b/lib/tpm_tcg2.c
+> @@ -580,26 +610,40 @@ int tcg2_log_prepare_buffer(struct udevice *dev, struct tcg2_event_log *elog,
+> +             } else {
+> +                     struct tpm_chip_priv *priv = dev_get_uclass_priv(dev);
+> +
+> +                     elog = devm_kzalloc(dev, sizeof(struct tcg2_event_log), 0);
+> +
+>                       elog->log = log.log;
+
+devm_kzalloc() can return NULL - this dereferences it immediately, and
+on failure leaks the 64KB buffer allocated above. Please check and
+unwind cleanly.
+
+> diff --git a/lib/tpm_tcg2.c b/lib/tpm_tcg2.c
+> @@ -662,6 +710,15 @@ void tcg2_measurement_term(struct udevice *dev, struct tcg2_event_log *elog,
+> +struct tcg2_event_log *tcg2_platform_get_dev_log(struct udevice *dev)
+> +{
+> +     struct tpm_chip_priv *priv;
+> +
+> +     priv = dev_get_uclass_priv(dev);
+> +
+> +     return priv->log;
+> +}
+
+Missing kernel-doc.
+
+> diff --git a/include/tpm-common.h b/include/tpm-common.h
+> @@ -83,6 +83,7 @@ struct tpm_chip_priv {
+>       u32 active_banks[TPM2_NUM_PCR_BANKS];
+>  #endif
+>       bool plat_hier_disabled;
+> +     void *log; /* struct tcg2_event_log */
+
+Please use a forward declaration ('struct tcg2_event_log;') and type
+the field properly as struct tcg2_event_log *log. Hiding the type
+behind void * loses compiler checking and forces every reader to trust
+the comment.
 
 Regards,
 Simon
