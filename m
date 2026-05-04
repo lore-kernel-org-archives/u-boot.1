@@ -4,92 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A02DFF885A
-	for <u-boot@archiver.kernel.org>; Mon,  4 May 2026 12:27:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3B5EFF885A
+	for <u-boot@archiver.kernel.org>; Mon,  4 May 2026 12:27:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0E37483FEC;
-	Mon,  4 May 2026 14:27:33 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4F6988466D;
+	Mon,  4 May 2026 14:27:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="nzVpJRNR";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="O+DZW5c+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 929DF84653; Mon,  4 May 2026 14:27:30 +0200 (CEST)
-Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
- [IPv6:2a00:1450:4864:20::532])
+ id 9B0788394E; Mon,  4 May 2026 14:27:36 +0200 (CEST)
+Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
+ [IPv6:2a00:1450:4864:20::62f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A68E28394E
- for <u-boot@lists.denx.de>; Mon,  4 May 2026 14:27:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B8F9D84664
+ for <u-boot@lists.denx.de>; Mon,  4 May 2026 14:27:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x532.google.com with SMTP id
- 4fb4d7f45d1cf-676e62faf2bso440907a12.1
- for <u-boot@lists.denx.de>; Mon, 04 May 2026 05:27:28 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1777897648; cv=none;
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-ba8472c1613so728324066b.0
+ for <u-boot@lists.denx.de>; Mon, 04 May 2026 05:27:34 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1777897654; cv=none;
  d=google.com; s=arc-20240605;
- b=j+VZN17G9SyRxRzfj3nQIDuQBzuSrYcir+hCMXztpACTaHvXt2PG0d1DLfDPcJqDek
- LL5pPhLQ3Ttm9amRsDyPyon4MMBXQyhy1tvFng5ssogRTOIgy/FkaROiBz1K187/7eKc
- vC23DF0qckoUITPY7wcTTBE4ZZytjvW/PGv/BlJlJVqkdFLRwiCEpHpL+ClYcE+I89Wz
- BPIRpgRrO7TBNB+dssc7C98F93KYx/VVkXxM2TvFryJYTY+fp3k6Yii0841YAKabKc9x
- mxToWYoynnixp1ImJCUhKV8aA6DML4dKSXek/q9/t6hb5h4AO1ppld2BrhIf3rJ8g9uv
- ssAw==
+ b=NK4fcnvlOHwQ23bs5tSJzosfbILa0q0Alcpl35KvehksjUuDRkc0XRcnfSposeUqYE
+ TJ86FY97ihqxSCI1yfZhR/BFkr8kuVJYiArKKCdYvvUlVYFzzrgoTDG7U6LSjcz1ef+n
+ fB4rNEJlIoGxRvAUVk+1YtUk2e94e4syrAT8q20YPWiFzXAqMAnWJYaH6U4WiiYN4yn5
+ Ra/o5T7mTO+fKPCwHUr7/Cu5YvetlMXIzsqFbwKWgzAgOqYcg+I8n0KlhvTRX1gC4J3N
+ bV0jxYwMXYnm085QA07Hfw9wq90hnPRFOheGBJRm1Y7zMVJYDa+FtKOwgkSfVsxLPNi0
+ jQFg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=IWdI5H3aBz4CkP8/uV4GsJEGaWWyqTX7wd0Fxos7zNE=;
- fh=PKLU0xSNpsrGOfl0gQ17G1VaKViMSq+Ysfr2F1w3zVg=;
- b=cha00IOQPKIeCHpnpdPmGZjbbRG/03GcXB30pI+Of9VL1gNHXTZtFNP6OgWoqivyo1
- B7o2JbMkSGdmzcV+6whEmDpe6HJvWeMOiZCklpsnD0XDK4yOFMbeFeHDprBVdZBu6mbg
- G9vkE8y3kQZB+7pJTCHkeiFZ9LtTSQign2hAytmucPB6gGKroCBcLK05dvJ90UxpsalN
- 3ZOxJvvHMCwsX6yWSQNiCiVMulCII2M/xqxgHJkdUN3Kor3EVvrIWC/nZfkVmSHcreMl
- YPpywFd1JvHnjdquPOzxcwRcC7ihWFwR000BJyeTBp30KBSiX6FCn1WPl6YOUkkVxRG8
- SMzQ==; darn=lists.denx.de
+ bh=zI8Pw6btTVABCB3HotUdYlZxWPiQvoVHOBGxARmjI9c=;
+ fh=PKU69MAUC1Uf4OYW7rlT1pB/QcRI58pIXTPjOErnGJo=;
+ b=hxnVRKRq6uIbwz12T8L9RSOS4nyPMgnLshspAXEhiR7rDoeYqhPWXqJ6u6Peng5LXc
+ Z63JaR8XLKqg9BBuDyl6sTIb0jANWzJxeYXNQ39lLKAi3+HBiNqBiOMZ586p75iEec6r
+ LlDrZmK0z4ug7XoA5gg0JWMiDZTLo8sCmrqR+fEn1km1mP+JGmxX3FVFlRcxs6Ve0+ac
+ ev0VwI/zUraSAUowekvBvW/M2DMRJj1VWFJEgbw7uTOnfpuPqIXmkwSR3RgDwlb04QDA
+ MhbBx76XHf1aR5p8HUNcGJB9XBcVSLA0q3hdKOgWwUhIoKbNryOqFppiDMKPY1q8orRH
+ mOqg==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1777897648; x=1778502448; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1777897654; x=1778502454; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=IWdI5H3aBz4CkP8/uV4GsJEGaWWyqTX7wd0Fxos7zNE=;
- b=nzVpJRNR+6jVIFNpFrSQI8SW2xrKhtC3lTaWfDEWM84hSS0TmRVmzuSoCKnn+bUOhM
- zZ8azGUTVg6EJb8Vl28gmTJWihlD5r78fQKG9jgGRG3VZRSpvBmbRCIcGn79U9XFIfqF
- l1vO+Jk3J4wvsEK0b63F/dV/iz60HzWjG5R84=
+ bh=zI8Pw6btTVABCB3HotUdYlZxWPiQvoVHOBGxARmjI9c=;
+ b=O+DZW5c+y6ISegn9i4B8c3P9/x+8713rMjQsLN4QvYfrYNvkQRT9TJl3zHO+66xLNG
+ kN2H82fle84PowRq84opm2WmBZuTeML59PtBgroz/9SssqiBRwd6d7o2IAVWRxW+luPb
+ qffXdEfVku0Sh3+DcqYzRQlxzRWH65AVUiHfE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777897648; x=1778502448;
+ d=1e100.net; s=20251104; t=1777897654; x=1778502454;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=IWdI5H3aBz4CkP8/uV4GsJEGaWWyqTX7wd0Fxos7zNE=;
- b=JTXM+StbOQBNtkTKle5p0Gr2dNCiy7D/lG/PJ2qs4D7hAq34NOEfajzcTQks5Y+EYI
- fjD3Q9Apd/SMFIpKlXxc1KEiQ5r87lhR9yF+hrB3BlDfKcu3sX7YubPCajM8uulKxndG
- GGwYtsFpcXH36MI4grFxwpL1oKbpUE9rwpURARjJ+ljgqV50wQg3mmSUaN3b0bUdCsKu
- iOXfJQgZTT7do+AL0p70vD6ymGJEeZqNgXAeockTReSDAdBqNV3JPfj6rL9dnDQIZDJ1
- OlsWxow81uKC/XR6SSJ//mdm/LVIijP1nVi72dP517jxIUJ+SFvno+zlgbHdJBD+IqUQ
- sPXg==
-X-Gm-Message-State: AOJu0YyxE1JcJ4NoPOCAszCoj5+hq7Qm33BhShAdJwlO0r0eqQK/5nP2
- lp1KUX9ThxSsmUKAg0EyKokx8RN3B6nzh61YgD00zGWH2fmehPLv1hBUgedk8T4aUPlOjkT0CdI
- 4uLNG1ULlnXhT6fAXl+rRrFSgV0KrXoc4nw43IEDw
-X-Gm-Gg: AeBDiev+qRkM6cz6jCIh3/rQxxE1mYXK7+8iZSsPtFdlPveKbfI8SKLGYPaBDbmW+g7
- asQEJHJmoGyKCa911x+6bh8oNSQyWAoo1SKTm3yGCkvCzzBfhCLTLxfiSJxaEhandp0HejrDXU9
- ul+8RrE+jhPiSveMrEaxiVK4TjT0esHJml6bQSpZ0rjefsCUpeF4K4pE6XF6KDninjtgupyqiv8
- UMeoWajxoOOqCS+uayqZWM4eB8vMK1EilPWOOu9u8OuyBArP4tojsarKhPTWj+RkqUkwpGv0rlC
- +2VggELY2b9YcaXx
-X-Received: by 2002:a17:906:f5a9:b0:bc3:3864:b528 with SMTP id
- a640c23a62f3a-bc33864d5a3mr88381166b.40.1777897647770; Mon, 04 May 2026
- 05:27:27 -0700 (PDT)
+ bh=zI8Pw6btTVABCB3HotUdYlZxWPiQvoVHOBGxARmjI9c=;
+ b=eMu3dWuoBpBSSN5+pi3+xNb1H4nPHMQtOmtpAW9zaoA42WgyjCZJ8VjKU9ZoysRWG9
+ 8i5nHDHSU/4D1HqyZACT0XdYpHk0T5EhwWhVkd9tbvXTxXGgABsMoY46fSo/CL5yvtN9
+ qzLfwdxWS8bbbARnBRRYdRg3ktmnRYY0azL71kTp+w8OtcOkHSsPHzJ7ho+Asl09mQ6K
+ O0ZuBf31o4FBVURgnUTSdAvaGDx9M7QrlpH0YkhRk7fy7zDBrFBpW5LqDnc9kh1X9hrR
+ r/M99cM5zyy3kIBAM1Rn13DIukITvNF/7kh0xn34rcvLAJ5ygDABHCZJw+GG7mClRIgM
+ HxbA==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ/teul3WPBxYx+Dhlc/wkzyEAlJTRbbHnh+AH69d2N9j7MMXDxPfbrX1LzvGimE4512c03e2ss=@lists.denx.de
+X-Gm-Message-State: AOJu0YxjYfgNSvAolhkHsrwpP3DwyHBjPuDlnuJw2fAMtDKd+oVroSfL
+ GX6YUH1Tk/755fWK9GO93cu8UvQTx4yL09M7VlPjueHQlQp3Jk+kOCDRfeN+2Bl0dRAVizo9LGu
+ OifB9VxNryYT7DsRPniU9OkMnmE0pUQWbK0fax3vN
+X-Gm-Gg: AeBDietvv1rNO4GHkUCwihyxZIuEaQH1b2XMWmaIApQzQSXxT0xEtTdlTN0YJZkyjJt
+ TH20/UBfTe4cQCS2uwxSj7z+iS8Bnna+1FbriLOcODy9xcDaVuZipKNCnBQ6UUBPvoeeonYRrDu
+ 3sKgj9GeMteUzuZin0l52hUaqLjHhNW6C2Vm2MGBjPZilNyuMeN5FBcwQ5P6is34aQdlvJ0haYG
+ y7IYpDeKRC0MPGJiyxspNTlUPSJMhYXuoZh/O54keU/J0N1N/HbkChQQwYx9DNDHOfiy1wvPZ/b
+ qCqY8W2NZ9QmDjo8
+X-Received: by 2002:a17:907:9491:b0:bc2:ac1d:2a9a with SMTP id
+ a640c23a62f3a-bc2ac1d4427mr140915766b.8.1777897654118; Mon, 04 May 2026
+ 05:27:34 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260430122629.606153-1-ludwig.nussel@siemens.com>
-In-Reply-To: <20260430122629.606153-1-ludwig.nussel@siemens.com>
+References: <20260429154000.71351-1-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20260429154000.71351-1-heinrich.schuchardt@canonical.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 4 May 2026 06:27:15 -0600
-X-Gm-Features: AVHnY4IJP8DZzv1Fnz2U6kEiLuYPMGteBrC2rDGPvHmOt8Pu8sfICJ-yfZ1fUW8
-Message-ID: <CAFLszThcmzcAewzvjN_4kY4FR6rGknHmWUF4GNha__4h2uCqAA@mail.gmail.com>
-Subject: Re: [v2,0/4] Improve FIT signature handling
-To: ludwig.nussel@siemens.com
-Cc: u-boot@lists.denx.de
+Date: Mon, 4 May 2026 06:27:19 -0600
+X-Gm-Features: AVHnY4KERBwsm2sfHJOU7cNFUe5GWozHasU0wJghHOW3YziNedmSbZszFUhAjSw
+Message-ID: <CAFLszThsVbNmH1j7Hx9Rf9QqxjqyVFv_zt1JOsPU4oB_L2NwFw@mail.gmail.com>
+Subject: Re: [PATCH 1/1] efi_loader: initialize variables in efi_dp_from_http()
+To: heinrich.schuchardt@canonical.com
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>, 
+ Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -107,31 +111,17 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ludwig,
+On 2026-04-29T15:40:00, Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
+> efi_loader: initialize variables in efi_dp_from_http()
+>
+> When using lwIP, efi_dp_from_http() may fail to initialize ip or mask.
+> Initialize the variables before the call.
+>
+> Addresses-Coverity-ID: 645840 - Uninitialized variables (UNINIT)
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+>
+> lib/efi_loader/efi_device_path.c | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
 
-On 2026-04-30T12:25:59, Ludwig Nussel <ludwig.nussel@siemens.com> wrote:
-
-> (optionally) enforce signatures so we can't accidentally boot
-> unsigned fit images.
-
-Thanks for tackling this - fail-open signature verification has bitten
-people before, so making it opt-out is a good direction! A few
-series-level points:
-
-test/py/tests/test_vboot.py exercises FIT signing end-to-end; please
-extend it to cover FIT_SIGNATURE_REQUIRED in both the success and
-fail-closed paths (no keys in the control DT, unsigned config).
-fit_all_configurations_verify() added in patch 4 should also get a
-test, ideally driven through iminfo so the command path is covered
-too. I wonder if we should enable the option for just one of sandbox /
-sandbox_flattree?
-
-Please update doc/usage/fit/signature.rst to describe
-FIT_SIGNATURE_REQUIRED, what it changes, and the migration story for
-boards relying on the fail-open behaviour. The QEMU change in patch 1
-needs a note in doc/board/emulation/qemu-arm.rst too - the
-CONFIG_OF_OMIT_DTB=n / CONFIG_OF_LIBFDT_OVERLAY=y pairing it needs is
-not obvious.
-
-Regards,
-Simon
+Reviewed-by: Simon Glass <sjg@chromium.org>
