@@ -4,55 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0BCC1FF885A
-	for <u-boot@archiver.kernel.org>; Mon,  4 May 2026 08:07:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 397E2FF885A
+	for <u-boot@archiver.kernel.org>; Mon,  4 May 2026 08:32:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 81BC38394E;
-	Mon,  4 May 2026 10:07:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 99D578394E;
+	Mon,  4 May 2026 10:32:14 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=pengutronix.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="g/ZbINGZ";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6EC5184255; Mon,  4 May 2026 10:07:40 +0200 (CEST)
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+ id 1C28C83EF9; Mon,  4 May 2026 10:32:14 +0200 (CEST)
+Received: from metis.whiteo.stw.pengutronix.de
+ (metis.whiteo.stw.pengutronix.de [IPv6:2a0a:edc0:2:b01:1d::104])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1994E80F0E
- for <u-boot@lists.denx.de>; Mon,  4 May 2026 10:07:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
+ by phobos.denx.de (Postfix) with ESMTPS id BB3E680F0E
+ for <u-boot@lists.denx.de>; Mon,  4 May 2026 10:32:11 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=pengutronix.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id DEB3660125;
- Mon,  4 May 2026 08:07:36 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4D0B6C2BCB9;
- Mon,  4 May 2026 08:07:36 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1777882056;
- bh=bR2Hicjpf25TdsHDTKzvc8Zkh4tbSt38AhgiZNuJoNk=;
- h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
- b=g/ZbINGZHiRdZ7Oyb3heb+li8eTqrpVL0teHsNT9gJzd6TAIUucBI2cwxARAZdTBM
- asFiBOLm7usiPv5tDldJnlZhqfyp/JH2LBfFFMfxY9ug27CQVsYJ3/xpw/Bc/y/+3f
- 3uEDgP5JNvNwyYFrLLrrNTB0JU00ZcSmhXu4hBu5xTvE+NzYwXvOXZNys3zFufZ5JB
- 4eZDjfeCyB6id/HSV5DRjkeC0Aa14IqU9ghs6SGD1dDrqffOM5dWhqFPXDjRqr6s8Z
- OOsdLW5SZtKUP4Viqp+bUsSyVOtzvQ4hD7tO/r/XFijApCz738rtRnOW5lu0ndRyau
- F0YzKtj8QF4fg==
-From: Mattijs Korpershoek <mkorpershoek@kernel.org>
-To: Marek Vasut <marex@nabladev.com>, u-boot@lists.denx.de
-Cc: Marek Vasut <marex@nabladev.com>, Christoph Niedermaier
- <cniedermaier@dh-electronics.com>, Lukasz Majewski <lukma@denx.de>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>, Tom Rini
- <trini@konsulko.com>
-Subject: Re: [PATCH] cmd: ums: Switch HW partition before block access
-In-Reply-To: <20260424033401.90360-1-marex@nabladev.com>
-References: <20260424033401.90360-1-marex@nabladev.com>
-Date: Mon, 04 May 2026 10:07:34 +0200
-Message-ID: <87y0hzd2d5.fsf@kernel.org>
+ spf=pass smtp.mailfrom=a.fatoum@pengutronix.de
+Received: from ptz.office.stw.pengutronix.de ([2a0a:edc0:0:900:1d::77]
+ helo=[127.0.0.1])
+ by metis.whiteo.stw.pengutronix.de with esmtp (Exim 4.92)
+ (envelope-from <a.fatoum@pengutronix.de>)
+ id 1wJoih-0007PT-7y; Mon, 04 May 2026 10:32:03 +0200
+Message-ID: <2eeccc2c-069e-4b91-adca-2917a24372d2@pengutronix.de>
+Date: Mon, 4 May 2026 10:32:00 +0200
 MIME-Version: 1.0
-Content-Type: text/plain
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 01/11] spl: Use FIT data address as fallback when
+ 'load' property is absent
+To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Cc: Beleswar Prasad Padhi <b-padhi@ti.com>, afd@ti.com, bb@ti.com,
+ anshuld@ti.com, hnagalla@ti.com, jm@ti.com, nm@ti.com, n-francis@ti.com,
+ u-kumar1@ti.com, u-boot@lists.denx.de
+References: <20260425033742.1519298-1-b-padhi@ti.com>
+ <20260425033742.1519298-2-b-padhi@ti.com>
+ <20260427195405.GL41863@bill-the-cat>
+ <9863b81f-e6ad-41cb-8e02-4f22377d0137@ti.com>
+ <20260428140606.GR41863@bill-the-cat>
+ <CAFLszTgBzgYYF8s9u_5=-4Yd-zV5Z+wNF5SzP6M+MSowRreJOA@mail.gmail.com>
+From: Ahmad Fatoum <a.fatoum@pengutronix.de>
+Content-Language: en-US, de-DE, de-BE
+In-Reply-To: <CAFLszTgBzgYYF8s9u_5=-4Yd-zV5Z+wNF5SzP6M+MSowRreJOA@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-SA-Exim-Connect-IP: 2a0a:edc0:0:900:1d::77
+X-SA-Exim-Mail-From: a.fatoum@pengutronix.de
+X-SA-Exim-Scanned: No (on metis.whiteo.stw.pengutronix.de);
+ SAEximRunCond expanded to false
+X-PTX-Original-Recipient: u-boot@lists.denx.de
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,148 +70,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Marek,
+Hello,
 
-Thank you for the patch.
+On 4/29/26 4:23 PM, Simon Glass wrote:
+> On Tue, 28 Apr 2026 at 08:06, Tom Rini <trini@konsulko.com> wrote:
+>> On Tue, Apr 28, 2026 at 04:26:31PM +0530, Beleswar Prasad Padhi wrote:
+>>>> I guess the real question here is, does the spec allow this to be
+>>>> omitted like that?
+>>>
+>>>
+>>> Could you please point me to the spec? I could not find it.
+>>
+>> Sure: https://github.com/open-source-firmware/flat-image-tree/
+> 
+> It is mandatory for kernel and firmware images. Instead of allowing it
+> to be optional for 'kernel', we created 'kernel_noload' some years
+> back.
+> 
+> Which image type are you using in your case?
 
-On Fri, Apr 24, 2026 at 05:33, Marek Vasut <marex@nabladev.com> wrote:
+FWIW, barebox has always interpreted lack of the load property to mean
+that it should just compute a suitable address itself (i.e. free memory
+aligned as Linux expects on that platform - same as kernel_noload).
 
-> An UMS session with eMMC device specifier "ums C mmc dev.part1,dev.part2"
-> exposes the same eMMC HW partition 'part2' twice instead of exposing both
-> HW partitions 'part1' and 'part2'. Fix this by switching the eMMC HW
-> partition before block device read/write access.
->
-> An eMMC is represented by a single struct blk_desc, with the currently
-> selected HW partition being stored in this struct blk_desc. Each call to
-> part_get_info_by_dev_and_name_or_num() with partition string dev[.partN]
-> does trigger HW partition switch by calling blk_get_device_part_str() ->
-> blk_get_device_part_str() -> get_dev_hwpart() -> get_dev_hwpart() ->
-> blk_dselect_hwpart(). The ums_init() iterates over the device specifier
-> string and calls part_get_info_by_dev_and_name_or_num() in a loop for
-> each dev[.partN] entry used as the partition string. If the device
-> specifier string contains more than one dev[.partN] partition strings
-> for the same dev device, then it is the HW partition described in the
-> last dev[.partN] partition string entry that is accessed for all dev
-> device partition strings in the device specifier string, because that
-> last dev[.partN] partition string entry was the last one that triggered
-> blk_dselect_hwpart() call for that device.
->
-> To access the expected HW partition for every dev[.partN] partition string
-> entry, it is necessary to call blk_dselect_hwpart() before each block read
-> or write. Store HW partition described for each dev[.partN] partition string
-> in struct ums and use the stored value to make it so.
->
-> The blk_dselect_hwpart() does test whether the currently selected HW
-> partition is already configured in hardware and does not reconfigure
-> the hardware if that is the case, therefore for the majority of block
-> reads and writes, blk_dselect_hwpart() is a no-op with negligible
-> performance impact.
->
-> Example reproducer is listed below. The last sector of both eMMC HW BOOT
-> partitions is populated with distinct test pattern and UMS is launched:
->
-> "
-> => mmc dev 1 1 ; mmc read $loadaddr 0x1fff 1 ; md $loadaddr 4
-> switch to partitions #1, OK
-> mmc1(part 1) is current device
-> MMC read: dev # 1, block # 8191, count 1 ... 1 blocks read: OK
-> 84000000: 1234abcd 1234abcd 1234abcd 1234abcd  ..4...4...4...4.
->
-> => mmc dev 1 2 ; mmc read $loadaddr 0x1fff 1 ; md $loadaddr 4
-> switch to partitions #2, OK
-> mmc1(part 2) is current device
-> MMC read: dev # 1, block # 8191, count 1 ... 1 blocks read: OK
-> 84000000: 567890ef 567890ef 567890ef 567890ef  ..xV..xV..xV..xV
->
-> => ums 0 mmc 1.1,1.2
-> UMS: LUN 0, dev mmc 1, hwpart 1, sector 0x0, count 0x2000
-> UMS: LUN 1, dev mmc 1, hwpart 2, sector 0x0, count 0x2000
-> "
->
-> Read of the two block devices on host without this fix produces
-> identical data present in HW BOOT partition 2:
->
-> "
-> $ dd if=/dev/sdX of=mmc-a.bin ; dd if=/dev/sdY of=mmc-b.bin
-> $ hexdump -C mmc-a.bin | tail -n 3 | head -n 1 ; \
->   hexdump -C mmc-b.bin | tail -n 3 | head -n 1
-> 003ffe00  ef 90 78 56 ef 90 78 56  ef 90 78 56 ef 90 78 56  |..xV..xV..xV..xV|
-> 003ffe00  ef 90 78 56 ef 90 78 56  ef 90 78 56 ef 90 78 56  |..xV..xV..xV..xV|
-> "
->
-> Read of the two block devices on host with this fix produces the
-> expected distinct data from either HW BOOT partition 1 or 2:
->
-> "
-> $ dd if=/dev/sdX of=mmc-a.bin ; dd if=/dev/sdY of=mmc-b.bin
-> $ hexdump -C mmc-a.bin | tail -n 3 | head -n 1 ; \
->   hexdump -C mmc-b.bin | tail -n 3 | head -n 1
-> 003ffe00  cd ab 34 12 cd ab 34 12  cd ab 34 12 cd ab 34 12  |..4...4...4...4.|
-> 003ffe00  ef 90 78 56 ef 90 78 56  ef 90 78 56 ef 90 78 56  |..xV..xV..xV..xV|
-> "
->
-> Reported-by: Christoph Niedermaier <cniedermaier@dh-electronics.com>
-> Signed-off-by: Marek Vasut <marex@nabladev.com>
+Writing that into the spec also allows for Beleswar's use case here,
+although it doesn't give the guarantee that the address will always be
+the image address.
 
-Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
+I think that giving a guarantee about the image address is wrong:
 
-> ---
-> Cc: Lukasz Majewski <lukma@denx.de>
-> Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: u-boot@lists.denx.de
-> ---
->  cmd/usb_mass_storage.c     | 11 +++++++++++
->  include/usb_mass_storage.h |  1 +
->  2 files changed, 12 insertions(+)
->
-> diff --git a/cmd/usb_mass_storage.c b/cmd/usb_mass_storage.c
-> index 47e8b70cd10..e8b87045bdc 100644
-> --- a/cmd/usb_mass_storage.c
-> +++ b/cmd/usb_mass_storage.c
-> @@ -24,6 +24,11 @@ static int ums_read_sector(struct ums *ums_dev,
->  {
->  	struct blk_desc *block_dev = &ums_dev->block_dev;
->  	lbaint_t blkstart = start + ums_dev->start_sector;
-> +	int ret;
-> +
-> +	ret = blk_dselect_hwpart(block_dev, ums_dev->hwpart);
-> +	if (ret && ret != -ENOSYS)
-> +		return ret;
->  
->  	return blk_dread(block_dev, blkstart, blkcnt, buf);
->  }
-> @@ -33,6 +38,11 @@ static int ums_write_sector(struct ums *ums_dev,
->  {
->  	struct blk_desc *block_dev = &ums_dev->block_dev;
->  	lbaint_t blkstart = start + ums_dev->start_sector;
-> +	int ret;
-> +
-> +	ret = blk_dselect_hwpart(block_dev, ums_dev->hwpart);
-> +	if (ret && ret != -ENOSYS)
-> +		return ret;
->  
->  	return blk_dwrite(block_dev, blkstart, blkcnt, buf);
->  }
-> @@ -110,6 +120,7 @@ static int ums_init(const char *devtype, const char *devnums_part_str)
->  		snprintf(name, UMS_NAME_LEN, "UMS disk %d", ums_count);
->  		ums[ums_count].name = name;
->  		ums[ums_count].block_dev = *block_dev;
-> +		ums[ums_count].hwpart = block_dev->hwpart;
->  
->  		printf("UMS: LUN %d, dev %s %d, hwpart %d, sector %#x, count %#x\n",
->  		       ums_count, devtype, ums[ums_count].block_dev.devnum,
-> diff --git a/include/usb_mass_storage.h b/include/usb_mass_storage.h
-> index 6d83d93cad7..9be704ea8b7 100644
-> --- a/include/usb_mass_storage.h
-> +++ b/include/usb_mass_storage.h
-> @@ -22,6 +22,7 @@ struct ums {
->  	unsigned int num_sectors;
->  	const char *name;
->  	struct blk_desc block_dev;
-> +	int hwpart;
->  };
->  
->  int fsg_init(struct ums *ums_devs, int count, struct udevice *udc);
-> -- 
-> 2.53.0
+- If the code is not relocatable, then its load address can equally well
+be written into the FIT image node
+
+- If the code is relocatable, then forcing the load address to be the
+image data addresses will make non-external FIT unfeasible for most
+users, because of code having the wrong alignment and for external FIT,
+it will mean careful placement of the FIT itself is required, so we
+don't end up with misbehavior at runtime.
+
+I thus suggest, the spec leaves it to bootloaders to select appropriate
+load addresses if its missing and if the bootloader can't, it should
+refuse boot (current U-Boot behavior). Future U-Boot behavior will
+likely need to be adapted, so this loading at image data address is only
+done for these specific firmware images and not in general as otherwise
+it would preclude any other use in future.
+
+Cheers,
+Ahmad
+
+> 
+> Regards,
+> Simon
+> 
+
+-- 
+Pengutronix e.K.                  |                             |
+Steuerwalder Str. 21              | http://www.pengutronix.de/  |
+31137 Hildesheim, Germany         | Phone: +49-5121-206917-0    |
+Amtsgericht Hildesheim, HRA 2686  | Fax:   +49-5121-206917-5555 |
+
