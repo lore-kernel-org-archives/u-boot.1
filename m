@@ -4,87 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F2B1CD3427
-	for <u-boot@archiver.kernel.org>; Mon,  4 May 2026 21:25:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E50CFF885A
+	for <u-boot@archiver.kernel.org>; Mon,  4 May 2026 22:10:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D7D8884858;
-	Mon,  4 May 2026 23:25:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id D031784836;
+	Tue,  5 May 2026 00:10:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Bo3tgqsu";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="KnHjMJiG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BD99784860; Mon,  4 May 2026 23:25:42 +0200 (CEST)
-Received: from mail-qt1-x82f.google.com (mail-qt1-x82f.google.com
- [IPv6:2607:f8b0:4864:20::82f])
+ id 6FCA484837; Tue,  5 May 2026 00:10:06 +0200 (CEST)
+Received: from mail-ot1-x331.google.com (mail-ot1-x331.google.com
+ [IPv6:2607:f8b0:4864:20::331])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D87808484F
- for <u-boot@lists.denx.de>; Mon,  4 May 2026 23:25:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6550B84832
+ for <u-boot@lists.denx.de>; Tue,  5 May 2026 00:10:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=raymondmaoca@gmail.com
-Received: by mail-qt1-x82f.google.com with SMTP id
- d75a77b69052e-50d876329bbso38631971cf.2
- for <u-boot@lists.denx.de>; Mon, 04 May 2026 14:25:39 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x331.google.com with SMTP id
+ 46e09a7af769-7dcd9061b1aso4313758a34.2
+ for <u-boot@lists.denx.de>; Mon, 04 May 2026 15:10:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1777929938; x=1778534738; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=F/oRancASU9MLde1H5jWJvRyH6ZHWMAfkPEGyf7SUvU=;
- b=Bo3tgqsu63tlqZB6FnfqEwYFnr07csTS1jNByoV3cvPO25SaYW61A34ov5bSHHCUCd
- osQRHxPMF/pDxgy5IL1+aSOQmUOBo2I69IJa6HPMlJyzAwLfR4gt7/nTWAB/Jj/CCCzD
- 9iw27+pcUjSQny3pvuqY6X9sSDwLDhEshfkTVypl5bt1JqyjcVtCHcB76uEhwgCg6BJx
- 5OpZF2yOXLOecaOl5WzjBHY/Xm9w1SDr3T6KJraT+1MPORFsynA6LwcdtV4xDoULOYzV
- SAJAr5GPkJrHJT5m2Wlout0Nq4cKaUBP7bUAxp+U+GdUL5PEmqsMrquVbC1ntGjLGvx3
- a9vg==
+ d=konsulko.com; s=google; t=1777932600; x=1778537400; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=IWcebgyFZJhO56OqZIK/Nc2KTiOk0r5sXXiFL4NCXB4=;
+ b=KnHjMJiGAJmkYleyfpVEUcGdeUhC5T0i5lnLE8eLtr+5nCMTwrJkk0/H6eCaEyrVxQ
+ ZuL04yMgXKSze80f6SjauaG+8WPJqnC+KSgkYbY/Y9qHz8S3BKQgRcbAGZY6KMZNUUeJ
+ GvDYq3Ik25HTU20hav3OdqsZcXn5e0ba0ZqtA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777929938; x=1778534738;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=F/oRancASU9MLde1H5jWJvRyH6ZHWMAfkPEGyf7SUvU=;
- b=hg//E3efq1nIXD8IFRmPYlcDKjin+Gms4Zxrjac5TLxf9W5WB2f6tMptKFK7pJMqMZ
- ld9buGC0TmbHLR0tQ50amJ5XpIKDjHaQOOj9OmkFOlQ+XmL8B8b9h2E97VY4dT0HfJUA
- rD1jSihixVrry0D4WZbe6h6D14r/T8tU9iiyZ0uUCqy9kup/09t5Dg/Ui+f/uGyonUsq
- vU4jS+O/UToujrO9U66CAQ8vkbo7lGHnuapBqALdHK/A5NG7ozlmuJevRO7LW1OKmUUx
- LY257SCknw9Z3LuYkwFVAS9YbgB05IAEP6WgzeRHfnfbZDbj95nlbL2OLxT7JmnBtCzt
- I94w==
-X-Gm-Message-State: AOJu0YxtD1psC13BJaBGcJjJ70zNjtTTgRiyOANbuflkblEhm0ITKt9W
- ieu8zBrmAoWl2D6yl8WI48SL5cDyZoDA4A7EkustUbLv7UbhbeAye1OZgiUpFRQTmc4=
-X-Gm-Gg: AeBDievuJSsWs7Ptc2kLp18AFOudsNQylEfW2pFSXbvRFeEHet/AkPumI9V8qp2uSKf
- +qAPmACrV38p0CS48IEVjElDLBG8hShqm7QiYoU02Czr8MpDUQuFpcRTh7S0wB2rN4FbIZa2KQJ
- v3k0t6w4HDBLS71+1bALkqegu/Zj+EQv4prguFjBS8/tmyxsUrtVKIEs71B77LdGpFP8Mi3dbjN
- rtAVWJEkFruJAEZPwKOAXrpoIrJDO6ZYcLynm7Cwm9Yv9SN7tKFcRt+zv1J4veclmIK+L8HYFE+
- YGj6p9NnHSBPvzIqYml+CxXLrtnOPosErXjIo7oD4Cc7QxIYJy4C48rtLmm1xhMerzEA54yQY8X
- 0u12J8hUklrdQGppgOp3g1UFVqxZ75ujhExkRrNbgOBzZXeagY15RqNJQLWTyt/qv5hEF+Mcf3K
- YOmM2vLTJfm7FVTYmuXSsSF/fQYcfRyrJWK14IijaVY6LfsgyTOggZJJWmH2eqe6b03qt+YNUyG
- 61t12U9ZU9e7lSxTDRSNw==
-X-Received: by 2002:a05:622a:5c86:b0:50b:4b3c:7554 with SMTP id
- d75a77b69052e-5130698817cmr7085561cf.10.1777929938259; 
- Mon, 04 May 2026 14:25:38 -0700 (PDT)
-Received: from ubuntu.localdomain (172-97-209-197.cpe.distributel.net.
- [172.97.209.197]) by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-51040ba8b0csm109586721cf.30.2026.05.04.14.25.37
+ d=1e100.net; s=20251104; t=1777932600; x=1778537400;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=IWcebgyFZJhO56OqZIK/Nc2KTiOk0r5sXXiFL4NCXB4=;
+ b=gKpkJAAKo7v4GMKIyheQn5o8fKky7/7MlpF6ZhA8eDZA6fDvdNmXQWPG6erihF/4RY
+ 4brvT0zGIWcBbnT2Xk86VhQ7UOvk5zfjSjPaPRVvJDjAec3R2st3+TA0Xfz+N8WRHQsU
+ wwCZlrBySjkyVyr+z4xQVy5NTHoHa6vNAdsIKP6Dsqlhz/oeD1HzvApNn/cNIe5rcQUc
+ OFfiTVPcMBPwvBBDXMd7Wif6oCq7cHzVZQxpd1FpHaz/jWt/mOWx/2PKQnJS2h3DmUWd
+ TWYVSd/QZZ2F6UlFlDefdq52rJ7Dl9wHG5QOz6DQ01Ket4H81VkUrvnMwJzJQYtgNFKs
+ yBrA==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ9XXYDa++aGXE2VYCaoYWybIAUTaBwca6FujCK/XMXIBkIabauXJg/r5EakMnJ5YBpXoiFiAtw=@lists.denx.de
+X-Gm-Message-State: AOJu0Ywxq/Ip2nwY8FPeT3GQY6r7Sz+00qCr5BfrZ0tf0/N+BFLc4YF6
+ 3AEgITYqKG9lqoqtrmSgwv9VQJhg3TNtT1SK9WK7afyNZeI6e5kBsBA2ygXFZR6TDz0=
+X-Gm-Gg: AeBDieu9D1Dn65qmMOD0uWg4VMkhZEsOd3SfFTIM2OehRhtqWYT9QUfLkvSbf/+RDk9
+ PO9HWlmoBr9mupMhagm87gq6j/ARGHebAvVU/aXR/5srlKkpm8xTK8CBpQK0Dm5g59DMc5w2TW8
+ X3HrFY8hCNJk63kb4wtG4aAi7TZyYFdISiAx5XMPgha1L3EqpTRMc6iz4yYydv37EYiFzr5zF0q
+ UsvmEgdQjDhiL5VcwdzcfsU4bJ8vjnxrMcTt21vQUVcUzBWBZVO0SMuJyh8RuxWUXL0KEEf9STm
+ sHxcY4aU347w6kFJ5ZGvvvbG7EfnJ3taigMcLqzsrxvIg/9Cf3WDGa1VpLijXARYbvNRX7ziIQW
+ nzOZk+Ipa5f4xsItzgUNWFebEkXQS20YsWiHqXnW9pTgKOOyWDmwCERzI2HTZMe/xGM1gbMzXKA
+ zFweoYXFPaiJvw4ZWQpYTEDEloX6tzVXMrwQFSFw5OEwAdopoXgv0l/iXNUJA8fhDFrKC/vtqr4
+ 5+vioHY34Qp4DqvYli77F7vWU64w/tVS7qDYu91SpWNS86lw6tmYxCvOjp5HA==
+X-Received: by 2002:a4a:ee04:0:b0:687:60d8:776d with SMTP id
+ 006d021491bc7-69697dc8e7bmr5955154eaf.54.1777932599942; 
+ Mon, 04 May 2026 15:09:59 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
+ [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-434548c1151sm11627781fac.2.2026.05.04.15.09.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 04 May 2026 14:25:37 -0700 (PDT)
-From: Raymond Mao <raymondmaoca@gmail.com>
-To: u-boot@lists.denx.de
-Cc: Raymond Mao <raymond.mao@riscstar.com>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>,
- Alexander Sverdlin <alexander.sverdlin@siemens.com>,
- Michal Simek <michal.simek@amd.com>,
- Casey Connolly <casey.connolly@linaro.org>,
- Pranav Sanwal <pranav.sanwal@amd.com>
-Subject: [PATCH v2] lib: fdtdec: validate bloblist FDT before consuming libfdt
- size
-Date: Mon,  4 May 2026 17:25:23 -0400
-Message-Id: <20260504212524.1665166-1-raymondmaoca@gmail.com>
-X-Mailer: git-send-email 2.25.1
+ Mon, 04 May 2026 15:09:59 -0700 (PDT)
+Date: Mon, 4 May 2026 16:09:57 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Daniel Palmer <daniel@thingy.jp>
+Cc: visitorckw@gmail.com, angelo@kernel-space.org, bmeng.cn@gmail.com,
+ sjg@chromium.org, u-boot@lists.denx.de
+Subject: Re: [PATCH v5 0/8] Add virtio-mmio support to m68k virt machine
+Message-ID: <20260504220957.GM1614990@bill-the-cat>
+References: <20260416093927.602613-1-daniel@thingy.jp>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="mF8dvDO1CJgQYjyA"
+Content-Disposition: inline
+In-Reply-To: <20260416093927.602613-1-daniel@thingy.jp>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,116 +99,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Raymond Mao <raymond.mao@riscstar.com>
 
-Coverity Scan defects are observed in fdtdec_apply_bloblist_dtos(),
-since the live FDT taken from the bloblist is passed to libfdt helpers
-which consume header size/offset fields:
-- fdt_open_into()
-- fdt_pack()
-- bloblist_resize(..., fdt_totalsize(...))
+--mF8dvDO1CJgQYjyA
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Add a small helper to validate the FDT header and confirm that the
-advertised totalsize fits within the currently allocated bloblist
-record. Use the sanitized size before calling fdt_open_into(), again
-after overlays are applied before calling fdt_pack(), and once more
-after packing before shrinking the bloblist record.
+On Thu, Apr 16, 2026 at 06:39:19PM +0900, Daniel Palmer wrote:
 
-This keeps the existing flow unchanged while making the size consumers
-operate on validated FDT metadata.
+> Lets start making the m68k virt machine support useful.
+>=20
+> First we need to fix some m68k endian issues.
+>=20
+> Then allow virtio mmio driver instances to be created with
+> platform data and fix a minor endian issue.
+>=20
+> Finally, add the code for the board to create the instances.
 
-Fixes: b70cbbfbf94f ("fdtdec: apply DT overlays from bloblist")
-Addresses-Coverity-ID: CID 645837: (TAINTED_SCALAR)
-Signed-off-by: Raymond Mao <raymond.mao@riscstar.com>
----
-changes in v2:
-- Rebased on master.
+We get this in CI:
+drivers/virtio/virtio_mmio.c:359:15: warning: cast to 'void *' from
+ smaller integer type 'phys_addr_t' (aka 'unsigned int') [-Wint-to-void-poi=
+nter-cast]
+  359 |         priv->base =3D (void __iomem *)plat->base;
+      |                      ^~~~~~~~~~~~~~~~~~~~~~~~~~                    =
+                  1 warning generated.
 
- lib/fdtdec.c | 43 +++++++++++++++++++++++++++++++++++++++----
- 1 file changed, 39 insertions(+), 4 deletions(-)
+With clang, please fix.
 
-diff --git a/lib/fdtdec.c b/lib/fdtdec.c
-index 2d66860f6ed..601f418db6e 100644
---- a/lib/fdtdec.c
-+++ b/lib/fdtdec.c
-@@ -1744,9 +1744,31 @@ static int fdtdec_apply_dto_blob(void **blob, __maybe_unused int size)
- 	return fdt_overlay_apply_verbose((void *)gd->fdt_blob, *blob);
- }
- 
-+static int fdtdec_get_valid_fdt_size(const void *fdt, int alloc_size,
-+				     int *fdt_sizep)
-+{
-+	int ret, fdt_size;
-+
-+	/*
-+	 * Validate the header before libfdt trusts any header offsets/sizes.
-+	 * Also make sure the advertised totalsize fits in the bloblist record.
-+	 */
-+	ret = fdt_check_header(fdt);
-+	if (ret)
-+		return ret;
-+
-+	fdt_size = fdt_totalsize(fdt);
-+	if (fdt_size > alloc_size)
-+		return -FDT_ERR_TRUNCATED;
-+
-+	*fdt_sizep = fdt_size;
-+
-+	return 0;
-+}
-+
- static int fdtdec_apply_bloblist_dtos(void)
- {
--	int ret;
-+	int ret, live_fdt_size;
- 	struct fdt_header *live_fdt;
- 	int blob_size;
- 	size_t padded_size, max_size;
-@@ -1760,8 +1782,12 @@ static int fdtdec_apply_bloblist_dtos(void)
- 	if (live_fdt != gd->fdt_blob)
- 		return -ENOENT;
- 
-+	ret = fdtdec_get_valid_fdt_size(live_fdt, blob_size, &live_fdt_size);
-+	if (ret)
-+		return ret;
-+
- 	/* Calculate the allowed padded size */
--	padded_size = fdt_totalsize(live_fdt) + CONFIG_SYS_FDT_PAD;
-+	padded_size = live_fdt_size + CONFIG_SYS_FDT_PAD;
- 	max_size = bloblist_get_total_size() - bloblist_get_size() + blob_size;
- 	if (padded_size > max_size)
- 		padded_size = max_size;
-@@ -1772,6 +1798,7 @@ static int fdtdec_apply_bloblist_dtos(void)
- 		if (ret)
- 			return ret;
- 
-+		blob_size = padded_size;
- 		ret = fdt_open_into(live_fdt, live_fdt, padded_size);
- 		if (ret)
- 			return ret;
-@@ -1781,12 +1808,20 @@ static int fdtdec_apply_bloblist_dtos(void)
- 	if (ret)
- 		return ret;
- 
--	/* Shrink the blob to the actual FDT size */
-+	ret = fdtdec_get_valid_fdt_size(live_fdt, blob_size, &live_fdt_size);
-+	if (ret)
-+		return ret;
-+
- 	ret = fdt_pack(live_fdt);
- 	if (ret)
- 		return ret;
- 
--	return bloblist_resize(BLOBLISTT_CONTROL_FDT, fdt_totalsize(live_fdt));
-+	ret = fdtdec_get_valid_fdt_size(live_fdt, blob_size, &live_fdt_size);
-+	if (ret)
-+		return ret;
-+
-+	/* Shrink the blob to the actual FDT size */
-+	return bloblist_resize(BLOBLISTT_CONTROL_FDT, live_fdt_size);
- }
- 
- int fdtdec_setup(void)
--- 
-2.25.1
+Also, it seems that "sysreset: qemu virt: Use __raw_writel()" has a
+duplicate Signed-off-by from you, please fix that as well. Thanks!
 
+--=20
+Tom
+
+--mF8dvDO1CJgQYjyA
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCafkZMQAKCRAr4qD1Cr/k
+CidFAQCE9OJFJztTJnLiyUfMzxUe8gqC8NQk/iC8V6ptLb2oBAD+OL9XgF1dfsoc
+RmVBE5ipYJ3pxq0fcogvH6ZprUQIVQg=
+=zSJC
+-----END PGP SIGNATURE-----
+
+--mF8dvDO1CJgQYjyA--
