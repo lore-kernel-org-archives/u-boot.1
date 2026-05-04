@@ -4,110 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9462FCD3427
-	for <u-boot@archiver.kernel.org>; Mon,  4 May 2026 20:40:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F2B1CD3427
+	for <u-boot@archiver.kernel.org>; Mon,  4 May 2026 21:25:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 368AC84836;
-	Mon,  4 May 2026 22:40:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id D7D8884858;
+	Mon,  4 May 2026 23:25:44 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="XH2EY1q6";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Bo3tgqsu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ECA7884706; Mon,  4 May 2026 22:40:50 +0200 (CEST)
-Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
- [IPv6:2a00:1450:4864:20::52b])
+ id BD99784860; Mon,  4 May 2026 23:25:42 +0200 (CEST)
+Received: from mail-qt1-x82f.google.com (mail-qt1-x82f.google.com
+ [IPv6:2607:f8b0:4864:20::82f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9446284859
- for <u-boot@lists.denx.de>; Mon,  4 May 2026 22:40:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D87808484F
+ for <u-boot@lists.denx.de>; Mon,  4 May 2026 23:25:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52b.google.com with SMTP id
- 4fb4d7f45d1cf-67c2d57a5ceso3363860a12.3
- for <u-boot@lists.denx.de>; Mon, 04 May 2026 13:40:48 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1777927248; cv=none;
- d=google.com; s=arc-20240605;
- b=IZUJeUqlST0F8HWqlk3zreVGgVTKLd0m0OVr/kEQ03IM3i9f5okAjXufxlMXvI/sHQ
- bixBo6tjRH2TsHiQqKJARwOYl/rlBypi5M2ghv+kUjL/iMzsOiH0kxSMp9PbOL+UDq05
- zBfBD5t/Oi37OPF5VJ9kjKvNa4x/nltxZH/45dHnXZm8coVXba6bFrOeNlonecjTmvTq
- kRNZDJkrpkCz6PsnSufOQVayknbr13GqzyR/+wPPzNGCO/PbUIGJMEvCsR8AxLBfcBKM
- GM9CAJTw67/PJxPVhhJMMlSDnB17Aghl9ynPriANmNtc+jElHliX3IGSK2KUwNwfiTG1
- 0VwQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=Rb5HwW8rB4LFDA6bRTFJslM+YN5yY8MPBvz97W3aoYw=;
- fh=KOAJnZ3yqZz1k4UafEiM97ZsU4VPS7w6l2kYYxF7AlI=;
- b=QSBGpAvrq1lXi9sLfdlPWaTRVHno6qPY50eSmVfVQlZEkAlugr+ITAzKE/sg+5fUcL
- /qmid1dwNRR8VchWzGH1gCBAjqTsqu9tNHCDOV2TnXPbrZB2n7nQop3+iisaLeNjcs1J
- ARBYZs+qWd0wRsUV32wY3lGsWnpwTyLssFqqylWO1/aYRSXdUF/YcfpJb+4gPPgVgALg
- s4BjCqm7KuiNjP3kIPJ2lAm+A0q0TVtaHVDWTdZyRMYfExJo3JIUNqAA+gVyEvuIAeTI
- htHtMeC1djp4lufwhXDO0K/jdcJUEKOOKBD54pApyAV31YE9dVUyV2uQuEJXed8TPlPP
- yAbQ==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=raymondmaoca@gmail.com
+Received: by mail-qt1-x82f.google.com with SMTP id
+ d75a77b69052e-50d876329bbso38631971cf.2
+ for <u-boot@lists.denx.de>; Mon, 04 May 2026 14:25:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1777927248; x=1778532048; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Rb5HwW8rB4LFDA6bRTFJslM+YN5yY8MPBvz97W3aoYw=;
- b=XH2EY1q6co57BCCG0lc624gzVdNXvRgLB2X0QmS7pb0j+0gPFxll4K58q7+cB+ET3J
- HKARP9Vo2vTMX7KFUd+cNJEV1faKy6Ue5BO8eWe/icDECn2tKfsqkmZIynsTdVnBkkCi
- 0vg2gfxJZrUmyhUy/VJh7EFcaoyTNddVSilZQ=
+ d=gmail.com; s=20251104; t=1777929938; x=1778534738; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=F/oRancASU9MLde1H5jWJvRyH6ZHWMAfkPEGyf7SUvU=;
+ b=Bo3tgqsu63tlqZB6FnfqEwYFnr07csTS1jNByoV3cvPO25SaYW61A34ov5bSHHCUCd
+ osQRHxPMF/pDxgy5IL1+aSOQmUOBo2I69IJa6HPMlJyzAwLfR4gt7/nTWAB/Jj/CCCzD
+ 9iw27+pcUjSQny3pvuqY6X9sSDwLDhEshfkTVypl5bt1JqyjcVtCHcB76uEhwgCg6BJx
+ 5OpZF2yOXLOecaOl5WzjBHY/Xm9w1SDr3T6KJraT+1MPORFsynA6LwcdtV4xDoULOYzV
+ SAJAr5GPkJrHJT5m2Wlout0Nq4cKaUBP7bUAxp+U+GdUL5PEmqsMrquVbC1ntGjLGvx3
+ a9vg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777927248; x=1778532048;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=1e100.net; s=20251104; t=1777929938; x=1778534738;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Rb5HwW8rB4LFDA6bRTFJslM+YN5yY8MPBvz97W3aoYw=;
- b=RSJoJ5RCy4GRUtxydE9b7oHgyvYkl+XD76i1sxvbeadbxiVM4s/In3TEgCqoIe8cPG
- ZL2vvi+Pj+AwTK2/CFu7CjrDBxk/o73tYDKaHhKXfYBJl36SHDdq6AW37eKmK4AUu/L0
- 49iFrqVy3DtEo39ptsuzbbTo990Y6uYF6XWk4BrwUN2u8pr3DTerOQYhcWaA7j8Ek8cv
- HSM5Qu+tDj2575+SC4B2gb4bWpM09jEipTaCv2KEiF7hpxtYlKdejcC5+F5uXqIg7Mdd
- F4iGP4P/PKUANVliJQrUSRZ2HO03doP5vwdLHfHWnd8mrZqBjBUfCSlu6AgnLe8bQYYi
- oPEA==
-X-Forwarded-Encrypted: i=1;
- AFNElJ+UWLIPuGlm4or3r96hG1SeAcTQVBZ/SYA7k/evEOA+jStT8CmFyZf2VEtl9PJy0XqpCZeReGI=@lists.denx.de
-X-Gm-Message-State: AOJu0Yzjp7YCq7y/g4bT8xPfTmyXiidLFNnAM+g0IJey0hWoM/B82nlb
- H6GFVUb+wHUTdo+z/Ux2Bw5kzuPu5Ulam5GkPmUVBhQ/mXcWpAb9yn2mLp51C6lG3SuPCk574S3
- +WQY3/9FspmrXyjhBASA9WrYTFHyNzGaKD38VPy8hLngfpKZyq3w=
-X-Gm-Gg: AeBDietltq1UMq8nqY9kymMKe3nl7cRntlyG9VzqEomrAc75tckfBWNLah0opxH5H7l
- smO3vNHr2DY5dcjnOtjeYEa2D1TI3/eEI3kP04Xgf6yZa6tqNk/mRJ/mxrpZaHaOOcrAy8m7oP5
- EE8ifzug1s+NJzyRSBaIIqZRLwuR2oztiS6sLVywq0AW9uhLYVxnkAzJgInrrhaQnjrqx78CiwC
- BP2TtCRApyig9S+FAtmkx25KH33G3u+1bwA8ZzQr6Mo5uO0gNopwm43wNj2BcULAn43HQDUUBZq
- u/OCuBPeBtPei1Hb
-X-Received: by 2002:a17:907:e8f:b0:bbe:384e:4c4d with SMTP id
- a640c23a62f3a-bbff97349a7mr633262566b.14.1777927247907; Mon, 04 May 2026
- 13:40:47 -0700 (PDT)
+ bh=F/oRancASU9MLde1H5jWJvRyH6ZHWMAfkPEGyf7SUvU=;
+ b=hg//E3efq1nIXD8IFRmPYlcDKjin+Gms4Zxrjac5TLxf9W5WB2f6tMptKFK7pJMqMZ
+ ld9buGC0TmbHLR0tQ50amJ5XpIKDjHaQOOj9OmkFOlQ+XmL8B8b9h2E97VY4dT0HfJUA
+ rD1jSihixVrry0D4WZbe6h6D14r/T8tU9iiyZ0uUCqy9kup/09t5Dg/Ui+f/uGyonUsq
+ vU4jS+O/UToujrO9U66CAQ8vkbo7lGHnuapBqALdHK/A5NG7ozlmuJevRO7LW1OKmUUx
+ LY257SCknw9Z3LuYkwFVAS9YbgB05IAEP6WgzeRHfnfbZDbj95nlbL2OLxT7JmnBtCzt
+ I94w==
+X-Gm-Message-State: AOJu0YxtD1psC13BJaBGcJjJ70zNjtTTgRiyOANbuflkblEhm0ITKt9W
+ ieu8zBrmAoWl2D6yl8WI48SL5cDyZoDA4A7EkustUbLv7UbhbeAye1OZgiUpFRQTmc4=
+X-Gm-Gg: AeBDievuJSsWs7Ptc2kLp18AFOudsNQylEfW2pFSXbvRFeEHet/AkPumI9V8qp2uSKf
+ +qAPmACrV38p0CS48IEVjElDLBG8hShqm7QiYoU02Czr8MpDUQuFpcRTh7S0wB2rN4FbIZa2KQJ
+ v3k0t6w4HDBLS71+1bALkqegu/Zj+EQv4prguFjBS8/tmyxsUrtVKIEs71B77LdGpFP8Mi3dbjN
+ rtAVWJEkFruJAEZPwKOAXrpoIrJDO6ZYcLynm7Cwm9Yv9SN7tKFcRt+zv1J4veclmIK+L8HYFE+
+ YGj6p9NnHSBPvzIqYml+CxXLrtnOPosErXjIo7oD4Cc7QxIYJy4C48rtLmm1xhMerzEA54yQY8X
+ 0u12J8hUklrdQGppgOp3g1UFVqxZ75ujhExkRrNbgOBzZXeagY15RqNJQLWTyt/qv5hEF+Mcf3K
+ YOmM2vLTJfm7FVTYmuXSsSF/fQYcfRyrJWK14IijaVY6LfsgyTOggZJJWmH2eqe6b03qt+YNUyG
+ 61t12U9ZU9e7lSxTDRSNw==
+X-Received: by 2002:a05:622a:5c86:b0:50b:4b3c:7554 with SMTP id
+ d75a77b69052e-5130698817cmr7085561cf.10.1777929938259; 
+ Mon, 04 May 2026 14:25:38 -0700 (PDT)
+Received: from ubuntu.localdomain (172-97-209-197.cpe.distributel.net.
+ [172.97.209.197]) by smtp.gmail.com with ESMTPSA id
+ d75a77b69052e-51040ba8b0csm109586721cf.30.2026.05.04.14.25.37
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 04 May 2026 14:25:37 -0700 (PDT)
+From: Raymond Mao <raymondmaoca@gmail.com>
+To: u-boot@lists.denx.de
+Cc: Raymond Mao <raymond.mao@riscstar.com>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>,
+ Alexander Sverdlin <alexander.sverdlin@siemens.com>,
+ Michal Simek <michal.simek@amd.com>,
+ Casey Connolly <casey.connolly@linaro.org>,
+ Pranav Sanwal <pranav.sanwal@amd.com>
+Subject: [PATCH v2] lib: fdtdec: validate bloblist FDT before consuming libfdt
+ size
+Date: Mon,  4 May 2026 17:25:23 -0400
+Message-Id: <20260504212524.1665166-1-raymondmaoca@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-References: <f8f4e639-0e73-4d14-828a-92dbfe5526ba@cherry.de>
- <CAFLszTjWZ9DBKVui_2EE-nSg8K+5eC9V8jvwp638dLeyp_p6vw@mail.gmail.com>
- <175e1198-2ac4-48de-b68a-c29f786832cc@cherry.de>
- <CAFLszThQ+kyCkojFm2=VNtLTtLDYT4iVmpqnto8awiMVqsct0Q@mail.gmail.com>
- <20260427144630.GG41863@bill-the-cat>
- <CAFLszTgga6eFp2aPF-MzJEqeqcEV-bMJhb4_ph_bE-1Dv4e_Cg@mail.gmail.com>
- <20260429142547.GT41863@bill-the-cat>
- <eab00828-0e87-4761-afc8-1a3295d18a26@cherry.de>
- <CAFLszTgKRS7xebQ0Y7+fOsTM7aUwnEH55L_H_NbaN_p=70THDg@mail.gmail.com>
- <20260504173544.GI1614990@bill-the-cat>
-In-Reply-To: <20260504173544.GI1614990@bill-the-cat>
-From: Simon Glass <sjg@chromium.org>
-Date: Mon, 4 May 2026 14:40:30 -0600
-X-Gm-Features: AVHnY4L35OQT7R13tnyjo2JrSUBoEd9vGzW1vYsiBQFRVVarjwGjkkI7ytfC5is
-Message-ID: <CAFLszTjESKRGDD3wi4ftxRdXR1X2JZcqybOMHdUYboZ7xjN3Qg@mail.gmail.com>
-Subject: Re: Couple of clang warnings for Rockchip boards
-To: Tom Rini <trini@konsulko.com>
-Cc: Quentin Schulz <quentin.schulz@cherry.de>,
- U-Boot Mailing List <u-boot@lists.denx.de>, 
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>, 
- Jonas Karlman <jonas@kwiboo.se>, Xuhui Lin <xuhui.lin@rock-chips.com>, 
- Heiko Stuebner <heiko@sntech.de>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Sebastian Reichel <sebastian.reichel@collabora.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -124,160 +101,116 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 4 May 2026 at 11:35, Tom Rini <trini@konsulko.com> wrote:
->
-> On Mon, May 04, 2026 at 05:14:13AM -0600, Simon Glass wrote:
-> > Hi Quentin,
-> >
-> > On Wed, 29 Apr 2026 at 10:32, Quentin Schulz <quentin.schulz@cherry.de> wrote:
-> > >
-> > > On 4/29/26 4:25 PM, Tom Rini wrote:
-> > > > On Wed, Apr 29, 2026 at 08:18:14AM -0600, Simon Glass wrote:
-> > > >> Hi Tom,
-> > > >>
-> > > >> On Mon, 27 Apr 2026 at 08:46, Tom Rini <trini@konsulko.com> wrote:
-> > > >>>
-> > > >>> On Mon, Apr 27, 2026 at 11:54:09PM +1200, Simon Glass wrote:
-> > > >>>> Hi Quentin,
-> > > >>>>
-> > > >>>> On Thu, 23 Apr 2026 at 22:24, Quentin Schulz <quentin.schulz@cherry.de> wrote:
-> > > >>>>>
-> > > >>>>> Hi Simon,
-> > > >>>>>
-> > > >>>>> On 4/22/26 11:57 PM, Simon Glass wrote:
-> > > >>>>>> Hi Quentin,
-> > > >>>>>>
-> > > >>>>>> On Thu, 23 Apr 2026 at 01:26, Quentin Schulz <quentin.schulz@cherry.de> wrote:
-> > > >>>>>>>
-> > > >>>>>>> Hi all,
-> > > >>>>>>>
-> > > >>>>>>> I'm looking into force-enabling CONFIG_WERROR for all Rockchip SoCs.
-> > > >>>>>>> First, let me know if this is a bad idea :)
-> > > >>>>>>
-> > > >>>>>> I don't like it, as it makes development slower. I like to see all the
-> > > >>>>>> warnings created by a change and tend to fix them iteratively. We
-> > > >>>>>> already have a warning check in CI. A better approach is to
-> > > >>>>>>
-> > > >>>>>> Can you use: KCFLAGS=-Werror
-> > > >>>>>>
-> > > >>>>>> either in your environment or on the 'make' cmdline?
-> > > >>>>>>
-> > > >>>>>
-> > > >>>>> Well, if it's during development, you can always disable WERROR? The
-> > > >>>>> fact that I've never actually enabled -Werror locally in about a decade
-> > > >>>>> in U-Boot probably isn't a good sign. One of the things that make me
-> > > >>>>> wary though is compiler updates with new warnings. I've tested with
-> > > >>>>> clang 22, don't know when clang 23 is planned to be released. GCC 16 is
-> > > >>>>> about to be released as well.
-> > > >>>>>
-> > > >>>>> By having the check in CI, we have a longer-than-necessary feedback loop
-> > > >>>>> for contributors. Has this been an issue in the past? /me shrugs
-> > > >>>>
-> > > >>>> This is strange though, because people should see the warnings during
-> > > >>>> development. I wonder if it is scrolling off the screen.
-> > > >>>>
-> > > >>>> One my bugbears is non-actionable output. When the build succeeds
-> > > >>>> (with no warnings) I see no output, using 'buildman -I --board xxx -w
-> > > >>>> -o /tmp/b/xxx' or in fact these days 'um build xxx'. This uses 'make
-> > > >>>> -s' under the hood, so that it doesn't print a huge list of filenames,
-> > > >>>> etc. I also sometimes do a 'fresh' build with 'um build -F xxx' to
-> > > >>>> check everything is clean ('buildman -m' does something similar).
-> > > >>>>
-> > > >>>> Note that buildman returns exit code 101 if there are any warnings, so
-> > > >>>> the build basically fails.
-> > > >>>>
-> > > >>>>>
-> > > >>>>> No defconfig seems to be setting this option, not sure exactly why that is.
-> > > >>>>
-> > > >>>> To me this is a difference between 'functionality' options and
-> > > >>>> development options. Putting development options in Kconfig makes it
-> > > >>>> harder to turn them on and off, since you must either edit the
-> > > >>>> defconfig or edit the .config file. It is easier to just pass an
-> > > >>>> environment variable.
-> > > >>>
-> > > >>> The point of a configuration is that it configures the build. Stuff in
-> > > >>> environment (directly or make FOO=bar) is a workaround and anti-pattern.
-> > > >>> Having to run one of the config front-end to change the config is a
-> > > >>> feature, and good thing.
-> > > >>
-> > > >> To give an example, we have boards which enable LTO, but it is
-> > > >> sometimes useful to disable it during development - it used to be a
-> > > >> huge time sync but something seems to have changed recently, as I
-> > > >> don't see much of a performance gap now. We don't want people
-> > > >> disabling LTO in the defconfig, though. The same applies for things
-> > > >> like V=1
-> > > >>
-> > > >> So I think there are build features which are of no use to end-users,
-> > > >> but are helpful for development. That is the distinction we have had
-> > > >> for a while and it would be a shame to lose it.
-> > > >
-> > > > Yes, the LTO thing is a good example of something we shouldn't have done
-> > > > really. Outside of sandbox you cannot just disable it.
-> >
-> > Are you sure about that?
->
-> Yes. Outside of sandbox LTO is enabled because the platform binaries
-> will exceed their non-optional size constraints.
+From: Raymond Mao <raymond.mao@riscstar.com>
 
-That is certainly true for some boards, but I'm not sure it is very many.
+Coverity Scan defects are observed in fdtdec_apply_bloblist_dtos(),
+since the live FDT taken from the bloblist is passed to libfdt helpers
+which consume header size/offset fields:
+- fdt_open_into()
+- fdt_pack()
+- bloblist_resize(..., fdt_totalsize(...))
 
->
-> > I seldom build with LTO, except for CI. For
-> > an incremental build the non-LTO is often twice as fast. Most of the
-> > time when developing new features I am just trying to make things
-> > work, so it is big time-saver in the IDE. To some extent this is
-> > changing, though (LSPs and AI tools). The main impact for me is with
-> > sandbox incremental builds.
->
-> We could maybe just drop LTO from sandbox, now that it's enabled more
-> widely on hardware.
+Add a small helper to validate the FDT header and confirm that the
+advertised totalsize fits within the currently allocated bloblist
+record. Use the sanitized size before calling fdt_open_into(), again
+after overlays are applied before calling fdt_pack(), and once more
+after packing before shrinking the bloblist record.
 
-The nice thing about LTO for sandbox is that it tests a different
-build path. We could perhaps disable it for just the 'sandbox' board?
+This keeps the existing flow unchanged while making the size consumers
+operate on validated FDT metadata.
 
->
-> > > >
-> > >
-> > > FYI, the Linux kernel defaults to CONFIG_WERROR=y. See commit
-> > > 3fe617ccafd6 ("Enable '-Werror' by default for all kernel builds")
-> > > (https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=3fe617ccafd6f5bb33c2391d6f4eeb41c1fd0151).
-> >
-> > Do we suffer from this same problem?
-> >
-> > >
-> > > I wouldn't necessarily recommend to switch it on right now, but I think
-> > > it could be a good idea in the mid-term. We're also very far behind in
-> > > terms of warn flags compared to the kernel. Syncing will take some time
-> > > though. For now I'm looking into enabling -Werror for host tools and
-> > > this resulted in (so far) 21 patches.
-> >
-> > I must be misunderstanding what you are referring to here. I don't see
-> > any warnings when building tools-only - certainly I would not put up
-> > with that. Do you mean that you are enabling additional warnings?
-> >
-> > We already have CI checking (which fails on the first warning) and we
-> > already show the warnings for normal builds. Importantly, without
-> > -Werror, we show *all* the warnings rather than just stopping at the
-> > first one depending on -j, etc.
-> >
-> > So forcing this option seems to be a tax on people who fix warnings,
-> > imposed by those who don't. It really should be the other way around
-> > :-)
-> >
-> > BTW we do have KCFLAGS which can be used to set Werror (and also
-> > perhaps other things).
->
-> I'll note that I just had to request changes on another patch because
-> they didn't realize warnings had to be fixed. It's quite likely that
-> making CONFIG_WERROR=y will save more people more time (maybe document
-> make -k? I don't know what people don't know about these days, but I do
-> "make -kj" a lot when doing the randconfig stuff for example) than what
-> we do today.
+Fixes: b70cbbfbf94f ("fdtdec: apply DT overlays from bloblist")
+Addresses-Coverity-ID: CID 645837: (TAINTED_SCALAR)
+Signed-off-by: Raymond Mao <raymond.mao@riscstar.com>
+---
+changes in v2:
+- Rebased on master.
 
-Yes, could be, particular if people are not using -s with make. I
-really dislike warnings quite a lot. I'd be happy enough with
-CONFIG_WERROR if we have an env var to disable -Werror like we have
-for LTO.
+ lib/fdtdec.c | 43 +++++++++++++++++++++++++++++++++++++++----
+ 1 file changed, 39 insertions(+), 4 deletions(-)
 
-Regards,
-Simon
+diff --git a/lib/fdtdec.c b/lib/fdtdec.c
+index 2d66860f6ed..601f418db6e 100644
+--- a/lib/fdtdec.c
++++ b/lib/fdtdec.c
+@@ -1744,9 +1744,31 @@ static int fdtdec_apply_dto_blob(void **blob, __maybe_unused int size)
+ 	return fdt_overlay_apply_verbose((void *)gd->fdt_blob, *blob);
+ }
+ 
++static int fdtdec_get_valid_fdt_size(const void *fdt, int alloc_size,
++				     int *fdt_sizep)
++{
++	int ret, fdt_size;
++
++	/*
++	 * Validate the header before libfdt trusts any header offsets/sizes.
++	 * Also make sure the advertised totalsize fits in the bloblist record.
++	 */
++	ret = fdt_check_header(fdt);
++	if (ret)
++		return ret;
++
++	fdt_size = fdt_totalsize(fdt);
++	if (fdt_size > alloc_size)
++		return -FDT_ERR_TRUNCATED;
++
++	*fdt_sizep = fdt_size;
++
++	return 0;
++}
++
+ static int fdtdec_apply_bloblist_dtos(void)
+ {
+-	int ret;
++	int ret, live_fdt_size;
+ 	struct fdt_header *live_fdt;
+ 	int blob_size;
+ 	size_t padded_size, max_size;
+@@ -1760,8 +1782,12 @@ static int fdtdec_apply_bloblist_dtos(void)
+ 	if (live_fdt != gd->fdt_blob)
+ 		return -ENOENT;
+ 
++	ret = fdtdec_get_valid_fdt_size(live_fdt, blob_size, &live_fdt_size);
++	if (ret)
++		return ret;
++
+ 	/* Calculate the allowed padded size */
+-	padded_size = fdt_totalsize(live_fdt) + CONFIG_SYS_FDT_PAD;
++	padded_size = live_fdt_size + CONFIG_SYS_FDT_PAD;
+ 	max_size = bloblist_get_total_size() - bloblist_get_size() + blob_size;
+ 	if (padded_size > max_size)
+ 		padded_size = max_size;
+@@ -1772,6 +1798,7 @@ static int fdtdec_apply_bloblist_dtos(void)
+ 		if (ret)
+ 			return ret;
+ 
++		blob_size = padded_size;
+ 		ret = fdt_open_into(live_fdt, live_fdt, padded_size);
+ 		if (ret)
+ 			return ret;
+@@ -1781,12 +1808,20 @@ static int fdtdec_apply_bloblist_dtos(void)
+ 	if (ret)
+ 		return ret;
+ 
+-	/* Shrink the blob to the actual FDT size */
++	ret = fdtdec_get_valid_fdt_size(live_fdt, blob_size, &live_fdt_size);
++	if (ret)
++		return ret;
++
+ 	ret = fdt_pack(live_fdt);
+ 	if (ret)
+ 		return ret;
+ 
+-	return bloblist_resize(BLOBLISTT_CONTROL_FDT, fdt_totalsize(live_fdt));
++	ret = fdtdec_get_valid_fdt_size(live_fdt, blob_size, &live_fdt_size);
++	if (ret)
++		return ret;
++
++	/* Shrink the blob to the actual FDT size */
++	return bloblist_resize(BLOBLISTT_CONTROL_FDT, live_fdt_size);
+ }
+ 
+ int fdtdec_setup(void)
+-- 
+2.25.1
+
