@@ -4,92 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55364FF885A
-	for <u-boot@archiver.kernel.org>; Mon,  4 May 2026 20:30:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56B0CFF885A
+	for <u-boot@archiver.kernel.org>; Mon,  4 May 2026 20:31:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 81253846FA;
-	Mon,  4 May 2026 22:30:53 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B7417846F9;
+	Mon,  4 May 2026 22:30:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="TIOexAXx";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="kKJldvwg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C7FBA846FA; Mon,  4 May 2026 22:30:51 +0200 (CEST)
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [IPv6:2a00:1450:4864:20::632])
+ id B975584704; Mon,  4 May 2026 22:30:56 +0200 (CEST)
+Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
+ [IPv6:2a00:1450:4864:20::630])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E2FB6846A0
- for <u-boot@lists.denx.de>; Mon,  4 May 2026 22:30:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 880D8846F4
+ for <u-boot@lists.denx.de>; Mon,  4 May 2026 22:30:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-bad54961385so767304666b.2
- for <u-boot@lists.denx.de>; Mon, 04 May 2026 13:30:49 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1777926649; cv=none;
+Received: by mail-ej1-x630.google.com with SMTP id
+ a640c23a62f3a-ba67b332bbaso649273366b.0
+ for <u-boot@lists.denx.de>; Mon, 04 May 2026 13:30:54 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1777926654; cv=none;
  d=google.com; s=arc-20240605;
- b=loNIvLPrUOVKyjSJXTrjzgyKcUURN8Zb0kBUb4fpoHjheJDl8Bfdotzy/NwbQREpc4
- m13QI4CUpNxCuRFVObj6Fr4eZC8QxRN071abBShZiuxhT+xzwLOkHiO7eadXbs/w1o9/
- 3Gn6QCkLFRc7cqbNlx8PVlMbpLuFL6w/eEO69duzKYhoK2YAmsIKeWvj5coab83RlJw1
- LvMZnxlhicTaNL16QUomjju/JrdKN7qUi0pYulez/W0uYAPIHRFx2TpnmZFoIImZ4yz0
- BEIExPcuoVHoFXBU+EWofl51CfgjmhhIlDZqwL7gII+DEsoc62ftYjACIrCAfTLksCgM
- wixA==
+ b=kwZyxnxSkkcguBiCPy5FqdRp0zuaT7MySrxeheu95B8RWqAmRsMKqw7JMPFS8+8n0x
+ xBTWFgj1euD2aUT0Rmx7TNUPS7YANF4NlQWaEfwXh3IPoRyTYjNnaQyoS3kbX1DDNzyJ
+ xrj3o5L7EkXhrKrktvurCZ6RmrVbStDxPmDE0Y3/8S4Y3JmEuyZHPsXy1u2UH9DpcOeu
+ COA11D+zktJi3WbgEaQd1dx78P2Bc8gmGKa/l+kF6ct5+SBQM92sujgX7ndqy4zqxz62
+ xg3+l4xdTvuxthna4Yb8L9ye6+iIjqelUKztTRXeG+6OrlPMeLtjI998fB1di1oN/efC
+ ueAA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=Ffa/C3Sopb7KYbOqEjPcq6gjd+yfmw/0HkHWI8nxdIk=;
+ bh=UXYTN+dlQg1sWL+vMpyYX3hlM/RayIVNZ3Flb0pXg1g=;
  fh=JDmMtl5m1ONTYAIDZy3RW95Kei7pwM4OcFAim19m6HQ=;
- b=Dagdhsu69nm5vKQTDvqkY++KtZfP5i2hmL0aQ0tRNeJUXnm0b0OwNd1YXLEPFtXHrE
- JPrhrnS6/fAjoziam1P6C1hjGCX16QB/igniuvijlZm6r5flAzR7OcyaLD0TJPXYb5RE
- 8VTgaOxXQnSETw8gOKQPMfTrwaSq7Ga91/1M146m6GQotRupsIvxfc/XjDOze974DZy5
- 4yL2Fl7Ajg+jj0WdWoP5xTy8bRCPsxcJK03eMERUFlwWs4Mxk6NnTEO1QlBnfoxDBN/i
- 33XUQPhIh74ErBEVUOQmXKYqBv6bvvz1ESiRNbpkZMsQ3KFO79DHQx8rARjqUxXJcKHU
- Izgg==; darn=lists.denx.de
+ b=FyLVmkEFGMRQm/C9nolWbY+5FQQrZltoyc4eCPlyo1eiPApIaqPvTIHwB1AYSKie4k
+ LbopV97A9uXthzf5/cetncL/4uJ0k2annGPb6oRXVYicZooKCYbY1ULmf7VWEL9r93Xh
+ Sjwl+c+6cO96TyldvX9D8Qytx5B4JMcCVLfTCkHJmukbTYXM3kkJbvAzgPKG37MBSL40
+ ujQjzFdP+DiQe2rqcYqL/ilxQ+lmv7Hv1v4ecefdVstTzmBZtCupuRYYkhYK83+hOBNm
+ j3ENjIp/np261f0a0qTyXliyZJxQXBRjYctr+4uSj9RDKFPfq5IrOE+K7y2Ik+E226Al
+ rclA==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1777926649; x=1778531449; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1777926654; x=1778531454; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Ffa/C3Sopb7KYbOqEjPcq6gjd+yfmw/0HkHWI8nxdIk=;
- b=TIOexAXx0nNBy6Ug+jvwDxHH76uq30hWNqa7AJmUPV/zcnxljzSyCaIX/XK5Wuifnc
- JdWqMS6OtHB30aK9TdeHuvdmt57TsejopzN8aerpta5pLBvMRPToQfSITwBNvFTgUCfG
- JER7N5u6ZI3kRsjsMO1dNLNvXwndjoqebzSIg=
+ bh=UXYTN+dlQg1sWL+vMpyYX3hlM/RayIVNZ3Flb0pXg1g=;
+ b=kKJldvwggjjFPrxTobGKUq4L/nPKOq2CFFQYHrOYFnw8OpBJY9s9IvIhjAeg5IcvdU
+ fgKOhpmUgb6aBGDo5tZIJkrL3sLLiMniGDT3OQY0y2EFh3o/VjquE78czDCFLuROAWQe
+ aEcMqUz1uijztNhcl6kgLLWe5fPsBZP5+FRZs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777926649; x=1778531449;
+ d=1e100.net; s=20251104; t=1777926654; x=1778531454;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Ffa/C3Sopb7KYbOqEjPcq6gjd+yfmw/0HkHWI8nxdIk=;
- b=MZlCFaRuaMb/sj1+nwGDi/lox0OyB1khoZ99fTnJKXSYczyosYZgYq+Ooz6rTvmIP6
- 0fzEcJErwu7U21ekLnhaGU7l2pVV4D41JeWpr7iU6E66ygU7ED/cvqcZQj6qKEnZ8o3w
- ICJ9j2N4oRrIIsfOQJMlOzOg7Xze2qVJZsgl+Gpac8OZVOdNpEpM/lwv0qg5TOZKJEit
- 8t1KJvAWVcT1+BlsgJizQELXluvd9C+DTKaJXK1ghFFBIktW/yxF/wfQGEb2tx/f0IAV
- IN0l2qvxGqHQWtjOvAURHxFCGlb8eeax0xofzaH9zYZR2db1/R4QiNgau/KsztM04Aeq
- am/w==
-X-Gm-Message-State: AOJu0Yz+yAIK9d7WY/XoNQ7Y/WMclKnpAMKHQZAmSjfSoVMnMefyK6h0
- FBU7xvvDEubt/49BUvvA3p6NE7mh4Q3+h9yImzXsveC8yuxYkxATIWw59BNq3rxflEL0E3LdWq8
- OK51Pv3kz0I08v2R+WyeSbzVlUA5JKgox2gbIhBw8
-X-Gm-Gg: AeBDiet9hwKiKJqGlOJ8hoFmtHymcWlrQFRDFboVEqd9fA1F2e3BXvBCJPeoXHupWR0
- uqRMqIkZezPq4j5YJON0I+ND0BEM9fzO5xxDPTkd7f7vCGOxFRBU36FCL/MniEvoKQF1/h8tHqW
- rXD/EhMvi2BOWfuf9crddyMqI4Ngkh770a9VYU6qP9IzjqJTSHl1ByQ8lyvYZHsiX0F6N9D8yav
- p/sDtIeBr4D9XsBezYyfYNruA13KDrdf27ihnMbmuHh0XhLA/s+3rT7h6AugD4VVNs5jE1yWZUM
- 8aJVTJRM8nKyJfvt
-X-Received: by 2002:a17:907:2da0:b0:b98:286a:e2c2 with SMTP id
- a640c23a62f3a-bc411d282b7mr4895666b.38.1777926649370; Mon, 04 May 2026
- 13:30:49 -0700 (PDT)
+ bh=UXYTN+dlQg1sWL+vMpyYX3hlM/RayIVNZ3Flb0pXg1g=;
+ b=JjKZPxPz9ZMRbhl3HX4GYSjklqop3hywcILmdqGK+6L5Gj271vtrZwRLSLROcGb0JZ
+ JxPsL6rQbTD1AJ4PwocTGUQWi/W3QHboMZkLZ+J9EE0qHbIz4rq7tCKcwemJb/5VrFrZ
+ 6MGOzncyH29BkiChJY9LwA8qTON/70NBT/XiMMfFgLQ8SUoe6+eecR3Jx2AcnKNfOqC9
+ vgVtHXFFTQgwc0iyr4qpPF6tDeLOz3VNOq7G5zNEAD7mCf+dCLy3Z8yfwQWyxMspgvUp
+ 3W/gic35kz+7SQ6a+60ADpuRxPS+cx+fc5A9euj/Ou+3hWQy6GviMu00XKIK/wc1MLUH
+ t0AQ==
+X-Gm-Message-State: AOJu0YxOy/w/CFuEIxZIXuIZWGvKNsMw0D3zMRDyFpm+j/fFuZ/63OhS
+ 4mu7M+/e3Pci+t8ethFLozDbVZT0jCBTeJgbkTDVOukqSmrsGEJriZoeuB/h1tHq06xODKC2sKp
+ Bat0+WN2EUQsoUG09mkRGDWcWfRr9bGJRt3HBmmgO
+X-Gm-Gg: AeBDiesMMFtoxkId4xGFDdD2ElWhmfOqwNjMAoQ00/6uJkrQYhZ7Tvt5KmuSa8uiHxF
+ bSvNYKAwcxEaKj5RfDjKC4q23QhBmBNKBj0XoNTzix9Cdn5JpuSlghuDj8aDuS8Grr1BIY9EOE1
+ r9OBmJpMK5OQoPjWLoI1ugj2oCuTNj8utP1lUaPHuIq3fqzqfUNNPKolBKzzGitBDWw3srDEbYt
+ WA10osKVYadLnf3PWySrI98F9xkdUBQFRskTX/1oaDiSpfFWgA8brIX1VMBi1mOr7G6lv0+GEaw
+ t+hYLL+shi35fq1wFmtqy8B1wZg=
+X-Received: by 2002:a17:907:7b97:b0:b9c:b682:83bd with SMTP id
+ a640c23a62f3a-bbff8dc8694mr659546066b.4.1777926653855; Mon, 04 May 2026
+ 13:30:53 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260504-extrawarn-sync-v1-0-b19301d1948a@cherry.de>
- <20260504-extrawarn-sync-v1-4-b19301d1948a@cherry.de>
-In-Reply-To: <20260504-extrawarn-sync-v1-4-b19301d1948a@cherry.de>
+ <20260504-extrawarn-sync-v1-5-b19301d1948a@cherry.de>
+In-Reply-To: <20260504-extrawarn-sync-v1-5-b19301d1948a@cherry.de>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 4 May 2026 14:30:33 -0600
-X-Gm-Features: AVHnY4Kj8GoX_SaVpYd1ixE5ySbAeHOXN1_fzJqLkzt_97NbeFXlYkrxviJi1z0
-Message-ID: <CAFLszTjO=C8=HFS6tg1uq-xgqjUKEzSUoS3Pqza+1MszZ7K0Qg@mail.gmail.com>
-Subject: Re: [PATCH RFC next 04/18] kbuild: re-enable int-in-bool-context
- warning
+Date: Mon, 4 May 2026 14:30:35 -0600
+X-Gm-Features: AVHnY4IUCW5GgkhBPjGrB7YPDgHmFC6j0FPEM-Lu7KMTyLg0xBAcJJkhtvNsuLs
+Message-ID: <CAFLszTj_FfPuhL-adQxviRP-96YSFa8kTR1QpKUcWE=9M-3+OQ@mail.gmail.com>
+Subject: Re: [PATCH RFC next 05/18] kbuild: Don't try to add
+ '-fcatch-undefined-behavior' flag
 To: foss+uboot@0leil.net
 Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
  Simon Glass <sjg@chromium.org>, Mattijs Korpershoek <mkorpershoek@kernel.org>, 
@@ -121,29 +121,22 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 2026-05-04T13:20:27, Quentin Schulz <foss+uboot@0leil.net> wrote:
-> kbuild: re-enable int-in-bool-context warning
+> kbuild: Don't try to add '-fcatch-undefined-behavior' flag
 >
-> [ Upstream commit a3bc88645e9293f5aaac9c05a185d9f1c0594c6c ]
+> [ Upstream commit 7eb8e5f073051eebbf55fa6b90ed2246c2274552 ]
 >
 > Original commit log:
 >
->   This warning was disabled by commit bd664f6b3e37 ("disable new
->   gcc-7.1.1 warnings for now") just because it was too noisy.
+>   This is no longer a valid option in clang, it was removed in 3.5, which
+>   we don't support.
 >
->   Thanks to Arnd Bergmann, all warnings have been fixed. Now, we are
->   ready to re-enable it.
+>   https://github.com/llvm/llvm-project/commit/cb3f812b6b9fab8f3b41414f24e90222170417b4
 >
+> [git conflict in context due to commit 52ee1a0294e8 ("global: Disable
+>  deprecated-non-prototype warning with clang")]
 > Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 >
 > Makefile | 1 -
 >  1 file changed, 1 deletion(-)
-
-> diff --git a/Makefile b/Makefile
-> @@ -897,7 +897,6 @@ KBUILD_CFLAGS     += $(call cc-option,-fno-delete-null-pointer-checks,)
->  KBUILD_CFLAGS        += $(call cc-disable-warning,frame-address,)
->  KBUILD_CFLAGS        += $(call cc-disable-warning, format-truncation)
->  KBUILD_CFLAGS        += $(call cc-disable-warning, format-overflow)
-> -KBUILD_CFLAGS        += $(call cc-disable-warning, int-in-bool-context)
->  KBUILD_CFLAGS        += $(call cc-disable-warning, address-of-packed-member)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
