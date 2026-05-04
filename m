@@ -4,87 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF51DFF885A
-	for <u-boot@archiver.kernel.org>; Mon,  4 May 2026 17:55:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E87BFF885A
+	for <u-boot@archiver.kernel.org>; Mon,  4 May 2026 18:04:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4E68F8467A;
-	Mon,  4 May 2026 19:55:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 9BC2484687;
+	Mon,  4 May 2026 20:04:40 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="DFzPomsO";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="TEyAou21";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D86B28467B; Mon,  4 May 2026 19:55:25 +0200 (CEST)
-Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
- [IPv6:2a00:1450:4864:20::331])
+ id AADB48467A; Mon,  4 May 2026 20:04:39 +0200 (CEST)
+Received: from mail-oa1-x42.google.com (mail-oa1-x42.google.com
+ [IPv6:2001:4860:4864:20::42])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C9CFC80F0E
- for <u-boot@lists.denx.de>; Mon,  4 May 2026 19:55:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4C80D84686
+ for <u-boot@lists.denx.de>; Mon,  4 May 2026 20:04:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-48a563e4ef7so42158415e9.0
- for <u-boot@lists.denx.de>; Mon, 04 May 2026 10:55:22 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x42.google.com with SMTP id
+ 586e51a60fabf-40f0e14b9f9so3172861fac.1
+ for <u-boot@lists.denx.de>; Mon, 04 May 2026 11:04:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1777917322; x=1778522122; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=M9UkPO56j0Qek9szbPKIs4NmRNBhasazroYlSkGGTxo=;
- b=DFzPomsO9UcBvW6aKNicf4P80xkqYTK5Da6pdetGA/bvQzaYoNjteiUrwspCGHrvy2
- lHUnmzwfJh3iJqRZgjvJsGDbNsne1UKXIFsUzWJmrp92Eacgl/mqS/H11ZF6OK1snEWu
- k20YWUy0aJ/bk1mhm29TiPdJQIysE5JV6I5JN/t5DJdmKB8emjJ/ly+XdVQyZmhUdG7n
- k6Q6cp8yanTLdJW7Sf60sm1+NC1OakDY1MJsuoJM9y+thagDIVMExv+BRkxG1j9wlh0Y
- LmeURU0vCwjsFLHnMsxSvvM4DNAHU6MvC5Tc+hY4cncThrR/cnGxZUsfHiQOGGmRA8uR
- m4bg==
+ d=konsulko.com; s=google; t=1777917873; x=1778522673; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=yfk0hCmy80+fh0FlntF1tRv/EvPPiI5wsdih5eriD+g=;
+ b=TEyAou21Q2WIYO6e15zE2Gs7OkTvwrHIkPe9RpFxdBQApuNxg9wGSmtVU5ql7VNO1n
+ VBHnsdVHSl3bCID5+SfEtrkD2JWjmmfxosA4MeQw3ZWk4eAlI8qyJln4GZuOF2HrWFwz
+ x00sRqm263CqpniqxBbwoShR5HvReUXyQON7w=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777917322; x=1778522122;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=M9UkPO56j0Qek9szbPKIs4NmRNBhasazroYlSkGGTxo=;
- b=DwZug0qrIsE+AugeWnMnhYvP/9ITU+qc1ctrJdqoRoeaNHr5EMHUXwx6j9RfLRpD4s
- cjN/ZgYQ1n6VyS+Fqb7ps5L1Z2woJ/BfmphnTYE3EYmnjWL646YBWmW3NjEYoZF7R0Ev
- 0Y/Ktv/V0j7hqseIuhy70F4tXEJm1PXcjEySb1h1Yys1u+7eUfY3bsSHPVOUysIUQjqF
- nfNaEoGV02Zuvg9lpsGdL7am9iy4G0QP02xi4uPRznWlE8PjM+2j+zqJHJDv/+p2gN3t
- FPaNZwXqmSY1BaKIQbEHPsvXJpSCZyO/WNp17DTujJDAKM3s3x4evEa3iWdEhhZKC4Hr
- 8oWg==
-X-Forwarded-Encrypted: i=1;
- AFNElJ9VZMGvjDb07GseqrdLfmQ0rXzY80nsgIEw1baRKrSRtY+qGHxVSzPHd6+tDjM4yhN0jf4E46M=@lists.denx.de
-X-Gm-Message-State: AOJu0YyQlEhK2dZ30IR/bYv6iWD6x913zSkYXxaNfE1GTu4+kejMBgLS
- wWnV++/d9x5LYpvZE4AQkbvAtrXe3WhcnWLaUrDgHLfStSBosaZNEeLm/hAz7NvZBO0=
-X-Gm-Gg: AeBDiesyvgpKiDP6m/JuluLq/1VemFIUuULbgMTG2sdSANSj/1EFq3E1QttgEOeF2LD
- Ld1wsrFIWvCzxdJuUX7RBx+dwY37Malem5beqR2zDqVaNrxbU79itNpo2/xF0VjTi5lCSqjk2EI
- ccYrWdmSZwjuQfaCGWiQSjHCQgHaMzQK2aDiwauscc6VRpTrFPeGv81HwxYLWkU2tPM3i+d6aeR
- mOSwPIuVyW66so6pBZ7YOgftgbXsjQLntotqdvpVvcRVRdzDo9lyLn0bUMRscQ8WDruEDTwvr8g
- Tr2L7dNF0eTJA9PrQ7GaEZd6ROBgaZFYsqEYw4pQtl4FI5/WFGjqoE3ON8xqSyUARnF9GxUMyjZ
- U+m/A+WvczUIpi3Cn86kuAJ1LxKpJrIR7Q8Vq8Be/7x9krjE76Tmfvhj5tDTA22+W/OJGYEc8Tj
- K2juglWlXJMxg+G+tzScCubgFFGBYn+6L1LH1a13a7LtEeF6dU6hA48PE1DvxuIW6Ha2nakwqF9
- VaRg9GtKZT1ik8=
-X-Received: by 2002:a05:600c:c089:b0:48a:75b9:b0bc with SMTP id
- 5b1f17b1804b1-48a98676df6mr154881865e9.29.1777917322209; 
- Mon, 04 May 2026 10:55:22 -0700 (PDT)
-Received: from lion.tail248178.ts.net (p4fc3dd86.dip0.t-ipconnect.de.
- [79.195.221.134]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-44a981defa6sm25406013f8f.24.2026.05.04.10.55.21
+ d=1e100.net; s=20251104; t=1777917873; x=1778522673;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=yfk0hCmy80+fh0FlntF1tRv/EvPPiI5wsdih5eriD+g=;
+ b=jvu5AYiT24u+o7Jz1JEb1Vf2NDEqcr56yGtff/39qfUYeadGp81RYjWeFTtoJxrMzl
+ l2JaFIK07QDEwTW3WnqJlPlJzDqVCgU2fpzCAzK5fSfpuToA+48f+VmD05ajt1CYo9Uh
+ WRq1go8AOSMzHOL2hDjlzDavDHS0Dyh35UUmIm4AAMSaQVyLCR4tgw1R4xO6Z9VjvKh1
+ 79J5yGcKwporskpO6PWx3EHtp2sdqMX+7sb0KoZtA6qCltrHjGO7rEax9MlCRWyxl4r0
+ hwewDlNIISckaX6f0T/RH/QokBqhinpszUD7e297/XQ00VThOUgE+jhhVOHJZYZAN1bB
+ VSFA==
+X-Gm-Message-State: AOJu0Yzm3iXbWsWAVmE9rh41VOHhyQvp/ZvO9EvHKbvg0xH4cTjliwHM
+ SveyzNshUOsW5gHrVa54xutwY2abXMHvIpGbzZ3Wz/SjeCe1icOf4PYdrmrbbA1v3U8=
+X-Gm-Gg: AeBDietxyWo2geZG6fVbuBecKAMvd56XdUHv5sePTD71ZYzm5a06dalwq75F1IvJfHO
+ nvrRT+Gu75bbtmcw+qSP72vlsV/kmlEzzXyjlnS4Glyyu68Fs0wPGWVIqkCLbKrF9hlXAqdYUUK
+ TPA/hzNRoqqNla/07i0JTJvYxnT3PJ78+y//2mSBI5H7m+CC806Inl0rhMeq8BK1sopAp8Zj7yN
+ suoloY/XRjIZOEgMT++kSKbrBMcHPsDLCHaBbEUm8gRKbcD3qj7siZlcvWHosdQzNbrmeUspa+0
+ GOwSCNqBvJX7XCL6Eu3jb3ZZCFhNgQp5BgPTp8TC4CDRDnKexTmO3PjLtyKd345o7uk00kSGNbw
+ PVufWhmgNBTKxNINbOweVS66OBjHaVBXDwe2f6ab3883GGWZ9nTfAQpsnfoseyJ70W/hCjPmmgP
+ +ImheiBr+8D1dFwrDMwflHCaHj54AYF58uYAf0Jjq6cDhohnG+zjFdw523S5+ibz0xZgvZyFRPW
+ Y10slBqeC30u2zpwKDDpjM2SoJCOKvkf0zML/IsXE6MEXPmFvCRv+/4xIJFDA==
+X-Received: by 2002:a05:6870:89a2:b0:430:3ddf:9712 with SMTP id
+ 586e51a60fabf-43475f950c4mr5879137fac.5.1777917872930; 
+ Mon, 04 May 2026 11:04:32 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
+ [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-43454cbd8dbsm11433727fac.11.2026.05.04.11.04.31
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 04 May 2026 10:55:21 -0700 (PDT)
-From: Casey Connolly <casey.connolly@linaro.org>
-To: Anshul Dalal <anshuld@ti.com>, Casey Connolly <casey.connolly@linaro.org>,
- Dhruva Gole <d-gole@ti.com>,
+ Mon, 04 May 2026 11:04:32 -0700 (PDT)
+Date: Mon, 4 May 2026 12:04:29 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Quentin Schulz <foss+uboot@0leil.net>
+Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ David Lechner <dlechner@baylibre.com>,
+ Jerome Forissier <jerome.forissier@arm.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Simon Glass <simon.glass@canonical.com>,
+ Raymond Mao <raymondmaoca@gmail.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Mark Kettenis <kettenis@openbsd.org>, Tom Rini <trini@konsulko.com>
-Cc: u-boot-qcom@groups.io,
-	u-boot@lists.denx.de
-Subject: [PATCH] armv8: mmu: support unmapping regions with set_one_region()
-Date: Mon,  4 May 2026 19:53:54 +0200
-Message-ID: <20260504175511.585797-1-casey.connolly@linaro.org>
-X-Mailer: git-send-email 2.53.0
+ Michal Simek <michal.simek@amd.com>, Adriano Cordova <adrianox@gmail.com>,
+ Sughosh Ganu <sughosh.ganu@arm.com>, Yao Zi <me@ziyao.cc>,
+ Rasmus Villemoes <ravi@prevas.dk>,
+ Quentin Schulz <quentin.schulz@cherry.de>
+Subject: Re: [PATCH RFC next 00/18] sync scripts/Makefile.extrawarn with 6.1, 
+ enable WERROR for host tools
+Message-ID: <20260504180429.GJ1614990@bill-the-cat>
+References: <20260504-extrawarn-sync-v1-0-b19301d1948a@cherry.de>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="zoEmg6758z+9ZUHj"
+Content-Disposition: inline
+In-Reply-To: <20260504-extrawarn-sync-v1-0-b19301d1948a@cherry.de>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,64 +109,94 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Currently set_one_region() implicitly assumes that we want to map a
-region and aggressively splits blocks into tables to do this, but when
-called with PTE_TYPE_FAULT to unmap a currently mapped region it may
-try to unnecessarily split blocks which doesn't make sense if the entire
-block should actually be unmapped. In the end it then has to walk every
-single page and create a bunch of empty tables.
 
-Introduce a check for this kind of behaviour and optimise with a fast
-path, if we're unmapping a region >= the size of this entry then we can
-just unmap the entire PTE and whatever it contains.
+--zoEmg6758z+9ZUHj
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-This fixes some bogus empty tables being left behind when carving out
-reserved memory regions on Qualcomm, and should improve the performance
-of the break-before-make in mmu_change_region_attr().
+On Mon, May 04, 2026 at 03:20:27PM +0200, Quentin Schulz wrote:
 
-Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
----
- arch/arm/cpu/armv8/cache_v8.c | 16 ++++++++++++++++
- 1 file changed, 16 insertions(+)
+> I ended up being surprised host tools aren't compiled with -Werror even
+> when CONFIG_WERROR is set.
+>=20
+> While this is an issue for local builds, buildman (used in CI) adds
+> -Werror to KCFLAGS and HOSTCFLAGS when passed -E (or
+> --warnings-as-errors), which we do, see
+> 'build all platforms in a single job' job and &buildman_and_testpy_dfn
+> template.
+>=20
+> It turns out that even though we claim to have synchronized our kbuild
+> with Linux kernel v6.1, some of it was stuck to v5.1 +- some partial
+> backports. This doesn't attempt to update everything that isn't in sync
+> with 6.1 though!
 
-diff --git a/arch/arm/cpu/armv8/cache_v8.c b/arch/arm/cpu/armv8/cache_v8.c
-index 39479df7b21f..b1a1fd571341 100644
---- a/arch/arm/cpu/armv8/cache_v8.c
-+++ b/arch/arm/cpu/armv8/cache_v8.c
-@@ -939,8 +939,20 @@ static u64 set_one_region(u64 start, u64 size, u64 attrs, bool flag, int level)
- 	int levelshift = level2shift(level);
- 	u64 levelsize = 1ULL << levelshift;
- 	u64 *pte = find_pte(start, level);
- 
-+	/*
-+	 * If we're trying to unmap a region then check if it's already unmapped or if it's bigger
-+	 * then the PTE we're looking at right now, in the first case we can do nothing and in the
-+	 * second case we just need to unmap this page/block.
-+	 * Otherwise we will needlessly create new tables until we have traversed every single page
-+	 * in the region.
-+	 */
-+	if (attrs == PTE_TYPE_FAULT && (pte_type(pte) == PTE_TYPE_FAULT || size >= levelsize)) {
-+		*pte &= ~PMD_ATTRMASK;
-+		return levelsize;
-+	}
-+
- 	/* Can we can just modify the current level block PTE? */
- 	if (is_aligned(start, size, levelsize)) {
- 		if (flag) {
- 			*pte &= ~PMD_ATTRMASK;
-@@ -1081,8 +1093,12 @@ void mmu_change_region_attr(phys_addr_t addr, size_t siz, u64 attrs)
- 	flush_dcache_range(gd->arch.tlb_addr,
- 			   gd->arch.tlb_addr + gd->arch.tlb_size);
- 	__asm_invalidate_tlb_all();
- 
-+	/* If we were unmapping a region then we're done! */
-+	if (attrs == PTE_TYPE_FAULT)
-+		return;
-+
- 	mmu_change_region_attr_nobreak(addr, siz, attrs);
- }
- 
- int pgprot_set_attrs(phys_addr_t addr, size_t size, enum pgprot_attrs perm)
--- 
-2.53.0
+Thanks for doing this. Having done a few of the previous re-syncs it's
+always hard to find every file that needs to be updated.
 
+> The first two patches are for fixing pytest calling make directly on a
+> "dirty" build directory as generated by buildman using the clang-20
+> toolchain, but pytest does not set HOSTCC and CC to clang-20, resulting
+> in clang flags being used with gcc).
+>=20
+> One can simply reproduce it (after backporting up to patch
+> "scripts/Makefile.extrawarn: sync with 6.1") by doing so in the
+> container:
+>=20
+> make HOSTCC=3Dclang-20 CC=3Dclang-20 O=3Dbuild/sandbox sandbox_defconfig
+> make HOSTCC=3Dclang-20 CC=3Dclang-20 O=3Dbuild/sandbox -j`nproc
+> make O=3Dbuild/sandbox u-boot-initial-env
+>=20
+> It'll print:
+> gcc: error: unrecognized command-line option '-mno-global-merge'
+> gcc: error: unrecognized command-line option '-Wformat-invalid-specifier'
+> gcc: error: unrecognized command-line option '-Qunused-arguments'
+>=20
+> This is essentially what's run within test_env_initial_env_file in
+> test/py/tests/test_env.py.
+>=20
+> While I'm not unhappy with the patches to pytest, it feels to me we may
+> be missing something else for the u-boot-initial-env make target to
+> update the kconfig symbol based on the toolchain being used when called.
+
+Is there some other target in the Makefile that should catch this kind
+of change? It's not just that build target that needs to be remade, it's
+everything, yes?
+
+> While looking at the kernel git history for Makefile and
+> scripts/Makefile.extrawarn I also saw a few flags being removed or
+> reworked so I took the liberty of backporting some.
+>=20
+> Then, scripts/Makefile.extrawarn is directly imported verbatim from v6.1
+> which is the version we've claimed to be synced with so far.
+>=20
+> Also, patches to apply CONFIG_WERROR to the host tools as well as linker
+> and assembler are backported.
+>=20
+> kernel-doc is made to ignore KBUILD_EXTRA_WARN since we have too many
+> warnings for now and it prevents us from being able to use W=3De Make
+> variable which is extremely convenient to essentially do the same as
+> setting CONFIG_WERROR in Kconfig, just without needing to actually set
+> it in the defconfig or in a .config. I don't like it but it is what it
+> is. Our kernel-doc has a couple of patches on top of Linux kernel
+> v5.11's. The kernel has moved to a Python script this year, so it's
+> probably wise to migrate to that before trying to tackle kernel-doc
+> warnings.
+
+This makes sense, yes.
+
+--=20
+Tom
+
+--zoEmg6758z+9ZUHj
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCafjfqgAKCRAr4qD1Cr/k
+CqEIAP9xVlyyOhx3gNLs0zizYE+KMgqKzhLyI8yvbE2lxcPe6gD/ZxwpP5SX+ErT
+CXMVAvPVKu/WNmssauiO9Okbw5IgVAk=
+=Wfre
+-----END PGP SIGNATURE-----
+
+--zoEmg6758z+9ZUHj--
