@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73141CD3430
-	for <u-boot@archiver.kernel.org>; Mon,  4 May 2026 13:21:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F5EDCD3430
+	for <u-boot@archiver.kernel.org>; Mon,  4 May 2026 13:21:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5AA31846A0;
-	Mon,  4 May 2026 15:20:53 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9C7D8846AC;
+	Mon,  4 May 2026 15:20:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=0leil.net header.i=@0leil.net header.b="QQyTpAb1";
+	dkim=pass (2048-bit key; unprotected) header.d=0leil.net header.i=@0leil.net header.b="j57WcsbA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 341AF8468B; Mon,  4 May 2026 15:20:51 +0200 (CEST)
-Received: from smtp-42ad.mail.infomaniak.ch (smtp-42ad.mail.infomaniak.ch
- [IPv6:2001:1600:7:10::42ad])
+ id 371218466D; Mon,  4 May 2026 15:20:52 +0200 (CEST)
+Received: from smtp-bc09.mail.infomaniak.ch (smtp-bc09.mail.infomaniak.ch
+ [IPv6:2001:1600:19:8e30::bc09])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1605084255
- for <u-boot@lists.denx.de>; Mon,  4 May 2026 15:20:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4971784686
+ for <u-boot@lists.denx.de>; Mon,  4 May 2026 15:20:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=foss+uboot@0leil.net
 Received: from smtp-3-0000.mail.infomaniak.ch (unknown
  [IPv6:2001:1600:4:17::246b])
- by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4g8Mhw5pK2zdqc;
- Mon,  4 May 2026 15:20:48 +0200 (CEST)
+ by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4g8Mhx63kkzfy9;
+ Mon,  4 May 2026 15:20:49 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=0leil.net;
- s=20231125; t=1777900848;
- bh=wNOe0KBuhA5n0d6iDlQcBO45jZa3Nffb2y5W+Ci/M0k=;
+ s=20231125; t=1777900849;
+ bh=iNtBERv+7EGnx3ovs/hNm+eknNEiaHJeleOA9EIhCfU=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
- b=QQyTpAb1NRmv7zHFjN3Udkf9RpYFJGuKl68j6MkDXOC0KkU7yGwjEoJMudvnVw7PF
- Tf+vDxBTQ9qJJQrd/sFQdeAAW/Gg5z1+kcr+SWXffS5G4sVXSFrENhNc2GsgmSo7IJ
- Hl3FNo+aqN7iHdBq0h1q+ztkCX2/ZnrOTBsJBz4QY/Qj7TiDwIZ5gup7UFhLmHzEA/
- dtTDl1D02ABQm1SLdlHEhrcgyYPpEu+/8pb2rjm74FS+QjqWH2ZPfht2MTVzVx2soi
- eJl1tE3DaGV2Wpr7T+zgPb7cUIs0KandeLzchyr0t4xT0IEpQjZxYtaYkjnH3uGlsz
- t1VYND4cplaNg==
+ b=j57WcsbAkChzrbzKjmnNd6cE15r26Xz1zuBpE/NXGtH6DVjItAn6WAxV0IA3bBsL2
+ xcXwmSgqiykfeNAbQdYxfcD9RXULJIgdP5ExRk+esCDa+iOcNO0AbJcU6GE2sy2T7r
+ Q+JPGJ0yPHmRwSpUmSCIJ+0jfA8X9VXjyTZHEZy3ER9fEsinbXF2lA0yCdaaanJ9GF
+ BXFiTUY+cU7E53QMQRB0MDvUZdfZq2jrmXcjyRseigM8ZNfM37g2RI78CIKkvX6Y/O
+ G/H8TBEBltt29RKJ6FmBvG8uzcmZ6r3M/myGKIHpdoj6SoYWuEh0owuyxXwsS4pvgb
+ R9pAfC6bcsApQ==
 Received: from unknown by smtp-3-0000.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4g8Mhv4Pj8z95B; Mon,  4 May 2026 15:20:47 +0200 (CEST)
+ id 4g8Mhw4Z74zClt; Mon,  4 May 2026 15:20:48 +0200 (CEST)
 From: Quentin Schulz <foss+uboot@0leil.net>
-Date: Mon, 04 May 2026 15:20:32 +0200
-Subject: [PATCH RFC next 05/18] kbuild: Don't try to add
- '-fcatch-undefined-behavior' flag
+Date: Mon, 04 May 2026 15:20:33 +0200
+Subject: [PATCH RFC next 06/18] Makefile: move deprecated-non-prototype to
+ scripts/Makefile.extrawarn.u-boot
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260504-extrawarn-sync-v1-5-b19301d1948a@cherry.de>
+Message-Id: <20260504-extrawarn-sync-v1-6-b19301d1948a@cherry.de>
 References: <20260504-extrawarn-sync-v1-0-b19301d1948a@cherry.de>
 In-Reply-To: <20260504-extrawarn-sync-v1-0-b19301d1948a@cherry.de>
 To: u-boot@lists.denx.de
@@ -86,34 +86,61 @@ X-Virus-Status: Clean
 
 From: Quentin Schulz <quentin.schulz@cherry.de>
 
-[ Upstream commit 7eb8e5f073051eebbf55fa6b90ed2246c2274552 ]
+This option is specific to U-Boot and was added back in
+commit 52ee1a0294e8 ("global: Disable deprecated-non-prototype warning
+with clang"). It was added next to other flags which are imported from
+the Linux kernel Makefile. This makes it unnecessarily hard to backport
+patches from that project since we'll always have a difference in the
+git context.
 
-Original commit log:
+So, move this to the new scripts/Makefile.extrawarn.u-boot file where we
+can store everything that is U-Boot-specific and lower the efforts for
+syncing with the Linux kernel for Makefile.
 
-  This is no longer a valid option in clang, it was removed in 3.5, which
-  we don't support.
-
-  https://github.com/llvm/llvm-project/commit/cb3f812b6b9fab8f3b41414f24e90222170417b4
-
-[git conflict in context due to commit 52ee1a0294e8 ("global: Disable
- deprecated-non-prototype warning with clang")]
 Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 ---
- Makefile | 1 -
- 1 file changed, 1 deletion(-)
+ Makefile                          |  1 -
+ scripts/Makefile.extrawarn.u-boot | 18 ++++++++++++++++++
+ 2 files changed, 18 insertions(+), 1 deletion(-)
 
 diff --git a/Makefile b/Makefile
-index 0404657dac6..a0e9406bc59 100644
+index a0e9406bc59..bfd4976a0d4 100644
 --- a/Makefile
 +++ b/Makefile
 @@ -1007,7 +1007,6 @@ KBUILD_CFLAGS += $(call cc-disable-warning, tautological-compare)
  # source of a reference will be _MergedGlobals and not on of the whitelisted names.
  # See modpost pattern 2
  KBUILD_CFLAGS += $(call cc-option, -mno-global-merge,)
--KBUILD_CFLAGS += $(call cc-option, -fcatch-undefined-behavior)
- KBUILD_CFLAGS += $(call cc-disable-warning, deprecated-non-prototype)
+-KBUILD_CFLAGS += $(call cc-disable-warning, deprecated-non-prototype)
  else
  
+ # These warnings generated too much noise in a regular build.
+diff --git a/scripts/Makefile.extrawarn.u-boot b/scripts/Makefile.extrawarn.u-boot
+index 21872a5492b..0a9b49a30f0 100644
+--- a/scripts/Makefile.extrawarn.u-boot
++++ b/scripts/Makefile.extrawarn.u-boot
+@@ -7,3 +7,21 @@
+ ifneq ($(findstring 3, $(KBUILD_EXTRA_WARN)),)
+ KBUILD_CFLAGS += $(call cc-option, -Wvla)
+ endif
++
++ifdef CONFIG_CC_IS_CLANG
++# We have a number of places in the code which use the following syntax:
++#
++# void func(a, b, c)
++#     int a; /* Does a */
++#     something_t *b; /* Pointer to b */
++#     int c; /* Does c */
++# {
++# ...
++# }
++#
++# Which while not what we document as our coding style, this is also code
++# which we have imported from other projects, and would like to re-sync
++# with in the future. While the biggest example of this is the zlib code,
++# there are other places as well. For now, we will silence this warning.
++KBUILD_CFLAGS += $(call cc-disable-warning, deprecated-non-prototype)
++endif
 
 -- 
 2.54.0
