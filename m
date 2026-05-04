@@ -4,99 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B1F7FF886F
-	for <u-boot@archiver.kernel.org>; Mon,  4 May 2026 12:06:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 427ADFF885A
+	for <u-boot@archiver.kernel.org>; Mon,  4 May 2026 12:07:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6231D845E3;
-	Mon,  4 May 2026 14:06:20 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9E8C38394E;
+	Mon,  4 May 2026 14:07:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="B2PR2XzJ";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="kbFiugGT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5F3658460C; Mon,  4 May 2026 14:06:19 +0200 (CEST)
+ id 4AE80845E3; Mon,  4 May 2026 14:07:55 +0200 (CEST)
 Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
  [IPv6:2a00:1450:4864:20::632])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 753C280F0E
- for <u-boot@lists.denx.de>; Mon,  4 May 2026 14:06:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5F50680F0E
+ for <u-boot@lists.denx.de>; Mon,  4 May 2026 14:07:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
 Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-ba67b332bbaso571098266b.0
- for <u-boot@lists.denx.de>; Mon, 04 May 2026 05:06:17 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1777896377; cv=none;
+ a640c23a62f3a-bc356898256so53919866b.3
+ for <u-boot@lists.denx.de>; Mon, 04 May 2026 05:07:53 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1777896473; cv=none;
  d=google.com; s=arc-20240605;
- b=Nh9beM+AxwkcRLC9YX59fQs15tO/ZRZrofDu3MJslhdcJ+2qwljiBlRbdbgPfnMlne
- 5ptfKngYX5UuAkJRFMezGsXobgXGHjg04qa00LNDHP15BvSyEsIv7K6ocCCiFxTvIrQb
- T2QpBDB71IGKgeUALxLyedj0h0yhaDffvo069ztwtK+1u2TvpglKi+POjJFTU5owcb2B
- 6HC1ms62udmSiAZjX7JE8nTKvXHwbPs9Fhlv09KmayFp6N+YQ8YtN1dzpme4tfkA5X5i
- YjtcfL5Z6klifi0jqEtNwpZcy3H7ycWT3/zUrGdzSGGLwsIk2zJmW9L9oDoLPfe2fF02
- KZqw==
+ b=OE4cS69RPPT2bFiTzuuIjZ9bW99WcgOfU2kiI4kBWAj2fE9lzmgghyat3k1iIBjeO3
+ f8IiDYzhJkWShA/dB26bU03EAueOLjLWOHzxE+ifiZZgL8WIawmJJPh3QFPjedGC0Fho
+ oQioljgZThsV/nq2x0KoknOMv4HoE3xQqMGBIAlmrUM3LhoTX0aWv++0eU4Tu/160cBk
+ hwj3NcnPwyl1hfAAeqV5VcID+439bw8eYBq0g9WnUiGEqigXwAFsDJCMSy6fYfrqN8+c
+ rkkuMqbeJb6/f0U456x/Dj82uwl5kRKl5wbX97n9+EuSZiQcT0RmI6sUGl15kMTIiXKu
+ Cjvw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=jSUX023LhuHKZWiuGhFuVClDy6ZYdrcCYibqDKPyhoo=;
- fh=HUaaCF3pXo4vuMiSwAVilAnegcN7RQHzK4eRcFLb+3Q=;
- b=SShujNr31p/5JpiPu2RtPBF/bgw65HCmOhHPxqFJSPrWOcmsGhaURjcwqO/MC4g0Rm
- +PS5ScUpfM0FDUmMzBQAaxmTPgfuvMpOnC8VKmOgbkRugr5Lw/tF39slisNCxSrr5bb6
- vMf5SCvR0FkL/8cWAzMv2yyoB7v8T2hIvXadGSmrzmnqKU/ThiA1yjTuE6nYhlh/AR3l
- DhBJe0kwm+PzWjf+3ktjMkPhBnfQT37YbZ5hmrWWR+Drt8sVoity66H4m9bTqm/K2I3P
- 5ZNIEoqUf8W9O+K0481cM4kknyKCXeQNXnAGM17HgX2NuAV/rJ19+q55sat9MPqiaA2t
- mY/g==; darn=lists.denx.de
+ bh=CL6H2+P4wCHqZGB3nx/HW2pd0wiksuGFME2GYntHs+0=;
+ fh=adUGbpDfIlKqNaAG0UO7b8dZMhhUWRdrAUYoSKoPOKE=;
+ b=DY3hgA3j+DRmGbQyaaVisw3Qe2w85MJ6+zk3SSvWc77Sv0F+PKOHxn0Wr5Uk/TU5P6
+ QWbwJVPSi1XG+klzhVYuIIG5xIX2FrRYeut2dh54xIYpKVz0oypK74XCpT2cg6UK3Yg4
+ D/zx6bomb+Ekw5k4o69z8/xOjtrSlB4fBaLhNz3I2W2Q0HnGr3cmd6KRPtlkRYyLI71H
+ p1+Cw4oRBTDP5rGM52hV5C2rbmOjkgF7Bn2uTPqFfg1nXL4ZstI4nYBqTuxLXyQgb0HT
+ svRsfwZTIl5vnaT00/V/MPmEQwBdD30tg9GxrA1ytJCVtGXUfYHb6Z64ATEePSL1+iUd
+ ziZg==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1777896377; x=1778501177; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1777896473; x=1778501273; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=jSUX023LhuHKZWiuGhFuVClDy6ZYdrcCYibqDKPyhoo=;
- b=B2PR2XzJR0FvNuq8y7lSGguoVPbeLAzPWgXSwzJDmzGKo8+QbhFCQIuCGRYIK/WmOg
- aN8Wcg6xoGKinfxZQIz3P4FRcqkLGi1PlQTIr67izXTZ3RGPEek2e7pHGXfu3YbhEOQi
- VyL9xFX6Z9uEekZtppe/vo0fFhpiT7DhJjnkI=
+ bh=CL6H2+P4wCHqZGB3nx/HW2pd0wiksuGFME2GYntHs+0=;
+ b=kbFiugGTNwId1m5mHOIQjBv0KtoHulGXyAo6heDt8FFFgr3c3l+yOinSI+aaKQEr5l
+ lKfcxJxFDbKijAVlFSWXxt5Q+sl0R9pOtLeMHk7jhrQqOCFcVHW7NgrEtwvt3hBpADbR
+ tpy/HcC6PBHqabaMWD+KpVmrbRa3gngyO2pPs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777896377; x=1778501177;
+ d=1e100.net; s=20251104; t=1777896473; x=1778501273;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=jSUX023LhuHKZWiuGhFuVClDy6ZYdrcCYibqDKPyhoo=;
- b=QMJu3vUG2yxFQ61SjqVn+15NIiykggWYOzaz4XkXKVcJB94VkckkmdWDd6VGv802fa
- JbbL2EjV5YmiW4iV8BoShX/R9G2KHu3bkrMxEtfAhGteeXX5XZHvC/ttkraKApxCIahw
- z84FDrgterhoSlsPSlpyVjYRBBGCjD7WsjrayczACYKFZTX5N0hO1hIX8NCk1BRfbPXw
- GQsPMVy/avGwm/5Dq4hnioBm9Icolf9WRoQWSmRs8QuUZ2JCqagL1dl8FpNHXXVqC5VO
- kdpxn/fb5PcOVgJtTy+pWYhBsYdzPMT+q0vF2m17Ldx2Ij3qfAGftquDB5yIq4wpqFrt
- ocrQ==
-X-Gm-Message-State: AOJu0YwQjgsCgMPvu+629K7As14z6o67k5rYOR0KboMU9P09FmaeoQLn
- UHkWg6r3s9WSqKyuCryo2hXEZRKIttyIAyybzMKJD6dOAIZJGjZ9qsGauMGSVSzCtx4cqDtqUKV
- Wcn97zfo+mxElXXBxvijDuu44qvvB5DcZwzzEjumxmSA3rn0uuY4=
-X-Gm-Gg: AeBDiev+VLVVli/ZfxovcYv1b9CTO6Wk7lUkp77IKmMlIpyIN8eXa7bNuCUwaDyuLp5
- rVIZXGKCR1b/x5avMEvxe1MDgX9hFB/xgg3aSj4r05/wEhRWdZ+tFR3V7uxhJuHFV69uhh+0lY+
- w9KYNTKghL1B6HsLKEEWZrZIVurwyCcmmFP50/4ECb/QPog/yZsXGt04VpRk+/423A78jj/bpIy
- 990ewZwX0FBW8scB6r67w02UPbl8ORltbeZt7sL9FH0uMr/XuovP4+DBrBYa928Da8SpuhQCVIi
- HCyBM+UHWO7qeLP7
-X-Received: by 2002:a17:907:7b83:b0:b9c:2c55:3384 with SMTP id
- a640c23a62f3a-bbffb846e81mr528890366b.31.1777896376311; Mon, 04 May 2026
- 05:06:16 -0700 (PDT)
+ bh=CL6H2+P4wCHqZGB3nx/HW2pd0wiksuGFME2GYntHs+0=;
+ b=dferm6o1QKnIrbaEEbxlESK4U5ap7dIqfIb2SJerkjfOihXWTODgjelazs5EyL0/E7
+ jrGK7xfbjDm0Zj4MWjkXTKlk1lyWnx/+3CyMEPz7tvO9ozdjoV7L2VAGgMCnJk5Zsmjb
+ E1F9o7gSbWQVESy8EKTxz+i0k/5ddyPKQyJ71y8+d95DvrJTl+H2K+fDCIBYgzc9VY4H
+ SGh2ap1rhyUsfs6PtV+2VupYislmeGGcCRsOscU8zEA89cqj9otUojiP2KlcM6vCijfc
+ TtklbstjGmdHtN0xqHxVim/9DKW4Zh5EdkiZ28oewIdGqaqFGNE7MsKRmOCkTjuIn3wo
+ xfEg==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ8hrGejQnhuRB/Devp1R9OE7fgYdhAVIoFN6XE59k7hDSDnIqJDYSTGtnKXLGzame8UY+f6H9s=@lists.denx.de
+X-Gm-Message-State: AOJu0YwgsZpSucv7IaSCc2HIb8dfmec6dWYe7IyOp4s0XQ7XTpnCE8co
+ iBjhJ6ooWsaeJuOsbeoA8rwzdtYgP/59X+YRZu4PQzI8Q+Z1EqVLxJRisvYgOc44lM9w0TQW32w
+ lhFUh3ah5h+ZrzXbj9pJViksaPl4D7yy5tJrIZy/nxNQGeguXWJ4=
+X-Gm-Gg: AeBDietoy5sm/NLDowQBdgrT/tO2TFQKKIiqciHEedTDEJgy41+5nvZUX1WXQ+npfpO
+ zx3qzchUCvb1bBhzQ03bvFpo9KfJJU3Yxx97WkJL72T3sarnZPuE8zr/Vvm9Pb0xxNBR5GWKuAM
+ od6tcKBpdVM/xzOJpgSqddPzGVQh8Uxz1X5aPH73ZtxK/9zQtC9i1O5wp6nQnr28Wo5QRflsrsB
+ M6xu9lbZiFd0H3K3w23A6SBDMhvK37VwLmTuaOGES23QRS0luv5GBsNQdzFgXBrwi/L3SNLFlvz
+ SlHRf2LQFrDYMTve
+X-Received: by 2002:a17:907:ea5:b0:ba7:3578:f627 with SMTP id
+ a640c23a62f3a-bbffbf77a93mr488612566b.37.1777896472836; Mon, 04 May 2026
+ 05:07:52 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260428-ufetch-net-v1-0-5d58c7618239@cherry.de>
- <20260428-ufetch-net-v1-2-5d58c7618239@cherry.de>
-In-Reply-To: <20260428-ufetch-net-v1-2-5d58c7618239@cherry.de>
+References: <20260225211332.1896252-1-han.xu@nxp.com>
+ <177424051904.2364563.14330681912708686610.b4-ty@nxp.com>
+In-Reply-To: <177424051904.2364563.14330681912708686610.b4-ty@nxp.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 4 May 2026 06:06:02 -0600
-X-Gm-Features: AVHnY4J8a_IJYS__6aVuGuTLJpTk87MXRZcGtpZLOckd69-bMJ5dNjnlZCFSj2c
-Message-ID: <CAFLszTj4H-mMfTUKkgr2oHg23r+kr=S7Yb6FbZwGerHQPzAQMQ@mail.gmail.com>
-Subject: Re: [PATCH 2/2] cmd: ufetch: only show comma separator if there was a
- previous feature
-To: foss+uboot@0leil.net
-Cc: u-boot@lists.denx.de, Casey Connolly <casey.connolly@linaro.org>, 
- Tom Rini <trini@konsulko.com>, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Peter Robinson <pbrobinson@gmail.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Quentin Schulz <quentin.schulz@cherry.de>
+Date: Mon, 4 May 2026 06:07:40 -0600
+X-Gm-Features: AVHnY4ILwvW6happZVcSYjaFSHlL0AI-kGgVQc7UQTnsVoniRJEMAlP7RYcK0-0
+Message-ID: <CAFLszTj-M9GFBEm+VkWh9SbncZsvnGi65fF_=dnDAH0puPXAyA@mail.gmail.com>
+Subject: Re: [PATCH] mmc: Add support for eMMC 5.1B specification
+To: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
+Cc: Jaehoon Chung <jh80.chung@samsung.com>, Tom Rini <trini@konsulko.com>,
+ Han Xu <han.xu@nxp.com>, Peng Fan <peng.fan@nxp.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -114,30 +111,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Quentin,
+Hi,
 
-On 2026-04-28T10:56:03, Quentin Schulz <foss+uboot@0leil.net> wrote:
-> cmd: ufetch: only show comma separator if there was a previous feature
+On Sun, 22 Mar 2026 at 21:20, Peng Fan (OSS) <peng.fan@oss.nxp.com> wrote:
 >
-> Currently, if NET is disabled, the next feature to be printed will start
-> with a comma and a space which is not pretty. Add the comma and
-> whitespace only when a previous feature has already been shown.
+> From: Peng Fan <peng.fan@nxp.com>
 >
-> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 >
-> cmd/ufetch.c | 29 ++++++++++++++++++++---------
->  1 file changed, 20 insertions(+), 9 deletions(-)
+> On Wed, 25 Feb 2026 15:13:32 -0600, Han Xu wrote:
+> > Add support for eMMC specification version 5.1B by defining
+> > MMC_VERSION_5_1B and including it in the version array.
+> >
+> > eMMC 5.1B (JESD84-B51B) is a minor revision of the 5.1 specification
+> > that primarily addresses MDT (Manufacturing Date) adjustment for dates
+> > beyond 2025. This aligns with the Linux kernel commit 9996707822f82
+> > ("mmc: core: Adjust MDT beyond 2025").
+> >
+> > [...]
+>
+> Applied to mmc-next-2026-03-23, thanks!
+>
+> [1/1] mmc: Add support for eMMC 5.1B specification
+>       commit: 67fc505228558efa19380542d801807fa9eee054
+>
 
-> diff --git a/cmd/ufetch.c b/cmd/ufetch.c
-> @@ -157,26 +157,37 @@ static int do_ufetch(struct cmd_tbl *cmdtp, int flag, int argc,
-> +                     if (IS_ENABLED(CONFIG_CMD_CAT)) {
-> +                             printf(":%scat :3", sep ? ", " : "");
-> +                             sep = true;
-> +                     }
+Oddly this commit (which looks fine to me) breaks beagleplay in my
+lab. There is no console output from SPL at all.
 
-Do you want the ':' before the '%s' ?
-
-Reviewed-by: Simon Glass <sjg@chromium.org>
+If I disable LTO it seems to work OK. So perhaps this is a 14.2
+toolchain bug. I'm just posting here in case anyone else hits the same
+thing.
 
 Regards,
 Simon
