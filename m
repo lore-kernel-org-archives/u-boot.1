@@ -4,139 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2211FFF885A
-	for <u-boot@archiver.kernel.org>; Mon,  4 May 2026 16:03:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95969FF885A
+	for <u-boot@archiver.kernel.org>; Mon,  4 May 2026 16:06:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 974A284374;
-	Mon,  4 May 2026 18:03:56 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
+	by phobos.denx.de (Postfix) with ESMTP id CE85184663;
+	Mon,  4 May 2026 18:06:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="JuFWunhj";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="HYNuxQJQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DBA49845E3; Mon,  4 May 2026 18:03:54 +0200 (CEST)
-Received: from PA4PR04CU001.outbound.protection.outlook.com
- (mail-francecentralazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c20a::7])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id EBBF484374; Mon,  4 May 2026 18:06:51 +0200 (CEST)
+Received: from mail-oa1-x2a.google.com (mail-oa1-x2a.google.com
+ [IPv6:2001:4860:4864:20::2a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D448D80F0E
- for <u-boot@lists.denx.de>; Mon,  4 May 2026 18:03:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
+ by phobos.denx.de (Postfix) with ESMTPS id BE92280F0E
+ for <u-boot@lists.denx.de>; Mon,  4 May 2026 18:06:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quentin.schulz@cherry.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=uGLxTxZe34UrfnY5nI43IxNIucU59jF7vAtEpeS9eAhDM2ikXJ0fyLNZhUM5VAHLBqbCkLmbrejfZ/yAp14MsNsUPxweOfvlr3+DrU0EAfpEprXCSif3OAmLvBja59ZGGQlGd0/OzRFM5gPcMHm8OEAGNG6QuUAcZpciywX2Vsdqe4GVb/qsun1XMk92926lVLei1HmD8HbwG1Hcu/g9d4x9zvbX5tY0PkPbJpyFL24OW6ZKHoTT3b0IQmL+XgI+LA7/EKS0Qo2U4Wuuv8ecyanoR4BgAlRkYTFigM+EDvfLs9ixk3KyBcgfLGi25N1PUm5CX7RcRSpUp/Z2SKV1nA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=YMPx2C5HD20wSqEKG6TGrQzhQtA8gLeFQcUYl9cY4iY=;
- b=j7dU/faJ4nl4ehLhiJZP3SURmNwSaQaWDmYvxbxlL3wglCodrehDpqRpmnM/84TpPdN1ya9fDm9HSwLmxAhLJmmRXdRXP9RFUSwgjwGNKh2gJSx+TpGQ8x/82wi/PD8qFxJBpw2kJglX3TqPJt2/gGmZQam58wZvx0VKjduDtcMqipsgaxeK9GnSilCP9OQVS8eCPqHmgNPjDe1YL4F+HmdxgvJ1t2K9IxxzfzJnGwUth5kMMUI2W+GdM+RYCDJIOTpfZkbEyDsqBwc1YgZD0995isRqDpSaXB5CYIRjnEMOEmuPtJB+JRCDQKK7Q3uAyxn5eGqbZIGYmW+amnGV+A==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=YMPx2C5HD20wSqEKG6TGrQzhQtA8gLeFQcUYl9cY4iY=;
- b=JuFWunhjHz3Nthk4fil+srBkqeQb4fxVFLV612bwYk2lv73E2OVeXsK5WwECD/swE81aav7cf1RiQClafIyhubUeY1YlmWiOW339aSe1/gQK2S28FZSgLCHDtIzs1u7qS7yeh5WkyWgtTlyAvHycR2lgNYadtYv7G1W60WjaPyQ=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from DBBPR04MB7737.eurprd04.prod.outlook.com (2603:10a6:10:1e5::22)
- by VI0PR04MB11784.eurprd04.prod.outlook.com (2603:10a6:800:2ea::12)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9870.25; Mon, 4 May
- 2026 16:03:49 +0000
-Received: from DBBPR04MB7737.eurprd04.prod.outlook.com
- ([fe80::5960:fb4b:9313:2b00]) by DBBPR04MB7737.eurprd04.prod.outlook.com
- ([fe80::5960:fb4b:9313:2b00%3]) with mapi id 15.20.9870.023; Mon, 4 May 2026
- 16:03:49 +0000
-Message-ID: <745d7c15-cd9f-4914-b81e-6e90b0f11d01@cherry.de>
-Date: Mon, 4 May 2026 18:03:46 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] rockchip: clk: clk_rk3576: Add support for RK3576 GMAC
- 25MHz clock output
-To: Alexey Charkov <alchark@flipper.net>, u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Heiko Stuebner
- <heiko@sntech.de>, Kever Yang <kever.yang@rock-chips.com>,
- Lukasz Majewski <lukma@denx.de>, Yao Zi <me@ziyao.cc>,
- Jonas Karlman <jonas@kwiboo.se>, Peng Fan <peng.fan@nxp.com>
-References: <20260504-rk3576-rgmii-refclk-v1-1-c6604a4b69ac@flipper.net>
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <20260504-rk3576-rgmii-refclk-v1-1-c6604a4b69ac@flipper.net>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: VIXP296CA0012.AUTP296.PROD.OUTLOOK.COM
- (2603:10a6:800:2a9::6) To DBBPR04MB7737.eurprd04.prod.outlook.com
- (2603:10a6:10:1e5::22)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x2a.google.com with SMTP id
+ 586e51a60fabf-4233e152457so3289943fac.1
+ for <u-boot@lists.denx.de>; Mon, 04 May 2026 09:06:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1777910808; x=1778515608; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=fFMbWu5jUCT6FuLd53u3ELU3xRU22oRsnGR17ht1hYE=;
+ b=HYNuxQJQVK6vq60NNuQ/qa/1Dm5DkVTZVs/CBC2PZdhcj2YNfCfeB6kmKsXnT4thym
+ aDZ0wO0I4hhzaNU8KM5EMb891TALD7pUgzd0r0eo+zkwmDuAMUsqXRPqOPWCfs90ekRE
+ q3i53HDP97G2cmNyauuaW3h7TyV0/rAhy6zjs=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1777910808; x=1778515608;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=fFMbWu5jUCT6FuLd53u3ELU3xRU22oRsnGR17ht1hYE=;
+ b=SyEf+tRr4exAZGbxxJevexWserSe5HEd5q1Zk3JC3Oowow/WFmynYmF7cccnmTMSci
+ 1HCmGbgMBpjJaWnKJoCwXtX0Xp6hBhYgPZRvqgHNLzCkMpxZcyZRXaDQI0OSU8Z4zt6Z
+ SILvEEAbmKMVh5lbTMe5bpotsvzwp0Qr87D5zx3mebfBJnbpE6/V31skdGKPq0KqMr7I
+ zh0dJgDJMkhoZ9IbfiDDxTN5PpbGfqrGFptmd4fQndYqEg6nZGZ1H4QJlOcEMdFvpdBL
+ BSd2LSd8+kOqmvzYn7lkhubvdxRpyAnS0lnu+AYXR1NXJ91b+gSFkOMXdwwWyK07exDe
+ B6hw==
+X-Gm-Message-State: AOJu0YxBOu4tkJeeyKYvZ0f0pb8OBYXqtGeugGhu3aukWhZnzW3ybeAG
+ 91Rk7IF8wNeOkwcxOJzIeWdIS49F7s2HpNcj+yy7eW97VFTJdN8XE8O0o5mqtm+yvAIHRdIpVWL
+ 3MA7qG321rtPS
+X-Gm-Gg: AeBDiet/zFFpEokVmIy3/T3grSTWtD1IxwG22V7rOTQ4G9ADRtpODQLWTw8ItlRzBSw
+ Xqu3pRVQIzAmQHYFKFz0PqL72bczJycBvks5x2v5s9AhymUGYezGMxPqjs3qnC+qCr6CcELjiYU
+ Q7F9cDDwZ7Pf2DfeYdhEN0RLEZHxijCg6D2Wf7qLrTyRKfkjQrAKQWcrbK1PE0tkm3jWn9NVxUA
+ NRm9wNtUwi8LbKdUEWstcLr693I28NXPqJpkHL6i4U9I+lsjyy69/fb9r8ogJ2w2y9oxEGpbf3K
+ 5i+py7MDuAsTWq3nx++h2TVjIuGBddcuStSADSf8FLjJC0jFGVAPvsp+CF8Mi3U1mCLdYUt0/xt
+ +9BS6INM1TOG1TLvHmjHiWQAg9eW3ZdAN6MupdZyjROn2hWdUeekrP1+UytZ11RZnVtjBsLyTyK
+ hCILpQH62o+VCJmh+Mi1TySLed1eACe+Ydi/RnG0AZBanXkmtV1hgczE0iLG2oAvPEwDRJ9kQUG
+ igHOs2wPh9FpmKZbuIe4hjSKo5YBn+pzk/9YRd5NqlOpG7bduLbl9qZRaasWQ==
+X-Received: by 2002:a05:6808:1983:b0:460:f435:2a70 with SMTP id
+ 5614622812f47-47c8933833bmr6077725b6e.47.1777910808344; 
+ Mon, 04 May 2026 09:06:48 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
+ [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-43454dd93fcsm11459462fac.18.2026.05.04.09.06.47
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 04 May 2026 09:06:47 -0700 (PDT)
+Date: Mon, 4 May 2026 10:06:45 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ U-Boot Custodians <u-boot-custodians@lists.denx.de>
+Subject: Re: In-tree Python tools (patman, buildman, binman, etc.)
+Message-ID: <20260504160645.GF1614990@bill-the-cat>
+References: <CAFLszTjeQ2mvnkPeVPsWwK7ay4Ac-+h=3pApff6CUxaaHq45JA@mail.gmail.com>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DBBPR04MB7737:EE_|VI0PR04MB11784:EE_
-X-MS-Office365-Filtering-Correlation-Id: 2ed8c039-597a-4d3f-f3c2-08dea9f6b9a1
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|7416014|376014|1800799024|10070799003|366016|56012099003|18002099003|22082099003;
-X-Microsoft-Antispam-Message-Info: WdvGRcBx4bOD4JfqTa7HDm+T9RXzq+2dGRkbUbY24kI1BI5mQDr1astnevimbMA4IrOI0wyojmSAbYJjTvqSiN9xbr6flMfcNQPnR1ClRovGXovZgRPFDbVaqMHw8rSa9lyK17wFW9V445EvXh9NVDLwJlXmRlevataEHa5rlT98/3xTR0M27BE8VLtheFSX8kjMNimovNBY3h+yQQOct264Rs2wv9v5pRm7+qOPxuYGKZGD/YXKWfJ+wMfud5CEYIqguihJB/B7bctLnxVrut7H2SATpCiV9AnnViAM1kEQ40cjIyU3jsYxJdMSUyO93irDI3/YDDn+fkFPg8x5aB/wWp3F2xsjWybC7BOlg7HUa59w90EPiQ4yJ1La6azXXsmPmSeAzqjPJt26kZMJvnYivPt59Vn6TBpZi9aoIfr3OcuNjR4l8Nw+rZ1CDK059ahNMnsKSjNNIWSN/L8lJqqHYMHie3AIZKd0EFbjn8paCn5Fachr0a4hP4VhPVJV6Enqhg3OWVo79MEZyGs8rxjc7L7wcJVgjNlsOZlqFvtbFXOioXU2QsZoAvlijJeDCAn45o2eCPFNBm0fdImd36+Z1nFOTKOUvS3mx4r35bf2b6Q+AXdg2YYzMZO9HSQbco9LJy1yDBEwyJFZ1XWLM7c6S2fobdj0rxhQw5Dcz0NSnbR7+2DC7i4YbDyLI0Gl
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:DBBPR04MB7737.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(7416014)(376014)(1800799024)(10070799003)(366016)(56012099003)(18002099003)(22082099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 2
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?VWlvTVJUcHpwT2FtUmFXR2xEUUUxaFdDdm1DSGZKTWFnMU44dW5wbUVhcVBO?=
- =?utf-8?B?bmVzSTB0ZXpIenVlT1Y4c0IvekdQOVg2SGV1Mlp2RFJiY2RPWG5XMHFzQy9p?=
- =?utf-8?B?aXJkVXVTWHFVOXVZYmJENUx0aXdEQkRDLy9Eb2l3UU1FQzlnck5TRFJPNS9B?=
- =?utf-8?B?TTRpT3VhbFdsZjRhT25FRTBVR0w0bnYrOG41Tm1YRjF1aEQ2RWNrTVhOQzN4?=
- =?utf-8?B?akQydXVTWE5EV1VmL0lLVWRBZXFhQnhHV0htWWRBd1g0OFRKTzF6aDZNR25N?=
- =?utf-8?B?SFdkczY1aURVSEVpRW9kUXF4bHRGZGpGdHBOVTh4dTNKRzBPVWUvTjZLTVVh?=
- =?utf-8?B?N2w5eWV1WWNFTVY0bHgwN2VvN0ZYeWlwTWZZS3VNMFh4dW45QnpSU1ltQmw0?=
- =?utf-8?B?YnUzblF1ZUU4dTRFSXNOMXRZNFlOQVFiZWtra0FLZ1hJM1c5S0xNM3pEbkpt?=
- =?utf-8?B?QytQSGJxaWxaeUVPNWE5Sks2a0pNWHQ4aDIxMzZ0dUoxZURnQTZvMFBEUWRh?=
- =?utf-8?B?V3k5Z3J6Y1NOcDdWUTk3UG1lKzVsdFhaYTUrZ2tvdkRUenhBV3laRGo3VVJF?=
- =?utf-8?B?ZFp2aEtTRGRMZENZL0JsZGYxQTBPS2ZpL25pN2NiSGhUT2ZmTlFVM3N6K2hm?=
- =?utf-8?B?ZWFNK0JyVlZLTktSVStNL2tsL0VPTElkQ29Yek1tY1BnY2tYSzNubEhwdUR2?=
- =?utf-8?B?YTN3ZUE5RUdNS0VHbEtRYkQzYldUblFKN2FKMDJ6a1h2eHNObkxTVHRjZUZo?=
- =?utf-8?B?RTQzZTgzQktMWFBiZmlNMVlmNlZwV3NjcVZvSDJTakNhdERDMVZqb2N0ZHRl?=
- =?utf-8?B?SEhEUnppbFIvSy9nVUw2SWx5bXlRd2wwREhXNElJMUxJR2tmRjZoZ1NNMXdL?=
- =?utf-8?B?bTh2UzVpcGV6QmpSOWRZUmZkdDRiOFJPMS9pUUY0V2hnYVpCcGs2TlNxWEQz?=
- =?utf-8?B?QnBqcWxNTGhwQ3BTOGV6a2N1VXZ0MnJwdC9uRDBoZGlVYUFEK2dVaVpkNmw5?=
- =?utf-8?B?OTVlRzVvTmFSWU1wVnVwbnQyWE9mSlZMMEM1WVVnZjQyVzFuSGFWT3ExWVVU?=
- =?utf-8?B?L0JvREtoTFFLSjEyTmZpRnV5U1ZaTE5jTWdDMm9CMEd3aUdKdDdtL2ZPVXZk?=
- =?utf-8?B?N2VlS1RZQ0E1dXFXY29scTQwYlZkMTNWK3dpMUR6eHpvdldjWjYwVVoxNjYv?=
- =?utf-8?B?Qnc3N1dSdjh4dDI4Z0VXNDhjTWczc09WbFl2QngzcTRmQ1htRWsyOWltZXpC?=
- =?utf-8?B?M1hBbnpEQVZNcUtxVFpTRXJKQk5vdGtMbUFHWVgxZ1BId1ZyS0IvOWhsNXRt?=
- =?utf-8?B?UlY4MWxoU3V3cG1kSm1YNjVIL05RWGx6T0xWZ0c1L3JVVUNXLzN5UjYwcE1S?=
- =?utf-8?B?RWp0QWw1bmRGdk9oUWQ2UGlKLzdDOHhFNURGZ1BybTBOdWNTb1A2ZDBrUDBW?=
- =?utf-8?B?K2ZIamxqWjcxOEQ4K1I5amdTNm5xN3Y0c2NiY3RoSTlkMDVrMkFiTjMybWdq?=
- =?utf-8?B?YVB4Tk5vMXdBa0NCZEpQVk5xSHZJSURQSHF0eDNCejVkLzFPZE5zVEFUR1N2?=
- =?utf-8?B?Z3Rqd3pVaE0vQi9YaXdlSlcwaFp5ejFJY0hVY2ZzWGloL200WVRMb25rWE9Y?=
- =?utf-8?B?ZXc3Ym5INlJJTDVOOE4wTlpnYVFDWjRsUWJVVDBnSS94RVovakVMcHRvQzVM?=
- =?utf-8?B?M213ZU5qYyt1K3lhOHFPODVleCtZRjhmSWUxbTUrbjNqUExaUFdFOGhuWm9j?=
- =?utf-8?B?U2Y5VnJRWXNqeU5BUlN6MWk2dmhzcExYMnFsYWlubjBGWkJrdyt0bVVjNTlp?=
- =?utf-8?B?dmdJMkYrbFJuVzFtWWZsK0wyVE5lUUF1NmRrWkphazFhemlLQVg2MVdyQWZa?=
- =?utf-8?B?TloyZ2NCSDVXQnFlaGZuSmtaS1BPQWs2azdmZTl2bkhIN1ZTU1Y0dEtJUlBn?=
- =?utf-8?B?U28zdzZTVjA1bXVXQSswN3pLOWtINCtyNXVYYXl0eDBRdGJSNUNKbG9Bd1g3?=
- =?utf-8?B?dzlTS3NDbDk2cXNHc2JsYjJQYVYvT1JEK0d2aW1GTUxQU2p5VzN5cEVWeGIr?=
- =?utf-8?B?QVZUREh5ckpLVWJSME00OXAyYjhKVUdJckl3WWd2cjAwNDFyQ3oxQnhHKzgw?=
- =?utf-8?B?RzJEOHFJa2UxMStNNmpWYUlULzBCVnhoTVFsQ0tla3lRWlk3VkR4bWc1a2tv?=
- =?utf-8?B?UVYweEtXeTExQlNrVUhkd3BBNzIrNTlITjNneDMvK09tTnBLNXE5WE1xUkNL?=
- =?utf-8?B?dnVFVGJCMmZIa3BRWDBUMDJJdmlNYnlqSW0vM2Zmd0MvakY1T0VrZmcxL1hz?=
- =?utf-8?B?R3M0Y0srTUNXNllMUXdraG5xN0E4RjJUSkVnYUphNis4Q0pMayttcUt4b3pw?=
- =?utf-8?Q?egsr17QVArXstubfSq9FILE77PS4tC82ycu9bUu3uOHFW?=
-X-MS-Exchange-AntiSpam-MessageData-1: m+WtHI/3SJtLSsxIYCy3o95HaB53il+kybU=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2ed8c039-597a-4d3f-f3c2-08dea9f6b9a1
-X-MS-Exchange-CrossTenant-AuthSource: DBBPR04MB7737.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 May 2026 16:03:49.3128 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: zx8Th9SCGCiXUCTyjunJe7GYwimJGNf9Sp53riVuF9q+ehqFNl+LA38ep+mwRviH7h0rMcX3UI1Fw9dh0v/7CtwgWXG5+Wcn/2T5Dkvul4o=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI0PR04MB11784
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="Fhkq2INjq6f1xFqR"
+Content-Disposition: inline
+In-Reply-To: <CAFLszTjeQ2mvnkPeVPsWwK7ay4Ac-+h=3pApff6CUxaaHq45JA@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -153,24 +98,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Alexey,
 
-On 5/4/26 3:45 PM, Alexey Charkov wrote:
-> Rockchip RK3576 SoC has two built-in GMACs which connect to external PHYs
-> via RGMII interface. The RGMII link can be clocked by either the PHY or
-> the SoC. When the SoC is the master, as is the case on the RK3576 EVB1,
-> the output clock needs to be configured in the CRU.
-> 
-> Add the respective logic for getting and setting the RGMII reference clock
-> output for both GMAC0 and GMAC1.
-> 
-> Signed-off-by: Alexey Charkov <alchark@flipper.net>
+--Fhkq2INjq6f1xFqR
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
+On Mon, May 04, 2026 at 06:16:58AM -0600, Simon Glass wrote:
+> Hi,
+>=20
+> As you know, I maintain several tools which are part of the U-Boot tree.
+>=20
+> Tom has previously suggested that it would be better to move patman
+> out of the U-Boot tree, e.g. to its own Github project. It is a
+> general tool which can be used with Linux and other
+> mailing-list/patchwork-based projects. I have never been keen on
+> taking on the extra effort required, but I've recently added more
+> features and am wondering whether now might be a good time to do this.
+>=20
+> Buildman is quite obviously designed specifically for U-Boot. I have
+> made some improvements recently (a large code refactor and distributed
+> builds). I would like to push those changes to mainline. Do people
+> think it should be in a separate tree somewhere?
+>=20
+> Binman was written with U-Boot in mind but supports other projects
+> (such as Zephyr). It is generic enough that it could be separated. The
+> impact would be harder code review.
+>=20
+> We also have smaller things like qconfig (which I have substantially
+> rewritten to make it fast) and dtoc, which is very tailored to U-Boot.
+>=20
+> What do people think? Of all of these, patman would be the easiest to
+> move, with the least impact on existing workflows.
 
-We should think about migrating to FIELD_PREP, FIELD_GET and similar 
-macros to make this a bit more readable and less error-prone though. 
-Some job for future us, not a blocker for sure :)
+Given that as a project we've been encouraging people to switch to using
+"b4" as it's now widely used and covers many of the problems patman was
+designed to solve, I think that's an easy one to say that you should
+move to your own personal hosting somewhere and it be untied from the
+project. The rest of the tools are something we as a community can
+figure out how to address once some of our general infrastructure issues
+are unblocked and moving forward.
 
-Thanks!
-Quentin
+--=20
+Tom
+
+--Fhkq2INjq6f1xFqR
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCafjEEQAKCRAr4qD1Cr/k
+CoIWAP9c7PBJ5zHlEHLPa/UeB5Wpo/kozHfnELSjLRrbItLuRgD9Feb+9tQhRjk4
+pJCs7GHHgmqDy9vM9AfRwUsbNap04wA=
+=sNK4
+-----END PGP SIGNATURE-----
+
+--Fhkq2INjq6f1xFqR--
