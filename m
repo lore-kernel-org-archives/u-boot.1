@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F5EDCD3430
-	for <u-boot@archiver.kernel.org>; Mon,  4 May 2026 13:21:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 432C6CD3430
+	for <u-boot@archiver.kernel.org>; Mon,  4 May 2026 13:21:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9C7D8846AC;
+	by phobos.denx.de (Postfix) with ESMTP id DD2B8846AF;
 	Mon,  4 May 2026 15:20:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=0leil.net header.i=@0leil.net header.b="j57WcsbA";
+	dkim=pass (2048-bit key; unprotected) header.d=0leil.net header.i=@0leil.net header.b="cpdzv0y0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 371218466D; Mon,  4 May 2026 15:20:52 +0200 (CEST)
-Received: from smtp-bc09.mail.infomaniak.ch (smtp-bc09.mail.infomaniak.ch
- [IPv6:2001:1600:19:8e30::bc09])
+ id 72DD0846A7; Mon,  4 May 2026 15:20:53 +0200 (CEST)
+Received: from smtp-190b.mail.infomaniak.ch (smtp-190b.mail.infomaniak.ch
+ [IPv6:2001:1600:19:b8b8::190b])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4971784686
- for <u-boot@lists.denx.de>; Mon,  4 May 2026 15:20:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 46E5484255
+ for <u-boot@lists.denx.de>; Mon,  4 May 2026 15:20:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=foss+uboot@0leil.net
 Received: from smtp-3-0000.mail.infomaniak.ch (unknown
  [IPv6:2001:1600:4:17::246b])
- by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4g8Mhx63kkzfy9;
- Mon,  4 May 2026 15:20:49 +0200 (CEST)
+ by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4g8Mhz06R7zfcY;
+ Mon,  4 May 2026 15:20:51 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=0leil.net;
- s=20231125; t=1777900849;
- bh=iNtBERv+7EGnx3ovs/hNm+eknNEiaHJeleOA9EIhCfU=;
+ s=20231125; t=1777900850;
+ bh=hl2oTjhZdqDqjTFjkFte8v0xBNjfhsnnOVxBWFU6XG8=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
- b=j57WcsbAkChzrbzKjmnNd6cE15r26Xz1zuBpE/NXGtH6DVjItAn6WAxV0IA3bBsL2
- xcXwmSgqiykfeNAbQdYxfcD9RXULJIgdP5ExRk+esCDa+iOcNO0AbJcU6GE2sy2T7r
- Q+JPGJ0yPHmRwSpUmSCIJ+0jfA8X9VXjyTZHEZy3ER9fEsinbXF2lA0yCdaaanJ9GF
- BXFiTUY+cU7E53QMQRB0MDvUZdfZq2jrmXcjyRseigM8ZNfM37g2RI78CIKkvX6Y/O
- G/H8TBEBltt29RKJ6FmBvG8uzcmZ6r3M/myGKIHpdoj6SoYWuEh0owuyxXwsS4pvgb
- R9pAfC6bcsApQ==
+ b=cpdzv0y0UNDulFHydcEW6pyg/v6+A6gOjclStbv9CCbQjIWoUDP8nqO4p3BTtL7gm
+ a1lpXCd8Zbkwuxa6iyZd+8mcocsql/86DGqbm4vQRWDdueIRbnT/CFlfoq8Ejm+Kt2
+ w154dL+WfU8rls2eudTplJsRfvkznZneIAh0Is2cE7gSR0SM33NSmrkPm+QDZC0lf6
+ +Smy4JhDqbbn5AoJ5fKZ1hxVvLe05yQR53rZ8ijIL8EHC80zeJlkJbCJBZzQZc35Mv
+ 01+bK9Ifyi94XBXnBth8NMwualAzpOs9X2I5tsejdmipQNC8fTh1zUelmfFdKHl8PG
+ McaSYiZ4ry9Zw==
 Received: from unknown by smtp-3-0000.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4g8Mhw4Z74zClt; Mon,  4 May 2026 15:20:48 +0200 (CEST)
+ id 4g8Mhx6Ct5zBtD; Mon,  4 May 2026 15:20:49 +0200 (CEST)
 From: Quentin Schulz <foss+uboot@0leil.net>
-Date: Mon, 04 May 2026 15:20:33 +0200
-Subject: [PATCH RFC next 06/18] Makefile: move deprecated-non-prototype to
- scripts/Makefile.extrawarn.u-boot
+Date: Mon, 04 May 2026 15:20:34 +0200
+Subject: [PATCH RFC next 07/18] scripts/Makefile.extrawarn: handle
+ CONFIG_WERROR in U-Boot-specific file
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260504-extrawarn-sync-v1-6-b19301d1948a@cherry.de>
+Message-Id: <20260504-extrawarn-sync-v1-7-b19301d1948a@cherry.de>
 References: <20260504-extrawarn-sync-v1-0-b19301d1948a@cherry.de>
 In-Reply-To: <20260504-extrawarn-sync-v1-0-b19301d1948a@cherry.de>
 To: u-boot@lists.denx.de
@@ -86,61 +86,45 @@ X-Virus-Status: Clean
 
 From: Quentin Schulz <quentin.schulz@cherry.de>
 
-This option is specific to U-Boot and was added back in
-commit 52ee1a0294e8 ("global: Disable deprecated-non-prototype warning
-with clang"). It was added next to other flags which are imported from
-the Linux kernel Makefile. This makes it unnecessarily hard to backport
-patches from that project since we'll always have a difference in the
-git context.
+This is not something that is in Linux kernel in v5.1, nor in v6.1 which
+will be the next sync. Since the next sync will be importing
+scripts/Makefile.extrawarn directly instead of backporting individual
+patches, CONFIG_WERROR handling would be gone.
 
-So, move this to the new scripts/Makefile.extrawarn.u-boot file where we
-can store everything that is U-Boot-specific and lower the efforts for
-syncing with the Linux kernel for Makefile.
+Move the CONFIG_WERROR handling to the U-Boot-specific file such that it
+doesn't get removed during the next sync.
 
 Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 ---
- Makefile                          |  1 -
- scripts/Makefile.extrawarn.u-boot | 18 ++++++++++++++++++
- 2 files changed, 18 insertions(+), 1 deletion(-)
+ scripts/Makefile.extrawarn        | 3 ---
+ scripts/Makefile.extrawarn.u-boot | 3 +++
+ 2 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/Makefile b/Makefile
-index a0e9406bc59..bfd4976a0d4 100644
---- a/Makefile
-+++ b/Makefile
-@@ -1007,7 +1007,6 @@ KBUILD_CFLAGS += $(call cc-disable-warning, tautological-compare)
- # source of a reference will be _MergedGlobals and not on of the whitelisted names.
- # See modpost pattern 2
- KBUILD_CFLAGS += $(call cc-option, -mno-global-merge,)
--KBUILD_CFLAGS += $(call cc-disable-warning, deprecated-non-prototype)
- else
+diff --git a/scripts/Makefile.extrawarn b/scripts/Makefile.extrawarn
+index c5ed501d374..7dfc374a19d 100644
+--- a/scripts/Makefile.extrawarn
++++ b/scripts/Makefile.extrawarn
+@@ -22,9 +22,6 @@ endif
  
- # These warnings generated too much noise in a regular build.
+ export KBUILD_EXTRA_WARN
+ 
+-KBUILD_CPPFLAGS-$(CONFIG_WERROR) += -Werror
+-KBUILD_CPPFLAGS += $(KBUILD_CPPFLAGS-y)
+-
+ ifeq ("$(origin W)", "command line")
+   KBUILD_EXTRA_WARN := $(W)
+ endif
 diff --git a/scripts/Makefile.extrawarn.u-boot b/scripts/Makefile.extrawarn.u-boot
-index 21872a5492b..0a9b49a30f0 100644
+index 0a9b49a30f0..86f6fbc2301 100644
 --- a/scripts/Makefile.extrawarn.u-boot
 +++ b/scripts/Makefile.extrawarn.u-boot
-@@ -7,3 +7,21 @@
- ifneq ($(findstring 3, $(KBUILD_EXTRA_WARN)),)
- KBUILD_CFLAGS += $(call cc-option, -Wvla)
+@@ -25,3 +25,6 @@ ifdef CONFIG_CC_IS_CLANG
+ # there are other places as well. For now, we will silence this warning.
+ KBUILD_CFLAGS += $(call cc-disable-warning, deprecated-non-prototype)
  endif
 +
-+ifdef CONFIG_CC_IS_CLANG
-+# We have a number of places in the code which use the following syntax:
-+#
-+# void func(a, b, c)
-+#     int a; /* Does a */
-+#     something_t *b; /* Pointer to b */
-+#     int c; /* Does c */
-+# {
-+# ...
-+# }
-+#
-+# Which while not what we document as our coding style, this is also code
-+# which we have imported from other projects, and would like to re-sync
-+# with in the future. While the biggest example of this is the zlib code,
-+# there are other places as well. For now, we will silence this warning.
-+KBUILD_CFLAGS += $(call cc-disable-warning, deprecated-non-prototype)
-+endif
++KBUILD_CPPFLAGS-$(CONFIG_WERROR) += -Werror
++KBUILD_CPPFLAGS += $(KBUILD_CPPFLAGS-y)
 
 -- 
 2.54.0
