@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 936B6CD3436
-	for <u-boot@archiver.kernel.org>; Mon,  4 May 2026 13:23:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89241CD3430
+	for <u-boot@archiver.kernel.org>; Mon,  4 May 2026 13:23:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 81DB4846E1;
-	Mon,  4 May 2026 15:21:04 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BF4E2846AA;
+	Mon,  4 May 2026 15:21:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=0leil.net header.i=@0leil.net header.b="Mgv7svE/";
+	dkim=pass (2048-bit key; unprotected) header.d=0leil.net header.i=@0leil.net header.b="Dwhk2BnM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 14CD9846D2; Mon,  4 May 2026 15:21:03 +0200 (CEST)
-Received: from smtp-190b.mail.infomaniak.ch (smtp-190b.mail.infomaniak.ch
- [IPv6:2001:1600:19:b8b8::190b])
+ id 3D9E7846DC; Mon,  4 May 2026 15:21:04 +0200 (CEST)
+Received: from smtp-42af.mail.infomaniak.ch (smtp-42af.mail.infomaniak.ch
+ [84.16.66.175])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DE792846A4
- for <u-boot@lists.denx.de>; Mon,  4 May 2026 15:21:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0B3F3846C1
+ for <u-boot@lists.denx.de>; Mon,  4 May 2026 15:21:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=foss+uboot@0leil.net
-Received: from smtp-3-0000.mail.infomaniak.ch (unknown
- [IPv6:2001:1600:4:17::246b])
- by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4g8Mj852KmzJDp;
- Mon,  4 May 2026 15:21:00 +0200 (CEST)
+Received: from smtp-3-0000.mail.infomaniak.ch (smtp-3-0000.mail.infomaniak.ch
+ [10.4.36.107])
+ by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4g8Mj95Hg3zj3Z;
+ Mon,  4 May 2026 15:21:01 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=0leil.net;
- s=20231125; t=1777900860;
- bh=wPgmSsOMi6JGPjvhIk9AfxCLt+GH+7rfNC4J1po3urM=;
+ s=20231125; t=1777900861;
+ bh=JCLjSzHlLOvyL4zUIjti/p37C7aBno+mZZLgakVjEd8=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
- b=Mgv7svE/Qdie7gDuJ9lvBGCZOf9b1AbL2lxiNTKGH+OP7oZKfTNbDIGO9bL9MW22k
- GKosSwNXZ/5Qh/J0GE5cxL3ckXwfdKdLHBTBErwEoGZM+d2QU6f0EoERq/pL9E8794
- Sg7QEPpmn1LnQ3oDwisGV1erRFImxASELhgBJivlMoJtKCl6vM69VuVQm3p7rKQFf7
- +FHwsiIHwURRhaA46BaaYJb5a20ew4mWMP3gALPwyeIo3YDShuK5jcdv2/NIgqY5D6
- 2iqDp8hVDeJEX4VsbJ76iaDaNTG3M32xt0YWt/uWFOKGUkF7MBuLQGIkbM2qf600Z/
- KiG04bZRbEQFA==
+ b=Dwhk2BnMlIEX2Hg+8YV2I1gJFQBS0zFixKgAJwrNrdZYv0Y9J7FG+KoV1q9oOgjsN
+ BESxs99PjdExNUx7Kbup2MjX2dFTXvLWpvFpy/wZ18KaGzEOsnnHelKdgnDSw0gcT9
+ yXQ5ydQHiOV3flFdzPKSWeIYUpvqwKW5EJ/v5OHKJRvHorbEtMtBXyHmUQgbqCot1E
+ orAiQaDMnG70Th2lV5PjAYnsUN3uVVIPBs4XlBkc6nv+gINVynyopSL+jwU45l+Un/
+ KLbmLvC1g1GL3Dv5bWNxzkKXmfT3GPMKNuqiVjUR/n7s3XlZP8Wzkb2rfjQV5Ecb60
+ 4J1KnyEnQ8W6g==
 Received: from unknown by smtp-3-0000.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4g8Mj73XWDzDqF; Mon,  4 May 2026 15:20:59 +0200 (CEST)
+ id 4g8Mj83k5TzCpb; Mon,  4 May 2026 15:21:00 +0200 (CEST)
 From: Quentin Schulz <foss+uboot@0leil.net>
-Date: Mon, 04 May 2026 15:20:43 +0200
-Subject: [PATCH RFC next 16/18] scripts/Makefile.extrawarn: Respect
- CONFIG_WERROR / W=e for hostprogs
+Date: Mon, 04 May 2026 15:20:44 +0200
+Subject: [PATCH RFC next 17/18] scripts/Makefile.build: do not run
+ kernel-docs with warnings
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260504-extrawarn-sync-v1-16-b19301d1948a@cherry.de>
+Message-Id: <20260504-extrawarn-sync-v1-17-b19301d1948a@cherry.de>
 References: <20260504-extrawarn-sync-v1-0-b19301d1948a@cherry.de>
 In-Reply-To: <20260504-extrawarn-sync-v1-0-b19301d1948a@cherry.de>
 To: u-boot@lists.denx.de
@@ -86,54 +86,36 @@ X-Virus-Status: Clean
 
 From: Quentin Schulz <quentin.schulz@cherry.de>
 
-[ Upstream commit 7ded7d37e5f5b36b4acd74380156cf07b6640c5b ]
+We have too many of them for now and the kernel has switched to a Python
+script with likely many other small changes. We also have a couple of
+patches in our fork, so it'll need to be ported to the new version once
+sync'ed.
 
-Original commit log:
-
-  Commit 27758d8c2583 ("kbuild: enable -Werror for hostprogs")
-  unconditionally enabled -Werror for the compiler, assembler, and linker
-  when building the host programs, as the build footprint of the host
-  programs is small (thus risk of build failures from warnings are low)
-  and that stage of the build may not have Kconfig values (thus
-  CONFIG_WERROR could not be used as a precondition).
-
-  While turning warnings into errors unconditionally happens in a few
-  places within the kernel, it can be disruptive to people who may be
-  building with newer compilers, such as while doing a bisect. While it is
-  possible to avoid this behavior by passing HOSTCFLAGS=-w or
-  HOSTCFLAGS=-Wno-error, it may not be the most intuitive for regular
-  users not intimately familiar with Kbuild.
-
-  Avoid being disruptive to the entire build by depending on the explicit
-  opt-in of CONFIG_WERROR or W=e to enable -Werror and the like while
-  building the host programs. While this means there is a small portion of
-  the build that does not have -Werror enabled (namely scripts/kconfig/*
-  and scripts/basic/fixdep), it is better than not having it altogether.
+For now, let's simply not run kernel-docs with warnings, which allows us
+to use W=e to enable Werror for host and target compilers as well as the
+linker and assembler. This will then be used in buildman in next commit.
 
 Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 ---
- scripts/Makefile.extrawarn | 8 +++++---
- 1 file changed, 5 insertions(+), 3 deletions(-)
+ scripts/Makefile.build | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
-diff --git a/scripts/Makefile.extrawarn b/scripts/Makefile.extrawarn
-index 8988308cc36..9fdc38a40af 100644
---- a/scripts/Makefile.extrawarn
-+++ b/scripts/Makefile.extrawarn
-@@ -108,9 +108,11 @@ KBUILD_AFLAGS		+= -Wa,--fatal-warnings
- KBUILD_LDFLAGS		+= --fatal-warnings
- KBUILD_RUSTFLAGS	+= -Dwarnings
+diff --git a/scripts/Makefile.build b/scripts/Makefile.build
+index 73b6769ab90..230180fa1f1 100644
+--- a/scripts/Makefile.build
++++ b/scripts/Makefile.build
+@@ -127,7 +127,10 @@ else ifeq ($(KBUILD_CHECKSRC),2)
+ endif
  
--endif
--
--# Hostprog flags are used during build bootstrapping and can not rely on CONFIG_ symbols.
-+# While hostprog flags are used during build bootstrapping (thus should not
-+# depend on CONFIG_ symbols), -Werror is disruptive and should be opted into.
-+# Only apply -Werror to hostprogs built after the initial Kconfig stage.
- KBUILD_HOSTCFLAGS	+= -Werror
- KBUILD_HOSTLDFLAGS	+= -Wl,--fatal-warnings
- KBUILD_HOSTRUSTFLAGS	+= -Dwarnings
-+
-+endif
+ ifneq ($(KBUILD_EXTRA_WARN),)
+-  cmd_checkdoc = $(srctree)/scripts/kernel-doc -none $<
++  # U-Boot: Too many warnings in our docs and this prevents us from using the
++  # very convenient W=e to configure -Werror via a Make variable, so silence it
++  # for now.
++  # cmd_checkdoc = $(srctree)/scripts/kernel-doc -none $<
+ endif
+ 
+ # Compile C sources (.c)
 
 -- 
 2.54.0
