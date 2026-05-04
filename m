@@ -4,92 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51400FF885A
-	for <u-boot@archiver.kernel.org>; Mon,  4 May 2026 20:32:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4E45CD3427
+	for <u-boot@archiver.kernel.org>; Mon,  4 May 2026 20:33:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E650F846F9;
-	Mon,  4 May 2026 22:32:39 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6C509846CE;
+	Mon,  4 May 2026 22:33:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ZPxDdQ2h";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="UhgM/VDS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BBBFB847C5; Mon,  4 May 2026 22:32:38 +0200 (CEST)
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [IPv6:2a00:1450:4864:20::632])
+ id F17CF846CE; Mon,  4 May 2026 22:33:41 +0200 (CEST)
+Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
+ [IPv6:2a00:1450:4864:20::529])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CBDAF846F9
- for <u-boot@lists.denx.de>; Mon,  4 May 2026 22:32:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 17DE38394E
+ for <u-boot@lists.denx.de>; Mon,  4 May 2026 22:33:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-ba922426c5cso785810266b.3
- for <u-boot@lists.denx.de>; Mon, 04 May 2026 13:32:36 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1777926756; cv=none;
+Received: by mail-ed1-x529.google.com with SMTP id
+ 4fb4d7f45d1cf-67b32c695efso7240835a12.1
+ for <u-boot@lists.denx.de>; Mon, 04 May 2026 13:33:40 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1777926819; cv=none;
  d=google.com; s=arc-20240605;
- b=Rpm4vcQxwr/CPIFPOWuQmukTrgM9onOWD+FNNZPkMun9v2skmvI4bsqouBht0ZrnqU
- XcIW+Tx2yb+cPSUkqRcJMtwEl3VU4PHbi8RYWylAYmoSUL08terbCVpoKCDGE7GKOE+B
- 29VQavrReI7QGMS9og8kSt0hiKcmntQ//8fne7YexGELG3AHEEfRw5ZdNX3Jj0Uxep0f
- lv1ca1uIW+SnsD6d4wmhjB08lvJZG/yiGfNWJo+lpV0h/LlSISrYAPrhL8mGzZACTVPo
- SZtmE263pSw60eID7gr9m9Wu3ZmMTLWQbq00uXfoQcxq4FMKdsRAx5a8TNds9RaIeO2m
- oNwQ==
+ b=SUsXCL9/UTXFxW4IXux4kLjv0E7g+I+fxT9LfXs+47TUVysFOEhBPL/h6huT/VCbRp
+ 6mQUYe6khKvCdlOfbXV/moJsQUF8+aH7ovxiMgaWALeomCzeM4W8yD3punZVUSRFOYMB
+ QgZsv11y1J8TcCXTqGcUKMa2db9NYwww3iAbVsk96GRPUHukeNJ1W/tmaPxumfl5TPyA
+ zzxBnaqXw9c5QJSFljmqrco+TMP+IEvkHDKSufSMZewZDHlhkfMP+EC7eX9ronEo6nDJ
+ Jq+agZ/RMPNBvhSTjYFYA+q4e5y98bcx8nHCM0M3cFh24ttQsTX69GKApzekwzun8L/N
+ cCBQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=ypBGQ4FZG73zdkDiyWvjnvWmAojHD1sMSZSMu7v8nCc=;
+ bh=rofFTqXdG+IRrJRdQHhP2wPSf9ZYuiVnvvSocq2N6iA=;
  fh=JDmMtl5m1ONTYAIDZy3RW95Kei7pwM4OcFAim19m6HQ=;
- b=K+m/zSOrWxqCMwMV3zVQacm73FgdQGvpHVq5SSk0zDW2FEtInL+4+PKt3PLTxidRqy
- 6oxDXk0OS1/3XeqVib9uhwvS4a7Cbamft/ATIsCrhL5IGOBbFFssKnIsfKPEgejmH0mC
- 9ZwtsDdhPA7ZjACon2/qC6wTGgFIX+L1ucLeKsGN0/eNihms+zZgSSoDN6tNktnp0Scb
- tHwj7hTW9VTKLx1wQqnB+dqQkeDM5twoB90kFzMssxlLMhh96YB7BfGnJ/0eimtQ5BP1
- aO+fyl1Er5USdGmGZoj+sDTlInsxH5ZkHx/tTeasYt/aEQi98HpiJcLuXHvFz7ffS/yQ
- hQfg==; darn=lists.denx.de
+ b=FCkZraSUuJ7OcRhGQmtAe73qjhIDrwHd7xYWJtkCQ9jfJfCbwS7cU1aSuxTOF+BeM4
+ kVzjxm84eVcryXY1Abm8ne2pOIn6hHOxypguyIZbVi/4hdo94u4SQHmQKxAlCvhuBWnd
+ UxlK+knqO7gnpop/B5j2yqeNCj9g2RGEFX6KcpHBGjyQ9iqPCleS/PFXHw5knf1P3g7v
+ GY4DG3dUtPTNHxWexg22jYjnrmWoGptzz6ilh/zv7x7WL8lPsEs7v1W3hr5RjP8HQm8J
+ 7y8AQXWAVBGzCE/9ndiQ4lICxHWC9UtiCzkN7Rxz0PgnpKrvEAi8cIjlG4Qt56mrIKaW
+ 44Tw==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1777926756; x=1778531556; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1777926819; x=1778531619; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=ypBGQ4FZG73zdkDiyWvjnvWmAojHD1sMSZSMu7v8nCc=;
- b=ZPxDdQ2hRsSBXbEIP15HgWibugv5wvy0qCgRzR5GWNoEu9W9PqMdSQ4qsJjW8F0+dL
- vOS544maxoHg2CIjMNvml6cxpeXI/Wrw1Poz7oJBq7r+k5UwgRFylKZazQQBph8tut2Y
- OAiMeJgFsAVnFtSXL8qV24ENif6gaVVbkLGko=
+ bh=rofFTqXdG+IRrJRdQHhP2wPSf9ZYuiVnvvSocq2N6iA=;
+ b=UhgM/VDSxbIpjW5DF06WdVfWQrfNqDQSWycwtwRnhOdZAP7rLv+YIpQx3t/uE9PFtb
+ rj8DMjCfF5qtvg4rt3tE6EMb7AhJSM09TpmZN1mbl3NaoNhPpo0DXIa1jE/AaYVzU2m/
+ sSV3EuhbsOjuDa8oKGbUmvuPd3MLCLiH3ottU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777926756; x=1778531556;
+ d=1e100.net; s=20251104; t=1777926819; x=1778531619;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ypBGQ4FZG73zdkDiyWvjnvWmAojHD1sMSZSMu7v8nCc=;
- b=PWKHrq8WRiN36A9Me2H2PhZcTRE2/ThM+fEpYAEVV0p81/tiV4+zV8lQvS3iGKlsTt
- Kyldz2A3OmcKMP+n7d/cooMVIfGGBmmaEz+SlaAL8V8infoG8abXCd4FA0MzUj3v0dBZ
- 2yViu8ytTofArS9Dgp5QfObW3I0W/RszcKQW52C7cxIgT0H7DiS5E8b1df61pTjcLdJo
- bMuiWAUvrTQJv6Owt1oI5+nlLMGAbGZ+O5Afqflrpgd+6K9mDlNjwGEYuKxDlv1e+fu0
- dHkIg2Ouv6t4JUEkwpSojohHwMjOf+vi5+WyGtbCsOhN7hHFbVfwhZ2kTrSvDNritbOf
- czcg==
-X-Gm-Message-State: AOJu0YxOV3nWQn9BW0HOmY/Oj75nqKbx3Jg8nRJIliQx8lC/8Kls5cx5
- 36H6zR4XrxtI3IEnI8XPcfkIWTUsmjWY1RdH0k1W1FQN/KHeqz5lKfid5+Bt4NcpNH96LUpD1vl
- 6UyzgwR3bZPTWrW5t1SxOMkrlvxViyZekHYW6JQkm
-X-Gm-Gg: AeBDiesdyv/4zP1Vukn5klwuF62DQGMZ92/VWUksVCAc3Xp+RtjIaUGVK/kWBgeZzwp
- aIwQluOIl3ENDE3tXIPOVRVhDyX33amZqWC8ZVS4AjmTRqNiLUaaB6K+0TX2sYz+H1rF2EF1s7+
- m0B3g52dvlv9VcQlg3eaRb194PnSRBdT0p+XTD5lHcKhf7oIWtFvOBMlHwHzlIDh0lp0CSROhSM
- gGyZTnfdvnY3sZnKqi/APwlO43i6bKOAM5Rt+UHMEvYClIr0fGDaPet8gh7ykMZsuxTxl2bcn/Z
- KPf/WlyvSmCQr9XD
-X-Received: by 2002:a17:907:cd0e:b0:bc3:d976:2453 with SMTP id
- a640c23a62f3a-bc40f532e4emr7295166b.10.1777926756216; Mon, 04 May 2026
- 13:32:36 -0700 (PDT)
+ bh=rofFTqXdG+IRrJRdQHhP2wPSf9ZYuiVnvvSocq2N6iA=;
+ b=egSS5K3NtvqRUSmP8p2HWk8PrYsLhle/os3Js4aNo06WI1FUKDYd7CGLKHiHWsadAl
+ R+893oPanN7/x/8pENTvGGBvOggN8SMDjBoTZIMwhYqFO1MZsEUpkOr4ckRWlX3mO6sE
+ n2KWhqjiMcKgGtTLmJUoICyqtvpGBekHO3l+7OOmvAxKsINEgAlj4doD9yv2v0/xYUDQ
+ bWTNHFySMjk5NhSsvnOSPSF5zdZY1BO+OJp5q2im4PAWv06ipv3rnab8N7VT7hw/Jxhz
+ YdFzTk1xcaN/YLRAbK7RU6Lik3Md9sIcIdm4WdLzCLNld3OD/QTrw7hVvXpLRgId0VOp
+ uuHQ==
+X-Gm-Message-State: AOJu0YyRc/NgJBMMNavXOM9sM056oTqQODIX7TScuDV6R2i8kLS2DDlN
+ 7gZOG8lgLSC0SYtfOZnNV1aclx5dGGwUkaXJpWWReymoc6HSkoOjYglxlV5sCrBEpl7HDfyoIJL
+ O7lp3X7fKaMhfHQg0NhGJvhKGGyoZEfY6vaACpm9F
+X-Gm-Gg: AeBDietK5V5/AJfmqPV4gu5xZqhwCyGh9WJjrcvsFPDNIVl1vStftOuUuLZSdlrSMxY
+ eYR/zwlMJm728rj/j/cwnc82IMCeEYzVitCzc+/fen7dLT9S/w9OfO0H+5qsaOETjI+nSUQuvRp
+ wSmU0cRhHvbXaBTGJwVcLFaeR2ifkyBoCYvn4gI68D8LKuICB9Bbh+lIBlyb35jjxV4quL1PMV4
+ iT083FZ/ITGRm9tahQ/E5jV7tJB7NkFZrABHmFyz4mak4I71HbYAOKkpx5VHQ7pAcK3u0HQLpkI
+ BMQkzxffciWNTkqq
+X-Received: by 2002:a17:906:b394:b0:bc3:a0e9:e0c with SMTP id
+ a640c23a62f3a-bc3d1636d7amr40590166b.13.1777926819404; Mon, 04 May 2026
+ 13:33:39 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260504-extrawarn-sync-v1-0-b19301d1948a@cherry.de>
- <20260504-extrawarn-sync-v1-9-b19301d1948a@cherry.de>
-In-Reply-To: <20260504-extrawarn-sync-v1-9-b19301d1948a@cherry.de>
+ <20260504-extrawarn-sync-v1-14-b19301d1948a@cherry.de>
+In-Reply-To: <20260504-extrawarn-sync-v1-14-b19301d1948a@cherry.de>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 4 May 2026 14:30:39 -0600
-X-Gm-Features: AVHnY4LDmej7YS1C53ihEasGmfwGTYcGadg3Ku7PfRb0HjgDlbC9eF750JhzyrQ
-Message-ID: <CAFLszTh3oif8uE-V6Be-9ukfPHS_4FYshN=qOHQ0tNUgWZHxZQ@mail.gmail.com>
-Subject: Re: [PATCH RFC next 09/18] kbuild: support W=c and W=e shorthands for
- Kconfig
+Date: Mon, 4 May 2026 14:33:27 -0600
+X-Gm-Features: AVHnY4JHFDVwD6n0LGQkBPBtkNNPtcG6R49j2kxmyHZgYg9tUqqARtOctrY8VNc
+Message-ID: <CAFLszTgxqo_JgMDMm83P0oWZ7Z5B_3a0HP3N=gTXLj17EUBpYA@mail.gmail.com>
+Subject: Re: [PATCH RFC next 14/18] kbuild: respect CONFIG_WERROR for linker
+ and assembler
 To: foss+uboot@0leil.net
 Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
  Simon Glass <sjg@chromium.org>, Mattijs Korpershoek <mkorpershoek@kernel.org>, 
@@ -121,44 +121,19 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 2026-05-04T13:20:27, Quentin Schulz <foss+uboot@0leil.net> wrote:
-> kbuild: support W=c and W=e shorthands for Kconfig
+> kbuild: respect CONFIG_WERROR for linker and assembler
 >
-> [ Upstream commit c77d06e70d59cbc6e3c22bf644bb0b197a5fc182 ]
+> [ Upstream commit ec4a3992bc0b5b659eceb44a9f8582b26f2c8489 ]
 >
 > Original commit log:
 >
->   KCONFIG_WARN_UNKNOWN_SYMBOLS=1 and KCONFIG_WERROR=1 are descriptive
->   and suitable in scripting, but typing them from the command line can
->   be tedious.
+>   The linker and assembler do not share the compiler flags.
 >
->   Associate them with KBUILD_EXTRA_WARN (and the W= shorthand).
+>   Make sure they also fail on warnings with CONFIG_WERROR and W=e.
 >
->   Support a new letter 'c' to enable extra checks in Kconfig. You can
->   still manage compiler warnings (W=1) and Kconfig warnings (W=c)
->   independently.
->
->   Reuse the letter 'e' to turn Kconfig warnings into errors.
->
->   As usual, you can combine multiple letters in KCONFIG_EXTRA_WARN.
->
->     $ KCONFIG_WARN_UNKNOWN_SYMBOLS=1 KCONFIG_WERROR=1 make defconfig
->
->   can be shortened to:
->
->     $ KBUILD_EXTRA_WARN=ce make defconfig
->
->   or, even shorter:
->
->     $ make W=ce defconfig
->
-> [note that U-Boot currently doesn't make use of the KCONFIG_WERROR or
->  KCONFIG_WARN_UNKNOWN_SYMBOLS symbols as we're using an ancient version
->  of kconfig, so technically W=c won't do anything.]
 > Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 >
-> Makefile                   | 10 ++++++++++
->  scripts/Makefile.extrawarn |  9 ---------
->  scripts/kconfig/Makefile   |  8 ++++++++
->  3 files changed, 18 insertions(+), 9 deletions(-)
+> scripts/Makefile.extrawarn | 2 ++
+>  1 file changed, 2 insertions(+)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
