@@ -4,106 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 058CCFF885A
-	for <u-boot@archiver.kernel.org>; Mon,  4 May 2026 20:36:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 346A7CD3427
+	for <u-boot@archiver.kernel.org>; Mon,  4 May 2026 20:36:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5632D846CE;
-	Mon,  4 May 2026 22:36:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 2FDC08483F;
+	Mon,  4 May 2026 22:36:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="cZwHnJS+";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="m8T7+laj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DE1A5847C5; Mon,  4 May 2026 22:36:09 +0200 (CEST)
-Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
- [IPv6:2a00:1450:4864:20::534])
+ id D248B84841; Mon,  4 May 2026 22:36:15 +0200 (CEST)
+Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
+ [IPv6:2607:f8b0:4864:20::32c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8935B8394E
- for <u-boot@lists.denx.de>; Mon,  4 May 2026 22:36:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AFEE784839
+ for <u-boot@lists.denx.de>; Mon,  4 May 2026 22:36:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x534.google.com with SMTP id
- 4fb4d7f45d1cf-67be871ed3fso4642146a12.1
- for <u-boot@lists.denx.de>; Mon, 04 May 2026 13:36:07 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1777926967; cv=none;
- d=google.com; s=arc-20240605;
- b=JZ4EXbopMD11c3+SsGuZlk65AeIBslcz/KXWTn68TxENV+KCbdO5Bv0L8PXJcQ7CCk
- w0Ou7ZxnxdkOGMRWEyVFwr9dPwfcMwCszmDpfqPWXkfvRRteAe6gMQkJWSTnbuf2+wlW
- 7iBSzb5ezLTmU719GZPh+Lm5K6ajDZth6D6uVuXwWMxoQGW6Oun8vzaFD32YQtPt3syW
- 6u1KpW0KRmYwzMnv8NUuUczAGFhVfJR0uHwxabSIfbDpVp/DX5n9vh6s2JBaoypIurmj
- fdndvmgNONFj5Bex7aOtN10O2THeOCLecWs9IedPj1gbtxV+LeZpJDXUwePgGyzSQ1TS
- lZnQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=2DOF6RZhgUvN++2zJIHL2CSnqgfzL8vyXpb5CnxveOU=;
- fh=JDmMtl5m1ONTYAIDZy3RW95Kei7pwM4OcFAim19m6HQ=;
- b=i9a1awaZ+7WWE8kPo9pqHFqwP/5S/NKLBqSYsvnpp0gKLRfDoV6QmhvR1kvXhNypEX
- IvVgskm9My2CBg6tzn3oXKi/ZUztwULQS88hvd022n1HWb/hDFKcVmpGZw06gq81yCRJ
- 7NUv6cPS3t5j6J/KJdrAiKMQn294izENhoHImmRrJus/1qVjNaXmro4XiCi5QfcXK4Wo
- P52n9rJgX0+CZeliC1RU39HAG0AY0FYe8BiGUMFWwWHb7cmpKhJKY7xBwu9yzmyNPzg+
- kzEyf3hP0z2hmeo0VF4t/jA0oddO1tMWwSnGnBtHFxnplb4KGdCFU6e9ZWLZL42NSbfU
- xKZA==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x32c.google.com with SMTP id
+ 46e09a7af769-7de7c57b52cso3889139a34.3
+ for <u-boot@lists.denx.de>; Mon, 04 May 2026 13:36:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1777926967; x=1778531767; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=2DOF6RZhgUvN++2zJIHL2CSnqgfzL8vyXpb5CnxveOU=;
- b=cZwHnJS+Lv+LYv61eDD+JHx1QeyFbcnS1rGZRCgI2AdqBtpXrdR6KCrGB2QxIh4ifK
- /5cCJgPd+05TE8jVtssU2jW+ET2N54GmB/pTfxtOy3r/aJsBgYToIMqG5iknZmx48oAF
- gTwWToJ1k/VMbKemfHF7NQ/KkHDphPKSR9LF4=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777926967; x=1778531767;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=konsulko.com; s=google; t=1777926972; x=1778531772; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=2DOF6RZhgUvN++2zJIHL2CSnqgfzL8vyXpb5CnxveOU=;
- b=KwBEW0xRMXNaQ2TyDBIroO1veHnqi68OMLFq9TT7UCvKpJO5GZAKZzvU9V3qi15J5h
- s5hdB0CEiZ+RKF5+NxFj3C9IIc7NHPp05YjM4wh0jRiOkmyddtLCxEPBbCeflEpZisDt
- ENuE/Ya7N4xbdbMu6ADe/XEHvBHe4k547hBQ0P96g+fPc6BLzabxnpZCwZii0oN6qSOO
- BDImhqm4UUsDEYAbS9Dr4oGvdDcPyjMvAQ5nBRQ+fDt+4QVuPuUkOX95mpo8zftzjjJL
- cg2hXHdSnIIU12VWA5BmsfXdEDy/SvVz8HMTpt/hucSQ88qV53zgaJ2K8Hm3p7bA07p6
- txqA==
-X-Gm-Message-State: AOJu0YwtRutU/zNcM0rIIGP4oXMcV3SbnsZbAwuFplGoJDtTm0XMmBUI
- qJ0cSiZTuCAXnlo/crSseEyEgxbR5yIfX1NPh7mEZiL0pj+xF1iUwYABiXx6uYlCwwPNTWZI3h9
- nPTauSgIEcIYnw2tRq1brjZvojL2EpHtQi8RXSd9u
-X-Gm-Gg: AeBDieu8vEr+XHvQgq9AWO2NpLJRlYsJ6Fb3uISOFY8/JqaWNQ/NX9C6eKjx7VCyZsS
- XX6FYMxhQnPY6OkWWT4VhHQWBPW/1QF9v6dsk9eOAmz2rUwXHaGdi0+3YYRFPWZ7wFiPNbRDyQf
- Eiw79DTL/VdYD/trHV9DvKMZ8EyM1L8udSTlH6NoeC+aaAf0+wD6HFmh5VFogUIMCUdF3XPl7X+
- 87WCG1M/3ehLy/p4jPpWqhb+slQTQ1Pu7vf6OtDsUXBXYffkbQn8qoBVfd02CBc4J2vgNyAR+0m
- 2vX48/9MyB6IJvGO
-X-Received: by 2002:a17:907:198c:b0:bae:3bbc:f290 with SMTP id
- a640c23a62f3a-bbffb23ff46mr650563066b.28.1777926966907; Mon, 04 May 2026
- 13:36:06 -0700 (PDT)
+ bh=m8zLpQ1td4xyaVkL7JiFaBdUl/D7cT/9Jdc9IQU+szI=;
+ b=m8T7+laj2IvDgqJrm8YEXv2cljpDJoyhwlW7Uks4UmZTKF+09akckJoCTUg51nQh92
+ ZO4UflSJMVATkY7KTKB8C3nUl/gYHaSRj2o5FiiQvHNn1E0mxwpnI8iPI5S8FPiM7Y3E
+ jngbFKoa7Xswt8X4nlx3xcYInT8DZgM765V44=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1777926972; x=1778531772;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=m8zLpQ1td4xyaVkL7JiFaBdUl/D7cT/9Jdc9IQU+szI=;
+ b=KWfKbrrhahgGL/d7GcesLJ5OmmRKqR19NYxaGpAe2xRMAOYSnz3fKc3/KwIQ1M4/yi
+ qCGoYVR+yiwRzVtlGtXsy3UeKeCQArrthF+mTd66QtbcqjwmRu49MspKSiQamSvZcxxI
+ CrSC0EgUGYZArGZzyoYwZ1NzQulsM9VG4hzwrPw/F8o8HHqEADJZCDD2dCmS5Bljfaop
+ B5CKlSp1Xpx4AbC3OTheWAXGLdxpLTsstlE8hDKpfwY5jTnrri+WUzlQHrV28BCL3s/p
+ /9BnkgWz3+Oyy++AOCJ3L5ntAsbvkcSV/zYz0PIv1R8fQDHX8eV3pd8ddTch8X6GcEnl
+ zzLA==
+X-Gm-Message-State: AOJu0Yx89ndZe0x6uqRwNCSV2XOBof+gfzvAw+0uK0ldmx8neaCh518V
+ lfJjC2fQS+VZIVTPo25iCQodRn6VjiBIkdu1D6KB21zBIS+A7e5TatHfTRm4b1uE4c8=
+X-Gm-Gg: AeBDiesB0/loPLmrOZ3Fks6gv0BiJiQqkXws7bqFKSsI0siaxuzsr2/pEYTNOnkWYG2
+ y6/WrtiEJko0X2ZT/aDMMQIjfZNI7IihJuxF6YH0naUAEGxcYnE+9fwNYGT5MEzWpYDKfPojSWj
+ grQCzOD4QPttS6+y9s51V4q7cbk3a7P1OKg6VjoU0s9zhkTFS+/f7dV7DWbG8lNv4ZDIKQxBYUF
+ O8xyJ8bek4c+jzS5q+U5cLlD7RVveLK3Ap7AxloqxzoksbL5ljkvXAWM+xziYhuZnytONJjyEzw
+ mE93xkfE0lVcGZbu1p6Bv4MU4KpEXwNQATepEC4dOOp9lrvC1YpMGOr8AoKewXfCa+UXTdfSRD4
+ NHR6avDpY6wMXHftZ/NPUcPlASPygU2i19xkUAom4He5x/TfNPy4WIHe68ww/7AeBBnNpOVjdrJ
+ CSjDL999A3wMbZjjprkZDn6q34JBH9SI78G49TuOWCU6kw7w02v8L9erDeTPb2gmyaWyTaFCf7m
+ 0clN5gG/jS56pZPsuiLVBi+v8/nRqAAS+ak6V5SjvGlYSVokFxJC9y68Adt
+X-Received: by 2002:a05:6830:67e5:b0:7d7:f031:37bf with SMTP id
+ 46e09a7af769-7dee13f9788mr7043340a34.19.1777926972087; 
+ Mon, 04 May 2026 13:36:12 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-189-203-106-235.totalplay.net.
+ [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7decac26330sm8464401a34.13.2026.05.04.13.36.11
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 04 May 2026 13:36:11 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de, Franz Schnyder <fra.schnyder@gmail.com>
+Cc: Francesco Dolcini <francesco.dolcini@toradex.com>, 
+ Rasmus Villemoes <ravi@prevas.dk>, 
+ Franz Schnyder <franz.schnyder@toradex.com>
+In-Reply-To: <20260331-fix-test-cmd-empty-v1-1-56cb93fc8f43@toradex.com>
+References: <20260331-fix-test-cmd-empty-v1-1-56cb93fc8f43@toradex.com>
+Subject: Re: [PATCH] board: toradex: Quote variables in `test` cmd expression
+Message-Id: <177792697111.2985766.14817811636048176090.b4-ty@konsulko.com>
+Date: Mon, 04 May 2026 14:36:11 -0600
 MIME-Version: 1.0
-References: <20260504-extrawarn-sync-v1-0-b19301d1948a@cherry.de>
- <20260504-extrawarn-sync-v1-16-b19301d1948a@cherry.de>
-In-Reply-To: <20260504-extrawarn-sync-v1-16-b19301d1948a@cherry.de>
-From: Simon Glass <sjg@chromium.org>
-Date: Mon, 4 May 2026 14:35:54 -0600
-X-Gm-Features: AVHnY4JYUa6hyyh-uY3lZIavNWlOmWByzjm9fQ8y5cpxPiHx3C4KtoL0EYOZyzg
-Message-ID: <CAFLszTg5-JREp8E5R7sYwssgmUYYL9zV9NYFvHyObV82dHBxYg@mail.gmail.com>
-Subject: Re: [PATCH RFC next 16/18] scripts/Makefile.extrawarn: Respect
- CONFIG_WERROR / W=e for hostprogs
-To: foss+uboot@0leil.net
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Simon Glass <sjg@chromium.org>, Mattijs Korpershoek <mkorpershoek@kernel.org>, 
- David Lechner <dlechner@baylibre.com>,
- Jerome Forissier <jerome.forissier@arm.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Simon Glass <simon.glass@canonical.com>, Raymond Mao <raymondmaoca@gmail.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Michal Simek <michal.simek@amd.com>, 
- Adriano Cordova <adrianox@gmail.com>, Sughosh Ganu <sughosh.ganu@arm.com>,
- Yao Zi <me@ziyao.cc>, 
- Rasmus Villemoes <ravi@prevas.dk>, Quentin Schulz <quentin.schulz@cherry.de>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -120,36 +98,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2026-05-04T13:20:27, Quentin Schulz <foss+uboot@0leil.net> wrote:
-> scripts/Makefile.extrawarn: Respect CONFIG_WERROR / W=e for hostprogs
->
-> [ Upstream commit 7ded7d37e5f5b36b4acd74380156cf07b6640c5b ]
->
-> Original commit log:
->
->   Commit 27758d8c2583 ("kbuild: enable -Werror for hostprogs")
->   unconditionally enabled -Werror for the compiler, assembler, and linker
->   when building the host programs, as the build footprint of the host
->   programs is small (thus risk of build failures from warnings are low)
->   and that stage of the build may not have Kconfig values (thus
->   CONFIG_WERROR could not be used as a precondition).
->
->   While turning warnings into errors unconditionally happens in a few
->   places within the kernel, it can be disruptive to people who may be
->   building with newer compilers, such as while doing a bisect. While it is
->   possible to avoid this behavior by passing HOSTCFLAGS=-w or
->   HOSTCFLAGS=-Wno-error, it may not be the most intuitive for regular
->   users not intimately familiar with Kbuild.
->
->   Avoid being disruptive to the entire build by depending on the explicit
->   opt-in of CONFIG_WERROR or W=e to enable -Werror and the like while
->   building the host programs. While this means there is a small portion of
->   the build that does not have -Werror enabled (namely scripts/kconfig/*
->   and scripts/basic/fixdep), it is better than not having it altogether.
->
-> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
->
-> scripts/Makefile.extrawarn | 8 +++++---
->  1 file changed, 5 insertions(+), 3 deletions(-)
+On Tue, 31 Mar 2026 10:10:10 +0200, Franz Schnyder wrote:
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+> With correct POSIX handling, unquoted empty variables can turn the
+> expression like
+> 	test -n ${fdtfile}
+> into
+> 	test -n
+> 
+> The POSIX handling for single argument `test` evaluates it as true,
+> so the fallback initialization will be skipped unexpectedly.
+> Quoting variable expansions in `test` expressions will always result in
+> correct behavior for empty and non-empty values.
+> This change was triggered by
+> commit 8b0619579b22 ("cmd: test: fix handling of single-argument form of test")
+> The aim is to have a less fragile codebase that is not dependent on a
+> quirk of the shell implementation.
+> 
+> [...]
+
+Applied to u-boot/master, thanks!
+
+[1/1] board: toradex: Quote variables in `test` cmd expression
+      commit: 92a04aea6df3e59942614864486bbd0f46d01682
+-- 
+Tom
+
+
