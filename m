@@ -4,96 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3B5EFF885A
-	for <u-boot@archiver.kernel.org>; Mon,  4 May 2026 12:27:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25FE9FF885A
+	for <u-boot@archiver.kernel.org>; Mon,  4 May 2026 12:27:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4F6988466D;
-	Mon,  4 May 2026 14:27:38 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8F03484674;
+	Mon,  4 May 2026 14:27:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="O+DZW5c+";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="kvrwF4Zj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9B0788394E; Mon,  4 May 2026 14:27:36 +0200 (CEST)
-Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
- [IPv6:2a00:1450:4864:20::62f])
+ id 5EC4F84674; Mon,  4 May 2026 14:27:45 +0200 (CEST)
+Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
+ [IPv6:2a00:1450:4864:20::535])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B8F9D84664
- for <u-boot@lists.denx.de>; Mon,  4 May 2026 14:27:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 76D8B83EF9
+ for <u-boot@lists.denx.de>; Mon,  4 May 2026 14:27:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62f.google.com with SMTP id
- a640c23a62f3a-ba8472c1613so728324066b.0
- for <u-boot@lists.denx.de>; Mon, 04 May 2026 05:27:34 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1777897654; cv=none;
+Received: by mail-ed1-x535.google.com with SMTP id
+ 4fb4d7f45d1cf-67b7c71c165so4442506a12.0
+ for <u-boot@lists.denx.de>; Mon, 04 May 2026 05:27:43 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1777897663; cv=none;
  d=google.com; s=arc-20240605;
- b=NK4fcnvlOHwQ23bs5tSJzosfbILa0q0Alcpl35KvehksjUuDRkc0XRcnfSposeUqYE
- TJ86FY97ihqxSCI1yfZhR/BFkr8kuVJYiArKKCdYvvUlVYFzzrgoTDG7U6LSjcz1ef+n
- fB4rNEJlIoGxRvAUVk+1YtUk2e94e4syrAT8q20YPWiFzXAqMAnWJYaH6U4WiiYN4yn5
- Ra/o5T7mTO+fKPCwHUr7/Cu5YvetlMXIzsqFbwKWgzAgOqYcg+I8n0KlhvTRX1gC4J3N
- bV0jxYwMXYnm085QA07Hfw9wq90hnPRFOheGBJRm1Y7zMVJYDa+FtKOwgkSfVsxLPNi0
- jQFg==
+ b=kico3Ml1dEIyqVBb8mo2pg8UzFcRWp+/ZT41LsvuOoepKM9eKG663HsvCB6m1LPn8d
+ IN/X4pisHZniEXJbvGQPPQ8lkrpPgpJTKLOThJYKfOJE2f1B9EK/pt4/Vptl8UV2tGk7
+ RmpmjqDSpEBSrJh9vTNlMhEOQMKZFgOph1VZdkY2u5QLYsQLL5ujKp2WDLMk8L/psl3j
+ LwF1TE34ARt1Mg/JZ/amj4BOUpjwBwZN+9OpNj0xQR3XQbS8VWBUryDYOj3Zwe9RoTMm
+ ASXG+u1pvvPpyUBjy5la9UxQupqdjGfqBG2pLrhliCyE1KpVdVRAD+cZZp3JINjaoKQh
+ w9qQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=zI8Pw6btTVABCB3HotUdYlZxWPiQvoVHOBGxARmjI9c=;
- fh=PKU69MAUC1Uf4OYW7rlT1pB/QcRI58pIXTPjOErnGJo=;
- b=hxnVRKRq6uIbwz12T8L9RSOS4nyPMgnLshspAXEhiR7rDoeYqhPWXqJ6u6Peng5LXc
- Z63JaR8XLKqg9BBuDyl6sTIb0jANWzJxeYXNQ39lLKAi3+HBiNqBiOMZ586p75iEec6r
- LlDrZmK0z4ug7XoA5gg0JWMiDZTLo8sCmrqR+fEn1km1mP+JGmxX3FVFlRcxs6Ve0+ac
- ev0VwI/zUraSAUowekvBvW/M2DMRJj1VWFJEgbw7uTOnfpuPqIXmkwSR3RgDwlb04QDA
- MhbBx76XHf1aR5p8HUNcGJB9XBcVSLA0q3hdKOgWwUhIoKbNryOqFppiDMKPY1q8orRH
- mOqg==; darn=lists.denx.de
+ bh=R8EOwhJnLdcq/ONAbdvvlIPzMGyDbBfcowTTYo+UdVM=;
+ fh=PKLU0xSNpsrGOfl0gQ17G1VaKViMSq+Ysfr2F1w3zVg=;
+ b=YWBxZSkN4EvnYBMgKfH8zgjGO6tL8Ipa8Po0ZMQFV6zFNN1wRcUYKJN48HrIyTApUn
+ qdAz0jChC+Ddqwrrd8Lnz81ao+GgkTm/IfWERy4CIlEPmMDY4JFE+MNOfRaAktkmYQvU
+ VtGcplRS0bQwXMIt3i06ccQkOEuypOiFwODBPCRV/FRBZYc0HtXfBqaN3IzrBYQSzmym
+ 1PMW4qq9K8zXA7m7UqYJivl9WbQEahbL1Rs2wtrMoMhyHwWLBSC+Twq6g9s7+Uy43zMP
+ gVGFu72+Q95fcktgEDME1YYHwU6Eb9k3/syO9iGKIvEQpWbpjuzIJfTg11WCVRHO5rlu
+ FArQ==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1777897654; x=1778502454; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1777897663; x=1778502463; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=zI8Pw6btTVABCB3HotUdYlZxWPiQvoVHOBGxARmjI9c=;
- b=O+DZW5c+y6ISegn9i4B8c3P9/x+8713rMjQsLN4QvYfrYNvkQRT9TJl3zHO+66xLNG
- kN2H82fle84PowRq84opm2WmBZuTeML59PtBgroz/9SssqiBRwd6d7o2IAVWRxW+luPb
- qffXdEfVku0Sh3+DcqYzRQlxzRWH65AVUiHfE=
+ bh=R8EOwhJnLdcq/ONAbdvvlIPzMGyDbBfcowTTYo+UdVM=;
+ b=kvrwF4ZjeTNdAxwsbVGEPRiiEVoE7ybs1j0ZvjXwcb5kEgYGSgBDCmfO+oF+f3VD5s
+ chW9ygtOUBFKxj8/F0f+S9A5gPMeosvpHN6ggaQoPfEK2OYb4Kkm5zGHXY3cPrJ/vFZ7
+ Qx2fr62pZ9voZMCgo0vLV5UZHDO5SkW+59uIM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777897654; x=1778502454;
+ d=1e100.net; s=20251104; t=1777897663; x=1778502463;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=zI8Pw6btTVABCB3HotUdYlZxWPiQvoVHOBGxARmjI9c=;
- b=eMu3dWuoBpBSSN5+pi3+xNb1H4nPHMQtOmtpAW9zaoA42WgyjCZJ8VjKU9ZoysRWG9
- 8i5nHDHSU/4D1HqyZACT0XdYpHk0T5EhwWhVkd9tbvXTxXGgABsMoY46fSo/CL5yvtN9
- qzLfwdxWS8bbbARnBRRYdRg3ktmnRYY0azL71kTp+w8OtcOkHSsPHzJ7ho+Asl09mQ6K
- O0ZuBf31o4FBVURgnUTSdAvaGDx9M7QrlpH0YkhRk7fy7zDBrFBpW5LqDnc9kh1X9hrR
- r/M99cM5zyy3kIBAM1Rn13DIukITvNF/7kh0xn34rcvLAJ5ygDABHCZJw+GG7mClRIgM
- HxbA==
-X-Forwarded-Encrypted: i=1;
- AFNElJ/teul3WPBxYx+Dhlc/wkzyEAlJTRbbHnh+AH69d2N9j7MMXDxPfbrX1LzvGimE4512c03e2ss=@lists.denx.de
-X-Gm-Message-State: AOJu0YxjYfgNSvAolhkHsrwpP3DwyHBjPuDlnuJw2fAMtDKd+oVroSfL
- GX6YUH1Tk/755fWK9GO93cu8UvQTx4yL09M7VlPjueHQlQp3Jk+kOCDRfeN+2Bl0dRAVizo9LGu
- OifB9VxNryYT7DsRPniU9OkMnmE0pUQWbK0fax3vN
-X-Gm-Gg: AeBDietvv1rNO4GHkUCwihyxZIuEaQH1b2XMWmaIApQzQSXxT0xEtTdlTN0YJZkyjJt
- TH20/UBfTe4cQCS2uwxSj7z+iS8Bnna+1FbriLOcODy9xcDaVuZipKNCnBQ6UUBPvoeeonYRrDu
- 3sKgj9GeMteUzuZin0l52hUaqLjHhNW6C2Vm2MGBjPZilNyuMeN5FBcwQ5P6is34aQdlvJ0haYG
- y7IYpDeKRC0MPGJiyxspNTlUPSJMhYXuoZh/O54keU/J0N1N/HbkChQQwYx9DNDHOfiy1wvPZ/b
- qCqY8W2NZ9QmDjo8
-X-Received: by 2002:a17:907:9491:b0:bc2:ac1d:2a9a with SMTP id
- a640c23a62f3a-bc2ac1d4427mr140915766b.8.1777897654118; Mon, 04 May 2026
- 05:27:34 -0700 (PDT)
+ bh=R8EOwhJnLdcq/ONAbdvvlIPzMGyDbBfcowTTYo+UdVM=;
+ b=e5Z1zB063bhC2HhlIDY5n3PBKMTG9NAdim6ZxiSo6ZdBxRO6MOhiE6LWVFKgHg0si/
+ QuHfs9WzXGr7Mkrawgt8kxawAsjADhw3r8a10xvTUOVh6zHV2y4uFeFOUAZqQs/JBMdr
+ YA8hYyJsqx8FASITzapiIQcSxBx98RuhZba0XZCUiEZqLE2Rokm/eSBpV7yVkgmyBgVF
+ M8tEbfHxfnG8ng+aHWALEb7qedyKSNNgCpNvjPM9h8OEHVGwKQBNJY8Rx6f7miybW2xZ
+ 2xAwtHXzTL/Ukb1oWrnX6dwmhe4+E8rOutftRx2JqBLQcBLg9eMdu/K8ArjdjyDfbrPH
+ koOw==
+X-Gm-Message-State: AOJu0YzHdJf7/UgEnaAut7+crQvP9sIfyuf9nRR+A0z9/usAe8I68VDJ
+ ckXx2/uCHNptLWyF3EklzN+2Q+bHAx9kE+SnW9feE/iH5nnXv+vWoQ3BPSb05lzcDJCgpCIcJmN
+ EdUo9duXXS3t0ukfFz3mTGJ6tRtC+fCaxx7s6HACVY/ffPQHyWWQ=
+X-Gm-Gg: AeBDieuyqrJAVF2nppZJEfp9lzOvUPmDys6Rgr4c8mp3Rxvbq0Z3l3EEOplsRvoVhSB
+ CT0M5Nt/53CXw/5gplfzjd8tQl5zFUQ9P7x9awZ8um4Xb9FaPMRQcIM2dZH5/q9blYtsk/bBcUp
+ Dg/45uHL9tCAPxYbpf0E8wn+KjZ4hriddcUAYLocCpEl0F4Lys5+KT1UAC7QQi/XgseeJmVgpcy
+ Hfhpo77X2r+gIbV1KNZySv9P1amqM8yApN2h30mI72r4bP9YDCN8EPAViLhAwfdabqdKm0SfsKC
+ o7tGiZpreLUklqd3
+X-Received: by 2002:a17:906:9f8f:b0:bb9:120f:965 with SMTP id
+ a640c23a62f3a-bbffab2fb42mr510293266b.7.1777897662872; Mon, 04 May 2026
+ 05:27:42 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260429154000.71351-1-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20260429154000.71351-1-heinrich.schuchardt@canonical.com>
+References: <20260429114250.791663-1-ludwig.nussel@siemens.com>
+In-Reply-To: <20260429114250.791663-1-ludwig.nussel@siemens.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 4 May 2026 06:27:19 -0600
-X-Gm-Features: AVHnY4KERBwsm2sfHJOU7cNFUe5GWozHasU0wJghHOW3YziNedmSbZszFUhAjSw
-Message-ID: <CAFLszThsVbNmH1j7Hx9Rf9QqxjqyVFv_zt1JOsPU4oB_L2NwFw@mail.gmail.com>
-Subject: Re: [PATCH 1/1] efi_loader: initialize variables in efi_dp_from_http()
-To: heinrich.schuchardt@canonical.com
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tom Rini <trini@konsulko.com>, 
- Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
+Date: Mon, 4 May 2026 06:27:28 -0600
+X-Gm-Features: AVHnY4LT55kEY9U-oG8WCyLmjZI08YdE7xceMOjItU-ZlOJRE-hggCSi2bTcznE
+Message-ID: <CAFLszTjwGbKPKaVTmVfhNNOsrco7W8VqcmLWvXjk3d6d+Pk8=g@mail.gmail.com>
+Subject: Re: [0/3] Improve U-Boot's TPM handling in the non-EFI case
+To: ludwig.nussel@siemens.com
+Cc: u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -111,17 +107,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2026-04-29T15:40:00, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
-> efi_loader: initialize variables in efi_dp_from_http()
->
-> When using lwIP, efi_dp_from_http() may fail to initialize ip or mask.
-> Initialize the variables before the call.
->
-> Addresses-Coverity-ID: 645840 - Uninitialized variables (UNINIT)
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
->
-> lib/efi_loader/efi_device_path.c | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
+Hi Ludwig,
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+On 2026-04-29T11:41:40, Ludwig Nussel <ludwig.nussel@siemens.com> wrote:
+
+> U-Boot might be the first component to start the event log, eg when
+> used in qemu. So allocate and attach the TPM event log to the TPM
+> device if not initialized yet.
+
+Thanks for looking at this. The cover letter should really mention
+patches 1 and 2 - the pcr_read changes are definitely user-visible.
+
+> I am not sure the allocation is the right way to do it for stuff
+> that gets passed to the kernel though. Advice welcome.
+
+Handing devm-allocated memory to the kernel is risky - devres can free
+it on device removal, and the kernel expects the buffer to live
+forever once linux,sml-base points at it. For memory the kernel will
+own you want a reserved-memory region (or at least an lmb_reserve())
+so it isn't reused later in the boot. What do you think?
+
+Can we have a test and a note in doc/usage/ describing the new
+behaviour and the linux,sml-base/linux,sml-size handoff?
+
+Regards,
+Simon
