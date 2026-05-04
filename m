@@ -4,64 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF27DCD343A
-	for <u-boot@archiver.kernel.org>; Mon,  4 May 2026 14:48:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 283D2FF885A
+	for <u-boot@archiver.kernel.org>; Mon,  4 May 2026 14:58:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E91378466C;
-	Mon,  4 May 2026 16:48:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=0leil.net
+	by phobos.denx.de (Postfix) with ESMTP id B3AA784374;
+	Mon,  4 May 2026 16:58:32 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=0leil.net header.i=@0leil.net header.b="HpxiYMRp";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="YHYUkA4/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1228C8460C; Mon,  4 May 2026 16:48:42 +0200 (CEST)
-Received: from smtp-1909.mail.infomaniak.ch (smtp-1909.mail.infomaniak.ch
- [IPv6:2001:1600:19:8e30::1909])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 383FC8460C; Mon,  4 May 2026 16:58:32 +0200 (CEST)
+Received: from mail-ot1-x330.google.com (mail-ot1-x330.google.com
+ [IPv6:2607:f8b0:4864:20::330])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BDAF184653
- for <u-boot@lists.denx.de>; Mon,  4 May 2026 16:48:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0524684255
+ for <u-boot@lists.denx.de>; Mon,  4 May 2026 16:58:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=0leil.net
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=foss+uboot@0leil.net
-Received: from smtp-4-0001.mail.infomaniak.ch (unknown
- [IPv6:2001:1600:7:10::a6c])
- by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4g8PfH3Zl2z1BsV;
- Mon,  4 May 2026 16:48:39 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=0leil.net;
- s=20231125; t=1777906119;
- bh=FvHrAs4a5FH0KPVgq8epTQa33IAZE4NxGTNFxX5wkFg=;
- h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
- b=HpxiYMRpUyWNHpc6GfcFwvb4890ZtaB/Lo38IW3p6oK8/EfQbbyI29a1ETts70nRc
- YkiptqzxIpPJ+yUzWdrZScQhbBFOamTNsjuS5HzH30GZRm4T4P8GRq1BUbE630pqGj
- tUJ1jyGoyjOVY4zjY+Vty8M7mLqwfEI93CFbiMj0Z8SqLvJ/dJJ9LSjtlgGiqCmOav
- OmWfKRwZIVjC5v2Mp0MvKt1fNGI5MpkPSxWZ/B57dTUF/qUHEDSpnxDZnJJOphAl4M
- cI67sEq1+ALWMywVaUHYwDd0H38wEyE0vbmrLFlTw3te6WN1iYF5/gzrsJtCTVJz8v
- AEUjTOCOII3ZQ==
-Received: from unknown by smtp-4-0001.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4g8PfG4lyhzQ0L; Mon,  4 May 2026 16:48:38 +0200 (CEST)
-From: Quentin Schulz <foss+uboot@0leil.net>
-Date: Mon, 04 May 2026 16:48:29 +0200
-Subject: [PATCH v2 2/2] cmd: ufetch: only show comma separator if there was
- a previous feature
-MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260504-ufetch-net-v2-2-01bec4ca7169@cherry.de>
-References: <20260504-ufetch-net-v2-0-01bec4ca7169@cherry.de>
-In-Reply-To: <20260504-ufetch-net-v2-0-01bec4ca7169@cherry.de>
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ot1-x330.google.com with SMTP id
+ 46e09a7af769-7dbca22dbfeso2410545a34.1
+ for <u-boot@lists.denx.de>; Mon, 04 May 2026 07:58:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1777906708; x=1778511508; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=knPKQjlL3i6tUdNtluwbGtNg7snT7hoq+Fa1mC4fqPY=;
+ b=YHYUkA4/BvaLe3G6m0Wm8gddCDHUv0+XBN7dg1t19eqmaCClhEihX+BzCP6c5ruH1C
+ GYokxRKZxbo4QlG4i47NGV8v3fHS8d2jDzue+dhqgZCAYKQZB0dFHxaga8+Bc5Lbg+Xw
+ GAJ6XV+tzDg0OcZ6dICXTKQ1kob0AB36lbuh0=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1777906708; x=1778511508;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=knPKQjlL3i6tUdNtluwbGtNg7snT7hoq+Fa1mC4fqPY=;
+ b=BNYawc/rVlrwfgxkdAMXQXmi5T3B9rrCUKA2XE4rwNfrIAKYG2Pg543qnqb7mjfiEq
+ aPN4iRV23XpzlfbLRjfEtkrAv29mzSdIxFXjgrkQ9LHmvA9ftIb4dZpxf4QfPlj8yzPG
+ McTBwZPhSYoI1wYEcHK5IU7J7hjfLuT04l0Jr4YgotMlZF3pAHXdi40+86Jq0L8kgjIR
+ q6uQPaAwhf4h2N0MAggKrtVGmsQaVy/YuwuVYeZy/tN/oQOFQn3mROg7E/VQ4HzAKrXV
+ veRY4tQB4RNbsil2GWaW8bqfi4XqlvELCjbELjjrkMJ50fqgIHALhQp7O9wo/xVtARfJ
+ CRKg==
+X-Gm-Message-State: AOJu0YwltCbw/o4HVEjV4yyqIgFHmW0u4RXuBqaaLc1U49uz2GZCOGbo
+ BXY4shccww+iAy5dfvR5UpvtJTYbcb1/ttmqsXWG89Dn9/6ZNej/VhIrmGs2cQxEqHcR2ERE4SC
+ l4gnffw==
+X-Gm-Gg: AeBDieuN/s7Nh/gMNyd5/p7wcBtZgTWmbqL4fDt9zMGk5HtqOXZA8SXCoQbSorpKqd5
+ W6jhFtgb60Y1LkNSD/D+dstWwWM2hlnkt8ECapSX01xShT6aiLwq8y4aid2SDz1gRkEccKNMM0y
+ 8CJg9jpDT43ROY9319K6I9cO9ZpWY/4sPd1pUZufKERpKk2pt2XHlD8ZgY1MMqdzm78ekN0U5Oj
+ Phgk6EBgNeZEhNMtZNeKhqZujfgbiy4mB/VBsBVd80jbptqA44fNR9tolp+jDoeD9z6iOlp8xi1
+ 6yMJBDGrY8ATeWgMAVBmOhzCMSZew6QLFMVq0WmP6Ts5I+UrRt85JoQNGMM6ibJW+JzAfgeW5/D
+ CXKRetvlvrwCTwBNcO/m7dnPYutXVtQxv3ECT16Vanttnp/nRFU7dgkCHgjtvuMizk6ClaOFZCe
+ Z2YMGqzq1XT51YkIgczxZKshv3tQIe
+X-Received: by 2002:a05:6830:3c08:b0:7de:44a5:51ea with SMTP id
+ 46e09a7af769-7dee121de03mr4800842a34.6.1777906708127; 
+ Mon, 04 May 2026 07:58:28 -0700 (PDT)
+Received: from chromium.org ([174.51.25.52]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7deca7a9036sm7854594a34.4.2026.05.04.07.58.27
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 04 May 2026 07:58:27 -0700 (PDT)
+From: Simon Glass <sjg@chromium.org>
 To: u-boot@lists.denx.de
-Cc: Casey Connolly <casey.connolly@linaro.org>, 
- Tom Rini <trini@konsulko.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Andrew Goodbody <andrew.goodbody@linaro.org>, 
- Peter Robinson <pbrobinson@gmail.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>, 
- Quentin Schulz <quentin.schulz@cherry.de>
-X-Mailer: b4 0.15-dev-47773
-X-Infomaniak-Routing: alpha
+Cc: Simon Glass <sjg@chromium.org>, Quentin Schulz <quentin.schulz@cherry.de>
+Subject: [PATCH] .mailmap: Update my email address
+Date: Mon,  4 May 2026 08:58:16 -0600
+Message-ID: <20260504145820.1727552-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.43.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,69 +90,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Quentin Schulz <quentin.schulz@cherry.de>
+Add a .mailmap entry so my sjg@chromium.org address is used for all
+email.
 
-Currently, if NET is disabled, the next feature to be printed will start
-with a comma and a space which is not pretty. Add the comma and
-whitespace only when a previous feature has already been shown.
-
-Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
+Suggested-by: Quentin Schulz <quentin.schulz@cherry.de>
+Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
- cmd/ufetch.c | 29 ++++++++++++++++++++---------
- 1 file changed, 20 insertions(+), 9 deletions(-)
 
-diff --git a/cmd/ufetch.c b/cmd/ufetch.c
-index bc5db08eee1..900b126b55b 100644
---- a/cmd/ufetch.c
-+++ b/cmd/ufetch.c
-@@ -157,26 +157,37 @@ static int do_ufetch(struct cmd_tbl *cmdtp, int flag, int argc,
- 				printf(" (%d baud)", gd->baudrate);
- 			putc('\n');
- 			break;
--		case FEATURES:
-+		case FEATURES: {
-+			bool sep = false;
-+
- 			printf("Features:" RESET " ");
--			if (IS_ENABLED(CONFIG_NET))
--				printf("Net");
--			if (IS_ENABLED(CONFIG_EFI_LOADER))
--				printf(", EFI");
--			if (IS_ENABLED(CONFIG_CMD_CAT))
--				printf(", cat :3");
-+			if (IS_ENABLED(CONFIG_NET)) {
-+				printf("%sNet", sep ? ", " : "");
-+				sep = true;
-+			}
-+			if (IS_ENABLED(CONFIG_EFI_LOADER)) {
-+				printf("%sEFI", sep ? ", " : "");
-+				sep = true;
-+			}
-+			if (IS_ENABLED(CONFIG_CMD_CAT)) {
-+				printf("%scat :3", sep ? ", " : "");
-+				sep = true;
-+			}
- #ifdef CONFIG_ARM64
- 			switch (current_el()) {
- 			case 2:
--				printf(", VMs");
-+				printf("%sVMs", sep ? ", " : "");
-+				sep = true;
- 				break;
- 			case 3:
--				printf(", full control!");
-+				printf("%sfull control!", sep ? ", " : "");
-+				sep = true;
- 				break;
- 			}
- #endif
- 			printf("\n");
- 			break;
-+		}
- 		case RELOCATION:
- 			if (gd->flags & GD_FLG_SKIP_RELOC)
- 				printf("Relocated:" RESET " no\n");
+ .mailmap | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/.mailmap b/.mailmap
+index 0c2e96219f8..7aef23fd7cf 100644
+--- a/.mailmap
++++ b/.mailmap
+@@ -137,6 +137,7 @@ Sean Anderson <sean.anderson@linux.dev> <sean.anderson@seco.com>
+ Shaohui Xie <Shaohui.Xie@freescale.com>
+ Shravya Kumbham <shravya.kumbham@amd.com> <shravya.kumbham@xilinx.com>
+ Shubhrajyoti Datta <shubhrajyoti.datta@amd.com> <shubhrajyoti.datta@xilinx.com>
++Simon Glass <sjg@chromium.org> <simon.glass@canonical.com>
+ Siva Durga Prasad Paladugu <siva.durga.prasad.paladugu@amd.com> <siva.durga.paladugu@xilinx.com>
+ Siva Durga Prasad Paladugu <siva.durga.prasad.paladugu@amd.com> <sivadur@xilinx.com>
+ Srinivas Goud <srinivas.goud@amd.com> <srinivas.goud@xilinx.com>
+---
+base-commit: bb0f3eebb3c196d9b6efbbd1e5aa9b16abbb9ad6
+branch: mailmap
 
 -- 
-2.54.0
+2.43.0
 
