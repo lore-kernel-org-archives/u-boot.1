@@ -4,57 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8651CCD3430
-	for <u-boot@archiver.kernel.org>; Mon,  4 May 2026 14:48:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 352F4CD343A
+	for <u-boot@archiver.kernel.org>; Mon,  4 May 2026 14:48:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E812484374;
-	Mon,  4 May 2026 16:48:40 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A875D8460D;
+	Mon,  4 May 2026 16:48:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=0leil.net header.i=@0leil.net header.b="QSkPZTGJ";
+	dkim=pass (2048-bit key; unprotected) header.d=0leil.net header.i=@0leil.net header.b="ROF4Xb6X";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1B15184661; Mon,  4 May 2026 16:48:40 +0200 (CEST)
-Received: from smtp-bc0b.mail.infomaniak.ch (smtp-bc0b.mail.infomaniak.ch
- [45.157.188.11])
+ id 7854B8466B; Mon,  4 May 2026 16:48:41 +0200 (CEST)
+Received: from smtp-bc09.mail.infomaniak.ch (smtp-bc09.mail.infomaniak.ch
+ [IPv6:2001:1600:19:8e30::bc09])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DB68B84255
- for <u-boot@lists.denx.de>; Mon,  4 May 2026 16:48:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D023A8460C
+ for <u-boot@lists.denx.de>; Mon,  4 May 2026 16:48:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=foss+uboot@0leil.net
 Received: from smtp-4-0001.mail.infomaniak.ch (unknown
  [IPv6:2001:1600:7:10::a6c])
- by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4g8PfF4CLBz1CqX;
- Mon,  4 May 2026 16:48:37 +0200 (CEST)
+ by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4g8PfG42R1z1BX4;
+ Mon,  4 May 2026 16:48:38 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=0leil.net;
- s=20231125; t=1777906117;
- bh=/kpw7p/o9yYLN1Y84Ai38/kwFtbTyaLtTuZc0hTU2X8=;
- h=From:Subject:Date:To:Cc:From;
- b=QSkPZTGJOwthHHHvuGqHvCb0SeNtjAoPqpcFOtaT3qcpQrnTMGqzUPVs/ejE6hkS3
- 7+OPSYieMksrrx0VJS+Db1/ftuRIXr6TOvfsGMO5S5lb1uXVMKfhivcZLOxdlIhwy/
- 18QfBxUKAF36ew7Qdaa6xpw/D/6UodJ7VdWOxjMHZI8/AFZxAZp7gfgXDlThNbCgSl
- ts6Lk9UUTr1AZYp/GDrpFCC6Zh5AwGceBHmcQYRBQjsV3NjHAQ6DuKZe/hOIj2p/q5
- vuE07QWmP+JMBtntUalE8l4mPS6WlPFwRXb8qcd3g/YdpikjLT7X10rXEHUdvdYWEj
- AApbNUo8/jUzg==
+ s=20231125; t=1777906118;
+ bh=84hrh3g9PJB/sCxZY9FG14DMpptDObciSi+ZiHCh5xQ=;
+ h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
+ b=ROF4Xb6XwaEwn+sZ4YyeqtviOIIdAXiRoSgrrljk8cwxuw8DH2X9HukgZTjRAMoPS
+ 09KHiMYlmBi+/aXe95ELjKNw5DqUc/lc/9O5UIP7RwhNa67H5U9ls/oPOcG7o1d47u
+ 9mmRwz0pz8Ca5F/7HEo+oVblTvN8CEebdOyL7zt6xtQyzRfH5g5XGLfBzrQ0pZuoA9
+ nAaDmU58RTXnyRLJ/Qbqu1Nl0XeVqKTraMScRbmm3MnHbmDxP3HblvLIGaNu6vUTuU
+ efZjTkF4N6osl1xm90Zl4i0aYxqi/znEnz/AtaA0//QhUq5Fh1L1XzewsR11aYCabK
+ akRIRFfv+7VWA==
 Received: from unknown by smtp-4-0001.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4g8PfC6V2DzN6M; Mon,  4 May 2026 16:48:35 +0200 (CEST)
+ id 4g8PfF4ZsyzMts; Mon,  4 May 2026 16:48:37 +0200 (CEST)
 From: Quentin Schulz <foss+uboot@0leil.net>
-Subject: [PATCH v2 0/2] cmd: ufetch: print Net feature when NET_LWIP=y,
- prettyfy if NET=n
-Date: Mon, 04 May 2026 16:48:27 +0200
-Message-Id: <20260504-ufetch-net-v2-0-01bec4ca7169@cherry.de>
+Date: Mon, 04 May 2026 16:48:28 +0200
+Subject: [PATCH v2 1/2] cmd: ufetch: show net feature when NET_LWIP is selected
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/22NQQ7CIBQFr9L8tRigUqor72G6oPAruGgNUGLTc
- Hehbl1OMm/eDgG9wwC3ZgePyQW3zAX4qQFt1fxE4kxh4JR39MJ7sk4YtSUzRsJGJYVoFadaQhm
- 8PU7uc8Qew4/DOr5Qx1qohnUhLn473hKr3t9wYoQSYUSvZcd63l7v2qL329kgDDnnLw1LKFK2A
- AAA
-X-Change-ID: 20260428-ufetch-net-1ba7553a20c7
+Message-Id: <20260504-ufetch-net-v2-1-01bec4ca7169@cherry.de>
+References: <20260504-ufetch-net-v2-0-01bec4ca7169@cherry.de>
+In-Reply-To: <20260504-ufetch-net-v2-0-01bec4ca7169@cherry.de>
 To: u-boot@lists.denx.de
 Cc: Casey Connolly <casey.connolly@linaro.org>, 
  Tom Rini <trini@konsulko.com>, 
@@ -81,31 +77,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Make sure the Net feature is printed when NET_LWIP is enabled, not only
-when NET_LEGACY is.
+From: Quentin Schulz <quentin.schulz@cherry.de>
 
-Only print comma and following whitespace as separator if there was a
-feature printed before feature to be printed.
+We've had a new lwIP networking stack for a couple of years already, so
+let's show there is a "net" feature if it's selected. Since NET_LEGACY
+|| NET_LWIP is the same as NET, let's check on NET.
 
+Reported-by: Simon Glass <sjg@chromium.org>
+Closes: https://lore.kernel.org/u-boot/CAFLszTgZC1FGy8965pHiG-u=FhrguftRv41ghQ_Qb_RRXx6tyg@mail.gmail.com/
+Reviewed-by: Simon Glass <sjg@chromium.org>
+Reviewed-by: Casey Connolly <casey.connolly@linaro.org>
 Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 ---
-Changes in v2:
-- added R-b trailers,
-- fixed spurious colon character before separator in cat,
-- Link to v1: https://patch.msgid.link/20260428-ufetch-net-v1-0-5d58c7618239@cherry.de
+ cmd/ufetch.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
----
-Quentin Schulz (2):
-      cmd: ufetch: show net feature when NET_LWIP is selected
-      cmd: ufetch: only show comma separator if there was a previous feature
+diff --git a/cmd/ufetch.c b/cmd/ufetch.c
+index f8dc904bdd0..bc5db08eee1 100644
+--- a/cmd/ufetch.c
++++ b/cmd/ufetch.c
+@@ -159,7 +159,7 @@ static int do_ufetch(struct cmd_tbl *cmdtp, int flag, int argc,
+ 			break;
+ 		case FEATURES:
+ 			printf("Features:" RESET " ");
+-			if (IS_ENABLED(CONFIG_NET_LEGACY))
++			if (IS_ENABLED(CONFIG_NET))
+ 				printf("Net");
+ 			if (IS_ENABLED(CONFIG_EFI_LOADER))
+ 				printf(", EFI");
 
- cmd/ufetch.c | 29 ++++++++++++++++++++---------
- 1 file changed, 20 insertions(+), 9 deletions(-)
----
-base-commit: bb0f3eebb3c196d9b6efbbd1e5aa9b16abbb9ad6
-change-id: 20260428-ufetch-net-1ba7553a20c7
-
-Best regards,
---  
-Quentin Schulz <quentin.schulz@cherry.de>
+-- 
+2.54.0
 
