@@ -4,91 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D355EFF886F
-	for <u-boot@archiver.kernel.org>; Mon,  4 May 2026 12:17:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73A0DFF886F
+	for <u-boot@archiver.kernel.org>; Mon,  4 May 2026 12:17:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 75A378460B;
-	Mon,  4 May 2026 14:17:40 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E86B3845E9;
+	Mon,  4 May 2026 14:17:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="B+ejsUt+";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="c76cV1WA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9F0518460B; Mon,  4 May 2026 14:17:39 +0200 (CEST)
-Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
- [IPv6:2a00:1450:4864:20::629])
+ id DA777845E3; Mon,  4 May 2026 14:17:45 +0200 (CEST)
+Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
+ [IPv6:2a00:1450:4864:20::52a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A7D7B83FEC
- for <u-boot@lists.denx.de>; Mon,  4 May 2026 14:17:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E93D483FEC
+ for <u-boot@lists.denx.de>; Mon,  4 May 2026 14:17:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-b9358bc9c50so605886866b.1
- for <u-boot@lists.denx.de>; Mon, 04 May 2026 05:17:37 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1777897057; cv=none;
+Received: by mail-ed1-x52a.google.com with SMTP id
+ 4fb4d7f45d1cf-67389cf78b0so7857341a12.2
+ for <u-boot@lists.denx.de>; Mon, 04 May 2026 05:17:43 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1777897063; cv=none;
  d=google.com; s=arc-20240605;
- b=DbWvgs+aW6Bq+rRclDYvPo/gaf4BWWaAkU2rfveaxzm7jCQXqmlIaGONGhqekX83ds
- 7Kc9wJh5d4dNgT7h7exExuvL2w3/UAplU1YoFD18neWYMjKRZLMmKRYwUHHwuQDhfa70
- GGBbH+os4QD+cr0MHsrdkVwBJpLvt9Z2RYOBkp8bmxH8aSX2L4XvzhZske0v6E9bDELg
- 0ENivAoYnpLDjB1j45CccMlUDY4QVOuJWuw3c2ODsWjvcoraA8A/8YRwebhgFi9CsTq+
- 2tLcwKfZ+3c+ODazC1g82EoQzymaR9N1t6IufXeyBO+K9ADBneKBB1LALWJvqFlF6WO/
- Fglw==
+ b=fl/e5km//HqVwVlrjknRMZkHaOv/do/coiFVDc1uj0QHSMRwe9JuyKo0vZ+ZyUbuOA
+ TcHIEdKnr75QdXa6o2ir9LSTmRg33VRL+CfxuXPUwNgo+zSVHUQwrx4lmpqPSsmqLuQi
+ KCqiWs8+BvOGzv99zxcmUSq1Gm7ETYhztVK6vwFBwFHtHb8lMaDRfUQbQNT6NvMuJfr1
+ VLAqDL4dEm2BLK6eEBdzPoHfTsUnNsmH+aWuaghWxFefRCC/GYi+bhMBac12b2cj0EkB
+ zs4k5Vor9rTFAdlQMEfZ2k8y3+y+8nV0/8nrfhuh9nOpdMywMLWym2ZVqdR0S2s0dssl
+ D94w==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=B0R11NFGsv/YHmM/E1D+NgdCTTY1DQFTKJ3KLzAoBOE=;
+ bh=suEa1mvWkV3XjyxJkzq/aU35EdHAiVhFwO1Q2Sc18eg=;
  fh=jmbcoFG2RPEOJsmPKSiakkV0VWJqP8RiS13G+yktnmU=;
- b=HTZ4b0s2+OpZ2BE9WVPUHAuelKxANEYiHICsBLYdZNvMj71mxZ6mGGKeU00SZ20hX3
- 97L4YMNErXYNhosTDuH9efT3NwQ/F+HUAkE58sTvMhCm3NaD2vrVLCIEVuWD8hl1P+mJ
- R2NuQscI8njWUl6ADW7muufIo+z0+PPYdFgeqDHGhPOjb4/bIWeCynUsd8S6h+QpmFCa
- r/T/MuPheFRxkwxyURt4OeB2GBF4cQ3QQvcsprbPfSCByxr3J8fAxFRqVbc/cDchH16T
- qfPgbTmOmgoW4JMUAUqwABDWVcifFWZ7ihrtPjFGRB7QFW5S07TOroQ4AjL7rPGmw+xf
- Kr6A==; darn=lists.denx.de
+ b=LrmN8g52rS/JT9+hv2wLVx3ygBYYFPbTVybYyJrjyNcLZcVhkTefa7t2yKk4KEoBNh
+ QN0o644UrSAPyZ0TmAD1x+xc8r0JUmwEfBzHMaQ0ejyhKmuIkx5UngZ1akAxjHPG43rt
+ dO1bO8nsQbXNrQ2yacrQImRMV2360VohBYhWjgjXBCwmpXHAVLvD7XFqLVwKUKX2akES
+ +Ec8e+bXt4X8Zi7CDX9qANrkc6hxey9j+OvKR8h8+aHt1ItLiaNihpbA2Bm/9Meswaq9
+ kLITYoQg6txfePhHY6/EglucIFxe844lcP4WmJRibxjZW03owcZ2SX7+NORXkoIbIetk
+ 5O1Q==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1777897057; x=1778501857; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1777897063; x=1778501863; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=B0R11NFGsv/YHmM/E1D+NgdCTTY1DQFTKJ3KLzAoBOE=;
- b=B+ejsUt+uLI3JUeFJm9P3milJ0g1aZ7Kmo2ElPFnp29tJykQoSnoE6W0ko/f9dnnNb
- PAc3U3BmP2EhSgzNrLACSfcoCqBSfvqML9p9wCbjGgYg3tjV5jIha/dOlX0GpxS+qAem
- WDBqx0D86XYZTZrch/y3sBE9ZLmSDiU0SRVas=
+ bh=suEa1mvWkV3XjyxJkzq/aU35EdHAiVhFwO1Q2Sc18eg=;
+ b=c76cV1WAT/bYpGlE7BDUCHpha15VBU8bmt5ANOIMC8KTVjcyNotVPxonHNk18VhI1R
+ EVwZPCIWBsg56OC9eW9e7UMV85wuCAQV5V86tkzIcJW+AAPrcfzlCyi1gZ1addA+iRCh
+ JbuRAUSPWOSMo3SCdsLPL6Y47E6bd2WofXsS4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777897057; x=1778501857;
+ d=1e100.net; s=20251104; t=1777897063; x=1778501863;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=B0R11NFGsv/YHmM/E1D+NgdCTTY1DQFTKJ3KLzAoBOE=;
- b=XNZO0HOqHoFXkdGI3UffJ1ZX0J5qx8XapYdIv/A/eRmdgPZupuydhaTMdRquJdjh13
- H1WVeDklZudLRAdvsau5+duS0Q9Aps0XziFAj26mFYH2BYuQjgBDV5BI56L+oOK21sJ/
- /gBCuCQnjBFV2se88DHHCYfVsbjmCTOFRQScHvVwi4mPATOOB0c9cgnKm5hdSQkPwB7C
- ZeNSlfxNDh/CQl+xUdjIfsxUPsjMm0jeufg4qnghDxwqOeKII5niqYzrV0UJWRVUnzgi
- jvmasO38sRVIFPSR4nEl3jUsfE1daKk+1wjvI61bWRPGfYeYc5bdx3AFR9gpJDy9ko4j
- 2Kkg==
-X-Gm-Message-State: AOJu0YwK4YFOKexRDRnJI9i+g8ngmYeP0G4DfIMOT73oHPYBjykkamcV
- mQ16DwLWuve99eJ1EmsBoCTg7zCUB70jw+IET8LpwUD3dsDswPZ5Qbpa+ba8LdH9Y1+6MCJZGV+
- yPkDWumZ304G19Aj8uzgBtIQzv8oViWPWB0zcXmdB
-X-Gm-Gg: AeBDievLulIGF7ZRJIJf6zZhegLfa7kaBHx1/PfHn+MVHTLYt1iHtgxx1OwX/rUIV6L
- H/30EEY1l0hTkZKtluAadAO+/LZ0JSThene4IJOGBm4pGey1tL07RQh3X/ofsfCmL9BDc430WPd
- +TY1ieuur8G12d0bCUJ40fBqQkPXAB3UGUB90L0x0mW9xC6JXlk7FJqP21aTr/5AsGI9Th863yM
- ILJkKdAqa/MIrZZ22ScQVIfyofP7+eSQa8LQnl+F4p1YzLKgNLO8gOTUEXtx9HU3eGBWdjzhgh4
- iAwgMxMheyxbAnHR
-X-Received: by 2002:a17:906:f595:b0:b9c:4fa:9141 with SMTP id
- a640c23a62f3a-bbff8dc777amr502121966b.9.1777897057026; Mon, 04 May 2026
- 05:17:37 -0700 (PDT)
+ bh=suEa1mvWkV3XjyxJkzq/aU35EdHAiVhFwO1Q2Sc18eg=;
+ b=NXAa3MkJrlvCJxj2i7geN9rAAgVEOPmjNXdO4PjFaPIVi9IHCodBnjV1Hu9eDbaRd9
+ jtvpQNWKSRFP3pOtuZRc7/HVsy2ID/DVQAa6nUaRXnXemRHX/8wALxQi1reQK8/OA7Ou
+ 3+s1CcieRvKnaLfqKDYKLsjAOk82r2DElyK/VNo/yGs+zwHt7P6MgmLCPxjBpnFBK0cU
+ K6m0VC8xCjV7u8O6/4f6AElX0Ef/VY9mvxcGN0jxUDqCv87bZYxTyc5Ov/pw3RSjwoJ6
+ fDa0v6FN/ZGblkiEf2LRgRpHAKgYKKUEb81K5EeMxmtRNAS0dm7+9uT0ir8Zq8LUFdj7
+ G21A==
+X-Gm-Message-State: AOJu0YxwvG8BhOqMDXSsewAP0ts08suoG0GeY/uh/aAiRO4QkC7EiyTn
+ zJiiw+STzRrNb1d09UxwUdTJbsuuujbe2S3E97jU5LR+jP1dW3qEni7KSy93kAlBoF606QA6OhD
+ gMr48KTMXlF8yST1vUxcuAjQCY9sJAFaJi3IiNuGV
+X-Gm-Gg: AeBDiesTwIfdW7p/kpVtoGbl8HNzRN5N20WgG3Hl6k11SHB7oB+zHP0Ai5srpAyTzhd
+ robhpAPLVycR5pjunIJaaTP/oW3A6QVCNTr05EnRVx8g9papasSxKk8ETPqP9uBeH0GL7TPvdIU
+ VIekxSrXjH6OPnFRb71lMc7YQUpwI7DNbxUp+5sQ+FCoAM3AWe9l3EQiHxuo2b1hWTi2uBRcizW
+ jq6dhoD6bWbW/SWngyg4S2DMuMcjA7aQ8RV9vmcDHdtYdTtuJZnT/aj9uAAT5vcO1b3+yaujkui
+ rudrUKOxNa8w6bnS
+X-Received: by 2002:a17:907:3e1d:b0:bc2:df19:b48e with SMTP id
+ a640c23a62f3a-bc2df19b65fmr134759166b.34.1777897063347; Mon, 04 May 2026
+ 05:17:43 -0700 (PDT)
 MIME-Version: 1.0
 References: <cover.1777551598.git.michal.simek@amd.com>
- <74c8b0830dadc5b7f36c4e2c49a1087a503f7ca1.1777551598.git.michal.simek@amd.com>
-In-Reply-To: <74c8b0830dadc5b7f36c4e2c49a1087a503f7ca1.1777551598.git.michal.simek@amd.com>
+ <7c16f629d85dba0118f8d67831adb8f167bdb8f1.1777551598.git.michal.simek@amd.com>
+In-Reply-To: <7c16f629d85dba0118f8d67831adb8f167bdb8f1.1777551598.git.michal.simek@amd.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 4 May 2026 06:17:23 -0600
-X-Gm-Features: AVHnY4LQUOu8Vb_cvR6fQMFLA8siFi68713qz9SB0WOF3fCzpnORgDy4ZJ2ZPJU
-Message-ID: <CAFLszTgWRJgZoLQqqLvLuUR0B_uKje5ffvQt3uZG9sdhPiKNNg@mail.gmail.com>
-Subject: Re: [PATCH 1/4] reset: Add reset_reset() and reset_reset_bulk() API
+Date: Mon, 4 May 2026 06:17:31 -0600
+X-Gm-Features: AVHnY4I8NqKuIDiNcZYNZGY3BFilAMTHWo605Z7BwKxSvLfXtVSJUrvqFrKKZC0
+Message-ID: <CAFLszTgN0=H_5qRfeqzB0V-fOeXYfV-xJ4upGSB4W5tGnaZ51Q@mail.gmail.com>
+Subject: Re: [PATCH 2/4] reset: Add sandbox tests for reset_reset() and
+ reset_reset_bulk()
 To: michal.simek@amd.com
 Cc: u-boot@lists.denx.de, git@amd.com
 Content-Type: text/plain; charset="UTF-8"
@@ -111,56 +112,47 @@ X-Virus-Status: Clean
 Hi Michal,
 
 On 2026-04-30T12:20:00, Michal Simek <michal.simek@amd.com> wrote:
-> reset: Add reset_reset() and reset_reset_bulk() API
+> reset: Add sandbox tests for reset_reset() and reset_reset_bulk()
 >
-> Add reset_reset() and reset_reset_bulk() functions to the reset
-> controller API. These functions assert and then deassert reset signals
-> in a single call, providing a convenient way to pulse/toggle a reset
-> line.
->
-> This mirrors the Linux kernel's reset_control_reset() and
-> reset_control_bulk_reset() APIs. The new functions are useful for
-> drivers that need to cycle a reset line during initialization or
-> error recovery.
+> Add DM test coverage for the new reset_reset() and reset_reset_bulk()
+> API functions. The tests exercise the assert + deassert fallback path
+> since the sandbox reset driver does not implement the rst_reset op.
 >
 > Signed-off-by: Michal Simek <michal.simek@amd.com>
 >
-> drivers/reset/reset-uclass.c | 30 ++++++++++++++++++++++++++++++
->  include/reset-uclass.h       | 11 +++++++++++
->  include/reset.h              | 35 +++++++++++++++++++++++++++++++++++
->  3 files changed, 76 insertions(+)
+> arch/sandbox/include/asm/reset.h   |  2 ++
+>  drivers/reset/sandbox-reset-test.c | 14 ++++++++++
+>  test/dm/reset.c                    | 53 ++++++++++++++++++++++++++++++++++++++
+>  3 files changed, 69 insertions(+)
 
-> diff --git a/drivers/reset/reset-uclass.c b/drivers/reset/reset-uclass.c
-> @@ -225,6 +225,36 @@ int reset_deassert_bulk(struct reset_ctl_bulk *bulk)
-> +int reset_reset(struct reset_ctl *reset_ctl)
+> diff --git a/test/dm/reset.c b/test/dm/reset.c
+> @@ -120,6 +120,59 @@ static int dm_test_reset_devm(struct unit_test_state *uts)
+> +     ut_assertok(sandbox_reset_test_assert(dev_test));
+> +     ut_asserteq(1, sandbox_reset_query(dev_reset, TEST_RESET_ID));
+> +
+> +     ut_assertok(sandbox_reset_test_reset(dev_test));
+> +     ut_asserteq(0, sandbox_reset_query(dev_reset, TEST_RESET_ID));
+
+This only checks the final state, i.e. a broken reset_reset() that
+skips the assert step would still pass, since the line was already
+asserted manually before the call. Please can you extend the sandbox
+driver to track the assert phase (a sticky 'was_asserted' flag or a
+transition counter) so the test confirms both halves of the pulse
+actually happen? Same for dm_test_reset_reset_bulk()
+
+> diff --git a/drivers/reset/sandbox-reset-test.c b/drivers/reset/sandbox-reset-test.c
+> @@ -96,6 +96,20 @@ int sandbox_reset_test_deassert_bulk(struct udevice *dev)
+> +int sandbox_reset_test_reset(struct udevice *dev)
 > +{
-> +     struct reset_ops *ops = reset_dev_ops(reset_ctl->dev);
-> +     int ret;
+> +     struct sandbox_reset_test *sbrt = dev_get_priv(dev);
 > +
-> +     debug('%s(reset_ctl=%p)\n', __func__, reset_ctl);
-> +
-> +     if (ops->rst_reset)
-> +             return ops->rst_reset(reset_ctl);
-> +
-> +     ret = reset_assert(reset_ctl);
-> +     if (ret < 0)
-> +             return ret;
-> +
-> +     return reset_deassert(reset_ctl);
+> +     return reset_reset(sbrt->ctlp);
 > +}
 
-Will this provide a long-enough pulse on real hardware?
+Re your commit message, better to implement rst_reset for sandbox, so
+that we keep the coverage up.
 
-> diff --git a/include/reset.h b/include/reset.h
-> @@ -443,6 +468,16 @@ static inline int reset_deassert_bulk(struct reset_ctl_bulk *bulk)
-> +static inline int reset_reset(struct reset_ctl *reset_ctl)
-> +{
-> +     return 0;
-> +}
-
-Just to check - this matches the existing assert/deassert stubs,
-silently succeeding with !CONFIG_DM_RESET: is that intended? Should we
-return -NOSYS here?
+Reviewed-by: Simon Glass <sjg@chromium.org>
 
 Regards,
 Simon
