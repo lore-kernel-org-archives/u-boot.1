@@ -4,94 +4,109 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88721FF886F
-	for <u-boot@archiver.kernel.org>; Mon,  4 May 2026 12:15:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7E0DFF886F
+	for <u-boot@archiver.kernel.org>; Mon,  4 May 2026 12:16:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C024A8465C;
-	Mon,  4 May 2026 14:15:34 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8414983EF9;
+	Mon,  4 May 2026 14:16:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="dPrJvHCl";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="HqPiZCQi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D3FA08465C; Mon,  4 May 2026 14:15:32 +0200 (CEST)
-Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
- [IPv6:2a00:1450:4864:20::52a])
+ id 8DDFB84659; Mon,  4 May 2026 14:16:06 +0200 (CEST)
+Received: from mail-pg1-x529.google.com (mail-pg1-x529.google.com
+ [IPv6:2607:f8b0:4864:20::529])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EA6F78394E
- for <u-boot@lists.denx.de>; Mon,  4 May 2026 14:15:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 112218394E
+ for <u-boot@lists.denx.de>; Mon,  4 May 2026 14:16:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52a.google.com with SMTP id
- 4fb4d7f45d1cf-672645dbfeaso4500652a12.0
- for <u-boot@lists.denx.de>; Mon, 04 May 2026 05:15:30 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1777896930; cv=none;
+Received: by mail-pg1-x529.google.com with SMTP id
+ 41be03b00d2f7-c80167f5716so525176a12.2
+ for <u-boot@lists.denx.de>; Mon, 04 May 2026 05:16:03 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1777896961; cv=none;
  d=google.com; s=arc-20240605;
- b=CqzcxdYQaZyj6TyC6z1UXfGKJTtlDiCKQGxdDNA5V2hc4ct5/3c5TkOzdnrPistie2
- PThfOOdMOqj76i4JiMLul92LfQ+lnEaSZa7SSBpc+jwTVzVkBl6LYKrQiuVA/MZ6MHSp
- O7LVK5N7C1osB0Sa1Uhm5wzgFXmkbnKT2fghT6av8TOc+dCnVs1EIX0HKqBIZaAggA95
- ONSpinZzFgLsXZ9U+bmti37f9i0k7tKSTXFE+NgfqFnBFcsH0dDWCWkwE82rer9HRIm9
- vdi/Gd2JhOfvvr7j+7NA6jRvNcGUb0IIGNLQvLUVWoRs0wWKHNogw4AH6Vnfbfk0905z
- x4JQ==
+ b=fV1Hd0e3m8dKukPVb08O3VQuboVxbpG5LKh4zsfMSudOOVIoNi/FcM/uP9xe2lgUUO
+ UasC3cZea8zuu0SE82s9IfCvHJI3BPV3p8y6tjMQ9CeuNUlw1Efcz7B0gl/dChvlTAhm
+ PE7TxIKQ5faIrPGnVPkp+E4Z0TfAcBA1dPzw65FuROjRA/tW8wnMbBxDWlK4QH77lTNf
+ B/HjjqL9kjIOf3uJvFlIE4HnJEENxFIjGLKo6za0MfsvA8ayZuE7BOPpN0mp41xmF55u
+ u7VU7UOebeUsxSBYgwCRGTF8d20EHMahzzC4gl0IrAbcUE406F2vD4m2IVBxIJ590IX0
+ 1Wnw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=KpxFgc7zManRCkoduSqx8SaZfaL9VEakirreT4Rj1K4=;
- fh=jmbcoFG2RPEOJsmPKSiakkV0VWJqP8RiS13G+yktnmU=;
- b=JL07PM3lN/eZ3gWBp04IAy1InIDNDv5Ikn1t1gsyxEGkIlvGJlS0teVY0M+VcE1A9x
- pLKtmZ5BnDI4RgvWACeb7pQpcaIsI+qheC4OBhNJSltBz8PMztkhCanFlhtDZ+H/4DE1
- bjxh1wxUOaQ8eofgMsSQ1thfmbOcJh+jHOPf4L6r3QMR4FrLww3em4P8wd5Uwq0ZbE/5
- hyvfvFgYph05A22grujHVVM8mZlwYwzRp2ozFsbXeGsTZaB28tV6JXdguuOS/s+lZVGb
- cMJrZ5lxyeBfnSUBgHscdn+ItiRjTvAwC+jJiOP9Sadc3oA375T7yFLJbXtnCjHL/uWn
- Hfjg==; darn=lists.denx.de
+ bh=uWLhpxBDecpnz4ev/BsXZHafPVfH+6bg1TQRx9dDkJU=;
+ fh=ZM47NY5NjwIVB0Rk5pbqSagMaOgAeQ/crhGguFcj3eE=;
+ b=YroNnT7H6XHSzl4OcBJKuwn5Spadr23WF0LQ0DuiBGtRnyxM3J+aLpOCb0A9cf2oCq
+ 95u4wj0NPmNcmy1H0evlvi5P2oHrU4FxQZZJok5SOHaPjf9iu7HzJh9SFdVC1TffxczH
+ c/uZdfAzJGc9JhhZo0vSEBWj42zRLAfXTfnlDZBIab8ha6zIqRNsOJeyBNZ94tBDr1Gf
+ pHzQLv0GRUCQvDqA2FJGLPMUm7Y3UqSlfBdJYKD50AVgjfGwaqV+NdAy97qOnFvJLJF8
+ RPiwfsjmNB0lXU13Whcow6ggQDJ7rygkH1/0A17TzGfV1hYXHdJcbHL9m6fdzQWDakWj
+ NuRw==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1777896930; x=1778501730; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1777896961; x=1778501761; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=KpxFgc7zManRCkoduSqx8SaZfaL9VEakirreT4Rj1K4=;
- b=dPrJvHClFb7Sjv+xG8KruhQkmcHW4hi2zkKMPRkMWag59VE7bujKNGLZt0oNX6Usjg
- x4oyWdx/JxGIJVdsPDINA8nBYbtTgx32SNXltFoYOxeZuu+7s5r1HcuSWox54FJL02ER
- AFZlbQgcLdOgjAcytp0Yl5Bmvxlb1VhZyx4vY=
+ bh=uWLhpxBDecpnz4ev/BsXZHafPVfH+6bg1TQRx9dDkJU=;
+ b=HqPiZCQi7BoCLF34v3ZtnOLolFyO5PvgKbokFGU3aHlqwNp64DtCwrdbbYmx0ueYXc
+ AM4Mj0tneJm9evdYIoa+cufhNVHVhkRKc7i3UMdqW854oV3yI0rV6FX9n9P/I3w053FX
+ zl5Ejk37sKCZ9nlbIsaOfRr86Rl6mpNbfHyoY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777896930; x=1778501730;
+ d=1e100.net; s=20251104; t=1777896961; x=1778501761;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=KpxFgc7zManRCkoduSqx8SaZfaL9VEakirreT4Rj1K4=;
- b=mgri0mZw2bTPu/kEHbVaU1Mpz/kT6aoLWGPUI2VpGKG9gC75gsMtUwOJcvmbMZWrFf
- UmVfjpzIsCbwYVBQ0uFhrwTfWMykLkHnRS8ZoWVKxmFM6bvZ0ZEZZwFWoPrI8hHXsqWw
- /WTiGxqAZToONIgi6F+jMjFIwCRSfRmT5fRi12hzy/K2hK5JLToMRL6ywS2Io+O3cEX9
- IsuhVQKz77XVKjX12XOGRnXgSmWqLbMbhS6Oy4QpRUPeJlJ2FwnAeqxNwJu0dQcJbJbL
- DjbdBQGii3Kny4q5fqPq63l6m43/PfHLrw3VYbqEPaXDwOnVwIem3ZXBdy8saPBRZZqh
- 33Vg==
-X-Gm-Message-State: AOJu0YwN8/bDVGy25w77y9RlrEppftCbQmoAomH24eIrIfjryKNJqczv
- RcHeIp1XFWUe09qREbPVrGG6Eq4mnSxRgHIbsbZ967oxwahss3dNtvI4+enlkhADTa1Kuyjbi0v
- uHoO++wkleTPewRMCZWveDl9TZv+yYEVt9skCtT2fzybsLewCpSU=
-X-Gm-Gg: AeBDieulYQyAhee8MRBiIY4tjbAHA+RwrKOboqy6+a8DOgmuUg5t8ogALdaklXl2MpR
- nSPINZV41AdHNQHdykKnaZQ3fUKv5ZYWyOVZMLaBNAlD/Yt3PKNlP4Ml8UnpfhSjx+5vwb9Qklp
- hNeZBmMTETQ65u+0ZzLLCMHum+6LfLvi/5nHOfCITtdB8oW6yW2mwrd6YJMirwa8Jj3iHaUecXl
- NeMedCmn8Dzr5FT5xMH4e45EHKypeJbMRSEm84VrXU25aByIKlOFfK6Rm0nNE+2b71rtraMg36L
- nQ5s33Q0KB6LNgjb
-X-Received: by 2002:a17:907:84d:b0:baa:2d37:cbf9 with SMTP id
- a640c23a62f3a-bbffa73b06fmr471594666b.1.1777896930266; Mon, 04 May 2026
- 05:15:30 -0700 (PDT)
+ bh=uWLhpxBDecpnz4ev/BsXZHafPVfH+6bg1TQRx9dDkJU=;
+ b=sQMrFd1wwWkB+2672XMDbrqU/s9NPv6Px8JGIWbFVkrYxV8x82/Cop1N8P2WzUqQiQ
+ Tmpnq3N2BZTVb0nAGPQsr8xu5V8RIvBSf5Prqn+8ylH1y8tFZUnSqA6kcKJhYeTH5r9g
+ N7uAwxI4sczfa2L0cUoy/9JKbr9KFok4g6qAo8j1pWMz1Mq+X7kM4FN1YkOf3sMxANj5
+ dtQGWneaM62g2qAls/QIDs0qWNTbMBBTi6leO8lLbUU+dQ9ISW7AKqsLqJflxb1V5U6F
+ 3sezxXslgBl4iOx7y/3fszhxhgrioAFBlGEH9lD5ZBPyG+lJS0zRQ3sxbBj6OX5BsmxK
+ BVhQ==
+X-Gm-Message-State: AOJu0YxAxa9wAEShMTRj0LzLTkW37Li2iwiMo2l78vmL5WuoIOZ+HID2
+ tYtckFPGhsR5nW3w+GrOl6/ZFEf3e8SVcLbij6r9+UOmgigQ9obgsZLtr/tHdGBL5f3Kbsm6q+F
+ u7wOs5yfpezLD5dMjKPApezRuXolkwCt2TW1L+8L7
+X-Gm-Gg: AeBDieuBDeVO1L7iqjlFJ5X5w3Z4ZRlxA3Ibpy3vRa8haSSuYxI6jqu1+A77d95muLR
+ Yd7K+nl/0boT7ORcW0NHX/3Zz02Uf7DoRCpD6lAOqKIJ9rz8+P33OJsi2F1fpeifbCXO5UzWyBb
+ AUxBy8BpW+ZhivA9tFZrc+VdS0b89RWo11sudvid1U5hMv49/oS3I7luFfMzQUSpTo3UuagR4Qe
+ n2NOskcnr8C0o3Vjgz5nCGbkf6ZeIB6cY5GsfiV1UW7rbyCZVpfCjPE7L1rwsICB7BER/bYdZTs
+ cfikFau65FCPTznz
+X-Received: by 2002:a05:6a20:914a:b0:3a2:d79c:4161 with SMTP id
+ adf61e73a8af0-3a7f1ca373dmr9900136637.47.1777896961487; Mon, 04 May 2026
+ 05:16:01 -0700 (PDT)
 MIME-Version: 1.0
-References: <cover.1777551598.git.michal.simek@amd.com>
- <9dde7ae68776d22d37c06646210c30c3a5874e17.1777551598.git.michal.simek@amd.com>
-In-Reply-To: <9dde7ae68776d22d37c06646210c30c3a5874e17.1777551598.git.michal.simek@amd.com>
+References: <20260503204936.3151124-1-sjg@chromium.org>
+ <20260503204936.3151124-2-sjg@chromium.org>
+ <20260504045410.GA5052@francesco-nb>
+In-Reply-To: <20260504045410.GA5052@francesco-nb>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 4 May 2026 06:15:16 -0600
-X-Gm-Features: AVHnY4LvDRXgU-YPwFs3it1R2M_muQbOeWE3Bo0idAlLZtzOHWvgDXD9-WEUB_k
-Message-ID: <CAFLszTj2cVtH+RV1qiyD36eJY+dZGba9zm1sLko8mE+tbi4tBg@mail.gmail.com>
-Subject: Re: [PATCH 4/4] reset: zynqmp: Implement rst_reset using
- PM_RESET_ACTION_PULSE
-To: michal.simek@amd.com
-Cc: u-boot@lists.denx.de, git@amd.com
+Date: Mon, 4 May 2026 06:15:33 -0600
+X-Gm-Features: AVHnY4I-pp3tC6YN83QPSypDQACdRNf-oqeCMa8yiGQSdFLWwST46jsJFa5HdZ8
+Message-ID: <CAFLszTj7DdLM1tn4KmE_2iWVt7epF7ADS3cSmzg=ibkQtkTzhw@mail.gmail.com>
+Subject: Re: [PATCH 1/6] toradex: Quote fdtfile in preboot test
+To: Francesco Dolcini <francesco@dolcini.it>
+Cc: u-boot@lists.denx.de, Alice Guo <alice.guo@nxp.com>,
+ Andrew Davis <afd@ti.com>, 
+ Anshul Dalal <anshuld@ti.com>, Bryan Brattlof <bb@ti.com>, 
+ Emanuele Ghidoli <emanuele.ghidoli@toradex.com>, 
+ Ernest Van Hoecke <ernest.vanhoecke@toradex.com>,
+ Fabio Estevam <festevam@gmail.com>, 
+ Francesco Dolcini <francesco.dolcini@toradex.com>,
+ Franz Schnyder <franz.schnyder@toradex.com>, 
+ Hiago De Franco <hiago.franco@toradex.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Max Krummenacher <max.krummenacher@toradex.com>,
+ Parth Pancholi <parth.pancholi@toradex.com>, 
+ Peng Fan <peng.fan@nxp.com>, Rasmus Villemoes <ravi@prevas.dk>, 
+ Sam Protsenko <semen.protsenko@linaro.org>, Tom Rini <trini@konsulko.com>, 
+ Udit Kumar <u-kumar1@ti.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -109,19 +124,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2026-04-30T12:20:00, Michal Simek <michal.simek@amd.com> wrote:
-> reset: zynqmp: Implement rst_reset using PM_RESET_ACTION_PULSE
->
-> Implement the rst_reset operation in the ZynqMP reset driver to use
-> PM_RESET_ACTION_PULSE. This allows the reset controller to perform
-> a reset pulse in a single firmware call instead of separate assert
-> and deassert calls.
->
-> This matches the Linux kernel implementation of zynqmp_reset_reset().
->
-> Signed-off-by: Michal Simek <michal.simek@amd.com>
->
-> drivers/reset/reset-zynqmp.c | 11 +++++++++++
->  1 file changed, 11 insertions(+)
+Hi Francesco,
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+On Sun, 3 May 2026 at 22:54, Francesco Dolcini <francesco@dolcini.it> wrote:
+>
+> Hello Simon,
+>
+> On Sun, May 03, 2026 at 02:49:19PM -0600, Simon Glass wrote:
+> > The 15 Toradex defconfigs (apalis-imx8, apalis_imx6, the colibri
+> > imx6/imx6ull/imx7/imx8x/vf families, the toradex-smarc-imx8mp/imx95
+> > boards and the verdin am62/am62p/imx8mm/imx8mp boards) all carry the
+> > same preboot expression:
+> >
+> >     test -n ${fdtfile} || setenv fdtfile ...
+>
+> Thanks for the patch.
+>
+> This was already sent weeks ago, see https://lore.kernel.org/all/20260331-fix-test-cmd-empty-v1-1-56cb93fc8f43@toradex.com/
+>
+
+Thanks, I'll reply on that.
+
+Regards,
+Simon
