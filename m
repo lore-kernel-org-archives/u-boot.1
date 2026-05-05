@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 020A9CD342C
-	for <u-boot@archiver.kernel.org>; Tue,  5 May 2026 02:20:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 531C8FF885A
+	for <u-boot@archiver.kernel.org>; Tue,  5 May 2026 02:21:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B1D2984866;
+	by phobos.denx.de (Postfix) with ESMTP id EF7BC8486A;
 	Tue,  5 May 2026 04:20:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=seznam.cz
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=seznam.cz header.i=@seznam.cz header.b="Z4/INFrR";
+	dkim=pass (2048-bit key; secure) header.d=seznam.cz header.i=@seznam.cz header.b="y85y3hjq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4A81584832; Tue,  5 May 2026 02:49:14 +0200 (CEST)
+ id E4E85846BE; Tue,  5 May 2026 02:49:14 +0200 (CEST)
 Received: from mxd-2-a03.seznam.cz (mxd-2-a03.seznam.cz
  [IPv6:2a02:598:64:8a00::1000:a03])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0A984846BE
+ by phobos.denx.de (Postfix) with ESMTPS id F244D846DB
  for <u-boot@lists.denx.de>; Tue,  5 May 2026 02:49:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=seznam.cz
@@ -28,28 +28,28 @@ Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=michael.srba@seznam.cz
 Received: from email.seznam.cz by smtpc-mxd-5f4d8d5f6f-w7th8
  (smtpc-mxd-5f4d8d5f6f-w7th8 [2a02:598:64:8a00::1000:a03])
- id 6f9181fe349fd5976e384da0; Tue, 05 May 2026 02:48:29 +0200 (CEST)
+ id 59be5f4c02b00b2558179312; Tue, 05 May 2026 02:48:21 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=seznam.cz; s=szn1;
- t=1777942109; bh=SwGdq8aw6PlZ+WsOZmBdvDo8PBGK8bN+LN456aseK7I=;
+ t=1777942101; bh=D5xpgNplQlGEKQBsZMgNjmaZ4NJUdvzqnEIZt0bHoc0=;
  h=From:Date:Subject:MIME-Version:Content-Type:
  Content-Transfer-Encoding:Message-Id:To:Cc;
- b=Z4/INFrRLUt5Z9VqMiYtmEesaQdyRSBjPIq3daouCSH6pKMRj9b7127OJXTYhYVfP
- Hiro0WVw4/1LTVqaoPsjbiS/gKaHp4k5OltWEbHrWrP+KMLz+zc7d/Ax0VZjAP10sR
- cmgDHh3krGe+/oO+1QxajUl4C5YOy0ToWW/KXg3nteDAv7FJFLi2aJ2EGdRzVBKkS7
- O9OjiqSA5nDy6X0hvo/pQY2KhyFgjCimOMSwBeYV5VTWA89GtZ0MUBDMzeEgOqdeap
- 7gEvY5HlmZAIHUn20iQ/Y3j/7ruSIZtQaP2RwjpG2DcP4kwDo/gV8mlmOqNsep8zlg
- 4zgjnH/rp5dDA==
+ b=y85y3hjqFjxRr6QGXIij8tl6q3tvh803rguALcVvgUt4gZlSY1g9uLblvbpSjDSmB
+ A39vK4DOTCIXJgprd4z4AijrZDdtNR12E5Wlb84ci2JhUZA/o28oAOfTFUa1kAhDCx
+ 1xn6ur7Qku3/o6Muo18+VRk5DoY7+HUGP6P5I3SH3IZ+YvTIlpdQw57NLRhOlbwQ8z
+ qI1Z/i5FMaAZF8J9+uj+SepfHe1mL0HYqRnZ6EbTTBzb+/Q2wNJZYLpMRJxMK6yovE
+ Xxjx9EG7K6RoigQCx1ifiOr1+TleK6ThpQelW0CmWXe+/t+0K/jXWlMpMfrEKxEtMp
+ SEKnj0EJfTJRA==
 Received: from [127.0.0.1] (ip-111-27.static.ccinternet.cz [147.161.27.111])
  by smtpd-relay-7c7c659656-rb5ts (szn-email-smtpd/2.0.72) with ESMTPA
- id 1b0e7b1d-79a2-4930-882b-0fa60cfc4c3f;
- Tue, 05 May 2026 02:48:13 +0200
+ id c89c441b-fb1f-4af5-94f4-b220c35d0cc4;
+ Tue, 05 May 2026 02:48:12 +0200
 From: michael.srba@seznam.cz
-Date: Tue, 05 May 2026 02:47:48 +0200
-Subject: [PATCH v5 02/11] of_live: support in SPL
+Date: Tue, 05 May 2026 02:47:47 +0200
+Subject: [PATCH v5 01/11] Makefile: add SPL_REMAKE_ELF_LDSCRIPT feature
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260505-qcom_spl-v5-2-11817415d664@seznam.cz>
+Message-Id: <20260505-qcom_spl-v5-1-11817415d664@seznam.cz>
 References: <20260505-qcom_spl-v5-0-11817415d664@seznam.cz>
 In-Reply-To: <20260505-qcom_spl-v5-0-11817415d664@seznam.cz>
 To: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>, 
@@ -108,82 +108,63 @@ X-Virus-Status: Clean
 
 From: Michael Srba <Michael.Srba@seznam.cz>
 
-Add CONFIG_SPL_OF_LIVE and if set, initialize of_live in spl.c
+Some platforms (e.g. at least Qualcomm) use the ELF format in creative
+ways, including in the bootrom. Make SPL_REMAKE_ELF use a linker script
+specified in SPL_REMAKE_ELF_LDSCRIPT (with the previously hardcoded path
+as the default).
 
 Signed-off-by: Michael Srba <Michael.Srba@seznam.cz>
-Reviewed-by: Simon Glass <sjg@chromium.org>
 ---
- common/spl/spl.c | 9 +++++++++
- dts/Kconfig      | 8 ++++++++
- lib/Makefile     | 2 +-
- 3 files changed, 18 insertions(+), 1 deletion(-)
+ Makefile           |  9 +++++++--
+ common/spl/Kconfig | 11 +++++++++++
+ 2 files changed, 18 insertions(+), 2 deletions(-)
 
-diff --git a/common/spl/spl.c b/common/spl/spl.c
-index 722b18c98ed..6c9a1a1cbcc 100644
---- a/common/spl/spl.c
-+++ b/common/spl/spl.c
-@@ -17,6 +17,7 @@
- #include <irq_func.h>
- #include <log.h>
- #include <mapmem.h>
-+#include <of_live.h>
- #include <serial.h>
- #include <spl.h>
- #include <spl_load.h>
-@@ -510,6 +511,14 @@ static int spl_common_init(bool setup_malloc)
- 			return ret;
- 		}
- 	}
-+	if (CONFIG_IS_ENABLED(OF_LIVE)) {
-+		bootstage_start(BOOTSTAGE_ID_ACCUM_OF_LIVE, "of_live");
-+		ret = of_live_build(gd->fdt_blob,
-+				    (struct device_node **)gd_of_root_ptr());
-+		bootstage_accum(BOOTSTAGE_ID_ACCUM_OF_LIVE);
-+		if (ret)
-+			return ret;
-+	}
- 	if (CONFIG_IS_ENABLED(DM)) {
- 		bootstage_start(BOOTSTAGE_ID_ACCUM_DM_SPL,
- 				xpl_phase() == PHASE_TPL ? "dm tpl" : "dm_spl");
-diff --git a/dts/Kconfig b/dts/Kconfig
-index 6b501c2239e..20b5834b8fa 100644
---- a/dts/Kconfig
-+++ b/dts/Kconfig
-@@ -86,6 +86,14 @@ config OF_LIVE
- 	  enables a live tree which is available after relocation,
- 	  and can be adjusted as needed.
+diff --git a/Makefile b/Makefile
+index 49d9740327e..8fe722f6c0d 100644
+--- a/Makefile
++++ b/Makefile
+@@ -2008,12 +2008,17 @@ u-boot.elf: u-boot.bin u-boot-elf.lds FORCE
+ quiet_cmd_u-boot-spl-elf ?= LD      $@
+ 	cmd_u-boot-spl-elf ?= $(LD) spl/u-boot-spl-elf.o -o $@ \
+ 	$(if $(CONFIG_SYS_BIG_ENDIAN),-EB,-EL) \
+-	-T u-boot-elf.lds --defsym=$(CONFIG_PLATFORM_ELFENTRY)=$(CONFIG_SPL_TEXT_BASE) \
++	-T spl/u-boot-spl-elf.lds --defsym=$(CONFIG_PLATFORM_ELFENTRY)=$(CONFIG_SPL_TEXT_BASE) \
+ 	-Ttext=$(CONFIG_SPL_TEXT_BASE)
+-spl/u-boot-spl.elf: spl/u-boot-spl.bin u-boot-elf.lds
++spl/u-boot-spl.elf: spl/u-boot-spl.bin spl/u-boot-spl-elf.lds
+ 	$(Q)$(OBJCOPY) -I binary $(PLATFORM_ELFFLAGS) $< spl/u-boot-spl-elf.o
+ 	$(call if_changed,u-boot-spl-elf)
  
-+config SPL_OF_LIVE
-+	bool "Enable use of a live tree in SPL"
-+	depends on SPL_DM && SPL_OF_CONTROL
-+	help
-+	  This option enables a live tree in SPL, allowing the sharing
-+	  of OF fixup code between U-Boot proper and SPL.
-+	  See also OF_LIVE.
++SPL_REMAKE_ELF_LDSCRIPT := $(addprefix $(srctree)/,$(CONFIG_SPL_REMAKE_ELF_LDSCRIPT:"%"=%))
 +
- config OF_UPSTREAM
- 	bool "Enable use of devicetree imported from Linux kernel release"
- 	depends on !COMPILE_TEST && !SANDBOX
-diff --git a/lib/Makefile b/lib/Makefile
-index d0ffabc2b47..bbd540e9687 100644
---- a/lib/Makefile
-+++ b/lib/Makefile
-@@ -13,7 +13,6 @@ obj-$(CONFIG_FWU_MULTI_BANK_UPDATE) += fwu_updates/
- obj-$(CONFIG_LZMA) += lzma/
- obj-$(CONFIG_BZIP2) += bzip2/
- obj-$(CONFIG_FIT) += libfdt/
--obj-$(CONFIG_OF_LIVE) += of_live.o
- obj-$(CONFIG_CMD_DHRYSTONE) += dhry/
- obj-$(CONFIG_ARCH_AT91) += at91/
- obj-$(CONFIG_OPTEE_LIB) += optee/
-@@ -55,6 +54,7 @@ obj-$(CONFIG_BITREVERSE) += bitrev.o
- obj-y += list_sort.o
- endif
++spl/u-boot-spl-elf.lds: $(SPL_REMAKE_ELF_LDSCRIPT) prepare FORCE
++	$(call if_changed_dep,cpp_lds)
++
+ u-boot-elf.lds: arch/u-boot-elf.lds prepare FORCE
+ 	$(call if_changed_dep,cpp_lds)
  
-+obj-$(CONFIG_$(PHASE_)OF_LIVE) += of_live.o
- obj-$(CONFIG_$(PHASE_)TPM) += tpm-common.o
- ifeq ($(CONFIG_$(PHASE_)TPM),y)
- obj-$(CONFIG_TPM) += tpm_api.o
+diff --git a/common/spl/Kconfig b/common/spl/Kconfig
+index 5fa94098e49..08a4d2a75e9 100644
+--- a/common/spl/Kconfig
++++ b/common/spl/Kconfig
+@@ -238,6 +238,17 @@ config SPL_HANDOFF
+ 	  proper. Also SPL can receive information from TPL in the same place
+ 	  if that is enabled.
+ 
++config SPL_REMAKE_ELF_LDSCRIPT
++	string "Linker script for SPL ELF"
++	depends on SPL_REMAKE_ELF
++	default "arch/u-boot-spl-elf.lds"
++	help
++	  This allows specifying a linker script that will be used to re-wrap
++	  the SPL binary into an ELF.
++	  Some platforms (e.g. at least Qualcomm) use the ELF format in creative
++	  ways, including in the bootrom. For such platforms, you can change
++	  the default linker script to a platform-specific one.
++
+ config SPL_LDSCRIPT
+ 	string "Linker script for the SPL stage"
+ 	default "arch/arm/cpu/arm926ejs/sunxi/u-boot-spl.lds" if MACH_SUNIV
 
 -- 
 2.53.0
