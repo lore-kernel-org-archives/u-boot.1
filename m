@@ -4,103 +4,144 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC8C2CD342F
-	for <u-boot@archiver.kernel.org>; Tue,  5 May 2026 10:48:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59304CD342F
+	for <u-boot@archiver.kernel.org>; Tue,  5 May 2026 10:52:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 43C8B8487C;
-	Tue,  5 May 2026 12:48:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id C7CD08487C;
+	Tue,  5 May 2026 12:52:16 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="nePa4UN+";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="R+4FPVeo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 21A46848A1; Tue,  5 May 2026 12:48:47 +0200 (CEST)
-Received: from mail-ot1-x331.google.com (mail-ot1-x331.google.com
- [IPv6:2607:f8b0:4864:20::331])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 11129848A4; Tue,  5 May 2026 12:52:14 +0200 (CEST)
+Received: from MRWPR03CU001.outbound.protection.outlook.com
+ (mail-francesouthazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c207::3])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EF76B8486B
- for <u-boot@lists.denx.de>; Tue,  5 May 2026 12:48:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 12DCA8486B
+ for <u-boot@lists.denx.de>; Tue,  5 May 2026 12:52:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=briansune@gmail.com
-Received: by mail-ot1-x331.google.com with SMTP id
- 46e09a7af769-7dea20cf21aso4784863a34.1
- for <u-boot@lists.denx.de>; Tue, 05 May 2026 03:48:44 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1777978124; cv=none;
- d=google.com; s=arc-20240605;
- b=RacRpFyDLwdlzxTYSkIInd3nlsjSC3/NqG8vINOcLxxTZysXBugyyOay3WC6JQo3tG
- tQ4MJ3MERJJmgunzdtAwxLroVPMdcx7rvNth37/QehTIT6TIaB06h/AZUP9Y5XeFAWIS
- 04+RGOYxOUJemh1guHg/UFMz/dzh3hW4ejUrYv6a8y63/HpQcGxhCbH4I2cc30Ejdx0f
- /S/5sW+7OREVvDf4JL+JcTxJpmaeJAfZBAn3bidzlf8sCV8jGbCGhLgY85t9CJg1eX95
- Mwt3RnkYSFH1lcFNMNCBBKR2iSaSOgxDRaNI1OoUU3dQ71P3t63ZdtjtSGp+Uh55VCZo
- +GpQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=RLooTjS8OS2aslXbdf/L+Q48kkbBBzSwP2j5rt+Cfy8=;
- fh=W4JgJSzjULev0XfUEVRF+lX3adx0KsOVAOAukof8Ri8=;
- b=KMxkx1Y2AnmJWmrucBYfAGVDouSw06dtcJdjzOPHyB7vXYYQUbJT1GjqkTijkaX9kt
- db/C73eB5wz67rTevYP1U9nHTrHP0a1phhSKxMeLAu2TyIcvkOlMgOdWv705RgmTfjmx
- NT9KbOdkgROUFWwwiNanw8SEAPgEZxdNFZ/fyaUTO1d4OaaqFPXopdAw4svNI3kyLu55
- ZleRJ+SMPI9I0yvR8qPV8+2EK+To74JEqVNS8+aAkGWXtHMJhRIxaJbPgpFEgwbP3U+D
- LmLS9SYY7Usz+ogg+zGncF81CPtybJsJjrjWLs/3gm/ZEdWGEZCBF9ns3RQbdFk7J7d1
- C8Vw==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1777978124; x=1778582924; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=RLooTjS8OS2aslXbdf/L+Q48kkbBBzSwP2j5rt+Cfy8=;
- b=nePa4UN+n8ndLyNaQPYA+PqAqB5M1IQPH/Yo4c5UlvFkueDIRJ5r0YQLty1iGCvU4+
- 2QUPV+JlirKn9RkRisyp6pJIh6IazN5KyWRPZxbjAAWq7YnnB3XaZgpznIEz0gwjCmg/
- TF9xzs51Mfy/7wSPfN182IGCwTaBqXIjnQe974VkwGfPrXwHY8SgJ4UCEcHBmmOkBxRB
- FxgWr3LAu1sACgWGVQggofkHkudIKm2HTSm3jetHwmQVffmaSksmN4iHaORixXZkNwUx
- VAAR89fmjZlgPBeolH9n9EC5zuNvw8Kitb20IskQyrv2qVGBUzb3pCWvjsXO0XzXKPgg
- C14g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777978124; x=1778582924;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=RLooTjS8OS2aslXbdf/L+Q48kkbBBzSwP2j5rt+Cfy8=;
- b=AgVC40SAnjz7SXQ/Sdnsl6/+elCsKwfaOHEp6x2IJC8rDg1bQXsJQpRlIWZq0Mtxhu
- 2Hq5B6JWZcRJJfw4d+CaRmEL3zRAK4Vas8MHxxSOBEb5bz2yfvknWUghkkgZIxCgVfrn
- b0Hhmno99RoXTCP1ghKZMjJ+TdkNGFDi24XQnclJYVF/U8EhE3YR4+XHuFWhO4zdrYUg
- EwgSoO8JjZA0vGP/Y0kwsfLWeCFKoDB2gDfVBrpHItq/KefSbAlcsBa6Zd2uNy0VwnsK
- OhDkah8AInI8E7zbs8Ma8euT/HOv7CHWg+inlCXto6CmwxBHn5o5rNrR9/rcxjHihuIL
- gNZw==
-X-Gm-Message-State: AOJu0Ywm9p/+F8QtPPx8FPnZ6ZrxqS3BQtr6UhC2QeqXA5EWt44UTwwH
- 8SEhUWl/OlXbnqsV3yUaXkvahEHJRA15xyvkJqWKTKbFYBHZnjm3+sxPfGHFRVFCzT2gom3MOgG
- lsjOrnyoCjpmNeEMVlsyPBkwiigK80aw=
-X-Gm-Gg: AeBDieuBecRbKJXt2C+kU1rgAlscK2rU2Se07XsVphiC8Fq85ckJjoJUwEawy2ywido
- V2bfb2hPDNis0+THnCtqoCqX3qE1jr2OVu8jaAn7JWDPGni8DAo1OAO+bgE4jaWJKEQlNxwuZ6I
- OSJUSEtkphpcGvrR3fgJaxqZNDi5FoXjuUp1V0pGk5TUYjiLWMoSZ7xv2JTY8R0e90AtqLLOun1
- FPZ2yaG7f4FapWlGnxEY7BWPB8HV0IATOPhSkmQ+4Yk2TGvLBWz4TsC+MIwpXBEzqrUwN3AHKW7
- l/9J5lOeB/V/7W7TFg==
-X-Received: by 2002:a05:6830:83b0:b0:7dc:cbaa:d730 with SMTP id
- 46e09a7af769-7e17cebd8b9mr1358411a34.8.1777978123639; Tue, 05 May 2026
- 03:48:43 -0700 (PDT)
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=a6f8tzX1xIR4faC4ZbVXD0kuWsx48/CnLZ+nntoKNZ8fjtG46TMwCIv0zrYqdGURvZ1S1rB9g3nZmMvN91RSXXNI6QSlSJYr+QDqlxyoh+Y2A0MOY7ZtZLCAjukEIb88UUcQNLtbNVHBofNEXhlrtvdtmHH44B2FLdwrivRSe4SC5ucv5Y2TENbMIpEx05SmVuK5J0k3mUnnKW2YPDyHl6y+8Xzcdi9gCQKAFDFlXCy546xbHnnsRPg8VrsUA6QUPE8W6okpiPYigq2Bq15Rgz2wFKTURw92ktia36PlGpn0tFTDLOs0kgCi9kHoEOxnfA8bI+1OjJb1tbpJGQ3zDg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=U7mQO9GXcM/rcVEP0rXPF4xne2xmSxeJv/4zgrGI9ws=;
+ b=rst6V6uW3TjTZdBGoxZh1SiKvYra7j5YWGGg27g3984JC5bxcgz08UP1Z5g2rV2jh1joOcpSuQy5QEkQinbWIEJDKSF1ooyqQW1fEmY4iNU5vX4jCGwEWXG3scIQrjEx6NWn5IgPUt9gJ004d2HMzAqOQ1ktUlkwrMGwftsZav0gCm5BM/DyINj3ysACPPkV3w72Dx02Sd/LrzS8swogplhs85uI0PKjwVBf+Vq1QtEOXsFZMliVLUAQ5PrCBOG0071CqBwxcyKTzAKj6kBdFUETx06JIHDsVJldYwNMFbr1HsLPfOQH/bm31LkFu8Zqdx8u2xm8pIJj8vF9XxjMCA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=U7mQO9GXcM/rcVEP0rXPF4xne2xmSxeJv/4zgrGI9ws=;
+ b=R+4FPVeobViNxpmGK5d/pRotZleNyfy/O/B/XuTjCdFH+BZwaQnXTGMquXCSDVA0mEwNzmQbHwNx9z1tjg3V0kHnhmpEqZfLaQeyUfS7bkusXMoTeN52itkWS8neE1p/nZp/eUrkouSg6EqeIUFERUCZCp7ED8kmDZg8li4BhIs=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from DBBPR04MB7737.eurprd04.prod.outlook.com (2603:10a6:10:1e5::22)
+ by PAXPR04MB8848.eurprd04.prod.outlook.com (2603:10a6:102:20f::9)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9870.25; Tue, 5 May
+ 2026 10:52:10 +0000
+Received: from DBBPR04MB7737.eurprd04.prod.outlook.com
+ ([fe80::5960:fb4b:9313:2b00]) by DBBPR04MB7737.eurprd04.prod.outlook.com
+ ([fe80::5960:fb4b:9313:2b00%3]) with mapi id 15.20.9870.023; Tue, 5 May 2026
+ 10:52:10 +0000
+Message-ID: <2202b6b4-41d4-4bcc-be89-b50f4c18662d@cherry.de>
+Date: Tue, 5 May 2026 12:52:07 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH RFC next 15/18] kbuild: enable -Werror for hostprogs
+To: Simon Glass <sjg@chromium.org>, foss+uboot@0leil.net
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ David Lechner <dlechner@baylibre.com>,
+ Jerome Forissier <jerome.forissier@arm.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Raymond Mao <raymondmaoca@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Michal Simek <michal.simek@amd.com>, Adriano Cordova <adrianox@gmail.com>,
+ Sughosh Ganu <sughosh.ganu@arm.com>, Yao Zi <me@ziyao.cc>,
+ Rasmus Villemoes <ravi@prevas.dk>
+References: <20260504-extrawarn-sync-v1-0-b19301d1948a@cherry.de>
+ <20260504-extrawarn-sync-v1-15-b19301d1948a@cherry.de>
+ <CAFLszTiX7VJzT_mYS071Vb5jOBR4pqtpuM9LoqR=6m+qMNLsyw@mail.gmail.com>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <CAFLszTiX7VJzT_mYS071Vb5jOBR4pqtpuM9LoqR=6m+qMNLsyw@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: FR3P281CA0026.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:1c::17) To DBBPR04MB7737.eurprd04.prod.outlook.com
+ (2603:10a6:10:1e5::22)
 MIME-Version: 1.0
-References: <20260428033230.7777-1-alif.zakuan.yuslaimi@altera.com>
- <20260428033230.7777-2-alif.zakuan.yuslaimi@altera.com>
- <5ce3b23e-97a7-46b5-a0d6-2ba28d7a2c68@altera.com>
-In-Reply-To: <5ce3b23e-97a7-46b5-a0d6-2ba28d7a2c68@altera.com>
-From: Sune Brian <briansune@gmail.com>
-Date: Tue, 5 May 2026 18:48:31 +0800
-X-Gm-Features: AVHnY4IwmGHc34ABjLeFJxcXsxqaVbN9WN4Fwf0igezughBAg5y3p1JaUp1npgk
-Message-ID: <CAN7C2SBzyO3xV=OB8cX_L2rbV5Q+y0fPrxPeDbeD_8bb4PCRsQ@mail.gmail.com>
-Subject: Re: [PATCH v2 1/3] arm: socfpga: Consolidate dram_bank_mmu_setup()
-To: "Chee, Tien Fong" <tien.fong.chee@altera.com>,
- Simon Glass <sjg@chromium.org>, 
- Tom Rini <trini@konsulko.com>, alif.zakuan.yuslaimi@altera.com
-Cc: u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DBBPR04MB7737:EE_|PAXPR04MB8848:EE_
+X-MS-Office365-Filtering-Correlation-Id: a6aee246-ab25-418a-81e7-08deaa945ac2
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|366016|1800799024|7416014|376014|22082099003|56012099003|18002099003;
+X-Microsoft-Antispam-Message-Info: EgDecFwgfSX/6LIBAPRUCNZu6gJOantO6qqoWmVStOL4bMy4T4e7ZQuStTnmNfkiHy9iE4Z3GciAVpgi/3KOH9ehieziiEDG6YEHOYpPuB8NfmYBluvLzGRShzok5AlLYur5kpgrG65l/agR2MBl3ykwjP7t5GxTWXwkZ1le1/wP/eJGMMA+vi2iXxVA/+5LhEpO4x2DvcTVD16+Xho4hd6Dm/VzY2bEBqNsy6AnAuoDeoU1/HS6Sn9qLYUxVBwTJpyDP3T34gr0hSptU+8lnW2hhORRRqGnaBEmYo1zoZHCA17phOwd/MrszxMB0+Obddmn3FPxScpupbdIJGuwqQS7oC9WYzclBJHVmD4OUb6nBgHcuE3IuYucNXoFOqPmGURe3U6Z6Q824F4nyHqs4DyyxNE2p8usCddIk5mnm0WKwzm11U4psu2g6YtQDAkSIjTbqqHhDIPJ+0b5YFIpPaISrkMjcaggkgoF5W+CksjipcmVVwK15bHuzHYMUB3Dca1YkK02UTNXLFXy8yQUKQNnIB6L75bfxa8+8XnVMuQ8Y6EoB4k3E0k1wATtdfWTQ5jy+6pcNc7Ew2fkpPyyTIpD+UNFLdPJo98ml8sq7Nbgw0wrMRtyZMqqcpqCO2ZAkNtn7PLimQ8Ji1f4PeymE93Op8TpuRiAQ+gy5L3cGmH3ASbqun4POvBCYpUNj7n3
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DBBPR04MB7737.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(1800799024)(7416014)(376014)(22082099003)(56012099003)(18002099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?cmQycEJKRnpxaXltVXJTZXV1UzNoeUlBbTVnUTNtTlVDaVZWNGdBeEpFQmxz?=
+ =?utf-8?B?K1lsUnY4WFBsbHFxdGJuRjlzWVFoK09ZRWRpWFdyK1NkOEgxSGVLZjdVT2lx?=
+ =?utf-8?B?UTJoL2xtQ0JNenBQTzArZ0hscndhSmVEVVFSN0pMNFQ5dW9sYXp6d3dhQkZz?=
+ =?utf-8?B?YmJML25NcTZKQ3hWMEh6emdrd0lQdWdFc05NekxVMFhqKzFMemhqTVJpSko2?=
+ =?utf-8?B?dmM1VWNGNXRES01vUEtrN2FGMXBTbWdHb1UyUURJcGcvKzhmZ0J0bTZjMng0?=
+ =?utf-8?B?L0VRK25XMjZ1YmhNV3NNNGFERlJqR1JVTit1TVNUeVVOUEdtamlHQlRHUzl6?=
+ =?utf-8?B?Z0c0Ry9yN3BLaFlHdE5DelIraGsxallLRFgybm5WT1QzZDQvZVA1QXVTRUhO?=
+ =?utf-8?B?V1UzL3ZuQkRuUnFZTjd4TEdpVTgzK3M3cVFFdnZhUVJjSW42aXFWb3VnL3dk?=
+ =?utf-8?B?VlluVC9kREE1K0tEc1BHMzNGa1Rtb2NnVGNRKzRtcjJGeUYySm5uL0I5MEJo?=
+ =?utf-8?B?YzFNcmg3WmI4cmJkdHZjak05WnBhb2FxcVJQNDErYkd2MmJaSTA3a1k2cE5I?=
+ =?utf-8?B?Y3djUWp6eGQ0OS9DOHJQU3dXYlFaS1h1Ulc5R0htL1R1NDlPZ2VyWG1Xdmpi?=
+ =?utf-8?B?K25xck9ITU0zL3FkSnRWMnVzcjByOWhGTnFmemtlcUFiN0dQT2Rac1hPTkVu?=
+ =?utf-8?B?WHR5dzJ5cmZtMUNmdkVEWjdpL1RIZjRTY2hqekZXTUdOL3lGYkVRZG5IL1BJ?=
+ =?utf-8?B?aWFsWUdIdWgxeisvaDBacmhXOGhTbFg1djlyMVpjcWNLd2xzSjZ4Y29ZTzRN?=
+ =?utf-8?B?MmdDMjFFK3J4emhleVBJQ1ZlMGo5WU44YzBXSyt4bVJZaWM3UFpmckkzWTdL?=
+ =?utf-8?B?TnZxaUtvRlYzMW4zSjV2MGhVbjlqbDZMRFhsS1ppN1FYSVdWR0t4Y0RsbS9Q?=
+ =?utf-8?B?b0hXWmdsWWVBWjN0WjBrekthdzdVSW9EbUE2ektIRVJkQkRUTVMvY0dQRjJs?=
+ =?utf-8?B?aFhPUEFlN25FbGY0VDR4UDg5WUppMzFUdjZiQmFnSGVCaE5KYkxpMHRrN0pI?=
+ =?utf-8?B?R0VzbXNHZW1tZVRKWUFKTGpWWGFSYzN0enoyQnNLRmkxRDlDTmVxcS96RmZv?=
+ =?utf-8?B?ZDY3N3p3Zk5GajdrRFdsTlFhRFhGVERaOHBNSThKdjIrbHNMaVBvSm9tVk95?=
+ =?utf-8?B?UkE3UGl6bmJQR2p2aFBDRXA0R3d4YlgzYlp0dHhWdUdpeGpBRWlja2JGVkZq?=
+ =?utf-8?B?QnpJbzMxQThJaTRHQ1oxb250QWNOK09OU3Uyc1lIQkd1RzRpSjc4MjBJZVkw?=
+ =?utf-8?B?UzR5YTlaN1NaM2VubHRFRUlFR2FIZ0xGV3lxRDU1aGNCcWNEWi9mMmR6OVdI?=
+ =?utf-8?B?ZExmTnRrcXBIcDlGOW1zcUdKT29JdFhFQ2FNeUdXNEhZd1ZnV0IwUGlVcW9h?=
+ =?utf-8?B?Z20rem5YTi9ybGIzeGJkb1JWY1pBbG5CbTJwS0E3R1h5ZWtDQW9iNk1BQTI3?=
+ =?utf-8?B?TTFTNE1SWjlpd2JzcXUxZDVSUVJMU2xXbmFFNUMzcGFZOGVVRUcxcnM0N0kz?=
+ =?utf-8?B?aXlPWnJreHNGUG4weGZOVXlGdGUvaDdaWnBZV2ZEZVUvb0NTM0Q4ZlVmYm8z?=
+ =?utf-8?B?U2FSZGhJS3dzQXRsOVZ1a0hFclN1TmVuU2hKU0d1ZXNmVGp4R1lIZy9JSlVD?=
+ =?utf-8?B?Q1RpZnQzMzlJSVhOM1Vvc0ZWb1BvOHFydHo0azdNVU50SmRscDdIbnNpSnVZ?=
+ =?utf-8?B?ZWhMV0U0U0UzbStnaGtXbG85OGJXTUtOcHdlU1Jkc0l1cU1hZlA4eXZOOG5Q?=
+ =?utf-8?B?dUtxdDZPQ3lncDBEMi9rUDFtMzVDMFc0Y2JhZTVZaTV1bFdJSjB4bnlSM2Jh?=
+ =?utf-8?B?L3hMS1V0ZUExV0tFNnUxTkJXSS9MQmRIeHJ4aDFvUU1kSk5Sd2ZORXVOZ0xj?=
+ =?utf-8?B?MlczMXRKM3dsVHJia1JJOFYwSlVFZ3FZbjdrcGdISGErQTFRTElvMmlaMm9U?=
+ =?utf-8?B?c0JjalEvTW1nQlBVbTJGUURwc1FMSEZ5Vkc5aWFmSm45M0g5S2lBWkpHQzkv?=
+ =?utf-8?B?VGJRc2FGSHRGR3F0UDZMSU12NFhPSkRoT3pEeFpmZ3YwdEUxRm8xNDVBNkx5?=
+ =?utf-8?B?MHJ0Um8zN3VyMzAxdC9rNnB0NXJIWkFhcjY5c2xTRG83L2lYRDl2Vm1HeGRn?=
+ =?utf-8?B?TnBPQ3ZpeUxqbEtKVmRHNU9CZCtvY3N2MmQrTm54djYrUG5kU2plaHhWL2R4?=
+ =?utf-8?B?MzJpVGpvSjB2ZU5mcVk0aVNId1k1YUtWd1FhclpuTGVER0llQWpzRWhjUGpa?=
+ =?utf-8?B?QUVjK2trdHFLbWlUUHRtSEo2M3kxRmNQK09QZk5tZ1VaSytuMzZVdz09?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: a6aee246-ab25-418a-81e7-08deaa945ac2
+X-MS-Exchange-CrossTenant-AuthSource: DBBPR04MB7737.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 May 2026 10:52:10.1989 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: pYI634I0xH+kjOqzeiljrHWCsBGTWHj3mRkFJdI0XW5HauXu1YZizaOO7KzR1EN8o3FzAzujbJX+9SF66faSQtTUdtYV9JITtAXUaT23qD8=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXPR04MB8848
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -117,68 +158,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tien Fong,
+Hi Simon,
 
-Disregarding to the code issue:
-I am curious that aren't someone do mentioned the:
+On 5/4/26 10:38 PM, Simon Glass wrote:
+> Hi Quentin,
+> 
+> On 2026-05-04T13:20:27, Quentin Schulz <foss+uboot@0leil.net> wrote:
+>> kbuild: enable -Werror for hostprogs
+>>
+>> [ Upstream commit 27758d8c2583d10472b745a43ff86fef96c11ef7 ]
+>>
+>> Original commit log:
+>>
+>>    The hostprog compilers and linkers do not share the regular compiler flags,
+>>    so they are not affected by CONFIG_WERROR or W=e. As hostprogs are used
+>>    during the bootstrap of the build, they can't depend on kconfig options.
+>>
+>>    Enable -Werror unconditionally.
+>>
+>> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
+>>
+>> scripts/Makefile.extrawarn | 5 +++++
+>>   1 file changed, 5 insertions(+)
+> 
+>> diff --git a/scripts/Makefile.extrawarn b/scripts/Makefile.extrawarn
+>> @@ -109,3 +109,8 @@ KBUILD_LDFLAGS            += --fatal-warnings
+>>   KBUILD_RUSTFLAGS     += -Dwarnings
+>>
+>>   endif
+>> +
+>> +# Hostprog flags are used during build bootstrapping and can not rely on CONFIG_ symbols.
+>> +KBUILD_HOSTCFLAGS    += -Werror
+>> +KBUILD_HOSTLDFLAGS   += -Wl,--fatal-warnings
+>> +KBUILD_HOSTRUSTFLAGS += -Dwarnings
+> 
+> Just to check, is there a reason to keep this and patch 16 separate?
 
-- Per-version change history must be placed below the '---' separator.
-- The required format is 'Changes in vN:'.
+Backports from Linux kernel where they already are separate.
 
-???
+> The next patch immediately undoes the 'unconditionally' claim made
+> here. Anyone bisecting through this point gets host tools failing on
+> any new compiler warning, with no way to opt out short of
+> HOSTCFLAGS=-Wno-error - squashing would also let you drop the comment
+> that patch 16 then has to rewrite.
+> 
 
-So suddenly all these high standards immediately disappeared from one
-patch to another patch?
-Interesting =3D]
+Fair enough.
 
-Thanks,
-Brian
+> If you'd rather keep them split to preserve upstream history, you
+> could mention in the commit message that the next patch makes it
+> conditional.
+> 
 
-On Tue, May 5, 2026 at 1:03=E2=80=AFPM Chee, Tien Fong
-<tien.fong.chee@altera.com> wrote:
->
-> Hi Alif,
->
->
-> On 28/4/2026 11:32 am, alif.zakuan.yuslaimi@altera.com wrote:
-> > From: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
-> >
-> > Relocate the dram_bank_mmu_setup() implementation from misc_arria10.c t=
-o
-> > the common socfpga misc.c and update the function to correctly handle b=
-oth
-> > pre-relocation and post-relocation cases for DRAM cache enabling for
-> > consistent MMU/dcache setup across Arria10 and CycloneV platforms.
-> >
-> > These changes help to improve maintainability and consistency of DRAM
-> > initialization as well as MMU configuration for Arria10 and CycloneV
-> > platforms.
-> >
-> > New Kconfig is introduced to enable this implementation only on the def=
-ault
-> > Arria10 and CycloneV boards as this will increase the SPL size which
-> > will exceed some Gen5 devices' SPL size limit.
-> >
-> > Fixes: e26ecebc684b ("socfpga: arria10: Allow dcache_enable before relo=
-cation")
-> >
-> > Signed-off-by: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
-> > ---
-> >   arch/arm/mach-socfpga/Kconfig        |  1 +
-> >   arch/arm/mach-socfpga/misc.c         | 31 +++++++++++++++++++++++++++=
-+
-> >   arch/arm/mach-socfpga/misc_arria10.c | 26 -----------------------
-> >   3 files changed, 32 insertions(+), 26 deletions(-)
-> >
-> > diff --git a/arch/arm/mach-socfpga/Kconfig b/arch/arm/mach-socfpga/Kcon=
-fig
-> > index fb98b647442..e2fdd6bb30f 100644
-> > --- a/arch/arm/mach-socfpga/Kconfig
-> > +++ b/arch/arm/mach-socfpga/Kconfig
-> > @@ -115,6 +115,7 @@ config ARCH_SOCFPGA_CYCLONE5
-> >   config ARCH_SOCFPGA_GEN5
-> >       bool
-> >       select SPL_ALTERA_SDRAM
-> > +     select SPL_CACHE if SPL
->
->
+I would prefer to, it should make it easier to then see which patches 
+were backported or not (git log --oneline). But I understand this 
+unnecessarily breaks bisectability, so no strong opinion.
+
+Cheers,
+Quentin
