@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58934CD343A
-	for <u-boot@archiver.kernel.org>; Tue,  5 May 2026 10:11:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 199BEFF885A
+	for <u-boot@archiver.kernel.org>; Tue,  5 May 2026 10:16:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 908D98487C;
-	Tue,  5 May 2026 12:11:50 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1C9CD84895;
+	Tue,  5 May 2026 12:16:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="T1Le38Iy";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="ugJaKXtd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7293C8488A; Tue,  5 May 2026 12:11:49 +0200 (CEST)
-Received: from tor.source.kernel.org (tor.source.kernel.org
- [IPv6:2600:3c04:e001:324:0:1991:8:25])
+ id 4951D84893; Tue,  5 May 2026 12:16:00 +0200 (CEST)
+Received: from sea.source.kernel.org (sea.source.kernel.org
+ [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A8CEA846D5
- for <u-boot@lists.denx.de>; Tue,  5 May 2026 12:11:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D3447846D5
+ for <u-boot@lists.denx.de>; Tue,  5 May 2026 12:15:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=sumit.garg@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 9173160128;
- Tue,  5 May 2026 10:11:45 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B428BC2BCB4;
- Tue,  5 May 2026 10:11:36 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id 274AA400AC;
+ Tue,  5 May 2026 10:15:56 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 199A6C2BCB4;
+ Tue,  5 May 2026 10:15:47 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1777975905;
- bh=g+VjJA1F1BltneXFI7+v5Wh+umGurvwVU6HLLKZRDfU=;
+ s=k20201202; t=1777976156;
+ bh=ITUG6PYXsvvdCvkqTIzvGLuiIDjl5Kdk6m82x+rMAMo=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=T1Le38IyetRIul7CN8AeqdGHInE5n12t7jXSbqppPV24J6KFSPPhIAWhz/fXYIyWo
- 4rWNMAE6s5N+kuDDPEUTxvaRpYaBUan75WIzIIiPVmCEBG3XpmkfJjJlWOyNufOTBM
- V7zS0vj/2HOhyCqNnUJYAMVjBLpV/ma0VX7a6Z/kU4+ST1102a+ievKBA4LKH504jF
- eV9csvoTYLgCOWxH5HVnaZ9RcjpkeoSzFlK0fOTCfZHkhblnhHiUj51SHkyrSPhzkf
- 6E7OlWRk3iWeh22TjUdASJukLA5jHDKrEzkqOmoumOJnjb4hP/8T7NZit8aFf3/gAZ
- c6Mxgvgu3XvBw==
-Date: Tue, 5 May 2026 15:41:33 +0530
+ b=ugJaKXtd0YkcuyLqBPQv/3CS6FfALoRxqGbcnA2MSHC9L2qxbfu2VhQoNQL+yqlyp
+ WN3HgrxutqyXjtVWitWSTRN7KAx8lHbvs4eMLhova2GMCeO6V9/+OO9P1xVkB3puGZ
+ WaZihdoABuBwftzMDV+450xeR+Sivo7xTVzeLbAmfDoTYG8L37kbGmlgzpph8ibthF
+ fzRGHrsdFxsvuxwrEsis5ibyHR7METHzHeDArRwVE9qtBu2s4FkmjrkwwYnDXzDQ7u
+ OB3L/omVX+zsZ3kNvRt81myVETT4Z1PsSeKxNMmZx9dMsd43WqKT8QUZAQvTVHFAVx
+ Bfo2yMCpVlsww==
+Date: Tue, 5 May 2026 15:45:45 +0530
 From: Sumit Garg <sumit.garg@kernel.org>
 To: Casey Connolly <casey.connolly@linaro.org>
 Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io,
@@ -65,13 +65,14 @@ Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io,
  Antony Kurniawan Soemardi <linux@smankusors.com>,
  Luca Weiss <luca.weiss@fairphone.com>,
  Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-Subject: Re: [PATCH v2 00/15] qcom: smem: modernize SMEM in U-Boot
-Message-ID: <afnCVT5JoeIdy-hQ@sumit-xelite>
+Subject: Re: [PATCH v2 01/15] Revert "dm: SMEM (Shared memory) uclass"
+Message-ID: <afnDUf1IpbbNUJIy@sumit-xelite>
 References: <20260504-b4-modernise-smem-v2-0-c01ec2ff3886@linaro.org>
+ <20260504-b4-modernise-smem-v2-1-c01ec2ff3886@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20260504-b4-modernise-smem-v2-0-c01ec2ff3886@linaro.org>
+In-Reply-To: <20260504-b4-modernise-smem-v2-1-c01ec2ff3886@linaro.org>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,148 +89,284 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Casey,
-
-Thanks for the much needed re-spin of the SMEM patch-set.
-
-On Mon, May 04, 2026 at 08:57:28PM +0200, Casey Connolly wrote:
-> Smem is currently implemented a uclass in U-Boot. This carries with it
-> some implicit limitations about how and when we can actually talk with
-> it, since its modelled as a device.
+On Mon, May 04, 2026 at 08:57:29PM +0200, Casey Connolly wrote:
+> SMEM is a highly Qualcomm specific interface, while having a dedicated
+> UCLASS for it offers a nice abstraction, for things like memory layout
+> parsing we need to use it before the driver model is available.
 > 
-> The SMEM uclass is qualcomm specific and has no other users, smem is
-> also largely useful for parsing the memory map and other tasks which we
-> have to do before DM is alive anyway.
+> Therefore, it doesn't make sense to fit SMEM into the driver model.
+> Instead let's adopt a model closer to Linux, and parse SMEM really early
+> during boot (as soon as we have the FDT).
 > 
-> Let's drop the old smem code and replace it with a straight port from
-> Linux, providing a familiar interface and enabling us to access it much
-> earlier in the boot process than would be possible with a standard
-> udevice.
+> This reverts commit 7b384eccc785b596f68448b155cbda26df57fb23.
 > 
-> Additionally, this will be easier to maintain going forwards since any
-> patches from Linux can be more easily ported over.
-> 
-> With this new smem framework in place, we can now use SMEM to parse the
-> memory map when it's not provided via some other mechanism and to read
-> the serial number of the board.
-> 
-> Implement this functionality and split the snapdragon memory parsing off
-> to its own file to try and organise things a bit better.
-> 
-> Since the memory map stored in SMEM doesn't already have some carveouts
-> let's also be correct about unmapping reserved memory regions, we
-> should eventually do this on all Qualcomm boards but it's particularly
-> important when we aren't chainloading from ABL.
-
-This was really needed to unmap reserved regions in U-Boot memory map to
-increase robustness.
-
-> 
-> This depends on a fix for unmapping memory regions: https://lore.kernel.org/u-boot/20260504175511.585797-1-casey.connolly@linaro.org/
-> 
+> Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
 > ---
-> Changes in v2:
-> - Ensure reserved regions are unmapped appropriately when using SMEM as
->   the source of truth for the memory map.
-> - Support SMEM ram layout v0/v1 for older platforms using a header from
->   Qualcomm.
+>  arch/arm/Kconfig           |  1 -
+>  drivers/Kconfig            |  2 --
+>  drivers/Makefile           |  1 -
+>  drivers/smem/Kconfig       | 25 -------------
+>  drivers/smem/Makefile      |  7 ----
+>  drivers/smem/smem-uclass.c | 46 ------------------------
+>  include/dm/uclass-id.h     |  1 -
+>  include/smem.h             | 90 ----------------------------------------------
+>  8 files changed, 173 deletions(-)
 
-It would be better if you can provide proper attribution in the commit
-to which this header is being picked up.
-
-> - Set an environment variable (memmap_source) providing info about
->   where U-Boots memory map is from.
-> - Correctly handle serial_num missing on msm8916
-> - Link to v1: https://lore.kernel.org/r/20241124-b4-modernise-smem-v1-0-b7852c11b67c@linaro.org
-> 
-
-FWIW, I tested this patch-set on RB3Gen2 and lemans-evk after dropping
-the U-Boot DT overrides, so feel free to carry:
-
-Tested-by: Sumit Garg <sumit.garg@oss.qualcomm.com>
-
-I will give a proper review to this series soon.
+Reviewed-by: Sumit Garg <sumit.garg@oss.qualcomm.com>
 
 -Sumit
 
-> To: u-boot@lists.denx.de
-> To: Sumit Garg <sumit.garg@kernel.org>
-> To: u-boot-qcom@groups.io
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: Simon Glass <sjg@chromium.org>
-> Cc: Casey Connolly <casey.connolly@linaro.org>
-> Cc: Peng Fan <peng.fan@nxp.com>
-> Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
-> Cc: Alice Guo <alice.guo@nxp.com>
-> Cc: Quentin Schulz <quentin.schulz@cherry.de>
-> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> Cc: Neil Armstrong <neil.armstrong@linaro.org>
-> Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>
-> Cc: Kuan-Wei Chiu <visitorckw@gmail.com>
-> Cc: Raymond Mao <raymond.mao@riscstar.com>
-> Cc: Stefan Roese <stefan.roese@mailbox.org>
-> Cc: Philip Molloy <philip.molloy@analog.com>
-> Cc: Jerome Forissier <jerome.forissier@arm.com>
-> Cc: Marek Vasut <marek.vasut@mailbox.org>
-> Cc: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
-> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
-> Cc: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
-> Cc: Rasmus Villemoes <ravi@prevas.dk>
-> Cc: Heiko Schocher <hs@nabladev.com>
-> Cc: Michal Simek <michal.simek@amd.com>
-> Cc: Sughosh Ganu <sughosh.ganu@arm.com>
-> Cc: Antony Kurniawan Soemardi <linux@smankusors.com>
-> Cc: Luca Weiss <luca.weiss@fairphone.com>
-> Cc: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 > 
-> ---
-> Casey Connolly (15):
->       Revert "dm: SMEM (Shared memory) uclass"
->       smem: drop drivers/smem
->       Revert "test: smem: add basic smem test"
->       Revert "drivers: smem: sandbox"
->       mach-snapdragon: fix reserved memory carveout
->       soc: qcom: import smem from Linux 6.11-rc2
->       soc: qcom: smem: adjust headers for U-Boot
->       soc: qcom: smem: adjust for U-Boot
->       soc: qcom: smem: get serial number from socinfo
->       soc: qcom: smem: stub functions
->       soc: qcom: smem: add build infra
->       mach-snapdragon: move memory parsing to its own file
->       mach-snapdragon: support parsing memory map from SMEM
->       mach-snapdragon: fetch serial# from SMEM
->       configs: add qcom_sm8650_defconfig and debug fragment
+> diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
+> index f624675eadf8..dadb18e0b8cd 100644
+> --- a/arch/arm/Kconfig
+> +++ b/arch/arm/Kconfig
+> @@ -1141,9 +1141,8 @@ config ARCH_SNAPDRAGON
+>  	select POWER_DOMAIN
+>  	select GPIO_EXTRA_HEADER
+>  	select MSM_SMEM
+>  	select OF_CONTROL
+> -	select SMEM
+>  	select SPMI
+>  	select BOARD_LATE_INIT
+>  	select OF_BOARD
+>  	select SAVE_PREV_BL_FDT_ADDR if !ENABLE_ARM_SOC_BOOT0_HOOK
+> diff --git a/drivers/Kconfig b/drivers/Kconfig
+> index 47606ddc6c8b..aa293df37c57 100644
+> --- a/drivers/Kconfig
+> +++ b/drivers/Kconfig
+> @@ -123,10 +123,8 @@ source "drivers/scsi/Kconfig"
+>  source "drivers/serial/Kconfig"
+>  
+>  source "drivers/sm/Kconfig"
+>  
+> -source "drivers/smem/Kconfig"
+> -
+>  source "drivers/sound/Kconfig"
+>  
+>  source "drivers/soc/Kconfig"
+>  
+> diff --git a/drivers/Makefile b/drivers/Makefile
+> index 43d0ba332818..ca3e87ffb102 100644
+> --- a/drivers/Makefile
+> +++ b/drivers/Makefile
+> @@ -118,9 +118,8 @@ obj-y += pwm/
+>  obj-y += reset/
+>  obj-y += input/
+>  obj-y += iommu/
+>  # SOC specific infrastructure drivers.
+> -obj-y += smem/
+>  obj-y += thermal/
+>  obj-$(CONFIG_TEE) += tee/
+>  obj-$(CONFIG_ARM_FFA_TRANSPORT) += firmware/arm-ffa/
+>  obj-y += axi/
+> diff --git a/drivers/smem/Kconfig b/drivers/smem/Kconfig
+> deleted file mode 100644
+> index e5d7dcc81b17..000000000000
+> --- a/drivers/smem/Kconfig
+> +++ /dev/null
+> @@ -1,25 +0,0 @@
+> -menuconfig SMEM
+> -	bool  "SMEM (Shared Memory mamanger) support"
+> -
+> -if SMEM
+> -
+> -config SANDBOX_SMEM
+> -    bool "Sandbox Shared Memory Manager (SMEM)"
+> -    depends on SANDBOX && DM
+> -    help
+> -      enable SMEM support for sandbox. This is an emulation of a real SMEM
+> -      manager.
+> -      The sandbox driver allocates a shared memory from the heap and
+> -      initialzies it on start.
+> -
+> -config MSM_SMEM
+> -    bool "Qualcomm Shared Memory Manager (SMEM)"
+> -    depends on DM
+> -    depends on ARCH_SNAPDRAGON || ARCH_IPQ40XX
+> -    select DEVRES
+> -    help
+> -      Enable support for the Qualcomm Shared Memory Manager.
+> -      The driver provides an interface to items in a heap shared among all
+> -      processors in a Qualcomm platform.
+> -
+> -endif # menu "SMEM Support"
+> diff --git a/drivers/smem/Makefile b/drivers/smem/Makefile
+> deleted file mode 100644
+> index af3e9b50883c..000000000000
+> --- a/drivers/smem/Makefile
+> +++ /dev/null
+> @@ -1,7 +0,0 @@
+> -# SPDX-License-Identifier: GPL-2.0+
+> -#
+> -# Makefile for the U-Boot SMEM interface drivers
+> -
+> -obj-$(CONFIG_SANDBOX_SMEM) += sandbox_smem.o
+> -obj-$(CONFIG_SMEM) += smem-uclass.o
+> -obj-$(CONFIG_MSM_SMEM) += msm_smem.o
+> diff --git a/drivers/smem/smem-uclass.c b/drivers/smem/smem-uclass.c
+> deleted file mode 100644
+> index 4dea5cc4bf1c..000000000000
+> --- a/drivers/smem/smem-uclass.c
+> +++ /dev/null
+> @@ -1,46 +0,0 @@
+> -// SPDX-License-Identifier: GPL-2.0+
+> -/*
+> - * Copyright (c) 2018 Ramon Fried <ramon.fried@gmail.com>
+> - */
+> -
+> -#define LOG_CATEGORY UCLASS_SMEM
+> -
+> -#include <dm.h>
+> -#include <smem.h>
+> -
+> -int smem_alloc(struct udevice *dev, unsigned int host,
+> -		unsigned int item, size_t size)
+> -{
+> -	struct smem_ops *ops = smem_get_ops(dev);
+> -
+> -	if (!ops->alloc)
+> -		return -ENOSYS;
+> -
+> -	return ops->alloc(host, item, size);
+> -}
+> -
+> -void *smem_get(struct udevice *dev, unsigned int host,
+> -		unsigned int item, size_t *size)
+> -{
+> -	struct smem_ops *ops = smem_get_ops(dev);
+> -
+> -	if (!ops->get)
+> -		return NULL;
+> -
+> -	return ops->get(host, item, size);
+> -}
+> -
+> -int smem_get_free_space(struct udevice *dev, unsigned int host)
+> -{
+> -	struct smem_ops *ops = smem_get_ops(dev);
+> -
+> -	if (!ops->get_free_space)
+> -		return -ENOSYS;
+> -
+> -	return ops->get_free_space(host);
+> -}
+> -
+> -UCLASS_DRIVER(smem) = {
+> -	.id     = UCLASS_SMEM,
+> -	.name       = "smem",
+> -};
+> diff --git a/include/dm/uclass-id.h b/include/dm/uclass-id.h
+> index 36b5d87c304f..fe0aae2720ca 100644
+> --- a/include/dm/uclass-id.h
+> +++ b/include/dm/uclass-id.h
+> @@ -133,9 +133,8 @@ enum uclass_id {
+>  	UCLASS_SCMI_BASE,	/* Interface for SCMI Base protocol */
+>  	UCLASS_SCSI,		/* SCSI device */
+>  	UCLASS_SERIAL,		/* Serial UART */
+>  	UCLASS_SIMPLE_BUS,	/* Bus with child devices */
+> -	UCLASS_SMEM,		/* Shared memory interface */
+>  	UCLASS_SOC,		/* SOC Device */
+>  	UCLASS_SOUND,		/* Playing simple sounds */
+>  	UCLASS_SPI,		/* SPI bus */
+>  	UCLASS_SPI_FLASH,	/* SPI flash */
+> diff --git a/include/smem.h b/include/smem.h
+> deleted file mode 100644
+> index b19c534ebc43..000000000000
+> --- a/include/smem.h
+> +++ /dev/null
+> @@ -1,90 +0,0 @@
+> -/* SPDX-License-Identifier: GPL-2.0+ */
+> -/*
+> - * The shared memory system is an allocate-only heap structure that
+> - * consists of one of more memory areas that can be accessed by the processors
+> - * in the SoC.
+> - *
+> - * Allocation can be done globally for all processors or to an individual processor.
+> - * This is controlled by the @host parameter.
+> - *
+> - * Allocation and management of heap can be implemented in various ways,
+> - * The @item parameter should be used as an index/hash to the memory region.
+> - *
+> - * Copyright (c) 2018 Ramon Fried <ramon.fried@gmail.com>
+> - */
+> -
+> -#ifndef _smemh_
+> -#define _smemh_
+> -
+> -/* struct smem_ops: Operations for the SMEM uclass */
+> -struct smem_ops {
+> -	/**
+> -	 * alloc() - allocate space for a smem item
+> -	 *
+> -	 * @host:	remote processor id, or -1 for all processors.
+> -	 * @item:	smem item handle
+> -	 * @size:	number of bytes to be allocated
+> -	 * @return 0 if OK, -ve on error
+> -	 */
+> -	int (*alloc)(unsigned int host,
+> -		unsigned int item, size_t size);
+> -
+> -	/**
+> -	 * get() - Resolve ptr of size of a smem item
+> -	 *
+> -	 * @host:	the remote processor, of -1 for all processors.
+> -	 * @item:	smem item handle
+> -	 * @size:	pointer to be filled out with the size of the item
+> -	 * @return	pointer on success, NULL on error
+> -	 */
+> -	void *(*get)(unsigned int host,
+> -		unsigned int item, size_t *size);
+> -
+> -	/**
+> -	 * get_free_space() - Get free space in smem in bytes
+> -	 *
+> -	 * @host:   the remote processor identifying a partition, or -1
+> -	 *			for all processors.
+> -	 * @return	free space, -ve on error
+> -	 */
+> -	int (*get_free_space)(unsigned int host);
+> -};
+> -
+> -#define smem_get_ops(dev)	((struct smem_ops *)(dev)->driver->ops)
+> -
+> -/**
+> - * smem_alloc() - allocate space for a smem item
+> - * @host:	remote processor id, or -1
+> - * @item:	smem item handle
+> - * @size:	number of bytes to be allocated
+> - * Return: 0 if OK, -ve on error
+> - *
+> - * Allocate space for a given smem item of size @size, given that the item is
+> - * not yet allocated.
+> - */
+> -int smem_alloc(struct udevice *dev, unsigned int host, unsigned int item, size_t size);
+> -
+> -/**
+> - * smem_get() - resolve ptr of size of a smem item
+> - * @host:	the remote processor, or -1 for all processors.
+> - * @item:	smem item handle
+> - * @size:	pointer to be filled out with size of the item
+> - * Return:	pointer on success, NULL on error
+> - *
+> - * Looks up smem item and returns pointer to it. Size of smem
+> - * item is returned in @size.
+> - */
+> -void *smem_get(struct udevice *dev, unsigned int host, unsigned int item, size_t *size);
+> -
+> -/**
+> - * smem_get_free_space() - retrieve amount of free space in a partition
+> - * @host:	the remote processor identifying a partition, or -1
+> - *			for all processors.
+> - * Return:	size in bytes, -ve on error
+> - *
+> - * To be used by smem clients as a quick way to determine if any new
+> - * allocations has been made.
+> - */
+> -int smem_get_free_space(struct udevice *dev, unsigned int host);
+> -
+> -#endif /* _smem_h_ */
 > 
->  MAINTAINERS                                  |   1 -
->  arch/arm/Kconfig                             |   3 +-
->  arch/arm/mach-snapdragon/Makefile            |   2 +-
->  arch/arm/mach-snapdragon/board.c             | 253 ++++-----
->  arch/arm/mach-snapdragon/dram.c              | 239 ++++++++
->  arch/arm/mach-snapdragon/qcom-priv.h         |  17 +
->  arch/arm/mach-snapdragon/rampart.h           | 194 +++++++
->  arch/sandbox/dts/test.dts                    |   4 -
->  board/qualcomm/debug-sm8650.config           |   5 +
->  configs/qcom_sm8650_defconfig                |  16 +
->  configs/sandbox64_defconfig                  |   2 -
->  configs/sandbox_defconfig                    |   2 -
->  drivers/Kconfig                              |   2 -
->  drivers/Makefile                             |   1 -
->  drivers/smem/Kconfig                         |  25 -
->  drivers/smem/Makefile                        |   7 -
->  drivers/smem/sandbox_smem.c                  |  44 --
->  drivers/smem/smem-uclass.c                   |  46 --
->  drivers/soc/qcom/Kconfig                     |   8 +
->  drivers/soc/qcom/Makefile                    |   1 +
->  drivers/{smem/msm_smem.c => soc/qcom/smem.c} | 777 ++++++++++++++++-----------
->  include/dm/uclass-id.h                       |   1 -
->  include/smem.h                               |  90 ----
->  include/soc/qcom/smem.h                      |  36 ++
->  include/soc/qcom/socinfo.h                   | 111 ++++
->  test/dm/Makefile                             |   1 -
->  test/dm/smem.c                               |  26 -
->  27 files changed, 1186 insertions(+), 728 deletions(-)
-> ---
-> base-commit: 2920b49fb117dd70b6219804bf0d298c96f184f2
-> 
-> // Casey (she/they)
+> -- 
+> 2.53.0
 > 
