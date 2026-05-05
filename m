@@ -4,91 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68C9ACD3427
-	for <u-boot@archiver.kernel.org>; Tue,  5 May 2026 15:50:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CAEFECD3427
+	for <u-boot@archiver.kernel.org>; Tue,  5 May 2026 15:50:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A4731849A8;
+	by phobos.denx.de (Postfix) with ESMTP id E3995849AD;
 	Tue,  5 May 2026 17:49:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="STqbVzlz";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="OHRS6U0D";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8D57984949; Tue,  5 May 2026 15:58:51 +0200 (CEST)
-Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
- [IPv6:2a00:1450:4864:20::530])
+ id 9FFBA8494B; Tue,  5 May 2026 16:01:15 +0200 (CEST)
+Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
+ [IPv6:2a00:1450:4864:20::629])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 58C5F848FC
- for <u-boot@lists.denx.de>; Tue,  5 May 2026 15:58:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4E39C848FC
+ for <u-boot@lists.denx.de>; Tue,  5 May 2026 16:01:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x530.google.com with SMTP id
- 4fb4d7f45d1cf-67c9616b4feso2991128a12.1
- for <u-boot@lists.denx.de>; Tue, 05 May 2026 06:58:49 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1777989529; cv=none;
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-bba0dde4f43so838807266b.3
+ for <u-boot@lists.denx.de>; Tue, 05 May 2026 07:01:13 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1777989673; cv=none;
  d=google.com; s=arc-20240605;
- b=a0OXiFwiB5SxW/CWZxriZ5SbqjbeJSh4G25jSxyIFgTtw2N8MoBiEkXbR7UsT7CrvP
- Z2TQrKVIrC71os4HHZJ1me6cFZR0KmZss89E/MFEOdvyaLSOlhJzqmtyxxFDC+Uv0PfI
- pGSVTcPzXQfZZbmY9cgpGJiq9PW4koihnm9JonbjqVzSx+meSKdAjiLYsCKGE2+EYVxa
- uPrxASj8+hVxq84/OX0OVNxx8FkHIhKHEnjKgU0mq0o89ZMPWg+f72GWvG1MlfmJf0mH
- jtOJHlaTvPf6BDskdkRxHIVHTcBqEbZQWJbFiAIofAOpnDV75L4Vt+fWWkALa5loJRlW
- BQRg==
+ b=LbSt+bZnTTKqq+0FmfanqTcgt1xZqdAYJBd1zR9VhLkVo/uzUGMkh2iUFg5Xml6iZL
+ 0w2SlXwdrAoBt/cY3uq/5P6QpKObvrkpUjA0rAviJvdm8fKbjanfCXjC6AdVshwlpuf/
+ OkeGhF67dXv38rXHQDRIYqEDiSqEjWXS/nFLj3/Sgo9rV3Iv79jSGN42PywREkcbAj4S
+ 3K3/XWRWFlSAjsNrqTny7e7Yx79RDyhBwt4OabgXu+hJ7dy8sYUdkOchsroVnGYlyPa8
+ lUnr4t5dQAOTCukkLRMKvCMckq0WSUogSOo/wS+R6Up2CemTohqEJJgFUykrqeSnWK1Z
+ HkuA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=I0OLmYKyF0zquofKxWrSol32T/HUiDSvMMd9kx7DM+Y=;
+ bh=IEr1X+AEq4NYb3E3owmDUy8jhHx+ItQjpnL+d13CAR0=;
  fh=CcNfW6dIjL9WUdVhhW/ZJ0mqXisjz2Ordk1F8mJ+6zw=;
- b=LBFeF3L1NH+aTzBS1IUK1zOodEpPGya6ZgJkjUh+JF33WY/zRKoclnvxayqNCvggRM
- ZD67GfMV0gRJBLuZiMfVkftdBdZdCP9sIbqA/puCoDaHt4vyJXuVGrrpvt5f2iLCZBr1
- 3cJAZIKGDCI7U8ycST89MW+8LPjwvqP39JZ4SEdDh95uE72fYDL3UG6wSAda6LXYlhyO
- z42vwVORnIQplAfjzefr7ZjeVbYzuDisA7nS5RqEVMtlvgapi6ZTUFMrhfV6nm4g07pj
- /DfSKQpo77Loos6jLRqxyJCG31SkiQvOVhHEES3uvi1wXch1Lkmf/KS+8LfIZA8j3S7J
- pfyw==; darn=lists.denx.de
+ b=aotA9CRelKBdL9je3FT1hlETmpBqCj4rdFylxM1o6Qs5kd/GCTn2E0zItRd+dPhpJs
+ Nm61qdlkiSj3wXc7IHDM5JNSQZ2XFa8guTtoOpA0mU3EE3nCBQnWuUtlCwqDWIEx8stl
+ aBrfb3QXoTUYAgnHrCpwAsQJSKRjQ1Qcf6JWAvAQn4rGpHKQ/wWDKgMgFL4VYZj09Dvn
+ 9U1F3sOh4+W6OZnLmQDYSHqHpH2znKQWWZ+4b4sJspM1H9Ij5HLIkWSlCI6ShoY0HKjx
+ tu23q/Ps5GrwPhYAJiVKC0j8rbM2GuiBFCOCV++LMXPw79KssXr4l0723KzcHpmE0E/I
+ GTYA==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1777989529; x=1778594329; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1777989673; x=1778594473; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=I0OLmYKyF0zquofKxWrSol32T/HUiDSvMMd9kx7DM+Y=;
- b=STqbVzlzSHuB973oNKcAJQi12smJKJJd1TwnxWv91Pe3Dl1bjj95B9yMTaNu97LQSs
- QbHe2lXdc9hsq0ETxo3B1i0lnUiXjtpqvr6lJXtQhSbYbW7Dk+Va6Fwh4gigg91Tm3Km
- mWSbV82KEjKcbyfW+p/9sT8swaM+fMI+Yw1hU=
+ bh=IEr1X+AEq4NYb3E3owmDUy8jhHx+ItQjpnL+d13CAR0=;
+ b=OHRS6U0DXcipQHZN/HK5oUZ4QaxkoxN7Gw0PwP5ZxNYsdtfdPZlujJLnZ0O/nOGWp4
+ VpJcHW3w+fGfVSULc2i58vuA80ZIkxkB9hkqcCqehYvcY3dYHMtu1qwkJPSzfndIBgcE
+ ZfkTHHXntzqMe/UtHqXkQqRoXFOc/xkqss4Bs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777989529; x=1778594329;
+ d=1e100.net; s=20251104; t=1777989673; x=1778594473;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=I0OLmYKyF0zquofKxWrSol32T/HUiDSvMMd9kx7DM+Y=;
- b=Rmc5hRiyqC3bYY2bHQN0G4qRW7ii5PJ0c41UZMA3h0zrdoofEPlKr3dNPumpuLc6aG
- U0AJI1Qr1Lny/u9RYojzmdxhsy8RbvHZ75oa9WTYqbrl8pzcGaBOGJck4FBpbnNf48PD
- /nFjFdzO1x79xMbO/HMXShiJmdnQ6GuJBaEYW6MMEViekZlW5YxNJw4+q48nbqYz4sH2
- 3vQX8ujmVPmmSFlr+y7HW2KqUK+9qn+p+fwAd2YdMIVEkdDIStQ7W7xHS7T/YxQ4Y0HE
- CWJ4nzenf2C676XqnYCb4RRNLgSmOJB2ugvU31H0Eaj+LYaYpDz1KHc9JWiRUZ5Yj1WU
- dp9g==
-X-Gm-Message-State: AOJu0YyvJYBnNSAHV7QeVueBD0lAiDQ4xTnfLWPRnU/zOKvOzw4UL0av
- g2CtA/5s9TFXnawHj0cNNxj1NaHaWE0E+GSdldgsS5n0Jz+foV5NA1Sg8tF9Y9FLdxeJW/SlBS2
- Lwip4UKCosBc2ZocVH8Gxv1E9xCg97OFsyg0M03sm
-X-Gm-Gg: AeBDietWPtr/p9dnGj0M4McJbHQqvFlocm0O+IaZI4kzK3VFrPuTdcqQmk4/VYQ0KDZ
- 25kb6ttqFNfuEj4C6tiURz22A/Idu2R7ggdMEipL5hEFKUhLIhYiB6B9qA5GV93SjxbP2hCBsbG
- dX1kr3KW/iGGdpEEopS+EVobh/EMIcRiIuQd7FwcvIyZ0vwm4ImuwCH6wuFwUowowoxTgbr0HwK
- ZGvUVqyL+NpG/5zobftQCUi4Etm6GP8+TDrvVHe4DI2noAW9MRJHaf0s+R8wbfPiD97eFcAC+W4
- gZXf03nuUu2WMnLi
-X-Received: by 2002:a17:907:9623:b0:bc4:a75e:1abb with SMTP id
- a640c23a62f3a-bc4a75e43afmr111022266b.21.1777989528544; Tue, 05 May 2026
- 06:58:48 -0700 (PDT)
+ bh=IEr1X+AEq4NYb3E3owmDUy8jhHx+ItQjpnL+d13CAR0=;
+ b=mW0pUVYMantr3aAswuwO6O3hEyepyDXsEWIZF9sNSvDp5cbJV5c3Jwh/LqrLNsFOR4
+ dXe0csthrupLjICiHh5X6xnNdnh6Pm2YGh+o5NgO10przKwQh0DIKEASRRs6lu5dPnNQ
+ TKWberQ8OXVeaWAWKub/x0hZj1HBSS4VufGsGZXIuNfTX495Ygojmdhv1djAB89UoFKg
+ +t4gjiG7/qu/b+cvCaA/zmnFuQjxTp9V06U4p+TsgpSsMkrEcbuLdWP+f31QienIwZqu
+ y1tPDZ/fiRuH2LxAEw+mYcjYmnI0xNQU6xVE8II3UY6/Fwv7dmAPwOgtUpYVzdwJs284
+ iKYg==
+X-Gm-Message-State: AOJu0YwdW7SOAxp0xBBkCnzaTe3lEHpraebmLaVfAjX4HhtTdxRID3h0
+ Lcdp0nEp/HKPg3lqg+MbYTiTiuPwl8aNggm0ZnOfko+d+ugzvuypWZEqxAUSIliijPWDSaN2u4k
+ YhHMI8q5UvsCmg85rdfK5jwZpEU14jwJF9q43qEyW
+X-Gm-Gg: AeBDietW+2ShDCVGGQxtOYryFrTNI8i1ODkxoBlKUeXmd9MKFzkePF1Uf5YyYusfkEr
+ vZaDbabkMD5RRutbWIFp9Nf0OpJJ14SjpWb8yEnnJde+mQ2pt8pfaHAeiNnUFkIRPRaQNYJm+2J
+ /61lxi6AjBIFi46nSKtdx5dYTEGGZ0VatfvTPbDw/Gp9bP+jE7O/8yC9Ft1BHhdH4JbOtwBoVwZ
+ pNsYijGlvepxSoz2eAQmeuHX1fjO5VIHZ6JoCauXluBBy8EwWnQFCUdmH9YhLWnhO3haei9tHOA
+ kB4jcPzHva+JyKBI
+X-Received: by 2002:a17:907:c06:b0:bc1:6ec9:453f with SMTP id
+ a640c23a62f3a-bc16ec95210mr606369066b.8.1777989671639; Tue, 05 May 2026
+ 07:01:11 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260505-qcom_spl-v5-0-11817415d664@seznam.cz>
- <20260505-qcom_spl-v5-1-11817415d664@seznam.cz>
-In-Reply-To: <20260505-qcom_spl-v5-1-11817415d664@seznam.cz>
+ <20260505-qcom_spl-v5-4-11817415d664@seznam.cz>
+In-Reply-To: <20260505-qcom_spl-v5-4-11817415d664@seznam.cz>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 5 May 2026 07:58:35 -0600
-X-Gm-Features: AVHnY4IMh-iLDUOnWaoTNBTe9VwHSTM7fbaZL2MFRLXKeOGvvIM-zmcHIATLHRc
-Message-ID: <CAFLszTj83hXz+mWj4jfJa6p5RY-yXCbpV0hrD2OFLgr0LPXz0w@mail.gmail.com>
-Subject: Re: [PATCH v5 01/11] Makefile: add SPL_REMAKE_ELF_LDSCRIPT feature
+Date: Tue, 5 May 2026 08:00:58 -0600
+X-Gm-Features: AVHnY4J7YSGcH43jmZTJ_z_eJdc4QDPo6V46JUTDE4f1sJuvnANrWNKPRN-h6Ww
+Message-ID: <CAFLszThNdiVOs5+q=tVZLxfr14_vxrjYA6rZ-=4J=9T6MAQfGg@mail.gmail.com>
+Subject: Re: [PATCH v5 04/11] mach-snapdragon: boot0.h: split out
+ msm8916_boot0.h
 To: michael.srba@seznam.cz
 Cc: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>,
  u-boot-qcom@groups.io, 
@@ -144,32 +145,41 @@ X-Virus-Status: Clean
 Hi Michael,
 
 On 2026-05-05T00:47:48, Michael Srba <michael.srba@seznam.cz> wrote:
-> Makefile: add SPL_REMAKE_ELF_LDSCRIPT feature
+> mach-snapdragon: boot0.h: split out msm8916_boot0.h
 >
-> Some platforms (e.g. at least Qualcomm) use the ELF format in creative
-> ways, including in the bootrom. Make SPL_REMAKE_ELF use a linker script
-> specified in SPL_REMAKE_ELF_LDSCRIPT (with the previously hardcoded path
-> as the default).
+> Prepare for supporting alternative boot0.h per-SoC by splitting out
+> the existing msm8916-specific code.
+>
+> There is now a selection mechanism to choose a specific boot0.h
+> in the Kconfig. BOOT0_MSM8916_PSCI_WORKAROUND is the only option
+> right now, but more can be added. The toplevel boot0.h additionally
+> enables conditionally performing the include only in u-boot proper,
+> or only in SPL.
 >
 > Signed-off-by: Michael Srba <Michael.Srba@seznam.cz>
 >
-> Makefile           |  9 +++++++--
->  common/spl/Kconfig | 11 +++++++++++
->  2 files changed, 18 insertions(+), 2 deletions(-)
+> arch/arm/mach-snapdragon/Kconfig                   | 16 ++++++
+>  arch/arm/mach-snapdragon/include/mach/boot0.h      | 58 +++-------------------
+>  .../mach-snapdragon/include/mach/msm8916_boot0.h   | 54 ++++++++++++++++++++
+>  configs/dragonboard410c_defconfig                  |  1 +
+>  4 files changed, 77 insertions(+), 52 deletions(-)
 
-> diff --git a/common/spl/Kconfig b/common/spl/Kconfig
-> @@ -238,6 +238,17 @@ config SPL_HANDOFF
-> +     help
-> +       This allows specifying a linker script that will be used to re-wrap
-> +       the SPL binary into an ELF.
-> +       Some platforms (e.g. at least Qualcomm) use the ELF format in creative
-> +       ways, including in the bootrom. For such platforms, you can change
-> +       the default linker script to a platform-specific one.
+> diff --git a/arch/arm/mach-snapdragon/include/mach/boot0.h b/arch/arm/mach-snapdragon/include/mach/boot0.h
+> @@ -1,54 +1,8 @@
+>  /* SPDX-License-Identifier: GPL-2.0+ */
+> +#if defined(CONFIG_SPL_BUILD)
+>       b       reset
+> +#else
+> +#if defined(CONFIG_BOOT0_MSM8916_PSCI_WORKAROUND)
+> +#include 'msm8916_boot0.h'
+> +#endif
+> +#endif
 
-Please add a blank line between the two paragraphs so menuconfig
-renders them separately.
+When neither CONFIG_SPL_BUILD nor BOOT0_MSM8916_PSCI_WORKAROUND is
+set, this expands to nothing, so start.S falls through into _TEXT_BASE
+etc. Is that intended?
 
-Missing file, as mentioned by Michal
+Reviewed-by: Simon Glass <sjg@chromium.org>
 
 Regards,
 Simon
