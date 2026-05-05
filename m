@@ -4,93 +4,105 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 446A5CD3427
-	for <u-boot@archiver.kernel.org>; Tue,  5 May 2026 12:21:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA70DCD3427
+	for <u-boot@archiver.kernel.org>; Tue,  5 May 2026 12:25:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D9050848BB;
-	Tue,  5 May 2026 14:21:47 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 145BD848BB;
+	Tue,  5 May 2026 14:25:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Sbls5Drr";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="JTSGdEGl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 150F0848BE; Tue,  5 May 2026 14:21:46 +0200 (CEST)
-Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
- [IPv6:2a00:1450:4864:20::32c])
+ id F0334848C2; Tue,  5 May 2026 14:25:07 +0200 (CEST)
+Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
+ [IPv6:2a00:1450:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 98E67848B8
- for <u-boot@lists.denx.de>; Tue,  5 May 2026 14:21:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 83407848B8
+ for <u-boot@lists.denx.de>; Tue,  5 May 2026 14:25:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-4891d7164ddso27266855e9.3
- for <u-boot@lists.denx.de>; Tue, 05 May 2026 05:21:43 -0700 (PDT)
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-48984d29fe3so75590665e9.0
+ for <u-boot@lists.denx.de>; Tue, 05 May 2026 05:25:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1777983703; x=1778588503; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1777983903; x=1778588703; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=ey82zrIR76Cm2ed3wHlOFpltNVS7SZzB8mVKjOnGcDA=;
- b=Sbls5Drrfib8fSdXf9Yd3LEzNGsQYH88FTm0iN5IjrmtJaR8PGKdIPGDesE0wPD3Ln
- iN/CSUuNcNyA/aCw6vGh7P85LtpiG71+bIsUVFAznjdPa0uAqfzWB2vG1gEdLGdoV5fA
- rE9aF4tK1wHHxt+zqhQO41P5kzqVE90BRHoAv6OvHd+iJNpN77JNh6JAuFbK90hlYl8g
- XERJKVEozqmyA83xFwvTLd5bl/8Ii0+ysxUfhUz4aQVC/vGmESl+gisNpN5bXLYML6r/
- f5oVNXG8ZVLt5yt9cbbt6LLHzy0CT0AOvr2p2jtgvyfrLXVBoWyWONbot0FG/7GGtvDW
- FHGA==
+ bh=kdfrNwicYvmoQdfDa4i9FHSFDTWErg85j9bffTqRHyc=;
+ b=JTSGdEGl5gXRCYPsCC/39eKwbvfm3evWV239y5EQB199dWVt6dzWBm9yuO+qFdsuN9
+ PwWefe0hjMUB3KvrYZI9NI3X6IuMMDoYjw7YPm0LRr0nzL49H6ipAjJb0019LAmjQJDY
+ X21iZ1LkxbWCqa6GNsDv0//siSBqcJ/PJB8Woy0VrtqYu+b8f2JrXhhnpGm66/XAWo5v
+ EdCgIIFaaeeGVYAH5yR99HyLurewJJCBHoKUEPPmIOBPiC0lUL16GDLky1HiPWnxGw/w
+ hvMkrpjQGR0UjAjXo3NwN8aQokwEeG2eWsoJhnuN1vgQAftO2QthLnUG+qCZHEVpFHJ+
+ Jtlw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777983703; x=1778588503;
+ d=1e100.net; s=20251104; t=1777983903; x=1778588703;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=ey82zrIR76Cm2ed3wHlOFpltNVS7SZzB8mVKjOnGcDA=;
- b=hJWyf8D5k/ETGoUzJbTVBDJ761StaROeLS92SPyDzWcz2sBbxvOm1S0pc3lNpxe5x+
- RZ0sjQnrYgqHiR46K5ZtCJ2N+1iDNPGfG460edTS6zc/2omVB17V9EzxRubChBmi05dl
- /ZGpsXerWlXgIukmqO9nh0XvTM/dADXjT424me/VCzZLAN9nWKVhlXuT7kqJmIOSqdTF
- 3H9raEmh7DJvF3cur9f5zqYWqIk7SK/W++t1qPkj8mOfVuVjsSuhdi+Vh4bq0xGH4uYB
- sRz591LtHB+UPa5l0FkDh57vPRJAIg5djx8K3WGNSFrgt6/gMBEOKaHgUPxi3TrA+L26
- 4UDw==
-X-Forwarded-Encrypted: i=1;
- AFNElJ8OMwpyykAgMWcIuzPxrE/Q2IyLypxtGHtl7dgRX5WmpimblKDqKoxYiIfRDkERO5q9KVo3PTU=@lists.denx.de
-X-Gm-Message-State: AOJu0YwjLRPkXMOdB9qWNm96YnLNxlY3h3L6J9iWySqQfb2wgHBf66Rr
- rzIR5HWaFierzxY4PK2m5UoSNyHpxm9E06UJ1d9EBCHjrbwbPSr55D/h2t4LXhMwo4ZcE7YVof/
- txDAAf8Y=
-X-Gm-Gg: AeBDietaE+aJgaHXDkQRnPzM48UFJhj2AH7QbeWw8sL4U4UOcvnKf3WMVfNCoYBZ+Rk
- rqUbUAmnXLOR7mdXkzoq7qpFge94KNFkJ0W6ZJxm56/pwTF06CuLfRlRrASpp3ZPiq4ucVXiEDX
- jWgPIn9JNj7p9TFyl2DY/dqA6W3CvP+tk/zY+UWLesKkzA9YbF1qvaeiMCNqHGFZRUbARjRnQlM
- tS2k/xtg8OgHiGv2oaed9KCjpIYHFpPLgjVJI2W3C/Zj8HySdfs0SNQuy09pBj2I7rpefXO7GxY
- 6ho6CmsfyqgCPRfZArFfLr/XIXNeKng6pwY9A1g/JcwckJTsd8TivSGIqaMx3IbaV2KESbK9qur
- GEsz6t2WK6ZtbdDW2QTl0zOnWaswc++WEJjBDwc1aS63MVL9OkV94z8GK9dZuvtCHcHujlynhlh
- GXFfawa616KeCRsQCWbkyzVW1l62FYzNGJ6RpMzyMT+bYpDfuDva5al5Oh3Fa3sw7bOm1F0i+lD
- Oq1
-X-Received: by 2002:a05:600c:1386:b0:485:3f30:6250 with SMTP id
- 5b1f17b1804b1-48a988b5623mr225994715e9.20.1777983702666; 
- Tue, 05 May 2026 05:21:42 -0700 (PDT)
+ bh=kdfrNwicYvmoQdfDa4i9FHSFDTWErg85j9bffTqRHyc=;
+ b=M6QkxlouW0UjMAnTU3F4aZlktpYqkWrCSnSM5DCDHdpQAfYeXlEtHIGb0wwWQIudLh
+ Fgq4rRkVaO1LJ79yULQUwkRDUjCafxhAA8A6a6PtyE9sSiGs0i3bj1madfo7h5BGAS7C
+ nM3mFl+RemK3/l+XeD4KmtzpSB8nTAkVe+CBs9Bgdp44r9FdzJdofjapWFk1pVxY+a1j
+ R8bqvyvwnAXZjg43PSPWmk97TOnVOal2uXTAX0jaV4KRf5oGX2pr1GK4XXBBE7s8p675
+ A6HUAGjml27nUtJo7iXL0IpE93PTV+MPR8xuSLblq9LT4+imlTFgNhwBLm3cM4Vm/rek
+ G2uw==
+X-Gm-Message-State: AOJu0YyQRUFT3OmBt0ns8jHTg4/UjqdT9Sq7b+NzHJOBBFX0EPsCMil0
+ UVzt2/9aFhvHndWyFBUslQfF9qFjq1J5W5Y6PUAo4J53s8f9ikJqd041V/z3sH92bTU=
+X-Gm-Gg: AeBDies8yKvZMN5n7qPfvmHXVp1LEiIIN/ffwOiS6aLL4+mmERjLoB61Q/64J9i80d+
+ iTfk7vnIoGqowC8o1VAatbJZ9fuH6Nz0Xh/TPsv7PLTagP52jumXb0Q8YI3wipZD6Mr2rxHwMYo
+ zGDci67Qn5d96MkF32vvzXf8e2o5U5PbrKYC768bJtdZAVZIm21zSTj4Eg4MIaCFUunUR1iXhRZ
+ plQeOZ3S7nj1JQ45EPmZRWurv8wuTm1STN3lKZSdVCyu2uGltJpDmZO2GJ9U7Vl9/znV/4h7AKq
+ Vc15Rg28Ifue/33AL1MhJVK1yc/l9mnq2bN+oJHkOqK2nPE7i2tB+faRirt97PAnsM7QtfjAMZh
+ XUqbuhamJetb/CkLhpJM/+W5YaeUTdyC7pIhqxWVX/sgME8au6Or+UxiYvWVbqrsF5U3Pzl+TK7
+ 87KvxytQeFH4ZptS6LucAW8GdMNpR5RnWCC3xhAI3yNamOXt1H7+iqq6mTPhkfPCDALMg+xhBYo
+ Rw2
+X-Received: by 2002:a05:600c:8b11:b0:48a:53ea:13eb with SMTP id
+ 5b1f17b1804b1-48d186dc79bmr44967735e9.5.1777983903488; 
+ Tue, 05 May 2026 05:25:03 -0700 (PDT)
 Received: from [192.168.1.36] (p4fc3dd86.dip0.t-ipconnect.de. [79.195.221.134])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-48d17714dc8sm34098235e9.4.2026.05.05.05.21.41
+ 5b1f17b1804b1-48a820c865esm387452105e9.5.2026.05.05.05.25.01
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 05 May 2026 05:21:42 -0700 (PDT)
-Message-ID: <400255c8-2997-4630-b087-c5e94e25e3b3@linaro.org>
-Date: Tue, 5 May 2026 14:21:41 +0200
+ Tue, 05 May 2026 05:25:02 -0700 (PDT)
+Message-ID: <21d5d2a1-e904-44b0-92c2-378035e158c0@linaro.org>
+Date: Tue, 5 May 2026 14:25:01 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] armv8: mmu: support unmapping regions with
- set_one_region()
+Subject: Re: [PATCH v2 00/15] qcom: smem: modernize SMEM in U-Boot
 Content-Language: en-US
 To: Sumit Garg <sumit.garg@kernel.org>
-Cc: Anshul Dalal <anshuld@ti.com>, Dhruva Gole <d-gole@ti.com>,
+Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io, Tom Rini
+ <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Peng Fan <peng.fan@nxp.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Alice Guo <alice.guo@nxp.com>, Quentin Schulz <quentin.schulz@cherry.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Mark Kettenis <kettenis@openbsd.org>, Tom Rini <trini@konsulko.com>,
- u-boot-qcom@groups.io, u-boot@lists.denx.de
-References: <20260504175511.585797-1-casey.connolly@linaro.org>
- <afm_cdgq-bXwcLLn@sumit-xelite>
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Kuan-Wei Chiu <visitorckw@gmail.com>, Raymond Mao
+ <raymond.mao@riscstar.com>, Stefan Roese <stefan.roese@mailbox.org>,
+ Philip Molloy <philip.molloy@analog.com>,
+ Jerome Forissier <jerome.forissier@arm.com>,
+ Marek Vasut <marek.vasut@mailbox.org>,
+ Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
+ Rasmus Villemoes <ravi@prevas.dk>, Heiko Schocher <hs@nabladev.com>,
+ Michal Simek <michal.simek@amd.com>, Sughosh Ganu <sughosh.ganu@arm.com>,
+ Antony Kurniawan Soemardi <linux@smankusors.com>,
+ Luca Weiss <luca.weiss@fairphone.com>,
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+References: <20260504-b4-modernise-smem-v2-0-c01ec2ff3886@linaro.org>
+ <afnCVT5JoeIdy-hQ@sumit-xelite>
 From: Casey Connolly <casey.connolly@linaro.org>
-In-Reply-To: <afm_cdgq-bXwcLLn@sumit-xelite>
+In-Reply-To: <afnCVT5JoeIdy-hQ@sumit-xelite>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -111,79 +123,166 @@ X-Virus-Status: Clean
 
 
 
-On 05/05/2026 11:59, Sumit Garg wrote:
-> On Mon, May 04, 2026 at 07:53:54PM +0200, Casey Connolly wrote:
->> Currently set_one_region() implicitly assumes that we want to map a
->> region and aggressively splits blocks into tables to do this, but when
->> called with PTE_TYPE_FAULT to unmap a currently mapped region it may
->> try to unnecessarily split blocks which doesn't make sense if the entire
->> block should actually be unmapped. In the end it then has to walk every
->> single page and create a bunch of empty tables.
->>
->> Introduce a check for this kind of behaviour and optimise with a fast
->> path, if we're unmapping a region >= the size of this entry then we can
->> just unmap the entire PTE and whatever it contains.
->>
->> This fixes some bogus empty tables being left behind when carving out
->> reserved memory regions on Qualcomm, and should improve the performance
->> of the break-before-make in mmu_change_region_attr().
->>
->> Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
->> ---
->>  arch/arm/cpu/armv8/cache_v8.c | 16 ++++++++++++++++
->>  1 file changed, 16 insertions(+)
+On 05/05/2026 12:11, Sumit Garg wrote:
+> Hi Casey,
 > 
-> Nice optimization, FWIW:
+> Thanks for the much needed re-spin of the SMEM patch-set.
 > 
-> Acked-by: Sumit Garg <sumit.garg@oss.qualcomm.com>
-> Tested-by: Sumit Garg <sumit.garg@oss.qualcomm.com>
+> On Mon, May 04, 2026 at 08:57:28PM +0200, Casey Connolly wrote:
+>> Smem is currently implemented a uclass in U-Boot. This carries with it
+>> some implicit limitations about how and when we can actually talk with
+>> it, since its modelled as a device.
+>>
+>> The SMEM uclass is qualcomm specific and has no other users, smem is
+>> also largely useful for parsing the memory map and other tasks which we
+>> have to do before DM is alive anyway.
+>>
+>> Let's drop the old smem code and replace it with a straight port from
+>> Linux, providing a familiar interface and enabling us to access it much
+>> earlier in the boot process than would be possible with a standard
+>> udevice.
+>>
+>> Additionally, this will be easier to maintain going forwards since any
+>> patches from Linux can be more easily ported over.
+>>
+>> With this new smem framework in place, we can now use SMEM to parse the
+>> memory map when it's not provided via some other mechanism and to read
+>> the serial number of the board.
+>>
+>> Implement this functionality and split the snapdragon memory parsing off
+>> to its own file to try and organise things a bit better.
+>>
+>> Since the memory map stored in SMEM doesn't already have some carveouts
+>> let's also be correct about unmapping reserved memory regions, we
+>> should eventually do this on all Qualcomm boards but it's particularly
+>> important when we aren't chainloading from ABL.
+> 
+> This was really needed to unmap reserved regions in U-Boot memory map to
+> increase robustness.
 
-Could you drop this on the v2 instead? Sorry for the confusion this
-version had a silly bug.
+agreed, the ~100ms cost sucks but I hope we can bring it down by doing
+this after dcache enable if we can figure that out (would probably rely
+on starting with an initial minimal map to avoid the prefetcher issues)
+but yeah, a problem for the future for sure.
+
+> 
+>>
+>> This depends on a fix for unmapping memory regions: https://lore.kernel.org/u-boot/20260504175511.585797-1-casey.connolly@linaro.org/
+>>
+>> ---
+>> Changes in v2:
+>> - Ensure reserved regions are unmapped appropriately when using SMEM as
+>>   the source of truth for the memory map.
+>> - Support SMEM ram layout v0/v1 for older platforms using a header from
+>>   Qualcomm.
+> 
+> It would be better if you can provide proper attribution in the commit
+> to which this header is being picked up.
+
+Where is the header sourced from? I can't really use another patch
+posting as a source.
+
+> 
+>> - Set an environment variable (memmap_source) providing info about
+>>   where U-Boots memory map is from.
+>> - Correctly handle serial_num missing on msm8916
+>> - Link to v1: https://lore.kernel.org/r/20241124-b4-modernise-smem-v1-0-b7852c11b67c@linaro.org
+>>
+> 
+> FWIW, I tested this patch-set on RB3Gen2 and lemans-evk after dropping
+> the U-Boot DT overrides, so feel free to carry:
+
+Good to know! I assume you removed the hardcoded DT memorymap for testing?
+
+> 
+> Tested-by: Sumit Garg <sumit.garg@oss.qualcomm.com>
+> 
+> I will give a proper review to this series soon.
+
+Thanks
 > 
 > -Sumit
 > 
+>> To: u-boot@lists.denx.de
+>> To: Sumit Garg <sumit.garg@kernel.org>
+>> To: u-boot-qcom@groups.io
+>> Cc: Tom Rini <trini@konsulko.com>
+>> Cc: Simon Glass <sjg@chromium.org>
+>> Cc: Casey Connolly <casey.connolly@linaro.org>
+>> Cc: Peng Fan <peng.fan@nxp.com>
+>> Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
+>> Cc: Alice Guo <alice.guo@nxp.com>
+>> Cc: Quentin Schulz <quentin.schulz@cherry.de>
+>> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+>> Cc: Neil Armstrong <neil.armstrong@linaro.org>
+>> Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>
+>> Cc: Kuan-Wei Chiu <visitorckw@gmail.com>
+>> Cc: Raymond Mao <raymond.mao@riscstar.com>
+>> Cc: Stefan Roese <stefan.roese@mailbox.org>
+>> Cc: Philip Molloy <philip.molloy@analog.com>
+>> Cc: Jerome Forissier <jerome.forissier@arm.com>
+>> Cc: Marek Vasut <marek.vasut@mailbox.org>
+>> Cc: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
+>> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+>> Cc: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+>> Cc: Rasmus Villemoes <ravi@prevas.dk>
+>> Cc: Heiko Schocher <hs@nabladev.com>
+>> Cc: Michal Simek <michal.simek@amd.com>
+>> Cc: Sughosh Ganu <sughosh.ganu@arm.com>
+>> Cc: Antony Kurniawan Soemardi <linux@smankusors.com>
+>> Cc: Luca Weiss <luca.weiss@fairphone.com>
+>> Cc: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 >>
->> diff --git a/arch/arm/cpu/armv8/cache_v8.c b/arch/arm/cpu/armv8/cache_v8.c
->> index 39479df7b21f..b1a1fd571341 100644
->> --- a/arch/arm/cpu/armv8/cache_v8.c
->> +++ b/arch/arm/cpu/armv8/cache_v8.c
->> @@ -939,8 +939,20 @@ static u64 set_one_region(u64 start, u64 size, u64 attrs, bool flag, int level)
->>  	int levelshift = level2shift(level);
->>  	u64 levelsize = 1ULL << levelshift;
->>  	u64 *pte = find_pte(start, level);
->>  
->> +	/*
->> +	 * If we're trying to unmap a region then check if it's already unmapped or if it's bigger
->> +	 * then the PTE we're looking at right now, in the first case we can do nothing and in the
->> +	 * second case we just need to unmap this page/block.
->> +	 * Otherwise we will needlessly create new tables until we have traversed every single page
->> +	 * in the region.
->> +	 */
->> +	if (attrs == PTE_TYPE_FAULT && (pte_type(pte) == PTE_TYPE_FAULT || size >= levelsize)) {
->> +		*pte &= ~PMD_ATTRMASK;
->> +		return levelsize;
->> +	}
->> +
->>  	/* Can we can just modify the current level block PTE? */
->>  	if (is_aligned(start, size, levelsize)) {
->>  		if (flag) {
->>  			*pte &= ~PMD_ATTRMASK;
->> @@ -1081,8 +1093,12 @@ void mmu_change_region_attr(phys_addr_t addr, size_t siz, u64 attrs)
->>  	flush_dcache_range(gd->arch.tlb_addr,
->>  			   gd->arch.tlb_addr + gd->arch.tlb_size);
->>  	__asm_invalidate_tlb_all();
->>  
->> +	/* If we were unmapping a region then we're done! */
->> +	if (attrs == PTE_TYPE_FAULT)
->> +		return;
->> +
->>  	mmu_change_region_attr_nobreak(addr, siz, attrs);
->>  }
->>  
->>  int pgprot_set_attrs(phys_addr_t addr, size_t size, enum pgprot_attrs perm)
->> -- 
->> 2.53.0
+>> ---
+>> Casey Connolly (15):
+>>       Revert "dm: SMEM (Shared memory) uclass"
+>>       smem: drop drivers/smem
+>>       Revert "test: smem: add basic smem test"
+>>       Revert "drivers: smem: sandbox"
+>>       mach-snapdragon: fix reserved memory carveout
+>>       soc: qcom: import smem from Linux 6.11-rc2
+>>       soc: qcom: smem: adjust headers for U-Boot
+>>       soc: qcom: smem: adjust for U-Boot
+>>       soc: qcom: smem: get serial number from socinfo
+>>       soc: qcom: smem: stub functions
+>>       soc: qcom: smem: add build infra
+>>       mach-snapdragon: move memory parsing to its own file
+>>       mach-snapdragon: support parsing memory map from SMEM
+>>       mach-snapdragon: fetch serial# from SMEM
+>>       configs: add qcom_sm8650_defconfig and debug fragment
+>>
+>>  MAINTAINERS                                  |   1 -
+>>  arch/arm/Kconfig                             |   3 +-
+>>  arch/arm/mach-snapdragon/Makefile            |   2 +-
+>>  arch/arm/mach-snapdragon/board.c             | 253 ++++-----
+>>  arch/arm/mach-snapdragon/dram.c              | 239 ++++++++
+>>  arch/arm/mach-snapdragon/qcom-priv.h         |  17 +
+>>  arch/arm/mach-snapdragon/rampart.h           | 194 +++++++
+>>  arch/sandbox/dts/test.dts                    |   4 -
+>>  board/qualcomm/debug-sm8650.config           |   5 +
+>>  configs/qcom_sm8650_defconfig                |  16 +
+>>  configs/sandbox64_defconfig                  |   2 -
+>>  configs/sandbox_defconfig                    |   2 -
+>>  drivers/Kconfig                              |   2 -
+>>  drivers/Makefile                             |   1 -
+>>  drivers/smem/Kconfig                         |  25 -
+>>  drivers/smem/Makefile                        |   7 -
+>>  drivers/smem/sandbox_smem.c                  |  44 --
+>>  drivers/smem/smem-uclass.c                   |  46 --
+>>  drivers/soc/qcom/Kconfig                     |   8 +
+>>  drivers/soc/qcom/Makefile                    |   1 +
+>>  drivers/{smem/msm_smem.c => soc/qcom/smem.c} | 777 ++++++++++++++++-----------
+>>  include/dm/uclass-id.h                       |   1 -
+>>  include/smem.h                               |  90 ----
+>>  include/soc/qcom/smem.h                      |  36 ++
+>>  include/soc/qcom/socinfo.h                   | 111 ++++
+>>  test/dm/Makefile                             |   1 -
+>>  test/dm/smem.c                               |  26 -
+>>  27 files changed, 1186 insertions(+), 728 deletions(-)
+>> ---
+>> base-commit: 2920b49fb117dd70b6219804bf0d298c96f184f2
+>>
+>> // Casey (she/they)
 >>
 
 -- 
