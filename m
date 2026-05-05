@@ -4,84 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 003EFCD3427
-	for <u-boot@archiver.kernel.org>; Tue,  5 May 2026 14:14:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1489DFF8855
+	for <u-boot@archiver.kernel.org>; Tue,  5 May 2026 14:15:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B595184954;
-	Tue,  5 May 2026 16:14:33 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4B928848B7;
+	Tue,  5 May 2026 16:14:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="eJjxumla";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="hDSJ6j8o";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1409E8495E; Tue,  5 May 2026 16:14:32 +0200 (CEST)
-Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
- [IPv6:2a00:1450:4864:20::32a])
+ id 89512848B7; Tue,  5 May 2026 16:14:33 +0200 (CEST)
+Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
+ [IPv6:2a00:1450:4864:20::329])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C27D3848FC
- for <u-boot@lists.denx.de>; Tue,  5 May 2026 16:14:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4FE1984954
+ for <u-boot@lists.denx.de>; Tue,  5 May 2026 16:14:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-488ad135063so50550325e9.0
- for <u-boot@lists.denx.de>; Tue, 05 May 2026 07:14:29 -0700 (PDT)
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-488d2079582so56596085e9.2
+ for <u-boot@lists.denx.de>; Tue, 05 May 2026 07:14:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1777990469; x=1778595269; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1777990470; x=1778595270; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=KRRHj2ziTk3pBFo0IBBbLtwcMaJtURlE9Evd42Lva54=;
- b=eJjxumla16gg14a84cIVReZcuJ8uahrjxJKfBEWbABG+Fw1vXEzDmnNOqXcuiJ+PTc
- LzcANp6BOPDFCfT+jeM/NKzkYoUI5O4a5x9kjCNY/+hMiBZWsvcsuY64+2Ti2Cxe4Y0h
- zSD8ggIc5RC2pU/ZPE0DkRzYqgY4b/dkfOqTD9p+JiPiGp6phh5Lb7ikYC25m/b9M/ij
- 91jnaLUX4+17iUpCtMDwoLZMWeUwf2LFMhjXXInCoTeaNqifD2MlIZ0vI2N0Hr9Baoln
- Hr/8LVTjUXuBa2SkZmhiVvQhJS1ht+t3R8rfKUSO+Fhgpbna1QpOYRXUiqOrIL/kYzM0
- cQig==
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=vZpKNg+hDdxRK/HKYZJ0dsJdkYfrL2j1P+QKCHsU5x8=;
+ b=hDSJ6j8oL9W+7qzZj0mDE267BGFE1iDp9+da6UaXHNEWlQNfghWghrgUeT7EFiyUNM
+ wY1q9HtQf2ABuvJgtpz9s5VQ6Zq4MoOZorDA7zp/M8bL+E2Tep1b3b4IgTWgQj7gAXnX
+ y3pR8gnqtRsfkgm/yiUcwxisF6LwE0ADZ9/SmI+IWIfhLJuiNci7XSVu59oUF8SJYySl
+ +zpdf3xTYyFcWTF2D8ApDDgWBOBUcXiLSv1HXc8ggRjC3JaDleFb3x8x6FEeYCbnF+k/
+ UZgwCDEUdwZFy8aPOx/jHo5OxoOgumimURC6Gm1xe2+RSZUKvE5U1JgOElnlxefiJmI6
+ ClDw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777990469; x=1778595269;
+ d=1e100.net; s=20251104; t=1777990470; x=1778595270;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=KRRHj2ziTk3pBFo0IBBbLtwcMaJtURlE9Evd42Lva54=;
- b=QRKdkQhYJsVKTaK00Kr1cu9o9HaKXPJ1OzQxtAaPvxC78JtRc6oHCjYlsJcRfVFgLM
- 9+FW0nYHCxOQe2nC6OHb9Wj4ua1gOx6dgWVjkDgJ8RDM3lXXIUtiJ67qrNR9b1w2FpMo
- 4mNtBzmeOdBfERvbd3cLLDYVCTm9U1J09hEsCfy3aO2sqq1jLrYKqh+d84zXwg249LuC
- DOIjHjCEi7KtHvoht5uGemQULdO1DgfH01cMGUHZkcoc+2xVvB0D9tORXPGhJOPerfGS
- bE6cF2AvTyWsVoFSQ5p5tSQwGpzbr9tQ0/T8nUmhk8qHa92gilIc/QbyTPVKXIQ7UrnY
- L5pg==
-X-Forwarded-Encrypted: i=1;
- AFNElJ8y3MBqn7fuCeGLTigM+Pi0+6VFle+6rxCO0LCScLeyTpbibWV/cThnGx31RqbJ8qrcYjOC/fA=@lists.denx.de
-X-Gm-Message-State: AOJu0YzuJ9c2zsqBgPbu8RMrYlhNdx+JwwGj2loqR5WsQyb6hLpotdwd
- hDHvgwSiQW0qtNFgV5Dr+OLkt2g3HwuuuIZpX60WLtDqrCM+CIUXGvPWnD9fB5psKwk=
-X-Gm-Gg: AeBDietn9dk1COXvOQo5Y3n8dz1As0aoidJDjGhUr6V6XqEuQIZuRMWAxTFtDsrpf3W
- n7SLvK5n9JhYyexYcWXPO9P9GCt/Rulz78TsAuKbNR9OdWnIKey0sGzRCHVFnReABCB0nEH48mo
- IYqlTVgfh2GSPC+tkcmK0/6yCTFjKkpcCSHZ9tNPci6RYKy1etxUFkE71iQgmV9Y2jFatsJJpsc
- 9MGLyci1HT9x7P0HM0EqSgSyXgy8crzgBfWfFgaYPnQDuN5kxyyDgV399dLvBWBV/gHbrXfDURG
- VTYTgEmqWdbUC+RYV8TR5np68Zrdlrubj0YUyr3SW6N+kXA9cSmoctY2Mx6z33nlJXJWlJttMA0
- skuOfZb7CL+JsvwDEB3VjfnYg2jRhd0FBUpywpA90X36jTy868vfOffLr6ID2cnn86w+Z8KUZxb
- w6Qv0Q//sx6iRqx5VlH4n+vI8/iGVKIT+EDZg6+PIw36OoL8S+6zkks3eQO8HJA+00tNe0DpiG8
- 2khxgs=
-X-Received: by 2002:a05:600c:16c9:b0:48d:35e:84a0 with SMTP id
- 5b1f17b1804b1-48d035e84damr120522515e9.28.1777990469209; 
- Tue, 05 May 2026 07:14:29 -0700 (PDT)
+ :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=vZpKNg+hDdxRK/HKYZJ0dsJdkYfrL2j1P+QKCHsU5x8=;
+ b=JB1x2Aj80GjgNutUZEwUt0qlQmYYhjLrGtm3GnMyehK4iRSPUBdNbg7u56jIZaarGW
+ ZFrYpc6nzkDrTmIK6Hj1nzW0d+94mb9JzfhhxczVn+wpAW4QxanH1JjKt9VMW+eCTPgT
+ g5D2g2RXECAKNLk+ZoucpNq0u1/Qt8o+KGxn7aBDsezh2YvLAij4aQnVMTltoRlX5uSs
+ 2IiQ/NNnsDTeZLhNuzWDfYOtsySgowzwM8Z6sz+niPJvwNkpun7iO5+SdTnqc3RRlzig
+ cqEWVLhWY1pYL0eaEJsFRMJYgj3gi3MRYXUwIR5CXZTSC68huZYWgQjJdxlUIgC6Hjzd
+ 5rYQ==
+X-Gm-Message-State: AOJu0YxDL3sQ5d9D43TVkNM0wkjZHshqx2z6jbaT9xR0v+7jEUVaIVfp
+ vJhPP3YWBNjkP2H13wb0kg+t8pUWycJMbJhXAUKGPbHkPk8TYBeyir35URN5gzwPJFlZ0Bh4red
+ 8GgHhylI=
+X-Gm-Gg: AeBDieuILDSZmRKfAiZNCc8KbXyNOlZZ2Ro5CRtL3WRhzGXi6UnV3iRIx5fMK4wmJx9
+ yrikljl4hFFDeoGuUmafQ6Y1b8A1kHG11WbnJeBzDJDQiXYF5eu8PmPlj2fy0zM9hp4jaPNfbSc
+ onzttGAHXauuM83KHzpffh5NC8ThJTTuFo3Walw8ta9eTcjV2ljckhBcVub4IkYAQS0rYgUqA2Q
+ 86R3nI4RHXohtdLSezSajzPjnF+eGkTzyMAP8Y/2M1yJc8TpsXI0rA+5EA96m5vfD7M4Hlg5YSi
+ NoP9zSxHNM0+sH7BM0rVlRfAfJOFGQ1KK1cLqKoDHxS17mipzMwTRV3zPdWlo29hT+UpGNg2jgy
+ LfUKlAQTWVh2g/zLGPcNOSAGJx5Y8tFMpK+23xS7FolL30ujUhHeKuHTTsIKZYeLHprnNTzZFvO
+ leKemkd+/gYlJUT7YuWSh2w72Ai0QdeZmnE3JxGjFshwCXQ4lYUxyOtlRZ0udrBUsVsZcBZtFNK
+ ve7UQY=
+X-Received: by 2002:a05:600c:8590:b0:488:ae6c:42c6 with SMTP id
+ 5b1f17b1804b1-48a9865f842mr188790215e9.14.1777990470367; 
+ Tue, 05 May 2026 07:14:30 -0700 (PDT)
 Received: from lion.localdomain (p4fc3dd86.dip0.t-ipconnect.de.
  [79.195.221.134]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-48a8eb3427fsm581408135e9.0.2026.05.05.07.14.28
+ 5b1f17b1804b1-48a8eb3427fsm581408135e9.0.2026.05.05.07.14.29
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 05 May 2026 07:14:28 -0700 (PDT)
+ Tue, 05 May 2026 07:14:29 -0700 (PDT)
 From: Casey Connolly <casey.connolly@linaro.org>
-To: neil.armstrong@linaro.org, sumit.garg@kernel.org, trini@konsulko.com, 
- andrew.goodbody@linaro.org, quic_timple@quicinc.com, swboyd@chromium.org, 
- u-boot-qcom@groups.io, u-boot@lists.denx.de, 
- Gurumoorthy Santhakumar <gurumoorthy.santhakumar@oss.qualcomm.com>
-In-Reply-To: <20260421044555.368486-1-gurumoorthy.santhakumar@oss.qualcomm.com>
-References: <20260421044555.368486-1-gurumoorthy.santhakumar@oss.qualcomm.com>
-Subject: Re: [PATCH v1] serial: msm-geni: configure RX watermark register
-Message-Id: <177799046819.839461.5836925011780468566.b4-ty@b4>
-Date: Tue, 05 May 2026 16:14:28 +0200
+To: u-boot@lists.denx.de, Quentin Schulz <foss+uboot@0leil.net>
+Cc: Tom Rini <trini@konsulko.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Andrew Goodbody <andrew.goodbody@linaro.org>, 
+ Peter Robinson <pbrobinson@gmail.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>, 
+ Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <20260505-ufetch-net-v3-0-eee5eb9ca5ce@cherry.de>
+References: <20260505-ufetch-net-v3-0-eee5eb9ca5ce@cherry.de>
+Subject: Re: [PATCH v3 0/2] cmd: ufetch: print Net feature when NET_LWIP=y,
+ prettyfy if NET=n
+Message-Id: <177799046931.839461.1297387191363695345.b4-ty@b4>
+Date: Tue, 05 May 2026 16:14:29 +0200
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -103,22 +107,22 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-On Tue, 21 Apr 2026 10:15:55 +0530, Gurumoorthy Santhakumar wrote:
-> The SE_GENI_RX_WATERMARK_REG was not being programmed in the RX
-> setup paths. Set it to DEF_RX_WM (2) in qcom_geni_serial_start_rx(),
-> msm_geni_serial_setup_rx() and _debug_uart_init() to align with the
-> Linux kernel driver behaviour.
+On Tue, 05 May 2026 11:14:30 +0200, Quentin Schulz wrote:
+> Make sure the Net feature is printed when NET_LWIP is enabled, not only
+> when NET_LEGACY is.
 > 
-> Without this, the RX FIFO watermark interrupt threshold is left at
-> its hardware reset value, which may differ from the expected value
-> and can cause RX data loss or missed watermark interrupts.
+> Only print comma and following whitespace as separator if there was a
+> feature printed before feature to be printed.
+> 
 > 
 > [...]
 
 Applied, thanks!
 
-[1/1] serial: msm-geni: configure RX watermark register
-      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/5f171c622479
+[1/2] cmd: ufetch: show net feature when NET_LWIP is selected
+      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/b586802913b4
+[2/2] cmd: ufetch: only show comma separator if there was a previous feature
+      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/b61bf7f71dfa
 
 Best regards,
 -- 
