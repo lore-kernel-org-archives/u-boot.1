@@ -4,99 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD4FBCD3427
-	for <u-boot@archiver.kernel.org>; Tue,  5 May 2026 13:59:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95F38FF8855
+	for <u-boot@archiver.kernel.org>; Tue,  5 May 2026 14:01:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2685684948;
-	Tue,  5 May 2026 15:59:00 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2272184948;
+	Tue,  5 May 2026 16:01:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ecEV1mXK";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="KmsmR3qL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A147E84949; Tue,  5 May 2026 15:58:58 +0200 (CEST)
-Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
- [IPv6:2a00:1450:4864:20::636])
+ id D69138494B; Tue,  5 May 2026 16:01:44 +0200 (CEST)
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
+ [IPv6:2a00:1450:4864:20::62e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5DEFE848FC
- for <u-boot@lists.denx.de>; Tue,  5 May 2026 15:58:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9A3FF848FC
+ for <u-boot@lists.denx.de>; Tue,  5 May 2026 16:01:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x636.google.com with SMTP id
- a640c23a62f3a-bc4edbedb4aso26593366b.1
- for <u-boot@lists.denx.de>; Tue, 05 May 2026 06:58:56 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1777989536; cv=none;
+Received: by mail-ej1-x62e.google.com with SMTP id
+ a640c23a62f3a-b936331786dso629231166b.3
+ for <u-boot@lists.denx.de>; Tue, 05 May 2026 07:01:42 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1777989702; cv=none;
  d=google.com; s=arc-20240605;
- b=Xa+xC1FZYUrOGikU0Lu9s/iDdVRQ2CvChTd+v0xwOUWvOZIKEeL/omfkRIvyS8S6Y9
- OjglJiRWOsWQaDl+dWvZ8nQTibkvFg7n0gtuaE5n3QYBEKrUFmihTAbLiq6J+BQoePaa
- J2k+NE6CpEhxFPyKfyCKC9uQUSJY/EUO2KWiqkJhH0I6Q2vk+xUxdzcmxoHFU8pCSHkj
- xz6uYi4/dSvIA5pmyh48zfVzC8ao2xja/ZIcP4cmapmD15tJ9KiO/NKda8k5LnkN2CqZ
- oveXVFgit3l3Mm2drm1cT8aYM8EMtZWKn4z7eGsZfT1BtHtPGQf1xo9n66sJBB5zYybH
- 2N6w==
+ b=Qayn6tmwjhmOyeQ3VtZbpSCnrKOaGoBBcCfb63ONokGUoMeWCmWOZdKNzS1FoBYETB
+ cTnk7fmlSMApIubWNG1A65mpx35tBJtyJulFoD1iShxdmSTeJ4Y0ScCIhCJsgJ0BNWbB
+ O2gsq0YsXVsFRyB09/BZ0yaxjx+aZLIrWBsV+yDaQ9YeUP4UaSRtHlCOUt7sL2oAWv+g
+ 77GLbNJ+HWBNV63gESyZb9UaKScaIJF5V+GM1I92RLwhar0KmNL2s7qUSGk/JBaScaWV
+ 4EoZoXES273oc7K2pkOmfsgM7sI1/urGIZlr+z5tQkI1jmhXlXoOj/TSlTImvVqeTR6O
+ rvgw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=RY71QjM3iOWtYfCkUKp5LSYXi8tdeq5bW4y5rrpCObU=;
- fh=6sX/JMBB1a9uFLN+GawcERyIrfwFtjkiJ6nSJPOXXGg=;
- b=CoP1khPTUTr0XF6eUKbwIrwV+jxONAppma/NeSsbKsPsKg+sXjUtRaqU0Z4D6FSo21
- 4zQjDX4jfWxcEwt0GPY9ssThWRrQ1lFJUh04AQc9dQZq2JxQFTgqa6BiScMVcNAsNBWs
- o23iFD+tzrYVlux90DuafCs94qJlOXlI7y8ELpl5RFKgfjoOVxHDrUWRxjGZwT5QA6F9
- oZ+2ZtUAVN9G2XwvzIhxAf4Aj58tQpf38MbwoRxHzuv76i5e8pmWfDHoXa/DrvsFNsvD
- AwatMwdkJjJdbjEJTEfXoa0tQA1KQaXjfQwqwgeRGtneL/SHKE4Kib003+ZusPiwoqpe
- PmwA==; darn=lists.denx.de
+ bh=x343E9z+qsopH5kFKKA+qiVrnv11WGyM1PP4qkFx96A=;
+ fh=GpG0ILApjOziwMpWxVdtEc+pDfvf/OdWX72BncHhg/s=;
+ b=O8Q8yJzjwEmS3852Q4lH7GpQztsxUuRoEyN/wcHG5usUqNLdQSWsojX4XAL/M/Pd18
+ Jo3UdyiLLNsLiYHsUzxF9Nfw58umf+bAIcss4cvDEdZgdn7kSygBd6JAi3ABqt2sTXZe
+ XfFcN7QZqf+u4cOWIVDpYzjjdbemfgmJPNtcl2D4LcD68k57VfHBc7hG4bky/OypUO3h
+ JFKY/gh/b4Iy5cVfrDfq0eEHxjxH0chQmKmSKDlrVaR/73w50ES+ukTY9VGA6h16h2u1
+ dVF1qd1BAiZ0tnx20iGApaNH+pCwBfHj+WO9rdSOE8p3Otq3P+rhjyxLsSc/Q7yQj4m/
+ ivjw==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1777989536; x=1778594336; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1777989702; x=1778594502; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=RY71QjM3iOWtYfCkUKp5LSYXi8tdeq5bW4y5rrpCObU=;
- b=ecEV1mXKzDE3GVq55JaDXOBqAPndcBk6ArDQAy4MxS3YadrFLcX9JJVo7a/CtRwSnG
- BeOdhm9PFM4lZ4hZKYE/fVXC+Zg+bu72m9rw2SzuSMu6psUjPElYtp3uwC4yFnAlMx0v
- QAEigjqFwgBc3tEG22/XCmJiW4VX73loKMxIw=
+ bh=x343E9z+qsopH5kFKKA+qiVrnv11WGyM1PP4qkFx96A=;
+ b=KmsmR3qLEC+pRV09cTCnD/uBxg3PBkYQSrh3k+Dd7EAdkaRmECOMp4pEOf5R85OEQW
+ JYskYopWz5yElxAKrIFvpMzBxcOgEhuTnA+EmjLr2nHBHOEqIvJoSeOurIBaeTMMKPQ6
+ yDslq0AivjVmx93fmDZtIqy53Dh4SWz35Qr8M=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777989536; x=1778594336;
+ d=1e100.net; s=20251104; t=1777989702; x=1778594502;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=RY71QjM3iOWtYfCkUKp5LSYXi8tdeq5bW4y5rrpCObU=;
- b=IEKYyESO4LvjXOLwDWuQVq4uoeaWVhsdLpaXPBMU0dwMpRPXE1dKzx6m4FAPtzgg2o
- uO9BFiWHh9BV3xA003ekKahfPRaykVe5uumCtJH/DvRV3v6OwNtXC88b+LzpZruYsKvb
- KdqiS0sTuQzhTQ3nVsb2wnyojQ8gBvG+whGhx13wWRZfLTTNwu6HTZW8k1Y7P/CUHvDq
- oJ3RuVvy2DSZxZZSaE/0Hcp89nRAVh7YO2aqLVHyTuMmuoUJlWWMpvLa1qK4dUD2Mh04
- zJH2atNVLneqXwyb6WvgYuGi0beCPQ0yuWD2ksIZ/ABY75pjyPBocvG25VVGODz+rag4
- VWig==
-X-Gm-Message-State: AOJu0YzZtFL36vsu26P11y56tUk9ljZUhgBSxPZarwhHswhkwpgArs8N
- aeaFnS6Mmu6jp/4EnloT/d9QxbFGrfHnuBRU9W4tg5joHUzRb3KVMeeSJXdPGge8jLOC3C0lzLs
- vr/E9DtzMH1gPy0oUG2Q2Mf8t0WsqBUUmav3rdmVC
-X-Gm-Gg: AeBDiev/6M7kpwhZa+9IzTKbIaMG53Wl6gMd2ARyN9jmzjTIWOidc6KPy+J/12WPo/k
- I2NIJjo/NfHyA0Vu97QgpRrUJ+hfuAwCQTgRBy9MogggT4COYkibDDWce3vLjkMSa1yWSCWPreC
- sV+XVbnFjM2x2Ir2KZpo3/te/X++6g90bkH/6zj5OisAfqOc0upmtIoeLwa6jI9WaChkgt3fYDd
- 4UcHo0/mHXnC1975NVdWZ3R507C9hKSeMIR7XXywWef5BlIhVlP9Pe3m2YF+jJJ1MBv9jfQL0XJ
- wvgelKKwy5MKqND1
-X-Received: by 2002:a17:906:fe03:b0:ba6:4e0f:e396 with SMTP id
- a640c23a62f3a-bbffad38563mr799157166b.12.1777989535770; Tue, 05 May 2026
- 06:58:55 -0700 (PDT)
+ bh=x343E9z+qsopH5kFKKA+qiVrnv11WGyM1PP4qkFx96A=;
+ b=ajqmaM+mWj38xBSDxXbjn6gA4yvfQ3D05BLjpkKnADIngVPpQEvVsWYkO0apAqyAhJ
+ Va3qi+UqCr+atZil/ocSzv0v6r+g9iCdgZal49GvyfFleHjitclbpOI/81fGdmqiCO2Y
+ l12isbpMLEE7sa7JcQCuzjqvPFtc0XwqM0yuqpEiCWgPUMpAPo2atVPw8uNCBX+hDnxx
+ bcwBBZ+dBYb7pys84GiN7syyv8qJiVQQERWNN2bJzpKJjgNVa5ltg6ALll42jz9zHNCB
+ +VoyPJD+ugnEu/+u8I4ZUEJ3ca/GQLXfPJVszzMJTtEkiXzez3EpNUNEE5pYLsVgbBLp
+ xIuA==
+X-Gm-Message-State: AOJu0Yzq9YcR2wcgtbeBW4crAc65zo8e7l8nZLoGCRQEq3HtIN3af1SY
+ uw7MmcDL41Qzxu7tZIyeW+Tyf0eBV7RlrLULDcS68sqmnqliPYP50yRXKzmYHPaWnNBDv66NMD4
+ hQkoVMz+YiT0TKvXlnziErX7jNP19KYH10fh2pAMMVbBQEiTVow0/PQ==
+X-Gm-Gg: AeBDietVcr63yvbeq4QDXRrlGSmxrs3AhUbO7I3DhPt+1ydPNTsTXuo6OOQ9bxtgT3Z
+ 75SPDrnmpSuhpspyBc8XHIIHcOqlGagJTj2c2DIApuWcivqLQWaneimT/bk1vwZh6q1dLiCHg0/
+ Dh5M3whlj/gPqxdEIX6cxHpUjclnOIee54UEQ7Xa/soUwCeQ9C9BUXMWztkWv/R2+phB5k9n50q
+ /TDgxIE6YxCSLBhI57NYoXKHUIFOQL8o0oWFpkdLfhSW+eZ7q/gLEe1sS8zlwXk1KiRfPwRf40h
+ fNUmzxT4UvFX4PM9
+X-Received: by 2002:a17:907:c312:b0:bb8:fd89:4a30 with SMTP id
+ a640c23a62f3a-bbffb95a912mr835196066b.31.1777989701694; Tue, 05 May 2026
+ 07:01:41 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260505-ufetch-net-v3-0-eee5eb9ca5ce@cherry.de>
- <20260505-ufetch-net-v3-2-eee5eb9ca5ce@cherry.de>
-In-Reply-To: <20260505-ufetch-net-v3-2-eee5eb9ca5ce@cherry.de>
+References: <20260429141850.1.6f48ecca7f833b4f4b90ba78432475de1461e838@changeid>
+ <CAFLszThHeODorsKtPCqFYmfSPuCJNGMTvdtUQ10yiHRhJnuCPA@mail.gmail.com>
+ <449bbab5-3451-4034-a643-771d9ddb0567@siemens.com>
+In-Reply-To: <449bbab5-3451-4034-a643-771d9ddb0567@siemens.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 5 May 2026 07:58:42 -0600
-X-Gm-Features: AVHnY4JagoXdSz75zn0ROlxoHc-uPM9gY1ZnrO60L7KktpYQz0jo5l7SuZUz1Y4
-Message-ID: <CAFLszTjYcqmyTZ2fWOcutqeL7AHaBrfVfqK64Daf=V_QHK5oBg@mail.gmail.com>
-Subject: Re: [PATCH v3 2/2] cmd: ufetch: only show comma separator if there
- was a previous feature
-To: foss+uboot@0leil.net
-Cc: u-boot@lists.denx.de, Casey Connolly <casey.connolly@linaro.org>, 
- Tom Rini <trini@konsulko.com>, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Peter Robinson <pbrobinson@gmail.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>, 
- Quentin Schulz <quentin.schulz@cherry.de>
+Date: Tue, 5 May 2026 08:01:29 -0600
+X-Gm-Features: AVHnY4K--5BCPLFWHAqR6F8YKXckscOxkbB4WQbHtaej-Nas5EMQPdLWlocS1BM
+Message-ID: <CAFLszTif8nRi8MGVmgj0hwbkCm+P3YV1trfvuVU7XxwiDAOeLw@mail.gmail.com>
+Subject: Re: [PATCH] patman: fix use in worktree
+To: Ludwig Nussel <ludwig.nussel@siemens.com>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -114,16 +109,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2026-05-05T09:14:31, Quentin Schulz <foss+uboot@0leil.net> wrote:
-> cmd: ufetch: only show comma separator if there was a previous feature
->
-> Currently, if NET is disabled, the next feature to be printed will start
-> with a comma and a space which is not pretty. Add the comma and
-> whitespace only when a previous feature has already been shown.
->
-> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
->
-> cmd/ufetch.c | 29 ++++++++++++++++++++---------
->  1 file changed, 20 insertions(+), 9 deletions(-)
+Hi Ludwig,
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+On Tue, 5 May 2026 at 02:25, Ludwig Nussel <ludwig.nussel@siemens.com> wrote:
+>
+> On 5/4/26 14:31, Simon Glass wrote:
+> > On 2026-04-29T12:18:51, Ludwig Nussel <ludwig.nussel@siemens.com> wrote:
+> >> patman: fix use in worktree
+> >>
+> >> When using a worktree '.git' actually is a file and pygit2
+> >> init_repository() does not like that. The intention is not to create
+> >> a new git repo anyway so use normal constructor instead of
+> >> init_repository().
+> >>
+> >> Signed-off-by: Ludwig Nussel <ludwig.nussel@siemens.com>
+> >>
+> >> tools/patman/cser_helper.py | 4 ++--
+> >>   tools/patman/cseries.py     | 6 +++---
+> >>   2 files changed, 5 insertions(+), 5 deletions(-)
+> >
+> >> diff --git a/tools/patman/cser_helper.py b/tools/patman/cser_helper.py
+> >> @@ -309,7 +309,7 @@ class CseriesHelper:
+> >>           self._copy_db_fields_to(series, ser)
+> >>           msg = None
+> >>           if end:
+> >> -            repo = pygit2.init_repository(self.gitdir)
+> >> +            repo = pygit2.Repository(self.gitdir)
+> >
+> > Thanks for tracking this down.
+> >
+> > There are more init_repository(self.gitdir) call sites have landed in
+> > cser_helper.py and cseries.py - please can you convert those too,
+> > otherwise the worktree case will still be broken on those paths.
+>
+> In which branch? In master I can only see init_repository() references
+> in tests.
+
+This is in the master branch at https://gitlab.denx.de/u-boot/u-boot.git :
+
+$ git grep init_repos
+tools/patman/cser_helper.py:            repo =
+pygit2.init_repository(self.gitdir)
+tools/patman/cser_helper.py:        repo = pygit2.init_repository(self.gitdir)
+tools/patman/cseries.py:        repo = pygit2.init_repository(self.gitdir)
+tools/patman/cseries.py:        repo = pygit2.init_repository(self.gitdir)
+tools/patman/cseries.py:        repo = pygit2.init_repository(self.gitdir)
+
+(I've omitted the 'test' ones)
+
+Regards,
+Simon
