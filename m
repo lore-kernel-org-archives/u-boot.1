@@ -4,79 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 507FDFF885A
-	for <u-boot@archiver.kernel.org>; Tue,  5 May 2026 07:50:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46078FF885A
+	for <u-boot@archiver.kernel.org>; Tue,  5 May 2026 07:50:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0EAFB846E7;
+	by phobos.denx.de (Postfix) with ESMTP id 5A1248483A;
 	Tue,  5 May 2026 09:50:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=thingy.jp
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=thingy.jp header.i=@thingy.jp header.b="e5R8Be7H";
+	dkim=pass (1024-bit key; unprotected) header.d=thingy.jp header.i=@thingy.jp header.b="Hiq/Fbv5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 159048470B; Tue,  5 May 2026 09:50:06 +0200 (CEST)
-Received: from mail-pl1-x62d.google.com (mail-pl1-x62d.google.com
- [IPv6:2607:f8b0:4864:20::62d])
+ id D0FC784713; Tue,  5 May 2026 09:50:07 +0200 (CEST)
+Received: from mail-pj1-x1034.google.com (mail-pj1-x1034.google.com
+ [IPv6:2607:f8b0:4864:20::1034])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AB837846C7
- for <u-boot@lists.denx.de>; Tue,  5 May 2026 09:50:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3F716846E7
+ for <u-boot@lists.denx.de>; Tue,  5 May 2026 09:50:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=thingy.jp
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=daniel@0x0f.com
-Received: by mail-pl1-x62d.google.com with SMTP id
- d9443c01a7336-2b24fcc2b5dso28829195ad.1
- for <u-boot@lists.denx.de>; Tue, 05 May 2026 00:50:01 -0700 (PDT)
+Received: by mail-pj1-x1034.google.com with SMTP id
+ 98e67ed59e1d1-364ff382b0bso3637028a91.2
+ for <u-boot@lists.denx.de>; Tue, 05 May 2026 00:50:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=thingy.jp; s=google; t=1777967400; x=1778572200; darn=lists.denx.de;
+ d=thingy.jp; s=google; t=1777967402; x=1778572202; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=aksnehCe/ISwAbC6oZ1a246nU64oxZ1zDgh3FfVB4k8=;
- b=e5R8Be7H76ou2hOftMGjOI6nXYT52wwnkMz9GfJ+1xZ5iA3GR2vFVm42SGRCh5z8Ct
- c3czbjmPAixNrb/t9ejFo5gRV3WrjSfxMFpPEc7/0d0gLAkFwFN+76A97TFf9bf8suuV
- jXcbnc0BK+EO3lY7S9g2wkmoVxbCawNZynPH4=
+ bh=sjZ6QF1XjUpz2TxGoVaH1Y2gkesh2X3YQ5JHHtG5vl0=;
+ b=Hiq/Fbv508TYJUjB1UCiX4YUxzqG8FQNTEmq1MIVCTS04kcuQXf32LTAbUu3w9y/Cb
+ nX7RdYvl2pY3F+837PE9nEuVjecufpfD3seoXdPCKnUkL2c+kNgjFw2lgipLTLeHJifP
+ DxCIQD+oh+bTQIED3wsJhs+93ju1z5zCpFCH0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777967400; x=1778572200;
+ d=1e100.net; s=20251104; t=1777967402; x=1778572202;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=aksnehCe/ISwAbC6oZ1a246nU64oxZ1zDgh3FfVB4k8=;
- b=hRmcbxJh7S1GdqwyHl6UYEPixDwS8jWUePMEFl11yDI7cjjPRu7QEPbnPiv+UTSmz1
- UcO9qqrxLJRydOG2vlS06qr+z72k6GyvKlCFDCrJuvgTdn+jy/g+pQYyFMIlrLFO8EO2
- T08XtaFu2u4xHLBxZkDN5SHAEYsls1RShkPVEsKqqwh+N/iJKi9uJvGli4kAkFuh63a4
- 0GR9NFSG6hhikFQlwg8sgRQgsUNrsH3YGrC1FGoZ18ze6KZFz44Ik180Tu1Q4BSZY3HO
- YMQOuHbqV8o0eKU4oAJpHSIMkLeljIwfeu1119EaABDrAySp5bpmgLnqx9KNfvzi0AUI
- Y0AQ==
+ bh=sjZ6QF1XjUpz2TxGoVaH1Y2gkesh2X3YQ5JHHtG5vl0=;
+ b=sQc2B1S+shHyqvu1DLxZVuM4QlF/zSeanZYJseZvyYA/VS9R7Qjv3zEJjBM+Xen6SF
+ 9LYWVj5KImayDft6FM+tm8VXYqc4/56WI7LfumLHZJtvqvDO952QvkICfx4Z26n4zaoj
+ MoBVYGg1BOaV9T23V93dn4zC3S2CN1517gsoG4DhHUUd6YYTkOgay03Ro2hxiolU+j7W
+ 7XoSEzWcbHu1X1lxobSSCVCtAyUy65H+PQ/rji6gkO03nzJICLLIWi6yqezJvQ3SjKGV
+ guv/E9RL2+/EBj8JP6iQW/6nnhJodfVL2GCFIIn4I+kKwrsc9tgQ0/lbuHAPVdFfsNTG
+ yVFQ==
 X-Forwarded-Encrypted: i=1;
- AFNElJ/OtEqUyO9jldXiZuPnP5uWChZffJN2xeQo5zk2s0RWFZVrpI2RfY8c4Rqj/1fIKGSXuEkyC4U=@lists.denx.de
-X-Gm-Message-State: AOJu0YzOeC2edWost/TfrRmX7rexh8jiK2GztTd8KztwbvD4Kk0CgXBe
- Wk/O4air3ss+r2h90394PV4StCCPW5eDmnwKpW7U4+vahO1nnkVd5LwEd91Il7ZsYtQ=
-X-Gm-Gg: AeBDiet1SfOzqqcawSbrtvI0MlBst5nCCNbOocaTJz2MzUWbOmFdMrGDAjEMK53MArN
- R6nSb3ebAqk4FdO88Hfilhyw7f5MXITdBeDBnTs5lWpzocIPtAS/1bSIB7IxjHU+ppiDZ81h4sZ
- lPmMSiX9XZELvtsUr04nTTotDMiNPOR17I7213mu/EPwdmfAos4nWocQdoZhm8MhAymfu5o+ZPj
- k5P3ykAwIdVNqZ9DiMlPxcG/X1R3eiAG7qUCLuViak9izZ/jGtW5/Zl041g9cCmPeD+IFr0k6OP
- xdfDbG2t4ZIhWDhSy6v41ccar9KtNIHOhChXNThPmjuCIlybzbT+lKdcBwh5CVYhP7nzNFEZJ06
- tghgDbhwVIM0eF0Lhy6q9B5tHM8LtV8NKSAiYAOX+UWOvqZpMz6SM5hNZaOHz1Q6c5QD7qE4GiM
- pFJJYPBttgNFwXDvepNDqLaWuNvkE1AXF1g1sqG2vETDPTGHh7GyN18ej2BHgMHOVl1kp9z1Ynk
- l5wFFyr7Xv2ia5tS+1lrUlTwgjL/lWFFmbtfg==
-X-Received: by 2002:a17:902:f70a:b0:2b7:aa20:3c61 with SMTP id
- d9443c01a7336-2b9f2838afamr119104075ad.33.1777967400150; 
- Tue, 05 May 2026 00:50:00 -0700 (PDT)
+ AFNElJ/hcsdGXAwhaIAUNzPWR1Q3mh2/yYo7D30aOkMmzlRYVQYbxnCz2pG/BF2pfbQkK7wD63Xfnmg=@lists.denx.de
+X-Gm-Message-State: AOJu0Yyi9+NgXshiNnJuNJwnIvx9+vVzTgnIKwLXhTw1wXnyBD30aMcm
+ OI2/r4Y1IxsR7urV3l7VMiFu/W22C6W7hGIJ11eV459ji4mm2SlB4TgA1PWfrpbONkk=
+X-Gm-Gg: AeBDies3fyICquJGttTx8SiLXQGS6ErOLn+en6jEf5e6SIWXbZ6aHJUTy16bTgtZ/9o
+ xRT/sZY9BWnJOI8W+6MQpXvyvqhc3vuK44hJh0az/tC1Km6gu3nJ9BaC0rV9G/LUp8QVD/wHhVP
+ pbLQP3oihr6kRsAQwpFPPZyQM14Y3xRpXszd0pE05sXROiCiBQ5tGn++ZLX3Wefcns9IUsyVSYj
+ 87HUXYzo3w8sdxsrtLU8Q3pE1saSTJts82S1wVMku2J/t4BJvDrph76gHavpbbBpuqevf9lVgk4
+ xi12cWVptetOKKYnt7F0fzleydd5Gd9B/BdKUsWd0TSi8NC1IpFmAlXFLsuOxlYNF7Ln8c0+x8u
+ ScfV8drpiHbNn0evd04iCmduZ82Zhko8yVbgUYUmemhAXn0fSKQSQsoskNLylY2Lc92LcJB5Z3y
+ S2Sts9w+cpWkZPsr93C8Biw6HAHfzdBJXh0vGEmkLln9JFUSnlk0vWz0mS5AklTH6LFaoUifqB5
+ JcPqlGwTRggC4jUFOMIVZnrcue3AsjyFRgh+A==
+X-Received: by 2002:a17:90b:224f:b0:364:b4e7:6709 with SMTP id
+ 98e67ed59e1d1-3650cd83468mr12083732a91.6.1777967401764; 
+ Tue, 05 May 2026 00:50:01 -0700 (PDT)
 Received: from kinako.work.home.arpa
  (p1387170-ipxg00a01sizuokaden.shizuoka.ocn.ne.jp. [153.221.239.170])
  by smtp.googlemail.com with ESMTPSA id
- d9443c01a7336-2ba038ae95csm89160495ad.46.2026.05.05.00.49.58
+ d9443c01a7336-2ba038ae95csm89160495ad.46.2026.05.05.00.50.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 05 May 2026 00:49:59 -0700 (PDT)
+ Tue, 05 May 2026 00:50:01 -0700 (PDT)
 From: Daniel Palmer <daniel@thingy.jp>
 To: trini@konsulko.com
 Cc: visitorckw@gmail.com, angelo@kernel-space.org, bmeng.cn@gmail.com,
  sjg@chromium.org, u-boot@lists.denx.de, Daniel Palmer <daniel@thingy.jp>
-Subject: [PATCH v6 3/8] timer: goldfish: Use __raw_readl()
-Date: Tue,  5 May 2026 16:49:36 +0900
-Message-ID: <20260505074948.2603870-4-daniel@thingy.jp>
+Subject: [PATCH v6 4/8] m68k: Fix writew(), writel(), readw(),
+ readl() endianness for classic m68k
+Date: Tue,  5 May 2026 16:49:37 +0900
+Message-ID: <20260505074948.2603870-5-daniel@thingy.jp>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260505074948.2603870-1-daniel@thingy.jp>
 References: <20260505074948.2603870-1-daniel@thingy.jp>
@@ -98,37 +99,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Kuan-Wei Chiu <visitorckw@gmail.com>
+In Linux these are meant to read a little-endian value and swap
+to the CPU endian.
 
-The Goldfish timer registers are native endian, so they act as
-big-endian on the m68k virt machine. Currently, this driver uses
-readl(), which works by luck because it's currently broken on m68k.
+In u-boot for m68k this is currently broken and prevents
+virtio-mmio from functioning.
 
-Use __raw_readl() instead to avoid breaking this driver when the
-endianness of readl() is fixed.
+This change is only for classic m68k. Coldfire has read big-endian,
+no swap for these in u-boot and Linux and existing drivers probably
+depend on this.
 
-Signed-off-by: Kuan-Wei Chiu <visitorckw@gmail.com>
-Tested-by: Daniel Palmer <daniel@thingy.jp>
+Tested-by: Angelo Dureghello <angelo@kernel-space.org>
+Reviewed-by: Simon Glass <sjg@chromium.org>
+Acked-by: Kuan-Wei Chiu <visitorckw@gmail.com>
+Acked-by: Angelo Dureghello <angelo@kernel-space.org>
 Signed-off-by: Daniel Palmer <daniel@thingy.jp>
 ---
- drivers/timer/goldfish_timer.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ arch/m68k/include/asm/io.h | 31 ++++++++++++++++++++-----------
+ 1 file changed, 20 insertions(+), 11 deletions(-)
 
-diff --git a/drivers/timer/goldfish_timer.c b/drivers/timer/goldfish_timer.c
-index 70673bbd93c2..91277d7932ac 100644
---- a/drivers/timer/goldfish_timer.c
-+++ b/drivers/timer/goldfish_timer.c
-@@ -31,8 +31,8 @@ static u64 goldfish_timer_get_count(struct udevice *dev)
- 	 * We must read LOW before HIGH to latch the high 32-bit value
- 	 * and ensure a consistent 64-bit timestamp.
- 	 */
--	low = readl(priv->base + TIMER_TIME_LOW);
--	high = readl(priv->base + TIMER_TIME_HIGH);
-+	low = __raw_readl(priv->base + TIMER_TIME_LOW);
-+	high = __raw_readl(priv->base + TIMER_TIME_HIGH);
+diff --git a/arch/m68k/include/asm/io.h b/arch/m68k/include/asm/io.h
+index 35ad4a1c0444..2577081d8363 100644
+--- a/arch/m68k/include/asm/io.h
++++ b/arch/m68k/include/asm/io.h
+@@ -23,18 +23,27 @@
+ #define __raw_writew(w,addr) ((*(volatile u16 *) (addr)) = (w))
+ #define __raw_writel(l,addr) ((*(volatile u32 *) (addr)) = (l))
  
- 	time = ((u64)high << 32) | low;
+-#define readb(addr)		in_8((volatile u8 *)(addr))
+-#define writeb(b,addr)		out_8((volatile u8 *)(addr), (b))
+-#if !defined(__BIG_ENDIAN)
+-#define readw(addr)		(*(volatile u16 *) (addr))
+-#define readl(addr)		(*(volatile u32 *) (addr))
+-#define writew(b,addr)		((*(volatile u16 *) (addr)) = (b))
+-#define writel(b,addr)		((*(volatile u32 *) (addr)) = (b))
++#define readb(addr)	in_8((volatile u8 *)(addr))
++#define writeb(b, addr)	out_8((volatile u8 *)(addr), (b))
++#ifdef CONFIG_M680x0
++/*
++ * For classic m68k these work the same way as Linux:
++ * Read a little endian value, swap to the CPU endian.
++ */
++#define readw(addr)	in_le16((volatile u16 *)(addr))
++#define readl(addr)	in_le32((volatile u32 *)(addr))
++#define writew(b, addr)	out_le16((volatile u16 *)(addr), (b))
++#define writel(b, addr)	out_le32((volatile u32 *)(addr), (b))
+ #else
+-#define readw(addr)		in_be16((volatile u16 *)(addr))
+-#define readl(addr)		in_be32((volatile u32 *)(addr))
+-#define writew(b,addr)		out_be16((volatile u16 *)(addr),(b))
+-#define writel(b,addr)		out_be32((volatile u32 *)(addr),(b))
++/*
++ * For coldfire these read a big endian value and use it
++ * as-is. This means that for little endian devices on the
++ * bus like PCI device these won't work as expected currently.
++ */
++#define readw(addr)	in_be16((volatile u16 *)(addr))
++#define readl(addr)	in_be32((volatile u32 *)(addr))
++#define writew(b, addr)	out_be16((volatile u16 *)(addr), (b))
++#define writel(b, addr)	out_be32((volatile u32 *)(addr), (b))
+ #endif
  
+ /*
 -- 
 2.53.0
 
