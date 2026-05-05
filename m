@@ -4,83 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72247FF8855
-	for <u-boot@archiver.kernel.org>; Tue,  5 May 2026 17:57:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4FA84CD3427
+	for <u-boot@archiver.kernel.org>; Tue,  5 May 2026 17:58:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AEC14849AA;
+	by phobos.denx.de (Postfix) with ESMTP id EE7AD849B8;
 	Tue,  5 May 2026 19:57:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="nAHkX4QH";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="cYE2bjJM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 667D3848BB; Tue,  5 May 2026 19:57:36 +0200 (CEST)
-Received: from mail-oa1-x2a.google.com (mail-oa1-x2a.google.com
- [IPv6:2001:4860:4864:20::2a])
+ id 39368849B1; Tue,  5 May 2026 19:57:37 +0200 (CEST)
+Received: from mail-oo1-xc2f.google.com (mail-oo1-xc2f.google.com
+ [IPv6:2607:f8b0:4864:20::c2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9A9D48486B
- for <u-boot@lists.denx.de>; Tue,  5 May 2026 19:57:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8665B849AA
+ for <u-boot@lists.denx.de>; Tue,  5 May 2026 19:57:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2a.google.com with SMTP id
- 586e51a60fabf-42321c8b8f5so129108fac.1
- for <u-boot@lists.denx.de>; Tue, 05 May 2026 10:57:33 -0700 (PDT)
+Received: by mail-oo1-xc2f.google.com with SMTP id
+ 006d021491bc7-6949831a7bcso3077257eaf.1
+ for <u-boot@lists.denx.de>; Tue, 05 May 2026 10:57:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1778003852; x=1778608652; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1778003853; x=1778608653; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=y4XuuIxJoXftAhXEWX0zVN36mSOP9Q9YRjMdQ9dkHz0=;
- b=nAHkX4QH8BCmPc/Z+Wg1D2meAg4/5yJrbFARXXny/PENVaIOGL8255bCM0DXb1mF8o
- CnsVk09S8/EBbCYPj3eZ11MZNLhuAOBnxQHkpfE+7yU33vedlX4ACNCStHl0B732tOAd
- Y3V2HFq+u+N9W5DZ+5wEL3Ne/PEt8YTqhSJl8=
+ bh=Xr1OmQOauEz9Apk77uE2QY8Mv6oP4+XLZ14aB0Sydxg=;
+ b=cYE2bjJMMfcDDHHTYieHaYVv5a3ZYUfgvkSgupX0cI7kW8k3DQkmm4oMDidUzEJ8n3
+ +ZLLN4eptXNKU7FfonOqksKdKtJ3RUsf57eyjgu2U15SgimcrsDO2S1YF7tWtVLWqzzX
+ gfGdBsDajO8bxPiXA7HrZayHLZq6hHnmpD8dw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778003852; x=1778608652;
+ d=1e100.net; s=20251104; t=1778003853; x=1778608653;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=y4XuuIxJoXftAhXEWX0zVN36mSOP9Q9YRjMdQ9dkHz0=;
- b=EQ+jlvPuD5CD7JZ3jhWaQzpEmQ5f8/IsQbwegE/R6JEbs09pHL9BZygMeX0ZpdsXNx
- YAV5R7yWQM3Vpv+EOKJHalKDh94KLepxuAqVHjbF5e0jxhv66aaSq3xoU5fNsz1V6fJG
- 4SZQx5BGk/6z6YqRgYddk7Tvsva8PKOdMAVbMQ/crIfvqdBrDb71b6z5XDWXHLU+och7
- TVFyifjtLadcQ8FxBQMyp9xcWTSi05t8jqLdJLdQu27rU6aC/VqTHgT3luDthi1AeCv6
- zr5aDNwCOqaHZkYSVPJIaetW6AeDpWFdrAHOC7gN1PzovRGiiOUqFytD1AzFbWefTftg
- bfow==
-X-Gm-Message-State: AOJu0Ywb20SZHK9lF8Zew4EyYQZ46xtifVZKsjuSfwCzeB9J34J+eNqv
- haFbXnpKYvfjCV3tDdKYDZSULZHj2WR/YRJyVabm8+H7p76D4GDbhfl1Tome8KTEVJM=
-X-Gm-Gg: AeBDiesuoDQTBpUvOZ6n31OlBuIccIPdwYUnp/lPFXg1xWFJQdbF7yz9Ua+yuXytSrU
- xslr9nJoRJwBZfhSatSnluVxBgCPuF7eG3gGWiXlYhIHS1zszx2F+3y8PrbpNIH7H7vi2oe7ns1
- rX3u0mMqpApEnGXjWP5f/0fiVHQ/QXSSkd8FFJcl9Tb9x+NN/O9GKdBEgDVhmMT4S+4inzhQvH0
- g1T5kAMXzSJW8tjAq36ol6J+MjEK26r20giKnNFTpZWan2XmcW3OlGWuTuOkEKthTRsb/9MIRxY
- mVGKt62S0E+qa7nSBaTJLA788UQucKn2D375EFZG9EpOyQYU4xcmgvzFfHg/Vai9lOGaVjbTDpn
- 4a/RPrWQOKATR97PML3mb4ZIXDVBJ3iMmrKNzW1zLI+FLpZKOlXu188xRTgPU54qmAo5Jouu10/
- UE3GwglwpuvDR6FK5dHNzOdNiiHRuWgGw2Hb4YgkhpaiQdEKps7fIoX2AUs+bGOEQtHBMc+8ZRA
- QODhVxKfquMuqWJSAw9WIJ6rdyXfWNQO+9Q/y6jtVJ1CG86SOOaRCAU+QeK8ogFQqDsjLE=
-X-Received: by 2002:a05:6871:e494:b0:430:16b5:909 with SMTP id
- 586e51a60fabf-434f9b80866mr14525fac.15.1778003852360; 
- Tue, 05 May 2026 10:57:32 -0700 (PDT)
+ bh=Xr1OmQOauEz9Apk77uE2QY8Mv6oP4+XLZ14aB0Sydxg=;
+ b=hATV+enUKKwe9mbuTL1nVblvLQ6IhqVjQDut/UpmsAWkmvq3nb1bPUQ+DoBMd31HrV
+ ieUjtjo0EKyxbBT5SdUhKMheg/KZkHOaSwxYlmPAvnqOTPiCidRgyGyWzeWgDIq+RpCH
+ 4iSW+pFcld3PPwWZKYMLQFUmCRTDQS7bQytjIGMvRHsfBqsDEn7jSC3OX7ak//mpKAYH
+ UexUk7K2UPor/f9GRpw4nN5z4+nb9M5SnuA7uk0NTM+5BTwiq4zvrKecIcw81Z3/jDlk
+ 2DO+umN/TMj7RKf2y600qtmk7eZR2+bF2N+Nw4anPmwXv75aJhtY7bXPdMqjntiH02Yd
+ gZvw==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ8l5JS5w0HK+OYEYJTGm9oWlUNPmOlvUbepCC3LPczR8HtwINNmVY04l/NN0OG3FPvvDRrNGxI=@lists.denx.de
+X-Gm-Message-State: AOJu0YxBoVUD22E+cI+1rIKf522i3RpOJL1Nbf0HByH6tpm/7Qrh9/A6
+ amBb8EJW2+bgrY7xyCoiYwK8R4eB2jtpAsXGAueDczJepYdR6dvW+QXJfDXlXo4gLfOihTI6+zq
+ v/QNMpt/7iWuR
+X-Gm-Gg: AeBDiesBDYl9wCqxCyqUNgjZIeORw0/tNJf8yZSDMXwpmbm/3VT6K+Aeott1JlxLd+l
+ 1wgR42DzKs2Dw3EIMOMANqU//oxlSJ9IOM3FG3VNOaydMOWgVMMueS5VPJ1ojHUKxnmiYeR+iGx
+ oTELb1+P/yrhf/45dlHSTEV6UWA/c0ZhDehjU8yVPAU+xDSVXy8+IGQgS6NeKrTxJH+dCnx7Zc1
+ KhXLZN+hK4RexiFR+fdBxvZAc0Ts1Y9BBqQfkEgwFzfZu3RLVgop8seh6S3XyQikFK/Sy1I92C+
+ rP4W2V+p/LVA0uU6cEDc6z0gI71wbuk3UBiGr0aDq22QZ3Iz9RbHJTnB1juebVXwyV1zlkB70E8
+ ILihcC1DV0xljfOC2Am/hhUo9E/lIYvGQMMJj954TzdPU0LFrrD/uqMMuxUw70MDSBWEhjReXNX
+ ENJV5KAvv3AumJ7IRev9Mk9yM68aiNQ5McuJn8rQnWWYwQmcQlGWW2JtBQrmk7Rl5DyT2pGZc7G
+ crEvrSqP8JkdfpFC+5o3ZXGdgebN4Dy+ti0EJ+IGYHo0JSYQGaw01mjJ8tp
+X-Received: by 2002:a05:6820:211:b0:68c:2ff9:522c with SMTP id
+ 006d021491bc7-696979ad2acmr7948201eaf.2.1778003853255; 
+ Tue, 05 May 2026 10:57:33 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-106-235.totalplay.net.
  [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-43454d324e2sm13561561fac.13.2026.05.05.10.57.31
+ 586e51a60fabf-43454d324e2sm13561561fac.13.2026.05.05.10.57.32
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Tue, 05 May 2026 10:57:32 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Aristo Chen <aristo.chen@canonical.com>
-Cc: ggiordano@phytec.com, w.egorov@phytec.de, 
- marek.vasut+renesas@mailbox.org, iwamatsu@nigauri.org, bb@ti.com, 
- afd@ti.com, d.schultz@phytec.de, peng.fan@nxp.com, 
- patrice.chotard@foss.st.com, hai.pham.ud@renesas.com, michal.simek@amd.com
-In-Reply-To: <20260421074523.4930-1-aristo.chen@canonical.com>
-References: <20260420145353.3923395-1-aristo.chen@canonical.com>
- <20260421074523.4930-1-aristo.chen@canonical.com>
-Subject: Re: [PATCH v2 1/3] configs: r8a78000_ironhide: Drop duplicate
- CONFIG_SCMI_FIRMWARE
-Message-Id: <177800385119.2525131.10521350424253151856.b4-ty@konsulko.com>
-Date: Tue, 05 May 2026 11:57:31 -0600
+To: sjg@chromium.org, alpernebiyasak@gmail.com, 
+ Yan WANG <yan.wang@softathome.com>
+Cc: paul.henrys_ext@softathome.com, u-boot@lists.denx.de
+In-Reply-To: <20260417083050.499955-1-yan.wang@softathome.com>
+References: <20260414131558.538656-3-yan.wang@softathome.com>
+ <20260417083050.499955-1-yan.wang@softathome.com>
+Subject: Re: [PATCH v7 0/3] binman: Fix preload signing with encrypted FIT
+Message-Id: <177800385253.2525131.9832701135870074049.b4-ty@konsulko.com>
+Date: Tue, 05 May 2026 11:57:32 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -101,21 +101,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 21 Apr 2026 07:44:38 +0000, Aristo Chen wrote:
+On Fri, 17 Apr 2026 10:30:47 +0200, Yan WANG wrote:
 
-> CONFIG_SCMI_FIRMWARE=y is listed twice in the defconfig. Remove the
-> redundant occurrence so each option appears only once.
+> This series improves the reliability and efficiency of binman preload
+> header generation and test it against an encrypted FIT image signed with
+> a preload header.
 > 
+> When a preload header references other entries (e.g. an encrypted FIT)
+> through the collection etype, the referenced entries may be rebuilt
+> multiple times during binman processing. This becomes problematic when
+> the referenced entry produces non-deterministic output, such as FIT
+> encryption using random IVs or timestamps, since rebuilding the entry
+> changes the data.
 > 
+> [...]
 
 Applied to u-boot/master, thanks!
 
-[1/3] configs: r8a78000_ironhide: Drop duplicate CONFIG_SCMI_FIRMWARE
-      commit: 7c3945a231700e80612bed5bc42fcc8cf545aa57
-[2/3] configs: phycore_am62ax_r5_ethboot: Drop duplicate CONFIG_SPL_MMC
-      commit: f7f2864e19fd207f743bee104976e51cd3c3b1bc
-[3/3] configs: phycore_am62x_r5_ethboot: Drop duplicate CONFIG entries
-      commit: e6112ab2d7261dc606f2d25599904f9d20b237ac
+[1/3] binman: Generate preload header and sign data only once
+      commit: 5006121b44a2d147e7e426c74537b3566407e853
+[2/3] binman: collection: Set build_done on referenced entries
+      commit: 9ff82a771c44a8cf38bd52b556f685ddbc6f1a55
+[3/3] tools: binman: Test signing an encrypted FIT with a preload header
+      commit: b20d69e5f57bee299380bb30112856e51d8f26b0
 -- 
 Tom
 
