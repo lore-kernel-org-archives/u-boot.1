@@ -4,101 +4,101 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 162C2FF885A
-	for <u-boot@archiver.kernel.org>; Tue,  5 May 2026 05:43:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83663CD13DA
+	for <u-boot@archiver.kernel.org>; Tue,  5 May 2026 05:44:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 982BD8469F;
-	Tue,  5 May 2026 07:43:43 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E05748469F;
+	Tue,  5 May 2026 07:44:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="cmNYLf23";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Ca+bSD4x";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 71317846A5; Tue,  5 May 2026 07:43:42 +0200 (CEST)
-Received: from mail-yx1-xb135.google.com (mail-yx1-xb135.google.com
- [IPv6:2607:f8b0:4864:20::b135])
+ id 4D9BF84683; Tue,  5 May 2026 07:44:08 +0200 (CEST)
+Received: from mail-yx1-xb136.google.com (mail-yx1-xb136.google.com
+ [IPv6:2607:f8b0:4864:20::b136])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 95DCC84683
- for <u-boot@lists.denx.de>; Tue,  5 May 2026 07:43:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 372AC846BC
+ for <u-boot@lists.denx.de>; Tue,  5 May 2026 07:44:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yx1-xb135.google.com with SMTP id
- 956f58d0204a3-65c396d3b36so2992972d50.0
- for <u-boot@lists.denx.de>; Mon, 04 May 2026 22:43:38 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1777959817; cv=none;
+Received: by mail-yx1-xb136.google.com with SMTP id
+ 956f58d0204a3-64d5a7926cfso4670327d50.2
+ for <u-boot@lists.denx.de>; Mon, 04 May 2026 22:44:06 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1777959845; cv=none;
  d=google.com; s=arc-20240605;
- b=aM+d4etBi1fWSMisW+204pF7SveoIFZzj52IEnPxtqRkjJhaEaJFOQEJgHeaUFf6yu
- 4FrLL4mhoAur4r1Drqd5iOkrjfA66MNo+RJBp7Cu9Ds/vd1M5p3CNThffUV+wViny87Q
- 8DKfci9NdZk3ohgd25l1+7eE7qShqx4x7oed2mc56c4MemFLz3WAh3ez+aMIKYTZlLjG
- 7i3NOP7oFoOGrLaJCVhoDffkTpqg0Ggmn4gibhFLuDFJC5wLiWvT5KdX6v5tdWXHSPLo
- 2f2XIELq5Rt+urjSwpfIaN1wrwZ1q+vm0afkNEqEaQo7Lj7AtJilVD6zaHzF94aosJpx
- F4Uw==
+ b=PLfOPpF4cb0hTXYQ/aEQEfnCJqoHMN0j3X/yAHsTEvhmd38pYeM7CqLnKQiWHh+9uF
+ jppYdOEwYezPYk+NjyFadZrGq1uc6TCkrzD3a11fEvlK7HgW4OcuPS0qhM1cKPuW+x6b
+ RNveV72+JDew/6H9thj0T7dA2/GQlu07hnERdzataXrApZ2A9muWPfKb6d2hP5cfUy76
+ r7lyzsRwHImA4BMB8ahFjS5KFWWfdzAdIp4q750IvXu+DlLxaW5yns9A18gI8wA86B+K
+ HX9K2aoBVxMo6v8pDrD7+MZ62uawMZ/j7DgCjFy0Yoi8bpUAcuz2LQP4jeXWGU/Rq0l8
+ oeRQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=6Frqwgt20924NSV+LJDkBdq4NWBMQ07+IZ8tp08fz0w=;
+ bh=E4oe6M9rihstniz1TzgCYpSCt3OBA1x0ImiMuje+Y5w=;
  fh=Jg1GwjOEZ1S4lNqzrPlyRpppkKciiPaSkBs16SCT10U=;
- b=kUuabkzXqwdwcIc008o+aQfhLa+oXe0XlsoIqlndY8j9D9Ascp8GARR58lITx+Y76h
- upmrqdfdt/w4kxyb9wnO7UZfVoEgOxcCCAMI4Uadz+Wr/37ji2Jiljpg6lkkhES16q3k
- 0A75fndUoC7uiKtlYi34f1nOHfc7h6lKligGeeaXHco1eXJVRfbHVoYvMD9Y+VV3ujcF
- FIOq1A6P2TolWl/L/yvlF9twcn4b0znUf/S7WnBWYOAZVd58BM2MRIYdTXfIbYjAr3vQ
- 0eK0IMh7JUlFTaF0c9T0+DZxeXgRS9FgsW7V3QlmRe+qLX1m0VSY9p99f0MqPNRdBKyB
- PUaA==; darn=lists.denx.de
+ b=AFSKmv8gMjrmXYCproibUTnAdzbJbqcI5pPSIb/8y/84brFkn1YqOefE9+rut2vEVq
+ py5vq+FaFOJstQcR0GAwA3Iqkvw+craCICLev9QSzy9pM9sjBpitFz8J77ndbLwOQCYB
+ yITuMclFF5RUxNWea2ayXA3Kpt5lCcvj7inT9UtajYQv6+QUNo2IitjAaZtfa9y0X1p7
+ OwK4zSfL6kkDhob12F0T1EyjIeDU2sP2WL+GsRGFFaaeFOAuRNeljRG3a2DBkfldxz6B
+ jLCWogEsO/4//pJF1lGUtLTtVDM5x4h2wrmx4X6DhPc8YW1z82NubMuLmFbXdQOiBhIx
+ e7nA==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1777959817; x=1778564617; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1777959845; x=1778564645; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=6Frqwgt20924NSV+LJDkBdq4NWBMQ07+IZ8tp08fz0w=;
- b=cmNYLf23R08/N13MF21xpWMKd7+c0CUKmQ51s2o47XM+ZeCwyy5/ieVzWmp8qTzlwK
- PNHB5fSUyqbau+j3e9Ud/vGjERObyQZyNys8r2EHr2qR0EFrWik8iXgFF3Ix/qys5IFl
- CWdxty+2WaJJzsFbUjoxVioxKNecHNmghM2bMm1onr3uhyqO49Q4fLR8ym6fiECGDhLG
- KYi6jiHufHo9PoOF9wr1KSZRZGTAZuwpmvtaJEhJHrWtg/+smrolb/mv8PznV7vjiujX
- hnbIUxkgJypj/qu9ujjlBmmA1cRqqCPpMzhIfQIgTxOS7VsbGJQu0wbicm1eZhhiR10d
- azvA==
+ bh=E4oe6M9rihstniz1TzgCYpSCt3OBA1x0ImiMuje+Y5w=;
+ b=Ca+bSD4xJWtvPbPCBwAPBAdtsrw9oZx1mJVWATmNz00xRQj7RCVmjt4E/0DpV3Gh62
+ q9E92c4k/IoTWZeGOTLwUBl3XfOVKLKioKjxE4OCFQhm+6xAISQ6tJE7bQBwTQ0dBENp
+ ZAkGfh+AFTD4DLls+QXF0OLnZfxh1Sg5Agg0yxxIYSuusptWf1z0wcnNt1F1nDyt+jNa
+ 6vpQ0bmQu5ytCAdLK4Po3JoJXTcD7NS4cOIZ4LH9ROpHK8ZNn4Owu3K0vvZenoVx9wUn
+ ijbTi+yCmLVt4qbpoTRXWakgcvLmaQWbSw7nwDadD0AzRyqaF2/BBZNMaAF/UeQK/yaO
+ 3FXg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777959817; x=1778564617;
+ d=1e100.net; s=20251104; t=1777959845; x=1778564645;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=6Frqwgt20924NSV+LJDkBdq4NWBMQ07+IZ8tp08fz0w=;
- b=EIIrZ4NosdJr2fXs0O5NbnxsTrp/iXdWPGZKzBNfkWn3qZ2BMwShfkpjiJJi7knOjb
- frqgp/43rxPIm6Id3b6SWWSluPPWKHVTsWjTQnPCAGtWI7lVStYZUdUV0PqtClO7WHAA
- H9rnl1T2oEd0UlnpizizONGBe6BgUSS7CSSrOHOoh6fDB5orE/rkQ4ohNvpWO8b9//sW
- oePtX4MvDKCfkB+BKx7AOwgQRr+5M0NCdmQWfPZRZifX9RaLwRqqDLP745qNx1RRYrEM
- q5rGYR0zaCOnTmuAmylOmx0RisQRlQ6uacJCsEfUmt6WSPiyh133AqV9P7jLqvQXIllP
- rccw==
-X-Gm-Message-State: AOJu0Yzi/3lz0X3KrGkVRPwKBVnidOYNjHt4Bhg01VB9K0KpbSTb4zfp
- vpiwschsqgZEN952ZfcMbRAcuHm4zqQDXzBobHFQ9bJlxBOm6SyX+4sIpuUPFkNzXMoJQPKzPIi
- Ofs7einv5gD/oRhBKEAUwwWp7hPgAdzJeMgcEHpLkaQ==
-X-Gm-Gg: AeBDieu5OzMJstYdLaqzd0SD5S7mV/PzxuAa+ICGxupE/kCRij89T7tfXFMEgGH9BRD
- Btj/0fxSBLSS7wW3Nrryx4HVClv/xG+ABqRK1z9TjeaUqw6gbiN4mZuzInGdS1LaC5hZoUHcNUU
- PNnHSObFsAP1aqBoDEcra4gQI0AyBw4YhrC3fb2zAzfGB0COPIuGsz19+amQAcgduXD0TjWXfy6
- 7/xojtP8PF5gAIf519RpQ7stZ4tpZpPweJmaS41BH7F8Hcbh7v1z9mGSCzv4Tg1TKAUHDoNuEAC
- ZCWf+s7AD4MX9KCIXapo/hE3sM9lfzC1ykajaY6Jg9o2RTAX7+2pvmc/l3RvEanXpc4X0WXjSyM
- qr9JSvooOEspWqESaji1nNy10q5nk29SoGioxbKokN+A+P+cumVKFO75O3zU9RkzAq3r8ipX20s
- lRrjHr3MleWHRrdLHWBizSa0NOokGym0qwT4DM+k2j3ZJ3RpZX55L9zgACJtf/Xl9F3Esc/Hq5a
- EgwXFoL0tsDI0oy1KX5z1DpmLgawFPLmbfLv3gYXthsBwHOUC/CQ8nHRLFhKeFYwIXtXMltxJRW
- tOr0+y9huc6u9g6nMtkr8cUO5D2LqoiFt2Zl0yh31EjdHGoe+d+64iZwIOp2CMOp+bFArnR7Qiq
- NaH/bD2i0iTxYn3P77DYw+Cnm3wIrfYZH4X7FLg==
-X-Received: by 2002:a05:690e:4081:b0:65c:65ae:be23 with SMTP id
- 956f58d0204a3-65c69f21f55mr1936602d50.45.1777959817361; Mon, 04 May 2026
- 22:43:37 -0700 (PDT)
+ bh=E4oe6M9rihstniz1TzgCYpSCt3OBA1x0ImiMuje+Y5w=;
+ b=X4PRqv+ksEV3RbbUrGKOKTgo0Y8v5Q+z5HqgdUJgpAcKpdsaJyWF6mVdsQBfnfe8zY
+ wtksh6112tvwEO+z7yfBwNIdioZag451bOL9LqQ+Qk3ykvYtoNqTfUTOf4XlxL50aW/M
+ VzT3bDVplUAhi+XmezmYM496G5uXqyFlg2uM77epdomgXdESpI6iSGIg9Xroxbflhj9K
+ g9dzDJ9RQ8PXsKPDjMP1DfDKudYRmYvmvtgMkI9UKwPRO7i11/3NaBg5XVP5Z7J9PcYT
+ X7mp86fH7UT1aUbmCYKqid1ddX1oczP5k6HLm6xgIlbKb8HQ5CL4HFiL4Ms1Zj0jLuxq
+ 8vhg==
+X-Gm-Message-State: AOJu0YwlWAPgOSkkHSv50jN0aRx256t2MDNFK5Jaox/ptfnZ7X2SAfV9
+ tQ0Qvzz8rCeLsviUegYfOvCkvA9liiAX643UE5zjONMRRoS8dsPoAo1V3OcHl502VaGcPVKAhXG
+ J9XzwGycy+2v9K5q7DB87OT3Yu7CNq809eyeIZOqlnQ==
+X-Gm-Gg: AeBDieuQjW2nvtMJsLhTltIZpdYf1cQIFPZ9zC/7tLk8kd6wp1A6UTzeGZyOQR0UQ/0
+ 5ZhXR6yXqSbd/z0uRhaJE02rGKO4lPxXvdLNPNl+kKrMAye3+UPrJskuSGrb/pXDMG9vaje6Atv
+ Kh7Dmk5JYwZtZHyMFbR5iv5c3OIb3qqaBYomTyoHJ/TQV+8MntX3EXTKuB5d+IETubAHwcFFvvX
+ wgnRyLQUaKr6pSUgrWNx4mZ/AnqF9hL2+YpCL/MhhJ+rv+TFoG0lEFU4WSVHQMuPQg3XUgr7SSs
+ tOMpYr53/6SasCZpEvy6zEtwmBe5nNB25Daawn1cNFs0n9vqP8aN4xV3FVm3HDOueDOfNg4re6S
+ BCKCgaxXlgqJlhQZ4M91/JAygHOM9ixBKxvwiAZvWYQ2UpYheplEzdhJLHNu8U5RkDFhoAfsVWU
+ rUr4SkVHo1hP6D5X+mdFZCCwWcihLtVjwwoWWr15OT1oyJ/+fbGGlMwLqFqqG0U426aZfUNcBKU
+ grP/YZClChUJ4io+V8gIH+HNTRg7L6efg4mobndWLmL6h/2ET8crhocvzWP7ZCdJzNfxdxH+aeF
+ L8EcaPOgbiZGz4+tF0m1E8ooL14vCJbbjLpKN8aW5QjZhTaXZPPNWvbO+qVrUvUfBzU6vPn3xPO
+ /rHPvrGZZM3y68K9S
+X-Received: by 2002:a05:690e:168f:b0:651:c268:479 with SMTP id
+ 956f58d0204a3-65c3db188a1mr10675611d50.57.1777959844907; Mon, 04 May 2026
+ 22:44:04 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260504-extrawarn-sync-v1-0-b19301d1948a@cherry.de>
- <20260504-extrawarn-sync-v1-7-b19301d1948a@cherry.de>
-In-Reply-To: <20260504-extrawarn-sync-v1-7-b19301d1948a@cherry.de>
+ <20260504-extrawarn-sync-v1-13-b19301d1948a@cherry.de>
+In-Reply-To: <20260504-extrawarn-sync-v1-13-b19301d1948a@cherry.de>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Tue, 5 May 2026 08:43:01 +0300
-X-Gm-Features: AVHnY4IndgXqGqiYtCNCPBs0wtCQ-iEgkx0RCoE9tvEkiM3TChWLJ3Q0tC7SKFY
-Message-ID: <CAC_iWj+wmJS9+i1ZQV9+xQ2cwL=6EX-E3j6FMYR6pHvvuqZc-Q@mail.gmail.com>
-Subject: Re: [PATCH RFC next 07/18] scripts/Makefile.extrawarn: handle
- CONFIG_WERROR in U-Boot-specific file
+Date: Tue, 5 May 2026 08:43:29 +0300
+X-Gm-Features: AVHnY4Kd3c8ThPqfIQwyCizAsUHfLxVhVQVRBdQUxZvqBlfXd9MEWyMJnRPRdyI
+Message-ID: <CAC_iWjKz_HgtRsmL2uOCSBYy5R2WSZ6RLRWY_OboZa_7+AB2og@mail.gmail.com>
+Subject: Re: [PATCH RFC next 13/18] kbuild: rust: move `-Dwarnings` handling
+ to `Makefile.extrawarn`
 To: Quentin Schulz <foss+uboot@0leil.net>
 Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
  Simon Glass <sjg@chromium.org>, Mattijs Korpershoek <mkorpershoek@kernel.org>, 
@@ -132,48 +132,39 @@ On Mon, 4 May 2026 at 16:20, Quentin Schulz <foss+uboot@0leil.net> wrote:
 >
 > From: Quentin Schulz <quentin.schulz@cherry.de>
 >
-> This is not something that is in Linux kernel in v5.1, nor in v6.1 which
-> will be the next sync. Since the next sync will be importing
-> scripts/Makefile.extrawarn directly instead of backporting individual
-> patches, CONFIG_WERROR handling would be gone.
+> [ Upstream commit 592b571f20c5b905c47a1370210456f9f90ce04f ]
 >
-> Move the CONFIG_WERROR handling to the U-Boot-specific file such that it
-> doesn't get removed during the next sync.
+> Original commit log:
 >
+>   Following commit e88ca24319e4 ("kbuild: consolidate warning flags
+>   in scripts/Makefile.extrawarn"), move `-Dwarnings` handling into
+>   `Makefile.extrawarn` like C's `-Werror`.
+>
+>   No functional change intended.
+>
+> [git conflict trying to remove KBUILD_RUSTFLAGS from Makefile, which we
+>  don't have in U-Boot]
+> [U-Boot doesn't build anything Rust so this is useless except for the
+>  fact it allows to backport patches from Linux kernel easier]
 > Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 > ---
 
 Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 
->  scripts/Makefile.extrawarn        | 3 ---
->  scripts/Makefile.extrawarn.u-boot | 3 +++
->  2 files changed, 3 insertions(+), 3 deletions(-)
+>  scripts/Makefile.extrawarn | 1 +
+>  1 file changed, 1 insertion(+)
 >
 > diff --git a/scripts/Makefile.extrawarn b/scripts/Makefile.extrawarn
-> index c5ed501d374..7dfc374a19d 100644
+> index b5b1a762cdc..2af90af594e 100644
 > --- a/scripts/Makefile.extrawarn
 > +++ b/scripts/Makefile.extrawarn
-> @@ -22,9 +22,6 @@ endif
+> @@ -104,5 +104,6 @@ endif
+>  ifneq ($(findstring e, $(KBUILD_EXTRA_WARN))$(CONFIG_WERROR),)
 >
->  export KBUILD_EXTRA_WARN
+>  KBUILD_CPPFLAGS                += -Werror
+> +KBUILD_RUSTFLAGS       += -Dwarnings
 >
-> -KBUILD_CPPFLAGS-$(CONFIG_WERROR) += -Werror
-> -KBUILD_CPPFLAGS += $(KBUILD_CPPFLAGS-y)
-> -
->  ifeq ("$(origin W)", "command line")
->    KBUILD_EXTRA_WARN := $(W)
 >  endif
-> diff --git a/scripts/Makefile.extrawarn.u-boot b/scripts/Makefile.extrawarn.u-boot
-> index 0a9b49a30f0..86f6fbc2301 100644
-> --- a/scripts/Makefile.extrawarn.u-boot
-> +++ b/scripts/Makefile.extrawarn.u-boot
-> @@ -25,3 +25,6 @@ ifdef CONFIG_CC_IS_CLANG
->  # there are other places as well. For now, we will silence this warning.
->  KBUILD_CFLAGS += $(call cc-disable-warning, deprecated-non-prototype)
->  endif
-> +
-> +KBUILD_CPPFLAGS-$(CONFIG_WERROR) += -Werror
-> +KBUILD_CPPFLAGS += $(KBUILD_CPPFLAGS-y)
 >
 > --
 > 2.54.0
