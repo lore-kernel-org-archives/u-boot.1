@@ -4,80 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA540FF8855
-	for <u-boot@archiver.kernel.org>; Tue,  5 May 2026 15:49:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D82A4FF8855
+	for <u-boot@archiver.kernel.org>; Tue,  5 May 2026 15:49:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C6EC1848CE;
-	Tue,  5 May 2026 17:48:58 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0E37984995;
+	Tue,  5 May 2026 17:48:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="SQgnRpN3";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ftheiVS0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 48E8F84994; Tue,  5 May 2026 17:48:57 +0200 (CEST)
-Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
- [IPv6:2a00:1450:4864:20::32c])
+ id 2AC9284951; Tue,  5 May 2026 17:48:58 +0200 (CEST)
+Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
+ [IPv6:2a00:1450:4864:20::32d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D1C4084951
- for <u-boot@lists.denx.de>; Tue,  5 May 2026 17:48:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 35C09848B7
+ for <u-boot@lists.denx.de>; Tue,  5 May 2026 17:48:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-48a563e4ef7so52485615e9.0
- for <u-boot@lists.denx.de>; Tue, 05 May 2026 08:48:54 -0700 (PDT)
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-488b0e1b870so85724395e9.2
+ for <u-boot@lists.denx.de>; Tue, 05 May 2026 08:48:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1777996134; x=1778600934; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1777996136; x=1778600936; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=lzWadQb21A++i7EkdA5OrftUFXP1i94lh/s73J01ZkM=;
- b=SQgnRpN3u8T5UTDGAVY6hovqyH3xDmceOTfNbPqkzveEjiEqQMM2kvqH74cWSwr3gA
- DHbvMT+6xoJHD8dVfxanvdnHFrImPYBXMifbl1qx8muZtf3gOXAhf4sfhTnWY/dSP8d9
- uhaqANEpCoU0m9pwpqJ+vL7STv8LunQcOya5o/9CnU06GIGNX/98i4c/pkhEMtoYP5He
- ryQWqAW0QdMyjm+bFa+mnkmNbXsPY1AN3YqkzFZ35ZW3caMX/pzXZAVU8DwdusYsqCCx
- WXEFAWApu/kpmTeM7odJCIm8VIaUN/SgQVEiq4RxaLbi3ppU5aS8pgpzuv7kkQa6mGgt
- tBbg==
+ :reply-to; bh=39y7gNinOlLetUo96ETHbfB+81x37gGbV9+WWeJWJh4=;
+ b=ftheiVS0IcrjKAK6OwCtk65Aa5mDg2IQcDSfoua2W+isOVz9dq9ehAGmWcSo5RDUT1
+ pj7f7OmkKGRKzE9MTcZhgxuqfaN1ALWshdgSfsGld0md/rmGcr6/EuSOxt28Sc4g1mMM
+ /VF3rnmOZdcp7WPC2EJbdsd4NlOL6+MA6dKQGm9wsib6z2kxl2pXGyL/J70vOBXcYw+c
+ b2n1NnvReKp2v9f+DajwarR9L2xMiOw1oyaBsVOb6LlPGqzJ10VWDDuAov0k/0okjfqA
+ vQGGnWKD0X84DQuqZ/sSlHUeKtVi/GMMGdJ2DATqfEWKH9Wo17T1vt/0JeTVHuQiIb+o
+ Rxug==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777996134; x=1778600934;
+ d=1e100.net; s=20251104; t=1777996136; x=1778600936;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=lzWadQb21A++i7EkdA5OrftUFXP1i94lh/s73J01ZkM=;
- b=YkQ8Mi3PG6uaLJOCAEmo2Ty/Jq0zQr2Smaj6JoSNi8WgrsA+uF3hgdzHsx+HkDm0A5
- B31hc47MODhEA1Ao5Y8r5+sqPhO3cGzcce1ASVP5hDDL3gtAdZuQ7YRIVQoTTnwDCiNM
- hpUhZdf48BKrLVn+9BTB+fAQq8pD4V1mXDvfgQTc/F78z3XSuDxhLKmwzpBnRX830JQd
- l3P82fcwM9WYLsDvSQaoA7/7TQQXE7cn6ZPOoQbs1sLNoLqKelMY5yXnv7jFtJVdLjfJ
- yS8dVd1KKPLk3Zcoasjo8xb2+dtGnQg2rb082USjx50msXYHuYgH3Nfs9bWCwLBQA+W2
- yNRw==
-X-Gm-Message-State: AOJu0YweW9ZBaLIGNQ0k8C79rg2fvudtY4ry7D/3uY69IfVjEA0x7rG2
- 0xeEQ+DoaACgDK2h2r3lFja5L4Ykae+S/Vwss/EK+qY4ymZLru/4Lqh1z8AAv9OZbP8=
-X-Gm-Gg: AeBDietrX4rWe/I6S0AzHc9zU+PGjC6vhEGvPiAinf1Q5gNyA4E5yFlvrg6gnjsY7qP
- i7FxFhkP6e8DniwFgtRfN4eY7zQG7b0yZnkecLsXeGmfbFagtrpQ6d4vY3uiIhyBtCiUeUXSEw3
- ggwMudZKJaZ7zt7GkkJbkCaBeZsvKoEsmbZ+xk/B9aJN3zKUypVKHSSdD+H4Ye4cHsXMegEtX4a
- JdXHrsuES22i4h7Wk1Q7TrAMfsbdccSmTX01LSDWDxxcNp9o8QJAS5y3MCYTd5QucNR6uhUtEPq
- 5rj6oujLXEGWT3iCtv4QMa7G5DGnjtQXa2DcRIPSKNgdfBgx1s2WUg+jn5KRpkMKm518yvizLjW
- Q5klVztXcAoW7RE9EkOCey6lRM75NN3AC9YZHOIssS1Shtdh3MMUnD4B8ozYhg+qWZ39tuxIHL9
- Y+n+v5rkn6denSZPNOwW1iOrPlaeVPQY2H+VC6UWdpAveMABnXQRd56Kt0dl1GKNzhGRBq62gb/
- gzG5qo=
-X-Received: by 2002:a05:600c:8907:b0:48a:75b9:b0bc with SMTP id
- 5b1f17b1804b1-48d18cfe207mr45809955e9.29.1777996134193; 
- Tue, 05 May 2026 08:48:54 -0700 (PDT)
+ bh=39y7gNinOlLetUo96ETHbfB+81x37gGbV9+WWeJWJh4=;
+ b=IKGNZ8NDNTjm5kE3b+knKXCkjaH+OEsqSkz9mQCG0GVSoxp+TwvZlczKP62Pnzqsz0
+ Yzydr6zBPUdiAUGy8V82mrLNTZ2i+Smp6jpDvdnnIYfnxxjDZ7e5MhOR5CvsHCbK13kq
+ qQ/Yb1HKN1Hj4dt63d0wldlHav1TvD9qbipYK32CiYbLPS1EdDeSpRJmZBBv9fzBYdrP
+ +3uAuczED/CdTJeK0Z9Kd7502ZgTTbxaClKJQ/z+PKgh2Jrkk00fnMFffWKL8MS7HR0M
+ 7jccC0OPUVzgx/TTbVVQGy21HrhltUSjLge2sJzu8A/Wl7ehlgv724g99P6uUcZTLAe2
+ 3TIQ==
+X-Gm-Message-State: AOJu0YxGUFEu3Mvi0RS2TZvaNvFIh5VVmUTCIlXnsvDIVdi9oaEZAwCc
+ 9zwOk7UIxadoIYENMNyprMna9gQK2qGSTW2xJUewGSMAl8rHCCqTYdcQjJakJy2h8Rs=
+X-Gm-Gg: AeBDieurB29k+JZ5OdmVsmtAmE91yXUlUmk+h0SRBeWkMmjQSYd/1R6hV6n9PQXscE/
+ xsPuj5F/1r9VbzSixXsNbzzmpN6NBWXBj8q/9cy+FCr3pupWmyp+HoO+llk4r0gLDhiHkJ58kvt
+ JavcETibeOPH/Q8cP1u9m70wKaRGB1DdBfWdKF/0b3tAkHWzwC/Np866sqDZpiSJt8NB1nKOE6v
+ qCAANL4ENhdV5RRVGygUg/PmLyBdTafhCSUEuhxM03BZpS9UM9eoDrrueIiG7c2Rj65qslf/hjn
+ GVuX6JgElyhnZsAkOGfSsNJk85XSlX5BzH1ARkwJGF2UZvVcgtBaU4aV0c5LNVB9AM2NnqL4qSE
+ he8GvdK5V1v7qfhLkjraf4df+NvGibIfoz9QSbvV0fKvbV/bq7OP9AGnKPlCp8pptZYoTiruidG
+ kB5P9Qg+bbyjTnVvmmR5TUcMivByAt5MEIqWslo1aAKVvb+zQ+8yfvZ/M5ZblSVs6pnotJYPmIu
+ q3aCQ8=
+X-Received: by 2002:a05:600c:a111:b0:488:a2ac:a34c with SMTP id
+ 5b1f17b1804b1-48a9863cde5mr171139505e9.12.1777996135585; 
+ Tue, 05 May 2026 08:48:55 -0700 (PDT)
 Received: from lion.localdomain (p4fc3dd86.dip0.t-ipconnect.de.
  [79.195.221.134]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-48d182ee923sm20305955e9.27.2026.05.05.08.48.52
+ 5b1f17b1804b1-48d182ee923sm20305955e9.27.2026.05.05.08.48.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 05 May 2026 08:48:52 -0700 (PDT)
+ Tue, 05 May 2026 08:48:55 -0700 (PDT)
 From: Casey Connolly <casey.connolly@linaro.org>
-Date: Tue, 05 May 2026 17:48:44 +0200
-Subject: [PATCH v6 4/6] doc: board/qualcomm: update docs for new u-boot.mbn
- target
+Date: Tue, 05 May 2026 17:48:45 +0200
+Subject: [PATCH v6 5/6] mach-snapdragon: add kconfig infra for building MBN
+ files
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260505-b4-qcom-tooling-improvements-v6-4-a5fb673f4af6@linaro.org>
+Message-Id: <20260505-b4-qcom-tooling-improvements-v6-5-a5fb673f4af6@linaro.org>
 References: <20260505-b4-qcom-tooling-improvements-v6-0-a5fb673f4af6@linaro.org>
 In-Reply-To: <20260505-b4-qcom-tooling-improvements-v6-0-a5fb673f4af6@linaro.org>
 To: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>, 
@@ -95,13 +95,13 @@ Cc: Tom Rini <trini@konsulko.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
  Michal Simek <michal.simek@amd.com>, David Lechner <dlechner@baylibre.com>
 X-Mailer: b4 0.16-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=7490;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2455;
  i=casey.connolly@linaro.org; h=from:subject:message-id;
- bh=FkuB4/AyXxwek3gq8MkKF4q+Zmv9ETHEGEa+/MeHAgM=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhsxfgrEiHJZx+2bd8eD3939/69jZLlHRQ7MFz87/2nGqc
- cmJ3r0/OkpZGAQ5GGTFFFnETyyzbFp72V5j+4ILMHNYmUCGMHBxCsBEYmQZGbZ812PecHyGlti5
- 21d67j9552ZheUEwYN6SNcYTbGepb7vDyLCjlTNsKf9kaSmtp9Mdl7caXdCuffT3gJRB3j/FHX5
- xe4IA
+ bh=xNBl772678bX3pMRK2ILHqAEnKdLM+zFZttaj+nLKJY=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhsxfgrGsCV+9Ty5Uj/+cne8o/IX/8aHNvh131k4KW/A2T
+ atHR+ZZRykLgyAHg6yYIov4iWWWTWsv22tsX3ABZg4rE8gQBi5OAZjI+R6Gv4L5Rdl5oQdE3SaV
+ PC2Z9W9jHZdkQgxfYUD1RLe7LR4XOBgZJk8453n+1bvmy6I8c3c++rLqm1j4FIOnvYKLtE+kfm5
+ eGAgA
 X-Developer-Key: i=casey.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -120,173 +120,72 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Update the build docs to describe building the u-boot.mbn target
-explicitly for some boards. Additionally add a new "signing" page to
-describe the purpose of mkmbn and the MBN format.
+Add a qualcomm specific Makefile fragment to make u-boot.mbn a build
+target and introduce a kconfig option to build it by default on relevant
+platforms via CONFIG_BUILD_TARGET.
 
 Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
 ---
- doc/board/qualcomm/dragonwing.rst | 14 ++++----------
- doc/board/qualcomm/index.rst      |  1 +
- doc/board/qualcomm/rb3gen2.rst    | 30 ++++++++++++++----------------
- doc/board/qualcomm/rdp.rst        |  5 +++--
- doc/board/qualcomm/signing.rst    | 29 +++++++++++++++++++++++++++++
- 5 files changed, 51 insertions(+), 28 deletions(-)
+ Kconfig                          |  1 +
+ arch/arm/mach-snapdragon/Kconfig | 11 +++++++++++
+ board/qualcomm/config.mk         | 14 ++++++++++++++
+ 3 files changed, 26 insertions(+)
 
-diff --git a/doc/board/qualcomm/dragonwing.rst b/doc/board/qualcomm/dragonwing.rst
-index d48994153095..028ec340d155 100644
---- a/doc/board/qualcomm/dragonwing.rst
-+++ b/doc/board/qualcomm/dragonwing.rst
-@@ -19,20 +19,15 @@ Installation
- First, setup ``CROSS_COMPILE`` for aarch64. Then, build U-Boot for ``QCS615``, ``QCS8300`` or ``QCS9100``::
+diff --git a/Kconfig b/Kconfig
+index 8428d039a1c0..183c8096030d 100644
+--- a/Kconfig
++++ b/Kconfig
+@@ -557,8 +557,9 @@ config BUILD_TARGET
+ 	default "u-boot-with-spl.sfp" if ARCH_SOCFPGA_GEN5
+ 	default "u-boot.itb" if !BINMAN && SPL_LOAD_FIT && (ARCH_ROCKCHIP || \
+ 				RISCV || ARCH_ZYNQMP)
+ 	default "u-boot.kwb" if (ARCH_KIRKWOOD || ARMADA_32BIT) && !SPL
++	default "u-boot.mbn" if ARCH_SNAPDRAGON && QCOM_GENERATE_MBN
+ 	help
+ 	  Some SoCs need special image types (e.g. U-Boot binary
+ 	  with a special header) as build targets. By defining
+ 	  CONFIG_BUILD_TARGET in the SoC / board header, this
+diff --git a/arch/arm/mach-snapdragon/Kconfig b/arch/arm/mach-snapdragon/Kconfig
+index d3de8693b5a8..6329cbb9215e 100644
+--- a/arch/arm/mach-snapdragon/Kconfig
++++ b/arch/arm/mach-snapdragon/Kconfig
+@@ -41,5 +41,16 @@ config SYS_CONFIG_NAME
+ 	  This option contains information about board configuration name.
+ 	  Based on this option include/configs/<CONFIG_SYS_CONFIG_NAME>.h header
+ 	  will be used for board configuration.
  
-   $ export CROSS_COMPILE=<aarch64 toolchain prefix>
-   $ make qcom_qcs8300_defconfig
--  $ make -j8 u-boot.mbn
-+  $ make -j8
- 
- Although the board does not have secure boot set up by default,
--the firmware still expects firmware ELF images to be "signed". The signature
--does not provide any security in this case, but it provides the firmware with
--some required metadata.
-+the firmware still expects firmware ELF images to be "signed" in the MBN format.
-+This is handled automatically with mkmbn (see :doc:`signing` for more details).
- 
--To "sign" ``u-boot.elf`` you can use e.g. `qtestsign`_::
--
--  $ qtestsign -v6 aboot -o u-boot.mbn u-boot.elf
--
--Then flash the resulting ``u-boot.mbn`` to the ``uefi_a`` partition
-+Just flash the resulting ``u-boot.mbn`` to the ``uefi_a`` partition
- on your device with ``fastboot flash uefi_a u-boot.mbn``.
- 
- U-Boot should be running after a reboot (``fastboot reboot``).
- 
-@@ -43,7 +38,6 @@ A tool like bkerler's `edl`_ can be used for flashing with the firehose loader (
- the firehose loader can be obtained from `dragonwing IQ9 bootbinaries`.) ::
- 
- $ edl.py --loader /path/to/prog_firehose_ddr.elf w uefi_a u-boot.mbn
- 
--.. _qtestsign: https://github.com/msm8916-mainline/qtestsign
- .. _edl: https://github.com/bkerler/edl
- .. _dragonwing IQ9 bootbinaries: https://artifacts.codelinaro.org/ui/native/qli-ci/flashable-binaries/qimpsdk/qcs9075-rb8-core-kit
-diff --git a/doc/board/qualcomm/index.rst b/doc/board/qualcomm/index.rst
-index 3238a68e859b..b7637b3c0439 100644
---- a/doc/board/qualcomm/index.rst
-+++ b/doc/board/qualcomm/index.rst
-@@ -13,4 +13,5 @@ Qualcomm
-    rb3gen2
-    iq8
-    phones
-    rdp
-+   signing
-diff --git a/doc/board/qualcomm/rb3gen2.rst b/doc/board/qualcomm/rb3gen2.rst
-index 518d01c4c3a3..329baa8d1f3a 100644
---- a/doc/board/qualcomm/rb3gen2.rst
-+++ b/doc/board/qualcomm/rb3gen2.rst
-@@ -17,34 +17,32 @@ Installation
- First, setup ``CROSS_COMPILE`` for aarch64. Then, build U-Boot for ``qcm6490``::
- 
-   $ export CROSS_COMPILE=<aarch64 toolchain prefix>
-   $ make qcm6490_defconfig
--  $ make -j8
-+  $ make -j8 DEVICE_TREE=qcom/qcs6490-rb3gen2
- 
--This will build ``u-boot.elf`` in the configured output directory.
-+This will build ``u-boot.mbn`` in the configured output directory.
- 
--Although the RB3 Gen 2 does not have secure boot set up by default,
--the firmware still expects firmware ELF images to be "signed". The signature
--does not provide any security in this case, but it provides the firmware with
--some required metadata.
--
--To "sign" ``u-boot.elf`` you can use e.g. `qtestsign`_::
--
--  $ qtestsign -v6 aboot -o u-boot.mbn u-boot.elf
-+Although the board does not have secure boot set up by default,
-+the firmware still expects firmware ELF images to be "signed" in the MBN format.
-+This is handled automatically with mkmbn (see :doc:`signing` for more details).
- 
- Then install the resulting ``u-boot.mbn`` to the ``uefi_a`` partition
- on your device with ``fastboot flash uefi_a u-boot.mbn``.
- 
- U-Boot should be running after a reboot (``fastboot reboot``).
- 
--Note that fastboot is not yet supported in U-Boot on this board, as a result,
--to flash back the original firmware, or new versoins of the U-Boot, EDL mode
--must be used. This can be accessed by pressing the EDL mode button as described
--in the Qualcomm Linux documentation. A tool like bkerler's `edl`_ can be used
--for flashing with the firehose loader binary appropriate for the board.
-+Note that fastboot is not yet supported in U-Boot on this board, as a result, to flash
-+back the original firmware, or new versoins of the U-Boot, EDL mode must be used. This
-+can be accessed by holding the EDL button while powering on as described in the
-+Qualcomm Linux documentation.
++config QCOM_GENERATE_MBN
++	bool "Generate an MBN-compatible ELF binary"
++	default n
++	help
++	  Enable this if you intend to flash U-Boot as a first-stage bootloader.
++	  The build system will generate a board-specific ELF file with the appropriate
++	  MBN hash segments and test keys.
 +
-+A tool like bkerler's `edl`_ can be used for flashing with the firehose loader from the `RB3 Gen 2 bootbinaries`. ::
++	  New platforms can be added to tools/qcom/mkmbn/mkmbn.py if they aren't already
++	  supported.
 +
-+  $ edl.py --loader /path/to/prog_firehose_ddr.elf w uefi_a u-boot.mbn
- 
--.. _qtestsign: https://github.com/msm8916-mainline/qtestsign
- .. _edl: https://github.com/bkerler/edl
-+.. _RB3 Gen 2 bootbinaries: https://artifacts.codelinaro.org/artifactory/qli-ci/software/chip/qualcomm_linux-spf-1-0/qualcomm-linux-spf-1-0_test_device_public/r1.0_00039.2/QCM6490.LE.1.0/common/build/ufs/bin/QCM6490_bootbinaries.zip
- 
- Usage
- -----
- 
-diff --git a/doc/board/qualcomm/rdp.rst b/doc/board/qualcomm/rdp.rst
-index 99cf8eba57ce..4e63fe624b8a 100644
---- a/doc/board/qualcomm/rdp.rst
-+++ b/doc/board/qualcomm/rdp.rst
-@@ -16,11 +16,12 @@ Installation
- First, setup ``CROSS_COMPILE`` for aarch64. Then, build U-Boot for ``IPQ9574``::
- 
-   $ export CROSS_COMPILE=<aarch64 toolchain prefix>
-   $ make qcom_ipq9574_mmc_defconfig
--  $ make -j8
-+  $ make -j8 u-boot.mbn
- 
--This will build ``u-boot.elf`` in the configured output directory.
-+This will build the signed ``u-boot.mbn`` in the configured output directory. More information
-+about image signing can be found in :doc:`signing`.
- 
- The firmware expects the ELF images to be in MBN format. The `elftombn.py` tool
- can be used to convert the ELF images to MBN format.
- 
-diff --git a/doc/board/qualcomm/signing.rst b/doc/board/qualcomm/signing.rst
+ endif
+diff --git a/board/qualcomm/config.mk b/board/qualcomm/config.mk
 new file mode 100644
-index 000000000000..317cd57cefee
+index 000000000000..769e4a51ca01
 --- /dev/null
-+++ b/doc/board/qualcomm/signing.rst
-@@ -0,0 +1,29 @@
-+.. SPDX-License-Identifier: GPL-2.0+
-+.. sectionauthor:: Casey Connolly <casey.connolly@linaro.org>
++++ b/board/qualcomm/config.mk
+@@ -0,0 +1,14 @@
++# SPDX-License-Identifier: GPL-2.0+
++#
++# (C) Copyright Linaro Ltd.
++#
++# Qualcomm specific make target for MBN signed ELF files.
++#
 +
-+Qualcomm Image Signing
-+======================
++# Create Qualcomm signed elf images
++CMD_MKMBN = $(srctree)/tools/qcom/mkmbn/mkmbn.py
++quiet_cmd_mkmbn = MBN     $@
++      cmd_mkmbn = $(CMD_MKMBN) $<
 +
-+On some boards like the RB3 Gen 2 where U-Boot runs as the first stage bootloader,
-+it must be in a Qualcomm specific signed ELF format called ``mbn``.
-+
-+For most boards this is handled automatically with the ``mkmbn`` tool in the U-Boot
-+build system. If you're bringing up a new platform which will run U-Boot as the first
-+stage bootloader, you may need to add your board and platform compatible string and
-+the load address used by your board to the ``boards`` table in ``tools/qcom/mkmbn/mkmbn.py``.
-+
-+For example:
-+
-+.. code-block:: python
-+
-+	boards: dict[bytes, int] = {
-+		# Exact matches for boards, these are preferred
-+		# Don't forget the null terminator!
-+		b"qcom,qcs6490-rb3gen2\0": MbnData(0x9FC00000, 6, SwId.aboot),
-+	...
-+	}
-+
-+
-+When you run make to build the ``u-boot.mbn`` target, ``mkmbn`` will inspect the DTB in your
-+U-Boot image and try to match the compatible to the table, then it will build an ELF image and
-+hash/sign it per the MBN spec.
++u-boot.mbn: u-boot.bin FORCE
++	$(call if_changed,mkmbn)
 
 -- 
 2.53.0
