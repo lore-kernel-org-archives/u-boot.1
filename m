@@ -4,143 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55739CD13DA
-	for <u-boot@archiver.kernel.org>; Tue,  5 May 2026 03:52:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6858BFF885A
+	for <u-boot@archiver.kernel.org>; Tue,  5 May 2026 04:26:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 80E5B8469A;
-	Tue,  5 May 2026 05:51:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
+	by phobos.denx.de (Postfix) with ESMTP id A736C84690;
+	Tue,  5 May 2026 06:26:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="q2nZMjrO";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="dvyQIJmm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 15C55846B4; Tue,  5 May 2026 05:51:57 +0200 (CEST)
-Received: from SN4PR0501CU005.outbound.protection.outlook.com
- (mail-southcentralusazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c10d::3])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 4F5AF8469A; Tue,  5 May 2026 06:26:38 +0200 (CEST)
+Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
+ [IPv6:2607:f8b0:4864:20::334])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5450A84661
- for <u-boot@lists.denx.de>; Tue,  5 May 2026 05:51:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 372848468B
+ for <u-boot@lists.denx.de>; Tue,  5 May 2026 06:26:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=altera.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tien.fong.chee@altera.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=hpJ+uVLKV2M7ZGQsdZtPpBSdAybFprBijvbgOYJFXpMs7APJrnv+Z74mcEaYC8Qzo6N6PxpYpofgeqplI2Psq9jGI+BIT7B02ZiFy/UdL1xbdFoB1lgo9Z4QrZWVaWXhP6Q6a1M94Pz1QmnUgrf/0OVP4BtpwEiY4mB+lMAmNd3uTEFZvaKDF9cyIWtOlz6Hyj0p37Y8ErYyRAwmyT7Si6VOOYJqX45kWCDrhdJMFiaoXjyw0flyel5UXpdwsjDzWRSAA/XONPWa07xbFAQwxHyrLx/nikiGdcq+4Abj3pAQT5cqNEYAhnYef2viBhpiziSVd49EG9LDbgeU/RDN8Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=2b6+9vWAf0wsi/e1opIUr/e7i8y/g7AyY0UaT00VHoQ=;
- b=rX6olnqO1V4DWnOL0+WVGS+Xi+geTrPcb21KaKlLlFA7aaozx1PO8zeM9TulO/nozOZKv3P/mCCEE2EWqaqgGqTH2mF6Sk3HpP4xW6r/4+teyZbxFvSsqnj8Rfsd0uVmRTDi6FuBRSxL1atgdrcNq1IMq6q4/TPefvvFusq0rdUkhc3K53BEnSX2opdH+UeAfFsMz6I2sDlb4gUKvRr4qGG76lbggKby+mGSt5fRqmV8EkIjTQvHoIWNDs53WE6tfnaVgcaL7IRAuMnUxt//gRhG2MqZS8z93/fA1I4qs5OsJLTsfOtniw9aipfCDy/hmDRK24wQDZsUS1fLb5hMPw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
- dkim=pass header.d=altera.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=2b6+9vWAf0wsi/e1opIUr/e7i8y/g7AyY0UaT00VHoQ=;
- b=q2nZMjrOzhh2dYd13Pk/HZqtvQjl/D0gUkdtkFPPMTtHzFLY1FdycYoiVcemP4mn+g/7FymmggAwY07GMfxRcVQPYGIxQ1eq1jWNYPWVHdBuneSlkFFTPW9ryCP+GZfFA0JSPuRhMLQf7EBwIVdy/IgbD8CFsbtnZz+NV0/0msc9cfjd/CIk5nUPVu3o8b2iujuG4SZN+yaibiUC/g7e5ZE7b5iV+mw7j1XOUuKo4AozfieRYKEXLTh7Us5ctat4zZTbQNea+GSV74ryoj5v0YhX/28gWRPoryiPgucnHNT1ACm/htFH6mJmwVktvcOGSDe0DHaskyVEiT6h96zS3A==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=altera.com;
-Received: from LV8PR03MB8137.namprd03.prod.outlook.com (2603:10b6:408:295::8)
- by PH7PR03MB6971.namprd03.prod.outlook.com (2603:10b6:510:12e::20)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9870.25; Tue, 5 May
- 2026 03:51:50 +0000
-Received: from LV8PR03MB8137.namprd03.prod.outlook.com
- ([fe80::efa9:4b97:3b4a:8235]) by LV8PR03MB8137.namprd03.prod.outlook.com
- ([fe80::efa9:4b97:3b4a:8235%4]) with mapi id 15.20.9870.023; Tue, 5 May 2026
- 03:51:50 +0000
-Message-ID: <cf24618c-2913-4bbe-868f-ea543077fe78@altera.com>
-Date: Tue, 5 May 2026 11:51:38 +0800
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/2] arm: dts: socfpga: Enable 8-bit embedded device
- support in Agilex5 eMMC device tree
-To: tze.yee.ng@altera.com, u-boot@lists.denx.de
-Cc: Marek Vasut <marex@denx.de>,
- Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
- Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>,
- Jaehoon Chung <jh80.chung@samsung.com>,
- Dinesh Maniyam <dinesh.maniyam@altera.com>,
- Chen Huei Lok <chen.huei.lok@altera.com>,
- Kok Kiang Hea <kok.kiang.hea@altera.com>, alif.zakuan.yuslaimi@altera.com,
- Boon Khai Ng <boon.khai.ng@altera.com>
-References: <cover.1777344421.git.tze.yee.ng@altera.com>
- <aa3bb421d60965e147f201d1739830b42ccd7124.1777344421.git.tze.yee.ng@altera.com>
-Content-Language: en-US
-From: "Chee, Tien Fong" <tien.fong.chee@altera.com>
-In-Reply-To: <aa3bb421d60965e147f201d1739830b42ccd7124.1777344421.git.tze.yee.ng@altera.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: SG2P153CA0004.APCP153.PROD.OUTLOOK.COM (2603:1096::14) To
- LV8PR03MB8137.namprd03.prod.outlook.com (2603:10b6:408:295::8)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x334.google.com with SMTP id
+ 46e09a7af769-7dbe437b072so3019873a34.2
+ for <u-boot@lists.denx.de>; Mon, 04 May 2026 21:26:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1777955195; x=1778559995; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=xdmJf6AEMk9wps6VJvQp0vNPTv0wCGKkfjTJ3jZ+Nck=;
+ b=dvyQIJmmEQX62xSZJnJrtY3/ttCHhlQi4+IDYVJ+UBMFrCfdeEcRhg4YjD3TeIkMJO
+ XdSM5UxFasON3XoelGWZw2oVPCGXF9VNPjpQ1xtuckcbXoAdJocFdlobmtqHckG5L7Kb
+ zqnT7LRf8PzAh0KCtdc4UKKLC27CfdT9Ln2EY=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1777955195; x=1778559995;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=xdmJf6AEMk9wps6VJvQp0vNPTv0wCGKkfjTJ3jZ+Nck=;
+ b=b7jf3chV6rxDIv7T0Fl0lRZ7DKj9H9JJjnI89ihSzFNtnwXYW5LoisxClp24RIZ1BB
+ DCsCiRuJsZ4+YkPuNu9uWhGcIWc0T/kDxEp4vTkmQL1AhQxGFof76lnqJzLlbZyPhT+X
+ sEAg/mnZZNLwQCMh50dzV62uza9dm0IwYfH1pSw1UnYjsuqzhf56zDqVNj9UJR3M2iE6
+ 1mwLNoCYKmb5lv6BDFEzQ2XCIMXXVWJ39sp37QZefDHOPg5Qd3QFsHj4JPBxzXOh6U0C
+ Kp2ONA9g/OhY9qkg3wdtIs7ljKaKWRTEHYU5F19KqFeX7tYoeMOuGCdI7AJHOGzGw6LZ
+ mu0Q==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ93K78BlOTww0UQI0BYQ6POJ1y8ODEedqnueiMxjHbotyHvmv4O7yBouUKDsnIy7V+x/uVFVTI=@lists.denx.de
+X-Gm-Message-State: AOJu0Yyk9obgWOFdxiBG2jRTKHNHY32xiOGWyIAfR/gF/RJ8VJ077Noh
+ KjjvHP9LVlCeMeHmHv/hmrqXZ0KNlLcER2yZshvV2L7D89TO/Iox/LhiJI6jaAWKnKw=
+X-Gm-Gg: AeBDievRqfn/+jvz1LLcQKuasWMnQe0FyAWD98MBhB/HEl6ZLmNjKqdL+NMdk45GZpL
+ 1B/BmkAAUOlkZnLaOpGCe8lhzGBM/v3XopjMVWpanRyQW6AoLk8/JfPjzyv2h2W+XSo3ZVo3mB2
+ vK+/jORJFFrEChWMj8qW9QrLY+q0/o8dweXQVbRf961wLXasQbJ0riiTO8tjp63KPpeR9a4Ue5N
+ a3Hn0fHcy9iUs08DW8pQUfNbrMukDmr3jbRO1RW9FnwPS2Hi01AUhhsVtIrPGa2/dohUnk6za5S
+ lV4AHS+AfREIGciWff6LB1rfalGvqC5oU/kzV8Dpx9YEgGaxMbs1+D2niroGTuBOSv5yVB39anv
+ l1qHcdok2mCh6CAuCqaa4y6G24hsl4khitRWpynRYcPIlZFBFakc2YEL0BPIV2ezNuScKTcXR9i
+ UXev550ZdBpkvkKy0NykeJFicAbMPhG5O9096uoxITaA2BP0S0/hFswn1yn6fvb8M6hfRScQ5D4
+ WvVPcWVTGfidxGQ9kJxhV+hO3ri/WvnbgLWDHVZj2zoYPpvZ21HudVH3C+rHw==
+X-Received: by 2002:a05:6820:6aea:b0:694:21fa:4ef2 with SMTP id
+ 006d021491bc7-6998d2512fbmr642159eaf.43.1777955194779; 
+ Mon, 04 May 2026 21:26:34 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
+ [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-69689441144sm7778855eaf.2.2026.05.04.21.26.32
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 04 May 2026 21:26:33 -0700 (PDT)
+Date: Mon, 4 May 2026 22:26:28 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Daniel Palmer <daniel@thingy.jp>
+Cc: visitorckw@gmail.com, angelo@kernel-space.org, bmeng.cn@gmail.com,
+ sjg@chromium.org, u-boot@lists.denx.de
+Subject: Re: [PATCH v5 0/8] Add virtio-mmio support to m68k virt machine
+Message-ID: <20260505042628.GN1614990@bill-the-cat>
+References: <20260416093927.602613-1-daniel@thingy.jp>
+ <20260504220957.GM1614990@bill-the-cat>
+ <CAFr9PXkDJOP4KF5+=Bmyo-LaPRe0uwU05pgTALOUWPSLCPzULQ@mail.gmail.com>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: LV8PR03MB8137:EE_|PH7PR03MB6971:EE_
-X-MS-Office365-Filtering-Correlation-Id: 5510c26b-83cc-48b1-a50c-08deaa59a13b
-X-MS-Exchange-AtpMessageProperties: SA
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|366016|1800799024|376014|18002099003|22082099003|56012099003|55112099003;
-X-Microsoft-Antispam-Message-Info: gF5MAiFk8joocmvVtbdCG1gePxPsOQM2RsVwv9IJ7DvLJp0rTy8R1J6yawxn/zaXltRUFco6Kp1TxjvOAfCFlfm42m9EfldhLzclV+VGUQFQm7SvbJY6QTq6on7HS2HEjLRTtIzYtRvVkl0v49Igz5mlwefJHZ1My6eG7Y6pU7KYSXNDGejda/cY8vdktAbFFwPcS/Z5CM/4LjRPuZrjKJeufZ9vXI4Lysc0yOc+m+k+T4JXVc7j98168WggPp4NUvi5ayZHRYodS/1VW4voKPs2D/z5lycgk2oHpDcH6cQsRyjGnyxdCrm1Rn7/URuJ2kLFE4Su7UcZAiKcBhZjxm9g4fjX8j1OQksvA+QwPw8X820f+WrO+r4Vo8DnjZ6V0szqVvNxJjWSECk0NMGxHF8zdCKsqXBkS0CQHbp50mYTz4ucTSXv+0Cxas9z8LlClvVBIUSNKkuwnEUh4kRjMAXBl7r6kZ+cvhD7muiGgIsSZXWVJ8mguYC6qskS2oPdGX3L9Ed4xosshFJZR1JvV/fX1eH2iekoLmnBgPp0OgqV+EpJu8X8ts9s6iIONNttmkmWTX4NrywF4bLpn+vCp5OdsJW2AqZuvmnbmBuWuJfm1skuuxwsyBpXmk6Ho63INWQqg3igRR3F3Af/+SC8kXF4MEpBQuS+NJrDD9Vg8cQfKtNoUcPIPTPH+IIamJuM
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:LV8PR03MB8137.namprd03.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(1800799024)(376014)(18002099003)(22082099003)(56012099003)(55112099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?TE5mWEFpRWJKc2dLMy82bFNNdTFBV1k3YjRrbzRoMG4yUGFUcVB1M09NMWlG?=
- =?utf-8?B?NGlGd3VqZ3pkTjUvMXRsU0NsbGZtdEc0RWhCTHM0cnhhQ2VLaitjMi9CRW4v?=
- =?utf-8?B?TkRRQzBnZEFwMm9PNUkwQk42U0lzU2JxUWRZTVpJZXZCbXJhN1BqY3IzMjFS?=
- =?utf-8?B?b3RGT2Q5dG85SFpaQ0FrQVdydXU5N004WWdVUnJ0S0lPR2xJc1BEL1ZvVnVO?=
- =?utf-8?B?V2VSODkzWDNIdzZzalFPUFU0djNQUC9qTkh1R1UyajcwQ1Iya0RXZjdQcC80?=
- =?utf-8?B?Yll4ZmNEZzM3NFRXQStQaWNLeXk5K003ZkFWYjliS3V3YzZXNWFWd3pwUXNx?=
- =?utf-8?B?aGgyU09GMDJBL3ZkamhHL3A4b1BabUNSSm1xTVVBTzNDaGpVczZHWGI5OE5r?=
- =?utf-8?B?QnVVaElqS0sySnRHcHl0dy8wTW9ycmorUXZ0MjQ4UXU5MW1xSTVSZ1ZXa0xj?=
- =?utf-8?B?bWJIRjJpZkJ1L2I4cnJDOGN2Zlg2T3FsWlh0Q1VDMkE4bW81WkxyZUd4M3JQ?=
- =?utf-8?B?eDJXeVlJeFZNbEFkQSt0QW9SeWFwM08xQmpWN0syRkhEYytVUWNRKzJSdFZJ?=
- =?utf-8?B?MGNWdDV0Y3VqUUJmSHluNUtvU1QzSDIrKzkwVWJqTGV0VGtEMTBYWW9DRnJk?=
- =?utf-8?B?VDkzMlcrREY4ZDh1TkVGK2IyQWo4SUtpUkJrNU9OREVFd1hRcjlVQVlDWTEy?=
- =?utf-8?B?aXpRMFdreGtYTU93cmtiTi9YdGprT3ZMQ2ZrcVFEQVZYelRyWllEZHFPN002?=
- =?utf-8?B?a2Y0cnlqcWJjM2RnWkc5M2Z6QU1VUmR5Mk9BRWVFTHVjTklyS1dCQnhYTzNB?=
- =?utf-8?B?SG4wS3djbVAvTXpsRXVJSmJBRWI4Y1BORGpNVFVvYUdteE9MT2RncUlTK1Fk?=
- =?utf-8?B?NHRiNWwrL0tvQzJnYlZWeUtUbmdDeDJqL0FvdjJZL1BETlhtZzNZOC90TGEx?=
- =?utf-8?B?UlFReXNVYVVPdEVnUmNUNHNoYVFXY2ZDaVVYQkNNbENMQVhkbXBTZkxKTkNG?=
- =?utf-8?B?bWNSMmFLQ2p3bER4c1FlQ0poNWN6dGFPajFBQmdTUVVRaEExMCtQNUdla3hH?=
- =?utf-8?B?b1g1Yzc0TTZ6UjVQWmlKRUVVN1V5QUppcFMzWjE4OWpiOHB5QkFWUksxYWo4?=
- =?utf-8?B?Zm5zUG9naWh0QS9OaTdxaXQxRUVPYzBSZ1JrQU9ZL2dNdCtSRXVXNVo0YVpW?=
- =?utf-8?B?bDJoaGZJM0xnL29kSlRFTGpveFdGQlNSMktjQll2dy9YYVRWVWNYblhrSlVP?=
- =?utf-8?B?VHhZcTgwckZ5OTQ0UzNCY0FIRmd6OW1IT2dIVncvQ2dmVndYNlplZkdIbjJJ?=
- =?utf-8?B?TVdZd3hXdmM0eEVSNVJJYzJOQk1mVlI3cHNuMGFYYmpYcCtuSkpjVXZCQS9h?=
- =?utf-8?B?WDd3bldTNERHS1I0bWVzb1VTbEtqV0s5TDVTYUJYdHJkVWt0dlpja25CdTM3?=
- =?utf-8?B?eWY2UVVzTVpVRkloa2NvQzRWbzRxb05EQjE2UjFUT1RtZDJFZUFWUXdQeW1V?=
- =?utf-8?B?SzMzYkw4SEg1eTFmaFFUcU84ZnJYS1pRQTVYRk5CWERzUkJSSzh5MVAwVXVM?=
- =?utf-8?B?blZ4SE9iUHpSMUtWWGR2RTllVVRwWm40aWFqUjRtQ1RZSUIrTVlPRTlvS1M1?=
- =?utf-8?B?bXdwWTN2czRTRjhITmM0U3VQT3NjSTMrUmJ4YkN1ZjJQSkt3ek5kZEQ0c0xR?=
- =?utf-8?B?MzR4Sm1IL2hLZ2trcHF3cyswZWhWemEvTklFYVdaWFRLU1pUVnltYTZBMlBn?=
- =?utf-8?B?V0VMZUF4VEpCUHBTb2dBOU1LQ0lXUGxnOGRWTk9oa0xxRVNYZ0RldTJLTDB6?=
- =?utf-8?B?RXdEeUhVYi85R0I2VVZrRjFtQ1MwcDZ1bkdQS09WQ1J2SXVoMWFkbWw2MXlF?=
- =?utf-8?B?V3Y2elhoc2grc1JkcmdQVkkvUDJDL25Gc0RxTjFBeTlXczJta0lFaFl4TS8x?=
- =?utf-8?B?RlZtV05GRXM2ZEQ3NExMQzZqZ2VNOGRhSE9CUTBFYnU3NnV0a3g0ZDk4bEFx?=
- =?utf-8?B?NGFwMHdHbFhIL1UzdEtXNVpzQnphS01NdjR0b0Rmb3gvaXIvbm1kR01RT29J?=
- =?utf-8?B?YmVGNU5weXpDVFM3N2xpd2dWc0xiVzJielc2aHd2dDAyTTVJNkpsd3pZVmh6?=
- =?utf-8?B?ZzRjT0FVS1ZxNHB0TDdWK0hURmhJYmlDK3ZpdEtLaDBFUjRYUkVLY250MVNB?=
- =?utf-8?B?aDcrVng0bW9KS2NyZ29vNHcvWnl6bi85VGFQdWtLY0swaGhVTC9GdWIwdWhM?=
- =?utf-8?B?dFdtY3Bia2xSK2lYM1dZdjN1K1RJZlV5SDl0empLakQ3Q3BtS0ZuQ2doL0Nv?=
- =?utf-8?B?emZQaUZjZWwzS2FpbzNscTNPMUhsZU0xZmViNzVOMGM5a2VyVmlzblVNQkxy?=
- =?utf-8?Q?aYQLBbYaixCXBYkI=3D?=
-X-OriginatorOrg: altera.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5510c26b-83cc-48b1-a50c-08deaa59a13b
-X-MS-Exchange-CrossTenant-AuthSource: LV8PR03MB8137.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 May 2026 03:51:49.8213 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: cjjfmYAEZ0YHwXJ5BdvuNNRiCMgqWQDEHjenwh39YWI+01qS6eMphF6I06QXDyLLDFRXXCuuG0eyZb8ReSdDHa50B9nkuHtUBWtR4k0Azco=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR03MB6971
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="PiqCVUOYBCZmWi1D"
+Content-Disposition: inline
+In-Reply-To: <CAFr9PXkDJOP4KF5+=Bmyo-LaPRe0uwU05pgTALOUWPSLCPzULQ@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -157,83 +101,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tze Yee,
 
+--PiqCVUOYBCZmWi1D
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On 28/4/2026 10:53 am, tze.yee.ng@altera.com wrote:
-> From: tzeyeeng <tzeyee.ng@altera.com>
->
-> The eMMC device tree inherits the configuration from
-> socfpga_agilex5_socdk.dts.
->
-> Changes:
-> - Set SDHCI Capabilities bit18 to enable 8-bit embedded device support.
->
-> Signed-off-by: tzeyeeng <tzeyee.ng@altera.com>
->
-> ---
-> Changes in v2:
-> - Remove /delete-property/ sd-uhs-sdr50 and /delete-property/
->    sd-uhs-sdr104 from mmc node
-> - Fix wording in commit message
-> - Update commit title
-> ---
->   arch/arm/dts/socfpga_agilex5_socdk_emmc.dts | 5 ++---
->   1 file changed, 2 insertions(+), 3 deletions(-)
->
-> diff --git a/arch/arm/dts/socfpga_agilex5_socdk_emmc.dts b/arch/arm/dts/socfpga_agilex5_socdk_emmc.dts
-> index 92ff8b4acf2..52aa92e4292 100644
-> --- a/arch/arm/dts/socfpga_agilex5_socdk_emmc.dts
-> +++ b/arch/arm/dts/socfpga_agilex5_socdk_emmc.dts
-> @@ -18,7 +18,6 @@
->   };
->   
->   &mmc {
-> -	/delete-property/ sd-uhs-sdr104;
+On Tue, May 05, 2026 at 11:11:24AM +0900, Daniel Palmer wrote:
+> Hi Tom,
+>=20
+> On Tue, 5 May 2026 at 07:10, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > On Thu, Apr 16, 2026 at 06:39:19PM +0900, Daniel Palmer wrote:
+> >
+> > > Lets start making the m68k virt machine support useful.
+> > >
+> > > First we need to fix some m68k endian issues.
+> > >
+> > > Then allow virtio mmio driver instances to be created with
+> > > platform data and fix a minor endian issue.
+> > >
+> > > Finally, add the code for the board to create the instances.
+> >
+> > We get this in CI:
+> > drivers/virtio/virtio_mmio.c:359:15: warning: cast to 'void *' from
+> >  smaller integer type 'phys_addr_t' (aka 'unsigned int') [-Wint-to-void=
+-pointer-cast]
+> >   359 |         priv->base =3D (void __iomem *)plat->base;
+> >       |                      ^~~~~~~~~~~~~~~~~~~~~~~~~~                =
+                      1 warning generated.
+> >
+> > With clang, please fix.
+>=20
+> That seems to be a 64bit cpu that has 32bit phys_addr_t
+> (CONFIG_PHYS_64BIT=3Dn)? Would this be acceptable:
+> priv->base =3D (void __iomem *)(uintptr_t)plat->base
+>=20
+> That would extend plat->base up to 64bits where needed and I guess
+> that is ok because if you have a 64bit cpu but a 32bit phys_addr_t you
+> don't have anything above 4GB that you want to access?
 
+Yes, we're building on sandbox when this comes up, and that sounds fine.
+Thanks!
 
-I have a concern regarding the v2 patch series that I would like you to 
-verify.
+--=20
+Tom
 
-In v2, patch 1/2 moves sd-uhs-sdr50 and sd-uhs-sdr104 from 
-socfpga_agilex5_socdk-u-boot.dtsi into socfpga_agilex5_socdk.dts as a 
-new &mmc node.
+--PiqCVUOYBCZmWi1D
+Content-Type: application/pgp-signature; name="signature.asc"
 
-Since socfpga_agilex5_socdk_emmc.dts uses #include 
-"socfpga_agilex5_socdk.dts" as a C preprocessor paste,
+-----BEGIN PGP SIGNATURE-----
 
-these SD UHS properties would be compiled into the eMMC DT, which is 
-incorrect.
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaflxcQAKCRAr4qD1Cr/k
+ChBMAQCb5PM/LCcyxN766lVH1eMpsO1pQ/1xPml88SNghnIj/gD/VdTjOmnpJmj9
+8rtFbzxZ+QU4E3dnW+X1NiAyPazXJwY=
+=xR6Q
+-----END PGP SIGNATURE-----
 
-In v1, those properties lived only in the dtsi, which is not applied to 
-the eMMC build since the eMMC build uses its own separate 
-socfpga_agilex5_socdk_emmc-u-boot.dtsi.
-
-This means the eMMC compiled DT was clean in v1.
-
-To verify this, please perform the following test:
-
-1. Revert socfpga_agilex5_socdk_emmc.dts back to its v1 state.
-
-2. Remove the /delete-property/ lines for both sd-uhs-sdr50 and 
-sd-uhs-sdr104 from socfpga_agilex5_socdk_emmc.dts.
-
-3. Build the eMMC DT and inspect the compiled .dtb (e.g. via dtc -I dtb 
--O dts).
-
-4. Confirm whether sd-uhs-sdr50 and sd-uhs-sdr104 are absent from the 
-eMMC compiled DT.
-
-If they are absent, it confirms that the /delete-property/ lines in the 
-eMMC DTS were always no-ops.
-
-In that case, the correct fix is simply to remove those no-op 
-/delete-property/ lines that were introduced in v1 patch 2/2,
-
-without moving any properties out of the dtsi into the base DTS.
-
-
-Best regards,
-
-Tien Fong
-
+--PiqCVUOYBCZmWi1D--
