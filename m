@@ -4,108 +4,145 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A581FF885A
-	for <u-boot@archiver.kernel.org>; Tue,  5 May 2026 11:25:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27302FF885A
+	for <u-boot@archiver.kernel.org>; Tue,  5 May 2026 11:29:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CF176848A7;
-	Tue,  5 May 2026 13:25:40 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id A37D88489F;
+	Tue,  5 May 2026 13:29:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="IInZ6CDM";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="mWxcuPDK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A6D93848B3; Tue,  5 May 2026 13:25:39 +0200 (CEST)
-Received: from mail-yx1-xb12a.google.com (mail-yx1-xb12a.google.com
- [IPv6:2607:f8b0:4864:20::b12a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id D7EA6848A7; Tue,  5 May 2026 13:29:29 +0200 (CEST)
+Received: from GVXPR05CU001.outbound.protection.outlook.com
+ (mail-swedencentralazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c202::7])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F06A08489F
- for <u-boot@lists.denx.de>; Tue,  5 May 2026 13:25:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CADF78488B
+ for <u-boot@lists.denx.de>; Tue,  5 May 2026 13:29:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yx1-xb12a.google.com with SMTP id
- 956f58d0204a3-64d5a7926cfso4952844d50.2
- for <u-boot@lists.denx.de>; Tue, 05 May 2026 04:25:35 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1777980335; cv=none;
- d=google.com; s=arc-20240605;
- b=iFfXFUHSUtwB+UtLrGtXZUIdziYc+kaO0JbtH2uDEBHAvpSMY0rHd5cgUcq3q08v1p
- nxWJoSPJ2lAkwf12LWYRBZ1hi0o/MTIfQWRs8Y6RGkwIf2++N969S+pvYl3c/VFzmjaY
- Iu3fKDa9YHOQclRYYGL9oqp3ao8txVyRctwgZwmJGZQvYjSMS94xCGYoCTaYyFltnB8i
- bEB3folC2FoGhP/37E9n5frQJw93otTCUqvy4+huAH7BwL14VK4+CzvGQ0c60MNmhwqR
- QbG13ORwRcEyCTCvGWauOc1Ki3D2Yk43pMz15n4PQJv3qKF9VIvyrsGhLDI4P/kSjyzM
- XTUg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=EznyehUoq8PLAOW4hQe3oY/3oeyZ01uxcz7vBB0rn9Y=;
- fh=igr8kmD/q1pcdh7Ar1wjn+myTld39sINyohQx5wH7kE=;
- b=AmJIybtRquEE0LyVl0yiZ/5oryJZM81+Cx6Z043DFjvLgaua8JAyluo5uQyMPc9iQ6
- yfH9LTwhK0SiJiCEnWx2vvuhd4Zdr3sM1RUaHMXeHqVzQnKVJnaWI1RI5zJ55/GF+G4/
- +3pg0d4SArKF123JnBhkRWDX7rRSyRJepWQUBRm/akkOP2yz268w9DTVTsrsYkoeY00/
- C7Fm5J/Sk9Tk1TWSI3LcNsxTnMwpPAfrUjC8Gj8e1qyZ0bCFfAktB3ctPcY2DkL1iNLb
- JoSNi61y3uL8NR8j+gORbDA+gKzFeYt9gJW11qag1x8ucHBp38vuH9kPx2PpbgP1drjD
- MiZg==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1777980335; x=1778585135; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=EznyehUoq8PLAOW4hQe3oY/3oeyZ01uxcz7vBB0rn9Y=;
- b=IInZ6CDMSrOH4S2ggh+p+L1bNCDn+Zzl1teJsskC9hGA/3sIXRc0FsAQ55MHyW/aCc
- iFP2ltcZojQd/f05eMCLNwHlR8z84NIP4kYuJ7zsI6wTb62hTOvct2La3lpp4J2BJlqh
- G5eSZCZtOUj+JRiPxh5il+CrbPOKJCDr/fN0b4X9zvBiRKOSAQFEVZGkhJygs45oeCqx
- NtWPGKMvq4Cwl3EB4D+3pMliNVzJZc7pHn15+/9OZMn8CFF2VvRDv4lUCdB9ZdJXBRBt
- PcuHcIgwOstI5Em4QrCHNhm8RM+g4fa4xGnICvn3trxrKlGmRCbFLil8BOWXG/XX4uRD
- Z10Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777980335; x=1778585135;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=EznyehUoq8PLAOW4hQe3oY/3oeyZ01uxcz7vBB0rn9Y=;
- b=SZB3sRN3t5+4sVVvStiW7Z/8EmLKgBNoVxnUUlQb6ckl40ARMaG4EA5Zx32wFAQbIk
- q/diKCAZxjjLAeP8VRTcXQp/y4aHO4N4QmHAldiRIlHrlzF9Xzode2jXpMv5QzTsD9w7
- t0AqauPCpMhAlYLdAFOwq0OBDlMZJLDBgJrQY3xfaMXUiFx167p+RayBZDXYFwikfFp3
- iZ3vbk+/SL6sX37shwDtZPbKyPb3tD9CMUUtN+aQbkBSe+MomucmF8x57isM4p8yshTG
- 8QPBBdUB/v4NOcODjdUE6ag3jXBHzxHiSyUwnrqNiWjv2FXT+WJH9yH37VNGzcbA+Zz8
- 9MNQ==
-X-Forwarded-Encrypted: i=1;
- AFNElJ/Cb1bzIzl03ROaRuW2y+oLQxKMZSOXsXMyub/VmMPIvp820pJpqLZY/lNEmdc6x7207Prh3d8=@lists.denx.de
-X-Gm-Message-State: AOJu0YycWwnYf85MDrrVYrRSyHEc+o75Le/Bt/MaknHh7q53hzY85VGQ
- pBCjYJ1wrzM+emSf9uVzJ8SQmIV8nGhNXvdpfwNnOtdzSrrEQeUfgImijaNJYBxMQL6rf5B2vzj
- mRw+Kn3l8b26iOHGDofHAXY2PTWka7mdMFBKS80aw4g==
-X-Gm-Gg: AeBDiesb8pHTe2HPoSMrSFF05cuo35dlo7D7FjwF2tKCEYxwnF90Gk5v3L8LY7PCeeq
- OZl0vGsxPvHF1mZNkLh9UUArN6BwDXohXriCU/8bdgOF6lWWqNKIsHteYhXPa1fvgRocMw9gCpL
- OGhJJBxDlhuRAW5jqTuKIpieC3zBDewQu8a+FY1icqzodw61zzVEeYE9Rmav7BLH0UEDidWrE5C
- buF1OpKPYW+i0qGu1FSex5V9r5S7ZgseT9ofFqSZV5rmKyTOFEDALkPodBFY96OkHox4YFVvpYc
- mpN+ah5h3wp1XBzK3+c2HnJvHFOj0Iy4zD8zSUSE6HF2FBPXmJqUb89HpxqpGIUU3bGChC4egQZ
- 9z/ZOjvfi5cJ0ijse9F64kQlU+Dj3KeVKebYw9EGXIJ4Nr2tXwFziNKQ3PJ79bihJcbc+GastLL
- MeWrmCZBgjNHciw8F8HkTzpVJousP10U5nwg7GWb40Rtxox0OfMAXFKnTMLOLJB8EU4RpTdJWPt
- vuXuBmnOa8nCXPYbCJHqudnz2n3eU+KbQiZkbM+gkQmkJMG61gkYrmfiK0S2XdiBv9PragPvR2F
- okGqrSvsl+r81xw/qXIcZu0wYdb5ZkqpGO+aDk6VL8nd6V29tYUY1khFAQxWKFuhRfyiHFAc0pp
- IjrcKBFOTDqHBCXGF
-X-Received: by 2002:a05:690e:4847:b0:64e:e2d7:7c28 with SMTP id
- 956f58d0204a3-65c3da9e57amr9279085d50.41.1777980334600; Tue, 05 May 2026
- 04:25:34 -0700 (PDT)
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=BtAwjma1pOjwbcdQ3wepGHBaORNr7pzj1OxZGnYM/AX6kCYwBqO/PVyC3ahv4DCORhb/8FSgCnHPE3uQht584qhDmKz0uq4s5GKZGw1Zg2agML31OzfhCZVVqgfP+8b6sfZno/YJUkrNomFRHPlUAqbOBAivgl49qfP1QhPIlnfDgTM/dx1L42oAyaRMzRZd833QS1TcLEE3R2atWI6B9ebJuhiTcxpgqw/7nKUcbiKlmRYPGf1Jk3WVpzvsxqisFlAcZMvFtS4zm4R9mwaHZbkcfyUHgSX6lTghqCcgC9Bw9EeeI0ZX/DHo7ElA4TStVDLDZQEhLZ3qCMpRK2vWAA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=e/hTLyhkbE56xdl8HcANWFeLPq6o3Y78KDSDbIxEnCQ=;
+ b=ZqEQM8evbVVHUtbYmus0SX6J+7pPLZ+5K9482U6oEhVmPDsHvvzzIngyq34rCQSB8at8BVSz7zem75bHZCI9epLVBYLVM8UanVWGyfPBpMNuIod32s1kJSU2GUgpSE+7FqJpuxF4Yk1ZVfG3LYaoGSIicwZ+rHP33vt+IAU8hZrq0a79q6xir2cdTngyxVPRvY8U9M/hIKF2zE+bV0oZhlVgqxMdfJ6ECckaFxyr56gpH89hKk4boCG/J7y49T8f2/xTbZHYocmlfjO+uvP3PJfnpEcdKWI90hhPtTwurfln+xdJSGvLrNFk4yvNVwkABYdAVBLyYF3dpQkyW6C0WA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=e/hTLyhkbE56xdl8HcANWFeLPq6o3Y78KDSDbIxEnCQ=;
+ b=mWxcuPDK09saXxNvj/N6+t2esLUIbTPWCzsumv/9tGglLe/NxyIfeMzgtZNVcCsWxKVa+8D/tdq3oV1aF0VHzrDn9/j2/aG60KvIX6WmOcdwKovs69IEkam8keYoL7ubYewspN03MMIaay5DVN/n6IP5rbW5Vw2hfJhkujQOA14=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from DBBPR04MB7737.eurprd04.prod.outlook.com (2603:10a6:10:1e5::22)
+ by DU4PR04MB11315.eurprd04.prod.outlook.com (2603:10a6:10:5d8::11)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9870.25; Tue, 5 May
+ 2026 11:29:24 +0000
+Received: from DBBPR04MB7737.eurprd04.prod.outlook.com
+ ([fe80::5960:fb4b:9313:2b00]) by DBBPR04MB7737.eurprd04.prod.outlook.com
+ ([fe80::5960:fb4b:9313:2b00%3]) with mapi id 15.20.9870.023; Tue, 5 May 2026
+ 11:29:24 +0000
+Message-ID: <4746bed3-e157-4c9f-9697-d07bab4a0a7e@cherry.de>
+Date: Tue, 5 May 2026 13:29:22 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH RFC next 18/18] buildman: set W flag to e to be consistent
+ with CONFIG_WERROR
+To: Simon Glass <sjg@chromium.org>, foss+uboot@0leil.net
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ David Lechner <dlechner@baylibre.com>,
+ Jerome Forissier <jerome.forissier@arm.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Simon Glass <simon.glass@canonical.com>, Raymond Mao
+ <raymondmaoca@gmail.com>, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Michal Simek <michal.simek@amd.com>, Adriano Cordova <adrianox@gmail.com>,
+ Sughosh Ganu <sughosh.ganu@arm.com>, Yao Zi <me@ziyao.cc>,
+ Rasmus Villemoes <ravi@prevas.dk>
+References: <20260504-extrawarn-sync-v1-0-b19301d1948a@cherry.de>
+ <20260504-extrawarn-sync-v1-18-b19301d1948a@cherry.de>
+ <CAFLszTjra2Tcsvki4qKz7h6EBshDccUP0M-6QkHpLMKAUYBw+A@mail.gmail.com>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <CAFLszTjra2Tcsvki4qKz7h6EBshDccUP0M-6QkHpLMKAUYBw+A@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: FR0P281CA0013.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:15::18) To DBBPR04MB7737.eurprd04.prod.outlook.com
+ (2603:10a6:10:1e5::22)
 MIME-Version: 1.0
-References: <20260422170946.3394481-1-rs@ti.com>
- <20260422170946.3394481-7-rs@ti.com>
-In-Reply-To: <20260422170946.3394481-7-rs@ti.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Tue, 5 May 2026 14:24:57 +0300
-X-Gm-Features: AVHnY4JyR3KXNUvbkwFsg6sM2xb2TAk6lGmVyLNNJQnrGXodfwRkSPc7QKGLCwI
-Message-ID: <CAC_iWjJBO=8y9A21U84diAma02VTc88Uib-LFiBei-XULK=d6Q@mail.gmail.com>
-Subject: Re: [PATCHv5 6/6] memory: reserve from start_addr_sp to
- initial_relocaddr
-To: rs@ti.com
-Cc: robertcnelson@gmail.com, ayush@beagleboard.org, 
- Erik.Welsh@octavosystems.com, anshuld@ti.com, bb@ti.com, trini@konsulko.com, 
- afd@ti.com, xypron.glpk@gmx.de, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DBBPR04MB7737:EE_|DU4PR04MB11315:EE_
+X-MS-Office365-Filtering-Correlation-Id: 107447e1-2296-44e9-8fbb-08deaa998f34
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|366016|7416014|376014|22082099003|56012099003|18002099003;
+X-Microsoft-Antispam-Message-Info: Gzn6pSgATzt4/JYY36/CltbBHgDGhOCSsSKpA4INdPNfBNmSw1iH9630PbMp5I4zm4bb7eifIceIOm+dZf1RD7NUIey7lJUNEgGfBu4NjYWZwGwC7YRF6EL02B5tvqnRFatGRyFh8o5UCXGi63OSCqyFcDjDn4OToZh1NPhBZmY88JKGI5jXIPunhLqFG+UZ1Gm14WPNcOK0pUu5OC+cRmDf/VkTE7mwZlaFVAkLlC2qFn+RWJipblZt82KwfrPekvdSbcutAqbaKfiyzJAZQd10QkvzW9LCVg8f2OUbIfiHeuukS9ZSuhp1XWlguurOajy6VYn4JNCY1ujobwCyEVLsHPE7kUcWvNDdas7aRn9xC5miqdsZRV0yPXlZY7xauTOJ2r4GWfw1TlkPwMOS2ZkgLnSDW/vRULm2mOIo6BEg+LicIpaGz4hDeIRjss2wCh2Gg9WFbjjk9FTmklQ16R8Cbeg43Ih0aOP3Eoga5jqcMaFacxFsMz0wRwl/8WWZTIyHoyyZHq7ybpGxka6nhUlQEvver4syQInw57qvU4nkVXPzDBY56nPzTjJgfSKZ+bO98EYga9D0SBTDLtcAykbIxm1jYZ54ctG/j5zhXaphfwttOwyjC6YPjsMyw2nSFsCK+NA4yt1GjBPQBD15ST7Fb5mry/j6d31HPMnpKdy1tzeZEBAxl5Ia5uMh80Rv
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DBBPR04MB7737.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(366016)(7416014)(376014)(22082099003)(56012099003)(18002099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?d00xS2VrVVB1YXZZQWs3SlVVZDN2bEw1L3FodTVLYUkrT1ZpUTRRQUwwRk0z?=
+ =?utf-8?B?bzhWU3FYdXpOZXhoNXQ3ZkR4TTVZU0Y5dkJEOUIvWCtCRTdKRG02cEFIUEVV?=
+ =?utf-8?B?YnJjUTdLMm9jdUMwTHk1TDFzTGxqQ2FkcTN1cUFCRmxENGpMTTl5Wlk4R091?=
+ =?utf-8?B?bktjV01MK0ZwU1VLb1BxZ1Z5K1A2WFJmb2FOTHlhaVYxSmhHTmtaNC8xb1cy?=
+ =?utf-8?B?OUJUbERSUVNldkR6MFdrdWlmYkRsN0lwN2hBWDJtTkN6cEd4bmp2Zk8vc1gv?=
+ =?utf-8?B?Y21rZmltTTdYUDhEMmtTZGg4L3pBeHpkN2cvaEE0SFVpaW5Ja25BSUV6dzNy?=
+ =?utf-8?B?VXJockxsN0xrZnJTRE04VkV1WGJHNjBEb1UvdU1DbmpIT2tmNk5pY3J4QVlo?=
+ =?utf-8?B?TXZ1aGtNYldzeUlNSStpZzJkaFR4RUhMOU8waU1saFNQdG1QWFQ0MG5RSmdj?=
+ =?utf-8?B?bndZK2hQc3JBR2lzNjdybE9lRFlHQnhsYVBSdGpUL2lXenczaWlJZlROWEZB?=
+ =?utf-8?B?VFMzbnFGUU5mUTh6ME1UalAvU1o3dTBySGV6dGJ5QWpac3pzYkpaeHRnSmkx?=
+ =?utf-8?B?bzdRUjI2Qmg1dWF6STJFVHJEekpwc3JzcmFkcUE2OWRrMlM5WG9PZjdRYWh0?=
+ =?utf-8?B?aWdzS2tIY3RkSGdXcExydWlaZk1rMlBYNXBnaHRIekE2dkt0QXRtektEdXE0?=
+ =?utf-8?B?MldMRXgwMElYeUhKK3JHbnUwYnZOREQ4VHNaY0E2RFBzK2JUTlNMZ29GMzVn?=
+ =?utf-8?B?RXJ5ejZRRU5SVE9zYlN2YkNsTU5MNlZ2ZmJmWWcrVHp0NnIxbFpEYllHMEho?=
+ =?utf-8?B?bXovNmNSKzY3ejlwWEcxUEV1YncxRDc5R1VGQmdyVDFNa0hnS0VSUlRWd09l?=
+ =?utf-8?B?b2FnSE9RdE8zK2ZVcUdFT04zR0hpdmU3Tm91Vk9zK3U3blJFM0prbEJMcm93?=
+ =?utf-8?B?eVBPY2Q4MHQzT1lJK2pRSjg0Q3BKWjF4b1ZRdHkyWDFrL2JnTytLWmZmVEFl?=
+ =?utf-8?B?MjBCcnY2UlZXb0wvdnJITWJzKy9xd1hHcmdnaStFU1p6YnRCbWFpS2ZwV2ti?=
+ =?utf-8?B?QUZuaEx3ZnlOTkxKM0Z5aXRxTWFCZ3lHclRUTEVZbzF6Vi9ZejFTYkEwTFNz?=
+ =?utf-8?B?bFVtM0lGdjFXWW81Y3RhbmJLYWJWcFozalJmdVVjS0ZEOUJGU09DK3UyaVYy?=
+ =?utf-8?B?cDlXSkVML0tlbXpIZHh1UWVnaXZFVGRmWGMyZVlqVDYzNUlrMklxNGorbXFn?=
+ =?utf-8?B?Z2htUWxMRzFiRi9ScFpjeDBkZ2tHV21XS2V1NlU5Ynl6eXc5ZEQ3c2NWTmpt?=
+ =?utf-8?B?MGx5U3gvY1JKZ1pVM0JjWktTWTkyNktTMFRHNE1oT2cyNkdiK0hCdU4vWkM4?=
+ =?utf-8?B?YXZFUWM3S29sMWh4M0x6R2tKazBYbFdVN0FsR04yWmFLZlNDaFUySEZjeDZk?=
+ =?utf-8?B?KzJSSW9xQjgrcnlHNFRQT2k0dlRYS0lxNG9ISy8xK1pYSUdGc0UwYjhkSzVx?=
+ =?utf-8?B?aGNWVGs0cHdtZEdTZHFjZXZ1MytUSGwwaEIrZGZrNTNqMFZGZVYzNHZ4OEJz?=
+ =?utf-8?B?NTJ4TUdMWjFTWEtneG1ORlMrQ2dJbmtqM3dGenUyTzdPNDJzVzZNSXdPcFp5?=
+ =?utf-8?B?VzlHYVF3L3l1d0FzM21OVzBMN1VzVFB1cWNYU01RZzN1ZEo1TjFHWk9GcGVp?=
+ =?utf-8?B?eFVPTGlEL1l0REhkaWprcGVXU3h2b3BBeStMMEtldnI2MTBiNU5wdE5yZUpV?=
+ =?utf-8?B?RVkxTWRIck14aHkyTVVKRGZMeUYzaGUyZGRJMGN6dlhwUUJBaTM1NEVvS1RM?=
+ =?utf-8?B?TG5FdnhBYmNTSTdVRldjNmJqMDYwTGNQQWY2cFM5Y1VXT3lQUVBHOVIvdFZN?=
+ =?utf-8?B?UVI4dHhMUTl6dGtISE03UkhycjZBYUZuNlpGSnlsbndBQlFaakxEV3doK1V3?=
+ =?utf-8?B?elhjWEVYVFFLZ3RMeDEzTHQ2WVd0dmtGVTRiU3Q1QVZZNXRWcE1PWUlPaWFn?=
+ =?utf-8?B?UTkzL0NmSjJOZ0lMWGpKV2dFQ2psQUVzQVJlOE05blE0ZlMzMEVtTTFQRlMr?=
+ =?utf-8?B?Y3IrRWZOTUV6UDlGQnBCb2QyZlpZTWpGZUljYUVOdTNPb2JmdWU4NHI5Ulcy?=
+ =?utf-8?B?MXoyMEhCVEVVZ3YwanJzeU1hMmpZRm92NXZ5dXkvaGFpUkJlZTVkRHlMN1NK?=
+ =?utf-8?B?aEo2WmhmbEkxbmNKRDlJcFJCZHptUURlRnhYQUk5VDRTd0N4K2xyTU5laXZK?=
+ =?utf-8?B?WVFXSkVWTXJpSVBvTysyQVQ0NE9UL24yS08rSHFkWlVnR3VTNStOeitmNVhO?=
+ =?utf-8?B?UHJMQUZXaUpCWjM2OW9kTkpnS1h5emlzakNKZ3pyK2haRDlkQ0ZYZz09?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 107447e1-2296-44e9-8fbb-08deaa998f34
+X-MS-Exchange-CrossTenant-AuthSource: DBBPR04MB7737.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 May 2026 11:29:24.3923 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: OWeFtl5E7hrywMv6JInk2ux1KSC9M+5L7tmJOEFExHOQq/EQEevthlHr8SKQ/XVpSxTN78wugjeQYaXqrptjVQGRXToAGt0T6w1SnHJ1UhA=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU4PR04MB11315
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -122,157 +159,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Randolph,
+Hi Simon,
 
-On Wed, 22 Apr 2026 at 20:10, <rs@ti.com> wrote:
->
-> From: Randolph Sapp <rs@ti.com>
->
-> Add a new global data struct member called initial_relocaddr. This
-> stores the original value of relocaddr, directly from setup_dest_addr.
-> This is specifically to avoid any adjustments made by other init
-> functions.
->
-> Reserve the memory from gd->start_addr_sp - CONFIG_STACK_SIZE to
-> gd->initial_relocaddr instead of gd->ram_top. This allows platform
-> specific relocation addresses to work without unnecessarily painting
-> over a large range.
->
-> Since PRAM comes out of this initial area up to initial_relocaddr, we no
-> longer need to account for it separately.
+On 5/4/26 10:38 PM, Simon Glass wrote:
+> Hi Quentin,
+> 
+> On 2026-05-04T13:20:27, Quentin Schulz <foss+uboot@0leil.net> wrote:
+>> buildman: set W flag to e to be consistent with CONFIG_WERROR
+>>
+>> Buildman currently only enables Werror for KBUILD_CFLAGS (via KCFLAGS)
+>> and KBUILD_HOSTCFLAGS (via HOSTCFLAGS) but nothing else.
+>>
+>> scripts/Makefile.extrawarn now supports --fatal-warnings for the linker
+>> and assembler, which are enabled whenever CONFIG_WERROR is set.
+>>
+>> Let's make buildman set this variable to enable even more checks.
+>> KBUILD_CFLAGS and KBUILD_HOSTCFLAGS are kept in case buildman is run on
+>> a git-range where W=e is not available, it's better than nothing.
+>>
+>> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
+>>
+>> tools/buildman/builderthread.py | 1 +
+>>   1 file changed, 1 insertion(+)
+> 
+>> diff --git a/tools/buildman/builderthread.py b/tools/buildman/builderthread.py
+>> @@ -233,6 +233,7 @@ class BuilderThread(threading.Thread):
+>>           if self.builder.warnings_as_errors:
+>>               args.append('KCFLAGS=-Werror')
+>>               args.append('HOSTCFLAGS=-Werror')
+>> +            args.append('W=e')
+> 
+> Please update test_warnings_as_errors() in tools/buildman/func_test.py
+> to assert W=e is present in the make args alongside the existing
+> KCFLAGS / HOSTCFLAGS checks. Otherwise the new behaviour is silently
+> untested.
+> 
 
-Several CI tests are complaining with this series.
-https://source.denx.de/u-boot/custodians/u-boot-tpm/-/pipelines/29989
+This test is only available in your fork of U-Boot. I'll therefore 
+ignore this comment.
 
-Can you have a look?
-
-Thanks
-/Ilias
-
->
-> Signed-off-by: Randolph Sapp <rs@ti.com>
-> ---
->  common/board_f.c                  |  9 ++++++-
->  include/asm-generic/global_data.h |  7 ++++++
->  lib/efi_loader/efi_memory.c       |  2 +-
->  lib/lmb.c                         | 39 +++++--------------------------
->  4 files changed, 22 insertions(+), 35 deletions(-)
->
-> diff --git a/common/board_f.c b/common/board_f.c
-> index ce87c619e68..31c6eb725fb 100644
-> --- a/common/board_f.c
-> +++ b/common/board_f.c
-> @@ -330,6 +330,8 @@ __weak int arch_setup_dest_addr(void)
->
->  static int setup_dest_addr(void)
->  {
-> +       int ret;
-> +
->         debug("Monitor len: %08x\n", gd->mon_len);
->         /*
->          * Ram is setup, size stored in gd !!
-> @@ -356,7 +358,12 @@ static int setup_dest_addr(void)
->         gd->relocaddr = gd->ram_top;
->         debug("Ram top: %08llX\n", (unsigned long long)gd->ram_top);
->
-> -       return arch_setup_dest_addr();
-> +       ret = arch_setup_dest_addr();
-> +       if (ret != 0)
-> +               return ret;
-> +
-> +       gd->initial_relocaddr = gd->relocaddr;
-> +       return ret;
->  }
->
->  #ifdef CFG_PRAM
-> diff --git a/include/asm-generic/global_data.h b/include/asm-generic/global_data.h
-> index 745d2c3a966..6c60a79c2ab 100644
-> --- a/include/asm-generic/global_data.h
-> +++ b/include/asm-generic/global_data.h
-> @@ -107,6 +107,13 @@ struct global_data {
->          * GDB using the 'add-symbol-file u-boot <relocaddr>' command.
->          */
->         unsigned long relocaddr;
-> +       /**
-> +        * @initial_relocaddr: end of memory currently in use by uboot
-> +        *
-> +        * This should be the original value of relocaddr before any other
-> +        * allocations or reservations shift it.
-> +        */
-> +       unsigned long initial_relocaddr;
->         /**
->          * @irq_sp: IRQ stack pointer
->          */
-> diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
-> index 046a2bb4641..ece05c142f0 100644
-> --- a/lib/efi_loader/efi_memory.c
-> +++ b/lib/efi_loader/efi_memory.c
-> @@ -869,7 +869,7 @@ static void add_u_boot_and_runtime(void)
->         /* Add U-Boot */
->         uboot_start = ((uintptr_t)map_sysmem(gd->start_addr_sp, 0) -
->                        uboot_stack_size) & ~EFI_PAGE_MASK;
-> -       uboot_pages = ((uintptr_t)map_sysmem(gd->ram_top - 1, 0) -
-> +       uboot_pages = ((uintptr_t)map_sysmem(gd->initial_relocaddr, 0) -
->                        uboot_start + EFI_PAGE_MASK) >> EFI_PAGE_SHIFT;
->         efi_update_memory_map(uboot_start, uboot_pages, EFI_BOOT_SERVICES_CODE,
->                               false, false);
-> diff --git a/lib/lmb.c b/lib/lmb.c
-> index 9a8c70b778a..e5d4d726ab1 100644
-> --- a/lib/lmb.c
-> +++ b/lib/lmb.c
-> @@ -534,46 +534,19 @@ static long lmb_reserve(phys_addr_t base, phys_size_t size, u32 flags)
->
->  static void lmb_reserve_uboot_region(void)
->  {
-> -       int bank;
-> -       ulong end, bank_end;
-> +       ulong size;
->         phys_addr_t rsv_start;
-> -       ulong pram = 0;
->
->         rsv_start = gd->start_addr_sp - CONFIG_STACK_SIZE;
-> -       end = gd->ram_top;
-> +       size = gd->initial_relocaddr - rsv_start;
->
-> -       /*
-> -        * Reserve memory from aligned address below the bottom of U-Boot stack
-> -        * until end of RAM area to prevent LMB from overwriting that memory.
-> -        */
-> -       debug("## Current stack ends at 0x%08lx ", (ulong)rsv_start);
-> +       debug("## Current stack ends at 0x%08lx\n", (ulong)rsv_start);
->
-> -#ifdef CFG_PRAM
-> -       pram = env_get_ulong("pram", 10, CFG_PRAM);
-> -       pram = pram << 10; /* size is in kB */
-> -#endif
-> -
-> -       for (bank = 0; bank < CONFIG_NR_DRAM_BANKS; bank++) {
-> -               if (!gd->bd->bi_dram[bank].size ||
-> -                   rsv_start < gd->bd->bi_dram[bank].start)
-> -                       continue;
-> -               /* Watch out for RAM at end of address space! */
-> -               bank_end = gd->bd->bi_dram[bank].start +
-> -                       gd->bd->bi_dram[bank].size - 1;
-> -               if (rsv_start > bank_end)
-> -                       continue;
-> -               if (bank_end > end)
-> -                       bank_end = end - 1;
-> +       lmb_reserve(rsv_start, size, LMB_NOOVERWRITE);
->
-> -               lmb_reserve(rsv_start, bank_end - rsv_start - pram + 1,
-> +       if (gd->flags & GD_FLG_SKIP_RELOC)
-> +               lmb_reserve((phys_addr_t)(uintptr_t)_start, gd->mon_len,
->                             LMB_NOOVERWRITE);
-> -
-> -               if (gd->flags & GD_FLG_SKIP_RELOC)
-> -                       lmb_reserve((phys_addr_t)(uintptr_t)_start,
-> -                                   gd->mon_len, LMB_NOOVERWRITE);
-> -
-> -               break;
-> -       }
->  }
->
->  static void lmb_reserve_common(void *fdt_blob)
-> --
-> 2.53.0
->
+Cheers,
+Quentin
