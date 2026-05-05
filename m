@@ -4,108 +4,144 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04C2ECD342F
-	for <u-boot@archiver.kernel.org>; Tue,  5 May 2026 10:45:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D5F4CD342F
+	for <u-boot@archiver.kernel.org>; Tue,  5 May 2026 10:46:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3D4E28487C;
-	Tue,  5 May 2026 12:45:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 819818487C;
+	Tue,  5 May 2026 12:46:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="cPX4BnJp";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="T1P+MGPr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D058E84882; Tue,  5 May 2026 12:45:40 +0200 (CEST)
-Received: from mail-yx1-xb129.google.com (mail-yx1-xb129.google.com
- [IPv6:2607:f8b0:4864:20::b129])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id C8A2684897; Tue,  5 May 2026 12:46:24 +0200 (CEST)
+Received: from AM0PR83CU005.outbound.protection.outlook.com
+ (mail-westeuropeazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6D3138486B
- for <u-boot@lists.denx.de>; Tue,  5 May 2026 12:45:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6FEB28486B
+ for <u-boot@lists.denx.de>; Tue,  5 May 2026 12:46:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yx1-xb129.google.com with SMTP id
- 956f58d0204a3-65c1ba7eeb6so4402317d50.1
- for <u-boot@lists.denx.de>; Tue, 05 May 2026 03:45:38 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1777977937; cv=none;
- d=google.com; s=arc-20240605;
- b=KL0ziInXYGeDE8W3I3V7A560762BZ6onpRU/tCd0bxZXs6qj7k60DUpcRKxuaceDWM
- bWLj0N9qFHulGGgD84Oqp7XWXZrIneKGHefDeM6RQVPfh47qaJtKPIbsL07aH/4Io1JM
- GOnRwK0z9oh/rykwORc4JS8O48uCYAehLwivNVoMr0ioUy7Ao+JZe0XYU1qXWj/i0jIF
- taHCvBe0zL9ZNMmE+HogzT75I+XPMUzumcNcBZI3+vDZAwuF08G3L3TG4BsF2GyDxlGH
- UyMHwpcZXMkaJcg+i1UZU6dpqdEoihFDuA8w1oFQb7/zGmsYdrTuMHHDjnRarHOA+2r3
- mUMQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=g3GLV507ZcLvlFP6ZQ/tORYDNU+H6X/LaU/Zsc4IxPI=;
- fh=5kUd394jKrhcOl2ZH+dGyAVzMYd6ZUkwYkyJrAcRQtc=;
- b=g2+e+mXsEhsEXzXwn6Pdv9hjvqnp6Ys5iaCvxjkIMchTvSUKfbUXTGWRFmp6h0riih
- 59Pkn11LWIyBtkfv3M1Jf7MTGWrd2R0dH9xx4yd0v+FqOSG8H/xRMq8nqt9eTO4b0ISF
- 2JV/hz+ielxe+Eza5bKa3g28fAKmkyVMTwxKCZ4D89cLBUDITKBKPFhnstQ5kwSy2lyz
- BKnO7e3kcz/jLHlckjefB/BWBY/mmxnqN5Ii32FbFLodkDopkFODgRIzruKNsFt/7n8p
- 6JEjBP08uK2MsQR5okOWGMiQiysDeK4BbihXZIJkr690vbrPBRXyhz+nPqobDhQJtpAl
- FlJQ==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1777977937; x=1778582737; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=g3GLV507ZcLvlFP6ZQ/tORYDNU+H6X/LaU/Zsc4IxPI=;
- b=cPX4BnJp8zvUuR+9c7xq7B0DjrrT1/NneBQ2zYd7O4jnmntwYcUudNdytY75me3S59
- n9ay76QLGicgpmg2sxiREHrnLZKlFMmU37Jk8Qy6SFkS/0WYeQNAc9TBYhxSJgZQLQ1l
- IQdoD5s1aYjtpC2rBvSrMmm0pntx8KajRnabgnZFVlul0g58w/4mH4AcZuec99GuesqU
- uhKDjzdOg2xxbYHE/NDRUcUa92WRmWAOsKtvrt474DMgLwW2GB2CwGv+KUheAix/uRn5
- mFKQ1ThG7LOhKpHGYWN8o5u0QxYoEv+dYT/+AkqgUNOLlRI1T374tygoloSy/Lkz17UM
- 4FbA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777977937; x=1778582737;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=g3GLV507ZcLvlFP6ZQ/tORYDNU+H6X/LaU/Zsc4IxPI=;
- b=TQH0nHRKNbguKRzPuFf6t2iiSgaG2GwyzqKKV8ECrtN0GfV/7T7zUq2RFCmiA5wugi
- OUU2Kok4f/6C9LyiF7F15UAQngWGhd10bEoxXzMalggyXbl7D7MSjG0d9d9Ma/a1+rX1
- LN5gBuIoVPTJ6xg3SpeeKWplMwELg6QfGUNCZUr6oGl8YQv0djVH9vua6tzxxze/4Zu/
- NIQztITxopbJGOsz0DuGoeT/XZ6IzSi7Doa/8NbL13m0ANF7xNjo9gqdTq6lAW4YHcAz
- 1nS0lwmnvPfMYweGk2tSr09XD4coIzgwhZoBpTRrPnlnYCWe8lUHl52tqFjSN67fs6ql
- FfxA==
-X-Forwarded-Encrypted: i=1;
- AFNElJ/+se8STs2lCH/DOcdIu+esbk2nB4InxtZv/NDi36TAZCt20O2EVFq5nT38xzvmu47yhCgu7SA=@lists.denx.de
-X-Gm-Message-State: AOJu0YwYqFltBuYvA1eY/elIl9sSZSdPo6uZXo8026fXaGWTagviE7y/
- Gx9H1g7ROoMromwrXjJlYbhHvIgNSci2TYqrqHafOQ8F2Pskzmgr2AOUfA+Libna/Bj1BV0/yLS
- HT2uUZfulh88EMCNGfeMxEJGmdf87GcEfj0P2lm27ZQ==
-X-Gm-Gg: AeBDievBEd6TzLF44uaidhlQdeskgqqJhhPzVm2iPyK4uB2f1sBWFURHXBQDZyXYKBE
- 36W2vdu0DPPrQobvt7QbqC/nmUII0STqggkclcafuNG7tEm/Wqdo1OkMdBU5ssiiUgO1hUE69qZ
- QRuaiJq3KN42ZPw6Y4+/vxfU25AlE/NE0Ig7HAsS3mwi2nt+jTNS1HSRzRJg61ribfWXnsBv75K
- 5VpwqRFRggmTq76MX+Jv8nQPM7wc5VRLsDKbeUiM6U+54Bd8Rbn0RRHSdyw/FiMyjGmlW/iUlWn
- tHHpXP1Jco4fB9R3VOwJ7FKeI1D2T+MQ1iBFYPAYIVhNXMZ5Ro4pvjnCbKzEC8aVF2wNtxIoS++
- +u20iXaJD++LFJEYtDQWQmp4vudBhc1MBDLzqgEvcNzBe7aZ5RjHEt+n29RqgFdCeANzYVy/9DH
- 4ETvuUgZ0P73Hm9ADyT3nn67HbmzDsONdBeU1WL41doBwrqz+G3UvAbLs74Q8Sp/qZYq1Y7+Jmi
- j5SE5/fuVZVQkMhhrMml7/rFMx8D91rI3IZ2HWWT9gUTnPRSxIT1GFJ6vNBRy8ghfKe6rjESXMg
- /3c5nRzI4oeKsz+VZZJZ8IrCrc/RfcdxG+HrJiTONrwhM0u2BX9UuR8dK3p0jo9gBiT+KaW6Kl6
- qyJESuPicAspX+Zqb
-X-Received: by 2002:a05:690e:1246:b0:650:1724:f63c with SMTP id
- 956f58d0204a3-65c3d9ca0c9mr12589985d50.20.1777977936779; Tue, 05 May 2026
- 03:45:36 -0700 (PDT)
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=tAs78w18bMCJeB1BiGVPaJWtTrH5mSqq4Fl+laibykDEkIwdMNIcWlBH6keOe3Kij2o8+v+IadNBZRz8+8t9QeY71AoxvJlqvSuap+VLWNaUatgvWqIRL3zxPJjTLybzzn8/QG+nroVE58GJQkDk1e6HF/qwu71GTubCNFO8lz8dPq8wDg8EMuECB1Y7ticI7nWRbOkcNtsVNSwfKYfX0Ss1aVbylG7M92wShVqmmuNsLj0f1e55xzuhRpCHqlwrn+KzfOgBCCbdt5QkASZrbdaA+U2wTXzn5zpqHaps0k5zYmYzjbWz1V6mZsW92TfVU0j8H6bD1llImbeMIHWQng==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=C0XlUJ/Zu5+dyZdud3rv7jIIn2mEv11H9UJXowN6BnE=;
+ b=HzXNJDCb+cj5u6+0HLdMDIE5QWmOccfFuyYRHko92awgc4pGMraEFeC4QbKrHsYxiGV13GFt+f8XA5pAzV4VVjrVwFJdABSR/UoEjY4ouw9l8+iMIb869Pn8NB+2bxKDyGc72fWJl2VWxXg2o+A5tWRMQZYp6DmEH+fNz/c2kBexYYfTPp4uUwX0yCfGfWi9WErPihvbyJX6OI1tbnk9yv0Q+0JIOg+YM/k7ayPX+xTbPt4OA6hUP01vjEgmE47lqN52Z6HBkI/Da9eTja50Lm7/42Gnml+8mrtfrwL5k/mGPRSay1PkA8a9NW8GonAY8zC7K62XS2y/3zBlRo1ziw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=C0XlUJ/Zu5+dyZdud3rv7jIIn2mEv11H9UJXowN6BnE=;
+ b=T1P+MGPrRUdFYpCSAIXZ0/m9ET9abgUsS0YRHAUdbaMK1nelRKJIoCVdG+uuD+I4AF1llZ6kMIFXwiBXmPLbCgRRRlilMJ8lz1HzdDUB0C671pHXptzQg8ur80WWjI00X05XUz/RfhIcCfov18cDvbcbopArhXr1VCnHkJ0MPw4=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from DBBPR04MB7737.eurprd04.prod.outlook.com (2603:10a6:10:1e5::22)
+ by PAXPR04MB8848.eurprd04.prod.outlook.com (2603:10a6:102:20f::9)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9870.25; Tue, 5 May
+ 2026 10:46:18 +0000
+Received: from DBBPR04MB7737.eurprd04.prod.outlook.com
+ ([fe80::5960:fb4b:9313:2b00]) by DBBPR04MB7737.eurprd04.prod.outlook.com
+ ([fe80::5960:fb4b:9313:2b00%3]) with mapi id 15.20.9870.023; Tue, 5 May 2026
+ 10:46:18 +0000
+Message-ID: <48121be4-3675-453d-b2a8-839c46756fb6@cherry.de>
+Date: Tue, 5 May 2026 12:46:16 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH RFC next 08/18] scripts/Makefile.extrawarn: sync with 6.1
+To: Simon Glass <sjg@chromium.org>, foss+uboot@0leil.net
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ David Lechner <dlechner@baylibre.com>,
+ Jerome Forissier <jerome.forissier@arm.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Raymond Mao <raymondmaoca@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Michal Simek <michal.simek@amd.com>, Adriano Cordova <adrianox@gmail.com>,
+ Sughosh Ganu <sughosh.ganu@arm.com>, Yao Zi <me@ziyao.cc>,
+ Rasmus Villemoes <ravi@prevas.dk>
+References: <20260504-extrawarn-sync-v1-0-b19301d1948a@cherry.de>
+ <20260504-extrawarn-sync-v1-8-b19301d1948a@cherry.de>
+ <CAFLszTjS4guQy-sW4SL3fzpbcNNqJKxMYn1qDDjpUhdP05YwVw@mail.gmail.com>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <CAFLszTjS4guQy-sW4SL3fzpbcNNqJKxMYn1qDDjpUhdP05YwVw@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: FR3P281CA0024.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:1c::15) To DBBPR04MB7737.eurprd04.prod.outlook.com
+ (2603:10a6:10:1e5::22)
 MIME-Version: 1.0
-References: <20260422170946.3394481-1-rs@ti.com>
- <20260422170946.3394481-3-rs@ti.com>
-In-Reply-To: <20260422170946.3394481-3-rs@ti.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Tue, 5 May 2026 13:45:00 +0300
-X-Gm-Features: AVHnY4LswW6x8DKn6F7RmitAuVei0HtcY8sFvTsuaskRudgLdgdWDvf4U8pE_tU
-Message-ID: <CAC_iWjKHYxzptmN35UKObMyGvbpFq39oFMO0_y6L0jeG=3zWLg@mail.gmail.com>
-Subject: Re: [PATCHv5 2/6] boot_fdt_add_mem_rsv_regions: free old dtb
- reservations
-To: rs@ti.com, Simon Glass <sjg@chromium.org>
-Cc: robertcnelson@gmail.com, ayush@beagleboard.org, 
- Erik.Welsh@octavosystems.com, anshuld@ti.com, bb@ti.com, trini@konsulko.com, 
- afd@ti.com, xypron.glpk@gmx.de, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DBBPR04MB7737:EE_|PAXPR04MB8848:EE_
+X-MS-Office365-Filtering-Correlation-Id: c3e0f612-05c1-4628-6ad4-08deaa9389b2
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|366016|1800799024|7416014|376014|22082099003|56012099003|18002099003;
+X-Microsoft-Antispam-Message-Info: 71+ZSpSdbXwtSVcUBD6IWWhYqokPpWsGWDsUMfrdjvGArpyJnTEWgh+3iO+V7HfiGHFebPg7VonWil6Y0u+o5+YSek3lAr7MHppBNawhEQ6EEegxEL53kAGSMQZhF6M98pZLg87Eps8yOXTp3/sh59xwOrSDg0SdXWcmIv7xUqiKb+Zu/YSl263Y7+FCMwkgsF/+vuVeUChyrnWTO+4jmUHvPdCWb7dfiV+TtpFIpS/yYS6d+JK0CSO/bWSg6wWbn0jtUT4gVXEdFt+DY1lZVw9dPehQn9fToWnnkV0A/r96K7nDQWsp/UqkvzTACPwNWFo0PkLaHh6JtIqNiVOIXQBBA09EaGA9KfG9SQkO4qs2rOKHAPNnmg+LTN+nMAsk2kZ3t1fi/YQrk4R8WbVsZWwGdTm43O217Y7anAL5wrOCfsL/JoFomLnBeOan5jt7Gy9I5GqqJ8iAZiEd0DgBuUnMVNYLqRuhjPA/JflIJFZ6aenhf/Qedl9PFZ4162vn37fZSbYvY8Wft5AhczsbcNDk3Z9BEEKQX3+KqNBX0YIxzpOM6Gm7b1PTORRPyFPmtJMr8wxacRn26UBcFEPh48qCssmX93gr8eMOgeagFutdYTBnmcByILo2UbTS/5DsGzAGIg3zeC8+3sGflNOT1A==
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DBBPR04MB7737.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(1800799024)(7416014)(376014)(22082099003)(56012099003)(18002099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?T0dQMUFERXVSTkdrY2VPRUtpcHhKV2hiSkFEMjMvMGt2TjJWQzVlbnp0V2Fa?=
+ =?utf-8?B?MVNWR3NsUDVBY3BHR002WGNwa1JwaUI5ZjlHblNxd09PZUZQZ082UGQ4NElH?=
+ =?utf-8?B?eVBiZkxGb2xvZ0dCWE1pQVJEOGZoM05YMWYxRkNkVjIwdzNyWSt5MGZSRFRh?=
+ =?utf-8?B?eUNlSkFIZm5rSXhTNFBPQlFqZXRGMHc0eGN5ZnBjcC9WWFZ3TU1oTFBLaENR?=
+ =?utf-8?B?VFc0TExRMXAvcmxxU3UrOTQwc0lieVY5N2NONHluV1Rpei84QWdLSE9sS09E?=
+ =?utf-8?B?TlprNVRNNEJlQVJKSjl6YUtkU2ZQdHJLMDBNdlQwV1FQeFp4MFEvdzBOTjBF?=
+ =?utf-8?B?UUx6MEM3VHdqWWtoK2Y0TGNOQ3cwNElRZEdlMTBZUExkM2ZVakI0KzQ3TmIv?=
+ =?utf-8?B?ZXI4dStiWmljdEVGV0tKL1ZVZ0NQcTFhR2hSQlV5ZFZiY0ZveVZuT1N5Z0s4?=
+ =?utf-8?B?bm1QWG9Icy9UMGZBU25JR1Q1NGloZm4zRElQbUN2UGg3RzQ5SmlUMTFURTNZ?=
+ =?utf-8?B?WnBsTWt0UjlmcEZsTndMaEw0Kzc5SjhkVFI3eEczUnRQeGFFTUpmVGVnbldP?=
+ =?utf-8?B?V1N2KzdxUTMySEVXcmJRRHpWS0FSWkcrRHYrNjdXT2kyVTEvQWtEdFRtV3lj?=
+ =?utf-8?B?c2lkTUlFNFQ1cWpHRndOQTZ0R04waU5nb0N1cUwyd05nTitJRnJ0Ni9xKzJK?=
+ =?utf-8?B?M2lkUzhHVzUvOWRpelA0UnRLVm54RXpibUNla3d4TEI0TTBPVkdiRUxBTlNo?=
+ =?utf-8?B?OUlKdE9pa2hITnh4WW0vZDAyK0FCUkg4Nit0UWJ1SUtCYnVDSHJSVkhlN1Ez?=
+ =?utf-8?B?bjdIMUN2K1lSNGYyTEd1T2FaMDRaZ3dwWklpaXlTdlh1ZHoxRllvRmlxajBi?=
+ =?utf-8?B?M0hQYTJpUjNkQXBUemRqVVNjckxhOXJ5Sm9jemtEcHpadnpSVFZFUjFZSW9G?=
+ =?utf-8?B?Wm1wbExDL1FGTTlsK3lGWmZsS1RTd3ZRVTM3dGw3ODBuRUkwcTB0cTJkNzlv?=
+ =?utf-8?B?UFRsSVRQWFh0RUJRa2VSY1hYUXYwQzExUXlDc29hMnRmdHUxb0tvaGd5OWdG?=
+ =?utf-8?B?dzFFTklLeHJrWTdhTlQwcHF5cGlsRmd4SWcwR29xa3dmazdCeWZVOHZYRnB3?=
+ =?utf-8?B?eCtzcG5tQkZMdTNLRnQ1WnhjdndtbFZnNC91L1lnMjBRSEVlaGtxWjBVNVND?=
+ =?utf-8?B?eUJJMjE5R2N0alp6ME1ubEpma05KUmZiN1lOcjhGRTY4R1dOR29haDgvYnhG?=
+ =?utf-8?B?cmtMSUZYMHdKMU5NKzRIRXRScjR5WDJXaXpoU2g1aXM2aHBDR0ZTRmRZUVNh?=
+ =?utf-8?B?M1loRmZrUmF4Q0Q1MHNSdC9nNkVtdzB4aktLUjVSVExnbFdjR0hqN2lBL3Rn?=
+ =?utf-8?B?eExSWjgza0JTRDZWSGprcy9QNHk1b1U4VThNNWFDNFp0R0Z6ZFdCQ2o3bi82?=
+ =?utf-8?B?Y2syVklRbVowWG5hYlkyWGNmSGxGUGxGUjZIMjJVOGY1N0V3SDNxeVZoRzN5?=
+ =?utf-8?B?UlVJellJMUdqZTN0QTRXOE1pRXJKQk45dXg1SjZSYjdqM0tPWWlEZTF3Z2F0?=
+ =?utf-8?B?ZC9Lb1V6SkZueTF2dHF6a0VvaE1BU3p2c2sxNmRwckkrNHVFYkhZWDhsTDJD?=
+ =?utf-8?B?cW1XZVRlQi9Xb0pkYjhENDUvcHpiTC9ROS8ySUM1V1RvTGwrMWVpUUlibk5i?=
+ =?utf-8?B?dkJlMDRXWkp1Z1J0Y3lxang0cDZPa3RmVk1NRk1wclQyT3RTelNibFVJczlO?=
+ =?utf-8?B?MWp0aE5zMDVQeW5wNVhBclhBN0hscHh5MlcxSUJrTGdEY0NqcnRybjJVM3g2?=
+ =?utf-8?B?bVJ3bkxBV3NYODZkZXJqR011eUR3QXhuZmZMMHR1cW9LQmF2Y0lNdXF5MTVj?=
+ =?utf-8?B?VXNHT1oxb2JCM2xjcmdsRzYwd0Jib3RIOTI2VDNaWTRhbjBvSlorWEoyTzdp?=
+ =?utf-8?B?N09GTDByWFY0YWk4TzU2VzdYOXZFc3RsdHBidDVtTmFrOHlHS253UjlTaTZK?=
+ =?utf-8?B?VXdrOFJuR0pwYmMrNjRGQVozcWo0Z2N0MXMramYwSXc5UTRtUW9mTWdZNmdm?=
+ =?utf-8?B?akdQVGkyQzJBcFNuTGRnMU9McnpGOGRPTk51azRJanZTZDZmb2d3N0hMQTJq?=
+ =?utf-8?B?N1BiZXBZNDZzQUw5Mm1qWkZxNEdBWjZqWm9yU0NXYnpjWEUvaUFvNFlnTnVs?=
+ =?utf-8?B?U2FLZHdCSmV0UlZtU3RyU1JnQlhYdDZPTS92TVhLVG5jSFhLVCs4WTVJK2xY?=
+ =?utf-8?B?Q1lnNzc1UlYzWUdtREl0SnB1b3cycUV5UW45cEkzWnNkblZwWHVhMzBxdzlJ?=
+ =?utf-8?B?djVMdUFiZEtJbXpMUVVkVGxndWtHTExKWFJwYVZBZDhvbDkyenk0Zz09?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: c3e0f612-05c1-4628-6ad4-08deaa9389b2
+X-MS-Exchange-CrossTenant-AuthSource: DBBPR04MB7737.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 May 2026 10:46:18.1833 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: jdatcuJmxtcGsVZaAY1fW8xuTUTSv0tcWCfo3C0oXwSX7TflAjhIiZIVCuLx3ttmDBhkvwsFo437y/82y/pP6mwMtCSpJxnKQNxuo5RoLiM=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXPR04MB8848
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -122,145 +158,148 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Simon,
+Hi Simon,
 
-This looks ok to me, but I haven't been involved with the bootm code
-much. Can you taker a quick look?
+On 5/4/26 10:34 PM, Simon Glass wrote:
+> Hi Quentin,
+> 
+> On 2026-05-04T13:20:27, Quentin Schulz <foss+uboot@0leil.net> wrote:
+>> scripts/Makefile.extrawarn: sync with 6.1
+>>
+>> Sync scripts/Makefile.extrawarn with Linux kernel 6.1's.
+>>
+>> Since it adds a new option for KBUILD_EXTRA_WARN with e, document it as
+>> done in kernel commit c77d06e70d59 ("kbuild: support W=e to make build
+>> abort in case of warning").
+>>
+>> s/gcc/build/ in Makefile as done in kernel commit e27128db6283 ("kbuild:
+>> rename KBUILD_ENABLE_EXTRA_GCC_CHECKS to KBUILD_EXTRA_WARN"), part of
+>> v5.4. The rest of this commit was backported with commit bd3f9ee679b4
+>> ("kbuild: Bump the build system to 6.1").
+>>
+>> Our scripts/Makefile.extrawarn before this commit is Linux kernel's from
+>> v5.1 with the following diff:
+>>
+>>   # diff --git a/proc/self/fd/11 b/proc/self/fd/13
+>>   # --- a/proc/self/fd/11
+>>   # +++ b/proc/self/fd/13
+>>   # @@ -13,17 +13,8 @@
+>> [...]
+>>
+>> Makefile                   |   3 +-
+>>   scripts/Makefile.extrawarn | 154 +++++++++++++++++++++++++++------------------
+>>   2 files changed, 95 insertions(+), 62 deletions(-)
+> 
+>> diff --git a/scripts/Makefile.extrawarn b/scripts/Makefile.extrawarn
+>> @@ -22,64 +17,101 @@ endif
+>>   ifdef CONFIG_CC_IS_CLANG
+>> -KBUILD_CFLAGS += $(call cc-disable-warning, initializer-overrides)
+>> -KBUILD_CFLAGS += $(call cc-disable-warning, unused-value)
+>> -KBUILD_CFLAGS += $(call cc-disable-warning, format)
+>> -KBUILD_CFLAGS += $(call cc-disable-warning, sign-compare)
+>> -KBUILD_CFLAGS += $(call cc-disable-warning, format-zero-length)
+>> -KBUILD_CFLAGS += $(call cc-disable-warning, uninitialized)
+>> +KBUILD_CFLAGS += -Wno-initializer-overrides
+>> +# Clang before clang-16 would warn on default argument promotions.
+>> +ifneq ($(call clang-min-version, 160000),y)
+> 
+> clang-min-version() is not defined anywhere that I can find. So I
+> believe $(call clang-min-version, 160000) always expands to empty, the
+> ifneq is always true and the inner ifeq always false.
+> 
 
-On Wed, 22 Apr 2026 at 20:10, <rs@ti.com> wrote:
->
-> From: Randolph Sapp <rs@ti.com>
->
-> Add a free flag and an initial call to free allocations covered by the
-> global FDT. This assumes that all calls to boot_fdt_add_mem_rsv_regions
-> occur before the transition to the new device tree, thus we can access
-> the currently active device tree through the global data pointer.
->
-> This allows us to clearly indicate to the user when a device tree
-> reservation fails. How we handle this can still use some improvement.
-> Right now we'll keep the default behavior and try to boot anyway.
->
-> This functionality was broken in:
-> 5a6aa7d ("boot: fdt: Handle already reserved memory in boot_fdt_reserve_region()")
->
+Thanks for catching this. It seems scripts/Makefile.compiler is also not 
+sync'ed with 6.1. We're missing kernel commit 88b61e3bff93 
+("Makefile.compiler: replace cc-ifversion with compiler-specific 
+macros"). I'll add that to the v2.
 
-[...]
+>> diff --git a/scripts/Makefile.extrawarn b/scripts/Makefile.extrawarn
+>> @@ -22,64 +17,101 @@ endif
+>> -warning := $(warning-$(findstring 1, $(KBUILD_ENABLE_EXTRA_GCC_CHECKS)))
+>> -warning += $(warning-$(findstring 2, $(KBUILD_ENABLE_EXTRA_GCC_CHECKS)))
+>> -warning += $(warning-$(findstring 3, $(KBUILD_ENABLE_EXTRA_GCC_CHECKS)))
+>> -
+>> -ifeq ("$(strip $(warning))","")
+>> -        $(error W=$(KBUILD_ENABLE_EXTRA_GCC_CHECKS) is unknown)
+>> -endif
+> 
+> Dropping this silently accepts make W=q as a no-op. That matches v6.1
+> so I'm fine with it, but please note the behaviour change in the
+> commit message so anyone bisecting a "my W=foo did nothing" report
+> finds it.
+> 
 
-either operation.
-> + */
-> +static void boot_fdt_reserve_region(u64 addr, u64 size, u32 flags, bool free)
->  {
+ACK. This was told in kernel commit 64a91907c896 ("kbuild: refactor 
+scripts/Makefile.extrawarn"):
 
-The function name is not accurate anymore. Perhaps call it
-boot_fdt_handle_region()?
+     This commit slightly changes the behavior, I think all of which are OK.
 
->         long ret;
->         phys_addr_t rsv_addr;
->
->         rsv_addr = (phys_addr_t)addr;
-> -       ret = lmb_alloc_mem(LMB_MEM_ALLOC_ADDR, 0, &rsv_addr, size, flags);
-> +       if (free)
-> +               ret = lmb_free(rsv_addr, size, flags);
-> +       else
-> +               ret = lmb_alloc_mem(LMB_MEM_ALLOC_ADDR, 0, &rsv_addr, size,
-> +                                   flags);
-> +
->         if (!ret) {
-> -               debug("   reserving fdt memory region: addr=%llx size=%llx flags=%x\n",
-> -                     (unsigned long long)addr,
-> +               debug("   %s fdt memory region: addr=%llx size=%llx flags=%x\n",
-> +                     free ? "freed" : "reserved", (unsigned long long)addr,
->                       (unsigned long long)size, flags);
-> -       } else if (ret != -EEXIST && ret != -EINVAL) {
-> -               puts("ERROR: reserving fdt memory region failed ");
-> -               printf("(addr=%llx size=%llx flags=%x)\n",
-> -                      (unsigned long long)addr,
-> -                      (unsigned long long)size, flags);
-> +       } else {
-> +               printf("ERROR: %s fdt memory region failed (addr=%llx size=%llx flags=%x): %ld\n",
-> +                      free ? "freeing" : "reserving", (unsigned long long)addr,
-> +                      (unsigned long long)size, flags, ret);
->         }
->  }
->
->  /**
-> - * boot_fdt_add_mem_rsv_regions - Mark the memreserve and reserved-memory
-> - * sections as unusable
-> + * boot_fdt_add_mem_rsv_regions - Handle FDT memreserve and reserved-memory
-> + * sections
->   * @fdt_blob: pointer to fdt blob base address
-> + * @free: indicate if regions are being freed
->   *
-> - * Adds the and reserved-memorymemreserve regions in the dtb to the lmb block.
-> - * Adding the memreserve regions prevents u-boot from using them to store the
-> - * initrd or the fdt blob.
-> + * Adds or removes reserved-memory and memreserve regions in the dtb to the lmb
-> + * block. Adding the memreserve regions prevents u-boot from using them to store
-> + * the initrd or the fdt blob. This function will attempt to clean the currently
-> + * active reservations if a new device tree blob is given.
->   */
-> -void boot_fdt_add_mem_rsv_regions(void *fdt_blob)
-> +void boot_fdt_add_mem_rsv_regions(void *fdt_blob, bool free)
->  {
->         uint64_t addr, size;
->         int i, total, ret;
-> @@ -108,12 +124,16 @@ void boot_fdt_add_mem_rsv_regions(void *fdt_blob)
->         if (fdt_check_header(fdt_blob) != 0)
->                 return;
->
-> +       /* Remove old regions */
-> +       if (gd->fdt_blob != fdt_blob)
-> +               boot_fdt_add_mem_rsv_regions((void *)gd->fdt_blob, true);
-> +
->         /* process memreserve sections */
->         total = fdt_num_mem_rsv(fdt_blob);
->         for (i = 0; i < total; i++) {
->                 if (fdt_get_mem_rsv(fdt_blob, i, &addr, &size) != 0)
->                         continue;
-> -               boot_fdt_reserve_region(addr, size, LMB_NOOVERWRITE);
-> +               boot_fdt_reserve_region(addr, size, LMB_NOOVERWRITE, free);
->         }
->
->         /* process reserved-memory */
-> @@ -131,7 +151,8 @@ void boot_fdt_add_mem_rsv_regions(void *fdt_blob)
->                                         flags = LMB_NOMAP;
->                                 addr = res.start;
->                                 size = res.end - res.start + 1;
-> -                               boot_fdt_reserve_region(addr, size, flags);
-> +                               boot_fdt_reserve_region(addr, size, flags,
-> +                                                       free);
->                         }
->
->                         subnode = fdt_next_subnode(fdt_blob, subnode);
-> diff --git a/include/image.h b/include/image.h
-> index 34efac6056d..68dfa4716ab 100644
-> --- a/include/image.h
-> +++ b/include/image.h
-> @@ -827,7 +827,7 @@ int boot_get_fdt(void *buf, const char *select, uint arch,
->                  struct bootm_headers *images, char **of_flat_tree,
->                  ulong *of_size);
->
-> -void boot_fdt_add_mem_rsv_regions(void *fdt_blob);
-> +void boot_fdt_add_mem_rsv_regions(void *fdt_blob, bool free);
->  int boot_relocate_fdt(char **of_flat_tree, ulong *of_size);
->
->  int boot_ramdisk_high(ulong rd_data, ulong rd_len, ulong *initrd_start,
-> diff --git a/lib/lmb.c b/lib/lmb.c
-> index 8f12c6ad8e5..9a8c70b778a 100644
-> --- a/lib/lmb.c
-> +++ b/lib/lmb.c
-> @@ -581,7 +581,7 @@ static void lmb_reserve_common(void *fdt_blob)
->         lmb_reserve_uboot_region();
->
->         if (CONFIG_IS_ENABLED(OF_LIBFDT) && fdt_blob)
-> -               boot_fdt_add_mem_rsv_regions(fdt_blob);
-> +               boot_fdt_add_mem_rsv_regions(fdt_blob, false);
->  }
->
->  static __maybe_unused void lmb_reserve_common_spl(void)
-> --
-> 2.53.0
->
+     [1] Currently, cc-option calls are needlessly evaluated. For example,
+           warning-3 += $(call cc-option, -Wpacked-bitfield-compat)
+         needs evaluating only when W=3, but it is actually evaluated for
+         W=1, W=2 as well. With this commit, only relevant cc-option calls
+         will be evaluated. This is a slight optimization.
 
-With the change above
-Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+     [2] Currently, unsupported level like W=4 is checked by:
+           $(error W=$(KBUILD_ENABLE_EXTRA_GCC_CHECKS) is unknown)
+         This will no longer be checked, but I do not think it is a big
+         deal.
+
+     [3] Currently, 4 Clang warnings (Winitializer-overrides, Wformat,
+         Wsign-compare, Wformat-zero-length) are shown by any of W=1, W=2,
+         and W=3. With this commit, they will be warned only by W=1. I
+         think this is a more correct behavior since each warning belongs
+         to only one group.
+
+>> diff --git a/scripts/Makefile.extrawarn b/scripts/Makefile.extrawarn
+>> @@ -22,64 +17,101 @@ endif
+>> -warning-1 += $(call cc-disable-warning, missing-field-initializers)
+>> -warning-1 += $(call cc-disable-warning, sign-compare)
+>> +KBUILD_CFLAGS += -Wmissing-prototypes
+>> +KBUILD_CFLAGS += -Wold-style-definition
+>> +KBUILD_CFLAGS += -Wmissing-include-dirs
+> 
+> ...
+>> +KBUILD_CFLAGS += -Wno-missing-field-initializers
+>> +KBUILD_CFLAGS += -Wno-sign-compare
+>> +KBUILD_CFLAGS += -Wno-type-limits
+>> +KBUILD_CFLAGS += -Wno-shift-negative-value
+> 
+> Several flags previously wrapped in cc-option / cc-disable-warning are
+> now passed unconditionally (-Wmissing-prototypes,
+> -Wold-style-definition, -Wmissing-include-dirs, -Wno-type-limits,
+> -Wno-shift-negative-value). That's the v6.1 behaviour, fair enough.
+> What's the oldest gcc we support?
+> 
+
+Pfew... That I don't know. We have an explicit check for GCC10 on ARM 
+since commit bb1c2b463265 ("update GCC version check after Kbuild 
+bump"). We have GCC4 min for PPC in arch/powerpc/config.mk with 
+checkgcc4 target.
+
+mbedtls specifies they test against GCC 5.4, c.f. 
+https://github.com/Mbed-TLS/mbedtls#tool-versions. Some parts in 
+lib/mbedtls/external/mbedtls/library/aesce.c and 
+lib/mbedtls/external/mbedtls/library/sha256.c require GCC6. 
+lib/mbedtls/external/mbedtls/library/sha512.c requires GCC8.
+
+lwip's CI tests on ubuntu-latest GitHub runner, c.f. 
+https://github.com/lwip-tcpip/lwip/blob/master/.github/workflows/ci-linux.yml#L9-L17. 
+I don't know which version we've been using but it was merged for 
+2025.01 and at that time ubuntu-latest GitHub worker was Ubuntu 22.04. I 
+believe GCC10 was the version by default, though 9 to 12 are available 
+in the Universe package feed.
+
+microMIPS requires GCC>=4.9, c.f. check in arch/mips/include/asm/compiler.h.
+
+include/linux/compiler-gcc.h requires GCC>=4.6.
+
+For the rest, I don't know. Maybe Tom does?
+
+The Linux kernel states in Documentation/process/changes.rst that the 
+minimum GCC is 5.1 though "The gcc version requirements may vary 
+depending on the type of CPU in your computer." (and I'm assuming "in 
+your computer" applies to the target device, not the host machine).
+
+Cheers,
+Quentin
