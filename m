@@ -4,101 +4,101 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36B91CD13DA
-	for <u-boot@archiver.kernel.org>; Tue,  5 May 2026 05:46:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EFF56CD13DA
+	for <u-boot@archiver.kernel.org>; Tue,  5 May 2026 05:47:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C1B2B846D5;
-	Tue,  5 May 2026 07:46:56 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8EDCC846D5;
+	Tue,  5 May 2026 07:47:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="exulbSsC";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="YcoKmLj2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 09C2E846E1; Tue,  5 May 2026 07:46:55 +0200 (CEST)
-Received: from mail-yx1-xb12e.google.com (mail-yx1-xb12e.google.com
- [IPv6:2607:f8b0:4864:20::b12e])
+ id AA0B8846D5; Tue,  5 May 2026 07:47:19 +0200 (CEST)
+Received: from mail-yx1-xb12b.google.com (mail-yx1-xb12b.google.com
+ [IPv6:2607:f8b0:4864:20::b12b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D086184683
- for <u-boot@lists.denx.de>; Tue,  5 May 2026 07:46:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 93D5C84683
+ for <u-boot@lists.denx.de>; Tue,  5 May 2026 07:47:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yx1-xb12e.google.com with SMTP id
- 956f58d0204a3-651c5d525f6so4435198d50.3
- for <u-boot@lists.denx.de>; Mon, 04 May 2026 22:46:52 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1777960011; cv=none;
+Received: by mail-yx1-xb12b.google.com with SMTP id
+ 956f58d0204a3-65c6a2158d3so309772d50.3
+ for <u-boot@lists.denx.de>; Mon, 04 May 2026 22:47:17 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1777960036; cv=none;
  d=google.com; s=arc-20240605;
- b=kK68YVFV/KVAdRn1ovEuXNOei5js61rnKODwV2+vq0ymEr3ethJX/kIr1WCvYM3edI
- KvlNrU+aeko6VggA81hiXnimwuX+wg7oAhJ5Zg7sUDsNCAT/GkROvtTVrM/gtuRNlmWi
- zCYqo4MUXb9Ir/XXceM1BkkG6l7X8Eaa7UZ43Kw6467eXZrZ4TQADVueKgSejTHlQJcN
- k2zZy6m6lNtcP4pUnqmagGMiauDqVHhLU1XQiX/CkIuv7T3GPnQOCGdpa+IkC4fAuTew
- jZX12Y5No2KXAWFdlYBSK91/wilFrWgtGvmWqncc2P7v8qkdb2Qdkn4WKvxy276+0lPO
- O1XA==
+ b=PGPJG18hFYVCR3uOzAzkP6Es5zgXqE6/qqs2rAbCmLK4Gm/O98/gZQ6el2ZaP23ieb
+ drZcWxJwZhFXxH22xazkk7314RPP0qsVNECOA2BUovsS9J6pV3gyPw4pvXNDJZgEmhho
+ V0D1BprD45SEwslqKsbaOWfJ8KzoC61ZlQp7KtKP3lD+qVod/rJGr1Wv4RhUF/xSndNO
+ 2DXVdrSDcd/ema4X174Hyne1UCHQrMllJE8CbaEF7KwRUFgDzgp1RS9RbO2vZdKf87d3
+ mn0+I+hyqvxVD00cSTf2ce+5Q49q7Cp5zFsPixFzzph7jvFLCMsv1Io5jsXdKQ9p1j9g
+ aXdg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=6Sg0br5+P7ShIDmtiq1cvgbHZKEzXBRF1+kAyNmNGZw=;
+ bh=nR4u5RzYDxoJ+x4zcm1oWW9Ugog3PHmCFbgJTBfqiwY=;
  fh=Jg1GwjOEZ1S4lNqzrPlyRpppkKciiPaSkBs16SCT10U=;
- b=NrKtDRQo3YuzsiygsSEYUxg0FSqV3pGwOBtvEcEo+jVF0exe/iDIRpAILUWagUgZ4D
- Pp+AntaWjUvvX6P58k9Jb2MjPTohK4aRjTpZRmr/UIcH9ahJJgZ5ujxB+fj6xH8Acg8C
- paWw2TLXfOQ/EpZ2Lzo9p9g7oL4juxk/1WKqoWJ3OhAryr9iFuulOlHwtPF0NeRa9h7w
- ecCqGKnPz+od8db27Qfw38blCersNGGeTU6aMgn6acirsZRK9cHEafqx12BGbERAV66w
- DM/qAIh034OzXRbxwhGJ2U7bQS8lrcJNeZlvK3Hxj3ASIgDuuFC/2w5Ym6gFkqk22lGO
- m91g==; darn=lists.denx.de
+ b=kYUsIGJhvlixhhxlrPQi3JbcevTnSLlTeRxWuIlT5K5V855GZwAjvgRzaQcqvej2tz
+ FBdliJ6fwfY8EzX5f5Uc7mUD/+D+BLNPDtWCmN/gCIO7tyRPfW0O1i0yh6B30lSR18xI
+ upaVesAtzyZQN420wxcWtW0MbJUeanlo1NxOTz3HSZFRWkaqZmsnveMd+4RN76eVKZki
+ WEkASipeQqa2TCa6wrsTJdimVN8egGo0t8mEs50uj6DiljViLHsR791zmcw6Ih8k6tCR
+ mU7wU2TPwmMhXfyYkrhzdNCacZvyPJvEuvMOX1iYbzsLrh0jtxErrid/PBoI4XR3AG+E
+ uZXA==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1777960011; x=1778564811; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1777960036; x=1778564836; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=6Sg0br5+P7ShIDmtiq1cvgbHZKEzXBRF1+kAyNmNGZw=;
- b=exulbSsChadTiBYeCEqWDNYJUK/0puFnfjrjchmRTqa1KJwzG0TMJcfBsEJxANg9S5
- 5DOelZYYq6b18ape5dhkkqyYagOz2rG+zUKMS36QVwsjr/ldQCs8fGV+HfJHHRlHDn8k
- adAVdZ/AHKhle9xIktlEASlKa+dAsp5wGcjqdma1HzwBCes1KEYmRhz4dMdCZdM3cpaw
- TieLd04X1Oct/ODZ7ZWsxaLqlSXLY5/pLvnSgrvUBuEh1kJIsXezVvNqmp5RUMi0aTZw
- H1TiaPECntflspuEhBPubwi8QkLwJaSEBcB1FInZn9AtjYfSItTOn/vYm232yh8r7+vi
- 9+Tg==
+ bh=nR4u5RzYDxoJ+x4zcm1oWW9Ugog3PHmCFbgJTBfqiwY=;
+ b=YcoKmLj2U8jF5dHYGEwVtGzqbUi/7wbhkpVQhttgrFbltrC6vY62qCLiSMTFemsGx+
+ 8dTYbk2wUxM+YbjjRqeIt08//8WSGV5VLApCNFY4f7lARYxG6rFh8doc6yhGVCGLZONk
+ lAgIGWkQAyDK7X0amL3DMcEy8P9Bv9INLmew5uC+eTMCF83yXui6ftxSS0RxktrPS9gQ
+ 7WuMhK0UgLsCD2Q+D2mI877An8Dq7e4U5BsTGsztMQ92AVevodG6XRsw/6TSgUJcwW4O
+ rWTDJyqyHOJ2lSkaP1Qbba9/3rLyguGtWoLZXCG1HRUU2FZrJZUxsYjLQHAyqtb6s1sc
+ qCrA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777960011; x=1778564811;
+ d=1e100.net; s=20251104; t=1777960036; x=1778564836;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=6Sg0br5+P7ShIDmtiq1cvgbHZKEzXBRF1+kAyNmNGZw=;
- b=J9uqygcWh5G0HAPQj2Kqb8x7tg0fu+Tgcg4Qrttq7HsnFsQs4gR2SYYgG3xIBTVh67
- S7mI6w5zQnf4awJzv3x3PrpSYFOUSo/7D57Jik4HGgeGYYyem4jxwa43pnaFZp67Uz3c
- Mu0V3cIYx4Smn8VUXlPwQ34i4LDgn6P9N4Hh+BruewWvrtSruS+toPYhHrLOp9/WVH0b
- lPTKtU1yhGuf9HfMN0lqhMgNQxFBsX5IqEUVzjgzoUkrBFg8gghHVCi/A5CdHRSmHWOT
- 4G4acD6D64YH3VMQis7/XCJ4xXQdY2575VOhEjcHfxAQHnxeKGe+j6vA21OZJ1M3AIEv
- 71zQ==
-X-Gm-Message-State: AOJu0YxKsemNJtPXdKvwVvwEaNdGEorGE5i/b7iGj95J3fDwN5pG4sOm
- 6/5+Q7Dw8rbK4ZMVCKO6jdbisOUBGcOnifrU+OwRhKpjdB6LVawJvnXgEUslbAXq6yHLPRjCho5
- N/qzlFEt++nFJ0WHxUtDf9aryPEJoZhhMWanUz4SUJg==
-X-Gm-Gg: AeBDietqdJx6uhFNKZzP4aa2YHv9E+b9FVxY1MosfKlgCMJJ/yIwQAkGDMQPfegwNHf
- iBiR2L5vfLZc4VYgcu25UPsQJ8YLg5hu/S0mY42dQdxmA0+hiZjvZ0CQDcSFtAWfb5Ipp4DLgEP
- blBRQEV7pC5ebldQOV43Og4lgAQZapF4QYA3Y9Eddl9DUYnKMo7wN6Wrw35rIcPSHLeoK7qT5OJ
- rxq+scXS3Qf58sRnQHR3RWFt1LaEKpKc5FArH1lNVsX9c3Y5Ved1sWmGtbxp97xN7Dr8mriD8uo
- lK0JIu1GlmD8dzYSfKYuCqwSCnb7W/mDOI6TJDOVXtqtxTzwBblcFF3bUnDq3d3THvUgOwlPmLd
- jontO0sEf4hqZkKt5Hxw9lvx0/s1JGwm68DuuMZJenezV2KC/dw26GIUHmK2OTnNF+2wNicThkc
- zLo1c9qTSxojTjTmEK8VwRNZCbbDBmEGoO65ekpGU2XaP12frKvyGji5sjcgwDqpqQDaxc4GDev
- vSL238QJ5R4MAKuI2dHGG/mtTrb7PqTImkV5jDbDhOEY/LEeR07tbfu/8GH8mL8r6+YM7pjm/bT
- pegIideo2peN585Qy/iDCseEV4d2+R6Rk5W/IkO/Z7iyRMmsf8AJOFwwkAeaxesk4PvX9kHFM3m
- SevhG+KsvT7m4zujh
-X-Received: by 2002:a05:690e:b4d:b0:656:fc53:12e0 with SMTP id
- 956f58d0204a3-65c3d9a39b5mr12202461d50.12.1777960011585; Mon, 04 May 2026
- 22:46:51 -0700 (PDT)
+ bh=nR4u5RzYDxoJ+x4zcm1oWW9Ugog3PHmCFbgJTBfqiwY=;
+ b=eO32jAcKmrLltV1Vlg1PQ82d+spMrEQkPcB/Sy4oG7sdHWR+aYSSFW4KPbccJqPhKY
+ aDi0bp9zroiYWNZsMb69kjX0bFLb+PM7uJ9h0aowFxLrqb0FW2iP/bpZLaNPfWdlVkYZ
+ UElOGZqs+Vak6//OHh3h+mVyiqVJoLR8q21uzAIRUlW2Fs6CaqAwXPxQKEhnFSW/XDk7
+ T654dRQDYNZ42EU5Gbe/Tn7GSc+VvVfissORBU4RCGMcRMjW/4BizQ8xH3ama8LMdMWC
+ diQI86c1cIjLI+LejEyAukVbYffMOCEmJTDWECax9XdMdlixusTFb2CRRoQVBKJrOBOK
+ u9pg==
+X-Gm-Message-State: AOJu0Yy/LTgIs0KWh1hN0Dk+CZf159hRAmkh8j8hP10hfeVYj0eFxFUg
+ kOG1buxc9gpWizDYbbX6YsZ7JfuNyP6lNwfo0b/K6Uk0FHl4mChmfQ61G+0veAL0v6WiqiusmeU
+ ikGW8qVzbM6zJdtOjxpKF6NcAyO07o0M4SH9hjyJPEw==
+X-Gm-Gg: AeBDieuwtWUqd8oIHrEwoHrMtHnj8SZr111QXioNXqcxoEubBCTFUCwc4B6gKlnKMhx
+ E1VF55blc0C5RUKZsn0nZB7qH+nyjw4IYQsclW1PY4B8Uq0KetYN/P2GnLX4aRoScHqv5ODmnIo
+ 8bTUY3GJEi2hvrdfAvzf1rxSVi4NExIe/HWOrjEt5zm1ap7Y/aOi55uxnQRLWNlYf3hTRWWvMjP
+ qUKDqnfGOqy8vTLaTf7T9p9lMJlhFASqnZ7d7ATMMobYRe103NfLY0Gr5pBLzRAgt8pDwD+moGe
+ b5YY2aDIrLik9zutFmf79nD8rB2stupPHg8DGlMFl0YxpGHa/ybHUQAc5nJ2FvyyysyKlpYD9ZX
+ bXzAiouE5n1+U0U6j/qqRDe34hAZ1O1Jwkc5vF0Q/cdNL/j87eBk99LAHObghhDp/Xn7cSYPmQd
+ jdvZhyW5dYbggSOHW3WHfVwzT/TojDf4XgxkDvLYC2A7Db7mrfNn7f0llrgZqkOuIp6Xc2lHgD5
+ sd8FwES7JrhtCfuZPm4v0sc8efIBkAZr3802A9V+Ic2OI57GKV3jKlbEteJwFHMqGLoX9PtbKO6
+ bf07N6vLuhsflBcQWBmhtIyEBJ1D7fQ3kIVfZsVMJQzpHKWSYZcDjPYeoPsFjZ9tdeYnlyJK2cE
+ rvfHt3nLG5BpsfO775Hc7zre5Kz4=
+X-Received: by 2002:a05:690e:4385:b0:651:d199:51f3 with SMTP id
+ 956f58d0204a3-65c3da2aaa6mr10102344d50.25.1777960036402; Mon, 04 May 2026
+ 22:47:16 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260504-extrawarn-sync-v1-0-b19301d1948a@cherry.de>
- <20260504-extrawarn-sync-v1-9-b19301d1948a@cherry.de>
-In-Reply-To: <20260504-extrawarn-sync-v1-9-b19301d1948a@cherry.de>
+ <20260504-extrawarn-sync-v1-14-b19301d1948a@cherry.de>
+In-Reply-To: <20260504-extrawarn-sync-v1-14-b19301d1948a@cherry.de>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Tue, 5 May 2026 08:46:14 +0300
-X-Gm-Features: AVHnY4KrzuREMV11kuMbCqEZsKaKYwTv_RTN2fG81o-eh5-ueqck3AI4vxJs5Hw
-Message-ID: <CAC_iWjLEBWJFyO9-Z+CMiG8JvK7WwCroMkfY=oa7vwm0_YCS0g@mail.gmail.com>
-Subject: Re: [PATCH RFC next 09/18] kbuild: support W=c and W=e shorthands for
- Kconfig
+Date: Tue, 5 May 2026 08:46:38 +0300
+X-Gm-Features: AVHnY4IrMfqCvweqriSQ3i78FLu-B5YS397DEObWMhi0NSFPJRUh_x5m0j_p_0o
+Message-ID: <CAC_iWj+eeVp6taRB4CV30HBVwSdmhEmoa+uioXWLvgAEJrZZ+w@mail.gmail.com>
+Subject: Re: [PATCH RFC next 14/18] kbuild: respect CONFIG_WERROR for linker
+ and assembler
 To: Quentin Schulz <foss+uboot@0leil.net>
 Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
  Simon Glass <sjg@chromium.org>, Mattijs Korpershoek <mkorpershoek@kernel.org>, 
@@ -132,114 +132,35 @@ On Mon, 4 May 2026 at 16:20, Quentin Schulz <foss+uboot@0leil.net> wrote:
 >
 > From: Quentin Schulz <quentin.schulz@cherry.de>
 >
-> [ Upstream commit c77d06e70d59cbc6e3c22bf644bb0b197a5fc182 ]
+> [ Upstream commit ec4a3992bc0b5b659eceb44a9f8582b26f2c8489 ]
 >
 > Original commit log:
 >
->   KCONFIG_WARN_UNKNOWN_SYMBOLS=1 and KCONFIG_WERROR=1 are descriptive
->   and suitable in scripting, but typing them from the command line can
->   be tedious.
+>   The linker and assembler do not share the compiler flags.
 >
->   Associate them with KBUILD_EXTRA_WARN (and the W= shorthand).
+>   Make sure they also fail on warnings with CONFIG_WERROR and W=e.
 >
->   Support a new letter 'c' to enable extra checks in Kconfig. You can
->   still manage compiler warnings (W=1) and Kconfig warnings (W=c)
->   independently.
->
->   Reuse the letter 'e' to turn Kconfig warnings into errors.
->
->   As usual, you can combine multiple letters in KCONFIG_EXTRA_WARN.
->
->     $ KCONFIG_WARN_UNKNOWN_SYMBOLS=1 KCONFIG_WERROR=1 make defconfig
->
->   can be shortened to:
->
->     $ KBUILD_EXTRA_WARN=ce make defconfig
->
->   or, even shorter:
->
->     $ make W=ce defconfig
->
-> [note that U-Boot currently doesn't make use of the KCONFIG_WERROR or
->  KCONFIG_WARN_UNKNOWN_SYMBOLS symbols as we're using an ancient version
->  of kconfig, so technically W=c won't do anything.]
 > Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 > ---
 
 Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 
->  Makefile                   | 10 ++++++++++
->  scripts/Makefile.extrawarn |  9 ---------
->  scripts/kconfig/Makefile   |  8 ++++++++
->  3 files changed, 18 insertions(+), 9 deletions(-)
+>  scripts/Makefile.extrawarn | 2 ++
+>  1 file changed, 2 insertions(+)
 >
-> diff --git a/Makefile b/Makefile
-> index aed54cee4a4..bd33437fdfd 100644
-> --- a/Makefile
-> +++ b/Makefile
-> @@ -105,6 +105,15 @@ endif
->
->  export quiet Q KBUILD_VERBOSE
->
-> +# backward compatibility
-> +KBUILD_EXTRA_WARN ?= $(KBUILD_ENABLE_EXTRA_GCC_CHECKS)
-> +
-> +ifeq ("$(origin W)", "command line")
-> +  KBUILD_EXTRA_WARN := $(W)
-> +endif
-> +
-> +export KBUILD_EXTRA_WARN
-> +
->  # Kbuild will save output files in the current working directory.
->  # This does not need to match to the root of the kernel source tree.
->  #
-> @@ -2745,6 +2754,7 @@ help:
->         @echo  '                1: warnings which may be relevant and do not occur too often'
->         @echo  '                2: warnings which occur quite often but may still be relevant'
->         @echo  '                3: more obscure warnings, can most likely be ignored'
-> +       @echo  '                c: extra checks in the configuration stage (Kconfig)'
->         @echo  '                e: warnings are being treated as errors'
->         @echo  '                Multiple levels can be combined with W=12 or W=123'
->         @echo  ''
 > diff --git a/scripts/Makefile.extrawarn b/scripts/Makefile.extrawarn
-> index 6bbba36c596..b1881d83e06 100644
+> index 2af90af594e..29b6aab5f72 100644
 > --- a/scripts/Makefile.extrawarn
 > +++ b/scripts/Makefile.extrawarn
-> @@ -8,15 +8,6 @@
+> @@ -104,6 +104,8 @@ endif
+>  ifneq ($(findstring e, $(KBUILD_EXTRA_WARN))$(CONFIG_WERROR),)
 >
->  KBUILD_CFLAGS += $(call cc-disable-warning, packed-not-aligned)
+>  KBUILD_CPPFLAGS                += -Werror
+> +KBUILD_AFLAGS          += -Wa,--fatal-warnings
+> +KBUILD_LDFLAGS         += --fatal-warnings
+>  KBUILD_RUSTFLAGS       += -Dwarnings
 >
-> -# backward compatibility
-> -KBUILD_EXTRA_WARN ?= $(KBUILD_ENABLE_EXTRA_GCC_CHECKS)
-> -
-> -ifeq ("$(origin W)", "command line")
-> -  KBUILD_EXTRA_WARN := $(W)
-> -endif
-> -
-> -export KBUILD_EXTRA_WARN
-> -
->  #
->  # W=1 - warnings which may be relevant and do not occur too often
->  #
-> diff --git a/scripts/kconfig/Makefile b/scripts/kconfig/Makefile
-> index abc34f60d15..f072772eba8 100644
-> --- a/scripts/kconfig/Makefile
-> +++ b/scripts/kconfig/Makefile
-> @@ -22,6 +22,14 @@ ifeq ($(quiet),silent_)
->  silent := -s
 >  endif
->
-> +ifneq ($(findstring c, $(KBUILD_EXTRA_WARN)),)
-> +export KCONFIG_WARN_UNKNOWN_SYMBOLS=1
-> +endif
-> +
-> +ifneq ($(findstring e, $(KBUILD_EXTRA_WARN)),)
-> +export KCONFIG_WERROR=1
-> +endif
-> +
->  # We need this, in case the user has it in its environment
->  unexport CONFIG_
->
 >
 > --
 > 2.54.0
