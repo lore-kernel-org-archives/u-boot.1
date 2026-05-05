@@ -4,51 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B432DFF8855
-	for <u-boot@archiver.kernel.org>; Tue,  5 May 2026 17:58:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E03CCD3427
+	for <u-boot@archiver.kernel.org>; Tue,  5 May 2026 17:58:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 46889849B2;
+	by phobos.denx.de (Postfix) with ESMTP id 869DA849CB;
 	Tue,  5 May 2026 19:58:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=seznam.cz
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=seznam.cz header.i=@seznam.cz header.b="bcZcjtRb";
+	dkim=pass (2048-bit key; secure) header.d=seznam.cz header.i=@seznam.cz header.b="ySD8OrOO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2332984986; Tue,  5 May 2026 18:27:18 +0200 (CEST)
-Received: from mxd-2-a03.seznam.cz (mxd-2-a03.seznam.cz
- [IPv6:2a02:598:64:8a00::1000:a03])
+ id 66881849A4; Tue,  5 May 2026 19:02:01 +0200 (CEST)
+Received: from mxd-3-701.seznam.cz (mxd-3-701.seznam.cz
+ [IPv6:2a02:598:96:8a00::1200:701])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AEA2984974
- for <u-boot@lists.denx.de>; Tue,  5 May 2026 18:27:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 60AC18497A
+ for <u-boot@lists.denx.de>; Tue,  5 May 2026 19:01:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=seznam.cz
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=Michael.Srba@seznam.cz
-Received: from email.seznam.cz by smtpc-mxd-5f4d8d5f6f-w7th8
- (smtpc-mxd-5f4d8d5f6f-w7th8 [2a02:598:64:8a00::1000:a03])
- id 67d65f513cd80b38667f930f; Tue, 05 May 2026 18:26:24 +0200 (CEST)
+Received: from email.seznam.cz by smtpc-mxd-5f4d8d5f6f-gj4cr
+ (smtpc-mxd-5f4d8d5f6f-gj4cr [2a02:598:96:8a00::1200:701])
+ id 131e4cd2481018bb12b7808c; Tue, 05 May 2026 19:01:16 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=seznam.cz; s=szn1;
- t=1777998384; bh=5eohVBgaDIDYaP5rqjaAhKw3Ri8jlfInk8O58Z++mew=;
+ t=1778000476; bh=493gGefwJW/7TZHSw7gpLU4l/s8e0CxGaoamnvS4mm0=;
  h=Message-ID:Date:MIME-Version:User-Agent:Subject:To:Cc:
  Content-Language:From:Content-Type:Content-Transfer-Encoding;
- b=bcZcjtRbZjcT8bc51JXQ892GEHgCrZ7KhYpaihCsNK85jHXZX9tnv0FQw/C/lcwOa
- SARlq2/jtqUHUqBG9lq6u2yhm206TS+qGH0PQjxcBg8/bCj/g8H7m2UeA6QgNVTtMU
- BcCyBlbfWA8zKe+w/69/q4e/KwiGrSlQi4/Qb0gDwG6tHRdolw3JWsIlPMCCCdOCOl
- DlV/l95b1QkKQ1XCHTEdFX0oNvG5HwgWmwX3OI9IGNlwFsA/rej2tPaPhXS2Pn6tOh
- VxzCFF/tQECH/J+1ZmBdkZ90hfHOmJPKFMyea9Hx/FBFHFlVpkMFNMREh+IzT0NAvL
- 1rvuA8RA+VfMg==
+ b=ySD8OrOO/z8zZ6SmMg7QhVPv3U+yFts9JT67yeckKmU/cXpdwczKWwIRf8FL2p4xV
+ Beutw66JjLE3AGb0pN1odLPRAYDdAZymNhtW/wu24EC2srrTgN4Nedcv4LxDFQOWGl
+ UGqAGqff0jdV1aTp0SMc8kHJ3gclDkUR6rr6YOOGoxtabVmRENE0NMtmhdKFQA5zHn
+ +wRc+I3wRnl9pcnG/rd6XNAx/vR1Ylj5SIHx+p7K0iTlkEAr61sxlnpkclsv4APSmG
+ 7WqJDlTmlMxeQe0WpFgK/YYaC3aYyIky7jZJbcFpOwtjMx5XH5E1F4kh7gg8sDE/g6
+ dNX6nbls48Tdw==
 Received: from [192.168.0.240] (ip-111-27.static.ccinternet.cz
  [147.161.27.111])
- by smtpd-relay-7c7c659656-xkdqp (szn-email-smtpd/2.0.72) with ESMTPA
- id 8b10b3e6-318c-41ea-90bf-fb101111d5fb;
- Tue, 05 May 2026 18:26:21 +0200
-Message-ID: <d7a881ec-5fbc-4d49-8115-c05911e81c1f@seznam.cz>
-Date: Tue, 5 May 2026 18:26:19 +0200
+ by smtpd-relay-7c7c659656-4rdhd (szn-email-smtpd/2.0.72) with ESMTPA
+ id 3a1c1cd2-2b8c-4304-8309-80d3bfffea88;
+ Tue, 05 May 2026 19:01:03 +0200
+Message-ID: <be758491-53be-438b-beaa-fb67ed2f2728@seznam.cz>
+Date: Tue, 5 May 2026 19:01:00 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 01/11] Makefile: add SPL_REMAKE_ELF_LDSCRIPT feature
+Subject: Re: [PATCH v5 04/11] mach-snapdragon: boot0.h: split out
+ msm8916_boot0.h
 To: Simon Glass <sjg@chromium.org>
 Cc: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>,
  u-boot-qcom@groups.io, Tom Rini <trini@konsulko.com>,
@@ -56,7 +57,7 @@ Cc: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>,
  Sughosh Ganu <sughosh.ganu@arm.com>, Anshul Dalal <anshuld@ti.com>,
  Peng Fan <peng.fan@nxp.com>, Mattijs Korpershoek <mkorpershoek@kernel.org>,
  Quentin Schulz <quentin.schulz@cherry.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Andrew Davis <afd@ti.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Hrushikesh Salunke <h-salunke@ti.com>,
  Dario Binacchi <dario.binacchi@amarulasolutions.com>, Ye Li <ye.li@nxp.com>,
  Andre Przywara <andre.przywara@arm.com>,
@@ -81,13 +82,13 @@ Cc: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>,
  George Chan <gchan9527@gmail.com>,
  Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
  Alexey Charkov <alchark@gmail.com>, Ronald Wahl <ronald.wahl@legrand.com>,
- Michael Trimarchi <michael@amarulasolutions.com>
+ Michael Trimarchi <michael@amarulasolutions.com>, Andrew Davis <afd@ti.com>
 References: <20260505-qcom_spl-v5-0-11817415d664@seznam.cz>
- <20260505-qcom_spl-v5-1-11817415d664@seznam.cz>
- <CAFLszTj83hXz+mWj4jfJa6p5RY-yXCbpV0hrD2OFLgr0LPXz0w@mail.gmail.com>
+ <20260505-qcom_spl-v5-4-11817415d664@seznam.cz>
+ <CAFLszThNdiVOs5+q=tVZLxfr14_vxrjYA6rZ-=4J=9T6MAQfGg@mail.gmail.com>
 Content-Language: en-US
 From: Michael Srba <Michael.Srba@seznam.cz>
-In-Reply-To: <CAFLszTj83hXz+mWj4jfJa6p5RY-yXCbpV0hrD2OFLgr0LPXz0w@mail.gmail.com>
+In-Reply-To: <CAFLszThNdiVOs5+q=tVZLxfr14_vxrjYA6rZ-=4J=9T6MAQfGg@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-Mailman-Approved-At: Tue, 05 May 2026 19:58:20 +0200
@@ -109,37 +110,44 @@ X-Virus-Status: Clean
 
 Hi,
 
-On 5/5/26 15:58, Simon Glass wrote:
+On 5/5/26 16:00, Simon Glass wrote:
 > Hi Michael,
 >
 > On 2026-05-05T00:47:48, Michael Srba <michael.srba@seznam.cz> wrote:
->> Makefile: add SPL_REMAKE_ELF_LDSCRIPT feature
+>> mach-snapdragon: boot0.h: split out msm8916_boot0.h
 >>
->> Some platforms (e.g. at least Qualcomm) use the ELF format in creative
->> ways, including in the bootrom. Make SPL_REMAKE_ELF use a linker script
->> specified in SPL_REMAKE_ELF_LDSCRIPT (with the previously hardcoded path
->> as the default).
+>> Prepare for supporting alternative boot0.h per-SoC by splitting out
+>> the existing msm8916-specific code.
+>>
+>> There is now a selection mechanism to choose a specific boot0.h
+>> in the Kconfig. BOOT0_MSM8916_PSCI_WORKAROUND is the only option
+>> right now, but more can be added. The toplevel boot0.h additionally
+>> enables conditionally performing the include only in u-boot proper,
+>> or only in SPL.
 >>
 >> Signed-off-by: Michael Srba <Michael.Srba@seznam.cz>
 >>
->> Makefile           |  9 +++++++--
->>   common/spl/Kconfig | 11 +++++++++++
->>   2 files changed, 18 insertions(+), 2 deletions(-)
->> diff --git a/common/spl/Kconfig b/common/spl/Kconfig
->> @@ -238,6 +238,17 @@ config SPL_HANDOFF
->> +     help
->> +       This allows specifying a linker script that will be used to re-wrap
->> +       the SPL binary into an ELF.
->> +       Some platforms (e.g. at least Qualcomm) use the ELF format in creative
->> +       ways, including in the bootrom. For such platforms, you can change
->> +       the default linker script to a platform-specific one.
-> Please add a blank line between the two paragraphs so menuconfig
-> renders them separately.
+>> arch/arm/mach-snapdragon/Kconfig                   | 16 ++++++
+>>   arch/arm/mach-snapdragon/include/mach/boot0.h      | 58 +++-------------------
+>>   .../mach-snapdragon/include/mach/msm8916_boot0.h   | 54 ++++++++++++++++++++
+>>   configs/dragonboard410c_defconfig                  |  1 +
+>>   4 files changed, 77 insertions(+), 52 deletions(-)
+>> diff --git a/arch/arm/mach-snapdragon/include/mach/boot0.h b/arch/arm/mach-snapdragon/include/mach/boot0.h
+>> @@ -1,54 +1,8 @@
+>>   /* SPDX-License-Identifier: GPL-2.0+ */
+>> +#if defined(CONFIG_SPL_BUILD)
+>>        b       reset
+>> +#else
+>> +#if defined(CONFIG_BOOT0_MSM8916_PSCI_WORKAROUND)
+>> +#include 'msm8916_boot0.h'
+>> +#endif
+>> +#endif
+> When neither CONFIG_SPL_BUILD nor BOOT0_MSM8916_PSCI_WORKAROUND is
+> set, this expands to nothing, so start.S falls through into _TEXT_BASE
+> etc. Is that intended?
+hm, no, it should definitely be `b reset`... my bad, will fix it
+> Reviewed-by: Simon Glass <sjg@chromium.org>
 >
-> Missing file, as mentioned by Michal
-looks like copy paste error, should clearly be arch/u-boot-elf.lds.
-fwiw CI didn't complain, but I guess I should've compile tested
-it locally.
 > Regards,
 > Simon
 
