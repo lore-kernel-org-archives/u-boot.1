@@ -4,84 +4,105 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60BDDCD342F
-	for <u-boot@archiver.kernel.org>; Tue,  5 May 2026 07:51:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F075BFF885A
+	for <u-boot@archiver.kernel.org>; Tue,  5 May 2026 07:55:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3F986846F9;
-	Tue,  5 May 2026 09:50:14 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=thingy.jp
+	by phobos.denx.de (Postfix) with ESMTP id 7CB26846CE;
+	Tue,  5 May 2026 09:55:52 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=thingy.jp header.i=@thingy.jp header.b="Q0Ig5mg6";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="Nr1WOjKU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 97A0484867; Tue,  5 May 2026 09:50:12 +0200 (CEST)
-Received: from mail-pl1-x632.google.com (mail-pl1-x632.google.com
- [IPv6:2607:f8b0:4864:20::632])
+ id 2B793846DB; Tue,  5 May 2026 09:55:52 +0200 (CEST)
+Received: from mail-yw1-x112c.google.com (mail-yw1-x112c.google.com
+ [IPv6:2607:f8b0:4864:20::112c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 01B6B846F4
- for <u-boot@lists.denx.de>; Tue,  5 May 2026 09:50:10 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=thingy.jp
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=daniel@0x0f.com
-Received: by mail-pl1-x632.google.com with SMTP id
- d9443c01a7336-2b9fcf7c91bso23248015ad.0
- for <u-boot@lists.denx.de>; Tue, 05 May 2026 00:50:09 -0700 (PDT)
+ by phobos.denx.de (Postfix) with ESMTPS id 1BA00846A1
+ for <u-boot@lists.denx.de>; Tue,  5 May 2026 09:55:49 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=amarulasolutions.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=dario.binacchi@amarulasolutions.com
+Received: by mail-yw1-x112c.google.com with SMTP id
+ 00721157ae682-7982c3b7dfcso48473767b3.0
+ for <u-boot@lists.denx.de>; Tue, 05 May 2026 00:55:49 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1777967748; cv=none;
+ d=google.com; s=arc-20240605;
+ b=O58IURYMfeDA+xrwLlbTxQ8sKakwp7STJc8jx270vSXjfv2ZyW6zADOsNd1m3NRjdX
+ qA0sq4/1ZaXH50pDlfQ6hDSv76FgM3qSoupqaslqYQ+tqguvhXSFWgx1uLZp2jf5B8lt
+ 5ntf1Gxzzk1w846bKeWE0lgeltlhd0EUW4Ey3Oaekg2Xek7ajf8y0dBxKWwfcXhpYCqt
+ vNkjfu+3SOPjtUr5xKKstEU6h31QkzJCrwDFzdAq+ldxYolaij2UJ8oFlDvcuSkTkbwh
+ AUTHaZfvn6PH2GGT1pOC9XrHFQIJc5OZOcAirmczfhuhDly3a7j4RjgWnxSYeKDYy/+O
+ HA8A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=NdlHwGOvbOYDIwMcALsCbRep6sOWuvwGSnde0aV+kBY=;
+ fh=VQfG0fmv5KJzLQhl0ufYpqdXBYQXanyqisBUd6SiNas=;
+ b=Gswh/dv52FG4fx8TZ0ISDkbIdhU1pqozv8mQaoYQ1qWLAvbhZO0avXvo2KBXcNUb+Q
+ xm7Wr7fbGFL0kvdQ17V99Ck6wBco17llN5zwacirfTTJb7U1lM4+3WX8Qd10ZdxTkchs
+ 3GGYSwuvkSmT3Uvi+aJKcMW2W439uMRlbRpTOpLKS9cr8Zy1rwOZU6oA1g7iG4mf6PbL
+ sKKORP1XaZGCTU//EjdCKDqi52G7QxXHy7Fncxpo/G+E3QAtkfQbIT1sEJAqfiejWI9K
+ eoejqRXgRRMAVex24gRFe49Ot5YV2e2QqZmrceoqB0bQtP0YoZuHdAPSE9K6VKIdfPt3
+ /S6g==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=thingy.jp; s=google; t=1777967408; x=1778572208; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=jndIn+4A7KdbivqHWcDepFFYPNsgpk+Rn9R2scjCMbI=;
- b=Q0Ig5mg6UsFwjuiir0Nb8IV9hAmNENe1pKBTrMKWRDcBdmTSRkSMKOl/lG65Le1zwB
- 4lsh4ssoI26CrM0Wg78vHJ9cgFFIDjgboIM1iQsKOTe5WQoAZlpboMihY59BghQDaPRD
- NZ2THZN55fAhNG5uqxgYsrm1tY+BzZJk+8+0s=
+ d=amarulasolutions.com; s=google; t=1777967748; x=1778572548;
+ darn=lists.denx.de; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=NdlHwGOvbOYDIwMcALsCbRep6sOWuvwGSnde0aV+kBY=;
+ b=Nr1WOjKUqXi4plvF9HnFFUiTbfHCr6qloyv+31qpfAEO9hhyYh+NiaoHW6YOJCaTzX
+ 5TQSLkvwHjUjC7xIykAwA0lJrifCjymlr9/UPuEdQAkyJyozi838JA5o0C4jo1EKiVnE
+ eTjrwHRYkuyqCZXsqBN3sOK48eRU7sGqWx5VA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777967408; x=1778572208;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=jndIn+4A7KdbivqHWcDepFFYPNsgpk+Rn9R2scjCMbI=;
- b=ghojwcL/sQSXLZ2jSLiMGcZuN3E0sjLK1oDF6z1d5ONaKKoClk+sY4m51fPfN2nAR/
- 1df7X0nlZDQPYLzFKmGggZZvhW1RSkVsvtSRmykLQdIpu7oXDshQe/66nIDKYdhsYNo/
- NGBfc1SFVWTVMmv5uNXWEJZAR3//uhEEwgGHBG3pS+y+3dMERWn1rEagZSOsiem+0PD3
- /ht5tyYZ6hNwqOYxnk76ndzb7jfMahmRyjAH/hbV+ex5t0ByCxlb384NguyFV0wHuFt/
- sdov7Sq/pyQUP/zh/FD/TIbhTBLA1Sn0kSMyBlITDuJHP3cOmZQ85D7ZZR9MwhXsE+kJ
- XQKg==
-X-Forwarded-Encrypted: i=1;
- AFNElJ/1hF6+PwtorcTj0wvDpdNgrzZx81hvBL2xd11HEH2yDvOZ5ta2P59AC1IFDHuUHmInOld7bqo=@lists.denx.de
-X-Gm-Message-State: AOJu0YyTdmgzK8Zpai3aXHfXyCPk8zupP2GPYVg/8vqHZyyyGPVDZ3EA
- cf797x2+Gtz0lZ0XlLvZqMceEJJDPCtx61Tp4CMRoTUjqyhjDJ0tZTeZIpKlY19yU3A=
-X-Gm-Gg: AeBDieuRtGl08eHoc2fzEAtm3Pkcbx89u4VvVCR1A+o8Gmou2NtFtuDe6fdLt563G6d
- ErG6FnljZ8R26UKjkdMgC7bhpeD+y6lrHq6OFSgLXYq9gLajs7tfV+VBSM4cc6+BJmAcGpBG3DS
- hOVqkiIRPm6OoRqKyhPhh/yuYz9ASkA2g+74Sv8U6TA34zZ9QLAwwPPlZpB4tF00Jo2ZY8Izr/5
- yNUIy2qYMqKQf5Gqv7yc0yDZrEGHsk0SAo1nosDz76l0eHwdUeRQ0d0h5ytEvdIsaYodavf40mr
- F8LSz5TR6Q4p4IlQguVOIPzWhQRSkMzvAhjfPy6VeqzS8jd0ElgvWXFRC73Zh9Ic56rj4NYmaXH
- gkibBTJPqTxumBK02ltQ2u3z7fcKgs7T5P38Hepk3Viufm7ypAHSVedZyl1waUk2Y0fpsP5z+RP
- rOgkDDdU0Yof/iTNHKh0jthTLwJI7sEPyUvsr5AQHm/snZk3LRwsx1HLuVq8IEnRSjfKN5fJwSY
- ycfPzbZIOH4+7fzJB/27YPCL8o=
-X-Received: by 2002:a17:903:48b:b0:2b2:eaec:c810 with SMTP id
- d9443c01a7336-2b9f2533763mr77364465ad.8.1777967408596; 
- Tue, 05 May 2026 00:50:08 -0700 (PDT)
-Received: from kinako.work.home.arpa
- (p1387170-ipxg00a01sizuokaden.shizuoka.ocn.ne.jp. [153.221.239.170])
- by smtp.googlemail.com with ESMTPSA id
- d9443c01a7336-2ba038ae95csm89160495ad.46.2026.05.05.00.50.07
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 05 May 2026 00:50:08 -0700 (PDT)
-From: Daniel Palmer <daniel@thingy.jp>
-To: trini@konsulko.com
-Cc: visitorckw@gmail.com, angelo@kernel-space.org, bmeng.cn@gmail.com,
- sjg@chromium.org, u-boot@lists.denx.de, Daniel Palmer <daniel@thingy.jp>
-Subject: [PATCH v6 8/8] board: qemu: m68k: Create virtio mmio instances
-Date: Tue,  5 May 2026 16:49:41 +0900
-Message-ID: <20260505074948.2603870-9-daniel@thingy.jp>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260505074948.2603870-1-daniel@thingy.jp>
-References: <20260505074948.2603870-1-daniel@thingy.jp>
+ d=1e100.net; s=20251104; t=1777967748; x=1778572548;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=NdlHwGOvbOYDIwMcALsCbRep6sOWuvwGSnde0aV+kBY=;
+ b=EoQ3Rl/nJNR7MoaiBHkaHJaU/r6bLDTkiV4yyadtXTlInbc/41X7se81/pD3LIwTEY
+ oBMb/77eVmVjDwyP+eR2wRsTXQwnMWSGCI7MwbgX5LlMurE0eE3/GejQAmTzurfuEKG/
+ Vh9EXZoTWbBdKmOnhQ9ffo99/8zrxN6TQ7Cu/1vr1FaNZ8zPB6zzgp5uuapmeGo98TTY
+ QhwD7HzcJJtsZfGtFw/YiLYgblF4VE/eUMaDe1VI2iwzNmrNTogrSjEV4cKKSiViUc+t
+ 4wic256yO7xbxvw4Gvhj1Ms0LG9PSAjaumX9KxYf/l0fU4LUDyl6Q1gexfVqF3uWJVII
+ ZaAw==
+X-Gm-Message-State: AOJu0YxP2W/jxvzTy7G3kZg8QyyytGn4NwA0JlMGTAtPVYUlKqxTZbO1
+ eDXPbjeRwUprvwUElaiYuJub7WVhq5OnIrn68MQh+cjIwJ1klyfbXNCIh9o4sJvvoVxJqXpET+w
+ MAUMIZSTxzq0mO94mcba4I0GDTu1nrLJIwV4hCrvy6Q==
+X-Gm-Gg: AeBDieunwE+IE78NVUcAZStb2dPKchTP21cJRGUV2vvCRM+ISKbCc6SzoZPNN70uR1X
+ nnxxGgYNeCbx0swQbIOBSJfdIYjiw26TSjKcqErmJVOrEJwFmoEwPJULe87pnHbaynhC8KEMDDo
+ 1D5+dqilGAD4hreisefD2wRsrCr2FIJfswazELKeHGgcXHu9f3KeODljYzV7mOUMFGcOZfyDVu6
+ 3qGgET8XXvnumPkfokXbd8tcpsHkTkA9Z2MnlFvQlayPGH+XLpByO8Dj1s8eBr0DXJl6gNqTyu3
+ LFJCiNiRend6RgcBmmsGQM/y0SH1brsPF02WhbUddmkspklr7qmQOr0G+/lLZvvzLQ93SjanCfe
+ 1xiyU/A==
+X-Received: by 2002:a05:690c:260f:b0:79b:cd3a:a5c7 with SMTP id
+ 00721157ae682-7bd76f9816dmr144695327b3.11.1777967747820; Tue, 05 May 2026
+ 00:55:47 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20260430080627.849636-1-dario.binacchi@amarulasolutions.com>
+ <20260430080627.849636-4-dario.binacchi@amarulasolutions.com>
+ <5b02ed04-764c-4eee-ba58-0f84ef43446c@foss.st.com>
+In-Reply-To: <5b02ed04-764c-4eee-ba58-0f84ef43446c@foss.st.com>
+From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+Date: Tue, 5 May 2026 09:55:35 +0200
+X-Gm-Features: AVHnY4JeCJ1ntYKSydAtY22N4-2hyhwlnMV9cw666QAJmLYskJ4pVlRsQR_UbNs
+Message-ID: <CABGWkvp-5GnhvOO46PoKBOKmh-XsTLbHQx63fMwm70J0NYZ55A@mail.gmail.com>
+Subject: Re: [PATCH v8 3/8] test: cmd: add unit tests for part command
+To: Patrice CHOTARD <patrice.chotard@foss.st.com>
+Cc: u-boot@lists.denx.de, linux-amarula@amarulasolutions.com, 
+ Simon Glass <sjg@chromium.org>, Dinesh Maniyam <dinesh.maniyam@altera.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,123 +119,294 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-So that you can use virtio network, block etc create the virtio mmio
-instances. There are 128 of these even if they are not all used, a
-single mmio base value is passed via bootinfo.
+Hi Patrice,
 
-Reviewed-by: Angelo Dureghello <angelo@kernel-space.org>
-Reviewed-by: Simon Glass <sjg@chromium.org>
-Signed-off-by: Daniel Palmer <daniel@thingy.jp>
----
- arch/m68k/Kconfig                     | 14 +++++----
- board/emulation/qemu-m68k/qemu-m68k.c | 45 +++++++++++++++++++++++++++
- 2 files changed, 53 insertions(+), 6 deletions(-)
+On Tue, May 5, 2026 at 9:26=E2=80=AFAM Patrice CHOTARD <patrice.chotard@fos=
+s.st.com>
+wrote:
 
-diff --git a/arch/m68k/Kconfig b/arch/m68k/Kconfig
-index 00e89bd0a625..8bebf0ea3e13 100644
---- a/arch/m68k/Kconfig
-+++ b/arch/m68k/Kconfig
-@@ -196,12 +196,14 @@ config TARGET_STMARK2
-         select M54418
- 
- config TARGET_QEMU_M68K
--    bool "Support QEMU m68k virt"
--    select M68040
--    imply CMD_DM
--    help
--      This target supports the QEMU m68k virtual machine (-M virt).
--      It simulates a Motorola 68040 CPU with Goldfish peripherals.
-+	bool "Support QEMU m68k virt"
-+	select M68040
-+	select BOARD_EARLY_INIT_R
-+	select VIRTIO_MMIO
-+	imply CMD_DM
-+	help
-+	  This target supports the QEMU m68k virtual machine (-M virt).
-+	  It simulates a Motorola 68040 CPU with Goldfish peripherals.
- 
- endchoice
- 
-diff --git a/board/emulation/qemu-m68k/qemu-m68k.c b/board/emulation/qemu-m68k/qemu-m68k.c
-index d3527aee1128..a19b23a28ce3 100644
---- a/board/emulation/qemu-m68k/qemu-m68k.c
-+++ b/board/emulation/qemu-m68k/qemu-m68k.c
-@@ -14,9 +14,14 @@
- #include <asm/bootinfo.h>
- #include <asm/global_data.h>
- #include <asm/io.h>
-+#include <dm.h>
-+#include <dm/device-internal.h>
-+#include <dm/lists.h>
- #include <dm/platdata.h>
-+#include <dm/root.h>
- #include <linux/errno.h>
- #include <linux/sizes.h>
-+#include <virtio_mmio.h>
- 
- DECLARE_GLOBAL_DATA_PTR;
- 
-@@ -25,6 +30,38 @@ static struct goldfish_rtc_plat rtc_plat;
- static struct goldfish_timer_plat timer_plat;
- static struct qemu_virt_ctrl_plat reset_plat;
- 
-+#define VIRTIO_MMIO_NUM	128
-+#define VIRTIO_MMIO_SZ	0x200
-+
-+static struct virtio_mmio_plat virtio_mmio_plat[VIRTIO_MMIO_NUM];
-+static char virtio_mmio_names[VIRTIO_MMIO_NUM][11];
-+static phys_addr_t virtio_mmio_base;
-+
-+static int create_virtio_mmios(void)
-+{
-+	struct driver *drv;
-+	int i, ret;
-+
-+	if (!virtio_mmio_base)
-+		return -ENODEV;
-+
-+	drv = lists_driver_lookup_name("virtio-mmio");
-+	if (!drv)
-+		return -ENOENT;
-+
-+	for (i = 0; i < VIRTIO_MMIO_NUM; i++) {
-+		virtio_mmio_plat[i].base = virtio_mmio_base + (VIRTIO_MMIO_SZ * i);
-+		sprintf(virtio_mmio_names[i], "virtio-%d", i);
-+
-+		ret = device_bind(dm_root(), drv, virtio_mmio_names[i],
-+				  &virtio_mmio_plat[i], ofnode_null(), NULL);
-+		if (ret)
-+			return ret;
-+	}
-+
-+	return 0;
-+}
-+
- /*
-  * Theoretical limit derivation:
-  * Max Bootinfo Size (Standard Page) = 4096 bytes
-@@ -65,6 +102,9 @@ static void parse_bootinfo(void)
- 		case BI_VIRT_CTRL_BASE:
- 			reset_plat.reg = base;
- 			break;
-+		case BI_VIRT_VIRTIO_BASE:
-+			virtio_mmio_base = base;
-+			break;
- 		case BI_MEMCHUNK:
- 			gd->ram_size = record->data[1];
- 			break;
-@@ -80,6 +120,11 @@ int board_early_init_f(void)
- 	return 0;
- }
- 
-+int board_early_init_r(void)
-+{
-+	return create_virtio_mmios();
-+}
-+
- int checkboard(void)
- {
- 	puts("Board: QEMU m68k virt\n");
--- 
-2.53.0
+>
+>
+> On 4/30/26 10:06, Dario Binacchi wrote:
+> > Add unit tests for the 'part' command, specifically for the 'number',
+> > 'start', and 'size' subcommands.
+> >
+> > These tests establish a baseline for the current partition lookup
+> > functionality by name. This foundation will be used by subsequent
+> > patches to extend the command, ensuring consistent behavior as new
+> > features are introduced.
+> >
+> > Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+> > Reviewed-by: Simon Glass <sjg@chromium.org>
+> >
+> > ---
+> >
+> > Changes in v8:
+> > - Skip the test in case the CONFIG_MCC is not enabled or the mmc
+> >   device is not found.
+> >
+> > Changes in v6:
+> > - Add Reviewed-by of Simon Glass to patch 3/8 "test: cmd: add unit
+> >   tests for part command"
+> >
+> > Changes in v4:
+> > - Place the part command tests in the cmd suite rather than the dm
+> >   suite.
+> > - Order the include files according the U-Boot coding style.
+> >
+> > Changes in v3:
+> > - Wrap the lines exceeding 80 columns
+> > - Combine run_command() and ut_asserteq() -> ut_asserteq(1, run_command=
+(
+> >
+> >  test/cmd/Makefile |   1 +
+> >  test/cmd/part.c   | 183 ++++++++++++++++++++++++++++++++++++++++++++++
+> >  2 files changed, 184 insertions(+)
+> >  create mode 100644 test/cmd/part.c
+> >
+> > diff --git a/test/cmd/Makefile b/test/cmd/Makefile
+> > index 5f2815b1bb65..8d6932f1176c 100644
+> > --- a/test/cmd/Makefile
+> > +++ b/test/cmd/Makefile
+> > @@ -26,6 +26,7 @@ obj-$(CONFIG_CMD_LOADM) +=3D loadm.o
+> >  obj-$(CONFIG_CMD_MEMINFO) +=3D meminfo.o
+> >  obj-$(CONFIG_CMD_MEMORY) +=3D mem_copy.o
+> >  obj-$(CONFIG_CMD_MEM_SEARCH) +=3D mem_search.o
+> > +obj-$(CONFIG_CMD_PART) +=3D part.o
+> >  ifdef CONFIG_CMD_PCI
+> >  obj-$(CONFIG_CMD_PCI_MPS) +=3D pci_mps.o
+> >  endif
+> > diff --git a/test/cmd/part.c b/test/cmd/part.c
+> > new file mode 100644
+> > index 000000000000..cac57a1a0e35
+> > --- /dev/null
+> > +++ b/test/cmd/part.c
+> > @@ -0,0 +1,183 @@
+> > +// SPDX-License-Identifier: GPL-2.0+
+> > +/*
+> > + * Test for part command
+> > + *
+> > + * Copyright (C) 2026 Amarula Solutions
+> > + * Written by Dario Binacchi <dario.binacchi@amarulasolutions.com>
+> > + */
+> > +
+> > +#include <command.h>
+> > +#include <dm.h>
+> > +#include <env.h>
+> > +#include <part.h>
+> > +#include <vsprintf.h>
+> > +#include <dm/test.h>
+> > +#include <test/cmd.h>
+> > +#include <test/test.h>
+> > +#include <test/ut.h>
+> > +
+> > +static struct disk_partition gpt_parts[] =3D {
+> > +     {
+> > +             .start =3D 48,
+> > +             .size =3D 1,
+> > +             .name =3D "test1",
+> > +             .uuid =3D "c5bce7a2-03f0-4d03-9048-01ff23b9d527",
+> > +     },
+> > +     {
+> > +             .start =3D 49,
+> > +             .size =3D 2,
+> > +             .name =3D "test2",
+> > +             .uuid =3D "9df346e8-2c53-4cd8-b9ac-3af83f9a9b74",
+> > +     },
+> > +};
+> > +
+> > +static char disk_guid[UUID_STR_LEN + 1] =3D
+> > +     "8d60b397-1bb6-4d33-80ee-b1587d24c2f8";
+> > +
+> > +static int setup_gpt_partitions(struct unit_test_state *uts,
+> > +                             unsigned int mmc_dev_num)
+> > +{
+> > +     struct blk_desc *mmc_dev_desc;
+> > +     char dev_str[10];
+> > +     int i, ret;
+> > +
+> > +     if (!CONFIG_IS_ENABLED(MMC))
+> > +             return -EAGAIN;
+>
+> Hi Dario
+>
+> Is there any reason to return -EAGAIN ? -ENODEV seems more appropriate ?
+>
 
+In the testing framework, returning -EAGAIN explicitly signals that the
+test should be skipped*.*
+
+As highlighted in the documentation for ut_run_test():
+
+*Return: 0 if all tests passed, -EAGAIN if the test should be skipped, -1
+if any failed*
+
+
+Since the necessary preconditions weren't met for some configuration in our
+case, I decided to skip.
+
+Thanks and regards,
+
+Dario
+
+
+> Thanks
+> Patrice
+>
+> > +
+> > +     snprintf(dev_str, sizeof(dev_str), "%u", mmc_dev_num);
+> > +
+> > +     ret =3D blk_get_device_by_str("mmc", dev_str, &mmc_dev_desc);
+> > +     if (ret =3D=3D -ENODEV)
+> > +             return -EAGAIN;
+> > +
+> > +     ut_asserteq(mmc_dev_num, ret);
+> > +
+> > +     if (CONFIG_IS_ENABLED(RANDOM_UUID)) {
+> > +             for (i =3D 0; i < ARRAY_SIZE(gpt_parts); i++)
+> > +                     gen_rand_uuid_str(gpt_parts[i].uuid,
+> > +                                       UUID_STR_FORMAT_STD);
+> > +
+> > +             gen_rand_uuid_str(disk_guid, UUID_STR_FORMAT_STD);
+> > +     }
+> > +
+> > +     ut_assertok(gpt_restore(mmc_dev_desc, disk_guid, gpt_parts,
+> > +                             ARRAY_SIZE(gpt_parts)));
+> > +     return 0;
+> > +}
+> > +
+> > +static int cmd_test_part_number(struct unit_test_state *uts)
+> > +{
+> > +     unsigned int mmc_dev_num =3D 2;
+> > +     char expected[10];
+> > +     int i, ret;
+> > +
+> > +     ret =3D setup_gpt_partitions(uts, mmc_dev_num);
+> > +     if (ret =3D=3D -EAGAIN)
+> > +             return ret;
+> > +
+> > +     ut_assertok(ret);
+> > +
+> > +     for (i =3D 0; i < ARRAY_SIZE(gpt_parts); i++) {
+> > +             env_set("partnum", NULL);
+> > +             ut_assertok(run_commandf("part number mmc %u %s partnum",
+> > +                                      mmc_dev_num, gpt_parts[i].name))=
+;
+> > +             snprintf(expected, sizeof(expected), "0x%x", i + 1);
+> > +             ut_asserteq_str(expected, env_get("partnum"));
+> > +     }
+> > +
+> > +     env_set("partnum", NULL);
+> > +     ut_asserteq(1, run_commandf("part number mmc %u bogus partnum",
+> > +                                 mmc_dev_num));
+> > +     ut_assertnull(env_get("partnum"));
+> > +
+> > +     return 0;
+> > +}
+> > +CMD_TEST(cmd_test_part_number, UTF_CONSOLE);
+> > +
+> > +static int cmd_test_part_start(struct unit_test_state *uts)
+> > +{
+> > +     unsigned int mmc_dev_num =3D 2;
+> > +     char expected[32];
+> > +     int i, ret;
+> > +
+> > +     ret =3D setup_gpt_partitions(uts, mmc_dev_num);
+> > +     if (ret =3D=3D -EAGAIN)
+> > +             return ret;
+> > +
+> > +     ut_assertok(ret);
+> > +
+> > +     for (i =3D 0; i < ARRAY_SIZE(gpt_parts); i++) {
+> > +             env_set("partstart", NULL);
+> > +             ut_assertok(run_commandf("part start mmc %u %d partstart"=
+,
+> > +                                      mmc_dev_num, i + 1));
+> > +             snprintf(expected, sizeof(expected), "%lx",
+> > +                      (unsigned long)gpt_parts[i].start);
+> > +             ut_asserteq_str(expected, env_get("partstart"));
+> > +     }
+> > +
+> > +     env_set("partstart", NULL);
+> > +     ut_asserteq(1, run_commandf("part start mmc %u 3 partstart",
+> > +                                 mmc_dev_num));
+> > +     ut_assertnull(env_get("partstart"));
+> > +
+> > +     for (i =3D 0; i < ARRAY_SIZE(gpt_parts); i++) {
+> > +             env_set("partstart", NULL);
+> > +             ut_assertok(run_commandf("part start mmc %u %s partstart"=
+,
+> > +                                      mmc_dev_num, gpt_parts[i].name))=
+;
+> > +             snprintf(expected, sizeof(expected), "%lx",
+> > +                      (unsigned long)gpt_parts[i].start);
+> > +             ut_asserteq_str(expected, env_get("partstart"));
+> > +     }
+> > +
+> > +     env_set("partstart", NULL);
+> > +     ut_asserteq(1, run_commandf("part start mmc %u bogus partstart",
+> > +                                 mmc_dev_num));
+> > +     ut_assertnull(env_get("partstart"));
+> > +
+> > +     return 0;
+> > +}
+> > +CMD_TEST(cmd_test_part_start, UTF_CONSOLE);
+> > +
+> > +static int cmd_test_part_size(struct unit_test_state *uts)
+> > +{
+> > +     unsigned int mmc_dev_num =3D 2;
+> > +     char expected[32];
+> > +     int i, ret;
+> > +
+> > +     ret =3D setup_gpt_partitions(uts, mmc_dev_num);
+> > +     if (ret =3D=3D -EAGAIN)
+> > +             return ret;
+> > +
+> > +     ut_assertok(ret);
+> > +
+> > +     for (i =3D 0; i < ARRAY_SIZE(gpt_parts); i++) {
+> > +             env_set("partsize", NULL);
+> > +             ut_assertok(run_commandf("part size mmc %u %d partsize",
+> > +                                      mmc_dev_num, i + 1));
+> > +             snprintf(expected, sizeof(expected), "%lx",
+> > +                      (unsigned long)gpt_parts[i].size);
+> > +             ut_asserteq_str(expected, env_get("partsize"));
+> > +     }
+> > +
+> > +     env_set("partsize", NULL);
+> > +     ut_asserteq(1, run_commandf("part size mmc %u 3 partsize",
+> > +                                 mmc_dev_num));
+> > +     ut_assertnull(env_get("partsize"));
+> > +
+> > +     for (i =3D 0; i < ARRAY_SIZE(gpt_parts); i++) {
+> > +             env_set("partsize", NULL);
+> > +             ut_assertok(run_commandf("part size mmc %u %s partsize",
+> > +                                      mmc_dev_num, gpt_parts[i].name))=
+;
+> > +             snprintf(expected, sizeof(expected), "%lx",
+> > +                      (unsigned long)gpt_parts[i].size);
+> > +             ut_asserteq_str(expected, env_get("partsize"));
+> > +     }
+> > +
+> > +     env_set("partsize", NULL);
+> > +     ut_asserteq(1, run_commandf("part size mmc %u bogus partsize",
+> > +                                 mmc_dev_num));
+> > +     ut_assertnull(env_get("partsize"));
+> > +
+> > +     return 0;
+> > +}
+> > +CMD_TEST(cmd_test_part_size, UTF_CONSOLE);
+>
+>
+
+--=20
+*Dario Binacchi*
+Senior Embedded Software Engineer
+M. +39 328 0625246
+dario.binacchi@amarulasolutions.com
+=E2=80=95=E2=80=95=E2=80=95=E2=80=95=E2=80=95=E2=80=95=E2=80=95=E2=80=95=E2=
+=80=95=E2=80=95=E2=80=95=E2=80=95=E2=80=95=E2=80=95=E2=80=95
+Amarula Solutions SRL
+ Via Felice Cavallotti 25D, 41012 Carpi, MO, IT
+info@amarulasolutions.com
+www.amarulasolutions.com
