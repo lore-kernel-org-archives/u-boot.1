@@ -4,86 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86C0FFF8855
-	for <u-boot@archiver.kernel.org>; Tue,  5 May 2026 18:13:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD484FF8855
+	for <u-boot@archiver.kernel.org>; Tue,  5 May 2026 19:07:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 975FC849E0;
-	Tue,  5 May 2026 20:13:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id DBCC38495B;
+	Tue,  5 May 2026 21:07:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=grimler.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="KgcKmxvt";
+	dkim=pass (1024-bit key; secure) header.d=grimler.se header.i=@grimler.se header.b="RWPmYzur";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F0397849EA; Tue,  5 May 2026 20:13:21 +0200 (CEST)
-Received: from mail-oa1-x29.google.com (mail-oa1-x29.google.com
- [IPv6:2001:4860:4864:20::29])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 9E22A849B2; Tue,  5 May 2026 21:07:44 +0200 (CEST)
+Received: from out-189.mta1.migadu.com (out-189.mta1.migadu.com
+ [95.215.58.189])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C132D849DF
- for <u-boot@lists.denx.de>; Tue,  5 May 2026 20:13:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CE22B848DA
+ for <u-boot@lists.denx.de>; Tue,  5 May 2026 21:07:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=grimler.se
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oa1-x29.google.com with SMTP id
- 586e51a60fabf-434d9df81a5so580829fac.1
- for <u-boot@lists.denx.de>; Tue, 05 May 2026 11:13:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1778004798; x=1778609598; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=QqK/GDDP8wLoMufy2/fY6nS1KowmC2c502gH0ke8gAo=;
- b=KgcKmxvtvfT0iawMREUTOpJxJv4D3Fa36h0DuKEkd1ybz0T0LXx+4wsdkrcVAkb8gw
- r++tDln9/r8S7Xq++E0DrxjHOAkfHtyC5wPOlGCHRcN+scF8KYPmy585P9I+ZL+rhA1B
- 4xgxkVeW+6X7qRSKzk2FqB+XFQ4TwF4Q28AwY=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778004798; x=1778609598;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=QqK/GDDP8wLoMufy2/fY6nS1KowmC2c502gH0ke8gAo=;
- b=Ouu1wwEV1penwMgYj46E24rUiGLB8x/psXGmOEUKoUhZQ/qs0VtbDg/HRf2jtWYhcy
- 2XI4yaQR9j1W9dnEFN+dA/1ZeE67vzb6paIMvI1qTA3m0aq9z0kKMtjYUXIHBWtOBrMt
- 8K6XF6hqJjN982/1KDsonmFjNyuLOejJEolaqWsovPh4W11bPdkf+6gp8bhEW7MDWo7B
- zXqmYO1HySZIRYaPye3XgItAUoGP+Wr/8mWgqDv7HN6r4Ll6dSoS8nuiscyQteR5l9IG
- yKypG1OnsMKbFJF9oGcbMUsOdngE1dvlQTSoRU+Jg5a0RLHdFjhgcp58OI4pjMVpegPj
- HWvQ==
-X-Gm-Message-State: AOJu0Ywt+E8f9pqPEPepkb+RxrrfPtNTSSAKufJTJxxT8mIQdpVnjAEI
- HCMBew8gouc3zZ3SS/BARCN2+BkW9tiydX7ewD5MhABdDgoL6pcfELeSurQQo9/tzdcnIwPtF+m
- 02RRxWA==
-X-Gm-Gg: AeBDieuc4VCiUVUVn0+6QRkHhLwnw0MXzA/WwkLWuXjU2upAb6a4zRgTL/L1Ypk+I6Z
- ODM56hTf6dIiSzc6J3u6TocS5wyx7/BALz5TOcchMMVjFHtyj0XhN4u/aYEVFOsmzBMCcUVbLe1
- eDql1moajHox9xG/g08tXIc4cLCQ6+TakoqGmJt5OrOUIUjUCnazr9Mih4drI6J44sGUmYOEqlU
- w6qn1pXBHbWLghuiU9XRH+6OHMlGsDwDrzC+yoLDBP3hbC5EVvRbkYr+SB045UlcowwPKFBJCyv
- ZVhdvzRDmbu630dybqwv978yzNN0KVPPiA3xqfKsT24Mt1kB2oS7J4n6PMNKDF8XzWJ5L/YnYxM
- b2n6C7SV0mR3cKsqpZLBJ0avJjK0LSg9q98ktdvplI3pWMlt0lg3gheWoGmOnP8axmXIqtyMBaT
- FaV/Pj8CrvUIpxgq1xSzcxn/unOt5GXSPZVhUiG/k=
-X-Received: by 2002:a05:6870:c18e:b0:41c:890d:d776 with SMTP id
- 586e51a60fabf-434f68b5743mr243459fac.7.1778004797851; 
- Tue, 05 May 2026 11:13:17 -0700 (PDT)
-Received: from chromium.org ([174.51.25.52]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-434549540b2sm14585754fac.6.2026.05.05.11.13.16
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 05 May 2026 11:13:16 -0700 (PDT)
-From: Simon Glass <sjg@chromium.org>
-To: u-boot@lists.denx.de
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, Bryan Brattlof <bb@ti.com>,
- Neha Malcom Francis <n-francis@ti.com>, Peng Fan <peng.fan@nxp.com>,
- Philippe Reynes <philippe.reynes@softathome.com>,
- Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>,
- Tom Rini <trini@konsulko.com>, Wojciech Dubowik <Wojciech.Dubowik@mt.com>,
- Yannic Moog <y.moog@phytec.de>
-Subject: [PATCH v2 4/4] binman: Use bintool wrappers for PKCS#11 tools in tests
-Date: Tue,  5 May 2026 12:12:55 -0600
-Message-ID: <20260505181300.223439-5-sjg@chromium.org>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260505181300.223439-1-sjg@chromium.org>
-References: <20260505181300.223439-1-sjg@chromium.org>
+ spf=pass smtp.mailfrom=henrik@grimler.se
+Date: Tue, 5 May 2026 21:07:29 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=grimler.se; s=key1;
+ t=1778008057;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=n7Bfku23opUurCSrL8pcUeunEwTBCIXEel7QqObg9x8=;
+ b=RWPmYzur7HrGXpzOAr+0gQ9bjoUyahBlmN0fOXnOlCXjVINaZXJ6b5XVd/+EKgiZ6B/oDJ
+ e6+VVcr9oyk52p+6mMf/aE7ihPNYdplIj5gIPdQyb7MytXKfrtHkLve5fu2ur0CThioxkP
+ y6pta0+rugcYEN7q4GHF3YiZKjA0R20=
+X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
+ include these headers.
+From: Henrik Grimler <henrik@grimler.se>
+To: Kaustabh Chakraborty <kauschluss@disroot.org>
+Cc: Peng Fan <peng.fan@nxp.com>, u-boot@lists.denx.de,
+ Minkyu Kang <mk7.kang@samsung.com>, Tom Rini <trini@konsulko.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>, Anand Moon <linux.amoon@gmail.com>,
+ Sam Protsenko <semen.protsenko@linaro.org>,
+ Lukas Timmermann <uboot@timmermann.space>
+Subject: Re: [PATCH v2 1/4] mmc: exynos_dw_mmc: add proper init sequence for
+ HS400 support
+Message-ID: <20260505190729.GA6951@l14.localdomain>
+References: <20260503-dwmmc-exynos-hs400-es-v2-0-3ff1526142a7@disroot.org>
+ <20260503-dwmmc-exynos-hs400-es-v2-1-3ff1526142a7@disroot.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260503-dwmmc-exynos-hs400-es-v2-1-3ff1526142a7@disroot.org>
+X-Migadu-Flow: FLOW_OUT
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,107 +71,215 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The PKCS#11 signing tests in ftest.py call tools.run('softhsm2-util', ...)
-directly (and the equivalent for pkcs11-tool and p11-kit), even though
-the test setup has already constructed the corresponding Bintool
-instances. As Quentin Schulz observed on v1, the bintool wrapper for
-these tools is currently used only as an "is this installed?" probe.
+Hi Kaustabh,
 
-Route the eight remaining call sites in ftest.py through
-<bintool>.run_cmd(...), which the Bintool base class already provides.
-The change is test-side only; no production binman code calls these
-tools.
+On Sun, May 03, 2026 at 05:51:26PM +0530, Kaustabh Chakraborty wrote:
+> HS400 support was added, but configuration necessary for HS400 support
+> was left out. Add necessary changes, which includes:
+> - Device tree properties, such as "samsung,dw-mshc-hs400-timing" and
+>   "samsung,read-strobe-delay", which function as per dt-bindings.
+> - Registers related to HS400, which are necessary to enable HS400+ support.
+> - Appropriate timing tunings for the HS400 mode.
+> 
+> Note that these changes are loosely based off of its Linux kernel
+> counterpart.
+> 
+> Fixes: bbe3b9fa0922 ("mmc: exynos_dw_mmc: add support for MMC HS200 and HS400 modes")
+> Signed-off-by: Kaustabh Chakraborty <kauschluss@disroot.org>
 
-Suggested-by: Quentin Schulz <quentin.schulz@cherry.de>
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
+Reviewed-by: Henrik Grimler <henrik@grimler.se>
 
-Changes in v2:
-- New patch in v2 (per Quentin's review): replace tools.run() of
-  softhsm2-util, pkcs11-tool and p11-kit in ftest.py with the
-  Bintool.run_cmd() wrapper that already exists
+This works fine on exynos5422-odroid-xu4 without hs400. I was not able
+to get hs400 working on the device, seems more changes than just dts
+update are needed.
 
- tools/binman/ftest.py | 46 +++++++++++++++++++++----------------------
- 1 file changed, 23 insertions(+), 23 deletions(-)
+Best regards,
+Henrik Grimler
 
-diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
-index ca5149ee654..273d0ff0379 100644
---- a/tools/binman/ftest.py
-+++ b/tools/binman/ftest.py
-@@ -7560,7 +7560,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
-         self._CheckBintool(p11_kit)
- 
-         p11_kit_config = configparser.ConfigParser()
--        out = tools.run('p11-kit', 'print-config')
-+        out = p11_kit.run_cmd('print-config')
-         p11_kit_config.read_string(out)
-         softhsm2_lib = p11_kit_config.get('softhsm2', 'module',
-                                            fallback=None)
-@@ -7569,16 +7569,16 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
-         with unittest.mock.patch.dict('os.environ',
-                                       {'SOFTHSM2_CONF': softhsm2_conf,
-                                        'PKCS11_MODULE_PATH': softhsm2_lib}):
--                tools.run('softhsm2-util', '--init-token', '--free', '--label',
--                          'U-Boot token', '--pin', '1111', '--so-pin',
--                          '222222')
--                tools.run('pkcs11-tool', '--module', softhsm2_lib,
--                          '--write-object', cert_file, '--pin', '1111',
--                          '--type', 'cert', '--id', '999999', '--label',
--                          'test_cert', '--login')
--                tools.run('softhsm2-util', '--import', private_key, '--token',
--                          'U-Boot token', '--label', 'test_key', '--id', '999999',
--                          '--pin', '1111')
-+                softhsm2_util.run_cmd('--init-token', '--free', '--label',
-+                                      'U-Boot token', '--pin', '1111',
-+                                      '--so-pin', '222222')
-+                pkcs11_tool.run_cmd('--module', softhsm2_lib,
-+                                    '--write-object', cert_file, '--pin', '1111',
-+                                    '--type', 'cert', '--id', '999999', '--label',
-+                                    'test_cert', '--login')
-+                softhsm2_util.run_cmd('--import', private_key, '--token',
-+                                      'U-Boot token', '--label', 'test_key',
-+                                      '--id', '999999', '--pin', '1111')
-                 data = self._DoReadFile('capsule/signed_pkcs11.dts')
- 
-         self._CheckCapsule(data, signed_capsule=True)
-@@ -8230,12 +8230,12 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
- 
-         with unittest.mock.patch.dict('os.environ',
-                                       {'SOFTHSM2_CONF': softhsm2_conf}):
--            tools.run('softhsm2-util', '--init-token', '--free', '--label',
--                      'U-Boot token', '--pin', '1111', '--so-pin',
--                      '222222')
--            tools.run('softhsm2-util', '--import', private_key, '--token',
--                      'U-Boot token', '--label', 'test_key', '--id', '999999',
--                      '--pin', '1111')
-+            softhsm2_util.run_cmd('--init-token', '--free', '--label',
-+                                  'U-Boot token', '--pin', '1111',
-+                                  '--so-pin', '222222')
-+            softhsm2_util.run_cmd('--import', private_key, '--token',
-+                                  'U-Boot token', '--label', 'test_key',
-+                                  '--id', '999999', '--pin', '1111')
- 
-         # Make sure the private key can only be accessed through the engine
-         os.remove(private_key)
-@@ -8305,12 +8305,12 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
- 
-         with unittest.mock.patch.dict('os.environ',
-                                       {'SOFTHSM2_CONF': softhsm2_conf}):
--            tools.run('softhsm2-util', '--init-token', '--free', '--label',
--                      'U-Boot prod token', '--pin', '1234', '--so-pin',
--                      '222222')
--            tools.run('softhsm2-util', '--import', private_key, '--token',
--                      'U-Boot prod token', '--label', 'prod', '--id', '999999',
--                      '--pin', '1234')
-+            softhsm2_util.run_cmd('--init-token', '--free', '--label',
-+                                  'U-Boot prod token', '--pin', '1234',
-+                                  '--so-pin', '222222')
-+            softhsm2_util.run_cmd('--import', private_key, '--token',
-+                                  'U-Boot prod token', '--label', 'prod',
-+                                  '--id', '999999', '--pin', '1234')
- 
-         # Make sure the private key can only be accessed through the engine
-         os.remove(private_key)
--- 
-2.43.0
-
+> ---
+>  arch/arm/mach-exynos/include/mach/dwmmc.h |  5 ++
+>  drivers/mmc/exynos_dw_mmc.c               | 81 +++++++++++++++++++++++++++++++
+>  2 files changed, 86 insertions(+)
+> 
+> diff --git a/arch/arm/mach-exynos/include/mach/dwmmc.h b/arch/arm/mach-exynos/include/mach/dwmmc.h
+> index 4432deedef7..50081326c25 100644
+> --- a/arch/arm/mach-exynos/include/mach/dwmmc.h
+> +++ b/arch/arm/mach-exynos/include/mach/dwmmc.h
+> @@ -15,6 +15,11 @@
+>  #define DWMCI_SET_DRV_CLK(x)		((x) << 16)
+>  #define DWMCI_SET_DIV_RATIO(x)		((x) << 24)
+>  
+> +/* HS400 Related Registers */
+> +#define DWMCI_HS400_DQS_EN		0x180
+> +#define DWMCI_HS400_ASYNC_FIFO_CTRL	0x184
+> +#define DWMCI_HS400_DLINE_CTRL		0x188
+> +
+>  /* Protector Register */
+>  #define DWMCI_EMMCP_BASE		0x1000
+>  #define EMMCP_MPSECURITY		(DWMCI_EMMCP_BASE + 0x0010)
+> diff --git a/drivers/mmc/exynos_dw_mmc.c b/drivers/mmc/exynos_dw_mmc.c
+> index 7ccd113bd79..6558cdc803d 100644
+> --- a/drivers/mmc/exynos_dw_mmc.c
+> +++ b/drivers/mmc/exynos_dw_mmc.c
+> @@ -8,6 +8,7 @@
+>  #include <dwmmc.h>
+>  #include <asm/global_data.h>
+>  #include <malloc.h>
+> +#include <mmc.h>
+>  #include <errno.h>
+>  #include <asm/arch/dwmmc.h>
+>  #include <asm/arch/clk.h>
+> @@ -30,6 +31,14 @@
+>  #define CLKSEL_UP_SAMPLE(x, y)		(((x) & ~CLKSEL_CCLK_SAMPLE(7)) | \
+>  					 CLKSEL_CCLK_SAMPLE(y))
+>  
+> +/* RCLK_EN register defines */
+> +#define DATA_STROBE_EN			BIT(0)
+> +#define AXI_NON_BLOCKING_WR	BIT(7)
+> +
+> +/* DLINE_CTRL register defines */
+> +#define DQS_CTRL_RD_DELAY(x, y)		(((x) & ~0x3FF) | ((y) & 0x3FF))
+> +#define DQS_CTRL_GET_RD_DELAY(x)	((x) & 0x3FF)
+> +
+>  /**
+>   * DOC: Quirk flags for different Exynos DW MMC blocks
+>   *
+> @@ -71,6 +80,11 @@ struct dwmci_exynos_priv_data {
+>  	struct clk clk;
+>  	u32 sdr_timing;
+>  	u32 ddr_timing;
+> +	u32 hs400_timing;
+> +	u32 tuned_sample;
+> +	u32 dqs_delay;
+> +	u32 saved_dqs_en;
+> +	u32 saved_strobe_ctrl;
+>  	const struct exynos_dwmmc_variant *chip;
+>  };
+>  
+> @@ -162,6 +176,27 @@ static u8 exynos_dwmmc_get_ciu_div(struct dwmci_host *host)
+>  				& DWMCI_DIVRATIO_MASK) + 1;
+>  }
+>  
+> +static void exynos_config_hs400(struct dwmci_host *host, enum bus_mode mode)
+> +{
+> +	struct dwmci_exynos_priv_data *priv = exynos_dwmmc_get_priv(host);
+> +	u32 dqs, strobe;
+> +
+> +	dqs = priv->saved_dqs_en;
+> +	strobe = priv->saved_strobe_ctrl;
+> +
+> +	switch (mode) {
+> +	case MMC_HS_400:
+> +		dqs |= DATA_STROBE_EN;
+> +		strobe = DQS_CTRL_RD_DELAY(strobe, priv->dqs_delay);
+> +		break;
+> +	default:
+> +		dqs &= ~DATA_STROBE_EN;
+> +	}
+> +
+> +	dwmci_writel(host, DWMCI_HS400_DQS_EN, dqs);
+> +	dwmci_writel(host, DWMCI_HS400_DLINE_CTRL, strobe);
+> +}
+> +
+>  /* Configure CLKSEL register with chosen timing values */
+>  static int exynos_dwmci_clksel(struct dwmci_host *host)
+>  {
+> @@ -170,6 +205,9 @@ static int exynos_dwmci_clksel(struct dwmci_host *host)
+>  	u32 timing;
+>  
+>  	switch (host->mmc->selected_mode) {
+> +	case MMC_HS_400:
+> +		timing = CLKSEL_UP_SAMPLE(priv->hs400_timing, priv->tuned_sample);
+> +		break;
+>  	case MMC_DDR_52:
+>  		timing = priv->ddr_timing;
+>  		break;
+> @@ -186,6 +224,9 @@ static int exynos_dwmci_clksel(struct dwmci_host *host)
+>  
+>  	dwmci_writel(host, priv->chip->clksel, timing);
+>  
+> +	if (CONFIG_IS_ENABLED(MMC_HS400_SUPPORT))
+> +		exynos_config_hs400(host, host->mmc->selected_mode);
+> +
+>  	return 0;
+>  }
+>  
+> @@ -223,6 +264,16 @@ static void exynos_dwmci_board_init(struct dwmci_host *host)
+>  {
+>  	struct dwmci_exynos_priv_data *priv = exynos_dwmmc_get_priv(host);
+>  
+> +	if (CONFIG_IS_ENABLED(MMC_HS400_SUPPORT)) {
+> +		priv->saved_strobe_ctrl = dwmci_readl(host, DWMCI_HS400_DLINE_CTRL);
+> +		priv->saved_dqs_en = dwmci_readl(host, DWMCI_HS400_DQS_EN);
+> +		priv->saved_dqs_en |= AXI_NON_BLOCKING_WR;
+> +		dwmci_writel(host, DWMCI_HS400_DQS_EN, priv->saved_dqs_en);
+> +		if (!priv->dqs_delay)
+> +			priv->dqs_delay =
+> +				DQS_CTRL_GET_RD_DELAY(priv->saved_strobe_ctrl);
+> +	}
+> +
+>  	if (priv->chip->quirks & DWMCI_QUIRK_DISABLE_SMU) {
+>  		dwmci_writel(host, EMMCP_MPSBEGIN0, 0);
+>  		dwmci_writel(host, EMMCP_SEND0, 0);
+> @@ -319,6 +370,22 @@ static int exynos_dwmmc_of_to_plat(struct udevice *dev)
+>  				   DWMCI_SET_DIV_RATIO(div);
+>  	}
+>  
+> +	err = dev_read_u32_array(dev, "samsung,dw-mshc-hs400-timing", timing, 2);
+> +	if (err) {
+> +		debug("DWMMC%d: Can't get hs400-timings, using ddr-timings\n",
+> +		      host->dev_index);
+> +		priv->hs400_timing = priv->ddr_timing;
+> +	} else {
+> +		priv->hs400_timing = DWMCI_SET_SAMPLE_CLK(timing[0]) |
+> +				     DWMCI_SET_DRV_CLK(timing[1]) |
+> +				     DWMCI_SET_DIV_RATIO(1);
+> +		if (dev_read_u32(dev, "samsung,read-strobe-delay", &priv->dqs_delay)) {
+> +			priv->dqs_delay = 0;
+> +			debug("DWMMC%d: read-strobe-delay is not found, assuming usage of default value\n",
+> +			      host->dev_index);
+> +		}
+> +	}
+> +
+>  	host->buswidth = dev_read_u32_default(dev, "bus-width", 4);
+>  	host->fifo_depth = dev_read_u32_default(dev, "fifo-depth", 0);
+>  	host->bus_hz = dev_read_u32_default(dev, "clock-frequency", 0);
+> @@ -356,6 +423,16 @@ static int exynos_dwmmc_get_best_clksmpl(u8 candidates)
+>  	return -EIO;
+>  }
+>  
+> +static int dw_mci_exynos_prepare_hs400_tuning(struct dwmci_host *host)
+> +{
+> +	struct dwmci_exynos_priv_data *priv = exynos_dwmmc_get_priv(host);
+> +
+> +	dwmci_writel(host, priv->chip->clksel, priv->hs400_timing);
+> +	host->bus_hz = exynos_dwmci_get_clk(host, host->clock);
+> +
+> +	return 0;
+> +}
+> +
+>  static int exynos_dwmmc_execute_tuning(struct udevice *dev, u32 opcode)
+>  {
+>  	struct dwmci_exynos_priv_data *priv = dev_get_priv(dev);
+> @@ -365,6 +442,9 @@ static int exynos_dwmmc_execute_tuning(struct udevice *dev, u32 opcode)
+>  	u32 clksel;
+>  	int ret;
+>  
+> +	if (mmc->hs400_tuning)
+> +		dw_mci_exynos_prepare_hs400_tuning(host);
+> +
+>  	clksel = dwmci_readl(host, priv->chip->clksel);
+>  	start_smpl = CLKSEL_CCLK_SAMPLE(clksel);
+>  
+> @@ -387,6 +467,7 @@ static int exynos_dwmmc_execute_tuning(struct udevice *dev, u32 opcode)
+>  		return ret;
+>  	}
+>  
+> +	priv->tuned_sample = ret;
+>  	dwmci_writel(host, priv->chip->clksel, CLKSEL_UP_SAMPLE(clksel, ret));
+>  
+>  	return 0;
+> 
+> -- 
+> 2.53.0
+> 
