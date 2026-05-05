@@ -4,124 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30138CD3427
-	for <u-boot@archiver.kernel.org>; Tue,  5 May 2026 12:31:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DC2EFF885A
+	for <u-boot@archiver.kernel.org>; Tue,  5 May 2026 12:35:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F3E1F848DA;
-	Tue,  5 May 2026 14:31:10 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 89438848BB;
+	Tue,  5 May 2026 14:35:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="DFCGCEgK";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="YjMZo5IG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 30206848B8; Tue,  5 May 2026 14:31:10 +0200 (CEST)
-Received: from BYAPR05CU005.outbound.protection.outlook.com
- (mail-westusazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c000::1])
+ id 7E10B848DC; Tue,  5 May 2026 14:35:38 +0200 (CEST)
+Received: from sea.source.kernel.org (sea.source.kernel.org
+ [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 80686848F0
- for <u-boot@lists.denx.de>; Tue,  5 May 2026 14:31:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9A0F2848B7
+ for <u-boot@lists.denx.de>; Tue,  5 May 2026 14:35:35 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=fTc3zYutxlAbBCABNpx8+xuGBu3qLOS/MwOxJwjqb9+MIRxSSfVEWLS91G7STGmYlpuJ0dD9QURPzKAT46ycc4K0/5gjp769+xwVqDmrEKu3p7qV0zNJvxDvTvp6G8NuY6yvvZmtWag8x0iucxlQ4n7jLsglOrvu6aWbfOB2Cb2LaeFyqFvgSvnAwW1RpZ4rjDvmFXiWyQAWewNLVddbryQG+nJwzIWTvv/q9b3RpZvn2wX1zAXHq/C8RkYquOaVWPaLazXDMZdUKgCFoZBzDAySQ1Tp8QE9rNMpPseF63x6gH02GlxJHWLnPoxAhwMzaRMnylUTXGKLxvc9gi6/Zg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=E8FNvPtB/VdvreB2yhfBbe2AclBTutklWd5kDd3Cae4=;
- b=gZDQ7vklP7TlO0AIgeIiyn1ZqkrFynafeLKp9n+AuIDkfR0iZsZXVt1BLM1biuTVh86ZtZQ217PVetKvj7WeLLigtVWiZOi6ipacc3v9q48jUF6u2ajkyx3GErfbi3WoHAuT4UUSjdPFqAt+MqA13CqjVR2AhhDmvE0VGkUamZ2vfa7iCLTHSMRn4+NmxvSQWx93DjVQRo4MLz3IErG3YuoOpHV1Xg94019cKlBJNaPEVoCVDU1bi+Wkgc63Q8WpPAIPROWCXC0p4bYDd8KCCBlemnkDvdktoYrQ4nHs1GVt0fvzAqv6X6u06IBO3H4U9xZ/sIthS48HoW0u6+n/cQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=E8FNvPtB/VdvreB2yhfBbe2AclBTutklWd5kDd3Cae4=;
- b=DFCGCEgKpeNEDsRt+Lnqdo8LQPVM9W3A3pjn1BsW5CoQVRQiJm6ASQtsBbIJpZAFLUOmIz3ekTHvYE98mH8rBCijzDyeVvdcaPROOdf88J3ov5DDP8d3UIJ+B7RQgEJSY6+HTH8DqueZmA7WaBn8m8XueYjFJhykJzfUisSe1oc=
-Received: from CH0PR03CA0287.namprd03.prod.outlook.com (2603:10b6:610:e6::22)
- by DS7PR12MB9551.namprd12.prod.outlook.com (2603:10b6:8:24f::13) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9870.25; Tue, 5 May
- 2026 12:31:02 +0000
-Received: from CH1PEPF0000AD78.namprd04.prod.outlook.com
- (2603:10b6:610:e6:cafe::f) by CH0PR03CA0287.outlook.office365.com
- (2603:10b6:610:e6::22) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9870.25 via Frontend Transport; Tue,
- 5 May 2026 12:31:01 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
-Received: from satlexmb08.amd.com (165.204.84.17) by
- CH1PEPF0000AD78.mail.protection.outlook.com (10.167.244.56) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9891.9 via Frontend Transport; Tue, 5 May 2026 12:31:01 +0000
-Received: from satlexmb10.amd.com (10.181.42.219) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Tue, 5 May
- 2026 07:30:57 -0500
-Received: from satlexmb07.amd.com (10.181.42.216) by satlexmb10.amd.com
- (10.181.42.219) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Tue, 5 May
- 2026 07:30:57 -0500
-Received: from localhost (10.180.168.240) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17 via Frontend
- Transport; Tue, 5 May 2026 07:30:56 -0500
-From: Michal Simek <michal.simek@amd.com>
-To: <u-boot@lists.denx.de>, <git@amd.com>, Simon Glass <sjg@chromium.org>
-CC: Naman Trivedi <naman.trivedimanojbhai@amd.com>, Senthil Nathan Thangaraj
- <senthilnathan.thangaraj@amd.com>, Tom Rini <trini@konsulko.com>, "Venkatesh
- Yadav Abbarapu" <venkatesh.abbarapu@amd.com>
-Subject: [PATCH v2 4/4] reset: zynqmp: Implement rst_reset using
- PM_RESET_ACTION_PULSE
-Date: Tue, 5 May 2026 14:30:32 +0200
-Message-ID: <0daf9f917c0b9d7b34f69c4841d56ac5c3bc9c0d.1777984225.git.michal.simek@amd.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <cover.1777984225.git.michal.simek@amd.com>
-References: <cover.1777984225.git.michal.simek@amd.com>
+ spf=pass smtp.mailfrom=sumit.garg@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sea.source.kernel.org (Postfix) with ESMTP id E5AD74080D;
+ Tue,  5 May 2026 12:35:33 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2E2FFC2BCB4;
+ Tue,  5 May 2026 12:35:24 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1777984533;
+ bh=ztsPfB9MqjHOiPmRR9Wi9ML+D6gR6k8/f/o7UtfwgZo=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=YjMZo5IGkffaxBCsuZXMvtlB732n62YV6zCf/Clg045RtVk8SYYvGdFOl1jFzwobi
+ bcqBLA6pf/bxZhPJbvNcckaStnnRoUnjcCfyeOiKQmfPI1Zh/eiJuOPZycLcx/c5HU
+ sIx2BTtpYxd4WtWgSnrTTwiMhpsfQrWVxAuFhSfu+R2YqdCtz3H3j30bz6/WdZimeY
+ oDzM0RexupABvNaNMcU+3MVEiK83sNu46Qy2CCACIiCSWWOP5F8pKPDtHhIJI8U7sD
+ Ttich0b1Yf2Nh4Urz/tADlCSOGWrNguKb3l7nYJPQD4glRNWrLKtm5iHg0WHwgxPnk
+ l1Oyc57wY1FRw==
+Date: Tue, 5 May 2026 18:05:22 +0530
+From: Sumit Garg <sumit.garg@kernel.org>
+To: Casey Connolly <casey.connolly@linaro.org>
+Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io,
+ Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Peng Fan <peng.fan@nxp.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Alice Guo <alice.guo@nxp.com>, Quentin Schulz <quentin.schulz@cherry.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Kuan-Wei Chiu <visitorckw@gmail.com>,
+ Raymond Mao <raymond.mao@riscstar.com>,
+ Stefan Roese <stefan.roese@mailbox.org>,
+ Philip Molloy <philip.molloy@analog.com>,
+ Jerome Forissier <jerome.forissier@arm.com>,
+ Marek Vasut <marek.vasut@mailbox.org>,
+ Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
+ Rasmus Villemoes <ravi@prevas.dk>, Heiko Schocher <hs@nabladev.com>,
+ Michal Simek <michal.simek@amd.com>, Sughosh Ganu <sughosh.ganu@arm.com>,
+ Antony Kurniawan Soemardi <linux@smankusors.com>,
+ Luca Weiss <luca.weiss@fairphone.com>,
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+Subject: Re: [PATCH v2 00/15] qcom: smem: modernize SMEM in U-Boot
+Message-ID: <afnkCp5tN342zORz@sumit-xelite>
+References: <20260504-b4-modernise-smem-v2-0-c01ec2ff3886@linaro.org>
+ <afnCVT5JoeIdy-hQ@sumit-xelite>
+ <21d5d2a1-e904-44b0-92c2-378035e158c0@linaro.org>
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1550; i=michal.simek@amd.com;
- h=from:subject:message-id; bh=lcdM9YtyBLlDQoE59m726Ju03m3PFEFYPGTOSMBSa34=;
- b=owGbwMvMwCG2mv3fB7+vgl8ZT6slMWT+fPTmnugS99c5/AlV3pNe9yfcCHsuOD1f1U4zcT/P3
- K1/Aj74d5SyMIhxMMiKKbJMZ9JxWPPt2lKx5ZH5MHNYmUCGMHBxCsBEzIMY/leyBp+q77hTONsx
- 81jTFX+GkztWsWXc2ruJpeBStPaaQ+sZ/uffi4vcIX/2i9O0iva/8zKct+Qv0771f1NmqP66Bbv
- DSlkB
-X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
- fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH1PEPF0000AD78:EE_|DS7PR12MB9551:EE_
-X-MS-Office365-Filtering-Correlation-Id: 29df12dd-a2ce-4c43-a1eb-08deaaa22b0f
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|36860700016|82310400026|1800799024|18002099003|56012099003|22082099003;
-X-Microsoft-Antispam-Message-Info: rFmkif13BRHm8MAo5roops0cC/IE44ImZD6u86K5aB7NsQ/JiWRhCbLvVOOeuvEfTFNexSoGwsIjQiCtwVzbYzwU6IVHK5zNMrCRbIpFYBdfoqZeZolq9j9a2aXJ5q8J1OOD1fGn5Z92HmUVo95W7HUoaTywCTithGZnI10UJC2W3fcVUl1D0wgmROfsKN4FsALc0TB3XogRMnwbnoYO8XlOJb305Co5kFtaVTGcaElBsX5Ox5yCJz5HbUAQJy/AIHb2wZKnB+Tva5Sc7iG3TAqAAjbvoYBpC8FIgWVAr8DaE2CHrxKVMjy1HOxCGdYaxLlfXZnDVcySq0ju4zjhZuYJkDcn8+SMXIWrZ+6im0rOnrSwdCpYT6df4dox+0jCOZur4OX7TvcUBFm3HtGA+OMOVyYwi/euC9FG5sP71isY00dYQIpKkQdW2NXT9ZS+y2O6PiqKOE0sepo5A3x2qRAdQ/9Ns7t5o9ThuB0IfuQtNyHwBbXc3ZhTIWXZjAHIGmhC0c5PwlKL/GoOHAgeOsm4YfGplZXRvkf8Jp77fj3B1EuPgwPS0p71A/K/sfIxTNNvEr4qwpJqLLqjyjSM4Qd9/dm9UBizfs4dMLpQjHMYeGJujZ1P2sRFkOjZPnf5UDjbheIhlMwp61NwA96vgmpq4RQU/1HoGhrrhjGWALb7FvLzZgZDjCcznQI84sB1qRs/GohooXOCZGj1zTj3HpaoqXjIAAfPZrCromQuHT0=
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:satlexmb08.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(376014)(36860700016)(82310400026)(1800799024)(18002099003)(56012099003)(22082099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: Ju/KpAsaBzLvhgYXfPzJvR+s+xeKZlaquVIf7LdqtrnohmrviGzbiXaI0S4ZPySxtIDh6YGyZAB41f81GqT5RvtYS1hBZ1ch280Vg06Z/pwaUuXjbXdCmlzi0jQyWWtIhyvD0N4yBSqny8XWdQtbq57TIcvAc76tvXtxUl4XVRBdLjRtIulPnNIcUhQH3hzkECQ9nZowmfaY6xKD4qIN8FiwezW/CFCN/UAhrAV8UxfeETjTljzYR4Ht3IrZ2DJupsfVMs/Nr+1WCONXPZL1df3uLHV+bbRd42jess1YQ/MwhXjZIV65wsO5qQ23TX8YqPyqQKN4jkgwxgIXEgHRnwvUaVGRDdNONEhTGoSUaNFjjNMry9vsGoKLj+5dTq+kOJ/PraqtcEFlolJzRt2L6NEcY+714BOWYcP9HSlwAte0q1l6dAZ9TlProCm/T1yS
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 May 2026 12:31:01.6516 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 29df12dd-a2ce-4c43-a1eb-08deaaa22b0f
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[satlexmb08.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: CH1PEPF0000AD78.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS7PR12MB9551
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <21d5d2a1-e904-44b0-92c2-378035e158c0@linaro.org>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -138,51 +90,187 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Implement the rst_reset operation in the ZynqMP reset driver to use
-PM_RESET_ACTION_PULSE. This allows the reset controller to perform
-a reset pulse in a single firmware call instead of separate assert
-and deassert calls.
+On Tue, May 05, 2026 at 02:25:01PM +0200, Casey Connolly wrote:
+> 
+> 
+> On 05/05/2026 12:11, Sumit Garg wrote:
+> > Hi Casey,
+> > 
+> > Thanks for the much needed re-spin of the SMEM patch-set.
+> > 
+> > On Mon, May 04, 2026 at 08:57:28PM +0200, Casey Connolly wrote:
+> >> Smem is currently implemented a uclass in U-Boot. This carries with it
+> >> some implicit limitations about how and when we can actually talk with
+> >> it, since its modelled as a device.
+> >>
+> >> The SMEM uclass is qualcomm specific and has no other users, smem is
+> >> also largely useful for parsing the memory map and other tasks which we
+> >> have to do before DM is alive anyway.
+> >>
+> >> Let's drop the old smem code and replace it with a straight port from
+> >> Linux, providing a familiar interface and enabling us to access it much
+> >> earlier in the boot process than would be possible with a standard
+> >> udevice.
+> >>
+> >> Additionally, this will be easier to maintain going forwards since any
+> >> patches from Linux can be more easily ported over.
+> >>
+> >> With this new smem framework in place, we can now use SMEM to parse the
+> >> memory map when it's not provided via some other mechanism and to read
+> >> the serial number of the board.
+> >>
+> >> Implement this functionality and split the snapdragon memory parsing off
+> >> to its own file to try and organise things a bit better.
+> >>
+> >> Since the memory map stored in SMEM doesn't already have some carveouts
+> >> let's also be correct about unmapping reserved memory regions, we
+> >> should eventually do this on all Qualcomm boards but it's particularly
+> >> important when we aren't chainloading from ABL.
+> > 
+> > This was really needed to unmap reserved regions in U-Boot memory map to
+> > increase robustness.
+> 
+> agreed, the ~100ms cost sucks but I hope we can bring it down by doing
+> this after dcache enable if we can figure that out (would probably rely
+> on starting with an initial minimal map to avoid the prefetcher issues)
+> but yeah, a problem for the future for sure.
 
-This matches the Linux kernel implementation of zynqmp_reset_reset().
++1
 
-Signed-off-by: Michal Simek <michal.simek@amd.com>
-Reviewed-by: Simon Glass <sjg@chromium.org>
----
+> 
+> > 
+> >>
+> >> This depends on a fix for unmapping memory regions: https://lore.kernel.org/u-boot/20260504175511.585797-1-casey.connolly@linaro.org/
+> >>
+> >> ---
+> >> Changes in v2:
+> >> - Ensure reserved regions are unmapped appropriately when using SMEM as
+> >>   the source of truth for the memory map.
+> >> - Support SMEM ram layout v0/v1 for older platforms using a header from
+> >>   Qualcomm.
+> > 
+> > It would be better if you can provide proper attribution in the commit
+> > to which this header is being picked up.
+> 
+> Where is the header sourced from? I can't really use another patch
+> posting as a source.
 
-(no changes since v1)
+I would have just mentioned the header to be contributed by:
+Aswin Murugan <aswin.murugan@oss.qualcomm.com> in commit message.
 
- drivers/reset/reset-zynqmp.c | 11 +++++++++++
- 1 file changed, 11 insertions(+)
+> 
+> > 
+> >> - Set an environment variable (memmap_source) providing info about
+> >>   where U-Boots memory map is from.
+> >> - Correctly handle serial_num missing on msm8916
+> >> - Link to v1: https://lore.kernel.org/r/20241124-b4-modernise-smem-v1-0-b7852c11b67c@linaro.org
+> >>
+> > 
+> > FWIW, I tested this patch-set on RB3Gen2 and lemans-evk after dropping
+> > the U-Boot DT overrides, so feel free to carry:
+> 
+> Good to know! I assume you removed the hardcoded DT memorymap for testing?
 
-diff --git a/drivers/reset/reset-zynqmp.c b/drivers/reset/reset-zynqmp.c
-index d04e8eef3bb4..2b58f3a75b42 100644
---- a/drivers/reset/reset-zynqmp.c
-+++ b/drivers/reset/reset-zynqmp.c
-@@ -45,6 +45,16 @@ static int zynqmp_reset_deassert(struct reset_ctl *rst)
- 				      PM_RESET_ACTION_RELEASE);
- }
- 
-+static int zynqmp_reset_reset(struct reset_ctl *rst, ulong delay_us)
-+{
-+	struct zynqmp_reset_priv *priv = dev_get_priv(rst->dev);
-+
-+	dev_dbg(rst->dev, "%s(rst=%p) (id=%lu)\n", __func__, rst, rst->id);
-+
-+	return zynqmp_pm_reset_assert(priv->reset_id + rst->id,
-+				      PM_RESET_ACTION_PULSE);
-+}
-+
- static int zynqmp_reset_request(struct reset_ctl *rst)
- {
- 	struct zynqmp_reset_priv *priv = dev_get_priv(rst->dev);
-@@ -74,6 +84,7 @@ const struct reset_ops zynqmp_reset_ops = {
- 	.request = zynqmp_reset_request,
- 	.rst_assert = zynqmp_reset_assert,
- 	.rst_deassert = zynqmp_reset_deassert,
-+	.rst_reset = zynqmp_reset_reset,
- };
- 
- static const struct udevice_id zynqmp_reset_ids[] = {
--- 
-2.43.0
+Yeah I did drop the hardcoded DT memory map as you can see here [1].
+Feel free to skip picking up DT memory override for Lemans EVK with this
+series merged.
 
+[1] https://github.com/qualcomm-linux/u-boot/pull/56
+
+-Sumit
+
+> 
+> > 
+> > Tested-by: Sumit Garg <sumit.garg@oss.qualcomm.com>
+> > 
+> > I will give a proper review to this series soon.
+> 
+> Thanks
+> > 
+> > -Sumit
+> > 
+> >> To: u-boot@lists.denx.de
+> >> To: Sumit Garg <sumit.garg@kernel.org>
+> >> To: u-boot-qcom@groups.io
+> >> Cc: Tom Rini <trini@konsulko.com>
+> >> Cc: Simon Glass <sjg@chromium.org>
+> >> Cc: Casey Connolly <casey.connolly@linaro.org>
+> >> Cc: Peng Fan <peng.fan@nxp.com>
+> >> Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
+> >> Cc: Alice Guo <alice.guo@nxp.com>
+> >> Cc: Quentin Schulz <quentin.schulz@cherry.de>
+> >> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> >> Cc: Neil Armstrong <neil.armstrong@linaro.org>
+> >> Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>
+> >> Cc: Kuan-Wei Chiu <visitorckw@gmail.com>
+> >> Cc: Raymond Mao <raymond.mao@riscstar.com>
+> >> Cc: Stefan Roese <stefan.roese@mailbox.org>
+> >> Cc: Philip Molloy <philip.molloy@analog.com>
+> >> Cc: Jerome Forissier <jerome.forissier@arm.com>
+> >> Cc: Marek Vasut <marek.vasut@mailbox.org>
+> >> Cc: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
+> >> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+> >> Cc: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+> >> Cc: Rasmus Villemoes <ravi@prevas.dk>
+> >> Cc: Heiko Schocher <hs@nabladev.com>
+> >> Cc: Michal Simek <michal.simek@amd.com>
+> >> Cc: Sughosh Ganu <sughosh.ganu@arm.com>
+> >> Cc: Antony Kurniawan Soemardi <linux@smankusors.com>
+> >> Cc: Luca Weiss <luca.weiss@fairphone.com>
+> >> Cc: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+> >>
+> >> ---
+> >> Casey Connolly (15):
+> >>       Revert "dm: SMEM (Shared memory) uclass"
+> >>       smem: drop drivers/smem
+> >>       Revert "test: smem: add basic smem test"
+> >>       Revert "drivers: smem: sandbox"
+> >>       mach-snapdragon: fix reserved memory carveout
+> >>       soc: qcom: import smem from Linux 6.11-rc2
+> >>       soc: qcom: smem: adjust headers for U-Boot
+> >>       soc: qcom: smem: adjust for U-Boot
+> >>       soc: qcom: smem: get serial number from socinfo
+> >>       soc: qcom: smem: stub functions
+> >>       soc: qcom: smem: add build infra
+> >>       mach-snapdragon: move memory parsing to its own file
+> >>       mach-snapdragon: support parsing memory map from SMEM
+> >>       mach-snapdragon: fetch serial# from SMEM
+> >>       configs: add qcom_sm8650_defconfig and debug fragment
+> >>
+> >>  MAINTAINERS                                  |   1 -
+> >>  arch/arm/Kconfig                             |   3 +-
+> >>  arch/arm/mach-snapdragon/Makefile            |   2 +-
+> >>  arch/arm/mach-snapdragon/board.c             | 253 ++++-----
+> >>  arch/arm/mach-snapdragon/dram.c              | 239 ++++++++
+> >>  arch/arm/mach-snapdragon/qcom-priv.h         |  17 +
+> >>  arch/arm/mach-snapdragon/rampart.h           | 194 +++++++
+> >>  arch/sandbox/dts/test.dts                    |   4 -
+> >>  board/qualcomm/debug-sm8650.config           |   5 +
+> >>  configs/qcom_sm8650_defconfig                |  16 +
+> >>  configs/sandbox64_defconfig                  |   2 -
+> >>  configs/sandbox_defconfig                    |   2 -
+> >>  drivers/Kconfig                              |   2 -
+> >>  drivers/Makefile                             |   1 -
+> >>  drivers/smem/Kconfig                         |  25 -
+> >>  drivers/smem/Makefile                        |   7 -
+> >>  drivers/smem/sandbox_smem.c                  |  44 --
+> >>  drivers/smem/smem-uclass.c                   |  46 --
+> >>  drivers/soc/qcom/Kconfig                     |   8 +
+> >>  drivers/soc/qcom/Makefile                    |   1 +
+> >>  drivers/{smem/msm_smem.c => soc/qcom/smem.c} | 777 ++++++++++++++++-----------
+> >>  include/dm/uclass-id.h                       |   1 -
+> >>  include/smem.h                               |  90 ----
+> >>  include/soc/qcom/smem.h                      |  36 ++
+> >>  include/soc/qcom/socinfo.h                   | 111 ++++
+> >>  test/dm/Makefile                             |   1 -
+> >>  test/dm/smem.c                               |  26 -
+> >>  27 files changed, 1186 insertions(+), 728 deletions(-)
+> >> ---
+> >> base-commit: 2920b49fb117dd70b6219804bf0d298c96f184f2
+> >>
+> >> // Casey (she/they)
+> >>
+> 
+> -- 
+> // Casey (she/her)
+> 
