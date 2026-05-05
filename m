@@ -4,81 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32C57FF8855
-	for <u-boot@archiver.kernel.org>; Tue,  5 May 2026 18:13:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2840FF8855
+	for <u-boot@archiver.kernel.org>; Tue,  5 May 2026 18:13:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8A3D0849B8;
-	Tue,  5 May 2026 20:13:14 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C82DC849D2;
+	Tue,  5 May 2026 20:13:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="hhsAu1ey";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Z+OCNaDb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5DA6884974; Tue,  5 May 2026 20:13:13 +0200 (CEST)
-Received: from mail-oi1-x230.google.com (mail-oi1-x230.google.com
- [IPv6:2607:f8b0:4864:20::230])
+ id B3455849D2; Tue,  5 May 2026 20:13:15 +0200 (CEST)
+Received: from mail-ot1-x341.google.com (mail-ot1-x341.google.com
+ [IPv6:2607:f8b0:4864:20::341])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2912B84974
- for <u-boot@lists.denx.de>; Tue,  5 May 2026 20:13:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 54118849B2
+ for <u-boot@lists.denx.de>; Tue,  5 May 2026 20:13:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oi1-x230.google.com with SMTP id
- 5614622812f47-479ef2b78f3so4238410b6e.2
- for <u-boot@lists.denx.de>; Tue, 05 May 2026 11:13:11 -0700 (PDT)
+Received: by mail-ot1-x341.google.com with SMTP id
+ 46e09a7af769-7dcc9b506d9so5363197a34.1
+ for <u-boot@lists.denx.de>; Tue, 05 May 2026 11:13:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1778004789; x=1778609589; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=+chlawyNOKDkuKVi+L6UcxpgMdEmabY4VlirHWm1qmA=;
- b=hhsAu1eybx5zxu4eJKlHTagTLXFmYXERrDYo96iQSTI9o8eGWtxCf8kZnhc07zedM9
- BSYpqIwklhjZT2f/KHfJYtgZaHgNXYwyn8GkGfPSh/PjIyhoZIH7SP8QD2Uj2LEOV4n5
- S5Uo1bCxvdtqol0ITkC2ku4w1C77/Js2o4aZg=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778004789; x=1778609589;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=chromium.org; s=google; t=1778004791; x=1778609591; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=+chlawyNOKDkuKVi+L6UcxpgMdEmabY4VlirHWm1qmA=;
- b=m0AVFDyTTpudK790r8SmENyRFcZXRNA8RSXZguZRNJPp0IGDpacgPKOOU9SlWPOr42
- Fo5xE8exQ+3OrEA6HSUovIeb7Iyy1870eRYxkFQA9+t14x8Bla0fhNNcROtvuIBtDAuG
- 3O9DlUVhcK2I49zQv8x5t7xInteQq/TbpT40d5qkP26PTbM8rUzrfykpsMcNEej5xL5R
- kNg9kFc2KPNC4NXcGlS72YbIu+0xzpQUHwDcdo2fmasGdJp92bY4az+uzwqlPpuSMlqe
- mj0jp5TZNBo+19Izo5iq2xAlYMbE0ewn1ZTgVydE5t8cvwdmPsPcEDDNmTKk41cN3XV7
- qJWQ==
-X-Gm-Message-State: AOJu0Yy8o3qRUnt3JDC/CYEoT5cNBbjmrOu2PFVltiWEBvTkq2fHdL3F
- RgF0e4Q00qf3zbE9WMPq23ie3R63uYjRt4Oju/FPaKBRqs4YR+iiHrSrJa1UXwqDDlrmbf6MOz5
- FIVIPZg==
-X-Gm-Gg: AeBDietfR8usONPjdTZNEnGJaUTBJ2xWAZTNbzf1mjdcEM7pEJgniW54sJBXN9rEDpQ
- mjMGhlzcbVDjwqeMLZxHghBCcVAZFfTmirh3qn3dn0S93jqcFZZW30GftHditZ8277YuhY63L3M
- ggOJNc4vv4iOi3m55uqhRrjkJ4u/o1J2vNr/UIktPj/p7yVuMLyDKY1HM0AvLAwE63FeNLRfJk1
- uV6rSe8fNBI5dswCRaIKXOl0w4+BTtcIdsZwAl8yTBwQRoC7C07e4qvMGG11/Zx1G/DGT7jyhhb
- j1g/WTY2dg3JFXgRjx0MEnXF6hz/Pw5HLP1VsNySYVD3BulO0w8i8s6bbNRR0iL3Z3rkRXv24Fs
- 7ZpWmR8Frd5E+Pu7BB+58xmgx/uiLcTFyObE5ESz19//vDlBebhqRj8AcZlAd9i2i6+g84Il1ME
- JwthuiOw0DhK/AAefKD2rRkSPdLtUo
-X-Received: by 2002:a05:6808:e642:b0:479:874b:15a3 with SMTP id
- 5614622812f47-480424d5a14mr63014b6e.43.1778004788729; 
- Tue, 05 May 2026 11:13:08 -0700 (PDT)
+ bh=ym9HUpKzPOqn4X6sWTWvqzozbNU9Zl944RE/uQTNg50=;
+ b=Z+OCNaDbtBL8+2JN9QfpOjdWLbNkGrhLCXcgLrIbpNYBL5oiSjzAmWFG2WH8LvgsWp
+ 8gShPpHYNzu3qMxN/azBI0ogH3Z8Oi4Q34DlP3M7yCCw2nBT8v5WMvhv5O7Iu+7HMZNa
+ bwwL10NkFk0DZTHLERY56H3rLfFtbd/pP/oIo=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1778004791; x=1778609591;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=ym9HUpKzPOqn4X6sWTWvqzozbNU9Zl944RE/uQTNg50=;
+ b=kLUtolDN3rWT7+fFf0bnvFl6Hs9uXXPAr9HILKVFoqg83sfyoqpNmYfe1JLmD1weOY
+ T9zPFebQ6DcPLtttH3TE9ltxr3JsEffSMWz5cGmUNEyUiYn7NKCrIYJ5vP+KfNjyO7zO
+ jUMonWFfGehA10OjtYj0lZAHx2JKxixWQuI5CjEZurzaxiqkQDQ01KOSCdE5gaBjmb09
+ mBgV/wroMxSjuDgBGhkQ0PbX8upsVbjyxo1kTpDbevJ7JAHuSwVaOlwc3aPzY3cxY52P
+ 7oDQRIIPNqzo0NHcK10wtucw4yFWPZc9bW5sU+XeieqqbhOK/kkf3DbODXeeYtXBrYdf
+ 2xRw==
+X-Gm-Message-State: AOJu0YyrsHK/uOU4dMpFsEwgQOiOO/26dEIlHKJ5nDuyGsyd1kvpmPS3
+ SGOFMm7z75RcsmD7qdBeGsiK/KWshUJBwbAIb6A+9c8u3GR+p4/YeZmoZFVcfeDhuSDVl7MBgpk
+ XQ3f5DrSg
+X-Gm-Gg: AeBDiev4NvA0dIcXE8hMXur1JodKVv5pAr8OYsM81WrpWqDhG7/gm92IWWLaO9sAk1s
+ FiFuqGSNWATHRzNBohQ3NL+EILzRlNIbSTk+GdpOVnM2CYw8m47pC1TiedcCPsNiW0KRJvOCZmE
+ zZMb+duCsAzlr7DC6XYc6ojtgjR+HRAr0HsuOT/r40FsfcAe8klzKZ1oMIQtSZ3VRhQB2mfWZA+
+ AWSP1HllNuUyalhliNGNTIRwNU5oPluAvew8CdGptMI0IoD1ZAKbMz2OHb9gGBGsdB3fQQtfDCP
+ QCm+3zURwl2xUbiSxkvJa+ghtcXwYq9yyh1Vaqd1zX9nw8YVsWv8wpWJ22cd7zqUO4q+JV7sXP1
+ mHreOiJqJXKJ+rJ7qidlMHqRqVREMt6VTkJGw7096LMLbEI+PHRVWdUXjHooiGLBOPZ8Eaq3EEy
+ smH4bAceksA1ix8gwVHHqFRCyrQG4x
+X-Received: by 2002:a05:6820:178a:b0:687:d4de:1f9d with SMTP id
+ 006d021491bc7-69998105a77mr416314eaf.24.1778004791416; 
+ Tue, 05 May 2026 11:13:11 -0700 (PDT)
 Received: from chromium.org ([174.51.25.52]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-434549540b2sm14585754fac.6.2026.05.05.11.13.07
+ 586e51a60fabf-434549540b2sm14585754fac.6.2026.05.05.11.13.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 05 May 2026 11:13:08 -0700 (PDT)
+ Tue, 05 May 2026 11:13:10 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: u-boot@lists.denx.de
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, Bryan Brattlof <bb@ti.com>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
  Neha Malcom Francis <n-francis@ti.com>, Peng Fan <peng.fan@nxp.com>,
  Philippe Reynes <philippe.reynes@softathome.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
  Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>,
- Tom Rini <trini@konsulko.com>, Wojciech Dubowik <Wojciech.Dubowik@mt.com>,
- Yannic Moog <y.moog@phytec.de>
-Subject: [PATCH v2 0/4] binman: Tidy up some missing bintool docs
-Date: Tue,  5 May 2026 12:12:51 -0600
-Message-ID: <20260505181300.223439-1-sjg@chromium.org>
+ Tom Rini <trini@konsulko.com>, Wojciech Dubowik <Wojciech.Dubowik@mt.com>
+Subject: [PATCH v2 1/4] binman: Flesh out the p11-kit bintool docstring
+Date: Tue,  5 May 2026 12:12:52 -0600
+Message-ID: <20260505181300.223439-2-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260505181300.223439-1-sjg@chromium.org>
+References: <20260505181300.223439-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -97,33 +98,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Some of the bintools are missing documentation. This series adds the
-missing pieces to bring things up to scratch.
+The Sphinx-generated bintools.rst currently produces an empty section
+for this bintool, since its class docstring is only a single line and
+so the body under the heading is blank.
+
+Extend the docstring with a short description of what p11-kit does and
+how binman uses it, so the generated documentation has useful content.
+
+Suggested-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Signed-off-by: Simon Glass <sjg@chromium.org>
+---
 
 Changes in v2:
-- Add patch to route PKCS#11 test fixtures through the bintools
-- New patch in v2 (per Quentin's review): replace tools.run() of
-  softhsm2-util, pkcs11-tool and p11-kit in ftest.py with the
-  Bintool.run_cmd() wrapper that already exists
 - Reword the docstring per Quentin's review: binman uses this bintool
   only as an availability check, not for runtime PKCS#11 operations
 
-Simon Glass (4):
-  binman: Flesh out the p11-kit bintool docstring
-  binman: Flesh out the pkcs11-tool bintool docstring
-  binman: Flesh out the softhsm2-util bintool docstring
-  binman: Use bintool wrappers for PKCS#11 tools in tests
+ tools/binman/btool/p11_kit.py | 11 ++++++++++-
+ 1 file changed, 10 insertions(+), 1 deletion(-)
 
- tools/binman/btool/p11_kit.py       | 11 ++++++-
- tools/binman/btool/pkcs11_tool.py   | 11 ++++++-
- tools/binman/btool/softhsm2_util.py | 12 +++++++-
- tools/binman/ftest.py               | 46 ++++++++++++++---------------
- 4 files changed, 54 insertions(+), 26 deletions(-)
-
----
-base-commit: 57460fde4ba84d67de4066ee1141e89e8139ed23
-branch: binj-us2
-
+diff --git a/tools/binman/btool/p11_kit.py b/tools/binman/btool/p11_kit.py
+index 9d8d5d848b4..1bbece5bb2b 100644
+--- a/tools/binman/btool/p11_kit.py
++++ b/tools/binman/btool/p11_kit.py
+@@ -7,7 +7,16 @@ from binman import bintool
+ 
+ 
+ class Bintoolp11_kit(bintool.Bintool):
+-    """p11-kit -- support tool for pkcs#11 libraries"""
++    """p11-kit -- support tool for pkcs#11 libraries
++
++    This bintool wraps the `p11-kit` command, a support tool for PKCS#11
++    modules. Binman uses this wrapper only to check that p11-kit is installed
++    (and to fetch it if missing); any actual PKCS#11 module discovery for
++    signing FIT images or capsules is done outside binman, by mkimage and the
++    OpenSSL PKCS#11 engine.
++
++    See https://p11-glue.github.io/p11-glue/p11-kit.html for more details.
++    """
+     def __init__(self, name):
+         super().__init__('p11-kit',
+                          'Pkcs11 library modules tool',
 -- 
 2.43.0
 
