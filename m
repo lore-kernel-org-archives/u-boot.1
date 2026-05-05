@@ -4,76 +4,147 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DC2EFF885A
-	for <u-boot@archiver.kernel.org>; Tue,  5 May 2026 12:35:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DBF42CD3427
+	for <u-boot@archiver.kernel.org>; Tue,  5 May 2026 12:39:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 89438848BB;
-	Tue,  5 May 2026 14:35:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 4D96B848F3;
+	Tue,  5 May 2026 14:39:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="YjMZo5IG";
+	dkim=pass (2048-bit key; unprotected) header.d=siemens.com header.i=@siemens.com header.b="uk1e5Q1b";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7E10B848DC; Tue,  5 May 2026 14:35:38 +0200 (CEST)
-Received: from sea.source.kernel.org (sea.source.kernel.org
- [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
+ id B6119848DE; Tue,  5 May 2026 14:39:31 +0200 (CEST)
+Received: from PA4PR04CU001.outbound.protection.outlook.com
+ (mail-francecentralazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20a::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9A0F2848B7
- for <u-boot@lists.denx.de>; Tue,  5 May 2026 14:35:35 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
+ by phobos.denx.de (Postfix) with ESMTPS id 917D1848CE
+ for <u-boot@lists.denx.de>; Tue,  5 May 2026 14:39:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id E5AD74080D;
- Tue,  5 May 2026 12:35:33 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2E2FFC2BCB4;
- Tue,  5 May 2026 12:35:24 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1777984533;
- bh=ztsPfB9MqjHOiPmRR9Wi9ML+D6gR6k8/f/o7UtfwgZo=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=YjMZo5IGkffaxBCsuZXMvtlB732n62YV6zCf/Clg045RtVk8SYYvGdFOl1jFzwobi
- bcqBLA6pf/bxZhPJbvNcckaStnnRoUnjcCfyeOiKQmfPI1Zh/eiJuOPZycLcx/c5HU
- sIx2BTtpYxd4WtWgSnrTTwiMhpsfQrWVxAuFhSfu+R2YqdCtz3H3j30bz6/WdZimeY
- oDzM0RexupABvNaNMcU+3MVEiK83sNu46Qy2CCACIiCSWWOP5F8pKPDtHhIJI8U7sD
- Ttich0b1Yf2Nh4Urz/tADlCSOGWrNguKb3l7nYJPQD4glRNWrLKtm5iHg0WHwgxPnk
- l1Oyc57wY1FRw==
-Date: Tue, 5 May 2026 18:05:22 +0530
-From: Sumit Garg <sumit.garg@kernel.org>
-To: Casey Connolly <casey.connolly@linaro.org>
-Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io,
- Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Peng Fan <peng.fan@nxp.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Alice Guo <alice.guo@nxp.com>, Quentin Schulz <quentin.schulz@cherry.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ dmarc=pass (p=reject dis=none) header.from=siemens.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ludwig.nussel@siemens.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=HN+WfmdwyxlTbfPT3opCpu3Qnhbree5otix4GhQ8gSPbA7dJsrPFD4cJ/zfv2PYofAJqh9kuMKSp/e4P/qDG/JrCwjZ0YDL8VkQoLiveBK1DJMhTSTzSSEhk5kNDfw5Of6qz5q+S+Jbb/lxw0zedrlgMEfVbcVrucFDSywtChAoFZYH24fiybzXHPxFLIpGYTlPQfDW+wP6mdjSnm7Im8su3AT9wm1HiV1289RXcG6XSW0WSHq9Jt4XH3DejypkVqLPh7dT6eOxmGJDwXlNmWlem0vLQTxI7VooTNHrujKGL7GoUvBVdqmnQsySD/wQ3etK3xacVQoZSlalotCWygg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=nKTDbpOoEyPCe7E5EQ+TflYlbfiml1bRl3FS2ELpTmY=;
+ b=QPQq6gcGhKa9PL1EWGpCbVo5JpmRVuW3J1Itm0VVwb44BNzCRAX3GoM/QWt8tIKI4uBUZkoKWg17hpolgGltSHSXEROW8Oy+SLwGZYXAsjRu2J4EBg6hCnpvv1bHN2itjCZpdhu67AfdglwjtTojBQ/+DQbWBH1X136PsU1VkQHoNnDFGPjRHXosJuvn3VYX8+xTas26QL3Tqh/mydAwU2Z/lj8zhft60k/stpGgD9J8NJLcDlOKbsLDJir1gwVm1WVhdhvj7rwPvElWVE5knMkD2Gq3D4Rwqsw1cjrxMdMvoowra4Jlqybi756GSfib+H4RjMPCSgCifFWERVyJ8Q==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=siemens.com; dmarc=pass action=none header.from=siemens.com;
+ dkim=pass header.d=siemens.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=siemens.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=nKTDbpOoEyPCe7E5EQ+TflYlbfiml1bRl3FS2ELpTmY=;
+ b=uk1e5Q1bTNpAZjxJXRTj76FaEqEW2W7PgXPht5fPZ1JPyHMeIPSuvxmFL4zHviYVotQWl9tCYjfDko8keoeHbpzmP7Jp1O713+yEoTj4gZ/x+GgCZpGMmAejJQTs+Q873rkEhk+fnIjRRzA7XRC9Vgf/CvLxkc7DXPGt1exu5bcfQURGtJSZuDFupdzoztoJ3hr55j88Int+UDhI9RaT7rLlTJfL7Xi44OqtcXxvPUh85cr5NhEWzTXQKR5smsg4JydtVN0NwuEFuVpKlGK1Nkdazb6TRcRvWPJRTmKc5U6LfQ7nALA7B0zU+9ur3uQk6PlCS5i3AiNRcHpJ28czmQ==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=siemens.com;
+Received: from DB9PR10MB5019.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:2cc::12)
+ by GV2PR10MB6408.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:150:c0::13)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9870.25; Tue, 5 May
+ 2026 12:39:26 +0000
+Received: from DB9PR10MB5019.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::97ce:ff62:c0b8:4ed1]) by DB9PR10MB5019.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::97ce:ff62:c0b8:4ed1%7]) with mapi id 15.20.9870.023; Tue, 5 May 2026
+ 12:39:26 +0000
+Message-ID: <72c5bd2d-6656-4a14-bd5d-3f896fc59247@siemens.com>
+Date: Tue, 5 May 2026 14:30:57 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 4/4] iminfo: also verify signatures
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ James Hilliard <james.hilliard1@gmail.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Kunihiko Hayashi <hayashi.kunihiko@socionext.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Mayuresh Chitale <mchitale@ventanamicro.com>,
  Neil Armstrong <neil.armstrong@linaro.org>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Kuan-Wei Chiu <visitorckw@gmail.com>,
- Raymond Mao <raymond.mao@riscstar.com>,
- Stefan Roese <stefan.roese@mailbox.org>,
- Philip Molloy <philip.molloy@analog.com>,
- Jerome Forissier <jerome.forissier@arm.com>,
- Marek Vasut <marek.vasut@mailbox.org>,
- Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
- Rasmus Villemoes <ravi@prevas.dk>, Heiko Schocher <hs@nabladev.com>,
- Michal Simek <michal.simek@amd.com>, Sughosh Ganu <sughosh.ganu@arm.com>,
- Antony Kurniawan Soemardi <linux@smankusors.com>,
- Luca Weiss <luca.weiss@fairphone.com>,
- Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-Subject: Re: [PATCH v2 00/15] qcom: smem: modernize SMEM in U-Boot
-Message-ID: <afnkCp5tN342zORz@sumit-xelite>
-References: <20260504-b4-modernise-smem-v2-0-c01ec2ff3886@linaro.org>
- <afnCVT5JoeIdy-hQ@sumit-xelite>
- <21d5d2a1-e904-44b0-92c2-378035e158c0@linaro.org>
+ Osama Abdelkader <osama.abdelkader@gmail.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>, Peng Fan <peng.fan@nxp.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Shiji Yang <yangshiji66@outlook.com>, Tom Rini <trini@konsulko.com>,
+ Wolfgang Wallner <wolfgang.wallner@at.abb.com>, Yao Zi <me@ziyao.cc>
+References: <20260430122629.606153-1-ludwig.nussel@siemens.com>
+ <20260430142602.v2.4.eb9898db9115ab0e26701a962ff8b41b199e78b2@changeid>
+ <CAFLszTiptqaM5PHyMR=rR+KEzMSbi0RLEsW41anQ+m229teE+w@mail.gmail.com>
+Content-Language: en-US
+From: Ludwig Nussel <ludwig.nussel@siemens.com>
+In-Reply-To: <CAFLszTiptqaM5PHyMR=rR+KEzMSbi0RLEsW41anQ+m229teE+w@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: BL1PR13CA0303.namprd13.prod.outlook.com
+ (2603:10b6:208:2c1::8) To DB9PR10MB5019.EURPRD10.PROD.OUTLOOK.COM
+ (2603:10a6:10:2cc::12)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <21d5d2a1-e904-44b0-92c2-378035e158c0@linaro.org>
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DB9PR10MB5019:EE_|GV2PR10MB6408:EE_
+X-MS-Office365-Filtering-Correlation-Id: 916b59b5-a59b-48c2-8c0e-08deaaa35789
+X-MS-Exchange-AtpMessageProperties: SA
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|366016|376014|7416014|1800799024|55112099003|56012099003|22082099003|18002099003;
+X-Microsoft-Antispam-Message-Info: dY6yiYzrPctN1pJcK0y6l5dCo6hXaOlx/5AWLTpjF8ikua9NOxG2DKboyAx4GECuZrjViYEmKkZPxUr2CARXNdKdUkUHZ3A5Azjh5AJOSAHcoDsztADI8KScWDicUki5ilMX96xMVYCJpJTGMz09/BY+L5FgQloUMzWTDIMIPNFCXEV9nEa2sLX2jp5+C/FZ3JzY10nfhhNQznA0KWb8UbDzdpJLZwzTMTeYu+r1kJZMIDg0/z3SizFSbeTTj91Sv8IWfUHG1cf1jQRJVoc+CuhKJBd/fWm7jqAWmtBU7CczHZ1/oBm9565w+4eauE7W5GjvcoLeHztC6zKJH0WmWs/IXQRH1AAWl2sZnFifii52rp245vWVhi2xRLGTEgm9HfoAjd1+gwRZCsXpXtFGB4u45i9zIVXfCE/qR0fBQk+JFSI7WOAYkWJ1zOH4K2euB/AKdPFfiYZ2nKEF/Ju/BGuerHtpVTkCSxFwP0uWWyAcuWX5nWiFjUEooFi9IVzOPex6PaBiT1JgEGligaaCsgUwUnZkV3I6ZTQ21/2iyUs4DK424kr38wjE/5zhb3k3F4bW7IlXlyPxB5mTj0GETavdE8PxSQuiXM1xdLQx2ajuv8hfnBMdeh2p20LMlluRHFwpDL4iItTKQD7BSheeEA==
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DB9PR10MB5019.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(376014)(7416014)(1800799024)(55112099003)(56012099003)(22082099003)(18002099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?T3E3cjVqU2tnRmlLSTl6ZkZIc1Y1aURnNHJiNVBHMGNaVStsUlFQb1N5eWdz?=
+ =?utf-8?B?R2p4bHZKMmQxc2Nta3kvWERyMnpCWUt2VlpDK3A1Q0cxTy9qQ1NmNTJ2RzhY?=
+ =?utf-8?B?VTZZNC9qWnY1SHZzT3lPQitwYkxJZyttV2RXZnBkY2Jlc3BOMGI2U3pUZ0tD?=
+ =?utf-8?B?WGY3SXpzbGJ6NU9waFJ0Q3ErMTBxVHEvZWo2Ymd5ZkZneG45eEhqTmJUb2wx?=
+ =?utf-8?B?Q1cvNVFkZFBiRFZBMWhrdDg0aHpUTVVvRDFYWnd0aVFBM25EUEQ3NXhnbEh2?=
+ =?utf-8?B?UWpSQm5QNWNkd2RvMzYwRWdUdjJHZmRPOStqbWtkOThEWXRmbkcvWmdwZ2JZ?=
+ =?utf-8?B?MG82RlJyWVZEWXhPR2NNMU5aTk5kcy84U3BLaHNwUmNHTWtFQ25xTlQ2YUZj?=
+ =?utf-8?B?blZGM2h4R1YvR3RGM1FQVThWbnRXaklsd2VoRytEK2R0M2pGbXpzTVptSkRU?=
+ =?utf-8?B?OHpMTlJnWGUreWtxM1FPdUh2MUJBdDI3cFd5eFlVTTZxZ0FnbmZUZDNnK1J3?=
+ =?utf-8?B?R0ZsZUM0dXBtR3k1Y3QzK3NJQW9NWXhEMWF2d1g5NzNKMEhVQ0lmTE1udlZG?=
+ =?utf-8?B?ODFLczhyVkVoVnA1RTk0N3hiMXo1OUtENGM2Q1JQR2NqcVhtSjZTdmRxVkZk?=
+ =?utf-8?B?eHd0QW5BVzhDSDIweXlUbXJSS0diV1JldHBWbHFzb3UyZW1HblBteXo3VS9s?=
+ =?utf-8?B?VmZvM0hIMVd1RkNZZUR2RmRuV1o5UVF0R05vTkh2TVMrSEpsUElTTVJ0ZDQ1?=
+ =?utf-8?B?QkFLcGVldFlmK1d2MEZLT2d3Y1VId0lJUDU3TkdkKzFkS2NFMmhqa3N4dDJ2?=
+ =?utf-8?B?eXgvTzhQU3M2eS9zL3lzT3hRN2t2VFlmMmw4Mk5xdFovSWpqb1ZhcERINDU0?=
+ =?utf-8?B?eWppajQxUFNFTmNnNmkxWDRndnczK2M4TzViNm9ZWGtteHVSTXdjOE5GZmd6?=
+ =?utf-8?B?L1B4WGE5dFpNdzJCeURLaGVUaW9VWDhsL3c5Tm1mUFJuT1Z1dzFLdjJiN3Nl?=
+ =?utf-8?B?cU00MkdUVHNybnhwVVJ2OWlpNXRPa3BZam9UNHVITXhrTTZMdEZ0anI1QmRr?=
+ =?utf-8?B?TzhJYnp0NUhMaE1PK2xHRnozcUJ2cm55ckR4ZmNmUURIbWJxL1dSaEtUU3FK?=
+ =?utf-8?B?WVc4ODQzZ1h5YXk3UGxQRHMrYURKelpDeTk5aDZ4ZU90VEx0ZHdGTHRHdjBY?=
+ =?utf-8?B?alJpTVVUampZemkyYTRUV0VVUURnd1BGS0Evb3Y2dXR3bHVBb25oTWhhMUtW?=
+ =?utf-8?B?UHFtbm9VVDc4aEszdUtFM25JNEp5b3o1b0lyOExjanpUV2VuTDQvakZyc1Zs?=
+ =?utf-8?B?ZGVIeWJIc1FIR01VOWxVNG5ydkg5MVdFeUpVakR1TFl0YVVnak85L2J6bGNj?=
+ =?utf-8?B?WXhVcnBHbWVmMTlldUplL1FOYVdvTXdoTVZoQlgzRFdiRUY1N2syNDBXbHhI?=
+ =?utf-8?B?SGZydE9NN1lHbjN2T2dqZ1EraWZOd1hHWU9QL1h1dnloMFNzMnU3alpDdDJj?=
+ =?utf-8?B?dEp2NG4xZVEvb0NDZVd3ZWpiekxCb2kweVMvUmt4VzRTT1owa2tMN1RVQktz?=
+ =?utf-8?B?a0VMeUF1ZHNiZ0tJTUlBcFNVOGduZGhkNVZvVklzUWtiTzdydDRyR1ArUUto?=
+ =?utf-8?B?UVI1WTBNUmVLRXpNVCtiRnBXQVU4UzQ1TjkxNGFnRk1sVkUxbnl1YTNNVlAx?=
+ =?utf-8?B?Zk9pVlAwWHltZWJFRkJvUzJMc2cvSVVZOUdXSWtUOUIrY1E4YjBVamRrYnU1?=
+ =?utf-8?B?SDB4eTFzV0Via1ZUOEFwbW90WW9MZ3NZWnpsUnZrYkVYTnVqazFtcjZnVHRZ?=
+ =?utf-8?B?VVFNeldVQzA0b2FRY0dya29ac1VGZGNQbVExQmRLRXlKdTJUWUpsT1J4T3lF?=
+ =?utf-8?B?bi9mRmhPakdUckcvSDFMUmZoUE9rZzI5cVZDYlRZdjVsNW00N1lUclJHcEM2?=
+ =?utf-8?B?U0xiY2hqSE9uYUUxVW1xenBUTVhPNDhXaVNIQ0lvcU9haHI1SjQzdHRadGJt?=
+ =?utf-8?B?dUcxS2Rhalc1RW5ldU1GWTA2QkpRQnh3VkdMTGdDQ3ZmTFVkcUNSaVR4MlE2?=
+ =?utf-8?B?T3Z6WXE4MnF6Q1hMR0dhWWVlRkRjYVdmQXYwUkVteWtqZ3Z4MkFvN2ZRdEVk?=
+ =?utf-8?B?L01VRmVKMy93VzV3TWhqSXAyV1VLWWQ0OFlCZ2N6Mi8rY1psTmJXS1pjdVRj?=
+ =?utf-8?B?MlduZkJLVWFrcnRCUzBTNWNWSmxvRDJGV29FWVNXVkl0aU03aGJKSXJrMWRB?=
+ =?utf-8?B?TnVheC9OdDRVOXpDOTNkTHJhaW52SC9zR0JFRThldkhwRkZ3UmpwOWFobmhI?=
+ =?utf-8?B?ZVhVK3cwK3pQM01OSDdtM3VsVFBXbEtsd0V5Ri9tWVAxaVVyVVl3OGNNWEpp?=
+ =?utf-8?Q?Yq1JBKDVZmGd+K64=3D?=
+X-OriginatorOrg: siemens.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 916b59b5-a59b-48c2-8c0e-08deaaa35789
+X-MS-Exchange-CrossTenant-AuthSource: DB9PR10MB5019.EURPRD10.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 May 2026 12:39:26.1286 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 38ae3bcd-9579-4fd4-adda-b42e1495d55a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: K7yJm0T2D/tmnoajYAirWORQdDdI4vtPrU1zs0lmQwsicYbG1n4awYkv0MIQj4x5RzW/+f0Va5SUv9CvyHzB9/w9ppY3cwKYleTH0PHyBv8=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV2PR10MB6408
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,187 +161,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, May 05, 2026 at 02:25:01PM +0200, Casey Connolly wrote:
+On 5/4/26 14:26, Simon Glass wrote:
+> On 2026-04-30T12:25:59, Ludwig Nussel <ludwig.nussel@siemens.com> wrote:
+>>[...]
+>> diff --git a/cmd/bootm.c b/cmd/bootm.c
+>> @@ -335,6 +335,13 @@ static int image_info(ulong addr)
+>> +             if (CONFIG_IS_ENABLED(FIT_SIGNATURE_REQUIRED) &&
+>> +                 fit_all_configurations_verify(hdr) != 0) {
+>> +                     puts("Signature verification failed!\n");
+>> +                     unmap_sysmem(hdr);
+>> +                     return 1;
+>> +             }
+>> +
 > 
-> 
-> On 05/05/2026 12:11, Sumit Garg wrote:
-> > Hi Casey,
-> > 
-> > Thanks for the much needed re-spin of the SMEM patch-set.
-> > 
-> > On Mon, May 04, 2026 at 08:57:28PM +0200, Casey Connolly wrote:
-> >> Smem is currently implemented a uclass in U-Boot. This carries with it
-> >> some implicit limitations about how and when we can actually talk with
-> >> it, since its modelled as a device.
-> >>
-> >> The SMEM uclass is qualcomm specific and has no other users, smem is
-> >> also largely useful for parsing the memory map and other tasks which we
-> >> have to do before DM is alive anyway.
-> >>
-> >> Let's drop the old smem code and replace it with a straight port from
-> >> Linux, providing a familiar interface and enabling us to access it much
-> >> earlier in the boot process than would be possible with a standard
-> >> udevice.
-> >>
-> >> Additionally, this will be easier to maintain going forwards since any
-> >> patches from Linux can be more easily ported over.
-> >>
-> >> With this new smem framework in place, we can now use SMEM to parse the
-> >> memory map when it's not provided via some other mechanism and to read
-> >> the serial number of the board.
-> >>
-> >> Implement this functionality and split the snapdragon memory parsing off
-> >> to its own file to try and organise things a bit better.
-> >>
-> >> Since the memory map stored in SMEM doesn't already have some carveouts
-> >> let's also be correct about unmapping reserved memory regions, we
-> >> should eventually do this on all Qualcomm boards but it's particularly
-> >> important when we aren't chainloading from ABL.
-> > 
-> > This was really needed to unmap reserved regions in U-Boot memory map to
-> > increase robustness.
-> 
-> agreed, the ~100ms cost sucks but I hope we can bring it down by doing
-> this after dcache enable if we can figure that out (would probably rely
-> on starting with an initial minimal map to avoid the prefetcher issues)
-> but yeah, a problem for the future for sure.
+> The subject says iminfo "also verifies signatures", but verification
+> only runs when FIT_SIGNATURE_REQUIRED is set. I'd expect iminfo to
+> attempt verification whenever FIT_SIGNATURE is enabled so the user
+> sees the result, and only treat failure as fatal when REQUIRED is set
+> - otherwise users on the legacy path lose the diagnostic value. What
+> do you think?
 
-+1
+Sure, sounds good.
 
-> 
-> > 
-> >>
-> >> This depends on a fix for unmapping memory regions: https://lore.kernel.org/u-boot/20260504175511.585797-1-casey.connolly@linaro.org/
-> >>
-> >> ---
-> >> Changes in v2:
-> >> - Ensure reserved regions are unmapped appropriately when using SMEM as
-> >>   the source of truth for the memory map.
-> >> - Support SMEM ram layout v0/v1 for older platforms using a header from
-> >>   Qualcomm.
-> > 
-> > It would be better if you can provide proper attribution in the commit
-> > to which this header is being picked up.
-> 
-> Where is the header sourced from? I can't really use another patch
-> posting as a source.
+cuLudwig
 
-I would have just mentioned the header to be contributed by:
-Aswin Murugan <aswin.murugan@oss.qualcomm.com> in commit message.
-
-> 
-> > 
-> >> - Set an environment variable (memmap_source) providing info about
-> >>   where U-Boots memory map is from.
-> >> - Correctly handle serial_num missing on msm8916
-> >> - Link to v1: https://lore.kernel.org/r/20241124-b4-modernise-smem-v1-0-b7852c11b67c@linaro.org
-> >>
-> > 
-> > FWIW, I tested this patch-set on RB3Gen2 and lemans-evk after dropping
-> > the U-Boot DT overrides, so feel free to carry:
-> 
-> Good to know! I assume you removed the hardcoded DT memorymap for testing?
-
-Yeah I did drop the hardcoded DT memory map as you can see here [1].
-Feel free to skip picking up DT memory override for Lemans EVK with this
-series merged.
-
-[1] https://github.com/qualcomm-linux/u-boot/pull/56
-
--Sumit
-
-> 
-> > 
-> > Tested-by: Sumit Garg <sumit.garg@oss.qualcomm.com>
-> > 
-> > I will give a proper review to this series soon.
-> 
-> Thanks
-> > 
-> > -Sumit
-> > 
-> >> To: u-boot@lists.denx.de
-> >> To: Sumit Garg <sumit.garg@kernel.org>
-> >> To: u-boot-qcom@groups.io
-> >> Cc: Tom Rini <trini@konsulko.com>
-> >> Cc: Simon Glass <sjg@chromium.org>
-> >> Cc: Casey Connolly <casey.connolly@linaro.org>
-> >> Cc: Peng Fan <peng.fan@nxp.com>
-> >> Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
-> >> Cc: Alice Guo <alice.guo@nxp.com>
-> >> Cc: Quentin Schulz <quentin.schulz@cherry.de>
-> >> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> >> Cc: Neil Armstrong <neil.armstrong@linaro.org>
-> >> Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>
-> >> Cc: Kuan-Wei Chiu <visitorckw@gmail.com>
-> >> Cc: Raymond Mao <raymond.mao@riscstar.com>
-> >> Cc: Stefan Roese <stefan.roese@mailbox.org>
-> >> Cc: Philip Molloy <philip.molloy@analog.com>
-> >> Cc: Jerome Forissier <jerome.forissier@arm.com>
-> >> Cc: Marek Vasut <marek.vasut@mailbox.org>
-> >> Cc: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
-> >> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
-> >> Cc: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
-> >> Cc: Rasmus Villemoes <ravi@prevas.dk>
-> >> Cc: Heiko Schocher <hs@nabladev.com>
-> >> Cc: Michal Simek <michal.simek@amd.com>
-> >> Cc: Sughosh Ganu <sughosh.ganu@arm.com>
-> >> Cc: Antony Kurniawan Soemardi <linux@smankusors.com>
-> >> Cc: Luca Weiss <luca.weiss@fairphone.com>
-> >> Cc: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-> >>
-> >> ---
-> >> Casey Connolly (15):
-> >>       Revert "dm: SMEM (Shared memory) uclass"
-> >>       smem: drop drivers/smem
-> >>       Revert "test: smem: add basic smem test"
-> >>       Revert "drivers: smem: sandbox"
-> >>       mach-snapdragon: fix reserved memory carveout
-> >>       soc: qcom: import smem from Linux 6.11-rc2
-> >>       soc: qcom: smem: adjust headers for U-Boot
-> >>       soc: qcom: smem: adjust for U-Boot
-> >>       soc: qcom: smem: get serial number from socinfo
-> >>       soc: qcom: smem: stub functions
-> >>       soc: qcom: smem: add build infra
-> >>       mach-snapdragon: move memory parsing to its own file
-> >>       mach-snapdragon: support parsing memory map from SMEM
-> >>       mach-snapdragon: fetch serial# from SMEM
-> >>       configs: add qcom_sm8650_defconfig and debug fragment
-> >>
-> >>  MAINTAINERS                                  |   1 -
-> >>  arch/arm/Kconfig                             |   3 +-
-> >>  arch/arm/mach-snapdragon/Makefile            |   2 +-
-> >>  arch/arm/mach-snapdragon/board.c             | 253 ++++-----
-> >>  arch/arm/mach-snapdragon/dram.c              | 239 ++++++++
-> >>  arch/arm/mach-snapdragon/qcom-priv.h         |  17 +
-> >>  arch/arm/mach-snapdragon/rampart.h           | 194 +++++++
-> >>  arch/sandbox/dts/test.dts                    |   4 -
-> >>  board/qualcomm/debug-sm8650.config           |   5 +
-> >>  configs/qcom_sm8650_defconfig                |  16 +
-> >>  configs/sandbox64_defconfig                  |   2 -
-> >>  configs/sandbox_defconfig                    |   2 -
-> >>  drivers/Kconfig                              |   2 -
-> >>  drivers/Makefile                             |   1 -
-> >>  drivers/smem/Kconfig                         |  25 -
-> >>  drivers/smem/Makefile                        |   7 -
-> >>  drivers/smem/sandbox_smem.c                  |  44 --
-> >>  drivers/smem/smem-uclass.c                   |  46 --
-> >>  drivers/soc/qcom/Kconfig                     |   8 +
-> >>  drivers/soc/qcom/Makefile                    |   1 +
-> >>  drivers/{smem/msm_smem.c => soc/qcom/smem.c} | 777 ++++++++++++++++-----------
-> >>  include/dm/uclass-id.h                       |   1 -
-> >>  include/smem.h                               |  90 ----
-> >>  include/soc/qcom/smem.h                      |  36 ++
-> >>  include/soc/qcom/socinfo.h                   | 111 ++++
-> >>  test/dm/Makefile                             |   1 -
-> >>  test/dm/smem.c                               |  26 -
-> >>  27 files changed, 1186 insertions(+), 728 deletions(-)
-> >> ---
-> >> base-commit: 2920b49fb117dd70b6219804bf0d298c96f184f2
-> >>
-> >> // Casey (she/they)
-> >>
-> 
-> -- 
-> // Casey (she/her)
-> 
+-- 
+Ludwig Nussel
+Siemens AG
+www.siemens.com
