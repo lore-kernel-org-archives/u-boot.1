@@ -4,57 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD484FF8855
-	for <u-boot@archiver.kernel.org>; Tue,  5 May 2026 19:07:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B60CCD3427
+	for <u-boot@archiver.kernel.org>; Tue,  5 May 2026 23:14:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DBCC38495B;
-	Tue,  5 May 2026 21:07:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=grimler.se
+	by phobos.denx.de (Postfix) with ESMTP id 73EE584974;
+	Wed,  6 May 2026 01:14:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=timmermann.space
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; secure) header.d=grimler.se header.i=@grimler.se header.b="RWPmYzur";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9E22A849B2; Tue,  5 May 2026 21:07:44 +0200 (CEST)
-Received: from out-189.mta1.migadu.com (out-189.mta1.migadu.com
- [95.215.58.189])
+ id 0195284968; Wed,  6 May 2026 01:14:07 +0200 (CEST)
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org
+ [IPv6:2001:67c:2050:0:465::103])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CE22B848DA
- for <u-boot@lists.denx.de>; Tue,  5 May 2026 21:07:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=grimler.se
+ by phobos.denx.de (Postfix) with ESMTPS id 0F8568495B
+ for <u-boot@lists.denx.de>; Wed,  6 May 2026 01:14:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=timmermann.space
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=henrik@grimler.se
-Date: Tue, 5 May 2026 21:07:29 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=grimler.se; s=key1;
- t=1778008057;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=n7Bfku23opUurCSrL8pcUeunEwTBCIXEel7QqObg9x8=;
- b=RWPmYzur7HrGXpzOAr+0gQ9bjoUyahBlmN0fOXnOlCXjVINaZXJ6b5XVd/+EKgiZ6B/oDJ
- e6+VVcr9oyk52p+6mMf/aE7ihPNYdplIj5gIPdQyb7MytXKfrtHkLve5fu2ur0CThioxkP
- y6pta0+rugcYEN7q4GHF3YiZKjA0R20=
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
- include these headers.
-From: Henrik Grimler <henrik@grimler.se>
-To: Kaustabh Chakraborty <kauschluss@disroot.org>
-Cc: Peng Fan <peng.fan@nxp.com>, u-boot@lists.denx.de,
- Minkyu Kang <mk7.kang@samsung.com>, Tom Rini <trini@konsulko.com>,
- Jaehoon Chung <jh80.chung@samsung.com>, Anand Moon <linux.amoon@gmail.com>,
- Sam Protsenko <semen.protsenko@linaro.org>,
- Lukas Timmermann <uboot@timmermann.space>
-Subject: Re: [PATCH v2 1/4] mmc: exynos_dw_mmc: add proper init sequence for
- HS400 support
-Message-ID: <20260505190729.GA6951@l14.localdomain>
-References: <20260503-dwmmc-exynos-hs400-es-v2-0-3ff1526142a7@disroot.org>
- <20260503-dwmmc-exynos-hs400-es-v2-1-3ff1526142a7@disroot.org>
+ spf=pass smtp.mailfrom=uboot@timmermann.space
+Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4g9Dpq6KlCz9v2Q;
+ Wed,  6 May 2026 01:13:55 +0200 (CEST)
+From: Lukas Timmermann <uboot@timmermann.space>
+Subject: [PATCH RFC v3 0/2] Modern pinctrl for Exynos5250 devices
+Date: Wed, 06 May 2026 01:13:28 +0200
+Message-Id: <20260506-pinctrl-exyno5250-v3-0-11649fe82210@timmermann.space>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260503-dwmmc-exynos-hs400-es-v2-1-3ff1526142a7@disroot.org>
-X-Migadu-Flow: FLOW_OUT
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyjHUUlJIzE
+ vPSU3UzU4B8JSMDIzMDUwMz3YLMvOSSohzd1IrKvHxTI1MD3WTTxFSzNBMT8yQjCyWgvoKi1LT
+ MCrCZ0UpBbs5KsRDB4tKkrNTkEpBpSrW1AHSgeo56AAAA
+X-Change-ID: 20260506-pinctrl-exyno5250-c5ae6f447b28
+To: u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, Yao Zi <me@ziyao.cc>, 
+ Kory Maincent <kory.maincent@bootlin.com>, Peng Fan <peng.fan@nxp.com>, 
+ Kuan-Wei Chiu <visitorckw@gmail.com>, 
+ Raymond Mao <raymond.mao@riscstar.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, 
+ Stefan Roese <stefan.roese@mailbox.org>, 
+ Philip Molloy <philip.molloy@analog.com>, 
+ Jerome Forissier <jerome.forissier@arm.com>, 
+ Kaustabh Chakraborty <kauschluss@disroot.org>, 
+ Henrik Grimler <henrik@grimler.se>, Minkyu Kang <mk7.kang@samsung.com>, 
+ Lukas Timmermann <uboot@timmermann.space>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,215 +69,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Kaustabh,
+This patch series adds the necessary files to use a modern pinctrl driver
+with an exynos5250 SoC. The changes are well tested and are working.
 
-On Sun, May 03, 2026 at 05:51:26PM +0530, Kaustabh Chakraborty wrote:
-> HS400 support was added, but configuration necessary for HS400 support
-> was left out. Add necessary changes, which includes:
-> - Device tree properties, such as "samsung,dw-mshc-hs400-timing" and
->   "samsung,read-strobe-delay", which function as per dt-bindings.
-> - Registers related to HS400, which are necessary to enable HS400+ support.
-> - Appropriate timing tunings for the HS400 mode.
-> 
-> Note that these changes are loosely based off of its Linux kernel
-> counterpart.
-> 
-> Fixes: bbe3b9fa0922 ("mmc: exynos_dw_mmc: add support for MMC HS200 and HS400 modes")
-> Signed-off-by: Kaustabh Chakraborty <kauschluss@disroot.org>
+In contrast to v1, this reenables GPIO functionality. But as I'm still
+lacking experience, I'm not quite sure on how to prevent s5p_gpio to
+load when using upstream DTS in a clean way. Because of that, this 
+patch series is marked as an RFC.
+checkpatch complains about using #ifdef.
 
-Reviewed-by: Henrik Grimler <henrik@grimler.se>
+All changes were tested with an DT already in linux-next.
+The tested device is a Google Nexus 10 (google-manta).
+U-Boot was ported to that device and will be upstreamed into U-Boot
+soon.
 
-This works fine on exynos5422-odroid-xu4 without hs400. I was not able
-to get hs400 working on the device, seems more changes than just dts
-update are needed.
+Changes in v3:
+- Reenable s5p_gpio
+- Fix new driver not binding s5p_gpio
+
+Signed-off-by: Lukas Timmermann <uboot@timmermann.space>
+---
+Lukas Timmermann (2):
+      pinctrl: exynos: Add exynos5250 driver
+      gpio: s5p: Disable when using upstream DTS
+
+ MAINTAINERS                                 |  5 ++
+ drivers/gpio/s5p_gpio.c                     |  2 +
+ drivers/pinctrl/exynos/Kconfig              |  8 +++
+ drivers/pinctrl/exynos/Makefile             |  1 +
+ drivers/pinctrl/exynos/pinctrl-exynos5250.c | 99 +++++++++++++++++++++++++++++
+ 5 files changed, 115 insertions(+)
+---
+base-commit: 7d6cd981df6662ec042e570495b04dc922f0e9d7
+change-id: 20260506-pinctrl-exyno5250-c5ae6f447b28
 
 Best regards,
-Henrik Grimler
+--  
+Lukas Timmermann <uboot@timmermann.space>
 
-> ---
->  arch/arm/mach-exynos/include/mach/dwmmc.h |  5 ++
->  drivers/mmc/exynos_dw_mmc.c               | 81 +++++++++++++++++++++++++++++++
->  2 files changed, 86 insertions(+)
-> 
-> diff --git a/arch/arm/mach-exynos/include/mach/dwmmc.h b/arch/arm/mach-exynos/include/mach/dwmmc.h
-> index 4432deedef7..50081326c25 100644
-> --- a/arch/arm/mach-exynos/include/mach/dwmmc.h
-> +++ b/arch/arm/mach-exynos/include/mach/dwmmc.h
-> @@ -15,6 +15,11 @@
->  #define DWMCI_SET_DRV_CLK(x)		((x) << 16)
->  #define DWMCI_SET_DIV_RATIO(x)		((x) << 24)
->  
-> +/* HS400 Related Registers */
-> +#define DWMCI_HS400_DQS_EN		0x180
-> +#define DWMCI_HS400_ASYNC_FIFO_CTRL	0x184
-> +#define DWMCI_HS400_DLINE_CTRL		0x188
-> +
->  /* Protector Register */
->  #define DWMCI_EMMCP_BASE		0x1000
->  #define EMMCP_MPSECURITY		(DWMCI_EMMCP_BASE + 0x0010)
-> diff --git a/drivers/mmc/exynos_dw_mmc.c b/drivers/mmc/exynos_dw_mmc.c
-> index 7ccd113bd79..6558cdc803d 100644
-> --- a/drivers/mmc/exynos_dw_mmc.c
-> +++ b/drivers/mmc/exynos_dw_mmc.c
-> @@ -8,6 +8,7 @@
->  #include <dwmmc.h>
->  #include <asm/global_data.h>
->  #include <malloc.h>
-> +#include <mmc.h>
->  #include <errno.h>
->  #include <asm/arch/dwmmc.h>
->  #include <asm/arch/clk.h>
-> @@ -30,6 +31,14 @@
->  #define CLKSEL_UP_SAMPLE(x, y)		(((x) & ~CLKSEL_CCLK_SAMPLE(7)) | \
->  					 CLKSEL_CCLK_SAMPLE(y))
->  
-> +/* RCLK_EN register defines */
-> +#define DATA_STROBE_EN			BIT(0)
-> +#define AXI_NON_BLOCKING_WR	BIT(7)
-> +
-> +/* DLINE_CTRL register defines */
-> +#define DQS_CTRL_RD_DELAY(x, y)		(((x) & ~0x3FF) | ((y) & 0x3FF))
-> +#define DQS_CTRL_GET_RD_DELAY(x)	((x) & 0x3FF)
-> +
->  /**
->   * DOC: Quirk flags for different Exynos DW MMC blocks
->   *
-> @@ -71,6 +80,11 @@ struct dwmci_exynos_priv_data {
->  	struct clk clk;
->  	u32 sdr_timing;
->  	u32 ddr_timing;
-> +	u32 hs400_timing;
-> +	u32 tuned_sample;
-> +	u32 dqs_delay;
-> +	u32 saved_dqs_en;
-> +	u32 saved_strobe_ctrl;
->  	const struct exynos_dwmmc_variant *chip;
->  };
->  
-> @@ -162,6 +176,27 @@ static u8 exynos_dwmmc_get_ciu_div(struct dwmci_host *host)
->  				& DWMCI_DIVRATIO_MASK) + 1;
->  }
->  
-> +static void exynos_config_hs400(struct dwmci_host *host, enum bus_mode mode)
-> +{
-> +	struct dwmci_exynos_priv_data *priv = exynos_dwmmc_get_priv(host);
-> +	u32 dqs, strobe;
-> +
-> +	dqs = priv->saved_dqs_en;
-> +	strobe = priv->saved_strobe_ctrl;
-> +
-> +	switch (mode) {
-> +	case MMC_HS_400:
-> +		dqs |= DATA_STROBE_EN;
-> +		strobe = DQS_CTRL_RD_DELAY(strobe, priv->dqs_delay);
-> +		break;
-> +	default:
-> +		dqs &= ~DATA_STROBE_EN;
-> +	}
-> +
-> +	dwmci_writel(host, DWMCI_HS400_DQS_EN, dqs);
-> +	dwmci_writel(host, DWMCI_HS400_DLINE_CTRL, strobe);
-> +}
-> +
->  /* Configure CLKSEL register with chosen timing values */
->  static int exynos_dwmci_clksel(struct dwmci_host *host)
->  {
-> @@ -170,6 +205,9 @@ static int exynos_dwmci_clksel(struct dwmci_host *host)
->  	u32 timing;
->  
->  	switch (host->mmc->selected_mode) {
-> +	case MMC_HS_400:
-> +		timing = CLKSEL_UP_SAMPLE(priv->hs400_timing, priv->tuned_sample);
-> +		break;
->  	case MMC_DDR_52:
->  		timing = priv->ddr_timing;
->  		break;
-> @@ -186,6 +224,9 @@ static int exynos_dwmci_clksel(struct dwmci_host *host)
->  
->  	dwmci_writel(host, priv->chip->clksel, timing);
->  
-> +	if (CONFIG_IS_ENABLED(MMC_HS400_SUPPORT))
-> +		exynos_config_hs400(host, host->mmc->selected_mode);
-> +
->  	return 0;
->  }
->  
-> @@ -223,6 +264,16 @@ static void exynos_dwmci_board_init(struct dwmci_host *host)
->  {
->  	struct dwmci_exynos_priv_data *priv = exynos_dwmmc_get_priv(host);
->  
-> +	if (CONFIG_IS_ENABLED(MMC_HS400_SUPPORT)) {
-> +		priv->saved_strobe_ctrl = dwmci_readl(host, DWMCI_HS400_DLINE_CTRL);
-> +		priv->saved_dqs_en = dwmci_readl(host, DWMCI_HS400_DQS_EN);
-> +		priv->saved_dqs_en |= AXI_NON_BLOCKING_WR;
-> +		dwmci_writel(host, DWMCI_HS400_DQS_EN, priv->saved_dqs_en);
-> +		if (!priv->dqs_delay)
-> +			priv->dqs_delay =
-> +				DQS_CTRL_GET_RD_DELAY(priv->saved_strobe_ctrl);
-> +	}
-> +
->  	if (priv->chip->quirks & DWMCI_QUIRK_DISABLE_SMU) {
->  		dwmci_writel(host, EMMCP_MPSBEGIN0, 0);
->  		dwmci_writel(host, EMMCP_SEND0, 0);
-> @@ -319,6 +370,22 @@ static int exynos_dwmmc_of_to_plat(struct udevice *dev)
->  				   DWMCI_SET_DIV_RATIO(div);
->  	}
->  
-> +	err = dev_read_u32_array(dev, "samsung,dw-mshc-hs400-timing", timing, 2);
-> +	if (err) {
-> +		debug("DWMMC%d: Can't get hs400-timings, using ddr-timings\n",
-> +		      host->dev_index);
-> +		priv->hs400_timing = priv->ddr_timing;
-> +	} else {
-> +		priv->hs400_timing = DWMCI_SET_SAMPLE_CLK(timing[0]) |
-> +				     DWMCI_SET_DRV_CLK(timing[1]) |
-> +				     DWMCI_SET_DIV_RATIO(1);
-> +		if (dev_read_u32(dev, "samsung,read-strobe-delay", &priv->dqs_delay)) {
-> +			priv->dqs_delay = 0;
-> +			debug("DWMMC%d: read-strobe-delay is not found, assuming usage of default value\n",
-> +			      host->dev_index);
-> +		}
-> +	}
-> +
->  	host->buswidth = dev_read_u32_default(dev, "bus-width", 4);
->  	host->fifo_depth = dev_read_u32_default(dev, "fifo-depth", 0);
->  	host->bus_hz = dev_read_u32_default(dev, "clock-frequency", 0);
-> @@ -356,6 +423,16 @@ static int exynos_dwmmc_get_best_clksmpl(u8 candidates)
->  	return -EIO;
->  }
->  
-> +static int dw_mci_exynos_prepare_hs400_tuning(struct dwmci_host *host)
-> +{
-> +	struct dwmci_exynos_priv_data *priv = exynos_dwmmc_get_priv(host);
-> +
-> +	dwmci_writel(host, priv->chip->clksel, priv->hs400_timing);
-> +	host->bus_hz = exynos_dwmci_get_clk(host, host->clock);
-> +
-> +	return 0;
-> +}
-> +
->  static int exynos_dwmmc_execute_tuning(struct udevice *dev, u32 opcode)
->  {
->  	struct dwmci_exynos_priv_data *priv = dev_get_priv(dev);
-> @@ -365,6 +442,9 @@ static int exynos_dwmmc_execute_tuning(struct udevice *dev, u32 opcode)
->  	u32 clksel;
->  	int ret;
->  
-> +	if (mmc->hs400_tuning)
-> +		dw_mci_exynos_prepare_hs400_tuning(host);
-> +
->  	clksel = dwmci_readl(host, priv->chip->clksel);
->  	start_smpl = CLKSEL_CCLK_SAMPLE(clksel);
->  
-> @@ -387,6 +467,7 @@ static int exynos_dwmmc_execute_tuning(struct udevice *dev, u32 opcode)
->  		return ret;
->  	}
->  
-> +	priv->tuned_sample = ret;
->  	dwmci_writel(host, priv->chip->clksel, CLKSEL_UP_SAMPLE(clksel, ret));
->  
->  	return 0;
-> 
-> -- 
-> 2.53.0
-> 
