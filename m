@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B31CCD342C
-	for <u-boot@archiver.kernel.org>; Tue,  5 May 2026 02:21:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08118CD342C
+	for <u-boot@archiver.kernel.org>; Tue,  5 May 2026 02:21:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 83E6A84876;
-	Tue,  5 May 2026 04:20:37 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7D9BC8487C;
+	Tue,  5 May 2026 04:20:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=seznam.cz
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=seznam.cz header.i=@seznam.cz header.b="hbCajLDH";
+	dkim=pass (2048-bit key; secure) header.d=seznam.cz header.i=@seznam.cz header.b="IvVyIZbC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4332C846F2; Tue,  5 May 2026 02:49:16 +0200 (CEST)
-Received: from mxd-2-a03.seznam.cz (mxd-2-a03.seznam.cz
- [IPv6:2a02:598:64:8a00::1000:a03])
+ id C60B2846F2; Tue,  5 May 2026 02:49:17 +0200 (CEST)
+Received: from mxd-1-a0f.seznam.cz (mxd-1-a0f.seznam.cz
+ [IPv6:2a02:598:128:8a00::1000:a0f])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1705484709
- for <u-boot@lists.denx.de>; Tue,  5 May 2026 02:49:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E1639846C3
+ for <u-boot@lists.denx.de>; Tue,  5 May 2026 02:49:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=seznam.cz
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=michael.srba@seznam.cz
-Received: from email.seznam.cz by smtpc-mxd-5f4d8d5f6f-w7th8
- (smtpc-mxd-5f4d8d5f6f-w7th8 [2a02:598:64:8a00::1000:a03])
- id 13c0b59448cee1fd126979ca; Tue, 05 May 2026 02:48:20 +0200 (CEST)
+Received: from email.seznam.cz by smtpc-mxd-5f4d8d5f6f-lmwqj
+ (smtpc-mxd-5f4d8d5f6f-lmwqj [2a02:598:128:8a00::1000:a0f])
+ id 13a6eac148a8bea8120f269f; Tue, 05 May 2026 02:48:35 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=seznam.cz; s=szn1;
- t=1777942100; bh=t5NQsjYuIjo5ryjp2KjlemG4Mnud/D1IMpC9EinLBbA=;
+ t=1777942115; bh=DDA7rWY6uiVaHcUKNCnkd0n3f3qAbapNWaHF3o4J1yc=;
  h=From:Date:Subject:MIME-Version:Content-Type:
  Content-Transfer-Encoding:Message-Id:To:Cc;
- b=hbCajLDHnf0q3u9rZ+1+N1TQr1zhXc13deOAj8cj5OHBfELN3rbkkdgzfLXgwaiRG
- FGGhXuoLvR5Ib/NEp+IB/AG44q7AD/xUrghn2Plgm7zD4Hpkg9V5Cmk8F8oW88EGxQ
- RgkBfRl5rkdKYW2ojAwGOiHgFuvMPa48OfkxpKd94Hvy+7Lu/RjUDE/194HEctIPZG
- xDjeeNQA1zYmCxk7SPoEoEj3Jt0b7vc+gj26qGQA560YhoRK8FBgC312u9MKbL/fnl
- UfsXjKYR2bC3EB+vAh2EjguIXA56aV9RsgD6z8Fl/hMZL5vOwfBhABxqah3ICK5Wq0
- 8VxBRDwUIrKow==
+ b=IvVyIZbCUQWzRw1Lf5OHatiBvut8YZGDhAAU6FebhtTi88QXSnzWtvjzRhY5m3tj+
+ VlGNc9CggqodLpDw31kJ9XVMUTGSGiWw7a+aYel/ZOM/VgBoGpum0kGSNqV4GavL1o
+ hKLOdJXQiryYwqF0Za3IeXLFa2UFMT65LMe47SjGnFCPPXmiPmI+8XRPPCKcOZXcBM
+ iWtyRUMkfDGfKpA9NVh9NL2Sqr53qtd+AtaFhVjdz+IkZQhyGgcLpGkQCjFT2G1wkd
+ SV//aO2JcUWZ66IF+WgwmVrT2mrFBaEq5QP2WFCTlfkA0w7v4UKXYOKVbBUvGQRp3R
+ A3SlTzvel3/FA==
 Received: from [127.0.0.1] (ip-111-27.static.ccinternet.cz [147.161.27.111])
  by smtpd-relay-7c7c659656-rb5ts (szn-email-smtpd/2.0.72) with ESMTPA
- id 5a92d8a7-0b30-456e-984a-09d37baf250a;
- Tue, 05 May 2026 02:48:16 +0200
+ id 1aa96934-5f0c-4769-8582-b07fa3076233;
+ Tue, 05 May 2026 02:48:19 +0200
 From: michael.srba@seznam.cz
-Date: Tue, 05 May 2026 02:47:53 +0200
-Subject: [PATCH v5 07/11] mach-snapdragon: Kconfig: changes / additions to
- support SPL
+Date: Tue, 05 May 2026 02:47:57 +0200
+Subject: [PATCH v5 11/11] dts: add u-boot specific sdm845 .dtsi and a .dtsi
+ for shift-axolotl
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260505-qcom_spl-v5-7-11817415d664@seznam.cz>
+Message-Id: <20260505-qcom_spl-v5-11-11817415d664@seznam.cz>
 References: <20260505-qcom_spl-v5-0-11817415d664@seznam.cz>
 In-Reply-To: <20260505-qcom_spl-v5-0-11817415d664@seznam.cz>
 To: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>, 
@@ -109,97 +109,47 @@ X-Virus-Status: Clean
 
 From: Michael Srba <Michael.Srba@seznam.cz>
 
-Select SUPPORT_SPL so SPL build can be enabled, disable SYSRESET_PSCI in SPL.
-(SPL runs in EL3, so if SPL itself doesn't provide PSCI, nothing else will.)
+The board .dtsi just includes the SoC-specific .dtsi, which
+adds bootph-all markings to upstream dts nodes which are
+needed in SPL.
 
 Signed-off-by: Michael Srba <Michael.Srba@seznam.cz>
+Reviewed-by: Simon Glass <sjg@chromium.org>
 ---
- arch/arm/Kconfig                 | 34 +++++++++++++++++++++++++++++++++-
- arch/arm/mach-snapdragon/Kconfig | 10 ++++++++++
- 2 files changed, 43 insertions(+), 1 deletion(-)
+ arch/arm/dts/sdm845-shift-axolotl-u-boot.dtsi |  2 ++
+ arch/arm/dts/sdm845-u-boot.dtsi               | 16 ++++++++++++++++
+ 2 files changed, 18 insertions(+)
 
-diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
-index f624675eadf..fb2614ba558 100644
---- a/arch/arm/Kconfig
-+++ b/arch/arm/Kconfig
-@@ -1135,6 +1135,7 @@ config ARCH_SNAPDRAGON
- 	bool "Qualcomm Snapdragon SoCs"
- 	select ARM64
- 	select DM
-+	select DM_EVENT if USB_DWC3_GENERIC
- 	select DM_GPIO
- 	select DM_SERIAL
- 	select DM_RESET
-@@ -1149,9 +1150,40 @@ config ARCH_SNAPDRAGON
- 	select SAVE_PREV_BL_FDT_ADDR if !ENABLE_ARM_SOC_BOOT0_HOOK
- 	select LINUX_KERNEL_IMAGE_HEADER if !ENABLE_ARM_SOC_BOOT0_HOOK
- 	select SYSRESET
--	select SYSRESET_PSCI
-+	select SYSRESET_PSCI if !SPL
- 	select ANDROID_BOOT_IMAGE_IGNORE_BLOB_ADDR
- 	select MMU_PGPROT
-+	select SUPPORT_SPL
+diff --git a/arch/arm/dts/sdm845-shift-axolotl-u-boot.dtsi b/arch/arm/dts/sdm845-shift-axolotl-u-boot.dtsi
+new file mode 100644
+index 00000000000..d41210ab23a
+--- /dev/null
++++ b/arch/arm/dts/sdm845-shift-axolotl-u-boot.dtsi
+@@ -0,0 +1,2 @@
++// SPDX-License-Identifier: GPL-2.0
++#include "sdm845-u-boot.dtsi"
+diff --git a/arch/arm/dts/sdm845-u-boot.dtsi b/arch/arm/dts/sdm845-u-boot.dtsi
+new file mode 100644
+index 00000000000..b029264555b
+--- /dev/null
++++ b/arch/arm/dts/sdm845-u-boot.dtsi
+@@ -0,0 +1,16 @@
++// SPDX-License-Identifier: GPL-2.0
++&gcc {
++	bootph-all;
++};
 +
-+	select OF_LIVE if USB_DWC3_GENERIC
-+	select SPL_OF_LIVE if SPL_USB_DWC3_GENERIC
-+	select ARMV8_SPL_EXCEPTION_VECTORS if SPL
-+	select ENABLE_ARM_SOC_BOOT0_HOOK if SPL
-+	select SPL_DM if SPL
-+	select SPL_DM_GPIO if SPL
-+	select SPL_DM_PMIC if SPL
-+	select SPL_DM_USB_GADGET if SPL
-+	select SPL_ENV_SUPPORT if SPL
-+	select SPL_EVENT if SPL_USB_DWC3_GENERIC
-+	select SPL_GPIO if SPL
-+	select SPL_HAS_BSS_LINKER_SECTION if SPL
-+	select SPL_LIBCOMMON_SUPPORT if SPL
-+	select SPL_LIBDISK_SUPPORT if SPL
-+	select SPL_LIBGENERIC_SUPPORT if SPL
-+	select SPL_OF_REAL if SPL
-+	select SPL_OF_CONTROL if SPL
-+	select SPL_PINCONF if SPL
-+	select SPL_PINCTRL if SPL
-+	select SPL_PINCTRL_FULL if SPL
-+	select SPL_PINCTRL_GENERIC if SPL
-+	select SPL_PINCONF_RECURSIVE if SPL
-+	select SPL_PINMUX if SPL
-+	select SPL_SPMI if SPL
-+	select SPL_SPMI_MSM if SPL
-+	select SPL_SPRINTF if SPL
-+	select SPL_STRTO if SPL
-+	select SPL_USB_GADGET if SPL
-+	imply SPL_MMC if SPL
- 	imply OF_UPSTREAM
- 	imply CMD_DM
- 	imply DM_USB_GADGET
-diff --git a/arch/arm/mach-snapdragon/Kconfig b/arch/arm/mach-snapdragon/Kconfig
-index c195d478512..a2228e217af 100644
---- a/arch/arm/mach-snapdragon/Kconfig
-+++ b/arch/arm/mach-snapdragon/Kconfig
-@@ -14,6 +14,9 @@ config SYS_VENDOR
- config SYS_MALLOC_F_LEN
- 	default 0x2000
- 
-+config SPL_SYS_MALLOC_F
-+	default y
++&usb_1_hsphy {
++	bootph-all;
++};
 +
- config SPL_SYS_MALLOC_F_LEN
- 	default 0x2000
- 
-@@ -39,6 +42,13 @@ config SYS_CONFIG_NAME
- 	  Based on this option include/configs/<CONFIG_SYS_CONFIG_NAME>.h header
- 	  will be used for board configuration.
- 
-+config SPL_SHARES_INIT_SP_ADDR
-+	# override the default from common/spl/Kconfig
-+	default n
++&usb_1_dwc3 {
++	bootph-all;
++};
 +
-+config SPL_HAVE_INIT_STACK
-+	default y
-+
- choice
- 	prompt "Qualcomm boot0.h workaround"
- 	optional
++&rpmhcc {
++	bootph-all;
++};
 
 -- 
 2.53.0
