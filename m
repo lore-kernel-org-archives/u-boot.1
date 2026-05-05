@@ -4,128 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4147FF8855
-	for <u-boot@archiver.kernel.org>; Tue,  5 May 2026 15:50:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83C82CD3427
+	for <u-boot@archiver.kernel.org>; Tue,  5 May 2026 15:50:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2F5C2849B2;
-	Tue,  5 May 2026 17:49:49 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 87E9A849B8;
+	Tue,  5 May 2026 17:49:55 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="LXrnuyFR";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=arm.com header.i=@arm.com header.b="HgaBokow";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B324884951; Tue,  5 May 2026 16:03:05 +0200 (CEST)
-Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
- [IPv6:2a00:1450:4864:20::535])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8FCB7848FC
- for <u-boot@lists.denx.de>; Tue,  5 May 2026 16:03:03 +0200 (CEST)
+ id 6805484968; Tue,  5 May 2026 16:30:49 +0200 (CEST)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id C5DFB848CE
+ for <u-boot@lists.denx.de>; Tue,  5 May 2026 16:30:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-67b6dc50b61so7908406a12.2
- for <u-boot@lists.denx.de>; Tue, 05 May 2026 07:03:03 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1777989782; cv=none;
- d=google.com; s=arc-20240605;
- b=F4PUOxaUGT9hETO9GEEK3eg7GlPtQ64tztPrS1owNnmSSTLf7cGS32b7yVuyCJGcMI
- Z+54kw2TAc2HIlsSPuFY4eU3Ln7YqiNLkzA9JOyh/Cs7eXQE69ouTA8th7WTQtN9VMjn
- 6kmn8/JOxwJjiZayzJOXOy0+Is45w/BtOv2ElxrcqDl1wAdsykVqWfPad/LP/ej7JvIM
- Rzq/9X6OlglYkorKDdzD/ZwEUA961G6Y9Sw+kwlbH/bqFqMFkd2OSgIXpN03NzpEk/uU
- /jUycWt+6K1hps9BIrTlpKoRsDLzDP66hyC8kotSuXTWkbM9TFYAJTXOoTCryybOp/1X
- c/ug==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=haSFuehn0ABHCYtrugr8FASxi3N5CreEL6jHMKo4DMA=;
- fh=CcNfW6dIjL9WUdVhhW/ZJ0mqXisjz2Ordk1F8mJ+6zw=;
- b=AXvF1vQtNXI7C565/K7PFw4troEcirSw8R2bqFdFBCqRmf4AsaErwYVGSzFdnbZ/9a
- b8jYkrt5hVuZGTPUxO8SBRBoiUIHvkbPZS9vtLJObcPbkHUynlFZjRncaGe6zcZpoF8W
- kKAHOp8Ux2UTtM/VeiGjLaKNPQIWyF/JoP4ldD0sjQVtgUleny9EIzFD5jsfvfF+mFw8
- /nG5zv43Sp8zt4HP+8QjB1FOvOmr5WNCfBOdQeuRUjTgt7Q8Vx1twxGcniNm3mjuJ+aQ
- ajlKwv7UvsnqCzKVrvfRl/jXY7Ba/WMcsHYdOtHoS8MXpWo2XmIvh9fq+AxfVSKR+b2x
- 6qDg==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1777989782; x=1778594582; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=haSFuehn0ABHCYtrugr8FASxi3N5CreEL6jHMKo4DMA=;
- b=LXrnuyFRu8FRIw8KzF1wS/+n/34T8ItGl+ewrzxziBeAiIWjuPUzot01/A0CEkuvpD
- 4V5CzLMY4H1Ed6h8FVYoohG046vR2KGV/ODSX5gXiSKQw36nqa1N+8Knng7Ed7IhAuJ8
- utBlC81kj/NO+96K04UMKG00R5/nEqFoijw6Y=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777989782; x=1778594582;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=haSFuehn0ABHCYtrugr8FASxi3N5CreEL6jHMKo4DMA=;
- b=VtVMr2UPWewMn/z20l7tceOU+jFSNLfnNLcd6ODyPCYP0PYRMiKG5omLs7++7B+5Ea
- 2/klzFAOjOwemQnr7wVR5Rvn2mXQG2oU3UmIIJLEEcIMMKKcNQ7rfE+kWnkZrjYQ29qX
- JFgpGiZa7yIZQsDq0QEPNzXuLBfbl9pfVLO4LhS+Lw9gRJbQRUsQdM2VtRFCFLB4Tg46
- +f85R0eTnY0Y/iYVAMhVEtzGyqNvtkJV+wOEInGtMo/DGTA5KrumHSJ+9QjPorUXhx35
- 1DKplhSU+m1qld8fAPYxn+ZKkY2hnFWFjMv+PBwohbbkxFdai4bsYft68BXQQatslGLE
- ttjg==
-X-Gm-Message-State: AOJu0Yw9pmg/yXLtix7PsqcL6AErrjoM2LUueMwmgWs2f+/xjwSCp3pC
- uN3/Sf1Sucfi/FhrbDAkQYAnVXiRWno9VRMFJRZSfsakFv0NKWBid6BDBFsVEn7Zj61AFxVYbbP
- uOp0BmaMtbJ6LtwqqFKG7IGwPp9Sndl9sPkC0/8R4
-X-Gm-Gg: AeBDievQ1uG7yxEWjCITjBapojdY90twj92ra1TOouDmhD6712NgujuBT192M3tvIYl
- 1EQ16tSHaY30uT/hokOvfu6xCrBdYJ0ego3MZW6/CfqpR+FJF5lypuNvtrJKixnSwWHKPVxBzZX
- OoQunfQ33mPvcT6AtCDV+i/UOfaQ1ebKZS+0TdbnzyC1tSa/4gwcC4cg6Y3PuzEo8c9X0FODTwC
- H2AUOJImgu5qX5Al84I8of7DqTwYh7tSgXtp03dcXUsqvnXcIXlwB46uwnIko8pnDEqmrJfw28i
- aX3NvzlZc8w47GSm
-X-Received: by 2002:a17:907:ea5:b0:bb7:beb9:b6d5 with SMTP id
- a640c23a62f3a-bbffbf8531fmr862847066b.39.1777989780795; Tue, 05 May 2026
- 07:03:00 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=arm.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=harsimransingh.tungal@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 7C152293B;
+ Tue,  5 May 2026 07:30:40 -0700 (PDT)
+Received: from e132995.arm.com (e132995.arm.com [10.1.29.25])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 515103F763;
+ Tue,  5 May 2026 07:30:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
+ t=1777991445; bh=+sGjWavLPdxKhSn4/sxS4RDp2KIioIHCAIMlCLs0n6Y=;
+ h=Subject:From:To:Cc:In-Reply-To:References:Date:From;
+ b=HgaBokownszBgICy/Qz2sOyyrKWGLuMNfVA1vJLdMdZaq2YGgO4FDvIYnA92f5T7b
+ t8JYefLMgDrEiOk33OGSOJKBILaWjHGTFvoW8DCpX8wudvr8jEpogi6ozod+BZHhdz
+ kURMiA9d/aZ2RfnCVbJb5V4IeZmNhebnmqyHAkFQ=
 MIME-Version: 1.0
-References: <20260505-qcom_spl-v5-0-11817415d664@seznam.cz>
- <20260505-qcom_spl-v5-7-11817415d664@seznam.cz>
-In-Reply-To: <20260505-qcom_spl-v5-7-11817415d664@seznam.cz>
-From: Simon Glass <sjg@chromium.org>
-Date: Tue, 5 May 2026 08:02:48 -0600
-X-Gm-Features: AVHnY4LvwlLc5fbQOmSvW0cviJJoqzVEJkH93FHSlc833JEnn9Cok-tvggJJfeE
-Message-ID: <CAFLszTjUniOCbnGdR9_d8HmQrt8SFV_u8dDonPvOEyCeOUZCTA@mail.gmail.com>
-Subject: Re: [PATCH v5 07/11] mach-snapdragon: Kconfig: changes / additions to
- support SPL
-To: michael.srba@seznam.cz
-Cc: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>,
- u-boot-qcom@groups.io, 
- Tom Rini <trini@konsulko.com>, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@arm.com>,
- Anshul Dalal <anshuld@ti.com>, 
- Peng Fan <peng.fan@nxp.com>, Mattijs Korpershoek <mkorpershoek@kernel.org>, 
- Quentin Schulz <quentin.schulz@cherry.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Andrew Davis <afd@ti.com>, 
- Hrushikesh Salunke <h-salunke@ti.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
- Ye Li <ye.li@nxp.com>, Andre Przywara <andre.przywara@arm.com>, 
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
- Leo Yu-Chi Liang <ycliang@andestech.com>, 
- Andrew Goodbody <andrew.goodbody@linaro.org>, Dhruva Gole <d-gole@ti.com>, 
- Kaustabh Chakraborty <kauschluss@disroot.org>,
- Jerome Forissier <jerome.forissier@arm.com>, 
- Heiko Schocher <hs@nabladev.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Lukasz Majewski <lukma@denx.de>,
- Mateusz Kulikowski <mateusz.kulikowski@gmail.com>, 
- Dinesh Maniyam <dinesh.maniyam@altera.com>,
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Patrice Chotard <patrice.chotard@foss.st.com>, 
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Michal Simek <michal.simek@amd.com>, 
- Yao Zi <me@ziyao.cc>, Peter Korsgaard <peter@korsgaard.com>, 
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>, 
- Casey Connolly <casey.connolly@linaro.org>,
- Tingting Meng <tingting.meng@altera.com>, 
- Tien Fong Chee <tien.fong.chee@altera.com>, Alice Guo <alice.guo@nxp.com>, 
- George Chan <gchan9527@gmail.com>, 
- Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
- Alexey Charkov <alchark@gmail.com>, Ronald Wahl <ronald.wahl@legrand.com>,
- Michael Trimarchi <michael@amarulasolutions.com>
-Content-Type: text/plain; charset="UTF-8"
-X-Mailman-Approved-At: Tue, 05 May 2026 17:49:47 +0200
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Subject: Re: [PATCH 04/12] efi_loader: enable EFI runtime
+ SetVariable()/GetVariable() using FF-A transport
+From: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: harsimransingh.tungal@arm.com, u-boot@lists.denx.de, 
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>, 
+ Tom Rini <trini@konsulko.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Hugues Kamba Mpiana <hugues.kambampiana@arm.com>
+In-Reply-To: <CAFLszTh1uOj6J7rfLXMqDwOb4wYNkerZ7ek0=8UMEFw4CueG_A@mail.gmail.com>
+References: <20260424173151.371134-1-harsimransingh.tungal@arm.com>
+ <20260424173151.371134-5-harsimransingh.tungal@arm.com>
+ <CAFLszTh1uOj6J7rfLXMqDwOb4wYNkerZ7ek0=8UMEFw4CueG_A@mail.gmail.com>
+Date: Tue, 05 May 2026 15:30:38 +0100
+Message-Id: <177799143872.374111.318893662871480731.b4-reply@b4>
+X-Mailer: b4 0.15.2
+X-Mailman-Approved-At: Tue, 05 May 2026 17:49:54 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -142,65 +72,190 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Michael,
-
-On 2026-05-05T00:47:48, Michael Srba <michael.srba@seznam.cz> wrote:
-> mach-snapdragon: Kconfig: changes / additions to support SPL
+On 2026-04-28 12:16 -0600, Simon Glass wrote:
+> Hi Harsimran,
+> 
+> On 2026-04-24T17:31:50, Harsimran Singh Tungal
+> <harsimransingh.tungal@arm.com> wrote:
+> > efi_loader: enable EFI runtime SetVariable()/GetVariable() using FF-A transport
+> >
+> > Route EFI runtime variable APIs through FF-A MM communication
+> >
+> > This patch implements full EFI Runtime Variable Services (GetVariable,
+> > SetVariable, GetNextVariableName, and QueryVariableInfo) using the
+> > FF-A/MM communication backend. Once ExitBootServices() has been invoked,
+> > all variable operations now use the runtime-safe FF-A transport instead
+> > of the boot-time communication paths.
+> >
+> > Key changes:
+> > ============
+> >
+> >  - Add runtime-safe variable property handling via FF-A MM SP.
+> >  - Add runtime versions of variable access and property operations.
+> >  - Replace all standard memory operations with EFI-runtime-safe variants.
+> >
+> > Signed-off-by: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
+> >
+> > lib/charset.c                     |   2 +-
+> >  lib/efi_loader/efi_variable_tee.c | 322 +++++++++++++++++++++++++++++++++++++-
+> >  2 files changed, 318 insertions(+), 6 deletions(-)
+> 
+> > diff --git a/lib/efi_loader/efi_variable_tee.c b/lib/efi_loader/efi_variable_tee.c
+> > @@ -991,6 +1066,92 @@ out:
+> > +     /*
+> > +      * UEFI > 2.7 needs the attributes set even if the buffer is
+> > +      * smaller
+> > +      */
+> > +     if (attributes) {
+> > +             tmp = get_property_int_runtime(variable_name, name_size, vendor,
+> > +                                            &var_property);
+> > +             if (tmp != EFI_SUCCESS) {
+> > +                     ret = tmp;
+> > +                     return ret;
+> > +             }
+> > +             *attributes = var_acc->attr;
+> > +             if (var_property.property &
+> > +                 VAR_CHECK_VARIABLE_PROPERTY_READ_ONLY)
+> > +                     *attributes |= EFI_VARIABLE_READ_ONLY;
+> > +     }
+> 
+> get_property_int_runtime() ends up calling setup_mm_hdr() ->
+> get_comm_buf(), and at runtime get_comm_buf() does
+> efi_memset_runtime(ffa_shared_buf, 0, CONFIG_FFA_SHARED_MM_BUF_SIZE)
+> on the same shared buffer that var_acc points into.
+> 
+> By the time you read var_acc->attr it has been zeroed, so
+> '*attributes' will only ever come back as 0 (optionally OR'd with
+> EFI_VARIABLE_READ_ONLY). The boot-time path gets away with this
+> because get_property_int() calloc()s a fresh buffer; the runtime path
+> cannot. Please cache var_acc->attr in a local before the call, or move
+> the get_property_int_runtime() call ahead of the SP exchange.
 >
-> Select SUPPORT_SPL so SPL build can be enabled, disable SYSRESET_PSCI in SPL.
-> (SPL runs in EL3, so if SPL itself doesn't provide PSCI, nothing else will.)
+Agreed, you're right.
+
+`get_property_int_runtime()` reuses the same runtime FF-A shared buffer, so
+the second call can clear the buffer backing `var_acc` before `var_acc->attr`
+is copied out.
+
+For v2, I will cache `var_acc->attr` in a local before calling
+`get_property_int_runtime()` and then used that cached value when updating
+`*attributes`.
+
+Thanks
+
+> > diff --git a/lib/efi_loader/efi_variable_tee.c b/lib/efi_loader/efi_variable_tee.c
+> > @@ -1228,7 +1477,70 @@ efi_set_variable_runtime(u16 *variable_name, const efi_guid_t *guid,
+> > +     ro = !!(attributes & EFI_VARIABLE_READ_ONLY);
+> > +     attributes &= EFI_VARIABLE_MASK;
+> > +
+> > +     ret = get_property_int_runtime(variable_name, name_size, guid,
+> > +                                    &var_property);
+> > +     if (ret != EFI_SUCCESS)
+> > +             return ret;
+> > +
+> > +     /*
+> > +      * Allocate the buffer early, before switching to RW (if needed)
+> > +      * so we won't need to account for any failures in reading/setting
+> > +      * the properties, if the allocation fails
+> > +      */
+> > +     comm_buf = setup_mm_hdr((void **)&var_acc, payload_size,
+> > +                             SMM_VARIABLE_FUNCTION_SET_VARIABLE, &ret);
+> > +     if (!comm_buf)
+> > +             return ret;
+> > +
+> > +     if (var_property.property & VAR_CHECK_VARIABLE_PROPERTY_READ_ONLY)
+> > +             return EFI_WRITE_PROTECTED;
+> 
+> The comment is copied from efi_set_variable_int() and no longer
+> matches the code - there is no RW switch in the runtime path (no
+> ro_check argument), and the allocation happens after the property
+> read, the opposite of what the comment claims. Either drop the comment
+> or, better, do the RO check before calling setup_mm_hdr() so the
+> early-return is quicker.
 >
-> Signed-off-by: Michael Srba <Michael.Srba@seznam.cz>
->
-> arch/arm/Kconfig                 | 34 +++++++++++++++++++++++++++++++++-
->  arch/arm/mach-snapdragon/Kconfig | 10 ++++++++++
->  2 files changed, 43 insertions(+), 1 deletion(-)
 
-> diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
-> @@ -1149,9 +1150,40 @@ config ARCH_SNAPDRAGON
->       select SAVE_PREV_BL_FDT_ADDR if !ENABLE_ARM_SOC_BOOT0_HOOK
->       select LINUX_KERNEL_IMAGE_HEADER if !ENABLE_ARM_SOC_BOOT0_HOOK
->       select SYSRESET
-> -     select SYSRESET_PSCI
-> +     select SYSRESET_PSCI if !SPL
->       select ANDROID_BOOT_IMAGE_IGNORE_BLOB_ADDR
->       select MMU_PGPROT
-> +     select SUPPORT_SPL
-> +
-> +     select OF_LIVE if USB_DWC3_GENERIC
-> +     select SPL_OF_LIVE if SPL_USB_DWC3_GENERIC
-> +     select ARMV8_SPL_EXCEPTION_VECTORS if SPL
+Agreed.
 
-The commit message only mentions SUPPORT_SPL and SYSRESET_PSCI, but
-this hunk adds ~30 selects plus default overrides in
-mach-snapdragon/Kconfig. Please expand the message to cover the rest -
-in particular the OF_LIVE/SPL_OF_LIVE and DM_EVENT/SPL_EVENT
-selections gated on (SPL_)USB_DWC3_GENERIC are not obvious; readers
-will want to know what breaks without them.
+That comment was copied from the boot-time path.
+For v2, I will drop it and move the `VAR_CHECK_VARIABLE_PROPERTY_READ_ONLY`
+check ahead of `setup_mm_hdr()`, so the runtime path returns
+`EFI_WRITE_PROTECTED` before allocating the MM communication buffer.
 
-> diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
-> @@ -1135,6 +1135,7 @@ config ARCH_SNAPDRAGON
->       bool "Qualcomm Snapdragon SoCs"
->       select ARM64
->       select DM
-> +     select DM_EVENT if USB_DWC3_GENERIC
+> > diff --git a/lib/efi_loader/efi_variable_tee.c b/lib/efi_loader/efi_variable_tee.c
+> > @@ -859,6 +859,38 @@ out:
+> > +static efi_status_t __efi_runtime set_property_int_runtime(const u16 *variable_name,
+> > +                                                        efi_uintn_t name_size,
+> > +                                                        const efi_guid_t *vendor,
+> > +                                                        struct var_check_property *var_property)
+> 
+> As mentioned elsewhere, the four new functions
+> (set_property_int_runtime, get_property_int_runtime,
+> efi_get_variable_runtime, efi_get_next_variable_name_runtime) are
+> near-line-for-line copies of their boot-time counterparts with
+> memcpy/guidcpy/memset swapped for the efi_*_runtime helpers and a
+> different mm_communicate(). Since setup_mm_hdr() was made runtime-safe
+> in patch 3, can the boot-time helpers be reused directly (with
+> mm_communicate() picking the right transport based on
+> efi_is_runtime_enabled())? It would also avoid the special-case free()
+> path.
+> 
 
-Just to check - does u-boot proper genuinely need DM_EVENT/OF_LIVE
-pulled in by USB_DWC3_GENERIC, or is this only required for SPL? DWC3
-has worked on Snapdragon without these so far. If it's only an SPL
-requirement, the proper-side selects should drop.
+I kept the separate runtime wrappers intentionally so the
+post-ExitBootServices call graph stays explicit and auditable: only
+runtime-safe helpers, no driver-model assumptions, and no boot-time heap
+cleanup semantics.
 
-> diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
-> @@ -1149,9 +1150,40 @@ config ARCH_SNAPDRAGON
-> +     select SPL_OF_REAL if SPL
-> +     select SPL_OF_CONTROL if SPL
+I also tried to match the existing EFI variable structure: `efi_variable.c`
+(Done by Heinrich Schuchardt) already has separate boot-time and runtime
+service entry points, so I kept the same split here instead of introducing a
+different pattern only for the TEE/FF-A backend.
 
-SPL_OF_REAL is already selected by SPL_OF_CONTROL (when
-SPL_OF_PLATDATA is not set) in dts/Kconfig, so this line is redundant.
-Also swap the order so SPL_OF_CONTROL comes first, since that's the
-option doing the work.
+Apart from these runtime variants, I will collapse the other `_runtime` helpers
+into the common implementations in v2 patchset. `get_mm_comms()`, `mm_communicate()`,
+`ffa_mm_communicate()`, and `ffa_notify_mm_sp()` will handle both boot and runtime,
+with only a small `efi_at_runtime()` branch for the phase-specific parts.
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+Does this explanation sound reasonable to you?
 
-Regards,
-Simon
+Thanks
+
+> > diff --git a/lib/charset.c b/lib/charset.c
+> > @@ -407,7 +407,7 @@ size_t __efi_runtime u16_strnlen(const u16 *in, size_t count)
+> > -size_t u16_strsize(const void *in)
+> > +size_t __efi_runtime u16_strsize(const void *in)
+> 
+> This change should really be in its own patch with a one-line note
+> that it's needed by the new runtime callers. It is unrelated to the
+> SetVariable/GetVariable wiring and is easy to lose in this 320-line
+> diff.
+> 
+
+For v2, I'll split the `u16_strsize()` `__efi_runtime` annotation into a
+separate small patch with a short note that it is needed by
+the new runtime variable callers. That should keep this patch focused on
+the SetVariable/GetVariable runtime wiring.
+
+> > Key changes:
+> > ============
+> 
+> >
+> >  - Add runtime-safe variable property handling via FF-A MM SP.
+> >  - Add runtime versions of variable access and property operations.
+> >  - Replace all standard memory operations with EFI-runtime-safe variants.
+> 
+> The'============' underline is more for rST documentation than commit
+> messages - please drop it. The third bullet is also misleading: only
+> the new runtime functions use the runtime-safe variants; the existing
+> boot-time helpers are unchanged. It is generally better to use prose
+> than bullet points in a commit message.
+> 
+> Regards,
+> Simon
+> 
+
+Sure, I will update this in v2.
+
+Regards
+Harsimran Singh
+
+
