@@ -4,56 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8FD67CD3427
-	for <u-boot@archiver.kernel.org>; Tue,  5 May 2026 15:50:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9DD92CD3427
+	for <u-boot@archiver.kernel.org>; Tue,  5 May 2026 16:32:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C32A0849BE;
-	Tue,  5 May 2026 17:49:55 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id D92C68497A;
+	Tue,  5 May 2026 18:32:14 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=arm.com header.i=@arm.com header.b="NrepMk3X";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="G8QTUEbs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 221FC84948; Tue,  5 May 2026 16:37:14 +0200 (CEST)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 6ED3F848DA
- for <u-boot@lists.denx.de>; Tue,  5 May 2026 16:37:10 +0200 (CEST)
+ id 763BF84986; Tue,  5 May 2026 18:32:13 +0200 (CEST)
+Received: from mail-ot1-x344.google.com (mail-ot1-x344.google.com
+ [IPv6:2607:f8b0:4864:20::344])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 4E88784974
+ for <u-boot@lists.denx.de>; Tue,  5 May 2026 18:32:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=arm.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=harsimransingh.tungal@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 58525293B;
- Tue,  5 May 2026 07:37:04 -0700 (PDT)
-Received: from e132995.arm.com (e132995.arm.com [10.1.29.25])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 1734C3F763;
- Tue,  5 May 2026 07:37:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
- t=1777991829; bh=ZHFg4p48qg8IK/XgyMAJBJWOMFEq6C7OGN9y/YgYV4o=;
- h=Subject:From:To:Cc:In-Reply-To:References:Date:From;
- b=NrepMk3XB6785Prr1ARaB8nK3lFyyzzSkseWZFnusE9tYkSKhhFW/IPCXv604DwzX
- oGD0E4Xre0avKCb1h9I3KDmYnD6GUYs4if//dKroKopai1c7zzPAMOHwquw5dpl36Q
- UW0tw1+a6BUu7pcscwx6a8bGpa5yJKJ9RIX6Htvc=
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x344.google.com with SMTP id
+ 46e09a7af769-7dea20cf21aso5084469a34.1
+ for <u-boot@lists.denx.de>; Tue, 05 May 2026 09:32:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1777998730; x=1778603530; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=+oJZlqj6DADU50ig/zCM9gQpx65632XKo27agRAki/c=;
+ b=G8QTUEbsEAOztQdknZgYHE+lOi4l46k5jZ70wqankchLyE21dscNZK0f5XYj0GoUQV
+ n0mxj0h8AANm5lrxYnUdU4QJWIAKh6wVe9SuTxz7ngxeDyLQCI896iaKZuSSjHDU4Bis
+ 4RiRO9qQZc26CafL2wQaq8lSv6/7a2rEMC7MM=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1777998730; x=1778603530;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=+oJZlqj6DADU50ig/zCM9gQpx65632XKo27agRAki/c=;
+ b=Zxe+mzLmhseBKZsOLzUW+x72V+oqi1Wm0CopDpTG1a9ElpTSEvm9p7ZnK90bE33Mwv
+ GvJ4qcwZfnIu4Db4xApD0vff4tSima3UcBIWbvpSPUrXBTXT2r+EPPbEwaPnCnAeCjtU
+ gZcN1qTcUftetF0sK4Ka4dmEs4tnhGuREYVBjwDIqvQxGfd3FkpL2gqfZJO0LHQxEGFu
+ SfQWoV2J8Zy2RKD7Nylw8V2h2O/5YLyVPAT/XJeUorwJKorp4+L616qTAdtTLwxh3Spx
+ L7GP/OPI/MY+I0zKnqSMLMGek3OfnQ8NyhOcYKe5drplEJdwNTGWIjXxGMHNQcj5B7s8
+ oatA==
+X-Gm-Message-State: AOJu0YzThzLF+WC50cx9HBAg8bVmUPQLG6ynfYpf54WV/x11ZE+MHpsv
+ 5CbtMuOoL3gICGKKJVQHqkFIyoDqHeQzj3YgWIV32P65OI7wlzbxqqbluFiLtnqtNZI=
+X-Gm-Gg: AeBDieumHnYn9oeEduksIUf5dz0co7sys3SkpQZebbnkKeBDS+iBZqiCmk45vglUe6g
+ C8p6jdeGYuCP6Npe41nqkfnJGn0c5+VIUcS55rPJqNjArSKr/R0VYQzByx2jdSX/ZDTpvMfTHPm
+ m7KrNDn1GSURM53c0x7B37QckBPiWYb09dArk/oJ7jg0c5ynppAubPMObKgF8k7LBCOn5JQRiP0
+ UpQapJPYksWllInbkyvn48aDEVlDovBgKSHpWkYZ1GEQp9hHlj6OPdfO4v3oWmrKIV+csSSHczD
+ 0TJ6wwo8g5cH+VkMlMmfoOi6EYtSTuHIZT31iqYSLhEg3DTTrlzOPISCp3subJWidhCZRkEpSac
+ INIPjEoYnT6LNLZQXjZrW6DBXk0bNkx7TCvzmf0xM6H6UC/SvGD5wQhfgZE50/6orWfSEoQ3ePy
+ sW8jqP7YlcEVlWcVCQa98P5mSEmw9NbzKTFRbejPoHmywQ78+f3LAVEoDfnWVFauLdrPZZt9PQw
+ KjtBeebfp6LJBcm2/yJboTAOmWDBiz7Az4kX2GFFhVIODBpqyJm1aVfOEK3KGsUcTr5ySYg
+X-Received: by 2002:a05:6830:8289:b0:7d7:4002:1f21 with SMTP id
+ 46e09a7af769-7e17df16a0dmr2127128a34.20.1777998729853; 
+ Tue, 05 May 2026 09:32:09 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
+ [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7deca7a5e75sm10262357a34.2.2026.05.05.09.32.08
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 05 May 2026 09:32:09 -0700 (PDT)
+Date: Tue, 5 May 2026 10:32:06 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Casey Connolly <casey.connolly@linaro.org>
+Cc: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>,
+ u-boot-qcom@groups.io, Neil Armstrong <neil.armstrong@linaro.org>,
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
+ Varadarajan Narayanan <quic_varada@quicinc.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
+ Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Michal Simek <michal.simek@amd.com>, David Lechner <dlechner@baylibre.com>
+Subject: Re: [PATCH v6 1/6] config.mk: support vendor generic includes
+Message-ID: <20260505163206.GS1614990@bill-the-cat>
+References: <20260505-b4-qcom-tooling-improvements-v6-0-a5fb673f4af6@linaro.org>
+ <20260505-b4-qcom-tooling-improvements-v6-1-a5fb673f4af6@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-Subject: Re: [PATCH 00/12] arm64: FF-A runtime transport for EFI variables
-From: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>, 
- u-boot@lists.denx.de, Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>, 
- Tom Rini <trini@konsulko.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Hugues Kamba Mpiana <hugues.kambampiana@arm.com>, 
- Simon Glass <sjg@chromium.org>
-In-Reply-To: <B8AF2367-CB21-4DAE-A4FF-3CCDB26E0322@gmx.de>
-References: <20260424173151.371134-1-harsimransingh.tungal@arm.com>
- <B8AF2367-CB21-4DAE-A4FF-3CCDB26E0322@gmx.de>
-Date: Tue, 05 May 2026 15:37:01 +0100
-Message-Id: <177799182178.374111.7134327651902895504.b4-reply@b4>
-X-Mailer: b4 0.15.2
-X-Mailman-Approved-At: Tue, 05 May 2026 17:49:54 +0200
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="JPwOHapoKThE27qe"
+Content-Disposition: inline
+In-Reply-To: <20260505-b4-qcom-tooling-improvements-v6-1-a5fb673f4af6@linaro.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,124 +107,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2026-04-25 00:18 +0200, Heinrich Schuchardt wrote:
-> Am 24. April 2026 19:31:39 MESZ schrieb Harsimran Singh Tungal <harsimransingh.tungal@arm.com>:
-> >Hi all,
-> >
-> >This series adds FF-A runtime transport support so EFI variable runtime
-> >services can communicate with the secure world after ExitBootServices().
-> >It also extends tests, docs, and board configs to validate the runtime
-> >path and keep boot‑time behavior aligned with the runtime flow.
-> 
-> Hello Harsiman,
-> 
-> Could you, please, explain the motivation for the series.
-> 
-> What is the overall architecture?
-> 
-> Please, describe how to set up a system on QEMU to test your development including the instructions for the secure world.
-> 
-> We would need a test in the CI using QEMU.
-> 
-> Best regards
-> 
-> Heinrich
-> 
->
-Hi Heinrich,
 
-The motivation for the series is that, when EFI variables are backed by an
-MM Secure Partition reached over FF-A, U-Boot can use that path during boot,
-but after ExitBootServices() the normal FF-A/DM path is no longer suitable.
-As a result, EFI runtime variable services can no longer reach the secure
-partition. The goal of this series is to keep only the minimal FF-A transport
-needed for EFI runtime variable services available after ExitBootServices().
+--JPwOHapoKThE27qe
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-The overall architecture is:
+On Tue, May 05, 2026 at 05:48:41PM +0200, Casey Connolly wrote:
 
-- During boot, the FF-A bus probes normally, discovers the U-Boot endpoint ID
-  and the MM SP partition ID, and registers an ExitBootServices() callback.
-- At ExitBootServices(), U-Boot copies the minimal FF-A state needed at
-  runtime into resident runtime data and enables the runtime context.
-- After that, EFI runtime variable operations
-  (SetVariable/GetVariable/GetNextVariableName/QueryVariableInfo) use the
-  runtime-safe path in efi_variable_tee.c, reuse the fixed FF-A shared buffer,
-  perform range-based cache maintenance on that buffer only, and notify the
-  MM SP using FF-A direct messaging.
+> Currently only board/vendor/$(BOARD)/config.mk is supported, add the
+> additional usecase of having a vendor generic config.mk which will be
+> used to add a Qualcomm specific make target.
+>=20
+> Additionally, fix the ifdef to correctly check for $(BOARDDIR) rather
+> than $(BOARD) since that's what is actually used in the fragment path.
+>=20
+> Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
+> ---
+>  config.mk | 6 +++++-
+>  1 file changed, 5 insertions(+), 1 deletion(-)
 
-So the runtime side is intentionally narrow: it keeps just enough FF-A support
-for EFI runtime variables, rather than trying to preserve the full FF-A bus
-or driver-model stack after ExitBootServices().
+A common pattern is to have board/VENDOR/common and I think qualcomm
+would benefit from that, and it would make this easier to use elsewhere.
 
-On testing, the current series adds sandbox DM tests for the FF-A runtime
-helpers and EFI selftests for the runtime variable path, and my end-to-end
-validation so far has been on Corstone-1000. I do not have a proper QEMU
-setup with the corresponding secure-world/MM SP side packaged as part of this
-series, so I cannot provide good QEMU instructions.
+>=20
+> diff --git a/config.mk b/config.mk
+> index abed9cb65c6f..28a4228b8fa5 100644
+> --- a/config.mk
+> +++ b/config.mk
+> @@ -53,10 +53,14 @@ ENVDIR=3D${vendor}/env
+>  else
+>  BOARDDIR =3D $(BOARD)
+>  ENVDIR=3D${board}/env
+>  endif
+> +else
+> +ifdef VENDOR
+> +BOARDDIR =3D $(VENDOR)
+>  endif
+> -ifdef	BOARD
+> +endif
+> +ifdef	BOARDDIR
+>  sinclude $(srctree)/board/$(BOARDDIR)/config.mk	# include board specific=
+ rules
+>  endif
+> =20
+>  ifdef FTRACE
 
-More details on building and running Corstone-1000 FVP can be found here:
-https://corstone1000.docs.arm.com/en/latest/user-guide.html
+But BOARDDIR is used in some other places, so might this become a
+problem overloading it this way? Does this end up working because
+there's no "board/" code being used on these platforms?
 
-Please let me know if this overall direction makes sense to you.
+--=20
+Tom
 
-Regards
-Harsimran Singh Tungal
+--JPwOHapoKThE27qe
+Content-Type: application/pgp-signature; name="signature.asc"
 
-> >
-> >Changes in this series:
-> >- Add EFI runtime-safe memset helper and FF-A runtime transport support.
-> >- Implement FF-A runtime communication in the EFI variable TEE backend.
-> >- Enable runtime variable operations and move helpers to avoid conflicts.
-> >- Add sandbox runtime transport tests and metadata reuse.
-> >- Extend EFI selftests for runtime variables and bootefi selftest config.
-> >- Document the FF-A runtime transport and selftest behavior.
-> >- Align boot‑time cache maintenance with the runtime path.
-> >
-> >Harsimran Singh Tungal (12):
-> >  efi_loader: add runtime memset helper
-> >  arm-ffa: add FF-A bus runtime support
-> >  efi_loader: add FF-A runtime support in EFI variable TEE driver
-> >  efi_loader: enable EFI runtime SetVariable()/GetVariable() using FF-A
-> >    transport
-> >  efi_loader: move runtime GetVariable() helpers to efi_variable.c
-> >  corstone1000: enable bootefi selftest
-> >  efi: selftest: add runtime variable tests with non-volatile storage
-> >  test: dm: add sandbox FF-A runtime transport tests
-> >  sandbox: ffa: share synthetic partition metadata via macros
-> >  doc: arm64: document FF-A runtime path for EFI variables
-> >  doc: bootefi: note two-phase runtime variables selftest
-> >  efi_loader: align FF-A cache maintenance with runtime path
-> >
-> > arch/sandbox/include/asm/sandbox_arm_ffa.h    |  16 +-
-> > configs/corstone1000_defconfig                |   3 +
-> > doc/arch/arm64.ffa.rst                        |  92 ++-
-> > doc/usage/cmd/armffa.rst                      |  11 +
-> > doc/usage/cmd/bootefi.rst                     |  12 +
-> > drivers/firmware/arm-ffa/Kconfig              |  11 +
-> > drivers/firmware/arm-ffa/Makefile             |   4 +-
-> > drivers/firmware/arm-ffa/arm-ffa-runtime.c    | 287 ++++++++
-> > drivers/firmware/arm-ffa/arm-ffa-uclass.c     | 111 +--
-> > drivers/firmware/arm-ffa/arm-ffa.c            |  16 +-
-> > drivers/firmware/arm-ffa/ffa-emul-uclass.c    |  48 +-
-> > include/arm_ffa.h                             |  16 +-
-> > include/arm_ffa_priv.h                        |  24 +-
-> > include/arm_ffa_runtime.h                     | 183 +++++
-> > include/efi_loader.h                          |   3 +
-> > lib/charset.c                                 |   2 +-
-> > lib/efi_loader/efi_runtime.c                  |  21 +
-> > lib/efi_loader/efi_var_common.c               |  24 -
-> > lib/efi_loader/efi_variable.c                 |  24 +
-> > lib/efi_loader/efi_variable_tee.c             | 686 +++++++++++++++++-
-> > .../efi_selftest_variables_runtime.c          | 106 ++-
-> > test/dm/Makefile                              |   3 +-
-> > test/dm/ffa.c                                 |   6 +-
-> > test/dm/ffa_runtime.c                         |  82 +++
-> > 24 files changed, 1602 insertions(+), 189 deletions(-)
-> > create mode 100644 drivers/firmware/arm-ffa/arm-ffa-runtime.c
-> > create mode 100644 include/arm_ffa_runtime.h
-> > create mode 100644 test/dm/ffa_runtime.c
-> >
-> 
-> 
+-----BEGIN PGP SIGNATURE-----
 
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCafobgwAKCRAr4qD1Cr/k
+CpWJAP4j2XA840LYADuZ1RFxT51+vTLohx4GRPPVPkFYnv0hpQEA0cGh57jZ8uVA
+KRFp/ZGyzH/wSlvQtqzJ0jXLDY4msw0=
+=xURt
+-----END PGP SIGNATURE-----
 
+--JPwOHapoKThE27qe--
