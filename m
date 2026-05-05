@@ -4,94 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58BE1FF8855
-	for <u-boot@archiver.kernel.org>; Tue,  5 May 2026 17:58:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32C57FF8855
+	for <u-boot@archiver.kernel.org>; Tue,  5 May 2026 18:13:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C23EF849D8;
-	Tue,  5 May 2026 19:58:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=seznam.cz
+	by phobos.denx.de (Postfix) with ESMTP id 8A3D0849B8;
+	Tue,  5 May 2026 20:13:14 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=seznam.cz header.i=@seznam.cz header.b="MHW3ng22";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="hhsAu1ey";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 46F8C84882; Tue,  5 May 2026 19:21:34 +0200 (CEST)
-Received: from mxd-1-a0f.seznam.cz (mxd-1-a0f.seznam.cz
- [IPv6:2a02:598:128:8a00::1000:a0f])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 5DA6884974; Tue,  5 May 2026 20:13:13 +0200 (CEST)
+Received: from mail-oi1-x230.google.com (mail-oi1-x230.google.com
+ [IPv6:2607:f8b0:4864:20::230])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 29E9E8467E
- for <u-boot@lists.denx.de>; Tue,  5 May 2026 19:21:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2912B84974
+ for <u-boot@lists.denx.de>; Tue,  5 May 2026 20:13:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=seznam.cz
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=Michael.Srba@seznam.cz
-Received: from email.seznam.cz by smtpc-mxd-5f4d8d5f6f-lmwqj
- (smtpc-mxd-5f4d8d5f6f-lmwqj [2a02:598:128:8a00::1000:a0f])
- id 681daa313313fe5869b4666f; Tue, 05 May 2026 19:20:45 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=seznam.cz; s=szn1;
- t=1778001645; bh=g99FYT7hPlS7/W3ZBKs0pTb0fGObq9szexHWXsUU9/s=;
- h=Message-ID:Date:MIME-Version:User-Agent:Subject:To:Cc:
- Content-Language:From:Content-Type:Content-Transfer-Encoding;
- b=MHW3ng22AQbILHW8oXTZ0kikceEIeRrf0bDW4+ZzAR0CUVeUu3r6Yy9OyBcN3O141
- BMaTHAedgu9eDUEy0IGBRbqefafuCW3kRKJcsm+9N7efcL7AxrTXuxxIIo8QN7ZdP6
- Lk9hSqPf7JtOy4DWNvcWQhFJ//2rrvboNEPeSGq9vb4mTNYCYeVvs4o+fBc79gALOf
- O81XMsJORNS9NF8WdZX26o5I3TAyeZdyQUK84xYhnuOGzH2HmjL1eNBMQT6Q9y7mLJ
- U/8G5loRFMQyogXSCfoabZaHpNj9z1KdXftm/3/aRxzs+w1uc41UrIkLsW6tzhnfU7
- qEepTRz/aBVqQ==
-Received: from [192.168.0.240] (ip-111-27.static.ccinternet.cz
- [147.161.27.111])
- by smtpd-relay-6597cc8696-jnjgp (szn-email-smtpd/2.0.72) with ESMTPA
- id 72142980-6b2a-4b6d-8ac2-cbf9d76aa7d8;
- Tue, 05 May 2026 19:20:00 +0200
-Message-ID: <51026c36-deae-4f80-9247-fab9c6fff518@seznam.cz>
-Date: Tue, 5 May 2026 19:19:58 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 07/11] mach-snapdragon: Kconfig: changes / additions to
- support SPL
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>,
- u-boot-qcom@groups.io, Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Sughosh Ganu <sughosh.ganu@arm.com>, Anshul Dalal <anshuld@ti.com>,
- Peng Fan <peng.fan@nxp.com>, Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-oi1-x230.google.com with SMTP id
+ 5614622812f47-479ef2b78f3so4238410b6e.2
+ for <u-boot@lists.denx.de>; Tue, 05 May 2026 11:13:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1778004789; x=1778609589; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=+chlawyNOKDkuKVi+L6UcxpgMdEmabY4VlirHWm1qmA=;
+ b=hhsAu1eybx5zxu4eJKlHTagTLXFmYXERrDYo96iQSTI9o8eGWtxCf8kZnhc07zedM9
+ BSYpqIwklhjZT2f/KHfJYtgZaHgNXYwyn8GkGfPSh/PjIyhoZIH7SP8QD2Uj2LEOV4n5
+ S5Uo1bCxvdtqol0ITkC2ku4w1C77/Js2o4aZg=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1778004789; x=1778609589;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=+chlawyNOKDkuKVi+L6UcxpgMdEmabY4VlirHWm1qmA=;
+ b=m0AVFDyTTpudK790r8SmENyRFcZXRNA8RSXZguZRNJPp0IGDpacgPKOOU9SlWPOr42
+ Fo5xE8exQ+3OrEA6HSUovIeb7Iyy1870eRYxkFQA9+t14x8Bla0fhNNcROtvuIBtDAuG
+ 3O9DlUVhcK2I49zQv8x5t7xInteQq/TbpT40d5qkP26PTbM8rUzrfykpsMcNEej5xL5R
+ kNg9kFc2KPNC4NXcGlS72YbIu+0xzpQUHwDcdo2fmasGdJp92bY4az+uzwqlPpuSMlqe
+ mj0jp5TZNBo+19Izo5iq2xAlYMbE0ewn1ZTgVydE5t8cvwdmPsPcEDDNmTKk41cN3XV7
+ qJWQ==
+X-Gm-Message-State: AOJu0Yy8o3qRUnt3JDC/CYEoT5cNBbjmrOu2PFVltiWEBvTkq2fHdL3F
+ RgF0e4Q00qf3zbE9WMPq23ie3R63uYjRt4Oju/FPaKBRqs4YR+iiHrSrJa1UXwqDDlrmbf6MOz5
+ FIVIPZg==
+X-Gm-Gg: AeBDietfR8usONPjdTZNEnGJaUTBJ2xWAZTNbzf1mjdcEM7pEJgniW54sJBXN9rEDpQ
+ mjMGhlzcbVDjwqeMLZxHghBCcVAZFfTmirh3qn3dn0S93jqcFZZW30GftHditZ8277YuhY63L3M
+ ggOJNc4vv4iOi3m55uqhRrjkJ4u/o1J2vNr/UIktPj/p7yVuMLyDKY1HM0AvLAwE63FeNLRfJk1
+ uV6rSe8fNBI5dswCRaIKXOl0w4+BTtcIdsZwAl8yTBwQRoC7C07e4qvMGG11/Zx1G/DGT7jyhhb
+ j1g/WTY2dg3JFXgRjx0MEnXF6hz/Pw5HLP1VsNySYVD3BulO0w8i8s6bbNRR0iL3Z3rkRXv24Fs
+ 7ZpWmR8Frd5E+Pu7BB+58xmgx/uiLcTFyObE5ESz19//vDlBebhqRj8AcZlAd9i2i6+g84Il1ME
+ JwthuiOw0DhK/AAefKD2rRkSPdLtUo
+X-Received: by 2002:a05:6808:e642:b0:479:874b:15a3 with SMTP id
+ 5614622812f47-480424d5a14mr63014b6e.43.1778004788729; 
+ Tue, 05 May 2026 11:13:08 -0700 (PDT)
+Received: from chromium.org ([174.51.25.52]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-434549540b2sm14585754fac.6.2026.05.05.11.13.07
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 05 May 2026 11:13:08 -0700 (PDT)
+From: Simon Glass <sjg@chromium.org>
+To: u-boot@lists.denx.de
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, Bryan Brattlof <bb@ti.com>,
+ Neha Malcom Francis <n-francis@ti.com>, Peng Fan <peng.fan@nxp.com>,
+ Philippe Reynes <philippe.reynes@softathome.com>,
  Quentin Schulz <quentin.schulz@cherry.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Andrew Davis <afd@ti.com>,
- Hrushikesh Salunke <h-salunke@ti.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>, Ye Li <ye.li@nxp.com>,
- Andre Przywara <andre.przywara@arm.com>,
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>, Dhruva Gole <d-gole@ti.com>,
- Kaustabh Chakraborty <kauschluss@disroot.org>,
- Jerome Forissier <jerome.forissier@arm.com>, Heiko Schocher
- <hs@nabladev.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Lukasz Majewski <lukma@denx.de>,
- Mateusz Kulikowski <mateusz.kulikowski@gmail.com>,
- Dinesh Maniyam <dinesh.maniyam@altera.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Michal Simek <michal.simek@amd.com>, Yao Zi <me@ziyao.cc>,
- Peter Korsgaard <peter@korsgaard.com>,
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Casey Connolly <casey.connolly@linaro.org>,
- Tingting Meng <tingting.meng@altera.com>,
- Tien Fong Chee <tien.fong.chee@altera.com>, Alice Guo <alice.guo@nxp.com>,
- George Chan <gchan9527@gmail.com>,
- Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
- Alexey Charkov <alchark@gmail.com>, Ronald Wahl <ronald.wahl@legrand.com>,
- Michael Trimarchi <michael@amarulasolutions.com>
-References: <20260505-qcom_spl-v5-0-11817415d664@seznam.cz>
- <20260505-qcom_spl-v5-7-11817415d664@seznam.cz>
- <CAFLszTjUniOCbnGdR9_d8HmQrt8SFV_u8dDonPvOEyCeOUZCTA@mail.gmail.com>
-Content-Language: en-US
-From: Michael Srba <Michael.Srba@seznam.cz>
-In-Reply-To: <CAFLszTjUniOCbnGdR9_d8HmQrt8SFV_u8dDonPvOEyCeOUZCTA@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Mailman-Approved-At: Tue, 05 May 2026 19:58:20 +0200
+ Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>,
+ Tom Rini <trini@konsulko.com>, Wojciech Dubowik <Wojciech.Dubowik@mt.com>,
+ Yannic Moog <y.moog@phytec.de>
+Subject: [PATCH v2 0/4] binman: Tidy up some missing bintool docs
+Date: Tue,  5 May 2026 12:12:51 -0600
+Message-ID: <20260505181300.223439-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.43.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,68 +97,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+Some of the bintools are missing documentation. This series adds the
+missing pieces to bring things up to scratch.
 
-On 5/5/26 16:02, Simon Glass wrote:
-> Hi Michael,
->
-> On 2026-05-05T00:47:48, Michael Srba <michael.srba@seznam.cz> wrote:
->> mach-snapdragon: Kconfig: changes / additions to support SPL
->>
->> Select SUPPORT_SPL so SPL build can be enabled, disable SYSRESET_PSCI in SPL.
->> (SPL runs in EL3, so if SPL itself doesn't provide PSCI, nothing else will.)
->>
->> Signed-off-by: Michael Srba <Michael.Srba@seznam.cz>
->>
->> arch/arm/Kconfig                 | 34 +++++++++++++++++++++++++++++++++-
->>   arch/arm/mach-snapdragon/Kconfig | 10 ++++++++++
->>   2 files changed, 43 insertions(+), 1 deletion(-)
->> diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
->> @@ -1149,9 +1150,40 @@ config ARCH_SNAPDRAGON
->>        select SAVE_PREV_BL_FDT_ADDR if !ENABLE_ARM_SOC_BOOT0_HOOK
->>        select LINUX_KERNEL_IMAGE_HEADER if !ENABLE_ARM_SOC_BOOT0_HOOK
->>        select SYSRESET
->> -     select SYSRESET_PSCI
->> +     select SYSRESET_PSCI if !SPL
->>        select ANDROID_BOOT_IMAGE_IGNORE_BLOB_ADDR
->>        select MMU_PGPROT
->> +     select SUPPORT_SPL
->> +
->> +     select OF_LIVE if USB_DWC3_GENERIC
->> +     select SPL_OF_LIVE if SPL_USB_DWC3_GENERIC
->> +     select ARMV8_SPL_EXCEPTION_VECTORS if SPL
-> The commit message only mentions SUPPORT_SPL and SYSRESET_PSCI, but
-> this hunk adds ~30 selects plus default overrides in
-> mach-snapdragon/Kconfig. Please expand the message to cover the rest -
-> in particular the OF_LIVE/SPL_OF_LIVE and DM_EVENT/SPL_EVENT
-> selections gated on (SPL_)USB_DWC3_GENERIC are not obvious; readers
-> will want to know what breaks without them.
->
->> diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
->> @@ -1135,6 +1135,7 @@ config ARCH_SNAPDRAGON
->>        bool "Qualcomm Snapdragon SoCs"
->>        select ARM64
->>        select DM
->> +     select DM_EVENT if USB_DWC3_GENERIC
-> Just to check - does u-boot proper genuinely need DM_EVENT/OF_LIVE
-> pulled in by USB_DWC3_GENERIC, or is this only required for SPL? DWC3
-> has worked on Snapdragon without these so far. If it's only an SPL
-> requirement, the proper-side selects should drop.
-The dt fixup for usb needs it, it registers a callback on an event and
-proceeds to patch the dt. I'm not sure if it's needed on absolutely every
-SoC, but the code does get compiled on every SoC so it might as well work.
->> diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
->> @@ -1149,9 +1150,40 @@ config ARCH_SNAPDRAGON
->> +     select SPL_OF_REAL if SPL
->> +     select SPL_OF_CONTROL if SPL
-> SPL_OF_REAL is already selected by SPL_OF_CONTROL (when
-> SPL_OF_PLATDATA is not set) in dts/Kconfig, so this line is redundant.
-> Also swap the order so SPL_OF_CONTROL comes first, since that's the
-> option doing the work.
-uhm, so do you prefer removing SPL_OF_REAL or swapping the lines around?
-"this is redundant" and "it should be swapped" are mixed signals...
-> Reviewed-by: Simon Glass <sjg@chromium.org>
->
-> Regards,
-> Simon
+Changes in v2:
+- Add patch to route PKCS#11 test fixtures through the bintools
+- New patch in v2 (per Quentin's review): replace tools.run() of
+  softhsm2-util, pkcs11-tool and p11-kit in ftest.py with the
+  Bintool.run_cmd() wrapper that already exists
+- Reword the docstring per Quentin's review: binman uses this bintool
+  only as an availability check, not for runtime PKCS#11 operations
+
+Simon Glass (4):
+  binman: Flesh out the p11-kit bintool docstring
+  binman: Flesh out the pkcs11-tool bintool docstring
+  binman: Flesh out the softhsm2-util bintool docstring
+  binman: Use bintool wrappers for PKCS#11 tools in tests
+
+ tools/binman/btool/p11_kit.py       | 11 ++++++-
+ tools/binman/btool/pkcs11_tool.py   | 11 ++++++-
+ tools/binman/btool/softhsm2_util.py | 12 +++++++-
+ tools/binman/ftest.py               | 46 ++++++++++++++---------------
+ 4 files changed, 54 insertions(+), 26 deletions(-)
+
+---
+base-commit: 57460fde4ba84d67de4066ee1141e89e8139ed23
+branch: binj-us2
+
+-- 
+2.43.0
 
