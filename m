@@ -4,105 +4,123 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85133FF885A
-	for <u-boot@archiver.kernel.org>; Tue,  5 May 2026 06:29:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10220CD13DA
+	for <u-boot@archiver.kernel.org>; Tue,  5 May 2026 06:34:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C565484683;
-	Tue,  5 May 2026 08:29:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 545BA84683;
+	Tue,  5 May 2026 08:34:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="M28ti7ay";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="AQVs25tI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5BFFA84687; Tue,  5 May 2026 08:29:39 +0200 (CEST)
-Received: from mail-yx1-xb12e.google.com (mail-yx1-xb12e.google.com
- [IPv6:2607:f8b0:4864:20::b12e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 87925846A1; Tue,  5 May 2026 08:34:24 +0200 (CEST)
+Received: from BN1PR04CU002.outbound.protection.outlook.com
+ (mail-eastus2azlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c110::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6E67F8467E
- for <u-boot@lists.denx.de>; Tue,  5 May 2026 08:29:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3A5DE8467E
+ for <u-boot@lists.denx.de>; Tue,  5 May 2026 08:34:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yx1-xb12e.google.com with SMTP id
- 956f58d0204a3-6587cee8b57so5304769d50.2
- for <u-boot@lists.denx.de>; Mon, 04 May 2026 23:29:36 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1777962575; cv=none;
- d=google.com; s=arc-20240605;
- b=bVKzC+FfizUV58QYK+xPeJ6rsRXn3JhH/cqfrn0kiyIpzrA7ClZ8ohe3GgnihjnUwf
- Ba4mfQ/HK+NO5zHbQIlsWrO1VQEOanuoOkdwo4CL9qopIQfYbNdcb742XA2M4x0zbKBj
- Qegan3P+dUHeEjl3CegTQk9OdCHStWvziHpNICoruFmAqmyKZNSAc2gtUeIHJRrycC8/
- qUjhQOFz+6mbnhyf6MZEROmqVo4dyQfsfxv9O/8F754stEp5d2V5XHt2Si0K79yCnp+W
- SzF2yUMzcJC/vJhpd9Cho9TA1WO5lPzB9sltbyhQKOkMtHUANkaNFQ6ix53wmMrIOujI
- vG4Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=Q+RwWTiXTPpegsi24k/1D0ZezCBwQxGPgT22hOVPVr0=;
- fh=4OUB9wDcqy9KqRDXB+bTp0TTfz6LHJD4qhdKww9bEBc=;
- b=T7J949HnPT0t4Jb46KyF7OrO0VO6WLXok0GgwKnJM8W/b6qO28tvHHyrUq7TJYhh+G
- UYoNUQes/HV09lxoqy1F/rvyWWYpNBNJTosAq4SIlyY/bdqEjK0jMyXPD3+Jj7YA275L
- 575rL319O6TcOZHqmGiCVP6t6M+fY7ZBRPs9fZSvUXLHqP2+NNFZkgpk1heyBR6UE3h4
- 9n91zWOoqUVTZlkAsT8ju9tXS87hk4OI0Sbm8lxTWY9x33vxH/L2ac71G2AykTAaHfw6
- 7mIH6B8JT/4Xq0lXtBKODkZp8HHdBRnnPc7BTRpxgySIBGtvzCP0gF0rJMgGLdfgBwNj
- SXlw==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1777962575; x=1778567375; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Q+RwWTiXTPpegsi24k/1D0ZezCBwQxGPgT22hOVPVr0=;
- b=M28ti7ayJHy8z2KDPg26IbdNxoWMrblQCYn7aeM1qCYy+MX4llN5yd+Lqqlp+GcHaS
- fdBuAofuVoBPsyJ4gxtuSii9XIJh5r4hvYXdlO+GbeuURJMEAHoMjqrpRa4GO+ZmVMMF
- ULlsMC3T9yw9iQmlSt2FwGjOsEPOIAAhr7qVSyMCuIwzIDXPJGtN5DFDUActwMFUWvbV
- vq2nj6EfgECGW3b7QRTLOQCWNbi5Mi/wQguHlDI/9NATUId7j4o9eHigCmEfdSKwVAWY
- PqM2b+9jPAM47PPRH2lvdyQKqOFE7IFc7w1sQRJhZmHzpGbbTvy0Xj9pN8HQnbWEoXwo
- u7vA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777962575; x=1778567375;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Q+RwWTiXTPpegsi24k/1D0ZezCBwQxGPgT22hOVPVr0=;
- b=LshRIb6A23IfH8yByVvZ/qlBi3S3TmyHMW7wpuCFKKGfFo6S8HBgiD8u5cHjibIt2B
- cJ5iu/TeMM3cagIipfjGv6a029jlBkXwd9nlx12DenAeCgvzZHl92/S9SZHiOg9tWyLL
- YTJsKYZpG6l+z4JQFeH3zCEloUzWZKgViI7BB2tzyahJStONo+bd2O9Pw18xbsNMNVOO
- PIzl0NuZruI1cbQ/5JS+k2uoWEW0bWRd4qgiwVHQhgH/cz6LEF9hkEoCK7POa/Fq3m4D
- pcPFbd23UBiNJzKfQmGk/QTQw/HQ9ycUkcEapKNjz0cSY4o5cTexq6ioBn5No8eKuUkq
- cNBw==
-X-Gm-Message-State: AOJu0YwH9Ykyj8qJ6EMRF9krgmJAypZ+tMnXYCcIC7FA51M7NVijXBSr
- VlKymKzOdlrseN/pF8izKiMO7lxuW1RbZ/ovGdKXnvAj20cwdewxSCbJ+Whny9/+HjeXktftQCA
- P4IkL+9jmToaL2yzatUiv9SRA3wFFmiJjPuBbXapP1Rxq6XkRRv0Ubfc=
-X-Gm-Gg: AeBDieuS+RP0h2mIva8zwBO/FaGJSUAgVALhH2c2FuFcuV88gIQsgazL2ay1UvPRoC9
- oDFKsdxxYG/yuj9Q3Zlf7igwGBznZzcNb4nsOdxFBu4tbUnbYXP8WowB0/eeKzLLkuJ3aMrjOUA
- pTsRdXtdJIlgD5nYCiJaV4PZQevDNCD/zZ4GG/nU3je5tDYptk2YFcn0V/UCdEwSH9PReaYWxm0
- dK7SQqcV0EtOzM3gH26GmTprMynQGPpXCjZtc7BrnL/61FWx+jpH2kcJjBAXYuTD9jJjLFTWvkm
- WUPuPFmMbIqv/2a8IeInFPXTJciihgu7N7bBA2N1mGbJYJqpHef8LjA7FJiXMe4MxV8xnAckYGD
- rk3AXquSL+z2NyRPJBFbuc7cx8JVZl7bK4ypSsLG5S5qqJd5ki9jq7zgRpM2hxDQWwugktSkpm2
- qDkE29/VphC/VpOZOpDNSHZ6QTY9eXk3KrDg1hllQd2/96Qvztu0y7w4S5bzKIV40CLZidZtGWV
- NR4fxJrPtEFa4lOx6D1Z9TA1tdOzhrBWansegQ5qDia6dpdG13IPj9+H3BuYIOQCvRxVKECRBB1
- /7xzXN33PiUonllZDfQC7MJbkbzFz1m8Lr+nQcDGqQZXlCRDCLZGJ4ztpxLULXPu2Jt6MKO+tb5
- 6Tvik3sw0HdcVEudY
-X-Received: by 2002:a05:690e:38a:b0:65c:5bfd:b205 with SMTP id
- 956f58d0204a3-65c69f751d8mr1499429d50.62.1777962575198; Mon, 04 May 2026
- 23:29:35 -0700 (PDT)
+ spf=fail smtp.mailfrom=michal.simek@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=JV82rMfnMeLCnFuW+Q6cJjEvhEc6Xm9rKcQX8/tA8c3XJ1Nd/m3rrbOUQgic66Lv1nALZ8JDIj7OvCfhUMXxAZDn8LIEGW3EC1PKhVvWq5JO10DXK4Q7tPGeQ3V1IIDF9Z6oLm4e/NN+dtXFS9abSY+d/dHOeACe4xwAjySjbuHvcWz/OGhlKju9la0F7COxMCeVgV1F5OElerJNghBZJPMMbIIe2b3sKxLxDvZ17eUQeJXEyx+MYZg2Eyl4cB2gluXe4sKVN1A29622p3FpDGBJXTYnmbeELs3kiht71UaivazeXga11wMm9IgFlQDHwBfJwRETQw/THbd4/b1j4g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=gKLOkUAAvlLwlt2WzIr1pNhNYldO1fZvGCgHavDcxcg=;
+ b=lQZXDUlmcLIl2oM0CfVrwTmGHfgjWh1LdRmN3eBMdm4lPTDYwg5CiepYkGoKVz1j/kgNruvwe8mWPwfnNQHWnEQiHLHbx3/YOYjuTiI9VEKhOssSCVwTQQD9JYuSRuUseAKda2t5U24gCSB4Grje8dIk+dxmxqq5WCd52yppaNyByN3tXcCiU09vzGzefInFM/eu5/pX2mc3jVxha337qPBD65kz8WcPp/0UuKR4SHCOB9CL+3GEqwohfwLz5caHhOdj/Gy4QVijxNPXDQRvGTOjkEfSqIEscEzHVjGy3dHIiB7sQI5+EmzERryGGAsLVrohWUnPqeqo3gbMIXSiqg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=gKLOkUAAvlLwlt2WzIr1pNhNYldO1fZvGCgHavDcxcg=;
+ b=AQVs25tIudzJY0suHwlNSDT2s3jg/4kvT+H6M1wM5kx1oJuEyDPQWRojG7r6zoN3lL6ptIMjdZ0m0DljyKaE0LwYHhgnzxxrXA/DehxcnAFRXRWBBOgFjSAFKKLsjGKWjSkgm4co374HajLx5IHo/Nt6KWL+Q+LKKGtu534fMPE=
+Received: from CH0PR03CA0016.namprd03.prod.outlook.com (2603:10b6:610:b0::21)
+ by PH8PR12MB7253.namprd12.prod.outlook.com (2603:10b6:510:226::16)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9870.25; Tue, 5 May
+ 2026 06:34:17 +0000
+Received: from DM2PEPF00003FC7.namprd04.prod.outlook.com
+ (2603:10b6:610:b0:cafe::d7) by CH0PR03CA0016.outlook.office365.com
+ (2603:10b6:610:b0::21) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9870.25 via Frontend Transport; Tue,
+ 5 May 2026 06:34:17 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
+Received: from satlexmb08.amd.com (165.204.84.17) by
+ DM2PEPF00003FC7.mail.protection.outlook.com (10.167.23.24) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9891.9 via Frontend Transport; Tue, 5 May 2026 06:34:17 +0000
+Received: from Satlexmb09.amd.com (10.181.42.218) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Tue, 5 May
+ 2026 01:34:15 -0500
+Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb09.amd.com
+ (10.181.42.218) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Mon, 4 May
+ 2026 23:34:14 -0700
+Received: from localhost (10.180.168.240) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17 via Frontend
+ Transport; Tue, 5 May 2026 01:34:14 -0500
+From: Michal Simek <michal.simek@amd.com>
+To: <u-boot@lists.denx.de>, <git@amd.com>, <michael.srba@seznam.cz>
+CC: Sandeep Gundlupet Raju <sandeep.gundlupet-raju@amd.com>, "Heinrich
+ Schuchardt" <xypron.glpk@gmx.de>, Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Martin Herren
+ <sputnik@on-the-web.ch>, Padmarao Begari <padmarao.begari@amd.com>, "Sam
+ Protsenko" <semen.protsenko@linaro.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH] xilinx: mbv: Enable SPL_REMAKE_ELF support
+Date: Tue, 5 May 2026 08:34:07 +0200
+Message-ID: <aa144c8002ba86154dcb62624a1d9d7cbe8c2cdf.1777962845.git.michal.simek@amd.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20260430113937.1274693-1-sjg@chromium.org>
- <20260430113937.1274693-2-sjg@chromium.org>
-In-Reply-To: <20260430113937.1274693-2-sjg@chromium.org>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Tue, 5 May 2026 09:28:57 +0300
-X-Gm-Features: AVHnY4J5Fchptx2aUw4l3uHgayp4o9HiWyaZTxzOxAmL4X72nRc3TG9UAo5IkI4
-Message-ID: <CAC_iWjJfh3CnYwinvicDi_-SO_XntcxS1HE=p_cUzXfdAqqC1g@mail.gmail.com>
-Subject: Re: [PATCH 1/2] bitops: Guard GENMASK and GENMASK_ULL against prior
- defines
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, Quentin Schulz <quentin.schulz@cherry.de>, 
- Heiko Schocher <hs@nabladev.com>, Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1010; i=michal.simek@amd.com;
+ h=from:subject:message-id; bh=+y6aJC0rnll/3kOfl+NOpvD9K4NiSFdZ9T29bjQyEog=;
+ b=owGbwMvMwCG2mv3fB7+vgl8ZT6slMWT+7E9oF9nTdeNAS5hDf7FUUYXO/fYTbUr388V3Kj/Yt
+ IL5XBFTRykLgxgHg6yYIst0Jh2HNd+uLRVbHpkPM4eVCWQIAxenAExEOZ6RYYpN7kPPDfv8qt6w
+ fLtv+6lYwifi5MGS+TcfLjDSDOKddJmR4ZaQfOPZB9dCDrp4H/5wucnDtyRdh2V3w/GaR50rYnr
+ V2AA=
+X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
+ fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DM2PEPF00003FC7:EE_|PH8PR12MB7253:EE_
+X-MS-Office365-Filtering-Correlation-Id: 999dadbb-2aaa-4b9b-9733-08deaa70550d
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|82310400026|36860700016|376014|56012099003|18002099003;
+X-Microsoft-Antispam-Message-Info: kRDoT1yvJph72mKOnJdZ4SOXXbicYwyFMUKo0jgYdmj5bkanYXwG4cn4Uc9G6RDD3HErGznPF8wHdgvKGXGXicCh3eydzPOcsMLjQfkPXEuulVMqVOtUVLmZa+tVmsx1JpUHh34xFrCHNwGkqtcwkdXea9DkEZCPzu3EIkH6X71Ng+szXXnl9OC9Nlbm6BHVrJVUxMy40VLwKkqkY6pWud4rQVP9SEUi7nDhaV2li+R//Y+t3nQMFC99nV4a4Am7PPk4e68o+kpfiZhTmksak3hCI9GjzQ4HXH5KWT0ftMSejv92PuT1J6pkz2L+XHM+xZjibsZ1PtOiInPsc848vN633I+BGX5z7IgCyuM0uO+8l3nTmMugoXmh/7CQrnaBSEM64WWL3CuLdTJufK8rgruTyEZfVL2bwyTUSJ9I5HkAJeQrMtbwXAID0zOFajeh42rYbasdl5BKPP/Ie6Lg5d62+AhLgV1l/5p21riqwvcgjlBYwUBLVsrTinlRXf5VZdLvmUS3hdYX3sz+jAvN9FHBVLcQ5qSzv9QGWBZBePliwJ/kuVv/KbttuF92ImhenBWHFXWel1nSnwtK8ckM0lJwyPndjQ71liEFj+17OV5yckXrMVsvM8Qccj7xafD0i1Lm0Jmp8eOXLiMH6mOdDaW3Y+0BUCPHVH9aLiIQ1rfaIRHLKfRp2GIjiMDY62e93nZDiGiGLK3N+RSCJfmcclkSMMwDJKZE5CWUY2Yyqw0=
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:satlexmb08.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(1800799024)(82310400026)(36860700016)(376014)(56012099003)(18002099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: IvuR72uovDTV312LrQU2q6N9HzIBaz9R/vF/hZMXTjYaoQZLM3KGpemHKE4YKu1Tp1lZ23Dzq4GfXDW9xlYXEdhB2/PvSjZjs/G9Cm4w6QUsi/SAsg6VsijpTy5KaSjao8phANlyQOU/o9Cf0ok9lOvOkpYjqvZDUz7XZBQBM3p2gS1igQkpMTYwb3iceXLVo4kGHkeOpAtMwwQ+1fT9NAvk2KEHx7Hs6xRKCI/5NPtmufDNxqS1oiOPxMEG2UXO7h2mHDbX5rwNXRYaON99ea3QRjeXqWRLByBuKy28ycmBW+AyaYZLP/qILdBVKQndphgyu7TkdjtsCGVDZ9nEDV+3DvyOZNFATbDGHzbRtCz1GMGWstOaXKmnb83vTbV+I9ZW2bQWxC573rdryATemaDxktXgZlu30E5I4zm+7yIPR4apFxAlw9jFV5k+POny
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 May 2026 06:34:17.2862 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 999dadbb-2aaa-4b9b-9733-08deaa70550d
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[satlexmb08.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: DM2PEPF00003FC7.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH8PR12MB7253
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -119,51 +137,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 30 Apr 2026 at 14:39, Simon Glass <sjg@chromium.org> wrote:
->
-> Some headers - notably the ec_commands.h synced from upstream
-> Chrome OS EC - define GENMASK and GENMASK_ULL themselves before
-> linux/bitops.h is pulled in. The unguarded definitions here then trigger
-> a 'redefined' warning at the second site, even though both spellings
-> produce the same mask.
->
-> Wrap the two macros in '#ifndef' guards so a pre-existing definition
-> wins. The U-Boot expressions are unchanged.
->
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
+From: Sandeep Gundlupet Raju <sandeep.gundlupet-raju@amd.com>
 
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+For MicroBlaze-V SPI boot, the u-boot-spl.elf should be embedded into
+the BRAM (Block RAM) of bitstream or rcdo. This requires SPL_REMAKE_ELF
+to be enabled so that the SPL ELF is generated during the build.
 
->
->  include/linux/bitops.h | 4 ++++
->  1 file changed, 4 insertions(+)
->
-> diff --git a/include/linux/bitops.h b/include/linux/bitops.h
-> index 29e0da48de8..8b381c916cf 100644
-> --- a/include/linux/bitops.h
-> +++ b/include/linux/bitops.h
-> @@ -26,6 +26,7 @@
->   * position @h. For example
->   * GENMASK_ULL(39, 21) gives us the 64bit vector 0x000000ffffe00000.
->   */
-> +#ifndef GENMASK
->  #ifdef CONFIG_SANDBOX
->  #define GENMASK(h, l) \
->         (((~0UL) << (l)) & (~0UL >> (CONFIG_SANDBOX_BITS_PER_LONG - 1 - (h))))
-> @@ -33,9 +34,12 @@
->  #define GENMASK(h, l) \
->         (((~0UL) << (l)) & (~0UL >> (BITS_PER_LONG - 1 - (h))))
->  #endif
-> +#endif
->
-> +#ifndef GENMASK_ULL
->  #define GENMASK_ULL(h, l) \
->         (((~0ULL) << (l)) & (~0ULL >> (BITS_PER_LONG_LONG - 1 - (h))))
-> +#endif
->
->  /*
->   * ffs: find first bit set. This is defined the same way as
-> --
-> 2.43.0
->
+Enable SPL_REMAKE_ELF for MB-V devices to support this flow.
+
+Signed-off-by: Sandeep Gundlupet Raju <sandeep.gundlupet-raju@amd.com>
+Signed-off-by: Michal Simek <michal.simek@amd.com>
+---
+
+ configs/xilinx_mbv32_defconfig | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/configs/xilinx_mbv32_defconfig b/configs/xilinx_mbv32_defconfig
+index 4ff3bd6b6875..0f88826687ff 100644
+--- a/configs/xilinx_mbv32_defconfig
++++ b/configs/xilinx_mbv32_defconfig
+@@ -34,6 +34,7 @@ CONFIG_SPL_SYS_MALLOC=y
+ CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
+ CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x80000000
+ CONFIG_SPL_SYS_MALLOC_SIZE=0x200000
++CONFIG_SPL_REMAKE_ELF=y
+ # CONFIG_CMD_MII is not set
+ CONFIG_CMD_SNTP=y
+ CONFIG_CMD_TIMER=y
+-- 
+2.43.0
+
+base-commit: 57460fde4ba84d67de4066ee1141e89e8139ed23
