@@ -4,83 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E349CD3427
-	for <u-boot@archiver.kernel.org>; Tue,  5 May 2026 14:14:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 003EFCD3427
+	for <u-boot@archiver.kernel.org>; Tue,  5 May 2026 14:14:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 41D7E84956;
-	Tue,  5 May 2026 16:14:32 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B595184954;
+	Tue,  5 May 2026 16:14:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="OGCW7iIJ";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="eJjxumla";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3900B8495E; Tue,  5 May 2026 16:14:31 +0200 (CEST)
-Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
- [IPv6:2a00:1450:4864:20::32d])
+ id 1409E8495E; Tue,  5 May 2026 16:14:32 +0200 (CEST)
+Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
+ [IPv6:2a00:1450:4864:20::32a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9B6AE84954
- for <u-boot@lists.denx.de>; Tue,  5 May 2026 16:14:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C27D3848FC
+ for <u-boot@lists.denx.de>; Tue,  5 May 2026 16:14:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wm1-x32d.google.com with SMTP id
- 5b1f17b1804b1-4891c00e7aeso45037935e9.2
- for <u-boot@lists.denx.de>; Tue, 05 May 2026 07:14:28 -0700 (PDT)
+Received: by mail-wm1-x32a.google.com with SMTP id
+ 5b1f17b1804b1-488ad135063so50550325e9.0
+ for <u-boot@lists.denx.de>; Tue, 05 May 2026 07:14:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1777990468; x=1778595268; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1777990469; x=1778595269; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=XpWVbqQDchzyYJa3dPNcHuAtM4NXvXVy0CshiIL6qdw=;
- b=OGCW7iIJzeOxlWgfXuOXxaKvepxDDbaTNV3cuC15ZppSZ7t5rX1osv35MheObNy7Uc
- EBEM1EC61/FfmQF+1GTckuND3lmRvsbVR/yMdDTnaW9I1p2AhAmU1h4soAydpSE92s3O
- j3DB3maOrAPeVbAi9gad5MAjqHbJOZd3iLuJEC+A2M3sKIelR2zqohcb7WknpSZ40a6J
- cBaWTS5XUWwO9qG5O+h1LGEHwlg+jeRWoO8svmS6DUNe4oZ0AbIkP6thAjZ+rHCZ7jMW
- PA4Lsw42y6cBOi205MP2dmt6TUKVy5HMB3LCm2xnVYxbJYk+/meUxJ+dIv8vQrmJnnjb
- xNSw==
+ :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=KRRHj2ziTk3pBFo0IBBbLtwcMaJtURlE9Evd42Lva54=;
+ b=eJjxumla16gg14a84cIVReZcuJ8uahrjxJKfBEWbABG+Fw1vXEzDmnNOqXcuiJ+PTc
+ LzcANp6BOPDFCfT+jeM/NKzkYoUI5O4a5x9kjCNY/+hMiBZWsvcsuY64+2Ti2Cxe4Y0h
+ zSD8ggIc5RC2pU/ZPE0DkRzYqgY4b/dkfOqTD9p+JiPiGp6phh5Lb7ikYC25m/b9M/ij
+ 91jnaLUX4+17iUpCtMDwoLZMWeUwf2LFMhjXXInCoTeaNqifD2MlIZ0vI2N0Hr9Baoln
+ Hr/8LVTjUXuBa2SkZmhiVvQhJS1ht+t3R8rfKUSO+Fhgpbna1QpOYRXUiqOrIL/kYzM0
+ cQig==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777990468; x=1778595268;
+ d=1e100.net; s=20251104; t=1777990469; x=1778595269;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=XpWVbqQDchzyYJa3dPNcHuAtM4NXvXVy0CshiIL6qdw=;
- b=OmHSzSmaDUPNo9a+f6u+P/MDtnPFeN2N7y7m8vQ0PpS4d/HqvVcZEkx3cQfNLzCSE3
- UoBXoreKWpbAGEozbTI0dBPQNopQ88sJaZOMu5BBbNVCRC/vd41s700jnd+iIHJsFH7/
- mJccY0GvSR/NVh5IvvEsoLx4v6N9dApwo4FhTzVGus9yEEnN5W/Zlk4FKIPB8fLlFYdd
- m8mF0EgC0cbmVo89VcH7LOFFtlSfWb+tJa6Hl1lm+ap4C1C89xADizukWTCjQorLroKw
- FwF7GPp6Mzr42VmtwkzW/sZbMqKQcBNxS6dY3N09idfrl7Cj02KX6I5Y/QivgwCaMOzk
- qfUA==
-X-Gm-Message-State: AOJu0YzySAbyHr5C0mlS0sTyM4Ssjnpo2yUQEZuOZLVc6BlMZAxre99T
- NjjFsDp4r1pCJAIjprr+33cAYIjW0jVScXEqR9Lv0Wn4kEQoP3qifYyBRLmGxr6QQZo=
-X-Gm-Gg: AeBDieudlEqh7mRhLZSB98GD7Gs0x1ur4frOy5SjMkMoz7SfwXo/+TpMaGhKrNTGXme
- g433WqFiZ29+OYDGgc5W7WhlXPOKvm924xMm9VVKlkk2DJgsV/YZyzGRxxWkW4mPEf6ooukPwJA
- W2/VcxNT2XJJOF7jwLKPjyvE1+OoR15kS/WfGK4Y3hTDRXYn0bQBf6ubmefXbAv+vKHw0OCse0R
- hld3bDJGZK3NcMDF5SLeA+AjRNAUy81wYd0Q6bUixIWIxqy98ayHkNgjOKfIyDw2SCee8E2IhSB
- 18Fy30ApZsZlKPLyHfh9AhTXlZ8ejzyVcy2ZvR0th7riVn2C5o39SKOEJDQg6VRv7Azd/IoPowq
- sX4pHuP/EQfsdyOBHHTd1BUc+KPhSlqiNLtUcNAFp4Cy4vTtj9FEQkqT3wKU3eZmR95It90zDsJ
- Vfr+rVjPH/ZktZUZ4TxbpjuIuUikUv2XjTD2uhN9kByKwiopBbHJt6X84oNVQmX/8ljcoeFfDSB
- dpZnDPYtfuM4GjcYw==
-X-Received: by 2002:a05:600c:35c5:b0:488:a977:8d6 with SMTP id
- 5b1f17b1804b1-48d18be4578mr58283415e9.19.1777990468012; 
- Tue, 05 May 2026 07:14:28 -0700 (PDT)
+ :references:in-reply-to:to:from:x-gm-gg:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=KRRHj2ziTk3pBFo0IBBbLtwcMaJtURlE9Evd42Lva54=;
+ b=QRKdkQhYJsVKTaK00Kr1cu9o9HaKXPJ1OzQxtAaPvxC78JtRc6oHCjYlsJcRfVFgLM
+ 9+FW0nYHCxOQe2nC6OHb9Wj4ua1gOx6dgWVjkDgJ8RDM3lXXIUtiJ67qrNR9b1w2FpMo
+ 4mNtBzmeOdBfERvbd3cLLDYVCTm9U1J09hEsCfy3aO2sqq1jLrYKqh+d84zXwg249LuC
+ DOIjHjCEi7KtHvoht5uGemQULdO1DgfH01cMGUHZkcoc+2xVvB0D9tORXPGhJOPerfGS
+ bE6cF2AvTyWsVoFSQ5p5tSQwGpzbr9tQ0/T8nUmhk8qHa92gilIc/QbyTPVKXIQ7UrnY
+ L5pg==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ8y3MBqn7fuCeGLTigM+Pi0+6VFle+6rxCO0LCScLeyTpbibWV/cThnGx31RqbJ8qrcYjOC/fA=@lists.denx.de
+X-Gm-Message-State: AOJu0YzuJ9c2zsqBgPbu8RMrYlhNdx+JwwGj2loqR5WsQyb6hLpotdwd
+ hDHvgwSiQW0qtNFgV5Dr+OLkt2g3HwuuuIZpX60WLtDqrCM+CIUXGvPWnD9fB5psKwk=
+X-Gm-Gg: AeBDietn9dk1COXvOQo5Y3n8dz1As0aoidJDjGhUr6V6XqEuQIZuRMWAxTFtDsrpf3W
+ n7SLvK5n9JhYyexYcWXPO9P9GCt/Rulz78TsAuKbNR9OdWnIKey0sGzRCHVFnReABCB0nEH48mo
+ IYqlTVgfh2GSPC+tkcmK0/6yCTFjKkpcCSHZ9tNPci6RYKy1etxUFkE71iQgmV9Y2jFatsJJpsc
+ 9MGLyci1HT9x7P0HM0EqSgSyXgy8crzgBfWfFgaYPnQDuN5kxyyDgV399dLvBWBV/gHbrXfDURG
+ VTYTgEmqWdbUC+RYV8TR5np68Zrdlrubj0YUyr3SW6N+kXA9cSmoctY2Mx6z33nlJXJWlJttMA0
+ skuOfZb7CL+JsvwDEB3VjfnYg2jRhd0FBUpywpA90X36jTy868vfOffLr6ID2cnn86w+Z8KUZxb
+ w6Qv0Q//sx6iRqx5VlH4n+vI8/iGVKIT+EDZg6+PIw36OoL8S+6zkks3eQO8HJA+00tNe0DpiG8
+ 2khxgs=
+X-Received: by 2002:a05:600c:16c9:b0:48d:35e:84a0 with SMTP id
+ 5b1f17b1804b1-48d035e84damr120522515e9.28.1777990469209; 
+ Tue, 05 May 2026 07:14:29 -0700 (PDT)
 Received: from lion.localdomain (p4fc3dd86.dip0.t-ipconnect.de.
  [79.195.221.134]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-48a8eb3427fsm581408135e9.0.2026.05.05.07.14.27
+ 5b1f17b1804b1-48a8eb3427fsm581408135e9.0.2026.05.05.07.14.28
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 05 May 2026 07:14:27 -0700 (PDT)
+ Tue, 05 May 2026 07:14:28 -0700 (PDT)
 From: Casey Connolly <casey.connolly@linaro.org>
-To: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>
-Cc: neil.armstrong@linaro.org, trini@konsulko.com, 
- aswin.murugan@oss.qualcomm.com, u-boot-qcom@groups.io, 
- Sumit Garg <sumit.garg@oss.qualcomm.com>
-In-Reply-To: <20260424104237.968195-1-sumit.garg@kernel.org>
-References: <20260424104237.968195-1-sumit.garg@kernel.org>
-Subject: Re: [PATCH v2] dts: lemans-evk-u-boot: add override dtsi
-Message-Id: <177799046708.839461.5305062197937898253.b4-ty@b4>
-Date: Tue, 05 May 2026 16:14:27 +0200
+To: neil.armstrong@linaro.org, sumit.garg@kernel.org, trini@konsulko.com, 
+ andrew.goodbody@linaro.org, quic_timple@quicinc.com, swboyd@chromium.org, 
+ u-boot-qcom@groups.io, u-boot@lists.denx.de, 
+ Gurumoorthy Santhakumar <gurumoorthy.santhakumar@oss.qualcomm.com>
+In-Reply-To: <20260421044555.368486-1-gurumoorthy.santhakumar@oss.qualcomm.com>
+References: <20260421044555.368486-1-gurumoorthy.santhakumar@oss.qualcomm.com>
+Subject: Re: [PATCH v1] serial: msm-geni: configure RX watermark register
+Message-Id: <177799046819.839461.5836925011780468566.b4-ty@b4>
+Date: Tue, 05 May 2026 16:14:28 +0200
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -102,14 +103,22 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-On Fri, 24 Apr 2026 16:12:37 +0530, Sumit Garg wrote:
-> Add initial support for the lemans EVK platform based on lemans SoC.
-> Define memory layout statically.
+On Tue, 21 Apr 2026 10:15:55 +0530, Gurumoorthy Santhakumar wrote:
+> The SE_GENI_RX_WATERMARK_REG was not being programmed in the RX
+> setup paths. Set it to DEF_RX_WM (2) in qcom_geni_serial_start_rx(),
+> msm_geni_serial_setup_rx() and _debug_uart_init() to align with the
+> Linux kernel driver behaviour.
+> 
+> Without this, the RX FIFO watermark interrupt threshold is left at
+> its hardware reset value, which may differ from the expected value
+> and can cause RX data loss or missed watermark interrupts.
+> 
+> [...]
 
 Applied, thanks!
 
-[1/1] dts: lemans-evk-u-boot: add override dtsi
-      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/fbd377377038
+[1/1] serial: msm-geni: configure RX watermark register
+      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/5f171c622479
 
 Best regards,
 -- 
