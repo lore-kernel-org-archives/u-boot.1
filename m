@@ -4,99 +4,108 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6BB60CD3427
-	for <u-boot@archiver.kernel.org>; Tue,  5 May 2026 15:10:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B703ECD3427
+	for <u-boot@archiver.kernel.org>; Tue,  5 May 2026 15:16:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D16B784968;
-	Tue,  5 May 2026 17:10:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id F373F8497B;
+	Tue,  5 May 2026 17:16:00 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="UlFQKQlH";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="GM29mOZh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A6E9684970; Tue,  5 May 2026 17:10:15 +0200 (CEST)
-Received: from mail-ot1-x343.google.com (mail-ot1-x343.google.com
- [IPv6:2607:f8b0:4864:20::343])
+ id D138684972; Tue,  5 May 2026 17:15:59 +0200 (CEST)
+Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
+ [IPv6:2a00:1450:4864:20::635])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7CB93848FC
- for <u-boot@lists.denx.de>; Tue,  5 May 2026 17:10:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B745F84994
+ for <u-boot@lists.denx.de>; Tue,  5 May 2026 17:15:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x343.google.com with SMTP id
- 46e09a7af769-7dcc9b506d9so5176308a34.1
- for <u-boot@lists.denx.de>; Tue, 05 May 2026 08:10:12 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x635.google.com with SMTP id
+ a640c23a62f3a-b8f97c626aaso969996966b.2
+ for <u-boot@lists.denx.de>; Tue, 05 May 2026 08:15:52 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1777994152; cv=none;
+ d=google.com; s=arc-20240605;
+ b=lr7LF0UNThfKM2vuIINJd4R0YPpO/7phDtOJ1AfCZBYD9FvnLMzY+2aXuNXRNY6JEX
+ kcHDg0A7REho6qmBGIEG6YWu9Vpwt41dBPj6bYg+lDsUjcJteZGlptdFbYCqJa82FPhd
+ RK20/pcgN32WTPg3Ky37zTUNzkhUwkjz7d5n+ivSv78WlMNvycJR6YBBrPYfam43g6vT
+ xCiec7LUGM7XfL8WDr7kjqhqIOs/NzFQNDR9hhTvYkDEOOItsNDkn6BuHXNv0Yc9bnsr
+ 4tvAL693S3jFbE9bcQNEX/G7IKdydjTJtk6b/yQsqZ4nmLMO+gLxT8naGFefgPvwlTCO
+ iHUQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=BPDtcpnAxEh8FuPvh8M+iGe6Ce2JugRs+/D7Y+xamLs=;
+ fh=NOOJLyTmARVTOzWlYRj0oaWCUL6/rnOFhhpJn4l+kts=;
+ b=DOFK5CCW0CVqVi2rMPu+4ah7btCKB1bqiBOTt5E+K/dheZdLDfwrQNC8m75cdp6E4Q
+ cQ2dYPQmYxf77Jf2qGApffZCy7Kt/65GvodGsoKsEn2pfrCj2xgooAjczp3W6dLNMlow
+ mEjLm2oRNkq4yOQ5wN4Bl4UM0XyRz9LzjlrX9QW85VpXwmwmTDDS6s/v3B/f6kVWiAHV
+ Ogu+Tpxc5itM+Wzdn1dg4pEeolyQj5Lk3eOL8Oib9/gsKNSU77f2YSJ47wFrrhcnoVei
+ 78ds8NGJMYel4XFuMW5CvNCfZ4nospV/gBobEPc16eKyZh2VudADeQFtWlj5JkNZ4oJt
+ gIEg==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1777993811; x=1778598611; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=39cKk9ASWZFZG5T2b2Pzkl0dXsXogwgWpsmt1RNk6p8=;
- b=UlFQKQlH9ynsrimEuWSHJO+Urk1AIP1/WdzAZExGKd4PgJ4YVLExFb4D/MPU+ZAliX
- EOTkZ1syWQKuyIh11vYk8FMGFJRVOE7RAQN5PD7WcTAF9mX1pfhkaogWRWkNrTYhxzHN
- 0fs3UNjzNwdYMEgWttsVaF63X/oHRjkp4/Fak=
+ d=chromium.org; s=google; t=1777994152; x=1778598952; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=BPDtcpnAxEh8FuPvh8M+iGe6Ce2JugRs+/D7Y+xamLs=;
+ b=GM29mOZhX7ZGMFfzXszOb+N81XkCQznfvU5n8jUU4gcGvV3lDYbLdLVFxs9tGOCwc2
+ zU5k+03pHg/YZlwAWE8LC60Q5gIDpWPIMP3xO9NWOapE9lSz9Pg8MFCIhfWIt87qdlNp
+ CSkC6zJlrrs9CM9YepbFE/uZIQ1Oq7e6mZCZM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777993811; x=1778598611;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=39cKk9ASWZFZG5T2b2Pzkl0dXsXogwgWpsmt1RNk6p8=;
- b=Jx81UGfoyyG0m/gIVUnK+lMAOUt2tdi7fgfk2wllUSXmcVMChRqeiVS1d2Sge+H/M0
- GIeopHh5CE2MeKCOP7V4ZW8FFcnb9GIa8+f1LeS43fyQSw9vqv3++1HvGhkcQ4+e5pUR
- KO4c2S5/ICHAkUWXuel6X5unt+R/YT+s+3MyPD+7CoLKxw0i+iINN1DEJzKWWJc8caoa
- f7nwod/PETQaXhvOgvRyfVgirY7RfQ3yNDavP4JNR9Hf7KbtMA6kxC6EPAXcutNoV70X
- 8b2rgCQgu7AIdmkF+8BMvqGZd16AsaXl35eoGHCC0VUBxkkMDM6a+7cXBB83tyFuIvQZ
- dQdQ==
+ d=1e100.net; s=20251104; t=1777994152; x=1778598952;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=BPDtcpnAxEh8FuPvh8M+iGe6Ce2JugRs+/D7Y+xamLs=;
+ b=U1uHc5KjbKqgOeNrefpaOertsM3nED16eD/dnIwQTF5H2vwJJk0mwC431xdWir09yp
+ NBbRua2nCtOXyFzVYr5T6nkdu2Z43jj7PDau0VRLO7q5LkAinEhKGNoRgp1Kf+BTLFHi
+ NWn8+CzPnT+AV8fRuTwNePlzILb+omP3RHVkrjjOrMvT8h3SH2PadHhY3fW1wzYW4Xwn
+ CEUgoe2EObIJcEpOhDVJbXzpaSGilglz87mr4MPsvoWbA9UUNa5YQXZbS9oCovuxhy7k
+ f/A/P4TPVBWqrt25vhGg3hQ6SpOVu7QtCSt7Zh7W6Xn3FVa+1EFqb5vvtbDpY7fWIyKA
+ ggUg==
 X-Forwarded-Encrypted: i=1;
- AFNElJ9xAps4L9021jVRkRJdtfROC8UqNNyb/DtM13Xsvcaajw7hvaUwGJM26xLGgXvrkFbJy1KJ+OA=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw/olXXZTAKxRQqLbl55rXr7oPSkHl+83on5ivjDO9TA6W47esx
- 8RY3rn4/1AGmVzyaoFviCLVbEPe7L8kNnJvICiFWn/45x4xs18iKuS8TGyoCdL/wALg=
-X-Gm-Gg: AeBDievGZHgj9oRpQbMo78BDIegzLrTYRdEMjWDX1tvwd3BK0rP7vKECVfTECllzM5L
- clnRdu2GYLeoWJU8deYm/N5/B47WgVaiKhSByErUQoLQzaPh9Oe2OlRZm0frMBdjP36vlmj26/h
- IWSOsVfHpDYj7Tdt1BaV7CMk8SUe5aIaIBoHLZVYbhNEDAIcBBSrldA568PUqocRpQLQ/WtoHhv
- 395QeOoBveXBlXj1ZMWy6Gl6ifqGnJ8YwJQWMGkV/+Lv3OeVo7oFD0slctDYzcWRLZmbxkyrSwp
- OSQl9phsb8IpTqyTa8gMcSVvnma8l27eC0DvhtoKkdJVtao9Mm6iF2um9gj/4Iyyr/3AGkDselh
- SirFp0WHwRYvGTMhF9cww1nnWBtfvhFsp16uBbtdOHY9yGka2/K8keGM5uAPxJ/Qo/l+DqOZFE6
- jFLIuJHZ/MI4xYkIBeu58wCtHM8TFtcaS2+508AEUCBkWhbqJ4OVwCeXR05AbVrktyG/O+PBH6+
- iUnompTf1Lbp4XAZ9/QqElaOZ2kLroyZi9EqPt6YvihhXlI+cDbJSR0FwyePA==
-X-Received: by 2002:a05:6808:e687:b0:46a:746c:2d53 with SMTP id
- 5614622812f47-47c88fdb5e1mr5351168b6e.2.1777993810969; 
- Tue, 05 May 2026 08:10:10 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
- [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-47c763b33c1sm8820037b6e.1.2026.05.05.08.10.09
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 05 May 2026 08:10:10 -0700 (PDT)
-Date: Tue, 5 May 2026 09:10:07 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: Quentin Schulz <foss+uboot@0leil.net>, u-boot@lists.denx.de,
- Simon Glass <sjg@chromium.org>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- David Lechner <dlechner@baylibre.com>,
- Jerome Forissier <jerome.forissier@arm.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Simon Glass <simon.glass@canonical.com>,
- Raymond Mao <raymondmaoca@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Michal Simek <michal.simek@amd.com>, Adriano Cordova <adrianox@gmail.com>,
- Sughosh Ganu <sughosh.ganu@arm.com>, Yao Zi <me@ziyao.cc>,
- Rasmus Villemoes <ravi@prevas.dk>
-Subject: Re: [PATCH RFC next 00/18] sync scripts/Makefile.extrawarn with 6.1, 
- enable WERROR for host tools
-Message-ID: <20260505151007.GR1614990@bill-the-cat>
-References: <20260504-extrawarn-sync-v1-0-b19301d1948a@cherry.de>
- <20260504180429.GJ1614990@bill-the-cat>
- <af74c5ed-a3a0-4f2d-a261-269e31882711@cherry.de>
+ AFNElJ9O1FuTe9qioxaG/bNEhE8YNpmiLxZL4HkdeF/o/1pKQJao79YoEQoz0DlI6/8jxAE2uJlQcdw=@lists.denx.de
+X-Gm-Message-State: AOJu0YzG3esgouRf8UUftFNqk63QEC8Vwxr3lVODY/+/yBkBw5+Qkge+
+ +HyLkfjJ2A9bC6gt6y/eJR17iM5odMrKxuJxEUqw0194FsQfLqdlVf6rN+4peMCkN1Kh5dPH3qa
+ UbECwL1yDk9Bg53bnrsuKSgGffJMEDNCSiCtNKR+n
+X-Gm-Gg: AeBDiesrkK5ClOcp8fCokOzMDCtZztkgn00GqxOzCzkEcajWpRiirzEqHfou0vbRwnB
+ UzaT4aoS2ij1KENb39AK5r/yJ8E9asZnRWBVTtPf3j3vKtPFq+EmjdW5hNCFeBf/P5JPZlkY9xk
+ 4R3emzkMeLcGGiQq0wuFb9nxllVrwhj/V092aQA1a08hWEa10Y9dcI1N6R+kqo/EfOhkAcXURzg
+ AFi0PUTl0D9XJ2Rbj1sJTcSCzX+27TXg9hEOz5mAn0RDqcbZ43AWW/pUqZiYlCxCxm1t3HatXrB
+ Zot0r6CulhXZLP90/hJ7GbjUAaE=
+X-Received: by 2002:a17:907:a48:b0:baf:3fa:5b4d with SMTP id
+ a640c23a62f3a-bbffab33934mr776301966b.9.1777994151875; Tue, 05 May 2026
+ 08:15:51 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="LgJkBSrPtVE9Fp9D"
-Content-Disposition: inline
-In-Reply-To: <af74c5ed-a3a0-4f2d-a261-269e31882711@cherry.de>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20260504-extrawarn-sync-v1-0-b19301d1948a@cherry.de>
+ <20260504-extrawarn-sync-v1-15-b19301d1948a@cherry.de>
+ <CAFLszTiX7VJzT_mYS071Vb5jOBR4pqtpuM9LoqR=6m+qMNLsyw@mail.gmail.com>
+ <2202b6b4-41d4-4bcc-be89-b50f4c18662d@cherry.de>
+In-Reply-To: <2202b6b4-41d4-4bcc-be89-b50f4c18662d@cherry.de>
+From: Simon Glass <sjg@chromium.org>
+Date: Tue, 5 May 2026 09:15:40 -0600
+X-Gm-Features: AVHnY4KavGm8OG5SIsrAMv2dg71bX7MBxE-lFBt3lygC5CLv7wFh1nQYIqQkzi4
+Message-ID: <CAFLszTjWcADrm_2yhaN5dq5HQ7AxAsqVTa0ukFMx5nooD_JCyg@mail.gmail.com>
+Subject: Re: [PATCH RFC next 15/18] kbuild: enable -Werror for hostprogs
+To: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: foss+uboot@0leil.net, u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ David Lechner <dlechner@baylibre.com>, 
+ Jerome Forissier <jerome.forissier@arm.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Raymond Mao <raymondmaoca@gmail.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Michal Simek <michal.simek@amd.com>, 
+ Adriano Cordova <adrianox@gmail.com>, Sughosh Ganu <sughosh.ganu@arm.com>,
+ Yao Zi <me@ziyao.cc>, Rasmus Villemoes <ravi@prevas.dk>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -113,116 +122,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Quentin,
 
---LgJkBSrPtVE9Fp9D
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Tue, 5 May 2026 at 04:52, Quentin Schulz <quentin.schulz@cherry.de> wrote:
+>
+> Hi Simon,
+>
+> On 5/4/26 10:38 PM, Simon Glass wrote:
+> > Hi Quentin,
+> >
+> > On 2026-05-04T13:20:27, Quentin Schulz <foss+uboot@0leil.net> wrote:
+> >> kbuild: enable -Werror for hostprogs
+> >>
+> >> [ Upstream commit 27758d8c2583d10472b745a43ff86fef96c11ef7 ]
+> >>
+> >> Original commit log:
+> >>
+> >>    The hostprog compilers and linkers do not share the regular compiler flags,
+> >>    so they are not affected by CONFIG_WERROR or W=e. As hostprogs are used
+> >>    during the bootstrap of the build, they can't depend on kconfig options.
+> >>
+> >>    Enable -Werror unconditionally.
+> >>
+> >> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
+> >>
+> >> scripts/Makefile.extrawarn | 5 +++++
+> >>   1 file changed, 5 insertions(+)
+> >
+> >> diff --git a/scripts/Makefile.extrawarn b/scripts/Makefile.extrawarn
+> >> @@ -109,3 +109,8 @@ KBUILD_LDFLAGS            += --fatal-warnings
+> >>   KBUILD_RUSTFLAGS     += -Dwarnings
+> >>
+> >>   endif
+> >> +
+> >> +# Hostprog flags are used during build bootstrapping and can not rely on CONFIG_ symbols.
+> >> +KBUILD_HOSTCFLAGS    += -Werror
+> >> +KBUILD_HOSTLDFLAGS   += -Wl,--fatal-warnings
+> >> +KBUILD_HOSTRUSTFLAGS += -Dwarnings
+> >
+> > Just to check, is there a reason to keep this and patch 16 separate?
+>
+> Backports from Linux kernel where they already are separate.
+>
+> > The next patch immediately undoes the 'unconditionally' claim made
+> > here. Anyone bisecting through this point gets host tools failing on
+> > any new compiler warning, with no way to opt out short of
+> > HOSTCFLAGS=-Wno-error - squashing would also let you drop the comment
+> > that patch 16 then has to rewrite.
+> >
+>
+> Fair enough.
+>
+> > If you'd rather keep them split to preserve upstream history, you
+> > could mention in the commit message that the next patch makes it
+> > conditional.
+> >
+>
+> I would prefer to, it should make it easier to then see which patches
+> were backported or not (git log --oneline). But I understand this
+> unnecessarily breaks bisectability, so no strong opinion.
 
-On Tue, May 05, 2026 at 01:58:26PM +0200, Quentin Schulz wrote:
-> Hi Tom,
->=20
-> On 5/4/26 8:04 PM, Tom Rini wrote:
-> > On Mon, May 04, 2026 at 03:20:27PM +0200, Quentin Schulz wrote:
-> [...]
-> > > The first two patches are for fixing pytest calling make directly on a
-> > > "dirty" build directory as generated by buildman using the clang-20
-> > > toolchain, but pytest does not set HOSTCC and CC to clang-20, resulti=
-ng
-> > > in clang flags being used with gcc).
-> > >=20
-> > > One can simply reproduce it (after backporting up to patch
-> > > "scripts/Makefile.extrawarn: sync with 6.1") by doing so in the
-> > > container:
-> > >=20
-> > > make HOSTCC=3Dclang-20 CC=3Dclang-20 O=3Dbuild/sandbox sandbox_defcon=
-fig
-> > > make HOSTCC=3Dclang-20 CC=3Dclang-20 O=3Dbuild/sandbox -j`nproc
-> > > make O=3Dbuild/sandbox u-boot-initial-env
-> > >=20
-> > > It'll print:
-> > > gcc: error: unrecognized command-line option '-mno-global-merge'
-> > > gcc: error: unrecognized command-line option '-Wformat-invalid-specif=
-ier'
-> > > gcc: error: unrecognized command-line option '-Qunused-arguments'
-> > >=20
-> > > This is essentially what's run within test_env_initial_env_file in
-> > > test/py/tests/test_env.py.
-> > >=20
-> > > While I'm not unhappy with the patches to pytest, it feels to me we m=
-ay
-> > > be missing something else for the u-boot-initial-env make target to
-> > > update the kconfig symbol based on the toolchain being used when call=
-ed.
-> >=20
-> > Is there some other target in the Makefile that should catch this kind
-> > of change? It's not just that build target that needs to be remade, it's
-> > everything, yes?
-> >=20
->=20
-> For the reproducer, one actually needs to do
->=20
-> diff --git a/Makefile b/Makefile
-> index bd33437fdfd..9079131f81e 100644
-> --- a/Makefile
-> +++ b/Makefile
-> @@ -1007,15 +1007,15 @@ KBUILD_CFLAGS +=3D $(call
-> cc-option,-Wno-format-nonliteral)
->  KBUILD_CFLAGS +=3D $(call cc-disable-warning, address-of-packed-member)
->=20
->  ifdef CONFIG_CC_IS_CLANG
-> -KBUILD_CPPFLAGS +=3D $(call cc-option,-Qunused-arguments,)
-> -KBUILD_CFLAGS +=3D $(call cc-disable-warning, format-invalid-specifier)
-> -KBUILD_CFLAGS +=3D $(call cc-disable-warning, gnu)
-> +KBUILD_CPPFLAGS +=3D -Qunused-arguments
-> +KBUILD_CFLAGS +=3D -Wno-format-invalid-specifier
-> +KBUILD_CFLAGS +=3D -Wno-gnu
->  # Quiet clang warning: comparison of unsigned expression < 0 is always
-> false
-> -KBUILD_CFLAGS +=3D $(call cc-disable-warning, tautological-compare)
-> +KBUILD_CFLAGS +=3D -Wno-tautological-compare
->  # CLANG uses a _MergedGlobals as optimization, but this breaks modpost, =
-as
-> the
->  # source of a reference will be _MergedGlobals and not on of the
-> whitelisted names.
->  # See modpost pattern 2
-> -KBUILD_CFLAGS +=3D $(call cc-option, -mno-global-merge,)
-> +KBUILD_CFLAGS +=3D -mno-global-merge
->  else
->=20
->  # These warnings generated too much noise in a regular build.
->=20
-> Which is what's being done since kernel commit a1494304346a ("kbuild: add
-> all Clang-specific flags unconditionally"). I actually had this in an
-> earlier version of this patch series and forgot I removed it.
->=20
-> This seems to apply to envtools and tools-only as well, though make promp=
-ts
-> me for the desired state of symbols that are now reachable, e.g.
-> ARM64_CRC32. And if I rerun the same command, then it works. It seems like
-> the config from the previous run is used? I don't know if it's related but
-> those two commands call make directly ($(Q)$(MAKE) $(build)=3D<path>). Do=
- you
-> have something in mind maybe? Or some more commands to run?
+Same here, up to you.
 
-I think I partly misunderstood at first. It's not that we switch from
-one toolchain to another, it's that we can't (as easily) use gcc for the
-target and clang for host tools (and vice-versa) because of how flags
-are set now, yes? If so, how does this work in the kernel?
-
---=20
-Tom
-
---LgJkBSrPtVE9Fp9D
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCafoITAAKCRAr4qD1Cr/k
-ChiqAQC/c1UAvD78NZAwbOiM6SU5mDwvYRC4bKL6gw/1KUpb0AEA2rBnurYV6t3b
-uWd4RYzeNhb+J2vUtWHcfI4vcXZvSwQ=
-=72bg
------END PGP SIGNATURE-----
-
---LgJkBSrPtVE9Fp9D--
+Regards,
+Simon
