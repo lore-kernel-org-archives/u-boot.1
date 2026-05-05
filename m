@@ -4,122 +4,122 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E692CFF885A
-	for <u-boot@archiver.kernel.org>; Tue,  5 May 2026 12:30:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3DA43CD3427
+	for <u-boot@archiver.kernel.org>; Tue,  5 May 2026 12:31:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 52994848BB;
-	Tue,  5 May 2026 14:30:52 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B1B6F848DD;
+	Tue,  5 May 2026 14:30:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="C+/UCBkG";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="Puls6oGh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4A382848CE; Tue,  5 May 2026 14:30:50 +0200 (CEST)
-Received: from CY7PR03CU001.outbound.protection.outlook.com
- (mail-westcentralusazlp170100005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c112::5])
+ id 48F69848DD; Tue,  5 May 2026 14:30:57 +0200 (CEST)
+Received: from BYAPR05CU005.outbound.protection.outlook.com
+ (mail-westusazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c000::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0CEC7848B8
- for <u-boot@lists.denx.de>; Tue,  5 May 2026 14:30:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4784A848DA
+ for <u-boot@lists.denx.de>; Tue,  5 May 2026 14:30:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=michal.simek@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=jL4cxgWN12wlPqnRY5zppkTudoG3+VQMitQWORmut7+oW2Cn/hqm3U36IPWZ30hcsEmNuo2COxWn2IzPbg0DRxeizq9h4Et51yzQmg9ZPVJF716k/piaCHbKaPmyD4Wt/RZWBmvwZ8kYCrrTr03Fq2L9fqQ3d+2oj+yG1wObQVJnSh8Baao9F04NQ05LEERA4fpOeKyP7nB5Pwuzx7lk/IHmzLZkPlgaZVVl1XVwOF5NTBmBU1k6+FK2kbevMLeiy6GSnTAxbSdjD2/ErXumrYo5sn3L5SgGK694CER7/sm7RayolwuZN6jOqarW1JvauNlIhvM+Hj06IElk2pEUeg==
+ b=PxWpHKXcTumK5j+OCi1oT9pIPHhVeYB2C5BY0Y6nBd44ofmgUuWHooB+FU0gIAPgyW5wIhPOBkxQzsRXdix/WglrphCr+6/1xVhdMwMxmB4Kyub0Rk2oJvinWsiZgTM8/VNhqolSa8VknP4qvUSO1gNpCIzXygcq0FY156T1u6TT1R1XVooVHIMcmLWMuDwsTW84wLpgwZqCh70m0QqlaQ/W6qwLGVmUMOg29jKp9Bzv596ps1IWPdGrQH5WKzeEin7aTO9Lswr8i61wrx8802Eydt7vxz1TB1cQowtX+q6tXzOMD7tBIqqvWaL1HPe90NC2/qqkHXoXwZuwv8/+kQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=aNasRr7V3qCN5rAjRZELUYQ+i2yuq5SRkpcoqM8mOMc=;
- b=j+YQ4MjZrgHSkzVwIlwnrkJ5X5VkLe3Be3Hmy6W3wTKNkceWAA8Rr6PAmfPkvjr9KLkfaYERokyVCkEerw5CicBdBD4AnD2HleopQt0kB5y9YwrFTsfgQQj7l8mh7qIrEIIfi7smOcwfeCQyIjIaaC8N8GtEB5zboqXxkWoorLPvlcVwWmFRgTFDLKYSRvIrUw1uI6/wfZszMrgZDGA8aixKV/HqscdgtgDAtDkbz2/9kqX30XzYiPXWyu7LIB53JkSi4DQvhimmPtiaByqvnqoPAPtgx0srv4Mbj15JsXC4lghoofudSSIqHGR+K8qA9Y9jvuCIzaL2P2FfIH81uQ==
+ bh=11v8JHHCxGqVuM7DzUXdY0SuP7lwEHIz3xinyqqqiTM=;
+ b=EhojnpbcPivcjDSiXHwz+JfsEYgoNVcZLZH7o72my2tDQxGfuZpPAmVxahJb5xsVNf8dTpgot2/2a/f9E3EHFsBNhgBmIXDMXNB/WRXnr1mEdY98qBi0dkmJBQhucBL3nb/KxNwHcK7uOtbhdlQA6A3x4SjXXqwgiP2au78L4mCoiKlvnJRpTDKWuz6/RPl17KHc6nJhrjGQyS97G5AacnsbCdQyBNhH8xvSFoXCgU9Wvd6RlMi06CvdRc3ybzYIY/hkxKkY+xYTIXbhQSDgmrKLhezfnmrq+542qQL2WNPApmh7J348KfqxgsG0/qmUybAg3cTB/JFZN86L+rNzfg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=aNasRr7V3qCN5rAjRZELUYQ+i2yuq5SRkpcoqM8mOMc=;
- b=C+/UCBkGGYpqgo7KewozLyez+RUkc/SyGhNUi9WUswWDEH4dxOMrAtnbh2A1xYhOj7LWtn/yQ9O3vL58tPtVwvlYjkyrogg+qHBFeRLIEnBul+fNvuX22n2F507dxg3FQXpEipJkpGJPdbZ0wFkOCW8r/2DIVH6gGJIkpBvjPNc=
-Received: from BYAPR06CA0012.namprd06.prod.outlook.com (2603:10b6:a03:d4::25)
- by CH3PR12MB7569.namprd12.prod.outlook.com (2603:10b6:610:146::6)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9870.27; Tue, 5 May
- 2026 12:30:44 +0000
-Received: from SJ5PEPF000001F6.namprd05.prod.outlook.com
- (2603:10b6:a03:d4:cafe::c6) by BYAPR06CA0012.outlook.office365.com
- (2603:10b6:a03:d4::25) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9891.15 via Frontend Transport; Tue,
- 5 May 2026 12:30:43 +0000
+ bh=11v8JHHCxGqVuM7DzUXdY0SuP7lwEHIz3xinyqqqiTM=;
+ b=Puls6oGhM3eGH1xhIvMlg7LPjrh76AzFluTwfgmnzK2y1I+W9LcembBMsxvLvvALIFjqn9Z9yE4DE0EoO1R5wL2hWQd8+fJOiuoJ4Br8E2rekVcFdH4t3l1E2zd3lRyQr4EanZUJNzMaiRWtW9wCm4w2qGtheSW+aGneQawZg+g=
+Received: from CH5P221CA0002.NAMP221.PROD.OUTLOOK.COM (2603:10b6:610:1f2::27)
+ by DS7PR12MB6095.namprd12.prod.outlook.com (2603:10b6:8:9c::19) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9870.25; Tue, 5 May
+ 2026 12:30:50 +0000
+Received: from CH1PEPF0000AD77.namprd04.prod.outlook.com
+ (2603:10b6:610:1f2:cafe::8f) by CH5P221CA0002.outlook.office365.com
+ (2603:10b6:610:1f2::27) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9870.27 via Frontend Transport; Tue,
+ 5 May 2026 12:30:50 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
 Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
-Received: from satlexmb07.amd.com (165.204.84.17) by
- SJ5PEPF000001F6.mail.protection.outlook.com (10.167.242.74) with Microsoft
+ client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
+Received: from satlexmb08.amd.com (165.204.84.17) by
+ CH1PEPF0000AD77.mail.protection.outlook.com (10.167.244.55) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9891.9 via Frontend Transport; Tue, 5 May 2026 12:30:43 +0000
-Received: from satlexmb10.amd.com (10.181.42.219) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
+ 15.20.9891.9 via Frontend Transport; Tue, 5 May 2026 12:30:50 +0000
+Received: from satlexmb10.amd.com (10.181.42.219) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Tue, 5 May
- 2026 07:30:40 -0500
+ 2026 07:30:46 -0500
 Received: from satlexmb07.amd.com (10.181.42.216) by satlexmb10.amd.com
  (10.181.42.219) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Tue, 5 May
- 2026 07:30:39 -0500
+ 2026 07:30:45 -0500
 Received: from localhost (10.180.168.240) by satlexmb07.amd.com
  (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17 via Frontend
- Transport; Tue, 5 May 2026 07:30:38 -0500
+ Transport; Tue, 5 May 2026 07:30:45 -0500
 From: Michal Simek <michal.simek@amd.com>
 To: <u-boot@lists.denx.de>, <git@amd.com>, Simon Glass <sjg@chromium.org>
-CC: Andrew Goodbody <andrew.goodbody@linaro.org>, Naman Trivedi
- <naman.trivedimanojbhai@amd.com>, Padmarao Begari <padmarao.begari@amd.com>,
- Senthil Nathan Thangaraj <senthilnathan.thangaraj@amd.com>, Tom Rini
- <trini@konsulko.com>, Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-Subject: [PATCH v2 0/4] reset: Introduce reset_reset.*() API
-Date: Tue, 5 May 2026 14:30:28 +0200
-Message-ID: <cover.1777984225.git.michal.simek@amd.com>
+CC: Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2 2/4] reset: Add sandbox tests for reset_reset() and
+ reset_reset_bulk()
+Date: Tue, 5 May 2026 14:30:30 +0200
+Message-ID: <21c23cc7403153b45a81c958118b8d9f85f73140.1777984225.git.michal.simek@amd.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <cover.1777984225.git.michal.simek@amd.com>
+References: <cover.1777984225.git.michal.simek@amd.com>
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1588; i=michal.simek@amd.com;
- h=from:subject:message-id; bh=gFrb0V9sDP8/SopbviY61slgpQa57pNRL59KRQJ/HB4=;
- b=owGbwMvMwCG2mv3fB7+vgl8ZT6slMWT+fPT0XMms38Xh63c/qrPlLLtltj62N2SPe/9F+/pzN
- aazI6bP7ihlYRDjYJAVU2SZzqTjsObbtaViyyPzYeawMoEMYeDiFICJHN3NyHCba7uD1HZvS5FP
- T35vv2cZdlvBuWBy/LTs+X/PsvTP4iljZJisdvy4+bvYFS2LM8uLY8+uYT4jeVZS20HZdul2xa/
- /5JgB
+X-Developer-Signature: v=1; a=openpgp-sha256; l=7488; i=michal.simek@amd.com;
+ h=from:subject:message-id; bh=37dzEtdvtbPG7oVd+oZ65NdjZEnkJU/bwOn/BlWhOtM=;
+ b=owGbwMvMwCG2mv3fB7+vgl8ZT6slMWT+fPSKZTVv5lMbrubfq5YJXNJTWORT1Wjw+O5ahzkbn
+ +9kSBPo7yhlYRDjYJAVU2SZzqTjsObbtaViyyPzYeawMoEMYeDiFICJbPnHyHBsLytnBsuHez+6
+ jkiYz955O3E9f1FJ5AGJ2VeW9KVPE9ZlZDhzue6KT6HQjxm5hVtUNG+FL2OYHNEoc+WfKk/VTEF
+ zP3YA
 X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
  fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ5PEPF000001F6:EE_|CH3PR12MB7569:EE_
-X-MS-Office365-Filtering-Correlation-Id: 9495b918-6293-493e-dab9-08deaaa22058
+X-MS-TrafficTypeDiagnostic: CH1PEPF0000AD77:EE_|DS7PR12MB6095:EE_
+X-MS-Office365-Filtering-Correlation-Id: 4d61422a-e278-40ee-1cad-08deaaa2242f
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|376014|82310400026|36860700016|56012099003|18002099003;
-X-Microsoft-Antispam-Message-Info: R4l7jzUZGAw4vOu9h62ynEPyH874GLmPWWPgj5OFKGtbJ3ACnFvLsDll13QXErlAhytExwq84EoVIM15RKWEm3Q4ssIpExsK9j/kYiDCKD+o1iKeOHs/GO01j+btL6TqwZK9izEt8AAXfBk0C4hUqyAY6Smf7f/EamgjXn63OWzsjnDJFXy1jwoB5ReYa6i5icfe+3fe5wf7byxW8oPBc5shiH4jmrGDze+5xkYaVpa6EjeON51VvcQxDGxXsp5rKRqsfIbSKkZE5eukmY/v5/YUXCmuKwP7BjoYOLrj8yg0Avc8EVrMY1Xyq7ddBRY/dXeRGMd8hQ55SiQ2ilhzdIoqsuCcSqNz/Qm7Lj6iEF57WU687oFMXHv0kTvQVZBQLF/wk3DxdDNcG74mBH1ByaUG+SJ0PdLHbREO5vskCPnda6g6FCp+aZKguENsE6EPUDRwusGJBNRxnSaSpXHyqig6FKPNApkmKnR4fiZ2C/mHxQ1/gtivu8IG5fjxQ4psZ0vIEqeKK83qCrjJ40qkX5gm/QygsZmnHNxEwYiDPgbGjnqZZCrq+YPoLGnC8zoS3duvinV+HUHdRVoYdcI5O4bUZPODUQusyweWTlbhaMqDFp+Z18KMeNUicqBzGLerg1TwYUkU7pmgYz8aZBUjwxbQHA0XP21thzONeJxVo+cMzH0mQlOJwJG66lQVDhmXJiRY65//iQpzxBKEunpSPwRH7plgY/UOEhWpGWsr4H0=
+ ARA:13230040|36860700016|82310400026|1800799024|376014|22082099003|18002099003|56012099003;
+X-Microsoft-Antispam-Message-Info: O80fxVgnQhkWMwDYQSCL/nrMR5fuS+TAiYiNxE1n8znxrI6q8tBIU1Wv9zfqjK2VF2ev8nT1U3iQtgfnU952wwOckd9u0D4n2oulIeAR4PH5/yReol6+kb8Mem3YSWWzGAB5g2w6RyfzXR7Qh7zmKv1RXxEm+Pfk1w3F5pqvN+IoxK7DVBGt2MyCjwiwX/I0H/qjHIDGtM36LO0sOGxzBcwOK3VZh4XiOUVU+qdMMdK+Z1YXGpBnNp5a2fL2TZSeS8qPjXT8u8YTMIfrvxCmNwyTDVk0g6l23ZQkJNgbyPx/NzWPoD3Xg8UTVb6dIutv4zm91/Db8OMo6FnNsQburbxHE3o1y5KLWmBO1DzyAypIy6mqAdDfshyxFp4UfsW/XRI6H5X+O4RbDy7iEr2CAvPK+TzD91TEC9SHQgXZD9vFE/wy7WVgJuJsuVBVRnxmmQVvoAk+MT8Q1gRerv9vinR2Bz7JNuFEN45dzscD70yLwECkgG7Py0kbPdkuir/Sm1q08PiU1HwLx8BPK4JqX4+i1GnkBINhO7hPuA31lFxyvl/1PSTuJgWz9kfAUj9sceYMePkJFq+LTljR/CFZuyGJf8XaGpJyrYYDF5jNVweqWt6qhk4EIQUle/RB463pRfKuilsV3Y5HvbjUb+tsnUBYnG+MPzxXL0fA/uI0SQu4MruuZjoHDFi9QlykmPLH8Q6fSTdO3yPwltIYEG13SQoxx1zAeB6CumRN1JXXT1E=
 X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:satlexmb07.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(82310400026)(36860700016)(56012099003)(18002099003);
+ IPV:NLI; SFV:NSPM; H:satlexmb08.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(36860700016)(82310400026)(1800799024)(376014)(22082099003)(18002099003)(56012099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: HwnkgnspfnuzSxUD329p1cmSJdUdPhVmNClIrSiozUTS79UZS7pyRa5t7YrD44qjIukk/om52c6/DbUxDOsEZaud/0JazlgtEwp4a1W7y7fZdbpjhHCPy07bD5GDL/uoWiYowBr4lMMGGGEbH8q+vSfjuLWkAjTl7jAimec/RBcRTvwsKVcEhHVIkoSZ8JH2vyh4HuqbiNPTMCr0XMGLdftqupYuF4w16lNwM/O2MJceTfcZmZ7ESjyrr0CqfKwMC7Z6QzEHVIHyEkIqgvf00uec2kPrM2ADfRAYUAweEglwZMPIXY62Zxgu0eUyC/TE5fE2iooF5HritsBnlrgKWcQ3wiyRsQqH5J3hfd7kONCeima7tAdNo0fyw1CFU9RCjVTC3wyJFaLR4dR2A0+BHMLvfVF9a8BC99pTlLycCe82Mw6+eYgzaAhniIS8MftQ
+X-MS-Exchange-AntiSpam-MessageData-0: 4j/hM5Bw20gf99D+T1FOCpyliUvr/JfWm86uHQfzMIWPoUQAF9ZG/FDwHBu1DwHZ4YAS/ENPWp+IJWmpvHbM1g9bC95cHr2dsJU8GeYHSq4EuoTeFhGu977zJoFXQYbKERCVrPSpCP43/7RTfPuXTiDhHXTImg6vxoJAznkJ/sNXRv7vQGs9E8Yw/63iHvaXjp1OEnUSCXqbXlaxVmhC3KbcDuaxOygSH9cB2lWi6QwbMJ1gPbySEQwz2/ANJO3nCY5IteqBI3io3OTRrVd0+WNKgXxP0Uh921CKaHEfGmASpJud1eOgQBAl8eS4gcfTH2Oj1uFh78Y3PDDhyvM8COnTVBMuBkXkRy/ZEQ9Oy9+9yaC8ogG+/GofLp73FlE+H3ecY0m+D4fD//1qohbC4uUiaEY/hkHdzy4fgEPxyWNCXcSF94VW9+IXrWFqDdOZ
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 May 2026 12:30:43.6063 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 9495b918-6293-493e-dab9-08deaaa22058
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 May 2026 12:30:50.1407 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4d61422a-e278-40ee-1cad-08deaaa2242f
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[satlexmb07.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: SJ5PEPF000001F6.namprd05.prod.outlook.com
+ Helo=[satlexmb08.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: CH1PEPF0000AD77.namprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH3PR12MB7569
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS7PR12MB6095
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -136,44 +136,223 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+Add DM test coverage for the new reset_reset() and reset_reset_bulk()
+API functions. The tests exercise the assert + deassert fallback path
+since the sandbox reset driver does not implement the rst_reset op.
 
-the patchset is adding reset_reset.*() interface which is common
-in Linux. And implement it for ZynqMP.
-
-Thanks,
-Michal
+Signed-off-by: Michal Simek <michal.simek@amd.com>
+---
 
 Changes in v2:
-- Add delay_us parameter to specify delay between assert and deassert
-- Pass delay_us to rst_reset op so drivers can use it if needed
-- Return -ENOSYS in stubs when !CONFIG_DM_RESET (like clk.h)
-- Fix line length to stay within 80 characters
 - Add reset_count field to track reset pulse operations
 - Implement sandbox_reset_reset() for rst_reset op
 - Add sandbox_reset_get_count() to query reset pulse count
 - Clear reset_count when reset is requested
 - Update tests to verify reset pulse actually happened
-- Pass 10us via parameter
-
-Michal Simek (4):
-  reset: Add reset_reset() and reset_reset_bulk() API
-  reset: Add sandbox tests for reset_reset() and reset_reset_bulk()
-  spi: cadence: Use reset_reset_bulk() for proper reset cycling
-  reset: zynqmp: Implement rst_reset using PM_RESET_ACTION_PULSE
 
  arch/sandbox/include/asm/reset.h   |  3 ++
- drivers/reset/reset-uclass.c       | 34 +++++++++++++++
- drivers/reset/reset-zynqmp.c       | 11 +++++
  drivers/reset/sandbox-reset-test.c | 14 +++++++
  drivers/reset/sandbox-reset.c      | 31 ++++++++++++++
- drivers/spi/cadence_qspi.c         | 16 ++-----
- include/reset-uclass.h             | 12 ++++++
- include/reset.h                    | 41 ++++++++++++++++++
  test/dm/reset.c                    | 67 ++++++++++++++++++++++++++++++
- 9 files changed, 217 insertions(+), 12 deletions(-)
+ 4 files changed, 115 insertions(+)
 
+diff --git a/arch/sandbox/include/asm/reset.h b/arch/sandbox/include/asm/reset.h
+index f0709b41c09f..2890e0dc09bd 100644
+--- a/arch/sandbox/include/asm/reset.h
++++ b/arch/sandbox/include/asm/reset.h
+@@ -10,6 +10,7 @@ struct udevice;
+ 
+ int sandbox_reset_query(struct udevice *dev, unsigned long id);
+ int sandbox_reset_is_requested(struct udevice *dev, unsigned long id);
++int sandbox_reset_get_count(struct udevice *dev, unsigned long id);
+ 
+ int sandbox_reset_test_get(struct udevice *dev);
+ int sandbox_reset_test_get_devm(struct udevice *dev);
+@@ -19,6 +20,8 @@ int sandbox_reset_test_assert(struct udevice *dev);
+ int sandbox_reset_test_assert_bulk(struct udevice *dev);
+ int sandbox_reset_test_deassert(struct udevice *dev);
+ int sandbox_reset_test_deassert_bulk(struct udevice *dev);
++int sandbox_reset_test_reset(struct udevice *dev);
++int sandbox_reset_test_reset_bulk(struct udevice *dev);
+ int sandbox_reset_test_free(struct udevice *dev);
+ int sandbox_reset_test_release_bulk(struct udevice *dev);
+ 
+diff --git a/drivers/reset/sandbox-reset-test.c b/drivers/reset/sandbox-reset-test.c
+index dfacb764bc77..64c205596c5e 100644
+--- a/drivers/reset/sandbox-reset-test.c
++++ b/drivers/reset/sandbox-reset-test.c
+@@ -96,6 +96,20 @@ int sandbox_reset_test_deassert_bulk(struct udevice *dev)
+ 	return reset_deassert_bulk(sbrt->bulkp);
+ }
+ 
++int sandbox_reset_test_reset(struct udevice *dev)
++{
++	struct sandbox_reset_test *sbrt = dev_get_priv(dev);
++
++	return reset_reset(sbrt->ctlp, 0);
++}
++
++int sandbox_reset_test_reset_bulk(struct udevice *dev)
++{
++	struct sandbox_reset_test *sbrt = dev_get_priv(dev);
++
++	return reset_reset_bulk(sbrt->bulkp, 0);
++}
++
+ int sandbox_reset_test_free(struct udevice *dev)
+ {
+ 	struct sandbox_reset_test *sbrt = dev_get_priv(dev);
+diff --git a/drivers/reset/sandbox-reset.c b/drivers/reset/sandbox-reset.c
+index adf9eedcba6d..71fba5b15da0 100644
+--- a/drivers/reset/sandbox-reset.c
++++ b/drivers/reset/sandbox-reset.c
+@@ -9,12 +9,14 @@
+ #include <reset-uclass.h>
+ #include <asm/io.h>
+ #include <asm/reset.h>
++#include <linux/delay.h>
+ 
+ #define SANDBOX_RESET_SIGNALS 101
+ 
+ struct sandbox_reset_signal {
+ 	bool asserted;
+ 	bool requested;
++	int reset_count;
+ };
+ 
+ struct sandbox_reset {
+@@ -31,6 +33,7 @@ static int sandbox_reset_request(struct reset_ctl *reset_ctl)
+ 		return -EINVAL;
+ 
+ 	sbr->signals[reset_ctl->id].requested = true;
++	sbr->signals[reset_ctl->id].reset_count = 0;
+ 	return 0;
+ }
+ 
+@@ -66,6 +69,21 @@ static int sandbox_reset_deassert(struct reset_ctl *reset_ctl)
+ 	return 0;
+ }
+ 
++static int sandbox_reset_reset(struct reset_ctl *reset_ctl, ulong delay_us)
++{
++	struct sandbox_reset *sbr = dev_get_priv(reset_ctl->dev);
++
++	debug("%s(reset_ctl=%p, delay_us=%lu)\n", __func__, reset_ctl,
++	      delay_us);
++
++	sbr->signals[reset_ctl->id].asserted = true;
++	udelay(delay_us);
++	sbr->signals[reset_ctl->id].asserted = false;
++	sbr->signals[reset_ctl->id].reset_count++;
++
++	return 0;
++}
++
+ static int sandbox_reset_bind(struct udevice *dev)
+ {
+ 	debug("%s(dev=%p)\n", __func__, dev);
+@@ -90,6 +108,7 @@ struct reset_ops sandbox_reset_reset_ops = {
+ 	.rfree = sandbox_reset_free,
+ 	.rst_assert = sandbox_reset_assert,
+ 	.rst_deassert = sandbox_reset_deassert,
++	.rst_reset = sandbox_reset_reset,
+ };
+ 
+ U_BOOT_DRIVER(sandbox_reset) = {
+@@ -125,3 +144,15 @@ int sandbox_reset_is_requested(struct udevice *dev, unsigned long id)
+ 
+ 	return sbr->signals[id].requested;
+ }
++
++int sandbox_reset_get_count(struct udevice *dev, unsigned long id)
++{
++	struct sandbox_reset *sbr = dev_get_priv(dev);
++
++	debug("%s(dev=%p, id=%ld)\n", __func__, dev, id);
++
++	if (id >= SANDBOX_RESET_SIGNALS)
++		return -EINVAL;
++
++	return sbr->signals[id].reset_count;
++}
+diff --git a/test/dm/reset.c b/test/dm/reset.c
+index dceb6a1dad38..043d7cb7e0fc 100644
+--- a/test/dm/reset.c
++++ b/test/dm/reset.c
+@@ -120,6 +120,73 @@ static int dm_test_reset_devm(struct unit_test_state *uts)
+ }
+ DM_TEST(dm_test_reset_devm, UTF_SCAN_FDT);
+ 
++static int dm_test_reset_reset(struct unit_test_state *uts)
++{
++	struct udevice *dev_reset;
++	struct udevice *dev_test;
++
++	ut_assertok(uclass_get_device_by_name(UCLASS_RESET, "reset-ctl",
++					      &dev_reset));
++	ut_asserteq(0, sandbox_reset_query(dev_reset, TEST_RESET_ID));
++
++	ut_assertok(uclass_get_device_by_name(UCLASS_MISC, "reset-ctl-test",
++					      &dev_test));
++	ut_assertok(sandbox_reset_test_get(dev_test));
++
++	/* Verify reset_count starts at 0 */
++	ut_asserteq(0, sandbox_reset_get_count(dev_reset, TEST_RESET_ID));
++
++	ut_assertok(sandbox_reset_test_assert(dev_test));
++	ut_asserteq(1, sandbox_reset_query(dev_reset, TEST_RESET_ID));
++
++	ut_assertok(sandbox_reset_test_reset(dev_test));
++
++	/* Verify reset was pulsed (count incremented) */
++	ut_asserteq(1, sandbox_reset_get_count(dev_reset, TEST_RESET_ID));
++	ut_asserteq(0, sandbox_reset_query(dev_reset, TEST_RESET_ID));
++
++	ut_assertok(sandbox_reset_test_free(dev_test));
++
++	return 0;
++}
++DM_TEST(dm_test_reset_reset, UTF_SCAN_FDT);
++
++static int dm_test_reset_reset_bulk(struct unit_test_state *uts)
++{
++	struct udevice *dev_reset;
++	struct udevice *dev_test;
++
++	ut_assertok(uclass_get_device_by_name(UCLASS_RESET, "reset-ctl",
++					      &dev_reset));
++	ut_asserteq(0, sandbox_reset_query(dev_reset, TEST_RESET_ID));
++	ut_asserteq(0, sandbox_reset_query(dev_reset, OTHER_RESET_ID));
++
++	ut_assertok(uclass_get_device_by_name(UCLASS_MISC, "reset-ctl-test",
++					      &dev_test));
++	ut_assertok(sandbox_reset_test_get_bulk(dev_test));
++
++	/* Verify reset_count starts at 0 */
++	ut_asserteq(0, sandbox_reset_get_count(dev_reset, TEST_RESET_ID));
++	ut_asserteq(0, sandbox_reset_get_count(dev_reset, OTHER_RESET_ID));
++
++	ut_assertok(sandbox_reset_test_assert_bulk(dev_test));
++	ut_asserteq(1, sandbox_reset_query(dev_reset, TEST_RESET_ID));
++	ut_asserteq(1, sandbox_reset_query(dev_reset, OTHER_RESET_ID));
++
++	ut_assertok(sandbox_reset_test_reset_bulk(dev_test));
++
++	/* Verify resets were pulsed (counts incremented) */
++	ut_asserteq(1, sandbox_reset_get_count(dev_reset, TEST_RESET_ID));
++	ut_asserteq(1, sandbox_reset_get_count(dev_reset, OTHER_RESET_ID));
++	ut_asserteq(0, sandbox_reset_query(dev_reset, TEST_RESET_ID));
++	ut_asserteq(0, sandbox_reset_query(dev_reset, OTHER_RESET_ID));
++
++	ut_assertok(sandbox_reset_test_release_bulk(dev_test));
++
++	return 0;
++}
++DM_TEST(dm_test_reset_reset_bulk, UTF_SCAN_FDT);
++
+ static int dm_test_reset_bulk(struct unit_test_state *uts)
+ {
+ 	struct udevice *dev_reset;
 -- 
 2.43.0
 
-base-commit: 57460fde4ba84d67de4066ee1141e89e8139ed23
