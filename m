@@ -4,140 +4,114 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1EF7CCD13DA
-	for <u-boot@archiver.kernel.org>; Tue,  5 May 2026 05:03:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1522FCD13DA
+	for <u-boot@archiver.kernel.org>; Tue,  5 May 2026 05:42:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 59FFF84687;
-	Tue,  5 May 2026 07:03:56 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
+	by phobos.denx.de (Postfix) with ESMTP id 3D4CA84687;
+	Tue,  5 May 2026 07:42:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="DuMyc/iX";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="xDNvLDDv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B14088468B; Tue,  5 May 2026 07:03:55 +0200 (CEST)
-Received: from SA9PR02CU001.outbound.protection.outlook.com
- (mail-southcentralusazlp170130001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c10c::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id BC99684692; Tue,  5 May 2026 07:42:05 +0200 (CEST)
+Received: from mail-yx1-xb132.google.com (mail-yx1-xb132.google.com
+ [IPv6:2607:f8b0:4864:20::b132])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8157B84683
- for <u-boot@lists.denx.de>; Tue,  5 May 2026 07:03:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 893EF80086
+ for <u-boot@lists.denx.de>; Tue,  5 May 2026 07:42:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=altera.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tien.fong.chee@altera.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=aQqA1CprN+9pcKsHd8WYD2xdk3Gok+0ePZaYKivCc3hkpAuXW/mX3Ne7gf2RoLnv5egDjPN8Sa2hRROSJfK65BMDolsMcyR5Bti4VTXgEkcJojOq5Kn1vD/F4t2+o6oc/Ahnap9R4t0UL7OKNd+gfomPoZMYUTKDkXm5e8d/S3Tx51ZbTMDwRybnYi4H5DhYnfwxzBkotuNchf8DErsL6epongliVKVflrVrd6saAJPLe9ZhrLtUa1kIAMYX28B4HUPbpjsCIMEU4l2zGqk3YHS3JXAFC8ffdmGgojWilO2KqLxzqbXktcp4VvzzGog1+e+vi1x/odXAuJZR7oUQ9w==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=EarhyF4NaZ1udSx+tEcdmZKBO6FLIsAO9+72BZmguOk=;
- b=efrLQPcS3HPQnFmMrXARzFnLOq4+lwxiGiDZLjLQMSjVhF3iTxxlrOxsXBi0gl3LtVvcOjsnoVhP/CtGaEiL1zKmWWE8yYtPzsAjzTtUZXyhOWDz/LkuLhFGP5BR1gXb3c5RZymh04oA1nSVu1lwVBPDD3DDCUAaVKFjONnRTH2BXt0dyYgr/Uj962wmDABgZIUh/IqobGrfJZj/8OtdiGWZj2l8owmSlZ2+eXiPDiKffC3qdS5pbZvCaWB3aNFqvA/TxOZfG6qy/1bEmKzkwDRTCc4lQSefrb8yls6XUMaG+CwJULCY8MWbJcydmi3bqffQedbUGZx7HMGBtysBfw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
- dkim=pass header.d=altera.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=EarhyF4NaZ1udSx+tEcdmZKBO6FLIsAO9+72BZmguOk=;
- b=DuMyc/iX2sR1US7oncBekhtAPloqjychOC1Y792NPDoNOCNzmBdcyltUldIeOdaCrAa7yKxRq9+/mSxO5tggD8NvMM/GbkKR25+uinyWvtFjvi1FRjnbEM85EQ2NcGMLUpUNtdDHpu+/TfWe6pmL/fooJarVJa0Z0q7FUf19iXBTVqvUm8KMqsdXT4rk2APiWvzQyITaerUSWfmndUh7nAGWwnMz9aVFGdaaaRhmrPYlM8CTa6jLpc4qdpkPk1/ra+hLDlduOTfULBbQUY1RwGV+KeLU2s6n3SgqY8Ct2sI10xFFe/dVuanydgUhYtQ4dIpAZHwgq+UA4Ao3aJ0dQg==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=altera.com;
-Received: from LV8PR03MB8137.namprd03.prod.outlook.com (2603:10b6:408:295::8)
- by LV4PR03MB8282.namprd03.prod.outlook.com (2603:10b6:408:2d8::11)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9870.25; Tue, 5 May
- 2026 05:03:50 +0000
-Received: from LV8PR03MB8137.namprd03.prod.outlook.com
- ([fe80::efa9:4b97:3b4a:8235]) by LV8PR03MB8137.namprd03.prod.outlook.com
- ([fe80::efa9:4b97:3b4a:8235%4]) with mapi id 15.20.9870.023; Tue, 5 May 2026
- 05:03:50 +0000
-Message-ID: <5ce3b23e-97a7-46b5-a0d6-2ba28d7a2c68@altera.com>
-Date: Tue, 5 May 2026 13:03:42 +0800
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/3] arm: socfpga: Consolidate dram_bank_mmu_setup()
-To: alif.zakuan.yuslaimi@altera.com, u-boot@lists.denx.de
-Cc: Marek Vasut <marex@denx.de>,
- Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
- Tom Rini <trini@konsulko.com>, Brian Sune <briansune@gmail.com>,
- Yao Zi <me@ziyao.cc>, Patrice Chotard <patrice.chotard@foss.st.com>,
- Peng Fan <peng.fan@nxp.com>, Simon Glass <sjg@chromium.org>
-References: <20260428033230.7777-1-alif.zakuan.yuslaimi@altera.com>
- <20260428033230.7777-2-alif.zakuan.yuslaimi@altera.com>
-Content-Language: en-US
-From: "Chee, Tien Fong" <tien.fong.chee@altera.com>
-In-Reply-To: <20260428033230.7777-2-alif.zakuan.yuslaimi@altera.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: SG2PR06CA0209.apcprd06.prod.outlook.com
- (2603:1096:4:68::17) To LV8PR03MB8137.namprd03.prod.outlook.com
- (2603:10b6:408:295::8)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yx1-xb132.google.com with SMTP id
+ 956f58d0204a3-651c366f7efso4619199d50.1
+ for <u-boot@lists.denx.de>; Mon, 04 May 2026 22:42:03 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1777959722; cv=none;
+ d=google.com; s=arc-20240605;
+ b=bJsBKUFVzFkrMmxbZRieebmW5EAaYMSTluuUTZCrNIEjm/7IAEG/b84T6m/HeTzUmL
+ HuEGlT32zf2LB15R9y2B+DqtDdtMgdTy6tnz/hDQpW5JGeMdtb9sXhRvu3NyW1DYmRs8
+ b+z9rvXINBg++VAlPGrkcMRmuBCebcJdqXNQiRvEVhiXFdogQULWFxHOXjKvF6J2GSlT
+ PgJ+g1I/RDsef4PuWiqrjkrzqr4dCwLkhkpfrKVOEZBwSGNhMlSH2U3prdYFNvOjtZfW
+ BYyFmJaj1+GWWe/qNkmcLA4k0aNm0CflujEcTo6e31YQ2vINSLj3yPVyDUmb6gDaUuwu
+ vUgg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=zJo7QaGoxyX6TlHT36IvZ0aaUkuKJt/UWnFBQDxzrv0=;
+ fh=Jg1GwjOEZ1S4lNqzrPlyRpppkKciiPaSkBs16SCT10U=;
+ b=eAw5i30q300NnascxkUnaT7dk3MdvDumEsKMG8FWBkzF924BnV1r6cjsmlJ5NtCU8I
+ 6AYlZ9vhYtjSN/8IFBRivXobY1AV75xLZqv7YZ41je0ZhFnY0L5CP0baKqr/joQihcpK
+ SZTgVE0qOjHY5j95+z6gya7fB2IchvRjFo78xPb3TTAKcoUwAZ+SQs3JSosqoFYlWPwM
+ 3MW8CbZI7VLwwegvlhpjPXZ5HKkXUa2tOZVxe6wsySO7QnIAJ8dFkp/P4E/Xbk3dVhnc
+ yUJT+26tz4xXs80WPKvyLQz4TEFAa3BP+JA8+nAy0NRAl+uMFkC5Too7E5OlzogdssEz
+ 9wVg==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1777959722; x=1778564522; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=zJo7QaGoxyX6TlHT36IvZ0aaUkuKJt/UWnFBQDxzrv0=;
+ b=xDNvLDDvhePdgqfX87CTeGbyYNncnj/TpRTyGF3Oefo+nnkpmRmnF4cP5GQ91ilMHS
+ CE7/nJZ79cNuUVp8EYeav+16aXLf0GCNxDFIffrfZ0yA+SOe/1dy7Tr3ZUU89ozxBR5+
+ gNbI9824SJ0fYyPXts6XTzB6B4gHiPlmZRZrGv1M4ta4HhAqSEBseq0bkmCDo0DULzFp
+ 8PDFkoBL6Ret3wPHeajYzcKwJAQObQ02ESAIejEzlndCMPK6LyMlW1Ofw6U+WgKvTaYx
+ CQIeYGfGgQTwBwXRw220VUjEb4JKlgdcqw6HHqO7SWDwKW6LzhyhfNrxd81IDo17uO7g
+ qPfg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1777959722; x=1778564522;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=zJo7QaGoxyX6TlHT36IvZ0aaUkuKJt/UWnFBQDxzrv0=;
+ b=sNUDX4+gHTwnm6E5T9xB6x4aJl2yZ0piaBMN4OKan2cThkhu641eGKhmiM0MD1cO40
+ nmG5Me630tIX3bT6AoSWRbAKpH37GoU4ZNl024HPfRypPdBTcWFBP+kLhh6io5nDbLjH
+ zI7jw285ZihmnEh3gBqPWsa5NtWuU7rP8lH9OKFIATunTNBIKJYXsPcbX6Rm4AE5T/7T
+ GcAoGk/EIuBM8RjzdNor894gkfNk41Xp5X1r4WgnBeIv7X1QEWE3p3yR1wlYGx9M4Bxo
+ BHccx3ZV/Gp0qrxha6H6YngsZ7DM8skKPHHxEvuw1nObMKq3s+3F6p4d1tWlf9MoDIvt
+ O4kg==
+X-Gm-Message-State: AOJu0YxtPMYsDi/S7748qEwaJJj0gdb67DcQVDNs+4d94rj7EYDy+dxO
+ NF42R1j6NOh3u8xlR06VAecflZH/GZcKJJObhOTJWGX5OI4hSC4Uc30uoeYZZoOH6FNbvx+h9x4
+ 9qwCbRcka/FbPyDvZkOjitNUasMp1H2fD2jYuPc+l+w==
+X-Gm-Gg: AeBDieuM7DMyT/FbBEJVarRwMS4ppUdithpTq17m+npjYKw1xnbNCym1SgDMxTwq9qY
+ TaWKkIE8puzhXAGJuPaBm0Nfy9W3GrUlLj7x0OjW4pOYbSZIjuR9tVdGfS240Lh8dCVsWUEc6/f
+ 7j0ydJwX89d/KvcROh1WXdIJov9LRaD77BWZAXWlbnwD7SBNo9P5J7n0s1nsnXcaF5hsNuALsk4
+ HfoyF4/lmPr3JzmbXD2WUOoYK18uiOx4q2NYHuvLHzejruBY3WZC3iw0EOrcx4b0eOdbAcWeqk8
+ KHhtHlMMmo/RHF+f5peO90HQiclfjK4jyX4zpyny5+zbffaGoZFrqNsc+kg8/2JxgGJZUgJQraX
+ PjppVenVvbwBvHcNLyo87BHbAkhxQPJUqJeMt4pEZ5c9RPjcfTqgWm4abeTiW7JTHLSs+i7e8Ig
+ uK7IsRLw8wiutBPymElMjZaFsv9BHMtDyR1lCOqf/PEQfH22SZkmw2pGMegICVa1y3t5qByEFqm
+ EOsOUxskikcM0TRc1ZzNbKruZHOZCCaKdlYHS4YDSD+Px68Mvd4eFLIfMP6D869wUBdzQyA8ooW
+ gLLIqIaYId6rGcOKHGZyQVUE/kLoeOWYalONYB1zkENU+ffe17lfkQVc8cti7hie4h8AiYgcgUv
+ 3Ejuv2ojT8WcqbfDnGhrB5QNt39A=
+X-Received: by 2002:a05:690e:e8d:b0:651:e0cd:5874 with SMTP id
+ 956f58d0204a3-65c3db4e820mr13446746d50.47.1777959722162; Mon, 04 May 2026
+ 22:42:02 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: LV8PR03MB8137:EE_|LV4PR03MB8282:EE_
-X-MS-Office365-Filtering-Correlation-Id: 6ccdc449-24bb-4831-09de-08deaa63b213
-X-MS-Exchange-AtpMessageProperties: SA
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|366016|1800799024|376014|22082099003|18002099003|56012099003|55112099003;
-X-Microsoft-Antispam-Message-Info: ul4g0c7/OuMznIZ6UTn1noy+B+UAXqHAc/Rg8VxYaHb3f2gQqYyfd0WJejKsA9Tcaz+d3L8vWSMd9EvYw6IPVmNNRJe2+W/e42Wh1AWFj5S/sUkNx7Ln41oPkXn3QH+QsVqDXB+VypL2XwuUTA0hNudH6suRUIfw8zNWj9svMFZOurhUIrTW5/+WlmCMwkdjEMCo7BfYg5DkmHMawh7wlgllslZtSp4luHKBO5dL0Yz7HwjAswBpPXEgYF0UEXThlmxBEkP0UMkz9QNTD2iiIGoizU2rxgx13T8dWpfc8t9JpSxmh0FjkjxBCqgaVYx/wqzOQOyySXQw+ehKx9wLmZVCAqwRvlAybcV4w46Bxe84ePOxOmt0PYbhllYGTO1jgeSpOl8DA9ZVuEuWurUU30+f06m8RgfVXvaIkZahR2404W10yydqTRIySdCeOk3+EFkcsEAxsZkCCVipFiinBFQiE5rVaghcA8rh/F8lOYYEJqL3mcXl3LuEBhSYP1TGQQJ+IFIhILT/bPECDLZgrYwv2jYez5Y+88cN3RtCRJY7bN3H0zwsXk4bswDyYK0CDRw7iOi6j9YT6xdmw8OVwZZr8NXtri3sIn8kYjzr6rC7dgv7tzpROy7lFPE+lPqUpY5u94PXTDqVzqmVuiPSYa666r3KUzPgAGWOOrtZIfHiM5pOZts5eeK9YNT+hkf1
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:LV8PR03MB8137.namprd03.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(1800799024)(376014)(22082099003)(18002099003)(56012099003)(55112099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?SmNpc2JwZXhUa3owcHMyT2dzTEgvN3o1ZSt2bkxaTEx3Qi81UmhxZ2Y3WEx0?=
- =?utf-8?B?dHlqcDZtbjh5NStMUklvS2lQcHhlK3pKNk41WDRyWE1MU1dnTHdMcXhvQitX?=
- =?utf-8?B?Wmg1YWZnNTBhTnFIdlpoWklrTWpWay92Y01Od2h1Q25NbG9QOU1hbTFyV3d4?=
- =?utf-8?B?WjU4ZU9vRUJ0Vnp6ZEVPRVpCOHYweE9iYTFoaUxnYUJsTHBRRWNNY08yTS9I?=
- =?utf-8?B?bVpUZjlKWEpNeGk3N2N5UzRxQkg3KzlkUFhuUE1EVUNodGw0VkxmUlRXOUoy?=
- =?utf-8?B?ckt2RjAvMEtSeTc2a2YyRTc2ZnpJeGdPZHdIZmpidDlTU24zRGN0NjREczVY?=
- =?utf-8?B?aGlqZ1Z5aDZsSlJrdVpFWDhCZEtiOExBQmtpQ3JSZ3M3b2ZtaVByMi9qUitW?=
- =?utf-8?B?NkhKYlNJZ1V1MVRnWHEzY0NGM0RiZklYRktoajhRZWpvZlNnL1d2c0duZkho?=
- =?utf-8?B?RDZBdW85QU41Wms4RENuL0p1OHN3ZzdnN2t0bHRaSnFmZzV3dE14UWVjSXkw?=
- =?utf-8?B?eWs3Y3kzR2d3L1Uxa2Yrd0NndnB5UFd1QnFsNHRadlkwbFc5V3Rnc2hnQmZU?=
- =?utf-8?B?Y0FCQldOekNhOVlIVERENmN3RDlLOXZaVmRsS2h2eTlDNlNja1QwZ0xmRFVj?=
- =?utf-8?B?VHl0VkVuTWZpT1htVFJXbmxZdDUzd1FETXJQV0lFNjlMdWRtcEFSTnJVQW1z?=
- =?utf-8?B?bGZQL1dYQzlrakZMVmFUQnd1REdYbWh6SzJGKzc5a1dSSE10cFNreC84L0ZP?=
- =?utf-8?B?bGdtd3FxVTJnS0piVnpOZGJmZXF1c01yQkJreWYxVlZ4V3hoNENoc3NCRHdN?=
- =?utf-8?B?dFFvMTNab2gxWnZyS3F2bHp1YUk1a0dyMklKSjZpeldmQkZqUlVBSGRidStx?=
- =?utf-8?B?Z2NaSDdMV0E0Mm5IN0NHRmllOWx2VWdlM0hqQmwyV0VuUmI4OHp6aVdoWHBu?=
- =?utf-8?B?UzM1Y0VYOSt3NjBVT3U2c0tvaDcyYnBUVHQ1WG1rTmFmN3JKUmJpVU50OTFt?=
- =?utf-8?B?VzZWamFiOWJFUzYvWkIrbGxaTmQ1aHpVeGpZYVdoSjUwdEh4TVVqUFNGSnhP?=
- =?utf-8?B?NlRwZDRaUlJ3N2pKQXpjQVVaWUJsb0FlTnJoNmppaTh1Z3BIRHIza2p4T25m?=
- =?utf-8?B?Z1ZPa1JjOGJPYnRXSEN5eVQ5MHlSbDduUlJERkFZOVIxMXVqVE9Ldmhza0h3?=
- =?utf-8?B?U3U2RSt5clhTQzJMZGFGa1hIeXRhVTdZd1hrZTZNR0VGY1YwS1JJZEFBdkRX?=
- =?utf-8?B?S2luVHhCSjRRZ3Brd3JtQU5lOXFtV1FWWENFNVI5dWorQXROR1ZqMHdmK0I2?=
- =?utf-8?B?WkRpZVJJd2dGYTYyaHFRY3BJY3RMN05KRnRYZnpURjBrU2k3WU9hMTYzRlBN?=
- =?utf-8?B?ZUlteTlXWEJsYi9pVS9kQm5hT3hMOUp2SVRhbGtiQlZGVnJRZDF3UFhjNVBj?=
- =?utf-8?B?aERuU1g4K2gvU25DOGdrNyt4T2VGTEE2TmxGN0xIN1pNUmNkdTkyZXR3M1hU?=
- =?utf-8?B?R2pMdy9GU3h0cEJuL09WejRRZ3k0Q0xweUhDTFlhRklnUllXSmJTVUF1SXYz?=
- =?utf-8?B?OGgrK3ZoMXkwdkoydGY1anlsdW8yK3dQL0FXNXJWNlZrS3l5N0lvaTFkdmw5?=
- =?utf-8?B?ZkpGb1FCdSs5elhScDlIcnpBeG9XTDNtTjV1YVlBc0w1SCswL0kwNWsxejBK?=
- =?utf-8?B?aW1XQ1JmZDVIZ1NFcFpnY2Vsd0dqbW9ZSEkxSjFJeVd5V0o3Y013WU4zMHFC?=
- =?utf-8?B?eTVqb0VsV2dsMFczK2E0OGRFdjdKTVZZK2ZTa0hwTVQzQnhiQnpsOXRYVWNZ?=
- =?utf-8?B?RGVIalhQRzUxMGRhclQxTTZkSVprS1ZYODRSSjV2d3hWdFlPUHFqU0FKaHpG?=
- =?utf-8?B?TDJTUHcvQjhrbGJseVJ6WjZqVTNrNDE1NkNmbWIvUDdpeG4wRGFjVmtGYlE2?=
- =?utf-8?B?bU1kSVJpVjlTTVpMNzdCTWplZi83L0tCcU1xRjFicmtOd3R3Ym14K1lDWExD?=
- =?utf-8?B?QW90MjE4S2RVVm90c3NnaWVmQnozUGJjOHFVbXpBT3hSWmdNdGx1d3hKcVhP?=
- =?utf-8?B?cU5mZ2lBaUtDUklXRXRLZzFzakhnazJENVBaQkNGNGNTdUFkNUVpRloxV1Fn?=
- =?utf-8?B?aE1OV2x0dTVIQmZCTW5Ha3UzN0JieEZSYkoxYXM4RmY5NlI4alJTdk56ayto?=
- =?utf-8?B?N0pUS0Y4bGl3KzFocEgvTCtBYm1yOTcrb0NGRTV1dlBHOFdYU28yWmF5bWZR?=
- =?utf-8?B?V2xhZTFTUWF2ckFWNTJTZTQ4Q0RaRnJPQzdnanBVZ0YrbEF3aWhzUUF0Wms2?=
- =?utf-8?B?bElxTDhjNWk0TXF0dGx3czVKcWFjUklIMllsbUcxSFpPdmtVU0IrM2owQ2lR?=
- =?utf-8?Q?nuaE+jsX5aUEbqB8=3D?=
-X-OriginatorOrg: altera.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 6ccdc449-24bb-4831-09de-08deaa63b213
-X-MS-Exchange-CrossTenant-AuthSource: LV8PR03MB8137.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 May 2026 05:03:50.3388 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: hvXc3FHbqw/2+JnF69GWGCZ8FBcSMMmIr6ry9KeUxMSOgIe2N5ACfcl+xsghd2qvDVVas9ROzYS+v7MsodACltPzwzqv/ksylUSYTchDHLg=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV4PR03MB8282
+References: <20260504-extrawarn-sync-v1-0-b19301d1948a@cherry.de>
+ <20260504-extrawarn-sync-v1-3-b19301d1948a@cherry.de>
+In-Reply-To: <20260504-extrawarn-sync-v1-3-b19301d1948a@cherry.de>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Tue, 5 May 2026 08:41:25 +0300
+X-Gm-Features: AVHnY4LOrapsd8e4CvgfV252eofNKkG0criu5difRW2w5sxHdDxkPFAcsaXA_OU
+Message-ID: <CAC_iWjLX5zhwakHO=SUqzBZmHA+bVSmG8=0y4D96pCGfPJgRWg@mail.gmail.com>
+Subject: Re: [PATCH RFC next 03/18] scripts/Makefile.extrawarn: migrate -Wvla
+ to a U-Boot-specific file
+To: Quentin Schulz <foss+uboot@0leil.net>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ Simon Glass <sjg@chromium.org>, Mattijs Korpershoek <mkorpershoek@kernel.org>, 
+ David Lechner <dlechner@baylibre.com>,
+ Jerome Forissier <jerome.forissier@arm.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Simon Glass <simon.glass@canonical.com>, Raymond Mao <raymondmaoca@gmail.com>, 
+ Michal Simek <michal.simek@amd.com>, Adriano Cordova <adrianox@gmail.com>, 
+ Sughosh Ganu <sughosh.ganu@arm.com>, Yao Zi <me@ziyao.cc>,
+ Rasmus Villemoes <ravi@prevas.dk>, 
+ Quentin Schulz <quentin.schulz@cherry.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -154,64 +128,81 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Alif,
-
-
-On 28/4/2026 11:32 am, alif.zakuan.yuslaimi@altera.com wrote:
-> From: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
+On Mon, 4 May 2026 at 16:20, Quentin Schulz <foss+uboot@0leil.net> wrote:
 >
-> Relocate the dram_bank_mmu_setup() implementation from misc_arria10.c to
-> the common socfpga misc.c and update the function to correctly handle both
-> pre-relocation and post-relocation cases for DRAM cache enabling for
-> consistent MMU/dcache setup across Arria10 and CycloneV platforms.
+> From: Quentin Schulz <quentin.schulz@cherry.de>
 >
-> These changes help to improve maintainability and consistency of DRAM
-> initialization as well as MMU configuration for Arria10 and CycloneV
-> platforms.
+> In the next commits, we'll be synchronizing scripts/Makefile.extrawarn
+> with the Linux kernel's at version 6.1 which is what we've been claiming
+> we've synced to for a while but that isn't true.
 >
-> New Kconfig is introduced to enable this implementation only on the default
-> Arria10 and CycloneV boards as this will increase the SPL size which
-> will exceed some Gen5 devices' SPL size limit.
+> In kernel commit 0bb95f80a38f ("Makefile: Globally enable VLA warning"),
+> available in v4.20, -Wvla is now enabled tree-wide and not present in
+> scripts/Makefile.extrawarn anymore. When we'll be syncing to v6.1, we'll
+> therefore be losing this flag (since it's not in our root Makefile). We
+> could backport the changes to the root Makefile to our root Makefile but
+> U-Boot is not VLA-free unlike the kernel.
 >
-> Fixes: e26ecebc684b ("socfpga: arria10: Allow dcache_enable before relocation")
+> We have two options:
+> - backport the changes to the root Makefile and disable it in
+>   scripts/Makefile.extrawarn.u-boot,
+> - only enable it in scripts/Makefile.extrawarn.u-boot, with the same
+>   warn level as currently: 3,
 >
-> Signed-off-by: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
+> For now, do the second option. We should probably go for the first
+> option in the long term and try to synchronize our flags with the
+> kernel's. Much bigger undertaking than desired right now.
+>
+> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 > ---
->   arch/arm/mach-socfpga/Kconfig        |  1 +
->   arch/arm/mach-socfpga/misc.c         | 31 ++++++++++++++++++++++++++++
->   arch/arm/mach-socfpga/misc_arria10.c | 26 -----------------------
->   3 files changed, 32 insertions(+), 26 deletions(-)
+
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+
+>  Makefile                          | 1 +
+>  scripts/Makefile.extrawarn        | 1 -
+>  scripts/Makefile.extrawarn.u-boot | 9 +++++++++
+>  3 files changed, 10 insertions(+), 1 deletion(-)
 >
-> diff --git a/arch/arm/mach-socfpga/Kconfig b/arch/arm/mach-socfpga/Kconfig
-> index fb98b647442..e2fdd6bb30f 100644
-> --- a/arch/arm/mach-socfpga/Kconfig
-> +++ b/arch/arm/mach-socfpga/Kconfig
-> @@ -115,6 +115,7 @@ config ARCH_SOCFPGA_CYCLONE5
->   config ARCH_SOCFPGA_GEN5
->   	bool
->   	select SPL_ALTERA_SDRAM
-> +	select SPL_CACHE if SPL
-
-
-Concern: Two-step SPL_CACHE Kconfig creates dangerous intermediate 
-bisect state
-
-Impact:
-
-Bisect or backport landing only patch 1 forces SPL_CACHE=y for 
-TARGET_SOCFPGA_TERASIC_SOCKIT,
-
-TARGET_SOCFPGA_EBV_SOCRATES, TARGET_SOCFPGA_SOFTING_VINING_FPGA. SPL 
-exceeds 64 KiB limit and fails to boot.
-
-Fix:
-
-Remove the 'select SPL_CACHE if SPL' hunk from patch 1 entirely.
-
-Add the correct conditional form 'select SPL_CACHE if SPL && 
-SOCFPGA_ECC_SUPPORT' only in patch 3 alongside SOCFPGA_ECC_SUPPORT.
-
-Best regards,
-
-Tien Fong
-
+> diff --git a/Makefile b/Makefile
+> index 49d9740327e..eb61df70838 100644
+> --- a/Makefile
+> +++ b/Makefile
+> @@ -1025,6 +1025,7 @@ KBUILD_CFLAGS += $(call cc-disable-warning, unused-but-set-variable)
+>  KBUILD_CFLAGS   += $(call cc-option,-Werror=date-time)
+>
+>  include $(srctree)/scripts/Makefile.extrawarn
+> +include $(srctree)/scripts/Makefile.extrawarn.u-boot
+>
+>  # Add user supplied CPPFLAGS, AFLAGS and CFLAGS as the last assignments
+>  KBUILD_CPPFLAGS += $(KCPPFLAGS)
+> diff --git a/scripts/Makefile.extrawarn b/scripts/Makefile.extrawarn
+> index 4e1714c9484..c5ed501d374 100644
+> --- a/scripts/Makefile.extrawarn
+> +++ b/scripts/Makefile.extrawarn
+> @@ -65,7 +65,6 @@ warning-3 += -Wpointer-arith
+>  warning-3 += -Wredundant-decls
+>  warning-3 += -Wswitch-default
+>  warning-3 += $(call cc-option, -Wpacked-bitfield-compat)
+> -warning-3 += $(call cc-option, -Wvla)
+>
+>  warning := $(warning-$(findstring 1, $(KBUILD_ENABLE_EXTRA_GCC_CHECKS)))
+>  warning += $(warning-$(findstring 2, $(KBUILD_ENABLE_EXTRA_GCC_CHECKS)))
+> diff --git a/scripts/Makefile.extrawarn.u-boot b/scripts/Makefile.extrawarn.u-boot
+> new file mode 100644
+> index 00000000000..21872a5492b
+> --- /dev/null
+> +++ b/scripts/Makefile.extrawarn.u-boot
+> @@ -0,0 +1,9 @@
+> +# SPDX-License-Identifier: GPL-2.0
+> +# ==========================================================================
+> +#
+> +# Collection of warnings that are specific to U-Boot
+> +#
+> +# ==========================================================================
+> +ifneq ($(findstring 3, $(KBUILD_EXTRA_WARN)),)
+> +KBUILD_CFLAGS += $(call cc-option, -Wvla)
+> +endif
+>
+> --
+> 2.54.0
+>
