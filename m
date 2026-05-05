@@ -4,92 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CAEFECD3427
-	for <u-boot@archiver.kernel.org>; Tue,  5 May 2026 15:50:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4147FF8855
+	for <u-boot@archiver.kernel.org>; Tue,  5 May 2026 15:50:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E3995849AD;
-	Tue,  5 May 2026 17:49:48 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2F5C2849B2;
+	Tue,  5 May 2026 17:49:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="OHRS6U0D";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="LXrnuyFR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9FFBA8494B; Tue,  5 May 2026 16:01:15 +0200 (CEST)
-Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
- [IPv6:2a00:1450:4864:20::629])
+ id B324884951; Tue,  5 May 2026 16:03:05 +0200 (CEST)
+Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
+ [IPv6:2a00:1450:4864:20::535])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4E39C848FC
- for <u-boot@lists.denx.de>; Tue,  5 May 2026 16:01:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8FCB7848FC
+ for <u-boot@lists.denx.de>; Tue,  5 May 2026 16:03:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-bba0dde4f43so838807266b.3
- for <u-boot@lists.denx.de>; Tue, 05 May 2026 07:01:13 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1777989673; cv=none;
+Received: by mail-ed1-x535.google.com with SMTP id
+ 4fb4d7f45d1cf-67b6dc50b61so7908406a12.2
+ for <u-boot@lists.denx.de>; Tue, 05 May 2026 07:03:03 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1777989782; cv=none;
  d=google.com; s=arc-20240605;
- b=LbSt+bZnTTKqq+0FmfanqTcgt1xZqdAYJBd1zR9VhLkVo/uzUGMkh2iUFg5Xml6iZL
- 0w2SlXwdrAoBt/cY3uq/5P6QpKObvrkpUjA0rAviJvdm8fKbjanfCXjC6AdVshwlpuf/
- OkeGhF67dXv38rXHQDRIYqEDiSqEjWXS/nFLj3/Sgo9rV3Iv79jSGN42PywREkcbAj4S
- 3K3/XWRWFlSAjsNrqTny7e7Yx79RDyhBwt4OabgXu+hJ7dy8sYUdkOchsroVnGYlyPa8
- lUnr4t5dQAOTCukkLRMKvCMckq0WSUogSOo/wS+R6Up2CemTohqEJJgFUykrqeSnWK1Z
- HkuA==
+ b=F4PUOxaUGT9hETO9GEEK3eg7GlPtQ64tztPrS1owNnmSSTLf7cGS32b7yVuyCJGcMI
+ Z+54kw2TAc2HIlsSPuFY4eU3Ln7YqiNLkzA9JOyh/Cs7eXQE69ouTA8th7WTQtN9VMjn
+ 6kmn8/JOxwJjiZayzJOXOy0+Is45w/BtOv2ElxrcqDl1wAdsykVqWfPad/LP/ej7JvIM
+ Rzq/9X6OlglYkorKDdzD/ZwEUA961G6Y9Sw+kwlbH/bqFqMFkd2OSgIXpN03NzpEk/uU
+ /jUycWt+6K1hps9BIrTlpKoRsDLzDP66hyC8kotSuXTWkbM9TFYAJTXOoTCryybOp/1X
+ c/ug==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=IEr1X+AEq4NYb3E3owmDUy8jhHx+ItQjpnL+d13CAR0=;
+ bh=haSFuehn0ABHCYtrugr8FASxi3N5CreEL6jHMKo4DMA=;
  fh=CcNfW6dIjL9WUdVhhW/ZJ0mqXisjz2Ordk1F8mJ+6zw=;
- b=aotA9CRelKBdL9je3FT1hlETmpBqCj4rdFylxM1o6Qs5kd/GCTn2E0zItRd+dPhpJs
- Nm61qdlkiSj3wXc7IHDM5JNSQZ2XFa8guTtoOpA0mU3EE3nCBQnWuUtlCwqDWIEx8stl
- aBrfb3QXoTUYAgnHrCpwAsQJSKRjQ1Qcf6JWAvAQn4rGpHKQ/wWDKgMgFL4VYZj09Dvn
- 9U1F3sOh4+W6OZnLmQDYSHqHpH2znKQWWZ+4b4sJspM1H9Ij5HLIkWSlCI6ShoY0HKjx
- tu23q/Ps5GrwPhYAJiVKC0j8rbM2GuiBFCOCV++LMXPw79KssXr4l0723KzcHpmE0E/I
- GTYA==; darn=lists.denx.de
+ b=AXvF1vQtNXI7C565/K7PFw4troEcirSw8R2bqFdFBCqRmf4AsaErwYVGSzFdnbZ/9a
+ b8jYkrt5hVuZGTPUxO8SBRBoiUIHvkbPZS9vtLJObcPbkHUynlFZjRncaGe6zcZpoF8W
+ kKAHOp8Ux2UTtM/VeiGjLaKNPQIWyF/JoP4ldD0sjQVtgUleny9EIzFD5jsfvfF+mFw8
+ /nG5zv43Sp8zt4HP+8QjB1FOvOmr5WNCfBOdQeuRUjTgt7Q8Vx1twxGcniNm3mjuJ+aQ
+ ajlKwv7UvsnqCzKVrvfRl/jXY7Ba/WMcsHYdOtHoS8MXpWo2XmIvh9fq+AxfVSKR+b2x
+ 6qDg==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1777989673; x=1778594473; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1777989782; x=1778594582; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=IEr1X+AEq4NYb3E3owmDUy8jhHx+ItQjpnL+d13CAR0=;
- b=OHRS6U0DXcipQHZN/HK5oUZ4QaxkoxN7Gw0PwP5ZxNYsdtfdPZlujJLnZ0O/nOGWp4
- VpJcHW3w+fGfVSULc2i58vuA80ZIkxkB9hkqcCqehYvcY3dYHMtu1qwkJPSzfndIBgcE
- ZfkTHHXntzqMe/UtHqXkQqRoXFOc/xkqss4Bs=
+ bh=haSFuehn0ABHCYtrugr8FASxi3N5CreEL6jHMKo4DMA=;
+ b=LXrnuyFRu8FRIw8KzF1wS/+n/34T8ItGl+ewrzxziBeAiIWjuPUzot01/A0CEkuvpD
+ 4V5CzLMY4H1Ed6h8FVYoohG046vR2KGV/ODSX5gXiSKQw36nqa1N+8Knng7Ed7IhAuJ8
+ utBlC81kj/NO+96K04UMKG00R5/nEqFoijw6Y=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777989673; x=1778594473;
+ d=1e100.net; s=20251104; t=1777989782; x=1778594582;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=IEr1X+AEq4NYb3E3owmDUy8jhHx+ItQjpnL+d13CAR0=;
- b=mW0pUVYMantr3aAswuwO6O3hEyepyDXsEWIZF9sNSvDp5cbJV5c3Jwh/LqrLNsFOR4
- dXe0csthrupLjICiHh5X6xnNdnh6Pm2YGh+o5NgO10przKwQh0DIKEASRRs6lu5dPnNQ
- TKWberQ8OXVeaWAWKub/x0hZj1HBSS4VufGsGZXIuNfTX495Ygojmdhv1djAB89UoFKg
- +t4gjiG7/qu/b+cvCaA/zmnFuQjxTp9V06U4p+TsgpSsMkrEcbuLdWP+f31QienIwZqu
- y1tPDZ/fiRuH2LxAEw+mYcjYmnI0xNQU6xVE8II3UY6/Fwv7dmAPwOgtUpYVzdwJs284
- iKYg==
-X-Gm-Message-State: AOJu0YwdW7SOAxp0xBBkCnzaTe3lEHpraebmLaVfAjX4HhtTdxRID3h0
- Lcdp0nEp/HKPg3lqg+MbYTiTiuPwl8aNggm0ZnOfko+d+ugzvuypWZEqxAUSIliijPWDSaN2u4k
- YhHMI8q5UvsCmg85rdfK5jwZpEU14jwJF9q43qEyW
-X-Gm-Gg: AeBDietW+2ShDCVGGQxtOYryFrTNI8i1ODkxoBlKUeXmd9MKFzkePF1Uf5YyYusfkEr
- vZaDbabkMD5RRutbWIFp9Nf0OpJJ14SjpWb8yEnnJde+mQ2pt8pfaHAeiNnUFkIRPRaQNYJm+2J
- /61lxi6AjBIFi46nSKtdx5dYTEGGZ0VatfvTPbDw/Gp9bP+jE7O/8yC9Ft1BHhdH4JbOtwBoVwZ
- pNsYijGlvepxSoz2eAQmeuHX1fjO5VIHZ6JoCauXluBBy8EwWnQFCUdmH9YhLWnhO3haei9tHOA
- kB4jcPzHva+JyKBI
-X-Received: by 2002:a17:907:c06:b0:bc1:6ec9:453f with SMTP id
- a640c23a62f3a-bc16ec95210mr606369066b.8.1777989671639; Tue, 05 May 2026
- 07:01:11 -0700 (PDT)
+ bh=haSFuehn0ABHCYtrugr8FASxi3N5CreEL6jHMKo4DMA=;
+ b=VtVMr2UPWewMn/z20l7tceOU+jFSNLfnNLcd6ODyPCYP0PYRMiKG5omLs7++7B+5Ea
+ 2/klzFAOjOwemQnr7wVR5Rvn2mXQG2oU3UmIIJLEEcIMMKKcNQ7rfE+kWnkZrjYQ29qX
+ JFgpGiZa7yIZQsDq0QEPNzXuLBfbl9pfVLO4LhS+Lw9gRJbQRUsQdM2VtRFCFLB4Tg46
+ +f85R0eTnY0Y/iYVAMhVEtzGyqNvtkJV+wOEInGtMo/DGTA5KrumHSJ+9QjPorUXhx35
+ 1DKplhSU+m1qld8fAPYxn+ZKkY2hnFWFjMv+PBwohbbkxFdai4bsYft68BXQQatslGLE
+ ttjg==
+X-Gm-Message-State: AOJu0Yw9pmg/yXLtix7PsqcL6AErrjoM2LUueMwmgWs2f+/xjwSCp3pC
+ uN3/Sf1Sucfi/FhrbDAkQYAnVXiRWno9VRMFJRZSfsakFv0NKWBid6BDBFsVEn7Zj61AFxVYbbP
+ uOp0BmaMtbJ6LtwqqFKG7IGwPp9Sndl9sPkC0/8R4
+X-Gm-Gg: AeBDievQ1uG7yxEWjCITjBapojdY90twj92ra1TOouDmhD6712NgujuBT192M3tvIYl
+ 1EQ16tSHaY30uT/hokOvfu6xCrBdYJ0ego3MZW6/CfqpR+FJF5lypuNvtrJKixnSwWHKPVxBzZX
+ OoQunfQ33mPvcT6AtCDV+i/UOfaQ1ebKZS+0TdbnzyC1tSa/4gwcC4cg6Y3PuzEo8c9X0FODTwC
+ H2AUOJImgu5qX5Al84I8of7DqTwYh7tSgXtp03dcXUsqvnXcIXlwB46uwnIko8pnDEqmrJfw28i
+ aX3NvzlZc8w47GSm
+X-Received: by 2002:a17:907:ea5:b0:bb7:beb9:b6d5 with SMTP id
+ a640c23a62f3a-bbffbf8531fmr862847066b.39.1777989780795; Tue, 05 May 2026
+ 07:03:00 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260505-qcom_spl-v5-0-11817415d664@seznam.cz>
- <20260505-qcom_spl-v5-4-11817415d664@seznam.cz>
-In-Reply-To: <20260505-qcom_spl-v5-4-11817415d664@seznam.cz>
+ <20260505-qcom_spl-v5-7-11817415d664@seznam.cz>
+In-Reply-To: <20260505-qcom_spl-v5-7-11817415d664@seznam.cz>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 5 May 2026 08:00:58 -0600
-X-Gm-Features: AVHnY4J7YSGcH43jmZTJ_z_eJdc4QDPo6V46JUTDE4f1sJuvnANrWNKPRN-h6Ww
-Message-ID: <CAFLszThNdiVOs5+q=tVZLxfr14_vxrjYA6rZ-=4J=9T6MAQfGg@mail.gmail.com>
-Subject: Re: [PATCH v5 04/11] mach-snapdragon: boot0.h: split out
- msm8916_boot0.h
+Date: Tue, 5 May 2026 08:02:48 -0600
+X-Gm-Features: AVHnY4LvwlLc5fbQOmSvW0cviJJoqzVEJkH93FHSlc833JEnn9Cok-tvggJJfeE
+Message-ID: <CAFLszTjUniOCbnGdR9_d8HmQrt8SFV_u8dDonPvOEyCeOUZCTA@mail.gmail.com>
+Subject: Re: [PATCH v5 07/11] mach-snapdragon: Kconfig: changes / additions to
+ support SPL
 To: michael.srba@seznam.cz
 Cc: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>,
  u-boot-qcom@groups.io, 
@@ -145,39 +145,60 @@ X-Virus-Status: Clean
 Hi Michael,
 
 On 2026-05-05T00:47:48, Michael Srba <michael.srba@seznam.cz> wrote:
-> mach-snapdragon: boot0.h: split out msm8916_boot0.h
+> mach-snapdragon: Kconfig: changes / additions to support SPL
 >
-> Prepare for supporting alternative boot0.h per-SoC by splitting out
-> the existing msm8916-specific code.
->
-> There is now a selection mechanism to choose a specific boot0.h
-> in the Kconfig. BOOT0_MSM8916_PSCI_WORKAROUND is the only option
-> right now, but more can be added. The toplevel boot0.h additionally
-> enables conditionally performing the include only in u-boot proper,
-> or only in SPL.
+> Select SUPPORT_SPL so SPL build can be enabled, disable SYSRESET_PSCI in SPL.
+> (SPL runs in EL3, so if SPL itself doesn't provide PSCI, nothing else will.)
 >
 > Signed-off-by: Michael Srba <Michael.Srba@seznam.cz>
 >
-> arch/arm/mach-snapdragon/Kconfig                   | 16 ++++++
->  arch/arm/mach-snapdragon/include/mach/boot0.h      | 58 +++-------------------
->  .../mach-snapdragon/include/mach/msm8916_boot0.h   | 54 ++++++++++++++++++++
->  configs/dragonboard410c_defconfig                  |  1 +
->  4 files changed, 77 insertions(+), 52 deletions(-)
+> arch/arm/Kconfig                 | 34 +++++++++++++++++++++++++++++++++-
+>  arch/arm/mach-snapdragon/Kconfig | 10 ++++++++++
+>  2 files changed, 43 insertions(+), 1 deletion(-)
 
-> diff --git a/arch/arm/mach-snapdragon/include/mach/boot0.h b/arch/arm/mach-snapdragon/include/mach/boot0.h
-> @@ -1,54 +1,8 @@
->  /* SPDX-License-Identifier: GPL-2.0+ */
-> +#if defined(CONFIG_SPL_BUILD)
->       b       reset
-> +#else
-> +#if defined(CONFIG_BOOT0_MSM8916_PSCI_WORKAROUND)
-> +#include 'msm8916_boot0.h'
-> +#endif
-> +#endif
+> diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
+> @@ -1149,9 +1150,40 @@ config ARCH_SNAPDRAGON
+>       select SAVE_PREV_BL_FDT_ADDR if !ENABLE_ARM_SOC_BOOT0_HOOK
+>       select LINUX_KERNEL_IMAGE_HEADER if !ENABLE_ARM_SOC_BOOT0_HOOK
+>       select SYSRESET
+> -     select SYSRESET_PSCI
+> +     select SYSRESET_PSCI if !SPL
+>       select ANDROID_BOOT_IMAGE_IGNORE_BLOB_ADDR
+>       select MMU_PGPROT
+> +     select SUPPORT_SPL
+> +
+> +     select OF_LIVE if USB_DWC3_GENERIC
+> +     select SPL_OF_LIVE if SPL_USB_DWC3_GENERIC
+> +     select ARMV8_SPL_EXCEPTION_VECTORS if SPL
 
-When neither CONFIG_SPL_BUILD nor BOOT0_MSM8916_PSCI_WORKAROUND is
-set, this expands to nothing, so start.S falls through into _TEXT_BASE
-etc. Is that intended?
+The commit message only mentions SUPPORT_SPL and SYSRESET_PSCI, but
+this hunk adds ~30 selects plus default overrides in
+mach-snapdragon/Kconfig. Please expand the message to cover the rest -
+in particular the OF_LIVE/SPL_OF_LIVE and DM_EVENT/SPL_EVENT
+selections gated on (SPL_)USB_DWC3_GENERIC are not obvious; readers
+will want to know what breaks without them.
+
+> diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
+> @@ -1135,6 +1135,7 @@ config ARCH_SNAPDRAGON
+>       bool "Qualcomm Snapdragon SoCs"
+>       select ARM64
+>       select DM
+> +     select DM_EVENT if USB_DWC3_GENERIC
+
+Just to check - does u-boot proper genuinely need DM_EVENT/OF_LIVE
+pulled in by USB_DWC3_GENERIC, or is this only required for SPL? DWC3
+has worked on Snapdragon without these so far. If it's only an SPL
+requirement, the proper-side selects should drop.
+
+> diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
+> @@ -1149,9 +1150,40 @@ config ARCH_SNAPDRAGON
+> +     select SPL_OF_REAL if SPL
+> +     select SPL_OF_CONTROL if SPL
+
+SPL_OF_REAL is already selected by SPL_OF_CONTROL (when
+SPL_OF_PLATDATA is not set) in dts/Kconfig, so this line is redundant.
+Also swap the order so SPL_OF_CONTROL comes first, since that's the
+option doing the work.
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
 
