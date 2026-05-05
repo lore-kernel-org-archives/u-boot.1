@@ -4,92 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1A94FF885A
-	for <u-boot@archiver.kernel.org>; Tue,  5 May 2026 02:22:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A1E0FF885A
+	for <u-boot@archiver.kernel.org>; Tue,  5 May 2026 02:44:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8B64F848A2;
-	Tue,  5 May 2026 04:20:40 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=seznam.cz
+	by phobos.denx.de (Postfix) with ESMTP id EF5BB84884;
+	Tue,  5 May 2026 04:44:01 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=seznam.cz header.i=@seznam.cz header.b="ija1ofGw";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="r2LPsScd";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="pJTpwjJy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 58EA8846DB; Tue,  5 May 2026 02:49:37 +0200 (CEST)
-Received: from mxd-1-a0f.seznam.cz (mxd-1-a0f.seznam.cz
- [IPv6:2a02:598:128:8a00::1000:a0f])
+ id 2B2AC8486A; Tue,  5 May 2026 04:44:00 +0200 (CEST)
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 03D6A846BE
- for <u-boot@lists.denx.de>; Tue,  5 May 2026 02:49:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 834EF84866
+ for <u-boot@lists.denx.de>; Tue,  5 May 2026 04:43:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=seznam.cz
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=michael.srba@seznam.cz
-Received: from email.seznam.cz by smtpc-mxd-5f4d8d5f6f-lmwqj
- (smtpc-mxd-5f4d8d5f6f-lmwqj [2a02:598:128:8a00::1000:a0f])
- id 6a4b6cce314538a76be2a090; Tue, 05 May 2026 02:49:05 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=seznam.cz; s=szn1;
- t=1777942145; bh=dTJMMFdtNtWdiTmpzpWmHwoEm39dt7qULBVFu+RrsD4=;
- h=From:Date:Subject:MIME-Version:Content-Type:
- Content-Transfer-Encoding:Message-Id:To:Cc;
- b=ija1ofGwNRdgsyydTO8H6SggeMmI0MSWy/kKuTIjq6NHUBL//PBAP9tSgqAmkDQLv
- S8anWVpj2q3Dms1WFoVtDgh17R3xonNCIoEtYSF0EWOIg8IebhZwC5G/tw/SmwMNwO
- wPtURg8bBU5A1z3NIUAj6C3You+kDafzaF4UGCcEnlR6vfrtzKYSPegpPGUvYfF9i2
- OFvlErrZyWLHjtY+EZGk4FGso8bDN0qsvtLBAlkPmSBSzU9791XOyR+B4EC0dBC/wv
- A99lk58o6+YGDQhEg01TXcn5p9x2/V6VSDlz16PjPvVMJeniEEqObQbIyMi1yNfeSu
- jnlnl5k769nQA==
-Received: from [127.0.0.1] (ip-111-27.static.ccinternet.cz [147.161.27.111])
- by smtpd-relay-7c7c659656-rb5ts (szn-email-smtpd/2.0.72) with ESMTPA
- id 7a70eb5d-23e3-48a4-9636-162deccf471e;
- Tue, 05 May 2026 02:48:14 +0200
-From: michael.srba@seznam.cz
-Date: Tue, 05 May 2026 02:47:50 +0200
-Subject: [PATCH v5 04/11] mach-snapdragon: boot0.h: split out msm8916_boot0.h
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp202.mailbox.org (smtp202.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4g8jWc5GXCz9tKj;
+ Tue,  5 May 2026 04:43:56 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1777949036;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=SpsXJ8DSLOAbOjiubTrhA2gOlZC4QBroMHb+Ww77DtQ=;
+ b=r2LPsScdZRH2PwSEV8KLKwRN2MKGEfqnEQDda9P6i0IKG1ocpQOvemWwylTZNW3lX98axD
+ nS4+axBZbRQ+oWEXIjrnXaGXLKVOYbgtEYI68DRG++ujCbLtcHI8nocEhIoq/+3mI05EuL
+ dRxwnFtqAfSL0/9mAR4DfP7e3lAySgx1RRcxwUDXrlx5j4x9zQrEYOdDRPq7zPyOcjF87g
+ D1ffxgxkx3pcgegElb5eIjBLXRtsUTvHvPOl1GWYkVSWKl+N2Vj1Nr2CpvG+zDXiem6xNH
+ ZaUV0Wtw5FlGOrvovT9azO/gDFIZq4EdUCfiy9dWNENvcHNpWuTy6s77OQE6xw==
+Authentication-Results: outgoing_mbo_mout;
+ dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=pJTpwjJy;
+ spf=pass (outgoing_mbo_mout: domain of marek.vasut@mailbox.org designates
+ 2001:67c:2050:b231:465::202 as permitted sender)
+ smtp.mailfrom=marek.vasut@mailbox.org
+Message-ID: <fca7dd0f-1037-4b9a-aff9-a490bb1639fb@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1777949035;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=SpsXJ8DSLOAbOjiubTrhA2gOlZC4QBroMHb+Ww77DtQ=;
+ b=pJTpwjJy4Yup+i2XS5c5mS9PGZkHHyDc/uF7scAdtQhzntdhOPieqcYue/T5H5jmG6aMhU
+ FWY0yA06moi3T1JyxkPPa7k3uiF0LF2S1gS0kv8CJZ6/Na1gxn5iOoAr3f/wojLyMK2N8a
+ Cfm/01V/rEQehSkTGUv0f1hKdbsjApGdcddR2WzT3DZpXpt1TR6gblOe+QaYu66zipDyXO
+ 6A+qdSiK4YBzcECG1lqnLXN8ivmQT1cWAAjS4afNRpAhtLR6RWWem99FGHWpa29vzhwPes
+ rD3v07obVHaglgO73lhm9rTCjXbfSVXnj8fw3vA8QwfewMcQSJC3Ba15Fw8MGg==
+Date: Tue, 5 May 2026 04:43:48 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Subject: Re: [PATCH 00/13] iMX8M: Covert to OF_UPSTREAM
+To: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@lists.denx.de,
+ kernel@puri.sm, u-boot@dh-electronics.com
+Cc: Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>,
+ Tom Rini <trini@konsulko.com>, "Lukas F. Hartmann" <lukas@mntre.com>,
+ Patrick Wildt <patrick@blueri.se>, Ye Li <ye.li@nxp.com>,
+ Frieder Schrempf <frieder.schrempf@kontron.de>,
+ Benjamin Hahn <B.Hahn@phytec.de>, Alice Guo <alice.guo@nxp.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Marco Franchi <marcofrk@gmail.com>, Alifer Moraes <alifer.wsdm@gmail.com>,
+ Angus Ainslie <angus@akkea.ca>, Heiko Thiery <heiko.thiery@gmail.com>,
+ Olaf Mandel <o.mandel@menlosystems.com>,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Matteo Lisi <matteo.lisi@engicam.com>,
+ Manoj Sai <abbaraju.manojsai@amarulasolutions.com>,
+ Emanuele Ghidoli <emanuele.ghidoli@toradex.com>,
+ Parth Pancholi <parth.pancholi@toradex.com>, Peng Fan <peng.fan@nxp.com>
+References: <20260425-imx8m-of-upstream-v1-0-07527be92e5d@nxp.com>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <20260425-imx8m-of-upstream-v1-0-07527be92e5d@nxp.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260505-qcom_spl-v5-4-11817415d664@seznam.cz>
-References: <20260505-qcom_spl-v5-0-11817415d664@seznam.cz>
-In-Reply-To: <20260505-qcom_spl-v5-0-11817415d664@seznam.cz>
-To: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>, 
- u-boot-qcom@groups.io
-Cc: Tom Rini <trini@konsulko.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@arm.com>, 
- Anshul Dalal <anshuld@ti.com>, Peng Fan <peng.fan@nxp.com>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>, 
- Quentin Schulz <quentin.schulz@cherry.de>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Andrew Davis <afd@ti.com>, 
- Hrushikesh Salunke <h-salunke@ti.com>, 
- Dario Binacchi <dario.binacchi@amarulasolutions.com>, Ye Li <ye.li@nxp.com>, 
- Andre Przywara <andre.przywara@arm.com>, 
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>, 
- Leo Yu-Chi Liang <ycliang@andestech.com>, 
- Andrew Goodbody <andrew.goodbody@linaro.org>, Dhruva Gole <d-gole@ti.com>, 
- Kaustabh Chakraborty <kauschluss@disroot.org>, 
- Jerome Forissier <jerome.forissier@arm.com>, 
- Heiko Schocher <hs@nabladev.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Lukasz Majewski <lukma@denx.de>, 
- Mateusz Kulikowski <mateusz.kulikowski@gmail.com>, 
- Dinesh Maniyam <dinesh.maniyam@altera.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Patrice Chotard <patrice.chotard@foss.st.com>, 
- Patrick Delaunay <patrick.delaunay@foss.st.com>, 
- Michal Simek <michal.simek@amd.com>, Yao Zi <me@ziyao.cc>, 
- Peter Korsgaard <peter@korsgaard.com>, 
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>, 
- Casey Connolly <casey.connolly@linaro.org>, 
- Tingting Meng <tingting.meng@altera.com>, 
- Tien Fong Chee <tien.fong.chee@altera.com>, Alice Guo <alice.guo@nxp.com>, 
- George Chan <gchan9527@gmail.com>, 
- Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>, 
- Alexey Charkov <alchark@gmail.com>, Ronald Wahl <ronald.wahl@legrand.com>, 
- Michael Trimarchi <michael@amarulasolutions.com>, 
- Michael Srba <Michael.Srba@seznam.cz>
-X-Mailer: b4 0.15.1
-X-Mailman-Approved-At: Tue, 05 May 2026 04:20:34 +0200
+X-MBO-RS-ID: a2baf2bf967a2eab4d8
+X-MBO-RS-META: eib5m1cjaisy4jjg5fygwyo865j3ns9z
+X-Rspamd-Queue-Id: 4g8jWc5GXCz9tKj
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,188 +108,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Michael Srba <Michael.Srba@seznam.cz>
-
-Prepare for supporting alternative boot0.h per-SoC by splitting out
-the existing msm8916-specific code.
-
-There is now a selection mechanism to choose a specific boot0.h
-in the Kconfig. BOOT0_MSM8916_PSCI_WORKAROUND is the only option
-right now, but more can be added. The toplevel boot0.h additionally
-enables conditionally performing the include only in u-boot proper,
-or only in SPL.
-
-Signed-off-by: Michael Srba <Michael.Srba@seznam.cz>
----
- arch/arm/mach-snapdragon/Kconfig                   | 16 ++++++
- arch/arm/mach-snapdragon/include/mach/boot0.h      | 58 +++-------------------
- .../mach-snapdragon/include/mach/msm8916_boot0.h   | 54 ++++++++++++++++++++
- configs/dragonboard410c_defconfig                  |  1 +
- 4 files changed, 77 insertions(+), 52 deletions(-)
-
-diff --git a/arch/arm/mach-snapdragon/Kconfig b/arch/arm/mach-snapdragon/Kconfig
-index d3de8693b5a..f863daf6bb9 100644
---- a/arch/arm/mach-snapdragon/Kconfig
-+++ b/arch/arm/mach-snapdragon/Kconfig
-@@ -42,4 +42,20 @@ config SYS_CONFIG_NAME
- 	  Based on this option include/configs/<CONFIG_SYS_CONFIG_NAME>.h header
- 	  will be used for board configuration.
- 
-+choice
-+	prompt "Qualcomm boot0.h workaround"
-+	optional
-+	help
-+	  While U-Boot on Qualcomm platforms doesn't generally need compile-time
-+	  adjustments based on the target SoC, workarounds in boot0.h can't
-+	  practically detect the SoC at runtime. Enable one of these workarounds
-+	  if you know you need it.
-+
-+config BOOT0_MSM8916_PSCI_WORKAROUND
-+	bool "boot0.h workaround for buggy PSCI on the msm8916 SoC"
-+	help
-+	  Select this if you are building U-Boot proper for an msm8916 board that
-+	  uses the buggy PSCI implementation.
-+endchoice
-+
- endif
-diff --git a/arch/arm/mach-snapdragon/include/mach/boot0.h b/arch/arm/mach-snapdragon/include/mach/boot0.h
-index 953cccad790..fb67aed7bc8 100644
---- a/arch/arm/mach-snapdragon/include/mach/boot0.h
-+++ b/arch/arm/mach-snapdragon/include/mach/boot0.h
-@@ -1,54 +1,8 @@
- /* SPDX-License-Identifier: GPL-2.0+ */
--/*
-- * Workaround for "PSCI bug" on DragonBoard 410c
-- * Copyright (C) 2021 Stephan Gerhold <stephan@gerhold.net>
-- *
-- * Syscall parameters taken from Qualcomm's LK fork (scm.h):
-- * Copyright (c) 2011-2015, The Linux Foundation. All rights reserved.
-- *
-- * The PSCI implementation in the TrustZone/tz firmware on DragonBoard 410c has
-- * a bug that starts all other CPU cores in 32-bit mode unless the TZ syscall
-- * that switches from 32-bit to 64-bit mode is executed at least once.
-- *
-- * Normally this happens inside Qualcomm's LK bootloader which runs in 32-bit
-- * mode and uses the TZ syscall to boot a kernel in 64-bit mode. However, if
-- * U-Boot is installed to the "aboot" partition (replacing LK) the switch to
-- * 64-bit mode never happens since U-Boot is already running in 64-bit mode.
-- *
-- * A workaround for this "PSCI bug" is to execute the TZ syscall when entering
-- * U-Boot. That way PSCI is made aware of the 64-bit switch and starts all other
-- * CPU cores in 64-bit mode as well.
-- */
--#include <linux/arm-smccc.h>
--
--#define ARM_SMCCC_SIP32_FAST_CALL \
--	ARM_SMCCC_CALL_VAL(ARM_SMCCC_FAST_CALL, ARM_SMCCC_SMC_32, ARM_SMCCC_OWNER_SIP, 0)
--
--	/*
--	 * U-Boot might be started in EL2 or EL3 with custom firmware.
--	 * In that case, we assume that the workaround is not necessary or is
--	 * handled already by the alternative firmware. Using the syscall in EL2
--	 * would demote U-Boot to EL1; in EL3 it would probably just crash.
--	 */
--	mrs	x0, CurrentEL
--	cmp	x0, #(1 << 2)	/* EL1 */
--	bne	reset
--
--	/* Prepare TZ syscall parameters */
--	mov	x0, #ARM_SMCCC_SIP32_FAST_CALL
--	movk	x0, #0x10f	/* SCM_SVC_MILESTONE_CMD_ID */
--	mov	x1, #0x12	/* MAKE_SCM_ARGS(0x2, SMC_PARAM_TYPE_BUFFER_READ) */
--	adr	x2, el1_system_param
--	mov	x3, el1_system_param_end - el1_system_param
--
--	/* Switch PSCI to 64-bit mode. Resets CPU and returns at el1_elr */
--	smc	#0
--
--	/* Something went wrong, perhaps PSCI is already in 64-bit mode? */
-+#if defined(CONFIG_SPL_BUILD)
- 	b	reset
--
--	.align	3
--el1_system_param:
--	.quad	0, 0, 0, 0, 0, 0, 0, 0, 0	/* el1_x0-x8 */
--	.quad	reset				/* el1_elr */
--el1_system_param_end:
-+#else
-+#if defined(CONFIG_BOOT0_MSM8916_PSCI_WORKAROUND)
-+#include "msm8916_boot0.h"
-+#endif
-+#endif
-diff --git a/arch/arm/mach-snapdragon/include/mach/msm8916_boot0.h b/arch/arm/mach-snapdragon/include/mach/msm8916_boot0.h
-new file mode 100644
-index 00000000000..953cccad790
---- /dev/null
-+++ b/arch/arm/mach-snapdragon/include/mach/msm8916_boot0.h
-@@ -0,0 +1,54 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+/*
-+ * Workaround for "PSCI bug" on DragonBoard 410c
-+ * Copyright (C) 2021 Stephan Gerhold <stephan@gerhold.net>
-+ *
-+ * Syscall parameters taken from Qualcomm's LK fork (scm.h):
-+ * Copyright (c) 2011-2015, The Linux Foundation. All rights reserved.
-+ *
-+ * The PSCI implementation in the TrustZone/tz firmware on DragonBoard 410c has
-+ * a bug that starts all other CPU cores in 32-bit mode unless the TZ syscall
-+ * that switches from 32-bit to 64-bit mode is executed at least once.
-+ *
-+ * Normally this happens inside Qualcomm's LK bootloader which runs in 32-bit
-+ * mode and uses the TZ syscall to boot a kernel in 64-bit mode. However, if
-+ * U-Boot is installed to the "aboot" partition (replacing LK) the switch to
-+ * 64-bit mode never happens since U-Boot is already running in 64-bit mode.
-+ *
-+ * A workaround for this "PSCI bug" is to execute the TZ syscall when entering
-+ * U-Boot. That way PSCI is made aware of the 64-bit switch and starts all other
-+ * CPU cores in 64-bit mode as well.
-+ */
-+#include <linux/arm-smccc.h>
-+
-+#define ARM_SMCCC_SIP32_FAST_CALL \
-+	ARM_SMCCC_CALL_VAL(ARM_SMCCC_FAST_CALL, ARM_SMCCC_SMC_32, ARM_SMCCC_OWNER_SIP, 0)
-+
-+	/*
-+	 * U-Boot might be started in EL2 or EL3 with custom firmware.
-+	 * In that case, we assume that the workaround is not necessary or is
-+	 * handled already by the alternative firmware. Using the syscall in EL2
-+	 * would demote U-Boot to EL1; in EL3 it would probably just crash.
-+	 */
-+	mrs	x0, CurrentEL
-+	cmp	x0, #(1 << 2)	/* EL1 */
-+	bne	reset
-+
-+	/* Prepare TZ syscall parameters */
-+	mov	x0, #ARM_SMCCC_SIP32_FAST_CALL
-+	movk	x0, #0x10f	/* SCM_SVC_MILESTONE_CMD_ID */
-+	mov	x1, #0x12	/* MAKE_SCM_ARGS(0x2, SMC_PARAM_TYPE_BUFFER_READ) */
-+	adr	x2, el1_system_param
-+	mov	x3, el1_system_param_end - el1_system_param
-+
-+	/* Switch PSCI to 64-bit mode. Resets CPU and returns at el1_elr */
-+	smc	#0
-+
-+	/* Something went wrong, perhaps PSCI is already in 64-bit mode? */
-+	b	reset
-+
-+	.align	3
-+el1_system_param:
-+	.quad	0, 0, 0, 0, 0, 0, 0, 0, 0	/* el1_x0-x8 */
-+	.quad	reset				/* el1_elr */
-+el1_system_param_end:
-diff --git a/configs/dragonboard410c_defconfig b/configs/dragonboard410c_defconfig
-index 51ad265688c..645f0816701 100644
---- a/configs/dragonboard410c_defconfig
-+++ b/configs/dragonboard410c_defconfig
-@@ -11,6 +11,7 @@ CONFIG_ENV_OFFSET=0x0
- CONFIG_DEFAULT_DEVICE_TREE="qcom/apq8016-sbc"
- CONFIG_OF_LIBFDT_OVERLAY=y
- CONFIG_SYS_LOAD_ADDR=0x80080000
-+CONFIG_BOOT0_MSM8916_PSCI_WORKAROUND=y
- CONFIG_IDENT_STRING="\nQualcomm-DragonBoard 410C"
- CONFIG_REMAKE_ELF=y
- CONFIG_BUTTON_CMD=y
-
--- 
-2.53.0
-
+On 4/25/26 2:36 AM, Peng Fan (OSS) wrote:
+> This is an effort to convert i.MX8M Boards to OF_UPSTREAM.
+> 
+> The only left one for i.MX8MQ is:
+> imx8mq-cm.dts
+> 
+> The left ones for i.MX8MM are:
+> imx8mm-cl-iot-gate-optee.dts
+> imx8mm-cl-iot-gate.dts
+> imx8mm-phg.dts
+> 
+> The left ones for i.MX8MP are:
+> imx8mp-msc-sm2s.dts
+> imx8mp-rsb3720-a1.dts
+> 
+> These board dts are not in upstream Linux, need give a look to upstream these
+> dts to linux, then move to OF_UPSTREAM.
+> 
+> I checked all the board dts, but I not have the board to test, best effort on
+> this patchset, but this change might break boards. I would appreciate board
+> maintainers to help test.
+> 
+> Signed-off-by: Peng Fan <peng.fan@nxp.com>
+> ---
+> Peng Fan (13):
+>        imx8mq: reform2: Switch to OF_UPSTREAM
+>        imx8mq: phanbell: Switch OF_UPSTREAM
+>        imx8mq: pico: Switch OF_UPSTREAM
+>        imx8mq: librem5: Switch to OF_UPSTREAM
+>        imx8mq: kontron-pitx-imx8m: Switch OF_UPSTREAM
+>        imx8mq: Drop arch/arm/dts/imx8mq.dtsi
+>        imx8mm: mx8menlo: Switch OF_UPSTREAM
+>        imx8mm/n: Drop unused dtsi
+>        imx8mm: data-modul-edm-sbc: Switch OF_UPSTREAM
+>        imx8mm: icore-mx8mm: Switch to OF_UPSTREAM
+>        imx8mp: dhcom-drc02/picoitx: Switch to OF_UPSTREAM
+>        imx8mp: data-modul-edm-sbc: Switch to OF_UPSTREAM
+>        imx8mp: icore-mx8mp-edimm2.2: Switch to OF_UPSTREAM
+I have the DH, Data Modul, Menlo boards on my list of boards to switch 
+to OF_UPSTREAM , but I did not get to test the result on real hardware 
+yet. I would very much prefer to avoid switching them to OF_UPSTREAM 
+without any testing on real hardware as that could cause unforeseen 
+breakage, so please either wait with applying those patches until I can 
+test them, or drop those patches from this series for now. Thank you.
