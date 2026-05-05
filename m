@@ -4,107 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36999CD3427
-	for <u-boot@archiver.kernel.org>; Tue,  5 May 2026 13:47:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C227CD3427
+	for <u-boot@archiver.kernel.org>; Tue,  5 May 2026 13:47:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B0A33848FC;
-	Tue,  5 May 2026 15:47:17 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 0D43184943;
+	Tue,  5 May 2026 15:47:37 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="fRYuqPsS";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="xTlw0AoJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 38B488493F; Tue,  5 May 2026 15:47:17 +0200 (CEST)
-Received: from mail-vs1-xe33.google.com (mail-vs1-xe33.google.com
- [IPv6:2607:f8b0:4864:20::e33])
+ id C67DD84944; Tue,  5 May 2026 15:47:35 +0200 (CEST)
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [IPv6:2a00:1450:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F2A3D848B9
- for <u-boot@lists.denx.de>; Tue,  5 May 2026 15:47:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A6858848B9
+ for <u-boot@lists.denx.de>; Tue,  5 May 2026 15:47:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=raymondmaoca@gmail.com
-Received: by mail-vs1-xe33.google.com with SMTP id
- ada2fe7eead31-612d8a59ca0so3460339137.1
- for <u-boot@lists.denx.de>; Tue, 05 May 2026 06:47:14 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1777988834; cv=none;
- d=google.com; s=arc-20240605;
- b=K35S//4Avcuo18R33rwLR++tNxeUv/PpSDhtHz2TZNQGcBkUHmhM/H5h0ulIOy2AM4
- YQ0rSTNuunxkqisQ+W0ylh+DTezTWvNNgDhFqMDaXacLDWp26jdyRScqpDkMCeVr+Uys
- 3Tf/B83waaBQzT7yGkRqBL4QDfw3APCZNoLDWA2HZm9BlFbnY4f9i7CnYzOV18eox78j
- Y8YJqF0zVSQ2D3gd7M8kULjz+d9Zt65P/GZUl1cLEXfill2GBrNJsweu47gQJ5VRwF+a
- qxrkv9nb3h0XMJM6cfo4YelpDFMgZcpeqf+6HVhm7qJIGB2loAR7ppFtFXwjZY/m0nMh
- b3FQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=J81hK9WQqZsyMatVdstSY2G86BviPvqirYBPD4Bewtw=;
- fh=LreFm9mn1MAcrpW1m+2bm+MhsMg7kY17DcY0aS1XlUc=;
- b=HMzc8DGnqnSbTfTnbV4G/3nNEg5f9zcF2vWSvcb0LAAKrBvjakhaE3Le6oguPqnaKg
- awO2vohB+gytLdi7tAoGRjRYQyiS0hQBvwzqi2qK7jqCYsjexEJ9+5YtW12Pzs80xYbn
- odXBBVGjqxlIZgZqJJvO9D/ssfAebYLfGyJrBNXTRlwMYBhmOeX53c5eZl8y/StJ/Mls
- S1lXdYuE1KhINMgP3D6yBn3GisR/YGHQ5apacMKDmJbrQpti58r+TeFsJyscmKjaUrnN
- If7tE//NmKohA1JqXHYnQqgHCAHZqWsn2Hj8gU9jySPpcosVbBqPV71PH+gvr/EYKItW
- 6a0g==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ spf=pass smtp.mailfrom=casey.connolly@linaro.org
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-4838c15e3cbso43234905e9.3
+ for <u-boot@lists.denx.de>; Tue, 05 May 2026 06:47:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1777988834; x=1778593634; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=J81hK9WQqZsyMatVdstSY2G86BviPvqirYBPD4Bewtw=;
- b=fRYuqPsSmmbo+p1iYCpIl9bg7mGmedashF7i1Y8EdMC5uG+UwsXERvqwWYd4hFhAaT
- t+Moe9DMjYEygNaW9M83ikQ9w3UXEsbR+6fED6W/Db/rEWTWtiSbTXlQHisCMjmagrgC
- F5FpNTs37cqv9Eet8+k/EVwGDmNg3RIFGfKczlK/BSXgBGPMimSoJBAJitdVty9QOT+e
- CwuZ8F9chY0kajEq5ZH2RZAR9RvhlYFhMaiv160Ku7/RhBFJqoUfJppmCvX6ONarAQPe
- c7C3oD7C+4ORPdXl6zzcZOglrxRn017wE80Ufad+Avqs/jm3Pl+TO+btdxAk2wBF/oI1
- 02Jg==
+ d=linaro.org; s=google; t=1777988852; x=1778593652; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=gatpzQrYyM4GPxVUMdc9l7bPDpLn0PU+92EL5xPFZFg=;
+ b=xTlw0AoJH+3qWqOZPLSeWWiAaf7aPcsv1tcD95qU526xPBdFksXX0AiS8my3BSqJTP
+ 72TsovOTRwxbyNOFE2fQsO3uj5HObvt7CvXvy1TMPG+oWArNemNcqh0iKXOg3LA8SaeQ
+ y0ze99s5Nk9MVi6QOAa2SO/QKLjUZywwZoyC3t++ZwxiXUBPP7za+DqqhC1XNoFiE5Lu
+ rb+oXvIdysPwF32uXdAP0t9800shvccCwzjH2LPmmNPhzMemRXnUdNWLIvrh1vcsYgzN
+ uIyk83vO4SqVHv6FySU2+V8FoAfW5rxl2P21ttWwWTs0IkPH0qS9uhP2dvNdmjkfGNx9
+ /1Pw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777988834; x=1778593634;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=J81hK9WQqZsyMatVdstSY2G86BviPvqirYBPD4Bewtw=;
- b=YqQwIqVTtDkKmrZAxnjMdpu69G6UUNrSt4AL5nEnt97wOtTOAuKtO+rrBUdgOsgyIH
- NtgdR+y0HsLBGjoMUFRlVcOyIUA5ra2fepxeq4r7GSbKbpqKND55XR2iBvpe6JqofwQi
- MlPSsIZGnR1iRqFWadFa5plS8GeEZUZKoQij92m8lybXBceJ9C7jxo/bhfOKLCrazTj3
- 5TBnj6+97DmzxcSBqh7paTuldCia8OfOu91PL65ijn2hyvNaVXHxrvVBYPs7UNzH5mof
- Wh5UuUJwHtSqlfflImbaWUZnNTy4RRfj8KUuB9X+2SVt5gWoWMVzIbDIixrW/GNhk6F5
- UiGQ==
-X-Gm-Message-State: AOJu0YyhrWKY62H0PeNXOQ69zGFYQtH4LvKDauA+piNZdTNRc/18oH37
- aN0wmaaz60M9PWS+7SxclMuOFk3O8HNzQ3DNXYpRqzuL4jpDg2VmfKpqi4a05GIQ+idcsMIxgYo
- D33ed/rxuH8zreCT7W5kmOQYXzOYo2yg=
-X-Gm-Gg: AeBDieskEi4VSdTJQD2R1cC6Bz5rkvfwP9z71918xwSIWE+XhfyA1b0OTDlxKSBkpd3
- gMn8P6+2XaR2pt0HKs6ZLC65g+YP9+3S2VnQGtW2tB8oKTfaQ9xMymtCvnUNxufKTUERgte6qmn
- +T8NMKGfE/kL20y+o/Iifm71ikE0rK68Xl6OVPREfLFaEUAXD+vxYknIXyOzS1eeUAexgMYbRES
- 2Xy/AUe+Ws30Z1+FtgASEdECL/9PJLBWtNPOhZb9BkYX4VbavhPaguwp1lUvUJLJ+Hhj9bqzAbi
- 7XxbKcUQlLKdamtO1Z0=
-X-Received: by 2002:a05:6102:2d0d:b0:610:76c6:b74a with SMTP id
- ada2fe7eead31-62d868151a0mr7946906137.14.1777988833649; Tue, 05 May 2026
- 06:47:13 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1777988852; x=1778593652;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=gatpzQrYyM4GPxVUMdc9l7bPDpLn0PU+92EL5xPFZFg=;
+ b=YeGt4L4QrnO0ZgJ93dZ5B0Qb6VtEHkIvDFO+poHvDfIeVkYmVkb43E2+8bUhJcKY9A
+ EcvkYYXNnb+J6tZalOllPCfJC0QMtR/l1hM2vDNOkciFuDgX5OpxavXjSohQy1YketH9
+ 4/6boMoYwiTRPXRoGjW1oZZ+66OVtcc4vNwHhSfqUyqmNfrDxUMO/XHz6ztgn+CTgK85
+ 6Vd+xFsnSLMGeqre68c4rF3JpxgQ4Wk/kCOWi5VwDoeMEF2rlogZep2POtYNjkxL5xuc
+ ujKiDc6o5alORWIZqdQ7juDuk2tntMr6myDrczlpUARlo4WxMEsIcqeje6D7wzhGHVut
+ 7znQ==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ856741ezmDUzMGg8qMHYB2LEU1FOOLcEE6+kwvlTP4OXKaqwI/tu7Tn3dUO0rgYCzwT1UpONM=@lists.denx.de
+X-Gm-Message-State: AOJu0YxlSMC/LOq7cOADA0RhX6OXzvdQw3//Nb09T8jrQrfluOfuX367
+ uUcoJcKfi7p8Apv/taF2+aU02YdrYUWUiLiwZwVzXXSsq+/63o+18zNosIClnVXSNM8=
+X-Gm-Gg: AeBDiev/V1K2nKmBb6WxFNUIaNXS5i/C5vOD+1Ppl6/0tNykC3y1DF/XsbNu7pvB9Bn
+ wgGB4mYCADkOLQJfn2i+a/xiLKN4v4qw+tXCPYUcQ+q2OjMs/VOZuuyGCHMFYCJ5Q6kDpMTX8go
+ iaINdsE6YvDD1dkVv3jvQdjk/jmTu4wlSNOES5cNQvZhKW5ZyoO59aOZxah+5zYTqdRhBHtNyWH
+ m23ryYkZSM1ZlYlvouub9fHXjdgfi5XwcwjOKu8u00/mzbz3rhnOHrdurla3VUfi2KKRpflEk+K
+ HL+ay5QoTgL3XEPT7AnV9EP2GU+KusO798vz8fV+NxMaQOd8UxEgBPu68RsHSJ3vUHN0yuIk/5S
+ dNGWobXE7fBQS8JIU38g8IZQTVNKp8pNzbMPU0seyvnMgQefSAmg2f98fPHIwDgJx6IxnkRlUax
+ /dtjJhuG3P9iABiwAZe37bH+qmDDrEL6vJqdkzxpeSv3zgS2U1aVsxePxiF/5Pe2Gh2Fg30Cv/s
+ P9a
+X-Received: by 2002:a05:600c:1551:b0:48a:58ae:9938 with SMTP id
+ 5b1f17b1804b1-48a98663ca6mr230548025e9.19.1777988851939; 
+ Tue, 05 May 2026 06:47:31 -0700 (PDT)
+Received: from [192.168.1.36] (p4fc3dd86.dip0.t-ipconnect.de. [79.195.221.134])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-48d17ff35f9sm19256955e9.15.2026.05.05.06.47.30
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 05 May 2026 06:47:31 -0700 (PDT)
+Message-ID: <40dde65f-9dc6-465f-a053-31a90d75fce1@linaro.org>
+Date: Tue, 5 May 2026 15:47:30 +0200
 MIME-Version: 1.0
-References: <20260504212524.1665166-1-raymondmaoca@gmail.com>
- <b7432c55f00b4c9b2043ca8efb262a5d5ec4d6e2.camel@siemens.com>
-In-Reply-To: <b7432c55f00b4c9b2043ca8efb262a5d5ec4d6e2.camel@siemens.com>
-From: Raymond Mao <raymondmaoca@gmail.com>
-Date: Tue, 5 May 2026 09:47:01 -0400
-X-Gm-Features: AVHnY4Lz1wCYwL-vvDPmRY0WGdL6GdHLgIaUa09VYMinEL9spaBFVczOkbHZtDU
-Message-ID: <CAMDkj5yUHypTiuYk+VqOVA3FSJpDo6CsqsVAWn69nOS3EapAcw@mail.gmail.com>
-Subject: Re: [PATCH v2] lib: fdtdec: validate bloblist FDT before consuming
- libfdt size
-To: "Sverdlin, Alexander" <alexander.sverdlin@siemens.com>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- "sjg@chromium.org" <sjg@chromium.org>, 
- "trini@konsulko.com" <trini@konsulko.com>, 
- "casey.connolly@linaro.org" <casey.connolly@linaro.org>, 
- "raymond.mao@riscstar.com" <raymond.mao@riscstar.com>,
- "pranav.sanwal@amd.com" <pranav.sanwal@amd.com>, 
- "michal.simek@amd.com" <michal.simek@amd.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 0/2] cmd: ufetch: print Net feature when NET_LWIP=y,
+ prettyfy if NET=n
+Content-Language: en-US
+To: Quentin Schulz <foss+uboot@0leil.net>, u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
+ Quentin Schulz <quentin.schulz@cherry.de>
+References: <20260505-ufetch-net-v3-0-eee5eb9ca5ce@cherry.de>
+From: Casey Connolly <casey.connolly@linaro.org>
+In-Reply-To: <20260505-ufetch-net-v3-0-eee5eb9ca5ce@cherry.de>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -121,152 +109,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Alexander,
 
-On Tue, May 5, 2026 at 4:31=E2=80=AFAM Sverdlin, Alexander
-<alexander.sverdlin@siemens.com> wrote:
->
-> Hi Raymond,
->
-> On Mon, 2026-05-04 at 17:25 -0400, Raymond Mao wrote:
-> > From: Raymond Mao <raymond.mao@riscstar.com>
-> >
-> > Coverity Scan defects are observed in fdtdec_apply_bloblist_dtos(),
-> > since the live FDT taken from the bloblist is passed to libfdt helpers
-> > which consume header size/offset fields:
-> > - fdt_open_into()
-> > - fdt_pack()
-> > - bloblist_resize(..., fdt_totalsize(...))
-> >
-> > Add a small helper to validate the FDT header and confirm that the
-> > advertised totalsize fits within the currently allocated bloblist
-> > record. Use the sanitized size before calling fdt_open_into(), again
-> > after overlays are applied before calling fdt_pack(), and once more
-> > after packing before shrinking the bloblist record.
-> >
-> > This keeps the existing flow unchanged while making the size consumers
-> > operate on validated FDT metadata.
-> >
-> > Fixes: b70cbbfbf94f ("fdtdec: apply DT overlays from bloblist")
-> > Addresses-Coverity-ID: CID 645837: (TAINTED_SCALAR)
-> > Signed-off-by: Raymond Mao <raymond.mao@riscstar.com>
-> > ---
-> > changes in v2:
-> > - Rebased on master.
-> >
-> >  lib/fdtdec.c | 43 +++++++++++++++++++++++++++++++++++++++----
-> >  1 file changed, 39 insertions(+), 4 deletions(-)
-> >
-> > diff --git a/lib/fdtdec.c b/lib/fdtdec.c
-> > index 2d66860f6ed..601f418db6e 100644
-> > --- a/lib/fdtdec.c
-> > +++ b/lib/fdtdec.c
-> > @@ -1744,9 +1744,31 @@ static int fdtdec_apply_dto_blob(void **blob, __=
-maybe_unused int size)
-> >       return fdt_overlay_apply_verbose((void *)gd->fdt_blob, *blob);
-> >  }
-> >
-> > +static int fdtdec_get_valid_fdt_size(const void *fdt, int alloc_size,
-> > +                                  int *fdt_sizep)
-> > +{
-> > +     int ret, fdt_size;
-> > +
-> > +     /*
-> > +      * Validate the header before libfdt trusts any header offsets/si=
-zes.
-> > +      * Also make sure the advertised totalsize fits in the bloblist r=
-ecord.
-> > +      */
-> > +     ret =3D fdt_check_header(fdt);
-> > +     if (ret)
-> > +             return ret;
-> > +
-> > +     fdt_size =3D fdt_totalsize(fdt);
-> > +     if (fdt_size > alloc_size)
-> > +             return -FDT_ERR_TRUNCATED;
->
-> here you return an error from the libfdt error space, but...
->
-> > +
-> > +     *fdt_sizep =3D fdt_size;
-> > +
-> > +     return 0;
-> > +}
-> > +
-> >  static int fdtdec_apply_bloblist_dtos(void)
-> >  {
-> > -     int ret;
-> > +     int ret, live_fdt_size;
-> >       struct fdt_header *live_fdt;
-> >       int blob_size;
-> >       size_t padded_size, max_size;
-> > @@ -1760,8 +1782,12 @@ static int fdtdec_apply_bloblist_dtos(void)
-> >       if (live_fdt !=3D gd->fdt_blob)
-> >               return -ENOENT;
->
-> ... the caller returns the codes from the standard errno.h
->
-> >
-> > +     ret =3D fdtdec_get_valid_fdt_size(live_fdt, blob_size, &live_fdt_=
-size);
-> > +     if (ret)
-> > +             return ret;
-> > +
-> >       /* Calculate the allowed padded size */
-> > -     padded_size =3D fdt_totalsize(live_fdt) + CONFIG_SYS_FDT_PAD;
-> > +     padded_size =3D live_fdt_size + CONFIG_SYS_FDT_PAD;
-> >       max_size =3D bloblist_get_total_size() - bloblist_get_size() + bl=
-ob_size;
-> >       if (padded_size > max_size)
-> >               padded_size =3D max_size;
-> > @@ -1772,6 +1798,7 @@ static int fdtdec_apply_bloblist_dtos(void)
-> >               if (ret)
-> >                       return ret;
-> >
-> > +             blob_size =3D padded_size;
-> >               ret =3D fdt_open_into(live_fdt, live_fdt, padded_size);
-> >               if (ret)
-> >                       return ret;
-> > @@ -1781,12 +1808,20 @@ static int fdtdec_apply_bloblist_dtos(void)
-> >       if (ret)
-> >               return ret;
-> >
-> > -     /* Shrink the blob to the actual FDT size */
-> > +     ret =3D fdtdec_get_valid_fdt_size(live_fdt, blob_size, &live_fdt_=
-size);
-> > +     if (ret)
-> > +             return ret;
-> > +
-> >       ret =3D fdt_pack(live_fdt);
-> >       if (ret)
-> >               return ret;
-> >
-> > -     return bloblist_resize(BLOBLISTT_CONTROL_FDT, fdt_totalsize(live_=
-fdt));
-> > +     ret =3D fdtdec_get_valid_fdt_size(live_fdt, blob_size, &live_fdt_=
-size);
->
-> doesn't the fdt_pack() already guarantee a valid header? Can the packed s=
-ize
-> exceed the blob_size if packing only shrinks?
->
 
-This might not happen, but just in order to solve the complaint from
-the coverity tool, otherwise we need an exemption.
+On 05/05/2026 11:14, Quentin Schulz wrote:
+> Make sure the Net feature is printed when NET_LWIP is enabled, not only
+> when NET_LEGACY is.
+> 
+> Only print comma and following whitespace as separator if there was a
+> feature printed before feature to be printed.
+> 
+> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 
-Regards,
-Raymond
+Reviewed-by: Casey Connolly <casey.connolly@linaro.org>
 
-> > +     if (ret)
-> > +             return ret;
-> > +
-> > +     /* Shrink the blob to the actual FDT size */
-> > +     return bloblist_resize(BLOBLISTT_CONTROL_FDT, live_fdt_size);
-> >  }
-> >
-> >  int fdtdec_setup(void)
->
-> --
-> Alexander Sverdlin
-> Siemens AG
-> www.siemens.com
+> ---
+> Changes in v3:
+> - migrated from bool plus ternary operator for setting the separator per
+>   printf to a const char* which contains the separator to print, as
+>   suggested by Simon,
+> - Link to v2: https://patch.msgid.link/20260504-ufetch-net-v2-0-01bec4ca7169@cherry.de
+> 
+> Changes in v2:
+> - added R-b trailers,
+> - fixed spurious colon character before separator in cat,
+> - Link to v1: https://patch.msgid.link/20260428-ufetch-net-v1-0-5d58c7618239@cherry.de
+> 
+> ---
+> Quentin Schulz (2):
+>       cmd: ufetch: show net feature when NET_LWIP is selected
+>       cmd: ufetch: only show comma separator if there was a previous feature
+> 
+>  cmd/ufetch.c | 29 ++++++++++++++++++++---------
+>  1 file changed, 20 insertions(+), 9 deletions(-)
+> ---
+> base-commit: 57460fde4ba84d67de4066ee1141e89e8139ed23
+> change-id: 20260428-ufetch-net-1ba7553a20c7
+> 
+> Best regards,
+> --  
+> Quentin Schulz <quentin.schulz@cherry.de>
+> 
+
+-- 
+// Casey (she/her)
+
