@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7BDB1CD343B
-	for <u-boot@archiver.kernel.org>; Wed,  6 May 2026 15:58:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F0FBCD342C
+	for <u-boot@archiver.kernel.org>; Wed,  6 May 2026 15:58:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EE742849E0;
-	Wed,  6 May 2026 17:58:15 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 67854849F7;
+	Wed,  6 May 2026 17:58:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="mog7IZJ8";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="BFg37Igr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9D5D6849F7; Wed,  6 May 2026 17:58:09 +0200 (CEST)
-Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
- [IPv6:2607:f8b0:4864:20::32f])
+ id B0B03849E0; Wed,  6 May 2026 17:58:11 +0200 (CEST)
+Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
+ [IPv6:2607:f8b0:4864:20::336])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3A289848FD
- for <u-boot@lists.denx.de>; Wed,  6 May 2026 17:58:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9D543849F6
+ for <u-boot@lists.denx.de>; Wed,  6 May 2026 17:58:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ot1-x32f.google.com with SMTP id
- 46e09a7af769-7dea1272943so4019537a34.0
- for <u-boot@lists.denx.de>; Wed, 06 May 2026 08:58:05 -0700 (PDT)
+Received: by mail-ot1-x336.google.com with SMTP id
+ 46e09a7af769-7dbca22dbfeso3794091a34.1
+ for <u-boot@lists.denx.de>; Wed, 06 May 2026 08:58:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1778083084; x=1778687884; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1778083087; x=1778687887; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=h1FIyZy+8inZynNa4UusPKbLST5hhymkXLz5RQ0eW1o=;
- b=mog7IZJ8cWbvPI1cvcfLX7xY75TfcYTQhbfQKEn8dw+32OMjTQSjaifzrgd/xrv0Lx
- Anx0K2ac6jLb5jwMGQd9BUGShW5xUb23HybEgz1DwkhTwEgMzNfHjUYEL7g2S6StBuPd
- 8RSc3cuh6ekQTqN+qh8NL2/HVpmOjDT94xjlE=
+ bh=m6HCx6liW/3uLoLMW4IlHQZInOzmC+F9oU7/9gWA66I=;
+ b=BFg37IgrIbKRFeSLYzheMxd4atMFZ+V9PoOBH/C3HkmIdg7Lmy2FbUI7NeAfMcIRJj
+ 2h92+33HHP32PkPy6WdHKxN/6tVWqHHgpl86lViFgP1oiiYapprntNMForB4cc7y5qKz
+ srkGT/YlXpHnS51/lKs2QPQ0vhK48W+Ozy2l0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778083084; x=1778687884;
+ d=1e100.net; s=20251104; t=1778083087; x=1778687887;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=h1FIyZy+8inZynNa4UusPKbLST5hhymkXLz5RQ0eW1o=;
- b=VSEnxDupd6ev5ZMBByXzxhB7cvPPAkxVwwTflegn4pa9QA4TxKCVRxWve60t+JB47e
- Nx/3SFdqJFFip+35mGt9LXpI+oDlPbB3CeSCHh64w/WDWUrmKy2qD9pBQ34T08F14KL7
- kotWY3ma9ukeJhYe/kENgbNT9EaSq2KznS6zyGUGNlD8Si+reUtKUgXhpo0L+Opkts6P
- j8OQDSP5w7KsXkkw65eEVLusCDxVqdilUksPHISnXr8boLS+3VQtDYB4hrR8vABOH7K+
- HcSwbfKDoRTKsTerEoj/OODfjUx3bi7UF+I5ic0IPZYsH4vnKrNVqTSMLcKFzAtz+ryu
- U2nA==
-X-Gm-Message-State: AOJu0YyKTX31Ms0F2TOeK8q4J8i8T0DwR7TFVU5PIMShyQ4ZcsAK4/x+
- hjgcaeq/e7tqwzLtFmVPhSRa4poazzWtnnqjdchOJScHcmCC77ToL9EeKGqxubjj2YbXHWha/kY
- Ph7qQAA==
-X-Gm-Gg: AeBDietOwkFbnL28+A8F8j77CuYJX0gnB6NVoY5HdjuR7nf4Y4o0IBrYl93j/NvFGB5
- lDFexEInYnOOzO3XUoD32u1rrQBjRcRUjI0SxZomoa6cq5cEJdS6wtb/yZdaLpp+EWKuHD6m3IW
- /hODfU7ga/fI7OA0Fz52LVdZ4k1wBk6Tcu4z1tYLmc3+I8wczhSXLAla9lunkJ7W+Otb7K+JJx/
- oV9Vy7nQakAOT7g/YtvX4qmI4JuBwhkecpTANR6worjk+geEAJJ7dq70E4JqGdku2lzjmR+GUsD
- jewqgJt/qaVoeqd7CfDcckitL/5XHmy524uy4IoYfGuBJxUMT05XSPLdu74D1HyEs90P7fGeHsz
- rUrLNkkW3kUG0mAUouq5d/DbBjrcoyL2a46StUCZoRCqGyWRwozEqtPCWg4ieAQS7gyqUr4eC+f
- i2vUKw/GvVNPa4s2oxwydgr3CekRHB
-X-Received: by 2002:a05:6830:391a:b0:7d7:d0f1:a132 with SMTP id
- 46e09a7af769-7e1df072f9emr2005866a34.22.1778083084103; 
- Wed, 06 May 2026 08:58:04 -0700 (PDT)
+ bh=m6HCx6liW/3uLoLMW4IlHQZInOzmC+F9oU7/9gWA66I=;
+ b=j867R69w6+/BUbjI/e9Bqz+WCGTXCyjJX5gHNFUzx4VtzedBtzE4R5PbNOn6ZyxI5d
+ KjJLBb7nB/eD2KtCEHHOJIR9Chph6UQn8L/iq5C/C0sdAy+LDhv4EIS5iTOgKbduyg7N
+ tvUmFqOkJtmWUdUsp6oS+xXk6Doifh1zCPnY/aruTw4kDX91UCe9R/PY/YZKdk+wdYt0
+ a7lBmxjVMoWRmWoJ5hPEexQCaKDfLYXWiVvnmobD6hKN7YGsyCr6Mrai/DlSSLKhztHL
+ AvkreocehP4KuX4j5fbdVAHOQ1m5If3b/khxz9PHzMrCA+W4CbucjX0PUZyt1m1yvxz/
+ JICA==
+X-Gm-Message-State: AOJu0Yz2Y0Hu0PVWrc9KE6QQNN9GyOItdZj4KghP7ys2hov3witgTkkj
+ qgHCrobrnAGFInJj99NQL3Cd2aaISfsIOwIFu/SdVo1Khq/GQBNmOMT53pwh5bQVOhsUEhqrteE
+ 7DEWwCA==
+X-Gm-Gg: AeBDiesirJD+D4FBFVhuWmD82LjiZIIgy39l/gyINA/3XZ38nzw9hB3FT+1DZD59MBi
+ nnQ1s0mOMOzSoCddwedlU+9dQ9IW57VZhGwQVLTla3UD/kOEiUByxvr5OPLJNtJ8Wdq0v8NTa5r
+ +3t/k5MuUtRqA+GneWVpMQO8B5Bk2tRIEewEC3hRvBe4FdZi5e+IN23VYE2KP1+9gnraClUVaga
+ PY5sagFpS7/pizx51XUrVqKehTxL4lMH1JWghTWiBCYS/6XLmlRGtMkrRFEsMuG7i6pZxlWtWxP
+ jfCIMRrsHjJ6C20v4D08ZG3MDlCUn2UhpQ9XNvQLM7yguaGrZWiNnBF7j8+S2pc3mhCtw/4DvOD
+ wrmH/tGzK+yQXD7CYezYy+k0qW2VVSHSUCjsfT0xBaey4Gh0zEIJWzOOdTrGv1qx/2rdQ2xEAwb
+ G+M00tcCiaC7MOnURhxBN7+BDJpO6LhD16xpUfFdk=
+X-Received: by 2002:a05:6830:2587:b0:7d7:da05:f2d2 with SMTP id
+ 46e09a7af769-7e1defc5b26mr1929555a34.16.1778083087097; 
+ Wed, 06 May 2026 08:58:07 -0700 (PDT)
 Received: from chromium.org ([174.51.25.52]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7decadc2906sm12309095a34.23.2026.05.06.08.58.03
+ 46e09a7af769-7decadc2906sm12309095a34.23.2026.05.06.08.58.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 06 May 2026 08:58:03 -0700 (PDT)
+ Wed, 06 May 2026 08:58:05 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: u-boot@lists.denx.de
 Cc: Simon Glass <sjg@chromium.org>,
  Christian Taedcke <christian.taedcke@weidmueller.com>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH 06/10] test: Factor mkfs args into _get_fs_args() helper
-Date: Wed,  6 May 2026 09:56:20 -0600
-Message-ID: <20260506155639.1191640-7-sjg@chromium.org>
+Subject: [PATCH 07/10] test: Pass mkfs -d unconditionally for ext filesystems
+Date: Wed,  6 May 2026 09:56:21 -0600
+Message-ID: <20260506155639.1191640-8-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260506155639.1191640-1-sjg@chromium.org>
 References: <20260506155639.1191640-1-sjg@chromium.org>
@@ -95,71 +95,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Move the mkfs option and program-name selection out of mk_fs() into a
-small helper.  This shortens mk_fs() and isolates the per-fs-type table
-from the surrounding logic.
+Modern e2fsprogs supports the -d flag on mkfs.ext2 and mkfs.ext3 as well
+as mkfs.ext4, so use it for all ext variants.
+
+An empty source directory is also harmless, so drop the guard that
+omitted -d when nothing has been written into srcdir. Remove the
+ValueError branch, which is now unreachable.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- test/py/tests/fs_helper.py | 35 +++++++++++++++++++++++------------
- 1 file changed, 23 insertions(+), 12 deletions(-)
+ test/py/tests/fs_helper.py | 9 ++-------
+ 1 file changed, 2 insertions(+), 7 deletions(-)
 
 diff --git a/test/py/tests/fs_helper.py b/test/py/tests/fs_helper.py
-index 179fbf04dfb..40cab6dddee 100644
+index 40cab6dddee..3983d42f5ce 100644
 --- a/test/py/tests/fs_helper.py
 +++ b/test/py/tests/fs_helper.py
-@@ -62,20 +62,14 @@ class FsHelper:
-         self.srcdir = None
-         self._do_cleanup = False
- 
--    def mk_fs(self):
--        """Make a new filesystem and copy in the files
-+    def _get_fs_args(self):
-+        """Get the mkfs options and program to use
- 
--        Raises:
--            CalledProcessError: if any error occurs when creating the
--                filesystem
-+        Returns:
-+            tuple:
-+                str: mkfs options, e.g. '-F 32' for fat32
-+                str: mkfs program to use, e.g. 'ext4' for ext4
-         """
--        self.setup()
--        self._do_cleanup = True
--        src_dir = self.srcdir if os.listdir(self.srcdir) else None
--
--        fs_img = os.path.join(self.config.persistent_data_dir,
--                              f'{self.prefix}.{self.fs_type}.img')
--
-         if self.fs_type == 'fat12':
-             mkfs_opt = '-F 12'
-         elif self.fs_type == 'fat16':
-@@ -91,6 +85,23 @@ class FsHelper:
-             fs_lnxtype = 'vfat'
+@@ -76,6 +76,8 @@ class FsHelper:
+             mkfs_opt = '-F 16'
+         elif self.fs_type == 'fat32':
+             mkfs_opt = '-F 32'
++        elif self.fs_type.startswith('ext'):
++            mkfs_opt = f'-d {self.srcdir}'
          else:
-             fs_lnxtype = self.fs_type
-+        return mkfs_opt, fs_lnxtype
-+
-+    def mk_fs(self):
-+        """Make a new filesystem and copy in the files
-+
-+        Raises:
-+            CalledProcessError: if any error occurs when creating the
-+                filesystem
-+        """
-+        self.setup()
-+        self._do_cleanup = True
-+        src_dir = self.srcdir if os.listdir(self.srcdir) else None
-+
-+        fs_img = os.path.join(self.config.persistent_data_dir,
-+                              f'{self.prefix}.{self.fs_type}.img')
-+
-+        mkfs_opt, fs_lnxtype = self._get_fs_args()
+             mkfs_opt = ''
  
-         if src_dir:
-             if fs_lnxtype == 'ext4':
+@@ -103,13 +105,6 @@ class FsHelper:
+ 
+         mkfs_opt, fs_lnxtype = self._get_fs_args()
+ 
+-        if src_dir:
+-            if fs_lnxtype == 'ext4':
+-                mkfs_opt = mkfs_opt + ' -d ' + src_dir
+-            elif fs_lnxtype != 'vfat' and fs_lnxtype != 'exfat':
+-                raise ValueError(
+-                    f'src_dir not implemented for fs {fs_lnxtype}')
+-
+         size = self.size_mb << 20
+         count = (size + SIZE_GRAN - 1) // SIZE_GRAN
+ 
 -- 
 2.43.0
 
