@@ -4,42 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40BDBCD342C
-	for <u-boot@archiver.kernel.org>; Wed,  6 May 2026 12:37:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C373CD3436
+	for <u-boot@archiver.kernel.org>; Wed,  6 May 2026 12:37:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8428984948;
-	Wed,  6 May 2026 14:36:33 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BBFB08491D;
+	Wed,  6 May 2026 14:36:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="qFaBmtef";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="CD/2igTZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A1B11848A1; Wed,  6 May 2026 14:36:31 +0200 (CEST)
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+ id 9FC1E848A1; Wed,  6 May 2026 14:36:35 +0200 (CEST)
+Received: from sea.source.kernel.org (sea.source.kernel.org
+ [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 362C484949
- for <u-boot@lists.denx.de>; Wed,  6 May 2026 14:36:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7A1D38484F
+ for <u-boot@lists.denx.de>; Wed,  6 May 2026 14:36:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mwalle@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 08BF3442F7;
+ by sea.source.kernel.org (Postfix) with ESMTP id 3D27C40178;
+ Wed,  6 May 2026 12:36:32 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 57407C2BCB8;
  Wed,  6 May 2026 12:36:28 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 245D0C2BCB8;
- Wed,  6 May 2026 12:36:23 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1778070987;
- bh=e6h2lUfl/yNuWQorIIWGpQxRp5IMe1bE99MboCwdsjY=;
+ s=k20201202; t=1778070992;
+ bh=HCxlvubW8qImPlN/lrwZO016CxYfR8p+V/Y/jX14PWM=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=qFaBmtefxMnM7zKHqMysekjqIBlGoyk3h9j8cRiyj+xPYcBm/YtHhYuglVV4KE0Q7
- S2H5RjNr3wsQAioKlcky2oYrQfMdBgA9CptDTjosY4dt5Re83efc+jJoYqcw7MggfJ
- EpEBTTuFqgxT41eceJyFlLGQoRyEZvnwG+goyYXFPhIwjIlECFgzREWDVueVsS7+9M
- BkLMOfrCSFGDAPcIw7rTSNFr7r7dau4Bk+IiX2iQQ1v07dU9t+jkfEMufskTwhERNH
- cPhmzcbdRqqyCnWhkIrDb4/Wpa0SyHFpOhDMnUZs078IjTrKfhzIwBHYUOIIKoVD8O
- qpPcsFfPgg1Pw==
+ b=CD/2igTZl45kSuGs9+CjlaV9jXCdqAYUiaPzT7iFaMoI330W4mI7au2zbTSO3z/H5
+ nCdsoqHvuMGDk4iihaSDeLfOXm/ck1wtuqWGPZsCE+oCULKXjLv5TQuhHxHCVt8TVK
+ GjNi0mThkRT6ekJXuqCA5Pu4ZeFi1xXNJwIPuXPEKAlE5DRb9+d7Cc9L0j7ZhJ8fNm
+ /p0PLchWXqh8s1dZbl58WQ2h/JSaT4oAnB/v3CkJ8bRmWKhg7XrbkknBId7WT1fU+3
+ 25bHr8eYRYHeOnY1O+rDIdkNHamJ10RZkfG0RoWr5sWHS9reQK+8UrDjIGS+8aEoou
+ lZhNEVd2TeHog==
 From: Michael Walle <mwalle@kernel.org>
 To: =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>,
  Tom Rini <trini@konsulko.com>, Pramod Kumar <pramod.kumar_1@nxp.com>,
@@ -54,9 +55,9 @@ To: =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>,
 Cc: Tomas Alvarez Vanoli <tomas.alvarez-vanoli@hitachienergy.com>,
  Jerome Forissier <jerome.forissier@arm.com>, u-boot@lists.denx.de,
  Michael Walle <mwalle@kernel.org>
-Subject: [PATCH v2 07/11] p2041rdb: use the upstream device tree
-Date: Wed,  6 May 2026 14:34:16 +0200
-Message-ID: <20260506123507.2081751-8-mwalle@kernel.org>
+Subject: [PATCH v2 08/11] p2041rdb: support SDcard boot
+Date: Wed,  6 May 2026 14:34:17 +0200
+Message-ID: <20260506123507.2081751-9-mwalle@kernel.org>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20260506123507.2081751-1-mwalle@kernel.org>
 References: <20260506123507.2081751-1-mwalle@kernel.org>
@@ -78,458 +79,88 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Switch to the upstream device tree, which already includes the UART
-nodes we need for the DM.
-
-We also need to increase malloc area before relocation otherwise you'll
-get the following error and the board panics:
-
-	DRAM:  Initializing....using SPD
-	alloc space exhausted ptr 414 limit 400
+The RCW was just supporting SPI boot. Add a second one for the SDcard
+boot. While at it, use the same naming scheme as for the other NXP
+boards.
 
 Signed-off-by: Michael Walle <mwalle@kernel.org>
 ---
- arch/powerpc/dts/Makefile             |   1 -
- arch/powerpc/dts/p2041.dtsi           | 138 --------------------------
- arch/powerpc/dts/p2041rdb-u-boot.dtsi |  19 ++++
- arch/powerpc/dts/p2041rdb.dts         | 127 ------------------------
- arch/powerpc/dts/p2041si-post.dtsi    |  43 --------
- configs/P2041RDB_SPIFLASH_defconfig   |   4 +-
- configs/P2041RDB_defconfig            |   4 +-
- include/configs/P2041RDB.h            |   2 +
- 8 files changed, 27 insertions(+), 311 deletions(-)
- delete mode 100644 arch/powerpc/dts/p2041.dtsi
- create mode 100644 arch/powerpc/dts/p2041rdb-u-boot.dtsi
- delete mode 100644 arch/powerpc/dts/p2041rdb.dts
- delete mode 100644 arch/powerpc/dts/p2041si-post.dtsi
+ board/nxp/p2041rdb/p2041rdb_rcw_sd.cfg                | 11 +++++++++++
+ .../{rcw_p2041rdb.cfg => p2041rdb_rcw_spi.cfg}        |  0
+ configs/P2041RDB_SDCARD_defconfig                     |  6 ++++--
+ configs/P2041RDB_SPIFLASH_defconfig                   |  2 +-
+ 4 files changed, 16 insertions(+), 3 deletions(-)
+ create mode 100644 board/nxp/p2041rdb/p2041rdb_rcw_sd.cfg
+ rename board/nxp/p2041rdb/{rcw_p2041rdb.cfg => p2041rdb_rcw_spi.cfg} (100%)
 
-diff --git a/arch/powerpc/dts/Makefile b/arch/powerpc/dts/Makefile
-index 766b0c05951..4fd3478ac2f 100644
---- a/arch/powerpc/dts/Makefile
-+++ b/arch/powerpc/dts/Makefile
-@@ -14,7 +14,6 @@ dtb-$(CONFIG_TARGET_P1010RDB_PB) += p1010rdb-pb.dtb p1010rdb-pb_36b.dtb
- dtb-$(CONFIG_TARGET_P1020RDB_PC) += p1020rdb-pc.dtb p1020rdb-pc_36b.dtb
- dtb-$(CONFIG_TARGET_P1020RDB_PD) += p1020rdb-pd.dtb
- dtb-$(CONFIG_TARGET_P2020RDB) += p2020rdb-pc.dtb p2020rdb-pc_36b.dtb
--dtb-$(CONFIG_TARGET_P2041RDB) += p2041rdb.dtb
- dtb-$(CONFIG_TARGET_P3041DS) += p3041ds.dtb
- dtb-$(CONFIG_TARGET_P4080DS) += p4080ds.dtb
- dtb-$(CONFIG_TARGET_P5040DS) += p5040ds.dtb
-diff --git a/arch/powerpc/dts/p2041.dtsi b/arch/powerpc/dts/p2041.dtsi
-deleted file mode 100644
-index ad09b138fc8..00000000000
---- a/arch/powerpc/dts/p2041.dtsi
-+++ /dev/null
-@@ -1,138 +0,0 @@
--// SPDX-License-Identifier: GPL-2.0+ OR X11
--/*
-- * P2041 Silicon/SoC Device Tree Source (pre include)
-- *
-- * Copyright 2011 - 2015 Freescale Semiconductor Inc.
-- * Copyright 2019-2020 NXP
-- */
--
--/dts-v1/;
--
--/include/ "e500mc_power_isa.dtsi"
--
--/ {
--	compatible = "fsl,P2041";
--	#address-cells = <2>;
--	#size-cells = <2>;
--	interrupt-parent = <&mpic>;
--
--	cpus {
--		#address-cells = <1>;
--		#size-cells = <0>;
--
--		cpu0: PowerPC,e500mc@0 {
--			device_type = "cpu";
--			reg = <0>;
--			fsl,portid-mapping = <0x80000000>;
--		};
--		cpu1: PowerPC,e500mc@1 {
--			device_type = "cpu";
--			reg = <1>;
--			fsl,portid-mapping = <0x40000000>;
--		};
--		cpu2: PowerPC,e500mc@2 {
--			device_type = "cpu";
--			reg = <2>;
--			fsl,portid-mapping = <0x20000000>;
--		};
--		cpu3: PowerPC,e500mc@3 {
--			device_type = "cpu";
--			reg = <3>;
--			fsl,portid-mapping = <0x10000000>;
--		};
--	};
--
--	soc: soc@ffe000000 {
--		ranges = <0x00000000 0xf 0xfe000000 0x1000000>;
--		reg = <0xf 0xfe000000 0 0x00001000>;
--		#address-cells = <1>;
--		#size-cells = <1>;
--		device_type = "soc";
--		compatible = "simple-bus";
--
--		mpic: pic@40000 {
--			interrupt-controller;
--			#address-cells = <0>;
--			#interrupt-cells = <4>;
--			reg = <0x40000 0x40000>;
--			compatible = "fsl,mpic", "chrp,open-pic";
--			device_type = "open-pic";
--			clock-frequency = <0x0>;
--		};
--
--		espi0: spi@110000 {
--			compatible = "fsl,mpc8536-espi";
--			#address-cells = <1>;
--			#size-cells = <0>;
--			reg = <0x110000 0x1000>;
--			fsl,espi-num-chipselects = <4>;
--			status = "disabled";
--		};
--
--		usb0: usb@210000 {
--			compatible = "fsl-usb2-mph";
--			reg = <0x210000 0x1000>;
--			phy_type = "utmi";
--		};
--
--		usb1: usb@211000 {
--			compatible = "fsl-usb2-mph";
--			reg = <0x210000 0x1000>;
--			phy_type = "utmi";
--		};
--
--		sata: sata@220000 {
--			compatible = "fsl,pq-sata-v2";
--			reg = <0x220000 0x1000>;
--			interrupts = <68 0x2 0 0>;
--			sata-offset = <0x1000>;
--			sata-number = <2>;
--			sata-fpdma = <0>;
--		};
--
--		esdhc: esdhc@114000 {
--			compatible = "fsl,esdhc";
--			reg = <0x114000 0x1000>;
--			clock-frequency = <0>;
--		};
--
--		/include/ "qoriq-i2c-0.dtsi"
--		/include/ "qoriq-i2c-1.dtsi"
--	};
--
--	pcie@ffe200000 {
--		compatible = "fsl,pcie-p2041", "fsl,pcie-fsl-qoriq";
--		reg = <0xf 0xfe200000 0x0 0x1000>;   /* registers */
--		law_trgt_if = <0>;
--		#address-cells = <3>;
--		#size-cells = <2>;
--		device_type = "pci";
--		bus-range = <0x0 0xff>;
--		ranges = <0x01000000 0x0 0x00000000 0xf 0xf8000000 0x0 0x00010000   /* downstream I/O */
--			  0x02000000 0x0 0xe0000000 0xc 0x00000000 0x0 0x20000000>; /* non-prefetchable memory */
--	};
--
--	pcie@ffe201000 {
--		compatible = "fsl,pcie-p2041", "fsl,pcie-fsl-qoriq";
--		reg = <0xf 0xfe201000 0x0 0x1000>;   /* registers */
--		law_trgt_if = <1>;
--		#address-cells = <3>;
--		#size-cells = <2>;
--		device_type = "pci";
--		bus-range = <0x0 0xff>;
--		ranges = <0x01000000 0x0 0x00000000 0xf 0xf8010000 0x0 0x00010000   /* downstream I/O */
--			  0x02000000 0x0 0xe0000000 0xc 0x20000000 0x0 0x20000000>; /* non-prefetchable memory */
--	};
--
--	pcie@ffe202000 {
--		compatible = "fsl,pcie-p2041", "fsl,pcie-fsl-qoriq";
--		reg = <0xf 0xfe202000 0x0 0x1000>;   /* registers */
--		law_trgt_if = <2>;
--		#address-cells = <3>;
--		#size-cells = <2>;
--		device_type = "pci";
--		bus-range = <0x0 0xff>;
--		ranges = <0x01000000 0x0 0x00000000 0xf 0xf8020000 0x0 0x00010000   /* downstream I/O */
--			  0x02000000 0x0 0xe0000000 0xc 0x40000000 0x0 0x20000000>; /* non-prefetchable memory */
--	};
--};
-diff --git a/arch/powerpc/dts/p2041rdb-u-boot.dtsi b/arch/powerpc/dts/p2041rdb-u-boot.dtsi
+diff --git a/board/nxp/p2041rdb/p2041rdb_rcw_sd.cfg b/board/nxp/p2041rdb/p2041rdb_rcw_sd.cfg
 new file mode 100644
-index 00000000000..1dc83cf846b
+index 00000000000..f22f3335e73
 --- /dev/null
-+++ b/arch/powerpc/dts/p2041rdb-u-boot.dtsi
-@@ -0,0 +1,19 @@
-+// SPDX-License-Identifier: GPL-2.0+
++++ b/board/nxp/p2041rdb/p2041rdb_rcw_sd.cfg
+@@ -0,0 +1,11 @@
++#
++# Default RCW for P2041RDB.
++#
 +
-+&serial0 {
-+	bootph-all;
-+};
-+
-+&soc {
-+	i2c@118000 {
-+		bootph-all;
-+	};
-+
-+	spi@110000 {
-+		flash@0 {
-+			spi-max-frequency = <10000000>;
-+		};
-+	};
-+};
-+
-+#include "u-boot.dtsi"
-diff --git a/arch/powerpc/dts/p2041rdb.dts b/arch/powerpc/dts/p2041rdb.dts
-deleted file mode 100644
-index 0fa1f098524..00000000000
---- a/arch/powerpc/dts/p2041rdb.dts
-+++ /dev/null
-@@ -1,127 +0,0 @@
--// SPDX-License-Identifier: GPL-2.0+ OR X11
--/*
-- * P2041RDB Device Tree Source
-- *
-- * Copyright 2011 - 2015 Freescale Semiconductor Inc.
-- * Copyright 2019-2020 NXP
-- */
--
--/include/ "p2041.dtsi"
--
--/ {
--	model = "fsl,P2041RDB";
--	compatible = "fsl,P2041RDB";
--	#address-cells = <2>;
--	#size-cells = <2>;
--	interrupt-parent = <&mpic>;
--
--	aliases {
--		phy_rgmii_0 = &phy_rgmii_0;
--		phy_rgmii_1 = &phy_rgmii_1;
--		phy_sgmii_2 = &phy_sgmii_2;
--		phy_sgmii_3 = &phy_sgmii_3;
--		phy_sgmii_4 = &phy_sgmii_4;
--		phy_sgmii_1c = &phy_sgmii_1c;
--		phy_sgmii_1d = &phy_sgmii_1d;
--		phy_sgmii_1e = &phy_sgmii_1e;
--		phy_sgmii_1f = &phy_sgmii_1f;
--		phy_xgmii_2 = &phy_xgmii_2;
--		spi0 = &espi0;
--	};
--
--	soc: soc@ffe000000 {
--		ranges = <0x00000000 0xf 0xfe000000 0x1000000>;
--		reg = <0xf 0xfe000000 0 0x00001000>;
--
--		fman@400000 {
--			ethernet@e0000 {
--				phy-handle = <&phy_sgmii_2>;
--				phy-connection-type = "sgmii";
--			};
--
--			mdio@e1120 {
--				phy_rgmii_0: ethernet-phy@0 {
--					reg = <0x0>;
--				};
--
--				phy_rgmii_1: ethernet-phy@1 {
--					reg = <0x1>;
--				};
--
--				phy_sgmii_2: ethernet-phy@2 {
--					reg = <0x2>;
--				};
--
--				phy_sgmii_3: ethernet-phy@3 {
--					reg = <0x3>;
--				};
--
--				phy_sgmii_4: ethernet-phy@4 {
--					reg = <0x4>;
--				};
--
--				phy_sgmii_1c: ethernet-phy@1c {
--					reg = <0x1c>;
--				};
--
--				phy_sgmii_1d: ethernet-phy@1d {
--					reg = <0x1d>;
--				};
--
--				phy_sgmii_1e: ethernet-phy@1e {
--					reg = <0x1e>;
--				};
--
--				phy_sgmii_1f: ethernet-phy@1f {
--					reg = <0x1f>;
--				};
--			};
--
--			ethernet@e2000 {
--				phy-handle = <&phy_sgmii_3>;
--				phy-connection-type = "sgmii";
--			};
--
--			ethernet@e4000 {
--				phy-handle = <&phy_sgmii_4>;
--				phy-connection-type = "sgmii";
--			};
--
--			ethernet@e6000 {
--				phy-handle = <&phy_rgmii_1>;
--				phy-connection-type = "rgmii";
--			};
--
--			ethernet@e8000 {
--				phy-handle = <&phy_rgmii_0>;
--				phy-connection-type = "rgmii";
--			};
--
--			ethernet@f0000 {
--				phy-handle = <&phy_xgmii_2>;
--				phy-connection-type = "xgmii";
--			};
--
--			mdio@f1000 {
--				phy_xgmii_2: ethernet-phy@0 {
--					compatible = "ethernet-phy-ieee802.3-c45";
--					reg = <0x0>;
--				};
--			};
--		};
--	};
--};
--
--&espi0 {
--	status = "okay";
--	flash@0 {
--		compatible = "jedec,spi-nor";
--		#address-cells = <1>;
--		#size-cells = <1>;
--		reg = <0>;
--		/* input clock */
--		spi-max-frequency = <10000000>;
--	};
--};
--
--/include/ "p2041si-post.dtsi"
-diff --git a/arch/powerpc/dts/p2041si-post.dtsi b/arch/powerpc/dts/p2041si-post.dtsi
-deleted file mode 100644
-index 8819199646f..00000000000
---- a/arch/powerpc/dts/p2041si-post.dtsi
-+++ /dev/null
-@@ -1,43 +0,0 @@
--// SPDX-License-Identifier: (GPL-2.0+ OR BSD-3-Clause)
--/*
-- * P2041/P2040 Silicon/SoC Device Tree Source (post include)
-- *
-- * Copyright 2011 - 2015 Freescale Semiconductor Inc.
-- * Copyright 2020 NXP
-- *
-- */
--
--&soc {
--
--/include/ "qoriq-clockgen1.dtsi"
--/include/ "qoriq-gpio-0.dtsi"
--/include/ "qoriq-sec4.2-0.dtsi"
--
--/* include used FMan blocks */
--/include/ "qoriq-fman-0.dtsi"
--/include/ "qoriq-fman-0-1g-0.dtsi"
--/include/ "qoriq-fman-0-1g-1.dtsi"
--/include/ "qoriq-fman-0-1g-2.dtsi"
--/include/ "qoriq-fman-0-1g-3.dtsi"
--/include/ "qoriq-fman-0-1g-4.dtsi"
--/include/ "qoriq-fman-0-10g-0.dtsi"
--	fman@400000 {
--		enet0: ethernet@e0000 {
--		};
--
--		enet1: ethernet@e2000 {
--		};
--
--		enet2: ethernet@e4000 {
--		};
--
--		enet3: ethernet@e6000 {
--		};
--
--		enet4: ethernet@e8000 {
--		};
--
--		enet5: ethernet@f0000 {
--		};
--	};
--};
-diff --git a/configs/P2041RDB_SPIFLASH_defconfig b/configs/P2041RDB_SPIFLASH_defconfig
-index 1b7389178be..465b3ee7dc7 100644
---- a/configs/P2041RDB_SPIFLASH_defconfig
-+++ b/configs/P2041RDB_SPIFLASH_defconfig
-@@ -1,11 +1,12 @@
++#PBL preamble and RCW header
++aa55aa55 010e0100
++#64 bytes RCW data
++12600000 00000000 241C0000 00000000
++649FA0C1 C3C02000 68000000 40000000
++00000000 00000000 00000000 D0030F07
++00000000 00000000 00000000 00000000
+diff --git a/board/nxp/p2041rdb/rcw_p2041rdb.cfg b/board/nxp/p2041rdb/p2041rdb_rcw_spi.cfg
+similarity index 100%
+rename from board/nxp/p2041rdb/rcw_p2041rdb.cfg
+rename to board/nxp/p2041rdb/p2041rdb_rcw_spi.cfg
+diff --git a/configs/P2041RDB_SDCARD_defconfig b/configs/P2041RDB_SDCARD_defconfig
+index ad04e2a1172..88695e1cabe 100644
+--- a/configs/P2041RDB_SDCARD_defconfig
++++ b/configs/P2041RDB_SDCARD_defconfig
+@@ -1,10 +1,11 @@
  CONFIG_PPC=y
  CONFIG_TEXT_BASE=0xFFF40000
  CONFIG_SYS_MALLOC_LEN=0x100000
 +CONFIG_SYS_MALLOC_F_LEN=0x600
  CONFIG_SF_DEFAULT_SPEED=10000000
  CONFIG_ENV_SIZE=0x2000
- CONFIG_ENV_OFFSET=0x100000
- CONFIG_ENV_SECT_SIZE=0x10000
+ CONFIG_ENV_OFFSET=0xCF400
 -CONFIG_DEFAULT_DEVICE_TREE="p2041rdb"
 +CONFIG_DEFAULT_DEVICE_TREE="fsl/p2041rdb"
  CONFIG_SYS_MONITOR_LEN=786432
  CONFIG_MPC85xx=y
  CONFIG_SYS_INIT_RAM_LOCK=y
-@@ -56,6 +57,7 @@ CONFIG_CMD_PING=y
+@@ -28,7 +29,7 @@ CONFIG_FIT=y
+ CONFIG_FIT_VERBOSE=y
+ CONFIG_RAMBOOT_PBL=y
+ CONFIG_SYS_FSL_PBL_PBI="board/nxp/p2041rdb/pbi.cfg"
+-CONFIG_SYS_FSL_PBL_RCW="board/nxp/p2041rdb/rcw_p2041rdb.cfg"
++CONFIG_SYS_FSL_PBL_RCW="board/nxp/p2041rdb/p2041rdb_rcw_sd.cfg"
+ CONFIG_BOOTDELAY=10
+ CONFIG_OF_BOARD_SETUP=y
+ CONFIG_OF_STDOUT_VIA_ALIAS=y
+@@ -54,6 +55,7 @@ CONFIG_CMD_PING=y
  CONFIG_CMD_EXT2=y
  CONFIG_CMD_FAT=y
  CONFIG_OF_CONTROL=y
 +CONFIG_OF_UPSTREAM=y
  CONFIG_ENV_OVERWRITE=y
- CONFIG_ENV_IS_IN_SPI_FLASH=y
+ CONFIG_ENV_IS_IN_MMC=y
  CONFIG_ENV_RELOC_GD_ENV_ADDR=y
-diff --git a/configs/P2041RDB_defconfig b/configs/P2041RDB_defconfig
-index b6c28db4f10..9c3e95093bf 100644
---- a/configs/P2041RDB_defconfig
-+++ b/configs/P2041RDB_defconfig
-@@ -1,10 +1,11 @@
- CONFIG_PPC=y
- CONFIG_TEXT_BASE=0xEFF40000
- CONFIG_SYS_MALLOC_LEN=0x100000
-+CONFIG_SYS_MALLOC_F_LEN=0x600
- CONFIG_SF_DEFAULT_SPEED=10000000
- CONFIG_ENV_SIZE=0x2000
- CONFIG_ENV_SECT_SIZE=0x20000
--CONFIG_DEFAULT_DEVICE_TREE="p2041rdb"
-+CONFIG_DEFAULT_DEVICE_TREE="fsl/p2041rdb"
- CONFIG_SYS_MONITOR_LEN=786432
- CONFIG_ENV_ADDR=0xEFF20000
- CONFIG_MPC85xx=y
-@@ -52,6 +53,7 @@ CONFIG_CMD_PING=y
- CONFIG_CMD_EXT2=y
- CONFIG_CMD_FAT=y
- CONFIG_OF_CONTROL=y
-+CONFIG_OF_UPSTREAM=y
- CONFIG_ENV_OVERWRITE=y
- CONFIG_ENV_IS_IN_FLASH=y
- CONFIG_USE_BOOTFILE=y
-diff --git a/include/configs/P2041RDB.h b/include/configs/P2041RDB.h
-index f88fb9cdb9a..3525e29acc4 100644
---- a/include/configs/P2041RDB.h
-+++ b/include/configs/P2041RDB.h
-@@ -149,6 +149,8 @@
-  * shorted - index 1
-  */
- 
-+#define CFG_SYS_NS16550_CLK          (get_bus_freq(0) / 2)
-+
- #define CFG_SYS_BAUDRATE_TABLE	\
- 	{300, 600, 1200, 2400, 4800, 9600, 19200, 38400, 57600, 115200}
- 
+diff --git a/configs/P2041RDB_SPIFLASH_defconfig b/configs/P2041RDB_SPIFLASH_defconfig
+index 465b3ee7dc7..fc187eb311c 100644
+--- a/configs/P2041RDB_SPIFLASH_defconfig
++++ b/configs/P2041RDB_SPIFLASH_defconfig
+@@ -31,7 +31,7 @@ CONFIG_FIT_VERBOSE=y
+ CONFIG_RAMBOOT_PBL=y
+ CONFIG_SPIFLASH=y
+ CONFIG_SYS_FSL_PBL_PBI="board/nxp/p2041rdb/pbi.cfg"
+-CONFIG_SYS_FSL_PBL_RCW="board/nxp/p2041rdb/rcw_p2041rdb.cfg"
++CONFIG_SYS_FSL_PBL_RCW="board/nxp/p2041rdb/p2041rdb_rcw_spi.cfg"
+ CONFIG_BOOTDELAY=10
+ CONFIG_OF_BOARD_SETUP=y
+ CONFIG_OF_STDOUT_VIA_ALIAS=y
 -- 
 2.47.3
 
