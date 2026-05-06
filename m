@@ -4,132 +4,136 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD66CCD342F
-	for <u-boot@archiver.kernel.org>; Wed,  6 May 2026 00:57:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5274BCD3427
+	for <u-boot@archiver.kernel.org>; Wed,  6 May 2026 02:22:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2342584944;
-	Wed,  6 May 2026 02:57:42 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A074B8493F;
+	Wed,  6 May 2026 04:22:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="sdaeLiRS";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="elbePBet";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 84824846A1; Wed,  6 May 2026 02:57:41 +0200 (CEST)
-Received: from OSPPR02CU001.outbound.protection.outlook.com
- (mail-norwayeastazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c20f::7])
+ id A56FC84944; Wed,  6 May 2026 04:22:19 +0200 (CEST)
+Received: from PA4PR04CU001.outbound.protection.outlook.com
+ (mail-francecentralazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20a::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 350B884944
- for <u-boot@lists.denx.de>; Wed,  6 May 2026 02:57:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CAC1584936
+ for <u-boot@lists.denx.de>; Wed,  6 May 2026 04:22:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=peng.fan@oss.nxp.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=oR2V0hruiZEq9Sr75QijUCRuZT0IOTMr9ncIZlQ39cNnvZe3MWxWkakJb6rHtCOsKVA2SGidQPMYMf4fwwu/iVWsoG2L+fUo8//e8YSKd+lJF6vnaXE6p94Syn3Zuqgp56L8fdjuEfrHAClrL1cf3n7nA/5VNK5rDinF77tzeWCATuvU0ODFWxZwaeqBHtUXId+JP3wn+wbgxoaSqWeKdTcwEWdpGMC9JLqVpA9YE4WHRiQWPi38RIdSbMHFJzTsgtZoL3ES8vI6CRmNudkjNV1KIsvUNlm1tfpGo1F7WyP9UY/A9MM3HYaqhsCo3olO3NDcQHRSogKOZN59sSc+oQ==
+ b=O7xcQkvn53/GcADhQYJGD95BmZ8nAeU6+/2qd+6LE0MHIA1BUj1XY1+PEQzAErQaxYzwvMwKfwW3Z8i9WKnyiPMmCdKdgDgcNjOJ+wMPgpM982r9BFL6zUOZtaM35AA0azVSpb92pKieXN0w1TGNjL2rf2bpaco6KXYLsCKhgmTidcVxv+zFssG9wxhS4+v8ku4Tnkt/pPwhvoHskY0O5MphXdCUuieCMJp8/maW5h5eJIy1r9fZxJs2sqzhqa7xRTqYwywTW5/ABD0jJST4cynzaFGlzchS/GKBoQTkN4cX75fl4isaYPf8PT9+1dLTzEyOxoNB8YAfKnq4GZboSA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=xTSIH3ntY3CCqAdT/docDwZr05ez8RVK4AaNvZgmxh8=;
- b=f9ocwI65X4SZoWp+cmPO0Ci5Z5rBO7icg6INRWNIaxkq0j2va6+6WYtaQ4IrjGpVSqskShnl71K1jeya6zRWyMDon3+C4n2IzoeFknXWWwuLnNBUGp5vLibsWp/k2SRAmKT5ShNYv8qXR6Fw4VTScYci1LrvFdwMuuVJa4ikRrFxbpEwDDokTzoZvSLLr66ZgvQVF/xvMtZsrUUYxg0OYgWiM8XGmYUCtygVXDx6aRaqsht8socFZGO6PHV3AaEypzJdlnvpMB8NZhxarG3yDSEx4DJNfEpvb8q6+hxl977bmIdB0vsqHvtiF3hRzVsZjXZdGRAoYitnuba9Gi2maQ==
+ bh=Sw5HDIQBcO5ryovL8zzLBUx4MnI3MAEZ6LAoQVAwrhg=;
+ b=SfpwO3fNtPHidb6c6Z5UHp9GK3Q1sxBii5xuZrTBxvqNQ5AZszgmHlA1SebbjEY/3Ap6ThFXGYGI7VGCvku4sfh9e01+js7ScpcZyIupEHGmRfpxDd4px5C0O1e0kj4odMy+J6pIAWR/I9B3x1WV92UwyyRcd2+JWJBazEEcnOPATxRaZCH+BQgjg4g5QTxKnxoXOXsbNEwnwq+6LkxERfaG0HPrgO+mt5yd9kp/tbJdoSmpe0sTfGtSpyElTbIsw3bXmC+tZtSceByuG+YH1htQcoFLG2nfJJRMQWDcEbdkBmjZSYrPARNZV4Bc/HnRREQQ+bGnr0MqtqiLy+FQoA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
  dkim=pass header.d=oss.nxp.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
  s=selector1-NXP1-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=xTSIH3ntY3CCqAdT/docDwZr05ez8RVK4AaNvZgmxh8=;
- b=sdaeLiRSnJs6InApJyNA+OSpHxIXUX+3HhuefFh2KtjNpO6uIscT21rFoS96Tm2KctnVHXyBEndLC8wbD3IJK3+fFDa6critmrGF5RXavQutjJjRkkqeO1cbv9zRL/FSN8gplla9GYM3RTnCgOgf8uOHABNTI0QTYJQ/qGtz6nKOJZNUM5fCXYZ2AtZHnFEQ3cKsl3K+kTfSwU1Y6w0XojGYA1I7P+FcEZsdjLXKbzVt/vYDebfC+uRJuDExFr85sycNpKbUmG9E1o49Eeuw3X9wRoFXvjBD5ZpVNjHea3agVje+NGCxIsGs8IuB4RbBs05U7TFykkulANlC25rkaw==
+ bh=Sw5HDIQBcO5ryovL8zzLBUx4MnI3MAEZ6LAoQVAwrhg=;
+ b=elbePBetlLTmkfDszEAKXJB8ImvCfJMTq0jIbeIWsjkOsmJHahQXhLmljLESwL5psU56s2L4orJA+Z2l94LHsAaq7v6yFTzw8ATOQt5p1PfWFgdhpau+6tYh3AgT4EYp8+2AUetcBQnL/LXoW4lZcC1GEP8SOl0c9W8bT7XghVMEOjIIrbIM5F0NykKHo8rZ5J/Jb12WOuetOdCgWTkcE3dx1n3jWEaODCeEAfHujRQEtEbD2OqmcnYMKyoy+0tdZ8aZAXEgsC1u2jkKnNVlL5a3WNOGe3uSG/hc6N6qh/94CEKJH0nf2uoSMYGQZhzkcqLlJjsBtgYRUR1quP1FyA==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=oss.nxp.com;
 Received: from MRWPR04MB12330.eurprd04.prod.outlook.com (2603:10a6:501:7f::23)
- by PR3PR04MB7273.eurprd04.prod.outlook.com (2603:10a6:102:89::15)
+ by VI0PR04MB10391.eurprd04.prod.outlook.com (2603:10a6:800:236::15)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9870.25; Wed, 6 May
- 2026 00:57:35 +0000
+ 2026 02:22:15 +0000
 Received: from MRWPR04MB12330.eurprd04.prod.outlook.com
  ([fe80::ca22:f8c8:6aca:7889]) by MRWPR04MB12330.eurprd04.prod.outlook.com
  ([fe80::ca22:f8c8:6aca:7889%6]) with mapi id 15.20.9891.008; Wed, 6 May 2026
- 00:57:35 +0000
-Date: Wed, 6 May 2026 10:14:27 +0800
+ 02:22:14 +0000
+Date: Wed, 6 May 2026 11:39:08 +0800
 From: Peng Fan <peng.fan@oss.nxp.com>
-To: tze.yee.ng@altera.com
-Cc: u-boot@lists.denx.de, Peng Fan <peng.fan@nxp.com>,
- Jaehoon Chung <jh80.chung@samsung.com>, Tom Rini <trini@konsulko.com>,
- Tanmay Kathpalia <tanmay.kathpalia@altera.com>,
- Tien Fong Chee <tien.fong.chee@altera.com>,
- Kok Kiang Hea <kok.kiang.hea@altera.com>,
- Dinesh Maniyam <dinesh.maniyam@altera.com>,
- Chen Huei Lok <chen.huei.lok@altera.com>, alif.zakuan.yuslaimi@altera.com,
- Boon Khai Ng <boon.khai.ng@altera.com>
-Subject: Re: [PATCH] mmc: sdhci-cadence: trigger tuning for SD HS mode on
- SD6HC (v6) PHY
-Message-ID: <afqkA0gI773LcIqx@nxa18884-linux.ap.freescale.net>
-References: <f385cf516e8a75fff5c90aa9e54f8e54044f0dd9.1777947009.git.tze.yee.ng@altera.com>
+To: Michael Walle <mwalle@kernel.org>
+Cc: Marek Beh??n <kabel@kernel.org>, Tom Rini <trini@konsulko.com>,
+ Pramod Kumar <pramod.kumar_1@nxp.com>, Vladimir Oltean <olteanv@gmail.com>,
+ Alison Wang <alison.wang@nxp.com>,
+ Tang Yuantian <andy.tang@nxp.com>, Mingkai Hu <mingkai.hu@nxp.com>,
+ Priyanka Jain <priyanka.jain@nxp.com>, Wasim Khan <wasim.khan@nxp.com>,
+ Meenakshi Aggarwal <meenakshi.aggarwal@nxp.com>,
+ TsiChung Liew <Tsi-Chung.Liew@nxp.com>,
+ Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>,
+ "NXP i . MX U-Boot Team" <uboot-imx@nxp.com>,
+ Peng Fan <peng.fan@nxp.com>, Shengzhou Liu <Shengzhou.Liu@nxp.com>,
+ Tomas Alvarez Vanoli <tomas.alvarez-vanoli@hitachienergy.com>,
+ Jerome Forissier <jerome.forissier@arm.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH 02/10] caam: don't write memory at 0 on PPC
+Message-ID: <afq33D1TQVdK2lBf@nxa18884-linux.ap.freescale.net>
+References: <20260429121816.1026326-1-mwalle@kernel.org>
+ <20260429121816.1026326-3-mwalle@kernel.org>
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <f385cf516e8a75fff5c90aa9e54f8e54044f0dd9.1777947009.git.tze.yee.ng@altera.com>
-X-ClientProxiedBy: SI2PR06CA0012.apcprd06.prod.outlook.com
- (2603:1096:4:186::13) To MRWPR04MB12330.eurprd04.prod.outlook.com
+In-Reply-To: <20260429121816.1026326-3-mwalle@kernel.org>
+X-ClientProxiedBy: MA5P287CA0005.INDP287.PROD.OUTLOOK.COM
+ (2603:1096:a01:176::14) To MRWPR04MB12330.eurprd04.prod.outlook.com
  (2603:10a6:501:7f::23)
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: MRWPR04MB12330:EE_|PR3PR04MB7273:EE_
-X-MS-Office365-Filtering-Correlation-Id: fdbe08f1-1750-40ff-212b-08deab0a761b
+X-MS-TrafficTypeDiagnostic: MRWPR04MB12330:EE_|VI0PR04MB10391:EE_
+X-MS-Office365-Filtering-Correlation-Id: 9deb682e-d865-421e-2847-08deab164993
 X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|376014|7416014|52116014|19092799006|366016|38350700014|10063799003|18002099003|22082099003|56012099003;
-X-Microsoft-Antispam-Message-Info: +t+yxqWDcS+1vL1JFmzS3OP3HarG2l3fQfAX2jfz998R9RpbFbSNMhGEUVgMxhLcJNE+7KCq6eZBO2LdGmiZdQKuaGPv1iDyA0NLBqyLscfDXnx08in7UtCeqTsmuq9/ev/l4+V3GA2hcpXldhqXRsqwJR4X4wvGirCcVUUyycJ0F4nL+8CFkKLYYvpp1Gf9FChwLEZH7y/eBAeKpdecyMKDPVrJjuknZzZ/1xW8Ssjiu53jKGHzHXM1+KTxq8G/GQql15SDXY+LbFlrbnqIxaAeklqtw1q27wskioKl5PQ7GPoFkBjURK8CBfByIQzvQHj/8TCqJCc8NSH3SeOCsdO+uRsvgqjjgOlOeLEC2mA8EISIpwcGsVy8qvLL/DNHP7ftirXUJ+kx25P+hyH3FnjKwYQ7IBdUARnhso6sxT2aaW5/9XQyeEh5ft99Oxx06O+1D1dSTBkxdocakknOChgJCEeteSZret+fiGiRD518sn5J+xO3M9VVDOWO8YEa5CaiBQq8rf8WPquoB0WQiuXvl6n9GuSZeXKaZ7W2RJ5RkgW606oTIJtJZx+6Un0iaFF6py8VfDV+cF9vp5lqHkZLPvtoCpt8surCynJo/Xrm2kkH/4OJOTZ70mCJz+vGlJtPXIq8OzOddw7NqSSHvx2GpI7cqybXbbKZ2TZ/T0jEB0OPGK+7usxhmEc3MU/nnvMdJYKIaAzzXoePgez+NyuhMa6Mrrl3uaFUpOsw2BrP7gIzg8Nrb8HvcUbZkE4j
+ ARA:13230040|376014|52116014|1800799024|19092799006|366016|18002099003|38350700014|22082099003|56012099003;
+X-Microsoft-Antispam-Message-Info: pEgA5W1QE0WZZ+SGDeEebxvB9bA9v39AF/Bg4w3dYXIslNQJfXKrgRK6dxMAXWPH+9KfqRu6z0oqKvcrUAq1mWHx4J3zXxUdLlebKcZwYCx8FRsUCRd03T4aorh7z9okKpWqmjcYubIMzia2wYp5ogHUFb0o0NOx0jP5aZI/9K6WYBIKDi9d5nc+eqku++jtTD66Ydg/KLz7z/0bo+/GLNKXXNjCjwbhgZ3MpVx7W6g8McC4yVEKhUnFUCf29AcNHRuEmHiPajZ5ZHVWGBP6tzA8VpG9/0LqG+UDSoDhZR6cMLcWaequ0AsHxEJZ+FwRpb73m4o/M+E/TInh0Vnrkhz711L+4pQkl4Fpd8B3wuKxIFxBXbTTaGgBGzfE2/hsAi4woNChJeWFd3iJMV18CgoeJJZ9K6BQODN0CjR02pYLqGBFXQeyFuxnp+TCLYU9yaNcnsj9uY/y8FRdqtmh2Yl7hYVHkNrgJelIhDFlEIR2puqw390eB7NpG1WYdMRYSfc+kE6Z0NEguIZHNYzvaVxl00geEiPOLQ5V6XWld2EZ7AmTcSn6kvgfGXgQFhXFoX8x8ssPvl2w2TdWmfMY7egfTx2ozEnRfo4K5u7ZVKM0BbWmFSf8FrzOKlAcZP3FyK5OZ/AxGuqrvZVLu60N36HSDXBZH7aU+499FcywSmVknoioBXhHOjE0z6Wu+X/EH6YQ9WJbb8b48e5owqesp1GtPQgcIsD8AI78vhUsDwGbU12TaUUooa7UvCTIbXTs
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:MRWPR04MB12330.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(7416014)(52116014)(19092799006)(366016)(38350700014)(10063799003)(18002099003)(22082099003)(56012099003);
+ SFS:(13230040)(376014)(52116014)(1800799024)(19092799006)(366016)(18002099003)(38350700014)(22082099003)(56012099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?DyC+ZrDVL+1XRdy8U25I5TJcDfOR2u7n60AEVNApWN8eT0Togk/azDT5WyD+?=
- =?us-ascii?Q?Zwqx1iy0syZO+rx0TV0+tDG4y2TBTc0EW75C5f8C40I2JMT45JMSx/vK1QKo?=
- =?us-ascii?Q?ulgBFYmj+U/8LSgErEu5HG6bKP2t8prz9WoohySYTwZsMguF6/HwDcCkiyIo?=
- =?us-ascii?Q?szegTcf/xQlDVmH7GDe8CQu/fkodroTYolHp4Lca6ciaPaabyE389clarvo2?=
- =?us-ascii?Q?CadkkfaB6o1V5GsjXz3D+QyPh8yJs12Dyjvkv89YnQKnIv7hpY3HQYXdYEHp?=
- =?us-ascii?Q?sX2eoyRWjhzjy7s5ytTa4lv3dwU461PII91fZTF4qEW1PFCx2d6I/yTZGBh4?=
- =?us-ascii?Q?hj2BOq7oHt1FyHoO3VZ0mFeO3Ng6z4RepGr+4U25RBzvNoxhSxkSTbnY6YcP?=
- =?us-ascii?Q?eCL7219Fdku8W5kD3FtJ6aAI3zlPrdVyvkHCFRqb5xRFGlO+2YpEML+r/OjC?=
- =?us-ascii?Q?/3hfPLp9WctS0vZIurIy8m2yIs6dA+uHcN4cUS0O0UjgRYfq2bQSps7VHzUT?=
- =?us-ascii?Q?5vSWs/HivmA51koMl/XRl4ZDrDVSj8VAwiIKYEu7sBgJa+1E3Ojjl0Llt7Uw?=
- =?us-ascii?Q?aKf9j2i2GSyeMm8r5Aba3TYE8amA68q16D215f+U8A/x2Ltgk8slmSuKA0ZG?=
- =?us-ascii?Q?q5DprUwb9xIPRi3M6ovnebCLe+TvvaR4pOdgIMUAAcaWKzPlarr7ySkoNpl/?=
- =?us-ascii?Q?cg/apJSignEOrGaaFHDpZb/q2EQrtodZTFu4Yk0ZeDgE1jGbsqrBJlhl560U?=
- =?us-ascii?Q?5ki5Gfpu3TgWgneVKADDY6OrnvTQEEsHePq+H54cJv371jlrsYvGd+TQ5/xm?=
- =?us-ascii?Q?m0/prA4a5QcAtvUnBhIMd8ODk8MIOLV+BH4tKbHk1Eb+/Ctw9Bu1CnJzGVjL?=
- =?us-ascii?Q?MxyCSb76ePYNOydMO3WobpomIcjVeRC1JoGkjaZMfJqI/miqbqdPWu1ZmUO/?=
- =?us-ascii?Q?8nVtdNaNlrOpVBapU3U8BxWmh8ljDPvTMy18NNjMrRfcOSVFH9imui/b9uYe?=
- =?us-ascii?Q?F08wVTefF/LSny9sQjAAvYSemNS7z55qH0DE3K6EPZalw/lsUpYY2Eoq/53H?=
- =?us-ascii?Q?06j2CDiZvE4/GkisAIZHzNzTSeZa6HbDHz/spaoVmi1abgbgws5Wxlvkosk1?=
- =?us-ascii?Q?FEWsIm9vKuNqOxtFGyseSyQvU7bOFN/RHSW2PdGzT6FkZvGXi8fPcJ5JRftE?=
- =?us-ascii?Q?6yu1aNW7Tmv/Lc0xakKXX5CmBoaMhs+SWshr4Pfi90+swWxpejkXmu29Mmpl?=
- =?us-ascii?Q?EZwqx0qexq9/35b3Z1jJna3nfmybZIaETxtJir+DwBw85Qxkc6QaP2AUYoqm?=
- =?us-ascii?Q?X+8KIPfxAl2UaBaKiws/gsUkk/ZT+Nn/+czUmzEa+I3PsQDxkGqW3Q00FiB5?=
- =?us-ascii?Q?5aNBc9wz8IfqXfftcxmybMo17m7s0U1Eer1XWNowTp7okDCPdzSo2hxbF62b?=
- =?us-ascii?Q?tBdjPZJIbwjsb4f+3jKcZm0WPgr/c3B1VAAE73kPr1EfolRWxrpZNAhDOU0/?=
- =?us-ascii?Q?QBR7eKIt4J2dasIHbQKO5LJ8khZwfvAy8L6sCnwrYhK+kVvs39HbfRhB6BcF?=
- =?us-ascii?Q?/ocEj8DlctSI43wboCp+SEZXU8VQxGD0CVP1BrWbNjuVr9cybta7DZTj765p?=
- =?us-ascii?Q?wrzw39DPaa/pO0FL4agLGzB+PEAEOWn4PVWsHnF49VRkwBNPndGpDoNfdr6W?=
- =?us-ascii?Q?FjabrO2pZLC0shiMjUYbioisH8jyp5R/eGTJJOZkRwc5yoLW2uovTqGX8/3Y?=
- =?us-ascii?Q?dSKgKnKFEA=3D=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?WUGQqJhgjG4JPR3u7CICo1DDTWSjDk+qaxcdJzNvbAKYxKElvS2eYFGcytGn?=
+ =?us-ascii?Q?LR2hY4tYjSbitNHNtkPGS+a37rkFWT3NTYTXqWoGLQokNZDJ+000tCymK0CN?=
+ =?us-ascii?Q?e6tsM9FpvloiE9Ifn13YoX038qrnKEB3flef5YF1edCFhdkF1v9GeLv+cIpS?=
+ =?us-ascii?Q?wm6IfJj7NkJYMFnsqLzO0ljAFsWUopWJg7AGVvhG8ehIZIZr8xayaAgDjmN1?=
+ =?us-ascii?Q?CgSbOhyuKis6hhWC3jNryiVAe4VI9sSxGRu7aEDDHS/ro6b0BoF20L9vT08S?=
+ =?us-ascii?Q?XkNizeQwUz667c+RxcfaUIbjH/KmnmBi6HdSxlUf60DFR3N14M13tx1OPger?=
+ =?us-ascii?Q?SCqJ7WjCnN3EXsSEyJQmTBxQpQINgmkzH2H3j0Al1BRiUGzb2A3OlieoXeMI?=
+ =?us-ascii?Q?krOPPuBpahr+qzatMVQvhBnC4lJDxh5v8lA6iFk0FeV1X9OconIoXv+Bvb2q?=
+ =?us-ascii?Q?uIbJ93CSiJtVrZQB9Q2+7wLtyNARl3XRslymisGqZ/cu3oYKkvoeo8weNFcw?=
+ =?us-ascii?Q?OwITECLN4GzO3DR83lQ3WLW5fI4u/ue7JNnWWXOEXx/Qp9BFvWGOVT9cbGQl?=
+ =?us-ascii?Q?N6W5/zbRBz9HA2QlY2n+r+Xq7Wjeh9UC2+kt8FTz0ShinAkRdC+RITQtzaRt?=
+ =?us-ascii?Q?PAOmBCBjI3zXY8p+L12ubWEXWafrSoaPpJrVshqf5X4U5ZKi8wkc3nOih7rN?=
+ =?us-ascii?Q?j52CTDZwJX/H2uDtLMldOdRR2RnXHe8K3be3dtIsWRyL5Adg5gO1zTLOt/fF?=
+ =?us-ascii?Q?eyb87XP9XTRtp60Ron1xdDM+rdH5K4vkFvtL/BXB0oDtbZQWyGWMuPzaqV1j?=
+ =?us-ascii?Q?gDfrKrD4LO7mvo/UI2uATxKxs9w0hl9Qx43DZdI5x5IZHMUcQTTqzCxLgobf?=
+ =?us-ascii?Q?wAwbeRwTuvQZSHZVdJ+l8Hw8Fod4B567vfaMQO/FEwGVp5inhWqOGBIakFue?=
+ =?us-ascii?Q?AO5VBJo7NlmwUfx941T8VMPL54lJKvx9HzlT31tBHSReCiXm7z8SN2caOnPR?=
+ =?us-ascii?Q?bqee2R9+nvYiw0cASYW3UkIRzUqVsgOq/cLBIBW4ZPAifwZ5SEcnfspovBai?=
+ =?us-ascii?Q?bRIQpWSdKTYpcqd+k6khMMSUYU8HOSQnkCwvuWgi09+R1gQ2PDT8wETYTUAe?=
+ =?us-ascii?Q?LsRgRAHC7z3YWH+1EhnvQzWYeD9fRjf6minnTHRoHDjrpYSjl2WxwNP6uf8L?=
+ =?us-ascii?Q?AVXrR6h72x3dV1pa5aTTgcjjxWlsLYWmYIQ5/sxvnVqSwYjv+zxNT3xs4cSM?=
+ =?us-ascii?Q?Ya93uzjlYuisOBZye/Ww4edzyIr2hjTsC7H2q0Rsmee3472jOW8Ktvw/L5k6?=
+ =?us-ascii?Q?FgphDTOKCw2yPbig+aOgtepIEEmFlqR5P5CH4siLuKtfqxCwkRv4t4tCyi+d?=
+ =?us-ascii?Q?E2OrjvidcI/l8GzUPEL709CGZZmCK4AUbTkAXNFm51K80Z1qxIhgnWvogoII?=
+ =?us-ascii?Q?9UAg8DU7PuVR93U67TqLGoGdaaVfr36hn7SNf2w+8qin61oRTtcR9yl1Fmvm?=
+ =?us-ascii?Q?msube7AIrcDLOi/OrRBL1P37nXpCoesSD5e1Xq5BM5YPOLjVTnVOmgPYKggD?=
+ =?us-ascii?Q?e7Txf4AkTRTOnRPN5kjcnX3aoke6CT/+Ou5gLezB9WSi/a2UKLn1qqYC6k70?=
+ =?us-ascii?Q?0psc71x24mpjlcy5FSjsWviFfbMPUbmQOx3K9pLg4d419A/PFA8snqNt1Ecj?=
+ =?us-ascii?Q?OCSadBR4z23l0U2lTHEClSV4GqJKHkQABihxtK/00BatUc+WPjTxBkEM2TPk?=
+ =?us-ascii?Q?68G49l6g0w=3D=3D?=
 X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: fdbe08f1-1750-40ff-212b-08deab0a761b
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9deb682e-d865-421e-2847-08deab164993
 X-MS-Exchange-CrossTenant-AuthSource: MRWPR04MB12330.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 May 2026 00:57:35.6105 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 May 2026 02:22:14.6583 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: UaQKM00YZACuIcCeB8bgjkny9vtDyZUNp3RBkalRP1h6vwE2/YXWR/DtNmjsvHrQKD9dwVcHRSCRstOaFJ1vCw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PR3PR04MB7273
+X-MS-Exchange-CrossTenant-UserPrincipalName: jfpX1oFTSFusU28svqFsECGwJ8IO5q2LEb/hgcnKA2833+9XEMwrx9BL51eBSmmGhNjAt84ZXPmXJq3fYk4GUg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI0PR04MB10391
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -146,296 +150,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, May 04, 2026 at 07:36:03PM -0700, tze.yee.ng@altera.com wrote:
->From: Tze Yee Ng <tze.yee.ng@altera.com>
+On Wed, Apr 29, 2026 at 02:17:16PM +0200, Michael Walle wrote:
+>For non-secure boot environments pamu_init() isn't called but the CAAM
+>will still call sec_config_pamu_table() -> config_pamu() which then uses
+>an uninitialized ppaact variable. In fact, that variable is initialized
+>with 0, so the config_pamu() will happily assume the structure is there
+>and will operate on that memory. Call pamu_init() in the non-secure boot
+>case, too.
 >
->The Cadence SD6HC (SDHCI spec v4.20+) controller uses a soft PHY whose
->DLL delay characteristics vary with PVT (Process, Voltage, Temperature)
->and board-level trace routing.
+>Signed-off-by: Michael Walle <mwalle@kernel.org>
+>---
+> arch/powerpc/cpu/mpc85xx/cpu_init.c | 4 +++-
+> 1 file changed, 3 insertions(+), 1 deletion(-)
 >
->A static delay value programmed via device tree for SD High Speed mode is
->insufficient because the optimal sampling point varies per board, SD card,
->and operating conditions. Runtime calibration is required.
->
->While the SD Physical Layer Specification does not mandate tuning for
->SD HS mode (only for UHS-I SDR50/SDR104), the Cadence SD6HC PHY
->requires runtime calibration of its receive data delay line to find a
->valid sampling window under constrained clock conditions.
->
->The tuning is triggered from the set_ios_post callback because at that
->moment hardware has committed the new bus width, clock frequency, and speed
->mode to the controller registers. This ensuring the tuning sequence runs
->at the correct SD HS operating conditions.
->
->The tuning is gated by a device tree property "cdns,sd-hs-tuning" so
->that only boards requiring runtime calibration opt in. When enabled,
->the driver performs a 40-tap DLL sweep using CMD19 to find the largest
->consecutive passing window, then programs the midpoint into
->PHY_DLL_SLAVE_CTRL_REG.
->
->To enable on a board, add to the MMC node in device tree:
->
->    &mmc {
->        cdns,sd-hs-tuning;
+>diff --git a/arch/powerpc/cpu/mpc85xx/cpu_init.c b/arch/powerpc/cpu/mpc85xx/cpu_init.c
+>index 739d14f8002..478ab648948 100644
+>--- a/arch/powerpc/cpu/mpc85xx/cpu_init.c
+>+++ b/arch/powerpc/cpu/mpc85xx/cpu_init.c
+>@@ -41,8 +41,8 @@
+> #ifdef CONFIG_FSL_CAAM
+> #include <fsl_sec.h>
+> #endif
+>-#if defined(CONFIG_NXP_ESBC) && defined(CONFIG_FSL_CORENET)
+> #include <asm/fsl_pamu.h>
+>+#if defined(CONFIG_NXP_ESBC) && defined(CONFIG_FSL_CORENET)
+> #include <fsl_secboot_err.h>
+> #endif
+> #ifdef CONFIG_SYS_QE_FMAN_FW_IN_NAND
+>@@ -899,6 +899,8 @@ int cpu_init_r(void)
+> #if defined(CONFIG_NXP_ESBC) && defined(CONFIG_FSL_CORENET)
+> 	if (pamu_init() < 0)
+> 		fsl_secboot_handle_error(ERROR_ESBC_PAMU_INIT);
+>+#else
+>+	pamu_init();
+> #endif
+> 
+> #ifdef CONFIG_FSL_CAAM
 
-Has this property been accepted by Linux Upstream?
+Seems this patch causes build error:
+   powerpc:  +   qemu-ppce500
++powerpc-linux-ld: arch/powerpc/cpu/mpc85xx/cpu_init.o: in function `cpu_init_r':
++arch/powerpc/cpu/mpc85xx/cpu_init.c:903:(.text.cpu_init_r+0x18): undefined reference to `pamu_init'
++make[1]: *** [Makefile:2109: u-boot] Error 1
++make: *** [Makefile:189: __sub-make] Error 2
+    0    0    1 /1              qemu-ppce500
 
 Regards
 Peng
-
->    };
->
->Signed-off-by: Tze Yee Ng <tze.yee.ng@altera.com>
->---
-> drivers/mmc/sdhci-cadence.c  | 108 ++++++++++++++++++++++++++++++++++-
-> drivers/mmc/sdhci-cadence.h  |   5 ++
-> drivers/mmc/sdhci-cadence6.c |  45 ++++++++++++++-
-> 3 files changed, 156 insertions(+), 2 deletions(-)
->
->diff --git a/drivers/mmc/sdhci-cadence.c b/drivers/mmc/sdhci-cadence.c
->index 5bbc18dfa51..a76f9e8d6bd 100644
->--- a/drivers/mmc/sdhci-cadence.c
->+++ b/drivers/mmc/sdhci-cadence.c
->@@ -39,6 +39,9 @@ static const struct sdhci_cdns_phy_cfg sdhci_cdns_phy_cfgs[] = {
-> 	{ "cdns,phy-dll-delay-strobe", SDHCI_CDNS_PHY_DLY_STROBE, },
-> };
-> 
->+static int __maybe_unused sdhci_cdns_execute_tuning(struct udevice *dev,
->+						    unsigned int opcode);
->+
-> static int sdhci_cdns_write_phy_reg(struct sdhci_cdns_plat *plat,
-> 				    u8 addr, u8 data)
-> {
->@@ -155,8 +158,93 @@ static void sdhci_cdns_set_control_reg(struct sdhci_host *host)
-> 		sdhci_cdns6_phy_adj(mmc->dev, plat, mmc->selected_mode);
-> }
-> 
->+static __maybe_unused bool sdhci_cdns_sd_needs_tuning(struct mmc *mmc)
->+{
->+	struct sdhci_cdns_plat *plat = dev_get_plat(mmc->dev);
->+
->+	if (!IS_SD(mmc))
->+		return false;
->+
->+	if (!dev_read_bool(mmc->dev, "cdns,sd-hs-tuning"))
->+		return false;
->+
->+	/* Already tuned for this mode */
->+	if (plat->tuned_mode == mmc->selected_mode)
->+		return false;
->+
->+	switch (mmc->selected_mode) {
->+	case SD_HS:
->+		return mmc->bus_width == 4;
->+	/* Add future modes here, e.g.:
->+	 * case UHS_SDR50:
->+	 *	return true;
->+	 */
->+	default:
->+		return false;
->+	}
->+}
->+
->+static int sdhci_cdns_set_ios_post(struct sdhci_host *host)
->+{
->+	struct mmc *mmc = host->mmc;
->+	struct sdhci_cdns_plat *plat = dev_get_plat(mmc->dev);
->+	int ret __maybe_unused;
->+	/*
->+	 * The SD6HC soft PHY requires runtime DLL delay calibration
->+	 * for SD High Speed mode. The default PHY_DLL_SLAVE_CTRL_REG
->+	 * values (READ_DQS_CMD_DELAY and READ_DQS_DELAY = 0) do not
->+	 * provide sufficient timing margin due to PVT and board trace
->+	 * variations.
->+	 *
->+	 * Tuning is performed once per entry into SD_HS mode
->+	 * (tracked by plat->tuned_mode state). The calibrated PHY delay
->+	 * values remain valid while the card stays in SD_HS mode, and
->+	 * leaving that tuned mode clears the state so re-entering SD_HS
->+	 * triggers tuning again.
->+	 *
->+	 * This must be done in set_ios_post (not set_control_reg)
->+	 * because the SDHCI controller must already be operating at
->+	 * the target bus width, clock, and speed mode before CMD19
->+	 * tuning commands can succeed.
->+	 */
->+
->+	if (IS_ENABLED(CONFIG_MMC_SUPPORTS_TUNING)) {
->+		if (SDHCI_GET_VERSION(host) >= SDHCI_SPEC_420 &&
->+		    sdhci_cdns_sd_needs_tuning(mmc)) {
->+			ret = sdhci_cdns_execute_tuning(mmc->dev,
->+							MMC_CMD_SEND_TUNING_BLOCK);
->+			if (ret) {
->+				dev_err(mmc->dev,
->+					"SD_HS tuning failed (ret=%d), using default PHY\n",
->+					ret);
->+				/* Restore default PHY settings and avoid retrying in this mode */
->+				sdhci_cdns6_phy_adj(mmc->dev, plat,
->+						    mmc->selected_mode);
->+				plat->tuned_mode = mmc->selected_mode;
->+				plat->tuned_dll_slave_ctrl = sdhci_cdns6_phy_get_dll_slave(plat);
->+				return 0;
->+			}
->+			/*
->+			 * Tuning succeeded. The tuned_mode is already set by
->+			 * execute_tuning(), so the tuned value will be preserved
->+			 * across subsequent PHY reconfigurations.
->+			 */
->+			dev_dbg(mmc->dev, "SD_HS tuning successful\n");
->+		}
->+
->+		/* Reset when mode changes away from a tuned mode */
->+		if (mmc->selected_mode != plat->tuned_mode) {
->+			plat->tuned_mode = MMC_MODES_END;
->+			plat->tuned_dll_slave_ctrl = 0;
->+		}
->+	}
->+
->+	return 0;
->+}
->+
-> static const struct sdhci_ops sdhci_cdns_ops = {
-> 	.set_control_reg = sdhci_cdns_set_control_reg,
->+	.set_ios_post = sdhci_cdns_set_ios_post,
-> };
-> 
-> static int sdhci_cdns_set_tune_val(struct sdhci_cdns_plat *plat,
->@@ -204,6 +292,7 @@ static int __maybe_unused sdhci_cdns_execute_tuning(struct udevice *dev,
-> 	int cur_streak = 0;
-> 	int max_streak = 0;
-> 	int end_of_streak = 0;
->+	int ret;
-> 	int i;
-> 
-> 	/*
->@@ -229,7 +318,24 @@ static int __maybe_unused sdhci_cdns_execute_tuning(struct udevice *dev,
-> 		return -EIO;
-> 	}
-> 
->-	return sdhci_cdns_set_tune_val(plat, end_of_streak - max_streak / 2);
->+	ret = sdhci_cdns_set_tune_val(plat, end_of_streak - max_streak / 2);
->+	if (ret)
->+		return ret;
->+
->+	/*
->+	 * Mark this mode as tuned. This is critical for both driver tuning
->+	 * (SD_HS via set_ios_post) and framework tuning (UHS_SDR104, MMC_HS_200,
->+	 * MMC_HS_400) so that subsequent PHY reconfigurations restore the
->+	 * calibrated DLL value instead of overwriting with DT defaults.
->+	 *
->+	 * For HS400, tuning is performed while the controller is in HS200 mode
->+	 * (mmc->selected_mode == MMC_HS_200 and mmc->hs400_tuning == true).
->+	 * Record the tuned mode as MMC_HS_400 so the calibrated DLL value is
->+	 * preserved across the HS200???HS400 transition.
->+	 */
->+	plat->tuned_mode = mmc->hs400_tuning ? MMC_HS_400 : mmc->selected_mode;
->+
->+	return 0;
-> }
-> 
-> static struct dm_mmc_ops sdhci_cdns_mmc_ops;
->diff --git a/drivers/mmc/sdhci-cadence.h b/drivers/mmc/sdhci-cadence.h
->index 7101f00b75b..ea517491860 100644
->--- a/drivers/mmc/sdhci-cadence.h
->+++ b/drivers/mmc/sdhci-cadence.h
->@@ -7,6 +7,8 @@
-> #ifndef SDHCI_CADENCE_H_
-> #define SDHCI_CADENCE_H_
-> 
->+#include <mmc.h>
->+
-> /* HRS - Host Register Set (specific to Cadence) */
-> /* PHY access port */
-> #define SDHCI_CDNS_HRS04		0x10
->@@ -60,10 +62,13 @@ struct sdhci_cdns_plat {
-> 	struct mmc_config cfg;
-> 	struct mmc mmc;
-> 	void __iomem *hrs_addr;
->+	enum bus_mode tuned_mode;
->+	u32 tuned_dll_slave_ctrl;
-> };
-> 
-> int sdhci_cdns6_phy_adj(struct udevice *dev, struct sdhci_cdns_plat *plat, u32 mode);
-> int sdhci_cdns6_phy_init(struct udevice *dev, struct sdhci_cdns_plat *plat);
-> int sdhci_cdns6_set_tune_val(struct sdhci_cdns_plat *plat, unsigned int val);
->+u32 sdhci_cdns6_phy_get_dll_slave(struct sdhci_cdns_plat *plat);
-> 
-> #endif
->diff --git a/drivers/mmc/sdhci-cadence6.c b/drivers/mmc/sdhci-cadence6.c
->index ca1086e2359..c8b42532e17 100644
->--- a/drivers/mmc/sdhci-cadence6.c
->+++ b/drivers/mmc/sdhci-cadence6.c
->@@ -173,6 +173,30 @@ static void sdhci_cdns6_write_phy_reg(struct sdhci_cdns_plat *plat, u32 addr, u3
-> 	writel(val, plat->hrs_addr + SDHCI_CDNS_HRS05);
-> }
-> 
->+static bool sdhci_cdns6_mode_is_tuned(struct sdhci_cdns_plat *plat, u32 mode)
->+{
->+	/*
->+	 * Check if the given mode has a valid tuned DLL value.
->+	 * Only modes that support tuning (driver or framework) can have
->+	 * valid tuned values. This prevents the initial state (tuned_mode=0)
->+	 * from falsely matching MMC_LEGACY.
->+	 */
->+	if (plat->tuned_mode != mode)
->+		return false;
->+
->+	switch (mode) {
->+	case SD_HS:		/* Driver tuning via set_ios_post */
->+	case UHS_SDR50:		/* Future driver tuning support */
->+	case UHS_SDR104:	/* Framework tuning */
->+	case MMC_HS_200:	/* Framework tuning */
->+	case MMC_HS_400:	/* Framework tuning */
->+	case MMC_HS_400_ES:	/* Framework tuning */
->+		return true;
->+	default:
->+		return false;
->+	}
->+}
->+
-> static int sdhci_cdns6_reset_phy_dll(struct sdhci_cdns_plat *plat, bool reset)
-> {
-> 	void __iomem *reg = plat->hrs_addr + SDHCI_CDNS_HRS09;
->@@ -259,7 +283,18 @@ int sdhci_cdns6_phy_adj(struct udevice *dev, struct sdhci_cdns_plat *plat, u32 m
-> 	sdhci_cdns6_write_phy_reg(plat, PHY_DQS_TIMING_REG_ADDR, sdhci_cdns6_phy_cfgs[0].val);
-> 	sdhci_cdns6_write_phy_reg(plat, PHY_GATE_LPBK_CTRL_REG_ADDR, sdhci_cdns6_phy_cfgs[1].val);
-> 	sdhci_cdns6_write_phy_reg(plat, PHY_DLL_MASTER_CTRL_REG_ADDR, sdhci_cdns6_phy_cfgs[4].val);
->-	sdhci_cdns6_write_phy_reg(plat, PHY_DLL_SLAVE_CTRL_REG_ADDR, sdhci_cdns6_phy_cfgs[2].val);
->+	if (sdhci_cdns6_mode_is_tuned(plat, mode)) {
->+		/*
->+		 * Use previously saved tuned DLL slave control value.
->+		 * Note: 0 is a valid tuned value (e.g., optimal tap at position 0),
->+		 * so we check both mode match AND that it's a tunable mode.
->+		 */
->+		sdhci_cdns6_write_phy_reg(plat, PHY_DLL_SLAVE_CTRL_REG_ADDR,
->+					  plat->tuned_dll_slave_ctrl);
->+	} else {
->+		sdhci_cdns6_write_phy_reg(plat, PHY_DLL_SLAVE_CTRL_REG_ADDR,
->+					  sdhci_cdns6_phy_cfgs[2].val);
->+	}
-> 
-> 	/* Switch Off the DLL Reset */
-> 	ret = sdhci_cdns6_reset_phy_dll(plat, false);
->@@ -318,6 +353,9 @@ int sdhci_cdns6_set_tune_val(struct sdhci_cdns_plat *plat, unsigned int val)
-> 
-> 	sdhci_cdns6_write_phy_reg(plat, PHY_DLL_SLAVE_CTRL_REG_ADDR, tmp);
-> 
->+	/* Store tuned DLL slave control value which will be reapplied via set_ios(). */
->+	plat->tuned_dll_slave_ctrl = tmp;
->+
-> 	/* Switch Off the DLL Reset */
-> 	ret = sdhci_cdns6_reset_phy_dll(plat, false);
-> 	if (ret) {
->@@ -327,3 +365,8 @@ int sdhci_cdns6_set_tune_val(struct sdhci_cdns_plat *plat, unsigned int val)
-> 
-> 	return 0;
-> }
->+
->+u32 sdhci_cdns6_phy_get_dll_slave(struct sdhci_cdns_plat *plat)
->+{
->+	return sdhci_cdns6_read_phy_reg(plat, PHY_DLL_SLAVE_CTRL_REG_ADDR);
->+}
 >-- 
->2.43.7
+>2.47.3
 >
 >
