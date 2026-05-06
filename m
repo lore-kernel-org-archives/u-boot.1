@@ -4,85 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE9A2CD343B
-	for <u-boot@archiver.kernel.org>; Wed,  6 May 2026 14:34:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5FB6DCD342C
+	for <u-boot@archiver.kernel.org>; Wed,  6 May 2026 14:34:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7B59B848FD;
-	Wed,  6 May 2026 16:34:42 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B4F5084951;
+	Wed,  6 May 2026 16:34:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="U/KniSN3";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="D+SBbAmp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 509A68490D; Wed,  6 May 2026 16:34:41 +0200 (CEST)
-Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
- [IPv6:2a00:1450:4864:20::42e])
+ id 9C5EC8495C; Wed,  6 May 2026 16:34:55 +0200 (CEST)
+Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
+ [IPv6:2a00:1450:4864:20::429])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 12123847E1
- for <u-boot@lists.denx.de>; Wed,  6 May 2026 16:34:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BE54F847E1
+ for <u-boot@lists.denx.de>; Wed,  6 May 2026 16:34:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x42e.google.com with SMTP id
- ffacd0b85a97d-43d73422431so6128161f8f.2
- for <u-boot@lists.denx.de>; Wed, 06 May 2026 07:34:39 -0700 (PDT)
+Received: by mail-wr1-x429.google.com with SMTP id
+ ffacd0b85a97d-43eb05b1875so3507015f8f.3
+ for <u-boot@lists.denx.de>; Wed, 06 May 2026 07:34:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1778078078; x=1778682878; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1778078093; x=1778682893; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:from:references:to:subject:reply-to:user-agent
  :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=2uYFKBuRFNh/3u/M5mOiGT8BfGUH1UhZPROysbX4AIk=;
- b=U/KniSN3K3uJQmvwwVLR6fAMvsDhpbJ6oP3M48JEIRMXMC6IvFCq+la/dd8wnM4QN6
- n+ks/LFlTh8kMOO5dFNFU5/VbaOmlHMb+S19r0F/S39JRmWKBGnmVgOLXHNQk6mkptQb
- z2U1/04V1KWXc1zkOU7GvpMcgNY7cSErUpuW7Ck7BdpMiNVrWqmk1fVDyNP6nAGCqZsj
- MZwcCr8b0YOgXmC0gTOEns2mwm8tY9P4dy9tEzxobZm63XjDlXWlCEarMeUclwTWMhzC
- BfmVYHFsjfIBCw9BhNJOmvNfGizfk6iNZieLlAA8IKi2RnUhAGUnfKP5rzZu14RDpQbw
- QFog==
+ :reply-to; bh=eRPZvTuj9PZvZ1gY28UHC+Sw2tAGhhpx2QYJMWbOvOE=;
+ b=D+SBbAmpihUsl1kMRsNwi8syjTqYM/bRqvgHyN43+eV7s2Ic2gIan0MfGZIkwVvFog
+ 896FCS+ZV+9tdWVxYUAQVSqB5UhF4U2U/05mcg2/LXCTCsb1RkrpZ6/k4SSM4WNNqEId
+ PiqlKroFAXL+Njb09CThcqwBQ35rP+fiEvc36pc6JH3rYtklXP6zWHtzrSwTPUXW45x2
+ /mEG5GVyJCJXmZ4+AVNml5khDvea2+Fnvwrr0imglYHMR2GRncC01VwzndFzlUpTE6Fj
+ VA2S9+LczKqzzLiPUeqUVrwSF5+yCm29LvblaaShl7+FVif7ZMIo4d+ysSRn7A9pqu/E
+ aT5A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778078078; x=1778682878;
+ d=1e100.net; s=20251104; t=1778078093; x=1778682893;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:from:references:to:subject:reply-to:user-agent
  :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=2uYFKBuRFNh/3u/M5mOiGT8BfGUH1UhZPROysbX4AIk=;
- b=poUpFGHmuNDU1LXMXqqCYmhTQ61lLKZYl8cgyGvDygmg0EhLnX+hUWRe/CeHtOwH2b
- DR6Ttt9C6i3lqgbd4jTtQAryTsqDHsn/DhY77NEw/YW/LuEBhuSJfaaQTa7uyJms/s5Q
- 5PA/u6IaF88Iej5n1n4zEF5FQw/hrjv5WIaJEnKcaUVrX1lDZ85O9nbQ/FpyeTCP+b3z
- gA0MD5AKokMPye7e3WMSvGLqk47QPJdT0EqoJHnwJDXEGerrju5wT5E055Wk4e9yg2Kw
- aITWNx1LqN2PWi6FBS8X7A+sZCJRooyT1DhSfYzg9zm3+sF7/lh+ns8IFfd3stXygCFe
- R0hA==
-X-Gm-Message-State: AOJu0YwAN0TIopCHRH4/ra241TmABjPPuogj59XPot4jaidACROGBfk3
- BRjEplPw15/n7QvfeC0d8DqRrQfpk4yMlaKlLBW92lcNluAlOJsmIXmWlnDYanTKKsdBeL/+tOc
- 8kWnl
-X-Gm-Gg: AeBDiesFmL2QW4i35ai8VvrTiKbG9OBXlIkpKDAioDpD78Tmm5le1lYO5Trm0z0iP6e
- hNzUOS8qPCPXuivt9ry6oB6+cX8uZIWYCWeZdPoIVamTtZRFbGYS5aTXndiPge5jw0N6cpoJdsX
- vUXRSlXCa+eqdDpuL83lbz/W0+klyn9OABOkCK4aMHvIDy6HQl1x9PVBpEjgwB4FdOPbcEqiZNp
- IIDp0fhJwWGXWKfDjnvTNwtRcJU724Fcm5xUszqBB5G4EXr0eATOVrxQRrvFIIO+efm/6M88/X7
- QHkIOD8cNyvVhFJbg1wrqCyMhPORvQ4Wj35nojzvzV0ayonWBh7thXL/EsrmD34d+IFfM+lh9BW
- a8BphFWHABNK5XlNOECkCnXK1kMG4hnjATHYP5D4kHkkSxtFNUgN9lKEjK4dwye2vBEvLEA9eY6
- p75kSkuSW4WHl4vC8k8IxAobI9IXZiO5mG3vf1ONIua1fT384qAHwFSoO2zg+o5ppkjiNKuovsc
- XyPAFETRjQdQfnWWLKUrvz00No8
-X-Received: by 2002:a05:6000:4210:b0:439:b1c3:84c8 with SMTP id
- ffacd0b85a97d-4515cd27a66mr6188228f8f.21.1778078078210; 
- Wed, 06 May 2026 07:34:38 -0700 (PDT)
+ bh=eRPZvTuj9PZvZ1gY28UHC+Sw2tAGhhpx2QYJMWbOvOE=;
+ b=cuvAhx9O/mIfdlTdxxL7T9y3QWbxR+CDA1fjZToarsWBUm8CISDY6XtbHREHJM8QGW
+ N8B2rLO+grtuoclaft5B7PdhpnLOYcQjdZwMhFG29Bn7OEWt90Upi/XcppRsb2DPzN1Z
+ NqDXPX5rwjnxqUaPwGAqlYjHET90nOPemNVPTpTUqiVw+Kr6wWdsfAoudWyl0/7ANfnx
+ a9C+jeV0fQQYABem7AFEc6oHs/dcyP2BFsbE/yVmX/IVnWcCAz3bScyzpwkLpZ/c2vBK
+ wadkXoSNH2SDU47YWiryiJp46VBPtS9CC5PYeb+j/WDdlzWUAcs5lbHfmMcIgOib5LQp
+ DCYQ==
+X-Gm-Message-State: AOJu0Yz9HN+51FXlcqG6u+gTgCZTYvwyjb2VnodPJtwyLoGWVNVFlq2M
+ vcSFfzjqJ/TNlEf0DjfFfpScnuzv5AteN0tfbwGZk2nyj3qFLyaSb+bTi5HVOER38Mns7FC3ylB
+ v6j4d
+X-Gm-Gg: AeBDies2DAAT3OxDki7osWv6+zDIAUwf75af3Kg9x/tGXiXpOlGylHjTRbcFaKm2O9l
+ zMMnpmhmWva/q12uzEVvXzf2+QP8vbwsBXv2QCupoSmls5h+Dia3Zc/BuAvDF2Iw6co9jhtfZ2M
+ Yg91hnTfZlTncMOf9lykDmR6fD5ZukARHmzxsLfUx6kkvVERH5ffv5u8o6Q1XPT+sTPBx4EcTtI
+ HDcH+JXDy5f8FzuYxdLTUZBknUdO7WFOlUYUG66+oCRn7CepRfdtm7dlE5IHFb9TMxBCCDx614c
+ D/Xg8yVEAbtHlZCW2sGc9jg33rFwcMvN1NCVknj6i9voqPtZxjisR5leLEXU+RMvjDeRT0kddpc
+ c8Y34UdkyaQlrhrqBcPeR3i1hwXH0Ku7Fag5z1B5W+yE5BRft+LJKGLeu48mq4BNOfqYfIyw7+/
+ yvPy3aVFhE1DyyfYEryGvgr3wCIfW3Q8A5w3WeLk/1EdQng7iglOUPMeAs46f+z2LzsVtZe3KJq
+ sv/6zxJKJICXXnoaw==
+X-Received: by 2002:a05:6000:22c6:b0:43c:f247:4792 with SMTP id
+ ffacd0b85a97d-4515b524475mr6675559f8f.12.1778078092906; 
+ Wed, 06 May 2026 07:34:52 -0700 (PDT)
 Received: from ?IPV6:2a01:e0a:106d:1080:a3bb:11a4:ca24:24ed?
  ([2a01:e0a:106d:1080:a3bb:11a4:ca24:24ed])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-45055960973sm12843571f8f.30.2026.05.06.07.34.37
+ ffacd0b85a97d-45054b03e04sm13144733f8f.21.2026.05.06.07.34.51
  for <u-boot@lists.denx.de>
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 06 May 2026 07:34:37 -0700 (PDT)
-Message-ID: <f46be233-e35e-4a42-8663-342e9913e784@linaro.org>
-Date: Wed, 6 May 2026 16:34:37 +0200
+ Wed, 06 May 2026 07:34:52 -0700 (PDT)
+Message-ID: <5ba58555-78cd-454f-9fcc-5aaec5fd4205@linaro.org>
+Date: Wed, 6 May 2026 16:34:51 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 6/9] pci: brcmstb: Get and use bridge and rescal reset
- properties
+Subject: Re: [PATCH v2 7/9] pci: brcmstb: Fix iBAR size calculation
 To: u-boot@lists.denx.de
-References: <20260428163936.7987968D09@verein.lst.de>
+References: <20260428163940.CE7CB68D0A@verein.lst.de>
 From: Neil Armstrong <neil.armstrong@linaro.org>
 Content-Language: en-US, fr
 Autocrypt: addr=neil.armstrong@linaro.org; keydata=
@@ -110,7 +109,7 @@ Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
  QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
 Organization: Linaro
-In-Reply-To: <20260428163936.7987968D09@verein.lst.de>
+In-Reply-To: <20260428163940.CE7CB68D0A@verein.lst.de>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -133,139 +132,32 @@ X-Virus-Status: Clean
 On 4/28/26 18:39, Torsten Duwe wrote:
 > From: Torsten Duwe <duwe@suse.de>
 > 
-> Check whether the device tree has nodes for the two reset controls and use
-> them if so.
+> Fix inbound window size calculation, like Linux commit 25a98c7270156.
 > 
 > Signed-off-by: Torsten Duwe <duwe@suse.de>
-> Co-authored-by: Oleksii Moisieiev <oleksii_moisieiev@epam.com>
 > Tested-by: Pedro Falcato <pfalcato@suse.de>
 > 
 > ---
->   drivers/pci/pcie_brcmstb.c | 51 +++++++++++++++++++++++++++++++++++++-
->   1 file changed, 50 insertions(+), 1 deletion(-)
+>   drivers/pci/pcie_brcmstb.c | 4 ++--
+>   1 file changed, 2 insertions(+), 2 deletions(-)
 > 
 > diff --git a/drivers/pci/pcie_brcmstb.c b/drivers/pci/pcie_brcmstb.c
-> index 261f8790528..1f97cda5cc7 100644
+> index 1f97cda5cc7..8a25fb04563 100644
 > --- a/drivers/pci/pcie_brcmstb.c
 > +++ b/drivers/pci/pcie_brcmstb.c
-> @@ -21,6 +21,7 @@
->   #include <linux/bitfield.h>
->   #include <linux/log2.h>
->   #include <linux/iopoll.h>
-> +#include <reset.h>
+> @@ -105,8 +105,8 @@ static int brcm_pcie_encode_ibar_size(u64 size)
+>   	if (log2_in >= 12 && log2_in <= 15)
+>   		/* Covers 4KB to 32KB (inclusive) */
+>   		return (log2_in - 12) + 0x1c;
+> -	else if (log2_in >= 16 && log2_in <= 37)
+> -		/* Covers 64KB to 32GB, (inclusive) */
+> +	else if (log2_in >= 16 && log2_in <= 36)
+> +		/* Covers 64KB to 64GB, (inclusive) */
+>   		return log2_in - 15;
 >   
->   /* PCIe parameters */
->   #define BRCM_NUM_PCIE_OUT_WINS				4
-> @@ -83,6 +84,8 @@ struct brcm_pcie {
->   
->   	int			gen;
->   	bool			ssc;
-> +	struct reset_ctl	rescal;
-> +	struct reset_ctl	bridge_reset;
->   	const struct brcm_pcie_cfg_data *pcie_cfg;
->   };
->   
-> @@ -147,6 +150,34 @@ static void brcm_pcie_perst_set_2712(struct brcm_pcie *pcie, u32 val)
->   	writel(tmp, pcie->base + PCIE_MISC_PCIE_CTRL);
->   }
->   
-> +static void brcm_pcie_get_resets_dt(struct udevice *dev)
-> +{
-> +	struct brcm_pcie *pcie = dev_get_priv(dev);
-> +	int ret;
-> +
-> +	ret = reset_get_by_name(dev, "rescal", &pcie->rescal);
-> +	if (ret) {
-> +		printf("Unable to get rescal reset\n");
-> +		return;
+>   	/* Something is awry so disable */
 
-Why don't you return the return value ?
-
-> +	}
-> +
-> +	ret = reset_get_by_name(dev, "bridge", &pcie->bridge_reset);
-> +	if (ret) {
-> +		printf("Unable to get bridge reset\n");
-> +		return;
-> +	}
-> +}
-> +
-> +static void brcm_pcie_do_reset(struct udevice *dev)
-> +{
-> +	struct brcm_pcie *pcie = dev_get_priv(dev);
-> +	int ret;
-> +
-> +	ret = reset_deassert(&pcie->rescal);
-> +	if (ret)
-> +		printf("failed to deassert 'rescal'\n");
-
-Ditto
-
-> +}
-> +
->   static void brcm_pcie_bridge_sw_init_set_generic(struct brcm_pcie *pcie, u32 val)
->   {
->   	if (val)
-> @@ -157,6 +188,14 @@ static void brcm_pcie_bridge_sw_init_set_generic(struct brcm_pcie *pcie, u32 val
->   			     RGR1_SW_INIT_1_INIT_MASK);
->   }
->   
-> +static void brcm_pcie_bridge_sw_init_set_2712(struct brcm_pcie *pcie, u32 val)
-> +{
-> +	if (val)
-> +		reset_assert(&pcie->bridge_reset);
-> +	else
-> +		reset_deassert(&pcie->bridge_reset);
-
-Ditto
-
-> +}
-> +
->   /**
->    * brcm_pcie_link_up() - Check whether the PCIe link is up
->    * @pcie: Pointer to the PCIe controller state
-> @@ -413,6 +452,12 @@ static int brcm_pcie_probe(struct udevice *dev)
->   	u16 nlw, cls, lnksta;
->   	u32 tmp;
->   
-> +	/*
-> +	 * Ensure rescal reset for BCM2712 is really disabled.
-> +	 */
-> +	if (pcie->pcie_cfg->type == BCM2712)
-> +		brcm_pcie_do_reset(dev);
-
-Ditto
-
-> +
->   	/*
->   	 * Reset the bridge, assert the fundamental reset. Note for some SoCs,
->   	 * e.g. BCM7278, the fundamental reset should not be asserted here.
-> @@ -611,6 +656,10 @@ static int brcm_pcie_of_to_plat(struct udevice *dev)
->   		pcie->gen = max_link_speed;
->   
->   	pcie->pcie_cfg = (const struct brcm_pcie_cfg_data *)dev_get_driver_data(dev);
-> +
-> +	if (pcie->pcie_cfg->type == BCM2712)
-> +		brcm_pcie_get_resets_dt(dev);
-
-Ditto
-
-> +
->   	return 0;
->   }
->   
-> @@ -645,7 +694,7 @@ static const struct brcm_pcie_cfg_data bcm2712_cfg = {
->   	.offsets	= pcie_offsets_bcm2712,
->   	.type		= BCM2712,
->   	.perst_set	= brcm_pcie_perst_set_2712,
-> -	.bridge_sw_init_set = brcm_pcie_bridge_sw_init_set_generic,
-> +	.bridge_sw_init_set = brcm_pcie_bridge_sw_init_set_2712,
-
-Can't you mimic linux and check for the reset in brcm_pcie_bridge_sw_init_set_generic ?
-
->   	.rc_mode	= brcm_pcie_rc_mode,
->   };
->   
+Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
 
 Thanks,
 Neil
