@@ -4,105 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3FDBBCD342C
-	for <u-boot@archiver.kernel.org>; Wed,  6 May 2026 22:31:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36602CD342C
+	for <u-boot@archiver.kernel.org>; Wed,  6 May 2026 22:37:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7308F849C9;
-	Thu,  7 May 2026 00:31:10 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 9DD3084970;
+	Thu,  7 May 2026 00:37:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20251104.gappssmtp.com header.i=@baylibre-com.20251104.gappssmtp.com header.b="nguQ+593";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=arm.com header.i=@arm.com header.b="c1pHKzY7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 56BB3849DF; Thu,  7 May 2026 00:31:09 +0200 (CEST)
-Received: from mail-oa1-x2e.google.com (mail-oa1-x2e.google.com
- [IPv6:2001:4860:4864:20::2e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B1F6784970
- for <u-boot@lists.denx.de>; Thu,  7 May 2026 00:31:06 +0200 (CEST)
+ id 7C43A849C9; Thu,  7 May 2026 00:37:07 +0200 (CEST)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id 4FBBD848BC
+ for <u-boot@lists.denx.de>; Thu,  7 May 2026 00:37:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dlechner@baylibre.com
-Received: by mail-oa1-x2e.google.com with SMTP id
- 586e51a60fabf-409de4132b5so83435fac.1
- for <u-boot@lists.denx.de>; Wed, 06 May 2026 15:31:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20251104.gappssmtp.com; s=20251104; t=1778106665; x=1778711465;
- darn=lists.denx.de; 
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:to:subject:user-agent:mime-version:date:message-id:from
- :to:cc:subject:date:message-id:reply-to;
- bh=c+pUI2gBc51X92kibaebYCiMDaSRGA5FaqnhtEfGlbA=;
- b=nguQ+593/4Byumxc+HwNGAd0foEl0bmM1efH7/UTyq4+2yb3Nh41gsiEJ1W/T5zYD0
- hL2YLMiE2cd9WSEt8jv7UF+mv4EWVSo1ky7AxL4UP3eBosgkl7fG+9pVC4zpoLYU51FQ
- w4qrRO+dDoYrPqwDDiV4r1xWif5y1AY6eI9741g73FGfV5qWeTPRC6a5lrMJAwY78BsQ
- 7nIZ2YhlmOiyk1phtghTMMvBMzE9td9xgPu8uORwlpTQDN1r31lxoxnFn4E/DNSq72Ai
- TShk9KHV1126zIcy1ADx74HibEr2xNAeYblBvv0yw85jNdSzZVP/wPBPvKRpFc/CT2XJ
- Rdrw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778106665; x=1778711465;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:to:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=c+pUI2gBc51X92kibaebYCiMDaSRGA5FaqnhtEfGlbA=;
- b=Dd1gOnUyyLONshbMKC1Gyi+5J5izzm9qLg39JGqH51jgbFOOzubZXhqmT4g7lUtqWl
- WbwPYJGO3uhQ9G15PigRkqQL4I/aNjFkygnvsc6JaA/N8fn98SYcbpIPntUKuwgvYT/q
- 2hnDsW5qGdLbM0vpKFbx7ixNzKsaAUZhwSAyxnZ3YeslpIo8Re6n0oCIuMRMJMNVJXYY
- 4el22CdAKwuwYf9L75kYhowEKY1wyDjK8ndem4NF67QoFzhSYTfZe6ioa1HsecXk3N+W
- +ikFbgXeKYfiQ+hEj3H1MF3fmZxmiHPHL6Z5b2DWCrg4Gl1M7miQY1mCgU/J2R/96R0s
- u4oQ==
-X-Forwarded-Encrypted: i=1;
- AFNElJ/GNrII669tRmpyqK5bhA/qlB5ioCNxQWhHtYbxicfhcMQ/pUPbapyvP40zDqpEQbaCHwkEp/U=@lists.denx.de
-X-Gm-Message-State: AOJu0YzYimZdxZHKGEqhrVNIryUY6+S3nFVPwDmtah81HR6iuGUMzx1l
- hrjtbz7iUQCvEIWakOqSXMtuQzC76b40CzZRXnxuJDhQ7y1D1m/Y+oY+CbW5LWsu658=
-X-Gm-Gg: AeBDieudsxAaNqrDaWC8B11uulov/tfoGjgWIs+0oqnrQeOMg29jgZltsrodAnEM9gf
- PyTFQH6wEIGJGFKBbBC5AmemV62lP1MMaGoB48iMwCky7MGTsEWjg7MEGAqyArOhYFYTOG7ruNo
- Q59vw/mZPATpCco1QSljSQeq8R9iIei1IhU+RSoeYMYNdlpBYe4OmFOKT+emNRU7Tow/X103AMa
- XwV+Z2SNjOFBYRFZTTic2WEbb4XCN/GEvNRL7JRrbHgiBfnUZVrGSRrmKvJ1p+HTknLulrw6iMu
- zB3k+rZqHrK0zpSZWyKtm2tMrUVX8tF1FmEoniV0tAH4CwvcqQMY7+sQA1BCAjNSaYuCtHWlKis
- pf4f7nGn32H0mKayfWj6b8Jeo5uIr4yqqLAvU5UH5e1803nhTzY3slMp21AOmjZVZKnzQWzBP1z
- HlUzv5hJvpIWMZp406SK73l8p1d++HKaDx1a3ubbONCTH7Vd9YJp1raS3ko2TMhQ7OoNWhMyF6z
- 2f59Ot42wxG
-X-Received: by 2002:a05:6870:9d10:b0:42c:1d80:2ca2 with SMTP id
- 586e51a60fabf-434f663cf8dmr3600193fac.38.1778106665118; 
- Wed, 06 May 2026 15:31:05 -0700 (PDT)
-Received: from ?IPV6:2600:8803:e7e4:500:7374:f02e:e8be:88a5?
- ([2600:8803:e7e4:500:7374:f02e:e8be:88a5])
- by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-43454cbbbd7sm16754043fac.10.2026.05.06.15.31.01
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 06 May 2026 15:31:04 -0700 (PDT)
-Message-ID: <a12b78a1-fc6f-4306-bd7b-40d6f8e6c55b@baylibre.com>
-Date: Wed, 6 May 2026 17:31:00 -0500
+ spf=pass smtp.mailfrom=andre.przywara@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 0C7F11655;
+ Wed,  6 May 2026 15:36:58 -0700 (PDT)
+Received: from ryzen.lan (usa-sjc-mx-foss1.foss.arm.com [172.31.20.19])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 6720C3F763;
+ Wed,  6 May 2026 15:37:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
+ t=1778107023; bh=z2bWlHfLUIap6PxVxOo7F6GK0qYfcOlG0suNtapUE78=;
+ h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+ b=c1pHKzY7fZDMDNGdtlHMDcey8S/LHbfz0Auyab6KYV+aw3MYQ3CIoNoKqyX3dfOXn
+ kzLmUOkBShKxgh/2oqX8TuiSDpZ60d1eED/NpNBbqXkBimXPcPsi4bZDY6vnh7fZUi
+ 5aX4XFFKk0kZtZfgYa9S6TAAcKHORnu7Zt6ShFys=
+Date: Thu, 7 May 2026 00:36:28 +0200
+From: Andre Przywara <andre.przywara@arm.com>
+To: Paul Kocialkowski <paulk@sys-base.io>, u-boot@lists.denx.de
+Cc: Jernej Skrabec <jernej.skrabec@gmail.com>, Chen-Yu Tsai
+ <wens@kernel.org>, linux-sunxi@lists.linux.dev
+Subject: Re: [PATCH v2 1/2] sunxi: A523: Move NSI init routine into generic
+ function
+Message-ID: <20260507003628.6605d894@ryzen.lan>
+In-Reply-To: <20260430135838.3438728-2-andre.przywara@arm.com>
+References: <20260430135838.3438728-1-andre.przywara@arm.com>
+ <20260430135838.3438728-2-andre.przywara@arm.com>
+Organization: Arm Ltd.
+X-Mailer: Claws Mail 4.4.0 (GTK 3.24.31; x86_64-slackware-linux-gnu)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 3/9] pinctrl: airoha: add shared pinctrl code
-To: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
- Tom Rini <trini@konsulko.com>, Christian Marangi <ansuelsmth@gmail.com>,
- Simon Glass <sjg@chromium.org>, Marek Vasut
- <marek.vasut+renesas@mailbox.org>, Peng Fan <peng.fan@nxp.com>,
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Dan Carpenter <dan.carpenter@linaro.org>, Michal Simek
- <michal.simek@amd.com>, Sean Anderson <sean.anderson@linux.dev>,
- Yao Zi <me@ziyao.cc>, Anis Chali <chalianis1@gmail.com>,
- "Yury Norov (NVIDIA)" <yury.norov@gmail.com>, Crt Mori <cmo@melexis.com>,
- Richard Genoud <richard.genoud@bootlin.com>,
- Jonathan Cameron <Jonathan.Cameron@huawei.com>,
- Geert Uytterhoeven <geert+renesas@glider.be>, u-boot@lists.denx.de,
- Lorenzo Bianconi <lorenzo@kernel.org>, Markus Gothe
- <markus.gothe@genexis.eu>, Matheus Sampaio Queiroga
- <srherobrine20@gmail.com>, Benjamin Larsson <benjamin.larsson@genexis.eu>
-References: <20260504130306.2764862-1-mikhail.kshevetskiy@iopsys.eu>
- <20260504130306.2764862-4-mikhail.kshevetskiy@iopsys.eu>
-Content-Language: en-US
-From: David Lechner <dlechner@baylibre.com>
-In-Reply-To: <20260504130306.2764862-4-mikhail.kshevetskiy@iopsys.eu>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -119,511 +67,271 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 5/4/26 8:03 AM, Mikhail Kshevetskiy wrote:
-> This patch introduce shared Airoha pinctrl code.
-> 
-> Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+On Thu, 30 Apr 2026 15:58:37 +0200
+Andre Przywara <andre.przywara@arm.com> wrote:
+
+just for the records ...
+
+
+> In previous generations of Allwinner SoCs, the memory bus (MBUS) access
+> arbitration was configured as part of the DRAM top registers. This is no
+> longer the case with for instance the A133 or A523, which have a dedicated
+> base address for the bus arbiter that is now called NSI instead of MBUS.
+>=20
+> NSI appears to be a later iteration of MBUS design, with new dedicated
+> registers that resemble the previous MBUS ones. Despite NSI not being
+> documented in the manual, the A133 BSP includes a nsi driver with some
+> description of the registers. Like previous generations, it implements
+> port arbitration priority for DRAM access and also supports an optional
+> QoS mode based on bandwidth limits.
+>=20
+> In preparation for re-using code for other SoCs, factor out the existing
+> NSI init routine from the A523 DRAM code, which was a bit ad-hoc and A523
+> specific, into a separate function, and abstract the settings a bit.
+> No functional change.
+>=20
+> Signed-off-by: Andre Przywara <andre.przywara@arm.com>
+> Co-develeoped-by: Paul Kocialkowski <paulk@sys-base.io>
+> Suggested-by: Jernej =C5=A0krabec <jernej.skrabec@gmail.com>
+> Sponsored-by: MEC Electronics GmbH <https://www.mec.at/>
 > ---
->  drivers/pinctrl/Kconfig                 |   1 +
->  drivers/pinctrl/Makefile                |   1 +
->  drivers/pinctrl/airoha/Kconfig          |  11 +
->  drivers/pinctrl/airoha/Makefile         |   3 +
->  drivers/pinctrl/airoha/airoha-common.h  | 512 ++++++++++++++
->  drivers/pinctrl/airoha/pinctrl-airoha.c | 843 ++++++++++++++++++++++++
->  6 files changed, 1371 insertions(+)
->  create mode 100644 drivers/pinctrl/airoha/Kconfig
->  create mode 100644 drivers/pinctrl/airoha/Makefile
->  create mode 100644 drivers/pinctrl/airoha/airoha-common.h
->  create mode 100644 drivers/pinctrl/airoha/pinctrl-airoha.c
+>  .../include/asm/arch-sunxi/cpu_sunxi_ncat2.h  |  1 +
+>  .../include/asm/arch-sunxi/dram_sun55i_a523.h | 29 +++++++++++
+>  arch/arm/include/asm/arch-sunxi/sunxi_nsi.h   | 25 ++++++++++
+>  arch/arm/mach-sunxi/Makefile                  |  2 +-
+>  arch/arm/mach-sunxi/dram_sun55i_a523.c        | 49 +++++++++----------
+>  arch/arm/mach-sunxi/sunxi_nsi.c               | 31 ++++++++++++
+>  6 files changed, 110 insertions(+), 27 deletions(-)
+>  create mode 100644 arch/arm/include/asm/arch-sunxi/sunxi_nsi.h
+>  create mode 100644 arch/arm/mach-sunxi/sunxi_nsi.c
+>=20
+> diff --git a/arch/arm/include/asm/arch-sunxi/cpu_sunxi_ncat2.h b/arch/arm=
+/include/asm/arch-sunxi/cpu_sunxi_ncat2.h
+> index 7cee7efe8b4..fd7d9b22058 100644
+> --- a/arch/arm/include/asm/arch-sunxi/cpu_sunxi_ncat2.h
+> +++ b/arch/arm/include/asm/arch-sunxi/cpu_sunxi_ncat2.h
+> @@ -9,6 +9,7 @@
+> =20
+>  #define SUNXI_TZPC_BASE			0x02000800
+>  #define SUNXI_CCM_BASE			0x02001000
+> +#define SUNXI_NSI_BASE			0x02020000
+>  #define SUNXI_TIMER_BASE		0x02050000
+> =20
+>  #define SUNXI_TWI0_BASE			0x02502000
+> diff --git a/arch/arm/include/asm/arch-sunxi/dram_sun55i_a523.h b/arch/ar=
+m/include/asm/arch-sunxi/dram_sun55i_a523.h
+> index 08bfe462856..462d4726a21 100644
+> --- a/arch/arm/include/asm/arch-sunxi/dram_sun55i_a523.h
+> +++ b/arch/arm/include/asm/arch-sunxi/dram_sun55i_a523.h
+> @@ -20,6 +20,35 @@ enum sunxi_dram_type {
+>  #define MCTL_COM_UNK_008        0x008
+>  #define MCTL_COM_MAER0          0x020
+> =20
+> +enum sunxi_nsi_port {
+> +	SUNXI_NSI_PORT_GPU      =3D 0,
+> +	SUNXI_NSI_PORT_GIC,	=3D 1,
 
-I don't remember if I asked before...
+This first comma is of course bollocks, I shouldn't do last minute
+changes without even compile testing ;-)
 
-Should we add a MAINTAINERS entry for this new directory?
+Cheers,
+Andre
 
-> 
-> diff --git a/drivers/pinctrl/Kconfig b/drivers/pinctrl/Kconfig
-> index 578edbf8168..46a95a1ab6b 100644
-> --- a/drivers/pinctrl/Kconfig
-> +++ b/drivers/pinctrl/Kconfig
-> @@ -405,6 +405,7 @@ config SPL_PINCTRL_ZYNQMP
->  
->  endif
->  
-> +source "drivers/pinctrl/airoha/Kconfig"
->  source "drivers/pinctrl/broadcom/Kconfig"
->  source "drivers/pinctrl/exynos/Kconfig"
->  source "drivers/pinctrl/intel/Kconfig"
-> diff --git a/drivers/pinctrl/Makefile b/drivers/pinctrl/Makefile
-> index 29fb9b484d0..b03e838ab39 100644
-> --- a/drivers/pinctrl/Makefile
-> +++ b/drivers/pinctrl/Makefile
-> @@ -24,6 +24,7 @@ obj-$(CONFIG_PINCTRL_PIC32)	+= pinctrl_pic32.o
->  obj-$(CONFIG_PINCTRL_EXYNOS)	+= exynos/
->  obj-$(CONFIG_PINCTRL_K210)	+= pinctrl-k210.o
->  obj-$(CONFIG_PINCTRL_MESON)	+= meson/
-> +obj-$(CONFIG_PINCTRL_AIROHA)	+= airoha/
-
-I still think this could be better placed. It looks like there is
-at leaset some attempt to put these in alphabetical order.
-
->  obj-$(CONFIG_PINCTRL_MTK)	+= mediatek/
->  obj-$(CONFIG_PINCTRL_MSCC)	+= mscc/
->  obj-$(CONFIG_ARCH_MVEBU)	+= mvebu/
-> diff --git a/drivers/pinctrl/airoha/Kconfig b/drivers/pinctrl/airoha/Kconfig
+> +	SUNXI_NSI_PORT_USB3,	=3D 2,
+> +	SUNXI_NSI_PORT_PCIE,	=3D 3,
+> +	SUNXI_NSI_PORT_CE,	=3D 4,
+> +	SUNXI_NSI_PORT_NPU,	=3D 5,
+> +	SUNXI_NSI_PORT_ISP,	=3D 6,
+> +	SUNXI_NSI_PORT_DSP,	=3D 7,
+> +	SUNXI_NSI_PORT_G2D,	=3D 8,
+> +	SUNXI_NSI_PORT_DI,	=3D 9,
+> +	SUNXI_NSI_PORT_IOMMU,	=3D 10,
+> +	SUNXI_NSI_PORT_VE_R,	=3D 11,
+> +	SUNXI_NSI_PORT_VE_RW,	=3D 12,
+> +	SUNXI_NSI_PORT_DE,	=3D 13,
+> +	SUNXI_NSI_PORT_CSI,	=3D 14,
+> +	SUNXI_NSI_PORT_GMAC0,	=3D 18,
+> +	SUNXI_NSI_PORT_GMAC1,	=3D 19,
+> +	SUNXI_NSI_PORT_MMC0,	=3D 20,
+> +	SUNXI_NSI_PORT_MMC1,	=3D 21,
+> +	SUNXI_NSI_PORT_MMC2,	=3D 22,
+> +	SUNXI_NSI_PORT_USB0,	=3D 23,
+> +	SUNXI_NSI_PORT_USB1,	=3D 24,
+> +	SUNXI_NSI_PORT_USB2,	=3D 25,
+> +	SUNXI_NSI_PORT_NPD,	=3D 26,
+> +	SUNXI_NSI_PORT_DMAC,	=3D 27,
+> +	SUNXI_NSI_PORT_DMA,	=3D 28,
+> +};
+> +
+>  /*
+>   * Controller registers seems to be the same or at least very similar
+>   * to those in H6.
+> diff --git a/arch/arm/include/asm/arch-sunxi/sunxi_nsi.h b/arch/arm/inclu=
+de/asm/arch-sunxi/sunxi_nsi.h
 > new file mode 100644
-> index 00000000000..eb87afbb374
+> index 00000000000..7d41f9318b5
 > --- /dev/null
-> +++ b/drivers/pinctrl/airoha/Kconfig
-> @@ -0,0 +1,11 @@
-> +# SPDX-License-Identifier: GPL-2.0-only
-> +
-> +config PINCTRL_AIROHA
-> +	depends on ARCH_AIROHA
-> +	select PINCTRL_FULL
-> +	select PINCTRL_GENERIC
-> +	select PINMUX
-> +	select PINCONF
-> +	select REGMAP
-> +	select SYSCON
-> +	bool
-> diff --git a/drivers/pinctrl/airoha/Makefile b/drivers/pinctrl/airoha/Makefile
-> new file mode 100644
-> index 00000000000..a25b744dd7a
-> --- /dev/null
-> +++ b/drivers/pinctrl/airoha/Makefile
-> @@ -0,0 +1,3 @@
-> +# SPDX-License-Identifier: GPL-2.0
-> +
-> +obj-$(CONFIG_PINCTRL_AIROHA)		+= pinctrl-airoha.o
-> diff --git a/drivers/pinctrl/airoha/airoha-common.h b/drivers/pinctrl/airoha/airoha-common.h
-> new file mode 100644
-> index 00000000000..af4964bf25d
-> --- /dev/null
-> +++ b/drivers/pinctrl/airoha/airoha-common.h
-> @@ -0,0 +1,512 @@
-> +/* SPDX-License-Identifier: GPL-2.0-only */
-> +#ifndef __AIROHA_COMMON_HEADER__
-> +#define __AIROHA_COMMON_HEADER__
-> +
-
-...
-
-> +static const u32 gpio_data_regs[] = {
-> +	REG_GPIO_DATA,
-> +	REG_GPIO_DATA1
-> +};
-> +
-> +static const u32 gpio_out_regs[] = {
-> +	REG_GPIO_OE,
-> +	REG_GPIO_OE1
-> +};
-> +
-> +static const u32 gpio_dir_regs[] = {
-> +	REG_GPIO_CTRL,
-> +	REG_GPIO_CTRL1,
-> +	REG_GPIO_CTRL2,
-> +	REG_GPIO_CTRL3
-> +};
-> +
-> +static const u32 irq_status_regs[] = {
-> +	REG_GPIO_INT,
-> +	REG_GPIO_INT1
-> +};
-> +
-> +static const u32 irq_level_regs[] = {
-> +	REG_GPIO_INT_LEVEL,
-> +	REG_GPIO_INT_LEVEL1,
-> +	REG_GPIO_INT_LEVEL2,
-> +	REG_GPIO_INT_LEVEL3
-> +};
-> +
-> +static const u32 irq_edge_regs[] = {
-> +	REG_GPIO_INT_EDGE,
-> +	REG_GPIO_INT_EDGE1,
-> +	REG_GPIO_INT_EDGE2,
-> +	REG_GPIO_INT_EDGE3
-> +};
-
-Putting these arrays in the header isn't a good idea. Each compile
-unit (C file) that includes this header will have them repeated. It
-looks like they are only used in pinctrl-arioha.c anyway, so they
-should should just be moved there.
-
-> diff --git a/drivers/pinctrl/airoha/pinctrl-airoha.c b/drivers/pinctrl/airoha/pinctrl-airoha.c
-> new file mode 100644
-> index 00000000000..11830c44612
-> --- /dev/null
-> +++ b/drivers/pinctrl/airoha/pinctrl-airoha.c
-> @@ -0,0 +1,843 @@
-> +// SPDX-License-Identifier: GPL-2.0-only
+> +++ b/arch/arm/include/asm/arch-sunxi/sunxi_nsi.h
+> @@ -0,0 +1,25 @@
+> +// SPDX-License-Identifier:	GPL-2.0+
 > +/*
-> + * Author: Lorenzo Bianconi <lorenzo@kernel.org>
-> + * Author: Benjamin Larsson <benjamin.larsson@genexis.eu>
-> + * Author: Markus Gothe <markus.gothe@genexis.eu>
-> + * Author: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+> + * A133/A523 NSI interconnect register and constant defines
+> + *
+> + * (C) Copyright 2026 Arm Ltd.
 > + */
-> +#include <dm.h>
-> +#include <dm/device_compat.h>
-> +#include <dm/device-internal.h>
-> +#include <dm/lists.h>
-> +#include <dm/ofnode.h>
-> +#include <asm-generic/gpio.h>
-> +#include <dt-bindings/pinctrl/mt65xx.h>
-> +#include <regmap.h>
 > +
-> +#include <syscon.h>
-> +#include <asm/arch/scu-regmap.h>
-
-Not sure I understand the organization of the includes
-above. Why the blank line between regmap and syscon? Why
-not everything in alphabetical order?
-
+> +#ifndef SUNXI_NSI_H__
+> +#define SUNXI_NSI_H__
 > +
-> +#include "airoha-common.h"
+> +#define SUNXI_NSI_PRI_CFG_LOWEST	0
+> +#define SUNXI_NSI_PRI_CFG_LOW		1
+> +#define SUNXI_NSI_PRI_CFG_HIGH		2
+> +#define SUNXI_NSI_PRI_CFG_HIGHEST	3
 > +
+> +#define SUNXI_NSI_IO_CFG_QOS_SEL_OUTPUT	0
+> +#define SUNXI_NSI_IO_CFG_QOS_SEL_INPUT	1
 > +
-> +static int pin_in_group(unsigned int pin, const struct pingroup *grp)
+> +#define NSI_CONF(port, pri, qos_sel) \
+> +	{ SUNXI_NSI_PORT_ ## port, SUNXI_NSI_PRI_CFG_ ## pri, \
+> +	  SUNXI_NSI_IO_CFG_QOS_SEL_ ## qos_sel }
+> +
+> +void nsi_configure_port(unsigned int port, u8 pri, u8 qos_sel);
+> +
+> +#endif /* SUNXI_NSI_H__ */
+> diff --git a/arch/arm/mach-sunxi/Makefile b/arch/arm/mach-sunxi/Makefile
+> index 0bee04d660f..3ef0113ea43 100644
+> --- a/arch/arm/mach-sunxi/Makefile
+> +++ b/arch/arm/mach-sunxi/Makefile
+> @@ -50,6 +50,6 @@ obj-$(CONFIG_DRAM_SUN50I_H616)	+=3D dram_sun50i_h616.o =
+dram_dw_helpers.o
+>  obj-$(CONFIG_DRAM_SUN50I_H616)	+=3D dram_timings/
+>  obj-$(CONFIG_DRAM_SUN50I_A133)	+=3D dram_sun50i_a133.o
+>  obj-$(CONFIG_DRAM_SUN50I_A133)	+=3D dram_timings/
+> -obj-$(CONFIG_MACH_SUN55I_A523)	+=3D dram_sun55i_a523.o dram_dw_helpers.o
+> +obj-$(CONFIG_MACH_SUN55I_A523)	+=3D dram_sun55i_a523.o dram_dw_helpers.o=
+ sunxi_nsi.o
+>  obj-$(CONFIG_DRAM_SUN55I_A523)	+=3D dram_timings/
+>  endif
+> diff --git a/arch/arm/mach-sunxi/dram_sun55i_a523.c b/arch/arm/mach-sunxi=
+/dram_sun55i_a523.c
+> index 1ffb62863e2..9fb054cea84 100644
+> --- a/arch/arm/mach-sunxi/dram_sun55i_a523.c
+> +++ b/arch/arm/mach-sunxi/dram_sun55i_a523.c
+> @@ -15,6 +15,7 @@
+>  #include <asm/arch/dram_dw_helpers.h>
+>  #include <asm/arch/cpu.h>
+>  #include <asm/arch/prcm.h>
+> +#include <asm/arch/sunxi_nsi.h>
+>  #include <linux/bitops.h>
+>  #include <linux/delay.h>
+> =20
+> @@ -1412,40 +1413,36 @@ static const struct dram_para para =3D {
+>  	.tpr10 =3D CONFIG_DRAM_SUNXI_TPR10,
+>  };
+> =20
+> -static void sunxi_nsi_init(void)
+> +static void nsi_set_master_priority(void)
+>  {
+> -	/* IOMMU prio 3 */
+> -	writel(0x1, 0x02021418);
+> -	writel(0xf, 0x02021414);
+> -	/* DE prio 2 */
+> -	writel(0x1, 0x02021a18);
+> -	writel(0xa, 0x02021a14);
+> -	/* VE R prio 2 */
+> -	writel(0x1, 0x02021618);
+> -	writel(0xa, 0x02021614);
+> -	/* VE RW prio 2 */
+> -	writel(0x1, 0x02021818);
+> -	writel(0xa, 0x02021814);
+> -	/* ISP prio 2 */
+> -	writel(0x1, 0x02020c18);
+> -	writel(0xa, 0x02020c14);
+> -	/* CSI prio 2 */
+> -	writel(0x1, 0x02021c18);
+> -	writel(0xa, 0x02021c14);
+> -	/* NPU prio 2 */
+> -	writel(0x1, 0x02020a18);
+> -	writel(0xa, 0x02020a14);
+> +	struct {
+> +		unsigned int port;
+> +		u8 pri;
+> +		u8 qos_sel;
+> +	} ports[] =3D {
+> +		NSI_CONF(NPU,	HIGH,		INPUT),
+> +		NSI_CONF(ISP,	HIGH,		INPUT),
+> +		NSI_CONF(IOMMU,	HIGHEST,	INPUT),
+> +		NSI_CONF(VE_R,	HIGH,		INPUT),
+> +		NSI_CONF(VE_RW,	HIGH,		INPUT),
+> +		NSI_CONF(DE,	HIGH,		INPUT),
+> +		NSI_CONF(CSI,	HIGH,		INPUT),
+> +	};
+> +	unsigned int i;
+> +
+> +	for (i =3D 0; i < ARRAY_SIZE(ports); i++)
+> +		nsi_configure_port(ports[i].port, ports[i].pri,
+> +				   ports[i].qos_sel);
+> =20
+>  	/* close ra0 autogating */
+> -	writel(0x0, 0x02023c00);
+> +	writel(0x0, 0x02023c00);	/* port 30 */
+>  	/* close ta autogating */
+> -	writel(0x0, 0x02023e00);
+> +	writel(0x0, 0x02023e00);	/* port 31 */
+>  	/* close pcie autogating */
+>  	writel(0x0, 0x02020600);
+>  }
+> =20
+>  static void init_something(void)
+> -
+>  {
+>  	u32 *ptr =3D (u32 *)0x02000804;
+> =20
+> @@ -1507,7 +1504,7 @@ unsigned long sunxi_dram_init(void)
+> =20
+>  	size =3D mctl_calc_size(&config);
+> =20
+> -	sunxi_nsi_init();
+> +	nsi_set_master_priority();
+>  	init_something();
+> =20
+>  	return size;
+> diff --git a/arch/arm/mach-sunxi/sunxi_nsi.c b/arch/arm/mach-sunxi/sunxi_=
+nsi.c
+> new file mode 100644
+> index 00000000000..3d7eb43df46
+> --- /dev/null
+> +++ b/arch/arm/mach-sunxi/sunxi_nsi.c
+> @@ -0,0 +1,31 @@
+> +#include <asm/io.h>
+> +#include <asm/arch/cpu.h>
+> +#include <asm/arch/sunxi_nsi.h>
+> +
+> +#define SUNXI_NSI_MODE_REG(i)		((i) * 0x200 + 0x10)
+> +#define SUNXI_NSI_PRI_CFG_REG(i)	((i) * 0x200 + 0x14)
+> +#define SUNXI_NSI_PRI_CFG_RD(v)		(((v) & 0x3) << 2)
+> +#define SUNXI_NSI_PRI_CFG_WR(v)		((v) & 0x3)
+> +#define SUNXI_NSI_IO_CFG_REG(i)		((i) * 0x200 + 0x18)
+> +#define SUNXI_NSI_ENABLE_REG(i)		((i) * 0x200 + 0xc0)
+> +
+> +void nsi_configure_port(unsigned int port, u8 pri, u8 qos_sel)
 > +{
-> +	for (int i = 0; i < grp->npins; i++) {
-> +		if (grp->pins[i] == pin)
-> +			return 1;
-> +	}
+> +	void *base =3D (void *)SUNXI_NSI_BASE;
+> +	u32 pri_cfg;
 > +
-> +	return 0;
+> +	/* QoS with bandwidth limits is not supported, disable it. */
+> +	writel(0, base + SUNXI_NSI_MODE_REG(port));
+> +	writel(0, base + SUNXI_NSI_ENABLE_REG(port));
+> +
+> +	/*
+> +	 * QoS direction selection should not be in use, but set it nevertheless
+> +	 * to match the BSP behavior (in case it has some other meaning).
+> +	 */
+> +	writel(qos_sel, base + SUNXI_NSI_IO_CFG_REG(port));
+> +
+> +	/* Port priority is always active. */
+> +	pri_cfg =3D SUNXI_NSI_PRI_CFG_RD(pri) | SUNXI_NSI_PRI_CFG_WR(pri);
+> +
+> +	writel(pri_cfg, base + SUNXI_NSI_PRI_CFG_REG(port));
 > +}
-> +
-> +static int pin_to_gpio(struct airoha_pinctrl *pinctrl, unsigned int pin)
-> +{
-> +	struct airoha_pinctrl_match_data *data = pinctrl->data;
-> +
-> +	if ((pin < data->gpio_offs) ||
-> +	    (pin > data->gpio_offs + data->gpio_pin_cnt))
-
-Should this be >= for the upper bound check?
-
-Also has unnecessary ().
-
-> +		return -EINVAL;
-> +
-> +	return pin - data->gpio_offs;
-> +}
-> +
-
-
-
-> +static int airoha_pinctrl_get_conf(struct airoha_pinctrl *pinctrl,
-> +				   enum airoha_pinctrl_confs_type conf_type,
-> +				   int pin, u32 *val)
-> +{
-> +	const struct airoha_pinctrl_confs_info *confs_info;
-> +	const struct airoha_pinctrl_reg *reg;
-> +
-> +	confs_info = &pinctrl->data->confs_info[conf_type];
-> +
-> +	reg = airoha_pinctrl_get_conf_reg(confs_info->confs,
-> +					  confs_info->num_confs,
-> +					  pin);
-> +	if (!reg)
-> +		return -EINVAL;
-> +
-> +	if (regmap_read(pinctrl->chip_scu, reg->offset, val))
-> +		return -EINVAL;
-> +
-> +	*val = (*val & reg->mask) >> __ffs(reg->mask);
-
-field_get()?
-
-> +
-> +	return 0;
-> +}
-> +
-> +static int airoha_pinctrl_set_conf(struct airoha_pinctrl *pinctrl,
-> +				   enum airoha_pinctrl_confs_type conf_type,
-> +				   int pin, u32 val)
-> +{
-> +	const struct airoha_pinctrl_confs_info *confs_info;
-> +	const struct airoha_pinctrl_reg *reg = NULL;
-> +
-> +	confs_info = &pinctrl->data->confs_info[conf_type];
-> +
-> +	reg = airoha_pinctrl_get_conf_reg(confs_info->confs,
-> +					  confs_info->num_confs,
-> +					  pin);
-> +	if (!reg)
-> +		return -EINVAL;
-> +
-> +	if (regmap_update_bits(pinctrl->chip_scu, reg->offset, reg->mask,
-> +			       val << __ffs(reg->mask)))
-
-field_prep()?
-
-> +		return -EINVAL;
-> +
-> +	return 0;
-> +}
-> +
-> +static int airoha_pinconf_get_direction(struct airoha_pinctrl *pinctrl, u32 p)
-> +{
-> +	int gpio;
-> +
-> +	gpio = pin_to_gpio(pinctrl, p);
-> +	if (gpio < 0)
-> +		return gpio;
-> +
-> +	return airoha_gpio_get_direction(pinctrl, gpio);
-> +}
-> +
-> +static int airoha_pinconf_get(struct airoha_pinctrl *pinctrl,
-> +			      unsigned int pin, unsigned long *config)
-> +{
-> +	enum pin_config_param param = pinconf_to_config_param(*config);
-> +	u32 arg;
-> +
-> +	switch (param) {
-> +	case PIN_CONFIG_BIAS_PULL_DOWN:
-> +	case PIN_CONFIG_BIAS_DISABLE:
-> +	case PIN_CONFIG_BIAS_PULL_UP: {
-> +		u32 pull_up, pull_down;
-> +
-> +		if (airoha_pinctrl_get_pullup_conf(pinctrl, pin, &pull_up) ||
-> +		    airoha_pinctrl_get_pulldown_conf(pinctrl, pin, &pull_down))
-> +			return -EINVAL;
-> +
-> +		if (param == PIN_CONFIG_BIAS_PULL_UP &&
-> +		    !(pull_up && !pull_down))
-> +			return -EINVAL;
-> +		else if (param == PIN_CONFIG_BIAS_PULL_DOWN &&
-> +			 !(pull_down && !pull_up))
-> +			return -EINVAL;
-> +		else if (pull_up || pull_down)
-> +			return -EINVAL;
-> +
-> +		arg = 1;
-> +		break;
-> +	}
-> +	case PIN_CONFIG_DRIVE_STRENGTH: {
-> +		u32 e2, e4;
-> +
-> +		if (airoha_pinctrl_get_drive_e2_conf(pinctrl, pin, &e2) ||
-> +		    airoha_pinctrl_get_drive_e4_conf(pinctrl, pin, &e4))
-> +			return -EINVAL;
-> +
-> +		arg = e4 << 1 | e2;
-> +		break;
-> +	}
-> +	case PIN_CONFIG_DRIVE_OPEN_DRAIN:
-> +		if (airoha_pinctrl_get_pcie_rst_od_conf(pinctrl, pin, &arg))
-> +			return -EINVAL;
-> +		break;
-> +	case PIN_CONFIG_OUTPUT_ENABLE:
-> +	case PIN_CONFIG_INPUT_ENABLE:
-> +		arg = airoha_pinconf_get_direction(pinctrl, pin);
-> +		if (arg != param)
-
-How does this work? It looks like airoha_pinconf_get_direction()
-returns enum gpio_func_t or negative error code.
-
-Should we check for error first before comparing?
-
-Do we need some kind of conversion between enum gpio_func_t and
-enum pin_config_param in airoha_pinconf_get_direction()?
-
-> +			return -EINVAL;
-> +
-> +		arg = 1;
-> +		break;
-> +	default:
-> +		return -EOPNOTSUPP;
-> +	}
-> +
-> +	*config = pinconf_to_config_packed(param, arg);
-> +
-> +	return 0;
-> +}
-> +
-> +static int airoha_pinconf_set_pin_value(struct airoha_pinctrl *pinctrl,
-> +					unsigned int p, bool value)
-> +{
-> +	int gpio;
-> +
-> +	gpio = pin_to_gpio(pinctrl, p);
-> +	if (gpio < 0)
-> +		return gpio;
-> +
-> +	return airoha_gpio_set(pinctrl, gpio, value);
-> +}
-> +
-> +static int airoha_pinconf_set(struct airoha_pinctrl *pinctrl,
-> +			      unsigned int pin, unsigned long *configs,
-> +			      unsigned int num_configs)
-> +{
-> +	int i;
-> +
-> +	for (i = 0; i < num_configs; i++) {
-> +		u32 param = pinconf_to_config_param(configs[i]);
-> +		u32 arg = pinconf_to_config_argument(configs[i]);
-> +
-
-In all of the cases below, I would expect that we should be checking
-the return value for error. Or add a comment on why it is safe to ignore
-the return value if that is the case.
-
-> +		switch (param) {
-> +		case PIN_CONFIG_BIAS_DISABLE:
-> +			airoha_pinctrl_set_pulldown_conf(pinctrl, pin, 0);
-> +			airoha_pinctrl_set_pullup_conf(pinctrl, pin, 0);
-> +			break;
-> +		case PIN_CONFIG_BIAS_PULL_UP:
-> +			airoha_pinctrl_set_pulldown_conf(pinctrl, pin, 0);
-> +			airoha_pinctrl_set_pullup_conf(pinctrl, pin, 1);
-> +			break;
-> +		case PIN_CONFIG_BIAS_PULL_DOWN:
-> +			airoha_pinctrl_set_pulldown_conf(pinctrl, pin, 1);
-> +			airoha_pinctrl_set_pullup_conf(pinctrl, pin, 0);
-> +			break;
-> +		case PIN_CONFIG_DRIVE_STRENGTH: {
-> +			u32 e2 = 0, e4 = 0;
-> +
-> +			switch (arg) {
-> +			case MTK_DRIVE_2mA:
-> +				break;
-> +			case MTK_DRIVE_4mA:
-> +				e2 = 1;
-> +				break;
-> +			case MTK_DRIVE_6mA:
-> +				e4 = 1;
-> +				break;
-> +			case MTK_DRIVE_8mA:
-> +				e2 = 1;
-> +				e4 = 1;
-> +				break;
-> +			default:
-> +				return -EINVAL;
-> +			}
-> +
-> +			airoha_pinctrl_set_drive_e2_conf(pinctrl, pin, e2);
-> +			airoha_pinctrl_set_drive_e4_conf(pinctrl, pin, e4);
-> +			break;
-> +		}
-> +		case PIN_CONFIG_DRIVE_OPEN_DRAIN:
-> +			airoha_pinctrl_set_pcie_rst_od_conf(pinctrl, pin, !!arg);
-> +			break;
-> +		case PIN_CONFIG_OUTPUT_ENABLE:
-> +		case PIN_CONFIG_INPUT_ENABLE:
-> +		case PIN_CONFIG_OUTPUT: {
-> +			bool input = param == PIN_CONFIG_INPUT_ENABLE;
-> +			int err;
-> +
-> +			err = airoha_pinmux_set_direction(pinctrl, pin, input);
-> +			if (err)
-> +				return err;
-> +
-> +			if (param == PIN_CONFIG_OUTPUT) {
-> +				err = airoha_pinconf_set_pin_value(pinctrl,
-> +								   pin, !!arg);
-> +				if (err)
-> +					return err;
-> +			}
-> +
-> +			break;
-> +		}
-> +		default:
-> +			return -EOPNOTSUPP;
-> +		}
-> +	}
-> +
-> +	return 0;
-> +}
-> +
-
-
-> +/**************************
-> + * pinctrl driver interface
-> + **************************/
-> +static int airoha_get_pins_count(struct udevice *dev)
-> +{
-> +	struct airoha_pinctrl *pinctrl = dev_get_priv(dev);
-> +
-> +	return pinctrl->data->num_pins;
-> +}
-> +
-> +static const char *airoha_get_pin_name(struct udevice *dev, unsigned selector)
-
-Inconsitent use of unsigned. Preferred is unsigned int. 
-
-> +{
-> +	struct airoha_pinctrl *pinctrl = dev_get_priv(dev);
-> +
-> +	return pinctrl->data->pins[selector].name;
-> +}
-> +
-
-
-> +static int airoha_pinconf_set_handler(struct udevice *dev, unsigned pin_selector,
-> +				      unsigned param, unsigned argument)
-> +{
-> +	struct airoha_pinctrl *pinctrl = dev_get_priv(dev);
-> +	unsigned long configs[1] = { pinconf_to_config_packed(param, argument) };
-> +	unsigned int pin = pinctrl->data->pins[pin_selector].number;
-> +
-> +	dev_dbg(dev, "enabling %s=%d property for pin %s\n",
-> +		airoha_pinconf_params[param].property, argument,
-
-This will result in out of bounds access. param is not the index but rather
-a field in the struct in the array.
-
-Easiset would be to just print numeric value of param, otherwise we need a
-lookup function.
-
-> +		airoha_get_pin_name(dev, pin_selector));
-> +
-> +	return airoha_pinconf_set(pinctrl, pin, configs,
-> +				  ARRAY_SIZE(configs));
-> +}
-> +
-> +static int airoha_pinconf_group_set_handler(struct udevice *dev, unsigned group_selector,
-> +					    unsigned param, unsigned argument)
-> +{
-> +	struct airoha_pinctrl *pinctrl = dev_get_priv(dev);
-> +	unsigned long configs[1] = { pinconf_to_config_packed(param, argument) };
-> +
-> +	dev_dbg(dev, "enabling %s=%d property for pin group %s\n",
-> +		airoha_pinconf_params[param].property, argument,
-
-ditto
-
-> +		airoha_get_group_name(dev, group_selector));
-> +
-> +	return airoha_pinconf_group_set(pinctrl, group_selector,
-> +					configs, ARRAY_SIZE(configs));
-> +}
-> +
-> +static int airoha_get_pin_muxing(struct udevice *dev, unsigned int selector,
-> +				 char *buf, int size)
-> +{
-> +	struct airoha_pinctrl *pinctrl = dev_get_priv(dev);
-> +	struct airoha_pinctrl_match_data *data = pinctrl->data;
-> +	const char *name, *type;
-> +	int ret, gpio, found = 0;
-> +	unsigned long config;
-> +	unsigned int param, pin;
-> +	u32 val;
-> +
-> +	pin = data->pins[selector].number;
-> +	for (int i = 0; i < data->num_grps; i++) {
-> +		if (!pin_in_group(pin, &data->grps[i]))
-> +			continue;
-> +
-> +		name = data->grps[i].name;
-> +		for (int j = 0; j < data->num_funcs; j++) {
-> +			if (!func_grp_active(pinctrl, &data->funcs[j], name))
-> +				continue;
-> +
-> +			ret = snprintf(buf, size, "%s(%s)",
-> +				       data->funcs[j].desc.name, name);
-
-Should use scnprintf(). snprintf() returns the number that would have been
-written, which can be larger than number actually written.
-
-Same applies elsewhere in this patch.
 
