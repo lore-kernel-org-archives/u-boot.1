@@ -4,86 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29DC8CD3436
-	for <u-boot@archiver.kernel.org>; Wed,  6 May 2026 12:46:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B2AACD342C
+	for <u-boot@archiver.kernel.org>; Wed,  6 May 2026 12:46:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C4A7C8499C;
-	Wed,  6 May 2026 14:46:04 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0A517849AD;
+	Wed,  6 May 2026 14:46:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="mDlSYbwc";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="UIdKeo8O";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4B23E848CE; Wed,  6 May 2026 13:42:35 +0200 (CEST)
-Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
- [IPv6:2a00:1450:4864:20::32c])
+ id 129E88488B; Wed,  6 May 2026 13:42:36 +0200 (CEST)
+Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
+ [IPv6:2a00:1450:4864:20::331])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6C9E38488B
- for <u-boot@lists.denx.de>; Wed,  6 May 2026 13:42:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 36FCB848A1
+ for <u-boot@lists.denx.de>; Wed,  6 May 2026 13:42:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=antoine.gouby@gmail.com
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-488b3f8fa2bso8092685e9.1
- for <u-boot@lists.denx.de>; Wed, 06 May 2026 04:42:33 -0700 (PDT)
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-48d146705b4so23422305e9.3
+ for <u-boot@lists.denx.de>; Wed, 06 May 2026 04:42:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=gmail.com; s=20251104; t=1778067753; x=1778672553; darn=lists.denx.de;
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:from:to:cc:subject:date:message-id:reply-to;
- bh=406cJPzKfc9o3e3oVxX/ucY83kiSfufshFfll6cQigQ=;
- b=mDlSYbwc5eNo01aOII2i1anxfluU0zM0cNDVQ8HgfVnnUw0e2IfNrpTMgtjuN74qXO
- ksHl402big/ajAQeznijUQsTzU3y1jIjtmVepcIM94esTFg3fLCocYdGHCuhnKxt9E0r
- Jh1fNwlns8ev6OQb+0TOzUWSHQa+mgDmFRiWBHLG0oGB8zQ0h/orZuW+i28FzTA9m1hn
- eHbjLDYwjKbW6lkak1+xf/k6LG92TqNy2nipxS7xHw3ztStBouINmy7lY5jBiTfdRYqM
- 61Bl+Nz1Qu/Wd7I4dwqoz7OdRYhcjadYBDXKR+piG6rcUmAb3OknbU47PkidnP8NcMGm
- Deag==
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=ffZn3zok47jjOsSDQkgjApq5BXX+auLc3Pc0wpXex/Y=;
+ b=UIdKeo8O3s07g4MJRq7HW74x/B9gmSLmm4CAnDsAvJUmwqa9ljKQNGPGRnXVrzWM8q
+ 1BFUriNolx63lNt6HmofVGiHFWgM2yJp3mOdh2lxZRkiTPLek0q0LlnGrH+5SehU22eB
+ EDpTT+I0MMFbYopePg1vmCYuBkh+I0QgRnbCp0+GtKvtXYlIlmp/ngNXIUj6N/AWTsv9
+ ctmVWzE/vIfULDvHnIG2uFRSUYNYsQ+kvlVMMH0vXd9QaK8WfD13EvCJZgMIMvOWa/mI
+ Px81t/7cBwL1jXWBI82bDPGQSaxTKEIr/OGcIPxzPYGfxPWmuc3Bf2Niq9Sf/o4yapOJ
+ kQMQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20251104; t=1778067753; x=1778672553;
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=406cJPzKfc9o3e3oVxX/ucY83kiSfufshFfll6cQigQ=;
- b=Z/KAHQJEJW5UAdmva1jx85MSFBJVjCuhw4quZOlupsRx/sNdNL3lOh7MGdteLmYzMy
- R6cxBymqfwiWQdUM5QNwi66/iddAouy57DsXA1TgAswfcKQEnpjWqKxQL8jetObOPak9
- tg5pRB6L0IJ1xRpnotBmtSKALoB3ewadvcevf8G04aZ+ohI7gTMMtt4y2l2tgpS845nm
- YtcGeY742XY4ALhRyQhaurd/JC65CH/WkAxxeL+xeapC718BP4kPFGGVZJmKwg8ctTBY
- bsPDXzNfNR0wedwtQ5aITjHoHGHJek/GK0tY2KXDEycoeof0wO2B7+sOG0ZITMLBbQGm
- bleA==
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=ffZn3zok47jjOsSDQkgjApq5BXX+auLc3Pc0wpXex/Y=;
+ b=SibJna+n2J1Wv+rafvMQ5MhPh9JpBElPNgiUg00GtkyJYtfQ2PekjtXjMldFHhB7JM
+ rltwhSeGPm+h92lMjTKI0S4eFIFUIB1Zqgu3Crx2weSnFRFuQu68sEiga2/rEzk+cyoe
+ SmyQzUu7R+Ss/eRI+p4VgPEhs/tyy8fGYV3sIqBSzdnh29GFBw1KrP7Y5Ol10wq5QeDt
+ EGfpsa3mntVt7it0KocXtGxtlI0zdiQU5VsJy/3IgvMLerAbLSH31zD5VtNzsrYuP6D4
+ n26bsJW9+C37c01XF00yZuky2VgzefJ0WZ/g0WrCO5M2i05aQs85QPuJZyN4HVeGeQAq
+ l0tA==
 X-Forwarded-Encrypted: i=1;
- AFNElJ/YLNiXK7KOJqy+HycrU1pstIivlApJ2eBYyf8Lmvu5keQzV+tFDt+jiRcqpmvBs9SawddRmqY=@lists.denx.de
-X-Gm-Message-State: AOJu0YxuoiHjkENLWoFzDLtyrG8wDIJttE2RYU75v1RBjE2JJ4h/HXjK
- 7mOGXlUEPnuH4nSHWXlQnGp894LZARl0tlUVn+7d8SPc+BpyGWSEyDUPXK++deSx
-X-Gm-Gg: AeBDiesZb6V5j7/ayJEB/I/uVh2zdhsO/ElW4Npq7wl+fCDU6sDAdYPXyR/aiO5YhVL
- ADNEiNiz8fpgHqYLVEwiXvjt8n10jJLCClE0A/TudH2h+vQmCKdEcTMzcASrjdx87AZun4efoZU
- UTNYJwIkafpckJzfE9YPgoYh3bhsG4Q5gYwBfamgO5bYlzY1ZdNLXnJSsabs1HBgw1u2sRosDBd
- uaFKn0tQl/WI7QZo7oXRvZx1WXPlyHyd3fvu9uPdrYTBHupSXJHx+mrdZD7r7Osw7kgCea0Mgox
- 09wur8UtkxNUrnbRQmG1IPcZSkpWeTTxz4L/Hct1edytE5Ow+CTeGSo3VzOkJdSATWoIwUPiKeX
- jkhWkMand+SE3wGKwZKCV7sWeUCSMMkGeRJzMqSl0zcuRAQDHhCYKlzUIPUmhiL3jzvZ/o9TxKo
- hz7ArewGaZoYfq98FPW1g6wmrbGR8JRheY7dHJ8qzvCqfycLpWq9p54Kv3dVWYCaxQlMo6OdoDS
- EOn55aHCB+A3OHWAjR8bKzFfGSd2yVUioftjoo5JrSV84Qmth6nyUiMQ66QNA==
-X-Received: by 2002:a05:600c:3504:b0:488:aa33:dc8f with SMTP id
- 5b1f17b1804b1-48e521f3938mr38954785e9.0.1778067752480; 
- Wed, 06 May 2026 04:42:32 -0700 (PDT)
+ AFNElJ8uO9KW+LnB2x3jnb0h2L93i88VzrSjK04xRekre7zG1Xrji4/IwpacLIdFPVdl7zg/LRlXsjU=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy9l1YDsji5dVpjy97zNUJ6wAZjSIRtLinFWRlhfkNToCHdjofi
+ mnLI5lXwNUD890IwESn/fARbZhEQAa+P5ynIEhYQhZDl79Q6QL84I+RM8KPNbI2f
+X-Gm-Gg: AeBDieuJlHm7uZtTV7czOsj1rGoV5hY26yRb0R1bbu3zdjshZ/JysG8Q1JF4O4S0Ynu
+ 6/IeM/xv6gopfieECNqZDbf7SxmuGDi9NFQWCtPTAMgI3GYNMaM3+uPr+8PfFjZpet0m5z8l7vb
+ Y1Pp1e9o/qqzuaV5FDfJT/S5ayrYXtDBqxGUyZUzkCUtjsjvLXxmLjaIcChjX7ibzKNPcNjl4t3
+ p9qnwNv31Qkt8MBWtp3FBeWvG7jG9wM1rRuAXuS9gGq1sRFjkE5QlAz4+RBtoB9N05Yn2HxYRzo
+ dXwnnqm3mMERslpX2wFDv0WvmG7l7i1NbpbiKxE3DKVzqw1LF+EPrc4vSFQZFVxtTspMdte1Mpl
+ pG6KuGnEa3cG8aP6g/JYFpSizdi0m9a2oBfw90CEaNtyyXXExlTnmMt2VjQ76yultej3OI0ldW/
+ BTw2aQFs8phlH3dCLtZnt7W8XD8Sl4VM1EyZho5VGMPepxCvQF6l3jeOdOr0z2+JfqY0ICvlIGQ
+ ADy/iwu5lVmC2KfNHsMrAa1zu/r5+3WILjokRqx39JByf75yfq1DlRvg0ygcw==
+X-Received: by 2002:a05:600c:354b:b0:485:7f02:afd5 with SMTP id
+ 5b1f17b1804b1-48e51f427bemr52815875e9.13.1778067753363; 
+ Wed, 06 May 2026 04:42:33 -0700 (PDT)
 Received: from [10.0.1.145]
  (248.201.173.83.static.wline.lns.sme.cust.swisscom.ch. [83.173.201.248])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-48e53157734sm14458305e9.35.2026.05.06.04.42.31
+ 5b1f17b1804b1-48e53157734sm14458305e9.35.2026.05.06.04.42.32
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Wed, 06 May 2026 04:42:32 -0700 (PDT)
 From: Antoine Gouby <antoine.gouby@gmail.com>
-Subject: [PATCH 0/2] board: toradex: imx95: remove gpio1 reg
-Date: Wed, 06 May 2026 13:42:19 +0200
-Message-Id: <20260506-v1-remove-gpio1-reg-v1-0-d5e09f936d90@toradex.com>
+Date: Wed, 06 May 2026 13:42:20 +0200
+Subject: [PATCH 1/2] board: toradex: smarc-imx95: remove gpio1 reg
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/x3MQQqAIBBA0avErBvQyim6SrSImmwWZShIIN49a
- /kW/ycI7IUDjFUCz1GCuKtA1xWsx3JZRtmKoVENKaMIo0bPp4uM9hb3wWJnmPq1HQYiA6W8Pe/
- y/NdpzvkF/k4so2UAAAA=
-X-Change-ID: 20260506-v1-remove-gpio1-reg-45e67c388665
+Message-Id: <20260506-v1-remove-gpio1-reg-v1-1-d5e09f936d90@toradex.com>
+References: <20260506-v1-remove-gpio1-reg-v1-0-d5e09f936d90@toradex.com>
+In-Reply-To: <20260506-v1-remove-gpio1-reg-v1-0-d5e09f936d90@toradex.com>
 To: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@lists.denx.de
 Cc: Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>, 
  Francesco Dolcini <francesco.dolcini@toradex.com>, 
@@ -92,13 +90,13 @@ Cc: Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>,
  Emanuele Ghidoli <emanuele.ghidoli@toradex.com>, 
  Antoine Gouby <antoine.gouby@toradex.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1021;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=804;
  i=antoine.gouby@toradex.com; h=from:subject:message-id;
- bh=UTLNNJpf1s1nuSPysOoxvE+JUOAtjxazoOGbLkvEpYo=;
- b=owGbwMvMwCWm0rPo7MxLN2YynlZLYsj8ramuPfGmp03+VU7H07Ey+xfYzWuN5umW/ix5ec82u
- 46zRffXdJSyMIhxMciKKbJkPFEV5FMIkfXgaE6GmcPKBDKEgYtTACZyNoGR4dDFyKIHntIxpjHL
- 1Cr5+W5lJy6t3dO9+9pP5m/mU7918zMyrO16fM3smPiE1rDETbnSGjWv/wZ0LWFtnvxI4uAReWE
- XfgA=
+ bh=K0NQS74Qwopp5hAPiJAxP7XPptzMi9KTPCkfktLe9n0=;
+ b=owGbwMvMwCWm0rPo7MxLN2YynlZLYsj8ran+KzugbrPMtIuhAiybJhm8rXNzty0U0up1/Wudz
+ /SP9XB7RykLgxgXg6yYIkvGE1VBPoUQWQ+O5mSYOaxMIEMYuDgFYCLHQhgZ7iVlfpObX9f4IG36
+ HOEtSR+9t/LvPWJZWanJ6bFdl+XEBUaGC6a1zG81xXZ/OaInsd+jeHKvIuML1Zv1k+oMYww475z
+ nBAA=
 X-Developer-Key: i=antoine.gouby@toradex.com; a=openpgp;
  fpr=68E425110E20541D48088363248CA2CD99D2D899
 X-Mailman-Approved-At: Wed, 06 May 2026 14:46:02 +0200
@@ -118,33 +116,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This series removes gpio1 reg from Toradex SMARC iMX95 and Verdin iMX95
-device trees.
+From: Antoine Gouby <antoine.gouby@toradex.com>
 
 The RGPIO2P driver contains legacy handling for compatible combinations
 that expose two reg ranges (dual base) for i.MX8ULP and i.MX93.
 
-The i.MX95 GPIO controller exposes a single register range, so the 
+The i.MX95 GPIO controller exposes a single register range, so the
 dual-base handling is unnecessary.
-
-On Verdin iMX95, the second address of the gpio1 reg node was incorrect.
-When used, it needs to be offsetted by 0x40 to start at the Port Data
-Output register.
 
 Signed-off-by: Antoine Gouby <antoine.gouby@toradex.com>
 ---
-Antoine Gouby (2):
-      board: toradex: smarc-imx95: remove gpio1 reg
-      board: toradex: verdin-imx95: remove gpio1 reg
-
  arch/arm/dts/imx95-toradex-smarc-dev-u-boot.dtsi | 1 -
- arch/arm/dts/imx95-verdin-wifi-dev-u-boot.dtsi   | 1 -
- 2 files changed, 2 deletions(-)
----
-base-commit: ae8987f4e690f397f507c4b1efabd68b3ed08db6
-change-id: 20260506-v1-remove-gpio1-reg-45e67c388665
+ 1 file changed, 1 deletion(-)
 
-Best regards,
+diff --git a/arch/arm/dts/imx95-toradex-smarc-dev-u-boot.dtsi b/arch/arm/dts/imx95-toradex-smarc-dev-u-boot.dtsi
+index 97ce7402e503..24952579a670 100644
+--- a/arch/arm/dts/imx95-toradex-smarc-dev-u-boot.dtsi
++++ b/arch/arm/dts/imx95-toradex-smarc-dev-u-boot.dtsi
+@@ -10,7 +10,6 @@
+ };
+ 
+ &gpio1 {
+-	reg = <0 0x47400000 0 0x1000>, <0 0x47400040 0 0x40>;
+ 	bootph-pre-ram;
+ };
+ 
+
 -- 
-Antoine Gouby <antoine.gouby@toradex.com>
+2.53.0
 
