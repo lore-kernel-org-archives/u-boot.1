@@ -4,46 +4,146 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1348DCD342C
-	for <u-boot@archiver.kernel.org>; Wed,  6 May 2026 09:42:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C28FBCD342C
+	for <u-boot@archiver.kernel.org>; Wed,  6 May 2026 09:59:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 75DA2847D9;
-	Wed,  6 May 2026 11:42:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=lst.de
+	by phobos.denx.de (Postfix) with ESMTP id 0BAAF84897;
+	Wed,  6 May 2026 11:59:32 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id B2302847FD; Wed,  6 May 2026 11:42:57 +0200 (CEST)
-Received: from verein.lst.de (verein.lst.de [213.95.11.211])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0DBA2846F4
- for <u-boot@lists.denx.de>; Wed,  6 May 2026 11:42:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=lst.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=duwe@lst.de
-Received: by verein.lst.de (Postfix, from userid 107)
- id D394768BFE; Wed,  6 May 2026 11:42:52 +0200 (CEST)
-Received: from neoN1 (unknown [80.255.5.134])
- by verein.lst.de (Postfix) with ESMTPSA id 4FEFB6732A;
- Wed,  6 May 2026 11:42:31 +0200 (CEST)
-Date: Wed, 6 May 2026 11:42:22 +0200
-From: Torsten Duwe <duwe@lst.de>
-To: Neil Armstrong <neil.armstrong@linaro.org>
-Cc: Bin Meng <bmeng.cn@gmail.com>, Andrew Goodbody
- <andrew.goodbody@linaro.org>, Tom Rini <trini@konsulko.com>, Peter Robinson
- <pbrobinson@gmail.com>, Matthias Brugger <mbrugger@suse.com>, Andrea della
- Porta <andrea.porta@suse.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH] nvme: Fix missing inbound DMA offset calculation
-Message-ID: <20260506114222.0284d200@neoN1>
-In-Reply-To: <0f10ff43-f2d6-4f6d-a1d5-13f7a1206a59@linaro.org>
-References: <20260430145412.BC53E68AFE@verein.lst.de>
- <fcdac873-bba4-4a76-853b-23672989d43f@linaro.org>
- <0f10ff43-f2d6-4f6d-a1d5-13f7a1206a59@linaro.org>
-Organization: LST e.V.
-X-Mailer: Claws Mail 4.3.1 (GTK 3.24.50; aarch64-suse-linux-gnu)
-MIME-Version: 1.0
+	dkim=pass (1024-bit key; unprotected) header.d=arm.com header.i=@arm.com header.b="QiBgWGCi";
+	dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b="QiBgWGCi";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 36748848AE; Wed,  6 May 2026 11:59:31 +0200 (CEST)
+Received: from AM0PR02CU008.outbound.protection.outlook.com
+ (mail-westeuropeazlp170130006.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::6])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 668948488B
+ for <u-boot@lists.denx.de>; Wed,  6 May 2026 11:59:28 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=arm.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=Jerome.Forissier@arm.com
+ARC-Seal: i=2; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=pass;
+ b=UDboV8BI6Whbv/mBFnxRiUqGCDWtVHjDgSdDckNCmfTRPY9uKvgTpnJ8mvqUulYH6xLgezGRNzx2V/8NTyU+bWxeGRxCH72Kk5i4wFZtQCGxTKx6saizURnFQd2ZKEQ+Le53rdmu7IervxOnuxSwcyokZPnnk1TaFU7Nr6dVTf9M8thbHIkn+349trQh/hOJta43tbSprDlPiZlAcd3TSF14V/2fzZbHKwFXhczTKKEiW8+M+K/+dNdBaFxJt80Chad427vHAZaj0mYOUD2vgTKcvqg/UY2KJi23t07Ve8lQKJ2Gks4/dtewNyliBPTE87aW4u+juuYUm6HRmavJHQ==
+ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=MrZFsAyXt/RSkEiO6s2M+lS6X1z8rpc7E7nHwfJD2L0=;
+ b=LFOTmy6rfB9etUvDGYoYqFg3AydlOOncNCHGPwsWr6Grdju/gx4RbNeqbY2LSxqjJssNcNJE5sd5ZwYoR2UCSpnS2YcVSRMLExHPipW2tTchPA4UUQ1cVfHLRTilcVI1MZeKPXyOBTE1//VFnrsv0YzZnx5pRnu9sakmCt2TbGJMZJIfvvz38LDa2ufd7/qOiW4nC7qglACDqnLp5up//Vc7+Xsc81KZMItPrpg53Pes+L92RQTWvoHLs70szdsWVp44H3AMxci0Z3J1kLcutkYN/DezuVlnD/F58rbrzDILp0cJ7ah/HEIyuaC91t26wfRCGNdI0ijEvKlVvsiiUA==
+ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
+ 4.158.2.129) smtp.rcpttodomain=konsulko.com smtp.mailfrom=arm.com; dmarc=pass
+ (p=none sp=none pct=100) action=none header.from=arm.com; dkim=pass
+ (signature was verified) header.d=arm.com; arc=pass (0 oda=1 ltdi=1
+ spf=[1,1,smtp.mailfrom=arm.com] dkim=[1,1,header.d=arm.com]
+ dmarc=[1,1,header.from=arm.com])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=MrZFsAyXt/RSkEiO6s2M+lS6X1z8rpc7E7nHwfJD2L0=;
+ b=QiBgWGCiiAiGYchg4khJ7qoQT5uB6ItsBvOEGDQc15iCgI+sqMt0JUdaoej3E9RdGbCqXGLZML5btRI7M2qMC/AiTVlF5SSu5J6h8SqdzN4CETeb1d7Zl9pmi4hGHGEMD9qJHgJ4UaUr4/FQsRjkyG6RLkOQ7escsh7/I5guhms=
+Received: from AS9PR06CA0132.eurprd06.prod.outlook.com (2603:10a6:20b:467::15)
+ by AS8PR08MB8826.eurprd08.prod.outlook.com (2603:10a6:20b:5bb::16)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9891.15; Wed, 6 May
+ 2026 09:59:22 +0000
+Received: from AMS1EPF00000044.eurprd04.prod.outlook.com
+ (2603:10a6:20b:467:cafe::dd) by AS9PR06CA0132.outlook.office365.com
+ (2603:10a6:20b:467::15) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9891.15 via Frontend Transport; Wed,
+ 6 May 2026 09:59:22 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 4.158.2.129)
+ smtp.mailfrom=arm.com; dkim=pass (signature was verified)
+ header.d=arm.com;dmarc=pass action=none header.from=arm.com;
+Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
+ 4.158.2.129 as permitted sender) receiver=protection.outlook.com;
+ client-ip=4.158.2.129; helo=outbound-uk1.az.dlp.m.darktrace.com; pr=C
+Received: from outbound-uk1.az.dlp.m.darktrace.com (4.158.2.129) by
+ AMS1EPF00000044.mail.protection.outlook.com (10.167.16.41) with Microsoft
+ SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.20.9891.9
+ via Frontend Transport; Wed, 6 May 2026 09:59:21 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=uJOYpijEyiB0J11wQrp2Kba5ICQEsFfKJCMnjlzlCjL+3ZRzfEm/K1oqkRlK9uar5YFfbdysdM/jbnLtYISDxasXoZc6HWr7F2q3EhHI8Cwnnxby2rmOx7iAgNKFViU6U1Pp3ZLwujJ8AhUnNytV1UKAsmQmt39jeQD2ebrsCtLOKTfkF2WLxvO1Zr6d9IXbGiyo1OUiK8bHa8dCj6NeELWJ400v1jW++QoTaCTSMvoc0LbpakwFczW7lZ0WPWRvw6na/9zjB+WCTejXosghtcKYtnncQKrg87nASzOD06uNWyj9ePcj1hls35STNkQ0Mh/1XELY2Kj88pNUdHA4Wg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=MrZFsAyXt/RSkEiO6s2M+lS6X1z8rpc7E7nHwfJD2L0=;
+ b=uBJ290dr0oOW+uEj+QC3a53EJ0kNJX7ia/w813YIeNoKJONYhSCBVjWvqsLnzxciVhmA3K9UwgL2mqMCB6oEVsHf2eLYbD/j5OL49T/M7rA2Bv4AHQMbzlMJdj79LoYtLz3+ml+gXfUQBd6Vo+Vyjd9m2LqoEkPreu+SgOdRzNGaTG+u4KxVmQazEaJJwj3q/NJMS457zI1rtuUMcn8/vNIWSEWFAllIvKCDOeBQBDEVzQumpC9S2bKMOyTWeNLH89C3NMTqLdKG6+p1kMfACRhp/a/v+sGA4Ewsv7/fVAgo4HOz5FfVoLM1udy3ACeZOE60xil57BK3MYZzGUCJtA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
+ header.d=arm.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=MrZFsAyXt/RSkEiO6s2M+lS6X1z8rpc7E7nHwfJD2L0=;
+ b=QiBgWGCiiAiGYchg4khJ7qoQT5uB6ItsBvOEGDQc15iCgI+sqMt0JUdaoej3E9RdGbCqXGLZML5btRI7M2qMC/AiTVlF5SSu5J6h8SqdzN4CETeb1d7Zl9pmi4hGHGEMD9qJHgJ4UaUr4/FQsRjkyG6RLkOQ7escsh7/I5guhms=
+Authentication-Results-Original: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=arm.com;
+Received: from AM0PR08MB11733.eurprd08.prod.outlook.com
+ (2603:10a6:20b:740::16) by PA6PR08MB10661.eurprd08.prod.outlook.com
+ (2603:10a6:102:3ce::14) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9870.25; Wed, 6 May
+ 2026 09:58:14 +0000
+Received: from AM0PR08MB11733.eurprd08.prod.outlook.com
+ ([fe80::29d7:e9ba:ff69:a0c3]) by AM0PR08MB11733.eurprd08.prod.outlook.com
+ ([fe80::29d7:e9ba:ff69:a0c3%3]) with mapi id 15.20.9891.008; Wed, 6 May 2026
+ 09:58:14 +0000
+Message-ID: <bc4236ee-057c-4fd3-930e-3c613e55ef19@arm.com>
+Date: Wed, 6 May 2026 11:58:13 +0200
+User-Agent: Mozilla Thunderbird
+Content-Language: en-US
+To: Tom Rini <trini@konsulko.com>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>, nd@arm.com
+From: Jerome Forissier <jerome.forissier@arm.com>
+Subject: Please pull net-20260506
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: PA7P264CA0051.FRAP264.PROD.OUTLOOK.COM
+ (2603:10a6:102:34a::18) To AM0PR08MB11733.eurprd08.prod.outlook.com
+ (2603:10a6:20b:740::16)
+MIME-Version: 1.0
+X-MS-TrafficTypeDiagnostic: AM0PR08MB11733:EE_|PA6PR08MB10661:EE_|AMS1EPF00000044:EE_|AS8PR08MB8826:EE_
+X-MS-Office365-Filtering-Correlation-Id: 379a4cc2-afb9-4d71-5c44-08deab56259e
+x-checkrecipientrouted: true
+NoDisclaimer: true
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam-Untrusted: BCL:0;
+ ARA:13230040|1800799024|376014|366016|56012099003|18002099003; 
+X-Microsoft-Antispam-Message-Info-Original: 0YqNzRqTzpSdtFi0BO7xoV+CWDGX5eb2wYNgJ+xrUz0SMItazGVYyDY4ESVFYBhOGSMe3kGhAs4ZL/FKu9+agycrMnBuix1n9kEvIC2Y2mXF75zZ8XqGXKaWlRom6NNqck5g61bjoLUgKkARtrfqXqEKOOYm1VgG1yjGlfeTt5sSbZBmMyk1oE9kS6dpZacq1uvKMuOq14CevuHzd1eUWYwDnWc/WmYVtEclWszRknyVo+iKTxE3aHuNEkv5mNu1Dh8KQMA5EMtWENWHuzc7VoswN6Hcb2jj4n1NZzxN++IE4vAer5iQY/2ZydfBL5j8s0DVjBCXjTxlKtQvRQz6XBkeOc1QmHHEM3NQQtcIZn29ntvASliI2Z0joidEddVBLoJeq1PPS5k0q/vbqFz0IzJdYaAhm1N3otFcLodcFbzNIrOOGrmGQhhJVc/cEkGafQ8h9A9NxxrTxr24Z+tLvtEYc5PR5sAn6beW4/IJV/lRWlQniqkQ3DJGTszXBcZH+p7DMRmeZuKuY46bvtaKfVPZs16jhP7JtJT9PRpIDI8omBnrLadWA7A69bIF7ckt4XskKVyRTnQqnhs83Ym7JAISqDPpzSKYaOyzdqYG8zR4Nkw8pnoiKyXrQBjhtlDrutiTXFSlBcjupUh5nM+5GA==
+X-Forefront-Antispam-Report-Untrusted: CIP:255.255.255.255; CTRY:; LANG:en;
+ SCL:1; SRV:; IPV:NLI; SFV:NSPM; H:AM0PR08MB11733.eurprd08.prod.outlook.com;
+ PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(376014)(366016)(56012099003)(18002099003); DIR:OUT;
+ SFP:1101; 
+X-Exchange-RoutingPolicyChecked: eGWZ33MJm3cTcvK1mDXm6E4HmdstlEaFtcESCWDXtoWhhFj7D3s/H5eFNRREdc/EBiwxbumAk/17YrCAH9Py4N8MAQ41TOs3/QxyQjMR8ioVOnJjUr4BiVENX2UADbHTzBXcYQpYkPjYdMqIcCkHcHECXWGWJoQoBXhbD/xbk9Kg2Rf6cW5bpNB7QpXBtMC46yIsJSTO/2JPOG9MNPICrqa6yYrexLiVHvMXfadN546PaRjif0+KneoYlCio53tfLTrY3XEKFlfC8FOMrIyDqJT5eIaAe6nlRx36t1JzZKlycnRegnAXwKSMEoBI1+/yAUdKXvAf20xOhSkSqi5X8g==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA6PR08MB10661
+X-EOPAttributedMessage: 0
+X-MS-Exchange-Transport-CrossTenantHeadersStripped: AMS1EPF00000044.eurprd04.prod.outlook.com
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id-Prvs: 560850da-6f33-4779-999d-08deab55fd76
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|14060799003|35042699022|82310400026|376014|36860700016|13003099007|56012099003|18002099003;
+X-Microsoft-Antispam-Message-Info: LPFiECW3HTzUerhFPKYUvvnHKmUGcIHen1F6GllPw0wq2b05ZWhfiH3LF0yvlXBKo8wjBou30v8XJZJnR9icSSfzgBqDs6gIRAPBqJfwc8EWlQEYTnPZMXal80u7kZFUOoHtPRvgE8tZX0rqtgATbAza2MSXZX0XEXORwWMHbciSQH1yhASCAgI4+VG96g+LtnV++oCt9uykU5ZSCyES4pxGQUvFArXpakzgVfJIdl83HqcwN0pQ8dTfAPFkAuH/pHx2CsHsk7Xsvu4oEFGT5zIa8AAVdK2SjvQix6/0UF4UubYSWbTyx/l48z/t+VIaOUCAnVJXo0pcxvA16okR5nMBZJtTmlAa3O4g/5cGlGlUuAJxwqfQA/SSVMy1L/FFQJ4fEubDWw5rYX5Namgi+KAsPBb9YrZLHLbak0MbqwOX6Gq1XuXKlbzMhx5pj6EVPkt+tESakNdbUeHnpH53pk+8GR90gvIec3/Ap5azwI97IS1/LU4RiG4pSdG21iWz7NuIn75b61lRcc6kpaoJX3H8KJzlpGd8A2qiKTLvt2ypTwUzIieAD/3jbo3+AdygDRpBCMdD5Rh7GlfqUGZXmFsPZVj8c3NL2dQx16GsuVcJQ96MM6mqsdXk8xtuXKX0a7ukkZ3vPoYEIlzB6upmtmrYZ1GgMxchMxZH8Yz5XP/f+QQ2wAwSkAD4XryjkWYQ
+X-Forefront-Antispam-Report: CIP:4.158.2.129; CTRY:GB; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:outbound-uk1.az.dlp.m.darktrace.com;
+ PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(1800799024)(14060799003)(35042699022)(82310400026)(376014)(36860700016)(13003099007)(56012099003)(18002099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 1z6F+BW07NdA1EBA6NqQtUt0PYocYzSd/V9sMh9Q6HUTtsU7ffvWs68kBn3gloZ4GEL5phkcXBWkrWq5jjB4VXZP9UaavsxzCB+56cWyVgDi/eihmRZA6VaI+u12Z4vLy5h25V0XZGjVsu6tF8R1D7U6SaaaKxTA7bEAbiXKQ9duWwMYJ3pCZdNtvAFk93uIFrbkNI+wWj3ybRcXvoDIfSgkUogMydEw7WQim1vqbS0NuPJJ9i2WDNsPelxuBvTGGtrt0cFq7HWdSMOBciQxYGk++Cku2tT9QaJXiWxvsvYSgu6Sdu9b2HMSFXiNPOrtm/DTSgtIJd7HYRScDSjxZAFI0QO0sj/zVNwndU0cR+32LZ7Q3AynWol6+ucndIU87prbn4wwlpF3Tt2zRmOu8AAP7GZYCxr2h1r+7J1HmbPyU/d+KBumTX8IYWzaip7z
+X-OriginatorOrg: arm.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 May 2026 09:59:21.9238 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 379a4cc2-afb9-4d71-5c44-08deab56259e
+X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d; Ip=[4.158.2.129];
+ Helo=[outbound-uk1.az.dlp.m.darktrace.com]
+X-MS-Exchange-CrossTenant-AuthSource: AMS1EPF00000044.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR08MB8826
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -60,109 +160,95 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 6 May 2026 10:59:55 +0200
-Neil Armstrong <neil.armstrong@linaro.org> wrote:
+Hi Tom,
 
-> On 5/6/26 09:52, Neil Armstrong wrote:
-> > On 4/30/26 16:54, Torsten Duwe wrote:
-[...]
-> >> +/*
-> >> + * This macro detects the correct inbound DMA offset in both cases:
-> >> + *=C2=A0=C2=A0 1) the NVMe is mentioned in the device tree, along wit=
-h its parent,
-> >> + *=C2=A0=C2=A0=C2=A0 and no intermediate PCIe bus node in between.
-> >> + *=C2=A0=C2=A0 2) the NVMe was found dynamically by PCI enumeration w=
-hich has created
-> >> + *=C2=A0=C2=A0=C2=A0 an intermediate PCIe bus node. That node will be=
- skipped and the offset
-> >> + *=C2=A0=C2=A0=C2=A0 looked up in the grandparent.
-> >> + */
-> >> +#define DEV_ADDR(a)=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 (dev_ha=
-s_ofnode(dev->udev) ? \
-> >> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 dev_phys_to_bus(dev->udev, (a=
-)) : \
-> >> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 dev_phys_to_bus(dev->udev->pa=
-rent, (a)))
-> >=20
-> > This looks subspicious, what is the state of the rpi5 here ? with a DT =
-node or without ?
-> >=20
-> > AFAIK NVMes are always dynamically detected, it seems the dma_offset is=
- not correctly
-> > copied to the nvme udev when created.
+The following changes since commit ae8987f4e690f397f507c4b1efabd68b3ed08db6:
 
-Yes, they are _usually_ detected via PCI enumeration, which dynamically
-adds a bus node without a corresponding DT node. But it is not prohibited
-to explicitly specify an NVMe disk in the device tree, I think. We've seen
-this with the RP1 chip (patches yet to come). With and without.
+  Merge patch series "binman: Fix preload signing with encrypted FIT" (2026-05-05 10:37:16 -0600)
 
->=20
-> So to check could you try adding something like:
->=20
-> ```
-> diff --git a/dts/upstream/src/arm64/broadcom/bcm2712-rpi-5-b-base.dtsi b/=
-dts/upstream/src/arm64/broadcom/bcm2712-rpi-5-b-base.dtsi
-> index 04738bf281e..640c5987077 100644
-> --- a/dts/upstream/src/arm64/broadcom/bcm2712-rpi-5-b-base.dtsi
-> +++ b/dts/upstream/src/arm64/broadcom/bcm2712-rpi-5-b-base.dtsi
-> @@ -247,6 +247,15 @@
->=20
->   &pcie1 {
->          status =3D "okay";
-> +
-> +       pci@0,0 {
-> +               reg =3D <0x0 0x0 0x0 0x0 0x0>;
-> +               ranges;
-> +               bus-range =3D <0 1>;
-> +               device_type =3D "pci";
-> +               #address-cells =3D <3>;
-> +               #size-cells =3D <2>;
-> +       };
->   };
->=20
->   &pcie2 {
-> ```
+are available in the Git repository at:
 
-We've had that in a previous version. The downside of this is that it
-would have to be done for each platform and each potential m.2 socket.
+  https://source.denx.de/u-boot/custodians/u-boot-net.git/ tags/net-20260506
 
-> or:
->=20
-> ```
-> --- a/drivers/core/device.c
-> +++ b/drivers/core/device.c
-> @@ -459,7 +459,19 @@ static int device_get_dma_constraints(struct udevice=
- *dev)
->          u64 size =3D 0;
->          int ret;
->=20
-> -       if (!CONFIG_IS_ENABLED(DM_DMA) || !parent || !dev_has_ofnode(pare=
-nt))
-> +       if (!CONFIG_IS_ENABLED(DM_DMA) || !parent)
-> +               return 0;
-> +
-> +       /* Look for the first node in the parent chain */
-> +       while (parent) {
-> +               if (dev_has_ofnode(parent))
-> +                       break;
-> +
-> +               parent =3D dev_get_parent(parent);
-> +       }
-> +
-> +       /* No parents have a node, bail out */
-> +       if (!parent)
->                  return 0;
->=20
->          /*
-> ```
-> Which will try to find the node higher in the parent chain.
+for you to fetch changes up to 5245bdc98b9fff46e4bcec2e44e915be44824537:
 
-Now this looks extremely tempting. It should solve the problem for NVMe
-and probably a few other PCI(e) scenarios in the future.
+  net: phy: mscc: add support for the VSC8572 (2026-05-06 11:07:22 +0200)
 
-I'll give it a spin...
+----------------------------------------------------------------
+Pull request net-20260506.
+
+net:
+- phy: dp83867: default to 2ns delay if unspecified in device-tree
+- nfs: fix buffer overflow in nfs_readlink_reply()
+- cpsw: Add cpsw-switch DT binding support
+- phy: add common PHY polarity properties support
+- phy: adin: add support for the ADIN1200 phy
+- macb: support for instances with less features
+- phy: mscc: add support for the VSC8572
+
+net-lwip:
+- wget: correct diagnostic output
+
+----------------------------------------------------------------
+Charles Perry (1):
+      net: phy: mscc: add support for the VSC8572
+
+Christian DREHER (4):
+      net: macb: include arch/clk.h only when necessary
+      net: macb: use SA1 for MAC filtering on GEM
+      net: macb: do not set user_io when it does not exist
+      net: macb: add gigabit implementation for fixed-link
+
+Heinrich Schuchardt (3):
+      net: lwip/wget: missing linefeed in diagnostic output
+      net: lwip/wget: don't print content size twice
+      net: lwip/wget: don't print progress bar when silent
+
+Lucien.Jheng (3):
+      phy: add common PHY properties support
+      net: phy: airoha: air_en8811: use standard rx-polarity/tx-polarity properties
+      test: dm: add PHY common props unit tests and sandbox DT nodes
+
+Markus Schneider-Pargmann (TI) (4):
+      net: cpsw: Fix error message
+      net: cpsw: Remove compat string argument
+      net: cpsw: Use driver data for phy_sel
+      net: cpsw: Support new cpsw-switch DT bindings
+
+Rasmus Villemoes (1):
+      net: phy: adin: add support for the ADIN1200 phy
+
+Sebastian Josue Alba Vives (1):
+      net: nfs: fix buffer overflow in nfs_readlink_reply()
+
+Siddharth Vadapalli (1):
+      net: phy: dp83867: default to 2ns delay if unspecified in device-tree
+
+ arch/sandbox/dts/test.dts            |  60 +++++++++++++++++++++++++++++++++++++++++++++
+ configs/sandbox_defconfig            |   1 +
+ drivers/net/macb.c                   |  94 ++++++++++++++++++++++++++++++++++++++++++++++++++++------------------
+ drivers/net/macb.h                   |   2 ++
+ drivers/net/phy/adin.c               |  13 ++++++++++
+ drivers/net/phy/airoha/Kconfig       |   1 +
+ drivers/net/phy/airoha/air_en8811.c  |  60 +++++++++++++++++++++++++++++++++------------
+ drivers/net/phy/dp83867.c            |  16 +++---------
+ drivers/net/phy/mscc.c               |  11 +++++++++
+ drivers/net/ti/cpsw.c                | 188 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-----------------------------------
+ drivers/phy/Kconfig                  |   8 ++++++
+ drivers/phy/Makefile                 |   1 +
+ drivers/phy/phy-common-props.c       | 286 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ include/linux/phy/phy-common-props.h |  69 ++++++++++++++++++++++++++++++++++++++++++++++++++++
+ net/lwip/wget.c                      |  18 +++++++-------
+ net/nfs-common.c                     |   4 +++
+ test/dm/Makefile                     |   1 +
+ test/dm/phy_common_props.c           | 319 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 18 files changed, 1045 insertions(+), 107 deletions(-)
+ create mode 100644 drivers/phy/phy-common-props.c
+ create mode 100644 include/linux/phy/phy-common-props.h
+ create mode 100644 test/dm/phy_common_props.c
+
+CI link: https://source.denx.de/u-boot/custodians/u-boot-net/-/pipelines/30007
+
 Thanks,
-
-	Torsten
+-- 
+Jerome
