@@ -4,78 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 784AECD342C
-	for <u-boot@archiver.kernel.org>; Wed,  6 May 2026 17:17:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF295CD3439
+	for <u-boot@archiver.kernel.org>; Wed,  6 May 2026 17:17:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 50CDB849F0;
-	Wed,  6 May 2026 19:17:33 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8E5B0849DF;
+	Wed,  6 May 2026 19:17:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="hasNED+J";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="SX2200fW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AAA81849EF; Wed,  6 May 2026 19:17:32 +0200 (CEST)
-Received: from mail-ot1-x342.google.com (mail-ot1-x342.google.com
- [IPv6:2607:f8b0:4864:20::342])
+ id C0558849E0; Wed,  6 May 2026 19:17:32 +0200 (CEST)
+Received: from mail-oi1-x230.google.com (mail-oi1-x230.google.com
+ [IPv6:2607:f8b0:4864:20::230])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9B480849DF
- for <u-boot@lists.denx.de>; Wed,  6 May 2026 19:17:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E3864849C9
+ for <u-boot@lists.denx.de>; Wed,  6 May 2026 19:17:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x342.google.com with SMTP id
- 46e09a7af769-7dbccf6a23dso5827238a34.2
- for <u-boot@lists.denx.de>; Wed, 06 May 2026 10:17:29 -0700 (PDT)
+Received: by mail-oi1-x230.google.com with SMTP id
+ 5614622812f47-47c918c62b4so2458869b6e.0
+ for <u-boot@lists.denx.de>; Wed, 06 May 2026 10:17:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1778087848; x=1778692648; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1778087847; x=1778692647; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=PgyyMiLRokAn2WxYC8PyIEqTUMmgS/ShAzMO9Q++/hc=;
- b=hasNED+JH994zllcliCxUp7T9HV1e5JUs9no6zkKl1GXCUvVitYvuo2Kb/2NH+HSgX
- MZLNXFYtyR6y+mkA/IdEU8cDorWjfJx7gnBrYaZDHXYJc//Lp7qZjyA5FzDNm9JOXwag
- aEDIexiSg39ftqIeekbc/mSnE83YWQjTTJq40=
+ bh=ie2eox9bN/5yaQ55qMPyVoAfHaNWYitCKlWCk39/9Es=;
+ b=SX2200fWe4wJaaeD8djIPulBoDqTKA2bvsTZHnWHDZAhhvCZZnTAgtw23o6CQP2IVR
+ kviBEKqJ6+eakEEM48k1cjRey8lAkJBB7oH+ZEArMT2oLGOSfBeBF7OoYqCoL/SX0Rxu
+ q5yxIof/q7rgZKJpnnG7I7Hjo3y+JiUEqx62I=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778087848; x=1778692648;
+ d=1e100.net; s=20251104; t=1778087847; x=1778692647;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=PgyyMiLRokAn2WxYC8PyIEqTUMmgS/ShAzMO9Q++/hc=;
- b=QHVdpxMRCwgMlLft/pryFRxeZiOjjC2OXCsOYh47epa9OEF4dSIA1bQYelxvyb2FHO
- zcOSQzUxXfI1g1eTa5DwGkFEbSh9aow3sfxfbPriHjtOWVZg1bucWGKIDEaqTscY5u6h
- zuxbhsa/9nZl1GaP6ObdY3pw6gI2b6P5OMIEs8978Y0F1LghnH9oEkPjTq5q5bq0Qy+C
- miD/lIvRngNbSiMT6VnaY0JDHc2ChudjMCR2IxZEFnXSAES6R7O5h2leLjeV+lWwjbk5
- ICyzZvnFOKh6ply6+b3Iog+YXQCU/aupD3szqClpUmlq1A84tROgqV2XC9k4U34NR+qs
- CGJg==
-X-Gm-Message-State: AOJu0YykwZTkQ61tV52BCfJRpfJPzRvCp9Gb2tR+zubqU+nFBCjzEw/J
- 7+kbAqtBE6uJqQJ93uyWkHd2GA+DI25uBb8X1Fc8NBW9S/be8xiTxJ5iwfkeoqgM3Tc=
-X-Gm-Gg: AeBDievITlfqxLmbB329vXbeVb/ujXFzxzr8BPyPFjIajInj9TuSZYfJQ0pZx6PocHm
- VfRq8HeG30sLo05teKfTFTbBVBaZb5cdKOIO/irIqoFVaDBeVfCGHFEvmJ5vqcXOxNUkGbN43/6
- 2dhc1NxEgO3SDnADenSmjbiy9EbALDo9uYsrVqWpRlHIVDDRjtIlCfVmwL2ivMpfLHJM6DV3/Q9
- jNEk5LYLxNMUwnY1gIPH9Pws3E8fstwvXmiZHckJ7mJTAIY4v/HWQH/mQDor8h6a0SZttrCKATp
- Pzz1iNDmams7k03+TaYxRsqASlQY60m5LRF7q+mxUrpBerYvkPEJts1wPjfX3IxuBCgv4L93FJr
- 09JIcC+R9+E3JTPAZ9qGjr6QwAdRoIdg0NbuFiPFqoI6r/SQmbqn1yM8yc8nTRIdgDUHxXSbz6Q
- TnyJXCfnluLqw1Vfu2W1ezjpHnbUg3W1oQ7SJovf7zSag3jZ7+tO5wlYYoicA4+Km9pqeBDdJ8h
- 1OV8KXr42j/IhjF/RvPuAHU0FUd+HWg1SloZINTqxWfLVGiPr+KVjvWSIAn
-X-Received: by 2002:a05:6830:67e3:b0:7dc:cd0b:58be with SMTP id
- 46e09a7af769-7e1deef5890mr2397894a34.8.1778087848358; 
- Wed, 06 May 2026 10:17:28 -0700 (PDT)
+ bh=ie2eox9bN/5yaQ55qMPyVoAfHaNWYitCKlWCk39/9Es=;
+ b=sFis+l0FYeijrDvC/fPAgKLmOhV9Nwl3HoZ36HwHHYAInqJwoas0VL+vSHAtz6zwjI
+ YbCVdyPTTLAiN+EQr5aUTzvypWPH0zGqVHG6r1Wq7XGul0kVHB07ENljUoCvBbyblQXu
+ TPnzpqXAw9zf8IN7AN65sEIpusdmwgi2srRdVRwcT0ZKY+e4Mu/6joIKr4MGaPx7oGdi
+ XlA0059yiJ1Myq/InHVdg+Hp3zuKQ/PWlvM9lwTqhurbf1x2crgqkCxFDQibAA1ICLvq
+ xzJBCtjSPr19DR0vK6vDBUR/3DuyXHHqdMIHSmenpolO+KpDwMcCpVGfzDfXbcZX2fRc
+ bZUw==
+X-Gm-Message-State: AOJu0YxAQ6609htFhgPKebEWsjXpikorasJIA7C+suXWj2r1MWpEOAb6
+ 1MWcmFBg4MXjqdNgVb0fEb+kMspom5ZFgDHhHqHwf69j7jMLuuWxELhunQJRLOkiiR0=
+X-Gm-Gg: AeBDiesJSBfbNj2geJE3FJDDxvAiVjB58O/Hp1C5UsmAVyV/dv823A/ZbBTTEFwjQjK
+ swg2czlhwMphjD95qwlGKWmpF1cx1j9WtzALOBLwz0RejS08PNfL+R2KOgLIshIcWM93T4+ZO04
+ L/2UssJq2UQCTk8IBZhp/60WUgO/r1ARUrLRTSMiOz6GmIAsnXHi4uwOF/a/lix8flhJn97P/Mj
+ Yv/bgQf8+eH90wQNqvuw/TTQossz8LE+G8SNlo1TTqb5aFeC0e7sHMbDTMpScxhfHgjGWBKeZ8a
+ hvOxUmFknhee2ER07Mzwma//Tz3tdsfgi6i+teYuB8oM9E9wiELp6KTFjovSBGYPwhIGrjA9oQV
+ xfwL0wCV13aFSC5iKvoKNxtQfdtC9+ZV9L7frDp7XimK4qkh9Lm0LkmkKnayrCX2/T5JYIBaAT8
+ MV3bjMyAQeCHfbC1EysRA9+TGd0VbshRraHUsCy2fa4hvYgtb1mHBtZ/QDat1kMvopnABKj7qI2
+ myniubssJgys+oh4CROCLF4TWVP9lwN0i5A/JPk8ZPA+h8fWdro2zUwEnq+
+X-Received: by 2002:a05:6808:f05:b0:46a:c98c:bfe9 with SMTP id
+ 5614622812f47-480424a4a44mr2474086b6e.40.1778087847538; 
+ Wed, 06 May 2026 10:17:27 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-106-235.totalplay.net.
  [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7deca80d5b7sm12380327a34.9.2026.05.06.10.17.27
+ 46e09a7af769-7deca80d5b7sm12380327a34.9.2026.05.06.10.17.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 06 May 2026 10:17:28 -0700 (PDT)
+ Wed, 06 May 2026 10:17:27 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Jerome Forissier <jerome.forissier@arm.com>
-Cc: u-boot@lists.denx.de, nd@arm.com
-In-Reply-To: <bc4236ee-057c-4fd3-930e-3c613e55ef19@arm.com>
-References: <bc4236ee-057c-4fd3-930e-3c613e55ef19@arm.com>
-Subject: Re: Please pull net-20260506
-Message-Id: <177808784766.2488.15075724300816880740.b4-ty@konsulko.com>
-Date: Wed, 06 May 2026 11:17:27 -0600
+To: Peng Fan <peng.fan@oss.nxp.com>
+Cc: u-boot@lists.denx.de, Mathew McBride <matt@traverse.com.au>, 
+ Ye Li <ye.li@nxp.com>, Julian Braha <julianbraha@gmail.com>
+In-Reply-To: <afsF9Ih4RPQ1L5d4@nxa18884-linux.ap.freescale.net>
+References: <afsF9Ih4RPQ1L5d4@nxa18884-linux.ap.freescale.net>
+Subject: Re: [GIT PULL] please pull fsl-qoriq-for-2026.07-rc2 for master
+Message-Id: <177808784654.2488.14949888607298544927.b4-ty@konsulko.com>
+Date: Wed, 06 May 2026 11:17:26 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -96,15 +97,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 6 May 2026 11:58:13 +0200, Jerome Forissier wrote:
+On Wed, 6 May 2026 17:12:20 +0800, Peng Fan wrote:
 
-> The following changes since commit ae8987f4e690f397f507c4b1efabd68b3ed08db6:
+> Please pull fsl-qoriq-for-2026.07-rc2 for master
 > 
->   Merge patch series "binman: Fix preload signing with encrypted FIT" (2026-05-05 10:37:16 -0600)
-> 
-> are available in the Git repository at:
-> 
->   https://source.denx.de/u-boot/custodians/u-boot-net.git/ tags/net-20260506
+> ---------------------------------------------------
+> Add USB Hub (USB5744) management support for ten64
+> Various DT fixes for ls1088a
+> Fix dead default for SYS_L3_SIZE for powerpc
+> ---------------------------------------------------
 > 
 > [...]
 
