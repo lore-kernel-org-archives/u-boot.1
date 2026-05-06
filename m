@@ -4,86 +4,102 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1872CD342C
-	for <u-boot@archiver.kernel.org>; Wed,  6 May 2026 12:46:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FC3ACD342C
+	for <u-boot@archiver.kernel.org>; Wed,  6 May 2026 12:46:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 56FFC848FD;
+	by phobos.denx.de (Postfix) with ESMTP id 8F5BE84974;
 	Wed,  6 May 2026 14:46:04 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="gSZB1h5e";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="i/HDIM8N";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 15D9284897; Wed,  6 May 2026 12:31:10 +0200 (CEST)
-Received: from mail-dl1-x1230.google.com (mail-dl1-x1230.google.com
- [IPv6:2607:f8b0:4864:20::1230])
+ id 7EFFD848A1; Wed,  6 May 2026 13:11:57 +0200 (CEST)
+Received: from mail-yx1-xb12d.google.com (mail-yx1-xb12d.google.com
+ [IPv6:2607:f8b0:4864:20::b12d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8D1B684882
- for <u-boot@lists.denx.de>; Wed,  6 May 2026 12:31:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 73FE48488B
+ for <u-boot@lists.denx.de>; Wed,  6 May 2026 13:11:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ssunkkan@gmail.com
-Received: by mail-dl1-x1230.google.com with SMTP id
- a92af1059eb24-12713e56abdso611083c88.1
- for <u-boot@lists.denx.de>; Wed, 06 May 2026 03:31:07 -0700 (PDT)
+ spf=pass smtp.mailfrom=matteo.guglielmi@gmail.com
+Received: by mail-yx1-xb12d.google.com with SMTP id
+ 956f58d0204a3-6587cee8b57so7114784d50.2
+ for <u-boot@lists.denx.de>; Wed, 06 May 2026 04:11:54 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1778065913; cv=none;
+ d=google.com; s=arc-20240605;
+ b=Gqqn7auDLg+cNmzvIk64DHSB1vufnxdxaGVW+7zjzAi5c+MyHZ1bDy+xx8PFHfBHV0
+ hbijySVTwA2bGOyiJsdshIrW7Q+VLn1xGkrrpwoO93W+LtOX845paowTduTBTIkCQYKL
+ BIQ+c2nLW6r6rN7NaD1fwn6ZvjGqUOqgooJZvOhIQQwU+amZzogoeKiALuY2aL1u0QyG
+ LxVe1mrx4WmtiOLnrryPiF8jgetGVaQVbsOow7nhIKWhNoG+iXDl87u8hflGMcPxHk7c
+ 980FR8tEmlnqybZXAa8MYtE+P7nmK0lb0Lh2MkM1EqzZs9pxmEwkTt0Aw/lOJo/A8poV
+ uynw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=x7nrz0SY7dsZ+hnUMWV+YZInKphwvNoqxvZLrnZ8sN8=;
+ fh=+6qlcApFAuRBtMtxf2g/FYYcKNS/xsDFYX5vTyW+ySs=;
+ b=lCNYbJvfF/ZBtN8oxoRswWSnds+WugtEY8uszh96TqHSTz/fw3Uc89qp22+Qc3Yurp
+ CTFoYHtuYoeJfV3mSpvaUTBsnLT9MEfnIw+W5EC5muVTfpqzDVGpHcJa3XgmzjBFOw8I
+ c9CLv3FjJszx4E5908GKHTyviHSQIEalqAepWWt3ttw0g5hHPXBkutiztEKPK7OsfHJg
+ Ft0I/mkO37MPxZpblWLHwINg4AGlsDlygO+PCUFMw5bzP4tMX99JTEgY90jPifOVGsY4
+ vbow5pnVrNpBMTwAUlPJeZpszNoxYO6NNZ9u0KMevSrl7dymagoyiVMrrbgeXkKMRPVj
+ Utyw==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1778063466; x=1778668266; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=LQe9yZtz9BZYre9YF3dbg+DL1vxu/OYHc4jH9RAQ0rA=;
- b=gSZB1h5e3q7H0QVprvIi4zESYqzmmPZr+tUSL+j3PFm9XtilY2bSWqY4IMOMj7mEVi
- fggBu1St4vjCZ+MqtScI7xGQfMS6Gd6Afo3+nu/7H9BtBg/z/YWJiLBcq9/+5z5Co3x8
- g2XY8ZHgAV3Yp1SG5hp0C1zA/nV2awU4SGh0CIh8tf3U+nodPXhGf2ZVdNDx2T406Lii
- l9U6haYmBJdKvRMsS7wvk+Cw57m1JC71WHgkCvCTqSwbNPukWPlr42GPVMHFboQDq3O0
- Un1j7WLkOD+7tjGFIF5boz97CWQAg2fL4Ml/f669o+rUKuAZ91DFSY6SMPqAxUga2dE3
- i+2w==
+ d=gmail.com; s=20251104; t=1778065913; x=1778670713; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=x7nrz0SY7dsZ+hnUMWV+YZInKphwvNoqxvZLrnZ8sN8=;
+ b=i/HDIM8NEZp72D8e9A2zcPLwOUJsRvYE3AZBSGHwUT48zBadhODf7lPKN38W72MBhT
+ DH9PmVhj+pdNKHlkWLa8sJ81Sffo1uSllKKhbAe01M5DgNNodeLInQHenReLn0/bRW3A
+ jtGZiA++W8qGYIhRCHJTcQ0EiZk3g+iVR2YnogJbMHqmZL/5No+t5ZxQRlDmrQaPjkaZ
+ 0KSrLWuTyogF/JJkzBEVvP8ivtdtWSMkZobtvqeijk7KOs3m3QuRvYL0dyedO0yvo8On
+ 1t+9vds2TiOxn1TNIkWcsMDzdpHrP3pU35M9QCoPYfBFy0bKnz+EaRXlgn6GrpE16JeN
+ L02Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778063466; x=1778668266;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=LQe9yZtz9BZYre9YF3dbg+DL1vxu/OYHc4jH9RAQ0rA=;
- b=GlG3DMubyyquBU3tHbAb/TwI9cCBjIawnat2a8BAqlS0vePvf34KofQ/gxhj3o15zQ
- Xj9mn/zS3WowNkvVam4TP/gglOTd7eJlEIfP01LP8sXPl85gYEbzB19XMltP0CyujfAu
- PsZG6xlLYKHE5otBMDiIsrZIIplKW4WyHTNF7f3wX/QNtr+YC9xxVXHxXDDSs/3dL+QF
- dRDEFkyIakt/gm6beOVU4mcIIQvdq/dqDRV8KbBuTgbAMWFljvlbfo3GLYr8AMPsBAZ1
- +NN5ZPVIdBAw98picHKc2+U52WfWXDgri5ttCmbNO5cWbsnSWD4cxCkJee3WfrRym46n
- U30A==
-X-Forwarded-Encrypted: i=1;
- AFNElJ+lXXmMozvJZn22gEltdtIWWnIXrHUWansBEf1RAOY9ilWodH70SbKtbu+/ON1Lkxn2/AkrlHg=@lists.denx.de
-X-Gm-Message-State: AOJu0Ywmr8SUOYdZyHrxHMqngZ7kLxldCL3n+ksFo6ep+xokOK0HRzor
- 5ZHH4vu2od9z8a/v3rfswIcEbKmqlpne03WUrHW3vlgUl7wAVeOFmgnd
-X-Gm-Gg: AeBDiesZ784NaG/xeMUtY2YyUZWhqgCx+KjzTcpflv68XmgsHqRgkJfdwHyg1L54xbR
- Waxh+1Xd9wODRFD3x6Sa9bD8X+vfxgVAGSWxNGbFd76bXIwedsl/be52nV2S+IB56hSk2+QKIg+
- ke1tCTc/PHmjHh4QpgxsDFBlNvaht/hyassSwbmPLvG/n9P7Ifi0F0MUDdQrwMvV1xvBZGww6EP
- oCY0IJH169uHe2EaJwtbhxfi2DS8yp1r5l4MCtHiMgNy5rYXRXahUNFqsDVuJMnwOlWltnzfhxf
- LP73MEev93OEc5zC15ftE/NLWTFnXhzAghP3ptNwXehjy18TgR2r/e6uMPOR0LQ5/jCE8P2jWZx
- fJeR4vuoLSK2JLr2spztWsBrI2HthJY9FPPj+VmIPCGhvUr9U1oYuqegwdGMRy4Srf+kYGUb0di
- YCUOlMAYLZ5qKEfs0naTw=
-X-Received: by 2002:a05:7022:239e:b0:12d:b401:8de4 with SMTP id
- a92af1059eb24-130a98f8fe7mr3391273c88.8.1778063465195; 
- Wed, 06 May 2026 03:31:05 -0700 (PDT)
-Received: from Sun ([107.172.49.54]) by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-2f56f88f4a4sm2509969eec.17.2026.05.06.03.31.02
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 06 May 2026 03:31:04 -0700 (PDT)
-From: Ssunk <ssunkkan@gmail.com>
-To: anshuld@ti.com
-Cc: ssunkkan@gmail.com, takahiro.kuwano@infineon.com, u-boot@lists.denx.de,
- vigneshr@ti.com, Jacky_guo@xmcwh.com
-Subject: [PATCH v2] mtd: spi-nor: Update XM25QH512C to XM25QH512D
-Date: Wed,  6 May 2026 18:30:53 +0800
-Message-ID: <20260506103053.537-1-ssunkkan@gmail.com>
-X-Mailer: git-send-email 2.53.0.windows.2
-In-Reply-To: <DI5GHDQSZVJL.2WY7OPMAER9IA@ti.com>
-References: <DI5GHDQSZVJL.2WY7OPMAER9IA@ti.com>
+ d=1e100.net; s=20251104; t=1778065913; x=1778670713;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=x7nrz0SY7dsZ+hnUMWV+YZInKphwvNoqxvZLrnZ8sN8=;
+ b=MX5JE7H7TteXUHEIx/vBal3tib4oDUZN9wSJ7QqAsZ+GruCTqQZ9Ou+5d4g5vyskRS
+ JROwHJuu326V8dZ+bvqYVcKqQNkZfnPJSBcpdIqcw4UGVyfH4jkTrMHHU1p6MI5r/Q7+
+ B+pzybnK7PZ6y7mVTe7y0NR7E6lHAsCb84bJ/M4884wXyj38TFAD3vTj5BVp21snntWW
+ xRTnz6nlcDj4jm9b/lYEq2l4Y8Bwt+JsyI9DK5SmG5RxosIpvlGKuZQcBPrTEJza/m+x
+ Hy/AVwqvSo9dOMivZ+GYkPPOEIOBDeKO3CivonaVAB00DrI5U51Ob481O6ECnIfmmRvY
+ 85EA==
+X-Gm-Message-State: AOJu0YwovGtsjQ+FJ0cIbimMnqoXUDvU0iSur/JSD2S2Ja0lg4e7LHVt
+ vAJTdDpq57XTvfXhPwsTWbQl4uDy2Wz6eofZVI0A/2DqezpLAQudBaE//vhMxOVoTH4uHpK7DvO
+ SC0IFDQP6scRpjxYZ2FuTrhht3sF0vPhiqrUb
+X-Gm-Gg: AeBDieuWbzES0AbR+wkH+OJ1NVuWVVWMBpr5MnsHpFNuR197P4rUWGymTaB8Z/SVy8B
+ s3laSvij5ZZea3HMQ+TLrn3SDa9mkvoPtU/imKmTYYQnhoK6ltiNmbtHaP9MVcSzi9dRN7TaXw1
+ hrEv60p3xOGthXewCn9jr0VC18w6mtS1k4+R6Tp39ZgjyZBOR7BZF9CigQhJI9dK7PklSQpTkn4
+ y9icZzuywuRlf+RsMOv8Zoq08C9/UVOIdNvz5NrFCko3w6eet4/arT9bIy953qTh8GzP1TQ7/DX
+ jE2v/EPAvrDEfEQ=
+X-Received: by 2002:a53:acd2:0:10b0:654:ea8a:f67 with SMTP id
+ 956f58d0204a3-65c7989162dmr2618622d50.9.1778065913056; Wed, 06 May 2026
+ 04:11:53 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <CABVgzFqe4Wj8DGJHFfwHgYy-As57CnmROXuyOnMhnEBwvJOZdw@mail.gmail.com>
+ <CALeDE9N5WTKjqnFPxr=4ASAR6KCDVpdf8Se0viuLVVjyeTWV9Q@mail.gmail.com>
+In-Reply-To: <CALeDE9N5WTKjqnFPxr=4ASAR6KCDVpdf8Se0viuLVVjyeTWV9Q@mail.gmail.com>
+From: Matteo GUGLIELMI <matteo.guglielmi@gmail.com>
+Date: Wed, 6 May 2026 13:11:40 +0200
+X-Gm-Features: AVHnY4KujUsUSna6yA-YomWWh5hOeXUU9CEWfRLsAeLPktpj9MCmGQtcNI3v0DA
+Message-ID: <CABVgzFrV=F9QFs_dCFnxQN=aj4h_xjui8KmHuO9obVNyb9odUA@mail.gmail.com>
+Subject: Re: Raspberry Pi 4 Model B Revision 1.5 and U-Boot >= 2025.07 stalls
+ issue.
+To: Peter Robinson <pbrobinson@gmail.com>
+Cc: u-boot@lists.denx.de
 X-Mailman-Approved-At: Wed, 06 May 2026 14:46:02 +0200
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,39 +116,112 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The XM25QH512C has been officially replaced by the XM25QH512D according
-to the XMC Product Change Notification (PCN). Both parts share the same
-JEDEC ID (0x204020) and have identical parameters.
+Hi Peter,
 
-Update the flash name string to reflect the current active part in
-production.
+Thank you for your prompt reply.
 
-Reference PCN document for the replacement:
-https://drive.google.com/file/d/1e-FfQFAD9qqlOO3iWe6PXY7EeGyN1e-l/view?usp=sharing
+I ran a git bisect between v2025.07 and v2025.10.
 
-Signed-off-by: Ssunk <ssunkkan@gmail.com>
----
-Changes in v2:
-- Added Signed-off-by tag.
-- Added PCN document link in the commit message as proof of the part replacement to address reviewer's concern.
-- Updated commit message to explicitly mention the PCN.
----
- drivers/mtd/spi/spi-nor-ids.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+The first bad commit is:
 
-diff --git a/drivers/mtd/spi/spi-nor-ids.c b/drivers/mtd/spi/spi-nor-ids.c
-index c0fa98424aa..3b8e309e0f2 100644
---- a/drivers/mtd/spi/spi-nor-ids.c
-+++ b/drivers/mtd/spi/spi-nor-ids.c
-@@ -672,7 +672,7 @@ const struct flash_info spi_nor_ids[] = {
- 	{ INFO("XM25QU128C", 0x204118, 0, 64 * 1024, 256, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
- 	{ INFO("XM25QH256C", 0x204019, 0, 64 * 1024, 512, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
- 	{ INFO("XM25QU256C", 0x204119, 0, 64 * 1024, 512, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
--	{ INFO("XM25QH512C", 0x204020, 0, 64 * 1024, 1024, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
-+	{ INFO("XM25QH512D", 0x204020, 0, 64 * 1024, 1024, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
- 	{ INFO("XM25QU512C", 0x204120, 0, 64 * 1024, 1024, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
- 	{ INFO("XM25QH01D", 0x204021, 0, 64 * 1024, 2048, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
- #endif
--- 
-2.53.0.windows.2
+bab54f5942c428be698216224fd10b91d974d4da
+net: phy: Do not do CL22 phy reset before ethernet phy driver probe
 
+Author: SkyLake.Huang skylake.huang@mediatek.com
+
+On Raspberry Pi 4 Model B Rev 1.5 / board revision d03115:
+
+   -
+
+   v2025.07 works
+   -
+
+   after this commit, DHCP still works
+   -
+
+   small TFTP transfers still work
+   -
+
+   larger TFTP transfers, for example start4.elf, stall with repeated =E2=
+=80=9CT=E2=80=9D
+
+The bisect test was:
+
+setenv autoload no
+dhcp
+tftpboot $loadaddr boot/vg3/boot/start4.elf # MY LARGE FILE FOR TESTING
+
+The same test succeeds on good commits and fails on bad commits.
+
+Thank you.
+
+### BITSECT LOG ###
+
+git bisect start
+# status: waiting for both good and bad commits
+# bad: [e50b1e8715011def8aff1588081a2649a2c6cd47] Prepare v2025.10
+git bisect bad e50b1e8715011def8aff1588081a2649a2c6cd47
+# status: waiting for good commit(s), bad commit known
+# good: [e37de002fac3895e8d0b60ae2015e17bb33e2b5b] Prepare v2025.07
+git bisect good e37de002fac3895e8d0b60ae2015e17bb33e2b5b
+# bad: [a7d1214d2c9a38af3a9a1271dd8388068cba904c] bootstd: rauc: Fix
+potential memory leak
+git bisect bad a7d1214d2c9a38af3a9a1271dd8388068cba904c
+# bad: [d1b6489ef11bc89145e9fcf1d0f05d89a934e410] kbuild: do not overwrite
+.gitignore in output directory
+git bisect bad d1b6489ef11bc89145e9fcf1d0f05d89a934e410
+# bad: [8aa384d01a079ec2d816f7051a7208a337727338] expo: Rename x and y in
+struct scene_obj_bbox
+git bisect bad 8aa384d01a079ec2d816f7051a7208a337727338
+# bad: [24e7625085ee14a55275e2fbdaa5e595af1d632f] patman: Add a helper for
+managing cseries
+git bisect bad 24e7625085ee14a55275e2fbdaa5e595af1d632f
+# bad: [24776ab2766787d9629e7250486a0a662871b070] patman: Move Patch and
+Review to patchwork module
+git bisect bad 24776ab2766787d9629e7250486a0a662871b070
+# good: [da24eb55327978410f5559f44ce1434ae8d8932d] Merge patch series
+"BOOTP/DHCPv4 enhancements"
+git bisect good da24eb55327978410f5559f44ce1434ae8d8932d
+# bad: [f74c6f9a81de1c0c04c578b0e6e2d8b1303d6d43] u_boot_pylib: Improve
+ANSI-colour output with backgrounds
+git bisect bad f74c6f9a81de1c0c04c578b0e6e2d8b1303d6d43
+# bad: [96b0a77da0e3877308effd3d916c779fb3deb9df] binman: Read the
+skip-at-start value on startup
+git bisect bad 96b0a77da0e3877308effd3d916c779fb3deb9df
+# bad: [bab54f5942c428be698216224fd10b91d974d4da] net: phy: Do not do CL22
+phy reset before ethernet phy driver probe
+git bisect bad bab54f5942c428be698216224fd10b91d974d4da
+# good: [44340456475da953a30c5cc4fbe8a9bc013c8c0f] net: tftp: don't call
+stop callback from UDP handler
+git bisect good 44340456475da953a30c5cc4fbe8a9bc013c8c0f
+# first bad commit: [bab54f5942c428be698216224fd10b91d974d4da] net: phy: Do
+not do CL22 phy reset before ethernet phy driver probe
+
+On Mon, May 4, 2026 at 12:55=E2=80=AFPM Peter Robinson <pbrobinson@gmail.co=
+m> wrote:
+
+> Hi Matteo,
+>
+> > TFTP downloads in U-Boot >=3D 2025.07 on Raspberry Pi 4 Model B Revisio=
+n
+> 1.5
+> > stall during transfer (continuous T output), while the same setup works
+> > correctly with U-Boot 2025.04.
+> >
+> > Please note that U-Boot starts correctly, DHCP works, and small TFTP
+> still
+> > works, but large TFTP stalls (e.g., kernel or initramfs files).
+> >
+> > On the contrary, Raspberry Pi 4 Model B Revision 1.4 does not have the
+> > stall issue and can download files correctly up to the latest stable
+> > version of U-Boot (2026.04).
+>
+> As far as I can tell from PCN [1] the only difference is the dual RAM
+> chips so I'm not sure what difference there may be and I only have rev
+> 1.1 and 1.4 of the 4B. Any chance you could do a git bisect between
+> 2025.04 and 2025.07 to work out what change causes the issue?
+>
+> Peter
+>
+> [1] https://pip.raspberrypi.com/categories/560-pcn
+>
