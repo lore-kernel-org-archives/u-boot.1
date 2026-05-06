@@ -4,124 +4,118 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE7BBCD342C
-	for <u-boot@archiver.kernel.org>; Wed,  6 May 2026 07:28:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9587ECD3424
+	for <u-boot@archiver.kernel.org>; Wed,  6 May 2026 07:52:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5AF15847FD;
-	Wed,  6 May 2026 09:28:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id DED908394E;
+	Wed,  6 May 2026 09:52:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="c6UTw6HT";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="gd/k8RYE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9952784812; Wed,  6 May 2026 09:28:25 +0200 (CEST)
-Received: from MW6PR02CU001.outbound.protection.outlook.com
- (mail-westus2azlp170120002.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c007::2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 0AF57846F4; Wed,  6 May 2026 09:52:55 +0200 (CEST)
+Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
+ [IPv6:2a00:1450:4864:20::42e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1FE54847F6
- for <u-boot@lists.denx.de>; Wed,  6 May 2026 09:28:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B439B80086
+ for <u-boot@lists.denx.de>; Wed,  6 May 2026 09:52:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sparsh-kumar@ti.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=IRAmhnaLeQ+zES6nnhHjRD6vLfIL8PbXjrZlHwq6Ta5gsYa/hELLQRLrjV/JirnBzqXaloF+nSylodFQ9dA0vtc93wdVqXCj6FbIM32znbagSkTgPp2MBsMdK8zSdad0N8vU8Sg0bOE7qaw4UwnpAByBdEqNOaDx9PSk3y2PARnS/e6LMf/jA5byL0c/HXs74ZmNDfKpgHBzsgha02YREV9Oiz04TcKY29egu5HLu9Hr5KbERSli01/JTcWIJS8eMwnfko/aZdngGQRybluHuQKmMPKUp2/eXUq7f2n51yRf/1pIipEjbm3NOfVSpmqChuNdjXrbfHZa0wZszT+XLQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=jPjcz12TIsiWJvd0iqQkK95Yc0p5t7O7fhvvDVnJwXQ=;
- b=DwDeT2BsII7veD3er+G1MIgLnfZfsev4bntDJAYaD46Ytvd4piV1vr0LOLRGFnhvwQrjRbn0N9oK/tAgglBM90nHlj0NhfQj2w+6oxD0mpMkcQa9OXckDnRDUQ95z5p8PJLFK2lCQNiUAmjg9A0iCauQrybCGyt1ZvM7VDY3WPk92fQ9nx3d6f2+S7v+5LCGpKkSyC5JfGi2KFh++Pb4EussrRkJX7pL6OV6TgPZxbg/APrrgYbSBVWcB2d25lQKJBGjKxjZZta9PXh7cNCSj5mdKTEGFcKOH9cDO6+7J6lxYd/BZUdZ2IkAy1H4and+6IddjpykkGgrPXWtqvhskw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.21.194) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
- dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=jPjcz12TIsiWJvd0iqQkK95Yc0p5t7O7fhvvDVnJwXQ=;
- b=c6UTw6HTxAoM9IDfEPWmnq83Avkf8wublLtART5J14209ocoucGHwScHSRc8AL89U6GhgHkqG7nJkVRAztpMPlkNkjH4czgt79korrWQptTGScglcmg0AnAOT04JuGApWHvh1Cuj7NAUjEdZMJGMGuZnKMcpUj5jlwI5GGMFYKk=
-Received: from BN9PR03CA0073.namprd03.prod.outlook.com (2603:10b6:408:fc::18)
- by IA3PR10MB8564.namprd10.prod.outlook.com (2603:10b6:208:583::10)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9870.25; Wed, 6 May
- 2026 07:28:18 +0000
-Received: from BN3PEPF0000B075.namprd04.prod.outlook.com
- (2603:10b6:408:fc:cafe::28) by BN9PR03CA0073.outlook.office365.com
- (2603:10b6:408:fc::18) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9870.27 via Frontend Transport; Wed,
- 6 May 2026 07:28:18 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.194)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.21.194 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.21.194; helo=flwvzet200.ext.ti.com; pr=C
-Received: from flwvzet200.ext.ti.com (198.47.21.194) by
- BN3PEPF0000B075.mail.protection.outlook.com (10.167.243.120) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9891.9 via Frontend Transport; Wed, 6 May 2026 07:28:17 +0000
-Received: from DFLE203.ent.ti.com (10.64.6.61) by flwvzet200.ext.ti.com
- (10.248.192.31) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Wed, 6 May
- 2026 02:28:14 -0500
-Received: from DFLE208.ent.ti.com (10.64.6.66) by DFLE203.ent.ti.com
- (10.64.6.61) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 6 May
- 2026 02:28:14 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE208.ent.ti.com
- (10.64.6.66) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37 via Frontend
- Transport; Wed, 6 May 2026 02:28:14 -0500
-Received: from [172.24.233.216] (uda0510137.dhcp.ti.com [172.24.233.216])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 6467SA8x875442;
- Wed, 6 May 2026 02:28:11 -0500
-Message-ID: <51d0ceea-f139-4ed4-b245-0eb31a246d90@ti.com>
-Date: Wed, 6 May 2026 12:58:10 +0530
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wr1-x42e.google.com with SMTP id
+ ffacd0b85a97d-44509921fbcso3116760f8f.3
+ for <u-boot@lists.denx.de>; Wed, 06 May 2026 00:52:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1778053972; x=1778658772; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:from:references:cc:to:subject:reply-to:user-agent
+ :mime-version:date:message-id:from:to:cc:subject:date:message-id
+ :reply-to; bh=U420R9PVdZ0h+BRAZmYlKtYBvoqZPTD+tdRZh8SfV24=;
+ b=gd/k8RYEevO3lUsPIOpd9f9ADlHDlzDBcUwtDySooQb67CJY8i7Ouprb/LhS7xZYTR
+ vkuVPGtxyTsa/e0AEybCg3uXeFWxb6z8XkZTu9da82nPn1Rf525IG3wMMWCe4bswXZTD
+ xq9RF9IbHzZb15q9iYU+swuxqi+68bsrlpbIXm1qTNaZb2yh0UCXRQwQXOcYdsAx7tVW
+ sVEyf6+8fPdWmK4ujovH3bFaddTEM77Vns/FfPvp2IuQAcIjtO2P2K2v10SG8KPHJHQd
+ 5e1MHo/bRnmWMJBqONL/XeNLJgozhmHPHpKRgNmnolPFQrfWhNGTDMpV9j5RezVvVzqp
+ q+DA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1778053972; x=1778658772;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:from:references:cc:to:subject:reply-to:user-agent
+ :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=U420R9PVdZ0h+BRAZmYlKtYBvoqZPTD+tdRZh8SfV24=;
+ b=WZ2Zqcridpug1Gp2n2Ikj0Lgx6qWsv0vgDAnvGccCiABDXuf+aMqJZJIOnd3PC5G1x
+ y0S4SPtW/rHoi3aOqZCbEUrcpzdKO4RpWgnE+b48/9p00dRgt8emzSVCuogFR8tJ6+th
+ Gka9bwo0krfMvwDFUvlATB+9oR92ZkxvaUuOLp1bZl0+ZysK3esh41j2S8Z2sLzvvSCp
+ PN/j2qZgO5lt5zuID5S0JaQk0DDE2BTzWMNE+DmZgrPkLURyLoA4lbJy4bBZTsZRXR+t
+ FgJhg7ke9rAfKFwSA0D/PvYySOVFlGrdKgWHgkEwgfqOR0p5FGrjLRMpGWNFr4frS3IS
+ HbKA==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ9gaCWiuT2OHXhZcvS33G/G2StUQ3ixWDoKH85a87Uu1ZDHA2u/VLh0+5PV3qnxoW2hU0pIQ8Y=@lists.denx.de
+X-Gm-Message-State: AOJu0YxY4SIgCxxy9iHESgrFo81/LcDn3ewI5Wcdnqd1G06R/r8676GV
+ 5Xw6IZh3XT3Nr3XWtTqaz8Zskc+af4o4z9+9GUBVO13NwWXpRHFbztHK/Su5v9bfD9k=
+X-Gm-Gg: AeBDievyQ8LSMIpOEa2z7V78RAH1XD0LizFGi0wgvV4ibQdcRtj3+7Fc85J56ztxivz
+ 1vZioV195txCJ9quvSc2dCF83Sh06qoFzIST5n0z8uDUz7xadJhZT9XcQYIJ1IbEpTZS0REqqf7
+ HSFfZi535lr79nHNwe25+oZWAW/EOq91EIwZ1byBv1hSG1A9lT/H5Umc1p+ANJ27GBFpyuecs+S
+ HCwUKuR+zUmFe/vT903irkAmr+Fh3DbgT/OsY2l9ovyPSbNirOWcSd/nHkljSLVu1Buk/r2R4AW
+ h4EmXUZtXQdbsUEIh0MzgD58sX88h4AlRuEB1PIy/rH08WobR0AeUdtzaPWlXZE6QERHk2VgEi0
+ dHj9I7JzQtdTNx6gpFU0OXfEw7kuzA2YlYWUhe63WMNp7WL+pJNrBxg9+3uJ0HLNTflSFkswFUz
+ XlmF5TlNzi4y3j6mULhPZOZZ1Cy/5qqoFyyzN6sMyr3OXmf1BzA1WE5dYNYGkNlKAPtPDl+K0n4
+ O2ZQtinT9YtWcSFWQ==
+X-Received: by 2002:a05:6000:4210:b0:43b:9a9f:8956 with SMTP id
+ ffacd0b85a97d-4515ce1c80fmr3720852f8f.22.1778053971859; 
+ Wed, 06 May 2026 00:52:51 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:106d:1080:19a4:dd04:854d:9f82?
+ ([2a01:e0a:106d:1080:19a4:dd04:854d:9f82])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-45055960fd6sm11106656f8f.31.2026.05.06.00.52.50
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 06 May 2026 00:52:51 -0700 (PDT)
+Message-ID: <fcdac873-bba4-4a76-853b-23672989d43f@linaro.org>
+Date: Wed, 6 May 2026 09:52:50 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [EXTERNAL] Re: [PATCH V2 0/9] board: k3: Sync rm-cfg with TIFS
- v11.02.09 firmware
-To: Ernest Van Hoecke <ernestvanhoecke@gmail.com>
-CC: Tom Rini <trini@konsulko.com>, <u-boot@lists.denx.de>, <vigneshr@ti.com>, 
- <praneeth@ti.com>, <bb@ti.com>, <afd@ti.com>, <n-francis@ti.com>,
- <vishalm@ti.com>, <sebin.francis@ti.com>, <d-gole@ti.com>, <a-kaur@ti.com>
-References: <20260225132425.3096103-1-sparsh-kumar@ti.com>
- <20260225151047.GJ1593142@bill-the-cat>
- <e6d88daa-c00c-418b-a8df-3714c7254002@ti.com>
- <vjlrb25moymvlg6tfofolyc4ybgfju3yglefe5olcjk2qphz2l@5d6e4knya7re>
-Content-Language: en-US
-From: Sparsh Kumar <sparsh-kumar@ti.com>
-In-Reply-To: <vjlrb25moymvlg6tfofolyc4ybgfju3yglefe5olcjk2qphz2l@5d6e4knya7re>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN3PEPF0000B075:EE_|IA3PR10MB8564:EE_
-X-MS-Office365-Filtering-Correlation-Id: de7b9635-6895-4b49-e3f5-08deab410abb
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|82310400026|36860700016|1800799024|10063799003|18002099003|22082099003|56012099003;
-X-Microsoft-Antispam-Message-Info: kgy9XWv7+ALavRiKjwzzKGh89BUzhJfsV167um3ZVTAS0pZUXiIue5Nnr44bGGeuP3+ZOLCjlESLBQI/yvJiWQbO4I9tuJ8r4ZiPICbVM2W6MOwyUX0O6HifjSkr0myOR35VXQ+PivdHL5BMgPLqz6mZOmWApzBL2BshDrBR8sU+Ff5WFZ2l+xkMTKeYbLAYFEtqQGnbwRpycKP87iWIyTyV8TKzAA41gSpLVJcfW6+IYQbS2jgLuAisngVzNZEGoURKc//dUX2RpysZR0Pu4sc68qzomj9PM15jWbHWfJDKk/P+OXKOPsvuymKsr4ml+XJqHFuPmF8GF789t8V38bsqdwh6+yjWBMAK/qXF2piv8YMvJ/fM+7h4u8PTcNTUPOZyJMfDDm0ZjsAE8HfR0ZJLFIYSh6xn5b4FFZabVh8ZIwLN+fH7OOdZu6BoKdYdllJH7OWpuWITPcvX4cihQolrEGtU6QOtIoxRqshaq1IPfO5w4OqLd0rw63z3PM8mzTR9g2KWM83U0r8dbjKIfx52mqyZImgXfhXWu7XDPnUH5u9DTuzFLdehOEGGRZ2PsNGqFfDQ1WV4qHzzRTu2fOJxQu8B3G0s7s58wsGwGHtpPqsGsSc1tbKRxbJpMl7hMb0z6BiQbbQsmI0Y7cwGQVSK7OwGxh7xaSOefQgmbfFALIlsilvLBVCGNaMUN/oF72/R7o2mcUFrO85ZIqjvp/zQXdi1ROLN8NsH2kDHV/0=
-X-Forefront-Antispam-Report: CIP:198.47.21.194; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:flwvzet200.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
- SFS:(13230040)(376014)(82310400026)(36860700016)(1800799024)(10063799003)(18002099003)(22082099003)(56012099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: eWfCWGwYSkoRz6fBrXd8gjTZIYsPuQU3ja2AM+y4nM+9XIbdZkIA7QaS+aftDi9AfLVIJ9uj4denAfdJLxMD2q7qWT4ASIAdYzZCIS9TWEMiCOJR0ra9FidQWjW1ukPKA6eZ1S313UaSs2hrxCA8DL76LFhdF6h+rChCUI4wOvanfCZKOzI/WcETDq/XJ93x8c6WgsGZHnFSaLsLiNARx+YRy7njwbbM9WVXR/7COxzaASUNTmN+Jh71g6XpPXImc4UwZTPtqfUUlA0wfvJ/xt+oIy4UTToOPnkKWZKanzCBDmDZgAgZdTYV5lJI7TSOmdnM6kEdGheqZD3AaNS9aUzg8R28kLTw99aV3nh0KaLhiZ2rsJWLrCCr+qXtXzgmtMd7BVlGc/XWCl4CA8PGDoS7pGF/exA9W6YxkidrJYQZWCzXBeopflJS93E+H/aS
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 May 2026 07:28:17.3264 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: de7b9635-6895-4b49-e3f5-08deab410abb
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.194];
- Helo=[flwvzet200.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: BN3PEPF0000B075.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA3PR10MB8564
+Subject: Re: [PATCH] nvme: Fix missing inbound DMA offset calculation
+To: Torsten Duwe <duwe@lst.de>, Bin Meng <bmeng.cn@gmail.com>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>, Tom Rini <trini@konsulko.com>
+Cc: Peter Robinson <pbrobinson@gmail.com>,
+ Matthias Brugger <mbrugger@suse.com>,
+ Andrea della Porta <andrea.porta@suse.com>, u-boot@lists.denx.de
+References: <20260430145412.BC53E68AFE@verein.lst.de>
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Content-Language: en-US, fr
+Autocrypt: addr=neil.armstrong@linaro.org; keydata=
+ xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
+ GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
+ BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
+ qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
+ 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
+ AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
+ OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
+ Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
+ YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
+ GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
+ UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
+ GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
+ yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
+ QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
+ SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
+ 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
+ Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
+ oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
+ M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
+ 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
+ KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
+ 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
+ QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
+Organization: Linaro
+In-Reply-To: <20260430145412.BC53E68AFE@verein.lst.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -133,134 +127,167 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 21/04/26 8:46 pm, Ernest Van Hoecke wrote:
-> On Wed, Feb 25, 2026 at 09: 17: 03PM +0530, Sparsh Kumar wrote: > On 
-> 25/02/26 8: 40 pm, Tom Rini wrote: > > On Wed, Feb 25, 2026 at 06: 54:  
-> 16PM +0530, Sparsh Kumar wrote: > > > > > This series updates the 
-> Resource Management
-> ZjQcmQRYFpfptBannerStart
-> This message was sent from outside of Texas Instruments.
-> Do not click links or open attachments unless you recognize the source 
-> of this email and know the content is safe.
-> Report Suspicious
-> <https://us-phishalarm-ewt.proofpoint.com/EWT/v1/G3vK! 
-> tJdi1lwHPC1bga2NF3tIVrcuzWKosV1nyLqwWw3W9oiThr2cg3_QFMBFOt-- 
-> e_D6WG7bRsTVT0QRq3fBi6wrfylqlm3Aj1v28uBtLAjlNJLSssbTwvOWqfU$>
-> ZjQcmQRYFpfptBannerEnd
+On 4/30/26 16:54, Torsten Duwe wrote:
+> From: Torsten Duwe <duwe@suse.de>
 > 
-> On Wed, Feb 25, 2026 at 09:17:03PM +0530, Sparsh Kumar wrote:
->> On 25/02/26 8:40 pm, Tom Rini wrote:
->> > On Wed, Feb 25, 2026 at 06:54:16PM +0530, Sparsh Kumar wrote:
->> > 
->> > > This series updates the Resource Management (RM) configuration files
->> > > for AM62 family devices to align with the TIFS v11.02.09 firmware.
->> > > 
->> > > Background
->> > > ----------
->> > > With the latest TIFS firmware (v11.02.09), an additional virtual
->> > > interrupt and event is reserved for MCU cores to DM usage on am62x,
->> > > am62ax, and am62px devices. This series brings the rm-cfg and
->> > > tifs-rm-cfg files in sync with these firmware changes across both
->> > > TI reference boards and vendor boards.
->> > > 
->> > > These changes are backward compatible with older TIFS firmware versions.
->> > > 
->> > > Additionally, the am62x platform was originally introduced without a
->> > > tifs-rm-cfg.yaml file, unlike other platforms in the AM62 family.
->> > > This series addresses that gap and enables tifs-rm-cfg in binman for
->> > > am625-sk and am62p-sk platforms.
->> > > 
->> > > Changes
->> > > -------
->> > > TI reference boards (patches 1-4):
->> > >    - Update rm-cfg.yaml for am62x, am62ax, am62px
->> > >    - Sync am62px tifs-rm-cfg.yaml with TIFS firmware template
->> > >    - Add missing tifs-rm-cfg.yaml for am62x
->> > >    - Enable tifs-rm-cfg in binman for am625-sk and am62p-sk
->> > > 
->> > > Vendor boards (patches 5-9):
->> > >    - beagleplay (am62x-based)
->> > >    - phytec phycore_am62x
->> > >    - toradex verdin-am62
->> > >    - phytec phycore_am62ax
->> > >    - toradex verdin-am62p
->> > > 
->> > > Note: For vendor boards, this series only updates the rm-cfg.yaml files
->> > > with the required interrupt reservation. The tifs-rm-cfg.yaml files
->> > > cannot be updated without access to the corresponding SysConfig files,
->> > > as both rm-cfg.yaml and tifs-rm-cfg.yaml must remain in sync.
->> > 
->> > Do I read this right, and the vendor boards will now be broken?
->> > 
->> Hello Tom,
->> 
->> No, the vendor boards will not be broken by these changes.
->> 
->> While it is generally recommended to keep rm-cfg.yaml and tifs-rm-cfg.yaml
->> in sync, the specific changes in this series do not require corresponding
->> tifs-rm-cfg.yaml updates for vendor boards:
->> 
->>   1. AM62ax and AM62px: The global events reservation change in rm-cfg.yaml
->> has no corresponding entry in tifs-rm-cfg.yaml, so no sync is needed.
->>   2. AM62x: The virtual interrupt change would ideally need a similar update
->> in tifs-rm-cfg.yaml, but none of the vendor boards have this file. This
->> series introduces tifs-rm-cfg.yaml only for TI reference board to align with
->> other K3 devices.
->>
+> U-Boot currently does not account for PCIe bridges with a non-zero
+> inbound access offset when talking NVMe, it only works on platforms
+> where this offset happens to be zero.
 > 
-> Hi Sparsh,
+> This patch enhances the NVMe driver with the ability to also handle
+> these cases. The fix is required to boot e.g. the Raspberry Pi5 from
+> NVMe.
 > 
-> I'm evaluating whether we (Toradex) should start including this
-> tifs-rm-cfg.yaml file. Could you expand on when this is required?
+> Signed-off-by: Torsten Duwe <duwe@suse.de>
+> ---
 > 
->  From the documentation I gather that the tifs config is a cut-down
-> version of rm-cfg.yaml, only meant for TIFS consumption.
-> Furthermore, doc/board/ti/k3.rst mentions:
->      Devices with a split firmware will have two firmwares loaded into the
->      device at different times during the bootup process. TI’s Foundational
->      Security (TIFS), needed to operate the Security Management Subsystem,
->      will either be loaded by ROM or the WKUP U-Boot SPL, then once the
->      wakeup U-Boot SPL has completed, the second Device Management (DM)
->      firmware can be loaded on the now free core in the wakeup domain.
+> Kudos for the idea of case discrimination go to Andrea; this eases
+> things a lot.
 > 
-> Is this a necessity for secure boot, or how is it used?
+> I do consider this a bug fix. The problem has popped up during RPi5
+> development but really is a generic major defect IMHO. Please apply
+> wherever appropriate.
 > 
-> Thanks for the help and kind regards,
-> Ernest
+> 	Torsten
 > 
+> ---
+>   drivers/nvme/nvme.c | 39 ++++++++++++++++++++++++++-------------
+>   1 file changed, 26 insertions(+), 13 deletions(-)
+> 
+> diff --git a/drivers/nvme/nvme.c b/drivers/nvme/nvme.c
+> index 2b14437f69c..8056f52fb50 100644
+> --- a/drivers/nvme/nvme.c
+> +++ b/drivers/nvme/nvme.c
+> @@ -12,6 +12,7 @@
+>   #include <log.h>
+>   #include <malloc.h>
+>   #include <memalign.h>
+> +#include <phys2bus.h>
+>   #include <time.h>
+>   #include <dm/device-internal.h>
+>   #include <linux/compat.h>
+> @@ -27,6 +28,18 @@
+>   #define IO_TIMEOUT		30
+>   #define MAX_PRP_POOL		512
+>   
+> +/*
+> + * This macro detects the correct inbound DMA offset in both cases:
+> + *   1) the NVMe is mentioned in the device tree, along with its parent,
+> + *	and no intermediate PCIe bus node in between.
+> + *   2) the NVMe was found dynamically by PCI enumeration which has created
+> + *	an intermediate PCIe bus node. That node will be skipped and the offset
+> + *	looked up in the grandparent.
+> + */
+> +#define DEV_ADDR(a)		(dev_has_ofnode(dev->udev) ? \
+> +					dev_phys_to_bus(dev->udev, (a)) : \
+> +					dev_phys_to_bus(dev->udev->parent, (a)))
 
-Hi Ernest,
+This looks subspicious, what is the state of the rpi5 here ? with a DT node or without ?
 
-Apologies for the delayed response.
+AFAIK NVMes are always dynamically detected, it seems the dma_offset is not correctly
+copied to the nvme udev when created.
 
-The M4 core that runs TIFS has far less memory available (176KB) than 
-the WKUP/DM R5 core. To keep the memory footprint as small as possible 
-we trim the full RM board configuration down to only the entries that 
-TIFS needs and store the result in `tifs‑rm‑cfg.yaml`.
+Could you look into this direction instead ?
 
-A couple of important points:
+> +
+>   static int nvme_wait_csts(struct nvme_dev *dev, u32 mask, u32 val)
+>   {
+>   	int timeout;
+> @@ -91,12 +104,12 @@ static int nvme_setup_prps(struct nvme_dev *dev, u64 *prp2,
+>   	i = 0;
+>   	while (nprps) {
+>   		if ((i == (prps_per_page - 1)) && nprps > 1) {
+> -			*(prp_pool + i) = cpu_to_le64((ulong)prp_pool +
+> -					page_size);
+> +			*(prp_pool + i) = cpu_to_le64(DEV_ADDR((ulong)prp_pool +
+> +								page_size));
+>   			i = 0;
+>   			prp_pool += page_size;
+>   		}
+> -		*(prp_pool + i++) = cpu_to_le64(dma_addr);
+> +		*(prp_pool + i++) = cpu_to_le64(DEV_ADDR(dma_addr));
+>   		dma_addr += page_size;
+>   		nprps--;
+>   	}
+> @@ -393,8 +406,8 @@ static int nvme_configure_admin_queue(struct nvme_dev *dev)
+>   	dev->ctrl_config |= NVME_CC_IOSQES | NVME_CC_IOCQES;
+>   
+>   	writel(aqa, &dev->bar->aqa);
+> -	nvme_writeq((ulong)nvmeq->sq_cmds, &dev->bar->asq);
+> -	nvme_writeq((ulong)nvmeq->cqes, &dev->bar->acq);
+> +	nvme_writeq(DEV_ADDR((ulong)nvmeq->sq_cmds), &dev->bar->asq);
+> +	nvme_writeq(DEV_ADDR((ulong)nvmeq->cqes), &dev->bar->acq);
+>   
+>   	result = nvme_enable_ctrl(dev);
+>   	if (result)
+> @@ -420,7 +433,7 @@ static int nvme_alloc_cq(struct nvme_dev *dev, u16 qid,
+>   
+>   	memset(&c, 0, sizeof(c));
+>   	c.create_cq.opcode = nvme_admin_create_cq;
+> -	c.create_cq.prp1 = cpu_to_le64((ulong)nvmeq->cqes);
+> +	c.create_cq.prp1 = cpu_to_le64(DEV_ADDR((ulong)nvmeq->cqes));
+>   	c.create_cq.cqid = cpu_to_le16(qid);
+>   	c.create_cq.qsize = cpu_to_le16(nvmeq->q_depth - 1);
+>   	c.create_cq.cq_flags = cpu_to_le16(flags);
+> @@ -437,7 +450,7 @@ static int nvme_alloc_sq(struct nvme_dev *dev, u16 qid,
+>   
+>   	memset(&c, 0, sizeof(c));
+>   	c.create_sq.opcode = nvme_admin_create_sq;
+> -	c.create_sq.prp1 = cpu_to_le64((ulong)nvmeq->sq_cmds);
+> +	c.create_sq.prp1 = cpu_to_le64(DEV_ADDR((ulong)nvmeq->sq_cmds));
+>   	c.create_sq.sqid = cpu_to_le16(qid);
+>   	c.create_sq.qsize = cpu_to_le16(nvmeq->q_depth - 1);
+>   	c.create_sq.sq_flags = cpu_to_le16(flags);
+> @@ -458,14 +471,14 @@ int nvme_identify(struct nvme_dev *dev, unsigned nsid,
+>   	memset(&c, 0, sizeof(c));
+>   	c.identify.opcode = nvme_admin_identify;
+>   	c.identify.nsid = cpu_to_le32(nsid);
+> -	c.identify.prp1 = cpu_to_le64(dma_addr);
+> +	c.identify.prp1 = cpu_to_le64(DEV_ADDR(dma_addr));
+>   
+>   	length -= (page_size - offset);
+>   	if (length <= 0) {
+>   		c.identify.prp2 = 0;
+>   	} else {
+>   		dma_addr += (page_size - offset);
+> -		c.identify.prp2 = cpu_to_le64(dma_addr);
+> +		c.identify.prp2 = cpu_to_le64(DEV_ADDR(dma_addr));
+>   	}
+>   
+>   	c.identify.cns = cpu_to_le32(cns);
+> @@ -490,7 +503,7 @@ int nvme_get_features(struct nvme_dev *dev, unsigned fid, unsigned nsid,
+>   	memset(&c, 0, sizeof(c));
+>   	c.features.opcode = nvme_admin_get_features;
+>   	c.features.nsid = cpu_to_le32(nsid);
+> -	c.features.prp1 = cpu_to_le64(dma_addr);
+> +	c.features.prp1 = cpu_to_le64(DEV_ADDR(dma_addr));
+>   	c.features.fid = cpu_to_le32(fid);
+>   
+>   	ret = nvme_submit_admin_cmd(dev, &c, result);
+> @@ -516,7 +529,7 @@ int nvme_set_features(struct nvme_dev *dev, unsigned fid, unsigned dword11,
+>   
+>   	memset(&c, 0, sizeof(c));
+>   	c.features.opcode = nvme_admin_set_features;
+> -	c.features.prp1 = cpu_to_le64(dma_addr);
+> +	c.features.prp1 = cpu_to_le64(DEV_ADDR(dma_addr));
+>   	c.features.fid = cpu_to_le32(fid);
+>   	c.features.dword11 = cpu_to_le32(dword11);
+>   
+> @@ -785,8 +798,8 @@ static ulong nvme_blk_rw(struct udevice *udev, lbaint_t blknr,
+>   		c.rw.slba = cpu_to_le64(slba);
+>   		slba += lbas;
+>   		c.rw.length = cpu_to_le16(lbas - 1);
+> -		c.rw.prp1 = cpu_to_le64(temp_buffer);
+> -		c.rw.prp2 = cpu_to_le64(prp2);
+> +		c.rw.prp1 = cpu_to_le64(DEV_ADDR(temp_buffer));
+> +		c.rw.prp2 = cpu_to_le64(DEV_ADDR(prp2));
+>   		status = nvme_submit_sync_cmd(dev->queues[NVME_IO_Q],
+>   				&c, NULL, IO_TIMEOUT);
+>   		if (status)
 
-1. Both `rm‑cfg.yaml` and `tifs‑rm‑cfg.yaml` are generated automatically.
-    We use the K3 Resource Configuration Tool (formerly the K3 Resource 
-Partitioning Tool) to generate the files from the SysConfig file and 
-then copy the generated YAML files into U‑Boot. No manual editing is 
-involved.
-
-2. By using a smaller board‑config file we free up RAM on the M4, 
-preserving space for future features or extensions.
-
-3. Secure‑boot relevance - The `tifs‑rm‑cfg.yaml` does not play any 
-direct role in the secure‑boot process; it is simply a streamlined copy 
-of `rm‑cfg.yaml` that contains only the TIFS‑specific resources.
-
-Please let me know if any part of this explanation is unclear or if you 
-need more detail on a specific step. Happy to elaborate!
-
--- 
-Best Regards,
-Sparsh
