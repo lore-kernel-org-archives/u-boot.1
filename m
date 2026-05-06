@@ -4,56 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70509CD3436
-	for <u-boot@archiver.kernel.org>; Wed,  6 May 2026 12:46:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1872CD342C
+	for <u-boot@archiver.kernel.org>; Wed,  6 May 2026 12:46:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0E50B848A1;
+	by phobos.denx.de (Postfix) with ESMTP id 56FFC848FD;
 	Wed,  6 May 2026 14:46:04 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=arm.com header.i=@arm.com header.b="dTiYtPw7";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="gSZB1h5e";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 519918488B; Wed,  6 May 2026 12:30:20 +0200 (CEST)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id AA11D84882
- for <u-boot@lists.denx.de>; Wed,  6 May 2026 12:30:17 +0200 (CEST)
+ id 15D9284897; Wed,  6 May 2026 12:31:10 +0200 (CEST)
+Received: from mail-dl1-x1230.google.com (mail-dl1-x1230.google.com
+ [IPv6:2607:f8b0:4864:20::1230])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 8D1B684882
+ for <u-boot@lists.denx.de>; Wed,  6 May 2026 12:31:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=arm.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=harsimransingh.tungal@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 8931D331A;
- Wed,  6 May 2026 03:30:11 -0700 (PDT)
-Received: from e132995.arm.com (e132995.arm.com [10.1.35.26])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 731683F836;
- Wed,  6 May 2026 03:30:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
- t=1778063416; bh=TsprfV9LAyEQrgTSxDX/OiKBfNvJ2hYcgIHWMT3Os18=;
- h=Subject:From:To:Cc:In-Reply-To:References:Date:From;
- b=dTiYtPw7QacbQOzUpXdJ5LI0aMFvJ3nqO7kS/pU5PKfOL3IUMK1b4ZZoxnfS5FK5v
- eqPvmgUl4MveAwqtIA4pphkzakKez28ANLsncq4b0dtcN2sxXJQyYkNmWBsDoXH7+o
- HpdWroPcIgvsV8/iFhidYsLVzEEIXJN7vJ/4ivVw=
+ spf=pass smtp.mailfrom=ssunkkan@gmail.com
+Received: by mail-dl1-x1230.google.com with SMTP id
+ a92af1059eb24-12713e56abdso611083c88.1
+ for <u-boot@lists.denx.de>; Wed, 06 May 2026 03:31:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1778063466; x=1778668266; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=LQe9yZtz9BZYre9YF3dbg+DL1vxu/OYHc4jH9RAQ0rA=;
+ b=gSZB1h5e3q7H0QVprvIi4zESYqzmmPZr+tUSL+j3PFm9XtilY2bSWqY4IMOMj7mEVi
+ fggBu1St4vjCZ+MqtScI7xGQfMS6Gd6Afo3+nu/7H9BtBg/z/YWJiLBcq9/+5z5Co3x8
+ g2XY8ZHgAV3Yp1SG5hp0C1zA/nV2awU4SGh0CIh8tf3U+nodPXhGf2ZVdNDx2T406Lii
+ l9U6haYmBJdKvRMsS7wvk+Cw57m1JC71WHgkCvCTqSwbNPukWPlr42GPVMHFboQDq3O0
+ Un1j7WLkOD+7tjGFIF5boz97CWQAg2fL4Ml/f669o+rUKuAZ91DFSY6SMPqAxUga2dE3
+ i+2w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1778063466; x=1778668266;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=LQe9yZtz9BZYre9YF3dbg+DL1vxu/OYHc4jH9RAQ0rA=;
+ b=GlG3DMubyyquBU3tHbAb/TwI9cCBjIawnat2a8BAqlS0vePvf34KofQ/gxhj3o15zQ
+ Xj9mn/zS3WowNkvVam4TP/gglOTd7eJlEIfP01LP8sXPl85gYEbzB19XMltP0CyujfAu
+ PsZG6xlLYKHE5otBMDiIsrZIIplKW4WyHTNF7f3wX/QNtr+YC9xxVXHxXDDSs/3dL+QF
+ dRDEFkyIakt/gm6beOVU4mcIIQvdq/dqDRV8KbBuTgbAMWFljvlbfo3GLYr8AMPsBAZ1
+ +NN5ZPVIdBAw98picHKc2+U52WfWXDgri5ttCmbNO5cWbsnSWD4cxCkJee3WfrRym46n
+ U30A==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ+lXXmMozvJZn22gEltdtIWWnIXrHUWansBEf1RAOY9ilWodH70SbKtbu+/ON1Lkxn2/AkrlHg=@lists.denx.de
+X-Gm-Message-State: AOJu0Ywmr8SUOYdZyHrxHMqngZ7kLxldCL3n+ksFo6ep+xokOK0HRzor
+ 5ZHH4vu2od9z8a/v3rfswIcEbKmqlpne03WUrHW3vlgUl7wAVeOFmgnd
+X-Gm-Gg: AeBDiesZ784NaG/xeMUtY2YyUZWhqgCx+KjzTcpflv68XmgsHqRgkJfdwHyg1L54xbR
+ Waxh+1Xd9wODRFD3x6Sa9bD8X+vfxgVAGSWxNGbFd76bXIwedsl/be52nV2S+IB56hSk2+QKIg+
+ ke1tCTc/PHmjHh4QpgxsDFBlNvaht/hyassSwbmPLvG/n9P7Ifi0F0MUDdQrwMvV1xvBZGww6EP
+ oCY0IJH169uHe2EaJwtbhxfi2DS8yp1r5l4MCtHiMgNy5rYXRXahUNFqsDVuJMnwOlWltnzfhxf
+ LP73MEev93OEc5zC15ftE/NLWTFnXhzAghP3ptNwXehjy18TgR2r/e6uMPOR0LQ5/jCE8P2jWZx
+ fJeR4vuoLSK2JLr2spztWsBrI2HthJY9FPPj+VmIPCGhvUr9U1oYuqegwdGMRy4Srf+kYGUb0di
+ YCUOlMAYLZ5qKEfs0naTw=
+X-Received: by 2002:a05:7022:239e:b0:12d:b401:8de4 with SMTP id
+ a92af1059eb24-130a98f8fe7mr3391273c88.8.1778063465195; 
+ Wed, 06 May 2026 03:31:05 -0700 (PDT)
+Received: from Sun ([107.172.49.54]) by smtp.gmail.com with ESMTPSA id
+ 5a478bee46e88-2f56f88f4a4sm2509969eec.17.2026.05.06.03.31.02
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 06 May 2026 03:31:04 -0700 (PDT)
+From: Ssunk <ssunkkan@gmail.com>
+To: anshuld@ti.com
+Cc: ssunkkan@gmail.com, takahiro.kuwano@infineon.com, u-boot@lists.denx.de,
+ vigneshr@ti.com, Jacky_guo@xmcwh.com
+Subject: [PATCH v2] mtd: spi-nor: Update XM25QH512C to XM25QH512D
+Date: Wed,  6 May 2026 18:30:53 +0800
+Message-ID: <20260506103053.537-1-ssunkkan@gmail.com>
+X-Mailer: git-send-email 2.53.0.windows.2
+In-Reply-To: <DI5GHDQSZVJL.2WY7OPMAER9IA@ti.com>
+References: <DI5GHDQSZVJL.2WY7OPMAER9IA@ti.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Subject: Re: [PATCH 05/12] efi_loader: move runtime GetVariable() helpers
- to efi_variable.c
-From: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>, 
- u-boot@lists.denx.de, Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>, 
- Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Hugues Kamba Mpiana <hugues.kambampiana@arm.com>, 
- Simon Glass <sjg@chromium.org>
-In-Reply-To: <CAC_iWjLeroR7T1dgrULkOjx93-=enGHuwuY7Wn9i-t0oBn+mJg@mail.gmail.com>
-References: <20260424173151.371134-1-harsimransingh.tungal@arm.com>
- <20260424173151.371134-6-harsimransingh.tungal@arm.com>
- <CAC_iWjLeroR7T1dgrULkOjx93-=enGHuwuY7Wn9i-t0oBn+mJg@mail.gmail.com>
-Date: Wed, 06 May 2026 11:30:10 +0100
-Message-Id: <177806341010.876188.14183050768550732016.b4-reply@b4>
-X-Mailer: b4 0.15.2
+Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Wed, 06 May 2026 14:46:02 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -71,148 +100,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2026-04-28 15:03 +0300, Ilias Apalodimas wrote:
-> Hi Harsiman,
-> 
-> On Fri, 24 Apr 2026 at 20:32, Harsimran Singh Tungal
-> <harsimransingh.tungal@arm.com> wrote:
-> >
-> > Consolidate runtime GetVariable helpers to avoid duplicates
-> >
-> > The functions efi_get_variable_runtime() and
-> > efi_get_next_variable_name_runtime() were implemented in
-> > efi_variable_tee.c as part of the FF-A runtime variable handling work.
-> > However, default implementations for these same runtime helpers also
-> > exist in efi_var_common.c.
-> 
-> efi_variable.c is there to deal with variables stored in the
-> non-secure world and efi_variable_tee.c for the variables stored on
-> the non secure world.
-> You can't compile both. By moving efi_get_next_variable_name_runtime
-> out of common you will break efi_variable_tee.c for example.
-> 
-> The reason these are in common is that U-Boot exposes the memory
-> backend to the kernel for get/setvariable. Then the kernel at runtime
-> decides to ignore the u-boot runtime functions and rewires them to
-> internal op-tee functions. If you want a variable variant for FF-A
-> that belongs into efi_variable_tee.c
-> 
-> Thanks
-> /Ilias
-> 
->
+The XM25QH512C has been officially replaced by the XM25QH512D according
+to the XMC Product Change Notification (PCN). Both parts share the same
+JEDEC ID (0x204020) and have identical parameters.
 
-Thanks, that is the intent here as well.
+Update the flash name string to reflect the current active part in
+production.
 
-This patch is not trying to move the FF-A-specific runtime path out of
-efi_variable_tee.c. The TEE/FF-A runtime variants stay in
-efi_variable_tee.c.
+Reference PCN document for the replacement:
+https://drive.google.com/file/d/1e-FfQFAD9qqlOO3iWe6PXY7EeGyN1e-l/view?usp=sharing
 
-What this patch does is relocate the generic runtime read helpers out of
-efi_var_common.c, which is always built, into efi_variable.c, which is
-only built for the non-TEE backend. That way the non-TEE backend keeps
-the generic memory-backed runtime implementations, while the TEE/FF-A
-backend can provide its own runtime read helpers in efi_variable_tee.c
-without a symbol clash.
+Signed-off-by: Ssunk <ssunkkan@gmail.com>
+---
+Changes in v2:
+- Added Signed-off-by tag.
+- Added PCN document link in the commit message as proof of the part replacement to address reviewer's concern.
+- Updated commit message to explicitly mention the PCN.
+---
+ drivers/mtd/spi/spi-nor-ids.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-I'll reword the commit message in v2 to make that clearer.
-
-Regards
-Harsimran Singh Tungal
-
-> > This results in duplicate symbol definitions.
-> > To resolve the conflict and centralize the runtime API, this patch moves
-> > the default implementations of the two runtime GetVariable() helpers
-> > from efi_var_common.c to efi_variable.c. This ensures that:
-> >
-> >  - only a single definition of each runtime helper exists,
-> >  - backend-specific implementations can override these cleanly,
-> >  - the EFI runtime variable service table continues to reference the
-> >    correct functions.
-> >
-> > No functional changes are introduced; this is a structural cleanup to
-> > avoid build-time conflicts and consolidate EFI runtime variable support
-> > in the appropriate file.
-> >
-> > Signed-off-by: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
-> > ---
-> >  lib/efi_loader/efi_var_common.c | 24 ------------------------
-> >  lib/efi_loader/efi_variable.c   | 24 ++++++++++++++++++++++++
-> >  2 files changed, 24 insertions(+), 24 deletions(-)
-> >
-> > diff --git a/lib/efi_loader/efi_var_common.c b/lib/efi_loader/efi_var_common.c
-> > index d63c2d1b1cd..7cbf098c64a 100644
-> > --- a/lib/efi_loader/efi_var_common.c
-> > +++ b/lib/efi_loader/efi_var_common.c
-> > @@ -173,30 +173,6 @@ efi_status_t EFIAPI efi_query_variable_info(
-> >         return EFI_EXIT(ret);
-> >  }
-> >
-> > -efi_status_t __efi_runtime EFIAPI
-> > -efi_get_variable_runtime(u16 *variable_name, const efi_guid_t *guid,
-> > -                        u32 *attributes, efi_uintn_t *data_size, void *data)
-> > -{
-> > -       efi_status_t ret;
-> > -
-> > -       ret = efi_get_variable_mem(variable_name, guid, attributes, data_size,
-> > -                                  data, NULL, EFI_VARIABLE_RUNTIME_ACCESS);
-> > -
-> > -       /* Remove EFI_VARIABLE_READ_ONLY flag */
-> > -       if (attributes)
-> > -               *attributes &= EFI_VARIABLE_MASK;
-> > -
-> > -       return ret;
-> > -}
-> > -
-> > -efi_status_t __efi_runtime EFIAPI
-> > -efi_get_next_variable_name_runtime(efi_uintn_t *variable_name_size,
-> > -                                  u16 *variable_name, efi_guid_t *guid)
-> > -{
-> > -       return efi_get_next_variable_name_mem(variable_name_size, variable_name,
-> > -                                             guid, EFI_VARIABLE_RUNTIME_ACCESS);
-> > -}
-> > -
-> >  /**
-> >   * efi_set_secure_state - modify secure boot state variables
-> >   * @secure_boot:       value of SecureBoot
-> > diff --git a/lib/efi_loader/efi_variable.c b/lib/efi_loader/efi_variable.c
-> > index 9923936c1b5..f2e0e1ad4e2 100644
-> > --- a/lib/efi_loader/efi_variable.c
-> > +++ b/lib/efi_loader/efi_variable.c
-> > @@ -579,6 +579,30 @@ efi_set_variable_runtime(u16 *variable_name, const efi_guid_t *vendor,
-> >         return EFI_SUCCESS;
-> >  }
-> >
-> > +efi_status_t __efi_runtime EFIAPI
-> > +efi_get_variable_runtime(u16 *variable_name, const efi_guid_t *guid,
-> > +                        u32 *attributes, efi_uintn_t *data_size, void *data)
-> > +{
-> > +       efi_status_t ret;
-> > +
-> > +       ret = efi_get_variable_mem(variable_name, guid, attributes, data_size,
-> > +                                  data, NULL, EFI_VARIABLE_RUNTIME_ACCESS);
-> > +
-> > +       /* Remove EFI_VARIABLE_READ_ONLY flag */
-> > +       if (attributes)
-> > +               *attributes &= EFI_VARIABLE_MASK;
-> > +
-> > +       return ret;
-> > +}
-> > +
-> > +efi_status_t __efi_runtime EFIAPI
-> > +efi_get_next_variable_name_runtime(efi_uintn_t *variable_name_size,
-> > +                                  u16 *variable_name, efi_guid_t *guid)
-> > +{
-> > +       return efi_get_next_variable_name_mem(variable_name_size, variable_name,
-> > +                                             guid, EFI_VARIABLE_RUNTIME_ACCESS);
-> > +}
-> > +
-> >  /**
-> >   * efi_variables_boot_exit_notify() - notify ExitBootServices() is called
-> >   */
-> > --
-> > 2.34.1
-> >
-> 
-
+diff --git a/drivers/mtd/spi/spi-nor-ids.c b/drivers/mtd/spi/spi-nor-ids.c
+index c0fa98424aa..3b8e309e0f2 100644
+--- a/drivers/mtd/spi/spi-nor-ids.c
++++ b/drivers/mtd/spi/spi-nor-ids.c
+@@ -672,7 +672,7 @@ const struct flash_info spi_nor_ids[] = {
+ 	{ INFO("XM25QU128C", 0x204118, 0, 64 * 1024, 256, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
+ 	{ INFO("XM25QH256C", 0x204019, 0, 64 * 1024, 512, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
+ 	{ INFO("XM25QU256C", 0x204119, 0, 64 * 1024, 512, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
+-	{ INFO("XM25QH512C", 0x204020, 0, 64 * 1024, 1024, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
++	{ INFO("XM25QH512D", 0x204020, 0, 64 * 1024, 1024, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
+ 	{ INFO("XM25QU512C", 0x204120, 0, 64 * 1024, 1024, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
+ 	{ INFO("XM25QH01D", 0x204021, 0, 64 * 1024, 2048, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
+ #endif
+-- 
+2.53.0.windows.2
 
