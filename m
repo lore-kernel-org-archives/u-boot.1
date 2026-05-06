@@ -4,79 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D65C6CD3439
-	for <u-boot@archiver.kernel.org>; Wed,  6 May 2026 17:17:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BDF05CD342C
+	for <u-boot@archiver.kernel.org>; Wed,  6 May 2026 17:17:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DED23849D9;
-	Wed,  6 May 2026 19:17:36 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3B6C1849ED;
+	Wed,  6 May 2026 19:17:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Q/v7+6IR";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Z7MYOyKt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F2FB184A02; Wed,  6 May 2026 19:17:35 +0200 (CEST)
-Received: from mail-ot1-x342.google.com (mail-ot1-x342.google.com
- [IPv6:2607:f8b0:4864:20::342])
+ id 03187849E5; Wed,  6 May 2026 19:17:36 +0200 (CEST)
+Received: from mail-ot1-x32d.google.com (mail-ot1-x32d.google.com
+ [IPv6:2607:f8b0:4864:20::32d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8AAD8849E5
- for <u-boot@lists.denx.de>; Wed,  6 May 2026 19:17:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2E754849EA
+ for <u-boot@lists.denx.de>; Wed,  6 May 2026 19:17:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x342.google.com with SMTP id
- 46e09a7af769-7df05fc49e5so2772983a34.3
- for <u-boot@lists.denx.de>; Wed, 06 May 2026 10:17:30 -0700 (PDT)
+Received: by mail-ot1-x32d.google.com with SMTP id
+ 46e09a7af769-7d4be94eeacso7380277a34.2
+ for <u-boot@lists.denx.de>; Wed, 06 May 2026 10:17:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1778087849; x=1778692649; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1778087850; x=1778692650; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=k8ZVh/7SqAIs2Wy8QaaMgX7dfIeUgt5Z4tTDLaplwDY=;
- b=Q/v7+6IRd2Qe0jMVb/oeSb7SLZHnm3b5hscH6xOm/OLPJuqPw6It3DxWqzJXqY4kNg
- s+ilsoOzz3Pcwezm6/VEzh+75QkEZst1qyMsulEa86feGgc7UYA8sbIkXWBU8QRk+Xx0
- X0w6XC5DnnvhXSJajcBd4a+jFLEFzVpMglNQs=
+ :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=z4BqFYVxCRZbFRrJ/G+qw+AImEqM6vP9MDgfyY1TPRM=;
+ b=Z7MYOyKtfKSdY0sYEWqO472uVmaPIahYh7kylc44JJ5nLrh+7bDL+jqqEX+2fU4t93
+ M0Bdxm1TKQIxc3boxanwZ19MA4Eh/s7cuDnqWmNPcy+dmuC2kduxIuOlhdfHsyXcX3+2
+ XUjNIPm/J8YE3ZeElsQDYRkMLtnzn1oJPAxNw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778087849; x=1778692649;
+ d=1e100.net; s=20251104; t=1778087850; x=1778692650;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=k8ZVh/7SqAIs2Wy8QaaMgX7dfIeUgt5Z4tTDLaplwDY=;
- b=PnzZocddqT6h/2LdL8K4SyBs+urVa80PRg4PbvYlVERjzDVWttwC3Ba2S48CGYlORb
- vltty4vCcdQrRzcqeaOaPMT2hYmSyyBz1umYU4keEGMsisuLtGUKAAZkvuZipDBX3VFS
- NxsQGxRmdDxqeSnEZ78tRhpo7NLQEG7a4srLhADf25M9jc4M+J8ZplrUOqUROaYXzkqE
- cAyef31qDoOXQA3rAKuhY/L5fYXZ79OyZ/o02w7TNaPVL9I2VCsYzyyg23v8dGJZWPfW
- Dg1Zo41dpMt7Gcl0ILSMJ3rrvKEmwlQZyP5VzlFac/N4zIkoJEvbYU+B1UReCQf0G7dr
- phCw==
-X-Gm-Message-State: AOJu0YyXkdZBN/26VmN7FadRNL7HcYfX+QbKFQ9UrJykwvxomBXmu9Ac
- AjKHLIbKiUg3ZW2hFaVe99bqsLMfDO8uVfeWrbmAS7DwxCHsoYIozEBbROjxZEj6ewI=
-X-Gm-Gg: AeBDiev0WZRKKqrnCODT3TVvxB/Bj5G5dVT6SmItKDrKoYWDFUYwF0URS0CxlK3mXX+
- 7k//ywshFyn88buxI+uY7O1RGHpiqorzUB1WI6nTnjHaEczSHgnJzXZ1Jp3Idxituwk0dZ4HXA2
- lDB8LObiD11KDoBBKCslQ6i9mAKxxE0cvI6FBG3R/DFUfyxRrgUUUU6Vats5E6zg2M+we28AXFl
- 0BJRLUpDk4XqptK2uEx/3rUA50mE1uUZaXYPdmjZXVwDGhtm/WNeqvxsdA3fuxJJmoBNmIWPtEP
- n3Nw8gNB0G70E6Pr6Q8jQgFXQkGlfL8sw6t2QUkRGMN6nnG2yh/rQqvSzDFa1BT/hfnQn5fEW80
- QsXN9GW1D8fPNPf8NItGQTh8TYX1qjsuPQm1dFri+yf/iTTIUChEBklG90OkBDkKIYGcwCVrjLv
- B5O9wA6z7NE33hYfdvmzzjbCOg2Bbd3mlhBvFl00OLHNZfkPKJXzcGW4vTT2e1+0KmEzogYrGko
- 70w0MpqY07h8n2b7rOaZY9upP2oFJr/nVPkSAS97GqhSMzy04EPnbUn4ljc
-X-Received: by 2002:a05:6830:4992:b0:7dc:dd58:50ab with SMTP id
- 46e09a7af769-7e1df0d2e76mr2351814a34.14.1778087849174; 
+ :references:in-reply-to:to:from:x-gm-gg:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=z4BqFYVxCRZbFRrJ/G+qw+AImEqM6vP9MDgfyY1TPRM=;
+ b=o1oMWVBjG8KY+a3bIaLStwpuxuzmGTb92zWtC6EeMUWAgXmRaMB1w3eOKBvtSJCI8e
+ imujCUjzt1zZcgWjoXc3CHq8XaB/iqwl83ROgzJykX5VA37zCUmkHXUn8/ArjUR9cMul
+ HDZLzb3DpBu+QocS8DHT0KrM7j5L8Hji/e0hk7WoKQXiRIGoUqZYWnquxJMVEUiMXK9C
+ Lb7BPxXTT9HYp6Mm0V4jUtYKV1TJ7IhmsVX05UrwBjk0PSvDK8ocg3oHf647M4fk9jYb
+ S9Qx0FiCjj55GALOg5uziL3DrHHVdhJxVf7x0MbLOWJnrnt53M+Xq6DdQ+tWKASSdds8
+ Migg==
+X-Gm-Message-State: AOJu0Yyxrdyrl3RyAJVm3BNJfch41rtSJBFCnJ9EiZVnrWh5Gy3iwt3t
+ zzWNa9xKHJKCL6Soh0WWF05S8geJdAm8ukhPWQ65xd38MRBJ3UOG/Z7TYRa3US2pnws=
+X-Gm-Gg: AeBDieuJTUrWnCDJgYjpypDXk5EIE+BTu5vlF0BxhtDFkEn6hRSkfmm0izKX3ENjVi5
+ cjY7Qi5kIQlQFlC9NV+WPefvOIqYK+tnMvAHFUF4jykz+mP+napRrCuQ6EUDLm7vX46O43oQ4CK
+ srprQE4nDGyB0sO+otiAHaQykHG2jV/ks3r9chfwcSwJjKwQU1jryGewBOc1wQtwUc90RB1a3w4
+ SZukfsWp2MY0Y6d1CvgfaGfX3/oW4Nnd9B6UbBkb6fYu+z0fkl7md4IkZa5q8vh7orqcuU8OOcn
+ rmHdoFz1TAlJQoXpk1oSDuNNxNEpiboAwkl9J/zVlh3eQerDtnLvwshE0EZCYP4pFYrD2kRRt25
+ ci4urC7o102s8b2GDyo5e03FjGFc1bT8EdT0dVG01WU9wmsWe7i94UyMZcJ5I0OF7q/v6nkdm06
+ Zd/QUaW5qsnf5Sul6JRjBTNML3I7O4vyYufbzSaVQGix/ffruUFzi3A9pliyGdRX8sQ/kkNtj0K
+ uJZx1iCZqT5KmlldvoHt3c+XOKlgQDZq7WoD379SwWVCye8aFsQX5G2mxHrMj7Js/Pjm/s=
+X-Received: by 2002:a05:6830:6401:b0:7dc:e45a:ade2 with SMTP id
+ 46e09a7af769-7e1dee81554mr2312384a34.5.1778087849899; 
  Wed, 06 May 2026 10:17:29 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-106-235.totalplay.net.
  [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7deca80d5b7sm12380327a34.9.2026.05.06.10.17.28
+ 46e09a7af769-7deca80d5b7sm12380327a34.9.2026.05.06.10.17.29
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 06 May 2026 10:17:28 -0700 (PDT)
+ Wed, 06 May 2026 10:17:29 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Randolph Sapp <rs@ti.com>
-In-Reply-To: <c9e9c08b-1e29-424a-b83a-11a29a2a111b@gmx.de>
-References: <c9e9c08b-1e29-424a-b83a-11a29a2a111b@gmx.de>
-Subject: Re: Pull request efi-2026-07-rc2-2
-Message-Id: <177808784847.2488.1452101539436449728.b4-ty@konsulko.com>
-Date: Wed, 06 May 2026 11:17:28 -0600
+To: u-boot@lists.denx.de, Daniel Schwierzeck <daniel.schwierzeck@gmail.com>
+In-Reply-To: <20260506144730.168827-1-daniel.schwierzeck@gmail.com>
+References: <20260506144730.168827-1-daniel.schwierzeck@gmail.com>
+Subject: Re: [PULL] u-boot-mips fixes for v2026.07
+Message-Id: <177808784931.2488.331036678158907036.b4-ty@konsulko.com>
+Date: Wed, 06 May 2026 11:17:29 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -97,17 +94,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 6 May 2026 14:44:20 +0200, Heinrich Schuchardt wrote:
+On Wed, 6 May 2026 16:47:30 +0200, Daniel Schwierzeck wrote:
 
-> The following changes since commit 57460fde4ba84d67de4066ee1141e89e8139ed23:
+> please pull one bugfix for MIPS, thanks.
 > 
->    Merge branch 'master' of git://git.denx.de/u-boot-coldfire
-> (2026-05-04 14:41:59 -0600)
+> The following changes since commit ae8987f4e690f397f507c4b1efabd68b3ed08db6:
+> 
+>   Merge patch series "binman: Fix preload signing with encrypted FIT" (2026-05-05 10:37:16 -0600)
 > 
 > are available in the Git repository at:
-> 
->    https://source.denx.de/u-boot/custodians/u-boot-efi.git
-> tags/efi-2026-07-rc2-2
 > 
 > [...]
 
