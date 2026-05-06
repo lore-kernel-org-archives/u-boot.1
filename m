@@ -4,112 +4,136 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8BCAFCD343B
-	for <u-boot@archiver.kernel.org>; Wed,  6 May 2026 15:01:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7508BCD342C
+	for <u-boot@archiver.kernel.org>; Wed,  6 May 2026 15:14:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BD2478490D;
-	Wed,  6 May 2026 17:01:01 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 6944384915;
+	Wed,  6 May 2026 17:14:52 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="rkDjGU+U";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="FgRiJANw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9527984915; Wed,  6 May 2026 17:00:58 +0200 (CEST)
-Received: from mail-ua1-x932.google.com (mail-ua1-x932.google.com
- [IPv6:2607:f8b0:4864:20::932])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 1435684951; Wed,  6 May 2026 17:14:51 +0200 (CEST)
+Received: from MRWPR03CU001.outbound.protection.outlook.com
+ (mail-francesouthazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c207::3])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 33B3B84903
- for <u-boot@lists.denx.de>; Wed,  6 May 2026 17:00:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 41B268490D
+ for <u-boot@lists.denx.de>; Wed,  6 May 2026 17:14:48 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=raymondmaoca@gmail.com
-Received: by mail-ua1-x932.google.com with SMTP id
- a1e0cc1a2514c-9568159ee07so4166824241.1
- for <u-boot@lists.denx.de>; Wed, 06 May 2026 08:00:56 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1778079655; cv=none;
- d=google.com; s=arc-20240605;
- b=lu2Q4yJRyMM5mFHuX73AD0JgH2/FvVaOX22NoxuNuDGB5+IFGqjkeD0n2EIxUjefLJ
- jnnXMJU9xeYZylT572WryXCOipXxCcOUVqMfIdyLNCGBjYV0gpC+SR7uRiq78fy5UrBi
- zPf/XLTgCig7ybcG0IpcWEIAns6qB2MeC9peSP/gJf936YFzfmeLgFy7DZ4jFHCkTA3k
- 8JeMb3TnWlEGxoRg92rONYHb/X+iE4BuC+QWiC7xgvDzBpKi5vidCL/+ksl5PlCKjWVg
- FRPMTEI4nCUIJpAmViIMOim7gxTQ9TD3KQkqKFnC4dbLRXfKAp3kzHeBzJven6v+74pE
- +nzw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=QdNM4USzhtzXWbOw45q3Ztws0njuQZklE/mcIb4cpUc=;
- fh=OblTLGc+1lUH8TfSwNzRn3G+tmUUu8l4kpFItvLaOJ8=;
- b=CXo/gz4UulSQ0Wp0vjEWMAJHd25gz5zkhzAFFZeBAzyjmd5zhEKqyuaTau70zxCzPa
- mlKuesazgOcJxgn63tb0ARONR8aEZceb4JNZOTAu0k+E6SHweMtHRQBi7E92DVdLUEpE
- XoNXBWU3TjpZo6EERkIsez45BCMl86d1VBtXy1tLSGGPgdSGzjcXJl0KJQShJ3maCXW5
- KLFEDsaeVrpb8J4P9L2FK6qo6wK1C6r4ACK5DKgqVk9rVULQwJLa21vKE1ptZaWSFR6a
- h9mfCy+TamkrJ+mPo9kAonbAcRCC0PXYlCW70b3PasfHopT8cUty3R9aySeYJczEN0Pc
- oQwQ==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1778079655; x=1778684455; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=QdNM4USzhtzXWbOw45q3Ztws0njuQZklE/mcIb4cpUc=;
- b=rkDjGU+UKlYJZX4RB43jku9oxdkIHkrTYhaZ1HkUAoOSwoe/rA6K1V0yhHMl5gTqEK
- BBvot/Dqp/nIBE/T+LWd5bN3Qn3tYM5T/+8tFzJUsFceFHt3DKtMb24NNCY+it3c0t2V
- Z+zgv93Tl2soIXhneD5+LHQQxqvH0e5oWVfLJbHin+jiiALOMwF6PuKvxI6TqpPChCr8
- cG6RJ3YzTW4EbA6kbI++GOp/c8+kVbtVkaKnJbfI5DSQCwZdJOSxuXdX3cy7RlXX4pyT
- 2bOg1z+lzigYIkZ5OYfAj0SElcJgvj7CGbQFAJZWt3Mq68emx6sw9XvpxU09bEXV6Wy+
- c6Bg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778079655; x=1778684455;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=QdNM4USzhtzXWbOw45q3Ztws0njuQZklE/mcIb4cpUc=;
- b=FgJSpPoShEjQXAbtWNxzXdJ2FNPUY3dApDS6B/7SDgE1vqvdhxVLL+LxuvOybIK+ue
- 6R3x7PislmVsAWypgyV4QPZ8l1xF6tF6QuVzBukTsZ2N+SrTx/Mzf4ILd5cZiUHFHwkz
- evpvqZSSE9as9LtyFYDJDIBdgpeRlfOeyTP3HXIi0kR57xp/VFmeX8lwu38ERU67dA1y
- gKLekGN/AuhJn96KuWIl2q5IQE/KFZTR8a4B39TYvevW3E49ki2UW6wn27sAJ3X5AN/C
- tu2BfkPjiX9vbVte1Joqlaq4w8bUQe9Hc3OErAT/4cDaLvEevCAeXjZ1HeeXT7WtPl6f
- P5zQ==
-X-Forwarded-Encrypted: i=1;
- AFNElJ/mPCfFIkeK+YjOxThLSYL2Pa167HWMYsKYNdXAytny1IpZY211JIkzHLi6L4VAjjv1ZXI1WD8=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz5CGnH+2a37tLr2DTnMxLyHEWUXihvaSkhxJvPSc5XhvS/CbO3
- Ag9wsbgoNiS7/dyqW7Cr4wkwRBZEc7v6oHtiBOioLwKrP0dI4Tk46QYFexP09wySLSq2fQSKQro
- iM5Gm+auvKwvKdM3DpwFH48qcOxe9KTU=
-X-Gm-Gg: AeBDiesI/0YL8w1EIYoGRKI06wyH9f9H+B8YgwdIuQmJRxG7f5YiT5Yt2a1HHVYm+wl
- sUGcFLhEbMDSWEdY5EHXc7w+88torQIlu2GIqEbqv6y3b7T+ren5Evi1VGe2++lmtYlPMnW4w+K
- xbhAsLx/PUyRmxac3/R/fbDWdSRc0z2svo2zuZI7l2qt80ZfVX9PxNSwsH/v2S9pqBNLaVTjYKf
- XntaLgdr24EurAJy9lW4tdjlMoFWGCf1m070CvRkf+JC7g8FZ60GAwmdGvCoY/oTLUd/EmsFFxf
- bk1V617hElPRnvct4uzXQXlKcx1kZA==
-X-Received: by 2002:a05:6102:3f52:b0:604:f29d:84be with SMTP id
- ada2fe7eead31-630f8e78530mr1739585137.3.1778079654573; Wed, 06 May 2026
- 08:00:54 -0700 (PDT)
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=PyGUuzdTkC6I7LxULooyw8ndocNqs8OITArIzhq5UCNqChXVMTCovNp5iOZbNcqyCjB+Slb7HXGs1v/2yDEhVziWz+SZapg8TXhEHlONNCTyJtd0r0nCFqrv4dMq+W4yNECFYN8vbA0e1MxkUziU8+kJIbJ8cweUwrUs/C+kwKOjHt09ClyZ2i27KjvQteN8yxJX94UiKoeD10SSm5rcFPWycT4+FjYEgFKg2IaHHFRy5TvMO82lEjrjTgXdCSSEBbYhyjXnfEEEF2i50GvGh/z6A+N1yvuUmLyk2Bn09pClux+3TJyzqd+XZ9O98rrixakHbqWFRFLZhJaEiVoFRw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=ixwabaoKOfyDVWqZh6lRO4Lj96tiDGGP6rqGos5yEAM=;
+ b=fuhEUzYvUXikn6tqThDGz0PolBaNM8xSsdor/IConmSD/c+wznZNiyk4IbE9nx6mRuO+9lWt2wjfQk5VhX8G1CYOQ7ngSPrqNhDL3r89bSaf/b806bALSQS5Ngsw846GCRd0o2yIPpY8aoFyIOjOAcmglxli2oxW44W+TUzm2Jwie4Qz/+47+NudylU7WuWO2KK9C9PnyHy5YTWxywrEQ2fCFxE+0uF/oPkzY328Y4I54chOFYvvFByO8PLNAHEA2XewGqgS8ctngjqQurbqJuPYrW1RjvoEROiS2rGunTLd8SB4j9AFtT4/iykAqD8MMqwFzfrFQmdvk/2fubt4kw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=ixwabaoKOfyDVWqZh6lRO4Lj96tiDGGP6rqGos5yEAM=;
+ b=FgRiJANwbcJpP1Wyh8IYE1bHY1t2+B4X0a3zDowTuw1AInda+MK5f1yEJknfZM5+uGjYbeiTuQeD952cB33XYf0/BUXqxzyPfyJ8b+PG1/De+4/eHCj6GtBxbD5ecu66jUSbIAoqxpzju/NnpvvfHN7dphtZ6qiBLrsmK2geGlA=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from PA4PR04MB7743.eurprd04.prod.outlook.com (2603:10a6:102:b8::20)
+ by AM8PR04MB7732.eurprd04.prod.outlook.com (2603:10a6:20b:237::7)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9891.15; Wed, 6 May
+ 2026 15:14:45 +0000
+Received: from PA4PR04MB7743.eurprd04.prod.outlook.com
+ ([fe80::9a4e:252f:2fd:97b7]) by PA4PR04MB7743.eurprd04.prod.outlook.com
+ ([fe80::9a4e:252f:2fd:97b7%6]) with mapi id 15.20.9891.008; Wed, 6 May 2026
+ 15:14:45 +0000
+Message-ID: <977aa4b0-ead7-4df9-9ce3-8626c3b0f845@cherry.de>
+Date: Wed, 6 May 2026 17:14:43 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH V2] board: rockchip: add Anbernic RG-DS
+To: Chris Morgan <macroalpha82@gmail.com>, u-boot@lists.denx.de
+Cc: jonas@kwiboo.se, trini@konsulko.com, kever.yang@rock-chips.com,
+ philipp.tomsich@vrull.eu, sjg@chromium.org,
+ Chris Morgan <macromorgan@hotmail.com>
+References: <20260427175553.21426-1-macroalpha82@gmail.com>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <20260427175553.21426-1-macroalpha82@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: VI6PEPF0000020F.AUTP296.PROD.OUTLOOK.COM
+ (2603:10a6:808:1::8cf) To PA4PR04MB7743.eurprd04.prod.outlook.com
+ (2603:10a6:102:b8::20)
 MIME-Version: 1.0
-References: <20260504212524.1665166-1-raymondmaoca@gmail.com>
- <b7432c55f00b4c9b2043ca8efb262a5d5ec4d6e2.camel@siemens.com>
- <CAMDkj5yUHypTiuYk+VqOVA3FSJpDo6CsqsVAWn69nOS3EapAcw@mail.gmail.com>
- <064b011e32963eb1e6220cafe4614186a1fc16c8.camel@siemens.com>
- <20260505143219.GQ1614990@bill-the-cat>
-In-Reply-To: <20260505143219.GQ1614990@bill-the-cat>
-From: Raymond Mao <raymondmaoca@gmail.com>
-Date: Wed, 6 May 2026 11:00:43 -0400
-X-Gm-Features: AVHnY4KThHJlL8UQU5_RB6h2wANWaKTTGx-J6rhqdchf6y0gd2knQlY025G5sYY
-Message-ID: <CAMDkj5xX5Vpzg1OEc=FGaJNWAyNrsPwtD9HQnVOxDbkr42VUQQ@mail.gmail.com>
-Subject: Re: [PATCH v2] lib: fdtdec: validate bloblist FDT before consuming
- libfdt size
-To: Tom Rini <trini@konsulko.com>
-Cc: "Sverdlin, Alexander" <alexander.sverdlin@siemens.com>,
- "sjg@chromium.org" <sjg@chromium.org>, 
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>, 
- "casey.connolly@linaro.org" <casey.connolly@linaro.org>, 
- "raymond.mao@riscstar.com" <raymond.mao@riscstar.com>,
- "pranav.sanwal@amd.com" <pranav.sanwal@amd.com>, 
- "michal.simek@amd.com" <michal.simek@amd.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PA4PR04MB7743:EE_|AM8PR04MB7732:EE_
+X-MS-Office365-Filtering-Correlation-Id: 88f5542d-2461-4c9b-8fc8-08deab82347d
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|10070799003|376014|1800799024|366016|22082099003|18002099003|56012099003;
+X-Microsoft-Antispam-Message-Info: 6LBd1BVVc0tZwf6SyZOOrRvafyE4J1G2p0U3Sw7frSUJ+GAQh8vFJNdgpSCN68116oLxc/0kHF+1KgqNr3/HQki1sd+1j4aLly0b2pXX67bLX8tXDevu5mR/IWCuSfK1EBBslCAMAlmZ5tJO4kkWrsr3YCWQN4DozNtwJBZzwHRuEYXNvva8kFMKoHU98RtoM6px7QTspgDx2KnX8Iatv7YwvEtA/FfiN+RQq3xqjzdAweovLmmMsy2oN35SRrI1YhNQ1196x1gi5M5o/tVJOftDPhTJW6ebXoYMpgqZ+6HebzHyeHgiYAyxdZ7osyaHZiUZdvNbFJ+X/3tuSXXogPz4SUX86p1qcvPfuuVj2Fvwd6xnWmzc49VkoDyYgYDGes09CaV47sVLC9SN8DbK+5C8jefdcUmb9L7jr6gBSVHWRGH4yV/ZzMKq/Xs3NF9LRswbo6itd3yslIV1vrgqs9IyR3B7hGGz8Xs/78j4bb4/20y+URLXl2K+9WkJIvaVSPUfmesYmugyDWV5V6xS55ZDDIH3QqKaF7X2eyBTey//ZBXLC8tzV/n69e5J69gYev6gkdLNi/es2Nct0utgSACG55NbvSZLN2yBwLk5VKGyoJMPSmu3GLz7GsQLxlMdEN3bUUPBkB2uBJjV66iv0w==
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PA4PR04MB7743.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(10070799003)(376014)(1800799024)(366016)(22082099003)(18002099003)(56012099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 2
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?b0RoRUd2dXdWemFsMVkyY3JPNDdSYTQ4eThtS3cvaW1MMzgvQmtVUnZ0MXdQ?=
+ =?utf-8?B?dElzZ2N0dDUxOUhRaXRQdzZEZlRNVEtaQW83NE85UFB3c2lKL0JUYTBDRS9h?=
+ =?utf-8?B?SGtWUEVKY1Z0UU1XcW1zdnlBWDB3am1maUhIaitmNWN1TkdDNWRlR1lYWEp1?=
+ =?utf-8?B?SjBFM2VJOXB2eDhnNDZRQmIySmQxNmNucGVjSHFLSWhvYTQxVkNsL2tYaW00?=
+ =?utf-8?B?eWMzM0xGdndRbWt4b2hBWHJjZkZJTERLb2d6MWQyNHlZUzVOTjIreFVuMFVS?=
+ =?utf-8?B?SEhqNE5ZVXByWmVXQXNZOC9sQ0VIeExkdUgvNlkxRXViWmFaZEhBWGZ6ai81?=
+ =?utf-8?B?T25xWHU4UEg0eS9FNC9hZ2doVit1MmtqTldYMmJzdmRIZGMrRnoya0VOYTJM?=
+ =?utf-8?B?dFpDWUpSTHlnNTJiaWNzT2p6N3hEdjNHNC9kY1ZzbkszYXVqSmJISDhRTXQ5?=
+ =?utf-8?B?KzJoKzRMK3hzMURDbWJ5cUpOb05HOFNpbXlueGczd0Ixd09JcUUvemEvM3Ny?=
+ =?utf-8?B?ZnE0aUw3SitJZTZmRGRhNVFLdnA1elVpQUF1bDZRL2pKSk90bzlnZ08vMnNa?=
+ =?utf-8?B?UEtLakN4Y3pwR3ZHNW1ER1VDVFV0MkdqSmJsVWV2bjJRaUh5TXRLRHJtcnFk?=
+ =?utf-8?B?UmdWSGxMQ1g4YTdqOVM0QnZ1eUpJQTI0Q1pXTmhPR0ROKzBKS2FveDVLbzEv?=
+ =?utf-8?B?VXUyOXlRc1g1NUdTWGFBRExoeit3UGJFZW9nNUhmRjJVNnJyZmY2U25yUkU2?=
+ =?utf-8?B?RU9rWTJ4L1IrTERsRHVZc00vZlhuT05MbE1uZ2I0RUlodzJiMnFvbSt0WUtW?=
+ =?utf-8?B?V0Y3NlZMcnlQSzVHOU10dEtXeUZqbmM5ZWhxSXowQ2pEdzMyM3c1ZklacS8r?=
+ =?utf-8?B?OFB2ejJ6WkRJWk9tbWZJRUtvekx1a05wZHNCTVBKdDRHZHZpSlRPRFJML1po?=
+ =?utf-8?B?Rk1XM3VTdWxhcTQ0ZDU2dm5Cd0FsU3lHbFUrcGU2eW15SllxZzNCSU5qS0xi?=
+ =?utf-8?B?NWVUcTd0eDJUYTVOcHdVeFVTNENEb3o3VTV2alpuTU5KcDlsSDdVRjBYSDFO?=
+ =?utf-8?B?dkFwYVJTS2ZBa2syNWhORElRdkNzZGRBMjN5NjFBZkttSUR0R3U1RnE2Y3Ay?=
+ =?utf-8?B?VkVvc0RPSWE2Yk8zdGEyODNqR25BTVFxZGcwRUw3MmRPZncxYjZYNjM0NkZa?=
+ =?utf-8?B?MlNtNlJwRlNpeFMwRzd6dzNIdjVlRXVvMkNMT0E0RnJ1eFE4ZU1NSUt2SlhZ?=
+ =?utf-8?B?VTVtcTFIZmdXMzBXNHB1SXVUd25ZZzFjd2Q5Q1o2YlZHUDNUZ2F5TEJkelNH?=
+ =?utf-8?B?c0gxNzlFNVNkS1pjOHd6Mldpd0FmbFg4WGZpUWhKVFNTejZOWWVzeWt1UlNq?=
+ =?utf-8?B?ck10dFV2bmhXbEVwNkZVSk5LaUYrelJqRldlTE9tNlU5dnAxbnMxYkpCMkVB?=
+ =?utf-8?B?Vys2cVZhS1Jsd25HWmYvcHNzQ0orZHlSNFVOQzJidUMxc3QweHB6MHF3a2dX?=
+ =?utf-8?B?WkN2ZFdwdWdIN0dxUXpkN2wrcnEyd0NCdWRES1FQMVBQR3EwUDlUNGtyZUdU?=
+ =?utf-8?B?M0ZhSDdpMXllVjVHRnhQMzcvMllxbFFSanFEdExMaG5yT1FrRVR6NTFpa1Ja?=
+ =?utf-8?B?bjlYVFJyVFQ5SU1zQ25UNDlmSFJsMmI2QmdCNm5GS0p4OFlnWEpCUStTaVYw?=
+ =?utf-8?B?OURtYWo3blhRaERLRk1hR09QTG5YcWVjTmFudzFTVFhoTEdwb3BuV0hSTy8w?=
+ =?utf-8?B?Qlg2a3BXZ0Q3aGpGRTdSTjlYN3huNXBVQVFxSXBxdFhIWnpZS0djM3pWTUl2?=
+ =?utf-8?B?YWsxQzN2cG93dVFZZXV4VGxwZ25sa2tvWFhPTTh0V1hybUJsNVloUitPSVVL?=
+ =?utf-8?B?bjFiTXpWUXZ1WWt6czQySjFKYVFXYVF4N0piaXRVQXpyTG1FVkRvU1Avbk9Y?=
+ =?utf-8?B?c01zT05UekVTcGs0NWZLQjF6S2hibmEyY0lwMWZ2UUcybXZmam1JOVIyV0FK?=
+ =?utf-8?B?UnhsK0ZmMkNIekxaQ2JLV3BrYkdod0pBSXhxVlJkVFlFQWJqLys3bVhTMlZG?=
+ =?utf-8?B?YXFqTEMyZ09wb2FXZkVucU4rZjcySCtxM3JRR3hnUHFrRW8yRXNkY1ZOSEhJ?=
+ =?utf-8?B?dHRQeUw5ZkFaeXlkL002VDZuZ3d3ajkxTlphR0tiZGs5Z21Ba3RkMThFckk4?=
+ =?utf-8?B?WTEvRHJBeFJqbG8rZU9tUk1xQTNvTis3dUNOMUtmV0dVV3cyZWRndUVDYlVC?=
+ =?utf-8?B?eXMyWk1zOEN4TEZndzlJeTRNU0cyNGtxd3F1Wjd4WlpWUklRMWhuU0llbllv?=
+ =?utf-8?B?b2s5MHVKTkYxT1BldU1BWDlvSGVjTFZNcmxqZGFFNlJsMHJZeFh0UTJURWhl?=
+ =?utf-8?Q?itzXphM5J3xRhJMq/kc6OQVK4uyzY4f8/i7TqVsUSBvuY?=
+X-MS-Exchange-AntiSpam-MessageData-1: o3B9ZpmJFXdmwhZCG4zwToz9VYjt52l0cXs=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 88f5542d-2461-4c9b-8fc8-08deab82347d
+X-MS-Exchange-CrossTenant-AuthSource: PA4PR04MB7743.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 May 2026 15:14:44.9358 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 6sbv6DiXNngWI7tgHB+v9bsQJOTOM+k3Q/yOc7yHH8JtgdJORVGMPOKtghxk7HMjHtTOgT1+P4XDqV0BKsgtzNiVFtFhbmtvBflRHNs+DkU=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM8PR04MB7732
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -126,174 +150,117 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi Chris,
 
-On Tue, May 5, 2026 at 10:32=E2=80=AFAM Tom Rini <trini@konsulko.com> wrote=
-:
->
-> On Tue, May 05, 2026 at 01:49:53PM +0000, Sverdlin, Alexander wrote:
-> > Hi Raymond,
-> >
-> > On Tue, 2026-05-05 at 09:47 -0400, Raymond Mao wrote:
-> > > > > Coverity Scan defects are observed in fdtdec_apply_bloblist_dtos(=
-),
-> > > > > since the live FDT taken from the bloblist is passed to libfdt he=
-lpers
-> > > > > which consume header size/offset fields:
-> > > > > - fdt_open_into()
-> > > > > - fdt_pack()
-> > > > > - bloblist_resize(..., fdt_totalsize(...))
-> > > > >
-> > > > > Add a small helper to validate the FDT header and confirm that th=
-e
-> > > > > advertised totalsize fits within the currently allocated bloblist
-> > > > > record. Use the sanitized size before calling fdt_open_into(), ag=
-ain
-> > > > > after overlays are applied before calling fdt_pack(), and once mo=
-re
-> > > > > after packing before shrinking the bloblist record.
-> > > > >
-> > > > > This keeps the existing flow unchanged while making the size cons=
-umers
-> > > > > operate on validated FDT metadata.
-> > > > >
-> > > > > Fixes: b70cbbfbf94f ("fdtdec: apply DT overlays from bloblist")
-> > > > > Addresses-Coverity-ID: CID 645837: (TAINTED_SCALAR)
-> > > > > Signed-off-by: Raymond Mao <raymond.mao@riscstar.com>
-> > > > > ---
-> > > > > changes in v2:
-> > > > > - Rebased on master.
-> > > > >
-> > > > >   lib/fdtdec.c | 43 +++++++++++++++++++++++++++++++++++++++----
-> > > > >   1 file changed, 39 insertions(+), 4 deletions(-)
-> > > > >
-> > > > > diff --git a/lib/fdtdec.c b/lib/fdtdec.c
-> > > > > index 2d66860f6ed..601f418db6e 100644
-> > > > > --- a/lib/fdtdec.c
-> > > > > +++ b/lib/fdtdec.c
-> > > > > @@ -1744,9 +1744,31 @@ static int fdtdec_apply_dto_blob(void **bl=
-ob, __maybe_unused int size)
-> > > > >        return fdt_overlay_apply_verbose((void *)gd->fdt_blob, *bl=
-ob);
-> > > > >   }
-> > > > >
-> > > > > +static int fdtdec_get_valid_fdt_size(const void *fdt, int alloc_=
-size,
-> > > > > +                                  int *fdt_sizep)
-> > > > > +{
-> > > > > +     int ret, fdt_size;
-> > > > > +
-> > > > > +     /*
-> > > > > +      * Validate the header before libfdt trusts any header offs=
-ets/sizes.
-> > > > > +      * Also make sure the advertised totalsize fits in the blob=
-list record.
-> > > > > +      */
-> > > > > +     ret =3D fdt_check_header(fdt);
-> > > > > +     if (ret)
-> > > > > +             return ret;
-> > > > > +
-> > > > > +     fdt_size =3D fdt_totalsize(fdt);
-> > > > > +     if (fdt_size > alloc_size)
-> > > > > +             return -FDT_ERR_TRUNCATED;
-> > > >
-> > > > here you return an error from the libfdt error space, but...
-> > > >
-> > > > > +
-> > > > > +     *fdt_sizep =3D fdt_size;
-> > > > > +
-> > > > > +     return 0;
-> > > > > +}
-> > > > > +
-> > > > >   static int fdtdec_apply_bloblist_dtos(void)
-> > > > >   {
-> > > > > -     int ret;
-> > > > > +     int ret, live_fdt_size;
-> > > > >        struct fdt_header *live_fdt;
-> > > > >        int blob_size;
-> > > > >        size_t padded_size, max_size;
-> > > > > @@ -1760,8 +1782,12 @@ static int fdtdec_apply_bloblist_dtos(void=
-)
-> > > > >        if (live_fdt !=3D gd->fdt_blob)
-> > > > >                return -ENOENT;
-> > > >
-> > > > ... the caller returns the codes from the standard errno.h
-> > > >
-> > > > >
-> > > > > +     ret =3D fdtdec_get_valid_fdt_size(live_fdt, blob_size, &liv=
-e_fdt_size);
-> > > > > +     if (ret)
-> > > > > +             return ret;
-> > > > > +
-> > > > >        /* Calculate the allowed padded size */
-> > > > > -     padded_size =3D fdt_totalsize(live_fdt) + CONFIG_SYS_FDT_PA=
-D;
-> > > > > +     padded_size =3D live_fdt_size + CONFIG_SYS_FDT_PAD;
-> > > > >        max_size =3D bloblist_get_total_size() - bloblist_get_size=
-() + blob_size;
-> > > > >        if (padded_size > max_size)
-> > > > >                padded_size =3D max_size;
-> > > > > @@ -1772,6 +1798,7 @@ static int fdtdec_apply_bloblist_dtos(void)
-> > > > >                if (ret)
-> > > > >                        return ret;
-> > > > >
-> > > > > +             blob_size =3D padded_size;
-> > > > >                ret =3D fdt_open_into(live_fdt, live_fdt, padded_s=
-ize);
-> > > > >                if (ret)
-> > > > >                        return ret;
-> > > > > @@ -1781,12 +1808,20 @@ static int fdtdec_apply_bloblist_dtos(voi=
-d)
-> > > > >        if (ret)
-> > > > >                return ret;
-> > > > >
-> > > > > -     /* Shrink the blob to the actual FDT size */
-> > > > > +     ret =3D fdtdec_get_valid_fdt_size(live_fdt, blob_size, &liv=
-e_fdt_size);
-> > > > > +     if (ret)
-> > > > > +             return ret;
-> > > > > +
-> > > > >        ret =3D fdt_pack(live_fdt);
-> > > > >        if (ret)
-> > > > >                return ret;
-> > > > >
-> > > > > -     return bloblist_resize(BLOBLISTT_CONTROL_FDT, fdt_totalsize=
-(live_fdt));
-> > > > > +     ret =3D fdtdec_get_valid_fdt_size(live_fdt, blob_size, &liv=
-e_fdt_size);
-> > > >
-> > > > doesn't the fdt_pack() already guarantee a valid header? Can the pa=
-cked size
-> > > > exceed the blob_size if packing only shrinks?
-> > > >
-> > >
-> > > This might not happen, but just in order to solve the complaint from
-> > > the coverity tool, otherwise we need an exemption.
-> >
-> > Is it some king of new U-Boot policy that Coverity false-positives just=
-ify
-> > a dead or cargo-cult code? Shall it maybe fixed in Coverity itself?
->
-> If this is a false-positive we can just mark it as such in Coverity.
-> That would be the correct path.
->
+On 4/27/26 7:55 PM, Chris Morgan wrote:
+> From: Chris Morgan <macromorgan@hotmail.com>
+> 
+> Add support for the Anbernic RG-DS dual-screen handheld gaming device.
+> 
 
-v3 is posted at:
-https://lore.kernel.org/u-boot/20260506145535.1679611-1-raymondmaoca@gmail.=
-com/T/#u
-leaving the report (as below) between fdt_pack() and bloblist_resize()
-as a false-positive.
+Can you please augment the commit log to specify why we need to list 
+clock-names in CONFIG_OF_SPL_REMOVE_PROPS? It's quite important as it's 
+not meant to be an oversight! Verbatim what you said in v1 as an answer 
+to my question is perfectly fine :)
 
-1784            /* Shink the blob to the actual FDT size */
-1785            fdt_pack(live_fdt);
->>>     CID 645837:           (TAINTED_SCALAR)
->>>     Passing tainted expression "fdt32_ld(&((struct fdt_header const *)l=
-ive_fdt)->totalsize)" to "bloblist_resize", which uses it as an offset.
-1786            return bloblist_resize(BLOBLISTT_CONTROL_FDT,
-fdt_totalsize(live_fdt));
+I'm a bit puzzled as to why removing clock-names (I'm assumign the one 
+in &rk817) helps. Isn't clocks property still here? Don't have time to 
+investigate today though.
 
-Regards,
-Raymond
+> Link: https://anbernic.com/products/rgds
+> Signed-off-by: Chris Morgan <macromorgan@hotmail.com>
+> ---
+> Changes since V1:
+>   - Added entry to doc/board/rockchip/rockchip.rst.
+>   - Removed &sdhci and added &vccio_sd to u-boot device tree.
+>   - Added rk3568 to board path.
+>   - Corrected defconfig and include files in MAINTAINERS.
+>   - Removed CONFIG_EFI_LOADER, CONFIG_LEGACY_IMAGE_FORMAT, and
+>     CONFIG_DISABLE_CONSOLE from defconfig.
+> ---
+>   .../arm/dts/rk3568-anbernic-rg-ds-u-boot.dtsi | 41 +++++++++++
+>   arch/arm/mach-rockchip/rk3568/Kconfig         |  7 ++
+>   board/anbernic/rg-ds_rk3568/Kconfig           | 12 +++
+>   board/anbernic/rg-ds_rk3568/MAINTAINERS       |  7 ++
+>   configs/anbernic-rg-ds-rk3568_defconfig       | 73 +++++++++++++++++++
+>   doc/board/rockchip/rockchip.rst               |  1 +
+>   include/configs/anbernic-rg-ds-rk3568.h       | 12 +++
+>   7 files changed, 153 insertions(+)
+>   create mode 100644 arch/arm/dts/rk3568-anbernic-rg-ds-u-boot.dtsi
+>   create mode 100644 board/anbernic/rg-ds_rk3568/Kconfig
+>   create mode 100644 board/anbernic/rg-ds_rk3568/MAINTAINERS
+>   create mode 100644 configs/anbernic-rg-ds-rk3568_defconfig
+>   create mode 100644 include/configs/anbernic-rg-ds-rk3568.h
+> 
+> diff --git a/arch/arm/dts/rk3568-anbernic-rg-ds-u-boot.dtsi b/arch/arm/dts/rk3568-anbernic-rg-ds-u-boot.dtsi
+> new file mode 100644
+> index 00000000000..00d57104775
+> --- /dev/null
+> +++ b/arch/arm/dts/rk3568-anbernic-rg-ds-u-boot.dtsi
+> @@ -0,0 +1,41 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +
+> +#include "rk356x-u-boot.dtsi"
 
-> --
-> Tom
+We know it's based on rk3568, so include rk3568-u-boot.dtsi instead. 
+Considering all other boards are including this, I guess it's fine for 
+now and a follow-up patch to change them all would be ok.
+
+[...]
+
+> diff --git a/configs/anbernic-rg-ds-rk3568_defconfig b/configs/anbernic-rg-ds-rk3568_defconfig
+> new file mode 100644
+> index 00000000000..34528b22420
+> --- /dev/null
+> +++ b/configs/anbernic-rg-ds-rk3568_defconfig
+> @@ -0,0 +1,73 @@
+> +CONFIG_ARM=y
+> +CONFIG_SKIP_LOWLEVEL_INIT=y
+> +CONFIG_COUNTER_FREQUENCY=24000000
+> +CONFIG_ARCH_ROCKCHIP=y
+> +CONFIG_SPL_GPIO=y
+> +CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3568-anbernic-rg-ds"
+> +CONFIG_ROCKCHIP_RK3568=y
+> +CONFIG_ROCKCHIP_RK8XX_DISABLE_BOOT_ON_POWERON=y
+> +CONFIG_SPL_SERIAL=y
+> +CONFIG_TARGET_ANBERNIC_RG_DS_RK3568=y
+> +CONFIG_SYS_LOAD_ADDR=0xc00800
+> +CONFIG_DEBUG_UART_BASE=0xFE660000
+> +CONFIG_DEBUG_UART_CLOCK=24000000
+> +CONFIG_DEBUG_UART=y
+> +CONFIG_FIT=y
+> +CONFIG_FIT_VERBOSE=y
+> +CONFIG_SPL_FIT_SIGNATURE=y
+> +CONFIG_SPL_LOAD_FIT=y
+> +CONFIG_OF_STDOUT_VIA_ALIAS=y
+> +CONFIG_DEFAULT_FDT_FILE="rockchip/rk3568-anbernic-rg-ds.dtb"
+> +# CONFIG_CONSOLE_MUX is not set
+> +CONFIG_BOARD_TYPES=y
+> +# CONFIG_DISPLAY_CPUINFO is not set
+> +CONFIG_DISPLAY_BOARDINFO_LATE=y
+> +CONFIG_BOARD_RNG_SEED=y
+> +CONFIG_SPL_MAX_SIZE=0x40000
+> +# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
+> +CONFIG_SPL_POWER=y
+> +CONFIG_SPL_ATF=y
+> +CONFIG_CMD_PWM=y
+> +CONFIG_CMD_GPT=y
+> +CONFIG_CMD_MMC=y
+> +# CONFIG_CMD_SETEXPR is not set
+> +# CONFIG_CMD_CLS is not set
+> +# CONFIG_SPL_DOS_PARTITION is not set
+> +CONFIG_SPL_OF_CONTROL=y
+> +CONFIG_OF_LIVE=y
+> +CONFIG_OF_LIST="rockchip/rk3568-anbernic-rg-ds"
+> +CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
+> +CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
+> +CONFIG_NO_NET=y
+
+Please disable NET instead of enabling NO_NET, I would like all users of 
+NO_NET to eventually stop using it so we can get rid of it (or make it a 
+transitional Kconfig symbol once our kbuild supports it).
+
+Looks good to me otherwise!
+
+Cheers,
+Quentin
