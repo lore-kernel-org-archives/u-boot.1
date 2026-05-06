@@ -4,143 +4,138 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95396CD343B
-	for <u-boot@archiver.kernel.org>; Wed,  6 May 2026 15:26:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78167CD342C
+	for <u-boot@archiver.kernel.org>; Wed,  6 May 2026 15:29:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E105084915;
-	Wed,  6 May 2026 17:26:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
+	by phobos.denx.de (Postfix) with ESMTP id E32B184915;
+	Wed,  6 May 2026 17:29:11 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="cAF7hC+L";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="JoY2tRBM";
+	dkim=pass (2048-bit key; unprotected) header.d=siemens.com header.i=@siemens.com header.b="FDGT9fp9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A29B184915; Wed,  6 May 2026 17:26:51 +0200 (CEST)
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
- [205.220.180.131])
+ id D8894849AE; Wed,  6 May 2026 17:29:09 +0200 (CEST)
+Received: from OSPPR02CU001.outbound.protection.outlook.com
+ (mail-norwayeastazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20f::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4D81C8490D
- for <u-boot@lists.denx.de>; Wed,  6 May 2026 17:26:49 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=oss.qualcomm.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=balaji.selvanathan@oss.qualcomm.com
-Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 646E0jOf2427853
- for <u-boot@lists.denx.de>; Wed, 6 May 2026 15:26:47 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- WNLhBpSfreKRlpNk1tw7b6qZn5vYQ3O6hfdGpaFPGuo=; b=cAF7hC+LUnVPt3c4
- X0Cg9E9LRdIUmPB+ojXQZeo1Eo+czSvqPyV0nTn7EluKZSRT1scXQGE3RdZzYTVv
- 0WDHzqm3hEB69VM4g1gDhPgb8gHhZFlg5hKrK+nC2RsxLibh0wUGwpT0NyU00IlA
- oaYYwQXJ3h4xNOPxJqV5bZBoeZzWLmXFX4GnQY7OPRhXMjuZ8hfoKV6DjDLsQCdC
- WQXba9PB6FfwfrRy/N20GBh6frqoDt2nuq2GkbFZFQsd1yDlTjUbq2xSHO9t1qbX
- ZOlljbF4IBHmnlAY5T9HXWDAhHkSn9lOJ0NLXOJHcIHbCky82zKX11eJb/t+URaA
- CeMFyw==
-Received: from mail-pj1-f72.google.com (mail-pj1-f72.google.com
- [209.85.216.72])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4e01ph1r50-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Wed, 06 May 2026 15:26:47 +0000 (GMT)
-Received: by mail-pj1-f72.google.com with SMTP id
- 98e67ed59e1d1-36514eb1194so8469911a91.2
- for <u-boot@lists.denx.de>; Wed, 06 May 2026 08:26:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1778081207; x=1778686007; darn=lists.denx.de; 
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=WNLhBpSfreKRlpNk1tw7b6qZn5vYQ3O6hfdGpaFPGuo=;
- b=JoY2tRBMuwyqGD0VUp+5NsEbeww7gT57zV9noOeNeV4M/YxipiZf23xbeDpRE+o8qK
- rNd1NtkvxjrLW3fdBl/Mg83uGG/TM/ido0fNF1yCO6kaFKkXlVg6H+zXktxHgboBYQHv
- /3Ii5jLfyx5ge8GoPl+uzQmovSOOifympAoocTglbJ0KoEH25HZZjin+TScSA4ArbA5P
- DHikH3wFgNMaNX1yD1I2nlKutgcFZK3nyb5iI3SGsHCEZZRIiJQD5Xw6gfPa4SRoCPAc
- QFghzqz9A+Sz2UljqT46djBeQITWdsAV1cZYMn/leSH5lOScPw497mvLaJexKSDtooP2
- A8Zw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778081207; x=1778686007;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=WNLhBpSfreKRlpNk1tw7b6qZn5vYQ3O6hfdGpaFPGuo=;
- b=JQqHAUEz7bPANKYadNFRZGEN5goL6gkz+zDfmcdh68VF8YMGYVOVjFs7/3DZrGg5HA
- Eh1R5J2o985cWFIXzo/myfvtjMIxLxv5Ohi3zGFV5xOr2p1+qv/R29xud7fFHyj8q+lQ
- pAYoD3rhT4wQ0lZ2elvT6p450TLHsunD0bDtRcYjpUxEt5Y4h1Du7x5sq7dH3fXxPCSh
- gx/o0mlJFu6eIe6OWphwVcqKv+ufkxFZ+yAqLLwaSAdKBKcxcWNIfHA8BmMVs97pllFG
- JorDK7e0OgtjBHLp+uyKCIyGOXNk6apRtkuo4uN4MPOd/aABa/ZX0p9JPa6kVCSsmoeA
- hV8w==
-X-Forwarded-Encrypted: i=1;
- AFNElJ9I6a8fvGYgSG2hWqfKjqZkfjCEPXrRCK6JZMXnWE6hvQ+nhSMApDBcFDHGVcDZY8AnxrXtGKc=@lists.denx.de
-X-Gm-Message-State: AOJu0YzQXlfM5UpMmiHLCcXc4+67/WL0BEMyD99q50wMDIPEXu5n4wcc
- oBrH7RVj+uDdUOkHoWa3n9TIV740MeCxlvoq6IVZRyzD1yKdpb0uIdbJ68qfV1LgYK5i2DxW6Kp
- ND+LR6WLaBgeQIcbDJXH5zhxUGXGgpNG26Ki4bHAt3i7IYrL6NwTwMn9r
-X-Gm-Gg: AeBDieuQxPJ9FEfOUOVkoirMEbVv1Q4SH9pSBw3oVDHinospPaTOxMnyWnU6QIeeJsY
- avJiWJPUxYl/iaZxQtITkgYWGhhdyZk4ZVnA7uBfJkkpsJA99Af8jivETK5GAQ+lSWkl4/TmsnW
- 4V4cp7gSm4K+17Gzp99z9XeAajgwfz2rynBKeXD0f9n8ZkEULwUQYFBkjru9VViP/3pULEvmDgj
- ONUlh7C8XJhH6t/bt+2vaAy8vLWB6jKSwEJebj7j/e+IlbL3ECGvxgVOoO+ii/LIHo6RAhzHWrC
- Z+J6MBhcNBrhEnR2oHQwdERBTns4AdkDHUwb4u4jELgGLzIeL0KFA9n37wt1eTlYW5OAQsTy1aj
- C0nokxNrYDO6UF7u/innLHdKxlyvfzF3qwP8L4y/Z0sZmB9xTPgwdKREsBkwnGUm9ZOQL
-X-Received: by 2002:a17:90b:5484:b0:35d:a3b4:2f00 with SMTP id
- 98e67ed59e1d1-365abad4670mr3609255a91.8.1778081206635; 
- Wed, 06 May 2026 08:26:46 -0700 (PDT)
-X-Received: by 2002:a17:90b:5484:b0:35d:a3b4:2f00 with SMTP id
- 98e67ed59e1d1-365abad4670mr3609220a91.8.1778081206182; 
- Wed, 06 May 2026 08:26:46 -0700 (PDT)
-Received: from [192.168.0.6] ([183.82.205.89])
- by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-365b08feeb0sm1907423a91.2.2026.05.06.08.26.42
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 06 May 2026 08:26:45 -0700 (PDT)
-Message-ID: <437a2860-fecf-4f45-bbe4-3fb9e8958b6a@oss.qualcomm.com>
-Date: Wed, 6 May 2026 20:56:40 +0530
-MIME-Version: 1.0
+ by phobos.denx.de (Postfix) with ESMTPS id D93D48490D
+ for <u-boot@lists.denx.de>; Wed,  6 May 2026 17:29:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=reject dis=none) header.from=siemens.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ludwig.nussel@siemens.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=SkjAw1WPiPCNOKJ70EkRBL/vbRa3H5jJ7OVGXi7xHNt4XlZWRqkh9F8oSUi2uP0F24G2+6MGQawZ/mGBRARr3vT+xtmoblzLe1V0o+5zlsOC+OmwgHf0jjMA919fPgqtlvzy2Y1ATpnqdsRUeKkjDE4COskOzsJ5ds8BWXHydlVvZtpr7Xl/zNvY5h6qN4xD988d5kB0ijWXJhsAgSo44b1rEWMyMJi0+yaoqABdNBBsWWeb84kejAL2CjgCYQ4bnoPu42Fo4lwVjFYekXzFoQQOcMVR/QWVGXX6B70jGHAFddKaKJE+fDq8oNauH9WPax6xPhl05tRjeFioTkl+ZQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=4MSP+g2yIY5g4RNEdXxKFlTR9EGW7o+Bj6Y6QiF+TYQ=;
+ b=pMeVe9VnWCJzjlRndf7vhnA/SOAofEQgUF35ra01HdZBvgeg4crGUrdxtqtVrrYJFJCXhusJfmFNWkBi9glpXHZgdKwTLJEn3LpXOX/dbnpO5fwYcxRRYWUhxrS3T00rrGTd5o5DF8xUsUCGJYlCu466Ob5keAtKATmD7TXn0Yl+gRErdcaCne3OMD7ZtsycCAJ+oBEpMkIaEAsFnt8AHa1cSQsF67KwOcrpMyjpSMMs8dCb+NG+5Oe4/fgSwVy0RsgfX4coU7zV6JT/Sa9cMIRGsb3Zb/1B3KlrziLd5h/ydsdJ+yd86g7JjdlYd6qke5CuRDRW6H7dwpVwovA0GA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=siemens.com; dmarc=pass action=none header.from=siemens.com;
+ dkim=pass header.d=siemens.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=siemens.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=4MSP+g2yIY5g4RNEdXxKFlTR9EGW7o+Bj6Y6QiF+TYQ=;
+ b=FDGT9fp9R+SrYxQaS+s/tz7Dg/AkUndTbj2guz724Djo2RJLR8/4EiRzQWocYVuI/xZHhP/2l0vO/P4XbDAL6JGbPLWy40mUXrGpMN8E1EiMuG5zPzKrOsTjqQ7yWSviBJY+z9cQoICx/WrNP0GIQQqW3fpY/7QYMvZI1tBU4TlltSeEQvFUmbFDQwn5vBUbU1LQ75aL7ygB2TG5O4BlgppN/lbo1LTzviXHHpeIB1HMeS7569LfJzROocdWAtpxLSLg+e5dznWumk6vRJ0HfTxTJ12z3jPZ/XBIcdpOGxIeEwXtsH0fBSsO0wFvz6b8GEYAZ15Wjdk3K6psQPqj2w==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=siemens.com;
+Received: from DB9PR10MB5019.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:2cc::12)
+ by GV1PR10MB6539.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:150:83::16)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9870.25; Wed, 6 May
+ 2026 15:29:04 +0000
+Received: from DB9PR10MB5019.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::97ce:ff62:c0b8:4ed1]) by DB9PR10MB5019.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::97ce:ff62:c0b8:4ed1%7]) with mapi id 15.20.9870.023; Wed, 6 May 2026
+ 15:29:04 +0000
+Message-ID: <79f3438d-a6d9-48a8-8cdf-01dde7b5e2b1@siemens.com>
+Date: Wed, 6 May 2026 17:29:03 +0200
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] usb: dwc3: Fix crash on fastboot exit due to incorrect
- memory free
-To: Marek Vasut <marek.vasut@mailbox.org>, u-boot@lists.denx.de
-Cc: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Chris Morgan <macromorgan@hotmail.com>,
- Casey Connolly <casey.connolly@linaro.org>,
- Varadarajan Narayanan <quic_varada@quicinc.com>,
- Gurumoorthy Santhakumar <gurumoorthy.santhakumar@oss.qualcomm.com>
-References: <20260506-usb-v1-1-e0f426bb1e42@oss.qualcomm.com>
- <a74a7a66-c1f1-4d6e-b85a-49ecc8e2e882@mailbox.org>
+Subject: Re: [PATCH v2 1/4] qemu: overlay signature nodes
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de, Peng Fan <peng.fan@nxp.com>,
+ Sam Protsenko <semen.protsenko@linaro.org>, Tom Rini <trini@konsulko.com>,
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>
+References: <20260430122629.606153-1-ludwig.nussel@siemens.com>
+ <20260430142602.v2.1.5f8ce2dc2b00328d29e64be2684b10d9f52c6a7b@changeid>
+ <CAFLszTiTCsLgdAasexCb5Gv1zkdAo6m47D2MEgYxqwpkfAZoNA@mail.gmail.com>
 Content-Language: en-US
-From: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-In-Reply-To: <a74a7a66-c1f1-4d6e-b85a-49ecc8e2e882@mailbox.org>
+From: Ludwig Nussel <ludwig.nussel@siemens.com>
+In-Reply-To: <CAFLszTiTCsLgdAasexCb5Gv1zkdAo6m47D2MEgYxqwpkfAZoNA@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNTA2MDE1MiBTYWx0ZWRfX3gvXhkLkAmna
- YhVQpffmSwuxtuCp/d4hXBChspw3iPpnmK8qyP99V1/PxfnZD/EeZWdhn1BfWAJ3aOwyFVrYEFL
- bs7p7bNecaJUpRZIqcoGB4K3DWpAP6aYy/ZP0OXiA5XKs2Zbo6NtY7qQ09Jn6iEwCT3hngov/aT
- EkURhHY/FOWZ1QekFBv6qIum/ii2wm8AVZD12i+rgznAYSfV0spgDZJioEmIFk+aQBYBGCX95qA
- 455xueNyL5Oa7qSdWtvuIeaj5nuqUsLT0tifr7NzIVOyIcdQjJPemKScqHwb0q90kFRPQLQ4UyK
- RKkIZ/qXkHMbsHddkjqcs2Q3DMueK/bbtfPe9B70ORerS+OBGJI3SgviTlFzjilbtfBNaA7Gmee
- t0ZCEW73ZNZpR9AY0NhUnuQ2dXVgNZOyOzM5AFoC/OdPjmtIkNKmy2fJZ2W9zjDEg0OqLF3Isur
- gyEglAHEbPJev0XT93g==
-X-Proofpoint-GUID: DsPFqYTz9MEosZldIuO0KjzQ5lLLYDXs
-X-Proofpoint-ORIG-GUID: DsPFqYTz9MEosZldIuO0KjzQ5lLLYDXs
-X-Authority-Analysis: v=2.4 cv=MYhcfZ/f c=1 sm=1 tr=0 ts=69fb5db7 cx=c_pps
- a=RP+M6JBNLl+fLTcSJhASfg==:117 a=f+zF1XwuGwr39dz+bZsZhg==:17
- a=IkcTkHD0fZMA:10 a=NGcC8JguVDcA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
- a=EUspDBNiAAAA:8 a=fRbKdbYq64vAyn_CajkA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
- a=iS9zxrgQBfv6-_F4QbHw:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
- definitions=2026-05-06_01,2026-05-06_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 bulkscore=0 clxscore=1015 impostorscore=0 adultscore=0
- spamscore=0 priorityscore=1501 malwarescore=0 lowpriorityscore=0
- suspectscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2604200000
- definitions=main-2605060152
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: FR4P281CA0417.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:d0::8) To DB9PR10MB5019.EURPRD10.PROD.OUTLOOK.COM
+ (2603:10a6:10:2cc::12)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DB9PR10MB5019:EE_|GV1PR10MB6539:EE_
+X-MS-Office365-Filtering-Correlation-Id: 76302e5b-5dc7-4942-5b4d-08deab8434f3
+X-MS-Exchange-AtpMessageProperties: SA
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|376014|366016|18002099003|56012099003|22082099003|55112099003;
+X-Microsoft-Antispam-Message-Info: NrOgOBPVyuYJ4E36qHMnUwGawKiqdYTKJre5tvT/FjyODx+AikjoZ8CS/Y23hTev3iADXu0k/xPiMyBWi7AH8m8frL3x+it0ybsFJ0uDUEhBruND72pxa85e6Upbb8EDNAqsmsBm4+v2KcF515e9nVW9z1+t++BaCHj9HeMSTS8fYWZvswqZDn3ZQ9jkJwkpRocOiFIrO0I7l9wIEv2mRoFnT5FWhAVfQDQ9yvnwIe3Jcyn1E+1K43ZcPfm0yVNADlFGZ+qdrHil6UV90KpiHkDka1VHMBYcWKacPwf9wYOdeSkp4oyHqXXliyGicIezSFaqEwY1lnxSfSER7k3UpYmpp8ySRFMxhnLSB4w0apjAe/ckwDEgxlQfFxOqVwNhPqNf0scYIpJzhha9rgQPV11SeGDZ6Af4UT3BT3qL+glco4rJvBU3TCtObaA1QiK4MRD1EpF4pGIs10RnQE7ROSoE+6w33Ax3fPAdFEYkfBWSPhin0iMfMe4Gm1EV0mXcoqmjkBJWO3kGZCSXssiPKOReftgP0MrUFvBlJrC0hQ12I1HbDYdLI3TdU2hr9gI2/H9XmS9bo4nv18X4+CY5ecMP13SLEHtyWYET9UxjQ8BpwSTu8mQx5kskQi4Une4wRDkci5GvxmJHEXDRfBBDEA==
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DB9PR10MB5019.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(376014)(366016)(18002099003)(56012099003)(22082099003)(55112099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?dDFpcGZBYUFIdlZtNU5BYTFobk1jS2pua05TQUFQLzRyQm1BbnRZdTFheG9a?=
+ =?utf-8?B?dzJQeUk1YTRFd1F3RnFpNWlIOVFQMnpXMThpOC9JUHF4eEV4TGxIOEwzcjJV?=
+ =?utf-8?B?cXR6YytLNmdzakJlbE9DUWdtSlFrMXhaZUNNOVVUMzAvZFU3K3AwY25OdGlD?=
+ =?utf-8?B?a0pSWnBTZlo1U2VtSXBXSkFaTUtHa29kODFFajlmQ1lybW5ycG5VejliN2R1?=
+ =?utf-8?B?OEU4L0VvWjZYaFNhUUxPR2xCbEpkeUNDM1U0TSt3SmdDdWkxYzJySE12NTF6?=
+ =?utf-8?B?N1IxSW5jUXU5ckJYMWs0Y3J2RUlrSGE0Y0pSSmhGSmwrbEtjWXhrQUVneFRT?=
+ =?utf-8?B?VmdadnpuM25pVUJwU2EvdzJhbFB6OE9wK2MwVmorK1Fla3FVd0RYM2lybE13?=
+ =?utf-8?B?RWVNanRZcFNYUnVkRklZK3RmQTE0azM0dHI1QVp2TnJDbE9pVDhkQmY1SDVE?=
+ =?utf-8?B?MXVFZ2JmZG52REJyS0NjOXE2SVF5c2Exb1h5ZnZjc3ZrY1Z4Vm1IdHM4UVQ0?=
+ =?utf-8?B?QzhhY1E2Mjkwd05sS0xkVmNOdm56VmFPbjFlMGM5Q25HcnE2RldCSG83WHBJ?=
+ =?utf-8?B?VHRoY1YyU0hjQWdOUldSaWxPdi91QTZlaEc2V0RSTXZ1VTVqN056LzJsWFRB?=
+ =?utf-8?B?NWZKaVVkd05ZeEFXTlRqcFBUam1BYktSQnY5MDZjRm1RZEtUSHNneElTenFh?=
+ =?utf-8?B?SE5YUmwzZlAvU1dXQVEvKytQL3JxM2d6YVV0QXlaVHIwMHNXdlFNTFJYSm5w?=
+ =?utf-8?B?VDRiM09VOExEamprbS9sdmVKVHg4TmsybGVFcUMzRE1pdkJDVFVmM3JHem0z?=
+ =?utf-8?B?WndLLzZzd3dJa0RPUWlGcFpDWGwzeldLYzlkeFh0UkVYV3ZZcmJaMWhPZzkw?=
+ =?utf-8?B?ZG9WQTQ2NFFyUjh3T3NEOWZLN1JXbE5MaVZYdEh1djlGR3JQN2JSZDRpRXZI?=
+ =?utf-8?B?cUpkdWpFS05jdzVpNis1TktKNzBsS2NYWWRjcWxEN2l0SEVxbkxzcUNobysv?=
+ =?utf-8?B?TnFlakI4V1pjSlo3V3FhenZ6ZTd4dkNybm1zZFhNd2ZrcEV4MXhGVzRsQ015?=
+ =?utf-8?B?UkdQUVVYK2kzU05CbTFoNlZFMzFzOFBJMTdDQzdQN1R5b3o5TXVZS05TV2xz?=
+ =?utf-8?B?Rzc1NUlkdUd0ckNlNlNZcStEU0UyS3d1M0xnRGdKRnFNc3dIcEZyTURwNXg2?=
+ =?utf-8?B?K25GWW5yOTNJT2Zxa3F5RFZ3bG5qakV2QlM0cUd1My9ra1J0N3gxMGdYenhy?=
+ =?utf-8?B?Ky9BdXVocTBPS0FVbXRmVVV3MVhSdE03QVhGaGJxUkczZGUyMzFHcFVjSmsv?=
+ =?utf-8?B?b1JnZkc4QjNaTktIY3YzZ0IwVmNXUzBCWk1UV2NzZ2RHV3NvdXlZcU9JMVFY?=
+ =?utf-8?B?NHpleGF5UHF3OFRUbXZzcGdJem53WVduVjA0R1k1NTB6UG5LaVFPL2QrdElV?=
+ =?utf-8?B?SEpoM0ZTMDFEMFBPUk82b1RyU1ZFSG0yUFRzN2Vtb3FZUFdyeG5hMnl5Ui85?=
+ =?utf-8?B?ZDM2REpNUURIMlFBU2hsYjRoMjYwTFpRVWs0Zk9PR2NPY0N0NTdnTi9aSWJP?=
+ =?utf-8?B?NmZ2QStDcVBub3pSYysrMm5KM21NUFJrOEhYcGdpQ3hwK2NrNUNxS1BzYnNQ?=
+ =?utf-8?B?VVRmYmx1azlIcHRmTGtxQ0pvZTliSUs1bTZjY01qSmx3RzBCMlhlZCtYTUdT?=
+ =?utf-8?B?M2E0cDBic0tDR3oyZndnQm0zMFBhMGthRHZmaHY3RTNIbWVQaXpEZGtSTkJp?=
+ =?utf-8?B?RDcwQjZuMGx1RFgvOUF5Zkt4VHd4Q3FhNmY2YnJueXluNE56Y0hUWnloc0Zp?=
+ =?utf-8?B?eStGME1YbDZGYWFLNFUzTWtCUGRPanQzdXdPUU1Yc1lrc0hZTXA0WXZ3TDlG?=
+ =?utf-8?B?bU1zRktvZGE4NHh1aFkrVTI4SUtFZGdLZjhnTUNmUkNYTVdFZmhHeFZsUUFY?=
+ =?utf-8?B?NjJHTU15WFZhWlM4blZnVHF6TlUzcDZqWUtySlFaNXZIWXZBZG9oYXAvSCtU?=
+ =?utf-8?B?ait1Rm1zVjhFekpOcm9HRFo0RER3a24yRXdkZGJZUVF2OS9jVHJvSDNiQzRB?=
+ =?utf-8?B?TDI5QWt2Y2pGc3AvZEVNTjFBSWt3ZXN4TnZadWQzQUZXa3EyRks5b2NNemts?=
+ =?utf-8?B?ZDc5SlIxYk54ZEdma1N1SSttd0pxUVlXTHYxcUVDYng4WVIvOUF6NzBKU3BC?=
+ =?utf-8?B?RFZJNUQ5REwreWFOeGEzVmk2V0daUVdjNnYwSllYVWJkL2hpV0VtYUgxcTJx?=
+ =?utf-8?B?T20wYzEyVVVDREcxNnN6eEZ6RWRhM2c0SnI0K2pCUFU5SnlOUXlLNGtZSWhQ?=
+ =?utf-8?B?KzY1eUNPQ2VSeEhJQmxxaTBqemlxbGtLOExrMlFGbmFNT0NVZDh4QT09?=
+X-OriginatorOrg: siemens.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 76302e5b-5dc7-4942-5b4d-08deab8434f3
+X-MS-Exchange-CrossTenant-AuthSource: DB9PR10MB5019.EURPRD10.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 May 2026 15:29:04.7172 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 38ae3bcd-9579-4fd4-adda-b42e1495d55a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: hqHZD9FG3RhevzaqefnxSdbomBJfCNwgMdVZl07fwaiiDNnufHxuzIyHEVenoarDGt7/M247hAiLyXDR02yALbkpN+ekxB0RySj/kvQKXNw=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV1PR10MB6539
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -157,47 +152,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 5/4/26 14:26, Simon Glass wrote:
+> On 2026-04-30T12:25:59, Ludwig Nussel <ludwig.nussel@siemens.com> wrote:
+>> qemu: overlay signature nodes
+>> [...]
+>> diff --git a/board/emulation/qemu-arm/qemu-arm.c b/board/emulation/qemu-arm/qemu-arm.c
+>> @@ -147,7 +147,38 @@ int dram_init_banksize(void)
+>>   int board_fdt_blob_setup(void **fdtp)
+>>   {
+>>        /* QEMU loads a generated DTB for us at the start of RAM. */
+>> -     *fdtp = (void *)CFG_SYS_SDRAM_BASE;
+>> +     void *qemu_fdt = (void *)CFG_SYS_SDRAM_BASE;
+>> +     int ret;
+>> +
+>> +     if (!*fdtp)
+>> +             goto out;
+> 
+> This runs the opposite direction to qemu-sbsa, which uses the U-Boot
+> DT as the base and overlays the QEMU DT onto it (see
+> fdtdec_board_setup() in board/emulation/qemu-sbsa/qemu-sbsa.c). Done
+> this way, any node in U-Boot's built-in DT that shares a name with a
+> QEMU node (/cpus, /memory, /chosen, ...) will have its properties
+> merged into QEMU's, potentially clobbering the hardware description.
+> If this is correct, please explain in the commit message why the merge
+> runs in this direction.
 
-On 5/6/2026 4:55 PM, Marek Vasut wrote:
-> On 5/6/26 8:14 AM, Balaji Selvanathan wrote:
->> The dwc3_free_one_event_buffer() function incorrectly called free()
->> on event buffer structures allocated with devm_kzalloc(). This
->> caused heap corruption and a synchronous abort when exiting
->> fastboot mode via "fastboot continue".
->>
->> Device-managed memory is automatically freed when the device is
->> removed, so manual deallocation causes the heap allocator to access
->> corrupted metadata.
->>
->> Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
->> ---
->>   drivers/usb/dwc3/core.c | 1 -
->>   1 file changed, 1 deletion(-)
->>
->> diff --git a/drivers/usb/dwc3/core.c b/drivers/usb/dwc3/core.c
->> index 0dee14c8b59..be198041f08 100644
->> --- a/drivers/usb/dwc3/core.c
->> +++ b/drivers/usb/dwc3/core.c
->> @@ -208,7 +208,6 @@ static void dwc3_free_one_event_buffer(struct 
->> dwc3 *dwc,
->>           struct dwc3_event_buffer *evt)
->>   {
->>       dma_free_coherent(evt->buf);
->> -    free(evt);
->>   }
->>     /**
-> Does this need:
->
-> Fixes: 884b10e86a05 ("usb: dwc3: core: fix memory leaks in event 
-> buffer cleanup")
->
-> ?
+IIUC the FDT patching happens before relocation. QEMU starts u-boot from 
+a ROM at address 0 so writing to the embedded DT does not work. QEMU's 
+provided DT is at a writable RAM location so patching that one works.
 
-Hi Marek,
+I don't know which direction makes more sense really. If you say merging 
+QEMU's DT into U-Boot's is better then board_fix_fdt() could be used for 
+the merging I guess. Looks like that could work with
+CONFIG_OF_INITIAL_DTB_READONLY and CONFIG_OF_BOARD_FIXUP set.
 
-We remove only "free(evt)"; "free(dwc->ev_buffs);" from this patch 
-(884b10e86a05 "usb: dwc3: core: fix memory leaks in event buffer 
-cleanup") is needed.
+cu
+Ludwig
 
-Regards
-
+-- 
+Ludwig Nussel
+Siemens AG
+www.siemens.com
