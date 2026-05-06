@@ -4,24 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 680C3CD3427
-	for <u-boot@archiver.kernel.org>; Thu,  7 May 2026 03:51:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3DBAACD3427
+	for <u-boot@archiver.kernel.org>; Thu,  7 May 2026 03:51:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6886A849BF;
-	Thu,  7 May 2026 05:51:18 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BF34384A0D;
+	Thu,  7 May 2026 05:51:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="J6XzANVi";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="ufs5jC1V";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="ODjjwbok";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7C74A849F6; Thu,  7 May 2026 05:51:16 +0200 (CEST)
+ id 220C9849BF; Thu,  7 May 2026 05:51:43 +0200 (CEST)
 Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
  [IPv6:2001:67c:2050:0:465::102])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C7E1B84951
- for <u-boot@lists.denx.de>; Thu,  7 May 2026 05:51:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5C79384A0D
+ for <u-boot@lists.denx.de>; Thu,  7 May 2026 05:51:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
@@ -31,42 +32,61 @@ Received: from smtp1.mailbox.org (smtp1.mailbox.org
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4g9ywH4y3Xz9vJh;
- Thu,  7 May 2026 05:51:11 +0200 (CEST)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4g9ywr52Gsz9vJh;
+ Thu,  7 May 2026 05:51:40 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1778125872;
+ s=mail20150812; t=1778125901;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=+6na5yuMNvS/laDn+VO4bsD1IBxEOeOunY58zQZMZu8=;
- b=J6XzANVin2CgFP/+e4uB2v+QSWqqdiLBazjPjYq9WoagGKQenIgFYIlRWTincs4YSgVeuo
- ICmRUg9f/dexBEJt4DKdNwCZg+BO2+LiHPHJYiaKF9M0gSyZacZoPzU2VFAKY9MR4Fvg+s
- 4Qv+bu7kQQ/9kT85HbphQMYmEFQMp7Y9EywhS/fcAoUcak92JfxcVxNizq6TdouQrfuZg8
- WZRpQxUZVQnNSWffqibl4eXipRcnAa1aANTJpvt2+T/fUcgFiQO4/8i2PRQF05WPdox7mI
- 5YRZWL6jqs+d4ovILo9q5dOs19pgNReAB6Ss0sjT/OWkIJ/d56HEM4MybvXCjA==
-Message-ID: <755b13b4-604d-480a-84be-000316eaf5a5@mailbox.org>
-Date: Thu, 7 May 2026 05:51:08 +0200
+ bh=YknNeBaMLWvZvzlSunnQoZomvVOntMzeGi1FUsfy8C4=;
+ b=ufs5jC1VXj4n3WvUrinMIQY+C4DCW65E0y4U16qsTr7XTjNyuOiMR9XzY+uotMG5HasggJ
+ qvXiqzLa/b2Tah0wPWg/n+9rGhlN5yl9muwkx9l/OFRkL+jDvJv/lHy1sdVgJnRxt86YP+
+ KdtioInlLiT4febD85DTAEWb6G2o70j9ejG+TcKXfYLBfkVCeeXBwGQ7vdD4BrcVt6XX4W
+ YNcGOF97hMe7LZLAj7aKP/OrFiAVLCzr7EZTHpdlU5C/CyXwlLpTZTbTZt5QI1DDLBxH5x
+ mTKkGBsUavN3tUSymtJEzc6gFWhsE8aw3WivfvTwrfI6FNOkKcMl9dTKPsqtzg==
+Authentication-Results: outgoing_mbo_mout;
+ dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=ODjjwbok;
+ spf=pass (outgoing_mbo_mout: domain of marek.vasut@mailbox.org designates
+ 2001:67c:2050:b231:465::1 as permitted sender)
+ smtp.mailfrom=marek.vasut@mailbox.org
+Message-ID: <6320a41d-77ce-402a-935e-ea5b6566452c@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1778125899;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=YknNeBaMLWvZvzlSunnQoZomvVOntMzeGi1FUsfy8C4=;
+ b=ODjjwbokGt6mlBxYYSnYm9Ur9FpAb82FMUUyrcupkMs5O2O+djCdCzd9z1dcnnu51YvIiJ
+ 5WkSqMRLwBSowqcdWUs1ovIcLWPAO9UFAs1nopZ2NnLSPMLpvA5x+oFWEU2D+DsnpKWLXU
+ HaK30mHy+vgdyNENFvmfV2ObwOK1QlJrPXQakd/tQ66lOptlmNiHtBn8naf7wE2Y+/ONL4
+ PF7/UImmiQEF5To32U+NQN0xso+YOq/Er5TKNHSiRGOTtz/cc74S+MheWVFF8S5RV60Yr0
+ H2wNDv8V8Hn4xVYnZP9MCrzfO0iUmPsiH64rJw6YgcUq8s99LiOxXpcYFWj+wQ==
+Date: Wed, 6 May 2026 17:28:39 +0200
 MIME-Version: 1.0
-Subject: Re: [PATCH v2 3/3] ddr: socfpga: Add ECC DRAM scrubbing support for
- Gen5/Arria10
-To: "Chee, Tien Fong" <tien.fong.chee@altera.com>,
- alif.zakuan.yuslaimi@altera.com, u-boot@lists.denx.de
-Cc: Marek Vasut <marex@denx.de>,
- Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
- Tom Rini <trini@konsulko.com>, Brian Sune <briansune@gmail.com>,
- Yao Zi <me@ziyao.cc>, Patrice Chotard <patrice.chotard@foss.st.com>,
- Peng Fan <peng.fan@nxp.com>, Simon Glass <sjg@chromium.org>
-References: <20260428033230.7777-1-alif.zakuan.yuslaimi@altera.com>
- <20260428033230.7777-4-alif.zakuan.yuslaimi@altera.com>
- <2880c529-5740-40b4-bb98-aa471f0c628f@altera.com>
+Subject: Re: [PATCH] usb: dwc3: Fix crash on fastboot exit due to incorrect
+ memory free
+To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
+ Marek Vasut <marek.vasut@mailbox.org>, u-boot@lists.denx.de
+Cc: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Chris Morgan <macromorgan@hotmail.com>,
+ Casey Connolly <casey.connolly@linaro.org>,
+ Varadarajan Narayanan <quic_varada@quicinc.com>,
+ Gurumoorthy Santhakumar <gurumoorthy.santhakumar@oss.qualcomm.com>
+References: <20260506-usb-v1-1-e0f426bb1e42@oss.qualcomm.com>
+ <a74a7a66-c1f1-4d6e-b85a-49ecc8e2e882@mailbox.org>
+ <437a2860-fecf-4f45-bbe4-3fb9e8958b6a@oss.qualcomm.com>
 Content-Language: en-US
 From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <2880c529-5740-40b4-bb98-aa471f0c628f@altera.com>
+In-Reply-To: <437a2860-fecf-4f45-bbe4-3fb9e8958b6a@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: qqtzzzn3ik4qm4eur51p1w1e8qut16r8
-X-MBO-RS-ID: 4015e2a507f459ef5fa
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-META: yt38n31s5ixan7tdp8gcgtn5k661h5ha
+X-MBO-RS-ID: a737ab51929db9914c3
+X-Rspamd-Queue-Id: 4g9ywr52Gsz9vJh
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,43 +103,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 5/5/26 8:54 AM, Chee, Tien Fong wrote:
-> Hi Alif,
+On 5/6/26 5:26 PM, Balaji Selvanathan wrote:
 > 
+> On 5/6/2026 4:55 PM, Marek Vasut wrote:
+>> On 5/6/26 8:14 AM, Balaji Selvanathan wrote:
+>>> The dwc3_free_one_event_buffer() function incorrectly called free()
+>>> on event buffer structures allocated with devm_kzalloc(). This
+>>> caused heap corruption and a synchronous abort when exiting
+>>> fastboot mode via "fastboot continue".
+>>>
+>>> Device-managed memory is automatically freed when the device is
+>>> removed, so manual deallocation causes the heap allocator to access
+>>> corrupted metadata.
+>>>
+>>> Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+>>> ---
+>>>   drivers/usb/dwc3/core.c | 1 -
+>>>   1 file changed, 1 deletion(-)
+>>>
+>>> diff --git a/drivers/usb/dwc3/core.c b/drivers/usb/dwc3/core.c
+>>> index 0dee14c8b59..be198041f08 100644
+>>> --- a/drivers/usb/dwc3/core.c
+>>> +++ b/drivers/usb/dwc3/core.c
+>>> @@ -208,7 +208,6 @@ static void dwc3_free_one_event_buffer(struct 
+>>> dwc3 *dwc,
+>>>           struct dwc3_event_buffer *evt)
+>>>   {
+>>>       dma_free_coherent(evt->buf);
+>>> -    free(evt);
+>>>   }
+>>>     /**
+>> Does this need:
+>>
+>> Fixes: 884b10e86a05 ("usb: dwc3: core: fix memory leaks in event 
+>> buffer cleanup")
+>>
+>> ?
 > 
-> On 28/4/2026 11:32 am, alif.zakuan.yuslaimi@altera.com wrote:
->> From: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
->>
->> The SDRAM must first be rewritten by zeroes if ECC is used to initialize
->> the ECC metadata. Make the CPU overwrite the DRAM with zeroes in such a
->> case.
->>
->> This implementation turns the caches on temporarily, then overwrites the
->> whole RAM with zeroes, flushes the caches and turns them off again.
->> This provides satisfactory performance.
->>
->> Move common code sdram_init_ecc_bits() to new common file sdram_soc32.c.
->> Preparation for Gen5 uses the same memory initialization function as
->> Arria10.
->>
->> New Kconfig is introduced to enable this implementation only on the 
->> default
->> Arria10 and CycloneV boards as this will increase the SPL size which
->> will exceed some Gen5 devices' SPL size limit.
-The subject is severely misleading, the ECC scrubbing was upstream since 
-2018:
-
-07252f6f7e37 ("ddr: altera: Add ECC DRAM scrubbing support for Arria10")
-
-     ddr: altera: Add ECC DRAM scrubbing support for Arria10
-
-     The SDRAM must first be rewritten by zeroes if ECC is used to 
-initialize
-     the ECC metadata. Make the CPU overwrite the DRAM with zeroes in such a
-     case. This scrubbing implementation turns the caches on 
-temporarily, then
-     overwrites the whole RAM with zeroes, flushes the caches and turns them
-     off again. This provides satisfactory performance.
-
-Even the commit message of this patch is a duplicate of that one in the 
-commit from 2018 ? What is going on here ?
+> Hi Marek,
+> 
+> We remove only "free(evt)"; "free(dwc->ev_buffs);" from this patch 
+> (884b10e86a05 "usb: dwc3: core: fix memory leaks in event buffer 
+> cleanup") is needed.
+The Fixes tag is only a reference for posterity, to trace which previous 
+commit this change repairs. The change itself is fine. Thanks !
