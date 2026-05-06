@@ -4,99 +4,99 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5CF9CD3436
-	for <u-boot@archiver.kernel.org>; Wed,  6 May 2026 10:49:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11484CD3436
+	for <u-boot@archiver.kernel.org>; Wed,  6 May 2026 10:53:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DE8408488B;
-	Wed,  6 May 2026 12:49:22 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 96167848A1;
+	Wed,  6 May 2026 12:53:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="DLgysV+U";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="IvBawPhj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1A23284897; Wed,  6 May 2026 12:49:22 +0200 (CEST)
-Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
- [IPv6:2a00:1450:4864:20::531])
+ id 6B6A0848AE; Wed,  6 May 2026 12:53:29 +0200 (CEST)
+Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
+ [IPv6:2a00:1450:4864:20::52e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1D55584882
- for <u-boot@lists.denx.de>; Wed,  6 May 2026 12:49:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 78C598488B
+ for <u-boot@lists.denx.de>; Wed,  6 May 2026 12:53:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-ed1-x531.google.com with SMTP id
- 4fb4d7f45d1cf-67b7c71c165so7827780a12.0
- for <u-boot@lists.denx.de>; Wed, 06 May 2026 03:49:20 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1778064559; cv=none;
+Received: by mail-ed1-x52e.google.com with SMTP id
+ 4fb4d7f45d1cf-67bc8609a9bso4181399a12.0
+ for <u-boot@lists.denx.de>; Wed, 06 May 2026 03:53:27 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1778064807; cv=none;
  d=google.com; s=arc-20240605;
- b=ZIrrxRXFOXY9GnwdlyIouGRHJUcDfwCFSwo9icYK+OYX6EIXNmH5d+M78gQ6/fG8CU
- 6JOu0zghENW1BYQmhw36iifcEropVYFBv+BFMkHC2hKRP4zaN3t59GfcTve4JMQBojRW
- 8RL/IThFY2UnuvvVnbHN5RCulvfXu2Oal8DigZQOnG3d8dji4U7UazsApQjv8KOufpjB
- B6yaPFKFjvzATs24H8oeVvKXnraqQ5Gp1swPjQJJ+LGBSwt9baW863JxQ7kIHHfnxcNY
- Sj1ggNkN2/6h00L8LQQ8CgldXyOw9/w4SKPZNlCScxuCaz+egRQnVznefTkEfLdyBYcV
- 4tLg==
+ b=ILxHWUqMzpDt6Wq9sMGA1Djish4ps/RrmuNHDxSovspwPlV1ixiwGAlLuVTXjc5Fh5
+ MzDu+qU8Ii1SLEQaL38Hj0WDolZnju99ulPBzUHtMKDy2gyqOEcvVhjXsgks/fpX60jV
+ UPVdCjtT/8jXd3UpanDSrHjh2EDcdO9EohVVMBANRik5rpUC3wxYZ2BWNpmC9tYhMIts
+ 3ZgjgZy+bLv371Nc8G8naZAnjLC3RES3UO0Vtjz2lfgiykGJ7/QyGz2u/nBXhNHOh7O4
+ /WmwOCEapO+aHKQseFAitTFJqQsPie61lCksmQRivF7D3ErF4ljC5ECWb7pnlhOs714p
+ +/zg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=kX4JTa/WzmJFD4bBfqq8b7xF6GkUeJRZjgAbIx2V7No=;
- fh=zRLnNarVXgpDlU5dj8kDuox+8a6k7QvOF1dsRmOKbvw=;
- b=Sz0OlMeobHGmBrOfl83BZp8Z186G5/Ci5fisJOOsvsjNA5GvpnqCvXd/TZqV6gt00b
- yLFI6lZ0EkVvs2UzC4mb4kaQ0eIkHYfyLfI5SPM3/AnjmI8S5+U6b0RiGzjVQTBADiEZ
- vtoEpDJyXjeTA7LYqUL5eHu7eVmvHwHu0CCK4CZntq19Y1mc7qfR+LBMMrmbHO8xYArb
- 0wpzAG99RTIDhDI4rkPwRoJ+VVv8NJPf8qkf28PjHm+1SJiytB5zoV1csH9oQOLIo91y
- t+Z0rH1G85wz9JbB1Va7AgCijx8MyM51fM2CBUivLhlQHQKOd/9O+hqQNb1xCb72mT5A
- WXRg==; darn=lists.denx.de
+ bh=7Qn2YpoPFgXSQBR+RTehkqViNZpwjN41bSwjPkcbo9U=;
+ fh=D7iEwFdYJqYJrNgrSKWmk+VeLW31/ippd26/9OpP6PM=;
+ b=VbIdY4aYgdhLD26u32yKodUc3Nwil9D3zKqZl6kufxouuOLpxgQm8LaNCkFFNktV0H
+ Dkdxy2JPWxyVvJRsu93vzW3XzGtd2/bpfKiKt4HuZ/TqO0AdrP8pvznysKRvh0V/S6hi
+ SK0G82Rw434hmMDUn6kNXFJuOAqWzUWa2jB0HPEthIlGHxLkRlFuqhLwEgN2jNopZJxI
+ w2upV/r8eSOOV6z4XTTS5vhrEx1nYYv/zoBAz+tFZww1V5pQG18Vi4w4oPr9K4zqolhB
+ 5A/cmMQh34TIKUxithsSoyGX6QBhpS9erXQfVNI6hYjhDq39tOPlTstgvOG/ndTdHH9C
+ 2/TQ==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1778064559; x=1778669359; darn=lists.denx.de;
+ d=gmail.com; s=20251104; t=1778064807; x=1778669607; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=kX4JTa/WzmJFD4bBfqq8b7xF6GkUeJRZjgAbIx2V7No=;
- b=DLgysV+UH5BjMUGp7in1cJ3ywwg/C22a1ZJW5Sjv1Fe2Wd+LwI9+kRwqIUcJzOSxRb
- cMBU+yKnu0zl6hfxb56I9RJJL2AUj736jBKkhLcAIh1I395Z68Yk9dIW6DMPNQRBYAiX
- rVTqr4HRTzqdBwA+FNH48jtmNm/5umap/EdR4kK699L/8UPfUbai5QgshjxcF+h5X6SX
- 5fOsMrm8XbmJVQU5G0XIuUYCgrkq2YRniOtYCZW5BanbeZscgGrZ2No/mNqSCmUzzEiq
- FzVU3o1i/LflsvVPNHKcWSj7Sdhk6/EnfCuGRf9mCysmswNuHALvi2yCFhmmdXeuyAaW
- 2VpA==
+ bh=7Qn2YpoPFgXSQBR+RTehkqViNZpwjN41bSwjPkcbo9U=;
+ b=IvBawPhj6fWFUpSXH5V5Ip0trp394yebojer6fLmfCUoIElqJrw78yzoTSBiFDSLcY
+ VXlLS6xiCVO5Q5VpO5xOvB+JPfPJcxR95HotmGvUOgc4qJ+vjCU6NSe5vKVtFVWGN7An
+ EI++E0FPOGD0TLCqMr5ez20fr1jAXlkoKTmuLzUBUiK6RpZwsHVDDoyjXWgmjBHnOEIr
+ +vVDlq+ig7zMa5fwwRAhg4mQAMmeF8mExpG4V7FNSv/qdkn7cuR6J3KsTIEBtiSePQgn
+ j+gAyjSrY/hEKVvDraiQ3ICdbTp//65VuaVkfLbBXpBzb4WTnxUScDn37Xm/gMg8WYhn
+ p8wA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778064559; x=1778669359;
+ d=1e100.net; s=20251104; t=1778064807; x=1778669607;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=kX4JTa/WzmJFD4bBfqq8b7xF6GkUeJRZjgAbIx2V7No=;
- b=I7gtE/kYJHyiMxFzblMevNHb26aTdoB3gq8tdU/VNXNVyjfOrIrODmNwL2iPOifcMY
- /HM4Uqwws9/30QJgoLS4GPCNaPhbGJ3L4hnwtKULqeEbpeFN+bdxV/uyQ1iRjMMOb4au
- saAbnxpG4M/LHlrg4usDBLg5QXTai6c2AlX1DyTKDAcbmBdB3is71JwTmk4jTRQDRp64
- n6IXvhHjQtm2a4wcJH6Gs5Vvohf+6zgvLm5poQiMZV2D4B2nTiexHUvTsVtMN3eLCzAc
- AYVl1jwi6/Z8GhFf0wrVHtTJeHJ37YvQwSbGEE2nD5rz1COJvGvtY1JhfoXCGMixOHP3
- YoYQ==
+ bh=7Qn2YpoPFgXSQBR+RTehkqViNZpwjN41bSwjPkcbo9U=;
+ b=DbTs4S0zpTEhkA2zM04hlwwW5qN79NjGECUwcTL+Sp5fp4hvYMmAi0gOVpKD+sPijc
+ np15xi87M+Ku8kjuL6YiX2Laik56qtfX1zNw2uaIJzA+V6qbZbZmVULUa7jX+vJ46TT1
+ ltBKz8RJLSvynvlOAsSk1lVNk+Wr608qUr7UdmUO7W1HG6EEiF4RGTlGKBK+FoupAX5H
+ nh69R0ARGVpeALVVQj0TskYDANdMWuUANPBvQaiGj97UT2MhFFFTxhfDsscKUsveyhUz
+ jPNNaSZHpxhG9b+Rf2J7CrDFEFxyvsPG8chMXS6OXD+oD4Wgys4ycYGnSofp+75CeSmL
+ D92g==
 X-Forwarded-Encrypted: i=1;
- AFNElJ82+78vgiaQJogwQhGwFDR+i8g3Yd7C12/pvH+TrpoWtCUVCAvnfDo8QkChnuwAQHoen2jP950=@lists.denx.de
-X-Gm-Message-State: AOJu0Ywbszupmsm7WKyHuG9A+A/ny6rUrETIHMQ2YMBxvVV6pR3o5OgS
- gX6WJpBxZrtd4wn2jOhxgw//ZYitHz1QwDmMbusxP8gRbHnjznaRyZKaymBDDWbVsWDttX3Umcw
- iPHTRSEpLT6hMF9cp6lXmsgXv9pJQbeQ=
-X-Gm-Gg: AeBDietdje2CBovvHLBhzAIXYLbsjAlJ5Pe7E+DsmrpHNlUbIPUEMdWqvFUwz1VoXw1
- tCoWCsnKtxevgRBqy4m0sKUEdVPD14tZ70V+NmF+3hjC3xY/xhl3TOaIxiWLRPAa4y2cc6nUXo7
- GgM5BYcD9aNST2t/BXKVZ1gcRUee2irNlNww5+EGWR1MRMP3yIIxkM3JpfcdcvMtSTHgcONxbjE
- y9dX1AjZtMCdylNTS651GVRXrvNjWhuJ96eHg9nPPm9yuQVx7mDMc7CRd50QMCE1xUzSZNeYgAj
- Yyn8zOGGai04rC9z2nihyupMahUCY+hv7paSomyO2CZNmdj2jQOru5HYP8c5UWF3BM+VafdSRcX
- +K33sjlnZbhJsGtWZJZpYUASeyG2zD/Xor2X1dh6HqI/zseaofkYVLFpJEc6F92YPwV1RsUDsQK
- ozuixQWI3DWUA=
-X-Received: by 2002:a05:6402:a60f:b0:67b:4aab:247e with SMTP id
- 4fb4d7f45d1cf-67d642c0997mr905301a12.16.1778064559294; Wed, 06 May 2026
- 03:49:19 -0700 (PDT)
+ AFNElJ8dVT9auiWQYH+CmV0vQXR16XeBhIjLa6E//UTxFx7lfkqi4/wUgyuNW0u0PQfR13fP6MsXOuU=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy2lZ31hOBWAizhZeLz3GYeRraluq6oHSZcsxVjU7ZL7iGTkQFF
+ BiW+Ap7YL0WU6aUIHo+y5rZQFityyfAP7ZI2NZKQARtz6FTbLNlUUrU+AwY3oarvIE0fPB0nOoa
+ U4mvbP+wRJ8yaDrBEWt1OohrO5tc7ozg=
+X-Gm-Gg: AeBDievOVYhKydLt27cfTzQKd2bVHL9obae5TcLNpHmfLcUKfzGRb2wXCLFb39S8BMU
+ btFTXKbffUo2gFPvysbQVlZ76oJq3q6gDwVilY0bW4jmC468D7WL0JaozEGzGuIsM9thzC3McCu
+ HXkiN/yAnd/RX9GB5ph1z3zeyhdbFwRCT/pkS73MsFjeHoBGnT4OHnOIck31LMCji7K7RieKt8t
+ KYFbne9rDOTxDCEeC2BIRyIXe/YmhB7nIrfKiiBRaFytAM2BcPqB+n8C/5c2oxAAVkGtUiJMvOx
+ wAJd46MHbzjRowPvaxUXKzoi22NlGUFN4RxJPifZswmd9LheYKne/W+XQjhRKdBhkv0imWlIlp9
+ 7wz0N6mF5tmSfYpj3r+YRCusz/ohdGWMWFdPk47gNPX22FznRzPwAx6en40r9jMeMh5Av5CJg/w
+ p5xywCIDJL/24=
+X-Received: by 2002:a05:6402:1cc7:b0:67c:64c0:b43c with SMTP id
+ 4fb4d7f45d1cf-67d642be9cemr1080733a12.16.1778064806567; Wed, 06 May 2026
+ 03:53:26 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260428162319.99B4268B05@verein.lst.de>
- <20260428163929.3501268D0D@verein.lst.de>
-In-Reply-To: <20260428163929.3501268D0D@verein.lst.de>
+ <20260428163932.5540868D0F@verein.lst.de>
+In-Reply-To: <20260428163932.5540868D0F@verein.lst.de>
 From: Peter Robinson <pbrobinson@gmail.com>
-Date: Wed, 6 May 2026 11:49:07 +0100
-X-Gm-Features: AVHnY4Jntsh0kxo_lfBrCTAyn-kjlNw5NOAZboafgn4AGJDk2ITjiIdUx6CKYbU
-Message-ID: <CALeDE9OtPmdEHY--QuOPY=xzUzMypqrXvGr9VRQDfByxG2kELw@mail.gmail.com>
-Subject: Re: [PATCH v2 4/9] pci: brcmstb: Add RPi5 reset facilities
+Date: Wed, 6 May 2026 11:53:15 +0100
+X-Gm-Features: AVHnY4JYSmYEdznfkXQPLRoeeSYyw7_C9SL8wZJaa8F7Nl96YdaH2xuNcvxvnjg
+Message-ID: <CALeDE9PHVnWug=PfASSXeoccF=hzZ5x=OFYeK9x62mooJnMMpw@mail.gmail.com>
+Subject: Re: [PATCH v2 5/9] pci: brcmstb: Add RPi5 rescal reset facilities
 To: Torsten Duwe <duwe@lst.de>
 Cc: Matthias Brugger <mbrugger@suse.com>, Tom Rini <trini@konsulko.com>, 
  =?UTF-8?B?SmFuIMSMZXJtw6Fr?= <sairon@sairon.cz>, 
@@ -131,52 +131,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> A driver for Broadcom reset controllers ported from
-> linux/drivers/reset/reset-brcmstb.c to U-Boot.
-
-The subject for this is wrong, it's a new reset driver, not part of
-the pcie subsystem.
-
+On Tue, 28 Apr 2026 at 17:39, Torsten Duwe <duwe@lst.de> wrote:
+>
+> From: Torsten Duwe <duwe@suse.de>
+>
+> A driver for Broadcom rescal reset controllers ported from
+> linux/drivers/reset/reset-brcmstb-rescal.c to U-Boot.
+>
 > Signed-off-by: Torsten Duwe <duwe@suse.de>
 > Co-authored-by: Oleksii Moisieiev <oleksii_moisieiev@epam.com>
 > Tested-by: Pedro Falcato <pfalcato@suse.de>
->
+
+Wrong subject.
+
 > ---
->  configs/rpi_arm64_defconfig   |  1 +
->  drivers/reset/Kconfig         |  7 +++
->  drivers/reset/Makefile        |  1 +
->  drivers/reset/reset-brcmstb.c | 97 +++++++++++++++++++++++++++++++++++
->  4 files changed, 106 insertions(+)
->  create mode 100644 drivers/reset/reset-brcmstb.c
+>  configs/rpi_arm64_defconfig          |   1 +
+>  drivers/reset/Kconfig                |   7 ++
+>  drivers/reset/Makefile               |   1 +
+>  drivers/reset/reset-brcmstb-rescal.c | 103 +++++++++++++++++++++++++++
+>  4 files changed, 112 insertions(+)
+>  create mode 100644 drivers/reset/reset-brcmstb-rescal.c
 >
 > diff --git a/configs/rpi_arm64_defconfig b/configs/rpi_arm64_defconfig
-> index 69e8e72c5d7..153d7ed301e 100644
+> index 153d7ed301e..38af5029403 100644
 > --- a/configs/rpi_arm64_defconfig
 > +++ b/configs/rpi_arm64_defconfig
-> @@ -44,6 +44,7 @@ CONFIG_BCMGENET=y
->  CONFIG_PCI_BRCMSTB=y
+> @@ -45,6 +45,7 @@ CONFIG_PCI_BRCMSTB=y
 >  CONFIG_PINCTRL=y
 >  # CONFIG_PINCTRL_GENERIC is not set
-> +CONFIG_RESET_BRCMSTB=y
+>  CONFIG_RESET_BRCMSTB=y
+> +CONFIG_RESET_BRCMSTB_RESCAL=y
 >  CONFIG_DM_RNG=y
 >  CONFIG_RNG_IPROC200=y
 >  # CONFIG_REQUIRE_SERIAL_CONSOLE is not set
 > diff --git a/drivers/reset/Kconfig b/drivers/reset/Kconfig
-> index 66911199c8b..e0561df8058 100644
+> index e0561df8058..b4237bf98bf 100644
 > --- a/drivers/reset/Kconfig
 > +++ b/drivers/reset/Kconfig
-> @@ -64,6 +64,13 @@ config RESET_BCM6345
->         help
->           Support reset controller on BCM6345.
+> @@ -71,6 +71,13 @@ config RESET_BRCMSTB
+>           If you wish to use reset resources managed by the Broadcom
+>           Reset Controller, say Y here. Otherwise, say N.
 >
-> +config RESET_BRCMSTB
-> +       bool "Generic Reset controller driver for Broadcom"
+> +config RESET_BRCMSTB_RESCAL
+> +       bool "Generic Rescal Reset controller driver for Broadcom"
 
-Should probably have
-depends on ARCH_BCM283X
+Same comment on the deps as per the other reset driver.
 
 > +       help
-> +         This enables reset controller for Broadcom devices.
+> +         Support rescal reset controller on Broadcom.
 > +         If you wish to use reset resources managed by the Broadcom
 > +         Reset Controller, say Y here. Otherwise, say N.
 > +
@@ -184,119 +186,125 @@ depends on ARCH_BCM283X
 >         bool "Reset controller driver for UniPhier SoCs"
 >         depends on ARCH_UNIPHIER
 > diff --git a/drivers/reset/Makefile b/drivers/reset/Makefile
-> index 088545c6473..ad5fe6b6184 100644
+> index ad5fe6b6184..c369bdb3d6c 100644
 > --- a/drivers/reset/Makefile
 > +++ b/drivers/reset/Makefile
-> @@ -13,6 +13,7 @@ obj-$(CONFIG_RESET_AIROHA) += reset-airoha.o
->  obj-$(CONFIG_RESET_TI_SCI) += reset-ti-sci.o
+> @@ -14,6 +14,7 @@ obj-$(CONFIG_RESET_TI_SCI) += reset-ti-sci.o
 >  obj-$(CONFIG_RESET_HSDK) += reset-hsdk.o
 >  obj-$(CONFIG_RESET_BCM6345) += reset-bcm6345.o
-> +obj-$(CONFIG_RESET_BRCMSTB) += reset-brcmstb.o
+>  obj-$(CONFIG_RESET_BRCMSTB) += reset-brcmstb.o
+> +obj-$(CONFIG_RESET_BRCMSTB_RESCAL) += reset-brcmstb-rescal.o
 >  obj-$(CONFIG_RESET_UNIPHIER) += reset-uniphier.o
 >  obj-$(CONFIG_RESET_AST2500) += reset-ast2500.o
 >  obj-$(CONFIG_RESET_AST2600) += reset-ast2600.o
-> diff --git a/drivers/reset/reset-brcmstb.c b/drivers/reset/reset-brcmstb.c
+> diff --git a/drivers/reset/reset-brcmstb-rescal.c b/drivers/reset/reset-brcmstb-rescal.c
 > new file mode 100644
-> index 00000000000..7861f7c9baf
+> index 00000000000..fc8fcfa8b3f
 > --- /dev/null
-> +++ b/drivers/reset/reset-brcmstb.c
-> @@ -0,0 +1,97 @@
+> +++ b/drivers/reset/reset-brcmstb-rescal.c
+> @@ -0,0 +1,103 @@
 > +// SPDX-License-Identifier: GPL-2.0
 > +/*
 > + * Broadcom STB generic reset controller
 > + *
 > + * Copyright (C) 2024 EPAM Systems
-> + *
 > + * Moved from linux kernel:
-> + * Author: Florian Fainelli <f.fainelli@gmail.com>
-> + * Copyright (C) 2018 Broadcom
+> + * Copyright (C) 2018-2020 Broadcom
 > + */
 > +
 > +#include <asm/io.h>
 > +#include <dm.h>
+> +#include <dm/device_compat.h>
 > +#include <errno.h>
 > +#include <linux/bitops.h>
 > +#include <linux/delay.h>
+> +#include <linux/iopoll.h>
 > +#include <log.h>
 > +#include <malloc.h>
 > +#include <reset-uclass.h>
 > +
-> +struct brcmstb_reset {
+> +#define BRCM_RESCAL_START 0x0
+> +#define BRCM_RESCAL_START_BIT BIT(0)
+> +#define BRCM_RESCAL_CTRL 0x4
+> +#define BRCM_RESCAL_STATUS 0x8
+> +#define BRCM_RESCAL_STATUS_BIT BIT(0)
+> +
+> +struct brcm_rescal_reset {
 > +       void __iomem *base;
 > +};
 > +
-> +#define SW_INIT_SET 0x00
-> +#define SW_INIT_CLEAR 0x04
-> +#define SW_INIT_STATUS 0x08
-> +
-> +#define SW_INIT_BIT(id) BIT((id) & 0x1f)
-> +#define SW_INIT_BANK(id) ((id) >> 5)
-> +
-> +#define usleep_range(a, b) udelay((b))
-> +
-> +/* A full bank contains extra registers that we are not utilizing but still
-> + * qualify as a single bank.
-> + */
-> +#define SW_INIT_BANK_SIZE 0x18
-> +
-> +static int brcmstb_reset_assert(struct reset_ctl *rst)
+> +/* Also doubles a deassert */
+> +static int brcm_rescal_reset_set(struct reset_ctl *rst)
 > +{
-> +       unsigned int off = SW_INIT_BANK(rst->id) * SW_INIT_BANK_SIZE;
-> +       struct brcmstb_reset *priv = dev_get_priv(rst->dev);
+> +       struct brcm_rescal_reset *data = dev_get_priv(rst->dev);
+> +       void __iomem *base = data->base;
+> +       u32 reg;
+> +       int ret;
 > +
-> +       writel_relaxed(SW_INIT_BIT(rst->id), priv->base + off + SW_INIT_SET);
+> +       reg = readl(base + BRCM_RESCAL_START);
+> +       writel(reg | BRCM_RESCAL_START_BIT, base + BRCM_RESCAL_START);
+> +       reg = readl(base + BRCM_RESCAL_START);
+> +       if (!(reg & BRCM_RESCAL_START_BIT)) {
+> +               dev_err(rst->dev, "failed to start SATA/PCIe rescal\n");
+> +               return -EIO;
+> +       }
+> +
+> +       ret = readl_poll_timeout(base + BRCM_RESCAL_STATUS, reg,
+> +                                (reg & BRCM_RESCAL_STATUS_BIT), 100);
+> +       if (ret) {
+> +               dev_err(rst->dev, "time out on SATA/PCIe rescal\n");
+> +               return ret;
+> +       }
+> +
+> +       reg = readl(base + BRCM_RESCAL_START);
+> +       writel(reg & ~BRCM_RESCAL_START_BIT, base + BRCM_RESCAL_START);
+> +
+> +       dev_dbg(rst->dev, "SATA/PCIe rescal success\n");
 > +       return 0;
 > +}
 > +
-> +static int brcmstb_reset_deassert(struct reset_ctl *rst)
+> +/* A dummy function - deassert/reset does all the work */
+> +static int brcm_rescal_reset_assert(struct reset_ctl *rst)
 > +{
-> +       unsigned int off = SW_INIT_BANK(rst->id) * SW_INIT_BANK_SIZE;
-> +       struct brcmstb_reset *priv = dev_get_priv(rst->dev);
-> +
-> +       writel_relaxed(SW_INIT_BIT(rst->id), priv->base + off + SW_INIT_CLEAR);
-> +       /* Maximum reset delay after de-asserting a line and seeing block
-> +        * operation is typically 14us for the worst case, build some slack
-> +        * here.
-> +        */
-> +       usleep_range(100, 200);
 > +       return 0;
 > +}
 > +
-> +static int brcmstb_reset_status(struct reset_ctl *rst)
+> +static int brcm_rescal_reset_xlate(struct reset_ctl *reset_ctl,
+> +                                  struct ofnode_phandle_args *args)
 > +{
-> +       unsigned int off = SW_INIT_BANK(rst->id) * SW_INIT_BANK_SIZE;
-> +       struct brcmstb_reset *priv = dev_get_priv(rst->dev);
-> +
-> +       return readl_relaxed(priv->base + off + SW_INIT_STATUS) &
-> +                       SW_INIT_BIT(rst->id);
+> +       /* This is needed if #reset-cells == 0. */
+> +       return 0;
 > +}
 > +
-> +struct reset_ops brcmstb_reset_reset_ops = {
-> +       .rst_assert = brcmstb_reset_assert,
-> +       .rst_deassert = brcmstb_reset_deassert,
-> +       .rst_status = brcmstb_reset_status};
+> +static const struct reset_ops brcm_rescal_reset_ops = {
+> +       .rst_deassert = brcm_rescal_reset_set,
+> +       .rst_assert = brcm_rescal_reset_assert,
+> +       .of_xlate = brcm_rescal_reset_xlate,
+> +};
 > +
-> +static int brcmstb_reset_probe(struct udevice *dev)
+> +static int brcm_rescal_reset_probe(struct udevice *dev)
 > +{
-> +       struct brcmstb_reset *priv = dev_get_priv(dev);
+> +       struct brcm_rescal_reset *data = dev_get_priv(dev);
 > +
-> +       priv->base = dev_remap_addr(dev);
-> +       if (!priv->base)
+> +       data->base = dev_remap_addr(dev);
+> +       if (!data->base)
 > +               return -EINVAL;
 > +
 > +       return 0;
 > +}
 > +
-> +static const struct udevice_id brcmstb_reset_ids[] = {
-> +       {.compatible = "brcm,brcmstb-reset"}, {/* sentinel */}};
+> +static const struct udevice_id brcm_rescal_reset_of_match[] = {
+> +       {.compatible = "brcm,bcm7216-pcie-sata-rescal"},
+> +       {},
+> +};
 > +
-> +U_BOOT_DRIVER(brcmstb_reset) = {
-> +       .name = "brcmstb-reset",
+> +U_BOOT_DRIVER(brcmstb_reset_rescal) = {
+> +       .name = "brcmstb-reset-rescal",
 > +       .id = UCLASS_RESET,
-> +       .of_match = brcmstb_reset_ids,
-> +       .ops = &brcmstb_reset_reset_ops,
-> +       .probe = brcmstb_reset_probe,
-> +       .priv_auto = sizeof(struct brcmstb_reset),
+> +       .of_match = brcm_rescal_reset_of_match,
+> +       .ops = &brcm_rescal_reset_ops,
+> +       .probe = brcm_rescal_reset_probe,
+> +       .priv_auto = sizeof(struct brcm_rescal_reset),
 > +};
 > --
 > 2.54.0
