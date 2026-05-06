@@ -4,99 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87253CD342C
-	for <u-boot@archiver.kernel.org>; Wed,  6 May 2026 08:16:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E645CD342C
+	for <u-boot@archiver.kernel.org>; Wed,  6 May 2026 08:51:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E7FB98483F;
-	Wed,  6 May 2026 10:16:02 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 85AD58484F;
+	Wed,  6 May 2026 10:51:52 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="fVgOzJsI";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="CgexIIw9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 52A9C846F4; Wed,  6 May 2026 10:16:01 +0200 (CEST)
-Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
- [IPv6:2a00:1450:4864:20::32c])
+ id 5D03A8484F; Wed,  6 May 2026 10:51:51 +0200 (CEST)
+Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
+ [IPv6:2a00:1450:4864:20::330])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 161BD846F4
- for <u-boot@lists.denx.de>; Wed,  6 May 2026 10:15:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7466C8483F
+ for <u-boot@lists.denx.de>; Wed,  6 May 2026 10:51:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-48e56c1bf5dso519475e9.3
- for <u-boot@lists.denx.de>; Wed, 06 May 2026 01:15:57 -0700 (PDT)
+ spf=pass smtp.mailfrom=ernestvanhoecke@gmail.com
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-488d2079582so63913445e9.2
+ for <u-boot@lists.denx.de>; Wed, 06 May 2026 01:51:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1778055357; x=1778660157; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=VmLaG4x+55AhXrMp9EhEFgpDjUykPyEdExoAX3OHqUk=;
- b=fVgOzJsIxGKSQNqRorxz7OcZ8/0lNFqWpYXHPUMsehmt+ItyR40Jft6THDcPsRQhYA
- 3xHXomQgamjOSANZwt/clu7YyVGfh5SvHOwjAM+DPKyB21D14QxAI22SKPzjwS19oz61
- BHeqjxD6r0ViNo1nYaD6RUo3Ga179AuQKK7LxtIbnUHjivnUd54hlO3qicRSWoCa8VUe
- KcKhuR9UiSCeS09LFgbRrkWkxrMEwIYhvftko97mSUSgRLkp+qZora46qwdFK37ADNaG
- YYknrWVygwW7v1mYq2/5kDesE+ZII3XyxQqwiXYiUsGuEQTbQwgnjQArvpFPQ2hLdoGd
- q6BQ==
+ d=gmail.com; s=20251104; t=1778057509; x=1778662309; darn=lists.denx.de;
+ h=in-reply-to:content-transfer-encoding:content-disposition
+ :mime-version:references:message-id:subject:cc:to:from:date:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=f2dB2qLeOiXn8MrlWjrALgYji0hvn02fy+4dfhqgr10=;
+ b=CgexIIw9ibhPDO50oHc+l8kz2pOo+t6EvPEnDqyup5ZnxoCZLvpgqFoWoqclxeM8XV
+ qB1EXd846do+vbaMD3C8H2f/Zhf5+ww2LM0m/hZUIU1oNHOULnz3OVg0J7hcO4o5DBq8
+ RDmFOPg/aj6NP74nkLwlzfqTvYGyv0m0Qwz79LwWkPMIi1tO4GdbH/Sal987gAH1TPSt
+ dqTfiwMbdA0MAlciY6QGZYOXhFv0fKsasc5BQlLH76bJE0OHQMNI3ZIXNuF804n+D6Qb
+ 50D/w0wfw8Jc3jzUXenLnwuyqUz9FMaCJ5muXf+egrPa28jluRZ5BbnsCJlGwPb7bbiP
+ 86jQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778055357; x=1778660157;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=VmLaG4x+55AhXrMp9EhEFgpDjUykPyEdExoAX3OHqUk=;
- b=VychhwGt5PUyyukDq/6TEOmeFOt+kYWxynJNBSVl7dVa2stVhIstmZkgB4bDlHkrxe
- bTagehlkQF/BZcdT4j5+41oZmTuhLcITbtXaGtQ3skWymR0+2ApgfkGz7x9q7IcU+i0L
- aXyBIOUhRDNjFEyGkUDtrHr55AShS6vw+JexnUgOfH7G9fqmnDG7psjG6969pmj3iFX9
- dy37dDcMuwzWMmnvsooSY3VjGIej7kjdxi3ZRH9eVXSvKTF6iMea3MgvtrWHBqlL3Y5H
- b1rnbOXm9jQ55dnPj8+oJcPdfpAhmABiVF//C1vsZjVPgKQaOkWnR+O9UbiY3wXY9sAh
- PTmQ==
-X-Gm-Message-State: AOJu0YwjIELE0gpnXj3FA3J0UbdVA9+oiz3L+4I+9TraVXVC4Eq8r7TR
- d4RvmvaCx3wmENsSSRk1gcYuEWs8JXHnZPWxlK/HExEPeLpjrCsHv1I6XLDb0lX12+Q=
-X-Gm-Gg: AeBDieuAscsnYcLFnvHfuZ4y4ObZr5V1VUjcEAq2snuAtzjl7gixOeuqZ0B7vhFddHV
- bDq6MKuxOxfN8dsGzjxqL+FFjwrk+Ljp44uM/YD/TSjY1bJxLSW92DsTRbDDQZcDZu3nMancvGf
- XS+pdhohQBXpi18FTl/rbxRcQ1FtpfMYNifnA2mcVyigZg8uEjI41PDVfSlO9Fgd+H/BpxlQ7bN
- 3ytux/S0D4ZshnaVwRRCWD9vtJvI/mEDRlJnjS/dfeil/1NiOpRL10KzFIG1tDJn6V9nnKpvoaF
- Lzm3KVpk0SXN2AwtCMBhbRgOcdKJea9QO1DYS5jDqgoRmcYNO5Nc8boMmQGv6HFDvfQ0WVm7gIK
- jGTS6Ye2fhDGEF26FF0kZdomY3Kh7d7q2/mWAOmHAhcaCQdcWwa3aJyomL2ovg5M405WiZry/yB
- vNE5eEDYcUG1g6PNP2VBVwtQQWt7VmIbd276PIz/fuRNTwgUMgQCKHwmPEY1/uugHTN4KpFc18V
- RUR
-X-Received: by 2002:a05:600d:8451:b0:487:219e:42d with SMTP id
- 5b1f17b1804b1-48e53f33f08mr13817845e9.11.1778055357251; 
- Wed, 06 May 2026 01:15:57 -0700 (PDT)
-Received: from [192.168.1.36] (p4fc3dd86.dip0.t-ipconnect.de. [79.195.221.134])
+ d=1e100.net; s=20251104; t=1778057509; x=1778662309;
+ h=in-reply-to:content-transfer-encoding:content-disposition
+ :mime-version:references:message-id:subject:cc:to:from:date:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=f2dB2qLeOiXn8MrlWjrALgYji0hvn02fy+4dfhqgr10=;
+ b=Wj+w059PTdLQLwF7oDay+vE5vU3LhOxmb8CsqYN4PLUHHl8ER8dWhjz63SKO/YMbpR
+ Q4KjpLW4cQ3BQ1g8gcuKrSnyqKckjUTH1GiP5e8MPegLdWMF6/fK1U3p0qcCim05UtNm
+ 38ZyyMlMrQzLmDVNOuDEMUXJcqBO393eODSEu4YzEW1VTwMVvpCBu/Dg/O7DnPJ1E4Oj
+ NKv/jWolSzgw0qlxW+5aIUnOcgxxvaXX8B/6BBDDVectqZiRtGa39hwFbCMw04UnC+J9
+ gjL584WQf5WR93e28VqgQJC1sgWlip30n5j3jGmKvkoOm4DMue0ly4DZNapTIv6kPFjb
+ RRpA==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ8cS0blYGBc8YrwuoUmTQRgYIKJY1VoSl702dhhXTUBfMseccc1siK5+clXJ95hMotcHx3sBRk=@lists.denx.de
+X-Gm-Message-State: AOJu0YxlZjHQD4UhR2TvXRtZvR/rP/6qprnj3XGORwj7A+yhofkCi1cp
+ ygzWaQ62pfJSW3//FDW18CUptlhlApDc33NNNlb4wBPOKNNes2xylQA8
+X-Gm-Gg: AeBDietIi99BceglisIcGMQI+LuolZ3NvHZwSsYqEFsOXEpSM2fQ7+Vf5qenuDmTnuQ
+ AKOlJvx/5Lb6gz+v4Y1reKjidOoJAmFSMGvQxbW3WgrAc8EwaDV1lDsQisegQOggIOi7brr2EfV
+ w8Dy4CxLAPWsEvDJP89kiWCxMI0cFgDFhBxf9FW8To63jwi2TVxXHdYIGQnNxaB4ENj2AC1OmQi
+ 9NyhuB1anP7nnfZcyuYbRRVNJOsbo50f5aZ8r437e/WB3nYaSfMPslQ9GlP/xUsLPLlqS8Kos7A
+ sdmhh6NK2ifDgv95cI9K3RYSoy4N81avR6mkoxNIRrk4VFgq3XMclZYm6neQvGul5Cl09ZoTSIp
+ tyuQZMn3PauiizM0NMW6OHkRJD7lR/vJNyhk7sm/qwNDA6lglRYU6Hxx+2ufpVNh6msGKqYi2VI
+ YgvVRvKTYbXzqlxRdWZqAWx7JvcDlEPSBtKgJ+zydLpiUCq4kp+VypxSWwk1lF/B0jR8uZKP0Db
+ 6H7eTkjx8ijexuHpLHmRw3Soe8rvbPHMhwabA==
+X-Received: by 2002:a05:600c:4512:b0:489:284:44ab with SMTP id
+ 5b1f17b1804b1-48e51e1deedmr41368475e9.12.1778057508580; 
+ Wed, 06 May 2026 01:51:48 -0700 (PDT)
+Received: from ernest.hoecke-nb
+ (248.201.173.83.static.wline.lns.sme.cust.swisscom.ch. [83.173.201.248])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-48e538aca14sm28412215e9.7.2026.05.06.01.15.55
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 06 May 2026 01:15:56 -0700 (PDT)
-Message-ID: <edb7a015-6da1-4f29-8d4c-5008c40d5277@linaro.org>
-Date: Wed, 6 May 2026 10:15:55 +0200
+ 5b1f17b1804b1-48e530c5dfcsm11658025e9.14.2026.05.06.01.51.47
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 06 May 2026 01:51:48 -0700 (PDT)
+Date: Wed, 6 May 2026 10:51:46 +0200
+From: Ernest Van Hoecke <ernestvanhoecke@gmail.com>
+To: Sparsh Kumar <sparsh-kumar@ti.com>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de, vigneshr@ti.com, 
+ praneeth@ti.com, bb@ti.com, afd@ti.com, n-francis@ti.com, vishalm@ti.com, 
+ sebin.francis@ti.com, d-gole@ti.com, a-kaur@ti.com
+Subject: Re: [EXTERNAL] Re: [PATCH V2 0/9] board: k3: Sync rm-cfg with TIFS
+ v11.02.09 firmware
+Message-ID: <avxsp5t6p5vchnarqtmla4rm3y2otv2zazjx52nzgshpwsy4u5@zzoo74zbwuuh>
+References: <20260225132425.3096103-1-sparsh-kumar@ti.com>
+ <20260225151047.GJ1593142@bill-the-cat>
+ <e6d88daa-c00c-418b-a8df-3714c7254002@ti.com>
+ <vjlrb25moymvlg6tfofolyc4ybgfju3yglefe5olcjk2qphz2l@5d6e4knya7re>
+ <51d0ceea-f139-4ed4-b245-0eb31a246d90@ti.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v6 1/6] config.mk: support vendor generic includes
-Content-Language: en-US
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>,
- u-boot-qcom@groups.io, Neil Armstrong <neil.armstrong@linaro.org>,
- Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
- Varadarajan Narayanan <quic_varada@quicinc.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Peng Fan <peng.fan@nxp.com>,
- Jaehoon Chung <jh80.chung@samsung.com>,
- Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Michal Simek <michal.simek@amd.com>, David Lechner <dlechner@baylibre.com>
-References: <20260505-b4-qcom-tooling-improvements-v6-0-a5fb673f4af6@linaro.org>
- <20260505-b4-qcom-tooling-improvements-v6-1-a5fb673f4af6@linaro.org>
- <20260505163206.GS1614990@bill-the-cat>
-From: Casey Connolly <casey.connolly@linaro.org>
-In-Reply-To: <20260505163206.GS1614990@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <51d0ceea-f139-4ed4-b245-0eb31a246d90@ti.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -113,62 +109,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
-
-On 05/05/2026 18:32, Tom Rini wrote:
-> On Tue, May 05, 2026 at 05:48:41PM +0200, Casey Connolly wrote:
+On Wed, May 06, 2026 at 12:58:10PM +0530, Sparsh Kumar wrote:
+> Hi Ernest,
 > 
->> Currently only board/vendor/$(BOARD)/config.mk is supported, add the
->> additional usecase of having a vendor generic config.mk which will be
->> used to add a Qualcomm specific make target.
->>
->> Additionally, fix the ifdef to correctly check for $(BOARDDIR) rather
->> than $(BOARD) since that's what is actually used in the fragment path.
->>
->> Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
->> ---
->>  config.mk | 6 +++++-
->>  1 file changed, 5 insertions(+), 1 deletion(-)
+> Apologies for the delayed response.
 > 
-> A common pattern is to have board/VENDOR/common and I think qualcomm
-> would benefit from that, and it would make this easier to use elsewhere.
-
-ahh that would make sense
-
+> The M4 core that runs TIFS has far less memory available (176KB) than the
+> WKUP/DM R5 core. To keep the memory footprint as small as possible we trim
+> the full RM board configuration down to only the entries that TIFS needs and
+> store the result in `tifs‑rm‑cfg.yaml`.
 > 
->>
->> diff --git a/config.mk b/config.mk
->> index abed9cb65c6f..28a4228b8fa5 100644
->> --- a/config.mk
->> +++ b/config.mk
->> @@ -53,10 +53,14 @@ ENVDIR=${vendor}/env
->>  else
->>  BOARDDIR = $(BOARD)
->>  ENVDIR=${board}/env
->>  endif
->> +else
->> +ifdef VENDOR
->> +BOARDDIR = $(VENDOR)
->>  endif
->> -ifdef	BOARD
->> +endif
->> +ifdef	BOARDDIR
->>  sinclude $(srctree)/board/$(BOARDDIR)/config.mk	# include board specific rules
->>  endif
->>  
->>  ifdef FTRACE
+> A couple of important points:
 > 
-> But BOARDDIR is used in some other places, so might this become a
-> problem overloading it this way? Does this end up working because
-> there's no "board/" code being used on these platforms?
-
-hmm, good point, it works in that case but would break if
-CONFIG_SYS_BOARD was set.
-
-I'll fix this up for the next version.
-
+> 1. Both `rm‑cfg.yaml` and `tifs‑rm‑cfg.yaml` are generated automatically.
+>    We use the K3 Resource Configuration Tool (formerly the K3 Resource
+> Partitioning Tool) to generate the files from the SysConfig file and then
+> copy the generated YAML files into U‑Boot. No manual editing is involved.
 > 
+> 2. By using a smaller board‑config file we free up RAM on the M4, preserving
+> space for future features or extensions.
+> 
+> 3. Secure‑boot relevance - The `tifs‑rm‑cfg.yaml` does not play any direct
+> role in the secure‑boot process; it is simply a streamlined copy of
+> `rm‑cfg.yaml` that contains only the TIFS‑specific resources.
+> 
+> Please let me know if any part of this explanation is unclear or if you need
+> more detail on a specific step. Happy to elaborate!
+> 
+> -- 
+> Best Regards,
+> Sparsh
 
--- 
-// Casey (she/her)
+Hi Sparsh,
+
+Thanks a lot for the extra explanation here, this clears up our
+questions!
+
+Kind regards,
+Ernest
 
