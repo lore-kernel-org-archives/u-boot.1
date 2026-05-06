@@ -4,84 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3D66CD343B
-	for <u-boot@archiver.kernel.org>; Wed,  6 May 2026 14:47:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92F27CD343B
+	for <u-boot@archiver.kernel.org>; Wed,  6 May 2026 14:54:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2EE4D8490D;
-	Wed,  6 May 2026 16:47:36 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C6B438490D;
+	Wed,  6 May 2026 16:54:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="WN9FzMoE";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="iuvswRxX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 137D584915; Wed,  6 May 2026 16:47:35 +0200 (CEST)
-Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
- [IPv6:2a00:1450:4864:20::42d])
+ id 500AE84951; Wed,  6 May 2026 16:54:00 +0200 (CEST)
+Received: from mail-pl1-x62d.google.com (mail-pl1-x62d.google.com
+ [IPv6:2607:f8b0:4864:20::62d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EFE3084903
- for <u-boot@lists.denx.de>; Wed,  6 May 2026 16:47:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3B3D784903
+ for <u-boot@lists.denx.de>; Wed,  6 May 2026 16:53:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=daniel.schwierzeck@gmail.com
-Received: by mail-wr1-x42d.google.com with SMTP id
- ffacd0b85a97d-44a044cb827so4734715f8f.0
- for <u-boot@lists.denx.de>; Wed, 06 May 2026 07:47:32 -0700 (PDT)
+ spf=pass smtp.mailfrom=visitorckw@gmail.com
+Received: by mail-pl1-x62d.google.com with SMTP id
+ d9443c01a7336-2aaed195901so27873255ad.0
+ for <u-boot@lists.denx.de>; Wed, 06 May 2026 07:53:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1778078852; x=1778683652; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=+UDffy0hpw5SJz6RCKITYw7N+TcqiyCpk2SzhPbh+zM=;
- b=WN9FzMoEzrKRjTs+8l7vj7cmsFZU/wmle5GyVnWS1JbuhKLMGx6bo26Ni/Bj1Kn/MG
- cLtfOUVHtJokpNMzsg08aLN3NEaL+kT/pfLXb3Qn2yeHJOVgZvbj4Eu7RhF3CNtsfCXO
- e1pswFYJDzYu3BlEy3gI1eERXzzuMdVGeyxN34ctsSRyguQEKvGAVECfS6DzDzrJCUa9
- /m6dkFfScrXBW+TAZt26aIZJOIfRq1eiwt/vPSZcbCbY5Ueo+y3M9zu7uuyKVdxPSoSu
- ZsWFGOJlJOgx6MFjvTKb+pD7dXkNxo3SEO3CcDNEANmGG0ljgfYl7wugNpg3iTSroN2A
- DW0g==
+ d=gmail.com; s=20251104; t=1778079237; x=1778684037; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=Ft7hGuJ+w8IaaK1o4gJ1RAdVNeE5cZWJU1wKOntk/pI=;
+ b=iuvswRxXKwkSE7Za0bYWOBzuHNmL+1itjs/cRy57HD4Rrbh2S7gSJEPT8f3I7vtouI
+ wckWRnc0jnDHj43nWuwjodhzHpTRalBr1pN0PtOAiZpCTMTAKOpq4L87l2upD5yq4INs
+ fM51OJyyUW/K8SdAeyHSAweVgbtiTgTGFlHcAvpc9S3SPqbJwW8ObmYGrqSHRozxOHFF
+ wxVjuB7fVCszwcxuXWW+3V0/pDgv+LfQw7yPGxtwRvhAkh2V0RJV7M3pmW0+W1CxBacx
+ DuUH22tKke7soXdgTmw/rwnmpRNCKw4hP/4SL5oc93oSGYK+3hueLFpDoLzrhVUHA4P1
+ 12jg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778078852; x=1778683652;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=+UDffy0hpw5SJz6RCKITYw7N+TcqiyCpk2SzhPbh+zM=;
- b=W5vx++bfz7K7Qs0EDSyLV1vLIxbpSu4r51jZEeYXeQZKe1azhP/P2F2eVUeMmutRB8
- gaZWMueov0dz/0Ck4DbhnuN+OlqTyNjT96w30Gc1BjY+FnTTv03w73MEmmcPa14cQcsZ
- 8HfZvDdHAjYyobkI9SZvA7BfUoUR/2B+2r+mNDlZyX2MxMa/wbcsxHFxTxbRb1l/AsCO
- XVMi5bkmPt0N804WEviVtCJueUqFCQNm0cbQ6p5nifb81VnVxMatA7kIe1TbttT87tB6
- h5ev3KBip8Ddlo/P3DuIZrlPHL8HZO69hPlqX107IyT5eRJw6ger12tQh7ss6/jCf2/o
- mb3A==
-X-Forwarded-Encrypted: i=1;
- AFNElJ+4/jemGmIvp3RLdcA/+X/0fGWE60p6rmTGNvBY25/iYnrAN+20eXgQeE1uX2MqoKymWbUkIVs=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy5amvEZVKfuz9L1pJmfWfHEbquDHq1nIQNcABZWsNqyJPB0ysF
- AfNklODTuq3ZgCBzb1aGiBoszS39SnTnMKGzwnAF/F2xhbWZ8TO4rvhLh3agiw==
-X-Gm-Gg: AeBDieu+BqZOgUbcTOih2X0kjRV7QCDZqN/x2H/f8mqnxjbimP8HnpgGJHuoBzZ9/tR
- /NUJCXEX5YEZqetooRbpFCLcq36Ct/DAOpk3bSoJ/tAEydG/1mt9htQuf/8ypXDsLeukkPGyTmV
- t/uk/O3qT3ONXo7pe+ueVGHDzPejH0W6FO9ynys5/RFz3E+vudBZpnuYXywx8S+GnSmAZGVxLz3
- Jsjshc50/jQstw0f+zrm3EnWL3JerCRGwBQaIsTOgNoN3S8YeOC3EHfb8A8q+roukIlbUybeNAX
- CBLUJ5M2ljzeYiIw4MPIorcfpOKQaPCBY2RnOKTzsruPX1/LwQihzjqppffLc8BWMhDuTfjS+j9
- wpAzqx/WF/lviZfTJurMRm2+gveTluVRfhq0LddqsCj1NMzFOQ7/I7mMSapOBQatNVi+8ZKsMff
- G+m9VPu1T+5TzhmIK0iU1Blcepq1rcO8y+udZRwj4dYvdoEB8uMJ2dztBmz/A1tcRTiQj6YKc3f
- g==
-X-Received: by 2002:a05:6000:2403:b0:43f:e9ee:5610 with SMTP id
- ffacd0b85a97d-4515df65daamr6226919f8f.43.1778078852151; 
- Wed, 06 May 2026 07:47:32 -0700 (PDT)
-Received: from workstation.lan.schwierd.dedyn.io
- ([2001:9e8:9c:7110:7346:e23d:5001:3678])
+ d=1e100.net; s=20251104; t=1778079237; x=1778684037;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=Ft7hGuJ+w8IaaK1o4gJ1RAdVNeE5cZWJU1wKOntk/pI=;
+ b=j3pF0PgZmBBbDgNCya8B2gL7M8/OgwGsPVaHw9ETzR7P0P8iZx+ihKqWFDRzkcudQ9
+ FEYx5vKhjMswcOuV/v84EbxIE+aGl+h17t7m8+LCySZt3+46+Ms9zUJw/ykfaRLbN3FL
+ SIzjVKQhhGXh0p1rQQb9N5h2hO8exQ8Qaf3eBsQGhOui+T81Mxc6oy6QQwidDwKXdVaZ
+ OzwI51EIusDAerEEwDM0GvaTyKQ35ZRVcfCSwmloSgsz6oBQfOsG1FWTlo6kESK9iiF1
+ MjYj/mL1JARKjR/QYh1PeEv6y9+93p6dzM9H2UtDXewXUObdwA/I+AbKYuZy2rI4E/qt
+ GhRw==
+X-Gm-Message-State: AOJu0YyEp54DZz1qrbpZmNzZ5LSNLe2t2XEN3W9h6IaakJhjqef7DsXx
+ rZA/0Xqv/zlQcAqsZCT6WwISXi9tq7EXQBb+qpoMFcFfnUqeeh66Ys/E
+X-Gm-Gg: AeBDievZR+U2lSJiPzJc2HT3x4JcSyN8k1Bq7FccznR05I12chNT5jmwHyXRPTBE+yT
+ j+EQ0mP4MrlYbtciYHjKucE0jbD4hLYaa5YhIRVxOchF+NZ2VxfnsJwICxg9AhUQEhZs7OAmliv
+ /NvJ6zalBF12bR/kQ8RvxpN+/TSpU/PgqcDWKkjkajSslWHvd68qUWj7R5BfgzyJgjm/qVtEAqd
+ tV5mw9bjYdrncqHNGN86jYKl+XQAQM6la+YrcQRXJflI16AqUBkrBGxzNq2RtzgquODq0uGjmsX
+ CJUGQFLn9aJX79evY0qdxSxaWr0ywJQSFwbUUosCfS9J9ERWofW77AhEr8s2zkBVgpZZcvLz36f
+ a0pOp0dT2dumPtOQC+M3U1Twk5n6nYDIxbKqfOBN2V4eyMeSA0p5DYN/wIqXuHa0MzwlH1e6531
+ tBY1KBom1YM6EeXfIXd5OM3e/mD4WnXEKLEoRScfMXaGGYxdOk7lMVNSiQbg==
+X-Received: by 2002:a17:903:17cb:b0:2b9:59ea:7eba with SMTP id
+ d9443c01a7336-2ba78f54626mr35443615ad.13.1778079236521; 
+ Wed, 06 May 2026 07:53:56 -0700 (PDT)
+Received: from google.com ([2402:7500:a16:6bef:75cc:2938:69c9:71bf])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-45054b02c5asm13000314f8f.19.2026.05.06.07.47.31
+ d9443c01a7336-2ba7ca109ddsm27972965ad.68.2026.05.06.07.53.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 06 May 2026 07:47:31 -0700 (PDT)
-From: Daniel Schwierzeck <daniel.schwierzeck@gmail.com>
-To: Tom Rini <trini@konsulko.com>,
-	u-boot@lists.denx.de
-Subject: [PULL] u-boot-mips fixes for v2026.07
-Date: Wed,  6 May 2026 16:47:30 +0200
-Message-ID: <20260506144730.168827-1-daniel.schwierzeck@gmail.com>
-X-Mailer: git-send-email 2.54.0
+ Wed, 06 May 2026 07:53:55 -0700 (PDT)
+Date: Wed, 6 May 2026 22:53:52 +0800
+From: Kuan-Wei Chiu <visitorckw@gmail.com>
+To: Ludwig Nussel <ludwig.nussel@siemens.com>
+Cc: u-boot@lists.denx.de, Bin Meng <bmeng.cn@gmail.com>,
+ Daniel Palmer <daniel@thingy.jp>, Tom Rini <trini@konsulko.com>
+Subject: Re: [PATCH v2] virtio: fix boot device hunting in qemu with virtio
+Message-ID: <aftWAKPOmhTR5vvV@google.com>
+References: <20260504091023.v2.1.d2ced6516d3db067379940b538830e60968dbf6c@changeid>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260504091023.v2.1.d2ced6516d3db067379940b538830e60968dbf6c@changeid>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,28 +97,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+On Mon, May 04, 2026 at 09:10:23AM +0200, Ludwig Nussel wrote:
+> Commit 70101c3217ae ("virtio: mmio: Return error codes on probe
+> failures") returns -ENODEV where it would return 0 before. That path is
+> apparently hit in qemu and breaks boot device discovery
+> (virtio_bootdev_hunt() expects only ENOENT). So return -ENOENT in
+> that path instead.
+> The remaining two error returns in the function are untouched as I
+> don't know where they play a role.
+> 
+> Signed-off-by: Ludwig Nussel <ludwig.nussel@siemens.com>
 
-please pull one bugfix for MIPS, thanks.
+Acked-by: Kuan-Wei Chiu <visitorckw@gmail.com>
 
-The following changes since commit ae8987f4e690f397f507c4b1efabd68b3ed08db6:
+Regards,
+Kuan-Wei
 
-  Merge patch series "binman: Fix preload signing with encrypted FIT" (2026-05-05 10:37:16 -0600)
-
-are available in the Git repository at:
-
-  https://source.denx.de/u-boot/custodians/u-boot-mips.git/ tags/mips-fixes-for-v2026.07
-
-for you to fetch changes up to de79075f0f6b8795d1f9e30ff36435583b1a119a:
-
-  mips: mtmips: align MT7621 image blobs to 8-byte boundary (2026-05-06 16:20:27 +0200)
-
-----------------------------------------------------------------
-- mips: mtmips: align MT7621 image blobs to 8-byte boundary
-
-----------------------------------------------------------------
-Shiji Yang (1):
-      mips: mtmips: align MT7621 image blobs to 8-byte boundary
-
- arch/mips/dts/mt7621-u-boot.dtsi | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+> 
+> ---
+> 
+> Changes in v2:
+>  - return ENOENT in probe()
+> 
+>  drivers/virtio/virtio_mmio.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/drivers/virtio/virtio_mmio.c b/drivers/virtio/virtio_mmio.c
+> index 62afe609ec0..d90d8309f99 100644
+> --- a/drivers/virtio/virtio_mmio.c
+> +++ b/drivers/virtio/virtio_mmio.c
+> @@ -372,7 +372,7 @@ static int virtio_mmio_probe(struct udevice *udev)
+>  		 * virtio-mmio device with an ID 0 is a (dummy) placeholder
+>  		 * with no function. End probing now with no error reported.
+>  		 */
+> -		return -ENODEV;
+> +		return -ENOENT;
+>  	}
+>  	uc_priv->vendor = readl(priv->base + VIRTIO_MMIO_VENDOR_ID);
+>  
+> -- 
+> 2.43.0
+> 
+> base-commit: 4433253ecf2041f9362a763bb6cb79960921ac7e
+> branch: us-virtio2
