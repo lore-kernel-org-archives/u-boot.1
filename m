@@ -4,132 +4,109 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0524CCD343F
-	for <u-boot@archiver.kernel.org>; Thu,  7 May 2026 20:18:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1904ACD343F
+	for <u-boot@archiver.kernel.org>; Thu,  7 May 2026 20:29:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9086384C00;
-	Thu,  7 May 2026 22:18:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=valla.it
+	by phobos.denx.de (Postfix) with ESMTP id 6C55384BB7;
+	Thu,  7 May 2026 22:29:28 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=antispam.mailspamprotection.com header.i=@antispam.mailspamprotection.com header.b="vHWcIM72";
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=valla.it header.i=@valla.it header.b="aGLJeEAU";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="HovdlPCG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6029E84BFD; Thu,  7 May 2026 22:18:47 +0200 (CEST)
-Received: from delivery.antispam.mailspamprotection.com
- (delivery.antispam.mailspamprotection.com [185.56.87.2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id BC33384BBE; Thu,  7 May 2026 22:29:27 +0200 (CEST)
+Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
+ [IPv6:2a00:1450:4864:20::333])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 00B3B84BB7
- for <u-boot@lists.denx.de>; Thu,  7 May 2026 22:18:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5CD1E84B86
+ for <u-boot@lists.denx.de>; Thu,  7 May 2026 22:29:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=valla.it
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=francesco@valla.it
-ARC-Seal: i=1; cv=none; a=rsa-sha256;
- d=outgoing.instance-europe-west4-1q29.prod.antispam.mailspamprotection.com;
- s=arckey; t=1778185125; 
- b=HX5BIv23Y2Rw7+RHOO5r2qeI1lWoztcWMgExhA3GDm9t0Zj3kxE19KDSWjC4t7NRq7yCWichca
- Pp2pmYL++FyJpOlBG3hvz8dvOGDsResUseRnqNCo42kICehTMCDvkrn52sToCgHcqkTqfamzu9
- 4r36EqrilffdXtabz6IrqAW/t7SKtFQe5MJXpyjW+MeQo+or4xQbaFNe/VhXX3Ppeq8+URjBM8
- ECt1NN3VuM9Dbfu3Y3OTQHPzjNtPpZGDuog/zCKHDZ1F0SKiN1KDuwUCghLHbChaIwUMf2g5sf
- WtIjn+7Sn5k5IZk8xIhDbHoT44KHtsFP2dP68K5q7z20zg==;
-ARC-Authentication-Results: i=1;
- outgoing.instance-europe-west4-1q29.prod.antispam.mailspamprotection.com;
- smtp.remote-ip=35.214.173.214; 
- iprev=pass (214.173.214.35.bc.googleusercontent.com)
- smtp.remote-ip=35.214.173.214; 
- auth=pass (LOGIN) smtp.auth=esm19.siteground.biz;
- dkim=pass header.d=valla.it header.s=default header.a=rsa-sha256;
- arc=none
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed;
- d=outgoing.instance-europe-west4-1q29.prod.antispam.mailspamprotection.com;
- s=arckey; t=1778185125; 
- bh=Kw9X7utPTHTcd09pbwGxiM88Y6twkk1GIzV/E9pIRGc=;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To:
- From:Date:DKIM-Signature:DKIM-Signature;
- b=kPCwT7Zk5zXExV5JRaTgUmQPkQbzkZpIr4tSFVxzWJ2yU9E5nxi6oQFOe9yGV/VOgvkphNKrQF
- KcRaU2Oicq8aDsX+QgbsfdEah1RQdF03fX1nmPDBl1yP8BHXYYwKXdkAWSYfeozkKaYqHGVv0J
- 5+1SCJfbE6MRTpEjRmX+OVmVDhnZ19Zt41GDh9gA6jlvXejFk9/mQnWQ0prn+n8DXRryz3ueiA
- THo34H54LaO9J6GKG/WByHCTMCyuUTFbbw+L9wHGBfwQGD60mHedDw7x7pYiuNA3h4ebt043M1
- OscQgC8YLBm594n5hw4i+wpyWbFuVgvWsfpmhAlm5OqXIw==;
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=antispam.mailspamprotection.com; s=default; h=CFBL-Feedback-ID:CFBL-Address
- :Content-Type:MIME-Version:Message-ID:Subject:Cc:To:From:Date:Reply-To:
- List-Unsubscribe:Content-Transfer-Encoding;
- bh=hGqH13jmhAYAJGIKI0+Fg7av42eZhlqRSxuvMlQ0MZA=; b=vHWcIM72RJK9f4EBi25L51z4Ru
- HL7PGDT85Ev5AKKoQoCSkDQ2zCYtxQLNVzHVTivd86f6vtEFuEIhWS6NudVUAkngJTYByxIjVZ868
- 9EfF5SVR0aN4w4m/DXLCmgS8471YI2JAPSnW8vwFCLc8t1KIaCUSgtueiHELtIVWU4xI=;
-Received: from 214.173.214.35.bc.googleusercontent.com ([35.214.173.214]
- helo=esm19.siteground.biz)
- by instance-europe-west4-1q29.prod.antispam.mailspamprotection.com with
- esmtpsa (TLS1.3) tls TLS_AES_256_GCM_SHA384 (Exim 4.99.1)
- (envelope-from <francesco@valla.it>) id 1wL5BC-00000000hEe-0OpO
- for u-boot@lists.denx.de; Thu, 07 May 2026 20:18:44 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=valla.it;
- s=default; h=Subject:Cc:To:From:Date:list-help:list-unsubscribe:
- list-subscribe:list-post:list-owner:list-archive;
- bh=hGqH13jmhAYAJGIKI0+Fg7av42eZhlqRSxuvMlQ0MZA=; b=aGLJeEAUU3r/Nhpmy4wbNGtaBM
- Kn+pTEUvdr55siy3VEdiwzXl60uq/ndNVmdhN2lrGZirSooKak0ZsoTTNBrccced/GhW56Ry137mO
- DXcPxhAUqTTJPCJBVM4uyXAFlp2P/4+9zvUpSLQ397n768OKQSUUIVEP66b0EytKMIHQ=;
-Received: from [79.26.42.213] (port=61660 helo=bywater)
- by esm19.siteground.biz with essmtpa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
- (Exim 4.99.1) (envelope-from <francesco@valla.it>)
- id 1wL5B4-00000000Pem-42nG; Thu, 07 May 2026 20:18:35 +0000
-Date: Thu, 7 May 2026 22:18:32 +0200
-From: Francesco Valla <francesco@valla.it>
-To: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- James Hilliard <james.hilliard1@gmail.com>, 
- Julien Stephan <jstephan@baylibre.com>,
- Frank Wunderlich <frank-w@public-files.de>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Kunihiko Hayashi <hayashi.kunihiko@socionext.com>, 
- Anshul Dalal <anshuld@ti.com>, Leo Yu-Chi Liang <ycliang@andestech.com>, 
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Ronald Wahl <ronald.wahl@legrand.com>, 
- Simon Glass <sjg@chromium.org>, Dhruva Gole <d-gole@ti.com>, 
- Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
- Rasmus Villemoes <ravi@prevas.dk>, 
- Michael Walle <mwalle@kernel.org>, Marek Vasut <marek.vasut@mailbox.org>, 
- Miquel Raynal <miquel.raynal@bootlin.com>,
- Richard Genoud <richard.genoud@bootlin.com>, 
- Wolfgang Wallner <wolfgang.wallner@at.abb.com>,
- David Lechner <dlechner@baylibre.com>
-Subject: Re: [PATCH 3/5] boot: fit: enable FIT image post-processing in SPL
-Message-ID: <afzzakAEtOauxSEw@bywater>
-References: <20260428-spl_fit_full-v1-0-dde63beeaab1@valla.it>
- <20260428-spl_fit_full-v1-3-dde63beeaab1@valla.it>
- <bcef111f-56a8-4935-b234-0e9558cf13e6@cherry.de>
+ spf=pass smtp.mailfrom=casey.connolly@linaro.org
+Received: by mail-wm1-x333.google.com with SMTP id
+ 5b1f17b1804b1-48896199cbaso11444185e9.1
+ for <u-boot@lists.denx.de>; Thu, 07 May 2026 13:29:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1778185765; x=1778790565; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=hnkhrDs2UwBCXkBL1x0h3Zw6PxS6SR6NPGGlWk0QQCM=;
+ b=HovdlPCGSKMgGR/FJuPZ3SibKsUj/69qWw+5nsV7vRifPuMCzXygtdY3X0TXZpzsjF
+ kiZbHwhjQqBNFmswgdKc3VH/G6oLmIzHC3azbP9/jl13OimmTtquH1cPudPxBBLi9b27
+ 3/yv03w7GkW5OE9tpmq5bpu5u4Ldp6rQqETgwe7/98ly+abjv7pikq36GLngRb30O8Iz
+ uUtiPDLWReSkpdscCPoc3sOQG3njO/OfSjqOfDF6Ac3C8vTgCNJX8iC9tkYEsd2royNk
+ YkNZzRzmKeND8nZS9RRfURfDALAM7NrV3+Kvrq+KIK6w1B9hTISB2PU83oibBoPNt8Ut
+ 4/nA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1778185765; x=1778790565;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=hnkhrDs2UwBCXkBL1x0h3Zw6PxS6SR6NPGGlWk0QQCM=;
+ b=XQnDWlpvH6Zb9opwu8rlJwKuD79Wml8uWz1yPyLnhnTLVrEGnfOtYmz3z5Lt6F5cEt
+ NaRwv0EmsyDmkWo2wW+cTWMoIwEQ5olXX3GjfWf4XU2kOLHvuCBG2v0IosmQUVUmsj3d
+ qzZsBxhcy+OOeAQI22FFbCIaugzR0Z+iDMWpkvaki82FPruJxOvXdCR6E8VCm42mr7JA
+ Q8XK5T8x/iyneJvWb++LkxIpycZmqsMEhIhvEJ4CynMcd4U3Nc+8gHFet5z9jqqwaYp2
+ VCyS9MM3SvA5O+xo3CAsTLE61pgCyJ+T9Xz/CgfQ0ps3DdommToQMae7Qx7yiYlGh8XH
+ JxSg==
+X-Gm-Message-State: AOJu0Yxb1F2sOhl/DNkddl3DPTXPzoG9yVCrPZrXUjA5MVcma8rRfjMg
+ +9GriQ1Be9H/xKqBE5XgYDrvY0Z26u9A44vggoAfPBMEk9p57RHXK716zsXw83uiDoE=
+X-Gm-Gg: AeBDiesU5/K2E7Hqtf/pd4HQxBf57YsV2m3ak03Ec4tNais4028AeF5ViNczWbfHy07
+ 0CH8mOs7S6GRNtO0ghx9tga54IVd6v/vcEZ9rpuWy1e0WhL5OktePsPDesP9QNhlkFr++zG9nTG
+ ArvyzMVIZcfrBDA4YSQ/HPYAXnBPdxuChfAHxjuVdJhdKgH0zTLdSHyGb/AQHgwK9palJZSJ9Xj
+ 15Qv37YG5+MpGNgL/bRhDlLbjiHwpxQnB4xHmPtKaWjAXZTAj4NAjpi7Un+P33JZ/hZ67KGBLWf
+ wGRo6C0xILg58dpYRutHE+LihHHAO7N/tA5K4n3C8ODmtjtYdGYmL8zeTF/3ysrxtur5ZKjIjIc
+ raYozY1lmnV5m+PCqPuouDBImvv0Tr2xbbR7XGQna6OsrjPQB2gvtsxUZgRGePnK7qB37mJRrIr
+ aVNDbcb6j0Z9GeMTFHMSFSZmrz6jmf3zk3QaFxGI3XxXFBDh42YHfhx09psXelynblRA==
+X-Received: by 2002:a05:600c:4f0c:b0:488:9fb7:376d with SMTP id
+ 5b1f17b1804b1-48e51f59fc5mr150587655e9.28.1778185764551; 
+ Thu, 07 May 2026 13:29:24 -0700 (PDT)
+Received: from [192.168.1.36] (p4fc3dd86.dip0.t-ipconnect.de. [79.195.221.134])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-48e6428e746sm5696895e9.0.2026.05.07.13.29.22
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 07 May 2026 13:29:24 -0700 (PDT)
+Message-ID: <0bdcc97b-b123-4d3c-b762-86f9bf3ad4a7@linaro.org>
+Date: Thu, 7 May 2026 22:29:22 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <bcef111f-56a8-4935-b234-0e9558cf13e6@cherry.de>
-X-AntiAbuse: This header was added to track abuse,
- please include it with any abuse report
-X-AntiAbuse: Primary Hostname - esm19.siteground.biz
-X-AntiAbuse: Original Domain - lists.denx.de
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - valla.it
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-X-SGantispam-id: 6958e4d2176d7a3d502c719e89fdbc2e
-X-AntiAbuse: ID - 6958e4d2176d7a3d502c719e89fdbc2e
-AntiSpam-DLS: false
-AntiSpam-DLSP: 
-AntiSpam-DLSRS: 
-AntiSpam-TS: 1.0
-CFBL-Address: feedback@antispam.mailspamprotection.com; report=arf
-CFBL-Feedback-ID: 1wL5BC-00000000hEe-0OpO-feedback@antispam.mailspamprotection.com
-Authentication-Results: outgoing.instance-europe-west4-1q29.prod.antispam.mailspamprotection.com; 
- iprev=pass (214.173.214.35.bc.googleusercontent.com)
- smtp.remote-ip=35.214.173.214; 
- auth=pass (LOGIN) smtp.auth=esm19.siteground.biz;
- dkim=pass header.d=valla.it header.s=default header.a=rsa-sha256;
- arc=none
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 05/15] mach-snapdragon: fix reserved memory carveout
+Content-Language: en-US
+To: Sumit Garg <sumit.garg@kernel.org>
+Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io, Tom Rini
+ <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Peng Fan <peng.fan@nxp.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Alice Guo <alice.guo@nxp.com>, Quentin Schulz <quentin.schulz@cherry.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Kuan-Wei Chiu <visitorckw@gmail.com>, Raymond Mao
+ <raymond.mao@riscstar.com>, Stefan Roese <stefan.roese@mailbox.org>,
+ Philip Molloy <philip.molloy@analog.com>,
+ Jerome Forissier <jerome.forissier@arm.com>,
+ Marek Vasut <marek.vasut@mailbox.org>,
+ Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
+ Rasmus Villemoes <ravi@prevas.dk>, Heiko Schocher <hs@nabladev.com>,
+ Michal Simek <michal.simek@amd.com>, Sughosh Ganu <sughosh.ganu@arm.com>,
+ Antony Kurniawan Soemardi <linux@smankusors.com>,
+ Luca Weiss <luca.weiss@fairphone.com>,
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+References: <20260504-b4-modernise-smem-v2-0-c01ec2ff3886@linaro.org>
+ <20260504-b4-modernise-smem-v2-5-c01ec2ff3886@linaro.org>
+ <afnhrel-ik0jOPD1@sumit-xelite>
+ <9870f8f4-a719-4ea5-93b7-5442d499c19f@linaro.org>
+ <afxDHAZD25moYKg8@sumit-xelite>
+From: Casey Connolly <casey.connolly@linaro.org>
+In-Reply-To: <afxDHAZD25moYKg8@sumit-xelite>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -146,44 +123,195 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Quentin
 
-On Thu, May 07, 2026 at 06:17:34PM +0200, Quentin Schulz wrote:
-> Hi Francesco,
-> 
-> On 4/28/26 10:24 PM, Francesco Valla wrote:
-> > Since CONFIG_SPL_FIT_IMAGE_POST_PROCESS is a valid configuration, allow
-> > it to be used when using the "full" FIT loading logic in SPL.
-> > 
-> > Signed-off-by: Francesco Valla <francesco@valla.it>
-> > ---
-> >   boot/image-fit.c | 2 +-
-> >   1 file changed, 1 insertion(+), 1 deletion(-)
-> > 
-> > diff --git a/boot/image-fit.c b/boot/image-fit.c
-> > index f3ddee940dbd..347304956a99 100644
-> > --- a/boot/image-fit.c
-> > +++ b/boot/image-fit.c
-> > @@ -2243,7 +2243,7 @@ int fit_image_load(struct bootm_headers *images, ulong addr,
-> >   	}
-> >   	/* perform any post-processing on the image data */
-> > -	if (!tools_build() && IS_ENABLED(CONFIG_FIT_IMAGE_POST_PROCESS))
-> > +	if (!tools_build() && CONFIG_IS_ENABLED(FIT_IMAGE_POST_PROCESS))
-> 
-> I think this can be reduced to
-> 
-> if (CONFIG_IS_ENABLED(FIT_IMAGE_POST_PROCESS))
-> 
-> as tools_build() is true when building for the host (tools), and
-> CONFIG_IS_ENABLED prepends CONFIG_TOOLS_ when building for the host (tools)
-> and we don't have a TOOLS_FIT_IMAGE_POST_PROCESS.
-> 
 
-Thanks, I'll check and add this to the v2.
+On 07/05/2026 09:45, Sumit Garg wrote:
+> On Tue, May 05, 2026 at 02:39:35PM +0200, Casey Connolly wrote:
+>>
+>>
+>> On 05/05/2026 14:25, Sumit Garg wrote:
+>>> On Mon, May 04, 2026 at 08:57:33PM +0200, Casey Connolly wrote:
+>>>> The memory carveout logic was fairly limited and had a few issues,
+>>>> rework it and teach it not to unmap regions that have a compatible
+>>>> property (since they may be used in U-Boot) or that don't have the
+>>>> no-map property.
+>>>>
+>>>> The carveout process adds ~100ms to the boot time depending on the
+>>>> platform.
+>>>>
+>>>> This prepares us for using SMEM as a source of truth and improving
+>>>> support for U-boot as a first stage bootloader since SMEMs memory map
+>>>> doesn't already carve out some regions like ABL does.
+>>>>
+>>>> Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
+>>>> ---
+>>>>  arch/arm/mach-snapdragon/board.c | 86 +++++++++++++++++++++++++---------------
+>>>>  1 file changed, 53 insertions(+), 33 deletions(-)
+>>>>
+>>>> diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/board.c
+>>>> index 829a0109ac78..e12d3d00caa4 100644
+>>>> --- a/arch/arm/mach-snapdragon/board.c
+>>>> +++ b/arch/arm/mach-snapdragon/board.c
+>>>> @@ -622,27 +622,36 @@ u64 get_page_table_size(void)
+>>>>  {
+>>>>  	return SZ_1M;
+>>>>  }
+>>>>  
+>>>> +struct mem_resource_attrs {
+>>>> +	fdt_addr_t start;
+>>>> +	fdt_addr_t size;
+>>>> +	u64 attrs;
+>>>> +};
+>>>
+>>> Let's move the struct declaration towards the top.
+>>
+>> it's only used by this one function, it felt easier to keep things
+>> readable this way. Probably we'll move this stuff to its own file at
+>> some point.
+>>
+>>>
+>>>> +
+>>>>  static int fdt_cmp_res(const void *v1, const void *v2)
+>>>
+>>> This API should now be renamed as mem_cmp_resources(), no?
+>>
+>> yeah
+>>
+>>>
+>>>>  {
+>>>> -	const struct fdt_resource *res1 = v1, *res2 = v2;
+>>>> +	const struct mem_resource_attrs *res1 = v1, *res2 = v2;
+>>>>  
+>>>>  	return res1->start - res2->start;
+>>>>  }
+>>>>  
+>>>> -#define N_RESERVED_REGIONS 32
+>>>> +#define N_RESERVED_REGIONS 64
+>>>>  
+>>>> -/* Mark all no-map regions as PTE_TYPE_FAULT to prevent speculative access.
+>>>> +/* Map and unmap reserved memory regions as appropriate.
+>>>> + * Mark all no-map regions as PTE_TYPE_FAULT to prevent speculative access.
+>>>>   * On some platforms this is enough to trigger a security violation and trap
+>>>>   * to EL3.
+>>>> + * Regions that may be accessed by drivers get mapped explicitly.
+>>>>   */
+>>>> -static void carve_out_reserved_memory(void)
+>>>> +static void configure_reserved_memory(void)
+>>>>  {
+>>>> -	static struct fdt_resource res[N_RESERVED_REGIONS] = { 0 };
+>>>> +	static struct mem_resource_attrs res[N_RESERVED_REGIONS] = { 0 };
+>>>>  	int parent, rmem, count, i = 0;
+>>>>  	phys_addr_t start;
+>>>>  	size_t size;
+>>>> +	u64 attrs;
+>>>>  
+>>>>  	/* Some reserved nodes must be carved out, as the cache-prefetcher may otherwise
+>>>>  	 * attempt to access them, causing a security exception.
+>>>>  	 */
+>>>> @@ -651,14 +660,19 @@ static void carve_out_reserved_memory(void)
+>>>>  		log_err("No reserved memory regions found\n");
+>>>>  		return;
+>>>>  	}
+>>>>  
+>>>> -	/* Collect the reserved memory regions */
+>>>> +	/* Collect the reserved memory regions and appropriate attrs */
+>>>>  	fdt_for_each_subnode(rmem, gd->fdt_blob, parent) {
+>>>>  		const fdt32_t *ptr;
+>>>> -		int len;
+>>>> +		attrs = PTE_TYPE_FAULT;
+>>>> +		/* If the no-map property isn't set then the region is valid */
+>>>>  		if (!fdt_getprop(gd->fdt_blob, rmem, "no-map", NULL))
+>>>> -			continue;
+>>>> +			attrs = PTE_TYPE_VALID | PTE_BLOCK_MEMTYPE(MT_NORMAL);
+>>>> +		/* If the compatible property is set then this region may be accessed by drivers and should
+>>>> +		 * be marked valid too. */
+>>>> +		if (fdt_getprop(gd->fdt_blob, rmem, "compatible", NULL))
+>>>> +			attrs = PTE_TYPE_VALID | PTE_BLOCK_MEMTYPE(MT_NORMAL);
+>>>>  
+>>>>  		if (i == N_RESERVED_REGIONS) {
+>>>>  			log_err("Too many reserved regions!\n");
+>>>>  			break;
+>>>> @@ -667,50 +681,55 @@ static void carve_out_reserved_memory(void)
+>>>>  		/* Read the address and size out from the reg property. Doing this "properly" with
+>>>>  		 * fdt_get_resource() takes ~70ms on SDM845, but open-coding the happy path here
+>>>>  		 * takes <1ms... Oh the woes of no dcache.
+>>>>  		 */
+>>>> -		ptr = fdt_getprop(gd->fdt_blob, rmem, "reg", &len);
+>>>> +		ptr = fdt_getprop(gd->fdt_blob, rmem, "reg", NULL);
+>>>>  		if (ptr) {
+>>>>  			/* Qualcomm devices use #address/size-cells = <2> but all reserved regions are within
+>>>>  			 * the 32-bit address space. So we can cheat here for speed.
+>>>>  			 */
+>>>>  			res[i].start = fdt32_to_cpu(ptr[1]);
+>>>> -			res[i].end = res[i].start + fdt32_to_cpu(ptr[3]);
+>>>> +			res[i].size = fdt32_to_cpu(ptr[3]);
+>>>> +			res[i].attrs = attrs;
+>>>>  			i++;
+>>>>  		}
+>>>>  	}
+>>>>  
+>>>>  	/* Sort the reserved memory regions by address */
+>>>>  	count = i;
+>>>> -	qsort(res, count, sizeof(struct fdt_resource), fdt_cmp_res);
+>>>> +	qsort(res, count, sizeof(res[0]), fdt_cmp_res);
+>>>> +	debug("Mapping %d regions!\n", count);
+>>>>  
+>>>>  	/* Now set the right attributes for them. Often a lot of the regions are tightly packed together
+>>>> -	 * so we can optimise the number of calls to mmu_change_region_attr() by combining adjacent
+>>>> +	 * so we can optimise the number of calls to mmu_change_region_attr_nobreak() by combining adjacent
+>>>>  	 * regions.
+>>>>  	 */
+>>>> -	start = ALIGN_DOWN(res[0].start, SZ_2M);
+>>>> -	size = ALIGN(res[0].end - start, SZ_2M);
+>>>> +	start = res[0].start;
+>>>> +	size = res[0].size;
+>>>> +	attrs = res[0].attrs;
+>>>> +	/* For each region after the first one, either increase the `size` to eventually be mapped or
+>>>> +	 * map the region we have and start a new one, this allows us to reduce the number of calls to
+>>>> +	 * mmu_map_region(). The loop is therefore "lagging" behind by one iteration. */
+>>>>  	for (i = 1; i <= count; i++) {
+>>>> -		/* We ideally want to 2M align everything for more efficient pagetables, but we must avoid
+>>>> -		 * overwriting reserved memory regions which shouldn't be mapped as FAULT (like those with
+>>>> -		 * compatible properties).
+>>>> -		 * If within 2M of the previous region, bump the size to include this region. Otherwise
+>>>> -		 * start a new region.
+>>>> -		 */
+>>>> -		if (i == count || start + size < res[i].start - SZ_2M) {
+>>>> -			debug("  0x%016llx - 0x%016llx: reserved\n",
+>>>> -			      start, start + size);
+>>>> -			mmu_change_region_attr(start, size, PTE_TYPE_FAULT);
+>>>> -			/* If this is the final region then quit here before we index
+>>>> -			 * out of bounds...
+>>>> -			 */
+>>>> +		/* If i == count we are done, just map the last region. If the last region is
+>>>> +		 * too far away or the attrs don't match then map the meta-region we have and
+>>>> +		 * start a new one. */
+>>>> +		if (i == count || start + size < res[i].start - SZ_8K || attrs != res[i].attrs) {
+>>>
+>>> I suppose this SZ_8K instead of SZ_2M is intentional here? It works now
+>>> due to page table optimization I guess?
+>>
+>> I realised there was a possibility for incorrectly mapping stuff with
+>> 2M. Probably not with the logic as it is but e.g. if you don't
+>> explicitly map reserved regions that need to be mapped then they can get
+>> unmapped here.
+> 
+> I think we rather need to unmap all the no-map regions first via
+> aligning to 2MB block mappings and then map regions required to be
+> mapped with the needed granularity. This way we can optimize the page
+> tables usage.
 
-> Cheers,
-> Quentin
+Just tried this now since both cmd-db and smem explicitly map themselves
+and that brings things down a whole lot. from 200ms to 100ms on sm8650,
+although that's with debug logs enabled heh, with them disabled it's
+30ms and on qcs6490 only 5ms so much more acceptable.
 
-Regards,
-Francesco
+It's realllly not ideal this way but I can't immediately think of any
+significant issues...
+
+> 
+> -Sumit
+
+-- 
+// Casey (she/her)
 
