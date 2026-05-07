@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09565CD3439
-	for <u-boot@archiver.kernel.org>; Thu,  7 May 2026 16:03:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD6CECD3439
+	for <u-boot@archiver.kernel.org>; Thu,  7 May 2026 16:03:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EC32D84AFA;
-	Thu,  7 May 2026 18:03:02 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 72F2984A7B;
+	Thu,  7 May 2026 18:03:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="ig8wkkjF";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="C1s5/MvO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1179B84ADD; Thu,  7 May 2026 18:03:01 +0200 (CEST)
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org
- [IPv6:2001:67c:2050:0:465::103])
+ id 9AFE084B44; Thu,  7 May 2026 18:03:04 +0200 (CEST)
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org
+ [IPv6:2001:67c:2050:0:465::202])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3A64484A75
- for <u-boot@lists.denx.de>; Thu,  7 May 2026 18:02:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7F1CD84A75
+ for <u-boot@lists.denx.de>; Thu,  7 May 2026 18:03:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
@@ -30,41 +30,43 @@ Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4gBH8c1Ntdz9v0h;
- Thu,  7 May 2026 18:02:56 +0200 (CEST)
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4gBH8g3hJ0z9tfD;
+ Thu,  7 May 2026 18:02:59 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1778169776;
+ s=mail20150812; t=1778169779;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=WOm2wYSBItAXJUY8/uFahUV2rFh9AgF217Fky78rwFA=;
- b=ig8wkkjFpCScoYwsEMlrB4KckWx49Lh1/O6aUdY1O9jZjJCEIMCzACBSe65dIcP+muX0Nn
- 8fuGs0a9+REAgIfi/bmynZDMRc3RR+/Po4lNsK4YrNZq3beIdATVrLANir/ZWatGMQgMtN
- LeD3cWm96hpQJSz2MjN+YwBVBhVILWZOhX0TmL3lHxvrdsbEeDFpPqcmE1VElHIKiF1IcG
- NHu7c5u9mPk1TrmKyYOE6jj5Cfx1pOp9AsXULYm4LZooolUe4+jKJv/xl1K7j1v6jxZ1qg
- XLh3uSYZkN2A30tmYZWWesxuXaxhHgOk8yB/UNoyuIV6UpLCN+SDhIQ5Z1q6zw==
-Message-ID: <8957e4ff-ee00-402a-948d-6b4a618aa7df@mailbox.org>
-Date: Thu, 7 May 2026 14:47:38 +0200
+ bh=ekBzBLl3xyNIuS5mSSN274WluwFd12lv6hicCSKWJZk=;
+ b=C1s5/MvOXug+j9Qe0CyNk5mRM7wCdWHFpHvBjfIByGl7ntF29IIaPPEfBmUvC8yvlUjUia
+ ZYIeXo0FaekHXCgtbm84sYnKLXy/H5svaFoYqwxYezYRWnSBaWbVabK9pmwVfWkW7x90/k
+ lgvrIvdxTiW9Z4R1ZuHotVZyf7zSHyniG2xLivI+qivG89/aEP0Fg/IxYluYsEkcGbA/zH
+ 69YWA+TTuf4wO2jaGhn1LwfgPYDcjuT6njC04UuJddtC5DUnfn4CNUTlCkw22/3ulEKFc8
+ 0ptmgEulgWCLRn6cPf9KZNxQJjm2y+hu9AHZVYvdC/PIisXZGiKFTqJ3aazVQg==
+Message-ID: <d93926aa-5f24-474a-a380-e7cca82644c3@mailbox.org>
+Date: Thu, 7 May 2026 14:50:34 +0200
 MIME-Version: 1.0
-Subject: Re: [PATCH v2] usb: dwc3: Fix crash on fastboot exit due to incorrect
- memory free
-To: Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
- Gurumoorthy Santhakumar <gurumoorthy.santhakumar@oss.qualcomm.com>,
- u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, Chris Morgan <macromorgan@hotmail.com>,
- Varadarajan Narayanan <quic_varada@quicinc.com>,
- Casey Connolly <casey.connolly@linaro.org>
-References: <20260507-usb-v2-1-3958b8732553@oss.qualcomm.com>
- <87ik8zd2wb.fsf@kernel.org>
+Subject: Re: [PATCH v2 3/3] ddr: socfpga: Add ECC DRAM scrubbing support for
+ Gen5/Arria10
+To: "Yuslaimi, Alif Zakuan" <alif.zakuan.yuslaimi@altera.com>,
+ "Chee, Tien Fong" <tien.fong.chee@altera.com>, u-boot@lists.denx.de
+Cc: Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
+ Tom Rini <trini@konsulko.com>, Brian Sune <briansune@gmail.com>,
+ Yao Zi <me@ziyao.cc>, Patrice Chotard <patrice.chotard@foss.st.com>,
+ Peng Fan <peng.fan@nxp.com>, Simon Glass <sjg@chromium.org>
+References: <20260428033230.7777-1-alif.zakuan.yuslaimi@altera.com>
+ <20260428033230.7777-4-alif.zakuan.yuslaimi@altera.com>
+ <2880c529-5740-40b4-bb98-aa471f0c628f@altera.com>
+ <755b13b4-604d-480a-84be-000316eaf5a5@mailbox.org>
+ <b6ffb0c1-aaa3-4a59-a470-fc3edf2df4d2@altera.com>
 Content-Language: en-US
 From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <87ik8zd2wb.fsf@kernel.org>
+In-Reply-To: <b6ffb0c1-aaa3-4a59-a470-fc3edf2df4d2@altera.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: tio7sg6xquah4cyn33ihhniighrh5cjr
-X-MBO-RS-ID: 79492c67965f7cb52a1
+X-MBO-RS-ID: 07867a2082fd0e62e7f
+X-MBO-RS-META: ocqau4x1be5h3tjenadros51xkmkrm84
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,28 +83,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 5/7/26 10:45 AM, Mattijs Korpershoek wrote:
-> Hi Balaji,
+On 5/7/26 8:07 AM, Yuslaimi, Alif Zakuan wrote:
+
+[...]
+
+>> Even the commit message of this patch is a duplicate of that one in the
+>> commit from 2018 ? What is going on here ?
 > 
-> Thank you for the patch.
+> This patch was derived from the original commit you have mentioned.
 > 
-> On Thu, May 07, 2026 at 10:06, Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com> wrote:
+> The intention of this patch is to bring over the ECC scrubbing support 
+> to Gen5 as well via a new common DDR driver shared by both Arria10 and 
+> Gen5 devices which is sdram_soc32.c. This makes ECC scrubbing support no 
+> longer exclusive only to Arria10.
 > 
->> The dwc3_free_one_event_buffer() function incorrectly called free()
->> on event buffer structures allocated with devm_kzalloc(). This
->> caused heap corruption and a synchronous abort when exiting
->> fastboot mode via "fastboot continue".
->>
->> Device-managed memory is automatically freed when the device is
->> removed, so manual deallocation causes the heap allocator to access
->> corrupted metadata.
->>
->> Fixes: 884b10e86a05 ("usb: dwc3: core: fix memory leaks in event buffer cleanup")
->>
->> Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-> 
-> Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
-> 
-> Marek, I'm assuming you will pick this up.
-> If you want me to take it instead, let me know.
-I'll pick up V3 once the nitpick is addressed.
+> Perhaps staying close to the original patch subject and message to 
+> describe the original functionality might have create some confusion 
+> here. I can rephrase the subject and the commit message for v3.
+Yes please , rephrase it , what you wrote in the two paragraphs above is 
+very close to what the commit message should contain.
