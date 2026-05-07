@@ -4,81 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A68E5CD343F
-	for <u-boot@archiver.kernel.org>; Thu,  7 May 2026 18:38:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9CEECD343F
+	for <u-boot@archiver.kernel.org>; Thu,  7 May 2026 18:38:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 399998490D;
-	Thu,  7 May 2026 20:38:14 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7F4238484F;
+	Thu,  7 May 2026 20:38:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="nw3KeIRB";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="gGHFpUNz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0A60984A7B; Thu,  7 May 2026 20:38:12 +0200 (CEST)
+ id 2402C84099; Thu,  7 May 2026 20:38:24 +0200 (CEST)
 Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
  [IPv6:2a00:1450:4864:20::632])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 37DE384099
- for <u-boot@lists.denx.de>; Thu,  7 May 2026 20:38:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9EA6884BDE
+ for <u-boot@lists.denx.de>; Thu,  7 May 2026 20:38:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jbx6244@gmail.com
 Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-bc49d30ceecso16188866b.3
- for <u-boot@lists.denx.de>; Thu, 07 May 2026 11:38:06 -0700 (PDT)
+ a640c23a62f3a-bc1efa13e30so13569166b.1
+ for <u-boot@lists.denx.de>; Thu, 07 May 2026 11:38:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1778179086; x=1778783886; darn=lists.denx.de;
+ d=gmail.com; s=20251104; t=1778179101; x=1778783901; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:content-language:references
  :cc:to:subject:from:user-agent:mime-version:date:message-id:from:to
  :cc:subject:date:message-id:reply-to;
- bh=m4RHtVQsqIJBSl79Nwcv3H+gMCq33EHy9UKGPpKrBwc=;
- b=nw3KeIRBxPkr/lYl35x6wu156VlAGVctty25WZmUeyYct23X21+JVz49jv60Qmckp8
- vRI0To0SOZm0G8Pu+WKp1X91357IktHOM6ZDE4jZiaeWQAsj5zNzjMp1z7wQismuypS6
- kKh9MKcwunvY+ofNm3LpvJ16hwVP0XGkduWnLVrmuLvIrjZXArbdkUBCdMVjm2k+hn1Z
- cdgbEd1be4HtzYUnToiSrjI3Ujw8kQTBG0/ITCg7nRYVLY4zQNiPQkUX1qeaXruy2xE4
- UOEhmx3DovRDzyiGmtY7Jpk5SnECn8gAQ8NZeaJok08SAT5FAYaztCMlrl3WFKhOq3eH
- /qgw==
+ bh=3EPxjE6AEY7h5lOBn/VLnitrUpHcJSWofAvY3sOxNUw=;
+ b=gGHFpUNz1/Wi0s3zH2XBzmMjrLiQjl35BQ2F68ysy/lVJ6yjahqilx/Esss28Lh78b
+ zTATXvSnQ+5R/0O1NKoWyLd3nEEaUY+isxD+VuJG8XmVtP+4mGhrCu0Ih4uSolKW09cE
+ 8Fnrzri89NwgPRLkiETuAih4zgUdWD1ePIla0kRR8fx5jPiuMP/O6VGzlyCHSxRBJ3xg
+ +8tScRjB1+eRDDP49mE3yutM7kJRRNj20aFxVvyBftXMxpd16Wdpo2GFgD9r14Qa3w0D
+ QKH5xNAQhAt8jjKf6njvDEmmeiKF5tbWuN9lZHXSKq14/wF5ZzLPN4vq6nAk+Qmn3VoD
+ pknA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778179086; x=1778783886;
+ d=1e100.net; s=20251104; t=1778179101; x=1778783901;
  h=content-transfer-encoding:in-reply-to:content-language:references
  :cc:to:subject:from:user-agent:mime-version:date:message-id:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=m4RHtVQsqIJBSl79Nwcv3H+gMCq33EHy9UKGPpKrBwc=;
- b=dOsiGV7QCeUjVYbTBo6uOQJAC3KeV9HrCK47q0fu229jnj73q0AVmCiZyOv2Ti+OJh
- 5zXIBLLNgVEA6pGJY32mVjxXazzTe60Cy67Li4VbSkhBvqLJ6J0+IxxkziE1bIA9tsya
- MvUzpOxOUrYkEFw7MAMBVWtQa/hH+K9diLtnQZxJ0FhFdLHCf56dd7P8uACBZzbNXtrX
- Nk6EHq+9MTn9F8KTnFlwje0P5UfFjorGL3d8Blj2nZvmraQVG5idgHYXOgI/5pcEs7rW
- 95GiM14LdxubNncT2GhniZddWCvNfcW4ZedfuZMjYuvUZWzRC92as4r0eMHB+NIAr9UD
- 59EA==
+ bh=3EPxjE6AEY7h5lOBn/VLnitrUpHcJSWofAvY3sOxNUw=;
+ b=UytOKSU25V/mND9SuCaT1Bj5gkX06L6hKHHZl1UIDUP8pHt9lgBk+xhgGMZO3Rsope
+ gNvt4QbP5g9u4i1X5N7bt8EPn2QtfijqR6ihNW7LnRxi+Iak6wPuCUkP5fV0Xd8yRF7Q
+ WEw9U8E6sn4pjDovalkOk0LE+PfE41aX/1hfapimcV9Z7waJ2Llv3tTvfG5huj7UjyQE
+ 4Ak5WiiJOD9m4NBLkJhuzd6lRbaWHNt5UqOlHKu4yAlYh9ESeJlxrKhXrC56G8BuWnQn
+ UdSpt5AC4g/7c0r25L+bZMD20/mli4r8FuyI4WVwtI3kSL7FpB5aUrU6vG4dTUl2GWsv
+ 23Mw==
 X-Forwarded-Encrypted: i=1;
- AFNElJ+6Bj3u9MecQQ18jHYRagGuX7UPeV9quqji4G7juWeEI+xK5JMJVurv+wxtfPx3ZzYuHhpjanw=@lists.denx.de
-X-Gm-Message-State: AOJu0YwUddLevQsrYc+DcG9q3+wXcolyl/TCo4i4NqQqbzopwYs5cKPa
- 9GW60u2AQbeMYbvWI2SNg7SKpUiO7OIMexXi+/A5ByLjBoMM07CDQFqx
-X-Gm-Gg: AeBDievScyjnpNfJiJa/K/0x9SCcMuz0zt2xaL39ygU1LiWew843DmWyPaXD7Tv6nSE
- A72CM5bmIqwUtVfxINvdQlI4cMRBfcq50Ey3Gcs3dSWXl6H2nAUeyq/7cQAH1z9w2ogiEx6n+Rt
- RLe5lPowngYtdMEQngZV26kwqPqQbFmFPWYOuQntlAupdjQgoNWNNL0pPdomQ8k1h3bhJdb6I4x
- v+MQjlApKhV9hbkl1GXVjbnkSbOOxZmNInUlrJq1xrC/Ysx36Wa+PHc4AVdJtcu20g6R0e8jND1
- j3Uuv7S5+IhgZIkTj9jHUnvZTUoPeYR1cAfAfnUuFqkChY3Z07pBrrqUv+2BlAexy64XmORiHYV
- 3sA4HKpL/BwrXUNr7z9wctdpxyoVYFkpBU1ZxxxJTKftgrQRaLWisg9qd/OemU3nRs27rc82tQF
- SeDCYjt2a6cd+CRzAxEYqlUWiRFww0Jhphv0wr8mmsmEZwMZe3oxyNUZUcEecOpiZRS0KPb4wb
-X-Received: by 2002:a17:906:52d2:b0:bc6:3181:a990 with SMTP id
- a640c23a62f3a-bc63181aa04mr135252266b.0.1778179084917; 
- Thu, 07 May 2026 11:38:04 -0700 (PDT)
+ AFNElJ8HyBZPX25hIZTsN6yRZngYgo4XKdszTDKKaSv++EleqqqujHZ9L1KD0tSHa9OIcDlXY37pkIQ=@lists.denx.de
+X-Gm-Message-State: AOJu0YznRVXUKF99N2GgCHzpwEbDFBEGD0TyyY+5yGzVX5kf6i4CzuRL
+ bBO6n40Cu0bpmL3HtvYOETeAIhnwVu9oMSsW0KGYNwPIYFnThTikJlgt
+X-Gm-Gg: AeBDievYfGuT2FAsDRcwuyumsV2WgqwUrQI4BACa30/e1Rma21GYc3KifCwKSSW9eWo
+ D5P/FQU55mkMJ0tTi9DNQz72wsohHNPgQHUIByvhmUtMN6GC6pATuvSSnJErZD1jPsZfUgO+gyQ
+ woMHKZF+DEtPPLZmhRkw19v7rpAuOzCoPtwDYTarpWMFuw6x8Wg9pANH9YI2hsjeoSMQ6lmNCRv
+ ShXlgNcgGBYJAGpTN/pV/9/m0Vfia1TwPLXhppQ5Wrjg6qcDjQXUOYr7G4hq5D5t0fGB67WVOBc
+ VMC75OQjVvXEBkaSGrv6SvmPw8MUmMcwyIg4oARJwIOp1XKob4UmGWdD2E2HJq0YZEWfvyJrkf0
+ r/hwbY7tihOm7n5nWYcVHNwVwzWmzKHVaFI3fLyh1YgQzY0aumuvjxc8Uem6IWI8kUiwAeJlgS5
+ JH+F6gtzj7cXVMX/Iz0PN3UEXX6AiGBOUowx+rARb70tyJplhvgsKSIQR0gtcIMQ==
+X-Received: by 2002:a17:907:9626:b0:b97:9524:d6d0 with SMTP id
+ a640c23a62f3a-bc5670676e0mr213570566b.0.1778179100495; 
+ Thu, 07 May 2026 11:38:20 -0700 (PDT)
 Received: from ?IPV6:2a02:a449:4071:0:32d0:42ff:fe10:6983?
  ([2a02:a449:4071:0:32d0:42ff:fe10:6983])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-bca543d2d30sm17039166b.19.2026.05.07.11.38.04
+ a640c23a62f3a-bca53ddda1bsm18111866b.11.2026.05.07.11.38.19
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 07 May 2026 11:38:04 -0700 (PDT)
-Message-ID: <3d1a006b-3e39-4e5d-827c-2ce74ef1e6c2@gmail.com>
-Date: Thu, 7 May 2026 20:38:03 +0200
+ Thu, 07 May 2026 11:38:20 -0700 (PDT)
+Message-ID: <6249d635-512c-4e66-893a-dcc5834cae86@gmail.com>
+Date: Thu, 7 May 2026 20:38:19 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: Johan Jonker <jbx6244@gmail.com>
-Subject: [PATCH v2 2/5] rockchip: Switch rk3229 boards to upstream devicetree
+Subject: [PATCH v2 3/5] rockchip: Remove rk3368-sheep board
 To: kever.yang@rock-chips.com
 Cc: philipp.tomsich@vrull.eu, sjg@chromium.org, trini@konsulko.com,
  afaerber@suse.de, andy.yan@rock-chips.com, u-boot@lists.denx.de,
@@ -104,1998 +104,571 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Switch rk3229 boards to upstream devicetree.
+Remove rk3368-sheep board due lack of upstream support.
 
 Signed-off-by: Johan Jonker <jbx6244@gmail.com>
 ---
 
 Changed V2:
-remove rk322x.dtsi
+removal in a separate patch
+remove README links
 ---
- arch/arm/dts/Makefile                  |    3 -
- arch/arm/dts/rk3229-evb.dts            |  256 -----
- arch/arm/dts/rk3229.dtsi               |   52 -
- arch/arm/dts/rk322x.dtsi               | 1293 ------------------------
- arch/arm/mach-rockchip/Kconfig         |    1 +
- board/rockchip/evb_rk3229/MAINTAINERS  |    1 -
- configs/evb-rk3229_defconfig           |    4 +-
- include/dt-bindings/clock/rk3228-cru.h |  287 ------
- 8 files changed, 3 insertions(+), 1894 deletions(-)
- delete mode 100644 arch/arm/dts/rk3229-evb.dts
- delete mode 100644 arch/arm/dts/rk3229.dtsi
- delete mode 100644 arch/arm/dts/rk322x.dtsi
- delete mode 100644 include/dt-bindings/clock/rk3228-cru.h
+ arch/arm/dts/Makefile                   |   1 -
+ arch/arm/dts/rk3368-sheep-u-boot.dtsi   |  35 ---
+ arch/arm/dts/rk3368-sheep.dts           | 286 ------------------------
+ arch/arm/mach-rockchip/rk3368/Kconfig   |   7 -
+ board/geekbuying/geekbox/README         |   1 -
+ board/rockchip/evb_px5/README           |   1 -
+ board/rockchip/sheep_rk3368/Kconfig     |  12 -
+ board/rockchip/sheep_rk3368/MAINTAINERS |   6 -
+ board/rockchip/sheep_rk3368/README      |  44 ----
+ configs/sheep-rk3368_defconfig          |  32 ---
+ doc/board/rockchip/rockchip.rst         |   1 -
+ include/configs/sheep_rk3368.h          |  15 --
+ 12 files changed, 441 deletions(-)
+ delete mode 100644 arch/arm/dts/rk3368-sheep-u-boot.dtsi
+ delete mode 100644 arch/arm/dts/rk3368-sheep.dts
+ delete mode 100644 board/geekbuying/geekbox/README
+ delete mode 100644 board/rockchip/evb_px5/README
+ delete mode 100644 board/rockchip/sheep_rk3368/Kconfig
+ delete mode 100644 board/rockchip/sheep_rk3368/MAINTAINERS
+ delete mode 100644 board/rockchip/sheep_rk3368/README
+ delete mode 100644 configs/sheep-rk3368_defconfig
+ delete mode 100644 include/configs/sheep_rk3368.h
 
 diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
-index fdd057fdfe6c..7b2847804835 100644
+index 7b2847804835..39ab188c5435 100644
 --- a/arch/arm/dts/Makefile
 +++ b/arch/arm/dts/Makefile
-@@ -52,9 +52,6 @@ dtb-$(CONFIG_MACH_S900) += \
- dtb-$(CONFIG_MACH_S700) += \
+@@ -53,7 +53,6 @@ dtb-$(CONFIG_MACH_S700) += \
  	s700-cubieboard7.dtb
 
--dtb-$(CONFIG_ROCKCHIP_RK322X) += \
--	rk3229-evb.dtb
--
  dtb-$(CONFIG_ROCKCHIP_RK3368) += \
- 	rk3368-sheep.dtb \
+-	rk3368-sheep.dtb \
  	rk3368-geekbox.dtb \
-diff --git a/arch/arm/dts/rk3229-evb.dts b/arch/arm/dts/rk3229-evb.dts
+ 	rk3368-px5-evb.dtb \
+
+diff --git a/arch/arm/dts/rk3368-sheep-u-boot.dtsi b/arch/arm/dts/rk3368-sheep-u-boot.dtsi
 deleted file mode 100644
-index 797476e8bef1..000000000000
---- a/arch/arm/dts/rk3229-evb.dts
+index cfc8b9340a8f..000000000000
+--- a/arch/arm/dts/rk3368-sheep-u-boot.dtsi
 +++ /dev/null
-@@ -1,256 +0,0 @@
--// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+@@ -1,35 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0+ OR X11
+-/*
+- * (C) Copyright 2017 Theobroma Systems Design und Consulting GmbH
+- */
+-
+-#include "rk3368-u-boot.dtsi"
+-
+-&pinctrl {
+-	bootph-all;
+-};
+-
+-&service_msch {
+-	bootph-all;
+-};
+-
+-&dmc {
+-	bootph-all;
+-	status = "okay";
+-};
+-
+-&pmugrf {
+-	bootph-all;
+-};
+-
+-&cru {
+-	bootph-all;
+-};
+-
+-&grf {
+-	bootph-all;
+-};
+-
+-&uart2 {
+-	bootph-all;
+-};
+diff --git a/arch/arm/dts/rk3368-sheep.dts b/arch/arm/dts/rk3368-sheep.dts
+deleted file mode 100644
+index 120dec1a3de9..000000000000
+--- a/arch/arm/dts/rk3368-sheep.dts
++++ /dev/null
+@@ -1,286 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0+
+-/*
+- * (C) Copyright 2017 Rockchip Electronics Co., Ltd
+- */
 -
 -/dts-v1/;
--
+-#include "rk3368.dtsi"
 -#include <dt-bindings/input/input.h>
--#include "rk3229.dtsi"
 -
 -/ {
--	model = "Rockchip RK3229 Evaluation board";
--	compatible = "rockchip,rk3229-evb", "rockchip,rk3229";
+-	model = "Rockchip sheep board";
+-	compatible = "rockchip,sheep", "rockchip,rk3368";
 -
--	aliases {
--		mmc0 = &emmc;
+-	chosen {
+-		stdout-path = "serial2:115200n8";
 -	};
 -
--	memory@60000000 {
+-	memory@0 {
 -		device_type = "memory";
--		reg = <0x60000000 0x40000000>;
+-		reg = <0x0 0x0 0x0 0x80000000>;
 -	};
 -
--	dc_12v: dc-12v-regulator {
--		compatible = "regulator-fixed";
--		regulator-name = "dc_12v";
--		regulator-always-on;
--		regulator-boot-on;
--		regulator-min-microvolt = <12000000>;
--		regulator-max-microvolt = <12000000>;
--	};
--
--	ext_gmac: ext_gmac {
+-	ext_gmac: gmac-clk {
 -		compatible = "fixed-clock";
 -		clock-frequency = <125000000>;
 -		clock-output-names = "ext_gmac";
 -		#clock-cells = <0>;
 -	};
 -
--	vcc_host: vcc-host-regulator {
--		compatible = "regulator-fixed";
--		enable-active-high;
--		gpio = <&gpio3 RK_PC4 GPIO_ACTIVE_HIGH>;
+-	ir: ir-receiver {
+-		compatible = "gpio-ir-receiver";
+-		gpios = <&gpio3 30 GPIO_ACTIVE_LOW>;
 -		pinctrl-names = "default";
--		pinctrl-0 = <&host_vbus_drv>;
--		regulator-name = "vcc_host";
--		regulator-always-on;
--		regulator-boot-on;
--		vin-supply = <&vcc_sys>;
+-		pinctrl-0 = <&ir_int>;
 -	};
 -
--	vcc_phy: vcc-phy-regulator {
--		compatible = "regulator-fixed";
--		enable-active-high;
--		regulator-name = "vcc_phy";
--		regulator-min-microvolt = <1800000>;
--		regulator-max-microvolt = <1800000>;
--		regulator-always-on;
--		regulator-boot-on;
--		vin-supply = <&vccio_1v8>;
+-	keys: gpio-keys {
+-		compatible = "gpio-keys";
+-		pinctrl-names = "default";
+-		pinctrl-0 = <&pwr_key>;
+-
+-		power {
+-			gpios = <&gpio0 2 GPIO_ACTIVE_LOW>;
+-			label = "GPIO Power";
+-			linux,code = <KEY_POWER>;
+-			wakeup-source;
+-		};
+-	};
+-
+-	leds: gpio-leds {
+-		compatible = "gpio-leds";
+-
+-		blue {
+-			gpios = <&gpio2 2 GPIO_ACTIVE_HIGH>;
+-			label = "geekbox:blue:led";
+-			default-state = "on";
+-		};
+-
+-		red {
+-			gpios = <&gpio2 3 GPIO_ACTIVE_HIGH>;
+-			label = "geekbox:red:led";
+-			default-state = "off";
+-		};
 -	};
 -
 -	vcc_sys: vcc-sys-regulator {
 -		compatible = "regulator-fixed";
 -		regulator-name = "vcc_sys";
--		regulator-always-on;
--		regulator-boot-on;
 -		regulator-min-microvolt = <5000000>;
 -		regulator-max-microvolt = <5000000>;
--		vin-supply = <&dc_12v>;
--	};
--
--	vccio_1v8: vccio-1v8-regulator {
--		compatible = "regulator-fixed";
--		regulator-name = "vccio_1v8";
--		regulator-min-microvolt = <1800000>;
--		regulator-max-microvolt = <1800000>;
--		regulator-always-on;
--		vin-supply = <&vcc_sys>;
--	};
--
--	vccio_3v3: vccio-3v3-regulator {
--		compatible = "regulator-fixed";
--		regulator-name = "vccio_3v3";
--		regulator-min-microvolt = <3300000>;
--		regulator-max-microvolt = <3300000>;
--		regulator-always-on;
--		vin-supply = <&vcc_sys>;
--	};
--
--	vdd_arm: vdd-arm-regulator {
--		compatible = "pwm-regulator";
--		pwms = <&pwm1 0 25000 1>;
--		pwm-supply = <&vcc_sys>;
--		regulator-name = "vdd_arm";
--		regulator-min-microvolt = <950000>;
--		regulator-max-microvolt = <1400000>;
 -		regulator-always-on;
 -		regulator-boot-on;
 -	};
--
--	vdd_log: vdd-log-regulator {
--		compatible = "pwm-regulator";
--		pwms = <&pwm2 0 25000 1>;
--		pwm-supply = <&vcc_sys>;
--		regulator-name = "vdd_log";
--		regulator-min-microvolt = <1000000>;
--		regulator-max-microvolt = <1300000>;
--		regulator-always-on;
--		regulator-boot-on;
--	};
--
--	gpio_keys {
--		compatible = "gpio-keys";
--		autorepeat;
--		pinctrl-names = "default";
--		pinctrl-0 = <&pwr_key>;
--
--		power_key: power-key {
--			label = "GPIO Key Power";
--			gpios = <&gpio3 23 GPIO_ACTIVE_LOW>;
--			linux,code = <KEY_POWER>;
--			debounce-interval = <100>;
--			wakeup-source;
--		};
--	};
--};
--
--&cpu0 {
--	cpu-supply = <&vdd_arm>;
--};
--
--&cpu1 {
--	cpu-supply = <&vdd_arm>;
--};
--
--&cpu2 {
--	cpu-supply = <&vdd_arm>;
--};
--
--&cpu3 {
--	cpu-supply = <&vdd_arm>;
 -};
 -
 -&emmc {
--	cap-mmc-highspeed;
--	non-removable;
 -	status = "okay";
+-	bus-width = <8>;
+-	cap-mmc-highspeed;
+-	clock-frequency = <150000000>;
+-	disable-wp;
+-	keep-power-in-suspend;
+-	non-removable;
+-	num-slots = <1>;
+-	vmmc-supply = <&vcc_io>;
+-	vqmmc-supply = <&vcc18_flash>;
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&emmc_clk>, <&emmc_cmd>, <&emmc_bus8>;
 -};
 -
 -&gmac {
--	assigned-clocks = <&cru SCLK_MAC_EXTCLK>, <&cru SCLK_MAC>;
--	assigned-clock-parents = <&ext_gmac>, <&cru SCLK_MAC_EXTCLK>;
--	clock_in_out = "input";
--	phy-supply = <&vcc_phy>;
+-	status = "okay";
+-	phy-supply = <&vcc_lan>;
 -	phy-mode = "rgmii";
+-	clock_in_out = "input";
+-	assigned-clocks = <&cru SCLK_MAC>;
+-	assigned-clock-parents = <&ext_gmac>;
 -	pinctrl-names = "default";
 -	pinctrl-0 = <&rgmii_pins>;
--	snps,reset-gpio = <&gpio2 RK_PD0 GPIO_ACTIVE_LOW>;
--	snps,reset-active-low;
--	snps,reset-delays-us = <0 10000 1000000>;
 -	tx_delay = <0x30>;
 -	rx_delay = <0x10>;
--	status = "okay";
 -};
 -
--&io_domains {
+-&i2c0 {
 -	status = "okay";
 -
--	vccio1-supply = <&vccio_3v3>;
--	vccio2-supply = <&vccio_1v8>;
--	vccio4-supply = <&vccio_3v3>;
+-	rk808: pmic@1b {
+-		compatible = "rockchip,rk808";
+-		reg = <0x1b>;
+-		pinctrl-names = "default";
+-		pinctrl-0 = <&pmic_int>, <&pmic_sleep>;
+-		interrupt-parent = <&gpio0>;
+-		interrupts = <5 IRQ_TYPE_LEVEL_LOW>;
+-		rockchip,system-power-controller;
+-		vcc1-supply = <&vcc_sys>;
+-		vcc2-supply = <&vcc_sys>;
+-		vcc3-supply = <&vcc_sys>;
+-		vcc4-supply = <&vcc_sys>;
+-		vcc6-supply = <&vcc_sys>;
+-		vcc7-supply = <&vcc_sys>;
+-		vcc8-supply = <&vcc_io>;
+-		vcc9-supply = <&vcc_sys>;
+-		vcc10-supply = <&vcc_sys>;
+-		vcc11-supply = <&vcc_sys>;
+-		vcc12-supply = <&vcc_io>;
+-		clock-output-names = "xin32k", "rk808-clkout2";
+-		#clock-cells = <1>;
+-
+-		regulators {
+-			vdd_cpu: DCDC_REG1 {
+-				regulator-always-on;
+-				regulator-boot-on;
+-				regulator-min-microvolt = <700000>;
+-				regulator-max-microvolt = <1500000>;
+-				regulator-name = "vdd_cpu";
+-			};
+-
+-			vdd_log: DCDC_REG2 {
+-				regulator-always-on;
+-				regulator-boot-on;
+-				regulator-min-microvolt = <700000>;
+-				regulator-max-microvolt = <1500000>;
+-				regulator-name = "vdd_log";
+-			};
+-
+-			vcc_ddr: DCDC_REG3 {
+-				regulator-always-on;
+-				regulator-boot-on;
+-				regulator-name = "vcc_ddr";
+-			};
+-
+-			vcc_io: DCDC_REG4 {
+-				regulator-always-on;
+-				regulator-boot-on;
+-				regulator-min-microvolt = <3300000>;
+-				regulator-max-microvolt = <3300000>;
+-				regulator-name = "vcc_io";
+-			};
+-
+-			vcc18_flash: LDO_REG1 {
+-				regulator-always-on;
+-				regulator-boot-on;
+-				regulator-min-microvolt = <1800000>;
+-				regulator-max-microvolt = <1800000>;
+-				regulator-name = "vcc18_flash";
+-			};
+-
+-			vcc33_lcd: LDO_REG2 {
+-				regulator-always-on;
+-				regulator-boot-on;
+-				regulator-min-microvolt = <3300000>;
+-				regulator-max-microvolt = <3300000>;
+-				regulator-name = "vcc33_lcd";
+-			};
+-
+-			vdd_10: LDO_REG3 {
+-				regulator-always-on;
+-				regulator-boot-on;
+-				regulator-min-microvolt = <1000000>;
+-				regulator-max-microvolt = <1000000>;
+-				regulator-name = "vdd_10";
+-			};
+-
+-			vcca_18: LDO_REG4 {
+-				regulator-boot-on;
+-				regulator-min-microvolt = <1800000>;
+-				regulator-max-microvolt = <1800000>;
+-				regulator-name = "vcca_18";
+-			};
+-
+-			vccio_sd: LDO_REG5 {
+-				regulator-always-on;
+-				regulator-boot-on;
+-				regulator-min-microvolt = <1800000>;
+-				regulator-max-microvolt = <3300000>;
+-				regulator-name = "vccio_sd";
+-			};
+-
+-			vdd10_lcd: LDO_REG6 {
+-				regulator-always-on;
+-				regulator-boot-on;
+-				regulator-min-microvolt = <1000000>;
+-				regulator-max-microvolt = <1000000>;
+-				regulator-name = "vdd10_lcd";
+-			};
+-
+-			vcc_18: LDO_REG7 {
+-				regulator-always-on;
+-				regulator-boot-on;
+-				regulator-min-microvolt = <1800000>;
+-				regulator-max-microvolt = <1800000>;
+-				regulator-name = "vcc_18";
+-			};
+-
+-			vcc18_lcd: LDO_REG8 {
+-				regulator-always-on;
+-				regulator-boot-on;
+-				regulator-min-microvolt = <1800000>;
+-				regulator-max-microvolt = <1800000>;
+-				regulator-name = "vcc18_lcd";
+-			};
+-
+-			vcc_sd: SWITCH_REG1 {
+-				regulator-always-on;
+-				regulator-boot-on;
+-				regulator-name = "vcc_sd";
+-			};
+-
+-			vcc_lan: SWITCH_REG2 {
+-				regulator-always-on;
+-				regulator-boot-on;
+-				regulator-name = "vcc_lan";
+-			};
+-		};
+-	};
 -};
 -
 -&pinctrl {
+-	ir {
+-		ir_int: ir-int {
+-			rockchip,pins = <3 30 RK_FUNC_GPIO &pcfg_pull_none>;
+-		};
+-	};
+-
 -	keys {
 -		pwr_key: pwr-key {
--			rockchip,pins = <3 RK_PC7 RK_FUNC_GPIO &pcfg_pull_up>;
+-			rockchip,pins = <0 2 RK_FUNC_GPIO &pcfg_pull_none>;
 -		};
 -	};
 -
--	usb {
--		host_vbus_drv: host-vbus-drv {
--			rockchip,pins = <3 RK_PC4 RK_FUNC_GPIO &pcfg_pull_none>;
+-	pmic {
+-		pmic_sleep: pmic-sleep {
+-			rockchip,pins = <0 0 RK_FUNC_2 &pcfg_pull_none>;
+-		};
+-
+-		pmic_int: pmic-int {
+-			rockchip,pins = <0 5 RK_FUNC_GPIO &pcfg_pull_up>;
 -		};
 -	};
 -};
 -
--&pwm1 {
--	status = "okay";
--};
--
--&pwm2 {
+-&saradc {
 -	status = "okay";
 -};
 -
 -&tsadc {
--	rockchip,hw-tshut-mode = <0>; /* tshut mode 0:CRU 1:GPIO */
 -	status = "okay";
+-	rockchip,hw-tshut-mode = <0>; /* CRU */
+-	rockchip,hw-tshut-polarity = <1>; /* high */
 -};
 -
--&uart2 {
+-&uart4 {
 -	status = "okay";
--};
--
--&u2phy0 {
--	status = "okay";
--
--	u2phy0_otg: otg-port {
--		status = "okay";
--	};
--
--	u2phy0_host: host-port {
--		phy-supply = <&vcc_host>;
--		status = "okay";
--	};
--};
--
--&u2phy1 {
--	status = "okay";
--
--	u2phy1_otg: otg-port {
--		phy-supply = <&vcc_host>;
--		status = "okay";
--	};
--
--	u2phy1_host: host-port {
--		phy-supply = <&vcc_host>;
--		status = "okay";
--	};
 -};
 -
 -&usb_host0_ehci {
 -	status = "okay";
 -};
 -
--&usb_host0_ohci {
--	status = "okay";
--};
--
--&usb_host1_ehci {
--	status = "okay";
--};
--
--&usb_host1_ohci {
--	status = "okay";
--};
--
--&usb_host2_ehci {
--	status = "okay";
--};
--
--&usb_host2_ohci {
--	status = "okay";
--};
--
 -&usb_otg {
 -	status = "okay";
 -};
-diff --git a/arch/arm/dts/rk3229.dtsi b/arch/arm/dts/rk3229.dtsi
+-
+-&wdt {
+-	status = "okay";
+-};
+diff --git a/arch/arm/mach-rockchip/rk3368/Kconfig b/arch/arm/mach-rockchip/rk3368/Kconfig
+index a7be30bbd897..4c28d26d4607 100644
+--- a/arch/arm/mach-rockchip/rk3368/Kconfig
++++ b/arch/arm/mach-rockchip/rk3368/Kconfig
+@@ -3,12 +3,6 @@ if ROCKCHIP_RK3368
+ choice
+ 	prompt "RK3368 board"
+
+-config TARGET_SHEEP
+-	bool "Sheep board"
+-	help
+-	  Sheep board is designed by Rockchip as a EVB board
+-	  for rk3368.
+-
+ config TARGET_GEEKBOX
+ 	bool "GeekBox"
+
+@@ -41,7 +35,6 @@ config SPL_LIBCOMMON_SUPPORT
+ config SPL_LIBGENERIC_SUPPORT
+ 	default y
+
+-source "board/rockchip/sheep_rk3368/Kconfig"
+ source "board/geekbuying/geekbox/Kconfig"
+ source "board/rockchip/evb_px5/Kconfig"
+
+diff --git a/board/geekbuying/geekbox/README b/board/geekbuying/geekbox/README
 deleted file mode 100644
-index c340fb30e775..000000000000
---- a/arch/arm/dts/rk3229.dtsi
+index de980f2f2337..000000000000
+--- a/board/geekbuying/geekbox/README
 +++ /dev/null
-@@ -1,52 +0,0 @@
--// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+@@ -1 +0,0 @@
+-see board/rockchip/sheep_rk3368/README
+diff --git a/board/rockchip/evb_px5/README b/board/rockchip/evb_px5/README
+deleted file mode 100644
+index de980f2f2337..000000000000
+--- a/board/rockchip/evb_px5/README
++++ /dev/null
+@@ -1 +0,0 @@
+-see board/rockchip/sheep_rk3368/README
+diff --git a/board/rockchip/sheep_rk3368/Kconfig b/board/rockchip/sheep_rk3368/Kconfig
+deleted file mode 100644
+index 321bf814859a..000000000000
+--- a/board/rockchip/sheep_rk3368/Kconfig
++++ /dev/null
+@@ -1,12 +0,0 @@
+-if TARGET_SHEEP
+-
+-config SYS_BOARD
+-	default "sheep_rk3368"
+-
+-config SYS_VENDOR
+-	default "rockchip"
+-
+-config SYS_CONFIG_NAME
+-	default "sheep_rk3368"
+-
+-endif
+diff --git a/board/rockchip/sheep_rk3368/MAINTAINERS b/board/rockchip/sheep_rk3368/MAINTAINERS
+deleted file mode 100644
+index cd5de9923e02..000000000000
+--- a/board/rockchip/sheep_rk3368/MAINTAINERS
++++ /dev/null
+@@ -1,6 +0,0 @@
+-RK3368 Sheep Board
+-M:	Andy Yan <andy.yan@rock-chips.com>
+-S:	Maintained
+-F:	board/rockchip/sheep_rk3368
+-F:	include/configs/sheep_rk3368.h
+-F:	configs/sheep-rk3368_defconfig
+diff --git a/board/rockchip/sheep_rk3368/README b/board/rockchip/sheep_rk3368/README
+deleted file mode 100644
+index 2d078cbe5c09..000000000000
+--- a/board/rockchip/sheep_rk3368/README
++++ /dev/null
+@@ -1,44 +0,0 @@
+-Here is the step-by-step to boot to U-Boot on rk3368.
+-
+-Get miniloader and trust.img form rockchip vendor u-boot source code
+-==============================================================================
+-  > git clone  https://github.com/rockchip-linux/u-boot.git rockchip-uboot
+-  > cd rockchip-uboot
+-  > make rk3368_defconfig /*chose px5_defconfig if you run a px5 platform here*/
+-  > ./mkv8.sh
+-
+-Compile the upstream U-Boot
+-===========================
+-  > cd u-boot
+-  > make CROSS_COMPILE=aarch64-linux-gnu- sheep-rk3368_defconfig  all
+-
+-Package u-boot for miniloader
+-================================
+-  > ../rockchip-uboot/tools/loaderimage --pack --uboot u-boot.bin u-boot.img
+-
+-Flash the image by rkdeveloptool
+-================================
+-rkdeveloptool can get from https://github.com/rockchip-linux/rkdeveloptool.git
+-
+-Power on(or reset with RESET KEY) with MASKROM KEY preesed, and then:
+-  > rkdeveloptool db ./rockchip-uboot/rk3368_loader_v2.00.256.bin
+-  > rkdeveloptool wl 0x6000 ./rockchip-uboot/trust.img
+-  > rkdeveloptool wl 0x4000 ./u-boot/u-boot.img
+-  > rkdeveloptool RD
+-
+-You should be able to get U-Boot log message from boot console:
+-
+-U-Boot 2017.05-rc3-01094-g9ddd1e8-dirty (May 15 2017 - 15:57:23 +0800)
+-
+-Model: Rockchip sheep board
+-DRAM:  2 GiB
+-MMC:   dwmmc@ff0f0000: 0
+-Using default environment
+-
+-In:    serial@ff690000
+-Out:   serial@ff690000
+-Err:   serial@ff690000
+-Net:   Net Initialization Skipped
+-No ethernet found.
+-Hit any key to stop autoboot:  0
+-=>
+diff --git a/configs/sheep-rk3368_defconfig b/configs/sheep-rk3368_defconfig
+deleted file mode 100644
+index bbaee0f147f8..000000000000
+--- a/configs/sheep-rk3368_defconfig
++++ /dev/null
+@@ -1,32 +0,0 @@
+-CONFIG_ARM=y
+-CONFIG_SKIP_LOWLEVEL_INIT=y
+-CONFIG_COUNTER_FREQUENCY=24000000
+-CONFIG_ARCH_ROCKCHIP=y
+-CONFIG_TEXT_BASE=0x00200000
+-CONFIG_NR_DRAM_BANKS=1
+-CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+-CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x300000
+-CONFIG_DEFAULT_DEVICE_TREE="rk3368-sheep"
+-CONFIG_ROCKCHIP_RK3368=y
+-CONFIG_SYS_LOAD_ADDR=0x800800
+-CONFIG_DEBUG_UART_BASE=0xFF1b0000
+-CONFIG_DEBUG_UART_CLOCK=24000000
+-CONFIG_DEBUG_UART=y
+-CONFIG_ANDROID_BOOT_IMAGE=y
+-CONFIG_DEFAULT_FDT_FILE="rockchip/rk3368-sheep.dtb"
+-# CONFIG_DISPLAY_CPUINFO is not set
+-CONFIG_DISPLAY_BOARDINFO_LATE=y
+-CONFIG_CMD_MMC=y
+-CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_REGMAP=y
+-CONFIG_SYSCON=y
+-CONFIG_CLK=y
+-CONFIG_MMC_DW=y
+-CONFIG_MMC_DW_ROCKCHIP=y
+-CONFIG_PINCTRL=y
+-CONFIG_RAM=y
+-CONFIG_DEBUG_UART_SHIFT=2
+-CONFIG_DEBUG_UART_ANNOUNCE=y
+-CONFIG_SYS_NS16550_MEM32=y
+-CONFIG_SYSRESET=y
+-CONFIG_ERRNO_STR=y
+diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
+index 141071f528a3..f369f2a8376e 100644
+--- a/doc/board/rockchip/rockchip.rst
++++ b/doc/board/rockchip/rockchip.rst
+@@ -76,7 +76,6 @@ List of mainline supported Rockchip boards:
+ * rk3368
+      - GeekBox (geekbox)
+      - PX5 EVB (evb-px5)
+-     - Rockchip Sheep (sheep-rk3368)
+ * rk3399
+      - 96boards RK3399 Ficus (ficus-rk3399)
+      - 96boards Rock960 (rock960-rk3399)
+diff --git a/include/configs/sheep_rk3368.h b/include/configs/sheep_rk3368.h
+deleted file mode 100644
+index 08cc4bf356d9..000000000000
+--- a/include/configs/sheep_rk3368.h
++++ /dev/null
+@@ -1,15 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0+ */
 -/*
-- * Copyright (c) 2017 Fuzhou Rockchip Electronics Co., Ltd
+- * Copyright (c) 2017 Rockchip Electronics Co., Ltd
 - */
 -
--#include "rk322x.dtsi"
+-#ifndef __CONFIGS_PX5_EVB_H
+-#define __CONFIGS_PX5_EVB_H
 -
--/ {
--	compatible = "rockchip,rk3229";
+-#include <configs/rk3368_common.h>
 -
--	/delete-node/ opp-table0;
--
--	cpu0_opp_table: opp-table-0 {
--		compatible = "operating-points-v2";
--		opp-shared;
--
--		opp-408000000 {
--			opp-hz = /bits/ 64 <408000000>;
--			opp-microvolt = <950000>;
--			clock-latency-ns = <40000>;
--			opp-suspend;
--		};
--		opp-600000000 {
--			opp-hz = /bits/ 64 <600000000>;
--			opp-microvolt = <975000>;
--		};
--		opp-816000000 {
--			opp-hz = /bits/ 64 <816000000>;
--			opp-microvolt = <1000000>;
--		};
--		opp-1008000000 {
--			opp-hz = /bits/ 64 <1008000000>;
--			opp-microvolt = <1175000>;
--		};
--		opp-1200000000 {
--			opp-hz = /bits/ 64 <1200000000>;
--			opp-microvolt = <1275000>;
--		};
--		opp-1296000000 {
--			opp-hz = /bits/ 64 <1296000000>;
--			opp-microvolt = <1325000>;
--		};
--		opp-1392000000 {
--			opp-hz = /bits/ 64 <1392000000>;
--			opp-microvolt = <1375000>;
--		};
--		opp-1464000000 {
--			opp-hz = /bits/ 64 <1464000000>;
--			opp-microvolt = <1400000>;
--		};
--	};
--};
-diff --git a/arch/arm/dts/rk322x.dtsi b/arch/arm/dts/rk322x.dtsi
-deleted file mode 100644
-index 8eed9e3a92e9..000000000000
---- a/arch/arm/dts/rk322x.dtsi
-+++ /dev/null
-@@ -1,1293 +0,0 @@
--// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
--
--#include <dt-bindings/gpio/gpio.h>
--#include <dt-bindings/interrupt-controller/irq.h>
--#include <dt-bindings/interrupt-controller/arm-gic.h>
--#include <dt-bindings/pinctrl/rockchip.h>
--#include <dt-bindings/clock/rk3228-cru.h>
--#include <dt-bindings/thermal/thermal.h>
--#include <dt-bindings/power/rk3228-power.h>
--
--/ {
--	#address-cells = <1>;
--	#size-cells = <1>;
--
--	interrupt-parent = <&gic>;
--
--	aliases {
--		serial0 = &uart0;
--		serial1 = &uart1;
--		serial2 = &uart2;
--		spi0 = &spi0;
--	};
--
--	cpus {
--		#address-cells = <1>;
--		#size-cells = <0>;
--
--		cpu0: cpu@f00 {
--			device_type = "cpu";
--			compatible = "arm,cortex-a7";
--			reg = <0xf00>;
--			resets = <&cru SRST_CORE0>;
--			operating-points-v2 = <&cpu0_opp_table>;
--			#cooling-cells = <2>; /* min followed by max */
--			clock-latency = <40000>;
--			clocks = <&cru ARMCLK>;
--			enable-method = "psci";
--		};
--
--		cpu1: cpu@f01 {
--			device_type = "cpu";
--			compatible = "arm,cortex-a7";
--			reg = <0xf01>;
--			resets = <&cru SRST_CORE1>;
--			operating-points-v2 = <&cpu0_opp_table>;
--			#cooling-cells = <2>; /* min followed by max */
--			enable-method = "psci";
--		};
--
--		cpu2: cpu@f02 {
--			device_type = "cpu";
--			compatible = "arm,cortex-a7";
--			reg = <0xf02>;
--			resets = <&cru SRST_CORE2>;
--			operating-points-v2 = <&cpu0_opp_table>;
--			#cooling-cells = <2>; /* min followed by max */
--			enable-method = "psci";
--		};
--
--		cpu3: cpu@f03 {
--			device_type = "cpu";
--			compatible = "arm,cortex-a7";
--			reg = <0xf03>;
--			resets = <&cru SRST_CORE3>;
--			operating-points-v2 = <&cpu0_opp_table>;
--			#cooling-cells = <2>; /* min followed by max */
--			enable-method = "psci";
--		};
--	};
--
--	cpu0_opp_table: opp-table-0 {
--		compatible = "operating-points-v2";
--		opp-shared;
--
--		opp-408000000 {
--			opp-hz = /bits/ 64 <408000000>;
--			opp-microvolt = <950000>;
--			clock-latency-ns = <40000>;
--			opp-suspend;
--		};
--		opp-600000000 {
--			opp-hz = /bits/ 64 <600000000>;
--			opp-microvolt = <975000>;
--		};
--		opp-816000000 {
--			opp-hz = /bits/ 64 <816000000>;
--			opp-microvolt = <1000000>;
--		};
--		opp-1008000000 {
--			opp-hz = /bits/ 64 <1008000000>;
--			opp-microvolt = <1175000>;
--		};
--		opp-1200000000 {
--			opp-hz = /bits/ 64 <1200000000>;
--			opp-microvolt = <1275000>;
--		};
--	};
--
--	arm-pmu {
--		compatible = "arm,cortex-a7-pmu";
--		interrupts = <GIC_SPI 76 IRQ_TYPE_LEVEL_HIGH>,
--			     <GIC_SPI 77 IRQ_TYPE_LEVEL_HIGH>,
--			     <GIC_SPI 78 IRQ_TYPE_LEVEL_HIGH>,
--			     <GIC_SPI 79 IRQ_TYPE_LEVEL_HIGH>;
--		interrupt-affinity = <&cpu0>, <&cpu1>, <&cpu2>, <&cpu3>;
--	};
--
--	psci {
--		compatible = "arm,psci-1.0", "arm,psci-0.2";
--		method = "smc";
--	};
--
--	timer {
--		compatible = "arm,armv7-timer";
--		arm,cpu-registers-not-fw-configured;
--		interrupts = <GIC_PPI 13 (GIC_CPU_MASK_SIMPLE(4) | IRQ_TYPE_LEVEL_HIGH)>,
--			     <GIC_PPI 14 (GIC_CPU_MASK_SIMPLE(4) | IRQ_TYPE_LEVEL_HIGH)>,
--			     <GIC_PPI 11 (GIC_CPU_MASK_SIMPLE(4) | IRQ_TYPE_LEVEL_HIGH)>,
--			     <GIC_PPI 10 (GIC_CPU_MASK_SIMPLE(4) | IRQ_TYPE_LEVEL_HIGH)>;
--		clock-frequency = <24000000>;
--	};
--
--	xin24m: oscillator {
--		compatible = "fixed-clock";
--		clock-frequency = <24000000>;
--		clock-output-names = "xin24m";
--		#clock-cells = <0>;
--	};
--
--	display_subsystem: display-subsystem {
--		compatible = "rockchip,display-subsystem";
--		ports = <&vop_out>;
--	};
--
--	i2s1: i2s1@100b0000 {
--		compatible = "rockchip,rk3228-i2s", "rockchip,rk3066-i2s";
--		reg = <0x100b0000 0x4000>;
--		interrupts = <GIC_SPI 27 IRQ_TYPE_LEVEL_HIGH>;
--		clock-names = "i2s_clk", "i2s_hclk";
--		clocks = <&cru SCLK_I2S1>, <&cru HCLK_I2S1_8CH>;
--		dmas = <&pdma 14>, <&pdma 15>;
--		dma-names = "tx", "rx";
--		pinctrl-names = "default";
--		pinctrl-0 = <&i2s1_bus>;
--		status = "disabled";
--	};
--
--	i2s0: i2s0@100c0000 {
--		compatible = "rockchip,rk3228-i2s", "rockchip,rk3066-i2s";
--		reg = <0x100c0000 0x4000>;
--		interrupts = <GIC_SPI 26 IRQ_TYPE_LEVEL_HIGH>;
--		clock-names = "i2s_clk", "i2s_hclk";
--		clocks = <&cru SCLK_I2S0>, <&cru HCLK_I2S0_8CH>;
--		dmas = <&pdma 11>, <&pdma 12>;
--		dma-names = "tx", "rx";
--		status = "disabled";
--	};
--
--	spdif: spdif@100d0000 {
--		compatible = "rockchip,rk3228-spdif";
--		reg = <0x100d0000 0x1000>;
--		interrupts = <GIC_SPI 29 IRQ_TYPE_LEVEL_HIGH>;
--		clocks = <&cru SCLK_SPDIF>, <&cru HCLK_SPDIF_8CH>;
--		clock-names = "mclk", "hclk";
--		dmas = <&pdma 10>;
--		dma-names = "tx";
--		pinctrl-names = "default";
--		pinctrl-0 = <&spdif_tx>;
--		status = "disabled";
--	};
--
--	i2s2: i2s2@100e0000 {
--		compatible = "rockchip,rk3228-i2s", "rockchip,rk3066-i2s";
--		reg = <0x100e0000 0x4000>;
--		interrupts = <GIC_SPI 28 IRQ_TYPE_LEVEL_HIGH>;
--		clock-names = "i2s_clk", "i2s_hclk";
--		clocks = <&cru SCLK_I2S2>, <&cru HCLK_I2S2_2CH>;
--		dmas = <&pdma 0>, <&pdma 1>;
--		dma-names = "tx", "rx";
--		status = "disabled";
--	};
--
--	grf: syscon@11000000 {
--		compatible = "rockchip,rk3228-grf", "syscon", "simple-mfd";
--		reg = <0x11000000 0x1000>;
--		#address-cells = <1>;
--		#size-cells = <1>;
--
--		io_domains: io-domains {
--			compatible = "rockchip,rk3228-io-voltage-domain";
--			status = "disabled";
--		};
--
--		power: power-controller {
--			compatible = "rockchip,rk3228-power-controller";
--			#power-domain-cells = <1>;
--			#address-cells = <1>;
--			#size-cells = <0>;
--
--			power-domain@RK3228_PD_VIO {
--				reg = <RK3228_PD_VIO>;
--				clocks = <&cru ACLK_HDCP>,
--					 <&cru SCLK_HDCP>,
--					 <&cru ACLK_IEP>,
--					 <&cru HCLK_IEP>,
--					 <&cru ACLK_RGA>,
--					 <&cru HCLK_RGA>,
--					 <&cru SCLK_RGA>;
--				pm_qos = <&qos_hdcp>,
--					 <&qos_iep>,
--					 <&qos_rga_r>,
--					 <&qos_rga_w>;
--				#power-domain-cells = <0>;
--			};
--
--			power-domain@RK3228_PD_VOP {
--				reg = <RK3228_PD_VOP>;
--				clocks =<&cru ACLK_VOP>,
--					<&cru DCLK_VOP>,
--					<&cru HCLK_VOP>;
--				pm_qos = <&qos_vop>;
--				#power-domain-cells = <0>;
--			};
--
--			power-domain@RK3228_PD_VPU {
--				reg = <RK3228_PD_VPU>;
--				clocks = <&cru ACLK_VPU>,
--					 <&cru HCLK_VPU>;
--				pm_qos = <&qos_vpu>;
--				#power-domain-cells = <0>;
--			};
--
--			power-domain@RK3228_PD_RKVDEC {
--				reg = <RK3228_PD_RKVDEC>;
--				clocks = <&cru ACLK_RKVDEC>,
--					 <&cru HCLK_RKVDEC>,
--					 <&cru SCLK_VDEC_CABAC>,
--					 <&cru SCLK_VDEC_CORE>;
--				pm_qos = <&qos_rkvdec_r>,
--					 <&qos_rkvdec_w>;
--				#power-domain-cells = <0>;
--			};
--
--			power-domain@RK3228_PD_GPU {
--				reg = <RK3228_PD_GPU>;
--				clocks = <&cru ACLK_GPU>;
--				pm_qos = <&qos_gpu>;
--				#power-domain-cells = <0>;
--			};
--		};
--
--		u2phy0: usb2phy@760 {
--			compatible = "rockchip,rk3228-usb2phy";
--			reg = <0x0760 0x0c>;
--			clocks = <&cru SCLK_OTGPHY0>;
--			clock-names = "phyclk";
--			clock-output-names = "usb480m_phy0";
--			#clock-cells = <0>;
--			status = "disabled";
--
--			u2phy0_otg: otg-port {
--				interrupts = <GIC_SPI 59 IRQ_TYPE_LEVEL_HIGH>,
--					     <GIC_SPI 60 IRQ_TYPE_LEVEL_HIGH>,
--					     <GIC_SPI 61 IRQ_TYPE_LEVEL_HIGH>;
--				interrupt-names = "otg-bvalid", "otg-id",
--						  "linestate";
--				#phy-cells = <0>;
--				status = "disabled";
--			};
--
--			u2phy0_host: host-port {
--				interrupts = <GIC_SPI 62 IRQ_TYPE_LEVEL_HIGH>;
--				interrupt-names = "linestate";
--				#phy-cells = <0>;
--				status = "disabled";
--			};
--		};
--
--		u2phy1: usb2phy@800 {
--			compatible = "rockchip,rk3228-usb2phy";
--			reg = <0x0800 0x0c>;
--			clocks = <&cru SCLK_OTGPHY1>;
--			clock-names = "phyclk";
--			clock-output-names = "usb480m_phy1";
--			#clock-cells = <0>;
--			status = "disabled";
--
--			u2phy1_otg: otg-port {
--				interrupts = <GIC_SPI 68 IRQ_TYPE_LEVEL_HIGH>;
--				interrupt-names = "linestate";
--				#phy-cells = <0>;
--				status = "disabled";
--			};
--
--			u2phy1_host: host-port {
--				interrupts = <GIC_SPI 69 IRQ_TYPE_LEVEL_HIGH>;
--				interrupt-names = "linestate";
--				#phy-cells = <0>;
--				status = "disabled";
--			};
--		};
--	};
--
--	uart0: serial@11010000 {
--		compatible = "snps,dw-apb-uart";
--		reg = <0x11010000 0x100>;
--		interrupts = <GIC_SPI 55 IRQ_TYPE_LEVEL_HIGH>;
--		clock-frequency = <24000000>;
--		clocks = <&cru SCLK_UART0>, <&cru PCLK_UART0>;
--		clock-names = "baudclk", "apb_pclk";
--		pinctrl-names = "default";
--		pinctrl-0 = <&uart0_xfer &uart0_cts &uart0_rts>;
--		reg-shift = <2>;
--		reg-io-width = <4>;
--		status = "disabled";
--	};
--
--	uart1: serial@11020000 {
--		compatible = "snps,dw-apb-uart";
--		reg = <0x11020000 0x100>;
--		interrupts = <GIC_SPI 56 IRQ_TYPE_LEVEL_HIGH>;
--		clock-frequency = <24000000>;
--		clocks = <&cru SCLK_UART1>, <&cru PCLK_UART1>;
--		clock-names = "baudclk", "apb_pclk";
--		pinctrl-names = "default";
--		pinctrl-0 = <&uart1_xfer>;
--		reg-shift = <2>;
--		reg-io-width = <4>;
--		status = "disabled";
--	};
--
--	uart2: serial@11030000 {
--		compatible = "snps,dw-apb-uart";
--		reg = <0x11030000 0x100>;
--		interrupts = <GIC_SPI 57 IRQ_TYPE_LEVEL_HIGH>;
--		clock-frequency = <24000000>;
--		clocks = <&cru SCLK_UART2>, <&cru PCLK_UART2>;
--		clock-names = "baudclk", "apb_pclk";
--		pinctrl-names = "default";
--		pinctrl-0 = <&uart2_xfer>;
--		reg-shift = <2>;
--		reg-io-width = <4>;
--		status = "disabled";
--	};
--
--	efuse: efuse@11040000 {
--		compatible = "rockchip,rk3228-efuse";
--		reg = <0x11040000 0x20>;
--		clocks = <&cru PCLK_EFUSE_256>;
--		clock-names = "pclk_efuse";
--		#address-cells = <1>;
--		#size-cells = <1>;
--
--		/* Data cells */
--		efuse_id: id@7 {
--			reg = <0x7 0x10>;
--		};
--		cpu_leakage: cpu_leakage@17 {
--			reg = <0x17 0x1>;
--		};
--	};
--
--	i2c0: i2c@11050000 {
--		compatible = "rockchip,rk3228-i2c";
--		reg = <0x11050000 0x1000>;
--		interrupts = <GIC_SPI 36 IRQ_TYPE_LEVEL_HIGH>;
--		#address-cells = <1>;
--		#size-cells = <0>;
--		clock-names = "i2c";
--		clocks = <&cru PCLK_I2C0>;
--		pinctrl-names = "default";
--		pinctrl-0 = <&i2c0_xfer>;
--		status = "disabled";
--	};
--
--	i2c1: i2c@11060000 {
--		compatible = "rockchip,rk3228-i2c";
--		reg = <0x11060000 0x1000>;
--		interrupts = <GIC_SPI 37 IRQ_TYPE_LEVEL_HIGH>;
--		#address-cells = <1>;
--		#size-cells = <0>;
--		clock-names = "i2c";
--		clocks = <&cru PCLK_I2C1>;
--		pinctrl-names = "default";
--		pinctrl-0 = <&i2c1_xfer>;
--		status = "disabled";
--	};
--
--	i2c2: i2c@11070000 {
--		compatible = "rockchip,rk3228-i2c";
--		reg = <0x11070000 0x1000>;
--		interrupts = <GIC_SPI 38 IRQ_TYPE_LEVEL_HIGH>;
--		#address-cells = <1>;
--		#size-cells = <0>;
--		clock-names = "i2c";
--		clocks = <&cru PCLK_I2C2>;
--		pinctrl-names = "default";
--		pinctrl-0 = <&i2c2_xfer>;
--		status = "disabled";
--	};
--
--	i2c3: i2c@11080000 {
--		compatible = "rockchip,rk3228-i2c";
--		reg = <0x11080000 0x1000>;
--		interrupts = <GIC_SPI 39 IRQ_TYPE_LEVEL_HIGH>;
--		#address-cells = <1>;
--		#size-cells = <0>;
--		clock-names = "i2c";
--		clocks = <&cru PCLK_I2C3>;
--		pinctrl-names = "default";
--		pinctrl-0 = <&i2c3_xfer>;
--		status = "disabled";
--	};
--
--	spi0: spi@11090000 {
--		compatible = "rockchip,rk3228-spi";
--		reg = <0x11090000 0x1000>;
--		interrupts = <GIC_SPI 49 IRQ_TYPE_LEVEL_HIGH>;
--		#address-cells = <1>;
--		#size-cells = <0>;
--		clocks = <&cru SCLK_SPI0>, <&cru PCLK_SPI0>;
--		clock-names = "spiclk", "apb_pclk";
--		pinctrl-names = "default";
--		pinctrl-0 = <&spi0_clk &spi0_tx &spi0_rx &spi0_cs0 &spi0_cs1>;
--		status = "disabled";
--	};
--
--	wdt: watchdog@110a0000 {
--		compatible = "rockchip,rk3228-wdt", "snps,dw-wdt";
--		reg = <0x110a0000 0x100>;
--		interrupts = <GIC_SPI 40 IRQ_TYPE_LEVEL_HIGH>;
--		clocks = <&cru PCLK_CPU>;
--		status = "disabled";
--	};
--
--	pwm0: pwm@110b0000 {
--		compatible = "rockchip,rk3288-pwm";
--		reg = <0x110b0000 0x10>;
--		#pwm-cells = <3>;
--		clocks = <&cru PCLK_PWM>;
--		pinctrl-names = "default";
--		pinctrl-0 = <&pwm0_pin>;
--		status = "disabled";
--	};
--
--	pwm1: pwm@110b0010 {
--		compatible = "rockchip,rk3288-pwm";
--		reg = <0x110b0010 0x10>;
--		#pwm-cells = <3>;
--		clocks = <&cru PCLK_PWM>;
--		pinctrl-names = "default";
--		pinctrl-0 = <&pwm1_pin>;
--		status = "disabled";
--	};
--
--	pwm2: pwm@110b0020 {
--		compatible = "rockchip,rk3288-pwm";
--		reg = <0x110b0020 0x10>;
--		#pwm-cells = <3>;
--		clocks = <&cru PCLK_PWM>;
--		pinctrl-names = "default";
--		pinctrl-0 = <&pwm2_pin>;
--		status = "disabled";
--	};
--
--	pwm3: pwm@110b0030 {
--		compatible = "rockchip,rk3288-pwm";
--		reg = <0x110b0030 0x10>;
--		#pwm-cells = <2>;
--		clocks = <&cru PCLK_PWM>;
--		pinctrl-names = "default";
--		pinctrl-0 = <&pwm3_pin>;
--		status = "disabled";
--	};
--
--	timer: timer@110c0000 {
--		compatible = "rockchip,rk3228-timer", "rockchip,rk3288-timer";
--		reg = <0x110c0000 0x20>;
--		interrupts = <GIC_SPI 43 IRQ_TYPE_LEVEL_HIGH>;
--		clocks = <&cru PCLK_TIMER>, <&xin24m>;
--		clock-names = "pclk", "timer";
--	};
--
--	cru: clock-controller@110e0000 {
--		compatible = "rockchip,rk3228-cru";
--		reg = <0x110e0000 0x1000>;
--		rockchip,grf = <&grf>;
--		#clock-cells = <1>;
--		#reset-cells = <1>;
--		assigned-clocks =
--			<&cru PLL_GPLL>, <&cru ARMCLK>,
--			<&cru PLL_CPLL>, <&cru ACLK_PERI>,
--			<&cru HCLK_PERI>, <&cru PCLK_PERI>,
--			<&cru ACLK_CPU>, <&cru HCLK_CPU>,
--			<&cru PCLK_CPU>;
--		assigned-clock-rates =
--			<594000000>, <816000000>,
--			<500000000>, <150000000>,
--			<150000000>, <75000000>,
--			<150000000>, <150000000>,
--			<75000000>;
--	};
--
--	pdma: pdma@110f0000 {
--		compatible = "arm,pl330", "arm,primecell";
--		reg = <0x110f0000 0x4000>;
--		interrupts = <GIC_SPI 0 IRQ_TYPE_LEVEL_HIGH>,
--			     <GIC_SPI 1 IRQ_TYPE_LEVEL_HIGH>;
--		#dma-cells = <1>;
--		arm,pl330-periph-burst;
--		clocks = <&cru ACLK_DMAC>;
--		clock-names = "apb_pclk";
--	};
--
--	thermal-zones {
--		cpu_thermal: cpu-thermal {
--			polling-delay-passive = <100>; /* milliseconds */
--			polling-delay = <5000>; /* milliseconds */
--
--			thermal-sensors = <&tsadc 0>;
--
--			trips {
--				cpu_alert0: cpu_alert0 {
--					temperature = <70000>; /* millicelsius */
--					hysteresis = <2000>; /* millicelsius */
--					type = "passive";
--				};
--				cpu_alert1: cpu_alert1 {
--					temperature = <75000>; /* millicelsius */
--					hysteresis = <2000>; /* millicelsius */
--					type = "passive";
--				};
--				cpu_crit: cpu_crit {
--					temperature = <90000>; /* millicelsius */
--					hysteresis = <2000>; /* millicelsius */
--					type = "critical";
--				};
--			};
--
--			cooling-maps {
--				map0 {
--					trip = <&cpu_alert0>;
--					cooling-device =
--						<&cpu0 THERMAL_NO_LIMIT 6>,
--						<&cpu1 THERMAL_NO_LIMIT 6>,
--						<&cpu2 THERMAL_NO_LIMIT 6>,
--						<&cpu3 THERMAL_NO_LIMIT 6>;
--				};
--				map1 {
--					trip = <&cpu_alert1>;
--					cooling-device =
--						<&cpu0 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
--						<&cpu1 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
--						<&cpu2 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
--						<&cpu3 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>;
--				};
--			};
--		};
--	};
--
--	tsadc: tsadc@11150000 {
--		compatible = "rockchip,rk3228-tsadc";
--		reg = <0x11150000 0x100>;
--		interrupts = <GIC_SPI 58 IRQ_TYPE_LEVEL_HIGH>;
--		clocks = <&cru SCLK_TSADC>, <&cru PCLK_TSADC>;
--		clock-names = "tsadc", "apb_pclk";
--		assigned-clocks = <&cru SCLK_TSADC>;
--		assigned-clock-rates = <32768>;
--		resets = <&cru SRST_TSADC>;
--		reset-names = "tsadc-apb";
--		pinctrl-names = "init", "default", "sleep";
--		pinctrl-0 = <&otp_pin>;
--		pinctrl-1 = <&otp_out>;
--		pinctrl-2 = <&otp_pin>;
--		#thermal-sensor-cells = <1>;
--		rockchip,hw-tshut-temp = <95000>;
--		status = "disabled";
--	};
--
--	hdmi_phy: hdmi-phy@12030000 {
--		compatible = "rockchip,rk3228-hdmi-phy";
--		reg = <0x12030000 0x10000>;
--		clocks = <&cru PCLK_HDMI_PHY>, <&xin24m>, <&cru DCLK_HDMI_PHY>;
--		clock-names = "sysclk", "refoclk", "refpclk";
--		#clock-cells = <0>;
--		clock-output-names = "hdmiphy_phy";
--		#phy-cells = <0>;
--		status = "disabled";
--	};
--
--	gpu: gpu@20000000 {
--		compatible = "rockchip,rk3228-mali", "arm,mali-400";
--		reg = <0x20000000 0x10000>;
--		interrupts = <GIC_SPI 6 IRQ_TYPE_LEVEL_HIGH>,
--			     <GIC_SPI 5 IRQ_TYPE_LEVEL_HIGH>,
--			     <GIC_SPI 4 IRQ_TYPE_LEVEL_HIGH>,
--			     <GIC_SPI 5 IRQ_TYPE_LEVEL_HIGH>,
--			     <GIC_SPI 4 IRQ_TYPE_LEVEL_HIGH>,
--			     <GIC_SPI 5 IRQ_TYPE_LEVEL_HIGH>;
--		interrupt-names = "gp",
--				  "gpmmu",
--				  "pp0",
--				  "ppmmu0",
--				  "pp1",
--				  "ppmmu1";
--		clocks = <&cru ACLK_GPU>, <&cru ACLK_GPU>;
--		clock-names = "bus", "core";
--		power-domains = <&power RK3228_PD_GPU>;
--		resets = <&cru SRST_GPU_A>;
--		status = "disabled";
--	};
--
--	vpu: video-codec@20020000 {
--		compatible = "rockchip,rk3228-vpu", "rockchip,rk3399-vpu";
--		reg = <0x20020000 0x800>;
--		interrupts = <GIC_SPI 11 IRQ_TYPE_LEVEL_HIGH>,
--			     <GIC_SPI  9 IRQ_TYPE_LEVEL_HIGH>;
--		interrupt-names = "vepu", "vdpu";
--		clocks = <&cru ACLK_VPU>, <&cru HCLK_VPU>;
--		clock-names = "aclk", "hclk";
--		iommus = <&vpu_mmu>;
--		power-domains = <&power RK3228_PD_VPU>;
--	};
--
--	vpu_mmu: iommu@20020800 {
--		compatible = "rockchip,iommu";
--		reg = <0x20020800 0x100>;
--		interrupts = <GIC_SPI 10 IRQ_TYPE_LEVEL_HIGH>;
--		clocks = <&cru ACLK_VPU>, <&cru HCLK_VPU>;
--		clock-names = "aclk", "iface";
--		power-domains = <&power RK3228_PD_VPU>;
--		#iommu-cells = <0>;
--	};
--
--	vdec: video-codec@20030000 {
--		compatible = "rockchip,rk3228-vdec", "rockchip,rk3399-vdec";
--		reg = <0x20030000 0x480>;
--		interrupts = <GIC_SPI 7 IRQ_TYPE_LEVEL_HIGH>;
--		clocks = <&cru ACLK_RKVDEC>, <&cru HCLK_RKVDEC>,
--			 <&cru SCLK_VDEC_CABAC>, <&cru SCLK_VDEC_CORE>;
--		clock-names = "axi", "ahb", "cabac", "core";
--		assigned-clocks = <&cru SCLK_VDEC_CABAC>, <&cru SCLK_VDEC_CORE>;
--		assigned-clock-rates = <300000000>, <300000000>;
--		iommus = <&vdec_mmu>;
--		power-domains = <&power RK3228_PD_RKVDEC>;
--	};
--
--	vdec_mmu: iommu@20030480 {
--		compatible = "rockchip,iommu";
--		reg = <0x20030480 0x40>, <0x200304c0 0x40>;
--		interrupts = <GIC_SPI 8 IRQ_TYPE_LEVEL_HIGH>;
--		clocks = <&cru ACLK_RKVDEC>, <&cru HCLK_RKVDEC>;
--		clock-names = "aclk", "iface";
--		power-domains = <&power RK3228_PD_RKVDEC>;
--		#iommu-cells = <0>;
--	};
--
--	vop: vop@20050000 {
--		compatible = "rockchip,rk3228-vop";
--		reg = <0x20050000 0x1ffc>;
--		interrupts = <GIC_SPI 32 IRQ_TYPE_LEVEL_HIGH>;
--		clocks = <&cru ACLK_VOP>, <&cru DCLK_VOP>, <&cru HCLK_VOP>;
--		clock-names = "aclk_vop", "dclk_vop", "hclk_vop";
--		resets = <&cru SRST_VOP_A>, <&cru SRST_VOP_H>, <&cru SRST_VOP_D>;
--		reset-names = "axi", "ahb", "dclk";
--		iommus = <&vop_mmu>;
--		power-domains = <&power RK3228_PD_VOP>;
--		status = "disabled";
--
--		vop_out: port {
--			#address-cells = <1>;
--			#size-cells = <0>;
--
--			vop_out_hdmi: endpoint@0 {
--				reg = <0>;
--				remote-endpoint = <&hdmi_in_vop>;
--			};
--		};
--	};
--
--	vop_mmu: iommu@20053f00 {
--		compatible = "rockchip,iommu";
--		reg = <0x20053f00 0x100>;
--		interrupts = <GIC_SPI 32 IRQ_TYPE_LEVEL_HIGH>;
--		clocks = <&cru ACLK_VOP>, <&cru HCLK_VOP>;
--		clock-names = "aclk", "iface";
--		power-domains = <&power RK3228_PD_VOP>;
--		#iommu-cells = <0>;
--		status = "disabled";
--	};
--
--	rga: rga@20060000 {
--		compatible = "rockchip,rk3228-rga", "rockchip,rk3288-rga";
--		reg = <0x20060000 0x1000>;
--		interrupts = <GIC_SPI 33 IRQ_TYPE_LEVEL_HIGH>;
--		clocks = <&cru ACLK_RGA>, <&cru HCLK_RGA>, <&cru SCLK_RGA>;
--		clock-names = "aclk", "hclk", "sclk";
--		power-domains = <&power RK3228_PD_VIO>;
--		resets = <&cru SRST_RGA>, <&cru SRST_RGA_A>, <&cru SRST_RGA_H>;
--		reset-names = "core", "axi", "ahb";
--	};
--
--	iep_mmu: iommu@20070800 {
--		compatible = "rockchip,iommu";
--		reg = <0x20070800 0x100>;
--		interrupts = <GIC_SPI 31 IRQ_TYPE_LEVEL_HIGH>;
--		clocks = <&cru ACLK_IEP>, <&cru HCLK_IEP>;
--		clock-names = "aclk", "iface";
--		power-domains = <&power RK3228_PD_VIO>;
--		#iommu-cells = <0>;
--		status = "disabled";
--	};
--
--	hdmi: hdmi@200a0000 {
--		compatible = "rockchip,rk3228-dw-hdmi";
--		reg = <0x200a0000 0x20000>;
--		reg-io-width = <4>;
--		interrupts = <GIC_SPI 35 IRQ_TYPE_LEVEL_HIGH>;
--		assigned-clocks = <&cru SCLK_HDMI_PHY>;
--		assigned-clock-parents = <&hdmi_phy>;
--		clocks = <&cru SCLK_HDMI_HDCP>, <&cru PCLK_HDMI_CTRL>, <&cru SCLK_HDMI_CEC>;
--		clock-names = "isfr", "iahb", "cec";
--		pinctrl-names = "default";
--		pinctrl-0 = <&hdmii2c_xfer &hdmi_hpd &hdmi_cec>;
--		resets = <&cru SRST_HDMI_P>;
--		reset-names = "hdmi";
--		phys = <&hdmi_phy>;
--		phy-names = "hdmi";
--		rockchip,grf = <&grf>;
--		status = "disabled";
--
--		ports {
--			hdmi_in: port {
--				#address-cells = <1>;
--				#size-cells = <0>;
--				hdmi_in_vop: endpoint@0 {
--					reg = <0>;
--					remote-endpoint = <&vop_out_hdmi>;
--				};
--			};
--		};
--	};
--
--	sdmmc: mmc@30000000 {
--		compatible = "rockchip,rk3228-dw-mshc", "rockchip,rk3288-dw-mshc";
--		reg = <0x30000000 0x4000>;
--		interrupts = <GIC_SPI 12 IRQ_TYPE_LEVEL_HIGH>;
--		clocks = <&cru HCLK_SDMMC>, <&cru SCLK_SDMMC>,
--			 <&cru SCLK_SDMMC_DRV>, <&cru SCLK_SDMMC_SAMPLE>;
--		clock-names = "biu", "ciu", "ciu-drive", "ciu-sample";
--		fifo-depth = <0x100>;
--		pinctrl-names = "default";
--		pinctrl-0 = <&sdmmc_clk &sdmmc_cmd &sdmmc_bus4>;
--		status = "disabled";
--	};
--
--	sdio: mmc@30010000 {
--		compatible = "rockchip,rk3228-dw-mshc", "rockchip,rk3288-dw-mshc";
--		reg = <0x30010000 0x4000>;
--		interrupts = <GIC_SPI 13 IRQ_TYPE_LEVEL_HIGH>;
--		clocks = <&cru HCLK_SDIO>, <&cru SCLK_SDIO>,
--			 <&cru SCLK_SDIO_DRV>, <&cru SCLK_SDIO_SAMPLE>;
--		clock-names = "biu", "ciu", "ciu-drive", "ciu-sample";
--		fifo-depth = <0x100>;
--		pinctrl-names = "default";
--		pinctrl-0 = <&sdio_clk &sdio_cmd &sdio_bus4>;
--		status = "disabled";
--	};
--
--	emmc: mmc@30020000 {
--		compatible = "rockchip,rk3228-dw-mshc", "rockchip,rk3288-dw-mshc";
--		reg = <0x30020000 0x4000>;
--		interrupts = <GIC_SPI 14 IRQ_TYPE_LEVEL_HIGH>;
--		clock-frequency = <37500000>;
--		max-frequency = <37500000>;
--		clocks = <&cru HCLK_EMMC>, <&cru SCLK_EMMC>,
--			 <&cru SCLK_EMMC_DRV>, <&cru SCLK_EMMC_SAMPLE>;
--		clock-names = "biu", "ciu", "ciu-drive", "ciu-sample";
--		bus-width = <8>;
--		rockchip,default-sample-phase = <158>;
--		fifo-depth = <0x100>;
--		pinctrl-names = "default";
--		pinctrl-0 = <&emmc_clk &emmc_cmd &emmc_bus8>;
--		resets = <&cru SRST_EMMC>;
--		reset-names = "reset";
--		status = "disabled";
--	};
--
--	usb_otg: usb@30040000 {
--		compatible = "rockchip,rk3228-usb", "rockchip,rk3066-usb",
--			     "snps,dwc2";
--		reg = <0x30040000 0x40000>;
--		interrupts = <GIC_SPI 23 IRQ_TYPE_LEVEL_HIGH>;
--		clocks = <&cru HCLK_OTG>;
--		clock-names = "otg";
--		dr_mode = "otg";
--		g-np-tx-fifo-size = <16>;
--		g-rx-fifo-size = <280>;
--		g-tx-fifo-size = <256 128 128 64 32 16>;
--		phys = <&u2phy0_otg>;
--		phy-names = "usb2-phy";
--		status = "disabled";
--	};
--
--	usb_host0_ehci: usb@30080000 {
--		compatible = "generic-ehci";
--		reg = <0x30080000 0x20000>;
--		interrupts = <GIC_SPI 16 IRQ_TYPE_LEVEL_HIGH>;
--		clocks = <&cru HCLK_HOST0>, <&u2phy0>;
--		phys = <&u2phy0_host>;
--		phy-names = "usb";
--		status = "disabled";
--	};
--
--	usb_host0_ohci: usb@300a0000 {
--		compatible = "generic-ohci";
--		reg = <0x300a0000 0x20000>;
--		interrupts = <GIC_SPI 17 IRQ_TYPE_LEVEL_HIGH>;
--		clocks = <&cru HCLK_HOST0>, <&u2phy0>;
--		phys = <&u2phy0_host>;
--		phy-names = "usb";
--		status = "disabled";
--	};
--
--	usb_host1_ehci: usb@300c0000 {
--		compatible = "generic-ehci";
--		reg = <0x300c0000 0x20000>;
--		interrupts = <GIC_SPI 19 IRQ_TYPE_LEVEL_HIGH>;
--		clocks = <&cru HCLK_HOST1>, <&u2phy1>;
--		phys = <&u2phy1_otg>;
--		phy-names = "usb";
--		status = "disabled";
--	};
--
--	usb_host1_ohci: usb@300e0000 {
--		compatible = "generic-ohci";
--		reg = <0x300e0000 0x20000>;
--		interrupts = <GIC_SPI 20 IRQ_TYPE_LEVEL_HIGH>;
--		clocks = <&cru HCLK_HOST1>, <&u2phy1>;
--		phys = <&u2phy1_otg>;
--		phy-names = "usb";
--		status = "disabled";
--	};
--
--	usb_host2_ehci: usb@30100000 {
--		compatible = "generic-ehci";
--		reg = <0x30100000 0x20000>;
--		interrupts = <GIC_SPI 66 IRQ_TYPE_LEVEL_HIGH>;
--		clocks = <&cru HCLK_HOST2>, <&u2phy1>;
--		phys = <&u2phy1_host>;
--		phy-names = "usb";
--		status = "disabled";
--	};
--
--	usb_host2_ohci: usb@30120000 {
--		compatible = "generic-ohci";
--		reg = <0x30120000 0x20000>;
--		interrupts = <GIC_SPI 67 IRQ_TYPE_LEVEL_HIGH>;
--		clocks = <&cru HCLK_HOST2>, <&u2phy1>;
--		phys = <&u2phy1_host>;
--		phy-names = "usb";
--		status = "disabled";
--	};
--
--	gmac: ethernet@30200000 {
--		compatible = "rockchip,rk3228-gmac";
--		reg = <0x30200000 0x10000>;
--		interrupts = <GIC_SPI 24 IRQ_TYPE_LEVEL_HIGH>;
--		interrupt-names = "macirq";
--		clocks = <&cru SCLK_MAC>, <&cru SCLK_MAC_RX>,
--			<&cru SCLK_MAC_TX>, <&cru SCLK_MAC_REF>,
--			<&cru SCLK_MAC_REFOUT>, <&cru ACLK_GMAC>,
--			<&cru PCLK_GMAC>;
--		clock-names = "stmmaceth", "mac_clk_rx",
--			"mac_clk_tx", "clk_mac_ref",
--			"clk_mac_refout", "aclk_mac",
--			"pclk_mac";
--		resets = <&cru SRST_GMAC>;
--		reset-names = "stmmaceth";
--		rockchip,grf = <&grf>;
--		status = "disabled";
--	};
--
--	qos_iep: qos@31030080 {
--		compatible = "rockchip,rk3228-qos", "syscon";
--		reg = <0x31030080 0x20>;
--	};
--
--	qos_rga_w: qos@31030100 {
--		compatible = "rockchip,rk3228-qos", "syscon";
--		reg = <0x31030100 0x20>;
--	};
--
--	qos_hdcp: qos@31030180 {
--		compatible = "rockchip,rk3228-qos", "syscon";
--		reg = <0x31030180 0x20>;
--	};
--
--	qos_rga_r: qos@31030200 {
--		compatible = "rockchip,rk3228-qos", "syscon";
--		reg = <0x31030200 0x20>;
--	};
--
--	qos_vpu: qos@31040000 {
--		compatible = "rockchip,rk3228-qos", "syscon";
--		reg = <0x31040000 0x20>;
--	};
--
--	qos_gpu: qos@31050000 {
--		compatible = "rockchip,rk3228-qos", "syscon";
--		reg = <0x31050000 0x20>;
--	};
--
--	qos_vop: qos@31060000 {
--		compatible = "rockchip,rk3228-qos", "syscon";
--		reg = <0x31060000 0x20>;
--	};
--
--	qos_rkvdec_r: qos@31070000 {
--		compatible = "rockchip,rk3228-qos", "syscon";
--		reg = <0x31070000 0x20>;
--	};
--
--	qos_rkvdec_w: qos@31070080 {
--		compatible = "rockchip,rk3228-qos", "syscon";
--		reg = <0x31070080 0x20>;
--	};
--
--	gic: interrupt-controller@32010000 {
--		compatible = "arm,gic-400";
--		interrupt-controller;
--		#interrupt-cells = <3>;
--		#address-cells = <0>;
--
--		reg = <0x32011000 0x1000>,
--		      <0x32012000 0x2000>,
--		      <0x32014000 0x2000>,
--		      <0x32016000 0x2000>;
--		interrupts = <GIC_PPI 9 (GIC_CPU_MASK_SIMPLE(4) | IRQ_TYPE_LEVEL_HIGH)>;
--	};
--
--	pinctrl: pinctrl {
--		compatible = "rockchip,rk3228-pinctrl";
--		rockchip,grf = <&grf>;
--		#address-cells = <1>;
--		#size-cells = <1>;
--		ranges;
--
--		gpio0: gpio@11110000 {
--			compatible = "rockchip,gpio-bank";
--			reg = <0x11110000 0x100>;
--			interrupts = <GIC_SPI 51 IRQ_TYPE_LEVEL_HIGH>;
--			clocks = <&cru PCLK_GPIO0>;
--
--			gpio-controller;
--			#gpio-cells = <2>;
--
--			interrupt-controller;
--			#interrupt-cells = <2>;
--		};
--
--		gpio1: gpio@11120000 {
--			compatible = "rockchip,gpio-bank";
--			reg = <0x11120000 0x100>;
--			interrupts = <GIC_SPI 52 IRQ_TYPE_LEVEL_HIGH>;
--			clocks = <&cru PCLK_GPIO1>;
--
--			gpio-controller;
--			#gpio-cells = <2>;
--
--			interrupt-controller;
--			#interrupt-cells = <2>;
--		};
--
--		gpio2: gpio@11130000 {
--			compatible = "rockchip,gpio-bank";
--			reg = <0x11130000 0x100>;
--			interrupts = <GIC_SPI 53 IRQ_TYPE_LEVEL_HIGH>;
--			clocks = <&cru PCLK_GPIO2>;
--
--			gpio-controller;
--			#gpio-cells = <2>;
--
--			interrupt-controller;
--			#interrupt-cells = <2>;
--		};
--
--		gpio3: gpio@11140000 {
--			compatible = "rockchip,gpio-bank";
--			reg = <0x11140000 0x100>;
--			interrupts = <GIC_SPI 54 IRQ_TYPE_LEVEL_HIGH>;
--			clocks = <&cru PCLK_GPIO3>;
--
--			gpio-controller;
--			#gpio-cells = <2>;
--
--			interrupt-controller;
--			#interrupt-cells = <2>;
--		};
--
--		pcfg_pull_up: pcfg-pull-up {
--			bias-pull-up;
--		};
--
--		pcfg_pull_down: pcfg-pull-down {
--			bias-pull-down;
--		};
--
--		pcfg_pull_none: pcfg-pull-none {
--			bias-disable;
--		};
--
--		pcfg_pull_none_drv_12ma: pcfg-pull-none-drv-12ma {
--			drive-strength = <12>;
--		};
--
--		sdmmc {
--			sdmmc_clk: sdmmc-clk {
--				rockchip,pins = <1 RK_PC0 1 &pcfg_pull_none_drv_12ma>;
--			};
--
--			sdmmc_cmd: sdmmc-cmd {
--				rockchip,pins = <1 RK_PB7 1 &pcfg_pull_none_drv_12ma>;
--			};
--
--			sdmmc_bus4: sdmmc-bus4 {
--				rockchip,pins = <1 RK_PC2 1 &pcfg_pull_none_drv_12ma>,
--						<1 RK_PC3 1 &pcfg_pull_none_drv_12ma>,
--						<1 RK_PC4 1 &pcfg_pull_none_drv_12ma>,
--						<1 RK_PC5 1 &pcfg_pull_none_drv_12ma>;
--			};
--		};
--
--		sdio {
--			sdio_clk: sdio-clk {
--				rockchip,pins = <3 RK_PA0 1 &pcfg_pull_none_drv_12ma>;
--			};
--
--			sdio_cmd: sdio-cmd {
--				rockchip,pins = <3 RK_PA1 1 &pcfg_pull_none_drv_12ma>;
--			};
--
--			sdio_bus4: sdio-bus4 {
--				rockchip,pins = <3 RK_PA2 1 &pcfg_pull_none_drv_12ma>,
--						<3 RK_PA3 1 &pcfg_pull_none_drv_12ma>,
--						<3 RK_PA4 1 &pcfg_pull_none_drv_12ma>,
--						<3 RK_PA5 1 &pcfg_pull_none_drv_12ma>;
--			};
--		};
--
--		emmc {
--			emmc_clk: emmc-clk {
--				rockchip,pins = <2 RK_PA7 2 &pcfg_pull_none>;
--			};
--
--			emmc_cmd: emmc-cmd {
--				rockchip,pins = <1 RK_PC6 2 &pcfg_pull_none>;
--			};
--
--			emmc_bus8: emmc-bus8 {
--				rockchip,pins = <1 RK_PD0 2 &pcfg_pull_none>,
--						<1 RK_PD1 2 &pcfg_pull_none>,
--						<1 RK_PD2 2 &pcfg_pull_none>,
--						<1 RK_PD3 2 &pcfg_pull_none>,
--						<1 RK_PD4 2 &pcfg_pull_none>,
--						<1 RK_PD5 2 &pcfg_pull_none>,
--						<1 RK_PD6 2 &pcfg_pull_none>,
--						<1 RK_PD7 2 &pcfg_pull_none>;
--			};
--		};
--
--		gmac {
--			rgmii_pins: rgmii-pins {
--				rockchip,pins = <2 RK_PB6 1 &pcfg_pull_none>,
--						<2 RK_PB4 1 &pcfg_pull_none>,
--						<2 RK_PD1 1 &pcfg_pull_none>,
--						<2 RK_PC3 1 &pcfg_pull_none_drv_12ma>,
--						<2 RK_PC2 1 &pcfg_pull_none_drv_12ma>,
--						<2 RK_PC6 1 &pcfg_pull_none_drv_12ma>,
--						<2 RK_PC7 1 &pcfg_pull_none_drv_12ma>,
--						<2 RK_PB1 1 &pcfg_pull_none_drv_12ma>,
--						<2 RK_PB5 1 &pcfg_pull_none_drv_12ma>,
--						<2 RK_PC1 1 &pcfg_pull_none>,
--						<2 RK_PC0 1 &pcfg_pull_none>,
--						<2 RK_PC5 2 &pcfg_pull_none>,
--						<2 RK_PC4 2 &pcfg_pull_none>,
--						<2 RK_PB3 1 &pcfg_pull_none>,
--						<2 RK_PB0 1 &pcfg_pull_none>;
--			};
--
--			rmii_pins: rmii-pins {
--				rockchip,pins = <2 RK_PB6 1 &pcfg_pull_none>,
--						<2 RK_PB4 1 &pcfg_pull_none>,
--						<2 RK_PD1 1 &pcfg_pull_none>,
--						<2 RK_PC3 1 &pcfg_pull_none_drv_12ma>,
--						<2 RK_PC2 1 &pcfg_pull_none_drv_12ma>,
--						<2 RK_PB5 1 &pcfg_pull_none_drv_12ma>,
--						<2 RK_PC1 1 &pcfg_pull_none>,
--						<2 RK_PC0 1 &pcfg_pull_none>,
--						<2 RK_PB0 1 &pcfg_pull_none>,
--						<2 RK_PB7 1 &pcfg_pull_none>;
--			};
--
--			phy_pins: phy-pins {
--				rockchip,pins = <2 RK_PB6 2 &pcfg_pull_none>,
--						<2 RK_PB0 2 &pcfg_pull_none>;
--			};
--		};
--
--		hdmi {
--			hdmi_hpd: hdmi-hpd {
--				rockchip,pins = <0 RK_PB7 1 &pcfg_pull_down>;
--			};
--
--			hdmii2c_xfer: hdmii2c-xfer {
--				rockchip,pins = <0 RK_PA6 2 &pcfg_pull_none>,
--						<0 RK_PA7 2 &pcfg_pull_none>;
--			};
--
--			hdmi_cec: hdmi-cec {
--				rockchip,pins = <0 RK_PC4 1 &pcfg_pull_none>;
--			};
--		};
--
--		i2c0 {
--			i2c0_xfer: i2c0-xfer {
--				rockchip,pins = <0 RK_PA0 1 &pcfg_pull_none>,
--						<0 RK_PA1 1 &pcfg_pull_none>;
--			};
--		};
--
--		i2c1 {
--			i2c1_xfer: i2c1-xfer {
--				rockchip,pins = <0 RK_PA2 1 &pcfg_pull_none>,
--						<0 RK_PA3 1 &pcfg_pull_none>;
--			};
--		};
--
--		i2c2 {
--			i2c2_xfer: i2c2-xfer {
--				rockchip,pins = <2 RK_PC4 1 &pcfg_pull_none>,
--						<2 RK_PC5 1 &pcfg_pull_none>;
--			};
--		};
--
--		i2c3 {
--			i2c3_xfer: i2c3-xfer {
--				rockchip,pins = <0 RK_PA6 1 &pcfg_pull_none>,
--						<0 RK_PA7 1 &pcfg_pull_none>;
--			};
--		};
--
--		spi0 {
--			spi0_clk: spi0-clk {
--				rockchip,pins = <0 RK_PB1 2 &pcfg_pull_up>;
--			};
--			spi0_cs0: spi0-cs0 {
--				rockchip,pins = <0 RK_PB6 2 &pcfg_pull_up>;
--			};
--			spi0_tx: spi0-tx {
--				rockchip,pins = <0 RK_PB3 2 &pcfg_pull_up>;
--			};
--			spi0_rx: spi0-rx {
--				rockchip,pins = <0 RK_PB5 2 &pcfg_pull_up>;
--			};
--			spi0_cs1: spi0-cs1 {
--				rockchip,pins = <1 RK_PB4 1 &pcfg_pull_up>;
--			};
--		};
--
--		spi1 {
--			spi1_clk: spi1-clk {
--				rockchip,pins = <0 RK_PC7 2 &pcfg_pull_up>;
--			};
--			spi1_cs0: spi1-cs0 {
--				rockchip,pins = <2 RK_PA2 2 &pcfg_pull_up>;
--			};
--			spi1_rx: spi1-rx {
--				rockchip,pins = <2 RK_PA0 2 &pcfg_pull_up>;
--			};
--			spi1_tx: spi1-tx {
--				rockchip,pins = <2 RK_PA1 2 &pcfg_pull_up>;
--			};
--			spi1_cs1: spi1-cs1 {
--				rockchip,pins = <2 RK_PA3 2 &pcfg_pull_up>;
--			};
--		};
--
--		i2s1 {
--			i2s1_bus: i2s1-bus {
--				rockchip,pins = <0 RK_PB0 1 &pcfg_pull_none>,
--						<0 RK_PB1 1 &pcfg_pull_none>,
--						<0 RK_PB3 1 &pcfg_pull_none>,
--						<0 RK_PB4 1 &pcfg_pull_none>,
--						<0 RK_PB5 1 &pcfg_pull_none>,
--						<0 RK_PB6 1 &pcfg_pull_none>,
--						<1 RK_PA2 2 &pcfg_pull_none>,
--						<1 RK_PA4 2 &pcfg_pull_none>,
--						<1 RK_PA5 2 &pcfg_pull_none>;
--			};
--		};
--
--		pwm0 {
--			pwm0_pin: pwm0-pin {
--				rockchip,pins = <3 RK_PC5 1 &pcfg_pull_none>;
--			};
--		};
--
--		pwm1 {
--			pwm1_pin: pwm1-pin {
--				rockchip,pins = <0 RK_PD6 2 &pcfg_pull_none>;
--			};
--		};
--
--		pwm2 {
--			pwm2_pin: pwm2-pin {
--				rockchip,pins = <1 RK_PB4 2 &pcfg_pull_none>;
--			};
--		};
--
--		pwm3 {
--			pwm3_pin: pwm3-pin {
--				rockchip,pins = <1 RK_PB3 2 &pcfg_pull_none>;
--			};
--		};
--
--		spdif {
--			spdif_tx: spdif-tx {
--				rockchip,pins = <3 RK_PD7 2 &pcfg_pull_none>;
--			};
--		};
--
--		tsadc {
--			otp_pin: otp-pin {
--				rockchip,pins = <0 RK_PD0 RK_FUNC_GPIO &pcfg_pull_none>;
--			};
--
--			otp_out: otp-out {
--				rockchip,pins = <0 RK_PD0 2 &pcfg_pull_none>;
--			};
--		};
--
--		uart0 {
--			uart0_xfer: uart0-xfer {
--				rockchip,pins = <2 RK_PD2 1 &pcfg_pull_none>,
--						<2 RK_PD3 1 &pcfg_pull_none>;
--			};
--
--			uart0_cts: uart0-cts {
--				rockchip,pins = <2 RK_PD5 1 &pcfg_pull_none>;
--			};
--
--			uart0_rts: uart0-rts {
--				rockchip,pins = <0 RK_PC1 1 &pcfg_pull_none>;
--			};
--		};
--
--		uart1 {
--			uart1_xfer: uart1-xfer {
--				rockchip,pins = <1 RK_PB1 1 &pcfg_pull_none>,
--						<1 RK_PB2 1 &pcfg_pull_none>;
--			};
--
--			uart1_cts: uart1-cts {
--				rockchip,pins = <1 RK_PB0 1 &pcfg_pull_none>;
--			};
--
--			uart1_rts: uart1-rts {
--				rockchip,pins = <1 RK_PB3 1 &pcfg_pull_none>;
--			};
--		};
--
--		uart2 {
--			uart2_xfer: uart2-xfer {
--				rockchip,pins = <1 RK_PC2 2 &pcfg_pull_up>,
--						<1 RK_PC3 2 &pcfg_pull_none>;
--			};
--
--			uart21_xfer: uart21-xfer {
--				rockchip,pins = <1 RK_PB2 2 &pcfg_pull_up>,
--						<1 RK_PB1 2 &pcfg_pull_none>;
--			};
--
--			uart2_cts: uart2-cts {
--				rockchip,pins = <0 RK_PD1 1 &pcfg_pull_none>;
--			};
--
--			uart2_rts: uart2-rts {
--				rockchip,pins = <0 RK_PD0 1 &pcfg_pull_none>;
--			};
--		};
--	};
--};
-diff --git a/arch/arm/mach-rockchip/Kconfig b/arch/arm/mach-rockchip/Kconfig
-index 02737c62df03..d92fcae2bb56 100644
---- a/arch/arm/mach-rockchip/Kconfig
-+++ b/arch/arm/mach-rockchip/Kconfig
-@@ -109,6 +109,7 @@ config ROCKCHIP_RK322X
- 	select TPL_OF_LIBFDT
- 	select TPL_HAVE_INIT_STACK if TPL
- 	select SPL_DRIVERS_MISC
-+	imply OF_UPSTREAM
- 	imply ROCKCHIP_COMMON_BOARD
- 	imply SPL_SERIAL
- 	imply SPL_ROCKCHIP_COMMON_BOARD
-diff --git a/board/rockchip/evb_rk3229/MAINTAINERS b/board/rockchip/evb_rk3229/MAINTAINERS
-index 4de97dbb0a49..7758ee9b9306 100644
---- a/board/rockchip/evb_rk3229/MAINTAINERS
-+++ b/board/rockchip/evb_rk3229/MAINTAINERS
-@@ -1,7 +1,6 @@
- EVB-RK3229
- M:      Kever Yang <kever.yang@rock-chips.com>
- S:      Maintained
--F:	arch/arm/dts/rk3229-evb.dts
- F:	arch/arm/dts/rk3229-evb-u-boot.dtsi
- F:      board/rockchip/evb_rk3229
- F:      include/configs/evb_rk3229.h
-diff --git a/configs/evb-rk3229_defconfig b/configs/evb-rk3229_defconfig
-index 116c04c914d7..46a682faecb0 100644
---- a/configs/evb-rk3229_defconfig
-+++ b/configs/evb-rk3229_defconfig
-@@ -9,7 +9,7 @@ CONFIG_NR_DRAM_BANKS=2
- CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
- CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x61100000
- CONFIG_ENV_OFFSET=0x3F8000
--CONFIG_DEFAULT_DEVICE_TREE="rk3229-evb"
-+CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3229-evb"
- CONFIG_ROCKCHIP_RK322X=y
- CONFIG_TARGET_EVB_RK3229=y
- CONFIG_SPL_STACK_R_ADDR=0x60600000
-@@ -24,7 +24,7 @@ CONFIG_FIT=y
- CONFIG_FIT_VERBOSE=y
- CONFIG_SPL_LOAD_FIT=y
- CONFIG_USE_PREBOOT=y
--CONFIG_DEFAULT_FDT_FILE="rk3229-evb.dtb"
-+CONFIG_DEFAULT_FDT_FILE="rockchip/rk3229-evb.dtb"
- # CONFIG_DISPLAY_CPUINFO is not set
- CONFIG_DISPLAY_BOARDINFO_LATE=y
- CONFIG_SPL_MAX_SIZE=0x100000
-diff --git a/include/dt-bindings/clock/rk3228-cru.h b/include/dt-bindings/clock/rk3228-cru.h
-deleted file mode 100644
-index de550ea56eeb..000000000000
---- a/include/dt-bindings/clock/rk3228-cru.h
-+++ /dev/null
-@@ -1,287 +0,0 @@
--/* SPDX-License-Identifier: GPL-2.0-or-later */
--/*
-- * Copyright (c) 2015 Rockchip Electronics Co. Ltd.
-- * Author: Jeffy Chen <jeffy.chen@rock-chips.com>
-- */
--
--#ifndef _DT_BINDINGS_CLK_ROCKCHIP_RK3228_H
--#define _DT_BINDINGS_CLK_ROCKCHIP_RK3228_H
--
--/* core clocks */
--#define PLL_APLL		1
--#define PLL_DPLL		2
--#define PLL_CPLL		3
--#define PLL_GPLL		4
--#define ARMCLK			5
--
--/* sclk gates (special clocks) */
--#define SCLK_SPI0		65
--#define SCLK_NANDC		67
--#define SCLK_SDMMC		68
--#define SCLK_SDIO		69
--#define SCLK_EMMC		71
--#define SCLK_TSADC		72
--#define SCLK_UART0		77
--#define SCLK_UART1		78
--#define SCLK_UART2		79
--#define SCLK_I2S0		80
--#define SCLK_I2S1		81
--#define SCLK_I2S2		82
--#define SCLK_SPDIF		83
--#define SCLK_TIMER0		85
--#define SCLK_TIMER1		86
--#define SCLK_TIMER2		87
--#define SCLK_TIMER3		88
--#define SCLK_TIMER4		89
--#define SCLK_TIMER5		90
--#define SCLK_I2S_OUT		113
--#define SCLK_SDMMC_DRV		114
--#define SCLK_SDIO_DRV		115
--#define SCLK_EMMC_DRV		117
--#define SCLK_SDMMC_SAMPLE	118
--#define SCLK_SDIO_SAMPLE	119
--#define SCLK_SDIO_SRC		120
--#define SCLK_EMMC_SAMPLE	121
--#define SCLK_VOP		122
--#define SCLK_HDMI_HDCP		123
--#define SCLK_MAC_SRC		124
--#define SCLK_MAC_EXTCLK		125
--#define SCLK_MAC		126
--#define SCLK_MAC_REFOUT		127
--#define SCLK_MAC_REF		128
--#define SCLK_MAC_RX		129
--#define SCLK_MAC_TX		130
--#define SCLK_MAC_PHY		131
--#define SCLK_MAC_OUT		132
--#define SCLK_VDEC_CABAC		133
--#define SCLK_VDEC_CORE		134
--#define SCLK_RGA		135
--#define SCLK_HDCP		136
--#define SCLK_HDMI_CEC		137
--#define SCLK_CRYPTO		138
--#define SCLK_TSP		139
--#define SCLK_HSADC		140
--#define SCLK_WIFI		141
--#define SCLK_OTGPHY0		142
--#define SCLK_OTGPHY1		143
--#define SCLK_HDMI_PHY		144
--
--/* dclk gates */
--#define DCLK_VOP		190
--#define DCLK_HDMI_PHY		191
--
--/* aclk gates */
--#define ACLK_DMAC		194
--#define ACLK_CPU		195
--#define ACLK_VPU_PRE		196
--#define ACLK_RKVDEC_PRE		197
--#define ACLK_RGA_PRE		198
--#define ACLK_IEP_PRE		199
--#define ACLK_HDCP_PRE		200
--#define ACLK_VOP_PRE		201
--#define ACLK_VPU		202
--#define ACLK_RKVDEC		203
--#define ACLK_IEP		204
--#define ACLK_RGA		205
--#define ACLK_HDCP		206
--#define ACLK_PERI		210
--#define ACLK_VOP		211
--#define ACLK_GMAC		212
--#define ACLK_GPU		213
--
--/* pclk gates */
--#define PCLK_GPIO0		320
--#define PCLK_GPIO1		321
--#define PCLK_GPIO2		322
--#define PCLK_GPIO3		323
--#define PCLK_VIO_H2P		324
--#define PCLK_HDCP		325
--#define PCLK_EFUSE_1024		326
--#define PCLK_EFUSE_256		327
--#define PCLK_GRF		329
--#define PCLK_I2C0		332
--#define PCLK_I2C1		333
--#define PCLK_I2C2		334
--#define PCLK_I2C3		335
--#define PCLK_SPI0		338
--#define PCLK_UART0		341
--#define PCLK_UART1		342
--#define PCLK_UART2		343
--#define PCLK_TSADC		344
--#define PCLK_PWM		350
--#define PCLK_TIMER		353
--#define PCLK_CPU		354
--#define PCLK_PERI		363
--#define PCLK_HDMI_CTRL		364
--#define PCLK_HDMI_PHY		365
--#define PCLK_GMAC		367
--
--/* hclk gates */
--#define HCLK_I2S0_8CH		442
--#define HCLK_I2S1_8CH		443
--#define HCLK_I2S2_2CH		444
--#define HCLK_SPDIF_8CH		445
--#define HCLK_VOP		452
--#define HCLK_NANDC		453
--#define HCLK_SDMMC		456
--#define HCLK_SDIO		457
--#define HCLK_EMMC		459
--#define HCLK_CPU		460
--#define HCLK_VPU_PRE		461
--#define HCLK_RKVDEC_PRE		462
--#define HCLK_VIO_PRE		463
--#define HCLK_VPU		464
--#define HCLK_RKVDEC		465
--#define HCLK_VIO		466
--#define HCLK_RGA		467
--#define HCLK_IEP		468
--#define HCLK_VIO_H2P		469
--#define HCLK_HDCP_MMU		470
--#define HCLK_HOST0		471
--#define HCLK_HOST1		472
--#define HCLK_HOST2		473
--#define HCLK_OTG		474
--#define HCLK_TSP		475
--#define HCLK_M_CRYPTO		476
--#define HCLK_S_CRYPTO		477
--#define HCLK_PERI		478
--
--#define CLK_NR_CLKS		(HCLK_PERI + 1)
--
--/* soft-reset indices */
--#define SRST_CORE0_PO		0
--#define SRST_CORE1_PO		1
--#define SRST_CORE2_PO		2
--#define SRST_CORE3_PO		3
--#define SRST_CORE0		4
--#define SRST_CORE1		5
--#define SRST_CORE2		6
--#define SRST_CORE3		7
--#define SRST_CORE0_DBG		8
--#define SRST_CORE1_DBG		9
--#define SRST_CORE2_DBG		10
--#define SRST_CORE3_DBG		11
--#define SRST_TOPDBG		12
--#define SRST_ACLK_CORE		13
--#define SRST_NOC		14
--#define SRST_L2C		15
--
--#define SRST_CPUSYS_H		18
--#define SRST_BUSSYS_H		19
--#define SRST_SPDIF		20
--#define SRST_INTMEM		21
--#define SRST_ROM		22
--#define SRST_OTG_ADP		23
--#define SRST_I2S0		24
--#define SRST_I2S1		25
--#define SRST_I2S2		26
--#define SRST_ACODEC_P		27
--#define SRST_DFIMON		28
--#define SRST_MSCH		29
--#define SRST_EFUSE1024		30
--#define SRST_EFUSE256		31
--
--#define SRST_GPIO0		32
--#define SRST_GPIO1		33
--#define SRST_GPIO2		34
--#define SRST_GPIO3		35
--#define SRST_PERIPH_NOC_A	36
--#define SRST_PERIPH_NOC_BUS_H	37
--#define SRST_PERIPH_NOC_P	38
--#define SRST_UART0		39
--#define SRST_UART1		40
--#define SRST_UART2		41
--#define SRST_PHYNOC		42
--#define SRST_I2C0		43
--#define SRST_I2C1		44
--#define SRST_I2C2		45
--#define SRST_I2C3		46
--
--#define SRST_PWM		48
--#define SRST_A53_GIC		49
--#define SRST_DAP		51
--#define SRST_DAP_NOC		52
--#define SRST_CRYPTO		53
--#define SRST_SGRF		54
--#define SRST_GRF		55
--#define SRST_GMAC		56
--#define SRST_PERIPH_NOC_H	58
--#define SRST_MACPHY		63
--
--#define SRST_DMA		64
--#define SRST_NANDC		68
--#define SRST_USBOTG		69
--#define SRST_OTGC		70
--#define SRST_USBHOST0		71
--#define SRST_HOST_CTRL0		72
--#define SRST_USBHOST1		73
--#define SRST_HOST_CTRL1		74
--#define SRST_USBHOST2		75
--#define SRST_HOST_CTRL2		76
--#define SRST_USBPOR0		77
--#define SRST_USBPOR1		78
--#define SRST_DDRMSCH		79
--
--#define SRST_SMART_CARD		80
--#define SRST_SDMMC		81
--#define SRST_SDIO		82
--#define SRST_EMMC		83
--#define SRST_SPI		84
--#define SRST_TSP_H		85
--#define SRST_TSP		86
--#define SRST_TSADC		87
--#define SRST_DDRPHY		88
--#define SRST_DDRPHY_P		89
--#define SRST_DDRCTRL		90
--#define SRST_DDRCTRL_P		91
--#define SRST_HOST0_ECHI		92
--#define SRST_HOST1_ECHI		93
--#define SRST_HOST2_ECHI		94
--#define SRST_VOP_NOC_A		95
--
--#define SRST_HDMI_P		96
--#define SRST_VIO_ARBI_H		97
--#define SRST_IEP_NOC_A		98
--#define SRST_VIO_NOC_H		99
--#define SRST_VOP_A		100
--#define SRST_VOP_H		101
--#define SRST_VOP_D		102
--#define SRST_UTMI0		103
--#define SRST_UTMI1		104
--#define SRST_UTMI2		105
--#define SRST_UTMI3		106
--#define SRST_RGA		107
--#define SRST_RGA_NOC_A		108
--#define SRST_RGA_A		109
--#define SRST_RGA_H		110
--#define SRST_HDCP_A		111
--
--#define SRST_VPU_A		112
--#define SRST_VPU_H		113
--#define SRST_VPU_NOC_A		116
--#define SRST_VPU_NOC_H		117
--#define SRST_RKVDEC_A		118
--#define SRST_RKVDEC_NOC_A	119
--#define SRST_RKVDEC_H		120
--#define SRST_RKVDEC_NOC_H	121
--#define SRST_RKVDEC_CORE	122
--#define SRST_RKVDEC_CABAC	123
--#define SRST_IEP_A		124
--#define SRST_IEP_H		125
--#define SRST_GPU_A		126
--#define SRST_GPU_NOC_A		127
--
--#define SRST_CORE_DBG		128
--#define SRST_DBG_P		129
--#define SRST_TIMER0		130
--#define SRST_TIMER1		131
--#define SRST_TIMER2		132
--#define SRST_TIMER3		133
--#define SRST_TIMER4		134
--#define SRST_TIMER5		135
--#define SRST_VIO_H2P		136
--#define SRST_HDMIPHY		139
--#define SRST_VDAC		140
--#define SRST_TIMER_6CH_P	141
+-#define KERNEL_LOAD_ADDR		0x280000
+-#define DTB_LOAD_ADDR			0x5600000
+-#define INITRD_LOAD_ADDR		0x5bf0000
 -
 -#endif
 --
