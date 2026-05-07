@@ -4,86 +4,109 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC23CCD343F
-	for <u-boot@archiver.kernel.org>; Thu,  7 May 2026 17:13:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B834BCD343F
+	for <u-boot@archiver.kernel.org>; Thu,  7 May 2026 17:19:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5058984B5D;
-	Thu,  7 May 2026 19:13:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 3452484B5D;
+	Thu,  7 May 2026 19:19:35 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="dPXcLKM3";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="dTsW+WLz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6C9AF84B9D; Thu,  7 May 2026 19:13:18 +0200 (CEST)
-Received: from mail-pf1-x435.google.com (mail-pf1-x435.google.com
- [IPv6:2607:f8b0:4864:20::435])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 8036484B8D; Thu,  7 May 2026 19:19:33 +0200 (CEST)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3867F84B58
- for <u-boot@lists.denx.de>; Thu,  7 May 2026 19:13:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=visitorckw@gmail.com
-Received: by mail-pf1-x435.google.com with SMTP id
- d2e1a72fcca58-82748257f5fso1431911b3a.1
- for <u-boot@lists.denx.de>; Thu, 07 May 2026 10:13:16 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1778173995; x=1778778795; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=EstZPJgHb8RCeftJb81EkfDJ2DN4hyepE0DYIG5j0Kk=;
- b=dPXcLKM3LOFpOz/WHhhp6kfMPUJlAr+8tdeyVXxPvc8+X1YWt17UOnDHKb4vX2KLHq
- SpHeMiIDvk6TvOR5i8Vtjjk7E/4qqUwspOTHcS2oOMi6g0rH/A7Ykb/bQIEMpYbfdvSz
- /1TOht+YMIei84I8Itc5Zv4YZmpKrDXicTTtHXdjFMEGmPC4a8LDiLABUUGO3GA6Makr
- J6vnFvU5B8hXwX/QMjzXQEqrCkPd1xzuHsHJCIpmZ4HV4ZUp1VVv7ooJOc/ZXsyGI27f
- /4g3ww7NT7jXfz3b96/DzSenN2QqH/bCbBALTwG0uR42hI2UTgG1uw+AwrGw/RaEW3X7
- aFHg==
+ by phobos.denx.de (Postfix) with ESMTPS id EB61084AA5
+ for <u-boot@lists.denx.de>; Thu,  7 May 2026 19:19:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
+ [209.85.221.71])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 886333FBFD
+ for <u-boot@lists.denx.de>; Thu,  7 May 2026 17:19:30 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20251003; t=1778174370;
+ bh=7weuHFtfMPuPdadZWkiERxhhzIMl+ZLheG84xPYjL6Y=;
+ h=Message-ID:Date:MIME-Version:From:Subject:To:Cc:References:
+ In-Reply-To:Content-Type;
+ b=dTsW+WLzhfY4qXJaJWhow7ImI9SZrlaHUL0Jf4+LRbidw1FlhqmHgxOoIq3ck5c/N
+ trXGSS6DgS9L88qZw3+OzDOD+RBCtj5Ys5kXinEeelq2s5ZUV0oUJ2i7+Q5BWH2K4s
+ RfeZFrXJ0Rhvwm7L6MxOIRtLNqAB3YFFq88IxhEJjRg9bTr7iQXGDFh8uKXvWIpZ1Z
+ fVIPNGpPbUZtRKo4niY6Ecq8oZN8xthAP+pgzDA3TTIaQaVLGJH17dHHA73f1BHZfh
+ LU7IawoBYm0NporBbziC8yyoq/zg2P9Vdq9XTY6O3TQZpUnc2hD2eDQi/CFSyJqHR5
+ niLn2U/wsVecPtj7gwSn56oFcL90Q3U6a7CHP487ORpj7FlFbMGmGc3unOXKfKlnII
+ fF0YMbIWSGoiWmod6SHJ9PJfZkGWbsaq9+nCJhXaPs6d5uXlLMA+c4mbwR0YeAZmoK
+ XickcBx0A7sbtxYIqzSS5pB3RT802tz0kn6czlJwu6/iUWJ2zsd8GyVkcz5lSe8/pg
+ D1Es5sCKfh+grufbJfZtzd+SMEMwU8jZveQQgDACX4nDLnHrG8uumjNBg8Yee8aYt+
+ zG8N2L6LktMjq4jek8ELERgd7otFYwqx9oOwISl4Mtp3Xnv0dQbmq1DewVnHhif4WD
+ HHab00XosgpqqNU1a9Ze0ANo=
+Received: by mail-wr1-f71.google.com with SMTP id
+ ffacd0b85a97d-441243ba35fso1051402f8f.0
+ for <u-boot@lists.denx.de>; Thu, 07 May 2026 10:19:30 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778173995; x=1778778795;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=EstZPJgHb8RCeftJb81EkfDJ2DN4hyepE0DYIG5j0Kk=;
- b=XCRt6beqEZQBj6KmDP0PMlxWqaqExaEeE9h0eqPGJBJTBvWU6l9ao+bAwb31Xurcc9
- k+a+xwxSMtVCcigr0TcpEq77w2UR8E3MCYncvfyQ7saHDkVoEuHxF5kPnV2XZioTrOtW
- 2b/c8dq5oOui+UV29/9boaxPGAL3F9uT7O+oypBTLY63kF55VBk8BP0UbWTAId0Qrr96
- zCFEJVBq55j2/qDrrS8e3UOqfc1yCoD+4QoCfhzgbgMdlWXBTOviBTsDP/fmw9Axki0u
- dFj8LdIOvB4kYmQK5xUXlsVIJEoIfvzKXaUKgb3dCmLo+NL9LHrQAS78ccgSwqAhbpsW
- XEgA==
+ d=1e100.net; s=20251104; t=1778174370; x=1778779170;
+ h=content-transfer-encoding:in-reply-to:content-language:references
+ :cc:to:subject:from:user-agent:mime-version:date:message-id:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=7weuHFtfMPuPdadZWkiERxhhzIMl+ZLheG84xPYjL6Y=;
+ b=QiyT3RtKujb/+WCqTwK/ZBlcqPJRKDfV/G60nzoLDqpzi4yMJs6fPVbFrbua7zyma7
+ S46DGUALBPGl11N1rIJmg/T9D/NHdlw/QTJp3u3Or5LOehiRe8hzNJTpB0X+XZh7U5Wq
+ upPKSFtnxgrPCytdIsdkpVLMDzhb8BYdLhLfOWbG4b+pWYMsU4vPTLpIWF4TydYzw9LD
+ NMZqt11+1kRkbCD0h+bg33jg9AmTctoD7d7J7utkhiq0iMebuiEsdyR2/51TYOl0Y4g6
+ Xdah5s8HZmba3MnTYjF1s11T1uJ4BHg4T1gMjGIfshrNtDFI95Yief7oIxPrLUlKNbif
+ E5oQ==
 X-Forwarded-Encrypted: i=1;
- AFNElJ8YRRNa1cDUKlaU1qo1NLSXGwIj3dv/hbg4Hcc9ZcruqHS2q52De+bSjGmD8q3hEyqzVCrxuCo=@lists.denx.de
-X-Gm-Message-State: AOJu0YwypBPIpOrKK0/LTpdsrvWKkOshq44AixGpuVQ+A9trYTJz8h2O
- YQa7b27C8/bQ2EcheDhwRZBnOhASTakoFuTFELLL676TkLsB7ZsQq1lv
-X-Gm-Gg: AeBDiesQCyyq/evvFogxfXgDjtMRcQysFhWII7glS/5ZBTqrr02E3EmTjG6qPiryY2C
- 6t5ENAiRaqBatmcS7Tuna9WV13LQRSd2RAcwafosbVPaPwj4w4H2G6tIhO6S5WdrrtFDvOD5EAC
- VNwgU2+IbSZ0QEEHhE0G74QvEqrgN9HgFfb7jMtsAZkCB9LkYQj4+SlRbgZkfeMsK+jpbtGBCZk
- eDYm3STws5eQ7Frli2wD+NXIQNI/DpYmpSIZVsCMY9sLzEIWY/RZAH2lDJ4d48mnrdP4HCOR+wL
- php1gFaLXjifRIxn2NxUE38Yi3mlEKFdDQ/2ZNyAzHO0bx8lYvlUR/7o92EIqBoM5QJzubvIgGI
- J35PS9TOBaWEV88cNYINwkGOAJbFDl566KQ9m+IWbXt58krymRZId1J7+87m/I8kegxD35TG5+x
- 5RhMkDNBCTpcEtmpibb/8LdMVQUZL0HYYtn8n+jsPU4i1WGmc=
-X-Received: by 2002:a05:6a00:b8f:b0:837:6bb9:acc1 with SMTP id
- d2e1a72fcca58-83bb6cd842cmr2982460b3a.13.1778173994503; 
- Thu, 07 May 2026 10:13:14 -0700 (PDT)
-Received: from google.com ([2402:7500:a16:6bef:465e:34ce:3a75:d3a0])
+ AFNElJ8EkrjFvwvXflXd8AMKp31vKLt759qA+gsn+SEDQRAYJjn8IJBpRFHf1HcJ9yB3quckNmxR59I=@lists.denx.de
+X-Gm-Message-State: AOJu0YzzUTIxxqUBny1NGO/yyB2dlXkt77K525ql4SEgSksBcyGz230a
+ ZV9r8httaF/f7j0xuM6sYpu3M4LQ2bz7qOH0F1k9fB2EUjCiAcXWoclyqBWwpCEWKwss+8R2Ru/
+ KFO5GHB/EqeCI3eECjHmDkKeaUH5O0ymVf4U8meGgkhFTM35qj2+FnC9+ffCJta7+ZmQJIHk=
+X-Gm-Gg: AeBDieurDMYlJyItJSIhmvim5BW1r/uUDRvLtza96mlLyumKxq38llmD0KebhVW2ITm
+ /qC1/awATtLFzl+/d+3YJCP/1p2UFFePolk1zribLcVjZEHtnEpD28qRdrLqo5M8Uyu+vDjqonX
+ ZGwSxiIjfffq3HqrGHK1oUM1KY5fnLm5nCtqqLAT7+hFJW+477CDgUjjq3hw5Te/b4OoB8c6W5B
+ CGzz2TpXvSAfolxmrtsuucVQ/t51botmWGoaB7Z4PP1CZ9HFaLKgwRJsO+I972lpqfvxG36CN8G
+ sSY0IkKxbTCJ6YjhsoxpoAaepdonXFHRLhkKxkO1nfUlBsLijf6yrT+o5REAwUF10l7Ga09v8XJ
+ W+Kp+Ts368dPwC72J3EgGR9+9e7kgyc2f6gwquMoYz3kYAR2nZWzB7c3hAwsu8RHQ4IJoP0UPfA
+ ==
+X-Received: by 2002:a05:6000:4381:b0:441:1fa5:4577 with SMTP id
+ ffacd0b85a97d-4515ce1c5b9mr14568230f8f.26.1778174370079; 
+ Thu, 07 May 2026 10:19:30 -0700 (PDT)
+X-Received: by 2002:a05:6000:4381:b0:441:1fa5:4577 with SMTP id
+ ffacd0b85a97d-4515ce1c5b9mr14568177f8f.26.1778174369512; 
+ Thu, 07 May 2026 10:19:29 -0700 (PDT)
+Received: from [10.51.4.10] ([149.11.192.252])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-8396563f127sm9616771b3a.5.2026.05.07.10.13.11
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 07 May 2026 10:13:13 -0700 (PDT)
-Date: Fri, 8 May 2026 01:13:09 +0800
-From: Kuan-Wei Chiu <visitorckw@gmail.com>
-To: Daniel Palmer <daniel@thingy.jp>
-Cc: trini@konsulko.com, angelo@kernel-space.org, bmeng.cn@gmail.com,
- sjg@chromium.org, u-boot@lists.denx.de
-Subject: Re: [PATCH v6 8/8] board: qemu: m68k: Create virtio mmio instances
-Message-ID: <afzIJQRmvH8ppToK@google.com>
-References: <20260505074948.2603870-1-daniel@thingy.jp>
- <20260505074948.2603870-9-daniel@thingy.jp>
+ ffacd0b85a97d-454128207cfsm613753f8f.1.2026.05.07.10.19.28
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 07 May 2026 10:19:28 -0700 (PDT)
+Message-ID: <bbbf0d5d-c98f-4be2-96b1-8d087668ddf6@canonical.com>
+Date: Thu, 7 May 2026 19:19:26 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260505074948.2603870-9-daniel@thingy.jp>
+User-Agent: Mozilla Thunderbird
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: Re: [PATCH] doc: usage: cmd: reset: specify when the -edl option is
+ available
+To: Quentin Schulz <quentin.schulz@cherry.de>,
+ Quentin Schulz <foss+uboot@0leil.net>
+Cc: Tom Rini <trini@konsulko.com>, Casey Connolly
+ <casey.connolly@linaro.org>, u-boot@lists.denx.de,
+ Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>,
+ Sumit Garg <sumit.garg@oss.qualcomm.com>
+References: <20260428-doc-sysreset-qcom-v1-1-964df4ee79f9@cherry.de>
+ <ba82cf35-1ee2-4407-8d25-9569577c7a47@canonical.com>
+ <bef4841c-a4c7-4e6b-96cf-d8fae4abf986@cherry.de>
+Content-Language: en-US
+In-Reply-To: <bef4841c-a4c7-4e6b-96cf-d8fae4abf986@cherry.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,131 +123,96 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, May 05, 2026 at 04:49:41PM +0900, Daniel Palmer wrote:
-> So that you can use virtio network, block etc create the virtio mmio
-> instances. There are 128 of these even if they are not all used, a
-> single mmio base value is passed via bootinfo.
+On 5/7/26 16:17, Quentin Schulz wrote:
+> Hi Heinrich,
 > 
-> Reviewed-by: Angelo Dureghello <angelo@kernel-space.org>
-> Reviewed-by: Simon Glass <sjg@chromium.org>
-> Signed-off-by: Daniel Palmer <daniel@thingy.jp>
-
-Reviewed-by: Kuan-Wei Chiu <visitorckw@gmail.com>
-Tested-by: Kuan-Wei Chiu <visitorckw@gmail.com>
-
-Regards,
-Kuan-Wei
-
-> ---
->  arch/m68k/Kconfig                     | 14 +++++----
->  board/emulation/qemu-m68k/qemu-m68k.c | 45 +++++++++++++++++++++++++++
->  2 files changed, 53 insertions(+), 6 deletions(-)
+> On 5/1/26 11:18 AM, Heinrich Schuchardt wrote:
+>> On 4/28/26 12:26, Quentin Schulz wrote:
+>>> From: Quentin Schulz <quentin.schulz@cherry.de>
+>>>
+>>> The option is only available when CONFIG_SYSRESET_QCOM_PSCI is enabled,
+>>> so let's make that explicit in the boot cmd documentation.
+>>>
+>>> Fixes: ef06c5d76ff4 ("cmd: boot: Add '-edl' option to reset command 
+>>> documentation")
+>>> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
+>>> ---
+>>>   doc/usage/cmd/reset.rst | 3 ++-
+>>>   1 file changed, 2 insertions(+), 1 deletion(-)
+>>>
+>>> diff --git a/doc/usage/cmd/reset.rst b/doc/usage/cmd/reset.rst
+>>> index 366b17eea16..54767fea241 100644
+>>> --- a/doc/usage/cmd/reset.rst
+>>> +++ b/doc/usage/cmd/reset.rst
+>>> @@ -23,7 +23,8 @@ DDR and peripherals, on some boards also resets 
+>>> external PMIC.
+>>>       Do warm WARM, reset CPU but keep peripheral/DDR/PMIC active.
+>>>   -edl
+>>
+>> All available arguments need to be specified in the synopsis section.
+>>
+>> The parameters -w and -edl are exclusive as both only work if they are 
+>> the first argument. So maybe:
+>>
+>>      reset [-w|-edl]
+>>
 > 
-> diff --git a/arch/m68k/Kconfig b/arch/m68k/Kconfig
-> index 00e89bd0a625..8bebf0ea3e13 100644
-> --- a/arch/m68k/Kconfig
-> +++ b/arch/m68k/Kconfig
-> @@ -196,12 +196,14 @@ config TARGET_STMARK2
->          select M54418
->  
->  config TARGET_QEMU_M68K
-> -    bool "Support QEMU m68k virt"
-> -    select M68040
-> -    imply CMD_DM
-> -    help
-> -      This target supports the QEMU m68k virtual machine (-M virt).
-> -      It simulates a Motorola 68040 CPU with Goldfish peripherals.
-> +	bool "Support QEMU m68k virt"
-> +	select M68040
-> +	select BOARD_EARLY_INIT_R
-> +	select VIRTIO_MMIO
-> +	imply CMD_DM
-> +	help
-> +	  This target supports the QEMU m68k virtual machine (-M virt).
-> +	  It simulates a Motorola 68040 CPU with Goldfish peripherals.
->  
->  endchoice
->  
-> diff --git a/board/emulation/qemu-m68k/qemu-m68k.c b/board/emulation/qemu-m68k/qemu-m68k.c
-> index d3527aee1128..a19b23a28ce3 100644
-> --- a/board/emulation/qemu-m68k/qemu-m68k.c
-> +++ b/board/emulation/qemu-m68k/qemu-m68k.c
-> @@ -14,9 +14,14 @@
->  #include <asm/bootinfo.h>
->  #include <asm/global_data.h>
->  #include <asm/io.h>
-> +#include <dm.h>
-> +#include <dm/device-internal.h>
-> +#include <dm/lists.h>
->  #include <dm/platdata.h>
-> +#include <dm/root.h>
->  #include <linux/errno.h>
->  #include <linux/sizes.h>
-> +#include <virtio_mmio.h>
->  
->  DECLARE_GLOBAL_DATA_PTR;
->  
-> @@ -25,6 +30,38 @@ static struct goldfish_rtc_plat rtc_plat;
->  static struct goldfish_timer_plat timer_plat;
->  static struct qemu_virt_ctrl_plat reset_plat;
->  
-> +#define VIRTIO_MMIO_NUM	128
-> +#define VIRTIO_MMIO_SZ	0x200
-> +
-> +static struct virtio_mmio_plat virtio_mmio_plat[VIRTIO_MMIO_NUM];
-> +static char virtio_mmio_names[VIRTIO_MMIO_NUM][11];
-> +static phys_addr_t virtio_mmio_base;
-> +
-> +static int create_virtio_mmios(void)
-> +{
-> +	struct driver *drv;
-> +	int i, ret;
-> +
-> +	if (!virtio_mmio_base)
-> +		return -ENODEV;
-> +
-> +	drv = lists_driver_lookup_name("virtio-mmio");
-> +	if (!drv)
-> +		return -ENOENT;
-> +
-> +	for (i = 0; i < VIRTIO_MMIO_NUM; i++) {
-> +		virtio_mmio_plat[i].base = virtio_mmio_base + (VIRTIO_MMIO_SZ * i);
-> +		sprintf(virtio_mmio_names[i], "virtio-%d", i);
-> +
-> +		ret = device_bind(dm_root(), drv, virtio_mmio_names[i],
-> +				  &virtio_mmio_plat[i], ofnode_null(), NULL);
-> +		if (ret)
-> +			return ret;
-> +	}
-> +
-> +	return 0;
-> +}
-> +
->  /*
->   * Theoretical limit derivation:
->   * Max Bootinfo Size (Standard Page) = 4096 bytes
-> @@ -65,6 +102,9 @@ static void parse_bootinfo(void)
->  		case BI_VIRT_CTRL_BASE:
->  			reset_plat.reg = base;
->  			break;
-> +		case BI_VIRT_VIRTIO_BASE:
-> +			virtio_mmio_base = base;
-> +			break;
->  		case BI_MEMCHUNK:
->  			gd->ram_size = record->data[1];
->  			break;
-> @@ -80,6 +120,11 @@ int board_early_init_f(void)
->  	return 0;
->  }
->  
-> +int board_early_init_r(void)
-> +{
-> +	return create_virtio_mmios();
-> +}
-> +
->  int checkboard(void)
->  {
->  	puts("Board: QEMU m68k virt\n");
-> -- 
-> 2.53.0
+> I'll follow the same syntax as in U_BOOT_CMD and have a separate line 
+> for -edl.
+
+
+Please, follow the synopsis syntax of Linux man-pages for our documentation.
+
+
 > 
+>>
+>>> -    Boot to Emergency DownLoad mode on supported Qualcomm platforms.
+>>> +    Boot to Emergency DownLoad mode on supported Qualcomm platforms 
+>>> and only
+>>> +    when CONFIG_SYSRESET_QCOM_PSCI=y.
+>>
+>> This information is incomplete. Without 
+>> CONFIG_SYSRESET_CMD_RESET_ARGS=y the -edl argument will not be parsed. 
+>> A configuration section to this document might be helpful.
+>>
+> 
+> We should probably not make the -edl option available if this isn't set 
+> either then, no?
+
+Yes, Kconfig may have to be fixed.
+
+> 
+>> Should we mention that a "PSCI SYSTEM_RESET2 not supported\n" message 
+>> is shown if the platform is not supported?
+>>
+> 
+> I would be wary of documenting strings that may change. However, we can 
+> say that the command will fail if the device doesn't support it.
+
+ok
+
+> 
+>> Where will a user learn how he can use the emergency download mode? 
+>> Can we add a link here? Unfortunately the EDL information seems to be 
+>> dispersed over multiple documents in the U-Boot documentation:
+>>
+>> doc/board/qualcomm/dragonwing.rst
+>> doc/board/qualcomm/iq8.rst
+>> doc/board/qualcomm/rdp.rst
+>>
+>> Do we need a document doc/board/quallcomm/edl.rst?
+>>
+> 
+> That would be a question for Varadarajan or Casey, I have never done 
+> anything with Qualcomm devices.
+
+Let's see what they come up with.
+
+Best regards
+
+Heinrich
+
+> 
+> Cheers,
+> Quentin
+
