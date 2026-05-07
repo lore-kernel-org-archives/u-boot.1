@@ -4,25 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54961CD3442
-	for <u-boot@archiver.kernel.org>; Thu,  7 May 2026 16:43:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E20DDCD3442
+	for <u-boot@archiver.kernel.org>; Thu,  7 May 2026 16:43:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7469B84BC7;
-	Thu,  7 May 2026 18:43:30 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id ACA6684BB7;
+	Thu,  7 May 2026 18:43:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="JTh8FwDw";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="TpZ0ARS6";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="RhwIRvzU";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="d8xM8nSp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 612BA84BCB; Thu,  7 May 2026 18:43:29 +0200 (CEST)
-Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
- [IPv6:2001:67c:2050:0:465::201])
+ id 1EBDE84BCB; Thu,  7 May 2026 18:43:30 +0200 (CEST)
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org
+ [IPv6:2001:67c:2050:0:465::202])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 61F6384BB3
- for <u-boot@lists.denx.de>; Thu,  7 May 2026 18:43:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5C89884BBD
+ for <u-boot@lists.denx.de>; Thu,  7 May 2026 18:43:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
@@ -31,48 +31,46 @@ Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4gBJ3K5BTnz9twN;
- Thu,  7 May 2026 18:43:25 +0200 (CEST)
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4gBJ3M5mm9z9tpZ;
+ Thu,  7 May 2026 18:43:27 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1778172205;
+ s=mail20150812; t=1778172207;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=zzaqBkcBBaK/iebjlhHWgqGtgunpx1xN3WLTv9ERu9E=;
- b=JTh8FwDw3raPLIYbl2W9hU0AAINqR85BNWnjTIbZsO1JEpqmu4C9rrrtQx7jR2gEirx28z
- 3HwxO/8P+XAaKZSbYfxU0MUrVP95ker7ceesDvlocdPBJmjcuQuOxsvv/22C+Hc0On79rR
- TplDPfAx1Ze/KmGDEJYCbAUV+rDLinVmAd9QBEA3AOsqY7fYwPQu8VHDgNK/zUI/ajSRwn
- LOkL1ysIYyLqEWY7wzy3gMPzr+oeNyjVh3UAi4rEM4v2LmBkBI2yAkcdH/4TO5g8TQGd3m
- uXzRmvlqf0UXcCxPndLOgWp852gat+OHLnv4fNYNMZxNajTyy4R4cOimtSfaJA==
+ bh=CDzkHmzcAxvyQV29lis4hFY6uJOHXGwyGfHp/SAbGiY=;
+ b=RhwIRvzU5JuJguwS6nSWKGfRtMlC8/6tVAK8IepD7sfnj1vUkcMf3hSZXjiRvvUiSiEOyV
+ 7cBmjCJxlIOtsM/3R/2u33y1hh87mBG3OOJOhJ5w6m7EfPSz6ULITHmUmyFjkrH8hdnxNU
+ 8aI/J97YnVTCO0UzkEaBo8rS5rCGWsZvw3w328RVx4yGCcwvUHUbdHPZXEaCfgIrbPQfjA
+ TFfMzinTDtDDfPoCnUIbhjU3PceiiiAok5lvSKCRIMUGS4APLsniNOqF7JC434e4bHUAjK
+ grwmBx/9hWvg/Tq5y3yTwIHiaRm9h7+5v4VhQANgC/Jn3wyTB0rKbs/E5pwM9w==
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1778172204;
+ s=mail20150812; t=1778172206;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=zzaqBkcBBaK/iebjlhHWgqGtgunpx1xN3WLTv9ERu9E=;
- b=TpZ0ARS6wx52zKGSYDn8tLBpk3lbLQAhCjT0YojyYomEGHGjHec+Qa2ZlZQDaJuwr2S4dX
- szcqctd8Wfcsxz9Z97cmVXV0YCnO5+skpx7DRCrXX0T2d/b/b2jDds9mP8EFsC47a8FDVR
- MSbbKdSDMvPJYHlCH31DWWDa77zweA50gZmqLBWxRivKBu92bgh4BpQ0z2JSI6ETnldaG2
- 0OaEjwHTc5wd1bCR4NHFam6VRj55MfgvhWkD8HUpsONekIckR90PkOh76XtXit8U3gXF1s
- Yr9G/qwmSJ1FVnkZS4UoWTZaNHu1PcVXOrxq+s/I/79LQ1WFV1s3qY+Dx5OB4Q==
+ bh=CDzkHmzcAxvyQV29lis4hFY6uJOHXGwyGfHp/SAbGiY=;
+ b=d8xM8nSpRFVCYf8Cr1B0USSvzpc/d4rgh3nGPDHBJ3gD2dOATE0nI7Jj9Qp8O90kHNSah2
+ aNiK7Xx37P1ROYcE2yFodNoMLQZhdGKKgHlHJFxjTtFQPfAK/AsscmfxUxHUBm9VELBKpx
+ XLHJM/J3nikcEXXdDD0hryevS+0amTxHST/Ghy3fgBsnlE8pa19rSKBVQoPboR7+a1uhEi
+ d0hglgMbc1z3OtAd4N+NYaPThMegpsS3WjKdJKFS7a2Rgm1G0oA7enhzfa+84E+LA+Jcke
+ V2uiM9yU03ngUs+l6qMNRpICNPbDZSUQktnJ4D9S0E/85nisrNq+me8Y4n2dzA==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Aspeed BMC SW team <BMC-SW@aspeedtech.com>,
- Chia-Wei Wang <chiawei_wang@aspeedtech.com>, Joel Stanley <joel@jms.id.au>,
- Lukasz Majewski <lukma@denx.de>, Ryan Chen <ryan_chen@aspeedtech.com>,
+ Andre Przywara <andre.przywara@arm.com>, Lukasz Majewski <lukma@denx.de>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH 2/4] clk: ast2600: Staticize and constify driver ops
-Date: Thu,  7 May 2026 18:42:58 +0200
-Message-ID: <20260507164314.59373-2-marek.vasut+renesas@mailbox.org>
+Subject: [PATCH 3/4] clk: sunxi: Drop the extern
+Date: Thu,  7 May 2026 18:42:59 +0200
+Message-ID: <20260507164314.59373-3-marek.vasut+renesas@mailbox.org>
 In-Reply-To: <20260507164314.59373-1-marek.vasut+renesas@mailbox.org>
 References: <20260507164314.59373-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: pped7cimcf8js7qb356pk89bo53ozmcg
-X-MBO-RS-ID: bbbe4f5b34bd8cb68af
+X-MBO-RS-META: z8nbfbqnq5tpq5y7udq4ue9us9gi1bru
+X-MBO-RS-ID: a0e34ebf241d3ae2464
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,35 +87,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Set the ops structure as static const. The structure is not accessible
-from outside of this driver and is not going to be modified at runtime.
+The struct clk_ops sunxi_clk_ops is private to the clock driver
+and there are no external users, no need to expose it this way.
+Drop the extern.
 
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
-Cc: Aspeed BMC SW team <BMC-SW@aspeedtech.com>
-Cc: Chia-Wei Wang <chiawei_wang@aspeedtech.com>
-Cc: Joel Stanley <joel@jms.id.au>
+Cc: Andre Przywara <andre.przywara@arm.com>
 Cc: Lukasz Majewski <lukma@denx.de>
-Cc: Ryan Chen <ryan_chen@aspeedtech.com>
 Cc: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de
 ---
- drivers/clk/aspeed/clk_ast2600.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ include/clk/sunxi.h | 2 --
+ 1 file changed, 2 deletions(-)
 
-diff --git a/drivers/clk/aspeed/clk_ast2600.c b/drivers/clk/aspeed/clk_ast2600.c
-index 535010b7941..4530053bc6b 100644
---- a/drivers/clk/aspeed/clk_ast2600.c
-+++ b/drivers/clk/aspeed/clk_ast2600.c
-@@ -1161,7 +1161,7 @@ static void ast2600_clk_dump(struct udevice *dev)
- }
- #endif
+diff --git a/include/clk/sunxi.h b/include/clk/sunxi.h
+index c298195c51e..09cc7a4fc46 100644
+--- a/include/clk/sunxi.h
++++ b/include/clk/sunxi.h
+@@ -85,6 +85,4 @@ struct ccu_plat {
+ 	const struct ccu_desc *desc;
+ };
  
--struct clk_ops ast2600_clk_ops = {
-+static const struct clk_ops ast2600_clk_ops = {
- 	.get_rate = ast2600_clk_get_rate,
- 	.set_rate = ast2600_clk_set_rate,
- 	.enable = ast2600_clk_enable,
+-extern struct clk_ops sunxi_clk_ops;
+-
+ #endif /* _CLK_SUNXI_H */
 -- 
 2.53.0
 
