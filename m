@@ -4,107 +4,101 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8544CD343F
-	for <u-boot@archiver.kernel.org>; Thu,  7 May 2026 16:49:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5F74CD3442
+	for <u-boot@archiver.kernel.org>; Thu,  7 May 2026 16:50:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 39E7584B95;
-	Thu,  7 May 2026 18:49:55 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 76EB584BAC;
+	Thu,  7 May 2026 18:50:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="NNaAWZMc";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Ibag8Tt6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AE98B84B9E; Thu,  7 May 2026 18:49:53 +0200 (CEST)
-Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
- [IPv6:2a00:1450:4864:20::62d])
+ id A788584BBE; Thu,  7 May 2026 18:50:01 +0200 (CEST)
+Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
+ [IPv6:2a00:1450:4864:20::631])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B547A84B02
- for <u-boot@lists.denx.de>; Thu,  7 May 2026 18:49:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 957D784B02
+ for <u-boot@lists.denx.de>; Thu,  7 May 2026 18:49:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-bc2301be8ecso196722966b.3
- for <u-boot@lists.denx.de>; Thu, 07 May 2026 09:49:51 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1778172591; cv=none;
+Received: by mail-ej1-x631.google.com with SMTP id
+ a640c23a62f3a-ba6838e76f2so135968366b.2
+ for <u-boot@lists.denx.de>; Thu, 07 May 2026 09:49:59 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1778172599; cv=none;
  d=google.com; s=arc-20240605;
- b=N1vGQaavn4r8nnPmmIewHc0XcvIvjtCBuwojJGhgFJrrZxIMUnOWaw/7TFALMRZ6vB
- g6lgvfC7mIx663TFGNhrd6YjMM5ZC/1RB7kh2NGV5rm0W2RcZobnaNOW+65Yc7GUe3f8
- d3iX9qMJFqrcZdTIG/HYwXYJ0CqP4aYL8kdAQFMQnJRFiWMemxgfgMg9XSqdblSCzplq
- hA5R+upYc2J++9y62RP8nhcwsJwZmkYinoR12MVHTCfyz6ojdgkEENLiJgJTMv5lt+Vc
- dgy7ztevb7ktKVLPx7esIhFV9TZGbjulPkJz1s6K+ls4TAJPzfjUZgQ3e7rvuD1vZ0/H
- OiyA==
+ b=VXfGRYihZUbMIeSlH1jKHAixa1UJrA8K2daIfyUa3Rd/CfR0ALEvhOk07xsRGi1MQ+
+ D/5U6hCE9N/zMwG58B2OEvLPcKKpQc9Qd7Q2MfuyxFAg90Y1eUAzBzrtlWz8O3uCcEL3
+ /CwIHJlX/qvNtvxHbbmmbyvTzCz/JoxjawYlm3z0pzACdWvvxOq4JY0LeEkrtdyGanK7
+ oL8ywSlMpPTJOq4OlBpIDVgwEmvqnbUvl+snZ/buLyXFovPobRvNfJGoOVTb6hT1zzKE
+ fZ7vheE8o5MK0GbRVEfzUWpAzVFW56PiD0q8IhykTRjcftBqW+zRihROaa0zJ5lTkvWf
+ L9rQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=YzlE0zegef2YjEtK3mGsEjc5rEf4jwFq4ft9WUM4Z6A=;
- fh=uBghxOPWvItNDGnTET7CByJtKX0H+SusgDDX5tqV63M=;
- b=JtRl4PLBIH/eY3ATy2SIpVWHdmKWztpJ5xqQe4dmD7pd25fCIbKzUC3peTuhsZPgvJ
- n2GRb/XzOGn34BroefReOBsE/LQbTfUN367OpWNtOj5kPeEZ80AHtP7/bPq4ow75DCyd
- IfMi1AREw27fOv5n8yqUSybfDVF9Pi96DzBpQzphc1mjf1CbgeR3awi3JH0sKNaVUky1
- Lad6n8qVANbMlseGdy4XtL3SLcq0JGSKQDLsHWkNT/HkwPwhqmnsNOMXxbuFTK0f/AgO
- AOmjy/XbOvH2AprBN5YFic96An4rJkvaO15trFxJSYgnv4zwKK/cdbcwuyuRRY8gCsGd
- I2iw==; darn=lists.denx.de
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=A/NCYfHES1ZdmjvcJIYAKvOfAqsth/OfLCGvkm1jx28=;
+ fh=EbGWCKFZJCliM95ZoiFBcyO2r4EsOdMnPJFtFtwgKiM=;
+ b=CCx+Nq25jjIVrBRgH/hu8YBQti3NRDG6OQJBaydbd5rwrgBucdzn4l4Q0dLjTDpaxG
+ pRxxGVrMocac5XRwZhgxxZiVGFykHZcpASix5UXdft9XMnxRJ4zJpRWYtFpkguwnsP+R
+ 2otV5NDwGZ67C6k8GoVOYjeFFht1u/cWPSVx8S89JL5VAa1Vv2UeX2T9krzXxhRChw8T
+ 2liq8HD6b/9aeOKUax/XdvSeMz7jSxCb09v+33ymxJKMd1VOOdSwMCKXjfiGAl0KFqM6
+ FleVrrPipQuFOR+qr/uigwCxgJUVlnnZWsA9IOO7X2QtiA67eJFDznYgGbjsDUeqHI7G
+ 2baw==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1778172591; x=1778777391; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=YzlE0zegef2YjEtK3mGsEjc5rEf4jwFq4ft9WUM4Z6A=;
- b=NNaAWZMcacryyGGNtqimfFVYM31k1GrLKqwoVrHHO0MNea3+JEP9XnPPHE+xjzydxa
- DPM89tNowLjft5l0E0qi3z9D/t7hmDVdNUCCQkzGfK7tquE6HO0V+A/IOP3FS4qQ7hGC
- Gt//Cgs5Sw00K9iqVDLUmEmXaxEVa7apWn+GU=
+ d=chromium.org; s=google; t=1778172599; x=1778777399; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=A/NCYfHES1ZdmjvcJIYAKvOfAqsth/OfLCGvkm1jx28=;
+ b=Ibag8Tt6Hn9CxIOHSAK5yOrb0qdIMo4M+4xiw20erWYhP7lO4HXbKWyAVpPXfvdpYJ
+ bdKCrJOSk0AMaspnsblUkL+KsmGB57gj44vXVVhojzPdB9POazCLqpPxP6oTuC1/rwMj
+ eRxd4O7A0vC5iQz372KGaoDnJXh5nwDAenCu0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778172591; x=1778777391;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=YzlE0zegef2YjEtK3mGsEjc5rEf4jwFq4ft9WUM4Z6A=;
- b=WxtO2npqrd5n5pXXqISHnIlp0CYP/z/Fw37LtM5zSmKOzapB/wvVzYY2XcJNS8VaJl
- t6BsPU/aLPhWYh3vQCASnQCwpOxV0IsXXGpcsFKcdAcIhpwsYz7vZvd9adXS/Kzyc6og
- 4memApyiyPlfi1KJAwd9etIYQfHac9GlDrLC3SCHQG51xV+4QnKd3zJFPcPXwQ8sVHY6
- Y+6DwmLRLEnqcPOQYQJV0OzFJUmfrCVIZnnHoSdp2e+SIeW7Qx/9oc+pqI2vSMjMBNBH
- MyblWyYcle+D8EFCSdPuYIV/Q/kLGW6f5I2eayXNjS28jo+M+zPStQ9k3SXQRzU81q8c
- L24w==
-X-Gm-Message-State: AOJu0Ywpirr0UT7AbighD9giAUPeH88x3qHy9af5hcW2YxBzlJLTkJrY
- E13i6xfMJgBoxgmF+gytE3vOufO3pmBCahKFfvDeggM6H036TrZNMN8gLjVJpfFWSGwc61JFb7m
- gWHWvkYTBab/4dhNX5kIrDMpxa8i/Z6nWZ1pRZZ/q
-X-Gm-Gg: AeBDiesxMdvk8Es++boo+ZKconvY0DR1hSr7vy/hnDUijiarQiza9njW185/bisUpEo
- wt45aUNtwgq0RDWKrS6OpONRPiT7tl7NkdJZKDvorM6Qo06PpsWhJh75SJnUPxxnFNrU+/zIFzf
- FeJIzbraQO27rDLB2RTtxkBHR3e/8mdQZyIQsXOf3oYdxJcfIu0NJrAjZbk9Yn6+DNsIq/kgDFI
- G6N//r1WYHUNuQI61d/5+u9ZQudSjs1zghE39NzEEwKhpVAF8JhcazoQj0jeCXLe7sRP9pWxQeU
- M8fkLQ==
-X-Received: by 2002:a17:906:5181:10b0:bc6:6045:e0ed with SMTP id
- a640c23a62f3a-bc66045e7damr289791366b.33.1778172591051; Thu, 07 May 2026
- 09:49:51 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1778172599; x=1778777399;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=A/NCYfHES1ZdmjvcJIYAKvOfAqsth/OfLCGvkm1jx28=;
+ b=pNJ754jOV7UF1DuMdIKyyibDSDI6h2D0TThgdY3zcKekDkstCWHpdeOBlmenwv9/Wo
+ 0LDiPN8Cuxag+NqegOdiOXjLQj6YwKUMwt5W+FSesGTILNK6XAismzZT5BQxkrO/jMJY
+ ViO3X3HQr6Cb6ftU4EGBCVE+VPIN5XDONXBkYhXIBnz9CUj2DMiyIAvvUWnSGLIFNO2D
+ cw06pNStYoRryIYFflxn3rHcVIehfOKEPh0sxTYELsqg7MtIJHSbFZrhU1oaqnsXPRz/
+ H9J3sQQc4LRBg3f8sgvY092mmrmBZxKrHoJSzeIBnE7ZrRfifAxPMLu93jOzNVTXpYaF
+ x/Pg==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ/vr0rPlFtfoaxXnxjrFTScuyQ2MgmFhYiaIJ7V7gwYJh+WukA6Rs1LZcn+YkY3pYRCT2cJ4bg=@lists.denx.de
+X-Gm-Message-State: AOJu0Yyl0IIxwBGqw0pwxowXCcVe2+Z317k34Jxuh1u3zJ/FwezwD/1i
+ 8pqK527FR8UwXmUsW2voMOUBaL8OF28likD7SbhqDy8+6boj4h55c+z3FhOLzOAuaCLv2rvXwvF
+ DqGP2J+W1zE+amEqP3o/DWJJATIozgCX8ZN4aJzSq
+X-Gm-Gg: AeBDieuyaVj6YWZbWtN42tVSgpJMZxR9EMI+IYdCYvFL4fw8NNJhVyU49/18TOraV9/
+ v0CiRstAzND2cifRn6YRDrP4jIAzPRz1gFbHThHXK1UWnVgmlReFm5HDsLCRwG1WJ2BiruVgfFO
+ QsHVcpb+OSWXTGPmXio4zYAc8szLlC98RjeDYaPCVipz4a9vlwXlRLZoZY5PUX/hxqCmikI1die
+ vTJklqRe1qb5LgiPlZr/O4Z6nhOf7DZt4Rv93SP2ISYPwkfKubapPL31iemmYdUB4751ySjJuwn
+ 4BOLRw==
+X-Received: by 2002:a17:907:a80d:b0:bc6:78fc:c77a with SMTP id
+ a640c23a62f3a-bc678fcd82amr389242466b.22.1778172598715; Thu, 07 May 2026
+ 09:49:58 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260507120735.310325-1-ludwig.nussel@siemens.com>
- <20260507140624.v3.4.eb9898db9115ab0e26701a962ff8b41b199e78b2@changeid>
-In-Reply-To: <20260507140624.v3.4.eb9898db9115ab0e26701a962ff8b41b199e78b2@changeid>
+References: <20260430223319.2663939-1-lukas.schmid@netcube.li>
+ <20260430223319.2663939-6-lukas.schmid@netcube.li>
+ <553ba73c-8a90-44e3-9809-185b0fdfd2ce@cherry.de>
+In-Reply-To: <553ba73c-8a90-44e3-9809-185b0fdfd2ce@cherry.de>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 7 May 2026 10:49:38 -0600
-X-Gm-Features: AVHnY4Iex2l2U_XLxrtxYKpP6HW77xESd71_DI6LNptQKyqpvSTH9RIm60XQznM
-Message-ID: <CAFLszTgkgGh_o=_ACPkTPpeNw6O3qvM=ZDywranrZpgPn_c_wA@mail.gmail.com>
-Subject: Re: [PATCH v3 4/4] iminfo: also verify signatures
-To: ludwig.nussel@siemens.com
-Cc: u-boot@lists.denx.de, David Lechner <dlechner@baylibre.com>, 
- James Hilliard <james.hilliard1@gmail.com>, Jonas Karlman <jonas@kwiboo.se>, 
- Kunihiko Hayashi <hayashi.kunihiko@socionext.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Mayuresh Chitale <mchitale@ventanamicro.com>,
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Osama Abdelkader <osama.abdelkader@gmail.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>, 
- Peng Fan <peng.fan@nxp.com>, Quentin Schulz <quentin.schulz@cherry.de>, 
- Shiji Yang <yangshiji66@outlook.com>, Simon Glass <sjg@chromium.org>, 
- Tom Rini <trini@konsulko.com>, Wolfgang Wallner <wolfgang.wallner@at.abb.com>,
- Yao Zi <me@ziyao.cc>
+Date: Thu, 7 May 2026 10:49:45 -0600
+X-Gm-Features: AVHnY4LKx9v4vKSGHd3m6KMiIjb8a1kCxZ0uORVUcf1gx_ZALWJXnALV8UFeToM
+Message-ID: <CAFLszTjwdY_+17qWouSMq9Bh2N1UJ6_Sq-JP7huwA5Y-YKb9zQ@mail.gmail.com>
+Subject: Re: [PATCH v2 5/6] sunxi: extend binman FIT description for signed
+ SPL images
+To: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: Lukas Schmid <lukas.schmid@netcube.li>,
+ Andre Przywara <andre.przywara@arm.com>, 
+ Tom Rini <trini@konsulko.com>, Hans de Goede <hdegoede@redhat.com>, 
+ Jerome Forissier <jerome.forissier@arm.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -121,105 +115,121 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ludwig,
+Hi Lukas, Quentin,
 
-On 2026-05-07T12:06:22, Ludwig Nussel <ludwig.nussel@siemens.com> wrote:
-> iminfo: also verify signatures
+On Thu, 7 May 2026 at 05:30, Quentin Schulz <quentin.schulz@cherry.de> wrote:
 >
-> The iminfo command already verifies hashes of images. This change also
-> verifies signatures of configurations if enabled.
+> Hi Lukas,
 >
-> Adjusts error output slighly to be on stderr
+> On 5/1/26 12:33 AM, Lukas Schmid wrote:
+> > Extend the sunxi binman/FIT description to support signed SPL FIT
+> > images. Add an SPL public-key DTB image, per-image hash nodes,
+> > fit,sign support, and a configuration signature that covers
+> > firmware, loadables and the selected FDT.
+> >
+> > Handle TOC0 SPL output as well by adding the required filename and
+> > mkimage wrapping so the generated sunxi image remains verifiable.
+> >
 >
-> Signed-off-by: Ludwig Nussel <ludwig.nussel@siemens.com>
+> I sympathize with the effort as I'd like something similar on Rockchip
+> but I don't think this is right.
 >
-> boot/image-fit.c | 54 +++++++++++++++++++++++++++++++++++++++++++++++++++=
-+++
->  cmd/bootm.c      |  7 +++++++
->  include/image.h  |  8 ++++++++
->  3 files changed, 69 insertions(+)
+> > Signed-off-by: Lukas Schmid <lukas.schmid@netcube.li>
+> > ---
+> >   arch/arm/dts/sunxi-u-boot.dtsi | 68 ++++++++++++++++++++++++++++++++--
+> >   1 file changed, 64 insertions(+), 4 deletions(-)
+> >
+> > diff --git a/arch/arm/dts/sunxi-u-boot.dtsi b/arch/arm/dts/sunxi-u-boot.dtsi
+> > index e1a9a7f5d4c..313fcad3922 100644
+> > --- a/arch/arm/dts/sunxi-u-boot.dtsi
+> > +++ b/arch/arm/dts/sunxi-u-boot.dtsi
+> > @@ -27,6 +27,38 @@
+> >   #endif
+> >
+> >   &binman {
+> > +#ifdef CONFIG_SPL_FIT_SIGNATURE
+> > +     spl {
+> > +#ifdef CONFIG_SPL_IMAGE_TYPE_SUNXI_TOC0
+> > +             filename = "spl/u-boot-spl.bin";
+> > +#else
+> > +             filename = "spl/sunxi-spl.bin";
+> > +#endif
+> > +
+> > +             u-boot-spl-nodtb {
+> > +             };
+> > +
+>
+> You're missing
+>
+> #if !IS_ENABLED(CONFIG_SPL_SEPARATE_BSS)
+>                          u-boot-spl-bss-pad {
+>                          };
+> #endif /* !CONFIG_SPL_SEPARATE_BSS */
+>
+> here.
+>
+>
+> > +             u-boot-spl-pubkey-dtb {
+> > +                     algo = "sha256,rsa2048";
+> > +                     required = "conf";
+> > +                     key-name-hint = "dev";
+> > +             };
+>
+> You're forcing the use of an RSA2048 key which is not recommended
+> nowadays anymore as far as I know. RSA4096 is "better" when using RSA.
+>
+> This also forces the user to have a dev.crt certificate to be able to
+> build the image. It's not a secret or sensitive info so I guess that's fine.
+>
+> > +     };
+> > +
+> > +#ifdef CONFIG_SPL_IMAGE_TYPE_SUNXI_TOC0
+> > +     image {
+> > +             filename = "spl/sunxi-spl.bin";
+> > +
+> > +             mkimage {
+> > +                     args = "-a 0x20060 -T sunxi_toc0";
+> > +                     data-to-imagename;
+> > +
+> > +                     u-boot-spl {
+> > +                     };
+> > +             };
+> > +     };
+> > +#endif
+> > +#endif
+> >       u-boot-sunxi-with-spl {
+> >               filename = "u-boot-sunxi-with-spl.bin";
+> >               pad-byte = <0xff>;
+> > @@ -45,6 +77,9 @@
+> >                       description = "Configuration to load U-Boot and firmware";
+> >                       #address-cells = <1>;
+> >                       fit,fdt-list = "of-list";
+> > +#ifdef CONFIG_SPL_FIT_SIGNATURE
+> > +                     fit,sign;
+> > +#endif
+> >
+>
+> This requires the user to sign as part of building U-Boot and therefore
+> have access to the private key. Some users may want to sign separately
+> from their U-Boot building step such that building can be done anywhere
+> but signing is only done on specific infrastructure.
 
-> diff --git a/boot/image-fit.c b/boot/image-fit.c
-> @@ -1512,6 +1512,60 @@ int fit_all_image_verify(const void *fit)
-> +/**
-> + * fit_all_configurations_verify - verify signatures of all configuratio=
-ns
-> + * @fit: pointer to the FIT format image header
-> + *
-> + * fit_all_configurations_verify() iterates over all configurations
-> + * in the FIT and checks the signatures. Returns success if all
-> + * configurations have valid signatures. See documentation at
-> + * fit_config_verify_required_keys() or fit_config_verify_key().
-> + *
-> + * returns:
-> + *     0, success
-> + *     -ENOENT, no configurations present
-> + *     <0, error
+I wonder if binman could help here, perhaps by providing an option
+(for CI) to skip signing if the file is missing?
 
-Please use kernel-doc style - 'Return:' rather than 'returns:' - also
-'fit_all_configurations_verify' at the top should be
-fit_all_configurations_verify()
-
-> diff --git a/boot/image-fit.c b/boot/image-fit.c
-> @@ -1512,6 +1512,60 @@ int fit_all_image_verify(const void *fit)
-> +#if FIT_IMAGE_ENABLE_VERIFY
-> +int fit_all_configurations_verify(const void *fit)
-
-The header in include/image.h declares this prototype under
-CONFIG_IS_ENABLED(FIT_SIGNATURE) but here you guard the definition
-with FIT_IMAGE_ENABLE_VERIFY. Please use one consistently -
-CONFIG_IS_ENABLED(FIT_SIGNATURE) reads more naturally and matches the
-neighbouring fit_config_verify()
-
-> diff --git a/boot/image-fit.c b/boot/image-fit.c
-> @@ -1512,6 +1512,60 @@ int fit_all_image_verify(const void *fit)
-> +             log_info("   %s ... ", fit_get_name(fit, noffset, NULL));
-> +             /* fit_config_verify() prints results so we can be silent *=
-/
-> +             ret =3D fit_config_verify(fit, noffset);
-> +             if (ret) {
-> +                     r =3D ret;
-> +                     log_err('FAIL\n');
-> +                     continue;
-> +             }
-> +             /* valid config found */
-> +             if (r =3D=3D -ENOENT)
-> +                     r =3D 0;
-> +
-> +             log_info('OK\n');
-
-The comment 'so we can be silent' contradicts the next lines, which
-print FAIL/OK. Either drop it or rework - fit_config_verify() does
-emit its own diagnostics on failure, which will interleave with the
-FAIL line printed here.
-
-> diff --git a/cmd/bootm.c b/cmd/bootm.c
-> @@ -335,6 +335,13 @@ static int image_info(ulong addr)
-> +             if (CONFIG_IS_ENABLED(FIT_SIGNATURE) &&
-> +                 fit_all_configurations_verify(hdr) !=3D 0) {
-> +                     puts("Signature verification failed!\n");
-> +                     unmap_sysmem(hdr);
-> +                     return CONFIG_IS_ENABLED(FIT_SIGNATURE_REQUIRED) =
-=3D=3D 1;
-> +             }
-
-A FIT with no /configurations node (an images-only FIT, which is
-valid) makes fit_all_configurations_verify() return -ENOENT and log
-'Can't find configurations parent node' from inside the helper. That
-ends up here as 'Signature verification failed!' which is misleading.
-Please treat -ENOENT as 'nothing to do' in this caller, and don't
-log_err inside the helper for that case.
-
-Also, 'CONFIG_IS_ENABLED(FIT_SIGNATURE_REQUIRED) =3D=3D 1' is odd - the
-macro already evaluates to 0 or 1, so just return it directly. Better
-yet, make the success/failure path explicit rather than encoding
-policy in the return value.
-
-> Adjusts error output slighly to be on stderr
-
-Typo: slighly -> slightly. Worth also mentioning that, for a
-verification failure, the iminfo exit status is gated on
-FIT_SIGNATURE_REQUIRED =E2=80=94 that is a non-obvious behaviour change.
+>
+> This also doesn't allow the user to use OpenSSL engines for signing (yes
+> engines are deprecated and replaced by providers, but the same likely
+> apply for providers once we'll support that).
+>
+> You definitely need to document this somewhere, likely in
+> doc/board/allwinner?
+>
+> I'll try to keep an eye on this and see if there's something we can take
+> for Rockchip as well :) But I don't know how to do this nicely and make
+> it "safer" to set up FIT signature verification for devices and avoid
+> common pitfalls or misconfigurations while still allowing out-of-build
+> signing and configuration of keys.
 
 Regards,
 Simon
