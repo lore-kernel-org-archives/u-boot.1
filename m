@@ -4,112 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2DBA2CD3442
-	for <u-boot@archiver.kernel.org>; Thu,  7 May 2026 19:03:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3BC93CD3442
+	for <u-boot@archiver.kernel.org>; Thu,  7 May 2026 19:25:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9C83F84B42;
-	Thu,  7 May 2026 21:03:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=e-labworks.com
+	by phobos.denx.de (Postfix) with ESMTP id 973B184AA5;
+	Thu,  7 May 2026 21:25:10 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=grimler.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=e-labworks-com.20251104.gappssmtp.com header.i=@e-labworks-com.20251104.gappssmtp.com header.b="s1Ykm6ED";
+	dkim=pass (1024-bit key; secure) header.d=grimler.se header.i=@grimler.se header.b="IZryDNfp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DBB9984B9D; Thu,  7 May 2026 21:03:50 +0200 (CEST)
-Received: from mail-dl1-x122a.google.com (mail-dl1-x122a.google.com
- [IPv6:2607:f8b0:4864:20::122a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 476CB84B42; Thu,  7 May 2026 21:25:09 +0200 (CEST)
+Received: from out-173.mta0.migadu.com (out-173.mta0.migadu.com
+ [IPv6:2001:41d0:1004:224b::ad])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A262D84A75
- for <u-boot@lists.denx.de>; Thu,  7 May 2026 21:03:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none)
- header.from=e-labworks.com
+ by phobos.denx.de (Postfix) with ESMTPS id C5B1984A79
+ for <u-boot@lists.denx.de>; Thu,  7 May 2026 21:25:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=grimler.se
 Authentication-Results: phobos.denx.de;
- spf=none smtp.mailfrom=sergio.prado@e-labworks.com
-Received: by mail-dl1-x122a.google.com with SMTP id
- a92af1059eb24-12e332315a8so26124c88.0
- for <u-boot@lists.denx.de>; Thu, 07 May 2026 12:03:48 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1778180627; cv=none;
- d=google.com; s=arc-20240605;
- b=Fladyg/FmfOp0fJ0LoJ3OtTPHUHcmgBbMzpQYHUsnpCZEhS0PuXD5lxArsCrToM6S4
- zaVbhwqU3NWT4ytAS1E1xKVOK51DgadAI/yqHV6rdlw5yTbSFos4//EB+khflReKQw5F
- EAK/zDxe7FUZLjmmlaIIfHaglki2vsGayjXY2vnMUsnq+O2/3VqB5lWGdQZPv0+87EpJ
- PuW7ix8qiHVymsmpWnNHGF4fEQwws3KWDIw6DDp0YGvif1HjHa+t7JCNlOmYFZYfV4d1
- lmemBVmByph8cAGgZEtFxlb1MyzWYN9245huX5X1TQGfkMUmtG3nh9hnBHOQcvEey+xO
- q5GQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=GvWUtecuUvVpHX42Q8e7/ByQi/ccv7bDF4lo2CHH0S4=;
- fh=rQdNVvvc8zqJicVVg1FKg9muS4zc+bsub2dGVVYbfLU=;
- b=QKtku66/hMVQxp/wcLTWNehU+jWccdLRaimaMHnS/wY9tb9CKyv/0eU9kNpXLRDUu4
- r4BsZzRr544x55ueaPWOYG795PPHtp2VNCCWCzoqLm/DZsAWFnuIDGTpMr30S0SGGBQZ
- naZbUW8tDmZAia9UFIac1EX+BeCiqJFtSCzifYy92npNo/ihmOT6YbJELAOFHsSpOUt6
- EUrH2sWCFUfPJloAGLTN86PkXBA8zOoxhtrhuPrRXwplw1fPMqnN5USqdVHMARJ9cBoG
- yxYiQYU2agKR13/dJ0k+1XoB7cRWz6OsL4cQ0cdJiNCqjKF/JwdDnpSO3nSCrdoZSv15
- sW3w==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=e-labworks-com.20251104.gappssmtp.com; s=20251104; t=1778180627; x=1778785427;
- darn=lists.denx.de; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=GvWUtecuUvVpHX42Q8e7/ByQi/ccv7bDF4lo2CHH0S4=;
- b=s1Ykm6ED/FOXjt4ZgcQXzhcrp6p1nrtL8wbjqrT2A3m1b+uEUGXQyzIQNzymf1f4rF
- 2vOPSO2o2gRn3pe+Sdf2GX5IX5Ic5IaN2WVEbqW42nt4dOLQIv8WfTQvqFp74BeAq8H0
- kLehrTFOkmSLiRsafHp26V84hpq3qhI2JC4xgswDorx9QQYrMS+FURNxjuNIwENMyS9k
- YB/GTPdUP/aATT5N2ZYuohNxdu+FEBRiD9YSTuHnKT2yv1hpL8LDC5g//1wkLGjBIEV9
- j2vdovr7MAEshtPPq3xmUQmrMEyCNICjaiRCvlXXjyUFEL5b2nFJjJeoZAtzI/vwcxo6
- xrXA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778180627; x=1778785427;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=GvWUtecuUvVpHX42Q8e7/ByQi/ccv7bDF4lo2CHH0S4=;
- b=EqmBBRPqOkgXwlPX1EcEGO3KKwhimrhSDf2KCt5vOXmUpp5Af/HHpvWx0g0ihd3UBS
- P5rKpPZl4JwTlIlzuziidwQ2+3rB/Wztmrzr60RwFRwBE+iu8HwuWLi+M3akOY6Xaizu
- PJj5myLKsUvRFIDjaqO742EClXt14lDW8qtRVYagnB99MdUOWTlvRUq7xh4G5jmm8iPy
- dZ23RJooy0yrSLVE4+geHjLchhWgZwoZXJp0XqE9xxFynjFlAp8re3S2azGT/1cCMOy1
- 4PeffPPj9E//45nGX7PJx6HUF6UlUA6Nuc9zU73eie/FyiAh+N9X1wzgKPQNfkFxWIaM
- LQfQ==
-X-Forwarded-Encrypted: i=1;
- AFNElJ+lT3lm8Nbj1LN80rZtn8KtyWm3tddkl2GbRg1Hg2jPblmfepISMK21Wg37ofQZi0143cTrAmc=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx0TKXKsY28TGrg8LqoaZL69mtjuJtdrUJDEFco2vlXQy0N9olw
- iyWU3Wiph3BDNouTb/z3UHXroyT8W9NoUV0+5yaDs839J5pY2YC/hsVA7jmPQ+YfjyocEgJnGw+
- rl/I9E2GfDw3QP6b++BnqCLq+ZVhKyqFg2OCHMn8jgQ==
-X-Gm-Gg: Acq92OG9uoh1Wso9IjwVN/ycYbASwA+7YxIMEJd/oGXjraWEJ7nDOWNPPIQROBk2B0a
- jH11wcMDzHovyBqRvJzsb61B/zX4N7idPr2xn4MTzFpjbDCVwTMpvNu+p2TwOxktbxwyQ6+EHFU
- rE1uwgxlkngzECxootMSJYv7QTapdt5FCsoo7+RhR6GB/gbJgrPkHVc1tGFfwko03C2uhj7KYme
- Qh1fHz2SNtjMugKNGIFOyfdng4ENL+hgQ2MfKTtTycXVz+yvuXc2MJLevRXf7cRAlpSUl6/2w2I
- A10N90MhqzvQ+wwASDEbkCwPOwdf2t0Oj5ucJNcasgeS6AbFO3tV7rVfeRe8
-X-Received: by 2002:a05:7300:a508:b0:2d9:b466:5e19 with SMTP id
- 5a478bee46e88-2f549e6b382mr4803495eec.21.1778180626718; Thu, 07 May 2026
- 12:03:46 -0700 (PDT)
+ spf=pass smtp.mailfrom=henrik@grimler.se
+Date: Thu, 7 May 2026 21:24:59 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=grimler.se; s=key1;
+ t=1778181906;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=esPSeeTo9p719OY+NhHX8+kRb9QZX5AOiVBG5fWYYZ0=;
+ b=IZryDNfpn2kMP9+pl3hyRN92VMdk7RvlGpaRQfAuQtim5hc4pzE+qcYOnHaly5y+QThGLf
+ IsinO2UOk+R8sx3BbQUl+RweeKaVX2kcK73Qc8lbgVGdQh3Zs0IgzMEFcHY3i+KTe8drjK
+ 2xihxkLIIXy4J/3jb6P8GGv/t7x3JaY=
+X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
+ include these headers.
+From: Henrik Grimler <henrik@grimler.se>
+To: Kaustabh Chakraborty <kauschluss@disroot.org>
+Cc: Peng Fan <peng.fan@nxp.com>, u-boot@lists.denx.de,
+ Minkyu Kang <mk7.kang@samsung.com>, Tom Rini <trini@konsulko.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>, Anand Moon <linux.amoon@gmail.com>,
+ Sam Protsenko <semen.protsenko@linaro.org>,
+ Lukas Timmermann <uboot@timmermann.space>
+Subject: Re: [PATCH v2 1/4] mmc: exynos_dw_mmc: add proper init sequence for
+ HS400 support
+Message-ID: <20260507192245.GA18026@l14.localdomain>
+References: <20260503-dwmmc-exynos-hs400-es-v2-0-3ff1526142a7@disroot.org>
+ <20260503-dwmmc-exynos-hs400-es-v2-1-3ff1526142a7@disroot.org>
+ <20260505190729.GA6951@l14.localdomain>
+ <DIBV2GMI0TCA.2NHUZI89OJUA0@disroot.org>
 MIME-Version: 1.0
-References: <20260423154536.768603-1-sergio.prado@e-labworks.com>
- <20260423154536.768603-2-sergio.prado@e-labworks.com>
- <491f7007-0574-4fa5-897c-59002c7dcaf6@cherry.de>
- <CAFLszThW0u0SrntCfXFi083petNmszVmSjNgXFc87a38tHyx1Q@mail.gmail.com>
- <610b19bb-3282-4062-a3f5-3071c69dbedb@cherry.de>
- <CAFLszTgjvZnwsLBQicn4=g_wia3JP8EWs1H8o=pUe6L9kcC9JQ@mail.gmail.com>
-In-Reply-To: <CAFLszTgjvZnwsLBQicn4=g_wia3JP8EWs1H8o=pUe6L9kcC9JQ@mail.gmail.com>
-From: Sergio Prado <sergio.prado@e-labworks.com>
-Date: Thu, 7 May 2026 16:03:30 -0300
-X-Gm-Features: AVHnY4JjzGzWCZn6JHrXPKH3WPpdYBODRWZG3AqfnteuRExnUc-o9ncvwnRGJw4
-Message-ID: <CANu7NGspwLDTC=iVYse_TbEmJ8yLuGtVBnVB5_479d238qFaeg@mail.gmail.com>
-Subject: Re: [PATCH v3 1/2] binman: bintool: add extra_env parameter to run_cmd
-To: Simon Glass <sjg@chromium.org>
-Cc: Quentin Schulz <quentin.schulz@cherry.de>, u-boot@lists.denx.de,
- trini@konsulko.com, 
- alpernebiyasak@gmail.com, ilias.apalodimas@linaro.org, 
- marek.vasut+renesas@mailbox.org, sughosh.ganu@arm.com, 
- wolfgang.wallner@at.abb.com, bb@ti.com, y.moog@phytec.de, xypron.glpk@gmx.de, 
- jerome.forissier@arm.com, afd@ti.com, Wojciech.Dubowik@mt.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Type: multipart/mixed; boundary="ONzoJokdmu4qXJlJ"
+Content-Disposition: inline
+In-Reply-To: <DIBV2GMI0TCA.2NHUZI89OJUA0@disroot.org>
+X-Migadu-Flow: FLOW_OUT
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -126,25 +73,387 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
 
-> My understanding of the justification for NOT passing the env argument
-> is that it is annoying to do that plumbing. But I would rather do that
-> plumbing. Perhaps not stated, but one of Binman's design goals is to
-> try to have callers pass in their requirements rather than relying on
-> state or sideways data (although there is plenty of that even so :-)
+--ONzoJokdmu4qXJlJ
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-I came up with a solution similar to FIT image signing. It is much simpler
-and does not require passing additional environment variables to binman
-(though it still requires defining a few environment variables when
-invoking make, such as OPENSSL_CONF and SOFTHSM2_CONF, which I assume is
-what you referred to as =E2=80=9Csideways data=E2=80=9D).
+Hi Kaustabh,
 
-Please let me know if I should submit this new version as v4, or is the
-approach of passing environment variables to binman still under discussion.
+On Thu, May 07, 2026 at 01:33:28AM +0530, Kaustabh Chakraborty wrote:
+> On 2026-05-05 21:07 +02:00, Henrik Grimler wrote:
+> > Hi Kaustabh,
+> >
+> > On Sun, May 03, 2026 at 05:51:26PM +0530, Kaustabh Chakraborty wrote:
+> >> HS400 support was added, but configuration necessary for HS400 support
+> >> was left out. Add necessary changes, which includes:
+> >> - Device tree properties, such as "samsung,dw-mshc-hs400-timing" and
+> >>   "samsung,read-strobe-delay", which function as per dt-bindings.
+> >> - Registers related to HS400, which are necessary to enable HS400+ support.
+> >> - Appropriate timing tunings for the HS400 mode.
+> >> 
+> >> Note that these changes are loosely based off of its Linux kernel
+> >> counterpart.
+> >> 
+> >> Fixes: bbe3b9fa0922 ("mmc: exynos_dw_mmc: add support for MMC HS200 and HS400 modes")
+> >> Signed-off-by: Kaustabh Chakraborty <kauschluss@disroot.org>
+> >
+> > Reviewed-by: Henrik Grimler <henrik@grimler.se>
+> >
+> > This works fine on exynos5422-odroid-xu4 without hs400. I was not able
+> > to get hs400 working on the device, seems more changes than just dts
+> > update are needed.
+> 
+> Do you have any logs or traces which may be able to help pinpoint it?
+> I can try to figure out the issue(s) if you want me to.
 
-Thanks for reviewing.
+I fully synced the mmc dts node with linux variant. This device does
+not have a pinctrl driver so pinctrl settings are not applied though,
+so I also updated the exynos-pinmux mmc function. See attached diff.
 
-Regards,
+I then also enabled just CONFIG_MMC_HS400_SUPPORT, or both
+MMC_HS400_SUPPORT and MMC_HS400_ES_SUPPORT. With MMC_HS400_ES_SUPPORT
+I get:
 
-Sergio Prado
+ODROID-XU3 # mmc info
+Select HS400ES failed -22
+unable to select a mode: -5
+
+And with just MMC_HS400_SUPPORT I get:
+
+ODROID-XU3 # mmc info
+Select HS400 failed -110
+unable to select a mode: -110
+
+I have not run it with additional debugging.
+
+I have plans to switch over to OF_UPSTREAM, and add a pinctrl driver,
+maybe that would fix it. Probably not worth spending too much time
+debugging it at this point.
+
+Best regards,
+Henrik Grimler
+
+> >
+> > Best regards,
+> > Henrik Grimler
+> >
+> >> ---
+> >>  arch/arm/mach-exynos/include/mach/dwmmc.h |  5 ++
+> >>  drivers/mmc/exynos_dw_mmc.c               | 81 +++++++++++++++++++++++++++++++
+> >>  2 files changed, 86 insertions(+)
+> >> 
+> >> diff --git a/arch/arm/mach-exynos/include/mach/dwmmc.h b/arch/arm/mach-exynos/include/mach/dwmmc.h
+> >> index 4432deedef7..50081326c25 100644
+> >> --- a/arch/arm/mach-exynos/include/mach/dwmmc.h
+> >> +++ b/arch/arm/mach-exynos/include/mach/dwmmc.h
+> >> @@ -15,6 +15,11 @@
+> >>  #define DWMCI_SET_DRV_CLK(x)		((x) << 16)
+> >>  #define DWMCI_SET_DIV_RATIO(x)		((x) << 24)
+> >>  
+> >> +/* HS400 Related Registers */
+> >> +#define DWMCI_HS400_DQS_EN		0x180
+> >> +#define DWMCI_HS400_ASYNC_FIFO_CTRL	0x184
+> >> +#define DWMCI_HS400_DLINE_CTRL		0x188
+> >> +
+> >>  /* Protector Register */
+> >>  #define DWMCI_EMMCP_BASE		0x1000
+> >>  #define EMMCP_MPSECURITY		(DWMCI_EMMCP_BASE + 0x0010)
+> >> diff --git a/drivers/mmc/exynos_dw_mmc.c b/drivers/mmc/exynos_dw_mmc.c
+> >> index 7ccd113bd79..6558cdc803d 100644
+> >> --- a/drivers/mmc/exynos_dw_mmc.c
+> >> +++ b/drivers/mmc/exynos_dw_mmc.c
+> >> @@ -8,6 +8,7 @@
+> >>  #include <dwmmc.h>
+> >>  #include <asm/global_data.h>
+> >>  #include <malloc.h>
+> >> +#include <mmc.h>
+> >>  #include <errno.h>
+> >>  #include <asm/arch/dwmmc.h>
+> >>  #include <asm/arch/clk.h>
+> >> @@ -30,6 +31,14 @@
+> >>  #define CLKSEL_UP_SAMPLE(x, y)		(((x) & ~CLKSEL_CCLK_SAMPLE(7)) | \
+> >>  					 CLKSEL_CCLK_SAMPLE(y))
+> >>  
+> >> +/* RCLK_EN register defines */
+> >> +#define DATA_STROBE_EN			BIT(0)
+> >> +#define AXI_NON_BLOCKING_WR	BIT(7)
+> >> +
+> >> +/* DLINE_CTRL register defines */
+> >> +#define DQS_CTRL_RD_DELAY(x, y)		(((x) & ~0x3FF) | ((y) & 0x3FF))
+> >> +#define DQS_CTRL_GET_RD_DELAY(x)	((x) & 0x3FF)
+> >> +
+> >>  /**
+> >>   * DOC: Quirk flags for different Exynos DW MMC blocks
+> >>   *
+> >> @@ -71,6 +80,11 @@ struct dwmci_exynos_priv_data {
+> >>  	struct clk clk;
+> >>  	u32 sdr_timing;
+> >>  	u32 ddr_timing;
+> >> +	u32 hs400_timing;
+> >> +	u32 tuned_sample;
+> >> +	u32 dqs_delay;
+> >> +	u32 saved_dqs_en;
+> >> +	u32 saved_strobe_ctrl;
+> >>  	const struct exynos_dwmmc_variant *chip;
+> >>  };
+> >>  
+> >> @@ -162,6 +176,27 @@ static u8 exynos_dwmmc_get_ciu_div(struct dwmci_host *host)
+> >>  				& DWMCI_DIVRATIO_MASK) + 1;
+> >>  }
+> >>  
+> >> +static void exynos_config_hs400(struct dwmci_host *host, enum bus_mode mode)
+> >> +{
+> >> +	struct dwmci_exynos_priv_data *priv = exynos_dwmmc_get_priv(host);
+> >> +	u32 dqs, strobe;
+> >> +
+> >> +	dqs = priv->saved_dqs_en;
+> >> +	strobe = priv->saved_strobe_ctrl;
+> >> +
+> >> +	switch (mode) {
+> >> +	case MMC_HS_400:
+> >> +		dqs |= DATA_STROBE_EN;
+> >> +		strobe = DQS_CTRL_RD_DELAY(strobe, priv->dqs_delay);
+> >> +		break;
+> >> +	default:
+> >> +		dqs &= ~DATA_STROBE_EN;
+> >> +	}
+> >> +
+> >> +	dwmci_writel(host, DWMCI_HS400_DQS_EN, dqs);
+> >> +	dwmci_writel(host, DWMCI_HS400_DLINE_CTRL, strobe);
+> >> +}
+> >> +
+> >>  /* Configure CLKSEL register with chosen timing values */
+> >>  static int exynos_dwmci_clksel(struct dwmci_host *host)
+> >>  {
+> >> @@ -170,6 +205,9 @@ static int exynos_dwmci_clksel(struct dwmci_host *host)
+> >>  	u32 timing;
+> >>  
+> >>  	switch (host->mmc->selected_mode) {
+> >> +	case MMC_HS_400:
+> >> +		timing = CLKSEL_UP_SAMPLE(priv->hs400_timing, priv->tuned_sample);
+> >> +		break;
+> >>  	case MMC_DDR_52:
+> >>  		timing = priv->ddr_timing;
+> >>  		break;
+> >> @@ -186,6 +224,9 @@ static int exynos_dwmci_clksel(struct dwmci_host *host)
+> >>  
+> >>  	dwmci_writel(host, priv->chip->clksel, timing);
+> >>  
+> >> +	if (CONFIG_IS_ENABLED(MMC_HS400_SUPPORT))
+> >> +		exynos_config_hs400(host, host->mmc->selected_mode);
+> >> +
+> >>  	return 0;
+> >>  }
+> >>  
+> >> @@ -223,6 +264,16 @@ static void exynos_dwmci_board_init(struct dwmci_host *host)
+> >>  {
+> >>  	struct dwmci_exynos_priv_data *priv = exynos_dwmmc_get_priv(host);
+> >>  
+> >> +	if (CONFIG_IS_ENABLED(MMC_HS400_SUPPORT)) {
+> >> +		priv->saved_strobe_ctrl = dwmci_readl(host, DWMCI_HS400_DLINE_CTRL);
+> >> +		priv->saved_dqs_en = dwmci_readl(host, DWMCI_HS400_DQS_EN);
+> >> +		priv->saved_dqs_en |= AXI_NON_BLOCKING_WR;
+> >> +		dwmci_writel(host, DWMCI_HS400_DQS_EN, priv->saved_dqs_en);
+> >> +		if (!priv->dqs_delay)
+> >> +			priv->dqs_delay =
+> >> +				DQS_CTRL_GET_RD_DELAY(priv->saved_strobe_ctrl);
+> >> +	}
+> >> +
+> >>  	if (priv->chip->quirks & DWMCI_QUIRK_DISABLE_SMU) {
+> >>  		dwmci_writel(host, EMMCP_MPSBEGIN0, 0);
+> >>  		dwmci_writel(host, EMMCP_SEND0, 0);
+> >> @@ -319,6 +370,22 @@ static int exynos_dwmmc_of_to_plat(struct udevice *dev)
+> >>  				   DWMCI_SET_DIV_RATIO(div);
+> >>  	}
+> >>  
+> >> +	err = dev_read_u32_array(dev, "samsung,dw-mshc-hs400-timing", timing, 2);
+> >> +	if (err) {
+> >> +		debug("DWMMC%d: Can't get hs400-timings, using ddr-timings\n",
+> >> +		      host->dev_index);
+> >> +		priv->hs400_timing = priv->ddr_timing;
+> >> +	} else {
+> >> +		priv->hs400_timing = DWMCI_SET_SAMPLE_CLK(timing[0]) |
+> >> +				     DWMCI_SET_DRV_CLK(timing[1]) |
+> >> +				     DWMCI_SET_DIV_RATIO(1);
+> >> +		if (dev_read_u32(dev, "samsung,read-strobe-delay", &priv->dqs_delay)) {
+> >> +			priv->dqs_delay = 0;
+> >> +			debug("DWMMC%d: read-strobe-delay is not found, assuming usage of default value\n",
+> >> +			      host->dev_index);
+> >> +		}
+> >> +	}
+> >> +
+> >>  	host->buswidth = dev_read_u32_default(dev, "bus-width", 4);
+> >>  	host->fifo_depth = dev_read_u32_default(dev, "fifo-depth", 0);
+> >>  	host->bus_hz = dev_read_u32_default(dev, "clock-frequency", 0);
+> >> @@ -356,6 +423,16 @@ static int exynos_dwmmc_get_best_clksmpl(u8 candidates)
+> >>  	return -EIO;
+> >>  }
+> >>  
+> >> +static int dw_mci_exynos_prepare_hs400_tuning(struct dwmci_host *host)
+> >> +{
+> >> +	struct dwmci_exynos_priv_data *priv = exynos_dwmmc_get_priv(host);
+> >> +
+> >> +	dwmci_writel(host, priv->chip->clksel, priv->hs400_timing);
+> >> +	host->bus_hz = exynos_dwmci_get_clk(host, host->clock);
+> >> +
+> >> +	return 0;
+> >> +}
+> >> +
+> >>  static int exynos_dwmmc_execute_tuning(struct udevice *dev, u32 opcode)
+> >>  {
+> >>  	struct dwmci_exynos_priv_data *priv = dev_get_priv(dev);
+> >> @@ -365,6 +442,9 @@ static int exynos_dwmmc_execute_tuning(struct udevice *dev, u32 opcode)
+> >>  	u32 clksel;
+> >>  	int ret;
+> >>  
+> >> +	if (mmc->hs400_tuning)
+> >> +		dw_mci_exynos_prepare_hs400_tuning(host);
+> >> +
+> >>  	clksel = dwmci_readl(host, priv->chip->clksel);
+> >>  	start_smpl = CLKSEL_CCLK_SAMPLE(clksel);
+> >>  
+> >> @@ -387,6 +467,7 @@ static int exynos_dwmmc_execute_tuning(struct udevice *dev, u32 opcode)
+> >>  		return ret;
+> >>  	}
+> >>  
+> >> +	priv->tuned_sample = ret;
+> >>  	dwmci_writel(host, priv->chip->clksel, CLKSEL_UP_SAMPLE(clksel, ret));
+> >>  
+> >>  	return 0;
+> >> 
+> >> -- 
+> >> 2.53.0
+> >> 
+> 
+
+--ONzoJokdmu4qXJlJ
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: attachment; filename=odroid-xu4-hs400.diff
+
+diff --git a/arch/arm/dts/exynos5422-odroidxu3.dts b/arch/arm/dts/exynos5422-odroidxu3.dts
+index e147fcb8643b..8d9f4470d890 100644
+--- a/arch/arm/dts/exynos5422-odroidxu3.dts
++++ b/arch/arm/dts/exynos5422-odroidxu3.dts
+@@ -279,10 +280,6 @@
+ 		status = "okay";
+ 	};
+ 
+-	mmc@12200000 {
+-		fifo-depth = <0x40>;
+-	};
+-
+ 	mmc@12220000 {
+ 		fifo-depth = <0x40>;
+ 	};
+@@ -292,3 +289,76 @@
+ 		reset-gpio = <&gpd1 0 0>;
+ 	};
+ };
++
++&mmc0 {
++	fifo-depth = <0x40>;
++	status = "okay";
++	// mmc-pwrseq = <&emmc_pwrseq>;
++	card-detect-delay = <200>;
++	samsung,dw-mshc-ciu-div = <3>;
++	samsung,dw-mshc-sdr-timing = <0 4>;
++	samsung,dw-mshc-ddr-timing = <0 2>;
++	samsung,dw-mshc-hs400-timing = <0 2>;
++	samsung,read-strobe-delay = <90>;
++	pinctrl-names = "default";
++	pinctrl-0 = <&sd0_clk &sd0_cmd &sd0_bus1 &sd0_bus4 &sd0_bus8 &sd0_cd &sd0_rclk>;
++	bus-width = <8>;
++	cap-mmc-highspeed;
++	mmc-ddr-1_8v;
++	mmc-hs200-1_8v;
++	mmc-hs400-1_8v;
++	max-frequency = <200000000>;
++	vmmc-supply = <&ldo18_reg>;
++	vqmmc-supply = <&ldo3_reg>;
++};
++
++&pinctrl_1 {
++	sd0_clk: sd0-clk-pins {
++		samsung,pins = "gpc0-0";
++		samsung,pin-function = <EXYNOS_PIN_FUNC_2>;
++		samsung,pin-pud = <EXYNOS_PIN_PULL_NONE>;
++		samsung,pin-drv = <EXYNOS5420_PIN_DRV_LV4>;
++	};
++
++	sd0_cmd: sd0-cmd-pins {
++		samsung,pins = "gpc0-1";
++		samsung,pin-function = <EXYNOS_PIN_FUNC_2>;
++		samsung,pin-pud = <EXYNOS_PIN_PULL_NONE>;
++		samsung,pin-drv = <EXYNOS5420_PIN_DRV_LV4>;
++	};
++
++	sd0_cd: sd0-cd-pins {
++		samsung,pins = "gpc0-2";
++		samsung,pin-function = <EXYNOS_PIN_FUNC_2>;
++		samsung,pin-pud = <EXYNOS_PIN_PULL_UP>;
++		samsung,pin-drv = <EXYNOS5420_PIN_DRV_LV4>;
++	};
++
++	sd0_bus1: sd0-bus-width1-pins {
++		samsung,pins = "gpc0-3";
++		samsung,pin-function = <EXYNOS_PIN_FUNC_2>;
++		samsung,pin-pud = <EXYNOS_PIN_PULL_UP>;
++		samsung,pin-drv = <EXYNOS5420_PIN_DRV_LV4>;
++	};
++
++	sd0_bus4: sd0-bus-width4-pins {
++		samsung,pins = "gpc0-4", "gpc0-5", "gpc0-6";
++		samsung,pin-function = <EXYNOS_PIN_FUNC_2>;
++		samsung,pin-pud = <EXYNOS_PIN_PULL_UP>;
++		samsung,pin-drv = <EXYNOS5420_PIN_DRV_LV4>;
++	};
++
++	sd0_bus8: sd0-bus-width8-pins {
++		samsung,pins = "gpc3-0", "gpc3-1", "gpc3-2", "gpc3-3";
++		samsung,pin-function = <EXYNOS_PIN_FUNC_2>;
++		samsung,pin-pud = <EXYNOS_PIN_PULL_UP>;
++		samsung,pin-drv = <EXYNOS5420_PIN_DRV_LV4>;
++	};
++
++	sd0_rclk: sd0-rclk-pins {
++		samsung,pins = "gpc0-7";
++		samsung,pin-function = <EXYNOS_PIN_FUNC_2>;
++		samsung,pin-pud = <EXYNOS_PIN_PULL_DOWN>;
++		samsung,pin-drv = <EXYNOS5420_PIN_DRV_LV4>;
++	};
++};
+diff --git a/arch/arm/dts/exynos54xx.dtsi b/arch/arm/dts/exynos54xx.dtsi
+index 5915ed697791..6f8999a3c506 100644
+--- a/arch/arm/dts/exynos54xx.dtsi
++++ b/arch/arm/dts/exynos54xx.dtsi
+@@ -118,12 +118,8 @@
+ 		samsung,i2s-id = <0>;
+ 	};
+ 
+-	mmc@12200000 {
++	mmc0: mmc@12200000 {
+ 		bus-width = <8>;
+-		samsung,dw-mshc-ciu-div = <3>;
+-		samsung,dw-mshc-sdr-timing = <1 3>;
+-		non-removable;
+-		samsung,pre-init;
+ 	};
+ 
+ 	mmc@12210000 {
+diff --git a/arch/arm/mach-exynos/pinmux.c b/arch/arm/mach-exynos/pinmux.c
+index ed46ea033558..d62f31304413 100644
+--- a/arch/arm/mach-exynos/pinmux.c
++++ b/arch/arm/mach-exynos/pinmux.c
+@@ -111,6 +111,9 @@ static int exynos5_mmc_config(int peripheral, int flags)
+ 			gpio_set_pull(i, S5P_GPIO_PULL_UP);
+ 			gpio_set_drv(i, S5P_GPIO_DRV_4X);
+ 		}
++		gpio_cfg_pin(start+7, S5P_GPIO_FUNC(0x2));
++		gpio_set_pull(start+7, S5P_GPIO_PULL_DOWN);
++		gpio_set_drv(start+7, S5P_GPIO_DRV_4X);
+ 	}
+ 	for (i = start; i < (start + 2); i++) {
+ 		gpio_cfg_pin(i, S5P_GPIO_FUNC(0x2));
+
+--ONzoJokdmu4qXJlJ--
