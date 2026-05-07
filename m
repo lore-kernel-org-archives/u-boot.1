@@ -4,114 +4,115 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CCCBBCD3427
-	for <u-boot@archiver.kernel.org>; Thu,  7 May 2026 11:35:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09DE0CD343F
+	for <u-boot@archiver.kernel.org>; Thu,  7 May 2026 11:59:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C832D84A81;
-	Thu,  7 May 2026 13:35:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 749C084A75;
+	Thu,  7 May 2026 13:59:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=riscstar.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="WdmZrUGU";
+	dkim=pass (2048-bit key; unprotected) header.d=riscstar-com.20251104.gappssmtp.com header.i=@riscstar-com.20251104.gappssmtp.com header.b="xCRnom3t";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4F03C84AA4; Thu,  7 May 2026 13:35:04 +0200 (CEST)
-Received: from CH1PR05CU001.outbound.protection.outlook.com
- (mail-northcentralusazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c105::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 1A38E84A72; Thu,  7 May 2026 13:59:56 +0200 (CEST)
+Received: from mail-yx1-xb136.google.com (mail-yx1-xb136.google.com
+ [IPv6:2607:f8b0:4864:20::b136])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1A37C84A4D
- for <u-boot@lists.denx.de>; Thu,  7 May 2026 13:34:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5876084A72
+ for <u-boot@lists.denx.de>; Thu,  7 May 2026 13:59:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=fail (p=none dis=none) header.from=riscstar.com
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=Pranav.VinayTilak@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=sv1RnXUdgJDNraPf+yE50zvmXhAhgY86txvIA4keKIlMN3wg9W1B1/5lgsqpDlyy0vGt4g21s/rZnXUoTZkrADh3gCJ2GT/jktySbWlPOpTSLT+WyY9pundrt6g9SRgAhFvJFS+uM58rLCwLUxSn/+VCwbMYx/fQ+GnFR4ylAziXdnz+tFRDgUL0RMqwnwGgzN1xt9cf3UnKGU7MOJZmmV5jKvtbSd1kwmC3IwwbzGeDcfEWe2Nj+0yF+UM+yZzKrsuXa4V6PiU2AJSGBIvsdvN9ye9S818XL/DMc5Nad2Er/LQAe/shoLEKW7RnYnANwcuPWIf1wlp20ETemLMMAQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=up6SOKAkm5a2pPLK+ivH4mcaMwK9j379ikRFaH4dqhQ=;
- b=iqLc85IN2YlVP3V3Dh5rMf0E6LjPMrb1jKNkE8uZEhtaA++1SqVnLU8NQTiU5uYrpjqpfSGwtD2WAgczbzS/KxUOY88rBVpWHnJimAT1CtTxgsr/3wklanTPVj++ZQsoMRYylXFHVMYnB4ggqIAIErPSTtf+GkJQBvgvAG00H8oqxfqE6CFwh5i+h8JlWKeYPSVHSjLGijcLR+c+DNFcDLRgub86PacY65tPUy4H6Izjonio3D3aTZD+jbL+UA6gQJnPaDGKPrh427JY2GOKyqwG8YEZ2ip8Pc6VIE0shsXPOPsTF08qVsKGIm6Nj/AE79n0Igpu5AYqBYqJG7G31g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=up6SOKAkm5a2pPLK+ivH4mcaMwK9j379ikRFaH4dqhQ=;
- b=WdmZrUGUBkY+BDlvHj33qkAXDD7+fHU+C42IAYSn3Y7IQl2ex9fNqdYl7A74MMJzvp7FL3JHMvho6VztMjN9jyPrZa3r8t05J1vQnv89FjF+IZFG13x4FMQ6/OpyU68FeH11VuC6zaC+ec/MkdJSEJ7dXv3oVtlAoj1WxRdjbko=
-Received: from CH0PR04CA0059.namprd04.prod.outlook.com (2603:10b6:610:77::34)
- by IA1PR12MB9497.namprd12.prod.outlook.com (2603:10b6:208:593::22)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9891.15; Thu, 7 May
- 2026 11:34:52 +0000
-Received: from CH1PEPF0000AD7B.namprd04.prod.outlook.com
- (2603:10b6:610:77:cafe::b1) by CH0PR04CA0059.outlook.office365.com
- (2603:10b6:610:77::34) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9891.18 via Frontend Transport; Thu,
- 7 May 2026 11:34:51 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
-Received: from satlexmb08.amd.com (165.204.84.17) by
- CH1PEPF0000AD7B.mail.protection.outlook.com (10.167.244.58) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9891.9 via Frontend Transport; Thu, 7 May 2026 11:34:51 +0000
-Received: from SATLEXMB04.amd.com (10.181.40.145) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.2.2562.17; Thu, 7 May
- 2026 06:34:51 -0500
-Received: from satlexmb07.amd.com (10.181.42.216) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 7 May
- 2026 06:34:49 -0500
-Received: from xhdkummari40.xilinx.com (10.180.168.240) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17 via Frontend
- Transport; Thu, 7 May 2026 06:34:47 -0500
-From: Pranav Tilak <pranav.vinaytilak@amd.com>
-To: <u-boot@lists.denx.de>
-CC: <git@amd.com>, <michal.simek@amd.com>, <Padmarao.Begari@amd.com>, "Pranav
- Tilak" <pranav.vinaytilak@amd.com>
-Subject: [PATCH] fpga: versalpl: Fix unaligned buffer handling
-Date: Thu, 7 May 2026 17:03:59 +0530
-Message-ID: <20260507113359.3665220-1-pranav.vinaytilak@amd.com>
-X-Mailer: git-send-email 2.34.1
+ spf=pass smtp.mailfrom=guodong@riscstar.com
+Received: by mail-yx1-xb136.google.com with SMTP id
+ 956f58d0204a3-6530287803cso729226d50.1
+ for <u-boot@lists.denx.de>; Thu, 07 May 2026 04:59:54 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1778155193; cv=none;
+ d=google.com; s=arc-20240605;
+ b=WyDHfSgswNrw5Nt6nxJAgbDYlxwltpE3Uj+OIwcroUVQzBpmgOBT2EA6TTP5LyFb7K
+ 6p44T8nPhd+pm7Fjr5y8yXycphJyZD6+trz6sEqfTpnlgXUOGsvX+raQ18g8s27SOBFN
+ G9rekmQklEUbXfhSxK6qZ7fceMllcxZyCa03RSTMEMM4+dI1RPBKgba51TrYkWZIQuUQ
+ T/olOB7h7f6MgtwR8LcC4vg0b80kJCo3NUjdV11JD5lSLa2eXF57KwVwdssFDcvFC5eM
+ nmBjqMwpLIHZ5lqmdTpp7lMOtHTTf/RFKzyLyPQwecDQ0nO1a87Kzn/PN1hw1D/NdMzg
+ xHRQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=ezLeU7IP1hnfpua7tVRHyolJuoyndYKWmb3c8Zb2b1Q=;
+ fh=ECBmsllh1P8eQu1ro8AwKXG1FkFlcIETP3dwK7IFcvk=;
+ b=WoaKJajhZ1IvyicZoYGJFliLTGMv0ID8r+UulGxvzGB/rJkhwBdTde6dZv7N+1uCPh
+ 937UvtktOSHbmhrDNpwC140brL+gLZwuruAngOg2WqN62GH3+N0M2RXVCDt0dQyjdS5Z
+ SOVtKZHpaFh/X9LbDlVmYiFS/baTolMaBnqYnkEM/DEQ0ROfPo1WdieBFO4nCAUvCTf5
+ NrPPqGqWfjJK+Qz/CO7+72+UAEIWAOINQD1+UgkODaKK+12zhtYB7LetKpkULp/t6sD+
+ /Y7bbLgSHsFuJDUkZrBrXXhqiVXFfmQaX43MybwXkyY/2cVvWjjzq2tYY+0TYs0W15kz
+ Vyqw==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=riscstar-com.20251104.gappssmtp.com; s=20251104; t=1778155193; x=1778759993;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ezLeU7IP1hnfpua7tVRHyolJuoyndYKWmb3c8Zb2b1Q=;
+ b=xCRnom3t31eG6iJJ6mxcbOaHnx1hozTUMPHTx0JH9LA+D+kw9zqPRjJ/YBde7ltl9h
+ OS5ERR4JzvS23cXzrUlTzwT/FmE92cWOSShOjE15/Kqpwln3uc2c2bxurAJYw8Rv9J2+
+ fBmnSv5VxgHG4CxvJTyhOB/hN353xNtskw2chWPdC6TV+SnU97egafhw4+AoBn3vGglg
+ tAs1pbPNmiYQYP8qvtc80HqcclgO8RWk+aGt56fYIVvu/rmo/gA032r4IbPwafh3U0Ih
+ lF0oxrCmXtdyrS5d8ZFlYKymNh7gGfQXwqBA9/6suUEwL+RO8qCmBu6waqXt/8heGm77
+ AaTg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1778155193; x=1778759993;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=ezLeU7IP1hnfpua7tVRHyolJuoyndYKWmb3c8Zb2b1Q=;
+ b=d7CUMmAVCFm5CqqfZDhFcbSgQtzzcIOAYtXYbyPM+H/WNmIkjYuWBJUXWgpB7ofUNY
+ vofR7hLicVY8HiGlMIf2vQA61OyrTzNDhmfrqd5x/KzRiVg8gH/SoRyCf7szctRNX3X8
+ HXQQhOCiAPBBDFwAztNnjInD9cRUwA8sA0comhACEsUGdhGRTTEQo7HCHN/VNF+pEQtR
+ knMkP6esJvA4j8kyvmHSE/DuE0QEEC2Y+uOnTj2JlgzBxP1C5E5DAMe4/vku1VKlE62B
+ nmH0be1ESLsu1bBQ6YlPcf2JGBroGc2OK8Pe04iP63KQ7rrfR+84V9p8d+ADYHzjQSBC
+ EOIg==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ+fRdWxSxJnQwSMIbazbUe9usuiIYxY4Oms6rE4VF1wQf7hgvRAeaO3urxBzxyd71UcbpSk97A=@lists.denx.de
+X-Gm-Message-State: AOJu0YxPKqCLV9+hOchlNPxA1j16uh6tXl2YlOOxgwh1CmfkIl6/H5Fx
+ 99z4zB9nOU+xgW+a9KUnpvdu8Jc9VJhQnn4UqPYdvKf7B15p12fcLPerqHuL9bsfbAgiVh8caUa
+ vqtW+qYDcfrQ/RVWMyb7C1AzZJ4e8pI0suwe3pb76vQ==
+X-Gm-Gg: Acq92OFFDML7l1u2fUfkVH6H5M1+OXwUyrDRnxcjBxHRUyGTknNgFSAd/4eg/yaID+R
+ ++1ff0lRGp+/JtmXrxinWyBH7N4Ut+jtPapS3h8Xp73sc8lFT+b8f6CLO/+Cq2sIOVzWBOyYQOS
+ XhvG4GiJGBEzpamJzvcGUcWHAm5X1wpXyz1fAEQWaNyjukh3c6UHQMrTEHwHwGBmQtMNpFtNi4Y
+ wHo1CBBBsCGpbV74k1DOFdNWQaB7m7yzyhNsHI7l33lo+3NQYh5u2QiqyTpHFpYvFIjjlMyKghE
+ I8jozGcxtmA0Q2EJaXYgxqAj2LgH+72NoB6JzHWPlcJv1s7RD08rofflbKH6iRUE5RDbyy8g0e2
+ Sjg==
+X-Received: by 2002:a05:690e:1594:10b0:657:b16e:f63c with SMTP id
+ 956f58d0204a3-65c79941a28mr6760693d50.28.1778155192837; Thu, 07 May 2026
+ 04:59:52 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-Received-SPF: None (SATLEXMB04.amd.com: pranav.vinaytilak@amd.com does not
- designate permitted sender hosts)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH1PEPF0000AD7B:EE_|IA1PR12MB9497:EE_
-X-MS-Office365-Filtering-Correlation-Id: 143b47fb-4c1c-441f-e56d-08deac2ca730
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700016|82310400026|376014|1800799024|56012099003|18002099003;
-X-Microsoft-Antispam-Message-Info: FJR2Hf++dTi1OmAemAREY9zxf0l7UN2uBtRdyoEFRN5cXIwuOlZNQTIu9fcyNwWOnsWiFafwyzpS6byb6ho9En6nP3BsHgum/dlBQNdj9tP7SXy0rwrpePcB/GYQ3TtgZEt8fn1NwAAKyZU3EwIdiz1n/8FpH2S0SEHxgdo1+5/sTY1i28XGIrDyeTNTT6y3E90Acwbj7Bnkmia/2OptWsZFeFgY9KaarW0SArL2bxyH4uBchVxSvWYLlX8fbRru2rcXOQnOW+NWDc1h5XqPBBZrr/8wfcYqiYpHPCmEntDMaDlq3J7RHp2E2tdHaImiHmTqXIK/uVMqHIkfE8TYFTBwgLGuLSHsYawsmzmz7Rf9IjCFF1S0zY6Dv9Y8g4lwpIb9ONSRSXhSanarn3VWbPIoudPwUrM9m6GoLHI/VYHPC1g7z5knaTcAViWeGQd/VI780gH1zW5Ow84DA1lM99Tu3tMy8PLAQnCZNpVZvg+sDPYo7j4tVakQztqK8QJ4HMpfSKho8CKCLyt3UlJUKWGRtnI/UZiq65OFmibRUJn/RKnJsF7QAOZW+FVA9STYX0UnRqWQzR3HvmFB59UgjYVGIaaro2nCPuNQGsyNAjPeoi+D8B2IvCryOsRbSea9Dx8PIwi6WddVsibS7FyadlbYqhhhe9YCgkfzcs/pLcgCamrPk43lZb+Ou1FULFvYcA1leFvYTsZ01zgiXY0p4vIkKoOVjY5mru08sVzWEOE=
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:satlexmb08.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(36860700016)(82310400026)(376014)(1800799024)(56012099003)(18002099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 8LBX2XVktxKziDPAtNVLB6VbGYb5f293WPk/PI60Mtg51YFEOZIPnvlvZtXnwk4UJcP9JpdpVNx4K0wJeVqYEGA4zofvDGRI12UL+NtfAGcli909vV/YJ8FyndPp9FiUIZkBAmr3pPcSD/cgZRJCNgepKx4G05Zkv6k63SxU98B2FZ+fqr1CY4W5UlYWz2FpSG2ZVmggLCCafv7ERukhM9/jjswwzb3XZD3uKrt4jNEHX2C+P9QH3SnsOCNena29aOJKFgfl630hHEZ9a8IQ0ET8MU3FT9IkvJn4C13C2+iu0CTznYm7jBy3bYbuCT/0XqZEuLDeIOyWOJavzwPfv3vG1NcFPkfWGPvW7g7xAoDq1wepnJXrI0ZnzzsIFCm2Bs0dEEiQGrIDYDl+00ICRIM+im1Sqnaw/A2+CEm/IzBQuAYfE7XFHFs0uUF5Ma9e
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 May 2026 11:34:51.6446 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 143b47fb-4c1c-441f-e56d-08deac2ca730
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[satlexmb08.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: CH1PEPF0000AD7B.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR12MB9497
+References: <20260422143112.1329478-1-raymondmaoca@gmail.com>
+ <20260422143112.1329478-5-raymondmaoca@gmail.com>
+ <20260429-glare-anybody-16c98d01184e@spud>
+ <afKvzj0yoJ85-5VI@pie> <6562F314-D379-42C4-8371-0184E48B8592@gmx.de>
+ <20260430143326.GA1614990@bill-the-cat>
+In-Reply-To: <20260430143326.GA1614990@bill-the-cat>
+From: Guodong Xu <guodong@riscstar.com>
+Date: Thu, 7 May 2026 19:59:41 +0800
+X-Gm-Features: AVHnY4IVB8Ekzin87zIRyrtyA9j0Ou2N_YqHsWS9DiTu1EkeS8Y7Bt6azKhY6kM
+Message-ID: <CAH1PCMaUEmuAEK-aiaScV4OAup=kKmN0A09GDGQnjt=so2dg6w@mail.gmail.com>
+Subject: Re: [PATCH 04/16] dts: k1: import pinctrl dts file from upstream
+ folder
+To: Tom Rini <trini@konsulko.com>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Yao Zi <me@ziyao.cc>,
+ Conor Dooley <conor@kernel.org>, 
+ Raymond Mao <raymondmaoca@gmail.com>, u-boot@lists.denx.de, uboot@riscstar.com,
+ u-boot-spacemit@groups.io, raymond.mao@riscstar.com, rick@andestech.com, 
+ ycliang@andestech.com, lukma@denx.de, hs@nabladev.com, jh80.chung@samsung.com, 
+ peng.fan@nxp.com, randolph@andestech.com, dlan@gentoo.org, 
+ junhui.liu@pigmoral.tech, neil.armstrong@linaro.org, quentin.schulz@cherry.de, 
+ samuel@sholland.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -128,37 +129,75 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When fpga load is called with a misaligned buffer address, the
-versal_align_dma_buffer() function shifts the pointer forward to the
-next aligned boundary and uses memcpy() to copy the data. Since the
-destination is ahead of the source and the regions overlap, memcpy()
-produces undefined behavior; in practice U-Boot's generic memcpy()
-copies forward, repeating the first ARCH_DMA_MINALIGN-aligned chunk
-throughout the buffer.
+Hi Tom, Conor, Heinrich, Yao Zi,
 
-Replace memcpy() with memmove() which correctly handles overlapping
-regions by copying backwards when the destination is ahead of the
-source.
 
-Fixes: 26e054c943a7 ("arm64: versal: fpga: Add PL bit stream load support")
-Signed-off-by: Pranav Tilak <pranav.vinaytilak@amd.com>
----
- drivers/fpga/versalpl.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+On Thu, Apr 30, 2026 at 10:33=E2=80=AFPM Tom Rini <trini@konsulko.com> wrot=
+e:
+>
+> On Thu, Apr 30, 2026 at 07:21:58AM +0200, Heinrich Schuchardt wrote:
+> > Am 30. April 2026 03:26:38 MESZ schrieb Yao Zi <me@ziyao.cc>:
+> > >On Wed, Apr 29, 2026 at 08:48:39PM +0100, Conor Dooley wrote:
+> > >> On Wed, Apr 22, 2026 at 10:31:00AM -0400, Raymond Mao wrote:
+> > >> > From: Raymond Mao <raymond.mao@riscstar.com>
+> > >> >
+> > >> > Import k1-pinctrl.dtsi from upstream folder.
+> > >>
+> > >> Why doesn't the platform just use the upstream dts directly?
+> > >
+> > >AFAIK, U-Boot's reset driver for SpacemiT K1 predates land of the
+> > >kernel side driver, and follows a complete different (and to me,
+> > >broken since it combines completely unrelated MMIO regions) ABI.
+> >
+> > Shouldn't we first correct the reset drivers and switch to the upstream=
+ kernel device-tree before adding anything new? - This would reduce future =
+rework.
+>
+> Exactly. That's a condition of bringing stuff in to U-Boot before it's
+> accepted to the kernel. It *must* be updated once the kernel folks have
+> provided feedback, we do not diverge.
+>
 
-diff --git a/drivers/fpga/versalpl.c b/drivers/fpga/versalpl.c
-index 630d1ecfea3..3cb56cc0dc9 100644
---- a/drivers/fpga/versalpl.c
-+++ b/drivers/fpga/versalpl.c
-@@ -17,7 +17,7 @@ static ulong versal_align_dma_buffer(ulong *buf, u32 len)
- 
- 	if ((ulong)buf != ALIGN((ulong)buf, ARCH_DMA_MINALIGN)) {
- 		new_buf = (ulong *)ALIGN((ulong)buf, ARCH_DMA_MINALIGN);
--		memcpy(new_buf, buf, len);
-+		memmove(new_buf, buf, len);
- 		buf = new_buf;
- 	}
- 
--- 
-2.34.1
+Chiming in as one of the K1 platform contributors.
 
+Yao Zi is right about the reset driver. U-Boot's spacemit,k1-reset driver
+predates the current kernel binding. The kernel K1 reset driver was reworke=
+d
+to use the auxiliary-device mechanism during upstream review. At that
+point the kernel DTS (arch/riscv/boot/dts/spacemit/k1.dtsi) dropped its
+reset-controller node. And it is from there, the K1 uboot and kernel dts/dt=
+si
+files starting to diverge with each other.
+
+To pull them back together, with the goal to reuse the kernel dts,
+we plan to:
+
+1. Refactor U-Boot's K1 reset driver to be spawned from each per-syscon
+clock driver via device_bind_driver_to_node(), called from the .bind
+hook in drivers/clk/spacemit/clk-k1.c. More study is requried but for
+now we think this is the correct way. After the refactor, the K1
+build should be able to switch dts/upstream/src/riscv/spacemit/, with
+a simple U-Boot specifics layered as <board>-u-boot.dtsi overlays.
+
+2. After the refactor, we'll rebase the still in-flight K1 SPL bring-up
+work [1] and the PIN/SPI series [2] (this one) on top, dropping
+the patches that imported the forked DT, and resend.
+
+Could you confirm this matches your direction? If so, we'll send the
+K1 reset driver refactor as a standalone series first.
+
+Link: https://lore.kernel.org/u-boot/20260325223232.1553212-1-raymondmaoca@=
+gmail.com/
+[1]
+[PATCH v3 00/16] Add board support for Spacemit K1 SoC in SPL
+
+Link: https://lore.kernel.org/u-boot/20260422143112.1329478-1-raymondmaoca@=
+gmail.com/
+[2]
+[PATCH 00/16] Add PIN and SPI support for Spacemit K1
+
+Thanks,
+Guodong
+
+> --
+> Tom
