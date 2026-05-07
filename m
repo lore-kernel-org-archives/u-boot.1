@@ -4,57 +4,102 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42983CD343F
-	for <u-boot@archiver.kernel.org>; Thu,  7 May 2026 16:44:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7CBFECD3442
+	for <u-boot@archiver.kernel.org>; Thu,  7 May 2026 16:45:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4732B84BED;
-	Thu,  7 May 2026 18:43:59 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=makrotopia.org
+	by phobos.denx.de (Postfix) with ESMTP id B531184BB7;
+	Thu,  7 May 2026 18:44:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 43B5B84BC7; Thu,  7 May 2026 18:43:58 +0200 (CEST)
-Received: from pidgin.makrotopia.org (pidgin.makrotopia.org
- [IPv6:2a07:2ec0:3002::65])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5F99E84BEA
- for <u-boot@lists.denx.de>; Thu,  7 May 2026 18:43:56 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=makrotopia.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=daniel@makrotopia.org
-Received: from local
- by pidgin.makrotopia.org with esmtpsa (TLS1.3:TLS_AES_256_GCM_SHA384:256)
- (Exim 4.99) (envelope-from <daniel@makrotopia.org>)
- id 1wL1p7-000000006jG-3CAs; Thu, 07 May 2026 16:43:41 +0000
-Date: Thu, 7 May 2026 17:43:38 +0100
-From: Daniel Golle <daniel@makrotopia.org>
-To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Kory Maincent <kory.maincent@bootlin.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Anshul Dalal <anshuld@ti.com>, Martin Schwan <m.schwan@phytec.de>,
- Daniel Golle <daniel@makrotopia.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Sughosh Ganu <sughosh.ganu@arm.com>, Benjamin ROBIN <dev@benjarobin.fr>,
- Ludwig Nussel <ludwig.nussel@siemens.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- James Hilliard <james.hilliard1@gmail.com>,
- Kunihiko Hayashi <hayashi.kunihiko@socionext.com>,
- Frank Wunderlich <frank-w@public-files.de>,
- Mayuresh Chitale <mchitale@ventanamicro.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Wolfgang Wallner <wolfgang.wallner@at.abb.com>,
- Shiji Yang <yangshiji66@outlook.com>,
- Aristo Chen <jj251510319013@gmail.com>, Rasmus Villemoes <ravi@prevas.dk>,
- Francois Berder <fberder@outlook.fr>, u-boot@lists.denx.de
-Subject: [PATCH v3 7/7] test: py: add mkimage dm-verity round-trip test
-Message-ID: <71ddfdd634aec7fc931f43f3b6c587774aa718a0.1778171184.git.daniel@makrotopia.org>
-References: <cover.1778171184.git.daniel@makrotopia.org>
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Jz6dgj9k";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 7A14584B58; Thu,  7 May 2026 18:44:23 +0200 (CEST)
+Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
+ [IPv6:2a00:1450:4864:20::62f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 324B384BB7
+ for <u-boot@lists.denx.de>; Thu,  7 May 2026 18:44:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-b8f9568e074so175540866b.0
+ for <u-boot@lists.denx.de>; Thu, 07 May 2026 09:44:19 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1778172258; cv=none;
+ d=google.com; s=arc-20240605;
+ b=WH7J2S2H+hENT4hY/aP14KbiHSiZs4KJKTU7ttJLTDleEZs0HFUG9dN8HDvtM63uOE
+ XBvLuLyBZesBlO9YNJg668qc38lZsnv71SEVyDx2hadssjz89wuPpczz1I4wQk76p15G
+ E0urwV0bI/32tuE3O9RUWn9lhQTS04hohshhXg7gOenFiReZT17W/cpAKGSwxBrj1PRw
+ X52qQCnskhrYNHQqWGi0j5bSoppbI56kvv3rosaQ6zsaa6638KpFfdqbRaFvyRoIHWgd
+ qYnalNtEDAlP0+VpFwR8WKDXCx/W8X27tMV9wu5XEs2AaPVy5j3Y76eFyEAdIHhXsiMI
+ Pv6Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=abqgcV8ObCv5cM1v8CBKHmg08FBqdpUxcmtcgkY2Tjw=;
+ fh=oHA4XbAgLOUN2o4rTr89cig2bJ58UhQLNNObawHCHTU=;
+ b=DNzJMifRw2Gqm+1qbB2UCsLBmhyornrPfybPIJWTxuwK1Mywg2ZNBHeKrSS7d9lPHu
+ 2pXVsHkEB1Yzze4XaiXIqOeUgT/ST1Bbqo+KRUKdky9WRaGw+t+IMOgZwBZ6WSUV3yAx
+ EAkj85M5yP7SIlF5TRNBWknRBzMsk8IxMukDPoZdVTJvwZJSy+4khYWCrWiuKWN6CLrW
+ GjNs3tSU8wX4dolCgHoL/Kb9xwJTovliAGyZFIequ/jV+n6opvn/FPj+6UU8YBGeDvIC
+ X2YJ699aW1oaff16w9RU03mariftQIzDLbWkEW4Ax4yXx5xSIog4B9GIXJu6/YoiRBo7
+ /chQ==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1778172258; x=1778777058; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=abqgcV8ObCv5cM1v8CBKHmg08FBqdpUxcmtcgkY2Tjw=;
+ b=Jz6dgj9kGBHKI1wsIz+3kFTYR+J687wFKtFsSP/06RDy15DGvjLMx/cLL9wxrEi01H
+ Y99rpZkE5PFw6YJAMYSdXiaXHoyh4xe+TgzP2QbS78Y1WroOUFAss0ra4YUsdoNjMJsY
+ HavQabNqmJShrF9U/Ss42iCPSzKCGsVAN6tOI=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1778172258; x=1778777058;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=abqgcV8ObCv5cM1v8CBKHmg08FBqdpUxcmtcgkY2Tjw=;
+ b=dmJjQTJUqCVlNyyjx6N/cm6cGe8e51ayyDGv6l+6S6y4cpXzsVy5qK4T/SIOuBz3ff
+ Obh7OvkA+nrYEdUoz+Whbbu2ue2z7KU2YDPXX28vxjT6RLLYUDyHv9uY0EcogvpeuYPB
+ ok3VP5etQI0+WwdVVU8ngvqlXsIdC2yMgqiHLpBparfBbkialkX77+8/XfV+J0gHJ/aE
+ fyAqKW4NJEAdCI7F47j2Fkhin9gIWurWuMOhzsIqifmUVB/b9ppM3gV2TmsU4+popHMy
+ hShvFDGN6zkDX5DjeILI9LYruHrnaPedG8lavWSuEOLi/q45TM+tWipxnm786Vh1q2o6
+ E1DQ==
+X-Gm-Message-State: AOJu0YxROpggxB1JUlssrQESZ4JaIQq/pwn5EZ1R+Tss7eviABJQrQjw
+ hRF2M4KTls9eQyNaeD8lz/zCNf7h6WgAdQ4lsMwrofmHFEg8ZRje4IAcD5I9iU/y0aYmy2/7Eg7
+ T8bNh2UOv3yQu3ldhpdDEA1GObkPRL1aVZY247DHR
+X-Gm-Gg: AeBDiesaDtC6MjSa+XVmrBjfeUf1K8j2Ajr168Zq30eajpw+00BhFWvfK9nZpoAkjYy
+ 9ieE/lSoPdfsaZC0U8M7DGIgsByOf2dyC+GJyLJHQgDJwLb+Q/BILDB927HKXZP4aoqYwyJZhwW
+ 9I4MQKrdWN1maMetSMXDWVIoQPBlDkenXiEQXtyCKZpsC+oAB/5WaVUyp5VymBXcsHsnrWaKaNp
+ cpf5bcYZtWpWo0VIAQ5ODvBPjyKaSEoOJnerXiVhstTiMhDPVArhYUDOCwM4JIwYZBBUhT5QS8W
+ U6W/qCBDAG8YvDdR
+X-Received: by 2002:a17:907:3c89:b0:bc5:7c6d:865d with SMTP id
+ a640c23a62f3a-bc57c6d93c0mr499760866b.35.1778172258368; Thu, 07 May 2026
+ 09:44:18 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <cover.1778171184.git.daniel@makrotopia.org>
+References: <20260507120735.310325-1-ludwig.nussel@siemens.com>
+ <20260507140624.v3.3.6d1d5d14140677a76a7cd7bb99a9088d8c8f480c@changeid>
+In-Reply-To: <20260507140624.v3.3.6d1d5d14140677a76a7cd7bb99a9088d8c8f480c@changeid>
+From: Simon Glass <sjg@chromium.org>
+Date: Thu, 7 May 2026 10:44:07 -0600
+X-Gm-Features: AVHnY4IgYwKuP7yAagWbMaIY5sFlcZ7bIyk84YF6_j2vQUIb1nK15diwJoGWfy4
+Message-ID: <CAFLszTiyCTSG-cXeBU6kKsOFjwVjb4HrggnMPt5syRFe6dghqA@mail.gmail.com>
+Subject: Re: [PATCH v3 3/4] image-fit-sig: Optionally require signatures
+To: ludwig.nussel@siemens.com
+Cc: u-boot@lists.denx.de, Anshul Dalal <anshuld@ti.com>,
+ George Chan <gchan9527@gmail.com>, 
+ "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
+ Martin Schwan <m.schwan@phytec.de>, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, Peng Fan <peng.fan@nxp.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>, 
+ Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,170 +116,90 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add test/py/tests/test_fit_verity.py with two tests.
+Hi Ludwig,
 
-Both tests are skipped if veritysetup is not installed on the host.
+On 2026-05-07T12:06:22, Ludwig Nussel <ludwig.nussel@siemens.com> wrote:
+> image-fit-sig: Optionally require signatures
+>
+> If U-Boot is built with signature verification but no keys are
+> included in the device tree, the boot would still continue.
+> Introduce FIT_SIGNATURE_REQUIRED to avoid a fail-open setup. The
+> default is enabled which may break existing setups that rely on the
+> insecure behavior.
+>
+> Consistently use log_err for errors in fit_config_verify_required_keys()
+> while at it
+>
+> Signed-off-by: Ludwig Nussel <ludwig.nussel@siemens.com>
+>
+> boot/Kconfig         | 10 ++++++++++
+>  boot/image-fit-sig.c | 22 ++++++++++++++--------
+>  2 files changed, 24 insertions(+), 8 deletions(-)
 
-Signed-off-by: Daniel Golle <daniel@makrotopia.org>
----
-v3: drop unused 'struct' import and the home-rolled have_veritysetup()
-    helper; use @pytest.mark.requiredtool('veritysetup') instead
-v2: new patch
+> diff --git a/boot/Kconfig b/boot/Kconfig
+> @@ -124,6 +124,16 @@ config FIT_SIGNATURE
+> +config FIT_SIGNATURE_REQUIRED
+> +     bool "Require signature verification of FIT uImages"
+> +     depends on FIT_SIGNATURE
+> +     help
+> +       This option requires that FIT uImages are signed or boot will fai=
+l.
+> +       That means the U-Boot device tree must contain a '/signature' nod=
+e
+> +       and at least one public key with required=3D'conf'. All configura=
+tion
+> +       sections of a FIT file must be signed using those keys based on
+> +       'required-mode' policy.
 
- test/py/tests/test_fit_verity.py | 145 +++++++++++++++++++++++++++++++
- 1 file changed, 145 insertions(+)
- create mode 100644 test/py/tests/test_fit_verity.py
+Just a few more thoughts.
 
-diff --git a/test/py/tests/test_fit_verity.py b/test/py/tests/test_fit_verity.py
-new file mode 100644
-index 00000000000..b18c569d318
---- /dev/null
-+++ b/test/py/tests/test_fit_verity.py
-@@ -0,0 +1,145 @@
-+# SPDX-License-Identifier: GPL-2.0+
-+#
-+# Copyright 2026 Daniel Golle <daniel@makrotopia.org>
-+
-+"""
-+Test mkimage dm-verity Merkle-tree generation
-+
-+Build a minimal .its with a dm-verity subnode (user-provided properties only),
-+run mkimage -E, and verify that the computed properties (digest, salt,
-+num-data-blocks, hash-start-block) are written into the resulting FIT.
-+
-+This test does not run the sandbox.  It only exercises the host tool 'mkimage'.
-+Requires 'veritysetup' from the cryptsetup package on the build host.
-+"""
-+
-+import os
-+import pytest
-+import utils
-+
-+ITS_TEMPLATE = """\
-+/dts-v1/;
-+
-+/ {
-+    description = "dm-verity test";
-+    #address-cells = <1>;
-+
-+    images {
-+        rootfs {
-+            description = "test filesystem";
-+            data = /incbin/("./rootfs.bin");
-+            type = "filesystem";
-+            arch = "sandbox";
-+            compression = "none";
-+
-+            dm-verity {
-+                algo = "sha256";
-+                data-block-size = <4096>;
-+                hash-block-size = <4096>;
-+            };
-+        };
-+    };
-+
-+    configurations {
-+        default = "conf-1";
-+        conf-1 {
-+            description = "test config";
-+            loadables = "rootfs";
-+        };
-+    };
-+};
-+"""
-+
-+@pytest.mark.requiredtool('dtc')
-+@pytest.mark.requiredtool('fdtget')
-+@pytest.mark.requiredtool('veritysetup')
-+def test_mkimage_verity(ubman):
-+    """Test that mkimage computes dm-verity properties correctly."""
-+
-+    mkimage = ubman.config.build_dir + '/tools/mkimage'
-+    tempdir = os.path.join(ubman.config.result_dir, 'verity')
-+    os.makedirs(tempdir, exist_ok=True)
-+
-+    rootfs_file = os.path.join(tempdir, 'rootfs.bin')
-+    its_file = os.path.join(tempdir, 'image.its')
-+    fit_file = os.path.join(tempdir, 'image.itb')
-+
-+    # Create a dummy filesystem image: 64 x 4096-byte blocks of 0xa5
-+    block_size = 4096
-+    num_blocks = 64
-+    with open(rootfs_file, 'wb') as f:
-+        f.write(bytes([0xa5]) * block_size * num_blocks)
-+
-+    with open(its_file, 'w') as f:
-+        f.write(ITS_TEMPLATE)
-+
-+    # Build the FIT with external data (required for dm-verity)
-+    dtc_args = f'-I dts -O dtb -i {tempdir}'
-+    utils.run_and_log(ubman,
-+                      [mkimage, '-E', '-D', dtc_args, '-f', its_file, fit_file])
-+
-+    # Helper to read FIT properties via fdtget
-+    def fdt_get(node, prop):
-+        val = utils.run_and_log(
-+            ubman, f'fdtget {fit_file} {node} {prop}')
-+        return val.strip()
-+
-+    def fdt_get_hex(node, prop):
-+        """Read a byte-array property as hex string."""
-+        val = utils.run_and_log(
-+            ubman, f'fdtget -tbx {fit_file} {node} {prop}')
-+        return ''.join(b.zfill(2) for b in val.strip().split())
-+
-+    verity_path = '/images/rootfs/dm-verity'
-+
-+    # Verify mkimage filled in the computed properties
-+    algo = fdt_get(verity_path, 'algo')
-+    assert algo == 'sha256', f'algo mismatch: {algo}'
-+
-+    dbs = int(fdt_get(verity_path, 'data-block-size'))
-+    assert dbs == block_size, f'data-block-size mismatch: {dbs}'
-+
-+    hbs = int(fdt_get(verity_path, 'hash-block-size'))
-+    assert hbs == block_size, f'hash-block-size mismatch: {hbs}'
-+
-+    nblk = int(fdt_get(verity_path, 'num-data-blocks'))
-+    assert nblk == num_blocks, f'num-data-blocks mismatch: {nblk} != {num_blocks}'
-+
-+    hblk = int(fdt_get(verity_path, 'hash-start-block'))
-+    # With --no-superblock, hash-start-block == num-data-blocks
-+    assert hblk == num_blocks, f'hash-start-block mismatch: {hblk} != {num_blocks}'
-+
-+    # digest and salt should be non-empty hex strings (sha256 = 32 bytes = 64 hex chars)
-+    digest = fdt_get_hex(verity_path, 'digest')
-+    assert len(digest) == 64, f'digest length mismatch: {len(digest)} (expected 64)'
-+    # Should not be all zeros
-+    assert digest != '0' * 64, 'digest is all zeros'
-+
-+    salt = fdt_get_hex(verity_path, 'salt')
-+    assert len(salt) == 64, f'salt length mismatch: {len(salt)} (expected 64)'
-+
-+
-+@pytest.mark.requiredtool('dtc')
-+@pytest.mark.requiredtool('veritysetup')
-+def test_mkimage_verity_requires_external(ubman):
-+    """Test that mkimage rejects dm-verity without -E flag."""
-+
-+    mkimage = ubman.config.build_dir + '/tools/mkimage'
-+    tempdir = os.path.join(ubman.config.result_dir, 'verity_no_ext')
-+    os.makedirs(tempdir, exist_ok=True)
-+
-+    rootfs_file = os.path.join(tempdir, 'rootfs.bin')
-+    its_file = os.path.join(tempdir, 'image.its')
-+    fit_file = os.path.join(tempdir, 'image.itb')
-+
-+    with open(rootfs_file, 'wb') as f:
-+        f.write(bytes([0xa5]) * 4096 * 8)
-+
-+    with open(its_file, 'w') as f:
-+        f.write(ITS_TEMPLATE)
-+
-+    # Without -E, mkimage should fail for dm-verity images
-+    dtc_args = f'-I dts -O dtb -i {tempdir}'
-+    with pytest.raises(Exception):
-+        utils.run_and_log(ubman,
-+                          [mkimage, '-D', dtc_args, '-f', its_file, fit_file])
--- 
-2.54.0
+The commit message says the default is enabled - please update to
+something like 'defaults to off so existing setups are not affected;
+boards wanting fail-closed behaviour must enable it explicitly'.
+
+Also, since fail-closed is the safer default, can you say a word in
+the help text about why a user might want to leave it off? Right now
+it reads as 'always turn this on'.
+
+> diff --git a/boot/image-fit-sig.c b/boot/image-fit-sig.c
+> @@ -632,15 +632,16 @@ static int fit_config_verify_required_keys(const vo=
+id *fit, int conf_noffset,
+>       /* Work out what we need to verify */
+>       key_node =3D fdt_subnode_offset(key_blob, 0, FIT_SIG_NODENAME);
+>       if (key_node < 0) {
+> -             debug("%s: No signature node found: %s\n", __func__,
+> -                   fdt_strerror(key_node));
+> +             log_err("No signature node found: %s\n", fdt_strerror(key_n=
+ode));
+> +             if (IS_ENABLED(CONFIG_FIT_SIGNATURE_REQUIRED))
+> +                     return -EPERM;
+>               return 0;
+>       }
+
+This is a behaviour change for users without FIT_SIGNATURE_REQUIRED -
+what was a quiet debug() now prints an error on every FIT boot when
+the control DT has no /signature node, even though boot proceeds.
+Please only log_err() in the REQUIRED case and keep log_debug() for
+the permissive case.
+
+> diff --git a/boot/image-fit-sig.c b/boot/image-fit-sig.c
+> @@ -632,15 +632,16 @@ static int fit_config_verify_required_keys(const vo=
+id *fit, int conf_noffset,
+> +             if (IS_ENABLED(CONFIG_FIT_SIGNATURE_REQUIRED))
+> +                     return -EPERM;
+
+In U-Boot the convention for code that may be compiled into SPL/TPL is
+CONFIG_IS_ENABLED(FIT_SIGNATURE_REQUIRED), which expands to the
+SPL_/TPL_ variant in those builds. Please use that here (and at the
+second site below) for consistency with the surrounding FIT_SIGNATURE
+handling =E2=80=94 see CONFIG_IS_ENABLED(FIT_SIGNATURE) usage in cmd/bootm.=
+c,
+boot/image-fit.c, common/spl/spl_fit.c
+
+You may also want to consider whether an SPL_FIT_SIGNATURE_REQUIRED
+Kconfig is needed, given SPL_FIT_SIGNATURE exists.
+
+Reviewed-by: Simon Glass <sjg@chromium.org>
+
+Regards,
+Simon
