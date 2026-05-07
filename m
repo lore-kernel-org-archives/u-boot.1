@@ -4,73 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8DF83CD343B
-	for <u-boot@archiver.kernel.org>; Thu,  7 May 2026 07:25:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A84E0CD3442
+	for <u-boot@archiver.kernel.org>; Thu,  7 May 2026 07:45:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4C8F284A19;
-	Thu,  7 May 2026 09:25:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=couthit.com
+	by phobos.denx.de (Postfix) with ESMTP id EDFA984A09;
+	Thu,  7 May 2026 09:45:48 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=couthit.com header.i=@couthit.com header.b="K7DNKoE/";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="SBswn+os";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E3F5C84A19; Thu,  7 May 2026 08:26:35 +0200 (CEST)
-Received: from server.couthit.com (server.couthit.com [162.240.164.96])
+ id 70CE484A09; Thu,  7 May 2026 09:45:47 +0200 (CEST)
+Received: from tor.source.kernel.org (tor.source.kernel.org
+ [IPv6:2600:3c04:e001:324:0:1991:8:25])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3CEF28490D
- for <u-boot@lists.denx.de>; Thu,  7 May 2026 08:26:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2F009849F6
+ for <u-boot@lists.denx.de>; Thu,  7 May 2026 09:45:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=couthit.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=parvathi@couthit.com
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=couthit.com
- ; s=default;
- h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject
- :Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:Content-Description:
- Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
- In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=+MPDa4vkq346DLcUtFkAoG7FpIVVSYGHCQ4Ac5Mq/6M=; b=K7DNKoE/ho1hA8ugBhnZkLnX4V
- VwMVNXyo0/fTNFbPWh1hWHztiRjq85/uReUxcxpqJn1pLM0mECqJa3cm4YVxsNqW0mSooHuOK4XqH
- hzW5EI7rA3N7DMKOfTsnWNffCI3Bm5aUwK/QCRDEOZ+CLRX4tAi+kl+jf9v1l9bsn3TlhA3cEkIZK
- pGReoz0bDEfzhgW0FKZOKYnjkKI3EL3COQEXO4FIKiK4Hc/xqOazH1d0CbFa8g65bUh/wAt64KFED
- g7dW22XhQNRd29qEf8PXgCP1/E6pYgCpfFVDkgzoMoFyUH4bkcwxklgAWX2nE5QftbuVXHkj7h1sd
- hg/sQVoQ==;
-Received: from [115.246.246.98] (port=7848 helo=cypher.couthit.local)
- by server.couthit.com with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
- (Exim 4.99.1) (envelope-from <parvathi@couthit.com>)
- id 1wKsBo-000000065Cv-2ZXy; Thu, 07 May 2026 02:26:29 -0400
-From: Parvathi Pudi <parvathi@couthit.com>
-To: u-boot@lists.denx.de, trini@konsulko.com, Maarten.Brock@sttls.nl,
- pbrobinson@gmail.com, quentin.schulz@cherry.de, kory.maincent@bootlin.com,
- msp@baylibre.com, ilias.apalodimas@linaro.org, parvathi@couthit.com,
- sbellary@baylibre.com, romain.gantois@bootlin.com
-Cc: pratheesh@ti.com, j-rameshbabu@ti.com, praneeth@ti.com, vigneshr@ti.com,
- srk@ti.com, rogerq@ti.com, danishanwar@ti.com, m-malladi@ti.com,
- krishna@couthit.com, mohan@couthit.com, pmohan@couthit.com,
- basharath@couthit.com
-Subject: [PATCH v4] board: ti: am335x: Conditional MDIO PAD configuration
- instead of static for AM335_ICE
-Date: Thu,  7 May 2026 11:53:49 +0530
-Message-ID: <20260507062547.1570033-1-parvathi@couthit.com>
-X-Mailer: git-send-email 2.43.0
+ spf=pass smtp.mailfrom=sumit.garg@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by tor.source.kernel.org (Postfix) with ESMTP id D970C60181;
+ Thu,  7 May 2026 07:45:43 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2BC5DC2BCB8;
+ Thu,  7 May 2026 07:45:34 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1778139943;
+ bh=Yez6rLFzYB3jKFw6j1iSDnKkZwLPBV5mAglMOTjRqTg=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=SBswn+ossXZLQr1RmxkUqu7OjDKdN8Jj0RfxU+ZpGXcCD9HLGCYbIy3R88jY1Sx0l
+ 7Q0Mfek0T351hYUoQRBIK3E/VDwu1/xjtVT+LlyxwswEK3t+mcnAcm54QlEdzU/KM2
+ toexpwHyAbelB3FUva2gyi9+996Z/OK20FrrCGcodEdLr09bhgBBzpryo/I4bUAJ7P
+ 6K4h3Fbr/ys307fyjEEx2eDhTo7oVjVdJEdJiwUHusJmXPes7b2TYnznhdz2An0DS6
+ QiipI+46b2zI5QZqfLXcQJJvW1RzSLQptu6/P7ftVtYMDyzlQnL+80wKzTgS+nmArk
+ UpVdzWNXpEpfg==
+Date: Thu, 7 May 2026 13:15:32 +0530
+From: Sumit Garg <sumit.garg@kernel.org>
+To: Casey Connolly <casey.connolly@linaro.org>
+Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io,
+ Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Peng Fan <peng.fan@nxp.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Alice Guo <alice.guo@nxp.com>, Quentin Schulz <quentin.schulz@cherry.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Kuan-Wei Chiu <visitorckw@gmail.com>,
+ Raymond Mao <raymond.mao@riscstar.com>,
+ Stefan Roese <stefan.roese@mailbox.org>,
+ Philip Molloy <philip.molloy@analog.com>,
+ Jerome Forissier <jerome.forissier@arm.com>,
+ Marek Vasut <marek.vasut@mailbox.org>,
+ Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
+ Rasmus Villemoes <ravi@prevas.dk>, Heiko Schocher <hs@nabladev.com>,
+ Michal Simek <michal.simek@amd.com>, Sughosh Ganu <sughosh.ganu@arm.com>,
+ Antony Kurniawan Soemardi <linux@smankusors.com>,
+ Luca Weiss <luca.weiss@fairphone.com>,
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+Subject: Re: [PATCH v2 05/15] mach-snapdragon: fix reserved memory carveout
+Message-ID: <afxDHAZD25moYKg8@sumit-xelite>
+References: <20260504-b4-modernise-smem-v2-0-c01ec2ff3886@linaro.org>
+ <20260504-b4-modernise-smem-v2-5-c01ec2ff3886@linaro.org>
+ <afnhrel-ik0jOPD1@sumit-xelite>
+ <9870f8f4-a719-4ea5-93b7-5442d499c19f@linaro.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-AntiAbuse: This header was added to track abuse,
- please include it with any abuse report
-X-AntiAbuse: Primary Hostname - server.couthit.com
-X-AntiAbuse: Original Domain - lists.denx.de
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - couthit.com
-X-Get-Message-Sender-Via: server.couthit.com: authenticated_id:
- parvathi@couthit.com
-X-Authenticated-Sender: server.couthit.com: parvathi@couthit.com
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-X-Mailman-Approved-At: Thu, 07 May 2026 09:25:41 +0200
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <9870f8f4-a719-4ea5-93b7-5442d499c19f@linaro.org>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,83 +91,179 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This patch removes the static MDIO pinmux configuration from
-rmii1_pin_mux[] and instead configures the MDIO pins conditionally
-during board_init(). Previously, the MDIO_CLK and MDIO_DATA pins
-were always configured for CPSW in mux.c, which could lead to
-unnecessary pin ownership and conflicts in scenarios where CPSW
-is not used.
+On Tue, May 05, 2026 at 02:39:35PM +0200, Casey Connolly wrote:
+> 
+> 
+> On 05/05/2026 14:25, Sumit Garg wrote:
+> > On Mon, May 04, 2026 at 08:57:33PM +0200, Casey Connolly wrote:
+> >> The memory carveout logic was fairly limited and had a few issues,
+> >> rework it and teach it not to unmap regions that have a compatible
+> >> property (since they may be used in U-Boot) or that don't have the
+> >> no-map property.
+> >>
+> >> The carveout process adds ~100ms to the boot time depending on the
+> >> platform.
+> >>
+> >> This prepares us for using SMEM as a source of truth and improving
+> >> support for U-boot as a first stage bootloader since SMEMs memory map
+> >> doesn't already carve out some regions like ABL does.
+> >>
+> >> Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
+> >> ---
+> >>  arch/arm/mach-snapdragon/board.c | 86 +++++++++++++++++++++++++---------------
+> >>  1 file changed, 53 insertions(+), 33 deletions(-)
+> >>
+> >> diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/board.c
+> >> index 829a0109ac78..e12d3d00caa4 100644
+> >> --- a/arch/arm/mach-snapdragon/board.c
+> >> +++ b/arch/arm/mach-snapdragon/board.c
+> >> @@ -622,27 +622,36 @@ u64 get_page_table_size(void)
+> >>  {
+> >>  	return SZ_1M;
+> >>  }
+> >>  
+> >> +struct mem_resource_attrs {
+> >> +	fdt_addr_t start;
+> >> +	fdt_addr_t size;
+> >> +	u64 attrs;
+> >> +};
+> > 
+> > Let's move the struct declaration towards the top.
+> 
+> it's only used by this one function, it felt easier to keep things
+> readable this way. Probably we'll move this stuff to its own file at
+> some point.
+> 
+> > 
+> >> +
+> >>  static int fdt_cmp_res(const void *v1, const void *v2)
+> > 
+> > This API should now be renamed as mem_cmp_resources(), no?
+> 
+> yeah
+> 
+> > 
+> >>  {
+> >> -	const struct fdt_resource *res1 = v1, *res2 = v2;
+> >> +	const struct mem_resource_attrs *res1 = v1, *res2 = v2;
+> >>  
+> >>  	return res1->start - res2->start;
+> >>  }
+> >>  
+> >> -#define N_RESERVED_REGIONS 32
+> >> +#define N_RESERVED_REGIONS 64
+> >>  
+> >> -/* Mark all no-map regions as PTE_TYPE_FAULT to prevent speculative access.
+> >> +/* Map and unmap reserved memory regions as appropriate.
+> >> + * Mark all no-map regions as PTE_TYPE_FAULT to prevent speculative access.
+> >>   * On some platforms this is enough to trigger a security violation and trap
+> >>   * to EL3.
+> >> + * Regions that may be accessed by drivers get mapped explicitly.
+> >>   */
+> >> -static void carve_out_reserved_memory(void)
+> >> +static void configure_reserved_memory(void)
+> >>  {
+> >> -	static struct fdt_resource res[N_RESERVED_REGIONS] = { 0 };
+> >> +	static struct mem_resource_attrs res[N_RESERVED_REGIONS] = { 0 };
+> >>  	int parent, rmem, count, i = 0;
+> >>  	phys_addr_t start;
+> >>  	size_t size;
+> >> +	u64 attrs;
+> >>  
+> >>  	/* Some reserved nodes must be carved out, as the cache-prefetcher may otherwise
+> >>  	 * attempt to access them, causing a security exception.
+> >>  	 */
+> >> @@ -651,14 +660,19 @@ static void carve_out_reserved_memory(void)
+> >>  		log_err("No reserved memory regions found\n");
+> >>  		return;
+> >>  	}
+> >>  
+> >> -	/* Collect the reserved memory regions */
+> >> +	/* Collect the reserved memory regions and appropriate attrs */
+> >>  	fdt_for_each_subnode(rmem, gd->fdt_blob, parent) {
+> >>  		const fdt32_t *ptr;
+> >> -		int len;
+> >> +		attrs = PTE_TYPE_FAULT;
+> >> +		/* If the no-map property isn't set then the region is valid */
+> >>  		if (!fdt_getprop(gd->fdt_blob, rmem, "no-map", NULL))
+> >> -			continue;
+> >> +			attrs = PTE_TYPE_VALID | PTE_BLOCK_MEMTYPE(MT_NORMAL);
+> >> +		/* If the compatible property is set then this region may be accessed by drivers and should
+> >> +		 * be marked valid too. */
+> >> +		if (fdt_getprop(gd->fdt_blob, rmem, "compatible", NULL))
+> >> +			attrs = PTE_TYPE_VALID | PTE_BLOCK_MEMTYPE(MT_NORMAL);
+> >>  
+> >>  		if (i == N_RESERVED_REGIONS) {
+> >>  			log_err("Too many reserved regions!\n");
+> >>  			break;
+> >> @@ -667,50 +681,55 @@ static void carve_out_reserved_memory(void)
+> >>  		/* Read the address and size out from the reg property. Doing this "properly" with
+> >>  		 * fdt_get_resource() takes ~70ms on SDM845, but open-coding the happy path here
+> >>  		 * takes <1ms... Oh the woes of no dcache.
+> >>  		 */
+> >> -		ptr = fdt_getprop(gd->fdt_blob, rmem, "reg", &len);
+> >> +		ptr = fdt_getprop(gd->fdt_blob, rmem, "reg", NULL);
+> >>  		if (ptr) {
+> >>  			/* Qualcomm devices use #address/size-cells = <2> but all reserved regions are within
+> >>  			 * the 32-bit address space. So we can cheat here for speed.
+> >>  			 */
+> >>  			res[i].start = fdt32_to_cpu(ptr[1]);
+> >> -			res[i].end = res[i].start + fdt32_to_cpu(ptr[3]);
+> >> +			res[i].size = fdt32_to_cpu(ptr[3]);
+> >> +			res[i].attrs = attrs;
+> >>  			i++;
+> >>  		}
+> >>  	}
+> >>  
+> >>  	/* Sort the reserved memory regions by address */
+> >>  	count = i;
+> >> -	qsort(res, count, sizeof(struct fdt_resource), fdt_cmp_res);
+> >> +	qsort(res, count, sizeof(res[0]), fdt_cmp_res);
+> >> +	debug("Mapping %d regions!\n", count);
+> >>  
+> >>  	/* Now set the right attributes for them. Often a lot of the regions are tightly packed together
+> >> -	 * so we can optimise the number of calls to mmu_change_region_attr() by combining adjacent
+> >> +	 * so we can optimise the number of calls to mmu_change_region_attr_nobreak() by combining adjacent
+> >>  	 * regions.
+> >>  	 */
+> >> -	start = ALIGN_DOWN(res[0].start, SZ_2M);
+> >> -	size = ALIGN(res[0].end - start, SZ_2M);
+> >> +	start = res[0].start;
+> >> +	size = res[0].size;
+> >> +	attrs = res[0].attrs;
+> >> +	/* For each region after the first one, either increase the `size` to eventually be mapped or
+> >> +	 * map the region we have and start a new one, this allows us to reduce the number of calls to
+> >> +	 * mmu_map_region(). The loop is therefore "lagging" behind by one iteration. */
+> >>  	for (i = 1; i <= count; i++) {
+> >> -		/* We ideally want to 2M align everything for more efficient pagetables, but we must avoid
+> >> -		 * overwriting reserved memory regions which shouldn't be mapped as FAULT (like those with
+> >> -		 * compatible properties).
+> >> -		 * If within 2M of the previous region, bump the size to include this region. Otherwise
+> >> -		 * start a new region.
+> >> -		 */
+> >> -		if (i == count || start + size < res[i].start - SZ_2M) {
+> >> -			debug("  0x%016llx - 0x%016llx: reserved\n",
+> >> -			      start, start + size);
+> >> -			mmu_change_region_attr(start, size, PTE_TYPE_FAULT);
+> >> -			/* If this is the final region then quit here before we index
+> >> -			 * out of bounds...
+> >> -			 */
+> >> +		/* If i == count we are done, just map the last region. If the last region is
+> >> +		 * too far away or the attrs don't match then map the meta-region we have and
+> >> +		 * start a new one. */
+> >> +		if (i == count || start + size < res[i].start - SZ_8K || attrs != res[i].attrs) {
+> > 
+> > I suppose this SZ_8K instead of SZ_2M is intentional here? It works now
+> > due to page table optimization I guess?
+> 
+> I realised there was a possibility for incorrectly mapping stuff with
+> 2M. Probably not with the logic as it is but e.g. if you don't
+> explicitly map reserved regions that need to be mapped then they can get
+> unmapped here.
 
-With this change, the MDIO pins are configured only when required,
-ensuring that CPSW Ethernet functionality in U-Boot remains unaffected.
-This approach keeps Ethernet boot behavior intact and provides cleaner
-separation between CPSW and other Ethernet use cases.
+I think we rather need to unmap all the no-map regions first via
+aligning to 2MB block mappings and then map regions required to be
+mapped with the needed granularity. This way we can optimize the page
+tables usage.
 
-Reviewed-by: Markus Schneider-Pargmann (TI) <msp@baylibre.com>
-Signed-off-by: Parvathi Pudi <parvathi@couthit.com>
----
-Changes from v3 to v4 :
-*) Addressed a comment from Tom rini on this patch.
-
-Changes from v2 to v3 :
-*) Addressed a comment from Markus Schneider-Pargmann on this patch.
-*) Added Reviewed-by: tag from Markus Schneider-Pargmann (TI).
-
-Changes from v1 to v2 :
-*) Addressed Markus Schneider-Pargmann's comments on this patch.
-
- board/ti/am335x/board.c | 10 ++++++++++
- board/ti/am335x/mux.c   |  2 --
- 2 files changed, 10 insertions(+), 2 deletions(-)
-
-diff --git a/board/ti/am335x/board.c b/board/ti/am335x/board.c
-index b5f69a45a7c..4a2d7655d2a 100644
---- a/board/ti/am335x/board.c
-+++ b/board/ti/am335x/board.c
-@@ -28,6 +28,7 @@
- #include <asm/arch/mmc_host_def.h>
- #include <asm/arch/sys_proto.h>
- #include <asm/arch/mem.h>
-+#include <asm/arch/mux.h>
- #include <asm/global_data.h>
- #include <asm/io.h>
- #include <asm/emif.h>
-@@ -72,6 +73,12 @@ static struct ctrl_dev *cdev = (struct ctrl_dev *)CTRL_DEVICE_BASE;
- #define GPIO0_IRQSTATUSRAW	(AM33XX_GPIO0_BASE + 0x024)
- #define GPIO1_IRQSTATUSRAW	(AM33XX_GPIO1_BASE + 0x024)
- 
-+static __maybe_unused struct module_pin_mux rmii1_mdio_pin_mux[] = {
-+	{OFFSET(mdio_clk), MODE(0) | PULLUP_EN},	/* MDIO_CLK */
-+	{OFFSET(mdio_data), MODE(0) | RXACTIVE | PULLUP_EN}, /* MDIO_DATA */
-+	{-1},
-+};
-+
- /*
-  * Read header information from EEPROM into global structure.
-  */
-@@ -779,6 +786,9 @@ int board_init(void)
- 			hang();
- 		}
- 
-+		if (!eth0_is_mii)
-+			configure_module_pin_mux(rmii1_mdio_pin_mux);
-+
- 		prueth_is_mii = eth0_is_mii;
- 
- 		/* disable rising edge IRQs */
-diff --git a/board/ti/am335x/mux.c b/board/ti/am335x/mux.c
-index d2d87c304f6..36d849d2119 100644
---- a/board/ti/am335x/mux.c
-+++ b/board/ti/am335x/mux.c
-@@ -190,8 +190,6 @@ static struct module_pin_mux mii1_pin_mux[] = {
- };
- 
- static struct module_pin_mux rmii1_pin_mux[] = {
--	{OFFSET(mdio_clk), MODE(0) | PULLUP_EN},	/* MDIO_CLK */
--	{OFFSET(mdio_data), MODE(0) | RXACTIVE | PULLUP_EN}, /* MDIO_DATA */
- 	{OFFSET(mii1_crs), MODE(1) | RXACTIVE},		/* MII1_CRS */
- 	{OFFSET(mii1_rxerr), MODE(1) | RXACTIVE},	/* MII1_RXERR */
- 	{OFFSET(mii1_txen), MODE(1)},			/* MII1_TXEN */
--- 
-2.43.0
-
+-Sumit
