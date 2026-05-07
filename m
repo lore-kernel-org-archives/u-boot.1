@@ -4,97 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 864FACD343F
-	for <u-boot@archiver.kernel.org>; Thu,  7 May 2026 21:12:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9F88CD343F
+	for <u-boot@archiver.kernel.org>; Thu,  7 May 2026 21:12:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1E28384C0C;
-	Thu,  7 May 2026 23:12:05 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 60B2284C00;
+	Thu,  7 May 2026 23:12:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="kQloTDSs";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="jWd6sEZT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5AC4584C04; Thu,  7 May 2026 23:12:03 +0200 (CEST)
-Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
- [IPv6:2a00:1450:4864:20::62b])
+ id B47E484B9D; Thu,  7 May 2026 23:12:18 +0200 (CEST)
+Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
+ [IPv6:2a00:1450:4864:20::634])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B4D2384B9D
- for <u-boot@lists.denx.de>; Thu,  7 May 2026 23:12:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BDFC084C0B
+ for <u-boot@lists.denx.de>; Thu,  7 May 2026 23:12:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62b.google.com with SMTP id
- a640c23a62f3a-bc356898256so227630866b.3
- for <u-boot@lists.denx.de>; Thu, 07 May 2026 14:12:00 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1778188320; cv=none;
+Received: by mail-ej1-x634.google.com with SMTP id
+ a640c23a62f3a-b9d9971d059so206844166b.2
+ for <u-boot@lists.denx.de>; Thu, 07 May 2026 14:12:16 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1778188336; cv=none;
  d=google.com; s=arc-20240605;
- b=VeOm4cOBc2NXxAxFiGeapYUIc3XeFA5e/38/Zdl2TfZfmqRxlyqSgW5wU+pZmdugNT
- LEcg5a2pW6ktgCUMVVLrH0Tm1hDgKMvqb7R6MjhWae/MNMJ5HYd1NMJ9VrStiYM95F3G
- novFybY5irj5Le0W2U+lKR3rBLY7ZV5lV01x6kIAqBRf9e2JUv0ywJpqK+YeHey+S5ls
- MtXbE1Ms3v6kWuHkSKbQiH5RoZgFvrOiiCP9X2yl7IBhnkICC9vpZ/8MyvJY8/BXggcq
- J0bDHQIVBlcDiSqDY4Yrmmx+LWZzgpNOZwR+m6RSfoVWQj7A7AIA9bjtY9Fwn/siV2JL
- aDSQ==
+ b=gE52zRxnkigDXo/b73+jTSlmoGtK4D4i+EgXPgit6wk18hoHhhmRc3usH8O90DmG6R
+ /5GBvmNrac6YvYHQEzTa5//BImKZehXoGMOUsQxvA+a+nHCDUjIDpH1lPN9GM+r25Rjz
+ wjtuvi5k/80NMCOAg4UKV9Yy9Tt4J8QtWL7AbH7yt98F6CSDVM5VdmKqJ8j2fY+L9sAn
+ shXQhN674A9j0OvH3mEHoBdt/gFbM+utcNbk42xmb9wJA328Rscve7D0nzT9XL0UJiu4
+ 55/kRbAxhUmKceci/ljzxAWUhIWWqtqTugLuTMpgGv2RDx/RSLf32jYv7N1hGki5ofVI
+ f37A==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=dvcqagHg03g3xJi7B7bMKxFSAJGkfF4RN56t07OdKtw=;
- fh=pG65kes1vWDQ1AvYIebNuLUz/8pQiTkb3lwpDruQbts=;
- b=IB9CHdQOFm0HrC0rWHZDT6yYhbkfkLGd50xkNffwubPxNqgBizZgN9fR++kehLt9ho
- Se2QgTyWghMmtih5gvres2PyVc9gye8+XdHT+TR+Oyz4aj9DtaxG4RaOK+NqNBrucYCX
- iDJjwf/73tyxFHemFXRkid4o/gIE8nfOija6jpgAZ0vcESrHBepfBzvS6178DfcY7+qy
- z/IKw4zIo2vmxx7iSHUVvN83v5Xe3abBRyO/nQHkfRcg6nInQX4gYEg0QabFHcHZWB4S
- 6A+PmBP9ydLz/P6LmlfL2Hnc38OYYFtrn1j8wF9Hm1WklmoSGG036qWm9qUaJ8r0ucXB
- cBMA==; darn=lists.denx.de
+ bh=E0Md/f5qJRx5FgIsN/qo8DQLZpal18EZEZyDN1R19hs=;
+ fh=XXcfzCiAuQMJyMuyiaSz7X2bqP/dLoxll3XeZkNPATA=;
+ b=VU+bL46rpv0w52cLTiMlDofTxpgFoajiYL/ttTbuwCufKga3OtKENgJrdYi7it93aL
+ YtfeId8K03KUHIhM/2xOFAx48f8y6kkSFLrwM/uXn9mf/5jnpRASG95uvy2nZ4mLlFTt
+ rlRvXxICR9qQRjrlXDuc5YdYUZ09b/1DBiHsxEkZhybq8r1gkIE9oHjkImVA7KRlBcWS
+ +Fwawfrf5CA52DaMD0z5MIm32b4CBpMZWfu/vW4ZDxgCIGgVKH/LKH3MmFYL0pc84BJ9
+ PdNjoXbpWewv6Fe8B9TWVY1EQCGVEugzF42Cn4O15hBG0OHrHzQzPg8609g49Ez44ZHq
+ Kwtg==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1778188320; x=1778793120; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1778188336; x=1778793136; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=dvcqagHg03g3xJi7B7bMKxFSAJGkfF4RN56t07OdKtw=;
- b=kQloTDSsflWA0Dh+vaAkohzU3GLfrNfR8o4IvpFJEAIxbEWI8s6rpgM2q2CUrLEq8K
- 6a8qj54+ShaWgz1fk3MMP+4EDJ+Js4QvAyqyHSNAPrhfYSu/rgTgm3XInxpg9LnHeRj7
- Sw5kKgBDTgveX4x7g1J2cnMYdHnYc4tH8Ay3c=
+ bh=E0Md/f5qJRx5FgIsN/qo8DQLZpal18EZEZyDN1R19hs=;
+ b=jWd6sEZT5bfOU6eC7H+FV6jeRyDRxi/P1Rz+ovVkElNnRcjJNbofu8Rg83dt1KQEQ1
+ vte8yJH+KhqrPjtZqgelHBmfEXHr7Rp65H1H5cMgIIWx94FfiRFn8kwHPxMIPqh8YIRL
+ 1NwOd4QrZDk392rJ8fJUwwnvLnJ1VH0TL5Lns=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778188320; x=1778793120;
+ d=1e100.net; s=20251104; t=1778188336; x=1778793136;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=dvcqagHg03g3xJi7B7bMKxFSAJGkfF4RN56t07OdKtw=;
- b=nhHZtErO+m9P8goxJGf6dOAkZwDctdq1B+R+fXlac39mjI6NrRfwOo5GkHUCAhHma9
- 5FKhafsVmdn8gTwIry+BzR9lqc/ffPoyu/okhVo90shEcFL9nlTfWz42Yk+1chHMRPLl
- JIJ+4dvzVt7KNBUA3JhdD24aqJRsOC+PudQ521S6gO42JamynmUCkLODAfHuFh0SGQDR
- h4NJ4E2lYWjheAhZlATOpIFuVh19pD2qG+GzvDMSXUuU1Hewqb4eVr5TOuzcKDi1x2Zi
- wbhTHl3en4TIIoI2gjlneweUMk0AD6GTs2NCw2GaA3Xj4J2ZO+8aCevVw379b0POnMjy
- 60nw==
-X-Gm-Message-State: AOJu0YyeGWeBVev1Htuk0O1E0Z/oTdNMABZxrcVjLv4EeZkr5bI2XMXo
- C8xPHWSaCFHwKq+MukVh1fyFLzhSyrwKl80xlfAXSOor3vK3N6T+quCwBSY9SLWdbNFWWb+xVy7
- etRIx9+dVA7j+rkcCHQsbId96Dkzx6Bl2GdRdwQT8o6Baap6yS6c=
-X-Gm-Gg: AeBDiesy3AdaT+JA9zSCyN+hun+KfkLVj9Re7uX9VZqo/IXWhhuF/ggjHNgEHxMRW6Y
- 9fTjZYw6ijIXUC+fFMiTbYMyEBk7OPhORBjdErh9r+yiGDE9huovHETIiTJOkbmYWbn0oDOMYoE
- JOjAHwMJZuw8zO15p1A/blgcBkHEdXoItHOYOoo+S6rlzFRLAMhCi7UCBO7eFvtWwfxHGPIVPds
- bmQIL2YmkOeODPePsOWcFx6jbM3NPUA0vRhbh2teTL//r0acqHACgM3xr2aT23HBuMXrO7sMRFN
- loFVn+c7iM3sDYen
-X-Received: by 2002:a17:907:d08d:b0:bc6:d873:fd5d with SMTP id
- a640c23a62f3a-bc6d87406c2mr382375766b.44.1778188320021; Thu, 07 May 2026
- 14:12:00 -0700 (PDT)
+ bh=E0Md/f5qJRx5FgIsN/qo8DQLZpal18EZEZyDN1R19hs=;
+ b=kj4hXFN4w+5b8hxptI9ep6neOJpqiZk14uLPZ6sOAP0ZrLb2tMXTaooxBw0UrYYggG
+ Cx/oMbNLI3KFHLMSlCdCw/oYLGXu4T/TVTmjW57iIgsz2FLeiJEKuf+9r9sdjskQ1mw8
+ 2GIn6jhDxJc3q5LWHvJKyPwpCPmX3DRjIElf390ObmuJUQHk0edQc8Lv2SKYF1r60OOq
+ mkWmuOo6iWLI5oEZS3J6xKas8AMKEx0MDENMJMrR05/8KjPG2nW+Iugz0+6BXxbip+0V
+ pBDICAioJA2cEcxSCTHPo+U8NLB7AfL5lQhsGgvwiqJYV8HN4iWmA5kyDEh81XEcBmgy
+ 64OA==
+X-Gm-Message-State: AOJu0YxBC7ItSdduMDjfYszDkyHLIRO5fT3DVzKTfzq5y8HCIDapMW8G
+ OMUvXEYloSaMo937zz1Y8QVSSSs20QCxcWppy4eGRC69wmMNxh502Qn6X7COxw2jBavTfYpZvLE
+ XyiEzwVYuVX1uNcoyM1KDfzkaQf5LCcvtsDKO03mR
+X-Gm-Gg: AeBDieuKmc+BcTD7d3/W7yEMcNHabHW0A1sMICDkj8ubT3W20UjBn7rM7ShvThsgtNr
+ BCg2gflYd1P9/WdSW4U45kgtA/cScGKvFanTHErow7foW1aijefEZcR8wFfXRNUKz0at0VqA2Y+
+ hRWUoC7XO/L0QBgQQd99GHXLJE8Ploa1J62UYFriKiGWGMAy/8vonEn2XiJL6XQHpP7qdkGqKha
+ ocNF8CtDS8vQIjjJOVpfjQGGDPgvBTPXJ630BG5ijxFVZ1Za6OqPK6M+LbEFUihsIkDu3nqhZg8
+ cOI3xw==
+X-Received: by 2002:a17:907:cb27:b0:bc2:e449:3665 with SMTP id
+ a640c23a62f3a-bc56cd3a9bbmr385624766b.27.1778188336146; Thu, 07 May 2026
+ 14:12:16 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260507120735.310325-1-ludwig.nussel@siemens.com>
- <20260507140624.v3.1.5f8ce2dc2b00328d29e64be2684b10d9f52c6a7b@changeid>
-In-Reply-To: <20260507140624.v3.1.5f8ce2dc2b00328d29e64be2684b10d9f52c6a7b@changeid>
+ <20260507140624.v3.2.2405ba52fddd2e9ff1bbc24585e1e3140f660637@changeid>
+In-Reply-To: <20260507140624.v3.2.2405ba52fddd2e9ff1bbc24585e1e3140f660637@changeid>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 7 May 2026 15:11:48 -0600
-X-Gm-Features: AVHnY4IxHcDb6khurhiVuBbTVQ35KwrBDTAV2tJ2i_vzRlK01IdGTga05m4naTw
-Message-ID: <CAFLszTg8hL6-CkPr9ztGBxD2DEAuHyi0RBuNcOxu2L_eqc+a-A@mail.gmail.com>
-Subject: Re: [PATCH v3 1/4] qemu: overlay signature nodes
+Date: Thu, 7 May 2026 15:12:03 -0600
+X-Gm-Features: AVHnY4IbtwakucH5Wl6t_OS7_Z-ZRWH6NyzVMYS9Z8mirn1AwoWT1W7BHyQ7m3c
+Message-ID: <CAFLszTgcLUAYSUzUQfdzHRnBsFuwDGD3LYf3-qHU8bp-BbWUQQ@mail.gmail.com>
+Subject: Re: [PATCH v3 2/4] mkimage: define log_err and log_info
 To: ludwig.nussel@siemens.com
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Peng Fan <peng.fan@nxp.com>, 
- Raymond Mao <raymondmaoca@gmail.com>,
- Sam Protsenko <semen.protsenko@linaro.org>, 
- Tom Rini <trini@konsulko.com>, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>
+Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -115,89 +112,43 @@ X-Virus-Status: Clean
 Hi Ludwig,
 
 On 2026-05-07T12:06:22, Ludwig Nussel <ludwig.nussel@siemens.com> wrote:
-> qemu: overlay signature nodes
+> mkimage: define log_err and log_info
 >
-> The keys trusted for FIT signature verification are supposed to be
-> embedded in the device tree built into u-boot. When running in Qemu it's
-> convenient to use the device tree provided by the VM which doesn't know
-> about signatures though. So merge both device trees at startup.
+> Define log_err and log_info centrally in mkimage.h so any file used in
+> this context benefits from it.
+>
+> This patch is in preparation for a change in image-fit-sig.c in the
+> next patch.
 >
 > Signed-off-by: Ludwig Nussel <ludwig.nussel@siemens.com>
 >
-> board/emulation/qemu-arm/qemu-arm.c | 50 ++++++++++++++++++++++++++++++++++---
->  configs/qemu_arm64_defconfig        |  1 +
->  2 files changed, 48 insertions(+), 3 deletions(-)
+> boot/image-pre-load.c | 3 ---
+>  tools/mkimage.h       | 5 +++++
+>  2 files changed, 5 insertions(+), 3 deletions(-)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
 
-a few things below
-
-> diff --git a/board/emulation/qemu-arm/qemu-arm.c b/board/emulation/qemu-arm/qemu-arm.c
-> @@ -144,12 +144,56 @@ int dram_init_banksize(void)
-> +/* QEMU loads a generated DTB for us at the start of RAM.
-> + * When using signatures we may have a built-in FDT that contains our known
-> + * public keys nevertheless. So merge those nodes into QEMU's FDT.
-> + * We cannot merge the other way around (eg in fdtdec_board_setup()
-> + * or board_fix_fdt() at this stage as U-Boot might be started from
-> + * a ROM location.
-> + * At the same time U-Boot needs QEMU's FDT to initialize serial
-> + * devices even before relocation.
+> diff --git a/tools/mkimage.h b/tools/mkimage.h
+> @@ -31,6 +31,11 @@
+>  #endif /* MKIMAGE_DEBUG */
+>
+>  #define log_debug(fmt, args...)      debug(fmt, ##args)
+> +#define log_info(fmt, args...)       printf(fmt, ##args)
+> +/* can't use stderr here as that's unbuffered and would produce
+> + * output different from u-boot's console
 > + */
+> +#define log_err(fmt, args...)        printf(fmt, ##args)
 
-nits: The opening paren after 'eg' is never closed. Also the subject
-says 'overlay signature nodes', but the code merges the whole root of
-the built-in DT into QEMU's, not just /signature  - either narrow the
-merge to /signature or reword the subject and commit message to
-describe what really happens.
+The comment is a bit off. These macros are only active under
+USE_HOSTCC, where there is no console, so the real concern is that
+stderr would interleave out of order with stdout. Something like:
 
-> diff --git a/board/emulation/qemu-arm/qemu-arm.c b/board/emulation/qemu-arm/qemu-arm.c
-> @@ -144,12 +144,56 @@ int dram_init_banksize(void)
-> +     void *qemu_fdt = (void *)CFG_SYS_SDRAM_BASE;
-> +     int ret = -EINVAL;
-> +
-> +     if (fdt_check_header(qemu_fdt) != 0) {
-> +             log_err("Invalid QEMU FDT at %p\n", qemu_fdt);
-> +             goto out;
-> +     }
+   /*
+    * Use stdout rather than stderr so error messages stay
+    * interleaved with normal output in the order produced.
+    */
 
-On this error path you still execute '*fdtp = qemu_fdt' at out: and
-return -EINVAL, so the caller is handed a pointer to garbage. Please
-leave *fdtp untouched, or only assign it once the header has been
-validated.
-
-> diff --git a/board/emulation/qemu-arm/qemu-arm.c b/board/emulation/qemu-arm/qemu-arm.c
-> @@ -144,12 +144,56 @@ int dram_init_banksize(void)
-> +     ret = fdt_increase_size(qemu_fdt, 1024 + fdt_totalsize(*fdtp));
-> +     if (ret) {
-> +             log_err("Failed to resize FDT overlay: %s", fdt_strerror(ret));
-> +             goto out;
-> +     }
-
-fdt_increase_size() resizes in place - there is no bound on the buffer
-at SDRAM_BASE, so on failure this writes past whatever QEMU put there.
-This is fine, from my understanding, but a short comment about that
-assumption would help.
-
-Also missing the trailing '\n', unlike the other log_err() calls.
-
-> diff --git a/board/emulation/qemu-arm/qemu-arm.c b/board/emulation/qemu-arm/qemu-arm.c
-> @@ -144,12 +144,56 @@ int dram_init_banksize(void)
-> +              * existing setups might have injected them into
-> +              * QEMUS's FDT already.
-
-QEMU's.
-
-> diff --git a/configs/qemu_arm64_defconfig b/configs/qemu_arm64_defconfig
-> @@ -7,6 +7,7 @@ CONFIG_ENV_SIZE=0x40000
->  CONFIG_ENV_SECT_SIZE=0x40000
->  CONFIG_DEFAULT_DEVICE_TREE='qemu-arm64'
->  CONFIG_OF_LIBFDT_OVERLAY=y
-> +CONFIG_OF_OMIT_DTB=n
->  CONFIG_SYS_LOAD_ADDR=0x40200000
-
-The convention for disabling a bool in a defconfig is '#
-CONFIG_OF_OMIT_DTB is not set', not '=n' - please run 'make
-savedefconfig' if you want to check the result.
+Also kernel comment style puts the opening /* on its own line.
 
 Regards,
 Simon
