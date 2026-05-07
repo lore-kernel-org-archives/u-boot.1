@@ -4,59 +4,104 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67939CD3442
-	for <u-boot@archiver.kernel.org>; Thu,  7 May 2026 16:44:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9AAA7CD3442
+	for <u-boot@archiver.kernel.org>; Thu,  7 May 2026 16:44:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CBE2E84BDA;
-	Thu,  7 May 2026 18:43:46 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=makrotopia.org
+	by phobos.denx.de (Postfix) with ESMTP id 12F7C84B5D;
+	Thu,  7 May 2026 18:43:55 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id AB0FC84BE4; Thu,  7 May 2026 18:43:45 +0200 (CEST)
-Received: from pidgin.makrotopia.org (pidgin.makrotopia.org
- [IPv6:2a07:2ec0:3002::65])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8B5F084B58
- for <u-boot@lists.denx.de>; Thu,  7 May 2026 18:43:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=makrotopia.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=daniel@makrotopia.org
-Received: from local
- by pidgin.makrotopia.org with esmtpsa (TLS1.3:TLS_AES_256_GCM_SHA384:256)
- (Exim 4.99) (envelope-from <daniel@makrotopia.org>)
- id 1wL1ox-000000006iU-2lvb; Thu, 07 May 2026 16:43:31 +0000
-Date: Thu, 7 May 2026 17:43:28 +0100
-From: Daniel Golle <daniel@makrotopia.org>
-To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Kory Maincent <kory.maincent@bootlin.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Anshul Dalal <anshuld@ti.com>, Martin Schwan <m.schwan@phytec.de>,
- Daniel Golle <daniel@makrotopia.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Sughosh Ganu <sughosh.ganu@arm.com>, Benjamin ROBIN <dev@benjarobin.fr>,
- Ludwig Nussel <ludwig.nussel@siemens.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- James Hilliard <james.hilliard1@gmail.com>,
- Kunihiko Hayashi <hayashi.kunihiko@socionext.com>,
- Frank Wunderlich <frank-w@public-files.de>,
- Mayuresh Chitale <mchitale@ventanamicro.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Wolfgang Wallner <wolfgang.wallner@at.abb.com>,
- Shiji Yang <yangshiji66@outlook.com>,
- Aristo Chen <jj251510319013@gmail.com>, Rasmus Villemoes <ravi@prevas.dk>,
- Francois Berder <fberder@outlook.fr>, u-boot@lists.denx.de
-Subject: [PATCH v3 6/7] test: boot: add runtime unit test for
- fit_verity_build_cmdline()
-Message-ID: <253645cd785862724bbfec7ddb906cdb09f54073.1778171184.git.daniel@makrotopia.org>
-References: <cover.1778171184.git.daniel@makrotopia.org>
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="UlSCwl7B";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 1643484B58; Thu,  7 May 2026 18:43:54 +0200 (CEST)
+Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
+ [IPv6:2a00:1450:4864:20::633])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id E2AA284B5D
+ for <u-boot@lists.denx.de>; Thu,  7 May 2026 18:43:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x633.google.com with SMTP id
+ a640c23a62f3a-bc177ebda91so202987366b.3
+ for <u-boot@lists.denx.de>; Thu, 07 May 2026 09:43:50 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1778172230; cv=none;
+ d=google.com; s=arc-20240605;
+ b=i/Ovt0VYQAIX2NEeMUN2SfPW+AgYjmseUtqTw0M0WXX9uS62G/Gd4m0iNNCpwNTlQc
+ PoR1ke7vDXPXD73dCOBEfehhiPGw6cu2romfBX8cLeruRv7iV8/jHUUxJy7E8GtoPWjw
+ hSsI+OO8TopTm2y+HNPlXAKarTX36sEuT/7LIeAPdr6qUYzZV+E8+9mq/GC2PI0w4Tuy
+ acm8TIG2odjQw9yhFCJ5j2SGUYthZGddzZ+elDTBEZvtYz8iCkvcYPHW/yB3pIZ+TocL
+ otkoeGRcwURk6l3nKtxHZFtd0zkx7mV21u6ldud8KBtZz3FdSJy3u+YoK8VheJ0IZ9Eo
+ DBGg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=clj7Zg472xF/KjO86KsqhsQQS/McoOFilRgNxW6R4u4=;
+ fh=LKdTK89Fij2rv9SJBhCBmnALtuMrTj8clfr8JZ1v4nE=;
+ b=IdcOx1907UuzsmKmEdQjqlhA2u706czB5L+/zf8sAYhntZI25aB6oyAWJtxmz7ts33
+ xMU7CqmqHa6veWEiDYBy8CstbdCV1A2uL9QR4i5qlz/4R9TN2Idm5lUxcxghc8zYxMPQ
+ vceikpWy3sRBVac6d9YcvxFR8XWmVboph2Da8uwDnmnzarFm8PlxonS4/N1k/PRC1q5x
+ 9Z2g8difOZ7jJFbVyOL4zX+1DccDUuZrISONLMXdO0RK5o94RkpKkmZkrRte0Y9vGgwR
+ bXgbwxFYFuFjfzEEc/XHH4QuLFzts134oGTGIDKdQTf2EYAydklMRRs2j3NPjrhexaPq
+ e3FA==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1778172230; x=1778777030; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=clj7Zg472xF/KjO86KsqhsQQS/McoOFilRgNxW6R4u4=;
+ b=UlSCwl7BMBki49mvFl4rBs8/RbYcHSchrFWa/mPJmqKCapeHmvioBotsRSWB1ZaJNS
+ UJmMmn8bLMHpyYBUOcVH3J4zrV3TzXjdOEbWZc791xRsdznQDGnjEIXzLSjuEGzrSNwF
+ dlzwtgp+QF+H2gRGzlUc03plrVnLLLEiwNIqI=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1778172230; x=1778777030;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=clj7Zg472xF/KjO86KsqhsQQS/McoOFilRgNxW6R4u4=;
+ b=bHgk55K9ukXLH1zR7npsuawFEq/ELzcvGtS++8GGV2SjM3ygSAJn8a4EUYKFr3xmL/
+ +HZnUMkMyG9aLAGh+uW+4oSxSG6fteNg+eo3vXovOcz9Lq928TiDqBfjOXQ2QQDKcagw
+ +llc2OVYeRtSePbnPPBk9iJJn4fKdFmCp0ATjwrE/juqNEdgjvKcJ1pa5J2wH7UNwkuA
+ MrYOl5s+u7zsx3xXMUEPIVKjKtQdwOCRLogLyU3WWcx+TD68AqRm8SLUDa3bjncPCYUj
+ NFguYPdouvW0gOUpel4vuGkMhbR+ztJ68bHlFih6p8BMM1iF05ZFldbAkR6U4uttm9ab
+ x4uQ==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ+AHFdvhw0yagxvRX4Aw/pzs3Lk9TGUjKAhmHHSPW+/KpM7hhw/GH+F1JEM9Z8c+/zvrtwDJug=@lists.denx.de
+X-Gm-Message-State: AOJu0YxHyoPKv4PDkyUD0j33CGKfN5yCEo7c0siwL8W0Po0iSQeIaXz0
+ OSZg2PxZlXpXEPm6o+WqaCQXw+WVFgsZk/iVMOCuEcV6xJ4GGtX7cFyd1KhdXKRvwjMnS3BLxS1
+ yUJK2UufBAw4xBxOPw/1s9RDxYyL3qaGzEeO6Ng24
+X-Gm-Gg: AeBDiesMjDM8J7gvV5Gm09EiptLnodRSkc32tLIiRUKSH9/7rDHbPyJsredF6ADUGHc
+ +NSavkDfLu0ZcDkWvoQuPyZT5ryTFXlIAtFQ96SLoh6HUuRouA6pnDET7VcKE8eK3oB33zxdeMm
+ VCJgcVv3JodFsruu2CktaBZGp16yLWal89Dalrz0iKc9FLTyyaMOJB35ZO31T8920/4AvgjfZI3
+ B8vCfukC1b+w9+pnZq4+8tosmkSWwDX4207rhRlpPGD9FYPXP7tcgxe4ua3eC8DXs9hrxjvvFXi
+ F8Z8ks5d/PYImuG/
+X-Received: by 2002:a17:907:ea7:b0:ba6:8f34:b419 with SMTP id
+ a640c23a62f3a-bc56ae27aa7mr516129966b.13.1778172230205; Thu, 07 May 2026
+ 09:43:50 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <cover.1778171184.git.daniel@makrotopia.org>
+References: <20260423154536.768603-1-sergio.prado@e-labworks.com>
+ <20260423154536.768603-2-sergio.prado@e-labworks.com>
+ <491f7007-0574-4fa5-897c-59002c7dcaf6@cherry.de>
+ <CAFLszThW0u0SrntCfXFi083petNmszVmSjNgXFc87a38tHyx1Q@mail.gmail.com>
+ <610b19bb-3282-4062-a3f5-3071c69dbedb@cherry.de>
+In-Reply-To: <610b19bb-3282-4062-a3f5-3071c69dbedb@cherry.de>
+From: Simon Glass <sjg@chromium.org>
+Date: Thu, 7 May 2026 10:43:35 -0600
+X-Gm-Features: AVHnY4JrBDpLTUHUq-P2RFll6vsR3-oKZGSQi0vUE_c4NpTVN10KF9aznwrpdQ4
+Message-ID: <CAFLszTgjvZnwsLBQicn4=g_wia3JP8EWs1H8o=pUe6L9kcC9JQ@mail.gmail.com>
+Subject: Re: [PATCH v3 1/2] binman: bintool: add extra_env parameter to run_cmd
+To: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: Sergio Prado <sergio.prado@e-labworks.com>, u-boot@lists.denx.de,
+ trini@konsulko.com, 
+ alpernebiyasak@gmail.com, ilias.apalodimas@linaro.org, 
+ marek.vasut+renesas@mailbox.org, sughosh.ganu@arm.com, 
+ wolfgang.wallner@at.abb.com, bb@ti.com, y.moog@phytec.de, xypron.glpk@gmx.de, 
+ jerome.forissier@arm.com, afd@ti.com, Wojciech.Dubowik@mt.com
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,363 +118,100 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add test/boot/fit_verity.c with four tests that construct FIT blobs
-in memory and exercise fit_verity_build_cmdline().
+Hi Quentin,
 
-Signed-off-by: Daniel Golle <daniel@makrotopia.org>
----
-v3: replace literal property name strings with the FIT_VERITY_*_PROP
-v2: new patch
+On Thu, 7 May 2026 at 07:19, Quentin Schulz <quentin.schulz@cherry.de> wrote:
+>
+> Hi Simon,
+>
+> On 5/1/26 4:10 AM, Simon Glass wrote:
+> > Hi Quentin,
+> >
+> > On Mon, 27 Apr 2026 at 03:48, Quentin Schulz <quentin.schulz@cherry.de> wrote:
+> >>
+> >> Hi Sergio,
+> >>
+> >> On 4/23/26 5:45 PM, Sergio Prado wrote:
+> >>> [You don't often get email from sergio.prado@e-labworks.com. Learn why this is important at https://aka.ms/LearnAboutSenderIdentification ]
+> >>>
+> >>> Add an optional extra_env dict parameter to run_cmd() and
+> >>> run_cmd_result(). When provided, the key/value pairs are merged into
+> >>> the subprocess environment for that invocation only, leaving the parent
+> >>> process environment unchanged.
+> >>>
+> >>> This might be needed by bintools that must inject environment variables
+> >>> into specific tool calls without polluting the global environment.
+> >>>
+> >>
+> >> Yeah, I'm not convinced this is useful.
+> >>
+> >> We would need to propagate this new variable to whatever calls those
+> >> methods as well. And it quickly balloons.
+> >>
+> >> Just mock the environment with
+> >>
+> >> with unittest.mock.patch.dict('os.environ', {'MYVAR': 'myval'}): like in
+> >> testFitSignPKCS11Object for example?
+> >
+> > While we can mock the environment, it becomes confusing as the mocks
+> > pile up. The code path in the test effectively differs from the actual
+> > code path, since the mock is overriding something that it assumes the
+> > underlying code does, so any changes can cause strange errors.
+> >
+>
+> Sorry, I don't understand what you meant here, can you rephrase?
 
- test/boot/Makefile     |   1 +
- test/boot/fit_verity.c | 306 +++++++++++++++++++++++++++++++++++++++++
- test/cmd_ut.c          |   2 +
- 3 files changed, 309 insertions(+)
- create mode 100644 test/boot/fit_verity.c
+Basically mocks are fragile since they assume certain behaviour of the
+implementation. Change that and the mocks break in confusing ways.
 
-diff --git a/test/boot/Makefile b/test/boot/Makefile
-index 89538d4f0a6..d98f212b243 100644
---- a/test/boot/Makefile
-+++ b/test/boot/Makefile
-@@ -15,6 +15,7 @@ endif
- ifdef CONFIG_SANDBOX
- obj-$(CONFIG_$(PHASE_)CMDLINE) += bootm.o
- endif
-+obj-$(CONFIG_$(PHASE_)FIT_VERITY) += fit_verity.o
- obj-$(CONFIG_MEASURED_BOOT) += measurement.o
- 
- ifdef CONFIG_OF_LIVE
-diff --git a/test/boot/fit_verity.c b/test/boot/fit_verity.c
-new file mode 100644
-index 00000000000..8011459a1cb
---- /dev/null
-+++ b/test/boot/fit_verity.c
-@@ -0,0 +7,306 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Tests for FIT dm-verity cmdline generation
-+ *
-+ * Copyright 2026 Daniel Golle <daniel@makrotopia.org>
-+ */
-+
-+#include <image.h>
-+#include <test/test.h>
-+#include <test/ut.h>
-+
-+#define FIT_VERITY_TEST(_name, _flags)	UNIT_TEST(_name, _flags, fit_verity)
-+
-+/* FIT blob buffer size — generous to avoid FDT_ERR_NOSPACE */
-+#define FIT_BUF_SIZE	4096
-+
-+/* Test digest (32 bytes = sha256) */
-+static const u8 test_digest[32] = {
-+	0x8e, 0x67, 0x91, 0x63, 0x7f, 0x93, 0xcb, 0xb8,
-+	0x1f, 0xc4, 0x52, 0x99, 0xe2, 0x03, 0xcb, 0xe8,
-+	0x5c, 0xa2, 0xe4, 0x7a, 0x38, 0xf5, 0x05, 0x1b,
-+	0xdd, 0xee, 0xce, 0x92, 0xd7, 0xb1, 0xc9, 0xf9,
-+};
-+
-+/* Test salt (32 bytes) */
-+static const u8 test_salt[32] = {
-+	0xaa, 0x7b, 0x11, 0xf8, 0xdb, 0x8f, 0xe2, 0xe5,
-+	0xbf, 0xd4, 0xec, 0xa1, 0xd1, 0x8a, 0x22, 0xb5,
-+	0xde, 0x7e, 0xa3, 0x9d, 0x2e, 0x1b, 0x93, 0xbb,
-+	0x72, 0x72, 0xce, 0x0c, 0x6c, 0xa3, 0xcc, 0x8e,
-+};
-+
-+/**
-+ * build_verity_fit() - construct a minimal FIT blob with dm-verity metadata
-+ * @buf:		output buffer (at least FIT_BUF_SIZE bytes)
-+ * @num_loadables:	number of filesystem loadables to create (1 or 2)
-+ *
-+ * Builds a FIT blob containing:
-+ *  - /images/rootfsN  with type="filesystem" and a dm-verity subnode
-+ *  - /configurations/conf-1  referencing the loadable(s)
-+ *
-+ * Return: configuration node offset, or -ve on error
-+ */
-+static int build_verity_fit(void *buf, int num_loadables)
-+{
-+	int images_node, conf_node, confs_node, img_node, verity_node;
-+	fdt32_t val;
-+	int ret, i;
-+	char name[32];
-+	/*
-+	 * Build the loadables string list.  FDT stringlists are concatenated
-+	 * NUL-terminated strings.  E.g. "rootfs0\0rootfs1\0"
-+	 */
-+	char loadables[128];
-+	int loadables_len = 0;
-+
-+	ret = fdt_create_empty_tree(buf, FIT_BUF_SIZE);
-+	if (ret)
-+		return ret;
-+
-+	/* /images */
-+	images_node = fdt_add_subnode(buf, 0, "images");
-+	if (images_node < 0)
-+		return images_node;
-+
-+	for (i = 0; i < num_loadables; i++) {
-+		snprintf(name, sizeof(name), "rootfs%d", i);
-+
-+		img_node = fdt_add_subnode(buf, images_node, name);
-+		if (img_node < 0)
-+			return img_node;
-+
-+		ret = fdt_setprop_string(buf, img_node, FIT_TYPE_PROP,
-+					 "filesystem");
-+		if (ret)
-+			return ret;
-+
-+		verity_node = fdt_add_subnode(buf, img_node,
-+					      FIT_VERITY_NODENAME);
-+		if (verity_node < 0)
-+			return verity_node;
-+
-+		ret = fdt_setprop_string(buf, verity_node,
-+					 FIT_VERITY_ALGO_PROP, "sha256");
-+		if (ret)
-+			return ret;
-+
-+		val = cpu_to_fdt32(4096);
-+		ret = fdt_setprop(buf, verity_node, FIT_VERITY_DBS_PROP,
-+				  &val, sizeof(val));
-+		if (ret)
-+			return ret;
-+
-+		ret = fdt_setprop(buf, verity_node, FIT_VERITY_HBS_PROP,
-+				  &val, sizeof(val));
-+		if (ret)
-+			return ret;
-+
-+		val = cpu_to_fdt32(100);
-+		ret = fdt_setprop(buf, verity_node, FIT_VERITY_NBLK_PROP,
-+				  &val, sizeof(val));
-+		if (ret)
-+			return ret;
-+
-+		val = cpu_to_fdt32(100);
-+		ret = fdt_setprop(buf, verity_node, FIT_VERITY_HBLK_PROP,
-+				  &val, sizeof(val));
-+		if (ret)
-+			return ret;
-+
-+		ret = fdt_setprop(buf, verity_node, FIT_VERITY_DIGEST_PROP,
-+				  test_digest, sizeof(test_digest));
-+		if (ret)
-+			return ret;
-+
-+		ret = fdt_setprop(buf, verity_node, FIT_VERITY_SALT_PROP,
-+				  test_salt, sizeof(test_salt));
-+		if (ret)
-+			return ret;
-+
-+		/* Append to loadables stringlist */
-+		loadables_len += snprintf(loadables + loadables_len,
-+					  sizeof(loadables) - loadables_len,
-+					  "%s", name) + 1;
-+	}
-+
-+	/* /configurations/conf-1 */
-+	confs_node = fdt_add_subnode(buf, 0, "configurations");
-+	if (confs_node < 0)
-+		return confs_node;
-+
-+	conf_node = fdt_add_subnode(buf, confs_node, "conf-1");
-+	if (conf_node < 0)
-+		return conf_node;
-+
-+	ret = fdt_setprop(buf, conf_node, FIT_LOADABLE_PROP,
-+			  loadables, loadables_len);
-+	if (ret)
-+		return ret;
-+
-+	return conf_node;
-+}
-+
-+/* Test: single dm-verity loadable produces correct cmdline fragments */
-+static int fit_verity_test_single(struct unit_test_state *uts)
-+{
-+	char buf[FIT_BUF_SIZE];
-+	struct bootm_headers images;
-+	int conf_noffset;
-+
-+	conf_noffset = build_verity_fit(buf, 1);
-+	ut_assert(conf_noffset >= 0);
-+
-+	memset(&images, 0, sizeof(images));
-+	ut_assertok(fit_verity_build_cmdline(buf, conf_noffset, &images));
-+
-+	/* dm_mod_create should contain the target spec for rootfs0 */
-+	ut_assertnonnull(images.dm_mod_create);
-+	ut_assert(strstr(images.dm_mod_create, "rootfs0,,,"));
-+	ut_assert(strstr(images.dm_mod_create, "verity 1"));
-+	ut_assert(strstr(images.dm_mod_create, "/dev/fit0"));
-+	ut_assert(strstr(images.dm_mod_create, "4096 4096 100 100"));
-+	ut_assert(strstr(images.dm_mod_create, "sha256"));
-+	/* Check hex-encoded digest prefix */
-+	ut_assert(strstr(images.dm_mod_create, "8e6791637f93cbb8"));
-+	/* Check hex-encoded salt prefix */
-+	ut_assert(strstr(images.dm_mod_create, "aa7b11f8db8fe2e5"));
-+
-+	/* dm_mod_waitfor should reference /dev/fit0 */
-+	ut_assertnonnull(images.dm_mod_waitfor);
-+	ut_asserteq_str("/dev/fit0", images.dm_mod_waitfor);
-+
-+	fit_verity_free(&images);
-+	ut_assertnull(images.dm_mod_create);
-+	ut_assertnull(images.dm_mod_waitfor);
-+
-+	return 0;
-+}
-+FIT_VERITY_TEST(fit_verity_test_single, 0);
-+
-+/* Test: FIT with no dm-verity subnode returns 0, pointers stay NULL */
-+static int fit_verity_test_no_verity(struct unit_test_state *uts)
-+{
-+	char buf[FIT_BUF_SIZE];
-+	struct bootm_headers images;
-+	int conf_node, images_node, img_node, confs_node;
-+	int ret;
-+
-+	ret = fdt_create_empty_tree(buf, FIT_BUF_SIZE);
-+	ut_assertok(ret);
-+
-+	images_node = fdt_add_subnode(buf, 0, "images");
-+	ut_assert(images_node >= 0);
-+
-+	img_node = fdt_add_subnode(buf, images_node, "rootfs");
-+	ut_assert(img_node >= 0);
-+	ut_assertok(fdt_setprop_string(buf, img_node, FIT_TYPE_PROP,
-+				       "filesystem"));
-+	/* No dm-verity subnode */
-+
-+	confs_node = fdt_add_subnode(buf, 0, "configurations");
-+	ut_assert(confs_node >= 0);
-+	conf_node = fdt_add_subnode(buf, confs_node, "conf-1");
-+	ut_assert(conf_node >= 0);
-+	ut_assertok(fdt_setprop_string(buf, conf_node, FIT_LOADABLE_PROP,
-+				       "rootfs"));
-+
-+	memset(&images, 0, sizeof(images));
-+	ut_asserteq(0, fit_verity_build_cmdline(buf, conf_node, &images));
-+	ut_assertnull(images.dm_mod_create);
-+	ut_assertnull(images.dm_mod_waitfor);
-+
-+	return 0;
-+}
-+FIT_VERITY_TEST(fit_verity_test_no_verity, 0);
-+
-+/* Test: two dm-verity loadables produce combined cmdline */
-+static int fit_verity_test_two_loadables(struct unit_test_state *uts)
-+{
-+	char buf[FIT_BUF_SIZE];
-+	struct bootm_headers images;
-+	int conf_noffset;
-+
-+	conf_noffset = build_verity_fit(buf, 2);
-+	ut_assert(conf_noffset >= 0);
-+
-+	memset(&images, 0, sizeof(images));
-+	ut_assertok(fit_verity_build_cmdline(buf, conf_noffset, &images));
-+
-+	/* Both targets should appear, separated by ";" */
-+	ut_assertnonnull(images.dm_mod_create);
-+	ut_assert(strstr(images.dm_mod_create, "rootfs0,,,"));
-+	ut_assert(strstr(images.dm_mod_create, ";rootfs1,,,"));
-+	ut_assert(strstr(images.dm_mod_create, "/dev/fit0"));
-+	ut_assert(strstr(images.dm_mod_create, "/dev/fit1"));
-+
-+	/* dm_mod_waitfor should list both devices */
-+	ut_assertnonnull(images.dm_mod_waitfor);
-+	ut_assert(strstr(images.dm_mod_waitfor, "/dev/fit0"));
-+	ut_assert(strstr(images.dm_mod_waitfor, "/dev/fit1"));
-+
-+	fit_verity_free(&images);
-+	return 0;
-+}
-+FIT_VERITY_TEST(fit_verity_test_two_loadables, 0);
-+
-+/* Test: invalid block size (not power of two) returns -EINVAL */
-+static int fit_verity_test_bad_blocksize(struct unit_test_state *uts)
-+{
-+	char buf[FIT_BUF_SIZE];
-+	struct bootm_headers images;
-+	int images_node, conf_node, confs_node, img_node, verity_node;
-+	fdt32_t val;
-+	int ret;
-+
-+	ret = fdt_create_empty_tree(buf, FIT_BUF_SIZE);
-+	ut_assertok(ret);
-+
-+	images_node = fdt_add_subnode(buf, 0, "images");
-+	ut_assert(images_node >= 0);
-+
-+	img_node = fdt_add_subnode(buf, images_node, "rootfs");
-+	ut_assert(img_node >= 0);
-+	ut_assertok(fdt_setprop_string(buf, img_node, FIT_TYPE_PROP,
-+				       "filesystem"));
-+
-+	verity_node = fdt_add_subnode(buf, img_node, FIT_VERITY_NODENAME);
-+	ut_assert(verity_node >= 0);
-+
-+	ut_assertok(fdt_setprop_string(buf, verity_node,
-+				       FIT_VERITY_ALGO_PROP, "sha256"));
-+
-+	/* 3000 is not a power of two */
-+	val = cpu_to_fdt32(3000);
-+	ut_assertok(fdt_setprop(buf, verity_node, FIT_VERITY_DBS_PROP,
-+				&val, sizeof(val)));
-+	val = cpu_to_fdt32(4096);
-+	ut_assertok(fdt_setprop(buf, verity_node, FIT_VERITY_HBS_PROP,
-+				&val, sizeof(val)));
-+
-+	val = cpu_to_fdt32(100);
-+	ut_assertok(fdt_setprop(buf, verity_node, FIT_VERITY_NBLK_PROP,
-+				&val, sizeof(val)));
-+	ut_assertok(fdt_setprop(buf, verity_node, FIT_VERITY_HBLK_PROP,
-+				&val, sizeof(val)));
-+
-+	ut_assertok(fdt_setprop(buf, verity_node, FIT_VERITY_DIGEST_PROP,
-+				test_digest, sizeof(test_digest)));
-+	ut_assertok(fdt_setprop(buf, verity_node, FIT_VERITY_SALT_PROP,
-+				test_salt, sizeof(test_salt)));
-+
-+	confs_node = fdt_add_subnode(buf, 0, "configurations");
-+	ut_assert(confs_node >= 0);
-+	conf_node = fdt_add_subnode(buf, confs_node, "conf-1");
-+	ut_assert(conf_node >= 0);
-+	ut_assertok(fdt_setprop_string(buf, conf_node, FIT_LOADABLE_PROP,
-+				       "rootfs"));
-+
-+	memset(&images, 0, sizeof(images));
-+	ut_asserteq(-EINVAL, fit_verity_build_cmdline(buf, conf_node, &images));
-+	ut_assertnull(images.dm_mod_create);
-+	ut_assertnull(images.dm_mod_waitfor);
-+
-+	return 0;
-+}
-+FIT_VERITY_TEST(fit_verity_test_bad_blocksize, 0);
-diff --git a/test/cmd_ut.c b/test/cmd_ut.c
-index 44e5fdfdaa6..d1b376f617c 100644
---- a/test/cmd_ut.c
-+++ b/test/cmd_ut.c
-@@ -59,6 +59,7 @@ SUITE_DECL(env);
- SUITE_DECL(exit);
- SUITE_DECL(fdt);
- SUITE_DECL(fdt_overlay);
-+SUITE_DECL(fit_verity);
- SUITE_DECL(font);
- SUITE_DECL(hush);
- SUITE_DECL(lib);
-@@ -86,6 +87,7 @@ static struct suite suites[] = {
- 	SUITE(exit, "shell exit and variables"),
- 	SUITE(fdt, "fdt command"),
- 	SUITE(fdt_overlay, "device tree overlays"),
-+	SUITE(fit_verity, "FIT dm-verity cmdline generation"),
- 	SUITE(font, "font command"),
- 	SUITE(hush, "hush behaviour"),
- 	SUITE(lib, "library functions"),
--- 
-2.54.0
+My understanding of the justification for NOT passing the env argument
+is that it is annoying to do that plumbing. But I would rather do that
+plumbing. Perhaps not stated, but one of Binman's design goals is to
+try to have callers pass in their requirements rather than relying on
+state or sideways data (although there is plenty of that even so :-)
+
+>
+> > The normal approach with binman tests is to pass through the settings
+> > they want. See for example _DoTestFile()
+> >
+> > If you look through the tests, there is almost no mocking despite the
+> > large amount of functionality provided by Binman.
+> >
+>
+> How many of those features are actually dependent on environment variables?
+>
+> Here, configuring OpenSSL, SOFTHSM2, and OpenSSL providers, we clearly
+> are in the same scenario as when doing FIT signing with OpenSSL engines.
+>
+> >>
+> >> I'm also very skeptical of the need for binman to *set* environment
+> >> variables to setup openssl.
+> >>
+> >> Look at what's been done for testFitSignPKCS11Object, we externally
+> >> configure openssl and softhsm so that binman doesn't have to know about
+> >> it. This avoids having to play smart and adding a bunch of new
+> >> variables. Is it possible to implement something like that for the x509
+> >> certificates? For FIT, we do use fit,engine,
+> >> fit,engine-keydir/key-name-hint with mkimage to (possibly) use pkcs11,
+> >> custom openssl engines, etc..
+> >>
+> >> Also, I don't think we should decide for the user whether they are
+> >> forced to use a provider or an engine based on the presence of the
+> >> provider? just let them configure openssl to use the one they want
+> >> externally?
+> >
+> > Fair enough. I wonder how the tests deal with something which is
+> > externally configured, though?
+> >
+>
+> You set the OPENSSL_CONF, OPENSSL_ENGINES and SOFTHSM2_CONF environment
+> variables to point at files that are generated for the tests. See the
+> various unittest.mock.patch.dict('os.environ',) in tools/binman/ftest.py
+> and tools/binman/test/fit/openssl.conf as well as
+> tools/binman/test/fit/softhsm2.conf.
+
+Right, so the tests determine / set up the environment and then test
+accordingly. That's fine. I'd just like to avoid mocks here.
+
+Regards,
+Simon
