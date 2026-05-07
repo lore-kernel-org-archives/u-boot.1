@@ -4,93 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21A2FCD343F
-	for <u-boot@archiver.kernel.org>; Thu,  7 May 2026 16:39:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58D84CD3442
+	for <u-boot@archiver.kernel.org>; Thu,  7 May 2026 16:40:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 48FE684A4F;
-	Thu,  7 May 2026 18:39:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 9E16584B76;
+	Thu,  7 May 2026 18:40:48 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=makrotopia.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MSM1Ia9f";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DCF4784B02; Thu,  7 May 2026 18:39:46 +0200 (CEST)
-Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
- [IPv6:2a00:1450:4864:20::535])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id D894984B5D; Thu,  7 May 2026 18:40:47 +0200 (CEST)
+Received: from pidgin.makrotopia.org (pidgin.makrotopia.org
+ [IPv6:2a07:2ec0:3002::65])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 04DF184A4D
- for <u-boot@lists.denx.de>; Thu,  7 May 2026 18:39:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EB13C84A4D
+ for <u-boot@lists.denx.de>; Thu,  7 May 2026 18:40:44 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=makrotopia.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-65c0891f4e9so1702571a12.1
- for <u-boot@lists.denx.de>; Thu, 07 May 2026 09:39:44 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1778171984; cv=none;
- d=google.com; s=arc-20240605;
- b=SwyOzsEBVUvNuCtt5W2/8s2bR8JAIETjDINTMpt2gDj6cwc/p5OOVGWclbj8AIYPSC
- nfBSsoWNX3FmNzqB1uda7LLXuGpkA6yEqT9k7jByggVhDbCqBG/meBaapjxnHKo1+3Ko
- bCbakFO576VqQKktmpysBSeExEtOXx5uEZl8ICZGeF5hGgk+rrSBiva8hgsATvICYf0t
- x3h9IHg6rHsOwyrr3v/Ouzrxgfu0hkhtAHeYN7gHPNrhq/YcB1kPfXWVHENfYLqTbg0a
- tJEoLuLkGdd0+sbamexFLOvzmD3G5r/WIlNk2f8BdpCM7FffdmJMeFfJsWDR5nP8uqbz
- +woQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=t5PKjOmp9K2p1STBMVXPZ1lsnMprWf2ICkw7Z+rjtwg=;
- fh=PKLU0xSNpsrGOfl0gQ17G1VaKViMSq+Ysfr2F1w3zVg=;
- b=LEZOyR1BEAi836bp1Iujs3ghXPXK6jVqZB+lr4LUV/VbH/d17Oyt95kkMxYyFB8I6J
- KSFMz4EQOjsbR0U1xc/tSWgu86riw+UgyAQr/er0SvWRR7ARU2rvevxjuYbMLrbdpK3o
- 1QdeEV4uBXMG5FRZQauM7b5xp4IJ+aDHICl88g5EqG3hWRwXiULORwHBi1qfZBR7KN/j
- QaIqOFlPhpyKbwbB+KsZMLVKJQ6UULWF5heMd2Cfm+ritCYYPPL/i1maVR2JTSj6dD5G
- Ua/2E3031sx0baX6VYZL0b6nSQ+zqmL7puxowwOlNywPs+3bYju0BI2oIB7fs1/bK6Uq
- YCrw==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1778171984; x=1778776784; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=t5PKjOmp9K2p1STBMVXPZ1lsnMprWf2ICkw7Z+rjtwg=;
- b=MSM1Ia9f77/4bN1yQFmnPH9D+wwkenav8+LdxDdt8jY7MR5UlNI0CKmnvuyVTGMeL+
- Gs2OADjMq7MvnQovK/zy9SI3g5WD+USGXBd7PioY+MkFVbtHeYAR2WGKeR043xw8Fb04
- eOkc3emp7ZvPbPcgTWjpbujvAJTy2Gf0g+uu8=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778171984; x=1778776784;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=t5PKjOmp9K2p1STBMVXPZ1lsnMprWf2ICkw7Z+rjtwg=;
- b=ZI9PihjvDXAMEWvj7Mz96A06jlUG9iS/JeZMcEepeMOeiKBvHB2IsXXwlv3hGdVd7q
- VGZ2LVc3Tq4anCRNxzMdWqoZ7NPtSHdzvb23T3nqU1wtVQbZ/4ZSMDSWqk4G+YyNg11V
- GQ7PaVoL6OHVQMfqpjoYJmxnpcCjL+AjyWoFQQsCu4Ubh2NhK57DchsX+DQ8NoLyAb5V
- FWovGP1C2UHIbKpqukbX9zeiPMSRZ8qzo9LxmfCR1KBi5gkG6kWPeVbkOA+lxvAz8ehk
- BjhxSjGYupXdKZBzzVVPHtys4/RGnZSLVldOIFpkSXxXiCyEcNoIJhBDgnCsfF8jMbi5
- 45Tg==
-X-Gm-Message-State: AOJu0YzEJWGJk+w1OhhQV3jAbOile6xFziCvJ2q3YSa8Iv9QYDWN3oGV
- YHnPNz7ljKzGuQyptpWCu9gy0b8nWkv/TUh8EXLBK+q5F3xWy3KJjBZqaK7LqaXWWlL746u8QMD
- X1nHcKKYDAVdaB/Meqri0I9Gq3J1G+2gePP+FWKV60GwqYpqp5aw=
-X-Gm-Gg: AeBDiet13YGuuBeoGfPwBgQNELfhK7B424GObt1OLPtcmG7nosrQ+bP6i+gxVKE/qbW
- PqZpTgd+/IAfS+2yTuNLT1uD/zANDvnWY8WvOgNxYsVjc8dvxSDa/zBX9kbgjkPQ9n78/0i4qun
- W+lR8THmZ3JFSMqYoIwVvTAPNLnsK8K3TBDvLM9Yn636c9r1Xs5e6Q7+YOOYJNBg4OndEGHVEm+
- q7EfOolWPHGJYb7kO7K3vqSGv1mt9ACXIYh2v0weTpre2/F0F/IFInreAkHxgYL4Hu3LFCzNQp4
- EbdL9w==
-X-Received: by 2002:a17:907:c9a1:b0:bc5:ac7e:25b7 with SMTP id
- a640c23a62f3a-bc5ac7e3229mr345427266b.28.1778171984109; Thu, 07 May 2026
- 09:39:44 -0700 (PDT)
+ spf=pass smtp.mailfrom=daniel@makrotopia.org
+Received: from local
+ by pidgin.makrotopia.org with esmtpsa (TLS1.3:TLS_AES_256_GCM_SHA384:256)
+ (Exim 4.99) (envelope-from <daniel@makrotopia.org>)
+ id 1wL1lv-000000006dv-3ZPW; Thu, 07 May 2026 16:40:23 +0000
+Date: Thu, 7 May 2026 17:40:15 +0100
+From: Daniel Golle <daniel@makrotopia.org>
+To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Kory Maincent <kory.maincent@bootlin.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Anshul Dalal <anshuld@ti.com>, Martin Schwan <m.schwan@phytec.de>,
+ Daniel Golle <daniel@makrotopia.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Sughosh Ganu <sughosh.ganu@arm.com>, Benjamin ROBIN <dev@benjarobin.fr>,
+ Ludwig Nussel <ludwig.nussel@siemens.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ James Hilliard <james.hilliard1@gmail.com>,
+ Kunihiko Hayashi <hayashi.kunihiko@socionext.com>,
+ Frank Wunderlich <frank-w@public-files.de>,
+ Mayuresh Chitale <mchitale@ventanamicro.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Wolfgang Wallner <wolfgang.wallner@at.abb.com>,
+ Shiji Yang <yangshiji66@outlook.com>,
+ Aristo Chen <jj251510319013@gmail.com>, Rasmus Villemoes <ravi@prevas.dk>,
+ Francois Berder <fberder@outlook.fr>, u-boot@lists.denx.de
+Subject: [PATCH v3 0/7] fit: dm-verity support
+Message-ID: <cover.1778171184.git.daniel@makrotopia.org>
 MIME-Version: 1.0
-References: <20260507120735.310325-1-ludwig.nussel@siemens.com>
-In-Reply-To: <20260507120735.310325-1-ludwig.nussel@siemens.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Thu, 7 May 2026 10:39:32 -0600
-X-Gm-Features: AVHnY4ItoJre4IWfxDi9_fbaLYACM7PfQdwHj1477xvXsB0wRKQSXIt_U1g2yZ4
-Message-ID: <CAFLszTjc1w3WTmXLbgQifH8ZBUyN-sF-NQ-bvYq45tqWscVuZw@mail.gmail.com>
-Subject: Re: [v3,0/4] Improve FIT signature handling
-To: ludwig.nussel@siemens.com
-Cc: u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,19 +69,97 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ludwig,
+This series adds dm-verity support to U-Boot's FIT image infrastructure.
+It is the first logical subset of the larger OpenWrt boot method series
+posted as an RFC in February 2026 [1], extracted here for independent
+review and merging.
 
-On 2026-05-07T12:06:22, Ludwig Nussel <ludwig.nussel@siemens.com> wrote:
+OpenWrt's firmware model embeds a read-only squashfs or erofs root
+filesystem directly inside a uImage.FIT container as a FILESYSTEM-type
+loadable FIT image. At boot the kernel maps this sub-image directly from
+the underlying block device via the fitblk driver (/dev/fit0, /dev/fit1,
+...), the goal is that the bootloader never even copies it to RAM.
 
-> (optionally) enforce signatures so we can't accidentally boot
-> unsigned fit images.
+dm-verity enables the kernel to verify the integrity of those mapped
+filesystems at read time, with a Merkle hash tree stored contiguously in
+the same sub-image just after the data. Two kernel command-line
+parameters are required:
 
-Since you are adding a new policy knob (FIT_SIGNATURE_REQUIRED) and a
-new verifier path (fit_all_configurations_verify()), please can you
-add coverage in test/py/tests/test_vboot.py for both the
-required-but-no-keys case and the iminfo signature path? Without tests
-it is easy for a future change to silently regress the fail-closed
-behaviour.
+  dm-mod.create=   -- the device-mapper target table for the verity device
+  dm-mod.waitfor=  -- a comma-separated list of block devices to wait for
+                      before dm-init sets up the targets (needed when fitblk
+                      probes late, e.g. because it depends on NVMEM
+                      calibration data)
 
-Regards,
-Simon
+The FIT dm-verity node schema was upstreamed into the flat-image-tree
+specification [2], which this implementation tries to follow exactly.
+
+The runtime feature is guarded behind CONFIG_FIT_VERITY. If not
+enabled the resulting binary size remains unchanged. If enabled the
+binary size increases by about 3kB.
+
+[1] previous submissions:
+    RFC: https://www.mail-archive.com/u-boot@lists.denx.de/msg565945.html
+    v1:  https://www.mail-archive.com/u-boot@lists.denx.de/msg569472.html
+    v2:  https://www.mail-archive.com/u-boot@lists.denx.de/msg570599.html
+[2] flat-image-tree dm-verity node spec:
+    https://github.com/open-source-firmware/flat-image-tree/commit/795fd5fd7f0121d0cb03efb1900aafc61c704771
+
+v3: address comments by Heinrich Schuchardt and Simon Glass
+ * use unsigned int instead of int for data-block-size and hash-block-size
+ * replace printf() with log_err() for the "broken dm-verity metadata"
+   diagnostic
+ * use FIT_VERITY_*_PROP, FIT_TYPE_PROP and FIT_LOADABLE_PROP constants
+   in the unit test instead of literal strings
+ * extend the mkimage block-count overflow check to also cover
+   hash_start_block (matters when hash-block-size < data-block-size)
+ * doc: clarify that hash-start-block only equals num-data-blocks when
+   data-block-size == hash-block-size
+ * pytest: drop unused 'struct' import and the home-rolled
+   have_veritysetup() helper in favour of
+   @pytest.mark.requiredtool('veritysetup')
+
+v2: address comments by Simon Glass
+ * use is_power_of_2() for pre-boot sanity check
+ * let fit_verity_build_cmdline() return 0 on success
+ * add comment explaining why bootm_start() calls fit_verity_free()
+ * use existing hex2bin() (and adapt it to be usable for host-tools)
+ * fix stale comment still including superblock despite veritysetup
+   being called with --no-superblock
+ * add power-of-two check for data-block-size and hash-block-size to
+   mkimage
+ * don't ignore return value of fdt_delprop()
+ * various documentation fixes, minimal example
+ * add pytest for mkimage part
+ * add run-time unit test for cmdline generation part
+
+Daniel Golle (7):
+  image: fit: add dm-verity property name constants
+  boot: fit: support generating DM verity cmdline parameters
+  include: hexdump: make hex2bin() usable from host tools
+  tools: mkimage: add dm-verity Merkle-tree generation
+  doc: fit: add dm-verity boot parameter documentation
+  test: boot: add runtime unit test for fit_verity_build_cmdline()
+  test: py: add mkimage dm-verity round-trip test
+
+ boot/Kconfig                     |  20 ++
+ boot/bootm.c                     |  13 ++
+ boot/image-board.c               |   5 +
+ boot/image-fit.c                 | 337 +++++++++++++++++++++++++++++
+ doc/usage/fit/dm-verity.rst      | 284 +++++++++++++++++++++++++
+ doc/usage/fit/index.rst          |   1 +
+ include/hexdump.h                |   8 +-
+ include/image.h                  |  97 ++++++++-
+ test/boot/Makefile               |   1 +
+ test/boot/fit_verity.c           | 306 +++++++++++++++++++++++++++
+ test/cmd_ut.c                    |   2 +
+ test/py/tests/test_fit_verity.py | 145 +++++++++++++
+ tools/fit_image.c                | 116 +++++++++-
+ tools/image-host.c               | 350 ++++++++++++++++++++++++++++++-
+ 14 files changed, 1672 insertions(+), 13 deletions(-)
+ create mode 100644 doc/usage/fit/dm-verity.rst
+ create mode 100644 test/boot/fit_verity.c
+ create mode 100644 test/py/tests/test_fit_verity.py
+
+-- 
+2.54.0
