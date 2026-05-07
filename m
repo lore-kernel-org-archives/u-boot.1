@@ -4,96 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F29E6CD343F
-	for <u-boot@archiver.kernel.org>; Thu,  7 May 2026 13:27:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0D23CD3439
+	for <u-boot@archiver.kernel.org>; Thu,  7 May 2026 13:30:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AEFDF84AFA;
-	Thu,  7 May 2026 15:27:33 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5167384A9E;
+	Thu,  7 May 2026 15:30:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="fee9MYx1";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="OB25SuSB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0A2B584ADD; Thu,  7 May 2026 15:27:32 +0200 (CEST)
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
- [IPv6:2a00:1450:4864:20::633])
+ id 1240784ADD; Thu,  7 May 2026 15:30:33 +0200 (CEST)
+Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
+ [IPv6:2a00:1450:4864:20::630])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 306AF84A6D
- for <u-boot@lists.denx.de>; Thu,  7 May 2026 15:27:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 251DD84A78
+ for <u-boot@lists.denx.de>; Thu,  7 May 2026 15:30:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-bc177ebda91so157249866b.3
- for <u-boot@lists.denx.de>; Thu, 07 May 2026 06:27:30 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1778160449; cv=none;
+Received: by mail-ej1-x630.google.com with SMTP id
+ a640c23a62f3a-bc177ebda91so157900266b.3
+ for <u-boot@lists.denx.de>; Thu, 07 May 2026 06:30:31 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1778160630; cv=none;
  d=google.com; s=arc-20240605;
- b=ACcREDNz3K6DP+bQBieK80wjGgSmZxl0tXDd60M1SEhn13xTWDWFmcfr9hFgkvfbWv
- fe1LNUkSrRHDc3wtponqGfVsBZJKtFMc3IubMJfTAKJcENNdP5R16tgcI8VV17hhYQZc
- OoLnGfPxNwLlK1Ev3jaEYNHAbKm1k8CfOnPD9/X+9mn5OFjdjLJJDs4DHiz7G0Vig3Sf
- I7p1AxY7/etdqZReUkmOA4U/Oe5u+FMrTLx49scfBL985VCo0EEwX7mr0V250IhYl0D1
- lnWbwcpvt2hhVDtFtTwxJYGe7757UjDp9IK7daYMlvpp4rQe/D2Ad7NQsj8LjyP6IgoJ
- 428w==
+ b=AcDDAT+wsrDyyjefJJAW6L5slRu/arS2RmaYnM4MZqVMmHb+bY5ffFJBMkPApUKxeJ
+ 7spc9hZPS8Q1QxmJIOjIR44MsSd/CwjmUw56cxkLVopUV//LxOVHG8gOzBEDVYg30HSG
+ O6mGD2SPVJJoxEC1Kf8yMrrGPj3haCiY0Re17fBHNeFQ86xWJP7yCRc/eqMfAURTaB5L
+ W6VtHAkl5B304nn2g7re2wcrO2nTw1/mr2874ThXg2sLNQSIHA2LsswY8gKr52/cTfG8
+ o3opcLkF94dfxs1qVIdMTjp9PVc03IQMjRAaOHK6f6jEUdM2E7EmNRRbLVPjKHo3Bk0P
+ e1JQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=PMzG+MY9y+dfUiqPaXVc86qUUTsxGDFWwyNYLs8KNdc=;
- fh=HdAOgKCO+gGyWWUY07YX1HIbVzH0zmehjZouPtYwrPg=;
- b=CeLRcal4AUBQHW+cKzweY1/fdZ9acUTRsnK5UTgJhUwQ3krkRztBMPlrDcDcLbCFGI
- Zt05m8mAtx/loeHiQlQebpvqK6gsBF/qoNqJ1YqkNNp/q411kTsrB11VTNPp+1UWot+9
- OUk6UqWv7HMDiv1xjKTaojPDzW7lq7jDCO1w8mQ/iK9UTe9cEq4u2Hf2WHS8bABeRV2W
- blPl2tJixjCFKIMZW4mkuz+X7nXIMXISd0hB6BV2RYJztcfYLOhvSKlyWXVlAghUrwka
- r/Exx/RTQJAe4dPQ9HYm6wqURbTcILeg/U9egv/xtwUB+p9ev4ayvotO999xo/RB3IT3
- z1NA==; darn=lists.denx.de
+ bh=nW3w2s3VUTnGhQLoJ7iPZHDOSmGY3zPpGIXd3YveCMg=;
+ fh=Lwet1BBut5ur9R2NSYCMNJw+S6PZXZ1ROwp9lg8y6LE=;
+ b=hHwmo4koTBF09aFWFpswMvAB/S2175l34+Pi7z43M29+BCmsECzNqzjs0pmd7XyvHv
+ M3pp+dtw/p4PJE0JEUhskqR37fFuv6P/ExH/31WFhdb7lYsMAtLxxfJ+mBTYDDQjnuoE
+ IrMqTZJaxJhH3RiDNcxq/RhtA7m2n3A0LXbYR1Fdee8/vd8eHZjkGCI0Y6I9/o7MPtHV
+ sl3XLz/iYObZYmOVXrXJqx1lVrGdQlTg5bUSYTOnBdn3G+rEmpDqMZ82u2MkBGHrb1Ky
+ BMbtbOmXT7HjImU6AwWqzLKgsgzw8Yp9rWwO968aJvgaZ29B/ppmRqGI04g/FLfGnWMp
+ XxRw==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1778160449; x=1778765249; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1778160630; x=1778765430; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=PMzG+MY9y+dfUiqPaXVc86qUUTsxGDFWwyNYLs8KNdc=;
- b=fee9MYx1nX+djueB2rYcaAxkLakO8sC7N7jKumACngZCEGPmyAhFzsOQ1s7WfHlNy8
- gY1JPKok/k+Nsjz1BNd0+DI9/RNpjdlCB0eAHdT8832fF96pn+VWtylUfpUJ4/vLbn0J
- X+uCajfIllpucgzPqEFpgAM+eqpL81pubReMc=
+ bh=nW3w2s3VUTnGhQLoJ7iPZHDOSmGY3zPpGIXd3YveCMg=;
+ b=OB25SuSBIiDIcg+jDS66vi72xwDFV6xhL08gTI8p/4FyuZJ4qfuLReV8PqUVyXZr2r
+ doTY61N2ABjdof4NkA9IFk5ZAmV1iIcmF04cpu2+auOuZ0rU/plmHW725KY0IoVTE1ro
+ stfJcJBqYOqKrf3W6tz0bJ0JS5+PCHn6Rc6zc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778160449; x=1778765249;
+ d=1e100.net; s=20251104; t=1778160630; x=1778765430;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=PMzG+MY9y+dfUiqPaXVc86qUUTsxGDFWwyNYLs8KNdc=;
- b=WRI2k9nKfenv9JdMWt9xcjTamhPElFNVm8cN+NBj+RO8aO3FxojWZN2VOxXpCxuxHK
- j8KTOE3aoiHJ/QpgXbXD0i2QXy2AHRO9Bjj/+ojAFNzpZmSa8dRlUkp2oQKV3xKsSw29
- ev3LZRvQzTyQ2OoUmarNJ47UtWQAUpXkqspro8K5eGh4r4Y8YJmK4yjdvo841u6DZyJh
- xBj8GiolDE+YRsZq3N7Mx1eYtMeo9Ejk3uVDpvmVMdYvpqqFsV/y77QbDt5eGfkwdYBv
- dP+ZqIvP1xlMk5ZFgZJ3/vh0qqKExfjPCZcX30JKjGdE9xhF0njdEPqDDXyFO9aCQRGR
- 7+dg==
-X-Forwarded-Encrypted: i=1;
- AFNElJ/9Zq/YKJA6+bqsB+OcmHjYWVWRJpjBlNCz6nlFs4z+apvg2rhEmiElSCWBgBmXT2RQUNUx3m8=@lists.denx.de
-X-Gm-Message-State: AOJu0Ywi0rcPw11V9pIDA43nhZUch4dCayp8+O0fuqqvgX0JAPd9xw4x
- 2PGREKG6T4WSKdSP0Nf5y9p7GTIsl/nG9pQI39PepdCX3BZguI9qxO0UM0YCej7ab8SaDzdgwsQ
- IbaugMwJD/3/VEDmib0jadHfXCuZmDFFZm97F5Q+y
-X-Gm-Gg: AeBDieuzwithRU64kzBe0TmijJEWJrSUmpwlnHfHwgCnATlaiFtGF3i26q1vebcCetq
- B0GUrnfp98hSSG1k9TxmAF6jQHKOqkJI83NhaSb7GEuaLCA9QLYjwFMSB2cMKdY+PlyaU/ujfxR
- 7IFJkL3Rb3C2RrAu84J2/jBeiD+jSqtwfoSNfk08iu5V51GI+ScWcF17PkWWTHHpNF8j0zujK+A
- 0rHtjSC2dx//OBsuvsKhDnvdr10luOTQL0ppIXMZSTxppeAT7PD677Tzj6rYRGdMyShPnJnpv9/
- 8NmgOcd1yBnY39qW
-X-Received: by 2002:a17:907:7255:b0:bc6:d755:4454 with SMTP id
- a640c23a62f3a-bc6d7554dccmr246755966b.23.1778160449467; Thu, 07 May 2026
- 06:27:29 -0700 (PDT)
+ bh=nW3w2s3VUTnGhQLoJ7iPZHDOSmGY3zPpGIXd3YveCMg=;
+ b=b2hk4poP1zwQCKBW9aq7xjKcXev2c+0uJ0isvZPwi7tJF4H0Ik8gaqSg3xZKqtNJck
+ T8B9vjXnfF9TxS/gcwaeVbG3IzoIn/8Sh6SvlY7le+59UPl6It/iOmz4E3eaZifo+sA2
+ J/6+K1leq4SRiWwj6bWpauB/5Qu5bMZ864Ar5RJ+Cqu1R6B75gZdSDWvVhvYlquaFXsG
+ 0RUE6TF+11XPhU+WtxrIiUbWNiKt7atmWCW8XUuLPaGd8E1phMDTYkoLpH1Ddd0decWw
+ I9gK7lw6Pj9fMe6kujVK6IIa1CyA9RUvEAOD14a3OGlSecGn1lDACFjAwlt6pNvHwQQU
+ /eIQ==
+X-Gm-Message-State: AOJu0YxVFao3nU4zpJYnqYnVjyu1hRglxXxYE9VkGV0z/FCVhEeHrTBY
+ h8hxcHJE8CoX1RLR0V8zHEJORg6oAIMmLIwRPw53ZYlzi8CS8u5x6DccJuXexlFOd6L8x6Rg7br
+ ZXyPDgqXiH8GTugAFAaesclbDDaJ5zYcChgABVUl0Jyo6SsCdcNc=
+X-Gm-Gg: AeBDiesFHYaprm1NaYMTWfGMXajlGMTj8DldJtLmhks3gXeneSjHZrc01coan7LuLw1
+ 8OdBzDAbwDuu1bagmauI95VI9Eko2TmrTE4wW5qpCmn06iRU8PkKYO9b6/uO2SmDpsUyFMJIkpF
+ Xc8AV3UBFjLnqZnFvbX+/ApjlUT9nt71iBnCfGvbeCX86uGy1IhOdpQAI5+b1fKWsgVI1+r98YH
+ re8AFuyKFBXCUjynh7x+IC/Q/qEXyVh2QK10ByS/O5vQhYpqRzfvH8ahuQnCTCol3l6eZIZaTdn
+ sLqKX6v79NVMejQt
+X-Received: by 2002:a17:907:26c4:b0:bc3:ae79:f02d with SMTP id
+ a640c23a62f3a-bc56a649890mr480862466b.7.1778160630343; Thu, 07 May 2026
+ 06:30:30 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260505074948.2603870-1-daniel@thingy.jp>
- <20260505074948.2603870-4-daniel@thingy.jp>
-In-Reply-To: <20260505074948.2603870-4-daniel@thingy.jp>
+References: <20260504172731.156719-1-jhaller.oss@gmail.com>
+In-Reply-To: <20260504172731.156719-1-jhaller.oss@gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 7 May 2026 07:27:16 -0600
-X-Gm-Features: AVHnY4Jmq2fX5FmVE_M8quZbkdeTNorCX1WAMJugGnodIGus9zj8Paf0_Hp_hzk
-Message-ID: <CAFLszTizJt5i9H_OD4FbLtoOEAh6AOaryjtJOEdEvdxHCkbS+g@mail.gmail.com>
-Subject: Re: [PATCH v6 3/8] timer: goldfish: Use __raw_readl()
-To: daniel@thingy.jp
-Cc: trini@konsulko.com, visitorckw@gmail.com, angelo@kernel-space.org, 
- bmeng.cn@gmail.com, sjg@chromium.org, u-boot@lists.denx.de
+Date: Thu, 7 May 2026 07:30:15 -0600
+X-Gm-Features: AVHnY4Jm8TVtNNb-jvZYnRQ_fe8gWb6p99c8aqGtj_rp2VAYVx0MOir108z3gRM
+Message-ID: <CAFLszTgW+TF-iPn8=xcYdaNbZnpJ52wJ+G5dppGCzYtLgL9nRg@mail.gmail.com>
+Subject: Re: [PATCH 1/2] tools: binman: fit: support engine override via
+ argument
+To: Julian Haller <julian.haller@philips.com>
+Cc: u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -111,21 +108,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2026-05-05T07:49:33, Daniel Palmer <daniel@thingy.jp> wrote:
-> timer: goldfish: Use __raw_readl()
->
-> The Goldfish timer registers are native endian, so they act as
-> big-endian on the m68k virt machine. Currently, this driver uses
-> readl(), which works by luck because it's currently broken on m68k.
->
-> Use __raw_readl() instead to avoid breaking this driver when the
-> endianness of readl() is fixed.
->
-> Signed-off-by: Kuan-Wei Chiu <visitorckw@gmail.com>
-> Tested-by: Daniel Palmer <daniel@thingy.jp>
-> Signed-off-by: Daniel Palmer <daniel@thingy.jp>
->
-> drivers/timer/goldfish_timer.c | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
+Hi Julian,
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+On 2026-05-04T17:27:31, None <jhaller.oss@gmail.com> wrote:
+> tools: binman: fit: support engine override via argument
+>
+> Allow overriding fit,engine and fit,engine-keydir via arguments,
+> enabling engine selection at build time without modifying the device
+> tree.
+>
+> Signed-off-by: Julian Haller <julian.haller@philips.com>
+>
+> Makefile                  |  2 ++
+>  tools/binman/etype/fit.py | 13 +++----------
+>  2 files changed, 5 insertions(+), 10 deletions(-)
+
+> diff --git a/Makefile b/Makefile
+> @@ -1701,6 +1701,8 @@ cmd_binman = $(srctree)/tools/binman/binman $(if $(BINMAN_DEBUG),-D) \
+>               -a vpl-dtb=$(CONFIG_VPL_OF_REAL) \
+>               -a pre-load-key-path=${PRE_LOAD_KEY_PATH} \
+>               -a of-spl-remove-props=$(CONFIG_OF_SPL_REMOVE_PROPS) \
+> +             $(if $(FIT_ENGINE),-a fit$(comma)engine=$(FIT_ENGINE)) \
+> +             $(if $(FIT_ENGINE_KEYDIR),-a fit$(comma)engine-keydir=$(FIT_ENGINE_KEYDIR)) \
+
+Please mention these new make variables in the docs (e.g.
+doc/usage/fit/signature.rst) so users can discover them - also how
+about an example invocation in the commit message?
+
+> diff --git a/tools/binman/etype/fit.py b/tools/binman/etype/fit.py
+> @@ -646,17 +646,10 @@ class Entry_fit(Entry_section):
+>                               OpenSSL API, as second element of the Tuple. None
+>                               if no keydir to pass.
+>          """
+> -        engine = None
+> +        engine = self.GetArg('fit,engine', str)
+>          engine_keydir = None
+> -
+> -        prop = self._fit_props.get('fit,engine')
+> -        if prop is not None:
+> -            engine = prop.value
+> -
+> -            prop = self._fit_props.get('fit,engine-keydir')
+> -            if prop is not None:
+> -                engine_keydir = prop.value
+> -
+> +        if engine is not None:
+> +            engine_keydir = self.GetArg('fit,engine-keydir', str)
+>          return engine, engine_keydir
+
+The fit,engine and fit,engine-keydir blocks in the class docstring
+describe these only as devicetree properties, but these can also be
+entry args.
+
+> diff --git a/tools/binman/etype/fit.py b/tools/binman/etype/fit.py
+> @@ -646,17 +646,10 @@ class Entry_fit(Entry_section):
+> +        engine = self.GetArg('fit,engine', str)
+
+Can you check 'binman test -T' and confirm that you have coverage for
+the new code?
+
+Regards,
+Simon
