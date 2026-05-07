@@ -4,100 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6CED6CD343F
-	for <u-boot@archiver.kernel.org>; Thu,  7 May 2026 15:32:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F12A7CD3439
+	for <u-boot@archiver.kernel.org>; Thu,  7 May 2026 15:33:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4D5FB84B65;
-	Thu,  7 May 2026 17:32:53 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8DB4584ADD;
+	Thu,  7 May 2026 17:33:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ASXNR2tt";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="bY7YAQYU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 028F384B77; Thu,  7 May 2026 17:32:53 +0200 (CEST)
-Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
- [IPv6:2a00:1450:4864:20::532])
+ id 2FC0A84B43; Thu,  7 May 2026 17:33:25 +0200 (CEST)
+Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
+ [IPv6:2a00:1450:4864:20::52c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0912B84ADD
- for <u-boot@lists.denx.de>; Thu,  7 May 2026 17:32:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3DDC084A79
+ for <u-boot@lists.denx.de>; Thu,  7 May 2026 17:33:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x532.google.com with SMTP id
- 4fb4d7f45d1cf-67c3cb1433cso1583934a12.0
- for <u-boot@lists.denx.de>; Thu, 07 May 2026 08:32:51 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1778167970; cv=none;
+Received: by mail-ed1-x52c.google.com with SMTP id
+ 4fb4d7f45d1cf-65c0891f4e9so1586535a12.1
+ for <u-boot@lists.denx.de>; Thu, 07 May 2026 08:33:23 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1778168003; cv=none;
  d=google.com; s=arc-20240605;
- b=H1qQPv2oL7R22F6m3+vO7KZh67lpLIuHcT0qvwNtd4ysqjdOJVjKQulwSyAlq7aDiC
- UPusMuMNDKHsYZ/QKul5XYECgolfstih9TxOw+eBD+I5eLCc890HU1Ttw7iQZYR+Tz2h
- ooSoazUAxCnvpqjFGOn40uQvbzeOfOiYDQsRXNTblauRIMm4k6wYQFJ16kbCR16Ozt2n
- xrnhGnABT8uriyUUxj98TBfDL1VOsuYrHXi6cH/BCqnFrsbnivXwkNCj9Jhmc37K8ouH
- qt/9PQX/XWPwcYxvq2Cey5fXsXfGLIdst5GNBLzZEI+l1vtNuP7FTxEjYAFqAA15xHTx
- iuXg==
+ b=hFqABWLufcc+/eqPENjBKiXQTZ3vnBB640RlBmjRbJ/nQho3mxOUgq+hXw+4FVThpA
+ OUT5BpkU5X8rUy/z4iVLykDS771ZVUKFMnfpdzC97FkuIQ6+TCBzMALnGhpVURAm4BC/
+ zmSHLzz+8V5wGf/h4Ay4cW6TiL5MBiwyq0mdpaqSDrZTUW5tdKMtB++/8nmD2oWcYQoA
+ wWNW0Ij7RrQKtVyNDhsRtTN3cQejzYBnZm5LtygdcBlBNtYUN/htoYnuh9UjiUs8Tohm
+ LMhID3cakE2kP7CoxP/HJwBHJIvAH7V3h6jE6n9kRqKE+Ct0bTrq8km4LusWc6usKYLH
+ mE0w==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=jDlKVjhVdWwaR1Pqn/Qx9HBkQNshJiRnsZGEkv+SV3w=;
- fh=3zI1MY2jLb+geQSEEyacKu9xbYcO7fBIfrZAWhTcvFI=;
- b=XhnrGhqfntOWwFEUmk72NqFRv5YUh9F4XHIIcTjpSbyLe2jxlLx10iD1x150j7HLYP
- LWb+4n789limZWbZYDTJRC102EO7h+oSV+pVrJyTgelEt9cEYr+wP7Q9Zd6wgwXzesZQ
- WWyb58ppbxY2qPixA+EtpItDrMonmFIWBiJYmgGgWLEjsQDowNdusFLMWsdMG/jb6u6k
- gdwrmdkkIdsCJTzAkM6rWstHlygZDTM21VbrIFoS/LxPDmWUyCWzBoeMgG1ykVc6b8m5
- 48PugZVsw5S8TfAyRWAK69t2dHSjcO4FNeQoK8E+AfMA3L/PRvFopL1iEAmh7Uh/cweS
- eycA==; darn=lists.denx.de
+ bh=ZA4aZg6uaViPQqMeubANzU/zWClANNOChEdvUpfYwiE=;
+ fh=XMGPZOvrWPTh4jxpYqp7bf2uJCORZqdYFHSCmuIYfc4=;
+ b=XZeLJ/F6GIyQ0Zy/9noVcqpdEuFcRCAMZvf4mq21voz7nVHSU4Cly7rdLpquiAcha9
+ Nt4JLoh0OZCuVdAhB7KH6Edai4YvG10p0G/ohfvYrF/CA1ROVflO/BlULpumjUkCqxWU
+ LvbV7jaDVQDrByjhLAjmwR10xEz//iQCazOpbGb9k+4oCY3WxrhMjH3hrFqi1S5FgNEt
+ cNxcWOYlNvstZX5Yu6PSu+mt7nIPIAGw1aI+Mk7m/QSMvciR65190iPuiSjWDoCaqzuG
+ bscS2jIpMAwrAbBXXmTyBCM74VrGEQNUbSL5xWabkAkcDvNUiQ0iBvErekP0y8+KNzdO
+ viAA==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1778167970; x=1778772770; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1778168003; x=1778772803; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=jDlKVjhVdWwaR1Pqn/Qx9HBkQNshJiRnsZGEkv+SV3w=;
- b=ASXNR2ttfCrfgBZbRtBC5K9ePHQscYzfBNOeV1aWomhfvMOv139szEN938ulOCORcs
- p8+Pse1VyPmBGc/6IzkyOyz90W3M8Pxj+zgufAZLI8HtY6tIfquiBuQG2tZ33UtyUldv
- iCPzzEM+UGSjSRGcwgyFT+2K5Bjmyy8n04+N4=
+ bh=ZA4aZg6uaViPQqMeubANzU/zWClANNOChEdvUpfYwiE=;
+ b=bY7YAQYUytnZ3R5Oj5eXjN00sV7fXZlE0GGjfb6ftc0BMSdwGdy3U7GVA3zP6dxHk5
+ /T1t/tWeZRvzwQ1oYkOD/XhVCPhRrwD0djc57crmp89YihjP+PaKMBIjiyeFwUn6ZDkD
+ f94/iu12rJK6SUSFfkokm67r1Akiaoq3jup1Y=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778167970; x=1778772770;
+ d=1e100.net; s=20251104; t=1778168003; x=1778772803;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=jDlKVjhVdWwaR1Pqn/Qx9HBkQNshJiRnsZGEkv+SV3w=;
- b=L3/ZHzZcD89E2yQNY69bvL4J4NTHohEUL11tpJt0asfB95+7e62KlXu/a8meeQ89a4
- Ep8EVtc91aO8JXzbQDWnjtTirHE4/bCgoqgDcY1Ed+wk5U0GpYa4nZVQnA6MhI6eWGuh
- Cwlr7u6pjxn1Sc1rfKkaUDOHOQZBKhMLYLky+I0ygRaFwGEu4TSKtBuY2XGUmdmG9ROD
- NUV6rrNyfQbWNQbd+3h0bfAaaqxx9PSClo4XhM70P3meOEnpinmFGM5XYOjdm19VAtSm
- bAzVhd8YvpAsS+iscddhthpp5/rl0fzejug61V6xpTqe7PbpGeIr4wohvQP8CdhPgiqn
- ftnA==
-X-Gm-Message-State: AOJu0Yy+p4LTh37TzwkdvHJzsNTIZc0c4YLERxEvyLX5C+IhA4/RnpQT
- 0sMCPflZVizwIcVqrJJ1y5a4bzrqzp2USSwEtmYTY2OzRHtDzkBbO7DY8JmS5LK5hTB8FE4CQgi
- mhreIdPHyvG3Kj+93HU8FHxn7a1WN3+a0bl/beKNO
-X-Gm-Gg: AeBDiesdgWhHR359XyPo5glvak62xXnbekGGQw1MOKf5WrwwanYERasBpIE9cMpcBVD
- x3OqoLWqcVebzLIsoygbr/JFhlAm8Xv3teEtw8aBBtwz0T30PlUgi3M0balBvu97iC4C7WIXWL8
- cUnRVGcoeUKk1EO+65mjQJmuPTjENiAP2db8H1hbZS2pAA0pgdstTJ5l1XX4/NKGsHMrjLZQLG2
- zKBjeDuDjKnob70C7jtvlgWgOH6yjK+ZslKca0DTQYb/bCmEkuwbbqqQq/TODhM8enkkbcv7wJ9
- Im++VgPDLhyDVoti
-X-Received: by 2002:a05:6402:26d0:b0:679:223c:d181 with SMTP id
- 4fb4d7f45d1cf-67d642b249dmr4417411a12.15.1778167970273; Thu, 07 May 2026
- 08:32:50 -0700 (PDT)
+ bh=ZA4aZg6uaViPQqMeubANzU/zWClANNOChEdvUpfYwiE=;
+ b=sAJu/Gz9mHSTNF7ticyILLwZ4H+lxNW7YoC8ttiaiytxIn89rgznWTp7Ip1PuRH/7D
+ AyyvIRCP/yangCjzm7why8+qqz0h3Ly+zQxGEXi2FVP6G7/hOpw3g37bmUMiWOJiurDI
+ Gizebn9GUpqVhiwKlNY+tQZbyzn6T+gsIRdc9tbIquaL74c4Vj/ury8ywkFwfFux99vP
+ XmcLIaQX/0+wcAOnhYEpiHGHM/DHc9RtN/Ls/7le3JEadYUjKVrOq0su7mvjS/qtNFzG
+ 307YA5KeSzFxQQawwczHSB82nBJxbWR/xeC560iaG7zkUGG9OwiYmgEOFHadjD+x8GPV
+ KvYA==
+X-Gm-Message-State: AOJu0Yy7B4AkbEbSXGzT3m0hl8IUafT0uNLceg/EoddNELD/7t4BTGzh
+ QUhqCqIEATdb93YNMmPUkdA0azIiJN8NFlsgyw+qUyMdB3zXVgekDyUcGqIWlJGev4b0+A/jsrF
+ w20RmEthV6OF+81NKlPSTX81Fr15DRobh6W1e/mxf
+X-Gm-Gg: AeBDieslY0nt0fDIx7xiBbJN5FFPNVHF4ZT1iEi0TCUT3WtZ8qkHkRc64wxj73kaRRk
+ rHCpTsmds4w6WWdOHcNLfADeZSX6SLVTkZFvj3dh8ok/5tYRW4vIti6NZppIb7YHAKZCklPquQU
+ X87sq3HAfEljjhygw/XwCu3N6L2rDpJF8O9y3TWaKeGQ1MxekPFYxG5e0/zG0Kz7PeExuWDkWYX
+ +int7kSEIqCtuHZucNgLHdDG6d0BEwKnkmpMAh2QfzoAN07GrX/YJLAwhICP8EWur9uWS0SpD7F
+ 9PApNIZ34N1oBbFFMig9QHaPiLo=
+X-Received: by 2002:a17:907:c06:b0:bc3:5164:ea82 with SMTP id
+ a640c23a62f3a-bc56ae2c6d4mr537747266b.1.1778168002438; Thu, 07 May 2026
+ 08:33:22 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260424173151.371134-1-harsimransingh.tungal@arm.com>
- <20260424173151.371134-8-harsimransingh.tungal@arm.com>
- <CAFLszThODjZiHNnTnKFUV=Sx2dZPeW=t+5t6Yfh6wcQDwjMkZA@mail.gmail.com>
- <177808046518.1594688.12778239468862754841.b4-reply@b4>
-In-Reply-To: <177808046518.1594688.12778239468862754841.b4-reply@b4>
+References: <20260430122629.606153-1-ludwig.nussel@siemens.com>
+ <20260430142602.v2.1.5f8ce2dc2b00328d29e64be2684b10d9f52c6a7b@changeid>
+ <CAFLszTiTCsLgdAasexCb5Gv1zkdAo6m47D2MEgYxqwpkfAZoNA@mail.gmail.com>
+ <79f3438d-a6d9-48a8-8cdf-01dde7b5e2b1@siemens.com>
+In-Reply-To: <79f3438d-a6d9-48a8-8cdf-01dde7b5e2b1@siemens.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 7 May 2026 09:32:38 -0600
-X-Gm-Features: AVHnY4KMZl3de5eXWj8Acv_axOSg48acFx_PFqEEzIDQPJjZwdEr_rKEcrnNIBY
-Message-ID: <CAFLszTgJUCxJoYPepLZC_zpL_4T4hRZ=2UYrZZLy9SjMy_MuhA@mail.gmail.com>
-Subject: Re: [PATCH 07/12] efi: selftest: add runtime variable tests with
- non-volatile storage
-To: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
-Cc: u-boot@lists.denx.de, Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>, 
- Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Hugues Kamba Mpiana <hugues.kambampiana@arm.com>
+Date: Thu, 7 May 2026 09:33:10 -0600
+X-Gm-Features: AVHnY4Jsft0ib12aYKgm8zxyadRuPmkNh_HEBoiID5kXuraioVUkUl5xEr83J30
+Message-ID: <CAFLszTg_EFGf6CTJsNdnFiJrxYKm8799ZDA+wEgLYXEqQ-3_xA@mail.gmail.com>
+Subject: Re: [PATCH v2 1/4] qemu: overlay signature nodes
+To: Ludwig Nussel <ludwig.nussel@siemens.com>
+Cc: u-boot@lists.denx.de, Peng Fan <peng.fan@nxp.com>, 
+ Sam Protsenko <semen.protsenko@linaro.org>, Tom Rini <trini@konsulko.com>, 
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -115,119 +113,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Harsimran,
++Patrick Rudolph
 
-On Wed, 6 May 2026 at 09:14, Harsimran Singh Tungal
-<harsimransingh.tungal@arm.com> wrote:
->
-> On 2026-04-28 12:04 -0600, Simon Glass wrote:
-> > Hi Harsimran,
-> >
-> > On 2026-04-24T17:31:50, Harsimran Singh Tungal
-> > <harsimransingh.tungal@arm.com> wrote:
-> > > efi: selftest: add runtime variable tests with non-volatile storage
-> > >
-> > > Extend runtime variable tests for persistent storage
-> > >
-> > > Previously, EFI selftesting of runtime variables was only supported
-> > > under CONFIG_EFI_RT_VOLATILE_STORE, which uses VarToFile to simulate
-> > > non-volatile variable storage. This commit adds new test cases that
-> > > exercise runtime variable operations for persistent storage.
-> > >
-> > > Features tested:
-> > > - Creation of runtime-accessible variables (set)
-> > > - Retrieval of runtime variables (get)
-> > > - Deletion using SetVariable() with size = 0
-> > > - Append operation using EFI_VARIABLE_APPEND_WRITE
-> > >
-> > > This improves EFI compliance validation for non-volatile runtime storage
-> > > scenarios and ensures proper attribute enforcement and variable
-> > > management.
-> > >
-> > > Signed-off-by: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
-> > >
-> > > lib/efi_selftest/efi_selftest_variables_runtime.c | 106 +++++++++++++++++++++-
-> > >  1 file changed, 104 insertions(+), 2 deletions(-)
-> >
-> > > diff --git a/lib/efi_selftest/efi_selftest_variables_runtime.c b/lib/efi_selftest/efi_selftest_variables_runtime.c
-> > > @@ -39,6 +46,80 @@ static int execute(void)
-> > > +     /* Compare the value of EFI variable if it already exists in non volatile storage */
-> > > +     if (!IS_ENABLED(CONFIG_EFI_RT_VOLATILE_STORE)) {
-> > > +             len = sizeof(v) / 2;
-> > > +             ret = st_runtime->get_variable(u'efi_st_var0', &guid_vendor0,
-> > > +                             &attr, &len, data);
-> > > +             if (ret == EFI_SUCCESS) {
-> >
-> > The two-phase split worries me. As written, phase 1 creates a
-> > non-volatile variable and immediately returns EFI_ST_SUCCESS, so a
-> > single 'bootefi selftest' run reports a green test even though none of
-> > the new assertions (append, delete, re-get) actually ran. It also
-> > leaves 'efi_st_var0' behind in NV storage if the user never reboots
-> > (or if phase 2 fails on an early assertion before the final delete).
-> > Could you split this into two distinct EFI_UNIT_TEST entries - say
-> > 'variables at runtime (setup)' and 'variables at runtime (verify)'.
-> > Then the user (and CI) explicitly select each phase, and the
-> > persistent state across the two is part of the contract rather than a
-> > hidden side-effect. At minimum, phase 1 needs to print a clear 'test
-> > incomplete, please reboot and rerun' rather than EFI_ST_SUCCESS.
-> >
->
-> Hi Simon, Heinrich,
->
-> I would like to confirm the design direction for this selftest change before I send v2.
->
-> The proposal is:
->
->   - Keep the existing automatic `variables at runtime` test for `CONFIG_EFI_RT_VOLATILE_STORE=y`, so the volatile-store runtime coverage stays in the current single-run form.
->
->   - For the non-volatile case, replace the previous implicit two-phase flow with two explicit on-request tests:
->     `variables at runtime setup`
->         EFI_UNIT_TEST(variables_run_setup) = {
->                 .name = "variables at runtime setup",
->                 .phase = EFI_SETUP_BEFORE_BOOTTIME_EXIT,
->                 .setup = setup,
->                 .execute = execute_setup,
->                 .on_request = true,
->         };
->
->     `variables at runtime verify`
->         EFI_UNIT_TEST(variables_run_verify) = {
->                 .name = "variables at runtime verify",
->                 .phase = EFI_SETUP_BEFORE_BOOTTIME_EXIT,
->                 .setup = setup,
->                 .execute = execute_verify,
->                 .on_request = true,
->         };
->
->   - `execute_setup` would:
->     run the runtime `QueryVariableInfo()` checks,
->     exercise create/delete of a runtime variable,
->     create `efi_st_var0` in non-volatile storage with the first half of the payload,
->     print that the system should be rebooted and `variables at runtime verify` should be run next.
->
->   - `execute_verify` would:
->     validate the prepared variable from `setup`,
->     append the remaining payload,
->     validate the full contents,
->     delete the variable,
->     confirm that it is gone.
->
->   - If `setup` finds an existing `efi_st_var0` already containing the expected half-payload, it would report that setup is already complete and ask the user to run `verify`.
->     If the existing variable does not match, it would delete the stale variable and recreate the expected setup state.
->
->   - The failure logs would also be made step-specific, so local runs and CI logs show exactly which runtime operation fails, and `verify` would print an explicit success line.
->
-> The intention is to make the reboot-dependent non-volatile flow explicit, while keeping the current volatile-store runtime test structure unchanged.
->
-> Does this design look reasonable to both of you for v2?
+Hi Ludwig,
 
-That seems reasonable to me, yes. This is a little tricky :-)
+On Wed, 6 May 2026 at 09:29, Ludwig Nussel <ludwig.nussel@siemens.com> wrote:
+>
+> On 5/4/26 14:26, Simon Glass wrote:
+> > On 2026-04-30T12:25:59, Ludwig Nussel <ludwig.nussel@siemens.com> wrote:
+> >> qemu: overlay signature nodes
+> >> [...]
+> >> diff --git a/board/emulation/qemu-arm/qemu-arm.c b/board/emulation/qemu-arm/qemu-arm.c
+> >> @@ -147,7 +147,38 @@ int dram_init_banksize(void)
+> >>   int board_fdt_blob_setup(void **fdtp)
+> >>   {
+> >>        /* QEMU loads a generated DTB for us at the start of RAM. */
+> >> -     *fdtp = (void *)CFG_SYS_SDRAM_BASE;
+> >> +     void *qemu_fdt = (void *)CFG_SYS_SDRAM_BASE;
+> >> +     int ret;
+> >> +
+> >> +     if (!*fdtp)
+> >> +             goto out;
+> >
+> > This runs the opposite direction to qemu-sbsa, which uses the U-Boot
+> > DT as the base and overlays the QEMU DT onto it (see
+> > fdtdec_board_setup() in board/emulation/qemu-sbsa/qemu-sbsa.c). Done
+> > this way, any node in U-Boot's built-in DT that shares a name with a
+> > QEMU node (/cpus, /memory, /chosen, ...) will have its properties
+> > merged into QEMU's, potentially clobbering the hardware description.
+> > If this is correct, please explain in the commit message why the merge
+> > runs in this direction.
+>
+> IIUC the FDT patching happens before relocation. QEMU starts u-boot from
+> a ROM at address 0 so writing to the embedded DT does not work. QEMU's
+> provided DT is at a writable RAM location so patching that one works.
+>
+> I don't know which direction makes more sense really. If you say merging
+> QEMU's DT into U-Boot's is better then board_fix_fdt() could be used for
+> the merging I guess. Looks like that could work with
+> CONFIG_OF_INITIAL_DTB_READONLY and CONFIG_OF_BOARD_FIXUP set.
 
-I have talked to Heinrich about moving these tests to the normal ut
-framework, but I have not tried to actually do it yet. In any case it
-should not affect your work here.
+Hmmm now I am wondering how this actually works with sbsa. As you
+point out it's hard to see how the fdtdec_board_setup() works before
+relocation...I don't have the energy to dig into it, though.
 
-[..]
+The whole this is quite messy due to QEMU's assuming that firmware
+does not care about the DT. Since this approach seems to work we can
+always revisit it later if problems come up.
+
+So how about you tidy up the other things and add my:
+
+Reviewed-by: Simon Glass <sjg@chromium.org>
 
 Regards,
 Simon
