@@ -4,96 +4,142 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7649BCD3427
-	for <u-boot@archiver.kernel.org>; Thu,  7 May 2026 08:35:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C999CCD3445
+	for <u-boot@archiver.kernel.org>; Thu,  7 May 2026 08:37:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 097688468B;
-	Thu,  7 May 2026 10:35:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=jannau.net
+	by phobos.denx.de (Postfix) with ESMTP id 1F4608468B;
+	Thu,  7 May 2026 10:37:32 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=jannau.net header.i=@jannau.net header.b="Krx387IS";
-	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="YpRWpcJB";
+	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="N7oA2Wau";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7072D84A26; Thu,  7 May 2026 10:35:24 +0200 (CEST)
-Received: from fout-a8-smtp.messagingengine.com
- (fout-a8-smtp.messagingengine.com [103.168.172.151])
+ id 3E02D84A29; Thu,  7 May 2026 10:37:30 +0200 (CEST)
+Received: from CY7PR03CU001.outbound.protection.outlook.com
+ (mail-westcentralusazlp170100005.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c112::5])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D41DA84687
- for <u-boot@lists.denx.de>; Thu,  7 May 2026 10:35:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D4FD584687
+ for <u-boot@lists.denx.de>; Thu,  7 May 2026 10:37:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=jannau.net
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=j@jannau.net
-Received: from phl-compute-01.internal (phl-compute-01.internal [10.202.2.41])
- by mailfout.phl.internal (Postfix) with ESMTP id D7D24EC0109;
- Thu,  7 May 2026 04:35:20 -0400 (EDT)
-Received: from phl-frontend-03 ([10.202.2.162])
- by phl-compute-01.internal (MEProxy); Thu, 07 May 2026 04:35:20 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=jannau.net; h=cc
- :cc:content-type:content-type:date:date:from:from:in-reply-to
- :in-reply-to:message-id:mime-version:references:reply-to:subject
- :subject:to:to; s=fm1; t=1778142920; x=1778229320; bh=i3IpRpvcjC
- Xw4ieFew/phd3fIhv7PTV74hijYW5EnpA=; b=Krx387ISAqZuRjBvW7ei+rnBqw
- zNq3szFceHC5nGSpN1tNOI1F9VvGBw0uI+OUBmmlI12K6lR9OcALjSzzOmMuT0/4
- +FXmwkZRBxKN3TybioKp3r9rA5AQVjsNR744exym6UP2gmtZaYmgOg1EiXiDMk0G
- PZw+4DboUodI+qNEbar44GN6hlUuky7vU4IsA7ey2TzkhGCHiPVsI9pGPECHZ6mt
- jPKLi25r/zMVjeCrOdhq0IRWsje/fUzKXysp1KQPm3rrLIQJ8BcHFzMa9wpizIQx
- SKmq4zRP2tiVFIEIOblZeSuVPbqzKI0vhC4qzP/TfrWQs3akIyMrgYKifRAA==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- messagingengine.com; h=cc:cc:content-type:content-type:date:date
- :feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
- :message-id:mime-version:references:reply-to:subject:subject:to
- :to:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=
- 1778142920; x=1778229320; bh=i3IpRpvcjCXw4ieFew/phd3fIhv7PTV74hi
- jYW5EnpA=; b=YpRWpcJBDS/zb9bYo6eutRqpNdfajx0sEMqNm8b6yI86Htpk97e
- YY6HeOcOOoclagGXNJ5C6RqlypBEh+jVJut1TlxlO30ksFdNqL4/RQE29p/hFv9j
- dVWqldZw4JMdLAc/+pYoaI0NVXyINghciYrhG2ciqQhymhFhn6TnYVhrRo78ftGo
- tIVYa2c6JdQuuKyqSPYw0rkbDTdEnx+ZTZyG0hq4TKzjWs3DHA0IPEuKW9ak9QEJ
- n5tSMnh4nxu3t4dD88fuM4ZbMP+x13qi0t2dV00EwZ9GZsIYHtG7RpaghBJAwiTl
- 2WC/Lk3KvxCoPO7sxd0u1ZMYjwPKBN2xowQ==
-X-ME-Sender: <xms:yE78aXYlRHUl32J9rQhvlFYyThGNTutBG4-LYj8ynO2ZKzUAbpcXBg>
- <xme:yE78aVfy3JKff8KEZY6nPOtLoOskTin8ZRcH05OP0PaCSSqBP1IY3zHdzzz9aaYpN
- lpy_GNb36kVUP-kQjconiUlJbA-fosGUxuPzc8YEFr88TgVixirsYs>
-X-ME-Received: <xmr:yE78aQIXjndKnImi0o6U7yXsMkFXHZ5laH5ZrqyGKGWdtd4g1mCjq8zJHMuYXVZoc203eE1JUY4k7Irm8voE4MWngZh5tAAEqFc>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefhedrtddtgddutdejtddtucetufdoteggodetrf
- dotffvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfurfetoffkrfgpnffqhgenuceu
- rghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujf
- gurhepfffhvfevuffkfhggtggujgesthdtredttddtjeenucfhrhhomheplfgrnhhnvgcu
- ifhruhhnrghuuceojhesjhgrnhhnrghurdhnvghtqeenucggtffrrghtthgvrhhnpefgvd
- ffveelgedujeeffeehheekheelheefgfejffeftedugeethfeuudefheefteenucevlhhu
- shhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpehjsehjrghnnhgruh
- drnhgvthdpnhgspghrtghpthhtohepkedpmhhouggvpehsmhhtphhouhhtpdhrtghpthht
- ohepmhgrrhhkrdhkvghtthgvnhhishesgihsgegrlhhlrdhnlhdprhgtphhtthhopehuqd
- gsohhotheslhhishhtshdruggvnhigrdguvgdprhgtphhtthhopehkvghtthgvnhhishes
- ohhpvghnsghsugdrohhrghdprhgtphhtthhopehtrhhinhhisehkohhnshhulhhkohdrtg
- homhdprhgtphhtthhopehsuhhghhhoshhhrdhgrghnuhesrghrmhdrtghomhdprhgtphht
- thhopehilhhirghsrdgrphgrlhhoughimhgrsheslhhinhgrrhhordhorhhgpdhrtghpth
- htohepmhhkohhrphgvrhhshhhovghksehkvghrnhgvlhdrohhrghdprhgtphhtthhopehj
- vghrohhmvgdrfhhorhhishhsihgvrhesrghrmhdrtghomh
-X-ME-Proxy: <xmx:yE78aaK17PZ4aS3QIqzRrYv61xZuM5o6VP3uG9IWpMNASzOMsWh35g>
- <xmx:yE78aXVwj-PQN2J0uQchs3Hu0SOjpaJZQF9KdeCplVLfYlyXeQFRYw>
- <xmx:yE78abn9r8VBthZg9IyOg8Lcu0bBRJMqyNPNY-OmgruHRllSvs5d_Q>
- <xmx:yE78aVmOMiF5FeWnWqJ_Ewx_je7OjaGMMYDZTrrbdr3u1KxcTJd3Eg>
- <xmx:yE78aUi4W0dXT3c9dWj0pxmzZIKKhToyFudyxrEcWrNith-0ypir5NSl>
-Feedback-ID: i47b949f6:Fastmail
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Thu,
- 7 May 2026 04:35:19 -0400 (EDT)
-Date: Thu, 7 May 2026 10:35:18 +0200
-From: Janne Grunau <j@jannau.net>
-To: Mark Kettenis <mark.kettenis@xs4all.nl>
-Cc: u-boot@lists.denx.de, kettenis@openbsd.org, trini@konsulko.com,
- sughosh.ganu@arm.com, ilias.apalodimas@linaro.org,
- mkorpershoek@kernel.org, jerome.forissier@arm.com
-Subject: Re: [PATCH] arm: apple: Add Apple M3 (t8122) support
-Message-ID: <20260507083518.GB514139@robin.jannau.net>
-References: <20260501-apple-m3-support-v1-1-4165bc2a73f4@jannau.net>
- <87zf2ic9iw.fsf@bloch.sibelius.xs4all.nl>
+ dmarc=pass (p=reject dis=none) header.from=altera.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=tien.fong.chee@altera.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=HvH3iyhGTazUTo/2AWDchZjUuW5R6aOWGEcQMzUErvCyfs7Ezq8yOJk6Udixk/4brFLaipkDVNIRlJOTidlP0wKgfBHxeAJTKsKKJyupnhUHI0u4GwKhyBR/m2xPezIZFY+HopTREh7APFjuLd4y0nalUzJ1a5f5+ASkYwIOP1HsuqlLaHwR6ZKYA4XBgisdNKoMrh8RUxUZL/emZ1fD/EMBLc87PQSVTgW3e/w6Zq6Qj3hefAOHFTlL1AfjL80rOiscQppNbXEzaWCHC8ps04Ae5FEzrFC74Z1b+G9J5sFsAErTWGP5gv58jckBJq3GgbnLRcVOjMsFAK589UCXOg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=t1Xh+Ij7W4FXVcMh0uFzCJcIEmkgR7Zgpy88ZG0UMP4=;
+ b=vWt2NV3ROS0IIiYqrGC7QvOiBCw9WtX/8iciHX3JSnQCN7OxsPO3MAyeOwUFRGAd75lnwl9V/UWwPZAqyjWzJfLeFQ7nyvMohRzRuaFu7l2VlJTPdDLt1zKEEK3D3MrHERaRlCHVd4A8j534Ycf409/fJDw5EKFTJlqyX3SWHRlMguN8BqWJCX6enezz5AY8Xhcd4HwaFjYMUhL4Q7bzikc3OdGKPOhj/EnfO7eWLqYAhZIvhdyTvn7Brb8cHJcG72sqD4Wyu2G8GXc/zHgqUabdVnvT5ZggFcKHYUMhzNvuP53mTgu6qL0AiX/Fak70d0nu7eMRQ1oFqeioi2bLLg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
+ dkim=pass header.d=altera.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=t1Xh+Ij7W4FXVcMh0uFzCJcIEmkgR7Zgpy88ZG0UMP4=;
+ b=N7oA2Wauyj6NQlATNouxMTIddoG/eH2OigXevwTTgtWacEBI+ndwL/sQA1BWfZcQooRbU6LmmgTstOB/1zanf2aJEIoPs4vXdjuQLcR1NRQQ3DFxLkhgGaVAabFnnYi0JuVRwhd3OqPBJvVfmgnNJrpgIin8YxWav/G1ugWBALIx7B5l4mnXlJy0n9WXZ3IVp0JzObBaWP4h3ekwN1OH17AtN6vmX0BKjXl4ULrVu9jDR5rng3tdBtlyOXxqOUwwFXaj7PTCU1xTiHS+vF3bN85OsfEPP3qgPq7Ltx3vs7ZW2AdV8p/tLNjgxyaqwo1zVbhjFoklhnFnMvE+UotSiw==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=altera.com;
+Received: from LV8PR03MB8137.namprd03.prod.outlook.com (2603:10b6:408:295::8)
+ by DM4PR03MB6911.namprd03.prod.outlook.com (2603:10b6:8:46::18) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9891.15; Thu, 7 May
+ 2026 08:37:23 +0000
+Received: from LV8PR03MB8137.namprd03.prod.outlook.com
+ ([fe80::efa9:4b97:3b4a:8235]) by LV8PR03MB8137.namprd03.prod.outlook.com
+ ([fe80::efa9:4b97:3b4a:8235%4]) with mapi id 15.20.9891.008; Thu, 7 May 2026
+ 08:37:23 +0000
+Message-ID: <cde9444b-1f01-4932-be46-d751e347379c@altera.com>
+Date: Thu, 7 May 2026 16:37:15 +0800
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 1/9] arch: arm: dts: stratix10: Switch to using
+ upstream Linux DT config
+To: alif.zakuan.yuslaimi@altera.com, u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, Marek Vasut <marex@denx.de>,
+ Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
+ Lukasz Majewski <lukma@denx.de>, Peng Fan <peng.fan@nxp.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>, Simon Glass <sjg@chromium.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Kory Maincent <kory.maincent@bootlin.com>, Yao Zi <me@ziyao.cc>
+References: <20260428034822.23756-1-alif.zakuan.yuslaimi@altera.com>
+ <20260428034822.23756-2-alif.zakuan.yuslaimi@altera.com>
+Content-Language: en-US
+From: "Chee, Tien Fong" <tien.fong.chee@altera.com>
+In-Reply-To: <20260428034822.23756-2-alif.zakuan.yuslaimi@altera.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: SG2PR01CA0184.apcprd01.prod.exchangelabs.com
+ (2603:1096:4:189::9) To LV8PR03MB8137.namprd03.prod.outlook.com
+ (2603:10b6:408:295::8)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <87zf2ic9iw.fsf@bloch.sibelius.xs4all.nl>
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: LV8PR03MB8137:EE_|DM4PR03MB6911:EE_
+X-MS-Office365-Filtering-Correlation-Id: f83565b5-cc2a-43bf-1042-08deac13dc3a
+X-MS-Exchange-AtpMessageProperties: SA
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|366016|1800799024|376014|7416014|13003099007|56012099003|3023799003|18002099003|22082099003|55112099003;
+X-Microsoft-Antispam-Message-Info: 6P5HF58DoKVUcxbw9huk7kQhpxOJEdjqrm1tlGZ/t4rDdQy37Lg9MhacsJHpypCQ6TPPefMKeCDBkN3Up1vGjmt2SKuSPoer88lxlGn+30m4K9QDC5En3J0IKA1+QOppabIKxuO5PeZeqV+zsFAycdL2FuyGIoXy1ET44EX2zzAtpUzxR7NZJOhYrK81JmDXAbOMq2a8EA0RcvpBU26M5wgkG4NxH5CBT8DMJsHSwgU3m+DSC1Xe8ehpJm3rmyIEdMbaNruOzigj7PK+hpDZBQoIIoQizJ8rgR+bUgrc+EH3BZSbe9yG65MQ7KAFk+y2DzSZFFoC8j2f1MnDqekOauvoKcKnOTWSzQ1rRfHw6CVcVY9uMmVFDSs1iTLLiGGPD2V8dtyQGkCxTRFT6DyI3oOCkg1/cqEkKuy+WMH7ui+mOWBxj/WeyQTWVmV17cWrU7+9uQpHq5meLTiK5S7pMbxbKfvEJjgS4cz3TfkK2HWKxJmtNH3wALDviKhEbigImAMpHla8loohwlhucYWQfV/rbZUl3eZG78MLHPog+eDswZUB+Iirt5HGXdFDWKhHqfCcpvMCThZi/nwqJbIb9RpDaXLU/TsmKxbQrDh4ZBTFMK0ybXRDKf5IeUkwZJdrVOczhQ8LQ1wmQmruvkyT+A==
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:LV8PR03MB8137.namprd03.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(1800799024)(376014)(7416014)(13003099007)(56012099003)(3023799003)(18002099003)(22082099003)(55112099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?R3F4dnFCc0Y1ZzE1QnppcE44MmJtNkhnYVM2Rlozemp4Y2crUWxBd3ovN2tk?=
+ =?utf-8?B?clM5NmlvZ3B1cmJPVkthMi9nampUU29MNHcvSEdUZm1xbGZjN0NIbzBXK3JM?=
+ =?utf-8?B?My95SVVKZmtMaU4xRmd3cFM2Z3JXNTRDUlVpWXVhTEgvRkx3YXFScTI1K1lC?=
+ =?utf-8?B?K2FSaktxODVNNDNVYlVCT1E5NnkxNXZHNHFCNjh1eGtsclpNNW1MN2JTWWEv?=
+ =?utf-8?B?SXpxUDRLQVNVZzdQdkU5d0JDTHBaQndGaWIzTUZCclIzN1Vnb2tpQU9oeG1J?=
+ =?utf-8?B?dHdzcllQZU5YcmV3c2xTbndWa3lsYVNQOUxJcnZNbmpzZWtPSC9KYTRVZnFI?=
+ =?utf-8?B?VzJxWkxOR0pzenh0QXZleHZSWUphRWFiQ0Q2dW5ybDFBRXI1MjlWaEJ5Sis1?=
+ =?utf-8?B?eVUxVXhoanN4NmoraUxScS8rNmdpdkpsdWljeGNPd1M4Ykl1UUhjcDFtQTNM?=
+ =?utf-8?B?cHUveVpZN0pmOTIwWms1VnByYm50Sm5tUmRoM1Q2SnBNUWU3L0wxK29Ob1pE?=
+ =?utf-8?B?YUxYR1ZmQWJLYnNoV2NDVGlJS1J6MXVoR216N01rdzZhTEE0QUNjWGNBZmxi?=
+ =?utf-8?B?Z09RQU53TWxaQUpUd2JNTlZTYWhBVVRUbFlyV3dKVmhZc3hqaDJ5TlhhQTY0?=
+ =?utf-8?B?TkZxQk5leVhxaDMrT1FpT042OTdTRWt6QnpydVE5TGxVMG5iM045eDlWWktB?=
+ =?utf-8?B?aTN3VUo4U216b0UrSkE1L05wNTgyQXBxYWd0NHdPMHBHeFJ1bmFiN3NZSDZU?=
+ =?utf-8?B?c0Zib1hBaCs0elIvbHRIZnlMaHNkR29PTElYKzFGREtmdUE4dkxvN3FDaWR0?=
+ =?utf-8?B?ZXI4SVBkSlZMR25NMTY2aUZSNE5WVGszZzFVeG5QS0txd3h4dTU2N0RPSTg0?=
+ =?utf-8?B?dVpwdDNOWlhJZ1RNTmlIVUtaSVhRci9zK2k3ck5sZDQ0NlJIODcyMEU1YXBK?=
+ =?utf-8?B?cHZ0YURiVTU1NmxaV1d3UjRUa0ZrU1N5Z1FUS3lGaDZVNHlXNENlcHN2Sito?=
+ =?utf-8?B?d2lsdGNUK05jT0NsVzh5REd2b0o2cjhaV2JNZzRTdzZyZzl6aHRIQU5sVFZy?=
+ =?utf-8?B?VmdZQXBGWUJNVElYQ21NWnZmcHRnT1VUT3lGL1VKa3pxMTN2TFJkajRrU1BH?=
+ =?utf-8?B?TElHcjVOZW5JOWd4d1F2SVNoTnF0T00zdUdpKzNVTEVoMFBOSkZWc3JTT2xD?=
+ =?utf-8?B?Qm95NzlHOHB6QUYxZVA0ZHBsU3ZQK3k5NHRBMTNtc3FFRHZXZTN0WWRQUURP?=
+ =?utf-8?B?RUYzVE53WVBpbUpScE42TXFxa0JCS0FERFV1c0dtUkRDUlpVTnhYMnJleHRi?=
+ =?utf-8?B?TjBRWi96Y1dKcWZxMjFMdEs4bjNtS0U2bG5CWTRGWU5sMlJLWmVWTzNPMEpj?=
+ =?utf-8?B?SC9lVU8rNWd5RjVncFY0ZHZIc01YYU11ZTR3RDl1TTdYeDZrcGk0Qit4ai90?=
+ =?utf-8?B?WDkxNEt4V3pZaCtzdEZpNzFwWXpiV3BBNEdoYVVPZjJyT0tzWENMRWlNRXl6?=
+ =?utf-8?B?MjhjcEFSRys2c09qZnd3K1phbzN6L1M0QTZ6R0tDNWFSOFR0RE95Zmk3dENP?=
+ =?utf-8?B?dHVSck9BVkFYbEZmaEJvT1E5dEd6OTMvR3EzQzMwcjBzTjFkbndMbHB6ZW03?=
+ =?utf-8?B?S3lKaGU1aElWYU84Y2N2bHJHTzFLNzFPSlZsYnV2NkkxYmRSUS9kYUU4Mnp1?=
+ =?utf-8?B?STdvbzltcnNwbEgyRnFQYmtjTHBPWkJHU3JCdVV3NDZtY2dkWXFNTzlINWQy?=
+ =?utf-8?B?QmpkQ3NwQ3JTM0xJTjRHT1BFbHJiZXZ5L1h0Vk9CWjd2YXVuYzdXVHhJaWFk?=
+ =?utf-8?B?WnJ4M1RIYjdHSU8rM1pKTTRrdEZqMURKeUkwZ1AyMTA2dzc1TVBVRC9yMVNE?=
+ =?utf-8?B?a0Q0ei8vbzN1Y2dIQzgvMWswanhCQUNVTno0bDlhcTJnS1F3eG1IbVlZTjdx?=
+ =?utf-8?B?OXY5MHk4MzdWN3NTaWRtb21qUDgyUmloWnhVNEQ0a05xOHkrSTlFRnN0RXlC?=
+ =?utf-8?B?NWJzd21FanJBSVY1a05ocXYrN05Ja3lIVDBsZmhvM0FiOTRYUHczOFJIQ3V0?=
+ =?utf-8?B?QjFwSU1ra1BzdGpXcDR6Z1cxYWVWZldEUEVQK01ydWdWQzdrL0R2a1EzclhY?=
+ =?utf-8?B?S3pKOUs1cWVoZXFqaDl5dnVpV3VWdGg3ZWxCZGcwV0lSRjQzbDZqS0RETW9X?=
+ =?utf-8?B?emZWVkFuTnhXN1RhWkFoWStvcVZTTWgvRlVRUmNIS2JKVmJFY0RVTTRKeGhG?=
+ =?utf-8?B?ZVNZZzBMZGNtZ2EzQk5WT09uY3F2T2lFRUcxbG54U3hBYWtobGVSK0NjWGk0?=
+ =?utf-8?B?Mk5INE44UVIwK2pXTGRtWlRJcGlvK3kvNGpwalcrRlVnRUJGakN4SFMxTUM0?=
+ =?utf-8?Q?cvIOqBxSpsvdakyI=3D?=
+X-OriginatorOrg: altera.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: f83565b5-cc2a-43bf-1042-08deac13dc3a
+X-MS-Exchange-CrossTenant-AuthSource: LV8PR03MB8137.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 May 2026 08:37:23.4721 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: eaDzTjkLhAv3irVnCcjGRGEP5FtyvH9UIhyidwsC5MIcdy7WPmAsOb8bnZqJjIg+B0Vk+S7lHfEeMBSJaU/Tt82/DNXWayUTOJFHRxr3XEo=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR03MB6911
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -110,147 +156,229 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hej,
+Hi Alif,
 
-On Sat, May 02, 2026 at 01:53:43PM +0200, Mark Kettenis wrote:
-> > From: Janne Grunau <j@jannau.net>
-> > Date: Fri, 01 May 2026 16:07:16 +0200
-> 
-> > Apple's M3 SoC is similar to M1 and M2 but uses a different memory map.
-> > The main difference is that RAM starts at 0x100_0000_0000 like on t600x
-> > and t602x (M1 and M2 Pro/Max/Ultra). Otherwise IO blocks have been
-> > rearranged.
-> > U-boot's existing drivers are compatible with the hardware and M3 device
-> > trees will carry "apple,t8103-*" compatible strings. Only
-> > apple-atcphy-reset might need a new compatible due to USB4 / DisplayPort
-> > changes the Linux driver has to deal with.
-> > 
-> > Signed-off-by: Janne Grunau <j@jannau.net>
-> > ---
-> >  arch/arm/mach-apple/board.c | 71 +++++++++++++++++++++++++++++++++++++++++++++
-> >  1 file changed, 71 insertions(+)
-> > 
-> > diff --git a/arch/arm/mach-apple/board.c b/arch/arm/mach-apple/board.c
-> > index 4cd8979bdc2..914b4581e7d 100644
-> > --- a/arch/arm/mach-apple/board.c
-> > +++ b/arch/arm/mach-apple/board.c
-> > @@ -85,6 +85,75 @@ static struct mm_region t8103_mem_map[] = {
-> >  	}
-> >  };
-> >  
-> > +/* Apple M3 */
-> 
-> I think it makes more sense to keep things sorted based on the name
-> and put M3 after M2 Ultra?  M2 is the odd one out here since it is
-> identical to M1.
 
-ack, I still think of t81xx and t60xx as two separate groups and group
-them together but I think that's not maintainable in the long run.
-This doesn't seem to hold for t6030 (M3 Pro) which looks more like an
-extended M3 or M4 than a chopped down t6031 (M3 Max).
+On 28/4/2026 11:48 am, alif.zakuan.yuslaimi@altera.com wrote:
+> From: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
+>
+> Migrate the legacy Stratix10 platform to use the upstream Linux device tree
+> configuration. This helps reduce maintenance overhead and aligns U-Boot
+> with the Linux kernel's DTS hierarchy and naming conventions.
+>
+> This change improves consistency between U-Boot and Linux by removing
+> custom/legacy DTS handling and instead relying on the standardized
+> definitions provided by the upstream Linux DTS.
+>
+> Signed-off-by: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
+> ---
 
-> > +
-> > +static struct mm_region t8122_mem_map[] = {
-> > +	{
-> > +		/* I/O */
-> > +		.virt = 0x210000000,
-> > +		.phys = 0x210000000,
-> > +		.size = 4UL * SZ_1G,
-> 
-> We should try to keep the regions aligned on 1G boundaries with sizes
-> that are multiples of 1G as that allows for more efficient page
-> tables.
-> 
-> I haven't looked at Apple's device tree for the t8122 (I don't think I
-> have ever seen one).  But based on the t8122.dtsi from the asahi-wip
-> branch, I'd suggest using two regions
-> 
-> 0x200000000: 4UL * SZ_1G
-> 0x300000000: 1UL * SZ_1G
-> 
-> You could tag the region at 0x300000000 as /* NVME */ if the Apple dts
-> doesn't suggest there are non-NVMe things in there.
 
-Apple's device tree for the M3 Macbook Pro (J504) has only NVMe related
-nodes in 0x300000000... (ignoring pmgr's and error-handler's views into
-other devices). I'll split the regions and annotate the second one as
-NVMe.
+Please add the change log for each version.
 
-> > +		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
-> > +			 PTE_BLOCK_NON_SHARE |
-> > +			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
-> > +	}, {
-> > +		/* I/O */
-> > +		.virt = 0x700000000,
-> > +		.phys = 0x700000000,
-> > +		.size = SZ_1G,
-> > +		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
-> > +			 PTE_BLOCK_NON_SHARE |
-> > +			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
-> > +	}, {
-> > +		/* I/O */
-> > +		.virt = 0xb00000000,
-> > +		.phys = 0xb00000000,
-> > +		.size = SZ_1G,
-> > +		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
-> > +			 PTE_BLOCK_NON_SHARE |
-> > +			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
-> > +	}, {
-> > +		/* I/O */
-> > +		.virt = 0x580000000,
-> > +		.phys = 0x580000000,
-> > +		.size = SZ_512M,
-> > +		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
-> > +			 PTE_BLOCK_NON_SHARE |
-> > +			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
-> > +	}, {
-> > +		/* PCIE */
-> > +		.virt = 0x5a0000000,
-> > +		.phys = 0x5a0000000,
-> > +		.size = SZ_512M,
-> > +		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRE) |
-> > +			 PTE_BLOCK_INNER_SHARE |
-> > +			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
-> > +	}, {
-> > +		/* PCIE */
-> > +		.virt = 0x5c0000000,
-> > +		.phys = 0x5c0000000,
-> > +		.size = SZ_1G,
-> > +		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRE) |
-> > +			 PTE_BLOCK_INNER_SHARE |
-> > +			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
-> > +	}, {
-> > +		/* RAM */
-> > +		.virt = 0x10000000000,
-> > +		.phys = 0x10000000000,
-> > +		.size = 8UL * SZ_1G,
-> > +		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
-> > +			 PTE_BLOCK_INNER_SHARE
-> > +	}, {
-> > +		/* Framebuffer */
-> > +		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL_NC) |
-> > +			 PTE_BLOCK_INNER_SHARE |
-> > +			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
-> > +	}, {
-> > +		/* List terminator */
-> > +		0,
-> > +	}
-> > +};
-> > +
-> >  /* Apple M1 Pro/Max */
-> >  
-> >  static struct mm_region t6000_mem_map[] = {
-> > @@ -710,6 +779,8 @@ void build_mem_map(void)
-> >  	if (of_machine_is_compatible("apple,t8103") ||
-> >  	    of_machine_is_compatible("apple,t8112"))
-> >  		mem_map = t8103_mem_map;
-> > +	else if (of_machine_is_compatible("apple,t8122"))
-> > +		mem_map = t8122_mem_map;
-> 
-> I'd probably move this down as well.
 
-ack
+>   arch/arm/dts/Makefile                         |   3 +-
+>   arch/arm/dts/socfpga_stratix10-u-boot.dtsi    | 158 +++++++
+>   arch/arm/dts/socfpga_stratix10.dtsi           | 430 ------------------
+>   .../dts/socfpga_stratix10_socdk-u-boot.dtsi   | 143 +++++-
+>   arch/arm/dts/socfpga_stratix10_socdk.dts      | 143 ------
+>   configs/socfpga_stratix10_defconfig           |   3 +-
+>   6 files changed, 286 insertions(+), 594 deletions(-)
+>   delete mode 100644 arch/arm/dts/socfpga_stratix10.dtsi
+>   delete mode 100644 arch/arm/dts/socfpga_stratix10_socdk.dts
+>
+> diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
+> index bff341d6118..2832123218f 100644
+> --- a/arch/arm/dts/Makefile
+> +++ b/arch/arm/dts/Makefile
+> @@ -460,8 +460,7 @@ dtb-$(CONFIG_ARCH_SOCFPGA) +=				\
+>   	socfpga_cyclone5_vining_fpga.dtb		\
+>   	socfpga_cyclone5_ac501soc.dtb			\
+>   	socfpga_cyclone5_ac550soc.dtb			\
+> -	socfpga_n5x_socdk.dtb				\
+> -	socfpga_stratix10_socdk.dtb
+> +	socfpga_n5x_socdk.dtb
+>   
+>   dtb-$(CONFIG_TARGET_DRA7XX_EVM) += dra72-evm.dtb dra7-evm.dtb	\
+>   	dra72-evm-revc.dtb dra71-evm.dtb dra76-evm.dtb
+> diff --git a/arch/arm/dts/socfpga_stratix10-u-boot.dtsi b/arch/arm/dts/socfpga_stratix10-u-boot.dtsi
+> index 3e3a3780469..a3b4c0564f9 100644
+> --- a/arch/arm/dts/socfpga_stratix10-u-boot.dtsi
+> +++ b/arch/arm/dts/socfpga_stratix10-u-boot.dtsi
+> @@ -3,6 +3,164 @@
+>    * U-Boot additions
+>    *
+>    * Copyright (C) 2020 Intel Corporation <www.intel.com>
+> + * Copyright (C) 2026 Altera Corporation <www.altera.com>
+>    */
+>   
+>   #include "socfpga_soc64_fit-u-boot.dtsi"
+> +
+> +/{
+> +	aliases {
+> +		spi0 = &qspi;
+> +		i2c0 = &i2c1;
+> +		freeze_br0 = &freeze_controller;
+> +	};
+> +
+> +	memory@0 {
+> +		device_type = "memory";
+> +		#address-cells = <2>;
+> +		#size-cells = <2>;
 
-I'll send a v2 shortly, thanks
 
-Janne
+make dtbs_check (Linux dt-validate) will flag it as a schema violation 
+since memory nodes must not define #address-cells / #size-cells because 
+no child node according to the dt spec.
+
+Remove both properties from the memory@0
+
+[...]
+
+
+> diff --git a/arch/arm/dts/socfpga_stratix10_socdk-u-boot.dtsi b/arch/arm/dts/socfpga_stratix10_socdk-u-boot.dtsi
+> index ef0df769762..da19943ec3b 100644
+> --- a/arch/arm/dts/socfpga_stratix10_socdk-u-boot.dtsi
+> +++ b/arch/arm/dts/socfpga_stratix10_socdk-u-boot.dtsi
+> @@ -3,47 +3,154 @@
+>    * U-Boot additions
+>    *
+>    * Copyright (C) 2019-2022 Intel Corporation <www.intel.com>
+> + * Copyright (C) 2026 Altera Corporation <www.altera.com>
+>    */
+>   
+>   #include "socfpga_stratix10-u-boot.dtsi"
+>   
+>   /{
+> -	aliases {
+> -		spi0 = &qspi;
+> -		freeze_br0 = &freeze_controller;
+> +	chosen {
+> +		stdout-path = "serial0:115200n8";
+> +		u-boot,spl-boot-order = &mmc,&flash0,&nand;
+>   	};
+>   
+> -	soc {
+> -		freeze_controller: freeze_controller@f9000450 {
+> -			compatible = "altr,freeze-bridge-controller";
+> -			reg = <0xf9000450 0x00000010>;
+> -			status = "disabled";
+> +	memory@0 {
+> +		/* 4GB */
+> +		reg = <0 0x00000000 0 0x80000000>,
+> +		      <1 0x80000000 0 0x80000000>;
+> +	};
+> +};
+> +
+> +&qspi {
+> +	status = "okay";
+> +};
+> +
+> +&gmac0 {
+> +	mdio0 {
+> +		ethernet_phy0: ethernet-phy@0 {
+> +			reg = <4>;
+> +			txd0-skew-ps = <0>; /* -420ps */
+> +			txd1-skew-ps = <0>; /* -420ps */
+> +			txd2-skew-ps = <0>; /* -420ps */
+> +			txd3-skew-ps = <0>; /* -420ps */
+> +			rxd0-skew-ps = <420>; /* 0ps */
+> +			rxd1-skew-ps = <420>; /* 0ps */
+> +			rxd2-skew-ps = <420>; /* 0ps */
+> +			rxd3-skew-ps = <420>; /* 0ps */
+> +			txen-skew-ps = <0>; /* -420ps */
+> +			txc-skew-ps = <900>; /* 0ps */
+> +			rxdv-skew-ps = <420>; /* 0ps */
+> +			rxc-skew-ps = <1680>; /* 780ps */
+>   		};
+>   	};
+>   };
+>   
+> -&clkmgr {
+> +&mmc {
+> +	drvsel = <3>;
+> +	smplsel = <2>;
+>   	bootph-all;
+>   };
+>   
+>   &qspi {
+> -	status = "okay";
+> -	bootph-all;
+> +	/delete-property/ clocks;
+>   };
+>   
+>   &flash0 {
+> -	compatible = "jedec,spi-nor";
+> -	spi-max-frequency = <100000000>;
+> +	reg = <0>;
+>   	spi-tx-bus-width = <4>;
+>   	spi-rx-bus-width = <4>;
+>   	bootph-all;
+> +
+> +	m25p,fast-read;
+> +	cdns,page-size = <256>;
+> +	cdns,block-size = <16>;
+> +	cdns,tshsl-ns = <50>;
+> +	cdns,tsd2d-ns = <50>;
+> +	cdns,tchsh-ns = <4>;
+> +	cdns,tslch-ns = <4>;
+> +	/delete-property/ cdns,read-delay;
+> +
+> +	partitions {
+> +		compatible = "fixed-partitions";
+> +		#address-cells = <1>;
+> +		#size-cells = <1>;
+> +
+> +		qspi_boot: partition@0 {
+> +			label = "u-boot";
+> +			reg = <0x0 0x04200000>;
+> +		};
+> +
+> +		root: partition@4200000 {
+> +			label = "root";
+> +			reg = <0x04200000 0x0BE00000>;
+> +		};
+> +	};
+>   };
+>   
+> -&sysmgr {
+> -	bootph-all;
+> +&fdt_0_blob {
+> +	filename = "dts/upstream/src/arm64/altera/socfpga_stratix10_socdk.dtb";
+>   };
+>   
+> -&watchdog0 {
+> -	status = "okay";
+> -	bootph-all;
+> +&images {
+> +	fdt-1 {
+> +		description = "socfpga_socdk_nand";
+> +		type = "flat_dt";
+> +		compression = "none";
+> +		fdt_1_blob: blob-ext {
+> +			filename = "dts/upstream/src/arm64/altera/socfpga_stratix10_socdk_nand.dtb";
+> +		};
+> +		hash {
+> +			algo = "crc32";
+> +		};
+> +	};
+> +
+> +	fdt-2 {
+> +		description = "socfpga_socdk_emmc";
+> +		type = "flat_dt";
+> +		compression = "none";
+> +		fdt_2_blob: blob-ext {
+> +			filename = "dts/upstream/src/arm64/altera/socfpga_stratix10_socdk_emmc.dtb";
+
+
+This file is absent. Binman references 
+dts/upstream/src/arm64/altera/socfpga_stratix10_socdk_emmc.dtb.
+
+If those source DTS files do not exist in the upstream tree, binman 
+fails with a file-not-found error at image build time
+
+
+Best regards,
+
+Tien Fong
+
