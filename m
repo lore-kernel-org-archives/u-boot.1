@@ -4,104 +4,102 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF4B4CD3442
-	for <u-boot@archiver.kernel.org>; Thu,  7 May 2026 08:06:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8DFACD3442
+	for <u-boot@archiver.kernel.org>; Thu,  7 May 2026 08:06:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 00A5384A20;
-	Thu,  7 May 2026 10:06:26 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 46C5184A27;
+	Thu,  7 May 2026 10:06:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=jannau.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=jannau.net header.i=@jannau.net header.b="c4J12/2S";
-	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="PlGxMrcB";
+	dkim=pass (2048-bit key; unprotected) header.d=jannau.net header.i=@jannau.net header.b="Gd2yupju";
+	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="H0mtN6am";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9DCE584A29; Thu,  7 May 2026 10:06:22 +0200 (CEST)
-Received: from fout-a8-smtp.messagingengine.com
- (fout-a8-smtp.messagingengine.com [103.168.172.151])
+ id 9308D84A29; Thu,  7 May 2026 10:06:24 +0200 (CEST)
+Received: from fhigh-a5-smtp.messagingengine.com
+ (fhigh-a5-smtp.messagingengine.com [103.168.172.156])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 871A0849F6
- for <u-boot@lists.denx.de>; Thu,  7 May 2026 10:06:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A104784A1E
+ for <u-boot@lists.denx.de>; Thu,  7 May 2026 10:06:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=jannau.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=j@jannau.net
-Received: from phl-compute-03.internal (phl-compute-03.internal [10.202.2.43])
- by mailfout.phl.internal (Postfix) with ESMTP id 5916FEC0351;
- Thu,  7 May 2026 04:06:16 -0400 (EDT)
+Received: from phl-compute-02.internal (phl-compute-02.internal [10.202.2.42])
+ by mailfhigh.phl.internal (Postfix) with ESMTP id AA7761400009;
+ Thu,  7 May 2026 04:06:19 -0400 (EDT)
 Received: from phl-frontend-04 ([10.202.2.163])
- by phl-compute-03.internal (MEProxy); Thu, 07 May 2026 04:06:16 -0400
+ by phl-compute-02.internal (MEProxy); Thu, 07 May 2026 04:06:19 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=jannau.net; h=cc
  :cc:content-transfer-encoding:content-type:content-type:date
- :date:from:from:in-reply-to:message-id:mime-version:reply-to
- :subject:subject:to:to; s=fm1; t=1778141176; x=1778227576; bh=o+
- S7n+zg1D8m1U2o2c1Sf4P7+Afk4SAaB5R+p8J294Y=; b=c4J12/2SdANKSJgJMH
- h9tGvUjlieJJhhXEsT6KPY+VKCbOAZdHutWBlLch9g4g4eCKXE2yR1WDaHuJQqmq
- sbkpTEpgPyonNk60A5k7tlq24pzvsY8CpOMVbgOKTmuEIk8gvYmo6MJpiIxJHElE
- FzcmX98HyUp+rxUQGRtQMSz7fzWLeRVq4JPA0wEMeGNrB9IlHM6LBvP/jds+z/u1
- E39woslaJ/cQit/RVhGhUNrcGD8lxeZhb7BNXKK1f9yIzGOZq4y7O5l82ksnDHS2
- H9SsP5vCi81ukB1qzWRUpO68C7IyL6y5GvfEtSa93Fa9qSH7OjS3UwWKQLij60Hr
- 2eYA==
+ :date:from:from:in-reply-to:in-reply-to:message-id:mime-version
+ :references:reply-to:subject:subject:to:to; s=fm1; t=1778141179;
+ x=1778227579; bh=CZ6hUpSEcwieECPxnKdC5bmBkFZn1+1Ip6P4iZJZ7Lk=; b=
+ Gd2yupjujUG7rMW1t6WLmEAFAOjXpW6kwDRYEOASfHGvZ7MYq1pdT9NlDvItwNEd
+ 0dnfhYi1HgnIKoaqzYaOXTBaKjpHGGDKvr5aRXRIowPnT6OzIkQaIO147ZwCydvC
+ 3WBCxE12TpMSm28irK2K9mTbU7ZMjvcbcwVoKrzbRR0sV4FGHS+lu4GJkCWGVFhf
+ PhNFb7UCb0ankPkST0iWGH3v5ekyIl3f4ORNdKIBko9ruo52EejZR02SJ6QydHrU
+ Deej2ZVWMNOGD63Zi9zxO/VwL5thuTijnBoGp60eHh7yMz1NTkxIUpb6Bi+mpDaz
+ sf/p2d8bWc8O2tueqwQeag==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
  messagingengine.com; h=cc:cc:content-transfer-encoding
  :content-type:content-type:date:date:feedback-id:feedback-id
- :from:from:in-reply-to:message-id:mime-version:reply-to:subject
- :subject:to:to:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
- fm3; t=1778141176; x=1778227576; bh=o+S7n+zg1D8m1U2o2c1Sf4P7+Afk
- 4SAaB5R+p8J294Y=; b=PlGxMrcBl0IqXft5K5/jBhAoL54APD+AOAWUOcCzWT8+
- 5Ambqr+/W3nBDK0UpujX6MOpm/02pMdzR5OSZ8FUCCodOGYApKLtBQCOKEKZhcyy
- OLfSeiARsUBMf90xzXaF2g0KIg6v3QAOVnB0FOkjepL9cW4FjVOFkR845GdYhztc
- SYszqcQtf6EpBlsC2nk9WIHlST57A8gkhXK2Rfprn3G2AWU9vy2xNHpuNiS54amt
- 6HBNN5HjPmiEEY48egm4lp8S/gIh8hO7n/Q5oorfOFAMBpAV89MOargMd44O1SVd
- X85p7XPzphMDKB/vN6d0onxRMmr9CxEqIR6wQYnkUg==
-X-ME-Sender: <xms:-Ef8aXNNKZ0mMRoQ3pxXN2HhgnCtjb-N976hkfuNNgzgpKHFokGVqw>
- <xme:-Ef8aY8MXolSik_oepebEWDTux_wE38DFFb7jN8S8GmyH37y2a6UAJLAu78xRSN9I
- o346s8xrE53RudfNUAfN7iwJsHHlDVL-fhecCI3HlQVP7QyMBT6nQo>
-X-ME-Received: <xmr:-Ef8abTgEQCyE7Ao__cjwmKXXpJG3FtPhhMGlNTIBgE4LSwaqXR68i45fwz3k4vaobjgskS6KAccxISggohBKPl5Kx0p99MEmgaAVg>
+ :from:from:in-reply-to:in-reply-to:message-id:mime-version
+ :references:reply-to:subject:subject:to:to:x-me-proxy
+ :x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1778141179; x=
+ 1778227579; bh=CZ6hUpSEcwieECPxnKdC5bmBkFZn1+1Ip6P4iZJZ7Lk=; b=H
+ 0mtN6amC7KNQa4klLlSrR4R6almv/NuB9IfylNG/OiyarwCyJl3jZLGQbEUzCf9Q
+ iPlYgaTnsfy1FelAFVOhf1VJg5SnBTQ2kOUEP+VKq5/d3dvj15BF7dH+R7hY+X0j
+ DDWDRTXmzoLejKDgpwDNATZ6PN647mERFk6Nc/Yo/Gu5UtCYM1zX/4XP8QLaNzIr
+ bXi3TwFg3WAM3mvhJye1G0mCZLqXjGqRvAcfnSo3SWc/kDvL1/FX4ZGGYbUm0Ijy
+ +VVOAnYCWANMRzuMc40kpEKc2PbJsrH2steHiWangTZGld8nItf10ajz4W/91viZ
+ CRRJ0NmS/1a9pJURbfEuQ==
+X-ME-Sender: <xms:-0f8aSf9pMsF-MKP8T6LT448WWOBjZ1WxeN8ocy4CF50KonZj_KFvQ>
+ <xme:-0f8aTOU04VDnII8dq83MqXEz-KwYDN2iB2r3ytwHnAqKxFOMI-e3E_DkOfbrHB7O
+ Iyce_GdCnUemRX3aquML6XffUFpUOfdQg0g_A37chr6NgvC_gqtzeA>
+X-ME-Received: <xmr:-0f8aYj5KVkfr395AlkzDHObdjxp96nbJkkT648c8Mxj24J_Dk81rCIxzEf1WML_w0vF0AKxo_XWySfk2vvPS4OCy874RcYfLpPM_g>
 X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefhedrtddtgddutdeileehucetufdoteggodetrf
  dotffvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfurfetoffkrfgpnffqhgenuceu
  rghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujf
- gurhephffufffkgggtgffvvefosehtjeertdertdejnecuhfhrohhmpeflrghnnhgvucfi
- rhhunhgruhcuoehjsehjrghnnhgruhdrnhgvtheqnecuggftrfgrthhtvghrnhepgffhge
- egheeviedtuefhieevteeufedvvdeiheelhffgleffvedugeevteejkeelnecuffhomhgr
- ihhnpehmshhgihgurdhlihhnkhenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmh
- epmhgrihhlfhhrohhmpehjsehjrghnnhgruhdrnhgvthdpnhgspghrtghpthhtohepgedp
- mhhouggvpehsmhhtphhouhhtpdhrtghpthhtohepkhgvthhtvghnihhssehophgvnhgssh
- gurdhorhhgpdhrtghpthhtohepjhesjhgrnhhnrghurdhnvghtpdhrtghpthhtohepthhr
- ihhniheskhhonhhsuhhlkhhordgtohhmpdhrtghpthhtohepuhdqsghoohhtsehlihhsth
- hsrdguvghngidruggv
-X-ME-Proxy: <xmx:-Ef8aalyji7XjDt1P3FPxZeD9avhVZjj4OnoVzuGQZOwT3UrOvsx7A>
- <xmx:-Ef8abTdt7wqcnqwTQ-DDTRA1X25AMj_hfiVEZSL3Mv53LQJXJi32w>
- <xmx:-Ef8aYNr_1Of32mbBNjygpODUt9VfY11VZ5w5BmzsnyzfgK0CqEg7g>
- <xmx:-Ef8aUWMB30pRybsXTDC5z3osRbCkhI71_s5lRcnEvzfM-uy_cwKHA>
- <xmx:-Ef8aVu7twYDzsSy4iz5CUcGfoq7q1NL7LfEAE8Pk5S0XwZTkhy6HjoK>
+ gurhephfffufggtgfgkfhfjgfvvefosehtjeertdertdejnecuhfhrohhmpeflrghnnhgv
+ ucfirhhunhgruhcuoehjsehjrghnnhgruhdrnhgvtheqnecuggftrfgrthhtvghrnhepve
+ ekgeduheegtdekvdeifeegkeekledujeelkeevhedvvdejtdeuveekffffheelnecuffho
+ mhgrihhnpeguvghvihgtvghtrhgvvgdrohhrghenucevlhhushhtvghrufhiiigvpedtne
+ curfgrrhgrmhepmhgrihhlfhhrohhmpehjsehjrghnnhgruhdrnhgvthdpnhgspghrtghp
+ thhtohepgedpmhhouggvpehsmhhtphhouhhtpdhrtghpthhtohepkhgvthhtvghnihhsse
+ hophgvnhgsshgurdhorhhgpdhrtghpthhtohepjhesjhgrnhhnrghurdhnvghtpdhrtghp
+ thhtohepthhrihhniheskhhonhhsuhhlkhhordgtohhmpdhrtghpthhtohepuhdqsghooh
+ htsehlihhsthhsrdguvghngidruggv
+X-ME-Proxy: <xmx:-0f8ae18j387onAVRVV6wPp_ywYPtjrox2ihq-xUBgetwyspmIHFeA>
+ <xmx:-0f8aahUEph-M68P6MKCYRfYpHqM5RZNEm-ZiMrFubY191J2Utt43A>
+ <xmx:-0f8aWdJU0Gb471dnadk9jktq_ssdlU1T0aYK1VPvCG0-KeA2clkdQ>
+ <xmx:-0f8aVneRyngQD4KyuRX3WsPFMe80QT6nuz4rjGTGOpnR2erxFgAtg>
+ <xmx:-0f8aY-BPeJVGih9ko99Inf0AtiiALSOUL2UHjKKwz0PDm_G6zNsWgM4>
 Feedback-ID: i47b949f6:Fastmail
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Thu,
- 7 May 2026 04:06:15 -0400 (EDT)
+ 7 May 2026 04:06:19 -0400 (EDT)
 From: Janne Grunau <j@jannau.net>
-Subject: [PATCH v2 0/3] Switch Apple silicon boards to upstream device
- trees
-Date: Thu, 07 May 2026 10:05:48 +0200
-Message-Id: <20260507-apple-dt-upstream-v2-0-35181f2b0509@jannau.net>
+Date: Thu, 07 May 2026 10:05:50 +0200
+Subject: [PATCH v2 2/3] doc: device-tree-bindings: Remove
+ apple,pinctrl.yaml
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/22NQQrCMBBFr1Jm7cik1YCuvId0MSRTG9E0JGlRS
- u5urFuX78F/f4Uk0UmCc7NClMUlN/kK7a4BM7K/CTpbGVpqNSk6IYfwELQZ55ByFH6itjxQd1Q
- 0iIG6C1EG99qa177y6FKe4nu7WNTX/mqHjv7UFoWE1rLWRmkhy5c7e8/z3kuGvpTyAWmpQFWzA
- AAA
-X-Change-ID: 20260109-apple-dt-upstream-6daf03510fec
+Message-Id: <20260507-apple-dt-upstream-v2-2-35181f2b0509@jannau.net>
+References: <20260507-apple-dt-upstream-v2-0-35181f2b0509@jannau.net>
+In-Reply-To: <20260507-apple-dt-upstream-v2-0-35181f2b0509@jannau.net>
 To: u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>, Mark Kettenis <kettenis@openbsd.org>, 
  Janne Grunau <j@jannau.net>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2633; i=j@jannau.net;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3326; i=j@jannau.net;
  s=yk2025; h=from:subject:message-id;
- bh=I6BDIltjA+pbNoiZ5dxMMU7w3rZmC7Z4gnNGYNwMjJ0=;
- b=owGbwMvMwCW2UNrmdq9+ahrjabUkhsw/7t/2L7rv29xybafW7W2Jq/LNJFwOzdVYaDrfOLy3T
- Lz6fk5DRykLgxgXg6yYIkuS9ssOhtU1ijG1D8Jg5rAygQxh4OIUgIkc9WD4pxhjKS17z8ZQrvVy
- n2hA7yruA6Ed+23PFz44oH0qM1nYkpHhzIbNb6s+B8ibmm/6ZCzfLqTd23F0U26P1UxGvtdzvS4
- zAgA=
+ bh=1DwQsahD0veYEkS23Vs22CE2EqXMsEsJDcqaJ7LFvoI=;
+ b=owGbwMvMwCW2UNrmdq9+ahrjabUkhsw/7t/42+Tnytcv7f/S0Jwt4y7vkxi6YIGehuvC+eK1v
+ Se3+Ct0lLIwiHExyIopsiRpv+xgWF2jGFP7IAxmDisTyBAGLk4BmIiNEiPDEcuVj3jy1rMLRZ7l
+ Y3A5/+7ELp5Pi3TSVPfe+WFffKN7KiPDyzNzXy7bearESVrbjjOv/NmlxM+p8149cNv5dcnisDv
+ qzAA=
 X-Developer-Key: i=j@jannau.net; a=openpgp;
  fpr=8B336A6BE4E5695E89B8532B81E806F586338419
 X-BeenThere: u-boot@lists.denx.de
@@ -120,57 +118,127 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The Linux device trees for Apple silicon devices cover now most of the
-hardware as u-boot's internal device trees for M1 devices. Linux has in
-addition device trees M2 and M1 and M2 Pro/Max/Ultra devices which were
-never added in u-boot.
-The most common use case for u-boot on Apple silicon devices does not
-use DTBs from u-boot but passes runtime modified device trees from an
-earlier boot loader (m1n1).
-This change regresses support for the SPI on M1 and M1 Pro/Max notebooks
-as SPI keyboard support is not in upstream Linux. This regression is in
-my opinion acceptable due to the limited use of u-boot's DTBs for these
-targets.
+Remove outdated apple,pinctrl.yaml. The dts/upstream contains the
+current version of this binding.
 
 Signed-off-by: Janne Grunau <j@jannau.net>
 ---
-Changes in v2:
-- Add CONFIG_OF_UPSTREAM_BUILD_VENDOR=y and
-  CONFIG_OF_UPSTREAM_VENDOR="apple" to build all apple DTBs
-- rebased onto v2026.07-rc1 for Linux v7.0 based DTs in dts/upstream
-- Link to v1: https://patch.msgid.link/20260430-apple-dt-upstream-v1-0-dda66c16e0da@jannau.net
+ .../pinctrl/apple,pinctrl.yaml                     | 106 ---------------------
+ 1 file changed, 106 deletions(-)
 
----
-Janne Grunau (3):
-      doc: board: apple: Mention M2 and M2 Pro/Max/Ultra SoCs
-      doc: device-tree-bindings: Remove apple,pinctrl.yaml
-      arm: dts: Switch Apple silicon devices to dts/upstream
+diff --git a/doc/device-tree-bindings/pinctrl/apple,pinctrl.yaml b/doc/device-tree-bindings/pinctrl/apple,pinctrl.yaml
+deleted file mode 100644
+index d50571affd1..00000000000
+--- a/doc/device-tree-bindings/pinctrl/apple,pinctrl.yaml
++++ /dev/null
+@@ -1,106 +0,0 @@
+-# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
+-%YAML 1.2
+----
+-$id: http://devicetree.org/schemas/pinctrl/apple,pinctrl.yaml#
+-$schema: http://devicetree.org/meta-schemas/core.yaml#
+-
+-title: Apple GPIO controller
+-
+-maintainers:
+-  - Mark Kettenis <kettenis@openbsd.org>
+-
+-description: |
+-  The Apple GPIO controller is a simple combined pin and GPIO
+-  controller present on Apple ARM SoC platforms, including various
+-  iPhone and iPad devices and the "Apple Silicon" Macs.
+-
+-properties:
+-  compatible:
+-    items:
+-      - const: apple,t8103-pinctrl
+-      - const: apple,pinctrl
+-
+-  reg:
+-    maxItems: 1
+-
+-  clocks:
+-    maxItems: 1
+-
+-  gpio-controller: true
+-
+-  '#gpio-cells':
+-    const: 2
+-
+-  gpio-ranges:
+-    maxItems: 1
+-
+-  interrupts:
+-    description: One interrupt for each of the (up to 7) interrupt
+-      groups supported by the controller sorted by interrupt group
+-      number in ascending order.
+-    minItems: 1
+-    maxItems: 7
+-
+-  interrupt-controller: true
+-
+-patternProperties:
+-  '-pins$':
+-    type: object
+-    $ref: pinmux-node.yaml#
+-
+-    properties:
+-      pinmux:
+-        description:
+-          Values are constructed from pin number and alternate function
+-          configuration number using the APPLE_PINMUX() helper macro
+-          defined in include/dt-bindings/pinctrl/apple.h.
+-
+-    required:
+-      - pinmux
+-
+-    additionalProperties: false
+-
+-required:
+-  - compatible
+-  - reg
+-  - gpio-controller
+-  - '#gpio-cells'
+-  - gpio-ranges
+-
+-additionalProperties: false
+-
+-examples:
+-  - |
+-    #include <dt-bindings/interrupt-controller/apple-aic.h>
+-    #include <dt-bindings/pinctrl/apple.h>
+-
+-    soc {
+-      #address-cells = <2>;
+-      #size-cells = <2>;
+-
+-      pinctrl: pinctrl@23c100000 {
+-        compatible = "apple,t8103-pinctrl", "apple,pinctrl";
+-        reg = <0x2 0x3c100000 0x0 0x100000>;
+-        clocks = <&gpio_clk>;
+-
+-        gpio-controller;
+-        #gpio-cells = <2>;
+-        gpio-ranges = <&pinctrl 0 0 212>;
+-
+-        interrupt-controller;
+-        interrupt-parent = <&aic>;
+-        interrupts = <AIC_IRQ 16 IRQ_TYPE_LEVEL_HIGH>,
+-                     <AIC_IRQ 17 IRQ_TYPE_LEVEL_HIGH>,
+-                     <AIC_IRQ 18 IRQ_TYPE_LEVEL_HIGH>,
+-                     <AIC_IRQ 19 IRQ_TYPE_LEVEL_HIGH>,
+-                     <AIC_IRQ 20 IRQ_TYPE_LEVEL_HIGH>,
+-                     <AIC_IRQ 21 IRQ_TYPE_LEVEL_HIGH>,
+-                     <AIC_IRQ 22 IRQ_TYPE_LEVEL_HIGH>;
+-
+-        pcie_pins: pcie-pins {
+-          pinmux = <APPLE_PINMUX(150, 1)>,
+-                   <APPLE_PINMUX(151, 1)>,
+-                   <APPLE_PINMUX(32, 1)>;
+-        };
+-      };
+-    };
 
- arch/arm/Kconfig                                   |    1 +
- arch/arm/dts/Makefile                              |    7 -
- arch/arm/dts/t8103-j274-u-boot.dtsi                |    1 -
- arch/arm/dts/t8103-j274.dts                        |  129 ---
- arch/arm/dts/t8103-j293-u-boot.dtsi                |    1 -
- arch/arm/dts/t8103-j293.dts                        |  116 --
- arch/arm/dts/t8103-j313-u-boot.dtsi                |    1 -
- arch/arm/dts/t8103-j313.dts                        |  111 --
- arch/arm/dts/t8103-j456-u-boot.dtsi                |    1 -
- arch/arm/dts/t8103-j456.dts                        |  117 --
- arch/arm/dts/t8103-j457-u-boot.dtsi                |    1 -
- arch/arm/dts/t8103-j457.dts                        |  105 --
- arch/arm/dts/t8103-jxxx.dtsi                       |  143 ---
- arch/arm/dts/t8103-pmgr.dtsi                       | 1138 --------------------
- arch/arm/dts/t8103-u-boot.dtsi                     |   25 -
- arch/arm/dts/t8103.dtsi                            |  696 ------------
- configs/apple_m1_defconfig                         |    4 +-
- doc/board/apple/m1.rst                             |   15 +-
- .../pinctrl/apple,pinctrl.yaml                     |  106 --
- 19 files changed, 13 insertions(+), 2705 deletions(-)
----
-base-commit: 4433253ecf2041f9362a763bb6cb79960921ac7e
-change-id: 20260109-apple-dt-upstream-6daf03510fec
-
-Best regards,
 -- 
-Janne Grunau <j@jannau.net>
+2.54.0
 
