@@ -4,118 +4,140 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F744CD3427
-	for <u-boot@archiver.kernel.org>; Thu,  7 May 2026 12:29:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C04A0CD343F
+	for <u-boot@archiver.kernel.org>; Thu,  7 May 2026 13:09:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EEE3384AA4;
-	Thu,  7 May 2026 14:29:17 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 341A684A6B;
+	Thu,  7 May 2026 15:09:04 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="vdBAY4Lx";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="cZBciG1N";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 002DF84AA9; Thu,  7 May 2026 14:29:16 +0200 (CEST)
-Received: from BL0PR03CU003.outbound.protection.outlook.com
- (mail-eastusazlp170120007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c101::7])
+ id 263E784A7D; Thu,  7 May 2026 15:09:01 +0200 (CEST)
+Received: from GVXPR05CU001.outbound.protection.outlook.com
+ (mail-swedencentralazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c202::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1F44184A85
- for <u-boot@lists.denx.de>; Thu,  7 May 2026 14:29:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7AC3684A57
+ for <u-boot@lists.denx.de>; Thu,  7 May 2026 15:08:57 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=s-vadapalli@ti.com
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=hS/ZFojVmMz7/ASYqlbL3DyT74rXyK24UTD0By+1ofa/0kkklQCceN4h2HOY3lqQl+L5Ggg2LM2JPGuqwGWaLXQXfhNa0RTh3uZfh7/iEjInprirpvc/OjEJFUNv9RvrfCTp25tNMsUpT4/oLWv9oOkJoRxK4ame/Vfs6/R3kNuXPBaxTZ4ZTdoCNp7U7fRSnXZdbokHSvJGvuRnkYBRQuoU8+wPoUW8Znesz0e9cVRlCH3XXk54J6z9xyoOv7trXOxfTnC6tOpFp55vPonkaJo2V10omuOigSPrTzNqMoV2EPZjHXNsonrZeHLDYVftbV8v8rPb1Ve1rD/sXLZclg==
+ b=HbAMtozkrWQ65Zti4ek7c2pVmVm4CDXGy+bs88mhGTca9k9/fixKtX0zM/pcVARUVfPk+DN0k0uVQGajtRdnbaJV5Qtk4AnBoxfdeAp91LW4UZi2u+IzccbJ5yUGXYYGuWAg3+piAcjH+d7VRO6EK1sJxzXXTRo+THWhtOGgH0c8eBi/dq3LN4D6DKXd/zSOTbU/V9zS1qqwqtt4pLeHA8decCCG/Z5piHOELp+DCI0dDesSdc9jZWun0ens9Zfbw8aapCm94d03muDl1YLwqcKgyYV62+aYnWf1FoMXNXpFJDOS3FDR0mXV0W7ZanG4rpdwPzLGZLvhIpuynPpUNA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=zJmZGNKTCbFcvU0V+63nQlIhiPr44Kq3yoxDY6yVzPA=;
- b=ys1U65ksGWePbcT5Vrbb/OQ7GpCqpp5Sne2NjSbrZ1WfY2kkSL3FA9XT/y9Fc2pS4uRWg+5P0BwMwu04gXPh9tWMBh/aVdetAbYk0PCCwcClHqTMDXimFJryyKeNlh0dKylb87bRZX1o1Ih2+EsQOyYKrCYopUQdfQao9/QPgbKfa/o79F08U/f4uA+y3DEnP54IsqpLP0PlCRjpmv4WCERbvh0VkyrusIUOhTJcHU+6npVz/bWqQmm0yl+jL/5Sk/biPHR2QDnJyDQlBUCnlBfUeK4ue2VVpH6OtJz0mOFWYJLdctCoFsj6JcuLYlzYsiEyTJuqMN7XXMwo1h6OPQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.23.195) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
- dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ bh=MzB/JR9BTJ7ecBVyN8iLMf04P+P2tZZtiBpv1LtNDxs=;
+ b=fAcV/q+Iz8+ZVeOUYF69fddJvXT6SD8a7QBVu885EplBPMKkSLVVZ1kAurp076+G6/6Aa4DvSdIIGJWZZ6LpKORT9aUL31t8y3ZoGmK1kgwdXQoa/4L2XKU5nmq/6OZvbhKhXNSrSmhL5bh8IOJdniW8Tjw/NOwydGpv49bYaP8gIpOSD5xYAIODcLlq2qsZHOIXqFJfTEnAJD92yCTz/uHEEAi80+j+GmGXQkaLanjmmXDgAuOJ+iWfIFeyH6tANVjm6oJpwV8zMJ7kup/mJ2irGoZJYh+rDvV/qP9cWe4qAip00extjpbL83zEeJViNe6fzOwJbrDbF9IbVHvwVA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=zJmZGNKTCbFcvU0V+63nQlIhiPr44Kq3yoxDY6yVzPA=;
- b=vdBAY4LxCs45q//dhlX1tYn4weag1Wz2momcWPLe9S01QQAvTi///RZYhuVb8AnVKczIXlOEk9SJmQ3GXdQQ90rFAmXWWchv9vwFhJM5JGIlwR54tI6Rau9peZUQm+NQDGdvH5za7OfQEN8RRwbAAWf2cWDY/Y4QaO/jNlBegHE=
-Received: from BL0PR02CA0039.namprd02.prod.outlook.com (2603:10b6:207:3d::16)
- by DS4PPFD4164D783.namprd10.prod.outlook.com (2603:10b6:f:fc00::d4c)
+ bh=MzB/JR9BTJ7ecBVyN8iLMf04P+P2tZZtiBpv1LtNDxs=;
+ b=cZBciG1NIeuGUAqSkSOLe931IVMZKH8gpJ1u/0QFQFjC8vRdStVSDhafS9TpYSwJ3Rde0Pm6jK/ZAAeELAkb1sEdiPV0mgPD7aWtusZ1Hf2rFySa5K65pDg7lAIWcZt2jt2jzW/P7RBtdSM7wZYpgSH2102GVLfipVxvMHZGJ6E=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from DBBPR04MB7737.eurprd04.prod.outlook.com (2603:10a6:10:1e5::22)
+ by AS8PR04MB8295.eurprd04.prod.outlook.com (2603:10a6:20b:3b0::16)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9891.15; Thu, 7 May
- 2026 12:29:09 +0000
-Received: from MN1PEPF0000F0E1.namprd04.prod.outlook.com
- (2603:10b6:207:3d:cafe::e9) by BL0PR02CA0039.outlook.office365.com
- (2603:10b6:207:3d::16) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9870.27 via Frontend Transport; Thu,
- 7 May 2026 12:29:08 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.195)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.23.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.23.195; helo=lewvzet201.ext.ti.com; pr=C
-Received: from lewvzet201.ext.ti.com (198.47.23.195) by
- MN1PEPF0000F0E1.mail.protection.outlook.com (10.167.242.39) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9891.9 via Frontend Transport; Thu, 7 May 2026 12:29:08 +0000
-Received: from DLEE200.ent.ti.com (157.170.170.75) by lewvzet201.ext.ti.com
- (10.4.14.104) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Thu, 7 May
- 2026 07:29:08 -0500
-Received: from DLEE207.ent.ti.com (157.170.170.95) by DLEE200.ent.ti.com
- (157.170.170.75) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Thu, 7 May
- 2026 07:29:07 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE207.ent.ti.com
- (157.170.170.95) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37 via Frontend
- Transport; Thu, 7 May 2026 07:29:07 -0500
-Received: from toolbox.dhcp.ti.com (uda0492258.dhcp.ti.com [10.24.73.74])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 647CT4cI3303222;
- Thu, 7 May 2026 07:29:05 -0500
-From: Siddharth Vadapalli <s-vadapalli@ti.com>
-To: <trini@konsulko.com>, <vigneshr@ti.com>, <bb@ti.com>,
- <sparsh-kumar@ti.com>, <p-bhagat@ti.com>
-CC: <u-boot@lists.denx.de>, <srk@ti.com>, <s-vadapalli@ti.com>
-Subject: [PATCH v2] board: ti: am62ax: tifs-rm-cfg/rm-cfg: Update DMA resource
- sharing for CPSW
-Date: Thu, 7 May 2026 18:01:15 +0530
-Message-ID: <20260507123127.1518673-1-s-vadapalli@ti.com>
-X-Mailer: git-send-email 2.51.1
-MIME-Version: 1.0
+ 2026 13:08:54 +0000
+Received: from DBBPR04MB7737.eurprd04.prod.outlook.com
+ ([fe80::5960:fb4b:9313:2b00]) by DBBPR04MB7737.eurprd04.prod.outlook.com
+ ([fe80::5960:fb4b:9313:2b00%3]) with mapi id 15.20.9891.008; Thu, 7 May 2026
+ 13:08:54 +0000
+Message-ID: <dc13566a-b477-4580-8954-0c0f83608ff1@cherry.de>
+Date: Thu, 7 May 2026 15:08:52 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 2/2] binman: x509_cert: add PKCS#11/HSM signing support
+To: Sergio Prado <sergio.prado@e-labworks.com>
+Cc: u-boot@lists.denx.de, trini@konsulko.com, sjg@chromium.org,
+ alpernebiyasak@gmail.com, ilias.apalodimas@linaro.org,
+ marek.vasut+renesas@mailbox.org, sughosh.ganu@arm.com,
+ wolfgang.wallner@at.abb.com, bb@ti.com, y.moog@phytec.de,
+ xypron.glpk@gmx.de, jerome.forissier@arm.com, afd@ti.com,
+ Wojciech.Dubowik@mt.com
+References: <20260423154536.768603-1-sergio.prado@e-labworks.com>
+ <20260423154536.768603-3-sergio.prado@e-labworks.com>
+ <df749b3b-0210-4b31-a4e0-8f7af9084589@cherry.de>
+ <CANu7NGs0=o5H7o=qwoQj5EYMxDtB7_NTus_-18Q1UZBnk3DiuQ@mail.gmail.com>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <CANu7NGs0=o5H7o=qwoQj5EYMxDtB7_NTus_-18Q1UZBnk3DiuQ@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-EOPAttributedMessage: 0
+X-ClientProxiedBy: VI1PR0102CA0059.eurprd01.prod.exchangelabs.com
+ (2603:10a6:803::36) To DBBPR04MB7737.eurprd04.prod.outlook.com
+ (2603:10a6:10:1e5::22)
+MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: MN1PEPF0000F0E1:EE_|DS4PPFD4164D783:EE_
-X-MS-Office365-Filtering-Correlation-Id: 4b133313-7d7e-48fd-1073-08deac343c9c
+X-MS-TrafficTypeDiagnostic: DBBPR04MB7737:EE_|AS8PR04MB8295:EE_
+X-MS-Office365-Filtering-Correlation-Id: ddf52d88-8472-4c97-3a17-08deac39ca79
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|1800799024|82310400026|36860700016|18002099003|56012099003;
-X-Microsoft-Antispam-Message-Info: YRNW7D2QQ74/8BbCeOFsPy6YHl6G1xsYbMIR4Z5jHUQiYLJ/I7u3zXSBRYzh0ojLHxNPllccgO2VFIqjkNu/pzwHD4Stj96RoHz5nGLKOikG17wL+KeIVl4PXlUkZcEIYsUMdFsxdew4zYpQqoX+odVrv+SJmk/vQJ7FbVw7/FbYN16M9If4SWKPZtyaXRga/BouXX94U3z9aHFcqbcJnT1imtuKJixE4mLizigRamrhmrOA238cYUlVMF17FEQDcexcLzFaW4j/MLkvtKq1EB9I/Tv+aVA7QWAkfus91B3Kq/D+1LSwTHKrcLGWhstovP2SDLlnaihQv4ic8ZYb7b0wNZnqArb+rl9w/MT5a9VgoSIBXaQePlJ5Jh38nYvO16RpamrJFzZbcnSFZbF7ZOb+AEERBTpvLzOQz9kDlex3HHh8A0xH4hJqEytBfEeTXY0e+jvwNlb1nvLDkrq1KLo2R3nkkn10yNSLqEAjrezwAK2V+bT91Amn5wagXRAiXJ3UFTqxU7XFFnhk/hwrSrIUlA16Z2tePLQ3yi0GshuQQnmAR+9jxq1WmgIcXXCUayD6yvrXwHzKL+M2XbywjnbhYRWCDN13kulBbHKXHOcdMSCwrE0r6uykzLLSi98Z3S58iS7692jrFT8uv3g2hzwkKX2liQLx3Qzuk2a29vPT9y+TvhVq+3/WTIjUyAIo
-X-Forefront-Antispam-Report: CIP:198.47.23.195; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:lewvzet201.ext.ti.com; PTR:InfoDomainNonexistent;
- CAT:NONE;
- SFS:(13230040)(376014)(1800799024)(82310400026)(36860700016)(18002099003)(56012099003);
+ ARA:13230040|366016|376014|1800799024|7416014|18002099003|22082099003|56012099003;
+X-Microsoft-Antispam-Message-Info: Zq3D7j8GR+CNnEnDd//+yHi+D9LQVCm+qheIPA8tgnm3dJMAqVQfmAE6rHr3vDlY94EgUSOUrm9rqLP6NRcd659xa26QlCr4Q908egEqDJsxKUGRoo1H+rGhBQ8LAy+ERxsUtIKf9olEs4v24QNXvfhFZchifaeO8PofxxP7dSTAZubzTKJLyQFF05Z6EDhNpu5UsJd1BL8spYozuhKV4ZdUeaQTAyjXHgAdfcHRadq3JZz3O9kJtouICLazpRMlnfgyWtK5BYa8sH3k0zTO2adIjUEM7KQWuJZ5PZmfaF0E3GZ99R6+7z/AGNf6BUd5Clp/Gh8B0l70DUV1xvSUZrkgHGdFdOiQY+/RR6a8M8coKbRIx4ufcLj9DckQ4j+Q+1JpuS8P5sHJqBEm3cMwviafmcuQraNqT9GKo5CTDKBF8AG56tM13ijt7v1DkCyIrlsShHXKT+DOjAWe4s2J0FjjX+LAeaSqQLwqQUcem6wQ5h+VPjfsRHK163uDDGR55MV8ZuFNnQhlIkD884HXkHDpvXyQz/L608MR7IwaZXVG3n0Ur0cQXyb5g/WInUpNM5yEtltemhabOiJ0E9Isuk9tWi9tcynv4nUhgdHVo6+QRlLCE6Q0HeMqgDj8FSTtuOqbyMAMpKOX9RS44iNZF+S7N/4VTARlqhpOcbErZLG01JhrlYtaanAjt4c7tD8U
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DBBPR04MB7737.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(376014)(1800799024)(7416014)(18002099003)(22082099003)(56012099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: HENI90azK+DVW5pXU3yELR3+ZM/v50msJO3iCT/SVvlOXOMgdgQ4ZLEEl63qyhCX97lD1ALj5KobSKk9nXlMgWMZR1uqYobMWusV3sNxmJnpxyar6W0BeQSEe0jeCHNELll/EzGIGBDsSZO0HXrbQEMx7ZlArz6P8uPeyszpdMKCR0G2uqQ+rO7v6DQK2kJQVZZrxhad8LKGSyXriCfIcjlqKgS1lsEYMrNgRlhCuI+47NGl/r11jn9W4xhOlXAnvDJ/zGOfxVKxNqy67ygKIQwUF863WTK03IiZ9EMpW4o/T0/wMJv22k0saxyKimYFsWsbSB3z1K3M9F/JfJKtAt3fGcIYli6ECfJ+m2ywXh2s/imxSSjVehcHSTHq1yrPYsphaIoSFm2XjPkeSTOaDg6ey0ZvrqODTjJmS/gkUf0w/H4coV9xOlH+HA9qTFue
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 May 2026 12:29:08.7193 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 4b133313-7d7e-48fd-1073-08deac343c9c
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.195];
- Helo=[lewvzet201.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: MN1PEPF0000F0E1.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS4PPFD4164D783
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?czBrMnhHaGw2bHMwSTh4ZDhrL0pxdUZCZWYyWmNBeW9lUUpwQ0lJeVhpOVU5?=
+ =?utf-8?B?NHlTOEdiL2NISVY5VlFmOXlwLys1Mmk0bmxnMkJZbDZRSnJCKzV1aUwwMTJj?=
+ =?utf-8?B?NHQrUEpLcG9pSkUxekpESjlKZ3FRVU1jOGpTY0o3Wk11RjVPa2Rsd292aTc4?=
+ =?utf-8?B?a1Z1WDZySDZLZ1ZhK1h2L3BPK2tzcGY4OWE4eS9DSG5OTG4yMTd4bVV5M2Y4?=
+ =?utf-8?B?MDdtV1p3UnIydEtWVGhGakVGY1ZvVkk4TTJyRFpoUDBEcUtzSThYVGhmREhq?=
+ =?utf-8?B?MklGQ0R4bjdNK2Y3VWdJazcwMWUrU01PTnE5QkdUYlJwaXo5SWZoV2FFQTd6?=
+ =?utf-8?B?dldJVjNrU1FTTWo0OENDaE1XRVhHbEZSK2dsemN0Q0FjY0VmSUlGZFVzMEpZ?=
+ =?utf-8?B?TzJjZUVUTVBWVThTbkNVRTNZR3hEekdNR0ZWS2pvTEVobUUrR0hHSmJmTkdJ?=
+ =?utf-8?B?V0ZwQ09nbkZUQXR1NERFQndUWnNYUnU3SG8xakFFc0NMdXIzY0hyRTUzTTMr?=
+ =?utf-8?B?dEVacmJoUTBPM0RvWTRWTDFkWDZIelZIL0RId1VoN09lK1ZkSmd1Sjl0Q1Ba?=
+ =?utf-8?B?WEpHaXNJcWlDNitIenVTaHp6OThmdG9HKzlja1lvanNIMXdqdzRuQzF5S1VE?=
+ =?utf-8?B?ckc0ZjFuTVFxYTFEUUFIZzg5bmlhTzRyTTY3N2dFZ0JyemJoYkxsemRNeEQ3?=
+ =?utf-8?B?UGVRcEJEMVV2azZMNFpmb28vNEQyTGkrbnVZZCsvRXFTZDVUZGY1OTRjVnR3?=
+ =?utf-8?B?Y3dnL1FEMlY1Njg5cmdKOEpJV1hUVDhmN2lncE1rWkhCU2JyWFFKSkt3Ykxs?=
+ =?utf-8?B?N000ZGlSVDRJQmVoSHUrdkJaTGMxUE9IOXBYaXpQRC83K2k4MzR3YitGTmdM?=
+ =?utf-8?B?aE42OURFNEI1anBaMnpBL1lETUpJVy9TNjN5QmIyb3ZVVVVsZnlPbTNjckkw?=
+ =?utf-8?B?VVVTdWZab0VKS1ArY3VyVHJvbUZxUEZQS1Q4QXhkNENmdWtWWnhWdjF1Qy9Y?=
+ =?utf-8?B?VHR3K0ZHZUExaTJ0Z28zRzc5K3VWbGw3bnhrTDdCVzZzNmkxVjg0OHB4U1dk?=
+ =?utf-8?B?UkFGTDkwRXRQa1lEZTJ5cGhoNkdQMDBEVGRpdVJtQUhCUk1sbVpMbmxveHpw?=
+ =?utf-8?B?RGRlL2UrV0lPNzZEaWJSb01XR0JXQ3B0SmZWdGpsemNNeFJyeFJOdUxOckFu?=
+ =?utf-8?B?TlM2aTlDU0YyN1FjN3ZxWjA2aW1tOHpRbkNlWHFmNVRlckF1cjN0S1FDVWZs?=
+ =?utf-8?B?K3I3U0tidEtpenpBdVNNN2QrZ1lTM1UzQzVEa3BBc1RmYTIxRzV0ZSttY0Ey?=
+ =?utf-8?B?bk4xVjhUZ081Z2pvVU1laWR1cXJ1YzgrZWp0TE40WmlNQ2pVRUtPL0hPNHkv?=
+ =?utf-8?B?UWFsLzdSeXdHdTlVTjJIeWd6ZUpNVTJITkVVVFlQT2RQdDVPY1VodlI1UGxV?=
+ =?utf-8?B?RHp6WFNJclJHeGxDcFB3bUJHb2tPNlcxcG9hZCtyTzd1VTcxYXRsZXlTYWM1?=
+ =?utf-8?B?aWNhb01XSUZhWkpSdHpqUnpqVzN6MHIwS0V5SEtxb2I1NEZSbE1Fa01SVTFk?=
+ =?utf-8?B?cnZUbllIUmE4Sm9hZzdzQlpaWnhjT1RBMGh5cFNHcTBtMlg3Sm1SS25BMlpy?=
+ =?utf-8?B?eVdyZnF2Qm1VanZXZjFZSlQvckp6RlJGSjlENXA2MFcwSU5YeUsyTlQ5ZEJw?=
+ =?utf-8?B?ZHJsN2ZpS09jblRUdUhvcjFEMmZsMk4vRW1xM3YrNmpCMFVJOW5yTEUzYTlN?=
+ =?utf-8?B?dE9EbkNHS0ZOL3hmS0Z5cnMrcFV3UktBZzJGQkEzVjcvWmVlL0RMVFIwWW1s?=
+ =?utf-8?B?eUlQbE9lUjVXVG9sMkgrVUFTbXBFNUJQNTV6MWZQZ0NaREVuTHVRWExRV1ZC?=
+ =?utf-8?B?Y1VEbGRTYjBLTUI3Wkh5YUwyWnRnWTV5LzNGS1NsWG1PRnRNbEZVYVp5anlF?=
+ =?utf-8?B?QmFVRDdLWWVoKzQySGdtVVBKMkZvdzEwd0JvYkxLZlFvQWxBbmpKWEN3S3pu?=
+ =?utf-8?B?TnBSUTRoNHFKb2prbFVmWnEzaHl2QitBUUhoM0p1N2xiamlvY0JBTjRUaGdR?=
+ =?utf-8?B?dHNQNmZlU3J5R3I4VDNUaVFaSVM2aGRSRnlGa3dMRXJaZFZHaWVXQ1dORWd3?=
+ =?utf-8?B?bGRtWVZqc3B3bjJ1MDgzM21VVHlwM01yMjFoc1RrQVJuanh6aEhMRmV5bzFJ?=
+ =?utf-8?B?TUpJZGJVZnNIcGNtdjgyRlh2dHBQRUtJVUZMbWtiZExtQ2IrLzI2MTdEdFh6?=
+ =?utf-8?B?bzhML1ROYUJMM2ZwUUdvS0FEV3lZc2xHQnZFT1l0ZCtwdmhQVXNHaHMzWkVZ?=
+ =?utf-8?B?WE1VMHozVkhHYVJIcTkyMi92TEVkNHFrUFFBbFRqVDZMMVNrUm8xZz09?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: ddf52d88-8472-4c97-3a17-08deac39ca79
+X-MS-Exchange-CrossTenant-AuthSource: DBBPR04MB7737.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 May 2026 13:08:54.4440 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: yZy1xbgwMe9J3VDstYx7MGvN29bvwTzfLrquAHtwNcFkhVOkgkNqTLcgNB4LJie6kaQVq+1zFBusNQsqaVWYMDGhcmjR9Zc52rY/dVs2YYU=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR04MB8295
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -132,420 +154,107 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The CPSW3G instance of CPSW on AM62AX SoC provides Ethernet functionality.
-Currently, Ethernet is supported on Linux which runs on the A53 core on the
-SoC, by allocating all of the DMA resources associated with CPSW to A53_2.
+Hi Sergio,
 
-In order to enable use-cases where the Ethernet traffic is sent from or
-consumed by various CPU cores on the SoC simultaneously, while at the
-same time, maintaining backward compatibility with the existing use-case
-of A53 being the sole entity that exchanges traffic with CPSW via DMA,
-update the DMA resource sharing scheme on AM62AX SoC to the following:
+On 4/30/26 8:23 PM, Sergio Prado wrote:
+> Hi Quentin,
+> 
+> On 4/28/26 X:XX PM, Quentin Schulz wrote:
+> 
+>> +BINMAN_PKCS11_MODULE
+>> +    Path to the PKCS#11 shared library (.so) for HSM signing. When set,
+> it is
+>> +    passed as ``-a pkcs11-module=<path>`` to binman. Only needed when the
+>> +    module is not already configured via ``openssl.cnf`` or the
+>> +    ``PKCS11_MODULE_PATH`` environment variable. Typically used together
+> with
+>> +    ``BINMAN_PKCS11_URI``::
+>>
+>> OK, but why do we want to have this variable for storing the path to the
+>> module lib instead of using an openssl.cnf?
+> 
+> Agreed. I’ll drop BINMAN_PKCS11_MODULE and rely on external OpenSSL
+> configuration (openssl.cnf) instead.
+> 
+>> Also, this is stating it's for signing boot artifacts with an HSM, but
+>> that isn't true. It won't work with FIT images, which use DT properties
+>> instead (see fit,engine, fit,engine-keydir/key-name-hint.).
+>>
+>> I'm assuming it's possible we want different keys for different boot
+>> artifacts, so this is also a bit too generic of a name?
+> 
+> Good point. I’ll scope this more precisely to X.509 usage. Would
+> BINMAN_X509_PKCS11_URI be appropriate, or do you have a preferred naming
+> convention here?
+> 
 
----------------      --------------   -------------  ----------------
-   Resource              WKUP_R5         MCU_R5            A53_2
----------------      --------------   -------------  ----------------
-TX Channels [8]  =>    4 (Primary)     4 (Primary)     8 (Secondary)
-TX Rings   [64]  =>   32 (Primary)    32 (Primary)    64 (Secondary)
-RX Channels [1]  =>    1 (Primary)     0               1 (Secondary)
-RX Flows   [16]  =>    6 (Primary)    10 (Primary)    16 (Secondary)
+Is this really PKCS11-specific? Is there no other way to get an x509 
+than by PKCS11 or plaintext file? Trying to think about potentially 
+having other providers needing something similar and then setting 
+BINMAN_X509_PKCS11_URI for that would be confusing.
 
-In the absence of primary owners of resources (existing use-case
-where A53 owns all of the CPSW DMA resources), the secondary owner
-can claim all of the resources as its own. For shared use-cases,
-the resources that are not claimed by the primary are communicated
-to the secondary owner allowing it to claim them. This ensures that
-Linux on A53_2 can continue claiming all DMA resources associated
-with CPSW in the absence of primary owners, while at the same time
-providing users the flexibility to share CPSW DMA resources across
-various CPU cores listed above if needed.
+>> +# Serializes concurrent PKCS#11 signing operations. SoftHSM2 and many
+> real
+>> +# HSMs do not support simultaneous logins from multiple threads, so
+> binman's
+>> +# ThreadPoolExecutor would otherwise cause intermittent login failures.
+>> +_pkcs11_lock = threading.Lock()
+>>
+>> Is there really no external mechanism to make sure this cannot happen?
+>> or maybe some sort of session concept?
+>>
+>> binman tests will run on multiple processes (see ConcurrentTestSuite)
+>> when not instructed to run on one thread (via -T 0, used for test
+>> coverage). My worry is whether this is multiprocess safe (hunch is no).
+> 
+> OK. I’ll investigate whether this can be handled externally (e.g. via
+> token/session configuration) or if a more robust approach is needed.
+> 
+>> +    def _pkcs11_use_provider(self):
+>> +        """Return True if the provider API should be used for PKCS#11
+> signing.
+>> +        ...
+>> +        """
+>> +        if self._use_provider is None:
+>> +            out = self.run_cmd('list', '-providers') or ''
+>> +            self._use_provider = 'pkcs11' in out
+>> +        return self._use_provider
+>>
+>> Why force the user to use providers if one is available? Can't they use
+>> an engine even if a pkcs11 provider is available (e.g. you have both
+>> pkcs11 provider support via softhsm2, but only engine support for your
+>> HSM). Isn't this something the user can specify via openssl.cnf?
+> 
+>  From my testing with SoftHSM2:
+> 
+> - Provider-based flow: configuring openssl.cnf is sufficient. OpenSSL
+> dispatches "pkcs11:" URIs via the STORE API without additional CLI
+> arguments.
+> - Engine-based flow: configuring the engine in openssl.cnf alone is not
+> sufficient; "-engine pkcs11 -keyform engine" must still be passed
+> explicitly.
+> 
 
-While Linux has been mentioned as the Operating System running
-on A53, there is no dependency between the Operating System
-running on A53 and its ability to claim the CPSW DMA resources
-listed above.
+Being curious now, I'm wondering if setting the -key to 
+org.openssl.engine:pkcs11:<key> would be enough on OpenSSL 3.x? C.f. 
+https://docs.openssl.org/3.0/man1/openssl/#engine-options
 
-Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
----
+We of course cannot use this when we still support OpenSSL 1.x though.
 
-This patch is based on commit
-3cdd19089f1 Merge tag 'mmc-for-2026.07-rc2' of https://source.denx.de/u-boot/custodians/u-boot-mmc
-of the master branch of U-Boot.
+> I would be fine with supporting provider-based flows only, as it simplifies
+> the implementation and covers my use case (OpenEmbedded integration).
+> However, I’m concerned about compatibility with older distributions where
+> PKCS#11 provider support may not be available by default. What would you
+> recommend in this case?
+> 
 
-v1 of this patch is at:
-https://lore.kernel.org/r/20260224120557.1476390-2-s-vadapalli@ti.com/
-Changes since v1:
-- Rebased patch.
+I'm tempted to say "another person's problem". I was already not happy 
+to contribute support for OpenSSL engines in FIT signing because it's 
+been deprecated for years at that point but I needed it (could have kept 
+it downstream though). We just need to make sure it's not impossible to 
+support if someone really wants it (and it needs to work with OpenSSL 
+1.x I believe, even though it's official EoL you can still buy 
+commercial support for it).
 
- board/ti/am62ax/rm-cfg.yaml      | 108 +++++++++++++++++++++++++++----
- board/ti/am62ax/tifs-rm-cfg.yaml |  94 +++++++++++++++++++++++----
- 2 files changed, 179 insertions(+), 23 deletions(-)
-
-diff --git a/board/ti/am62ax/rm-cfg.yaml b/board/ti/am62ax/rm-cfg.yaml
-index 4e238883b96..36b0049f43a 100644
---- a/board/ti/am62ax/rm-cfg.yaml
-+++ b/board/ti/am62ax/rm-cfg.yaml
-@@ -244,7 +244,7 @@ rm-cfg:
-             subhdr:
-                 magic: 0x7B25
-                 size: 8
--            resasg_entries_size: 1064
-+            resasg_entries_size: 1176
-             reserved: 0
-     resasg_entries:
-         -
-@@ -705,13 +705,25 @@ rm-cfg:
-             reserved: 0
-         -
-             start_resource: 19
--            num_resource: 64
-+            num_resource: 32
-             type: 1937
-             host_id: 12
-             reserved: 0
-         -
-             start_resource: 19
--            num_resource: 64
-+            num_resource: 32
-+            type: 1937
-+            host_id: 36
-+            reserved: 0
-+        -
-+            start_resource: 51
-+            num_resource: 32
-+            type: 1937
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 51
-+            num_resource: 32
-             type: 1937
-             host_id: 30
-             reserved: 0
-@@ -759,13 +771,25 @@ rm-cfg:
-             reserved: 0
-         -
-             start_resource: 118
--            num_resource: 16
-+            num_resource: 6
-             type: 1943
-             host_id: 12
-             reserved: 0
-         -
-             start_resource: 118
--            num_resource: 16
-+            num_resource: 6
-+            type: 1943
-+            host_id: 36
-+            reserved: 0
-+        -
-+            start_resource: 124
-+            num_resource: 10
-+            type: 1943
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 124
-+            num_resource: 10
-             type: 1943
-             host_id: 30
-             reserved: 0
-@@ -825,13 +849,25 @@ rm-cfg:
-             reserved: 0
-         -
-             start_resource: 19
--            num_resource: 8
-+            num_resource: 4
-             type: 1956
-             host_id: 12
-             reserved: 0
-         -
-             start_resource: 19
--            num_resource: 8
-+            num_resource: 4
-+            type: 1956
-+            host_id: 36
-+            reserved: 0
-+        -
-+            start_resource: 23
-+            num_resource: 4
-+            type: 1956
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 23
-+            num_resource: 4
-             type: 1956
-             host_id: 30
-             reserved: 0
-@@ -917,17 +953,29 @@ rm-cfg:
-             start_resource: 19
-             num_resource: 1
-             type: 1963
--            host_id: 30
-+            host_id: 36
-             reserved: 0
-         -
-             start_resource: 19
--            num_resource: 16
-+            num_resource: 6
-             type: 1964
-             host_id: 12
-             reserved: 0
-         -
-             start_resource: 19
--            num_resource: 16
-+            num_resource: 6
-+            type: 1964
-+            host_id: 36
-+            reserved: 0
-+        -
-+            start_resource: 25
-+            num_resource: 10
-+            type: 1964
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 25
-+            num_resource: 10
-             type: 1964
-             host_id: 30
-             reserved: 0
-@@ -1009,6 +1057,12 @@ rm-cfg:
-             type: 12750
-             host_id: 12
-             reserved: 0
-+        -
-+            start_resource: 0
-+            num_resource: 6
-+            type: 12750
-+            host_id: 36
-+            reserved: 0
-         -
-             start_resource: 0
-             num_resource: 6
-@@ -1017,16 +1071,46 @@ rm-cfg:
-             reserved: 0
-         -
-             start_resource: 0
--            num_resource: 8
-+            num_resource: 6
-+            type: 12769
-+            host_id: 36
-+            reserved: 0
-+        -
-+            start_resource: 0
-+            num_resource: 5
-             type: 12810
-             host_id: 12
-             reserved: 0
-+        -
-+            start_resource: 5
-+            num_resource: 3
-+            type: 12810
-+            host_id: 35
-+            reserved: 0
-+        -
-+            start_resource: 5
-+            num_resource: 3
-+            type: 12810
-+            host_id: 36
-+            reserved: 0
-         -
-             start_resource: 12288
--            num_resource: 128
-+            num_resource: 64
-             type: 12813
-             host_id: 12
-             reserved: 0
-+        -
-+            start_resource: 12352
-+            num_resource: 64
-+            type: 12813
-+            host_id: 35
-+            reserved: 0
-+        -
-+            start_resource: 12352
-+            num_resource: 64
-+            type: 12813
-+            host_id: 36
-+            reserved: 0
-         -
-             start_resource: 3072
-             num_resource: 6
-diff --git a/board/ti/am62ax/tifs-rm-cfg.yaml b/board/ti/am62ax/tifs-rm-cfg.yaml
-index 78bbab38bb6..3706fac8664 100644
---- a/board/ti/am62ax/tifs-rm-cfg.yaml
-+++ b/board/ti/am62ax/tifs-rm-cfg.yaml
-@@ -244,7 +244,7 @@ tifs-rm-cfg:
-             subhdr:
-                 magic: 0x7B25
-                 size: 8
--            resasg_entries_size: 880
-+            resasg_entries_size: 976
-             reserved: 0
-     resasg_entries:
-         -
-@@ -585,13 +585,25 @@ tifs-rm-cfg:
-             reserved: 0
-         -
-             start_resource: 19
--            num_resource: 64
-+            num_resource: 32
-             type: 1937
-             host_id: 12
-             reserved: 0
-         -
-             start_resource: 19
--            num_resource: 64
-+            num_resource: 32
-+            type: 1937
-+            host_id: 36
-+            reserved: 0
-+        -
-+            start_resource: 51
-+            num_resource: 32
-+            type: 1937
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 51
-+            num_resource: 32
-             type: 1937
-             host_id: 30
-             reserved: 0
-@@ -639,13 +651,25 @@ tifs-rm-cfg:
-             reserved: 0
-         -
-             start_resource: 118
--            num_resource: 16
-+            num_resource: 6
-             type: 1943
-             host_id: 12
-             reserved: 0
-         -
-             start_resource: 118
--            num_resource: 16
-+            num_resource: 6
-+            type: 1943
-+            host_id: 36
-+            reserved: 0
-+        -
-+            start_resource: 124
-+            num_resource: 10
-+            type: 1943
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 124
-+            num_resource: 10
-             type: 1943
-             host_id: 30
-             reserved: 0
-@@ -705,13 +729,25 @@ tifs-rm-cfg:
-             reserved: 0
-         -
-             start_resource: 19
--            num_resource: 8
-+            num_resource: 4
-             type: 1956
-             host_id: 12
-             reserved: 0
-         -
-             start_resource: 19
--            num_resource: 8
-+            num_resource: 4
-+            type: 1956
-+            host_id: 36
-+            reserved: 0
-+        -
-+            start_resource: 23
-+            num_resource: 4
-+            type: 1956
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 23
-+            num_resource: 4
-             type: 1956
-             host_id: 30
-             reserved: 0
-@@ -797,17 +833,29 @@ tifs-rm-cfg:
-             start_resource: 19
-             num_resource: 1
-             type: 1963
--            host_id: 30
-+            host_id: 36
-             reserved: 0
-         -
-             start_resource: 19
--            num_resource: 16
-+            num_resource: 6
-             type: 1964
-             host_id: 12
-             reserved: 0
-         -
-             start_resource: 19
--            num_resource: 16
-+            num_resource: 6
-+            type: 1964
-+            host_id: 36
-+            reserved: 0
-+        -
-+            start_resource: 25
-+            num_resource: 10
-+            type: 1964
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 25
-+            num_resource: 10
-             type: 1964
-             host_id: 30
-             reserved: 0
-@@ -877,6 +925,12 @@ tifs-rm-cfg:
-             type: 12750
-             host_id: 12
-             reserved: 0
-+        -
-+            start_resource: 0
-+            num_resource: 6
-+            type: 12750
-+            host_id: 36
-+            reserved: 0
-         -
-             start_resource: 0
-             num_resource: 6
-@@ -885,10 +939,28 @@ tifs-rm-cfg:
-             reserved: 0
-         -
-             start_resource: 0
--            num_resource: 8
-+            num_resource: 6
-+            type: 12769
-+            host_id: 36
-+            reserved: 0
-+        -
-+            start_resource: 0
-+            num_resource: 5
-             type: 12810
-             host_id: 12
-             reserved: 0
-+        -
-+            start_resource: 5
-+            num_resource: 3
-+            type: 12810
-+            host_id: 35
-+            reserved: 0
-+        -
-+            start_resource: 5
-+            num_resource: 3
-+            type: 12810
-+            host_id: 36
-+            reserved: 0
-         -
-             start_resource: 3072
-             num_resource: 6
--- 
-2.51.1
-
+Cheers,
+Quentin
