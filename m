@@ -4,95 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9F88CD343F
-	for <u-boot@archiver.kernel.org>; Thu,  7 May 2026 21:12:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 482F4CD37AA
+	for <u-boot@archiver.kernel.org>; Thu,  7 May 2026 22:05:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 60B2284C00;
-	Thu,  7 May 2026 23:12:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 9C75984B86;
+	Fri,  8 May 2026 00:05:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=microchip.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="jWd6sEZT";
+	dkim=pass (2048-bit key; unprotected) header.d=microchip.com header.i=@microchip.com header.b="DI35qpJk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B47E484B9D; Thu,  7 May 2026 23:12:18 +0200 (CEST)
-Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
- [IPv6:2a00:1450:4864:20::634])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id F167584A75; Thu,  7 May 2026 20:44:53 +0200 (CEST)
+Received: from esa.microchip.iphmx.com (esa.microchip.iphmx.com
+ [68.232.153.233])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BDFC084C0B
- for <u-boot@lists.denx.de>; Thu,  7 May 2026 23:12:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-b9d9971d059so206844166b.2
- for <u-boot@lists.denx.de>; Thu, 07 May 2026 14:12:16 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1778188336; cv=none;
- d=google.com; s=arc-20240605;
- b=gE52zRxnkigDXo/b73+jTSlmoGtK4D4i+EgXPgit6wk18hoHhhmRc3usH8O90DmG6R
- /5GBvmNrac6YvYHQEzTa5//BImKZehXoGMOUsQxvA+a+nHCDUjIDpH1lPN9GM+r25Rjz
- wjtuvi5k/80NMCOAg4UKV9Yy9Tt4J8QtWL7AbH7yt98F6CSDVM5VdmKqJ8j2fY+L9sAn
- shXQhN674A9j0OvH3mEHoBdt/gFbM+utcNbk42xmb9wJA328Rscve7D0nzT9XL0UJiu4
- 55/kRbAxhUmKceci/ljzxAWUhIWWqtqTugLuTMpgGv2RDx/RSLf32jYv7N1hGki5ofVI
- f37A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=E0Md/f5qJRx5FgIsN/qo8DQLZpal18EZEZyDN1R19hs=;
- fh=XXcfzCiAuQMJyMuyiaSz7X2bqP/dLoxll3XeZkNPATA=;
- b=VU+bL46rpv0w52cLTiMlDofTxpgFoajiYL/ttTbuwCufKga3OtKENgJrdYi7it93aL
- YtfeId8K03KUHIhM/2xOFAx48f8y6kkSFLrwM/uXn9mf/5jnpRASG95uvy2nZ4mLlFTt
- rlRvXxICR9qQRjrlXDuc5YdYUZ09b/1DBiHsxEkZhybq8r1gkIE9oHjkImVA7KRlBcWS
- +Fwawfrf5CA52DaMD0z5MIm32b4CBpMZWfu/vW4ZDxgCIGgVKH/LKH3MmFYL0pc84BJ9
- PdNjoXbpWewv6Fe8B9TWVY1EQCGVEugzF42Cn4O15hBG0OHrHzQzPg8609g49Ez44ZHq
- Kwtg==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1778188336; x=1778793136; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=E0Md/f5qJRx5FgIsN/qo8DQLZpal18EZEZyDN1R19hs=;
- b=jWd6sEZT5bfOU6eC7H+FV6jeRyDRxi/P1Rz+ovVkElNnRcjJNbofu8Rg83dt1KQEQ1
- vte8yJH+KhqrPjtZqgelHBmfEXHr7Rp65H1H5cMgIIWx94FfiRFn8kwHPxMIPqh8YIRL
- 1NwOd4QrZDk392rJ8fJUwwnvLnJ1VH0TL5Lns=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778188336; x=1778793136;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=E0Md/f5qJRx5FgIsN/qo8DQLZpal18EZEZyDN1R19hs=;
- b=kj4hXFN4w+5b8hxptI9ep6neOJpqiZk14uLPZ6sOAP0ZrLb2tMXTaooxBw0UrYYggG
- Cx/oMbNLI3KFHLMSlCdCw/oYLGXu4T/TVTmjW57iIgsz2FLeiJEKuf+9r9sdjskQ1mw8
- 2GIn6jhDxJc3q5LWHvJKyPwpCPmX3DRjIElf390ObmuJUQHk0edQc8Lv2SKYF1r60OOq
- mkWmuOo6iWLI5oEZS3J6xKas8AMKEx0MDENMJMrR05/8KjPG2nW+Iugz0+6BXxbip+0V
- pBDICAioJA2cEcxSCTHPo+U8NLB7AfL5lQhsGgvwiqJYV8HN4iWmA5kyDEh81XEcBmgy
- 64OA==
-X-Gm-Message-State: AOJu0YxBC7ItSdduMDjfYszDkyHLIRO5fT3DVzKTfzq5y8HCIDapMW8G
- OMUvXEYloSaMo937zz1Y8QVSSSs20QCxcWppy4eGRC69wmMNxh502Qn6X7COxw2jBavTfYpZvLE
- XyiEzwVYuVX1uNcoyM1KDfzkaQf5LCcvtsDKO03mR
-X-Gm-Gg: AeBDieuKmc+BcTD7d3/W7yEMcNHabHW0A1sMICDkj8ubT3W20UjBn7rM7ShvThsgtNr
- BCg2gflYd1P9/WdSW4U45kgtA/cScGKvFanTHErow7foW1aijefEZcR8wFfXRNUKz0at0VqA2Y+
- hRWUoC7XO/L0QBgQQd99GHXLJE8Ploa1J62UYFriKiGWGMAy/8vonEn2XiJL6XQHpP7qdkGqKha
- ocNF8CtDS8vQIjjJOVpfjQGGDPgvBTPXJ630BG5ijxFVZ1Za6OqPK6M+LbEFUihsIkDu3nqhZg8
- cOI3xw==
-X-Received: by 2002:a17:907:cb27:b0:bc2:e449:3665 with SMTP id
- a640c23a62f3a-bc56cd3a9bbmr385624766b.27.1778188336146; Thu, 07 May 2026
- 14:12:16 -0700 (PDT)
+ by phobos.denx.de (Postfix) with ESMTPS id 5494984903
+ for <u-boot@lists.denx.de>; Thu,  7 May 2026 20:44:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=microchip.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=5806bb17a=Charles.Perry@microchip.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=microchip.com; i=@microchip.com; q=dns/txt; s=mchp;
+ t=1778179491; x=1809715491;
+ h=date:from:to:cc:subject:message-id:references:
+ mime-version:content-transfer-encoding:in-reply-to;
+ bh=4lpB/A40bsAJNEDw+fR7RRtEyk0Sq5FVz+FZc0TgGKM=;
+ b=DI35qpJk3qSv9Sl6fNGSvEk5GreoLTq415KdvbQ8NUqW9aVeJNlGxbaW
+ xtG4DQ+kLkejVNGsO3jhL1Vc0U6PpbTg/YSnAX/r1XqIjH5pJbjF0zsFp
+ JLcM0LwCrJzKYel08WLsVSUpAYmGMXLkw7LVBhj6J+InxgUOp2pLOZTT/
+ Z1Z8SOLsRgVrKae3C3VAIXtz+HI0ZjHJPyUTISioiU0heQhjc+QWCoTdz
+ r+JV/ZNEDTIW/Ku3sr5kuntOi3Io91QGMIS98dm4rLvFyr/NRXApIZ3CI
+ MsWhTA820pWPYYNDC3vILfx7YuTdZqv9cZzkEJOaSP84PN1RbzTETwye1 A==;
+X-CSE-ConnectionGUID: ApoweLVFTGCw0ULOu3TX1w==
+X-CSE-MsgGUID: QVrLziF5Qs2TEqm1V7WKNQ==
+X-IronPort-AV: E=Sophos;i="6.23,222,1770620400"; d="scan'208";a="288561387"
+X-Amp-Result: SKIPPED(no attachment in message)
+Received: from unknown (HELO email.microchip.com) ([170.129.1.10])
+ by esa5.microchip.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 07 May 2026 11:44:49 -0700
+Received: from chn-vm-ex01.mchp-main.com (10.10.87.71) by
+ chn-vm-ex4.mchp-main.com (10.10.87.33) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.2.2562.37; Thu, 7 May 2026 11:44:48 -0700
+Received: from bby-cbu-swbuild03.eng.microchip.com (10.10.85.11) by
+ chn-vm-ex01.mchp-main.com (10.10.85.143) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.58 via Frontend Transport; Thu, 7 May 2026 11:44:48 -0700
+Date: Thu, 7 May 2026 11:44:46 -0700
+From: Charles Perry <charles.perry@microchip.com>
+To: Quentin Schulz <quentin.schulz@cherry.de>
+CC: Charles Perry <charles.perry@microchip.com>, <u-boot@lists.denx.de>, "Tom
+ Rini" <trini@konsulko.com>, Eoin Dickson <eoin.dickson@microchip.com>,
+ "Yegor
+ Yefremov" <yegorslists@googlemail.com>, Rasmus Villemoes <ravi@prevas.dk>,
+ Philip Molloy <philip.molloy@analog.com>, Michael Trimarchi
+ <michael@amarulasolutions.com>, Dan Carpenter <dan.carpenter@linaro.org>,
+ Michal Simek <michal.simek@amd.com>, Tanmay Kathpalia
+ <tanmay.kathpalia@altera.com>
+Subject: Re: [PATCH] gpio: Correct dependencies for MCP230xx
+Message-ID: <afzdng8tTi+K3RDd@bby-cbu-swbuild03.eng.microchip.com>
+References: <20260505133427.2647028-1-charles.perry@microchip.com>
+ <aaab90be-cef8-4ef7-a355-62557f8459ea@cherry.de>
+ <1762aa65-b2a6-455b-9431-2f4433d07788@cherry.de>
 MIME-Version: 1.0
-References: <20260507120735.310325-1-ludwig.nussel@siemens.com>
- <20260507140624.v3.2.2405ba52fddd2e9ff1bbc24585e1e3140f660637@changeid>
-In-Reply-To: <20260507140624.v3.2.2405ba52fddd2e9ff1bbc24585e1e3140f660637@changeid>
-From: Simon Glass <sjg@chromium.org>
-Date: Thu, 7 May 2026 15:12:03 -0600
-X-Gm-Features: AVHnY4IbtwakucH5Wl6t_OS7_Z-ZRWH6NyzVMYS9Z8mirn1AwoWT1W7BHyQ7m3c
-Message-ID: <CAFLszTgcLUAYSUzUQfdzHRnBsFuwDGD3LYf3-qHU8bp-BbWUQQ@mail.gmail.com>
-Subject: Re: [PATCH v3 2/4] mkimage: define log_err and log_info
-To: ludwig.nussel@siemens.com
-Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <1762aa65-b2a6-455b-9431-2f4433d07788@cherry.de>
+X-Mailman-Approved-At: Fri, 08 May 2026 00:05:04 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -109,46 +91,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ludwig,
+On Thu, May 07, 2026 at 06:53:22PM +0200, Quentin Schulz wrote:
+> On 5/7/26 6:51 PM, Quentin Schulz wrote:
+> > Hi Charles,
+> > 
+> > On 5/5/26 3:34 PM, Charles Perry wrote:
+> > > [You don't often get email from charles.perry@microchip.com. Learn
+> > > why this is important at
+> > > https://aka.ms/LearnAboutSenderIdentification ]
+> > > 
+> > > This driver depends on DM_I2C and DM_SPI, add it.
+> > > 
+> > 
+> > Wondering if we shouldn't split that driver in two symbols, one for I2C
+> > and one for SPI such that you don't need both if you only have a device
+> > over I2C/SPI.
+> > 
+> 
+> Just want to clarify that this is "it would be nice if we could do X", this
+> is not a requirement though. The immediate issue is you cannot build this
+> driver without DM_I2C or DM_SPI not set, so this patch is fine with the
+> small change requested below.
+> 
 
-On 2026-05-07T12:06:22, Ludwig Nussel <ludwig.nussel@siemens.com> wrote:
-> mkimage: define log_err and log_info
->
-> Define log_err and log_info centrally in mkimage.h so any file used in
-> this context benefits from it.
->
-> This patch is in preparation for a change in image-fit-sig.c in the
-> next patch.
->
-> Signed-off-by: Ludwig Nussel <ludwig.nussel@siemens.com>
->
-> boot/image-pre-load.c | 3 ---
->  tools/mkimage.h       | 5 +++++
->  2 files changed, 5 insertions(+), 3 deletions(-)
+Ok, I won't take on this refactoring task but if anyone looks into this, it
+might be relevant to use a "regmap".
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+> > > Signed-off-by: Charles Perry <charles.perry@microchip.com>
+> > > ---
+> > >   drivers/gpio/Kconfig | 2 +-
+> > >   1 file changed, 1 insertion(+), 1 deletion(-)
+> > > 
+> > > diff --git a/drivers/gpio/Kconfig b/drivers/gpio/Kconfig
+> > > index 37cb672697c0..3ced3fb32f24 100644
+> > > --- a/drivers/gpio/Kconfig
+> > > +++ b/drivers/gpio/Kconfig
+> > > @@ -309,7 +309,7 @@ config MAX77663_GPIO
+> > > 
+> > >   config MCP230XX_GPIO
+> > >          bool "MCP230XX GPIO driver"
+> > > -       depends on DM
+> > > +       depends on DM && DM_I2C && DM_SPI
+> > >          help
+> > >            Support for Microchip's MCP230XX I2C connected GPIO devices.
+> > 
+> > Can you update the help text to say this supports SPI-connected GPIO
+> > devices as well (the SPI-connected devices are listed below, outside the
+> > git context but if someone doesn't know better, it'll be difficult to
+> > figure this out)?
+> > 
 
-> diff --git a/tools/mkimage.h b/tools/mkimage.h
-> @@ -31,6 +31,11 @@
->  #endif /* MKIMAGE_DEBUG */
->
->  #define log_debug(fmt, args...)      debug(fmt, ##args)
-> +#define log_info(fmt, args...)       printf(fmt, ##args)
-> +/* can't use stderr here as that's unbuffered and would produce
-> + * output different from u-boot's console
-> + */
-> +#define log_err(fmt, args...)        printf(fmt, ##args)
+Ok, will send a v2.
 
-The comment is a bit off. These macros are only active under
-USE_HOSTCC, where there is no console, so the real concern is that
-stderr would interleave out of order with stdout. Something like:
+Thanks,
+Charles
 
-   /*
-    * Use stdout rather than stderr so error messages stay
-    * interleaved with normal output in the order produced.
-    */
-
-Also kernel comment style puts the opening /* on its own line.
-
-Regards,
-Simon
