@@ -4,140 +4,140 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C04A0CD343F
-	for <u-boot@archiver.kernel.org>; Thu,  7 May 2026 13:09:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D48E5CD343F
+	for <u-boot@archiver.kernel.org>; Thu,  7 May 2026 13:19:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 341A684A6B;
-	Thu,  7 May 2026 15:09:04 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3133884A75;
+	Thu,  7 May 2026 15:19:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="cZBciG1N";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="Wyx+fcuN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 263E784A7D; Thu,  7 May 2026 15:09:01 +0200 (CEST)
-Received: from GVXPR05CU001.outbound.protection.outlook.com
- (mail-swedencentralazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c202::7])
+ id E518584A7D; Thu,  7 May 2026 15:19:20 +0200 (CEST)
+Received: from AM0PR02CU008.outbound.protection.outlook.com
+ (mail-westeuropeazlp170130006.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::6])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7AC3684A57
- for <u-boot@lists.denx.de>; Thu,  7 May 2026 15:08:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A8D3684A6D
+ for <u-boot@lists.denx.de>; Thu,  7 May 2026 15:19:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=cherry.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=quentin.schulz@cherry.de
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=HbAMtozkrWQ65Zti4ek7c2pVmVm4CDXGy+bs88mhGTca9k9/fixKtX0zM/pcVARUVfPk+DN0k0uVQGajtRdnbaJV5Qtk4AnBoxfdeAp91LW4UZi2u+IzccbJ5yUGXYYGuWAg3+piAcjH+d7VRO6EK1sJxzXXTRo+THWhtOGgH0c8eBi/dq3LN4D6DKXd/zSOTbU/V9zS1qqwqtt4pLeHA8decCCG/Z5piHOELp+DCI0dDesSdc9jZWun0ens9Zfbw8aapCm94d03muDl1YLwqcKgyYV62+aYnWf1FoMXNXpFJDOS3FDR0mXV0W7ZanG4rpdwPzLGZLvhIpuynPpUNA==
+ b=PNVE8sX9oB51RnUPxe9KIWLgeC67jUn5eOQOzW5Yf2jJQ6w3tFEEvIStVU3ScjH0ap9eampqAsMf8wzpUv3hdlQEYuXGG/llgqBpVrnqlS+ZmTuTcUnRbB3NpyGNRPBFxaBg9wEGxVQy7l2F/dAqZkMyEJ0bNd4qGo5L/x6IjE7BizOECC01ZrA0Gdc8WvTXv8M7ZYCeR7LIMqQD9fbc7NDSBPqZnMmC+XRGqudxZmNDoRJea7HcVYCeWakgu0RALhcK9mN2NpV6GWGWaZ+E0q7hTphTegHlXMR6hOtXeLkqwWxj1Yz9I9T4OzbNUU+5eZTmQGEvkkM+nzTQRkGcBw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=MzB/JR9BTJ7ecBVyN8iLMf04P+P2tZZtiBpv1LtNDxs=;
- b=fAcV/q+Iz8+ZVeOUYF69fddJvXT6SD8a7QBVu885EplBPMKkSLVVZ1kAurp076+G6/6Aa4DvSdIIGJWZZ6LpKORT9aUL31t8y3ZoGmK1kgwdXQoa/4L2XKU5nmq/6OZvbhKhXNSrSmhL5bh8IOJdniW8Tjw/NOwydGpv49bYaP8gIpOSD5xYAIODcLlq2qsZHOIXqFJfTEnAJD92yCTz/uHEEAi80+j+GmGXQkaLanjmmXDgAuOJ+iWfIFeyH6tANVjm6oJpwV8zMJ7kup/mJ2irGoZJYh+rDvV/qP9cWe4qAip00extjpbL83zEeJViNe6fzOwJbrDbF9IbVHvwVA==
+ bh=oyBBZG0X8QCHRLj+VXl0bUEW/V5MGj+F0y8sVPvf6Zc=;
+ b=R1tHxJTbTMjzJof6t5jiis6zOlGxDjeHUwQFoLfaxdT6dEYRRHNUMYSqAzph+sERIjFDf48lXTYya0apfr1gLFNAthUQN0xHPoXhKLxblnwHX1x1O8/WkpQ1Nx1xogPeErTb6crKlvSAtKx5MGYRwYttxgKZ9LzkxUi7/4GSWYbvN6xiu+cx2ocAq5FfYLHeQxkenrVMqNR4SI48Srnwx3kvx4y/DFAW4R78ni7pexdyncUSjl5x6AbdM+gIIsR6ULRXFl6pF9kRic5EylImxM24aUqJe5uK0LL1eiF12kei5Elqj9hBPRraRXltE1+9vA0njDHwQr07Xs3Q0jRW8A==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
  dkim=pass header.d=cherry.de; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=MzB/JR9BTJ7ecBVyN8iLMf04P+P2tZZtiBpv1LtNDxs=;
- b=cZBciG1NIeuGUAqSkSOLe931IVMZKH8gpJ1u/0QFQFjC8vRdStVSDhafS9TpYSwJ3Rde0Pm6jK/ZAAeELAkb1sEdiPV0mgPD7aWtusZ1Hf2rFySa5K65pDg7lAIWcZt2jt2jzW/P7RBtdSM7wZYpgSH2102GVLfipVxvMHZGJ6E=
+ bh=oyBBZG0X8QCHRLj+VXl0bUEW/V5MGj+F0y8sVPvf6Zc=;
+ b=Wyx+fcuNCFuJqVFMP5S2Y5rAWHg2N73q3op8iAXGnOfrgrDo+brHFjepuw+g7jVoFXian239Qih3mx5QxsHnhbgqD9wVP5/PirfsM5rjPama3zHqDUgc7ONn6qZSoRI/9UBNxEeS6zZV7VVRWZDbQKcABielurZP9GcWbztAwAk=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=cherry.de;
 Received: from DBBPR04MB7737.eurprd04.prod.outlook.com (2603:10a6:10:1e5::22)
- by AS8PR04MB8295.eurprd04.prod.outlook.com (2603:10a6:20b:3b0::16)
+ by AS8PR04MB8296.eurprd04.prod.outlook.com (2603:10a6:20b:3f2::23)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9891.15; Thu, 7 May
- 2026 13:08:54 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9891.18; Thu, 7 May
+ 2026 13:19:15 +0000
 Received: from DBBPR04MB7737.eurprd04.prod.outlook.com
  ([fe80::5960:fb4b:9313:2b00]) by DBBPR04MB7737.eurprd04.prod.outlook.com
  ([fe80::5960:fb4b:9313:2b00%3]) with mapi id 15.20.9891.008; Thu, 7 May 2026
- 13:08:54 +0000
-Message-ID: <dc13566a-b477-4580-8954-0c0f83608ff1@cherry.de>
-Date: Thu, 7 May 2026 15:08:52 +0200
+ 13:19:15 +0000
+Message-ID: <610b19bb-3282-4062-a3f5-3071c69dbedb@cherry.de>
+Date: Thu, 7 May 2026 15:19:13 +0200
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 2/2] binman: x509_cert: add PKCS#11/HSM signing support
-To: Sergio Prado <sergio.prado@e-labworks.com>
-Cc: u-boot@lists.denx.de, trini@konsulko.com, sjg@chromium.org,
- alpernebiyasak@gmail.com, ilias.apalodimas@linaro.org,
+Subject: Re: [PATCH v3 1/2] binman: bintool: add extra_env parameter to run_cmd
+To: Simon Glass <sjg@chromium.org>
+Cc: Sergio Prado <sergio.prado@e-labworks.com>, u-boot@lists.denx.de,
+ trini@konsulko.com, alpernebiyasak@gmail.com, ilias.apalodimas@linaro.org,
  marek.vasut+renesas@mailbox.org, sughosh.ganu@arm.com,
  wolfgang.wallner@at.abb.com, bb@ti.com, y.moog@phytec.de,
  xypron.glpk@gmx.de, jerome.forissier@arm.com, afd@ti.com,
  Wojciech.Dubowik@mt.com
 References: <20260423154536.768603-1-sergio.prado@e-labworks.com>
- <20260423154536.768603-3-sergio.prado@e-labworks.com>
- <df749b3b-0210-4b31-a4e0-8f7af9084589@cherry.de>
- <CANu7NGs0=o5H7o=qwoQj5EYMxDtB7_NTus_-18Q1UZBnk3DiuQ@mail.gmail.com>
+ <20260423154536.768603-2-sergio.prado@e-labworks.com>
+ <491f7007-0574-4fa5-897c-59002c7dcaf6@cherry.de>
+ <CAFLszThW0u0SrntCfXFi083petNmszVmSjNgXFc87a38tHyx1Q@mail.gmail.com>
 Content-Language: en-US
 From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <CANu7NGs0=o5H7o=qwoQj5EYMxDtB7_NTus_-18Q1UZBnk3DiuQ@mail.gmail.com>
+In-Reply-To: <CAFLszThW0u0SrntCfXFi083petNmszVmSjNgXFc87a38tHyx1Q@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: VI1PR0102CA0059.eurprd01.prod.exchangelabs.com
- (2603:10a6:803::36) To DBBPR04MB7737.eurprd04.prod.outlook.com
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: VI1PR0102CA0055.eurprd01.prod.exchangelabs.com
+ (2603:10a6:803::32) To DBBPR04MB7737.eurprd04.prod.outlook.com
  (2603:10a6:10:1e5::22)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DBBPR04MB7737:EE_|AS8PR04MB8295:EE_
-X-MS-Office365-Filtering-Correlation-Id: ddf52d88-8472-4c97-3a17-08deac39ca79
+X-MS-TrafficTypeDiagnostic: DBBPR04MB7737:EE_|AS8PR04MB8296:EE_
+X-MS-Office365-Filtering-Correlation-Id: 1f0f8af1-17ec-4fd0-7b32-08deac3b3cb9
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|366016|376014|1800799024|7416014|18002099003|22082099003|56012099003;
-X-Microsoft-Antispam-Message-Info: Zq3D7j8GR+CNnEnDd//+yHi+D9LQVCm+qheIPA8tgnm3dJMAqVQfmAE6rHr3vDlY94EgUSOUrm9rqLP6NRcd659xa26QlCr4Q908egEqDJsxKUGRoo1H+rGhBQ8LAy+ERxsUtIKf9olEs4v24QNXvfhFZchifaeO8PofxxP7dSTAZubzTKJLyQFF05Z6EDhNpu5UsJd1BL8spYozuhKV4ZdUeaQTAyjXHgAdfcHRadq3JZz3O9kJtouICLazpRMlnfgyWtK5BYa8sH3k0zTO2adIjUEM7KQWuJZ5PZmfaF0E3GZ99R6+7z/AGNf6BUd5Clp/Gh8B0l70DUV1xvSUZrkgHGdFdOiQY+/RR6a8M8coKbRIx4ufcLj9DckQ4j+Q+1JpuS8P5sHJqBEm3cMwviafmcuQraNqT9GKo5CTDKBF8AG56tM13ijt7v1DkCyIrlsShHXKT+DOjAWe4s2J0FjjX+LAeaSqQLwqQUcem6wQ5h+VPjfsRHK163uDDGR55MV8ZuFNnQhlIkD884HXkHDpvXyQz/L608MR7IwaZXVG3n0Ur0cQXyb5g/WInUpNM5yEtltemhabOiJ0E9Isuk9tWi9tcynv4nUhgdHVo6+QRlLCE6Q0HeMqgDj8FSTtuOqbyMAMpKOX9RS44iNZF+S7N/4VTARlqhpOcbErZLG01JhrlYtaanAjt4c7tD8U
+ ARA:13230040|7416014|376014|1800799024|366016|22082099003|18002099003|56012099003;
+X-Microsoft-Antispam-Message-Info: jDir1zORRicG/9JnnWkxHiOW+Y4pT/8zOnHgspeW76t1X3itusgMN+1lcbaQOdawUfAJirlOpXGsFgzdVti1wVdjZCAc9IFcqr1W3goWbI11OWA8zh717JYJnRSvz17VWRi+sb9nm3FAZ5qfUsV3O9bnPEDaqLMFE35z/I6cxeP7BvfKzXp0JDvnnTnK7evCDdDaZ7gdLu0l4Ix/KojKeuv+pSU5uiFIsaqEadEhRHeyT2Z+dhIrPBO01DzHJ7RM+M1qe7bt424NEOiUICLd9wyj4ppetfmkO0cWoeR1IxEBK5XWOWTNE8hOByYj0lf/D8G6JE6EVoitwNy6fzk2UjdeBxvtO9sRVv01z3of9uEXiPhkXg0OEaqeOlvw9u9v0KzPdgVYSG/SFZsxmlks6an6X/nq67LHmOd1hjt2ExRIVQk2NaxtVVBXhIZGCmlf+zY1CkvSoRFWElgDsmlPh3Zpc1jvxK0+5pgDbiarnabacIWttalRE9E0SBJ+3HdJAUg4y0oZY0Yrx/N5JyY79CosVQbAh1ra7ZhUcgPo6kqxITIYBSw1MUxBVgbBG/gXyFClAceMJzb1FlRYbnGv7fVKfeFPSypjj7lmAUljjfRJ2WxeugY3DF0hVIhXSwrl4YG6kCUOgO/IPZ7z6TPmVW1dW23gp9I6YPmHjCJ+IIKSDfILsJpZUpjXeWhDbk2w
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:DBBPR04MB7737.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(376014)(1800799024)(7416014)(18002099003)(22082099003)(56012099003);
+ SFS:(13230040)(7416014)(376014)(1800799024)(366016)(22082099003)(18002099003)(56012099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?czBrMnhHaGw2bHMwSTh4ZDhrL0pxdUZCZWYyWmNBeW9lUUpwQ0lJeVhpOVU5?=
- =?utf-8?B?NHlTOEdiL2NISVY5VlFmOXlwLys1Mmk0bmxnMkJZbDZRSnJCKzV1aUwwMTJj?=
- =?utf-8?B?NHQrUEpLcG9pSkUxekpESjlKZ3FRVU1jOGpTY0o3Wk11RjVPa2Rsd292aTc4?=
- =?utf-8?B?a1Z1WDZySDZLZ1ZhK1h2L3BPK2tzcGY4OWE4eS9DSG5OTG4yMTd4bVV5M2Y4?=
- =?utf-8?B?MDdtV1p3UnIydEtWVGhGakVGY1ZvVkk4TTJyRFpoUDBEcUtzSThYVGhmREhq?=
- =?utf-8?B?MklGQ0R4bjdNK2Y3VWdJazcwMWUrU01PTnE5QkdUYlJwaXo5SWZoV2FFQTd6?=
- =?utf-8?B?dldJVjNrU1FTTWo0OENDaE1XRVhHbEZSK2dsemN0Q0FjY0VmSUlGZFVzMEpZ?=
- =?utf-8?B?TzJjZUVUTVBWVThTbkNVRTNZR3hEekdNR0ZWS2pvTEVobUUrR0hHSmJmTkdJ?=
- =?utf-8?B?V0ZwQ09nbkZUQXR1NERFQndUWnNYUnU3SG8xakFFc0NMdXIzY0hyRTUzTTMr?=
- =?utf-8?B?dEVacmJoUTBPM0RvWTRWTDFkWDZIelZIL0RId1VoN09lK1ZkSmd1Sjl0Q1Ba?=
- =?utf-8?B?WEpHaXNJcWlDNitIenVTaHp6OThmdG9HKzlja1lvanNIMXdqdzRuQzF5S1VE?=
- =?utf-8?B?ckc0ZjFuTVFxYTFEUUFIZzg5bmlhTzRyTTY3N2dFZ0JyemJoYkxsemRNeEQ3?=
- =?utf-8?B?UGVRcEJEMVV2azZMNFpmb28vNEQyTGkrbnVZZCsvRXFTZDVUZGY1OTRjVnR3?=
- =?utf-8?B?Y3dnL1FEMlY1Njg5cmdKOEpJV1hUVDhmN2lncE1rWkhCU2JyWFFKSkt3Ykxs?=
- =?utf-8?B?N000ZGlSVDRJQmVoSHUrdkJaTGMxUE9IOXBYaXpQRC83K2k4MzR3YitGTmdM?=
- =?utf-8?B?aE42OURFNEI1anBaMnpBL1lETUpJVy9TNjN5QmIyb3ZVVVVsZnlPbTNjckkw?=
- =?utf-8?B?VVVTdWZab0VKS1ArY3VyVHJvbUZxUEZQS1Q4QXhkNENmdWtWWnhWdjF1Qy9Y?=
- =?utf-8?B?VHR3K0ZHZUExaTJ0Z28zRzc5K3VWbGw3bnhrTDdCVzZzNmkxVjg0OHB4U1dk?=
- =?utf-8?B?UkFGTDkwRXRQa1lEZTJ5cGhoNkdQMDBEVGRpdVJtQUhCUk1sbVpMbmxveHpw?=
- =?utf-8?B?RGRlL2UrV0lPNzZEaWJSb01XR0JXQ3B0SmZWdGpsemNNeFJyeFJOdUxOckFu?=
- =?utf-8?B?TlM2aTlDU0YyN1FjN3ZxWjA2aW1tOHpRbkNlWHFmNVRlckF1cjN0S1FDVWZs?=
- =?utf-8?B?K3I3U0tidEtpenpBdVNNN2QrZ1lTM1UzQzVEa3BBc1RmYTIxRzV0ZSttY0Ey?=
- =?utf-8?B?bk4xVjhUZ081Z2pvVU1laWR1cXJ1YzgrZWp0TE40WmlNQ2pVRUtPL0hPNHkv?=
- =?utf-8?B?UWFsLzdSeXdHdTlVTjJIeWd6ZUpNVTJITkVVVFlQT2RQdDVPY1VodlI1UGxV?=
- =?utf-8?B?RHp6WFNJclJHeGxDcFB3bUJHb2tPNlcxcG9hZCtyTzd1VTcxYXRsZXlTYWM1?=
- =?utf-8?B?aWNhb01XSUZhWkpSdHpqUnpqVzN6MHIwS0V5SEtxb2I1NEZSbE1Fa01SVTFk?=
- =?utf-8?B?cnZUbllIUmE4Sm9hZzdzQlpaWnhjT1RBMGh5cFNHcTBtMlg3Sm1SS25BMlpy?=
- =?utf-8?B?eVdyZnF2Qm1VanZXZjFZSlQvckp6RlJGSjlENXA2MFcwSU5YeUsyTlQ5ZEJw?=
- =?utf-8?B?ZHJsN2ZpS09jblRUdUhvcjFEMmZsMk4vRW1xM3YrNmpCMFVJOW5yTEUzYTlN?=
- =?utf-8?B?dE9EbkNHS0ZOL3hmS0Z5cnMrcFV3UktBZzJGQkEzVjcvWmVlL0RMVFIwWW1s?=
- =?utf-8?B?eUlQbE9lUjVXVG9sMkgrVUFTbXBFNUJQNTV6MWZQZ0NaREVuTHVRWExRV1ZC?=
- =?utf-8?B?Y1VEbGRTYjBLTUI3Wkh5YUwyWnRnWTV5LzNGS1NsWG1PRnRNbEZVYVp5anlF?=
- =?utf-8?B?QmFVRDdLWWVoKzQySGdtVVBKMkZvdzEwd0JvYkxLZlFvQWxBbmpKWEN3S3pu?=
- =?utf-8?B?TnBSUTRoNHFKb2prbFVmWnEzaHl2QitBUUhoM0p1N2xiamlvY0JBTjRUaGdR?=
- =?utf-8?B?dHNQNmZlU3J5R3I4VDNUaVFaSVM2aGRSRnlGa3dMRXJaZFZHaWVXQ1dORWd3?=
- =?utf-8?B?bGRtWVZqc3B3bjJ1MDgzM21VVHlwM01yMjFoc1RrQVJuanh6aEhMRmV5bzFJ?=
- =?utf-8?B?TUpJZGJVZnNIcGNtdjgyRlh2dHBQRUtJVUZMbWtiZExtQ2IrLzI2MTdEdFh6?=
- =?utf-8?B?bzhML1ROYUJMM2ZwUUdvS0FEV3lZc2xHQnZFT1l0ZCtwdmhQVXNHaHMzWkVZ?=
- =?utf-8?B?WE1VMHozVkhHYVJIcTkyMi92TEVkNHFrUFFBbFRqVDZMMVNrUm8xZz09?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?RzV4Y1RlK21vb3BXWGliTXFQOFluWjh0Q25HSkQyZGU5a2JpVU9PYUgzOHVw?=
+ =?utf-8?B?c1RxVlhoaVcyZ1RJRTA4M3dZa1FxVzEyZVNDTE1hM0lubzI4RndCMmFkUS85?=
+ =?utf-8?B?ODE2eW11THozYVM5amdvTnFPNnZ4MFQ5YjBaUVJORDdQVE5ndzViU21RSmV0?=
+ =?utf-8?B?RnhmM3QzVGl3Nk9ZWUY5U0RiWEN2K0JNbmZaYStuRU9lRjRKZzljZlVvaWRB?=
+ =?utf-8?B?WUJObkthODI0WlhYYXRHNVg0NnZzczNuME10S2NQbXFFUVc2cTRrVzJ6Vkxh?=
+ =?utf-8?B?cVZ2cUpEZG01L241Tk1FdEl6NnZSejJ3ZFFhQzRRMURVOFJmNFRxQUdXRWVw?=
+ =?utf-8?B?elVCOFAvVURMdHN1dmZqOFk4VGVZVzhBSmxBKzc0eGYzakpreHdlS3BzaG4v?=
+ =?utf-8?B?UVVGVGcwRGpIM05XT09MdUxJMUhRVkgvWlhrUU5uNnpzZ2pLR2lhY1hMTEZq?=
+ =?utf-8?B?cUd2dkhCVDJ1aHZsSE9aTTRFTEdUVVZEam84c0M3YmJjRTdWL0xxZG5JWFZV?=
+ =?utf-8?B?Z25DQWNIM0dDQzZ3NXRmQXY0T3o4NW9odld5SGtpU1d3RElhemV0TDMyVkFy?=
+ =?utf-8?B?UmpwVGtLam9hUWoyQnUvRk4vejg1alVBWU1CSkJTWW95Y3VlbXRvNzRjNy9I?=
+ =?utf-8?B?dkQzbk9CSWFPWnZHaTZNYkpLTWJlN1RvWFM2NEZqdjU1bDJ3VGNiRmJZUDBx?=
+ =?utf-8?B?OTY0SWFRSHlPUXdJODZnZUxLckVBMy9oRzNwdE9oM2RHWEo1dXdzU2w0SElt?=
+ =?utf-8?B?TWN5OEdHUkJSalFQcHd6RzVyUHI0dkRCWWdWR2p1MWt3NjRyZzZ4ZXpXTXhv?=
+ =?utf-8?B?azVxUGtGV25oSzNXeWU2VWxrMEpBNUk5L0JLcjNPU05ubGhZK21sbEFMK2k3?=
+ =?utf-8?B?QWsraGU4NW0rWFBSRzdNSnlZaG5BVURHMkZkTHoxa29vR2ptdUpYVC8ya2d1?=
+ =?utf-8?B?TUkzKzVoL0RhVFJkM0NVRno2aDRmT2FKa1BMM054RW1oNEE3WUErb1FnWjdP?=
+ =?utf-8?B?cnNVOTRuMitqK085Sm4wSHF0UTZycTdIRkErZHNveWxYMUdyMGJTQVAyYWsv?=
+ =?utf-8?B?WDVKdmJpOUk2OURqS2FoRHVqWVFWNDA4dlBQRVRBR1dvY0lIZE1UQTU3cllE?=
+ =?utf-8?B?dHYwKzJPOW92d1dFY2VkZThvd0RmRkZzTTBnTm0zNXkxalE5MGIyYWdTbEtl?=
+ =?utf-8?B?VkY5WEpPWklRK093d1lZY3gwKzFXUFNrMzg1TUl0cVlpUU5RSjlzV2V1OGE2?=
+ =?utf-8?B?a2pCdnZyOVFRbnFyYXl5MkdCQ3c4TUhlTS9kd2VVem1XdnFkbUZIQWprS0Zz?=
+ =?utf-8?B?LzFKbmxGSGpsZTdYdExZSlhSZlJzZXFYeUh4bGdJcnB0c1N6RFdEUTlpOG1Q?=
+ =?utf-8?B?NitieUc2V0ErelhlS3RCazRwdnVIREhTbkVNZE9YVmY0Y3dBNEkwWHV2Uno2?=
+ =?utf-8?B?c3g4N3RKOTVPWXpXYTRFSjhySTJMY0Y0OTQ3TEZoQXdlV2lTU3ZWV0VubkNX?=
+ =?utf-8?B?bHJGVHJraXhPRVZuMFhBZHBHL21CSUdpdFZ3aXNrRnk4aWtDYkFwcUNtMldO?=
+ =?utf-8?B?czhLQklBYytpMnlBS3lrMlN1aGFPa2JnUVlRbEVjbFpYOFBIcjY0SE82YWd4?=
+ =?utf-8?B?b1hnRExZejJaQmJ4d2tUZitHOGUrZlM0bTNram5EUmZYL1Y3Y1JyY0xuVHBQ?=
+ =?utf-8?B?aXBwd29VTk4zU1huR2xpNVN6R1hHMXcwU1pZd0pKQU9yenEydlQvVHdQYllT?=
+ =?utf-8?B?S1NiSUs1VFJGeTlLZ3BwaFVBZm5pRExQbzJ0cmx4MXFLME1MdzFTOVNDVk41?=
+ =?utf-8?B?b0xHVlBiaHl2NStHSENiQmthUUdCTkRmaWlySldYTE5lSDhCTFdhdTBtcVNx?=
+ =?utf-8?B?KzJTbGhSSUlrREtlTEVPeWlnKyttYzBQSXBSanJIVG85aFlZZk5uNUhZQU1M?=
+ =?utf-8?B?WnAyVnhZMGhReGZzeGpMVnpFeWxRelRUV3VaL21JT28xalRYb1duT1RFcWxW?=
+ =?utf-8?B?dnl5eDZVM25qd0tMd285TWt2dUk3blBjN2pZOTBBTGl6bzVhTDhZa1BQYVlP?=
+ =?utf-8?B?cFAvT0Z3MU5PelNMbEtYWk05ckVEVDVNeldTQVdXVFlOOHNVa2o0Q1JjN1Iv?=
+ =?utf-8?B?emgzVGRxNVBwTWpoY3M3TnhXRitIVUtiRWI3WUtqOS9waENEazZDUUtMcmFI?=
+ =?utf-8?B?VGRoMTlzcVZwRkVlWXN1QzFuckc4ZDVFeFdYN0w3dTZCTGZHYURGRWlkU00v?=
+ =?utf-8?B?eWVFdU9HcUxSVFpVTEZrSlZqQS9vLzIzbFRDek9XNkNFNkw3N3FkSC84RlJq?=
+ =?utf-8?B?eTVJc0VMR1l1ZDlLcnk2ODNIUzBqOXJZSXBHeFdpUDF0cDlDYmlSdz09?=
 X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: ddf52d88-8472-4c97-3a17-08deac39ca79
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1f0f8af1-17ec-4fd0-7b32-08deac3b3cb9
 X-MS-Exchange-CrossTenant-AuthSource: DBBPR04MB7737.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 May 2026 13:08:54.4440 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 May 2026 13:19:15.6062 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: yZy1xbgwMe9J3VDstYx7MGvN29bvwTzfLrquAHtwNcFkhVOkgkNqTLcgNB4LJie6kaQVq+1zFBusNQsqaVWYMDGhcmjR9Zc52rY/dVs2YYU=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR04MB8295
+X-MS-Exchange-CrossTenant-UserPrincipalName: tOxsaBm3jf7ZS1bOWRG8kKZB5MMO1T8URInEVCCJVfSbMP4rAlz1FR9KA7MtcxKufkqujPYZub9+eRj9S0KZAmH3dm/vtFzj5BtEVLhdZmM=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR04MB8296
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -154,107 +154,83 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Sergio,
+Hi Simon,
 
-On 4/30/26 8:23 PM, Sergio Prado wrote:
+On 5/1/26 4:10 AM, Simon Glass wrote:
 > Hi Quentin,
 > 
-> On 4/28/26 X:XX PM, Quentin Schulz wrote:
-> 
->> +BINMAN_PKCS11_MODULE
->> +    Path to the PKCS#11 shared library (.so) for HSM signing. When set,
-> it is
->> +    passed as ``-a pkcs11-module=<path>`` to binman. Only needed when the
->> +    module is not already configured via ``openssl.cnf`` or the
->> +    ``PKCS11_MODULE_PATH`` environment variable. Typically used together
-> with
->> +    ``BINMAN_PKCS11_URI``::
+> On Mon, 27 Apr 2026 at 03:48, Quentin Schulz <quentin.schulz@cherry.de> wrote:
 >>
->> OK, but why do we want to have this variable for storing the path to the
->> module lib instead of using an openssl.cnf?
-> 
-> Agreed. I’ll drop BINMAN_PKCS11_MODULE and rely on external OpenSSL
-> configuration (openssl.cnf) instead.
-> 
->> Also, this is stating it's for signing boot artifacts with an HSM, but
->> that isn't true. It won't work with FIT images, which use DT properties
->> instead (see fit,engine, fit,engine-keydir/key-name-hint.).
+>> Hi Sergio,
 >>
->> I'm assuming it's possible we want different keys for different boot
->> artifacts, so this is also a bit too generic of a name?
-> 
-> Good point. I’ll scope this more precisely to X.509 usage. Would
-> BINMAN_X509_PKCS11_URI be appropriate, or do you have a preferred naming
-> convention here?
-> 
-
-Is this really PKCS11-specific? Is there no other way to get an x509 
-than by PKCS11 or plaintext file? Trying to think about potentially 
-having other providers needing something similar and then setting 
-BINMAN_X509_PKCS11_URI for that would be confusing.
-
->> +# Serializes concurrent PKCS#11 signing operations. SoftHSM2 and many
-> real
->> +# HSMs do not support simultaneous logins from multiple threads, so
-> binman's
->> +# ThreadPoolExecutor would otherwise cause intermittent login failures.
->> +_pkcs11_lock = threading.Lock()
+>> On 4/23/26 5:45 PM, Sergio Prado wrote:
+>>> [You don't often get email from sergio.prado@e-labworks.com. Learn why this is important at https://aka.ms/LearnAboutSenderIdentification ]
+>>>
+>>> Add an optional extra_env dict parameter to run_cmd() and
+>>> run_cmd_result(). When provided, the key/value pairs are merged into
+>>> the subprocess environment for that invocation only, leaving the parent
+>>> process environment unchanged.
+>>>
+>>> This might be needed by bintools that must inject environment variables
+>>> into specific tool calls without polluting the global environment.
+>>>
 >>
->> Is there really no external mechanism to make sure this cannot happen?
->> or maybe some sort of session concept?
+>> Yeah, I'm not convinced this is useful.
 >>
->> binman tests will run on multiple processes (see ConcurrentTestSuite)
->> when not instructed to run on one thread (via -T 0, used for test
->> coverage). My worry is whether this is multiprocess safe (hunch is no).
-> 
-> OK. I’ll investigate whether this can be handled externally (e.g. via
-> token/session configuration) or if a more robust approach is needed.
-> 
->> +    def _pkcs11_use_provider(self):
->> +        """Return True if the provider API should be used for PKCS#11
-> signing.
->> +        ...
->> +        """
->> +        if self._use_provider is None:
->> +            out = self.run_cmd('list', '-providers') or ''
->> +            self._use_provider = 'pkcs11' in out
->> +        return self._use_provider
+>> We would need to propagate this new variable to whatever calls those
+>> methods as well. And it quickly balloons.
 >>
->> Why force the user to use providers if one is available? Can't they use
->> an engine even if a pkcs11 provider is available (e.g. you have both
->> pkcs11 provider support via softhsm2, but only engine support for your
->> HSM). Isn't this something the user can specify via openssl.cnf?
+>> Just mock the environment with
+>>
+>> with unittest.mock.patch.dict('os.environ', {'MYVAR': 'myval'}): like in
+>> testFitSignPKCS11Object for example?
 > 
->  From my testing with SoftHSM2:
-> 
-> - Provider-based flow: configuring openssl.cnf is sufficient. OpenSSL
-> dispatches "pkcs11:" URIs via the STORE API without additional CLI
-> arguments.
-> - Engine-based flow: configuring the engine in openssl.cnf alone is not
-> sufficient; "-engine pkcs11 -keyform engine" must still be passed
-> explicitly.
+> While we can mock the environment, it becomes confusing as the mocks
+> pile up. The code path in the test effectively differs from the actual
+> code path, since the mock is overriding something that it assumes the
+> underlying code does, so any changes can cause strange errors.
 > 
 
-Being curious now, I'm wondering if setting the -key to 
-org.openssl.engine:pkcs11:<key> would be enough on OpenSSL 3.x? C.f. 
-https://docs.openssl.org/3.0/man1/openssl/#engine-options
+Sorry, I don't understand what you meant here, can you rephrase?
 
-We of course cannot use this when we still support OpenSSL 1.x though.
-
-> I would be fine with supporting provider-based flows only, as it simplifies
-> the implementation and covers my use case (OpenEmbedded integration).
-> However, I’m concerned about compatibility with older distributions where
-> PKCS#11 provider support may not be available by default. What would you
-> recommend in this case?
+> The normal approach with binman tests is to pass through the settings
+> they want. See for example _DoTestFile()
+> 
+> If you look through the tests, there is almost no mocking despite the
+> large amount of functionality provided by Binman.
 > 
 
-I'm tempted to say "another person's problem". I was already not happy 
-to contribute support for OpenSSL engines in FIT signing because it's 
-been deprecated for years at that point but I needed it (could have kept 
-it downstream though). We just need to make sure it's not impossible to 
-support if someone really wants it (and it needs to work with OpenSSL 
-1.x I believe, even though it's official EoL you can still buy 
-commercial support for it).
+How many of those features are actually dependent on environment variables?
+
+Here, configuring OpenSSL, SOFTHSM2, and OpenSSL providers, we clearly 
+are in the same scenario as when doing FIT signing with OpenSSL engines.
+
+>>
+>> I'm also very skeptical of the need for binman to *set* environment
+>> variables to setup openssl.
+>>
+>> Look at what's been done for testFitSignPKCS11Object, we externally
+>> configure openssl and softhsm so that binman doesn't have to know about
+>> it. This avoids having to play smart and adding a bunch of new
+>> variables. Is it possible to implement something like that for the x509
+>> certificates? For FIT, we do use fit,engine,
+>> fit,engine-keydir/key-name-hint with mkimage to (possibly) use pkcs11,
+>> custom openssl engines, etc..
+>>
+>> Also, I don't think we should decide for the user whether they are
+>> forced to use a provider or an engine based on the presence of the
+>> provider? just let them configure openssl to use the one they want
+>> externally?
+> 
+> Fair enough. I wonder how the tests deal with something which is
+> externally configured, though?
+> 
+
+You set the OPENSSL_CONF, OPENSSL_ENGINES and SOFTHSM2_CONF environment 
+variables to point at files that are generated for the tests. See the 
+various unittest.mock.patch.dict('os.environ',) in tools/binman/ftest.py 
+and tools/binman/test/fit/openssl.conf as well as 
+tools/binman/test/fit/softhsm2.conf.
 
 Cheers,
 Quentin
