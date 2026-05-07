@@ -4,98 +4,108 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2FEE7CD3442
-	for <u-boot@archiver.kernel.org>; Thu,  7 May 2026 19:58:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6CFACD343F
+	for <u-boot@archiver.kernel.org>; Thu,  7 May 2026 20:05:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 536B384BFD;
-	Thu,  7 May 2026 21:58:30 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 362D684BB7;
+	Thu,  7 May 2026 22:05:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="cRHXTv1l";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="yLE3x57G";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 03A2D84BEE; Thu,  7 May 2026 21:58:29 +0200 (CEST)
-Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
- [IPv6:2a00:1450:4864:20::336])
+ id 9EDA484BD5; Thu,  7 May 2026 22:05:51 +0200 (CEST)
+Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
+ [IPv6:2a00:1450:4864:20::332])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0EA1684B58
- for <u-boot@lists.denx.de>; Thu,  7 May 2026 21:58:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8BA4284B58
+ for <u-boot@lists.denx.de>; Thu,  7 May 2026 22:05:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-488b150559bso9872575e9.1
- for <u-boot@lists.denx.de>; Thu, 07 May 2026 12:58:27 -0700 (PDT)
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-488a9033b2cso12434095e9.2
+ for <u-boot@lists.denx.de>; Thu, 07 May 2026 13:05:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1778183906; x=1778788706; darn=lists.denx.de;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=xrmDk9XCkoDkcaZwxqSxP7vyriYdTHuacokEhK2S1DA=;
- b=cRHXTv1lkZACCKh8vPWKt4mV3TQXlKnM4dAwYO8ntzvLfHd3Fx9j3X3qkLQsBm/DPh
- YUiQHtI11+6Ge12aqCAw7PyuUF5Hwena0m3+a7RPrEpvYVX98yn8H8VmH7yCz+70u5yc
- cilC2EKYsy/PFhY8pFRjLdqxLeSEkFEnIXCa0R07szLYPH0FIrimQpAmLXhzUr+y7CiZ
- v4EURXu4ONYDxf/w/k20+oCR9/hu4dBKhu8gVMmNEu8QbljJ9hJtjtTUuz1H3ZF6Jong
- bHaflOlQUWqGTbVK+EcWA+Xzzz2bBZOFhgSbpRLGyaiHlGHa7/kaDYjYQLtDVJdXgTHt
- tqRQ==
+ d=linaro.org; s=google; t=1778184349; x=1778789149; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=JJKECZPO9XBcje6sWMkAemgjoH/OVGGIRZdM57IDuNI=;
+ b=yLE3x57G8nKN/RNSBTVHWgKTlcXvJ9hpAOOVX/d6BLN1EEZHkEE6MezKZFAqtOi2bi
+ UvaT/I47D0lBuCSKlk+FSuhVMqDEx25y7K1tC35VXATNFXiJ3qnARzvXPDmOScuX7073
+ V8f7vJT30JAnWdWlpRuzp1bKhkiiaw0/i1aRYmvExdhZmGV6nqGDspiymGM9vMaG2pAe
+ OTl5ypyRu2wf18NVhMFtC9D9CWq1xwglwSinzXa4Mtc/lJ+2dFxjLH8HNu3yMl02K8/z
+ Sfj2SBmOuHfJHIPF1xyoDNrl8KnMCcOQVrRx2bSlMnD1Uv9aWCcpyHEfHhJB8Snw+Vbi
+ vzIA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778183906; x=1778788706;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=xrmDk9XCkoDkcaZwxqSxP7vyriYdTHuacokEhK2S1DA=;
- b=WK0aySwblYVMjEtgKNMj+ZadxKblHyhwxHRUk/txoaYYheZF0R3lleryVXu9ar1Fyd
- dSg2fuzr/54mXFCw9VSmOoqeCbyBw4F5N58axmupNRcPZj+OiLslnYxwFnVxO/tkq/ji
- F/2uEgn7Wl1inf3PxF9i9b0ERYcd1AszjxvPMImaCCBjkGyoHWYX487hRaFLD/tGp6Ve
- bqe6ccAojNaQOqiplLxYtjDwn2I2RCSbFlx2tR+YCygcgYwP23Huvi9lOJnPVRVAza+5
- w/2wna+9UsqKAuvCQd2P+Cr3qcudf90XZZwu8jtFcjFxqEpA/dqTlWx370KHHKpWvur4
- ua3A==
-X-Gm-Message-State: AOJu0YxNLjGgGZgxlfyjhswMxaQAfRyRrbUcVJorlMP9dmX6ulZyVazi
- 7+6sEamF4HsDL5co+wHOYcmdALJVKmqchv6Z5XtucCWbMwt1e0DgcG/bD6jSnJdAFto=
-X-Gm-Gg: AeBDieujRERpI3YAiuhBzBSgQ4f+qNWg608eci5aRaeOBbBwm96iPqFt3GGxB62QOq6
- Hkc4WA/Vj8icDlZOyHhjRY82MCIFx6ep1+ma6btsvnMMJjRBmio6vtASSucRzWSRG+VzmayksDT
- eIDPVNjj7r/Is9kHLT5TNxlCQnZDpl0dAPA/yyXQNQHBCWuhQdTCttB2rFEU5AHbGJ+T1Dwp1EX
- 4qUFgDYYhO4PKVB8qC1IYwc6frXmjqTiau7wuTqjm7R6ujPisyWC0d4nBpkuUpw9g2LyCud+NOU
- GQ96P0LwrkgFos1cMQxQY+KHweT/qhv0R5dmuXB9A+PSIMpDy9A51tL4Bi3GXe+AG8MDwGygPjf
- XTehZ/LuTpQ+nchtSjPHYcVoubsyuXxjpQNyrVD8mjEZicppurJ7yl/8AAls2fbfQzNgeQmNr3h
- wOOLsTpc470S/HZne6fgSNBo4BCugcaPRiI4ToMSNMSSD0dUIauLFua2XOsDb5OBERYHdZ
-X-Received: by 2002:a05:600c:8211:b0:485:3cf3:1010 with SMTP id
- 5b1f17b1804b1-48e51e09680mr159048725e9.2.1778183906391; 
- Thu, 07 May 2026 12:58:26 -0700 (PDT)
-Received: from lion.localdomain (p4fc3dd86.dip0.t-ipconnect.de.
- [79.195.221.134]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-48e538d2878sm235344265e9.15.2026.05.07.12.58.25
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 07 May 2026 12:58:25 -0700 (PDT)
-From: Casey Connolly <casey.connolly@linaro.org>
-Date: Thu, 07 May 2026 21:58:11 +0200
-Subject: [PATCH v3 4/4] armv8: mmu: fix and optimise explicitly unmapping
- regions
+ d=1e100.net; s=20251104; t=1778184349; x=1778789149;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=JJKECZPO9XBcje6sWMkAemgjoH/OVGGIRZdM57IDuNI=;
+ b=GIiEApduybThTrDnrteiGCSh7/KHqIOce2MYuMNpS9g4m2iBIXfXu2PpkuLpH5ZAV/
+ 1MRUAoE+DLjfBFUUbhHx5KWTI6MsoQkxihs5+KYOvQxS7sP7GANzZ8NmmiMVK3+srNnj
+ aAFWIZykwLy15JucQ5evukHpeN0s7ouWE1DwZlS+glQPT0vALo6CdelgacJ/S9brtHQ+
+ 1AyFgDJ3YUU9inemMne24u6KyrCuTJVQ7Q1nZEdjw8b6QPIpVpDinikZ01w6SJT/TRSs
+ egW0VIKHvRbGOot7jjTtC4yMrLDE754FPPUVLd2ypkf2WkRGYyhsKAYivOsnIirXuaaC
+ PaMA==
+X-Gm-Message-State: AOJu0Yx+M3+QD4ZGWrbse4di2XsCzqumY2Jx/woa9dPK5IxuEsm4AUi9
+ uvkKlf7Gg1sYY8yZIldXBsb++uyOr5KK8o0rCX47d+v3c9cgriaS0Fqfw3X5ahwgWcc=
+X-Gm-Gg: AeBDies9X4IMT11UFJ5EVRX6tkhXSqO8/WwUrAUuZX268+KHQbmjLz5kxjnuz9qGva6
+ oH6sf8eyWrONQLWej3Nsy/z5V1/+qGoKDa4O2eIGDAClH0spsXYP8MBDC0AsALhVaWNY0W80/El
+ Gr+J5RONw/SR6S2iuS3RcVFiU0VDFCOblLIHIavvOaNjwlkR6QBma57TzqiJ72cSTLDTaMNuu3W
+ amuTV5KfpRTeUDNmnfuuErSmwMR7j4SD5FUqxwTDDJ/OYQDHeEbxuvLYj+Xl7ICkqiQ7vyecbQB
+ tZXyr8tzrwIo64SjHeZwIVoFBNanltSwqxQRseAErLiPiOebk8xqZZTgXZkdVCSZyJuMdikPjfx
+ W1fWinAP/cPau6EHWFbfkIT0nVWTq27dtydfniUHRrKiwtUff0snudOGl9YYA71kmRSuXyAEYiW
+ tUAYkXVtWgUJujijJTWoJSedUFalH711FeWlGhh+L1C2LZUwqYgh6jaLGNtOY1SQveLQyjsTXHu
+ ptc
+X-Received: by 2002:a05:600c:1393:b0:48e:635a:18d9 with SMTP id
+ 5b1f17b1804b1-48e635a1ae9mr25395935e9.15.1778184348889; 
+ Thu, 07 May 2026 13:05:48 -0700 (PDT)
+Received: from [192.168.1.36] (p4fc3dd86.dip0.t-ipconnect.de. [79.195.221.134])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-48e538b26a3sm260800935e9.9.2026.05.07.13.05.47
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 07 May 2026 13:05:48 -0700 (PDT)
+Message-ID: <238269ef-d3bb-458a-bde9-40506df61936@linaro.org>
+Date: Thu, 7 May 2026 22:05:46 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 01/15] Revert "dm: SMEM (Shared memory) uclass"
+Content-Language: en-US
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>,
+ u-boot-qcom@groups.io, Tom Rini <trini@konsulko.com>,
+ Peng Fan <peng.fan@nxp.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Alice Guo <alice.guo@nxp.com>, Quentin Schulz <quentin.schulz@cherry.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Kuan-Wei Chiu <visitorckw@gmail.com>, Raymond Mao
+ <raymond.mao@riscstar.com>, Stefan Roese <stefan.roese@mailbox.org>,
+ Philip Molloy <philip.molloy@analog.com>,
+ Jerome Forissier <jerome.forissier@arm.com>,
+ Marek Vasut <marek.vasut@mailbox.org>,
+ Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
+ Rasmus Villemoes <ravi@prevas.dk>, Heiko Schocher <hs@nabladev.com>,
+ Michal Simek <michal.simek@amd.com>, Sughosh Ganu <sughosh.ganu@arm.com>,
+ Antony Kurniawan Soemardi <linux@smankusors.com>,
+ Luca Weiss <luca.weiss@fairphone.com>,
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+References: <20260504-b4-modernise-smem-v2-0-c01ec2ff3886@linaro.org>
+ <20260504-b4-modernise-smem-v2-1-c01ec2ff3886@linaro.org>
+ <CAFLszTgwbSxN5tEZ7ShgaAi1JvGfT-ntPdeJ1q8rd2GcOeaFeQ@mail.gmail.com>
+From: Casey Connolly <casey.connolly@linaro.org>
+In-Reply-To: <CAFLszTgwbSxN5tEZ7ShgaAi1JvGfT-ntPdeJ1q8rd2GcOeaFeQ@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260507-b4-mmu-unmap-fixes-v3-4-aac7726d87d5@linaro.org>
-References: <20260507-b4-mmu-unmap-fixes-v3-0-aac7726d87d5@linaro.org>
-In-Reply-To: <20260507-b4-mmu-unmap-fixes-v3-0-aac7726d87d5@linaro.org>
-To: u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, Anshul Dalal <anshuld@ti.com>, 
- Casey Connolly <casey.connolly@linaro.org>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Dhruva Gole <d-gole@ti.com>, 
- Mark Kettenis <kettenis@openbsd.org>, 
- Patrice Chotard <patrice.chotard@foss.st.com>, 
- Sumit Garg <sumit.garg@kernel.org>
-X-Mailer: b4 0.16-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=4030;
- i=casey.connolly@linaro.org; h=from:subject:message-id;
- bh=JyKcHG3CDm6TiD3xkCztln04+LiDUlSBDyQYtXKquSg=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhsw/7+4cFTn31sfzvB3nNA5Jd//DB7VWOiXrSlhkT45r7
- vbbmPiqo5SFQZCDQVZMkUX8xDLLprWX7TW2L7gAM4eVCWQIAxenAEzEqJGRYWPW3u13hc6UrV8z
- O5bb+N9CYa6lde09qfJT5zseFyx9/4Thf4Sc2/YJ2iuenPh9KvnBhBi2971CLcsE1h7/xVHU4Op
- wLxIA
-X-Developer-Key: i=casey.connolly@linaro.org; a=openpgp;
- fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -112,103 +122,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-As more platforms start ensuring they explicitly unmap reserved-memory
-regions a few issues have appeared with how the existing dynamic mapping
-code works. Fix these and get a small optimisation as well.
 
-1. Teach pte_type() to actually respect the PTE_TYPE_VALID bit
-2. Don't walk the TLB a second time if we call mmu_change_region_attr()
-   with PTE_TYPE_FAULT (since it would just be a slow nop)
-3. Fix how set_one_region() decides to split blocks.
 
-Today set_one_region() will always split blocks until it reaches the
-smallest granule size (4k) and then update all of these pages. This
-appears to be due to a big in how is_aligned() is implemented, since
-it only evaluates to true if addr and size are both multiples of the
-current granule size, so a mapping aligned to 2M which is 4M in size
-will cleanly result in 2 blocks being set, but a mapping aligned to
-2M which is 4M + 8k in size will result in blocks being split and 1026
-individual pages being set.
+On 07/05/2026 17:31, Simon Glass wrote:
+> Hi Casey,
+> 
+> On Mon, 4 May 2026 at 12:57, Casey Connolly <casey.connolly@linaro.org> wrote:
+>>
+>> SMEM is a highly Qualcomm specific interface, while having a dedicated
+>> UCLASS for it offers a nice abstraction, for things like memory layout
+>> parsing we need to use it before the driver model is available.
+> 
+> Do you mean before or after relocation?
 
-While for the address it is correct to enforce that it is aligned to
-the current granule size, we only need to check if the region size is
-greater than the current granule size. This allows us to simplify our
-second example above to only 4 entries being updated (assuming no blocks
-have to be split) since we only need to update 2 blocks to map the first
-4M, drastically improving the best-case performance.
+Before, we actually use it and read the memory map in
+board_fdt_blob_setup() since we support the usecase where you chainload
+U-Boot from ABL but with its own DTB baked in. This allows you to leave
+the original Android DTB and read the memory map from it while using a
+proper DTB for U-Boot without having to hardcode the memory map.
 
-In the case where the address is 4k aligned rather than 2M aligned we
-will still be restricted to mapping 4k pages until we reach 2M alignment
-where we could then map a larger 2M granule which previously would never
-happen.
+Basically it exists because some Android phones have awful bootloaders
+that will crash or break stuff if you don't have very specific arbitrary
+things in your devicetree.
 
-Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
----
- arch/arm/cpu/armv8/cache_v8.c | 18 ++++++++++++++----
- 1 file changed, 14 insertions(+), 4 deletions(-)
-
-diff --git a/arch/arm/cpu/armv8/cache_v8.c b/arch/arm/cpu/armv8/cache_v8.c
-index bd839b2addb4..c3dd1c24d18a 100644
---- a/arch/arm/cpu/armv8/cache_v8.c
-+++ b/arch/arm/cpu/armv8/cache_v8.c
-@@ -162,9 +162,9 @@ u64 get_tcr(u64 *pips, u64 *pva_bits)
- #define MAX_PTE_ENTRIES 512
- 
- static int pte_type(u64 *pte)
- {
--	return *pte & PTE_TYPE_MASK;
-+	return *pte & PTE_TYPE_VALID ? *pte & PTE_TYPE_MASK : PTE_TYPE_FAULT;
- }
- 
- /* Returns the LSB number for a PTE on level <level> */
- static int level2shift(int level)
-@@ -980,11 +980,12 @@ u64 *__weak arch_get_page_table(void) {
- 
- 	return NULL;
- }
- 
-+/* Checks if the current PTE is an aligned subset of the region */
- static bool is_aligned(u64 addr, u64 size, u64 align)
- {
--	return !(addr & (align - 1)) && !(size & (align - 1));
-+	return !(addr & (align - 1)) && size >= align;
- }
- 
- /* Use flag to indicate if attrs has more than d-cache attributes */
- static u64 set_one_region(u64 start, u64 size, u64 attrs, bool flag, int level)
-@@ -992,11 +993,16 @@ static u64 set_one_region(u64 start, u64 size, u64 attrs, bool flag, int level)
- 	int levelshift = level2shift(level);
- 	u64 levelsize = 1ULL << levelshift;
- 	u64 *pte = find_pte(start, level);
- 
--	/* Can we can just modify the current level block PTE? */
-+	/* Can we can just modify the current level block/page? */
- 	if (is_aligned(start, size, levelsize)) {
--		if (flag) {
-+		if (attrs == PTE_TYPE_FAULT) {
-+			if (pte_type(pte) == PTE_TYPE_TABLE)
-+				*pte &= ~0;
-+			else
-+				*pte &= ~(PMD_ATTRMASK | PTE_TYPE_MASK | PTE_BLOCK_INNER_SHARE);
-+		} else if (flag) {
- 			*pte &= ~PMD_ATTRMASK;
- 			*pte |= attrs & PMD_ATTRMASK;
- 		} else {
- 			*pte &= ~PMD_ATTRINDX_MASK;
-@@ -1099,8 +1105,12 @@ void mmu_change_region_attr(phys_addr_t addr, size_t size, u64 attrs)
- 	flush_dcache_range(gd->arch.tlb_addr,
- 			   gd->arch.tlb_addr + gd->arch.tlb_size);
- 	__asm_invalidate_tlb_all();
- 
-+	/* If we were unmapping a region then we have nothing to make and can return. */
-+	if (attrs == PTE_TYPE_FAULT)
-+		return;
-+
- 	mmu_change_region_attr_nobreak(addr, size, attrs);
- }
- 
- int pgprot_set_attrs(phys_addr_t addr, size_t size, enum pgprot_attrs perm)
+> 
+>>
+>> Therefore, it doesn't make sense to fit SMEM into the driver model.
+>> Instead let's adopt a model closer to Linux, and parse SMEM really early
+>> during boot (as soon as we have the FDT).
+>>
+>> This reverts commit 7b384eccc785b596f68448b155cbda26df57fb23.
+>>
+>> Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
+>> ---
+>>  arch/arm/Kconfig           |  1 -
+>>  drivers/Kconfig            |  2 --
+>>  drivers/Makefile           |  1 -
+>>  drivers/smem/Kconfig       | 25 -------------
+>>  drivers/smem/Makefile      |  7 ----
+>>  drivers/smem/smem-uclass.c | 46 ------------------------
+>>  include/dm/uclass-id.h     |  1 -
+>>  include/smem.h             | 90 ----------------------------------------------
+>>  8 files changed, 173 deletions(-)
+> 
+> [..]
+> 
+> Regards,
+> Simon
 
 -- 
-2.53.0
+// Casey (she/her)
 
