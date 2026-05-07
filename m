@@ -4,144 +4,153 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3655CD3427
-	for <u-boot@archiver.kernel.org>; Thu,  7 May 2026 06:07:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0297CD343B
+	for <u-boot@archiver.kernel.org>; Thu,  7 May 2026 07:25:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 35CBE84A17;
-	Thu,  7 May 2026 08:07:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
+	by phobos.denx.de (Postfix) with ESMTP id BA6F4848BC;
+	Thu,  7 May 2026 09:25:42 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="uU5WQS5c";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="X8TvOQbe";
+	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Sgi4DM8g";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A643684A19; Thu,  7 May 2026 08:07:31 +0200 (CEST)
-Received: from BN1PR04CU002.outbound.protection.outlook.com
- (mail-eastus2azlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c110::1])
+ id CAAFB8490D; Thu,  7 May 2026 06:56:28 +0200 (CEST)
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
+ [205.220.180.131])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8921D8490D
- for <u-boot@lists.denx.de>; Thu,  7 May 2026 08:07:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=altera.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=alif.zakuan.yuslaimi@altera.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=vb0eAA4ZQf12uEAO1dRwWEs8I4dRHQwBSKoiMnNUOQrJDW90olc7fN5UzImB1UvVyShEz6eIWUcPla/0pdeXKwf2P6ZYUOUg/GqUd+lqNJCPORNIO6o/qp+hInLT9EfEoPwW5SX9j8iUUJ2xtxF/nN0c6qEtUtE3yUUnr/BcKfyE5C5oqKuBti0OaxhyDLr06x+h6l7eTfahXLVFQ7l9Mn7AOYyrUc16CkRoAGdpo3F44XQJV/4xnZf1agdB5WOLJwstMj39DadV6qy/5HDPewwfCCg/0lbkmm7mv/g1KytvdwvNLXIZJQyXwsUmTw7Kr4t7x8AhL33mazFYdlRZPg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=LT+w0/KlV9ppIcgzYrWLBtVheaR24LOumssDPdmKAn0=;
- b=YBLFgI+rEnLDZBZhL1E6zpSBiwbwI2tqKFU+87GiDXOsCDN3sDCeP8LSgGa2p0tpmeG1u1h/AhclFwsyMQl2QFq/ftcvUC1gV8cTJxCD2JLFFteXGEBf6F9/tCKv8P7S6Lb8Yg2Vv8TcbvpSZ0vk3SJIwmBndxu5tRk9gtmnLlid3o+A6L39zP5DQYHHUskNlG/wnrdF71ezP7lnWTOLS+lTNysk/qats83jLCm4oRRCbfmKltnZd3OrSKCh1Z4fLUHzmIVGBtfMhhTda8YgrZ5GXiLGesRlI/hgGBjTxn5hTg08YmYcWKwC0Tzx4g3dpk1WT+NniKFdOWhN78aswg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
- dkim=pass header.d=altera.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=LT+w0/KlV9ppIcgzYrWLBtVheaR24LOumssDPdmKAn0=;
- b=uU5WQS5c0xstxBiNhG12dNdZMgqxwjWexxb5wScUQ6b4arJDjebmvHRmnHRDNMKOHXqwKr87RPfPcVmDfi01l2P2d88GXWt7+fj8Ixp5PSRZn3uJANpyLcrJBze0ady88cKZbXAJEVSVxijnrKLgWdr+F13xBybWop5wVC6fn3yWRPbCBpYs4IGRUlQ72cSa7zs5Ar6Q/pZzR1FeeHLGL23dw7+oBD7maGmMxpW0dMf/kokO4T6u/+rEXLRjZzB4ezrSe0F7pizVoapmWjwe0tYwgzW7dgCaggjDDvNYjaAjyUmtPLEYCd9MCuMVrfNltbZj3l3iqbWCzf9BJ1D9ww==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=altera.com;
-Received: from PH7PR03MB7063.namprd03.prod.outlook.com (2603:10b6:510:2a4::6)
- by SA1PR03MB6529.namprd03.prod.outlook.com (2603:10b6:806:1c4::7)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9891.17; Thu, 7 May
- 2026 06:07:25 +0000
-Received: from PH7PR03MB7063.namprd03.prod.outlook.com
- ([fe80::f6cf:4203:1cbc:cd21]) by PH7PR03MB7063.namprd03.prod.outlook.com
- ([fe80::f6cf:4203:1cbc:cd21%4]) with mapi id 15.20.9891.008; Thu, 7 May 2026
- 06:07:25 +0000
-Message-ID: <b6ffb0c1-aaa3-4a59-a470-fc3edf2df4d2@altera.com>
-Date: Thu, 7 May 2026 14:07:18 +0800
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 3/3] ddr: socfpga: Add ECC DRAM scrubbing support for
- Gen5/Arria10
-To: Marek Vasut <marek.vasut@mailbox.org>,
- "Chee, Tien Fong" <tien.fong.chee@altera.com>, u-boot@lists.denx.de
-Cc: Marek Vasut <marex@denx.de>,
- Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
- Tom Rini <trini@konsulko.com>, Brian Sune <briansune@gmail.com>,
- Yao Zi <me@ziyao.cc>, Patrice Chotard <patrice.chotard@foss.st.com>,
- Peng Fan <peng.fan@nxp.com>, Simon Glass <sjg@chromium.org>
-References: <20260428033230.7777-1-alif.zakuan.yuslaimi@altera.com>
- <20260428033230.7777-4-alif.zakuan.yuslaimi@altera.com>
- <2880c529-5740-40b4-bb98-aa471f0c628f@altera.com>
- <755b13b4-604d-480a-84be-000316eaf5a5@mailbox.org>
-Content-Language: en-US
-From: "Yuslaimi, Alif Zakuan" <alif.zakuan.yuslaimi@altera.com>
-In-Reply-To: <755b13b4-604d-480a-84be-000316eaf5a5@mailbox.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: MW4PR04CA0050.namprd04.prod.outlook.com
- (2603:10b6:303:6a::25) To PH7PR03MB7063.namprd03.prod.outlook.com
- (2603:10b6:510:2a4::6)
+ by phobos.denx.de (Postfix) with ESMTPS id A7A03848FD
+ for <u-boot@lists.denx.de>; Thu,  7 May 2026 06:56:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=oss.qualcomm.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=varadarajan.narayanan@oss.qualcomm.com
+Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 646Noeb9442617
+ for <u-boot@lists.denx.de>; Thu, 7 May 2026 04:56:25 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-type:date:from:in-reply-to:message-id:mime-version
+ :references:subject:to; s=qcppdkim1; bh=KaRXyz+QnazDFI5mt4uKMQQi
+ Vin0G+ItjU/LFhnviaI=; b=X8TvOQbepx1YnN4dKhH3ifXxZ5v7Rh8Eb+/JlTTe
+ /drNOps7bXToXvw8yyVtP3Rm7EOp9VWvfPhGZeF8R7SiFr98x9igIXRAapQ8cKC+
+ K+fQN/kXIXZtyIMP1j8QBbyl08o14xciQH3tcMcrFFEo+rJQMTlqm0AJZ4RcaZYZ
+ 7sOEpjI+phunCLPWaOjEQkp9Lic6raLGUXio2la5HwQ9mSiTU9/6L4r76SCNwcd9
+ eBguKn2epNmV3V+SK6Roj1e5XBzhOMLVhkvRZqF/wG8g7HvPL5KMspqTwTVivS3D
+ W3UO81DRAuMNwyvX3pPg1g4Uss5/hijjJY1H8PY5pnXAUA==
+Received: from mail-pf1-f198.google.com (mail-pf1-f198.google.com
+ [209.85.210.198])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4e0299kxpn-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <u-boot@lists.denx.de>; Thu, 07 May 2026 04:56:25 +0000 (GMT)
+Received: by mail-pf1-f198.google.com with SMTP id
+ d2e1a72fcca58-82fa5ecd760so219563b3a.0
+ for <u-boot@lists.denx.de>; Wed, 06 May 2026 21:56:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=oss.qualcomm.com; s=google; t=1778129784; x=1778734584; darn=lists.denx.de; 
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=KaRXyz+QnazDFI5mt4uKMQQiVin0G+ItjU/LFhnviaI=;
+ b=Sgi4DM8g5911f1YkkkexoPYxBpP5FhJ+e8yTi3sk4NgoDLauV8bN+kkNae8W7z+8xW
+ BWOFfK1XX/pjrkPE3mHx82B2vS7B94Vn7VskLHju0vV7MqM5FhC0dQmyWsVkBh0mXit1
+ W93hGakRbFn6YcvXL5zbt++NM0KL+N/LvrxxaqUbS4c6EU+PCa8ZqXI6lHHnK7mVasH+
+ igb2U+nt5jXVpUNLmhNH/O/4xU9iRJXR/701YTUoGX6xr/+FQRcNKfLReEeUdKfcEmcW
+ 9xqjUAwTbHytu2K9NF7RIStRrDMpyzFQKQwAxpmhCQ8tKrecocsI6arAIil7aW5/IAsy
+ BlYA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1778129784; x=1778734584;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=KaRXyz+QnazDFI5mt4uKMQQiVin0G+ItjU/LFhnviaI=;
+ b=qOsT7RcStkJhnu5opqfyDWdFOs4Fmq9wn5FysQorjodi6A4a3joNXVM4M66cPWKLsg
+ Ac+XEe0AJra7dltDDS0s7qsoo8tgYr6rc6eStpwpsptrecqxxAmsvVnyQKmxkNwd0H5L
+ YLlKzut0A4k+Anbminxb/EsO37j4bp0GacV6sQaH4VPh7zq/dH4QmzEqWR3ozhwy70J7
+ Hnft04mRt+QvsyWxoOo/HebWF/QLkOXeCZGcIjgsMdYO0kaNtR6i2wWfLz+6gZ8ohRA9
+ 0IybwKUnmeUKEJ52+xuorPgZiV/h10wnlBrENyH3egDkZxzsFtZ1Piv/3hqB0E3ebdMx
+ rNqA==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ9/z1pQy1h2K5ZafR0XoL5ahQyB8ZNjzD2Bb3/HlrKOUfd50aQe6dvOWuA99f0otMK8Ygx+eIY=@lists.denx.de
+X-Gm-Message-State: AOJu0YzRbQYzdus4cTKOa48ll+jOoG+WtUcT/ZMtAkmoiC0tlJrytTZh
+ qrQt4WMOZSKU9W+7vKb2WVOLZkHRO+P8YPAl3pTl7BKdTKoRc4iCQPnzMm8mUzWCM5c38AINqTu
+ n0oDT7CxbYGmxcfFn1Irns2L+eg79+SrIve52ONRF+fmJ1BWziu6IsOuu
+X-Gm-Gg: AeBDieuJdHRFgs0p6jxDiJ+vn8s2uVbvkANNhsRUZ7VbEqRwjrT0sJmMf5FVVAZQSTg
+ I0+mk4yAIAvLtRbAZmur1qPdJfCql7JvL6sdN63Du2hqFLRK3hv3fu1dy8MFrzwFJ2H8vbsCHZ9
+ 3gVMJLhXNniCLBE26a7JlfSuwvpYmmQQmubWrLexK2xESzUOnLn+4MYnGqVcd8PG7AHYUXa150M
+ kql1Qg23YhienVsHFDsGywC3k+O4aYSj6arrXkRBMZwndLFurshJw6cxisAxu3Z1rrBAmXUOwcL
+ 7jD0uOWj+HTlBuqlwFKzFHgEMPkCpXtNx2pDTykCfv63LAylGfX4tPcOJhUFzY5XlThD998xiR7
+ TTJL52v8IHc2I/gmq6NAoS5xeWrlZ6NxUiWA2bReFGTttvq09ECrHuvfMbMId/RTZU7XJjHciMd
+ PDl1AQYoO5xh/IbGBQEJjdZBwZvGu+xLAKx5e50jjgiMMCWZiPlqSkHE/2amB7Gg==
+X-Received: by 2002:a05:6a00:3e14:b0:835:6bdf:c87f with SMTP id
+ d2e1a72fcca58-83a5b6c48e7mr6086859b3a.9.1778129783962; 
+ Wed, 06 May 2026 21:56:23 -0700 (PDT)
+X-Received: by 2002:a05:6a00:3e14:b0:835:6bdf:c87f with SMTP id
+ d2e1a72fcca58-83a5b6c48e7mr6086797b3a.9.1778129783409; 
+ Wed, 06 May 2026 21:56:23 -0700 (PDT)
+Received: from hu-varada-blr.qualcomm.com
+ (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
+ by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-83965945101sm7073408b3a.13.2026.05.06.21.56.12
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 06 May 2026 21:56:22 -0700 (PDT)
+Date: Thu, 7 May 2026 10:26:09 +0530
+From: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: rayagonda.kokatanur@broadcom.com, trini@konsulko.com,
+ casey.connolly@linaro.org, neil.armstrong@linaro.org,
+ sumit.garg@kernel.org, peng.fan@nxp.com, jh80.chung@samsung.com,
+ lukma@denx.de, tien.fong.chee@altera.com, tingting.meng@altera.com,
+ anshuld@ti.com, alif.zakuan.yuslaimi@altera.com, alice.guo@nxp.com,
+ quentin.schulz@cherry.de, ilias.apalodimas@linaro.org,
+ mkorpershoek@kernel.org, h-salunke@ti.com, alchark@gmail.com,
+ dario.binacchi@amarulasolutions.com, ye.li@nxp.com,
+ andre.przywara@arm.com, dinesh.maniyam@altera.com,
+ luca.weiss@fairphone.com, danila@jiaxyga.com,
+ aswin.murugan@oss.qualcomm.com, balaji.selvanathan@oss.qualcomm.com,
+ adrian@mainlining.org, n-francis@ti.com, wens@kernel.org,
+ jamie.gibbons@microchip.com, justin@tidylabs.net,
+ ycliang@andestech.com, david.wronek@mainlining.org,
+ james.hilliard1@gmail.com, richard.genoud@bootlin.com,
+ michael@amarulasolutions.com, philip.molloy@analog.com,
+ sughosh.ganu@arm.com, u-boot@lists.denx.de, u-boot-qcom@groups.io
+Subject: Re: [PATCH v3 06/10] mach-snapdragon: Add initial support for
+ IPQ5210 SPL
+Message-ID: <afwbaa+Ys253fErW@hu-varada-blr.qualcomm.com>
+References: <20260416053928.2834699-1-varadarajan.narayanan@oss.qualcomm.com>
+ <20260416053928.2834699-7-varadarajan.narayanan@oss.qualcomm.com>
+ <CAFLszTiwN_YU9SkHATfXCW+AhhDWpsNPudY9wTxC2Q98jjdLow@mail.gmail.com>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PH7PR03MB7063:EE_|SA1PR03MB6529:EE_
-X-MS-Office365-Filtering-Correlation-Id: 89e2f99e-c81b-4f3d-6089-08deabfee89e
-X-MS-Exchange-AtpMessageProperties: SA
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|7416014|376014|366016|18002099003|22082099003|56012099003|55112099003;
-X-Microsoft-Antispam-Message-Info: W7RG2xtSo+Noktt0pZgUJyoRfTBhDK71lU3cTE+RAgmKl0n7D+Huogu7b2t1HtsY+zuK9HxN+ShH9S/Vd715g7h3Kdkbyf+s1hOfNZ/NsRedm8Dtc8j7REnYPZgU88NDa/y+E8eLveQLLnIsh1sbKWHxFH4FbbLFD+WDaSv4kf4eQVklIfwSRUSQE8ZaDmsv3lS6gMcsA6WEuKEC9CvKS7O+XE9lbn0HDHRo/zCQ0UB8T8kXEqEXAGnyMKiv4D2Y6QUWdrqxi2G+jcMLnilLcUrlh1e+Pj57ILEcwYTFVOLvj3Ic8KzmUuf2TGrpH2NDZOAotrNq3d4IY6XGCKxgqmX0/4KOxyBuSL7DXBWZ3gfZBARcg20jGVltaFEFu7v+wV1jSTvXEQLdS5mEF2rVrjvTrE1fUhCb2rwCEDVkE8JcjUE0kD9yGiEWpM9pcSYQHSNuUgx1fVh948Oq+s0LcdnQWNe8WLD6Z134ff+iQp477GdzTh6jugSRT/kpUu5XwSnN2deLUi11ePCvFdmrpv9FDH08ePIsF+l3SosGvnKKReNIEYII4tJL0rHCBk/NU5d31b267DXrn5RGaUvtBM4n2yXpzTOahbO69tuZLCSahIfRCfwDaIz3iN5MIgO6Ou0pXXGliYc4L1KDfVkm1u8mz2IWi2YFEaoXIHdxhwVppmm1IZyRSBypLyUd0fmx
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PH7PR03MB7063.namprd03.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(7416014)(376014)(366016)(18002099003)(22082099003)(56012099003)(55112099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?VjM4N1hXZWtsb21udVJzSmdsZ0NvNCtISmJjaVFnUDZsSUtBSitGVmxzV3N5?=
- =?utf-8?B?WXJ2Ri95dzl1Q0Zib05XUXE1YWNuUmw5N1JYRkJVV3Rna2lHTmRhNVZ6T25O?=
- =?utf-8?B?L1pMYSs2SFg5SDZvT2xXTVRmZ2VTVEo5Mi9Edmt1ZmpUSXZwY3NKODYvODNu?=
- =?utf-8?B?bElvNVJRSktJQzBUKytXL25MZTdkUEZGQ0dRaDNlYk1JbWxyb0pLaWJxTUd2?=
- =?utf-8?B?OWhCWkxTVHhZVkM3YzVKTlNuZXVBcWZKYi9YcWVBQWpQb211OFVNbER2aE5y?=
- =?utf-8?B?bXNJL3lab1FZekhKbWlRc054Vkk1cFl5THd1Z2RoK285ZlFpUzNMeTVndWRR?=
- =?utf-8?B?UDVqVzFWeU5xS3cwOTI4bnNvMnhxVHVZZnJ6c0RBOXo4RkpuNXgrUjJjVlZ1?=
- =?utf-8?B?cjEwR0xReFRoYTM2dStCL2dOMWo2K1RyaXNnVFpDQUF3WnJiOFJWRUxodlIr?=
- =?utf-8?B?Y2g1Y1U3cHl5VDU5Zloyd3FRQ2NvRGRNMzRicythVS9MZkwvcUkxME5ZU1R0?=
- =?utf-8?B?OWxwekRHdTRhMDc2QlYvVW0yU2NMWlFYeVVNQWFLcDdXMWsxQWcxR1BVMWxa?=
- =?utf-8?B?RWl1Z2s3QlVMQS8vLzRCYTRIY0Q5WmloNUtMeGRuMTBVZElFTmZBTmdTQW91?=
- =?utf-8?B?aTc5NWFUclNxMVZqL1ZpZE9nYksybVRmdWpGZ0U2bE4ydTRjUDExREdqUHpp?=
- =?utf-8?B?WlV0NWhTTFZuUTd5OERoeE1oTWdVeERWc2RTNVFpblBTMDR0RDRVK2ZGaXdj?=
- =?utf-8?B?UDVjRk9jU1hWS0lpaDNwb09UREt6SmNJRCsramUyZFFRd0hLQ2wrTXZyclhU?=
- =?utf-8?B?M01ZNGd0WGtvQVRFT1BRWlJXdCs0azB1VkRoWXZPNnlMZklPbkk0RlZzQlpQ?=
- =?utf-8?B?VXl0STVzOEkyRmxKaUdWNFFlbzhKaGJKSWJuZTBYbmd0TXZFcVdHbkhKQ0Vm?=
- =?utf-8?B?SjEwdjJVQ2JTWk9ZQUNDb2hYT0ZJQ3VpQ0lUMDBMYlZ5ZHl2UVA4dnFqWVBZ?=
- =?utf-8?B?Y3RZZG5YNDRNVmZXQ3I0VG55OUo4Tm0ra1lhcWV6ZUxsenY4cXNxRnJRdXQv?=
- =?utf-8?B?RTZlS2NZQ3pjMmpHRDdSMktVY0x6bld5Nzc1QzRpYk0ySGpuNUQxcEkzWm1K?=
- =?utf-8?B?VmdSR3ZlRjl5RHJ3djJ0c1VRYU0vZW4zK1cyRDMyS2g4R1RUM3JyK3dxR3o2?=
- =?utf-8?B?dE53M29iSXdTVCt2bXdnWWVMelBIM21WUldsOHV3OFZjdWdOUHhIU05WcVpT?=
- =?utf-8?B?WUZvcmRiUzVSOVlFMVF0UncxZnE2bU5WeDkwZ0N6Zy9FRVRSOFNlRjArZFRQ?=
- =?utf-8?B?THJ1OFJHRUhaN3N1SU1jc3Rrbzdiem9udEl5UUVuWnV6Q1pRUk5NVHJzVlND?=
- =?utf-8?B?UGpFM1lDQ3F4V0VhdDhXVVVoMmhXWkNjbVFkWnMrTEdFWUFCQVAyWlpuWk9L?=
- =?utf-8?B?a2NKUUp4YWRGVmxKTGxjK2UzcDZ1ZmJDaS9XT2pNS25LdDhxZnFPS211TEpJ?=
- =?utf-8?B?dVhMRnFuaHhJZGdNUVVnY1NFWEl4Q2tXUHdmNFZEbzZFc1c2bTRTWFYzd0RW?=
- =?utf-8?B?ellQemMyRWh4bDlCOTVlVlhBblorQjFnUVBaOUNNUTkvaHJBY2xSSXIvaWRi?=
- =?utf-8?B?OTFIcUl6OUdIRHRlYm1WaExzVHluT0FHOGpXbkNuN25UVk5RV3hXVkdBOFVT?=
- =?utf-8?B?MnNuQldVVWhkaXYvR3NKaDZDTVhxU3VXSGlQUVVYVHlKUzVhK3JKcVM4STBt?=
- =?utf-8?B?R09hY1FZWjlCOVRMTzdRemFVRWVDeWYwczlpT0JHSFNaL0pJdFBvTVVGZUlS?=
- =?utf-8?B?N2R1S2lrQzNGbmo0dHBCNkNDeFFmYWhIbFpveCtEMGptdWlpckwrUnJ0TmFj?=
- =?utf-8?B?bEU0QzVRMUxjWHZLMmRuZlFNZFVTNmdwSTNTZWxuWVRFcUE0KytiZFp1K2t4?=
- =?utf-8?B?TDlta0VWb0FPU1Y1K2VHUE1IZHphaG1qL28rSi9zUlJtdlNWNTFzeTZTemFq?=
- =?utf-8?B?UUR3VWlkK2E0ZTBBVXN6QlhjNllwcHNUMlIvUG5pdVYrNFdLMWtxak5OcTlt?=
- =?utf-8?B?RUhLNUNzVXByR2tyTFB1b1UyRm01Vi9BMWIrZ3h2K09tMVZBaWpxS2JvYTRT?=
- =?utf-8?B?bzM3YWFGNVdndTcxMGs4dHhPVFBIWlR1ekh1OTBWdUF1YVdNQkttR1FmVlhr?=
- =?utf-8?B?Q3lpMU9vZVd1MmtjdTdGcitlUmxUZk1HUjlEL3ZpdVVFV3lYM1o5M1kxcGY4?=
- =?utf-8?B?ekwvTGdTbFVHaGNTVmNOeEFUaW1URkpvdzJZM3FWcXZSUGdGRm1LOUZRWm0w?=
- =?utf-8?B?UzljblJlU0xwcmRlR2M1TzNHODZZL3krdEdCWTYxeVMyTklhbXorbHBjSGlD?=
- =?utf-8?Q?/gT1nPv3OpnG/yzf/Biary80AKCHgL0CvXcgj?=
-X-OriginatorOrg: altera.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 89e2f99e-c81b-4f3d-6089-08deabfee89e
-X-MS-Exchange-CrossTenant-AuthSource: PH7PR03MB7063.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 May 2026 06:07:25.1096 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 910AXwr8YY8JBeYLiK47UWKT8rZjIoHTfVez3bRk/2kYPdw7wphIVmrvIGb21RWWVJ2UvOqANTY7RsDojyrNtfQcc4JPe4oANmLcGu95Ag0=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR03MB6529
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CAFLszTiwN_YU9SkHATfXCW+AhhDWpsNPudY9wTxC2Q98jjdLow@mail.gmail.com>
+X-Authority-Analysis: v=2.4 cv=fMMJG5ae c=1 sm=1 tr=0 ts=69fc1b79 cx=c_pps
+ a=m5Vt/hrsBiPMCU0y4gIsQw==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+ a=kj9zAlcOel0A:10 a=NGcC8JguVDcA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22
+ a=EUspDBNiAAAA:8 a=B8IGObF7S2O4Iy4BeFMA:9 a=CjuIK1q_8ugA:10
+ a=IoOABgeZipijB_acs4fv:22
+X-Proofpoint-ORIG-GUID: kRXLUYoVrGNqaEDIdFj4XdUKBPPYH7SU
+X-Proofpoint-GUID: kRXLUYoVrGNqaEDIdFj4XdUKBPPYH7SU
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNTA3MDA0NSBTYWx0ZWRfX0ICgaTxHIKo8
+ IO8XZOICe8zGUX34tbu9vMteHu0t2OZoKya60ElOeMcStZTkARJPKogHTinmnNXd5gE2bDxLR6X
+ enQGCwTqMVf2SUXXiqHcTUReQPc77UGrC4mfgcZ344JUu7E1UyVO68Ypyzb/54aAh8C+9F2WLCX
+ opgEu+Sov0wL8XiNFbT205GcQcJPnB6A/CU3ladzKu1zfhRUvG2b8t+ZWiVZs04NSmWYsNa2ufC
+ Zt2pDc4Q1AEihNAl0Xv15IgZFIbBE9fQmk33l2MxO1P7Z56okbShe1iZEfZSC5cn525PYzLPDbr
+ AZW1QZsdvjOKatDjjh0z3nZFQ0ScsS6bj55PuPMHcZWRNxOWwcq3im0+c5o9xYDb9Dy3a715zfZ
+ n67oYPOl2QO07vcZ2VmXn7VDMu1Uh8ORZ6KcZ4f2KwYpnOUonE0DPj3bmaaStvN6qUpHmCE61GH
+ YhvPR2hls2QmoKO0e7A==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
+ definitions=2026-05-06_02,2026-05-06_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ adultscore=0 phishscore=0 priorityscore=1501 suspectscore=0
+ lowpriorityscore=0 bulkscore=0 impostorscore=0 spamscore=0 malwarescore=0
+ clxscore=1015 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2604200000
+ definitions=main-2605070045
+X-Mailman-Approved-At: Thu, 07 May 2026 09:25:41 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -158,75 +167,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Marek,
+On Fri, Apr 17, 2026 at 08:53:54AM +1200, Simon Glass wrote:
+> Hi Varadarajan,
+>
+> On 2026-04-16T05:39:18, Varadarajan Narayanan
+> <varadarajan.narayanan@oss.qualcomm.com> wrote:
+> > mach-snapdragon: Add initial support for IPQ5210 SPL
+> >
+> > Add basic SPL infrastructure for IPQ5210 SoC. This handles basic serial
+> > console init, identifying the boot media, loading the additional
+> > firmware binaries to setup DDR, TFA and eventually jump to U-Boot.
+> >
+> > Signed-off-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
+> >
+> > arch/arm/Kconfig                  |   5 +-
+> >  arch/arm/mach-snapdragon/Makefile |   3 +
+> >  arch/arm/mach-snapdragon/spl.c    | 640 ++++++++++++++++++++++++++++++++++++++
+> >  3 files changed, 646 insertions(+), 2 deletions(-)
+>
+> > +static int spl_find_partition_info(enum uclass_id uclass_id, int device_num,
+> > +                                const char *part_name,
+> > +                                struct disk_partition *info)
+>
+> This function is defined unconditionally but only called within the
+> CONFIG_IS_ENABLED(MMC) block - you could use __maybe_unused ?
+>
+> > +void *board_spl_fit_buffer_addr(ulong fit_size, int sectors, int bl_len)
+> > +{
+> > +     void *buffer = spl_get_load_buffer(0, sectors * bl_len);
+> > +
+> > +     if (!buffer) {
+> > +             pr_err("Failed to get FIT load buffer\n");
+> > +             qcom_spl_error_handler(NULL);
+> > +     }
+>
+> spl_get_load_buffer() always returns a non-null address so this code
+> is not needed
+>
+> > + * @entry_point:Pointer to store the retrieved entry point.
+>
+> nit: missing space after the colon
+>
+> > +     if (desc->part_type == PART_TYPE_UNKNOWN) {
+> > +             printf("Initializing partition table\n");
+> > +             /*
+> > +              * Prefer EFI/GPT
+> > +              */
+> > +             desc->part_type = PART_TYPE_EFI;
+> > +     }
+>
+> Simply setting part_type to PART_TYPE_EFI doesn't actually initialise
+> the partition table - it just tells the partition code to assume GPT.
+> If the device doesn't have GPT, it will fail - how about calling
+> part_init() or letting part_driver_lookup_type() auto-detect?
 
-On 7/5/2026 11:51 am, Marek Vasut wrote:
-> [CAUTION: This email is from outside your organization. Unless you trust 
-> the sender, do not click on links or open attachments as it may be a 
-> fraudulent email attempting to steal your information and/or compromise 
-> your computer.]
-> 
-> On 5/5/26 8:54 AM, Chee, Tien Fong wrote:
->> Hi Alif,
->>
->>
->> On 28/4/2026 11:32 am, alif.zakuan.yuslaimi@altera.com wrote:
->>> From: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
->>>
->>> The SDRAM must first be rewritten by zeroes if ECC is used to initialize
->>> the ECC metadata. Make the CPU overwrite the DRAM with zeroes in such a
->>> case.
->>>
->>> This implementation turns the caches on temporarily, then overwrites the
->>> whole RAM with zeroes, flushes the caches and turns them off again.
->>> This provides satisfactory performance.
->>>
->>> Move common code sdram_init_ecc_bits() to new common file sdram_soc32.c.
->>> Preparation for Gen5 uses the same memory initialization function as
->>> Arria10.
->>>
->>> New Kconfig is introduced to enable this implementation only on the
->>> default
->>> Arria10 and CycloneV boards as this will increase the SPL size which
->>> will exceed some Gen5 devices' SPL size limit.
-> The subject is severely misleading, the ECC scrubbing was upstream since
-> 2018:
-> 
-> 07252f6f7e37 ("ddr: altera: Add ECC DRAM scrubbing support for Arria10")
-> 
->      ddr: altera: Add ECC DRAM scrubbing support for Arria10
-> 
->      The SDRAM must first be rewritten by zeroes if ECC is used to
-> initialize
->      the ECC metadata. Make the CPU overwrite the DRAM with zeroes in 
-> such a
->      case. This scrubbing implementation turns the caches on
-> temporarily, then
->      overwrites the whole RAM with zeroes, flushes the caches and turns 
-> them
->      off again. This provides satisfactory performance.
-> 
-> Even the commit message of this patch is a duplicate of that one in the
-> commit from 2018 ? What is going on here ?
+Since this is on eMMC and GPT is kind of mandatory on eMMC, would prefer
+to fail if GPT is not found. And, support for other partition types are
+not enabled in the config.
 
-This patch was derived from the original commit you have mentioned.
+Hope this is ok.
 
-The intention of this patch is to bring over the ECC scrubbing support 
-to Gen5 as well via a new common DDR driver shared by both Arria10 and 
-Gen5 devices which is sdram_soc32.c. This makes ECC scrubbing support no 
-longer exclusive only to Arria10.
-
-Perhaps staying close to the original patch subject and message to 
-describe the original functionality might have create some confusion 
-here. I can rephrase the subject and the commit message for v3.
-
-Do let me know if you have any suggestions for me to improve the commit 
-message for the next submission, I can add your sign-off as well with 
-your permission as you are the original author for this feature for Arria10.
-
-Thanks,
-Alif
-
-
-
-
+Thanks
+Varada
