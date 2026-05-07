@@ -4,107 +4,142 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68A77CD3427
-	for <u-boot@archiver.kernel.org>; Thu,  7 May 2026 09:39:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1DDD7CD3427
+	for <u-boot@archiver.kernel.org>; Thu,  7 May 2026 09:39:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 639DB84B59;
-	Thu,  7 May 2026 11:31:37 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 9F78C84B52;
+	Thu,  7 May 2026 11:31:40 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="x7nkeuR7";
+	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="F3LHP9Mw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 29F3E84B52; Thu,  7 May 2026 11:31:36 +0200 (CEST)
-Received: from mail-lj1-x22d.google.com (mail-lj1-x22d.google.com
- [IPv6:2a00:1450:4864:20::22d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 0D07284B73; Thu,  7 May 2026 11:31:38 +0200 (CEST)
+Received: from SN4PR0501CU005.outbound.protection.outlook.com
+ (mail-southcentralusazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c10d::3])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 15AF584B43
- for <u-boot@lists.denx.de>; Thu,  7 May 2026 11:31:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 65E5A84A6D
+ for <u-boot@lists.denx.de>; Thu,  7 May 2026 11:31:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jens.wiklander@linaro.org
-Received: by mail-lj1-x22d.google.com with SMTP id
- 38308e7fff4ca-393c93a01abso5058271fa.1
- for <u-boot@lists.denx.de>; Thu, 07 May 2026 02:31:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1778146290; x=1778751090; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=HOShavlW6NiHeQRh90iLZnyQ8tvKQApeHH70KNDox5c=;
- b=x7nkeuR7QLwudDFqeAgYyWdfmcHEj4/nxBkMIHdmB15hmtrNRbkltqXGaunfvTQpy1
- Pl1WPXic6J/uhWdIlWOSdFxfUY8cDWtbO34bAgf3lMPIMeXklgUamQOWSlXJydRL/6NQ
- hzO2egXKcDU3K6XMqWAK/d72sv5q4Udd9fMLvyhEEahNnSL2Vgj5/6SHfDOfGeH6rqCO
- rqTaaN2sQWLnpdU8zf8JoFjMQRnOdQkNPDGWYUOsdEwJsC6Yu46M1W1syimpb0ApomPK
- idXV319NNd8Ux1H/fXCYT5Qn2uwfSNY6bil0ppOeq8vAgiXYBoSiFBJmFAXO9YdjIap/
- Uoog==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778146290; x=1778751090;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=HOShavlW6NiHeQRh90iLZnyQ8tvKQApeHH70KNDox5c=;
- b=Ix8cS9Kw5XxmO2l71oaaSVUM8SLXRlDpXnN536BDu9e7RXwxTR/cKYYbl9590td59/
- dJqivWyEyg06YCc7/OFaOQc5QpOP0EQxQPNE/I1XRDVHaTLP+rlNQH2GmDn73Y5yQdZR
- Fpsc4cLR+uYwWfGDK1dfyq4QHSUrsIWWaUEVH0/+px/M36pPD8/EP0tkp2gsszzm+nnK
- tyqvwd2xje0S31TCOFrP5WPnbEG4zoRuts8dNmIMaczY2ClmRipfepmvhaKr1cAqKW9B
- oqQhRNER6CTnUkMgH1VQrQ3xSTTCEUdD+/Sa8MYUNu8SSj/VJnyTrR888kH542wJrfXg
- nYJg==
-X-Gm-Message-State: AOJu0YxdeUxXF7G0gsyGH+HxBUJuZJngnSo7rUmk4ahK1aT/ppvU/ocS
- 8Z3r29XooQOrRlGGEojRoRIkpEQL/CF5McugGLr99pa6n+Y+nEea2sKNJNlsRT6zI7ruzdWKe4+
- Vx7WI1neXcQ==
-X-Gm-Gg: AeBDievkniS18cA3F7KQUu5xbSt5XFs/4hp4N6I8y9Hx9vrprmWJwNJtG7TdRW96+Pz
- yZ995cF2YFmwGVKGikb6hYVt1bnokhdtwISaImhhF+/UjmwdPZo0tU+lPOl4hpRaZSfM3qjJ1aQ
- JRV4wY6KhidmK3YUAaqfekQ64pbCAW4/WJdbpBVfCQopUNXZavoIU3Yg26SrGQaXabyrRy9IBha
- lu9hYi9Wpt4+XLUL6n1H8bS0448OVEPiJdBJ0hUz7VTHOynnwnRG/jyN3As2mEpIn7ulJdeqLvH
- sezlbT9FYqXH7AzrgQmyExhuWKj4nFDwVoPCf3aulxlHyBLwe7QA0BvEUytFvTK/K24LmuoosCn
- FxFS3Zxthq/1GAHm4kceHoeAUOWI7Uo5vHQ+9CdoM43uzag8MUJ6P1lW0rQjE1CI44bzhhsbVGz
- QBW39ueaHx4j5Cp1yBbwt0YWOQ4rGpobV3/ux6HLa0PmbLr9JyKDyyeZZFlm3U8j9RhCfvFVwVM
- IdXa6oX0Q4sBIIV7F2yTCri/wBbnLdyR1RtzQWH1Q==
-X-Received: by 2002:a05:6512:234f:b0:5a3:d375:f587 with SMTP id
- 2adb3069b0e04-5a887ceb2e9mr2854581e87.35.1778146289281; 
- Thu, 07 May 2026 02:31:29 -0700 (PDT)
-Received: from rayden.urgonet (h-79-136-84-34.A175.priv.bahnhof.se.
- [79.136.84.34]) by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-5a8914953d6sm696937e87.73.2026.05.07.02.31.27
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 07 May 2026 02:31:28 -0700 (PDT)
-From: Jens Wiklander <jens.wiklander@linaro.org>
-To: u-boot@lists.denx.de,
-	Marek Vasut <marex@denx.de>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Andre Przywara <andre.przywara@arm.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Anshul Dalal <anshuld@ti.com>, Bin Meng <bmeng.cn@gmail.com>,
- Casey Connolly <casey.connolly@linaro.org>,
- Chunfeng Yun <chunfeng.yun@mediatek.com>,
- Eddie Cai <eddie.cai.linux@gmail.com>,
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- Ion Agorria <ion@agorria.com>, Junhui Liu <junhui.liu@pigmoral.tech>,
- Kongyang Liu <seashell11234455@gmail.com>, Lukasz Majewski <lukma@denx.de>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ spf=pass smtp.mailfrom=tien.fong.chee@altera.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=iey0g+wIp7qlUK1PRntvkpUHnVLNfCKJBOFJCqJSPVUuWKnbqfxTeMnG+Qxf83arn5tVVXx9AyLZhUo9Ph5N97QChVJDUcH6stYkqE10lJ7HVQDW+anEyi6VUoF8IHlq47gNJnMIUa60zx7fjwNAl0V5DfzJY12aagafJvHseDSyA2w5MF3/s8QDik3y8qpq3EOtxbgavjhgs+E758YECYiNqafzGhzffXPesK7HAfhlKL/RdLpcuiupxtwTwVyEZz3ii+/jMjLf6VjfwOeBI4aZUOLUqPKqARCNq3Mn8iGjMOouwjIUakhjY0tqza5+WNhJuY7SBAsyJ72ueAs0Iw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=Qjbs6uMsL/RHtZspDz8h3qbOB/g92WTbZSYHLUgdkJ0=;
+ b=wZCFxFpc+CBT6wxXbWGlocDxdGpLPdoXPasV+YYQGojVXN+mc0ffpus1EwVq9rbXS31j3+7cpd9a0Q33kc8V5lL8smf0nhmrUG9INeHuIQYzsiEnRIN+QLyvpbYk9ylrb3F+wBUYr8n3xjuwSri3ev+n3ml7NttxMdn+BduJFN0LSdgCuX8kTd+J1Xp/w24Gjtw134SbPghkeb+vw03Wydqo5Oy6+2tLDiZvcbfU0rE/Vn7DcaqqBKAPnoScUV5WJ5Vo56Uy0AaORmK1A+k1kmN7mz9U2M6cEoXj59G/CM0+qOEAhUyyvzlaTp25Nc2c0pp4ij8DrOnHXT8SkwH0Sw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
+ dkim=pass header.d=altera.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Qjbs6uMsL/RHtZspDz8h3qbOB/g92WTbZSYHLUgdkJ0=;
+ b=F3LHP9Mw6hlNjN5lXmD/wQJtqc0OwhlCR4rgiuqoIrQtKKhO/fcxnINC4atS0Dq1EKDb55yf+1biRQWHsflbSokoWcj0IyWOBok0TmLS+PS4XzyBi0g5wyR8EGo4tDoUf4/spaYV6FHgtksP1igY0NECokxJg4Zq8cYWskjxAXcMppxmg6WcnLKQMwOdO1dR2JWF0RvijXopYjLfej8vnysoo+MUSHiSqN980Uo746rdSbh/dK0eQleW7JU2pWAlehECyrsKs4mSlry5qslq9ef1x+XRDv223DM5vPZMPB2rbN9ndLdv3yl6+cMmWPUFN6C+qd6HnuDjsA8v7x+5Nw==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=altera.com;
+Received: from LV8PR03MB8137.namprd03.prod.outlook.com (2603:10b6:408:295::8)
+ by CO1PR03MB7916.namprd03.prod.outlook.com (2603:10b6:303:276::19)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9891.15; Thu, 7 May
+ 2026 09:31:27 +0000
+Received: from LV8PR03MB8137.namprd03.prod.outlook.com
+ ([fe80::efa9:4b97:3b4a:8235]) by LV8PR03MB8137.namprd03.prod.outlook.com
+ ([fe80::efa9:4b97:3b4a:8235%4]) with mapi id 15.20.9891.008; Thu, 7 May 2026
+ 09:31:27 +0000
+Message-ID: <c569f03b-1383-4771-8169-99eb611d3f5d@altera.com>
+Date: Thu, 7 May 2026 17:31:17 +0800
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 2/9] configs: stratix10: Combine defconfig for all boot
+ flashes
+To: alif.zakuan.yuslaimi@altera.com, u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, Marek Vasut <marex@denx.de>,
+ Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
+ Lukasz Majewski <lukma@denx.de>, Peng Fan <peng.fan@nxp.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>, Simon Glass <sjg@chromium.org>,
  Neil Armstrong <neil.armstrong@linaro.org>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Rasmus Villemoes <ravi@prevas.dk>, Ryder Lee <ryder.lee@mediatek.com>,
- Simon Glass <sjg@chromium.org>,
- Stephan Gerhold <stephan.gerhold@linaro.org>,
- Svyatoslav Ryhel <clamor95@gmail.com>, Tom Rini <trini@konsulko.com>,
- Varadarajan Narayanan <quic_varada@quicinc.com>,
- Weijie Gao <weijie.gao@mediatek.com>, Zixun LI <admin@hifiphile.com>,
- Jerome Forissier <jerome.forissier@arm.com>,
- Jens Wiklander <jens.wiklander@linaro.org>
-Subject: [RFC PATCH v2 57/64] usb: dwc3: import from kernel v6.13
-Date: Thu,  7 May 2026 11:28:04 +0200
-Message-ID: <20260507092843.358908-58-jens.wiklander@linaro.org>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260507092843.358908-1-jens.wiklander@linaro.org>
-References: <20260507092843.358908-1-jens.wiklander@linaro.org>
+ Kory Maincent <kory.maincent@bootlin.com>, Yao Zi <me@ziyao.cc>
+References: <20260428034822.23756-1-alif.zakuan.yuslaimi@altera.com>
+ <20260428034822.23756-3-alif.zakuan.yuslaimi@altera.com>
+Content-Language: en-US
+From: "Chee, Tien Fong" <tien.fong.chee@altera.com>
+In-Reply-To: <20260428034822.23756-3-alif.zakuan.yuslaimi@altera.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: SI2P153CA0033.APCP153.PROD.OUTLOOK.COM
+ (2603:1096:4:190::21) To LV8PR03MB8137.namprd03.prod.outlook.com
+ (2603:10b6:408:295::8)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: LV8PR03MB8137:EE_|CO1PR03MB7916:EE_
+X-MS-Office365-Filtering-Correlation-Id: 6f8b2f73-252c-468f-2389-08deac1b68d2
+X-MS-Exchange-AtpMessageProperties: SA
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|7416014|376014|366016|1800799024|18002099003|56012099003|22082099003|55112099003;
+X-Microsoft-Antispam-Message-Info: ZnkB1e44NNlXkhj/oh6qPtNtxcrBzxVk/v7hij9zzLS7crz0IGXIO2ZjVqOuNuVqtHs6kfe5GA3upF/zj2Y0Zu0TjhrhpC+SqUmEdeJvY2Cv1YOhJAFfxaFYisp+aBnI9h+C1lirbuMA6C6qH6b2xSX3MW6M6FXQNwPikdzgcGmelnl609lYdWicXRjmO49lANLZd5/z83JGt1nC/qBQqLWEikE7TBd12XfK0ktZmXRWf2nkUlwgRvRlpVFCyBSvFOnAIfOrXUWSQ9RIHqFJwhpm+I1CvF2RiICVNBueQgEgMFhiAh1pxkfiH7eV2YBvD2o6j9381fbx2KQ6h7vC5ftz8H/xHlbEsy0635GxL2RR7dvYG1iinZ+mZrTxiquWu9tYXQEMc7Sj+wZ+DJbOqmqCz/pbqB/DTLmyIrBFhrIdlxPOcfh3D+e+SkVI40awm6STtcjiYbNJtMHxyLrvGfKtx1bxXmfFoaenh945jB9U2IKa7oOF6D2oCV5lqJ0HEOEtgeUuQXQXDA8z/KvyG4Wmj4+x4bFjc+4nDZ8f1Q5QG6/C7uIPRkxB734n6Rv3wZ2cBui+I7KtMelKr8UOFRJL3u3mr7SX9sfho1DBPWaHdDn6esWsxyHx2JzJxHLupnIQxEiRT4kwca+mr5hxmRJdDeC0gLc9p/voFCwmuPpCdL1cSuZZxrp3EhAQrRhf
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:LV8PR03MB8137.namprd03.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(7416014)(376014)(366016)(1800799024)(18002099003)(56012099003)(22082099003)(55112099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?SUoyeG9IWWN5ejN6clo5REhLZkRsVmJaY1dnb0dxMFdXYlZLK3ZLZEtRYnNB?=
+ =?utf-8?B?NHdXem1ORDJ3aVEyU08rd2R3VFRneW0wenhkN2k1Y3V2YXBUZlNsUjA3Mkta?=
+ =?utf-8?B?YXkrSmd2UW1FNmxDNlp3cGF3ZUVxbVcrdys0cjZNQTNWaldweWJvckxtN2s2?=
+ =?utf-8?B?aFo1WjRFd2psZE1HcjBRay9LU2thU0JGS2tvU1FJRC9JZlVvR2tUWERvU2tI?=
+ =?utf-8?B?QnBUc215RUE5SWs0OUVwZWdOSTNUOVN6STcyK2Z1aVJ0ZDYxMy81NmkyTkcv?=
+ =?utf-8?B?eHdQQ1JoUzFrSEJESUNXMmZuZ3B1UHF0clNDTWt5N1ZGN3M0V3lxN3lOV1Z2?=
+ =?utf-8?B?bUpjMHlUNmtKUHpBcEU1NVVaMlBmM0xsWHN5SHkxMmxUNWN5OWx6emRHMTNl?=
+ =?utf-8?B?UWwzTzFZVEl4Mm5FYjc5VjZENm9RTTZVejdvSjdhWHNnK3B6ZGp3a0MvZ05o?=
+ =?utf-8?B?WWFMVDRpeWVKSk15S2RGQzRMNHdNSTZ5eERsbXh3Ky9kSDdRWUY0cDRITGRl?=
+ =?utf-8?B?V0Yxbko2cFh0OStlWEt1dlZScDJyK0I1RjlrOHVtZXJQaWFFYjVKSWRwVkpK?=
+ =?utf-8?B?ZnpVYzFqVG1RbVkxMHJHMGhUdUwwMjRUaDBFY3lLT3JlbmF0YjJ5aTk1Uk1M?=
+ =?utf-8?B?VlJONlR2bktXKzV0MzFvdjdDSXJybVlUbms5M3ppTmZyMi9NbkZvN1pjS1Yz?=
+ =?utf-8?B?amJKM1VFeEhqZUFVanZhdzcycHlPd1VhMjlvbER2S2Jka2FVVk45Vm0rL0Nr?=
+ =?utf-8?B?YXE3dWQ3eDRRYVB0cldxVlpuMC9OSFFiem15Vld2cWkrWFdUNGE2U0RiWm43?=
+ =?utf-8?B?TXRCbG5tMHo3VnhIYlNDK2F4dEdHYnNadVIyUlQreXAxM2lYWnVxN3Bua1c4?=
+ =?utf-8?B?bitQdVc0VVY3ZURpYkJxbzlGRXB5ak16V05Ub0d6R01vTnNoWVkvM2cxMmJj?=
+ =?utf-8?B?VFdOWnJpaUtiUjVINk9tUWg4NnR4dm92OE12aDEySW9MTHpjVjNibTNKeVJv?=
+ =?utf-8?B?cGtEUGlOMmRocjdQME5qMVJDRmtpbEFUVjhaakNpcTdnNXU0SW8vSkxnZXBP?=
+ =?utf-8?B?VnR3OS9YNWhqWitvTkM1c211V0czMFArV0RFTFZLQ1VCSGJubkVMUnhIZFE2?=
+ =?utf-8?B?QVJiNzMrUFFlWGUvS0UwenBqeWh2QXFDRnE3YmxtR0pqQ2ptMWNmVXlnZk1l?=
+ =?utf-8?B?WmNmbUlCMTJLK1ZIeTZMeWtWOFFrQTlzY3pZbnhSc3RjUEE0ZWhtMUg5ZEFQ?=
+ =?utf-8?B?MGl3azZ3SUhxSGF2VjRCQlA5OElINWhuNmVDb0IwWWVOVU4wbUxCeGxBY3Zq?=
+ =?utf-8?B?V2lHaUxUdmJQQldZODkzSlNEcDZjemtpVm5XZ3pmWkp6MU5MSHA2dUhZS3F5?=
+ =?utf-8?B?VnJ3aTdqd1dtb3dJUSs2ZlU5amFRRFNUa05Ia1NnbGhsbnVuTkFBT1piOEIz?=
+ =?utf-8?B?ZXlNTmtJSVdvVUdJR25EamxjbkV4M1lhYnpZbHU5ck41VTVsQlZRenJPSlBp?=
+ =?utf-8?B?d2t5QlFuWHRnTU1lTkhGWHdWRXY4Wkg5U29vd0NMWnlrUG9DRDdtOGNTTHNn?=
+ =?utf-8?B?ejY2eTV4N29FVEJKZXZJb2YxcTEveE4wMk5OY0RCdVBFV3lBZUVPQS9WSitm?=
+ =?utf-8?B?QkhISWhlMWRHUWoxVmErRnBlVXY1TmhLSUF3N1ZLc0hUOVIyeVZBMG5iZDFS?=
+ =?utf-8?B?bnJXK0ZSOFVXYzU5cEdFbmg2cUR3NzBSbksrcGRWOGVuSlVhckxvR3pEazdI?=
+ =?utf-8?B?Y2cwcEpYSXFkdFhIUmkyc3lHZVN1LzBxMWExaDYwY25hZCtJc1dYS0RFQmpC?=
+ =?utf-8?B?ZC90cDJXSDIybXo0YmhxR2lQLzR4T0FGaEZEM241SE5Qdm1pMW92WjlENlBB?=
+ =?utf-8?B?YlhJODk1dWFWVnRvZ0xoanpQeWNjVlczTFUzekU5RTJhZ3k3d3VZNkZ4eVRl?=
+ =?utf-8?B?eFU0Y3A3NlpkTzh4VTlabXhDbk5YelBULzczdk01RnRzUys2N0dDRmJmK2Vh?=
+ =?utf-8?B?UWwvS0pONTJ6WEhyaWxkdlJ2aFdOdWEremRyb0xkQ1VVTmo3VEZNWTd1bjNh?=
+ =?utf-8?B?Z1luenlsYWt0TEZUNEQ0ZGc2amduYksvbWNXT255ZGM4WEFvOG5XT2p1YnhD?=
+ =?utf-8?B?bHVpQ2JqckdETU1GTFlDS1VSNWNlUmx1TnlJcmFqWS82TGZUb2s2K1Z5Vncx?=
+ =?utf-8?B?bVBGTi9YZjlTVjlzZnJ4KzR5a1N0cXo2VWZ2TC90WmlPdG9YVzVISXBVOUI5?=
+ =?utf-8?B?cE8vQnFLQW1jUkJJay9ESnQzRm1CMDVkS1NPNUVqTWhlS3h0MjhUTlp2Qnln?=
+ =?utf-8?B?dVpxKzNnMExKMVUvR0p6YkhueGFPVXRBc2Rqd0NFa0RBYWl0M2JNdGRjb0pm?=
+ =?utf-8?Q?Tl86+spBoECd8MAY=3D?=
+X-OriginatorOrg: altera.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 6f8b2f73-252c-468f-2389-08deac1b68d2
+X-MS-Exchange-CrossTenant-AuthSource: LV8PR03MB8137.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 May 2026 09:31:26.8737 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: td501m3b1LO7/yomM0xB47zJd70X7L4wehVFaojC0IgBopLe0e0U7fChlEm9VGbR6hNDRqvyXQRim6JsYfWdqVcTyXfaYIKblmBYs4vW228=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CO1PR03MB7916
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -121,545 +156,284 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Sync Linux kernel dwc3 changes from v6.12 to v6.13.
+Hi Alif,
 
-The following files are preserved accross the import:
-Makefile Kconfig dwc3-meson-g12a.c dwc3-meson-gxl.c dwc3-omap.c
-dwc3-uniphier.c dwc3-generic.h dwc3-generic.c dwc3-generic-sti.c
-dwc3-layerscape.c ti_usb_phy.c
 
-Skipping unused files:
-debugfs.c drd.c dwc3-exynos.c dwc3-haps.c dwc3-imx8mp.c dwc3-keystone.c
-dwc3-octeon.c dwc3-of-simple.c dwc3-pci.c dwc3-qcom.c dwc3-qcom-legacy.c
-dwc3-rtk.c dwc3-st.c dwc3-xilinx.c host.c trace.c trace.h ulpi.c
+On 28/4/2026 11:48 am, alif.zakuan.yuslaimi@altera.com wrote:
+> From: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
+>
+> Combine all MMC and QSPI configs into single defconfig which is named
+> as "socfpga_stratix10_defconfig". This will be the default defconfig to
+> use.
+>
+> This will support booting from all three flashes using ARM Trusted Firmware
+> (ATF) as the secure runtime monitor.
+>
+> Signed-off-by: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
+> ---
+>   configs/socfpga_stratix10_atf_defconfig | 90 ----------------------
+>   configs/socfpga_stratix10_defconfig     | 99 +++++++++++++++----------
+>   2 files changed, 58 insertions(+), 131 deletions(-)
+>   delete mode 100644 configs/socfpga_stratix10_atf_defconfig
+>
+> diff --git a/configs/socfpga_stratix10_atf_defconfig b/configs/socfpga_stratix10_atf_defconfig
+> deleted file mode 100644
+> index 206343885d9..00000000000
+> --- a/configs/socfpga_stratix10_atf_defconfig
+> +++ /dev/null
+> @@ -1,90 +0,0 @@
+> -CONFIG_ARM=y
+> -CONFIG_COUNTER_FREQUENCY=400000000
+> -CONFIG_ARCH_SOCFPGA=y
+> -CONFIG_TEXT_BASE=0x200000
+> -CONFIG_SYS_MALLOC_LEN=0x500000
+> -CONFIG_NR_DRAM_BANKS=2
+> -CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+> -CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x300000
+> -CONFIG_SF_DEFAULT_MODE=0x2003
+> -CONFIG_ENV_SIZE=0x1000
+> -CONFIG_ENV_OFFSET=0x200
+> -CONFIG_DM_GPIO=y
+> -CONFIG_DEFAULT_DEVICE_TREE="socfpga_stratix10_socdk"
+> -CONFIG_DM_RESET=y
+> -CONFIG_SPL_STACK=0xffe3f000
+> -CONFIG_SPL_TEXT_BASE=0xFFE00000
+> -CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+> -CONFIG_SPL_BSS_START_ADDR=0x3ff00000
+> -CONFIG_SPL_BSS_MAX_SIZE=0x100000
+> -CONFIG_SYS_BOOTM_LEN=0x2000000
+> -CONFIG_SYS_LOAD_ADDR=0x02000000
+> -CONFIG_TARGET_SOCFPGA_STRATIX10_SOCDK=y
+> -CONFIG_IDENT_STRING="socfpga_stratix10"
+> -CONFIG_SPL_FS_FAT=y
+> -CONFIG_REMAKE_ELF=y
+> -CONFIG_FIT=y
+> -CONFIG_SPL_FIT_SIGNATURE=y
+> -CONFIG_SPL_LOAD_FIT=y
+> -CONFIG_SPL_LOAD_FIT_ADDRESS=0x02000000
+> -CONFIG_BOOTDELAY=5
+> -CONFIG_USE_BOOTARGS=y
+> -CONFIG_BOOTARGS="earlycon"
+> -CONFIG_USE_BOOTCOMMAND=y
+> -CONFIG_BOOTCOMMAND="run fatscript; run mmcfitload; run mmcfitboot"
+> -CONFIG_SYS_PBSIZE=2085
+> -CONFIG_SPL_MAX_SIZE=0x40000
+> -# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
+> -CONFIG_SPL_HAVE_INIT_STACK=y
+> -CONFIG_SPL_SYS_MALLOC=y
+> -CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
+> -CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x3fa00000
+> -CONFIG_SPL_SYS_MALLOC_SIZE=0x500000
+> -CONFIG_SPL_SPI_LOAD=y
+> -CONFIG_SYS_SPI_U_BOOT_OFFS=0x02000000
+> -CONFIG_SPL_ATF=y
+> -CONFIG_SPL_ATF_NO_PLATFORM_PARAM=y
+> -CONFIG_SPL_TARGET="spl/u-boot-spl-dtb.hex"
+> -CONFIG_HUSH_PARSER=y
+> -CONFIG_SYS_PROMPT="SOCFPGA_STRATIX10 # "
+> -CONFIG_CMD_MEMTEST=y
+> -CONFIG_CMD_GPIO=y
+> -CONFIG_CMD_I2C=y
+> -CONFIG_CMD_MMC=y
+> -CONFIG_CMD_SPI=y
+> -CONFIG_CMD_USB=y
+> -CONFIG_CMD_DHCP=y
+> -CONFIG_CMD_MII=y
+> -CONFIG_CMD_PING=y
+> -CONFIG_CMD_CACHE=y
+> -CONFIG_CMD_EXT4=y
+> -CONFIG_CMD_FAT=y
+> -CONFIG_CMD_FS_GENERIC=y
+> -CONFIG_ENV_IS_IN_MMC=y
+> -CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+> -CONFIG_NET_RANDOM_ETHADDR=y
+> -CONFIG_SPL_DM_SEQ_ALIAS=y
+> -CONFIG_SPL_ALTERA_SDRAM=y
+> -CONFIG_DWAPB_GPIO=y
+> -CONFIG_DM_I2C=y
+> -CONFIG_SYS_I2C_DW=y
+> -CONFIG_SYS_MMC_MAX_BLK_COUNT=256
+> -CONFIG_MMC_DW=y
+> -CONFIG_SPI_FLASH_SPANSION=y
+> -CONFIG_SPI_FLASH_STMICRO=y
+> -CONFIG_PHY_MICREL=y
+> -CONFIG_PHY_MICREL_KSZ90X1=y
+> -CONFIG_ETH_DESIGNWARE=y
+> -CONFIG_MII=y
+> -CONFIG_SYS_NS16550_MEM32=y
+> -CONFIG_SPI=y
+> -CONFIG_CADENCE_QSPI=y
+> -CONFIG_DESIGNWARE_SPI=y
+> -CONFIG_USB=y
+> -CONFIG_USB_DWC2=y
+> -CONFIG_USB_STORAGE=y
+> -CONFIG_DESIGNWARE_WATCHDOG=y
+> -CONFIG_WDT=y
+> -# CONFIG_SPL_USE_TINY_PRINTF is not set
+> -CONFIG_PANIC_HANG=y
+> -CONFIG_SPL_CRC32=y
+> diff --git a/configs/socfpga_stratix10_defconfig b/configs/socfpga_stratix10_defconfig
+> index ef21dc92493..02a1875a72e 100644
+> --- a/configs/socfpga_stratix10_defconfig
+> +++ b/configs/socfpga_stratix10_defconfig
+> @@ -1,93 +1,110 @@
+>   CONFIG_ARM=y
+>   CONFIG_COUNTER_FREQUENCY=400000000
+> +CONFIG_SPL_LDSCRIPT="arch/arm/mach-socfpga/u-boot-spl-soc64.lds"
+>   CONFIG_ARCH_SOCFPGA=y
+> -CONFIG_TEXT_BASE=0x1000
+> -CONFIG_SYS_MALLOC_LEN=0x500000
+> +CONFIG_TEXT_BASE=0x200000
+> +CONFIG_SYS_MALLOC_F_LEN=0x2000
+>   CONFIG_NR_DRAM_BANKS=2
+> -CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+> -CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x101000
+> -CONFIG_SF_DEFAULT_MODE=0x2003
+> -CONFIG_ENV_SIZE=0x1000
+> -CONFIG_ENV_OFFSET=0x200
+> +CONFIG_ENV_SIZE=0x2000
+> +CONFIG_ENV_OFFSET=0x04100000
+> +CONFIG_ENV_SECT_SIZE=0x20000
+> +CONFIG_SYS_SPI_U_BOOT_OFFS=0x04000000
+>   CONFIG_DM_GPIO=y
+>   CONFIG_DEFAULT_DEVICE_TREE="altera/socfpga_stratix10_socdk"
+>   CONFIG_OF_UPSTREAM=y
+> -CONFIG_DM_RESET=y
+> -CONFIG_SPL_STACK=0xffe3f000
+>   CONFIG_SPL_TEXT_BASE=0xFFE00000
+> -CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+> -CONFIG_SPL_BSS_START_ADDR=0x3ff00000
+> -CONFIG_SPL_BSS_MAX_SIZE=0x100000
+> -CONFIG_SYS_BOOTM_LEN=0x2000000
+> -CONFIG_SYS_LOAD_ADDR=0x02000000
+>   CONFIG_TARGET_SOCFPGA_STRATIX10_SOCDK=y
+>   CONFIG_IDENT_STRING="socfpga_stratix10"
+>   CONFIG_SPL_FS_FAT=y
+> -# CONFIG_PSCI_RESET is not set
+> -CONFIG_SYS_MEMTEST_START=0x00000000
+> -CONFIG_SYS_MEMTEST_END=0x3fe00000
+> -CONFIG_OPTIMIZE_INLINING=y
+> -CONFIG_SPL_OPTIMIZE_INLINING=y
+> -CONFIG_REMAKE_ELF=y
+> +CONFIG_DISTRO_DEFAULTS=y
+> +CONFIG_FIT=y
+> +CONFIG_SPL_FIT_SIGNATURE=y
+> +CONFIG_SPL_LOAD_FIT=y
+> +CONFIG_SPL_LOAD_FIT_ADDRESS=0x02000000
+> +# CONFIG_USE_SPL_FIT_GENERATOR is not set
+> +CONFIG_QSPI_BOOT=y
+>   CONFIG_BOOTDELAY=5
+>   CONFIG_USE_BOOTARGS=y
+> -CONFIG_BOOTARGS="earlycon"
+> -CONFIG_USE_BOOTCOMMAND=y
+> -CONFIG_BOOTCOMMAND="run fatscript; run mmcload; run linux_qspi_enable; run mmcboot"
+> -CONFIG_SYS_PBSIZE=2085
+> +# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
+> +CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+> +CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x300000
+>   CONFIG_SPL_MAX_SIZE=0x40000
+> +CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+> +CONFIG_SPL_BSS_START_ADDR=0x3ff00000
+>   # CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
+>   CONFIG_SPL_HAVE_INIT_STACK=y
+> +CONFIG_SPL_STACK=0xffe3f000
+>   CONFIG_SPL_SYS_MALLOC=y
+>   CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
+>   CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x3fa00000
+>   CONFIG_SPL_SYS_MALLOC_SIZE=0x500000
+> +CONFIG_SPL_BSS_MAX_SIZE=0x100000
+> +CONFIG_BOOTARGS="earlycon panic=-1"
+> +# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
 
-Note that this is a raw import and doesn't build.
-A fixup commit at the end of the series fixes that.
 
-List of commits: git log --oneline v6.12..v6.13
-Commits imported:
-625e70ccb7bb usb: dwc3-am62: Disable autosuspend during remove
-01ea6bf5cb58 usb: dwc3: gadget: fix writing NYET threshold
-a48f744bef9e usb: dwc3: xilinx: make sure pipe clock is deselected in usb2 only mode
-a4faee01179a usb: dwc3: imx8mp: fix software node kernel dump
-6a34dfa15d6e Merge tag 'kbuild-v6.13' of git://git.kernel.org/pub/scm/linux/kernel/git/masahiroy/linux-kbuild
-e33a6d83e178 Merge tag 'usb-6.13-rc1' of git://git.kernel.org/pub/scm/linux/kernel/git/gregkh/usb
-f5313c8b418c usb: dwc3: gadget: Remove dwc3_request->needs_extra_trb
-61440628a4ff usb: dwc3: gadget: Cleanup SG handling
-b7fc65f5141c usb: dwc3: gadget: Fix looping of queued SG entries
-02a6982b0ccf usb: dwc3: gadget: Fix checking for number of TRBs left
-5d2fb074dea2 usb: dwc3: ep0: Don't clear ep0 DWC3_EP_TRANSFER_STARTED
-ce25e2a8d82d usb: dwc3: core: Set force_gen1 bit for all applicable SuperSpeed ports
-61eb055cd304 usb: dwc3: gadget: Add missing check for single port RAM in TxFIFO resizing logic
-6ff78df5b3d0 usb: Use (of|device)_property_present() for non-boolean properties
-b95d0899c8bf usb: use "prompt" instead of "bool" for choice prompts
-fad16c823e66 usb: dwc3: gadget: Refine the logic for resizing Tx FIFOs
-c6d9e43954bf Merge 6.12-rc4 into usb-next
-64f3b5a6bc49 Merge 6.12-rc3 into usb-next
-9a0749d61a9a usb: Switch back to struct platform_driver::remove()
-57d7a6b93822 usb: dwc3: Correct some typos in comments
+Remove one of the two identical # CONFIG_SPL_RAW_IMAGE_SUPPORT lines. 
+Regenerate defconfig with make savedefconfig
 
-Signed-off-by: Jens Wiklander <jens.wiklander@linaro.org>
----
- drivers/usb/dwc3/core.c      |  16 ++--
- drivers/usb/dwc3/core.h      |  15 ++--
- drivers/usb/dwc3/dwc3-am62.c |   3 +-
- drivers/usb/dwc3/ep0.c       |   4 +-
- drivers/usb/dwc3/gadget.c    | 156 +++++++++++++++++++++--------------
- 5 files changed, 114 insertions(+), 80 deletions(-)
 
-diff --git a/drivers/usb/dwc3/core.c b/drivers/usb/dwc3/core.c
-index 98114c2827c0..f219c82e9619 100644
---- a/drivers/usb/dwc3/core.c
-+++ b/drivers/usb/dwc3/core.c
-@@ -1409,7 +1409,7 @@ static int dwc3_core_init(struct dwc3 *dwc)
- 
- 	/*
- 	 * When configured in HOST mode, after issuing U3/L2 exit controller
--	 * fails to send proper CRC checksum in CRC5 feild. Because of this
-+	 * fails to send proper CRC checksum in CRC5 field. Because of this
- 	 * behaviour Transaction Error is generated, resulting in reset and
- 	 * re-enumeration of usb device attached. All the termsel, xcvrsel,
- 	 * opmode becomes 0 during end of resume. Enabling bit 10 of GUCTL1
-@@ -1470,9 +1470,13 @@ static int dwc3_core_init(struct dwc3 *dwc)
- 	if (hw_mode != DWC3_GHWPARAMS0_MODE_GADGET &&
- 	    (DWC3_IP_IS(DWC31)) &&
- 	    dwc->maximum_speed == USB_SPEED_SUPER) {
--		reg = dwc3_readl(dwc->regs, DWC3_LLUCTL);
--		reg |= DWC3_LLUCTL_FORCE_GEN1;
--		dwc3_writel(dwc->regs, DWC3_LLUCTL, reg);
-+		int i;
-+
-+		for (i = 0; i < dwc->num_usb3_ports; i++) {
-+			reg = dwc3_readl(dwc->regs, DWC3_LLUCTL(i));
-+			reg |= DWC3_LLUCTL_FORCE_GEN1;
-+			dwc3_writel(dwc->regs, DWC3_LLUCTL(i), reg);
-+		}
- 	}
- 
- 	return 0;
-@@ -1941,7 +1945,7 @@ static struct extcon_dev *dwc3_get_extcon(struct dwc3 *dwc)
- 	struct extcon_dev *edev = NULL;
- 	const char *name;
- 
--	if (device_property_read_bool(dev, "extcon"))
-+	if (device_property_present(dev, "extcon"))
- 		return extcon_get_edev_by_phandle(dev, 0);
- 
- 	/*
-@@ -2651,7 +2655,7 @@ MODULE_DEVICE_TABLE(acpi, dwc3_acpi_match);
- 
- static struct platform_driver dwc3_driver = {
- 	.probe		= dwc3_probe,
--	.remove_new	= dwc3_remove,
-+	.remove		= dwc3_remove,
- 	.driver		= {
- 		.name	= "dwc3",
- 		.of_match_table	= of_match_ptr(of_dwc3_match),
-diff --git a/drivers/usb/dwc3/core.h b/drivers/usb/dwc3/core.h
-index eab81dfdcc35..f11570c8ffd0 100644
---- a/drivers/usb/dwc3/core.h
-+++ b/drivers/usb/dwc3/core.h
-@@ -81,7 +81,7 @@
- #define DWC3_GSNPSREV_MASK	0xffff
- #define DWC3_GSNPS_ID(p)	(((p) & DWC3_GSNPSID_MASK) >> 16)
- 
--/* DWC3 registers memory space boundries */
-+/* DWC3 registers memory space boundaries */
- #define DWC3_XHCI_REGS_START		0x0
- #define DWC3_XHCI_REGS_END		0x7fff
- #define DWC3_GLOBALS_REGS_START		0xc100
-@@ -179,7 +179,7 @@
- #define DWC3_OEVTEN		0xcc0C
- #define DWC3_OSTS		0xcc10
- 
--#define DWC3_LLUCTL		0xd024
-+#define DWC3_LLUCTL(n)		(0xd024 + ((n) * 0x80))
- 
- /* Bit fields */
- 
-@@ -464,6 +464,7 @@
- #define DWC3_DCTL_TRGTULST_SS_INACT	(DWC3_DCTL_TRGTULST(6))
- 
- /* These apply for core versions 1.94a and later */
-+#define DWC3_DCTL_NYET_THRES_MASK	(0xf << 20)
- #define DWC3_DCTL_NYET_THRES(n)		(((n) & 0xf) << 20)
- 
- #define DWC3_DCTL_KEEP_CONNECT		BIT(19)
-@@ -915,6 +916,7 @@ struct dwc3_hwparams {
- #define DWC3_MODE(n)		((n) & 0x7)
- 
- /* HWPARAMS1 */
-+#define DWC3_SPRAM_TYPE(n)	(((n) >> 23) & 1)
- #define DWC3_NUM_INT(n)		(((n) & (0x3f << 15)) >> 15)
- 
- /* HWPARAMS3 */
-@@ -925,6 +927,9 @@ struct dwc3_hwparams {
- #define DWC3_NUM_IN_EPS(p)	(((p)->hwparams3 &		\
- 			(DWC3_NUM_IN_EPS_MASK)) >> 18)
- 
-+/* HWPARAMS6 */
-+#define DWC3_RAM0_DEPTH(n)	(((n) & (0xffff0000)) >> 16)
-+
- /* HWPARAMS7 */
- #define DWC3_RAM1_DEPTH(n)	((n) & 0xffff)
- 
-@@ -937,18 +942,14 @@ struct dwc3_hwparams {
-  * @request: struct usb_request to be transferred
-  * @list: a list_head used for request queueing
-  * @dep: struct dwc3_ep owning this request
-- * @sg: pointer to first incomplete sg
-  * @start_sg: pointer to the sg which should be queued next
-  * @num_pending_sgs: counter to pending sgs
-- * @num_queued_sgs: counter to the number of sgs which already got queued
-  * @remaining: amount of data remaining
-  * @status: internal dwc3 request status tracking
-  * @epnum: endpoint number to which this request refers
-  * @trb: pointer to struct dwc3_trb
-  * @trb_dma: DMA address of @trb
-  * @num_trbs: number of TRBs used by this request
-- * @needs_extra_trb: true when request needs one extra TRB (either due to ZLP
-- *	or unaligned OUT)
-  * @direction: IN or OUT direction flag
-  * @mapped: true when request has been dma-mapped
-  */
-@@ -960,7 +961,6 @@ struct dwc3_request {
- 	struct scatterlist	*start_sg;
- 
- 	unsigned int		num_pending_sgs;
--	unsigned int		num_queued_sgs;
- 	unsigned int		remaining;
- 
- 	unsigned int		status;
-@@ -978,7 +978,6 @@ struct dwc3_request {
- 
- 	unsigned int		num_trbs;
- 
--	unsigned int		needs_extra_trb:1;
- 	unsigned int		direction:1;
- 	unsigned int		mapped:1;
- };
-diff --git a/drivers/usb/dwc3/dwc3-am62.c b/drivers/usb/dwc3/dwc3-am62.c
-index fad151e78fd6..7d43da5f2897 100644
---- a/drivers/usb/dwc3/dwc3-am62.c
-+++ b/drivers/usb/dwc3/dwc3-am62.c
-@@ -309,6 +309,7 @@ static void dwc3_ti_remove(struct platform_device *pdev)
- 
- 	pm_runtime_put_sync(dev);
- 	pm_runtime_disable(dev);
-+	pm_runtime_dont_use_autosuspend(dev);
- 	pm_runtime_set_suspended(dev);
- }
- 
-@@ -377,7 +378,7 @@ MODULE_DEVICE_TABLE(of, dwc3_ti_of_match);
- 
- static struct platform_driver dwc3_ti_driver = {
- 	.probe		= dwc3_ti_probe,
--	.remove_new	= dwc3_ti_remove,
-+	.remove		= dwc3_ti_remove,
- 	.driver		= {
- 		.name	= "dwc3-am62",
- 		.pm	= DEV_PM_OPS,
-diff --git a/drivers/usb/dwc3/ep0.c b/drivers/usb/dwc3/ep0.c
-index c9533a99e47c..666ac432f52d 100644
---- a/drivers/usb/dwc3/ep0.c
-+++ b/drivers/usb/dwc3/ep0.c
-@@ -145,7 +145,7 @@ static int __dwc3_gadget_ep0_queue(struct dwc3_ep *dep,
- 	 * Unfortunately we have uncovered a limitation wrt the Data Phase.
- 	 *
- 	 * Section 9.4 says we can wait for the XferNotReady(DATA) event to
--	 * come before issueing Start Transfer command, but if we do, we will
-+	 * come before issuing Start Transfer command, but if we do, we will
- 	 * miss situations where the host starts another SETUP phase instead of
- 	 * the DATA phase.  Such cases happen at least on TD.7.6 of the Link
- 	 * Layer Compliance Suite.
-@@ -232,7 +232,7 @@ void dwc3_ep0_stall_and_restart(struct dwc3 *dwc)
- 	/* stall is always issued on EP0 */
- 	dep = dwc->eps[0];
- 	__dwc3_gadget_ep_set_halt(dep, 1, false);
--	dep->flags &= DWC3_EP_RESOURCE_ALLOCATED;
-+	dep->flags &= DWC3_EP_RESOURCE_ALLOCATED | DWC3_EP_TRANSFER_STARTED;
- 	dep->flags |= DWC3_EP_ENABLED;
- 	dwc->delayed_status = false;
- 
-diff --git a/drivers/usb/dwc3/gadget.c b/drivers/usb/dwc3/gadget.c
-index 4959c26d3b71..31a654c6f15b 100644
---- a/drivers/usb/dwc3/gadget.c
-+++ b/drivers/usb/dwc3/gadget.c
-@@ -197,7 +197,6 @@ static void dwc3_gadget_del_and_unmap_request(struct dwc3_ep *dep,
- 
- 	list_del(&req->list);
- 	req->remaining = 0;
--	req->needs_extra_trb = false;
- 	req->num_trbs = 0;
- 
- 	if (req->request.status == -EINPROGRESS)
-@@ -687,6 +686,44 @@ static int dwc3_gadget_calc_tx_fifo_size(struct dwc3 *dwc, int mult)
- 	return fifo_size;
- }
- 
-+/**
-+ * dwc3_gadget_calc_ram_depth - calculates the ram depth for txfifo
-+ * @dwc: pointer to the DWC3 context
-+ */
-+static int dwc3_gadget_calc_ram_depth(struct dwc3 *dwc)
-+{
-+	int ram_depth;
-+	int fifo_0_start;
-+	bool is_single_port_ram;
-+
-+	/* Check supporting RAM type by HW */
-+	is_single_port_ram = DWC3_SPRAM_TYPE(dwc->hwparams.hwparams1);
-+
-+	/*
-+	 * If a single port RAM is utilized, then allocate TxFIFOs from
-+	 * RAM0. otherwise, allocate them from RAM1.
-+	 */
-+	ram_depth = is_single_port_ram ? DWC3_RAM0_DEPTH(dwc->hwparams.hwparams6) :
-+			DWC3_RAM1_DEPTH(dwc->hwparams.hwparams7);
-+
-+	/*
-+	 * In a single port RAM configuration, the available RAM is shared
-+	 * between the RX and TX FIFOs. This means that the txfifo can begin
-+	 * at a non-zero address.
-+	 */
-+	if (is_single_port_ram) {
-+		u32 reg;
-+
-+		/* Check if TXFIFOs start at non-zero addr */
-+		reg = dwc3_readl(dwc->regs, DWC3_GTXFIFOSIZ(0));
-+		fifo_0_start = DWC3_GTXFIFOSIZ_TXFSTADDR(reg);
-+
-+		ram_depth -= (fifo_0_start >> 16);
-+	}
-+
-+	return ram_depth;
-+}
-+
- /**
-  * dwc3_gadget_clear_tx_fifos - Clears txfifo allocation
-  * @dwc: pointer to the DWC3 context
-@@ -753,7 +790,7 @@ static int dwc3_gadget_resize_tx_fifos(struct dwc3_ep *dep)
- {
- 	struct dwc3 *dwc = dep->dwc;
- 	int fifo_0_start;
--	int ram1_depth;
-+	int ram_depth;
- 	int fifo_size;
- 	int min_depth;
- 	int num_in_ep;
-@@ -773,17 +810,32 @@ static int dwc3_gadget_resize_tx_fifos(struct dwc3_ep *dep)
- 	if (dep->flags & DWC3_EP_TXFIFO_RESIZED)
- 		return 0;
- 
--	ram1_depth = DWC3_RAM1_DEPTH(dwc->hwparams.hwparams7);
-+	ram_depth = dwc3_gadget_calc_ram_depth(dwc);
- 
--	if ((dep->endpoint.maxburst > 1 &&
--	     usb_endpoint_xfer_bulk(dep->endpoint.desc)) ||
--	    usb_endpoint_xfer_isoc(dep->endpoint.desc))
--		num_fifos = 3;
--
--	if (dep->endpoint.maxburst > 6 &&
--	    (usb_endpoint_xfer_bulk(dep->endpoint.desc) ||
--	     usb_endpoint_xfer_isoc(dep->endpoint.desc)) && DWC3_IP_IS(DWC31))
--		num_fifos = dwc->tx_fifo_resize_max_num;
-+	switch (dwc->gadget->speed) {
-+	case USB_SPEED_SUPER_PLUS:
-+	case USB_SPEED_SUPER:
-+		if (usb_endpoint_xfer_bulk(dep->endpoint.desc) ||
-+		    usb_endpoint_xfer_isoc(dep->endpoint.desc))
-+			num_fifos = min_t(unsigned int,
-+					  dep->endpoint.maxburst,
-+					  dwc->tx_fifo_resize_max_num);
-+		break;
-+	case USB_SPEED_HIGH:
-+		if (usb_endpoint_xfer_isoc(dep->endpoint.desc)) {
-+			num_fifos = min_t(unsigned int,
-+					  usb_endpoint_maxp_mult(dep->endpoint.desc) + 1,
-+					  dwc->tx_fifo_resize_max_num);
-+			break;
-+		}
-+		fallthrough;
-+	case USB_SPEED_FULL:
-+		if (usb_endpoint_xfer_bulk(dep->endpoint.desc))
-+			num_fifos = 2;
-+		break;
-+	default:
-+		break;
-+	}
- 
- 	/* FIFO size for a single buffer */
- 	fifo = dwc3_gadget_calc_tx_fifo_size(dwc, 1);
-@@ -794,7 +846,7 @@ static int dwc3_gadget_resize_tx_fifos(struct dwc3_ep *dep)
- 
- 	/* Reserve at least one FIFO for the number of IN EPs */
- 	min_depth = num_in_ep * (fifo + 1);
--	remaining = ram1_depth - min_depth - dwc->last_fifo_depth;
-+	remaining = ram_depth - min_depth - dwc->last_fifo_depth;
- 	remaining = max_t(int, 0, remaining);
- 	/*
- 	 * We've already reserved 1 FIFO per EP, so check what we can fit in
-@@ -820,9 +872,9 @@ static int dwc3_gadget_resize_tx_fifos(struct dwc3_ep *dep)
- 		dwc->last_fifo_depth += DWC31_GTXFIFOSIZ_TXFDEP(fifo_size);
- 
- 	/* Check fifo size allocation doesn't exceed available RAM size. */
--	if (dwc->last_fifo_depth >= ram1_depth) {
-+	if (dwc->last_fifo_depth >= ram_depth) {
- 		dev_err(dwc->dev, "Fifosize(%d) > RAM size(%d) %s depth:%d\n",
--			dwc->last_fifo_depth, ram1_depth,
-+			dwc->last_fifo_depth, ram_depth,
- 			dep->endpoint.name, fifo_size);
- 		if (DWC3_IP_IS(DWC3))
- 			fifo_size = DWC3_GTXFIFOSIZ_TXFDEP(fifo_size);
-@@ -1177,11 +1229,14 @@ static u32 dwc3_calc_trbs_left(struct dwc3_ep *dep)
- 	 * pending to be processed by the driver.
- 	 */
- 	if (dep->trb_enqueue == dep->trb_dequeue) {
-+		struct dwc3_request *req;
-+
- 		/*
--		 * If there is any request remained in the started_list at
--		 * this point, that means there is no TRB available.
-+		 * If there is any request remained in the started_list with
-+		 * active TRBs at this point, then there is no TRB available.
- 		 */
--		if (!list_empty(&dep->started_list))
-+		req = next_request(&dep->started_list);
-+		if (req && req->num_trbs)
- 			return 0;
- 
- 		return DWC3_TRB_NUM - 1;
-@@ -1384,6 +1439,7 @@ static int dwc3_prepare_last_sg(struct dwc3_ep *dep,
- 	unsigned int maxp = usb_endpoint_maxp(dep->endpoint.desc);
- 	unsigned int rem = req->request.length % maxp;
- 	unsigned int num_trbs = 1;
-+	bool needs_extra_trb;
- 
- 	if (dwc3_needs_extra_trb(dep, req))
- 		num_trbs++;
-@@ -1391,15 +1447,15 @@ static int dwc3_prepare_last_sg(struct dwc3_ep *dep,
- 	if (dwc3_calc_trbs_left(dep) < num_trbs)
- 		return 0;
- 
--	req->needs_extra_trb = num_trbs > 1;
-+	needs_extra_trb = num_trbs > 1;
- 
- 	/* Prepare a normal TRB */
- 	if (req->direction || req->request.length)
- 		dwc3_prepare_one_trb(dep, req, entry_length,
--				req->needs_extra_trb, node, false, false);
-+				needs_extra_trb, node, false, false);
- 
- 	/* Prepare extra TRBs for ZLP and MPS OUT transfer alignment */
--	if ((!req->direction && !req->request.length) || req->needs_extra_trb)
-+	if ((!req->direction && !req->request.length) || needs_extra_trb)
- 		dwc3_prepare_one_trb(dep, req,
- 				req->direction ? 0 : maxp - rem,
- 				false, 1, true, false);
-@@ -1414,8 +1470,8 @@ static int dwc3_prepare_trbs_sg(struct dwc3_ep *dep,
- 	struct scatterlist *s;
- 	int		i;
- 	unsigned int length = req->request.length;
--	unsigned int remaining = req->request.num_mapped_sgs
--		- req->num_queued_sgs;
-+	unsigned int remaining = req->num_pending_sgs;
-+	unsigned int num_queued_sgs = req->request.num_mapped_sgs - remaining;
- 	unsigned int num_trbs = req->num_trbs;
- 	bool needs_extra_trb = dwc3_needs_extra_trb(dep, req);
- 
-@@ -1423,7 +1479,7 @@ static int dwc3_prepare_trbs_sg(struct dwc3_ep *dep,
- 	 * If we resume preparing the request, then get the remaining length of
- 	 * the request and resume where we left off.
- 	 */
--	for_each_sg(req->request.sg, s, req->num_queued_sgs, i)
-+	for_each_sg(req->request.sg, s, num_queued_sgs, i)
- 		length -= sg_dma_len(s);
- 
- 	for_each_sg(sg, s, remaining, i) {
-@@ -1488,7 +1544,6 @@ static int dwc3_prepare_trbs_sg(struct dwc3_ep *dep,
- 		if (!last_sg)
- 			req->start_sg = sg_next(s);
- 
--		req->num_queued_sgs++;
- 		req->num_pending_sgs--;
- 
- 		/*
-@@ -1569,9 +1624,7 @@ static int dwc3_prepare_trbs(struct dwc3_ep *dep)
- 		if (ret)
- 			return ret;
- 
--		req->sg			= req->request.sg;
--		req->start_sg		= req->sg;
--		req->num_queued_sgs	= 0;
-+		req->start_sg		= req->request.sg;
- 		req->num_pending_sgs	= req->request.num_mapped_sgs;
- 
- 		if (req->num_pending_sgs > 0) {
-@@ -3075,7 +3128,7 @@ static int dwc3_gadget_check_config(struct usb_gadget *g)
- 	struct dwc3 *dwc = gadget_to_dwc(g);
- 	struct usb_ep *ep;
- 	int fifo_size = 0;
--	int ram1_depth;
-+	int ram_depth;
- 	int ep_num = 0;
- 
- 	if (!dwc->do_fifo_resize)
-@@ -3098,8 +3151,8 @@ static int dwc3_gadget_check_config(struct usb_gadget *g)
- 	fifo_size += dwc->max_cfg_eps;
- 
- 	/* Check if we can fit a single fifo per endpoint */
--	ram1_depth = DWC3_RAM1_DEPTH(dwc->hwparams.hwparams7);
--	if (fifo_size > ram1_depth)
-+	ram_depth = dwc3_gadget_calc_ram_depth(dwc);
-+	if (fifo_size > ram_depth)
- 		return -ENOMEM;
- 
- 	return 0;
-@@ -3416,20 +3469,16 @@ static int dwc3_gadget_ep_reclaim_trb_sg(struct dwc3_ep *dep,
- 		int status)
- {
- 	struct dwc3_trb *trb;
--	struct scatterlist *sg = req->sg;
--	struct scatterlist *s;
--	unsigned int num_queued = req->num_queued_sgs;
-+	unsigned int num_completed_trbs = req->num_trbs;
- 	unsigned int i;
- 	int ret = 0;
- 
--	for_each_sg(sg, s, num_queued, i) {
-+	for (i = 0; i < num_completed_trbs; i++) {
- 		trb = &dep->trb_pool[dep->trb_dequeue];
- 
--		req->sg = sg_next(s);
--		req->num_queued_sgs--;
--
- 		ret = dwc3_gadget_ep_reclaim_completed_trb(dep, req,
--				trb, event, status, true);
-+				trb, event, status,
-+				!!(trb->ctrl & DWC3_TRB_CTRL_CHN));
- 		if (ret)
- 			break;
- 	}
-@@ -3437,19 +3486,9 @@ static int dwc3_gadget_ep_reclaim_trb_sg(struct dwc3_ep *dep,
- 	return ret;
- }
- 
--static int dwc3_gadget_ep_reclaim_trb_linear(struct dwc3_ep *dep,
--		struct dwc3_request *req, const struct dwc3_event_depevt *event,
--		int status)
--{
--	struct dwc3_trb *trb = &dep->trb_pool[dep->trb_dequeue];
--
--	return dwc3_gadget_ep_reclaim_completed_trb(dep, req, trb,
--			event, status, false);
--}
--
- static bool dwc3_gadget_ep_request_completed(struct dwc3_request *req)
- {
--	return req->num_pending_sgs == 0 && req->num_queued_sgs == 0;
-+	return req->num_pending_sgs == 0 && req->num_trbs == 0;
- }
- 
- static int dwc3_gadget_ep_cleanup_completed_request(struct dwc3_ep *dep,
-@@ -3459,24 +3498,13 @@ static int dwc3_gadget_ep_cleanup_completed_request(struct dwc3_ep *dep,
- 	int request_status;
- 	int ret;
- 
--	if (req->request.num_mapped_sgs)
--		ret = dwc3_gadget_ep_reclaim_trb_sg(dep, req, event,
--				status);
--	else
--		ret = dwc3_gadget_ep_reclaim_trb_linear(dep, req, event,
--				status);
-+	ret = dwc3_gadget_ep_reclaim_trb_sg(dep, req, event, status);
- 
- 	req->request.actual = req->request.length - req->remaining;
- 
- 	if (!dwc3_gadget_ep_request_completed(req))
- 		goto out;
- 
--	if (req->needs_extra_trb) {
--		ret = dwc3_gadget_ep_reclaim_trb_linear(dep, req, event,
--				status);
--		req->needs_extra_trb = false;
--	}
--
- 	/*
- 	 * The event status only reflects the status of the TRB with IOC set.
- 	 * For the requests that don't set interrupt on completion, the driver
-@@ -4167,8 +4195,10 @@ static void dwc3_gadget_conndone_interrupt(struct dwc3 *dwc)
- 		WARN_ONCE(DWC3_VER_IS_PRIOR(DWC3, 240A) && dwc->has_lpm_erratum,
- 				"LPM Erratum not available on dwc3 revisions < 2.40a\n");
- 
--		if (dwc->has_lpm_erratum && !DWC3_VER_IS_PRIOR(DWC3, 240A))
-+		if (dwc->has_lpm_erratum && !DWC3_VER_IS_PRIOR(DWC3, 240A)) {
-+			reg &= ~DWC3_DCTL_NYET_THRES_MASK;
- 			reg |= DWC3_DCTL_NYET_THRES(dwc->lpm_nyet_threshold);
-+		}
- 
- 		dwc3_gadget_dctl_write_safe(dwc, reg);
- 	} else {
--- 
-2.43.0
+> +CONFIG_SPL_CRC32=y
+> +CONFIG_SPL_MTD=y
+> +CONFIG_SPL_MTD_SUPPORT=y
+>   CONFIG_SPL_SPI_LOAD=y
+> -CONFIG_SYS_SPI_U_BOOT_OFFS=0x3C00000
+> -CONFIG_SPL_TARGET="spl/u-boot-spl-dtb.hex"
+> -CONFIG_HUSH_PARSER=y
+> +CONFIG_SPL_ATF=y
+> +CONFIG_SPL_ATF_NO_PLATFORM_PARAM=y
+>   CONFIG_SYS_PROMPT="SOCFPGA_STRATIX10 # "
+> +CONFIG_CMD_NVEDIT_SELECT=y
+>   CONFIG_CMD_MEMTEST=y
+> +# CONFIG_CMD_FLASH is not set
+>   CONFIG_CMD_GPIO=y
+>   CONFIG_CMD_I2C=y
+>   CONFIG_CMD_MMC=y
+> +CONFIG_CMD_MTD=y
+>   CONFIG_CMD_SPI=y
+>   CONFIG_CMD_USB=y
+> -CONFIG_CMD_WDT=y
+> -CONFIG_CMD_DHCP=y
+> -CONFIG_CMD_MII=y
+> -CONFIG_CMD_PING=y
+>   CONFIG_CMD_CACHE=y
+> -CONFIG_CMD_EXT4=y
+> -CONFIG_CMD_FAT=y
+> -CONFIG_CMD_FS_GENERIC=y
+> -CONFIG_ENV_IS_IN_MMC=y
+> -CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+> -CONFIG_USE_BOOTFILE=y
+> -CONFIG_BOOTFILE="Image"
+> +CONFIG_SPL_SPI_FLASH_MTD=y
+> +CONFIG_SPI_FLASH_MTD=y
+> +# CONFIG_SPI_FLASH_USE_4K_SECTORS is not set
+> +CONFIG_CMD_UBI=y
+> +CONFIG_CMD_UBIFS=y
+> +CONFIG_MTD_UBI=y
+> +CONFIG_MTD_UBI_WL_THRESHOLD=4096
+> +CONFIG_MTD_UBI_BEB_LIMIT=20
+> +# CONFIG_ISO_PARTITION is not set
+> +# CONFIG_EFI_PARTITION is not set
+> +CONFIG_OF_LIST=""
+> +CONFIG_ENV_IS_IN_FAT=y
+> +CONFIG_ENV_IS_IN_UBI=y
+> +CONFIG_ENV_FAT_DEVICE_AND_PART="0:1"
+> +CONFIG_ENV_UBI_PART="root"
+> +CONFIG_ENV_UBI_VOLUME="env"
+> +CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+>   CONFIG_NET_RANDOM_ETHADDR=y
+>   CONFIG_SPL_DM_SEQ_ALIAS=y
+>   CONFIG_SPL_ALTERA_SDRAM=y
+> +CONFIG_FPGA_INTEL_PR=y
+>   CONFIG_DWAPB_GPIO=y
+>   CONFIG_DM_I2C=y
+>   CONFIG_SYS_I2C_DW=y
+> -CONFIG_SYS_MMC_MAX_BLK_COUNT=256
+> +CONFIG_MISC=y
+>   CONFIG_MMC_DW=y
+> +CONFIG_SYS_MMC_MAX_BLK_COUNT=256
+> +CONFIG_MTD=y
+> +CONFIG_DM_MTD=y
+> +CONFIG_SF_DEFAULT_MODE=0x2003
+>   CONFIG_SPI_FLASH_SPANSION=y
+>   CONFIG_SPI_FLASH_STMICRO=y
+>   CONFIG_PHY_MICREL=y
+>   CONFIG_PHY_MICREL_KSZ90X1=y
+> +CONFIG_DM_ETH=y
+>   CONFIG_ETH_DESIGNWARE=y
+>   CONFIG_MII=y
+> +CONFIG_DM_RESET=y
+>   CONFIG_SYS_NS16550_MEM32=y
+>   CONFIG_SPI=y
+>   CONFIG_CADENCE_QSPI=y
+>   CONFIG_DESIGNWARE_SPI=y
+>   CONFIG_USB=y
+> +CONFIG_DM_USB=y
+>   CONFIG_USB_DWC2=y
+> -CONFIG_USB_STORAGE=y
+
+
+missing vs ATF defconfig, why dropping this?
+
+
+Best regards,
+
+Tien Fong
 
