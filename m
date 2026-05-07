@@ -4,108 +4,108 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6CFACD343F
-	for <u-boot@archiver.kernel.org>; Thu,  7 May 2026 20:05:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59136CD343F
+	for <u-boot@archiver.kernel.org>; Thu,  7 May 2026 20:10:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 362D684BB7;
-	Thu,  7 May 2026 22:05:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id D0ADC84BE0;
+	Thu,  7 May 2026 22:10:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=e-labworks.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="yLE3x57G";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=e-labworks-com.20251104.gappssmtp.com header.i=@e-labworks-com.20251104.gappssmtp.com header.b="NhO5FG/j";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9EDA484BD5; Thu,  7 May 2026 22:05:51 +0200 (CEST)
-Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
- [IPv6:2a00:1450:4864:20::332])
+ id 16C3784BED; Thu,  7 May 2026 22:10:16 +0200 (CEST)
+Received: from mail-dy1-x1330.google.com (mail-dy1-x1330.google.com
+ [IPv6:2607:f8b0:4864:20::1330])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8BA4284B58
- for <u-boot@lists.denx.de>; Thu,  7 May 2026 22:05:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id ADB7A84BB7
+ for <u-boot@lists.denx.de>; Thu,  7 May 2026 22:10:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none)
+ header.from=e-labworks.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-488a9033b2cso12434095e9.2
- for <u-boot@lists.denx.de>; Thu, 07 May 2026 13:05:49 -0700 (PDT)
+ spf=none smtp.mailfrom=sergio.prado@e-labworks.com
+Received: by mail-dy1-x1330.google.com with SMTP id
+ 5a478bee46e88-2c15849aa2cso1638491eec.0
+ for <u-boot@lists.denx.de>; Thu, 07 May 2026 13:10:12 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1778184611; cv=none;
+ d=google.com; s=arc-20240605;
+ b=BzNSIpW4p6T2yor1J3RcXvu4p8YRlJjIp6AzwNv1++LcloxewHuK4O01ejDrQgBL0m
+ FtDI5AgoCfRyPPdNAEDgyxoGu33YXtcn7oQOqUBK73dIG6Zk1Cqi+7Fd8XAi05a9Y1ox
+ qUfPNQw2c1P5s3CwTwzcUOXEMZYCpC1MJirRAYB5OdmhNhyM37UmDOn3H6CxFZdsYWe8
+ /jtM65ad2ZgWz2dR7tZ2+iSIcFpa3073oX+nsot7DAi5uPBL8t9ccqPs1j5yklsnzmxe
+ mOptMy2ma5NIzTla2JTKNx6W43fqyW7J1Eq5KItYSrcs2GrN/f7ZzzDtWBnlUbKOEoFz
+ VlYQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=E6jr4Vn5MJSknJnN06DhtjUSLn1LgwCtxeQjEdg3umk=;
+ fh=B7++efQEoSVFQ9ePsS0QvvXoKtroD+13bBMFR3U3XYY=;
+ b=fQqbb65PhxwOBBi6FRbx38QnnPLW3zbUmHaC0mEcyOC5SAtOaT3T5DIzqJvGDEJ2C8
+ USH5nF1Hh4HK1jmUeCb/h8CIEaqy1Uc6j4XYwJYMoG1GiqsDJO9qdnQ6E+w4bErvvi6w
+ YHdRK99P9Ono8L87ixFD9svrCJGejxpljIM3HWckA4KkQdJ9wKytDZwO5apZtIAyPbdo
+ jnfPGUIcTTEvYlIgsLpA0enR1QFc5L8T195LdYzs8aRLpuI+2VKKZdVxes5UFbVZySid
+ GNTGGXG+gijsX2GCnLUb7ckQo7CcCIF9xMSI/0GtNnpyBD5wsI/vUkOtK5U+Z6TBjDjT
+ 7+6Q==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1778184349; x=1778789149; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=JJKECZPO9XBcje6sWMkAemgjoH/OVGGIRZdM57IDuNI=;
- b=yLE3x57G8nKN/RNSBTVHWgKTlcXvJ9hpAOOVX/d6BLN1EEZHkEE6MezKZFAqtOi2bi
- UvaT/I47D0lBuCSKlk+FSuhVMqDEx25y7K1tC35VXATNFXiJ3qnARzvXPDmOScuX7073
- V8f7vJT30JAnWdWlpRuzp1bKhkiiaw0/i1aRYmvExdhZmGV6nqGDspiymGM9vMaG2pAe
- OTl5ypyRu2wf18NVhMFtC9D9CWq1xwglwSinzXa4Mtc/lJ+2dFxjLH8HNu3yMl02K8/z
- Sfj2SBmOuHfJHIPF1xyoDNrl8KnMCcOQVrRx2bSlMnD1Uv9aWCcpyHEfHhJB8Snw+Vbi
- vzIA==
+ d=e-labworks-com.20251104.gappssmtp.com; s=20251104; t=1778184611; x=1778789411;
+ darn=lists.denx.de; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=E6jr4Vn5MJSknJnN06DhtjUSLn1LgwCtxeQjEdg3umk=;
+ b=NhO5FG/j2vwsjoIhIIi89oqwPoKJw0sA2sbujUtCkT1rfdDGGGJrW0ynq408sae/DK
+ GSsGilH/j8qmGhQePCx7/Kzlo6sV/r/ueLaA6oNxMvhSEZ26e7a3dKySwHKa8AhiS8Tn
+ te7oJ9Td6NiQPj88+eWiwJskMwM1SDlmW3YMj0eR3mToLJJVMupLLsChgSCavc0t+3kA
+ /UdKHp79DWiD/5swFcsHBQ1P8hBUSmoLLS8G7oEhYD71T7BMSv69+hPqtXW81O6KVa16
+ PxfK6KRCC51FsoIalHKljh1KFBR57iZXMma1OlTPftcApwupIJHgIJqaKHgODpyPxySV
+ r3qw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778184349; x=1778789149;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=JJKECZPO9XBcje6sWMkAemgjoH/OVGGIRZdM57IDuNI=;
- b=GIiEApduybThTrDnrteiGCSh7/KHqIOce2MYuMNpS9g4m2iBIXfXu2PpkuLpH5ZAV/
- 1MRUAoE+DLjfBFUUbhHx5KWTI6MsoQkxihs5+KYOvQxS7sP7GANzZ8NmmiMVK3+srNnj
- aAFWIZykwLy15JucQ5evukHpeN0s7ouWE1DwZlS+glQPT0vALo6CdelgacJ/S9brtHQ+
- 1AyFgDJ3YUU9inemMne24u6KyrCuTJVQ7Q1nZEdjw8b6QPIpVpDinikZ01w6SJT/TRSs
- egW0VIKHvRbGOot7jjTtC4yMrLDE754FPPUVLd2ypkf2WkRGYyhsKAYivOsnIirXuaaC
- PaMA==
-X-Gm-Message-State: AOJu0Yx+M3+QD4ZGWrbse4di2XsCzqumY2Jx/woa9dPK5IxuEsm4AUi9
- uvkKlf7Gg1sYY8yZIldXBsb++uyOr5KK8o0rCX47d+v3c9cgriaS0Fqfw3X5ahwgWcc=
-X-Gm-Gg: AeBDies9X4IMT11UFJ5EVRX6tkhXSqO8/WwUrAUuZX268+KHQbmjLz5kxjnuz9qGva6
- oH6sf8eyWrONQLWej3Nsy/z5V1/+qGoKDa4O2eIGDAClH0spsXYP8MBDC0AsALhVaWNY0W80/El
- Gr+J5RONw/SR6S2iuS3RcVFiU0VDFCOblLIHIavvOaNjwlkR6QBma57TzqiJ72cSTLDTaMNuu3W
- amuTV5KfpRTeUDNmnfuuErSmwMR7j4SD5FUqxwTDDJ/OYQDHeEbxuvLYj+Xl7ICkqiQ7vyecbQB
- tZXyr8tzrwIo64SjHeZwIVoFBNanltSwqxQRseAErLiPiOebk8xqZZTgXZkdVCSZyJuMdikPjfx
- W1fWinAP/cPau6EHWFbfkIT0nVWTq27dtydfniUHRrKiwtUff0snudOGl9YYA71kmRSuXyAEYiW
- tUAYkXVtWgUJujijJTWoJSedUFalH711FeWlGhh+L1C2LZUwqYgh6jaLGNtOY1SQveLQyjsTXHu
- ptc
-X-Received: by 2002:a05:600c:1393:b0:48e:635a:18d9 with SMTP id
- 5b1f17b1804b1-48e635a1ae9mr25395935e9.15.1778184348889; 
- Thu, 07 May 2026 13:05:48 -0700 (PDT)
-Received: from [192.168.1.36] (p4fc3dd86.dip0.t-ipconnect.de. [79.195.221.134])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-48e538b26a3sm260800935e9.9.2026.05.07.13.05.47
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 07 May 2026 13:05:48 -0700 (PDT)
-Message-ID: <238269ef-d3bb-458a-bde9-40506df61936@linaro.org>
-Date: Thu, 7 May 2026 22:05:46 +0200
+ d=1e100.net; s=20251104; t=1778184611; x=1778789411;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=E6jr4Vn5MJSknJnN06DhtjUSLn1LgwCtxeQjEdg3umk=;
+ b=I7t9N6yCYEo47zzQxjJ/LHXUTVBpdL/1gg5Hngoaju917dAyCYc0RFnhHbYFohZJq+
+ xVF9QbzXYJH/TlA6SkJGau2pgakSNHUyH/Wdq5r7E3cPkKN9A+2LHg4ipiJy+r48aXGC
+ ImNQIGiQWVgb3T+whTn9LKyPyya/7OSgc9FGi5C5l+ViHlBLzvfw2rv2f3OzTQT6UiWC
+ Wsx3+JYP0PnhZNOVLmUwnucQJsRBD+xAkKilxI3qRpEMwolum2rDV4DKeUEgDJVGvdwM
+ 1WJ+oFJvmGsyNK/6a8KAHKCxm74YpnydQIzV4s6MX0GFX88jTipWECONJvUn34TLLfqD
+ GC4g==
+X-Gm-Message-State: AOJu0Yy8tp6cuFOEASyq9nJi1sR/MJXsLsdkrnKGAla4gM+p75o9BYpH
+ cQBvTf6wuzAgpIRBNC2LWnjttvJuyS8r3m313g2TAB5gMQiD+OUD3p4TRGGTQzPkyDQUS+NsufW
+ pp3Nm+snOO/VgrZ11oGPtLSRtnoeOgWYtWxGQnQwdew==
+X-Gm-Gg: Acq92OFaXgcsr3dSfg1pkt1srdQ6OPvgg7S62xibPpDM4tSQGx++0yWhIj8KRNATjCG
+ 2Kz8o1rUDaxT4jxfF6G+rMXIF00NTAOje922uj4dHp8+EiLO/qBxM5w11M8UwOCVbY77PRbQz+y
+ WIEx4M88/LK1+eH8HTYSjTGxKcT9ywH3uh6pKHRDlAAiEWj5ZiqjhAUnA1gBNES9qkvsrGc85vE
+ wHqYMtw6JxeiUxsRRoRazjp6cW0MUq6HN59VmUJwOo+UpdLA5SmMLpfmcgfXUxuM4yOJT0kiHG2
+ fNDbKMYWdXcPSVYu/9Q0vb2RwgWOKVwXrMb2DFI=
+X-Received: by 2002:a05:7301:3f07:b0:2ed:e14:42e9 with SMTP id
+ 5a478bee46e88-2f54b57793bmr4947285eec.34.1778184610955; Thu, 07 May 2026
+ 13:10:10 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 01/15] Revert "dm: SMEM (Shared memory) uclass"
-Content-Language: en-US
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>,
- u-boot-qcom@groups.io, Tom Rini <trini@konsulko.com>,
- Peng Fan <peng.fan@nxp.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Alice Guo <alice.guo@nxp.com>, Quentin Schulz <quentin.schulz@cherry.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Kuan-Wei Chiu <visitorckw@gmail.com>, Raymond Mao
- <raymond.mao@riscstar.com>, Stefan Roese <stefan.roese@mailbox.org>,
- Philip Molloy <philip.molloy@analog.com>,
- Jerome Forissier <jerome.forissier@arm.com>,
- Marek Vasut <marek.vasut@mailbox.org>,
- Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
- Rasmus Villemoes <ravi@prevas.dk>, Heiko Schocher <hs@nabladev.com>,
- Michal Simek <michal.simek@amd.com>, Sughosh Ganu <sughosh.ganu@arm.com>,
- Antony Kurniawan Soemardi <linux@smankusors.com>,
- Luca Weiss <luca.weiss@fairphone.com>,
- Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-References: <20260504-b4-modernise-smem-v2-0-c01ec2ff3886@linaro.org>
- <20260504-b4-modernise-smem-v2-1-c01ec2ff3886@linaro.org>
- <CAFLszTgwbSxN5tEZ7ShgaAi1JvGfT-ntPdeJ1q8rd2GcOeaFeQ@mail.gmail.com>
-From: Casey Connolly <casey.connolly@linaro.org>
-In-Reply-To: <CAFLszTgwbSxN5tEZ7ShgaAi1JvGfT-ntPdeJ1q8rd2GcOeaFeQ@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+References: <20260423154536.768603-1-sergio.prado@e-labworks.com>
+ <20260423154536.768603-3-sergio.prado@e-labworks.com>
+ <df749b3b-0210-4b31-a4e0-8f7af9084589@cherry.de>
+ <CANu7NGs0=o5H7o=qwoQj5EYMxDtB7_NTus_-18Q1UZBnk3DiuQ@mail.gmail.com>
+ <dc13566a-b477-4580-8954-0c0f83608ff1@cherry.de>
+In-Reply-To: <dc13566a-b477-4580-8954-0c0f83608ff1@cherry.de>
+From: Sergio Prado <sergio.prado@e-labworks.com>
+Date: Thu, 7 May 2026 17:09:54 -0300
+X-Gm-Features: AVHnY4LrWFdMJnhjjAYUC-dMrRkFIpgLwKUjNk0VUNqGrX5f0gVWqR4R9plDu8A
+Message-ID: <CANu7NGsFtWuLH1AZ_B8oMS8+rjpjgANYuVuVtVAaTNW1HzgcNg@mail.gmail.com>
+Subject: Re: [PATCH v3 2/2] binman: x509_cert: add PKCS#11/HSM signing support
+To: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: u-boot@lists.denx.de, trini@konsulko.com, sjg@chromium.org, 
+ alpernebiyasak@gmail.com, ilias.apalodimas@linaro.org, 
+ marek.vasut+renesas@mailbox.org, sughosh.ganu@arm.com, 
+ wolfgang.wallner@at.abb.com, bb@ti.com, y.moog@phytec.de, xypron.glpk@gmx.de, 
+ jerome.forissier@arm.com, afd@ti.com, Wojciech.Dubowik@mt.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -122,54 +122,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Quentin,
 
+> > Good point. I=E2=80=99ll scope this more precisely to X.509 usage. Woul=
+d
+> > BINMAN_X509_PKCS11_URI be appropriate, or do you have a preferred namin=
+g
+> > convention here?
+> >
+>
+> Is this really PKCS11-specific? Is there no other way to get an x509
+> than by PKCS11 or plaintext file? Trying to think about potentially
+> having other providers needing something similar and then setting
+> BINMAN_X509_PKCS11_URI for that would be confusing.
 
-On 07/05/2026 17:31, Simon Glass wrote:
-> Hi Casey,
-> 
-> On Mon, 4 May 2026 at 12:57, Casey Connolly <casey.connolly@linaro.org> wrote:
->>
->> SMEM is a highly Qualcomm specific interface, while having a dedicated
->> UCLASS for it offers a nice abstraction, for things like memory layout
->> parsing we need to use it before the driver model is available.
-> 
-> Do you mean before or after relocation?
+Hmmm, good point. What if we rename the variable to BINMAN_X509_KEY_URI and
+the entry argument to key-uri?
 
-Before, we actually use it and read the memory map in
-board_fdt_blob_setup() since we support the usecase where you chainload
-U-Boot from ABL but with its own DTB baked in. This allows you to leave
-the original Android DTB and read the memory map from it while using a
-proper DTB for U-Boot without having to hardcode the memory map.
+> >  From my testing with SoftHSM2:
+> >
+> > - Provider-based flow: configuring openssl.cnf is sufficient. OpenSSL
+> > dispatches "pkcs11:" URIs via the STORE API without additional CLI
+> > arguments.
+> > - Engine-based flow: configuring the engine in openssl.cnf alone is not
+> > sufficient; "-engine pkcs11 -keyform engine" must still be passed
+> > explicitly.
+> >
+>
+> Being curious now, I'm wondering if setting the -key to
+> org.openssl.engine:pkcs11:<key> would be enough on OpenSSL 3.x? C.f.
+> https://docs.openssl.org/3.0/man1/openssl/#engine-options
 
-Basically it exists because some Android phones have awful bootloaders
-that will crash or break stuff if you don't have very specific arbitrary
-things in your devicetree.
+Good catch! It does work.
 
-> 
->>
->> Therefore, it doesn't make sense to fit SMEM into the driver model.
->> Instead let's adopt a model closer to Linux, and parse SMEM really early
->> during boot (as soon as we have the FDT).
->>
->> This reverts commit 7b384eccc785b596f68448b155cbda26df57fb23.
->>
->> Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
->> ---
->>  arch/arm/Kconfig           |  1 -
->>  drivers/Kconfig            |  2 --
->>  drivers/Makefile           |  1 -
->>  drivers/smem/Kconfig       | 25 -------------
->>  drivers/smem/Makefile      |  7 ----
->>  drivers/smem/smem-uclass.c | 46 ------------------------
->>  include/dm/uclass-id.h     |  1 -
->>  include/smem.h             | 90 ----------------------------------------------
->>  8 files changed, 173 deletions(-)
-> 
-> [..]
-> 
-> Regards,
-> Simon
+$ OPENSSL_CONF=3Dtest_engine.cnf openssl req -new -x509 -key \
+   "org.openssl.engine:pkcs11:${PKCS11_URI}" -nodes -outform DER \
+   -out cert_engine_unified.der -subj "/CN=3Dtest-unified-engine" \
+   -sha512 && echo "exit: $?"
+exit: 0
 
--- 
-// Casey (she/her)
+With this, the implementation transparently supports both flows on OpenSSL
+3.x - the user picks the URI form to match their setup. I'll document both
+URI forms in the binman documentation.
 
+> I'm tempted to say "another person's problem". I was already not happy
+> to contribute support for OpenSSL engines in FIT signing because it's
+> been deprecated for years at that point but I needed it (could have kept
+> it downstream though). We just need to make sure it's not impossible to
+> support if someone really wants it (and it needs to work with OpenSSL
+> 1.x I believe, even though it's official EoL you can still buy
+> commercial support for it).
+
+Understood.
+
+Regards,
+
+Sergio Prado
