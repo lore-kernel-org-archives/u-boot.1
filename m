@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71650CD3439
-	for <u-boot@archiver.kernel.org>; Thu,  7 May 2026 15:04:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5AEEFCD3439
+	for <u-boot@archiver.kernel.org>; Thu,  7 May 2026 15:04:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B263E84A7D;
+	by phobos.denx.de (Postfix) with ESMTP id ECC6384B2C;
 	Thu,  7 May 2026 17:04:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=0leil.net header.i=@0leil.net header.b="UE1tAAri";
+	dkim=pass (2048-bit key; unprotected) header.d=0leil.net header.i=@0leil.net header.b="BYjRzazN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4F28A84B23; Thu,  7 May 2026 17:04:27 +0200 (CEST)
-Received: from smtp-bc08.mail.infomaniak.ch (smtp-bc08.mail.infomaniak.ch
- [IPv6:2001:1600:19:e38::bc08])
+ id 60BFD84A7B; Thu,  7 May 2026 17:04:27 +0200 (CEST)
+Received: from smtp-190a.mail.infomaniak.ch (smtp-190a.mail.infomaniak.ch
+ [IPv6:2001:1600:19:38e0::190a])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1896284A7B
+ by phobos.denx.de (Postfix) with ESMTPS id 84DCA84A93
  for <u-boot@lists.denx.de>; Thu,  7 May 2026 17:04:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=0leil.net
@@ -28,32 +28,29 @@ Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=foss+uboot@0leil.net
 Received: from smtp-3-0001.mail.infomaniak.ch (smtp-3-0001.mail.infomaniak.ch
  [10.4.36.108])
- by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4gBFs454tZzVHg;
- Thu,  7 May 2026 17:04:24 +0200 (CEST)
+ by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4gBFs51sYpzW6g;
+ Thu,  7 May 2026 17:04:25 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=0leil.net;
- s=20231125; t=1778166264;
- bh=9K602GnPIwULVUaJqDl4oPOFeYkc7D8MBA17pTBM3og=;
- h=From:Subject:Date:To:Cc:From;
- b=UE1tAAripX7joqu/hdOrARF/YYnVWd+7+Mah0YAHiobPi/yWztfnkNytmTm3nGjf1
- lKCYaqiHffubIma0Cfj2ik3UOy4U5wSceBvcaJajz5Q5kSALdqSJvrWvXzdAIUiXvI
- G9VqAGTSUeNrJP7KXm9RbZmnrQZN+MiEs2oB9dtgkLgZ4ie171j165RTbzLxOE+of6
- KirI0/PhkZ2tK/k8ZlD6ookb+YtnkHp+udnVeGvS4aCM7vUWIY7L6SQdeWNOXx3TUZ
- FAJXVQRJqc6+4ht2+JWa9POasssS9gHiNrKs4rBiDJZb/KjOqP0g2WhBYNe6ucUInF
- SHKxor53T4Hnw==
+ s=20231125; t=1778166265;
+ bh=Rt6rbponnh1mtHZvesAorRkx9wFNe3w/5JBfFFesuek=;
+ h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
+ b=BYjRzazNjaRj8b4EqKfoDikCx7I3P+bgvAFooGDCGeiXE5mES+nOlX5mhkolx1XW5
+ Sfo3c9fu+Dd3u7Rr84viwNF+JHovtlzI7igop18usZ4PzcZ3jyppdxIWA/iFwgzBdz
+ yfePZx83DT7GTRg7zwhIrLhRg3XXRfq8DUQlLGKJ+GHniJITbLcsPD+4s6TooCKDfO
+ y3/BQoIVHzLC+Mszu2SKRLYuXXEcHUfGbs8DUYToEPW8Zxe9I/9OMXSKMautSDDIHA
+ O0m6FqieOyUIAv/Co/+r4Dfkbowk5xKpLCmCC6wVIXAz2Zly8pQn3zenhvIABvVnXI
+ E7bFQEFHRt33w==
 Received: from unknown by smtp-3-0001.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4gBFs35kjvzTll; Thu,  7 May 2026 17:04:23 +0200 (CEST)
+ id 4gBFs44KqnzVcv; Thu,  7 May 2026 17:04:24 +0200 (CEST)
 From: Quentin Schulz <foss+uboot@0leil.net>
-Subject: [PATCH v2 0/3] cmd: reset: fixes related to Qualcomm's edl
-Date: Thu, 07 May 2026 17:04:04 +0200
-Message-Id: <20260507-doc-sysreset-qcom-v2-0-37fef7a9cf92@cherry.de>
+Date: Thu, 07 May 2026 17:04:05 +0200
+Subject: [PATCH v2 1/3] cmd: boot: fix edl being shown when not supported
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/32NQQ6CMBBFr0Jm7RjaVARX3sOwqO1UaiLVGSQS0
- rsLuHf5kvffn0GIIwmcihmYxigx9QvoXQGus/2NMPqFQZe6Ko2u0SeHMgmT0IAvlx4YDl4ra2u
- jjIZl92QK8bM1L+2P5X29kxvW0Gp0UYbE03Y6qtX71x8VKmwq44MhOjahObuOmKe9J2hzzl9Dh
- 0dPxAAAAA==
-X-Change-ID: 20260428-doc-sysreset-qcom-f5d21aa84142
+Message-Id: <20260507-doc-sysreset-qcom-v2-1-37fef7a9cf92@cherry.de>
+References: <20260507-doc-sysreset-qcom-v2-0-37fef7a9cf92@cherry.de>
+In-Reply-To: <20260507-doc-sysreset-qcom-v2-0-37fef7a9cf92@cherry.de>
 To: Casey Connolly <casey.connolly@linaro.org>, 
  Sumit Garg <sumit.garg@oss.qualcomm.com>, 
  Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>, 
@@ -78,38 +75,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Fix a missed dependency on the edl reset command option for deciding
-when to show the option in the help text.
+From: Quentin Schulz <quentin.schulz@cherry.de>
 
-Fix typo in reset command usage documentation.
+edl is implemented in the sysreset_ops.request_arg callback of the
+qcom-psci sysreset driver. That callback is only called from
+sysreset_request_arg() which is compiled only when
+CONFIG_SYSRESET_CMD_RESET_ARGS=y.
 
-Fix missing edl reset option in reset command usage documentation.
+Therefore, only show the edl option if that symbol is enabled.
 
+It is in a separate if block because any option but -w will only be
+handled when CONFIG_SYSRESET_CMD_RESET_ARGS=y as seen with the
+implementation in do_reset() in drivers/sysreset/sysreset-uclass.c.
+
+Fixes: ef06c5d76ff4 ("cmd: boot: Add '-edl' option to reset command documentation")
 Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 ---
-Changes in v2:
-- added patch 1, fixing edl option being shown even when not usable,
-- added patch 2, fixing "Do warm WARM" typo,
-- added -edl to the synopsis,
-- added requirement on CONFIG_SYSRESET_CMD_RESET_ARGS=y to docs,
-- added info that an error message will be printed on unsupported
-  platforms but that the command will still succeed,
-- Link to v1: https://patch.msgid.link/20260428-doc-sysreset-qcom-v1-1-964df4ee79f9@cherry.de
+ cmd/boot.c | 3 +++
+ 1 file changed, 3 insertions(+)
 
----
-Quentin Schulz (3):
-      cmd: boot: fix edl being shown when not supported
-      doc: usage: cmd: reset: fix typo
-      doc: usage: cmd: reset: specify when the -edl option is available
+diff --git a/cmd/boot.c b/cmd/boot.c
+index d80f9d8c05d..29cdf4a9a81 100644
+--- a/cmd/boot.c
++++ b/cmd/boot.c
+@@ -60,8 +60,11 @@ U_BOOT_CMD(
+ 	reset, 2, 0,	do_reset,
+ 	"Perform RESET of the CPU",
+ 	"- cold boot without level specifier\n"
++#if IS_ENABLED(CONFIG_SYSRESET_CMD_RESET_ARGS)
++// All options handled by sysreset drivers via their sysreset_ops.request_arg callback
+ #ifdef CONFIG_SYSRESET_QCOM_PSCI
+ 	"reset -edl - Boot to Emergency DownLoad mode\n"
++#endif
+ #endif
+ 	"reset -w - warm reset if implemented"
+ );
 
- cmd/boot.c              |  3 +++
- doc/usage/cmd/reset.rst | 12 +++++++++---
- 2 files changed, 12 insertions(+), 3 deletions(-)
----
-base-commit: 3cdd19089f1b1b7cd08530f33ff4708abcfd426c
-change-id: 20260428-doc-sysreset-qcom-f5d21aa84142
-
-Best regards,
---  
-Quentin Schulz <quentin.schulz@cherry.de>
+-- 
+2.54.0
 
