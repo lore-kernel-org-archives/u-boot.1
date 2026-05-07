@@ -4,94 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5195CCD343F
-	for <u-boot@archiver.kernel.org>; Thu,  7 May 2026 15:32:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47ACBCD3439
+	for <u-boot@archiver.kernel.org>; Thu,  7 May 2026 15:32:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6E25B84A79;
-	Thu,  7 May 2026 17:32:14 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C99D784A79;
+	Thu,  7 May 2026 17:32:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="fucz4Izm";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="hGzvrAKd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C2D6D84B44; Thu,  7 May 2026 17:32:12 +0200 (CEST)
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
- [IPv6:2a00:1450:4864:20::630])
+ id D573C84B52; Thu,  7 May 2026 17:32:36 +0200 (CEST)
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [IPv6:2a00:1450:4864:20::632])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5669E84B49
- for <u-boot@lists.denx.de>; Thu,  7 May 2026 17:32:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 72D9784A44
+ for <u-boot@lists.denx.de>; Thu,  7 May 2026 17:32:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-bc356898256so171593366b.3
- for <u-boot@lists.denx.de>; Thu, 07 May 2026 08:32:07 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1778167927; cv=none;
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-b9358dd7f79so170199766b.1
+ for <u-boot@lists.denx.de>; Thu, 07 May 2026 08:32:34 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1778167954; cv=none;
  d=google.com; s=arc-20240605;
- b=WKyDVHkLmFcZ0zMl3gufE+UCvu6Ah5URAnYuJnMx+oWsGz5ZYsK8HIpEY7QIrU/WKe
- OzB9Rz3pPmlBrHDVEhlXHKDK8RGi/6yToBEed92/gSmztIoLOorfg1/341Ll5SZcWBoz
- L0G92HBRmydRy4FQVldw8eFTngOK20bMUeLjCalm/qTUv+U7Me680htHV1IvrtbsqEi1
- N02X12vdeiqfZQg8lj+cVNsI8SB7h4FCGteJqOVPPBxZVva40+LdnKhXewkWOUXHCDC5
- L1VEXcccYKs07vjg1atEP1+crofqZWKVPEbmqHFIIgGkZZTRdArOu2G+r2nY2DQt07Lv
- a67w==
+ b=fEcEfQNyOQ+wWTPTuBCZ5Ellbc6sWDqwQpa4f4r8rTtL25OS7hePdWXatQOHlqzm1I
+ GrFbvU6DnbNDlPO4GvwNY5Ckc2CSlFo/JUEAfHwuBzoi6POasmaVu7I+bNn+T2T9wBlu
+ /xn8+cwEU8YMA/SEf/R8GuFlZommt7+PIkdj523Y573/d4NRIPQQ65CQ7APRl3CDudaL
+ mS9vpTcNIdKOfMOKHTl8SyUR6D8QDHHnu2WWfLk/FtjPvmkNlJOIvi4pF5X0SkmYDtmR
+ zKiCaX2FSRnCn5e+CKKjKpDF/gcaNIRXPA/wRKqW7RVNWlsLjeei4qycor+cXcVG4jL+
+ g+jA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=Y8tFLl3KLKZIsW/JbMMLZ0B09j3Ttxvn4RsxwKyKXOo=;
- fh=BTFB4szhANUdeKdGhUtFNOkjp2T4RwfYw5Yk7MO0OCE=;
- b=Kz41tzaIpoJIeNXK+NeCH/uBjtfn0vZUo0PsjD77wf6qirBFnOBp416rG1lfwhgqaK
- 1dgosdzabr/n78TynPNT9dzj5zkMnw2rw1NW8PFWynDJJ2F9Jd9BonlFXNqU28qmKemj
- vlQw40T0nXpde5/UX5Fqd9U5Vg9nkqx1a0FnDq6EfhlGrYvrEyWwFKWBFKCpFDjvre/P
- xhaAdfd67k/fAAYdjS4xUiubZj6Ovhd+Xwe85dWpyg/a/aVE1GqSu+iQN3mZNJgrN90F
- 81WXxEQoYv0zN6HTgn0sMgXKJY51g3uP7reDcO1SM2ZcR4/HUsI8V19RDmXQmgY5x8TR
- R0tw==; darn=lists.denx.de
+ bh=9RNrDlx7pc6a68AcEDo/AAYyA9U83tpxJuEvTb0XWDI=;
+ fh=GpG0ILApjOziwMpWxVdtEc+pDfvf/OdWX72BncHhg/s=;
+ b=GPtZi+F1l2oJnlu0Jfw3TO6UJPJofok5K5qywrR+DMFYLYgCJUmvwTAvJ0Dqyrchju
+ E55s4f66DvPV/KBpnlcS+2TkBx1Qxq5MW4+cCRiJ597C9rw6R1rDBGV0mkeirQcqGA91
+ +VnQAtF0gzgxMIMUBdONKMKg8AyF3wjdJ1lKqnz5rXHANXZUn7QypjoMHDTKdGSL8FS1
+ VhNRFAX+Clztrs5cL9te4laOgqRaM8yK3pAXTujgOzaVACk33JICgatMtgUDZ5QxLKd9
+ fWPEzxSpLKcFxxdjrM+py6v/0D9BSf4SP53SifnwgDBqty5XljhtO5yGm6JhnveVfyKT
+ ftPg==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1778167927; x=1778772727; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1778167954; x=1778772754; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Y8tFLl3KLKZIsW/JbMMLZ0B09j3Ttxvn4RsxwKyKXOo=;
- b=fucz4IzmqHXXGlPSgejihM0ToJ9VeLMMkMjLM5WD1YmvUT7CNP3HMM6HO/AE+P6x2n
- qPQLiVA2UNBrfN9e2zSOzhqDZ0ITkLbc4fEFh6rcqm6z4hYS6mpp4oAGZQm29P4lN0KV
- 1d6nbmzAnnkdmkFRCLtWINDBFMYGw6CFT+ZrQ=
+ bh=9RNrDlx7pc6a68AcEDo/AAYyA9U83tpxJuEvTb0XWDI=;
+ b=hGzvrAKdy6L6KWsxbUVHm3hsyWNkO/kPnE/55dm1bm7bRCDlOOOECiIDIcPFqpEpX2
+ ISJMVXjWJ1rM/3u+O3A6m/6byJ22A7Hs96mx35UwYD9JW8LOyk43U3H0iVUN/mI+ko+R
+ AH843EOUxCZuuudQzRoNADSTzUpcHnaWtboSQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778167927; x=1778772727;
+ d=1e100.net; s=20251104; t=1778167954; x=1778772754;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Y8tFLl3KLKZIsW/JbMMLZ0B09j3Ttxvn4RsxwKyKXOo=;
- b=DryDdyTMLB1yrsEbdW1BKL0T+RVRZMptCnehoVuU7dDJUGx5DB5awFcQ4P5gYgSFXK
- TKb9IGFmlTfPLg8X235b6ue+rdD/lEIvazdHfd1/eoXJ2bJCXSdg2hOM3DTcsjI2H1ee
- FyG6+gSFSUgBqNkVmT6DHDdNETe3isaIjyRBneyZ3pRt1LUpXtStGHP3UqsOtT85w/gn
- 9l2ArFJ0DMKnKmx0e0YNdC6bsAeqBWiewUwRmXA5ggletT/feFaPyofx75c3pEbd/on+
- 4Rlk9D05tWuORBpyTY0Xm60ZlebZDPyIAuozJJatSPtsu5ATkIWPIbiDZgwhAkFAqZwz
- vSSQ==
-X-Gm-Message-State: AOJu0YwAJ0UmEPvYk0ThE7S66cTmITxvCKCqlUTpJP4rpx9EWEK5WpW/
- hX8Kce3oR40ExQVUBTiIAGydCoMUsRvdtOksFlv4GMOwJrBe1xUlt+Lj5vDNZPDkGhMm+lzVwEl
- 9hsQv92v3i8hqk0dB1ghgbQK4zlg3/e2/e4CLyGoi
-X-Gm-Gg: AeBDiesK/1dtdG+FIJTZ93swiAfvJYxG/zmd8Drj7Kt/gQTU//p357/xuTpsLn7BysG
- hYOsDLaqNh05PWup0CBThfR3wCI60vqNOGPy1NcoHhNoTi8OmTwyG5HQ9UysDbT+i8VGzj1rg6y
- si5BF4iof5upEB4lt06iDh/5fozJOz9aNa882XwUC/MhIDHlXsu+JaAiVM5CMzF8h7tQ1/vBZKK
- y6BZ2qF6XgHE8OKBGCFJM5/65V8Q5mjL2TeZcEfU9PYd89KwCb0/BD07ChuVW8LrcdQjWNTG9qC
- VyBrijBhgFVvJN2q
-X-Received: by 2002:a17:907:709:b0:bb7:beb9:b6d5 with SMTP id
- a640c23a62f3a-bc56da16349mr561732466b.39.1778167926370; Thu, 07 May 2026
- 08:32:06 -0700 (PDT)
+ bh=9RNrDlx7pc6a68AcEDo/AAYyA9U83tpxJuEvTb0XWDI=;
+ b=KLbMrK48HFlJdVe4kcAEevNDcz7SxOfzyAvAhBKiyBMGa0f0FmrtYNeEFkqV5Tecax
+ hUsmnWqG2BNY4FZY0R2Q6aphVAzmHdswR8T5mw4DLkcu0hTVhkEwvFOH/Tr51Lo9kwSG
+ yVLSjbbcOGvSQGTqjoS02AYBatcdH1jnymFDF4P7/Om3CPWzD3bSrW+iC3iddP1MvW7i
+ GR3BgUNxkvfCBTH9xHH/FVx30V4suWq5/Tf68ERT8DriNZWJJ/lQO0Hr8UmIB2IsjyOr
+ G5zIKUwlbyxtY3p54GtcN0AeEHDmMj9SCOeFDjKki8C602qPEQISzS1hVEtEO399Jfpg
+ 7mYQ==
+X-Gm-Message-State: AOJu0YxAh4fd0FMnzQu44yHgJ9ffMeD19wQ0wAu+iNGbwLvb+dv4LH/Q
+ XjfuilLyWTnvF9Ufgb+UgJ9iNOAqaedXm5fcVJCyGhrF2dvjDS9g4evw477DxszcQsOYkrkVip7
+ TPpkSjr463buwsK0Cl2Db8G5LCHgl5YXGlgJJrvMv
+X-Gm-Gg: AeBDiesqqSno0s+4eKCm6bSvN+QwG91jaQz9Dj0gH2U6E8pGbW7sTGpdG7S4WxoW2a/
+ Iz4xxHjhFhN8bEmE30LHLFcmMByfkNILa+aMlT49GLKB3t+MghgmRwuWRluobIUwBXOusKznfmT
+ DUEwiJG5iEeUqDIQx06XJjO9XvUsP4FtrbrB3QQRzL70JF2YdhW9XkajMZkqwU01sBbrz2TDzm0
+ EOtbXBbzOq7ouNLAAdlpxAFbmJeaHjY0RhfkqWMIOfDWtNuZiB42BNbPOup/LmC7Kh8+yJplqzV
+ 88J7lRcoT7JCaJNI
+X-Received: by 2002:a17:906:9f8a:b0:ba0:fd75:9c58 with SMTP id
+ a640c23a62f3a-bc56d717ed5mr511723866b.32.1778167953616; Thu, 07 May 2026
+ 08:32:33 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260430122629.606153-1-ludwig.nussel@siemens.com>
- <CAFLszThcmzcAewzvjN_4kY4FR6rGknHmWUF4GNha__4h2uCqAA@mail.gmail.com>
- <95621f94-8398-4f60-912a-1c23fe79bca9@siemens.com>
-In-Reply-To: <95621f94-8398-4f60-912a-1c23fe79bca9@siemens.com>
+References: <20260429141850.1.6f48ecca7f833b4f4b90ba78432475de1461e838@changeid>
+ <CAFLszThHeODorsKtPCqFYmfSPuCJNGMTvdtUQ10yiHRhJnuCPA@mail.gmail.com>
+ <449bbab5-3451-4034-a643-771d9ddb0567@siemens.com>
+ <CAFLszTif8nRi8MGVmgj0hwbkCm+P3YV1trfvuVU7XxwiDAOeLw@mail.gmail.com>
+ <dd5dc055-dd57-4d1e-b155-5c254f2d20a5@siemens.com>
+In-Reply-To: <dd5dc055-dd57-4d1e-b155-5c254f2d20a5@siemens.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 7 May 2026 09:31:51 -0600
-X-Gm-Features: AVHnY4ImozpXbe5wAHvVOns5bgrtGqH1qudlqjt9_nkPN9Wc7BiCeR8Om8oo5_I
-Message-ID: <CAFLszThMMfmHC75uqNWUsb51eTzr37Zau10Tr7ktYrD99reY_w@mail.gmail.com>
-Subject: Re: [v2,0/4] Improve FIT signature handling
+Date: Thu, 7 May 2026 09:32:19 -0600
+X-Gm-Features: AVHnY4LoRgU3leyGmBuDfljHw7Qknl-9PLhB9ygKlmifQJJJI_vi9iQECke5bu4
+Message-ID: <CAFLszTgP+g=6GafZtJn4GVvXLrvkf17ixH6BidJvLT-uZ50ULw@mail.gmail.com>
+Subject: Re: [PATCH] patman: fix use in worktree
 To: Ludwig Nussel <ludwig.nussel@siemens.com>
-Cc: u-boot@lists.denx.de
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -111,36 +113,60 @@ X-Virus-Status: Clean
 
 Hi Ludwig,
 
-On Tue, 5 May 2026 at 06:39, Ludwig Nussel <ludwig.nussel@siemens.com> wrote:
+On Wed, 6 May 2026 at 05:47, Ludwig Nussel <ludwig.nussel@siemens.com> wrote:
 >
-> On 5/4/26 14:27, Simon Glass wrote:
+> On 5/5/26 16:01, Simon Glass wrote:
 > > Hi Ludwig,
 > >
-> > On 2026-04-30T12:25:59, Ludwig Nussel <ludwig.nussel@siemens.com> wrote:
+> > On Tue, 5 May 2026 at 02:25, Ludwig Nussel <ludwig.nussel@siemens.com> wrote:
+> >>
+> >> On 5/4/26 14:31, Simon Glass wrote:
+> >>> On 2026-04-29T12:18:51, Ludwig Nussel <ludwig.nussel@siemens.com> wrote:
+> >>>> patman: fix use in worktree
+> >>>>
+> >>>> When using a worktree '.git' actually is a file and pygit2
+> >>>> init_repository() does not like that. The intention is not to create
+> >>>> a new git repo anyway so use normal constructor instead of
+> >>>> init_repository().
+> >>>>
+> >>>> Signed-off-by: Ludwig Nussel <ludwig.nussel@siemens.com>
+> >>>>
+> >>>> tools/patman/cser_helper.py | 4 ++--
+> >>>>    tools/patman/cseries.py     | 6 +++---
+> >>>>    2 files changed, 5 insertions(+), 5 deletions(-)
+> >>>
+> >>>> diff --git a/tools/patman/cser_helper.py b/tools/patman/cser_helper.py
+> >>>> @@ -309,7 +309,7 @@ class CseriesHelper:
+> >>>>            self._copy_db_fields_to(series, ser)
+> >>>>            msg = None
+> >>>>            if end:
+> >>>> -            repo = pygit2.init_repository(self.gitdir)
+> >>>> +            repo = pygit2.Repository(self.gitdir)
+> >>>
+> >>> Thanks for tracking this down.
+> >>>
+> >>> There are more init_repository(self.gitdir) call sites have landed in
+> >>> cser_helper.py and cseries.py - please can you convert those too,
+> >>> otherwise the worktree case will still be broken on those paths.
+> >>
+> >> In which branch? In master I can only see init_repository() references
+> >> in tests.
 > >
-> >> (optionally) enforce signatures so we can't accidentally boot
-> >> unsigned fit images.
+> > This is in the master branch at http:...
 > >
-> > Thanks for tackling this - fail-open signature verification has bitten
-> > people before, so making it opt-out is a good direction! A few
-> > series-level points:
-> >
-> > test/py/tests/test_vboot.py exercises FIT signing end-to-end; please
-> > extend it to cover FIT_SIGNATURE_REQUIRED in both the success and
-> > fail-closed paths (no keys in the control DT, unsigned config).
-> > fit_all_configurations_verify() added in patch 4 should also get a
-> > test, ideally driven through iminfo so the command path is covered
-> > too. I wonder if we should enable the option for just one of sandbox /
-> > sandbox_flattree?
+> > $ git grep init_repos
+> > tools/patman/cser_helper.py:            repo =
+> > pygit2.init_repository(self.gitdir)
+> > tools/patman/cser_helper.py:        repo = pygit2.init_repository(self.gitdir)
+> > tools/patman/cseries.py:        repo = pygit2.init_repository(self.gitdir)
+> > tools/patman/cseries.py:        repo = pygit2.init_repository(self.gitdir)
+> > tools/patman/cseries.py:        repo = pygit2.init_repository(self.gitdir)
 >
->
-> Thanks for the review!
-> I haven't touched tests at all so far, might take me a while to get into.
+> The patch covers exactly those :-)
 
-OK, let me know if you need help.
+Ah yes... :-)
 
-You might find this WIP tool helpful for running C and Python tests:
-https://github.com/sjg20/uman
+Reviewed-by: Simon Glass <sjg@chromium.org>
 
 Regards,
 Simon
