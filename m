@@ -4,108 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC410CD3427
-	for <u-boot@archiver.kernel.org>; Thu,  7 May 2026 08:34:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7649BCD3427
+	for <u-boot@archiver.kernel.org>; Thu,  7 May 2026 08:35:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1DCAA8468B;
-	Thu,  7 May 2026 10:34:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 097688468B;
+	Thu,  7 May 2026 10:35:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=jannau.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20251104.gappssmtp.com header.i=@baylibre-com.20251104.gappssmtp.com header.b="GYOVmkTz";
+	dkim=pass (2048-bit key; unprotected) header.d=jannau.net header.i=@jannau.net header.b="Krx387IS";
+	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="YpRWpcJB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 96C028470B; Thu,  7 May 2026 10:34:37 +0200 (CEST)
-Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
- [IPv6:2a00:1450:4864:20::62d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 7072D84A26; Thu,  7 May 2026 10:35:24 +0200 (CEST)
+Received: from fout-a8-smtp.messagingengine.com
+ (fout-a8-smtp.messagingengine.com [103.168.172.151])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9D18D84687
- for <u-boot@lists.denx.de>; Thu,  7 May 2026 10:34:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D41DA84687
+ for <u-boot@lists.denx.de>; Thu,  7 May 2026 10:35:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jstephan@baylibre.com
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-bc23bebd345so105310066b.1
- for <u-boot@lists.denx.de>; Thu, 07 May 2026 01:34:35 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1778142875; cv=none;
- d=google.com; s=arc-20240605;
- b=Z5UkktoD9xvp7ZAhQ9nSrSoYFW/xaAjX2QmI1zEsRvXSDEft2oraS5r+5FmK9yD+LT
- WWoBZPyeLkWPOkwsXcyqNdwFHislRu+YhwN/7/0mBbdHGhVh5Pw8bvyTa46f7zQcASMO
- +Cp8DwLlHb7H4stnhpH+9lLBbkLQparptnmvcNEfrKD8teXnNbdNiDF7rYywZjwh2UeV
- e4PrsyQglla75z8IangjcQzjVYwzUnI16DmnyF5bRbvOIGJ4SR8qfJjP5H2lo9NZmN9N
- 1AOOwERg8bg+CsdbfnMcqXB3DTyDn5JMD4znOhNupYTuNCNregu3C4uUN7UWVBbOcbrx
- WBvQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=E6/ONhPobXZaNA6igkYmKy+m1QG+eEKWxg/Jq1q71vY=;
- fh=UXp/EUO74pqMB+5HT3XpWdbPS1TOvKi3CAK6N3sl4iA=;
- b=VDp2zE551ExJpeJ8BBSxHwQrGJU4P89wpd+EoRioH8wbxrU4NVkgPF64Ovygos965M
- MvDUJ510MejhCjj/KJO8HnSkxpSPFuHtZiVJpx7e8kh5oaJ4ho6cOj9Xwz9mfiOACPhF
- peyakv/OJEz+YQabXNiHsc+HA4oEOFnMJetCifTlZi5ddN4QYKZS1X/3Lph75JNTD3dk
- OF+Cnm9wnlPCsX0VjgD4vcZ1QdbYTbuSpUJGYQzFVjYh1LDg9MMb+bUnHK7ItxosygaE
- NX3FB/aFPpYJ8woj+q0T5QPHj9eVD7VuNiDB3Kio/7sh8h9TG0TYb71khV7mYogNZZNe
- MoqQ==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20251104.gappssmtp.com; s=20251104; t=1778142875; x=1778747675;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=E6/ONhPobXZaNA6igkYmKy+m1QG+eEKWxg/Jq1q71vY=;
- b=GYOVmkTzbvLZWqf5/LXziBIOelUJChVkuYNPCwN0EVUsO0tT6qfH7Pa0ipLl071wvS
- 5gVrtyds19XL+RO7kGzyFG9nJxHJ3Rw0J05zKdPehvWf0u0uaNvHNNK/83GbpRhDPh02
- Jh4KKgus6121lXo2cgEo741tGx71wWQJb1D1Zi6/4q0Ov+YuII1w68xUj5A7LCxmJk0C
- 6lySMTl86ehsvMgd4P0Bhfr7MNYsUluGH5/9QQssgXsGRAwlaboFUbbr3qEz/J2ki3BX
- Ee4HHuo74d04laJohkdC4DMu9wzrJSR0Qtn3M/Mamv6Wyx3S7KDjsNRVx/JUaa45K+fR
- Cyrw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778142875; x=1778747675;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=E6/ONhPobXZaNA6igkYmKy+m1QG+eEKWxg/Jq1q71vY=;
- b=Ao6YzwJ8GOJncyeh55PyP6lhyibbaasgnzq7euPSB3R8nH3wqR3Xlc0pS+Of6BL9R8
- 5Iq9rp8XFWru+t7QxN3V2HG4UHtLieGkgXRR0P5xKRQ0u4qctine2O+cvdZEedExEG4E
- 68P6GubRqfhn7RspvU2uaFByJUoyjmp+h37l5CVu2cg86le4YUy7Vw4+RBsQ1ybaaC2D
- iwGt5N6gXHPle3eledhD4j/7okDuS1gIQGNqI3mqHUpSHVxAC+dJmDLqAbhRKXrfLhuX
- vBJA3yK6ABkPwL9N4gBVvBcLniGdaBMXWhkw8FNXBm9gSPwc3Sn3fl/yVRq8NeEtlacU
- Feug==
-X-Forwarded-Encrypted: i=1;
- AFNElJ/zgzJ39Twz0wxaoxh6zrhzV/tKV9+w6RlRoPeuL7Sx0KaHqojG7f21xfYDjbxTLdWJPKkFzUo=@lists.denx.de
-X-Gm-Message-State: AOJu0YxxTuSTT9YuNS2N7+1UcA9fDjx/eP2nb2us9vbKvSn0jhd4rFtG
- ie7jJzix4xkoj3Bl6JLuiAGIecb2r8GmeapQBqgX6VxcLjskxxNA7D03hjs5SBgrj8K1zLwC628
- o3MlUzOjm6m2yp7smnm/Axg5mzdtxikNeYCAM9XUQjQ==
-X-Gm-Gg: AeBDiesuy5m5Dt5bDIb22nMlkQ/kmuwHDrElWOFUcE2opqRkPn58O0G1yxfEWcjzg94
- uYFQ/UfKOSH4Lq5U2RslPOwUCqwjP3xC174ns8u7Xstao/dyqfq99yhV54yLZNfiVgPCDUQhcT1
- badCqCRdnOPc97WTzdzoC8Gpj1ynW56WXykK2+oQzusGE78jCCIgfCJQiUvefAXyoLoH18zlCs+
- TYbZL/W6CsBV/9vOkqDiGhIRvCgEyZrL0ftgbqOgqLceMbB9LVUTv8z75Zo4WIWCMGmPs7wsrjX
- eUDjCYNLUcvaDt5DwKGiVfK7qD2+7P/yTpMTaQNDkOgjKHBuWhesbdRDEiL3dd74SSw0COYbSks
- yNtxqES3Doj45Zybge2B0zJy/dpySxWg4OvSUBA==
-X-Received: by 2002:a17:907:7b9d:b0:bba:1743:33ce with SMTP id
- a640c23a62f3a-bc84d58c2b2mr89505366b.14.1778142874849; Thu, 07 May 2026
- 01:34:34 -0700 (PDT)
+ dmarc=none (p=none dis=none) header.from=jannau.net
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=j@jannau.net
+Received: from phl-compute-01.internal (phl-compute-01.internal [10.202.2.41])
+ by mailfout.phl.internal (Postfix) with ESMTP id D7D24EC0109;
+ Thu,  7 May 2026 04:35:20 -0400 (EDT)
+Received: from phl-frontend-03 ([10.202.2.162])
+ by phl-compute-01.internal (MEProxy); Thu, 07 May 2026 04:35:20 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=jannau.net; h=cc
+ :cc:content-type:content-type:date:date:from:from:in-reply-to
+ :in-reply-to:message-id:mime-version:references:reply-to:subject
+ :subject:to:to; s=fm1; t=1778142920; x=1778229320; bh=i3IpRpvcjC
+ Xw4ieFew/phd3fIhv7PTV74hijYW5EnpA=; b=Krx387ISAqZuRjBvW7ei+rnBqw
+ zNq3szFceHC5nGSpN1tNOI1F9VvGBw0uI+OUBmmlI12K6lR9OcALjSzzOmMuT0/4
+ +FXmwkZRBxKN3TybioKp3r9rA5AQVjsNR744exym6UP2gmtZaYmgOg1EiXiDMk0G
+ PZw+4DboUodI+qNEbar44GN6hlUuky7vU4IsA7ey2TzkhGCHiPVsI9pGPECHZ6mt
+ jPKLi25r/zMVjeCrOdhq0IRWsje/fUzKXysp1KQPm3rrLIQJ8BcHFzMa9wpizIQx
+ SKmq4zRP2tiVFIEIOblZeSuVPbqzKI0vhC4qzP/TfrWQs3akIyMrgYKifRAA==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ messagingengine.com; h=cc:cc:content-type:content-type:date:date
+ :feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
+ :message-id:mime-version:references:reply-to:subject:subject:to
+ :to:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=
+ 1778142920; x=1778229320; bh=i3IpRpvcjCXw4ieFew/phd3fIhv7PTV74hi
+ jYW5EnpA=; b=YpRWpcJBDS/zb9bYo6eutRqpNdfajx0sEMqNm8b6yI86Htpk97e
+ YY6HeOcOOoclagGXNJ5C6RqlypBEh+jVJut1TlxlO30ksFdNqL4/RQE29p/hFv9j
+ dVWqldZw4JMdLAc/+pYoaI0NVXyINghciYrhG2ciqQhymhFhn6TnYVhrRo78ftGo
+ tIVYa2c6JdQuuKyqSPYw0rkbDTdEnx+ZTZyG0hq4TKzjWs3DHA0IPEuKW9ak9QEJ
+ n5tSMnh4nxu3t4dD88fuM4ZbMP+x13qi0t2dV00EwZ9GZsIYHtG7RpaghBJAwiTl
+ 2WC/Lk3KvxCoPO7sxd0u1ZMYjwPKBN2xowQ==
+X-ME-Sender: <xms:yE78aXYlRHUl32J9rQhvlFYyThGNTutBG4-LYj8ynO2ZKzUAbpcXBg>
+ <xme:yE78aVfy3JKff8KEZY6nPOtLoOskTin8ZRcH05OP0PaCSSqBP1IY3zHdzzz9aaYpN
+ lpy_GNb36kVUP-kQjconiUlJbA-fosGUxuPzc8YEFr88TgVixirsYs>
+X-ME-Received: <xmr:yE78aQIXjndKnImi0o6U7yXsMkFXHZ5laH5ZrqyGKGWdtd4g1mCjq8zJHMuYXVZoc203eE1JUY4k7Irm8voE4MWngZh5tAAEqFc>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefhedrtddtgddutdejtddtucetufdoteggodetrf
+ dotffvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfurfetoffkrfgpnffqhgenuceu
+ rghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujf
+ gurhepfffhvfevuffkfhggtggujgesthdtredttddtjeenucfhrhhomheplfgrnhhnvgcu
+ ifhruhhnrghuuceojhesjhgrnhhnrghurdhnvghtqeenucggtffrrghtthgvrhhnpefgvd
+ ffveelgedujeeffeehheekheelheefgfejffeftedugeethfeuudefheefteenucevlhhu
+ shhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpehjsehjrghnnhgruh
+ drnhgvthdpnhgspghrtghpthhtohepkedpmhhouggvpehsmhhtphhouhhtpdhrtghpthht
+ ohepmhgrrhhkrdhkvghtthgvnhhishesgihsgegrlhhlrdhnlhdprhgtphhtthhopehuqd
+ gsohhotheslhhishhtshdruggvnhigrdguvgdprhgtphhtthhopehkvghtthgvnhhishes
+ ohhpvghnsghsugdrohhrghdprhgtphhtthhopehtrhhinhhisehkohhnshhulhhkohdrtg
+ homhdprhgtphhtthhopehsuhhghhhoshhhrdhgrghnuhesrghrmhdrtghomhdprhgtphht
+ thhopehilhhirghsrdgrphgrlhhoughimhgrsheslhhinhgrrhhordhorhhgpdhrtghpth
+ htohepmhhkohhrphgvrhhshhhovghksehkvghrnhgvlhdrohhrghdprhgtphhtthhopehj
+ vghrohhmvgdrfhhorhhishhsihgvrhesrghrmhdrtghomh
+X-ME-Proxy: <xmx:yE78aaK17PZ4aS3QIqzRrYv61xZuM5o6VP3uG9IWpMNASzOMsWh35g>
+ <xmx:yE78aXVwj-PQN2J0uQchs3Hu0SOjpaJZQF9KdeCplVLfYlyXeQFRYw>
+ <xmx:yE78abn9r8VBthZg9IyOg8Lcu0bBRJMqyNPNY-OmgruHRllSvs5d_Q>
+ <xmx:yE78aVmOMiF5FeWnWqJ_Ewx_je7OjaGMMYDZTrrbdr3u1KxcTJd3Eg>
+ <xmx:yE78aUi4W0dXT3c9dWj0pxmzZIKKhToyFudyxrEcWrNith-0ypir5NSl>
+Feedback-ID: i47b949f6:Fastmail
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Thu,
+ 7 May 2026 04:35:19 -0400 (EDT)
+Date: Thu, 7 May 2026 10:35:18 +0200
+From: Janne Grunau <j@jannau.net>
+To: Mark Kettenis <mark.kettenis@xs4all.nl>
+Cc: u-boot@lists.denx.de, kettenis@openbsd.org, trini@konsulko.com,
+ sughosh.ganu@arm.com, ilias.apalodimas@linaro.org,
+ mkorpershoek@kernel.org, jerome.forissier@arm.com
+Subject: Re: [PATCH] arm: apple: Add Apple M3 (t8122) support
+Message-ID: <20260507083518.GB514139@robin.jannau.net>
+References: <20260501-apple-m3-support-v1-1-4165bc2a73f4@jannau.net>
+ <87zf2ic9iw.fsf@bloch.sibelius.xs4all.nl>
 MIME-Version: 1.0
-References: <20260506-mtk-pinctrl-fix-scnprintf-v1-1-56b99d5809db@baylibre.com>
-In-Reply-To: <20260506-mtk-pinctrl-fix-scnprintf-v1-1-56b99d5809db@baylibre.com>
-From: Julien Stephan <jstephan@baylibre.com>
-Date: Thu, 7 May 2026 10:34:22 +0200
-X-Gm-Features: AVHnY4LJHL3paJZxF8Z1jK3HFa_qVf8VFNz3DBpjG6zwPHDK_0TaTtTWxx2BnHs
-Message-ID: <CAEHHSvZ+Un2e12ppBmjZcvN=P2QTofZ16g5otond0ds9teogOA@mail.gmail.com>
-Subject: Re: [PATCH] pinctrl: mediatek: use scnprintf() instead of snprintf()
-To: David Lechner <dlechner@baylibre.com>
-Cc: Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
- Chunfeng Yun <chunfeng.yun@mediatek.com>, 
- Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- Tom Rini <trini@konsulko.com>, 
- Macpaul Lin <macpaul.lin@mediatek.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <87zf2ic9iw.fsf@bloch.sibelius.xs4all.nl>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -122,94 +110,147 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Le jeu. 7 mai 2026 =C3=A0 01:05, David Lechner <dlechner@baylibre.com> a =
-=C3=A9crit :
->
-> Replace snprintf() with scnprintf() in the MediaTek pinctrl driver.
->
-> snprintf() returns the number of characters that _would_ have been
-> written if the buffer were large enough, while scnprintf() returns the
-> number of characters actually written to the buffer. Since we use the
-> return value to advance the buffer pointer, we need to use scnprintf()
-> to have the correct pointer arithmetic.
->
-> Fixes: 76da7482cf39 ("pinctrl: mediatek: print bias info along with pinmu=
-x")
-> Signed-off-by: David Lechner <dlechner@baylibre.com>
-> ---
->  drivers/pinctrl/mediatek/pinctrl-mtk-common.c | 10 +++++-----
->  1 file changed, 5 insertions(+), 5 deletions(-)
->
-> diff --git a/drivers/pinctrl/mediatek/pinctrl-mtk-common.c b/drivers/pinc=
-trl/mediatek/pinctrl-mtk-common.c
-> index cfffbaeef84..01f67f09407 100644
-> --- a/drivers/pinctrl/mediatek/pinctrl-mtk-common.c
-> +++ b/drivers/pinctrl/mediatek/pinctrl-mtk-common.c
-> @@ -251,7 +251,7 @@ static int mtk_pinconf_get(struct udevice *dev, u32 p=
-in, char *buf, size_t size)
->         if (mtk_get_pin_io_type(dev, pin, &io_type))
->                 return 0;
->
-> -       pos =3D snprintf(buf, size, " (%s)", io_type.name);
-> +       pos =3D scnprintf(buf, size, " (%s)", io_type.name);
->         if (pos >=3D size)
->                 return pos;
->
-> @@ -306,7 +306,7 @@ static int mtk_get_pin_muxing(struct udevice *dev, un=
-signed int selector,
->         if (err)
->                 return err;
->
-> -       pos =3D snprintf(buf, size, "Aux Func.%d", val);
-> +       pos =3D scnprintf(buf, size, "Aux Func.%d", val);
->         if (pos >=3D size)
->                 return 0;
->
-> @@ -721,7 +721,7 @@ int mtk_pinconf_get_pu_pd(struct udevice *dev, u32 pi=
-n, char *buf, size_t size)
->         if (err)
->                 return err;
->
-> -       return snprintf(buf, size, " PU:%d PD:%d", pu, pd);
-> +       return scnprintf(buf, size, " PU:%d PD:%d", pu, pd);
->  }
->
->  int mtk_pinconf_get_pupd_r1_r0(struct udevice *dev, u32 pin, char *buf, =
-size_t size)
-> @@ -740,7 +740,7 @@ int mtk_pinconf_get_pupd_r1_r0(struct udevice *dev, u=
-32 pin, char *buf, size_t s
->         if (err)
->                 return err;
->
-> -       return snprintf(buf, size, " PUPD:%d R1:%d R0:%d", pupd, r1, r0);
-> +       return scnprintf(buf, size, " PUPD:%d R1:%d R0:%d", pupd, r1, r0)=
-;
->  }
->
->  int mtk_pinconf_get_pu_pd_rsel(struct udevice *dev, u32 pin, char *buf, =
-size_t size)
-> @@ -755,7 +755,7 @@ int mtk_pinconf_get_pu_pd_rsel(struct udevice *dev, u=
-32 pin, char *buf, size_t s
->         if (err)
->                 return err;
->
-> -       return pos + snprintf(buf + pos, size - pos, " RSEL:%d", rsel);
-> +       return pos + scnprintf(buf + pos, size - pos, " RSEL:%d", rsel);
->  }
->  #endif
->
->
-> ---
-> base-commit: e08877916e24cf97d3afc67aee65ed2204790f48
-> change-id: 20260506-mtk-pinctrl-fix-scnprintf-b5bfd1a31ed2
->
-> Best regards,
-> --
-> David Lechner <dlechner@baylibre.com>
->
+Hej,
 
-Hi David,
+On Sat, May 02, 2026 at 01:53:43PM +0200, Mark Kettenis wrote:
+> > From: Janne Grunau <j@jannau.net>
+> > Date: Fri, 01 May 2026 16:07:16 +0200
+> 
+> > Apple's M3 SoC is similar to M1 and M2 but uses a different memory map.
+> > The main difference is that RAM starts at 0x100_0000_0000 like on t600x
+> > and t602x (M1 and M2 Pro/Max/Ultra). Otherwise IO blocks have been
+> > rearranged.
+> > U-boot's existing drivers are compatible with the hardware and M3 device
+> > trees will carry "apple,t8103-*" compatible strings. Only
+> > apple-atcphy-reset might need a new compatible due to USB4 / DisplayPort
+> > changes the Linux driver has to deal with.
+> > 
+> > Signed-off-by: Janne Grunau <j@jannau.net>
+> > ---
+> >  arch/arm/mach-apple/board.c | 71 +++++++++++++++++++++++++++++++++++++++++++++
+> >  1 file changed, 71 insertions(+)
+> > 
+> > diff --git a/arch/arm/mach-apple/board.c b/arch/arm/mach-apple/board.c
+> > index 4cd8979bdc2..914b4581e7d 100644
+> > --- a/arch/arm/mach-apple/board.c
+> > +++ b/arch/arm/mach-apple/board.c
+> > @@ -85,6 +85,75 @@ static struct mm_region t8103_mem_map[] = {
+> >  	}
+> >  };
+> >  
+> > +/* Apple M3 */
+> 
+> I think it makes more sense to keep things sorted based on the name
+> and put M3 after M2 Ultra?  M2 is the odd one out here since it is
+> identical to M1.
 
-LGTM
+ack, I still think of t81xx and t60xx as two separate groups and group
+them together but I think that's not maintainable in the long run.
+This doesn't seem to hold for t6030 (M3 Pro) which looks more like an
+extended M3 or M4 than a chopped down t6031 (M3 Max).
 
-Reviewed-by: Julien Stephan <jstephan@baylibre.com>
+> > +
+> > +static struct mm_region t8122_mem_map[] = {
+> > +	{
+> > +		/* I/O */
+> > +		.virt = 0x210000000,
+> > +		.phys = 0x210000000,
+> > +		.size = 4UL * SZ_1G,
+> 
+> We should try to keep the regions aligned on 1G boundaries with sizes
+> that are multiples of 1G as that allows for more efficient page
+> tables.
+> 
+> I haven't looked at Apple's device tree for the t8122 (I don't think I
+> have ever seen one).  But based on the t8122.dtsi from the asahi-wip
+> branch, I'd suggest using two regions
+> 
+> 0x200000000: 4UL * SZ_1G
+> 0x300000000: 1UL * SZ_1G
+> 
+> You could tag the region at 0x300000000 as /* NVME */ if the Apple dts
+> doesn't suggest there are non-NVMe things in there.
+
+Apple's device tree for the M3 Macbook Pro (J504) has only NVMe related
+nodes in 0x300000000... (ignoring pmgr's and error-handler's views into
+other devices). I'll split the regions and annotate the second one as
+NVMe.
+
+> > +		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
+> > +			 PTE_BLOCK_NON_SHARE |
+> > +			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
+> > +	}, {
+> > +		/* I/O */
+> > +		.virt = 0x700000000,
+> > +		.phys = 0x700000000,
+> > +		.size = SZ_1G,
+> > +		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
+> > +			 PTE_BLOCK_NON_SHARE |
+> > +			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
+> > +	}, {
+> > +		/* I/O */
+> > +		.virt = 0xb00000000,
+> > +		.phys = 0xb00000000,
+> > +		.size = SZ_1G,
+> > +		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
+> > +			 PTE_BLOCK_NON_SHARE |
+> > +			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
+> > +	}, {
+> > +		/* I/O */
+> > +		.virt = 0x580000000,
+> > +		.phys = 0x580000000,
+> > +		.size = SZ_512M,
+> > +		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
+> > +			 PTE_BLOCK_NON_SHARE |
+> > +			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
+> > +	}, {
+> > +		/* PCIE */
+> > +		.virt = 0x5a0000000,
+> > +		.phys = 0x5a0000000,
+> > +		.size = SZ_512M,
+> > +		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRE) |
+> > +			 PTE_BLOCK_INNER_SHARE |
+> > +			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
+> > +	}, {
+> > +		/* PCIE */
+> > +		.virt = 0x5c0000000,
+> > +		.phys = 0x5c0000000,
+> > +		.size = SZ_1G,
+> > +		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRE) |
+> > +			 PTE_BLOCK_INNER_SHARE |
+> > +			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
+> > +	}, {
+> > +		/* RAM */
+> > +		.virt = 0x10000000000,
+> > +		.phys = 0x10000000000,
+> > +		.size = 8UL * SZ_1G,
+> > +		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
+> > +			 PTE_BLOCK_INNER_SHARE
+> > +	}, {
+> > +		/* Framebuffer */
+> > +		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL_NC) |
+> > +			 PTE_BLOCK_INNER_SHARE |
+> > +			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
+> > +	}, {
+> > +		/* List terminator */
+> > +		0,
+> > +	}
+> > +};
+> > +
+> >  /* Apple M1 Pro/Max */
+> >  
+> >  static struct mm_region t6000_mem_map[] = {
+> > @@ -710,6 +779,8 @@ void build_mem_map(void)
+> >  	if (of_machine_is_compatible("apple,t8103") ||
+> >  	    of_machine_is_compatible("apple,t8112"))
+> >  		mem_map = t8103_mem_map;
+> > +	else if (of_machine_is_compatible("apple,t8122"))
+> > +		mem_map = t8122_mem_map;
+> 
+> I'd probably move this down as well.
+
+ack
+
+I'll send a v2 shortly, thanks
+
+Janne
