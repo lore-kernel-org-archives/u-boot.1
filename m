@@ -4,106 +4,129 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD51FCD342C
-	for <u-boot@archiver.kernel.org>; Wed,  6 May 2026 23:05:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 878B1CD342C
+	for <u-boot@archiver.kernel.org>; Thu,  7 May 2026 00:53:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 06A7684099;
-	Thu,  7 May 2026 01:05:49 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id A72FF8490D;
+	Thu,  7 May 2026 02:53:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20251104.gappssmtp.com header.i=@baylibre-com.20251104.gappssmtp.com header.b="aXqnmkRP";
+	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="Py5SpDbw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B2900846A1; Thu,  7 May 2026 01:05:46 +0200 (CEST)
-Received: from mail-oa1-x2d.google.com (mail-oa1-x2d.google.com
- [IPv6:2001:4860:4864:20::2d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 8CA8984951; Thu,  7 May 2026 02:53:06 +0200 (CEST)
+Received: from SA9PR02CU001.outbound.protection.outlook.com
+ (mail-southcentralusazlp170130001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c10c::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 519BC83A91
- for <u-boot@lists.denx.de>; Thu,  7 May 2026 01:05:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 79D9B84903
+ for <u-boot@lists.denx.de>; Thu,  7 May 2026 02:53:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dlechner@baylibre.com
-Received: by mail-oa1-x2d.google.com with SMTP id
- 586e51a60fabf-40f1a1f77a6so119687fac.2
- for <u-boot@lists.denx.de>; Wed, 06 May 2026 16:05:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20251104.gappssmtp.com; s=20251104; t=1778108743; x=1778713543;
- darn=lists.denx.de; 
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=PdIhmmorDifGDWuNZ2wlEGnMdPmTeROATtwnS7a9TEw=;
- b=aXqnmkRPoX1LqgDM0O1T2tPW4xEqT3xZ3ei4AuUWKP48nxpmitjNZSPib1acuQl0z7
- TMkAgxCbVGXEubK0FZmL1ZfwsEXCMbgw5CejmtDY8Ko6LuCuc7INs0/nrB7sl4Si365n
- eNLvm8FMMU8gP1WmvA+mRkG9QaoJUenRb7Wwn397dunaZtRMo25FKOMf2w7vgg8L7Nfu
- XcNK6hIk04SDM+ws1IcRW/XzQqtYURjnefmjarddlwpVca3IgqkGeLSf9OPmU2EKifpM
- 4XGwsmcfgOBoC4hydFqXtB8gkQRIFmacuyrabyZxMHyMhIB/v/5Df5EAvsczTrnl7gRs
- nKfg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778108743; x=1778713543;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=PdIhmmorDifGDWuNZ2wlEGnMdPmTeROATtwnS7a9TEw=;
- b=lWkfIP85TcNjzoLSYuah+xt6znszzBkOh8kCazk9utNqxryawVxLOwJdtVJ3XBLIvh
- Ozcf3j73Jly25g1I0Fv5DmSYurv27dkGdhyugZn/kWpg/M/k7FbF9hhb5ENYbGTkDmSJ
- VU0GlHmRA/OU1/S175riHBOmq1TDrVYs7IkUeuYPLvyMt2RTaRwTOgdaCddZB+s8v5lR
- 6guHVToeK6dzobPOUOMIocNc2jvBRHOxoIVCQqXAjENzTgIlxfHSrX7rBG3ZjaI+TdL/
- sVHiZZNJECG8xtbSG12g0qaXRXuot06Du1fcNI7hPnZo8Mqtohqj8n2XotjsCxz/P/EO
- oIQw==
-X-Forwarded-Encrypted: i=1;
- AFNElJ9BcA1R2CCC6deH0w/vQ8NbNu4HitwCROnCosvtopac93F1J3z6Dbmvaf/SdV6f4j0+MySFA/4=@lists.denx.de
-X-Gm-Message-State: AOJu0YwuOjNfv4u2HWGu0c5OTmlgDSYH30A/J+up1Md+GWqfU/SKa+vK
- ycE1EGr4ZytIeMf0qTYKUYPjD50XhGHaVTJkypA6pDQs0niki+P7odH7TGsyuehxdok=
-X-Gm-Gg: AeBDies8kHxVJhSLfHCsCNS/2puBU7/0a2qJFd2+y80WkxRBigXHtyN0JmbkHJiNq0R
- qPHBvQvQW8bKx/yhic7t6DPEbpRO1Zu8NbBA7VJ3ELQ6dHApUk+1F8Qz4MPFSiSozC258lx1MnB
- vv3h0f4TfCwAVjRjA3mtRHea5qgTIEnFYZHNBNJ0FTiJ6LrMK/D9cVjUOhdl2keJoyOZkdBHQeQ
- zB48mmQz6wCuA2p3kNvtPYIets5h30xqoosccJKOobLAWXcyr7GdQ/AzldpY5zuPAGp7thoHovN
- CORm+gSi6PrSUYjmJDwSRrYAgz50OS8IcBYZINLdOaXS7FsXlsDUyNJPFTmr081ncsxo8g0AXX1
- 8WY7eiMBNer/hV3q1HGnLsUfjeD/LkeJhC1uNsrqSLYQefOMUqWMZLH6XrBMB3tnyoI+uCW67vu
- IKJspd45IreeSXHjL8z7VuMTDr7oYWgfaydc9Sqr8=
-X-Received: by 2002:a05:6871:b0d:b0:423:f59:31f4 with SMTP id
- 586e51a60fabf-434f6359cc9mr3601888fac.11.1778108742954; 
- Wed, 06 May 2026 16:05:42 -0700 (PDT)
-Received: from [127.0.1.1] ([2600:8803:e7e4:500:7374:f02e:e8be:88a5])
- by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-434ca5af84csm8104943fac.12.2026.05.06.16.05.39
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 06 May 2026 16:05:41 -0700 (PDT)
-From: David Lechner <dlechner@baylibre.com>
-Date: Wed, 06 May 2026 18:05:31 -0500
-Subject: [PATCH] pinctrl: mediatek: use scnprintf() instead of snprintf()
+ spf=pass smtp.mailfrom=dinesh.maniyam@altera.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=jcRzfXY5NBsKA5TPhFg/mZe8pr9igZ+iW5m32Yyw8WZkkqMJRZZ0Uob99F1ivpmS0v9lXmmaCvlWqDxw2Xppo5i8VA0Hno3U6xjjpgT/pPcplBBJgwf8BB3mwh6IKR2oYeNKxsEiUvOeeK0Cm95VlHZB73Pa1EFW8Tt7u0dOcFtzIc/8qGozxoACUhV2mFJx3M7scqje9P9mM5rHz9HeV3NEHXIjWXWNmS2fJjZgpxyDsazzGt1XRVyLt7CF9TTumhFIpyUQBU0/tQQlevH9MqCBKV/1xIZA8AagJ8Uiy96F7Y7IkWKTbEZdYDHCY8kwGWJvuZ9T5R+NAl3uO48tpQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=vW9n9XAikyBDy66ZRqdiZGDzpQg1qD5rrmPL5ZWVaiE=;
+ b=tixXCGENNmJS6TY4repClyAwaL5ddlC0SnmderBZWkpihMallK3XyMm1MEJX/Ym8Aee7csu7VOMpNhwMBK9+/VgtQv3CU4tqQpYIh4ks6HF2eV1kaEeFhEXakuPIb+++qYD0+1b9+iy0e/1tnKmOyaT+f8YLsaqMehzaFES+MmVG+5dN8IW8EMrP9XHCPavRz8FG2UHazVlpHHXEA2JG07T4A5zKCFbTmB16Wq0onl8Vtvv1E61DgOjyNcuxtX9GA32VZHvN4UObIAzGm4aW12HS48kFbodQAqQQ0XQE5LS+eh7f8on2Tdpwytv0x2zelnAzXuReoOCOdNalYJaWFw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
+ dkim=pass header.d=altera.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=vW9n9XAikyBDy66ZRqdiZGDzpQg1qD5rrmPL5ZWVaiE=;
+ b=Py5SpDbwJbo93aEF6z4O0pzDOwng0yICRh+g0mXWmuitViE51XBK1G83EGyI+64GLqRKf/2/1qdDjKPvANcfjkYm0Of+EtmLxY3iDMrPmNgBBSBkuZaBUSx20dYx5s3d6BMjptwntm0XhTjWckRcCU/Q9x76BMoi0U6rcYZB+E87U+8Xn49huyhcjokRPJUSi1PjB3TSeVGizdlzOY1T09QITVW8EtqxGIwSbIycxPqEu/RzXaDxazNx6keTVLKw+vfwA1XK+Th83DMjLr3vrLAkfj+RqquW03REh+aB1KiL20gpECCQOSkrl7y43JqUZ/SNkP34xpYkVmdNKIP11A==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=altera.com;
+Received: from PH7PR03MB6942.namprd03.prod.outlook.com (2603:10b6:510:157::18)
+ by CH7PR03MB7810.namprd03.prod.outlook.com (2603:10b6:610:250::16)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9891.16; Thu, 7 May
+ 2026 00:52:58 +0000
+Received: from PH7PR03MB6942.namprd03.prod.outlook.com
+ ([fe80::8f8a:2a94:f5a8:ea1a]) by PH7PR03MB6942.namprd03.prod.outlook.com
+ ([fe80::8f8a:2a94:f5a8:ea1a%3]) with mapi id 15.20.9891.008; Thu, 7 May 2026
+ 00:52:58 +0000
+From: dinesh.maniyam@altera.com
+To: u-boot@lists.denx.de
+Cc: Dinh Nguyen <dinguyen@kernel.org>, Marek Vasut <marex@denx.de>,
+ Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
+ Tien Fong Chee <tien.fong.chee@altera.com>, Tom Rini <trini@konsulko.com>,
+ Dinesh Maniyam <dinesh.maniyam@altera.com>,
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
+ Chen Huei Lok <chen.huei.lok@altera.com>,
+ Kok Kiang <kok.kiang.hea@altera.com>, Boon Khai <boon.khai.ng@altera.com>
+Subject: [PATCH] configs: socfpga_arria10_defconfig: Enable
+ CONFIG_CMD_FPGA_LOADMK
+Date: Thu,  7 May 2026 08:52:10 +0800
+Message-ID: <20260507005210.30014-1-dinesh.maniyam@altera.com>
+X-Mailer: git-send-email 2.43.7
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: BYAPR11CA0067.namprd11.prod.outlook.com
+ (2603:10b6:a03:80::44) To PH7PR03MB6942.namprd03.prod.outlook.com
+ (2603:10b6:510:157::18)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260506-mtk-pinctrl-fix-scnprintf-v1-1-56b99d5809db@baylibre.com>
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMSw7CMAxF0a1UHmMpCWoHbAUxaBIHzMdEdoqQq
- u6dAMMjvXdXMFImg8OwgtKLjZ/S4XcDpMssZ0LO3RBcmNzoJny0G1aW1PSOhd9oSaqytIJxjCX
- 7ee8pB+j/qtQHv/bx9Lct8UqpfYOwbR+1SOyufQAAAA==
-X-Change-ID: 20260506-mtk-pinctrl-fix-scnprintf-b5bfd1a31ed2
-To: Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
- Chunfeng Yun <chunfeng.yun@mediatek.com>, 
- Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
- Tom Rini <trini@konsulko.com>, Macpaul Lin <macpaul.lin@mediatek.com>
-Cc: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de, 
- David Lechner <dlechner@baylibre.com>
-X-Mailer: b4 0.16-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2651; i=dlechner@baylibre.com; 
- h=from:subject:message-id;
- bh=wpW5ErHavG/AsIKKLU0wLdgAu9z4KC4YN6QFbfCQjqw=; 
- b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBp+8k84FpY0UIVcfAvYGx/2HBcqI5bU653tu/j6
- IxvA5Y34jOJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCafvJPBYcZGxlY2huZXJA
- YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AqSEIAJJePECn8WDr4CZLLaSxefywmqb67TVhD7pWH9U
- RYLrWzfQDpj/q7jdfWLka4t4NVUg0Nwbqx1JDnDfwBRDWEqweALZ4K8ryy8FXb6iwR6dsBjeEy6
- XY+DjtKrKxSU5e5BK0w3qOS0sVDbVCMm2YX1551Mksp6NLRdJ8j52jGNWN2h/FcYfXqMbJE+k/g
- kFqhbHNbeBpozhFya3MwjzVDGirUfgbMd+YzmUpA0apuKhenJQ7BMqupc0QVLRtpEt9j1uRhkhY
- qzdEIn1vsp5rWRf/uEgkRTNN9icX3H418VmeY5AXJlgNub9sZwOz2vTLyCTHQte9LqpXjDTzI7s
- egvA=
-X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
- fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PH7PR03MB6942:EE_|CH7PR03MB7810:EE_
+X-MS-Office365-Filtering-Correlation-Id: d5dd5c69-c290-457c-cabd-08deabd2fb25
+X-MS-Exchange-AtpMessageProperties: SA
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|376014|1800799024|366016|18002099003|56012099003|55112099003; 
+X-Microsoft-Antispam-Message-Info: g0Ioktxy0dapV8m9zEkuh611yIFbGAK8aNilv8ueVdAtd2DPcOwyJb5PyTjskY+BfRV0hIC0GXFkah7b/9tI9NVFin2TG5v8C8mzj7Gqxfr7hFoU90Fyc909gcpOywAh7SxK7mlNHjvd6XLtRwnXd/kzKVjwnkTOhTEZxY1xSmNuTgr2/1m7a78WrXe394nxTPPFBjNtLFv/N/heNTXd3jSYsXBMKydnzo4ToDVlQZf2uPK8ZAQ8i/wXDZEp4OO9jqQCJ1oobSXezVFpHRM+kqvg5HPNtzH6HuGT8EFSgPd9UP+nmfGSLus36nUludsT4/HuzIbea2UqBHFvksR2xdYDELwF7ERvsNwizlipAUueggLmMs7iZak1UkipOJCkc053l0oF7ZhR3rNRzIoXLq7pPDfrjIySWwaoOOUkey++YZLhKl2gVikfL4as0IIMFB3UtmTQaY6nnxStHl0xwT6sNtVSiJY56HLUCTwWuhqNPEVKrswZ7Lf5+o6nb43VPEe7I0RFn+bpWsKQ1m/v3SXLy35n7HmYZjUeA7fb2+fkzuIhMNRsxHL0ENQoDLsY7fG1k/bZGL4yF8xQuAdTGuwahrP0nKhA7m3yNRjy0s5wQVyw74knTl2OL4VP8zwN89SE/RnsDQIwqfr51vsz3rHq1GSzlXeDFwZyeziE7tL+JmmhsbB/OKXkRWscYato
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PH7PR03MB6942.namprd03.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(1800799024)(366016)(18002099003)(56012099003)(55112099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?l024U9s8Wnhj85qDUxq92LUg9+Zjz5icvkFCYMzmCOxduq+sK4iC767lsFyc?=
+ =?us-ascii?Q?3nUWh6uvX8lJVqxWw71jv5UIqeP61z5tnO1tMXygcZ1Vx3Y+NSmzsClBl/tV?=
+ =?us-ascii?Q?WMU3SXQwTb4Sx4ZiyFIlSkKEZrariy4SNSvO+GGsQCuK7XPIlgq5ta7aJ8v7?=
+ =?us-ascii?Q?i8HIQ4/PpsTFqyLgfxCQ8vJANGRCPvE4aNlPC9/wtU24oxWG1wCP1pEoUbS+?=
+ =?us-ascii?Q?1Sf91M1a30JMyt/ZlQBMutBUADORlhJDcfOl5ucyq/CXfzt9mtt0457b5mXw?=
+ =?us-ascii?Q?Kt0TwO/MqvngzGmgBOgn7BbCsYv4DRZud+7JooVJPgGG5QrFbMEarJuN7LjF?=
+ =?us-ascii?Q?W/hjYY4PBcG9sXGTlEOCEE1fLn8xDMbOsZHaTujeeZsr0K/RtDHaUMUX+Wch?=
+ =?us-ascii?Q?l95X50nm1YkkLOmUtOaFEYajdY+Sqt0sLt+n5AEi9o8tD4feKoEdbSMfkcgd?=
+ =?us-ascii?Q?Z8+rNVwN/DBpRlA7L2GbfcyqTabVShmXmmdRjBje525+Cc2PDkS6QRG9EmXc?=
+ =?us-ascii?Q?RSXBfvctWxGqpMSDs0O59KjsvXGAzwO8qXjpFt6ndnacwXDynYJ8ZscCJ1wN?=
+ =?us-ascii?Q?O+5ZnEugMblLALJkrzLvQbZVpQh1AtW0gGsZqqSa5kAdJGjSOV3EkiO3Ddyt?=
+ =?us-ascii?Q?6aP0ERNHFKfXv0wN6WUprGenGevc8Nuo3J2E4WT9dcTx+SUWKwMKcKO8UQ05?=
+ =?us-ascii?Q?lspy3nRLuW+Z7mXbz5rbhaGYDaOC1hfmeV/+Gk8NHC+eDg4gJeT1ySBoeJWY?=
+ =?us-ascii?Q?cC1sXSLuObxQNCUJtqPlsYc+NIcY1afDF2jRGjhdD5+RogIKm2F+kXzRVqi+?=
+ =?us-ascii?Q?OXfGQiDQ8JyC5QDtJR1qCNKT5mlqAuEhHdgApeKCqWMyYwgJpqX91p6Tt6y6?=
+ =?us-ascii?Q?+Ta39Sgwq6TOZ5vhrUr+So37SXHzL3wJwU/CL8XYHA8vaCv8TGTufip0DkkV?=
+ =?us-ascii?Q?yzTpdKQMfqHBitT8BgbHfiz9KssKxS/sG14zTXde8xd9oO3hguLLK6TAjSYl?=
+ =?us-ascii?Q?seotR3GqM4ogpMhRuGJhmZKw9/9w2ljwGhp+eO9x/JLMgGIk5JOC8hOhp9ic?=
+ =?us-ascii?Q?fdnbxpFvRDoUU9DVNCTeqDzAOLmX9aG4nrRqwT70rR8WwzYLLFBTn3+wr70+?=
+ =?us-ascii?Q?opJxCBpgOt6vok/jvzgHCC+8RVvBjcy1pSnr02ZY0FsYsRQwHXtSm9jr2Flf?=
+ =?us-ascii?Q?fqqNqlqjikwFsD6jQFaIuR82eTPV2qpmS27baxOR9hhVnYDijRzv8/vC7gP/?=
+ =?us-ascii?Q?7rmweAsIF2GqXxXoLfKr3vJV/n8+CH9pgWn0y77tyLz72fSAVvhPK/V98DVQ?=
+ =?us-ascii?Q?f8ZFr0Bga+cR2Vn+McrcgoLy0yXDek9fC/md2dXTrSxoiUqCvPHdLhFCkUqr?=
+ =?us-ascii?Q?87PefOij6TAF/Hh5vMGh8PSy+IpZO/uUyu6bT7JwkRoGNV97oyx+0f8LlI9A?=
+ =?us-ascii?Q?7/J9iODMaV/xC+Wnc/y7qExMjHxs8ce6pPsUMAT9ayYpoZBPW358CX7TgesU?=
+ =?us-ascii?Q?wbKXZfbMK4mwiKHIOjn4YbQKEL9R3EIJoOPZAeyPB2qq9pE4Fjritr5fKIRW?=
+ =?us-ascii?Q?SmztXwB6YSoCdC/pcBMhJ7Uy5go7EzB0cRHdfKp//40jlwgv24sIlCZ/rxcp?=
+ =?us-ascii?Q?/gtx/KnDfZnhYk8gX/cnW4ssTzvZrSY8pGEkOu9t9XmJ/yGJyzsqBS5X4on3?=
+ =?us-ascii?Q?Q6UBy42drO1yIp8FBaFIXfzdHUEnGJ23sp6ckN52Gv66U3jt2iNsOpeAN8QC?=
+ =?us-ascii?Q?f7+jqj6qgAHre/qmy9oYmPGZpzaikPw=3D?=
+X-OriginatorOrg: altera.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: d5dd5c69-c290-457c-cabd-08deabd2fb25
+X-MS-Exchange-CrossTenant-AuthSource: PH7PR03MB6942.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 May 2026 00:52:58.2427 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: ckNE/CaF+mncaTCtpiqRqvvFzuojPfjLYg7M6cj70pxf8U8QKZ3xfjIWTCm/wTHuQi4SxvJ/sv3uVkV/Uz+AFl4ZJYtFiadZTTMUbyd5cS8=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH7PR03MB7810
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -120,75 +143,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Replace snprintf() with scnprintf() in the MediaTek pinctrl driver.
+From: Tien Fong Chee <tien.fong.chee@altera.com>
 
-snprintf() returns the number of characters that _would_ have been
-written if the buffer were large enough, while scnprintf() returns the
-number of characters actually written to the buffer. Since we use the
-return value to advance the buffer pointer, we need to use scnprintf()
-to have the correct pointer arithmetic.
+Enable the "fpga loadmk" command on the Arria 10 SoC Development Kit
+defconfig so that users can program the FPGA core bitstream from a
+FIT image already loaded into DDR.
 
-Fixes: 76da7482cf39 ("pinctrl: mediatek: print bias info along with pinmux")
-Signed-off-by: David Lechner <dlechner@baylibre.com>
+Signed-off-by: Tien Fong Chee <tien.fong.chee@altera.com>
+Signed-off-by: Dinesh Maniyam <dinesh.maniyam@altera.com>
 ---
- drivers/pinctrl/mediatek/pinctrl-mtk-common.c | 10 +++++-----
- 1 file changed, 5 insertions(+), 5 deletions(-)
+ configs/socfpga_arria10_defconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/drivers/pinctrl/mediatek/pinctrl-mtk-common.c b/drivers/pinctrl/mediatek/pinctrl-mtk-common.c
-index cfffbaeef84..01f67f09407 100644
---- a/drivers/pinctrl/mediatek/pinctrl-mtk-common.c
-+++ b/drivers/pinctrl/mediatek/pinctrl-mtk-common.c
-@@ -251,7 +251,7 @@ static int mtk_pinconf_get(struct udevice *dev, u32 pin, char *buf, size_t size)
- 	if (mtk_get_pin_io_type(dev, pin, &io_type))
- 		return 0;
- 
--	pos = snprintf(buf, size, " (%s)", io_type.name);
-+	pos = scnprintf(buf, size, " (%s)", io_type.name);
- 	if (pos >= size)
- 		return pos;
- 
-@@ -306,7 +306,7 @@ static int mtk_get_pin_muxing(struct udevice *dev, unsigned int selector,
- 	if (err)
- 		return err;
- 
--	pos = snprintf(buf, size, "Aux Func.%d", val);
-+	pos = scnprintf(buf, size, "Aux Func.%d", val);
- 	if (pos >= size)
- 		return 0;
- 
-@@ -721,7 +721,7 @@ int mtk_pinconf_get_pu_pd(struct udevice *dev, u32 pin, char *buf, size_t size)
- 	if (err)
- 		return err;
- 
--	return snprintf(buf, size, " PU:%d PD:%d", pu, pd);
-+	return scnprintf(buf, size, " PU:%d PD:%d", pu, pd);
- }
- 
- int mtk_pinconf_get_pupd_r1_r0(struct udevice *dev, u32 pin, char *buf, size_t size)
-@@ -740,7 +740,7 @@ int mtk_pinconf_get_pupd_r1_r0(struct udevice *dev, u32 pin, char *buf, size_t s
- 	if (err)
- 		return err;
- 
--	return snprintf(buf, size, " PUPD:%d R1:%d R0:%d", pupd, r1, r0);
-+	return scnprintf(buf, size, " PUPD:%d R1:%d R0:%d", pupd, r1, r0);
- }
- 
- int mtk_pinconf_get_pu_pd_rsel(struct udevice *dev, u32 pin, char *buf, size_t size)
-@@ -755,7 +755,7 @@ int mtk_pinconf_get_pu_pd_rsel(struct udevice *dev, u32 pin, char *buf, size_t s
- 	if (err)
- 		return err;
- 
--	return pos + snprintf(buf + pos, size - pos, " RSEL:%d", rsel);
-+	return pos + scnprintf(buf + pos, size - pos, " RSEL:%d", rsel);
- }
- #endif
- 
-
----
-base-commit: e08877916e24cf97d3afc67aee65ed2204790f48
-change-id: 20260506-mtk-pinctrl-fix-scnprintf-b5bfd1a31ed2
-
-Best regards,
---  
-David Lechner <dlechner@baylibre.com>
+diff --git a/configs/socfpga_arria10_defconfig b/configs/socfpga_arria10_defconfig
+index b32f40ae408..3e3689dbec3 100644
+--- a/configs/socfpga_arria10_defconfig
++++ b/configs/socfpga_arria10_defconfig
+@@ -40,6 +40,7 @@ CONFIG_SPL_FPGA=y
+ CONFIG_SYS_MAXARGS=32
+ CONFIG_CMD_ASKENV=y
+ CONFIG_CMD_GREPENV=y
++CONFIG_CMD_FPGA_LOADMK=y
+ CONFIG_CMD_GPIO=y
+ CONFIG_CMD_MMC=y
+ CONFIG_CMD_USB=y
+-- 
+2.43.7
 
