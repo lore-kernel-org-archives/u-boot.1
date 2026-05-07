@@ -4,92 +4,112 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 837E4CD343F
-	for <u-boot@archiver.kernel.org>; Thu,  7 May 2026 18:59:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2DBA2CD3442
+	for <u-boot@archiver.kernel.org>; Thu,  7 May 2026 19:03:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A42EA84B42;
-	Thu,  7 May 2026 20:59:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 9C83F84B42;
+	Thu,  7 May 2026 21:03:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=e-labworks.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="JX+kesnc";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=e-labworks-com.20251104.gappssmtp.com header.i=@e-labworks-com.20251104.gappssmtp.com header.b="s1Ykm6ED";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 82C5C84B45; Thu,  7 May 2026 20:59:32 +0200 (CEST)
-Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
- [IPv6:2a00:1450:4864:20::331])
+ id DBB9984B9D; Thu,  7 May 2026 21:03:50 +0200 (CEST)
+Received: from mail-dl1-x122a.google.com (mail-dl1-x122a.google.com
+ [IPv6:2607:f8b0:4864:20::122a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4D0CD84A75
- for <u-boot@lists.denx.de>; Thu,  7 May 2026 20:59:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A262D84A75
+ for <u-boot@lists.denx.de>; Thu,  7 May 2026 21:03:48 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none)
+ header.from=e-labworks.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-48a563e4ef7so11554345e9.0
- for <u-boot@lists.denx.de>; Thu, 07 May 2026 11:59:30 -0700 (PDT)
+ spf=none smtp.mailfrom=sergio.prado@e-labworks.com
+Received: by mail-dl1-x122a.google.com with SMTP id
+ a92af1059eb24-12e332315a8so26124c88.0
+ for <u-boot@lists.denx.de>; Thu, 07 May 2026 12:03:48 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1778180627; cv=none;
+ d=google.com; s=arc-20240605;
+ b=Fladyg/FmfOp0fJ0LoJ3OtTPHUHcmgBbMzpQYHUsnpCZEhS0PuXD5lxArsCrToM6S4
+ zaVbhwqU3NWT4ytAS1E1xKVOK51DgadAI/yqHV6rdlw5yTbSFos4//EB+khflReKQw5F
+ EAK/zDxe7FUZLjmmlaIIfHaglki2vsGayjXY2vnMUsnq+O2/3VqB5lWGdQZPv0+87EpJ
+ PuW7ix8qiHVymsmpWnNHGF4fEQwws3KWDIw6DDp0YGvif1HjHa+t7JCNlOmYFZYfV4d1
+ lmemBVmByph8cAGgZEtFxlb1MyzWYN9245huX5X1TQGfkMUmtG3nh9hnBHOQcvEey+xO
+ q5GQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=GvWUtecuUvVpHX42Q8e7/ByQi/ccv7bDF4lo2CHH0S4=;
+ fh=rQdNVvvc8zqJicVVg1FKg9muS4zc+bsub2dGVVYbfLU=;
+ b=QKtku66/hMVQxp/wcLTWNehU+jWccdLRaimaMHnS/wY9tb9CKyv/0eU9kNpXLRDUu4
+ r4BsZzRr544x55ueaPWOYG795PPHtp2VNCCWCzoqLm/DZsAWFnuIDGTpMr30S0SGGBQZ
+ naZbUW8tDmZAia9UFIac1EX+BeCiqJFtSCzifYy92npNo/ihmOT6YbJELAOFHsSpOUt6
+ EUrH2sWCFUfPJloAGLTN86PkXBA8zOoxhtrhuPrRXwplw1fPMqnN5USqdVHMARJ9cBoG
+ yxYiQYU2agKR13/dJ0k+1XoB7cRWz6OsL4cQ0cdJiNCqjKF/JwdDnpSO3nSCrdoZSv15
+ sW3w==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1778180370; x=1778785170; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=TxJ988+iWKdUUiQQe/Qk1GYxLxuDwqH8AzdMVcPEdhQ=;
- b=JX+kesncaDvTqmKvib3BvG5jZptWSb692niTRCIIiuABJiKMtwizVxL9KHGwR4+Z1q
- jOjqt/QgIOpMvAhLC4pD3cqa2+QGPw6uIdpev9QjCxyenIbrQ916+8bEj6jSV2dmT0O0
- Qko6IP2TaJdIflpHiBvmntgBiJ9eeosdIlAcl4exr95Q8pvCM09f2NkOVMnVDxkwVVw0
- 6HMEqWvH5bps/CDG6WNU8yHd9IT12NsAYre+EBfiE6Aew0sqfLirGraRX2rBRLGs3obt
- wDg09Yzxem7+FkrDIZOgbZPo+qrIHcC1GGiLZuN+QTgIHmhf7p3OR8fL0giR8lXIBOiY
- SbIA==
+ d=e-labworks-com.20251104.gappssmtp.com; s=20251104; t=1778180627; x=1778785427;
+ darn=lists.denx.de; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=GvWUtecuUvVpHX42Q8e7/ByQi/ccv7bDF4lo2CHH0S4=;
+ b=s1Ykm6ED/FOXjt4ZgcQXzhcrp6p1nrtL8wbjqrT2A3m1b+uEUGXQyzIQNzymf1f4rF
+ 2vOPSO2o2gRn3pe+Sdf2GX5IX5Ic5IaN2WVEbqW42nt4dOLQIv8WfTQvqFp74BeAq8H0
+ kLehrTFOkmSLiRsafHp26V84hpq3qhI2JC4xgswDorx9QQYrMS+FURNxjuNIwENMyS9k
+ YB/GTPdUP/aATT5N2ZYuohNxdu+FEBRiD9YSTuHnKT2yv1hpL8LDC5g//1wkLGjBIEV9
+ j2vdovr7MAEshtPPq3xmUQmrMEyCNICjaiRCvlXXjyUFEL5b2nFJjJeoZAtzI/vwcxo6
+ xrXA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778180370; x=1778785170;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=TxJ988+iWKdUUiQQe/Qk1GYxLxuDwqH8AzdMVcPEdhQ=;
- b=P6/ACMX2KoN6nP/KubBowrgANOVE5B0tAORjO5GoMQyt2zyXxcB+zcjfzZINQpWZkB
- AREo4ZqCT/G8djfzoZJKkYiNLFYyao8HASkfriO4J3ppk3ldH7SZZqL34+7Ivv6w9dAW
- OqJFVvBE265MbFKGy5SK6AhyTzdGIpW20VhZ0oYwMi/XfTQ9jMTU9NsRRCprmHwO7K5n
- 5JfBw1HpJP1T4OWV7AMLbl0tjufO84grxwIel7w67PorAezSQuSGDk39+ySplXTz/MY2
- 05dq3q+uSGb1KEqVhRca4+v+rPxwaClW2AMAe0uhClAecofqnavpuBe95/fuxCIZXKF6
- uCDQ==
+ d=1e100.net; s=20251104; t=1778180627; x=1778785427;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=GvWUtecuUvVpHX42Q8e7/ByQi/ccv7bDF4lo2CHH0S4=;
+ b=EqmBBRPqOkgXwlPX1EcEGO3KKwhimrhSDf2KCt5vOXmUpp5Af/HHpvWx0g0ihd3UBS
+ P5rKpPZl4JwTlIlzuziidwQ2+3rB/Wztmrzr60RwFRwBE+iu8HwuWLi+M3akOY6Xaizu
+ PJj5myLKsUvRFIDjaqO742EClXt14lDW8qtRVYagnB99MdUOWTlvRUq7xh4G5jmm8iPy
+ dZ23RJooy0yrSLVE4+geHjLchhWgZwoZXJp0XqE9xxFynjFlAp8re3S2azGT/1cCMOy1
+ 4PeffPPj9E//45nGX7PJx6HUF6UlUA6Nuc9zU73eie/FyiAh+N9X1wzgKPQNfkFxWIaM
+ LQfQ==
 X-Forwarded-Encrypted: i=1;
- AFNElJ95NWu1rBqqLBcUC3w+SM5OYb+AyHm+X+7W9UXor7Ul7hntoyKjZUFYXVcJh7MkcX3OUDMcCfQ=@lists.denx.de
-X-Gm-Message-State: AOJu0YzLR/O0lZ9iwU0GBGB/K6+9COg9xkAS/3i6ZMjVsRlUhwRBaTNJ
- ttbGOhUJR6KjPodJjm1Ba+WsZ40D+KCNI5YxlaIFGXU8zmIb8Kp0gt/pYkndr984JuI=
-X-Gm-Gg: AeBDievXcIzZkSe3bWfJVJ44cR8Z2G7uLbXAd6JTUYUCHzUeAILaQZ+qYXqA7M1cjf3
- lECh3aIiPUvIWnCjOxCLOhAGKv+pnwS42z+Rr/aEcU4BhOAh/oegbPFjF+Q6pX475EyZQuLQ9To
- g00Wt2ZCFmCbCspbgyYfbO8Bw0ejnnAyUmXiricnumnQUopcIQCbr9XcGX6PtemJQlxmi9q/ceA
- HAF7lc9qS5HiYRVMQ9kE18iyLcWjfqIOY2SRNZ2nGJ3CmJAh1H6JoiK31cLsej2Mrxc0D1UgGob
- da+nKhK+8TRF/h3Wif9Ilz9cEFmCwsMP/bmVugf/yrzKiX2ZLtEp9HwFrYRJSX7/sLhJd1clBEL
- ks6pS0Yj4IjXhi8beXxVqtx9VSg1ghbfp3JEL3sp4aMsVaG7lfvWvYAMI6eL0YepU/VxdjpKRfb
- p9Ke0qjZsGEf8qnmUFulHWxnON0wGrrDSyB43MqdMRtwTZf7tVoeJRtqpkNDc+olNXcbykhgCbV
- S8j
-X-Received: by 2002:a05:600c:34c8:b0:486:fd5c:2b35 with SMTP id
- 5b1f17b1804b1-48e51f2f85emr171224235e9.13.1778180369620; 
- Thu, 07 May 2026 11:59:29 -0700 (PDT)
-Received: from [192.168.1.36] (p4fc3dd86.dip0.t-ipconnect.de. [79.195.221.134])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-48e538d2878sm229917545e9.15.2026.05.07.11.59.28
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 07 May 2026 11:59:29 -0700 (PDT)
-Message-ID: <e5c62ceb-906e-40ac-a4bc-f573d7e748ac@linaro.org>
-Date: Thu, 7 May 2026 20:59:28 +0200
+ AFNElJ+lT3lm8Nbj1LN80rZtn8KtyWm3tddkl2GbRg1Hg2jPblmfepISMK21Wg37ofQZi0143cTrAmc=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx0TKXKsY28TGrg8LqoaZL69mtjuJtdrUJDEFco2vlXQy0N9olw
+ iyWU3Wiph3BDNouTb/z3UHXroyT8W9NoUV0+5yaDs839J5pY2YC/hsVA7jmPQ+YfjyocEgJnGw+
+ rl/I9E2GfDw3QP6b++BnqCLq+ZVhKyqFg2OCHMn8jgQ==
+X-Gm-Gg: Acq92OG9uoh1Wso9IjwVN/ycYbASwA+7YxIMEJd/oGXjraWEJ7nDOWNPPIQROBk2B0a
+ jH11wcMDzHovyBqRvJzsb61B/zX4N7idPr2xn4MTzFpjbDCVwTMpvNu+p2TwOxktbxwyQ6+EHFU
+ rE1uwgxlkngzECxootMSJYv7QTapdt5FCsoo7+RhR6GB/gbJgrPkHVc1tGFfwko03C2uhj7KYme
+ Qh1fHz2SNtjMugKNGIFOyfdng4ENL+hgQ2MfKTtTycXVz+yvuXc2MJLevRXf7cRAlpSUl6/2w2I
+ A10N90MhqzvQ+wwASDEbkCwPOwdf2t0Oj5ucJNcasgeS6AbFO3tV7rVfeRe8
+X-Received: by 2002:a05:7300:a508:b0:2d9:b466:5e19 with SMTP id
+ 5a478bee46e88-2f549e6b382mr4803495eec.21.1778180626718; Thu, 07 May 2026
+ 12:03:46 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] armv8: mmu: support unmapping regions with
- set_one_region()
-Content-Language: en-US
-To: Anshul Dalal <anshuld@ti.com>, Dhruva Gole <d-gole@ti.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Mark Kettenis <kettenis@openbsd.org>, Tom Rini <trini@konsulko.com>
-Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de
-References: <20260504183721.646712-1-casey.connolly@linaro.org>
-From: Casey Connolly <casey.connolly@linaro.org>
-In-Reply-To: <20260504183721.646712-1-casey.connolly@linaro.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+References: <20260423154536.768603-1-sergio.prado@e-labworks.com>
+ <20260423154536.768603-2-sergio.prado@e-labworks.com>
+ <491f7007-0574-4fa5-897c-59002c7dcaf6@cherry.de>
+ <CAFLszThW0u0SrntCfXFi083petNmszVmSjNgXFc87a38tHyx1Q@mail.gmail.com>
+ <610b19bb-3282-4062-a3f5-3071c69dbedb@cherry.de>
+ <CAFLszTgjvZnwsLBQicn4=g_wia3JP8EWs1H8o=pUe6L9kcC9JQ@mail.gmail.com>
+In-Reply-To: <CAFLszTgjvZnwsLBQicn4=g_wia3JP8EWs1H8o=pUe6L9kcC9JQ@mail.gmail.com>
+From: Sergio Prado <sergio.prado@e-labworks.com>
+Date: Thu, 7 May 2026 16:03:30 -0300
+X-Gm-Features: AVHnY4JjzGzWCZn6JHrXPKH3WPpdYBODRWZG3AqfnteuRExnUc-o9ncvwnRGJw4
+Message-ID: <CANu7NGspwLDTC=iVYse_TbEmJ8yLuGtVBnVB5_479d238qFaeg@mail.gmail.com>
+Subject: Re: [PATCH v3 1/2] binman: bintool: add extra_env parameter to run_cmd
+To: Simon Glass <sjg@chromium.org>
+Cc: Quentin Schulz <quentin.schulz@cherry.de>, u-boot@lists.denx.de,
+ trini@konsulko.com, 
+ alpernebiyasak@gmail.com, ilias.apalodimas@linaro.org, 
+ marek.vasut+renesas@mailbox.org, sughosh.ganu@arm.com, 
+ wolfgang.wallner@at.abb.com, bb@ti.com, y.moog@phytec.de, xypron.glpk@gmx.de, 
+ jerome.forissier@arm.com, afd@ti.com, Wojciech.Dubowik@mt.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,86 +126,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-After discussing more with Ilias off-list it's become clear that this
-was the wrong approach. I have an improved fix working which I'll post
-shortly.
+Hi Simon,
 
-On 04/05/2026 20:37, Casey Connolly wrote:
-> Currently set_one_region() implicitly assumes that we want to map a
-> region and aggressively splits blocks into tables to do this, but when
-> called with PTE_TYPE_FAULT to unmap a currently mapped region it may
-> try to unnecessarily split blocks which doesn't make sense if the entire
-> block should actually be unmapped. In the end it then has to walk every
-> single page and create a bunch of empty tables.
-> 
-> Introduce a check for this kind of behaviour and optimise with a fast
-> path, if we're unmapping a region >= the size of this entry then we can
-> just unmap the entire PTE and whatever it contains.
-> 
-> This fixes some bogus empty tables being left behind when carving out
-> reserved memory regions on Qualcomm, and should improve the performance
-> of the break-before-make in mmu_change_region_attr().
-> 
-> Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
-> ---
-> Changes in v2:
->  - Update pte_type() to correctly check the PTE_TYPE_VALID bit
->  - Explicitly unset both bits of PTE_TYPE_MASK to be extra safe
->  - V1: https://lore.kernel.org/u-boot/20260504175511.585797-1-casey.connolly@linaro.org/
-> ---
->  arch/arm/cpu/armv8/cache_v8.c | 18 +++++++++++++++++-
->  1 file changed, 17 insertions(+), 1 deletion(-)
-> 
-> diff --git a/arch/arm/cpu/armv8/cache_v8.c b/arch/arm/cpu/armv8/cache_v8.c
-> index 39479df7b21f..b6506e8523be 100644
-> --- a/arch/arm/cpu/armv8/cache_v8.c
-> +++ b/arch/arm/cpu/armv8/cache_v8.c
-> @@ -162,9 +162,9 @@ u64 get_tcr(u64 *pips, u64 *pva_bits)
->  #define MAX_PTE_ENTRIES 512
->  
->  static int pte_type(u64 *pte)
->  {
-> -	return *pte & PTE_TYPE_MASK;
-> +	return *pte & PTE_TYPE_VALID ? *pte & PTE_TYPE_MASK : PTE_TYPE_FAULT;
->  }
->  
->  /* Returns the LSB number for a PTE on level <level> */
->  static int level2shift(int level)
-> @@ -939,8 +939,20 @@ static u64 set_one_region(u64 start, u64 size, u64 attrs, bool flag, int level)
->  	int levelshift = level2shift(level);
->  	u64 levelsize = 1ULL << levelshift;
->  	u64 *pte = find_pte(start, level);
->  
-> +	/*
-> +	 * If we're trying to unmap a region then check if it's already unmapped or if it's bigger
-> +	 * then the PTE we're looking at right now, in the first case we can do nothing and in the
-> +	 * second case we just need to unmap this page/block.
-> +	 * Otherwise we will needlessly create new tables until we have traversed every single page
-> +	 * in the region.
-> +	 */
-> +	if (attrs == PTE_TYPE_FAULT && (pte_type(pte) == PTE_TYPE_FAULT || size >= levelsize)) {
-> +		*pte &= ~(PMD_ATTRMASK | PTE_TYPE_MASK);
-> +		return levelsize;
-> +	}
-> +
->  	/* Can we can just modify the current level block PTE? */
->  	if (is_aligned(start, size, levelsize)) {
->  		if (flag) {
->  			*pte &= ~PMD_ATTRMASK;
-> @@ -1081,8 +1093,12 @@ void mmu_change_region_attr(phys_addr_t addr, size_t siz, u64 attrs)
->  	flush_dcache_range(gd->arch.tlb_addr,
->  			   gd->arch.tlb_addr + gd->arch.tlb_size);
->  	__asm_invalidate_tlb_all();
->  
-> +	/* If we were unmapping a region then we're done! */
-> +	if (attrs == PTE_TYPE_FAULT)
-> +		return;
-> +
->  	mmu_change_region_attr_nobreak(addr, siz, attrs);
->  }
->  
->  int pgprot_set_attrs(phys_addr_t addr, size_t size, enum pgprot_attrs perm)
+> My understanding of the justification for NOT passing the env argument
+> is that it is annoying to do that plumbing. But I would rather do that
+> plumbing. Perhaps not stated, but one of Binman's design goals is to
+> try to have callers pass in their requirements rather than relying on
+> state or sideways data (although there is plenty of that even so :-)
 
--- 
-// Casey (she/her)
+I came up with a solution similar to FIT image signing. It is much simpler
+and does not require passing additional environment variables to binman
+(though it still requires defining a few environment variables when
+invoking make, such as OPENSSL_CONF and SOFTHSM2_CONF, which I assume is
+what you referred to as =E2=80=9Csideways data=E2=80=9D).
 
+Please let me know if I should submit this new version as v4, or is the
+approach of passing environment variables to binman still under discussion.
+
+Thanks for reviewing.
+
+Regards,
+
+Sergio Prado
