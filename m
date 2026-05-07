@@ -4,138 +4,101 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F353ACD343B
-	for <u-boot@archiver.kernel.org>; Thu,  7 May 2026 14:17:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75CDACD3439
+	for <u-boot@archiver.kernel.org>; Thu,  7 May 2026 14:54:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 614E084A93;
-	Thu,  7 May 2026 16:17:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
+	by phobos.denx.de (Postfix) with ESMTP id A039784A7D;
+	Thu,  7 May 2026 16:54:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="gkdG8MuU";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20251104.gappssmtp.com header.i=@baylibre-com.20251104.gappssmtp.com header.b="CqO0fKWA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9C8D584A9E; Thu,  7 May 2026 16:17:37 +0200 (CEST)
-Received: from DU2PR03CU002.outbound.protection.outlook.com
- (mail-northeuropeazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::3])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 8DFA184AF2; Thu,  7 May 2026 16:54:44 +0200 (CEST)
+Received: from mail-oo1-xc2a.google.com (mail-oo1-xc2a.google.com
+ [IPv6:2607:f8b0:4864:20::c2a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8975684A7D
- for <u-boot@lists.denx.de>; Thu,  7 May 2026 16:17:35 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
+ by phobos.denx.de (Postfix) with ESMTPS id 64CE484A7D
+ for <u-boot@lists.denx.de>; Thu,  7 May 2026 16:54:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quentin.schulz@cherry.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Zv7oIQdYvqAJKp1+YYzq9FUHAj9gbokSDQr+D+fPkgjMXZsA17XqESNhpb7PFQElSYszS8uZOJjSBn0lRz37UCN7WNOL/m3cBV07ccHFbrYxIJa7WLoQ5NDQtDVWFP1W5bC+2K22jqSPG1iroKlZRR/xdeF6dUADT51sU8QlWCtDSURYuM9dWWsiqgROh4wMPUvDAoucgN3Uzjg08FfrmCeJEKcHRCppxtyFh9lyzHv7zhWag20oTZy9ODD3sLspo8Jz37CzKPzpuG4VtbRkv+Rpt0aNnyJ2h/sUosft80JBwmel5uxTcQJLqvKSvi9lN0HmG3HeVF19M+nYgUqmjQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Ea1ofdWTBasjb1/hg5m2IZ8BtDjlPHqfZjh1Ajr+wtA=;
- b=mMFa3jSVjncLbbLcQtHetvVB52zczUv7Lex299S4kOmCLth24PpsdkcMdBZnLh/KjDiaYLA1slpvy8z1lrudnkWlBcBuwN9SaiBjerxkcsfmFQ1bQHBQMtdeOGV256pIX0fYuoPZyvuFAsWcC5ISF61cjqsjMlK2CzuV1k+ElBfm4q4ZfzcbXDfOroaeRbOQEVah4XiHFUou8Ux/BGP58LFJPshXnyVLajB3dpTq25fUDjK2NEmKZjjHP2L1f5T1mD6uibldIePH9WNodDj1b01pH5dVGscVVt3PPfcGTdheKINq0e3i/npjaiwbfndnlmuK1iGAZjsEghfaX9nw/g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Ea1ofdWTBasjb1/hg5m2IZ8BtDjlPHqfZjh1Ajr+wtA=;
- b=gkdG8MuUmiFvyg5T1/jG22qrZDqhBoOQ+arXVHowAuwiVR2oxfcw1RgE8fpXrHi2NFK6qj3oCpfdWdp2wf0ihZjlY0ShZUPYShNG5SKsmR7fEE2CiXCDxq9wrYs9LDjHP4NWjQTR+ofBw1y9ct/+4xr2PywTzqy6nkToHx31RcQ=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from DBBPR04MB7737.eurprd04.prod.outlook.com (2603:10a6:10:1e5::22)
- by AM9PR04MB8082.eurprd04.prod.outlook.com (2603:10a6:20b:3e8::11)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9870.25; Thu, 7 May
- 2026 14:17:33 +0000
-Received: from DBBPR04MB7737.eurprd04.prod.outlook.com
- ([fe80::5960:fb4b:9313:2b00]) by DBBPR04MB7737.eurprd04.prod.outlook.com
- ([fe80::5960:fb4b:9313:2b00%3]) with mapi id 15.20.9891.008; Thu, 7 May 2026
- 14:17:33 +0000
-Message-ID: <bef4841c-a4c7-4e6b-96cf-d8fae4abf986@cherry.de>
-Date: Thu, 7 May 2026 16:17:31 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] doc: usage: cmd: reset: specify when the -edl option is
- available
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
- Quentin Schulz <foss+uboot@0leil.net>
-Cc: Tom Rini <trini@konsulko.com>, Casey Connolly
- <casey.connolly@linaro.org>, u-boot@lists.denx.de,
- Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>,
- Sumit Garg <sumit.garg@oss.qualcomm.com>
-References: <20260428-doc-sysreset-qcom-v1-1-964df4ee79f9@cherry.de>
- <ba82cf35-1ee2-4407-8d25-9569577c7a47@canonical.com>
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <ba82cf35-1ee2-4407-8d25-9569577c7a47@canonical.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: FR4P281CA0221.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:e4::18) To DBBPR04MB7737.eurprd04.prod.outlook.com
- (2603:10a6:10:1e5::22)
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=dlechner@baylibre.com
+Received: by mail-oo1-xc2a.google.com with SMTP id
+ 006d021491bc7-694891f8f62so492576eaf.2
+ for <u-boot@lists.denx.de>; Thu, 07 May 2026 07:54:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20251104.gappssmtp.com; s=20251104; t=1778165681; x=1778770481;
+ darn=lists.denx.de; 
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=etSw/srcm+PjLKNxo5qxhXfRxY76XE8bD6MMaY+N1io=;
+ b=CqO0fKWAbDPPHKKKEKmnSrZEBKPnOQn0W9iASWFFxUyI9U4wUnFbrIqpxs9BVPCUq0
+ 7fibmzmhrlk9OoLi6nY4SSu3de691BrX3heRqkihzfKJQcilsHKPjxE54LhgKyCBKYg7
+ avS0zXWq+E5ehz/h5C55g7M1m0qjL6cOp11phDxcJExEwJpgP1f05fgaCiJ2E+iDEJEG
+ QRVeu0VGAQbphNNSbupm8RCVAzsWY58v2DUvz83Y/hkQUMOk5VNDtuXx7jWd4ILfSbul
+ ozsCqRTX5mTt+4eLLJ97ctIoLYr0gq86eVKJLikvDs86B7xxlON9SeHcqkwhLtw879aS
+ 9SuA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1778165681; x=1778770481;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=etSw/srcm+PjLKNxo5qxhXfRxY76XE8bD6MMaY+N1io=;
+ b=oU0P2zechLJGS9cUPmnT5KNodJ99ro2FJYyjUNRK7U+kPLgtTB4Hpwi7SCxkN+OlAw
+ eOB8miYJEPNYVHVcAzR5k25sbKmPAJAk+9gSLk7nQU0l+BiZZYdu4PkrJUWoc+5qvmNv
+ MOGRSp9xbTc1BOwd1TxVX28VEjhInfb5mHBCtHMNIl0YTZMQvX6EuyJnA9TNWoU//Ew6
+ OrvAuuvjt1LwcbzVqMsja1Fy29Mm8W/wE8RCByMrw+Sqw9Hqx+pZfHF6bUkN3YkgjhcR
+ pyBMS2yB4bE0ZEiFdKvTgbyqMyqXhKuSris/cCN1nODd6GOLWHTmcfVcFkXgwLTyla9k
+ 3LaA==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ/LqHm05FOND126k+Rpaf07WnE8oT+1WAlv6tUsw0jDdhjE+XoSdKB825rSCuAG2s5XYXEuE+s=@lists.denx.de
+X-Gm-Message-State: AOJu0YyrbQGWukDaxXs/NX8P7qA/zcG5+jXTl1NHGerYUx/ywd7W/vHh
+ sqoF3qwZuyQ+zQZBLPgZrmV21BlLbfD2p4FHWXEWGY8SFkhMKFVYRYrxd1XT+k4vugrQDuo9nzk
+ RLOCm
+X-Gm-Gg: AeBDiev3kJvDDBkDUbExKVU3i+g1xRuY6e5soggNCBC23JOfERTclDBgJKu/7YOQm7w
+ X3eKtFfYVASt721Pf/hTj6CK8mWLbrWZTU0n69ZpW6X9XKVJz+XHjCCmTKhpt0wQ7WnDaFgHYdA
+ Zswc4gjWgqixenToNjHxIWn31gtygkvEgm4gXZ4DiNI3i4XrtoYHgZ4VU9Tk8VQPtcNwqz15kvM
+ KrtXyPwo4xKlmCGlKgtEkmV+p3xBSL6DRGDH2uP9ADJAlZKYxjlphK4EBQLcnWf8UdD+h0mXcC4
+ 9dbTsd/ZI5IuVgmrnwGkhaAD2s8auMO0Hg5J57UfJhMsKwqMSeHwBinsC2VtA9p6UL3YqJyunHU
+ si/MbaeHOEt9CWVc/q3mF2/L8RYZ5MOdTp4CEPeBG3JIUk35iv/zVAOmgv80J9k+BGevAmAy/we
+ dq7Mt46zB2RgrxRpkS3CPoMLjDbC9dW0C5CHdeA/4m2PltbTWq1A==
+X-Received: by 2002:a05:6820:81c6:b0:696:1e8f:a03a with SMTP id
+ 006d021491bc7-69998ccdeb6mr4496968eaf.24.1778165681146; 
+ Thu, 07 May 2026 07:54:41 -0700 (PDT)
+Received: from [127.0.1.1] ([2600:8803:e7e4:500:7374:f02e:e8be:88a5])
+ by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-69689266bacsm12151275eaf.0.2026.05.07.07.54.40
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 07 May 2026 07:54:40 -0700 (PDT)
+From: David Lechner <dlechner@baylibre.com>
+Date: Thu, 07 May 2026 09:54:02 -0500
+Subject: [PATCH 1/2] configs/mt8188: enable bootstd, FIT and DT overlays
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DBBPR04MB7737:EE_|AM9PR04MB8082:EE_
-X-MS-Office365-Filtering-Correlation-Id: fb2aacdd-1794-4794-1591-08deac436155
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|366016|1800799024|376014|22082099003|56012099003|3023799003|18002099003;
-X-Microsoft-Antispam-Message-Info: l9Vu6v34w6k6dK0FTWZAFdMDWQhP5Tkn5FObDXMuHkxphVR1xorebZYyBkZnB1ROZ3SR7qiPnTGWGlIUSQba1Vv1lmOOUhO7gxy9DImThIHiwz+jLEQ4t3nglkcH73dhC+FgnLHKUoPZIA+UzRHxZUrtjHj5WeLz+DAfV0G90kU7J2Ua8wwKjN76LwSz8Datndu9/keOy9+KSYdy+aZ/xJhcG5euCDlZ987OxxHarOEH2abscs+/zChGasz4Xe3VWcPuB7gv1HNWD49QwwrsNiUOU6KdOg+ACDvPvDpXDdSOR9gnuPKrz1LR8buf3w9FEg8p7BIR4g36KsHkUw5ECV9R8bz78RquNkXvufQZXYOLehcJQETgR2HdMevlWlQagvWo8LhRLqKm/qXmKGjbLPaa/d+Rc+IbfmOA1Sr6kC7jit8b7OFbpN15w6B4Hecng8aGzU2y3oqN7feTuv0jKNF3GyCRi8+tmYrJVscm3pW4fBaiwwGprCOYQWgTwdi7KZZ8dLXkJFWZkBKeqcMlcVjMEVIXfPtKUHhmPxxxopz0wVDBZi4pnvdGSoF6i+dcN3kSOWyde0t7Nq7+niHe5WYDSVbbJmTaxxO1/dy2ixj0ohnwDzhmLTwtpwv9uja1CGFjHP6eMnNzUbzJBqhsL7Qj/UjlKlLPC6h3k7BRwxgFQI21a+OikFEO6mSlq9wF
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:DBBPR04MB7737.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(1800799024)(376014)(22082099003)(56012099003)(3023799003)(18002099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?T21salo1L1drL1pXRkxUdXA4Z1ZrdmdKaVNEZFo2cDN4NUF4QTFrcm4xWnU2?=
- =?utf-8?B?QzhZeWtTajdKalhlRGVxbUNCWG5aRlRlNEZUQ2xVRTdHSkQxaUZEZVkvMUdv?=
- =?utf-8?B?ZnJHS25xcDk1cUpHSk5qNWlJaHM0dmR6U041azhtQmRJU3lHMmNNNTlPaWpS?=
- =?utf-8?B?QlBkaU5LbVAxbC9VZE1LRzFHNy9VdjU5OFVrQVB0a1ZNYXd0OGNOTjdmTW9k?=
- =?utf-8?B?Z3dGMWhIdU03bjN6VUtUSXcrRlhMb2RDbG11cmF6ZFdQY2lxSDM2amp2MEZj?=
- =?utf-8?B?c1gzVCtnTmRZaUJpc3grSXVTSGdJbytDZTgyY2hjWG9LVmV3WXBMVUsxRnBv?=
- =?utf-8?B?cTAyTERVaXByejNGeWlnMFRYWit5NnNnLzRLa1k2TXpjVGR2RU1nSzhpZ0FP?=
- =?utf-8?B?enl0WHg2TWJDMnc3c3FTTURnSGpKYkdtbnNHdkhreTVXUjNrQ0N2Q1lRWWlt?=
- =?utf-8?B?bnNETk9vdXEzazhORno5KytsU3VHS0o1WlhKWUpkZGNTRElGYWQ2cGY3dXdq?=
- =?utf-8?B?ckNCSjdza3hGRHNQemdGWFN5OURqQXB5RzF5T2J0RzI1RnBwZGdPZVQ3bEJY?=
- =?utf-8?B?ajBjK3oxTHNPbFJRNkROY09CbEZJSlVkL0Q3TE9aTDNYbUJsK2JOcVNzbUdh?=
- =?utf-8?B?a0NpTlJlL0FXQWgvazdXdTRmbFBWZlE1eGp1dndIZVhaMHlZazNHYUM2Smlu?=
- =?utf-8?B?T3ZWM1RTSGFvOVIranJXd2JnMEI3UmZYRS8xVjBNczhVaExUWlJaQnZJRVkz?=
- =?utf-8?B?ZTNVZWlQSWYzRFBKU3lXNTBnVUlqOWJFYys1eUUzaS83TzBWT2JaMVJKdm5z?=
- =?utf-8?B?bDhpb0REbWVLOENwcnR2QWFaZ1ozTEtXczBNaXI4MWNkN2VUczd5Uk5Mc2xl?=
- =?utf-8?B?dGNyM1RZWXhRMzY4TTRrR0ZSazdqNmpBUVFtV3ZhbGFYT3d4b3ZNQW1sRVVX?=
- =?utf-8?B?WnN4d3ZpQ2c1RWcvaTgyRlp1QnNjMHJiSTF4N1NkTnZpOXIxWHhySHhHMmF0?=
- =?utf-8?B?Vk13ZE95TEFLSFNvOHFrK0RVeEFCVEY2dTVrTWJSTVpYTWdBVTZBaFV6RW94?=
- =?utf-8?B?cmRXYVlHOFRUNGZreUVFZGRHN3dYelE0cStiRzhON0xRUGFVYS92ODE1Y1lR?=
- =?utf-8?B?TGtNWi84Zm4xazd3R1VBRGg5M3hiOUZ6VjU2Z1hQUHBKUGk0QkxvcDRlNzVu?=
- =?utf-8?B?TXJUNXg4cFJKU01ITEZWOUUxVC9vUUVBZ1NmMklVaEhCZUNIR0M2U1lJT2VJ?=
- =?utf-8?B?MGdWaGc0Njc5M1NNTmUydm1hRFVmNkxJRG9laWtsbllGdWhmSVZId1M4OWJ6?=
- =?utf-8?B?akRUOEtFcEFmZEFKTEVoN3VzcXlwRTU1Q3JUTXNFdE5reUZFems5R055Wm1m?=
- =?utf-8?B?SFJZNEVsSjVOdmUzV0F5MXJhcjA2anZyaXpUMDNjTEw1eU1DSWN1aENkeTVC?=
- =?utf-8?B?RjljWE1XYVJwTjU3UU4yYm81TWEyQ3NGdGFTUFVzWmFlRWRsenZvRGF1cEI3?=
- =?utf-8?B?VEFobGc1M3E3a1Zyck90SGVVRGgrT29VQWhpTExXT2FqeEJjMHpTQjFjTFJm?=
- =?utf-8?B?cTFPNjhMQ29tbHZoTG54cmF5bWZZRHNJVkxoMFAwL1JzampPYkhwT3NTMGg2?=
- =?utf-8?B?WmhEcmdTUjIvSmYzSjFLdEpDNU9tK2xXN0swK0FCR0kvaHZzOEJTSTlMV2N6?=
- =?utf-8?B?NWE5T0xLY3ViWCtPdXorZDNFUWdJZ0RHMmpCSEpHYUFoaTJNK3AxdlBMTFdu?=
- =?utf-8?B?Qk5Icmt3Y0RzY1RjejZzU01URmVScGJzUVovS3RIUFJQNktkTjYwVHIvRG01?=
- =?utf-8?B?WjJxV2xmMDd2MmV5ZzFOM3I5SzFveWUwRkFiVzA2QXNoRG5GUXpTNHRXd0pD?=
- =?utf-8?B?VkR1OW9SdFdVTTRwY2hCRTd3d0lvWWEwVlFlUnZ1aE5SYVhyWm1BRm5jMWJD?=
- =?utf-8?B?dTViTGI0SEhvQmFwZmwzQlQ2T0V3blEvRWlqNXM4a2pIcC93YmdmYjVjcVJI?=
- =?utf-8?B?OGQ4cmNKUkpGZTNjeFc0Mk5PdHZweFltbXEraDh3K3cxdWZIc3pYVHUzZXg2?=
- =?utf-8?B?ZU5takZrSDhUYkwrZXNXenZkNHlvQnYwNm1NcW5MWVFoSXliS2dRZVpRcU9V?=
- =?utf-8?B?RHV5M28yRWZ1WmlsZkY4emFUZjJpZDVkbFZQb3lKWTc1ZnV0aGZjWUVKbU9s?=
- =?utf-8?B?dU5WM1ZRWHZ2emhCUEttMUErc2xPUi85RXNTVURlQ1cvVW1nQ1g5emxLdm9T?=
- =?utf-8?B?Y3JGdDRDMm13RUdMSHlyQ0ZsUWoxN2lncGRBR25wNVhLRjJ0R2NvNTZlS1dv?=
- =?utf-8?B?MlZIUkZ3bDVyV3o4WHVONjVBQXdacFZSN0hRb3BsT20zT25sV3NCUT09?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: fb2aacdd-1794-4794-1591-08deac436155
-X-MS-Exchange-CrossTenant-AuthSource: DBBPR04MB7737.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 May 2026 14:17:33.0072 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: F71rdDaBlFeGDT1oxlFjyH9+7YsKIeHcqXPYu46SOraGOd6bQ6dvVyenWKKLeIA8ZaEBYiVsUXKcxsXbjXSK+WiACtNAoKLH1Ju3lBgKn0c=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM9PR04MB8082
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260507-mtk-genio-defconfig-v1-1-5ca5d5c956cb@baylibre.com>
+References: <20260507-mtk-genio-defconfig-v1-0-5ca5d5c956cb@baylibre.com>
+In-Reply-To: <20260507-mtk-genio-defconfig-v1-0-5ca5d5c956cb@baylibre.com>
+To: Macpaul Lin <Macpaul.Lin@mediatek.com>, Tom Rini <trini@konsulko.com>
+Cc: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de, 
+ David Lechner <dlechner@baylibre.com>
+X-Mailer: b4 0.16-dev
+X-Developer-Signature: v=1; a=openpgp-sha256; l=739; i=dlechner@baylibre.com; 
+ h=from:subject:message-id;
+ bh=z5si8CsMmRFoE/c8o5veir+ORD/xdJh6yKQ0K1KV0pE=; 
+ b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBp/Keh6InDDnIvei8OA4ef8UKLXe/17mG7+PO4J
+ RJABn9dpfiJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCafynoRYcZGxlY2huZXJA
+ YmF5bGlicmUuY29tAAoJEMLMIAH/AY/A28YH/RQJXbHOoFlfJAzLQ5wyhXEdLXtheEuOtAQuaNJ
+ 4MJTdin8c3L5/4StAbSxPrAKLXaZcjUvp03JPWOgdFzZj2rQwaUnnHQVYfvTQ81xh2jJ8Ia0W19
+ 28VY2n0OSffh5nyBZrUQrdFtU33PDYtiTRViFTynk+NLcdQ8L8eWggF7aA87P7uMBfZQ7TvUVAK
+ HGjG9iLMFNo0/E6uWpSzWRQYOaE6lxOaP860yUw0SlWoFjr4DoGr4uw2+2phdpg/MxIseu7hF6P
+ q+r0U3QhyRnVz0HKrzgFUST7DWuRYpHYnTJDtV36sBLsaQ6YEJ8PpDWj4MthXIA68DfpMTAEqGi
+ dJ6s=
+X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
+ fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -152,76 +115,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+Enable options needed by the default board support package for Genio
+510/700 EVK boards that use this config.
 
-On 5/1/26 11:18 AM, Heinrich Schuchardt wrote:
-> On 4/28/26 12:26, Quentin Schulz wrote:
->> From: Quentin Schulz <quentin.schulz@cherry.de>
->>
->> The option is only available when CONFIG_SYSRESET_QCOM_PSCI is enabled,
->> so let's make that explicit in the boot cmd documentation.
->>
->> Fixes: ef06c5d76ff4 ("cmd: boot: Add '-edl' option to reset command 
->> documentation")
->> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
->> ---
->>   doc/usage/cmd/reset.rst | 3 ++-
->>   1 file changed, 2 insertions(+), 1 deletion(-)
->>
->> diff --git a/doc/usage/cmd/reset.rst b/doc/usage/cmd/reset.rst
->> index 366b17eea16..54767fea241 100644
->> --- a/doc/usage/cmd/reset.rst
->> +++ b/doc/usage/cmd/reset.rst
->> @@ -23,7 +23,8 @@ DDR and peripherals, on some boards also resets 
->> external PMIC.
->>       Do warm WARM, reset CPU but keep peripheral/DDR/PMIC active.
->>   -edl
-> 
-> All available arguments need to be specified in the synopsis section.
-> 
-> The parameters -w and -edl are exclusive as both only work if they are 
-> the first argument. So maybe:
-> 
->      reset [-w|-edl]
-> 
+Signed-off-by: David Lechner <dlechner@baylibre.com>
+---
+ configs/mt8188.config | 3 +++
+ 1 file changed, 3 insertions(+)
 
-I'll follow the same syntax as in U_BOOT_CMD and have a separate line 
-for -edl.
+diff --git a/configs/mt8188.config b/configs/mt8188.config
+index 9dfba6bf99f..55ceba44d45 100644
+--- a/configs/mt8188.config
++++ b/configs/mt8188.config
+@@ -4,8 +4,11 @@ CONFIG_POSITION_INDEPENDENT=y
+ CONFIG_ARCH_MEDIATEK=y
+ CONFIG_TEXT_BASE=0x4c000000
+ CONFIG_NR_DRAM_BANKS=1
++CONFIG_OF_LIBFDT_OVERLAY=y
+ CONFIG_TARGET_MT8188=y
+ CONFIG_SYS_LOAD_ADDR=0x4c000000
++CONFIG_FIT=y
++CONFIG_BOOTSTD_FULL=y
+ # CONFIG_BOARD_INIT is not set
+ CONFIG_CMD_CLK=y
+ CONFIG_CMD_GPT=y
 
-> 
->> -    Boot to Emergency DownLoad mode on supported Qualcomm platforms.
->> +    Boot to Emergency DownLoad mode on supported Qualcomm platforms 
->> and only
->> +    when CONFIG_SYSRESET_QCOM_PSCI=y.
-> 
-> This information is incomplete. Without CONFIG_SYSRESET_CMD_RESET_ARGS=y 
-> the -edl argument will not be parsed. A configuration section to this 
-> document might be helpful.
-> 
+-- 
+2.43.0
 
-We should probably not make the -edl option available if this isn't set 
-either then, no?
-
-> Should we mention that a "PSCI SYSTEM_RESET2 not supported\n" message is 
-> shown if the platform is not supported?
-> 
-
-I would be wary of documenting strings that may change. However, we can 
-say that the command will fail if the device doesn't support it.
-
-> Where will a user learn how he can use the emergency download mode? Can 
-> we add a link here? Unfortunately the EDL information seems to be 
-> dispersed over multiple documents in the U-Boot documentation:
-> 
-> doc/board/qualcomm/dragonwing.rst
-> doc/board/qualcomm/iq8.rst
-> doc/board/qualcomm/rdp.rst
-> 
-> Do we need a document doc/board/quallcomm/edl.rst?
-> 
-
-That would be a question for Varadarajan or Casey, I have never done 
-anything with Qualcomm devices.
-
-Cheers,
-Quentin
