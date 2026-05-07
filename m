@@ -4,135 +4,101 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86F4FCD343F
-	for <u-boot@archiver.kernel.org>; Thu,  7 May 2026 11:01:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4823DCD343F
+	for <u-boot@archiver.kernel.org>; Thu,  7 May 2026 11:04:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F085A84A85;
-	Thu,  7 May 2026 13:01:46 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
+	by phobos.denx.de (Postfix) with ESMTP id CDD4F84A85;
+	Thu,  7 May 2026 13:04:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="cPsbm2hE";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="K8a2G01J";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0CDEE84A8E; Thu,  7 May 2026 13:01:46 +0200 (CEST)
-Received: from OSPPR02CU001.outbound.protection.outlook.com
- (mail-norwayeastazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c20f::7])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 3849484A97; Thu,  7 May 2026 13:04:22 +0200 (CEST)
+Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
+ [IPv6:2607:f8b0:4864:20::32e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6FD8484A81
- for <u-boot@lists.denx.de>; Thu,  7 May 2026 13:01:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
+ by phobos.denx.de (Postfix) with ESMTPS id BB05E84A81
+ for <u-boot@lists.denx.de>; Thu,  7 May 2026 13:04:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quentin.schulz@cherry.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=go5Ur3jXWzAjLcqEqMGpHNf+4TRyKa/WXuBoEw98V1151YiyCYTlKnflu/SbEYjCkSeLgs267kv9dpiAN+R1+o+8ouSx5ZN8I6gmavSwjbhbmx7xL2w6bsThVZKx/kxVkDk1urXpn+fPY8HFPrSVltm++QtQMmcWfiGKQWuOFFhLOOrkmEQ19cQ5A7MwaMXum8fazFmbosKd6AUep48sgo7xFNKEUVIJH1NvduIeSl9c9+E3NHqAOtvx/Zcjj6/+q8sBfCd9bz/Glp3S3iVqjd6+3HiSRM+gLz3D7tRdQRv65XbbS89lTga8xtcnuPB31Ii5tOhxy3HGUNprWeRcBA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=wEa2rFsbDQcEJ2eLo1I2BHL+L7+htWt+68pkO31ZQGI=;
- b=UpQMTbcf6ex22BcZNG2YPbhqJRuztUHEjq5Eg45eZyfikZCepFYEKOG5QhHc3e3ky/UGLCwVyR5Xsqp6C+N/SXuQKb0pg7H/2ur6GhVqDCovX7WXxF8PEcm17g3TjD3LXRIbUv8f1iNGEysPBBAcoV1otkkWwqPrms2lZwCMwyJbipARX75Y3NxPM530Q+n8p9BvSoXu2/GRIfBFThCtTR7bggzy/AyNDMhNAi3Fr4vIisRpeal8XOP6XRZlQmvJUWnyD0ElVzsrZdOeEL9zrpwQ/mpSCxZJL8WCcq5s48qXM17ocnI8fvHk4whVeq72mwrdbSA0668XU14dGCugCA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=wEa2rFsbDQcEJ2eLo1I2BHL+L7+htWt+68pkO31ZQGI=;
- b=cPsbm2hESm93XYNTY7APUv+oOaKqa0bewYruxgMWfji7DhI4eXBsDc1SNEqKcyhFlMubNjdqMu3B6SYW+QGDfXH7MB3CwUf0bzMU/5N111wxG6AIcmSan7j0hc0xyu0OezEHgbQ6Aj/0N3h1T9D8u6sFCDskHlZTiM2k1H2KO9M=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from DBBPR04MB7737.eurprd04.prod.outlook.com (2603:10a6:10:1e5::22)
- by PA1PR04MB11406.eurprd04.prod.outlook.com (2603:10a6:102:4f1::22)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9891.15; Thu, 7 May
- 2026 11:01:40 +0000
-Received: from DBBPR04MB7737.eurprd04.prod.outlook.com
- ([fe80::5960:fb4b:9313:2b00]) by DBBPR04MB7737.eurprd04.prod.outlook.com
- ([fe80::5960:fb4b:9313:2b00%3]) with mapi id 15.20.9891.008; Thu, 7 May 2026
- 11:01:40 +0000
-Message-ID: <453e3e7f-e975-42a6-9f44-5aaa9a5fd03f@cherry.de>
-Date: Thu, 7 May 2026 13:01:39 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] fastboot: read fastboot buffer address from
- fastboot_addr_r
-To: =?UTF-8?Q?=C5=81ukasz_Stelmach?= <l.stelmach@samsung.com>,
- u-boot@lists.denx.de
-Cc: Marek Szyprowski <m.szyprowski@samsung.com>
-References: <CGME20260430201556eucas1p21ad12913ce5c83e8bf5cef3c4f50d81b@eucas1p2.samsung.com>
- <20260430201503.320359-1-l.stelmach@samsung.com>
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <20260430201503.320359-1-l.stelmach@samsung.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: FR2P281CA0108.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:9c::19) To DBBPR04MB7737.eurprd04.prod.outlook.com
- (2603:10a6:10:1e5::22)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=briansune@gmail.com
+Received: by mail-ot1-x32e.google.com with SMTP id
+ 46e09a7af769-7de46b8e432so664784a34.1
+ for <u-boot@lists.denx.de>; Thu, 07 May 2026 04:04:19 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1778151858; cv=none;
+ d=google.com; s=arc-20240605;
+ b=JMt801A2EO4RsAdYnnKOJmPcCdPBLdxnsgkT1Wo0bFrQYE4xPksBmJD233yRoBKPbg
+ U5/DuOW1gZMAruQhyM2SlFNfH/btlo/2wgF/h1n+SS9QT9vj8GGt/XbrtDXEHzHUFlI9
+ /cAj6xQ8MtNRDVs7V9zOSwvoCZsJ8cpHhYkk1bpKLsfx4JpvKUTpxifNPKoH7HkaqvKA
+ WoZFIZkhiEEuEp7ofJA3agP3ixpeGj6zTicWZyWsm2IWelILfdehhOHUfZxq+I0TD5SC
+ BQNzodHj27FJX4iUqLWSbhlaXplF4UPEVpVfzX9IZwmja5fVMNc4eAJG8n+zj4MKlWyo
+ miFA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=v/wznG1/psjKtJqBirBZurZA4lTrrEID19UCuo2/AhM=;
+ fh=PU95mNB4AuxGQ84jDLQBHcUTgKxXUQt4G4Ky7TZC1AM=;
+ b=lkdlKGDIvtlUbzoVPZQ765InqRQOYCLJQkpDWOs6+okfsuOOm1XUpKSXoNSkWcOfNp
+ eZZPwniEiksp4RaXZ87Jbs5aeIsVmzM/xkPhSywgy+Qu30M/hq1L9KK20Gc6k2R0liR/
+ tVDIOO8UH67IvR+niccveKIsMGtipBfyVldUWyjvjP8OESuXFWOz8okK3RY6GxaL9Zsn
+ ZPj5DagsjehR+M0BxpoFVWojo6gqL41YFbsCsDwgOiqX/WbCddQb0lBAReDNCshJ+2+c
+ WK3WjByZJD5ee1AtVgr8scE1lBz3kvzeausK6lJq0Se8HnNN2pZW2vFmh/kZyVo8F/Ea
+ t0bg==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1778151858; x=1778756658; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=v/wznG1/psjKtJqBirBZurZA4lTrrEID19UCuo2/AhM=;
+ b=K8a2G01JW3ULX7RGRfKEwkiHTq8NuP79No5eBciu3wUSh6vTsD+xLIoJrOmLIiBmBB
+ 8IXnyl+wYlR9vmFs0iiOlhjwme5CmCcfAZmNjCRQ+Pl+wAoJt3ydEwTtHzpJMJ46gWR/
+ uBNsdSUikOJqIzQO1fcj32K08NvfXPf2aePzxM0VkrKYlxisgTRPCsISLEfUs6adD8cd
+ +X0bmpBi5n39JlSLerr0w/0+I8s0lA6CxKLgLSOqXlTHkhCPRCbmCkP92EuUgsEmY+1n
+ 4E+6eBlvr+vIgE2ITKoSBLZd3kEGOoqtP7ur7YLZ/buUJLQR9a2mio0E/VaIE0Ugdrxx
+ Pt4g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1778151858; x=1778756658;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=v/wznG1/psjKtJqBirBZurZA4lTrrEID19UCuo2/AhM=;
+ b=iMhKZ+AuStF18+MSdneU++AZX/TkIzM8cPgLCTPZgJ3UdeFXxNvmpobgJIuMemW0R5
+ WkYL6p8SLHdYGTdXZ2ReyeBSf5WOZEsGZCNfFMQupi+zrTTf41Z0Koq59GNxEUg5bp90
+ jieBxPQn2/p+HujB4/ErOzNwXe9CK2zumIlnpMaFttQhXSKTKi+rPMyqMNhUkRHQ+OyB
+ Q5KriAjT6jEl4J6hcZ//kAGCjeZE+c+b0sIgW7LsJC1q0F9mm+tPe5cBC/t5YiEFnE9C
+ O0IOMbtt325qzScVG2FTVlMhjoJaWnIclZYlaQK75GziR82LJK3qOFM/L8CwfBRqYoNZ
+ b1lA==
+X-Gm-Message-State: AOJu0YzzLhvQFxpxTfxAvFvoaJqEfKQflqHea0eOlAVjM6i5vPXd/SPs
+ iq72ppis7ctXYE26hbormb04rM9swclwbliDjn0mD9hH3d/OqPqN1cDc/5S7m9YNK4A6UJo84qJ
+ T3m66TTvsXJaUXhFedMYhIw1R8IAqmDE=
+X-Gm-Gg: AeBDieuAOSjegJRY2q4rLawpM638N6Bdb7f7G85/Wp6DTj2cs5rCeo/hzY6IrCja7SN
+ DIHBu/lwcxixtvrJnFaIZNpKwg6Rx9OghPpV9uR16hTotkFYrpjOKkDF7M71iSaPKo61Dwfas5N
+ 9jlBURMGf81xJZqpbo3xpzQgSj46/uy56PrY3Xm9vBz5yTmEok6Pe3bsE606qaGINxvzGIDj7bB
+ Yz6YagRsWaTveDPm1M7QzwQ6jYOIRttsfMnsQXBOCtn4gZ3HoLUuhWsaPlugVHoB5JiVXLzk3+3
+ /SJE6PuGHoI1EFmxs2+W6qW7FtcXfM1vs2x0QDyd
+X-Received: by 2002:a05:6830:201:b0:7e1:e832:c8a2 with SMTP id
+ 46e09a7af769-7e1e832ca72mr2683264a34.19.1778151858388; Thu, 07 May 2026
+ 04:04:18 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DBBPR04MB7737:EE_|PA1PR04MB11406:EE_
-X-MS-Office365-Filtering-Correlation-Id: 7933bde6-33d2-4d5a-172d-08deac280402
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|366016|1800799024|376014|4133799003|56012099003|22082099003|18002099003;
-X-Microsoft-Antispam-Message-Info: RBENWJd+D7MuBnwVg+jxSyVZoO8Li0WjIlmKI6NGj72brqpzgNEnq6dkKwq0MH4PbLXAvtDC8KSwJTAuXSebpESdesG3J2cFKYnHz/fdaGsOSW1nsUtcgVr0PHU7QZ/DMRMq2gXY/ls4X4X1hxiMIDgX4WMvq/Gth3i88Ht0rG0Ee2ecW9BGHDmeG43eisjqgkDsAtDoJH9utrFoHw0FfCSrRp802yrbyrXTJb23t5HlpLXXdDf0JLwKpicinLy5QuF+/YLatgE3+YaV4wtQC7xUMsfYwNb5bHQN8X383VwoFUMgF7PeIG95SbfdKKOaB5gJ20gSHiWiq6hQ1pbGk8YLVrerBHf2In/vycbA402FSXU1kJZVPf0Mk1tzekpkAhnFEzpgdtIqs23bIrBETh3IiGAHlaHdx5cm3y/+xQ/HEh8Y8bm1Q1L/5S2/4rB/iqPK0knTROJEhN5vE6GDLUzjpJOJ3RJZfDuhCNUZ1luMlXtQfCFxqM03WH7N6b7caUBH/fX27FoaJrIHRZRsvVIErwC1KdcS2zw7+URljEMiRW0eVlBp6MXEE1wNGNvIJX0RRVrHZgFf9UebLR4p+nlQHm0ARAZX8njJWXe3JXY9KP3g56vDZ9VDswSXw8su6XfgRJYysC5gO6VwwFnFco2rc/x1S6VO+eO+sr0WRbeQ1joXDwArPHT1pLDiSaZ9
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:DBBPR04MB7737.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(1800799024)(376014)(4133799003)(56012099003)(22082099003)(18002099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?YmUyL1N5RFdmOVRtWEY1R0NwY0ZuNFlKeW5Zeml5KzJ4MnJDQVB3U1JrQml1?=
- =?utf-8?B?aExNdzY3emt2ZnJyaXU2UzN3N0ZjMkxYSENSRWZ5TVp6NjhFaFQwZU9YdEhZ?=
- =?utf-8?B?WStXRzFXUGFNT081NmpBVjJhWVZhdk1iL0xsRFN1bVJBR1ZSK0VNZVZsdVA1?=
- =?utf-8?B?MnhlOWJtcUJtcEdEMVF6dzlaM29ZNXUyZkFjcmFXbGtJMmFBUzZHYTBMb0lS?=
- =?utf-8?B?RWR1VjdoUVJLSWlGNjZXcHZJQXREdkJvK3VDNVNTZU5LVHVabGpvTm5OQjQw?=
- =?utf-8?B?NGpHa2Z0enk0K2xSRVRlMzk0Q3pOREFMWFNVODQxKzE3SWU2Z1UyNDZjbU9X?=
- =?utf-8?B?aW94Y05KZnIwd2czb1pvOVFZL3BIWTRMZWN1MFdOS0E5WGRLMWM1aExOMXJa?=
- =?utf-8?B?SkUxS0cwTHJweG1WS1M3ZWh0Y2pDWEFkbEhMVk9UV3MwUlZJWk1xVy9vKzJ4?=
- =?utf-8?B?TUpBbGxnNDlvb3NBWU5sM1kxKzY4MnJGaUlITTZTbXRqWGxoQU9wRWxDV2VG?=
- =?utf-8?B?QVhnL3dzMXpoL3ZlYXhFYk9MMzBNa2NWaFdmMzVnVlVDdk5EalgvNFhwbHhN?=
- =?utf-8?B?Nzk2enZVNkxtaWFyQzdzSC9SL2o0c2p6YUtab1JqaHdURjNiWmZRcUVTVlM5?=
- =?utf-8?B?WFVZNWd4Q3loMlRxSFFSL0R5SWhybGdkZG1GYmF3a2o2eHRrVGxybUxuL3pB?=
- =?utf-8?B?dE1SbENzbDMxcVJYZXFpNlgxb3d0eDBlWGFFN1NLQWM1OEhhVXBIVEVEYkov?=
- =?utf-8?B?R2ZwU0JKQnpvYStPbmsvd3kzZ3NBcjZKMjBTaTRQMFo4MUxQV1RhMmtraWJn?=
- =?utf-8?B?K0d3U1MzV0RlR3lPV2pxSGd1YU5zOXZXVnNzMFM4UTBneUUvbnpzSklaNERW?=
- =?utf-8?B?UHRGTCtvVXhBaWVHM2ZKaWthcGZUaUh4NWx3YnVWdGZYa0laKzJnV1pSNm13?=
- =?utf-8?B?a09oTEpTTTVJdWdsVXplZy9lMGhBcWk5dVhIaW5oT0FOaHRpRVRPTld4Vmdm?=
- =?utf-8?B?aUgwTXlFeFFHNWNQTWsvZXo1aHBqK0N5blF6UUlDbkV5Z0FWRE1RNHAzYWQy?=
- =?utf-8?B?VXVDbEZWUmMrVGl0RTd5RHd2Z0ZDVVJYNzZmeGdMbjZNenN2b3AxcStpSjJT?=
- =?utf-8?B?bzFTalJISzlxdmR5VmVtV3RZVWZSNEZOZElidWp6U2dtMVgvM0JCV3JIMVoz?=
- =?utf-8?B?U2g0WG9EU05NeWNnTWVzWEYyY01uWVFaNm1oK1RhWG1LMGxKU1p6Z1dyOTVK?=
- =?utf-8?B?ZExaZmZvMDJzd1E3dE5lK1FYSmtBanlOWjdBSzdianI4b1M0bFlRR2RNalMw?=
- =?utf-8?B?MVpNV1lMY2NWcUkxSi9VdkZ6QS9icVI3OCtWWFFSb0l4eUEza0xhYXJRb1c4?=
- =?utf-8?B?dDA4WWtOczRWYm8xUnlOeVZSUnRtZXlCUkZrYkpVZEp6M0N0TzZoR1ZDdDJV?=
- =?utf-8?B?Tkp1TjdPc3hJZ3BLa2t3T0htcGVETGZhMTJMTitNbzF6YUxtS1U4SU43WmxQ?=
- =?utf-8?B?WHBpTEZGV3d4QkVQZllzSnQ3NHJCREM4K3pzWmZCNTVzUUtDdWw0VC83SFRx?=
- =?utf-8?B?WHVqSGhVUUJ0Wi90ZVIyaENiemtCMlIrbkRFc3ZLY3hYVUNydTJhUDUrNVFB?=
- =?utf-8?B?aTRtQmFHRzBTNHFkcDlSTW9rREVNSjl4d0lBcms0MGE0ME9OdjdKeDNSK1JY?=
- =?utf-8?B?Mk5RdmlYMFRBSm9scFkzczIyK3NqTG5iU0hjNXZZK2U1SkkyRnlxQVdBY3dC?=
- =?utf-8?B?bjZyVmNna0l4RDVrZTlBUENDcVJ1QW5SQk44Y21yVFp0Zk1vWXFrMnVBNlR2?=
- =?utf-8?B?MzVaaHY4VENzT29pNG1tNDVoOGlnNDYvWTJKeUZQbS9kdXNHR0RKN240TmYx?=
- =?utf-8?B?T1VTUTlBREF0cGkvenp1UUk4b3pQRUViam43dCt6OUM3VkZzS04xZ2o4a1Zn?=
- =?utf-8?B?ZXNHajY1MjNvZlFkY2Z0Y0xIbnpkejFBclFKTmNlcm1pS0R6SzI1SURYZnZw?=
- =?utf-8?B?d1BIeGZZOVBqcGdTOVM2ZktVZ0NuTnNoNmdab1NlVnhmamNrd1loMWhsSk0r?=
- =?utf-8?B?Vmp4NDJ1N2ZTbDNRSk9hcnVxTk5JNm5xVldXbXN0YTVkMkhXM1NhSG81RDJB?=
- =?utf-8?B?TGlRemEwbThuL3ZYQ1NiNXRISlAwOC82OUhTa0pzTmkrYXltdi9LaHNVdmoz?=
- =?utf-8?B?cXNnZHRVbEJaQyt4QkNpTEhkVzNaWWI1S1VIQzJrMXNFZEswb2xLMElQQjJB?=
- =?utf-8?B?NHN0QWdBSFBZRUdJMW5BWlNOMTJLUk5ZSVNTVWVySGVGa2ZqTkdBb0tIS2NF?=
- =?utf-8?B?RmVOR0pvazFqbExTYzVnQ2RsaGQ4NlZlcGFXTkF6RXZQdlNOQWwwUT09?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 7933bde6-33d2-4d5a-172d-08deac280402
-X-MS-Exchange-CrossTenant-AuthSource: DBBPR04MB7737.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 May 2026 11:01:40.0428 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: GrR+SsH8/kUCUr5onJbZtFdQET1RngWPQGgPktFW2HGBM5B7/7lhF2nSVo77nmyQTy/Jzi/Lbzqb7d9CFxIHtE5IvEPdwezquLk2Lp1kzRo=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA1PR04MB11406
+References: <20260423080637.30006-1-alif.zakuan.yuslaimi@altera.com>
+In-Reply-To: <20260423080637.30006-1-alif.zakuan.yuslaimi@altera.com>
+From: Sune Brian <briansune@gmail.com>
+Date: Thu, 7 May 2026 19:04:06 +0800
+X-Gm-Features: AVHnY4JSE4I5ur3h7kdYhxvMLWQYK6D1x2HO-jRtIQ6Qqv14GLXoKl0tf_SxLMg
+Message-ID: <CAN7C2SD8D4yHnSLAQfrs3-kgGfmZrqh6fMXmB=QOfZYq9Uq7EA@mail.gmail.com>
+Subject: Re: [PATCH v2 0/3] SoCFPGA: Update DDR Support for Gen5/Arria10 in
+ U-Boot
+To: Tien Fong Chee <tien.fong.chee@altera.com>, Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de, alif.zakuan.yuslaimi@altera.com, 
+ Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -149,42 +115,73 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Łukasz,
+On Thu, Apr 23, 2026 at 4:06=E2=80=AFPM <alif.zakuan.yuslaimi@altera.com> w=
+rote:
+>
+> From: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
+>
+> This patch set updates the boot support for the Altera SoCFPGA Gen5/Arria=
+10 platform in U-Boot. The changes include:
+>         1. Update MMU/dcache setup across Gen5/Arria10 using common drive=
+r
+>         2. Add ECC scrubbing support for Gen5/Arria10
+>         3. Add DRAM size checking for Gen5/Arria10
+>
+> This patch set has been tested on CycloneV devkit with SDMMC boot and RAM=
+ boot (TFTP & ARM DS debugger).
+> Tested on Arria10 devkit with RAM boot as well
+>
+> v1->v2:
+> --------
+> - ECC scrubbing, Gen5 DRAM size checking, and shared dram_bank_mmu_setup(=
+) is set as optional via Kconfig and
+>   defaulted on only for the reference Arria10/CycloneV boards to avoid SP=
+L overflows on size-limited Gen5
+>   defconfigs.
 
-On 4/30/26 10:14 PM, Łukasz Stelmach wrote:
-> [You don't often get email from l.stelmach@samsung.com. Learn why this is important at https://aka.ms/LearnAboutSenderIdentification ]
-> 
-> Following the previous advice (link below) check fastbooot_addr_r
-> environment variable for fastboot buffer address.
-> 
-> Link: https://lore.kernel.org/u-boot/aWiWFrdwvy7-IK63@sumit-xelite/
-> Signed-off-by: Łukasz Stelmach <l.stelmach@samsung.com>
-> ---
->   drivers/fastboot/fb_common.c | 4 +++-
->   1 file changed, 3 insertions(+), 1 deletion(-)
-> 
-> diff --git a/drivers/fastboot/fb_common.c b/drivers/fastboot/fb_common.c
-> index 68f92c4b887..4579f30b52e 100644
-> --- a/drivers/fastboot/fb_common.c
-> +++ b/drivers/fastboot/fb_common.c
-> @@ -226,7 +226,9 @@ void fastboot_set_progress_callback(void (*progress)(const char *msg))
->    */
->   void fastboot_init(void *buf_addr, u32 buf_size)
->   {
-> -       fastboot_buf_addr = buf_addr ? buf_addr :
-> +       void *_buf_addr = (void *)env_get_hex("fastboot_addr_r", 0);
-> +
-> +       fastboot_buf_addr = buf_addr ? buf_addr : _buf_addr ? _buf_addr :
->                                         (void *)CONFIG_FASTBOOT_BUF_ADDR;
+Well, I don't know I am only a contributor after all:
+1) But do some one or some ones clearly mentioned [1]
+2) Per-version change history must be placed below the '---' separator.
+    The required format is 'Changes in vN:'. Custom formats are not
+    acceptable.
 
-Nested ternary conditions are unreadable.
+So v1->v2 is considered as a valid format and not a custom format.
+Hum, interesting.
 
-I'm assuming this is the same as
+What a wonderful world =3D]
 
-fastboot_buf_addr = buf_addr ? buf_addr : (void 
-*)env_get_hex("fastboot_addr_r", CONFIG_FASTBOOT_BUF_ADDR);
+Appreciated all the "reviewers" HAHA :D
 
-?
+Brian
 
-Cheers,
-Quentin
+[1] https://docs.u-boot.org/en/latest/develop/sending_patches.html#sending-=
+updated-patch-versions
+
+>
+> History:
+> --------
+> [v1]: https://patchwork.ozlabs.org/project/uboot/cover/20251216084623.195=
+89-1-alif.zakuan.yuslaimi@altera.com/
+>
+> Alif Zakuan Yuslaimi (3):
+>   arm: socfpga: Consolidate dram_bank_mmu_setup()
+>   ddr: altera: gen5: Add DRAM size checking
+>   ddr: socfpga: Add ECC DRAM scrubbing support for Gen5/Arria10
+>
+>  arch/arm/mach-socfpga/Kconfig        | 21 +++++++
+>  arch/arm/mach-socfpga/misc.c         | 31 ++++++++++
+>  arch/arm/mach-socfpga/misc_arria10.c | 26 ---------
+>  arch/arm/mach-socfpga/spl_a10.c      |  4 ++
+>  arch/arm/mach-socfpga/spl_gen5.c     | 17 ++++++
+>  drivers/ddr/altera/Makefile          |  4 +-
+>  drivers/ddr/altera/sdram_arria10.c   | 34 +++++------
+>  drivers/ddr/altera/sdram_gen5.c      | 64 ++++++++++++++++++++-
+>  drivers/ddr/altera/sdram_soc32.c     | 85 ++++++++++++++++++++++++++++
+>  drivers/ddr/altera/sdram_soc32.h     | 15 +++++
+>  10 files changed, 252 insertions(+), 49 deletions(-)
+>  create mode 100644 drivers/ddr/altera/sdram_soc32.c
+>  create mode 100644 drivers/ddr/altera/sdram_soc32.h
+>
+> --
+> 2.43.7
+>
