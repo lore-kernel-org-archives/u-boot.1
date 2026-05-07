@@ -4,24 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6424CD343F
-	for <u-boot@archiver.kernel.org>; Thu,  7 May 2026 16:42:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D965CD343F
+	for <u-boot@archiver.kernel.org>; Thu,  7 May 2026 16:42:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 76F3284B8D;
-	Thu,  7 May 2026 18:42:32 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B994D84B76;
+	Thu,  7 May 2026 18:42:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="q4IxxHJn";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="M3CBQEiP";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="BBaSzwiv";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="LcFQIled";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A75FD84B5D; Thu,  7 May 2026 18:42:31 +0200 (CEST)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
+ id B80C784BB3; Thu,  7 May 2026 18:42:33 +0200 (CEST)
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org
+ [IPv6:2001:67c:2050:0:465::103])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E574E84A4F
- for <u-boot@lists.denx.de>; Thu,  7 May 2026 18:42:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F1DFF84A4F
+ for <u-boot@lists.denx.de>; Thu,  7 May 2026 18:42:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
@@ -30,41 +31,45 @@ Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4gBJ2F4b5Qz9vHF;
- Thu,  7 May 2026 18:42:29 +0200 (CEST)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4gBJ2H5wWwz9txq;
+ Thu,  7 May 2026 18:42:31 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1778172149;
+ s=mail20150812; t=1778172151;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=kmJjuIhxBcLzBONJFWikbAvxYK9b7+uIkxIF7LGiIi8=;
- b=q4IxxHJnHsqEaxcy5HrbboGDi0BgwvBxHU85Iy9t54ErZhH6O8CbLq0++mOzVJZYmtrymB
- KqHdgLwToqYDkTVYC9jQzIOlWbgvdCcIcAEUV7HuwEEZ3dnZLhsfP1/z0LQx+myftRquQ7
- gSGYbROdTo5SlATRc/KYXevzzZ7T3iVPxHi3UD47Mz/FQ5bY0IY4NMYkncHQX0Szg+Wjx7
- jt00vhWKAQ0+m1UK2KqM25q5gmdNljuZzVaUIfBjCxUbDgGXA/GlZ3OpYPLMbVCOD5qrM7
- IMZq0fepmsCvw/nAM8zzKyZjDhNJ1s0+mrtA9Jifckq8YSOEx8vUG6MODSDPIQ==
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=eQwRI1HHP9xREdVYF18AlUVglgfbvuazzm7qgSZTujQ=;
+ b=BBaSzwivTgat/DJj4D29rPHbSgMEVyi40OthDSGNZyjSad8pHOwaiA0Wu583gKkkfZrZ9R
+ 2fCBF6VgvduE2xqAg1VnLTDgHmU5fKn6V3Nt9XhPuzjnrAOiXHPDIQ4LBMqo757zfL4mCM
+ bRnIk/01ZxTgNG22CWkP9JEqJ84X3rgLRPEjfMSQI4Qkg6c0GQtw9F0tkvF+VDglr/0VQZ
+ ueJkAQmW76C33BLbt8UWki67BLZ53URhdHiGZK7OiNhug1HdMRy8R0NXpIOYENicdnwt83
+ QOnjzL6Uk3ANnB+G8O+jpRZVYUAlrPNNAR8bGvMFqF4dXe7V5XN0X5+bD/sf8g==
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1778172148;
+ s=mail20150812; t=1778172150;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=kmJjuIhxBcLzBONJFWikbAvxYK9b7+uIkxIF7LGiIi8=;
- b=M3CBQEiPjK2FqrDajsxr47xDeBsFl47MipNephfYlTvVzi+kEwxou7uTE33eUH2G1HLF7z
- MyVuizXuFg8hm4SN+0V0SNtilfGwfPUQEZlC5TZtVJQT8rOpHom80HpQV6xf0wym/1vWRg
- xAlwNv6p7hqzMsxsCF+OLVp60LT/3zwVbQTw2V1DvgrGRLDep3tAHbsyqZV5xPxDE8EEhp
- 0/QoLKGPfBA+gOG/a4L2vlmBV+CfpErKgvn4qKAR+Bg/NtGjlTPNq8wn2gaWBCludN/44t
- zzAcnVP5cTd7c3O8M2RIHqpo3PRbd8E26cXHhh4jC0XQRMlP89M/tbW6+5LOJw==
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=eQwRI1HHP9xREdVYF18AlUVglgfbvuazzm7qgSZTujQ=;
+ b=LcFQIledK4brmCkZ2nw6hpKchLjvuAJ3GiROisGBD6eqCEd+v+QzASeT9DpSORtYHp/jfv
+ oDz8NL2jVna78GfaK7TWFSxEocVIu099F+lZFN1kJ2nV4D8DLkli+rtPsKCXUAv9apF9as
+ +x1A6yzq3H0sAv/WQIvOw8TZaQsQZYltAQdJfEd9fPsFtWkLe7jkOnazsrkcECYbhdta3l
+ cjXd9WIZjizxiP33o46vDc+xlidAM1Js/HG4aXu6HwrAcn7FY99xweNElf41iTjNLKOjQt
+ Qjafe9q780ixcegtfWFWXjXVKJrtlxD5towRyi5tqdeLmkZvu9CNnlt+ZTT0kg==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH 1/3] ata: fsl_sata: Staticize and constify driver ops
-Date: Thu,  7 May 2026 18:42:06 +0200
-Message-ID: <20260507164225.59325-1-marek.vasut+renesas@mailbox.org>
+Subject: [PATCH 2/3] ata: bootstd: Staticize and constify driver ops
+Date: Thu,  7 May 2026 18:42:07 +0200
+Message-ID: <20260507164225.59325-2-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20260507164225.59325-1-marek.vasut+renesas@mailbox.org>
+References: <20260507164225.59325-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: brgdxumxin54ca53wxr84ftsc6q3mqh1
-X-MBO-RS-ID: 454a40200b560857d57
+X-MBO-RS-META: abrpzdzpd8sp4jnbc4jswu1847b6wsdt
+X-MBO-RS-ID: 3ab8ebcb10af81780e3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,22 +94,22 @@ Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 Cc: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de
 ---
- drivers/ata/fsl_sata.c | 2 +-
+ drivers/ata/sata_bootdev.c | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/ata/fsl_sata.c b/drivers/ata/fsl_sata.c
-index 4990148388b..a29735f7609 100644
---- a/drivers/ata/fsl_sata.c
-+++ b/drivers/ata/fsl_sata.c
-@@ -960,7 +960,7 @@ static int sata_fsl_scan(struct udevice *dev)
+diff --git a/drivers/ata/sata_bootdev.c b/drivers/ata/sata_bootdev.c
+index a5ca6f6fd5b..85f30040d05 100644
+--- a/drivers/ata/sata_bootdev.c
++++ b/drivers/ata/sata_bootdev.c
+@@ -37,7 +37,7 @@ static int sata_bootdev_hunt(struct bootdev_hunter *info, bool show)
  	return 0;
  }
  
--struct ahci_ops sata_fsl_ahci_ops = {
-+static const struct ahci_ops sata_fsl_ahci_ops = {
- 	.scan = sata_fsl_scan,
+-struct bootdev_ops sata_bootdev_ops = {
++static const struct bootdev_ops sata_bootdev_ops = {
  };
  
+ static const struct udevice_id sata_bootdev_ids[] = {
 -- 
 2.53.0
 
