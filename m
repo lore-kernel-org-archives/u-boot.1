@@ -4,55 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B16FECD3427
-	for <u-boot@archiver.kernel.org>; Thu,  7 May 2026 12:04:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04196CD343F
+	for <u-boot@archiver.kernel.org>; Thu,  7 May 2026 12:04:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AE42084A7D;
-	Thu,  7 May 2026 14:04:30 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2806384AAE;
+	Thu,  7 May 2026 14:04:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="WFoCEsuA";
+	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="ChAZAkEI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CEC3284A30; Thu,  7 May 2026 11:01:32 +0200 (CEST)
-Received: from CO1PR03CU002.outbound.protection.outlook.com
- (mail-westus2azlp170100005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c005::5])
+ id 2E1F784A30; Thu,  7 May 2026 11:02:32 +0200 (CEST)
+Received: from BL0PR03CU003.outbound.protection.outlook.com
+ (mail-eastusazlp170120007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c101::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B89F584903
- for <u-boot@lists.denx.de>; Thu,  7 May 2026 11:01:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 46BAA84903
+ for <u-boot@lists.denx.de>; Thu,  7 May 2026 11:02:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=chen.huei.lok@altera.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=s3fkIY/FSa14r5ygQf+mq+2kK+TwBUwDsWYNy5BZV+RXdc8wAj6Oj21pjVzh+9Wj70eEqJfzYBj44zdtfRKOEtu7oFazsUe67BC62FTv8NoSVfefrcaK55ClIKXVBvt/XiQlbOX1DLBhkfr9jf/E5HUFhTtlOxJkAvoV9xBqs59fYz89zGM4lUfNgF5d87Ko0ZCnmIc0T709AB+qQSsWodZSnOoNwncFL/TdqPxXRCprs+Gl7Lck7CoqmM4ExZgxyksmm2n6ZBn72/Fhoa1uRvi8OLzILa5I58L9JtbZAMA95m71x/h95JhrCup1qC4rRKhQ8IuvXvC1lEYHoN0gJg==
+ b=Kw14wISAPkly72llr7LtgU166ZQg5yhN0hRxkz2Nk3lSSfG+L1qznl+TL/myWe+EwkDZXfVbQ/JbZdlTFt/T4AtsjGmyTTd+Ma+hP4BkFWj8vZSeztvmJxvsderQcU3Gi059t+6iVqE3tkHmWDQqfxT9PNEa2ozzbrnKAz5uCqfXuJGz/MEcsspsoqvf0Uji53gwIOgM7pePHQ3FoTrV+qq5dYsZTc5mXDdzCdPqVhBCggj6NzNvqdQPing8nbcq/1mqsTW4/FPkBTYLjubaoATLPJdJnNWh+LznzDlO7ywk3PTYjHpHGAsIKgNsELQUBOfsTL7OzAqezrSSH2tYbQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=xxOSEc2PTpuCknqSH4D/61i7A7kfhp9wYOJMZy1DpDM=;
- b=TQeDofJJ6tllLdLZu+urwGzwf2uzZMU+uEevi3ehUTYx91oV5nmOiLb0NaVC0Y9DsVCBN1QFHDwCNMoeFy9jvqh0dOas9PTQs8+SWQ4iTA0UzkaIRhlIW9vPaAfkPly5kohUK3VjVjZnwLNGM9ET7HQ7p7kX57a3XkpqkDJmoWQtrYvCfQv0VpZo0EDO5B79J29tIHib+h7pDLG/RuFyswmtKs6ClXMZWz9JElrX5qdyzsaSIqwEoURqAa+uhU7lFCrf2Kff5dFNYbVKiY/ClW2S7/vGlwg/xpm+UasQRHmAk3HRDFpQp8S214qpgBK2eSKWYGJt5mQkZn+DxTzE1w==
+ bh=pP9n71upYKp/o39VxRBwm8k+Bu23dLD1bTguG7RgBt0=;
+ b=BV7QqWIJaC8oVLXh2TIs4CHRG6WP8SoeWh8lm+3DRzYKJb7d4nXgEGkX/IeJ7Hl3OMPDTiFIKKBUp2QX2Im+FzQH+GCjYSBHvhVxCNSlfOjRmdUbpzMr3soCBwCsYhSI4UhKj3kFbt/mow9bHOLqlLixSdxsL0M8JlvfmNQZeqTN02DhD2yYvUaC1Sr6th2x6f9HbUBBexZ8yxytvmqrnid/ijjtrRbSmgOhDtEgmde5kqrXkPvqXKKsb8oLY7R6fErAkWu0S73/SETrfOaYSnZZw5+IZldjn0gUpfiZTCwnJ90nuaEhO62AKLeQ7CLL4SXs+Sr5dYUiHlsj6T8ERQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
  dkim=pass header.d=altera.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=xxOSEc2PTpuCknqSH4D/61i7A7kfhp9wYOJMZy1DpDM=;
- b=WFoCEsuAr4GhiTOK/2YGuFUte0h5snShSFgCpg6k6DZ02BnwTAhTVqq2yYXnLAJO6BdU89eL4z+UtflLcvIu6XJxldNvBFb14R1Z0T6wFk3yB+EGNsKC89QCppWlpAt3Hp9sGBHBBj+CK1OJsTmlRmUunjuzTlMmBsfTbWnwNMDMoZMjiWNilk/P0jEej8x/97D1HKVXziWn8zrXnc+NjZ2wtIvPeBcRzks+l4PLyu6HGItdmsf05ofwuhUoKIJzUgfs4177AYflYTLhJAZtOchsfvBTCdAdl+N64kvaV8yZv7Z2NFpHEEbiLnSB1GKZMIe47WpeelBAl/upShiYgA==
+ bh=pP9n71upYKp/o39VxRBwm8k+Bu23dLD1bTguG7RgBt0=;
+ b=ChAZAkEIklhjeTfBKzh7iUYj29tzjdUPE7+1cPYkSS9862tIXk0TucN/2HKTBMzBwoVlRKMfSEXeFfqcenWujzFvx3bAODYgCNq8QKxNb5lfibSRQjLKHDFWWQzxQeXEcJLf7rZn1f8hwHEKOCimPuw6Ko6W7+mME8VaZmjsvNjRkV0k86pkkLQSLzlB6g0XefHdWj6nbt6X9UotvTLKL/5QBo++O3J1D1PA74TPSiXLP1H3nFaldZ2lAyTXApfYqWJAEfJIjG4tufLNvGAAvjVMG1KlcTISYDDV812Id/WJHM77oFt1zOqNIkDSccgkV/fVBeZOUOdgLg82LkAu1Q==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=altera.com;
 Received: from IA3PR03MB8021.namprd03.prod.outlook.com (2603:10b6:208:502::17)
  by IA3PR03MB7740.namprd03.prod.outlook.com (2603:10b6:208:512::11)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9891.15; Thu, 7 May
- 2026 09:01:25 +0000
+ 2026 09:02:27 +0000
 Received: from IA3PR03MB8021.namprd03.prod.outlook.com
  ([fe80::3016:b672:c683:f7ad]) by IA3PR03MB8021.namprd03.prod.outlook.com
  ([fe80::3016:b672:c683:f7ad%4]) with mapi id 15.20.9891.015; Thu, 7 May 2026
- 09:01:25 +0000
+ 09:02:27 +0000
 From: Chen Huei Lok <chen.huei.lok@altera.com>
 To: u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
@@ -61,71 +61,70 @@ Cc: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
  Dinesh Maniyam <dinesh.maniyam@altera.com>,
  Boon Khai Ng <boon.khai.ng@altera.com>,
  Kok Kiang Hea <kok.kiang.hea@altera.com>,
- Chen Huei Lok <chen.huei.lok@altera.com>,
- Jit Loon Lim <jit.loon.lim@altera.com>
-Subject: [PATCH] drivers: clk: n5x: update comment to describe PLL bypass
-Date: Thu,  7 May 2026 17:01:09 +0800
-Message-ID: <20260507090109.17130-1-chen.huei.lok@altera.com>
+ Chen Huei Lok <chen.huei.lok@altera.com>
+Subject: [PATCH] drivers: clk: n5x: Fix incorrect EMAC clock source selection
+Date: Thu,  7 May 2026 17:02:15 +0800
+Message-ID: <20260507090215.18074-1-chen.huei.lok@altera.com>
 X-Mailer: git-send-email 2.43.7
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-ClientProxiedBy: SJ0PR03CA0115.namprd03.prod.outlook.com
- (2603:10b6:a03:333::30) To IA3PR03MB8021.namprd03.prod.outlook.com
+X-ClientProxiedBy: BY3PR04CA0029.namprd04.prod.outlook.com
+ (2603:10b6:a03:217::34) To IA3PR03MB8021.namprd03.prod.outlook.com
  (2603:10b6:208:502::17)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: IA3PR03MB8021:EE_|IA3PR03MB7740:EE_
-X-MS-Office365-Filtering-Correlation-Id: b186265b-eb18-4d49-63b9-08deac1736d8
+X-MS-Office365-Filtering-Correlation-Id: 2fce6081-df8b-4dfc-2852-08deac175c80
 X-MS-Exchange-AtpMessageProperties: SA
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
  ARA:13230040|366016|376014|1800799024|55112099003|56012099003|18002099003; 
-X-Microsoft-Antispam-Message-Info: TQTtGA4b7ZczO/15mdUnz8RjsZ67Jp11xmK8FWlz6cbcqwzzOTHZutLgP5FpOOZBdWCF6AT2kVolWr0XRKHOR5YuM8LGJG3+pgFhPYobwB5dJ4QmaNn4W7n3pmoPGpKhVOVSq+CegxLdOYjFZIy1WQ/EpSiom0oJyZuufAmF9i9lENhu1RP6TlNWWgOnddg1Xiu37fvGPcCWN4QUv9uTDz4ksKIFKo9pipWcEnchsmz1VuxbLuXdgeezzQiVPgpDwmBD4uBfTQdFtfIqQ8tgo8jAIsFklteGX0hB6OWY/z2QUhTyYX4yyepSCrsbkb48Cr/5Ssv+3N1oZhlURuogn4M0hrpj3oDlCjJkWiEs0SidIowStYeRmp8kd0QkowlEVDd3DMDaJVXzFTNEiro37aKFcd2t/vuWNBxNwIUha4QzwxDkbmfTplACsNN+JPG9Ge09JkPfzbTmY6lEdgDnhZKvqqKdhtcfX8UKa4IWVoVpcjlmXXQxDdh8oygZt5ysuV514XfPSgOj4xmqo6TNepxaCRSDd3u87/MqcfN9wGJ65rvKvx4DF9LrTMblyXzHxZy06o2Mkij0+ugyI7ixSFLYujsvHXl84lABs8/OoYEA6TnXWWjJttbHkIfuZTWY4NqWITDETX4OmXG2FaZdPgnHzqQ/eZ5ZK7LjpbxYVIHuoRNrHO0IynDNnWedT3jd
+X-Microsoft-Antispam-Message-Info: vNqjLzbsNN0jStCmCZtptTNq/FsnvF3mrCtcrd3Ts0VoE+sa7lWeVaLkqbiPvFoE+7t3gHLydqYmSxpj/wrN0Xz/ThAkzoORlGJVYyD6tnFHsmkIjF0Y2Ohprb4M0FV9lOEJiINE2tPAyZ5Xx+5JC+SGXAC4ZNDyXb9xd4pDeqOW2v93WbEnlIP6jSGIr08tznNEC00ntX7gwM/zcfgrI9JdO3aDJh1lpO/3/aLutLrTmB+VNOBrYmXdqvCbSo0O4tuaEHGPSYCVmpmLZ93uqqoYg5XolJzn9zhNAR5FM2H/d22E2Pldttv/ECCk24O2mpoNsFOSNxQ9evPuMpej++g25MiV9fMx3tT2c9q1kxpChLEYAkiwtrN7lYR9uh70mpwCnLyw/gQETEdqTm2kOGVhvUpleqOj9fnz79mE+mfx0Nut6xq2cXDZ6UEyWXCcGtsKB7MB2+zxUMNu1bwGtGnZDy631ipiRAYl9Pj0M1rxIi0zHLcgBqvsZoDDsLUaYlK3Pj/J1/rQOkc9KrBHjWmU0RoS5KjYC4mnqm+FlhN1+medMTelGvGZesH8P8VvQohjxca82mEe1TTgfAz2xscBzjfhV+7xfQT7rall6u6H++VZlOmcokeveb9QtC8lyeoJhZ1ZXLMy29Mi7We+6hmvqAvhAsG2M/bacqZtAopwY3hrv6UQbSeUDMYrZcmE
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:IA3PR03MB8021.namprd03.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(366016)(376014)(1800799024)(55112099003)(56012099003)(18002099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?7SZgJA7BSG7JyXzcnHsvQhLHZIwNzl3SC2ptOeLKM2b4lTXgbzJvTDDuw9FS?=
- =?us-ascii?Q?t9VFKdDUM7GKawVVdsh+gQgBlocvhMtSJL/pAr3IbVD4fjPFwX6hLmIZ3afd?=
- =?us-ascii?Q?uf2r9gYNguRNh5kiAjDSSDzkZ5U02hfq7F1XKZBFG8f1MYALn9eK0jDQ1GFw?=
- =?us-ascii?Q?BsQ9hmpu5cL9TUGcU7ypH5o+bGL5ZvJPz/hgykLC3Y6CxA5BiV3WILkZy/fr?=
- =?us-ascii?Q?1JZ/vu2WFVu/afJ6AyYncHH7+NPRl8r/SNbd+Ys8YkEqgwXGu33DKxnX0YaU?=
- =?us-ascii?Q?5ONBrT+ptRhqjbIxouzjmXmPvsGbLUa+x6ussWdO/Cw0AdzRgWlAPEq+2eY1?=
- =?us-ascii?Q?bP7PAY2QeA1pbDnqyEeAGvHqhn/STf6GMV04rUCwFxtiPDoh6tQMk5sn57Bo?=
- =?us-ascii?Q?xIRY3nA90BRXnga4jGIEJs0SRHBq4e2itFk2STXauQafX8ePtvAak1uH/UBE?=
- =?us-ascii?Q?WM31Rjk7ONcdtfGlIfxMCzco8IToFF+W0qS7SROOc658NeAyiJQ2yKpEVSwD?=
- =?us-ascii?Q?1hE8/qAtyh0cppgwNJzWEt4pulMXST/DH1BKgYkz0zm7V8W2Hbh5Wfek6a97?=
- =?us-ascii?Q?C8CSkRur/X3uqzdsprUYY4coPVkdZXtblAYgxogsbMZ0QqTSsENDC31IJLMx?=
- =?us-ascii?Q?pVDYcLZCCpzHKvNh6eyaLfFayH7KkB92/ORPsGtorvJnbHlppNMdSUFKkQ2/?=
- =?us-ascii?Q?NxMDGcpk4H6X3mEtZn2FFDuWSq/qTgg6Yg39gZU2B7N+KGhmfy1y2+eiQP0g?=
- =?us-ascii?Q?rLlFlyzRD0RBL27BVp1bVBcsRUph9ANS+hlt3vgZgjHjlltPtPzWcmOUydY8?=
- =?us-ascii?Q?ImYZXrUkpoEavULaAIMxPn8XH61zd7qFANsXc6cbog9eqAAhQ76SfmRjn9Vr?=
- =?us-ascii?Q?zlqBsoF8l6NebCjXjv3PIUN/RaYYgr+rdOzg7wykvZA9/arGckarKgxGZ2HG?=
- =?us-ascii?Q?K4nGOtdSP/AK30anzvVzK3HJube5TWDgl1UHA+uMbNXeq8bQ/BjKkYZP0Ud+?=
- =?us-ascii?Q?r9+dYqrNGpNUh/tx88+scF8CTiXKZDtokxIXOkbHjfCV0kIQvP8b4BpTPG/R?=
- =?us-ascii?Q?y0t/f7Q1cQ2bSS+dmfensrnWEbTJ3jJdp/trA1jA6t3MnpwzC6oaXTMoFw/3?=
- =?us-ascii?Q?2+N+3DSTTwy1tKv6oOhX4niJuVBqGk/s0pte85kpMYJPy4aJlMzGpUl3izuf?=
- =?us-ascii?Q?iKExw7sglCB8j29mhz4FLjcD7x91Gde7O5Tstdft0B9KNEo1vyrt0PS/Qx+C?=
- =?us-ascii?Q?LkQPVcdkUbyN2kvbuxYYhDGWdXD817CqS7yLCXLsvgHfQERNTWYJdi08R964?=
- =?us-ascii?Q?lDV+ERNzs/cquGRkpg82gxL/HQl4j/zPK9FNbtpTzSuwEbfGuGz7hT50ufj5?=
- =?us-ascii?Q?hUnXkJsrA/oCXzualXvsNAHNRLjDtL4lV14zU37NikSdlLPVepkEqRvy3wqy?=
- =?us-ascii?Q?rBMhPAXs81HsPNdTRkPjSJkyyaaKuZUbG7Bl5QUOr2iDByS3Mk2fkaEN1suq?=
- =?us-ascii?Q?bt1pPglpY4Q4Md7m894yreuLjTQnTWoLl1BbvVkS8HIV4qLL1mSNTkuqf/mk?=
- =?us-ascii?Q?q9b3pmLRE+RgiyakOC6U+9RIs9lsr+EL6slAOz1w7KGA0Xhn6aHHLmlrDqth?=
- =?us-ascii?Q?om6+Z2I8xiUS9DjH6L2OLTtGfJ/Zetn/LDjWsujk9dFvVsm0h9FGeMyOoLj4?=
- =?us-ascii?Q?gdFmTae4SmH8eO8L0ZnR8TlObtUxOUEcUSyXfoVINcaGJk3p1sZQh3W9d7MY?=
- =?us-ascii?Q?OCrgSB149IIHFCVh1JT2Z+tdoHCucVo=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?mw5nFrohHJXkZenLEtDexR+Zv1/Ts+fzlCNRhPfdID7eEDRevwjFrQbQJ1A7?=
+ =?us-ascii?Q?InYQb1Z8gwIJep5FNVzoje9/oUlCK5oCYWVcg6hOhTz/nL07nl2xbUs0XU0b?=
+ =?us-ascii?Q?M8fMsJnMWGRM6maM5ekTnvVNPMh6mHPmo2sY8LoLj+bGzOz65wR3rt5fyapd?=
+ =?us-ascii?Q?3DFZoEagCr6ek/JBC7PUcu6Yqkj8mjwsoYSsfmY7WN7vWWtugF1RfEp90SRS?=
+ =?us-ascii?Q?Qgh8kBPzKEdcGizBBsesareJ5cXk9WMP487e3QbVRNA5sVyr7bxdlJB/R25V?=
+ =?us-ascii?Q?+d/I2gmqncbThr2ZT8FaeqLapO3JCoaEmFlYTwlqqU11Qy9HDdnw4d53CcQr?=
+ =?us-ascii?Q?TwD/uhSFXX1E5C1jC7XMsvbanz1xNamu/xkkjykKulAWAQ3yb8nADagvznL7?=
+ =?us-ascii?Q?xfYzzXIkQPt/Ny4yn55tCMFrbUWPEL8qHlRrUmnkZikztA/JQ5oC/WitS6Dl?=
+ =?us-ascii?Q?cW1ZkxtEPiBA569Dr4+GYZX+Yc9i9HuxuRHWNpGNJFrNsAEqeY9skg8Z2IXh?=
+ =?us-ascii?Q?cmkSttBDhVQndZUB9RKB01HscQL+SWuqWktmMc1jVlHBYvnDfEcXxEqGb2nQ?=
+ =?us-ascii?Q?t4eBDv43VthgDP9vK2/htrnaKNCcvkHiBMNMoTRR3S6SYDMe1pjlpniqci8+?=
+ =?us-ascii?Q?66f4i4GcpbLvw4FsncoCXvxlNuaP3EumTS2aL0r2MgFLwn4PXqnnTrTFpz4A?=
+ =?us-ascii?Q?KU9SlCX+ntj8IdyK/936ZBchyzZp6SsUcTm5963WTpcE/tjv4HhgzNLlX4Ra?=
+ =?us-ascii?Q?8NoekxaLI7HdDf76LAY4jdEXPWi1VTjYxguMCbJ9Pao3FP9Rgv68uPC+bjmf?=
+ =?us-ascii?Q?q1EqH6GcZNGG6Q44dOAqq8juSPZefS3jbAq1p2GSwZe3tjpzRD01RtG7Ffsd?=
+ =?us-ascii?Q?TRNuWq20aoQ8tdTOiLYsZA2cVT3d4vx0eFWMbfahPkjJX28GYvnCcjLHp8UR?=
+ =?us-ascii?Q?EBAR6dqyHRzdsBLR/8YtGJ/fABB1vuxBEcyEsp3KMgII/sUqiIMtHb3yr78w?=
+ =?us-ascii?Q?f/r6PKg4En4vqomfDtbwZc476ajEFMo7bYYDMuJAvDGCTm6G8QAE3lXaBabX?=
+ =?us-ascii?Q?UKbNY9eWarzxsUFMHs3yKAOxHOxvoZ9V7WMiGUdcTez2YrdL122MzzTlsIRV?=
+ =?us-ascii?Q?CeamgCJXD9FkIilNReeKShT164rdsB64kx9V8e22Z+n1rqxYhlqqnMSXFCe8?=
+ =?us-ascii?Q?ITEmLfbLd/z++HTnZYs7KmrylrI5+gm2PXXzCPcCT2PrE0iJNa/g3HEaazGd?=
+ =?us-ascii?Q?DKQtnl8E+vD7AVtILmhUgThUGR8qMvokUqXhYhr0E199J1xSV8aZshSDN2pW?=
+ =?us-ascii?Q?oB6TjUtcVH+LpscFlm5LE2RDQ1oGMm3D4Vj8GtWdeMmtjf83m8Q5lrOUjtfY?=
+ =?us-ascii?Q?QQBzusxU4pFSez4Z3uDs7Vn1UTvOrguBYzGAPNDLgUjaRnTizSHO2lpgJZ3c?=
+ =?us-ascii?Q?zAlrZfwcttMgN+ZUhbUbPoPDnkypaGBGvokro9f69mZ/fuoXT2qH0hxgSMeY?=
+ =?us-ascii?Q?+ZwSl3ByZEsQnwnKH4lIdyeucY9zT5QN5ufMmudizcUc9oMIUcMk98+s3bTA?=
+ =?us-ascii?Q?lYrhfu0tFZPzCzdE9oGtCLCkr7zYeAPCz3c6CWVB2P6atnHCqoIn4Vz9vfhl?=
+ =?us-ascii?Q?vnfImZ4uPVEUZ4+Ml5nMwZMcfMr+ErQwANBbae/zviH3tqjpaJpV9vWmznf4?=
+ =?us-ascii?Q?x4BBtPQ6UbyPuMyOmaHddiTl1LVKiTOE4vgCqxFb4gGVu8qoTyhHz2nVjvAz?=
+ =?us-ascii?Q?CMq63Npr1YkjglJpGcIkjwrF5AGF900=3D?=
 X-OriginatorOrg: altera.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: b186265b-eb18-4d49-63b9-08deac1736d8
+X-MS-Exchange-CrossTenant-Network-Message-Id: 2fce6081-df8b-4dfc-2852-08deac175c80
 X-MS-Exchange-CrossTenant-AuthSource: IA3PR03MB8021.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 May 2026 09:01:24.4138 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 May 2026 09:02:27.3543 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: PiHI6O67ahQC6j+ZS+nXJHVykwgPq1yjCY5QGwOZSCCBW0lPLdRW+NQ5M14E9WtYNz+kp58zfA4lSLEdn/GD8szS4Z4VBZ6778wX+m1vvxU=
+X-MS-Exchange-CrossTenant-UserPrincipalName: JenY4MrNfxb52B0mFgxIidqgUimfjZ5ZrEzjXs5gUt1AFpm/ESFGK1m7R43SqKKZKK/Aj0GzyTl5xRX+yWQMBhS1hJBb4zAdAXfS2ktnB6g=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA3PR03MB7740
 X-Mailman-Approved-At: Thu, 07 May 2026 14:04:29 +0200
 X-BeenThere: u-boot@lists.denx.de
@@ -144,70 +143,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Jit Loon Lim <jit.loon.lim@altera.com>
+Fix the incorrect bit masking and bit shift that caused EMAC to always
+get the clock source from emaca_free_clk. The mask must be applied
+before shifting, not after.
 
-The existing comments incorrectly say "Put PLLs in Reset" and
-"Take PLL out of reset and power up", but the code actually toggles
-the PLL bypass bit. Update the comments to accurately describe the
-PLL bypass behavior.
-
-Signed-off-by: Jit Loon Lim <jit.loon.lim@altera.com>
 Signed-off-by: Chen Huei Lok <chen.huei.lok@altera.com>
 ---
- drivers/clk/altera/clk-mem-n5x.c | 7 +++++--
- drivers/clk/altera/clk-n5x.c     | 7 +++++--
- 2 files changed, 10 insertions(+), 4 deletions(-)
+ drivers/clk/altera/clk-n5x.c | 12 ++++++------
+ 1 file changed, 6 insertions(+), 6 deletions(-)
 
-diff --git a/drivers/clk/altera/clk-mem-n5x.c b/drivers/clk/altera/clk-mem-n5x.c
-index ac59571a853..0b136b30ce6 100644
---- a/drivers/clk/altera/clk-mem-n5x.c
-+++ b/drivers/clk/altera/clk-mem-n5x.c
-@@ -58,7 +58,10 @@ static void clk_mem_basic_init(struct udevice *dev,
- 	/* Put PLLs in bypass */
- 	clk_mem_write_bypass_mempll(plat, MEMCLKMGR_BYPASS_MEMPLL_ALL);
- 
--	/* Put PLLs in Reset */
-+	/*
-+	 * Put PLL in bypass which powers down the PLL
-+	 * and bypasses it such that PLLOUT tracks REF.
-+	 */
- 	CM_REG_SETBITS(plat, MEMCLKMGR_MEMPLL_PLLCTRL,
- 		       MEMCLKMGR_PLLCTRL_BYPASS_MASK);
- 
-@@ -68,7 +71,7 @@ static void clk_mem_basic_init(struct udevice *dev,
- 	CM_REG_WRITEL(plat, cfg->mem_plldiv, MEMCLKMGR_MEMPLL_PLLDIV);
- 	CM_REG_WRITEL(plat, cfg->mem_plloutdiv, MEMCLKMGR_MEMPLL_PLLOUTDIV);
- 
--	/* Take PLL out of reset and power up */
-+	/* Take PLL out of bypass */
- 	CM_REG_CLRBITS(plat, MEMCLKMGR_MEMPLL_PLLCTRL,
- 		       MEMCLKMGR_PLLCTRL_BYPASS_MASK);
- }
 diff --git a/drivers/clk/altera/clk-n5x.c b/drivers/clk/altera/clk-n5x.c
-index 185c9028a78..3495283407d 100644
+index 3495283407d..47a51bd5ace 100644
 --- a/drivers/clk/altera/clk-n5x.c
 +++ b/drivers/clk/altera/clk-n5x.c
-@@ -63,7 +63,10 @@ static void clk_basic_init(struct udevice *dev,
- 	clk_write_bypass_mainpll(plat, CLKMGR_BYPASS_MAINPLL_ALL);
- 	clk_write_bypass_perpll(plat, CLKMGR_BYPASS_PERPLL_ALL);
+@@ -328,14 +328,14 @@ static u32 clk_get_emac_clk_hz(struct socfpga_clk_plat *plat, u32 emac_id)
+ 	/* Get EMAC clock source */
+ 	ctl = CM_REG_READL(plat, CLKMGR_PERPLL_EMACCTL);
+ 	if (emac_id == N5X_EMAC0_CLK)
+-		ctl = (ctl >> CLKMGR_PERPLLGRP_EMACCTL_EMAC0SELB_OFFSET) &
+-		       CLKMGR_PERPLLGRP_EMACCTL_EMAC0SELB_MASK;
++		ctl = (ctl & CLKMGR_PERPLLGRP_EMACCTL_EMAC0SELB_MASK) >>
++		       CLKMGR_PERPLLGRP_EMACCTL_EMAC0SELB_OFFSET;
+ 	else if (emac_id == N5X_EMAC1_CLK)
+-		ctl = (ctl >> CLKMGR_PERPLLGRP_EMACCTL_EMAC1SELB_OFFSET) &
+-		       CLKMGR_PERPLLGRP_EMACCTL_EMAC1SELB_MASK;
++		ctl = (ctl & CLKMGR_PERPLLGRP_EMACCTL_EMAC1SELB_MASK) >>
++		       CLKMGR_PERPLLGRP_EMACCTL_EMAC1SELB_OFFSET;
+ 	else if (emac_id == N5X_EMAC2_CLK)
+-		ctl = (ctl >> CLKMGR_PERPLLGRP_EMACCTL_EMAC2SELB_OFFSET) &
+-		       CLKMGR_PERPLLGRP_EMACCTL_EMAC2SELB_MASK;
++		ctl = (ctl & CLKMGR_PERPLLGRP_EMACCTL_EMAC2SELB_MASK) >>
++		       CLKMGR_PERPLLGRP_EMACCTL_EMAC2SELB_OFFSET;
+ 	else
+ 		return 0;
  
--	/* Put both PLLs in Reset */
-+	/*
-+	 * Put both PLLs in bypass which power down the PLLs
-+	 * and bypasses it such that PLLOUT tracks REF.
-+	 */
- 	CM_REG_SETBITS(plat, CLKMGR_MAINPLL_PLLCTRL,
- 		       CLKMGR_PLLCTRL_BYPASS_MASK);
- 	CM_REG_SETBITS(plat, CLKMGR_PERPLL_PLLCTRL,
-@@ -84,7 +87,7 @@ static void clk_basic_init(struct udevice *dev,
- 	CM_REG_WRITEL(plat, cfg->per_pll_emacctl, CLKMGR_PERPLL_EMACCTL);
- 	CM_REG_WRITEL(plat, cfg->per_pll_gpiodiv, CLKMGR_PERPLL_GPIODIV);
- 
--	/* Take both PLL out of reset and power up */
-+	/* Take both PLLs out of bypass */
- 	CM_REG_CLRBITS(plat, CLKMGR_MAINPLL_PLLCTRL,
- 		       CLKMGR_PLLCTRL_BYPASS_MASK);
- 	CM_REG_CLRBITS(plat, CLKMGR_PERPLL_PLLCTRL,
 -- 
 2.43.7
 
