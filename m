@@ -4,144 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88735CD343F
-	for <u-boot@archiver.kernel.org>; Thu,  7 May 2026 15:25:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A426DCD343F
+	for <u-boot@archiver.kernel.org>; Thu,  7 May 2026 15:31:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A9D5E84A7B;
-	Thu,  7 May 2026 17:25:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
+	by phobos.denx.de (Postfix) with ESMTP id 0B68884A79;
+	Thu,  7 May 2026 17:31:15 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="XybYr2/T";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="gIbspwEo";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Mq6hFUEy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A2E2084ADD; Thu,  7 May 2026 17:25:41 +0200 (CEST)
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
- [205.220.168.131])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id D101A84AFA; Thu,  7 May 2026 17:31:13 +0200 (CEST)
+Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
+ [IPv6:2a00:1450:4864:20::635])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0C18484A44
- for <u-boot@lists.denx.de>; Thu,  7 May 2026 17:25:37 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=oss.qualcomm.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=balaji.selvanathan@oss.qualcomm.com
-Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 647BTrH1682778
- for <u-boot@lists.denx.de>; Thu, 7 May 2026 15:25:36 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- kLlIvB12g+n12hiCi+MMmkBPyde6nykwNuD6bRl9B7c=; b=XybYr2/TE1g5WFIE
- w6nvqubDUxRjQpaqBSxJJqE6ky8F2OKL2WKcTIKkYPQ93D29iBMmrcoyRBg5t2aL
- PlSxFFsYlINqLEDjtJ2sq9XnOFACxdPPBLtE7YVbwe1HrLMhMYWVjsOIkCTqF870
- r370mJO+XBQ5fKTalKMtWHH9VAzpxSoAZZkywGIjJkBx7rb97vFBkL+0DnzPYDgv
- KcovytjcLdW9+ZfHaOXtxvDLBB0cHrb9xlSZsusE67iXkkHiJmBvY2wQ86g3p+wX
- vMVd3PMfNqq+MiXzfW0zWYruTzolUFXqF5i22lQBX3rl2e82B3kFRBhJMw0/eoCu
- ccWiUQ==
-Received: from mail-pf1-f199.google.com (mail-pf1-f199.google.com
- [209.85.210.199])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4e0mhat8fc-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Thu, 07 May 2026 15:25:36 +0000 (GMT)
-Received: by mail-pf1-f199.google.com with SMTP id
- d2e1a72fcca58-82fa6c3a77cso644694b3a.3
- for <u-boot@lists.denx.de>; Thu, 07 May 2026 08:25:35 -0700 (PDT)
+ by phobos.denx.de (Postfix) with ESMTPS id 31FFB84A7B
+ for <u-boot@lists.denx.de>; Thu,  7 May 2026 17:31:11 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x635.google.com with SMTP id
+ a640c23a62f3a-bc23bebd345so189560766b.1
+ for <u-boot@lists.denx.de>; Thu, 07 May 2026 08:31:11 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1778167870; cv=none;
+ d=google.com; s=arc-20240605;
+ b=hSjLN5g9u7K6Ai8uS9MoEIf0U7FJZ8gSskw0vwesdPCb/qWjp/XrZyUzuU8IRV3zZj
+ NhVrV1ip3/Li/BZghIcsq0mBMUWm6RTaEP7sP5Q1rgmW0adgPzxfUhxe1reCepqXOax5
+ JnZlbTppzvrpRVaDOvKm+fgDeVF/6ZMHvp0WYVxx6jyxgFVmCEjvsncVTnHAlqUfKEQx
+ ylZaXxZrnBOwTuhjyIk/+Qjm9vIPjg2LLsVj5jCV4g2dYE5l9u6BTjyYYmckxjHIRDaP
+ TCWOCrW0Rf6+J8M6T98CSZhCDMQP0kBHq8/E+d2Z/PDxarw66a8b7KYCYHjUadat3YDx
+ 4R7w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=iu852Ff196ydzXaHxvC8GWPNpFpEq1sm/XEICjKFslY=;
+ fh=mMjfHynJFJmcWd2ujY9HOYbDsUWJsRgAYR53jQaIBb4=;
+ b=AZzoFIxGCTuxTjedK1WCiiadajagcA/iL5wRIT7Pmo9vjUvnwJmoJSavOjxQrDqVNK
+ mdatPEYKgm2klPOFihEZLGha8W+RZfytsKyNszuQK9Go2aG6uusk0ZPZt/QXcwCAadGJ
+ fshUclI51RV6pUgvxcNcCpjvEduCyiix1PmDKFGqBqh4f94xhW8GlXRlbqSJZbm2CVO4
+ TOw5aGmmc2rmwowiVRxMMK5dvdoYDMA1reMucrM2MUp+4rAJKbITByoqaDvDjAekBCiU
+ HH13a9ONXui9fMQFeEiPyvNCTyCjmitdHzmP1keEJQlj7jwLfmlaK9ci2it+wlkHfeNU
+ Dvjg==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1778167535; x=1778772335; darn=lists.denx.de; 
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=kLlIvB12g+n12hiCi+MMmkBPyde6nykwNuD6bRl9B7c=;
- b=gIbspwEoYtnvJAV26srZm5qIFNdEMzJElMg0T98fCAMIwA2MOm5lw7cJcvg48j8w3o
- ZxA9oPTZuQKjKr+Gl3rNk4ZX2UOKGc6Zn2pBZy6Y5BYrHjlbVR4Y5QJpaeN9qfDCSYQk
- mo/1mcMjZQTiVvQHrURcZtjnqSjK/tIcR1QaEzKunv1hBMQy/KLhVDEVAsCsIirkp9+4
- mjncmGFix58vjCb9j3miYDaX5ue7C92p7rQ+2fjC0d0GPCQi1rQMhWWnS4v7W0IDWKvS
- r4WDtMABh7fQtIgz4djVKNvD6U9IzkdqKRlte7w/Ibx8G14hBxJFSnFFw4MjPt/QXdXI
- IBIA==
+ d=chromium.org; s=google; t=1778167870; x=1778772670; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=iu852Ff196ydzXaHxvC8GWPNpFpEq1sm/XEICjKFslY=;
+ b=Mq6hFUEy3H/b5+u+hmSGyG/8h88K7kyJ4lKxDp1X5VcnLS+NC/VX5g0ZutWuSFp6qm
+ chkNgCG+EiDPXe70Ee/YkLlaoKTduvpghdcCTvEyqSsX4DppqG4/VvwcKg22k02N7gVc
+ epuHUAVj5nK1IiHhk6tWwstX5/5JjH8erCLzw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778167535; x=1778772335;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=kLlIvB12g+n12hiCi+MMmkBPyde6nykwNuD6bRl9B7c=;
- b=Sm58IwFE0EFAyVj53mPGJZ5JGOxur12KE8bQck0sfnD6lWS/RRj4GmAc3YEfbOzVuF
- YOFs3a0nxAUgdUpg4l4PFTBaYV57aCUOz4vTgX56Lf6TS75LA2EzJEbR/EEEYurj9sYv
- eDpQir2kWE+Jw1YV+qIglGHIIQCcXKlmPIPI4il+uWZbyfARc807qkMtGguba0vZEXVo
- 9EKV3wIzbjkcx+GnbIX0CmGLXnQCU7gUXFxfNcQXb4R/U6M0gWiF0rdyR6uxWF0oZ7Hy
- xa3JSLcnKOj5XdVFmt3Dwd2hstqfelgtYjsbw0zdu2p2GYCrfIIYnzoSdUbp8FOv1y8d
- doJA==
-X-Forwarded-Encrypted: i=1;
- AFNElJ8Z9DhSawrwuQ18pW0ZQh+wiwkWuVsJzMF7CpJh9g4Wi/ldUartQtumrt60zL800HGiB7hej08=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw5YsyoCGhTpxmB8BFpzo06FdCihuUEbDuKfPG51C3sHT3EgBPM
- MdJ57USp5oZAT8Tu9qAjghesTilxwKvbCVfqmRnGzk0tOeOWE3kMI9ylmUZWs5keGGhzyhYAt4W
- WzpBtCLbd6opydvs0zoW/hIgJSNDbHfRPCEa2T0fBYenlQdysaeIdrN9v
-X-Gm-Gg: AeBDievBLhsPr468gFgPXSHAL21hCwrX26gS2sByXVj1dvYyLFIo6YJTjIvwMpxX4I1
- IHLQh0WfA3j9WA6Lljj6awHkWghb9bSXdqFZmjQVdKWIZJdX15tqb+zwOd518RBev6VpKwc0tP6
- 67Pi40kHV7Eln8hw7w67xgfUBXCIsWFjiAa9D/dZpKdEk1lxbeA85gPVqqvyUOyLiY+71zxqyFR
- A5UMoJKaSdz7vPyFwyjmjlYgsrCDPIZp8oBeqkdMPcsorq78UYZbNrdrZiFTDaUHtW+OsMz1f0x
- xOr0Ra3zu1KZQLNAMyvwnPdTC0btNT2nPEXm+uhhGUaK/VUadO9RZ9GowcHCSDXCj2tQyJUt+qj
- AJXcPZSzSkKxNgEzsUBuWPFzXJE2soWvmwn6VCWm/oAhO5YMc4kg3YkwZaCyaSCot2MtI
-X-Received: by 2002:a05:6a00:a256:b0:837:6bb9:acb7 with SMTP id
- d2e1a72fcca58-83a5805d724mr8266829b3a.0.1778167535329; 
- Thu, 07 May 2026 08:25:35 -0700 (PDT)
-X-Received: by 2002:a05:6a00:a256:b0:837:6bb9:acb7 with SMTP id
- d2e1a72fcca58-83a5805d724mr8266788b3a.0.1778167534774; 
- Thu, 07 May 2026 08:25:34 -0700 (PDT)
-Received: from [192.168.0.6] ([183.82.29.229])
- by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-839682a20ebsm9439126b3a.53.2026.05.07.08.25.31
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 07 May 2026 08:25:34 -0700 (PDT)
-Message-ID: <f27cc86e-886f-4832-9ed0-d6dc9c7c7866@oss.qualcomm.com>
-Date: Thu, 7 May 2026 20:55:28 +0530
+ d=1e100.net; s=20251104; t=1778167870; x=1778772670;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=iu852Ff196ydzXaHxvC8GWPNpFpEq1sm/XEICjKFslY=;
+ b=muGBrzfzi+HlZ2j7O5lx09fusDgakhg3hCccouHWbCNnfoqFbgAVapkk86+G4wdtl1
+ GHWosbykQfeitWhxIxdIf3tfqwrZ+FUEG0n/rr4Rszk8xbeh1MIfqyOKkSWvVxV0q4hX
+ aENGNdE6xAwxS68wWB1HsJ9SWCanzo4kz5xpMykShol1QMcvOonX4i36qG+xAe5xZqDf
+ RXopT4W7UmB5mUfjTEh63ng4lpbbCqZuXjpW6ZksTgwZ+NzUcYF+46Uj4wZ2ks7vf9mh
+ e8zv4zYVGdojauCx1XRcy0iZf5d2w+48dme20mNCwFu6gr7sEDEOfaRzpLFBrR6CEAS+
+ 3Llw==
+X-Gm-Message-State: AOJu0YzK5zsVeudk2HnnHY/68wVnBoe6eh0OE7pJcRt4X16mPbb3J0EH
+ GMSEoIagLdPrkWbHFFKlZUGeLvwAX3Y2SGbnFCL7oIfBlXkB/sFMl6HmCw4k0tG49M/mUVAG5PW
+ Jv6uBoWcYGHyAWsMm5rVo8xZYApsbPBXr8MwxBylj
+X-Gm-Gg: AeBDieu2W8faJLbBcCRi9GtLtiaOmlPWuV/W/oLbRc/uBgR9zDNvtgctrvHiZckTu72
+ RRNW72mKCg9HHm0fUqEB8ja1A+vYTdGSBrcOuVgiwRSG9dQ+wqhPJL9NeZtHvdkYFBz2wEO6kZM
+ NFJV/BPP2ww9cZRCvxG0mGLBkhAq2XnwgiSkeCjK7sVuDtb0PM9zLQvu+kEBtrIjM2HcUfw/1Jy
+ AfczKlxX5tOp9+V8bpHkJr20zi1QCCAt/T/Tk1Rm1/xWgITF88NfpOJZhXuSfoQSRQEdPhKt19e
+ yQyna6IvkdupQRSsfjZ9e73XSNM=
+X-Received: by 2002:a17:907:e157:20b0:b9d:14e9:d06d with SMTP id
+ a640c23a62f3a-bc84ce749a5mr155195766b.8.1778167870319; Thu, 07 May 2026
+ 08:31:10 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] usb: dwc3: Fix crash on fastboot exit due to incorrect
- memory free
-To: Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Marek Vasut <marek.vasut+usb@mailbox.org>,
- Gurumoorthy Santhakumar <gurumoorthy.santhakumar@oss.qualcomm.com>,
- u-boot@lists.denx.de
-Cc: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
- Chris Morgan <macromorgan@hotmail.com>,
- Varadarajan Narayanan <quic_varada@quicinc.com>,
- Casey Connolly <casey.connolly@linaro.org>
-References: <20260507-usb-v2-1-3958b8732553@oss.qualcomm.com>
- <87fr43d2le.fsf@kernel.org>
-Content-Language: en-US
-From: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-In-Reply-To: <87fr43d2le.fsf@kernel.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNTA3MDE1NCBTYWx0ZWRfX+4ekMUf82dmg
- d/tRqYSUIptifCNWrJfe6RdCC1evmPtRndNtmGmt3qgHfncPOTgAsXuQWbx1ATw4xHOnrezzDdE
- s8lAvtskvnZ3asjcrKjhPATtb6cnNmkaUGU8bKSQvmDSiiqhUGWte4Zi8nH2pl5soZ1/S/I9PJk
- 5qVSaTi2QivCBH9U/DSovX1UU8/kI2qLkZxg4b9cLtTcQ0jlNEf8+26G9omkPJUOntUrwTK5W7m
- 9xO/yxJTIPNSl54HXzkH5aM6cRWt4KYBFo9lIkDdOf7OfphuB2jppiLRo61tjNCeN16zAy/9U4d
- w2wy+eE1qtEhlPmQGaiAErX/S1HT5LgXkuaEvn8WiRS9eg5sSXEy3iqbAzNRH371aF9Trn7INAd
- 8ujn7g5myV0DYYJJaloOGc4s2ld8b7uE0cdx4YRaTlA0bEKuGLYDi70r7GFsDGwA545umA0sAsa
- Lny29iapybMT2QZgrNA==
-X-Proofpoint-ORIG-GUID: u3UDzuNErqfyE_JtrQf9Tt3h4aXE-6zC
-X-Proofpoint-GUID: u3UDzuNErqfyE_JtrQf9Tt3h4aXE-6zC
-X-Authority-Analysis: v=2.4 cv=ReWgzVtv c=1 sm=1 tr=0 ts=69fcaef0 cx=c_pps
- a=WW5sKcV1LcKqjgzy2JUPuA==:117 a=QSexx7ugTgw61ZAVApU5FA==:17
- a=IkcTkHD0fZMA:10 a=NGcC8JguVDcA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
- a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=FiGvj3fQRKTR5oEpz4QA:9 a=QEXdDO2ut3YA:10
- a=OpyuDcXvxspvyRM73sMx:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
- definitions=2026-05-07_01,2026-05-06_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 priorityscore=1501 impostorscore=0 lowpriorityscore=0
- spamscore=0 suspectscore=0 adultscore=0 phishscore=0 malwarescore=0
- bulkscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
- adjust=0 reason=mlx scancount=1 engine=8.22.0-2604200000
- definitions=main-2605070154
+References: <20260504144455.3674272-1-ravi@prevas.dk>
+In-Reply-To: <20260504144455.3674272-1-ravi@prevas.dk>
+From: Simon Glass <sjg@chromium.org>
+Date: Thu, 7 May 2026 09:30:58 -0600
+X-Gm-Features: AVHnY4LMVZMuq1-Q28kGll9QoXXwdPGAakj4S4t1dLx3a8XNiNvrUWXyHsi5yrw
+Message-ID: <CAFLszTjtqDHB5NpXq_dTu-WBx1D9uhgNMcEtgvsSg8MoRUHDOw@mail.gmail.com>
+Subject: Re: [PATCH] boot: image-fit.c: check target, not source, for 8-byte
+ alignment when loading FDT
+To: ravi@prevas.dk
+Cc: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -158,61 +109,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Rasmus,
 
-On 5/7/2026 2:21 PM, Mattijs Korpershoek wrote:
-> On Thu, May 07, 2026 at 10:06, Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com> wrote:
+On 2026-05-04T14:44:55, Rasmus Villemoes <ravi@prevas.dk> wrote:
+> boot: image-fit.c: check target, not source, for 8-byte alignment when loading FDT
 >
->> The dwc3_free_one_event_buffer() function incorrectly called free()
->> on event buffer structures allocated with devm_kzalloc(). This
->> caused heap corruption and a synchronous abort when exiting
->> fastboot mode via "fastboot continue".
->>
->> Device-managed memory is automatically freed when the device is
->> removed, so manual deallocation causes the heap allocator to access
->> corrupted metadata.
->>
->> Fixes: 884b10e86a05 ("usb: dwc3: core: fix memory leaks in event buffer cleanup")
->>
->> Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-> Ah, and I missed a nitpick. Fixes should be part of the commit footer.
-> Same block as in the Signed-off-by:
+> A number of our boards no longer boot with v2026.04, ironically as a
+> result of the effort to ensure 8-byte alignment of the dtb passed to
+> the kernel and getting rid of the fdt_high=0xffffffff.
 >
-> See: https://docs.kernel.org/process/submitting-patches.html#using-reported-by-tested-by-reviewed-by-suggested-by-and-fixes
+> The problem exists when the FIT image does specify a (properly
+> aligned) load address to use for the fdt. For example, we have
+>
+>         fdt-am335x-boneblack.dtb {
+>                 description = "Flattened Device Tree blob";
+>                 data = /incbin/(...);
+>                 ...
+>                 load = <0x88000000>;
+>         }
+>
+> Now, with v2026.04 and depending on just exactly where that data ends
+> up, in a good case we see
+>
+>      Loading fdt from 0x8a8c6e10 to 0x88000000
+> [...]
+>
+> boot/image-fit.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 
-Hi,
+> diff --git a/boot/image-fit.c b/boot/image-fit.c
+> @@ -2311,7 +2311,7 @@ int fit_image_load(struct bootm_headers *images, ulong addr,
+>               }
+>               len = load_end - load;
+>       } else if (load_op != FIT_LOAD_IGNORED && image_type == IH_TYPE_FLATDT &&
+> -                ((uintptr_t)buf & 7)) {
+> +                (load & 7)) {
+>               loadbuf = aligned_alloc(8, len);
+>               load = map_to_sysmem(loadbuf);
+>               memcpy(loadbuf, buf, len);
 
-Thanks for the feedback; Pls find respin here: 
-https://lore.kernel.org/u-boot/20260507-usb-v3-1-402b37fc2154@oss.qualcomm.com/
+Fixes: 8fbcc0e0e839 ("boot: Assure FDT is always at 8-byte aligned address")
+
+BTW the file already uses IS_ALIGNED(x, 8) a few lines up in
+boot_get_fdt_fit_into_buffer() so you could use !IS_ALIGNED(load, 8)
+
+Reviewed-by: Simon Glass <sjg@chromium.org>
 
 Regards,
-
-Balaji
-
->> ---
->> Changes in v2:
->> - Added Fixes tag in commit description
->> - Link to v1: https://lore.kernel.org/u-boot/20260506-usb-v1-1-e0f426bb1e42@oss.qualcomm.com/
->> ---
->>   drivers/usb/dwc3/core.c | 1 -
->>   1 file changed, 1 deletion(-)
->>
->> diff --git a/drivers/usb/dwc3/core.c b/drivers/usb/dwc3/core.c
->> index 0dee14c8b59..be198041f08 100644
->> --- a/drivers/usb/dwc3/core.c
->> +++ b/drivers/usb/dwc3/core.c
->> @@ -208,7 +208,6 @@ static void dwc3_free_one_event_buffer(struct dwc3 *dwc,
->>   		struct dwc3_event_buffer *evt)
->>   {
->>   	dma_free_coherent(evt->buf);
->> -	free(evt);
->>   }
->>   
->>   /**
->>
->> ---
->> base-commit: 3cdd19089f1b1b7cd08530f33ff4708abcfd426c
->> change-id: 20260507-usb-34b404ff063a
->>
->> Best regards,
->> -- 
->> Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+Simon
