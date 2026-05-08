@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47543CD342F
-	for <u-boot@archiver.kernel.org>; Fri,  8 May 2026 08:22:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3C30CD3436
+	for <u-boot@archiver.kernel.org>; Fri,  8 May 2026 08:23:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 595F184C3F;
+	by phobos.denx.de (Postfix) with ESMTP id A637484C5F;
 	Fri,  8 May 2026 10:21:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=ew.tq-group.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=ew.tq-group.com header.i=@ew.tq-group.com header.b="jNWeLpM+";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=ew.tq-group.com header.i=@ew.tq-group.com header.b="mU34435B";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9175284BDC; Fri,  8 May 2026 10:21:47 +0200 (CEST)
+ id C4BE184BBD; Fri,  8 May 2026 10:21:48 +0200 (CEST)
 Received: from www537.your-server.de (www537.your-server.de [188.40.3.216])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E7F2F84C3B
- for <u-boot@lists.denx.de>; Fri,  8 May 2026 10:21:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1BDD384C3F
+ for <u-boot@lists.denx.de>; Fri,  8 May 2026 10:21:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=ew.tq-group.com
 Authentication-Results: phobos.denx.de; spf=pass
@@ -30,28 +30,29 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
  Content-Type:Content-ID:Content-Description:Resent-Date:Resent-From:
  Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID;
- bh=+tiNDsglmt29WcjpfIyx3nsbhYgX+64HSA0Jhk2V/Tw=; b=jNWeLpM+x4TJKqDZuZfsRBg+84
- v8PGCHs/mX0+N2cHzh/J4k5DRu5N+NyYYTa8Tc83M/TKGzvr1P83BUXZnHh59uiBGA+Ix+vS2C1i4
- wX8ljNtHRWfZQitRY2KgElJ6ZvcFaZ4p/HiAomV6WNg3g/CoOBwKsiQYl1pZLfyzgGRNM+MS6UVWN
- ief/a3LOn3LVHxPe2Sg9mbVG+AEXTBm504LV7aAyIRjnAwBtcQP4W5S9WsBOvE+CMiQo1diVBk/bO
- 90v/T5bYcUmopuYj9aZ2fovmOa3iRInJBiw+xa/CXWbXKPXsNGOCuGhwNPXXMGMP9nZTzpGqYSc7L
- MSTtQ5Rw==;
+ bh=NeQYqtmf8LdnSy9b3tWZ8x/ao56dk1uI302l/8jPbp4=; b=mU34435BcPoVnroP/D3Y9EeiJy
+ RM9DjZC/ubOjb3DOGcPwMJ30F8X8mkp2IwRK3mwcTuEdTRZL1XlFTZO/xBrwMtmd4Y3kWQiH/s2Uc
+ gPU8UoRSZL9LUmsvwKyZZo+u26fIbfWz9KUTPOtrS0mVlbdadsHzO3b1Jb5wMNI968CjgP6GNasPh
+ oEwHrsVrPTm1VJFBV97iOZeSWBoiegy3miKjF1a/Y9AoLqLQPjMSkg1o6nSLMgOi42SXj+lMm7PVz
+ ap1LrSduQSvUGsl2WRzYmwSShi6E63d1HYU1ncRTX5VIoKclFIOMAwCAWWo5cFnAzrKjWfj7q6JB0
+ UjUAtZzw==;
 Received: from sslproxy06.your-server.de ([78.46.172.3])
  by www537.your-server.de with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
  (Exim 4.96.2) (envelope-from <Alexander.Feilke@ew.tq-group.com>)
- id 1wLGSs-0005oo-1k; Fri, 08 May 2026 10:21:42 +0200
+ id 1wLGSs-0005p7-2P; Fri, 08 May 2026 10:21:42 +0200
 Received: from localhost ([127.0.0.1])
  by sslproxy06.your-server.de with esmtpsa (TLS1.3) tls TLS_AES_256_GCM_SHA384
  (Exim 4.96) (envelope-from <Alexander.Feilke@ew.tq-group.com>)
- id 1wLGSs-000P5H-27; Fri, 08 May 2026 10:21:42 +0200
+ id 1wLGSs-000P5H-2n; Fri, 08 May 2026 10:21:42 +0200
 From: Alexander Feilke <Alexander.Feilke@ew.tq-group.com>
 To: u-boot@lists.denx.de
 Cc: u-boot@ew.tq-group.com,
  Alexander Feilke <alexander.feilke@ew.tq-group.com>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH 7/8] rtc: pcf85063: add power loss detection during probe
-Date: Fri,  8 May 2026 10:21:31 +0200
-Message-Id: <20260508082132.25476-8-Alexander.Feilke@ew.tq-group.com>
+Subject: [PATCH 8/8] drivers: Kconfig: rtc_pcf85063: note unsupported chip
+ features
+Date: Fri,  8 May 2026 10:21:32 +0200
+Message-Id: <20260508082132.25476-9-Alexander.Feilke@ew.tq-group.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20260508082132.25476-1-Alexander.Feilke@ew.tq-group.com>
 References: <20260508082132.25476-1-Alexander.Feilke@ew.tq-group.com>
@@ -75,38 +76,25 @@ X-Virus-Status: Clean
 
 From: Alexander Feilke <alexander.feilke@ew.tq-group.com>
 
-Retrofit from upstream linux to try resetting the device after power loss.
-
 Signed-off-by: Alexander Feilke <alexander.feilke@ew.tq-group.com>
 ---
- drivers/rtc/pcf85063.c | 14 ++++++++++++++
- 1 file changed, 14 insertions(+)
+ drivers/rtc/Kconfig | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/drivers/rtc/pcf85063.c b/drivers/rtc/pcf85063.c
-index 107e8b4d4c8..421c42c0b81 100644
---- a/drivers/rtc/pcf85063.c
-+++ b/drivers/rtc/pcf85063.c
-@@ -185,6 +185,20 @@ static int pcf85063_probe(struct udevice *dev)
- 		return err;
- 	}
+diff --git a/drivers/rtc/Kconfig b/drivers/rtc/Kconfig
+index ef1663f3450..ccb0709a953 100644
+--- a/drivers/rtc/Kconfig
++++ b/drivers/rtc/Kconfig
+@@ -168,6 +168,9 @@ config RTC_PCF85063
+ 	help
+ 	  If you say yes here you get support for the NXP PCF85063 RTC
+ 	  and compatible chips.
++	  Support for the following chip features is currently not implemented:
++	  - NVMEM
++	  - CLKOUT generation
  
-+	/*
-+	 * If a Power loss is detected, SW reset the device.
-+	 * From PCF85063A datasheet:
-+	 * There is a low probability that some devices will have corruption
-+	 * of the registers after the automatic power-on reset...
-+	 */
-+	if (tmp & PCF85063_REG_SC_OS) {
-+		dev_warn(dev, "POR issue detected, sending a SW reset\n");
-+		err = dm_i2c_reg_clrset(dev, PCF85063_REG_CTRL1,
-+					0xff, PCF85063_REG_CTRL1_SWR);
-+		if (err < 0)
-+			dev_warn(dev, "SW reset failed, trying to continue\n");
-+	}
-+
- 	err = pcf85063_load_capacitance(dev);
- 	if (err < 0)
- 		dev_warn(dev, "failed to set xtal load capacitance: %d",
+ config RTC_PCF8563
+ 	bool "Philips PCF8563"
 -- 
 2.34.1
 
