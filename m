@@ -4,53 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5930ECD37AC
-	for <u-boot@archiver.kernel.org>; Fri,  8 May 2026 10:24:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8C31CD3447
+	for <u-boot@archiver.kernel.org>; Fri,  8 May 2026 10:34:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7AF7F84BDC;
-	Fri,  8 May 2026 12:24:05 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 560B784BDC;
+	Fri,  8 May 2026 12:34:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=arm.com header.i=@arm.com header.b="YRfnqE+g";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=arm.com header.i=@arm.com header.b="lsRCs5GQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3C49C84C45; Fri,  8 May 2026 12:24:05 +0200 (CEST)
+ id 76A5B84C19; Fri,  8 May 2026 12:34:38 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 0D16B84A66
- for <u-boot@lists.denx.de>; Fri,  8 May 2026 12:24:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id 556A884B56
+ for <u-boot@lists.denx.de>; Fri,  8 May 2026 12:34:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=abdellatif.elkhlifi@arm.com
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 0B8AE1BCA;
- Fri,  8 May 2026 03:23:57 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 326E61BCA;
+ Fri,  8 May 2026 03:34:30 -0700 (PDT)
 Received: from e130802.arm.com (e130802.arm.com [10.1.29.54])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id D4D153F763;
- Fri,  8 May 2026 03:24:00 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id B2D673F763;
+ Fri,  8 May 2026 03:34:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
- t=1778235842; bh=DuCyh2LHQHuYFabsZ1Ud/ilQw+BZS+VsS7TNH+9GJCw=;
+ t=1778236475; bh=m7u2doM0wmeImW+ZaUZNmJjXQGW4YlM0ymH0Ks7vjiE=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=YRfnqE+gbOttjuGveDiX3kEeLCy5oZ9rHG0G5WRaU4F0/TKaL7nCcA9Lb5ZkNeDp5
- TnTk5Ubb6Ufe01n4otuSsVfKsSkkexr3dUBd4v1KM6S3ZDPocNsjXhIqAw9VZkk4JA
- K2v5M/XHDNCMv0r4Gc/tkDxSNmtysMqoJHl+c/4Y=
-Date: Fri, 8 May 2026 11:23:52 +0100
+ b=lsRCs5GQ0Wi5K4OYmifKPIl1RcYZ2z9VE6Qaz2l1uvR3xN1ukNul6AqvgE/00kOmv
+ +1oP0Kf4q6rrGD176/uETHgTIctoQqC6NLhImt5BmJla1kJBW+OH0KzPWzw6tPERQ7
+ n13TFuB3tyumSjAW7wX7btMEu7Gv3RdGerQ+vNUQ=
+Date: Fri, 8 May 2026 11:34:25 +0100
 From: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- harsimransingh.tungal@arm.com
-Cc: u-boot@lists.denx.de, trini@konsulko.com, xypron.glpk@gmx.de,
- hugues.kambampiana@arm.com, sjg@chromium.org
-Subject: Re: [PATCH 03/12] efi_loader: add FF-A runtime support in EFI
- variable TEE driver
-Message-ID: <af25uGoE7BBQpGhj@e130802.arm.com>
+To: Simon Glass <sjg@chromium.org>, harsimransingh.tungal@arm.com
+Cc: hugues.kambampiana@arm.com, ilias.apalodimas@linaro.org,
+ trini@konsulko.com, u-boot@lists.denx.de, xypron.glpk@gmx.de
+Subject: Re: [PATCH 12/12] efi_loader: align FF-A cache maintenance with
+ runtime path
+Message-ID: <af28MYL97NMcvsFz@e130802.arm.com>
 References: <20260424173151.371134-1-harsimransingh.tungal@arm.com>
- <20260424173151.371134-4-harsimransingh.tungal@arm.com>
- <CAC_iWj+TMCCMkRmAV3x2gh0LoxBt3pvkJgnojq48fCkJBFro+w@mail.gmail.com>
+ <20260424173151.371134-13-harsimransingh.tungal@arm.com>
+ <CAFLszTjVEhDxLN0btbo=Uczr7QMQpJF-T_7Sp78vvft-FYTPZQ@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <CAC_iWj+TMCCMkRmAV3x2gh0LoxBt3pvkJgnojq48fCkJBFro+w@mail.gmail.com>
+In-Reply-To: <CAFLszTjVEhDxLN0btbo=Uczr7QMQpJF-T_7Sp78vvft-FYTPZQ@mail.gmail.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,180 +68,84 @@ X-Virus-Status: Clean
 
 Hi Harsimran,
 
-> On Fri, 24 Apr 2026 at 20:32, Harsimran Singh Tungal
+> On 2026-04-24T17:31:50, Harsimran Singh Tungal
 > <harsimransingh.tungal@arm.com> wrote:
+> > efi_loader: align FF-A cache maintenance with runtime path
 > >
-> > Enable MM variable services over FF-A after ExitBootServices
+> > Match boot-time FF-A cache handling to runtime behavior
 > >
-> > This patch extends lib/efi_loader/efi_variable_tee.c to support FF-A
-> > communication with the secure world during EFI runtime. It enables EFI
-> > runtime variable access and MM communication using FF-A transport when
-> > ExitBootServices() has already been called.
+> > The boot-time FF-A MM communication path used invalidate_dcache_all()
+> > after copying the message into the shared buffer. This differs from the
+> > runtime path, which performs range-based maintenance to avoid global cache
+> > operations.
 > >
-> > Key changes:
-> >  ------------
-> >   - Introduce runtime-safe implementations for MM communication,
-> >     notification, and variable access using FF-A driver.
-> >   - Introduce communication-buffer helper (get_comm_buf()) that switches
-> >     between dynamic allocation (boot phase) and the fixed FF-A shared
-> >     buffer (runtime phase).
-> >   - Mark persistent data and code with __efi_runtime and
-> >     __efi_runtime_data attributes.
-> >   - Use direct physical address mapping for shared buffers since
-> >     U-Boot operates with 1:1 physical-to-virtual mapping.
-> >   - Only per-buffer cache maintenance is performed at runtime,
-> >     as whole D-cache invalidation would violate the OS coherency model
-> >     after ExitBootServices().
-> >   - Add runtime-phase tracking (efi_runtime_enabled).
-> 
-> Why is this needed? For the memory allocations?
-> 
-> [...]
-> 
-> >   *
-> >   *  Authors:
-> >   *    Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
-> > @@ -14,6 +14,7 @@
+> > Update ffa_mm_communicate() to use the same pattern as the runtime helper:
+> > clean the shared buffer range before the SMC and invalidate the same range
+> > after the response. This keeps boot-time and runtime behavior consistent
+> > and avoids whole-cache invalidation.
 > >
-> >  #if CONFIG_IS_ENABLED(ARM_FFA_TRANSPORT)
-> >  #include <arm_ffa.h>
-> > +#include <arm_ffa_runtime.h>
-> >  #endif
-> >  #include <cpu_func.h>
-> >  #include <dm.h>
-> > @@ -34,20 +35,47 @@
-> >  #define MM_DENIED (-3)
-> >  #define MM_NO_MEMORY (-5)
+> > Signed-off-by: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
+> > Signed-off-by: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
 > >
-> > +static const int __efi_runtime_rodata mm_sp_errmap[] = {
-> > +       [-MM_NOT_SUPPORTED]      = -EINVAL,
-> > +       [-MM_INVALID_PARAMETER]  = -EPERM,
-> > +       [-MM_DENIED]             = -EACCES,
-> > +       [-MM_NO_MEMORY]          = -EBUSY,
-> > +};
-> > +
+> > lib/efi_loader/efi_variable_tee.c | 33 ++++++++++++++++++++++++++-------
+> >  1 file changed, 26 insertions(+), 7 deletions(-)
 > 
-> These are already defined above and used in ffa_notify_mm_sp(). If you
-> plan to convert them, do it for the entire file.
-> 
-> [...]
-> 
-> > +/**
-> > + * efi_is_runtime_enabled() - Indicate whether the system is in the UEFI runtime phase
-> > + *
-> > + * This helper returns whether the firmware has transitioned into the
-> > + * UEFI runtime phase, meaning that ExitBootServices() has been invoked.
-> > + *
-> > + * Return:
-> > + *   true  - The system is operating in UEFI runtime mode.
-> > + *   false - The system is still in the boot services phase.
-> > + */
-> > +static bool __efi_runtime efi_is_runtime_enabled(void)
-> > +{
-> > +       return efi_runtime_enabled;
-> > +}
-> 
-> Enabled is a bit confusing. efi_at_runtime() should be enough. The
-> efi_tcg.c code calls this 'ebs_called'
-> 
-> > +
-> >  /**
-> >   * get_connection() - Retrieve OP-TEE session for a specific UUID.
-> >   *
-> > @@ -169,6 +197,28 @@ static efi_status_t optee_mm_communicate(void *comm_buf, ulong dsize)
-> >  }
+> > diff --git a/lib/efi_loader/efi_variable_tee.c b/lib/efi_loader/efi_variable_tee.c
+> > @@ -389,19 +389,38 @@ static efi_status_t ffa_mm_communicate(void *comm_buf, ulong comm_buf_size)
+> >       memcpy(virt_shared_buf, comm_buf, tx_data_size);
 > >
-> >  #if CONFIG_IS_ENABLED(ARM_FFA_TRANSPORT)
-> > +/**
-> > + * ffa_map_sp_event_runtime() - Map MM SP response to errno (runtime-safe)
-> > + * @sp_event_ret: MM SP return code from ffa_notify_mm_sp_runtime()
-> > + *
-> > + * Convert the MM SP return code into a standard U-Boot errno. This helper
-> > + * is marked __efi_runtime to ensure it is safe to call after
-> > + * ExitBootServices().
-> > + *
-> > + * Return: 0 on success, negative errno on failure
-> > + */
-> > +static __efi_runtime int ffa_map_sp_event_runtime(int sp_event_ret)
-> > +{
-> > +       int idx = -sp_event_ret;
-> > +
-> > +       if (sp_event_ret == MM_SUCCESS)
-> > +               return 0;
-> > +       if (idx > 0 && idx < (int)ARRAY_SIZE(mm_sp_errmap) &&
-> > +           mm_sp_errmap[idx])
-> > +               return mm_sp_errmap[idx];
-> > +       return -EACCES;
-> > +}
-> > +
-> >  /**
-> >   * ffa_notify_mm_sp() - Announce there is data in the shared buffer
-> >   *
-> > @@ -225,6 +275,35 @@ static int ffa_notify_mm_sp(void)
-> >         return ret;
-> >  }
-> >
-> > +/**
-> > + * ffa_notify_mm_sp_runtime() - Runtime implementation of
-> > + *                              ffa_notify_mm_sp()
-> > + *
-> > + * Notify the MM partition in the trusted world that
-> > + * data is available in the shared buffer.
-> > + * This is a blocking call during which trusted world has exclusive access
-> > + * to the MM shared buffer.
-> > + *
-> > + * Return:
-> > + *
-> > + * 0 on success
-> > + */
-> > +static int __efi_runtime ffa_notify_mm_sp_runtime(void)
-> > +{
-> > +       struct ffa_send_direct_data msg = {0};
-> > +       int ret;
-> > +       int sp_event_ret;
-> > +
-> > +       msg.data0 = CONFIG_FFA_SHARED_MM_BUF_OFFSET;
-> > +
-> > +       ret = ffa_sync_send_receive_runtime(mm_sp_id, &msg, 1);
-> > +       if (ret)
-> > +               return ret;
-> > +
-> > +       ret = ffa_map_sp_event_runtime(sp_event_ret);
-> > +       return ret;
-> > +}
-> > +
-> >  /**
-> >   * ffa_discover_mm_sp_id() - Query the MM partition ID
-> >   *
-> > @@ -360,6 +439,116 @@ static efi_status_t ffa_mm_communicate(void *comm_buf, ulong comm_buf_size)
-> >         return efi_ret;
-> >  }
-> >
-> > +/**
-> > + * ffa_mm_communicate_runtime() - Runtime implementation of ffa_mm_communicate()
-> > + * @comm_buf:          locally allocated communication buffer used for rx/tx
-> > + * @comm_buf_size:     communication buffer size
-> > + *
-> > + * Issue a door bell event to notify the MM partition (SP) running in OP-TEE
-> > + * that there is data to read from the shared buffer.
-> > + * Communication with the MM SP is performed using FF-A transport.
-> > + * On the event, MM SP can read the data from the buffer and
-> > + * update the MM shared buffer with response data.
-> > + * The response data is copied back to the communication buffer.
-> > + *
-> > + * Return:
-> > + *
-> > + * EFI status code
-> > + */
-> > +static efi_status_t __efi_runtime ffa_mm_communicate_runtime(void *comm_buf,
-> > +                                                            ulong comm_buf_size)
-> > +{
+> >       /*
+> > -      * The secure world might have cache disabled for
+> > -      * the device region used for shared buffer (which is the case for Optee).
+> > -      * In this case, the secure world reads the data from DRAM.
+> > -      * Let's flush the cache so the DRAM is updated with the latest data.
+> > +      * Shared buffer cache maintenance for FF-A / OP-TEE communication:
+> > +      *
+> > +      * NS -> S (request path):
+> > +      *
+> > +      * The non-secure side populates the shared buffer. If the buffer is cached
+> > +      * in NS, the updated bytes may reside in dirty D-cache lines and not yet be
+> > +      * visible in DDR. Since the secure world typically reads the shared buffer
+> > +      * directly from DDR (e.g. with caches disabled / non-coherent mapping), we
+> > +      * must clean the corresponding cache lines to the Point of Coherency (PoC)
+> > +      * before entering secure world.
+> > +      *
+> > +      * S -> NS (response path):
+> > +      *
+> > +      * The secure world may update the same shared buffer in DDR. After returning
+> > +      * to non-secure, any cached copies of that region in NS may be stale. We
+> > +      * therefore invalidate the shared buffer range after the FF-A call to drop
+> > +      * those lines and force subsequent reads to fetch the latest data from DDR.
+> >        */
 > 
-> There's a lot of code duplication between the boottime and runtime
-> variants, but I don;t see why we need it. Can't we have a single
-> function that works both boottime and runtime?
+> This 20-line comment is now duplicated verbatim with the one in
+> ffa_mm_communicate_runtime() introduced earlier in the series. Please
+> factor the clean-before / invalidate-after sequence into a small
+> helper (e.g. ffa_mm_buf_pre_call() / ffa_mm_buf_post_call()) so the
+> commentary lives in one place and the two paths cannot drift. The
+> runtime helper would add the extra 'no whole-cache invalidation after
+> ExitBootServices()' note at the call site.
+> 
+> > diff --git a/lib/efi_loader/efi_variable_tee.c b/lib/efi_loader/efi_variable_tee.c
+> > @@ -389,19 +389,38 @@ static efi_status_t ffa_mm_communicate(void *comm_buf, ulong comm_buf_size)
+> > -#ifdef CONFIG_ARM64
+> > -     invalidate_dcache_all();
+> > -#endif
+> > +     if (IS_ENABLED(CONFIG_ARM64))
+> > +             flush_dcache_range((unsigned long)virt_shared_buf,
+> > +                                (unsigned long)virt_shared_buf +
+> > +                                CONFIG_FFA_SHARED_MM_BUF_SIZE);
+> 
+> Just to check - flush_dcache_range() and invalidate_dcache_range() on
+> arm64 require start and end to be cache-line aligned, otherwise the
+> arch code warns and falls back to clean+invalidate of the partial
+> lines. CONFIG_FFA_SHARED_MM_BUF_ADDR and _SIZE need to be at least
+> CONFIG_SYS_CACHELINE_SIZE aligned - is that documented or enforced
+> anywhere? You could use BUILD_BUG_ON() near the call, perhaps?
 
-Ilias suggestion makes sense to me. Please address that.
+Let's make sure the CONFIG_FFA_SHARED_MM_BUF_ADDR and _SIZE
+are CONFIG_SYS_CACHELINE_SIZE aligned and document that in the Kconfig file.
+It is also a good idea to add the BUILD_BUG_ON() check.
 
 Regards,
 Abdellatif
