@@ -4,111 +4,108 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98291CD3445
-	for <u-boot@archiver.kernel.org>; Fri,  8 May 2026 15:28:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4476CD3445
+	for <u-boot@archiver.kernel.org>; Fri,  8 May 2026 15:28:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C94CE84D1F;
-	Fri,  8 May 2026 17:28:15 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 0D82784D23;
+	Fri,  8 May 2026 17:28:16 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="N7CWaL4/";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="DqLrrq33";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5CEF384D23; Fri,  8 May 2026 17:28:13 +0200 (CEST)
-Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
- [IPv6:2a00:1450:4864:20::62e])
+ id AC85984CF2; Fri,  8 May 2026 17:28:15 +0200 (CEST)
+Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
+ [IPv6:2a00:1450:4864:20::52b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 689A584CF2
- for <u-boot@lists.denx.de>; Fri,  8 May 2026 17:28:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F29D484D21
+ for <u-boot@lists.denx.de>; Fri,  8 May 2026 17:28:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-ba922426c5cso369649566b.3
- for <u-boot@lists.denx.de>; Fri, 08 May 2026 08:28:11 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1778254091; cv=none;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=linux.amoon@gmail.com
+Received: by mail-ed1-x52b.google.com with SMTP id
+ 4fb4d7f45d1cf-6763cc8775cso5770580a12.0
+ for <u-boot@lists.denx.de>; Fri, 08 May 2026 08:28:12 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1778254092; cv=none;
  d=google.com; s=arc-20240605;
- b=UzJ3k7J30y1L6ztTsoc/YIxLPr8m7fGXKi4clzWI0Q8OUI4YB7hM0wmuNId42YW9m5
- g31aZv3yXb7+gFlPpvI+QpCpboUQDN8z0/OPZKeuSu6+9eiw0gsFeu3xJVh8SPs7RENH
- 5/R6SljQMfENNrU1Y3J7BKsuxYum+ZeNK1Pshr6Q2o4E2Wu1oSF/y+ymQqCqUywRsa2n
- 7YaxhLBGrNj19CTibvRlUTDCTNd9xJt+aS6NJ+Z242+fqe4bPHV2Pmw6G+zIaVJIZas3
- BET6JNJFRJ1fxtMD9Fxwce0Q/1fBqAXxq+hc6ib6XRPfszN76eg33jehv1exLhEZF0Jy
- IF9g==
+ b=b3Zj3ebXMiRoV2mQyE0aUlS+oIoyWn9dTVTpeSDBKUKhXdnjh+SJX3NXH5ezgQOx/6
+ v2D8ygJAmlyJURY37jIb6mXnSwMff6ais8ihp9hDPXS3MvHxeMC41+DznqeZtT01OS/P
+ UmjJMTzTILVqr9OcqQZpyW1O6tw7KgrzLaqm87lIfy/Uwa5oqSCnVzXdc1OQCzLYVtQG
+ nIO0Zg56gfbkuTg3APwLeV37eSkzHhG5JQaMqUEnQPdFHc//IDdlaI0TQCvRoGZp2vpx
+ QVgKJtMLSgCB/70ky7IMA1ggN0tH6MIRHjT/YKnZVOOjyZ9u36D2xSp/STOVhLNEuk9I
+ trPw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=qrk0ES76V9wE0fgFD4SSim3Axp8T/rJqhzqYQNA3U7Y=;
- fh=cXLM2xWHT98EMji+CvqvFHfrMeoAXhLsVQYbWE9nUP8=;
- b=L2NGR8Mt9IfrEars7bPq5I03Qz/z0F4kjpbBRwHBkx9ViLDRku0YzOpbwUGxplO1m/
- rHLqXO129+k9VFOP8YMnLFg92pGlB0O4XCuP72Z+k70nRG3FGCkLa4KNfgyXFsALw1Bt
- sulwKx9Tnts1Aj05+6Ml7TZEHtSleNbzVmifq+gli02eQr5teZQp/zJOuv7l+pl7lS7n
- pLzUp52rm8FLhMiPiqnmC9Ybww/Zsx3X6D34rYvbi3uX4b740RyjOVyWDcfheReF8uoz
- HeruziQ1R22Uzhj43Gs0tC/R5qKJAwLswl8MLG5PFuQ/dKPZ/lcul8gYqOQFc3sMdHq+
- JoRg==; darn=lists.denx.de
+ bh=ZbfmXzT+/AdNUJYDKlxv5vllgy7fNUK0bcFoPydtDzI=;
+ fh=9GwbXVzlQvwRanQRb7RLg8HfbzXauhpTPJpli/UjO44=;
+ b=SMNySPkmFd7lHUY4hlxsyWzdTpRAGaMX31WgPeYpM8fzDeWhx4qrrdWhv453FD197d
+ +p6MeXWp4AXZAfp80l4qt7bsE+HRenYHacxvu/PSMtb9dEwQsTxpxWlpVVERF+Wzw5/O
+ SqEsxAd0HIQb4Fz9+J01Iw8YrHbE2BF1Ujyl0AglKpcupu+fo6EGn7EjRzY2LXvth6Jz
+ iqLEI+o4N8nav3RocCI9LpHgrT+cVm989pCGcONe4I/y5zpR7lll14UjCGIG3rIulkFY
+ U3UYCuQxZdf3xGFkKkuA8BbI4jCenthYLy55TLVRKcuolo6kha0z+trp55QD/Oifj0hE
+ 3V1w==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1778254091; x=1778858891; darn=lists.denx.de;
+ d=gmail.com; s=20251104; t=1778254092; x=1778858892; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=qrk0ES76V9wE0fgFD4SSim3Axp8T/rJqhzqYQNA3U7Y=;
- b=N7CWaL4/OS720mgiANQUk3Ij2Gki5vNlRNUSHC4ZmN2HmXy1FaSrKZcNHqP3R3EyvL
- iLC8Rx/jBQGVANE5Sr/LHVlCJP6upu7/w5jKkrSPxWXoo6F0y75SvZrbBSm9gQgGMH01
- 1pgjz4UsYk+SQxOkH7NeKxG+hAbDpDATN9mZU=
+ bh=ZbfmXzT+/AdNUJYDKlxv5vllgy7fNUK0bcFoPydtDzI=;
+ b=DqLrrq33JlFPQ8+Y9dtu2r9Z6amnf8WrHeyy7IK8HfHce9cIsekuKBdowbEne+s6AI
+ ciFVpeZe77wi4zjgcKy9cC/9FtqfaKM+q+9Clb+YCCxLuFZjW6FWH9hQDbzbgdXZJ9cj
+ +hG5jHjGgPN28cKxSB6uEfvvTszdEH4ECBFk+r3e3+cnmyqYwaYjIUcX6emgJaZw6UFQ
+ R5DHexm+JFA7Ft5UwBODmrbh/6wHl1NmqlntuVq6k5lFkWCZWaAQeLvWnp5kU063cBXg
+ Wm+C4Tt5SCAfaP0HVASX6roBV8iN19cGUrEMywxEs9VMMDRzk/yZy9fjjbOEj6GSbCBv
+ CXZA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778254091; x=1778858891;
+ d=1e100.net; s=20251104; t=1778254092; x=1778858892;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=qrk0ES76V9wE0fgFD4SSim3Axp8T/rJqhzqYQNA3U7Y=;
- b=V1YbK8wd2Ny9+0gt5PrFF88ATZd7wCmrueDgulh/ar9s6fNOFbQcfOSt9VRI2JeqxW
- 9qQiE3+7Xa62MLUmQecxRTal6gosTqi140Y5QF0Sl7YykdEgtr2z7P3HBt4xWflwmzUB
- vHzhXOhWrH9nH0R1jkseHbMFUDvy9t+RRJNf7ePGJkY/fxRKt8SvE6+JCuN+sv40F5V8
- nT0TNAAtFsFT6lBmzk3MF/68snJOZG+AbOFez5dg/YaJzuBF4KcvV5UE5KvrFtF7ng43
- 6CUIz3HwlkHh2XbnTWSu29da9v8mojHG4Ja8CVCkmQFgsaScnC1cJ8CZ7rgD1QvIgcss
- CJEg==
-X-Gm-Message-State: AOJu0Yz5DxhLla6Im9z0HKDduTQD34VVllIvFZ4xSg0sI9zSEyNkZLZx
- sLhR8Rp/n1lR4yf+yxH9/s4UlkzJIj5MHsbpF8huWKca+cfuyPIt5EjFnaytf/fIdpW1vBisSfa
- IDqHVSe0wB+rClG7nf2U6K2RoCVYFgrAFZr5u1HYt
-X-Gm-Gg: AeBDieuinEmTD1qiKk5VaeXrSrSSQxu9qBkXEI31C1ALfljSeQVrn+MRFtOh2Qx5XPR
- sZxaRKK+TI2v4Wi9RzyV8PbnV9TaWM5mMeJjImU2k0tcTMrEWKCScA3F4hx0NV0NQ+UZz8hytF6
- RoY+vpqpC+M8B0S+O8O40lyjlf7tnO5OfwLAk1zVZnAWh60w6aj//BKTsNeGSsyryjP4gzWVxT/
- 2wd9GYhlWucIg3p1UKWh7havGJLenGIYXd/kLYW4/TIIcGCHpKPLviOTu2IMiCHV7N+F5rqYN8d
- I8EMPw==
-X-Received: by 2002:a17:906:9f8a:b0:ba0:fd75:9c58 with SMTP id
- a640c23a62f3a-bc56d717ed5mr804201866b.32.1778254090655; Fri, 08 May 2026
- 08:28:10 -0700 (PDT)
+ bh=ZbfmXzT+/AdNUJYDKlxv5vllgy7fNUK0bcFoPydtDzI=;
+ b=C3yrF7V4haJsqgHUVP2p/+zSN5DlSClRlQ24oHGXVwyMTkWwnulJNoDV+cXs5Jujt4
+ kAbgps/h9iaYJeCSuBxiQiYSISUNSrbg/XCyCCDhxHtGWpjcJLlhYTNXiKr3EjL5Ql6Z
+ Z4ovHEMO81aJlu4rBdFmasmZFF050FOMxr//PKEBQxTzBK7Nogw60mvv3tR8esr/5lPn
+ n0iNEBcnsjsl4SdHuQt51Z0irctMVEtxraGmcNHu3M0MrxdZpqyRLdx/Dqy2WFj3jtKn
+ aWgno7ShYKoR1X6h2yzkQYIVz0vKE9pfiB78051LpmNEiEIITxFnT5h/SEQ0sQ0XxJbg
+ gJ9w==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ+NERPDbRSjE1DpCXA0LouJ9UuEeQ0RhOFQm/WOHTACIOxQz916i5cY6opkDg3Q+nx0b2PAKxk=@lists.denx.de
+X-Gm-Message-State: AOJu0YzNE9O97y/dZEywJ7KgPQcTQ0J/Mx6ePuthJv7i+aUfZTFKbrFY
+ LBlYPpDyXaFPJ2cE16MH04+aUfOJQzq7agsspcymQEwz/oHk1YlWcAYTJb/G56y6JokLWMyey67
+ isUFGO458yBNEoHueuAb6PxkZuUUaynI=
+X-Gm-Gg: Acq92OGAbgvXe8uDUukjaUPTJhbSn4hRMxbEHX+xQsxHNesjqdBVHBBmnYenn90DPC9
+ tdKlaIUf3KcRr8q3cQyPcGjXE3uIfQDNaUrESIX1zcybISiBg4FUvee4Y1vDpIrDbmgihTBIqiZ
+ 05s3mVXJdawykztCYeY/jTUm7vXTNJ9fB6tyOOs0PJPe9DL0TyNMdo12wcCWHe2+TwUZcgUtP3E
+ lH4GeY3aqPwBk5KhXc2ObWGrtgkQc/0+/oITu/Vj/2VcL/PBXdNsdf/888H8NuXu0w7cf90r3FX
+ dZJh
+X-Received: by 2002:a05:6402:1d48:b0:67b:847a:2dfb with SMTP id
+ 4fb4d7f45d1cf-67e0ddf044emr3374231a12.2.1778254092006; Fri, 08 May 2026
+ 08:28:12 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260507092843.358908-1-jens.wiklander@linaro.org>
- <20260507092843.358908-10-jens.wiklander@linaro.org>
-In-Reply-To: <20260507092843.358908-10-jens.wiklander@linaro.org>
-From: Simon Glass <sjg@chromium.org>
-Date: Fri, 8 May 2026 09:26:19 -0600
-X-Gm-Features: AVHnY4IeZwaY3p-RJujQkf6gZ1r9jbwml9NXyE_5eFnBjryjKXfTahuJBITSB5k
-Message-ID: <CAFLszTjDJ8_7pFKQGq=6NkEBNhY+sU70h_Ym3hLPD6jCkq8=EA@mail.gmail.com>
-Subject: Re: [RFC PATCH v2 09/64] usb: dwc3: import from kernel v4.6
-To: jens.wiklander@linaro.org
-Cc: u-boot@lists.denx.de, Marek Vasut <marex@denx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Andre Przywara <andre.przywara@arm.com>, 
- Andrew Goodbody <andrew.goodbody@linaro.org>, Anshul Dalal <anshuld@ti.com>, 
- Bin Meng <bmeng.cn@gmail.com>, Casey Connolly <casey.connolly@linaro.org>, 
- Chunfeng Yun <chunfeng.yun@mediatek.com>, Eddie Cai <eddie.cai.linux@gmail.com>,
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- Ion Agorria <ion@agorria.com>, Junhui Liu <junhui.liu@pigmoral.tech>,
- Kongyang Liu <seashell11234455@gmail.com>, 
- Lukasz Majewski <lukma@denx.de>, Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Patrice Chotard <patrice.chotard@foss.st.com>, 
- Quentin Schulz <quentin.schulz@cherry.de>, Rasmus Villemoes <ravi@prevas.dk>, 
- Ryder Lee <ryder.lee@mediatek.com>, Simon Glass <sjg@chromium.org>, 
- Stephan Gerhold <stephan.gerhold@linaro.org>,
- Svyatoslav Ryhel <clamor95@gmail.com>, 
- Tom Rini <trini@konsulko.com>, Varadarajan Narayanan <quic_varada@quicinc.com>,
- Weijie Gao <weijie.gao@mediatek.com>, Zixun LI <admin@hifiphile.com>, 
- Jerome Forissier <jerome.forissier@arm.com>
+References: <20260503-dwmmc-exynos-hs400-es-v2-0-3ff1526142a7@disroot.org>
+ <20260503-dwmmc-exynos-hs400-es-v2-1-3ff1526142a7@disroot.org>
+ <20260505190729.GA6951@l14.localdomain>
+ <DIBV2GMI0TCA.2NHUZI89OJUA0@disroot.org>
+ <20260507192245.GA18026@l14.localdomain>
+In-Reply-To: <20260507192245.GA18026@l14.localdomain>
+From: Anand Moon <linux.amoon@gmail.com>
+Date: Fri, 8 May 2026 20:57:53 +0530
+X-Gm-Features: AVHnY4IpxnVyXfB7W0PnR8wuXHYqeKTqVfndIbb5F6w5y00ClRZYuKShiTVHWU0
+Message-ID: <CANAwSgTgoGqMCkYg1-5yvkEWY2HGayNnwkWpzkZQMoqHufgYhQ@mail.gmail.com>
+Subject: Re: [PATCH v2 1/4] mmc: exynos_dw_mmc: add proper init sequence for
+ HS400 support
+To: Henrik Grimler <henrik@grimler.se>
+Cc: Kaustabh Chakraborty <kauschluss@disroot.org>, Peng Fan <peng.fan@nxp.com>,
+ u-boot@lists.denx.de, 
+ Minkyu Kang <mk7.kang@samsung.com>, Tom Rini <trini@konsulko.com>, 
+ Jaehoon Chung <jh80.chung@samsung.com>,
+ Sam Protsenko <semen.protsenko@linaro.org>, 
+ Lukas Timmermann <uboot@timmermann.space>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -126,52 +123,261 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2026-05-07T09:27:07, Jens Wiklander <jens.wiklander@linaro.org> wrote:
-> usb: dwc3: import from kernel v4.6
->
-> Sync Linux kernel dwc3 changes from v4.5 to v4.6.
->
-> The following files are preserved accross the import:
-> Makefile Kconfig dwc3-meson-g12a.c dwc3-meson-gxl.c dwc3-omap.c
-> dwc3-uniphier.c dwc3-generic.h dwc3-generic.c dwc3-generic-sti.c
-> dwc3-layerscape.c ti_usb_phy.c
->
-> Skipping unused files:
-> debugfs.c drd.c dwc3-exynos.c dwc3-haps.c dwc3-imx8mp.c dwc3-keystone.c
-> dwc3-octeon.c dwc3-of-simple.c dwc3-pci.c dwc3-qcom.c dwc3-qcom-legacy.c
-> dwc3-rtk.c dwc3-st.c dwc3-xilinx.c host.c trace.c trace.h ulpi.c
->
-> Note that this is a raw import and doesn't build.
-> A fixup commit at the end of the series fixes that.
->
-> List of commits: git log --oneline v4.5..v4.6
-> Commits imported:
-> 9772b47a4c29 usb: dwc3: gadget: Fix suspend/resume during device mode
-> e6bdf8195b4a usb: dwc3: fix memory leak of dwc->regset
-> 5c4ad318de3b usb: dwc3: core: fix PHY handling during suspend
-> 45d49cb706e5 usb: dwc3: omap: fix up error path on probe()
-> adf9a3ab90eb usb: dwc3: keystone: drop dma_mask configuration
-> 1ffb4d5cc78a usb: dwc3: pci: add ID for one more Intel Broxton platform
-> e901aa159dac usb: dwc3: gadget: fix endpoint renaming
-> ad14d4e0308a usb: dwc3: gadget: release spin lock during gadget resume
-> f59dcab17629 usb: dwc3: core: improve reset sequence
-> 33c1f638a0fe Merge tag 'clk-for-linus' of git://git.kernel.org/pub/scm/linux/kernel/git/clk/linux
-> 77966eb85e6d usb: dwc3: Validate the maximum_speed parameter
-> 7580862b3e80 usb: dwc3: Enable SuperSpeedPlus
-> 2c7f1bd9127a usb: dwc3: Update maximum_speed for SuperSpeedPlus
-> ee5cd41c9117 usb: dwc3: Update speed checks for SuperSpeedPlus
-> 1f38f88a24c8 usb: dwc3: Update register fields for SuperSpeedPlus
-> c4137a9c841e usb: dwc3: DWC_usb31 controller check
-> 71e41bbb4379 Merge 4.5-rc6 into usb-next
-> 3d755dcc20dd usb: dwc3: Remove impossible check for of_clk_get_parent_count() < 0
-> 172ad9af55d2 Merge 4.5-rc4 into usb-next
->
-> Signed-off-by: Jens Wiklander <jens.wiklander@linaro.org>
->
-> drivers/usb/dwc3/core.c   | 54 ++++++++++++++++++++++++++++++++++++++++++-----
->  drivers/usb/dwc3/core.h   | 11 +++++++++-
->  drivers/usb/dwc3/ep0.c    |  9 +++++---
->  drivers/usb/dwc3/gadget.c | 47 +++++++++++++++++++++++++++++++----------
->  4 files changed, 101 insertions(+), 20 deletions(-)
+Hi Henrik,
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+On Fri, 8 May 2026 at 00:55, Henrik Grimler <henrik@grimler.se> wrote:
+>
+> Hi Kaustabh,
+>
+> On Thu, May 07, 2026 at 01:33:28AM +0530, Kaustabh Chakraborty wrote:
+> > On 2026-05-05 21:07 +02:00, Henrik Grimler wrote:
+> > > Hi Kaustabh,
+> > >
+> > > On Sun, May 03, 2026 at 05:51:26PM +0530, Kaustabh Chakraborty wrote:
+> > >> HS400 support was added, but configuration necessary for HS400 support
+> > >> was left out. Add necessary changes, which includes:
+> > >> - Device tree properties, such as "samsung,dw-mshc-hs400-timing" and
+> > >>   "samsung,read-strobe-delay", which function as per dt-bindings.
+> > >> - Registers related to HS400, which are necessary to enable HS400+ support.
+> > >> - Appropriate timing tunings for the HS400 mode.
+> > >>
+> > >> Note that these changes are loosely based off of its Linux kernel
+> > >> counterpart.
+> > >>
+> > >> Fixes: bbe3b9fa0922 ("mmc: exynos_dw_mmc: add support for MMC HS200 and HS400 modes")
+> > >> Signed-off-by: Kaustabh Chakraborty <kauschluss@disroot.org>
+> > >
+> > > Reviewed-by: Henrik Grimler <henrik@grimler.se>
+> > >
+> > > This works fine on exynos5422-odroid-xu4 without hs400. I was not able
+> > > to get hs400 working on the device, seems more changes than just dts
+> > > update are needed.
+> >
+> > Do you have any logs or traces which may be able to help pinpoint it?
+> > I can try to figure out the issue(s) if you want me to.
+>
+> I fully synced the mmc dts node with linux variant. This device does
+> not have a pinctrl driver so pinctrl settings are not applied though,
+> so I also updated the exynos-pinmux mmc function. See attached diff.
+>
+> I then also enabled just CONFIG_MMC_HS400_SUPPORT, or both
+> MMC_HS400_SUPPORT and MMC_HS400_ES_SUPPORT. With MMC_HS400_ES_SUPPORT
+> I get:
+>
+> ODROID-XU3 # mmc info
+> Select HS400ES failed -22
+> unable to select a mode: -5
+>
+> And with just MMC_HS400_SUPPORT I get:
+>
+> ODROID-XU3 # mmc info
+> Select HS400 failed -110
+> unable to select a mode: -110
+>
+> I have not run it with additional debugging.
+>
+> I have plans to switch over to OF_UPSTREAM, and add a pinctrl driver,
+> maybe that would fix it. Probably not worth spending too much time
+> debugging it at this point.
+>
+We need to transition Exynos4 and Exynos5 SoCs to OF_UPSTREAM.
+I attempted this earlier, but the clock subsystem for these SoCs still
+requires work to function correctly in U-Boot.
+
+Thanks
+-Anand
+> Best regards,
+> Henrik Grimler
+>
+> > >
+> > > Best regards,
+> > > Henrik Grimler
+> > >
+> > >> ---
+> > >>  arch/arm/mach-exynos/include/mach/dwmmc.h |  5 ++
+> > >>  drivers/mmc/exynos_dw_mmc.c               | 81 +++++++++++++++++++++++++++++++
+> > >>  2 files changed, 86 insertions(+)
+> > >>
+> > >> diff --git a/arch/arm/mach-exynos/include/mach/dwmmc.h b/arch/arm/mach-exynos/include/mach/dwmmc.h
+> > >> index 4432deedef7..50081326c25 100644
+> > >> --- a/arch/arm/mach-exynos/include/mach/dwmmc.h
+> > >> +++ b/arch/arm/mach-exynos/include/mach/dwmmc.h
+> > >> @@ -15,6 +15,11 @@
+> > >>  #define DWMCI_SET_DRV_CLK(x)              ((x) << 16)
+> > >>  #define DWMCI_SET_DIV_RATIO(x)            ((x) << 24)
+> > >>
+> > >> +/* HS400 Related Registers */
+> > >> +#define DWMCI_HS400_DQS_EN                0x180
+> > >> +#define DWMCI_HS400_ASYNC_FIFO_CTRL       0x184
+> > >> +#define DWMCI_HS400_DLINE_CTRL            0x188
+> > >> +
+> > >>  /* Protector Register */
+> > >>  #define DWMCI_EMMCP_BASE          0x1000
+> > >>  #define EMMCP_MPSECURITY          (DWMCI_EMMCP_BASE + 0x0010)
+> > >> diff --git a/drivers/mmc/exynos_dw_mmc.c b/drivers/mmc/exynos_dw_mmc.c
+> > >> index 7ccd113bd79..6558cdc803d 100644
+> > >> --- a/drivers/mmc/exynos_dw_mmc.c
+> > >> +++ b/drivers/mmc/exynos_dw_mmc.c
+> > >> @@ -8,6 +8,7 @@
+> > >>  #include <dwmmc.h>
+> > >>  #include <asm/global_data.h>
+> > >>  #include <malloc.h>
+> > >> +#include <mmc.h>
+> > >>  #include <errno.h>
+> > >>  #include <asm/arch/dwmmc.h>
+> > >>  #include <asm/arch/clk.h>
+> > >> @@ -30,6 +31,14 @@
+> > >>  #define CLKSEL_UP_SAMPLE(x, y)            (((x) & ~CLKSEL_CCLK_SAMPLE(7)) | \
+> > >>                                     CLKSEL_CCLK_SAMPLE(y))
+> > >>
+> > >> +/* RCLK_EN register defines */
+> > >> +#define DATA_STROBE_EN                    BIT(0)
+> > >> +#define AXI_NON_BLOCKING_WR       BIT(7)
+> > >> +
+> > >> +/* DLINE_CTRL register defines */
+> > >> +#define DQS_CTRL_RD_DELAY(x, y)           (((x) & ~0x3FF) | ((y) & 0x3FF))
+> > >> +#define DQS_CTRL_GET_RD_DELAY(x)  ((x) & 0x3FF)
+> > >> +
+> > >>  /**
+> > >>   * DOC: Quirk flags for different Exynos DW MMC blocks
+> > >>   *
+> > >> @@ -71,6 +80,11 @@ struct dwmci_exynos_priv_data {
+> > >>    struct clk clk;
+> > >>    u32 sdr_timing;
+> > >>    u32 ddr_timing;
+> > >> +  u32 hs400_timing;
+> > >> +  u32 tuned_sample;
+> > >> +  u32 dqs_delay;
+> > >> +  u32 saved_dqs_en;
+> > >> +  u32 saved_strobe_ctrl;
+> > >>    const struct exynos_dwmmc_variant *chip;
+> > >>  };
+> > >>
+> > >> @@ -162,6 +176,27 @@ static u8 exynos_dwmmc_get_ciu_div(struct dwmci_host *host)
+> > >>                            & DWMCI_DIVRATIO_MASK) + 1;
+> > >>  }
+> > >>
+> > >> +static void exynos_config_hs400(struct dwmci_host *host, enum bus_mode mode)
+> > >> +{
+> > >> +  struct dwmci_exynos_priv_data *priv = exynos_dwmmc_get_priv(host);
+> > >> +  u32 dqs, strobe;
+> > >> +
+> > >> +  dqs = priv->saved_dqs_en;
+> > >> +  strobe = priv->saved_strobe_ctrl;
+> > >> +
+> > >> +  switch (mode) {
+> > >> +  case MMC_HS_400:
+> > >> +          dqs |= DATA_STROBE_EN;
+> > >> +          strobe = DQS_CTRL_RD_DELAY(strobe, priv->dqs_delay);
+> > >> +          break;
+> > >> +  default:
+> > >> +          dqs &= ~DATA_STROBE_EN;
+> > >> +  }
+> > >> +
+> > >> +  dwmci_writel(host, DWMCI_HS400_DQS_EN, dqs);
+> > >> +  dwmci_writel(host, DWMCI_HS400_DLINE_CTRL, strobe);
+> > >> +}
+> > >> +
+> > >>  /* Configure CLKSEL register with chosen timing values */
+> > >>  static int exynos_dwmci_clksel(struct dwmci_host *host)
+> > >>  {
+> > >> @@ -170,6 +205,9 @@ static int exynos_dwmci_clksel(struct dwmci_host *host)
+> > >>    u32 timing;
+> > >>
+> > >>    switch (host->mmc->selected_mode) {
+> > >> +  case MMC_HS_400:
+> > >> +          timing = CLKSEL_UP_SAMPLE(priv->hs400_timing, priv->tuned_sample);
+> > >> +          break;
+> > >>    case MMC_DDR_52:
+> > >>            timing = priv->ddr_timing;
+> > >>            break;
+> > >> @@ -186,6 +224,9 @@ static int exynos_dwmci_clksel(struct dwmci_host *host)
+> > >>
+> > >>    dwmci_writel(host, priv->chip->clksel, timing);
+> > >>
+> > >> +  if (CONFIG_IS_ENABLED(MMC_HS400_SUPPORT))
+> > >> +          exynos_config_hs400(host, host->mmc->selected_mode);
+> > >> +
+> > >>    return 0;
+> > >>  }
+> > >>
+> > >> @@ -223,6 +264,16 @@ static void exynos_dwmci_board_init(struct dwmci_host *host)
+> > >>  {
+> > >>    struct dwmci_exynos_priv_data *priv = exynos_dwmmc_get_priv(host);
+> > >>
+> > >> +  if (CONFIG_IS_ENABLED(MMC_HS400_SUPPORT)) {
+> > >> +          priv->saved_strobe_ctrl = dwmci_readl(host, DWMCI_HS400_DLINE_CTRL);
+> > >> +          priv->saved_dqs_en = dwmci_readl(host, DWMCI_HS400_DQS_EN);
+> > >> +          priv->saved_dqs_en |= AXI_NON_BLOCKING_WR;
+> > >> +          dwmci_writel(host, DWMCI_HS400_DQS_EN, priv->saved_dqs_en);
+> > >> +          if (!priv->dqs_delay)
+> > >> +                  priv->dqs_delay =
+> > >> +                          DQS_CTRL_GET_RD_DELAY(priv->saved_strobe_ctrl);
+> > >> +  }
+> > >> +
+> > >>    if (priv->chip->quirks & DWMCI_QUIRK_DISABLE_SMU) {
+> > >>            dwmci_writel(host, EMMCP_MPSBEGIN0, 0);
+> > >>            dwmci_writel(host, EMMCP_SEND0, 0);
+> > >> @@ -319,6 +370,22 @@ static int exynos_dwmmc_of_to_plat(struct udevice *dev)
+> > >>                               DWMCI_SET_DIV_RATIO(div);
+> > >>    }
+> > >>
+> > >> +  err = dev_read_u32_array(dev, "samsung,dw-mshc-hs400-timing", timing, 2);
+> > >> +  if (err) {
+> > >> +          debug("DWMMC%d: Can't get hs400-timings, using ddr-timings\n",
+> > >> +                host->dev_index);
+> > >> +          priv->hs400_timing = priv->ddr_timing;
+> > >> +  } else {
+> > >> +          priv->hs400_timing = DWMCI_SET_SAMPLE_CLK(timing[0]) |
+> > >> +                               DWMCI_SET_DRV_CLK(timing[1]) |
+> > >> +                               DWMCI_SET_DIV_RATIO(1);
+> > >> +          if (dev_read_u32(dev, "samsung,read-strobe-delay", &priv->dqs_delay)) {
+> > >> +                  priv->dqs_delay = 0;
+> > >> +                  debug("DWMMC%d: read-strobe-delay is not found, assuming usage of default value\n",
+> > >> +                        host->dev_index);
+> > >> +          }
+> > >> +  }
+> > >> +
+> > >>    host->buswidth = dev_read_u32_default(dev, "bus-width", 4);
+> > >>    host->fifo_depth = dev_read_u32_default(dev, "fifo-depth", 0);
+> > >>    host->bus_hz = dev_read_u32_default(dev, "clock-frequency", 0);
+> > >> @@ -356,6 +423,16 @@ static int exynos_dwmmc_get_best_clksmpl(u8 candidates)
+> > >>    return -EIO;
+> > >>  }
+> > >>
+> > >> +static int dw_mci_exynos_prepare_hs400_tuning(struct dwmci_host *host)
+> > >> +{
+> > >> +  struct dwmci_exynos_priv_data *priv = exynos_dwmmc_get_priv(host);
+> > >> +
+> > >> +  dwmci_writel(host, priv->chip->clksel, priv->hs400_timing);
+> > >> +  host->bus_hz = exynos_dwmci_get_clk(host, host->clock);
+> > >> +
+> > >> +  return 0;
+> > >> +}
+> > >> +
+> > >>  static int exynos_dwmmc_execute_tuning(struct udevice *dev, u32 opcode)
+> > >>  {
+> > >>    struct dwmci_exynos_priv_data *priv = dev_get_priv(dev);
+> > >> @@ -365,6 +442,9 @@ static int exynos_dwmmc_execute_tuning(struct udevice *dev, u32 opcode)
+> > >>    u32 clksel;
+> > >>    int ret;
+> > >>
+> > >> +  if (mmc->hs400_tuning)
+> > >> +          dw_mci_exynos_prepare_hs400_tuning(host);
+> > >> +
+> > >>    clksel = dwmci_readl(host, priv->chip->clksel);
+> > >>    start_smpl = CLKSEL_CCLK_SAMPLE(clksel);
+> > >>
+> > >> @@ -387,6 +467,7 @@ static int exynos_dwmmc_execute_tuning(struct udevice *dev, u32 opcode)
+> > >>            return ret;
+> > >>    }
+> > >>
+> > >> +  priv->tuned_sample = ret;
+> > >>    dwmci_writel(host, priv->chip->clksel, CLKSEL_UP_SAMPLE(clksel, ret));
+> > >>
+> > >>    return 0;
+> > >>
+> > >> --
+> > >> 2.53.0
+> > >>
+> >
