@@ -4,91 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7748CD3445
-	for <u-boot@archiver.kernel.org>; Fri,  8 May 2026 15:29:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F16C1CD3445
+	for <u-boot@archiver.kernel.org>; Fri,  8 May 2026 15:29:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7F67D84D0C;
-	Fri,  8 May 2026 17:29:08 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B68A684D23;
+	Fri,  8 May 2026 17:29:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MYdFJiP/";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="BEan3QMv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3E91284CF2; Fri,  8 May 2026 17:29:07 +0200 (CEST)
-Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
- [IPv6:2a00:1450:4864:20::629])
+ id 8E60A84D3C; Fri,  8 May 2026 17:29:17 +0200 (CEST)
+Received: from mail-pj1-x1030.google.com (mail-pj1-x1030.google.com
+ [IPv6:2607:f8b0:4864:20::1030])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 49DB484D38
- for <u-boot@lists.denx.de>; Fri,  8 May 2026 17:29:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4348C84D23
+ for <u-boot@lists.denx.de>; Fri,  8 May 2026 17:29:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-ba922426c5cso369837666b.3
- for <u-boot@lists.denx.de>; Fri, 08 May 2026 08:29:05 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1778254145; cv=none;
+Received: by mail-pj1-x1030.google.com with SMTP id
+ 98e67ed59e1d1-356337f058aso1455227a91.2
+ for <u-boot@lists.denx.de>; Fri, 08 May 2026 08:29:15 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1778254154; cv=none;
  d=google.com; s=arc-20240605;
- b=ZXXTT3Ehob3E9HTp625IloQVDX6MBFmY6t/ggG94RMheG13ugc8f923CKSamru1WXi
- v6Z0ZQgEz2zgG9MMOfqLbz8CNXmQviQw9imEfirqjfjX16r5s1qeLkJMQhgVTb9MTdRE
- W3jAKncqfHBOFhjthHNt/PGt24exe/JviOWZ8UVlZeJlXmvsaqyr5WAyJKwdV2D85ocy
- WsCkNce1uidvtxHHdN52faS2HOeLBtWTC8LUWbk7YIjkXfzPE+jFeLRtDRz/4AHTy5Fm
- 2BwCE7urzoGIfeLyri/RwsIRUMDvPjP12YzG0SP3Iq5tt7UNJ58wEaC/Wx0gs9Vn2ljH
- Zduw==
+ b=eRuLEUOhrk4VtisyrLD7hiWsKQg6v8+8Bls4WJpv0c1Sz/ehu2z2tgXt3JV1Fcqhe2
+ NTUQgTqINrvxJcNo9eE95hH4J+RT7Xx1RUG8TVQrqniidMuabTaCRkMAnaUxxd9qmCwo
+ jVPVVHwdAM46ueojIYKvVFP2Dx4rChqWXWZlvsSi73k8BbPyCxDK/3s2vVzetnL6caaK
+ PSevZnNxMbmtVUdA/VDVA3LQqZpLI+XI75u1ifmpVRelIBLt8uOYv+osGwDNLxMoSK/5
+ VCngg553sjWHqBhoQw9bdT+kE+Vywh+jUUENvItvOSZ4+YLwEnybk+iWJyWkucJmgaGQ
+ 3PLQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=zItbFJ/kH8bcQVjIBkUedC/RsiNj5fPrrmqEwLHCwcI=;
+ bh=yYN98aN8VGNx6MLoPHCa5eKujg0vdhfXCQxmOqw79Z8=;
  fh=cXLM2xWHT98EMji+CvqvFHfrMeoAXhLsVQYbWE9nUP8=;
- b=hlH861QT4t5O+NylqCemp5IIH6JcLM6OuB+P52JSRZzI2mqbJ1iLBEf7golPmeONyL
- HeAeJ//dQcKuofDnpX2sn/mUc5a7hV+LYxtIGVgHKxXjKHvBoP8qb/dsvCTZ+dahRxCd
- VQ3tLs0HFJM1dnvJrnCs05CfTiawUpZFqz2E/QY/M6yryvENM5mrD6N+Glg0D3+ARHxh
- IkpEmgSPwkbuDHUoJDuKTtiPiqoRGLHYV9FUOglY68H1smhHzqBJJTjcuw6tnF3/rPUG
- HZ9OFDQFhMqlFQjDSKmwk4xIzNfD8Z2PNf54gt8/PXvWvdQatf9+PVXHSxZ07PNujO6M
- M1fA==; darn=lists.denx.de
+ b=HaoGt7mZCy+FDf9isKJJeBpF6mKtc4lT0DIAd8NDB86fgPv3v9bxnWCdUcO8IY/UJ0
+ KflNAiugDuPxDcA9m9TXi0l37theDNiLS8iOnfjniTrZLBYjpGbnLq0glbVuZBsoQ4UD
+ I85PKyyWSmcDsUQHwkmA33Nad3iXg4BXUI2I7DNMKt4JkJAd+W+mGnpPm6EpHkp96QNI
+ Cz51b98/xu3bWgjIqPkn700C2sDoHa7eeX6dF0/YOePcvDwN3u/l7mBUGyRqVfxvZR5d
+ Bc7bqqt/SpdM/aJHnPDzkK8wdbrG8DDDi4pYeEX53YYpESeLib2pissEZpJw8y3flcbH
+ DV8g==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1778254145; x=1778858945; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1778254154; x=1778858954; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=zItbFJ/kH8bcQVjIBkUedC/RsiNj5fPrrmqEwLHCwcI=;
- b=MYdFJiP/+AUbqH14owoqxCsJ6lA+PoMcqN5B4WBNV0HB9wQH5zLl3sq4eN/7QS3wOX
- +ih22i93JyTJMCdasA7kwC74sy9RaI++a6BAKoamFZVZsRooRQBsdjZd4WpT6woJ641c
- mT9Vg4xiX23xA6vA4Em8XyZcFPw/g4hacDP18=
+ bh=yYN98aN8VGNx6MLoPHCa5eKujg0vdhfXCQxmOqw79Z8=;
+ b=BEan3QMvvGdlVbA9DyJoGW9RI51WU1Csz/4LBfRumT/b4ZhPcpAs6GmwX2DBrcCwrK
+ +YRyi8URzD4CisBhDyP4uSI0zd2tcAL/0sB9jUxhpMkuygmUGlo8VWcLlAqtlWXHmDxY
+ Prw2ex1JoKuFQL0Jm1oY5qQt2u0UG/radSaH4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778254145; x=1778858945;
+ d=1e100.net; s=20251104; t=1778254154; x=1778858954;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=zItbFJ/kH8bcQVjIBkUedC/RsiNj5fPrrmqEwLHCwcI=;
- b=L9Ng1mOaigd2ZbRPZgN10LmgR8QsiHWh6iuQylSpgPNE8elDYG4vAGMd2helCGprqr
- lA+JXv2TGBBkIocq7TL7H+tBAp7nZ001daTiWOGkXK7ytT2rLzBeTYCz576DuU/ypprX
- A00duWi9EcxQfZglaK8pQiAAfJ33ii823lvdiULeRKlibRoxvhsWCZvXA2qxW6gAhZe6
- 3xZkjmp2hpKPIDI9QKBdziIPESVPCWNt5xKk07v4YpT1sDsFIhCwM0B5MSY0IK2MGwt0
- mvSgZQZdD+hVUI3Cv8FzJkVVDiLF//wCvUxI7rl6LnR9AQhG39aPWwoM3ZJPTA9YGUG5
- o0NA==
-X-Gm-Message-State: AOJu0YyMXfUaRMb/syU0dICv0fm+6btINZyHTtrg5QQXWqp3BC04jAmT
- 21dd77A0NVaVW5hhP4716tr+8XlidjNR6jzhG9AhkNpzY9tZT/GtPes6wbEApHWOp4QSuvS44L7
- Xs64YWMuoD8MbPxHts35k5Sag/H4DWom0ZfZ/M4//
-X-Gm-Gg: Acq92OECCIVRgKIo51N8SVnSv0WPs8Vpg0jh8W1zf0KlE+wtxS+fKGJT23dlARDYsFJ
- FBTjbsZ5lWW3hnhIuKV13NsB2GiWYW7R5c2jQeaJ+Np81z4xt+HEv8Le8BpuX8gEp39GKWXFRv4
- Re0ps7B1g0lsnPsyulePC0CyO8H5xIoqUj2WP8p6grtlat29a4N+MDx1T0L3rZ7u4hXqXWPRxTK
- spR64B2ShAOvnU/XD0R1JUySv5A9qRxs3N56soDqqBVgpmjNefZ9kyajz9l9pr8UFqtLgPeX7C+
- eRl4uA==
-X-Received: by 2002:a17:906:fe42:b0:b9d:2fce:308b with SMTP id
- a640c23a62f3a-bc56d80c34fmr779534766b.30.1778254144404; Fri, 08 May 2026
- 08:29:04 -0700 (PDT)
+ bh=yYN98aN8VGNx6MLoPHCa5eKujg0vdhfXCQxmOqw79Z8=;
+ b=GkkFf69uagkU+USoKcqbvh5Lk3RjLxsbseD3WdRnWLtW1ptbwAC1xNYJGhrMoEfyIf
+ WmpXoqgZk+T6W/Mhhor069NxSUYwldsTfWsiDlHVsd9cOD17rzYuVhNRgouIAb4Rjwof
+ 6bgc/HjVBdU/8lHMA1oWc+JTXnR6k3FzR7qxXRBmx5AFbieXktj5jJBvB9ApqjAvwyeB
+ OFQNbhzj/lKSih6aZL68tUogQC7eiX61M+c3iBQCwGugiDrKt1qRWhKhOypp+lneY0ep
+ m2UkEMkLxaU+mEFUBL27sI9jMkPCEfF0IRZvgQKP60pP8cWgYIvpURHwCYLpI6n1UVpB
+ NWLg==
+X-Gm-Message-State: AOJu0YxIdOJBghTX2Eck/YyZ8DGTCxlBEWiTJkyfzSRKVKZg5xJIZEUP
+ 6Xgyv2skO7CNHFg3Oqp8fI1dUyTQsQPbdTRY7iywh2nk027ibVvVy+yEaBnM01uH4CVBTNf9Ume
+ TE9seOEGg9E8/WKPt7eRYuKdLpvdTDJ/mfXJGp/f5
+X-Gm-Gg: Acq92OGai/qxPJed4SLDpvPZSeE0BPTZ5xEFi8e9Oe1qt+qKFjsGRIZ69n4gD7d4Yve
+ 8tqJkjiZqux1+XB+2APCxLiXU2Bb/L7+lXln5eh4xF4RA/te+PUb+B/mVFXlkn+3k9SkS1UJrBa
+ DTZPFP+J/vcnJYC+bL34oyFUP0hGk1zmQxnVug88hqE13tXlJbcZBSyn/LeNmfOO7d5gvGt/fO0
+ 4JVQMTEBUcQiYhuxPOr/h7Pr+gKfyyXp2KwKDfGR/VrIq3542djXeiKfuKE1y64NkjMgdzhFgdT
+ wzpwDQ==
+X-Received: by 2002:a17:90a:2cc6:b0:366:132:fda6 with SMTP id
+ 98e67ed59e1d1-36601331eb6mr5979023a91.11.1778254153690; Fri, 08 May 2026
+ 08:29:13 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260507092843.358908-1-jens.wiklander@linaro.org>
- <20260507092843.358908-21-jens.wiklander@linaro.org>
-In-Reply-To: <20260507092843.358908-21-jens.wiklander@linaro.org>
+ <20260507092843.358908-22-jens.wiklander@linaro.org>
+In-Reply-To: <20260507092843.358908-22-jens.wiklander@linaro.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 8 May 2026 09:28:48 -0600
-X-Gm-Features: AVHnY4Kb7HllWkdyQbV6sT1WLCd0QP36VAMveSXAY-qX8pvas0s6orpdaxmZF_0
-Message-ID: <CAFLszTiTqB9x_giD_Gvf_5SHN5Z09d_fF+1MUph5uOuRbDsvMw@mail.gmail.com>
-Subject: Re: [RFC PATCH v2 20/64] usb: dwc3: import from kernel v4.17
+Date: Fri, 8 May 2026 09:28:50 -0600
+X-Gm-Features: AVHnY4Id25t3LhaVTc0jJSWsqE_hmPGmcSqISX2VP5G7XqiriiYCrRNX918OpdY
+Message-ID: <CAFLszThj1uAAm=308Pc3ASgQ=bjzVen=OfD2R5+05grUbCSCiQ@mail.gmail.com>
+Subject: Re: [RFC PATCH v2 21/64] usb: dwc3: import from kernel v4.18
 To: jens.wiklander@linaro.org
 Cc: u-boot@lists.denx.de, Marek Vasut <marex@denx.de>, 
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
@@ -127,9 +127,9 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 2026-05-07T09:27:07, Jens Wiklander <jens.wiklander@linaro.org> wrote:
-> usb: dwc3: import from kernel v4.17
+> usb: dwc3: import from kernel v4.18
 >
-> Sync Linux kernel dwc3 changes from v4.16 to v4.17.
+> Sync Linux kernel dwc3 changes from v4.17 to v4.18.
 >
 > The following files are preserved accross the import:
 > Makefile Kconfig dwc3-meson-g12a.c dwc3-meson-gxl.c dwc3-omap.c
@@ -144,41 +144,79 @@ On 2026-05-07T09:27:07, Jens Wiklander <jens.wiklander@linaro.org> wrote:
 > Note that this is a raw import and doesn't build.
 > A fixup commit at the end of the series fixes that.
 >
-> List of commits: git log --oneline v4.16..v4.17
+> List of commits: git log --oneline v4.17..v4.18
 > Commits imported:
-> 96bd39df29c2 usb: dwc3: gadget: Fix list_del corruption in dwc3_ep_dequeue
-> 9cffd15de0c3 usb: dwc3: gadget: dwc3_gadget_del_and_unmap_request() can be static
-> c91815b59624 usb: dwc3: gadget: never call ->complete() from ->ep_queue()
-> 6d23ee9caa67 Merge tag 'usb-for-v4.17' of git://git.kernel.org/pub/scm/linux/kernel/git/balbi/usb into usb-testing
-> 7d11c3ac6669 usb: dwc3: core: Fix broken system suspend/resume on AM437x
-> 2f3090c6a8f2 usb: dwc3: Check controller type before setting speed
-> 80b776340c78 usb: dwc3: Dump LSP and BMU debug info
-> 938a5ad1d305 usb: dwc3: Check for ESS TX/RX threshold config
-> 6743e817a4de usb: dwc3: Add DWC_usb31 GTXTHRCFG reg fields
-> 01b0e2cc7d89 usb: dwc3: gadget: Check IP revision for GRXTHRCFG
-> 2fbc5bdc8fd1 usb: dwc3: Add DWC_usb31 GRXTHRCFG bit fields
-> d548a61767fa usb: dwc3: Check IP revision for GTXFIFOSIZ
-> 0cab8d26d6e5 usb: dwc3: Update DWC_usb31 GTXFIFOSIZ reg fields
-> fab383333877 usb: dwc3: Add SoftReset PHY synchonization delay
-> cabdf83dadfb usb: dwc3: pci: Properly cleanup resource
-> de948a74ad6f usb: dwc3: Makefile: fix link error on randconfig
-> a8f25c36f732 Merge branch 4.16-rc6 into usb-next
-> 7642d8386ac7 usb: dwc3: ep0: remove redundant assignment
-> 498f0478aba4 usb: dwc3: Prevent indefinite sleep in _dwc3_set_mode during suspend/resume
-> f09cc79b4b33 usb: dwc3: add dual role support using OTG block
-> daaecc6541d0 usb: dwc3: prevent setting PRTCAP to OTG from debugfs
-> 4cff75c7fe3d usb: dwc3: core.h: add some register definitions
-> e8284db48f1f usb: dwc3: of-simple: add support for the Amlogic Meson GXL and AXG SoCs
-> ff0a632f0875 usb: dwc3: of-simple: add support for shared and pulsed reset lines
-> 6d5b53c1fd5c usb: dwc3: debugfs: Re-use DEFINE_SHOW_ATTRIBUTE() macro
-> 134d1fd44221 Merge 4.16-rc3 into usb-next
+> 9566a7c72f4f usb: dwc3: gadget: remove redundant variable maxpacket
+> 9925e6ebe5c2 usb: dwc3: qcom: mark PM functions as __maybe_unused
+> 93ef2dc0c4f7 usb: dwc3: Fix error return code in dwc3_qcom_probe()
+> 615277779f41 usb: dwc3: Only call clk_bulk_get() on devicetree instantiated devices
+> 896e518883f1 usb: dwc3: of-simple: fix use-after-free on remove
+> 00908693c481 usb: dwc3: pci: add support for Intel IceLake
+> 535c8dc5c480 USB: dwc3: no need to check return value of debugfs_create functions
+> 3bea1cfcff11 usb: dwc3: Remove DEBUG define from Qualcomm DWC3 glue driver
+> 05645366f389 usb: dwc3: gadget: Fix list_del corruption in dwc3_ep_dequeue
+> 691025107eb7 usb: dwc3: gadget: dwc3_gadget_del_and_unmap_request() can be static
+> edbbfe19444e usb: dwc3: dwc3_get_extcon() can be static
+> 31a2f5a7e136 usb: dwc3: gadget: init req->{direction,epnum} from alloc_request()
+> d7ca7e1896b2 usb: dwc3: gadget: initialize transfer index from send_gadget_ep_cmd()
+> 4439661d64f5 usb: dwc3: gadget: assign resource_index inside get_transfer_index()
+> f62afb4929a8 usb: dwc3: gadget: always start isochronous aligned to dep->interval
+> d513320f1fd0 usb: dwc3: gadget: don't issue End Transfer if we have started reqs
+> e1d542f712e1 usb: dwc3: debug: decode uFrame from event too
+> 42626919efab usb: dwc3: gadget: move dwc3_calc_trbs_left() in place of prototype
+> 20d1d43fa09a usb: dwc3: gadget: move set_xfer_resource() in place of prototype
+> b07c2db83f92 usb: dwc3: gadget: remove a few more dwc arguments
+> a2d23f08038e usb: dwc3: gadget: combine modify & restore into single argument
+> 8f1c99cd24b0 usb: dwc3: gadget: refactor dwc3_gadget_init_endpoints()
+> f38e35dd84e2 usb: dwc3: gadget: split dwc3_gadget_ep_cleanup_completed_requests()
+> 6d9d22dac114 usb: dwc3: gadget: get rid of the length variable
+> fee73e6144d8 usb: dwc3: gadget: reduce scope of ret variable
+> 6afbdb57732b usb: dwc3: gadget: one declaration per line
+> e0c42ce590fe usb: dwc3: gadget: simplify IOC handling
+> d80fe1b6e34d usb: dwc3: gadget: simplify short packet event
+> b27972b508d1 usb: dwc3: trace: print out event status too
+> 8b3b7b66c0e6 usb: dwc3: gadget: simplify unaligned and zlp handling
+> cf35fc336e66 usb: dwc3: gadget: remove unnecessary 'chain' variable
+> 021595963a3c usb: dwc3: gadget: remove PENDING handling from cleanup_completed
+> d36929538f8b usb: dwc3: gadget: split scatterlist and linear handlers
+> d5044a04b529 usb: dwc3: gadget: simplify isoc case on cleanup_completed_requests
+> fe990cea8ed5 usb: dwc3: gadget: simplify queueing of isoc transfers
+> 4d588a145b3e usb: dwc3: gadget: remove duplicated missed isoc handling
+> 6d8a019614f3 usb: dwc3: gadget: check for Missed Isoc from event status
+> 58f0218a271d usb: dwc3: gadget: remove unnecessary 'ioc' variable
+> 12a3a4ada816 usb: dwc3: gadget: make cleanup_completed_requests() return nothing
+> 5f2e7975f0df usb: dwc3: gadget: remove DWC3_EP_BUSY flag
+> 1912cbc60f44 usb: dwc3: gadget: start removing BUSY flag
+> ee3638b897b9 usb: dwc3: gadget: update dep->frame_number from XferInprogress too
+> 5828cada9908 usb: dwc3: gadget: always use frame number from XferNotReady
+> 8f608e8ab628 usb: dwc3: gadget: remove unnecessary 'dwc' parameter
+> 320338651d33 usb: dwc3: gadget: move handler closer to calling site
+> ed27442e5093 usb: dwc3: gadget: rename dwc3_gadget_start_isoc()
+> a24a6ab1493a usb: dwc3: gadget: remove some pointless checks
+> 0bd0f6d201eb usb: dwc3: gadget: remove allocated/queued request tracking
+> 66f5dd5a0379 usb: dwc3: gadget: rename done_trbs and done_reqs
+> a861282f5037 usb: dwc3: gadget: don't kick transfer all the time
+> fbea935accf4 usb: dwc3: gadget: rename dwc3_endpoint_transfer_complete()
+> 742a4fff5f29 usb: dwc3: gadget: XferComplete only for EP0
+> 38408464aa76 usb: dwc3: gadget: XferNotReady is Isoc-only
+> 52fcc0bead0f usb: dwc3: gadget: pre-issue Start Transfer for Interrupt EPs too
+> c96e6725db9d usb: dwc3: gadget: Correct the logic for queuing sgs
+> a31e63b608ff usb: dwc3: gadget: Correct handling of scattergather lists
+> 5f0b74e54890 USB: dwc3: get extcon device by OF graph bindings
+> fe8abf332b8f usb: dwc3: support clocks and resets for DWC3 core
+> 44feb8e6ea2d usb: dwc3: use local copy of resource to fix-up register offset
+> bcb128777af5 usb: dwc3: core: Suspend PHYs on runtime suspend in host mode
+> a4333c3a6ba9 usb: dwc3: Add Qualcomm DWC3 glue driver
+> e362098f0e12 usb: dwc3: of-simple: Add compatible for Allwinner H6 platform
 >
 > Signed-off-by: Jens Wiklander <jens.wiklander@linaro.org>
 >
-> drivers/usb/dwc3/core.c   | 132 ++++++++++++++++++++++++++++++++++++++---
->  drivers/usb/dwc3/core.h   | 146 ++++++++++++++++++++++++++++++++++++++++++++++
->  drivers/usb/dwc3/ep0.c    |   2 +-
->  drivers/usb/dwc3/gadget.c |  84 ++++++++++++++++++--------
->  4 files changed, 331 insertions(+), 33 deletions(-)
+> drivers/usb/dwc3/core.c   | 157 ++++++++--
+>  drivers/usb/dwc3/core.h   |  25 +-
+>  drivers/usb/dwc3/debug.h  |  26 +-
+>  drivers/usb/dwc3/ep0.c    |   9 +-
+>  drivers/usb/dwc3/gadget.c | 773 ++++++++++++++++++++++------------------------
+>  drivers/usb/dwc3/gadget.h |   5 +-
+>  6 files changed, 531 insertions(+), 464 deletions(-)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
