@@ -4,55 +4,104 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C318CD3436
-	for <u-boot@archiver.kernel.org>; Fri,  8 May 2026 07:28:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 069F7CD3436
+	for <u-boot@archiver.kernel.org>; Fri,  8 May 2026 08:21:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A69D784AF6;
-	Fri,  8 May 2026 09:28:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 44BA184B02;
+	Fri,  8 May 2026 10:21:36 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=flipper.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="kvM7fP1B";
+	dkim=pass (2048-bit key; unprotected) header.d=flipper.net header.i=@flipper.net header.b="hXVWTwzu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9247584B56; Fri,  8 May 2026 09:28:25 +0200 (CEST)
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 9395884B0E; Fri,  8 May 2026 10:21:35 +0200 (CEST)
+Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
+ [IPv6:2a00:1450:4864:20::533])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4F01384AB3
- for <u-boot@lists.denx.de>; Fri,  8 May 2026 09:28:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 31D2384AF6
+ for <u-boot@lists.denx.de>; Fri,  8 May 2026 10:21:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
+ header.from=flipper.net
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 1404360252;
- Fri,  8 May 2026 07:28:22 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 73B84C2BCB0;
- Fri,  8 May 2026 07:28:17 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1778225301;
- bh=FxJ9BmPhsc3qbDyU+Pzfz9Fn1Uq18pBQ+/fXW29rTOQ=;
- h=From:To:Cc:Subject:Date:From;
- b=kvM7fP1BCq7ls4azK/LnWuLBn1fQaSooIu0ttKDasI7roHXQTc0dWL58gKD1Nujg7
- JmbU0AMUospxHHT34Pb2g0j4jXSZ1sY8vJJbvEXmQBXvHa94v1wqBN23N5IGqcOQ4n
- 2lYeUkYgmGP0INkOv7cIUX1cCqZGiFEUue688PFvj/jPSN0/CRXX8GJqibiJq+l/zd
- V+VNIdziJLcY65WVwS1LAxAofStZeMD0+v9F2M8SfZmQtdV+EFa65xYTvjC2rzW6oO
- e7qhhm0ReBlsNi7qWZCafGOwgQH6ID+YSPrYt/XrheBtnPaKyV9HWCQ/wsSrf0jPpi
- I6uDCofx+sboQ==
-From: Sumit Garg <sumit.garg@kernel.org>
-To: u-boot@lists.denx.de,
-	u-boot-qcom@groups.io
-Cc: trini@konsulko.com, casey.connolly@linaro.org, neil.armstrong@linaro.org,
- ilias.apalodimas@linaro.org, varadarajan.narayanan@oss.qualcomm.com,
- aswin.murugan@oss.qualcomm.com, balaji.selvanathan@oss.qualcomm.com,
- Sumit Garg <sumit.garg@oss.qualcomm.com>
-Subject: [PATCH] armv8: mmu: Extend mmu_map_region() to allow uncached mappings
-Date: Fri,  8 May 2026 12:58:06 +0530
-Message-ID: <20260508072806.2421694-1-sumit.garg@kernel.org>
-X-Mailer: git-send-email 2.51.0
+ spf=pass smtp.mailfrom=alchark@flipper.net
+Received: by mail-ed1-x533.google.com with SMTP id
+ 4fb4d7f45d1cf-67e9b3037dcso1525113a12.0
+ for <u-boot@lists.denx.de>; Fri, 08 May 2026 01:21:33 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1778228492; cv=none;
+ d=google.com; s=arc-20240605;
+ b=dchuGxbToVliiVHt7ElnP5CUuPsZIHzgSZfaGFbmJw7QvynzyVstEDhsTKl5B+020N
+ S6uqD+CRnFLro0oaQAjC70cNpPOdYsVuEOw4hCCDYcbdns4z1aEFgzFxrg6VycmPwZu+
+ ctTRiui4dQSTWOuvR4OOl9PlSadpsCfByuMQJch8ODi/cn4DEPjwwvQDBZVcaWR+1Ecs
+ LdLtKAXJlWWFC5DGNDhMbGZQ5uN/sM9L7pXJE/RDVRRAPcJAbNLgsQAZIjzRpSrDoaX0
+ hX1bJRT7qIAuJHNLL7yflP+u4WX/qRmqs/xRq4ckC/tgp73lDzCPONPxz8O22iRUqtPk
+ vjGw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=I3RO3z9v9nfzB+u9695HWeO2nagR0niRVFgThWjpnaE=;
+ fh=K14gpZ6JKPaQhC9E5R+893RCU86w86q8zttNTAU9Ryw=;
+ b=fBgaqhdnuKakz1KIj+T2OOpPfvMAtDjFM16YCfQjk9UOt5PtAENZX2OzyHHf+W7WKz
+ fdJniB0ocvkVrL5YclaQoagTmLqKnrt6rpn4o0Xkd8vW6N/Gbmb/2miIUlFzv9A9FOYH
+ H3nJS89Y/cdYW+gp8MBx0VpkhI2zliR1R+ZePO86mbvEuCRXaSgHT/kgkEXZqKQWR5hN
+ 87HSdldztggo4sBnL3PQzpWnSfNP6fzQ1IMfCF297E/eKQlEmgxers5hnOyFYiPv+T2U
+ hoLqoM8+FMwURBzIjCvfcPfKJdMw4Vhovek7gqJX55mNDJ2wLOSaqKXJ/LLXGyOgKCDQ
+ NpDw==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=flipper.net; s=google; t=1778228492; x=1778833292; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=I3RO3z9v9nfzB+u9695HWeO2nagR0niRVFgThWjpnaE=;
+ b=hXVWTwzuZg2GENzQ6lFtVBb3ryyeT2dqdwcrRNJrDksXtn4bQgZvzonC0VlupxW6kS
+ aonTQ3Twi8v4eNuOE0ncsFqK7p0cknm05v/6+ERnLmPQUfODG+EdP+fDRcqRjpdKNiqg
+ 8PIneILY1atXVxO0xSJhxReEuJqtU+N0JK5b67NS+Q2hnujjvZhnef6BaeHxB5LX95Q/
+ oRkyFM+c7kHFM3iGcgJ2hyRLl9elQqJaQClqMLxEbt0IksAFJ1ld7B1NjhWCTp05IMYw
+ cK4Ej1CNhiormx5Dvy7InVrRSDqBe9BhoT0WH0j109YzDLRwe6jn/WqSW3ogEBwuNt1B
+ Jfnw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1778228492; x=1778833292;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=I3RO3z9v9nfzB+u9695HWeO2nagR0niRVFgThWjpnaE=;
+ b=lXtBx2nGNZdZh/Z55y26sKpLC+e8XWQoDnnFbvRYxWW+l6Z8dw+xfyaEY16hi0pbpi
+ V5tvmLHQBjaEUgNhipgfvTP2FOqhtJQmXd+L5T9bvoAEW0Q792URNyj4xxTeC5MTaUhj
+ fQB3Pm0c84qok0SQjBUKVHuMRzS+I4HvVFU0SDN0cg74SgMiTFgLk/99B3uiru+1nIg1
+ Mvx0TZXM8xAPqXwaYw3Ab2qCmL+3EVCZesbAQZtuOqh0MMkg2oJW28HKY3S3afGDKhMq
+ 0vgYZgZc+nio1cReuXkFBoV527ZZewe2sUN/31kBFVt2S+VoW7MQfmiN68vmyzELAY66
+ 0nCg==
+X-Gm-Message-State: AOJu0Yxk+WlqVyZzncctdtpHNg/aJ0mrby46SQhr7ZDlH+5h7vOyg2Cj
+ HM2RkiRYMNW4L2PbBE7hSwmKwPFbveNixLb7CpuHUGURdAgOvptR48cCmCm7Ltyh/sudiFSAL81
+ VgNT/v2avsUJQfU9fp2atPe+kgHrcpfbG0d7cINJfug==
+X-Gm-Gg: Acq92OFfCS4kOoua2SBTVKfBFp3LN0uQUV4tiqH4rAh14W98A0a7P9k7zfFfLODWt7P
+ Rz6NAYPJJ/zXNUgg1xytSeNex3s0+OMXB590nSK+zTKrPX9c61ObLxNH7Va+d4Je2Yo/8zEGgmt
+ Y7qn3wJ+sYqE/6mVZzzWYG5JwcN9gnGawGtRKnVk0IsU9A72oAsc3rcYAketoDdYnP56lR7cQN1
+ W7ZJgB+CHESMGze9OQgKB5Z+ZFkRTHDIt28/fyuq+A1s51q9xpit2mU/tfADo5epDvvbKxwEkRH
+ ZCr1nnPqPSg7Qx9wtBLt8/7x9zZGHrhp/dy/jHS/
+X-Received: by 2002:a17:907:9346:b0:bc3:b598:7f47 with SMTP id
+ a640c23a62f3a-bcaad226929mr107050766b.42.1778228492430; Fri, 08 May 2026
+ 01:21:32 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20260427-rk3576-usb-gadget-v1-1-982fd1de08db@flipper.net>
+ <13650571778172129@c82c52a0-4efd-47b9-b2a9-5a9057476b1d>
+In-Reply-To: <13650571778172129@c82c52a0-4efd-47b9-b2a9-5a9057476b1d>
+From: Alexey Charkov <alchark@flipper.net>
+Date: Fri, 8 May 2026 12:21:23 +0400
+X-Gm-Features: AVHnY4KvKbZSvI8CAgbHgzJC5zvtoY2GGOMJyNRUX1HdyYum1AS0xe9bqBJiSAU
+Message-ID: <CAKTNdwG-Keu5Gf9EA5TUw7mG-KGBLumOco54Gm=iRM2Oif-F7w@mail.gmail.com>
+Subject: Re: [PATCH] rockchip: rk3576: Properly handle USB controller takeover
+ from BootROM
+To: Anton Burticica <mouse@ya.ru>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ Tom Rini <trini@konsulko.com>, 
+ Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>, 
+ Kever Yang <kever.yang@rock-chips.com>, Jonas Karlman <jonas@kwiboo.se>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,81 +118,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Sumit Garg <sumit.garg@oss.qualcomm.com>
+On Thu, May 7, 2026 at 8:48=E2=80=AFPM Anton Burticica <mouse@ya.ru> wrote:
+>
+> The original idea was to _not_ disable USB3 OTG port when booted from USB=
+:
+>
+> https://github.com/flipperdevices/u-boot/pull/20/changes
 
-On Qcom platforms, cmd-db region is required to be mapped as uncached
-region especially when executing at EL2. Otherwise an xPU violation
-can be triggered due to cache operations as descibed by a similar fix
-for the kernel here:
+Hi Anton, thanks for the context!
 
-Commit f9bb896eab22 ("soc: qcom: cmd-db: Map shared memory as WC, not WB")
+It seems, however, that the minimal change out of your original pull
+request which fixes the observed initialization issue is just the
+assertion of the reset line. The rest may be helpful but is apparently
+not directly relevant to what I'm trying to fix here - thus the
+significantly trimmed down patch body compared to your original
+version (one change at a time).
 
-So, let's map CMD-DB region as uncached to avoid any issues while
-booting U-Boot in EL2 mode.
+> There is a possibility that with already running analogue blocks, disabli=
+ng the port will leave the controller in some weird state and it's not poss=
+ible to fully reset it via exposed reset lanes without full SoC reset.
 
-Fixes: a9cbf76e4dd3 ("soc: qcom: cmd-db: map cmd-db region")
-Signed-off-by: Sumit Garg <sumit.garg@oss.qualcomm.com>
----
- arch/arm/cpu/armv8/cache_v8.c | 11 ++++++++---
- arch/arm/include/asm/system.h |  3 ++-
- drivers/soc/qcom/cmd-db.c     |  2 +-
- 3 files changed, 11 insertions(+), 5 deletions(-)
+Could be. However, having a different initial hardware state by the
+time the driver loads, depending on the original bootsource, sounds
+like future pain.
 
-diff --git a/arch/arm/cpu/armv8/cache_v8.c b/arch/arm/cpu/armv8/cache_v8.c
-index 39479df7b21..05e90e1eb32 100644
---- a/arch/arm/cpu/armv8/cache_v8.c
-+++ b/arch/arm/cpu/armv8/cache_v8.c
-@@ -388,13 +388,18 @@ static void map_range(u64 virt, u64 phys, u64 size, int level,
- 	}
- }
- 
--void mmu_map_region(phys_addr_t addr, u64 size, bool emergency)
-+void mmu_map_region(phys_addr_t addr, u64 size, bool cached, bool emergency)
- {
- 	u64 va_bits;
- 	int level = 0;
--	u64 attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) | PTE_BLOCK_INNER_SHARE;
-+	u64 attrs;
- 
--	attrs |= PTE_TYPE_BLOCK | PTE_BLOCK_AF;
-+	if (cached)
-+		attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL);
-+	else
-+		attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL_NC);
-+
-+	attrs |= PTE_BLOCK_INNER_SHARE | PTE_TYPE_BLOCK | PTE_BLOCK_AF;
- 
- 	get_tcr(NULL, &va_bits);
- 	if (va_bits < 39)
-diff --git a/arch/arm/include/asm/system.h b/arch/arm/include/asm/system.h
-index 5ed6833c155..52ab86112fb 100644
---- a/arch/arm/include/asm/system.h
-+++ b/arch/arm/include/asm/system.h
-@@ -306,9 +306,10 @@ void flush_l3_cache(void);
-  *
-  * @start: Start address of the region
-  * @size: Size of the region
-+ * @cached: Map memory as cacheable or not
-  * @emerg: Also map the region in the emergency table
-  */
--void mmu_map_region(phys_addr_t start, u64 size, bool emerg);
-+void mmu_map_region(phys_addr_t start, u64 size, bool cached, bool emerg);
- 
- /**
-  * mmu_change_region_attr() - change a mapped region attributes
-diff --git a/drivers/soc/qcom/cmd-db.c b/drivers/soc/qcom/cmd-db.c
-index d0a6047b8a6..61e15783123 100644
---- a/drivers/soc/qcom/cmd-db.c
-+++ b/drivers/soc/qcom/cmd-db.c
-@@ -248,7 +248,7 @@ static int cmd_db_bind(struct udevice *dev)
- 	}
- 
- 	/* On SM8550/SM8650 and newer SoCs cmd-db might not be mapped */
--	mmu_map_region((phys_addr_t)base, (phys_size_t)size, false);
-+	mmu_map_region((phys_addr_t)base, (phys_size_t)size, false, false);
- 
- 	cmd_db_header = base;
- 	if (!cmd_db_magic_matches(cmd_db_header)) {
--- 
-2.51.0
+The Linux driver(s) also seem to be able to properly reinitialize the
+relevant hardware blocks regardless of where the boot ROM and U-boot
+left them, so I don't think we are dealing with a case of
+"unrecoverable weird state requiring full SoC reset". We just need to
+figure out what we are missing here, out of the substantial difference
+between the two codebases.
 
+> To: "u-boot@lists.denx.de" <u-boot@lists.denx.de>;
+> Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, Philip=
+p Tomsich <philipp.tomsich@vrull.eu>, Kever Yang <kever.yang@rock-chips.com=
+>, Jonas Karlman <jonas@kwiboo.se>, Anton Burticica <mouse@ya.ru>, Alexey C=
+harkov <alchark@flipper.net>;
+> Subject: [PATCH] rockchip: rk3576: Properly handle USB controller takeove=
+r from BootROM;
+> 15:53, April 27, 2026, Alexey Charkov <alchark@flipper.net>:
+>
+> From: Anton Burticica <mouse@ya.ru>
+>
+> When booting via USB download mode (Maskrom), the BootROM leaves the
+> USB3OTG0 controller in an active state. U-Boot must properly reset
+> the controller before reinitializing it for fastboot or other USB
+> gadget functions.
+>
+> Without this change, USB gadget mode commands such as fastboot and ums
+> fail when U-Boot is loaded via Maskrom USB download because the
+> controller state is inconsistent.
+>
+> Signed-off-by: Anton Burticica <mouse@ya.ru>
+> [Removed unrelated changes, adjusted the commit description]
+> Signed-off-by: Alexey Charkov <alchark@flipper.net>
+> ---
+>  arch/arm/mach-rockchip/rk3576/rk3576.c | 18 ++++++++++++++++++
+>  1 file changed, 18 insertions(+)
+
+[Please avoid top posting per mailing list etiquette, as that makes
+tracing the context for your reply harder]
+
+Best regards,
+Alexey
