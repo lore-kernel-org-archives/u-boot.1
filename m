@@ -4,95 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6270CD3445
-	for <u-boot@archiver.kernel.org>; Fri,  8 May 2026 18:48:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69C18CD342F
+	for <u-boot@archiver.kernel.org>; Fri,  8 May 2026 18:57:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9040B84DD6;
-	Fri,  8 May 2026 20:48:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id E2FB884DC3;
+	Fri,  8 May 2026 20:57:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="D0uGzzl4";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="FCm5+cSE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4558784D02; Fri,  8 May 2026 20:48:08 +0200 (CEST)
-Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
- [IPv6:2a00:1450:4864:20::52b])
+ id 90A8584DD6; Fri,  8 May 2026 20:57:55 +0200 (CEST)
+Received: from mail-oa1-x2e.google.com (mail-oa1-x2e.google.com
+ [IPv6:2001:4860:4864:20::2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7073D84DD6
- for <u-boot@lists.denx.de>; Fri,  8 May 2026 20:48:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D553D84D1B
+ for <u-boot@lists.denx.de>; Fri,  8 May 2026 20:57:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52b.google.com with SMTP id
- 4fb4d7f45d1cf-67b32c695efso5386450a12.1
- for <u-boot@lists.denx.de>; Fri, 08 May 2026 11:48:05 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1778266085; cv=none;
- d=google.com; s=arc-20240605;
- b=PAWqGobv1Y+svfZ7CeS2Y3p3mnrRvrF4M543LHi0ZEK/sou32E1tBPYbJ/NIAh/7b7
- GHFY7K/THY1F/I4jKqHmMN1NNjCydbU7W4pzGk2W/ZfFkK15QwMNwEdHn3/MuPrFZZro
- ssvZEOB0sHqGc9Bi0KpiN+Y6P6WrIP5q0X8DYENAezxH4Gyp+vVzwnpQ+6I8JP24vymq
- hpSk83b2zhwkw8xMNMcXuas0hKKODGH++pEUDfZTjdSDadeqzheM2ZIXzMzG6lJv3q4J
- Tcy+NtTFh0UdZ7V8dgzq8vyqVe/qMTKGqKa1Yhrgdg7j2rlUvpqhPiFXJ/jOo87sDxl/
- 15qw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=8Xpvj7HqzB0oA+0qdH8N3uNSqgnfG3sf1zlf5hyw18Q=;
- fh=7+NugGQ2fjuifNFbboBIeXRgPjkONDOweWugJxHsSfY=;
- b=cPvZ1r/XsvzYOfGm7V6xB+0JdEJmTAnHIhSMltv1CSFGY1GhqGgbjhwsnTe+WY8838
- 8GMxENi6xEu5ZuDB1GdZXA6eSn9v0TogpWWlX0etP1v4eBQeiu0LzBTUDL0vQS/VDKLm
- td40cDbtsG0cUv1h5Ip0WvBd5HlE2+U0UTJ3FhQeL6DKTRzjzjJYdddLK4A+FUaKlmNd
- WNwgOJO0FKBJ1LaXWxs/s8Vb7WNpqTUCOoHM768D/ZDEsyqZGDa5woqww00UcIynFrBO
- C2HXxWAszYUiBv267L+eGF9BZ2xerwQOrurGo8ButILQ+xJUOkQMdJnTc/R4p+EMh7jH
- Hv2w==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x2e.google.com with SMTP id
+ 586e51a60fabf-434e69e943bso1815491fac.3
+ for <u-boot@lists.denx.de>; Fri, 08 May 2026 11:57:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1778266085; x=1778870885; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=8Xpvj7HqzB0oA+0qdH8N3uNSqgnfG3sf1zlf5hyw18Q=;
- b=D0uGzzl47AIWNdTxDv4/sJAzlg1rTzptEBc0DpNjlOvtNW2TKm6Kc+NQFMoppiaGxi
- CWYLath64g9FHLPukmCdwMHiO/PtZmXTTi7zZcqCxEGAXfg/5wwYsdfu53Bdcrd+HSFx
- H16s8Gk0MviMuQdfkMrcQ+B+/VKTpmE8HCciQ=
+ d=konsulko.com; s=google; t=1778266671; x=1778871471; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=N6hq6jRph7nH/lCl4n9NaRxHNUrepy7nifySleLLGdU=;
+ b=FCm5+cSEyfv7gU11PzR/DVD9nfGR+PSczTNYg8KfAYF5XPe2o2ojRBDE/B+8RGOd3S
+ bAKEVkMS5ngjeHcFtVPixyZwpAtTDNCyeJJDl68R0J7fXFt5ph2PMiPa8A0e+bfIqiZx
+ 4nADwXG9Q57zWIlVI1gzXUsIY/4QGhJcWv6G0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778266085; x=1778870885;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=8Xpvj7HqzB0oA+0qdH8N3uNSqgnfG3sf1zlf5hyw18Q=;
- b=SeVQs8w5FzLG5W4j/fWXEvOBnXh31ftzOQknkwrGi9bMxncIyhakBt3eGrgjDN3Jl+
- A6daBNmE8ulkytkJO7Lesifdjm7+IaKo1pBSfVM/wR2ya8qL7dSO3RUMxfQ7fhOJBpfT
- dfd/tSalUArXnslon3vkBVP6FbLZK/fvw82qOERufhw/GkXtIF38DRUnzJE5zHU8Jscv
- Ysl/Ic0HTGCGymQWjsq/uKSY9c59L2BcH8uOmiJITOaYdyB0Es34kharWuCkJGolQyxC
- FPQJuvI9C+bPpDnujE229333E7msVIoxeDBVGQgkAyetXbBZRgKeV8FCfJ3xMWIYULkV
- 11BA==
-X-Gm-Message-State: AOJu0YzQ0FKqdbvVjW3VYBhL0y2SumNkfT1CckUHCk4FScYDDp5VrJNS
- upWbKSBiglLp1dwWr+VyIAwPPhWIbew+pgUvksM2s87HYMxhKSQEHYYriJpizK3Z332zvrennKg
- t4CMee1rOxi2oPAJPURm6DZpNz+TfEFMIIXfW6Kdg1aFCKA8mApo=
-X-Gm-Gg: AeBDiesBvDJ4alm7iwUGKRSwkwCDIBC8bZb+Ho9KwQpgGzQWzAji1zwCgMTaqfMG8Lz
- cC0AO3HGcfTXGM7EJVNNaEOPhD2YmxoC8NdBjJFuebzX++dqJNj6QLaXuIGMa3b2ZsiMG4gwUcD
- p9MQaL9ohNbFhwvQtNnEGs53zD4EFJ4UQUjjOfzj55dm4RRIkMhmVfG62dw3Mq5zI3b9/Yc+fQP
- Tb8936wjaREukBN2pK2r48cAc6VVJT7Lh7575/CPKRJ08E/mjkBcSXNHqB0jSpaIEvGzjwuBlsd
- 4O33lNx1UwQe1Ltb
-X-Received: by 2002:a17:907:1b29:b0:bc4:b981:d6eb with SMTP id
- a640c23a62f3a-bc85d3c2c6bmr437513866b.29.1778266084789; Fri, 08 May 2026
- 11:48:04 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1778266671; x=1778871471;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=N6hq6jRph7nH/lCl4n9NaRxHNUrepy7nifySleLLGdU=;
+ b=LaslkV4F4yWA8bDXXTY8iWa5Wwvpw1xxKTapk43+jbML58azkUWI7fHXkNRKoqZ5EN
+ U001bxZhLS0YYGNUd6C2Vmegtf4XsD8wiNONncooSMFtla27hbe2cNOAMTBr3aqbs3Qs
+ i11PCvvrIKU2BeY6MmsypSy7ADDxA50oZxPv80FQs5V/eOSt76zVumcT9Te/AJ1EFZqE
+ nbuRCNJCDfCDwG515Ojf9ABdE3fU7w+7znQdj1/WGnR6PfLGgaQ17Ftqdd178loDUccl
+ MQ2tw7SdPFaUUK6SpcqbikzYlwF1CqT/k2ELzbKCnI7OnPpzpzfyvQpynZrmhaJmpd/n
+ JOMA==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ81B05+P3FYTjasc7j3EQIFm6hh7jSTc7hCjayAAhVs37HpE72Qa/RMSnUZxOun3K+TL/vxGBs=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy644xZo0DTRh8VIHn5boL90v8VfHlTkG5iknbrGfqcVfFzfmyZ
+ +1WnyNv6kg8SU5Fekv5RFQu4VMT6B6U2rkBzwT+N1N72XgY6dVZ0fFVTfDDVQHxF+ZQ=
+X-Gm-Gg: AeBDievQKSOkhEpmp1S58BCI7d51z6u7Bbr6sfD8/x6b3tqY+CzfOjIhGC2qc2l0cBn
+ /UdlLiKvajICrE03Kk2DC3Lo+e6DrS/7WhMP90lLbH9gztH+zwUzQrmhCp2jLz/fIk4GsxgvFqF
+ 6alNAqZIHQ4X3nhOLhvzMVJmCAX7IU/TC4Jw8KSW3McqhEtbEDaOJHBSlB/pKjvoTuIfHU3bWLU
+ s2NLJjwX5Q14LcdBsES8aLwy4TkEQCXomRbloYrZoN7Ni5ZuFJbHfBbg/oWK3MCvUnDC53GJkQD
+ AyTL31kDOo5smGKshjyxjVzkSDgNDAXY5qZy5hAgAYYhdZywnPhc6r1WMKVhSONRs9ekXlSk+a/
+ e3Cnx+XlEH+ohTKbw47kStKd33RV0kuixQ8lm/b/kk3MjQcW6vU27kHRCVimQje8pMLX0aLTYv3
+ WbLMcn5XeEkt+tYXk1PaakvwcgvvVEn5UNzuqq9sgbiEni7ND+gimA6Hj9t7hxOnz2e/hvXbU1N
+ 7lqrrRZ5ECLFIn9aVBv0GyIfyKQwp1F4osxn0HzCPFlyPZ6JcdyRX+Yw80Fng==
+X-Received: by 2002:a4a:ec45:0:b0:696:924c:43cc with SMTP id
+ 006d021491bc7-69998d35da6mr7597852eaf.47.1778266671069; 
+ Fri, 08 May 2026 11:57:51 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
+ [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-435570ad8f4sm2427396fac.4.2026.05.08.11.57.48
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 08 May 2026 11:57:50 -0700 (PDT)
+Date: Fri, 8 May 2026 12:57:47 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Daniel Golle <daniel@makrotopia.org>
+Cc: Simon Glass <sjg@chromium.org>, Quentin Schulz <quentin.schulz@cherry.de>,
+ Kory Maincent <kory.maincent@bootlin.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Anshul Dalal <anshuld@ti.com>, Martin Schwan <m.schwan@phytec.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Sughosh Ganu <sughosh.ganu@arm.com>, Benjamin ROBIN <dev@benjarobin.fr>,
+ Ludwig Nussel <ludwig.nussel@siemens.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ James Hilliard <james.hilliard1@gmail.com>,
+ Kunihiko Hayashi <hayashi.kunihiko@socionext.com>,
+ Frank Wunderlich <frank-w@public-files.de>,
+ Mayuresh Chitale <mchitale@ventanamicro.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Wolfgang Wallner <wolfgang.wallner@at.abb.com>,
+ Shiji Yang <yangshiji66@outlook.com>,
+ Aristo Chen <jj251510319013@gmail.com>, Rasmus Villemoes <ravi@prevas.dk>,
+ Francois Berder <fberder@outlook.fr>, u-boot@lists.denx.de
+Subject: Re: [PATCH v3 0/7] fit: dm-verity support
+Message-ID: <20260508185747.GC1858239@bill-the-cat>
+References: <cover.1778171184.git.daniel@makrotopia.org>
 MIME-Version: 1.0
-References: <20260507220725.209205-1-marek.vasut+renesas@mailbox.org>
- <20260507220725.209205-2-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20260507220725.209205-2-marek.vasut+renesas@mailbox.org>
-From: Simon Glass <sjg@chromium.org>
-Date: Fri, 8 May 2026 12:47:53 -0600
-X-Gm-Features: AVHnY4Kj73H3Ov59kVq6QiWc8FNCIcbDm0B-ebtaoALXZkaF357e5F3yRy2g8HU
-Message-ID: <CAFLszTh4bEKqQdT_cCZwoD2jdrz1r4yvtyTNtE0QaDNPV+DZ2w@mail.gmail.com>
-Subject: Re: [PATCH 2/3] misc: i2c: eeprom-emul: Staticize and constify driver
- ops
-To: marek.vasut+renesas@mailbox.org
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="1UhQtqOHGY9IAtG0"
+Content-Disposition: inline
+In-Reply-To: <cover.1778171184.git.daniel@makrotopia.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -109,15 +114,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2026-05-07T22:07:14, Marek Vasut <marek.vasut+renesas@mailbox.org> wrote:
-> misc: i2c: eeprom-emul: Staticize and constify driver ops
->
-> Set the ops structure as static const. The structure is not accessible
-> from outside of this driver and is not going to be modified at runtime.
->
-> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
->
-> drivers/misc/i2c_eeprom_emul.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+--1UhQtqOHGY9IAtG0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Thu, May 07, 2026 at 05:40:15PM +0100, Daniel Golle wrote:
+
+> This series adds dm-verity support to U-Boot's FIT image infrastructure.
+> It is the first logical subset of the larger OpenWrt boot method series
+> posted as an RFC in February 2026 [1], extracted here for independent
+> review and merging.
+>=20
+> OpenWrt's firmware model embeds a read-only squashfs or erofs root
+> filesystem directly inside a uImage.FIT container as a FILESYSTEM-type
+> loadable FIT image. At boot the kernel maps this sub-image directly from
+> the underlying block device via the fitblk driver (/dev/fit0, /dev/fit1,
+> ...), the goal is that the bootloader never even copies it to RAM.
+>=20
+> dm-verity enables the kernel to verify the integrity of those mapped
+> filesystems at read time, with a Merkle hash tree stored contiguously in
+> the same sub-image just after the data. Two kernel command-line
+> parameters are required:
+>=20
+>   dm-mod.create=3D   -- the device-mapper target table for the verity dev=
+ice
+>   dm-mod.waitfor=3D  -- a comma-separated list of block devices to wait f=
+or
+>                       before dm-init sets up the targets (needed when fit=
+blk
+>                       probes late, e.g. because it depends on NVMEM
+>                       calibration data)
+>=20
+> The FIT dm-verity node schema was upstreamed into the flat-image-tree
+> specification [2], which this implementation tries to follow exactly.
+>=20
+> The runtime feature is guarded behind CONFIG_FIT_VERITY. If not
+> enabled the resulting binary size remains unchanged. If enabled the
+> binary size increases by about 3kB.
+
+So one thing is that sandbox needs to enable this, so that CI can run
+the tests (and we can see the tests run, and there's no new warnings,
+etc). That can be a follow-up and not a full respin, pending other
+feedback.
+
+--=20
+Tom
+
+--1UhQtqOHGY9IAtG0
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaf4yJwAKCRAr4qD1Cr/k
+ChDlAP9pHmo21Rjo7kz5pfeS3apRrYWZYu5vdgmCNtyOYfccoAD9Eg58cT7f2223
+1TrJgEg+Gqmfee0marzmM1QvvfvSyAc=
+=gubg
+-----END PGP SIGNATURE-----
+
+--1UhQtqOHGY9IAtG0--
