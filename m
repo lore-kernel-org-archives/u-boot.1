@@ -4,37 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 003DECD3436
-	for <u-boot@archiver.kernel.org>; Fri,  8 May 2026 15:42:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D20CCD3445
+	for <u-boot@archiver.kernel.org>; Fri,  8 May 2026 15:42:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8CBB084D5A;
-	Fri,  8 May 2026 17:42:43 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3C23684D6D;
+	Fri,  8 May 2026 17:42:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=lst.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 757A184D64; Fri,  8 May 2026 17:42:42 +0200 (CEST)
+ id A227A84D5B; Fri,  8 May 2026 17:42:48 +0200 (CEST)
 Received: from verein.lst.de (verein.lst.de [213.95.11.211])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5DC6684D2F
- for <u-boot@lists.denx.de>; Fri,  8 May 2026 17:42:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4E6EA84D2F
+ for <u-boot@lists.denx.de>; Fri,  8 May 2026 17:42:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=lst.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=duwe@lst.de
 Received: by verein.lst.de (Postfix, from userid 2005)
- id 1E16368BFE; Fri,  8 May 2026 17:42:39 +0200 (CEST)
-To: Simon Glass <sjg@chromium.org>
+ id 0E24868BFE; Fri,  8 May 2026 17:42:45 +0200 (CEST)
+To: Bin Meng <bmeng.cn@gmail.com>, Andrew Goodbody <andrew.goodbody@linaro.org>
 Cc: Peter Robinson <pbrobinson@gmail.com>, Matthias Brugger <mbrugger@suse.com>,
-    Bin Meng <bmeng.cn@gmail.com>, Andrew Goodbody <andrew.goodbody@linaro.org>,
     Tom Rini <trini@konsulko.com>, Andrea della Porta <andrea.porta@suse.com>,
-    Neil Armstrong <neil.armstrong@linaro.org>, "Jan Čermák" <sairon@sairon.cz>,
-    u-boot@lists.denx.de
-Subject: [PATCH 1/3] core: Skip parent device nodes without a DT reference
- when looking for dma-ranges
+    Neil Armstrong <neil.armstrong@linaro.org>, Simon Glass <sjg@chromium.org>,
+    "Jan Čermák" <sairon@sairon.cz>, u-boot@lists.denx.de
+Subject: [PATCH 2/3] nvme: Fix missing address translation for PCIe inbound
+ access
 In-Reply-To: <20260508154108.336B968BEB@verein.lst.de>
 References: <20260508154108.336B968BEB@verein.lst.de>
-Message-Id: <20260508154239.1E16368BFE@verein.lst.de>
-Date: Fri,  8 May 2026 17:42:39 +0200 (CEST)
+Message-Id: <20260508154245.0E24868BFE@verein.lst.de>
+Date: Fri,  8 May 2026 17:42:45 +0200 (CEST)
 From: duwe@lst.de (Torsten Duwe)
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -54,46 +53,136 @@ X-Virus-Status: Clean
 
 From: Torsten Duwe <duwe@suse.de>
 
-If a device node got created dynamically, there is no guarantee that the
-parent node has an associated device tree node which could specify dma
-constraints. Especially PCI(e) enumeration adds intermediate "bus nodes",
-also dynamically.
+U-Boot currently does not account for PCIe bridges with a non-zero
+inbound access offset when talking NVMe, it only works on platforms
+where this offset happens to be zero.
 
-Try harder to find the correct configuration by walking up the tree until
-a DT association is found.
+This patch enhances the NVMe driver with the ability to also handle
+these cases.
 
-Suggested-by: Neil Armstrong <neil.armstrong@linaro.org>
 Signed-off-by: Torsten Duwe <duwe@suse.de>
 
 ---
- drivers/core/device.c | 14 +++++++++++++-
- 1 file changed, 13 insertions(+), 1 deletion(-)
+ drivers/nvme/nvme.c | 34 +++++++++++++++++++++-------------
+ 1 file changed, 21 insertions(+), 13 deletions(-)
 
-diff --git a/drivers/core/device.c b/drivers/core/device.c
-index 779f371b9d5..9de64dbb3c5 100644
---- a/drivers/core/device.c
-+++ b/drivers/core/device.c
-@@ -459,7 +459,19 @@ static int device_get_dma_constraints(struct udevice *dev)
- 	u64 size = 0;
- 	int ret;
+diff --git a/drivers/nvme/nvme.c b/drivers/nvme/nvme.c
+index 2b14437f69c..99a47bf25f2 100644
+--- a/drivers/nvme/nvme.c
++++ b/drivers/nvme/nvme.c
+@@ -12,6 +12,7 @@
+ #include <log.h>
+ #include <malloc.h>
+ #include <memalign.h>
++#include <phys2bus.h>
+ #include <time.h>
+ #include <dm/device-internal.h>
+ #include <linux/compat.h>
+@@ -27,6 +28,13 @@
+ #define IO_TIMEOUT		30
+ #define MAX_PRP_POOL		512
  
--	if (!CONFIG_IS_ENABLED(DM_DMA) || !parent || !dev_has_ofnode(parent))
-+	if (!CONFIG_IS_ENABLED(DM_DMA) || !parent)
-+		return 0;
++/*
++ * Convert a memory address to the value needed by the PCI device to
++ * access the given location, taking into account inbound window
++ * translations of PCI bridges:
++ */
++#define DEV_ADDR(a)		dev_phys_to_bus(dev->udev, (a))
 +
-+	/* Look for the first node in the parent chain */
-+	while (parent) {
-+		if (dev_has_ofnode(parent))
-+			break;
-+
-+		parent = dev_get_parent(parent);
-+	}
-+
-+	/* No parents have a node, bail out */
-+	if (!parent)
- 		return 0;
+ static int nvme_wait_csts(struct nvme_dev *dev, u32 mask, u32 val)
+ {
+ 	int timeout;
+@@ -91,12 +99,12 @@ static int nvme_setup_prps(struct nvme_dev *dev, u64 *prp2,
+ 	i = 0;
+ 	while (nprps) {
+ 		if ((i == (prps_per_page - 1)) && nprps > 1) {
+-			*(prp_pool + i) = cpu_to_le64((ulong)prp_pool +
+-					page_size);
++			*(prp_pool + i) = cpu_to_le64(DEV_ADDR((ulong)prp_pool +
++								page_size));
+ 			i = 0;
+ 			prp_pool += page_size;
+ 		}
+-		*(prp_pool + i++) = cpu_to_le64(dma_addr);
++		*(prp_pool + i++) = cpu_to_le64(DEV_ADDR(dma_addr));
+ 		dma_addr += page_size;
+ 		nprps--;
+ 	}
+@@ -393,8 +401,8 @@ static int nvme_configure_admin_queue(struct nvme_dev *dev)
+ 	dev->ctrl_config |= NVME_CC_IOSQES | NVME_CC_IOCQES;
  
- 	/*
+ 	writel(aqa, &dev->bar->aqa);
+-	nvme_writeq((ulong)nvmeq->sq_cmds, &dev->bar->asq);
+-	nvme_writeq((ulong)nvmeq->cqes, &dev->bar->acq);
++	nvme_writeq(DEV_ADDR((ulong)nvmeq->sq_cmds), &dev->bar->asq);
++	nvme_writeq(DEV_ADDR((ulong)nvmeq->cqes), &dev->bar->acq);
+ 
+ 	result = nvme_enable_ctrl(dev);
+ 	if (result)
+@@ -420,7 +428,7 @@ static int nvme_alloc_cq(struct nvme_dev *dev, u16 qid,
+ 
+ 	memset(&c, 0, sizeof(c));
+ 	c.create_cq.opcode = nvme_admin_create_cq;
+-	c.create_cq.prp1 = cpu_to_le64((ulong)nvmeq->cqes);
++	c.create_cq.prp1 = cpu_to_le64(DEV_ADDR((ulong)nvmeq->cqes));
+ 	c.create_cq.cqid = cpu_to_le16(qid);
+ 	c.create_cq.qsize = cpu_to_le16(nvmeq->q_depth - 1);
+ 	c.create_cq.cq_flags = cpu_to_le16(flags);
+@@ -437,7 +445,7 @@ static int nvme_alloc_sq(struct nvme_dev *dev, u16 qid,
+ 
+ 	memset(&c, 0, sizeof(c));
+ 	c.create_sq.opcode = nvme_admin_create_sq;
+-	c.create_sq.prp1 = cpu_to_le64((ulong)nvmeq->sq_cmds);
++	c.create_sq.prp1 = cpu_to_le64(DEV_ADDR((ulong)nvmeq->sq_cmds));
+ 	c.create_sq.sqid = cpu_to_le16(qid);
+ 	c.create_sq.qsize = cpu_to_le16(nvmeq->q_depth - 1);
+ 	c.create_sq.sq_flags = cpu_to_le16(flags);
+@@ -458,14 +466,14 @@ int nvme_identify(struct nvme_dev *dev, unsigned nsid,
+ 	memset(&c, 0, sizeof(c));
+ 	c.identify.opcode = nvme_admin_identify;
+ 	c.identify.nsid = cpu_to_le32(nsid);
+-	c.identify.prp1 = cpu_to_le64(dma_addr);
++	c.identify.prp1 = cpu_to_le64(DEV_ADDR(dma_addr));
+ 
+ 	length -= (page_size - offset);
+ 	if (length <= 0) {
+ 		c.identify.prp2 = 0;
+ 	} else {
+ 		dma_addr += (page_size - offset);
+-		c.identify.prp2 = cpu_to_le64(dma_addr);
++		c.identify.prp2 = cpu_to_le64(DEV_ADDR(dma_addr));
+ 	}
+ 
+ 	c.identify.cns = cpu_to_le32(cns);
+@@ -490,7 +498,7 @@ int nvme_get_features(struct nvme_dev *dev, unsigned fid, unsigned nsid,
+ 	memset(&c, 0, sizeof(c));
+ 	c.features.opcode = nvme_admin_get_features;
+ 	c.features.nsid = cpu_to_le32(nsid);
+-	c.features.prp1 = cpu_to_le64(dma_addr);
++	c.features.prp1 = cpu_to_le64(DEV_ADDR(dma_addr));
+ 	c.features.fid = cpu_to_le32(fid);
+ 
+ 	ret = nvme_submit_admin_cmd(dev, &c, result);
+@@ -516,7 +524,7 @@ int nvme_set_features(struct nvme_dev *dev, unsigned fid, unsigned dword11,
+ 
+ 	memset(&c, 0, sizeof(c));
+ 	c.features.opcode = nvme_admin_set_features;
+-	c.features.prp1 = cpu_to_le64(dma_addr);
++	c.features.prp1 = cpu_to_le64(DEV_ADDR(dma_addr));
+ 	c.features.fid = cpu_to_le32(fid);
+ 	c.features.dword11 = cpu_to_le32(dword11);
+ 
+@@ -785,8 +793,8 @@ static ulong nvme_blk_rw(struct udevice *udev, lbaint_t blknr,
+ 		c.rw.slba = cpu_to_le64(slba);
+ 		slba += lbas;
+ 		c.rw.length = cpu_to_le16(lbas - 1);
+-		c.rw.prp1 = cpu_to_le64(temp_buffer);
+-		c.rw.prp2 = cpu_to_le64(prp2);
++		c.rw.prp1 = cpu_to_le64(DEV_ADDR(temp_buffer));
++		c.rw.prp2 = cpu_to_le64(DEV_ADDR(prp2));
+ 		status = nvme_submit_sync_cmd(dev->queues[NVME_IO_Q],
+ 				&c, NULL, IO_TIMEOUT);
+ 		if (status)
 -- 
 2.54.0
 
