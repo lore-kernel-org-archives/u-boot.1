@@ -4,54 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D010CD342F
-	for <u-boot@archiver.kernel.org>; Fri,  8 May 2026 04:07:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89E68CD342F
+	for <u-boot@archiver.kernel.org>; Fri,  8 May 2026 04:08:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BAD8184AF1;
-	Fri,  8 May 2026 06:07:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
+	by phobos.denx.de (Postfix) with ESMTP id 1EE1B84AF1;
+	Fri,  8 May 2026 06:08:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=seznam.cz
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="RUKubaOF";
+	dkim=pass (2048-bit key; secure) header.d=seznam.cz header.i=@seznam.cz header.b="BLMr7YPs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9385A84B02; Fri,  8 May 2026 06:07:04 +0200 (CEST)
-Received: from mx.nabladev.com (mx.nabladev.com
- [IPv6:2a00:f820:417:0:178:251:229:89])
+ id E70A584C1A; Fri,  8 May 2026 02:34:34 +0200 (CEST)
+Received: from mxd-2-a03.seznam.cz (mxd-2-a03.seznam.cz
+ [IPv6:2a02:598:64:8a00::1000:a03])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4D2F884ADF
- for <u-boot@lists.denx.de>; Fri,  8 May 2026 06:07:02 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=nabladev.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@nabladev.com
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 5A6211128A4; Fri,  8 May 2026 06:07:00 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
- s=dkim; t=1778213221;
- h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:content-language:in-reply-to:references;
- bh=kT9GYkJq/1OL0AY1pMW/R0CsCs6+AsjQ7wDZZC0duQo=;
- b=RUKubaOFiMr56/3NsdIkiYhDXD/uSrpNONtFFjuXOXQ3F448Zx8yljIuK9/P64Nx4npSPk
- YbAB9u45X5EPuLPTeuPafKMAaj8WSRfRRv35yDyLVs7Y7lRqKDlc2uOd1oXbwniRrc8Sq1
- 48qCCxD3HKBuWsflYSIi2KuhssfYTH+xqdO+DBUhnUxdyLGyfxMELel/xntxd4y3Z+bZdI
- xHUByvI56akNxyuNWhNnS3nJiICH7ug7XSLxFXIiMWY6wrj6ULdS3My+xLPLamEHaXd3Bt
- ky/a4LSLX3WeeRoeHOSLZH1x51caS0DqaEI8srVefUotaOEWkxBjel4Sqhqb+w==
-Message-ID: <a50c3355-5cdb-2a43-3466-9c44ec48b589@nabladev.com>
-Date: Fri, 8 May 2026 06:06:39 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id CA93E84C06
+ for <u-boot@lists.denx.de>; Fri,  8 May 2026 02:34:32 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=seznam.cz
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=michael.srba@seznam.cz
+Received: from email.seznam.cz by smtpc-mxd-5f4d8d5f6f-w7th8
+ (smtpc-mxd-5f4d8d5f6f-w7th8 [2a02:598:64:8a00::1000:a03])
+ id 1ca46d2747aa394e1d0da179; Fri, 08 May 2026 02:33:43 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=seznam.cz; s=szn1;
+ t=1778200423; bh=xTXY0bRfUDHKoGW9cC1UhCy42YE5fR7ShpVHXE0tApg=;
+ h=From:Date:Subject:MIME-Version:Content-Type:
+ Content-Transfer-Encoding:Message-Id:To:Cc;
+ b=BLMr7YPs1lTVvev9x3O26afbKfICTsPGOoSkpnSti0q5eANPHx0UMEvd9s3hySVt2
+ Y8FBpRplnd5hn/F6uigBAub0c9DQXA8u9W+QsFJkS3M6QUcpIK7dhA900Qng/0AC7K
+ YikLg1Y6Can7ArfJU7oX6O+xCPZY00eYBmy1QjQ6Qvycub6C9T5Z3bRx+cD08kyFGR
+ /FTUNWBkXVd69UKl7/OyIdpE2fIHTW2Q+QgbotHMK/1P9DFCbtD/l06muSX+JMHa7D
+ TCe3EanoW9cyE5vcTThh0plvHXLDyqFFZxsdskke23XzsyBnQKiCucSl9y/KxkKV7n
+ owjIUjFiHWBzw==
+Received: from [127.0.0.1] (ip-111-27.static.ccinternet.cz [147.161.27.111])
+ by smtpd-relay-6597cc8696-xddnz (szn-email-smtpd/2.0.72) with ESMTPA
+ id 4e0dfd2f-23a2-41cc-b219-c85be7619fde;
+ Fri, 08 May 2026 02:33:39 +0200
+From: michael.srba@seznam.cz
+Date: Fri, 08 May 2026 02:33:28 +0200
+Subject: [PATCH v6 06/11] mach-snapdragon: Kconfig: fix duplicate
+ SYS_MALLOC_LEN
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.2.0
-Subject: Re: [PATCH] i2c: designware_i2c: Staticize and constify driver ops
-Content-Language: en-US
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>
-References: <20260507220617.209146-1-marek.vasut+renesas@mailbox.org>
-From: Heiko Schocher <hs@nabladev.com>
-In-Reply-To: <20260507220617.209146-1-marek.vasut+renesas@mailbox.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260508-qcom_spl-v6-6-aaac1ab17b50@seznam.cz>
+References: <20260508-qcom_spl-v6-0-aaac1ab17b50@seznam.cz>
+In-Reply-To: <20260508-qcom_spl-v6-0-aaac1ab17b50@seznam.cz>
+To: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>, 
+ u-boot-qcom@groups.io
+Cc: Tom Rini <trini@konsulko.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@arm.com>, 
+ Anshul Dalal <anshuld@ti.com>, Peng Fan <peng.fan@nxp.com>, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Andrew Davis <afd@ti.com>, 
+ Hrushikesh Salunke <h-salunke@ti.com>, 
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>, Ye Li <ye.li@nxp.com>, 
+ Andre Przywara <andre.przywara@arm.com>, 
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>, 
+ Leo Yu-Chi Liang <ycliang@andestech.com>, 
+ Andrew Goodbody <andrew.goodbody@linaro.org>, Dhruva Gole <d-gole@ti.com>, 
+ Kaustabh Chakraborty <kauschluss@disroot.org>, 
+ Jerome Forissier <jerome.forissier@arm.com>, 
+ Heiko Schocher <hs@nabladev.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Lukasz Majewski <lukma@denx.de>, 
+ Mateusz Kulikowski <mateusz.kulikowski@gmail.com>, 
+ Dinesh Maniyam <dinesh.maniyam@altera.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Patrice Chotard <patrice.chotard@foss.st.com>, 
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, 
+ Michal Simek <michal.simek@amd.com>, Yao Zi <me@ziyao.cc>, 
+ Peter Korsgaard <peter@korsgaard.com>, 
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>, 
+ Casey Connolly <casey.connolly@linaro.org>, 
+ Tingting Meng <tingting.meng@altera.com>, 
+ Tien Fong Chee <tien.fong.chee@altera.com>, Alice Guo <alice.guo@nxp.com>, 
+ George Chan <gchan9527@gmail.com>, 
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>, 
+ Alexey Charkov <alchark@gmail.com>, Ronald Wahl <ronald.wahl@legrand.com>, 
+ Michael Trimarchi <michael@amarulasolutions.com>, 
+ Michael Srba <Michael.Srba@seznam.cz>
+X-Mailer: b4 0.15.1
+X-Mailman-Approved-At: Fri, 08 May 2026 06:08:16 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -68,30 +107,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Marek,
+From: Michael Srba <Michael.Srba@seznam.cz>
 
-On 08.05.26 00:06, Marek Vasut wrote:
-> Set the ops structure as static const. The structure is not accessible
-> from outside of this driver and is not going to be modified at runtime.
-> 
-> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
-> ---
-> Cc: Heiko Schocher <hs@nabladev.com>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: u-boot@lists.denx.de
-> ---
->   drivers/i2c/designware_i2c_pci.c | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
+Signed-off-by: Michael Srba <Michael.Srba@seznam.cz>
+Reviewed-by: Simon Glass <sjg@chromium.org>
+---
+ arch/arm/mach-snapdragon/Kconfig | 3 ---
+ 1 file changed, 3 deletions(-)
 
-Thanks!
+diff --git a/arch/arm/mach-snapdragon/Kconfig b/arch/arm/mach-snapdragon/Kconfig
+index f863daf6bb9..c195d478512 100644
+--- a/arch/arm/mach-snapdragon/Kconfig
++++ b/arch/arm/mach-snapdragon/Kconfig
+@@ -11,9 +11,6 @@ config SYS_VENDOR
+ 	  Based on this option board/<CONFIG_SYS_VENDOR>/<CONFIG_SYS_BOARD>
+ 	  will be used as the custom board directory.
+ 
+-config SYS_MALLOC_LEN
+-	default 0x10000000
+-
+ config SYS_MALLOC_F_LEN
+ 	default 0x2000
+ 
 
-Reviewed-by: Heiko Schocher <hs@nabladev.com>
-
-bye,
-Heiko
 -- 
-Nabla Software Engineering
-HRB 40522 Augsburg
-Phone: +49 821 45592596
-E-Mail: office@nabladev.com
-Geschäftsführer : Stefano Babic
+2.53.0
+
