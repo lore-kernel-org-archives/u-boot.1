@@ -4,104 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C51C9CD3447
-	for <u-boot@archiver.kernel.org>; Fri,  8 May 2026 11:01:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A27B6CD3447
+	for <u-boot@archiver.kernel.org>; Fri,  8 May 2026 11:08:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 40F2184B56;
-	Fri,  8 May 2026 13:01:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=flipper.net
+	by phobos.denx.de (Postfix) with ESMTP id ECE7184B56;
+	Fri,  8 May 2026 13:08:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=flipper.net header.i=@flipper.net header.b="j+1xp2NV";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="Y0DNHBEn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 607AC84C72; Fri,  8 May 2026 13:01:27 +0200 (CEST)
-Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
- [IPv6:2a00:1450:4864:20::530])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 1403684BDC; Fri,  8 May 2026 13:08:22 +0200 (CEST)
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 404C584AE9
- for <u-boot@lists.denx.de>; Fri,  8 May 2026 13:01:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=flipper.net
+ by phobos.denx.de (Postfix) with ESMTPS id DB54984AE9
+ for <u-boot@lists.denx.de>; Fri,  8 May 2026 13:08:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=alchark@flipper.net
-Received: by mail-ed1-x530.google.com with SMTP id
- 4fb4d7f45d1cf-67e43a8996fso1756652a12.0
- for <u-boot@lists.denx.de>; Fri, 08 May 2026 04:01:22 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1778238082; cv=none;
- d=google.com; s=arc-20240605;
- b=OKaHRSZ2kr8uOVEPIUjWuyHqs0hoABCopiHTsRbablMAoCbXMgs0cCLql7HpbSfkuy
- 1R98GbEiEY289hJvfMbzrpgKNtYPVMEa4VYqfR6E78O12jOFC34kT7CPwkiLPUuQHVrq
- BC8rkvx/tiqKy6JBdOK/Due+9ZZmmyiISWeJtwmVRl51l2CkBgDlGst/lmmulQbG9w+x
- wKycBJ87Uy4VRUNJBmYnD4sGBLFLg2a+vPMsthTAYmMWLbByrtYomBCVM+b2UwxVuOYY
- lb5dclfuTFJBbsMCteVYJKW0zhM9NLjZCSHBWS/PDDLfkOedZnFfOpRJb0Bgv5n+nkCA
- R26A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=PomJqz9yPBs4I8c5nmZVynZxnJhBdf05otHtSIi5cJk=;
- fh=GHvsfaNFfJc6freB36TFZe9eRjJCdWwTuX66cUaCh64=;
- b=h2Fl2IxANzZgDeQjKOp62imMqiwA6g6Ihh47I6QvGizSImZDekG33iGw8wj8TTDjk5
- 93A3LzzybOpIQCB4NfUIRTUtw4a1Mk1wJtDWKtfaXTfPIUfweMkbFfwNVQzokqVPCS0W
- JfWJmZUEziKx5iwHpYlSg2H5Bcwh+4Ig9FCLJsFygM0k0mOU1JuwDYvmdPWusITy2YRl
- nU9Ih8GakxaD5or6+umXaHejrAihG2jNuNT608GytCupJcLYW7hZcPtCaCTEB7kqcYpv
- Wo20bGDg3KM91qnbP4CUkTotN0FuZ+wA9mn2cXRXfhY6Mgc3TvqD6CvwMxkgGgqoI1MA
- iyHw==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=flipper.net; s=google; t=1778238082; x=1778842882; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=PomJqz9yPBs4I8c5nmZVynZxnJhBdf05otHtSIi5cJk=;
- b=j+1xp2NVcP85V+BuVDy0Et2SzrjJSO6PM1GzYwBlMIMCFkGFe+RPgiSfrZ84pOWUrR
- jurltu2wCHQ+nHZfYFL/bOfO9bXtT9dDfqBzcgDeqCnbGN4NdJvJI7tLRXMcFibFZBc2
- CsKvk2ftbPH/UL6OVTP5iZU9dUEM1XZuKSnzXk251DfBxij53sAawwNA2sTxshidU//U
- ScO6bKzEYr7ZEhNaawTULoN9Env5LSFgNRzU0CCHiRRhpi7lRZBEjo1La09VCU7gDEWc
- 3lsBtTxV75lnVVw8oupjpxJSTigzT4MYydoHYpVICqMhXyE78bAGQzOoV8iklC9HMBcR
- aTQg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778238082; x=1778842882;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=PomJqz9yPBs4I8c5nmZVynZxnJhBdf05otHtSIi5cJk=;
- b=c5/nr+E1fvinqekzw00gjvMBKSlm2WRom/gdBOX94J+p7m26NYCDN4SOWCKik13Det
- 4yRvJyTOJqT9fdDKedm0+uo7472zj0nYkS3k3uyN1H/oD1Bj8fUVw5/Gmwz5u5W1DE4a
- KDL9Eh7f+dURSOpzCFn+stUEOcomlRns3GG37sT6GPWNhdzmgGrIkjpGOe8cD0SAA9k0
- Ch7PObIFWoqoIGnnd5PQgduPum3erVtz0YsXnmFFUtcaZ1W0flUH3SYszemUzi4YQlkg
- YQecuwZLyf5SpQMwLvbG+ZX6SQ+43gn9MWHXIOAetMvWLmCEhCm4mG3jM7dhrkwoSi0d
- A+JQ==
-X-Forwarded-Encrypted: i=1;
- AFNElJ/kw6qt6xHa2ECBjn3Ub7bCqBECuRrYrllEcS86EJExh9ukSnArKCpQC1ZurdhOKseqW9nK9A8=@lists.denx.de
-X-Gm-Message-State: AOJu0YzwMlCgSbNon0X99iUtJaIwMv/7SWuL8klHKPJgUWUB9t/n+1kZ
- qJ4lX40na6VC5uC8N5BcyJMZPaYWloJGISyoAQA3Q1if4iStEy8kGStBTEiTyzp0YSCYASNwbRs
- B9PYMM4/rZkf9lBrl2vmSBQ60lFoMQmPuLM9ps5DIWA==
-X-Gm-Gg: Acq92OFG1FHQyZfePo3GuBA5KRoWD5m7xl+dmWkgzKDak2Q8Vtui/XaRisIwMu/MEb7
- xWnI06cjfV4AQI+oJOd44KBDs7BaHUv3XzJADJZDsxQcEpmLDdpDAMI7Axl0d8JyPr6lRHS9pIS
- ADnU/70km6O14xJnrW97YjKkic9eP3z73+Wt7mDZtJ8N3Vu5EfwaCI05dBUEZR5A0m/iQvJ1Gxf
- S64dxzI3TBZgvSya7+r8eUkpNaOjPu5tPSaT+VIU+z4tYcatXG/b0RerZna7Zy4VJAlmHgF8Nnl
- yD+B2N3viUqWKjj9SgjWjsDiHehhYB+hL6oILlU9uwu23w5ojOQ=
-X-Received: by 2002:a17:907:720f:b0:bc8:b8cd:8a22 with SMTP id
- a640c23a62f3a-bc8b90a98b4mr434837366b.23.1778238079952; Fri, 08 May 2026
- 04:01:19 -0700 (PDT)
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=stefan.roese@mailbox.org
+Received: from smtp1.mailbox.org (smtp1.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4gBmZ84xfRz9sjG;
+ Fri,  8 May 2026 13:08:16 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1778238496;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=mbhrVYhSMawHJJfOp3khmsnetnM23zXsNZzHxmbxkxA=;
+ b=Y0DNHBEnoUl9X995KwnCGngGqjANCCiEXdAAhWm5GftKL/9eV336FXn8MNlRoxYMCcS/l1
+ oDyH+9KhVSYExPoZRLNoyKx8Jh3iQo7HNpgO4Fw6UJ0SZ1OofifzBvCW+3gSRIu3iGe9M/
+ H5KeJns0Eo7W3kdmQe/s0nVhh34UuZgXdszH+wAdnhyp4/JMt2LAQ4s6AtnoV0lnXWaBmi
+ 6N4cNnHVY8Lw8LCQcPm1WIj9mTkEQFy1Go7gx2BR+ns/8ymgrm4GUJgZg3t3hom4xi6qn2
+ sglxFX60v0Td6oNygpPxUIisDmvjIoXENizFJxz3Hx+xtEZfZJJ7TQZ2xxXzbg==
+Message-ID: <a63855c7-f2b3-4b99-a5d5-6a2cd25a2a30@mailbox.org>
+Date: Fri, 8 May 2026 13:08:15 +0200
 MIME-Version: 1.0
-References: <20260416055501.494002-1-gurumoorthy.santhakumar@oss.qualcomm.com>
-In-Reply-To: <20260416055501.494002-1-gurumoorthy.santhakumar@oss.qualcomm.com>
-From: Alexey Charkov <alchark@flipper.net>
-Date: Fri, 8 May 2026 15:01:09 +0400
-X-Gm-Features: AVHnY4LBx4Hw9P8dN5ZIiWO2Gspy61K7n21lW7oZFk3Yijj6YlsFW0Xqss8VO88
-Message-ID: <CAKTNdwHA_3eJ4D7maBmAAr1DyrvT_meMsJ7_Naux1dKTzOu3OQ@mail.gmail.com>
-Subject: Re: [PATCH v2] usb: dwc3: core: fix memory leaks in event buffer
- cleanup
-To: Gurumoorthy Santhakumar <gurumoorthy.santhakumar@oss.qualcomm.com>
-Cc: marex@denx.de, trini@konsulko.com, mkorpershoek@kernel.org, 
- macromorgan@hotmail.com, casey.connolly@linaro.org, quic_varada@quicinc.com, 
- felipe.balbi@linux.intel.com, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Subject: Re: [PATCH v2 0/5] NBX10G: Marvell Armada 8040 Nodebox 10G board
+ support
+To: Vincent Jardin <vjardin@free.fr>, u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>
+References: <cover.1773151972.git.vjardin@free.fr>
+ <cover.1776762022.git.vjardin@free.fr>
+Content-Language: en-US
+From: Stefan Roese <stefan.roese@mailbox.org>
+In-Reply-To: <cover.1776762022.git.vjardin@free.fr>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-MBO-RS-ID: c488856c0017af9a63b
+X-MBO-RS-META: bbxhanzkaa1x6oqgchk4yqpmpm5n6jxe
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -118,88 +76,85 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, May 8, 2026 at 2:45=E2=80=AFPM Gurumoorthy Santhakumar
-<gurumoorthy.santhakumar@oss.qualcomm.com> wrote:
->
-> In dwc3_free_one_event_buffer(), only the DMA buffer (evt->buf) was
-> being freed via dma_free_coherent(), but the evt structure itself was
-> never explicitly freed, causing a memory leak.
->
-> In dwc3_free_event_buffers(), the ev_buffs pointer array allocated
-> with memalign() was never freed after iterating and releasing all
-> individual event buffers, causing another memory leak.
->
-> Fix both leaks by freeing the evt struct in
-> dwc3_free_one_event_buffer() and freeing dwc->ev_buffs in
-> dwc3_free_event_buffers() after all entries have been released.
->
-> Signed-off-by: Gurumoorthy Santhakumar <gurumoorthy.santhakumar@oss.qualc=
-omm.com>
-> ---
-> Changes in V2:
-> - Removed redundant NULL check before free
-> - Removed NULL assignment to the pointer after free
-> - Link to V1:
-> https://lore.kernel.org/u-boot/20260414055013.2978223-1-gurumoorthy.santh=
-akumar@oss.qualcomm.com/
-> ---
-> ---
->  drivers/usb/dwc3/core.c | 3 +++
->  1 file changed, 3 insertions(+)
->
-> diff --git a/drivers/usb/dwc3/core.c b/drivers/usb/dwc3/core.c
-> index 6f22b9232ba..65c4d1a4e6f 100644
-> --- a/drivers/usb/dwc3/core.c
-> +++ b/drivers/usb/dwc3/core.c
-> @@ -206,6 +206,7 @@ static void dwc3_free_one_event_buffer(struct dwc3 *d=
-wc,
->                 struct dwc3_event_buffer *evt)
->  {
->         dma_free_coherent(evt->buf);
-> +       free(evt);
+On 4/21/26 11:04, Vincent Jardin wrote:
+> This v2 addresses Stefan Roese's review feedback on v1:
+>    https://lists.denx.de/pipermail/u-boot/2026-March/613625.html
+> 
+> Changes since v1:
+>   - Patch 1 (cpuinfo/SAR): added Reviewed-by Stefan
+>   - Patch 2 (board support):
+>       * dropped board_init() bi_boot_params assignment
+>         (ARM64 uses FDT, ATAGS are !ARM64-only)
+>       * dropped empty board_early_init_f()
+>       * removed unused includes / DECLARE_GLOBAL_DATA_PTR
+>       * added note on U-Boot vs Linux comphy DT bindings
+>       * MAINTAINERS: armada-8040-nbx* wildcard covers the u-boot dtsi;
+>         removed duplicate NBX BOARD entry from
+>         board/Marvell/mvebu_armada-8k/MAINTAINERS
+>       * added Reviewed-by Stefan
+>   - Patch 3 (emmcboot): moved from cmd/mvebu/ to board/freebox/nbx10g/,
+>       renamed Kconfig CMD_MVEBU_EMMCBOOT -> CMD_NBX_EMMCBOOT and
+>       MVEBU_MMC_PART_* -> NBX_MMC_PART_*, replaced all `return -1`
+>       with `return -EINVAL`, commit message now explains legacy format
+>   - Patch 4 (fbxserial): moved from cmd/mvebu/ to board/freebox/nbx10g/,
+>       replaced all `return -1` with proper errno codes
+>       (-EINVAL for data validation, -ENODEV for missing MMC,
+>        -EIO for MMC I/O failures)
+>   - Patch 5 (U-Boot dtsi): added Reviewed-by Stefan
 
-Hi Gurumoorthy,
+Thanks. Next time, please include this revision history into the
+patches. This makes the review a bit easier. Please see here:
 
-evt is allocated using devm_kzalloc, so this change introduces a
-double-free causing a crash when tearing down a USB gadget mode
-session on my Rockchip RK3576 board:
+https://docs.u-boot.org/en/stable/develop/sending_patches.html#sending-updated-patch-versions
 
-=3D> ums 0 scsi 0:0
-...
-CTRL+C - Operation aborted
-"Synchronous Abort" handler, esr 0x96000004, far 0xfffffffffe04e990
-elr: 00000000408333f8 lr : 0000000040869e90 (reloc)
-elr: 00000000ffe4a3f8 lr : 00000000ffe80e90
-x0 : 00000000ffe592d0 x1 : 00000000ffe592d2
-x2 : 7d00000000000000 x3 : fffffffffe04e980
-x4 : 00000000ffef1e68 x5 : 00000000fdea7c52
-x6 : 00000000ffef1e78 x7 : 00000000fdef81b0
-x8 : 0000000000000008 x9 : 0000000000000001
-x10: 0000000000000006 x11: 0000000000000008
-x12: 00000000fff090ba x13: 0000000000000000
-x14: 00000000fff090ba x15: 0000000000ffffff
-x16: 00000000ffe793f0 x17: 0000000000000000
-x18: 00000000fddf7d70 x19: 0000000000000000
-x20: 00000000fdea7c60 x21: 00000000fdea72a8
-x22: 00000000ffeebe50 x23: 00000000ffef5e40
-x24: 00000000ffef5000 x25: 00000000ffee5966
-x26: 00000000fde90b70 x27: 0000000000000000
-x28: 0000000000000000 x29: 00000000fddc6350
+Thanks,
+Stefan
 
-Code: f0000526 9139e0c6 cb000063 8b000021 (f9400860)
-Resetting CPU ...
+> Build tested on Nodebox 10G (ATF v2.14 + U-Boot 2026.04 + Linux 6.19),
+> all functionality verified on hardware.
+> 
+> Vincent Jardin (5):
+>    arm: mach-mvebu: armada8k: cpuinfo and SAR
+>    board: freebox: add Nodebox 10G board support
+>    board: freebox: nbx10g: add emmcboot for dual-bank eMMC boot
+>    board: freebox: nbx10g: add device serial and MAC address
+>      initialization
+>    arm: dts: armada-8040-nbx: add U-Boot dtsi for conditional OP-TEE
+> 
+>   arch/arm/dts/Makefile                    |   1 +
+>   arch/arm/dts/armada-8040-nbx-u-boot.dtsi |  15 +
+>   arch/arm/dts/armada-8040-nbx.dts         | 259 ++++++++++++++++
+>   arch/arm/mach-mvebu/Kconfig              |   9 +
+>   arch/arm/mach-mvebu/armada8k/Makefile    |   2 +-
+>   arch/arm/mach-mvebu/armada8k/cpu.c       |  12 +
+>   arch/arm/mach-mvebu/armada8k/soc_info.c  | 194 ++++++++++++
+>   arch/arm/mach-mvebu/armada8k/soc_info.h  |  14 +
+>   board/freebox/nbx10g/Kconfig             |  94 ++++++
+>   board/freebox/nbx10g/MAINTAINERS         |   6 +
+>   board/freebox/nbx10g/Makefile            |   5 +
+>   board/freebox/nbx10g/board.c             |  53 ++++
+>   board/freebox/nbx10g/nbx_emmcboot.c      | 357 +++++++++++++++++++++++
+>   board/freebox/nbx10g/nbx_fbxserial.c     | 286 ++++++++++++++++++
+>   board/freebox/nbx10g/nbx_fbxserial.h     | 156 ++++++++++
+>   board/freebox/nbx10g/nbx_imagetag.h      |  78 +++++
+>   board/freebox/nbx10g/nbx_nrboot.h        |  34 +++
+>   configs/mvebu_nbx_88f8040_defconfig      |  75 +++++
+>   include/configs/nbx10g.h                 |  29 ++
+>   19 files changed, 1678 insertions(+), 1 deletion(-)
+>   create mode 100644 arch/arm/dts/armada-8040-nbx-u-boot.dtsi
+>   create mode 100644 arch/arm/dts/armada-8040-nbx.dts
+>   create mode 100644 arch/arm/mach-mvebu/armada8k/soc_info.c
+>   create mode 100644 arch/arm/mach-mvebu/armada8k/soc_info.h
+>   create mode 100644 board/freebox/nbx10g/Kconfig
+>   create mode 100644 board/freebox/nbx10g/MAINTAINERS
+>   create mode 100644 board/freebox/nbx10g/Makefile
+>   create mode 100644 board/freebox/nbx10g/board.c
+>   create mode 100644 board/freebox/nbx10g/nbx_emmcboot.c
+>   create mode 100644 board/freebox/nbx10g/nbx_fbxserial.c
+>   create mode 100644 board/freebox/nbx10g/nbx_fbxserial.h
+>   create mode 100644 board/freebox/nbx10g/nbx_imagetag.h
+>   create mode 100644 board/freebox/nbx10g/nbx_nrboot.h
+>   create mode 100644 configs/mvebu_nbx_88f8040_defconfig
+>   create mode 100644 include/configs/nbx10g.h
+> 
 
-resetting ...
-
-These offsets translate to:
- ... free at common/dlmalloc.c:1599
-      dwc3_free_event_buffers at drivers/usb/dwc3/core.c:253
-
-Reverting this hunk alone fixes the issue for me.
-
-While at that, I see similar asymmetry (devm_kzalloc + kfree) on
-dwc->mem, which might also cause double-free issues, but I'm not
-hitting them in my usage scenario.
-
-Best regards,
-Alexey
