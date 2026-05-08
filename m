@@ -4,92 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9924ACD3445
-	for <u-boot@archiver.kernel.org>; Fri,  8 May 2026 16:29:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7B26CD3436
+	for <u-boot@archiver.kernel.org>; Fri,  8 May 2026 16:33:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1B5E884D73;
-	Fri,  8 May 2026 18:29:41 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2C45B84D5B;
+	Fri,  8 May 2026 18:33:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="V0cphBFh";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="bH9slB2C";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3125C84D80; Fri,  8 May 2026 18:29:39 +0200 (CEST)
-Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
- [IPv6:2a00:1450:4864:20::531])
+ id 4245984D5E; Fri,  8 May 2026 18:33:33 +0200 (CEST)
+Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
+ [IPv6:2a00:1450:4864:20::529])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 09C2784D5B
- for <u-boot@lists.denx.de>; Fri,  8 May 2026 18:29:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6658B84D42
+ for <u-boot@lists.denx.de>; Fri,  8 May 2026 18:33:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x531.google.com with SMTP id
- 4fb4d7f45d1cf-678adefbd26so3983702a12.3
- for <u-boot@lists.denx.de>; Fri, 08 May 2026 09:29:37 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1778257776; cv=none;
+Received: by mail-ed1-x529.google.com with SMTP id
+ 4fb4d7f45d1cf-67e9b3037dcso2313659a12.0
+ for <u-boot@lists.denx.de>; Fri, 08 May 2026 09:33:31 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1778258011; cv=none;
  d=google.com; s=arc-20240605;
- b=fFTRm1Eddl6XUl8IP03OISBqkMRoy1vqZuvkjJ1PBktjqDYYebPCXJSBqiBLwa2aZc
- HIswnihbYCgQSVbmmFheMZKOymS3/VXXub3xmmzqn2MFVmVQS072Wsl1BKxopcjf8oeD
- MYizbUalWc2ogt9rv8w+y3RdPQ6CasPd/IH60+Hd3EUDHBqouwtkG/JG0GXY39vyufD8
- oO+f4SkvQeMu4It1q0GFqkoWVfJi7dSq83Ot4x3IBOhtbpoTBKC8JF4ALAKR22zTNRY0
- Cw9kIucPcieZ/OsPqmD3sObD13/0wE2I2B3cBfuql/rjJTUmcmD8OetQRCiOAjT8gfUX
- HX8g==
+ b=Q8+ZmP9DHmqUC9Vs0nS7NHSE0uScHH3uDHVJRY1zvJvQoqupW1f2eJx888NkGBimN2
+ s0Mw1xLaBuABfuk7JAn2m+a73ZWj2ZY8UM7/3SBRTf0WxECJNh2LEQ5G3j/5mcY3VD1Y
+ 5pEDtBU8j/aIZu/JGAaMgUzsyQMGRYRtp6eAGNwFO/7lojOvRs2s3N7sxactwIUGIa0Q
+ PB2KEmNERfv+NzwSiFab+RAflNRYBklWfCTrtHkged09yHMU1kNnkqhl/iEYzf+SqeyT
+ UkGMj8Jpo7HhuPHF6m6AnyL6MGrD9/eArK/Sz9G1Izd421UqwKjjrSEE4kJ3JXtlMmbh
+ YSCA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=POFyWbqfUI5u7Il/wtBJJdTElIuvsAnugfonimAvcaU=;
- fh=7+NugGQ2fjuifNFbboBIeXRgPjkONDOweWugJxHsSfY=;
- b=Fsu7K6btSxebuFITxx0WFepChk9IzUB0mcwXyG7qbwupBc9FKk7SBYo1kuT8wcDz3b
- pmlBaraua3L4OrFfSSLgpUYYN2xhmWIiG+a4vBbOmT8NWGGNHjVRkPgDdG/ceIUQesBe
- MCtm0TqnMlMbBif5BSHjARA3+Pm5e4rSwW/oRHsZY2p6T0KeFfjHhO5kcbhW0w1dZyGB
- veZPsF8LkxZRYhsXE+McJ86egeN/NBnpH8DAyUVbDaip5YtR7Occdw1ssNUhvzV3umlr
- HLwUCocUbqWMXEK8NWqHQCrR+BAQV3n4Ve5En825VlpM5vtIIf4oXLA1Md0pRVv3JC7/
- zkag==; darn=lists.denx.de
+ bh=5TTPZDK1uuC0hcTeq9y+dpFLZJrchm5tqllgkOSNo2o=;
+ fh=RrscOEuqNWG7RNbz9cdSX0Wgt+LjOhN0bm7MfOUSrDc=;
+ b=FN8cDZGwttlJ8EE9otPY9XgKyGe/ScpDp+y9Hh7OZcnnc1vLJ0Vu5BfOyE8u9k7PZ8
+ daByces3f3xm98jcKB7+P/2WNqA2iB+Ag0egzcad+zJ5Vdg5Pi2EXHHI2XoOtJHjLIZT
+ 3wNx4XfUDRRFa4RFwg+0m/Jdk6ewMWJnY+IpDQjV4kWa5ZyimNX3z9j0RaGdgoi7emob
+ hlaufhf6AX3jOwkvmLNs0l0Kqa2DNhVWDqmyHHX8UoRfBd0wmSAGcYIxrD6VsDPJGrD2
+ lqAmVLE8HFTXtqmmuAZxNLtDxF0Yun/6bH6tRH+D2PnBh2ltp8wX44IBUjUriq5ynkm8
+ 932A==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1778257776; x=1778862576; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1778258011; x=1778862811; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=POFyWbqfUI5u7Il/wtBJJdTElIuvsAnugfonimAvcaU=;
- b=V0cphBFhoPPdq2KgDybgDnTe0DRJ5dx5sq6Q4JpNy8Frc63kFoINl57pTvefUtcwIC
- Tses8hVaXBACwtnr8D7/b+5EE1K0bsYxkoe6rQOLACw/xK0nQaL02UXVf2UPfp+ewftX
- XvVqRvo2sQhCjM+JkcCEyFd5VsuIYsDQa4nfU=
+ bh=5TTPZDK1uuC0hcTeq9y+dpFLZJrchm5tqllgkOSNo2o=;
+ b=bH9slB2CA1ZrmoomDS2rJk+EvpS0rzFrzjNrp7XDyCMRnynP3/tkkboS+SLFRDZED/
+ Zye/PHXOCXinOphV+vITbKxEixvpMvKGcN7RHHaaZZcTPints06b6WE2Is1Veyhkpr/p
+ sFIZH+v8ucLbvzSNeXx/HKm+qC118s5DGIyRQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778257776; x=1778862576;
+ d=1e100.net; s=20251104; t=1778258011; x=1778862811;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=POFyWbqfUI5u7Il/wtBJJdTElIuvsAnugfonimAvcaU=;
- b=pQiIVKM5g7Mwtb01hoBFzHz5x5Lc3HsmaCrJ4OoVjxX/1CjcZM1O1wWHHz/rEjHmKu
- +KDH0EVP38Gro/3gu03pv8SBjaSrwaNnYqDWxmbboUO2hLZt/O8Fkh5BD99bkoYCgqx/
- OE1dpBHvqodEsnYYFEBxBI+0a/Ajekk3IIFLHRFdF6zsB2vsa5K+J0kiQgZvfNK4HGl4
- JuKKKhq6gafxRckXrwTCBgJud1Y2imykcAogwkP2vZv7pwLLsiFE175t1a1xC80wRZl6
- tLrJL/k79QwXZ/hUfoXwvj412sZwfKRV2q90gAUHiZwQJrkTfCQtvNZ3f1fYd+UeLiwc
- 8uLg==
-X-Gm-Message-State: AOJu0YxFBOWuxtaYDtUj2r/T+zoT33I8mimvq/AFazggaCk5EoHEKoJF
- BiCxn7NeLQj/G8PyMKPG/4FRR8vbly2OtxSkTJ6ZG1ngs9oM6DdH4ClTdQut8hzbtBGCcs9bNT7
- JXIcVk0ho9O07BDhG2YgKpUv8FypBlZWELV0h0/8erYy5oz1XSx4=
-X-Gm-Gg: Acq92OEqKEBShklLgPrvhycChHYnjES+R5iKLz45Y1mqeDP7ecWjADPuhNwmirxlHrU
- 3Pebcv24PPnDLuK1crg7kturYFhZNMSxtWDA0F10GO1b2iFSKzcy3i5AoL4+/CojG5JAJrptbjV
- i+eAgvOTo5jyjdaPIccXs6wamnZhqE4oEoR3FJY9xvWbfdMnMEex7Ex3YwzfgP6ls7jO8Zxri3g
- ydJbUhdW7FyCm0DEyfzEfdAlpiVWMx0sxCz+RbYPBZ4uK8PDIHU11P7DBcsYRxSIrOpDgEMe/Dh
- V75n/w==
-X-Received: by 2002:a17:907:3c8c:b0:ba6:6c2d:5c81 with SMTP id
- a640c23a62f3a-bcaad42b3b3mr219307766b.44.1778257776340; Fri, 08 May 2026
- 09:29:36 -0700 (PDT)
+ bh=5TTPZDK1uuC0hcTeq9y+dpFLZJrchm5tqllgkOSNo2o=;
+ b=GSzcEK5hFA7MZJnwY/rR7ilzLMVnWkOiiu7SCLIRt6WXEkY0XJwgMLsii2xq9iKg3R
+ I4nGGa8muYBFKd6Giw95dVH79ZtfMxeiDGkYfBLAejDNGi0VHRZabKpK4XKRVWFwpAGq
+ Ww6zzbSzbPgkV8GSwzPitaeE2imegceYSrn4l757xp/eINTfbT04ZpSU2Xk3+JZmv+pr
+ 02ouPRlhozfmTePDgFLG4e/XeEHob+r6p0E3oXudaTxBfVm0DL3XNh11WNk+gvHZ/k/m
+ ohqD5QZZ6lVpY2em2dMtOdK2BOx+yhTkSRcQvebYffsBuCWNRX34vS08djex0W3Se+Nc
+ 3dGg==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ9kLKDJYeM+jWoEJ8OFLfHYfv49QfG/ziqW/QmyxSLnOg0JDnlDv0AYxy12VmSo+Q6cFGF2lk8=@lists.denx.de
+X-Gm-Message-State: AOJu0YzaJeV067sdE9T6BZbQBAYMwk4nhmCacQTmyV5kJJWn1R9aW8W+
+ sI0GtdNVuH/Z02mIgr0SKnpbNxdW1LKQ2RXOgsdnXL0IKMP9GqThVBGTQO5yxLmGJJanynRT+96
+ Fp5Sh0XtnPqew1/70THmRXPEmfihtyi01Wvr+lCN1
+X-Gm-Gg: AeBDietzUNanSoD5vNT9OgrrZmezDDR6OwnthsubTNvi38ucNSYzRuv5kJmqVUtW4fc
+ vSS8NFTfO2GOdaRQ+tocQrjCmGme1CBFh1iOpMbUFhGAi7KGq4ILF9QpMM02jrSzdrhMlr/Lh/5
+ hXul7TSC4hsENvfR5rKJxJe5P7KwwR8aJbLhfJ5s8IkXLSYrCxDDmu20D12CmNvlwGr7huKOR9l
+ LM5tSyBx0H3NYf2QFb6RLqujZVUzlLAeIM4o1vzdUaR7OBpko/AjXs5tl73rOB9Ki46nwq2WDnh
+ jDMxvQ==
+X-Received: by 2002:a17:907:a186:b0:bcb:8b03:9fc2 with SMTP id
+ a640c23a62f3a-bcb8b03a05dmr58485366b.15.1778258010767; Fri, 08 May 2026
+ 09:33:30 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260507164248.59353-1-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20260507164248.59353-1-marek.vasut+renesas@mailbox.org>
+References: <20260507-doc-sysreset-qcom-v2-0-37fef7a9cf92@cherry.de>
+ <20260507-doc-sysreset-qcom-v2-1-37fef7a9cf92@cherry.de>
+In-Reply-To: <20260507-doc-sysreset-qcom-v2-1-37fef7a9cf92@cherry.de>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 8 May 2026 10:29:22 -0600
-X-Gm-Features: AVHnY4KzzQKtdgvzdjgVNYVL8CefqH6StZ0rZMwi--PeK4tzMyIrFRaqoWau9zk
-Message-ID: <CAFLszTjizssuT0Acka0DBTZsX=99gqeP3GdNShFj8LMCDCXOVQ@mail.gmail.com>
-Subject: Re: [PATCH 1/2] block: ide: Staticize and constify driver ops
-To: marek.vasut+renesas@mailbox.org
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
+Date: Fri, 8 May 2026 10:33:16 -0600
+X-Gm-Features: AVHnY4IRQa-hA1FXaP3JQ7MAFsl10QuzLE-5Wh0xijxsJh2BjWwu1x2dL0jM9FY
+Message-ID: <CAFLszTjqrfQiNGjk7JodYz-6XTk-sC8reDUKg+g2a+YRJQkr2w@mail.gmail.com>
+Subject: Re: [PATCH v2 1/3] cmd: boot: fix edl being shown when not supported
+To: foss+uboot@0leil.net
+Cc: Casey Connolly <casey.connolly@linaro.org>,
+ Sumit Garg <sumit.garg@oss.qualcomm.com>, 
+ Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>,
+ u-boot@lists.denx.de, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Bin Meng <bmeng.cn@gmail.com>,
+ Tom Rini <trini@konsulko.com>, Quentin Schulz <quentin.schulz@cherry.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -107,15 +115,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2026-05-07T16:42:39, Marek Vasut <marek.vasut+renesas@mailbox.org> wrote:
-> block: ide: Staticize and constify driver ops
+Hi Quentin,
+
+On 2026-05-07T15:04:04, Quentin Schulz <foss+uboot@0leil.net> wrote:
+> cmd: boot: fix edl being shown when not supported
 >
-> Set the ops structure as static const. The structure is not accessible
-> from outside of this driver and is not going to be modified at runtime.
+> edl is implemented in the sysreset_ops.request_arg callback of the
+> qcom-psci sysreset driver. That callback is only called from
+> sysreset_request_arg() which is compiled only when
+> CONFIG_SYSRESET_CMD_RESET_ARGS=y.
 >
-> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+> Therefore, only show the edl option if that symbol is enabled.
 >
-> drivers/block/ide.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+> It is in a separate if block because any option but -w will only be
+> handled when CONFIG_SYSRESET_CMD_RESET_ARGS=y as seen with the
+> implementation in do_reset() in drivers/sysreset/sysreset-uclass.c.
+>
+> Fixes: ef06c5d76ff4 ("cmd: boot: Add '-edl' option to reset command documentation")
+> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
+>
+> cmd/boot.c | 3 +++
+>  1 file changed, 3 insertions(+)
+
+> diff --git a/cmd/boot.c b/cmd/boot.c
+> @@ -60,8 +60,11 @@ U_BOOT_CMD(
+>       reset, 2, 0,    do_reset,
+>       "Perform RESET of the CPU",
+>       "- cold boot without level specifier\n"
+> +#if IS_ENABLED(CONFIG_SYSRESET_CMD_RESET_ARGS)
+> +// All options handled by sysreset drivers via their sysreset_ops.request_arg callback
+>  #ifdef CONFIG_SYSRESET_QCOM_PSCI
+>       "reset -edl - Boot to Emergency DownLoad mode\n"
+> +#endif
+>  #endif
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
+
+Should SYSRESET_QCOM_PSCI select SYSRESET_CMD_RESET_ARGS ?
+
+Regards,
+Simon
