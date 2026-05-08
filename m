@@ -4,93 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3097FCD37AA
-	for <u-boot@archiver.kernel.org>; Fri,  8 May 2026 17:00:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1830CD3445
+	for <u-boot@archiver.kernel.org>; Fri,  8 May 2026 17:01:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A710B84DA0;
-	Fri,  8 May 2026 19:00:11 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4EAF884D6D;
+	Fri,  8 May 2026 19:01:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="aKqcOEHM";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="oYD0jHdf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 773AD84DA2; Fri,  8 May 2026 19:00:09 +0200 (CEST)
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [IPv6:2a00:1450:4864:20::632])
+ id 759A284DA0; Fri,  8 May 2026 19:01:27 +0200 (CEST)
+Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
+ [IPv6:2a00:1450:4864:20::52b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6B11D84D42
- for <u-boot@lists.denx.de>; Fri,  8 May 2026 19:00:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B35D184D42
+ for <u-boot@lists.denx.de>; Fri,  8 May 2026 19:01:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-bc1f0f48351so357848166b.1
- for <u-boot@lists.denx.de>; Fri, 08 May 2026 10:00:03 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1778259603; cv=none;
+Received: by mail-ed1-x52b.google.com with SMTP id
+ 4fb4d7f45d1cf-67c3cb1433cso3710671a12.0
+ for <u-boot@lists.denx.de>; Fri, 08 May 2026 10:01:24 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1778259684; cv=none;
  d=google.com; s=arc-20240605;
- b=LcXQUEEDpqA1PP/utfkwhwVmvYau+czMHvLOEm+tLN25aZnMEgdJMS7c90uZqPmVw6
- DjswMKyqYeyZYJ0hrwBUTrjk9kx+jToZ316IZW1oG1Iy204/gSXum8FBqs8I/lIYoV3t
- 0nKJLcvf2Jlvvc6o3PjTB5bcgUtiRCowLHdzY+5q/x08BhkvgG1Q+PGmG3Tb7arlvoCB
- U4VJ/pw9tNRF39vbKm/BXGRYMwn33aqugp1Rw3wIyKctx4+FU6aJVhDKFWIq7n33wh/+
- SaZg39G8CI3mRtH8IHSnXN/w02N+H25qVCGiHZuVhQWL8JyedhR/Dcz+qsaxudlIZrAU
- /aYg==
+ b=lFURisdCYoy5eEe4dUFFCAwnBk55OYGiCwGTmH+cgtft8J1y9Wl2mESFdM9oUbdWM7
+ ZnIWuCiR09vuE2vAabW15Q44T7gjEqOdjAQ8OQN/Vm1puheGeF9TWKjlW61ZYoaSk16c
+ kVUEk/zuqKo0nx5VZ0LNoYaDPRvZ4yDnunAdmM+S4Il2yKZC3FnPeUkptN+iCd7j8Ywo
+ 1SIZ8d2GaA72IWWEeMmvrXGqvJVh1Z5URFNINWaML8kZ/Of/kUZClXFS7/eSfzifeCvk
+ /zL/js31Ed3E91blQKoJaSMlMbWcZQ22L8afMDNSm32scf0MRonJtKz+TdgkCk4QhOMo
+ j4jw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=ZoX1/zSlIa/jqBca9m4yWvb+AVfccwLgJ44JDDjtlKw=;
- fh=7+NugGQ2fjuifNFbboBIeXRgPjkONDOweWugJxHsSfY=;
- b=cA/xlymqBpbJEC07KgEgi8vKwSIXWRKzlva8s5U4d9rd4xqTdf6V7LcOQljNLYFNW9
- qSnCSaajOBhDUcgXS06L5zNP7dnaX7ALsSI7yYRKN9EoPeQTGvAeWfaNGplwRSTRYTIu
- fgAqlY0yuu2n3/z8oiVJMmTB4DEA/WKYmKo9xD0l43TF3/EKHAAwhiiM6wvXSinoGFPC
- nkWzIpbyUYOSN6+iu0iczsLqqs6SSNgKWPKLVUhwUHCbtwvGLaA2mTqXSd0vfVhFQ1eI
- kHD9Av4UV9AU6G6ipg5CdyqCYfaxuS7xy6QMK+cjYfMNmlEudP2ZJWungj+AN99aeR5U
- uOfQ==; darn=lists.denx.de
+ bh=jnKpt78NlpnJkB6FCKFRrnKjmeRFXT2G+ngQEWgHCHI=;
+ fh=kSTLPb+Yh5doh/bRjNYTOFhAFvDM9JCnaqpznS9LmwY=;
+ b=Xi5D086CP+VojqCXntXp7yhYWWgAfGHqtb8v3RMPwIVV7Em8YC0FZqLuLXhlRF8yme
+ dbkIwygyJhL6xZ9AD3yrpfXXtF0HW6HdzcAtWXQYYtbFugw19q+hIUr3CSf1EmNep5PV
+ nhoMjj7MT+fH6L5B1NWgugt1hEuAOUF7nSj+VoA1xKqMnem+/ffgVsniDdW9tABSPi0/
+ P1vHhAJw39g89655HhMX2+oyS185HPgh6qMpq4VEMeWeQv0SHofy5/EQcb8s5p+ARaDP
+ 6JiNxh/pp2seDKA1k1agho+H0qlyOFMhFBOEOPqNW/LyL9leJNTZvjWlhqK0zNsRcJyT
+ xk9A==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1778259603; x=1778864403; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1778259684; x=1778864484; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=ZoX1/zSlIa/jqBca9m4yWvb+AVfccwLgJ44JDDjtlKw=;
- b=aKqcOEHMZQLFkbuM1kRE3ko93RzYOuVcYCGwnzcLuqLj5zalAVxoGXpPhAfzGCih4F
- tzCSAwvDycP238jWFNwJ93TOWPi6IpYbGGb01Ng0iaSV0Ll8ecdD0cVriROnNG+T0VsO
- j0TFcuan6VN7vxg/UGBDKvPOvfOqYiDBp8/fE=
+ bh=jnKpt78NlpnJkB6FCKFRrnKjmeRFXT2G+ngQEWgHCHI=;
+ b=oYD0jHdfum6wvUqi6t1ceRH5ErJGw76lOCoMDBs8E9vp8fx02e2VoNPqLRgUUsNcF9
+ x4AOTOFo/dEsW5Bzuyga848Vh29EFBj49dPiQWhHi9WcxTTlTYgNfIDT9AT0VEutUnhW
+ WGaXn4wEAuBmV+54UHXOvQ6HZJ3puiKd2zFcw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778259603; x=1778864403;
+ d=1e100.net; s=20251104; t=1778259684; x=1778864484;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ZoX1/zSlIa/jqBca9m4yWvb+AVfccwLgJ44JDDjtlKw=;
- b=ifM0vqFm61R1Fs+CoW5NjUmo1urruwOKv+6dg+4/l/uD75q6vCIPZH2sR3sbmqUp4X
- eEjWM09ZmageFRq+QWOcJiddAwP7MiRutDveKQKKCMZNN7dSB247QRIcfoKNeSF54bd5
- cjU4OSkU/d3XwhLGcCIUGlSKKKzCBE7lQYEGrDpWIAe3pMmv3act7U3XwhLUNkY0J59J
- Dn9ph2C/vmzDsDYMDOGtw+OGQe9Ikthyb1FQqF61cXh4F2EZ6M8uK+B2mGRjR5A2ZhkZ
- v1F2ToKbomN+/OYNOTzGtMnPIAkMCrSPq7FJIfDWJZunUNC7z6kmt59vuQLTXYCo/EUi
- 7Tag==
-X-Gm-Message-State: AOJu0YzY6Tt1rcnvI53LYLZ6PPREW4oAutJX3C/hqta3Wkq0HobHmcut
- lTFQYxIAuJp90x1w76k09H9UPTod/6gi6QoHqUASlL+jR05BOhFeJjVOkwVd0Bk5mvfDMYSMtSV
- Q24eD9OoZl73o/CAZoW/DOQVModn9e4mZBlUONVnWT/AqFh6ctlw=
-X-Gm-Gg: AeBDievqvxyJJrveWqdH8edeyi+W2AXWHBxEyH82ZtUzCyFLN+60YFkzLjogb/rw8VK
- WQlco6gyPlDZrnOjAx1H+Mk5n+EXuXnZR2JZuU8tsdwyHAfThGzWajnMBR2lFzLsevsrolVHqfQ
- KPkRD29jfWhtJPlBWsvWWdgHtEE/2QxT8K72D3VM79VWmYj6cOjdTkS869zWMGSP+tAnTZL2zrZ
- 53hdC5mHgRdaDr68LUQ+866TB+pTJHhoA7ulDKEmRMvbaUWojnZKWYXXY6huv5i42RRBU4RZVv2
- kYEpDQ==
-X-Received: by 2002:a17:906:5194:10b0:bca:48de:5cce with SMTP id
- a640c23a62f3a-bca48de5cebmr235016566b.36.1778259602598; Fri, 08 May 2026
- 10:00:02 -0700 (PDT)
+ bh=jnKpt78NlpnJkB6FCKFRrnKjmeRFXT2G+ngQEWgHCHI=;
+ b=LXzMP8nm2R/6uD+nXCHpHHp2TU9huGoGMa7wLq+bZUB+OfXRXsBF46vg3tv8FN7wWp
+ 4VF9/DBT+fmm++f0tfqGgVvYjpRdBjkBODzLjAFzuXxjgiT/SyT7FD6pyHJoTqC7eyXy
+ Vuy0IXttF+hmVn4ffINnPrU7twdX2FqMg+ktNcQlz6r037mw65VmcM31MGVZYxfrh0+H
+ M2UXyxYwqfi8rufIWpr+zvPZecxfT6nDtnWAopv5Dz3QCLLkLE3tYcFawm/6Ric9ovBJ
+ U4IrjDSgde/MR8uI2N2APVVDakWJd8LiiSn1rUZ1+aln48/uM2g/ABALjQTz7XXDjudW
+ U2Mg==
+X-Gm-Message-State: AOJu0Ywc7WvW51H9bbElx9NlmV8J49GWd52tQ8VkoW9Ewgn7qxLdBdmq
+ ag+tcBrIzexu4guSBpySrITb26QN7Wekmf3WZKRMGdi16I4TStZzpdqREc4pMDAyMTLOsX+W6lm
+ CXbRvGhj6OVQuGzdVMXXK0VE/ZLufRFlft6ZiCo49
+X-Gm-Gg: Acq92OGHsU4CRdtnWlcobJZKYr0pBOfDGE9A58sL1rqLla1xo0bWX5pOuLaLrC8NGrk
+ KD07Zt15dfg8SqzxLVwenWY6Hb4soyA5hAD6LS3ZZRivosLCmOonEg2aKBeI/svE+QE84klTCqQ
+ b/Fw6TsER5cWbhgQO4v64OvnLpJC2UVWtfs65OiHMAvqUqwecigqvAepnnOHkgrRrny9iriTpoC
+ jEnynIGG4g9ILYs+kpDffiNLs4/qvXRN1OrDakPypKEhuUD8tbv3o4i/qdZDC7fv2OzruvAY3r0
+ z+iSgA==
+X-Received: by 2002:a17:907:9341:b0:b98:3b5d:e147 with SMTP id
+ a640c23a62f3a-bc56a6498b8mr810004766b.3.1778259683665; Fri, 08 May 2026
+ 10:01:23 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260507164248.59353-1-marek.vasut+renesas@mailbox.org>
- <20260507164248.59353-2-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20260507164248.59353-2-marek.vasut+renesas@mailbox.org>
+References: <20260507220725.209205-1-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20260507220725.209205-1-marek.vasut+renesas@mailbox.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 8 May 2026 10:59:49 -0600
-X-Gm-Features: AVHnY4Ix_xdOTJefQDHSvjzgoiMC_PBJJFXAOkBE0b4wZDAUhBU9ELiO6oE7aHk
-Message-ID: <CAFLszTjCo1mO6pDCaqMfThToTHBS2a1AeO5eEY1sn0T4pCXJsg@mail.gmail.com>
-Subject: Re: [PATCH 2/2] block: rockchip: Staticize and constify driver ops
+Date: Fri, 8 May 2026 11:01:08 -0600
+X-Gm-Features: AVHnY4Lg4MtOhIX7s5igHj8KptCE3vXef9ZHh3ofEjphJb1K5lKfrXQG5ZaZy_E
+Message-ID: <CAFLszTiRWmZaGW7ntiN1nBOyJ+PKSobT8kHg-3CRVaf7jpc5Bg@mail.gmail.com>
+Subject: Re: [PATCH 1/3] misc: cros_ec: Staticize and constify driver ops
 To: marek.vasut+renesas@mailbox.org
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Andrew Goodbody <andrew.goodbody@linaro.org>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>, 
+ Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -108,8 +109,10 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2026-05-07T16:42:39, Marek Vasut <marek.vasut+renesas@mailbox.org> wrote:
-> block: rockchip: Staticize and constify driver ops
+Hi Marek,
+
+On 2026-05-07T22:07:14, Marek Vasut <marek.vasut+renesas@mailbox.org> wrote:
+> misc: cros_ec: Staticize and constify driver ops
 >
 > Set the ops structure as static const. The structure is not accessible
 > from outside of this driver and is not going to be modified at runtime.
@@ -117,7 +120,27 @@ On 2026-05-07T16:42:39, Marek Vasut <marek.vasut+renesas@mailbox.org> wrote:
 > Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 > Acked-by: Quentin Schulz <quentin.schulz@cherry.de>
 >
-> drivers/block/rkmtd.c | 2 +-
+> drivers/misc/cros_ec_sandbox.c | 2 +-
 >  1 file changed, 1 insertion(+), 1 deletion(-)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
+
+> diff --git a/drivers/misc/cros_ec_sandbox.c b/drivers/misc/cros_ec_sandbox.c
+> @@ -726,7 +726,7 @@ int cros_ec_probe(struct udevice *dev)
+>       return cros_ec_register(dev);
+>  }
+>
+> -struct dm_cros_ec_ops cros_ec_ops = {
+> +static const struct dm_cros_ec_ops cros_ec_ops = {
+>       .packet = cros_ec_sandbox_packet,
+>       .get_switches = cros_ec_sandbox_get_switches,
+>  };
+
+Only the sandbox driver is touched - you could do cros_ec_i2c.c,
+cros_ec_lpc.c and cros_ec_spi.c as well if you like.
+
+BTW dm_cros_ec_get_ops() in include/cros_ec.h casts the ops pointer
+back to non-const!
+
+Regards,
+Simon
