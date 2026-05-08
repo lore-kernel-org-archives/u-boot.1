@@ -4,24 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ACA96CD3436
-	for <u-boot@archiver.kernel.org>; Fri,  8 May 2026 12:22:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F95BCD3436
+	for <u-boot@archiver.kernel.org>; Fri,  8 May 2026 12:22:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4120F84AF1;
-	Fri,  8 May 2026 14:22:09 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0045584AF1;
+	Fri,  8 May 2026 14:22:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="iKKNXR05";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="xEs8vhNi";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="B5h0APnI";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="NIVoDQ9p";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CB7E984AF1; Fri,  8 May 2026 14:22:07 +0200 (CEST)
-Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
+ id CDCC584C95; Fri,  8 May 2026 14:22:56 +0200 (CEST)
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
+ [IPv6:2001:67c:2050:0:465::102])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 07D4E83DBF
- for <u-boot@lists.denx.de>; Fri,  8 May 2026 14:22:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F1C9B8488B
+ for <u-boot@lists.denx.de>; Fri,  8 May 2026 14:22:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
@@ -31,47 +32,48 @@ Received: from smtp2.mailbox.org (smtp2.mailbox.org
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4gBpCK5LLzz9v8L;
- Fri,  8 May 2026 14:22:05 +0200 (CEST)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4gBpDF235Cz9vGg;
+ Fri,  8 May 2026 14:22:53 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1778242925;
+ s=mail20150812; t=1778242973;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding;
- bh=b0oSHaRLkNahfnl3VyTC/2FxubvcSXUf19fQi93A6hE=;
- b=iKKNXR055fRgNpzwSUcnvH4P1jyFQilIADMWW2Y03f3yF/8fyUXV2yVE8HKGRH/p70rZ0t
- aK9jsbNfvzD6x/tHM7sB8CtDaA+efm4s2IblsIqw1PBobAMUhaMzUxxR1u8dUjUMnWo9K3
- hqVMEWax9bGoBBVDervsij/p2WMTVRINRuLad6QNYL1WsEPkcHpJlMvczHxSgPicLA89Ma
- KhlNlxBZ2AC97TkjfXZ67tewcL+qQ7hPZ3atwYHqj/3U1wKZc1GefLaS+4miBM2a20zGs3
- L9eBOXXsTeo05Vo5M92F4cqtBClADT4azUP7K9L8qO+f0SHaG54fgCgrkfELog==
+ bh=ifAnUw5JIG/MVYhiSEWtjeB4xJoXFtwAbRpx6Lsf7ps=;
+ b=B5h0APnI9y/XfMx9RPzrUzDDrGjWGMxp5e/KZYcmaFvYq/fWLlQ9I0vsoaTP2ruaIKw3ub
+ H6C3NK2687Ld/cmsfOu4bxwzMf26YuTMwjKZ+wWqXeqzqOHtZJq37GhKGW+NB4/x2NmNMJ
+ A5bZ9huVYYAUDMu4/bwQ+7ika5hHVqLo9Z2Re04+fGzUOEqiFy4ETxl9AkFTm2ohFarhl5
+ uvTjbpSH6sgr5WSKHi8Ls+cCl9wM5qcIFrN9aHeU8QMQEuERqMt6rqwSdRi9N+gLznEx4Y
+ geyH0qH0bBIsnnQ8AbDOMAfiZJWNlYPMMQCfgf4gV9oppj7yJRy0io8YyQOgZQ==
 Authentication-Results: outgoing_mbo_mout;
- dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=xEs8vhNi;
+ dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=NIVoDQ9p;
  spf=pass (outgoing_mbo_mout: domain of marek.vasut+renesas@mailbox.org
  designates 2001:67c:2050:b231:465::2 as permitted sender)
  smtp.mailfrom=marek.vasut+renesas@mailbox.org
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1778242924;
+ s=mail20150812; t=1778242972;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding;
- bh=b0oSHaRLkNahfnl3VyTC/2FxubvcSXUf19fQi93A6hE=;
- b=xEs8vhNiWh9SRM4OPB0eE005y8Eax9jzp5GLVdmRUciePzQvShfTh1hcwGdYCavbwLQ5YZ
- HgJwJRADKEypB0I4TEBf91VmCsCNe3bdT+FJly0fu4EB1+z+qCQ62VablwY4RJ66JDonuF
- AmJHWBCXvVpqEqRHEFLhM1UCXcY4Ur/mn+Ks9ogR7xpxTQRwAeT85RrmAFvqjUHWkWjJk4
- qVc3FGVki34rGC96iAxL12oI1Tzyqa5iGWMlE+IK1jACByVpEo5+Hy1uAUXOc2ZkRMewRl
- LjMIqaw8nf2VG4DKvFMb1qP1AYlaztGrqdJmXDINUocCDZCEAca5VifaV59ecA==
+ bh=ifAnUw5JIG/MVYhiSEWtjeB4xJoXFtwAbRpx6Lsf7ps=;
+ b=NIVoDQ9pjzy87R0Wkp0o0NKlXAqpi9BnRXhio6OoqOkVIJsr4lEon0g2rxjcnY7XpgF/3s
+ 1dX5EjxsEfaq9r15w3wXfMBC7l3Fl63ygOF9fSoQJXrHcNT7MfIG8iyhOg1Saw9bEqNmtM
+ PRkaRGDJ6QGQd1jgSH/wqzIDgnqeSFCgMRpKYd4plio5gV39gobHsMmO+RJnJs/XdsfTCA
+ b81h1ouLEN452hQEGqaT4agQi43t2DRJ++4cc30C9jHukOwU6k+mow4Y+S7oanTbsAA3X2
+ 2KzDCaKLDXB/wf/QVQUFChsmgJMZ5iVuKdAY+A08ZmvUdm6JV93HtX+OQBMZfg==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Stefan Roese <stefan.roese@mailbox.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH] pinctrl: armada-38x: Staticize and constify driver ops
-Date: Fri,  8 May 2026 14:21:56 +0200
-Message-ID: <20260508122201.512840-1-marek.vasut+renesas@mailbox.org>
+ Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH 01/14] power: domain: apple: Staticize and constify driver ops
+Date: Fri,  8 May 2026 14:22:01 +0200
+Message-ID: <20260508122247.512862-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: e95bf33b3398f98e627
-X-MBO-RS-META: mi3sodh8d9jktxra5hfjiwudr6n55jiw
-X-Rspamd-Queue-Id: 4gBpCK5LLzz9v8L
+X-MBO-RS-META: n1q38qtmykpgk4tbgx6q6jkooarafoiy
+X-MBO-RS-ID: a13ea9157848ffd184a
+X-Rspamd-Queue-Id: 4gBpDF235Cz9vGg
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,26 +95,36 @@ from outside of this driver and is not going to be modified at runtime.
 
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
-Cc: Stefan Roese <stefan.roese@mailbox.org>
+Cc: Jaehoon Chung <jh80.chung@samsung.com>
+Cc: Peng Fan <peng.fan@nxp.com>
 Cc: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de
 ---
- drivers/pinctrl/mvebu/pinctrl-armada-38x.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ drivers/power/domain/apple-pmgr.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/pinctrl/mvebu/pinctrl-armada-38x.c b/drivers/pinctrl/mvebu/pinctrl-armada-38x.c
-index 78184d2860a..c18afe958dc 100644
---- a/drivers/pinctrl/mvebu/pinctrl-armada-38x.c
-+++ b/drivers/pinctrl/mvebu/pinctrl-armada-38x.c
-@@ -550,7 +550,7 @@ static int armada_38x_pinctrl_probe(struct udevice *dev)
+diff --git a/drivers/power/domain/apple-pmgr.c b/drivers/power/domain/apple-pmgr.c
+index bf9940621ee..37fac815242 100644
+--- a/drivers/power/domain/apple-pmgr.c
++++ b/drivers/power/domain/apple-pmgr.c
+@@ -67,7 +67,7 @@ static int apple_reset_deassert(struct reset_ctl *reset_ctl)
  	return 0;
  }
  
--struct pinctrl_ops armada_37xx_pinctrl_ops = {
-+static const struct pinctrl_ops armada_37xx_pinctrl_ops = {
- 	.get_pins_count = armada_38x_pinctrl_get_pins_count,
- 	.get_pin_name = armada_38x_pinctrl_get_pin_name,
- 	.get_functions_count = armada_38x_pinctrl_get_functions_count,
+-struct reset_ops apple_reset_ops = {
++static const struct reset_ops apple_reset_ops = {
+ 	.of_xlate = apple_reset_of_xlate,
+ 	.rst_assert = apple_reset_assert,
+ 	.rst_deassert = apple_reset_deassert,
+@@ -138,7 +138,7 @@ static int apple_pmgr_probe(struct udevice *dev)
+ 	return 0;
+ }
+ 
+-struct power_domain_ops apple_pmgr_ops = {
++static const struct power_domain_ops apple_pmgr_ops = {
+ 	.on = apple_pmgr_on,
+ 	.of_xlate = apple_pmgr_of_xlate,
+ };
 -- 
 2.53.0
 
