@@ -4,106 +4,142 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90991CD3445
-	for <u-boot@archiver.kernel.org>; Sat,  9 May 2026 00:42:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0966ACD37AC
+	for <u-boot@archiver.kernel.org>; Sat,  9 May 2026 00:43:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 82D5A84E5C;
-	Sat,  9 May 2026 02:40:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id E4D8284E0E;
+	Sat,  9 May 2026 02:40:32 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=outlook.fr
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="g01fC99C";
+	dkim=pass (2048-bit key; unprotected) header.d=OUTLOOK.FR header.i=@OUTLOOK.FR header.b="t+tTvOk8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6880884D1A; Fri,  8 May 2026 23:32:44 +0200 (CEST)
-Received: from smtp-relay-internal-1.canonical.com
- (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ id 4712F84DEC; Fri,  8 May 2026 21:46:31 +0200 (CEST)
+Received: from AM0PR83CU005.outbound.protection.outlook.com
+ (mail-westeuropeazolkn19010001.outbound.protection.outlook.com [52.103.33.1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6A77884CEF
- for <u-boot@lists.denx.de>; Fri,  8 May 2026 23:32:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=canonical.com
+ by phobos.denx.de (Postfix) with ESMTPS id 71BA084C33
+ for <u-boot@lists.denx.de>; Fri,  8 May 2026 21:46:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=aristo.chen@canonical.com
-Received: from mail-pf1-f198.google.com (mail-pf1-f198.google.com
- [209.85.210.198])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 27E293F9C1
- for <u-boot@lists.denx.de>; Fri,  8 May 2026 21:32:42 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1778275962;
- bh=ZcdxGsH+z5nGD+j7GS29ZPoAxjLJdcvRr+ttuG0s2lY=;
- h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
- MIME-Version;
- b=g01fC99CjlpT2YcU64hP8qTwyDFmKJjeujBfbw/z97akpDRz9WQlSBBrkDD1gCq7T
- 58kjp94pqWabf2r8IiTttcEjwKdBaLFrOnsSi/kJrOuvr7GhdVhBO7AST0cXvQlE/E
- GjzOKpGFlwv5GMC9Mw4jV6sD5ZgoGTnyCOjNyNVC7KApS4REqtkE0npALXo4xqURgx
- 5GeJIIhBsjbxRg1TH67FRqtAW3dChnqjjSTogux2zPCCYur8UgRmV40qr1HjhVerNh
- ocPV1269OCSo5PuZwSGzoWlJsDhp8PSomV/wgIMcPHHsQbWDFWldQezJEeihDmR264
- mAN08tYbfci6mLdK4KidLigOmrvdd5j1bJ85B71dXzUD9e0aOX4hnrSPq1W6/7A5Ji
- 9SQcpB3cv1lxiGuIKsxvuB1ukW2Gv2EBVy8cOcE/1RSPXxehQq4Os/7UPTzgZuaN3S
- HbOzgQPrkkFjXu9rFuLY48tqBSwnrrw5+rB4y9g7kBTdccVNdsOrkvq+x/eir87NkE
- +oVRZA/qgxJLQFM0GbDINbNMjQNiQj37plQ7U2ATA9nP6/WUFgjKVclxW8FJEJZSRH
- eZcHCaxkJ+GQzg+oQ87NHXx20M29kcgW+RrlhXW52bWSvA5loUmPB8Xg6KTJ/KgqeW
- t1e++um+1+RyYB8n8KNqmXK4=
-Received: by mail-pf1-f198.google.com with SMTP id
- d2e1a72fcca58-82f756ebd0dso1647648b3a.1
- for <u-boot@lists.denx.de>; Fri, 08 May 2026 14:32:42 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778275960; x=1778880760;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=ZcdxGsH+z5nGD+j7GS29ZPoAxjLJdcvRr+ttuG0s2lY=;
- b=e35T6OAwngrXebhQdAgskNlnEioNULbg+o9CYuZrfkc8+EY2DWfacSHxrLsG8ZSgj1
- nFEzcNsRZ3/mrIkNfsOgEekrusbUG6/V+YcZHX1YwcaWw5cuYYMyIkrIwjlhIezTgqqj
- 32Wcslc2DZ2DaA7SL76kflx2HZ/tTljHnnZ5R+hkmzA3bEF1OK6p4veHim365KDak051
- fkR3RgCP+EsxNQsDerRUpdkO5cshYBSzNjAPfU6IMtX6qfywTOrkOPpQMZPHqyu4E3mL
- A5aBTbxbgVQzlr7k4KhaqtdlGadHl/az55R0EE1ohqsBd+qYALpUDfzzl7Cx7tH5NOH1
- CSKw==
-X-Gm-Message-State: AOJu0YzUYcm/sspL6mkdZwngCW9C08Q6yGM/RD6g+zCv27QUvOb9BUUa
- LUdPcjVldgU7sMjbqokh2KE6WW182soGkmbMYUofAI/NS34L6N7EVLlY7CI3nFZNHUp5yO/ftrZ
- u84lx4VdoxgHQShUvAHYt4fox9MEeo7ZBOs0dICBzQT6zm14uTHTb0sLzR9vC4G84TxOPy9PzJ/
- p8VLmGvxH6uJg=
-X-Gm-Gg: Acq92OGuQ3xkWE9ky1Zo/zSL1CRkB+pF4aqs/bR6p7NRrWaWed4LPx1sI+tOMglK6nv
- VfTaKf1DMgbDXHPtuIO6w9u8s19lSHo+eDfqtR2bSJTbvCcAodZKTYP1Rqvg+84AAr5LudiwiIt
- fLnwVfpUPQcn7rY7aDsyg2+FrmU2gzWyNhJdsBXsloBzgbXgQxLt2HiKI2UrnJ3gL6GkaQxguuY
- o/VdyWae0XRpY7cuIGPUALEk1gldAx7E4VG7Om6DOTW4Ln3/hfEHU5MbFvhceD9lNIJV0b891g7
- rhZ1Z+HxQUmya7s0J6gsfkkCub8YSH3Tjs/0coGr7OBLPd+LCXTg9AWP6ebA/tuN7pTUpgqolNA
- r0Lj5p3rwVXLYJgXmjLVllyGOD1sYRfk5B6bUhfULCzkdxkhc/cSA8p89K0IO4HEu1sX1dNBaXI
- TKmyx3aLlc7c6ZANM=
-X-Received: by 2002:a05:6a00:1796:b0:82f:5726:be23 with SMTP id
- d2e1a72fcca58-83cf7755867mr4855259b3a.49.1778275960164; 
- Fri, 08 May 2026 14:32:40 -0700 (PDT)
-X-Received: by 2002:a05:6a00:1796:b0:82f:5726:be23 with SMTP id
- d2e1a72fcca58-83cf7755867mr4855245b3a.49.1778275959766; 
- Fri, 08 May 2026 14:32:39 -0700 (PDT)
-Received: from noble-uboot.tail872496.ts.net
- (124-218-37-86.cm.dynamic.apol.com.tw. [124.218.37.86])
- by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-83962e7e3fcsm16196751b3a.0.2026.05.08.14.32.37
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 08 May 2026 14:32:39 -0700 (PDT)
-From: Aristo Chen <aristo.chen@canonical.com>
+ dmarc=pass (p=none dis=none) header.from=outlook.fr
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=fberder@outlook.fr
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=RlhQBG++zO2E6FkYS9AqpQcA35cYhrcMqAEq2yWH4ffpkg8Ofmx5AfP1UvzaicXUNv1p6LVQqfB9KRIWcxr7OQwODyfKeNpxE0rzlGtmlqPsAt0G4gPolP6fE6iN9vADaTbA9UJ5PWBANVg0aQvKrX7JMIve6L1HPpB7PfTqzPVbvSSQP4PdRN6hfVYVTPkk0x+6f8dADT0yNmNra93qGedPhZnazWYYf++5hJU3dGWXCQf/QT/IXWfydhxu9xHxdhg9FUDvROzqAB1YnDN4uxp7nl2V3mHHuZbqbfUsPa7Z3mW7PigRVvQiNCYlkcAM85E3IQm0yOF8U3CGvGn22Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=2NhJ097GEeSEKt06iC8X7ffy3Mh2lvLUJygbdHEL1A8=;
+ b=VggAiyRE00YV0IW0A/KxSOllRthZ5RdNBDzNkE+FVJSSJslEgoHMqaaCk66G+uaGjkGzFznjp9Pnfe3cMB0jbijfKWmz/XI0qGUkrF3mC9XL6SW4FmNqvbZnDXXurpG/y26Fr01eESSOBnN7tCJAIJcWOej+WOkmeROVHQ7Q2WfbKCY+MG3wsVRB+krPCPllkZGZMk6c7kjkQ3Rqxm37EkHVZsl+csP8m3SgUoUpKWcYdtuvK2bi4aLkKnPbUrSEiNIxjHx574q62ePq+D4wnMBXPpfbps/oG6Nh11FB7CgJ0Gk1tPQBPuVwSQKpcz73AN8MZqMX90syLvJx/dYmYg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
+ dkim=none; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=OUTLOOK.FR;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=2NhJ097GEeSEKt06iC8X7ffy3Mh2lvLUJygbdHEL1A8=;
+ b=t+tTvOk8Un2mhNM47729JyVZwRb5hG17cOA6h4Qe3bfROkxwbMNvA7z4VPx6qplInswfvNbOAYaJ/4UZc2M+YXE/omZHHGIl+d0UOASJAfFcO8bdYL8gXd/tC1+LHFN6bEbyNSvV+J9p3BJiBSbvvDKVLZL2QmOkC0B5GQjA6MiPu6xmJVFAofNuXdKdfKedoi1bXK2KG/yCK87uGivMlzvu/V2+6luDKqUisCJkGwO1R1iVH68eOnVn2OcGnHFaBEjINr8xqdqZ0BAugdMrpB2p2Gkxnl5v8PBWJ5v2D49alLa6cf2NJJqIIJJJVgAQYPIPOYLsIPb2SuSBEYTssQ==
+Received: from BESP194MB2805.EURP194.PROD.OUTLOOK.COM (2603:10a6:b10:e8::5) by
+ AM8P194MB1717.EURP194.PROD.OUTLOOK.COM (2603:10a6:20b:324::9) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9891.20; Fri, 8 May 2026 19:46:27 +0000
+Received: from BESP194MB2805.EURP194.PROD.OUTLOOK.COM
+ ([fe80::5ae3:1158:9ce8:90]) by BESP194MB2805.EURP194.PROD.OUTLOOK.COM
+ ([fe80::5ae3:1158:9ce8:90%3]) with mapi id 15.20.9891.019; Fri, 8 May 2026
+ 19:46:27 +0000
+Message-ID: <BESP194MB28057EE4305A2535D0607448DA3D2@BESP194MB2805.EURP194.PROD.OUTLOOK.COM>
+Date: Fri, 8 May 2026 21:46:22 +0200
+User-Agent: Mozilla Thunderbird
+Content-Language: en-US
 To: u-boot@lists.denx.de
-Cc: Aristo Chen <aristo.chen@canonical.com>, Tom Rini <trini@konsulko.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- James Hilliard <james.hilliard1@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- David Lechner <dlechner@baylibre.com>
-Subject: [PATCH v1 3/3] boot/fit: use fdt_for_each_subnode() in image-fit.c
-Date: Fri,  8 May 2026 21:32:01 +0000
-Message-ID: <20260508213217.3807786-4-aristo.chen@canonical.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260508213217.3807786-1-aristo.chen@canonical.com>
-References: <20260508213217.3807786-1-aristo.chen@canonical.com>
+Cc: Lukasz Majewski <lukma@denx.de>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, Marek Vasut <marex@denx.de>,
+ Tom Rini <trini@konsulko.com>
+From: Francois Berder <fberder@outlook.fr>
+Subject: [PATCH] usb: gadget: f_acm: Fix memory leak in acm_add
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: PR1P264CA0110.FRAP264.PROD.OUTLOOK.COM
+ (2603:10a6:102:2cf::16) To BESP194MB2805.EURP194.PROD.OUTLOOK.COM
+ (2603:10a6:b10:e8::5)
+X-Microsoft-Original-Message-ID: <d7089c19-d3da-44ba-af88-99fdcf4d0ceb@outlook.fr>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Sat, 09 May 2026 02:40:19 +0200
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BESP194MB2805:EE_|AM8P194MB1717:EE_
+X-MS-Office365-Filtering-Correlation-Id: f7969c7e-744a-4d74-1a72-08dead3a7d6c
+X-Microsoft-Antispam: BCL:0;
+ ARA:14566002|19110799012|8060799015|41001999006|15080799012|23021999003|5062599005|6090799003|5072599009|8022599003|24021099003|37011999003|3412199025|440099028|12091999003;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?YjZIU3V2ZXM1eUhUVFJUc1hRREJjK0NCMVFjdTVWYWRVVmlEanh0UUIzMGRV?=
+ =?utf-8?B?QUswbkEvTklHYk9TRlZjWXNqSEcwWjV0dW90K1lLS3hkdFhiNTNIN0gzQ1Nh?=
+ =?utf-8?B?MkcvT1QrbUIyL1pLdVhHelYvMEtxSHdLTnFWVjB1c0NndFlYUk1MSGZKK3du?=
+ =?utf-8?B?aVVmM2lwb1JFMWR2Sjk0UElCSFEyWjlpS2FoNUYxSzVobVVQZHdoQ3diejU4?=
+ =?utf-8?B?Vmd4M0Y4cGNlWmozaDh4cFM4c0hHNDZFNmN3QXJxMHJpWHlsNStxR0txZzR4?=
+ =?utf-8?B?N2c1Y3VCemJuMWdSQWVhVzE5STVaR2NBNGV5MkpxWHAxa3IzdS92OWpTcXdO?=
+ =?utf-8?B?ck0yUE5MSnZzZ2ZYS09aZkNrVE1wL1FINDkvR0Rpdmp5TzNYaTRnZXY5RkRw?=
+ =?utf-8?B?a2I0eWtFbXVCa09CbVBoMDJqNVdzUEU5bGcrRWFjV2p6ZjBpTXhYZCtseW01?=
+ =?utf-8?B?K25QWUdPRElPWk1vQXJEcWFGYVZrTFF0ZWRMWmd5Q1RQOFB4bkIvVWMzNmVR?=
+ =?utf-8?B?MXRNSWlQQjhHekdJT0NwUGZRdHlkUzlPWkVqRUlTcFYxWjFMeG9pZ0s2dG1L?=
+ =?utf-8?B?SkVCZHBPYlF6N0E3ZGZsT0dtRi9SQ0ZzMXQvblA5L1VTM1o3MWJ1TzZmZHZm?=
+ =?utf-8?B?RTVIL0Z6RkE3VkxFcjNGd2xSeGZ5T2xBeWNLb1J3M3pkYXhPcUdwQXhHUmlB?=
+ =?utf-8?B?N2lhWHB6VWRqRkpvMSswNFJtaE94dzA5aVVPK3UraDdORzh6a1ZxbnRjYVRG?=
+ =?utf-8?B?NWozRFhLNm1JVTNPVU5IYVpLaFVDbjFweGgxRExoUVV4bi9PZUpNenBQekFV?=
+ =?utf-8?B?d0ZwSzZ4dUpKUGZ2RUJFQS9kcWJHTHpCaEc0WGN4d0FnQXNhbUhyV3dRaE1R?=
+ =?utf-8?B?UXg1OVNHaGFrdmFlMzhFcHJyZnoxWkFuemNESVpMaUhiWGZzNG5HMmRjLzdI?=
+ =?utf-8?B?TE05M2c5ak5kTVNITFZmQmpLblo2UDlvRzJnaGRDZ3lpa1NQWFVsZHR2V3Y0?=
+ =?utf-8?B?ZldqZGc4bE9FaW9KRUcxTjdHMHFoTEpiQkhNQ1F0V2J0SVlKSHRLY1dUMjR3?=
+ =?utf-8?B?ektFV01aaHh4M1YvQ3BuNURPbENHckQ3UExVZm9HOGxtZG8zRUpGWHZiTkhh?=
+ =?utf-8?B?S1U1MWo3eE12S3FQcThGWHZZYTU4Mm9QemJubzRIeVRac3NWZGNaZ2RobUo1?=
+ =?utf-8?B?d2dEZzkvWG8ycm14UEZqSjRxSXp6OFUvVERQbVMvOVNSbkxPOUk3QzFFZU1x?=
+ =?utf-8?B?R3JWK2xHb3VGYmJ3Q08wOUVkMU5HdHUzVGtKNGhjYXZ4V3VtN29FK2lkeGNz?=
+ =?utf-8?B?VGUrdkdIWE42U2s1QWdnVHBtZHFtM2NPakhXTXVaMzhuZXZxd2JoL1YvdGlr?=
+ =?utf-8?B?cmJZNlJjL2tuNW1pRzFzWi9Lc2lXK1hJdHV6NW1hKzR0ZmozWDFQVnhPaXBa?=
+ =?utf-8?Q?O9fWkbZt?=
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?TVpFSmpKRUhhUlc4cFI0SnkwSjVuTHBOVEYxTUxuR09ZcWR5S0FhN2NLTTVi?=
+ =?utf-8?B?bkRJSmMvMmNuSyt6S01seEQvRFZrUkpySDdxMklMRm8wK3lkVTc1ZS92OEww?=
+ =?utf-8?B?Y3Q3OU5FSTdtTkRKMWFTZGNHQVpVczc2b0hkMjg5Tjloc1doYlUzMCs0cjVR?=
+ =?utf-8?B?Z3hqL1htNjAzOW5rLy9HaGRiMXFhd1plaTJHZnl4ZUZIZW9idFptMndFRTNC?=
+ =?utf-8?B?SWNvUGk0a2xxK2doWlJaMWNKS3dxVmdmQnFMMDA4dnFPendEdWgxeG1LajRy?=
+ =?utf-8?B?LzhOdXZmUU5STWQyNlhWUTVKNk96U1kwTCtqOFQzdDB6NFdmWm1rY1dEQ1pj?=
+ =?utf-8?B?dEVSaHlzTllDUzNRMkpVbFNhYlF5ZmttdEFOQ0d6TFNKeDJUdklVdTJaL2ZO?=
+ =?utf-8?B?bXhPTkJwbFZrSXBEbExzY3pUaUQvT29HSnFuVG40U2hzaFZFV1JMOThIZERh?=
+ =?utf-8?B?Q3IxTTUzOEUvNkxNM3JENHJIYTFFQkN6NlZIWGl1RERoTk16cE1tNndKMmg3?=
+ =?utf-8?B?cC96aTNvRG5HN1Z4UTdWenFVZmh6anA1dW9QNXlQTUhKOUZGL01Fc3MyMmEr?=
+ =?utf-8?B?WkRlV0xnWkZuSS82MStRWFcrakg2cHJNcmkxdzhXdy85R0ZxKy9DSGk3VmJU?=
+ =?utf-8?B?N0dyKzRhRERHd29FR0J1cnltcmVuM2ppMFFUaDlVdGY5VU5PbHY0bUhTSDMw?=
+ =?utf-8?B?VTFNOTNPbStGU3JiVTlMZWF6dkZ3U1kyUWpoak8vUTdOejFJYVV4K29XVGEr?=
+ =?utf-8?B?RFpuVkFZbzNSWnhRcGYyZzUvc0ZzNDRmQ2NYUUtLNXkvS3FPT3BXK3lDYXBt?=
+ =?utf-8?B?YUFQdklwWlROSGhOK296Nmh5Wm1la28yZ1V1YkpsbU9vbzNCYUJNUzJzZEl5?=
+ =?utf-8?B?QjZnaEN1SURteTg0K2puRHFpU0tncnBMSW1pUXVEaUZPYnlQMFF6VG9pdlAz?=
+ =?utf-8?B?L01iK293Y2QvZ3YvWGdBTFFYcUcxSXF2MDRkSjJwUEJwS2xTdk56U2pQQThG?=
+ =?utf-8?B?S0F2UldSOXQ4MVFoSlpKOGZ0L0RwUzkxSm9lNm0zNnhlR3RyMGs0Z2t2SEx0?=
+ =?utf-8?B?ZTVMVCtob3d5cVZMeEdsSVRXQ0pmTFAydmVqUkFPRDFFMVY0WjIzV0JoYkdT?=
+ =?utf-8?B?ZkJHdy9MVEVNY3drbXljT2g3Y1IxRFZVQTNSVGhxNEFrb2paekhhUVJ6ZW91?=
+ =?utf-8?B?Y2swWktTeCtndHRkRmJXQjR5THoyanVPYklsMlh2bmhyekUrTEpNeHVvVEpG?=
+ =?utf-8?B?VEZZSWtLSFZqcERzV3JQdXRXY3hjeU5aNEJML1pKbDF5ejl6OFFDVmJrbDNa?=
+ =?utf-8?B?OWl5ajhhUEdHakFuK2ViMTQrM0MvcStUZktYcG9rQnQ2cDFMUkdTTVpMQ3Bn?=
+ =?utf-8?B?dUZheEJERWdxNS9aK2NkeEI0bTc2dUR1ejNaazRudnhTWlFqdzFJOXhPL1RX?=
+ =?utf-8?B?eGlXQ1c5NTVkUDJOcnUrUnpURVV4UzZSQjlpbVNKUXNzZG1yVHZxMWE2Sk1o?=
+ =?utf-8?B?cUpBR3RmZTQ1UnIwZTlOaWNGdzVEa01YcGxidzNEaWRzN3FuUHpwdXZEMnha?=
+ =?utf-8?B?WDlPSlFxUlViOTJhZllXQy9qTkwyYkNuMDRCdUpEaUlrV1VVKzFyZjBObnc4?=
+ =?utf-8?B?S3VMMmxYdk1NS1RLMTh1ZDNCNXR0dEJiM0hrbVhXMy9GMTVsZ1I4RFlYeitx?=
+ =?utf-8?B?enZmM1NjUkM0U3REdlg4NjRlbTJyWWY0c2hVYmx1djhBRjV4aVQ3QVVySzFo?=
+ =?utf-8?B?cS9JaE5OQWxPaHFicTVxK3JpMkdaU2FQSVFNc2V2V05PU0pCQm5rbnk4MTRN?=
+ =?utf-8?B?Z0NjWFVZMXRmZjZNZWlFVHlmNTdsM1hZdXNTZTV5aVlHcytJS2RQa0JWU1hk?=
+ =?utf-8?Q?MPnobrzoBcR0J?=
+X-OriginatorOrg: sct-15-20-9412-4-msonline-outlook-3927c.templateTenant
+X-MS-Exchange-CrossTenant-Network-Message-Id: f7969c7e-744a-4d74-1a72-08dead3a7d6c
+X-MS-Exchange-CrossTenant-AuthSource: BESP194MB2805.EURP194.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 May 2026 19:46:27.1727 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
+X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM8P194MB1717
+X-Mailman-Approved-At: Sat, 09 May 2026 02:40:31 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -120,242 +156,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Replace the verbose fdt_next_node() + ndepth pattern with the
-fdt_for_each_subnode() macro at all seven sites in boot/image-fit.c
-where the loop only ever processes direct children. The macro is
-already defined in <linux/libfdt.h> and used in boot/image-fit-sig.c,
-so this brings image-fit.c in line with the rest of the FIT code.
+If udc_device_get_by_index fails, the f_acm struct was not released.
+Free it before returning the error.
 
-The conversions are equivalence-preserving:
-
-  - fit_get_subimage_count(): the depth-1 filter and the macro are
-    both restricted to direct children.
-  - fit_conf_print(): the parameter is named noffset, so the loop
-    now uses sub_noffset to keep the parent reference stable.
-  - fit_print_contents(): the count reset that lived inside the for
-    initialiser is moved out as an explicit assignment before each
-    loop, so the second loop still starts from zero.
-  - fit_image_print(): straightforward replacement.
-  - fit_all_image_verify(): same shape as the print loops, with the
-    count reset moved out as an explicit assignment before the loop.
-  - fit_conf_find_compat(): the body's "if (ndepth > 1) continue"
-    guard is redundant once the macro is in use, and is dropped.
-
-No behaviour changes outside of these mechanical reductions. Local
-ndepth declarations that are no longer referenced are removed.
-
-Signed-off-by: Aristo Chen <aristo.chen@canonical.com>
+Signed-off-by: Francois Berder <fberder@outlook.fr>
 ---
- boot/image-fit.c | 107 ++++++++++++-----------------------------------
- 1 file changed, 27 insertions(+), 80 deletions(-)
+ drivers/usb/gadget/f_acm.c | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/boot/image-fit.c b/boot/image-fit.c
-index 5a502e93106..dddc0d97928 100644
---- a/boot/image-fit.c
-+++ b/boot/image-fit.c
-@@ -156,18 +156,10 @@ static void fit_get_debug(const void *fit, int noffset,
- int fit_get_subimage_count(const void *fit, int images_noffset)
- {
- 	int noffset;
--	int ndepth;
- 	int count = 0;
+diff --git a/drivers/usb/gadget/f_acm.c b/drivers/usb/gadget/f_acm.c
+index 8f7256069f5..0d8a3183330 100644
+--- a/drivers/usb/gadget/f_acm.c
++++ b/drivers/usb/gadget/f_acm.c
+@@ -547,8 +547,10 @@ static int acm_add(struct usb_configuration *c)
+ 	f_acm->usb_function.setup = acm_setup;
  
--	/* Process its subnodes, print out component images details */
--	for (ndepth = 0, count = 0,
--		noffset = fdt_next_node(fit, images_noffset, &ndepth);
--	     (noffset >= 0) && (ndepth > 0);
--	     noffset = fdt_next_node(fit, noffset, &ndepth)) {
--		if (ndepth == 1) {
--			count++;
--		}
--	}
-+	fdt_for_each_subnode(noffset, fit, images_noffset)
-+		count++;
+ 	status = udc_device_get_by_index(0, &f_acm->udc);
+-	if (status)
++	if (status) {
++		free(f_acm);
+ 		return status;
++	}
  
- 	return count;
- }
-@@ -291,7 +283,7 @@ static void fit_conf_print(const void *fit, int noffset, const char *p)
- 	const char *uname;
- 	int ret;
- 	int fdt_index, loadables_index;
--	int ndepth;
-+	int sub_noffset;
- 
- 	/* Mandatory properties */
- 	ret = fit_get_desc(fit, noffset, &desc);
-@@ -357,14 +349,8 @@ static void fit_conf_print(const void *fit, int noffset, const char *p)
- 	}
- 
- 	/* Process all hash subnodes of the component configuration node */
--	for (ndepth = 0, noffset = fdt_next_node(fit, noffset, &ndepth);
--	     (noffset >= 0) && (ndepth > 0);
--	     noffset = fdt_next_node(fit, noffset, &ndepth)) {
--		if (ndepth == 1) {
--			/* Direct child node of the component configuration node */
--			fit_image_print_verification_data(fit, noffset, p);
--		}
--	}
-+	fdt_for_each_subnode(sub_noffset, fit, noffset)
-+		fit_image_print_verification_data(fit, sub_noffset, p);
- }
- 
- /**
-@@ -386,8 +372,7 @@ void fit_print_contents(const void *fit)
- 	int images_noffset;
- 	int confs_noffset;
- 	int noffset;
--	int ndepth;
--	int count = 0;
-+	int count;
- 	int ret;
- 	const char *p;
- 	time_t timestamp;
-@@ -424,20 +409,12 @@ void fit_print_contents(const void *fit)
- 	}
- 
- 	/* Process its subnodes, print out component images details */
--	for (ndepth = 0, count = 0,
--		noffset = fdt_next_node(fit, images_noffset, &ndepth);
--	     (noffset >= 0) && (ndepth > 0);
--	     noffset = fdt_next_node(fit, noffset, &ndepth)) {
--		if (ndepth == 1) {
--			/*
--			 * Direct child node of the images parent node,
--			 * i.e. component image node.
--			 */
--			printf("%s Image %u (%s)\n", p, count++,
--			       fit_get_name(fit, noffset, NULL));
-+	count = 0;
-+	fdt_for_each_subnode(noffset, fit, images_noffset) {
-+		printf("%s Image %u (%s)\n", p, count++,
-+		       fit_get_name(fit, noffset, NULL));
- 
--			fit_image_print(fit, noffset, p);
--		}
-+		fit_image_print(fit, noffset, p);
- 	}
- 
- 	/* Find configurations parent node offset */
-@@ -454,20 +431,12 @@ void fit_print_contents(const void *fit)
- 		printf("%s Default Configuration: '%s'\n", p, uname);
- 
- 	/* Process its subnodes, print out configurations details */
--	for (ndepth = 0, count = 0,
--		noffset = fdt_next_node(fit, confs_noffset, &ndepth);
--	     (noffset >= 0) && (ndepth > 0);
--	     noffset = fdt_next_node(fit, noffset, &ndepth)) {
--		if (ndepth == 1) {
--			/*
--			 * Direct child node of the configurations parent node,
--			 * i.e. configuration node.
--			 */
--			printf("%s Configuration %u (%s)\n", p, count++,
--			       fit_get_name(fit, noffset, NULL));
-+	count = 0;
-+	fdt_for_each_subnode(noffset, fit, confs_noffset) {
-+		printf("%s Configuration %u (%s)\n", p, count++,
-+		       fit_get_name(fit, noffset, NULL));
- 
--			fit_conf_print(fit, noffset, p);
--		}
-+		fit_conf_print(fit, noffset, p);
- 	}
- }
- 
-@@ -494,7 +463,6 @@ void fit_image_print(const void *fit, int image_noffset, const char *p)
- 	ulong load, entry;
- 	const void *data;
- 	int noffset;
--	int ndepth;
- 	int ret;
- 
- 	if (!CONFIG_IS_ENABLED(FIT_PRINT))
-@@ -584,14 +552,8 @@ void fit_image_print(const void *fit, int image_noffset, const char *p)
- 	}
- 
- 	/* Process all hash subnodes of the component image node */
--	for (ndepth = 0, noffset = fdt_next_node(fit, image_noffset, &ndepth);
--	     (noffset >= 0) && (ndepth > 0);
--	     noffset = fdt_next_node(fit, noffset, &ndepth)) {
--		if (ndepth == 1) {
--			/* Direct child node of the component image node */
--			fit_image_print_verification_data(fit, noffset, p);
--		}
--	}
-+	fdt_for_each_subnode(noffset, fit, image_noffset)
-+		fit_image_print_verification_data(fit, noffset, p);
- }
- 
- /**
-@@ -1477,7 +1439,6 @@ int fit_all_image_verify(const void *fit)
- {
- 	int images_noffset;
- 	int noffset;
--	int ndepth;
- 	int count;
- 
- 	/* Find images parent node offset */
-@@ -1491,23 +1452,15 @@ int fit_all_image_verify(const void *fit)
- 	/* Process all image subnodes, check hashes for each */
- 	printf("## Checking hash(es) for FIT Image at %08lx ...\n",
- 	       (ulong)fit);
--	for (ndepth = 0, count = 0,
--	     noffset = fdt_next_node(fit, images_noffset, &ndepth);
--			(noffset >= 0) && (ndepth > 0);
--			noffset = fdt_next_node(fit, noffset, &ndepth)) {
--		if (ndepth == 1) {
--			/*
--			 * Direct child node of the images parent node,
--			 * i.e. component image node.
--			 */
--			printf("   Hash(es) for Image %u (%s): ", count,
--			       fit_get_name(fit, noffset, NULL));
--			count++;
-+	count = 0;
-+	fdt_for_each_subnode(noffset, fit, images_noffset) {
-+		printf("   Hash(es) for Image %u (%s): ", count,
-+		       fit_get_name(fit, noffset, NULL));
-+		count++;
- 
--			if (!fit_image_verify(fit, noffset))
--				return 0;
--			printf("\n");
--		}
-+		if (!fit_image_verify(fit, noffset))
-+			return 0;
-+		printf("\n");
- 	}
- 	return 1;
- }
-@@ -1734,7 +1687,6 @@ int fit_check_format(const void *fit, ulong size)
- 
- int fit_conf_find_compat(const void *fit, const void *fdt)
- {
--	int ndepth = 0;
- 	int noffset, confs_noffset, images_noffset;
- 	const void *fdt_compat;
- 	int fdt_compat_len;
-@@ -1757,9 +1709,7 @@ int fit_conf_find_compat(const void *fit, const void *fdt)
- 	/*
- 	 * Loop over the configurations in the FIT image.
- 	 */
--	for (noffset = fdt_next_node(fit, confs_noffset, &ndepth);
--			(noffset >= 0) && (ndepth > 0);
--			noffset = fdt_next_node(fit, noffset, &ndepth)) {
-+	fdt_for_each_subnode(noffset, fit, confs_noffset) {
- 		const void *fdt;
- 		const char *kfdt_name;
- 		int kfdt_noffset, compat_noffset;
-@@ -1768,9 +1718,6 @@ int fit_conf_find_compat(const void *fit, const void *fdt)
- 		size_t sz;
- 		int i;
- 
--		if (ndepth > 1)
--			continue;
--
- 		/* If there's a compat property in the config node, use that. */
- 		if (fdt_getprop(fit, noffset, FIT_COMPAT_PROP, NULL)) {
- 			fdt = fit;		  /* search in FIT image */
+ 	status = usb_add_function(c, &f_acm->usb_function);
+ 	if (status) {
 -- 
 2.43.0
-
