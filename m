@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21180CD3436
-	for <u-boot@archiver.kernel.org>; Fri,  8 May 2026 08:49:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2E20CD342F
+	for <u-boot@archiver.kernel.org>; Fri,  8 May 2026 08:49:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3D24584C3B;
+	by phobos.denx.de (Postfix) with ESMTP id 761EA84C54;
 	Fri,  8 May 2026 10:48:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=ew.tq-group.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=ew.tq-group.com header.i=@ew.tq-group.com header.b="DB7BzS9s";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=ew.tq-group.com header.i=@ew.tq-group.com header.b="MjP+56+S";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 987B384C6E; Fri,  8 May 2026 10:48:55 +0200 (CEST)
+ id 9B85C84C3B; Fri,  8 May 2026 10:48:55 +0200 (CEST)
 Received: from www537.your-server.de (www537.your-server.de [188.40.3.216])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2EAE684C1A
- for <u-boot@lists.denx.de>; Fri,  8 May 2026 10:48:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 828F084C50
+ for <u-boot@lists.denx.de>; Fri,  8 May 2026 10:48:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=ew.tq-group.com
 Authentication-Results: phobos.denx.de; spf=pass
@@ -30,31 +30,30 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
  Content-Type:Content-ID:Content-Description:Resent-Date:Resent-From:
  Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID;
- bh=THSxc1TgobDFoOM+nawAHsZwESdCTqPVPG1vrHXpRkU=; b=DB7BzS9s0+pNApo2rXWTqjYJ97
- rNd7fYmZYA6a2UN6zBSuVt3puZUA4V64svntTGkhd4GP/LJJoRx2fOrJS3i/cOr65m812OxZhFBo7
- 6Yok+qXStRuRrA7BXWbPZ9HUVp9vfa9tPFiMQyBWdsnrHb7g7oLTM1fyQbZDxcjoabHo9USZ3ck+3
- FSSqOtxO9SWiT4xKeb6qURc+3NTPB8haXttf2cU/R/wWPqacN9e6WlkBa3PclB5jRdoW4N59hB1/O
- tlogf3MVHrMTekOJfMMjZxH0fo6AB6fCgPkLdf0OAt8enJlNx0Y3J0INvM6rY0ayhPpYyHuPK4o1H
- latUyBVg==;
+ bh=hxDjW+qVyofIUA2ER04VOap2j1uczTKFgX48CTqBMac=; b=MjP+56+SSkNmD84hTkDNuwl80r
+ DDJu3Vip9KbtgFXunFAmHVHNJ27wZdScS7nOgKe9rg0bFzFW+/KcGjrB5teZRU2lnfwTl5vqLFDzz
+ UatpwI6qbaCF7YckbsqIKLXf6nWAcRW8LGwKsgYGiV0s8tvJ903hUVA39vsKqm6r+/Y1MFV1v7Wo6
+ Ev4GTC6GFmOphrDMiJT/YhS5Rlpn2chKLql0gWWksxvaGzkeqA0gYhNQKnjtDsXA2KWo+0RPxGPLI
+ cgjHjVvN9tcJvGmXxGk7AcZAmLTc3r1XbPHdF6N5JLh3/fXQnVkoBVWKMQhXp8cRsLs/uEZwzo6BK
+ f0OnGk2w==;
 Received: from sslproxy03.your-server.de ([88.198.220.132])
  by www537.your-server.de with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
  (Exim 4.96.2) (envelope-from <Alexander.Feilke@ew.tq-group.com>)
- id 1wLGt8-0009ZS-2c; Fri, 08 May 2026 10:48:50 +0200
+ id 1wLGtA-0009b1-2A; Fri, 08 May 2026 10:48:52 +0200
 Received: from localhost ([127.0.0.1])
  by sslproxy03.your-server.de with esmtpsa (TLS1.3) tls TLS_AES_256_GCM_SHA384
  (Exim 4.96) (envelope-from <Alexander.Feilke@ew.tq-group.com>)
- id 1wLGt7-000KsG-2o; Fri, 08 May 2026 10:48:50 +0200
+ id 1wLGt9-000KsG-2f; Fri, 08 May 2026 10:48:52 +0200
 From: Alexander Feilke <Alexander.Feilke@ew.tq-group.com>
 To: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@ew.tq-group.com,
  u-boot@lists.denx.de
-Cc: Nora Schiffer <nora.schiffer@ew.tq-group.com>,
+Cc: Alexander Feilke <alexander.feilke@ew.tq-group.com>,
  Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>,
  Alexander Feilke <Alexander.Feilke@ew.tq-group.com>,
- Tom Rini <trini@konsulko.com>,
- Alexander Feilke <alexander.feilke@ew.tq-group.com>
-Subject: [PATCH 1/6] sysinfo: uclass: use sysinfo_priv size for per_device_auto
-Date: Fri,  8 May 2026 10:48:29 +0200
-Message-Id: <20260508084834.45637-2-Alexander.Feilke@ew.tq-group.com>
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH 6/6] boards: tqma7: integrate sysinfo_tq_eeprom driver
+Date: Fri,  8 May 2026 10:48:34 +0200
+Message-Id: <20260508084834.45637-7-Alexander.Feilke@ew.tq-group.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20260508084834.45637-1-Alexander.Feilke@ew.tq-group.com>
 References: <20260508084834.45637-1-Alexander.Feilke@ew.tq-group.com>
@@ -76,28 +75,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Nora Schiffer <nora.schiffer@ew.tq-group.com>
+From: Alexander Feilke <alexander.feilke@ew.tq-group.com>
 
-Reference the struct itself for the size as it is more robust,
-even if it contains just a bool at the moment.
+Probe the TQ-Eeprom sysinfo driver during boot to print its contents.
 
-Signed-off-by: Nora Schiffer <nora.schiffer@ew.tq-group.com>
 Signed-off-by: Alexander Feilke <alexander.feilke@ew.tq-group.com>
 ---
- drivers/sysinfo/sysinfo-uclass.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ arch/arm/dts/imx7s-tqma7-u-boot.dtsi | 7 +++++++
+ board/tq/tqma7/tqma7.c               | 4 ++++
+ 2 files changed, 11 insertions(+)
 
-diff --git a/drivers/sysinfo/sysinfo-uclass.c b/drivers/sysinfo/sysinfo-uclass.c
-index f04998ef8bb..bf0f664e8dc 100644
---- a/drivers/sysinfo/sysinfo-uclass.c
-+++ b/drivers/sysinfo/sysinfo-uclass.c
-@@ -152,5 +152,5 @@ UCLASS_DRIVER(sysinfo) = {
- 	.id		= UCLASS_SYSINFO,
- 	.name		= "sysinfo",
- 	.post_bind	= dm_scan_fdt_dev,
--	.per_device_auto	= sizeof(bool),
-+	.per_device_auto	= sizeof(struct sysinfo_priv),
+diff --git a/arch/arm/dts/imx7s-tqma7-u-boot.dtsi b/arch/arm/dts/imx7s-tqma7-u-boot.dtsi
+index 2d1d614cd57..55b9556cb55 100644
+--- a/arch/arm/dts/imx7s-tqma7-u-boot.dtsi
++++ b/arch/arm/dts/imx7s-tqma7-u-boot.dtsi
+@@ -9,6 +9,13 @@
+ 
+ #include "imx7s-u-boot.dtsi"
+ 
++/ {
++	sysinfo_mba7: sysinfo {
++		compatible = "tq,eeprom-sysinfo";
++		i2c-eeprom = <&m24c64>;
++	};
++};
++
+ &soc {
+ 	bootph-pre-ram;
  };
+diff --git a/board/tq/tqma7/tqma7.c b/board/tq/tqma7/tqma7.c
+index 30bd155713d..7542a081ea0 100644
+--- a/board/tq/tqma7/tqma7.c
++++ b/board/tq/tqma7/tqma7.c
+@@ -14,9 +14,11 @@
+ #include <asm/arch/clock.h>
+ #include <asm/arch/imx-regs.h>
+ #include <asm/arch/sys_proto.h>
++#include <dm/uclass.h>
+ 
+ #include "../common/tq_bb.h"
+ #include "../common/tq_som.h"
++#include "../common/tq_sysinfo.h"
+ 
+ DECLARE_GLOBAL_DATA_PTR;
+ 
+@@ -65,6 +67,8 @@ int board_late_init(void)
+ 
+ 	env_set_runtime("board_name", bname);
+ 
++	tq_common_sysinfo_setup();
++
+ 	return tq_bb_board_late_init();
+ }
+ 
 -- 
 2.34.1
 
