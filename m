@@ -4,53 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21D66CD3445
-	for <u-boot@archiver.kernel.org>; Sat,  9 May 2026 00:43:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35735CD37AC
+	for <u-boot@archiver.kernel.org>; Sat,  9 May 2026 00:44:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 78A1D84E74;
+	by phobos.denx.de (Postfix) with ESMTP id B8CA584E78;
 	Sat,  9 May 2026 02:40:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=seznam.cz
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=seznam.cz header.i=@seznam.cz header.b="fHDgC2g7";
+	dkim=pass (2048-bit key; secure) header.d=seznam.cz header.i=@seznam.cz header.b="uGPWAGli";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E940E84D75; Fri,  8 May 2026 23:46:22 +0200 (CEST)
-Received: from mxd-2-a03.seznam.cz (mxd-2-a03.seznam.cz
- [IPv6:2a02:598:64:8a00::1000:a03])
+ id 0518484CF2; Fri,  8 May 2026 23:46:25 +0200 (CEST)
+Received: from mxd-3-701.seznam.cz (mxd-3-701.seznam.cz
+ [IPv6:2a02:598:96:8a00::1200:701])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F195184CE5
- for <u-boot@lists.denx.de>; Fri,  8 May 2026 23:46:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B060484CF3
+ for <u-boot@lists.denx.de>; Fri,  8 May 2026 23:46:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=seznam.cz
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=michael.srba@seznam.cz
-Received: from email.seznam.cz by smtpc-mxd-5f4d8d5f6f-w7th8
- (smtpc-mxd-5f4d8d5f6f-w7th8 [2a02:598:64:8a00::1000:a03])
- id 6cfd56fa37f302936d549aa4; Fri, 08 May 2026 23:45:49 +0200 (CEST)
+Received: from email.seznam.cz by smtpc-mxd-5f4d8d5f6f-gj4cr
+ (smtpc-mxd-5f4d8d5f6f-gj4cr [2a02:598:96:8a00::1200:701])
+ id 0d1e3a3f56106e560cb7f661; Fri, 08 May 2026 23:45:50 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=seznam.cz; s=szn1;
- t=1778276749; bh=xTXY0bRfUDHKoGW9cC1UhCy42YE5fR7ShpVHXE0tApg=;
+ t=1778276750; bh=2hcVMBb/votXPvYlM+WsyTziruFXMO8uiwMwrzloXRk=;
  h=From:Date:Subject:MIME-Version:Content-Type:
  Content-Transfer-Encoding:Message-Id:To:Cc;
- b=fHDgC2g7lz2Y+/AyPhCAYGYQ2sKGMFpxpxJ+TDCi4YpN6POAheddtvK45BvshcQv5
- eU3XHj/+3pNtW5vWTluX60KCk8/v+3HuaLwDv5L4QGDB6FdMNmnPPWmJfsM/4UrPS6
- 231LQFq8ZJb94l9e5Hpf0Lk1Gxkjk3jUqQjyBrq6/gFVpZ+0cLWxkmnnaZqQRaN3+8
- 0IEIYxhfimAkhrcpOx10f/73MrhmyUPTOjkZtMuxMTHqXr+2QAIJoCM2nktl4BTQb7
- E7UMCd2FCDwRPHBiinYVSs5k2Dp7VFlH24PFS+iGNYFHgC5KVziNnjAD6/40h/g9C1
- Hnn5fU/dx9mrA==
+ b=uGPWAGlien4vq1oQqfhjhYJ4NxACfA+1jO6lQTjensLWJDO1xUZI796XjcLQb2DgX
+ p1CjrEcGtfSk8m6vVM+DuXtZx8eD0fdLxPWVujshahUPmAIxcMjh+pBYfyfhIrXx24
+ kxV+3AIxMcOGj2wrazF+jmg/VYM+C7SXXvvH3SrZ+X81cqaYwIGOjVqrgPz53KvtGy
+ O9oAOCeZC7dizgguyPBIWZcxVEMML75gdWfioOvjsPfF9/X9oADHScUvSUsSvLqfuf
+ 5bkeapPG9CrL7rZWjeiJpfvKiKFkqstCHHHs4B8Ve8GZV7d9I5HGFZE4Yzvs2LhwCT
+ nw2LtwmHbI+6g==
 Received: from [127.0.0.1] (ip-111-27.static.ccinternet.cz [147.161.27.111])
  by smtpd-relay-6597cc8696-jn5pf (szn-email-smtpd/2.0.72) with ESMTPA
- id 4e8bfacb-e720-4814-977e-3c3793565db8;
- Fri, 08 May 2026 23:45:42 +0200
+ id f2a4e67a-7daa-4039-9c36-a5c504d023bd;
+ Fri, 08 May 2026 23:45:38 +0200
 From: michael.srba@seznam.cz
-Date: Fri, 08 May 2026 23:45:30 +0200
-Subject: [PATCH v7 06/11] mach-snapdragon: Kconfig: fix duplicate
- SYS_MALLOC_LEN
+Date: Fri, 08 May 2026 23:45:25 +0200
+Subject: [PATCH v7 01/11] Makefile: add SPL_REMAKE_ELF_LDSCRIPT feature
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260508-qcom_spl-v7-6-7d0e22aaaa8f@seznam.cz>
+Message-Id: <20260508-qcom_spl-v7-1-7d0e22aaaa8f@seznam.cz>
 References: <20260508-qcom_spl-v7-0-7d0e22aaaa8f@seznam.cz>
 In-Reply-To: <20260508-qcom_spl-v7-0-7d0e22aaaa8f@seznam.cz>
 To: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>, 
@@ -109,26 +108,65 @@ X-Virus-Status: Clean
 
 From: Michael Srba <Michael.Srba@seznam.cz>
 
+Some platforms (e.g. at least Qualcomm) use the ELF format in creative
+ways, including in the bootrom. Make SPL_REMAKE_ELF use a linker script
+specified in SPL_REMAKE_ELF_LDSCRIPT (with the previously hardcoded path
+as the default).
+
 Signed-off-by: Michael Srba <Michael.Srba@seznam.cz>
 Reviewed-by: Simon Glass <sjg@chromium.org>
 ---
- arch/arm/mach-snapdragon/Kconfig | 3 ---
- 1 file changed, 3 deletions(-)
+ Makefile           |  9 +++++++--
+ common/spl/Kconfig | 12 ++++++++++++
+ 2 files changed, 19 insertions(+), 2 deletions(-)
 
-diff --git a/arch/arm/mach-snapdragon/Kconfig b/arch/arm/mach-snapdragon/Kconfig
-index f863daf6bb9..c195d478512 100644
---- a/arch/arm/mach-snapdragon/Kconfig
-+++ b/arch/arm/mach-snapdragon/Kconfig
-@@ -11,9 +11,6 @@ config SYS_VENDOR
- 	  Based on this option board/<CONFIG_SYS_VENDOR>/<CONFIG_SYS_BOARD>
- 	  will be used as the custom board directory.
+diff --git a/Makefile b/Makefile
+index 49d9740327e..8fe722f6c0d 100644
+--- a/Makefile
++++ b/Makefile
+@@ -2008,12 +2008,17 @@ u-boot.elf: u-boot.bin u-boot-elf.lds FORCE
+ quiet_cmd_u-boot-spl-elf ?= LD      $@
+ 	cmd_u-boot-spl-elf ?= $(LD) spl/u-boot-spl-elf.o -o $@ \
+ 	$(if $(CONFIG_SYS_BIG_ENDIAN),-EB,-EL) \
+-	-T u-boot-elf.lds --defsym=$(CONFIG_PLATFORM_ELFENTRY)=$(CONFIG_SPL_TEXT_BASE) \
++	-T spl/u-boot-spl-elf.lds --defsym=$(CONFIG_PLATFORM_ELFENTRY)=$(CONFIG_SPL_TEXT_BASE) \
+ 	-Ttext=$(CONFIG_SPL_TEXT_BASE)
+-spl/u-boot-spl.elf: spl/u-boot-spl.bin u-boot-elf.lds
++spl/u-boot-spl.elf: spl/u-boot-spl.bin spl/u-boot-spl-elf.lds
+ 	$(Q)$(OBJCOPY) -I binary $(PLATFORM_ELFFLAGS) $< spl/u-boot-spl-elf.o
+ 	$(call if_changed,u-boot-spl-elf)
  
--config SYS_MALLOC_LEN
--	default 0x10000000
--
- config SYS_MALLOC_F_LEN
- 	default 0x2000
++SPL_REMAKE_ELF_LDSCRIPT := $(addprefix $(srctree)/,$(CONFIG_SPL_REMAKE_ELF_LDSCRIPT:"%"=%))
++
++spl/u-boot-spl-elf.lds: $(SPL_REMAKE_ELF_LDSCRIPT) prepare FORCE
++	$(call if_changed_dep,cpp_lds)
++
+ u-boot-elf.lds: arch/u-boot-elf.lds prepare FORCE
+ 	$(call if_changed_dep,cpp_lds)
  
+diff --git a/common/spl/Kconfig b/common/spl/Kconfig
+index 5fa94098e49..5c7b094e6b6 100644
+--- a/common/spl/Kconfig
++++ b/common/spl/Kconfig
+@@ -238,6 +238,18 @@ config SPL_HANDOFF
+ 	  proper. Also SPL can receive information from TPL in the same place
+ 	  if that is enabled.
+ 
++config SPL_REMAKE_ELF_LDSCRIPT
++	string "Linker script for SPL ELF"
++	depends on SPL_REMAKE_ELF
++	default "arch/u-boot-elf.lds"
++	help
++	  This allows specifying a linker script that will be used to re-wrap
++	  the SPL binary into an ELF.
++
++	  Some platforms (e.g. at least Qualcomm) use the ELF format in creative
++	  ways, including in the bootrom. For such platforms, you can change
++	  the default linker script to a platform-specific one.
++
+ config SPL_LDSCRIPT
+ 	string "Linker script for the SPL stage"
+ 	default "arch/arm/cpu/arm926ejs/sunxi/u-boot-spl.lds" if MACH_SUNIV
 
 -- 
 2.53.0
