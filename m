@@ -4,93 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ABC4ACD3445
-	for <u-boot@archiver.kernel.org>; Sat,  9 May 2026 00:43:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12DF7CD37AC
+	for <u-boot@archiver.kernel.org>; Sat,  9 May 2026 00:43:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 788C084E64;
-	Sat,  9 May 2026 02:40:33 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6151B84E6E;
+	Sat,  9 May 2026 02:40:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=seznam.cz
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=seznam.cz header.i=@seznam.cz header.b="vatnyzbB";
+	dkim=pass (2048-bit key; secure) header.d=seznam.cz header.i=@seznam.cz header.b="l+BRWhkE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 26E2484CF3; Fri,  8 May 2026 23:41:31 +0200 (CEST)
-Received: from mxd-1-a0f.seznam.cz (mxd-1-a0f.seznam.cz
- [IPv6:2a02:598:128:8a00::1000:a0f])
+ id 222F784D1A; Fri,  8 May 2026 23:46:18 +0200 (CEST)
+Received: from mxd-2-a03.seznam.cz (mxd-2-a03.seznam.cz
+ [IPv6:2a02:598:64:8a00::1000:a03])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E57E084CE5
- for <u-boot@lists.denx.de>; Fri,  8 May 2026 23:41:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 40A7184CE5
+ for <u-boot@lists.denx.de>; Fri,  8 May 2026 23:46:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=seznam.cz
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=Michael.Srba@seznam.cz
-Received: from email.seznam.cz by smtpc-mxd-5f4d8d5f6f-lmwqj
- (smtpc-mxd-5f4d8d5f6f-lmwqj [2a02:598:128:8a00::1000:a0f])
- id 25a186dc7eafd2b524084a82; Fri, 08 May 2026 23:40:49 +0200 (CEST)
+ spf=pass smtp.mailfrom=michael.srba@seznam.cz
+Received: from email.seznam.cz by smtpc-mxd-5f4d8d5f6f-w7th8
+ (smtpc-mxd-5f4d8d5f6f-w7th8 [2a02:598:64:8a00::1000:a03])
+ id 02924065599c140c033b8c3b; Fri, 08 May 2026 23:45:42 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=seznam.cz; s=szn1;
- t=1778276449; bh=BFCasuzNhU8KlhxU7Sg1XQkqFqfG2V3hX0geT0cowKo=;
- h=Message-ID:Date:MIME-Version:User-Agent:Subject:To:Cc:
- Content-Language:From:Content-Type:Content-Transfer-Encoding;
- b=vatnyzbBA64WfVBkY1uZXNcmWjBBx7O3yLdnfLlyN3dB2mpbLFE69hAAXwbDsR/th
- 3bHuOtOT6DSSTwz3t+RG2/LskFkKDqkRdMm36vHc83BOpwKNEHqyMUxOZMsMLjLbJK
- zISZbg7ri6JseXXNel6UewsyubqQFZ46xkEYEn8ZY4axwRdImB9bzHTi15hLUb9jx1
- OlmkEhpGbPmCpuun0XmBzX8ORZMG+Xq39hHKskjkUU6/ivUmvU7h4s7X/dw2yiLXLV
- zPhFLx7F0dAKQ4GmSUAwI9rcx2hdEGvbilRcyf4wVhMPVcmImaRPdG6fksoOwOUpm8
- Px2aIxm0ShHdQ==
-Received: from [192.168.0.240] (ip-111-27.static.ccinternet.cz
- [147.161.27.111])
- by smtpd-relay-7c7c659656-xkdqp (szn-email-smtpd/2.0.72) with ESMTPA
- id 48959f6a-691e-4625-8211-27b551afb80a;
- Fri, 08 May 2026 23:39:48 +0200
-Message-ID: <e48fd644-3ba1-4ebf-96d7-ba287604e817@seznam.cz>
-Date: Fri, 8 May 2026 23:39:46 +0200
+ t=1778276742; bh=SwGdq8aw6PlZ+WsOZmBdvDo8PBGK8bN+LN456aseK7I=;
+ h=From:Date:Subject:MIME-Version:Content-Type:
+ Content-Transfer-Encoding:Message-Id:To:Cc;
+ b=l+BRWhkEzQtpijQedJ6eosGgtVJW1xJq8e5lH0W8aMYXp2pJfxW7/koUirSf+DOT1
+ h0yG7cTxUIfGgDt1LwlNmIZNz0NHw0wWInAyjKjdWHiizqWqBKh0T4/ilr6z6mu02u
+ Siq6n9tfsUdEKt+XvDIROpp7OPo+8JpBJpkFDJkwyiWWUKpLWJYTcm7HSf7k2pCTu2
+ wZfqBjSZruYZHaS53ndkacsRMyTzomQDYCCrxJjF66phe8hLV/pzQvgn2ZTmo2XV4F
+ sWqEY1FaVWruEY51CH4TpFYRkhIGRn1AlsNFSwyGqaA0p5CfFfqCVQL+Solgpu1fdi
+ nXiij5lv+7yQw==
+Received: from [127.0.0.1] (ip-111-27.static.ccinternet.cz [147.161.27.111])
+ by smtpd-relay-6597cc8696-jn5pf (szn-email-smtpd/2.0.72) with ESMTPA
+ id a40a0ad2-dac4-4c02-a34e-3889ad5b8283;
+ Fri, 08 May 2026 23:45:39 +0200
+From: michael.srba@seznam.cz
+Date: Fri, 08 May 2026 23:45:26 +0200
+Subject: [PATCH v7 02/11] of_live: support in SPL
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v6 04/11] mach-snapdragon: boot0.h: split out
- msm8916_boot0.h
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>,
- u-boot-qcom@groups.io, Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Sughosh Ganu <sughosh.ganu@arm.com>, Anshul Dalal <anshuld@ti.com>,
- Peng Fan <peng.fan@nxp.com>, Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Andrew Davis <afd@ti.com>,
- Hrushikesh Salunke <h-salunke@ti.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>, Ye Li <ye.li@nxp.com>,
- Andre Przywara <andre.przywara@arm.com>,
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>, Dhruva Gole <d-gole@ti.com>,
- Kaustabh Chakraborty <kauschluss@disroot.org>,
- Jerome Forissier <jerome.forissier@arm.com>, Heiko Schocher
- <hs@nabladev.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Lukasz Majewski <lukma@denx.de>,
- Mateusz Kulikowski <mateusz.kulikowski@gmail.com>,
- Dinesh Maniyam <dinesh.maniyam@altera.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Michal Simek <michal.simek@amd.com>, Yao Zi <me@ziyao.cc>,
- Peter Korsgaard <peter@korsgaard.com>,
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Casey Connolly <casey.connolly@linaro.org>,
- Tingting Meng <tingting.meng@altera.com>,
- Tien Fong Chee <tien.fong.chee@altera.com>, Alice Guo <alice.guo@nxp.com>,
- George Chan <gchan9527@gmail.com>,
- Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
- Alexey Charkov <alchark@gmail.com>, Ronald Wahl <ronald.wahl@legrand.com>,
- Michael Trimarchi <michael@amarulasolutions.com>
-References: <20260508-qcom_spl-v6-0-aaac1ab17b50@seznam.cz>
- <20260508-qcom_spl-v6-4-aaac1ab17b50@seznam.cz>
- <CAFLszTiMG3z6TqGc3D5=NdTVXgUFNekhKMyZNyKQPbVL4gL-1Q@mail.gmail.com>
-Content-Language: en-US
-From: Michael Srba <Michael.Srba@seznam.cz>
-In-Reply-To: <CAFLszTiMG3z6TqGc3D5=NdTVXgUFNekhKMyZNyKQPbVL4gL-1Q@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260508-qcom_spl-v7-2-7d0e22aaaa8f@seznam.cz>
+References: <20260508-qcom_spl-v7-0-7d0e22aaaa8f@seznam.cz>
+In-Reply-To: <20260508-qcom_spl-v7-0-7d0e22aaaa8f@seznam.cz>
+To: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>, 
+ u-boot-qcom@groups.io
+Cc: Tom Rini <trini@konsulko.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@arm.com>, 
+ Anshul Dalal <anshuld@ti.com>, Peng Fan <peng.fan@nxp.com>, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Andrew Davis <afd@ti.com>, 
+ Hrushikesh Salunke <h-salunke@ti.com>, 
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>, Ye Li <ye.li@nxp.com>, 
+ Andre Przywara <andre.przywara@arm.com>, 
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>, 
+ Leo Yu-Chi Liang <ycliang@andestech.com>, 
+ Andrew Goodbody <andrew.goodbody@linaro.org>, Dhruva Gole <d-gole@ti.com>, 
+ Kaustabh Chakraborty <kauschluss@disroot.org>, 
+ Jerome Forissier <jerome.forissier@arm.com>, 
+ Heiko Schocher <hs@nabladev.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Lukasz Majewski <lukma@denx.de>, 
+ Mateusz Kulikowski <mateusz.kulikowski@gmail.com>, 
+ Dinesh Maniyam <dinesh.maniyam@altera.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Patrice Chotard <patrice.chotard@foss.st.com>, 
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, 
+ Michal Simek <michal.simek@amd.com>, Yao Zi <me@ziyao.cc>, 
+ Peter Korsgaard <peter@korsgaard.com>, 
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>, 
+ Casey Connolly <casey.connolly@linaro.org>, 
+ Tingting Meng <tingting.meng@altera.com>, 
+ Tien Fong Chee <tien.fong.chee@altera.com>, Alice Guo <alice.guo@nxp.com>, 
+ George Chan <gchan9527@gmail.com>, 
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>, 
+ Alexey Charkov <alchark@gmail.com>, Ronald Wahl <ronald.wahl@legrand.com>, 
+ Michael Trimarchi <michael@amarulasolutions.com>, 
+ Michael Srba <Michael.Srba@seznam.cz>
+X-Mailer: b4 0.15.1
 X-Mailman-Approved-At: Sat, 09 May 2026 02:40:31 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -108,95 +106,85 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+From: Michael Srba <Michael.Srba@seznam.cz>
 
-On 5/8/26 18:49, Simon Glass wrote:
-> Hi Michael,
->
-> On 2026-05-08T00:33:28, Michael Srba <michael.srba@seznam.cz> wrote:
->> mach-snapdragon: boot0.h: split out msm8916_boot0.h
->>
->> Prepare for supporting alternative boot0.h per-SoC by splitting out
->> the existing msm8916-specific code.
->>
->> There is now a selection mechanism to choose a specific boot0.h
->> in the Kconfig. BOOT0_MSM8916_PSCI_WORKAROUND is the only option
->> right now, but more can be added. The toplevel boot0.h additionally
->> enables conditionally performing the include only in u-boot proper,
->> or only in SPL.
->>
->> Signed-off-by: Michael Srba <Michael.Srba@seznam.cz>
->>
->> arch/arm/mach-snapdragon/Kconfig                   | 16 ++++++
->>   arch/arm/mach-snapdragon/include/mach/boot0.h      | 60 +++-------------------
->>   .../mach-snapdragon/include/mach/msm8916_boot0.h   | 54 +++++++++++++++++++
->>   configs/dragonboard410c_defconfig                  |  1 +
->>   4 files changed, 79 insertions(+), 52 deletions(-)
-> Reviewed-by: Simon Glass <sjg@chromium.org>
->
->> diff --git a/configs/dragonboard410c_defconfig b/configs/dragonboard410c_defconfig
->> @@ -11,6 +11,7 @@ CONFIG_ENV_OFFSET=0x0
->>   CONFIG_DEFAULT_DEVICE_TREE='qcom/apq8016-sbc'
->>   CONFIG_OF_LIBFDT_OVERLAY=y
->>   CONFIG_SYS_LOAD_ADDR=0x80080000
->> +CONFIG_BOOT0_MSM8916_PSCI_WORKAROUND=y
->>   CONFIG_IDENT_STRING="\nQualcomm-DragonBoard 410C"
-> Do you need to see CONFIG_BOOT0_MSM8916_PSCI_WORKAROUND=y in
-> hmibsc_defconfig too? It looks like hmibsc_defconfig is also an
-> apq8016 (msm8916) board with CONFIG_ENABLE_ARM_SOC_BOOT0_HOOK=y, so it
-> currently relies on the same PSCI workaround and will silently lose it
-> after this patch. If not, it is worth mentioning in the commit
-> message.
-My bad, didn't realize that, will add it.
->> diff --git a/arch/arm/mach-snapdragon/include/mach/boot0.h b/arch/arm/mach-snapdragon/include/mach/boot0.h
->> @@ -1,54 +1,10 @@
->>   /* SPDX-License-Identifier: GPL-2.0+ */
->> -/*
->> - * Workaround for "PSCI bug" on DragonBoard 410c
-> ...
->> +#if defined(CONFIG_SPL_BUILD)
->>        b       reset
->> -
->> -     .align  3
->> -el1_system_param:
->> -     .quad   0, 0, 0, 0, 0, 0, 0, 0, 0       /* el1_x0-x8 */
->> -     .quad   reset                           /* el1_elr */
->> -el1_system_param_end:
->> +#else
->> +#if defined(CONFIG_BOOT0_MSM8916_PSCI_WORKAROUND)
->> +#include 'msm8916_boot0.h'
->> +#else
->> +     b       reset
->> +#endif
->> +#endif
-> You could flatten this with #elif - which would make it more obvious
-> that the SPL path is intentionally a stub.
->
->      #if defined(CONFIG_SPL_BUILD)
->          b       reset
->      #elif defined(CONFIG_BOOT0_MSM8916_PSCI_WORKAROUND)
->      #include 'msm8916_boot0.h'
->      #else
->          b       reset
->      #endif
-It's not going to be a stub after the followup commit that adds the sdm845
-behavior which should only be enabled in SPL though. It's a nested if
-(sadly the code style for macros does't really make it obvious),
-basically:
+Add CONFIG_SPL_OF_LIVE and if set, initialize of_live in spl.c
 
-```
+Signed-off-by: Michael Srba <Michael.Srba@seznam.cz>
+Reviewed-by: Simon Glass <sjg@chromium.org>
+---
+ common/spl/spl.c | 9 +++++++++
+ dts/Kconfig      | 8 ++++++++
+ lib/Makefile     | 2 +-
+ 3 files changed, 18 insertions(+), 1 deletion(-)
 
-#if defined(CONFIG_SPL_BUILD)
-     ... spl-only workarounds ...
-#else
-     ... u-boot-proper-only workarounds ...
-#endif
+diff --git a/common/spl/spl.c b/common/spl/spl.c
+index 722b18c98ed..6c9a1a1cbcc 100644
+--- a/common/spl/spl.c
++++ b/common/spl/spl.c
+@@ -17,6 +17,7 @@
+ #include <irq_func.h>
+ #include <log.h>
+ #include <mapmem.h>
++#include <of_live.h>
+ #include <serial.h>
+ #include <spl.h>
+ #include <spl_load.h>
+@@ -510,6 +511,14 @@ static int spl_common_init(bool setup_malloc)
+ 			return ret;
+ 		}
+ 	}
++	if (CONFIG_IS_ENABLED(OF_LIVE)) {
++		bootstage_start(BOOTSTAGE_ID_ACCUM_OF_LIVE, "of_live");
++		ret = of_live_build(gd->fdt_blob,
++				    (struct device_node **)gd_of_root_ptr());
++		bootstage_accum(BOOTSTAGE_ID_ACCUM_OF_LIVE);
++		if (ret)
++			return ret;
++	}
+ 	if (CONFIG_IS_ENABLED(DM)) {
+ 		bootstage_start(BOOTSTAGE_ID_ACCUM_DM_SPL,
+ 				xpl_phase() == PHASE_TPL ? "dm tpl" : "dm_spl");
+diff --git a/dts/Kconfig b/dts/Kconfig
+index 6b501c2239e..20b5834b8fa 100644
+--- a/dts/Kconfig
++++ b/dts/Kconfig
+@@ -86,6 +86,14 @@ config OF_LIVE
+ 	  enables a live tree which is available after relocation,
+ 	  and can be adjusted as needed.
+ 
++config SPL_OF_LIVE
++	bool "Enable use of a live tree in SPL"
++	depends on SPL_DM && SPL_OF_CONTROL
++	help
++	  This option enables a live tree in SPL, allowing the sharing
++	  of OF fixup code between U-Boot proper and SPL.
++	  See also OF_LIVE.
++
+ config OF_UPSTREAM
+ 	bool "Enable use of devicetree imported from Linux kernel release"
+ 	depends on !COMPILE_TEST && !SANDBOX
+diff --git a/lib/Makefile b/lib/Makefile
+index d0ffabc2b47..bbd540e9687 100644
+--- a/lib/Makefile
++++ b/lib/Makefile
+@@ -13,7 +13,6 @@ obj-$(CONFIG_FWU_MULTI_BANK_UPDATE) += fwu_updates/
+ obj-$(CONFIG_LZMA) += lzma/
+ obj-$(CONFIG_BZIP2) += bzip2/
+ obj-$(CONFIG_FIT) += libfdt/
+-obj-$(CONFIG_OF_LIVE) += of_live.o
+ obj-$(CONFIG_CMD_DHRYSTONE) += dhry/
+ obj-$(CONFIG_ARCH_AT91) += at91/
+ obj-$(CONFIG_OPTEE_LIB) += optee/
+@@ -55,6 +54,7 @@ obj-$(CONFIG_BITREVERSE) += bitrev.o
+ obj-y += list_sort.o
+ endif
+ 
++obj-$(CONFIG_$(PHASE_)OF_LIVE) += of_live.o
+ obj-$(CONFIG_$(PHASE_)TPM) += tpm-common.o
+ ifeq ($(CONFIG_$(PHASE_)TPM),y)
+ obj-$(CONFIG_TPM) += tpm_api.o
 
-```
-
-I wonder if using CONFIG_IS_ENABLED would be cleaner, even though
-in most cases the config option would only exist either with or without
-the SPL_ prefix.
-> Regards,
-> Simon
+-- 
+2.53.0
 
