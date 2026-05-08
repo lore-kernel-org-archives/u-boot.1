@@ -4,95 +4,104 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 677BACD37AC
-	for <u-boot@archiver.kernel.org>; Sat,  9 May 2026 00:42:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3EDC9CD3445
+	for <u-boot@archiver.kernel.org>; Sat,  9 May 2026 00:42:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B5DA084E28;
-	Sat,  9 May 2026 02:40:20 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0344B84E3D;
+	Sat,  9 May 2026 02:40:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="JX24KLB4";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="bMmr/m2b";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D292084CF1; Fri,  8 May 2026 23:32:37 +0200 (CEST)
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ id CD2E284CF1; Fri,  8 May 2026 23:32:39 +0200 (CEST)
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DA86A84CE5
- for <u-boot@lists.denx.de>; Fri,  8 May 2026 23:32:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E115184CE5
+ for <u-boot@lists.denx.de>; Fri,  8 May 2026 23:32:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=canonical.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=aristo.chen@canonical.com
-Received: from mail-pf1-f200.google.com (mail-pf1-f200.google.com
- [209.85.210.200])
+Received: from mail-pg1-f199.google.com (mail-pg1-f199.google.com
+ [209.85.215.199])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 862F63FEBC
- for <u-boot@lists.denx.de>; Fri,  8 May 2026 21:32:35 +0000 (UTC)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 92C233F9C1
+ for <u-boot@lists.denx.de>; Fri,  8 May 2026 21:32:37 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1778275955;
- bh=axynfVotHajRHk0PEAyKEmbt+sNEM+EclROkiy3hfr4=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=JX24KLB4mUFCFx1Ir7Bzias4zb7zbYN7Jy/P9q7U08pnY0vH7TiFVf6LUiwvVjtCZ
- CI2WXY+aw4IUCwX98rcIDrHSJecwDZ4myknYC2qXOXB5DMN8z2o+Aloy3InlS9Wuoe
- RALFlQdNtRGHsIgcp+o65ZPxrzAzHV7jSM/S6QORqE6MAn9lzm3f5XFa/zFC11KgDe
- Wwpg+2H1rytVee8iUjXznC1GOj5AlBSv3T76PzIalenXwNQYuLQNfU08765os10ZUn
- M5EbNylwz9Gw72c8W3rbWc4ZV6EUoGanBZmWf9rU10efmWK/m/aXWQnJjIJoJZSDRt
- KgZsu+XPOBX0kH6oGH+WCNlJyx+ccM7Ud5LHAStMqMgcClVVIEyOhsD/UqBjBEizbq
- ef9H0QyWbSvJNDREUqnJ/HQHZyEFT3kPtt2NRYCo33kvYh2qA2TiXuSt3SsNyUbJ1c
- TTnS9GXDS264dCeZDawpI9AzNvypDQIkFev8Uo4m1vrJh7qte88UMg2bu4g0hO686+
- WLuQgcBIl7ddmh8GcfzGqJ/lffA1RoJGJ4AeIXdj4iMshgKGOoDIZg+hvSD6roFSAf
- lN8saph2j9CwyJ0q2GOZBXsnmfEMPJGZ1HLwrDaXHa07dopWJ0DN8Ip2zhVEvAxiu2
- EM7fhk7XT5Dq08WzW4Rt5t4k=
-Received: by mail-pf1-f200.google.com with SMTP id
- d2e1a72fcca58-82fa6c3a77cso1653045b3a.3
- for <u-boot@lists.denx.de>; Fri, 08 May 2026 14:32:35 -0700 (PDT)
+ s=20251003; t=1778275957;
+ bh=P9bxS7ZvW/jWs2zPFQZl6n2TtP559v11PvIFdtyhLAk=;
+ h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+ MIME-Version;
+ b=bMmr/m2bPTLLlzLtf5Gja6RTNEeIizBsm32hvP9oICmJAYs4pOyUBI/LxaL6l78Jq
+ X4WFGvdnxjni3n+qZXXfhqEA4mcQ57QPajWTUZKlQKx8/Ic0I4xafCc4GfIOAoQpvw
+ Lc0HtyFltdT1fAtaFRfLmbO1+5q/PBFaycIf4RB4GOzL1cVfmiwbUU8AlhQj3lBcSw
+ 3clC04yPqUi1AAN7xYphHPlzk1eXngeJI3sCK3IDysaE8Mn/InVcEVQyPAzo0xEsXZ
+ OdUNFOlbkK+0Iy0tfJm1Z6TVLFUertgB41Y4pZ5KoMpIF/9thMJcolp9wVDd+lD2He
+ 9bGaibovyDbO7KyXVAsEXvuGHA5qYeJC94fRvMANeVAKYtl9XiZ86oYYOqmYjI0bjk
+ TRnHKmVdgyO1zbh3EFKbq1hfJogIQRUcV4CJwqAZxrg3O5CRyotpRsjqOklvK8WB2a
+ En6+GlmLrhZfOltEQTUywhs/kKsmsifxh8np4q4xh8yubGz9rvp3B3BC40nf9Byh8h
+ 17Gm20msDXEP4CdK7KpVUFio18Z+4uYhkPJLQxzeV7mMGw4z28ES9/tKalJtOhDcqJ
+ voryTC5lzoU0XNnsSHV5tS3g1V2MmL/+3rAIQpVMnrxIafejA6+qwb3ZmGPlHiriTk
+ +x2YzyiEdWoX474MjQY6ePOU=
+Received: by mail-pg1-f199.google.com with SMTP id
+ 41be03b00d2f7-c70f19f0f37so1403745a12.0
+ for <u-boot@lists.denx.de>; Fri, 08 May 2026 14:32:37 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778275953; x=1778880753;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=axynfVotHajRHk0PEAyKEmbt+sNEM+EclROkiy3hfr4=;
- b=ZNxAPvEgyduSnSfudZRYJgBuIhhKKZJ8M2S3WUwd/K9zEHrNaKj1uRdnWTWEHyvaJF
- vjkCeGj1dPu9IzabUZh/j9Xbvzx9I8XBMU/etLqIkpGPaca3nhl+uIMJX01YctbcmtpG
- xz0cnTy/O9ZM9kb/y/D3YGp/rDkwYsGcfLRl4FtTzwGzr+beq+fCY79g5QgSdVa3mbdT
- DotIy84D0cWEu7fufcCsPxBwzYl3CL+CPRl5yLCUQPMG9TeTS3w456YYxsGvdYMoft/S
- Hyd1/O5LfeJ37MF49k16AGNbUybqteDZfXhWoQeCIrnmB6t9WKR4hBa+5C1iQgBzEYSc
- h3fw==
-X-Gm-Message-State: AOJu0YxTIT7/o4dAJoxuS/JiM8wyBG8K7Wq+Hcx8RrCQh5xg7MnqgsMu
- OvSsEDjl7fGaZlOZRblDPyJ7K9v19N+jJzx6c1G+u5d2LrMPLzS8AAGUXhU3RsJXj3EFlD+LzSv
- hu62oriwuFHxnfCJaRgQ+zTYNc+/oSb/g0L3oHdh4oEaqLehVKmqHPTrK9bO+wTaotXZl+Ump8s
- /fsYCatg==
-X-Gm-Gg: Acq92OGykEPqBa66eneIcuSwXdP5Nmj1aL6DK2z2DGD2x+0lb2d9sVVeecDb9ZG3XOP
- ga5vqFqhQvQ8jaTeNLrnSATygMqoZyOwHmvdA8FM52x/E8d8YmJX0/7TMVPH5GzwEqI1zVF/kl1
- cPzasLUIDJaWcFGWw2CGujbS10VaDHGGU3azlJ2txwIcXAYOIsnolBEBwOoXIH17zOegknjcxJd
- 1OKBg28x/uvsVRvtMhJhmxDLAIU1uM1dz/59X6ib3E2qHOqd1L1hrEG1Bzx1lEiUBbBgNFc8mH/
- m7GRmyDdUoHsH1eci7QQD4ZyvsdWH5VAhwizTdYRPxxlxYI0rQEL9XlNXfW2A3fEi2NkGC2I6Fi
- 5/0stqDl20dMYVLM0G1eciDVKjWbD8R+PXe8M/WLj1m0iohMkmhSabbpIGBerzKdrk2qSC+q8vO
- 8+HuoHHpQpXBnWgyk=
-X-Received: by 2002:a05:6a00:aa82:b0:837:6bb9:acb7 with SMTP id
- d2e1a72fcca58-83cf1e48de4mr4689503b3a.0.1778275953309; 
- Fri, 08 May 2026 14:32:33 -0700 (PDT)
-X-Received: by 2002:a05:6a00:aa82:b0:837:6bb9:acb7 with SMTP id
- d2e1a72fcca58-83cf1e48de4mr4689487b3a.0.1778275952883; 
- Fri, 08 May 2026 14:32:32 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1778275956; x=1778880756;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=P9bxS7ZvW/jWs2zPFQZl6n2TtP559v11PvIFdtyhLAk=;
+ b=k9ZyohByhqwyJDmPq/RRQbEQu7MsMAlas1q8QOBTFkbWIQKt0iivrs3v2WPJ066cYG
+ a9ne9H8x84huG4p88dwr9Uy14oUdO2UUH8JYe9UxWnAkc4TKAdwatEnDZai1n8cLQRwj
+ sGcs2IprIMkbZaDSFcBeSXwBUkTIwGnyRJtJphdWRwTbTB3Nvjvz+h13ooKQWPpZpDmO
+ poZn2NGDNETQLUdFJasWgeb9cYSpAEE2wLQTkzx2lgt48VaIl2THGJS1olfq0ZhJlSV1
+ plemTCG6jpfyAEhEMjkYwS4UQaszYxMUFqyyjOkyNH7O6IkTa2PuesBEUhjAAj+PCwml
+ FNVw==
+X-Gm-Message-State: AOJu0YxWlXVHLd2aoARKHfwNag4HTEhaaWRtqUkyUXCXfd+Zj00iki8o
+ AI4RaH3QOq7a7Zvpc9RecupwKxq/UsJRjVAI9zO9WyfoUdRK51m5x28M9Q++MnJHOotlU9GqGsb
+ m2ersYmi1VyjqHVz5Rg191j4C/aNw4x8yu2vgf8t5XvVi3eox8DmiHJKx5TNDH0vN/SHkXPoRs4
+ vPU35x67Pf5ak=
+X-Gm-Gg: AeBDievVvP3OA/V2akIyxlhALas9lSEbyBiX7AWTkuOEvQdUWvdKxDX1vHjsTwtUrMV
+ +a0/KJ9Z6alXN7UWvpUVLuzFrg+b3iIqqfQdmmR0ux3UPNgQZ0m8yAmh0hwUFIrK3hmer6v7q0l
+ XeW7YR2nunC3phw4+pboZg4DfSFMpwq0MLV9gq05vXvLMdVfEQbWcd6GT/OauIQJQbiZcWV6NX1
+ sIw45YNnQ39tOT1nglJmdR+8cPNs3+la+IoaiIMb6XhXvUQ4tMN0NtqU73woR067F+A9F05jfyt
+ dVWhRa23XLKbkPBgVaInF2yZlrY9E2HNphJYT8yrgLVYlnzSToIKALCZberRqAKoSpWefXoxlfY
+ dEVZ9r1WHanK53DlemuQX8KslwMo639RDWDV5NS9c/DUJ3PKeQwFHw3KVEVAixE7QL+thplfziw
+ Q1F6TZWdYEYeSKVTY=
+X-Received: by 2002:a05:6a20:3d1f:b0:35d:cc9a:8bc1 with SMTP id
+ adf61e73a8af0-3aa8c1edb8fmr8476538637.27.1778275955689; 
+ Fri, 08 May 2026 14:32:35 -0700 (PDT)
+X-Received: by 2002:a05:6a20:3d1f:b0:35d:cc9a:8bc1 with SMTP id
+ adf61e73a8af0-3aa8c1edb8fmr8476518637.27.1778275955271; 
+ Fri, 08 May 2026 14:32:35 -0700 (PDT)
 Received: from noble-uboot.tail872496.ts.net
  (124-218-37-86.cm.dynamic.apol.com.tw. [124.218.37.86])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-83962e7e3fcsm16196751b3a.0.2026.05.08.14.32.31
+ d2e1a72fcca58-83962e7e3fcsm16196751b3a.0.2026.05.08.14.32.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 08 May 2026 14:32:32 -0700 (PDT)
+ Fri, 08 May 2026 14:32:34 -0700 (PDT)
 From: Aristo Chen <aristo.chen@canonical.com>
 To: u-boot@lists.denx.de
-Cc: Aristo Chen <aristo.chen@canonical.com>
-Subject: [PATCH v1 0/3] boot/fit: use fdt_for_each_subnode() in image-fit.c
-Date: Fri,  8 May 2026 21:31:58 +0000
-Message-ID: <20260508213217.3807786-1-aristo.chen@canonical.com>
+Cc: Aristo Chen <aristo.chen@canonical.com>, Tom Rini <trini@konsulko.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ James Hilliard <james.hilliard1@gmail.com>,
+ Wolfgang Wallner <wolfgang.wallner@at.abb.com>,
+ Kunihiko Hayashi <hayashi.kunihiko@socionext.com>
+Subject: [PATCH v1 1/3] boot/fit: read default-config property from the
+ configurations node
+Date: Fri,  8 May 2026 21:31:59 +0000
+Message-ID: <20260508213217.3807786-2-aristo.chen@canonical.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260508213217.3807786-1-aristo.chen@canonical.com>
+References: <20260508213217.3807786-1-aristo.chen@canonical.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Sat, 09 May 2026 02:40:19 +0200
@@ -112,42 +121,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This series ends with replacing the verbose fdt_next_node() + ndepth
-idiom in boot/image-fit.c with fdt_for_each_subnode(), bringing the
-file in line with boot/image-fit-sig.c. Six of the seven sites in
-image-fit.c predate the macro by 2-6 years; the seventh was
-copy-pasted from a neighbour in 2015 just after the macro landed.
-The old idiom is legacy, not a deliberate technical choice.
+In fit_print_contents() the default configuration's unit name is read by
+calling fdt_getprop() with noffset rather than confs_noffset. Today this
+happens to work by coincidence: the preceding loop walks /images using
+fdt_next_node(), and when iteration leaves the subtree libfdt returns
+the offset of the next sibling in DFS order, which by FIT layout
+convention is /configurations. The depth counter then drops below zero
+and the loop exits with noffset still pointing at /configurations.
 
-Converting straight to the macro turned out to need a prerequisite,
-which is patch 1. fit_print_contents() reads the default-config
-property using the loop variable left over after iterating /images
-children. With /images defined first in the source (the conventional
-layout) libfdt's walker happens to leave that variable pointing at
-/configurations and the read works. With /configurations defined
-first the read returns NULL and the "Default Configuration" line is
-silently omitted. fdt_for_each_subnode()'s post-loop value is
-unconditionally a negative error code, so a naive conversion would
-have made the missing line the unconditional behaviour. Patch 1
-reads the property from confs_noffset directly and removes the
-layout dependency.
+This relies on /images and /configurations being adjacent siblings and
+on the implementation detail of fdt_next_node()'s post-exhaustion
+return value. It also blocks a follow-up conversion to
+fdt_for_each_subnode(), whose post-loop loop variable is a negative
+error code rather than a valid offset.
 
-Patch 2 adds a regression test for the configs-before-images
-layout, which had no coverage. 
+Use confs_noffset directly, which the comment immediately above the
+call already names as the source.
 
-Patch 3 is the mechanical conversion at all seven sites,
-equivalence-preserving as described in the per-patch message.
+Signed-off-by: Aristo Chen <aristo.chen@canonical.com>
+---
+ boot/image-fit.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Aristo Chen (3):
-  boot/fit: read default-config property from the configurations node
-  test: fit: regression test for default-config print with reversed node
-    order
-  boot/fit: use fdt_for_each_subnode() in image-fit.c
-
- boot/image-fit.c          | 109 ++++++++++----------------------------
- test/py/tests/test_fit.py |  53 ++++++++++++++++++
- 2 files changed, 81 insertions(+), 81 deletions(-)
-
+diff --git a/boot/image-fit.c b/boot/image-fit.c
+index 2d2709aa5b1..5a502e93106 100644
+--- a/boot/image-fit.c
++++ b/boot/image-fit.c
+@@ -449,7 +449,7 @@ void fit_print_contents(const void *fit)
+ 	}
+ 
+ 	/* get default configuration unit name from default property */
+-	uname = (char *)fdt_getprop(fit, noffset, FIT_DEFAULT_PROP, NULL);
++	uname = (char *)fdt_getprop(fit, confs_noffset, FIT_DEFAULT_PROP, NULL);
+ 	if (uname)
+ 		printf("%s Default Configuration: '%s'\n", p, uname);
+ 
 -- 
 2.43.0
 
