@@ -4,52 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C51CECD3436
-	for <u-boot@archiver.kernel.org>; Fri,  8 May 2026 10:18:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5930ECD37AC
+	for <u-boot@archiver.kernel.org>; Fri,  8 May 2026 10:24:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1C95C84BDC;
-	Fri,  8 May 2026 12:18:37 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7AF7F84BDC;
+	Fri,  8 May 2026 12:24:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=arm.com header.i=@arm.com header.b="H3y0qeFC";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=arm.com header.i=@arm.com header.b="YRfnqE+g";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C725784C19; Fri,  8 May 2026 12:18:35 +0200 (CEST)
+ id 3C49C84C45; Fri,  8 May 2026 12:24:05 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 5867784A66
- for <u-boot@lists.denx.de>; Fri,  8 May 2026 12:18:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id 0D16B84A66
+ for <u-boot@lists.denx.de>; Fri,  8 May 2026 12:24:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=abdellatif.elkhlifi@arm.com
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 058741BCA;
- Fri,  8 May 2026 03:18:27 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 0B8AE1BCA;
+ Fri,  8 May 2026 03:23:57 -0700 (PDT)
 Received: from e130802.arm.com (e130802.arm.com [10.1.29.54])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 805A23F763;
- Fri,  8 May 2026 03:18:30 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id D4D153F763;
+ Fri,  8 May 2026 03:24:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
- t=1778235512; bh=2HlNUe5uiUOGmPJMhYk28AacQboyjN3j+eKMUsTM8/M=;
+ t=1778235842; bh=DuCyh2LHQHuYFabsZ1Ud/ilQw+BZS+VsS7TNH+9GJCw=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=H3y0qeFCNFf6d9zHwyO7MhaaeS9K5n5NE3jSJjE+5hpAFcsWBaiTwguxv8dGnRtMm
- cTncFeyzuAnUzUa4kLqLCWyyHX1w9DzdGaN49Xf0A197pLBrOX7fuMLQrgP9/PkKDL
- ysrz3ROHOeFlRlm0ERywqgqOacGWF60A1ztyDBIY=
-Date: Fri, 8 May 2026 11:18:21 +0100
+ b=YRfnqE+gbOttjuGveDiX3kEeLCy5oZ9rHG0G5WRaU4F0/TKaL7nCcA9Lb5ZkNeDp5
+ TnTk5Ubb6Ufe01n4otuSsVfKsSkkexr3dUBd4v1KM6S3ZDPocNsjXhIqAw9VZkk4JA
+ K2v5M/XHDNCMv0r4Gc/tkDxSNmtysMqoJHl+c/4Y=
+Date: Fri, 8 May 2026 11:23:52 +0100
 From: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
-To: Simon Glass <sjg@chromium.org>, harsimransingh.tungal@arm.com
-Cc: u-boot@lists.denx.de, abdellatif.elkhlifi@arm.com, trini@konsulko.com,
- ilias.apalodimas@linaro.org, xypron.glpk@gmx.de, hugues.kambampiana@arm.com
-Subject: Re: [PATCH 02/12] arm-ffa: add FF-A bus runtime support
-Message-ID: <af24bWF2NjwQlUer@e130802.arm.com>
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ harsimransingh.tungal@arm.com
+Cc: u-boot@lists.denx.de, trini@konsulko.com, xypron.glpk@gmx.de,
+ hugues.kambampiana@arm.com, sjg@chromium.org
+Subject: Re: [PATCH 03/12] efi_loader: add FF-A runtime support in EFI
+ variable TEE driver
+Message-ID: <af25uGoE7BBQpGhj@e130802.arm.com>
 References: <20260424173151.371134-1-harsimransingh.tungal@arm.com>
- <20260424173151.371134-3-harsimransingh.tungal@arm.com>
- <CAFLszTiBGiJHiw+mv3y=pr+csA3AQoQ_HOG5-R+ZrPXxbPJL4w@mail.gmail.com>
+ <20260424173151.371134-4-harsimransingh.tungal@arm.com>
+ <CAC_iWj+TMCCMkRmAV3x2gh0LoxBt3pvkJgnojq48fCkJBFro+w@mail.gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <CAFLszTiBGiJHiw+mv3y=pr+csA3AQoQ_HOG5-R+ZrPXxbPJL4w@mail.gmail.com>
+In-Reply-To: <CAC_iWj+TMCCMkRmAV3x2gh0LoxBt3pvkJgnojq48fCkJBFro+w@mail.gmail.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -68,153 +69,180 @@ X-Virus-Status: Clean
 
 Hi Harsimran,
 
-> On 2026-04-24T17:31:50, Harsimran Singh Tungal
+> On Fri, 24 Apr 2026 at 20:32, Harsimran Singh Tungal
 > <harsimransingh.tungal@arm.com> wrote:
-> > arm-ffa: add FF-A bus runtime support
 > >
-> > Enable FF-A runtime transport for EFI services
+> > Enable MM variable services over FF-A after ExitBootServices
 > >
-> > This patch introduces the FF-A runtime infrastructure that enables
-> > U-Boot to use the Arm Firmware Framework for Arm A-profile (FF-A)
-> > transport layer after ExitBootServices().
-> > The runtime transport provides persistent, runtime-safe
-> > implementations of key FF-A functions used by EFI runtime services.
+> > This patch extends lib/efi_loader/efi_variable_tee.c to support FF-A
+> > communication with the secure world during EFI runtime. It enables EFI
+> > runtime variable access and MM communication using FF-A transport when
+> > ExitBootServices() has already been called.
 > >
-> > Summary of key changes:
-> > -----------------------
-> >   - Add drivers/firmware/arm-ffa/arm-ffa-runtime.c implementing FF-A
-> >     runtime operations.
-> >   - Introduce include/arm_ffa_runtime.h exporting FF-A runtime
-> >     functions and data structures.
-> >   - Move FF-A error mapping into runtime context.
-> >   - Introduce invoke_ffa_fn_runtime() as runtime safe SMC wrapper.
-> >   - Add runtime SMC wrapper for sandbox emulation.
-> >   - Add ARM_FFA_RT_MODE Kconfig to enable runtime support.
-> > [...]
-> >
-> > drivers/firmware/arm-ffa/Kconfig           |  11 ++
-> >  drivers/firmware/arm-ffa/Makefile          |   4 +-
-> >  drivers/firmware/arm-ffa/arm-ffa-runtime.c | 287 +++++++++++++++++++++++++++++
-> >  drivers/firmware/arm-ffa/arm-ffa-uclass.c  | 111 ++---------
-> >  drivers/firmware/arm-ffa/arm-ffa.c         |  16 +-
-> >  drivers/firmware/arm-ffa/ffa-emul-uclass.c |  12 ++
-> >  include/arm_ffa.h                          |  16 +-
-> >  include/arm_ffa_priv.h                     |  24 ++-
-> >  include/arm_ffa_runtime.h                  | 183 ++++++++++++++++++
-> >  test/dm/ffa.c                              |   6 +-
-> >  10 files changed, 551 insertions(+), 119 deletions(-)
+> > Key changes:
+> >  ------------
+> >   - Introduce runtime-safe implementations for MM communication,
+> >     notification, and variable access using FF-A driver.
+> >   - Introduce communication-buffer helper (get_comm_buf()) that switches
+> >     between dynamic allocation (boot phase) and the fixed FF-A shared
+> >     buffer (runtime phase).
+> >   - Mark persistent data and code with __efi_runtime and
+> >     __efi_runtime_data attributes.
+> >   - Use direct physical address mapping for shared buffers since
+> >     U-Boot operates with 1:1 physical-to-virtual mapping.
+> >   - Only per-buffer cache maintenance is performed at runtime,
+> >     as whole D-cache invalidation would violate the OS coherency model
+> >     after ExitBootServices().
+> >   - Add runtime-phase tracking (efi_runtime_enabled).
 > 
-> > diff --git a/drivers/firmware/arm-ffa/arm-ffa-runtime.c b/drivers/firmware/arm-ffa/arm-ffa-runtime.c
-> > @@ -0,0 +1,287 @@
-> > +     if (priv)
-> > +             ffa_copy_runtime_priv(&priv->rt);
-> > +     else
-> > +             log_err("FF-A: Entering RT mode without FF-A runtime data information\n");
-> > +
-> > +     ffa_enable_runtime_context();
+> Why is this needed? For the memory allocations?
 > 
-> This enables the runtime context unconditionally, even after logging
-> the priv data is missing. The runtime then comes up with id == 0 and
-> fwk_version == 0 and any later FF-A call silently uses bogus values.
-> Please return after the log_err() so ffa_get_status_runtime_context()
-> keeps returning false on the failure path.
+> [...]
 > 
-> > diff --git a/drivers/firmware/arm-ffa/arm-ffa-runtime.c b/drivers/firmware/arm-ffa/arm-ffa-runtime.c
-> > @@ -0,0 +1,287 @@
+> >   *
+> >   *  Authors:
+> >   *    Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
+> > @@ -14,6 +14,7 @@
+> >
+> >  #if CONFIG_IS_ENABLED(ARM_FFA_TRANSPORT)
+> >  #include <arm_ffa.h>
 > > +#include <arm_ffa_runtime.h>
-> > +#include <arm_ffa_priv.h>
-> > +#include <log.h>
-> > +#include <asm/global_data.h>
-> > +#include <linux/errno.h>
-> > +#include <linux/types.h>
+> >  #endif
+> >  #include <cpu_func.h>
+> >  #include <dm.h>
+> > @@ -34,20 +35,47 @@
+> >  #define MM_DENIED (-3)
+> >  #define MM_NO_MEMORY (-5)
+> >
+> > +static const int __efi_runtime_rodata mm_sp_errmap[] = {
+> > +       [-MM_NOT_SUPPORTED]      = -EINVAL,
+> > +       [-MM_INVALID_PARAMETER]  = -EPERM,
+> > +       [-MM_DENIED]             = -EACCES,
+> > +       [-MM_NO_MEMORY]          = -EBUSY,
+> > +};
 > > +
-> > +DECLARE_GLOBAL_DATA_PTR;
 > 
-> gd doesn't seem to be referenced in this file?
+> These are already defined above and used in ffa_notify_mm_sp(). If you
+> plan to convert them, do it for the entire file.
 > 
-> > diff --git a/drivers/firmware/arm-ffa/arm-ffa-runtime.c b/drivers/firmware/arm-ffa/arm-ffa-runtime.c
-> > @@ -0,0 +1,287 @@
-> > + * after the FF-A bus device has successfully probed and U-Boot’s FF-A
+> [...]
 > 
-> This (and the same line in arm_ffa_runtime.h) should use a normal '
-> instead of the UTF-8 right single quotation mark.
+> > +/**
+> > + * efi_is_runtime_enabled() - Indicate whether the system is in the UEFI runtime phase
+> > + *
+> > + * This helper returns whether the firmware has transitioned into the
+> > + * UEFI runtime phase, meaning that ExitBootServices() has been invoked.
+> > + *
+> > + * Return:
+> > + *   true  - The system is operating in UEFI runtime mode.
+> > + *   false - The system is still in the boot services phase.
+> > + */
+> > +static bool __efi_runtime efi_is_runtime_enabled(void)
+> > +{
+> > +       return efi_runtime_enabled;
+> > +}
 > 
-> > diff --git a/drivers/firmware/arm-ffa/arm-ffa-runtime.c b/drivers/firmware/arm-ffa/arm-ffa-runtime.c
-> > @@ -0,0 +1,287 @@
-> > +#if CONFIG_IS_ENABLED(ARM_FFA_RT_MODE)
-> > +static void EFIAPI ffa_rt_exit_boot_services_notify(struct efi_event *event,
-> > +                                                 void *context)
+> Enabled is a bit confusing. efi_at_runtime() should be enough. The
+> efi_tcg.c code calls this 'ebs_called'
 > 
-> CONFIG_IS_ENABLED() is only meaningful for symbols with an SPL twin.
-> ARM_FFA_RT_MODE has none, and the uclass side already uses
-> IS_ENABLED(CONFIG_ARM_FFA_RT_MODE) - please use IS_ENABLED() here and
-> in arm_ffa_runtime.h.
+> > +
+> >  /**
+> >   * get_connection() - Retrieve OP-TEE session for a specific UUID.
+> >   *
+> > @@ -169,6 +197,28 @@ static efi_status_t optee_mm_communicate(void *comm_buf, ulong dsize)
+> >  }
+> >
+> >  #if CONFIG_IS_ENABLED(ARM_FFA_TRANSPORT)
+> > +/**
+> > + * ffa_map_sp_event_runtime() - Map MM SP response to errno (runtime-safe)
+> > + * @sp_event_ret: MM SP return code from ffa_notify_mm_sp_runtime()
+> > + *
+> > + * Convert the MM SP return code into a standard U-Boot errno. This helper
+> > + * is marked __efi_runtime to ensure it is safe to call after
+> > + * ExitBootServices().
+> > + *
+> > + * Return: 0 on success, negative errno on failure
+> > + */
+> > +static __efi_runtime int ffa_map_sp_event_runtime(int sp_event_ret)
+> > +{
+> > +       int idx = -sp_event_ret;
+> > +
+> > +       if (sp_event_ret == MM_SUCCESS)
+> > +               return 0;
+> > +       if (idx > 0 && idx < (int)ARRAY_SIZE(mm_sp_errmap) &&
+> > +           mm_sp_errmap[idx])
+> > +               return mm_sp_errmap[idx];
+> > +       return -EACCES;
+> > +}
+> > +
+> >  /**
+> >   * ffa_notify_mm_sp() - Announce there is data in the shared buffer
+> >   *
+> > @@ -225,6 +275,35 @@ static int ffa_notify_mm_sp(void)
+> >         return ret;
+> >  }
+> >
+> > +/**
+> > + * ffa_notify_mm_sp_runtime() - Runtime implementation of
+> > + *                              ffa_notify_mm_sp()
+> > + *
+> > + * Notify the MM partition in the trusted world that
+> > + * data is available in the shared buffer.
+> > + * This is a blocking call during which trusted world has exclusive access
+> > + * to the MM shared buffer.
+> > + *
+> > + * Return:
+> > + *
+> > + * 0 on success
+> > + */
+> > +static int __efi_runtime ffa_notify_mm_sp_runtime(void)
+> > +{
+> > +       struct ffa_send_direct_data msg = {0};
+> > +       int ret;
+> > +       int sp_event_ret;
+> > +
+> > +       msg.data0 = CONFIG_FFA_SHARED_MM_BUF_OFFSET;
+> > +
+> > +       ret = ffa_sync_send_receive_runtime(mm_sp_id, &msg, 1);
+> > +       if (ret)
+> > +               return ret;
+> > +
+> > +       ret = ffa_map_sp_event_runtime(sp_event_ret);
+> > +       return ret;
+> > +}
+> > +
+> >  /**
+> >   * ffa_discover_mm_sp_id() - Query the MM partition ID
+> >   *
+> > @@ -360,6 +439,116 @@ static efi_status_t ffa_mm_communicate(void *comm_buf, ulong comm_buf_size)
+> >         return efi_ret;
+> >  }
+> >
+> > +/**
+> > + * ffa_mm_communicate_runtime() - Runtime implementation of ffa_mm_communicate()
+> > + * @comm_buf:          locally allocated communication buffer used for rx/tx
+> > + * @comm_buf_size:     communication buffer size
+> > + *
+> > + * Issue a door bell event to notify the MM partition (SP) running in OP-TEE
+> > + * that there is data to read from the shared buffer.
+> > + * Communication with the MM SP is performed using FF-A transport.
+> > + * On the event, MM SP can read the data from the buffer and
+> > + * update the MM shared buffer with response data.
+> > + * The response data is copied back to the communication buffer.
+> > + *
+> > + * Return:
+> > + *
+> > + * EFI status code
+> > + */
+> > +static efi_status_t __efi_runtime ffa_mm_communicate_runtime(void *comm_buf,
+> > +                                                            ulong comm_buf_size)
+> > +{
 > 
-> > diff --git a/drivers/firmware/arm-ffa/arm-ffa-runtime.c b/drivers/firmware/arm-ffa/arm-ffa-runtime.c
-> > @@ -0,0 +1,287 @@
-> > +     if (is_smc64) {
-> > +             req_mode = FFA_SMC_64(FFA_MSG_SEND_DIRECT_REQ);
-> > +     } else {
-> > +             req_mode = FFA_SMC_32(FFA_MSG_SEND_DIRECT_REQ);
-> > +     }
-> 
-> Single-statement bodies should not be braced. Please run patman or
-> checkpatch.pl on your patches. Also, the two efi_memset_runtime()
-> calls below clear fresh stack variables. Please initialise them at
-> declaration ('ffa_value_t ffa_args_rt = {}') and drop the explicit
-> memset()s; the compiler's zero-init is just as runtime-safe and is
-> what the boot path already does.
-> 
-> Also could you run checkpatch / patman over your patches for v2?
-> 
-> > diff --git a/drivers/firmware/arm-ffa/arm-ffa-uclass.c b/drivers/firmware/arm-ffa/arm-ffa-uclass.c
-> > @@ -1047,6 +961,11 @@ static int ffa_do_probe(struct udevice *dev)
-> > +     if (IS_ENABLED(CONFIG_ARM_FFA_RT_MODE)) {
-> > +             ret = ffa_setup_efi_exit_boot_services_event(uc_priv);
-> > +             if (ret)
-> > +                     return ret;
-> > +     }
-> 
-> If event creation fails here, the RX/TX buffers mapped above and the
-> partition cache are leaked, i,e. the existing failure path for
-> ffa_cache_partitions_info() at least calls
-> ffa_unmap_rxtx_buffers_hdlr(). Please follow the same pattern, or move
-> event registration before resource allocation.
-> 
-> > diff --git a/drivers/firmware/arm-ffa/Kconfig b/drivers/firmware/arm-ffa/Kconfig
-> > @@ -41,3 +44,11 @@ config ARM_FFA_TRANSPORT
-> > +config ARM_FFA_RT_MODE
-> > +     bool "Enable FF-A runtime support"
-> > +     depends on ARM_FFA_TRANSPORT && EFI_LOADER
-> > +     default y
-> 
-> Just to check, does every existing FF-A user want this on? 'default y'
-> silently enables a new transport path (and the ExitBootServices
-> callback) for everyone with ARM_FFA_TRANSPORT && EFI_LOADER. I'd
-> suggest defaulting, or at minimum 'default y if CORSTONE1000' or
-> similar, until other boards have opted in.
-> 
-> > diff --git a/include/arm_ffa_priv.h b/include/arm_ffa_priv.h
-> > @@ -212,9 +227,8 @@ struct ffa_partitions {
-> > -     u32 fwk_version;
-> > +     struct ffa_priv_runtime rt;
-> >       struct udevice *emul;
-> > -     u16 id;
-> 
-> Just to clarify the model: 'struct ffa_priv' now embeds 'struct
-> ffa_priv_runtime rt' at boot, and at ExitBootServices we copy the
-> whole sub-struct (including 'use_ffa_runtime', always false here) into
-> the resident 'ffa_priv_rt', then immediately overwrite use_ffa_runtime
-> via ffa_enable_runtime_context(). Layering would be clearer if
-> 'use_ffa_runtime' lived only on the resident copy and ffa_priv_runtime
-> carried just the data shipped across the boundary (fwk_version, id).
-> 
-> Regards,
-> Simon
+> There's a lot of code duplication between the boottime and runtime
+> variants, but I don;t see why we need it. Can't we have a single
+> function that works both boottime and runtime?
 
-Simon’s comments make sense to me. Please address them.
-
-Aside from that, everything looks good in this commit.
+Ilias suggestion makes sense to me. Please address that.
 
 Regards,
 Abdellatif
