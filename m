@@ -4,95 +4,105 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A163CD3445
-	for <u-boot@archiver.kernel.org>; Fri,  8 May 2026 18:10:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12F08CD342F
+	for <u-boot@archiver.kernel.org>; Fri,  8 May 2026 18:12:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 269EA84DD6;
-	Fri,  8 May 2026 20:10:43 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 92A4484DD6;
+	Fri,  8 May 2026 20:12:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="NaExWLQV";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="K0OAwNIm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ACE0584DDD; Fri,  8 May 2026 20:10:40 +0200 (CEST)
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [IPv6:2a00:1450:4864:20::632])
+ id C8F2084DE2; Fri,  8 May 2026 20:12:46 +0200 (CEST)
+Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
+ [IPv6:2a00:1450:4864:20::62b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BC0B984DC3
- for <u-boot@lists.denx.de>; Fri,  8 May 2026 20:10:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C81E184DC3
+ for <u-boot@lists.denx.de>; Fri,  8 May 2026 20:12:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-bcb69c8b30bso77265466b.1
- for <u-boot@lists.denx.de>; Fri, 08 May 2026 11:10:38 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1778263838; cv=none;
+Received: by mail-ej1-x62b.google.com with SMTP id
+ a640c23a62f3a-ba7a1cc0380so413045666b.2
+ for <u-boot@lists.denx.de>; Fri, 08 May 2026 11:12:44 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1778263964; cv=none;
  d=google.com; s=arc-20240605;
- b=Q4EgQ/NDu+DiDg++VhGc+X6ORRkCZ2NJ6h5PZxldDBctEULcBi4BzoD6tIxV60k+7B
- pm/5OOSqZlKE/+ppjQH+/lw22Zd3siN6CFAzwlW03RS3QFnPHgKvC4+1YbUC6z/UiOC+
- F+N/FwAWLAKnRIZ3EH0pLKUpk075/2ByYvg6Fw/Kiabf8TFKsfF5YvW3wiefWm3pQtcM
- S6wGVOmUfNwUUc+2u097VZLeshF0x4OWyvcxZNsg+HwHUUzl4l2gb/wuxtlOsOjRxE+P
- Hh/6vhNI70sxAhU3kSG4B59w2DmEEhdw2WvlsnMteSTPhzkH3bnUfAUq6/MdXhpMKMj4
- 0xpA==
+ b=gsIfkluSKviTDxbSvpkiFDL+KhxlRVUy/KhADdpZDHTVTJ3fYk4UQ3C3y4aQC3WC7T
+ glMZqed1PmUHV2XRA4nOGJJeSZUSG4jMcJPQSvLvMaZNSKGoE9CJzdGfZ6EcHRCiV36r
+ YXf1Ro1YSBVef8F26Ai57ksZfCe/qwzgR8DzyM7pSb8gQCVsk+us1ABcUZogzUBkcz9G
+ Il6DOupsBiNEkI716B9QqcbDMpUKCIPfZBwBrRt/iMU5tq2uJPcf4vr0gmMyD1HjjEx/
+ s7LZbNQLFNPQZALgXVSwvDUhhCXrCI5llzOsNx0/DXGKWVJATH7FqcNz3+q5Rya6WHQk
+ m4fA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=24haMHXTsp0lycj2/K1moGsekD3pJLaAfu/ikje45bE=;
- fh=L35BJGl1eOCTAl0X8L2OQ78gjsGwLgv72NZeh8dCP+M=;
- b=MknMO/vN4MG+MsHKZtLuafJgSG4DYsCDL6XpmpARUpVRVy1U+YDZD2TiyITdY10kX8
- +qon6sdbLOgfhvEgt8ZYiZ24WPnf3kXZ88QbpJaBBbMZLZlyVnrcaSir8GinX1G2aKyw
- z5Q9nx6pmGL+MgU9w3UXEzX7v/4VoHhqQ3GG2rE3gX8ShdDNgc+UAMMKG3TCBQ97u9qT
- AG9MVLRZATVzw2CYYNctmntjhEG8xhKgDWSmpEzYnmNIOt2YYdiBA8ePS7wH8Qp/oUzw
- 4bu+Yvewnb6Qp4kQ6a+Z8DT8gw/CRhhmy1qAW/2m9bj1moL4cIHgLit5srZKGiTZEgLn
- 6tRA==; darn=lists.denx.de
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=64O7vG2AX0zyxIwbM60+4Xh3YyQkhTWqut12iSsJuhA=;
+ fh=ygRMXKfDeHWsHPoqZuiKJ52ykjHOmT0Fyb/GAJQ3Vhc=;
+ b=QYqE4ENjpXEHU1k8Yvi4t9oMKyHH5BJ9J0rA+QzkxiC8ADUxbvqS2ZD9sx69WaUwSF
+ G3fx+QqY0M7Og0eR1NrcRVNIOZopWquxLD84opTDSWtr1V4SQFIdBc4Lv1OATrHb0mp1
+ 66REwCdnC1sIFNNSrnrc9t44JosBpbiTW+lhOQoM03crq/2o5usaHbw01/poJgCdCblf
+ wCOtL8wdtz8VE95EODlSBlR0WSoK0JVtw/rvAm6wzLenmeK8cgs906qomtqR31C1Nia1
+ l1vUH5sfaodqzuX5EGUBrti5ZTVrCPiLy9hKi+XoK3ksCPgSGAToYLABe0sAbpF6q6X6
+ 6kkw==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1778263838; x=1778868638; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=24haMHXTsp0lycj2/K1moGsekD3pJLaAfu/ikje45bE=;
- b=NaExWLQVZrxvoLMJgJrHhJLwrO4Oags0Hv8XTEZthPsGmib4ZkRKbVUPtgByW8Ff99
- QWlEIjR5sJKvEKgldSfUQJgMIIVSMcSbS2F3rg8k6+Qfp1xBZov0S70g+EnI2XG0eP8N
- j+NVGDD07nOrazk9+mqkAy1JRqe5Pqye5+J9c=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778263838; x=1778868638;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=chromium.org; s=google; t=1778263964; x=1778868764; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=24haMHXTsp0lycj2/K1moGsekD3pJLaAfu/ikje45bE=;
- b=kamc4omR47g5+Ghelb4/PDUE5wCXvNQ3gM2dFCV9MaoM3SQEh+QcSYYQ/BdEBooQBH
- H7CQlLu1molqznCRJSG5tqLdRhMMoCVSc1YuTQs3wHObWvN5j47rYUMvx00FrCOgRkbV
- Xkg82dJ6UD5MsMX9eP2vhJE6i+yqe6eGn710IhLP4rGCj36AKG27gy+zx124i699TttB
- w0v830e00W3UCU+OpPAEU5qbzePEi+pDYXYDpENGH0WggXBqig/f+pad3jW4FtDrw7Ev
- 0PX6wFChd4UQMrCboRBP1XOBjVBgoRPDon1IiqRnIzCdDpDAmfRsVVaVNM2D3qretjrM
- ubtw==
-X-Gm-Message-State: AOJu0Yx+hgGQwHOcYAImaaUfUec3oFPCYpicznoTn6dqCLPgvzFL0Ono
- gP2RhoWSHNXKtcx0rWFxqSwGJjuXSEvozOq65cSTIgBkCtbO5A2QbMXdQeKkXEWqfo6unCPp8Cr
- QsFy0f/nVKObbCRBH01DyUruF2NCntjT5qR56kcjK
-X-Gm-Gg: Acq92OHU2v+GfxKdAIVlmhz9VUlDQaIJ10yq+Z5gBTOxgZAWpSysfasFmrnXbzpcDBY
- HX5EdiB6dOzM7Q20AETQDaEP3O91oCm0X8eadEfX3G3YUqzk1CvU3VvWGDpvyIFBPgtdYkGl+D3
- U9xgb0pC4+6baSnTuGewBEQHAG/8CJ/1WY2Z6ok1du1GydNgK9DDG0BD9CnE+C3upiEDYHy3vkf
- FN5NaNZ8Jagwat9T2mdJtCBDaHIeqrUSSDsN3GRKT9sFrkoNPVVCzLt+l6kpSK2BNIo6hcJqC1N
- +olUD0Esfv/gR+q0
-X-Received: by 2002:a17:907:268a:b0:bad:af5:7ff3 with SMTP id
- a640c23a62f3a-bc56da16383mr834970566b.37.1778263837657; Fri, 08 May 2026
- 11:10:37 -0700 (PDT)
+ bh=64O7vG2AX0zyxIwbM60+4Xh3YyQkhTWqut12iSsJuhA=;
+ b=K0OAwNImYiztYshhip3iVYOgJ4AfEFSMdoX2zEzovEa1hm2x5yFdSJ2gyLNrwRCS0K
+ ItXssnYZzJNFawUn2LP3X9E+bkR55vboQvHVjILCXR8E2ypxr3nduz7qnUoQE8RK761J
+ 2yfo7gAJ+f/DL0bhhyhUZdxQfykE2eE0LbHYc=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1778263964; x=1778868764;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=64O7vG2AX0zyxIwbM60+4Xh3YyQkhTWqut12iSsJuhA=;
+ b=bCa9p/Pzc5A9ypD65LeT+iowIEPvizM5KKC9rBAZe9Bn09UceA0v25j5lta8O2WNkH
+ hWqEgfvE/wlshCnDMcbNT8rXo2jkCcvhjDkXnMnsTaF26YBuItoJIgxLkl5xKAMjqIF3
+ Uvv+Aoj+0BZ6pY0NcJPOvmzWWArWSFQAImhTf2s31CLIkACOi2W4rx6X1i7Gdf5pk4uJ
+ cE0/VqDqKzh9ZlZFY/Zi6xPHvNopZfC7Cb6I9aO0L1wmCuPd3dWVC/GyOzSBkEmMQS0g
+ BzIc1N+ghhcKyv9sdpwldEf7LrGKNSb0Zedhi2Vk0RYoj7s8y9qMDmYX3RDomP4VEljq
+ jCXA==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ+76XSR2xQ+I2AlCWzUWcPDcc6tKn7QchPj9dAV8Mw9lbum7Sr4WUWgGNOGEyAdeCCJwAEDFl4=@lists.denx.de
+X-Gm-Message-State: AOJu0YxgblNMpik16eDoY/cOVgDNt1OaHQHaqpZdCoUXlz3slvHtTcwq
+ gUwSugEFP6oYNsvH/ITXwXyojIjC8dUsVxe8UDoC7+gzFPMCyryT6bLP8Pd39yrSaRtaBN8uqi3
+ yTs7WL41U0VYYZNb2taNNiuPHap/KV+HJmxT2R/rv
+X-Gm-Gg: Acq92OE05gR3MfYHlGgXaLi62bOjpjYmCc5POJD1SS4kw7Xj8gv8Aykb0RZ1wSdI8XR
+ 0tVn5e59oqKAyF8Yk560//8QEQ/K9M1uS14r61Gul1XnylN/h0HOZw3Nbc6hswuU6czk18QeVvi
+ 2izy7DVtKlQkt/lmC9gwFppIOHrllNLiNHdZnK7K4fGJXXzn9taQYjYcdaO2LCG3JlkKHsixAvK
+ V+WjpSLuCj6WwrcV/hjMjMgG75R05v+tAVAn0NwmSR52+iwPKn2Cs3ktcZBlsGyhCUPmzl6cOMv
+ NDd16w==
+X-Received: by 2002:a17:907:1685:b0:bc6:7238:bd4e with SMTP id
+ a640c23a62f3a-bc67239005cmr605620666b.5.1778263964126; Fri, 08 May 2026
+ 11:12:44 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260508082132.25476-1-Alexander.Feilke@ew.tq-group.com>
- <20260508082132.25476-2-Alexander.Feilke@ew.tq-group.com>
-In-Reply-To: <20260508082132.25476-2-Alexander.Feilke@ew.tq-group.com>
+References: <20260430223319.2663939-1-lukas.schmid@netcube.li>
+ <20260430223319.2663939-6-lukas.schmid@netcube.li>
+ <553ba73c-8a90-44e3-9809-185b0fdfd2ce@cherry.de>
+ <CAFLszTjwdY_+17qWouSMq9Bh2N1UJ6_Sq-JP7huwA5Y-YKb9zQ@mail.gmail.com>
+ <2cf115f3-c889-4b57-b20c-3eb2b7bbde03@cherry.de>
+In-Reply-To: <2cf115f3-c889-4b57-b20c-3eb2b7bbde03@cherry.de>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 8 May 2026 12:10:25 -0600
-X-Gm-Features: AVHnY4IhdB3Bge5KK0aRB-dV7LjaZVMC_P_50ksqAL0ASENJJkWwpIvSwTvy08k
-Message-ID: <CAFLszTjAZECeyOPy8C5-Cz6aJciUvGdrKgqn5m=Q9LqxpfbVvA@mail.gmail.com>
-Subject: Re: [PATCH 1/8] cmd: date: improve day of month verification
-To: Alexander.Feilke@ew.tq-group.com
-Cc: u-boot@lists.denx.de, u-boot@ew.tq-group.com, 
- Markus Niebel <Markus.Niebel@ew.tq-group.com>, Tom Rini <trini@konsulko.com>
+Date: Fri, 8 May 2026 12:12:32 -0600
+X-Gm-Features: AVHnY4IkHrkAHFd-hN1hdVK1-XxewlSe4BH_f4oyPjZldNtBBbNu581-BBxsAes
+Message-ID: <CAFLszTgj0Bpq92jaRD=f5AzDM_SeqisjZP6LxNyuhWOZ9h+3=Q@mail.gmail.com>
+Subject: Re: [PATCH v2 5/6] sunxi: extend binman FIT description for signed
+ SPL images
+To: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: Lukas Schmid <lukas.schmid@netcube.li>,
+ Andre Przywara <andre.przywara@arm.com>, 
+ Tom Rini <trini@konsulko.com>, Jerome Forissier <jerome.forissier@arm.com>,
+ u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -109,52 +119,148 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Markus,
+Hi Quentin,
 
-On 2026-05-08T08:21:24, Feilke, Alexander
-<Alexander.Feilke@ew.tq-group.com> wrote:
-> cmd: date: improve day of month verification
+On Fri, 8 May 2026 at 08:02, Quentin Schulz <quentin.schulz@cherry.de> wrot=
+e:
 >
-> Use rtc_month_days instead of oversimplified local logic.
+> Hi Simon,
 >
-> Signed-off-by: Markus Niebel <Markus.Niebel@ew.tq-group.com>
+> On 5/7/26 6:49 PM, Simon Glass wrote:
+> > Hi Lukas, Quentin,
+> >
+> > On Thu, 7 May 2026 at 05:30, Quentin Schulz <quentin.schulz@cherry.de> =
+wrote:
+> >>
+> >> Hi Lukas,
+> >>
+> >> On 5/1/26 12:33 AM, Lukas Schmid wrote:
+> >>> Extend the sunxi binman/FIT description to support signed SPL FIT
+> >>> images. Add an SPL public-key DTB image, per-image hash nodes,
+> >>> fit,sign support, and a configuration signature that covers
+> >>> firmware, loadables and the selected FDT.
+> >>>
+> >>> Handle TOC0 SPL output as well by adding the required filename and
+> >>> mkimage wrapping so the generated sunxi image remains verifiable.
+> >>>
+> >>
+> >> I sympathize with the effort as I'd like something similar on Rockchip
+> >> but I don't think this is right.
+> >>
+> >>> Signed-off-by: Lukas Schmid <lukas.schmid@netcube.li>
+> >>> ---
+> >>>    arch/arm/dts/sunxi-u-boot.dtsi | 68 ++++++++++++++++++++++++++++++=
+++--
+> >>>    1 file changed, 64 insertions(+), 4 deletions(-)
+> >>>
+> >>> diff --git a/arch/arm/dts/sunxi-u-boot.dtsi b/arch/arm/dts/sunxi-u-bo=
+ot.dtsi
+> >>> index e1a9a7f5d4c..313fcad3922 100644
+> >>> --- a/arch/arm/dts/sunxi-u-boot.dtsi
+> >>> +++ b/arch/arm/dts/sunxi-u-boot.dtsi
+> >>> @@ -27,6 +27,38 @@
+> >>>    #endif
+> >>>
+> >>>    &binman {
+> >>> +#ifdef CONFIG_SPL_FIT_SIGNATURE
+> >>> +     spl {
+> >>> +#ifdef CONFIG_SPL_IMAGE_TYPE_SUNXI_TOC0
+> >>> +             filename =3D "spl/u-boot-spl.bin";
+> >>> +#else
+> >>> +             filename =3D "spl/sunxi-spl.bin";
+> >>> +#endif
+> >>> +
+> >>> +             u-boot-spl-nodtb {
+> >>> +             };
+> >>> +
+> >>
+> >> You're missing
+> >>
+> >> #if !IS_ENABLED(CONFIG_SPL_SEPARATE_BSS)
+> >>                           u-boot-spl-bss-pad {
+> >>                           };
+> >> #endif /* !CONFIG_SPL_SEPARATE_BSS */
+> >>
+> >> here.
+> >>
+> >>
+> >>> +             u-boot-spl-pubkey-dtb {
+> >>> +                     algo =3D "sha256,rsa2048";
+> >>> +                     required =3D "conf";
+> >>> +                     key-name-hint =3D "dev";
+> >>> +             };
+> >>
+> >> You're forcing the use of an RSA2048 key which is not recommended
+> >> nowadays anymore as far as I know. RSA4096 is "better" when using RSA.
+> >>
+> >> This also forces the user to have a dev.crt certificate to be able to
+> >> build the image. It's not a secret or sensitive info so I guess that's=
+ fine.
+> >>
+> >>> +     };
+> >>> +
+> >>> +#ifdef CONFIG_SPL_IMAGE_TYPE_SUNXI_TOC0
+> >>> +     image {
+> >>> +             filename =3D "spl/sunxi-spl.bin";
+> >>> +
+> >>> +             mkimage {
+> >>> +                     args =3D "-a 0x20060 -T sunxi_toc0";
+> >>> +                     data-to-imagename;
+> >>> +
+> >>> +                     u-boot-spl {
+> >>> +                     };
+> >>> +             };
+> >>> +     };
+> >>> +#endif
+> >>> +#endif
+> >>>        u-boot-sunxi-with-spl {
+> >>>                filename =3D "u-boot-sunxi-with-spl.bin";
+> >>>                pad-byte =3D <0xff>;
+> >>> @@ -45,6 +77,9 @@
+> >>>                        description =3D "Configuration to load U-Boot =
+and firmware";
+> >>>                        #address-cells =3D <1>;
+> >>>                        fit,fdt-list =3D "of-list";
+> >>> +#ifdef CONFIG_SPL_FIT_SIGNATURE
+> >>> +                     fit,sign;
+> >>> +#endif
+> >>>
+> >>
+> >> This requires the user to sign as part of building U-Boot and therefor=
+e
+> >> have access to the private key. Some users may want to sign separately
+> >> from their U-Boot building step such that building can be done anywher=
+e
+> >> but signing is only done on specific infrastructure.
+> >
+> > I wonder if binman could help here, perhaps by providing an option
+> > (for CI) to skip signing if the file is missing?
+> >
 >
-> cmd/date.c | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
+> If fit,sign is there, we should sign and not give an option to silence
+> fails. The fact we can have SPL_FIT_SIGNATURE enabled and not include
+> the pubkey in the SPL DTB is already big enough of a footgun, we
+> shouldn't add more =F0=9F=99=82
 
-> diff --git a/cmd/date.c b/cmd/date.c
-> @@ -167,12 +167,12 @@ int mk_date (const char *datestr, struct rtc_time *tmp)
->               /* fall thru */
->       case 12:                /* MMDDhhmmCCYY */
->               if (cnvrt2 (datestr+0, &val) ||
-> -                 val > 12) {
-> +                 val > 12 || val < 1) {
->                       break;
->               }
->               tmp->tm_mon  = val;
->               if (cnvrt2 (datestr+2, &val) ||
-> -                 val > ((tmp->tm_mon==2) ? 29 : 31)) {
-> +                 val > rtc_month_days(tmp->tm_mon - 1, tmp->tm_year)) {
->                       break;
->               }
->               tmp->tm_mday = val;
-
-Please also reject day 0 - the new check still accepts val == 0 for
-tm_mday. A 'val < 1' on the day mirrors the month check.
-
-Also worth noting in the commit message: for the len == 8 case
-(MMDDhhmm) tm_year is not set in this function, so the leap-year
-result from rtc_month_days() depends on whatever tm_year the caller
-passed in. Pre-existing behaviour, but the new code is now sensitive
-to it.
+Sure...I'm not suggesting that the build should succeed though...a bit
+like how we have 'buildman --allow-missing'. It's just a wacky idea so
+that we can avoid needing special cases everywhere.
 
 >
-> Use rtc_month_days instead of oversimplified local logic.
+> The thought I had a while ago was that we could simply have the whole
+> setup without fit,sign property during typical build workflow and then
+> sign with yet-unused info in the FIT Device Tree. Meaning the hash nodes
+> are added, in images/confs/both, with the expected key-name-hint and
+> all, but not signed (the pubkey can be inserted already if we have
+> access to it, but maybe it's stored in an HSM also, not always easy to
+> think about every possible scenario). So you generate an image with
+> pubkey in SPL DTB, and unsigned FIT as u-boot.itb. Then have mkimage or
+> binman run outside of the normal build workflow to sign required
+> artifacts in u-boot.itb. All the info for that is hopefully still in the
+> FIT Device Tree such that we can sign properly.
 
-This could use expanding. Please use rtc_month_days() with
-parentheses, and mention that the old check accepted month 0 and
-accepted 29 February in non-leap years, and that you also reject month
-0 now.
+Yes I thought we had that feature somewhere but can't remember where.
+It might have been my imagination.
 
 Regards,
 Simon
