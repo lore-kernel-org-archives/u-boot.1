@@ -4,117 +4,142 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9138FCD3445
-	for <u-boot@archiver.kernel.org>; Fri,  8 May 2026 14:25:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B344CD3445
+	for <u-boot@archiver.kernel.org>; Fri,  8 May 2026 14:29:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0B95584C7E;
-	Fri,  8 May 2026 16:25:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 12E4584C7E;
+	Fri,  8 May 2026 16:29:09 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="EvnEGUdf";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="AuKD63Xd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DD33C84CE4; Fri,  8 May 2026 16:25:22 +0200 (CEST)
-Received: from SA9PR02CU001.outbound.protection.outlook.com
- (mail-southcentralusazlp170130001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c10c::1])
+ id 4481E84CE9; Fri,  8 May 2026 16:29:08 +0200 (CEST)
+Received: from OSPPR02CU001.outbound.protection.outlook.com
+ (mail-norwayeastazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20f::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C13CB84A3E
- for <u-boot@lists.denx.de>; Fri,  8 May 2026 16:25:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0C5D784A75
+ for <u-boot@lists.denx.de>; Fri,  8 May 2026 16:29:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=lI5OF7qL8Ek+aWzGSldzCkjqBG7iSrYMb0SVGmkUgOI61OaDU8Rb/Tx6n1TySTCbL+mcKTDjbs7xImul7cgDzW6AlddmE5OfO7PYP5Ivbn/DXiVwtRLKQeewznnYY2TOsCQcBcGLAkvnxisOoduktju0lLKpws00kl53YRs0XWIhIcg7PqLDyXQQo68CXlAx/3vTLe5lf5C7/XxJ8wb12lbxrknn5WG5tAkxg21kRQTQqTc1OY98Jq5/YSbqiDioY/3I5oqvi0B90WandZBKbvav876P2ZFr8gq+rHwThY5nK0g5t7dqN0iaMJN3cxnodqGbylYqZkl2Qfi7sV6Wuw==
+ b=uHPqEKoFJxp28i975RIIlFFZMWsd2yQU1TJURlu1SPrBfjtu2BtYyt4HTPL7Pzvixh0UB7h/Fi0jf2Ge7GvJi+3h+olBFSdLaFCjc1ZFm4H+gGoObMBZx3C9xh9L1KhJECF7aMmBOA5O7sl13PRZLz6jVRKp0CIuCoL9mmW4JknIJ7ifYgursqUGWI7oIXRW+D2b5kEGwQxAIa9xFkk3GfPVZ0LZVSglY6ADA8CoK7BTsH6WDmY6xt1eV3mi9Y99LDBKJrdlVoAWsWxIECHWwaXNOvzLOadq0AADmEz2YquSevOVeNzTrGMGMPXHT28dW4vhmrcpk8HQ2IrWSCiL7g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=DIlaUWWscROo3Jk/bJ9jcr5wKDC2k+Y0SwevRzeSHNU=;
- b=mtCj+tqpKlukOkHSNjVVwcO6b9p9uqNuemlfcKwVBBbhYbv5fTgSJlKpLkBm/dgrO3K3epguoUmxpxNhaWuw0BVJABd44+0hgsxXdHnbQxkwFGn0dzpQ66HOD1ztqNsnIYTEhb7hDgplkYcChwuOCtrr1Y2gb+4NE1WU3Pw43RPAniW76C7/EV9PbwXBYtCDiF0qTKbN92zovM8s3ny6I1JNxi11KNKpj8dlv9ZmAHv3sNo5JI2Z3T5NO2QPKGEnTzM/k1m/v1iwgvRWFKkgKPwlYRjcCcFXtAfHmbb8t8Dlqy7P1ROHQZe/9L95UYJMBV44lJsXVK9DUTVv9qz3KQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.23.194) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
- dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ bh=baelh4S0NAgvwIrh64jSXw7QNCHvI8UEDpcLgqAl6yg=;
+ b=gCCWnxT3B1f4PP/NZsMYxsWtVthdSFhWidEn99peMnvX9AoUiwoCAr/JGqBTGorpLVpCH1fnb2Mj+tIfYvmhoBosoTwRI45PJVDK6AVdvV/lMJY86gZSkTHDPPDZpR3PqHezqbzsJCyouHyw5M3nf2d3NHddlNbFZax1WgtZUMPIWZkaxGIRd3gmjyJQWk9dN9+hn/VHq+mmf0D5Uzk6Fb0/ZeC/fFa77zTzl2+0ozaLVFxYwrwgH/ERSxMeWxXGfoM2hQVxtACBYLaIg+CGtKNGs7ujCx3dSsD8esYzkRiHRmjBmt1wHMQwFBnmGpdQGMgVf1g15Tq0N/e+pflYGQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=DIlaUWWscROo3Jk/bJ9jcr5wKDC2k+Y0SwevRzeSHNU=;
- b=EvnEGUdfHNV136zTgqCR1D9F06yxzWDL3KvNTr4AcJgV7eb0S5KZ1qAt1F9Sg+vASZ1kwKoYxIiNbNsL7Y/+HsiMO39aJBOW/zb/qyze7fkV4RNdu0sTGdUArvBYXp8uWyFuDp4q+xlP3Y/OAy45RMbHU0ZcIQERDliidJpxghg=
-Received: from CH5PR03CA0009.namprd03.prod.outlook.com (2603:10b6:610:1f1::22)
- by DS4PPF194C7D93E.namprd10.prod.outlook.com (2603:10b6:f:fc00::d0e)
+ bh=baelh4S0NAgvwIrh64jSXw7QNCHvI8UEDpcLgqAl6yg=;
+ b=AuKD63XdqNBwSrrmy/bVbaDdR/rm0LNKEN5cWU4Phjkf5OZtNUytfW6IH+EANcDlAHBbYi+QlMT6HsCuSmmIVEf1n0c4w3EnrZp0ZaB1O8R35t/SWEUWUvFRcH53ZkVJjwcamqtJXmeBdUGI9ajBhV16JO5cCIYZ1slTCGDPIjI=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from DBBPR04MB7737.eurprd04.prod.outlook.com (2603:10a6:10:1e5::22)
+ by FRWPR04MB11197.eurprd04.prod.outlook.com (2603:10a6:d10:170::10)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9891.19; Fri, 8 May
- 2026 14:25:12 +0000
-Received: from DS3PEPF000099E2.namprd04.prod.outlook.com
- (2603:10b6:610:1f1:cafe::b) by CH5PR03CA0009.outlook.office365.com
- (2603:10b6:610:1f1::22) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9891.20 via Frontend Transport; Fri,
- 8 May 2026 14:25:11 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.194)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.23.194 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.23.194; helo=lewvzet200.ext.ti.com; pr=C
-Received: from lewvzet200.ext.ti.com (198.47.23.194) by
- DS3PEPF000099E2.mail.protection.outlook.com (10.167.17.201) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9891.9 via Frontend Transport; Fri, 8 May 2026 14:25:11 +0000
-Received: from DLEE207.ent.ti.com (157.170.170.95) by lewvzet200.ext.ti.com
- (10.4.14.103) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Fri, 8 May
- 2026 09:25:10 -0500
-Received: from DLEE205.ent.ti.com (157.170.170.85) by DLEE207.ent.ti.com
- (157.170.170.95) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Fri, 8 May
- 2026 09:25:10 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE205.ent.ti.com
- (157.170.170.85) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37 via Frontend
- Transport; Fri, 8 May 2026 09:25:10 -0500
-Received: from a0497641-HP-Z2-Tower-G9-Workstation-Desktop-PC.dhcp.ti.com
- (a0497641-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [10.24.50.71])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 648EP7Xh1541028;
- Fri, 8 May 2026 09:25:08 -0500
-From: Neha Malcom Francis <n-francis@ti.com>
-To: <trini@konsulko.com>, <m-chawdhry@ti.com>
-CC: <b-padhi@ti.com>, <u-boot@lists.denx.de>, <u-kumar1@ti.com>,
- <gehariprasath@ti.com>, <n-francis@ti.com>
-Subject: [PATCH] arm: mach-k3: j721s2: j784s4: Add errata i2378 workaround
-Date: Fri, 8 May 2026 19:55:07 +0530
-Message-ID: <20260508142507.1386946-1-n-francis@ti.com>
-X-Mailer: git-send-email 2.34.1
-MIME-Version: 1.0
+ 2026 14:29:02 +0000
+Received: from DBBPR04MB7737.eurprd04.prod.outlook.com
+ ([fe80::5960:fb4b:9313:2b00]) by DBBPR04MB7737.eurprd04.prod.outlook.com
+ ([fe80::5960:fb4b:9313:2b00%3]) with mapi id 15.20.9891.019; Fri, 8 May 2026
+ 14:29:02 +0000
+Message-ID: <d8659668-165e-4572-9b66-6419a1909cf7@cherry.de>
+Date: Fri, 8 May 2026 16:29:00 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 2/2] binman: x509_cert: add PKCS#11/HSM signing support
+To: Sergio Prado <sergio.prado@e-labworks.com>
+Cc: u-boot@lists.denx.de, trini@konsulko.com, sjg@chromium.org,
+ alpernebiyasak@gmail.com, ilias.apalodimas@linaro.org,
+ marek.vasut+renesas@mailbox.org, sughosh.ganu@arm.com,
+ wolfgang.wallner@at.abb.com, bb@ti.com, y.moog@phytec.de,
+ xypron.glpk@gmx.de, jerome.forissier@arm.com, afd@ti.com,
+ Wojciech.Dubowik@mt.com
+References: <20260423154536.768603-1-sergio.prado@e-labworks.com>
+ <20260423154536.768603-3-sergio.prado@e-labworks.com>
+ <df749b3b-0210-4b31-a4e0-8f7af9084589@cherry.de>
+ <CANu7NGs0=o5H7o=qwoQj5EYMxDtB7_NTus_-18Q1UZBnk3DiuQ@mail.gmail.com>
+ <dc13566a-b477-4580-8954-0c0f83608ff1@cherry.de>
+ <CANu7NGsFtWuLH1AZ_B8oMS8+rjpjgANYuVuVtVAaTNW1HzgcNg@mail.gmail.com>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <CANu7NGsFtWuLH1AZ_B8oMS8+rjpjgANYuVuVtVAaTNW1HzgcNg@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-EOPAttributedMessage: 0
+X-ClientProxiedBy: VE1PR03CA0032.eurprd03.prod.outlook.com
+ (2603:10a6:803:118::21) To DBBPR04MB7737.eurprd04.prod.outlook.com
+ (2603:10a6:10:1e5::22)
+MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS3PEPF000099E2:EE_|DS4PPF194C7D93E:EE_
-X-MS-Office365-Filtering-Correlation-Id: 0a772b29-bc17-4070-c0c9-08dead0d9d0d
+X-MS-TrafficTypeDiagnostic: DBBPR04MB7737:EE_|FRWPR04MB11197:EE_
+X-MS-Office365-Filtering-Correlation-Id: ce87395e-e18a-4cd9-f83c-08dead0e268b
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|36860700016|1800799024|82310400026|56012099003|18002099003;
-X-Microsoft-Antispam-Message-Info: iApkSWZGhZCbFWLH6qg0bHN+rgMKWeNpCUXNtlFyg2QsuDvjeOt9jYJYSoissQEUWsvmvY672h8+63FZ19+RCLysXRApN0x1SiqFJT9iZZOCfDcjZ5wPsbbkmZH5trBxlrdwFhj074egQ4MAOhJ/oaVQirwSnxJCUlr1UoXxCTf/OOVuIB19RGe6qPMZ8v6UdAsUO5COwq2U+z0a8vM5w8nSALZ0KUUxJCs/vpv2hY7e7sjMuq2iljhGrhTAoSknd+wama17YI8aCdchH15UOXJ42XP22MUb9N9FzYewMLYsDpKoaXyQSCDZ66iWHK9orKj3AMD+zh2x7Z5/g3SAl3EQZt8Op7O8jzYruhVtT+gf79MHIlEyjBL45napFRhG3PZ/eVjBMeaUcjr6Eb/oUnICr5XI7rCibbBMv5bAbc4XKAyqZTFILMAxJxSl9wQyanBL5Ogb3RgwU7OaAjypHYQJsvbT7Pl4w3B9TE8+wmo7ioHWgtnrseQfLszJjUnNAklWaosGhusH78zjs0vy3oLmkIZD5fzz0ZCFwDr8X3MjPLue0v9b9wcWZeR5/Ogj8E0KiQS1Gp6nhkX/wEjO9iBcJN0asAWA8+QEn7a5sFeKdVCECha3Urewi0GaCuTEdgLhZ7bw9N0CjSpO/TOvFadpcP6I6U6gOXt3gFFmKUKzgxW4wiW3nhjmSayiwVgB
-X-Forefront-Antispam-Report: CIP:198.47.23.194; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:lewvzet200.ext.ti.com; PTR:InfoDomainNonexistent;
- CAT:NONE;
- SFS:(13230040)(376014)(36860700016)(1800799024)(82310400026)(56012099003)(18002099003);
+ ARA:13230040|366016|7416014|376014|1800799024|56012099003|22082099003|18002099003;
+X-Microsoft-Antispam-Message-Info: fmtCG7B/hZLRzY4/+P8jAnaaiZESCd2pjR3uWhRPb+mJ20cppFvpiuz6k6USqnxJ9s5osuFO1G/wWmad7ZFv67IuTONZSKyLZ9HGuLUFxl0A75J0w1nOM54ygDsDGnTUO6iCrPzsOp0aE5NSqaUrdiHIOQYmPsBCIz0paqhy7aGB1gnqcrN3OvL8uwM1tGiaNr25s+d4w1xyCdojIbRnJtUf4ajbBhGyYteC9fVP13H5CTjIyA3zWo8QdiFOvbjH6dyX5JLuVcOkW8/jBrYfvE4hOkR+f7VY88GfYHUtccFT6X99Ieb9Ho6zAqf2zh2LcWwd9ptlXTwxsKEO6nRaHDtKe+l0Zqu+W6cBVVOXSiy2RRjEAP4KsPqn5vbgYjxgNAr2ueoa5UebH50SkYiBzpyHHdQbsi4vp1/i+az2TyfsAZC91+RgaDFN09+rtVazvTRs4PnxmZhzp2mc1MrJBvxe09tDx/Sv84fu2ZQgN6HXLpVUP/Mf2vWJ8F5lB529Z+G5pFOk6V1gmNk1zcAwJgGktyIrWnyaY8pQupw+27r8nFrlix8fKcKYVJSY5qN0lxRyjPkrUWbtTB/P1dKK/HFTjkH17hut1OE/z9isOj4iyNbu2F8+tPYyJlvW72eYvkYL5WhhmvWClOKduxVfWHp9qkGoO/aKTHcPW5CpBHo0PvsTmB9bjoVIrQsXx2lA
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DBBPR04MB7737.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(7416014)(376014)(1800799024)(56012099003)(22082099003)(18002099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 3yvtD0ple+bxvKklvnDSgXeSjg5aTOMysP2AFwt9RXpp+6D2Eu34+kF5Qj+LGD0TzxnRzxtg7tWCiL4qB6SMXnieYgxdf1fKIKAFfd/DxQxR/PTTkbcjlZsI2FQLcUrUsEGLwRvpDACZzwWnoUQNx62lQ5TCnja/5bOSRXV5OHhoS89t9HmWFcNxswGUNssfCaZkvykoUS93qSuASWM0CoSIqqNjK3fhsb1Gk/LFjKXongM33XqLzkf7H7ABs5/ZTxSVTIIWDw+bxt82JtKKXGwVSoBiud5eipl0ef//TW+41sMEmYlfu6RpOCbASuU95i5m8kuqgQLqTv6aeKLnrd1c623sFVCt4mBUusz+KZxpRo5qfUGy61bBV10tLayd70VvKzgrtD2HYOPo3V0/hSYF65XbsHZF6CdcxdW6U/w0PelEY9MZOj5TYyUg5X3e
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 May 2026 14:25:11.3305 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 0a772b29-bc17-4070-c0c9-08dead0d9d0d
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.194];
- Helo=[lewvzet200.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: DS3PEPF000099E2.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS4PPF194C7D93E
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?UlE3cGgxSWVLVHhIOEhaNWxUMHdteWVBNzdBZmtzb2RrZTJZaUh0YXFBUEFC?=
+ =?utf-8?B?Q2owL0FiSEJVTFJZSVp2S1ZERnBBc2dOOUY4REI1Sml4ZytxbkIzR1hhV1pY?=
+ =?utf-8?B?OVc3SjFoL0EwdkNIbVlOQ2tJdmZWVnU5RVFSY1hucmkxbE55Y2kra2JZVFBs?=
+ =?utf-8?B?UU0zWE12Ukt5ZDdaRjNoaExvM0w3eWNCcjZvWGpOQ0FKS0FNR052MVdLalFu?=
+ =?utf-8?B?T25kbFJNMDZFUHlxQ2Z1R2orckFCUldFdng2QVBzMytvUTZhQ3VCUmFSQWgy?=
+ =?utf-8?B?OWpQS3hxUngvZzhrRUxnOGFFMzUzSnMweU91QzJya2xsVUVHYy9mZnFBK1da?=
+ =?utf-8?B?K1lLOVJEMStmNWFhMnBURlhBczRacjBzeW1xb3p0NFFEd2VNVzNGTzdNemxW?=
+ =?utf-8?B?a01aTDVHSVZCQ0syQ3hmKzJBTXZjVEIzU0xjOFYyVWxLaEZjL3ZmWTJ3RkI0?=
+ =?utf-8?B?SGhIVk5KMFRucjEzSzdlWjVieVdyd2l3Rzl3VjhmeE45YXo1Um0rWjhHSWRk?=
+ =?utf-8?B?K1M2SGtqNzgxT3pKd3dmaExvTWxLbTRic0RTb3JvTDFrbHBuUHRGeU9Ua3hQ?=
+ =?utf-8?B?MFNIWXV6VFowam5iL3M4eFplRXVOdVpFM0RocGNUaC9iaC8vMDd0aHpQZ0VD?=
+ =?utf-8?B?YkJwZlNRMFAvU0ZnTnQ3ZlJsN2p4UVlocVJubVZIdXFPRkZGc05IOGhVQ1Ix?=
+ =?utf-8?B?cVUwMHdRSmlUS1pSekltSW5HL20zenBBb25xcnpxOGNiWE9YSlNJOTAvcU5v?=
+ =?utf-8?B?YkdkaHo3NXZVSHFEa1lxNGtiN1ZEWjQ5OU8rWXQwbXYzRC9KRHA3RkVJNUlG?=
+ =?utf-8?B?NFdDbVZwSlVqaDhRMVloOStFSUtyZ3c4UWJWVzJKeWd5U3BnSGJiOGlvNnhI?=
+ =?utf-8?B?V0Y0TlQ4NGIwbzhpbHRYaE9YREgxQ3U3MDFMcXhwZTVZVy9adlRLRWQ1M2JQ?=
+ =?utf-8?B?QlJMdlBBOHFGaWZzekg0UGlHay9STisyNmRBZGN3cVVMUy84WFVYNVhoWlVV?=
+ =?utf-8?B?eTlDaGJ6ZHlXd25KT3ZaT3VrTTlkRk1oSGtuM091cFBHMUtIVCtobVk2M0do?=
+ =?utf-8?B?Y1NoVjdhSVZyOFFwVXNyNjZlc0FVbDdQc2hrSXBrcXQvOTlZRTNXRTlEYmh2?=
+ =?utf-8?B?WnB1bmxXaWw2bExkN2laMzNwd21nQXJheFcweWx0K1FnS05JSklVSjdwb2p3?=
+ =?utf-8?B?ajd3OGJ1Q2NCTmFXdGdPMm1ORjNNRkVoWmw3NllIeGRJUVIzV05tTXluRm1E?=
+ =?utf-8?B?RExqSkk3clRJWFkzSytMQUUyQVliWEo5SjhCV3VPQXYwbVQ4dll0RmhValRi?=
+ =?utf-8?B?cWYwK1NoWUZEWmdaVk5lUGlJZVp6VC9jV0UwYVpWTmNvdnNuUUJQR0JhR29Q?=
+ =?utf-8?B?N1ZHeDJZOS82dFM0VWI4bXlLajJDbndBSndNdWh3MC9jL0NLa1dmbE9VM2V5?=
+ =?utf-8?B?NVBBd003NWp5Vk1MUU5XZ3d2NHowTGZLWHhHQ2tSdm5KRktucGtmNnFCSWlh?=
+ =?utf-8?B?ZytpOHBnUDNXWXJMcGM4UFFBSUdNRzZna0wvYmUwUEFqRHVRdURwRjFRcWlr?=
+ =?utf-8?B?dkdSUFJVYU1XcVl0MGxVTEhuL2trK28yVW9hVHFqT29sdk5ETFE0dEkwSVVn?=
+ =?utf-8?B?dkw2VnJEaVZBQ2k3WU1xc05UYWt3ejBJWXIxeFRyWEYyVG9hYnRIRE9oNXBY?=
+ =?utf-8?B?RkFUNzd0a3U5aC9qYzRLWnk1eWlCSlo4SUR2NTdLTlpsVVdDbkZGNEJDVEZl?=
+ =?utf-8?B?ZDBNbUVEU1c5eVJDVkFodWV2bDFQN2laSlhKMDJMUzBuTEordnZyNDVGcjVs?=
+ =?utf-8?B?SFluWEdMSldvT1ZuUVhKYWpNYlZJaVN2RVIxR2xoV3pMbktsWkVwMWRoUTYv?=
+ =?utf-8?B?STNFNE5tNmk0QmhvL2lPd1llN1NuUGJ2WlNBMlJKU3RkMy9DUFdGMFk1Qzdi?=
+ =?utf-8?B?ZnpSd21OUlpUams0bGcxOFYra0lCY29TMnQzeE95SDZFbDEwNDYwTiszdng3?=
+ =?utf-8?B?WlJFL1hxNEtubzFqc25yUjlITlNsNWtGSHpQanNHbjhhQ0JHdVJPWW94MXda?=
+ =?utf-8?B?amRLKzlWSzdNSGdISFlxaE16Mi9qQ1Z3MHIyaVBsNkMrNUxPcUsvajl1K1Vi?=
+ =?utf-8?B?NWo0UlplZzc3TXJieHhwOGRybGJrSUtBTWVuWkIya2NCeGtwK0hoNEx4R1NM?=
+ =?utf-8?B?REgvYTM5V0ZQNFZEN0hneU9TOGxVcWpDQUdXZXg3Q3c0VUs4Tk5Zbk1JM1Bi?=
+ =?utf-8?B?WnVYM3NpaTNqVDdkZ3NyN0FxNzR3QkQ5K0xMdDVRcVEzd1Zmb0l5ZUs2NHgv?=
+ =?utf-8?B?ZkVvS1haYy9tSmRWNHFqYzBTWldPMDFNTWlXOEJoajlRUHFUUzBQUT09?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: ce87395e-e18a-4cd9-f83c-08dead0e268b
+X-MS-Exchange-CrossTenant-AuthSource: DBBPR04MB7737.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 May 2026 14:29:02.2478 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: IVpR+Vz8IdGPO53k3UqK9Ckt/URVPbt4puGlSXOaPiZ1vaeXn/EcngXpEXMZrxX6PdsF3v+hmNWfecNAQRhDfvZaLxSPYITyEa+dNPzsYrI=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: FRWPR04MB11197
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -131,113 +156,77 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The shadow copies of WAY_SELECT MSMC MMRs have incorrect reset values.
-The main copy has the correct reset value but MSMC functionality uses
-the shadow copy values. This incorrect reset value results in
-under-utilization of MSMC L3 data cache and snoop filter for DDR
-accesses.
+Hi Sergio,
 
-The workaround is to write 0x00000303 to both MSMC MMRs after reset.
-This ensures that their shadow copies get the correct post-reset value.
+On 5/7/26 10:09 PM, Sergio Prado wrote:
+> Hi Quentin,
+> 
+>>> Good point. I’ll scope this more precisely to X.509 usage. Would
+>>> BINMAN_X509_PKCS11_URI be appropriate, or do you have a preferred naming
+>>> convention here?
+>>>
+>>
+>> Is this really PKCS11-specific? Is there no other way to get an x509
+>> than by PKCS11 or plaintext file? Trying to think about potentially
+>> having other providers needing something similar and then setting
+>> BINMAN_X509_PKCS11_URI for that would be confusing.
+> 
+> Hmmm, good point. What if we rename the variable to BINMAN_X509_KEY_URI and
+> the entry argument to key-uri?
+> 
 
-Link: https://www.ti.com/lit/er/sprz530c/sprz530c.pdf
-Link: https://www.ti.com/lit/er/sprz536b/sprz536b.pdf
-Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
----
- arch/arm/mach-k3/include/mach/j721s2_hardware.h |  4 ++++
- arch/arm/mach-k3/include/mach/j784s4_hardware.h |  4 ++++
- arch/arm/mach-k3/j721s2/j721s2_init.c           | 11 +++++++++++
- arch/arm/mach-k3/j784s4/j784s4_init.c           | 11 +++++++++++
- 4 files changed, 30 insertions(+)
+We should have x509 in the entry argument as key-uri could mean the URI 
+used for signing FIT images for example.
 
-diff --git a/arch/arm/mach-k3/include/mach/j721s2_hardware.h b/arch/arm/mach-k3/include/mach/j721s2_hardware.h
-index 82f076a45e0..a4d7fe48662 100644
---- a/arch/arm/mach-k3/include/mach/j721s2_hardware.h
-+++ b/arch/arm/mach-k3/include/mach/j721s2_hardware.h
-@@ -37,6 +37,10 @@
- /* MCU SCRATCHPAD usage */
- #define TI_SRAM_SCRATCH_BOARD_EEPROM_START	CONFIG_SYS_K3_MCU_SCRATCHPAD_BASE
- 
-+/* MSMC RT_WAY MMR addresses */
-+#define K3_MSMC_RT_WAY_SELECT		0x6E008000
-+#define K3_MSMC_NRT_WAY_SELECT		0x6E008008
-+
- #if defined(CONFIG_SYS_K3_SPL_ATF) && !defined(__ASSEMBLY__)
- 
- #define J721S2_DEV_MCU_RTI0			295
-diff --git a/arch/arm/mach-k3/include/mach/j784s4_hardware.h b/arch/arm/mach-k3/include/mach/j784s4_hardware.h
-index 29a894baed3..bb5c58d00e4 100644
---- a/arch/arm/mach-k3/include/mach/j784s4_hardware.h
-+++ b/arch/arm/mach-k3/include/mach/j784s4_hardware.h
-@@ -37,6 +37,10 @@
- /* MCU SCRATCHPAD usage */
- #define TI_SRAM_SCRATCH_BOARD_EEPROM_START	CONFIG_SYS_K3_MCU_SCRATCHPAD_BASE
- 
-+/* MSMC RT_WAY MMR addresses */
-+#define K3_MSMC_RT_WAY_SELECT		0x6E008000
-+#define K3_MSMC_NRT_WAY_SELECT		0x6E008008
-+
- #if defined(CONFIG_SYS_K3_SPL_ATF) && !defined(__ASSEMBLY__)
- 
- #define J784S4_DEV_MCU_RTI0			367
-diff --git a/arch/arm/mach-k3/j721s2/j721s2_init.c b/arch/arm/mach-k3/j721s2/j721s2_init.c
-index b5453d8895d..d996dfcc332 100644
---- a/arch/arm/mach-k3/j721s2/j721s2_init.c
-+++ b/arch/arm/mach-k3/j721s2/j721s2_init.c
-@@ -163,6 +163,14 @@ static void store_boot_info_from_rom(void)
- 	       sizeof(struct rom_extended_boot_data));
- }
- 
-+void apply_msmc_shadow_copy_errata(void)
-+{
-+	/* Errata i2378: Write 0x00000303 to MSMC shadow copy MMRs */
-+	writel(0x00000303, K3_MSMC_RT_WAY_SELECT);
-+	writel(0x00000303, K3_MSMC_NRT_WAY_SELECT);
-+	debug("%s: Applied errata i2378\n", __func__);
-+}
-+
- void k3_spl_init(void)
- {
- 	struct udevice *dev;
-@@ -176,6 +184,9 @@ void k3_spl_init(void)
- 	/* Make all control module registers accessible */
- 	ctrl_mmr_unlock();
- 
-+	/* Apply MSMC shadow copy errata workaround */
-+	apply_msmc_shadow_copy_errata();
-+
- 	if (IS_ENABLED(CONFIG_CPU_V7R)) {
- 		disable_linefill_optimization();
- 		setup_k3_mpu_regions();
-diff --git a/arch/arm/mach-k3/j784s4/j784s4_init.c b/arch/arm/mach-k3/j784s4/j784s4_init.c
-index 53f152ccd9c..48b52fcb333 100644
---- a/arch/arm/mach-k3/j784s4/j784s4_init.c
-+++ b/arch/arm/mach-k3/j784s4/j784s4_init.c
-@@ -180,6 +180,14 @@ static void store_boot_info_from_rom(void)
- 	       sizeof(struct rom_extended_boot_data));
- }
- 
-+void apply_msmc_shadow_copy_errata(void)
-+{
-+	/* Errata i2378: Write 0x00000303 to MSMC shadow copy MMRs */
-+	writel(0x00000303, K3_MSMC_RT_WAY_SELECT);
-+	writel(0x00000303, K3_MSMC_NRT_WAY_SELECT);
-+	debug("%s: Applied errata i2378\n", __func__);
-+}
-+
- void k3_spl_init(void)
- {
- 	struct udevice *dev;
-@@ -194,6 +202,9 @@ void k3_spl_init(void)
- 	/* Make all control module registers accessible */
- 	ctrl_mmr_unlock();
- 
-+	/* Apply MSMC shadow copy errata workaround */
-+	apply_msmc_shadow_copy_errata();
-+
- 	if (IS_ENABLED(CONFIG_CPU_V7R)) {
- 		disable_linefill_optimization();
- 		setup_k3_mpu_regions();
--- 
-2.34.1
+The other thing I'm worried about is "will there always be only one x509 
+certificate per binman invocation or can we have more".
 
+For signing FIT images, it's pretty simple, mkimage only supports one 
+configuration for the whole FIT last time I checked so it's not a worry 
+as much more plumbing needs to be added to support that. Though what 
+happens when you want to sign two FITs per binman run each with their 
+own key... Not sure there's a usecase for that though.
+
+>>>   From my testing with SoftHSM2:
+>>>
+>>> - Provider-based flow: configuring openssl.cnf is sufficient. OpenSSL
+>>> dispatches "pkcs11:" URIs via the STORE API without additional CLI
+>>> arguments.
+>>> - Engine-based flow: configuring the engine in openssl.cnf alone is not
+>>> sufficient; "-engine pkcs11 -keyform engine" must still be passed
+>>> explicitly.
+>>>
+>>
+>> Being curious now, I'm wondering if setting the -key to
+>> org.openssl.engine:pkcs11:<key> would be enough on OpenSSL 3.x? C.f.
+>> https://docs.openssl.org/3.0/man1/openssl/#engine-options
+> 
+> Good catch! It does work.
+> 
+> $ OPENSSL_CONF=test_engine.cnf openssl req -new -x509 -key \
+>     "org.openssl.engine:pkcs11:${PKCS11_URI}" -nodes -outform DER \
+>     -out cert_engine_unified.der -subj "/CN=test-unified-engine" \
+>     -sha512 && echo "exit: $?"
+> exit: 0
+> 
+> With this, the implementation transparently supports both flows on OpenSSL
+> 3.x - the user picks the URI form to match their setup. I'll document both
+> URI forms in the binman documentation.
+> 
+
+I guess that's acceptable. I don't think we should bend backwards to 
+support OpenSSL 1.x :)
+
+I've realized that we have only one test for the x509-cert entry type, 
+seems like it'd be nice to have more :) I don't think we need to make 
+this a requirement for this series though.
+We also have virtually no documentation for the arguments (they shoiuld 
+be in the docstring of the Entry_x509_cert class), this we should fix 
+and add the new arguments/properties to the docstring.
+Finally, Entry_ti_secure and Entry_ti_secure_rom both extend 
+Entry_x509_cert and both call super().<method> on the Entry_x509_cert 
+mtehods so their docstring should be updated to reflect that and 
+possibly add tests for pkcs11 to those entries as well.
+
+Cheers,
+Quentin
