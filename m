@@ -4,85 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4168CD3436
-	for <u-boot@archiver.kernel.org>; Fri,  8 May 2026 12:24:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08DADCD3447
+	for <u-boot@archiver.kernel.org>; Fri,  8 May 2026 12:24:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 412A784CC9;
-	Fri,  8 May 2026 14:23:24 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 799B984CD1;
+	Fri,  8 May 2026 14:23:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="iyfpxQhT";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="hY8oSgY6";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="PfGsI50B";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="RrOoUnJW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2FCC284CC3; Fri,  8 May 2026 14:23:23 +0200 (CEST)
-Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
+ id 6396884CCF; Fri,  8 May 2026 14:23:24 +0200 (CEST)
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org
+ [IPv6:2001:67c:2050:0:465::202])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DCB5E84CC5
- for <u-boot@lists.denx.de>; Fri,  8 May 2026 14:23:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 517048488B
+ for <u-boot@lists.denx.de>; Fri,  8 May 2026 14:23:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org
- [IPv6:2001:67c:2050:b231:465::2])
+Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4gBpDl4grpz9tSk;
- Fri,  8 May 2026 14:23:19 +0200 (CEST)
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4gBpDn1HLNz9tsN;
+ Fri,  8 May 2026 14:23:21 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1778242999;
+ s=mail20150812; t=1778243001;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=1WAQNDwQt8mfpXnWxIR2g0NSPVC13XDXqPC9VZgstZ0=;
- b=iyfpxQhTfBWu7BeUionS6wTKbdmuePmNFAaDjApcI935LXs/crp2DsVL4kXGDDyPCMtPUq
- 4hKu6mKzDKCZUJrqrQGoFX7QfnLw93Ffao1pWnoQKhUmKx/lXm81ByOPkBlWftReZfuQaS
- ob4puSbCpUnI2Oo8qTpZ16NKiI8VtmvPwkXCKAPIy5r8n7KaCVTfOygHeQE1PmQjGWJ3wz
- 5H3dVIUd4fjKzP8WwIvSdjkXrHMaUwI6cv11JMu4MRl9qY4be7UTyTDCfssl89zTr/pnrC
- WZFcV3Qs91jjOyUxX4vV6qF8WyLnNNIL9kR3l61mf+shKPDzEf1/j8ut1o8ifw==
-Authentication-Results: outgoing_mbo_mout;
- dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=hY8oSgY6;
- spf=pass (outgoing_mbo_mout: domain of marek.vasut+renesas@mailbox.org
- designates 2001:67c:2050:b231:465::2 as permitted sender)
- smtp.mailfrom=marek.vasut+renesas@mailbox.org
+ bh=Is/+SkyWghA6OWnlV8R/jgihd6pPGyZABIHvkNdxsdc=;
+ b=PfGsI50BEH6QKBVakR8bfdUUxD7uGVrAb/9XCk+pCaGwEuJ8KVkdGQPl7l8MqQeR1dQ0Mc
+ Vxd131FUzljePvn+0LECSE0JA7InYQyb2gpOsccEPivGBfSPy7ABlJciewLHnM6BQv5CH7
+ DFuko3wJUw5RK3sx/gxreALoLAi9SvwQpnLV4pIiDj1g4zT+q2BbSdxRlkfaW5MVjCxQ5D
+ U3EiA8QkH1IzHh/R2tx0RNCuq3MpSUtm7Hl7cbsHmtnvSJfi7SdwIadG3wL7Q6rM3RkX2b
+ Wl76WaVzD6V6+49U7C6HDYZC9/aq/eROWtICjyE/IVtL+ANU525+ZSnEc6DNJg==
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1778242998;
+ s=mail20150812; t=1778243000;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=1WAQNDwQt8mfpXnWxIR2g0NSPVC13XDXqPC9VZgstZ0=;
- b=hY8oSgY6n2PUzQmO85jPzs58z/tFyMpwJ5l6cVVs53JPXDDMOhQE87sA8N+zOEVdGeuLBq
- ZKrDrgkRc7xuFG43LEeOEMUjyttjX7aPvRFAEyKHo7jF0K/LjVDQb4ZioEn/di5i64R3p/
- c+asD0Yqh7eJ4sz+K3hywPjLdVbmdVtun3bHH15aRq2TKTjPOy/Z8rPAQQxZhJlGJZuzwh
- 9MH+MOk8VMtwumIcVLSPI9ySFghb1FOCysNsYR80KeYpcgb6piBtTHkvF0ZIlWgPtrQk05
- WantdruoWaTThTuUAdcCNIC0Bn634LsnqfDovq0RhAs9hy0+A/HmQRy/t4CZYA==
+ bh=Is/+SkyWghA6OWnlV8R/jgihd6pPGyZABIHvkNdxsdc=;
+ b=RrOoUnJWkD228Wq5NelgJXkOwKV5c+N+szwJQVHVZn82j585mwNmpiIU3it/erKfCIbWTq
+ FFv+SX29tcikfNovFnrmhXT6NaRqFuBYosh5oSvRrwljrva1PoP7yfecWc+4jY/5p3CiK+
+ O61suW8rQmy6WhedmsO2sAgQCe96R50oi8uVIxGdVbRQJjrQoj0aRT/+S4voY7oIv8Qafu
+ EUViTlCnVlKUQ5K8JNqyDHalEDMsAXH6JIr3+SSFrpr4I0IB6AilIWsaHsyvjH2zfIHpkh
+ kaW85n8Gf1jbt1zv2bGWYoz/YTOgpcsHaNvb+F6gnCWImtcPtBkQMk7zoGPWiA==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Chunfeng Yun <chunfeng.yun@mediatek.com>,
- David Lechner <dlechner@baylibre.com>,
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- Igor Belwon <igor.belwon@mentallysanemainliners.org>,
- Jaehoon Chung <jh80.chung@samsung.com>,
- Julien Stephan <jstephan@baylibre.com>, Peng Fan <peng.fan@nxp.com>,
- Ryder Lee <ryder.lee@mediatek.com>, Tom Rini <trini@konsulko.com>,
- Weijie Gao <weijie.gao@mediatek.com>
-Subject: [PATCH 10/14] power: domain: mtk: Staticize and constify driver ops
-Date: Fri,  8 May 2026 14:22:10 +0200
-Message-ID: <20260508122247.512862-10-marek.vasut+renesas@mailbox.org>
+ Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH 11/14] power: domain: sandbox: Staticize and constify driver
+ ops
+Date: Fri,  8 May 2026 14:22:11 +0200
+Message-ID: <20260508122247.512862-11-marek.vasut+renesas@mailbox.org>
 In-Reply-To: <20260508122247.512862-1-marek.vasut+renesas@mailbox.org>
 References: <20260508122247.512862-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: 7t63g59n1t7z33n3nbtjqnzdnx3ipqgb
-X-MBO-RS-ID: 05952c9b56feb39a460
-X-Rspamd-Queue-Id: 4gBpDl4grpz9tSk
+X-MBO-RS-ID: 2d0e205f8acdca1cafa
+X-MBO-RS-META: k5mmgcnjou3zjuh9kfxwhm88k6h9jehw
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,34 +93,27 @@ from outside of this driver and is not going to be modified at runtime.
 
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
-Cc: Chunfeng Yun <chunfeng.yun@mediatek.com>
-Cc: David Lechner <dlechner@baylibre.com>
-Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>
-Cc: Igor Belwon <igor.belwon@mentallysanemainliners.org>
 Cc: Jaehoon Chung <jh80.chung@samsung.com>
-Cc: Julien Stephan <jstephan@baylibre.com>
 Cc: Peng Fan <peng.fan@nxp.com>
-Cc: Ryder Lee <ryder.lee@mediatek.com>
 Cc: Tom Rini <trini@konsulko.com>
-Cc: Weijie Gao <weijie.gao@mediatek.com>
 Cc: u-boot@lists.denx.de
 ---
- drivers/power/domain/mtk-power-domain.c | 2 +-
+ drivers/power/domain/sandbox-power-domain.c | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/power/domain/mtk-power-domain.c b/drivers/power/domain/mtk-power-domain.c
-index 2d1ba1855a5..24dd540897d 100644
---- a/drivers/power/domain/mtk-power-domain.c
-+++ b/drivers/power/domain/mtk-power-domain.c
-@@ -392,7 +392,7 @@ static const struct udevice_id mtk_power_domain_ids[] = {
- 	{ /* sentinel */ }
+diff --git a/drivers/power/domain/sandbox-power-domain.c b/drivers/power/domain/sandbox-power-domain.c
+index a8031657638..a30826a3b4d 100644
+--- a/drivers/power/domain/sandbox-power-domain.c
++++ b/drivers/power/domain/sandbox-power-domain.c
+@@ -78,7 +78,7 @@ static const struct udevice_id sandbox_power_domain_ids[] = {
+ 	{ }
  };
  
--struct power_domain_ops mtk_power_domain_ops = {
-+static const struct power_domain_ops mtk_power_domain_ops = {
- 	.off = scpsys_power_off,
- 	.on = scpsys_power_on,
- 	.request = scpsys_power_request,
+-struct power_domain_ops sandbox_power_domain_ops = {
++static const struct power_domain_ops sandbox_power_domain_ops = {
+ 	.request = sandbox_power_domain_request,
+ 	.rfree = sandbox_power_domain_free,
+ 	.on = sandbox_power_domain_on,
 -- 
 2.53.0
 
