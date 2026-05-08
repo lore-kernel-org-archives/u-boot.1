@@ -4,52 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06AB7CD37AC
-	for <u-boot@archiver.kernel.org>; Sat,  9 May 2026 00:44:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03442CD3445
+	for <u-boot@archiver.kernel.org>; Sat,  9 May 2026 00:44:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4715684E85;
+	by phobos.denx.de (Postfix) with ESMTP id 8499B84E8D;
 	Sat,  9 May 2026 02:40:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=seznam.cz
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=seznam.cz header.i=@seznam.cz header.b="M7q+/kB5";
+	dkim=pass (2048-bit key; secure) header.d=seznam.cz header.i=@seznam.cz header.b="ZACIn7Rg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D4C6D84D1A; Fri,  8 May 2026 23:46:31 +0200 (CEST)
+ id 7157F84CE5; Fri,  8 May 2026 23:46:32 +0200 (CEST)
 Received: from mxd-3-701.seznam.cz (mxd-3-701.seznam.cz
  [IPv6:2a02:598:96:8a00::1200:701])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 614EA84CE5
- for <u-boot@lists.denx.de>; Fri,  8 May 2026 23:46:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5028284CF3
+ for <u-boot@lists.denx.de>; Fri,  8 May 2026 23:46:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=seznam.cz
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=michael.srba@seznam.cz
 Received: from email.seznam.cz by smtpc-mxd-5f4d8d5f6f-gj4cr
  (smtpc-mxd-5f4d8d5f6f-gj4cr [2a02:598:96:8a00::1200:701])
- id 1e3c89084532dd611f954556; Fri, 08 May 2026 23:45:59 +0200 (CEST)
+ id 0bec8ee950e2da800a4542b7; Fri, 08 May 2026 23:45:56 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=seznam.cz; s=szn1;
- t=1778276759; bh=trEpWKqY8oPcclt1AJm23G60J57XnGZiRDwNSWc+Zec=;
+ t=1778276756; bh=Cuh6NxDdkfayKCAp9nhXUFhAnwLWqRTf+KcpMg5BfQ8=;
  h=From:Date:Subject:MIME-Version:Content-Type:
  Content-Transfer-Encoding:Message-Id:To:Cc;
- b=M7q+/kB5kW/WycE5yIhOoAtLuHVC6vD8LPMe863ZGyflLvucPvJvOfPB4J5WQavLS
- JP6a6+PJcLUDAWXWBvKjC716NzLFcP16Vntb2i+J2eOui4MRz8Lo5nmsEzmLc7rtRG
- /5LnVKajbhF4l4b+WAzkmgojPmDt/gbeH5tdfR4odW2iJbiLYjWKCcri4H0kjFHiih
- yx+tBolxcZZdI41Eol5Dwv/gyygWcW4oO5Tox5PLXr2x288hmF9N0mVfMjFXTs0sZ5
- Tefi88OX7Yg2xtZ7/rzwT9RRV3ACOMXqDraLsPBEsL8xhj7GngptaHTrq/lAm/N0zc
- wjFLezbQE+ohA==
+ b=ZACIn7Rg8TS0v/jvCKq6owBASwB8+VpWwszAkHsnsBFNrssQhY5V6FZaee2Ml7pyE
+ kBsJHNm3W4RS/yunStcQ9pnZKhYgVjFLDApgBwKfbV2H1WzoZIdotruEp8rsGgP414
+ 5GjiR3BXrw0D2cHhX+zklOGRy9SuhZX34iTsknssdYgndm1HkRazZUJ2d6whWP0Tys
+ k0pfsI9HFWrYoT6cI5KgMTzsObo4zhKfdUkuHegNCsnq6BS/PawuXGSCxtL/PFnCad
+ X7/sHlUE3+LyHy6A7vo5B6AgdCrYO6wn2X8DjCr/F1t0P8WHNIvsZC2lIHjzEWAmAF
+ b7Y7pOMeNSYlQ==
 Received: from [127.0.0.1] (ip-111-27.static.ccinternet.cz [147.161.27.111])
  by smtpd-relay-6597cc8696-jn5pf (szn-email-smtpd/2.0.72) with ESMTPA
- id bf3f6e9f-329a-4cdd-ab88-95dfc9559458;
- Fri, 08 May 2026 23:45:41 +0200
+ id 6994ab9f-3fc4-41aa-af21-205956a2c673;
+ Fri, 08 May 2026 23:45:42 +0200
 From: michael.srba@seznam.cz
-Date: Fri, 08 May 2026 23:45:29 +0200
-Subject: [PATCH v7 05/11] mach-snapdragon: add u-boot-spl-elf-sdm845.lds
+Date: Fri, 08 May 2026 23:45:31 +0200
+Subject: [PATCH v7 07/11] mach-snapdragon: Kconfig: changes / additions to
+ support SPL
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260508-qcom_spl-v7-5-7d0e22aaaa8f@seznam.cz>
+Message-Id: <20260508-qcom_spl-v7-7-7d0e22aaaa8f@seznam.cz>
 References: <20260508-qcom_spl-v7-0-7d0e22aaaa8f@seznam.cz>
 In-Reply-To: <20260508-qcom_spl-v7-0-7d0e22aaaa8f@seznam.cz>
 To: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>, 
@@ -108,66 +109,104 @@ X-Virus-Status: Clean
 
 From: Michael Srba <Michael.Srba@seznam.cz>
 
-This custom linker script is required to produce a bootable ELF
-for the sdm845 SoC. An xbl_sec.elf must be provided, which will
-be put in a section in the ELF as required by the boot rom.
+Select SUPPORT_SPL so SPL build can be enabled, disable SYSRESET_PSCI in SPL.
+(SPL runs in EL3, so if SPL itself doesn't provide PSCI, nothing else will.)
+
+Also select (SPL_)OF_LIVE and DM_EVENT/SPL_EVENT, which are needed to fix up
+upstream dt to make usb work.
+
+Mirror u-boot proper selections like GPIO and pinctrl to ensure consistent
+behavior, and select SPL_SPRINTF, SPL_LIBCOMMON_SUPPORT etc for similar
+reasons.
 
 Signed-off-by: Michael Srba <Michael.Srba@seznam.cz>
 Reviewed-by: Simon Glass <sjg@chromium.org>
 ---
- arch/arm/mach-snapdragon/u-boot-spl-elf-sdm845.lds | 44 ++++++++++++++++++++++
- 1 file changed, 44 insertions(+)
+ arch/arm/Kconfig                 | 33 ++++++++++++++++++++++++++++++++-
+ arch/arm/mach-snapdragon/Kconfig | 10 ++++++++++
+ 2 files changed, 42 insertions(+), 1 deletion(-)
 
-diff --git a/arch/arm/mach-snapdragon/u-boot-spl-elf-sdm845.lds b/arch/arm/mach-snapdragon/u-boot-spl-elf-sdm845.lds
-new file mode 100644
-index 00000000000..3740209d499
---- /dev/null
-+++ b/arch/arm/mach-snapdragon/u-boot-spl-elf-sdm845.lds
-@@ -0,0 +1,44 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
+diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
+index f624675eadf..8e818071df6 100644
+--- a/arch/arm/Kconfig
++++ b/arch/arm/Kconfig
+@@ -1135,6 +1135,7 @@ config ARCH_SNAPDRAGON
+ 	bool "Qualcomm Snapdragon SoCs"
+ 	select ARM64
+ 	select DM
++	select DM_EVENT if USB_DWC3_GENERIC
+ 	select DM_GPIO
+ 	select DM_SERIAL
+ 	select DM_RESET
+@@ -1149,9 +1150,39 @@ config ARCH_SNAPDRAGON
+ 	select SAVE_PREV_BL_FDT_ADDR if !ENABLE_ARM_SOC_BOOT0_HOOK
+ 	select LINUX_KERNEL_IMAGE_HEADER if !ENABLE_ARM_SOC_BOOT0_HOOK
+ 	select SYSRESET
+-	select SYSRESET_PSCI
++	select SYSRESET_PSCI if !SPL
+ 	select ANDROID_BOOT_IMAGE_IGNORE_BLOB_ADDR
+ 	select MMU_PGPROT
++	select SUPPORT_SPL
 +
-+/*
-+ * The boot rom uses the segment type to identify the xbl_sec program header.
-+ * See https://github.com/coreboot/coreboot/blob/643efabd2af9f7ac/util/qualcomm/mbn_tools.py#L143.
-+ */
-+#define PF_SEGMENT_TYPE_XBL_SEC 5
++	select OF_LIVE if USB_DWC3_GENERIC
++	select SPL_OF_LIVE if SPL_USB_DWC3_GENERIC
++	select ARMV8_SPL_EXCEPTION_VECTORS if SPL
++	select ENABLE_ARM_SOC_BOOT0_HOOK if SPL
++	select SPL_DM if SPL
++	select SPL_DM_GPIO if SPL
++	select SPL_DM_PMIC if SPL
++	select SPL_DM_USB_GADGET if SPL
++	select SPL_ENV_SUPPORT if SPL
++	select SPL_EVENT if SPL_USB_DWC3_GENERIC
++	select SPL_GPIO if SPL
++	select SPL_HAS_BSS_LINKER_SECTION if SPL
++	select SPL_LIBCOMMON_SUPPORT if SPL
++	select SPL_LIBDISK_SUPPORT if SPL
++	select SPL_LIBGENERIC_SUPPORT if SPL
++	select SPL_OF_CONTROL if SPL
++	select SPL_PINCONF if SPL
++	select SPL_PINCTRL if SPL
++	select SPL_PINCTRL_FULL if SPL
++	select SPL_PINCTRL_GENERIC if SPL
++	select SPL_PINCONF_RECURSIVE if SPL
++	select SPL_PINMUX if SPL
++	select SPL_SPMI if SPL
++	select SPL_SPMI_MSM if SPL
++	select SPL_SPRINTF if SPL
++	select SPL_STRTO if SPL
++	select SPL_USB_GADGET if SPL
++	imply SPL_MMC if SPL
+ 	imply OF_UPSTREAM
+ 	imply CMD_DM
+ 	imply DM_USB_GADGET
+diff --git a/arch/arm/mach-snapdragon/Kconfig b/arch/arm/mach-snapdragon/Kconfig
+index c195d478512..a2228e217af 100644
+--- a/arch/arm/mach-snapdragon/Kconfig
++++ b/arch/arm/mach-snapdragon/Kconfig
+@@ -14,6 +14,9 @@ config SYS_VENDOR
+ config SYS_MALLOC_F_LEN
+ 	default 0x2000
+ 
++config SPL_SYS_MALLOC_F
++	default y
 +
-+/*
-+ * The boot rom expects this to be equal to a seemingly magic value possibly specific
-+ * to a particular xbl_sec.elf. If you're extracting your xbl_sec.elf from an xbl elf,
-+ * you can just reuse the value; otherwise you can either compute it yourself or use
-+ * coreboot's tool.
-+ * See https://github.com/coreboot/coreboot/blob/643efabd2af9f7ac/util/qualcomm/createxbl.py#L638.
-+ */
-+#define XLB_SEC_SEGMENT_ADDR 0x0000000014699000
+ config SPL_SYS_MALLOC_F_LEN
+ 	default 0x2000
+ 
+@@ -39,6 +42,13 @@ config SYS_CONFIG_NAME
+ 	  Based on this option include/configs/<CONFIG_SYS_CONFIG_NAME>.h header
+ 	  will be used for board configuration.
+ 
++config SPL_SHARES_INIT_SP_ADDR
++	# override the default from common/spl/Kconfig
++	default n
 +
++config SPL_HAVE_INIT_STACK
++	default y
 +
-+TARGET("binary")
-+INPUT("./xbl_sec.elf")
-+
-+OUTPUT_FORMAT("default")
-+
-+ENTRY(CONFIG_PLATFORM_ELFENTRY)
-+PHDRS
-+{
-+	data PT_LOAD FLAGS(7);
-+	xbl_sec PT_LOAD FLAGS(5 | (PF_SEGMENT_TYPE_XBL_SEC << 24));
-+}
-+SECTIONS
-+{
-+
-+	. = XLB_SEC_SEGMENT_ADDR;
-+	.xbl_sec : { // XBL_SEC nested ELF
-+		. = .;
-+		"./xbl_sec.elf"
-+	} :xbl_sec
-+
-+	. = CONFIG_PLATFORM_ELFENTRY;
-+
-+	.data : {
-+		*(.data*)
-+	} :data
-+}
+ choice
+ 	prompt "Qualcomm boot0.h workaround"
+ 	optional
 
 -- 
 2.53.0
