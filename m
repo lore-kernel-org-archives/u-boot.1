@@ -4,22 +4,22 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF225CD3436
-	for <u-boot@archiver.kernel.org>; Fri,  8 May 2026 08:22:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78135CD3436
+	for <u-boot@archiver.kernel.org>; Fri,  8 May 2026 08:22:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DBE9084BD1;
-	Fri,  8 May 2026 10:21:49 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1CDC984C18;
+	Fri,  8 May 2026 10:21:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=ew.tq-group.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=ew.tq-group.com header.i=@ew.tq-group.com header.b="F+qFo6y0";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=ew.tq-group.com header.i=@ew.tq-group.com header.b="ntvbH9SF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1F52C84C22; Fri,  8 May 2026 10:21:47 +0200 (CEST)
+ id 251CD84C18; Fri,  8 May 2026 10:21:47 +0200 (CEST)
 Received: from www537.your-server.de (www537.your-server.de [188.40.3.216])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 45E0C84C18
+ by phobos.denx.de (Postfix) with ESMTPS id 02AEA84BDC
  for <u-boot@lists.denx.de>; Fri,  8 May 2026 10:21:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=ew.tq-group.com
@@ -30,28 +30,29 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
  Content-Type:Content-ID:Content-Description:Resent-Date:Resent-From:
  Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID;
- bh=Zo8mG7i99bZ4YgMJMlaxoPyxb790Z8FCGb3ysSiaAvY=; b=F+qFo6y0I/VSHv0YFEKoO2GiTK
- IPW3QX2aXJeZ7+riTAeFrYlXH8+SBUSa8aKqlC9LlfCtW3KuNWLx3gXBAWCX8hsykMOgyFXnbSGxn
- uCvVqqvraIlWG83DPup1o6T/k4VlmBL1DGdjeeTdCxqp+DAY2+4sht4G6YLfnKPTnIHQohooixdOf
- JOKGV8BxupUhL4tb2hxOgPKbs6sKxh0J20VG+T9icWWx2RNPTVpWw+Ts+PoePh2kCLCBNSSFDIf+s
- 1/PN4JJvZI8eRDd+TuO2IM1wlRZTegncdYcn08lH+JIsvL/7DOs9dq/WkpSv22ci4qAR42w/IFmik
- YBxEIUAA==;
+ bh=9fhTiGKUAQw+CVj82UfV0B/x1KF1f27bM1e/DwAQx2E=; b=ntvbH9SFPwq0SIOXvq/JeqCZqS
+ uDWhhmveuTYyol6lKUOMj+mAfN4WSBGPnHmRmAOLtWDuyAELQ8TUe3xQf8SPlbTbC52Dm8tyRybI2
+ YRaKcoyd0sQGC+qimye5gFZr8l/qOZbSBo+xSLQ+QQMmQGODvXHIajPCnSwfCG6Jz7dxCW6XgeSiB
+ ykaE1LFiUnSavSKUKlePZ2y4g089YBZn00+rgj2KsGVGqnqKIcsPQhQbZLA5OtzvGSQkvSIaAvZn1
+ PIUuBu7jcZFsu9OVZS103tV1L3OrSe1dBBT0A2c9Wv33hsaE2eEU5jY0A7nNFGxnYNtKg8v76GC1E
+ 6VoPfhXQ==;
 Received: from sslproxy06.your-server.de ([78.46.172.3])
  by www537.your-server.de with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
  (Exim 4.96.2) (envelope-from <Alexander.Feilke@ew.tq-group.com>)
- id 1wLGSr-0005nv-2s; Fri, 08 May 2026 10:21:41 +0200
+ id 1wLGSr-0005nK-1e; Fri, 08 May 2026 10:21:41 +0200
 Received: from localhost ([127.0.0.1])
  by sslproxy06.your-server.de with esmtpsa (TLS1.3) tls TLS_AES_256_GCM_SHA384
  (Exim 4.96) (envelope-from <Alexander.Feilke@ew.tq-group.com>)
- id 1wLGSs-000P5H-04; Fri, 08 May 2026 10:21:41 +0200
+ id 1wLGSr-000P5H-1r; Fri, 08 May 2026 10:21:41 +0200
 From: Alexander Feilke <Alexander.Feilke@ew.tq-group.com>
 To: u-boot@lists.denx.de
 Cc: u-boot@ew.tq-group.com,
  Alexander Feilke <alexander.feilke@ew.tq-group.com>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH 4/8] rtc: pcf85063: add missing register definitions
-Date: Fri,  8 May 2026 10:21:28 +0200
-Message-Id: <20260508082132.25476-5-Alexander.Feilke@ew.tq-group.com>
+Subject: [PATCH 2/8] rtc: pcf85063: adjust date format to adhere to the
+ rtc_time spec
+Date: Fri,  8 May 2026 10:21:26 +0200
+Message-Id: <20260508082132.25476-3-Alexander.Feilke@ew.tq-group.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20260508082132.25476-1-Alexander.Feilke@ew.tq-group.com>
 References: <20260508082132.25476-1-Alexander.Feilke@ew.tq-group.com>
@@ -75,61 +76,57 @@ X-Virus-Status: Clean
 
 From: Alexander Feilke <alexander.feilke@ew.tq-group.com>
 
-Sync definitions from upstream linux v6.19.
+The rtc_time documentation in rtc_def.h notes a differences
+to the common "struct time" that specifies tm_mon as 1 ... 12
+and tm_year as year since 0. Also trim register values to valid bits.
+
+Fixes: 1c2a2253f798 ("drivers: rtc: add PCF85063 support")
 
 Signed-off-by: Alexander Feilke <alexander.feilke@ew.tq-group.com>
 ---
- drivers/rtc/pcf85063.c | 26 ++++++++++++++++++++++++--
- 1 file changed, 24 insertions(+), 2 deletions(-)
+ drivers/rtc/pcf85063.c | 19 +++++++++++++++----
+ 1 file changed, 15 insertions(+), 4 deletions(-)
 
 diff --git a/drivers/rtc/pcf85063.c b/drivers/rtc/pcf85063.c
-index 183a214a3e9..06c85d939e0 100644
+index 737d4547aca..21640b039c1 100644
 --- a/drivers/rtc/pcf85063.c
 +++ b/drivers/rtc/pcf85063.c
-@@ -11,11 +11,33 @@
- #include <dm/device_compat.h>
+@@ -35,7 +35,9 @@ static int pcf85063_get_time(struct udevice *dev, struct rtc_time *tm)
+ 	tm->tm_hour = bcd2bin(regs[2] & 0x3f);
+ 	tm->tm_mday = bcd2bin(regs[3] & 0x3f);
+ 	tm->tm_wday = regs[4] & 0x07;
+-	tm->tm_mon = bcd2bin(regs[5] & 0x1f) - 1;
++	/* rtc register and rtc_time spec uses 1 - 12 */
++	tm->tm_mon = bcd2bin(regs[5] & 0x1f);
++	/* adjust rtc_time (years since 0) to match register spec */
+ 	tm->tm_year = bcd2bin(regs[6]) + 2000;
  
- #define PCF85063_REG_CTRL1		0x00 /* status */
--#define PCF85063_REG_CTRL1_SR		0x58
-+#define PCF85063_REG_CTRL1_CAP_SEL	BIT(0)
-+#define PCF85063_REG_CTRL1_STOP		BIT(5)
-+#define PCF85063_REG_CTRL1_EXT_TEST	BIT(7)
-+#define PCF85063_REG_CTRL1_SWR		0x58 /* Software reset command */
-+
-+#define PCF85063_REG_CTRL2		0x01
-+#define PCF85063_CTRL2_AF		BIT(6)
-+#define PCF85063_CTRL2_AIE		BIT(7)
-+
-+#define PCF85063_REG_OFFSET		0x02
-+#define PCF85063_OFFSET_SIGN_BIT	6	/* 2's complement sign bit */
-+#define PCF85063_OFFSET_MODE		BIT(7)
-+#define PCF85063_OFFSET_STEP0		4340
-+#define PCF85063_OFFSET_STEP1		4069
-+
-+#define PCF85063_REG_CLKO_F_MASK	0x07 /* frequency mask */
-+#define PCF85063_REG_CLKO_F_32768HZ	0x00
-+#define PCF85063_REG_CLKO_F_OFF		0x07
-+
-+#define PCF85063_REG_RAM		0x03
+ 	return 0;
+@@ -50,12 +52,21 @@ static int pcf85063_set_time(struct udevice *dev, const struct rtc_time *tm)
+ 		return -EINVAL;
+ 	}
  
- #define PCF85063_REG_SC			0x04 /* datetime */
- #define PCF85063_REG_SC_OS		0x80
- 
-+#define PCF85063_REG_ALM_S		0x0b
-+#define PCF85063_AEN			BIT(7)
+-	regs[0] = bin2bcd(tm->tm_sec);
++	/* hours, minutes and seconds */
++	regs[0] = bin2bcd(tm->tm_sec) & (~PCF85063_REG_SC_OS);
 +
- static int pcf85063_get_time(struct udevice *dev, struct rtc_time *tm)
- {
- 	u8 regs[7];
-@@ -74,7 +96,7 @@ static int pcf85063_set_time(struct udevice *dev, const struct rtc_time *tm)
+ 	regs[1] = bin2bcd(tm->tm_min);
+ 	regs[2] = bin2bcd(tm->tm_hour);
++
++	/* Day of month, 1 - 31 */
+ 	regs[3] = bin2bcd(tm->tm_mday);
+-	regs[4] = tm->tm_wday;
+-	regs[5] = bin2bcd(tm->tm_mon + 1);
++
++	/* Day of week 0 - 6 */
++	regs[4] = tm->tm_wday & 0x07;
++
++	/* rtc register and rtc_time spec uses 1 - 12 */
++	regs[5] = bin2bcd(tm->tm_mon);
++	/* adjust register to match rtc_time spec */
+ 	regs[6] = bin2bcd(tm->tm_year % 100);
  
- static int pcf85063_reset(struct udevice *dev)
- {
--	return dm_i2c_reg_write(dev, PCF85063_REG_CTRL1, PCF85063_REG_CTRL1_SR);
-+	return dm_i2c_reg_write(dev, PCF85063_REG_CTRL1, PCF85063_REG_CTRL1_SWR);
- }
- 
- static int pcf85063_read(struct udevice *dev, unsigned int offset, u8 *buf,
+ 	return dm_i2c_write(dev, PCF85063_REG_SC, regs, sizeof(regs));
 -- 
 2.34.1
 
