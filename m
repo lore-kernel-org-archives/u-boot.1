@@ -4,91 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E98B3CD3436
-	for <u-boot@archiver.kernel.org>; Fri,  8 May 2026 15:27:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38EDBCD3445
+	for <u-boot@archiver.kernel.org>; Fri,  8 May 2026 15:27:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 89B1084CF2;
-	Fri,  8 May 2026 17:27:44 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id CDBE884CFD;
+	Fri,  8 May 2026 17:27:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="PfJBStMD";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="KdkS7Vkn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D87F684CF3; Fri,  8 May 2026 17:27:43 +0200 (CEST)
-Received: from mail-pg1-x536.google.com (mail-pg1-x536.google.com
- [IPv6:2607:f8b0:4864:20::536])
+ id 6B4EE84D05; Fri,  8 May 2026 17:27:55 +0200 (CEST)
+Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
+ [IPv6:2a00:1450:4864:20::534])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3851084CEC
- for <u-boot@lists.denx.de>; Fri,  8 May 2026 17:27:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9C7FB84CEC
+ for <u-boot@lists.denx.de>; Fri,  8 May 2026 17:27:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pg1-x536.google.com with SMTP id
- 41be03b00d2f7-c70ea5e9e9dso945405a12.1
- for <u-boot@lists.denx.de>; Fri, 08 May 2026 08:27:41 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1778254060; cv=none;
+Received: by mail-ed1-x534.google.com with SMTP id
+ 4fb4d7f45d1cf-67be871ed3fso4126865a12.1
+ for <u-boot@lists.denx.de>; Fri, 08 May 2026 08:27:53 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1778254073; cv=none;
  d=google.com; s=arc-20240605;
- b=fu7glULSBaNxbdKOVHMIdtA2qTAsIP9ZKcZ57Uzvg0FeZqKeTd096JXO/9KcTB1f9f
- qTJyvdihvJZ0D8FxG7f5ntOSL83BR68n9kuw3kk9BJ/6IUt3G0V2bvr7GvI0GO0s2Xr9
- tUoLnFT5jkBXbCsrMQ32EIm//epxdWpgo/mDvRndVJbhC0RET9FJfeHNokg/th53QkeE
- w7XMvlmXMhUyJPz9CBgv1c9hudgQh/N0W3SCNAD81KnSIXI1OVD6OzjPDxRcJG73lqga
- /bhgzWFOU9CPHWtQIQQer+Lhcxd917CDoM7YWBrmjnd/lBw4XHTO/Bu6rIJB0LruaQwa
- vKOA==
+ b=fdZzInwxG0v9F5hqnr3Bja9UK8QTWsKhkZxecKlu0wf/flUwrmcdOPjeq2IbMdP3wd
+ RxV0LhM0/JMYqNPgsgfW7G3ZEP969U8RobS96YtP236O42VeIJLChNYRqUitbATioUip
+ J7vJZsa7XvFnGQe6OGyOFVA+k8GTJUsCxCnubs53rvJ66KSID80uu1nl9lk+EBjIXyne
+ WdfCoVe5DIsGeotJpO6nLyCRI2Gw2qlUPAaTa7hxRwrHoUl9PUUFmc4L7ZdnsgZmr5Fc
+ ie1s7MQzlTo4DGeC5t5WVG3m7JUGiTlFemsq3WRBo9qWhntje0Pp1K/L4rs8vjMe+o0Q
+ d+tg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=wxx9g+Ho7Y97kc9DBHd7vddrpaAfivbXNjlRSOS3DB0=;
+ bh=7tPYT1HhyFPv9SWzQmk9c086Fym84suAOqsseI+2iUY=;
  fh=cXLM2xWHT98EMji+CvqvFHfrMeoAXhLsVQYbWE9nUP8=;
- b=ZYwt7x8fuBGFm0YdRkYvevpf6WDddh7HcSa0QcyanZFdRRjcwFlki2zf01JC6VTYJ8
- OpMyYTNm6IH5gwMfS1JL7m/In6n1Dzu/9NXIfIrYnjPHobaRZvfxox9Db3UNUBUmLJEt
- oXN/uirEV9yK+bVfWwAAZQuBn45EiCRxzZh5rkxaDtZs1fg5fLzLO98vmONgZcCySW5t
- YEnXvF++Eq0OZZYJNIroTfRyLyIUK0doKepsMCdHQiaRLe4XLIKJgl2CNm1Vrd5afFDU
- abiuGby/PjCD3gS0rOzwEBJaYhekZCHiKgAQunlzUD95V2oQq/EDunOOICq41Y4fSnpS
- 97cw==; darn=lists.denx.de
+ b=g8aIE4h7r4U9SsH9u4VKEOjjrX6ax0XnAO6idbPpdT6qJ2tAPmrCHFQj87rzMv5ltV
+ Y+gq/4b9dC/hC3vHRq2fnduKWGVdfP5QnQS/V6/pp1d5wFbZrfGW/f+wFlBGdZuJ7GFM
+ LZ+AsmZ3YZCdyzvuDdxoZAng5TIdKQecjfiW9Fq0odV8Cs+lXNJhJMPG/qtVe5FcZ86C
+ 0Gq1tQEV9TOrYGkQQfhZ6LUGQfmDYKIcMaMkrLY0Aqvx8vQ8+s/wcvwxUbQVTBIlNoJ4
+ GtsLD7F4mes2RhluxjaF4nm7PAKS4af7IbK/oKFKyIUnmVQfSB+TcmDeG8soYR8kC2us
+ jECQ==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1778254060; x=1778858860; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1778254073; x=1778858873; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=wxx9g+Ho7Y97kc9DBHd7vddrpaAfivbXNjlRSOS3DB0=;
- b=PfJBStMDWnn0AETwnA7FZWdmDwZAccvhTzbTKf1lYySxCBuM8v1C8rdgczDRYhoich
- nB6+dP2x/DvjSlYOM6kdfRaz6HN66TArE1WwkhY3cYEIOlXaVQDi3Sz6a5gQW9TbhhSi
- ipBNRPR3sZTVU9OPgKoyYNM+RQyUhkRZOP2+A=
+ bh=7tPYT1HhyFPv9SWzQmk9c086Fym84suAOqsseI+2iUY=;
+ b=KdkS7VknDIQiabmutmQ735dPuwvin5bM1RRMoN3E9/hn2kGIejriAf7ttWEzjIS3sg
+ H978tIZ7mM0o7AurRl6b1x6wVSPRlz51FFfY/dTbumUN+JlBWsn6vmY94j5ADtYYEkNW
+ Et7tOm4ZTAQ6sC8SKf/3wVGUCNZsvG84Ok1GI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778254060; x=1778858860;
+ d=1e100.net; s=20251104; t=1778254073; x=1778858873;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=wxx9g+Ho7Y97kc9DBHd7vddrpaAfivbXNjlRSOS3DB0=;
- b=BMSTg/r9SZSozmwN1rwmA61FP+rjn+U8PRWwwjRi1OIbi8LUsoSbWyQgOrF0506rnA
- xKImdy7zMug5NYb19uVaYibtCUp58B4dyYOszLx/IfOHIJbzi8/3zu2QBej8f+1IqeeP
- 4LcfRg/Y835Upey/K9rF+Fy5qK1Lc1t/2bbAvXxK4lgh0eoTIJu8jSuMcaYQPAMXYrFb
- 9EQvUPf+7KC9wN7b7TqZoaMGQLXsEZtOm/p/lRw4BIIUmEhQlP637Po/xSxrUre5HA3n
- Agd+TxZ1ZtUmwZz50pCDBGK1iW8L7bhD/rro/4CpHbD90aK7ixjykgGSKrYRcCr6zFB+
- RAkw==
-X-Gm-Message-State: AOJu0YzZljE8deNRydzYIWOrUOk5ZNUxoQDya/279apF8xlFRvUQwZ8I
- VAM4hStGbuqM33dcyE8WCP/9BtwcBQ017bg1fz8M4t5JCMAOv81rraocOm+3l6KFZRdK+0q4051
- PUWWEAv2Df+/G96GgTs0kW9+ppphI1mKztc2Zfis7
-X-Gm-Gg: AeBDiet33h/XrlZdbVBdNH8wp8Et0ok0BSgNA14yUfyUDI/62m9O8rVEghpCmKuhdEw
- 62NaR4qx4Wf+bUTQSpUtwwTY1B00a/xW3rBQSuA0p7ro+KSv9IZslAKE9iF8EXVaIYPOhhK8PVa
- CUKQYQ5H0gSW8ggQGhFxPVkAEsUr63zTLj31g4BVQMS/b/nWclnocPdYRlg8Wof2eT3djbbdfna
- E9HGyReVFC+AK52m3seUKS8LCVjBpxUrL8sQgoQ6k3Jsw1yGjBXGUThsVUT9znRlO9yWfUVaMre
- 91r43Y9fqEOQE1em
-X-Received: by 2002:a05:6300:210a:b0:3a2:dd8a:5087 with SMTP id
- adf61e73a8af0-3aa5ab86d84mr15129907637.46.1778254059643; Fri, 08 May 2026
- 08:27:39 -0700 (PDT)
+ bh=7tPYT1HhyFPv9SWzQmk9c086Fym84suAOqsseI+2iUY=;
+ b=dUZYjXEYQpQ6j3cLZ3l/YSfIbsAxmm3xZMtqd/H7iRIpGi1obrSnomrtPxWnPwpFWK
+ n45z+nooG2KfLoN4IR/vVXUcB/f5+5ZLTYnNZwAVod/nCd3joI3jXI5ZzsiRyktmijIF
+ x25qLXXFs8Nn7CRa16/9L8OAwN6Ns6X4b7v6TfJFNLwT5fnZVlHIE94WtQ9lv4VMXHxT
+ 70OLOpFOoMnjXKX6zQEYQN6mYZmN8pkykZAqAyZHex+iZGtl8AhXVH4xMUklKym30WTU
+ Bi4Oqu6O8JiF2SFcoEXOk0vaXjkgfMnus+uRB86vkBGQ98U9Ah4akitQIgJiBFV0psAm
+ jyhw==
+X-Gm-Message-State: AOJu0Yz7nRazoJwPVYsJeTOfx9F3s4dsCDjOx6186idTV57131rFeyzB
+ 2u1Di01SvrC0ya/HwjFe690nR2yEPApL+2wdHH0LNwN7/G5lb11yh+1t8UVEABYlL1BXq8Gn16P
+ Y5924BbLInQHOzAFd3s7FvoeNyaQqxzYXavztGzhj
+X-Gm-Gg: AeBDiesN536pqGdMcJuOwlZ2JUJCOu0Rpm3NhVPGJ+Ztt/cWZYEoNKF5Xjo20whpVRk
+ 4Glh1VzGvn1jcwF5uW8ygXk8WgMBamLDk4OeqBMZ/NpGRR9yG4nxmQ3OpoMH1hVpK4jI3sXxi3n
+ ZGNXr4EeQp4lg9bo8OZoqj0U90mHAWo5lsS4XCNH5BtjI1mv2712ueKHQyK3x1t746tiWzp3VLq
+ nxA0XX6RMRMN75595vjGUPimxGaHUHLBEAuNt5yof4NbwXvPh781q2Kjiw4RukUWr8iq68QWp4c
+ wFYNbZkrHAKKuBwr
+X-Received: by 2002:a17:906:9f88:b0:ba8:ca25:e6ab with SMTP id
+ a640c23a62f3a-bc56b626a5dmr763626266b.11.1778254072950; Fri, 08 May 2026
+ 08:27:52 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260507092843.358908-1-jens.wiklander@linaro.org>
- <20260507092843.358908-17-jens.wiklander@linaro.org>
-In-Reply-To: <20260507092843.358908-17-jens.wiklander@linaro.org>
+ <20260507092843.358908-14-jens.wiklander@linaro.org>
+In-Reply-To: <20260507092843.358908-14-jens.wiklander@linaro.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 8 May 2026 09:26:45 -0600
-X-Gm-Features: AVHnY4ItJWp5m3bVj7piJIg2EQRdwE-mf1sZH5X6SkUz0JIkpgjqvOZCDD1ms2A
-Message-ID: <CAFLszThAyVnts3aPgmpyxinbZMuVfxNQpr_kV641SWoNoAwwpg@mail.gmail.com>
-Subject: Re: [RFC PATCH v2 16/64] usb: dwc3: import from kernel v4.13
+Date: Fri, 8 May 2026 09:26:35 -0600
+X-Gm-Features: AVHnY4JHYyBMIRpI2SIPQYopIi4q8d39ng6Za9D0k_IepimeIpgieya6CSNLU2Y
+Message-ID: <CAFLszTgouezRRc=EPWYN-YLDFOh7N9tGrnFmFAjG5JxMz_1f7w@mail.gmail.com>
+Subject: Re: [RFC PATCH v2 13/64] usb: dwc3: import from kernel v4.10
 To: jens.wiklander@linaro.org
 Cc: u-boot@lists.denx.de, Marek Vasut <marex@denx.de>, 
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
@@ -126,62 +126,9 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Jens,
+
 On 2026-05-07T09:27:07, Jens Wiklander <jens.wiklander@linaro.org> wrote:
-> usb: dwc3: import from kernel v4.13
->
-> Sync Linux kernel dwc3 changes from v4.12 to v4.13.
->
-> The following files are preserved accross the import:
-> Makefile Kconfig dwc3-meson-g12a.c dwc3-meson-gxl.c dwc3-omap.c
-> dwc3-uniphier.c dwc3-generic.h dwc3-generic.c dwc3-generic-sti.c
-> dwc3-layerscape.c ti_usb_phy.c
->
-> Skipping unused files:
-> debugfs.c drd.c dwc3-exynos.c dwc3-haps.c dwc3-imx8mp.c dwc3-keystone.c
-> dwc3-octeon.c dwc3-of-simple.c dwc3-pci.c dwc3-qcom.c dwc3-qcom-legacy.c
-> dwc3-rtk.c dwc3-st.c dwc3-xilinx.c host.c trace.c trace.h ulpi.c
->
-> Note that this is a raw import and doesn't build.
-> A fixup commit at the end of the series fixes that.
->
-> List of commits: git log --oneline v4.12..v4.13
-> Commits imported:
-> 40d829fb2ec6 usb: dwc3: gadget: Correct ISOC DATA PIDs for short packets
-> 4a71fcb8ac5f usb: dwc3: gadget: only unmap requests from DMA if mapped
-> ee249b455494 usb: dwc3: omap: remove IRQ_NOAUTOEN used with shared irq
-> 541768b08a40 usb: dwc3: core: Call dwc3_core_get_phy() before initializing phys
-> 408c9861c697 Merge tag 'pm-4.13-rc1' of git://git.kernel.org/pub/scm/linux/kernel/git/rafael/linux-pm
-> 362f6729cbb1 Merge tag 'usb-4.13-rc1' of git://git.kernel.org/pub/scm/linux/kernel/git/gregkh/usb
-> de3ef1eb1cd0 PM / core: Drop run_wake flag from struct dev_pm_info
-> 24040a58379e Merge tag 'usb-for-v4.13' of git://git.kernel.org/pub/scm/linux/kernel/git/balbi/usb into usb-testing
-> ece7af5f787e usb: dwc3: exynos: Handle return value of clk_prepare_enable
-> 46b780d46bcc usb: dwc3: gadget: increase readability of dwc3_gadget_init_endpoints()
-> 958d1a4c40dd usb: dwc3: core: program PHY for proper DRD modes
-> f54edb539c11 usb: dwc3: core: initialize ULPI before trying to get the PHY
-> e0082698b689 usb: dwc3: ulpi: conditionally resume ULPI PHY
-> 9b0a1f95c4b4 usb: dwc3: ep0: make sure wValue is 0 on GetStatus()
-> 7d8d0639565f usb: dwc3: gadget: implement ->udc_set_speed()
-> 94116f8126de ACPI: Switch to use generic guid_t in acpi_evaluate_dsm()
-> af32423a2d86 usb: dwc3: trace: decode ctrl request
-> 3587f36a125f usb: dwc3: debug: remove static char buffer from dwc3_decode_event()
-> e42f09b85f20 usb: dwc3: trace: rely on __string() and __assign_str()
-> dfc5e80578f2 usb: dwc3: gadget: slight cleanup to dwc3_process_event_entry()
-> 436841d53dd7 usb: dwc3: debugfs: slightly improve output of trb_ring
-> bfad65ee9be2 usb: dwc3: update documentation
-> 04fb365c453e usb: dwc3: replace %p with %pK
-> 6acf116c9558 Merge 4.12-rc2 into usb-next
-> 65db7a0c9816 usb: dwc3: add disable u2mac linestate check quirk
-> cdb55b39fab8 usb: dwc3: gadget: lazily map requests for DMA
-> 202adafe5a6e usb: dwc3: gadget: don't WARN about lack of TRBs
->
-> Signed-off-by: Jens Wiklander <jens.wiklander@linaro.org>
->
-> drivers/usb/dwc3/core.c   |  57 ++++++--
->  drivers/usb/dwc3/core.h   |  48 ++++---
->  drivers/usb/dwc3/debug.h  | 247 ++++++++++++++++++++++++++++++++-
->  drivers/usb/dwc3/ep0.c    |   8 +-
->  drivers/usb/dwc3/gadget.c | 340 ++++++++++++++++++++++++++++------------------
->  drivers/usb/dwc3/gadget.h |  22 ++-
->  6 files changed, 549 insertions(+), 173 deletions(-)
+> usb: dwc3: import from kernel v4.10
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
