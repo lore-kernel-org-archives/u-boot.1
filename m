@@ -4,75 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25DFACD3436
-	for <u-boot@archiver.kernel.org>; Fri,  8 May 2026 13:51:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A1E7CD3445
+	for <u-boot@archiver.kernel.org>; Fri,  8 May 2026 13:54:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BA21884C81;
-	Fri,  8 May 2026 15:51:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 0323A84C81;
+	Fri,  8 May 2026 15:54:28 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=free.fr
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="G/fj+DKg";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="RLu/0E2U";
+	dkim=pass (2048-bit key; unprotected) header.d=free.fr header.i=@free.fr header.b="gHwye2oe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 08BBA84CBE; Fri,  8 May 2026 15:51:53 +0200 (CEST)
-Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
- [IPv6:2001:67c:2050:0:465::201])
+ id E4C7F84C95; Fri,  8 May 2026 15:54:26 +0200 (CEST)
+Received: from smtp2-g21.free.fr (smtp2-g21.free.fr [IPv6:2a01:e0c:1:1599::11])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3914684C3C
- for <u-boot@lists.denx.de>; Fri,  8 May 2026 15:51:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C2AFE84C3C
+ for <u-boot@lists.denx.de>; Fri,  8 May 2026 15:54:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4gBrBt5TCFz9vFl;
- Fri,  8 May 2026 15:51:50 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1778248310;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=nzKO8K3oxEHOU8UAQUGGuZ2dYZZcs3eXc/b7pRek8LI=;
- b=G/fj+DKgbESH0/QYZAJvaXyt2XO3UylBushqGaXpdxNQY2bZHxhX41PrWRusvkc/caLA+F
- s7E6+ZSDSpUiC57SSqx0C0uHJfaPOBYdCN6qqYP9EYJ6HB42XPaq0OK7QsLq8H5v4+pOh4
- zY8f5ynM5DfjXOjmRfYvQx30tOuRiCo3dOtvrUGKJdMiXnFSJrw7kNW3S4hJIR43dvElga
- N1lZtmKK7YveNhc0h7WPcjIlTuB4XyNHYxDp096h1NWqnr2KXMw9NKDLL2TxOkEr0sTg8i
- pfEyDeDoGqzCVPPNVEfa17i5hMmfL7StFlNLgGRYJiQIlNOPbEXEJiu3UTfvKw==
-Message-ID: <4a54d1b0-47ce-4112-ad98-9d063bedcf69@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1778248309;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=nzKO8K3oxEHOU8UAQUGGuZ2dYZZcs3eXc/b7pRek8LI=;
- b=RLu/0E2UlxgYfGjnYf3aiIIYsYdqmJklYCO7GdJDAPcUrFwf87TtkLJZ5aleWeErfYBkqU
- R74yoLbuxNbfbrYJ1xAeAJtp51PEWptWAwe1Hp7lPZ9dpGkYeTMr91MwysHeuLFxUdvIv0
- 0mhvCG6xY+cD47m+XVDsqrTYzPC8T1dKW7e1uwMmOXUxknONPrQJd9q4n7l8URoXsELDvs
- yTC+MneuFxsXn0LAviurKFvBvg39uF7wO1sOxMn+agNc9PQw8jjJy9kkPVGC91qT7v08PL
- jKmy3z+KrW687Q8i1bExISIKUhe43q5OzAGWzAw89g3aIBT+VZYFuJPQ5DmkTQ==
-Date: Fri, 8 May 2026 15:51:46 +0200
+ dmarc=pass (p=quarantine dis=none) header.from=free.fr
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=vjardin@free.fr
+Received: from y14 (unknown [IPv6:2a01:e0a:2af:22b0:d1a5:1153:d371:3c9c])
+ (Authenticated sender: vjardin@free.fr)
+ by smtp2-g21.free.fr (Postfix) with ESMTPSA id 7C3FC2003AE;
+ Fri,  8 May 2026 15:54:18 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=free.fr;
+ s=smtp-20201208; t=1778248464;
+ bh=0EkJ02+o5DWwOXrL+HLfJYBppNSFKteZtF672FP94gA=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=gHwye2oepDegYPrV9HRKHabnR9TOo/ZKIetCuFCdiQSaZojGSGkbJYyBhy0kPLbp7
+ jWD/KwWYdwR3xW9PDBAS0v/kjYooYk5hi+omLtHM9OCUoTuIyoV1f/hSTJ1iTPsI7f
+ FXcp0ynJNq3CacAzqK8pWiYn3YJrtX95q2G8xHDIVTn/MuS6pT30LcQhNUSHwDlngy
+ pmBz6oMTBO56aCd6pitKln+VcX9btFiSxUgYwxO7VdFTJ3GQHMoZ55k4tWq7+yuRJx
+ S8k/t7poSsQCQ1o97HMlR3gMxJ3D3MnFpRlf/Zuej7XoeLzite890qgd3SDJh/A2rV
+ Rh9rSY6sMG6IQ==
+From: Vincent Jardin <vjardin@free.fr>
+To: u-boot@lists.denx.de
+Cc: Stefan Roese <stefan.roese@mailbox.org>, Tom Rini <trini@konsulko.com>,
+ Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
+ Vincent Jardin <vjardin@free.fr>
+Subject: [PATCH v3 0/5] NBX10G: Marvell Armada 8040 Nodebox 10G board support
+Date: Fri,  8 May 2026 15:54:03 +0200
+Message-ID: <cover.1778247592.git.vjardin@free.fr>
+X-Mailer: git-send-email 2.53.0
+In-Reply-To: <cover.1776762022.git.vjardin@free.fr>
+References: <cover.1776762022.git.vjardin@free.fr>
 MIME-Version: 1.0
-Subject: Re: [PATCH] cpu: armv8: Staticize and constify driver ops
-To: Quentin Schulz <quentin.schulz@cherry.de>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>
-References: <20260507164338.59399-1-marek.vasut+renesas@mailbox.org>
- <060791c2-e18b-47f4-8dc9-dd7daca8b260@cherry.de>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <060791c2-e18b-47f4-8dc9-dd7daca8b260@cherry.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: 432100cc5266707cb08
-X-MBO-RS-META: 4iniz8kssemgozzmkht1bpea4mccqbti
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,32 +67,90 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 5/8/26 3:44 PM, Quentin Schulz wrote:
-> Hi Marek,
-> 
-> On 5/7/26 6:43 PM, Marek Vasut wrote:
->> Set the ops structure as static const. The structure is not accessible
->> from outside of this driver and is not going to be modified at runtime.
->>
->> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
->> ---
->> Cc: Tom Rini <trini@konsulko.com>
->> Cc: u-boot@lists.denx.de
->> ---
->>   drivers/cpu/armv8_cpu.c | 2 +-
->>   1 file changed, 1 insertion(+), 1 deletion(-)
->>
->> diff --git a/drivers/cpu/armv8_cpu.c b/drivers/cpu/armv8_cpu.c
->> index 4eedfe5e2c5..ed87841b723 100644
->> --- a/drivers/cpu/armv8_cpu.c
->> +++ b/drivers/cpu/armv8_cpu.c
->> @@ -124,7 +124,7 @@ int armv8_cpu_fill_madt(const struct udevice *dev, 
->> struct acpi_ctx *ctx)
->>       return 0;
->>   }
->> -struct acpi_ops armv8_cpu_acpi_ops = {
->> +static struct acpi_ops armv8_cpu_acpi_ops = {
-> 
-> Missing const?
-Thanks. I just sent a V2, I had to fix up a few of the patches and 
-didn't update the commit message.
+This v3 addresses Stefan Roese's review feedback on v2:
+  https://lists.denx.de/pipermail/u-boot/2026-May/617738.html
+
+Per-patch changelogs are now included below --- in each patch
+(per U-Boot's "Sending updated patch versions" guidelines).
+
+Changes in v3:
+- Moved per-patch changelogs below --- in each patch (Stefan)
+- Patches 3 and 4: collected Reviewed-by Stefan from v2 review
+    https://lists.denx.de/pipermail/u-boot/2026-May/617739.html
+    https://lists.denx.de/pipermail/u-boot/2026-May/617740.html
+
+For reference, v2 changelog (now also present in each patch):
+- Patch 1 (cpuinfo/SAR): added Reviewed-by Stefan
+- Patch 2 (board support):
+    * dropped board_init() bi_boot_params assignment
+      (ARM64 uses FDT, ATAGS are !ARM64-only)
+    * dropped empty board_early_init_f()
+    * removed unused includes / DECLARE_GLOBAL_DATA_PTR
+    * added note on U-Boot vs Linux comphy DT bindings
+    * MAINTAINERS: armada-8040-nbx* wildcard covers the u-boot dtsi;
+      removed duplicate NBX BOARD entry from
+      board/Marvell/mvebu_armada-8k/MAINTAINERS
+    * added Reviewed-by Stefan
+- Patch 3 (emmcboot): moved from cmd/mvebu/ to board/freebox/nbx10g/,
+    renamed Kconfig CMD_MVEBU_EMMCBOOT -> CMD_NBX_EMMCBOOT and
+    MVEBU_MMC_PART_* -> NBX_MMC_PART_*, replaced all `return -1`
+    with `return -EINVAL`, commit message now explains legacy format
+- Patch 4 (fbxserial): moved from cmd/mvebu/ to board/freebox/nbx10g/,
+    replaced all `return -1` with proper errno codes
+    (-EINVAL for data validation, -ENODEV for missing MMC,
+     -EIO for MMC I/O failures)
+- Patch 5 (U-Boot dtsi): added Reviewed-by Stefan
+
+v1 review thread:
+  https://lists.denx.de/pipermail/u-boot/2026-March/613625.html
+
+Build tested on Nodebox 10G (ATF v2.14 + U-Boot 2026.04 + Linux 6.19),
+all functionality verified on hardware.
+
+Vincent Jardin (5):
+  arm: mach-mvebu: armada8k: cpuinfo and SAR
+  board: freebox: add Nodebox 10G board support
+  board: freebox: nbx10g: add emmcboot for dual-bank eMMC boot
+  board: freebox: nbx10g: add device serial and MAC address
+    initialization
+  arm: dts: armada-8040-nbx: add U-Boot dtsi for conditional OP-TEE
+
+ arch/arm/dts/Makefile                    |   1 +
+ arch/arm/dts/armada-8040-nbx-u-boot.dtsi |  15 +
+ arch/arm/dts/armada-8040-nbx.dts         | 259 ++++++++++++++++
+ arch/arm/mach-mvebu/Kconfig              |   9 +
+ arch/arm/mach-mvebu/armada8k/Makefile    |   2 +-
+ arch/arm/mach-mvebu/armada8k/cpu.c       |  12 +
+ arch/arm/mach-mvebu/armada8k/soc_info.c  | 194 ++++++++++++
+ arch/arm/mach-mvebu/armada8k/soc_info.h  |  14 +
+ board/freebox/nbx10g/Kconfig             |  94 ++++++
+ board/freebox/nbx10g/MAINTAINERS         |   6 +
+ board/freebox/nbx10g/Makefile            |   5 +
+ board/freebox/nbx10g/board.c             |  53 ++++
+ board/freebox/nbx10g/nbx_emmcboot.c      | 357 +++++++++++++++++++++++
+ board/freebox/nbx10g/nbx_fbxserial.c     | 286 ++++++++++++++++++
+ board/freebox/nbx10g/nbx_fbxserial.h     | 156 ++++++++++
+ board/freebox/nbx10g/nbx_imagetag.h      |  78 +++++
+ board/freebox/nbx10g/nbx_nrboot.h        |  34 +++
+ configs/mvebu_nbx_88f8040_defconfig      |  75 +++++
+ include/configs/nbx10g.h                 |  29 ++
+ 19 files changed, 1678 insertions(+), 1 deletion(-)
+ create mode 100644 arch/arm/dts/armada-8040-nbx-u-boot.dtsi
+ create mode 100644 arch/arm/dts/armada-8040-nbx.dts
+ create mode 100644 arch/arm/mach-mvebu/armada8k/soc_info.c
+ create mode 100644 arch/arm/mach-mvebu/armada8k/soc_info.h
+ create mode 100644 board/freebox/nbx10g/Kconfig
+ create mode 100644 board/freebox/nbx10g/MAINTAINERS
+ create mode 100644 board/freebox/nbx10g/Makefile
+ create mode 100644 board/freebox/nbx10g/board.c
+ create mode 100644 board/freebox/nbx10g/nbx_emmcboot.c
+ create mode 100644 board/freebox/nbx10g/nbx_fbxserial.c
+ create mode 100644 board/freebox/nbx10g/nbx_fbxserial.h
+ create mode 100644 board/freebox/nbx10g/nbx_imagetag.h
+ create mode 100644 board/freebox/nbx10g/nbx_nrboot.h
+ create mode 100644 configs/mvebu_nbx_88f8040_defconfig
+ create mode 100644 include/configs/nbx10g.h
+
+-- 
+2.53.0
+
