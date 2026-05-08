@@ -4,80 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CDCE4CD342F
-	for <u-boot@archiver.kernel.org>; Fri,  8 May 2026 06:38:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C318CD3436
+	for <u-boot@archiver.kernel.org>; Fri,  8 May 2026 07:28:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0FF6384A20;
-	Fri,  8 May 2026 08:38:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id A69D784AF6;
+	Fri,  8 May 2026 09:28:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="UJ3cKbP3";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="LbBcv1UF";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="kvM7fP1B";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0298784A37; Fri,  8 May 2026 08:38:06 +0200 (CEST)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
+ id 9247584B56; Fri,  8 May 2026 09:28:25 +0200 (CEST)
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B46F7849E0
- for <u-boot@lists.denx.de>; Fri,  8 May 2026 08:38:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4F01384AB3
+ for <u-boot@lists.denx.de>; Fri,  8 May 2026 09:28:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=stefan.roese@mailbox.org
-Received: from smtp1.mailbox.org (smtp1.mailbox.org
- [IPv6:2001:67c:2050:b231:465::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4gBfZL2GLTz9tGG;
- Fri,  8 May 2026 08:38:02 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1778222282;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=44aDehuh91CE5ccoLrD3qqu231u7YHBlJNybg2kbERM=;
- b=UJ3cKbP3VEeokiTEmGOKllzvch0AAG3dUOlrwCEocc13gaTRKGhsjJQgj+sLrm8/C8oY+8
- k4OCvA9LFO+BP1YWUot64DsOQAkuCW9lXoULLLhKBa/Uy7mov/EKAiffB8aBJ04FMg44q2
- F3Poxx803+cyte+eTfj0izg+RbW6RL8oR3V6ic+ZwoOEbGFn+tVQzmI0FlwYttrpI6a+Ra
- jMgvU/8OidCyU43w2McCrJ3SFxq8lexf6H6qRCPKn8A4P88Yj0v7QXkTiti0Xo6CpBIBs9
- NKEPSLIGEIrbj8ml7hRntUikRVLD4A285m7m/Zatgr8ydv09SZiFtzdevTq7nA==
-Authentication-Results: outgoing_mbo_mout;
- dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=LbBcv1UF;
- spf=pass (outgoing_mbo_mout: domain of stefan.roese@mailbox.org designates
- 2001:67c:2050:b231:465::1 as permitted sender)
- smtp.mailfrom=stefan.roese@mailbox.org
-Message-ID: <a4340687-d970-43d6-b6b7-751cb0b478ff@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1778222280;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=44aDehuh91CE5ccoLrD3qqu231u7YHBlJNybg2kbERM=;
- b=LbBcv1UFmOE3lJkXAz4nSUfmg9GGN/ApkhWtpXs+2XaojYhWodAk/gKGi9B8SmWY9bg1S8
- 2AGGlqZiK9PVGCAar2PPfyK2ZtclYDJXm9xv1U+7IAY7kgW1sOag5M+yHOhNTSJAQJjkya
- h/nknSYVswReG8UAb4fAa3/9M8GqGRZ+5oE4tCOZ/gl+nCVFTYXiuAFuor3DmOpQLMVd4J
- gVH1kx06DLBo4yBtzytZxwfFQs3bhoIs/0WORemwnSMFui/xD5OHA6eKOEEUEVZpBr1PZr
- i1DbKzY0DMmtRlkdtuiF8Iqt9rWEJSsPDEF/DX+qGwMCCr9VZokGWzT7Bsr2AQ==
-Date: Fri, 8 May 2026 08:37:58 +0200
+ spf=pass smtp.mailfrom=sumit.garg@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by tor.source.kernel.org (Postfix) with ESMTP id 1404360252;
+ Fri,  8 May 2026 07:28:22 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 73B84C2BCB0;
+ Fri,  8 May 2026 07:28:17 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1778225301;
+ bh=FxJ9BmPhsc3qbDyU+Pzfz9Fn1Uq18pBQ+/fXW29rTOQ=;
+ h=From:To:Cc:Subject:Date:From;
+ b=kvM7fP1BCq7ls4azK/LnWuLBn1fQaSooIu0ttKDasI7roHXQTc0dWL58gKD1Nujg7
+ JmbU0AMUospxHHT34Pb2g0j4jXSZ1sY8vJJbvEXmQBXvHa94v1wqBN23N5IGqcOQ4n
+ 2lYeUkYgmGP0INkOv7cIUX1cCqZGiFEUue688PFvj/jPSN0/CRXX8GJqibiJq+l/zd
+ V+VNIdziJLcY65WVwS1LAxAofStZeMD0+v9F2M8SfZmQtdV+EFa65xYTvjC2rzW6oO
+ e7qhhm0ReBlsNi7qWZCafGOwgQH6ID+YSPrYt/XrheBtnPaKyV9HWCQ/wsSrf0jPpi
+ I6uDCofx+sboQ==
+From: Sumit Garg <sumit.garg@kernel.org>
+To: u-boot@lists.denx.de,
+	u-boot-qcom@groups.io
+Cc: trini@konsulko.com, casey.connolly@linaro.org, neil.armstrong@linaro.org,
+ ilias.apalodimas@linaro.org, varadarajan.narayanan@oss.qualcomm.com,
+ aswin.murugan@oss.qualcomm.com, balaji.selvanathan@oss.qualcomm.com,
+ Sumit Garg <sumit.garg@oss.qualcomm.com>
+Subject: [PATCH] armv8: mmu: Extend mmu_map_region() to allow uncached mappings
+Date: Fri,  8 May 2026 12:58:06 +0530
+Message-ID: <20260508072806.2421694-1-sumit.garg@kernel.org>
+X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
-Subject: Re: [PATCH 3/3] ata: sata_mv: Staticize and constify driver ops
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-Cc: Andrew Goodbody <andrew.goodbody@linaro.org>, Tom Rini <trini@konsulko.com>
-References: <20260507164225.59325-1-marek.vasut+renesas@mailbox.org>
- <20260507164225.59325-3-marek.vasut+renesas@mailbox.org>
-Content-Language: en-US
-From: Stefan Roese <stefan.roese@mailbox.org>
-In-Reply-To: <20260507164225.59325-3-marek.vasut+renesas@mailbox.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: 83irg4ra8s1zokjh3xppexkfhw4zb66y
-X-MBO-RS-ID: 861cfb56421b99ad98b
-X-Rspamd-Queue-Id: 4gBfZL2GLTz9tGG
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,37 +69,81 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 5/7/26 18:42, Marek Vasut wrote:
-> Set the ops structure as static const. The structure is not accessible
-> from outside of this driver and is not going to be modified at runtime.
-> 
-> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
-> ---
-> Cc: Andrew Goodbody <andrew.goodbody@linaro.org>
-> Cc: Stefan Roese <stefan.roese@mailbox.org>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: u-boot@lists.denx.de
+From: Sumit Garg <sumit.garg@oss.qualcomm.com>
 
-Reviewed-by: Stefan Roese <stefan.roese@mailbox.org>
+On Qcom platforms, cmd-db region is required to be mapped as uncached
+region especially when executing at EL2. Otherwise an xPU violation
+can be triggered due to cache operations as descibed by a similar fix
+for the kernel here:
 
-Thanks,
-Stefan
+Commit f9bb896eab22 ("soc: qcom: cmd-db: Map shared memory as WC, not WB")
 
-> ---
->   drivers/ata/sata_mv.c | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/drivers/ata/sata_mv.c b/drivers/ata/sata_mv.c
-> index b8c73b4a9dd..3fb1a245698 100644
-> --- a/drivers/ata/sata_mv.c
-> +++ b/drivers/ata/sata_mv.c
-> @@ -1122,7 +1122,7 @@ static const struct udevice_id sata_mv_ids[] = {
->   	{ }
->   };
->   
-> -struct ahci_ops sata_mv_ahci_ops = {
-> +static const struct ahci_ops sata_mv_ahci_ops = {
->   	.scan = sata_mv_scan,
->   };
->   
+So, let's map CMD-DB region as uncached to avoid any issues while
+booting U-Boot in EL2 mode.
+
+Fixes: a9cbf76e4dd3 ("soc: qcom: cmd-db: map cmd-db region")
+Signed-off-by: Sumit Garg <sumit.garg@oss.qualcomm.com>
+---
+ arch/arm/cpu/armv8/cache_v8.c | 11 ++++++++---
+ arch/arm/include/asm/system.h |  3 ++-
+ drivers/soc/qcom/cmd-db.c     |  2 +-
+ 3 files changed, 11 insertions(+), 5 deletions(-)
+
+diff --git a/arch/arm/cpu/armv8/cache_v8.c b/arch/arm/cpu/armv8/cache_v8.c
+index 39479df7b21..05e90e1eb32 100644
+--- a/arch/arm/cpu/armv8/cache_v8.c
++++ b/arch/arm/cpu/armv8/cache_v8.c
+@@ -388,13 +388,18 @@ static void map_range(u64 virt, u64 phys, u64 size, int level,
+ 	}
+ }
+ 
+-void mmu_map_region(phys_addr_t addr, u64 size, bool emergency)
++void mmu_map_region(phys_addr_t addr, u64 size, bool cached, bool emergency)
+ {
+ 	u64 va_bits;
+ 	int level = 0;
+-	u64 attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) | PTE_BLOCK_INNER_SHARE;
++	u64 attrs;
+ 
+-	attrs |= PTE_TYPE_BLOCK | PTE_BLOCK_AF;
++	if (cached)
++		attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL);
++	else
++		attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL_NC);
++
++	attrs |= PTE_BLOCK_INNER_SHARE | PTE_TYPE_BLOCK | PTE_BLOCK_AF;
+ 
+ 	get_tcr(NULL, &va_bits);
+ 	if (va_bits < 39)
+diff --git a/arch/arm/include/asm/system.h b/arch/arm/include/asm/system.h
+index 5ed6833c155..52ab86112fb 100644
+--- a/arch/arm/include/asm/system.h
++++ b/arch/arm/include/asm/system.h
+@@ -306,9 +306,10 @@ void flush_l3_cache(void);
+  *
+  * @start: Start address of the region
+  * @size: Size of the region
++ * @cached: Map memory as cacheable or not
+  * @emerg: Also map the region in the emergency table
+  */
+-void mmu_map_region(phys_addr_t start, u64 size, bool emerg);
++void mmu_map_region(phys_addr_t start, u64 size, bool cached, bool emerg);
+ 
+ /**
+  * mmu_change_region_attr() - change a mapped region attributes
+diff --git a/drivers/soc/qcom/cmd-db.c b/drivers/soc/qcom/cmd-db.c
+index d0a6047b8a6..61e15783123 100644
+--- a/drivers/soc/qcom/cmd-db.c
++++ b/drivers/soc/qcom/cmd-db.c
+@@ -248,7 +248,7 @@ static int cmd_db_bind(struct udevice *dev)
+ 	}
+ 
+ 	/* On SM8550/SM8650 and newer SoCs cmd-db might not be mapped */
+-	mmu_map_region((phys_addr_t)base, (phys_size_t)size, false);
++	mmu_map_region((phys_addr_t)base, (phys_size_t)size, false, false);
+ 
+ 	cmd_db_header = base;
+ 	if (!cmd_db_magic_matches(cmd_db_header)) {
+-- 
+2.51.0
 
