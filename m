@@ -4,57 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96833CD3436
-	for <u-boot@archiver.kernel.org>; Fri,  8 May 2026 08:48:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2FC49CD342F
+	for <u-boot@archiver.kernel.org>; Fri,  8 May 2026 08:49:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0FF1084C19;
+	by phobos.denx.de (Postfix) with ESMTP id 4E28284C63;
 	Fri,  8 May 2026 10:48:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=ew.tq-group.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=ew.tq-group.com header.i=@ew.tq-group.com header.b="lbrqPHqv";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=ew.tq-group.com header.i=@ew.tq-group.com header.b="Xcp7cvnE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A185D84BD1; Fri,  8 May 2026 10:48:53 +0200 (CEST)
+ id 2376184BD1; Fri,  8 May 2026 10:48:54 +0200 (CEST)
 Received: from www537.your-server.de (www537.your-server.de [188.40.3.216])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8B4FF84BD1
- for <u-boot@lists.denx.de>; Fri,  8 May 2026 10:48:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1C1B384C19
+ for <u-boot@lists.denx.de>; Fri,  8 May 2026 10:48:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=ew.tq-group.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=Alexander.Feilke@ew.tq-group.com
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=ew.tq-group.com; s=default2602; h=Content-Transfer-Encoding:MIME-Version:
- Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References;
- bh=nRk4cVd3UquyUfZg8hTFZqJrVOIh7IXqX9P6EH2tehI=; b=lbrqPHqv0hvVqJnM/9i52/6hJc
- wZFVMo4i7+zsHVTmjmxI5hTFtcxrcbdwWUJON0fOKV1+7eEMJj11rpmNencZ6zU/Fzvq2ZUnpytOW
- MDzfqlPBOUDNvwV3Mw+eiLvYq+/vZguniOBPRNh2FFY9H7JVgUSm0kNOPnspbGt+ZKCURiKS0LZMG
- ZiENPPB5t4+XEfutCmfw8eAM/C2CI4I5e+pNlqfnMYf51uPY/89jYBPkeaD3CmQZ3EhI0cENQL7Dm
- 8KJ7bjhGaUxxkVylpAF88A7+1EYZO0B2lDXh55p7KNycesdDP7ckBQQ7nGJZzHAu+xanN8Jp6zxJU
- NPuDglrA==;
+ References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
+ Content-Type:Content-ID:Content-Description:Resent-Date:Resent-From:
+ Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID;
+ bh=FmW6PIlps73Dbn9zGjS17eDeKI1tz1mfkcXyQa60sJg=; b=Xcp7cvnEQUqdPl17N8kXkPTOBI
+ tMwqEqNI4EqEbyZnrW4qXNm1iBC+FtCuPymEbOm4TDGA8zDEe/aOKIJbMcD3dzW3GgJ8Yg0SRjpcD
+ MGrkF8tQsElKCGlYX8cIQng99tistsQcbt95OPDiEIorKU9j1lYn2FYBa/RfL85LohnDy61WUVnw/
+ vPrVmv7DOvRWnDg1GSFChxS/e1Gp52JJuiQX8N+QyDu+MfQyKCnoqdX7ydivBbzQZjooc404ZwGlR
+ bYhbQEh51jQ69D9J4tisi0rOKqgTg7sY+AQO5yuzRnIt/0KkN2DTg39q+l/XoHDRc7KaNLp1ltitR
+ eyyZShcw==;
 Received: from sslproxy03.your-server.de ([88.198.220.132])
  by www537.your-server.de with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
  (Exim 4.96.2) (envelope-from <Alexander.Feilke@ew.tq-group.com>)
- id 1wLGt8-0009ZR-1N; Fri, 08 May 2026 10:48:50 +0200
+ id 1wLGt9-0009ZZ-0P; Fri, 08 May 2026 10:48:51 +0200
 Received: from localhost ([127.0.0.1])
  by sslproxy03.your-server.de with esmtpsa (TLS1.3) tls TLS_AES_256_GCM_SHA384
  (Exim 4.96) (envelope-from <Alexander.Feilke@ew.tq-group.com>)
- id 1wLGt7-000KsG-1i; Fri, 08 May 2026 10:48:50 +0200
+ id 1wLGt8-000KsG-0i; Fri, 08 May 2026 10:48:50 +0200
 From: Alexander Feilke <Alexander.Feilke@ew.tq-group.com>
 To: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@ew.tq-group.com,
  u-boot@lists.denx.de
-Cc: Alexander Feilke <alexander.feilke@ew.tq-group.com>,
+Cc: Nora Schiffer <nora.schiffer@ew.tq-group.com>,
  Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>,
  Alexander Feilke <Alexander.Feilke@ew.tq-group.com>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH 0/6] TQMa7 eeprom sysinfo driver
-Date: Fri,  8 May 2026 10:48:28 +0200
-Message-Id: <20260508084834.45637-1-Alexander.Feilke@ew.tq-group.com>
+ Tom Rini <trini@konsulko.com>,
+ Alexander Feilke <alexander.feilke@ew.tq-group.com>
+Subject: [PATCH 2/6] sysinfo: add sysinfo_get_and_detect() helper
+Date: Fri,  8 May 2026 10:48:30 +0200
+Message-Id: <20260508084834.45637-3-Alexander.Feilke@ew.tq-group.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20260508084834.45637-1-Alexander.Feilke@ew.tq-group.com>
+References: <20260508084834.45637-1-Alexander.Feilke@ew.tq-group.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -73,43 +76,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Alexander Feilke <alexander.feilke@ew.tq-group.com>
+From: Nora Schiffer <nora.schiffer@ew.tq-group.com>
 
-Integrates a new tq_eeprom sysinfo driver that reads & prints board
-information during boot.
+sysinfo_detect() is commonly called after sysinfo_get(). Make the API a
+bit more convenient to use by introducing a helper.
 
-This is the basis for additional patches that will be sent along with
-updates of the TQMa6 in the near future, including support for multiple
-indexed sysinfo devices and VARD (variant detection) data for newer TQ SOM's.
+Signed-off-by: Nora Schiffer <nora.schiffer@ew.tq-group.com>
+Signed-off-by: Alexander Feilke <alexander.feilke@ew.tq-group.com>
+---
+ include/sysinfo.h | 21 +++++++++++++++++++++
+ 1 file changed, 21 insertions(+)
 
-Alexander Feilke (1):
-  boards: tqma7: integrate sysinfo_tq_eeprom driver
-
-Nora Schiffer (5):
-  sysinfo: uclass: use sysinfo_priv size for per_device_auto
-  sysinfo: add sysinfo_get_and_detect() helper
-  sysinfo: tq_eeprom: new driver
-  sysinfo: add IDs for RAM size and variant
-  board: tq: common: add sysinfo helpers
-
- arch/arm/dts/imx7s-tqma7-u-boot.dtsi |   7 +
- board/tq/common/Kconfig              |  27 ++++
- board/tq/common/Makefile             |   4 +
- board/tq/common/tq_sysinfo.c         |  32 ++++
- board/tq/common/tq_sysinfo.h         |  18 +++
- board/tq/tqma7/tqma7.c               |   4 +
- drivers/sysinfo/Kconfig              |   8 +
- drivers/sysinfo/Makefile             |   1 +
- drivers/sysinfo/sysinfo-uclass.c     |   2 +-
- drivers/sysinfo/tq_eeprom.c          | 223 +++++++++++++++++++++++++++
- include/sysinfo.h                    |  24 +++
- include/sysinfo/tq_eeprom.h          |  24 +++
- 12 files changed, 373 insertions(+), 1 deletion(-)
- create mode 100644 board/tq/common/tq_sysinfo.c
- create mode 100644 board/tq/common/tq_sysinfo.h
- create mode 100644 drivers/sysinfo/tq_eeprom.c
- create mode 100644 include/sysinfo/tq_eeprom.h
-
+diff --git a/include/sysinfo.h b/include/sysinfo.h
+index 54eb64a204a..026ea393730 100644
+--- a/include/sysinfo.h
++++ b/include/sysinfo.h
+@@ -446,3 +446,24 @@ static inline int sysinfo_get_fit_loadable(struct udevice *dev, int index,
+ 
+ #endif
+ #endif
++
++/**
++ * sysinfo_get_and_detect() - Return the sysinfo device for the sysinfo in
++ * question and runs its detect operation.
++ * @devp: Pointer to structure to receive the sysinfo device.
++ *
++ * Since there can only be at most one sysinfo instance, the API can supply a
++ * function that returns the unique device. This is especially useful for use
++ * in sysinfo files.
++ *
++ * Return: 0 if OK, -ve on error.
++ */
++static inline int sysinfo_get_and_detect(struct udevice **devp)
++{
++	int ret = sysinfo_get(devp);
++
++	if (!ret)
++		ret = sysinfo_detect(*devp);
++
++	return ret;
++}
 -- 
 2.34.1
 
