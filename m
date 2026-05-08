@@ -4,91 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5782DCD3445
-	for <u-boot@archiver.kernel.org>; Fri,  8 May 2026 15:28:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98291CD3445
+	for <u-boot@archiver.kernel.org>; Fri,  8 May 2026 15:28:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8486884D1B;
-	Fri,  8 May 2026 17:28:11 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C94CE84D1F;
+	Fri,  8 May 2026 17:28:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="CSg7QiJn";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="N7CWaL4/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9140B84CF2; Fri,  8 May 2026 17:28:10 +0200 (CEST)
-Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
- [IPv6:2a00:1450:4864:20::62a])
+ id 5CEF384D23; Fri,  8 May 2026 17:28:13 +0200 (CEST)
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
+ [IPv6:2a00:1450:4864:20::62e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ADA5884D1A
- for <u-boot@lists.denx.de>; Fri,  8 May 2026 17:28:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 689A584CF2
+ for <u-boot@lists.denx.de>; Fri,  8 May 2026 17:28:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-bc3582acc23so324555566b.3
- for <u-boot@lists.denx.de>; Fri, 08 May 2026 08:28:08 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1778254088; cv=none;
+Received: by mail-ej1-x62e.google.com with SMTP id
+ a640c23a62f3a-ba922426c5cso369649566b.3
+ for <u-boot@lists.denx.de>; Fri, 08 May 2026 08:28:11 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1778254091; cv=none;
  d=google.com; s=arc-20240605;
- b=EWIPFrijf+fkyMMsaDMvnqyzFx0l9ADN6aE6UIDxc0jIb/xGaLJMubqpTdYH4VHGMd
- DS+uYbRb9eWN3drIO+8kQojF9JzXn1QDkLStW4UPqVjBGQ+F/Ai9UTLhgDeZQJm7mqce
- I88vJbXdt1T5xLu7cufV6j5Rnfn4Oj4Vw8SmZwYq0NlYyk3JfzdlzWOYDeBU4DWTBzBl
- Wc58q51PjV95x5TIyGFvrtrTtt5fbhW89oBMMzGuHGH6K/2RzkwU6YL3aFM8BD41jy4t
- tG3rkOm3OCeG46/W7JZGK5qJpuIJ/qry+zVsT/G911QV3iY3iwq+pO2eLmtZiI2VfN6M
- AXOg==
+ b=UzJ3k7J30y1L6ztTsoc/YIxLPr8m7fGXKi4clzWI0Q8OUI4YB7hM0wmuNId42YW9m5
+ g31aZv3yXb7+gFlPpvI+QpCpboUQDN8z0/OPZKeuSu6+9eiw0gsFeu3xJVh8SPs7RENH
+ 5/R6SljQMfENNrU1Y3J7BKsuxYum+ZeNK1Pshr6Q2o4E2Wu1oSF/y+ymQqCqUywRsa2n
+ 7YaxhLBGrNj19CTibvRlUTDCTNd9xJt+aS6NJ+Z242+fqe4bPHV2Pmw6G+zIaVJIZas3
+ BET6JNJFRJ1fxtMD9Fxwce0Q/1fBqAXxq+hc6ib6XRPfszN76eg33jehv1exLhEZF0Jy
+ IF9g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=MgM9E8q0QjRFXnv1uVG2ZHDqx3ZdbrG8Z9dVt5pPxOY=;
+ bh=qrk0ES76V9wE0fgFD4SSim3Axp8T/rJqhzqYQNA3U7Y=;
  fh=cXLM2xWHT98EMji+CvqvFHfrMeoAXhLsVQYbWE9nUP8=;
- b=lpQeMTb+BwfjbhYmZZGirJ2myyQ20lkBL60OMY1CpgBtp3Q3vqPfVk68fDeqVhTwWN
- 1Q5har+Kkn7IVGclgomhvdtSY6nTyP6xdYwj9pZH+H0mfZOKaMgA7ZJr5ND7AGpUN8Vx
- +fj5Q3L6K5gdULCAlYb6J/QLQSv0cFRKfmxWOoGoDaGpajwNDx9k2FNath7T6Dl5FQdi
- UWE1rfcWcFoHPdLkTSKFWvjsii46b+w3bQ2QkcBrYLVuvOiqo5A8B6K82MACORsH+PYi
- FWPfGU5w/XPt33mWTnq9rguIdrBQsleqOi7rcqaYEmv5qscKOnU9bV+Tk125X0/43HuB
- H+pA==; darn=lists.denx.de
+ b=L2NGR8Mt9IfrEars7bPq5I03Qz/z0F4kjpbBRwHBkx9ViLDRku0YzOpbwUGxplO1m/
+ rHLqXO129+k9VFOP8YMnLFg92pGlB0O4XCuP72Z+k70nRG3FGCkLa4KNfgyXFsALw1Bt
+ sulwKx9Tnts1Aj05+6Ml7TZEHtSleNbzVmifq+gli02eQr5teZQp/zJOuv7l+pl7lS7n
+ pLzUp52rm8FLhMiPiqnmC9Ybww/Zsx3X6D34rYvbi3uX4b740RyjOVyWDcfheReF8uoz
+ HeruziQ1R22Uzhj43Gs0tC/R5qKJAwLswl8MLG5PFuQ/dKPZ/lcul8gYqOQFc3sMdHq+
+ JoRg==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1778254088; x=1778858888; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1778254091; x=1778858891; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=MgM9E8q0QjRFXnv1uVG2ZHDqx3ZdbrG8Z9dVt5pPxOY=;
- b=CSg7QiJny/ygUoJwUid1t0uO+pxw5Ap62bcda1SWe77TUDiZhj/Hk9PwhKv/Lq+ga7
- JebOmQzUrla+ouaGbMV22p54935YFjRzY8GmzyH53r5rRfoPNlanrAItG6i/KhRtm722
- xLXqHTygGTJd3U9VU25yR3xJQkPjl1n0xDSeU=
+ bh=qrk0ES76V9wE0fgFD4SSim3Axp8T/rJqhzqYQNA3U7Y=;
+ b=N7CWaL4/OS720mgiANQUk3Ij2Gki5vNlRNUSHC4ZmN2HmXy1FaSrKZcNHqP3R3EyvL
+ iLC8Rx/jBQGVANE5Sr/LHVlCJP6upu7/w5jKkrSPxWXoo6F0y75SvZrbBSm9gQgGMH01
+ 1pgjz4UsYk+SQxOkH7NeKxG+hAbDpDATN9mZU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778254088; x=1778858888;
+ d=1e100.net; s=20251104; t=1778254091; x=1778858891;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=MgM9E8q0QjRFXnv1uVG2ZHDqx3ZdbrG8Z9dVt5pPxOY=;
- b=miDlTAFkF52t8O+R2aiqM/tB8RpWL3dF0peVDWIRJG+i7dGB4i+JA5htN7Fnj+fxo1
- u08IOOFTbTSZ3MgjaHUdAqyYgOEvzUyJ30Zgi+FtqBjkqxFTObER1eLLElVqD/3wvQSl
- Ac3EEBuARQffx2zxh2pBjU5wtDogFXS+4ocRovYfoDqYZ+YinMll98pvpmOCHVGPIgE+
- AksBG6EHwHHyHPX9GdU/ubXDRZk/MJ9cICicQfg7sQh+lu5dy3YZnp+ILulB9u4AvBze
- 627xbHPIBWz2+NGXGFLSfUkdRfi0naYukx/7lQLv8iIV61OPtCxeEHWNYaUDGrYYgrz/
- t20A==
-X-Gm-Message-State: AOJu0YyAk5fUx73NoV9bNfyTgkN5nwj6JtVDvU1nnCpDHYiUzE8WjnLN
- FW4MdE8Cfu3/saY3xGr9G8610eW3x0Yd7YdO/yn6nvjFmq9y7o1705uMt/5AQECxnVRjovBrkj+
- ROIO5MtJrFahI55NQjIVF2mjNXAFeDzyLbZgUr1OI
-X-Gm-Gg: AeBDieuf8LUjvPvufY0or5YFTXs7g4YX1U3RVKOcMaFcp1k8LwtMS+8QVTXlvK5wvds
- dI/fFiofPyq1ssG5jj/Wc7umYwVMJmQ8yTtEGG2M3/uVALrU2SbngQR6H0lQrlB/O7DQ70HmiVT
- fHyX6R0kPaCBqGEiv3llEySVTmOsBI5WOwM7K2duCL/lVGR2EZr1MEEi+MK9BLBMvf0nTg34XuT
- YOYPsT2ATioIe2DleEEBiDecq3maSl+wJKVpfSEXH3Bqj2OoM3RTZvQe5WD2Q/qaiWexgoC4PuF
- 2pz5CSkI4Ka7as4V
-X-Received: by 2002:a17:907:1b1c:b0:ba1:1181:b773 with SMTP id
- a640c23a62f3a-bc56b028f46mr781520466b.10.1778254087970; Fri, 08 May 2026
- 08:28:07 -0700 (PDT)
+ bh=qrk0ES76V9wE0fgFD4SSim3Axp8T/rJqhzqYQNA3U7Y=;
+ b=V1YbK8wd2Ny9+0gt5PrFF88ATZd7wCmrueDgulh/ar9s6fNOFbQcfOSt9VRI2JeqxW
+ 9qQiE3+7Xa62MLUmQecxRTal6gosTqi140Y5QF0Sl7YykdEgtr2z7P3HBt4xWflwmzUB
+ vHzhXOhWrH9nH0R1jkseHbMFUDvy9t+RRJNf7ePGJkY/fxRKt8SvE6+JCuN+sv40F5V8
+ nT0TNAAtFsFT6lBmzk3MF/68snJOZG+AbOFez5dg/YaJzuBF4KcvV5UE5KvrFtF7ng43
+ 6CUIz3HwlkHh2XbnTWSu29da9v8mojHG4Ja8CVCkmQFgsaScnC1cJ8CZ7rgD1QvIgcss
+ CJEg==
+X-Gm-Message-State: AOJu0Yz5DxhLla6Im9z0HKDduTQD34VVllIvFZ4xSg0sI9zSEyNkZLZx
+ sLhR8Rp/n1lR4yf+yxH9/s4UlkzJIj5MHsbpF8huWKca+cfuyPIt5EjFnaytf/fIdpW1vBisSfa
+ IDqHVSe0wB+rClG7nf2U6K2RoCVYFgrAFZr5u1HYt
+X-Gm-Gg: AeBDieuinEmTD1qiKk5VaeXrSrSSQxu9qBkXEI31C1ALfljSeQVrn+MRFtOh2Qx5XPR
+ sZxaRKK+TI2v4Wi9RzyV8PbnV9TaWM5mMeJjImU2k0tcTMrEWKCScA3F4hx0NV0NQ+UZz8hytF6
+ RoY+vpqpC+M8B0S+O8O40lyjlf7tnO5OfwLAk1zVZnAWh60w6aj//BKTsNeGSsyryjP4gzWVxT/
+ 2wd9GYhlWucIg3p1UKWh7havGJLenGIYXd/kLYW4/TIIcGCHpKPLviOTu2IMiCHV7N+F5rqYN8d
+ I8EMPw==
+X-Received: by 2002:a17:906:9f8a:b0:ba0:fd75:9c58 with SMTP id
+ a640c23a62f3a-bc56d717ed5mr804201866b.32.1778254090655; Fri, 08 May 2026
+ 08:28:10 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260507092843.358908-1-jens.wiklander@linaro.org>
- <20260507092843.358908-9-jens.wiklander@linaro.org>
-In-Reply-To: <20260507092843.358908-9-jens.wiklander@linaro.org>
+ <20260507092843.358908-10-jens.wiklander@linaro.org>
+In-Reply-To: <20260507092843.358908-10-jens.wiklander@linaro.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 8 May 2026 09:26:16 -0600
-X-Gm-Features: AVHnY4LehedUUDyL0rM428iY2Lbnf6SNJNbM-e9NLu98DKdBArGpzEhXk-sluHM
-Message-ID: <CAFLszTjSnfY=x64Lits80mkFVCdFXVSfzdCQQLYC06yiXk4o_g@mail.gmail.com>
-Subject: Re: [RFC PATCH v2 08/64] usb: dwc3: import from kernel v4.5
+Date: Fri, 8 May 2026 09:26:19 -0600
+X-Gm-Features: AVHnY4IeZwaY3p-RJujQkf6gZ1r9jbwml9NXyE_5eFnBjryjKXfTahuJBITSB5k
+Message-ID: <CAFLszTjDJ8_7pFKQGq=6NkEBNhY+sU70h_Ym3hLPD6jCkq8=EA@mail.gmail.com>
+Subject: Re: [RFC PATCH v2 09/64] usb: dwc3: import from kernel v4.6
 To: jens.wiklander@linaro.org
 Cc: u-boot@lists.denx.de, Marek Vasut <marex@denx.de>, 
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
@@ -127,9 +127,9 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 2026-05-07T09:27:07, Jens Wiklander <jens.wiklander@linaro.org> wrote:
-> usb: dwc3: import from kernel v4.5
+> usb: dwc3: import from kernel v4.6
 >
-> Sync Linux kernel dwc3 changes from v4.4 to v4.5.
+> Sync Linux kernel dwc3 changes from v4.5 to v4.6.
 >
 > The following files are preserved accross the import:
 > Makefile Kconfig dwc3-meson-g12a.c dwc3-meson-gxl.c dwc3-omap.c
@@ -144,30 +144,34 @@ On 2026-05-07T09:27:07, Jens Wiklander <jens.wiklander@linaro.org> wrote:
 > Note that this is a raw import and doesn't build.
 > A fixup commit at the end of the series fixes that.
 >
-> List of commits: git log --oneline v4.4..v4.5
+> List of commits: git log --oneline v4.5..v4.6
 > Commits imported:
-> c450960187f4 usb: dwc3: Fix assignment of EP transfer resources
-> 6a4290cc28be usb: dwc3: gadget: set the OTG flag in dwc3 gadget driver.
-> 5072cfc40a80 usb: dwc3: of-simple: fix build warning on !PM
-> d9261898a4b2 usb: dwc3: gadget: don't send extra ZLP
-> 95ca961c758c usb: dwc3: gadget: pass a condition to dev_WARN_ONCE()
-> 46a01427e969 usb: dwc3: trace: show request flags
-> 04c03d10e507 usb: dwc3: gadget: handle request->zero
-> b084662776be usb: dwc3: remove dwc3-qcom in favor of dwc3-of-simple
-> 16adc674d0d6 usb: dwc3: add generic OF glue layer
-> b5d335e5ea6a usb: dwc3: ep0: fix setup_packet_pending initialization
-> ac7bdcc1b3ad usb: dwc3: gadget: simplify next_request() return check
-> acc38c4970ca usb: dwc3: ep0: purge dev_dbg() calls
-> 1407bf13e3bf usb: dwc3: core: purge dev_dbg() calls
-> ec5e795cdefb usb: dwc3: gadget: purge dev_dbg() calls
-> bb423984c28e usb: dwc3: gadget: simplify dwc3_gadget_ep_queue()
+> 9772b47a4c29 usb: dwc3: gadget: Fix suspend/resume during device mode
+> e6bdf8195b4a usb: dwc3: fix memory leak of dwc->regset
+> 5c4ad318de3b usb: dwc3: core: fix PHY handling during suspend
+> 45d49cb706e5 usb: dwc3: omap: fix up error path on probe()
+> adf9a3ab90eb usb: dwc3: keystone: drop dma_mask configuration
+> 1ffb4d5cc78a usb: dwc3: pci: add ID for one more Intel Broxton platform
+> e901aa159dac usb: dwc3: gadget: fix endpoint renaming
+> ad14d4e0308a usb: dwc3: gadget: release spin lock during gadget resume
+> f59dcab17629 usb: dwc3: core: improve reset sequence
+> 33c1f638a0fe Merge tag 'clk-for-linus' of git://git.kernel.org/pub/scm/linux/kernel/git/clk/linux
+> 77966eb85e6d usb: dwc3: Validate the maximum_speed parameter
+> 7580862b3e80 usb: dwc3: Enable SuperSpeedPlus
+> 2c7f1bd9127a usb: dwc3: Update maximum_speed for SuperSpeedPlus
+> ee5cd41c9117 usb: dwc3: Update speed checks for SuperSpeedPlus
+> 1f38f88a24c8 usb: dwc3: Update register fields for SuperSpeedPlus
+> c4137a9c841e usb: dwc3: DWC_usb31 controller check
+> 71e41bbb4379 Merge 4.5-rc6 into usb-next
+> 3d755dcc20dd usb: dwc3: Remove impossible check for of_clk_get_parent_count() < 0
+> 172ad9af55d2 Merge 4.5-rc4 into usb-next
 >
 > Signed-off-by: Jens Wiklander <jens.wiklander@linaro.org>
 >
-> drivers/usb/dwc3/core.c   |   8 +-
->  drivers/usb/dwc3/core.h   |   4 +-
->  drivers/usb/dwc3/ep0.c    |  17 ++--
->  drivers/usb/dwc3/gadget.c | 204 ++++++++++++++++++++++++++++++++--------------
->  4 files changed, 157 insertions(+), 76 deletions(-)
+> drivers/usb/dwc3/core.c   | 54 ++++++++++++++++++++++++++++++++++++++++++-----
+>  drivers/usb/dwc3/core.h   | 11 +++++++++-
+>  drivers/usb/dwc3/ep0.c    |  9 +++++---
+>  drivers/usb/dwc3/gadget.c | 47 +++++++++++++++++++++++++++++++----------
+>  4 files changed, 101 insertions(+), 20 deletions(-)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
