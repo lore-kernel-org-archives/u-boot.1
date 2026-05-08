@@ -4,80 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6E86CD3436
-	for <u-boot@archiver.kernel.org>; Fri,  8 May 2026 08:52:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 642E9CD3436
+	for <u-boot@archiver.kernel.org>; Fri,  8 May 2026 08:52:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 81CFB84C0C;
-	Fri,  8 May 2026 10:52:24 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0F9AA84C3B;
+	Fri,  8 May 2026 10:52:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="GDPlXj1k";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="WjEWnhlw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8146284C86; Fri,  8 May 2026 10:52:23 +0200 (CEST)
-Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com
- [IPv6:2a00:1450:4864:20::436])
+ id DD04E84C88; Fri,  8 May 2026 10:52:24 +0200 (CEST)
+Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
+ [IPv6:2a00:1450:4864:20::332])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DE73184BD1
- for <u-boot@lists.denx.de>; Fri,  8 May 2026 10:52:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D15A084C19
+ for <u-boot@lists.denx.de>; Fri,  8 May 2026 10:52:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ernestvanhoecke@gmail.com
-Received: by mail-wr1-x436.google.com with SMTP id
- ffacd0b85a97d-43d7e23defbso1031921f8f.0
- for <u-boot@lists.denx.de>; Fri, 08 May 2026 01:52:20 -0700 (PDT)
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-48896199cbaso15742145e9.1
+ for <u-boot@lists.denx.de>; Fri, 08 May 2026 01:52:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1778230340; x=1778835140; darn=lists.denx.de;
+ d=gmail.com; s=20251104; t=1778230342; x=1778835142; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=dPxPa0AGRRwCK3DEnIxgS/iVuis0dMYIl/hFsaoXX/o=;
- b=GDPlXj1kHsxY7jiTsuzsviXCMtTZskSUnkFtTBT/XbteUDbAylc1tK7cmI7eErMaqW
- hsgmFJnyemgaB5cKg+0e/3GtotOaP0Ftx71cemJHeScwUancEJceW+NgIEGo1cIVPklp
- TqznKYJJllWjL+CkbBNGa6o3ywPWe37lDbOpJABdt972/DQ2gR6gas3TCFLwYN6I+8sW
- mqpEx9e4Buitq8yPe8tuBtpBGLxERBH99lb0v5Wt66fOSn3k0y1SLwAhzH4fZ3DPgubL
- K7UoMHvlEusPia+mbQSZg0MD0YPPTFeNqhg0Y/rNtTW6jzy1ncQTq+PHWZtV4vuDwYx3
- iAMg==
+ :reply-to; bh=fbk+yc5EOhiDleiJAb/Jjw9JRHPCsSSDSssGzJmTM3U=;
+ b=WjEWnhlwsEZ9G4IK9NnGyuY2Fiie5BIbFws2xm4JItW1G5lfmsQYJHBdCoxnRXGbKP
+ nPR9DB2qJUduM4qw1s1VwlVW8arOC9ynGaZTAzWabyGcnHfHsSxqGLHBill2GiM/jLil
+ 10GCrraa/tCWwZNsC0m8su/Qf9BwAxMKz4+vYAO+TIM3c/OhWnrf+QuEeGajJf86GaWR
+ 9IpiXZJzxVJgTvsMiK7rf2yz2bdkEqvsc6NDPaBC3AIvCUI2oRwSdXvDXJr2OAsz2eUK
+ 3EUEzhlvjK33gSTL8USd6cwvVqhb30fj9S2BL7IyKz+CAwOkoTbqZdVMJ/NR2bhkDiOg
+ +06g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778230340; x=1778835140;
+ d=1e100.net; s=20251104; t=1778230342; x=1778835142;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=dPxPa0AGRRwCK3DEnIxgS/iVuis0dMYIl/hFsaoXX/o=;
- b=YrKcvCnXcUzapYMZvtAcmW57Rb/uBumKPQ2QHJaJCwbHmHXZWfJK+CCZfjGy1uggsx
- 9PN6Bjnf1G/K/mxbxswRYEezh8jMyUFVeWEB6Lz8G+TW4dN7rkpjW4yM8soPJlsnM4Pg
- KInhVfZmPAc2ujRfKFg8FPLDSV8aZzzU7LOOm6kKlvXykCzs6+ijSU5eVyhTtuAFgdij
- JdeYe6ogv0X712O1u9g0aTh8igfZYle6gGR8iTN7dlXSc281dS7OznkgqVXSxZrMNVXy
- Hw4xDwN+z8LZG1uLjWf6bypqDAo8iGuHuAX2Cdkzqycrbu/Q+7Vevi6UisJ6g6980+fs
- Ch+w==
-X-Gm-Message-State: AOJu0Ywt9F3QCBn1LSn792yHwWpWVCDffoqB4T3dIY+/hcTBFDIhQSKY
- nIzbaGFOvTf/NvCnvOcAIA6zrzKbB/Vhj0S3aCTv2CtCL9wMWXvai5bH
-X-Gm-Gg: Acq92OE/RdDTaQeIjg4H39/g2DuvvavTEpscG658mDq/OcyB2MTbey6kxYN12R9J+Fe
- W+WG61eOAOCUUpUzGx/y3+Jnmus5ufctOCngQhAYPjJ0oHO4adFHGuoGWzk5p3Y1kQgMhnDXU2O
- +QqArdrMutNUESGw698wbfD6HkE+7xh3ikSHr8V7s5cZxTZEUqkKFAeEBxwAgsCV1xK7s4h/+5U
- jIr2maQragp6yTI27tD4X84FIq2LZfCbTFy+l+ffH4ounGQwtL3mw1yXvfaslq0s6ei2a0qDJc7
- Qr0ysrZZerEdrumNCPOcpEb7Zjgu90AR2myfsDk7jx2/9dCG1hT9OITlWFR+LAcadRTiOjHjgOC
- YvRRRw8fWRHQMTfSERYOVJhbx5N+ITrYGmWs5QYBLvvsQE5G6dQ/veS4c90nTsmW/QB9krJwbd5
- rXUFk1t14oAdLBAjbwKsLk2qZnmNTkoQwec3no4nbRkxc7Zjct07q09dv9zSOGYHxSQJ6vskmL9
- ayYD/VCN4ikmzeaBjKCFvpaxGk=
-X-Received: by 2002:a5d:5f90:0:b0:448:7049:a6c9 with SMTP id
- ffacd0b85a97d-4515b056c3emr18569357f8f.5.1778230340151; 
- Fri, 08 May 2026 01:52:20 -0700 (PDT)
+ bh=fbk+yc5EOhiDleiJAb/Jjw9JRHPCsSSDSssGzJmTM3U=;
+ b=hT/8Hp2mgHQ7INKgblEzhl2H0nketM5wm4028yhuE0XrgfPjAcIbWWVHyaqZVicS/2
+ G0lyBgkz45zAQVXRCnw+rEyzZgOx/nAZGjiHcDNdsm04Kl/LdjogErzLk9jgFqGvtSd3
+ T3upDRUl4GxagQv1nlaQw5w0cLD3dORo9NYnEA586YxQaewyBuyroYi9g2Fyx+W3uFRo
+ usr4uBnBW7TXEiX771GoiCwDDYPNJJ+odPO4DtUOl5PPyWorlxXf6gNwgOfQ0dJYCYxJ
+ Xi8FyfBFQaQRaA2Ydq+zj1qAmXQTfZesoo8ohZPJe8647sau8PEp+bebez3EXn8dvUo1
+ h2Bw==
+X-Gm-Message-State: AOJu0YycKfgDkdpbsmlXnZwlQ2OKRXEVsY5jXPthWWshJmjda5PIl7R1
+ QqSCvhUBMoCESJHcKQvI2LPm9k78reNORepiqI3ceeXCRE9XWuaNRt+x
+X-Gm-Gg: Acq92OHmAyvoIdHirHOsb1KfRm1aMalX1P6BYNMfXzRSafaG4W2eR57C7I2wTpV6UpW
+ GHN4C1SdJQBeLRTobPWtvvV3LJMc1BkyQY6nWBM5aiLZIDCmsRX5d5eHEqpoEqKsmT9sEXxraf9
+ lv+1MJWmBg2pepzfsAVQqihB1dLsxbEMT9pwXJbSAJG8N2dDzljlznVLSuNKQGuHBj4XoucgD2k
+ QlGJGLtbAK0LhO11UE1tKKD5TLPUvfZJh3RVutlhg6xIemJFbMPqG7V6EGW1xJiG/inhcv9qjGd
+ u7O/iSkvMnXGYWLIFuq0z/iL60ddRE8yi18v2Ue4CzFGNpffUaamQHGHTFb1nLehcIcIIOjgHB3
+ V7LuqJ0clGL4q27vHe0HUorPjN7MGldVnVm9eKDqphpIB46meCjxg/mpHND1hpiXJGSvZO/q0Lb
+ 8aAt2AXzo0SLQ4MRXRREmM2pqxMn4yly7emRFRG+sDS4FAkt0QUbqnLvkzhNvUqBGaYmSOx07sY
+ tGw0QhW6tlT+8AOAF8d4BhlM6Zxy4sLRcN7lg==
+X-Received: by 2002:a05:6000:61e:b0:441:2335:ac3f with SMTP id
+ ffacd0b85a97d-4515d4d114fmr18921970f8f.31.1778230342070; 
+ Fri, 08 May 2026 01:52:22 -0700 (PDT)
 Received: from ernest.hoecke-nb
  (248.201.173.83.static.wline.lns.sme.cust.swisscom.ch. [83.173.201.248])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-4548e6a5b65sm2676777f8f.8.2026.05.08.01.52.18
+ ffacd0b85a97d-4548e6a5b65sm2676777f8f.8.2026.05.08.01.52.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 08 May 2026 01:52:19 -0700 (PDT)
+ Fri, 08 May 2026 01:52:21 -0700 (PDT)
 From: Ernest Van Hoecke <ernestvanhoecke@gmail.com>
-Date: Fri, 08 May 2026 10:52:10 +0200
-Subject: [PATCH 2/4] board: toradex: verdin-am62: add missing tifs-rm-cfg.yaml
+Date: Fri, 08 May 2026 10:52:12 +0200
+Subject: [PATCH 4/4] arm: dts: k3: k3-am62*5-verdin-binman: Enable
+ tifs-rm-cfg in binman
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260508-v1-update-rm-cfg-v1-2-ec9d033f8ec1@toradex.com>
+Message-Id: <20260508-v1-update-rm-cfg-v1-4-ec9d033f8ec1@toradex.com>
 References: <20260508-v1-update-rm-cfg-v1-0-ec9d033f8ec1@toradex.com>
 In-Reply-To: <20260508-v1-update-rm-cfg-v1-0-ec9d033f8ec1@toradex.com>
 To: u-boot@lists.denx.de, Sparsh Kumar <sparsh-kumar@ti.com>, 
@@ -107,897 +108,53 @@ X-Virus-Status: Clean
 
 From: Ernest Van Hoecke <ernest.vanhoecke@toradex.com>
 
-Add the previously missing TIFS RM configuration, generated with
-V12.00.00 of k3-resource-partition.
+Add rcfg_yaml_tifs node overrides to use tifs-rm-cfg.yaml instead of
+the default rm-cfg.yaml for Verdin AM62 and Verdin AM62P platforms.
 
-This file is exactly the same as board/ti/am62x/tifs-rm-cfg.yaml.
+This enables binman to include the tifs-rm-cfg.yaml configuration when
+building tiboot3 images in line with other K3 devices that already use
+tifs-rm-cfg.yaml.
 
-rm-cfg.yaml and tifs-rm-cfg.yaml need to be in sync, this was already
-taken care of by TI. [1]
+This follows the changes done by TI to their am62x/am62px platforms. [1]
 
-It was verified that rm-cfg.yaml also remained unchanged with V12.00.00
-of the tool.
-
-[1] commit 64ebab10b5ea ("toradex: verdin-am62: rm-cfg: Update rm-cfg to reflect new resource reservation")
+[1] commit 41814276f03e ("arm: dts: k3: am62x/am62px: Enable tifs-rm-cfg in binman")
 
 Signed-off-by: Ernest Van Hoecke <ernest.vanhoecke@toradex.com>
 ---
- board/toradex/verdin-am62/tifs-rm-cfg.yaml | 867 +++++++++++++++++++++++++++++
- 1 file changed, 867 insertions(+)
+ arch/arm/dts/k3-am625-verdin-wifi-dev-binman.dtsi  | 4 ++++
+ arch/arm/dts/k3-am62p5-verdin-wifi-dev-binman.dtsi | 4 ++++
+ 2 files changed, 8 insertions(+)
 
-diff --git a/board/toradex/verdin-am62/tifs-rm-cfg.yaml b/board/toradex/verdin-am62/tifs-rm-cfg.yaml
-new file mode 100644
-index 000000000000..8510fe9526ed
---- /dev/null
-+++ b/board/toradex/verdin-am62/tifs-rm-cfg.yaml
-@@ -0,0 +1,867 @@
-+# SPDX-License-Identifier: GPL-2.0+
-+# Copyright (C) 2022-2026 Texas Instruments Incorporated - https://www.ti.com/
-+#
-+# Resource management configuration for AM62X
-+#
+diff --git a/arch/arm/dts/k3-am625-verdin-wifi-dev-binman.dtsi b/arch/arm/dts/k3-am625-verdin-wifi-dev-binman.dtsi
+index 7b6466295876..e72065209f28 100644
+--- a/arch/arm/dts/k3-am625-verdin-wifi-dev-binman.dtsi
++++ b/arch/arm/dts/k3-am625-verdin-wifi-dev-binman.dtsi
+@@ -7,6 +7,10 @@
+ 
+ #ifdef CONFIG_TARGET_VERDIN_AM62_R5
+ 
++&rcfg_yaml_tifs {
++	config = "tifs-rm-cfg.yaml";
++};
 +
-+---
+ &binman {
+ 	tiboot3-am62x-hs-verdin.bin {
+ 		filename = "tiboot3-am62x-hs-verdin.bin";
+diff --git a/arch/arm/dts/k3-am62p5-verdin-wifi-dev-binman.dtsi b/arch/arm/dts/k3-am62p5-verdin-wifi-dev-binman.dtsi
+index b46e871ef8ab..2682ba13afb8 100644
+--- a/arch/arm/dts/k3-am62p5-verdin-wifi-dev-binman.dtsi
++++ b/arch/arm/dts/k3-am62p5-verdin-wifi-dev-binman.dtsi
+@@ -7,6 +7,10 @@
+ 
+ #if IS_ENABLED(CONFIG_TARGET_VERDIN_AM62P_R5)
+ 
++&rcfg_yaml_tifs {
++	config = "tifs-rm-cfg.yaml";
++};
 +
-+tifs-rm-cfg:
-+    rm_boardcfg:
-+        rev:
-+            boardcfg_abi_maj: 0x0
-+            boardcfg_abi_min: 0x1
-+        host_cfg:
-+            subhdr:
-+                magic: 0x4C41
-+                size: 356
-+            host_cfg_entries:
-+                -  # 1
-+                    host_id: 12
-+                    allowed_atype: 0x2A
-+                    allowed_qos: 0xAAAA
-+                    allowed_orderid: 0xAAAAAAAA
-+                    allowed_priority: 0xAAAA
-+                    allowed_sched_priority: 0xAA
-+                -  # 2
-+                    host_id: 30
-+                    allowed_atype: 0x2A
-+                    allowed_qos: 0xAAAA
-+                    allowed_orderid: 0xAAAAAAAA
-+                    allowed_priority: 0xAAAA
-+                    allowed_sched_priority: 0xAA
-+                -  # 3
-+                    host_id: 36
-+                    allowed_atype: 0x2A
-+                    allowed_qos: 0xAAAA
-+                    allowed_orderid: 0xAAAAAAAA
-+                    allowed_priority: 0xAAAA
-+                    allowed_sched_priority: 0xAA
-+                -  # 4
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                -  # 5
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                -  # 6
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                -  # 7
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                -  # 8
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                -  # 9
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                -  # 10
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                -  # 11
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                -  # 12
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                -  # 13
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                -  # 14
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                -  # 15
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                -  # 16
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                -  # 17
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                -  # 18
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                -  # 19
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                -  # 20
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                -  # 21
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                -  # 22
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                -  # 23
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                -  # 24
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                -  # 25
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                -  # 26
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                -  # 27
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                -  # 28
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                -  # 29
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                -  # 30
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                -  # 31
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                -  # 32
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+        resasg:
-+            subhdr:
-+                magic: 0x7B25
-+                size: 8
-+            resasg_entries_size: 824
-+            reserved: 0
-+    resasg_entries:
-+        -
-+            start_resource: 0
-+            num_resource: 18
-+            type: 1677
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 18
-+            num_resource: 6
-+            type: 1677
-+            host_id: 35
-+            reserved: 0
-+        -
-+            start_resource: 18
-+            num_resource: 6
-+            type: 1677
-+            host_id: 36
-+            reserved: 0
-+        -
-+            start_resource: 24
-+            num_resource: 2
-+            type: 1677
-+            host_id: 30
-+            reserved: 0
-+        -
-+            start_resource: 26
-+            num_resource: 6
-+            type: 1677
-+            host_id: 128
-+            reserved: 0
-+        -
-+            start_resource: 54
-+            num_resource: 18
-+            type: 1678
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 72
-+            num_resource: 6
-+            type: 1678
-+            host_id: 35
-+            reserved: 0
-+        -
-+            start_resource: 72
-+            num_resource: 6
-+            type: 1678
-+            host_id: 36
-+            reserved: 0
-+        -
-+            start_resource: 78
-+            num_resource: 2
-+            type: 1678
-+            host_id: 30
-+            reserved: 0
-+        -
-+            start_resource: 80
-+            num_resource: 2
-+            type: 1678
-+            host_id: 128
-+            reserved: 0
-+        -
-+            start_resource: 32
-+            num_resource: 12
-+            type: 1679
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 44
-+            num_resource: 6
-+            type: 1679
-+            host_id: 35
-+            reserved: 0
-+        -
-+            start_resource: 44
-+            num_resource: 6
-+            type: 1679
-+            host_id: 36
-+            reserved: 0
-+        -
-+            start_resource: 50
-+            num_resource: 2
-+            type: 1679
-+            host_id: 30
-+            reserved: 0
-+        -
-+            start_resource: 52
-+            num_resource: 2
-+            type: 1679
-+            host_id: 128
-+            reserved: 0
-+        -
-+            start_resource: 0
-+            num_resource: 18
-+            type: 1696
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 18
-+            num_resource: 6
-+            type: 1696
-+            host_id: 35
-+            reserved: 0
-+        -
-+            start_resource: 18
-+            num_resource: 6
-+            type: 1696
-+            host_id: 36
-+            reserved: 0
-+        -
-+            start_resource: 24
-+            num_resource: 2
-+            type: 1696
-+            host_id: 30
-+            reserved: 0
-+        -
-+            start_resource: 26
-+            num_resource: 6
-+            type: 1696
-+            host_id: 128
-+            reserved: 0
-+        -
-+            start_resource: 0
-+            num_resource: 18
-+            type: 1697
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 18
-+            num_resource: 6
-+            type: 1697
-+            host_id: 35
-+            reserved: 0
-+        -
-+            start_resource: 18
-+            num_resource: 6
-+            type: 1697
-+            host_id: 36
-+            reserved: 0
-+        -
-+            start_resource: 24
-+            num_resource: 2
-+            type: 1697
-+            host_id: 30
-+            reserved: 0
-+        -
-+            start_resource: 26
-+            num_resource: 2
-+            type: 1697
-+            host_id: 128
-+            reserved: 0
-+        -
-+            start_resource: 0
-+            num_resource: 12
-+            type: 1698
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 12
-+            num_resource: 6
-+            type: 1698
-+            host_id: 35
-+            reserved: 0
-+        -
-+            start_resource: 12
-+            num_resource: 6
-+            type: 1698
-+            host_id: 36
-+            reserved: 0
-+        -
-+            start_resource: 18
-+            num_resource: 2
-+            type: 1698
-+            host_id: 30
-+            reserved: 0
-+        -
-+            start_resource: 20
-+            num_resource: 2
-+            type: 1698
-+            host_id: 128
-+            reserved: 0
-+        -
-+            start_resource: 5
-+            num_resource: 35
-+            type: 1802
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 44
-+            num_resource: 35
-+            type: 1802
-+            host_id: 35
-+            reserved: 0
-+        -
-+            start_resource: 44
-+            num_resource: 35
-+            type: 1802
-+            host_id: 36
-+            reserved: 0
-+        -
-+            start_resource: 168
-+            num_resource: 7
-+            type: 1802
-+            host_id: 30
-+            reserved: 0
-+        -
-+            start_resource: 0
-+            num_resource: 1024
-+            type: 1807
-+            host_id: 128
-+            reserved: 0
-+        -
-+            start_resource: 4096
-+            num_resource: 29
-+            type: 1808
-+            host_id: 128
-+            reserved: 0
-+        -
-+            start_resource: 4608
-+            num_resource: 99
-+            type: 1809
-+            host_id: 128
-+            reserved: 0
-+        -
-+            start_resource: 5120
-+            num_resource: 24
-+            type: 1810
-+            host_id: 128
-+            reserved: 0
-+        -
-+            start_resource: 5632
-+            num_resource: 51
-+            type: 1811
-+            host_id: 128
-+            reserved: 0
-+        -
-+            start_resource: 6144
-+            num_resource: 51
-+            type: 1812
-+            host_id: 128
-+            reserved: 0
-+        -
-+            start_resource: 6656
-+            num_resource: 51
-+            type: 1813
-+            host_id: 128
-+            reserved: 0
-+        -
-+            start_resource: 8192
-+            num_resource: 32
-+            type: 1814
-+            host_id: 128
-+            reserved: 0
-+        -
-+            start_resource: 8704
-+            num_resource: 32
-+            type: 1815
-+            host_id: 128
-+            reserved: 0
-+        -
-+            start_resource: 9216
-+            num_resource: 32
-+            type: 1816
-+            host_id: 128
-+            reserved: 0
-+        -
-+            start_resource: 9728
-+            num_resource: 22
-+            type: 1817
-+            host_id: 128
-+            reserved: 0
-+        -
-+            start_resource: 10240
-+            num_resource: 22
-+            type: 1818
-+            host_id: 128
-+            reserved: 0
-+        -
-+            start_resource: 10752
-+            num_resource: 22
-+            type: 1819
-+            host_id: 128
-+            reserved: 0
-+        -
-+            start_resource: 11264
-+            num_resource: 28
-+            type: 1820
-+            host_id: 128
-+            reserved: 0
-+        -
-+            start_resource: 11776
-+            num_resource: 28
-+            type: 1821
-+            host_id: 128
-+            reserved: 0
-+        -
-+            start_resource: 12288
-+            num_resource: 28
-+            type: 1822
-+            host_id: 128
-+            reserved: 0
-+        -
-+            start_resource: 0
-+            num_resource: 10
-+            type: 1936
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 10
-+            num_resource: 3
-+            type: 1936
-+            host_id: 35
-+            reserved: 0
-+        -
-+            start_resource: 10
-+            num_resource: 3
-+            type: 1936
-+            host_id: 36
-+            reserved: 0
-+        -
-+            start_resource: 13
-+            num_resource: 3
-+            type: 1936
-+            host_id: 30
-+            reserved: 0
-+        -
-+            start_resource: 16
-+            num_resource: 3
-+            type: 1936
-+            host_id: 128
-+            reserved: 0
-+        -
-+            start_resource: 19
-+            num_resource: 64
-+            type: 1937
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 19
-+            num_resource: 64
-+            type: 1937
-+            host_id: 36
-+            reserved: 0
-+        -
-+            start_resource: 83
-+            num_resource: 8
-+            type: 1938
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 91
-+            num_resource: 8
-+            type: 1939
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 99
-+            num_resource: 10
-+            type: 1942
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 109
-+            num_resource: 3
-+            type: 1942
-+            host_id: 35
-+            reserved: 0
-+        -
-+            start_resource: 109
-+            num_resource: 3
-+            type: 1942
-+            host_id: 36
-+            reserved: 0
-+        -
-+            start_resource: 112
-+            num_resource: 3
-+            type: 1942
-+            host_id: 30
-+            reserved: 0
-+        -
-+            start_resource: 115
-+            num_resource: 3
-+            type: 1942
-+            host_id: 128
-+            reserved: 0
-+        -
-+            start_resource: 118
-+            num_resource: 16
-+            type: 1943
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 118
-+            num_resource: 16
-+            type: 1943
-+            host_id: 36
-+            reserved: 0
-+        -
-+            start_resource: 134
-+            num_resource: 8
-+            type: 1944
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 134
-+            num_resource: 8
-+            type: 1945
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 142
-+            num_resource: 8
-+            type: 1946
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 142
-+            num_resource: 8
-+            type: 1947
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 0
-+            num_resource: 10
-+            type: 1955
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 10
-+            num_resource: 3
-+            type: 1955
-+            host_id: 35
-+            reserved: 0
-+        -
-+            start_resource: 10
-+            num_resource: 3
-+            type: 1955
-+            host_id: 36
-+            reserved: 0
-+        -
-+            start_resource: 13
-+            num_resource: 3
-+            type: 1955
-+            host_id: 30
-+            reserved: 0
-+        -
-+            start_resource: 16
-+            num_resource: 3
-+            type: 1955
-+            host_id: 128
-+            reserved: 0
-+        -
-+            start_resource: 19
-+            num_resource: 8
-+            type: 1956
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 19
-+            num_resource: 8
-+            type: 1956
-+            host_id: 36
-+            reserved: 0
-+        -
-+            start_resource: 27
-+            num_resource: 1
-+            type: 1957
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 28
-+            num_resource: 1
-+            type: 1958
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 0
-+            num_resource: 10
-+            type: 1961
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 10
-+            num_resource: 3
-+            type: 1961
-+            host_id: 35
-+            reserved: 0
-+        -
-+            start_resource: 10
-+            num_resource: 3
-+            type: 1961
-+            host_id: 36
-+            reserved: 0
-+        -
-+            start_resource: 13
-+            num_resource: 3
-+            type: 1961
-+            host_id: 30
-+            reserved: 0
-+        -
-+            start_resource: 16
-+            num_resource: 3
-+            type: 1961
-+            host_id: 128
-+            reserved: 0
-+        -
-+            start_resource: 0
-+            num_resource: 10
-+            type: 1962
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 10
-+            num_resource: 3
-+            type: 1962
-+            host_id: 35
-+            reserved: 0
-+        -
-+            start_resource: 10
-+            num_resource: 3
-+            type: 1962
-+            host_id: 36
-+            reserved: 0
-+        -
-+            start_resource: 13
-+            num_resource: 3
-+            type: 1962
-+            host_id: 30
-+            reserved: 0
-+        -
-+            start_resource: 16
-+            num_resource: 3
-+            type: 1962
-+            host_id: 128
-+            reserved: 0
-+        -
-+            start_resource: 19
-+            num_resource: 1
-+            type: 1963
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 19
-+            num_resource: 1
-+            type: 1963
-+            host_id: 36
-+            reserved: 0
-+        -
-+            start_resource: 19
-+            num_resource: 16
-+            type: 1964
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 19
-+            num_resource: 16
-+            type: 1964
-+            host_id: 36
-+            reserved: 0
-+        -
-+            start_resource: 20
-+            num_resource: 1
-+            type: 1965
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 35
-+            num_resource: 8
-+            type: 1966
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 21
-+            num_resource: 1
-+            type: 1967
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 35
-+            num_resource: 8
-+            type: 1968
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 22
-+            num_resource: 1
-+            type: 1969
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 43
-+            num_resource: 8
-+            type: 1970
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 23
-+            num_resource: 1
-+            type: 1971
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 43
-+            num_resource: 8
-+            type: 1972
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 0
-+            num_resource: 1
-+            type: 2112
-+            host_id: 128
-+            reserved: 0
-+        -
-+            start_resource: 2
-+            num_resource: 2
-+            type: 2122
-+            host_id: 12
-+            reserved: 0
+ &binman {
+ 	tiboot3-am62px-hs-fs-verdin.bin {
+ 		filename = "tiboot3-am62px-hs-fs-verdin.bin";
 
 -- 
 2.43.0
