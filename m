@@ -4,60 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3C30CD3436
-	for <u-boot@archiver.kernel.org>; Fri,  8 May 2026 08:23:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49C6BCD3436
+	for <u-boot@archiver.kernel.org>; Fri,  8 May 2026 08:33:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A637484C5F;
-	Fri,  8 May 2026 10:21:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=ew.tq-group.com
+	by phobos.denx.de (Postfix) with ESMTP id 873C184BD1;
+	Fri,  8 May 2026 10:33:04 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=free.fr
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=ew.tq-group.com header.i=@ew.tq-group.com header.b="mU34435B";
+	dkim=pass (2048-bit key; unprotected) header.d=free.fr header.i=@free.fr header.b="kQBtVXnm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C4BE184BBD; Fri,  8 May 2026 10:21:48 +0200 (CEST)
-Received: from www537.your-server.de (www537.your-server.de [188.40.3.216])
+ id 1905684BD1; Fri,  8 May 2026 10:33:01 +0200 (CEST)
+Received: from smtp1-g21.free.fr (smtp1-g21.free.fr [IPv6:2a01:e0c:1:1599::10])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1BDD384C3F
- for <u-boot@lists.denx.de>; Fri,  8 May 2026 10:21:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=ew.tq-group.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=Alexander.Feilke@ew.tq-group.com
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=ew.tq-group.com; s=default2602; h=Content-Transfer-Encoding:MIME-Version:
- References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
- Content-Type:Content-ID:Content-Description:Resent-Date:Resent-From:
- Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID;
- bh=NeQYqtmf8LdnSy9b3tWZ8x/ao56dk1uI302l/8jPbp4=; b=mU34435BcPoVnroP/D3Y9EeiJy
- RM9DjZC/ubOjb3DOGcPwMJ30F8X8mkp2IwRK3mwcTuEdTRZL1XlFTZO/xBrwMtmd4Y3kWQiH/s2Uc
- gPU8UoRSZL9LUmsvwKyZZo+u26fIbfWz9KUTPOtrS0mVlbdadsHzO3b1Jb5wMNI968CjgP6GNasPh
- oEwHrsVrPTm1VJFBV97iOZeSWBoiegy3miKjF1a/Y9AoLqLQPjMSkg1o6nSLMgOi42SXj+lMm7PVz
- ap1LrSduQSvUGsl2WRzYmwSShi6E63d1HYU1ncRTX5VIoKclFIOMAwCAWWo5cFnAzrKjWfj7q6JB0
- UjUAtZzw==;
-Received: from sslproxy06.your-server.de ([78.46.172.3])
- by www537.your-server.de with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
- (Exim 4.96.2) (envelope-from <Alexander.Feilke@ew.tq-group.com>)
- id 1wLGSs-0005p7-2P; Fri, 08 May 2026 10:21:42 +0200
-Received: from localhost ([127.0.0.1])
- by sslproxy06.your-server.de with esmtpsa (TLS1.3) tls TLS_AES_256_GCM_SHA384
- (Exim 4.96) (envelope-from <Alexander.Feilke@ew.tq-group.com>)
- id 1wLGSs-000P5H-2n; Fri, 08 May 2026 10:21:42 +0200
-From: Alexander Feilke <Alexander.Feilke@ew.tq-group.com>
+ by phobos.denx.de (Postfix) with ESMTPS id 0D4EB84BBD
+ for <u-boot@lists.denx.de>; Fri,  8 May 2026 10:32:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=quarantine dis=none) header.from=free.fr
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=vjardin@free.fr
+Received: from L30177.local (unknown
+ [IPv6:2a01:e0a:2af:22b0:b979:5676:9880:8700])
+ (Authenticated sender: vjardin@free.fr)
+ by smtp1-g21.free.fr (Postfix) with ESMTPSA id 7F0B5B00592;
+ Fri,  8 May 2026 10:32:55 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=free.fr;
+ s=smtp-20201208; t=1778229177;
+ bh=7XvZmx2NTUou+YBnUxqlHa55gqLzlmlxeISahO+j8Zw=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=kQBtVXnmUMoPbepu/+d7WGptdg2BRCq/DkrWSI71GYoCLwpzZ4kuAx8GMkskHoXmY
+ LFV1z0AUrf3AxNplFwrbjFbQzWjDmIxyThKeOJqeKwg1Q3ubU5TwdgEJRKHyk5w9mM
+ e5qG5PJb8RxL2UOiR6aRE4+O0Ub576h7j75Vtarw5zoI/Q5kDuEuNySj302vcKIua/
+ Uwj3Uzr4Wx9irSt+K+ZJZXkUbQt4tJvcEICxM2zaPkpJA23OF+QIqXrXIOIAFsmskS
+ w3C2F07DZ4sR//7wAm2cfikrFuhRrli3LnDGnVdGI+WuV1lY0zeOKWcoJIbL0THAce
+ 754wQuUtOBMlg==
+Date: Fri, 8 May 2026 10:32:54 +0200
+From: Vincent Jardin <vjardin@free.fr>
 To: u-boot@lists.denx.de
-Cc: u-boot@ew.tq-group.com,
- Alexander Feilke <alexander.feilke@ew.tq-group.com>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH 8/8] drivers: Kconfig: rtc_pcf85063: note unsupported chip
- features
-Date: Fri,  8 May 2026 10:21:32 +0200
-Message-Id: <20260508082132.25476-9-Alexander.Feilke@ew.tq-group.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20260508082132.25476-1-Alexander.Feilke@ew.tq-group.com>
-References: <20260508082132.25476-1-Alexander.Feilke@ew.tq-group.com>
+Cc: Stefan Roese <stefan.roese@mailbox.org>, Tom Rini <trini@konsulko.com>
+Subject: Re: [PATCH v2 0/5] NBX10G: Marvell Armada 8040 Nodebox 10G board
+ support
+Message-ID: <af2ftixNofr9R9ld@L30177.local>
+References: <cover.1773151972.git.vjardin@free.fr>
+ <cover.1776762022.git.vjardin@free.fr>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
+In-Reply-To: <cover.1776762022.git.vjardin@free.fr>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,27 +69,14 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Alexander Feilke <alexander.feilke@ew.tq-group.com>
+Hi,
 
-Signed-off-by: Alexander Feilke <alexander.feilke@ew.tq-group.com>
----
- drivers/rtc/Kconfig | 3 +++
- 1 file changed, 3 insertions(+)
+Le 21/04/26 11:04, Vincent Jardin a écrit :
+> This v2 addresses Stefan Roese's review feedback on v1:
+>   https://lists.denx.de/pipermail/u-boot/2026-March/613625.html
 
-diff --git a/drivers/rtc/Kconfig b/drivers/rtc/Kconfig
-index ef1663f3450..ccb0709a953 100644
---- a/drivers/rtc/Kconfig
-+++ b/drivers/rtc/Kconfig
-@@ -168,6 +168,9 @@ config RTC_PCF85063
- 	help
- 	  If you say yes here you get support for the NXP PCF85063 RTC
- 	  and compatible chips.
-+	  Support for the following chip features is currently not implemented:
-+	  - NVMEM
-+	  - CLKOUT generation
- 
- config RTC_PCF8563
- 	bool "Philips PCF8563"
--- 
-2.34.1
+Please, how to have a review of this serie ? I am available
+to include your comments.
 
+best regards,
+  Vincent
