@@ -4,48 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C791CCD3445
-	for <u-boot@archiver.kernel.org>; Fri,  8 May 2026 13:54:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5EEEDCD3436
+	for <u-boot@archiver.kernel.org>; Fri,  8 May 2026 13:54:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8245A84CD1;
-	Fri,  8 May 2026 15:54:40 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C039E84CD0;
+	Fri,  8 May 2026 15:54:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=free.fr
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=free.fr header.i=@free.fr header.b="vWy4sciU";
+	dkim=pass (2048-bit key; unprotected) header.d=free.fr header.i=@free.fr header.b="O7Gp7UOG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 27D2F84CD1; Fri,  8 May 2026 15:54:40 +0200 (CEST)
+ id 2B9D684CD7; Fri,  8 May 2026 15:54:46 +0200 (CEST)
 Received: from smtp2-g21.free.fr (smtp2-g21.free.fr [212.27.42.2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E43D984C3C
- for <u-boot@lists.denx.de>; Fri,  8 May 2026 15:54:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C6A8684C3C
+ for <u-boot@lists.denx.de>; Fri,  8 May 2026 15:54:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=free.fr
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=vjardin@free.fr
 Received: from y14 (unknown [IPv6:2a01:e0a:2af:22b0:d1a5:1153:d371:3c9c])
  (Authenticated sender: vjardin@free.fr)
- by smtp2-g21.free.fr (Postfix) with ESMTPSA id CFAF12003C8;
- Fri,  8 May 2026 15:54:30 +0200 (CEST)
+ by smtp2-g21.free.fr (Postfix) with ESMTPSA id 3C6C62003D6;
+ Fri,  8 May 2026 15:54:37 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=free.fr;
- s=smtp-20201208; t=1778248477;
- bh=N4WEolzFo5qSEw1bEdt3mVFJq/fLToz1v+qSMEDZX7E=;
+ s=smtp-20201208; t=1778248483;
+ bh=2WE6YpJUwrJ4OR8ja4lk4qgAu0rivhoN3yuoKrhAAGs=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=vWy4sciUjBB3DXWfKyxieDKpVuqlLWlV41vfQ8hpGUSZcwiTlgMS7o4BO5z/HGGR+
- Vb6W2feShF+B5pNySrydJRWFy1O40+1j9E9SylYZQ2wXPAQg4e5uT9KO4riR6+clFK
- TfN1/eyuopVJKw74aAStNZhlCVL/M2Aeeb1D/f40ZlxL3qr4EDFIA92UrCro7FqgLn
- Ttis8C0aDQzZS9U3bsdpbNim6UK7JfEQhG72L1ygJJ1yx6F7fp5Os5vEceKclLgFsW
- ElRvJNRmgl9GiCH5BLBwKKjF5fqEXxrgne1cf2braMM2RIe/LalFuqHe2O3EYNQfOi
- Gx9VQtaz6pJDQ==
+ b=O7Gp7UOG3LmSyfCzc56nF7JLvjyLT5XX+6dxd4+eiaYKtt54AgBCoi32WLYlMISWe
+ em0yB7Fi2y7M3JQ8LX1oJcYDxf+WqJxYj4PEhd/cCawdq5clz63pi1UmQRZFeoFrj0
+ UjD3jqkvyphYjRp1WR19/ovEhSIImop413MiyXv/4vwhcIQuTcQiqv1eF6pc3xt6Xk
+ jdFzkhbAqijZxL6XVylh+FODD8umKx2kM9lZUD6ecYLqseMyLHz6AZX411vHoim6Pj
+ u7nSVqCEnlyZL2B3XnApLWcVI7ELG21wRpPiRvUEJ2U+vwt7xtP6k2tyd+XXbmutrO
+ WkV+p8tO74Nzg==
 From: Vincent Jardin <vjardin@free.fr>
 To: u-boot@lists.denx.de
 Cc: Stefan Roese <stefan.roese@mailbox.org>, Tom Rini <trini@konsulko.com>,
  Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
  Vincent Jardin <vjardin@free.fr>
-Subject: [PATCH v3 2/5] board: freebox: add Nodebox 10G board support
-Date: Fri,  8 May 2026 15:54:05 +0200
-Message-ID: <f1dcac4aecffc144ef4ba49c8ba6e9de57599221.1778247592.git.vjardin@free.fr>
+Subject: [PATCH v3 3/5] board: freebox: nbx10g: add emmcboot for dual-bank
+ eMMC boot
+Date: Fri,  8 May 2026 15:54:06 +0200
+Message-ID: <a4e3b37e6a02f949b02386166040f9add8e75925.1778247592.git.vjardin@free.fr>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <cover.1778247592.git.vjardin@free.fr>
 References: <cover.1776762022.git.vjardin@free.fr>
@@ -68,576 +69,605 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add board support for the Freebox Nodebox 10G based on the Marvell
-Armada 8040 SoC. This board features:
+Add the emmcboot command as board-specific support for the Nodebox 10G.
 
-- Quad-core ARMv8 AP806 with dual CP110 companions
-- eMMC storage via Xenon SDHCI controller
-- 1G SGMII Ethernet on CP0 lane 5
-- I2C buses for peripheral access
-- NS16550 UART console at 115200 baud
+This is a legacy boot format that has been in production on this board
+for many years so it cannot change anymore. It implements a dual-bank
+boot system for reliable firmware updates:
 
-The implementation includes:
-- Device tree for the Nodebox 10G hardware
-- Dedicated board directory (board/freebox/nbx10g/)
-- Board-specific Kconfig and defconfig
+- Bank0: Stable/fallback boot image
+- Bank1: Newer/test boot image with reboot tracking
 
-The U-Boot comphy bindings (phy-type/phy-speed) differ from the
-mainline Linux PHY framework bindings used by phy-mvebu-cp110-comphy,
-so U-Boot and the kernel each have their own device tree.
+The boot order depends on the nrboot counter stored in eMMC:
+- Healthy state (counter < 4): Try Bank1 first, then Bank0
+- Degraded state (counter >= 4): Try Bank0 first, then Bank1
+
+Each bank stores an image tag with CRC32 validation. The counter uses
+a bit-counting scheme for wear leveling and tracks consecutive failed
+boots to trigger automatic fallback.
 
 Signed-off-by: Vincent Jardin <vjardin@free.fr>
 Reviewed-by: Stefan Roese <stefan.roese@mailbox.org>
 ---
 Changes in v3:
 - Move per-patch changelog below --- per U-Boot guidelines (Stefan)
+- Collected Reviewed-by Stefan from v2 review
 
 Changes in v2:
-- Dropped board_init() bi_boot_params assignment
-  (ARM64 uses FDT, ATAGS are !ARM64-only)
-- Dropped empty board_early_init_f()
-- Removed unused includes / DECLARE_GLOBAL_DATA_PTR
-- Added note on U-Boot vs Linux comphy DT bindings
-- MAINTAINERS: armada-8040-nbx* wildcard covers the u-boot dtsi;
-  removed duplicate NBX BOARD entry from
-  board/Marvell/mvebu_armada-8k/MAINTAINERS
-- Added Reviewed-by Stefan
+- Moved from cmd/mvebu/ to board/freebox/nbx10g/
+- Renamed Kconfig CMD_MVEBU_EMMCBOOT -> CMD_NBX_EMMCBOOT and
+  MVEBU_MMC_PART_* -> NBX_MMC_PART_*
+- Replaced all `return -1` with `return -EINVAL`
+- Commit message now explains legacy format
 
- arch/arm/dts/Makefile               |   1 +
- arch/arm/dts/armada-8040-nbx.dts    | 259 ++++++++++++++++++++++++++++
- arch/arm/mach-mvebu/Kconfig         |   9 +
- board/freebox/nbx10g/Kconfig        |  12 ++
- board/freebox/nbx10g/MAINTAINERS    |   6 +
- board/freebox/nbx10g/Makefile       |   3 +
- board/freebox/nbx10g/board.c        |  53 ++++++
- configs/mvebu_nbx_88f8040_defconfig |  75 ++++++++
- include/configs/nbx10g.h            |  29 ++++
- 9 files changed, 447 insertions(+)
- create mode 100644 arch/arm/dts/armada-8040-nbx.dts
- create mode 100644 board/freebox/nbx10g/Kconfig
- create mode 100644 board/freebox/nbx10g/MAINTAINERS
- create mode 100644 board/freebox/nbx10g/Makefile
- create mode 100644 board/freebox/nbx10g/board.c
- create mode 100644 configs/mvebu_nbx_88f8040_defconfig
- create mode 100644 include/configs/nbx10g.h
+ board/freebox/nbx10g/Kconfig        |  53 +++++
+ board/freebox/nbx10g/Makefile       |   1 +
+ board/freebox/nbx10g/nbx_emmcboot.c | 357 ++++++++++++++++++++++++++++
+ board/freebox/nbx10g/nbx_imagetag.h |  78 ++++++
+ board/freebox/nbx10g/nbx_nrboot.h   |  34 +++
+ 5 files changed, 523 insertions(+)
+ create mode 100644 board/freebox/nbx10g/nbx_emmcboot.c
+ create mode 100644 board/freebox/nbx10g/nbx_imagetag.h
+ create mode 100644 board/freebox/nbx10g/nbx_nrboot.h
 
-diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
-index bff341d6118..a743fde92df 100644
---- a/arch/arm/dts/Makefile
-+++ b/arch/arm/dts/Makefile
-@@ -169,6 +169,7 @@ dtb-$(CONFIG_ARCH_MVEBU) +=			\
- 	armada-8040-clearfog-gt-8k.dtb		\
- 	armada-8040-db.dtb			\
- 	armada-8040-mcbin.dtb			\
-+	armada-8040-nbx.dtb			\
- 	armada-8040-puzzle-m801.dtb		\
- 	cn9130-db-A.dtb				\
- 	cn9130-db-B.dtb				\
-diff --git a/arch/arm/dts/armada-8040-nbx.dts b/arch/arm/dts/armada-8040-nbx.dts
-new file mode 100644
-index 00000000000..b8b7298b4f5
---- /dev/null
-+++ b/arch/arm/dts/armada-8040-nbx.dts
-@@ -0,0 +1,259 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Device Tree file for NBX board (Freebox Nodebox10G)
-+ * Based on Marvell Armada 8040 SoC
-+ *
-+ * Copyright (C) 2024
-+ */
-+
-+#include "armada-8040.dtsi"
-+
-+/ {
-+	model = "NBX Armada 8040";
-+	compatible = "nbx,armada8040", "marvell,armada8040";
-+
-+	chosen {
-+		stdout-path = "serial0:115200n8";
-+	};
-+
-+	aliases {
-+		i2c0 = &cp0_i2c0;
-+		i2c1 = &cp0_i2c1;
-+		gpio0 = &ap_gpio0;
-+		gpio1 = &cp0_gpio0;
-+		gpio2 = &cp0_gpio1;
-+	};
-+
-+	memory@00000000 {
-+		device_type = "memory";
-+		reg = <0x0 0x0 0x0 0x80000000>;  /* 2GB */
-+	};
-+};
-+
-+/* AP806 UART - active */
-+&uart0 {
-+	status = "okay";
-+};
-+
-+/* AP806 pinctrl */
-+&ap_pinctl {
-+	/*
-+	 * MPP Bus:
-+	 * eMMC  [0-10]
-+	 * UART0 [11,19]
-+	 */
-+		  /* 0 1 2 3 4 5 6 7 8 9 */
-+	pin-func = < 1 1 1 1 1 1 1 1 1 1
-+		     1 3 0 0 0 0 0 0 0 3 >;
-+};
-+
-+/* AP806 on-board eMMC */
-+&ap_sdhci0 {
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&ap_emmc_pins>;
-+	bus-width = <8>;
-+	non-removable;
-+	status = "okay";
-+};
-+
-+/* CP0 pinctrl */
-+&cp0_pinctl {
-+	/*
-+	 * MPP Bus:
-+	 * [0-31]  = 0xff: Keep default CP0_shared_pins
-+	 * [32,34] GE_MDIO/MDC
-+	 * [35-36] I2C1
-+	 * [37-38] I2C0
-+	 * [57-58] MSS I2C
-+	 */
-+		/*   0    1    2    3    4    5    6    7    8    9 */
-+	pin-func = < 0xff 0xff 0xff 0xff 0xff 0xff 0xff 0xff 0xff 0xff
-+		     0xff 0xff 0xff 0xff 0xff 0xff 0xff 0xff 0xff 0xff
-+		     0xff 0xff 0xff 0xff 0xff 0xff 0xff 0xff 0xff 0xff
-+		     0xff 0xff 7    0    7    2    2    2    2    0
-+		     0    0    0    0    0    0    0    0    0    0
-+		     0    0    0    0    0    0    0    2    2    0
-+		     0    0    0 >;
-+
-+	cp0_smi_pins: cp0-smi-pins {
-+		marvell,pins = <32 34>;
-+		marvell,function = <7>;
-+	};
-+};
-+
-+/* CP0 I2C0 */
-+&cp0_i2c0 {
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&cp0_i2c0_pins>;
-+	status = "okay";
-+	clock-frequency = <100000>;
-+};
-+
-+/* CP0 I2C1 */
-+&cp0_i2c1 {
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&cp0_i2c1_pins>;
-+	status = "okay";
-+	clock-frequency = <100000>;
-+};
-+
-+/* CP0 MSS I2C0 - Management SubSystem I2C (pins 57-58, func 2) */
-+&cp0_mss_i2c0 {
-+	status = "okay";
-+};
-+
-+/* CP0 MDIO for PHY */
-+&cp0_mdio {
-+	status = "okay";
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&cp0_smi_pins>;
-+
-+	nbx_phy0: ethernet-phy@0 {
-+		reg = <0>;
-+	};
-+};
-+
-+/* CP0 ComPhy - SerDes configuration */
-+&cp0_comphy {
-+	/*
-+	 * CP0 Serdes Configuration:
-+	 * Lane 0-3: Unconnected
-+	 * Lane 4:   SFI (10G Ethernet)
-+	 * Lane 5:   SGMII2 (1G Ethernet)
-+	 */
-+	phy0 {
-+		phy-type = <COMPHY_TYPE_UNCONNECTED>;
-+	};
-+	phy1 {
-+		phy-type = <COMPHY_TYPE_UNCONNECTED>;
-+	};
-+	phy2 {
-+		phy-type = <COMPHY_TYPE_UNCONNECTED>;
-+	};
-+	phy3 {
-+		phy-type = <COMPHY_TYPE_UNCONNECTED>;
-+	};
-+	phy4 {
-+		phy-type = <COMPHY_TYPE_SFI0>;
-+		phy-speed = <COMPHY_SPEED_10_3125G>;
-+	};
-+	phy5 {
-+		phy-type = <COMPHY_TYPE_SGMII2>;
-+		phy-speed = <COMPHY_SPEED_1_25G>;
-+	};
-+};
-+
-+/* CP0 Ethernet - only eth2 (MAC3) is active via SGMII */
-+&cp0_ethernet {
-+	status = "okay";
-+};
-+
-+&cp0_eth2 {
-+	status = "okay";
-+	phy = <&nbx_phy0>;
-+	phy-mode = "sgmii";
-+};
-+
-+/* CP0 UTMI PHY for USB */
-+&cp0_utmi {
-+	status = "okay";
-+};
-+
-+&cp0_utmi0 {
-+	status = "okay";
-+};
-+
-+&cp0_utmi1 {
-+	status = "okay";
-+};
-+
-+/* CP0 USB3 Host controllers */
-+&cp0_usb3_0 {
-+	status = "okay";
-+};
-+
-+&cp0_usb3_1 {
-+	status = "okay";
-+};
-+
-+/* CP1 pinctrl */
-+&cp1_pinctl {
-+	/*
-+	 * MPP Bus:
-+	 * [0-26]  = Unconfigured
-+	 * [27-28] GE_MDIO/MDC
-+	 * [29-30] MSS I2C
-+	 * [31]    = Unconfigured
-+	 * [32-62] = 0xff: Keep default CP1_shared_pins
-+	 */
-+		/*   0    1    2    3    4    5    6    7    8    9 */
-+	pin-func = < 0x0  0x0  0x0  0x0  0x0  0x0  0x0  0x0  0x0  0x0
-+		     0x0  0x0  0x0  0x0  0x0  0x0  0x0  0x0  0x0  0x0
-+		     0x0  0x0  0x0  0x0  0x0  0x0  0x0  0x8  0x8  0x8
-+		     0x8  0x0  0xff 0xff 0xff 0xff 0xff 0xff 0xff 0xff
-+		     0xff 0xff 0xff 0xff 0xff 0xff 0xff 0xff 0xff 0xff
-+		     0xff 0xff 0xff 0xff 0xff 0xff 0xff 0xff 0xff 0xff
-+		     0xff 0xff 0xff>;
-+
-+	cp1_mss_i2c_pins: cp1-mss-i2c-pins {
-+		marvell,pins = <29 30>;
-+		marvell,function = <8>;
-+	};
-+};
-+
-+/* CP1 MSS I2C0 - Management SubSystem I2C (pins 29-30, func 8) */
-+&cp1_mss_i2c0 {
-+	status = "okay";
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&cp1_mss_i2c_pins>;
-+};
-+
-+/* CP1 ComPhy - SerDes configuration */
-+&cp1_comphy {
-+	/*
-+	 * CP1 Serdes Configuration:
-+	 * Lane 0:   PCIe x1
-+	 * Lane 1:   USB3 Host
-+	 * Lane 2-3: Unconnected
-+	 * Lane 4:   SFI (10G Ethernet)
-+	 * Lane 5:   Unconnected
-+	 */
-+	phy0 {
-+		phy-type = <COMPHY_TYPE_PEX0>;
-+	};
-+	phy1 {
-+		phy-type = <COMPHY_TYPE_USB3_HOST0>;
-+	};
-+	phy2 {
-+		phy-type = <COMPHY_TYPE_UNCONNECTED>;
-+	};
-+	phy3 {
-+		phy-type = <COMPHY_TYPE_UNCONNECTED>;
-+	};
-+	phy4 {
-+		phy-type = <COMPHY_TYPE_SFI0>;
-+		phy-speed = <COMPHY_SPEED_10_3125G>;
-+	};
-+	phy5 {
-+		phy-type = <COMPHY_TYPE_UNCONNECTED>;
-+	};
-+};
-+
-+/* CP1 PCIe x1 on lane 0 */
-+&cp1_pcie0 {
-+	status = "okay";
-+};
-+
-+/* CP1 USB3 Host on lane 1 */
-+&cp1_usb3_0 {
-+	status = "okay";
-+};
-+
-+/* CP1 UTMI PHY for USB */
-+&cp1_utmi {
-+	status = "okay";
-+};
-+
-+&cp1_utmi0 {
-+	status = "okay";
-+};
-diff --git a/arch/arm/mach-mvebu/Kconfig b/arch/arm/mach-mvebu/Kconfig
-index 4afaee234ea..86d90cddb0b 100644
---- a/arch/arm/mach-mvebu/Kconfig
-+++ b/arch/arm/mach-mvebu/Kconfig
-@@ -166,6 +166,14 @@ config TARGET_MVEBU_ARMADA_8K
- 	select BOARD_LATE_INIT
- 	imply SCSI
- 
-+config TARGET_NBX10G
-+	bool "Support Freebox Nodebox 10G"
-+	select ARMADA_8K
-+	select BOARD_LATE_INIT
-+	help
-+	  Enable support for the Freebox Nodebox 10G board based on the
-+	  Marvell Armada 8040 SoC with dual CP110 companion chips.
-+
- config TARGET_MVEBU_ALLEYCAT5
- 	bool "Support AlleyCat 5 platforms"
- 	select ALLEYCAT_5
-@@ -508,5 +516,6 @@ config ARMADA_32BIT_SYSCON_SYSRESET
- 
- source "board/solidrun/clearfog/Kconfig"
- source "board/kobol/helios4/Kconfig"
-+source "board/freebox/nbx10g/Kconfig"
- 
- endif
 diff --git a/board/freebox/nbx10g/Kconfig b/board/freebox/nbx10g/Kconfig
-new file mode 100644
-index 00000000000..18a169761b7
---- /dev/null
+index 18a169761b7..d21153eae75 100644
+--- a/board/freebox/nbx10g/Kconfig
 +++ b/board/freebox/nbx10g/Kconfig
-@@ -0,0 +1,12 @@
-+if TARGET_NBX10G
+@@ -9,4 +9,57 @@ config SYS_VENDOR
+ config SYS_CONFIG_NAME
+ 	default "nbx10g"
+ 
++config CMD_NBX_EMMCBOOT
++	bool "emmcboot command"
++	depends on MMC_SDHCI_XENON
++	help
++	  Enable the emmcboot command for dual-bank boot from eMMC.
++	  This is a legacy boot format used on this board for many years.
++	  It implements a boot system with two image banks and automatic
++	  fallback on boot failures. The boot order depends on a reboot
++	  tracking counter (nrboot):
++	  - If healthy: try Bank1 (newer) first, then Bank0 (stable)
++	  - If degraded (>= 4 failures): try Bank0 first, then Bank1
 +
-+config SYS_BOARD
-+	default "nbx10g"
++	  Requires image_addr and fdt_addr environment variables to be set.
 +
-+config SYS_VENDOR
-+	default "freebox"
++if CMD_NBX_EMMCBOOT
 +
-+config SYS_CONFIG_NAME
-+	default "nbx10g"
++config NBX_MMC_PART_NRBOOT_OFFSET
++	hex "NRBoot counter offset in eMMC"
++	default 0x802000
++	help
++	  Byte offset in eMMC where the reboot tracking counter is stored.
++	  Default: 0x802000 (8MB + 8KB)
++
++config NBX_MMC_PART_BANK0_OFFSET
++	hex "Bank0 image offset in eMMC"
++	default 0x804000
++	help
++	  Byte offset in eMMC where the stable (Bank0) boot image starts.
++	  Default: 0x804000 (8MB + 16KB)
++
++config NBX_MMC_PART_BANK0_SIZE
++	hex "Bank0 image maximum size"
++	default 0x10000000
++	help
++	  Maximum size of the Bank0 boot image.
++	  Default: 0x10000000 (256MB)
++
++config NBX_MMC_PART_BANK1_OFFSET
++	hex "Bank1 image offset in eMMC"
++	default 0x10804000
++	help
++	  Byte offset in eMMC where the newer (Bank1) boot image starts.
++	  Default: 0x10804000 (264MB + 16KB)
++
++config NBX_MMC_PART_BANK1_SIZE
++	hex "Bank1 image maximum size"
++	default 0x10000000
++	help
++	  Maximum size of the Bank1 boot image.
++	  Default: 0x10000000 (256MB)
 +
 +endif
-diff --git a/board/freebox/nbx10g/MAINTAINERS b/board/freebox/nbx10g/MAINTAINERS
-new file mode 100644
-index 00000000000..2e31eed45b9
---- /dev/null
-+++ b/board/freebox/nbx10g/MAINTAINERS
-@@ -0,0 +1,6 @@
-+NBX10G BOARD
-+M:	Vincent Jardin <vjardin@free.fr>
-+S:	Maintained
-+F:	board/freebox/nbx10g/
-+F:	configs/mvebu_nbx_88f8040_defconfig
-+F:	arch/arm/dts/armada-8040-nbx*
-diff --git a/board/freebox/nbx10g/Makefile b/board/freebox/nbx10g/Makefile
-new file mode 100644
-index 00000000000..bf83bdf63ee
---- /dev/null
-+++ b/board/freebox/nbx10g/Makefile
-@@ -0,0 +1,3 @@
-+# SPDX-License-Identifier: GPL-2.0+
 +
-+obj-y	:= board.o
-diff --git a/board/freebox/nbx10g/board.c b/board/freebox/nbx10g/board.c
+ endif
+diff --git a/board/freebox/nbx10g/Makefile b/board/freebox/nbx10g/Makefile
+index bf83bdf63ee..a3b3d3a1fe3 100644
+--- a/board/freebox/nbx10g/Makefile
++++ b/board/freebox/nbx10g/Makefile
+@@ -1,3 +1,4 @@
+ # SPDX-License-Identifier: GPL-2.0+
+ 
+ obj-y	:= board.o
++obj-$(CONFIG_CMD_NBX_EMMCBOOT)	+= nbx_emmcboot.o
+diff --git a/board/freebox/nbx10g/nbx_emmcboot.c b/board/freebox/nbx10g/nbx_emmcboot.c
 new file mode 100644
-index 00000000000..7d16010ec7e
+index 00000000000..0bea96fadd9
 --- /dev/null
-+++ b/board/freebox/nbx10g/board.c
-@@ -0,0 +1,53 @@
++++ b/board/freebox/nbx10g/nbx_emmcboot.c
+@@ -0,0 +1,357 @@
 +// SPDX-License-Identifier: GPL-2.0+
 +/*
-+ * Copyright (C) 2017-2018 Freebox SA
-+ * Copyright (C) 2026 Free Mobile, Vincent Jardin <vjardin@free.fr>
++ * Nodebox 10G dual-bank eMMC boot command with automatic fallback
 + *
-+ * Freebox Nodebox 10G board support
++ * Copyright (C) 2026 Free Mobile, Freebox
++ *
++ * This implements a dual-bank boot system with automatic fallback:
++ * - Bank0: Stable/fallback boot image
++ * - Bank1: Newer/test boot image
++ *
++ * The boot order depends on the reboot tracking counter (nrboot):
++ * - If healthy: try Bank1 first, then Bank0
++ * - If degraded (>= 4 failures): try Bank0 first, then Bank1
 + */
 +
-+#include <init.h>
-+#include <asm/gpio.h>
-+#include <linux/delay.h>
++#include <command.h>
++#include <env.h>
++#include <mmc.h>
++#include <malloc.h>
++#include <memalign.h>
++#include <vsprintf.h>
++#include <u-boot/crc.h>
++#include <u-boot/schedule.h>
++#include <asm/byteorder.h>
++#include <linux/errno.h>
++#include "nbx_imagetag.h"
++#include "nbx_nrboot.h"
 +
-+/* Management PHY reset GPIO */
-+#define NBX_PHY_RESET_GPIO	83
++/* Partition offsets defined in Kconfig (CONFIG_NBX_MMC_PART_*) */
 +
-+/* Nodebox 10G ASCII art logo */
-+static const char * const nbx_logo =
-+	"  _   _           _      _                 __  ___   _____\n"
-+	" | \\ | |         | |    | |               /_ |/ _ \\ / ____|\n"
-+	" |  \\| | ___   __| | ___| |__   _____  __  | | | | | |  __\n"
-+	" | . ` |/ _ \\ / _` |/ _ \\ '_ \\ / _ \\ \\/ /  | | | | | | |_ |\n"
-+	" | |\\  | (_) | (_| |  __/ |_) | (_) >  <   | | |_| | |__| |\n"
-+	" |_| \\_|\\___/ \\__,_|\\___|_.__/ \\___/_/\\_\\  |_|\\___/ \\_____|\n";
++/* Image Tag Functions */
 +
-+int checkboard(void)
++static int mvebu_imagetag_check(struct mvebu_image_tag *tag,
++				unsigned long maxsize, const char *name)
 +{
-+	printf("%s\n", nbx_logo);
-+	return 0;
-+}
-+
-+int board_init(void)
-+{
-+	return 0;
-+}
-+
-+int board_late_init(void)
-+{
-+	int ret;
-+
-+	/* Reset the management PHY */
-+	ret = gpio_request(NBX_PHY_RESET_GPIO, "phy-reset");
-+	if (ret) {
-+		printf("Failed to request PHY reset GPIO: %d\n", ret);
-+		return 0;
++	if (be32_to_cpu(tag->magic) != MVEBU_IMAGE_TAG_MAGIC) {
++		if (name)
++			printf("%s: invalid TAG magic: %.8x\n", name,
++			       be32_to_cpu(tag->magic));
++		return -EINVAL;
 +	}
 +
-+	gpio_direction_output(NBX_PHY_RESET_GPIO, 0);
-+	mdelay(100);
-+	gpio_set_value(NBX_PHY_RESET_GPIO, 1);
-+	mdelay(100);
++	if (be32_to_cpu(tag->version) != MVEBU_IMAGE_TAG_VERSION) {
++		if (name)
++			printf("%s: invalid TAG version: %.8x\n", name,
++			       be32_to_cpu(tag->version));
++		return -EINVAL;
++	}
++
++	if (be32_to_cpu(tag->total_size) < sizeof(*tag)) {
++		if (name)
++			printf("%s: tag size is too small!\n", name);
++		return -EINVAL;
++	}
++
++	if (be32_to_cpu(tag->total_size) > maxsize) {
++		if (name)
++			printf("%s: tag size is too big!\n", name);
++		return -EINVAL;
++	}
++
++	if (be32_to_cpu(tag->device_tree_offset) < sizeof(*tag) ||
++	    be32_to_cpu(tag->device_tree_offset) +
++	    be32_to_cpu(tag->device_tree_size) > maxsize) {
++		if (name)
++			printf("%s: bogus device tree offset/size!\n", name);
++		return -EINVAL;
++	}
++
++	if (be32_to_cpu(tag->kernel_offset) < sizeof(*tag) ||
++	    be32_to_cpu(tag->kernel_offset) +
++	    be32_to_cpu(tag->kernel_size) > maxsize) {
++		if (name)
++			printf("%s: bogus kernel offset/size!\n", name);
++		return -EINVAL;
++	}
++
++	if (be32_to_cpu(tag->rootfs_offset) < sizeof(*tag) ||
++	    be32_to_cpu(tag->rootfs_offset) +
++	    be32_to_cpu(tag->rootfs_size) > maxsize) {
++		if (name)
++			printf("%s: bogus rootfs offset/size!\n", name);
++		return -EINVAL;
++	}
++
++	if (name) {
++		/*
++		 * Ensure null-termination within the 32-byte fields
++		 * before printing to avoid displaying garbage.
++		 */
++		tag->image_name[sizeof(tag->image_name) - 1] = '\0';
++		tag->build_date[sizeof(tag->build_date) - 1] = '\0';
++		tag->build_user[sizeof(tag->build_user) - 1] = '\0';
++
++		printf("%s: Found valid tag: %s / %s / %s\n", name,
++		       tag->image_name, tag->build_date, tag->build_user);
++	}
 +
 +	return 0;
 +}
-diff --git a/configs/mvebu_nbx_88f8040_defconfig b/configs/mvebu_nbx_88f8040_defconfig
++
++static int mvebu_imagetag_crc(struct mvebu_image_tag *tag, const char *name)
++{
++	u32 crc = ~0;
++
++	crc = crc32(crc, ((unsigned char *)tag) + 4,
++		    be32_to_cpu(tag->total_size) - 4);
++
++	if (be32_to_cpu(tag->crc) != crc) {
++		if (name)
++			printf("%s: invalid tag CRC!\n", name);
++		return -EINVAL;
++	}
++
++	return 0;
++}
++
++/* NRBoot (Reboot Tracking) Functions */
++
++struct mvebu_nrboot {
++	u16 nrboot;
++	u16 nrsuccess;
++};
++
++#define MVEBU_MAX_FAILURE	4
++
++static int mvebu_count_bits(u16 val)
++{
++	int i, found = 0;
++
++	for (i = 0; i < 16; i++) {
++		if (val & (1 << i))
++			found++;
++	}
++	return found;
++}
++
++int mvebu_check_nrboot(struct mmc *mmc, unsigned long offset)
++{
++	struct blk_desc *bd = mmc_get_blk_desc(mmc);
++	struct mvebu_nrboot *nr;
++	uint blk_start = ALIGN(offset, bd->blksz) / bd->blksz;
++	uint blk_cnt = ALIGN(sizeof(*nr), bd->blksz) / bd->blksz;
++	uint n;
++
++	ALLOC_CACHE_ALIGN_BUFFER(char, buf, blk_cnt * bd->blksz);
++	nr = (void *)buf;
++
++	n = blk_dread(bd, blk_start, blk_cnt, buf);
++	if (n != blk_cnt)
++		return 0;
++
++	printf(" - nr.nrboot = %04x\n", nr->nrboot);
++	printf(" - nr.nrsuccess = %04x\n", nr->nrsuccess);
++
++	/* Sanity check on values */
++	if (mvebu_count_bits(~nr->nrboot + 1) <= 1 &&
++	    mvebu_count_bits(~nr->nrsuccess + 1) <= 1) {
++		int boot, success;
++
++		boot = 16 - mvebu_count_bits(nr->nrboot);
++		success = 16 - mvebu_count_bits(nr->nrsuccess);
++
++		printf(" - Nrboot: %d / Nrsuccess: %d\n", boot, success);
++
++		if (boot == 16 || boot < success ||
++		    boot - success >= MVEBU_MAX_FAILURE) {
++			printf(" - Nrboot exceeded\n");
++			return 0;
++		}
++
++		/* Increment boot attempt counter */
++		boot++;
++		nr->nrboot = ~((1 << boot) - 1);
++
++		printf(" - Setting Nrboot to %d\n", boot);
++
++		n = blk_dwrite(bd, blk_start, blk_cnt, buf);
++		if (n != blk_cnt)
++			return 0;
++
++		return 1;
++	}
++
++	printf(" - Invalid NR values\n");
++
++	return 0;
++}
++
++/* emmcboot Command */
++
++static void mvebu_try_emmcboot(struct mmc *mmc, unsigned long offset,
++			       unsigned long maxsize, const char *bank)
++{
++	struct blk_desc *bd = mmc_get_blk_desc(mmc);
++	struct mvebu_image_tag *tag;
++	ulong image_addr = 0;
++	ulong fdt_addr = 0;
++	ulong tag_addr;
++	uint tag_blk_start = ALIGN(offset, bd->blksz) / bd->blksz;
++	uint tag_blk_cnt = ALIGN(sizeof(*tag), bd->blksz) / bd->blksz;
++	uint n;
++
++	ALLOC_CACHE_ALIGN_BUFFER(char, tag_buf, tag_blk_cnt * bd->blksz);
++	tag = (void *)tag_buf;
++
++	schedule();
++
++	printf("## Trying %s boot...\n", bank);
++
++	/* Load tag header */
++	n = blk_dread(bd, tag_blk_start, tag_blk_cnt, tag_buf);
++	if (n != tag_blk_cnt) {
++		printf("%s: failed to read tag header\n", bank);
++		return;
++	}
++
++	if (mvebu_imagetag_check(tag, maxsize, bank) != 0)
++		return;
++
++	if (tag->rootfs_size != 0) {
++		printf("%s: rootfs in tag not supported\n", bank);
++		return;
++	}
++
++	/* Get image and device tree load addresses from environment */
++	image_addr = env_get_ulong("image_addr", 16, 0);
++	if (!image_addr) {
++		puts("emmcboot needs image_addr\n");
++		return;
++	}
++
++	fdt_addr = env_get_ulong("fdt_addr", 16, 0);
++	if (!fdt_addr) {
++		puts("emmcboot needs fdt_addr\n");
++		return;
++	}
++
++	tag_addr = image_addr;
++
++	/* Load full image, temporarily reuse image_addr for this */
++	{
++		uint data_blk_start = ALIGN(offset, bd->blksz) / bd->blksz;
++		uint data_blk_cnt = ALIGN(mvebu_imagetag_total_size(tag),
++					  bd->blksz) / bd->blksz;
++
++		n = blk_dread(bd, data_blk_start, data_blk_cnt, (void *)tag_addr);
++		if (n != data_blk_cnt) {
++			printf("%s: failed to read full image\n", bank);
++			return;
++		}
++
++		if (mvebu_imagetag_crc((void *)tag_addr, bank) != 0)
++			return;
++	}
++
++	schedule();
++
++	/* Copy image and device tree to the right addresses */
++	/* We assume that image_addr + tag_size < fdt_addr */
++	{
++		tag = (void *)tag_addr;
++		memcpy((void *)fdt_addr,
++		       ((void *)tag_addr) + mvebu_imagetag_device_tree_offset(tag),
++		       mvebu_imagetag_device_tree_size(tag));
++		memmove((void *)image_addr,
++			((void *)tag_addr) + mvebu_imagetag_kernel_offset(tag),
++			mvebu_imagetag_kernel_size(tag));
++	}
++
++	schedule();
++
++	/* Set bootargs and boot */
++	{
++		char bootargs[256];
++		char *console_env;
++
++		console_env = env_get("console");
++		if (console_env)
++			snprintf(bootargs, sizeof(bootargs), "%s bank=%s",
++				 console_env, bank);
++		else
++			snprintf(bootargs, sizeof(bootargs), "bank=%s", bank);
++
++		env_set("bootargs", bootargs);
++
++		printf("## Booting kernel from %s...\n", bank);
++		printf("   Image addr: 0x%lx\n", image_addr);
++		printf("   FDT addr:   0x%lx\n", fdt_addr);
++
++		/* Build and run booti command */
++		{
++			char cmd[128];
++
++			snprintf(cmd, sizeof(cmd), "booti 0x%lx - 0x%lx",
++				 image_addr, fdt_addr);
++			run_command(cmd, 0);
++		}
++	}
++
++	printf("## %s boot failed\n", bank);
++}
++
++static int do_emmcboot(struct cmd_tbl *cmdtp, int flag, int argc,
++		       char *const argv[])
++{
++	int dev;
++	struct mmc *mmc;
++
++	dev = 0;
++	if (argc >= 2)
++		dev = dectoul(argv[1], NULL);
++
++	mmc = find_mmc_device(dev);
++	if (!mmc) {
++		printf("No MMC device %d found\n", dev);
++		return CMD_RET_FAILURE;
++	}
++
++	if (mmc_init(mmc)) {
++		puts("MMC init failed\n");
++		return CMD_RET_FAILURE;
++	}
++
++	/* Switch to partition 0 (user data area) */
++	if (blk_select_hwpart_devnum(UCLASS_MMC, dev, 0)) {
++		puts("MMC partition switch failed\n");
++		return CMD_RET_FAILURE;
++	}
++
++	if (mvebu_check_nrboot(mmc, CONFIG_NBX_MMC_PART_NRBOOT_OFFSET)) {
++		/* System is healthy: try newer bank first */
++		mvebu_try_emmcboot(mmc, CONFIG_NBX_MMC_PART_BANK1_OFFSET,
++				   CONFIG_NBX_MMC_PART_BANK1_SIZE, "bank1");
++		mvebu_try_emmcboot(mmc, CONFIG_NBX_MMC_PART_BANK0_OFFSET,
++				   CONFIG_NBX_MMC_PART_BANK0_SIZE, "bank0");
++	} else {
++		/* System is degraded: use stable bank first */
++		mvebu_try_emmcboot(mmc, CONFIG_NBX_MMC_PART_BANK0_OFFSET,
++				   CONFIG_NBX_MMC_PART_BANK0_SIZE, "bank0");
++		mvebu_try_emmcboot(mmc, CONFIG_NBX_MMC_PART_BANK1_OFFSET,
++				   CONFIG_NBX_MMC_PART_BANK1_SIZE, "bank1");
++	}
++
++	puts("emmcboot: all boot attempts failed\n");
++	return CMD_RET_FAILURE;
++}
++
++U_BOOT_CMD(
++	emmcboot, 2, 0, do_emmcboot,
++	"boot from MVEBU eMMC image banks",
++	"[dev]\n"
++	"    - Boot from eMMC device <dev> (default 0)\n"
++	"    - Requires image_addr and fdt_addr environment variables\n"
++	"    - Uses dual-bank boot with automatic fallback\n"
++	"    - Bank selection based on reboot tracking (nrboot)"
++);
+diff --git a/board/freebox/nbx10g/nbx_imagetag.h b/board/freebox/nbx10g/nbx_imagetag.h
 new file mode 100644
-index 00000000000..85a3086d6a0
+index 00000000000..999293dd58a
 --- /dev/null
-+++ b/configs/mvebu_nbx_88f8040_defconfig
-@@ -0,0 +1,75 @@
-+CONFIG_ARM=y
-+CONFIG_ARCH_CPU_INIT=y
-+CONFIG_ARCH_MVEBU=y
-+CONFIG_TEXT_BASE=0x00000000
-+CONFIG_NR_DRAM_BANKS=2
-+CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
-+CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xff0000
-+CONFIG_TARGET_NBX10G=y
-+CONFIG_ENV_SIZE=0x10000
-+CONFIG_ENV_OFFSET=0x180000
-+CONFIG_DM_GPIO=y
-+CONFIG_DEFAULT_DEVICE_TREE="armada-8040-nbx"
-+CONFIG_FIT=y
-+CONFIG_SYS_BOOTM_LEN=0x1000000
-+CONFIG_SYS_LOAD_ADDR=0x800000
-+CONFIG_PCI=y
-+# CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
-+# CONFIG_EFI_LOADER is not set
-+CONFIG_USE_PREBOOT=y
-+CONFIG_PREBOOT="echo (CRC warning is normal: no env saved yet)"
-+CONFIG_SYS_PBSIZE=1048
-+CONFIG_SYS_CONSOLE_INFO_QUIET=y
-+CONFIG_LAST_STAGE_INIT=y
-+CONFIG_SYS_PROMPT="nodebox10G>> "
-+CONFIG_SYS_MAXARGS=32
-+CONFIG_CMD_BOOTZ=y
-+# CONFIG_BOOTM_VXWORKS is not set
-+# CONFIG_CMD_ELF is not set
-+CONFIG_CMD_MEMTEST=y
-+CONFIG_CMD_GPIO=y
-+CONFIG_CMD_I2C=y
-+CONFIG_CMD_MISC=y
-+CONFIG_CMD_MMC=y
-+CONFIG_CMD_PCI=y
-+# CONFIG_CMD_SF is not set
-+CONFIG_CMD_USB=y
-+CONFIG_CMD_DHCP=y
-+CONFIG_CMD_MII=y
-+CONFIG_CMD_PING=y
-+CONFIG_CMD_CACHE=y
-+CONFIG_CMD_TIME=y
-+CONFIG_CMD_TIMER=y
-+CONFIG_CMD_NBX_EMMCBOOT=y
-+CONFIG_CMD_NBX_FBXSERIAL=y
-+CONFIG_CMD_EXT2=y
-+CONFIG_CMD_EXT4=y
-+CONFIG_CMD_EXT4_WRITE=y
-+CONFIG_CMD_FAT=y
-+CONFIG_CMD_FS_GENERIC=y
-+CONFIG_EFI_PARTITION=y
-+CONFIG_ENV_OVERWRITE=y
-+CONFIG_ENV_IS_IN_MMC=y
-+CONFIG_ENV_RELOC_GD_ENV_ADDR=y
-+CONFIG_ARP_TIMEOUT=200
-+CONFIG_NET_RETRY_COUNT=50
-+CONFIG_NET_RANDOM_ETHADDR=y
-+CONFIG_DM_I2C=y
-+CONFIG_SYS_I2C_MVTWSI=y
-+CONFIG_I2C_MUX=y
-+CONFIG_MISC=y
-+CONFIG_MMC_SDHCI=y
-+CONFIG_MMC_SDHCI_XENON=y
-+# CONFIG_SPI_FLASH is not set
-+CONFIG_PHY_MARVELL=y
-+CONFIG_PHY_GIGE=y
-+CONFIG_MVPP2=y
-+CONFIG_PCIE_DW_MVEBU=y
-+CONFIG_PHY=y
-+CONFIG_MVEBU_COMPHY_SUPPORT=y
-+CONFIG_PINCTRL=y
-+CONFIG_PINCTRL_ARMADA_8K=y
-+CONFIG_SYS_NS16550=y
-+CONFIG_USB=y
-+CONFIG_USB_XHCI_HCD=y
-+CONFIG_USB_STORAGE=y
-diff --git a/include/configs/nbx10g.h b/include/configs/nbx10g.h
-new file mode 100644
-index 00000000000..bd083b7e7d8
---- /dev/null
-+++ b/include/configs/nbx10g.h
-@@ -0,0 +1,29 @@
++++ b/board/freebox/nbx10g/nbx_imagetag.h
+@@ -0,0 +1,78 @@
 +/* SPDX-License-Identifier: GPL-2.0+ */
 +/*
-+ * Copyright (C) 2017-2018 Freebox SA
-+ * Copyright (C) 2026 Free Mobile, Vincent Jardin <vjardin@free.fr>
++ * MVEBU Image Tag header
 + *
-+ * Configuration for Freebox Nodebox 10G
++ * Copyright (C) 2026 Free Mobile, Freebox
 + */
 +
-+#ifndef _CONFIG_NBX10G_H
-+#define _CONFIG_NBX10G_H
++#ifndef __MVEBU_IMAGETAG_H
++#define __MVEBU_IMAGETAG_H
 +
-+#include "mvebu_armada-8k.h"
++#include <linux/types.h>
 +
-+/* Override environment settings for NBX */
-+#undef CFG_EXTRA_ENV_SETTINGS
-+#define CFG_EXTRA_ENV_SETTINGS \
-+	"hostname=nodebox10G\0" \
-+	"ethrotate=no\0" \
-+	"image_addr=0x7000000\0" \
-+	"image_name=Image.nodebox10G\0" \
-+	"fdt_addr=0x6f00000\0" \
-+	"fdt_name=nodebox10G.dtb\0" \
-+	"console=ttyS0,115200\0" \
-+	"tftpboot=setenv bootargs console=${console} bank=tftp; " \
-+		"dhcp ${image_addr} ${image_name}; " \
-+		"tftp ${fdt_addr} ${fdt_name}; " \
-+		"booti ${image_addr} - ${fdt_addr}\0"
++#define MVEBU_IMAGE_TAG_MAGIC	0x8d7c90bc
++#define MVEBU_IMAGE_TAG_VERSION	1
 +
-+#endif /* _CONFIG_NBX10G_H */
++/**
++ * struct mvebu_image_tag - MVEBU boot image tag structure
++ *
++ * All multi-byte fields are stored in big-endian format.
++ */
++struct mvebu_image_tag {
++	u32 crc;			/* CRC32-LE checksum (from offset 4) */
++	u32 magic;			/* Magic: 0x8d7c90bc */
++	u32 version;			/* Version: 1 */
++	u32 total_size;			/* Total image size including tag */
++	u32 flags;			/* Feature flags (reserved) */
++
++	u32 device_tree_offset;		/* Offset from tag start to DTB */
++	u32 device_tree_size;		/* DTB size in bytes */
++
++	u32 kernel_offset;		/* Offset from tag start to kernel */
++	u32 kernel_size;		/* Kernel size in bytes */
++
++	u32 rootfs_offset;		/* Offset from tag start to rootfs */
++	u32 rootfs_size;		/* Rootfs size (must be 0) */
++
++	char image_name[32];		/* Image name (null-terminated) */
++	char build_user[32];		/* Build user info */
++	char build_date[32];		/* Build date info */
++};
++
++/* Accessor functions for big-endian fields */
++static inline u32 mvebu_imagetag_device_tree_offset(struct mvebu_image_tag *tag)
++{
++	return be32_to_cpu(tag->device_tree_offset);
++}
++
++static inline u32 mvebu_imagetag_device_tree_size(struct mvebu_image_tag *tag)
++{
++	return be32_to_cpu(tag->device_tree_size);
++}
++
++static inline u32 mvebu_imagetag_kernel_offset(struct mvebu_image_tag *tag)
++{
++	return be32_to_cpu(tag->kernel_offset);
++}
++
++static inline u32 mvebu_imagetag_kernel_size(struct mvebu_image_tag *tag)
++{
++	return be32_to_cpu(tag->kernel_size);
++}
++
++static inline u32 mvebu_imagetag_rootfs_offset(struct mvebu_image_tag *tag)
++{
++	return be32_to_cpu(tag->rootfs_offset);
++}
++
++static inline u32 mvebu_imagetag_rootfs_size(struct mvebu_image_tag *tag)
++{
++	return be32_to_cpu(tag->rootfs_size);
++}
++
++static inline u32 mvebu_imagetag_total_size(struct mvebu_image_tag *tag)
++{
++	return be32_to_cpu(tag->total_size);
++}
++
++#endif /* __MVEBU_IMAGETAG_H */
+diff --git a/board/freebox/nbx10g/nbx_nrboot.h b/board/freebox/nbx10g/nbx_nrboot.h
+new file mode 100644
+index 00000000000..91c9fb2e57b
+--- /dev/null
++++ b/board/freebox/nbx10g/nbx_nrboot.h
+@@ -0,0 +1,34 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++/*
++ * MVEBU NRBoot (Number of Reboots) tracking header
++ *
++ * Copyright (C) 2026 Free Mobile, Freebox
++ */
++
++#ifndef __MVEBU_NRBOOT_H
++#define __MVEBU_NRBOOT_H
++
++#include <mmc.h>
++
++/**
++ * mvebu_check_nrboot() - Check and update reboot tracking counter
++ * @mmc: MMC device
++ * @offset: Byte offset in MMC where nrboot data is stored
++ *
++ * This function reads the reboot tracking counter, checks if we've
++ * exceeded the maximum number of failed boots (4), and updates the
++ * counter for the current boot attempt.
++ *
++ * The counter uses a bit-field encoding:
++ * - nrboot: Running count of boot attempts
++ * - nrsuccess: Count of successful boots
++ *
++ * If boot - success >= MAX_FAILURE (4), the system is considered
++ * degraded and should use the fallback boot bank.
++ *
++ * Return: 1 if system is healthy (try newer bank first),
++ *         0 if system is degraded (use stable bank first)
++ */
++int mvebu_check_nrboot(struct mmc *mmc, unsigned long offset);
++
++#endif /* __MVEBU_NRBOOT_H */
 -- 
 2.53.0
 
