@@ -4,96 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48A08CD342F
-	for <u-boot@archiver.kernel.org>; Fri,  8 May 2026 17:50:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF43DCD342F
+	for <u-boot@archiver.kernel.org>; Fri,  8 May 2026 17:51:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C9BC884DBB;
-	Fri,  8 May 2026 19:50:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 2CF1784D1E;
+	Fri,  8 May 2026 19:51:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ITbaBGdd";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="fOfTGYsL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A909A84DBF; Fri,  8 May 2026 19:50:05 +0200 (CEST)
-Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
- [IPv6:2a00:1450:4864:20::62a])
+ id 0624084DBB; Fri,  8 May 2026 19:51:24 +0200 (CEST)
+Received: from mail-oa1-x2a.google.com (mail-oa1-x2a.google.com
+ [IPv6:2001:4860:4864:20::2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B316784CE5
- for <u-boot@lists.denx.de>; Fri,  8 May 2026 19:50:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D846184CE5
+ for <u-boot@lists.denx.de>; Fri,  8 May 2026 19:51:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-bc47a96d3bbso306667066b.3
- for <u-boot@lists.denx.de>; Fri, 08 May 2026 10:50:02 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1778262602; cv=none;
- d=google.com; s=arc-20240605;
- b=DNna8Dg7v2PfK78wRO46PxHg2yj4PQ5efRhip7J8PCGXK5p8WdHCijx+QAdh2Tgedz
- uvPm6VX54ptve/cPkRmHoekBmWwQD4AvuHrSbhJSCqUL+euxBxVf36KqfRj1AKN6qnx6
- 3Y/AML8EfofWJO2MDQWdzTW/QuqXz/IrPOpcgUZ+CR0i8g29R4ohT/9UmdWyf1zirH+o
- p0lv25pi/AI3zhHfTMTDO/L9TiozGpvD34P3v9bin/ChvAzifRFqvSdxggCfyo4IwpRT
- MS4mtPUjZBEoqshEG3TCaH/s8KGBrj4cfUUxTmUleHmDg6+zC6cQ5fQf9Tpuaa2M9X65
- DeDA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=/bu5OyaFP3jdvMwDWFktPLAcMVsC4cR6fjVq3U1r7PY=;
- fh=i9TuoQdvRbVIn2UPEHNNC4PoYN0x8wYN83oS/pJLOns=;
- b=NlzGvDx0UQBG2bcw0EXs0OLR5or2FOlsdyuz02k2GH67+PlV1+TctfSAAlZSOF6AOt
- 8LaRqdhYQ9FzAeTMHIMFhp9arbhMszGKak8fHXiXna0TgRKYa1Df/71ur6nVS1lSMNmN
- ijxBwMDnHGXpmyPSetWBZkWx0E+PFbn2/7EK1NMNaKnk98B27KR7PFiWyM4WhcYSTKV0
- ZV5vZMZC5VWwurTQE9M2J3UNOCulB9ow5Ea54XNUjCi1T2e834+FpaRehtj9maFdKU31
- ZXE3FVuhRlRUXjzGp1z2lw6lqNNhOEya5DvFqm+UrfhPSv9ZvswDsD/TNn2RGpfb6z9i
- gd3Q==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x2a.google.com with SMTP id
+ 586e51a60fabf-42c08cbae4cso1780273fac.2
+ for <u-boot@lists.denx.de>; Fri, 08 May 2026 10:51:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1778262602; x=1778867402; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=/bu5OyaFP3jdvMwDWFktPLAcMVsC4cR6fjVq3U1r7PY=;
- b=ITbaBGddJuDmMbmc9TRoms+yIKxOMCN8Fu6O71kCtqcncjM8U0fxIzjXwpsphI9f9u
- 6g7JVDhLrRvTGsceeec8alA0AAjLQoyjebNGYRAHkblfOuKZFgYnbvXEpywkZgVmWfsn
- pyRixicEU+C0ipRgD40ljjUzqN7AzYt2khFpE=
+ d=konsulko.com; s=google; t=1778262680; x=1778867480; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=vcURqqFtbESSaqolbXtX/dxBwHFNq9yKOoAN2TbVYvw=;
+ b=fOfTGYsLD65urFQazmV/qBy04bDfHlk5vgenxa0jsPxqz6tmWMnNSOfr8Fn17OwNmo
+ UmkCh2F8MhTA9XBEQwb3pyh/lpvtJIfg37sYCSMdgEGE+C4Onm0SyWuc2d69YewYbx4B
+ 0+wcuRI0GPeiE7gmYuooD1Wt7Atw6T2MiJu50=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778262602; x=1778867402;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=/bu5OyaFP3jdvMwDWFktPLAcMVsC4cR6fjVq3U1r7PY=;
- b=ZLBvcGgCSRhOC3W0ODRpBModa9kmLeqsnnbNQuYzenKbvT2DOq1Qggj99kUpKiA6tI
- +UKIEFbpIwZnXhOKlouvqMeCfUe3OCXXR+COJbx57aHPvWUHR9HqWHF7uKOY3LTJfnSb
- NhY8Mh4X0lgmv052sWp6NBDoxVSZPKz31aH31d8+iqytkGB6RmgguA9erMcXT/b4e6+P
- o/GSrtPmTZv7LBikBio1HaxtLAv8N31D0llYZ66lHEQT2xG06dnKdu4x6/aTYxgcRBuv
- zGJrtHu92fHWn/n5hojLWezjB+lI3JRFTvu12iLZyG/VtNWUXZTFCiK8vv+fiNAeufQo
- /TnQ==
-X-Gm-Message-State: AOJu0Yzhv2c0CDJ/thqGnDuRdVyKuGNIuoLiaafamasnOz29p/7YSwlj
- IXS0SHLhr8oPVYOt6PrYnAUm8MLCo490A7rUyjEsaUrRKwOFc9KhPG+U7VdahlRzJIXtx1AEr2P
- Cy971CTLGfgKATfzZCOE0x+LpFE+rncSJ/4xv1jyl
-X-Gm-Gg: AeBDiet2i/yr0usA+luObXDGXV9zlAL2LUWkD0HAJoskoyzrlDHiB3ujGsi7IWusEF0
- Ia+8pc+R2VEnGrGppSNQFm+swKC3CPj/5rfGxOyIaBWSVQZrzu+xoxQLyQ6wOdLaaC7/18iQbMH
- 8APPS+TPNF0kBbEiS6Lo09dax/LVJlLLZwcY3AfDaHcR7/L129vpp5hw3Cp67UUlECuupXSA2+Y
- TQyuvnIBRvAWxH8ZSrhugu9wIjYa92XRLZzrDnXEGVIFXQWYh4p+sj6tEEW8jMWVZlAQTkBb0m1
- V2uUag==
-X-Received: by 2002:a17:907:1c01:b0:bc4:f44f:e145 with SMTP id
- a640c23a62f3a-bc56b82fa60mr762178966b.16.1778262601604; Fri, 08 May 2026
- 10:50:01 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1778262680; x=1778867480;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=vcURqqFtbESSaqolbXtX/dxBwHFNq9yKOoAN2TbVYvw=;
+ b=QtnA+9WG6/+YormrqVy7UbmDXy6eEvP9WVTJQEcSVWFy04sIlaBOGeREzM+8KatDBj
+ kCg/NjSqfDma9q020m7Cmg/0aRSiPvbNRjySYHAIj+WdLapxQUhPNhp1f9RPXVinzoq9
+ 6nDCLEljiUs6Nq7qiisdMTMi25caiO7E+2oFI6jbPDdqlJN8E0WLtym3thIq2eO+RqwE
+ V8sMkIRWcL0MXoDJ1a/5EP8e5ugpHexOJGG5djzttQaH4r9PH64cgCbDFQFgf1eOgYL2
+ xnNLzgkRq2Mvgfzluo8yaZXSsh/zpcgUOeGYMPFH2VmsfQOrsHIQ3QSlKg0x/iwO1lqD
+ dXNQ==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ80WUduOTxjqinPC/Yu9rjOsTNeVHb8CJYd5Owid+6qAquLsu7hP5zDlPaBPuyaDbIewn8jcd0=@lists.denx.de
+X-Gm-Message-State: AOJu0YxrGvkOktA8Z3p4Uf1cyv+c4G8ngT0lf/ion5ad7WYntBKPwtcL
+ DNiQZEpghEGzBgYzQTqHTzsd14OaR1UA4sFLzGmqErNb0y5VG7vQO/WHbudtADlcst8=
+X-Gm-Gg: Acq92OE7uH2C2p5YfaXkDJMgmfAVvg7LPsmICfwPX8SSbFCU4F+SiKiEydOHApz6Oyw
+ TfHdFSLjOFO7wHCNCQyKLaRFgsVwCG0nnsY3kxZL5yKDbKJqD/TuF1oHxM/Kwmi1nbH9CQBga1+
+ jI52t0cwlaj6XIOUpALTgGYDx8vAu5IKTquTMywKK0qLZ6tYPKbMX5cjEdznxLEGznbh8XbZHf4
+ ur7YhVJxoZMVB+4Al8XPiaCZAJxe5FKlrB3OksCXo5dfZQs/VoVAAcvlvXBX8uGTjZvOGn9svy0
+ XP45ct1E1w6Zh1neT0cgoWRCy853EjShsAv9mhFeU+MxPcP8bj9yth8O9VIgQCE+BiMXa+Amspi
+ pi90onD08lJWDY90rqobjQd/oovweDlvpXuksIYFcNocGkP/g5c5fow1aS5D07u7d4o5YZmKeXa
+ pLpOqWhV6+Jz9LPpWuJOsts/I4jS5rpPvYtr1GU3avZKRYxSAqbhtQHtWj8popM/k6iO13MQbia
+ f1/EM4WCiF34IVsB560PpncEbHf5PiYEQOHzPOdLPL5aaYfhEo=
+X-Received: by 2002:a05:6871:3312:b0:3f1:6d93:4386 with SMTP id
+ 586e51a60fabf-434f68b18e5mr9041183fac.1.1778262680553; 
+ Fri, 08 May 2026 10:51:20 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
+ [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-43557109b67sm2192423fac.6.2026.05.08.10.51.19
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 08 May 2026 10:51:19 -0700 (PDT)
+Date: Fri, 8 May 2026 11:51:17 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Daniel Golle <daniel@makrotopia.org>
+Cc: Wade Sparks <wsparks@vulncheck.com>, u-boot@lists.denx.de,
+ Disclosures <disclosure@vulncheck.com>
+Subject: Re: Coordinated Vulnerability Disclosure - U-Boot Multiple
+ Vulnerabilities (3)
+Message-ID: <20260508175117.GB1858239@bill-the-cat>
+References: <CAA1v+SgpU6iU_WZFWN4ft1NveJHM47zSk+KPLApy9hogOKDe9A@mail.gmail.com>
+ <af4hsnMuwzEKHZF3@makrotopia.org>
 MIME-Version: 1.0
-References: <20260508122247.512862-1-marek.vasut+renesas@mailbox.org>
- <20260508122247.512862-11-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20260508122247.512862-11-marek.vasut+renesas@mailbox.org>
-From: Simon Glass <sjg@chromium.org>
-Date: Fri, 8 May 2026 11:49:46 -0600
-X-Gm-Features: AVHnY4IADt-PeI-9Nw5xkw5KF1-gXqcdGHA4bff38NU0NmSVMl5SA375Uc6jv1o
-Message-ID: <CAFLszTgNJe27rZiu+vh7ywMtbwFnqZfeCKm_a2FExWHx+3efZg@mail.gmail.com>
-Subject: Re: [PATCH 11/14] power: domain: sandbox: Staticize and constify
- driver ops
-To: marek.vasut+renesas@mailbox.org
-Cc: u-boot@lists.denx.de, Jaehoon Chung <jh80.chung@samsung.com>, 
- Peng Fan <peng.fan@nxp.com>, Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="uOge1SmjloWoiejM"
+Content-Disposition: inline
+In-Reply-To: <af4hsnMuwzEKHZF3@makrotopia.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -110,15 +101,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2026-05-08T12:22:01, Marek Vasut <marek.vasut+renesas@mailbox.org> wrote:
-> power: domain: sandbox: Staticize and constify driver ops
->
-> Set the ops structure as static const. The structure is not accessible
-> from outside of this driver and is not going to be modified at runtime.
->
-> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
->
-> drivers/power/domain/sandbox-power-domain.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+--uOge1SmjloWoiejM
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Fri, May 08, 2026 at 06:47:30PM +0100, Daniel Golle wrote:
+> On Fri, May 08, 2026 at 01:20:44PM -0400, Wade Sparks wrote:
+> > Hello U-Boot mailing list,
+> >=20
+> > [...]
+> > We have provisionally allocated the following CVE IDs, which have been
+> > shared with the researcher but will remain private until public disclos=
+ure:
+> >=20
+> >    - *CVE-2026-29007* - Out-of-Bounds Read in TCP Options Parser
+> >    - *CVE-2026-29008* - Integer Underflow in TCP Payload Length
+> >    - *CVE-2026-29009* - Buffer Overflow via NFS Symlink Chain
+> >=20
+> > Please be aware that none of this information is public at this moment =
+and
+> > all parties involved are considered under embargo. The researcher has
+> > provided us with a comprehensive technical report including reproduction
+> > steps. Once an appropriate point of contact is identified, we'd be happ=
+y to
+> > share those materials with your team.
+>=20
+> Well, you've just posed it to a public mailing list, which even
+> includes a search-engine indexed public archive. The mere description
+> of the CVEs above already tells a lot (I'm sure any decent LLM can
+> identify the vuln just based on the CVE title given the sourcecode
+> repo), and should not have been made public before the fixes have
+> landed, and users have been given time to pick them up.
+>=20
+> So I suppose you have to act fast now. Tom, Simon and Marek are the
+> primary contact points (I'm just an external contributor, do NOT share
+> any details with me).
+
+Our documented process is to disclose things in public. We don't have
+the resources for handling issued behind closed doors. I've always
+believed bad actors are going to have found problems first. That was
+true years ago, and is even more true now in this day and age where
+malicious actors can just throw code at LLMs and see what breaks.
+
+--=20
+Tom
+
+--uOge1SmjloWoiejM
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaf4ikgAKCRAr4qD1Cr/k
+ChfcAP9GcNCrT8T8QOcl/kDu8k6Ywq0ImDla5+FH2cmUAiuVTwD/RKQwPv7DiU7B
+d4SVBqhsWZ+OUFUPUZv8AK2LoRczKwM=
+=brn7
+-----END PGP SIGNATURE-----
+
+--uOge1SmjloWoiejM--
