@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C435ACD342F
-	for <u-boot@archiver.kernel.org>; Fri,  8 May 2026 04:09:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 872DACD3436
+	for <u-boot@archiver.kernel.org>; Fri,  8 May 2026 04:09:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 21D7884C3B;
+	by phobos.denx.de (Postfix) with ESMTP id 57F0A84C40;
 	Fri,  8 May 2026 06:08:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=seznam.cz
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=seznam.cz header.i=@seznam.cz header.b="ZjQMS62s";
+	dkim=pass (2048-bit key; secure) header.d=seznam.cz header.i=@seznam.cz header.b="SDY/lQJe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2A6D684C06; Fri,  8 May 2026 02:34:40 +0200 (CEST)
-Received: from mxd-3-701.seznam.cz (mxd-3-701.seznam.cz
- [IPv6:2a02:598:96:8a00::1200:701])
+ id 5C87784BBD; Fri,  8 May 2026 02:34:47 +0200 (CEST)
+Received: from mxd-2-a03.seznam.cz (mxd-2-a03.seznam.cz
+ [IPv6:2a02:598:64:8a00::1000:a03])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1704384B92
- for <u-boot@lists.denx.de>; Fri,  8 May 2026 02:34:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7230C84B42
+ for <u-boot@lists.denx.de>; Fri,  8 May 2026 02:34:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=seznam.cz
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=michael.srba@seznam.cz
-Received: from email.seznam.cz by smtpc-mxd-5f4d8d5f6f-gj4cr
- (smtpc-mxd-5f4d8d5f6f-gj4cr [2a02:598:96:8a00::1200:701])
- id 406354a61b6d00cf41ca98f8; Fri, 08 May 2026 02:34:07 +0200 (CEST)
+Received: from email.seznam.cz by smtpc-mxd-5f4d8d5f6f-w7th8
+ (smtpc-mxd-5f4d8d5f6f-w7th8 [2a02:598:64:8a00::1000:a03])
+ id 12481b2849464f4113e1d776; Fri, 08 May 2026 02:34:12 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=seznam.cz; s=szn1;
- t=1778200447; bh=PK/VsNrAQcwxUbCQZouzLC89WSeJ2aIyRG66rvwvU+s=;
+ t=1778200452; bh=7nFW10wCGNHRb8Xsu1MBt06sElcp4PleqBMkRkab5KM=;
  h=From:Date:Subject:MIME-Version:Content-Type:
  Content-Transfer-Encoding:Message-Id:To:Cc;
- b=ZjQMS62swqVSznoMMQodUIj2H92jHXwzJ9HjNMt6KODTfpP7KSI6Vn1pxxyyW5ng9
- RLhBIB2rt/zOZG+xzR0ELJ4yRepW4l8XdLJudn/0mVKH8duNQaygpOdw8u3ZNsmy8h
- UJsfUWE0JQlUSy1pY1dL0ic6CCiOtJ8mWObD46qt98/GuyUS/uLLaRvbe4hbe/DXuY
- iezL00HEpG8sOpIScOCpN2KAb/CwvvDTmO3NCUU73XcRQrZpU1Qb+8UkFSVBzghzo5
- y18fEbl9pqSNiNUxT1oPgXlbgUISZlGKuYDAc6UKdteP5Ywg12CTpMNKXbWLhnpYJm
- ozAfweAvtNlQQ==
+ b=SDY/lQJeJ/VoHrFjkAbNkrtPTdBYnuYizba1kpmGlSnKRfMnY1zNm5qzFMIHLFp0O
+ sFHp9avZebEz0vBgCX0Y2o2hQGOUSUeWtHsNSPUdUq7ANhUxDHBKccbkTfzq8kyl27
+ DPeW8/ad6HsotwfumniPwDGADIyjSpLcQZu4bPmyxuRZtQrZOq+H+Vhbyuh8egSogD
+ mmSoE4zifiYB8b31o4MHVqKIX7WrRMsuzASTUz5rp7vS79qbqiL8VU9S6AKzkz55VB
+ PWuAB+o7l+6AdEp2MtWe5YFxTJMBHW1GEVLEIy/lMKWVDE9dxWWJNIF7wyb0M4qqJG
+ J3vA/CSczF7+g==
 Received: from [127.0.0.1] (ip-111-27.static.ccinternet.cz [147.161.27.111])
  by smtpd-relay-6597cc8696-xddnz (szn-email-smtpd/2.0.72) with ESMTPA
- id 3db8f1ca-90e4-455d-bbf6-2050ce0de454;
- Fri, 08 May 2026 02:33:38 +0200
+ id 05e040c1-bc5f-40fd-b987-a08397a42589;
+ Fri, 08 May 2026 02:33:36 +0200
 From: michael.srba@seznam.cz
-Date: Fri, 08 May 2026 02:33:26 +0200
-Subject: [PATCH v6 04/11] mach-snapdragon: boot0.h: split out msm8916_boot0.h
+Date: Fri, 08 May 2026 02:33:23 +0200
+Subject: [PATCH v6 01/11] Makefile: add SPL_REMAKE_ELF_LDSCRIPT feature
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260508-qcom_spl-v6-4-aaac1ab17b50@seznam.cz>
+Message-Id: <20260508-qcom_spl-v6-1-aaac1ab17b50@seznam.cz>
 References: <20260508-qcom_spl-v6-0-aaac1ab17b50@seznam.cz>
 In-Reply-To: <20260508-qcom_spl-v6-0-aaac1ab17b50@seznam.cz>
 To: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>, 
@@ -108,187 +108,64 @@ X-Virus-Status: Clean
 
 From: Michael Srba <Michael.Srba@seznam.cz>
 
-Prepare for supporting alternative boot0.h per-SoC by splitting out
-the existing msm8916-specific code.
-
-There is now a selection mechanism to choose a specific boot0.h
-in the Kconfig. BOOT0_MSM8916_PSCI_WORKAROUND is the only option
-right now, but more can be added. The toplevel boot0.h additionally
-enables conditionally performing the include only in u-boot proper,
-or only in SPL.
+Some platforms (e.g. at least Qualcomm) use the ELF format in creative
+ways, including in the bootrom. Make SPL_REMAKE_ELF use a linker script
+specified in SPL_REMAKE_ELF_LDSCRIPT (with the previously hardcoded path
+as the default).
 
 Signed-off-by: Michael Srba <Michael.Srba@seznam.cz>
 ---
- arch/arm/mach-snapdragon/Kconfig                   | 16 ++++++
- arch/arm/mach-snapdragon/include/mach/boot0.h      | 60 +++-------------------
- .../mach-snapdragon/include/mach/msm8916_boot0.h   | 54 +++++++++++++++++++
- configs/dragonboard410c_defconfig                  |  1 +
- 4 files changed, 79 insertions(+), 52 deletions(-)
+ Makefile           |  9 +++++++--
+ common/spl/Kconfig | 12 ++++++++++++
+ 2 files changed, 19 insertions(+), 2 deletions(-)
 
-diff --git a/arch/arm/mach-snapdragon/Kconfig b/arch/arm/mach-snapdragon/Kconfig
-index d3de8693b5a..f863daf6bb9 100644
---- a/arch/arm/mach-snapdragon/Kconfig
-+++ b/arch/arm/mach-snapdragon/Kconfig
-@@ -42,4 +42,20 @@ config SYS_CONFIG_NAME
- 	  Based on this option include/configs/<CONFIG_SYS_CONFIG_NAME>.h header
- 	  will be used for board configuration.
+diff --git a/Makefile b/Makefile
+index 49d9740327e..8fe722f6c0d 100644
+--- a/Makefile
++++ b/Makefile
+@@ -2008,12 +2008,17 @@ u-boot.elf: u-boot.bin u-boot-elf.lds FORCE
+ quiet_cmd_u-boot-spl-elf ?= LD      $@
+ 	cmd_u-boot-spl-elf ?= $(LD) spl/u-boot-spl-elf.o -o $@ \
+ 	$(if $(CONFIG_SYS_BIG_ENDIAN),-EB,-EL) \
+-	-T u-boot-elf.lds --defsym=$(CONFIG_PLATFORM_ELFENTRY)=$(CONFIG_SPL_TEXT_BASE) \
++	-T spl/u-boot-spl-elf.lds --defsym=$(CONFIG_PLATFORM_ELFENTRY)=$(CONFIG_SPL_TEXT_BASE) \
+ 	-Ttext=$(CONFIG_SPL_TEXT_BASE)
+-spl/u-boot-spl.elf: spl/u-boot-spl.bin u-boot-elf.lds
++spl/u-boot-spl.elf: spl/u-boot-spl.bin spl/u-boot-spl-elf.lds
+ 	$(Q)$(OBJCOPY) -I binary $(PLATFORM_ELFFLAGS) $< spl/u-boot-spl-elf.o
+ 	$(call if_changed,u-boot-spl-elf)
  
-+choice
-+	prompt "Qualcomm boot0.h workaround"
-+	optional
++SPL_REMAKE_ELF_LDSCRIPT := $(addprefix $(srctree)/,$(CONFIG_SPL_REMAKE_ELF_LDSCRIPT:"%"=%))
++
++spl/u-boot-spl-elf.lds: $(SPL_REMAKE_ELF_LDSCRIPT) prepare FORCE
++	$(call if_changed_dep,cpp_lds)
++
+ u-boot-elf.lds: arch/u-boot-elf.lds prepare FORCE
+ 	$(call if_changed_dep,cpp_lds)
+ 
+diff --git a/common/spl/Kconfig b/common/spl/Kconfig
+index 5fa94098e49..5c7b094e6b6 100644
+--- a/common/spl/Kconfig
++++ b/common/spl/Kconfig
+@@ -238,6 +238,18 @@ config SPL_HANDOFF
+ 	  proper. Also SPL can receive information from TPL in the same place
+ 	  if that is enabled.
+ 
++config SPL_REMAKE_ELF_LDSCRIPT
++	string "Linker script for SPL ELF"
++	depends on SPL_REMAKE_ELF
++	default "arch/u-boot-elf.lds"
 +	help
-+	  While U-Boot on Qualcomm platforms doesn't generally need compile-time
-+	  adjustments based on the target SoC, workarounds in boot0.h can't
-+	  practically detect the SoC at runtime. Enable one of these workarounds
-+	  if you know you need it.
++	  This allows specifying a linker script that will be used to re-wrap
++	  the SPL binary into an ELF.
 +
-+config BOOT0_MSM8916_PSCI_WORKAROUND
-+	bool "boot0.h workaround for buggy PSCI on the msm8916 SoC"
-+	help
-+	  Select this if you are building U-Boot proper for an msm8916 board that
-+	  uses the buggy PSCI implementation.
-+endchoice
++	  Some platforms (e.g. at least Qualcomm) use the ELF format in creative
++	  ways, including in the bootrom. For such platforms, you can change
++	  the default linker script to a platform-specific one.
 +
- endif
-diff --git a/arch/arm/mach-snapdragon/include/mach/boot0.h b/arch/arm/mach-snapdragon/include/mach/boot0.h
-index 953cccad790..b3c76d6d97d 100644
---- a/arch/arm/mach-snapdragon/include/mach/boot0.h
-+++ b/arch/arm/mach-snapdragon/include/mach/boot0.h
-@@ -1,54 +1,10 @@
- /* SPDX-License-Identifier: GPL-2.0+ */
--/*
-- * Workaround for "PSCI bug" on DragonBoard 410c
-- * Copyright (C) 2021 Stephan Gerhold <stephan@gerhold.net>
-- *
-- * Syscall parameters taken from Qualcomm's LK fork (scm.h):
-- * Copyright (c) 2011-2015, The Linux Foundation. All rights reserved.
-- *
-- * The PSCI implementation in the TrustZone/tz firmware on DragonBoard 410c has
-- * a bug that starts all other CPU cores in 32-bit mode unless the TZ syscall
-- * that switches from 32-bit to 64-bit mode is executed at least once.
-- *
-- * Normally this happens inside Qualcomm's LK bootloader which runs in 32-bit
-- * mode and uses the TZ syscall to boot a kernel in 64-bit mode. However, if
-- * U-Boot is installed to the "aboot" partition (replacing LK) the switch to
-- * 64-bit mode never happens since U-Boot is already running in 64-bit mode.
-- *
-- * A workaround for this "PSCI bug" is to execute the TZ syscall when entering
-- * U-Boot. That way PSCI is made aware of the 64-bit switch and starts all other
-- * CPU cores in 64-bit mode as well.
-- */
--#include <linux/arm-smccc.h>
--
--#define ARM_SMCCC_SIP32_FAST_CALL \
--	ARM_SMCCC_CALL_VAL(ARM_SMCCC_FAST_CALL, ARM_SMCCC_SMC_32, ARM_SMCCC_OWNER_SIP, 0)
--
--	/*
--	 * U-Boot might be started in EL2 or EL3 with custom firmware.
--	 * In that case, we assume that the workaround is not necessary or is
--	 * handled already by the alternative firmware. Using the syscall in EL2
--	 * would demote U-Boot to EL1; in EL3 it would probably just crash.
--	 */
--	mrs	x0, CurrentEL
--	cmp	x0, #(1 << 2)	/* EL1 */
--	bne	reset
--
--	/* Prepare TZ syscall parameters */
--	mov	x0, #ARM_SMCCC_SIP32_FAST_CALL
--	movk	x0, #0x10f	/* SCM_SVC_MILESTONE_CMD_ID */
--	mov	x1, #0x12	/* MAKE_SCM_ARGS(0x2, SMC_PARAM_TYPE_BUFFER_READ) */
--	adr	x2, el1_system_param
--	mov	x3, el1_system_param_end - el1_system_param
--
--	/* Switch PSCI to 64-bit mode. Resets CPU and returns at el1_elr */
--	smc	#0
--
--	/* Something went wrong, perhaps PSCI is already in 64-bit mode? */
-+#if defined(CONFIG_SPL_BUILD)
- 	b	reset
--
--	.align	3
--el1_system_param:
--	.quad	0, 0, 0, 0, 0, 0, 0, 0, 0	/* el1_x0-x8 */
--	.quad	reset				/* el1_elr */
--el1_system_param_end:
-+#else
-+#if defined(CONFIG_BOOT0_MSM8916_PSCI_WORKAROUND)
-+#include "msm8916_boot0.h"
-+#else
-+	b	reset
-+#endif
-+#endif
-diff --git a/arch/arm/mach-snapdragon/include/mach/msm8916_boot0.h b/arch/arm/mach-snapdragon/include/mach/msm8916_boot0.h
-new file mode 100644
-index 00000000000..953cccad790
---- /dev/null
-+++ b/arch/arm/mach-snapdragon/include/mach/msm8916_boot0.h
-@@ -0,0 +1,54 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+/*
-+ * Workaround for "PSCI bug" on DragonBoard 410c
-+ * Copyright (C) 2021 Stephan Gerhold <stephan@gerhold.net>
-+ *
-+ * Syscall parameters taken from Qualcomm's LK fork (scm.h):
-+ * Copyright (c) 2011-2015, The Linux Foundation. All rights reserved.
-+ *
-+ * The PSCI implementation in the TrustZone/tz firmware on DragonBoard 410c has
-+ * a bug that starts all other CPU cores in 32-bit mode unless the TZ syscall
-+ * that switches from 32-bit to 64-bit mode is executed at least once.
-+ *
-+ * Normally this happens inside Qualcomm's LK bootloader which runs in 32-bit
-+ * mode and uses the TZ syscall to boot a kernel in 64-bit mode. However, if
-+ * U-Boot is installed to the "aboot" partition (replacing LK) the switch to
-+ * 64-bit mode never happens since U-Boot is already running in 64-bit mode.
-+ *
-+ * A workaround for this "PSCI bug" is to execute the TZ syscall when entering
-+ * U-Boot. That way PSCI is made aware of the 64-bit switch and starts all other
-+ * CPU cores in 64-bit mode as well.
-+ */
-+#include <linux/arm-smccc.h>
-+
-+#define ARM_SMCCC_SIP32_FAST_CALL \
-+	ARM_SMCCC_CALL_VAL(ARM_SMCCC_FAST_CALL, ARM_SMCCC_SMC_32, ARM_SMCCC_OWNER_SIP, 0)
-+
-+	/*
-+	 * U-Boot might be started in EL2 or EL3 with custom firmware.
-+	 * In that case, we assume that the workaround is not necessary or is
-+	 * handled already by the alternative firmware. Using the syscall in EL2
-+	 * would demote U-Boot to EL1; in EL3 it would probably just crash.
-+	 */
-+	mrs	x0, CurrentEL
-+	cmp	x0, #(1 << 2)	/* EL1 */
-+	bne	reset
-+
-+	/* Prepare TZ syscall parameters */
-+	mov	x0, #ARM_SMCCC_SIP32_FAST_CALL
-+	movk	x0, #0x10f	/* SCM_SVC_MILESTONE_CMD_ID */
-+	mov	x1, #0x12	/* MAKE_SCM_ARGS(0x2, SMC_PARAM_TYPE_BUFFER_READ) */
-+	adr	x2, el1_system_param
-+	mov	x3, el1_system_param_end - el1_system_param
-+
-+	/* Switch PSCI to 64-bit mode. Resets CPU and returns at el1_elr */
-+	smc	#0
-+
-+	/* Something went wrong, perhaps PSCI is already in 64-bit mode? */
-+	b	reset
-+
-+	.align	3
-+el1_system_param:
-+	.quad	0, 0, 0, 0, 0, 0, 0, 0, 0	/* el1_x0-x8 */
-+	.quad	reset				/* el1_elr */
-+el1_system_param_end:
-diff --git a/configs/dragonboard410c_defconfig b/configs/dragonboard410c_defconfig
-index 51ad265688c..645f0816701 100644
---- a/configs/dragonboard410c_defconfig
-+++ b/configs/dragonboard410c_defconfig
-@@ -11,6 +11,7 @@ CONFIG_ENV_OFFSET=0x0
- CONFIG_DEFAULT_DEVICE_TREE="qcom/apq8016-sbc"
- CONFIG_OF_LIBFDT_OVERLAY=y
- CONFIG_SYS_LOAD_ADDR=0x80080000
-+CONFIG_BOOT0_MSM8916_PSCI_WORKAROUND=y
- CONFIG_IDENT_STRING="\nQualcomm-DragonBoard 410C"
- CONFIG_REMAKE_ELF=y
- CONFIG_BUTTON_CMD=y
+ config SPL_LDSCRIPT
+ 	string "Linker script for the SPL stage"
+ 	default "arch/arm/cpu/arm926ejs/sunxi/u-boot-spl.lds" if MACH_SUNIV
 
 -- 
 2.53.0
