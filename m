@@ -4,107 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0130CD3445
-	for <u-boot@archiver.kernel.org>; Fri,  8 May 2026 23:37:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3908DCD3445
+	for <u-boot@archiver.kernel.org>; Fri,  8 May 2026 23:42:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 59EF384CE4;
-	Sat,  9 May 2026 01:37:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id A181384CE4;
+	Sat,  9 May 2026 01:42:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="j97YbvSr";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="eYo6NUlW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ED16684DF6; Sat,  9 May 2026 01:37:07 +0200 (CEST)
-Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
- [IPv6:2a00:1450:4864:20::62c])
+ id 5434584DF8; Sat,  9 May 2026 01:42:40 +0200 (CEST)
+Received: from mail-ot1-x341.google.com (mail-ot1-x341.google.com
+ [IPv6:2607:f8b0:4864:20::341])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4139C84CB5
- for <u-boot@lists.denx.de>; Sat,  9 May 2026 01:37:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9997D84CBB
+ for <u-boot@lists.denx.de>; Sat,  9 May 2026 01:42:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62c.google.com with SMTP id
- a640c23a62f3a-bc1f0830f44so660627566b.0
- for <u-boot@lists.denx.de>; Fri, 08 May 2026 16:37:05 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1778283425; cv=none;
- d=google.com; s=arc-20240605;
- b=exkQlYHTEJroJuLvG9PfFyRZPXTXkUcCYyqCa4xMOg6LV5BIujUpG5sG8NnEe4gvuC
- 1neaNDXHJE8u4PoDnF7eqz77/D3GyFiO0vPKsNr14/mViGeke+xnjujLdif2HikZu0hO
- yWG2Pdrt+qQ6jJY4lkL5isyTWQJ+4iEHU0VAll8gaglyZ+FXZCeSB7LUHWohdr3lrdyB
- 3tzEX7JWa4JVmKySARpMGb30MOMb2BfsK19ukq6+Het7u4pskWQ9VfDP2+Tg7PvYD0QS
- rkm6Xnu0X8PEEiVzxVuztGX2jjEoHKMSGqwKDocbN2QqU7FaWHSh+XbAusi3Mv/+9WRb
- l6/w==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=k3Lic5jJ+rPBe5vt2vgkLF1T9ZoWpxsZ2Z28UfztWnU=;
- fh=aS5+gFzCC5U8/m+k29r1E0mgtm9g+3h1Bn+q7cc0omo=;
- b=WeWUfeLgcl73WCdUFvJvfv4KIsz1jz3SsKYwfob/fJo0yyH6eoZPrTtQt/DqCJMsT6
- dULyo8Us6aRKshfqlyaacL/cPTDw2IH3MlLRnsZ/llOyiNa9vg99uAK7o16n+bCE5V3n
- 4mEKmCGJ3/T9Rh3/8LYaZmoA9CH90TQV14himEqIDnk/IlNTeL21OU+sUuPvimS8AJ43
- //+yg3V3TmuNj4dTXGtmdI2w+fqpNP3ZkW0EqN0/TVzuFm74QW0IRLxhANb92rxzZOWD
- VTtrF62gzcIOGRZsF/H0aTyCXGDxqK0/MZGxvyrAAaBVBZkxQR8d1NyWYT3LXdOs9rDK
- Zy/w==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x341.google.com with SMTP id
+ 46e09a7af769-7dcdaf06498so1898603a34.2
+ for <u-boot@lists.denx.de>; Fri, 08 May 2026 16:42:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1778283425; x=1778888225; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=k3Lic5jJ+rPBe5vt2vgkLF1T9ZoWpxsZ2Z28UfztWnU=;
- b=j97YbvSrdtmvA856t6jADFpW493vuGsL9tUtjzn+Xzp2EJsXLEsumlRqPrewLjkjby
- wYEP7UhkEXUjklOlZdUDlj59IcGdz+f6fRYK9sTDeBdvJTQdzM1tO5KTWTrf2VuLi0yn
- mhqKmfVvmkx6mztz8oDV0Q1VUt6rEkV+L5Nok=
+ d=konsulko.com; s=google; t=1778283755; x=1778888555; darn=lists.denx.de;
+ h=content-disposition:mime-version:message-id:subject:cc:to:from:date
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=ZN1IzPwunZIe+NyjNfjH/koKaqyTeLl0u4ZBqhH92cQ=;
+ b=eYo6NUlWQ9u0srM/GZNq2L7jTyrjdMLN46q9VR7HCs8msQEelFwuAJrO1a6jtdfopx
+ xvqG3k6Z+0kzzmZHBMi8MWMfts82ITCfjine7NrSAsORZDqg3nPPLOcXEoee/28KKnaj
+ NACfIvAQWORmONN//QhQWhoS1oc0nB1qnS2Pg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778283425; x=1778888225;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=k3Lic5jJ+rPBe5vt2vgkLF1T9ZoWpxsZ2Z28UfztWnU=;
- b=Mu4dkCuRMBBP3dzUY+FTTKoUSAAScL59rHHBRsgaeMz9ZA2pRtx5oZiqpAEB8Yibli
- N4W2MHZLfoM8Fthg18xoUBcJB+6QkgjVFpzfhV7Eo+/utXC5nzBxN1vVAXe8YyJjhf2N
- qMrUJfFKcKWmOBH3qIe2Try/ibsdkN6pYHNDt9ygU5aUQmnZtW0VWosg7Zs8ZtGDFI9g
- XEdEfK1fW92+ohwzHYsxV/X6yQ5Fuv/FEYld8JWMfryxVpshFYi60mmC2MReBIi/w/Qd
- OD+BfWaXY+E9uScZInmC99QdeGQySj2S+/2XhPXUuTNsWXyzmExIZWcLVvXRL2hHgM8G
- oJqQ==
-X-Forwarded-Encrypted: i=1;
- AFNElJ8CZtUMQAzcf48RLxxzkN+2KsxWNJCbwjwkR7/CrIWRM5Wtq+i74Hd67HcMkQx7pM7m8bl8DLY=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy9ZerupTMlNUBqBWo0OZmy0lOSMd5zO08EL7C/TE3Q+i9DwFbC
- PhDgjB7GSq9JtjM1+6CebiA8KW/8K3fCzZxG5RnIbxubKFopRxF4MuMjQ53xrE2bqaNf63zTi2Q
- ae8JWoZuae6j/lBxiEfKQuGbD69vU86yj4vUYllLT
-X-Gm-Gg: Acq92OHAxKPWcM3O5+ZdXbKOFzz+fxFLe6ri0IIXU33UN122Fgr6Ius/jhTzWCrhxMN
- xR+VsKfoqDowqKeESrOG3ukfL0UbCUugYeVFsyuXk5fQQB1ygRxQwM6c84c52KqueJm4cMAhLpT
- HjjHuQOb7+U7UcFkR+odIlw/JVRMuGd8oqINxUg72mxPWMUUCXpTsZXOqIv4Xee/m+F8bReYoyY
- MoI1fXD8ZTs/VYDyzU6glROSL83rdrQsUIOoU2zuQt7zqjS46jp5GcW7JHHkUHAuqlfgFuvndAt
- ICQLQg==
-X-Received: by 2002:a17:906:398c:b0:bcb:b757:a8a9 with SMTP id
- a640c23a62f3a-bcbb757a994mr60285366b.12.1778283424516; Fri, 08 May 2026
- 16:37:04 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1778283755; x=1778888555;
+ h=content-disposition:mime-version:message-id:subject:cc:to:from:date
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=ZN1IzPwunZIe+NyjNfjH/koKaqyTeLl0u4ZBqhH92cQ=;
+ b=sU6vrwCF9ugOM9VvPEjGYXB7sM6mkpcF8vfHL80KW3IlF/4/UWJ18hwoikhsO/5kJW
+ oLmSuDWHD2WyvCEsQZFhv5+NS/ywXeki1CoTnALGKwYWoykM8FlUTMgsQMQJ7bfLofIZ
+ kQ55efl0DMd7e4EopfFwqdpfBn9TrldEQ2rrSs6NZnRBoZY1/K+E6JgCEs4Y7EjQH7L0
+ 4gFQbTmsavW0ySM0eeX3uLm1n60hcaFBWmMz310k0b7/Io8JsZfuNC0/NuYGvD08OeBa
+ rlS5jGb/V4PKObSKoS8DGUIQO4f3w+ulQ+5KK+8NvEnv1p3F31YOrzskoHLRjgpKjTRw
+ m4Ew==
+X-Gm-Message-State: AOJu0Yyw07SiiyNz6SCccEkIxuMC605I3iUIBUn+Cmz+g/AiWmpprFz1
+ PPmeyeIuNRRVBz+pZPYaNe46yNt9n+6aFwCk3Ya/poPIk0D9QDJhktmcMOt5gY4SK7PNClRe7+C
+ k93XPu9ZGw2/2BUI=
+X-Gm-Gg: AeBDiesCVrj6GNI4Hd3oZugt6Cw7YmadivRV/6MaKeMm6wJ5/036R5J+ww6Eryk49H1
+ 4T9RuUYnaJ9cP0YIfMeBYot0jyshVe5M4QQP0p+egLjHcb4H0BGxHBU1YcxEj68DsESU/IRB902
+ CesYQjuPaktEeWh0SrH5vPyoKg1XQ6sbKP8a+LWEiXQZjYqJDzccqqwQYpBvCeoCoHng8YRxNmK
+ 2OzhF0otaKuNPLpUrVhmCMWbwl6hdgEq9MqLt9QJp/469MYNp/rm0+fX8YsZoCFhfw+wJ0VAQPE
+ 7AdzHs8tTIGKu16iT79HfGUGKihMCcjjmMCgneQOnBetvXSg9sQfO3XgohPzUHFkxGzVn69bZyS
+ KezF/OQP9lWojjkJy6a3kCJUQ2iQ0bmQ8t0DwYGynvZWBdUQBAb0Rk5+Pjfgbj0Iek7irpl2eKb
+ V2oBmo8qU+dHhQ4ULkZRmzrY30e2idJoomHLIs/CTQ+nIyspmSMm1EoEoEunLFKbnptvjECieSM
+ WPXIZj6Zh8jnYQMSDNf15llI3qYO+Xp2wDx0angEgZZ/oVhJ/wh4E8/ikCY+w==
+X-Received: by 2002:a05:6820:4cc4:b0:694:6e61:8de0 with SMTP id
+ 006d021491bc7-69998d17b75mr3949358eaf.30.1778283755214; 
+ Fri, 08 May 2026 16:42:35 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
+ [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-69b25c9a23fsm1813735eaf.7.2026.05.08.16.42.33
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 08 May 2026 16:42:34 -0700 (PDT)
+Date: Fri, 8 May 2026 17:42:31 -0600
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de
+Cc: "Lucien.Jheng" <lucienzx159@gmail.com>
+Subject: Fwd: New Defects reported by Coverity Scan for Das U-Boot
+Message-ID: <20260508234231.GF1858239@bill-the-cat>
 MIME-Version: 1.0
-References: <20260508154108.336B968BEB@verein.lst.de>
- <20260508154239.1E16368BFE@verein.lst.de>
- <CAFLszTgaG8RV=kWgr7Gu3tkVniq5pNVQ7RSUEv2EMyyQ4ALO6Q@mail.gmail.com>
- <20260508214222.642b15cb@lst.de>
- <CALeDE9NQKk8Cd3bAUqM6Rpf2ZDtTUkRSKnzsG+p7ycCihNvHYA@mail.gmail.com>
-In-Reply-To: <CALeDE9NQKk8Cd3bAUqM6Rpf2ZDtTUkRSKnzsG+p7ycCihNvHYA@mail.gmail.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Fri, 8 May 2026 17:36:52 -0600
-X-Gm-Features: AVHnY4IwaaZI83vLCOqUl0dsP5HoQA-uy9zr8vh-IlDRkSAPMhrPj9bicHoMyBI
-Message-ID: <CAFLszTiiq5Gtpn8gxi5U0nE7Uyy2B58E6qFdQ8qrWeXskJEB5A@mail.gmail.com>
-Subject: Re: [PATCH 1/3] core: Skip parent device nodes without a DT reference
- when looking for dma-ranges
-To: Peter Robinson <pbrobinson@gmail.com>
-Cc: Torsten Duwe <duwe@lst.de>, Matthias Brugger <mbrugger@suse.com>,
- Bin Meng <bmeng.cn@gmail.com>, 
- Andrew Goodbody <andrew.goodbody@linaro.org>, Tom Rini <trini@konsulko.com>, 
- Andrea della Porta <andrea.porta@suse.com>,
- Neil Armstrong <neil.armstrong@linaro.org>, 
- =?UTF-8?B?SmFuIMSMZXJtw6Fr?= <sairon@sairon.cz>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="DigdrTmORQw5dwWa"
+Content-Disposition: inline
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -121,419 +95,592 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Peter,
 
-On Fri, 8 May 2026 at 13:56, Peter Robinson <pbrobinson@gmail.com> wrote:
->
-> On Fri, 8 May 2026 at 20:42, Torsten Duwe <duwe@lst.de> wrote:
-> >
-> > On Fri, 8 May 2026 12:47:45 -0600
-> > Simon Glass <sjg@chromium.org> wrote:
-> > [...]
-> > > There's already a unit test for device_get_dma_constraints() in
-> > > test/dm/read.c (dm_test_dma_ranges). Since you are extending it to
-> > > walk past nodes without an ofnode, please can you add a case
-> > > exercising the new path - a sandbox device whose immediate parent has
-> > > no DT reference should do it.
-> >
-> > I'll have a look.
-> >
-> > Talking unit tests, is it just me who experiences reproducible crashes
-> > on RPi5 with today's master branch?
->
-> Not just you, I saw crashes when I tested rc1 but I've not had time to
-> bisect it and see what other platforms are affected.
+--DigdrTmORQw5dwWa
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-I just did a bisect and this is the start and end of it:
+Here's the latest report. I think test code matters because it sets bad
+examples, or might not really end up testing things the way we want them
+to, and so should be fixed. Thanks!
 
-HEAD is now at 88dc2788777 Prepare v2026.04
-=E2=9C=94 ~/u [v2026.04|=E2=9C=94]
-17:08 $ ub-smoke rpi5
-.
-                    [100%]
-1 passed in 29.02s
-=E2=9C=94 ~/u [v2026.04|=E2=80=A61]
-17:08 $ good
-You need to start by "git bisect start"
-
-Do you want me to do it for you [Y/n]?
-status: waiting for both good and bad commits
-status: waiting for bad commit, 1 good commit known
-=E2=9C=94 ~/u [v2026.04|BISECTING|=E2=80=A61]
-17:09 $ co us/master
-Previous HEAD position was 88dc2788777 Prepare v2026.04
-HEAD is now at 3cdd19089f1 Merge tag 'mmc-for-2026.07-rc2' of
-https://source.denx.de/u-boot/custodians/u-boot-mmc
-=E2=9C=94 ~/u [:3cdd19089f1|BISECTING|=E2=80=A61]
-17:09 $ ub-smoke rpi5
-E
-                    [100%]
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D ERRORS
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-_______________________________ ERROR at setup of test_uboot_smoke
-_______________________________
-
-request =3D <SubRequest 'u_boot' for <Function test_uboot_smoke>>
-target =3D Target(name=3D'rpi5',
-env=3DEnvironment(config_file=3D'/vid/software/devel/ubtest/lab/cfg/kea_env=
-.cfg'),
-var_dict=3DNone)
-strategy =3D UBootStrategy(target=3DTarget(name=3D'rpi5',
-env=3DEnvironment(config_file=3D'/vid/software/devel/ubtest/lab/cfg/kea_env=
-.cfg')...covery_reset=3DFalse,
-console_needs_power=3DFalse, power_on_before_reset=3DFalse,
-power_on_button=3DFalse, power_off_delay=3D0.0)
-
-    @pytest.fixture
-    def u_boot(request, target, strategy):
-        if request.config.option.lg_use_running_system:
-            strategy.uboot.assume_active()
-            target.activate(strategy.uboot)
-        else:
-            try:
->               strategy.transition("uboot")
-
-/vid/software/devel/ubtest/labgrid/contrib/u-boot/conftest.py:26:
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
-_ _ _ _ _ _ _ _ _ _ _ _ _ _
-/vid/software/devel/ubtest/labgrid/labgrid/strategy/ubootstrategy.py:274:
-in transition
-    self.target.activate(self.uboot)
-/vid/software/devel/ubtest/labgrid/labgrid/target.py:554: in activate
-    client.on_activate()
-/vid/software/devel/ubtest/labgrid/labgrid/driver/ubootdriver.py:69:
-in on_activate
-    self._await_prompt()
-/vid/software/devel/ubtest/labgrid/labgrid/step.py:220: in wrapper
-    _result =3D func(*_args, **_kwargs)
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
-_ _ _ _ _ _ _ _ _ _ _ _ _ _
-
-self =3D UBootDriver(target=3DTarget(name=3D'rpi5',
-env=3DEnvironment(config_file=3D'/vid/software/devel/ubtest/lab/cfg/kea_env=
-.cfg'),
-...x version \\d', boot_command=3D'run bootcmd', boot_commands=3D{},
-login_timeout=3D30, boot_timeout=3D30, strip_timestamp=3DFalse)
-
-    @step()
-    def _await_prompt(self):
-        """Await autoboot line and stop it to get to the prompt, optionally
-        enter the password.
-        """
-        timeout =3D Timeout(float(self.login_timeout))
-
-        # We call console.expect with a short timeout here to detect if the
-        # console is idle, which would result in a timeout without any chan=
-ges
-        # to the before property. So we store the last before value we've s=
-een.
-        # Because pexpect keeps any read data in it's buffer when a timeout
-        # occours, we can't lose any data this way.
-        last_before =3D None
-
-        expectations =3D [self.prompt, self.autoboot, self.password_prompt,
-                        pattern_u_boot_main_signon, TIMEOUT]
-        while True:
-            index, before, m, _ =3D self.console.expect(
-                expectations,
-                timeout=3D2
-            )
-            if index =3D=3D 0:
-                self._status =3D 1
-                break
-
-            elif index =3D=3D 1:
-                self.console.write(self.interrupt.encode('ASCII'))
-
-            elif index =3D=3D 2:
-                if not self.password:
-                    raise Exception("Password entry needed but no password =
-set")
-                self.console.sendline(self.password)
-
-            elif index =3D=3D 3:
-                self.version =3D m.group(1).decode('ASCII')
-            elif index =3D=3D 4:
-                # expect hit a timeout while waiting for a match
-                if before =3D=3D last_before:
-                    # we did not receive anything during the previous
-expect cycle
-                    # let's assume the target is idle and we can safely iss=
-ue a
-                    # newline to check the state
-                    self.console.sendline("")
-
-                if timeout.expired:
-                    output =3D self.console.read_output(False)
-                    for line in output.splitlines():
-                        print(line.decode('utf-8', errors=3D'replace'))
->                   raise TIMEOUT(
-                        f"Timeout of {self.login_timeout} seconds
-exceeded during waiting for login"
-                    )
-E                   pexpect.exceptions.TIMEOUT: Timeout of 30 seconds
-exceeded during waiting for login
-
-/vid/software/devel/ubtest/labgrid/labgrid/driver/ubootdriver.py:205: TIMEO=
-UT
-------------------------------------- Captured stdout setup
---------------------------------------
-Building U-Boot in sourcedir for rpi_arm64
-Bootstrapping U-Boot from dir /tmp/b/rpi_arm64
-Writing U-Boot using method rpi5
-
-  0.80 RPi: BOOTSYS release VERSION:6fe0b091 DATE: 2024/06/05 TIME: 16:41:4=
-9
-  0.84 BOOTMODE: 0x06 partition 0 build-ts BUILD_TIMESTAMP=3D1717602109
-serial 648a6bdf boardrev b04170 stc 784131
-  0.94 AON_RESET: 00000003 PM_RSTS 00001000
-  0.01 RP1_BOOT chip ID: 0x20001927
-  0.04 PM_RSTS: 0x00001000
-  0.04 part 00000000 reset_info 00000000
-  0.08 PMIC reset-event 00000000 rtc 00000000 alarm 00000000 enabled 0
-  0.14 uSD voltage 3.3V
-  0.33 Initialising SDRAM 'Micron' 16Gb x1 total-size: 16 Gbit 4267
-  0.36 DDR 4267 0 0 16 152
-  2.01 OTP boardrev b04170 bootrom a a
-  2.02 Customer key hash
-0000000000000000000000000000000000000000000000000000000000000000
-  2.09 VC-JTAG unlocked
-  2.32 RP1_BOOT chip ID: 0x20001927
-
-  2.37 RP1_BOOT chip ID: 0x20001927
-  2.38 RP1_BOOT: fw size 25992
-  3.93 PCI2 init
-  3.93 PCI2 reset
-  3.37 PCIe scan 00001de4:00000001
-  3.37 RP1_CHIP_INFO 20001927
-
-  3.40 RPi: BOOTLOADER release VERSION:6fe0b091 DATE: 2024/06/05 TIME: 16:4=
-1:49
-  3.47 BOOTMODE: 0x06 partition 0 build-ts BUILD_TIMESTAMP=3D1717602109
-serial 648a6bdf boardrev b04170 stc 3147335
-  3.57 AON_RESET: 00000003 PM_RSTS 00001000
-  3.61 PCIEx1: PWR 0 DET_WAKE 0
-  3.64 M.2 PCIe HAT not detected.
-  3.88 usb_pd_init status 3
-  3.88 USB_PD CONFIG 0 41
-  3.94 XHCI-STOP
-  3.94 xHC0 ver: 272 HCS: 03000440 140000f1 07ff000a HCC: 0240fe6d
-  3.99 USBSTS 1
-  3.01 xHC0 ver: 272 HCS: 03000440 140000f1 07ff000a HCC: 0240fe6d
-  3.06 xHC0 ports 3 slots 64 intrs 4
-  3.18 XHCI-STOP
-  3.18 xHC1 ver: 272 HCS: 03000440 140000f1 07ff000a HCC: 0240fe6d
-  3.23 USBSTS 1
-  3.25 xHC1 ver: 272 HCS: 03000440 140000f1 07ff000a HCC: 0240fe6d
-  3.30 xHC1 ports 3 slots 64 intrs 4
-  3.38 Boot mode: SD (01) order f4
-  3.28 USB2[2] 000206e1 connected
-  3.78 USB2[2] 00200e03 connected enabled
-  3.79 USB2 root HUB port 2 init
-  3.85 DEV [01:00] 2.16 000000:02 class 0 VID 090c PID 1000
-  3.87 MSD device [01:00] 2.16 000000:02 conf 0 iface 0 ep 82#512 01#512
-  3.95 MSD [01:00] 2.16 000000:02 register MSD
-  3.52 SD HOST: 200000000 CTL0: 0x00800000 BUS: 400000 Hz actual:
-390625 HZ div: 512 (256) status: 0x1fff0000 delay: 276
-  3.63 SD HOST: 200000000 CTL0: 0x00800f00 BUS: 400000 Hz actual:
-390625 HZ div: 512 (256) status: 0x1fff0000 delay: 276
-  3.97 OCR c0ff8000 [39]
-CID: 0027504853443332476075149214017b
-CSD: 400e00325b590000e6e97f800a400000
-  3.05 SD: bus-width: 4 spec: 2 SCR: 0x02858083 0x00000000
-  3.13 SD HOST: 200000000 CTL0: 0x00800f04 BUS: 50000000 Hz actual:
-50000000 HZ div: 4 (2) status: 0x1fff0000 delay: 2
-  3.22 MBR: 0x00000800, 1048576 type: 0x0c
-  3.24 MBR: 0x00100800,17020996 type: 0x83
-  3.28 MBR: 0x00000000,       0 type: 0x00
-  3.32 MBR: 0x00000000,       0 type: 0x00
-  3.36 Trying partition: 0
-  3.38 type: 32 lba: 2048 'mkfs.fat' ' system-boot' clusters 1032412 (1)
-  3.44 rsc 32 fat-sectors 8066 root dir cluster 2 sectors 0 entries 0
-  3.51 FAT32 clusters 1032412
-  3.57 [sdcard] autoboot.txt not found
-  3.58 Select partition rsts 0 C(boot_partition) 0 EEPROM config 0 result 0
-  3.65 Trying partition: 0
-  3.67 type: 32 lba: 2048 'mkfs.fat' ' system-boot' clusters 1032408 (1)
-  3.73 rsc 32 fat-sectors 8066 root dir cluster 2 sectors 0 entries 0
-  3.80 FAT32 clusters 1032408
-  3.87 Read config.txt bytes     1680 hnd 0x2fc7d
-  3.90 [sdcard] pieeprom.upd not found
-  3.92 usb_max_current_enable default 0 max-current 3000
-  4.08 Read bcm2712-rpi-5-b.dtb bytes    80206 hnd 0x352
-  4.11 dt-match: compatible: raspberrypi,5-model-b match: brcm,bcm2712
-  4.17 dt-match: compatible: brcm,bcm2712 match: brcm,bcm2712
-  4.23 Selecting USB low current limit
-
-NOTICE:  BL31: v2.6(release):v2.6-239-g2a9ede0bd
-NOTICE:  BL31: Built : 14:26:57, Jun 22 2023
+---------- Forwarded message ---------
+=46rom: <scan-admin@coverity.com>
+Date: Fri, May 8, 2026 at 5:31=E2=80=AFPM
+Subject: New Defects reported by Coverity Scan for Das U-Boot
+To: <tom.rini@gmail.com>
 
 
-U-Boot 2026.07-rc1-00169-g3cdd19089f1b (May 08 2026 - 17:09:17 -0600)
+Hi,
 
-DRAM:  2 GiB
-RPI 5 Model B (0xb04170)
-Core:  24 devices, 11 uclasses, devicetree: board
-"Synchronous Abort" handler, esr 0x96000045, far 0x7ffff000
-elr: 000000000005d11c lr : 000000000005d0f4 (reloc)
-elr: 000000003fba511c lr : 000000003fba50f4
-x0 : 000000007ffff000 x1 : 60198ddf6491caa3
-x2 : 1fe67ddf6491caa2 x3 : 7ffff00000000001
-x4 : 0000000000000080 x5 : 0000000000000007
-x6 : 0000000000000000 x7 : 000000003f746420
-x8 : 0000000000000002 x9 : 000000003f745d88
-x10: 0000000040000000 x11: 0000000000000000
-x12: 0000000000001000 x13: 000000003fbece00
-x14: 0000000000000001 x15: 0000000000000002
-x16: 000000003fb8527c x17: 0000000000000000
-x18: 000000003f743d90 x19: 0000000000000001
-x20: 000000003f72fde8 x21: 000000003fbe4588
-x22: 0000000000000000 x23: 0000000000000000
-x24: 0000000000000000 x25: 0000000000000000
-x26: 0000000000000000 x27: 0000000000000000
-x28: 0000000000000000 x29: 000000003f72fd90
+Please find the latest report on new defect(s) introduced to *Das U-Boot*
+found with Coverity Scan.
 
-Code: f2e3fcc2 ca020061 eb02007f 9a9f1421 (a9000413)
-Resetting CPU ...
+   - *New Defects Found:* 17
+   - 3 defect(s), reported by Coverity Scan earlier, were marked fixed in
+   the recent build analyzed by Coverity Scan.
+   - *Defects Shown:* Showing 17 of 17 defect(s)
 
-resetting ...
+Defect Details
 
-(lots of error output here)
-
-ERROR ../../../../../../../../vid/software/devel/ubtest/labgrid/contrib/u-b=
-oot/test_smoke.py::test_uboot_smoke
-- pexpect.exceptions.TIMEOUT: Timeout of 30 seconds exceeded during
-waiting for login
-1 error in 45.25s
-=E2=9C=98-1 ~/u [:3cdd19089f1|BISECTING|=E2=80=A61]
-17:09 $ pe
-3cdd19089f1 (HEAD, us/master, us/WIP/06May2026, pw-503347-review)
-Merge tag 'mmc-for-2026.07-rc2' of
-https://source.denx.de/u-boot/custodians/u-boot-mmc
-e08877916e2 Merge tag 'mips-fixes-for-v2026.07' of
-https://source.denx.de/u-boot/custodians/u-boot-mips
-8399b039b03 Merge tag 'efi-2026-07-rc2-2' of
-https://source.denx.de/u-boot/custodians/u-boot-efi
-980f8a45896 Merge tag 'net-20260506' of
-https://source.denx.de/u-boot/custodians/u-boot-net
-ffdce9d3fbd Merge tag 'fsl-qoriq-for-2026.07-rc2' of
-https://source.denx.de/u-boot/custodians/u-boot-fsl-qoriq
-de79075f0f6 mips: mtmips: align MT7621 image blobs to 8-byte boundary
-5245bdc98b9 net: phy: mscc: add support for the VSC8572
-9717831e293 net: macb: add gigabit implementation for fixed-link
-d7fe1f4333a net: macb: do not set user_io when it does not exist
-361bb8f827b net: macb: use SA1 for MAC filtering on GEM
-=E2=9C=94 ~/u [:3cdd19089f1|BISECTING|=E2=80=A61]
-17:10 $ bad
-Bisecting: 580 revisions left to test after this (roughly 9 steps)
-[6e30330d7ac1b708772b1f5c2afae4bbec7c9678] net: dwc_eth_xgmac: Move
-DMA reset and pad calibration after PHY init
-=E2=9C=94 ~/u [:6e30330d7ac|BISECTING|=E2=80=A61]
-17:10 $ ub-bisect rpi5
-Starting bisect on target rpi5 - cherry-pick commit:
-running '_ub-bisect-try'
-Revision 6e30330d7ac1b708772b1f5c2afae4bbec7c9678, target rpi5
-E
+** CID 646011:       Integer handling issues  (INTEGER_OVERFLOW)
+/test/dm/phy_common_props.c: 164           in
+dm_test_phy_common_props_rx_unsupported()
 
 
-CONSOLE SerialLogger.rp:    SerialDriver(rpi5) <   3.15 [sdcard]
-autoboot.txt not found=E2=90=8D=E2=90=A4
-CONSOLE SerialLogger.rp:    SerialDriver(rpi5) <   3.16 Select
-partition rsts 0 C(boot_partition) 0 EEPROM config 0 result 0=E2=90=8D=E2=
-=90=A4
-CONSOLE SerialLogger.rp:    SerialDriver(rpi5) <   3.23 Trying partition: 0=
-=E2=90=8D=E2=90=A4
-CONSOLE SerialLogger.rp:    SerialDriver(rpi5) <   3.25 type: 32 lba:
-2048 'mkfs.fat' ' system-boot' clusters 1032408 (1)=E2=90=8D=E2=90=A4
-CONSOLE SerialLogger.rp:    SerialDriver(rpi5) <   3.32 rsc 32
-fat-sectors 8066 root dir cluster 2 sectors 0 entries 0=E2=90=8D=E2=90=A4
-CONSOLE SerialLogger.rp:    SerialDriver(rpi5) <   3.38 FAT32 clusters 1032=
-408=E2=90=8D=E2=90=A4
-CONSOLE SerialLogger.rp:    SerialDriver(rpi5) <   3.45 Read
-config.txt bytes     1680 hnd 0x2fc7d=E2=90=8D=E2=90=A4
-CONSOLE SerialLogger.rp:    SerialDriver(rpi5) <   3.48 [sdcard]
-pieeprom.upd not found=E2=90=8D=E2=90=A4
-CONSOLE SerialLogger.rp:    SerialDriver(rpi5) <   3.50
-usb_max_current_enable default 0 max-current 3000=E2=90=8D=E2=90=A4
-CONSOLE SerialLogger.rp:    SerialDriver(rpi5) <   3.64 Read
-bcm2712-rpi-5-b.dtb bytes    80206 hnd 0x352=E2=90=8D=E2=90=A4
-CONSOLE SerialLogger.rp:    SerialDriver(rpi5) <   3.66 dt-match:
-compatible: raspberrypi,5-model-b match: brcm,bcm2712=E2=90=8D=E2=90=A4
-CONSOLE SerialLogger.rp:    SerialDriver(rpi5) <   3.72 dt-match:
-compatible: brcm,bcm2712 match: brcm,bcm2712=E2=90=8D=E2=90=A4
-CONSOLE SerialLogger.rp:    SerialDriver(rpi5) <   3.79 Selecting USB
-low current limit=E2=90=8D=E2=90=A4
-CONSOLE SerialLogger.rp:    SerialDriver(rpi5) < =E2=90=8D=E2=90=A4
-INFO         StepLogger:   =E2=86=90 SerialDriver.expect() result=3D(4,
-b'\r\n\r\nDRAM:  2 GiB\r\nRPI 5 Model B (0xb04170)\r\nCore:  24
-devices, 11 uclasses, devicetree=E2=80=A6 [2.000s]
-INFO         StepLogger:   =E2=86=92 SerialDriver.expect(pattern=3D['U-Boot=
->',
-'stop autoboot', 'enter Password:', re.compile(b'(U-Boot( Concept)?
-\\d{4}\\.\\d{2}[^\r\n]*\\))'), <class 'pexpect.exceptions.TIMEOUT'>])
-INFO         StepLogger:   =E2=86=90 SerialDriver.expect() result=3D(4,
-b'\r\n\r\nDRAM:  2 GiB\r\nRPI 5 Model B (0xb04170)\r\nCore:  24
-devices, 11 uclasses, devicetree=E2=80=A6 [2.000s]
-CONSOLE SerialLogger.rp:   SerialDriver(rpi5) > =E2=90=A4=E2=90=8D=E2=90=A4
-INFO         StepLogger:   =E2=86=92 SerialDriver.expect(pattern=3D['U-Boot=
->',
-'stop autoboot', 'enter Password:', re.compile(b'(U-Boot( Concept)?
-\\d{4}\\.\\d{2}[^\r\n]*\\))'), <class 'pexpect.exceptions.TIMEOUT'>])
-INFO         StepLogger:   =E2=86=90 SerialDriver.expect() result=3D(4,
-b'\r\n\r\nDRAM:  2 GiB\r\nRPI 5 Model B (0xb04170)\r\nCore:  24
-devices, 11 uclasses, devicetree=E2=80=A6 [2.000s]
-CONSOLE SerialLogger.rp:   SerialDriver(rpi5) > =E2=90=A4=E2=90=8D=E2=90=A4
-INFO         StepLogger:  =E2=9A=A0 UBootDriver._await_prompt() [30.715s]
-exception=3DTimeout of 30 seconds exceeded during waiting for login
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D short test summary info
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-ERROR test_smoke.py::test_uboot_smoke - pexpect.exceptions.TIMEOUT:
-Timeout of 30 seconds exceeded during waiting for login
-1 error in 42.37s
-a3075db94d49f415658bf7e961e1eae90d9abc33 is the first bad commit
-commit a3075db94d49f415658bf7e961e1eae90d9abc33
-Author: Marek Vasut <marek.vasut+renesas@mailbox.org>
-Date:   Wed Jan 28 00:48:40 2026 +0100
+___________________________________________________________________________=
+__________________
+*** CID 646011:         Integer handling issues  (INTEGER_OVERFLOW)
+/test/dm/phy_common_props.c: 164             in
+dm_test_phy_common_props_rx_unsupported()
+158     	unsigned int val;
+159     	int ret;
+160
+161     	ut_assert(ofnode_valid(node));
+162
+163     	ret =3D phy_get_manual_rx_polarity(node, "sgmii", &val);
+>>>     CID 646011:         Integer handling issues  (INTEGER_OVERFLOW)
+>>>     Expression "_val2", where "ret" is known to be equal to -95, overfl=
+ows the type of "_val2", which is type "unsigned int".
+164     	ut_asserteq(-EOPNOTSUPP, ret);
+165
+166     	return 0;
+167     }
+168
+169     DM_TEST(dm_test_phy_common_props_rx_unsupported, UTF_SCAN_FDT);
 
-    lmb: Reinstate access to memory above ram_top
+** CID 646010:       Integer handling issues  (INTEGER_OVERFLOW)
+/test/dm/phy_common_props.c: 236           in
+dm_test_phy_common_props_tx_more_names()
 
-    Revert commit eb052cbb896f ("lmb: add and reserve memory above ram_top"=
-)
-    and commit 1a48b0be93d4 ("lmb: prohibit allocations above ram_top even =
-from
-    same bank"). These are based on incorrect premise of the first commit, =
-that
-    "U-Boot does not use memory above ram_top". While U-Boot itself indeed =
-does
-    not and should not use memory above ram_top, user can perfectly well us=
-e
-    that memory from the U-Boot shell, for example to load content in there=
-.
 
-    Currently, attempt to use that memory to load large image using TFTP en=
-ds
-    with "TFTP error: trying to overwrite reserved memory...". With this ch=
-ange
-    in place, the memory can be used again.
+___________________________________________________________________________=
+__________________
+*** CID 646010:         Integer handling issues  (INTEGER_OVERFLOW)
+/test/dm/phy_common_props.c: 236             in
+dm_test_phy_common_props_tx_more_names()
+230     	unsigned int val;
+231     	int ret;
+232
+233     	ut_assert(ofnode_valid(node));
+234
+235     	ret =3D phy_get_manual_tx_polarity(node, "sgmii", &val);
+>>>     CID 646010:         Integer handling issues  (INTEGER_OVERFLOW)
+>>>     Expression "_val2", where "ret" is known to be equal to -95, overfl=
+ows the type of "_val2", which is type "unsigned int".
+236     	ut_asserteq(-EINVAL, ret);
+237
+238     	return 0;
+239     }
+240
+241     DM_TEST(dm_test_phy_common_props_tx_more_names, UTF_SCAN_FDT);
 
-    Fixes: eb052cbb896f ("lmb: add and reserve memory above ram_top")
-    Fixes: 1a48b0be93d4 ("lmb: prohibit allocations above ram_top even
-from same bank")
-    Reported-by: Yuya Hamamachi <yuya.hamamachi.sx@renesas.com>
-    Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+** CID 646009:         (INTEGER_OVERFLOW)
+/test/dm/phy_common_props.c: 253           in
+dm_test_phy_common_props_tx_find_by_name()
+/test/dm/phy_common_props.c: 257           in
+dm_test_phy_common_props_tx_find_by_name()
+/test/dm/phy_common_props.c: 261           in
+dm_test_phy_common_props_tx_find_by_name()
 
- lib/lmb.c | 17 +----------------
- 1 file changed, 1 insertion(+), 16 deletions(-)
-bisect found first bad commit
-=E2=9C=94 ~/u [:a3075db94d4|BISECTING|=E2=80=A61]
-17:16 $
 
-Actually I recently sent an email about this patch recently but I
-forgot to cc you.
+___________________________________________________________________________=
+__________________
+*** CID 646009:           (INTEGER_OVERFLOW)
+/test/dm/phy_common_props.c: 253             in
+dm_test_phy_common_props_tx_find_by_name()
+247     	unsigned int val;
+248     	int ret;
+249
+250     	ut_assert(ofnode_valid(node));
+251
+252     	ret =3D phy_get_manual_tx_polarity(node, "sgmii", &val);
+>>>     CID 646009:           (INTEGER_OVERFLOW)
+>>>     Expression "_val2", where "ret" is known to be equal to -95, overfl=
+ows the type of "_val2", which is type "unsigned int".
+253     	ut_asserteq(0, ret);
+254     	ut_asserteq(PHY_POL_NORMAL, val);
+255
+256     	ret =3D phy_get_manual_tx_polarity(node, "2500base-x", &val);
+257     	ut_asserteq(0, ret);
+258     	ut_asserteq(PHY_POL_INVERT, val);
+/test/dm/phy_common_props.c: 257             in
+dm_test_phy_common_props_tx_find_by_name()
+251
+252     	ret =3D phy_get_manual_tx_polarity(node, "sgmii", &val);
+253     	ut_asserteq(0, ret);
+254     	ut_asserteq(PHY_POL_NORMAL, val);
+255
+256     	ret =3D phy_get_manual_tx_polarity(node, "2500base-x", &val);
+>>>     CID 646009:           (INTEGER_OVERFLOW)
+>>>     Expression "_val2", where "ret" is known to be equal to -95, overfl=
+ows the type of "_val2", which is type "unsigned int".
+257     	ut_asserteq(0, ret);
+258     	ut_asserteq(PHY_POL_INVERT, val);
+259
+260     	ret =3D phy_get_manual_tx_polarity(node, "1000base-x", &val);
+261     	ut_asserteq(0, ret);
+262     	ut_asserteq(PHY_POL_NORMAL, val);
+/test/dm/phy_common_props.c: 261             in
+dm_test_phy_common_props_tx_find_by_name()
+255
+256     	ret =3D phy_get_manual_tx_polarity(node, "2500base-x", &val);
+257     	ut_asserteq(0, ret);
+258     	ut_asserteq(PHY_POL_INVERT, val);
+259
+260     	ret =3D phy_get_manual_tx_polarity(node, "1000base-x", &val);
+>>>     CID 646009:           (INTEGER_OVERFLOW)
+>>>     Expression "_val2", where "ret" is known to be equal to -95, overfl=
+ows the type of "_val2", which is type "unsigned int".
+261     	ut_asserteq(0, ret);
+262     	ut_asserteq(PHY_POL_NORMAL, val);
+263
+264     	return 0;
+265     }
+266
 
-Regards,
-Simon
+** CID 646008:       Integer handling issues  (INTEGER_OVERFLOW)
+/test/dm/phy_common_props.c: 31           in
+dm_test_phy_common_props_rx_missing()
+
+
+___________________________________________________________________________=
+__________________
+*** CID 646008:         Integer handling issues  (INTEGER_OVERFLOW)
+/test/dm/phy_common_props.c: 31             in
+dm_test_phy_common_props_rx_missing()
+25     	unsigned int val;
+26     	int ret;
+27
+28     	ut_assert(ofnode_valid(node));
+29
+30     	ret =3D phy_get_manual_rx_polarity(node, "sgmii", &val);
+>>>     CID 646008:         Integer handling issues  (INTEGER_OVERFLOW)
+>>>     Expression "_val2", where "ret" is known to be equal to -95, overfl=
+ows the type of "_val2", which is type "unsigned int".
+31     	ut_asserteq(0, ret);
+32     	ut_asserteq(PHY_POL_NORMAL, val);
+33
+34     	return 0;
+35     }
+36
+
+** CID 646007:       Integer handling issues  (INTEGER_OVERFLOW)
+/test/dm/phy_common_props.c: 296           in
+dm_test_phy_common_props_tx_with_default()
+
+
+___________________________________________________________________________=
+__________________
+*** CID 646007:         Integer handling issues  (INTEGER_OVERFLOW)
+/test/dm/phy_common_props.c: 296             in
+dm_test_phy_common_props_tx_with_default()
+290     	unsigned int val;
+291     	int ret;
+292
+293     	ut_assert(ofnode_valid(node));
+294
+295     	ret =3D phy_get_manual_tx_polarity(node, "sgmii", &val);
+>>>     CID 646007:         Integer handling issues  (INTEGER_OVERFLOW)
+>>>     Expression "_val2", where "ret" is known to be equal to -95, overfl=
+ows the type of "_val2", which is type "unsigned int".
+296     	ut_asserteq(0, ret);
+297     	ut_asserteq(PHY_POL_INVERT, val);
+298
+299     	return 0;
+300     }
+301
+
+** CID 646006:       Integer handling issues  (INTEGER_OVERFLOW)
+/test/dm/phy_common_props.c: 314           in
+dm_test_phy_common_props_tx_unsupported()
+
+
+___________________________________________________________________________=
+__________________
+*** CID 646006:         Integer handling issues  (INTEGER_OVERFLOW)
+/test/dm/phy_common_props.c: 314             in
+dm_test_phy_common_props_tx_unsupported()
+308     	unsigned int val;
+309     	int ret;
+310
+311     	ut_assert(ofnode_valid(node));
+312
+313     	ret =3D phy_get_manual_tx_polarity(node, "sgmii", &val);
+>>>     CID 646006:         Integer handling issues  (INTEGER_OVERFLOW)
+>>>     Expression "_val2", where "ret" is known to be equal to -95, overfl=
+ows the type of "_val2", which is type "unsigned int".
+314     	ut_asserteq(-EOPNOTSUPP, ret);
+315
+316     	return 0;
+317     }
+318
+
+** CID 646005:         (INTEGER_OVERFLOW)
+/test/dm/phy_common_props.c: 111           in
+dm_test_phy_common_props_rx_find_by_name()
+/test/dm/phy_common_props.c: 105           in
+dm_test_phy_common_props_rx_find_by_name()
+/test/dm/phy_common_props.c: 101           in
+dm_test_phy_common_props_rx_find_by_name()
+
+
+___________________________________________________________________________=
+__________________
+*** CID 646005:           (INTEGER_OVERFLOW)
+/test/dm/phy_common_props.c: 111             in
+dm_test_phy_common_props_rx_find_by_name()
+105     	ut_asserteq(0, ret);
+106     	ut_asserteq(PHY_POL_INVERT, val);
+107
+108     	/* "usb-ss" has PHY_POL_AUTO; auto is supported here */
+109     	ret =3D phy_get_rx_polarity(node, "usb-ss", BIT(PHY_POL_AUTO),
+110     				  PHY_POL_AUTO, &val);
+>>>     CID 646005:           (INTEGER_OVERFLOW)
+>>>     Expression "_val2", where "ret" is known to be equal to -95, overfl=
+ows the type of "_val2", which is type "unsigned int".
+111     	ut_asserteq(0, ret);
+112     	ut_asserteq(PHY_POL_AUTO, val);
+113
+114     	return 0;
+115     }
+116
+/test/dm/phy_common_props.c: 105             in
+dm_test_phy_common_props_rx_find_by_name()
+99
+100     	ret =3D phy_get_manual_rx_polarity(node, "sgmii", &val);
+101     	ut_asserteq(0, ret);
+102     	ut_asserteq(PHY_POL_NORMAL, val);
+103
+104     	ret =3D phy_get_manual_rx_polarity(node, "2500base-x", &val);
+>>>     CID 646005:           (INTEGER_OVERFLOW)
+>>>     Expression "_val2", where "ret" is known to be equal to -95, overfl=
+ows the type of "_val2", which is type "unsigned int".
+105     	ut_asserteq(0, ret);
+106     	ut_asserteq(PHY_POL_INVERT, val);
+107
+108     	/* "usb-ss" has PHY_POL_AUTO; auto is supported here */
+109     	ret =3D phy_get_rx_polarity(node, "usb-ss", BIT(PHY_POL_AUTO),
+110     				  PHY_POL_AUTO, &val);
+/test/dm/phy_common_props.c: 101             in
+dm_test_phy_common_props_rx_find_by_name()
+95     	unsigned int val;
+96     	int ret;
+97
+98     	ut_assert(ofnode_valid(node));
+99
+100     	ret =3D phy_get_manual_rx_polarity(node, "sgmii", &val);
+>>>     CID 646005:           (INTEGER_OVERFLOW)
+>>>     Expression "_val2", where "ret" is known to be equal to -95, overfl=
+ows the type of "_val2", which is type "unsigned int".
+101     	ut_asserteq(0, ret);
+102     	ut_asserteq(PHY_POL_NORMAL, val);
+103
+104     	ret =3D phy_get_manual_rx_polarity(node, "2500base-x", &val);
+105     	ut_asserteq(0, ret);
+106     	ut_asserteq(PHY_POL_INVERT, val);
+
+** CID 646004:       Integer handling issues  (INTEGER_OVERFLOW)
+/test/dm/phy_common_props.c: 183           in
+dm_test_phy_common_props_tx_missing()
+
+
+___________________________________________________________________________=
+__________________
+*** CID 646004:         Integer handling issues  (INTEGER_OVERFLOW)
+/test/dm/phy_common_props.c: 183             in
+dm_test_phy_common_props_tx_missing()
+177     	unsigned int val;
+178     	int ret;
+179
+180     	ut_assert(ofnode_valid(node));
+181
+182     	ret =3D phy_get_manual_tx_polarity(node, "sgmii", &val);
+>>>     CID 646004:         Integer handling issues  (INTEGER_OVERFLOW)
+>>>     Expression "_val2", where "ret" is known to be equal to -95, overfl=
+ows the type of "_val2", which is type "unsigned int".
+183     	ut_asserteq(0, ret);
+184     	ut_asserteq(PHY_POL_NORMAL, val);
+185
+186     	return 0;
+187     }
+188
+
+** CID 646003:       Integer handling issues  (INTEGER_OVERFLOW)
+/test/dm/phy_common_props.c: 49           in
+dm_test_phy_common_props_rx_more_values()
+
+
+___________________________________________________________________________=
+__________________
+*** CID 646003:         Integer handling issues  (INTEGER_OVERFLOW)
+/test/dm/phy_common_props.c: 49             in
+dm_test_phy_common_props_rx_more_values()
+43     	unsigned int val;
+44     	int ret;
+45
+46     	ut_assert(ofnode_valid(node));
+47
+48     	ret =3D phy_get_manual_rx_polarity(node, "sgmii", &val);
+>>>     CID 646003:         Integer handling issues  (INTEGER_OVERFLOW)
+>>>     Expression "_val2", where "ret" is known to be equal to -95, overfl=
+ows the type of "_val2", which is type "unsigned int".
+49     	ut_asserteq(-EINVAL, ret);
+50
+51     	return 0;
+52     }
+53
+54     DM_TEST(dm_test_phy_common_props_rx_more_values, UTF_SCAN_FDT);
+
+** CID 646002:       Integer handling issues  (INTEGER_OVERFLOW)
+/test/dm/phy_common_props.c: 146           in
+dm_test_phy_common_props_rx_with_default()
+
+
+___________________________________________________________________________=
+__________________
+*** CID 646002:         Integer handling issues  (INTEGER_OVERFLOW)
+/test/dm/phy_common_props.c: 146             in
+dm_test_phy_common_props_rx_with_default()
+140     	unsigned int val;
+141     	int ret;
+142
+143     	ut_assert(ofnode_valid(node));
+144
+145     	ret =3D phy_get_manual_rx_polarity(node, "sgmii", &val);
+>>>     CID 646002:         Integer handling issues  (INTEGER_OVERFLOW)
+>>>     Expression "_val2", where "ret" is known to be equal to -95, overfl=
+ows the type of "_val2", which is type "unsigned int".
+146     	ut_asserteq(0, ret);
+147     	ut_asserteq(PHY_POL_INVERT, val);
+148
+149     	return 0;
+150     }
+151
+
+** CID 646001:       Integer handling issues  (INTEGER_OVERFLOW)
+/test/dm/phy_common_props.c: 66           in
+dm_test_phy_common_props_rx_single_value()
+
+
+___________________________________________________________________________=
+__________________
+*** CID 646001:         Integer handling issues  (INTEGER_OVERFLOW)
+/test/dm/phy_common_props.c: 66             in
+dm_test_phy_common_props_rx_single_value()
+60     	unsigned int val;
+61     	int ret;
+62
+63     	ut_assert(ofnode_valid(node));
+64
+65     	ret =3D phy_get_manual_rx_polarity(node, "sgmii", &val);
+>>>     CID 646001:         Integer handling issues  (INTEGER_OVERFLOW)
+>>>     Expression "_val2", where "ret" is known to be equal to -95, overfl=
+ows the type of "_val2", which is type "unsigned int".
+66     	ut_asserteq(0, ret);
+67     	ut_asserteq(PHY_POL_INVERT, val);
+68
+69     	return 0;
+70     }
+71
+
+** CID 646000:       Integer handling issues  (INTEGER_OVERFLOW)
+/test/dm/phy_common_props.c: 129           in
+dm_test_phy_common_props_rx_no_default()
+
+
+___________________________________________________________________________=
+__________________
+*** CID 646000:         Integer handling issues  (INTEGER_OVERFLOW)
+/test/dm/phy_common_props.c: 129             in
+dm_test_phy_common_props_rx_no_default()
+123     	unsigned int val;
+124     	int ret;
+125
+126     	ut_assert(ofnode_valid(node));
+127
+128     	ret =3D phy_get_manual_rx_polarity(node, "sgmii", &val);
+>>>     CID 646000:         Integer handling issues  (INTEGER_OVERFLOW)
+>>>     Expression "_val2", where "ret" is known to be equal to -95, overfl=
+ows the type of "_val2", which is type "unsigned int".
+129     	ut_asserteq(-EINVAL, ret);
+130
+131     	return 0;
+132     }
+133
+134     DM_TEST(dm_test_phy_common_props_rx_no_default, UTF_SCAN_FDT);
+
+** CID 645999:       Integer handling issues  (INTEGER_OVERFLOW)
+/test/dm/phy_common_props.c: 84           in
+dm_test_phy_common_props_rx_more_names()
+
+
+___________________________________________________________________________=
+__________________
+*** CID 645999:         Integer handling issues  (INTEGER_OVERFLOW)
+/test/dm/phy_common_props.c: 84             in
+dm_test_phy_common_props_rx_more_names()
+78     	unsigned int val;
+79     	int ret;
+80
+81     	ut_assert(ofnode_valid(node));
+82
+83     	ret =3D phy_get_manual_rx_polarity(node, "sgmii", &val);
+>>>     CID 645999:         Integer handling issues  (INTEGER_OVERFLOW)
+>>>     Expression "_val2", where "ret" is known to be equal to -95, overfl=
+ows the type of "_val2", which is type "unsigned int".
+84     	ut_asserteq(-EINVAL, ret);
+85
+86     	return 0;
+87     }
+88
+89     DM_TEST(dm_test_phy_common_props_rx_more_names, UTF_SCAN_FDT);
+
+** CID 645998:       Integer handling issues  (INTEGER_OVERFLOW)
+/test/dm/phy_common_props.c: 218           in
+dm_test_phy_common_props_tx_single_value()
+
+
+___________________________________________________________________________=
+__________________
+*** CID 645998:         Integer handling issues  (INTEGER_OVERFLOW)
+/test/dm/phy_common_props.c: 218             in
+dm_test_phy_common_props_tx_single_value()
+212     	unsigned int val;
+213     	int ret;
+214
+215     	ut_assert(ofnode_valid(node));
+216
+217     	ret =3D phy_get_manual_tx_polarity(node, "sgmii", &val);
+>>>     CID 645998:         Integer handling issues  (INTEGER_OVERFLOW)
+>>>     Expression "_val2", where "ret" is known to be equal to -95, overfl=
+ows the type of "_val2", which is type "unsigned int".
+218     	ut_asserteq(0, ret);
+219     	ut_asserteq(PHY_POL_INVERT, val);
+220
+221     	return 0;
+222     }
+223
+
+** CID 646014:       Integer handling issues  (INTEGER_OVERFLOW)
+/test/dm/phy_common_props.c: 201           in
+dm_test_phy_common_props_tx_more_values()
+
+
+___________________________________________________________________________=
+__________________
+*** CID 646014:         Integer handling issues  (INTEGER_OVERFLOW)
+/test/dm/phy_common_props.c: 201             in
+dm_test_phy_common_props_tx_more_values()
+195     	unsigned int val;
+196     	int ret;
+197
+198     	ut_assert(ofnode_valid(node));
+199
+200     	ret =3D phy_get_manual_tx_polarity(node, "sgmii", &val);
+>>>     CID 646014:         Integer handling issues  (INTEGER_OVERFLOW)
+>>>     Expression "_val2", where "ret" is known to be equal to -95, overfl=
+ows the type of "_val2", which is type "unsigned int".
+201     	ut_asserteq(-EINVAL, ret);
+202
+203     	return 0;
+204     }
+205
+206     DM_TEST(dm_test_phy_common_props_tx_more_values, UTF_SCAN_FDT);
+
+** CID 646013:       Integer handling issues  (INTEGER_OVERFLOW)
+/test/dm/phy_common_props.c: 279           in
+dm_test_phy_common_props_tx_no_default()
+
+
+___________________________________________________________________________=
+__________________
+*** CID 646013:         Integer handling issues  (INTEGER_OVERFLOW)
+/test/dm/phy_common_props.c: 279             in
+dm_test_phy_common_props_tx_no_default()
+273     	unsigned int val;
+274     	int ret;
+275
+276     	ut_assert(ofnode_valid(node));
+277
+278     	ret =3D phy_get_manual_tx_polarity(node, "sgmii", &val);
+>>>     CID 646013:         Integer handling issues  (INTEGER_OVERFLOW)
+>>>     Expression "_val2", where "ret" is known to be equal to -95, overfl=
+ows the type of "_val2", which is type "unsigned int".
+279     	ut_asserteq(-EINVAL, ret);
+280
+281     	return 0;
+282     }
+283
+284     DM_TEST(dm_test_phy_common_props_tx_no_default, UTF_SCAN_FDT);
+
+** CID 646012:         (TAINTED_SCALAR)
+/drivers/phy/phy-common-props.c: 156           in ofnode_get_u32_prop_for_n=
+ame()
+
+
+___________________________________________________________________________=
+__________________
+*** CID 646012:           (TAINTED_SCALAR)
+/drivers/phy/phy-common-props.c: 156             in
+ofnode_get_u32_prop_for_name()
+150     	props =3D calloc(n_props, sizeof(*props));
+151     	if (!props)
+152     		return -ENOMEM;
+153
+154     	err =3D ofnode_read_u32_array(node, props_title, props, n_props);
+155     	if (err >=3D 0) {
+>>>     CID 646012:           (TAINTED_SCALAR)
+>>>     Using tainted variable "idx" as an index to pointer "props".
+156     		*val =3D props[idx];
+157     		pr_debug("%s: resolved value %u at index %d for name '%s'
+=66rom '%s'\n",
+158     			 __func__, *val, idx, name, props_title);
+159     	} else {
+160     		pr_debug("%s: failed to read u32 array '%s' (err=3D%d)\n",
+161     			 __func__, props_title, err);
+/drivers/phy/phy-common-props.c: 164             in
+ofnode_get_u32_prop_for_name()
+158     			 __func__, *val, idx, name, props_title);
+159     	} else {
+160     		pr_debug("%s: failed to read u32 array '%s' (err=3D%d)\n",
+161     			 __func__, props_title, err);
+162     	}
+163
+>>>     CID 646012:           (TAINTED_SCALAR)
+>>>     Passing tainted expression "*props" to "dlfree", which uses it as a=
+n offset.
+164     	free(props);
+165
+166     	return err;
+167     }
+168
+169     /**
+
+
+
+View Defects in Coverity Scan
+<https://scan.coverity.com/projects/das-u-boot?tab=3Doverview>
+
+Best regards,
+
+The Coverity Scan Admin Team
+
+----- End forwarded message -----
+
+--=20
+Tom
+
+--DigdrTmORQw5dwWa
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaf505AAKCRAr4qD1Cr/k
+CuXSAQCuxKjX5Z068U2HSargLrxJBcbm1k5y1jCsm4RHrLUMbwD/Ugf/WbzN0VmL
+Ps887BX0cnnGenRzDIOlYbbDR6acXgY=
+=8nvz
+-----END PGP SIGNATURE-----
+
+--DigdrTmORQw5dwWa--
