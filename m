@@ -4,82 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8313CD342F
-	for <u-boot@archiver.kernel.org>; Fri,  8 May 2026 17:25:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB814CD3445
+	for <u-boot@archiver.kernel.org>; Fri,  8 May 2026 17:37:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 50E6D84DAB;
-	Fri,  8 May 2026 19:25:28 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6791D84D5B;
+	Fri,  8 May 2026 19:37:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="Ch3bv8o8";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="d7bF5wKP";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="Ixjgvupz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4CBC684DAF; Fri,  8 May 2026 19:25:27 +0200 (CEST)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
- [IPv6:2001:67c:2050:0:465::101])
+ id A2B6784CDB; Fri,  8 May 2026 19:37:46 +0200 (CEST)
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2778984CD2
- for <u-boot@lists.denx.de>; Fri,  8 May 2026 19:25:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C03F984CDB
+ for <u-boot@lists.denx.de>; Fri,  8 May 2026 19:37:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp102.mailbox.org (smtp102.mailbox.org
- [IPv6:2001:67c:2050:b231:465::102])
+Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4gBwxJ14pzz9t14;
- Fri,  8 May 2026 19:25:24 +0200 (CEST)
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4gBxCV1sNSz9tnC;
+ Fri,  8 May 2026 19:37:42 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1778261124;
+ s=mail20150812; t=1778261862;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=jdbdOOCxpF2aNuuGzkfi5ObLkP5Xa8Ageg1ZTTQzvVE=;
- b=Ch3bv8o831pIseiPEoJ0QibnFXqxvZdm7EW4nKjltCUMv6Hie0fe7mTtLOr2sZbMWhZk6X
- nG4t7A/CE1poDJzGbFWzXImyq8k/s8K1gwqQciUhFvr9ayElXN6YkE9Hfs34785eHoVJ1s
- mFkPd0Ht4EeZ1oEMRjA1S0fADfRF+dLRWQXisIWXrpFkoT9ChDdKvvPep1xMl0S9M5nNKy
- Sg9T4bduQqhdSiPSgGEXIpRyrgAd9KZv2W1axUtPhTjeYCix+SeBOAzK3f33ijdvWNepe4
- AgqgYnSfukvxrwoeG+fyPVAHUyZVs61KqaEr0nTTxnFGYoxJptF72FJJZf3n5w==
-Authentication-Results: outgoing_mbo_mout;
- dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=d7bF5wKP;
- spf=pass (outgoing_mbo_mout: domain of marek.vasut@mailbox.org designates
- 2001:67c:2050:b231:465::102 as permitted sender)
- smtp.mailfrom=marek.vasut@mailbox.org
-Message-ID: <fae30eed-0d1a-4b7b-ba2f-a1b7f48c4991@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1778261123;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=jdbdOOCxpF2aNuuGzkfi5ObLkP5Xa8Ageg1ZTTQzvVE=;
- b=d7bF5wKPWXK5PGrMURCo0ZURC3C60rn33W8WzLtpW4CW3EsffIHGFhxQSHHxH0sVpjPs8s
- ONBVX6kveVAtoqthYpp1i4OcUxZqINLK/bKjeM+MIXqPlkkt9CtEtUaCzaZjQ+TKnQtQ58
- BeppPHwr17tcG9vbBMUeIxc7YNThWPO5paPohqBy+a3J4NJsgzvD+C7e3JgPMJkX5CK+a9
- PZvWMyN4yDO0NJrUo03QKdwXEkYhTJ1F3xXM/3U3bhuKetvhsaoS8kQEtd08zn69EbiSo2
- DbFFx5qSN7kmOmQhigOwre5AL2A3v+LIJS11yV4KMXrLL3YORWUbVXD+MaBc+Q==
-Date: Fri, 8 May 2026 19:25:17 +0200
+ bh=me4tArdpbczTUVnVqFVPeLes7AXa0GZ7Nq2/oqqwUlE=;
+ b=IxjgvupzMrnTRYekm46k/pHaJjcfFf/L6KGlccK6295ijzjYLc5P08plZ3b6fxj1nnuV7t
+ NaO9s90F41hLyktfNAuc/oQ2djg+5G4IsqT3MdOnBiYWH7nVggUMGcX1x42nbOqYzu8NX5
+ xv5kp4k2hHWVdOixGq/feYpdDKyf/FN1uVqBsKuMEgueZ8lEfjHEyqvy9ektG/Yu8lY/yz
+ ZSQzc5hN143U1rxH9Hp46RI3afblAD7+w3HFNMYqdyHhq694x897h4z+uHeJwxwaw0qyXd
+ kv9yatNXCXArbhYCGcI/DYR3x+j9OM/GXf8pexlR/NqvJ77yX/UG+6GbBs4PFw==
+Message-ID: <b368c0cc-cd66-4879-8eb7-b2e9c214fbb1@mailbox.org>
+Date: Fri, 8 May 2026 19:37:40 +0200
 MIME-Version: 1.0
-Subject: Re: [PATCH 3/3] misc: x86: Staticize and constify driver ops
-To: Simon Glass <sjg@chromium.org>, marek.vasut+renesas@mailbox.org
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
+Subject: Re: [PATCH 1/3] misc: cros_ec: Staticize and constify driver ops
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de, Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>
 References: <20260507220725.209205-1-marek.vasut+renesas@mailbox.org>
- <20260507220725.209205-3-marek.vasut+renesas@mailbox.org>
- <CAFLszThbW0CUojf7zpuy_eUS2PYOU41pVGRTujrvo8G19z1Xkw@mail.gmail.com>
+ <CAFLszTiRWmZaGW7ntiN1nBOyJ+PKSobT8kHg-3CRVaf7jpc5Bg@mail.gmail.com>
 Content-Language: en-US
 From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <CAFLszThbW0CUojf7zpuy_eUS2PYOU41pVGRTujrvo8G19z1Xkw@mail.gmail.com>
+In-Reply-To: <CAFLszTiRWmZaGW7ntiN1nBOyJ+PKSobT8kHg-3CRVaf7jpc5Bg@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: ijiowrmgeofaosnoesqeauo9nsm4d7xd
-X-MBO-RS-ID: b2937893f65e9980b55
-X-Rspamd-Queue-Id: 4gBwxJ14pzz9t14
+X-MBO-RS-ID: debd7b3d9a41c012674
+X-MBO-RS-META: qaukcu496hpzeccx84737i44abe8sc33
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,30 +75,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 5/8/26 6:59 PM, Simon Glass wrote:
-> Hi Marek,
-> 
-> On 2026-05-07T22:07:14, Marek Vasut <marek.vasut+renesas@mailbox.org> wrote:
->> misc: x86: Staticize and constify driver ops
->>
->> Set the ops structure as static const. The structure is not accessible
->> from outside of this driver and is not going to be modified at runtime.
->>
->> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
->>
->> drivers/misc/qfw.c | 2 +-
->>   1 file changed, 1 insertion(+), 1 deletion(-)
-> 
->> diff --git a/drivers/misc/qfw.c b/drivers/misc/qfw.c
->> @@ -152,7 +152,7 @@ UCLASS_DRIVER(qfw) = {
->>        .per_device_auto        = sizeof(struct qfw_dev),
->>   };
->>
->> -struct bootdev_ops qfw_bootdev_ops = {
->> +static const struct bootdev_ops qfw_bootdev_ops = {
->>        .get_bootflow   = qfw_get_bootflow,
+On 5/8/26 7:01 PM, Simon Glass wrote:
+
+Hello Simon,
+
+>> -struct dm_cros_ec_ops cros_ec_ops = {
+>> +static const struct dm_cros_ec_ops cros_ec_ops = {
+>>        .packet = cros_ec_sandbox_packet,
+>>        .get_switches = cros_ec_sandbox_get_switches,
 >>   };
 > 
-> How about calling this 'misc: qfw: Staticize and constify bootdev ops' ?
-Sure, some one those files didn't have a good consistent subject tag I 
-could dig out of git log .
+> Only the sandbox driver is touched - you could do cros_ec_i2c.c,
+> cros_ec_lpc.c and cros_ec_spi.c as well if you like.
+
+There is 220 sites which do static struct which can be switched to 
+static const struct. I'll do that after I am done with this series, and 
+then with ACPI_OPS_PTR series. Ugh ... I think I will be sending a lot 
+more patches.
+
+> BTW dm_cros_ec_get_ops() in include/cros_ec.h casts the ops pointer
+> back to non-const!
+And this one too, I made a commit locally and will submit this later, 
+once I am done with this series. I don't want to flood the ML.
