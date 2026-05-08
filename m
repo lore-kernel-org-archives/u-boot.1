@@ -4,60 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B475CD3436
-	for <u-boot@archiver.kernel.org>; Fri,  8 May 2026 11:49:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F244ACD3436
+	for <u-boot@archiver.kernel.org>; Fri,  8 May 2026 11:49:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1FA0184BBD;
-	Fri,  8 May 2026 13:49:36 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6316484C19;
+	Fri,  8 May 2026 13:49:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="q6Trd1C/";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="htOxTyvE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C85C484BD1; Fri,  8 May 2026 13:49:34 +0200 (CEST)
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
+ id 4C61384C60; Fri,  8 May 2026 13:49:50 +0200 (CEST)
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D40B384A5A
- for <u-boot@lists.denx.de>; Fri,  8 May 2026 13:49:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2B52584A5A
+ for <u-boot@lists.denx.de>; Fri,  8 May 2026 13:49:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=stefan.roese@mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
+Received: from smtp1.mailbox.org (smtp1.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4gBnTl1FCsz9t9P;
- Fri,  8 May 2026 13:49:31 +0200 (CEST)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4gBnV13tvrz9v3M;
+ Fri,  8 May 2026 13:49:45 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1778240971;
+ s=mail20150812; t=1778240985;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=HZY4MY+Z4JHfba2dzRnk3PRJrpf1VRZvsic43olzL+w=;
- b=q6Trd1C/pHPgGkbGOHf1w+bJHXKf9yFNQstk9owgmSCjEBUGJ2k5lfr65dTDYnUBUvrV1+
- 50kKlN+O4QTkVCP1sA4pU+GwZaGtXfALPM5rpnpqScYnMXk42CEYDXBuHVGHsSbce6YOxQ
- k/fFeIjTAPFvQKXTljudzWwS/qGYlk0880CK0CUOkWYtOqX1MvjxqSjH/SdSvmj5UnQWVU
- XgBuJRNBlRWbNaiU2C49pl2yxvebY/IfmBX8KX/5BUJVxSYapaBYlAG1ocuDwVG3kaUuYB
- Pjg5Zw4Db22jK8j2WAQm7jhdpup0hPXtLAYu6djuaRjRkjzO6e3KBZ4m1kk5WA==
-Message-ID: <6cf43fb7-f39a-437e-bcdb-23a4d20d2b10@mailbox.org>
-Date: Fri, 8 May 2026 13:49:28 +0200
+ bh=pC0EMYzkjXK2//0krFxwtEYcpcxF7kQ7S/BwIki3ijo=;
+ b=htOxTyvEVIiE0gdE2KcDCjkkDQjiZj63D5vstrN2/M8067dSy9JTEZgG8oATgal3DR85Q/
+ lrtemuU5tAONWb9ubyXBC+94wkrz0YsqGDp4fIToRvxG+ju1dRheb/1WAh96wFnHAegy1/
+ nTuva7akUT+4nJUCwL+4ltK+h+tqrOIQjNNLZjXR40r5+LA5AHllDFch9JD/GhMZzmuze6
+ c1aBZWXx+gUa+ggIaHAdMO7su+5aXCQZ2hf5GgbjwJxMc8As5PGT02TKB5AXsETGLNv2DF
+ 3J4tsCy4PIa5NMlOPLZSBO7D01SVGXHONBsrW7pipqLvCdFYm+EZZ5a/kl0Crw==
+Message-ID: <a42da35f-e230-4d60-a0e2-37b2c2d8c5bc@mailbox.org>
+Date: Fri, 8 May 2026 13:49:43 +0200
 MIME-Version: 1.0
-Subject: Re: [PATCH RESEND] watchdog: sbsa_gwdt: clamp WOR value to hw max
+Subject: Re: [PATCH RESEND] watchdog: octeontx_wdt: fix DT matches to Marvell
+ compatibles
 To: Juuso Rinta <juuso.rinta@nokia.com>, u-boot@lists.denx.de
-Cc: Peng Fan <peng.fan@nxp.com>, Tom Rini <trini@konsulko.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>, Yao Zi <me@ziyao.cc>
-References: <20260504-fix-sbsa-timeout-overflow-v1-1-87de9b44112f@nokia.com>
+Cc: Tom Rini <trini@konsulko.com>, Bharat Bhushan <bbhushan2@marvell.com>,
+ Aaro Koskinen <aaro.koskinen@nokia.com>
+References: <20260504-rinta-octeontx-wdt-compatible-v1-1-660f3800d33a@nokia.com>
 Content-Language: en-US
 From: Stefan Roese <stefan.roese@mailbox.org>
-In-Reply-To: <20260504-fix-sbsa-timeout-overflow-v1-1-87de9b44112f@nokia.com>
+In-Reply-To: <20260504-rinta-octeontx-wdt-compatible-v1-1-660f3800d33a@nokia.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: 172e935dc0778df76ca
-X-MBO-RS-META: yigzn94myf4os4udaaig5qmm3c87cw74
+X-MBO-RS-ID: 67b52a3ebed689f7ae4
+X-MBO-RS-META: gudauwfq1sp3kckdgf1zq1t5ucxybii1
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,16 +76,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 5/4/26 11:34, Juuso Rinta wrote:
-> The WOR register is 32 bits, so any tick count exceeding U32_MAX is
-> truncated by writel(). A large requested timeout can wrap to a small
-> value causing the watchdog to fire sooner than requested.
+On 5/4/26 11:36, Juuso Rinta wrote:
+> The OcteonTX watchdog driver currently matches arm,sbsa-gwdt.
+> On systems with multiple watchdog devices this can be ambiguous since
+> arm,sbsa-gwdt is a generic SBSA binding.
 > 
-> Clamp the calculated value to U32_MAX prior to writing the register so
-> over-large requests will be set to the maximum timeout value.
+> Replace the SBSA match with SoC-specific Marvell compatibles
+> marvell,cn10624-wdt and marvell,cn9670-wdt.
 > 
-> Found by code review.
+> These compatibles align with the upstream Linux device tree binding:
+> https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/Documentation/devicetree/bindings/watchdog/marvell,cn10624-wdt.yaml
 > 
+> Reviewed-by: Aaro Koskinen <aaro.koskinen@nokia.com>
 > Signed-off-by: Juuso Rinta <juuso.rinta@nokia.com>
 
 Reviewed-by: Stefan Roese <stefan.roese@mailbox.org>
@@ -91,43 +95,28 @@ Reviewed-by: Stefan Roese <stefan.roese@mailbox.org>
 Thanks,
 Stefan
 
-
 > ---
->   drivers/watchdog/sbsa_gwdt.c | 10 ++++++++--
->   1 file changed, 8 insertions(+), 2 deletions(-)
+>   drivers/watchdog/octeontx_wdt.c | 3 ++-
+>   1 file changed, 2 insertions(+), 1 deletion(-)
 > 
-> diff --git a/drivers/watchdog/sbsa_gwdt.c b/drivers/watchdog/sbsa_gwdt.c
-> index 807884c5bc7..3a924cb2b9a 100644
-> --- a/drivers/watchdog/sbsa_gwdt.c
-> +++ b/drivers/watchdog/sbsa_gwdt.c
-> @@ -50,6 +50,7 @@ static int sbsa_gwdt_start(struct udevice *dev, u64 timeout, ulong flags)
->   {
->   	struct sbsa_gwdt_priv *priv = dev_get_priv(dev);
->   	u32 clk;
-> +	u64 tout_wdog;
+> diff --git a/drivers/watchdog/octeontx_wdt.c b/drivers/watchdog/octeontx_wdt.c
+> index c79d9539c13..7299a9f9739 100644
+> --- a/drivers/watchdog/octeontx_wdt.c
+> +++ b/drivers/watchdog/octeontx_wdt.c
+> @@ -159,7 +159,8 @@ static const struct octeontx_wdt_data octeon_data = {
+>   };
 >   
->   	/*
->   	 * it work in the single stage mode in u-boot,
-> @@ -58,8 +59,13 @@ static int sbsa_gwdt_start(struct udevice *dev, u64 timeout, ulong flags)
->   	 * to half value of timeout.
->   	 */
->   	clk = get_tbclk();
-> -	writel(clk / (2 * 1000) * timeout,
-> -	       priv->reg_control + SBSA_GWDT_WOR);
-> +
-> +	/* if requested timeout overflows, clamp it to u32_max */
-> +	tout_wdog = ((u64)clk * timeout) / (2 * 1000);
-> +	if (tout_wdog > U32_MAX)
-> +		tout_wdog = U32_MAX;
-> +
-> +	writel(tout_wdog, priv->reg_control + SBSA_GWDT_WOR);
->   
->   	/* writing WCS will cause an explicit watchdog refresh */
->   	writel(SBSA_GWDT_WCS_EN, priv->reg_control + SBSA_GWDT_WCS);
+>   static const struct udevice_id octeontx_wdt_ids[] = {
+> -	{ .compatible = "arm,sbsa-gwdt", .data = (ulong)&octeontx_data },
+> +	{ .compatible = "marvell,cn10624-wdt", .data = (ulong)&octeontx_data },
+> +	{ .compatible = "marvell,cn9670-wdt", .data = (ulong)&octeontx_data },
+>   	{ .compatible = "cavium,octeon-7890-ciu3", .data = (ulong)&octeon_data },
+>   	{}
+>   };
 > 
 > ---
 > base-commit: 4433253ecf2041f9362a763bb6cb79960921ac7e
-> change-id: 20260428-fix-sbsa-timeout-overflow-20cf84fa8a6b
+> change-id: 20260428-rinta-octeontx-wdt-compatible-0ca7b83e634e
 > 
 > Best regards,
 > --
