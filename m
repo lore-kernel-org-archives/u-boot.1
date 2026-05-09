@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7EEA6CD3447
-	for <u-boot@archiver.kernel.org>; Sat,  9 May 2026 11:12:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1108CD343F
+	for <u-boot@archiver.kernel.org>; Sat,  9 May 2026 11:12:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 17E0B84D13;
-	Sat,  9 May 2026 13:12:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=iopsys.eu
+	by phobos.denx.de (Postfix) with ESMTP id 621BF84CF4;
+	Sat,  9 May 2026 13:12:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="cIDdEDm0";
+	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="wGq/4egr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D2EAA84D0C; Sat,  9 May 2026 13:12:19 +0200 (CEST)
-Received: from AM0PR02CU008.outbound.protection.outlook.com
- (mail-westeuropeazlp170130006.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::6])
+ id A8B5F84CD2; Sat,  9 May 2026 13:12:22 +0200 (CEST)
+Received: from GVXPR05CU001.outbound.protection.outlook.com
+ (mail-swedencentralazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c202::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A195084CEC
- for <u-boot@lists.denx.de>; Sat,  9 May 2026 13:12:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5430884CEC
+ for <u-boot@lists.denx.de>; Sat,  9 May 2026 13:12:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mikhail.kshevetskiy@genexis.eu
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=THh5jOvPuwvZsdebQzB9GGwdLpIpf0uBTVjEYLEqPwOhDmB/mhy6qOXC0ySkhy3aSoheGG4L2PYfsBoVbudIc1N5o3dJ+LuHFZG2/N9jgmaRgdjid735NWtOHrt2yV4L51JWC5ZOB0BEPfShzf8aJ3klsFoUXjQi3Zug41EbN/O0Hxx5a28m30CXbdnBD77j78SorlIuunaEuTyhnWsctcZmsEcHA1nue+f5z1SolTHkpqTQsSvxEIKdbwHsvG8zAM9LN/5WFxPORwxY/i/1VDDhR3hqbgjBRLg2kDZ0dYDfr9M5sbCRjNwsO24AVQmr+bj/MwUDqeGai5AhkpnAIA==
+ b=Y8LWzbNsPIBe1x5S3EhA6L1aBQzE2sVgoVzWCvcvGF7NzzVHvLQ4+yKJ/GCqGjJcmtdx0lfxv5yVigcrl6hWHVj2p46RADkbDIs5ZVJgEGPNlf97GFQC0+nJ6TBic1lNm9agg7No2wKzpODunz2M7yX+LxMWkaX4BP3TZ1dRDbb7er1U2ZRkfIjUnLi/bHrxEqCOe/6SHOEd3eDRaXK67YKRU7UmWHRpwN5s8VjvkGrYg8L8KjFdFyrI1E+JIah1IaHIwXBJWQTev56ZlD3V/0na0reXlXQjiHd9V9SHAjP7nHTtR1ZQsC6J4gPL80mJhNgh7qaTL+u1M8RkyQ09Bg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=rMseN64sQS3/akme9GC8k6TTFuD1XTJQiYv7y5TQt/U=;
- b=aUdLkAGEypdx0HuBWiVo43kEvpY1Fs2N7dobDLib5yLI5FjRckraN+HmjMilTsaPz7EHS6FGSTOc0SUqQ3vAOl8oyF5YDFhTyiQvISR/ES5vjxEd2XIagq1izx15fiyf2sYjx+tTKd6UcTPL3cUIllZ3yf9nj34418grWPFUBO75wHzdR4dJX36+C3auf6OWO5rA7oYFRpZek5JT/H9qx0yHkEgaIOx65VwaNjeY+QwjgzP5RiUHuRDGqlOilVyDUZwZnPmUu/9MWW/Y3lEq6e8aeSSnVa4Ml5jfQ5KgGTYDVzdtXipV1s+n+3kMxnKza0mLPcSJfBU7FtroGwUKOw==
+ bh=81mIX4A5l8chV4yjp/FNxXOsXcyzxT8V4QMyBmdXwRE=;
+ b=xIDvVnUB9SJRVKmi7xZDZIzIjwthqBBk5afAxg7Le/g4THnL3b8WuWWpcUGF7AOWMc+V46IkyCFQwv45FJIymJM2EpP2ueB8FHQ99Hf6HVtaXhuoSOLC5M/65G3PIoV2yvAMaGHSvEOYhSieYvqnTEvyViPLPWQGp4rfFw+XDHqyNg9SzB0SBR+V64rqenBLKbF9CoO30SdkCY90sM7nZrrN7vpOeyEpyX7nwGr8D/EpjwcELrREJZlPPvXScinjvAtT2y+nyv/YjtnvsKStWJ6pBIH+Zkr/s8jymQnjLjYbBDEvKebuwOEozJWycPfzFoboLE0AqhAza+GGntbd/w==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=genexis.eu; dmarc=pass action=none header.from=iopsys.eu;
  dkim=pass header.d=iopsys.eu; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iopsys.eu; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=rMseN64sQS3/akme9GC8k6TTFuD1XTJQiYv7y5TQt/U=;
- b=cIDdEDm0n2BoLWvOCfOUm/6SN67JE9CrxGKvkXzaVxU5JoKlbcR6tQLD+tzWpGkmTXTgTfYihnExrPNpJ/Lsknj9U6MNrld7xQqueC3kWAF7ghQoG6b3xK0QYslIP0Y1MpXntQWT1S3p3yO/A5QX9LVz6aZZ6TS1G8P8CcdcoziXNz2tPsbPpjA83hNUaSDHlWTSy01dDK551WdoO8fmXIrrBPA9XAIwgmA+TWbNPQGgG7eMISWKPlrU2WOV2Qfip/kJnjAqpY9u25hkdGviKQWWH6d0iC1flzeSILE5ljStObqcRzgex/bZKpPbENiXQ3qImOLrf4sFclGeAg0ZYA==
+ bh=81mIX4A5l8chV4yjp/FNxXOsXcyzxT8V4QMyBmdXwRE=;
+ b=wGq/4egrIrW5WzrqcT671rmItdgYN0Kie5Dmrv0YcmvDzNNquAYSC27jzr6F8WnGbQr2YQ8R+raFZ9IBsjntlJ0OOi61OwZCZJ7bWgN40WwgoydG4p+SJNPhSQ/mnSFG3DEZzgJ1D1mGyLLL9NN0jKrzWzqg+c/oDykbPpUC2GSAG8G9SnwXr5xhBZt8vRgOgHjkI/q6u+TWdkysNkf0r/6n1Q7Elg8lcrbzkSk/8Q3+Rn9LKZxY3/6DstXVzDUDKLz7+vfR3Yrx+qbk9nAzK16PynSxJYx+NEY8SuJ1shb4ktGujUVU5ml7vRtukDNf5wHR1Df5Ba2vjNRNxZwGVg==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=iopsys.eu;
 Received: from DU2PR08MB10037.eurprd08.prod.outlook.com (2603:10a6:10:49a::20)
  by GV1PR08MB8617.eurprd08.prod.outlook.com (2603:10a6:150:81::15)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9891.20; Sat, 9 May
- 2026 11:12:15 +0000
+ 2026 11:12:17 +0000
 Received: from DU2PR08MB10037.eurprd08.prod.outlook.com
  ([fe80::3c7:6d2e:8afe:e4dc]) by DU2PR08MB10037.eurprd08.prod.outlook.com
  ([fe80::3c7:6d2e:8afe:e4dc%5]) with mapi id 15.20.9891.019; Sat, 9 May 2026
- 11:12:15 +0000
+ 11:12:17 +0000
 From: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
 To: Tom Rini <trini@konsulko.com>, Christian Marangi <ansuelsmth@gmail.com>,
  Simon Glass <sjg@chromium.org>,
@@ -72,85 +72,71 @@ To: Tom Rini <trini@konsulko.com>, Christian Marangi <ansuelsmth@gmail.com>,
  Markus Gothe <markus.gothe@genexis.eu>,
  Matheus Sampaio Queiroga <srherobrine20@gmail.com>,
  Benjamin Larsson <benjamin.larsson@genexis.eu>
-Cc: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
- Alexandre Belloni <alexandre.belloni@bootlin.com>,
- Crt Mori <cmo@melexis.com>, Richard Genoud <richard.genoud@bootlin.com>,
- Andy Shevchenko <andriy.shevchenko@intel.com>
-Subject: [PATCH v5 03/11] bitfield: Add non-constant field_{prep,
- get}() helpers
-Date: Sat,  9 May 2026 14:11:49 +0300
-Message-ID: <20260509111157.4039434-4-mikhail.kshevetskiy@iopsys.eu>
+Cc: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+Subject: [PATCH v5 04/11] pinctrl: add more pinconf/pinctrl definitions
+Date: Sat,  9 May 2026 14:11:50 +0300
+Message-ID: <20260509111157.4039434-5-mikhail.kshevetskiy@iopsys.eu>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260509111157.4039434-1-mikhail.kshevetskiy@iopsys.eu>
 References: <20260509111157.4039434-1-mikhail.kshevetskiy@iopsys.eu>
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 X-ClientProxiedBy: GVZP280CA0004.SWEP280.PROD.OUTLOOK.COM
  (2603:10a6:150:273::9) To DU2PR08MB10037.eurprd08.prod.outlook.com
  (2603:10a6:10:49a::20)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: DU2PR08MB10037:EE_|GV1PR08MB8617:EE_
-X-MS-Office365-Filtering-Correlation-Id: b51488a8-0472-4232-41a4-08deadbbd360
+X-MS-Office365-Filtering-Correlation-Id: 134ea890-8331-4335-8a69-08deadbbd4e2
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|366016|52116014|376014|7416014|921020|38350700014|3023799003|56012099003|9063799003|22082099003|18002099003;
-X-Microsoft-Antispam-Message-Info: DEKxczSNSUi8zueKbFbjyLBcnXbYupn4UqdK1aItX2EEJYG3qAWshAhKcpSbnfIo8s6VsejmQNYgXPpalJ48CpVsyi9jgaa+X85CGp51LxTdSgS9IQcMAEc6drbWb/Xahp/75HMASd0TeDqJzJdD2SO6h4v6yDU2fw6kC2CXcqiPkJAr2Add2wlwJdVMWd5e2eXvYEVwHySZzXM+ZsgU1rMcJsQiRLWZwJmIXVIUwrMPpRQM5pPGQNjRI3HYgIfYQzWjRpjBK8rhz417RUye5Bt+/uZ45hHAWh+giT7pN2nUMoeO4kZv+zsPktksWtoUYkjXDb7m5B4bcceYJp6GamC25uWhI/jMsYIUWnYYAaHbXkSe6cyF3L8ZpbyMjP10eON/DppuiG4WbT2IHqPepDkGI+lBFKLBJ9Tzrh/913KWqVjvHe2uSnlXH5QJGZYGreEuvu3AiHIWDbbV6uXVimHRFsKyFNyO2nNpmqpq6IlB1iAxNYCzz0ra8M8xx3Q1wm1S86lZey0xu1o6ATOZ792gTmfSLMOboS1RX2ecrs8CG7k5ixChDAey00rxCIymFi+Lj+oeZO64SvTTWodttD19MNK7Lu1X8fwUIpYZvgwY/0Se5YgrMyL2lpHDkupAA1DCWFpN/ksFQt0rmtQd8UoQs5p/6Rtz6DlXofdptB7GCNlRsxrNIzM/nSHfyfJtc13R/8d8BcbFFdwZr8DuVeBF0sjblDADaRnXKXzv0oiHqny14hIj68j3TlLoRXH1BLiRuAhCmmuxdSyQsR4Ybw==
+ ARA:13230040|1800799024|366016|52116014|376014|7416014|921020|38350700014|56012099003|22082099003|18002099003;
+X-Microsoft-Antispam-Message-Info: 6kyW2Obqgm8L7GsP5iyMaop6rwRwKYp0M2M6nEYar6gEMeWpv/IbQiBWH21wiTE09AqsKyomCsAF6Hebjmm9ilJSDYKAoExlyiezZ3fabefdqrPYmPMCg3nEeYJR8DMvC7D3/Xm/XKRN5ew6L1rYY7/6VAwMg0yYE+3jwHA2lH+Ivs7t9K//yOnDFWSU5YnJS2pkPKWjWpqNuBMS2mCJhuL3I/TUzzjPCOoKfgfblQOSgWyW1l0lOy/4rdDO3mkwgshnOmIWr3HgeRF6h8P0/msNFOw7kkM0vP5lpm86B5edgb69bxlBAvZ9owqzvJ0JBPM9Q/woI+N/U/RPskupr7r6jKUVfIxVjZDH7q4knWPV9eOsHsA/ylNVPxlCgOdWtMD09s7Zhb+e2dkQDWbJ8KAXGOL5RSOjdPPu1JhuMYwFy7nCAsBdMxJEnp1Zn2XWq3eeDShulZ6eEc3sF4oR2bBDM059HUzONMhxtblAfjsoLoR3M6zKuJyofs1MXDikVu+CpEUayETQ89J/u37LeC5ma9nVjvEdLf7rnXFGPmIWAWvbESIn0u5AxMR+y41y2cPe62eiVnycR+dQXFY78k7iIswGP2elDaMx10xBYkpxp7c+qGiMop0T2ah3cP3F43Vbk50guSP9RxxZx++D2cHdT11io6/KbTSFDNQRbIyPT5Xfub51NsrVqajngwOFce7XAgGvAzApKWGije7wpMUK8wOwPorMRuZFpywOq0o+RgKCx1GGwwQ6T++GeWyTPRFiR/U1mvwly1Q7NuBPxg==
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:DU2PR08MB10037.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(366016)(52116014)(376014)(7416014)(921020)(38350700014)(3023799003)(56012099003)(9063799003)(22082099003)(18002099003);
+ SFS:(13230040)(1800799024)(366016)(52116014)(376014)(7416014)(921020)(38350700014)(56012099003)(22082099003)(18002099003);
  DIR:OUT; SFP:1102; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?UjJFbXlyN0ZFcStiOVBkU3ROZlhFZVkzY1JHSldOK2ZEWUlBL3RBVnU0eFNz?=
- =?utf-8?B?RERaa29tcE1aaDUwY2VMVUhzZHlENk5CWlVIeFREZnhGem0xMUZ6UFlCd1h2?=
- =?utf-8?B?VHYzUE04emcwWXB6SWczcm15VEQ5WDVWYXFYNTcrcE5OcWhZWkZSZERRU1Vm?=
- =?utf-8?B?OXpyV20ra1lZaXFMY3VYd1JiSTF1aUEwdkNSMlFmTVg4czdsOFdzVVMwdnAz?=
- =?utf-8?B?YklScVhDOE9rQ21SbHVwNFdxVlBSNkQ4QlcwNW5DV1QvSng4Tm03V3NVRkNC?=
- =?utf-8?B?ZFlURjZWUDZZcGU0c2xZeEw3VFFuMnJ1bCtKRlNYcHRJUWlCbXQ1eU84bFVI?=
- =?utf-8?B?eDJjUnNIMVRIQ0NVOGUrSzhITjZTbFUydUhOeWF5L3pYNVdScVorSUt5Znh4?=
- =?utf-8?B?amNpUzRtNTFGSUZCWUZkZHZ0UzYyMHVuekVsVkR6K1NkQjJQL3JucDlKWDVw?=
- =?utf-8?B?TFVrZWNscFZiSzJweWRtajVyQ1BEZzFPdnhrVXd3S05JdDB2RGtCSEdtWjYr?=
- =?utf-8?B?M0ZOZzMwZDByamgyUVRxaE1CZFV0MDBVaGtOTU1Td2kzWUVLclBYQnR2cFdY?=
- =?utf-8?B?R3lDU0NrTlpPTVpTUmVzWkt3MnJybGtPajkvT1RNOEFQc0lZdUgwdU52cVNt?=
- =?utf-8?B?YUVkWjRwQzZqTWpyaFhCNlpaMmRNOTArRi9PeVZnYk53aXl4alo0K0M2djND?=
- =?utf-8?B?M0U3V2pXZVpCU1AvaURwYU5DdCtWNDBmMEQxSk5YemtaMUU0bXdTREIyT0pS?=
- =?utf-8?B?R0JXNXhEWlNyaWdPMEZ6YlBmVXVkZGIxYjBtV0RpMW9TT1R4VW1VNjlQbzdK?=
- =?utf-8?B?NFVuOEZINHBLTi9YbmNwZFRUZndzQ3lSM2gwYVFXaTJia2tVQmFXSGZCUlV4?=
- =?utf-8?B?YzBqYzlEdWVYUVdkMEFScTRJcGRacU15NG1rSWZheDJ0K3RZdjJHdVNVcnpD?=
- =?utf-8?B?MEpEVkFrV2VVbXZUdm9sRlYwSStLa2JrSTE2c1htTTNsQWxxdUFsQzN5VXhR?=
- =?utf-8?B?VVhOdjBCOThrMmNoQWloVHVWRGxPVFp1M0RWbUdObFdPWlhwTHN1TVVxUTJL?=
- =?utf-8?B?VTJvMXdqTlA1emljcWl0ZWgwQ0w5Uml6RFRDK0NhY1BURmtPbFcrVjdpL1hr?=
- =?utf-8?B?NzhVZzJHb2l2dnEwbGJvYmk2M3VoQnY0UWVJMU9JY3ZiWnV6VmJ6cjZIQWxJ?=
- =?utf-8?B?eEtreEphOW16cHRIWXl1Z29UKzRYME5teHdqazZScHMrdkUxQitQNzZUWWhD?=
- =?utf-8?B?Q25QR2pPTFpPdUdIVFVEbDNBd1BNTzF4TjlHajVySi9FMVExSDRFQktQK25l?=
- =?utf-8?B?ekFoSDJZa1JKZHZOR1IrOVQ5NVFtQ241OWlFMDdmTDFDM0ZjazVQSjF6STBl?=
- =?utf-8?B?L04wZk1VamVjTHI5NzUvZS9KR3JvUHppTEZMaFZ1dXdSQVc1eHIrWWdBWWtw?=
- =?utf-8?B?UEVLUGUzNVQ2RURLSEwwS25ONVVHTERPdWNvNy9xYUhrZXEvVkszRUxDNmVU?=
- =?utf-8?B?QUE4QnVzVEFjREFKV0QyMnFpNG00amVJempxSEdJV3BFMnlzbUxVc3ZGSHZW?=
- =?utf-8?B?UXBYbGlHNmNDUEpDckpZYVBDZTJ2VDVvL3JkQlNJL0t5Mlg1WXBvdjdtcUdU?=
- =?utf-8?B?VWRtRmVnYmdFOUtMN2I0b05lQWJuUFFvTmttR1dJV1ZyMVJ6blFHU29ESSs5?=
- =?utf-8?B?V2xxL3B2UHk0TDM3KzJiWGpzM3lIR2N0RDQ4dmhoUWQyUTlRNGJjRDU1dXIw?=
- =?utf-8?B?M0xIZEdqMGxINHd5Y0c3b1lmYUh0Qkl6YUNwWVNvVG14UjdWMTdIaHdzWVJO?=
- =?utf-8?B?WWlTQ2xRSjZONjZxMXRBQlNzMjJGaXllWFVBM3AvdWlqQ29EdzdwU3hBYW40?=
- =?utf-8?B?QW4vVWlkcEdpRmQrWjErN2JYQWRhdVJaRUgxblcrQzY0TmJNUE5Veld0ZDVi?=
- =?utf-8?B?ekxIZFIrV0xuSGdOTE9ETkN3Um9kbUZSdkg0cHBVcVJiTFp0VnNHVHlWb1lk?=
- =?utf-8?B?L2JwaFI3eTkzUHVFS093eHZlOWVmd1pjS1lmaWNOZHZ3dW1TY2FaMUtkMm5p?=
- =?utf-8?B?dmEvemNRellMdS9CT1c0NTRVYWdEUmRDd01TSHpUWS9BUngxakxKb0NxR01U?=
- =?utf-8?B?akJRTzc3aE9KeGkzWlBodUxaVDdlMlZLUGVTSFhVa0hzeVU1VFR5K3dqQ2xa?=
- =?utf-8?B?RWNpWEFWS0trcXI2MGZQWjg0MEthMlQ1b3I1RlNzYk1pM2Z6L2puc2NYNTFT?=
- =?utf-8?B?dkV6U1lvU1o1SHZEN0VvU3EzUnRES1crRlBONFJqSFJReTRpS0dSMEJxNVR0?=
- =?utf-8?B?eDBkMmtJUHRHYy9WdUk3RnkxNmxpckJOSzJ5VFZIMis2Z0hHV3VwUENUTG9N?=
- =?utf-8?Q?7c9UoJNBWubUA9qY=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?hT+Itv9P6xnehl2O20aY2jy/DK5ibT25ATXrbz7nRaDN/jhOg3dD+514TlFP?=
+ =?us-ascii?Q?4Ng37kyLZyYr/PRfM13WtyqKuRrmnOyDgTUUZvPySwRiOIV8MJr+pDJDeYOD?=
+ =?us-ascii?Q?KNdQOHA6LBd5ET9j1vxkXxHovTicoFCd8o1rg8iV8bbeeSct746zLi+Jltup?=
+ =?us-ascii?Q?EYxAc6rkauos9HYev7nyqZUMF5M0bFO4TQTPHTeu8vhpcDVaGJnkaASRxh0P?=
+ =?us-ascii?Q?mgLsEu5aMXRzllUhf0eHUUclhRodEt1sVBmloGo6gnSSYyu8W3FJmEO6SKAj?=
+ =?us-ascii?Q?4O/6gWXtxtss83s/0zB/Le6yHKr7EzwIudwVKDqtAHlKT3s1Q66ZOSe6DhGT?=
+ =?us-ascii?Q?1+ePYx7l64+wzbnrzWDclQNY2Yv76nGWLMV+L0PaxjX71ZPtnB+J7jVaxMXr?=
+ =?us-ascii?Q?V7QczBLOHwEA0VRGuKBMFE6R2OPkcrqYuAKdswNFviOtuAqzCDyWzVQH3gfL?=
+ =?us-ascii?Q?V/+KDhMTp4Jd9dHYOf2WbQRmUC+lMHmVaASfwgHsB9TYfsy9eCYmiuHcE791?=
+ =?us-ascii?Q?hxm6mpzlpfHbbgcT4nf4pyyA1mhQwnwmBCc1LG4XnMfxKwa1hyRz/bSEsvP6?=
+ =?us-ascii?Q?nvHgKDU2rulsI8X1IdWPC84N2XVP3Jxvh1soGrPqCNlLHnnFHJ/3rl3PGdMx?=
+ =?us-ascii?Q?pVNTU6kWjFgPvqV169ZrWmrCCv8ATL+Zu6Msaue7nluFHe0I8djeuFJBHQKd?=
+ =?us-ascii?Q?CKhggGb7spX8gbsFHu1K3NdUaJLOUr8BI4I+hZ0Av5jncLG/QMqoFjf/vJ61?=
+ =?us-ascii?Q?L+IEo9VIk9c0f1H0G89TKYp8IFDDgXDY1h0hQMWhvn+bCSxtn34tv+kedh7I?=
+ =?us-ascii?Q?pOPUDXBQ7PH7AnA5QfLniStq4b7n2VkRQS6SDzQcycdnt1ftDPWVbrpn1E17?=
+ =?us-ascii?Q?+RrnQPoL7iik7dN8xhh/HZwJ5o6NF8KtxFX0Hc10AKpLELV0qf74DW+SxitT?=
+ =?us-ascii?Q?GlTqT/y0D92Yxr6j57gxM7JMbs5RgjTjJ/5z+p/o8OpPgw++5WMMu79c9Xly?=
+ =?us-ascii?Q?WlqvU+JvKBTqUTtlr3EuZghh75L3M0rtf9nPOJTa8Vt+2WLr9GmUqhpj1Vbs?=
+ =?us-ascii?Q?PJRGwtf7XoDAnKX5PSdOjDlB0xztmifzdRtQNz737it2JtfGpajGQ1Yi7Li/?=
+ =?us-ascii?Q?SqEzJ7YW+WHSofmxAk/pUQGtq6HY+gQnTFnQvrJKo9tsP4fQhKFAmHZHd9bF?=
+ =?us-ascii?Q?YXu+XJgilHYxbzD9p4QOzuzb+Zuv7DbezSQZol6eB0HeVvrVq73Txg/J2+Lf?=
+ =?us-ascii?Q?DMu6PwUoS7HBZl0vj3zUTNX7s7DQXwWYHmawVw9m5WFyNPbryeKvqeCaLtVQ?=
+ =?us-ascii?Q?XLdpeveVnG1K5QmYekoBAf8mb0OMpDn9pn1YBoK48FpgmX1YcUdaf83xHtaD?=
+ =?us-ascii?Q?2u4ar2Nn8+xXNshftnjeqA8ODr7I54YKl0SAMWNRs2qAkjmisNzyg+SfuRes?=
+ =?us-ascii?Q?Lrfbjexlr7FoC51JNA1Ll/uK5T9Td7Q+6EhgPhJ+dXJ+GGFNmARYUJeTRJRH?=
+ =?us-ascii?Q?QthEim9estTVDtfKZoGell0SfGHZb7ASO+9/KPZWidEUOly5sXcutzybGVVp?=
+ =?us-ascii?Q?Ov9+gaPwgUjgTJOp6TgqDTYFcFgvcU6Xedra64jVcqZr8ljbf1vRyFV9DkPY?=
+ =?us-ascii?Q?ccxwmdo8Ovzc3PD8C+HJByBlOPLxgDhW5H3zR6kwUGT1GdfO7hjzUOQIx+N/?=
+ =?us-ascii?Q?cUZUPgvsWdEtz5oKq8RbP8lnVJZVTwADggrztDaBtG5qm1RYbVV80T7oTzBA?=
+ =?us-ascii?Q?0Xkb6R39bxGlgNNqw9TQ0EgroOD73Ko=3D?=
 X-OriginatorOrg: iopsys.eu
-X-MS-Exchange-CrossTenant-Network-Message-Id: b51488a8-0472-4232-41a4-08deadbbd360
+X-MS-Exchange-CrossTenant-Network-Message-Id: 134ea890-8331-4335-8a69-08deadbbd4e2
 X-MS-Exchange-CrossTenant-AuthSource: DU2PR08MB10037.eurprd08.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 May 2026 11:12:15.1534 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 May 2026 11:12:17.6860 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8d891be1-7bce-4216-9a99-bee9de02ba58
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: jC+3dpbh8zfjPOuBXRlnBu2VO/zeNB4YVvJcoCUX6IM7E7syh5E8FU/hb0WV9yjTCLfN+coxPs0dmzE9ubpE49kWDJ50Ul1Sq4o4nQ5RBzg=
+X-MS-Exchange-CrossTenant-UserPrincipalName: a4+yOt5WykBSUJOOERLFBWOobHJc1m+029LvBkbJ8HzKfyHJAUCoJt+euZpeweDbUwHr5niwtuQ3ddmS9W1gVLq0j8n/M6bdc+m17qz3xys=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV1PR08MB8617
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -168,116 +154,142 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Geert Uytterhoeven <geert+renesas@glider.be>
+These pinconf/pinctrl definitions will be used by the next patches.
 
-The existing FIELD_{GET,PREP}() macros are limited to compile-time
-constants.  However, it is very common to prepare or extract bitfield
-elements where the bitfield mask is not a compile-time constant.
+The definitions was taken from public headers of linux-7.0. It's used
+by several linux pinctrl drivers, so it might be helpful for U-Boot as
+well.
 
-To avoid this limitation, the AT91 clock driver and several other
-drivers already have their own non-const field_{prep,get}() macros.
-Make them available for general use by adding them to
-<linux/bitfield.h>, and improve them slightly:
-  1. Avoid evaluating macro parameters more than once,
-  2. Replace "ffs() - 1" by "__ffs()",
-  3. Support 64-bit use on 32-bit architectures,
-  4. Wire field_{get,prep}() to FIELD_{GET,PREP}() when mask is
-     actually constant.
+Pinconf definitions are placed near the corresponding U-Boot definitions
+in file include/dm/pinctrl.h. Pin/group/function definitions stored within
+the same path as in linux (include/linux/pinctrl/pinctrl.h).
 
-This is deliberately not merged into the existing FIELD_{GET,PREP}()
-macros, as people expressed the desire to keep stricter variants for
-increased safety, or for performance critical paths.
-
-Yury: use __mask within new macros.
-
-Signed-off-by: Geert Uytterhoeven <geert+renesas@glider.be>
-Acked-by: Alexandre Belloni <alexandre.belloni@bootlin.com>
-Acked-by: Jonathan Cameron <Jonathan.Cameron@huawei.com>
-Acked-by: Crt Mori <cmo@melexis.com>
-Acked-by: Nuno Sá <nuno.sa@analog.com>
-Acked-by: Richard Genoud <richard.genoud@bootlin.com>
-Reviewed-by: Andy Shevchenko <andriy.shevchenko@intel.com>
-Reviewed-by: Yury Norov (NVIDIA) <yury.norov@gmail.com>
-Signed-off-by: Yury Norov (NVIDIA) <yury.norov@gmail.com>
+Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
 ---
- include/linux/bitfield.h | 59 ++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 59 insertions(+)
+ include/dm/pinctrl.h            | 28 +++++++++++++
+ include/linux/pinctrl/pinctrl.h | 74 +++++++++++++++++++++++++++++++++
+ 2 files changed, 102 insertions(+)
+ create mode 100644 include/linux/pinctrl/pinctrl.h
 
-diff --git a/include/linux/bitfield.h b/include/linux/bitfield.h
-index ef81901bc41..18cf57aeb2c 100644
---- a/include/linux/bitfield.h
-+++ b/include/linux/bitfield.h
-@@ -16,6 +16,7 @@
-  * FIELD_{GET,PREP} macros take as first parameter shifted mask
-  * from which they extract the base mask and shift amount.
-  * Mask must be a compilation time constant.
-+ * field_{get,prep} are variants that take a non-const mask.
-  *
-  * Example:
-  *
-@@ -223,4 +224,62 @@ __MAKE_OP(64)
- #undef __MAKE_OP
- #undef ____MAKE_OP
+diff --git a/include/dm/pinctrl.h b/include/dm/pinctrl.h
+index e41baea6200..36db47802c7 100644
+--- a/include/dm/pinctrl.h
++++ b/include/dm/pinctrl.h
+@@ -481,6 +481,34 @@ enum pin_config_param {
+ 	PIN_CONFIG_MAX = 255, /* 0xFF */
+ };
  
-+#define __field_prep(mask, val)						\
-+	({								\
-+		__auto_type __mask = (mask);				\
-+		typeof(__mask) __val = (val);				\
-+		unsigned int __shift = BITS_PER_TYPE(__mask) <= 32 ?	\
-+				       __ffs(__mask) : __ffs64(__mask);	\
-+		(__val << __shift) & __mask;				\
-+	})
++/*
++ * Helpful configuration macro to be used in tables etc.
++ */
++#define PIN_CONF_PACKED(p, a) ((a << 8) | ((unsigned long) p & 0xffUL))
 +
-+#define __field_get(mask, reg)						\
-+	({								\
-+		__auto_type __mask = (mask);				\
-+		typeof(__mask) __reg =  (reg);				\
-+		unsigned int __shift = BITS_PER_TYPE(__mask) <= 32 ?	\
-+				       __ffs(__mask) : __ffs64(__mask);	\
-+		(__reg & __mask) >> __shift;				\
-+	})
++/*
++ * The following inlines stuffs a configuration parameter and data value
++ * into and out of an unsigned long argument, as used by the generic pin config
++ * system. We put the parameter in the lower 8 bits and the argument in the
++ * upper 24 bits.
++ */
++
++static inline enum pin_config_param pinconf_to_config_param(unsigned long config)
++{
++	return (enum pin_config_param) (config & 0xffUL);
++}
++
++static inline u32 pinconf_to_config_argument(unsigned long config)
++{
++	return (u32) ((config >> 8) & 0xffffffUL);
++}
++
++static inline unsigned long pinconf_to_config_packed(enum pin_config_param param,
++			     u32 argument)
++{
++	return PIN_CONF_PACKED(param, argument);
++}
++
+ #if CONFIG_IS_ENABLED(PINCTRL_GENERIC)
+ /**
+  * pinctrl_generic_set_state() - Generic set_state operation
+diff --git a/include/linux/pinctrl/pinctrl.h b/include/linux/pinctrl/pinctrl.h
+new file mode 100644
+index 00000000000..32b56e0ab18
+--- /dev/null
++++ b/include/linux/pinctrl/pinctrl.h
+@@ -0,0 +1,74 @@
++/* SPDX-License-Identifier: GPL-2.0-only */
++
++#ifndef __LINUX_PINCTRL_PINCTRL_H
++#define __LINUX_PINCTRL_PINCTRL_H
++
++#include <linux/types.h>
 +
 +/**
-+ * field_prep() - prepare a bitfield element
-+ * @mask: shifted mask defining the field's length and position, must be
-+ *        non-zero
-+ * @val:  value to put in the field
-+ *
-+ * Return: field value masked and shifted to its final destination
-+ *
-+ * field_prep() masks and shifts up the value.  The result should be
-+ * combined with other fields of the bitfield using logical OR.
-+ * Unlike FIELD_PREP(), @mask is not limited to a compile-time constant.
-+ * Typical usage patterns are a value stored in a table, or calculated by
-+ * shifting a constant by a variable number of bits.
-+ * If you want to ensure that @mask is a compile-time constant, please use
-+ * FIELD_PREP() directly instead.
++ * struct pingroup - provides information on pingroup
++ * @name: a name for pingroup
++ * @pins: an array of pins in the pingroup
++ * @npins: number of pins in the pingroup
 + */
-+#define field_prep(mask, val)						\
-+	(__builtin_constant_p(mask) ? __FIELD_PREP(mask, val, "field_prep: ") \
-+				    : __field_prep(mask, val))
++struct pingroup {
++	const char *name;
++	const unsigned int *pins;
++	size_t npins;
++};
++
++/* Convenience macro to define a single named or anonymous pingroup */
++#define PINCTRL_PINGROUP(_name, _pins, _npins)	\
++(struct pingroup) {				\
++	.name = _name,				\
++	.pins = _pins,				\
++	.npins = _npins,			\
++}
 +
 +/**
-+ * field_get() - extract a bitfield element
-+ * @mask: shifted mask defining the field's length and position, must be
-+ *        non-zero
-+ * @reg:  value of entire bitfield
-+ *
-+ * Return: extracted field value
-+ *
-+ * field_get() extracts the field specified by @mask from the
-+ * bitfield passed in as @reg by masking and shifting it down.
-+ * Unlike FIELD_GET(), @mask is not limited to a compile-time constant.
-+ * Typical usage patterns are a value stored in a table, or calculated by
-+ * shifting a constant by a variable number of bits.
-+ * If you want to ensure that @mask is a compile-time constant, please use
-+ * FIELD_GET() directly instead.
++ * struct pinctrl_pin_desc - boards/machines provide information on their
++ * pins, pads or other muxable units in this struct
++ * @number: unique pin number from the global pin number space
++ * @name: a name for this pin
++ * @drv_data: driver-defined per-pin data. pinctrl core does not touch this
 + */
-+#define field_get(mask, reg)						\
-+	(__builtin_constant_p(mask) ? __FIELD_GET(mask, reg, "field_get: ") \
-+				    : __field_get(mask, reg))
++struct pinctrl_pin_desc {
++	unsigned int number;
++	const char *name;
++	void *drv_data;
++};
 +
- #endif
++/* Convenience macro to define a single named or anonymous pin descriptor */
++#define PINCTRL_PIN(_number, _name)		\
++(struct pinctrl_pin_desc) {			\
++	.number = _number,			\
++	.name = _name,				\
++}
++
++#define PINCTRL_PIN_ANON(_number)		\
++(struct pinctrl_pin_desc) {			\
++	.number = _number,			\
++}
++
++/**
++ * struct pinfunction - Description about a function
++ * @name: Name of the function
++ * @groups: An array of groups for this function
++ * @ngroups: Number of groups in @groups
++ * @flags: Additional pin function flags
++ */
++struct pinfunction {
++	const char *name;
++	const char * const *groups;
++	size_t ngroups;
++};
++
++/* Convenience macro to define a single named pinfunction */
++#define PINCTRL_PINFUNCTION(_name, _groups, _ngroups)	\
++(struct pinfunction) {					\
++	.name = (_name),				\
++	.groups = (_groups),				\
++	.ngroups = (_ngroups),				\
++}
++
++#endif /* __LINUX_PINCTRL_PINCTRL_H */
 -- 
 2.53.0
 
