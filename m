@@ -4,83 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0936CD37AC
-	for <u-boot@archiver.kernel.org>; Sat,  9 May 2026 00:40:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1D66CD3445
+	for <u-boot@archiver.kernel.org>; Sat,  9 May 2026 00:41:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1653684E1D;
+	by phobos.denx.de (Postfix) with ESMTP id 601A384E21;
 	Sat,  9 May 2026 02:40:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=wolfssl.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=wolfssl-com.20251104.gappssmtp.com header.i=@wolfssl-com.20251104.gappssmtp.com header.b="cIN1Bbrj";
+	dkim=pass (2048-bit key; unprotected) header.d=wolfssl-com.20251104.gappssmtp.com header.i=@wolfssl-com.20251104.gappssmtp.com header.b="iC9DUXPg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BB56584E0F; Sat,  9 May 2026 02:04:44 +0200 (CEST)
+ id B2C7884E0B; Sat,  9 May 2026 02:04:46 +0200 (CEST)
 Received: from mail-dl1-x1234.google.com (mail-dl1-x1234.google.com
  [IPv6:2607:f8b0:4864:20::1234])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 72BCA84E10
- for <u-boot@lists.denx.de>; Sat,  9 May 2026 02:04:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id ED6C784E0A
+ for <u-boot@lists.denx.de>; Sat,  9 May 2026 02:04:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=wolfssl.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=aidan@wolfssl.com
 Received: by mail-dl1-x1234.google.com with SMTP id
- a92af1059eb24-12db2e415a7so1869602c88.1
- for <u-boot@lists.denx.de>; Fri, 08 May 2026 17:04:42 -0700 (PDT)
+ a92af1059eb24-12c8c9c4cd8so2159753c88.0
+ for <u-boot@lists.denx.de>; Fri, 08 May 2026 17:04:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=wolfssl-com.20251104.gappssmtp.com; s=20251104; t=1778285080; x=1778889880;
+ d=wolfssl-com.20251104.gappssmtp.com; s=20251104; t=1778285082; x=1778889882;
  darn=lists.denx.de; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=nbamVX3rWvdw7UjgaZEIs2puQ+YV3AvIErMweW3jqyU=;
- b=cIN1BbrjaRL62i93oQU/XiVue0cO9+Vnc3w0ZgerX6ncenBj5sRfg+5x3lsNYrEHl+
- 8Du6hdJYxOON6P5OIdv76mQRFdj1pAuC4Y9Z+JAnoDKXCy9ofOAipDVJ3lM4Vg/cM7KS
- IEj6DwQ+HbAi4dj47yahiq9mfmEDDYiRIbDeihuQFmkou0LjTj1ZUrIWiLF+74u27d1g
- bzuyxttX22KvmsL0qLn+zCWbMgwG1iKfe7dw2qBJS0m9L7I4Vy00X/cJdhtRn2wfeI1T
- PvcNSp2kB27OT8yNKT+f0ChxQJs0kqNOEsff4umgMrIEbh8eOA6HnMxAELJmq0yJCJJX
- fhPA==
+ bh=ktXImSmp24jPe3o0Ul/H4vgOE24na+wCFd6yUC51Ax4=;
+ b=iC9DUXPgRAWLNxNet5Uk5KcFxvdgUuBM/tiTXUabxEc98KcA1Sb7FD8pWWixPn23ZL
+ k/XMHCjoWxJigSBlkdH2dE114+HnzIGZomKfzV3i0JVJ3qeallEfZfZZLKDIr28BdFY0
+ wumfZIb2gaJ4/JrT3CYLlIs85SoMQkx9OZoe0yZgFpleUrp25oy5NGYzlFK89mpRx58c
+ K6szSqBtDmUzD0Q2lCt8Azu5mBquB207octAlNQAs/+dGpQAQ5EwtzlRnTl9jRBgbp+N
+ x+aGCwmv2GrLCVGLj8FkEVKpdGGKEalPaj8+WsjLGSu5bqDqjqfldpztdWOPVRwR5o+Y
+ TqEA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778285080; x=1778889880;
+ d=1e100.net; s=20251104; t=1778285082; x=1778889882;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=nbamVX3rWvdw7UjgaZEIs2puQ+YV3AvIErMweW3jqyU=;
- b=ow0TCOBbL6l0YRp7NEKTjEvGItpa47vinXELFoGAXZyDi5uEkAwWfjSlmyqTEXprpd
- ovo29stwSiU7sZPvmEPyhUivHwPsHwsGqCPYpvokaghxI2qJJPVvC6mIH7jx2wn5jhKN
- JOcSDbKCqJFnO7jZ0gFoZarqhYlC4qkl4SArjEfOzBOEpje+v86oA9R+fmmg6lTxeP/d
- I5sCHk7EvjDNAhkt835Q63pobdXKLB5MO4YdT+uoWus7jBLOOWmdjH0j92560Uwi42KK
- dxbhjKbG+9/gp//j8Q02SMPjvkLjhTv7/+lIGjEyvgOAR34tI8CBjNPVbuue1xRQ+9HG
- o4iA==
-X-Gm-Message-State: AOJu0YyH67fHhRjBxIn+TfxAM+VJEEg9+BlthniwcLAnNjCSJtcQg7Hr
- yseORrG+LIaGM3lXGH/U3j0d9ldon2Jmx9fQEtAnCBFdo0OQPJfphvfSyvn8D2Ed5NXVwWh3XYe
- r0fnN
-X-Gm-Gg: AeBDiesWj4uafOAaUAj1ABwRxknAJ0/y/oJ23cmkq7Ng9uhL0NVF0iBuWwq5fw4ZJZV
- vVfKzI5+6tUHit/t+Jf2yGAImxFrfABLnYNwgTJUu2xowtVmsEz1mizjd03xfUlhhvxcePi1aws
- Dm4w0Oyl+t/Bs5DD5qN+PLZkertutDvVXYhtjVsegzbVg5Mm3aJAzX/kp6uX9MUIwDU5YKfwnJ/
- RNZj9cLdoU5+aAxOHTK1PyRzpOj2qXiz/QX3AmAT3tJC+PVkD2i842BhJb9qmmtol8F6Pc7snZg
- Az7wJTyxIC3MhKwRXfdpkFNar897SNLoM4VczoLJV9i1g9yReihL5WI0L7+9lhHwqHlOEqESiPu
- uCUKu2qYLySddDw8y8allMiDpV0SxXwse3r1A55YQ/TuXNZSJ5AJhotMY620EzJGSOcwjlVBV9F
- LozUICcW4AEpY673Jd0VIcCxmXgu3pJ/FIU1jXNaVek3nPWG1ofOWAd9e14lZw8GktIE4k08mZY
- vPRXzU55nLZ2jt+Y9raGQ==
-X-Received: by 2002:a05:7022:43a6:b0:12b:f881:d8f6 with SMTP id
- a92af1059eb24-1319d05636cmr7071992c88.29.1778285080498; 
- Fri, 08 May 2026 17:04:40 -0700 (PDT)
+ bh=ktXImSmp24jPe3o0Ul/H4vgOE24na+wCFd6yUC51Ax4=;
+ b=rvjNlHAumUV1T9qPTiEET4m44HsnsWWlRrytBIrktwMmX6QYzRyaE37SdxpaNljLoa
+ a/3PeMhTvRHa3oMzGcK8MQRqD+idorbeUNOf+9MnfcShs/66MGZKsVbDowfVenb1x9BU
+ DAv9Pfv+IcxoVqDeCy6XW2FOKzc6cUhW76eLRupBPdptYX61BX/VYlauS3TY2dSiusah
+ 17di9MQv3TvE8V3LOEIabtAb6vOqxyFzFQtuYOYKgAngrf9sajdtqsiyZSRSjvGC3L1c
+ 18/kwk5YHE3MQ9lqIbSm1osZx/PH/Kt33gVckphh9xrFV3H6oLMOyRiK/Yx5o5fqVHRD
+ 9/IA==
+X-Gm-Message-State: AOJu0YyU/kOkpz6Vm6LXC46iQLSan3tuTGcVZvBUb+KYC6tNLpR9xgc/
+ MjjD2Hlsogr3D0w+7iBkbnn2eT0klNC7h3d9yNZrzCNZqmrSK3Xr+Wv6miBbWev35iTgiBTgpmd
+ cIV9S
+X-Gm-Gg: AeBDiesyRYfdyDHXCWLuezL4iOk1L1s3P5urv7nLp4La8407gfirm2KXOWpZns5mutp
+ O7m+6Oxo7yoHiSptdCL+iwtKLHPhEH70Y++rNve0oHnsQyv+Rpjy9xDK0LpK+Rr5Y/YTCp3SoUK
+ TFnlVvy+EW/6LgSMudPBOXkgJfVBfPLC2yDEVCS9N9SD1ukr9wTQzmJ19iQuL6Re0xB4dQHYrmi
+ T41fwCOYGBdkYUOPAtkdoDT/IW9OH2VKSI/3zK7T7XZcq/7R6uWMKU5Kn9BCJ+SEO721/aD4v2h
+ CAeVRibU+qutn5Jk0cCvLweJkJMNogQMbIE1Hzx3DMe9iWfzh3uHmc3+wtqp4hKtidOVVb+/9+2
+ xoRtFraJZ0EavgZSJ3hap0Q5LrsYM8n0tEZQXQx752PJRnWxhNkM6qfCoOyFHGGGMnRMHQa+huu
+ PjHG2FUJtW6vf54vnEb4C7b1q51z3a6DJVR8bmqL9gl+EAEtEqbGwntr2cA4nymLG8UpCTIUkpl
+ z95+L204qH0gVitSwo0Ww==
+X-Received: by 2002:a05:7022:4588:b0:12a:6abf:ab1c with SMTP id
+ a92af1059eb24-1323ae990d7mr4252670c88.11.1778285082034; 
+ Fri, 08 May 2026 17:04:42 -0700 (PDT)
 Received: from localhost.localdomain ([207.231.76.218])
  by smtp.gmail.com with ESMTPSA id
- a92af1059eb24-132787673ffsm5505030c88.15.2026.05.08.17.04.39
+ a92af1059eb24-132787673ffsm5505030c88.15.2026.05.08.17.04.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 08 May 2026 17:04:40 -0700 (PDT)
+ Fri, 08 May 2026 17:04:41 -0700 (PDT)
 From: Aidan Garske <aidan@wolfssl.com>
 To: u-boot@lists.denx.de
 Cc: David Garske <david@wolfssl.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Subject: [PATCH v3 04/12] dts: add TPM device tree nodes for RPi4, QEMU,
- and sandbox
-Date: Fri,  8 May 2026 17:04:11 -0700
-Message-ID: <9922bb5e8b3fb1d5c6e80ea51a01b685690a2f44.1778277334.git.aidan@wolfssl.com>
+Subject: [PATCH v3 05/12] tpm: add wolfTPM build rules and Kconfig
+Date: Fri,  8 May 2026 17:04:12 -0700
+Message-ID: <40dab2a66e32cda7db755402a27403307709f9a7.1778277334.git.aidan@wolfssl.com>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <cover.1778277334.git.aidan@wolfssl.com>
 References: <cover.1778277334.git.aidan@wolfssl.com>
@@ -105,170 +104,111 @@ X-Virus-Status: Clean
 
 From: Aidan <aidan@wolfssl.com>
 
-Add device tree entries for TPM devices across three platforms:
+Hook the wolfTPM source tree (imported as a subtree at lib/wolftpm/ in
+the preceding commits) into the U-Boot build and add upstream-pull
+support to tools/update-subtree.sh, matching how mbedtls, dts, and lwip
+are maintained.
 
-bcm2711-rpi-4-b.dts:
-  Add SPI0 node with Infineon SLB9670/9672 TPM on CE1 (GPIO7),
-  matching the standard Linux tpm-slb9670 overlay. Add spi0 alias
-  so wolfTPM finds the bus at index 0.
+lib/Kconfig:
+  Adds CONFIG_TPM_WOLF under library routines, depending on DM,
+  implying DM_RNG, and selecting SHA1.
 
-bcm2711-rpi-4-b-u-boot.dtsi (new file):
-  Add soft-SPI (GPIO bit-bang) fallback node for TPM communication.
-  This uses spi-gpio with GPIO11/10/9/7 and provides an alternative
-  to the hardware SPI driver when pinctrl naming differs between
-  U-Boot and Linux device trees.
+lib/Makefile:
+  When CONFIG_TPM_WOLF and CONFIG_TPM_V2 are both enabled, compiles
+  wolfTPM core source files (tpm2.c, tpm2_packet.c, tpm2_tis.c,
+  tpm2_wrap.c, tpm2_param_enc.c) and the HAL layer (tpm_io.c).
+  Sets -I include paths and -DWOLFTPM_USER_SETTINGS so wolfTPM picks
+  up include/configs/user_settings.h.
 
-qemu-arm64.dts:
-  Add MMIO-based TPM TIS node at 0x0c000000 for QEMU virt machine
-  with swtpm. This allows wolfTPM testing via QEMU without hardware.
-
-sandbox.dtsi:
-  Add sandbox TPM SPI device (sandbox,tpm-spi) on SPI bus CS1 with
-  a phandle reference to a sandbox TPM SPI emulator node. This
-  enables wolfTPM SPI HAL testing in the sandbox environment.
+tools/update-subtree.sh:
+  Registers the wolftpm subtree (path lib/wolftpm, upstream
+  https://github.com/wolfssl/wolfTPM.git) so the existing pull/pick
+  workflow can be used for future wolfTPM updates.
 
 Signed-off-by: Aidan Garske <aidan@wolfssl.com>
 ---
- arch/arm/dts/bcm2711-rpi-4-b-u-boot.dtsi | 54 ++++++++++++++++++++++++
- arch/arm/dts/bcm2711-rpi-4-b.dts         | 20 +++++++++
- arch/arm/dts/qemu-arm64.dts              |  4 ++
- arch/sandbox/dts/sandbox.dtsi            | 11 +++++
- 4 files changed, 89 insertions(+)
- create mode 100644 arch/arm/dts/bcm2711-rpi-4-b-u-boot.dtsi
+ lib/Kconfig             | 13 +++++++++++++
+ lib/Makefile            | 17 +++++++++++++++++
+ tools/update-subtree.sh |  7 ++++++-
+ 3 files changed, 36 insertions(+), 1 deletion(-)
 
-diff --git a/arch/arm/dts/bcm2711-rpi-4-b-u-boot.dtsi b/arch/arm/dts/bcm2711-rpi-4-b-u-boot.dtsi
-new file mode 100644
-index 00000000000..c38276abee9
---- /dev/null
-+++ b/arch/arm/dts/bcm2711-rpi-4-b-u-boot.dtsi
-@@ -0,0 +1,54 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/*
-+ * U-Boot specific additions for Raspberry Pi 4 Model B
-+ *
-+ * Adds soft SPI support for Infineon SLB9670/9672 TPM HAT
-+ * connected to SPI0 CE1 (GPIO 7)
-+ *
-+ * Uses GPIO bit-banging instead of hardware SPI to avoid
-+ * GPIO chip naming issues (pinctrl-bcm2835 vs pinctrl-bcm2711)
-+ */
-+
-+#include "bcm283x-u-boot.dtsi"
-+#include <dt-bindings/gpio/gpio.h>
-+
-+/ {
-+	aliases {
-+		spi0 = &soft_spi;
-+	};
-+
-+	soft_spi: soft-spi {
-+		compatible = "spi-gpio";
-+		#address-cells = <1>;
-+		#size-cells = <0>;
-+		status = "okay";
-+		bootph-all;
-+
-+		/*
-+		 * GPIO pins for SPI0 on Raspberry Pi 4:
-+		 * GPIO 11 = SCLK
-+		 * GPIO 10 = MOSI
-+		 * GPIO 9  = MISO
-+		 * GPIO 7  = CE1 (chip select for TPM)
-+		 */
-+		gpio-sck = <&gpio 11 GPIO_ACTIVE_HIGH>;
-+		gpio-mosi = <&gpio 10 GPIO_ACTIVE_HIGH>;
-+		gpio-miso = <&gpio 9 GPIO_ACTIVE_HIGH>;
-+		cs-gpios = <&gpio 7 GPIO_ACTIVE_LOW>;
-+		num-chipselects = <1>;
-+		spi-delay-us = <1>;
-+
-+		/* Infineon SLB9672 TPM on CS1 */
-+		tpm@0 {
-+			compatible = "infineon,slb9672", "tcg,tpm-tis-spi";
-+			reg = <0>;
-+			spi-max-frequency = <10000000>;
-+			status = "okay";
-+			bootph-all;
-+		};
-+	};
-+};
-+
-+&gpio {
-+	bootph-all;
-+};
-diff --git a/arch/arm/dts/bcm2711-rpi-4-b.dts b/arch/arm/dts/bcm2711-rpi-4-b.dts
-index 72ce80fbf26..a09276dc279 100644
---- a/arch/arm/dts/bcm2711-rpi-4-b.dts
-+++ b/arch/arm/dts/bcm2711-rpi-4-b.dts
-@@ -8,6 +8,11 @@
- 	compatible = "raspberrypi,4-model-b", "brcm,bcm2711";
- 	model = "Raspberry Pi 4 Model B";
+diff --git a/lib/Kconfig b/lib/Kconfig
+index 931d5206936..b7dc422e94c 100644
+--- a/lib/Kconfig
++++ b/lib/Kconfig
+@@ -500,6 +500,19 @@ config TPM
+ 	  If you want a fully functional TPM enable all hashing algorithms.
+ 	  If you enabled measured boot all hashing algorithms are selected.
  
-+	/* Alias hardware SPI as spi0 so wolfTPM finds it at bus 0 */
-+	aliases {
-+		spi0 = &spi;
-+	};
++config TPM_WOLF
++	bool "Enable wolfTPM support"
++	depends on DM
++	imply DM_RNG
++	select SHA1
++	help
++	  This option enables support for wolfTPM in U-Boot. wolfTPM is a
++	  portable, open-source TPM 2.0 stack licensed under GPLv2. Enabling
++	  this option allows U-Boot to interact with the TPM via wolfTPM,
++	  including firmware updates, PCR extend, and other TPM 2.0
++	  operations. The wolfTPM source tree lives under lib/wolftpm/ as
++	  a subtree (see tools/update-subtree.sh).
 +
- 	chosen {
- 		/* 8250 auxiliary UART instead of pl011 */
- 		stdout-path = "serial1:115200n8";
-@@ -54,6 +59,21 @@
- 		enable-active-high;
- 		gpio = <&expgpio 6 GPIO_ACTIVE_HIGH>;
- 	};
-+
-+};
-+
-+/* Hardware SPI with TPM - matches Linux tpm-slb9670 overlay */
-+&spi {
-+	status = "okay";
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&spi0_gpio7>;
-+
-+	/* Infineon SLB9670/9672 TPM 2.0 on CE1 (GPIO7) */
-+	tpm@1 {
-+		compatible = "infineon,slb9670", "tcg,tpm_tis-spi";
-+		reg = <1>;  /* CE1 */
-+		spi-max-frequency = <32000000>;
-+	};
- };
+ config SPL_TPM
+ 	bool "Trusted Platform Module (TPM) Support in SPL"
+ 	depends on SPL_DM
+diff --git a/lib/Makefile b/lib/Makefile
+index 70667f3728c..0753e33d69e 100644
+--- a/lib/Makefile
++++ b/lib/Makefile
+@@ -64,6 +64,23 @@ obj-$(CONFIG_EFI_TCG2_PROTOCOL) += tpm_tcg2.o
+ obj-$(CONFIG_MEASURED_BOOT) += tpm_tcg2.o
+ endif
  
- &ddc0 {
-diff --git a/arch/arm/dts/qemu-arm64.dts b/arch/arm/dts/qemu-arm64.dts
-index 95fcf53ed74..e74d036a532 100644
---- a/arch/arm/dts/qemu-arm64.dts
-+++ b/arch/arm/dts/qemu-arm64.dts
-@@ -12,4 +12,8 @@
- #endif
- 
- / {
-+	tpm@0c000000 {
-+		compatible = "tcg,tpm-tis-mmio";
-+		reg = <0x0 0x0c000000 0x0 0x5000>;
-+	};
- };
-diff --git a/arch/sandbox/dts/sandbox.dtsi b/arch/sandbox/dts/sandbox.dtsi
-index 02b03894eaf..2fdd7f0e942 100644
---- a/arch/sandbox/dts/sandbox.dtsi
-+++ b/arch/sandbox/dts/sandbox.dtsi
-@@ -286,6 +286,17 @@
- 			spi-max-frequency = <40000000>;
- 			sandbox,filename = "spi.bin";
- 		};
++# wolfTPM (TPM 2.0 stack, including firmware update support)
++ifeq ($(CONFIG_TPM_WOLF),y)
++ifeq ($(CONFIG_TPM_V2),y)
++ccflags-y += -I$(srctree)/lib/wolftpm \
++	     -I$(srctree)/include/configs \
++	     -DWOLFTPM_USER_SETTINGS
++obj-y += wolftpm/hal/tpm_io.o
++obj-$(CONFIG_WOLFTPM_LINUX_DEV) += wolftpm/src/tpm2_linux.o
++obj-y += wolftpm/src/tpm2.o
++obj-y += wolftpm/src/tpm2_packet.o
++obj-y += wolftpm/src/tpm2_tis.o
++obj-y += wolftpm/src/tpm2_wrap.o
++obj-y += wolftpm/src/tpm2_param_enc.o
++obj-y += wolftpm.o
++endif
++endif
 +
-+		tpm_spi: tpm@1 {
-+			reg = <1>;
-+			compatible = "sandbox,tpm-spi";
-+			spi-max-frequency = <10000000>;
-+			sandbox,emul = <&tpm_spi_emul>;
-+		};
-+	};
-+
-+	tpm_spi_emul: tpm-spi-emul {
-+		compatible = "sandbox,tpm-spi-emul";
- 	};
+ obj-$(CONFIG_$(PHASE_)CRC8) += crc8.o
+ obj-$(CONFIG_$(PHASE_)CRC16) += crc16.o
+ obj-$(CONFIG_$(PHASE_)CRC16) += crc16-ccitt.o
+diff --git a/tools/update-subtree.sh b/tools/update-subtree.sh
+index 536b3318573..c5963e6a3ae 100755
+--- a/tools/update-subtree.sh
++++ b/tools/update-subtree.sh
+@@ -17,7 +17,7 @@ set -e
+ print_usage() {
+     echo "usage: $0 <op> <subtree-name> <ref>"
+     echo "  <op>           pull or pick"
+-    echo "  <subtree-name> mbedtls or dts or lwip"
++    echo "  <subtree-name> mbedtls or dts or lwip or wolftpm"
+     echo "  <ref>          release tag [pull] or commit id [pick]"
+ }
  
- 	spl-test {
+@@ -47,6 +47,11 @@ set_params() {
+             repo_url=https://git.savannah.gnu.org/git/lwip.git
+             remote_name="lwip_upstream"
+             ;;
++        wolftpm)
++            path=lib/wolftpm
++            repo_url=https://github.com/wolfssl/wolfTPM.git
++            remote_name="wolftpm_upstream"
++            ;;
+         *)
+             echo "Invalid subtree name: $subtree_name"
+             print_usage
 -- 
 2.47.3
 
