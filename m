@@ -4,93 +4,120 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 176A5CD3445
-	for <u-boot@archiver.kernel.org>; Sat,  9 May 2026 00:45:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B0B4CD37AC
+	for <u-boot@archiver.kernel.org>; Sat,  9 May 2026 01:45:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2B96884EA5;
-	Sat,  9 May 2026 02:40:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=seznam.cz
+	by phobos.denx.de (Postfix) with ESMTP id 6BAF384E14;
+	Sat,  9 May 2026 03:45:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=seznam.cz header.i=@seznam.cz header.b="VSIoWHNi";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="HKXfQh2F";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C932B84CF3; Fri,  8 May 2026 23:47:02 +0200 (CEST)
-Received: from mxd-2-a03.seznam.cz (mxd-2-a03.seznam.cz
- [IPv6:2a02:598:64:8a00::1000:a03])
+ id 52D2084E16; Sat,  9 May 2026 03:45:30 +0200 (CEST)
+Received: from SN4PR0501CU005.outbound.protection.outlook.com
+ (mail-southcentralusazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c10d::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 95EA984CE5
- for <u-boot@lists.denx.de>; Fri,  8 May 2026 23:46:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 15F2A84DF6
+ for <u-boot@lists.denx.de>; Sat,  9 May 2026 03:45:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=seznam.cz
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=michael.srba@seznam.cz
-Received: from email.seznam.cz by smtpc-mxd-5f4d8d5f6f-w7th8
- (smtpc-mxd-5f4d8d5f6f-w7th8 [2a02:598:64:8a00::1000:a03])
- id 557ba1220e75f54b54d26d7c; Fri, 08 May 2026 23:46:29 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=seznam.cz; s=szn1;
- t=1778276789; bh=l9nvWJX56TfMCGKkiSEi72qqShDxpXY8qsCwjKKYukE=;
- h=From:Date:Subject:MIME-Version:Content-Type:
- Content-Transfer-Encoding:Message-Id:To:Cc;
- b=VSIoWHNiEw5HSm8yo2dRltlV4DHAv/f+31CR7XlPtdWHNNxjgl6W0a5bRy+Sc7c5a
- u7NF9PR6MTJkOWp86bczy8tr6pO2/GqWdg13wCnsd08WqnkZxBXx8yjaHQdsIEle3D
- sqXx8j5+bjfhp5tyB3WQQPspR6r3Vi8XeZ3HyN96fh5fGPNpyuhCLRIlu4Djij4SyP
- zeFJd0cPv+sTlotwqtqXPvu4Dm8+3hZGYnPBX/TBpykHRREnrQnV0Sd0w0QIBdSpOS
- 8iNIgpLTgFPigY5hoyWjJazxQcA0pTK6cSaFiNM7ch5TeZze+u/msp7AwklWeJIOPR
- khRHe6rducSww==
-Received: from [127.0.0.1] (ip-111-27.static.ccinternet.cz [147.161.27.111])
- by smtpd-relay-6597cc8696-jn5pf (szn-email-smtpd/2.0.72) with ESMTPA
- id 79b1d94b-3914-4b67-9618-b7cbb08f9771;
- Fri, 08 May 2026 23:45:44 +0200
-From: michael.srba@seznam.cz
-Date: Fri, 08 May 2026 23:45:33 +0200
-Subject: [PATCH v7 09/11] mach-snapdragon: add board_spl.c and split out
- common code
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=LefveZgtrQQa4fMv1oQpxQsxYdU+zhQ9t6Blmi6YKCAtZXuOQYdXHj2WPF2lGMu4aOEFxHJorwn3HWfwhH+71n5GJLJPmPuOR6WIR03YO80lAHuq6fRR8hjS4qAutO9u5nzWCSRNwkEKeihwXwC38sDIIaWCYqBbneoqh/4ql2OBwUCLAOjbWfPo4WlWDn5zvdDJsx7UtDbp8aftZ6sOWxqBKV70r9+R1Yb0NpaSiRVjfmd7ISn+GBKD5yhOwYC2ttVPBpsKeik7jbCZNzJj11ODC3h3N1b8NjyxduiNzvfNuCZdWrLqKOQG52fzBQTXQVkehsOghEZs7st+j2bQlg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=gMOekzOyfsKlRx+HHb0b1gHLkkmiPk9fMZzEiovSeJ4=;
+ b=XPrO77hGix9KwGsgwZzN7l7biHiNZ2bPjH1Zvl8fPTXOTkHmP2pYbVtTjeXqtC0jhA0a/Qd/7sbKs5JWAl6YM3AS4yRIjuwZ3zqyOoZuSL2gIl7Cl+JEUXTzOCGEgxsLdcBR7X619F2SHVy4mpTjXp2L5+J/Q3vlccNVpstZooODLuvimnhfZjt7r1/9YtpW78iGqVlD3JUtqWQDe1PIbtCvD8b54TA+xniz2sY/t+MOhbIVt0c6u/z8l4KxflFUdvvnTTWn/ktfIkdqT3VlT9MTkDxqWiWS6eFEYubEO+PKfV4Pbkpu5P1kK54vMw5vAchb3L4X0c85sX6PI+UnTg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.23.195) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
+ dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=gMOekzOyfsKlRx+HHb0b1gHLkkmiPk9fMZzEiovSeJ4=;
+ b=HKXfQh2FELfZlm3GNn4Lj1sKRP3ovd21jEmKvlBW8Ky7fHZ06pyJx6B5+vRqXuSzA+llf5lx5o5ljqMJIWTrsPN/9GDUr6e2/yXG37GS29D3Jnbi2uPHA2S5d96G9jETy1BR6uFhAeJniyt083bcvMvW7aZwiifyz0CKRVQeebg=
+Received: from BN1PR13CA0019.namprd13.prod.outlook.com (2603:10b6:408:e2::24)
+ by PH0PR10MB4725.namprd10.prod.outlook.com (2603:10b6:510:3e::18)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9891.20; Sat, 9 May
+ 2026 01:45:23 +0000
+Received: from BN1PEPF00004685.namprd03.prod.outlook.com
+ (2603:10b6:408:e2:cafe::f4) by BN1PR13CA0019.outlook.office365.com
+ (2603:10b6:408:e2::24) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.25.10 via Frontend Transport; Sat, 9
+ May 2026 01:45:22 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.195)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.23.195 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.23.195; helo=lewvzet201.ext.ti.com; pr=C
+Received: from lewvzet201.ext.ti.com (198.47.23.195) by
+ BN1PEPF00004685.mail.protection.outlook.com (10.167.243.86) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9913.8 via Frontend Transport; Sat, 9 May 2026 01:45:22 +0000
+Received: from DLEE207.ent.ti.com (157.170.170.95) by lewvzet201.ext.ti.com
+ (10.4.14.104) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Fri, 8 May
+ 2026 20:45:22 -0500
+Received: from DLEE204.ent.ti.com (157.170.170.84) by DLEE207.ent.ti.com
+ (157.170.170.95) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Fri, 8 May
+ 2026 20:45:21 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE204.ent.ti.com
+ (157.170.170.84) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37 via Frontend
+ Transport; Fri, 8 May 2026 20:45:21 -0500
+Received: from [10.249.134.231] ([10.249.134.231])
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 6491jHpj2786072;
+ Fri, 8 May 2026 20:45:18 -0500
+Message-ID: <b515a248-9a40-466b-a45f-e363465193e1@ti.com>
+Date: Sat, 9 May 2026 07:15:16 +0530
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] arm: mach-k3: j721s2: j784s4: Add errata i2378 workaround
+To: Neha Malcom Francis <n-francis@ti.com>, <trini@konsulko.com>,
+ <m-chawdhry@ti.com>
+CC: <b-padhi@ti.com>, <u-boot@lists.denx.de>, <gehariprasath@ti.com>,
+ <u-kumar1@ti.com>
+References: <20260508142507.1386946-1-n-francis@ti.com>
+Content-Language: en-US
+From: "Kumar, Udit" <u-kumar1@ti.com>
+In-Reply-To: <20260508142507.1386946-1-n-francis@ti.com>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260508-qcom_spl-v7-9-7d0e22aaaa8f@seznam.cz>
-References: <20260508-qcom_spl-v7-0-7d0e22aaaa8f@seznam.cz>
-In-Reply-To: <20260508-qcom_spl-v7-0-7d0e22aaaa8f@seznam.cz>
-To: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>, 
- u-boot-qcom@groups.io
-Cc: Tom Rini <trini@konsulko.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@arm.com>, 
- Anshul Dalal <anshuld@ti.com>, Peng Fan <peng.fan@nxp.com>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>, 
- Quentin Schulz <quentin.schulz@cherry.de>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Andrew Davis <afd@ti.com>, 
- Hrushikesh Salunke <h-salunke@ti.com>, 
- Dario Binacchi <dario.binacchi@amarulasolutions.com>, Ye Li <ye.li@nxp.com>, 
- Andre Przywara <andre.przywara@arm.com>, 
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>, 
- Leo Yu-Chi Liang <ycliang@andestech.com>, 
- Andrew Goodbody <andrew.goodbody@linaro.org>, Dhruva Gole <d-gole@ti.com>, 
- Kaustabh Chakraborty <kauschluss@disroot.org>, 
- Jerome Forissier <jerome.forissier@arm.com>, 
- Heiko Schocher <hs@nabladev.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Lukasz Majewski <lukma@denx.de>, 
- Mateusz Kulikowski <mateusz.kulikowski@gmail.com>, 
- Dinesh Maniyam <dinesh.maniyam@altera.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Patrice Chotard <patrice.chotard@foss.st.com>, 
- Patrick Delaunay <patrick.delaunay@foss.st.com>, 
- Michal Simek <michal.simek@amd.com>, Yao Zi <me@ziyao.cc>, 
- Peter Korsgaard <peter@korsgaard.com>, 
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>, 
- Casey Connolly <casey.connolly@linaro.org>, 
- Tingting Meng <tingting.meng@altera.com>, 
- Tien Fong Chee <tien.fong.chee@altera.com>, Alice Guo <alice.guo@nxp.com>, 
- George Chan <gchan9527@gmail.com>, 
- Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>, 
- Alexey Charkov <alchark@gmail.com>, Ronald Wahl <ronald.wahl@legrand.com>, 
- Michael Trimarchi <michael@amarulasolutions.com>, 
- Michael Srba <Michael.Srba@seznam.cz>
-X-Mailer: b4 0.15.1
-X-Mailman-Approved-At: Sat, 09 May 2026 02:40:31 +0200
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BN1PEPF00004685:EE_|PH0PR10MB4725:EE_
+X-MS-Office365-Filtering-Correlation-Id: 18ee7e4f-c2fc-4047-b048-08dead6ca265
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|376014|36860700016|82310400026|56012099003|22082099003|18002099003;
+X-Microsoft-Antispam-Message-Info: OvE3WhTeFMvaslWIZYNqbkd3G4RFYYrZ89kM5ELlmwNvxU1lHIgFEvK04ResEYev3wKW9vNPbLM/VthCLLSBIW7zFWs1AhjGB/tbl5CTyCryV+5GuwVr0+z1EynXhbbV//8WX8n8kDlatQJw5GwPrntuAGSsMrQKV7BC5XRu29fpniStKjKsRI2pgU42Me0uESjfVAlKFUXhxDf69bWrCqF8MjOVLjy6OfwZ0KtJ+w00fLMcCpakWzJIcU8LdETnOLyqnG6+PQslexNvI1H6P21CT9GZN+kD4Ci7+h0FW5EdXH/q62iTUMsJEEnAulFaACVeGitChWlqH2GU5le6MsKErTcOfZgM45Pc3eobEZwV6pymG3jRiMgZdn4qOSv57RFYgWXuFIRGYSS6U8GW473TUqd+2nSP7LLe+7CpBeiMq9RSBYTwcaY/J9fgJkgdXtVDczy9dx6lxQXHUFD6gIbiCpM25m7cr0t44HbmaMslXKqYZV98hDAeXeWWmhrOYCPIPP9ow4/8wbNBP8JHCr8DAHx8/DeXlkuA2yaC2u36Nesxfug3eEIrxWGTk3jVb3jFofHVDmXZI0Q5jO7swLbevsuZ+DjQC2zYALtHsXUhq32AtInHOBREBmYQXmww88rOYOgSsdpYUHXmS+wh+Vaq+TokKQRCjQPlHHu/gHatA4Yxo2dyGOmi46/CqRMK
+X-Forefront-Antispam-Report: CIP:198.47.23.195; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:lewvzet201.ext.ti.com; PTR:InfoDomainNonexistent;
+ CAT:NONE;
+ SFS:(13230040)(1800799024)(376014)(36860700016)(82310400026)(56012099003)(22082099003)(18002099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: RaEPQPiyGJpahyPV+MY9JJrj4jO29T6n0eUgSLmJyTa8LjbCXrHnQbIiLJwsmduvtQfMtRvgsodmapM3iohqcSJ+P/QSYzV3YYR/kz2Oc1DU0UL1BaEC/4f2Ngv0nDoRS40yz17ncrNoZteMI/wj4ZQCtDRsmSAcF6rPtKvYSKh3jOjke1L3aW1BSJx8xPsfvtGL+47uHiwxMIcJqlyCHe7eAWw6TWDYJl0FYv0i5QsQvOVHzOKIW3632i2puU+kygMNoqJOqb6+lq4MYxJY+2czLjOf+DTUEpY9t2Zvbv6fEYnnSOFstK5utBd3Nx2ihQj6EAurjw6rLr2f75IFXajTUvJMqEhZjP0A0Q1fAC1CE/i4VEImPlCXEDIWBD0tCyISrOB1LV4hpJijm1gOagOLxHk08NNWMPQC2xEngfZ+/oIDSuJWNr+c/YhCSOvO
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 May 2026 01:45:22.4588 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 18ee7e4f-c2fc-4047-b048-08dead6ca265
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.195];
+ Helo=[lewvzet201.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: BN1PEPF00004685.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH0PR10MB4725
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,909 +134,118 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Michael Srba <Michael.Srba@seznam.cz>
 
-Code in board.c will now only be compiled into U-Boot proper,
-and the new board_spl.c will only be built into SPL.
-Code in board_common.c is common to both phases.
 
-Also split out mem_map.c, which is currently common to both
-phases since it seems to not cause issues in SPL. In the future
-it should probably behave differenly in SPL, especially if dram
-initialization is supported.
+On 5/8/2026 7:55 PM, Neha Malcom Francis wrote:
+> The shadow copies of WAY_SELECT MSMC MMRs have incorrect reset values.
+> The main copy has the correct reset value but MSMC functionality uses
+> the shadow copy values. This incorrect reset value results in
+> under-utilization of MSMC L3 data cache and snoop filter for DDR
+> accesses.
+> 
 
-Signed-off-by: Michael Srba <Michael.Srba@seznam.cz>
-Reviewed-by: Simon Glass <sjg@chromium.org>
----
- arch/arm/mach-snapdragon/Makefile       |   8 +
- arch/arm/mach-snapdragon/board.c        | 358 +-------------------------------
- arch/arm/mach-snapdragon/board_common.c |  56 +++++
- arch/arm/mach-snapdragon/board_spl.c    |  35 ++++
- arch/arm/mach-snapdragon/mem_map.c      | 318 ++++++++++++++++++++++++++++
- arch/arm/mach-snapdragon/qcom-priv.h    |   4 +-
- 6 files changed, 429 insertions(+), 350 deletions(-)
+Thanks Neha for rolling this out. Wondering if L3 set to zero then
+will this hardcoded write will impact in some way ?
 
-diff --git a/arch/arm/mach-snapdragon/Makefile b/arch/arm/mach-snapdragon/Makefile
-index 343e825c6fd..4b265b746ce 100644
---- a/arch/arm/mach-snapdragon/Makefile
-+++ b/arch/arm/mach-snapdragon/Makefile
-@@ -2,6 +2,14 @@
- #
- # (C) Copyright 2015 Mateusz Kulikowski <mateusz.kulikowski@gmail.com>
- 
-+obj-y += board_common.o
-+obj-y += mem_map.o
-+
-+ifeq ($(CONFIG_SPL_BUILD),y)
-+obj-y += board_spl.o
-+else
- obj-y += board.o
- obj-$(CONFIG_EFI_HAVE_CAPSULE_SUPPORT) += capsule_update.o
-+endif
-+
- obj-$(CONFIG_OF_LIVE) += of_fixup.o
-diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/board.c
-index 829a0109ac7..a20c9853789 100644
---- a/arch/arm/mach-snapdragon/board.c
-+++ b/arch/arm/mach-snapdragon/board.c
-@@ -1,6 +1,7 @@
- // SPDX-License-Identifier: GPL-2.0+
- /*
-  * Common initialisation for Qualcomm Snapdragon boards.
-+ * U-Boot proper only, see board_common.c for parts shared with SPL
-  *
-  * Copyright (c) 2024 Linaro Ltd.
-  * Author: Casey Connolly <casey.connolly@linaro.org>
-@@ -9,155 +10,21 @@
- #define LOG_CATEGORY LOGC_BOARD
- #define pr_fmt(fmt) "QCOM: " fmt
- 
--#include <asm/armv8/mmu.h>
--#include <asm/gpio.h>
--#include <asm/io.h>
--#include <asm/psci.h>
--#include <asm/system.h>
--#include <dm/device.h>
--#include <dm/pinctrl.h>
--#include <dm/uclass-internal.h>
--#include <dm/read.h>
--#include <power/regulator.h>
-+#include <dm/ofnode.h>
- #include <env.h>
- #include <fdt_support.h>
- #include <init.h>
- #include <linux/arm-smccc.h>
--#include <linux/bug.h>
-+#include <linux/errno.h>
- #include <linux/psci.h>
- #include <linux/sizes.h>
- #include <lmb.h>
--#include <malloc.h>
--#include <fdt_support.h>
--#include <usb.h>
--#include <sort.h>
--#include <time.h>
- 
- #include "qcom-priv.h"
- 
--DECLARE_GLOBAL_DATA_PTR;
--
- enum qcom_boot_source qcom_boot_source __section(".data") = 0;
- 
--static struct mm_region rbx_mem_map[CONFIG_NR_DRAM_BANKS + 2] = { { 0 } };
--
--struct mm_region *mem_map = rbx_mem_map;
--
--static struct {
--	phys_addr_t start;
--	phys_size_t size;
--} prevbl_ddr_banks[CONFIG_NR_DRAM_BANKS] __section(".data") = { 0 };
--
--int dram_init(void)
--{
--	/*
--	 * gd->ram_base / ram_size have been setup already
--	 * in qcom_parse_memory().
--	 */
--	return 0;
--}
--
--static int ddr_bank_cmp(const void *v1, const void *v2)
--{
--	const struct {
--		phys_addr_t start;
--		phys_size_t size;
--	} *res1 = v1, *res2 = v2;
--
--	if (!res1->size)
--		return 1;
--	if (!res2->size)
--		return -1;
--
--	return (res1->start >> 24) - (res2->start >> 24);
--}
--
--/* This has to be done post-relocation since gd->bd isn't preserved */
--static void qcom_configure_bi_dram(void)
--{
--	int i;
--
--	for (i = 0; i < CONFIG_NR_DRAM_BANKS; i++) {
--		gd->bd->bi_dram[i].start = prevbl_ddr_banks[i].start;
--		gd->bd->bi_dram[i].size = prevbl_ddr_banks[i].size;
--	}
--}
--
--int dram_init_banksize(void)
--{
--	qcom_configure_bi_dram();
--
--	return 0;
--}
--
--/**
-- * The generic memory parsing code in U-Boot lacks a few things that we
-- * need on Qualcomm:
-- *
-- * 1. It sets gd->ram_size and gd->ram_base to represent a single memory block
-- * 2. setup_dest_addr() later relocates U-Boot to ram_base + ram_size, the end
-- *    of that first memory block.
-- *
-- * This results in all memory beyond U-Boot being unusable in Linux when booting
-- * with EFI.
-- *
-- * Since the ranges in the memory node may be out of order, the only way for us
-- * to correctly determine the relocation address for U-Boot is to parse all
-- * memory regions and find the highest valid address.
-- *
-- * We can't use fdtdec_setup_memory_banksize() since it stores the result in
-- * gd->bd, which is not yet allocated.
-- *
-- * @fdt: FDT blob to parse /memory node from
-- *
-- * Return: 0 on success or -ENODATA if /memory node is missing or incomplete
-- */
--static int qcom_parse_memory(const void *fdt)
--{
--	int offset;
--	const fdt64_t *memory;
--	int memsize;
--	phys_addr_t ram_end = 0;
--	int i, j, banks;
--
--	offset = fdt_path_offset(fdt, "/memory");
--	if (offset < 0)
--		return -ENODATA;
--
--	memory = fdt_getprop(fdt, offset, "reg", &memsize);
--	if (!memory)
--		return -ENODATA;
--
--	banks = min(memsize / (2 * sizeof(u64)), (ulong)CONFIG_NR_DRAM_BANKS);
--
--	if (memsize / sizeof(u64) > CONFIG_NR_DRAM_BANKS * 2)
--		log_err("Provided more than the max of %d memory banks\n", CONFIG_NR_DRAM_BANKS);
--
--	if (banks > CONFIG_NR_DRAM_BANKS)
--		log_err("Provided more memory banks than we can handle\n");
--
--	for (i = 0, j = 0; i < banks * 2; i += 2, j++) {
--		prevbl_ddr_banks[j].start = get_unaligned_be64(&memory[i]);
--		prevbl_ddr_banks[j].size = get_unaligned_be64(&memory[i + 1]);
--		if (!prevbl_ddr_banks[j].size) {
--			j--;
--			continue;
--		}
--		ram_end = max(ram_end, prevbl_ddr_banks[j].start + prevbl_ddr_banks[j].size);
--	}
--
--	if (!banks || !prevbl_ddr_banks[0].size)
--		return -ENODATA;
--
--	/* Sort our RAM banks -_- */
--	qsort(prevbl_ddr_banks, banks, sizeof(prevbl_ddr_banks[0]), ddr_bank_cmp);
--
--	gd->ram_base = prevbl_ddr_banks[0].start;
--	gd->ram_size = ram_end - gd->ram_base;
--
--	return 0;
--}
--
-+#if CONFIG_IS_ENABLED(SYSRESET_PSCI)
- static void show_psci_version(void)
- {
- 	struct arm_smccc_res res;
-@@ -199,6 +66,7 @@ static void qcom_psci_fixup(void *fdt)
- 	if (ret)
- 		log_err("Failed to delete /psci node: %d\n", ret);
- }
-+#endif
- 
- /* We support booting U-Boot with an internal DT when running as a first-stage bootloader
-  * or for supporting quirky devices where it's easier to leave the downstream DT in place
-@@ -258,49 +126,13 @@ int board_fdt_blob_setup(void **fdtp)
- 		ret = 0;
- 	}
- 
-+#if CONFIG_IS_ENABLED(SYSRESET_PSCI)
- 	qcom_psci_fixup(*fdtp);
-+#endif
- 
- 	return ret;
- }
- 
--/*
-- * Some Qualcomm boards require GPIO configuration when switching USB modes.
-- * Support setting this configuration via pinctrl state.
-- */
--int board_usb_init(int index, enum usb_init_type init)
--{
--	struct udevice *usb;
--	int ret = 0;
--
--	/* USB device */
--	ret = uclass_find_device_by_seq(UCLASS_USB, index, &usb);
--	if (ret) {
--		printf("Cannot find USB device\n");
--		return ret;
--	}
--
--	ret = dev_read_stringlist_search(usb, "pinctrl-names",
--					 "device");
--	/* No "device" pinctrl state, so just bail */
--	if (ret < 0)
--		return 0;
--
--	/* Select "default" or "device" pinctrl */
--	switch (init) {
--	case USB_INIT_HOST:
--		pinctrl_select_state(usb, "default");
--		break;
--	case USB_INIT_DEVICE:
--		pinctrl_select_state(usb, "device");
--		break;
--	default:
--		debug("Unknown usb_init_type %d\n", init);
--		break;
--	}
--
--	return 0;
--}
--
- /*
-  * Some boards still need board specific init code, they can implement that by
-  * overriding this function.
-@@ -313,7 +145,9 @@ void __weak qcom_board_init(void)
- 
- int board_init(void)
- {
-+#if CONFIG_IS_ENABLED(SYSRESET_PSCI) && !defined(CONFIG_SPL_BUILD)
- 	show_psci_version();
-+#endif
- 	qcom_board_init();
- 	return 0;
- }
-@@ -580,177 +414,3 @@ int board_late_init(void)
- 
- 	return 0;
- }
--
--static void build_mem_map(void)
--{
--	int i, j;
--
--	/*
--	 * Ensure the peripheral block is sized to correctly cover the address range
--	 * up to the first memory bank.
--	 * Don't map the first page to ensure that we actually trigger an abort on a
--	 * null pointer access rather than just hanging.
--	 * FIXME: we should probably split this into more precise regions
--	 */
--	mem_map[0].phys = 0x1000;
--	mem_map[0].virt = mem_map[0].phys;
--	mem_map[0].size = gd->bd->bi_dram[0].start - mem_map[0].phys;
--	mem_map[0].attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
--			 PTE_BLOCK_NON_SHARE |
--			 PTE_BLOCK_PXN | PTE_BLOCK_UXN;
--
--	for (i = 1, j = 0; i < ARRAY_SIZE(rbx_mem_map) - 1 && gd->bd->bi_dram[j].size; i++, j++) {
--		mem_map[i].phys = gd->bd->bi_dram[j].start;
--		mem_map[i].virt = mem_map[i].phys;
--		mem_map[i].size = gd->bd->bi_dram[j].size;
--		mem_map[i].attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) | \
--				   PTE_BLOCK_INNER_SHARE;
--	}
--
--	mem_map[i].phys = UINT64_MAX;
--	mem_map[i].size = 0;
--
--#ifdef DEBUG
--	debug("Configured memory map:\n");
--	for (i = 0; mem_map[i].size; i++)
--		debug("  0x%016llx - 0x%016llx: entry %d\n",
--		      mem_map[i].phys, mem_map[i].phys + mem_map[i].size, i);
--#endif
--}
--
--u64 get_page_table_size(void)
--{
--	return SZ_1M;
--}
--
--static int fdt_cmp_res(const void *v1, const void *v2)
--{
--	const struct fdt_resource *res1 = v1, *res2 = v2;
--
--	return res1->start - res2->start;
--}
--
--#define N_RESERVED_REGIONS 32
--
--/* Mark all no-map regions as PTE_TYPE_FAULT to prevent speculative access.
-- * On some platforms this is enough to trigger a security violation and trap
-- * to EL3.
-- */
--static void carve_out_reserved_memory(void)
--{
--	static struct fdt_resource res[N_RESERVED_REGIONS] = { 0 };
--	int parent, rmem, count, i = 0;
--	phys_addr_t start;
--	size_t size;
--
--	/* Some reserved nodes must be carved out, as the cache-prefetcher may otherwise
--	 * attempt to access them, causing a security exception.
--	 */
--	parent = fdt_path_offset(gd->fdt_blob, "/reserved-memory");
--	if (parent <= 0) {
--		log_err("No reserved memory regions found\n");
--		return;
--	}
--
--	/* Collect the reserved memory regions */
--	fdt_for_each_subnode(rmem, gd->fdt_blob, parent) {
--		const fdt32_t *ptr;
--		int len;
--		if (!fdt_getprop(gd->fdt_blob, rmem, "no-map", NULL))
--			continue;
--
--		if (i == N_RESERVED_REGIONS) {
--			log_err("Too many reserved regions!\n");
--			break;
--		}
--
--		/* Read the address and size out from the reg property. Doing this "properly" with
--		 * fdt_get_resource() takes ~70ms on SDM845, but open-coding the happy path here
--		 * takes <1ms... Oh the woes of no dcache.
--		 */
--		ptr = fdt_getprop(gd->fdt_blob, rmem, "reg", &len);
--		if (ptr) {
--			/* Qualcomm devices use #address/size-cells = <2> but all reserved regions are within
--			 * the 32-bit address space. So we can cheat here for speed.
--			 */
--			res[i].start = fdt32_to_cpu(ptr[1]);
--			res[i].end = res[i].start + fdt32_to_cpu(ptr[3]);
--			i++;
--		}
--	}
--
--	/* Sort the reserved memory regions by address */
--	count = i;
--	qsort(res, count, sizeof(struct fdt_resource), fdt_cmp_res);
--
--	/* Now set the right attributes for them. Often a lot of the regions are tightly packed together
--	 * so we can optimise the number of calls to mmu_change_region_attr() by combining adjacent
--	 * regions.
--	 */
--	start = ALIGN_DOWN(res[0].start, SZ_2M);
--	size = ALIGN(res[0].end - start, SZ_2M);
--	for (i = 1; i <= count; i++) {
--		/* We ideally want to 2M align everything for more efficient pagetables, but we must avoid
--		 * overwriting reserved memory regions which shouldn't be mapped as FAULT (like those with
--		 * compatible properties).
--		 * If within 2M of the previous region, bump the size to include this region. Otherwise
--		 * start a new region.
--		 */
--		if (i == count || start + size < res[i].start - SZ_2M) {
--			debug("  0x%016llx - 0x%016llx: reserved\n",
--			      start, start + size);
--			mmu_change_region_attr(start, size, PTE_TYPE_FAULT);
--			/* If this is the final region then quit here before we index
--			 * out of bounds...
--			 */
--			if (i == count)
--				break;
--			start = ALIGN_DOWN(res[i].start, SZ_2M);
--			size = ALIGN(res[i].end - start, SZ_2M);
--		} else {
--			/* Bump size if this region is immediately after the previous one */
--			size = ALIGN(res[i].end - start, SZ_2M);
--		}
--	}
--}
--
--/* This function open-codes setup_all_pgtables() so that we can
-- * insert additional mappings *before* turning on the MMU.
-- */
--void enable_caches(void)
--{
--	u64 tlb_addr = gd->arch.tlb_addr;
--	u64 tlb_size = gd->arch.tlb_size;
--	u64 pt_size;
--	ulong carveout_start;
--
--	gd->arch.tlb_fillptr = tlb_addr;
--
--	build_mem_map();
--
--	icache_enable();
--
--	/* Create normal system page tables */
--	setup_pgtables();
--
--	pt_size = (uintptr_t)gd->arch.tlb_fillptr -
--		  (uintptr_t)gd->arch.tlb_addr;
--	debug("Primary pagetable size: %lluKiB\n", pt_size / 1024);
--
--	/* Create emergency page tables */
--	gd->arch.tlb_size -= pt_size;
--	gd->arch.tlb_addr = gd->arch.tlb_fillptr;
--	setup_pgtables();
--	gd->arch.tlb_emerg = gd->arch.tlb_addr;
--	gd->arch.tlb_addr = tlb_addr;
--	gd->arch.tlb_size = tlb_size;
--
--	/* We do the carveouts only for QCS404, for now. */
--	if (fdt_node_check_compatible(gd->fdt_blob, 0, "qcom,qcs404") == 0) {
--		carveout_start = get_timer(0);
--		/* Takes ~20-50ms on SDM845 */
--		carve_out_reserved_memory();
--		debug("carveout time: %lums\n", get_timer(carveout_start));
--	}
--	dcache_enable();
--}
-diff --git a/arch/arm/mach-snapdragon/board_common.c b/arch/arm/mach-snapdragon/board_common.c
-new file mode 100644
-index 00000000000..f6daeb6edf4
---- /dev/null
-+++ b/arch/arm/mach-snapdragon/board_common.c
-@@ -0,0 +1,56 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Common initialisation for Qualcomm Snapdragon boards.
-+ *
-+ * Copyright (c) 2024 Linaro Ltd.
-+ * Author: Casey Connolly <casey.connolly@linaro.org>
-+ */
-+
-+#define LOG_CATEGORY LOGC_BOARD
-+#define pr_fmt(fmt) "QCOM: " fmt
-+
-+#include <dm/device.h>
-+#include <dm/pinctrl.h>
-+#include <dm/uclass-internal.h>
-+#include <dm/read.h>
-+#include <usb.h>
-+
-+#include "qcom-priv.h"
-+
-+/*
-+ * Some Qualcomm boards require GPIO configuration when switching USB modes.
-+ * Support setting this configuration via pinctrl state.
-+ */
-+int board_usb_init(int index, enum usb_init_type init)
-+{
-+	struct udevice *usb;
-+	int ret = 0;
-+
-+	/* USB device */
-+	ret = uclass_find_device_by_seq(UCLASS_USB, index, &usb);
-+	if (ret) {
-+		printf("Cannot find USB device\n");
-+		return ret;
-+	}
-+
-+	ret = dev_read_stringlist_search(usb, "pinctrl-names",
-+					 "device");
-+	/* No "device" pinctrl state, so just bail */
-+	if (ret < 0)
-+		return 0;
-+
-+	/* Select "default" or "device" pinctrl */
-+	switch (init) {
-+	case USB_INIT_HOST:
-+		pinctrl_select_state(usb, "default");
-+		break;
-+	case USB_INIT_DEVICE:
-+		pinctrl_select_state(usb, "device");
-+		break;
-+	default:
-+		debug("Unknown usb_init_type %d\n", init);
-+		break;
-+	}
-+
-+	return 0;
-+}
-diff --git a/arch/arm/mach-snapdragon/board_spl.c b/arch/arm/mach-snapdragon/board_spl.c
-new file mode 100644
-index 00000000000..19260975063
---- /dev/null
-+++ b/arch/arm/mach-snapdragon/board_spl.c
-@@ -0,0 +1,35 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Common SPL code for Qualcomm Snapdragon boards.
-+ *
-+ * Copyright (c) 2026 Michael Srba <Michael.Srba@seznam.cz>
-+ */
-+
-+#include <hang.h>
-+#include <spl.h>
-+
-+/* in SPL, we always use internal DT */
-+int board_fdt_blob_setup(void **fdtp)
-+{
-+	return -EEXIST;
-+}
-+
-+int board_init(void)
-+{
-+	return 0;
-+}
-+
-+__weak void reset_cpu(void)
-+{
-+	/* This should currently not get called in non-error paths, so just hang */
-+	printf("reset_cpu called, going to hang()\n");
-+	hang();
-+}
-+
-+u32 spl_boot_device(void)
-+{
-+	/* TODO: check boot reason to support UFS and sdcard */
-+	u32 boot_device = BOOT_DEVICE_DFU;
-+
-+	return boot_device;
-+}
-diff --git a/arch/arm/mach-snapdragon/mem_map.c b/arch/arm/mach-snapdragon/mem_map.c
-new file mode 100644
-index 00000000000..70e3c1d1fcc
---- /dev/null
-+++ b/arch/arm/mach-snapdragon/mem_map.c
-@@ -0,0 +1,318 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Common initialisation for Qualcomm Snapdragon boards.
-+ *
-+ * Copyright (c) 2024 Linaro Ltd.
-+ * Author: Casey Connolly <casey.connolly@linaro.org>
-+ */
-+
-+#define LOG_CATEGORY LOGC_BOARD
-+#define pr_fmt(fmt) "QCOM: " fmt
-+
-+#include <asm/armv8/mmu.h>
-+#include <asm/global_data.h>
-+#include <asm/system.h>
-+#include <asm-generic/unaligned.h>
-+#include <cpu_func.h>
-+#include <fdt_support.h>
-+#include <linux/errno.h>
-+#include <linux/sizes.h>
-+#include <sort.h>
-+#include <time.h>
-+
-+#include "qcom-priv.h"
-+
-+DECLARE_GLOBAL_DATA_PTR;
-+
-+static struct mm_region rbx_mem_map[CONFIG_NR_DRAM_BANKS + 2] = { { 0 } };
-+
-+struct mm_region *mem_map = rbx_mem_map;
-+
-+static struct {
-+	phys_addr_t start;
-+	phys_size_t size;
-+} prevbl_ddr_banks[CONFIG_NR_DRAM_BANKS] __section(".data") = { 0 };
-+
-+int dram_init(void)
-+{
-+	/*
-+	 * gd->ram_base / ram_size have been setup already
-+	 * in qcom_parse_memory().
-+	 */
-+	return 0;
-+}
-+
-+static int ddr_bank_cmp(const void *v1, const void *v2)
-+{
-+	const struct {
-+		phys_addr_t start;
-+		phys_size_t size;
-+	} *res1 = v1, *res2 = v2;
-+
-+	if (!res1->size)
-+		return 1;
-+	if (!res2->size)
-+		return -1;
-+
-+	return (res1->start >> 24) - (res2->start >> 24);
-+}
-+
-+/* This has to be done post-relocation since gd->bd isn't preserved */
-+static void qcom_configure_bi_dram(void)
-+{
-+	int i;
-+
-+	for (i = 0; i < CONFIG_NR_DRAM_BANKS; i++) {
-+		gd->bd->bi_dram[i].start = prevbl_ddr_banks[i].start;
-+		gd->bd->bi_dram[i].size = prevbl_ddr_banks[i].size;
-+	}
-+}
-+
-+int dram_init_banksize(void)
-+{
-+	qcom_configure_bi_dram();
-+
-+	return 0;
-+}
-+
-+/**
-+ * The generic memory parsing code in U-Boot lacks a few things that we
-+ * need on Qualcomm:
-+ *
-+ * 1. It sets gd->ram_size and gd->ram_base to represent a single memory block
-+ * 2. setup_dest_addr() later relocates U-Boot to ram_base + ram_size, the end
-+ *    of that first memory block.
-+ *
-+ * This results in all memory beyond U-Boot being unusable in Linux when booting
-+ * with EFI.
-+ *
-+ * Since the ranges in the memory node may be out of order, the only way for us
-+ * to correctly determine the relocation address for U-Boot is to parse all
-+ * memory regions and find the highest valid address.
-+ *
-+ * We can't use fdtdec_setup_memory_banksize() since it stores the result in
-+ * gd->bd, which is not yet allocated.
-+ *
-+ * @fdt: FDT blob to parse /memory node from
-+ *
-+ * Return: 0 on success or -ENODATA if /memory node is missing or incomplete
-+ */
-+int qcom_parse_memory(const void *fdt)
-+{
-+	int offset;
-+	const fdt64_t *memory;
-+	int memsize;
-+	phys_addr_t ram_end = 0;
-+	int i, j, banks;
-+
-+	offset = fdt_path_offset(fdt, "/memory");
-+	if (offset < 0)
-+		return -ENODATA;
-+
-+	memory = fdt_getprop(fdt, offset, "reg", &memsize);
-+	if (!memory)
-+		return -ENODATA;
-+
-+	banks = min(memsize / (2 * sizeof(u64)), (ulong)CONFIG_NR_DRAM_BANKS);
-+
-+	if (memsize / sizeof(u64) > CONFIG_NR_DRAM_BANKS * 2)
-+		log_err("Provided more than the max of %d memory banks\n", CONFIG_NR_DRAM_BANKS);
-+
-+	if (banks > CONFIG_NR_DRAM_BANKS)
-+		log_err("Provided more memory banks than we can handle\n");
-+
-+	for (i = 0, j = 0; i < banks * 2; i += 2, j++) {
-+		prevbl_ddr_banks[j].start = get_unaligned_be64(&memory[i]);
-+		prevbl_ddr_banks[j].size = get_unaligned_be64(&memory[i + 1]);
-+		if (!prevbl_ddr_banks[j].size) {
-+			j--;
-+			continue;
-+		}
-+		ram_end = max(ram_end, prevbl_ddr_banks[j].start + prevbl_ddr_banks[j].size);
-+	}
-+
-+	if (!banks || !prevbl_ddr_banks[0].size)
-+		return -ENODATA;
-+
-+	/* Sort our RAM banks -_- */
-+	qsort(prevbl_ddr_banks, banks, sizeof(prevbl_ddr_banks[0]), ddr_bank_cmp);
-+
-+	gd->ram_base = prevbl_ddr_banks[0].start;
-+	gd->ram_size = ram_end - gd->ram_base;
-+
-+	return 0;
-+}
-+
-+static void build_mem_map(void)
-+{
-+	int i, j;
-+
-+	/*
-+	 * Ensure the peripheral block is sized to correctly cover the address range
-+	 * up to the first memory bank.
-+	 * Don't map the first page to ensure that we actually trigger an abort on a
-+	 * null pointer access rather than just hanging.
-+	 * FIXME: we should probably split this into more precise regions
-+	 */
-+	mem_map[0].phys = 0x1000;
-+	mem_map[0].virt = mem_map[0].phys;
-+	mem_map[0].size = gd->bd->bi_dram[0].start - mem_map[0].phys;
-+	mem_map[0].attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
-+			 PTE_BLOCK_NON_SHARE |
-+			 PTE_BLOCK_PXN | PTE_BLOCK_UXN;
-+
-+	for (i = 1, j = 0; i < ARRAY_SIZE(rbx_mem_map) - 1 && gd->bd->bi_dram[j].size; i++, j++) {
-+		mem_map[i].phys = gd->bd->bi_dram[j].start;
-+		mem_map[i].virt = mem_map[i].phys;
-+		mem_map[i].size = gd->bd->bi_dram[j].size;
-+		mem_map[i].attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) | \
-+				   PTE_BLOCK_INNER_SHARE;
-+	}
-+
-+	mem_map[i].phys = UINT64_MAX;
-+	mem_map[i].size = 0;
-+
-+#ifdef DEBUG
-+	debug("Configured memory map:\n");
-+	for (i = 0; mem_map[i].size; i++)
-+		debug("  0x%016llx - 0x%016llx: entry %d\n",
-+		      mem_map[i].phys, mem_map[i].phys + mem_map[i].size, i);
-+#endif
-+}
-+
-+u64 get_page_table_size(void)
-+{
-+	return SZ_1M;
-+}
-+
-+static int fdt_cmp_res(const void *v1, const void *v2)
-+{
-+	const struct fdt_resource *res1 = v1, *res2 = v2;
-+
-+	return res1->start - res2->start;
-+}
-+
-+#define N_RESERVED_REGIONS 32
-+
-+/* Mark all no-map regions as PTE_TYPE_FAULT to prevent speculative access.
-+ * On some platforms this is enough to trigger a security violation and trap
-+ * to EL3.
-+ */
-+static void carve_out_reserved_memory(void)
-+{
-+	static struct fdt_resource res[N_RESERVED_REGIONS] = { 0 };
-+	int parent, rmem, count, i = 0;
-+	phys_addr_t start;
-+	size_t size;
-+
-+	/* Some reserved nodes must be carved out, as the cache-prefetcher may otherwise
-+	 * attempt to access them, causing a security exception.
-+	 */
-+	parent = fdt_path_offset(gd->fdt_blob, "/reserved-memory");
-+	if (parent <= 0) {
-+		log_err("No reserved memory regions found\n");
-+		return;
-+	}
-+
-+	/* Collect the reserved memory regions */
-+	fdt_for_each_subnode(rmem, gd->fdt_blob, parent) {
-+		const fdt32_t *ptr;
-+		int len;
-+		if (!fdt_getprop(gd->fdt_blob, rmem, "no-map", NULL))
-+			continue;
-+
-+		if (i == N_RESERVED_REGIONS) {
-+			log_err("Too many reserved regions!\n");
-+			break;
-+		}
-+
-+		/* Read the address and size out from the reg property. Doing this "properly" with
-+		 * fdt_get_resource() takes ~70ms on SDM845, but open-coding the happy path here
-+		 * takes <1ms... Oh the woes of no dcache.
-+		 */
-+		ptr = fdt_getprop(gd->fdt_blob, rmem, "reg", &len);
-+		if (ptr) {
-+			/* Qualcomm devices use #address/size-cells = <2> but all reserved regions are within
-+			 * the 32-bit address space. So we can cheat here for speed.
-+			 */
-+			res[i].start = fdt32_to_cpu(ptr[1]);
-+			res[i].end = res[i].start + fdt32_to_cpu(ptr[3]);
-+			i++;
-+		}
-+	}
-+
-+	/* Sort the reserved memory regions by address */
-+	count = i;
-+	qsort(res, count, sizeof(struct fdt_resource), fdt_cmp_res);
-+
-+	/* Now set the right attributes for them. Often a lot of the regions are tightly packed together
-+	 * so we can optimise the number of calls to mmu_change_region_attr() by combining adjacent
-+	 * regions.
-+	 */
-+	start = ALIGN_DOWN(res[0].start, SZ_2M);
-+	size = ALIGN(res[0].end - start, SZ_2M);
-+	for (i = 1; i <= count; i++) {
-+		/* We ideally want to 2M align everything for more efficient pagetables, but we must avoid
-+		 * overwriting reserved memory regions which shouldn't be mapped as FAULT (like those with
-+		 * compatible properties).
-+		 * If within 2M of the previous region, bump the size to include this region. Otherwise
-+		 * start a new region.
-+		 */
-+		if (i == count || start + size < res[i].start - SZ_2M) {
-+			debug("  0x%016llx - 0x%016llx: reserved\n",
-+			      start, start + size);
-+			mmu_change_region_attr(start, size, PTE_TYPE_FAULT);
-+			/* If this is the final region then quit here before we index
-+			 * out of bounds...
-+			 */
-+			if (i == count)
-+				break;
-+			start = ALIGN_DOWN(res[i].start, SZ_2M);
-+			size = ALIGN(res[i].end - start, SZ_2M);
-+		} else {
-+			/* Bump size if this region is immediately after the previous one */
-+			size = ALIGN(res[i].end - start, SZ_2M);
-+		}
-+	}
-+}
-+
-+/* This function open-codes setup_all_pgtables() so that we can
-+ * insert additional mappings *before* turning on the MMU.
-+ */
-+void enable_caches(void)
-+{
-+	u64 tlb_addr = gd->arch.tlb_addr;
-+	u64 tlb_size = gd->arch.tlb_size;
-+	u64 pt_size;
-+	ulong carveout_start;
-+
-+	gd->arch.tlb_fillptr = tlb_addr;
-+
-+	build_mem_map();
-+
-+	icache_enable();
-+
-+	/* Create normal system page tables */
-+	setup_pgtables();
-+
-+	pt_size = (uintptr_t)gd->arch.tlb_fillptr -
-+		  (uintptr_t)gd->arch.tlb_addr;
-+	debug("Primary pagetable size: %lluKiB\n", pt_size / 1024);
-+
-+	/* Create emergency page tables */
-+	gd->arch.tlb_size -= pt_size;
-+	gd->arch.tlb_addr = gd->arch.tlb_fillptr;
-+	setup_pgtables();
-+	gd->arch.tlb_emerg = gd->arch.tlb_addr;
-+	gd->arch.tlb_addr = tlb_addr;
-+	gd->arch.tlb_size = tlb_size;
-+
-+	/* We do the carveouts only for QCS404, for now. */
-+	if (fdt_node_check_compatible(gd->fdt_blob, 0, "qcom,qcs404") == 0) {
-+		carveout_start = get_timer(0);
-+		/* Takes ~20-50ms on SDM845 */
-+		carve_out_reserved_memory();
-+		debug("carveout time: %lums\n", get_timer(carveout_start));
-+	}
-+	dcache_enable();
-+}
-diff --git a/arch/arm/mach-snapdragon/qcom-priv.h b/arch/arm/mach-snapdragon/qcom-priv.h
-index b8bf574e8bb..b372465d125 100644
---- a/arch/arm/mach-snapdragon/qcom-priv.h
-+++ b/arch/arm/mach-snapdragon/qcom-priv.h
-@@ -20,7 +20,9 @@ extern enum qcom_boot_source qcom_boot_source;
- #if IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT)
- void qcom_configure_capsule_updates(void);
- #else
--void qcom_configure_capsule_updates(void) {}
-+static inline void qcom_configure_capsule_updates(void) {}
- #endif /* EFI_HAVE_CAPSULE_SUPPORT */
- 
-+int qcom_parse_memory(const void *fdt);
-+
- #endif /* __QCOM_PRIV_H__ */
-
--- 
-2.53.0
+> The workaround is to write 0x00000303 to both MSMC MMRs after reset.
+> This ensures that their shadow copies get the correct post-reset value.
+> 
+> Link: https://www.ti.com/lit/er/sprz530c/sprz530c.pdf
+> Link: https://www.ti.com/lit/er/sprz536b/sprz536b.pdf
+> Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
+> ---
+>  arch/arm/mach-k3/include/mach/j721s2_hardware.h |  4 ++++
+>  arch/arm/mach-k3/include/mach/j784s4_hardware.h |  4 ++++
+>  arch/arm/mach-k3/j721s2/j721s2_init.c           | 11 +++++++++++
+>  arch/arm/mach-k3/j784s4/j784s4_init.c           | 11 +++++++++++
+>  4 files changed, 30 insertions(+)
+> 
+> diff --git a/arch/arm/mach-k3/include/mach/j721s2_hardware.h b/arch/arm/mach-k3/include/mach/j721s2_hardware.h
+> index 82f076a45e0..a4d7fe48662 100644
+> --- a/arch/arm/mach-k3/include/mach/j721s2_hardware.h
+> +++ b/arch/arm/mach-k3/include/mach/j721s2_hardware.h
+> @@ -37,6 +37,10 @@
+>  /* MCU SCRATCHPAD usage */
+>  #define TI_SRAM_SCRATCH_BOARD_EEPROM_START	CONFIG_SYS_K3_MCU_SCRATCHPAD_BASE
+>  
+> +/* MSMC RT_WAY MMR addresses */
+> +#define K3_MSMC_RT_WAY_SELECT		0x6E008000
+> +#define K3_MSMC_NRT_WAY_SELECT		0x6E008008
+> +
+>  #if defined(CONFIG_SYS_K3_SPL_ATF) && !defined(__ASSEMBLY__)
+>  
+>  #define J721S2_DEV_MCU_RTI0			295
+> diff --git a/arch/arm/mach-k3/include/mach/j784s4_hardware.h b/arch/arm/mach-k3/include/mach/j784s4_hardware.h
+> index 29a894baed3..bb5c58d00e4 100644
+> --- a/arch/arm/mach-k3/include/mach/j784s4_hardware.h
+> +++ b/arch/arm/mach-k3/include/mach/j784s4_hardware.h
+> @@ -37,6 +37,10 @@
+>  /* MCU SCRATCHPAD usage */
+>  #define TI_SRAM_SCRATCH_BOARD_EEPROM_START	CONFIG_SYS_K3_MCU_SCRATCHPAD_BASE
+>  
+> +/* MSMC RT_WAY MMR addresses */
+> +#define K3_MSMC_RT_WAY_SELECT		0x6E008000
+> +#define K3_MSMC_NRT_WAY_SELECT		0x6E008008
+> +
+>  #if defined(CONFIG_SYS_K3_SPL_ATF) && !defined(__ASSEMBLY__)
+>  
+>  #define J784S4_DEV_MCU_RTI0			367
+> diff --git a/arch/arm/mach-k3/j721s2/j721s2_init.c b/arch/arm/mach-k3/j721s2/j721s2_init.c
+> index b5453d8895d..d996dfcc332 100644
+> --- a/arch/arm/mach-k3/j721s2/j721s2_init.c
+> +++ b/arch/arm/mach-k3/j721s2/j721s2_init.c
+> @@ -163,6 +163,14 @@ static void store_boot_info_from_rom(void)
+>  	       sizeof(struct rom_extended_boot_data));
+>  }
+>  
+> +void apply_msmc_shadow_copy_errata(void)
+> +{
+> +	/* Errata i2378: Write 0x00000303 to MSMC shadow copy MMRs */
+> +	writel(0x00000303, K3_MSMC_RT_WAY_SELECT);
+> +	writel(0x00000303, K3_MSMC_NRT_WAY_SELECT);
+> +	debug("%s: Applied errata i2378\n", __func__);
+> +}
+> +
+>  void k3_spl_init(void)
+>  {
+>  	struct udevice *dev;
+> @@ -176,6 +184,9 @@ void k3_spl_init(void)
+>  	/* Make all control module registers accessible */
+>  	ctrl_mmr_unlock();
+>  
+> +	/* Apply MSMC shadow copy errata workaround */
+> +	apply_msmc_shadow_copy_errata();
+> +
+>  	if (IS_ENABLED(CONFIG_CPU_V7R)) {
+>  		disable_linefill_optimization();
+>  		setup_k3_mpu_regions();
+> diff --git a/arch/arm/mach-k3/j784s4/j784s4_init.c b/arch/arm/mach-k3/j784s4/j784s4_init.c
+> index 53f152ccd9c..48b52fcb333 100644
+> --- a/arch/arm/mach-k3/j784s4/j784s4_init.c
+> +++ b/arch/arm/mach-k3/j784s4/j784s4_init.c
+> @@ -180,6 +180,14 @@ static void store_boot_info_from_rom(void)
+>  	       sizeof(struct rom_extended_boot_data));
+>  }
+>  
+> +void apply_msmc_shadow_copy_errata(void)
+> +{
+> +	/* Errata i2378: Write 0x00000303 to MSMC shadow copy MMRs */
+> +	writel(0x00000303, K3_MSMC_RT_WAY_SELECT);
+> +	writel(0x00000303, K3_MSMC_NRT_WAY_SELECT);
+> +	debug("%s: Applied errata i2378\n", __func__);	
+> +}
+> +
+>  void k3_spl_init(void)
+>  {
+>  	struct udevice *dev;
+> @@ -194,6 +202,9 @@ void k3_spl_init(void)
+>  	/* Make all control module registers accessible */
+>  	ctrl_mmr_unlock();
+>  
+> +	/* Apply MSMC shadow copy errata workaround */
+> +	apply_msmc_shadow_copy_errata();
+> +
+>  	if (IS_ENABLED(CONFIG_CPU_V7R)) {
+>  		disable_linefill_optimization();
+>  		setup_k3_mpu_regions();
 
