@@ -4,58 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60FB4CD343F
-	for <u-boot@archiver.kernel.org>; Sat,  9 May 2026 10:27:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F36A3CD3447
+	for <u-boot@archiver.kernel.org>; Sat,  9 May 2026 10:40:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0CCD784CC7;
-	Sat,  9 May 2026 12:27:19 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C9D9584CD2;
+	Sat,  9 May 2026 12:40:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="E7lrEY/V";
+	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="sETLtTJM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B1D7A84CD5; Sat,  9 May 2026 12:27:18 +0200 (CEST)
-Received: from DUZPR83CU001.outbound.protection.outlook.com
- (mail-northeuropeazlp170120005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::5])
+ id DFF2D84CD5; Sat,  9 May 2026 12:40:12 +0200 (CEST)
+Received: from MRWPR03CU001.outbound.protection.outlook.com
+ (mail-francesouthazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c207::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 85CA684CC3
- for <u-boot@lists.denx.de>; Sat,  9 May 2026 12:27:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AFB9B84CC9
+ for <u-boot@lists.denx.de>; Sat,  9 May 2026 12:40:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mikhail.kshevetskiy@genexis.eu
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Yt/4/CVwdcSDn07hUEZOkP1suVg+zkjchQCf4WxJHZuFz15+xIrmNDQoYP4wtFyrpAUujI12rwbhviRpSyBcsAXo8MB3rI3TnJ+NG1ImY+Uy0bFAfQMuq9NWhBefWm4TrxSgA/33mbUX5R1Uzh5lBcjpglsEqvjCz5IWVmrxNvT9zCMd6MKRI0ZeDpv7+0yBicZsucJm15/2pfjH49W7OzEuG5s4E9VhfPELaQjoaaF7GYpFYmj7ib5brbxsdjcRNajgJIJfu5csdgd3TRzU+xCo50hboVMJiOP+NjURWeY/7tloyxX77YxqKwLAV1N7HSxkPtO31WFA8quigYLBpw==
+ b=H/P0eEtxEN6wI0kb3TNSTgOGBC0GRuvTNTjkmiW9SKGn90tI3Mvv6et+PIH+Opdf/k4Zm5EOaPYEOMC5XowifSBE3gGtOMzalNKB4KLcLIuTJKFxbLmA+xz/bLE1A9DbjKsTOBx5Gj9eb/dnEnGEQ5rAgaE9eY1yuIyWEMGFWg88MBYH/wGd//GBsJ8mr+qJFrl9SfcMbrMnNuLNLux85QHeI7qSwP0JxUZ0YKqZ9jyRqWz4SlRWCHSSSfF2jKab9OgRf0jPkLkTl0051shLnxgukhEOudE7RiEzs5PJiC0lJCWErYBzWy5CgGulw/rSS8L8dwYkoly2RxL0SbFcqA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=CYQk6bs7kC4jcFySbvgINlqbihtU4GECoRMUJqOw0es=;
- b=x6CZMGglGwk+BeDhTAXQAFIf1DZHnek8tVRMaULp6pDUO6juD36/pOqWTxW7ftOXo98O/LE0YzY2ju1M6nSaZBc9i+4InZYaq5TXt8cFzegm+BOZXlV8NyRE8hOBtWLWftPU7x724eBAbtiU9BSwXfhapJiTe1V2ygZmpRdfwkBJOip67aqHgFZP1uIvK48GGC5VjdpTLzGBDKuRHT2eM0cd0/hGoagmnCWL3+OwRg69Mrwxz7SACuRFIGvgG/qSmvbenCeHk/oYYxGGSw96EOqq2no/RJVHkeLkXJnahb2yLrkcS1908I1HcQc8VjJxF9hxbF25lsegDpDWEcFSRQ==
+ bh=Ggf3i9G4C1ngRkyYXOGDM9sbDTOsm/n60/mg6VtFHHM=;
+ b=WegKAVeOoCmh8hmI16IAZU5NCq+IxdSQw2EtZL7szHg8f7ead9C1/PcRtsZiYnKNCiwJcRQu/5k3vNSJFsEb+nSbDIvLEOhvZPXoit9WWuSTpeouOSko7pgZEqxY4u//vqpw8NfiBjYwGag5c7CKxsr7Zngqk0ImSEPtyCdf/kKzJk84P965KPya9/Ku9+9IzX8MYSZLRaSgCojUKivHiTKR7PO9RD2JV3awLp7ruIFlEuQBuMtg+U+BHYe70FkzYGn62DxqMzBiBlL3ktj45M+Z11VZ+/MVK9YvLKdHT8yk7v0gVB+tPcs4gAYzO9xmnll4n6LcqfJLh+g/AUkM5A==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=genexis.eu; dmarc=pass action=none header.from=iopsys.eu;
  dkim=pass header.d=iopsys.eu; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iopsys.eu; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=CYQk6bs7kC4jcFySbvgINlqbihtU4GECoRMUJqOw0es=;
- b=E7lrEY/Vm8LAEceJk5YNRZTbg+fKRZRpns5lETko2QrfQwwC6YgEhcJ8i5x2YC65rYnGK+FxnqOJAVZD1ZWPiPesaCU2qfXun/PPk9H1y3v4ZOzcRJvzXQu3p/snr31mSwszX9gRTE5Zme/eDeOukMc3Cm6tqU65gaHqzOEhQxb+/fXj8yH8BMg4EEv1Ggi91qCnCi8X7/amGDLchZStZZkcw2CQsIG3vULMlosGPOWgnC2EhGt5MjDfR4zb+iGWM/18ahYloSY/U57iK4+qZPuk7SsRzwocABSqMJyQiX1tefV4DF5XCfklbF8RwZXbPuxbw8z62RXZdAQahC5//A==
+ bh=Ggf3i9G4C1ngRkyYXOGDM9sbDTOsm/n60/mg6VtFHHM=;
+ b=sETLtTJMCHMjhZATd+RsP/XRbOfrxF+tRUrN08WM2r8W5FKgX78wXrDNndWpK790s9C7L4Yf/PhVg/Fr2LjKSdpd/YpNCjkX4RJ7o52NyvsiqMd0otzMFpfEtfNeNvkwyvqfUxXDsdHJIX6DRt4z/UHXdrf/AsnRT5ZyDMIhhpp6aryZNRv3dudm9IsKFsz3UUkqQN1NNmcjOwdEnIZOrxeh3ppk7i/MUdhUysqbhEUKEO9jZU90UTY5cRwExCdEoYcVdxm+KyUeY9uGXvKnV9PZ/kGyTmFrnn0T916AZZIHdmyfFHxennD+h6noC/kukGjBwkzwjqiaMokAjkVD1w==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=iopsys.eu;
 Received: from DU2PR08MB10037.eurprd08.prod.outlook.com (2603:10a6:10:49a::20)
- by PA6PR08MB10417.eurprd08.prod.outlook.com (2603:10a6:102:3cd::16)
+ by PA6PR08MB10858.eurprd08.prod.outlook.com (2603:10a6:102:3d8::14)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9891.15; Sat, 9 May
- 2026 10:27:11 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9891.20; Sat, 9 May
+ 2026 10:40:02 +0000
 Received: from DU2PR08MB10037.eurprd08.prod.outlook.com
  ([fe80::3c7:6d2e:8afe:e4dc]) by DU2PR08MB10037.eurprd08.prod.outlook.com
  ([fe80::3c7:6d2e:8afe:e4dc%5]) with mapi id 15.20.9891.019; Sat, 9 May 2026
- 10:27:10 +0000
-Message-ID: <f1487e0d-04a4-4ccb-b618-396da085dd29@iopsys.eu>
-Date: Sat, 9 May 2026 13:27:06 +0300
+ 10:40:02 +0000
+Message-ID: <d0d07e96-c638-4639-b2b5-12becabbb933@iopsys.eu>
+Date: Sat, 9 May 2026 13:40:00 +0300
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 3/9] pinctrl: airoha: add shared pinctrl code
+Subject: Re: [PATCH v4 4/9] pinctrl: airoha: add pin controller and gpio
+ driver for AN7581 SoC
 To: David Lechner <dlechner@baylibre.com>, Tom Rini <trini@konsulko.com>,
  Christian Marangi <ansuelsmth@gmail.com>, Simon Glass <sjg@chromium.org>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>, Peng Fan <peng.fan@nxp.com>,
@@ -71,80 +72,80 @@ To: David Lechner <dlechner@baylibre.com>, Tom Rini <trini@konsulko.com>,
  <markus.gothe@genexis.eu>, Matheus Sampaio Queiroga
  <srherobrine20@gmail.com>, Benjamin Larsson <benjamin.larsson@genexis.eu>
 References: <20260504130306.2764862-1-mikhail.kshevetskiy@iopsys.eu>
- <20260504130306.2764862-4-mikhail.kshevetskiy@iopsys.eu>
- <a12b78a1-fc6f-4306-bd7b-40d6f8e6c55b@baylibre.com>
+ <20260504130306.2764862-5-mikhail.kshevetskiy@iopsys.eu>
+ <63eb62e7-f301-470f-9524-c261c85dfbd9@baylibre.com>
 From: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
 Content-Language: en-US, ru-RU
-In-Reply-To: <a12b78a1-fc6f-4306-bd7b-40d6f8e6c55b@baylibre.com>
+In-Reply-To: <63eb62e7-f301-470f-9524-c261c85dfbd9@baylibre.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: GVX0EPF0005F716.SWEP280.PROD.OUTLOOK.COM
- (2603:10a6:158:400::395) To DU2PR08MB10037.eurprd08.prod.outlook.com
+X-ClientProxiedBy: FR3P281CA0131.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:94::14) To DU2PR08MB10037.eurprd08.prod.outlook.com
  (2603:10a6:10:49a::20)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DU2PR08MB10037:EE_|PA6PR08MB10417:EE_
-X-MS-Office365-Filtering-Correlation-Id: 6d9b21db-7b1c-4640-9054-08deadb58726
+X-MS-TrafficTypeDiagnostic: DU2PR08MB10037:EE_|PA6PR08MB10858:EE_
+X-MS-Office365-Filtering-Correlation-Id: 3df215c5-115a-4b7a-c3ad-08deadb75391
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|7416014|1800799024|366016|921020|56012099003|18002099003|22082099003|3023799003;
-X-Microsoft-Antispam-Message-Info: bF3FTbO2l/oy1FZsZx/KXJ71FQWM2u+iq/FrwnV/CSjyW7OQTsmy+pAewJEhdgcrUO7P/m6DDdAeg56/tj9Un4PQ4AVU4DeHdWfMTprhkOZ20NYQzL0xOZZ+zBel1euZw5EgQdoMNvB6uXYS1EGLtkbAgCAI1CMTVpy6g/ZQTr5bZBt8JwJ3TmRPPUMAjzbwNdKxYss+uANOQGPI8lzh9168vCRoksYC8vdZmTh4iq5rv0YTA1qVFDDn7qh9bmH66JAT/+Tc+iHd34iSN0aWLkuBa7vQHRtg1f1zFp77PiuVkPQcqgzmOyllT+51FBem/txhx6mQm7hXhu4WrQHDyR5O52N5gH0Wiv/ltAGBoiO5QpV3zTmw2f2yN81eYs9L+qxNmHZdC9Ga5hfSVF5IktNPjQsxVw0lojMms2l0/izhz8B0nn9vII9mvGGBdQE/pduOhHaoGrskRCL9fQyrFu2Yos0swyq90FrLAZOYZSVGnyOk56cHqkV/mlGuR73zSxxSWD6w/8I21hgak273urDWmrFErXcbE9eJv1K+sHyvxGVca9Rt8w2vT6dHc8wyYXNSg9WHJLcweEOfs5Sc9XF/H1gIEFiTplTzLGPe8Y95G+pqCWikr5xwwJfpM1g4h7BxIJ93n6tHfkq6Fj0VAqmziMASdYBNelN1eKf9tHa7vVrw/fdKWFdMOIvKYahLuManck163IjE3/e/yX6qD0Y1FMGZpVRinMoIl9iNsWNV88Q6+gVxvcpAI3IKclXN
+ ARA:13230040|366016|7416014|376014|1800799024|921020|22082099003|18002099003|56012099003;
+X-Microsoft-Antispam-Message-Info: Oe4847Z8yAmRjG2kg38gxQ4tyoRYTQUMGyTMeysddZCzi2oel6TZUK0v7UOwi+fDapWfazNAh8/xMGQS0/0VgMGpI4s8WNKvUEZ/2qj3xIVTaE0iCqQ9ciK2ieMGvjqJTwAdwEGEpoWPk5vVBuN8IpSPwJFiBoiIdDnNIx0zjd3YDf76r8FlJc8e+VbCiQVkPYv8RTCzvPGuLYqU51KMO9u7rPhx1YpJh4yqk/NjrSVzHhU+Y637iJ91noWqjOawkW26D6RIJIWgLIWJsIdn1vGfLHTfwl/9cdIXX6V2yh55JL8WLNyfl3K4jWy5yWKUCPdAyFIY+S9i16g0JBt/HxlcfcMQBnwW1iOoDh0CAkj0FmKayEAW9n8c90bq6wXd2PF5VbnOzh8rHrp08i3lnWudg3bd3+TnWlBuf3ef1nlQr/lR9Hh/uY1JImR3cbk7mqASSopHAH8qgNg0e6yPDHY7OnMzyiyUIZauU5EFZF3V+3E6rgX1gLppGCmEEX9Rf1Yf0GgvbyO/Zkg9cHR/lUASwyWx4g+tgWgjQjp27scrf9ZNDCA4YUa66hrB+RoHWgY7DLpp1cMUB0xacu3GrLlLVeVfTmZkIRlZXq7QsoErIwFqAIQQ2odEGtr7YSoLpDEq6bSlIHbnoITCCvONez+f1+1N0+tk+pL7aM40TpCb5fLFlcOKFXKA3HQJDJ5A/IdoBJZvpbgQRSFpgYmq3V3u4h+O31horvTxzANv16M=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:DU2PR08MB10037.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(7416014)(1800799024)(366016)(921020)(56012099003)(18002099003)(22082099003)(3023799003);
+ SFS:(13230040)(366016)(7416014)(376014)(1800799024)(921020)(22082099003)(18002099003)(56012099003);
  DIR:OUT; SFP:1102; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?OXd0cGNNZG9Xb1Bud21qMVlHQy9ITTVjK3dkbUc5KzdDUHBmdjhGeUpiNjFO?=
- =?utf-8?B?VUVybDF5V1g2aFcvdVdpRTBvT0RNYmE1VXhaREpZcEc5N1JvMDZNUGtnYmFv?=
- =?utf-8?B?R1pSMG9JK1hmTThTSFZWUE9raU1DV2JaNU1WSUZ0bjFtNkN3bGVMOW9reDVO?=
- =?utf-8?B?TmtLUk5sNExVdXpXYlNWbmhIbmY0QnlEb2tIMDhsbGl6dGM0eUdBR0k1Yi9D?=
- =?utf-8?B?VFA5QVp6QWoxZFc1MzNpU0RSVytEYzk0KzJvRGdCUWR1T0dBeVJRb2pmbFBR?=
- =?utf-8?B?N0Y4RGhxRVZ1RmhCTFh0cVMzYVlFdHZqRld1R0xZeVVTU1ZSWjdrWWhWcm5w?=
- =?utf-8?B?TmdKSmJod2wrSXArSWsyekMvTFBueWdRbFpSallveVNaUkdOQVBnNVBZUHNx?=
- =?utf-8?B?cUtOWDhSZk5zb3B4S3c5S2t1N3RwVVFLK0hkMEFOd0RTRmNybVRsQWRZQS9v?=
- =?utf-8?B?dU85YVpSRit2R1ZXUVZNK1QwT1hra2hoZFRucU9KdEhhOXZVTGVzVmpQWkdR?=
- =?utf-8?B?TnlBeWFXaFBVay80ZWpBWW5CZXdGZHkrQjZsMXBoSi8xclJqUUtTbS9BMTdI?=
- =?utf-8?B?VHZ0cW84aHlya1NZNnA4dkI4MTNES3UxcTdtUnJzUVM5a0UyRnI1enMxR0Rh?=
- =?utf-8?B?UGRUNmlZN1FUdnlCZGdJY0xhNzJDWXhSVCs2KzdFbXZpZUtiaExjYnIrZkZR?=
- =?utf-8?B?d1NKeUxRK0JqTy9RbjhUYytLeGJ3RE10ZnhUUlNCVVBaNmpEaTh6bFBGbHh1?=
- =?utf-8?B?MTVKNlNJbEdDcEZBOEFvRDlSaHAvSUpFZFJLa1ArbGlsMUp3cHordkVQVlJZ?=
- =?utf-8?B?Mm43L3pOYTJQSkpsOVlqYUIwbGFSZE4xS251Z1lYeUQ3a3FkU3VrVzJ5VjQv?=
- =?utf-8?B?YjdHSm1YTXl4QXRqUk1VeC8ycVVVc2tidSszdlNua3hiSm9UdEtzcXNTeG9I?=
- =?utf-8?B?bmMvclpUeWo5ZGZXY2R5YTEvWnE0WWo2VWd2bXNLVWwxMWxDTmV6MkhpOG9D?=
- =?utf-8?B?U1VLRk5KdU5iK1Y1VUwraGNPRlMrQnpGMjhHcWgyTEUwdzdFWDFFa1ZvaVNE?=
- =?utf-8?B?OEZwb2tRemhKSk84a01mOVZIcEFZMHlJeGp6SkJScENyelpsQjU2Z0lyR0R1?=
- =?utf-8?B?R09XRUw2ZVFZT2NYdEd6bDUxWE9lUDJuOHdUM2dVRzJDUzc0Wk9tQVAyMURY?=
- =?utf-8?B?UUhGWmtjSDBtT0RremdXemptcGpxMzA2aWdkSUVjYzhXQnpweWVqRzE0T01x?=
- =?utf-8?B?bkt2bXh5Z0Izc2dwWDA1cUhYeldtTTNJbzZhVGNwQlUxekdLb1pMR3B0VVZo?=
- =?utf-8?B?TXFTOWh3WDZKZ3hZQ05aQThKWHh6QXdHL3EvL2w1Tk9weHphNmM2YUlEM2t6?=
- =?utf-8?B?b2tQZ2hYZmNnemVCeENIK0dNR25Ia0dON0szZzI4MnpEcXFQbjlkOHpnNDRE?=
- =?utf-8?B?bUlxVS9EZ2pDc1RNUDFQbm1SdXhHVFN1VjlBU09rdWZpTWx5TWhwOXRXSTZk?=
- =?utf-8?B?MWR3ZXZndDcxWlZveWxrb1hHNWwybnVqRUVtYk8zU1JQbFg1M1owVUhBMGty?=
- =?utf-8?B?ckwyMXVUcFRrRGtnL2sxNGNLTTI1YlcrQ1R1TUx2a2dXWTM4MlNBNHdsbzNS?=
- =?utf-8?B?dTBmdWtJMkpmdFVFbGw1Q29TdnZtaDNLS1l0ZzZMU3lmcHQ5aFY2VFFOVnl3?=
- =?utf-8?B?cFVQazhIUFdoRHhGc3dGa0tGZWFyZkhSVUNoQWVnZUlQUGFaU0xvSTRiM1Qz?=
- =?utf-8?B?dlp1RkV0R3loamhyaFoxN0tBVUU3UmlUeEVrZS9tZS8zMXIzcXBvNlpOa1cz?=
- =?utf-8?B?dUFJSlVSMjErZlJ0M1BYTXo3VEVlQkhZWEtFditXTDhPWFc1dzNRRnNDd3l0?=
- =?utf-8?B?MWVTTnVjaWlPTXlRTUMwaGd6aE9wUEtPM3J2cEN5RmFHY3ZFclFWRHlubkZZ?=
- =?utf-8?B?L2RScnhrYlh5N1JFajRYRWhSdU5COHppMTJRVkN5SWM3QlhCUDBvRTRRT0dr?=
- =?utf-8?B?RE95Qm5wd0RBV0FWVWtEcDJTOE55RjhoTmxHbDFzNHB2V3RqWmdxZFhybkZx?=
- =?utf-8?B?aDMzSHEvTlM3TEtFWFlLNElwSDc3T0lPa1Fyb2dZYUR2TWg0QUhlTG5kdWJi?=
- =?utf-8?B?ZkZQK29LYUljKzR2NHJyWFpGNTRFQXRIV1E2bnEzaVljMUxWNjdxQWRVU295?=
- =?utf-8?B?aTdlbUFvYmZ2b2xPMFJubXY3TUU3M3ROUnF0cHBXU2cwTjFVNlVqd2F2QitX?=
- =?utf-8?B?Y0lXYmRZbEpLZDFSVHBnTk02bklLRGpLNStSMGFwblg4cXpIS2VId243azlG?=
- =?utf-8?B?ZDJCY01uRkVENVJYWUlVVGRkL253Z1J0bmJOTnMyazQyTXJhNVp2WDduM1RF?=
- =?utf-8?Q?q/5JgrIoSsMvFO4c=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?VlhrbFhNd2s2ZVVsK2ZvcW53cmprODBxWnlHcFhneC9QNTlKOEFEQnptb002?=
+ =?utf-8?B?M3p0VldKeUM0bzF5VzNjbk44YjdzMTZ4RmNVS1lBb1ZSZXVha000ZHl3QXZY?=
+ =?utf-8?B?cHhGWWwxWkZHeEE5cWZ5VnlMb1g2RkZvbGxuMURmNkNaOUxreHVvTE1pd1Ur?=
+ =?utf-8?B?ZHdaY0k4K0lGcmFKQTNKM0REd3p3NnNwakc2WExvL2d0OEtZOFZBaW9IRUZ3?=
+ =?utf-8?B?VU81aWpyRzQ2dms5eUtjVlVhUXVsZTh5UUFobXlOTzd3SWZxdVgvVEN4c0JY?=
+ =?utf-8?B?NDM4SE1Ybys2VURXV0h0eHpBaHJxSEttaEJUVUcxS2xXNW9zazNBWHB3YVZM?=
+ =?utf-8?B?SG1ZY0UweTcwQmg4bW5zZ1FuSW5uaHhVM0QxVm1ubXFQNm53L3JlYXpDZHhJ?=
+ =?utf-8?B?OXVLSVBHRFF6cXdRVzJKa1QrKzBoYTg5RHhVVlUyYmc0VC9LZzQvOUx2aWRO?=
+ =?utf-8?B?RGNDeVRQNGp3bFZuTGtSejJ5L09kWnZ4WUE0c3lBMW9RRENPT3ZYd1pHVXJ2?=
+ =?utf-8?B?T3lvdlFsRWoyN1VMbXB2M1NIMlo3REFCL3l6QTNtZk0wd0dDMENCaEwreVlw?=
+ =?utf-8?B?dDVuZXQ4OHFSb0pyUFdCVnlwbzh6RFNsNDNtQUhyZFJVaHpKVHc4ZytSN0M2?=
+ =?utf-8?B?bXdYVzZvV3FxMURHL3NOS1FEa01XOXUvSFBxZnlKeVhMOGZDbjU1amQ4MS96?=
+ =?utf-8?B?d3JBdzNoRVd2VUt2VDg0QWF2NG5wTEJwSFNRRnN1bjQ3RGFLa0U3eEZnSFhG?=
+ =?utf-8?B?bFR5Yi84TXRWS1pEaUdZQXhnWFJ1bFpGYS9hcFBhd1ZuSm1mVnkwVktRV2ps?=
+ =?utf-8?B?bE9HZkhOU21CMjZ5WGZha0paR29QUzJDTW1oNHMrbFNWUElnZjBIUC9KWkpj?=
+ =?utf-8?B?OUhEL1QvSEp2OWpFY1AveDlIWGZFQmlKeGNkamZQTnU2ZFNGelBnQTBzbFhk?=
+ =?utf-8?B?V2grR2FycWhtc01CNlZCT1ROV0taV002eEhpV1Z0dkp4TDh2OWwxYzg0S2d4?=
+ =?utf-8?B?VjN0b0drZ1ZKWm1pbjJYQ0FCZkZMaTBIRGNQUno4QzlkWS81SXZVRndxcUt5?=
+ =?utf-8?B?TFVNQmFOSEFuNkpKQ3VpR3BCK0JNRzBKMkc0TE1NUHpnb21TRFhiL0Z2WXBn?=
+ =?utf-8?B?eXA3NkFlMWU2OWxtRzNzVmNHbGFkSGR2ZzNZYkNVUXVJbUFBUXoxRS8reERr?=
+ =?utf-8?B?NHNDRG12WGlWb21zcm1lRnRDUitDL01wdnNVRlNvRUtVNCtCakVIKzhDR2pl?=
+ =?utf-8?B?ekdhYUNOaTR4RmxnUkYwdDdPRkRuUituM1RCcEQvZFNhemIxcGwwaDJmKzZX?=
+ =?utf-8?B?WnVYUHNsdE9tUGJrK0tQakRlMVJId0Z3cmh0UU4vTW1BRzdjR1dsNXV6c0JS?=
+ =?utf-8?B?WUkwOS9RSFZCUjZRWnZ4Q1NJRlVzMjhnUTd2SzJmUFM3YitLOUJ2MDJ3K0hR?=
+ =?utf-8?B?VW9Ja2dxdmwxdEthNiszeCtnb25vY1dYVFdzUmJ5NG1wN2FvRXJxd2RWSkI5?=
+ =?utf-8?B?VEdvSFFvamF3UWVhSFpkdXg5U1QxSFEvSGZlUG56ckN5OXc2NStlQzVaQVQ1?=
+ =?utf-8?B?VEhZVVovNXNhWVpFa3F4RzFkVVVlS2xBU1MrZjc2aWZMTVdRYVdVOTZGcHBS?=
+ =?utf-8?B?UnFxc1VmUU5LVkxpTWZDVElST252ODNrQVEydGVEdE0wUW1TejI1OFBPRGdn?=
+ =?utf-8?B?eGNHNGs0bHM5RHJaclhHeC9aNTBoS2lxd0l5bmxFRnA2MjZ0MlhIZDB0Vkht?=
+ =?utf-8?B?aTVOSTdCZTVUMXIxRnREelV6OGprWUFFNkJVNURzL3pVU3cxQ1NIL0cxL0ZQ?=
+ =?utf-8?B?MjcwN2F0VUY4d1l3UkpoUG92cnRZZG9hVDJBOTJEbGovWk5xS1ZsVWx4bmtp?=
+ =?utf-8?B?eEhVdHVkUHN6aTRmNG1hNlNiRyt1eTcyTDR6REhRZlNDakR6eThwU01IT29N?=
+ =?utf-8?B?Qjhkd1AvZmwwcVFJU3QvOUdMQUpsSDNyU0llWkNuTnBYTCsydzR6RzNlYUxB?=
+ =?utf-8?B?eUlNRU9Ja2VxV21DbWdPUTR5c2owSXVYcFVCMXB1OE9jZTd5djJJRTQ3anZB?=
+ =?utf-8?B?WUdUZjBFSWRHb09YNWQrbFNTWXhQQVp1K1NpZWpHdmRBMWh6Zk54SldoVExN?=
+ =?utf-8?B?VXNEWFhHVFpCejBWTE1CdlExa2NGcDhUR1licFlQazVRTFp3a25CbzlMNjQ2?=
+ =?utf-8?B?UTN1MkhYM3pSdHdPL3J2dC94b2VZRXFmcXhPZm92WGFIVU94OEdjOUNpKzly?=
+ =?utf-8?B?SW9HbEZoaldQb1d6ODhNdXI4VWJHNzRwZlBidVJ2MDVDVUVzZXZzRmZ6SEFU?=
+ =?utf-8?B?dEdDb1ZkN05qVUlVb0RBUG90aStCd081S3NId1V4QXBtUHJBL3JrZXNqVVJR?=
+ =?utf-8?Q?Vq42blpqPmOOTrAw=3D?=
 X-OriginatorOrg: iopsys.eu
-X-MS-Exchange-CrossTenant-Network-Message-Id: 6d9b21db-7b1c-4640-9054-08deadb58726
+X-MS-Exchange-CrossTenant-Network-Message-Id: 3df215c5-115a-4b7a-c3ad-08deadb75391
 X-MS-Exchange-CrossTenant-AuthSource: DU2PR08MB10037.eurprd08.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 May 2026 10:27:10.3242 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 May 2026 10:40:02.7208 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8d891be1-7bce-4216-9a99-bee9de02ba58
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: IQShCWVyy3OZ58CVmj8oE1AX+EXSGC2E062IwbThc94D8FhC7tySO0R2E7xy82WaXThPsGKvizNiGtKdeocXfgd7N1i7gd5i31m+d9CL6x4=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA6PR08MB10417
+X-MS-Exchange-CrossTenant-UserPrincipalName: cflOil4aEDdSnlqJCjv8xaMZB4m6TR1wwUpelKH5wV+QdeVUgoitD0MEVARO8RGVsUFV0xp2rPotJnB7M0R+RsO8ct3DD9yp9Wn6mTTiSGE=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA6PR08MB10858
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -161,508 +162,150 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 5/7/26 01:31, David Lechner wrote:
+
+On 5/7/26 00:44, David Lechner wrote:
 > On 5/4/26 8:03 AM, Mikhail Kshevetskiy wrote:
->> This patch introduce shared Airoha pinctrl code.
+>> This patch adds U-Boot pin controller and gpio driver for Airoha AN7581 SoC.
 >>
 >> Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
 >> ---
->>  drivers/pinctrl/Kconfig                 |   1 +
->>  drivers/pinctrl/Makefile                |   1 +
->>  drivers/pinctrl/airoha/Kconfig          |  11 +
->>  drivers/pinctrl/airoha/Makefile         |   3 +
->>  drivers/pinctrl/airoha/airoha-common.h  | 512 ++++++++++++++
->>  drivers/pinctrl/airoha/pinctrl-airoha.c | 843 ++++++++++++++++++++++++
->>  6 files changed, 1371 insertions(+)
->>  create mode 100644 drivers/pinctrl/airoha/Kconfig
->>  create mode 100644 drivers/pinctrl/airoha/Makefile
->>  create mode 100644 drivers/pinctrl/airoha/airoha-common.h
->>  create mode 100644 drivers/pinctrl/airoha/pinctrl-airoha.c
-> I don't remember if I asked before...
->
-> Should we add a MAINTAINERS entry for this new directory?
-
-Good questions. Probably Markus Gothe or Benjamin Larsson are better
-maintainers candidates.
-
-Markus Gothe, Benjamin Larsson what do you think?
-
->
->> diff --git a/drivers/pinctrl/Kconfig b/drivers/pinctrl/Kconfig
->> index 578edbf8168..46a95a1ab6b 100644
->> --- a/drivers/pinctrl/Kconfig
->> +++ b/drivers/pinctrl/Kconfig
->> @@ -405,6 +405,7 @@ config SPL_PINCTRL_ZYNQMP
->>  
->>  endif
->>  
->> +source "drivers/pinctrl/airoha/Kconfig"
->>  source "drivers/pinctrl/broadcom/Kconfig"
->>  source "drivers/pinctrl/exynos/Kconfig"
->>  source "drivers/pinctrl/intel/Kconfig"
->> diff --git a/drivers/pinctrl/Makefile b/drivers/pinctrl/Makefile
->> index 29fb9b484d0..b03e838ab39 100644
->> --- a/drivers/pinctrl/Makefile
->> +++ b/drivers/pinctrl/Makefile
->> @@ -24,6 +24,7 @@ obj-$(CONFIG_PINCTRL_PIC32)	+= pinctrl_pic32.o
->>  obj-$(CONFIG_PINCTRL_EXYNOS)	+= exynos/
->>  obj-$(CONFIG_PINCTRL_K210)	+= pinctrl-k210.o
->>  obj-$(CONFIG_PINCTRL_MESON)	+= meson/
->> +obj-$(CONFIG_PINCTRL_AIROHA)	+= airoha/
-> I still think this could be better placed. It looks like there is
-> at leaset some attempt to put these in alphabetical order.
-will fix.
->
->>  obj-$(CONFIG_PINCTRL_MTK)	+= mediatek/
->>  obj-$(CONFIG_PINCTRL_MSCC)	+= mscc/
->>  obj-$(CONFIG_ARCH_MVEBU)	+= mvebu/
+>>  drivers/pinctrl/airoha/Kconfig          |    5 +
+>>  drivers/pinctrl/airoha/Makefile         |    2 +
+>>  drivers/pinctrl/airoha/pinctrl-an7581.c | 1074 +++++++++++++++++++++++
+>>  3 files changed, 1081 insertions(+)
+>>  create mode 100644 drivers/pinctrl/airoha/pinctrl-an7581.c
+>>
 >> diff --git a/drivers/pinctrl/airoha/Kconfig b/drivers/pinctrl/airoha/Kconfig
->> new file mode 100644
->> index 00000000000..eb87afbb374
->> --- /dev/null
+>> index eb87afbb374..986d23c2e3d 100644
+>> --- a/drivers/pinctrl/airoha/Kconfig
 >> +++ b/drivers/pinctrl/airoha/Kconfig
->> @@ -0,0 +1,11 @@
->> +# SPDX-License-Identifier: GPL-2.0-only
+>> @@ -9,3 +9,8 @@ config PINCTRL_AIROHA
+>>  	select REGMAP
+>>  	select SYSCON
+>>  	bool
 >> +
->> +config PINCTRL_AIROHA
->> +	depends on ARCH_AIROHA
->> +	select PINCTRL_FULL
->> +	select PINCTRL_GENERIC
->> +	select PINMUX
->> +	select PINCONF
->> +	select REGMAP
->> +	select SYSCON
->> +	bool
+>> +config PINCTRL_AIROHA_AN7581
+>> +	tristate "AN7581 pin controller and gpio driver"
+>> +	depends on TARGET_AN7581
+>> +	select PINCTRL_AIROHA
 >> diff --git a/drivers/pinctrl/airoha/Makefile b/drivers/pinctrl/airoha/Makefile
->> new file mode 100644
->> index 00000000000..a25b744dd7a
->> --- /dev/null
+>> index a25b744dd7a..909bd9a04d9 100644
+>> --- a/drivers/pinctrl/airoha/Makefile
 >> +++ b/drivers/pinctrl/airoha/Makefile
->> @@ -0,0 +1,3 @@
->> +# SPDX-License-Identifier: GPL-2.0
+>> @@ -1,3 +1,5 @@
+>>  # SPDX-License-Identifier: GPL-2.0
+>>  
+>>  obj-$(CONFIG_PINCTRL_AIROHA)		+= pinctrl-airoha.o
 >> +
->> +obj-$(CONFIG_PINCTRL_AIROHA)		+= pinctrl-airoha.o
->> diff --git a/drivers/pinctrl/airoha/airoha-common.h b/drivers/pinctrl/airoha/airoha-common.h
+>> +obj-$(CONFIG_PINCTRL_AIROHA_AN7581)	+= pinctrl-an7581.o
+>> diff --git a/drivers/pinctrl/airoha/pinctrl-an7581.c b/drivers/pinctrl/airoha/pinctrl-an7581.c
 >> new file mode 100644
->> index 00000000000..af4964bf25d
+>> index 00000000000..2505818251c
 >> --- /dev/null
->> +++ b/drivers/pinctrl/airoha/airoha-common.h
->> @@ -0,0 +1,512 @@
->> +/* SPDX-License-Identifier: GPL-2.0-only */
->> +#ifndef __AIROHA_COMMON_HEADER__
->> +#define __AIROHA_COMMON_HEADER__
->> +
-> ...
->
->> +static const u32 gpio_data_regs[] = {
->> +	REG_GPIO_DATA,
->> +	REG_GPIO_DATA1
->> +};
->> +
->> +static const u32 gpio_out_regs[] = {
->> +	REG_GPIO_OE,
->> +	REG_GPIO_OE1
->> +};
->> +
->> +static const u32 gpio_dir_regs[] = {
->> +	REG_GPIO_CTRL,
->> +	REG_GPIO_CTRL1,
->> +	REG_GPIO_CTRL2,
->> +	REG_GPIO_CTRL3
->> +};
->> +
->> +static const u32 irq_status_regs[] = {
->> +	REG_GPIO_INT,
->> +	REG_GPIO_INT1
->> +};
->> +
->> +static const u32 irq_level_regs[] = {
->> +	REG_GPIO_INT_LEVEL,
->> +	REG_GPIO_INT_LEVEL1,
->> +	REG_GPIO_INT_LEVEL2,
->> +	REG_GPIO_INT_LEVEL3
->> +};
->> +
->> +static const u32 irq_edge_regs[] = {
->> +	REG_GPIO_INT_EDGE,
->> +	REG_GPIO_INT_EDGE1,
->> +	REG_GPIO_INT_EDGE2,
->> +	REG_GPIO_INT_EDGE3
->> +};
-> Putting these arrays in the header isn't a good idea. Each compile
-> unit (C file) that includes this header will have them repeated. It
-> looks like they are only used in pinctrl-arioha.c anyway, so they
-> should should just be moved there.
-will fix
->
->> diff --git a/drivers/pinctrl/airoha/pinctrl-airoha.c b/drivers/pinctrl/airoha/pinctrl-airoha.c
->> new file mode 100644
->> index 00000000000..11830c44612
->> --- /dev/null
->> +++ b/drivers/pinctrl/airoha/pinctrl-airoha.c
->> @@ -0,0 +1,843 @@
+>> +++ b/drivers/pinctrl/airoha/pinctrl-an7581.c
+>> @@ -0,0 +1,1074 @@
 >> +// SPDX-License-Identifier: GPL-2.0-only
 >> +/*
 >> + * Author: Lorenzo Bianconi <lorenzo@kernel.org>
 >> + * Author: Benjamin Larsson <benjamin.larsson@genexis.eu>
 >> + * Author: Markus Gothe <markus.gothe@genexis.eu>
->> + * Author: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
 >> + */
->> +#include <dm.h>
->> +#include <dm/device_compat.h>
->> +#include <dm/device-internal.h>
->> +#include <dm/lists.h>
->> +#include <dm/ofnode.h>
->> +#include <asm-generic/gpio.h>
->> +#include <dt-bindings/pinctrl/mt65xx.h>
->> +#include <regmap.h>
->> +
->> +#include <syscon.h>
->> +#include <asm/arch/scu-regmap.h>
-> Not sure I understand the organization of the includes
-> above. Why the blank line between regmap and syscon? Why
-> not everything in alphabetical order?
-No special ordering. Just a kind of ecstatic.
-Will fix a bit.
->> +
 >> +#include "airoha-common.h"
 >> +
->> +
->> +static int pin_in_group(unsigned int pin, const struct pingroup *grp)
->> +{
->> +	for (int i = 0; i < grp->npins; i++) {
->> +		if (grp->pins[i] == pin)
->> +			return 1;
->> +	}
->> +
->> +	return 0;
->> +}
->> +
->> +static int pin_to_gpio(struct airoha_pinctrl *pinctrl, unsigned int pin)
->> +{
->> +	struct airoha_pinctrl_match_data *data = pinctrl->data;
->> +
->> +	if ((pin < data->gpio_offs) ||
->> +	    (pin > data->gpio_offs + data->gpio_pin_cnt))
-> Should this be >= for the upper bound check?
+> The en7581_ prefix doesn't match the file name or Kconfig. Did you
+> mean to use an7581_ everywhere?
+Good question. EN7581 is the initial name of the chip. The rename to
+AN7581 was caused by renaming of Econet company to Airoha. There are a
+lot of places where en7581_ prefix is used. Also this prefix used in the
+original linux driver, so I prefer to keep it as is.
 >
-> Also has unnecessary ().
-nice catch, will fix
+>> +static const int en7581_pon_pins[] = { 49, 50, 51, 52, 53, 54 };
+>> +static const int en7581_pon_tod_1pps_pins[] = { 46 };
+>> +static const int en7581_gsw_tod_1pps_pins[] = { 46 };
+>> +static const int en7581_sipo_pins[] = { 16, 17 };
+>> +static const int en7581_sipo_rclk_pins[] = { 16, 17, 43 };
+>> +static const int en7581_mdio_pins[] = { 14, 15 };
+>> +static const int en7581_uart2_pins[] = { 48, 55 };
+>> +static const int en7581_uart2_cts_rts_pins[] = { 46, 47 };
+>> +static const int en7581_hsuart_pins[] = { 28, 29 };
+>> +static const int en7581_hsuart_cts_rts_pins[] = { 26, 27 };
+>> +static const int en7581_uart4_pins[] = { 38, 39 };
+>> +static const int en7581_uart5_pins[] = { 18, 19 };
+>> +static const int en7581_i2c0_pins[] = { 2, 3 };
+>> +static const int en7581_i2c1_pins[] = { 14, 15 };
+>> +static const int en7581_jtag_udi_pins[] = { 16, 17, 18, 19, 20 };
+>> +static const int en7581_jtag_dfd_pins[] = { 16, 17, 18, 19, 20 };
+>> +static const int en7581_i2s_pins[] = { 26, 27, 28, 29 };
+>> +static const int en7581_pcm1_pins[] = { 22, 23, 24, 25 };
+>> +static const int en7581_pcm2_pins[] = { 18, 19, 20, 21 };
+>> +static const int en7581_spi_quad_pins[] = { 32, 33 };
+>> +static const int en7581_spi_pins[] = { 4, 5, 6, 7 };
+>> +static const int en7581_spi_cs1_pins[] = { 34 };
+>> +static const int en7581_pcm_spi_pins[] = { 18, 19, 20, 21, 22, 23, 24, 25 };
+>> +static const int en7581_pcm_spi_int_pins[] = { 14 };
+>> +static const int en7581_pcm_spi_rst_pins[] = { 15 };
+>> +static const int en7581_pcm_spi_cs1_pins[] = { 43 };
+>> +static const int en7581_pcm_spi_cs2_pins[] = { 40 };
+>> +static const int en7581_pcm_spi_cs2_p128_pins[] = { 40 };
+>> +static const int en7581_pcm_spi_cs2_p156_pins[] = { 40 };
+>> +static const int en7581_pcm_spi_cs3_pins[] = { 41 };
+>> +static const int en7581_pcm_spi_cs4_pins[] = { 42 };
+>> +static const int en7581_emmc_pins[] = {
+>> +	4, 5, 6, 30, 31, 32, 33, 34, 35, 36, 37
+>> +};
+>> +static const int en7581_pnand_pins[] = {
+>> +	4, 5, 6, 7, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42
+>> +};
+>> +static const int en7581_gpio0_pins[] = { 13 };
+>> +static const int en7581_gpio1_pins[] = { 14 };
+>> +static const int en7581_gpio2_pins[] = { 15 };
+>> +static const int en7581_gpio3_pins[] = { 16 };
+>> +static const int en7581_gpio4_pins[] = { 17 };
+>> +static const int en7581_gpio5_pins[] = { 18 };
+>> +static const int en7581_gpio6_pins[] = { 19 };
+>> +static const int en7581_gpio7_pins[] = { 20 };
+>> +static const int en7581_gpio8_pins[] = { 21 };
+>> +static const int en7581_gpio9_pins[] = { 22 };
+>> +static const int en7581_gpio10_pins[] = { 23 };
+>> +static const int en7581_gpio11_pins[] = { 24 };
+>> +static const int en7581_gpio12_pins[] = { 25 };
+>> +static const int en7581_gpio13_pins[] = { 26 };
+>> +static const int en7581_gpio14_pins[] = { 27 };
+>> +static const int en7581_gpio15_pins[] = { 28 };
+>> +static const int en7581_gpio16_pins[] = { 29 };
+>> +static const int en7581_gpio17_pins[] = { 30 };
+>> +static const int en7581_gpio18_pins[] = { 31 };
+>> +static const int en7581_gpio19_pins[] = { 32 };
+>> +static const int en7581_gpio20_pins[] = { 33 };
+>> +static const int en7581_gpio21_pins[] = { 34 };
+>> +static const int en7581_gpio22_pins[] = { 35 };
+>> +static const int en7581_gpio23_pins[] = { 36 };
+>> +static const int en7581_gpio24_pins[] = { 37 };
+>> +static const int en7581_gpio25_pins[] = { 38 };
+>> +static const int en7581_gpio26_pins[] = { 39 };
+>> +static const int en7581_gpio27_pins[] = { 40 };
+>> +static const int en7581_gpio28_pins[] = { 41 };
+>> +static const int en7581_gpio29_pins[] = { 42 };
+>> +static const int en7581_gpio30_pins[] = { 43 };
+>> +static const int en7581_gpio31_pins[] = { 44 };
+> No gpio32?
+The bug of original linux driver, will fix
 >
->> +		return -EINVAL;
+>> +static const int en7581_gpio33_pins[] = { 46 };
+>> +static const int en7581_gpio34_pins[] = { 47 };
+>> +static const int en7581_gpio35_pins[] = { 48 };
+>> +static const int en7581_gpio36_pins[] = { 49 };
+>> +static const int en7581_gpio37_pins[] = { 50 };
+>> +static const int en7581_gpio38_pins[] = { 51 };
+>> +static const int en7581_gpio39_pins[] = { 52 };
+>> +static const int en7581_gpio40_pins[] = { 53 };
+>> +static const int en7581_gpio41_pins[] = { 54 };
+>> +static const int en7581_gpio42_pins[] = { 55 };
+>> +static const int en7581_gpio43_pins[] = { 56 };
+>> +static const int en7581_gpio44_pins[] = { 57 };
+>> +static const int en7581_gpio45_pins[] = { 58 };
+>> +static const int en7581_gpio46_pins[] = { 59 };
+>> +static const int en7581_pcie_reset0_pins[] = { 61 };
+>> +static const int en7581_pcie_reset1_pins[] = { 62 };
+>> +static const int en7581_pcie_reset2_pins[] = { 63 };
 >> +
->> +	return pin - data->gpio_offs;
->> +}
->> +
->
->
->> +static int airoha_pinctrl_get_conf(struct airoha_pinctrl *pinctrl,
->> +				   enum airoha_pinctrl_confs_type conf_type,
->> +				   int pin, u32 *val)
->> +{
->> +	const struct airoha_pinctrl_confs_info *confs_info;
->> +	const struct airoha_pinctrl_reg *reg;
->> +
->> +	confs_info = &pinctrl->data->confs_info[conf_type];
->> +
->> +	reg = airoha_pinctrl_get_conf_reg(confs_info->confs,
->> +					  confs_info->num_confs,
->> +					  pin);
->> +	if (!reg)
->> +		return -EINVAL;
->> +
->> +	if (regmap_read(pinctrl->chip_scu, reg->offset, val))
->> +		return -EINVAL;
->> +
->> +	*val = (*val & reg->mask) >> __ffs(reg->mask);
-> field_get()?
-will fix
->
->> +
->> +	return 0;
->> +}
->> +
->> +static int airoha_pinctrl_set_conf(struct airoha_pinctrl *pinctrl,
->> +				   enum airoha_pinctrl_confs_type conf_type,
->> +				   int pin, u32 val)
->> +{
->> +	const struct airoha_pinctrl_confs_info *confs_info;
->> +	const struct airoha_pinctrl_reg *reg = NULL;
->> +
->> +	confs_info = &pinctrl->data->confs_info[conf_type];
->> +
->> +	reg = airoha_pinctrl_get_conf_reg(confs_info->confs,
->> +					  confs_info->num_confs,
->> +					  pin);
->> +	if (!reg)
->> +		return -EINVAL;
->> +
->> +	if (regmap_update_bits(pinctrl->chip_scu, reg->offset, reg->mask,
->> +			       val << __ffs(reg->mask)))
-> field_prep()?
-will fix
->
->> +		return -EINVAL;
->> +
->> +	return 0;
->> +}
->> +
->> +static int airoha_pinconf_get_direction(struct airoha_pinctrl *pinctrl, u32 p)
->> +{
->> +	int gpio;
->> +
->> +	gpio = pin_to_gpio(pinctrl, p);
->> +	if (gpio < 0)
->> +		return gpio;
->> +
->> +	return airoha_gpio_get_direction(pinctrl, gpio);
->> +}
->> +
->> +static int airoha_pinconf_get(struct airoha_pinctrl *pinctrl,
->> +			      unsigned int pin, unsigned long *config)
->> +{
->> +	enum pin_config_param param = pinconf_to_config_param(*config);
->> +	u32 arg;
->> +
->> +	switch (param) {
->> +	case PIN_CONFIG_BIAS_PULL_DOWN:
->> +	case PIN_CONFIG_BIAS_DISABLE:
->> +	case PIN_CONFIG_BIAS_PULL_UP: {
->> +		u32 pull_up, pull_down;
->> +
->> +		if (airoha_pinctrl_get_pullup_conf(pinctrl, pin, &pull_up) ||
->> +		    airoha_pinctrl_get_pulldown_conf(pinctrl, pin, &pull_down))
->> +			return -EINVAL;
->> +
->> +		if (param == PIN_CONFIG_BIAS_PULL_UP &&
->> +		    !(pull_up && !pull_down))
->> +			return -EINVAL;
->> +		else if (param == PIN_CONFIG_BIAS_PULL_DOWN &&
->> +			 !(pull_down && !pull_up))
->> +			return -EINVAL;
->> +		else if (pull_up || pull_down)
->> +			return -EINVAL;
->> +
->> +		arg = 1;
->> +		break;
->> +	}
->> +	case PIN_CONFIG_DRIVE_STRENGTH: {
->> +		u32 e2, e4;
->> +
->> +		if (airoha_pinctrl_get_drive_e2_conf(pinctrl, pin, &e2) ||
->> +		    airoha_pinctrl_get_drive_e4_conf(pinctrl, pin, &e4))
->> +			return -EINVAL;
->> +
->> +		arg = e4 << 1 | e2;
->> +		break;
->> +	}
->> +	case PIN_CONFIG_DRIVE_OPEN_DRAIN:
->> +		if (airoha_pinctrl_get_pcie_rst_od_conf(pinctrl, pin, &arg))
->> +			return -EINVAL;
->> +		break;
->> +	case PIN_CONFIG_OUTPUT_ENABLE:
->> +	case PIN_CONFIG_INPUT_ENABLE:
->> +		arg = airoha_pinconf_get_direction(pinctrl, pin);
->> +		if (arg != param)
-> How does this work? It looks like airoha_pinconf_get_direction()
-> returns enum gpio_func_t or negative error code.
->
-> Should we check for error first before comparing?
->
-> Do we need some kind of conversion between enum gpio_func_t and
-> enum pin_config_param in airoha_pinconf_get_direction()?
-The bug caused by linux driver porting, will fix.
->> +			return -EINVAL;
->> +
->> +		arg = 1;
->> +		break;
->> +	default:
->> +		return -EOPNOTSUPP;
->> +	}
->> +
->> +	*config = pinconf_to_config_packed(param, arg);
->> +
->> +	return 0;
->> +}
->> +
->> +static int airoha_pinconf_set_pin_value(struct airoha_pinctrl *pinctrl,
->> +					unsigned int p, bool value)
->> +{
->> +	int gpio;
->> +
->> +	gpio = pin_to_gpio(pinctrl, p);
->> +	if (gpio < 0)
->> +		return gpio;
->> +
->> +	return airoha_gpio_set(pinctrl, gpio, value);
->> +}
->> +
->> +static int airoha_pinconf_set(struct airoha_pinctrl *pinctrl,
->> +			      unsigned int pin, unsigned long *configs,
->> +			      unsigned int num_configs)
->> +{
->> +	int i;
->> +
->> +	for (i = 0; i < num_configs; i++) {
->> +		u32 param = pinconf_to_config_param(configs[i]);
->> +		u32 arg = pinconf_to_config_argument(configs[i]);
->> +
-> In all of the cases below, I would expect that we should be checking
-> the return value for error. Or add a comment on why it is safe to ignore
-> the return value if that is the case.
-will fix
->> +		switch (param) {
->> +		case PIN_CONFIG_BIAS_DISABLE:
->> +			airoha_pinctrl_set_pulldown_conf(pinctrl, pin, 0);
->> +			airoha_pinctrl_set_pullup_conf(pinctrl, pin, 0);
->> +			break;
->> +		case PIN_CONFIG_BIAS_PULL_UP:
->> +			airoha_pinctrl_set_pulldown_conf(pinctrl, pin, 0);
->> +			airoha_pinctrl_set_pullup_conf(pinctrl, pin, 1);
->> +			break;
->> +		case PIN_CONFIG_BIAS_PULL_DOWN:
->> +			airoha_pinctrl_set_pulldown_conf(pinctrl, pin, 1);
->> +			airoha_pinctrl_set_pullup_conf(pinctrl, pin, 0);
->> +			break;
->> +		case PIN_CONFIG_DRIVE_STRENGTH: {
->> +			u32 e2 = 0, e4 = 0;
->> +
->> +			switch (arg) {
->> +			case MTK_DRIVE_2mA:
->> +				break;
->> +			case MTK_DRIVE_4mA:
->> +				e2 = 1;
->> +				break;
->> +			case MTK_DRIVE_6mA:
->> +				e4 = 1;
->> +				break;
->> +			case MTK_DRIVE_8mA:
->> +				e2 = 1;
->> +				e4 = 1;
->> +				break;
->> +			default:
->> +				return -EINVAL;
->> +			}
->> +
->> +			airoha_pinctrl_set_drive_e2_conf(pinctrl, pin, e2);
->> +			airoha_pinctrl_set_drive_e4_conf(pinctrl, pin, e4);
->> +			break;
->> +		}
->> +		case PIN_CONFIG_DRIVE_OPEN_DRAIN:
->> +			airoha_pinctrl_set_pcie_rst_od_conf(pinctrl, pin, !!arg);
->> +			break;
->> +		case PIN_CONFIG_OUTPUT_ENABLE:
->> +		case PIN_CONFIG_INPUT_ENABLE:
->> +		case PIN_CONFIG_OUTPUT: {
->> +			bool input = param == PIN_CONFIG_INPUT_ENABLE;
->> +			int err;
->> +
->> +			err = airoha_pinmux_set_direction(pinctrl, pin, input);
->> +			if (err)
->> +				return err;
->> +
->> +			if (param == PIN_CONFIG_OUTPUT) {
->> +				err = airoha_pinconf_set_pin_value(pinctrl,
->> +								   pin, !!arg);
->> +				if (err)
->> +					return err;
->> +			}
->> +
->> +			break;
->> +		}
->> +		default:
->> +			return -EOPNOTSUPP;
->> +		}
->> +	}
->> +
->> +	return 0;
->> +}
->> +
->
->> +/**************************
->> + * pinctrl driver interface
->> + **************************/
->> +static int airoha_get_pins_count(struct udevice *dev)
->> +{
->> +	struct airoha_pinctrl *pinctrl = dev_get_priv(dev);
->> +
->> +	return pinctrl->data->num_pins;
->> +}
->> +
->> +static const char *airoha_get_pin_name(struct udevice *dev, unsigned selector)
-> Inconsitent use of unsigned. Preferred is unsigned int. 
-will fix
->
->> +{
->> +	struct airoha_pinctrl *pinctrl = dev_get_priv(dev);
->> +
->> +	return pinctrl->data->pins[selector].name;
->> +}
->> +
->
->> +static int airoha_pinconf_set_handler(struct udevice *dev, unsigned pin_selector,
->> +				      unsigned param, unsigned argument)
->> +{
->> +	struct airoha_pinctrl *pinctrl = dev_get_priv(dev);
->> +	unsigned long configs[1] = { pinconf_to_config_packed(param, argument) };
->> +	unsigned int pin = pinctrl->data->pins[pin_selector].number;
->> +
->> +	dev_dbg(dev, "enabling %s=%d property for pin %s\n",
->> +		airoha_pinconf_params[param].property, argument,
-> This will result in out of bounds access. param is not the index but rather
-> a field in the struct in the array.
->
-> Easiset would be to just print numeric value of param, otherwise we need a
-> lookup function.
-yeah, will create a lookup function.
->> +		airoha_get_pin_name(dev, pin_selector));
->> +
->> +	return airoha_pinconf_set(pinctrl, pin, configs,
->> +				  ARRAY_SIZE(configs));
->> +}
->> +
->> +static int airoha_pinconf_group_set_handler(struct udevice *dev, unsigned group_selector,
->> +					    unsigned param, unsigned argument)
->> +{
->> +	struct airoha_pinctrl *pinctrl = dev_get_priv(dev);
->> +	unsigned long configs[1] = { pinconf_to_config_packed(param, argument) };
->> +
->> +	dev_dbg(dev, "enabling %s=%d property for pin group %s\n",
->> +		airoha_pinconf_params[param].property, argument,
-> ditto
->
->> +		airoha_get_group_name(dev, group_selector));
->> +
->> +	return airoha_pinconf_group_set(pinctrl, group_selector,
->> +					configs, ARRAY_SIZE(configs));
->> +}
->> +
->> +static int airoha_get_pin_muxing(struct udevice *dev, unsigned int selector,
->> +				 char *buf, int size)
->> +{
->> +	struct airoha_pinctrl *pinctrl = dev_get_priv(dev);
->> +	struct airoha_pinctrl_match_data *data = pinctrl->data;
->> +	const char *name, *type;
->> +	int ret, gpio, found = 0;
->> +	unsigned long config;
->> +	unsigned int param, pin;
->> +	u32 val;
->> +
->> +	pin = data->pins[selector].number;
->> +	for (int i = 0; i < data->num_grps; i++) {
->> +		if (!pin_in_group(pin, &data->grps[i]))
->> +			continue;
->> +
->> +		name = data->grps[i].name;
->> +		for (int j = 0; j < data->num_funcs; j++) {
->> +			if (!func_grp_active(pinctrl, &data->funcs[j], name))
->> +				continue;
->> +
->> +			ret = snprintf(buf, size, "%s(%s)",
->> +				       data->funcs[j].desc.name, name);
-> Should use scnprintf(). snprintf() returns the number that would have been
-> written, which can be larger than number actually written.
->
-> Same applies elsewhere in this patch.
->
-will fix
