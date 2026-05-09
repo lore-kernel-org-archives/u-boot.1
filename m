@@ -4,77 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6A3DCD3445
-	for <u-boot@archiver.kernel.org>; Sat,  9 May 2026 15:14:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4799CCD3447
+	for <u-boot@archiver.kernel.org>; Sat,  9 May 2026 15:14:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BB71984D80;
-	Sat,  9 May 2026 17:13:26 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0470B84D74;
+	Sat,  9 May 2026 17:13:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="dVvBmV5q";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="bPZ6RmSb";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="kv3+z/em";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="f66lgyvF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D72DE84D78; Sat,  9 May 2026 17:13:25 +0200 (CEST)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
- [IPv6:2001:67c:2050:0:465::102])
+ id 09F2084D8D; Sat,  9 May 2026 17:13:27 +0200 (CEST)
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 085C984CC7
- for <u-boot@lists.denx.de>; Sat,  9 May 2026 17:13:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2468C84D23
+ for <u-boot@lists.denx.de>; Sat,  9 May 2026 17:13:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
+Received: from smtp102.mailbox.org (smtp102.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::102])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4gCTyW3p3Rz9v5y;
- Sat,  9 May 2026 17:13:23 +0200 (CEST)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4gCTyX4rtHz9stw;
+ Sat,  9 May 2026 17:13:24 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1778339604;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=Sh8MdegUdLJI4Wl5aiPuhyFlO5wC8K+cY7ug8b3UeUk=;
+ b=kv3+z/emCgqW9YNdNBCUIdW7qLV12KnvnIZgdB+PjZyxbHimrTNfNZX+TIqm4P2DTpPHbO
+ 1hgfcgqC2xthBf3+lhdAblnTvsrJGYUPvBn3T8EZPeXjO6mSCMdJ8+3pzC/EmW545V1nAR
+ Z1m9GN8COff9DhTC0mg4WLyyZJpLOMFMEp9aKhimIr2uyBXSTgm+8hP/ftSk0rak1zGYwP
+ LwfuTn0sXPi2emVTPR0jqe2xm0p+zeFCpq+sB26+q1JLIrsbn+7Z7byosdoMHQSOU68Oqe
+ 3ntwqf0XmtBj4dilTRDW2eN0z607qN8mfu7GI8GYspSPPfs7cov3TRg6X6p1mQ==
+Authentication-Results: outgoing_mbo_mout;
+ dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=f66lgyvF;
+ spf=pass (outgoing_mbo_mout: domain of marek.vasut+renesas@mailbox.org
+ designates 2001:67c:2050:b231:465::102 as permitted sender)
+ smtp.mailfrom=marek.vasut+renesas@mailbox.org
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
  s=mail20150812; t=1778339603;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=UPCNT571Knc9H3DqmbeJ0UadBlH5wptlI7oMUiQgL7w=;
- b=dVvBmV5qD1s3EPK1iyn/lWssozLiKKqG4VphPrZXq6XeqX4VjrSn0LPGydWTd+aDhJnGbe
- y6HjyjTTIxc574h2wmenmENdJO9C5uAOyEPr5RMHDvqKuh2ukBR5LBQViWGopk70Ja46mE
- tPDfK58wwXbtjb0h3+D6igg79z+znbVWb5RmAKde1LMmsB8gTnycoQ+S7b2NmT+NJI2/wK
- X8+gwZmeSnr24+sf3pCRyO5onxUSMmCKXszLTOOJcf9aGIt5TRV9Sk0PXXe9u2t0VQO+St
- QT571CPaAgva+yOdo5A8xdfYmfYHDJ51Zx6y+ikY+P0QwicXS6AdgNCVHHEUiQ==
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1778339601;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=UPCNT571Knc9H3DqmbeJ0UadBlH5wptlI7oMUiQgL7w=;
- b=bPZ6RmSbSbgQVdhW9mKjvZDVu6nBu4MrTo4v8Rfbuwt1hiTYFWnwANZwGwT4H6N5iOXSf0
- dMZBz4hG8TYXqVZbMN3YrQfb5gBoBCalmjLZxQvy82qNNio9N5A5zq2jh62hAw+OgjNLnb
- i2WqE0bnRz4P9+M1mfMc81WtfiwvFeD7hMiMaIHYSJxUQlFxoVxDQeLfXlLrwQiqJZqR/g
- zLIIXA9puUVC/n/XqldNgpsD7c3Y11uewejUvWiAIz/b//0g08IGbSwlSOtYX6cEWRHch2
- YQnIyGqyv94dVyuFGXQH7YFTCv0GAcJA/XqGE/kNXi5miBrUEffmfHPfM5+5ug==
+ bh=Sh8MdegUdLJI4Wl5aiPuhyFlO5wC8K+cY7ug8b3UeUk=;
+ b=f66lgyvFndDZGtr4A/fnSmDR9ZFJd7n5a2Iw4jQ5+W8r8aLWKxBsZSlsE1PTxMXsgnHgbD
+ wRRELCstMTJCEN66n64btERGOAQ4FRDVRfr9jK4ZI6/3d7HwbRi1v9HaFK43ggsDKItknT
+ a9ZYpEhyQFaIE1/XeNovMBfv/LFOQii96uXgvMa/0Tl1jRcUe2BcUlNvY6owe/m1JUAt/G
+ PVKnDzhdQMvi9qaR9jIj3WpUXdbQRqBXUqREr0/yn4WbvATuf08pdeAag2aw+6eJW5zMoM
+ ejX8tTAT0sPWyEjprb6W84cFfIcl5uqNpx95CLY/UzeaOKMZ/0fzVMrrNKraeQ==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Chunfeng Yun <chunfeng.yun@mediatek.com>,
- David Lechner <dlechner@baylibre.com>,
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- Igor Belwon <igor.belwon@mentallysanemainliners.org>,
- Julien Stephan <jstephan@baylibre.com>, Ryder Lee <ryder.lee@mediatek.com>,
- Tom Rini <trini@konsulko.com>, Weijie Gao <weijie.gao@mediatek.com>
-Subject: [PATCH 06/14] reset: mediatek: Staticize and constify driver ops
-Date: Sat,  9 May 2026 17:12:29 +0200
-Message-ID: <20260509151308.23067-6-marek.vasut+renesas@mailbox.org>
+ Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>,
+ u-boot-amlogic@groups.io
+Subject: [PATCH 07/14] reset: meson: Staticize and constify driver ops
+Date: Sat,  9 May 2026 17:12:30 +0200
+Message-ID: <20260509151308.23067-7-marek.vasut+renesas@mailbox.org>
 In-Reply-To: <20260509151308.23067-1-marek.vasut+renesas@mailbox.org>
 References: <20260509151308.23067-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: a0351ec9acb52ac37de
-X-MBO-RS-META: o3mtanbrrspmhba9zz677mez7e6s8z6d
+X-MBO-RS-META: mfcmcp3jtr7yi4gf58zka5eytcp85uan
+X-MBO-RS-ID: 029d36f02eb3cee1daf
+X-Rspamd-Queue-Id: 4gCTyX4rtHz9stw
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,32 +98,27 @@ from outside of this driver and is not going to be modified at runtime.
 
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
-Cc: Chunfeng Yun <chunfeng.yun@mediatek.com>
-Cc: David Lechner <dlechner@baylibre.com>
-Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>
-Cc: Igor Belwon <igor.belwon@mentallysanemainliners.org>
-Cc: Julien Stephan <jstephan@baylibre.com>
-Cc: Ryder Lee <ryder.lee@mediatek.com>
+Cc: Neil Armstrong <neil.armstrong@linaro.org>
 Cc: Tom Rini <trini@konsulko.com>
-Cc: Weijie Gao <weijie.gao@mediatek.com>
+Cc: u-boot-amlogic@groups.io
 Cc: u-boot@lists.denx.de
 ---
- drivers/reset/reset-mediatek.c | 2 +-
+ drivers/reset/reset-meson.c | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/reset/reset-mediatek.c b/drivers/reset/reset-mediatek.c
-index 4b3afab92ea..66bcf7c29b6 100644
---- a/drivers/reset/reset-mediatek.c
-+++ b/drivers/reset/reset-mediatek.c
-@@ -47,7 +47,7 @@ static int mediatek_reset_deassert(struct reset_ctl *reset_ctl)
- 		priv->regofs + ((id / 32) << 2), BIT(id % 32), 0);
+diff --git a/drivers/reset/reset-meson.c b/drivers/reset/reset-meson.c
+index 6337cdaaffa..8c27563ce23 100644
+--- a/drivers/reset/reset-meson.c
++++ b/drivers/reset/reset-meson.c
+@@ -66,7 +66,7 @@ static int meson_reset_deassert(struct reset_ctl *reset_ctl)
+ 	return meson_reset_level(reset_ctl, false);
  }
  
--struct reset_ops mediatek_reset_ops = {
-+static const struct reset_ops mediatek_reset_ops = {
- 	.rst_assert = mediatek_reset_assert,
- 	.rst_deassert = mediatek_reset_deassert,
- };
+-struct reset_ops meson_reset_ops = {
++static const struct reset_ops meson_reset_ops = {
+ 	.request = meson_reset_request,
+ 	.rst_assert = meson_reset_assert,
+ 	.rst_deassert = meson_reset_deassert,
 -- 
 2.53.0
 
