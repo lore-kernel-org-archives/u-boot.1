@@ -4,96 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9CA9FCD3447
-	for <u-boot@archiver.kernel.org>; Sat,  9 May 2026 16:47:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7230CCD3447
+	for <u-boot@archiver.kernel.org>; Sat,  9 May 2026 16:47:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9F2F584CF2;
-	Sat,  9 May 2026 18:47:11 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id DCDD784CF2;
+	Sat,  9 May 2026 18:47:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="YtgdCusG";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ZwBnwAXa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 74F7184CF4; Sat,  9 May 2026 18:47:10 +0200 (CEST)
-Received: from mail-dy1-x1334.google.com (mail-dy1-x1334.google.com
- [IPv6:2607:f8b0:4864:20::1334])
+ id 3C71984D68; Sat,  9 May 2026 18:47:43 +0200 (CEST)
+Received: from mail-dy1-x132f.google.com (mail-dy1-x132f.google.com
+ [IPv6:2607:f8b0:4864:20::132f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 48AA884CEC
- for <u-boot@lists.denx.de>; Sat,  9 May 2026 18:47:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 26FB184CEC
+ for <u-boot@lists.denx.de>; Sat,  9 May 2026 18:47:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-dy1-x1334.google.com with SMTP id
- 5a478bee46e88-2f7020a928eso4083934eec.1
- for <u-boot@lists.denx.de>; Sat, 09 May 2026 09:47:08 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1778345226; cv=none;
+Received: by mail-dy1-x132f.google.com with SMTP id
+ 5a478bee46e88-2f30a4601bbso3184482eec.1
+ for <u-boot@lists.denx.de>; Sat, 09 May 2026 09:47:41 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1778345259; cv=none;
  d=google.com; s=arc-20240605;
- b=Ye/fjM9NQiKtQBMTo2wV2dQP/YZwtdrUYgd8fDXDyRfThFDxPzTAS0QJXCHctXJfxW
- KkOeax32P+fBzFgOWk7ALa0/u19ppHdEH1ZyaK1r0QL2NYr+ZgNN1QDv3twRepn6IE1y
- 77vmngtUkPLYlNSCYxIOxMVd+uKCh09/3iwJEiSspHzB5cAC6n/BRRv3H0KH9UBfcJLx
- 1SqfaZhDCGu41NaM6Z9fVSKhC/kIcYPOrewv+Ih7j6k/1yNrFs/WOsEhpZblh/GOgKeS
- qV6sIFFIZFSqbV9su1Dx6eIDVWBlHlNs8e56eUNWAKO68VVnAIeqZ+tYjpF3ymQmF9Cs
- +xtQ==
+ b=iOkYotIgFtE8ZtY46CfZa1EsvHDRJ/tqCWoSRX5FnWN1qmPnHVRR9GpStKG6Y63v68
+ r3V0AuneRFxVaM9NsyZysIKVSFfIjz6KYAk/uPOHqFqYAzbpp1L0pGncNdmT+XHWccO+
+ G8eg4eadD7BbBM/zywlYwpzBe5YY7yTNdccacbu4lZgu3hjPUX0Zpmei2CGHXPEeKkNj
+ 2f+SnI7MOF0W9Aj8/R3htX3OmfHTL1cGAEzxu+x/cFTzfaH78WOE7YvqfQpDrZh3s1f3
+ /j5gxQoAKZ6iQlW5Lt0hTyJUdDnUmgp4OKTkn//7hRYXKG3NN7xDu3ymHn4s4lmeYZLp
+ +BrA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:dkim-signature;
- bh=iqMcG9IjbYbgjVWQ477roO34LlaUvOByCHW9kFg/3MA=;
+ bh=yl55wnnoih47rr2V3k0s8/PkXoInYFUvIFSP9pQXHZU=;
  fh=NbL1UtTKC0x7fUW18qQWobdeBynxeVXzUKcjNgMhygI=;
- b=duLfFVk7EegTEiroz4HqynLNds68ZIMtQc5Ci1/7zGLae5kpJHEiruIUApl6LaJqVZ
- G8wlyFBSnX/iz1S00tQfip/xkEshsEup9KiE/9Is6VMCL75AHtrHGlEA6Mr+0HdvUsDH
- Yxyf5Df8o23MW3zNM12F3/AHyNPdX9HibO3kHu4j7ofbKv28GCX2hVnh5SwqTCap9q6v
- Y+jj+CJ58cOye0rwGDYxfAKlUPVwpX6IntwtNEeK0R0AXxXHspI3sRYAyPq3vNxSrEAL
- o/EGauzZ/7t/25HSD5y9YHfATgoVaHrmmbUGc7zMDx92WXEOCSkemBp4HMFMzoRVLE8c
- KZCg==; darn=lists.denx.de
+ b=eEfAzaVkBQnQRf1mvN4/3J7aEpUR/GoiWK9uQYvjVYrNl/v3fxm5a3NBnDzmcY5eiL
+ iVOBLZM/PLSmU9+NcAZhU+DB4OAKNbWnxUfEpjfJN1THcSLYxWYdkvZ0LKusHRCGHEnE
+ 1IKPZS8PcvAFpyrL+eA347uNvXgOq6K1VriTkL4yYYnzlwHkLqWFJxLoncQNtAdubLLt
+ RdtrGAZU77UC3IQ8/3kNqaLocJzAAvMRCAMlbnfDhenJ2BVv0b37MZgftlVJpePvNwKN
+ mqhD6BAcNL7vpfoStuuSGNsfkCDn4wL2y3ULYwnGprcmnDbMJ5z4xQ5Pfj9ZMLA4EPfh
+ gbUw==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1778345226; x=1778950026; darn=lists.denx.de;
+ d=gmail.com; s=20251104; t=1778345259; x=1778950059; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=iqMcG9IjbYbgjVWQ477roO34LlaUvOByCHW9kFg/3MA=;
- b=YtgdCusGsHcW1wRNbwmK2NEQuUAw+4QqDDdpP1kU9PYF7cZPVL/WC9+WQg21oibujt
- 4eQ+GdaIXDJ7t+yfNfQWHmsmIz16psRumfLc4+p7/a29gW8I0UkxlG7GC61FzmoHvCnm
- 6XQ92mSCTJ2NyAp3PTmqnklr1VV4rQNFyOGos5LVAPE/O8dLTosJyF3PyzbVDXSUyXt8
- D3Ge76ftzn6yBdmrcBvu5b97vMvdn/FyNkK+4sQ7z+5kUNnzf2RuaEKya0sqFdEMcFtG
- 4hJy9QUCOV6mCjGX6tnGng3sDhjxQDwn7YPXdrurHNZ0u9mg1noiKuM5jMuTuxi507Lm
- wbRg==
+ bh=yl55wnnoih47rr2V3k0s8/PkXoInYFUvIFSP9pQXHZU=;
+ b=ZwBnwAXarbEcza5Y/YpQx67Ap0liW+eSdolS9+6F04xcE70gv/xhCa2LfNvHJdg4YP
+ HhK9i1S2CqTSqlr3Dm0vPe6EG65CNXy9lEBrqpecxtiFtMxeKRbYZEoU4nA7S5uwdHeG
+ /fHD9naRgv9rsbf65jNZM9B6gCfAu4YGN/+r7f7wcs/JZqS9yVt0tiRDNd1Xe+obEH7J
+ 0N9V5pY4IYtCD0GNEnRBynlaf8bnCRKOCw2te25PxQSD2fiLYlECkWpIpxMwOualpJCK
+ CbJybZoAYoG76xLAXkk4/1IiwU2Tz7haWgK/8C5y+wxRNKi2GxRxLRjUYyzq5SMCRlMS
+ NPLQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778345226; x=1778950026;
+ d=1e100.net; s=20251104; t=1778345259; x=1778950059;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=iqMcG9IjbYbgjVWQ477roO34LlaUvOByCHW9kFg/3MA=;
- b=d5+Dk4hosAaGtMYnmzm+NuQmlYmEKK9u9gght5sK9TG852ZBNdTle/pM8sQk3KOx4/
- xWCoKh62lxgFAdxoH2/bh/kIEwl4DAN1RanFo6gBJvxMWZszzuQ/Zt5I8lka/djQVvFH
- i0hBgCfAd6teaUwyt+92q8twRyrJbWi3UAjM986Wdljewpd/LoJtKQqNA+nACtDkVzl3
- +74Er9yHaya1Xup3hFwZCkuQa8yJfRTYZFQ/UH5gpbu85+6ssghAV5JR27Ze+3E2g2k8
- gIfnPEX6n7BIoGRkxY6B8201Y2k2We2mOe5HtfKkg4t2ZxXQO5nZp07DbdVbLNBunLzQ
- Cdyw==
-X-Gm-Message-State: AOJu0Yxw9EXeIYibZyFsrifshk+X+RnAstIN5Y9uaa/cmIxJk3N9nZ8s
- +ZcO2S5/aAkDsvlrC51yHLZJ2TFa1Vs49pt4IXWu5LLq4erzT3TA9mbRhwPh9n1AZOu4phsLKaI
- szGYb0fKXMqoKxGYuOvih+7aMv71shRo=
-X-Gm-Gg: Acq92OE0SMe1FZTfg4fhwMWb5NpEzoj2h8iVBAqDwbawa13Q9+TAxEOddM7OYkMV8Hh
- 9Hq1vxluna0CDYxP1SgGkjw7Y+SBqlZned8cgYM2kkMRSD565PIWrMXHWn2mhwyY2VffyOddSsO
- t31RRgitvjOrh7y7XFIwfB7HfoyXS6940gEGEIjD9mBgWEU2SnllWxa9LC4tJ1OVoqC8v2s+FXa
- c2uXxydWZU+PjKf1q6zGUZ64M+lQ4JndUgdQ8hi2csXrqMG18ITsxxR3ZF+W9KMA4ZMvW7iLnpE
- XkUO3qZe
-X-Received: by 2002:a05:7300:f690:b0:2ea:7901:8d72 with SMTP id
- 5a478bee46e88-2f54a87e863mr8905181eec.17.1778345226448; Sat, 09 May 2026
- 09:47:06 -0700 (PDT)
+ bh=yl55wnnoih47rr2V3k0s8/PkXoInYFUvIFSP9pQXHZU=;
+ b=j7Kdj3t1yH48Uc3W0RiAhbKPJUheL22WqSvvDuULCtbh/LTDWQBnXOo8tToa6P3cxs
+ t3DY2pcKS/W2uUcE5uNylUU3XChEk9FmiVsq4TGnvhxXFidpt2aj5Qi4Nv5AaAAlnlfY
+ OlP/v/qUJMK8HHRjtwtq8/6wFacHmE1DSF+NtDxs6FLTLsJtd111CGtUUXyfC+XyrACN
+ Grx7sFvKAMrGm7CHvCCNPWKeYex8mFqjbNRF7eV8guw4+Y/YG98K4o6Q+X+KBQDIS81Y
+ U5GuHLI7ghg88OEdVH8t8a1DwePriTUEUsM82Xr0w72SwdpO0oG3Q3Fb8cHtScvx/fEl
+ iH2w==
+X-Gm-Message-State: AOJu0YwKpm+2/ErcBEhjH5y5VSEHj0R78uyVSVy9npVN1bB8MXb1vVwn
+ d3uxBbff2kU4KiqUXxFl3vGrVfMtgeLOzcuXhCNOsg1edA2FXBKsgvyjFpih5fJjF6PKKVVvaxM
+ sEMUf0uqlB7hlzBczbMugTWJclpXYl8g=
+X-Gm-Gg: Acq92OFWG2CUFfOEfo2H+xsj+LGigrVmJnNSyIzmVW1vwbMJ79qNMbGpYVSWtdeQ6Pl
+ MXI+7McmQSEwbnfnKwA8+hAVYABZVoecTSE69Mok2jD7DP5rq2Fo5pxT2LhkPiZxZ0wRHEUx/CL
+ H93cNlg/n3xM0ylQMWYopStDyAwjbfNH0Uw6tvHabMjVUnkYU2ymL+YjvNPTROiLYWD3j5msPcA
+ s6KF25q+Qc37hm0+MIMgewv7JtYnnDzVw9u3F1vQKPYai0CIXbh+1/v0tlzt3AorUB9khHiF50C
+ FSKTcVnG
+X-Received: by 2002:a05:7301:6793:b0:2f3:986d:2d01 with SMTP id
+ 5a478bee46e88-2f54d79b94dmr7089242eec.19.1778345259511; Sat, 09 May 2026
+ 09:47:39 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260509151308.23067-1-marek.vasut+renesas@mailbox.org>
- <20260509151308.23067-13-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20260509151308.23067-13-marek.vasut+renesas@mailbox.org>
+ <20260509151308.23067-14-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20260509151308.23067-14-marek.vasut+renesas@mailbox.org>
 From: Svyatoslav Ryhel <clamor95@gmail.com>
-Date: Sat, 9 May 2026 19:46:55 +0300
-X-Gm-Features: AVHnY4LhpV6zrXMeuTmGK5V1gGcMztohNJtA1zaSHkavg1eBqgwGhJlpE-vw5rQ
-Message-ID: <CAPVz0n1OoDAj9No2vg-1b6-QBwkPsKqfQAXspPOZh_XgeCHKbA@mail.gmail.com>
-Subject: Re: [PATCH 13/14] reset: tegra-car: Staticize and constify driver ops
+Date: Sat, 9 May 2026 19:47:28 +0300
+X-Gm-Features: AVHnY4K6jwHAhNQyUe3fSIGRO9JjJStt75VaMKbY6Sdvn2lMmR0oTA0l4Q2cQFA
+Message-ID: <CAPVz0n2TSBEpN5sw9nk7KWwoy5RQx2MoFk3ycut+QtQMuUbN_A@mail.gmail.com>
+Subject: Re: [PATCH 14/14] reset: tegra186: Staticize and constify driver ops
 To: Marek Vasut <marek.vasut+renesas@mailbox.org>
 Cc: u-boot@lists.denx.de, Thierry Reding <treding@nvidia.com>,
  Tom Rini <trini@konsulko.com>
@@ -128,8 +128,10 @@ X-Virus-Status: Clean
 > Cc: Tom Rini <trini@konsulko.com>
 > Cc: u-boot@lists.denx.de
 > ---
->  drivers/reset/tegra-car-reset.c | 2 +-
+>  drivers/reset/tegra186-reset.c | 2 +-
 >  1 file changed, 1 insertion(+), 1 deletion(-)
 >
 
 Acked-by: Svyatoslav Ryhel <clamor95@gmail.com>
+
+Thank you!
