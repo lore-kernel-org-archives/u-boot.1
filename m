@@ -4,52 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4799CCD3447
-	for <u-boot@archiver.kernel.org>; Sat,  9 May 2026 15:14:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9070CD3447
+	for <u-boot@archiver.kernel.org>; Sat,  9 May 2026 15:14:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0470B84D74;
+	by phobos.denx.de (Postfix) with ESMTP id 4582884D78;
 	Sat,  9 May 2026 17:13:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="kv3+z/em";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="f66lgyvF";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="vxXh5SAD";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="D7TBUgv3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 09F2084D8D; Sat,  9 May 2026 17:13:27 +0200 (CEST)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
+ id 9F6F384CEC; Sat,  9 May 2026 17:13:27 +0200 (CEST)
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2468C84D23
+ by phobos.denx.de (Postfix) with ESMTPS id BC33884D74
  for <u-boot@lists.denx.de>; Sat,  9 May 2026 17:13:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp102.mailbox.org (smtp102.mailbox.org
- [IPv6:2001:67c:2050:b231:465::102])
+Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4gCTyX4rtHz9stw;
- Sat,  9 May 2026 17:13:24 +0200 (CEST)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4gCTyY3WMFz9vCH;
+ Sat,  9 May 2026 17:13:25 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1778339604;
+ s=mail20150812; t=1778339605;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=Sh8MdegUdLJI4Wl5aiPuhyFlO5wC8K+cY7ug8b3UeUk=;
- b=kv3+z/emCgqW9YNdNBCUIdW7qLV12KnvnIZgdB+PjZyxbHimrTNfNZX+TIqm4P2DTpPHbO
- 1hgfcgqC2xthBf3+lhdAblnTvsrJGYUPvBn3T8EZPeXjO6mSCMdJ8+3pzC/EmW545V1nAR
- Z1m9GN8COff9DhTC0mg4WLyyZJpLOMFMEp9aKhimIr2uyBXSTgm+8hP/ftSk0rak1zGYwP
- LwfuTn0sXPi2emVTPR0jqe2xm0p+zeFCpq+sB26+q1JLIrsbn+7Z7byosdoMHQSOU68Oqe
- 3ntwqf0XmtBj4dilTRDW2eN0z607qN8mfu7GI8GYspSPPfs7cov3TRg6X6p1mQ==
-Authentication-Results: outgoing_mbo_mout;
- dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=f66lgyvF;
- spf=pass (outgoing_mbo_mout: domain of marek.vasut+renesas@mailbox.org
- designates 2001:67c:2050:b231:465::102 as permitted sender)
- smtp.mailfrom=marek.vasut+renesas@mailbox.org
+ bh=yiLvwptcZZwx3Yesmrs2fKjt06kz0q8N4KQi5zd/z7Q=;
+ b=vxXh5SAD4cyjK7J7t8jU1uFNiE5DS/VeZcOcZa1JlTSx1OKSfzwKOrD1v04TBN9Pcn0xRX
+ YkTuAbZKI5DEftKYzL0DD4+hj8hnQth0OhGfWrW88f0D8QDuZkA6/au6muvN47g9FGCy5N
+ L2D3BjZr52uKEdDVAo3cXAbKxfKKaWqU+xh9/8vqyV3EwOd28E0bVMbXbYo5iPrYAdG7VX
+ 8DhDrY6lJWJ80O5htEkAqgW/7GZu0Bu9vZe7yQ+R8TT50eFVRQh+JLqiRJllT+CmEFbdUw
+ XFN/je6diTdCxTQxEj1mfzf0n6Sn9XlrX3bujfWeHb8E9RHyMJsRM0zo+t0b0Q==
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
  s=mail20150812; t=1778339603;
@@ -57,26 +51,24 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=Sh8MdegUdLJI4Wl5aiPuhyFlO5wC8K+cY7ug8b3UeUk=;
- b=f66lgyvFndDZGtr4A/fnSmDR9ZFJd7n5a2Iw4jQ5+W8r8aLWKxBsZSlsE1PTxMXsgnHgbD
- wRRELCstMTJCEN66n64btERGOAQ4FRDVRfr9jK4ZI6/3d7HwbRi1v9HaFK43ggsDKItknT
- a9ZYpEhyQFaIE1/XeNovMBfv/LFOQii96uXgvMa/0Tl1jRcUe2BcUlNvY6owe/m1JUAt/G
- PVKnDzhdQMvi9qaR9jIj3WpUXdbQRqBXUqREr0/yn4WbvATuf08pdeAag2aw+6eJW5zMoM
- ejX8tTAT0sPWyEjprb6W84cFfIcl5uqNpx95CLY/UzeaOKMZ/0fzVMrrNKraeQ==
+ bh=yiLvwptcZZwx3Yesmrs2fKjt06kz0q8N4KQi5zd/z7Q=;
+ b=D7TBUgv3vb1mIr4VM7RhJVJbCQOKYjOTXcatr8F8lsobp+zR2EogqdKpI2S2alOApB6SEm
+ u7bmMkMMCUSmOLZ27WUPSw7Jg6uY4tiI0xyERAnqRcVUunEUVAh8ZFm/aGpz8IM10A+1U/
+ cgiSuD9vD0vdJDi2rArsTeMXt+Jcc1f3XEGP31p5Co55+rOKp/yt9N4BjYb7TmQDQ6YZLt
+ dcBg+0SqwYnM3B8hxA9EYX8eTTVYivbt7Fcgxq0hh/OZRmX4IO/qLm5c+xDMaenT5jkvYy
+ byvxV9+COae/ULrklslNHqnSDnyhptgOHRdIcGmaXk4nrPeBOuzJ1/j6R7Hhxw==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>,
- u-boot-amlogic@groups.io
-Subject: [PATCH 07/14] reset: meson: Staticize and constify driver ops
-Date: Sat,  9 May 2026 17:12:30 +0200
-Message-ID: <20260509151308.23067-7-marek.vasut+renesas@mailbox.org>
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH 08/14] reset: npcm: Staticize and constify driver ops
+Date: Sat,  9 May 2026 17:12:31 +0200
+Message-ID: <20260509151308.23067-8-marek.vasut+renesas@mailbox.org>
 In-Reply-To: <20260509151308.23067-1-marek.vasut+renesas@mailbox.org>
 References: <20260509151308.23067-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: mfcmcp3jtr7yi4gf58zka5eytcp85uan
-X-MBO-RS-ID: 029d36f02eb3cee1daf
-X-Rspamd-Queue-Id: 4gCTyX4rtHz9stw
+X-MBO-RS-META: 1m9xxhf1euqg7eqiepqapkmr66b1ho9i
+X-MBO-RS-ID: cd4ca9e72b63ed0e252
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,27 +90,25 @@ from outside of this driver and is not going to be modified at runtime.
 
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
-Cc: Neil Armstrong <neil.armstrong@linaro.org>
 Cc: Tom Rini <trini@konsulko.com>
-Cc: u-boot-amlogic@groups.io
 Cc: u-boot@lists.denx.de
 ---
- drivers/reset/reset-meson.c | 2 +-
+ drivers/reset/reset-npcm.c | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/reset/reset-meson.c b/drivers/reset/reset-meson.c
-index 6337cdaaffa..8c27563ce23 100644
---- a/drivers/reset/reset-meson.c
-+++ b/drivers/reset/reset-meson.c
-@@ -66,7 +66,7 @@ static int meson_reset_deassert(struct reset_ctl *reset_ctl)
- 	return meson_reset_level(reset_ctl, false);
- }
+diff --git a/drivers/reset/reset-npcm.c b/drivers/reset/reset-npcm.c
+index a3b85a42250..66b541f09e6 100644
+--- a/drivers/reset/reset-npcm.c
++++ b/drivers/reset/reset-npcm.c
+@@ -126,7 +126,7 @@ static const struct udevice_id npcm_reset_ids[] = {
+ 	{ }
+ };
  
--struct reset_ops meson_reset_ops = {
-+static const struct reset_ops meson_reset_ops = {
- 	.request = meson_reset_request,
- 	.rst_assert = meson_reset_assert,
- 	.rst_deassert = meson_reset_deassert,
+-struct reset_ops npcm_reset_ops = {
++static const struct reset_ops npcm_reset_ops = {
+ 	.request = npcm_reset_request,
+ 	.rfree = npcm_reset_free,
+ 	.rst_assert = npcm_reset_assert,
 -- 
 2.53.0
 
