@@ -4,79 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6CFFCD3447
-	for <u-boot@archiver.kernel.org>; Sun, 10 May 2026 01:42:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8802ACD37B2
+	for <u-boot@archiver.kernel.org>; Sun, 10 May 2026 01:42:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9BE5284A49;
+	by phobos.denx.de (Postfix) with ESMTP id D18D884B1E;
 	Sun, 10 May 2026 03:42:14 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="pJTS7dni";
-	dkim-atps=neutral
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1778377334;
+	bh=Bfg8iaGghhB0W1QrIJqJAI5lKojZS0AkPtdEQV1pSPY=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=WhhY+EZGtmgeWyL1fld1q1Uvnuyp3fPYetu4Gsrk5ob6r1SIqMNs5J2LkD53kJCtk
+	 Sglyh0nyZy+oGq2zaq0VvURmFgw3CcgN2PBtmevZPx/PbALJ4b/zBo/YLxISciPJ9J
+	 vmBqX/IVJl5VBRxTm3E8Rb6q3/9CDR9fIMbvJ+wTZDlAp1DHAAfV94blNwETWGBnhM
+	 +uBIJGSZ8jbLRTwmHYOn0omCCpfnQjoYUQvEpRWavlFahamdBajBjf/1ya5WuEaAah
+	 cn4psa8/Wivw6Xc8ONFDzzjtk1hW/RwNms0wSbpf+lz8ceQl9JfLjcbLmp6zU16IJc
+	 yyiKH3/G3r3TQ==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E60AE84663; Sat,  9 May 2026 19:59:57 +0200 (CEST)
-Received: from mail-pj1-x102d.google.com (mail-pj1-x102d.google.com
- [IPv6:2607:f8b0:4864:20::102d])
+ id 8BEAF846EB; Sat,  9 May 2026 23:06:47 +0200 (CEST)
+Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com
+ [209.85.128.52])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BA5FE845E9
- for <u-boot@lists.denx.de>; Sat,  9 May 2026 19:59:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B526B846DF
+ for <u-boot@lists.denx.de>; Sat,  9 May 2026 23:06:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tanmay.kathpalia@gmail.com
-Received: by mail-pj1-x102d.google.com with SMTP id
- 98e67ed59e1d1-36536771300so2928039a91.1
- for <u-boot@lists.denx.de>; Sat, 09 May 2026 10:59:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1778349594; x=1778954394; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=8e9tpAHtbErUyIzUxjPlOTgCnVBK8+3E/ZHqxwr1RSA=;
- b=pJTS7dniZR1KJ23XpSgOftcpi9a7nRuiSN6fzWMbUcVxEg+ZlJRUev712QEojMj80m
- br1H+ZYqNR9wrD1Z+6Z1QrXB/DYlr2Nk+NrnBSJac0C27chwFSYaP7RTzemydwzQeDPs
- SHkIuETHayxCv2GLLVD5xrOgYA+baB45MBApcOeGzDc9V3C6UUSGn9QtXBW7Me5V6s/q
- PO7cYXF7SjEbEv8avvRqiZ4jdg/A5LgRgC4YXbHoFGN6jdWUTJz9hc4oT51UpV/DhML9
- OyIseVyLpr/7zUKp7pQo+Tl18gXIg1n9a1qFFVyePIsTJnlMD9/yydWZ5nscEtQWs3Ya
- 06/g==
+ spf=pass smtp.mailfrom=liel.harel@gmail.com
+Received: by mail-wm1-f52.google.com with SMTP id
+ 5b1f17b1804b1-488ba840146so26974205e9.1
+ for <u-boot@lists.denx.de>; Sat, 09 May 2026 14:06:45 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778349594; x=1778954394;
+ d=1e100.net; s=20251104; t=1778360805; x=1778965605;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=8e9tpAHtbErUyIzUxjPlOTgCnVBK8+3E/ZHqxwr1RSA=;
- b=XBURtA5QaVSfQfKY650kZPkTlLXt612r/hccfUYsEVJaDyjs2BBWQ83HhPL6NPTJhN
- ++k3KVRGfc12XJLPDmrUQlZT0cfGtwMraWDyrVBkagxuCgj20ZpgVql+rvwlhSgZA+9W
- 2SrDe05c13j3iJ64Imsxqx8iSCLep9EkE92NdMfnEcmrAScntVMWf5PZHAKgqxPgZsli
- Lt8Kmg+//mvWFe0HYZCxiHs4eaLwtF2nFlxUpXL/wDASz0RF2ho+dMdZfGANbSxo5O0+
- T6FbmuBKNzR2RjJeXF5JPoNg9qZqi1vuNXXGOC7AS65Z9EF+wwqhoJfjvNIlgzfiv7rq
- Q7tg==
-X-Gm-Message-State: AOJu0Yyev5dv9QaJlvPdilau2/Lqgqjy+VzrG8SO32ZcpdDRd5UlPQFu
- gPeW7REefyoTYA4gfrd6sGD4DMugy97ibe82yoZu76x8f3Ge6tPSjBASGSkMnTpRrMM=
-X-Gm-Gg: Acq92OE7f2HWzCbvApmp+ngyuLGiuLIxTNlw53QKlPFVzLYxlyccFLHFPz4EBty8gb9
- uELnaH2xRib+n6a0MoRoafTcv90rH3wJiEFI8FI5wum2gIxprNEAPQlNFxfOfce7e1QJmRhKpEX
- eP7DfEeBR4cnIN2xQUo4RmKd3yNC3mGAPrZoi9rNXYx2UfcBjhNUcxuOryjQQRv1XTtDavpcOXd
- thmt03UoR1JWzewt/kmoxREe+6+3wNEGX/v3WyVb+MAshKq9ottJ3356PvuKfi3UQC7yjZ0NwqY
- xBGa5n3vNIMzdzo5GSWJzVo8Th0WM9+DAYS+c5u/5VUqnAYsHVqRboTtQifk016+qLJXZS8jxNg
- lcM8zZQGKvFG6OADVoZsYYD4eqYEK/UjBspDuloBr3MF66q1ohyJYbfwKHyf7YZ48MTIdzIifJv
- jXdcpqolK+pDswjFDZLP2W5U/GJuDBzKMdw4lLwIA0mlo5pg==
-X-Received: by 2002:a17:90a:d646:b0:356:21e9:73ff with SMTP id
- 98e67ed59e1d1-366055e69demr9522563a91.11.1778349593748; 
- Sat, 09 May 2026 10:59:53 -0700 (PDT)
-Received: from partlink-A8.. ([122.161.53.136])
+ bh=Bfg8iaGghhB0W1QrIJqJAI5lKojZS0AkPtdEQV1pSPY=;
+ b=RezjFe2bVm0VOaUfGgOvvK4NTULiAYUbMSvo79nYbAtKJuTjKknf8ezYBulenfcym9
+ LZzSn0mi4vIerY+dDX/IcHhnHYVueuvAyeEMHSitStcjrN6t7vStJduUlcwyg+UuJpa8
+ AW45kxvt9hGkSafYTOJDvIkYmaEEbg02i/GL1ZSb8Hbjz4J/qnCG7CjzsLb9ujuP3D1t
+ nEQygK9iKc27UxM/aF866ra+n+2vUeC1D9yhfxwX99xVFkKqWy5Gm9okmRmSCA3N/pfZ
+ cxrN/C8/VjSRALWc9vrwDVd4NPBKEPyeJaA7iPduxQCVnHCjwGsw01YxzdkpMbQqYGSc
+ moLw==
+X-Gm-Message-State: AOJu0Yz6I5mbEHk/Y/fzSw7kRSv0b5vREVgdWEPyBQvlvu3KKTG1axUm
+ 663aVfqxkgYtA+jaMg2NAi/cixzVTU+ni82377ws4JuPARYwusqDFd3/EZdvVi7GIZY=
+X-Gm-Gg: Acq92OG9G22Wco7FN9nlJFJay0JZMBInCFzn7QG6BEszIsXWMhTHFWqOKl6N1/Gy+FF
+ MsPVQngw1bVFOBTDO8cb77G0Ak2r//u6VPnfrWxfATN20pLfQeg7RI29Khn32LuWQ9QHBsMwM9u
+ 9ujkhmt9YppNRaleBjbwlA0iJmCJYWSPa3yvBKq7w+K8Fq7Bcj0T1E7RYM3QZzpZMcx6mXOUFgi
+ UPmOLdUSrB+M8vVL3GA6/J7rfjwPIx3BN68oXLChQcUqpRAkzCgR1+0YUbbgQaaDdBK+3se4+bI
+ SXc0E8BcfPW4kLxIW/DGT9AL05+i5jcdAc3IKsHDtEnuoTE9G1Wh9QKUMkgcPb3cvZXLxpVRBnF
+ abw3hTiuM+MwiDcHLcy/ja6cxWF+/EZT+BSwosb/vE+h71oY9Myr8HFmsX4SV8Te8OaWMyLJHBE
+ atpWj7FCGVz1C+vKrsafBRGep+I6Rvh8SV
+X-Received: by 2002:a5d:5f47:0:b0:449:c1e8:7655 with SMTP id
+ ffacd0b85a97d-4515cf125bbmr28880505f8f.27.1778360804385; 
+ Sat, 09 May 2026 14:06:44 -0700 (PDT)
+Received: from Liel.localdomain ([77.137.77.46])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-367be784e0asm1563275a91.3.2026.05.09.10.59.51
+ ffacd0b85a97d-45491f8d4c3sm13600391f8f.34.2026.05.09.14.06.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 09 May 2026 10:59:53 -0700 (PDT)
-From: Tanmay Kathpalia <tanmay.kathpalia@gmail.com>
+ Sat, 09 May 2026 14:06:43 -0700 (PDT)
+From: Liel@denx.de, Harel@denx.de, liel.harel@gmail.com
 To: u-boot@lists.denx.de
-Cc: Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
- Tom Rini <trini@konsulko.com>,
- Tanmay Kathpalia <tanmay.kathpalia@gmail.com>
-Subject: [PATCH] mmc: sdhci: Start status timeout after command issue
-Date: Sat,  9 May 2026 23:29:32 +0530
-Message-ID: <20260509175932.263105-1-tanmay.kathpalia@gmail.com>
+Cc: Liel Harel <liel.harel@gmail.com>, Matthias Brugger <mbrugger@suse.com>,
+ Peter Robinson <pbrobinson@gmail.com>, Peng Fan <peng.fan@nxp.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH] mmc: bcm2835_sdhci: Parse generic MMC device tree properties
+Date: Sun, 10 May 2026 00:06:07 +0300
+Message-ID: <20260509210607.51303-1-liel.harel@gmail.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -97,32 +94,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The status polling timeout in sdhci_send_command() should measure the
-time spent waiting for the command interrupt after the command has been
-issued.
+From: Liel Harel <liel.harel@gmail.com>
 
-Do not initialize the timer at function entry, since the command inhibit
-wait and setup path can consume time before SDHCI_COMMAND is written.
-Start the timer immediately after issuing the command instead.
+The bcm2835 SDHCI driver sets up the MMC host configuration via
+sdhci_setup_cfg(), but does not parse generic MMC device tree
+properties.
 
-Signed-off-by: Tanmay Kathpalia <tanmay.kathpalia@gmail.com>
+As a result, properties such as bus-width are ignored. On Raspberry Pi
+Compute Module 4, the eMMC node describes an 8-bit bus, but U-Boot
+initialized the device as 4-bit.
+
+Call mmc_of_parse() before sdhci_setup_cfg() so that generic MMC
+properties are folded into the host configuration before the MMC core
+selects the bus width.
+
+Before this change, mmc info reported:
+
+    Bus Speed: 52000000
+    Bus Width: 4-bit
+
+After this change, mmc info reports:
+
+    Bus Speed: 52000000
+    Bus Width: 8-bit
+
+Tested on Raspberry Pi Compute Module 4 with onboard eMMC.
+
+Signed-off-by: Liel Harel <liel.harel@gmail.com>
 ---
- drivers/mmc/sdhci.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ drivers/mmc/bcm2835_sdhci.c | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/drivers/mmc/sdhci.c b/drivers/mmc/sdhci.c
-index 648dfa4b5ef..08594e10266 100644
---- a/drivers/mmc/sdhci.c
-+++ b/drivers/mmc/sdhci.c
-@@ -215,7 +215,7 @@ static int sdhci_send_command(struct mmc *mmc, struct mmc_cmd *cmd,
- 	u32 mask, flags, mode = 0;
- 	unsigned int time = 0;
- 	int mmc_dev = mmc_get_blk_desc(mmc)->devnum;
--	ulong start = get_timer(0);
-+	ulong start;
+diff --git a/drivers/mmc/bcm2835_sdhci.c b/drivers/mmc/bcm2835_sdhci.c
+index 655d9902dfa..efa4d14f5da 100644
+--- a/drivers/mmc/bcm2835_sdhci.c
++++ b/drivers/mmc/bcm2835_sdhci.c
+@@ -219,6 +219,10 @@ static int bcm2835_sdhci_probe(struct udevice *dev)
+ 	host->mmc = &plat->mmc;
+ 	host->mmc->dev = dev;
  
- 	host->start_addr = 0;
- 	/* Timeout unit - ms */
++	ret = mmc_of_parse(dev, &plat->cfg);
++	if (ret)
++		return ret;
++
+ 	ret = sdhci_setup_cfg(&plat->cfg, host, emmc_freq, MIN_FREQ);
+ 	if (ret) {
+ 		debug("%s: Failed to setup SDHCI (err=%d)\n", __func__, ret);
 -- 
 2.43.0
 
