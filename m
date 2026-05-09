@@ -4,99 +4,104 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41834CD37B2
-	for <u-boot@archiver.kernel.org>; Sat,  9 May 2026 23:02:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C8D2CD3447
+	for <u-boot@archiver.kernel.org>; Sat,  9 May 2026 23:06:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 46AD284711;
-	Sun, 10 May 2026 01:02:24 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BBCA384834;
+	Sun, 10 May 2026 01:06:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="pIsVXLue";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Cs1HuBEv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E85398485F; Sun, 10 May 2026 01:02:23 +0200 (CEST)
-Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
- [IPv6:2607:f8b0:4864:20::32a])
+ id 18ED2848BC; Sun, 10 May 2026 01:06:33 +0200 (CEST)
+Received: from mail-yx1-xb12f.google.com (mail-yx1-xb12f.google.com
+ [IPv6:2607:f8b0:4864:20::b12f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B63A28470B
- for <u-boot@lists.denx.de>; Sun, 10 May 2026 01:02:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 15CC884711
+ for <u-boot@lists.denx.de>; Sun, 10 May 2026 01:06:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=james.hilliard1@gmail.com
-Received: by mail-ot1-x32a.google.com with SMTP id
- 46e09a7af769-7dcdd23fcdfso1688613a34.3
- for <u-boot@lists.denx.de>; Sat, 09 May 2026 16:02:21 -0700 (PDT)
+ spf=pass smtp.mailfrom=mibodhi@gmail.com
+Received: by mail-yx1-xb12f.google.com with SMTP id
+ 956f58d0204a3-65c2cd216c9so3068569d50.3
+ for <u-boot@lists.denx.de>; Sat, 09 May 2026 16:06:31 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1778367990; cv=none;
+ d=google.com; s=arc-20240605;
+ b=MAezPiwsVMHkmev+QOllROFc0t3FW6rgzRkMJIebLd9UqC8eonpcvC16I8DXXDNlVu
+ 8GYEs7C1CXkiXh0uEzT3Of8xGKuspfhHC15hiFfsLYl8kcizo6puSJQCookCPbTi/xMN
+ QJGnJ9/7G4GVYFbpOENaLgppGUoNo9SzYOiEOY4AmadmQWQ5ltnjlk1uBlThjc3abJpf
+ J3bUehyT/3WJiEI7nnYaDvAA4VKZ/QuxSrn3A/47h9Vvym+5Qmls5M1hJcJKDwxvTW4E
+ QtUmNUr61bKTUc/EYPoARcwYw845SHB4ULyZXfGZSJQcyaVcdjK6x96HpefyP+WyVAfS
+ pSMA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=oLcujl6tP3WqbBMaaB/wpbRTgrDmyJZ1d1KgENKk5cs=;
+ fh=ISiQsfwo8d03NHQXniFCSKIjOUxBA62ngxIVH1Rb/yw=;
+ b=R2WiAQz9yu13ht1qE74EcgvsBHvOD4MX55HaqyKPnqqChYhDVCPyk14wv0RZCw+X0g
+ ls+tqq60Dg2ujjGyvlG1LEiuIowfbcWUBhwPCRBmn8d1fBi+8VrXhHldISaxW90dpAfs
+ BRW3nG7Bggs+GOOBblrOdcRElUg+1I+p5WoKs+ebkb+/J3pm2Txb8gZ8m8rXmLSYgFJL
+ NzpG/rPxQ40nEeMW9tLEh0hezZeZF7s2923HwcXHeMHzs5JpTiVIxd8gOlh07NlMQrKh
+ 6h501ngg9d4BtIH/7uX5WU6F5rjIGpr06sW6X4l5Hguo64l8Hz27ePZ8wDm3GRp+CNZZ
+ RK6A==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1778367740; x=1778972540; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=/crUnX78+xBAlOjkEcBwcKfNbG8nPLJzqdC0oxmSHoY=;
- b=pIsVXLueiSUHCu9qWs4yOzTlsp33Rrbzv8p5tdI9/wu2GU8Qat3Vz/SuDSVsoh1pqO
- jCUlXUETos8cDjUcS8hsqJStZRJQ+Ic3B1tKNDFaDACayZbfuWFj9OVuincZ+h980sKd
- ty/49MkDpD82UFi8ZupydX45jMi3uTxY+QrxX+9jN7SnvfTbvxy1Pdf8kLhCcsx83K0f
- 5+PLJ5kbgNqapNr8Jh0lEprTOj/U5543PZOflpLKbfofLPbk+2eQDPq3qA4gp/aQjb1G
- FAJ4HJxzdaCXESpYSC5rnk9OlsQt8UaeGxowkLccR8fQ3nAFoc5BobhHx4gkpJC1ZuDT
- oAiA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778367740; x=1778972540;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=gmail.com; s=20251104; t=1778367990; x=1778972790; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=/crUnX78+xBAlOjkEcBwcKfNbG8nPLJzqdC0oxmSHoY=;
- b=kS3xd/+htuvthqBrRJDBIg9I8ZQVGVcSAXDGgQrArNHkHcLe0XuKskvDT8O7ogDIb0
- NB3UpPJcZWIIfA0YjoBnzroilq3JePBMVc1sUJfTedb0+pskB01HNkRBiY6lF7NaEHSI
- fr0do29uhB8IEPRFOjqncq15H8y0R2xGrbQ1Bj9wqRt4STi3z1UkH2SBMK2pkFaR1faR
- IU1ThSDGF/cBXmHjytk6ENM+HLVCaqZvWSZA01RRp4xSkEDKcOWzXCdm+09y6l7PoT8c
- CMXj0UacJDuUG47ZjVHIoWwscx7HiBGnahzmWQDlKajRS0+FTSAW1yXIUQIYIXAiqq3Y
- 9tEg==
-X-Gm-Message-State: AOJu0YxjdkdPE8IEaOrF7gNl76z8k0w+WX5kWxLhlrSHY5bO7dZ8s6aj
- 9uzYjn43Ls86UuB7cP5KC0KlIV2/ein3TgSnHefQ/BChm6jN/N4PbWKVEtX4PT71
-X-Gm-Gg: Acq92OG2Rtoa51IpzwcSjOs9ouWasKParymPtHJcgSfrWpgEOzrnaL6Vf+cOwPO8HcA
- kU0vaSQVFfuYGrsv/F/YDujZjl22Z1Va3ucbmwwY+AYt2uRlh6o8WwqyHk1LewshKpCVHNEx2V3
- +Ca0aYRvPuCvtNH2j8pNiNyULYKIlRG6/zLC/b2HCtxK+bZCLGDj6G0gl2uWStEdBsVU3wv9iXH
- 6u6UyDrr6ObE4CkHmTBiE611F9QnfHbIqwVm1KNjy57fby9FkICHkiueKXFUzwAGCKNQ4syaPTI
- BBnIakhMFuEaCzMMYlp5hLzRe6TNDX/zoKIhNMRLjJjyeJykKlaSzbvJPUq2PeXaO1VnS9ijWWn
- /gBipdQQCdnhq14SE+pq8DQq1mpiC2lJMYAyxHXnw34oFkUwiHRifmC32XpB6yYuwvkVexNiUMc
- 84oeI2KxFcu+ykzQM4UE44utb65ViB9B/+9OhAJ9jcylSFFzu5OqpQ64AtDOQQB/EGKSpk5Dx10
- L2KHRd7wmuvvn43nE2O657r/JlyJ7mAg3hMEWD/bAkOSXfqx74Cl1yCGEMbU7EnT1Gu+7aZ
-X-Received: by 2002:a05:6820:883:b0:695:66d5:6a72 with SMTP id
- 006d021491bc7-69998d47f38mr10788660eaf.50.1778367739648; 
- Sat, 09 May 2026 16:02:19 -0700 (PDT)
-Received: from james-x399.tailafd1a.ts.net (71-218-113-237.hlrn.qwest.net.
- [71.218.113.237]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-69b25dc00acsm3261043eaf.10.2026.05.09.16.02.17
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 09 May 2026 16:02:18 -0700 (PDT)
-From: James Hilliard <james.hilliard1@gmail.com>
-To: u-boot@lists.denx.de
-Cc: James Hilliard <james.hilliard1@gmail.com>, Tom Rini <trini@konsulko.com>,
- Alexander Sverdlin <alexander.sverdlin@siemens.com>,
- Heiko Schocher <hs@nabladev.com>,
- Walter Schweizer <walter.schweizer@siemens.com>,
- Sumit Garg <sumit.garg@kernel.org>,
- Matthias Winker <matthias.winker@de.bosch.com>,
- Philip Oberfichtner <pro@denx.de>, Le Jin <le.jin@siemens.com>,
- Jan Kiszka <jan.kiszka@siemens.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Daniel Golle <daniel@makrotopia.org>,
- Philip Molloy <philip.molloy@analog.com>,
- David Lechner <dlechner@baylibre.com>, Michael Walle <mwalle@kernel.org>,
- Varadarajan Narayanan <quic_varada@quicinc.com>,
- Peng Fan <peng.fan@nxp.com>,
- Adrian Freihofer <adrian.freihofer@siemens.com>,
- Peter Robinson <pbrobinson@gmail.com>, Simon Glass <sjg@chromium.org>,
- Benjamin ROBIN <dev@benjarobin.fr>
-Subject: [PATCH] env: add Kconfig option for static flags list
-Date: Sat,  9 May 2026 17:01:44 -0600
-Message-ID: <20260509230147.1308308-1-james.hilliard1@gmail.com>
-X-Mailer: git-send-email 2.53.0
+ bh=oLcujl6tP3WqbBMaaB/wpbRTgrDmyJZ1d1KgENKk5cs=;
+ b=Cs1HuBEvUuZPHi75J2s7i1vtt2Q7mtGv4PXKczZ7jiPpgdSviFA7jo9ArmNCnnxYL9
+ ux5Eg+g65gvEvBJK7kFelCRfVGfwLlAHF/PbWJdkxCqvLRl2ZMueYYXFgO67lp7uNx//
+ iRWuAo66HYKiGY+zCYuir4FlpYdAiAWNFsgjc92c2nUc3iHywQve4eAUiNF6wBHVfsVJ
+ GdBqMQ1R42D6BZBOuFQda5dgruZAQ3cfKQ5ZeZmmPJ0/UoFiPdq2x0uGlAEUlt6wdkRE
+ H0Njd91DeVrMb4xYx9z2svW9asdWbqRb+BVElsUq/DMXMJlDiBIbp2iX5KN6oeJn1CNT
+ BeHw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1778367990; x=1778972790;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=oLcujl6tP3WqbBMaaB/wpbRTgrDmyJZ1d1KgENKk5cs=;
+ b=gT04J7N0yXv+nliBYQGFfKp/OLGMFbipreWmcEjXVzxcmMSeBcYhGN9Kfe3juZi/1C
+ 1kCEEFttNFaG5yUje1UY2RRUZfg83yMEgmX6OFqKIpBN2+IB7lpC8a1NxOYKk1vFBn4/
+ aFD4ORqlkjr1ar6Jo4VMc808JSQM4K1ZduQwxsK1uiOGTH0bJowhna3/RrYv6aPycG0o
+ doToWcznfWIdy4aimq7Xgb9a3o0oGNXlW0PfzLQAKuh5iLOouU7JSYI01Kn5DwUPXTvs
+ nTdgD0AH5+l8aPTF83Q3gmkZzKhQfBvOtkOTQRy3YFCqHlLGSy3C1wWM0MpQeqjA0w2U
+ FXIQ==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ+h6iwgaU5YP/xMAeftk2IXpg5Vn22KKB18AUi75DIYQxNeQpYZ7JPnSNSubPZjhiExfobMqz0=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw9gQ2pF3hcyxxwzRwIGi1ywzUbhv63RViVAbiSKK/JanEwhEm+
+ CV+t4WHR7M3MqI1l2vt88pwnGxJ310nTxHtuXxwjDfeW9QoU4RlmKdL5YM1H/WUSusCEZKvbah6
+ M+ifE95FgDiT7g5rQByuhLrigWhsKZqI=
+X-Gm-Gg: Acq92OHin2CSj5tcJUmK1OFxIpsT4AyeSYtEC4P+D4+wRY6GpmvQ2dOJMBTeAPUX9rE
+ 51OGBynV2kE01egbfhc94ZfZCtBEQZYZy+GSOw3yWR0QRQRaLOjtpA4rR0CSEMVwIWo+8Endtp5
+ eg9ks2LhwputX+UGHYYIfadc94ShWOSFOQt5mE3vcJYxrlgLpZzz1HsKdsAnL2gfKdTNt1HdpEu
+ 6z95lVJDitfxeO2fz2i/aHrv71mAN1G3dy/j04IgcWjiWKaKgXSqwl5UZt4Tg0+hIMlXUASUzv3
+ iwi+Vlj3
+X-Received: by 2002:a05:690e:d8a:b0:650:1bff:602c with SMTP id
+ 956f58d0204a3-65da8526b5amr3743639d50.53.1778367989742; Sat, 09 May 2026
+ 16:06:29 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <IRefanijM8fTzOXeGe-H5hmhRkm7pt4Q83BV6VcWKlWp0s4i8mYcONTQz-IVhvNWlGta4LtnfK7ti6gxlrqq8h8cotgG1S0Fs6_DviAHvyo=@bens.haus>
+ <9b0f2989-5c78-4e74-a691-b873b9bb2649@cherry.de>
+ <ZJ8GNZXD-fYDaXZ4MCGrxvVAtJfaDjWWHRt6LlXWpQJpg3evBb4F-T9KO5yGvmFM3j643wz9PQa4ROK62TL6kKSnBW65XJmBep6yuxh2qUo=@bens.haus>
+In-Reply-To: <ZJ8GNZXD-fYDaXZ4MCGrxvVAtJfaDjWWHRt6LlXWpQJpg3evBb4F-T9KO5yGvmFM3j643wz9PQa4ROK62TL6kKSnBW65XJmBep6yuxh2qUo=@bens.haus>
+From: Tony Dinh <mibodhi@gmail.com>
+Date: Sat, 9 May 2026 16:06:17 -0700
+X-Gm-Features: AVHnY4Ih3qG2H7Nb3_nmPC_r5oyUNgAZ2RFJ3TiFcP5lQC9No8ashANMYWM50kg
+Message-ID: <CAJaLiFzyOUV1r0gUAFpgGcQUGzmz_zneiC=AVbAnxKDcOMCvqg@mail.gmail.com>
+Subject: Re: v2026.04 crashing on Marvell Armada 3720
+To: Ben Schneider <ben@bens.haus>
+Cc: Quentin Schulz <quentin.schulz@cherry.de>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -113,161 +118,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Environment callbacks can already be configured from Kconfig with
-CONFIG_ENV_CALLBACK_LIST_STATIC, but static environment flags still
-require board headers to define CFG_ENV_FLAGS_LIST_STATIC.
+On Sat, May 9, 2026 at 12:03=E2=80=AFAM Ben Schneider <ben@bens.haus> wrote=
+:
+>
+> Hi Quentin, thank you!
+>
+> On Thursday, May 7th, 2026 at 2:58 AM, Quentin Schulz <quentin.schulz@che=
+rry.de> wrote:
+> >
+> > It'd be super helpful if you can pinpoint which commit between v2026.01
+> > and v2026.04 releases is the culprit.
+> >
+>
+> Git bisect led me to 284e1a0 x86: Increase SYS_MALLOC_F_LEN to 0x1000. I'=
+m really confused. This board is ARCH_MVEBU--an arm64 device, not x86. I ch=
+ecked the good commit twice to be sure. Any idea why this would cause probl=
+ems?
+>
 
-Add CONFIG_ENV_FLAGS_LIST_STATIC and append it to ENV_FLAGS_LIST_STATIC
-after the legacy CFG_ENV_FLAGS_LIST_STATIC value. Normalize existing
-CFG_ENV_FLAGS_LIST_STATIC definitions to end with a comma so the Kconfig
-list can be concatenated directly.
+I believe the SYS_MALLOC_F_LEN for ARCH_MVEBU should be 0x2000 (system
+wide default value). Please try that.
 
-This lets boards configure writeable-list policy and type validation
-from defconfig without adding a config header solely for env flags.
+But indeed, it's strange that commit 284e1a0 would affect ARCH_MVEBU.
 
-Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
----
- README                             |  6 ++++++
- env/Kconfig                        | 13 +++++++++++++
- include/configs/capricorn-common.h |  2 +-
- include/configs/hmibsc.h           |  2 +-
- include/configs/imx6q-bosch-acc.h  |  2 +-
- include/configs/iot2050.h          |  2 +-
- include/configs/socrates.h         |  2 +-
- include/env_flags.h                |  3 ++-
- 8 files changed, 26 insertions(+), 6 deletions(-)
-
-diff --git a/README b/README
-index 6836a917c79..b963ce23078 100644
---- a/README
-+++ b/README
-@@ -1107,6 +1107,7 @@ Configuration Settings:
- 		Use buffered writes to flash.
- 
- - CONFIG_ENV_FLAGS_LIST_DEFAULT
-+- CONFIG_ENV_FLAGS_LIST_STATIC
- - CFG_ENV_FLAGS_LIST_STATIC
- 	Enable validation of the values given to environment variables when
- 	calling env set.  Variables can be restricted to only decimal,
-@@ -1133,11 +1134,16 @@ Configuration Settings:
- 		r - Read-only
- 		o - Write-once
- 		c - Change-default
-+		w - Writeable if CONFIG_ENV_WRITEABLE_LIST is enabled
- 
- 	- CONFIG_ENV_FLAGS_LIST_DEFAULT
- 		Define this to a list (string) to define the ".flags"
- 		environment variable in the default or embedded environment.
- 
-+	- CONFIG_ENV_FLAGS_LIST_STATIC
-+		Define this to a list (string) to add to the static flags
-+		list.
-+
- 	- CFG_ENV_FLAGS_LIST_STATIC
- 		Define this to a list (string) to define validation that
- 		should be done if an entry is not found in the ".flags"
-diff --git a/env/Kconfig b/env/Kconfig
-index 7abd82ab6f3..ca8f9aff19e 100644
---- a/env/Kconfig
-+++ b/env/Kconfig
-@@ -34,6 +34,19 @@ config ENV_CALLBACK_LIST_STATIC
- 	  If the callback name is not specified, then the callback is deleted.
- 	  Spaces are also allowed anywhere in the list.
- 
-+config ENV_FLAGS_LIST_STATIC
-+	string "Static flags list"
-+	default ""
-+	help
-+	  The environment flags are associated with variables in a static
-+	  list. Define this list in the same format as
-+	  CFG_ENV_FLAGS_LIST_STATIC.
-+
-+	  When CONFIG_ENV_WRITEABLE_LIST is enabled, the 'w' access attribute
-+	  can be used to mark variables as writable.
-+
-+	  Spaces are also allowed anywhere in the list.
-+
- config SAVEENV
- 	def_bool y if CMD_SAVEENV
- 
-diff --git a/include/configs/capricorn-common.h b/include/configs/capricorn-common.h
-index ee13d2ab950..95a05d64d68 100644
---- a/include/configs/capricorn-common.h
-+++ b/include/configs/capricorn-common.h
-@@ -48,7 +48,7 @@
- 	"sig_a:sw,sig_b:sw," \
- 	"target_env:sw," \
- 	"upgrade_available:dw," \
--	"ustate:dw"
-+	"ustate:dw,"
- #endif
- 
- /* Default location for tftp and bootm */
-diff --git a/include/configs/hmibsc.h b/include/configs/hmibsc.h
-index 950ec8b190d..cca562a66c9 100644
---- a/include/configs/hmibsc.h
-+++ b/include/configs/hmibsc.h
-@@ -10,6 +10,6 @@
- 
- /* PHY needs a longer aneg time */
- 
--#define CFG_ENV_FLAGS_LIST_STATIC "BOOT_A_LEFT:dw,BOOT_B_LEFT:dw,BOOT_ORDER:sw"
-+#define CFG_ENV_FLAGS_LIST_STATIC "BOOT_A_LEFT:dw,BOOT_B_LEFT:dw,BOOT_ORDER:sw,"
- 
- #endif
-diff --git a/include/configs/imx6q-bosch-acc.h b/include/configs/imx6q-bosch-acc.h
-index 84da8250684..5662b59343e 100644
---- a/include/configs/imx6q-bosch-acc.h
-+++ b/include/configs/imx6q-bosch-acc.h
-@@ -54,7 +54,7 @@
- 	"fitpart:dw," \
- 	"mmcpart:dw," \
- 	"production:bw," \
--	"ustate:dw"
-+	"ustate:dw,"
- 
- #else
- /* SD Card boot */
-diff --git a/include/configs/iot2050.h b/include/configs/iot2050.h
-index 5c58c7bbaab..fe3fd5405d7 100644
---- a/include/configs/iot2050.h
-+++ b/include/configs/iot2050.h
-@@ -43,7 +43,7 @@
- 	"board_uuid:sw,board_name:sw,board_serial:sw,board_a5e:sw,"	\
- 	"mlfb:sw,fw_version:sw,seboot_version:sw,"			\
- 	"m2_manual_config:sw,"						\
--	"eth1addr:mw,eth2addr:mw,watchdog_timeout_ms:dw,boot_targets:sw"
-+	"eth1addr:mw,eth2addr:mw,watchdog_timeout_ms:dw,boot_targets:sw,"
- #endif
- 
- #endif /* __CONFIG_IOT2050_H */
-diff --git a/include/configs/socrates.h b/include/configs/socrates.h
-index 006d649f6ed..9cd0abd60aa 100644
---- a/include/configs/socrates.h
-+++ b/include/configs/socrates.h
-@@ -108,7 +108,7 @@
-  */
- #define CFG_SYS_BOOTMAPSZ	(8 << 20)	/* Initial Memory map for Linux	*/
- 
--#define CFG_ENV_FLAGS_LIST_STATIC "ethaddr:mw,eth1addr:mw,system1_addr:xw,serial#:sw,ethact:sw,ethprime:sw"
-+#define CFG_ENV_FLAGS_LIST_STATIC "ethaddr:mw,eth1addr:mw,system1_addr:xw,serial#:sw,ethact:sw,ethprime:sw,"
- 
- /* pass open firmware flat tree */
- 
-diff --git a/include/env_flags.h b/include/env_flags.h
-index 123fdbcb0ba..98b50c72227 100644
---- a/include/env_flags.h
-+++ b/include/env_flags.h
-@@ -89,7 +89,8 @@ enum env_flags_varaccess {
- 	NET_FLAGS \
- 	NET6_FLAGS \
- 	SERIAL_FLAGS \
--	CFG_ENV_FLAGS_LIST_STATIC
-+	CFG_ENV_FLAGS_LIST_STATIC \
-+	CONFIG_ENV_FLAGS_LIST_STATIC
- 
- #ifdef CONFIG_CMD_ENV_FLAGS
- /*
--- 
-2.53.0
-
+All the best,
+Tony
