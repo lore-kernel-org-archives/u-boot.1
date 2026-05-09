@@ -4,67 +4,108 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C755BCD37AF
-	for <u-boot@archiver.kernel.org>; Sat,  9 May 2026 15:15:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 746DACD3445
+	for <u-boot@archiver.kernel.org>; Sat,  9 May 2026 15:17:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 059B884CF4;
-	Sat,  9 May 2026 17:13:46 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id F284C84CF4;
+	Sat,  9 May 2026 17:17:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="CcfDjNdO";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="S8oeM4eg";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20251104.gappssmtp.com header.i=@baylibre-com.20251104.gappssmtp.com header.b="HnyTWTdP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C3E1284DCA; Sat,  9 May 2026 17:13:44 +0200 (CEST)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 098B584CFE; Sat,  9 May 2026 17:17:06 +0200 (CEST)
+Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
+ [IPv6:2607:f8b0:4864:20::336])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0493784CC7
- for <u-boot@lists.denx.de>; Sat,  9 May 2026 17:13:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C7C0D84CD5
+ for <u-boot@lists.denx.de>; Sat,  9 May 2026 17:16:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4gCTyt5kG2z9vC5;
- Sat,  9 May 2026 17:13:42 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1778339622;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=V0GR3mkVbpexik+cTfROBNqltWftr3qStsRGLj2Ci0I=;
- b=CcfDjNdOFdIfN8gdQ4zNXs4KfL3UTU4xkJPpMVSpGCHdJ4eOzopAVf0vW3h07P/bzjWGHp
- JEAcUC7ihYxWGPkYfy1UpZNSKPMSsXlJZuC8mzBdz10Y6y3jRHJzIS2hPaAEmy5yjjzQrJ
- +sUy6zgfX8gx7ODjFHKtXWZEREIfQrIwqSmcXlrzXad8P8ZDvRurw5KLW4G/CMK2tcaUb6
- +S6JwkDi/+hwDpKTypzyez6kE1UuABGFFZjG6zVIJfzFwAC3AuSwTl4odN+leoWOjPVhcC
- sasmFLiJQu4FR3IJOMySlp9/BgrPykh0vzMQcJYE1wqzd8A8d60nFznVzlgcdw==
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1778339621;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=V0GR3mkVbpexik+cTfROBNqltWftr3qStsRGLj2Ci0I=;
- b=S8oeM4eg0ZK/B5WYFzO388IqQwqhzaYNH1dSSeaUTKwch89QueZkXhdgZpG4xuST0EEtct
- N5obBvUe43NvlIDyyE2nYEMc+hg+8FKFX8ccwa5KRVR1ldjUR+ufg+eqzcGUwfCR539ftL
- yL6eC3d9INhesFdz+8yS0ISsEg781ZM/MG/zgrVSWryq8vf5l029o1cC5YPsSiQuAo7wWz
- qc9U/EE0J1mAUJO3fBIdSPx3jZU+/5W6mY/PTu/bY3vNzCugne7BJYHntz3MBECW3JlGS3
- ays9FiYdK6QFCxt3vWysfBXJCY8bENlZC30rqQYrefhO34n5nDcFh9rbKAmUZQ==
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH] rtc: emul: Staticize and constify driver ops
-Date: Sat,  9 May 2026 17:13:32 +0200
-Message-ID: <20260509151339.23116-1-marek.vasut+renesas@mailbox.org>
+ spf=pass smtp.mailfrom=dlechner@baylibre.com
+Received: by mail-ot1-x336.google.com with SMTP id
+ 46e09a7af769-7dbe437b072so1594453a34.2
+ for <u-boot@lists.denx.de>; Sat, 09 May 2026 08:16:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20251104.gappssmtp.com; s=20251104; t=1778339817; x=1778944617;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:to:subject:user-agent:mime-version:date:message-id:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=amPkeP+uqDL5CEtFnLeCFPFG0XzDG9KuRqAx9wBiUz4=;
+ b=HnyTWTdPo8RQPoRSw3gm7PvcIi6BtruSzQeD9/IoBlxUK/HVrxWbx9EPRgSnmw+NSz
+ zIfeL0HuNyZfVw4bq6mNdcYfzQQt1TzNhyaa8c7h2mvFA5GMCGSyV0PvHK9Mh8OFEedS
+ PoJFSgm0+HI7qqnwvKhn/sT4nMc9JIOvzDGKAehb7m9ugoaXDsE0gBuEufxbUMfWY/vP
+ 2COZd+DFY0GeK5umrqkOCOJkC+x41Bv6hT11oIJNM1Lv70SLpMbSA5LFyoUDlhVlBaDA
+ J7emZg0fx0C5n09o+Mo1CvYUJZlBn5cMOb+zZTSImxKVIDJCKEWI9iqc4AOGtlvZxig1
+ gpig==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1778339817; x=1778944617;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=amPkeP+uqDL5CEtFnLeCFPFG0XzDG9KuRqAx9wBiUz4=;
+ b=WqtAhbQmvrOA5tYHQ4h6i689nXZl92LYvI5gRnBlU5UfKAvMH6uoUPPNQZZUrt4Spg
+ LaaDJ7YkGWNHeDqqQ6A8btdQoS6EZfQCKOuyCM1ICp2ATWQIN5zEcglFY2VtibpjpV8g
+ 4BBdZ1bWQ+JmN0eeWp6rtDenc3kHdi0Wj2FrgaN1gFOil7HqExIE6eJolH22Ih/wlsBq
+ YtLOaXZj2XQLRDobI6HPG2Z93m959vt+IDPt6rU6DElcow+Nprc8MVRPECZ+N5oPzgdb
+ Qor3A00FoVaT+fHxhGSmDaq4gLXYyCkoQvgmw1jhbeDpZlL5Td7I7tKO1tMqAPqElWrB
+ /FqA==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ/+VHHRoHTUMDk25cnlNi1QGQJ/azTmiXdHVoV0yQHHokKTu2NQ4PQZPVnPMzx33qD+vK6EIr8=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy/TKqlc9au1nNjVtH/r0FkH+1p9ZShO6VWqa71thbcILHXRgQq
+ 0TsSEoaOZIDknTd0JfvbQs1q+xF9Q2kcn+6VQw8syv9OVc0mc+wdNkp0TOrfK1tpv2A=
+X-Gm-Gg: Acq92OGiWXn3Ml19RZ2u2L+mX0hpttK81VkHLg8L9bi+to09HrZEGgNhbxaLBfuLOBk
+ 4BVwo9pGptVQfKXezkAc/itOV9x/ytnjZlLwWnySJywRVHYSHGeXpgf+sEQjkXXiqVRnS8i1cDK
+ UX+b2HCX8jZb9qcdZtUkvvtNCMpku06v9475ne+BD2YKed0aYEpKEe7HF/SCy+3inuce+Tq7bUw
+ BrfxJBu/RI2Jh6S9Sqwr0TPXj1N7Hkp54hGRZGPAt5v0Eu/GJfMO07ObEXQjaiOUam1+6WRr4iD
+ bP3T4P1DzmFiSl5Zqv7cl/zPWNdBAT+8xW9/wpmHMaf0bXI14eYHzlsc2uXE9emMfjRbECv+gzs
+ e6l4D4SPeKui6SIvrRJVM7xZeXIGIn/ptYPxTRETyiOCWh/NZ1rhA5WLDH23IkIMTxjlFWZ3fSu
+ k2pCALk0jGKAdTGOa9jIqv9q+bFny1V8EPkltZrWsH2BeoQcEwx+YmemcXGK2/pzBI2iYdGsNwb
+ g==
+X-Received: by 2002:a05:6830:6588:b0:7d7:5113:f83a with SMTP id
+ 46e09a7af769-7e1df0f959dmr9832278a34.25.1778339817385; 
+ Sat, 09 May 2026 08:16:57 -0700 (PDT)
+Received: from ?IPV6:2600:8803:e7e4:500:3548:c22e:ea52:dbc7?
+ ([2600:8803:e7e4:500:3548:c22e:ea52:dbc7])
+ by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7e367d8fe3esm3082837a34.21.2026.05.09.08.16.55
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sat, 09 May 2026 08:16:55 -0700 (PDT)
+Message-ID: <150787c2-785c-4c97-8c9d-06797c3bebae@baylibre.com>
+Date: Sat, 9 May 2026 10:16:54 -0500
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 4/9] pinctrl: airoha: add pin controller and gpio
+ driver for AN7581 SoC
+To: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+ Tom Rini <trini@konsulko.com>, Christian Marangi <ansuelsmth@gmail.com>,
+ Simon Glass <sjg@chromium.org>, Marek Vasut
+ <marek.vasut+renesas@mailbox.org>, Peng Fan <peng.fan@nxp.com>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Dan Carpenter <dan.carpenter@linaro.org>, Michal Simek
+ <michal.simek@amd.com>, Sean Anderson <sean.anderson@linux.dev>,
+ Yao Zi <me@ziyao.cc>, Anis Chali <chalianis1@gmail.com>,
+ "Yury Norov (NVIDIA)" <yury.norov@gmail.com>, Crt Mori <cmo@melexis.com>,
+ Richard Genoud <richard.genoud@bootlin.com>,
+ Jonathan Cameron <Jonathan.Cameron@huawei.com>,
+ Geert Uytterhoeven <geert+renesas@glider.be>, u-boot@lists.denx.de,
+ Lorenzo Bianconi <lorenzo@kernel.org>, Markus Gothe
+ <markus.gothe@genexis.eu>, Matheus Sampaio Queiroga
+ <srherobrine20@gmail.com>, Benjamin Larsson <benjamin.larsson@genexis.eu>
+References: <20260504130306.2764862-1-mikhail.kshevetskiy@iopsys.eu>
+ <20260504130306.2764862-5-mikhail.kshevetskiy@iopsys.eu>
+ <63eb62e7-f301-470f-9524-c261c85dfbd9@baylibre.com>
+ <d0d07e96-c638-4639-b2b5-12becabbb933@iopsys.eu>
+Content-Language: en-US
+From: David Lechner <dlechner@baylibre.com>
+In-Reply-To: <d0d07e96-c638-4639-b2b5-12becabbb933@iopsys.eu>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: 4ami9renthzurjb7qh4u8dzi5gbayshx
-X-MBO-RS-ID: c12cdd7fe7d5408bca6
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,30 +122,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Set the ops structure as static const. The structure is not accessible
-from outside of this driver and is not going to be modified at runtime.
-
-Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
----
-Cc: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
----
- drivers/rtc/i2c_rtc_emul.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/drivers/rtc/i2c_rtc_emul.c b/drivers/rtc/i2c_rtc_emul.c
-index ea11c72c964..41bdf275f1e 100644
---- a/drivers/rtc/i2c_rtc_emul.c
-+++ b/drivers/rtc/i2c_rtc_emul.c
-@@ -191,7 +191,7 @@ static int sandbox_i2c_rtc_xfer(struct udevice *emul, struct i2c_msg *msg,
- 	return 0;
- }
- 
--struct dm_i2c_ops sandbox_i2c_rtc_emul_ops = {
-+static const struct dm_i2c_ops sandbox_i2c_rtc_emul_ops = {
- 	.xfer = sandbox_i2c_rtc_xfer,
- };
- 
--- 
-2.53.0
-
+On 5/9/26 5:40 AM, Mikhail Kshevetskiy wrote:
+> 
+> On 5/7/26 00:44, David Lechner wrote:
+>> On 5/4/26 8:03 AM, Mikhail Kshevetskiy wrote:
+>>> This patch adds U-Boot pin controller and gpio driver for Airoha AN7581 SoC.
+>>>
+>>> Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+>>> ---
+>>>  drivers/pinctrl/airoha/Kconfig          |    5 +
+>>>  drivers/pinctrl/airoha/Makefile         |    2 +
+>>>  drivers/pinctrl/airoha/pinctrl-an7581.c | 1074 +++++++++++++++++++++++
+>>>  3 files changed, 1081 insertions(+)
+>>>  create mode 100644 drivers/pinctrl/airoha/pinctrl-an7581.c
+>>>
+>>> diff --git a/drivers/pinctrl/airoha/Kconfig b/drivers/pinctrl/airoha/Kconfig
+>>> index eb87afbb374..986d23c2e3d 100644
+>>> --- a/drivers/pinctrl/airoha/Kconfig
+>>> +++ b/drivers/pinctrl/airoha/Kconfig
+>>> @@ -9,3 +9,8 @@ config PINCTRL_AIROHA
+>>>  	select REGMAP
+>>>  	select SYSCON
+>>>  	bool
+>>> +
+>>> +config PINCTRL_AIROHA_AN7581
+>>> +	tristate "AN7581 pin controller and gpio driver"
+>>> +	depends on TARGET_AN7581
+>>> +	select PINCTRL_AIROHA
+>>> diff --git a/drivers/pinctrl/airoha/Makefile b/drivers/pinctrl/airoha/Makefile
+>>> index a25b744dd7a..909bd9a04d9 100644
+>>> --- a/drivers/pinctrl/airoha/Makefile
+>>> +++ b/drivers/pinctrl/airoha/Makefile
+>>> @@ -1,3 +1,5 @@
+>>>  # SPDX-License-Identifier: GPL-2.0
+>>>  
+>>>  obj-$(CONFIG_PINCTRL_AIROHA)		+= pinctrl-airoha.o
+>>> +
+>>> +obj-$(CONFIG_PINCTRL_AIROHA_AN7581)	+= pinctrl-an7581.o
+>>> diff --git a/drivers/pinctrl/airoha/pinctrl-an7581.c b/drivers/pinctrl/airoha/pinctrl-an7581.c
+>>> new file mode 100644
+>>> index 00000000000..2505818251c
+>>> --- /dev/null
+>>> +++ b/drivers/pinctrl/airoha/pinctrl-an7581.c
+>>> @@ -0,0 +1,1074 @@
+>>> +// SPDX-License-Identifier: GPL-2.0-only
+>>> +/*
+>>> + * Author: Lorenzo Bianconi <lorenzo@kernel.org>
+>>> + * Author: Benjamin Larsson <benjamin.larsson@genexis.eu>
+>>> + * Author: Markus Gothe <markus.gothe@genexis.eu>
+>>> + */
+>>> +#include "airoha-common.h"
+>>> +
+>> The en7581_ prefix doesn't match the file name or Kconfig. Did you
+>> mean to use an7581_ everywhere?
+> Good question. EN7581 is the initial name of the chip. The rename to
+> AN7581 was caused by renaming of Econet company to Airoha. There are a
+> lot of places where en7581_ prefix is used. Also this prefix used in the
+> original linux driver, so I prefer to keep it as is.
+>>
+Then why not also change the file name, etc. to match? Otherwise, it just
+looks like a typo if you don't know the history.
