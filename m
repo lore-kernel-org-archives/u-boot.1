@@ -4,54 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8185CD3447
-	for <u-boot@archiver.kernel.org>; Sat,  9 May 2026 13:06:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35EFDCD3445
+	for <u-boot@archiver.kernel.org>; Sat,  9 May 2026 15:13:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BD1C984CD5;
-	Sat,  9 May 2026 15:06:34 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id F2AD784CF4;
+	Sat,  9 May 2026 17:13:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="MQnWZJZW";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="P60Ow7la";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="PU19773M";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6727184CEC; Sat,  9 May 2026 15:06:33 +0200 (CEST)
-Received: from sea.source.kernel.org (sea.source.kernel.org
- [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
+ id 5CC6784D13; Sat,  9 May 2026 17:13:19 +0200 (CEST)
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AE49B84CC7
- for <u-boot@lists.denx.de>; Sat,  9 May 2026 15:06:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
+ by phobos.denx.de (Postfix) with ESMTPS id 61DCB84CC7
+ for <u-boot@lists.denx.de>; Sat,  9 May 2026 17:13:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ehristev@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 32C4543E69;
- Sat,  9 May 2026 13:06:27 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 796B2C2BCB4;
- Sat,  9 May 2026 13:06:26 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1778331987;
- bh=inBXH8pjkMshWf7AkgW+C53cHyQquEGa4wL1tBL4Sq0=;
- h=Date:From:To:Cc:Subject:From;
- b=MQnWZJZW6T/8O/xZD3legj/YQ1qA7Ubo5+QIwSLPhUz1RNrAlfg12B8xwq7Q1JlVx
- kiR9iemnZauD0P41n65kjBk9XJ+KIli/c6m8yoZdmPr9TCpndUVi8CairlH2R8poIx
- ejZslIevShfeBzYwSgPFQs+r28kI194fervpcFcUz1upVFtxx0n55IdOg7JnrnMCs+
- jVr7+PLXLrpUR3gwf+BoL/8ZBxMvQsoY1MJAJMvj8SShwABJRknHw8LWim0UyfXqT7
- z/HKJfgJCtFwm/8GezpeMKYM9HTCJPJ07QzOhBO6+/SPtfrVgN9BgOMEhmPFbOx4Ky
- PBbqLygkEgeGw==
-Message-ID: <3262be87-a39c-4676-ae3e-c8efd2f4ec17@kernel.org>
-Date: Sat, 9 May 2026 16:06:23 +0300
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
+Received: from smtp102.mailbox.org (smtp102.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4gCTyN6ZmZz9t5H;
+ Sat,  9 May 2026 17:13:16 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1778339596;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=nBxbZf1/zT6amR2O6yVu0BOofLyZ15QEdacEFEqbVqc=;
+ b=P60Ow7laceHqvS05JhmDeNgVkdnw5QqCyRqbVKzxWk3ymor0fHE/ERIqbdKY6TYvb+5ISF
+ fSy77tM/3X02rVexeVeMB/yaCdTUlMLTf5HXY07nD17d2wWEKmQLL2DJkrgoPpqJFpx1Su
+ cM6kMYI5Q08EY5MKh3tLNQwm/13GDDD5t8JnrVax7V2vevzlAZDgvjIkEZgUmbxmB9tyE2
+ QVGC4m+sYqJlItpvhQMz6ClaTzrh177XXCMbO8+oleNvt0lxL3ALHd4yR/bXcH30qJBbpf
+ GjvXXMHzjEmQbB6jfP35Mp5RKl0euyAt+CAsW2AU0T2kwXOsCEhZ0r+Milrw0Q==
+Authentication-Results: outgoing_mbo_mout;
+ dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=PU19773M;
+ spf=pass (outgoing_mbo_mout: domain of marek.vasut+renesas@mailbox.org
+ designates 2001:67c:2050:b231:465::102 as permitted sender)
+ smtp.mailfrom=marek.vasut+renesas@mailbox.org
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1778339595;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=nBxbZf1/zT6amR2O6yVu0BOofLyZ15QEdacEFEqbVqc=;
+ b=PU19773MxtozzWbeMqCFo77TicE4aqQj2mx1cOP0gceH2DSEBaWKi3PO62gyVmXjKdAMXa
+ okVQZCqw2Sj7A+lLBB2axjoZeTmZvwm+7MRr8tPbIvA3/IXfksQ0kf7iimQYy2vjFSAPRi
+ kD9MJQWYAsMUgKFvAy6/sG3/3MpvNrtxbZimyCKmrhKcR+o8f8f4/Nq6d9qKJzzFHOdymi
+ 9+gJ0NHoaWJ5Qdjd7lurBxufV88+KN9X7htG1D78qmJNvBoo2cJ6pX882RlfhAFbvmCxE7
+ HsE9F5GRULD1h4yNPRm3w30d4v7i6OsE/ZnItiEOR4i5DaJpTefxi/K2tcJ9LA==
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Aspeed BMC SW team <BMC-SW@aspeedtech.com>,
+ Chia-Wei Wang <chiawei_wang@aspeedtech.com>, Joel Stanley <joel@jms.id.au>,
+ Ryan Chen <ryan_chen@aspeedtech.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH 01/14] reset: ast2500: Staticize and constify driver ops
+Date: Sat,  9 May 2026 17:12:24 +0200
+Message-ID: <20260509151308.23067-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: en-US
-From: Eugen Hristev <ehristev@kernel.org>
-To: Tom Rini <trini@konsulko.com>
-Cc: open list <u-boot@lists.denx.de>
-Subject: [PULL] u-boot-at91-fixes-2026.07-a
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-ID: 651a5feef877c9d95c6
+X-MBO-RS-META: a3udn6nozsyp9cmnpyypseobsmpwsjb7
+X-Rspamd-Queue-Id: 4gCTyN6ZmZz9t5H
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -68,66 +90,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Tom,
+Set the ops structure as static const. The structure is not accessible
+from outside of this driver and is not going to be modified at runtime.
 
-Please pull tag u-boot-at91-fixes-2026.07-a , the first set of at91
-fixes for the 2026.07 cycle.
+Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+---
+Cc: Aspeed BMC SW team <BMC-SW@aspeedtech.com>
+Cc: Chia-Wei Wang <chiawei_wang@aspeedtech.com>
+Cc: Joel Stanley <joel@jms.id.au>
+Cc: Ryan Chen <ryan_chen@aspeedtech.com>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+---
+ drivers/reset/reset-ast2500.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-This is just one cleanup of some useless code.
+diff --git a/drivers/reset/reset-ast2500.c b/drivers/reset/reset-ast2500.c
+index f3543fa8cc1..39b3d025713 100644
+--- a/drivers/reset/reset-ast2500.c
++++ b/drivers/reset/reset-ast2500.c
+@@ -91,7 +91,7 @@ static const struct udevice_id ast2500_reset_ids[] = {
+ 	{ }
+ };
+ 
+-struct reset_ops ast2500_reset_ops = {
++static const struct reset_ops ast2500_reset_ops = {
+ 	.rst_assert = ast2500_reset_assert,
+ 	.rst_deassert = ast2500_reset_deassert,
+ 	.rst_status = ast2500_reset_status,
+-- 
+2.53.0
 
-Thanks,
-Eugen
-
-
-
-The following changes since commit 9f61fd5b80a43ae20ba115e3a2933d47d720ab82:
-
-  Makefile: fix host CPP pollution in cmd_gen_envp (2026-04-24 12:49:27
--0600)
-
-are available in the Git repository at:
-
-  https://source.denx.de/u-boot/custodians/u-boot-at91.git
-tags/u-boot-at91-fixes-2026.07-a
-
-for you to fetch changes up to 301bad079b15bdcdae1dc7c3f4f7b30cff15ba84:
-
-  arm: at91: Drop unnecessary BOARD_EARLY_INIT_F usage (2026-05-01
-10:00:13 +0300)
-
-----------------------------------------------------------------
-First set of u-boot-at91 fixes for the 2026.07 cycle
-
-----------------------------------------------------------------
-Tom Rini (1):
-      arm: at91: Drop unnecessary BOARD_EARLY_INIT_F usage
-
- arch/arm/mach-at91/Kconfig                          | 21
----------------------
- arch/arm/mach-at91/spl_atmel.c                      |  3 ++-
- board/atmel/at91sam9260ek/at91sam9260ek.c           |  7 -------
- board/atmel/at91sam9261ek/at91sam9261ek.c           |  7 -------
- board/atmel/at91sam9263ek/at91sam9263ek.c           |  7 -------
- board/atmel/at91sam9m10g45ek/at91sam9m10g45ek.c     |  7 -------
- board/atmel/at91sam9n12ek/at91sam9n12ek.c           |  7 -------
- board/atmel/at91sam9rlek/at91sam9rlek.c             |  7 -------
- board/atmel/at91sam9x5ek/at91sam9x5ek.c             |  7 -------
- board/atmel/sam9x60_curiosity/sam9x60_curiosity.c   |  5 -----
- board/atmel/sam9x60ek/sam9x60ek.c                   |  7 -------
- board/atmel/sam9x75_curiosity/sam9x75_curiosity.c   |  5 -----
- board/atmel/sama5d27_som1_ek/sama5d27_som1_ek.c     |  7 -------
- board/atmel/sama5d27_wlsom1_ek/sama5d27_wlsom1_ek.c |  7 -------
- board/atmel/sama5d2_icp/sama5d2_icp.c               |  5 -----
- board/atmel/sama5d2_ptc_ek/sama5d2_ptc_ek.c         |  7 -------
- board/atmel/sama5d2_xplained/sama5d2_xplained.c     |  7 -------
- board/atmel/sama5d3_xplained/sama5d3_xplained.c     |  7 -------
- board/atmel/sama5d3xek/sama5d3xek.c                 |  7 -------
- board/atmel/sama5d4_xplained/sama5d4_xplained.c     |  7 -------
- board/atmel/sama5d4ek/sama5d4ek.c                   |  7 -------
- board/atmel/sama7d65_curiosity/sama7d65_curiosity.c |  5 -----
- board/atmel/sama7g5ek/sama7g5ek.c                   |  5 -----
- board/ronetix/pm9261/pm9261.c                       |  5 -----
- board/ronetix/pm9263/pm9263.c                       |  5 -----
- configs/pm9261_defconfig                            |  1 -
- configs/pm9263_defconfig                            |  1 -
- 27 files changed, 2 insertions(+), 171 deletions(-)
