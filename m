@@ -4,80 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 315ACCD37B2
-	for <u-boot@archiver.kernel.org>; Sun, 10 May 2026 17:18:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 809A2CD37B9
+	for <u-boot@archiver.kernel.org>; Sun, 10 May 2026 17:18:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E2AEF84711;
-	Sun, 10 May 2026 19:17:39 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2CCB9847C4;
+	Sun, 10 May 2026 19:17:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="iFo+vu5K";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="HDrAq+7I";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="fLWdiiYj";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="CMMl22Bg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 585B284712; Sun, 10 May 2026 19:17:38 +0200 (CEST)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
- [IPv6:2001:67c:2050:0:465::102])
+ id DC30484715; Sun, 10 May 2026 19:17:39 +0200 (CEST)
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8FE48846D0
- for <u-boot@lists.denx.de>; Sun, 10 May 2026 19:17:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 16E8E8470B
+ for <u-boot@lists.denx.de>; Sun, 10 May 2026 19:17:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org
- [IPv6:2001:67c:2050:b231:465::2])
+Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4gD8gN1YDJz9vCB;
- Sun, 10 May 2026 19:17:36 +0200 (CEST)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4gD8gP6JbSz9srf;
+ Sun, 10 May 2026 19:17:37 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1778433457;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=Qh8P9iusoTshA0zVUEfXcNoWtViUBuSO70zABfSyP8c=;
+ b=fLWdiiYjdNCFI9kIJUvBSZ5YyfRZMJ4jx1qyt7BTu7mscJ48cWd9abyjREbtoMrZWL/jK8
+ l7KJvgx13P9+3XBIdLHSu8cEvwM9Nl3xXpxHkG8mUsHydcA0g54mK2x4QBDW3CVXdwhBcL
+ HFR5KabX8Ap6htSOE6RdP9BIPXLuMDNpQjCU81LjTuVNlcXhawow/o34Q/+YUztG8MUBGw
+ oLlyWl3ZM0RmC40NBKeR2B+apwpeyFYtxxAhhhUtJvXO3lQ5MSB5INhJo3qpTMg4EpOPS0
+ XGw5D+E6CkRF2H/T5yjOlE3lteAZ6ne5x8w8cnaJX3OqDlH6QckAnmk+Tft7Tg==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
  s=mail20150812; t=1778433456;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=u1+LBFO3fRtqD11CMjxLfK9RyS2PfuqNyvWau2qxC2w=;
- b=iFo+vu5KDJu0WvZ5myVJak0JX9VE/WCd5tTP7C5pOTeywt/v1+AoqGVLxSIjYoNjJBqPwP
- he+QKqnOgR7NtCmY8cYdpy+JV4rMhA1PcL+O59ojHo3EXqpSrBP7nh+Vem6MD+xu0RxjvY
- qp1D2tBbLkH5io2Ta+XiNTNfaqQPAnkMNbRMXNWqEMNgYfR/Vg+P4OXinAvbPOQ77knWDo
- HWKvjXmVdg4X9fBvAUlI3q17SMbwFTg2WRzsH9T4of0p3ZEADPiVr41J3b9XZ//YLmZD1J
- ygoWRIt7oSWkjenLYgcDhoUdM7m4wjBAt87cd3NnppWascE2ewDRsUehcEjCkw==
-Authentication-Results: outgoing_mbo_mout;
- dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=HDrAq+7I;
- spf=pass (outgoing_mbo_mout: domain of marek.vasut+renesas@mailbox.org
- designates 2001:67c:2050:b231:465::2 as permitted sender)
- smtp.mailfrom=marek.vasut+renesas@mailbox.org
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1778433455;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=u1+LBFO3fRtqD11CMjxLfK9RyS2PfuqNyvWau2qxC2w=;
- b=HDrAq+7Ix/LdSa0ZMGQ1BHlE9EimMbTPsZWoFtcKx00yuxBWS4vywUbOaAy5izZAKS8U+T
- 3wMrvsGgwyXRiM6Jt6rTk8gulij6MFTetHsyGIfmT8w2jG9GwAbpEh2b/NHfb++92nW3A6
- pCkJm7IAREN2S6daYt8BUjddn80GhFWKq8IDlJ1fg6BCpkv6rOCLH4dKhk6LSVnq1IaTYP
- TdP5Q+hf7gf0Twdzb/VmUxmYlV+81JomywIjN8uSlLLZM6HXc94Krw5KBfOB8/FbUIRXNg
- YiMNqjfVH7B+u6UCuFSzlJSdD55jPG7UjxePTLvcXJzC70zstnqPFav9E03vow==
+ bh=Qh8P9iusoTshA0zVUEfXcNoWtViUBuSO70zABfSyP8c=;
+ b=CMMl22BgM1m7hfAp1LD63YcK0yJ40zkv70c94tIlAIZ+0Jnb5qwV3LWp7xjU6AsKLtr4LS
+ O84GQSFeNXPiDhRMSEjnkC+nytb/dQ0ySQOttkqjfds2/iU+9MQr42gwhcwnE5ZGgwKA8E
+ iGyco93VhgNMYBzJYHtNTx0HixL0g+RvyB1TYr0M85A0e5J3yNTooeHrYhCaFhrGj3RNTq
+ ZdIs/wFova1xOxmc/zHySZKzL+tmH7vEToxA9VJjBtptBXEfS0CKfbtYySaZwjW++GyBta
+ XDEWTtY32FewOEioZkLOh5gSNAbEPMwlPSr4BG3oXEx6BKejpqOa/iLCmTvyyg==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Anatolij Gustschin <ag.dev.uboot@gmail.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 04/11] video: console: normal: Staticize and constify driver
+Subject: [PATCH 05/11] video: console: rotate: Staticize and constify driver
  ops
-Date: Sun, 10 May 2026 19:16:59 +0200
-Message-ID: <20260510171723.56866-4-marek.vasut+renesas@mailbox.org>
+Date: Sun, 10 May 2026 19:17:00 +0200
+Message-ID: <20260510171723.56866-5-marek.vasut+renesas@mailbox.org>
 In-Reply-To: <20260510171723.56866-1-marek.vasut+renesas@mailbox.org>
 References: <20260510171723.56866-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: 15gq7zxsfj1kjc9kbtt3iwa63n8dauen
-X-MBO-RS-ID: c51ca59b514c295771a
-X-Rspamd-Queue-Id: 4gD8gN1YDJz9vCB
+X-MBO-RS-META: 9bh7fq5r4pdzcuuh33kiqohqgxfnx1ce
+X-MBO-RS-ID: ceed1d68e35ac45a143
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,22 +95,40 @@ Cc: Anatolij Gustschin <ag.dev.uboot@gmail.com>
 Cc: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de
 ---
- drivers/video/console_normal.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ drivers/video/console_rotate.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/drivers/video/console_normal.c b/drivers/video/console_normal.c
-index 07db613ac53..6dc0a6eaf9d 100644
---- a/drivers/video/console_normal.c
-+++ b/drivers/video/console_normal.c
-@@ -133,7 +133,7 @@ static int console_set_cursor_visible(struct udevice *dev, bool visible,
- 	return 0;
+diff --git a/drivers/video/console_rotate.c b/drivers/video/console_rotate.c
+index 886b25dcfaf..e478e0ef3bc 100644
+--- a/drivers/video/console_rotate.c
++++ b/drivers/video/console_rotate.c
+@@ -284,7 +284,7 @@ static int console_putc_xy_3(struct udevice *dev, uint x_frac, uint y, int cp)
+ 	return VID_TO_POS(fontdata->width);
  }
  
--struct vidconsole_ops console_ops = {
-+static const struct vidconsole_ops console_ops = {
- 	.putc_xy	= console_putc_xy,
- 	.move_rows	= console_move_rows,
- 	.set_row	= console_set_row,
+-struct vidconsole_ops console_ops_1 = {
++static const struct vidconsole_ops console_ops_1 = {
+ 	.putc_xy	= console_putc_xy_1,
+ 	.move_rows	= console_move_rows_1,
+ 	.set_row	= console_set_row_1,
+@@ -293,7 +293,7 @@ struct vidconsole_ops console_ops_1 = {
+ 	.select_font	= console_simple_select_font,
+ };
+ 
+-struct vidconsole_ops console_ops_2 = {
++static const struct vidconsole_ops console_ops_2 = {
+ 	.putc_xy	= console_putc_xy_2,
+ 	.move_rows	= console_move_rows_2,
+ 	.set_row	= console_set_row_2,
+@@ -302,7 +302,7 @@ struct vidconsole_ops console_ops_2 = {
+ 	.select_font	= console_simple_select_font,
+ };
+ 
+-struct vidconsole_ops console_ops_3 = {
++static const struct vidconsole_ops console_ops_3 = {
+ 	.putc_xy	= console_putc_xy_3,
+ 	.move_rows	= console_move_rows_3,
+ 	.set_row	= console_set_row_3,
 -- 
 2.53.0
 
