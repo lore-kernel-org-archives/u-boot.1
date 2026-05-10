@@ -4,25 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2309CD37B9
-	for <u-boot@archiver.kernel.org>; Sun, 10 May 2026 17:17:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9437ECD37B2
+	for <u-boot@archiver.kernel.org>; Sun, 10 May 2026 17:17:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D8940846FD;
-	Sun, 10 May 2026 19:17:11 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 23572846F8;
+	Sun, 10 May 2026 19:17:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="SaqNHYsZ";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="S0XTIWL2";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="xC41YICs";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="dFvXulS+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A7504846FA; Sun, 10 May 2026 19:17:10 +0200 (CEST)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
- [IPv6:2001:67c:2050:0:465::102])
+ id 9988784701; Sun, 10 May 2026 19:17:35 +0200 (CEST)
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
+ [IPv6:2001:67c:2050:0:465::101])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2F21B846F2
- for <u-boot@lists.denx.de>; Sun, 10 May 2026 19:17:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CB229846D0
+ for <u-boot@lists.denx.de>; Sun, 10 May 2026 19:17:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
@@ -31,51 +31,42 @@ Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4gD8fg33pNz9vC5;
- Sun, 10 May 2026 19:16:59 +0200 (CEST)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4gD8gJ4ZlXz9snJ;
+ Sun, 10 May 2026 19:17:32 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1778433419;
+ s=mail20150812; t=1778433452;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=mwF+lumBrjLtDCPqtKCkZ5BsSkOilQZ4fMRjZ+xmIPA=;
- b=SaqNHYsZpNEUX30TqKlLNKdFWqILLo89M/kADz07QRm0dIXcKhe3qLZb1Duh5Wt1Y7Mbw8
- lQ9SwMvKpvp16ntDF7so5aRaCFIckSMyyqGQLmkMDolG5t5jqbmIKutTgdtAMwIwteEH5Z
- W/8+cemfLmOYTH4+5cyew383m7fnbrZaKYFYenwbDpgFFwcnYz1J5FC/Hmalz1EXqRll4I
- 4M8/EbyOSMbvalrcb4RwYEdlExqxyXuUrRz5qB+qAIpjqt65lPfkULv9/SC0N68sFEmEbV
- SO8J1WRhVv67txk29nHVpBb4T2RL9H5xsmfAdaO2ejCQsuCa2prZf6cKDMkx2Q==
+ content-transfer-encoding:content-transfer-encoding;
+ bh=Ew+LGNrP90TploLWkO+93ZHinbmQsZIn0DFhOMrSMCA=;
+ b=xC41YICs5Bt8Q32u8VNVPEje1QxqM7uh4RNjyBTJ4O8xazQ/GxcZ0z0JXhljWmzYCwEXkW
+ VhdZX/7yZvlZum01kRxy+S9wsE7QBkVz9HC0sKw7zaccO3AspdvN8tXgl8zyTxcpz170Kr
+ wjkR1mLfjXwHT16Pynzo1EE59Urowgoslnz6Y8DNou0B/wiUHE+ZHErAI96X4M3amdDKJh
+ KT90gYQIWQ8YHhsX0qHIVzhgeshyGv8RJoPboaWaS+ZgOJu1ys0hr5x2+bXk0Jd7ho92V4
+ ajuDIIEcAzcPqNXmEQSRg2ezS/kyIdkVbwygCxYDzYuY3/rGaJJF/v9VD9sEUg==
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1778433417;
+ s=mail20150812; t=1778433451;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=mwF+lumBrjLtDCPqtKCkZ5BsSkOilQZ4fMRjZ+xmIPA=;
- b=S0XTIWL2GLQ22CVnvkzUkHhpEGwrsiwTHudBxcLWHtOm26aQqgg/BthiWvO3Xw5h8PRzx7
- uakzclXZBnx5RhS1rUUkHHpzzkiP70ssAZLUnBMMoMplBjWwOXELNnDHGpEekp6T/6qAS+
- q4DwOzNBjvWYALewLtwPkgGi4uUWcBiKBBQE5xExhmFpgHAVHXOmhmrkP02cbMNDet2iaM
- XdRJIt8BWI4ZRLN4Qx+vs3X1RaagfrFJ+oBgnBWIW15zL1Aofr8SwbHT+ehqbYnj6envXk
- TP1beXMBfpZlq44MyMKJKknR7EqdYKwLuzGyg08+DpXQF/E+NwGPqm4BeDuo8g==
+ content-transfer-encoding:content-transfer-encoding;
+ bh=Ew+LGNrP90TploLWkO+93ZHinbmQsZIn0DFhOMrSMCA=;
+ b=dFvXulS+BcQ0kPdarBS3G2lM6RCRm2heEX1lFD9OapBwihslHxkPnPkKrYwhkIPGmCjvWi
+ gH49FE2u4MT36EcrPJwvJmA/GEsVVm6u+fEROLUNRe5xZpVF6hsgBoSqK7iKPAzRoPmJog
+ 77aNKsvmxPqjndFqlCCuuxHZ+z8E6uCP8lW7UJHTaHqB7JGmXDMNTmPsE/rhc/tDFvDArt
+ CumP8OiukLoWd3UXNvTK2PrKcgXHOXpYNB/IEwvxqBoFksHfAx2X9aMQyXNvfOhfMHoHV5
+ HS22N/9165vkVED2EPC36JTKsTmC64DSKFS3lJ7ZjxID/s/UMMhx+kophOkV/A==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
- Casey Connolly <casey.connolly@linaro.org>,
- Jonas Karlman <jonas@kwiboo.se>,
- Kaustabh Chakraborty <kauschluss@disroot.org>,
- Kever Yang <kever.yang@rock-chips.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Sam Protsenko <semen.protsenko@linaro.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 3/3] usb: dwc3: generic: Staticize and constify driver ops
-Date: Sun, 10 May 2026 19:16:33 +0200
-Message-ID: <20260510171649.56837-3-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20260510171649.56837-1-marek.vasut+renesas@mailbox.org>
-References: <20260510171649.56837-1-marek.vasut+renesas@mailbox.org>
+ Anatolij Gustschin <ag.dev.uboot@gmail.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH 01/11] video: bridge: anx6345: Staticize and constify driver
+ ops
+Date: Sun, 10 May 2026 19:16:56 +0200
+Message-ID: <20260510171723.56866-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: fd7d087cf1b3ce8ab50
-X-MBO-RS-META: hwrptbqjqqyokcjud13hnpjotttwecf3
+X-MBO-RS-META: 481cekdykxythe3gbpfwrzpir8b6st9k
+X-MBO-RS-ID: f7dc859207164434c4e
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,61 +88,26 @@ from outside of this driver and is not going to be modified at runtime.
 
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
-Cc: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-Cc: Casey Connolly <casey.connolly@linaro.org>
-Cc: Jonas Karlman <jonas@kwiboo.se>
-Cc: Kaustabh Chakraborty <kauschluss@disroot.org>
-Cc: Kever Yang <kever.yang@rock-chips.com>
-Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>
-Cc: Sam Protsenko <semen.protsenko@linaro.org>
+Cc: Anatolij Gustschin <ag.dev.uboot@gmail.com>
 Cc: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de
 ---
- drivers/usb/dwc3/dwc3-generic.c | 10 +++++-----
- 1 file changed, 5 insertions(+), 5 deletions(-)
+ drivers/video/bridge/anx6345.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/usb/dwc3/dwc3-generic.c b/drivers/usb/dwc3/dwc3-generic.c
-index 22b9ef0b24e..2356b3bc0aa 100644
---- a/drivers/usb/dwc3/dwc3-generic.c
-+++ b/drivers/usb/dwc3/dwc3-generic.c
-@@ -330,7 +330,7 @@ void dwc3_imx8mp_glue_configure(struct udevice *dev, int index,
- 	unmap_physmem(base, MAP_NOCACHE);
+diff --git a/drivers/video/bridge/anx6345.c b/drivers/video/bridge/anx6345.c
+index 8cee4c958bd..a5d2781aa48 100644
+--- a/drivers/video/bridge/anx6345.c
++++ b/drivers/video/bridge/anx6345.c
+@@ -403,7 +403,7 @@ static int anx6345_probe(struct udevice *dev)
+ 	return anx6345_enable(dev);
  }
  
--struct dwc3_glue_ops imx8mp_ops = {
-+static const struct dwc3_glue_ops imx8mp_ops = {
- 	.glue_configure = dwc3_imx8mp_glue_configure,
- };
- 
-@@ -414,7 +414,7 @@ enum dwc3_omap_utmi_mode {
- 	unmap_physmem(base, MAP_NOCACHE);
- }
- 
--struct dwc3_glue_ops ti_ops = {
-+static const struct dwc3_glue_ops ti_ops = {
- 	.glue_configure = dwc3_ti_glue_configure,
- };
- 
-@@ -506,16 +506,16 @@ static int dwc3_flat_dt_get_ctrl_dev(struct udevice *dev, ofnode *node)
- 	return 0;
- }
- 
--struct dwc3_glue_ops qcom_ops = {
-+static const struct dwc3_glue_ops qcom_ops = {
- 	.glue_configure = dwc3_qcom_glue_configure,
- };
- 
--struct dwc3_glue_ops qcom_flat_dt_ops = {
-+static const struct dwc3_glue_ops qcom_flat_dt_ops = {
- 	.glue_configure = dwc3_qcom_glue_configure,
- 	.glue_get_ctrl_dev = dwc3_flat_dt_get_ctrl_dev,
- };
- 
--struct dwc3_glue_ops rk_ops = {
-+static const struct dwc3_glue_ops rk_ops = {
- 	.glue_get_ctrl_dev = dwc3_flat_dt_get_ctrl_dev,
- };
- 
+-struct video_bridge_ops anx6345_ops = {
++static const struct video_bridge_ops anx6345_ops = {
+ 	.attach = anx6345_attach,
+ 	.set_backlight = anx6345_set_backlight,
+ 	.read_edid = anx6345_read_edid,
 -- 
 2.53.0
 
