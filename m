@@ -4,51 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25C71CD37B2
-	for <u-boot@archiver.kernel.org>; Sun, 10 May 2026 22:08:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 291D0CD37B2
+	for <u-boot@archiver.kernel.org>; Sun, 10 May 2026 22:22:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8AC7A846D2;
-	Mon, 11 May 2026 00:08:27 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 884C8846AC;
+	Mon, 11 May 2026 00:22:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=free.fr
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=free.fr header.i=@free.fr header.b="eRhLHt+Q";
+	dkim=pass (2048-bit key; unprotected) header.d=free.fr header.i=@free.fr header.b="sRCb7ioK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2DB9E846E6; Mon, 11 May 2026 00:08:26 +0200 (CEST)
+ id 00900846D2; Mon, 11 May 2026 00:22:17 +0200 (CEST)
 Received: from smtp1-g21.free.fr (smtp1-g21.free.fr [212.27.42.1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3E01E846D1
- for <u-boot@lists.denx.de>; Mon, 11 May 2026 00:08:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3818D846A7
+ for <u-boot@lists.denx.de>; Mon, 11 May 2026 00:22:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=free.fr
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=vjardin@free.fr
 Received: from localhost.localdomain (unknown [91.160.0.144])
  (Authenticated sender: vjardin@free.fr)
- by smtp1-g21.free.fr (Postfix) with ESMTPSA id 248DAB00535;
- Mon, 11 May 2026 00:08:13 +0200 (CEST)
+ by smtp1-g21.free.fr (Postfix) with ESMTPSA id 1EDB9B00535;
+ Mon, 11 May 2026 00:21:59 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=free.fr;
- s=smtp-20201208; t=1778450903;
- bh=9Py32B90x6zTYxPzkSCdE5wSBbSnNSlS3IUifIA5vXU=;
+ s=smtp-20201208; t=1778451734;
+ bh=cc4qnew4X0+0dKhu6tQdIhUir4zg8J5FU5wO3PYSKps=;
  h=From:To:Cc:Subject:Date:From;
- b=eRhLHt+QupDhVd+5S1GqglbIN4diK7ANZS0PCPEf3hg6UFhqJS6rASRxLxSwl48XA
- nHlO1PoFFw0qiQjLYHr85N7v4v0gj7QResEz77wBh6wnzIR6nnbghUjxW2WGitQW5u
- fjazPLXRbJW5VmeZZvOS2w3tHHyvdR8Fo3379s3pVFJDC2GI1b8GuN10dh/4DZkgM9
- 9lZpobUdoIuhd3Q3QYqK8p69pzvyHonxMQnpApEKilOkOPJixmR0mtCA+//bJuXeIJ
- 69/GH8KFS7WS/CC2MYHf39GgnR5p4VSLAy8f72hIiFd21BQGh/FXzg9PHtAoTWzuC6
- QHQNkJ1hi9prw==
+ b=sRCb7ioKRp/J8d4QrVNwpYl2fCONqvsFfFpkpDssnZHqV0VLgdcOk997IIH/2zYBi
+ CNTTcBmKLCGIbBPCYQrn4qBRoGMEmx5tNZETeZY4lyG8xlzgRZ6hjRj2KIqF8URJGk
+ TvpuMbHFk3z5apJmaTMcS6IeaXw7irMpIVs86gmHLtBQDP/YiWNd4QQSHAmEPUP2Bz
+ FqwS8c6xXH3/NDeAPzQv/ANIWAXKVd22cHDJRYt0eILWmV7/OwvgLx/dU6wJHRY0Al
+ svKrlVMi4NavqvrlRLEc9PjDDhPm2v9Jm8vRZn0puqEHKDXAcvL1E781d8UqwEuCFT
+ y5iSWgWqgqYIQ==
 From: Vincent Jardin <vjardin@free.fr>
 To: u-boot@lists.denx.de
-Cc: Vincent Jardin <vjardin@free.fr>, Alice Guo <alice.guo@nxp.com>,
- Fabio Estevam <festevam@gmail.com>,
- Meenakshi Aggarwal <meenakshi.aggarwal@nxp.com>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Stefano Babic <sbabic@nabladev.com>, Tom Rini <trini@konsulko.com>,
- Wasim Khan <wasim.khan@nxp.com>
-Subject: [PATCH v1] board: nxp: common: support CONFIG_FSL_USE_PCA9547_MUX
-Date: Mon, 11 May 2026 00:07:30 +0200
-Message-ID: <20260510220751.578230-1-vjardin@free.fr>
+Cc: Vincent Jardin <vjardin@free.fr>,
+ Christoph Reiter <christoph.reiter@evk.biz>,
+ David Lechner <dlechner@baylibre.com>,
+ Flaviu Nistor <flaviu.nistor@gmail.com>, Jeffrey Yu <jeyu@issi.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Miquel Raynal <miquel.raynal@bootlin.com>,
+ Shiji Yang <yangshiji66@outlook.com>, Ssunk <ssunkkan@gmail.com>,
+ Takahiro Kuwano <takahiro.kuwano@infineon.com>,
+ Tom Rini <trini@konsulko.com>, Vignesh R <vigneshr@ti.com>
+Subject: [PATCH v1] mtd: spi-nor: Add gd55lb02gf chips
+Date: Mon, 11 May 2026 00:21:03 +0200
+Message-ID: <20260510222140.603755-1-vjardin@free.fr>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -68,53 +71,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Use select_i2c_ch_pca9547() only when CONFIG_FSL_USE_PCA9547_MUX
-is set, but several call in board/nxp/lx2160a/lx2160a.c invoke
-it unconditionally,
-or using unrelated Kconfigs (CONFIG_EMC2305, CONFIG_VID).
+Add GigaDevice GD55LB02GF (256 MiB, JEDEC 0xc8 0x60 0x1c) to the
+spi-nor ID table.
 
-Compilation with LX2160A target that omits the mux therefore fails with
-
-  error: implicit declaration of function 'select_i2c_ch_pca9547'
-
-Add a static inline stub with -EOPNOTSUPP for the
-!CONFIG_FSL_USE_PCA9547_MUX case so all cases compile cleanly.
-
-Adapted from the convention used by include/scmi_nxp_protocols.h for
-SCMI subprotocol stubs.
-
-There is no functional change for NXP boards: all eight upstream
-LX2160A defconfigs (lx2160ardb / lx2160aqds / lx2162aqds and their
-secure / stmm / verified_boot variants) already set
-CONFIG_FSL_USE_PCA9547_MUX=y, so the real declaration wins.
-
-The purpose is to support new boards that do not use the PCA9547.
+Same die family as the existing gd55lb02g entry but a distinct memtype
+byte (0x60 versus 0x67), so the existing entry does not match.
 
 Signed-off-by: Vincent Jardin <vjardin@free.fr>
 
 ---
 
- board/nxp/common/i2c_mux.h | 5 +++++
- 1 file changed, 5 insertions(+)
+ drivers/mtd/spi/spi-nor-ids.c | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/board/nxp/common/i2c_mux.h b/board/nxp/common/i2c_mux.h
-index 0870c1918e6..ef7ce8e2e51 100644
---- a/board/nxp/common/i2c_mux.h
-+++ b/board/nxp/common/i2c_mux.h
-@@ -10,6 +10,11 @@
- 
- #ifdef CONFIG_FSL_USE_PCA9547_MUX
- int select_i2c_ch_pca9547(u8 ch, int bus);
-+#else
-+static inline int select_i2c_ch_pca9547(u8 ch, int bus)
-+{
-+	return -EOPNOTSUPP;
-+}
- #endif
- 
- #endif
+diff --git a/drivers/mtd/spi/spi-nor-ids.c b/drivers/mtd/spi/spi-nor-ids.c
+index c0fa98424aa..50f6dd3e5c4 100644
+--- a/drivers/mtd/spi/spi-nor-ids.c
++++ b/drivers/mtd/spi/spi-nor-ids.c
+@@ -191,6 +191,8 @@ const struct flash_info spi_nor_ids[] = {
+ 	SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_4B_OPCODES)},
+ 	{INFO("gd55lb02g", 0xc8671C, 0, 64 * 1024, 4096,	SECT_4K |
+ 	SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_4B_OPCODES)},
++	{INFO("gd55lb02gf", 0xc8601C, 0, 64 * 1024, 4096,	SECT_4K |
++	SPI_NOR_HAS_LOCK | SPI_NOR_4B_OPCODES)},
+ 	{INFO("gd25lf80", 0xc86314, 0, 64 * 1024, 16,	SECT_4K |
+ 	SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK)},
+ 	{INFO("gd25lf16", 0xc86315, 0, 64 * 1024, 32,	SECT_4K |
 -- 
 2.43.0
 
 base-commit: bfe90a308a94caa9d855440683521ff04122ae2a
-branch: for-upstream/nxp-common-pca9547-stub
+branch: for-upstream/spi-nor-gd55lb02gf
