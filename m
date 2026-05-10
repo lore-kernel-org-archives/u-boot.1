@@ -4,80 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53E4FCD37AF
-	for <u-boot@archiver.kernel.org>; Sun, 10 May 2026 00:07:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90BF6CD37AF
+	for <u-boot@archiver.kernel.org>; Sun, 10 May 2026 00:07:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0A07984A48;
-	Sun, 10 May 2026 02:07:20 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C949C84A5F;
+	Sun, 10 May 2026 02:07:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=riscstar.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=riscstar-com.20251104.gappssmtp.com header.i=@riscstar-com.20251104.gappssmtp.com header.b="ZkVUPKj0";
+	dkim=pass (2048-bit key; unprotected) header.d=riscstar-com.20251104.gappssmtp.com header.i=@riscstar-com.20251104.gappssmtp.com header.b="zyfrrmLF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9565684A44; Sun, 10 May 2026 02:07:19 +0200 (CEST)
-Received: from mail-pl1-x632.google.com (mail-pl1-x632.google.com
- [IPv6:2607:f8b0:4864:20::632])
+ id 3960984A44; Sun, 10 May 2026 02:07:25 +0200 (CEST)
+Received: from mail-pl1-x62b.google.com (mail-pl1-x62b.google.com
+ [IPv6:2607:f8b0:4864:20::62b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6D3C684A4A
- for <u-boot@lists.denx.de>; Sun, 10 May 2026 02:07:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 241AB84A63
+ for <u-boot@lists.denx.de>; Sun, 10 May 2026 02:07:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=riscstar.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=guodong@riscstar.com
-Received: by mail-pl1-x632.google.com with SMTP id
- d9443c01a7336-2ba17c8cfacso32411865ad.2
- for <u-boot@lists.denx.de>; Sat, 09 May 2026 17:07:17 -0700 (PDT)
+Received: by mail-pl1-x62b.google.com with SMTP id
+ d9443c01a7336-2b9fcf7c91bso30938195ad.0
+ for <u-boot@lists.denx.de>; Sat, 09 May 2026 17:07:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=riscstar-com.20251104.gappssmtp.com; s=20251104; t=1778371636; x=1778976436;
+ d=riscstar-com.20251104.gappssmtp.com; s=20251104; t=1778371641; x=1778976441;
  darn=lists.denx.de; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=8iJxq/QySdbFn6syh0RErNipDKBSxgbGQlbfm/XUCxQ=;
- b=ZkVUPKj0SRS/XgmV4zWj5TbAkEM5y8s5Le9sHXQajln9u47iYY3iUjUHKZLycEAlqQ
- KUqa2UhwhHuCoUd+WaRLg+YJvmgIzbCf+SBBzIjg5QIwe/yHef2uIJMGOqY4ypQ7ZAZW
- eSXCt5RiSZL3aVyYyDvPJRPd5BeSh9La4DMmLEas/CsgzVLj3euQNIGus6yaE7YQd3Vz
- FSNpkXQ8cwnNEkeizV7thdkoj5MUKIDH/F1rAwRGbDynO28cztK+hTHKFUogMaHJJ2Xk
- 9ZAZ5B98vDLVFfsmLtDq9keodU1pmhBJXxXwPD3WgreOU32rHUDahRH0E2Pxu6rT8uxx
- gGIw==
+ :reply-to; bh=BQkDeHAzzvEbfMnWz/rrkhqeYixLSuvSQJhpOEYPjag=;
+ b=zyfrrmLF4/D3QH97uGrRQbXao/BvDvOApAchmmOyDN6+MVRQ3Kf40ZRxsBpb46wHfV
+ T0U4BTlhbpw5BGpS4WeA1nXfYrvJgpdChtgd6jdOzjKXW0OssKkLpceYqf0AlqQkH40z
+ +4B5aUfqrDCXnr0+d5rn1NsQUIDgJDECfGlV33xHWcIzSx/piIhl7WJxe8AHrd6hlM+q
+ Z7fXnjIQo/kXuHzKSkBnzNHoEl0Sui7n7q/AsncLccCnWWGkGfke15tm8fTDLotcgvZR
+ LGayiWuaMeKovLxad1jUK12gybnVKboCS5uhfOdE43PqD63SNCPREW4umxTLYlKpC81P
+ xXmw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778371636; x=1778976436;
+ d=1e100.net; s=20251104; t=1778371641; x=1778976441;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=8iJxq/QySdbFn6syh0RErNipDKBSxgbGQlbfm/XUCxQ=;
- b=esNnafplQAOTXKWDtAtiO8pl2Z3Sskc2gyZX6J3uzvi12rcjODLfAY8660dpzElRlz
- ITGioNU9lKr9FDyhryH2KpQZBfzZSIRC/hVsR6iszfKMH6YGaIsgWtpZzJ6IsfzVQNWz
- vKLe55urngQ/8LnvUAMKcLGDUSG0og1dMC4f5FCiVCrKX8Vfawgj7w4B+xk1Wz3gJBWP
- JhhNwEgcN4YrGSJx2+roxkZUKd9KyhSCLg98QJwTi0remuCjn6eTGBM8JT6tV9Gwsbvm
- asPNdxaCiy5wYYAB2m3kt/DPd4ElSoBWPUXq5dHd29/lCJUe2UoCS/j9ZkU9MYzbb1il
- WbDQ==
-X-Gm-Message-State: AOJu0YxtHFRYxjVJaD+JCA1e8+gbwcPDBk34S7qk8yTIGeXILjxKVoY6
- rFzuCW74loGMmx+/f8Jpygd2EOtBVmZx3K+6F+8R3XYn9o6uVY14iIlLIyI+F2dHxRs=
-X-Gm-Gg: Acq92OFzXYmZcH6G/4Mmw+qQ4SGcPt4KJMgz7tA9eHNEYMMFCVXno8610CLu/hhXwZY
- TM7c4/1qi1t/1+wrnmLhUHOWgLADdo2KtIjnnn5d11BCDyOBuIM9++aSFj1m8fd4Wnfb346OmyQ
- ZoIabNIAZpHtcLGoKjvyK3QD8gLBjsWbEHtPNlZqn8ZD/wCoFgG3xcNb9qgyQ/h/LuGg+GDWaDZ
- q5MgFHThDND55ULW83390KUoFFzRePedJRWha8tWQ7HFeWSOYCRqSsEivsy5x5yIvbLB/Z3voM9
- vaPMhkW7U3wk9PmSCME+E4fc3yp2VXoi5BH5kVryD6o7O+2fpTfAYuJkj9uknbYLQNejxu1m+xU
- cXqKeLbbFiUJIDxex+D0L6aaa3kOkNpkMCl6RereCrquAKv2v5UXFCsFzJ4QMbmuCxw2N9C0Hh8
- Ij7r0Tf2wq4FlPmnhA1R5Dt4HSkZx0JrrK6gYxHmrWRec=
-X-Received: by 2002:a17:902:74c2:b0:2ba:7354:7299 with SMTP id
- d9443c01a7336-2ba79bdb06emr141987655ad.27.1778371635939; 
- Sat, 09 May 2026 17:07:15 -0700 (PDT)
+ bh=BQkDeHAzzvEbfMnWz/rrkhqeYixLSuvSQJhpOEYPjag=;
+ b=Q6NyAe9UkcBvy3ojerc9tIEFLvxBtLD+MJALvFCNBLGVOTB2ELhthhw9bkLKM3KaTq
+ n5e1AjsEybsfyoGMi/+Ilgm9+wCxVWhrQI3ycCf1KKqrxlFjDj/xrabygfF8FORpwhBI
+ VKwbXsAFhFqmfvMNC38TVzkWrZt1vqrMluIGJPlZwYhHnjnm+bVib9/wotXMUzs+VE60
+ yH3buI/rNioJzS6c5tL4bYzg+2MQOQsDUvB631HBgbOXLvm9db8vxbTm401PURrD3apP
+ 76TAfrBS8mps8eWhlIyAVpCos/GMiZnb98uAJuo4aydjCyYDr6j+i0pUVJMEeRWPKMzX
+ exyQ==
+X-Gm-Message-State: AOJu0YzQnTemQoJrJb4+0UVfP5IUdHEIiQjXS+KC8d9QZJ49Po0qoyrD
+ XtNMKXvWdcAdnKftT/wd+5OMnl2b7MBcKg859x8wyGllxEs/GV3/KbYdjTk6RuVakzA=
+X-Gm-Gg: Acq92OESpIVlecsSb9vRzQWXqo7PsjNfSRq3xN+91rTUm5eKOkYQQbfq3bQoDgR3Lgi
+ p3sOtj9PIRePuYiLVc6MvEXfUneHN6TaKiVcoOUiG8MQahWf0ufmeSWIHWx7a1+WhEDJwa6D4ih
+ 3Az4xYCx8OsqM+CtOta1jijt2kLBC+7AtZuryoz6YJHMWkoYJ2CGqakk/1S+n1P9T7xc9jF86oK
+ mOlNc7UWPzhRB2zsUWxT3W4OlRWlfx/G7Ixk8gNkNUbBnssPwMISJZjCOM/LKix5jRyORTHnTbn
+ E2dB3CIUJA/pdI8sxryGnY26w0vyRN9aKuRbb2fgkO3MBQkcuspTZGA/9+8EMBde/iMYs7cP2q7
+ W8SgfJoDAUoqex/zn8oehQuOutpdkc7OVxxxAu2+23esOepagZf5lLhU3/EPhriOi9SLTIvZBB1
+ mZMWbofdzgk5pxLtfw1g9jDD2ZTijpYWF8SYT45inSM3zKrt3kyb53MQ==
+X-Received: by 2002:a17:903:13cf:b0:2b2:501c:bc0 with SMTP id
+ d9443c01a7336-2ba79290f29mr175414205ad.7.1778371641448; 
+ Sat, 09 May 2026 17:07:21 -0700 (PDT)
 Received: from [127.0.1.1] ([2a12:a305:4::30f3])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2baf1d3fee3sm57010625ad.18.2026.05.09.17.07.10
+ d9443c01a7336-2baf1d3fee3sm57010625ad.18.2026.05.09.17.07.16
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 09 May 2026 17:07:15 -0700 (PDT)
+ Sat, 09 May 2026 17:07:21 -0700 (PDT)
 From: Guodong Xu <guodong@riscstar.com>
-Date: Sun, 10 May 2026 08:06:25 -0400
-Subject: [PATCH 3/8] clk: spacemit: k1: spawn reset device from per-syscon
- clock drivers
+Date: Sun, 10 May 2026 08:06:26 -0400
+Subject: [PATCH 4/8] configs: bananapi-f3: enable Spacemit K1 clock driver
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260510-b4-k1-clk-reset-upstream-dts-v1-3-db0b0503ee44@riscstar.com>
+Message-Id: <20260510-b4-k1-clk-reset-upstream-dts-v1-4-db0b0503ee44@riscstar.com>
 References: <20260510-b4-k1-clk-reset-upstream-dts-v1-0-db0b0503ee44@riscstar.com>
 In-Reply-To: <20260510-b4-k1-clk-reset-upstream-dts-v1-0-db0b0503ee44@riscstar.com>
 To: u-boot@lists.denx.de
@@ -113,103 +112,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The K1 reset driver in drivers/reset/spacemit/ binds by name (no DT
-of_match), so the per-syscon clock drivers must spawn it.
-
-Add a .bind hook to k1_mpmu_clk, k1_apbc_clk and k1_apmu_clk that
-calls spacemit_k1_reset_bind() to instantiate a UCLASS_RESET sibling
-on the same ofnode.
-
-Also introduce k1_apbc2_clk here. Its kernel DT node has #reset-cells
-but no #clock-cells, so the driver exists only as the binding hook
-for the apbc2 reset spawn.
-
-With this in place, references such as
-  resets = <&syscon_apbc RESET_TWSI0>;
-in the kernel-mainline DT resolve correctly.
+Enable CLK_SPACEMIT and CLK_SPACEMIT_K1 to compile in the K1
+per-syscon clock drivers.
 
 Signed-off-by: Guodong Xu <guodong@riscstar.com>
 ---
- drivers/clk/spacemit/clk-k1.c | 37 +++++++++++++++++++++++++++++++++++++
- 1 file changed, 37 insertions(+)
+ configs/bananapi-f3_defconfig | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/drivers/clk/spacemit/clk-k1.c b/drivers/clk/spacemit/clk-k1.c
-index 4c0972d952e..80eede251b8 100644
---- a/drivers/clk/spacemit/clk-k1.c
-+++ b/drivers/clk/spacemit/clk-k1.c
-@@ -13,6 +13,7 @@
- #include <dm/lists.h>
- #include <regmap.h>
- #include <linux/clk-provider.h>
-+#include <soc/spacemit/k1-reset.h>
- #include <soc/spacemit/k1-syscon.h>
- 
- #include "clk_common.h"
-@@ -1670,6 +1671,26 @@ U_BOOT_DRIVER(k1_pll_clk) = {
- 	.flags		= DM_FLAG_PRE_RELOC,
- };
- 
-+static int k1_mpmu_clk_bind(struct udevice *dev)
-+{
-+	return spacemit_k1_reset_bind(dev, SPACEMIT_K1_RESET_MPMU);
-+}
-+
-+static int k1_apbc_clk_bind(struct udevice *dev)
-+{
-+	return spacemit_k1_reset_bind(dev, SPACEMIT_K1_RESET_APBC);
-+}
-+
-+static int k1_apmu_clk_bind(struct udevice *dev)
-+{
-+	return spacemit_k1_reset_bind(dev, SPACEMIT_K1_RESET_APMU);
-+}
-+
-+static int k1_apbc2_clk_bind(struct udevice *dev)
-+{
-+	return spacemit_k1_reset_bind(dev, SPACEMIT_K1_RESET_APBC2);
-+}
-+
- static const struct udevice_id k1_mpmu_clk_match[] = {
- 	{ .compatible = "spacemit,k1-syscon-mpmu",
- 	  .data = (ulong)&k1_ccu_mpmu_data },
-@@ -1682,6 +1703,7 @@ U_BOOT_DRIVER(k1_mpmu_clk) = {
- 	.name		= "k1_mpmu_clk",
- 	.id		= UCLASS_CLK,
- 	.of_match	= k1_mpmu_clk_match,
-+	.bind		= k1_mpmu_clk_bind,
- 	.probe		= k1_mpmu_clk_probe,
- 	.ops		= &k1_mpmu_clk_ops,
- 	.flags		= DM_FLAG_PRE_RELOC,
-@@ -1699,6 +1721,7 @@ U_BOOT_DRIVER(k1_apbc_clk) = {
- 	.name		= "k1_apbc_clk",
- 	.id		= UCLASS_CLK,
- 	.of_match	= k1_apbc_clk_match,
-+	.bind		= k1_apbc_clk_bind,
- 	.probe		= k1_apbc_clk_probe,
- 	.ops		= &k1_apbc_clk_ops,
- 	.flags		= DM_FLAG_PRE_RELOC,
-@@ -1716,7 +1739,21 @@ U_BOOT_DRIVER(k1_apmu_clk) = {
- 	.name		= "k1_apmu_clk",
- 	.id		= UCLASS_CLK,
- 	.of_match	= k1_apmu_clk_match,
-+	.bind		= k1_apmu_clk_bind,
- 	.probe		= k1_apmu_clk_probe,
- 	.ops		= &k1_apmu_clk_ops,
- 	.flags		= DM_FLAG_PRE_RELOC,
- };
-+
-+static const struct udevice_id k1_apbc2_clk_match[] = {
-+	{ .compatible = "spacemit,k1-syscon-apbc2" },
-+	{ /* sentinel */ },
-+};
-+
-+U_BOOT_DRIVER(k1_apbc2_clk) = {
-+	.name		= "k1_apbc2_clk",
-+	.id		= UCLASS_CLK,
-+	.of_match	= k1_apbc2_clk_match,
-+	.bind		= k1_apbc2_clk_bind,
-+	.flags		= DM_FLAG_PRE_RELOC,
-+};
+diff --git a/configs/bananapi-f3_defconfig b/configs/bananapi-f3_defconfig
+index a726ce84775..9f9424adc9f 100644
+--- a/configs/bananapi-f3_defconfig
++++ b/configs/bananapi-f3_defconfig
+@@ -17,6 +17,8 @@ CONFIG_SYS_PBSIZE=276
+ # CONFIG_BOARD_INIT is not set
+ CONFIG_HUSH_PARSER=y
+ CONFIG_ENV_OVERWRITE=y
++CONFIG_CLK_SPACEMIT=y
++CONFIG_CLK_SPACEMIT_K1=y
+ CONFIG_PINCTRL=y
+ CONFIG_PINCTRL_SINGLE=y
+ CONFIG_RESET_SPACEMIT_K1=y
 
 -- 
 2.43.0
