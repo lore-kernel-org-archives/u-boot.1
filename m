@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E090BCD37AF
-	for <u-boot@archiver.kernel.org>; Sun, 10 May 2026 00:08:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF194CD37AF
+	for <u-boot@archiver.kernel.org>; Sun, 10 May 2026 00:08:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 12D0984A7C;
-	Sun, 10 May 2026 02:07:40 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0947284A4C;
+	Sun, 10 May 2026 02:07:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=riscstar.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=riscstar-com.20251104.gappssmtp.com header.i=@riscstar-com.20251104.gappssmtp.com header.b="qI6hrzBB";
+	dkim=pass (2048-bit key; unprotected) header.d=riscstar-com.20251104.gappssmtp.com header.i=@riscstar-com.20251104.gappssmtp.com header.b="o6SK5sdE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9B79284AA5; Sun, 10 May 2026 02:07:37 +0200 (CEST)
-Received: from mail-pl1-x62f.google.com (mail-pl1-x62f.google.com
- [IPv6:2607:f8b0:4864:20::62f])
+ id F406C84ACF; Sun, 10 May 2026 02:07:45 +0200 (CEST)
+Received: from mail-pj1-x1034.google.com (mail-pj1-x1034.google.com
+ [IPv6:2607:f8b0:4864:20::1034])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6E31284A20
- for <u-boot@lists.denx.de>; Sun, 10 May 2026 02:07:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5CACD84AC7
+ for <u-boot@lists.denx.de>; Sun, 10 May 2026 02:07:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=riscstar.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=guodong@riscstar.com
-Received: by mail-pl1-x62f.google.com with SMTP id
- d9443c01a7336-2ba21d32776so21668825ad.2
- for <u-boot@lists.denx.de>; Sat, 09 May 2026 17:07:34 -0700 (PDT)
+Received: by mail-pj1-x1034.google.com with SMTP id
+ 98e67ed59e1d1-36536771300so2997967a91.1
+ for <u-boot@lists.denx.de>; Sat, 09 May 2026 17:07:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=riscstar-com.20251104.gappssmtp.com; s=20251104; t=1778371653; x=1778976453;
+ d=riscstar-com.20251104.gappssmtp.com; s=20251104; t=1778371659; x=1778976459;
  darn=lists.denx.de; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=K0Vv49iXJFMBcv07/C9lRGEf7XrbDNsWsP5G9WQXkQU=;
- b=qI6hrzBBQFSg/8UQeGlU7rIP7RCw1qga83ac3HQfYp23t1bfJsN8f7YnmJcb2LJqIB
- T3REanfs87U3juwdiHEQomu/kAbCgP4OxvU6j7icLhCf5X6IKfLhVr58e4yx0NpbgcOf
- Srdz6R1vGSKgiFF+wtUtUoIZ+4tXyENZTJf8Jd4tMSy6G9YM7DEdUMHOCIj4YKWK3nrj
- soXEbq4ZErVGJRPVyK1kYiZyafkoVgysmPoiQCJQNnWW4UFsaInMqjfRAkZllsebXZ9n
- aPRgOi9k3sy1VpzQPtZGu2Nn9Jq66O/uGeXi2fNG0bMErXS+2p6h9w71VmvI8thFmk61
- 34OQ==
+ :reply-to; bh=a7x43Pm1VTfak07bo6lia4gVdffg9Zxi08jHOGZPEr4=;
+ b=o6SK5sdE2KVEVhV5KthsTjhhIaA8/D2jsp6B4JrH8G6WpvtQ4noLpvx7B6jXiHxldB
+ JiGN+vty2ukN7evHE2GMOp2JS7Gb8KxqFdAD7e32eJhe1bcHyuZ3oneVl3t4PnJ7r4qN
+ mNl+MY1XQqHa7rGPBRVHZtuF4vbW+AQwA3XDOLo+1JMhNFY4X0alIoVYhZc7x9bEWsRl
+ Bm9C1mjkSPkLLeLBqAH1ynw2v2e/gDWX/1GU2L0skVLpz6yc+3Q3spXoKyq1QyfdcMsO
+ L1Hek09x3ZA5ic0t7jZyinpSTlBWx7qagi5RWxY/5bVR/Q/Gfe7ZNhG9qZV4RyvhsYdF
+ mwTw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778371653; x=1778976453;
+ d=1e100.net; s=20251104; t=1778371659; x=1778976459;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=K0Vv49iXJFMBcv07/C9lRGEf7XrbDNsWsP5G9WQXkQU=;
- b=m4MvoSqVMGrU+IfkRKAvAOc1okDmJlYhi7isOVbLHtRHTvrj2omDi+uSxaQou7NCtY
- pxGTXvsCoxJzdMW+FUv3mpaUxtzKmGmJ/po2W/LOYc45w91fLpSXpu2YhF23J7lMvkca
- cmW8KmuofxrJlc415ivO7sIehZ2AcHiQMtI1mMVvLkZ+Mk7q1lo5zlPmjKRANHS19Nwb
- nA9iRv7aBqu3Z/OhUJkNJKbZ/PiTvoQ8zFilZUx8A4E7KNdcvNlit4kQ2N49yTBMg+87
- y4mpAHOxrK0sFNjmSOoV6ohO8wcrTpHPrXUbGyHRMV/yMQEyI7Fk30b1RNt8e+WXxQdd
- l2Vw==
-X-Gm-Message-State: AOJu0YwV2cdVwiO+EQ3MkIHbfPf1cn5uqChDFrAYX0LaxH6eR5PP7MQR
- wbxvB5KUtHg7OWRqaLIvkKl0UZqPlmtlu+GSRTM3Kj7Atz5cl2bgl5Ekm73e3nCHMic=
-X-Gm-Gg: Acq92OH27KbCcXfYIegzCMNGAFMd8JWD+wDNxHTJUZB6fzAZKiFAqVpwLCeixl5oYfX
- rPHKk8/wVMTabKQIsyvrj7/GPCLsiZqiqKZcipV2M7JBlX/SsJGLsKbK5BbW1Tp54gbEI6V3t0Q
- ZOcpEw92lKFxcg3CYZio8XSYaak0fFUZuGmJRuqgewcwMti/EURaYTl+v+/4B8QP5Be970wd4iu
- SjfhQ/iVAfoPUH6TxnsOvYFxGM5TKm5a4Y5s3DKLiA7YX8a9seUv8HjaNWEb0nmb83TWjovh+ET
- 4WcsWDM1fxup3fazcZmrlXDF3XV221UTn8QVnoJNjtKTQ5GIXLnvmSVXkW/lPN04uASFbCZS4ZZ
- AzzsE3zILcXThEGoncVS/FWLoLgbV8Xg/SpgHRpxqqT0RcyFrMvfYS4ZoBcr1W84hzAnIhJsTWl
- 35vsvrGIbp4TXecxcQ6YSjhnW24Zzj3grJkk6aW8jtM7E=
-X-Received: by 2002:a17:903:228c:b0:2b2:4194:9521 with SMTP id
- d9443c01a7336-2ba79287606mr195365605ad.25.1778371652865; 
- Sat, 09 May 2026 17:07:32 -0700 (PDT)
+ bh=a7x43Pm1VTfak07bo6lia4gVdffg9Zxi08jHOGZPEr4=;
+ b=m0Bs2/dJ2lp28Q9RrnxcsjWdtqfVvhpq7PLXnMff+fEQtfir0Eib9U1hUkSxcZEfG6
+ h3uUxTWoqF+/S/DC4m7Tfe18m51d8298BTOgN49ykFzFOUTV4Gg+5Gm4XINxG+lFyxXh
+ RcX82h3AifqBJbEV0yyrWBMSjkZfzuGQ8MCvphpP7xXpnrrej/F3SV2xHkqYFL9J9qCE
+ cDzR3WzITZBPpbcj2WdyrUJbu6Oqhl4SRcfaaDRRciLLbTF49hekKOTAXtWOC50RIYdZ
+ wbHRWEU2qjSrcgIjIleq89ldSooVuUGOS5j+8LHe5/rPsSCOTj1E3x/CS4MFcPIQFlM/
+ NjIA==
+X-Gm-Message-State: AOJu0YwGx0XhxuolKvKavcF62k3hnQSV2iwr1hB6erZ0Ll+a0jbUD2Ka
+ qK5g4vYlUwANpbUNJW1uv/jmUOoKmj8vCK2OyRZsYj3Tcd+kvKH/aZa3gfeeS/g/BKc=
+X-Gm-Gg: Acq92OFJ3TW/DCNsgCRbRh4P4ZCs2YtSlHOe3B4PCTDudY+6flNI84785cEy51yA2Np
+ afMa5JPn6BSvcFVGtbAvIySdpPzXOy+dAzbhfTVBT9T9hcFK4cZ0IZrudPv5X4oSeaKWP53FyjL
+ qRtFtcnxO21ajZmXZrucW162ohlXHba5kVSw9khuvmkCACyIHXRlSSZiAVzammsWZt72cNlyiFO
+ 0wiuzl/2E9KRvL336Pf4EVac1aPF7OUSk6Y/aJR2yM2lClGOWxvRldwQUlBxmsshU0Qqzq3NoNx
+ o/44Rjqg3d0EEfSqxMOCYBFvNo61RU1Jn8+6xcSQttwnomycVcJEzIjFQAo8eVFh3CWtT/40zKW
+ c529K93VereOU3sFecRDDiCqMrKPD8VMJ0AfkiU3QY9/AQ8iK4dEEnkeuhp18kH6W2cTAr6kzbx
+ WfSjS+oc+uoTE/pXjTu6CxEjvGsw/yDxgJ8dK9pjM+6jI=
+X-Received: by 2002:a17:903:3904:b0:2ae:47b0:dc80 with SMTP id
+ d9443c01a7336-2babcaad261mr116630965ad.11.1778371658673; 
+ Sat, 09 May 2026 17:07:38 -0700 (PDT)
 Received: from [127.0.1.1] ([2a12:a305:4::30f3])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2baf1d3fee3sm57010625ad.18.2026.05.09.17.07.27
+ d9443c01a7336-2baf1d3fee3sm57010625ad.18.2026.05.09.17.07.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 09 May 2026 17:07:32 -0700 (PDT)
+ Sat, 09 May 2026 17:07:38 -0700 (PDT)
 From: Guodong Xu <guodong@riscstar.com>
-Date: Sun, 10 May 2026 08:06:28 -0400
-Subject: [PATCH 6/8] dts: k1: drop legacy local DT files
+Date: Sun, 10 May 2026 08:06:29 -0400
+Subject: [PATCH 7/8] reset: spacemit: k1: drop legacy spacemit,k1-reset driver
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260510-b4-k1-clk-reset-upstream-dts-v1-6-db0b0503ee44@riscstar.com>
+Message-Id: <20260510-b4-k1-clk-reset-upstream-dts-v1-7-db0b0503ee44@riscstar.com>
 References: <20260510-b4-k1-clk-reset-upstream-dts-v1-0-db0b0503ee44@riscstar.com>
 In-Reply-To: <20260510-b4-k1-clk-reset-upstream-dts-v1-0-db0b0503ee44@riscstar.com>
 To: u-boot@lists.denx.de
@@ -112,561 +112,621 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The K1 build now consumes the kernel device tree via OF_UPSTREAM. The
-local copies under arch/riscv/dts/ (k1.dtsi, k1-pinctrl.dtsi,
-k1-bananapi-f3.dts) are unreachable; remove them.
+After the K1 build switched to dts/upstream/src/riscv/spacemit/ and the
+local arch/riscv/dts/k1.dtsi was deleted, the legacy
+reset-controller@d4050000 DT node no longer exists. The of_match driver
+in drivers/reset/reset-spacemit-k1.c (compatible "spacemit,k1-reset")
+matches nothing and only sits in the binary as dead code.
+
+Remove the legacy driver file, its Makefile entry, the RESET_SPACEMIT_K1
+Kconfig symbol, and its bananapi-f3_defconfig selection. The new
+syscon-bound reset driver under drivers/reset/spacemit/ has no
+DT of_match of its own and is spawned by the K1 clock drivers, so gate
+the subdirectory on CONFIG_CLK_SPACEMIT_K1 instead.
 
 Signed-off-by: Guodong Xu <guodong@riscstar.com>
 ---
- arch/riscv/dts/k1-bananapi-f3.dts |  28 ---
- arch/riscv/dts/k1-pinctrl.dtsi    |  19 --
- arch/riscv/dts/k1.dtsi            | 480 --------------------------------------
- 3 files changed, 527 deletions(-)
+ configs/bananapi-f3_defconfig     |   1 -
+ drivers/reset/Kconfig             |   7 -
+ drivers/reset/Makefile            |   3 +-
+ drivers/reset/reset-spacemit-k1.c | 548 --------------------------------------
+ 4 files changed, 1 insertion(+), 558 deletions(-)
 
-diff --git a/arch/riscv/dts/k1-bananapi-f3.dts b/arch/riscv/dts/k1-bananapi-f3.dts
+diff --git a/configs/bananapi-f3_defconfig b/configs/bananapi-f3_defconfig
+index b9a2ee19f53..adecbee10f2 100644
+--- a/configs/bananapi-f3_defconfig
++++ b/configs/bananapi-f3_defconfig
+@@ -22,6 +22,5 @@ CONFIG_CLK_SPACEMIT=y
+ CONFIG_CLK_SPACEMIT_K1=y
+ CONFIG_PINCTRL=y
+ CONFIG_PINCTRL_SINGLE=y
+-CONFIG_RESET_SPACEMIT_K1=y
+ CONFIG_SYS_NS16550=y
+ CONFIG_SYS_NS16550_MEM32=y
+diff --git a/drivers/reset/Kconfig b/drivers/reset/Kconfig
+index 2fd91d6299c..7af309945fe 100644
+--- a/drivers/reset/Kconfig
++++ b/drivers/reset/Kconfig
+@@ -246,12 +246,5 @@ config RESET_RZG2L_USBPHY_CTRL
+ 	  RZ/G2L SoC. This is required for USB 2.0 functionality to work on this
+ 	  SoC.
+ 
+-config RESET_SPACEMIT_K1
+-	bool "Support for SPACEMIT's K1 Reset driver"
+-	depends on DM_RESET
+-	help
+-	  Support for SPACEMIT's K1 Reset system. Basic Assert/Deassert
+-	  is supported.
+-
+ source "drivers/reset/stm32/Kconfig"
+ endmenu
+diff --git a/drivers/reset/Makefile b/drivers/reset/Makefile
+index 10e1460ee34..170446f9a7e 100644
+--- a/drivers/reset/Makefile
++++ b/drivers/reset/Makefile
+@@ -34,8 +34,7 @@ obj-$(CONFIG_RESET_DRA7) += reset-dra7.o
+ obj-$(CONFIG_RESET_AT91) += reset-at91.o
+ obj-$(CONFIG_$(PHASE_)RESET_JH7110) += reset-jh7110.o
+ obj-$(CONFIG_RESET_RZG2L_USBPHY_CTRL) += reset-rzg2l-usbphy-ctrl.o
+-obj-$(CONFIG_RESET_SPACEMIT_K1) += reset-spacemit-k1.o
+-obj-$(CONFIG_RESET_SPACEMIT_K1) += spacemit/
++obj-$(CONFIG_CLK_SPACEMIT_K1) += spacemit/
+ 
+ obj-$(CONFIG_ARCH_STM32) += stm32/
+ obj-$(CONFIG_ARCH_STM32MP) += stm32/
+diff --git a/drivers/reset/reset-spacemit-k1.c b/drivers/reset/reset-spacemit-k1.c
 deleted file mode 100644
-index 6b5b83bcdb9..00000000000
---- a/arch/riscv/dts/k1-bananapi-f3.dts
+index 613e002fc4f..00000000000
+--- a/drivers/reset/reset-spacemit-k1.c
 +++ /dev/null
-@@ -1,28 +0,0 @@
--// SPDX-License-Identifier: GPL-2.0-or-later OR MIT
--/*
-- * Copyright (C) 2024 Yangyu Chen <cyy@cyyself.name>
-- */
--
--#include "k1.dtsi"
--#include "binman.dtsi"
--#include "k1-pinctrl.dtsi"
--
--/ {
--	model = "Banana Pi BPI-F3";
--	compatible = "bananapi,bpi-f3", "spacemit,k1";
--
--	chosen {
--		stdout-path = "serial0";
--	};
--
--	memory@0 {
--		device_type = "memory";
--		reg = <0x00000000 0x00000000 0x00000000 0x80000000>;
--	};
--};
--
--&uart0 {
--	pinctrl-names = "default";
--	pinctrl-0 = <&uart0_2_cfg>;
--	status = "okay";
--};
-diff --git a/arch/riscv/dts/k1-pinctrl.dtsi b/arch/riscv/dts/k1-pinctrl.dtsi
-deleted file mode 100644
-index 14e7096fbcf..00000000000
---- a/arch/riscv/dts/k1-pinctrl.dtsi
-+++ /dev/null
-@@ -1,19 +0,0 @@
--// SPDX-License-Identifier: (GPL-2.0 OR MIT)
+@@ -1,548 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0+
 -/*
 - * Copyright (C) 2022 Spacemit Inc.
-- * Copyright (C) 2025 Yixun Lan <dlan@gentoo.org>
+- * Copyright (C) 2025 Huan Zhou <pericycle.cc@gmail.com>
 - */
 -
--#define K1_PADCONF(pin, func) (((pin) << 16) | (func))
+-#include <asm/io.h>
+-#include <config.h>
+-#include <dm.h>
+-#include <dm/device_compat.h>
+-#include <dm/device-internal.h>
+-#include <dm/lists.h>
+-#include <dt-bindings/reset/spacemit-k1-reset.h>
+-#include <linux/bitops.h>
+-#include <reset-uclass.h>
 -
--&pinctrl {
--	uart0_2_cfg: uart0-2-cfg {
--		uart0-2-pins {
--			pinmux = <K1_PADCONF(68, 2)>,
--				 <K1_PADCONF(69, 2)>;
+-/* APBC register offset */
+-#define APBC_UART1_CLK_RST      0x0
+-#define APBC_UART2_CLK_RST      0x4
+-#define APBC_GPIO_CLK_RST       0x8
+-#define APBC_PWM0_CLK_RST       0xc
+-#define APBC_PWM1_CLK_RST       0x10
+-#define APBC_PWM2_CLK_RST       0x14
+-#define APBC_PWM3_CLK_RST       0x18
+-#define APBC_TWSI8_CLK_RST      0x20
+-#define APBC_UART3_CLK_RST      0x24
+-#define APBC_RTC_CLK_RST        0x28
+-#define APBC_TWSI0_CLK_RST      0x2c
+-#define APBC_TWSI1_CLK_RST      0x30
+-#define APBC_TIMERS1_CLK_RST    0x34
+-#define APBC_TWSI2_CLK_RST      0x38
+-#define APBC_AIB_CLK_RST        0x3c
+-#define APBC_TWSI4_CLK_RST      0x40
+-#define APBC_TIMERS2_CLK_RST    0x44
+-#define APBC_ONEWIRE_CLK_RST    0x48
+-#define APBC_TWSI5_CLK_RST      0x4c
+-#define APBC_DRO_CLK_RST        0x58
+-#define APBC_IR_CLK_RST         0x5c
+-#define APBC_TWSI6_CLK_RST      0x60
+-#define APBC_TWSI7_CLK_RST      0x68
+-#define APBC_TSEN_CLK_RST       0x6c
 -
--			bias-pull-up = <0>;
--			drive-strength = <32>;
--		};
--	};
+-#define APBC_UART4_CLK_RST      0x70
+-#define APBC_UART5_CLK_RST      0x74
+-#define APBC_UART6_CLK_RST      0x78
+-#define APBC_SSP3_CLK_RST       0x7c
+-
+-#define APBC_SSPA0_CLK_RST      0x80
+-#define APBC_SSPA1_CLK_RST      0x84
+-
+-#define APBC_IPC_AP2AUD_CLK_RST 0x90
+-#define APBC_UART7_CLK_RST      0x94
+-#define APBC_UART8_CLK_RST      0x98
+-#define APBC_UART9_CLK_RST      0x9c
+-
+-#define APBC_CAN0_CLK_RST       0xa0
+-#define APBC_PWM4_CLK_RST       0xa8
+-#define APBC_PWM5_CLK_RST       0xac
+-#define APBC_PWM6_CLK_RST       0xb0
+-#define APBC_PWM7_CLK_RST       0xb4
+-#define APBC_PWM8_CLK_RST       0xb8
+-#define APBC_PWM9_CLK_RST       0xbc
+-#define APBC_PWM10_CLK_RST      0xc0
+-#define APBC_PWM11_CLK_RST      0xc4
+-#define APBC_PWM12_CLK_RST      0xc8
+-#define APBC_PWM13_CLK_RST      0xcc
+-#define APBC_PWM14_CLK_RST      0xd0
+-#define APBC_PWM15_CLK_RST      0xd4
+-#define APBC_PWM16_CLK_RST      0xd8
+-#define APBC_PWM17_CLK_RST      0xdc
+-#define APBC_PWM18_CLK_RST      0xe0
+-#define APBC_PWM19_CLK_RST      0xe4
+-/* end of APBC register offset */
+-
+-/* MPMU register offset */
+-#define MPMU_WDTPCR     0x200
+-/* end of MPMU register offset */
+-
+-/* APMU register offset */
+-#define APMU_JPG_CLK_RES_CTRL       0x20
+-#define APMU_CSI_CCIC2_CLK_RES_CTRL 0x24
+-#define APMU_ISP_CLK_RES_CTRL       0x38
+-#define APMU_LCD_CLK_RES_CTRL1      0x44
+-#define APMU_LCD_SPI_CLK_RES_CTRL   0x48
+-#define APMU_LCD_CLK_RES_CTRL2      0x4c
+-#define APMU_CCIC_CLK_RES_CTRL      0x50
+-#define APMU_SDH0_CLK_RES_CTRL      0x54
+-#define APMU_SDH1_CLK_RES_CTRL      0x58
+-#define APMU_USB_CLK_RES_CTRL       0x5c
+-#define APMU_QSPI_CLK_RES_CTRL      0x60
+-#define APMU_USB_CLK_RES_CTRL       0x5c
+-#define APMU_DMA_CLK_RES_CTRL       0x64
+-#define APMU_AES_CLK_RES_CTRL       0x68
+-#define APMU_VPU_CLK_RES_CTRL       0xa4
+-#define APMU_GPU_CLK_RES_CTRL       0xcc
+-#define APMU_SDH2_CLK_RES_CTRL      0xe0
+-#define APMU_PMUA_MC_CTRL           0xe8
+-#define APMU_PMU_CC2_AP             0x100
+-#define APMU_PMUA_EM_CLK_RES_CTRL   0x104
+-
+-#define APMU_AUDIO_CLK_RES_CTRL     0x14c
+-#define APMU_HDMI_CLK_RES_CTRL      0x1B8
+-
+-#define APMU_PCIE_CLK_RES_CTRL_0    0x3cc
+-#define APMU_PCIE_CLK_RES_CTRL_1    0x3d4
+-#define APMU_PCIE_CLK_RES_CTRL_2    0x3dc
+-
+-#define APMU_EMAC0_CLK_RES_CTRL     0x3e4
+-#define APMU_EMAC1_CLK_RES_CTRL     0x3ec
+-/* end of APMU register offset */
+-
+-/* APBC2 register offset */
+-#define APBC2_UART1_CLK_RST		0x00
+-#define APBC2_SSP2_CLK_RST		0x04
+-#define APBC2_TWSI3_CLK_RST		0x08
+-#define APBC2_RTC_CLK_RST		0x0c
+-#define APBC2_TIMERS0_CLK_RST	0x10
+-#define APBC2_KPC_CLK_RST		0x14
+-#define APBC2_GPIO_CLK_RST		0x1c
+-/* end of APBC2 register offset */
+-
+-enum spacemit_reset_base_type {
+-	RST_BASE_TYPE_MPMU       = 0,
+-	RST_BASE_TYPE_APMU       = 1,
+-	RST_BASE_TYPE_APBC       = 2,
+-	RST_BASE_TYPE_APBS       = 3,
+-	RST_BASE_TYPE_CIU        = 4,
+-	RST_BASE_TYPE_DCIU       = 5,
+-	RST_BASE_TYPE_DDRC       = 6,
+-	RST_BASE_TYPE_AUDC       = 7,
+-	RST_BASE_TYPE_APBC2      = 8,
 -};
-diff --git a/arch/riscv/dts/k1.dtsi b/arch/riscv/dts/k1.dtsi
-deleted file mode 100644
-index a633e43da32..00000000000
---- a/arch/riscv/dts/k1.dtsi
-+++ /dev/null
-@@ -1,480 +0,0 @@
--// SPDX-License-Identifier: GPL-2.0-or-later OR MIT
--/*
-- * Copyright (C) 2024 Yangyu Chen <cyy@cyyself.name>
-- */
 -
--/dts-v1/;
--/ {
--	#address-cells = <2>;
--	#size-cells = <2>;
--	model = "SpacemiT K1";
--	compatible = "spacemit,k1";
+-struct spacemit_reset_signal {
+-	u32 offset;
+-	u32 mask;
+-	u32 deassert_val;
+-	u32 assert_val;
+-	enum spacemit_reset_base_type type;
+-};
 -
--	aliases {
--		serial0 = &uart0;
--		serial1 = &uart2;
--		serial2 = &uart3;
--		serial3 = &uart4;
--		serial4 = &uart5;
--		serial5 = &uart6;
--		serial6 = &uart7;
--		serial7 = &uart8;
--		serial8 = &uart9;
+-struct spacemit_reset_base {
+-	void __iomem *mpmu_base;
+-	void __iomem *apmu_base;
+-	void __iomem *apbc_base;
+-	void __iomem *apbs_base;
+-	void __iomem *ciu_base;
+-	void __iomem *dciu_base;
+-	void __iomem *ddrc_base;
+-	void __iomem *audio_ctrl_base;
+-	void __iomem *apbc2_base;
+-};
+-
+-struct spacemit_reset {
+-	struct spacemit_reset_base io_base;
+-	const struct spacemit_reset_signal *signals;
+-};
+-
+-enum {
+-	RESET_TWSI6_SPL = 0,
+-	RESET_TWSI8_SPL,
+-	RESET_SDH_AXI_SPL,
+-	RESET_SDH0_SPL,
+-	RESET_USB_AXI_SPL,
+-	RESET_USBP1_AXI_SPL,
+-	RESET_USB3_0_SPL,
+-	RESET_QSPI_SPL,
+-	RESET_QSPI_BUS_SPL,
+-	RESET_AES_SPL,
+-	RESET_SDH2_SPL,
+-	RESET_NUMBER_SPL
+-};
+-
+-static const struct spacemit_reset_signal
+-	k1_reset_signals[RESET_NUMBER] = {
+-	[RESET_UART1]   = { APBC_UART1_CLK_RST, BIT(2), 0, BIT(2), RST_BASE_TYPE_APBC },
+-	[RESET_UART2]   = { APBC_UART2_CLK_RST, BIT(2), 0, BIT(2), RST_BASE_TYPE_APBC },
+-	[RESET_GPIO]    = { APBC_GPIO_CLK_RST, BIT(2), 0,
+-			BIT(2),
+-			RST_BASE_TYPE_APBC },
+-	[RESET_PWM0]    = { APBC_PWM0_CLK_RST,
+-			BIT(2) | BIT(0),
+-			BIT(0),
+-			BIT(2),
+-			RST_BASE_TYPE_APBC },
+-	[RESET_PWM1]    = { APBC_PWM1_CLK_RST,
+-			BIT(2) | BIT(0),
+-			BIT(0),
+-			BIT(2),
+-			RST_BASE_TYPE_APBC },
+-	[RESET_PWM2]    = { APBC_PWM2_CLK_RST,
+-			BIT(2) | BIT(0),
+-			BIT(0),
+-			BIT(2),
+-			RST_BASE_TYPE_APBC },
+-	[RESET_PWM3]    = { APBC_PWM3_CLK_RST,
+-			BIT(2) | BIT(0),
+-			BIT(0),
+-			BIT(2),
+-			RST_BASE_TYPE_APBC },
+-	[RESET_PWM4]    = { APBC_PWM4_CLK_RST,
+-			BIT(2) | BIT(0),
+-			BIT(0),
+-			BIT(2),
+-			RST_BASE_TYPE_APBC },
+-	[RESET_PWM5]    = { APBC_PWM5_CLK_RST,
+-			BIT(2) | BIT(0),
+-			BIT(0),
+-			BIT(2),
+-			RST_BASE_TYPE_APBC },
+-	[RESET_PWM6]    = { APBC_PWM6_CLK_RST,
+-			BIT(2) | BIT(0),
+-			BIT(0),
+-			BIT(2),
+-			RST_BASE_TYPE_APBC },
+-	[RESET_PWM7]    = { APBC_PWM7_CLK_RST,
+-			BIT(2) | BIT(0),
+-			BIT(0),
+-			BIT(2),
+-			RST_BASE_TYPE_APBC },
+-	[RESET_PWM8]    = { APBC_PWM8_CLK_RST,
+-			BIT(2) | BIT(0),
+-			BIT(0),
+-			BIT(2),
+-			RST_BASE_TYPE_APBC },
+-	[RESET_PWM9]    = { APBC_PWM9_CLK_RST,
+-			BIT(2) | BIT(0),
+-			BIT(0),
+-			BIT(2),
+-			RST_BASE_TYPE_APBC },
+-	[RESET_PWM10]   = { APBC_PWM10_CLK_RST,
+-			BIT(2) | BIT(0),
+-			BIT(0),
+-			BIT(2),
+-			RST_BASE_TYPE_APBC },
+-	[RESET_PWM11]   = { APBC_PWM11_CLK_RST,
+-			BIT(2) | BIT(0),
+-			BIT(0),
+-			BIT(2),
+-			RST_BASE_TYPE_APBC },
+-	[RESET_PWM12]   = { APBC_PWM12_CLK_RST,
+-			BIT(2) | BIT(0),
+-			BIT(0),
+-			BIT(2),
+-			RST_BASE_TYPE_APBC },
+-	[RESET_PWM13]   = { APBC_PWM13_CLK_RST,
+-			BIT(2) | BIT(0),
+-			BIT(0),
+-			BIT(2),
+-			RST_BASE_TYPE_APBC },
+-	[RESET_PWM14]   = { APBC_PWM14_CLK_RST,
+-			BIT(2) | BIT(0),
+-			BIT(0),
+-			BIT(2),
+-			RST_BASE_TYPE_APBC },
+-	[RESET_PWM15]   = { APBC_PWM15_CLK_RST,
+-			BIT(2) | BIT(0),
+-			BIT(0),
+-			BIT(2),
+-			RST_BASE_TYPE_APBC },
+-	[RESET_PWM16]   = { APBC_PWM16_CLK_RST,
+-			BIT(2) | BIT(0),
+-			BIT(0),
+-			BIT(2),
+-			RST_BASE_TYPE_APBC },
+-	[RESET_PWM17]   = { APBC_PWM17_CLK_RST,
+-			BIT(2) | BIT(0),
+-			BIT(0),
+-			BIT(2),
+-			RST_BASE_TYPE_APBC },
+-	[RESET_PWM18]   = { APBC_PWM18_CLK_RST,
+-			BIT(2) | BIT(0),
+-			BIT(0),
+-			BIT(2),
+-			RST_BASE_TYPE_APBC },
+-	[RESET_PWM19]   = { APBC_PWM19_CLK_RST,
+-			BIT(2) | BIT(0),
+-			BIT(0),
+-			BIT(2),
+-			RST_BASE_TYPE_APBC },
+-	[RESET_SSP3]    = { APBC_SSP3_CLK_RST, BIT(2), 0, BIT(2), RST_BASE_TYPE_APBC },
+-	[RESET_UART3]   = { APBC_UART3_CLK_RST, BIT(2), 0, BIT(2), RST_BASE_TYPE_APBC },
+-	[RESET_RTC]     = { APBC_RTC_CLK_RST, BIT(2), 0, BIT(2), RST_BASE_TYPE_APBC },
+-	[RESET_TWSI0]   = { APBC_TWSI0_CLK_RST, BIT(2), 0, BIT(2), RST_BASE_TYPE_APBC },
+-	[RESET_TIMERS1] = { APBC_TIMERS1_CLK_RST, BIT(2), 0, BIT(2), RST_BASE_TYPE_APBC },
+-	[RESET_AIB]     = { APBC_AIB_CLK_RST, BIT(2), 0, BIT(2), RST_BASE_TYPE_APBC },
+-	[RESET_TIMERS2] = { APBC_TIMERS2_CLK_RST, BIT(2), 0, BIT(2), RST_BASE_TYPE_APBC },
+-	[RESET_ONEWIRE] = { APBC_ONEWIRE_CLK_RST, BIT(2), 0, BIT(2), RST_BASE_TYPE_APBC },
+-	[RESET_SSPA0]   = { APBC_SSPA0_CLK_RST, BIT(2), 0, BIT(2), RST_BASE_TYPE_APBC },
+-	[RESET_SSPA1]   = { APBC_SSPA1_CLK_RST, BIT(2), 0, BIT(2), RST_BASE_TYPE_APBC },
+-	[RESET_DRO]     = { APBC_DRO_CLK_RST, BIT(2), 0, BIT(2), RST_BASE_TYPE_APBC },
+-	[RESET_IR]      = { APBC_IR_CLK_RST, BIT(2), 0, BIT(2), RST_BASE_TYPE_APBC },
+-	[RESET_TWSI1]   = { APBC_TWSI1_CLK_RST, BIT(2), 0, BIT(2), RST_BASE_TYPE_APBC },
+-	[RESET_TSEN]    = { APBC_TSEN_CLK_RST, BIT(2), 0, BIT(2), RST_BASE_TYPE_APBC },
+-	[RESET_TWSI2]   = { APBC_TWSI2_CLK_RST, BIT(2), 0, BIT(2), RST_BASE_TYPE_APBC },
+-	[RESET_TWSI4]   = { APBC_TWSI4_CLK_RST, BIT(2), 0, BIT(2), RST_BASE_TYPE_APBC },
+-	[RESET_TWSI5]   = { APBC_TWSI5_CLK_RST, BIT(2), 0, BIT(2), RST_BASE_TYPE_APBC },
+-	[RESET_TWSI6]   = { APBC_TWSI6_CLK_RST, BIT(2), 0, BIT(2), RST_BASE_TYPE_APBC },
+-	[RESET_TWSI7]   = { APBC_TWSI7_CLK_RST, BIT(2), 0, BIT(2), RST_BASE_TYPE_APBC },
+-	[RESET_TWSI8]   = { APBC_TWSI8_CLK_RST, BIT(2), 0, BIT(2), RST_BASE_TYPE_APBC },
+-	[RESET_IPC_AP2AUD]   = { APBC_IPC_AP2AUD_CLK_RST, BIT(2), 0, BIT(2), RST_BASE_TYPE_APBC },
+-	[RESET_UART4]   = { APBC_UART4_CLK_RST, BIT(2), 0, BIT(2), RST_BASE_TYPE_APBC },
+-	[RESET_UART5]   = { APBC_UART5_CLK_RST, BIT(2), 0, BIT(2), RST_BASE_TYPE_APBC },
+-	[RESET_UART6]   = { APBC_UART6_CLK_RST, BIT(2), 0, BIT(2), RST_BASE_TYPE_APBC },
+-	[RESET_UART7]   = { APBC_UART7_CLK_RST, BIT(2), 0, BIT(2), RST_BASE_TYPE_APBC },
+-	[RESET_UART8]   = { APBC_UART8_CLK_RST, BIT(2), 0, BIT(2), RST_BASE_TYPE_APBC },
+-	[RESET_UART9]   = { APBC_UART9_CLK_RST, BIT(2), 0, BIT(2), RST_BASE_TYPE_APBC },
+-	[RESET_CAN0]    = { APBC_CAN0_CLK_RST, BIT(2), 0, BIT(2), RST_BASE_TYPE_APBC },
+-	/* MPMU */
+-	[RESET_WDT]     = { MPMU_WDTPCR, BIT(2), 0, BIT(2), RST_BASE_TYPE_MPMU },
+-	/* APMU */
+-	[RESET_JPG]     = { APMU_JPG_CLK_RES_CTRL, BIT(0), BIT(0), 0, RST_BASE_TYPE_APMU },
+-	[RESET_CSI]     = { APMU_CSI_CCIC2_CLK_RES_CTRL, BIT(1), BIT(1), 0, RST_BASE_TYPE_APMU },
+-	[RESET_CCIC2_PHY]   = { APMU_CSI_CCIC2_CLK_RES_CTRL,
+-				BIT(2),
+-				BIT(2),
+-				0,
+-				RST_BASE_TYPE_APMU },
+-	[RESET_CCIC3_PHY]   = { APMU_CSI_CCIC2_CLK_RES_CTRL,
+-				BIT(29),
+-				BIT(29),
+-				0,
+-				RST_BASE_TYPE_APMU },
+-	[RESET_ISP]     = { APMU_ISP_CLK_RES_CTRL, BIT(0), BIT(0), 0, RST_BASE_TYPE_APMU },
+-	[RESET_ISP_AHB] = { APMU_ISP_CLK_RES_CTRL, BIT(3), BIT(3), 0, RST_BASE_TYPE_APMU },
+-	[RESET_ISP_CI]  = { APMU_ISP_CLK_RES_CTRL, BIT(16), BIT(16), 0, RST_BASE_TYPE_APMU },
+-	[RESET_ISP_CPP] = { APMU_ISP_CLK_RES_CTRL, BIT(27), BIT(27), 0, RST_BASE_TYPE_APMU },
+-	[RESET_LCD]     = { APMU_LCD_CLK_RES_CTRL1, BIT(4), BIT(4), 0, RST_BASE_TYPE_APMU },
+-	[RESET_DSI_ESC] = { APMU_LCD_CLK_RES_CTRL1, BIT(3), BIT(3), 0, RST_BASE_TYPE_APMU },
+-	[RESET_V2D]     = { APMU_LCD_CLK_RES_CTRL1, BIT(27), BIT(27), 0, RST_BASE_TYPE_APMU },
+-	[RESET_MIPI]    = { APMU_LCD_CLK_RES_CTRL1, BIT(15), BIT(15), 0, RST_BASE_TYPE_APMU },
+-	[RESET_LCD_SPI] = { APMU_LCD_SPI_CLK_RES_CTRL, BIT(0), BIT(0), 0, RST_BASE_TYPE_APMU },
+-	[RESET_LCD_SPI_BUS]     = { APMU_LCD_SPI_CLK_RES_CTRL,
+-				BIT(4),
+-				BIT(4),
+-				0,
+-				RST_BASE_TYPE_APMU },
+-	[RESET_LCD_SPI_HBUS]    = { APMU_LCD_SPI_CLK_RES_CTRL,
+-				BIT(2),
+-				BIT(2),
+-				0,
+-				RST_BASE_TYPE_APMU },
+-	[RESET_LCD_MCLK]    = { APMU_LCD_CLK_RES_CTRL2, BIT(9), BIT(9), 0, RST_BASE_TYPE_APMU },
+-	[RESET_CCIC_4X]     = { APMU_CCIC_CLK_RES_CTRL, BIT(1), BIT(1), 0, RST_BASE_TYPE_APMU },
+-	[RESET_CCIC1_PHY]   = { APMU_CCIC_CLK_RES_CTRL, BIT(2), BIT(2), 0, RST_BASE_TYPE_APMU },
+-	[RESET_SDH_AXI]     = { APMU_SDH0_CLK_RES_CTRL, BIT(0), BIT(0), 0, RST_BASE_TYPE_APMU },
+-	[RESET_SDH0]      = { APMU_SDH0_CLK_RES_CTRL, BIT(1), BIT(1), 0, RST_BASE_TYPE_APMU },
+-	[RESET_SDH1]	  = { APMU_SDH1_CLK_RES_CTRL, BIT(1), BIT(1), 0, RST_BASE_TYPE_APMU },
+-	[RESET_USB_AXI]	  = { APMU_USB_CLK_RES_CTRL, BIT(0), BIT(0), 0, RST_BASE_TYPE_APMU },
+-	[RESET_USBP1_AXI] = { APMU_USB_CLK_RES_CTRL, BIT(4), BIT(4), 0, RST_BASE_TYPE_APMU },
+-	[RESET_USB3_0]	  = { APMU_USB_CLK_RES_CTRL,
+-				BIT(9) | BIT(10) | BIT(11),
+-				BIT(9) | BIT(10) | BIT(11),
+-				0,
+-				RST_BASE_TYPE_APMU },
+-	[RESET_QSPI]  = { APMU_QSPI_CLK_RES_CTRL, BIT(1), BIT(1), 0, RST_BASE_TYPE_APMU },
+-	[RESET_QSPI_BUS]  = { APMU_QSPI_CLK_RES_CTRL, BIT(0), BIT(0), 0, RST_BASE_TYPE_APMU },
+-	[RESET_DMA]	 = { APMU_DMA_CLK_RES_CTRL, BIT(0), BIT(0), 0, RST_BASE_TYPE_APMU },
+-	[RESET_AES]	 = { APMU_AES_CLK_RES_CTRL, BIT(4), BIT(4), 0, RST_BASE_TYPE_APMU },
+-	[RESET_VPU]	 = { APMU_VPU_CLK_RES_CTRL, BIT(0), BIT(0), 0, RST_BASE_TYPE_APMU },
+-	[RESET_GPU]	 = { APMU_GPU_CLK_RES_CTRL, BIT(1), BIT(1), 0, RST_BASE_TYPE_APMU },
+-	[RESET_SDH2] = { APMU_SDH2_CLK_RES_CTRL, BIT(1), BIT(1), 0, RST_BASE_TYPE_APMU },
+-	[RESET_MC]	 = { APMU_PMUA_MC_CTRL, BIT(0), BIT(0), 0, RST_BASE_TYPE_APMU },
+-	[RESET_EM_AXI]	= { APMU_PMUA_EM_CLK_RES_CTRL, BIT(0), BIT(0), 0, RST_BASE_TYPE_APMU },
+-	[RESET_EM]	= { APMU_PMUA_EM_CLK_RES_CTRL, BIT(1), BIT(1), 0, RST_BASE_TYPE_APMU },
+-	[RESET_AUDIO_SYS] = { APMU_AUDIO_CLK_RES_CTRL,
+-				BIT(0) | BIT(2) | BIT(3),
+-				BIT(0) | BIT(2) | BIT(3),
+-				0,
+-				RST_BASE_TYPE_APMU },
+-	[RESET_HDMI]	 = { APMU_HDMI_CLK_RES_CTRL, BIT(9), BIT(9), 0, RST_BASE_TYPE_APMU },
+-	[RESET_PCIE0]	 = { APMU_PCIE_CLK_RES_CTRL_0,
+-				BIT(3) | BIT(4) | BIT(5) | BIT(8),
+-				BIT(3) | BIT(4) | BIT(5),
+-				BIT(8),
+-				RST_BASE_TYPE_APMU },
+-	[RESET_PCIE1]	 = { APMU_PCIE_CLK_RES_CTRL_1,
+-				BIT(3) | BIT(4) | BIT(5) | BIT(8),
+-				BIT(3) | BIT(4) | BIT(5),
+-				BIT(8),
+-				RST_BASE_TYPE_APMU },
+-	[RESET_PCIE2]	 = { APMU_PCIE_CLK_RES_CTRL_2, 0x138, 0x38, 0x100, RST_BASE_TYPE_APMU },
+-	[RESET_EMAC0]	 = { APMU_EMAC0_CLK_RES_CTRL, BIT(1), BIT(1), 0, RST_BASE_TYPE_APMU },
+-	[RESET_EMAC1]	 = { APMU_EMAC1_CLK_RES_CTRL, BIT(1), BIT(1), 0, RST_BASE_TYPE_APMU },
+-	[RESET_SEC_UART1]	= { APBC2_UART1_CLK_RST, BIT(2), 0, BIT(2), RST_BASE_TYPE_APBC2 },
+-	[RESET_SEC_SSP2]	= { APBC2_SSP2_CLK_RST, BIT(2), 0, BIT(2), RST_BASE_TYPE_APBC2 },
+-	[RESET_SEC_TWSI3]	= { APBC2_TWSI3_CLK_RST, BIT(2), 0, BIT(2), RST_BASE_TYPE_APBC2 },
+-	[RESET_SEC_RTC]		= { APBC2_RTC_CLK_RST, BIT(2), 0, BIT(2), RST_BASE_TYPE_APBC2 },
+-	[RESET_SEC_TIMERS0]	= { APBC2_TIMERS0_CLK_RST, BIT(2), 0, BIT(2), RST_BASE_TYPE_APBC2 },
+-	[RESET_SEC_KPC]		= { APBC2_KPC_CLK_RST, BIT(2), 0, BIT(2), RST_BASE_TYPE_APBC2 },
+-	[RESET_SEC_GPIO]	= { APBC2_GPIO_CLK_RST, BIT(2), 0, BIT(2), RST_BASE_TYPE_APBC2 },
 -	};
 -
--	cpus {
--		#address-cells = <1>;
--		#size-cells = <0>;
--		timebase-frequency = <24000000>;
+-static u32 spacemit_reset_read(struct spacemit_reset *reset, u32 id)
+-{
+-	void __iomem *base;
 -
--		cpu-map {
--			cluster0 {
--				core0 {
--					cpu = <&cpu_0>;
--				};
--				core1 {
--					cpu = <&cpu_1>;
--				};
--				core2 {
--					cpu = <&cpu_2>;
--				};
--				core3 {
--					cpu = <&cpu_3>;
--				};
--			};
+-	switch (reset->signals[id].type) {
+-	case RST_BASE_TYPE_APMU:
+-		base = reset->io_base.apmu_base;
+-		break;
+-	case RST_BASE_TYPE_APBC:
+-		base = reset->io_base.apbc_base;
+-		break;
+-	default:
+-		base = reset->io_base.apbc_base;
+-		break;
+-	}
 -
--			cluster1 {
--				core0 {
--					cpu = <&cpu_4>;
--				};
--				core1 {
--					cpu = <&cpu_5>;
--				};
--				core2 {
--					cpu = <&cpu_6>;
--				};
--				core3 {
--					cpu = <&cpu_7>;
--				};
--			};
--		};
+-	return readl(base + reset->signals[id].offset);
+-}
 -
--		cpu_0: cpu@0 {
--			compatible = "spacemit,x60", "riscv";
--			device_type = "cpu";
--			reg = <0>;
--			riscv,isa = "rv64imafdcv_zicbom_zicbop_zicboz_zicntr_zicond_zicsr_zifencei_zihintpause_zihpm_zfh_zba_zbb_zbc_zbs_zkt_zvfh_zvkt_sscofpmf_sstc_svinval_svnapot_svpbmt";
--			riscv,isa-base = "rv64i";
--			riscv,isa-extensions = "i", "m", "a", "f", "d", "c", "v", "zicbom",
--					       "zicbop", "zicboz", "zicntr", "zicond", "zicsr",
--					       "zifencei", "zihintpause", "zihpm", "zfh", "zba",
--					       "zbb", "zbc", "zbs", "zkt", "zvfh", "zvkt",
--					       "sscofpmf", "sstc", "svinval", "svnapot", "svpbmt";
--			riscv,cbom-block-size = <64>;
--			riscv,cbop-block-size = <64>;
--			riscv,cboz-block-size = <64>;
--			i-cache-block-size = <64>;
--			i-cache-size = <32768>;
--			i-cache-sets = <128>;
--			d-cache-block-size = <64>;
--			d-cache-size = <32768>;
--			d-cache-sets = <128>;
--			next-level-cache = <&cluster0_l2_cache>;
--			mmu-type = "riscv,sv39";
+-static void spacemit_reset_write(struct spacemit_reset *reset, u32 value, u32 id)
+-{
+-	void __iomem *base;
 -
--			cpu0_intc: interrupt-controller {
--				compatible = "riscv,cpu-intc";
--				interrupt-controller;
--				#interrupt-cells = <1>;
--			};
--		};
+-	switch (reset->signals[id].type) {
+-	case RST_BASE_TYPE_APMU:
+-		base = reset->io_base.apmu_base;
+-		break;
+-	case RST_BASE_TYPE_APBC:
+-		base = reset->io_base.apbc_base;
+-		break;
+-	default:
+-		base = reset->io_base.apbc_base;
+-		break;
+-	}
 -
--		cpu_1: cpu@1 {
--			compatible = "spacemit,x60", "riscv";
--			device_type = "cpu";
--			reg = <1>;
--			riscv,isa = "rv64imafdcv_zicbom_zicbop_zicboz_zicntr_zicond_zicsr_zifencei_zihintpause_zihpm_zfh_zba_zbb_zbc_zbs_zkt_zvfh_zvkt_sscofpmf_sstc_svinval_svnapot_svpbmt";
--			riscv,isa-base = "rv64i";
--			riscv,isa-extensions = "i", "m", "a", "f", "d", "c", "v", "zicbom",
--					       "zicbop", "zicboz", "zicntr", "zicond", "zicsr",
--					       "zifencei", "zihintpause", "zihpm", "zfh", "zba",
--					       "zbb", "zbc", "zbs", "zkt", "zvfh", "zvkt",
--					       "sscofpmf", "sstc", "svinval", "svnapot", "svpbmt";
--			riscv,cbom-block-size = <64>;
--			riscv,cbop-block-size = <64>;
--			riscv,cboz-block-size = <64>;
--			i-cache-block-size = <64>;
--			i-cache-size = <32768>;
--			i-cache-sets = <128>;
--			d-cache-block-size = <64>;
--			d-cache-size = <32768>;
--			d-cache-sets = <128>;
--			next-level-cache = <&cluster0_l2_cache>;
--			mmu-type = "riscv,sv39";
+-	writel(value, base + reset->signals[id].offset);
+-}
 -
--			cpu1_intc: interrupt-controller {
--				compatible = "riscv,cpu-intc";
--				interrupt-controller;
--				#interrupt-cells = <1>;
--			};
--		};
+-static void spacemit_reset_set(struct reset_ctl *rst, u32 id, bool assert)
+-{
+-	u32 value;
+-	struct spacemit_reset *reset = dev_get_priv(rst->dev);
 -
--		cpu_2: cpu@2 {
--			compatible = "spacemit,x60", "riscv";
--			device_type = "cpu";
--			reg = <2>;
--			riscv,isa = "rv64imafdcv_zicbom_zicbop_zicboz_zicntr_zicond_zicsr_zifencei_zihintpause_zihpm_zfh_zba_zbb_zbc_zbs_zkt_zvfh_zvkt_sscofpmf_sstc_svinval_svnapot_svpbmt";
--			riscv,isa-base = "rv64i";
--			riscv,isa-extensions = "i", "m", "a", "f", "d", "c", "v", "zicbom",
--					       "zicbop", "zicboz", "zicntr", "zicond", "zicsr",
--					       "zifencei", "zihintpause", "zihpm", "zfh", "zba",
--					       "zbb", "zbc", "zbs", "zkt", "zvfh", "zvkt",
--					       "sscofpmf", "sstc", "svinval", "svnapot", "svpbmt";
--			riscv,cbom-block-size = <64>;
--			riscv,cbop-block-size = <64>;
--			riscv,cboz-block-size = <64>;
--			i-cache-block-size = <64>;
--			i-cache-size = <32768>;
--			i-cache-sets = <128>;
--			d-cache-block-size = <64>;
--			d-cache-size = <32768>;
--			d-cache-sets = <128>;
--			next-level-cache = <&cluster0_l2_cache>;
--			mmu-type = "riscv,sv39";
+-	value = spacemit_reset_read(reset, id);
 -
--			cpu2_intc: interrupt-controller {
--				compatible = "riscv,cpu-intc";
--				interrupt-controller;
--				#interrupt-cells = <1>;
--			};
--		};
+-	if (assert) {
+-		value &= ~reset->signals[id].mask;
+-		value |= reset->signals[id].assert_val;
+-	} else {
+-		value &= ~reset->signals[id].mask;
+-		value |= reset->signals[id].deassert_val;
+-	}
 -
--		cpu_3: cpu@3 {
--			compatible = "spacemit,x60", "riscv";
--			device_type = "cpu";
--			reg = <3>;
--			riscv,isa = "rv64imafdcv_zicbom_zicbop_zicboz_zicntr_zicond_zicsr_zifencei_zihintpause_zihpm_zfh_zba_zbb_zbc_zbs_zkt_zvfh_zvkt_sscofpmf_sstc_svinval_svnapot_svpbmt";
--			riscv,isa-base = "rv64i";
--			riscv,isa-extensions = "i", "m", "a", "f", "d", "c", "v", "zicbom",
--					       "zicbop", "zicboz", "zicntr", "zicond", "zicsr",
--					       "zifencei", "zihintpause", "zihpm", "zfh", "zba",
--					       "zbb", "zbc", "zbs", "zkt", "zvfh", "zvkt",
--					       "sscofpmf", "sstc", "svinval", "svnapot", "svpbmt";
--			riscv,cbom-block-size = <64>;
--			riscv,cbop-block-size = <64>;
--			riscv,cboz-block-size = <64>;
--			i-cache-block-size = <64>;
--			i-cache-size = <32768>;
--			i-cache-sets = <128>;
--			d-cache-block-size = <64>;
--			d-cache-size = <32768>;
--			d-cache-sets = <128>;
--			next-level-cache = <&cluster0_l2_cache>;
--			mmu-type = "riscv,sv39";
+-	spacemit_reset_write(reset, value, id);
+-}
 -
--			cpu3_intc: interrupt-controller {
--				compatible = "riscv,cpu-intc";
--				interrupt-controller;
--				#interrupt-cells = <1>;
--			};
--		};
+-static int spacemit_reset_update(struct reset_ctl *rst, bool assert)
+-{
+-	if (rst->id < RESET_UART1 || rst->id >= RESET_NUMBER)
+-		return 0;
 -
--		cpu_4: cpu@4 {
--			compatible = "spacemit,x60", "riscv";
--			device_type = "cpu";
--			reg = <4>;
--			riscv,isa = "rv64imafdcv_zicbom_zicbop_zicboz_zicntr_zicond_zicsr_zifencei_zihintpause_zihpm_zfh_zba_zbb_zbc_zbs_zkt_zvfh_zvkt_sscofpmf_sstc_svinval_svnapot_svpbmt";
--			riscv,isa-base = "rv64i";
--			riscv,isa-extensions = "i", "m", "a", "f", "d", "c", "v", "zicbom",
--					       "zicbop", "zicboz", "zicntr", "zicond", "zicsr",
--					       "zifencei", "zihintpause", "zihpm", "zfh", "zba",
--					       "zbb", "zbc", "zbs", "zkt", "zvfh", "zvkt",
--					       "sscofpmf", "sstc", "svinval", "svnapot", "svpbmt";
--			riscv,cbom-block-size = <64>;
--			riscv,cbop-block-size = <64>;
--			riscv,cboz-block-size = <64>;
--			i-cache-block-size = <64>;
--			i-cache-size = <32768>;
--			i-cache-sets = <128>;
--			d-cache-block-size = <64>;
--			d-cache-size = <32768>;
--			d-cache-sets = <128>;
--			next-level-cache = <&cluster1_l2_cache>;
--			mmu-type = "riscv,sv39";
+-	/* can not write to twsi8 */
+-	if (rst->id == RESET_TWSI8)
+-		return 0;
 -
--			cpu4_intc: interrupt-controller {
--				compatible = "riscv,cpu-intc";
--				interrupt-controller;
--				#interrupt-cells = <1>;
--			};
--		};
+-	spacemit_reset_set(rst, rst->id, assert);
+-	return 0;
+-}
 -
--		cpu_5: cpu@5 {
--			compatible = "spacemit,x60", "riscv";
--			device_type = "cpu";
--			reg = <5>;
--			riscv,isa = "rv64imafdcv_zicbom_zicbop_zicboz_zicntr_zicond_zicsr_zifencei_zihintpause_zihpm_zfh_zba_zbb_zbc_zbs_zkt_zvfh_zvkt_sscofpmf_sstc_svinval_svnapot_svpbmt";
--			riscv,isa-base = "rv64i";
--			riscv,isa-extensions = "i", "m", "a", "f", "d", "c", "v", "zicbom",
--					       "zicbop", "zicboz", "zicntr", "zicond", "zicsr",
--					       "zifencei", "zihintpause", "zihpm", "zfh", "zba",
--					       "zbb", "zbc", "zbs", "zkt", "zvfh", "zvkt",
--					       "sscofpmf", "sstc", "svinval", "svnapot", "svpbmt";
--			riscv,cbom-block-size = <64>;
--			riscv,cbop-block-size = <64>;
--			riscv,cboz-block-size = <64>;
--			i-cache-block-size = <64>;
--			i-cache-size = <32768>;
--			i-cache-sets = <128>;
--			d-cache-block-size = <64>;
--			d-cache-size = <32768>;
--			d-cache-sets = <128>;
--			next-level-cache = <&cluster1_l2_cache>;
--			mmu-type = "riscv,sv39";
+-static int spacemit_reset_assert(struct reset_ctl *rst)
+-{
+-	return spacemit_reset_update(rst, true);
+-}
 -
--			cpu5_intc: interrupt-controller {
--				compatible = "riscv,cpu-intc";
--				interrupt-controller;
--				#interrupt-cells = <1>;
--			};
--		};
+-static int spacemit_reset_deassert(struct reset_ctl *rst)
+-{
+-	return spacemit_reset_update(rst, false);
+-}
 -
--		cpu_6: cpu@6 {
--			compatible = "spacemit,x60", "riscv";
--			device_type = "cpu";
--			reg = <6>;
--			riscv,isa = "rv64imafdcv_zicbom_zicbop_zicboz_zicntr_zicond_zicsr_zifencei_zihintpause_zihpm_zfh_zba_zbb_zbc_zbs_zkt_zvfh_zvkt_sscofpmf_sstc_svinval_svnapot_svpbmt";
--			riscv,isa-base = "rv64i";
--			riscv,isa-extensions = "i", "m", "a", "f", "d", "c", "v", "zicbom",
--					       "zicbop", "zicboz", "zicntr", "zicond", "zicsr",
--					       "zifencei", "zihintpause", "zihpm", "zfh", "zba",
--					       "zbb", "zbc", "zbs", "zkt", "zvfh", "zvkt",
--					       "sscofpmf", "sstc", "svinval", "svnapot", "svpbmt";
--			riscv,cbom-block-size = <64>;
--			riscv,cbop-block-size = <64>;
--			riscv,cboz-block-size = <64>;
--			i-cache-block-size = <64>;
--			i-cache-size = <32768>;
--			i-cache-sets = <128>;
--			d-cache-block-size = <64>;
--			d-cache-size = <32768>;
--			d-cache-sets = <128>;
--			next-level-cache = <&cluster1_l2_cache>;
--			mmu-type = "riscv,sv39";
+-static int spacemit_k1_reset_probe(struct udevice *dev)
+-{
+-	struct spacemit_reset *reset = dev_get_priv(dev);
 -
--			cpu6_intc: interrupt-controller {
--				compatible = "riscv,cpu-intc";
--				interrupt-controller;
--				#interrupt-cells = <1>;
--			};
--		};
+-	reset->io_base.mpmu_base = (void *)dev_remap_addr_index(dev, 0);
+-	if (!reset->io_base.mpmu_base) {
+-		pr_err("failed to map mpmu registers\n");
+-		goto out;
+-	}
 -
--		cpu_7: cpu@7 {
--			compatible = "spacemit,x60", "riscv";
--			device_type = "cpu";
--			reg = <7>;
--			riscv,isa = "rv64imafdcv_zicbom_zicbop_zicboz_zicntr_zicond_zicsr_zifencei_zihintpause_zihpm_zfh_zba_zbb_zbc_zbs_zkt_zvfh_zvkt_sscofpmf_sstc_svinval_svnapot_svpbmt";
--			riscv,isa-base = "rv64i";
--			riscv,isa-extensions = "i", "m", "a", "f", "d", "c", "v", "zicbom",
--					       "zicbop", "zicboz", "zicntr", "zicond", "zicsr",
--					       "zifencei", "zihintpause", "zihpm", "zfh", "zba",
--					       "zbb", "zbc", "zbs", "zkt", "zvfh", "zvkt",
--					       "sscofpmf", "sstc", "svinval", "svnapot", "svpbmt";
--			riscv,cbom-block-size = <64>;
--			riscv,cbop-block-size = <64>;
--			riscv,cboz-block-size = <64>;
--			i-cache-block-size = <64>;
--			i-cache-size = <32768>;
--			i-cache-sets = <128>;
--			d-cache-block-size = <64>;
--			d-cache-size = <32768>;
--			d-cache-sets = <128>;
--			next-level-cache = <&cluster1_l2_cache>;
--			mmu-type = "riscv,sv39";
+-	reset->io_base.apmu_base = (void *)dev_remap_addr_index(dev, 1);
+-	if (!reset->io_base.apmu_base) {
+-		pr_err("failed to map apmu registers\n");
+-		goto out;
+-	}
 -
--			cpu7_intc: interrupt-controller {
--				compatible = "riscv,cpu-intc";
--				interrupt-controller;
--				#interrupt-cells = <1>;
--			};
--		};
+-	reset->io_base.apbc_base = (void *)dev_remap_addr_index(dev, 2);
+-	if (!reset->io_base.apbc_base) {
+-		pr_err("failed to map apbc registers\n");
+-		goto out;
+-	}
 -
--		cluster0_l2_cache: l2-cache0 {
--			compatible = "cache";
--			cache-block-size = <64>;
--			cache-level = <2>;
--			cache-size = <524288>;
--			cache-sets = <512>;
--			cache-unified;
--		};
+-	reset->io_base.apbs_base = (void *)dev_remap_addr_index(dev, 3);
+-	if (!reset->io_base.apbs_base) {
+-		pr_err("failed to map apbs registers\n");
+-		goto out;
+-	}
 -
--		cluster1_l2_cache: l2-cache1 {
--			compatible = "cache";
--			cache-block-size = <64>;
--			cache-level = <2>;
--			cache-size = <524288>;
--			cache-sets = <512>;
--			cache-unified;
--		};
--	};
+-	reset->io_base.ciu_base = (void *)dev_remap_addr_index(dev, 4);
+-	if (!reset->io_base.ciu_base) {
+-		pr_err("failed to map ciu registers\n");
+-		goto out;
+-	}
 -
--	soc {
--		compatible = "simple-bus";
--		interrupt-parent = <&plic>;
--		#address-cells = <2>;
--		#size-cells = <2>;
--		dma-noncoherent;
--		ranges;
+-	reset->io_base.dciu_base = (void *)dev_remap_addr_index(dev, 5);
+-	if (!reset->io_base.dciu_base) {
+-		pr_err("failed to map dragon ciu registers\n");
+-		goto out;
+-	}
 -
--		uart0: serial@d4017000 {
--			compatible = "spacemit,k1-uart", "intel,xscale-uart";
--			reg = <0x0 0xd4017000 0x0 0x100>;
--			interrupts = <42>;
--			clock-frequency = <14857000>;
--			reg-shift = <2>;
--			reg-io-width = <4>;
--			status = "disabled";
--		};
+-	reset->io_base.ddrc_base = (void *)dev_remap_addr_index(dev, 6);
+-	if (!reset->io_base.ddrc_base) {
+-		pr_err("failed to map ddrc registers\n");
+-		goto out;
+-	}
 -
--		uart2: serial@d4017100 {
--			compatible = "spacemit,k1-uart", "intel,xscale-uart";
--			reg = <0x0 0xd4017100 0x0 0x100>;
--			interrupts = <44>;
--			clock-frequency = <14857000>;
--			reg-shift = <2>;
--			reg-io-width = <4>;
--			status = "disabled";
--		};
+-	reset->io_base.apbc2_base = (void *)dev_remap_addr_index(dev, 7);
+-	if (!reset->io_base.apbc2_base) {
+-		pr_err("failed to map apbc2 registers\n");
+-		goto out;
+-	}
 -
--		uart3: serial@d4017200 {
--			compatible = "spacemit,k1-uart", "intel,xscale-uart";
--			reg = <0x0 0xd4017200 0x0 0x100>;
--			interrupts = <45>;
--			clock-frequency = <14857000>;
--			reg-shift = <2>;
--			reg-io-width = <4>;
--			status = "disabled";
--		};
+-	reset->signals = k1_reset_signals;
 -
--		uart4: serial@d4017300 {
--			compatible = "spacemit,k1-uart", "intel,xscale-uart";
--			reg = <0x0 0xd4017300 0x0 0x100>;
--			interrupts = <46>;
--			clock-frequency = <14857000>;
--			reg-shift = <2>;
--			reg-io-width = <4>;
--			status = "disabled";
--		};
+-out:
+-	return 0;
+-}
 -
--		uart5: serial@d4017400 {
--			compatible = "spacemit,k1-uart", "intel,xscale-uart";
--			reg = <0x0 0xd4017400 0x0 0x100>;
--			interrupts = <47>;
--			clock-frequency = <14857000>;
--			reg-shift = <2>;
--			reg-io-width = <4>;
--			status = "disabled";
--		};
+-const struct reset_ops k1_reset_ops = {
+-	.rst_assert = spacemit_reset_assert,
+-	.rst_deassert = spacemit_reset_deassert,
+-};
 -
--		uart6: serial@d4017500 {
--			compatible = "spacemit,k1-uart", "intel,xscale-uart";
--			reg = <0x0 0xd4017500 0x0 0x100>;
--			interrupts = <48>;
--			clock-frequency = <14857000>;
--			reg-shift = <2>;
--			reg-io-width = <4>;
--			status = "disabled";
--		};
+-static const struct udevice_id k1_reset_ids[] = {
+-	{ .compatible = "spacemit,k1-reset", },
+-	{},
+-};
 -
--		uart7: serial@d4017600 {
--			compatible = "spacemit,k1-uart", "intel,xscale-uart";
--			reg = <0x0 0xd4017600 0x0 0x100>;
--			interrupts = <49>;
--			clock-frequency = <14857000>;
--			reg-shift = <2>;
--			reg-io-width = <4>;
--			status = "disabled";
--		};
--
--		uart8: serial@d4017700 {
--			compatible = "spacemit,k1-uart", "intel,xscale-uart";
--			reg = <0x0 0xd4017700 0x0 0x100>;
--			interrupts = <50>;
--			clock-frequency = <14857000>;
--			reg-shift = <2>;
--			reg-io-width = <4>;
--			status = "disabled";
--		};
--
--		uart9: serial@d4017800 {
--			compatible = "spacemit,k1-uart", "intel,xscale-uart";
--			reg = <0x0 0xd4017800 0x0 0x100>;
--			interrupts = <51>;
--			clock-frequency = <14857000>;
--			reg-shift = <2>;
--			reg-io-width = <4>;
--			status = "disabled";
--		};
--
--		plic: interrupt-controller@e0000000 {
--			compatible = "spacemit,k1-plic", "sifive,plic-1.0.0";
--			reg = <0x0 0xe0000000 0x0 0x4000000>;
--			interrupts-extended = <&cpu0_intc 11>, <&cpu0_intc 9>,
--					      <&cpu1_intc 11>, <&cpu1_intc 9>,
--					      <&cpu2_intc 11>, <&cpu2_intc 9>,
--					      <&cpu3_intc 11>, <&cpu3_intc 9>,
--					      <&cpu4_intc 11>, <&cpu4_intc 9>,
--					      <&cpu5_intc 11>, <&cpu5_intc 9>,
--					      <&cpu6_intc 11>, <&cpu6_intc 9>,
--					      <&cpu7_intc 11>, <&cpu7_intc 9>;
--			interrupt-controller;
--			#address-cells = <0>;
--			#interrupt-cells = <1>;
--			riscv,ndev = <159>;
--		};
--
--		clint: timer@e4000000 {
--			compatible = "spacemit,k1-clint", "sifive,clint0";
--			reg = <0x0 0xe4000000 0x0 0x10000>;
--			interrupts-extended = <&cpu0_intc 3>, <&cpu0_intc 7>,
--					      <&cpu1_intc 3>, <&cpu1_intc 7>,
--					      <&cpu2_intc 3>, <&cpu2_intc 7>,
--					      <&cpu3_intc 3>, <&cpu3_intc 7>,
--					      <&cpu4_intc 3>, <&cpu4_intc 7>,
--					      <&cpu5_intc 3>, <&cpu5_intc 7>,
--					      <&cpu6_intc 3>, <&cpu6_intc 7>,
--					      <&cpu7_intc 3>, <&cpu7_intc 7>;
--		};
--
--		sec_uart1: serial@f0612000 {
--			compatible = "spacemit,k1-uart", "intel,xscale-uart";
--			reg = <0x0 0xf0612000 0x0 0x100>;
--			interrupts = <43>;
--			clock-frequency = <14857000>;
--			reg-shift = <2>;
--			reg-io-width = <4>;
--			status = "reserved"; /* for TEE usage */
--		};
--
--		reset: reset-controller@d4050000 {
--			compatible = "spacemit,k1-reset";
--			reg = <0x0 0xd4050000 0x0 0x209c>,
--				<0x0 0xd4282800 0x0 0x400>,
--				<0x0 0xd4015000 0x0 0x1000>,
--				<0x0 0xd4090000 0x0 0x1000>,
--				<0x0 0xd4282c00 0x0 0x400>,
--				<0x0 0xd8440000 0x0 0x98>,
--				<0x0 0xc0000000 0x0 0x4280>,
--				<0x0 0xf0610000 0x0 0x20>;
--			reg-names = "mpmu", "apmu", "apbc", "apbs", "ciu", "dciu", "ddrc", "apbc2";
--			#reset-cells = <1>;
--			status = "disabled";
--		};
--
--		pinctrl: pinctrl@d401e000 {
--			compatible = "spacemit,k1-pinctrl", "pinctrl-single";
--			reg = <0x0 0xd401e000 0x0 0x400>;
--			pinctrl-single,register-width = <32>;
--		};
--	};
+-U_BOOT_DRIVER(k1_reset) = {
+-	.name		= "spacemit,k1-reset",
+-	.id		= UCLASS_RESET,
+-	.ops		= &k1_reset_ops,
+-	.of_match	= k1_reset_ids,
+-	.probe		= spacemit_k1_reset_probe,
+-	.priv_auto	= sizeof(struct spacemit_reset),
 -};
 
 -- 
