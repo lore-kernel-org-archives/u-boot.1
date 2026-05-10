@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41650CD37B9
-	for <u-boot@archiver.kernel.org>; Sun, 10 May 2026 17:18:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE076CD37B9
+	for <u-boot@archiver.kernel.org>; Sun, 10 May 2026 17:18:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 24ED984839;
-	Sun, 10 May 2026 19:17:50 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5F09484843;
+	Sun, 10 May 2026 19:17:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="gPKnUzvy";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="M4bl6Tph";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="M9+sQ8i5";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="HSq9CO8+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B664E84839; Sun, 10 May 2026 19:17:48 +0200 (CEST)
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
+ id A562684843; Sun, 10 May 2026 19:17:50 +0200 (CEST)
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E5CA9846D0
- for <u-boot@lists.denx.de>; Sun, 10 May 2026 19:17:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D9B00846D0
+ for <u-boot@lists.denx.de>; Sun, 10 May 2026 19:17:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
@@ -30,49 +30,46 @@ Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4gD8gZ2f0vz9trC;
- Sun, 10 May 2026 19:17:46 +0200 (CEST)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4gD8gc4gp6z9tKq;
+ Sun, 10 May 2026 19:17:48 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1778433466;
+ s=mail20150812; t=1778433468;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=h95iAmUrYmIQGfHD/OOdajo7oc2aU4j+2dEcBLetKko=;
- b=gPKnUzvyTB8beQjD1afbZymB/nXTqS+k+bWPKKZhZP6Ysqztzk/5V4Vh/LpZ7Ahs8Ihbz5
- l5fRef6r4/xtnsSnJX9oLOT/AbmUVfO+QBMEouPjraP4OYbqcSuZ3sSJaGB2+IdBuGtjwa
- xTEAsfM3PO65RXjC3Pf5n0bU1H6KZTKI9+JdLW9fSNvLAGCE7jcfyeAOsuG95h5jFyRb6b
- wScR8MBCFEmnEEgZ4HFspAIbqJi2I3jFZQs5equMWSuuLTrknUt9tpZO3rFktLttdiJIre
- 1j9WK3GH7zt8ROSjHd5OPWU5k5m0xXbAnlNw5WdRhoWZcU39ORvKM6jIcnJv/Q==
+ bh=ZmRX/upL7GN9fheA1bfRgdeXNQXL31Olcccp32V6LrQ=;
+ b=M9+sQ8i50gjMB5Si3reRjWRP362JxReRNFdt5yNyrjQUGGyUsBTxSvVOnuo7RaPLfF3TJD
+ pJUatLhhLrZo3NztWM1rlExntWl9y2koZrrZDe1v03k38WpzO/QD2cDuehp5dE92EQSDwo
+ RWfd6Nyv6tvYyl3/LX4+LoJzbvE1eFnNAGb/sBLEFU2518ACj6kKLE2yRfrK3CBWa5DD42
+ ybt9LkU1REBm1Vlssl2Yy++uF190zs99vQYDkSid1yJM1iTJo4pkVQdq9YA3KeB2JcEmAV
+ UcDEhkY2qHoazR9g1AFIH0pxRY87yicGlmvvaCeyYKzVlKEqVrm/SpMzd8Pa7g==
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1778433464;
+ s=mail20150812; t=1778433467;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=h95iAmUrYmIQGfHD/OOdajo7oc2aU4j+2dEcBLetKko=;
- b=M4bl6TphxiAC7jCR+JnTEXYTwaIPucRlvBHzwv3TBUEmRgYQbX9zApJNfUeHQhgrBSTitg
- wbwVIiWNdkLWabjyL3pqj5pTiRqQUxT0kmuxZ9NaDNTcG0yYYT0O9Zm6HHJVxYK8oe5dhL
- yzLyT7zOe+7WZsM1vQONRF5A+orYUrnOjmcyEB9t6LQ6YjBaukda8YpLMTYdr/8Ix/J5zW
- 1IRd1Uijqv2S+b0ehkarUZUr59sy2RJKf4t9y3xqGzwA/QNxtep0g5P8L0N5+CuEw2C+GX
- Kj36ludxSXXR/RUU/jUsFShSNFdidz2LpmMpiLbdAsCT7cXbMrGuoOeI+urXpA==
+ bh=ZmRX/upL7GN9fheA1bfRgdeXNQXL31Olcccp32V6LrQ=;
+ b=HSq9CO8+982JJCmvbcelFVteIN13tm5lipmClVQYtEMO6Qa6wjmBXvhPrXaAQ/OFu/JPRY
+ a0XFEZjbKxKqbZnNjTQWhVUgy0rDwlMzUTW/O6B95L1BEJixDkDmxzxKYApSZi2NewZ5KF
+ EQaj6ey652Jfee00j7MzyKJcEl2/n5DMmTRPFM8fmbq3xGUDbqF3Rx4ZVrevdrggXctQ9N
+ b5lDV4Je3ejh8wk2bSwIJXY6vPhtYdi7QX+BblsbzyFcxslicnn4w2mQK8SISyp28n9UU/
+ Zx3Syyq+049fSW96ewbnO4KBxdsXRNAnirtiTczs5uiL//sUDvMBTm1Aw3nLtg==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Anatolij Gustschin <ag.dev.uboot@gmail.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Raphael Gallais-Pou <rgallaispou@gmail.com>, Tom Rini <trini@konsulko.com>,
- uboot-stm32@st-md-mailman.stormreply.com
-Subject: [PATCH 09/11] video: stm32: Staticize and constify driver ops
-Date: Sun, 10 May 2026 19:17:04 +0200
-Message-ID: <20260510171723.56866-9-marek.vasut+renesas@mailbox.org>
+ Liviu Dudau <liviu.dudau@foss.arm.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH 10/11] video: tda19988: Staticize and constify driver ops
+Date: Sun, 10 May 2026 19:17:05 +0200
+Message-ID: <20260510171723.56866-10-marek.vasut+renesas@mailbox.org>
 In-Reply-To: <20260510171723.56866-1-marek.vasut+renesas@mailbox.org>
 References: <20260510171723.56866-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: u4gqoh8ez9xxn769en59foemubbjsaie
-X-MBO-RS-ID: 8537b3bfc5576dd47f5
+X-MBO-RS-ID: 5718a03dd378c4ca9b5
+X-MBO-RS-META: i38jf6q4h39pmobmf5tho1brkp986aon
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,28 +92,25 @@ from outside of this driver and is not going to be modified at runtime.
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
 Cc: Anatolij Gustschin <ag.dev.uboot@gmail.com>
-Cc: Patrice Chotard <patrice.chotard@foss.st.com>
-Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
-Cc: Raphael Gallais-Pou <rgallaispou@gmail.com>
+Cc: Liviu Dudau <liviu.dudau@foss.arm.com>
 Cc: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de
-Cc: uboot-stm32@st-md-mailman.stormreply.com
 ---
- drivers/video/stm32/stm32_dsi.c | 2 +-
+ drivers/video/tda19988.c | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/video/stm32/stm32_dsi.c b/drivers/video/stm32/stm32_dsi.c
-index 5c4d8d2aab5..29c57a4ff89 100644
---- a/drivers/video/stm32/stm32_dsi.c
-+++ b/drivers/video/stm32/stm32_dsi.c
-@@ -511,7 +511,7 @@ err_reg:
- 	return ret;
+diff --git a/drivers/video/tda19988.c b/drivers/video/tda19988.c
+index ebc8521c6ed..a4cc3a49232 100644
+--- a/drivers/video/tda19988.c
++++ b/drivers/video/tda19988.c
+@@ -522,7 +522,7 @@ static int tda19988_enable(struct udevice *dev, int panel_bpp,
+ 	return 0;
  }
  
--struct video_bridge_ops stm32_dsi_ops = {
-+static const struct video_bridge_ops stm32_dsi_ops = {
- 	.attach = stm32_dsi_attach,
- 	.set_backlight = stm32_dsi_set_backlight,
+-struct dm_display_ops tda19988_ops = {
++static const struct dm_display_ops tda19988_ops = {
+ 	.read_edid = tda19988_read_edid,
+ 	.enable = tda19988_enable,
  };
 -- 
 2.53.0
