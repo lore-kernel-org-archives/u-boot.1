@@ -4,119 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5C2ACD37AC
-	for <u-boot@archiver.kernel.org>; Mon, 11 May 2026 04:50:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF430CD37AC
+	for <u-boot@archiver.kernel.org>; Mon, 11 May 2026 04:53:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1BA7E846CA;
-	Mon, 11 May 2026 06:50:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 3A4AD846CA;
+	Mon, 11 May 2026 06:53:16 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=ziyao.cc
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="THWGmrep";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=ziyao.cc header.i=me@ziyao.cc header.b="eM7b5LEj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CA75D846CB; Mon, 11 May 2026 06:50:17 +0200 (CEST)
-Received: from DM5PR21CU001.outbound.protection.outlook.com
- (mail-centralusazlp170110009.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c111::9])
+ id CDAEB84706; Mon, 11 May 2026 06:53:14 +0200 (CEST)
+Received: from sender4-op-o12.zoho.com (sender4-op-o12.zoho.com
+ [136.143.188.12])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C5E63846C7
- for <u-boot@lists.denx.de>; Mon, 11 May 2026 06:50:14 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=TnLh4Njd7n20yUFODYLhNKGKhA9cDLm9TMXbzwZlES/eRMG+3R+l7+JrSnB/zenDcmdCDSvPBEi/e2fYi1ZZ+l9rBwXM3aeir/JUxADGUInQABZPpuVEyonvpCUNg5AHsNrG+Yaj3uk9cg8CX2oXDjEBgtM3peqWB4wGiHBkvDDwRL7BAo0wUe+tieUW/b/OgE/6Re7xul8hbrai8tHbG4pup0msHeG/J2S0XTEHW1o5UlEaGSoUrjpaVf0g5zQ84ZYugwmXlhqCcU7Liefjy1LHPxHemTc2MCTv0UI+j/kKnjC9Lqhd9X1BSh6wUVySjwcvl3x+DZ64fVheciAweA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=QqRAAPtUpgETnRsSCFwIXBgY4cJiU/RAxEG7KiyHwog=;
- b=H3j0DPGBDFZlaa265+20aZ1Lyuu8n4wdSU08GfDPtyr5+NoA5W43Y2h3nc7lrMFEvOvkWsz8zmg0rdMaPyPk6AcKBuNbt7nkLFeELIxWMuL2ysXqBXM+zXb2M6vlYdukvpkXiRklNP5LS8Tvqin8g/CtoL3E4gKUtaE2ja5+p5vTlwKZ9pqvGZZNfiIQ0DR0bOGdEP7QsR08JvnMYb+7jGqPkQPOnri3mpYuaBCddBP4h6/KdF9leUCcB5ZWc8M+BcWOSR6NNgSJWC7GRyDziYXHHXnHfhssqJ95qDQ+Sz2QARVNL3nvgnxXzCcNEI8OAYMWGj3ai4vcUQzVOqkFKQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.23.195) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
- dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=QqRAAPtUpgETnRsSCFwIXBgY4cJiU/RAxEG7KiyHwog=;
- b=THWGmrepaIqs+6SHTTzVQ+oYeAxz6HNfPY6DcYF+oRvr81ZdiJsNk++Oz7t8TZzT7VKqWFprEa8aEe8AblXL4FJ8+jmK+UpPh5IOI629rlHgB+PqdYuLxMnDdq9u/+v8CLLcIFnPN4w2dbwGLcCpE72LGwTe3/QMGP+wUow1x5s=
-Received: from BY5PR13CA0005.namprd13.prod.outlook.com (2603:10b6:a03:180::18)
- by SA1PR10MB997678.namprd10.prod.outlook.com (2603:10b6:806:4b4::8)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9891.22; Mon, 11 May
- 2026 04:50:12 +0000
-Received: from CO1PEPF000075ED.namprd03.prod.outlook.com
- (2603:10b6:a03:180:cafe::77) by BY5PR13CA0005.outlook.office365.com
- (2603:10b6:a03:180::18) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.25.15 via Frontend Transport; Mon, 11
- May 2026 04:50:11 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.195)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.23.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.23.195; helo=lewvzet201.ext.ti.com; pr=C
-Received: from lewvzet201.ext.ti.com (198.47.23.195) by
- CO1PEPF000075ED.mail.protection.outlook.com (10.167.249.36) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.25.13 via Frontend Transport; Mon, 11 May 2026 04:50:11 +0000
-Received: from DLEE202.ent.ti.com (157.170.170.77) by lewvzet201.ext.ti.com
- (10.4.14.104) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Sun, 10 May
- 2026 23:50:10 -0500
-Received: from DLEE207.ent.ti.com (157.170.170.95) by DLEE202.ent.ti.com
- (157.170.170.77) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Sun, 10 May
- 2026 23:50:10 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE207.ent.ti.com
- (157.170.170.95) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37 via Frontend
- Transport; Sun, 10 May 2026 23:50:10 -0500
-Received: from [172.24.20.81] (ltpw0g6znt.dhcp.ti.com [172.24.20.81])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 64B4o8Pm2939831;
- Sun, 10 May 2026 23:50:08 -0500
-Message-ID: <dd7aad86-aa6c-4153-8b60-e98c51b57fee@ti.com>
-Date: Mon, 11 May 2026 10:20:07 +0530
+ by phobos.denx.de (Postfix) with ESMTPS id DBF46846C7
+ for <u-boot@lists.denx.de>; Mon, 11 May 2026 06:53:11 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
+ header.from=ziyao.cc
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=me@ziyao.cc
+ARC-Seal: i=1; a=rsa-sha256; t=1778475186; cv=none; 
+ d=zohomail.com; s=zohoarc; 
+ b=SfGB1/Y7UybMw+c/sSTm+FRSdYTOAl3VWBFFQQqVFpnNuP5OpDvdJme9aPN2JpaTtxg++74x5phJGduBldag1nTCcS9MtWmDcP+b3vdh4dPqn8xAFfSWaxmxWN6ynvN70zvKzr201v5lQKi87zl06coafbMGwIQ1vdREBqL011M=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
+ s=zohoarc; t=1778475186;
+ h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To;
+ bh=hUMw3EK4uCn0OLMUE93iDZKZf6153KoojNVCmA6cM80=; 
+ b=e4C0Io5D66yryoXc6Lvk0lNDlX+sYyRsteC+kMMoYo2L0061SEoOQ4XATHlpnjLyLEutaCI6s07C6VnqxOhL5QkZwsnPOJspHGHzU4ckdyHxtAXxMkA8ZEeQ2pJixO2ov7Ir6OeEBfQYoFR998abHtw2mFs+3N8/YGKnDUfvXIA=
+ARC-Authentication-Results: i=1; mx.zohomail.com; dkim=pass  header.i=ziyao.cc;
+ spf=pass  smtp.mailfrom=me@ziyao.cc;
+ dmarc=pass header.from=<me@ziyao.cc>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1778475186; 
+ s=zmail; d=ziyao.cc; i=me@ziyao.cc;
+ h=Date:Date:From:From:To:To:Cc:Cc:Subject:Subject:Message-ID:References:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:Message-Id:Reply-To;
+ bh=hUMw3EK4uCn0OLMUE93iDZKZf6153KoojNVCmA6cM80=;
+ b=eM7b5LEj7nAAJilTLpOPn0ZieLoXXLHXozjpZwDjKa6UefnEZyqM9LqIAx2vQ2FX
+ korN4d2LnchlbpHC4eRNg9UU02eVU7RWb7RFGFLZYzPBnqy8/33C9///Q7qCIiV3Y+p
+ vJZUB12OoC8eu6ft7f7lOumH+Ohvcr8Nh+3V/pKA=
+Received: by mx.zohomail.com with SMTPS id 1778475184059216.23393348748994;
+ Sun, 10 May 2026 21:53:04 -0700 (PDT)
+Date: Mon, 11 May 2026 04:52:49 +0000
+From: Yao Zi <me@ziyao.cc>
+To: Vincent Legoll <legoll@online.fr>, Guodong Xu <guodong@riscstar.com>,
+ u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Michal Simek <michal.simek@amd.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Junhui Liu <junhui.liu@pigmoral.tech>,
+ Peter Korsgaard <peter@korsgaard.com>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Raymond Mao <raymond.mao@riscstar.com>,
+ Gabriel Fernandez <gabriel.fernandez@foss.st.com>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Finley Xiao <finley.xiao@rock-chips.com>, Rick Chen <rick@andestech.com>,
+ Conor Dooley <conor.dooley@microchip.com>,
+ u-boot-spacemit@groups.io, Heinrich Schuchardt <xypron.glpk@gmx.de>
+Subject: Re: [PATCH 0/8] riscv: spacemit: k1: add clock reset drivers, switch
+ to upstream DT
+Message-ID: <agFgoT-HbPfzgVWT@pie>
+References: <20260510-b4-k1-clk-reset-upstream-dts-v1-0-db0b0503ee44@riscstar.com>
+ <3fe472bc-b9aa-49f6-ab75-a45547815c28@online.fr>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] arm: mach-k3: j721s2: j784s4: Add errata i2378 workaround
-To: "Kumar, Udit" <u-kumar1@ti.com>, <trini@konsulko.com>, <m-chawdhry@ti.com>
-CC: <b-padhi@ti.com>, <u-boot@lists.denx.de>, <gehariprasath@ti.com>
-References: <20260508142507.1386946-1-n-francis@ti.com>
- <b515a248-9a40-466b-a45f-e363465193e1@ti.com>
-Content-Language: en-US
-From: "Francis, Neha" <n-francis@ti.com>
-In-Reply-To: <b515a248-9a40-466b-a45f-e363465193e1@ti.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CO1PEPF000075ED:EE_|SA1PR10MB997678:EE_
-X-MS-Office365-Filtering-Correlation-Id: 6859e463-b7c0-4991-5db0-08deaf18c8b4
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|1800799024|36860700016|82310400026|22082099003|56012099003|18002099003;
-X-Microsoft-Antispam-Message-Info: 1mtyUmEjWgro2HumvI9bBqVpOq3fwIwfD/WV4ChBZdZiGQccrWCQilsq5mcpnyy5tMn8izaXElXjhilYmzVQwTOfR4qPQREthHaZc1W7vR76O5U4QCmuuPyIWyWvao2sifv+SCjqTXeeDChC1A76jMSAz7pIBrKSXFS7UyU+2pyRcp9dVsHH1d09l4siOP3VzogN/9QnebdRgLS6PCmXMinVjhsmn5ReMJ7HPe2Zj7u+JgmPNBbWKMJBrE0g9NUj4rRsEb79wWYwDkCv2tREqyIEcTL/nuUXKWzqkIWJT0m1mJQIpPbmT0a1cBYDrW9DpAOsVj0FJ/zNGPC2KmwudIAs56vULeVwRHCmoBNZNf6dQeS6vW63TgZKtwyuJoBYvNm9WXW9SFXs1O21Oy1JNu9KdXM4N5QPN5j8mEvYtd77Ur1bXRCxjfR+PAzbZ6XAFNMYpmlnxcwyftP+k1sUSearI52BskCOFNwwxv/xgEP/EVnxwk6N9Ef7Gd6PDcEGDOn4slgvb7sZSwVLTbVGjHdmCnLhf4AxYtcuS2TGmD5VKufQlkug+gkTFUunzT1tuDW4jgMl3N5grbKrtQTVSfUcXtCo5BpaZAQdlz6Dj/eAvilDnT7MFkNUSg8Jnls9i2bMGODgS92x5jy1tpYLeFlIKc3RpvtRu4X+90JmuHmIdMO35Bh4iUAYxc15eNuAx3YiYfHYyjF/TIeTlGh51lQid9t0F3D4Qym6NLhZpHM=
-X-Forefront-Antispam-Report: CIP:198.47.23.195; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:lewvzet201.ext.ti.com; PTR:InfoDomainNonexistent;
- CAT:NONE;
- SFS:(13230040)(376014)(1800799024)(36860700016)(82310400026)(22082099003)(56012099003)(18002099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 71S+TqPz+97W3TzlLOjYnkYpEAu0iREVfmOHGyuDABfCRi0WdkeZaFG4HE2cXmr/WlR/94vTpAum7DyRl5XFmiJ4q4ngE9p8zAr0K35mt7G17wgIh1kvG0ooMGxd7YBJyIEeZbtaw04bXD3J+5Rg1GmKzjp1IOIpuAkJy1x9sb49z5cLsil27BPEzYCx5F/20NurK6zYBc+ozq2qTbjPL/9B2hWKHS3qnKmWK2qbprkIIBXtSwJNisWYctaMrngJJv+n6z4CGCpnrb1ZzCH67aUBOh6wAYZ6q9KGE1GidsUrIT3tgwWM2wybx8pjrmvCQb7Ro9m6ykmBo5b7q6r60l+nhzLQoTquWvFHhycerki0xJU3bUVMOynRe3DHEL57tplv+pYFrq0zjHvXtQHOc5z3dZ1OlTv1pZkUM/ab5fmQ8Fzq6Q1LmukRyQIiMYvk
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 May 2026 04:50:11.3249 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 6859e463-b7c0-4991-5db0-08deaf18c8b4
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.195];
- Helo=[lewvzet201.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: CO1PEPF000075ED.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR10MB997678
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <3fe472bc-b9aa-49f6-ab75-a45547815c28@online.fr>
+X-ZohoMailClient: External
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -133,129 +90,101 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Udit
-
-On 5/9/2026 7:15 AM, Kumar, Udit wrote:
+On Sun, May 10, 2026 at 09:44:14PM +0200, Vincent Legoll wrote:
+> Hello Guodong Xu,
+> 
+> On 5/10/26 14:06, Guodong Xu wrote:
+> > Currently U-Boot's SpacemiT K1 ships its own arch/riscv/dts/k1.dtsi and a
+> > spacemit,k1-reset binding that has no node in the upstream
+> > (kernel-mainline) K1 dts. After list discussion [1], this series
+> > moves U-Boot to the upstream DT before further K1 work lands.
+> > 
+> > In the upstream DT, each K1 syscon provides both clocks and resets.
+> > The kernel's clock driver spawns the reset child via the auxiliary
+> > bus. This patchset does the same in U-Boot: each clock driver
+> > spawns a UCLASS_RESET sibling on the same ofnode.
+> > 
+> > Patch 1/8 adds the K1 clock driver.
+> > Patch 2/8 adds a new syscon-bound reset driver with no DT of_match. At this
+> >            point, the legacy reset driver and local dts are still there.
+> > Patch 3/8 has each per-syscon clock driver spawn the reset child on the
+> >            same ofnode, the way the kernel uses auxiliary devices.
+> > Patch 4/8 enables the clock driver.
+> > Patch 5/8 switches BPI-F3 to dts/upstream/.
+> > Patch 6/8, 7/8 and 8/8 clean up the legacy reset driver and local dts files.
+> > 
+> > Old and new reset drivers coexist from 2/8 through 6/8 so the series
+> > is bisectable.
+> > 
+> > The K1 SPL bring-up [2] and PIN/SPI [3] series will be rebased on
+> > this and resent once it lands.
+> > 
+> > Link: https://lore.kernel.org/u-boot/20260507140558.GU1614990@bill-the-cat/ [1]
+> > Link: https://lore.kernel.org/u-boot/20260325223232.1553212-1-raymondmaoca@gmail.com/ [2]
+> > Link: https://lore.kernel.org/u-boot/20260422143112.1329478-1-raymondmaoca@gmail.com/ [3]
+> > 
+> > [...]
+> > 
+> > ---
+> > base-commit: 24db98cdf911b6ca362209e674bf9412441c1095
+> > change-id: 20260510-b4-k1-clk-reset-upstream-dts-cbf1f3a79cfb
 > 
 > 
-> On 5/8/2026 7:55 PM, Neha Malcom Francis wrote:
->> The shadow copies of WAY_SELECT MSMC MMRs have incorrect reset values.
->> The main copy has the correct reset value but MSMC functionality uses
->> the shadow copy values. This incorrect reset value results in
->> under-utilization of MSMC L3 data cache and snoop filter for DDR
->> accesses.
->>
+> I tried to apply this locally but failed:
 > 
-> Thanks Neha for rolling this out. Wondering if L3 set to zero then
-> will this hardcoded write will impact in some way ?
-
-I don't think it will, but I will confirm with the h/w team to make sure.
-
+> $ git log --oneline -1
+> 24db98cdf91 (HEAD -> test) Merge tag 'u-boot-imx-next-20260318' of
+> https://gitlab.denx.de/u-boot/custodians/u-boot-imx into next
 > 
->> The workaround is to write 0x00000303 to both MSMC MMRs after reset.
->> This ensures that their shadow copies get the correct post-reset value.
->>
->> Link: https://www.ti.com/lit/er/sprz530c/sprz530c.pdf
->> Link: https://www.ti.com/lit/er/sprz536b/sprz536b.pdf
->> Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
->> ---
->>  arch/arm/mach-k3/include/mach/j721s2_hardware.h |  4 ++++
->>  arch/arm/mach-k3/include/mach/j784s4_hardware.h |  4 ++++
->>  arch/arm/mach-k3/j721s2/j721s2_init.c           | 11 +++++++++++
->>  arch/arm/mach-k3/j784s4/j784s4_init.c           | 11 +++++++++++
->>  4 files changed, 30 insertions(+)
->>
->> diff --git a/arch/arm/mach-k3/include/mach/j721s2_hardware.h b/arch/arm/mach-k3/include/mach/j721s2_hardware.h
->> index 82f076a45e0..a4d7fe48662 100644
->> --- a/arch/arm/mach-k3/include/mach/j721s2_hardware.h
->> +++ b/arch/arm/mach-k3/include/mach/j721s2_hardware.h
->> @@ -37,6 +37,10 @@
->>  /* MCU SCRATCHPAD usage */
->>  #define TI_SRAM_SCRATCH_BOARD_EEPROM_START	CONFIG_SYS_K3_MCU_SCRATCHPAD_BASE
->>  
->> +/* MSMC RT_WAY MMR addresses */
->> +#define K3_MSMC_RT_WAY_SELECT		0x6E008000
->> +#define K3_MSMC_NRT_WAY_SELECT		0x6E008008
->> +
->>  #if defined(CONFIG_SYS_K3_SPL_ATF) && !defined(__ASSEMBLY__)
->>  
->>  #define J721S2_DEV_MCU_RTI0			295
->> diff --git a/arch/arm/mach-k3/include/mach/j784s4_hardware.h b/arch/arm/mach-k3/include/mach/j784s4_hardware.h
->> index 29a894baed3..bb5c58d00e4 100644
->> --- a/arch/arm/mach-k3/include/mach/j784s4_hardware.h
->> +++ b/arch/arm/mach-k3/include/mach/j784s4_hardware.h
->> @@ -37,6 +37,10 @@
->>  /* MCU SCRATCHPAD usage */
->>  #define TI_SRAM_SCRATCH_BOARD_EEPROM_START	CONFIG_SYS_K3_MCU_SCRATCHPAD_BASE
->>  
->> +/* MSMC RT_WAY MMR addresses */
->> +#define K3_MSMC_RT_WAY_SELECT		0x6E008000
->> +#define K3_MSMC_NRT_WAY_SELECT		0x6E008008
->> +
->>  #if defined(CONFIG_SYS_K3_SPL_ATF) && !defined(__ASSEMBLY__)
->>  
->>  #define J784S4_DEV_MCU_RTI0			367
->> diff --git a/arch/arm/mach-k3/j721s2/j721s2_init.c b/arch/arm/mach-k3/j721s2/j721s2_init.c
->> index b5453d8895d..d996dfcc332 100644
->> --- a/arch/arm/mach-k3/j721s2/j721s2_init.c
->> +++ b/arch/arm/mach-k3/j721s2/j721s2_init.c
->> @@ -163,6 +163,14 @@ static void store_boot_info_from_rom(void)
->>  	       sizeof(struct rom_extended_boot_data));
->>  }
->>  
->> +void apply_msmc_shadow_copy_errata(void)
->> +{
->> +	/* Errata i2378: Write 0x00000303 to MSMC shadow copy MMRs */
->> +	writel(0x00000303, K3_MSMC_RT_WAY_SELECT);
->> +	writel(0x00000303, K3_MSMC_NRT_WAY_SELECT);
->> +	debug("%s: Applied errata i2378\n", __func__);
->> +}
->> +
->>  void k3_spl_init(void)
->>  {
->>  	struct udevice *dev;
->> @@ -176,6 +184,9 @@ void k3_spl_init(void)
->>  	/* Make all control module registers accessible */
->>  	ctrl_mmr_unlock();
->>  
->> +	/* Apply MSMC shadow copy errata workaround */
->> +	apply_msmc_shadow_copy_errata();
->> +
->>  	if (IS_ENABLED(CONFIG_CPU_V7R)) {
->>  		disable_linefill_optimization();
->>  		setup_k3_mpu_regions();
->> diff --git a/arch/arm/mach-k3/j784s4/j784s4_init.c b/arch/arm/mach-k3/j784s4/j784s4_init.c
->> index 53f152ccd9c..48b52fcb333 100644
->> --- a/arch/arm/mach-k3/j784s4/j784s4_init.c
->> +++ b/arch/arm/mach-k3/j784s4/j784s4_init.c
->> @@ -180,6 +180,14 @@ static void store_boot_info_from_rom(void)
->>  	       sizeof(struct rom_extended_boot_data));
->>  }
->>  
->> +void apply_msmc_shadow_copy_errata(void)
->> +{
->> +	/* Errata i2378: Write 0x00000303 to MSMC shadow copy MMRs */
->> +	writel(0x00000303, K3_MSMC_RT_WAY_SELECT);
->> +	writel(0x00000303, K3_MSMC_NRT_WAY_SELECT);
->> +	debug("%s: Applied errata i2378\n", __func__);	
->> +}
->> +
->>  void k3_spl_init(void)
->>  {
->>  	struct udevice *dev;
->> @@ -194,6 +202,9 @@ void k3_spl_init(void)
->>  	/* Make all control module registers accessible */
->>  	ctrl_mmr_unlock();
->>  
->> +	/* Apply MSMC shadow copy errata workaround */
->> +	apply_msmc_shadow_copy_errata();
->> +
->>  	if (IS_ENABLED(CONFIG_CPU_V7R)) {
->>  		disable_linefill_optimization();
->>  		setup_k3_mpu_regions();
+> $ git status
+> On branch test
+> nothing to commit, working tree clean
+> 
+> $ wget https://lore.kernel.org/u-boot/20260510-b4-k1-clk-reset-upstream-dts-v1-0-db0b0503ee44@riscstar.com/t.mbox.gz
+> \
+> 
+>  -O ~/Downloads/PATCH-0-8-riscv-spacemit-k1-add-clock-reset-drivers-switch-to-upstream-DT.mbox.gz
+> 
+> 
+> $ gzip -dc ~/Downloads/PATCH-0-8-riscv-spacemit-k1-add-clock-reset-drivers-switch-to-upstream-DT.mbox.gz
+> | git am
+> Applying: riscv: spacemit: k1: add clock reset drivers, switch to upstream
+> DT
+> error: No valid patches in input (allow with "--allow-empty")
+> Patch failed at 0001 riscv: spacemit: k1: add clock reset drivers, switch to
+> upstream DT
+> hint: Use 'git am --show-current-patch=diff' to see the failed patch
+> hint: When you have resolved this problem, run "git am --continue".
+> hint: If you prefer to skip this patch, run "git am --skip" instead.
+> hint: To restore the original branch and stop patching, run "git am
+> --abort".
+> hint: Disable this message with "git config set advice.mergeConflict false"
+> 
+> I had a similar failure with the mbox downloaded with:
+
+Because the first mail in the mbox file is the cover letter, not a real
+patch, thus contains no code changes and couldn't be applied by default.
+
+Try
+
+	b4 shazam 20260510-b4-k1-clk-reset-upstream-dts-v1-0-db0b0503ee44@riscstar.com
+
+instead, which applies the series cleanly at least on my side. With
+git am you might skip application of the first mail manually by
+
+	git am --skip
+
+and continue with rest of the series.
+
+> $ b4 mbox https://lore.kernel.org/u-boot/20260510-b4-k1-clk-reset-upstream-dts-v1-0-db0b0503ee44@riscstar.com/T/#t
+> 
+> 
+> I also tried to apply to master branch without success
+> 
+> Is there something I'm doing wrong ?
+> 
+> Regards
 > 
 
--- 
-Thanking You
-Neha Malcom Francis
-
+Regards,
+Yao Zi
