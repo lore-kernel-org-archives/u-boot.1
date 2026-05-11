@@ -4,94 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9739FCD37AC
-	for <u-boot@archiver.kernel.org>; Mon, 11 May 2026 13:11:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8ACBCCD37AC
+	for <u-boot@archiver.kernel.org>; Mon, 11 May 2026 13:11:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A1C5784255;
-	Mon, 11 May 2026 15:11:17 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id DB94584653;
+	Mon, 11 May 2026 15:11:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="SdNoMq1b";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="CSRI1YRI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DFC0484656; Mon, 11 May 2026 15:11:15 +0200 (CEST)
-Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
- [IPv6:2a00:1450:4864:20::62f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id AB1F1800AE; Mon, 11 May 2026 15:11:20 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.66])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 19D228460B
+ by phobos.denx.de (Postfix) with ESMTPS id 9859F84653
  for <u-boot@lists.denx.de>; Mon, 11 May 2026 15:11:14 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62f.google.com with SMTP id
- a640c23a62f3a-bd2087858c4so16018966b.0
- for <u-boot@lists.denx.de>; Mon, 11 May 2026 06:11:14 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1778505073; cv=none;
- d=google.com; s=arc-20240605;
- b=TPiQRtUTQYHz+rVytAudYNcqX18NnWAAU7dY0uCrDpqzAzuMgEB4v8+rKyseFc2wHk
- dZ5TBuhTFi/9F9uxVL12aFFi0eJGyy1sD6NE85bwy0P8BDIBkrR6wYV/njJmaWTNUZfb
- 1MMTSPqJJkjhp8CV18K4EW4j6JCD2WXoTuxpaAg/LFm3vL8XVszpO1Mb3HwO2B81dFmu
- S8Py9P11n7u3eOs7nYJ3AhgcvrMoAfGHVKN6jJv3zfaDeo9gdsS42uUBml6Cke1SYJk9
- uq/lN+uhZovyNJL2X0eSPj0pbps2lbqwJuXd2TGj9fcHWWDZgU+Ri8TJnrC1tGblN0ob
- YjYw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=L2zA3xi5jriHNacmPpvkKD7XPmPISfhopRqQwZUpeWA=;
- fh=YDH4tYxYY/L18TkSaMEaPWRyobgWco5gBQA2N64+Pfk=;
- b=lVrcP7znyjW8or2mpJeuzBoejPDjJo3qX4LoMECv9jxX97yRTPwrcC7oy/Ki3dSzFx
- RqrwJrJF/+qnpFrVRP9MCuS5Z9sy4Bd9D756ZSn/f2ln1XCVFDTp2yHIKdEOG1SXDkVx
- mEZC5NOeil9ZY/jeTneOzdl9hij1Ci2X7DqmN35y6HiFU7rDO2CvHimFaWe4Gg0zkZBH
- N0qAeMAwsecqPWOFtEgCEJBBf6MaT2DO+PLecpexI4/CXbE+gwH/PIg2tKR/9VMq/jmM
- ifNiEJjha1816VpBQ6GWp0SYTbnkm/fV4GbSLMNwM9t+yQspGfymOmGUSF51/9oADIHK
- A6xA==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1778505073; x=1779109873; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=L2zA3xi5jriHNacmPpvkKD7XPmPISfhopRqQwZUpeWA=;
- b=SdNoMq1b71mMMy9Ph21DVFmmwPjiENrfN3vdBHIpDVT8eQX8GD55nQFjTE7C0bW52m
- ul4zhIW+qQ7VOmoL5kf+N8qOkCqmg8H4cb6fzhZBwYtKEz1n06UhC1reeoGcWF1gFUUZ
- B+cfqLbKk4ImATQtKwyu+NJnJ5vzD8auxVWHI=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778505073; x=1779109873;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=L2zA3xi5jriHNacmPpvkKD7XPmPISfhopRqQwZUpeWA=;
- b=S3L348gm67qJu7yRY25+gmlcvoq+vmQJGCAT4LJhzW5mNIiowwThDUX1DP+29bmss2
- 51YGvOHt+HgJrysw44vUejA1i/vSSDSHCQcb0w0RshR/0XUAtNSwXLIJ2u9zcN5HgaeK
- 2vpzFjSkwovBX1oWQiP7PH88JAUQPodNWI/wjYrVl5y8egrSJD8A/wpsEsRH+Np0B2ji
- Z1DMePokIVB3CVTCWoYEEFK+/RNmOoPBpEFzuOGG7fqKSzGfkFj7+xxM/t9bHdkoIJ7y
- CYAIOSOUijCzrpqbCxzylXBr4pDnqWXDC39CTgf2ZtnbeaBO6phMkIo36w6NGEC2ifIr
- fS/g==
-X-Gm-Message-State: AOJu0Yy3HW0qeCLIwH3le3+z5kqqUyuatPGCuZq95Z+ksPnrfgJXOpdY
- jh/r/YTqI5ytA4svqIwVQlk83aMbD9qcot8/vI3rvDho3LVyyf7O3uQGkrWrKn70xhtDUEVu2Q9
- V8QKIebeIOS05RV6PSFJe0tqDDnj71T0ANFuUENkY
-X-Gm-Gg: Acq92OE271B65xBHamnWV3Sseq88gN1HF+QWq928xI6vZTsTdUjwm0vh/DdbSIsD+ph
- ju3gJ+ZB7ILO/d6O8dWnQKNTq77oWrqZGwPRnwj5tjRc5rCjAicPLmxdG7vOwhOaOHFUXlIlUli
- fo0uCrd5RuL6nANQZE1cSO4PGQwVmzdep1S2hoLhOtMGScRe8px/swHH0FrMWn+mFYYPo6MV5PD
- MU9Q5dCbkvQmhglfx7nNuoPs8PHriMi3f43MDC6nOKCULYij/T51q1zScEvGLIwC/1PYewRdEHO
- j8oltA==
-X-Received: by 2002:a17:906:478e:b0:ba5:885d:3280 with SMTP id
- a640c23a62f3a-bcaaa54ff6dmr778842966b.17.1778505073350; Mon, 11 May 2026
- 06:11:13 -0700 (PDT)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=9ba6=DJ=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: References: Cc:
+ To: From: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1778505058;
+ bh=7GmBLga10C/GmkydFq5keIIVAjb5BGXPh/0GW/Lauuc=;
+ b=CSRI1YRIpifQgomRWwUMHrq9MSJv2vTllQzSzF1P9KnxJCeKceiVjl1JaYwLFW6lBpKPtL2Fz
+ ve029ZaM9NVCmk8Q/b7qvDVyEBuTW96W+bHLULfFgBuzQ0e0W6g3kPgL0ff46bCbu4iF6yeY5n9
+ NPJYiz3d8PwtHP9Odn8TWLKWeY8MBkuCPCbL1MVzrJSNjEBCH3yPatpuOGf3pThmt0aSZiCL/tF
+ 2eUFM4+zb3OzWAwnmwRsN4mnBbosy+Az+9O0V6DYL11bj78vN+RLZAd1yvWT2E73TqEy+BTETEP
+ bcyqAoQqKkHTnAC1nNOJRmFBsWVWuQYzFoiE1Kny29zw==
+X-Forward-Email-ID: 6a01d53cf7c6a191e5811c27
+X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 121.127.44.66
+X-Forward-Email-Version: 2.8.4
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+Message-ID: <32618820-7e62-44d0-bbbd-da90be7327de@kwiboo.se>
+Date: Mon, 11 May 2026 15:10:16 +0200
 MIME-Version: 1.0
-References: <20260510171604.56788-1-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20260510171604.56788-1-marek.vasut+renesas@mailbox.org>
-From: Simon Glass <sjg@chromium.org>
-Date: Mon, 11 May 2026 07:10:55 -0600
-X-Gm-Features: AVHnY4Lj2ZZiXYMMBBstieHHWEQNY7gOB9e4SmvQbJ-BmbjiRaFlwMoLjP9tpY4
-Message-ID: <CAFLszTitpkTwc8vgmHd7jaK87QmWOMQP3LW9F=ZheOA6++3xXg@mail.gmail.com>
-Subject: Re: [PATCH 1/2] scsi: sandbox: Staticize and constify driver ops
-To: marek.vasut+renesas@mailbox.org
-Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] power: regulator: Fix power on/off delay issue
+From: Jonas Karlman <jonas@kwiboo.se>
+To: Ye Li <ye.li@nxp.com>, ye.li@oss.nxp.com
+Cc: jh80.chung@samsung.com, peng.fan@nxp.com, festevam@gmail.com,
+ uboot-imx@nxp.com, u-boot@lists.denx.de
+References: <20260511074953.3777767-1-ye.li@nxp.com>
+ <c60ea578-30e9-49c2-8d45-0731b9fd74b0@kwiboo.se>
+Content-Language: en-US
+In-Reply-To: <c60ea578-30e9-49c2-8d45-0731b9fd74b0@kwiboo.se>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,15 +74,98 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2026-05-10T17:15:52, Marek Vasut <marek.vasut+renesas@mailbox.org> wrote:
-> scsi: sandbox: Staticize and constify driver ops
->
-> Set the ops structure as static const. The structure is not accessible
-> from outside of this driver and is not going to be modified at runtime.
->
-> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
->
-> drivers/scsi/sandbox_scsi.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+Hi again,
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+On 5/11/2026 10:30 AM, Jonas Karlman wrote:
+> Hi,
+> 
+> On 5/11/2026 9:49 AM, Ye Li wrote:
+>> SD initialization failure happens with some UHS-I SD cards on
+>> iMX8MM/iMX93/iMX91 EVK after
+>> commit 4fcba5d556b4 ("regulator: implement basic reference counter").
+>> When sending operation condition to SD card, the OCR does not return
+>> correct status. The root cause is regulator on/off delay is missed
+>> in MMC power cycle with above commit, so SD card is not completely
+>> power off.
+>>
+>> When SD startup, the sequence of MMC power cycle is:
+>> mmc_power_init(get vmmc_supply dev) -> mmc_power_off -> udelay(2000)
+>> -> mmc_power_on
+>>
+>> Before above commit, as a fixed regulator, the GPIO is set as:
+>>   GPIO inactive (in mmc_power_init) ->
+>>   GPIO inactive and delay off-on-delay-us (in mmc_power_off) ->
+>>   udelay(2000) ->
+>>   GPIO active (in mmc_power_on)
+>>
+>> After the commit:
+>>   GPIO inactive (in mmc_power_init) ->
+>>   enable_count is 0, regulator_set_enable returns -EALREADY immediately,
+>>       so GPIO is inactive but No off-on-delay-us (in mmc_power_off) ->
+
+If the regulator is off at boot-on then this is working as intended.
+
+However, if probing the regulator turns it off and that requires a
+off-on-delay-us delay, maybe you are missing a regulator-boot-on
+property to indicate that the regulator is on at boot/reset. That should
+also align the enable count with boot-on state of the regulator.
+
+Looking at the kernel the off-on-delay-us is applied before a regulator
+is enabled, not after it is disabled like in U-Boot. Maybe U-Boot should
+do something similar, in simplest form always udelay off-on-delay-us
+before the regulator is enabled.
+
+>>   udelay(2000) ->
+>>   GPIO active (in mmc_power_on)
+>>
+>> Add the on/off delay and startup delay after GPIO request in
+>> regulator_common_of_to_plat which is called in regulator device probing.
+>> So in mmc_power_init, after GPIO is set to default inactive, the
+>> off-on-delay-us is applied.
+>>
+>> Signed-off-by: Ye Li <ye.li@nxp.com>
+>> ---
+>>  drivers/power/regulator/regulator_common.c | 6 ++++++
+>>  1 file changed, 6 insertions(+)
+>>
+>> diff --git a/drivers/power/regulator/regulator_common.c b/drivers/power/regulator/regulator_common.c
+>> index 85af8d599ad..158284a3309 100644
+>> --- a/drivers/power/regulator/regulator_common.c
+>> +++ b/drivers/power/regulator/regulator_common.c
+>> @@ -46,6 +46,12 @@ int regulator_common_of_to_plat(struct udevice *dev,
+>>  			dev_read_u32_default(dev, "u-boot,off-on-delay-us", 0);
+>>  	}
+>>  
+>> +	if ((flags & GPIOD_IS_OUT_ACTIVE) && plat->startup_delay_us)
+>> +		udelay(plat->startup_delay_us);
+>> +
+>> +	if (!(flags & GPIOD_IS_OUT_ACTIVE) && plat->off_on_delay_us)
+>> +		udelay(plat->off_on_delay_us);
+> 
+> regulator_common_of_to_plat() is for parsing the values, no udelay()
+> should be applied here.
+> 
+> regulator_common_set_enable() applies udelay() when the regulator is
+> enabled.
+
+Or disabled.
+
+> 
+> Does your regulator .get_enable() ops not being called or does it not
+> implement its own udelay() based on parsed values?
+
+I meant set_enable() here :-)
+
+Regards,
+Jonas
+
+> 
+> Regards,
+> Jonas
+> 
+>> +
+>>  	return 0;
+>>  }
+>>  
+> 
+
