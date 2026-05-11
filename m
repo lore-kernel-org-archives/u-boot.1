@@ -4,182 +4,116 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6282CD37B5
-	for <u-boot@archiver.kernel.org>; Mon, 11 May 2026 06:35:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 280EACD37AC
+	for <u-boot@archiver.kernel.org>; Mon, 11 May 2026 06:42:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E6A6A846CB;
-	Mon, 11 May 2026 08:35:27 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 9C14B846CA;
+	Mon, 11 May 2026 08:42:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="Z/YmKUCf";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="MCtcS0oJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A314284715; Mon, 11 May 2026 08:35:26 +0200 (CEST)
-Received: from CY7PR03CU001.outbound.protection.outlook.com
- (mail-westcentralusazlp170100005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c112::5])
+ id C6455846CB; Mon, 11 May 2026 08:42:54 +0200 (CEST)
+Received: from OSPPR02CU001.outbound.protection.outlook.com
+ (mail-norwayeastazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20f::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 411F1846B0
- for <u-boot@lists.denx.de>; Mon, 11 May 2026 08:35:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 705F2846B0
+ for <u-boot@lists.denx.de>; Mon, 11 May 2026 08:42:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
+ spf=pass smtp.mailfrom=patrice.chotard@foss.st.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=CbStCoxibe/ovhnJ/VFhQprsjNEQ6i11GBEQ95VosI33rWC6ccimrKGY3jYBlKCitByKELulaMBYWt67r3c/BRY3GHL8JVe5LpmDbwr5ILABdBIzLyo7NqJDFpkKPvEj4fU3p5gbSU7W/n7vJYkowRtZXgvv58xlmPn5kjz6eA3/o4s07pQqThz1JY4WRSUIbIm95F1Tf87pqhVLm7yM83t9eo+k/vcUDgfFioXrbf4tZJvEEbE7GT6d9aTJwWhqT4I3m4Xv/EgRcvCK2U+KrmWzJGoYdKjr4Ult/4DSIPQz/0rPfSEFx74g7sBjg8yh8LYKaXq7msJpH2olOKVZ/w==
+ b=F5Q73fsqfA8Kors6hr0hYysPlN3cRcIYro86DD9Evxm1mzDuQAUmwDsk9KkpD2RS8BF6pN8QSrpGVpkjpn8OaIEfC1KPf/+JGh3SgcpDG/tLUwqR5Dl/Yaa0qCJ51QkUcCdeNzr67pQ5f7eNBp9YfZ7Wqxh0neHympsH9na/rwg6WojOJbYZoYVHvqHZWgOZdcLYA73ZqXUBr2fYIDxBEL6xUwunKlTe0vKd0kddyEtBtu/7bK3LtqAinxdzQwnNBwwXHjyozdmKRDiMLVPm90GQVR3FJbCgxqrMHGORjdp+DY6V6uRLMmb/ernAerJD6Cf4VKrHEZTpr0l3blahnQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=O78npFaeHapzKV/0TGIqQcMnuiQ1et/H1G26Ve690kY=;
- b=LzFoCi0EInbD0zs4oQCrNo1qQ2swDgxNQvMjHcUwGIDsJBZ2r9SJYxzIE9+xR0ym/lpipVSFIWH3TwSMNUtsIshWRySNqHbRwSFsUElGH9TJ44nIZEb9qSV5ahBlasja0pGumKA9BKBTSHlAXou53SoFZ+XIpfguOnpVG0b+LHoFhebHJzuS/bWgbiXLgG31mekyKPhKmC0NX4x5/YFgL0YIAN8sNWHSaudZgJQMaRahAydUKZa8FrKqlPjb+BvA0/PX85w4fIOIlQGgDh9oxLPkqMe81SZ1N1NLGZCQOrS60QPJttUUNfRFctqIHyJY1MRCnaGnhQEkWaSvPDpPfQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ bh=8MgsZfMqaNBVuBwuacZ186/OetJkSkYFTRF4lgph9YA=;
+ b=qVE2V8N/gKBCRGOVx82XpJQ2zKgqPbVUySsL4+sqlj1WQ9E2coGcwuFkKYrDdlR9ylYhvGnlt6HrZIKwLpyNF525IJrrJrUcQP08Zpa5LiWpnyxbeTxGSg8dpY0vn8A4a82u4aTED+BUUWrmoS9pnVvjxZqf6fEdSpK6xW2/0wRu7jUoxo1m3XXHaWG4u69Z+k8tSq7r4zfrBEf7MQTi7J+zg8ypgKFrK7ldPN4Dew5ljoSkONsJnt2oAQ2Q8OpSmPIYlVDAGXq4SYb0xA38be1Y21cuiYxGnyzVVtQqNHzeDmxklMZ5oT32xhR3ztL+n5p9W3nDvNZ3iRcn6l0pvQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
+ 164.130.1.60) smtp.rcpttodomain=mailbox.org smtp.mailfrom=foss.st.com;
+ dmarc=fail (p=none sp=none pct=100) action=none header.from=foss.st.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
+ s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=O78npFaeHapzKV/0TGIqQcMnuiQ1et/H1G26Ve690kY=;
- b=Z/YmKUCfnhfTMrORxCmPlRTqs+gKk1VDY/X9YKyv6S7SsHRnm+nAzMUz0zMuVq12/kBz6VWWmh0d1z/WVoVU0fIThMbjx66y7nWg/racS+Iaj6QHCwp0jRgoBcBYbqQW6RFP3bj80Y25gGJ/Hh+XRv12+/xEnD1fCnv2QW17K38=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-Received: from IA4PR12MB9788.namprd12.prod.outlook.com (2603:10b6:208:5d5::11)
- by CY5PR12MB6348.namprd12.prod.outlook.com (2603:10b6:930:f::13) with
+ bh=8MgsZfMqaNBVuBwuacZ186/OetJkSkYFTRF4lgph9YA=;
+ b=MCtcS0oJWollYC4m2W+jZhfefIpthuis4Faa1Hd9QJU0NaZsWIk4Ng2RoezNLm/R8qXaMU2X2WN2ciHHJJEU8uABS6Pj1KqFuR/dHd6JSqyupp17YUwCMfik5qHHllJSaAbS+JPJPIaEPu1ceWcDsr56pyeurao6wrPA+S6SgABR5Glurdp5anmBFKnUTxVKORFOgR+YEZ0UVuiaLfQbHb0F2Ue8RPljF/c3cp8cYsmsvnejciv/KfKw4Y1YzSXUqOXL4BMbxpbBafRMbw5Aw/i66qzq/UYgNHsyv6yMHy7atXCg00fR+OjYZe8dSd5yQH1KtkOZHjxGJB62z7xTjA==
+Received: from CWLP123CA0117.GBRP123.PROD.OUTLOOK.COM (2603:10a6:401:5f::33)
+ by AM0PR10MB3348.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:208:18a::23) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9891.22; Mon, 11 May
- 2026 06:35:19 +0000
-Received: from IA4PR12MB9788.namprd12.prod.outlook.com
- ([fe80::aac5:ae06:3bf1:36db]) by IA4PR12MB9788.namprd12.prod.outlook.com
- ([fe80::aac5:ae06:3bf1:36db%6]) with mapi id 15.20.9891.021; Mon, 11 May 2026
- 06:35:18 +0000
-Message-ID: <ecda7b5f-4016-44aa-a5c1-73c8947d25cf@amd.com>
-Date: Mon, 11 May 2026 08:35:11 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 14/14] power: domain: zynqmp: Staticize and constify
- driver ops
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-Cc: Jaehoon Chung <jh80.chung@samsung.com>,
- Naman Trivedi <naman.trivedimanojbhai@amd.com>, Peng Fan <peng.fan@nxp.com>,
- Senthil Nathan Thangaraj <senthilnathan.thangaraj@amd.com>,
- Tom Rini <trini@konsulko.com>,
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-References: <20260508122247.512862-1-marek.vasut+renesas@mailbox.org>
- <20260508122247.512862-14-marek.vasut+renesas@mailbox.org>
-Content-Language: en-US
-From: Michal Simek <michal.simek@amd.com>
-Autocrypt: addr=michal.simek@amd.com; keydata=
- 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
- mpwx1d8=
-In-Reply-To: <20260508122247.512862-14-marek.vasut+renesas@mailbox.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: MW4PR04CA0194.namprd04.prod.outlook.com
- (2603:10b6:303:86::19) To IA4PR12MB9788.namprd12.prod.outlook.com
- (2603:10b6:208:5d5::11)
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9891.23; Mon, 11 May
+ 2026 06:42:48 +0000
+Received: from AMS1EPF00000090.eurprd05.prod.outlook.com
+ (2603:10a6:401:5f:cafe::84) by CWLP123CA0117.outlook.office365.com
+ (2603:10a6:401:5f::33) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9891.23 via Frontend Transport; Mon,
+ 11 May 2026 06:42:48 +0000
+X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.60)
+ smtp.mailfrom=foss.st.com; dkim=none (message not signed)
+ header.d=none;dmarc=fail action=none header.from=foss.st.com;
+Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
+ designate 164.130.1.60 as permitted sender) receiver=protection.outlook.com;
+ client-ip=164.130.1.60; helo=smtpO365.st.com;
+Received: from smtpO365.st.com (164.130.1.60) by
+ AMS1EPF00000090.mail.protection.outlook.com (10.167.242.87) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.25.13 via Frontend Transport; Mon, 11 May 2026 06:42:47 +0000
+Received: from STKDAG1NODE1.st.com (10.75.128.132) by smtpO365.st.com
+ (10.250.44.72) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.35; Mon, 11 May
+ 2026 08:46:13 +0200
+Received: from [10.48.87.93] (10.48.87.93) by STKDAG1NODE1.st.com
+ (10.75.128.132) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.35; Mon, 11 May
+ 2026 08:42:47 +0200
+Message-ID: <fc9c4c3a-cc8f-4f68-ae32-f867cc5b3a99@foss.st.com>
+Date: Mon, 11 May 2026 08:42:46 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 6/6] mailbox: stm32-ipcc: Staticize and constify driver ops
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>, <u-boot@lists.denx.de>
+CC: Patrick Delaunay <patrick.delaunay@foss.st.com>, Tom Rini
+ <trini@konsulko.com>, <uboot-stm32@st-md-mailman.stormreply.com>
+References: <20260507220651.209168-1-marek.vasut+renesas@mailbox.org>
+ <20260507220651.209168-6-marek.vasut+renesas@mailbox.org>
+Content-Language: en-US
+From: Patrice CHOTARD <patrice.chotard@foss.st.com>
+In-Reply-To: <20260507220651.209168-6-marek.vasut+renesas@mailbox.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.48.87.93]
+X-ClientProxiedBy: ENXCAS1NODE2.st.com (10.75.128.138) To STKDAG1NODE1.st.com
+ (10.75.128.132)
+X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: IA4PR12MB9788:EE_|CY5PR12MB6348:EE_
-X-MS-Office365-Filtering-Correlation-Id: 20253c44-b11b-4733-6b74-08deaf2777d6
+X-MS-TrafficTypeDiagnostic: AMS1EPF00000090:EE_|AM0PR10MB3348:EE_
+X-MS-Office365-Filtering-Correlation-Id: e1833256-d69d-4a12-014e-08deaf2883ef
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|366016|1800799024|18002099003|22082099003|56012099003; 
-X-Microsoft-Antispam-Message-Info: J7Ckhy0t/S2gQT7wJkp6FoDohEwVkdLr6Q5Jz3Bzrv/ItrSJoLZNqvPfR2cjWV0WUT11WpVxHjnV5IuMzmJevahgskKXTqksTmv51EQsCUwput8VfrUDSKFc2ZKAuCf99CVfRzVThSuDp52a3SIXKl6U/kBdu1Ig7m1A/8S45uefdI/0avtwedoCyxnl7gUXtpgSjw7+aaqEokl05ISBuKRxy61mzXjpLEyk9jMCKSOKt9A9UVRfz3srpNtrJCdVVIkZukwjRkcsuXm+lAbj5jqHigAMXeojWngoz0uYfpnKNSu8CvfJPbDviHcFTGUgxjIvu11mAcb9OVLkzXCS4w/Zhj67xnHZtakFU2pNkDLc86gcP1Um7DBGLpuAH/88h4LBedrUuEZeuoQmulDbv31YGJ9MOWrf9IjtFZ6n74WNNIHtQ1fk6EE/dZYlCPYHEk9iGjVTlUkH9E8kXSZgk1Qyv+Gl+BVg87fyZ8Q3uENtt7tLMQrHdzfVl4fb8iLcCXVuFXlSETs9LSY7erpsbpHlTG1LeFBuvZT9xiRkZ97++mf9wBX2iy0t7AaPb81V17+ysOnoxdcwRZJlf6NWmItuMMEpA3qIqO+F7CBqEamC9+dqmPwmZ+DwKyf91yYAcvrtzs/2qwoKuG9jnErb/rqbe0HYPgrzAeVS9u1iI1dbY7QRlLzWf5II6oJNEWyL
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:IA4PR12MB9788.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(366016)(1800799024)(18002099003)(22082099003)(56012099003);
+ ARA:13230040|1800799024|36860700016|82310400026|376014|56012099003|22082099003|18002099003;
+X-Microsoft-Antispam-Message-Info: IcK5hlXNG/q3AuouxBkf6/yflWSBg59XbgZuLWqU2VhyMDQUta3JLv73+BKfz6YeiXgGLZ8t+M3vr9hqqZ7ff2yAbSgTr2VivixRB+zD02E91j0c59fE3KXZlw//xeqBTf9aZ0tTmDR3OBfBw8IAQcFYDyD5yjfQDfOf1EXtoc4Czx+7IfT6M2b4HXBPQ+42YqBo7nSRAdJY424d8ZFQvIaNBcMQfSBBirLTlmeSiNq/axPzeUh5v/+atcT8pymYwDoT0i3LP+IsqyzLSGyLwx1eYZwEB+vNAnyWz1aBAlqpRohYAQ+E0Dgs8Q8KVDhhjeeizaDlC/pD/Jw2gn75GhITN+PD2rmD5rJUrKZEWqrqldqyOITC892nR7Av/MsEQ9gUOO7iHy5k27cDholqz5RTL5UxnJktqjTTJNBxSs89k6Abz3+FcgRDQ3Fd4z+SmNiQEYRf6WXYy3coXv9+2BnC/xQYbY1RzfxByqOYF5Npx51LZ8iITJOQ9ForINCvHA1mtUYsNSLYtIWWrXeikqpOu0qX2cYkri7gqzJ0C18U7l0peL8R4KhL/i2BAZmaSQd55VmDivPp6jQYUP5MEPZ1SWHRC3nhRHuJpHffvd1Ek6/yMA+vmLJTsA7bENI5amePDbUiWKEkaI+uNMXSGSmOLR3xK37mg1wFqQLrnTpUfOsKlPve6JQcttOhUbTATaD918NTOK3ES6AaYkBADkM4vXHnvWQGKsJN5cHkN5o=
+X-Forefront-Antispam-Report: CIP:164.130.1.60; CTRY:IT; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(1800799024)(36860700016)(82310400026)(376014)(56012099003)(22082099003)(18002099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?ZnEwakRHL1I1VUdFYWVlT2Q3Qld0TWtIRDRLT0xxUTVicUxwV05mOWpHOGJw?=
- =?utf-8?B?Wnl6Y2M1dmhMNmpTdkwxRXNFWkJMMGd4dHd0MDlOa3ZJMDUrQjByR3luY3Vp?=
- =?utf-8?B?NDFjNXJxR2t4c3cyUE91RzR1U1BNWk1ERS9TMzF2K0lyYmhsNVNCUDR4Rldx?=
- =?utf-8?B?MjlROWwwUzdLTmdSaFhYZGZQbEQ3cjd0ek5TSDBIMWoxczNmajYzYnR3RElR?=
- =?utf-8?B?eW5XZGtnYTNWbkhqLyswSElYTDh1dzZhSmZQVG8vcHI3WGcza0pWSTJzcFNo?=
- =?utf-8?B?MWJXdDFKTFJ1eXNwQ1dDRk9Va0wzMENMa29idjdEZS9VYmVxUWhneXlxbU5B?=
- =?utf-8?B?bmg4NWtscW5zTFlFdWN0YVl3V1pXc0w2UnVGMC8yakpMUzgxWTdIUmpnV08r?=
- =?utf-8?B?SCtZclRPa1ova3RGVDVOcS95ZFZzUjY0Zm5uTlpWclZya0hEc05wYnRhMmV4?=
- =?utf-8?B?dUkvZUtkRmJrQ2Y3YkNGaVAxYW1JLzR0ZFNldW94WVUzSjYzZVhGQVlZMEE0?=
- =?utf-8?B?aDRmQW5XRnJtV0d2dTJyNEx4ZWsyNGhpbEF4OTZEcURLOEtoSHNUVUp1U2pE?=
- =?utf-8?B?aWVhQU5KN3dBU05DbGVvNVVCKzh3b0VhZElwNGdGZjNRM0N5Wnp6aFlkclhi?=
- =?utf-8?B?Ym45c1UyNFJmWDYrdG50Y21oSXFHRTZ3NkJ2UGxkUnIvU1NkeWpwell6WWZT?=
- =?utf-8?B?NzM4cVI3enRpRTV5MXBiS1ZLdE9Yd1FpRmtJWmp2R1FLM0pldGYzSTJBS29z?=
- =?utf-8?B?Zk11SmtUdXU3SERFWTQxSStIZ0p5U0hPM3hTd291akZ5TjN4WHJnbU1ia0s1?=
- =?utf-8?B?cjNiSm0zMEk5UzJZZkYzZ0ljZ1hDVjdIQ1Zob2ptYlM0L2VXVTNrNWRaRzRh?=
- =?utf-8?B?US9ybStiTmZZeC8wY1RXN1Q1cTRGbExhN3pGcmMrcllUbEg0TVZ5ZWVrT0Iv?=
- =?utf-8?B?K3dRNmY2TExXZndRZ2htRUtZbEQvYlVqZ2JyVmFWUHY5TkhtVkRyVEdzeThn?=
- =?utf-8?B?a2xQMmhHOExNdnBxQjAvR1lTeUJBeEhGTVZZRi9uRTRScklTYTZZa2tvWEFq?=
- =?utf-8?B?ZFFxVzZOcXNBSTdTMjNpcDVrN3RGcTRaM3RnNVM0czhmaFZ0c1pnK2JyTzZa?=
- =?utf-8?B?bE1jWEU3ZXlZU1h3WDF6RU1LY01iYURxUjFjYVVpMWJGQllQaFgzVkcrdG5H?=
- =?utf-8?B?cEZMSUtMU2p5QVoyVWZBbmMwU3ROOTNLQWtlaEJFSmtvVHJpcU5NbEtXQVJT?=
- =?utf-8?B?bmZ2K3VDbmNwbkErTTFUdXFuV3B0SnBnai93YldVdmRxZDd3cXVERGhiN0pT?=
- =?utf-8?B?NmZQeXRNT3ozUkl6OHdEYTVqTFZPdldPSTVtR25VR2lMTExRZ0VBbitlb2ov?=
- =?utf-8?B?M3F4a0Uwdk1JczVIblZGUGM0Vzc2VEtDT01DcSt5T0I5WTNGSGdhcUNBbmFx?=
- =?utf-8?B?T0l2NzNJc3U3MU1sOWxsbG13bnA1a09OclJScHNlVk5jRnRnUFBFR0FvTlh2?=
- =?utf-8?B?ZDM4RDhOQ1A5NEl5cFRscTgwVzF1eWRsdlcyandya2s0eGVwTkVzRlFkZklo?=
- =?utf-8?B?aGJlMHNRSUtPR01IaEpPN3lyK2FycTREMTBla3pCL2V3N2JUT3NUSDBPWlpK?=
- =?utf-8?B?dGFFU29xNDRWaGpmcGR6MVB3eVVHVFg3U0ZmeWVQYzl0YTlObmw2RVkyRS83?=
- =?utf-8?B?Rnh1S1dnempiN0xpN3Q1Z0drWVNjZlpKci90VjBSSjNYYWtuQ0haT1o5NThQ?=
- =?utf-8?B?YkpZMXFIbnp6TVltMkw5OGtCTitwR2UwVk1hZ0FRNSsyQXo2UmJJNFJhY2xL?=
- =?utf-8?B?K05oU29jenZwN012K2dLVU5aV2pVRHlQeFptMG1RdnpKK1FRQkg2SUV6ZGRQ?=
- =?utf-8?B?TUFsVW1GTWVsb0laR2xFdDFJRUh4V1JFQmRubHVZWWxOVUd1d202aFRDRkFO?=
- =?utf-8?B?NkhLckxYQzZyVDFpUGNWQlZRQ1VyTEdvcEp3K3RzSDNtcmorNDVFcTNTU3I1?=
- =?utf-8?B?UHVkNUZ1MmoxUGUwQmMwdkFjd3dhSmpudGM3WG1ZbWlKU2xlWE5DemdYM2pL?=
- =?utf-8?B?bTcxbzZQRzFVYWU5VDNobG1raG5HelVwekVqQ3RYbUhRRjBsTFcrK202dUtz?=
- =?utf-8?B?d3ZNMDhwWHRoWk1ONktVMVRTQ1JOblRIUDVZMlBPRjZWbmRSVGZia25sLzJw?=
- =?utf-8?B?aDZEMjRLYVFpakRtdHBPVVFiRS82K3VUUDMxOGxjY1BwQytkL3VqVjUxOHBX?=
- =?utf-8?B?QVByMnVsZXRIb0daUlRWaDkrM2JtcDBYQ0tLNkZWQmNCajE1NUpDTnQvMHZa?=
- =?utf-8?B?djZJV2RvRStQRWFnRGVLdlNROUh0bVNIaUZjZ1M1UDdHY2Q1RktYZz09?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 20253c44-b11b-4733-6b74-08deaf2777d6
-X-MS-Exchange-CrossTenant-AuthSource: IA4PR12MB9788.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 May 2026 06:35:18.4870 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: fOJZv9DIDp71cc5fKG+VyfU7HiOMNYhW8a7or2YXkrZFEk8y1bsVlIdfDJMj0nzC
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY5PR12MB6348
+X-MS-Exchange-AntiSpam-MessageData-0: Ir0IupVxx6OwJYmqD0YXN2IY8w3nwSsj0w+/y+GoDV95abBZGtNuTFo8i+xUgqH9Mci3EHU07L1uEglU3K000009stlHy/Z9nreiG02Nhcno2vBCIoK97rVureXNS7NjJQz9mFrtgDtD3zHH7kxa1DtHNKMsGIwBN6TPuJe0osFj+8137Nt1TD/DskTvhQACmoTQz/DD11IRCAyXPCEUACZS4OttRp+3yUAsvUipKHprPE1golw2557VWZEV78BQLoVyoHmQ4cZToTNIbZuOULWBm6UvaDa4DN/ERi+Sx7SkYi9qk9N2Ir5ez5kEET/hKBEnxGTF/3GUePY+Knqc0S2HqdEGA99Js0ve5uX+QuCmAVj41kEV9y55plI3hTf4SIqks+fQ5Bjfni+jp3brczMYuUuEkFa7SIVEGmOtx+nzZeKJRfU0mpkpcCp1vgTa
+X-OriginatorOrg: foss.st.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 May 2026 06:42:47.9367 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: e1833256-d69d-4a12-014e-08deaf2883ef
+X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.60];
+ Helo=[smtpO365.st.com]
+X-MS-Exchange-CrossTenant-AuthSource: AMS1EPF00000090.eurprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM0PR10MB3348
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -198,39 +132,38 @@ X-Virus-Status: Clean
 
 
 
-On 5/8/26 14:22, Marek Vasut wrote:
+On 5/8/26 00:06, Marek Vasut wrote:
 > Set the ops structure as static const. The structure is not accessible
 > from outside of this driver and is not going to be modified at runtime.
 > 
 > Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 > ---
-> Cc: Jaehoon Chung <jh80.chung@samsung.com>
-> Cc: Michal Simek <michal.simek@amd.com>
-> Cc: Naman Trivedi <naman.trivedimanojbhai@amd.com>
-> Cc: Peng Fan <peng.fan@nxp.com>
-> Cc: Senthil Nathan Thangaraj <senthilnathan.thangaraj@amd.com>
+> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
 > Cc: Tom Rini <trini@konsulko.com>
-> Cc: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
 > Cc: u-boot@lists.denx.de
+> Cc: uboot-stm32@st-md-mailman.stormreply.com
 > ---
->   drivers/power/domain/zynqmp-power-domain.c | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
+>  drivers/mailbox/stm32-ipcc.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 > 
-> diff --git a/drivers/power/domain/zynqmp-power-domain.c b/drivers/power/domain/zynqmp-power-domain.c
-> index a54de5c1439..0acfc54e787 100644
-> --- a/drivers/power/domain/zynqmp-power-domain.c
-> +++ b/drivers/power/domain/zynqmp-power-domain.c
-> @@ -57,7 +57,7 @@ static int zynqmp_power_domain_off(struct power_domain *power_domain)
->   	return 0;
->   }
->   
-> -struct power_domain_ops zynqmp_power_domain_ops = {
-> +static const struct power_domain_ops zynqmp_power_domain_ops = {
->   	.request = zynqmp_power_domain_request,
->   	.rfree = zynqmp_power_domain_free,
->   	.on = zynqmp_power_domain_on,
+> diff --git a/drivers/mailbox/stm32-ipcc.c b/drivers/mailbox/stm32-ipcc.c
+> index dda108735fc..49f7795b3cd 100644
+> --- a/drivers/mailbox/stm32-ipcc.c
+> +++ b/drivers/mailbox/stm32-ipcc.c
+> @@ -147,7 +147,7 @@ static const struct udevice_id stm32_ipcc_ids[] = {
+>  	{ }
+>  };
+>  
+> -struct mbox_ops stm32_ipcc_mbox_ops = {
+> +static const struct mbox_ops stm32_ipcc_mbox_ops = {
+>  	.request = stm32_ipcc_request,
+>  	.rfree = stm32_ipcc_free,
+>  	.send = stm32_ipcc_send,
 
-Reviewed-by: Michal Simek <michal.simek@amd.com>
+Hi Marek
 
-Thanks,
-Michal
+Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
+
+Thanks
+Patrice
