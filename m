@@ -4,89 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 284C6CD484E
-	for <u-boot@archiver.kernel.org>; Mon, 11 May 2026 20:15:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55CFBCD484E
+	for <u-boot@archiver.kernel.org>; Mon, 11 May 2026 20:43:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B89C683FEC;
-	Mon, 11 May 2026 22:15:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id C73AE83C2B;
+	Mon, 11 May 2026 22:43:42 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="PbMSO1Dx";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="GXnfbh0q";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C48428460E; Mon, 11 May 2026 22:15:42 +0200 (CEST)
-Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
- [IPv6:2a00:1450:4864:20::52a])
+ id 6ED888460E; Mon, 11 May 2026 22:43:42 +0200 (CEST)
+Received: from mail-oi1-x22b.google.com (mail-oi1-x22b.google.com
+ [IPv6:2607:f8b0:4864:20::22b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 88E2383C2B
- for <u-boot@lists.denx.de>; Mon, 11 May 2026 22:15:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5EAFA8394E
+ for <u-boot@lists.denx.de>; Mon, 11 May 2026 22:43:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52a.google.com with SMTP id
- 4fb4d7f45d1cf-6763cc8775cso10336888a12.0
- for <u-boot@lists.denx.de>; Mon, 11 May 2026 13:15:40 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1778530538; cv=none;
- d=google.com; s=arc-20240605;
- b=M+OIBkbzmQOUBNJyf8N8lzb9lskcjmj8NwDCFATdl/zrwO0bRVRlTEXeAJIVQJBS/b
- hVZkrD19fexSi6R7HtwQ2cGmc7urd2HvEyVmg4bzOFjg/KCSm6qvtLR1imIf/sVUOcu7
- 89NewvxzALxpokShDEPdz7WQojOaMnhZqj3tf1eDaPLwV8HK5Snh6TYA1v51kfEChlzA
- n5uyT/PHy+zyPGjMVPbNg+YzdffN7jeotMZTA/ooisFuD4TXGNK50miniXVwIVEdBSlY
- gOZzDk4WwLoMQTFWulgI9ALB4sKE/QlXI/h2k4njRCO2rLvCgDUyDgViSoh4ZdRUX2Ya
- UVlQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:mime-version:dkim-signature;
- bh=TsSImFAXFyCmMcGXCS8ZBKmg/G44NZpBrIelGmR7OsM=;
- fh=AoVEW340XNpvidYYnA4aNiS4cNS3eTFSgS3pBmJ/70w=;
- b=Ij77yC+OUMFXW+vjY01Ft81nFd1SM+NiH4Icy7UoMpoGueeW/tfMNbhdnJ672SQjI8
- jp6RxzOtNzDYWcFBwJcxGY9MggdhjQrgKvzpH6K0yEtQ1V0+2UJlG2GIkg+824YW1Mpd
- a07+uHGxnIZQXsngcA1DxPPkP89/EAH1vqgkOGA6CUXFLpiN6pRZU7dsPumGILu5m6cf
- c0j7issTgT4vNP7w4NayAwISe9n7rq3tXQO0THyX7xssBa0XVhTsFQpghkUmZWEMbNPA
- rpNjUhXvrd7PvFoJdJnYmiH3pkTo1V6scX+IxdEU0eivgFv5qys/J7QgHkubIFv6/fg2
- ociw==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x22b.google.com with SMTP id
+ 5614622812f47-479e4835e26so2807255b6e.3
+ for <u-boot@lists.denx.de>; Mon, 11 May 2026 13:43:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1778530538; x=1779135338; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=TsSImFAXFyCmMcGXCS8ZBKmg/G44NZpBrIelGmR7OsM=;
- b=PbMSO1Dxab2EL/79l62bQuG57TgaawmRCMtJLA7cCz4cBDs6WIXrlRh7/1O0SwKNza
- 6Uf0C1VrzOjy/8bIki61HeZtzIlL4fgLBgPSP3pvLxuPBWr1SFafX6IGfEyglfcGNrtH
- iGSOLOx9Jn5El7mOn3YW8TDiF7gir1MtHdGlE=
+ d=konsulko.com; s=google; t=1778532219; x=1779137019; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=drzz3D3mMFliFediqQzFfSrBHShrHcKAXAtNzBz8bMo=;
+ b=GXnfbh0q/8KPVH089aeLQ0/i8AayCqntvEBZQZMyujbvrbGTtNPHMSWptJKRCsVoJg
+ ApbJnpfHx89/Zei1OwZgazvS+5NfWagpWscO/pF2j1HsiRnkXlTi6DFmdJ6ipn78uSiD
+ WtKYjtT84QbawYLrLvwhafgOOZ44PAZZt/x6k=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778530538; x=1779135338;
- h=cc:to:subject:message-id:date:from:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=TsSImFAXFyCmMcGXCS8ZBKmg/G44NZpBrIelGmR7OsM=;
- b=pyXjYLgLMZL9xNNDU+MqP3GzreUwZoG+gD7hlN53gSbS29vVirjJxqKSDBjCm8mZci
- N0nh4huxxNht8Pb4d3p1DA1KMEmkj3mA98E200RKbITXLiKYdO+msZez11YnZlJlScQN
- l2kDWYdlO+x/7+TtkKKKgQB9F6R2vcSeOmdLjcLMJtKJa+DhseU8SR5Q9CPyBBKAZTNa
- bXEkKAIOximSIicUONtONGCCxyicYbu4eUzf+z3pkj6ROnW3+0Kx0HkQEF6Jz5xmYpSj
- R56xtB1SKMy074UuyskTylaaQuOgSN28hnOVjFZSQuNag9F5S4BIuqZxrCPQ8S1B4TbF
- /1UA==
-X-Gm-Message-State: AOJu0YzgPm9mEZ5q8Gi8QgPbke5Qg4w+zH1pabiuO9AsH2HjemK0vkKP
- dps8TvviqfMzKbq6MJWDX/226cPErybAODJ0VnFFR0gOyCGhC5x4XaRCJMgqNDZVRGY9jLXgwRQ
- tKckMYifM0r+bpjFvfMlIK21tDLyeOSW6JCHufA87TW5zeE+N42aKEw==
-X-Gm-Gg: Acq92OG590vM0NrlIFneVV+/oINe+yCeurTXVww1rKH7q4STfyWAt4oaPxr96JDvcqD
- rMfwg1fcWyulfgKFCltt/U/lEw+9gDAWVmy1tLMHh4TN4BkuAKRDZGZihXhxOaho7aGR5SqHNz+
- engzvXhEI341IkHSRAOXVb4RAPLj7B4tsyTwy6gNktZjmGkb8m/LveLl7y6sa2jyHA6DcxQ8lle
- CQGWf72QyYEtBoUKmLB5FmD3LIMnj+v85GntbE4CgaBIJRPB8e1o1KhJ4NGSLnd/17SK9xbYZIS
- 7ExZFVz4KbUAbEpU
-X-Received: by 2002:a17:906:209c:b0:bbf:bab5:ecd9 with SMTP id
- a640c23a62f3a-bd23b508751mr49102666b.15.1778530538392; Mon, 11 May 2026
- 13:15:38 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1778532219; x=1779137019;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=drzz3D3mMFliFediqQzFfSrBHShrHcKAXAtNzBz8bMo=;
+ b=adUAciMzL58OLk3B5yFNTCttiIqdXx5xOSuOXdxM4yLkcNHUGtN4c5J8RLvb8Ey7/J
+ ydj7SRk3W7jxn+pxAS3SxofvtPgM2AGHTpGREFc5cqrcV3PssUCGSzJ7wDn/MXtwHhos
+ XptlWFLDop5xMJxB+fdjwCeHO6FmJFYhV78rljL3cJMHOQspzH4E+5epDz+HpSS8qSPO
+ QFWuxJtPrKykecoPzQk6fbrbJIjRN+wni27Bbe84sBoMZ+RXWYxNf2S6pvRosV2r0NO8
+ TuBa/qM5uD0hFpyneDBwzdy/vo+QI0sd2qvIe9HaPT12KlI3GQAX/bWTT1PYGvMsTnFU
+ Nclg==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ+UGwnjkXBUSQcSlnKbGe+6I7qLlV0UmvbpZZMpsdYq2VE5q1BZ8tVwYjUg3EDTTAhTAwLy1ak=@lists.denx.de
+X-Gm-Message-State: AOJu0YwnYoezjjIukQWCTTzsbYfyHY7K/hi5pEkzDNauNRXGoF/JdsZi
+ vBfsz6hNnZ+/L0AjWsBOhQXMknkrWO0Y+OEC6VpkrdwcReUEae39qhQeebMvjYisTDte37Wygkh
+ um/y3RjvzNtu8
+X-Gm-Gg: Acq92OFzD85CVmhr9NPR7sNGNenZhG6BeKtwrG2zNc0kLSuR9NnOnaK0Ic7QNs8x2dw
+ 07rnxvpFHBIqhESNRYAbBZeyCuhqFPGCd+iA/VM3vYmQGUhByNhKu0+RFMnajmb1zTKIu8z2l4Y
+ 3JyyXd2s5kGk8yx9Opxx7TEUJGyCEOIcRdlOQlndAlTNsOccAPQ+pmZUDOnuppPiJbHmU8Tf7v/
+ ix+cFNxuPWmCBRzkon59wfsO3P7hD+0cDZi+hLeiUzLz0n8piDy2yn44uGyvLeFoI9I7EpKvRou
+ eCCJ4SlunyIZ/osmV4qD/xAWlPDo65z1fftXejqr2SS/V1MBV25BWMsfslUcaPpJTD5eslIC8N5
+ t7a51sBsM23Kz5x2ujpyD9KAk4YkbUlGjvl25gqmO4n3Qu2Rfdwv0kXdEshMYQAJe7AXzMrw5A7
+ Fb2KYrROKnha838E3ayfxnPsrpbe3uN2jpR+VnDDc8388VsQ1isu/ko0cYFeQf6gWwp+Ey3Bax5
+ Cb5+qwZw6lyrp5pGYIGa6C08EYyNbCKqDQ8XTxw5W3NAfrnZw==
+X-Received: by 2002:a05:6808:e3c5:b0:45e:f443:dc3d with SMTP id
+ 5614622812f47-48297137030mr123255b6e.13.1778532219065; 
+ Mon, 11 May 2026 13:43:39 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-189-203-106-235.totalplay.net.
+ [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7e367c04e00sm7505796a34.7.2026.05.11.13.43.38
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 11 May 2026 13:43:38 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: Peter Collingbourne <peter@pcc.me.uk>
+Cc: Peng Fan <peng.fan@nxp.com>, 
+ Andrew Goodbody <andrew.goodbody@linaro.org>, 
+ Patrice Chotard <patrice.chotard@foss.st.com>, Yao Zi <me@ziyao.cc>, 
+ Simon Kagstrom <simon.kagstrom@netinsight.net>, Stefan Roese <sr@denx.de>, 
+ u-boot@lists.denx.de, Kyungmin Park <kmpark@infradead.org>, 
+ Heiko Schocher <hs@nabladev.com>
+In-Reply-To: <20260505103816.202758-1-peter@pcc.me.uk>
+References: <20260505103816.202758-1-peter@pcc.me.uk>
+Subject: Re: [PATCH] fs: ubifs: fix bugs involving symlinks in ubifs_findfile
+Message-Id: <177853221798.1608836.6191893582727653736.b4-ty@konsulko.com>
+Date: Mon, 11 May 2026 14:43:37 -0600
 MIME-Version: 1.0
-From: Simon Glass <sjg@chromium.org>
-Date: Mon, 11 May 2026 14:15:26 -0600
-X-Gm-Features: AVHnY4Jab60MFBFjL_aGfOKWqa0vY105b9k6gustqQ_uFUlOxYKn01yp_L9p7OU
-Message-ID: <CAFLszThRPTPUs7H-2Cy2v2hw78uLGHrG2r9TFWZFdBkomUtGMg@mail.gmail.com>
-Subject: Please pull u-boot-dm
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,54 +104,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+On Tue, 05 May 2026 03:38:16 -0700, Peter Collingbourne wrote:
 
-https://source.denx.de/u-boot/custodians/u-boot-dm/-/pipelines/30065
+> When encountering a symlink pointing to an absolute path, ubifs_findfile
+> would return the target of the symlink as the result instead of resolving
+> any following components in the original path. Fix it by following the
+> same code path that is used for relative paths except that we set the
+> next inode to the root if we see a leading slash.
+> 
+> The existing code used memcpy and sprintf to copy the symlink target
+> into a fixed size stack buffer and was therefore vulnerable to buffer
+> overflows with a sufficiently long symlink target. Fix it by using a
+> heap buffer for the temporary path during path resolution.
+> 
+> [...]
+
+Applied to u-boot/master, thanks!
+
+[1/1] fs: ubifs: fix bugs involving symlinks in ubifs_findfile
+      commit: d5888d509cc43942ec98d993f2d129f5c8ddc432
+-- 
+Tom
 
 
-The following changes since commit 22a285380e35a31d0a882af66278bc1edc1b917e:
-
-  Merge tag 'u-boot-at91-fixes-2026.07-a' of
-https://source.denx.de/u-boot/custodians/u-boot-at91 (2026-05-09
-07:31:55 -0600)
-
-are available in the Git repository at:
-
-  git://git.denx.de/u-boot-dm.git tags/dm-pull-11may26b
-
-for you to fetch changes up to 08bcf962c5fe1d2690ac3ff6dd75d3963325476b:
-
-  binman: Use bintool wrappers for PKCS#11 tools in tests (2026-05-11
-12:05:10 -0600)
-
-----------------------------------------------------------------
-Add missing bintool docstrings
-Minor patman fix
-Fix small ACPI bug
-
-----------------------------------------------------------------
-Heinrich Schuchardt (1):
-      acpi: fix initial RSDT and XSDT size
-
-Ludwig Nussel (1):
-      patman: fix use in worktree
-
-Simon Glass (4):
-      binman: Flesh out the p11-kit bintool docstring
-      binman: Flesh out the pkcs11-tool bintool docstring
-      binman: Flesh out the softhsm2-util bintool docstring
-      binman: Use bintool wrappers for PKCS#11 tools in tests
-
- lib/acpi/base.c                     |  4 ++--
- test/dm/acpi.c                      |  8 ++++----
- tools/binman/btool/p11_kit.py       | 11 ++++++++++-
- tools/binman/btool/pkcs11_tool.py   | 11 ++++++++++-
- tools/binman/btool/softhsm2_util.py | 12 +++++++++++-
- tools/binman/ftest.py               | 46
-+++++++++++++++++++++++-----------------------
- tools/patman/cser_helper.py         |  4 ++--
- tools/patman/cseries.py             |  6 +++---
- 8 files changed, 65 insertions(+), 37 deletions(-)
-
-Regards,
-Simon
