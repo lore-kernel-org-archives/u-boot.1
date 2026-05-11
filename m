@@ -4,102 +4,109 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59CB8CD4840
-	for <u-boot@archiver.kernel.org>; Mon, 11 May 2026 17:01:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4CFB1CD4840
+	for <u-boot@archiver.kernel.org>; Mon, 11 May 2026 17:25:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5616B80F0E;
-	Mon, 11 May 2026 19:01:20 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 8AED481E18;
+	Mon, 11 May 2026 19:25:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=flipper.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Uj1xAC6y";
+	dkim=pass (2048-bit key; unprotected) header.d=flipper.net header.i=@flipper.net header.b="VgQEDDBq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D60AC8341A; Mon, 11 May 2026 19:01:18 +0200 (CEST)
+ id 7DF338341A; Mon, 11 May 2026 19:25:23 +0200 (CEST)
 Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
  [IPv6:2a00:1450:4864:20::62e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E9A76803C6
- for <u-boot@lists.denx.de>; Mon, 11 May 2026 19:01:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1419B803C6
+ for <u-boot@lists.denx.de>; Mon, 11 May 2026 19:25:20 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=flipper.net
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+ spf=pass smtp.mailfrom=alchark@flipper.net
 Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-bcf41831af1so207021566b.3
- for <u-boot@lists.denx.de>; Mon, 11 May 2026 10:01:16 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1778518876; cv=none;
+ a640c23a62f3a-bd11a3729e8so128774066b.0
+ for <u-boot@lists.denx.de>; Mon, 11 May 2026 10:25:20 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1778520320; cv=none;
  d=google.com; s=arc-20240605;
- b=DxBE5VTDIpfyfmgNWEK37DRSL1VFu+4ttVVXNmRiI/IYtHWA2oOgY/r0JrNnwmfaeU
- 9qRSyzP1xTKKs0DrxxhulJjZ84soJFrciHw/OVUyy6XT2vuDtFh4Tcfoe/9OX6Z0w6Ab
- qmWZGwsPmxGIokxwG9bhF1c+O5dSz6340z0vqY27cZ12O8juTTbJXyQcwx3qh0X8k4UE
- MhhBalEPjVx7XexcZgRQ2dNqKeAhdhkbHXE7JjubSRUfCyLez7NcoLetF/EFDwjP6POm
- CnkHah9bV8f4+63X7JUFjq1iB+QT/MNHMTcPKZuL/2lcmGz+xYNCBFilzASkd99HSHzx
- 0pVQ==
+ b=YA4KIzRoV+AnOjhTkCTSpbO1Lk8+U2vXVU4CoC/wAF2/t9OIkXlLQUDxAYlMsxh7oJ
+ PeeiHbC4fC0PC8RjJL5uUrSqZV1PXh9ypMyQrX+gm4G76ZhBqn6Mca9PdXh31bQnRY5j
+ lKgNjdcR6mNS4kCyPMEXTBXtIJiCCkU8twPvTVFkjgBt7tJG5wy0TPnMxmOyfoPcthDu
+ fpQ11a4lCKdiZ4VkJ1AyKaw+60m3wLEBNd06Mv/7tc6t7Qh0p8tmljPYEQM3sMsJjYRN
+ iwY21wUaBoufxBnmIHX8k0x3kzs3t61N7Fg0Yvbbc0Lxp+phnmfyDnagkwfvJRocUD3O
+ 3UJg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=4IoDjVNPkhhrlo/ncykU+6Utlqx6lU/tiM3RbMoMujM=;
- fh=4S+CaPjWrEUq6IBaHLxukaf8lc/EXhxCPJNN7m9iHfY=;
- b=c4qbOTmTXj+4BQGT9DsQYYoV+PBxsGsI+YsJXnVYEWlfSlJ4unvAdcUVRjsuvxeeNx
- sSoSflK0yRQktzTQpDulPHvKWSwHTMw6cDdYsaeg44dR840QxrKfCklRd3tUvDpOvpSP
- OAFY0lkLRtAPu/A7B5v5hPJI+c0Rbse0L9n75EBOl4dQMgJKthuDYOLMdMl/OV4Gaw5J
- bo61waQ+IVy1KnHACam+QCsr0IgNmX3FSJyZ/pYaWa3SJir30taMn5mC4Gbw8zIkQjjK
- 09JcsLYTdBp06zNNtIPEzdxyWPjuBQLFz0NG68xdyco8sEv7ji+2zArFW6fZLJisukwc
- BNxw==; darn=lists.denx.de
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=mw/4ZfGlXZqwdkNyScg2W0Genv4sww26aUdjmTklXyY=;
+ fh=Qu0pkaxWK7tNOa/Jlih+nW5PEEuNwPOHHmDwYqI9Yls=;
+ b=k7h197kD4YIGAMmcjZD3dxojX7IUB6li8VhpjsLJAU4EqP9VUD51Zgjncj11YOvUWt
+ COV7FD5EGZCcrCu+0IYrb+ar8zyfUJN3gA3Q8w4Ku7MY7RdmEc5h3rqJ3gcMql36BgQr
+ bSAuM1D18SylskhvWrvDYs4Sq/zL9cyMvhME65I6uW6SXABfi8Rmxd88mplsv7SkooPo
+ 6BT4jLEejN4dnR5QzHRzppuBJjP//rLVAcOJdsLaq5eu2UJ5Ph3sEGCQjVgnTPCebqTk
+ VML6IBwt/QErj6KYAWLpwLUm6m9/TPoez7AiCckOFPPY+m2sjnxIcZ2JGuYvLDlmex9i
+ MekA==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1778518876; x=1779123676; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=4IoDjVNPkhhrlo/ncykU+6Utlqx6lU/tiM3RbMoMujM=;
- b=Uj1xAC6yBoPsAJLsBZvoxTLAOHAZdBxd6//UvXg4ZLOM8Me+rjeUyF8zp1jvho0vhK
- Rq0TqXogUKlj4ddClj3gHzB+axam53ZDyWSxeciLGAJAbXe541jHmtINlM3GZeQdOU6y
- KundvOGouOJpoOeWufis0DLc0PQTTBf819L94=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778518876; x=1779123676;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=flipper.net; s=google; t=1778520320; x=1779125120; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=4IoDjVNPkhhrlo/ncykU+6Utlqx6lU/tiM3RbMoMujM=;
- b=KXKlPYIBTgw0GwYFZe6FL3A4mhqjZ5Q/21vmH6BwmFpnCN3AeY5pz86ZkZC2MtOuLC
- J3svd2C3pAd94TUkRFG3XAzjSEz9ONtKpxYhf3erQP1yNsJCpOy+0/26K5QLf/VKUo8E
- TcA6Z2QBVa6mzgNs+hEntA2rk3mepGPyFEvthB4oIjHe384DqVIyGYfNsh5BZyhzPxUB
- DcqXX6HFeXT+Hfy9aHnSXzzOMFFPQZluh/nuD1AfD6MYTioZP2XVWDtrlZPrtn3aDxgB
- 8BgX36JOT0uqnLNTfbNJOWKfqBQ3k6h/IBQseB7sJy7aDi3IQEBV72ArO/gatJBuf7ZF
- 8Vfw==
+ bh=mw/4ZfGlXZqwdkNyScg2W0Genv4sww26aUdjmTklXyY=;
+ b=VgQEDDBql9CSDX0ob0coJWsJNTVKrqZXERBScx3lf87FGODAx2g8KrXdj6POJHh24n
+ lMlnLrUCfdg5KN5/ZQpR8L5E6zWXGCKEf+sMRYt/Emv62WaJDdEVtinz6axd/QusTJ7h
+ QhQbGIOXMcVbi0voodEmkHz6byaHLQTqMH2lhYlY9IGDxNRlcWzPKjFYDZHmQ6QYcrBz
+ tc9Ikkk864G5YUrCRZjoE3MbUZDT8iC/IEEbl8Icc2i258q/DEl3mxeQoUzGgqUXtNdd
+ /FiCJW0i6jafjeAC6U1mc/nhG02Fj51uamMiM1M0nxBaf/AGuwshHm/YGjiGMtqhsxyV
+ 2Cpw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1778520320; x=1779125120;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=mw/4ZfGlXZqwdkNyScg2W0Genv4sww26aUdjmTklXyY=;
+ b=GMTu2OJUm46jIYUtxL/FmWcFmX1GuQ5M/TCSKyfjUWCczgaDRTo8oTBh8yvi+xhz7Y
+ cUKj+/2/ZTP00FcQnGxxvLPHznLgFHwwUTbr+pwqsc4bhbmiCOMsrzqQy949zchCkEZJ
+ C0QE39CjRpt5FwALFs1m3s8tqEscBdAYgci8FGYgMj2Zeq73xwwmDnyD4C4SobhYskDk
+ F8+E9lLmQ9jaH9p8aOtkmYiSuVT+Jh2QVX3HjslohK9QGABDZuV0CrN9TyQHACeaVY4Y
+ 4oPTqU7cMVOKNcv61bPKEtGDUhvkz4EzbCGJQ+9i3kh/gBzbtwt1yj6NWJLSvo5Hs7rN
+ s6Ig==
 X-Forwarded-Encrypted: i=1;
- AFNElJ8oZiYFUvnBtGZNLqlfrMLHpGxLW47G7kOdqQw7t0AbLvrtTlPeMzNkvYyWsYDYFzTTHB6xcr0=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy3IQHP+ssHlVIFfoKhaGzohICNKT1UBddfwzsvNgLcpXKwpUgE
- TbAWbMnzqA0aw1G3PdqsEnhLTvqvaRBmdxYECRseS1P1U0lwZPh2d0dJmGnugyxDQD8HHMjWp3P
- rauQA/1xKUN3gwm0F5nlvI1O0jorndO8u4quPEvCg
-X-Gm-Gg: Acq92OGi6WsijGS/pEi8U3LI75NVRVgBeN39TX3tAJsdug95hwx7IU0cAyTAGifhwCM
- +XrxqGGgmz65vWGj8t0wDjUcnhpemS87vFKELN/K8sQzST/pOzhjZUvu5uUM0opp+k1NDjned+L
- DYmVZjRbZxIz5XsB9PPjzegouWLvnUNRRpWapR6gVFtnfoIWvkxKxNnyAAfpyboA+bvfJqOZS9i
- +PDChOhuW95NWK102hDHulkBJVWDeuK8PflyeWAEIDTl18/NYTXBsZziFG+RCrqsv+sXLbiUuvA
- htUxgg==
-X-Received: by 2002:a17:907:7a8e:b0:bd1:e2da:dbf6 with SMTP id
- a640c23a62f3a-bd1e2daddc6mr157968666b.30.1778518876120; Mon, 11 May 2026
- 10:01:16 -0700 (PDT)
+ AFNElJ9UQECWlMJiUqa3PmP9ho79rPNb2ao2ZFwE42qukksVvC9825kOW1QkYdNH1DhlsPrzmkU2st4=@lists.denx.de
+X-Gm-Message-State: AOJu0YwXOsIyNsfKL2wfbi5h0SscnrPBBq2uOzt7vhnnI7QLWH5xz6iK
+ ZBk7zSoCNerpgU+qVcaFcqYi0xIANhdRXiJbUY1e9UGVzDWUWH3TiCmsOLE6N38hYBm/P8J1HJU
+ L+izeo0Whfa4f6kMJEaJ4Ty3m0J5uwM1yCTKx0CywPA==
+X-Gm-Gg: Acq92OE7AG4Acl4Q5zQfBUmHjxc3zfCg4lyJOu5dBpCQil3lEO2TpJZsF1bj5N8NqLU
+ Fs4VsVNmz9P7awkn56Uw3HifYkWyCC1m11VR+adv/NqLeLfx5TIDlKL28WeO2jgNbOm45Jsb+xV
+ gQdjyx30z+dBOcFE5YpWkNPBqZP4FavME7dRZPvKjk0MODE1fIKl+f6MkaUiBGaEV+/AXcgFyqB
+ 9bE4D0gHcxmXp+2P5BLa3sLjrB0x7sPe405Pq2MyGxFRpkoQJ8ZFuNfhi6oto6lQ0Xq2yswoteK
+ LJku+60ou4aAtp/M1SL9IqDcB7iLjsaD5Lpvdklz
+X-Received: by 2002:a17:907:d18:b0:bd1:e34f:8364 with SMTP id
+ a640c23a62f3a-bd1e34f895amr135111366b.36.1778520319901; Mon, 11 May 2026
+ 10:25:19 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260507-doc-sysreset-qcom-v2-0-37fef7a9cf92@cherry.de>
- <20260507-doc-sysreset-qcom-v2-3-37fef7a9cf92@cherry.de>
-In-Reply-To: <20260507-doc-sysreset-qcom-v2-3-37fef7a9cf92@cherry.de>
-From: Simon Glass <sjg@chromium.org>
-Date: Mon, 11 May 2026 11:01:03 -0600
-X-Gm-Features: AVHnY4IQeBHU1PmcS0smrroKxVGahOLM2pfvA6F8POquxnq3V4BvKBHc5RXv5SU
-Message-ID: <CAFLszTh4m97_KEJCNV8AckBL6Zbs6LjzCL1YJctnicrw6V-M2Q@mail.gmail.com>
-Subject: Re: [PATCH v2 3/3] doc: usage: cmd: reset: specify when the -edl
- option is available
-To: foss+uboot@0leil.net
-Cc: Casey Connolly <casey.connolly@linaro.org>,
- Sumit Garg <sumit.garg@oss.qualcomm.com>, 
- Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>,
+References: <20260507-usb-v3-1-402b37fc2154@oss.qualcomm.com>
+In-Reply-To: <20260507-usb-v3-1-402b37fc2154@oss.qualcomm.com>
+From: Alexey Charkov <alchark@flipper.net>
+Date: Mon, 11 May 2026 21:25:09 +0400
+X-Gm-Features: AVHnY4ISKKdhT1ygqI3H3yWlpEsex9v-1OQthJmWe9TnKv_yJ61rPQhWli6kX94
+Message-ID: <CAKTNdwE-EoFvODNztD8HsS6C9GcjkMARNndYjTTDaXPTHFiAeA@mail.gmail.com>
+Subject: Re: [PATCH v3] usb: dwc3: Fix crash on fastboot exit due to incorrect
+ memory free
+To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Marek Vasut <marek.vasut+usb@mailbox.org>, 
+ Gurumoorthy Santhakumar <gurumoorthy.santhakumar@oss.qualcomm.com>,
  u-boot@lists.denx.de, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Bin Meng <bmeng.cn@gmail.com>,
- Tom Rini <trini@konsulko.com>, Quentin Schulz <quentin.schulz@cherry.de>
+ Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>, 
+ Casey Connolly <casey.connolly@linaro.org>,
+ Chris Morgan <macromorgan@hotmail.com>, 
+ Varadarajan Narayanan <quic_varada@quicinc.com>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -116,58 +123,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Quentin,
-
-On 2026-05-07T15:04:04, Quentin Schulz <foss+uboot@0leil.net> wrote:
-> doc: usage: cmd: reset: specify when the -edl option is available
+On Mon, May 11, 2026 at 9:21=E2=80=AFPM Balaji Selvanathan
+<balaji.selvanathan@oss.qualcomm.com> wrote:
 >
-> The option is only available when CONFIG_SYSRESET_QCOM_PSCI is enabled,
-> so let's make that explicit in the boot cmd documentation.
+> The dwc3_free_one_event_buffer() function incorrectly called free()
+> on event buffer structures allocated with devm_kzalloc(). This
+> caused heap corruption and a synchronous abort when exiting
+> fastboot mode via "fastboot continue".
 >
-> Due to the implementation in drivers/sysreset/sysreset-uclass.c
-> do_reset() function, all options to the reset command are passed to all
-> sysreset drivers' sysreset_ops.request_arg callback (including -w) which
-> is only available when CONFIG_SYSRESET_CMD_RESET_ARGS=y. -w, however,
-> works also without this option.
+> Device-managed memory is automatically freed when the device is
+> removed, so manual deallocation causes the heap allocator to access
+> corrupted metadata.
 >
-> Fixes: ef06c5d76ff4 ("cmd: boot: Add '-edl' option to reset command documentation")
-> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
+> Fixes: 884b10e86a05 ("usb: dwc3: core: fix memory leaks in event buffer c=
+leanup")
+> Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+> ---
+> Changes in v3:
+> - Move Fixes tag to commit footer in commit description
+> - Link to v2: https://lore.kernel.org/u-boot/20260507-usb-v2-1-3958b87325=
+53@oss.qualcomm.com/
 >
-> doc/usage/cmd/reset.rst | 10 ++++++++--
->  1 file changed, 8 insertions(+), 2 deletions(-)
-
-Reviewed-by: Simon Glass <sjg@chromium.org>
-
-nits below
-
-> diff --git a/doc/usage/cmd/reset.rst b/doc/usage/cmd/reset.rst
-> @@ -22,8 +24,12 @@ DDR and peripherals, on some boards also resets external PMIC.
->  -w
->      Do WARM reset: reset CPU but keep peripheral/DDR/PMIC active.
+> Changes in v2:
+> - Added Fixes tag in commit description
+> - Link to v1: https://lore.kernel.org/u-boot/20260506-usb-v1-1-e0f426bb1e=
+42@oss.qualcomm.com/
+> ---
+>  drivers/usb/dwc3/core.c | 1 -
+>  1 file changed, 1 deletion(-)
 >
-> +All other options require CONFIG_SYSRESET_CMD_RESET_ARGS=y.
-> +
->  -edl
-> -    Boot to Emergency DownLoad mode on supported Qualcomm platforms.
-> +    Boot to Emergency DownLoad mode on supported Qualcomm platforms. Unsupported
-> +    platforms will print an error message but the command will successfully
-> +    return (having done nothing).
+> diff --git a/drivers/usb/dwc3/core.c b/drivers/usb/dwc3/core.c
+> index 0dee14c8b59..be198041f08 100644
+> --- a/drivers/usb/dwc3/core.c
+> +++ b/drivers/usb/dwc3/core.c
+> @@ -208,7 +208,6 @@ static void dwc3_free_one_event_buffer(struct dwc3 *d=
+wc,
+>                 struct dwc3_event_buffer *evt)
+>  {
+>         dma_free_coherent(evt->buf);
+> -       free(evt);
 
-When sysreset_walk_arg() returns anything other than -EINPROGRESS
-(e.g. -EPROTONOSUPPORT from qcom_psci_sysreset_request_arg(), or
--ENOSYS when CONFIG_SYSRESET_QCOM_PSCI is not enabled), execution
-falls through to sysreset_walk_halt(reset_type) with reset_type still
-SYSRESET_COLD
+Thanks for the fix Balaji! This fixed a crash I've been seeing on
+Rockchip RK3576 trying to use the UMS gadget, so
 
-So 'reset -edl' on an unsupported platform actually performs a cold
-reset (or hang() if no driver implements it).
+Tested-by: Alexey Charkov <alchark@flipper.net>
+Closes: https://lore.kernel.org/u-boot/CAKTNdwHA_3eJ4D7maBmAAr1DyrvT_meMsJ7=
+_Naux1dKTzOu3OQ@mail.gmail.com/
 
-> -    reset [-w]
-> +    reset
-> +    reset -w
-> +    reset -edl
-
-nit: I would suggest 'reset [-w | -edl]'
-
-Regards,
-Simon
+Best regards,
+Alexey
