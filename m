@@ -4,95 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76AE5CD4840
-	for <u-boot@archiver.kernel.org>; Mon, 11 May 2026 18:08:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A03EACD4840
+	for <u-boot@archiver.kernel.org>; Mon, 11 May 2026 18:09:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AD05C838BB;
-	Mon, 11 May 2026 20:08:11 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2941381E18;
+	Mon, 11 May 2026 20:09:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="g/6wHnKM";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="VYEQJ7m0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 658F180398; Mon, 11 May 2026 20:08:10 +0200 (CEST)
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [IPv6:2a00:1450:4864:20::632])
+ id AE6CB8341A; Mon, 11 May 2026 20:09:03 +0200 (CEST)
+Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
+ [IPv6:2a00:1450:4864:20::636])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DEBE68341A
- for <u-boot@lists.denx.de>; Mon, 11 May 2026 20:08:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6726F803C6
+ for <u-boot@lists.denx.de>; Mon, 11 May 2026 20:09:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-bcda7765d64so291650666b.1
- for <u-boot@lists.denx.de>; Mon, 11 May 2026 11:08:06 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1778522886; cv=none;
+Received: by mail-ej1-x636.google.com with SMTP id
+ a640c23a62f3a-bd124546379so138954166b.3
+ for <u-boot@lists.denx.de>; Mon, 11 May 2026 11:09:00 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1778522940; cv=none;
  d=google.com; s=arc-20240605;
- b=Y0j5mNNVEhsKjzTP55wI6ccCblqRsXoz9n/y5TdQ/Bwg/XqYnEuj0Cr11xWaVv0Okp
- xG+kzTV+Blok1ZKLxhnL3JLZgGlg5h6iYdu7FxDRkE2dTQR1dcNo/UO+UuuJ7DtJavjA
- 3fQJUht/+dE2WHCrCnKiBVaieJt0VYw1v/EEhEut/yC/IBPY8w54LOUY7hhcer5ZDhP5
- M1zPvzpn6NhOwzWJIrTg7Z+CkU6aTQP6tZVF8ZCT5vuUedIUYytWK4GHgvF70DcvlZMu
- E0epLZ2hnC4JWStHDtqzeDONqRRA4hTUJUb0b3kuyO2fuTPPgu+l/QclVqeeqHvZ7rGW
- BR1Q==
+ b=hUm7cAr4PVdQyqmucjQ9xv5U4tmqrlGSK6Lk3JKXDUH6/zMtQ2mvy+05tvsJiKMTuN
+ rrbH9qJ+CXU22r4E7+ZA2WxGPxetPgz/T8CrDbmQUXft5uKm1L98kRNxgVYgAPYxFEaU
+ 9SKsTDS1A8OrN2vLq5UBUcXKYG9CiKh0A9HDEngCtfD0fYjQyZACgpkyQeDv4DoiDTnq
+ pJd2fcRUyb5L0d0QRvfrUNwJk8wfCC65Au8w/obN2fF5uvekTvD+j5ByCYo80XMgQU/K
+ heGx5Sl+iqZUZuw1d3GsrDYAk/x98YBthJ0iQRpNtXUITKjcq/vV2sd6cB9v/ypeieHE
+ 9lJw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=geQUIbsdF6ZO7DPffX3jx2YFnn3sFXKfIRF4uTE0n8Y=;
- fh=Scn8Joqle4yweNpfVUSjPYEkltLEef7DfonlSmtQc3M=;
- b=jb2koysyj9EPVkPZlGd+Tlf65yxYHycdmc4wk4araT+zaljeG74Nh5kGmxV+Oz0hOO
- 32CSmPnP5lGB9x6doHU2vRhqDg6uS29iCl4Z/FN74QTflX5U2wFFtdrMIRg/8Mp70Hfs
- ZFovzBF+wCq/ZXuzWSmdKFRSBdKViWyyyLewwlX7RV7h0TfDYdj35vvUFV7a2wwY76jy
- UU77gIUmvuBnVklVy2rEwDmDIMo7TR1A78aMP4kmm4TBatPyW+CLDzNws77JLS8O+mY7
- FxRGTRw39aIYAwqmJ85gFyqvvCxvp2w+3M3YgbnWTgVc+I4s6HyhxHn4vcub8m7Y1AlW
- 0GSQ==; darn=lists.denx.de
+ bh=CJsCNRyKYSDnk4CHJfgzYSRMdLZfjCUTPquPLt0r14c=;
+ fh=tRsvz3Em/uqZj8upmXWTx8tJ38Q7cjR5IH6Ts18dPvs=;
+ b=fLL1LnLXEO4Ae56eZdQa/2hsh4GFAfR+XQkMTRSpm6gY+eVAZWnN0MtSMcKM2ydB7v
+ GjgCK7G3b/EtenyTg6n+1RXD9bjTIRfII6/WwbIC8uLr9lY8CfqYGswJUHdiYOkAzVI2
+ bduXATMf4t5XHDkT1BMmBp2EIuQSq2UXNZog4+SoA8uX5l15x7FBHzSf4S+Im7tGuXXC
+ rRQab1HNGh2xPr7IkfApxSTxTvKRnqqCrv+6baxeb/Qe84I9+AOyXNHziSINtyw8grys
+ 5aObm1vBRVUXwnAcicmM7Ct+mO/zxV1WgpU7vJb6UvEaxDgdhs2/85x+2bBRf8A1FLCn
+ Tiwg==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1778522886; x=1779127686; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1778522940; x=1779127740; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=geQUIbsdF6ZO7DPffX3jx2YFnn3sFXKfIRF4uTE0n8Y=;
- b=g/6wHnKMHp5nsAt7iX2b3VTOhfrF20PSptSkNXrnwfDK3O0GEGlk9k/mk/raNCU3fI
- vYvD/nbPiDgevBLPm9Usn9RwX2NwtlfWQ0lUvc/BQpzpCFv4CJhc1XXWPrDZDxa7YNVu
- gb/08oWxGf3BrwxfVB1FHAYyGmbxYAjz/7BhQ=
+ bh=CJsCNRyKYSDnk4CHJfgzYSRMdLZfjCUTPquPLt0r14c=;
+ b=VYEQJ7m03F31e3nekykLp50FZXEmZKoAOgsUJJzo0Lf1dUYq1XOI75BI9ovjYJo7+V
+ tdQlGS2ceihz9pqKtuLZlAaYbfWRY8Q4qK9owA/g6kCZf4RA6UeJhbhzABfFUXgcEZdI
+ 8eWbGbDQ2JZzvdTBa7/AhxuFC8jfgns0mVFvs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778522886; x=1779127686;
+ d=1e100.net; s=20251104; t=1778522940; x=1779127740;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=geQUIbsdF6ZO7DPffX3jx2YFnn3sFXKfIRF4uTE0n8Y=;
- b=B/KqfzDszcqN56qcs1gXExF2l73umx1UYMpNSot572mPn3Sk1nVnhYqjvJihkTz0F2
- cYbYCWgnTpK8aF2oAzRwh6mCy2ITYn9cmi2Ef7hSB+jq1gL+vr8QrMgq/NSNxFBPMTTH
- SKXInLtDQOD/Fz3Pg6kMtmFbNDonvbn4DHQXjInex/0OG1dme+gtl98LDEG0ZJJeFV/m
- fYWt4/89t7MyW9VrAINLh1DghDb12m8pnk1y6MOFrSIsnekpb20Ukulk34TvlMptR8rq
- SWGgqEH3BdLxKsvb5JCbvmI/QHmvViw8sPebPbq5ZhalH53aFVWH3uGTsxk4dOc1OeOF
- urVg==
-X-Gm-Message-State: AOJu0YxLipHKEgfFIcfScjpG8JkYUu7hl5knYpw08nIH7c31U38aft7w
- yOjrXvlX8QcbU3MBYR/0JYs66v2ofG9ZLoGiafdKTTV1kyYVUEagcTqKGY5cYm59FHOuXEehuqS
- czTjSwe4A4vS6agbc+ZQPJ6qqpu4uU/WfqFOBzI/AeX6lg2JWUfA=
-X-Gm-Gg: Acq92OHscYbRLt9oqTySwKYksIAmmHujn5p5fSwgASsCl9zbX0k+bSoP0XymSixzd3Y
- TZbZyu2H+Rp4UMW0JgFjPX/qViQJtY+uzMsaLBb+O75TdX7x3g+KbFS/EEwin2q9wYtStIJ5HhK
- rvRKffEx3xG2cp64bVAFgBYRNd3kltUk1PeAilGE6mdq4PMi5Bb2YlKNhG9iayf2S/z4RQEvAv0
- LGbpu+J/g61y/eZxh7gyujJqmX+sE37NRmCp90loJTURnzB6h5B7dTjqPKKDblgrzDmC6FzVsEv
- 80z41LGNiSsNRnfc
-X-Received: by 2002:a17:907:c8c4:b0:bc6:bb4b:1726 with SMTP id
- a640c23a62f3a-bd23bff618emr38994366b.22.1778522886331; Mon, 11 May 2026
- 11:08:06 -0700 (PDT)
+ bh=CJsCNRyKYSDnk4CHJfgzYSRMdLZfjCUTPquPLt0r14c=;
+ b=g2ynSP2sXfYWbc3hi1nBo4w8IshDJWS3QW+6coVT/EN7dHcnEAfMTM0nKrG/vvDKTa
+ oJc07dfBsXdQJ0C+fY8auCjYjn66Dt22qkC3eX3SJYFSh9QyroDU+rA2iCZbngaLhPau
+ gNl8ZAqDdkKlHe+0ukctEnT4782LekgT4h7C+wklYehMZknlkl6lrAVSpLEAfHUie001
+ SMWkpCHuQ4rZ6XvlWab83Zgec0F/YNjjk4U8B9hFlwx6D89hcQw2gxHj9eN/kIwsJgqY
+ +hwQOHb9X5Vsd2cT6+ydWcsGzK+rWDruFMyDbhzrXwMOgy1TI07O098hklTLkktKqDvG
+ 87GA==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ8KcTk+FC6G4jFOFenspHbyYqTDSd3CqjkBt/cNegzK8ydT8m/ygvUunONxg3BbKN2PO01U6f0=@lists.denx.de
+X-Gm-Message-State: AOJu0YwMAGGdBnRkgBfcSfX0tRdk4iw6Sg7jhClVFfrTQXYwhmoj8MYk
+ gtv7aZSBl7cbpe2p8Ni1NkbGPO2poJ5dxCwIVFx8SL5+saDOweuMt9CaZp5tsm7t044/UTaTYl4
+ XMilBPw30ye7xA7jmmGVa6+ygXHYg2GWMqA3Vre3y
+X-Gm-Gg: Acq92OHoxx3GYOiJuOCZ/Az1MJnnvJFDZ8QIHywsktOdYXgS63eHgz9RdT5HvCEV3pF
+ 3yj47dNycZFh+HO8AHbZgCfIfH/aHwnrYNPTYIx9UuzvVwHh1WayLXHVdhyynGgagQN9t2PTfES
+ /YeCPXx27VGzm0vWRNzcwcuLfWTGncBKkM3mM/c0ho6uGb4CodMogz4Hz7O/wCc9YgIA5Rmq/4N
+ fCLxpWRxHeItYHfwifbwIu3+V/RDhMw6x1FOELQRBo5kaaO22miwcTj+V62osTnuFOcTSIjjJDN
+ IbFbnA==
+X-Received: by 2002:a17:906:ef08:b0:bab:d8e9:53a7 with SMTP id
+ a640c23a62f3a-bc56cd297b4mr1607661566b.29.1778522939765; Mon, 11 May 2026
+ 11:08:59 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260510171723.56866-1-marek.vasut+renesas@mailbox.org>
- <20260510171723.56866-11-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20260510171723.56866-11-marek.vasut+renesas@mailbox.org>
+References: <20260509-net-lwip-add-stop-function-v1-1-62d854bfa66a@baylibre.com>
+In-Reply-To: <20260509-net-lwip-add-stop-function-v1-1-62d854bfa66a@baylibre.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 11 May 2026 12:07:53 -0600
-X-Gm-Features: AVHnY4KV3Q2w1jVIxWWT7pQZ24Wa2GZKxUpXlvgO-reczuUdd9KBMitLR69Yg14
-Message-ID: <CAFLszTgpRsBvTdM9=AfBSZ6nv=X7f7va69hNjiS4QASNfNPqLA@mail.gmail.com>
-Subject: Re: [PATCH 11/11] video: tegra: Staticize and constify driver ops
-To: marek.vasut+renesas@mailbox.org
-Cc: u-boot@lists.denx.de, Anatolij Gustschin <ag.dev.uboot@gmail.com>, 
- Svyatoslav Ryhel <clamor95@gmail.com>, Thierry Reding <treding@nvidia.com>,
- Tom Rini <trini@konsulko.com>
+Date: Mon, 11 May 2026 12:08:47 -0600
+X-Gm-Features: AVHnY4JEr30QNywY5qn7F_F-NlCUHet7n7zofiLRBpacx0K44eAlBYIgpL9NY4w
+Message-ID: <CAFLszTg7tCbBu5pKivVq2q8DW4pZdGBny4+0PytE7QHXOdOHcg@mail.gmail.com>
+Subject: Re: [PATCH] net: lwip: introduce net_lwip_eth_stop() function
+To: dlechner@baylibre.com
+Cc: Jerome Forissier <jerome.forissier@arm.com>, Tom Rini <trini@konsulko.com>,
+ Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -110,16 +110,90 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2026-05-10T17:16:56, Marek Vasut <marek.vasut+renesas@mailbox.org> wrote:
-> video: tegra: Staticize and constify driver ops
->
-> Set the ops structure as static const. The structure is not accessible
-> from outside of this driver and is not going to be modified at runtime.
->
-> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
-> Acked-by: Svyatoslav Ryhel <clamor95@gmail.com>
->
-> drivers/video/tegra/dsi.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+Hi David,
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+On 2026-05-09T17:36:26, David Lechner <dlechner@baylibre.com> wrote:
+> net: lwip: introduce net_lwip_eth_stop() function
+>
+> Add a introduce net_lwip_eth_stop() function and use that to stop the
+> network interface after each command that uses the network.
+>
+> This makes the behavior the same as the legacy net code and avoids
+> potential issues with the network interface being left in an active
+> state after a command finishes.
+>
+> Signed-off-by: David Lechner <dlechner@baylibre.com>
+>
+> cmd/lwip/ping.c     | 10 ++++++++--
+>  cmd/lwip/sntp.c     | 10 ++++++++--
+>  include/net-lwip.h  |  1 +
+>  net/lwip/dhcp.c     | 15 +++++++++++----
+>  net/lwip/dns.c      |  6 +++++-
+>  net/lwip/net-lwip.c |  6 +++++-
+>  net/lwip/nfs.c      |  4 ++++
+>  net/lwip/tftp.c     |  4 ++++
+>  net/lwip/wget.c     | 34 ++++++++++++++++++++++------------
+>  9 files changed, 68 insertions(+), 22 deletions(-)
+
+> diff --git a/net/lwip/wget.c b/net/lwip/wget.c
+> @@ -302,6 +302,7 @@ int wget_do_request(ulong dst_addr, char *uri)
+>       struct udevice *udev;
+>       struct netif *netif;
+>       struct wget_ctx ctx;
+> +     int ret = CMD_RET_USAGE;
+>       char *path;
+>       bool is_https;
+
+Initialising ret to CMD_RET_USAGE changes error paths:
+
+   netif = net_lwip_new_netif(udev);
+   if (!netif)
+        goto out_stop;          /* ret is still CMD_RET_USAGE */
+
+   if (!tls_allocator.arg) {
+        log_err(...);
+        goto out_remove_netif;  /* ret is still CMD_RET_USAGE */
+   }
+
+The fall-through after 'Certificate verification failed' also lands on
+out_remove_netif with ret unchanged. These paths previously returned
+-1; now they return CMD_RET_USAGE (1), so the command framework prints
+usage for a network/TLS failure.
+
+wget_do_request() isn't a command handler either, so CMD_RET_USAGE is
+doubly out of place. Please initialise ret to -1 and set ret =
+CMD_RET_FAILURE explicitly only in the paths that previously returned
+that.
+
+It might make sense to split this up function (perhaps in a prior
+patch) to try to make the error handling easier?
+
+> diff --git a/net/lwip/net-lwip.c b/net/lwip/net-lwip.c
+> @@ -181,7 +181,6 @@ int net_lwip_eth_start(void)
+>       int ret;
+>
+>       net_init();
+> -     eth_halt();
+>       eth_set_current();
+>       ret = eth_init();
+
+Removing the eth_halt() changes the contract of net_lwip_eth_start().
+The legacy code in net/net.c still does eth_halt() before eth_init()
+in the on-demand-init path, so the claim that this matches legacy
+behaviour is only half true.
+
+do_dhcp() with argc > 1 calls do_tftpb() while the interface is still
+up, so do_tftpb() now calls net_lwip_eth_start() -> eth_init() without
+an intervening halt. I wonder what happens if we have 'dhcp <addr>
+<file>' on a board where the driver doesn't support a second
+eth_init() without a halt? It may be safer to keep the halt in
+net_lwip_eth_start() and treat net_lwip_eth_stop() as the symmetric
+counterpart.
+
+> Add a introduce net_lwip_eth_stop() function and use that to stop the
+> network interface after each command that uses the network.
+
+Commit message: 'Add a introduce' should be just 'Introduce' (or 'Add a').
+
+Regards,
+Simon
