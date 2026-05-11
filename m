@@ -4,89 +4,142 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD244CD484E
-	for <u-boot@archiver.kernel.org>; Mon, 11 May 2026 20:58:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8B68CD37BE
+	for <u-boot@archiver.kernel.org>; Mon, 11 May 2026 21:10:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2C1E58394E;
-	Mon, 11 May 2026 22:58:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 601928394E;
+	Mon, 11 May 2026 23:10:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=outlook.fr
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="gU1qbhXF";
+	dkim=pass (2048-bit key; unprotected) header.d=OUTLOOK.FR header.i=@OUTLOOK.FR header.b="p5gbCmOE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2500883C2B; Mon, 11 May 2026 22:58:38 +0200 (CEST)
-Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
- [IPv6:2607:f8b0:4864:20::32a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id D293583FEC; Mon, 11 May 2026 21:55:37 +0200 (CEST)
+Received: from AM0PR02CU008.outbound.protection.outlook.com
+ (mail-westeuropeazolkn190130003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:d201::3])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3693080086
- for <u-boot@lists.denx.de>; Mon, 11 May 2026 22:58:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D67098394E
+ for <u-boot@lists.denx.de>; Mon, 11 May 2026 21:55:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=outlook.fr
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=james.hilliard1@gmail.com
-Received: by mail-ot1-x32a.google.com with SMTP id
- 46e09a7af769-7dcd9061b1aso4225369a34.2
- for <u-boot@lists.denx.de>; Mon, 11 May 2026 13:58:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1778533114; x=1779137914; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=OG8gZIEVNQcv4tbWnXo75xRzwv2HvFSnWipzyltpVM4=;
- b=gU1qbhXFkiahO2YlyVU1RvQHkv5qkeAQ1ak1BFWze47/655f/CWvQZ9WCdV7RjcR6q
- CiPhvkcAmSKZtnrjbmxDjcC2QQBHMgIZPW5XAhAu5bRQitLHomfpVJmCFjBl/T/GjZR+
- 2rydBB+5QdVj+xCSu2lBVrm1x9jAyNY5lIfyqKKLZt9jQ0HixIRISDi6cYSHrEktaHKd
- Rj/GVyQiHcRtYpm/aAhzW3v5Mme2eVZH5uedZ7ERLcv/G13AGTa0lPlVZkcDniCWZDCF
- cHx68xDlHI5J/RtPbnEksnEhZOSEqZJp6ZSz8HiCgSr9oWAPjbedESpzNjTk/xpWCfDw
- FNxA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778533114; x=1779137914;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=OG8gZIEVNQcv4tbWnXo75xRzwv2HvFSnWipzyltpVM4=;
- b=Y2NcqOWq7td4mc6wzahsmZLre00dAmWCWqEHgRhCrpZL65oTFJUK+8jHogeTtgbemU
- vHyk0z61D09t0eqo52BdmW2f7g+uOKNwK6UA6u+SRBWIbxBtCA0vHn0NS9snoEj0CDZl
- 8zy7zxJKffOc5n+9ksfkahTslpkqwNG86fgr+bLyyRd0IPb2BkS+MNRSeqYpBS3Frk/t
- HHDRZQ9Q42tFOj0Gf9ErmNI5n3wGZTM8nq3P8r7c9VaD9ZJEwvW32C8Ic4Sn7rZdTTEk
- oNEA4di62Vz/D8DZVMjcX/1cIHECYBNMqoW/2WczTiHhJgVdOTvhHCwdM+a6vUKTq8lD
- kdOg==
-X-Gm-Message-State: AOJu0YxrBryvMYoj9ttlp3UVHRkPW/7otdSOtLIjly4yg9jqFUZyMlyP
- cBGN6uFAWYf2aXivuuA0jCw9l10ipRKovtH52PZPKiaDouEKE36dJ77XrLIX8LY5
-X-Gm-Gg: Acq92OEVYa24mP/lfbz/YstXiP9pXEUdfHu+KqrmjM4Rg1ruu0l+NMqkeHJUKUo4a8D
- vmizl/ykltaAmDbszhBeEcZdEYEHBleBqMYZI+omx1ET3USrtThEopWSPofsElyeeZIJ1HCNk6H
- ZVYhwMLcfvL92sTviccv37WasEJxce7o2VLYZXbBkB9484R21AxcqajNXD3lC5ZbaJenGp+NlE/
- La09y5aNWfEJFb6Kdi2AZpUiHRtZPEv8UOri6L7XTpI2kh8j6R+aE+VU5fth/j0S6fORWekBHGX
- usRp+V22YAvADhGzazF3xHNI2hedSdKtgMfU3zIdlwJZhRD8Fnu22RryxCWPpQFWH1T4+DLz7tQ
- JZIo+RyjnoZFKy8N/5InWI8xifx15Mcywa87DPZl8/U2Xt15kcDzUy3f4/8Kk0wFJXJrBrQrLmp
- pevojqnzZpYWhra3qDPKQDsXB/6ohX82Bx+HCyAwAJquwuT9f2XCod1E6KIs/TVVe0M4ZG44ZM4
- ucmBffBHgCXKk86DEgL6I/K8Gl19qyfflU2EGNDQ8kq1FIzzS8D6LcOAp04wbn/E43KJw==
-X-Received: by 2002:a05:6830:6d13:b0:7de:298:5332 with SMTP id
- 46e09a7af769-7e1df24ed2bmr16391777a34.27.1778533113492; 
- Mon, 11 May 2026 13:58:33 -0700 (PDT)
-Received: from james-x399.tailafd1a.ts.net (71-218-106-55.hlrn.qwest.net.
- [71.218.106.55]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7e367be1168sm7597584a34.5.2026.05.11.13.58.32
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 11 May 2026 13:58:33 -0700 (PDT)
-From: James Hilliard <james.hilliard1@gmail.com>
+ spf=pass smtp.mailfrom=fberder@outlook.fr
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=yBJFLlfjOCfCO/rOqRKpGfnF9hDQnBIqb0r6Zo+KM++UZqIZI8Vk9HOeN/LLtWN8redDrcn+va4X+GbH2YLa+FsdpAqiaMUT2PySEQhlR1mnZ4605gxibg0iu99IXvpMPD67cwVaVWXhzsh8AQHykIQsAkhfqfs98lSB/o+Pj2Dfk0G9tt4jzVYnoYJqSSnOQ8yF8/mPqIDREGI7O6KobKit8Y03O3ILOrLYKdBrF5dk0ZXU9WW84fFzb0f4tcEtzQM78qng9BmOe5BAxhT63xFOB+K6BwsOgAUcCt40NJ0BJYEOF/DDIGWf9p8CTPhoaw55OwmSYB6LbyqSkDwnAA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=md9L94xoKbZUQS2mByPfOl2LCAygmPM2RJ6bUn4V3ps=;
+ b=QapfNDt17zFy4JlgtpQsAEoy90Zxxhyt0d58dTLlQrgVVUZBlWqZcf65mR0sthWXoUx2Af9Jyzxm3f1Lg9BzNkyfTqsaxkpaUM9OS5x5Ik9UZIOp36LVWnICw2iZOXvg22CLBPLlTMbfyi4bxwsO+vJDdjdOJevT96ligfuZEld8SNJbyp9J5N4tn6fxYe+PjTLX7o1GTVlVJD/eYbahLC7NJgBBX/boi5gP+fBsfSgH/4wHtP0t0Vpi6vvXcH/2BFECPU/aZ1Bm+4Ox/zbcY+qa0x6s4R2i48vKIY5TkLPcGRdc1a0LsagSaTup7P7riDPTddYVXsjoUELDKhT4Vg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
+ dkim=none; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=OUTLOOK.FR;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=md9L94xoKbZUQS2mByPfOl2LCAygmPM2RJ6bUn4V3ps=;
+ b=p5gbCmOEVdOczdETb+bWhmz9LDm/jp5jUyx/QvAmSx5BXA7LwYsQIMcoWkFKyJCJmsfj2ZNWKX1RofifFvfDKzdAyO8BpF/yAqTQoEq/mkyFlAbc905ubs9ySWf1HtuIuK5rY+SM1gBVAkQ3KT/Z4fdf1VaCgKxsXRMfgHaupAahYSrQqi6rxcI+B2Bq2wHlg5SQdIEyAL49dqwgmYmQKwbaXaCA1FZXubgfdxuamlGZme2nFUgYKOIq1WHRvtWwb9UECfnQZSU0i2wcx55Q1EAlYzaOJ66M6u2G7YL1SyW5r67AGV+xo1GzBjFwo7jp805xQjd02/6BotCypu5CQA==
+Received: from BESP194MB2805.EURP194.PROD.OUTLOOK.COM (2603:10a6:b10:e8::5) by
+ GV2P194MB2966.EURP194.PROD.OUTLOOK.COM (2603:10a6:150:304::20) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9891.23; Mon, 11 May 2026 19:55:34 +0000
+Received: from BESP194MB2805.EURP194.PROD.OUTLOOK.COM
+ ([fe80::5ae3:1158:9ce8:90]) by BESP194MB2805.EURP194.PROD.OUTLOOK.COM
+ ([fe80::5ae3:1158:9ce8:90%3]) with mapi id 15.20.9891.021; Mon, 11 May 2026
+ 19:55:34 +0000
+Message-ID: <BESP194MB2805928BF5055166EE7F0B11DA382@BESP194MB2805.EURP194.PROD.OUTLOOK.COM>
+Date: Mon, 11 May 2026 21:55:31 +0200
+User-Agent: Mozilla Thunderbird
+Content-Language: en-US
 To: u-boot@lists.denx.de
-Cc: James Hilliard <james.hilliard1@gmail.com>,
- Andre Przywara <andre.przywara@arm.com>,
- Hans de Goede <hdegoede@redhat.com>, Tom Rini <trini@konsulko.com>,
- "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
- Richard Genoud <richard.genoud@bootlin.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Simon Glass <sjg@chromium.org>, Bohdan Chubuk <chbgdn@gmail.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>
-Subject: [PATCH] sunxi: add raw NAND secure storage support
-Date: Mon, 11 May 2026 14:58:08 -0600
-Message-ID: <20260511205813.86932-1-james.hilliard1@gmail.com>
-X-Mailer: git-send-email 2.53.0
+Cc: Jerome Forissier <jerome.forissier@arm.com>, Tom Rini <trini@konsulko.com>
+From: Francois Berder <fberder@outlook.fr>
+Subject: [PATCH] net: dhcpv6: Prevent buffer overflow during BOOTFILE_URL
+ parsing
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: PA7P264CA0382.FRAP264.PROD.OUTLOOK.COM
+ (2603:10a6:102:399::14) To BESP194MB2805.EURP194.PROD.OUTLOOK.COM
+ (2603:10a6:b10:e8::5)
+X-Microsoft-Original-Message-ID: <19c84e49-1d90-44ca-8248-a931ff9b7d2e@outlook.fr>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BESP194MB2805:EE_|GV2P194MB2966:EE_
+X-MS-Office365-Filtering-Correlation-Id: 0e9478c1-5e11-4ae2-2d8b-08deaf97439e
+X-Microsoft-Antispam: BCL:0;
+ ARA:14566002|5062599005|6090799003|51005399006|55001999006|37011999003|24021099003|15080799012|23021999003|8060799015|19110799012|5072599009|40105399003|440099028|3412199025;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?aElxM01nQ2pST1R4Tm5URGlFMUVMNGRVMVFXUk14bUxrUWJyaTFtN3Y2dEph?=
+ =?utf-8?B?YW9XZHNHczdyUytHUkZWSGpKZk5yR2gzT3ZYREhuVlRDaVI2YktwYS83QVhW?=
+ =?utf-8?B?VkhNUjlLSXI4U3JzemFhdEgvQ1B1OXdCbEhjN1orVUNKMi8reS9aN3FuVlZS?=
+ =?utf-8?B?dlgwUmNjdWRSS1ZnSUcybmE2Y24veDZMYzhNaTV2SXB1aWVJa1JiZC9xaE1o?=
+ =?utf-8?B?Q3QvVUtVWTJTa3JFYmlBdzVPYUlXMjFmSm9wcVB1blZYSDQ2RGFLNWVORTc5?=
+ =?utf-8?B?cGJZWTFFVzZWM1ZoclF5VFdLNlh5QjhLRVBOUWJaR0FqSVdBZ1NhZFl0aytR?=
+ =?utf-8?B?Y3dOb2VlVDJRelI3RTA2M3lVaDNuM3JmUDg4ZUJZZUZIVFlvQ1hOMjVreCtN?=
+ =?utf-8?B?SGk3VHUwalNLMVNFaXIveFdncDUzMGxBdUNBTHp3Q2tTUWkxalEzUVgrZnF2?=
+ =?utf-8?B?UGNoUVdWNTJJQnR1dzl5WVFRME05Q1EvVG5OWmN6TVNjRGhTUHdlbTJHZ0ht?=
+ =?utf-8?B?UGpWNjg5M2tseDBTdUw4aENpS01CY2xBS3ZIZlU4bThEdEVPYmhsSGZYa3kw?=
+ =?utf-8?B?THpFNmpkTlY5bTJMdjV4bE9yZzcyemMwNXJ4Y2VEMWx1QlY0ZXMyZVpKS0JF?=
+ =?utf-8?B?WURkM3ErSkYxRlFDKzJUVUJGa1lGWFM1QWcrWGY1SGF6MjB1d0VMbm9UYlhF?=
+ =?utf-8?B?QjJiV0VTeFNwTVIyMTJPOWFieEhJTVVJbXJUL2Q2b2Z3VS81YWRZTThhWmhB?=
+ =?utf-8?B?YXNNanZLU2ZmcnJKRXlDMEFoQytVM0dPSmhPVFc1K3BCUjZPWGJESE1vUy9U?=
+ =?utf-8?B?VGE0d0pzOGZGcWxqSFJzZmFxYVZscTlrQURraERzNVpFRHc5MlUrOXp6eDRQ?=
+ =?utf-8?B?ZUtBOGRUVDAvK3M3ZGhNRG5leU5XY0dEdzAydUtqaUR3VGJPSHJOSjZ5WXpM?=
+ =?utf-8?B?eXMvdC9UaTNXWThCSkI4S2tTVWp3YWdGNGhkRDAwaHU5YlNCQ0NZNWsxSkk3?=
+ =?utf-8?B?MHlxdk5zaUdDVW9OdktPa2hpREsxTUFNZVBHUG9SRGV5MCthMTkvL3RJNHRF?=
+ =?utf-8?B?K2tWS1BkUU5hTHdRZnB1b1BDYzZrLzZPVjdTVGVScUtkMGZGU2RTclFjaWdM?=
+ =?utf-8?B?aTlmL1hYWjVIVE9HRDdUU01kU3BLaWoyMENjbTdZTm5BTzdHU2x0Q1lLV3ZI?=
+ =?utf-8?B?dVVGcWdpN200L0czeWVhS05zME4zUzhnTVhlcGRXUkdvQWRyeXhsS1QzM2Ra?=
+ =?utf-8?B?ZGNadjduNUtLZU5wdVV2MktSaTAzelZURk50dnpsdldwa1ZaL2ZlVXJPMFpZ?=
+ =?utf-8?B?R3FaVlA4QkJhUkMwN1FpSmRiT3RCVU56cGZwQVdtUzdZWDFGaDBienhtd1FH?=
+ =?utf-8?B?eGVHTm1qL1pLOG5RWUdndyttdjBmS1Z3dUVJZzlob3ZjWlkralRyZjc2em5E?=
+ =?utf-8?Q?nP9pETUD?=
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?aDNoZHg3SE11UVdnVUIrdFZRWjlqMGpqelgwc2tIcWxIZVNJTTRTY1RpWmJo?=
+ =?utf-8?B?MWtDUlZCTTcxSWxKSnhNVzl2dFloUE5BVkt6a3Urckl1OEFnWFFaYk9Xclhk?=
+ =?utf-8?B?bmxibGxHTDdrOGlIRjAzOElodFluckdjLzVqYjB1VmZWOWJROUZ6RHN1dVlG?=
+ =?utf-8?B?dDZJakp2S0NRUDJTRGNZK0lNWEo4QmdoMng3eWsra0toVmFWL3NDOFFXR3Fl?=
+ =?utf-8?B?eEZZaUVoNEtEaUt3eTBodld6Q3JTR2ttaHdMc0huMVNxUElTMU1GbWo2alE2?=
+ =?utf-8?B?NG1wVHovbkk0bFExVFJhYkhmYTdqZUw5dkIwUGdieHJTaWN5VEpLSFFSVTNS?=
+ =?utf-8?B?cUEwUWZWRjFBQ2RTOEd0anh0cXFaWng3K0VkdEpmQjI1b3NlTzFvR21yZkJY?=
+ =?utf-8?B?ZzNJY1hHWEx3YWZEU3QrSy92TnhpWUZqM0lYc0I0Z3N1MEpqM0YwVmtrRmZh?=
+ =?utf-8?B?TjZmVEJIZ2tGN1VzSSsxNGJOZFo1MFNjTVRNYzRiWDdZa0ZiSjc3VHpPTXp5?=
+ =?utf-8?B?SW9NZXJPbFZmSUorNWhFaXZtOEZZRTlCb3BzdXZwOWhid2ZnM0NDQjU5RUlM?=
+ =?utf-8?B?TEJiN01oWGpSZ2JWUDVGdHdzc3hKWVJKWFhaTDJpRWw1YUxLZUU2TEFvWHZV?=
+ =?utf-8?B?Q2hjTXlEb01teFdOc2ZzaVY3MDhLcjZsZFptZkxRT05nUXpGdVR0NUVsRnVu?=
+ =?utf-8?B?UUlFa1gxT0NiczRheFpCOUZBSFdpVkNxQVA5YkFubkxtM3BlaWRCMStPM1Ey?=
+ =?utf-8?B?UjNndnptZExnZlBKS0thTnh6Vi9SektlTFROVkt1RDgzVXpUOXc2TFI0TytI?=
+ =?utf-8?B?ZklQUVBFUnlSOUE3Z09ILzVvUGtKT2J6OXV1clBqeDNSWk00eHBFQnFDVDhm?=
+ =?utf-8?B?L3ZRS3FKY1YrU1h3aysvMks2QlgzNWZYMDAyU3hnQ2xmVWFDQTVraWFUa25K?=
+ =?utf-8?B?N2V2WTh1UUZMWllzKzZCa3hEdHd1aGpSbXRrcnJkYnBUK1lTNUo3RFM3em5R?=
+ =?utf-8?B?MUhFaWVLU3VWVlNQazk2elk0YzlHT01pUUdDejJMT0dycFNEV01xbmhKc0V0?=
+ =?utf-8?B?NktEaHVMN3dBRFVXeTZBem1IVXFNOFpPelVTQjBBNGlGN3YxZTRMNFlhdS9y?=
+ =?utf-8?B?VENDSGVqcll0UmQzaUZHWEJiMGZrQnFTMG5RYlpDUXRjVEQ4SWJyR0s0cnU4?=
+ =?utf-8?B?Y1M3UXVmcDVtbzZkMDdJUWJjN0I2bmtPaEk3S2xOYW9RNzlvT3o1Z1VkVGF5?=
+ =?utf-8?B?UktjTVlTMWZaeVR1bm1VbU5JaTlkZm53RjhhVmJqRVBaUEVPQjlGVk9ick9q?=
+ =?utf-8?B?Q0VmZndGMU1kWEk2V0xuem1nanhlSVhLbVBDNmg3UTFINVJBZEV2a0lvSGpU?=
+ =?utf-8?B?TE1sTlJZQkU3VjlobXFpOWNxR0xmTldsQjZjSWNwdTJNMXQxSXNOTkJxR3Jn?=
+ =?utf-8?B?bUgzN1JMV1J1cHhzMDlpUUl3Q3JTUVpuOGx5U3JGaUtNZjY2RjJFMFZVeXBx?=
+ =?utf-8?B?RVBqd2NzZjZQcFM2QVNSTnVncHBMRmRnd0NDUFZPek0vV2VJMXhSUHJ4K255?=
+ =?utf-8?B?SXd1Q0NFdkhZOU1pdkRNY2k4Z2djSzQ4YWdPOUpRRUpRcWUreDh3Z0N1M0lI?=
+ =?utf-8?B?NGxLdmRNSUI4MXNsTStEZnV1NTZQaW1zMHhrdnM0OGRGdE9YUlhtMWs4enlF?=
+ =?utf-8?B?cUlEK2lHY2o5dFUrbnFlVjhlNHV2blg3VGgwTEJJV0V1UXlSUEJUZTQ3T1d6?=
+ =?utf-8?B?V2x4dWx1VzVxcnFJaElQRFVkNWxoYmYwT2JXa1BvVnJkcFJMZ21BdlpiY3dQ?=
+ =?utf-8?B?RjhFMHJvZmY4SjhvQ0NiOThvdlR5UWtoUms1VHM3SGVYS1htTEhpYVRYa2NE?=
+ =?utf-8?Q?Q0KqShxt2kd4g?=
+X-OriginatorOrg: sct-15-20-9412-4-msonline-outlook-3927c.templateTenant
+X-MS-Exchange-CrossTenant-Network-Message-Id: 0e9478c1-5e11-4ae2-2d8b-08deaf97439e
+X-MS-Exchange-CrossTenant-AuthSource: BESP194MB2805.EURP194.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 May 2026 19:55:34.6582 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
+X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV2P194MB2966
+X-Mailman-Approved-At: Mon, 11 May 2026 23:10:28 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,810 +156,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Some sunxi boards boot from raw NAND using an Allwinner flash layout.
-Factory data is stored in redundant secure-storage blocks after the
-U-Boot proper area.
+The net_boot_file_name is a 1024 byte buffer.
+However, based on DHCPv6 RFC, bootfile-url length is
+specified by option_len, a 16-bit unsigned integer
+(valid range: 0-65535).
+Hence, one needs to make sure that option_len is less
+than the size of net_boot_file_name array before copying
+bootfile-url to net_boot_file_name.
 
-Mainline U-Boot needs to preserve this area when generating NAND
-partition tables. It may also need to read factory data, such as the
-Ethernet MAC address.
-
-Add helpers to locate secure-storage marker blocks, read checksummed
-store_object items through the MTD ECC path, set ethaddr from a
-configurable key, and generate runtime mtdparts that place UBI after
-the last secure-storage marker.
-
-Secure-storage block discovery intentionally mirrors the existing NAND
-layout: use marker-only discovery from the computed U-Boot proper end
-to block 50. Item data remains checksum and CRC validated before use.
-
-Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
+Signed-off-by: Francois Berder <fberder@outlook.fr>
 ---
- board/sunxi/Kconfig               |  39 +++
- board/sunxi/Makefile              |   3 +
- board/sunxi/board.c               | 119 +++++++
- board/sunxi/nand_secure_storage.c | 521 ++++++++++++++++++++++++++++++
- board/sunxi/nand_secure_storage.h |  42 +++
- 5 files changed, 724 insertions(+)
- create mode 100644 board/sunxi/nand_secure_storage.c
- create mode 100644 board/sunxi/nand_secure_storage.h
+ net/dhcpv6.c | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-diff --git a/board/sunxi/Kconfig b/board/sunxi/Kconfig
-index 084a8b0c6ca..c3826f0ade9 100644
---- a/board/sunxi/Kconfig
-+++ b/board/sunxi/Kconfig
-@@ -22,3 +22,42 @@ config SPL_IMAGE_TYPE
- 	string
- 	default "sunxi_egon" if SPL_IMAGE_TYPE_SUNXI_EGON
- 	default "sunxi_toc0" if SPL_IMAGE_TYPE_SUNXI_TOC0
-+
-+config SUNXI_NAND_SECURE_STORAGE
-+	bool "Allwinner NAND secure storage support"
-+	depends on NAND_SUNXI && MTD_RAW_NAND
-+	help
-+	  Enable support for reading the Allwinner raw NAND secure-storage
-+	  area from U-Boot proper. This is used by some sunxi boards to
-+	  preserve factory data, such as MAC addresses, when booting a
-+	  mainline NAND layout.
-+
-+config SUNXI_NAND_SECURE_STORAGE_ETHADDR
-+	bool "Read ethaddr from Allwinner NAND secure storage"
-+	depends on SUNXI_NAND_SECURE_STORAGE && NET
-+	select CRC32
-+	help
-+	  Read the configured secure-storage key and use it as the primary
-+	  Ethernet MAC address before the normal sunxi fallback environment
-+	  value is generated.
-+
-+config SUNXI_NAND_SECURE_STORAGE_ETHADDR_KEY
-+	string "NAND secure-storage key name for ethaddr"
-+	depends on SUNXI_NAND_SECURE_STORAGE_ETHADDR
-+	default "mac"
-+	help
-+	  Name of the secure-storage item containing the primary Ethernet MAC
-+	  address. The store_object payload is parsed like a U-Boot
-+	  Ethernet environment variable.
-+
-+config SUNXI_NAND_SECURE_STORAGE_MTD_PARTS
-+	bool "Generate NAND mtdparts around secure storage"
-+	depends on SUNXI_NAND_SECURE_STORAGE && SYS_MTDPARTS_RUNTIME
-+	help
-+	  Generate the default NAND mtdparts at runtime by locating
-+	  secure-storage marker blocks and placing the UBI partition immediately
-+	  after the last marker. This avoids hard-coding the secure-storage
-+	  offset, which may shift when bad blocks are present before or inside
-+	  the secure-storage window. Only SLC raw NAND is supported; MLC/TLC
-+	  parts need Allwinner's LSB-block-size mapping, which is not available
-+	  here.
-diff --git a/board/sunxi/Makefile b/board/sunxi/Makefile
-index ee82493117a..fda2a0bfe76 100644
---- a/board/sunxi/Makefile
-+++ b/board/sunxi/Makefile
-@@ -8,6 +8,9 @@
- # Wolfgang Denk, DENX Software Engineering, wd@denx.de.
- obj-y	+= board.o
- obj-$(CONFIG_SUN7I_GMAC)	+= gmac.o
-+ifndef CONFIG_XPL_BUILD
-+obj-$(CONFIG_SUNXI_NAND_SECURE_STORAGE)	+= nand_secure_storage.o
-+endif
- obj-$(CONFIG_MACH_SUN4I)	+= dram_sun4i_auto.o
- obj-$(CONFIG_MACH_SUN5I)	+= dram_sun5i_auto.o
- obj-$(CONFIG_MACH_SUN7I)	+= dram_sun5i_auto.o
-diff --git a/board/sunxi/board.c b/board/sunxi/board.c
-index 3d1afec7c66..19a0402eb03 100644
---- a/board/sunxi/board.c
-+++ b/board/sunxi/board.c
-@@ -50,9 +50,126 @@
- #include <spl.h>
- #include <sy8106a.h>
- #include <asm/setup.h>
-+#include <vsprintf.h>
-+
-+#include "nand_secure_storage.h"
+diff --git a/net/dhcpv6.c b/net/dhcpv6.c
+index 5bf935cb6a3..51f44979f8e 100644
+--- a/net/dhcpv6.c
++++ b/net/dhcpv6.c
+@@ -377,6 +377,11 @@ static void dhcp6_parse_options(uchar *rx_pkt, unsigned int len)
+ 			break;
+ 		case DHCP6_OPTION_OPT_BOOTFILE_URL:
+ 			debug("DHCP6_OPTION_OPT_BOOTFILE_URL FOUND\n");
++			if (option_len >= sizeof(net_boot_file_name)) {
++				debug("Option length for BOOTFILE_URL is greater or equal than %zu. Skipping\n",
++				      sizeof(net_boot_file_name));
++				break;
++			}
+ 			copy_filename(net_boot_file_name, option_ptr, option_len + 1);
+ 			debug("net_boot_file_name: %s\n", net_boot_file_name);
  
- DECLARE_GLOBAL_DATA_PTR;
- 
-+#if IS_ENABLED(CONFIG_SYS_MTDPARTS_RUNTIME) && !defined(CONFIG_XPL_BUILD)
-+#define SUNXI_NAND_MTDIDS_MAXLEN	128
-+#define SUNXI_NAND_MTDPARTS_MAXLEN	512
-+
-+static int sunxi_mtdparts_append(char *buf, size_t size, int *len,
-+				 const char *fmt, ...)
-+{
-+	size_t avail;
-+	va_list args;
-+	int ret;
-+
-+	if (*len < 0 || (size_t)*len >= size)
-+		return -ENOSPC;
-+
-+	avail = size - (size_t)*len;
-+	va_start(args, fmt);
-+	ret = vsnprintf(buf + *len, avail, fmt, args);
-+	va_end(args);
-+	if (ret < 0 || (size_t)ret >= avail)
-+		return -ENOSPC;
-+
-+	*len += ret;
-+	return 0;
-+}
-+
-+static int sunxi_mtdparts_add(char *buf, size_t size, int *len,
-+			      const char *name, u64 part_size, u64 offset,
-+			      bool ro)
-+{
-+	return sunxi_mtdparts_append(buf, size, len, "0x%llx@0x%llx(%s)%s,",
-+				    (unsigned long long)part_size,
-+				    (unsigned long long)offset, name,
-+				    ro ? "ro" : "");
-+}
-+
-+void board_mtdparts_default(const char **mtdids, const char **mtdparts)
-+{
-+	static char ids[SUNXI_NAND_MTDIDS_MAXLEN];
-+	static char parts[SUNXI_NAND_MTDPARTS_MAXLEN];
-+	static bool generated;
-+	struct sunxi_nand_secure_storage_info ss;
-+	u32 i;
-+	int len, ret;
-+
-+	*mtdids = NULL;
-+	*mtdparts = NULL;
-+
-+	if (!IS_ENABLED(CONFIG_SUNXI_NAND_SECURE_STORAGE_MTD_PARTS))
-+		return;
-+
-+	if (generated) {
-+		*mtdids = ids;
-+		*mtdparts = parts;
-+		return;
-+	}
-+
-+	ret = sunxi_nand_secure_storage_locate(&ss);
-+	if (ret) {
-+		debug("sunxi secure storage: no dynamic mtdparts: %d\n", ret);
-+		return;
-+	}
-+
-+	if (!ss.mtd_name || !ss.mtd_size || !ss.spl_copy_size ||
-+	    !ss.spl_copy_count || !ss.uboot_size || !ss.secure_size) {
-+		debug("sunxi secure storage: invalid dynamic mtdparts geometry\n");
-+		return;
-+	}
-+
-+	if (ss.uboot_offset + ss.uboot_size > ss.secure_offset ||
-+	    ss.secure_end >= ss.mtd_size) {
-+		debug("sunxi secure storage: dynamic mtdparts would overlap\n");
-+		return;
-+	}
-+
-+	len = snprintf(ids, sizeof(ids), "nand0=%s", ss.mtd_name);
-+	if (len < 0 || len >= sizeof(ids))
-+		return;
-+
-+	len = snprintf(parts, sizeof(parts), "%s:", ss.mtd_name);
-+	if (len < 0 || len >= sizeof(parts))
-+		goto err;
-+
-+	for (i = 0; i < ss.spl_copy_count; i++) {
-+		char name[16];
-+
-+		ret = snprintf(name, sizeof(name), "spl-%u", i);
-+		if (ret < 0 || (size_t)ret >= sizeof(name))
-+			goto err;
-+		if (sunxi_mtdparts_add(parts, sizeof(parts), &len, name,
-+				       ss.spl_copy_size,
-+				       ss.spl_copy_size * i, false))
-+			goto err;
-+	}
-+
-+	if (sunxi_mtdparts_add(parts, sizeof(parts), &len, "uboot",
-+			       ss.uboot_size, ss.uboot_offset, false))
-+		goto err;
-+	if (sunxi_mtdparts_add(parts, sizeof(parts), &len, "securestorage",
-+			       ss.secure_size, ss.secure_offset, true))
-+		goto err;
-+	if (sunxi_mtdparts_append(parts, sizeof(parts), &len, "-@0x%llx(UBI)",
-+				  (unsigned long long)ss.secure_end))
-+		goto err;
-+
-+	generated = true;
-+	*mtdids = ids;
-+	*mtdparts = parts;
-+	return;
-+
-+err:
-+	ids[0] = '\0';
-+}
-+#endif
-+
- void i2c_init_board(void)
- {
- #ifdef CONFIG_I2C0_ENABLE
-@@ -792,6 +909,8 @@ static void setup_environment(const void *fdt)
- 	char ethaddr[16];
- 	int i;
- 
-+	sunxi_nand_secure_storage_setup_ethaddr();
-+
- 	if (!get_unique_sid(sid))
- 		return;
- 
-diff --git a/board/sunxi/nand_secure_storage.c b/board/sunxi/nand_secure_storage.c
-new file mode 100644
-index 00000000000..f786a47430a
---- /dev/null
-+++ b/board/sunxi/nand_secure_storage.c
-@@ -0,0 +1,521 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Allwinner raw NAND secure-storage support.
-+ *
-+ * The Allwinner NAND layout stores redundant secure-storage blocks
-+ * immediately after the U-Boot proper area. The blocks are identified by an
-+ * OOB marker and their pages are read through the normal NAND ECC/randomizer
-+ * path.
-+ */
-+
-+#ifdef CONFIG_SUNXI_NAND_SECURE_STORAGE_ETHADDR
-+#include <env.h>
-+#include <net.h>
-+#include <u-boot/crc.h>
-+#endif
-+#include <asm/unaligned.h>
-+#include <memalign.h>
-+#include <nand.h>
-+#include <linux/errno.h>
-+#include <linux/kernel.h>
-+#include <linux/log2.h>
-+#include <linux/mtd/mtd.h>
-+#include <linux/mtd/rawnand.h>
-+#include <linux/sizes.h>
-+#include <linux/types.h>
-+
-+#include "nand_secure_storage.h"
-+
-+/*
-+ * The Allwinner NAND layout scans up to block 50 and starts scanning at
-+ * uboot_next_block. The U-Boot range below follows the geometry-dependent
-+ * defaults used when no stored NAND partition table is present.
-+ */
-+#define SS_SCAN_END_BLOCK		50
-+
-+#define SS_SMALL_NAND_MAX_BLOCK_SIZE	SZ_1M
-+#define SS_SMALL_NAND_MIN_BLOCK_SIZE	SZ_128K
-+#define SS_SMALL_NAND_ALWAYS_BLOCK_SIZE	SZ_512K
-+#define SS_SMALL_NAND_UBOOT_START	8
-+#define SS_SMALL_NAND_UBOOT_SIZE	SZ_4M
-+#define SS_MEDIUM_NAND_MAX_BLOCK_SIZE	SZ_2M
-+#define SS_BIG_NAND_UBOOT_START		4
-+#define SS_BIG_NAND_1M_UBOOT_BLOCKS	20
-+#define SS_BIG_NAND_2M_UBOOT_BLOCKS	10
-+#define SS_BIG_NAND_MIN_UBOOT_BLOCKS	8
-+
-+/*
-+ * The H616/sun50iw9 NAND layout uses the 128-page SPL-copy geometry.
-+ * Only unrelated SUN8IW18 and SUN50IW11 SoC families use the 256-page
-+ * variant.
-+ */
-+#define SS_SPL_PAGE_CNT_PER_COPY	128
-+
-+#define SS_OOB_MAGIC_OFF		1
-+#define SS_OOB_CHECKSUM_OFF		3
-+#define SS_OOB_MAGIC			0xaa5c
-+#define SS_OOB_MAGIC_SIZE		(SS_OOB_MAGIC_OFF + sizeof(u16))
-+#define SS_OOB_CHECKSUM_SIZE		(SS_OOB_CHECKSUM_OFF + sizeof(u32))
-+
-+#ifdef CONFIG_SUNXI_NAND_SECURE_STORAGE_ETHADDR
-+#define SS_ITEM_SIZE			SZ_4K
-+#define SS_EMPTY_SUM			0x1234
-+#define SS_ITEMS_PER_BLOCK		32
-+#define SS_MAP_MAX_ENTRIES		(SS_ITEMS_PER_BLOCK - 1)
-+#define SS_NAME_LEN			64
-+
-+#define SS_STORE_MAGIC			0x17253948
-+#define SS_STORE_MAX_LEN		0xc00
-+#endif
-+
-+struct ss_info {
-+	struct mtd_info *mtd;
-+	u32 first_block;
-+	u32 last_block;
-+	u32 marker_count;
-+	u32 page_size;
-+	u32 oob_size;
-+	u32 erase_size;
-+	u32 pages_per_block;
-+	u32 spl_copy_blocks;
-+	u32 spl_copy_count;
-+	u32 uboot_start_block;
-+	u32 uboot_next_block;
-+};
-+
-+#ifdef CONFIG_SUNXI_NAND_SECURE_STORAGE_ETHADDR
-+struct ss_object {
-+	u32 magic;
-+	u32 id;
-+	char name[SS_NAME_LEN];
-+	u32 re_encrypt;
-+	u32 version;
-+	u32 write_protect;
-+	u32 reserved[3];
-+	u32 actual_len;
-+	u8 data[SS_STORE_MAX_LEN];
-+	u32 crc;
-+} __packed;
-+
-+static u32 ss_get_le32(const void *buf, size_t offset)
-+{
-+	return get_unaligned_le32((const u8 *)buf + offset);
-+}
-+#endif
-+
-+static bool ss_oob_has_magic(const u8 *oob)
-+{
-+	return get_unaligned_be16(oob + SS_OOB_MAGIC_OFF) == SS_OOB_MAGIC;
-+}
-+
-+static int ss_read_ecc_page(struct ss_info *ss, u32 block, u32 page, void *buf,
-+			    u8 *oob)
-+{
-+	struct mtd_oob_ops ops = {};
-+	loff_t offs = (loff_t)block * ss->erase_size +
-+		      (loff_t)page * ss->page_size;
-+	int ret;
-+
-+	ops.mode = MTD_OPS_PLACE_OOB;
-+	ops.len = ss->page_size;
-+	ops.ooblen = ss->oob_size;
-+	ops.datbuf = buf;
-+	ops.oobbuf = oob;
-+
-+	ret = mtd_read_oob(ss->mtd, offs, &ops);
-+	if (ret && !mtd_is_bitflip(ret))
-+		return ret;
-+
-+	if (ops.retlen != ss->page_size || ops.oobretlen != ss->oob_size)
-+		return -EIO;
-+
-+	return 0;
-+}
-+
-+#ifdef CONFIG_SUNXI_NAND_SECURE_STORAGE_ETHADDR
-+static u32 ss_page_sum(const void *buf, size_t len)
-+{
-+	const u8 *bytes = buf;
-+	u32 sum = SS_EMPTY_SUM;
-+	size_t i;
-+
-+	for (i = 0; i < len / sizeof(u32); i++)
-+		sum += get_unaligned_le32(bytes + i * sizeof(u32));
-+
-+	return sum;
-+}
-+
-+static int ss_read_page(struct ss_info *ss, u32 block, u32 page, void *buf,
-+			u8 *oob, u32 len)
-+{
-+	u32 sum;
-+	int ret;
-+
-+	ret = ss_read_ecc_page(ss, block, page, buf, oob);
-+	if (ret)
-+		return ret;
-+
-+	if (!ss_oob_has_magic(oob))
-+		return -ENOENT;
-+
-+	sum = ss_page_sum(buf, len);
-+	if (sum != get_unaligned_be32(oob + SS_OOB_CHECKSUM_OFF))
-+		return -EBADMSG;
-+	if (sum == SS_EMPTY_SUM)
-+		return -ENODATA;
-+
-+	return 0;
-+}
-+
-+static int ss_read_replicated_page(struct ss_info *ss, u32 block, u32 page,
-+				   void *buf, u8 *oob, u32 len)
-+{
-+	int ret = -ENOENT;
-+
-+	for (; page < ss->pages_per_block; page += SS_ITEMS_PER_BLOCK) {
-+		ret = ss_read_page(ss, block, page, buf, oob, len);
-+		if (!ret)
-+			return 0;
-+	}
-+
-+	return ret;
-+}
-+#endif
-+
-+static bool ss_is_secure_block(struct ss_info *ss, u32 block, void *pagebuf,
-+			       u8 *oob)
-+{
-+	if (ss_read_ecc_page(ss, block, 0, pagebuf, oob))
-+		return false;
-+
-+	return ss_oob_has_magic(oob);
-+}
-+
-+static void ss_default_uboot_range(struct ss_info *ss)
-+{
-+	u32 block_size = ss->erase_size;
-+	u32 uboot_blocks;
-+
-+	if (ss->erase_size <= SS_SMALL_NAND_ALWAYS_BLOCK_SIZE ||
-+	    (ss->erase_size <= SS_SMALL_NAND_MAX_BLOCK_SIZE &&
-+	     ss->pages_per_block <= 128)) {
-+		if (block_size < SS_SMALL_NAND_MIN_BLOCK_SIZE)
-+			block_size = SS_SMALL_NAND_MIN_BLOCK_SIZE;
-+		block_size = roundup_pow_of_two(block_size);
-+
-+		ss->uboot_start_block = SS_SMALL_NAND_UBOOT_START;
-+		uboot_blocks = SS_SMALL_NAND_UBOOT_SIZE / block_size;
-+	} else if (ss->erase_size <= SS_SMALL_NAND_MAX_BLOCK_SIZE) {
-+		ss->uboot_start_block = SS_BIG_NAND_UBOOT_START;
-+		uboot_blocks = SS_BIG_NAND_1M_UBOOT_BLOCKS;
-+	} else if (ss->erase_size <= SS_MEDIUM_NAND_MAX_BLOCK_SIZE) {
-+		ss->uboot_start_block = SS_BIG_NAND_UBOOT_START;
-+		uboot_blocks = SS_BIG_NAND_2M_UBOOT_BLOCKS;
-+	} else {
-+		ss->uboot_start_block = SS_BIG_NAND_UBOOT_START;
-+		uboot_blocks = SS_BIG_NAND_MIN_UBOOT_BLOCKS;
-+	}
-+
-+	ss->uboot_next_block = ss->uboot_start_block + uboot_blocks;
-+}
-+
-+static void ss_default_spl_layout(struct ss_info *ss)
-+{
-+	ss->spl_copy_blocks =
-+		DIV_ROUND_UP(SS_SPL_PAGE_CNT_PER_COPY, ss->pages_per_block);
-+
-+	/*
-+	 * The SPL-copy writer silently stops once the next SPL copy would
-+	 * overlap U-Boot proper. Keep the same floor division here.
-+	 */
-+	if (ss->spl_copy_blocks)
-+		ss->spl_copy_count =
-+			ss->uboot_start_block / ss->spl_copy_blocks;
-+}
-+
-+static int ss_scan_blocks(struct ss_info *ss)
-+{
-+	struct mtd_info *mtd;
-+	u64 total_blocks;
-+	u32 block, end_block;
-+	int ret;
-+
-+	nand_init();
-+
-+	mtd = get_nand_dev_by_index(0);
-+	if (!mtd)
-+		return -ENODEV;
-+	if (!mtd->writesize || !mtd->erasesize || !mtd->oobsize)
-+		return -EINVAL;
-+	if (mtd_mod_by_ws(mtd->erasesize, mtd))
-+		return -EINVAL;
-+	if (mtd->oobsize < SS_OOB_MAGIC_SIZE)
-+		return -EINVAL;
-+	if (IS_ENABLED(CONFIG_SUNXI_NAND_SECURE_STORAGE_ETHADDR) &&
-+	    mtd->oobsize < SS_OOB_CHECKSUM_SIZE)
-+		return -EINVAL;
-+	if (!nand_is_slc(mtd_to_nand(mtd)))
-+		return -EOPNOTSUPP;
-+
-+	memset(ss, 0, sizeof(*ss));
-+	ss->mtd = mtd;
-+	ss->page_size = mtd->writesize;
-+	ss->oob_size = mtd->oobsize;
-+	ss->erase_size = mtd->erasesize;
-+	ss->pages_per_block = mtd_div_by_ws(mtd->erasesize, mtd);
-+	ss_default_uboot_range(ss);
-+	ss_default_spl_layout(ss);
-+
-+	ALLOC_CACHE_ALIGN_BUFFER(u8, pagebuf, ss->page_size);
-+	ALLOC_CACHE_ALIGN_BUFFER(u8, oob, ss->oob_size);
-+
-+	total_blocks = mtd_div_by_eb(mtd->size, mtd);
-+	end_block = min_t(u64, total_blocks, SS_SCAN_END_BLOCK);
-+
-+	if (ss->uboot_next_block >= end_block)
-+		return -ENOENT;
-+
-+	for (block = ss->uboot_next_block; block < end_block; block++) {
-+		ret = mtd_block_isbad(mtd, (loff_t)block * ss->erase_size);
-+		if (ret > 0)
-+			continue;
-+		if (ret < 0)
-+			return ret;
-+		if (!ss_is_secure_block(ss, block, pagebuf, oob))
-+			continue;
-+
-+		if (!ss->marker_count)
-+			ss->first_block = block;
-+		ss->last_block = block;
-+		ss->marker_count++;
-+	}
-+
-+	if (!ss->marker_count)
-+		return -ENOENT;
-+
-+	return 0;
-+}
-+
-+static int ss_find_blocks(struct ss_info *ss)
-+{
-+	static struct ss_info cached_ss;
-+	static bool cached;
-+	int ret;
-+
-+	if (cached) {
-+		*ss = cached_ss;
-+		return 0;
-+	}
-+
-+	ret = ss_scan_blocks(ss);
-+	if (ret)
-+		return ret;
-+
-+	cached_ss = *ss;
-+	cached = true;
-+
-+	return 0;
-+}
-+
-+int sunxi_nand_secure_storage_locate(struct sunxi_nand_secure_storage_info *info)
-+{
-+	struct ss_info ss;
-+	int ret;
-+
-+	if (!info)
-+		return -EINVAL;
-+
-+	ret = ss_find_blocks(&ss);
-+	if (ret)
-+		return ret;
-+
-+	memset(info, 0, sizeof(*info));
-+	info->mtd_name = ss.mtd->name;
-+	info->mtd_size = ss.mtd->size;
-+	info->spl_copy_size = (u64)ss.spl_copy_blocks * ss.erase_size;
-+	info->spl_copy_count = ss.spl_copy_count;
-+	info->uboot_offset = (u64)ss.uboot_start_block * ss.erase_size;
-+	info->uboot_size = (u64)(ss.uboot_next_block - ss.uboot_start_block) *
-+			   ss.erase_size;
-+	info->secure_offset = (u64)ss.first_block * ss.erase_size;
-+	info->secure_size = (u64)(ss.last_block - ss.first_block + 1) *
-+			    ss.erase_size;
-+	info->secure_end = (u64)(ss.last_block + 1) * ss.erase_size;
-+
-+	return 0;
-+}
-+
-+#ifdef CONFIG_SUNXI_NAND_SECURE_STORAGE_ETHADDR
-+static int ss_read_item(struct ss_info *ss, u32 item, void *buf)
-+{
-+	u32 pages_per_item = SS_ITEM_SIZE / ss->page_size;
-+	u32 page_len = pages_per_item == 1 ? SS_ITEM_SIZE : ss->page_size;
-+	u32 page;
-+	int ret;
-+
-+	if (ss->page_size > SS_ITEM_SIZE || SS_ITEM_SIZE % ss->page_size)
-+		return -EINVAL;
-+	if ((item + 1) * pages_per_item > ss->pages_per_block)
-+		return -EINVAL;
-+
-+	ALLOC_CACHE_ALIGN_BUFFER(u8, oob, ss->oob_size);
-+
-+	for (page = 0; page < pages_per_item; page++) {
-+		u8 *dst = (u8 *)buf + page * ss->page_size;
-+		u32 raw_page = item * pages_per_item + page;
-+
-+		ret = ss_read_replicated_page(ss, ss->first_block, raw_page,
-+					      dst, oob, page_len);
-+		if (ret && ss->last_block != ss->first_block)
-+			ret = ss_read_replicated_page(ss, ss->last_block,
-+						      raw_page, dst, oob,
-+						      page_len);
-+		if (ret)
-+			return ret;
-+	}
-+
-+	return 0;
-+}
-+
-+static bool ss_object_name_matches(const struct ss_object *object,
-+				   const char *key)
-+{
-+	size_t key_len = strlen(key);
-+	size_t name_len = strnlen(object->name, SS_NAME_LEN);
-+
-+	return name_len == key_len && !memcmp(object->name, key, key_len);
-+}
-+
-+static int ss_find_item(const char *map, const char *key, u32 *item)
-+{
-+	size_t key_len = strlen(key);
-+	u32 pos = 0;
-+	u32 nr = 1;
-+
-+	if (key_len >= SS_NAME_LEN)
-+		return -ENAMETOOLONG;
-+
-+	while (pos < SS_ITEM_SIZE && map[pos]) {
-+		const char *entry = map + pos;
-+		const char *colon;
-+		size_t entry_len = strnlen(entry, SS_ITEM_SIZE - pos);
-+
-+		if (entry_len == SS_ITEM_SIZE - pos)
-+			return -EINVAL;
-+		if (nr > SS_MAP_MAX_ENTRIES)
-+			return -ENOSPC;
-+
-+		colon = memchr(entry, ':', entry_len);
-+		if (!colon || colon == entry || colon + 1 == entry + entry_len)
-+			return -EINVAL;
-+
-+		if (colon - entry == key_len && !memcmp(entry, key, key_len)) {
-+			*item = nr;
-+			return 0;
-+		}
-+
-+		pos += entry_len + 1;
-+		nr++;
-+	}
-+
-+	return -ENOENT;
-+}
-+
-+static int ss_get_payload(const void *item, const char *key, const u8 **payload,
-+			  u32 *len)
-+{
-+	const struct ss_object *object = item;
-+	u32 actual_len, stored_crc, crc;
-+
-+	if (ss_get_le32(item, offsetof(struct ss_object, magic)) !=
-+	    SS_STORE_MAGIC)
-+		return -EINVAL;
-+
-+	stored_crc = ss_get_le32(item, offsetof(struct ss_object, crc));
-+	crc = crc32(0, item, offsetof(struct ss_object, crc));
-+	if (crc != stored_crc)
-+		return -EBADMSG;
-+	if (!ss_object_name_matches(object, key))
-+		return -ENOENT;
-+
-+	actual_len = ss_get_le32(item, offsetof(struct ss_object, actual_len));
-+	if (actual_len > SS_STORE_MAX_LEN)
-+		return -EINVAL;
-+
-+	*payload = ((const struct ss_object *)item)->data;
-+	*len = actual_len;
-+
-+	return 0;
-+}
-+
-+static bool ss_parse_mac(const u8 *buf, u32 len, u8 *mac)
-+{
-+	char text[ARP_HLEN_ASCII + 1];
-+	size_t text_len;
-+
-+	text_len = strnlen((const char *)buf, len);
-+	if (!text_len || text_len > ARP_HLEN_ASCII)
-+		return false;
-+
-+	memcpy(text, buf, text_len);
-+	text[text_len] = '\0';
-+	string_to_enetaddr(text, mac);
-+
-+	return is_valid_ethaddr(mac);
-+}
-+
-+static int ss_read_mac(const char *key, u8 *mac)
-+{
-+	struct ss_info ss;
-+	const u8 *payload;
-+	u32 item, len;
-+	int ret;
-+
-+	ret = ss_find_blocks(&ss);
-+	if (ret)
-+		return ret;
-+
-+	ALLOC_CACHE_ALIGN_BUFFER(u8, itembuf, SS_ITEM_SIZE);
-+
-+	ret = ss_read_item(&ss, 0, itembuf);
-+	if (ret)
-+		return ret;
-+
-+	ret = ss_find_item((const char *)itembuf, key, &item);
-+	if (ret)
-+		return ret;
-+
-+	ret = ss_read_item(&ss, item, itembuf);
-+	if (ret)
-+		return ret;
-+
-+	ret = ss_get_payload(itembuf, key, &payload, &len);
-+	if (ret)
-+		return ret;
-+
-+	return ss_parse_mac(payload, len, mac) ? 0 : -EINVAL;
-+}
-+
-+void sunxi_nand_secure_storage_setup_ethaddr(void)
-+{
-+	const char *key = CONFIG_SUNXI_NAND_SECURE_STORAGE_ETHADDR_KEY;
-+	static bool attempted;
-+	u8 mac[ARP_HLEN];
-+	int ret;
-+
-+	if (attempted || !key[0] || eth_env_get_enetaddr("ethaddr", mac))
-+		return;
-+
-+	attempted = true;
-+
-+	ret = ss_read_mac(key, mac);
-+	if (ret) {
-+		printf("Secure storage: failed to read key '%s' (%d)\n",
-+		       key, ret);
-+		return;
-+	}
-+
-+	eth_env_set_enetaddr("ethaddr", mac);
-+	printf("Secure storage mac: %pM\n", mac);
-+}
-+#endif
-diff --git a/board/sunxi/nand_secure_storage.h b/board/sunxi/nand_secure_storage.h
-new file mode 100644
-index 00000000000..45b20659c0b
---- /dev/null
-+++ b/board/sunxi/nand_secure_storage.h
-@@ -0,0 +1,42 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+/*
-+ * Allwinner NAND secure storage helpers.
-+ */
-+
-+#ifndef SUNXI_NAND_SECURE_STORAGE_H
-+#define SUNXI_NAND_SECURE_STORAGE_H
-+
-+#include <linux/errno.h>
-+#include <linux/kconfig.h>
-+#include <linux/types.h>
-+
-+struct sunxi_nand_secure_storage_info {
-+	const char *mtd_name;
-+	u64 mtd_size;
-+	u64 spl_copy_size;
-+	u32 spl_copy_count;
-+	u64 uboot_offset;
-+	u64 uboot_size;
-+	u64 secure_offset;
-+	u64 secure_size;
-+	u64 secure_end;
-+};
-+
-+#if IS_ENABLED(CONFIG_SUNXI_NAND_SECURE_STORAGE) && !defined(CONFIG_XPL_BUILD)
-+int sunxi_nand_secure_storage_locate(struct sunxi_nand_secure_storage_info *info);
-+#else
-+static inline int
-+sunxi_nand_secure_storage_locate(struct sunxi_nand_secure_storage_info *info)
-+{
-+	return -ENODEV;
-+}
-+#endif
-+
-+#if IS_ENABLED(CONFIG_SUNXI_NAND_SECURE_STORAGE_ETHADDR) && \
-+	!defined(CONFIG_XPL_BUILD)
-+void sunxi_nand_secure_storage_setup_ethaddr(void);
-+#else
-+static inline void sunxi_nand_secure_storage_setup_ethaddr(void) {}
-+#endif
-+
-+#endif
 -- 
-2.53.0
+2.43.0
 
