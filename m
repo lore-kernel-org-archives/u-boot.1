@@ -4,102 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2AD83CD37AC
-	for <u-boot@archiver.kernel.org>; Mon, 11 May 2026 12:51:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8FB00CD37BE
+	for <u-boot@archiver.kernel.org>; Mon, 11 May 2026 12:51:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 63CBD83C5E;
+	by phobos.denx.de (Postfix) with ESMTP id A290083E36;
 	Mon, 11 May 2026 14:50:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=infineon.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="FdHBuJeC";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=infineon.com header.i=@infineon.com header.b="ABHj19KO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8160C84706; Mon, 11 May 2026 10:59:11 +0200 (CEST)
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id C62A38485A; Mon, 11 May 2026 12:28:34 +0200 (CEST)
+Received: from smtp2.infineon.com (smtp2.infineon.com
+ [IPv6:2a00:18f0:1e00:4::4])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7C043846A5
- for <u-boot@lists.denx.de>; Mon, 11 May 2026 10:59:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=canonical.com
+ by phobos.denx.de (Postfix) with ESMTPS id 1651183A91
+ for <u-boot@lists.denx.de>; Mon, 11 May 2026 12:28:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=infineon.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=aristo.chen@canonical.com
-Received: from mail-pf1-f200.google.com (mail-pf1-f200.google.com
- [209.85.210.200])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 277E53F427
- for <u-boot@lists.denx.de>; Mon, 11 May 2026 08:59:09 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1778489949;
- bh=S6S3tmCtghAcRufgbPHFJ9gmk8ioXC1goBcILuNfLMI=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=FdHBuJeCtMEVsXi1SRZ0sGWz5VGi3MGPrPUBKU8Dh4wO8MKxaEW2LvInxpDPXIguk
- 5wPxhHgThLoWtbBUxjbULYLMgFJ2oge0lcHXu2PXArjaN1N0aChiCf3RcQ2HWpMm1n
- 38O13XrlGG2AywHmOTVRrQzJyAwzA9QQM6eiPzfLo+1UgidhiOx6yNecSE8V0iUzOg
- nOJSHNRP8Xm9m9hBKJF/Q5M2q1oHicHkg2GkhCSVHLABYHDtgALYX8ldfkM6lspMkq
- maa9xUyDfc44eoCXHv+qVcAwJVimVcMy3AF0nSubIiPIxZQX1SQmuE8/Q52CDXIb+c
- AhXtvK/kW66BNqZCbOMORbF3JARTGOasbivCEW4QKgENjokxmCNBBGT+aF4yRAS+7A
- c3D3BWxbJnm8k1qycSF+wpi6FiCUw+p/F8PBrS19btJtteg/zcd74BhoTu47FGknEv
- Dj7uXEyb4HDkbHLEJxBF99b1IYkzRbSE3QinhZtQi7JLardqU99nhr5ItHmxnyqD4A
- BNBBmX+s7AEEkH5BV3JHoZYnDBbFxX6zn/YI5eJ1iXSnGapM2M1xB8d8VwLVplqaPB
- jkPyweILNTbcnWlJFhjl/RmDRPG98n4aw8iU/0trpX4eYL8i83IiBQF6U+yLx/XyuY
- P5S0gpE/bJzBz5vObQkZBJEQ=
-Received: by mail-pf1-f200.google.com with SMTP id
- d2e1a72fcca58-83565161a6eso2313495b3a.1
- for <u-boot@lists.denx.de>; Mon, 11 May 2026 01:59:09 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778489947; x=1779094747;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=S6S3tmCtghAcRufgbPHFJ9gmk8ioXC1goBcILuNfLMI=;
- b=cYgiVUjeuWlkrnd0An/cqospRgIVkC3nO9UIz/itsHPRRGKqJF1MrBVK9EEOM3iJAC
- GIZhzyPxNBOL0F1qAhZY5TqEvxabA8g5jPjHs43uHiFxeVhkofww9t5CSd9L3J1TyUcO
- 2hf9PDE5+B16PK7GjkwtQb9e9i5WOxkJddu7exgO43ndqxatwaJWgteeJEYKcvr41YqX
- VM38fUZuprdox48WwSlmAw3OHVCaedxG77OCr+lGePG9dryiznVpZqN/Z1wZzP+l6Yl0
- +qPOkOM8WgwgLWFECH91gv+LHo+5813svC/KXIC7b/ezpCoZFTjVTaYBxl0l749eClUr
- vb9A==
-X-Gm-Message-State: AOJu0YztnUoey9ISycB+hxWW47DcEPEt4sM73lWDEFfQRSBOoYNQP9hE
- RRCx3fL9jhSq/FxOx6zlt20ElGVXGoQv7/nYJTXQ0BQvAX45g7eJNPZscssNm7TYwec5ggJzdBy
- g2X9/+mmghsp54DYfFjeuyljkghh9sIjCMN19tmlc+N/TiDTdCTdxI25xDKI9sojCwnTt5svVYo
- mvnRq1gicD
-X-Gm-Gg: Acq92OHsTNha4Iav7WIgMHtlkt1nO4WRsrJZUPZ5flU2IcV+L4u8eN1cAXZlCusru6E
- LFhpdO7ClS9X8d+YgXSRd961DWJA/wTzKl8WllsdO4C6maOwgjEvauNjVGHgHV9zPlpTJLUUKvb
- V7bHYhO0BwFaZn5xRh02qt0HMQ4ukVLd56kR3fmLMaHuL9l444NFChtn71SzLlxiboJ/XYi0xt/
- WpZhsAg28ps7EHOWed6PFBLvTq/2FjeA2jEQDEtO/ne7L47d5j1ja63s9oEu6NEOWxwK8cSb9yf
- 9v2dwgFaTYO/VvS5Xnq780QQfWAiYEGAKhhq9TipyWkAgkazUHicP0HXY+647ukkxsqyO3Yo73I
- Ih2J6kGoLZHMJqtdUgQl+T8YNQmjDrtcU3XMyA+ie6JQm5+vZKgftqbJu9D6PLbTI0+dnT4nTHG
- 3Z4MVH49NUjaxdjD+K2+QjS1xNug==
-X-Received: by 2002:a05:6a00:3e22:b0:82f:7888:e2fa with SMTP id
- d2e1a72fcca58-83bb7fb5438mr14346691b3a.17.1778489947350; 
- Mon, 11 May 2026 01:59:07 -0700 (PDT)
-X-Received: by 2002:a05:6a00:3e22:b0:82f:7888:e2fa with SMTP id
- d2e1a72fcca58-83bb7fb5438mr14346660b3a.17.1778489946868; 
- Mon, 11 May 2026 01:59:06 -0700 (PDT)
-Received: from noble-uboot.tail872496.ts.net
- (124-218-37-86.cm.dynamic.apol.com.tw. [124.218.37.86])
- by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-839679c80e7sm24034367b3a.31.2026.05.11.01.59.04
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 11 May 2026 01:59:06 -0700 (PDT)
-From: Aristo Chen <aristo.chen@canonical.com>
-To: u-boot@lists.denx.de
-Cc: Aristo Chen <aristo.chen@canonical.com>,
- Huang Jianan <jnhuang95@gmail.com>, Tom Rini <trini@konsulko.com>,
- Joao Marcos Costa <joaomarcos.costa@bootlin.com>,
- Richard Genoud <richard.genoud@bootlin.com>,
- Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>, linux-erofs@lists.ozlabs.org
-Subject: [PATCH v1 1/1] test: fs: Use shared generate_file from utils
-Date: Mon, 11 May 2026 08:58:50 +0000
-Message-ID: <20260511085857.3933053-1-aristo.chen@canonical.com>
-X-Mailer: git-send-email 2.43.0
+ spf=pass smtp.mailfrom=Takahiro.Kuwano@infineon.com
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=infineon.com; i=@infineon.com; q=dns/txt; s=IFXMAIL;
+ t=1778495310; x=1810031310;
+ h=from:to:cc:subject:date:message-id:references:
+ in-reply-to:content-transfer-encoding:mime-version;
+ bh=Py6HPE7MJvW94WcgaRWM5uE/2PILz1bS1cRwU/b2G8k=;
+ b=ABHj19KORAKnrit9IZnXf9lkqwVJU84k2PMyTu9XQwMm/PChBZgIa5S7
+ nogNEeu1X0Sv4o2G1IeUrduko3nzD9RyOMkNl+JPozlxh/ZplurEBSSlL
+ iAURcwdEXH8Ffi0mLniCQ4swN9yEZTS2WEtI0VDhos/hroE1tEQeEVMSB Y=;
+X-CSE-ConnectionGUID: eJe+4BNUTWeY7LxqbQ1P1A==
+X-CSE-MsgGUID: v22Cm222SviqWlJF2QaqYg==
+X-IronPort-AV: E=McAfee;i="6800,10657,11782"; a="157076752"
+X-IronPort-AV: E=Sophos;i="6.23,228,1770591600"; d="scan'208";a="157076752"
+X-Amp-Result: SKIPPED(no attachment in message)
+Received: from unknown (HELO MUCSE812.infineon.com) ([172.23.29.38])
+ by smtp2.infineon.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 11 May 2026 12:28:29 +0200
+Received: from MUCSE817.infineon.com (172.23.29.43) by MUCSE812.infineon.com
+ (172.23.29.38) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Mon, 11 May
+ 2026 12:28:29 +0200
+Received: from MUCSE815.infineon.com (172.23.29.41) by MUCSE817.infineon.com
+ (172.23.29.43) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Mon, 11 May
+ 2026 12:28:29 +0200
+Received: from MUCSE815.infineon.com ([fe80::b54c:c0bd:546c:c9be]) by
+ MUCSE815.infineon.com ([fe80::b54c:c0bd:546c:c9be%12]) with mapi id
+ 15.02.2562.037; Mon, 11 May 2026 12:28:29 +0200
+From: <Takahiro.Kuwano@infineon.com>
+To: <vjardin@free.fr>, <u-boot@lists.denx.de>
+CC: <christoph.reiter@evk.biz>, <dlechner@baylibre.com>,
+ <flaviu.nistor@gmail.com>, <jeyu@issi.com>,
+ <marek.vasut+renesas@mailbox.org>, <miquel.raynal@bootlin.com>,
+ <yangshiji66@outlook.com>, <ssunkkan@gmail.com>, <trini@konsulko.com>,
+ <vigneshr@ti.com>
+Subject: RE: [PATCH v1] mtd: spi-nor: Add gd55lb02gf chips
+Thread-Topic: [PATCH v1] mtd: spi-nor: Add gd55lb02gf chips
+Thread-Index: AQHc4Mt1nus7H+92dk68A3upwZMt9bYIkXXQ
+Date: Mon, 11 May 2026 10:28:29 +0000
+Message-ID: <77e1b83ec3d549d0a2fe2816241446c7@infineon.com>
+References: <20260510222140.603755-1-vjardin@free.fr>
+In-Reply-To: <20260510222140.603755-1-vjardin@free.fr>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.161.6.196]
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Mon, 11 May 2026 14:50:48 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -117,148 +93,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-test_fs/test_erofs.py and test_fs/test_squashfs/sqfs_common.py both
-defined a generate_file() helper that writes a file of a given size
-filled with 'x'. The two functions were functionally identical and
-differed only in parameter names and docstrings.
+Hi,
+>=20
+> Add GigaDevice GD55LB02GF (256 MiB, JEDEC 0xc8 0x60 0x1c) to the
+> spi-nor ID table.
+>=20
+> Same die family as the existing gd55lb02g entry but a distinct memtype
+> byte (0x60 versus 0x67), so the existing entry does not match.
+>=20
+0xc8671c is for GD55LB02GE and there is duplicate entry appears in the last
+part of GigaDevice entries. Besides SPI_NOR_HAS_TB flag is missing in the
+"gd55lb02g" entry...
 
-Move the helper into the existing test/py/utils.py module, which is
-the established home for generic test utilities (md5sum_file,
-PersistentRandomFile, attempt_to_open_file). Update both call sites
-to use it.
+> Signed-off-by: Vincent Jardin <vjardin@free.fr>
+>=20
+> ---
+>=20
+>  drivers/mtd/spi/spi-nor-ids.c | 2 ++
+>  1 file changed, 2 insertions(+)
+>=20
+> diff --git a/drivers/mtd/spi/spi-nor-ids.c b/drivers/mtd/spi/spi-nor-ids.=
+c
+> index c0fa98424aa..50f6dd3e5c4 100644
+> --- a/drivers/mtd/spi/spi-nor-ids.c
+> +++ b/drivers/mtd/spi/spi-nor-ids.c
+> @@ -191,6 +191,8 @@ const struct flash_info spi_nor_ids[] =3D {
+>         SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_4B_OPCODES)},
+>         {INFO("gd55lb02g", 0xc8671C, 0, 64 * 1024, 4096,        SECT_4K |
+>         SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_4B_OPCODES)},
+> +       {INFO("gd55lb02gf", 0xc8601C, 0, 64 * 1024, 4096,       SECT_4K |
+> +       SPI_NOR_HAS_LOCK | SPI_NOR_4B_OPCODES)},
 
-Signed-off-by: Aristo Chen <aristo.chen@canonical.com>
----
- test/py/tests/test_fs/test_erofs.py           | 16 ++++----------
- .../test_fs/test_squashfs/sqfs_common.py      | 22 +++++--------------
- test/py/utils.py                              | 13 +++++++++++
- 3 files changed, 22 insertions(+), 29 deletions(-)
+Could you create a new entry just after "gd55lb02ge" with the same flags wi=
+th
+it? GD55LB02G'F' should be a successor chip of GD55LB02G'E'.
 
-diff --git a/test/py/tests/test_fs/test_erofs.py b/test/py/tests/test_fs/test_erofs.py
-index a2bb6b505f2..cec803256ac 100644
---- a/test/py/tests/test_fs/test_erofs.py
-+++ b/test/py/tests/test_fs/test_erofs.py
-@@ -6,19 +6,11 @@ import os
- import pytest
- import shutil
- import subprocess
-+import utils
- 
- EROFS_SRC_DIR = 'erofs_src_dir'
- EROFS_IMAGE_NAME = 'erofs.img'
- 
--def generate_file(name, size):
--    """
--    Generates a file filled with 'x'.
--    """
--    content = 'x' * size
--    file = open(name, 'w')
--    file.write(content)
--    file.close()
--
- def make_erofs_image(build_dir):
-     """
-     Makes the EROFS images used for the test.
-@@ -36,15 +28,15 @@ def make_erofs_image(build_dir):
-     os.makedirs(root)
- 
-     # 4096: uncompressed file
--    generate_file(os.path.join(root, 'f4096'), 4096)
-+    utils.generate_file(os.path.join(root, 'f4096'), 4096)
- 
-     # 7812: Compressed file
--    generate_file(os.path.join(root, 'f7812'), 7812)
-+    utils.generate_file(os.path.join(root, 'f7812'), 7812)
- 
-     # sub-directory with a single file inside
-     subdir_path = os.path.join(root, 'subdir')
-     os.makedirs(subdir_path)
--    generate_file(os.path.join(subdir_path, 'subdir-file'), 100)
-+    utils.generate_file(os.path.join(subdir_path, 'subdir-file'), 100)
- 
-     # symlink
-     os.symlink('subdir', os.path.join(root, 'symdir'))
-diff --git a/test/py/tests/test_fs/test_squashfs/sqfs_common.py b/test/py/tests/test_fs/test_squashfs/sqfs_common.py
-index d1621dcce3a..b366bde5f49 100644
---- a/test/py/tests/test_fs/test_squashfs/sqfs_common.py
-+++ b/test/py/tests/test_fs/test_squashfs/sqfs_common.py
-@@ -5,6 +5,7 @@
- import os
- import shutil
- import subprocess
-+import utils
- 
- """ standard test images table: Each table item is a key:value pair
- representing the output image name and its respective mksquashfs options.
-@@ -66,19 +67,6 @@ def init_standard_table():
-     for key, value in zip(STANDARD_TABLE.keys(), opts_list):
-         STANDARD_TABLE[key] = value
- 
--def generate_file(file_name, file_size):
--    """ Generates a file filled with 'x'.
--
--    Args:
--        file_name: the file's name.
--        file_size: the content's length and therefore the file size.
--    """
--    content = 'x' * file_size
--
--    file = open(file_name, 'w')
--    file.write(content)
--    file.close()
--
- def generate_sqfs_src_dir(build_dir):
-     """ Generates the source directory used to make the SquashFS images.
- 
-@@ -107,20 +95,20 @@ def generate_sqfs_src_dir(build_dir):
- 
-     # 4096: minimum block size
-     file_name = 'f4096'
--    generate_file(os.path.join(root, file_name), 4096)
-+    utils.generate_file(os.path.join(root, file_name), 4096)
- 
-     # 5096: minimum block size + 1000 chars (fragment)
-     file_name = 'f5096'
--    generate_file(os.path.join(root, file_name), 5096)
-+    utils.generate_file(os.path.join(root, file_name), 5096)
- 
-     # 1000: less than minimum block size (fragment only)
-     file_name = 'f1000'
--    generate_file(os.path.join(root, file_name), 1000)
-+    utils.generate_file(os.path.join(root, file_name), 1000)
- 
-     # sub-directory with a single file inside
-     subdir_path = os.path.join(root, 'subdir')
-     os.makedirs(subdir_path)
--    generate_file(os.path.join(subdir_path, 'subdir-file'), 100)
-+    utils.generate_file(os.path.join(subdir_path, 'subdir-file'), 100)
- 
-     # symlink (target: sub-directory)
-     os.symlink('subdir', os.path.join(root, 'sym'))
-diff --git a/test/py/utils.py b/test/py/utils.py
-index ca80e4b0b0a..e8971502509 100644
---- a/test/py/utils.py
-+++ b/test/py/utils.py
-@@ -51,6 +51,19 @@ def md5sum_file(fn, max_length=None):
-         data = fh.read(*params)
-     return md5sum_data(data)
- 
-+def generate_file(file_name, file_size):
-+    """ Generates a file filled with 'x'.
-+
-+    Args:
-+        file_name: the file's name.
-+        file_size: the content's length and therefore the file size.
-+    """
-+    content = 'x' * file_size
-+
-+    file = open(file_name, 'w')
-+    file.write(content)
-+    file.close()
-+
- class PersistentRandomFile:
-     """Generate and store information about a persistent file containing
-     random data."""
--- 
-2.43.0
+Thanks,
+Takahiro
 
+>         {INFO("gd25lf80", 0xc86314, 0, 64 * 1024, 16,   SECT_4K |
+>         SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK)},
+>         {INFO("gd25lf16", 0xc86315, 0, 64 * 1024, 32,   SECT_4K |
+> --
+> 2.43.0
+>=20
+> base-commit: bfe90a308a94caa9d855440683521ff04122ae2a
+> branch: for-upstream/spi-nor-gd55lb02gf
