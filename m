@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49217CD37B5
-	for <u-boot@archiver.kernel.org>; Mon, 11 May 2026 09:07:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20249CD37AC
+	for <u-boot@archiver.kernel.org>; Mon, 11 May 2026 09:08:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CA701846BD;
-	Mon, 11 May 2026 11:07:49 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 90C118485A;
+	Mon, 11 May 2026 11:08:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="c2rVRixZ";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="q1g23Dh9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ADDDD8484C; Mon, 11 May 2026 11:07:48 +0200 (CEST)
-Received: from sea.source.kernel.org (sea.source.kernel.org
- [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
+ id B1ECF8485D; Mon, 11 May 2026 11:08:05 +0200 (CEST)
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BFBB3846AA
- for <u-boot@lists.denx.de>; Mon, 11 May 2026 11:07:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A98AA846AA
+ for <u-boot@lists.denx.de>; Mon, 11 May 2026 11:08:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mkorpershoek@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 363C040964;
- Mon, 11 May 2026 09:07:45 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9D3E9C2BCB0;
- Mon, 11 May 2026 09:07:44 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id A10FF6001A;
+ Mon, 11 May 2026 09:08:00 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E70E7C2BCB0;
+ Mon, 11 May 2026 09:07:59 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1778490465;
+ s=k20201202; t=1778490480;
  bh=wwjRKBtqxd1RvDsUvWbVKUNzCKTdRddH2jCI+JGtwHI=;
  h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
- b=c2rVRixZWSTdyTJCIfrvwY09XA2n3hL1bccVs3Ogvi238LYZpr9OUOVEekfMnsUU+
- z56Unq5W1A9b/s6Ti9rk5RriE5DhNxnwK5eURT4BLQhHzLDti7sMSfOD2bib/ZQFdE
- 3WiWTjLNh8tYYtIOyPa9hgVdsiZc+OA0EiiK7vYoyRhxv0L9LfQn8dI7/qpce5dmg6
- 9vSct8CrnMEbJP5qzBWnSWPhVxrFDzb2szJG3R/ymJKgZ72DS++ED/rHqUgcXg4Pjb
- E/GPJeQyIUPd2JH8W55Gbos/tSbeNmuqpMkDrt9aGp6ScMcGMLoAktQ2i8/8+FNal2
- dQMlknmv5JKGw==
+ b=q1g23Dh9n2Gr93RxMyU2rblalZj0nqDwKdDU/mvpgvRXbcdwLKkL1KWERwZs8fvwN
+ MKifx6gnxg9DUfIATjrbRDB/nk/VkuMm3JVmBsGfYWDZuIl5N4RbwuTsfsoo9ckHSt
+ ZbwSP1VtXmpc9EkEMZHtHHUcGxNusqm5WgPMnLV9DWCVJ38vJGlyRlCcdzAruXrTLH
+ VQesBLOQgVrGp7b6h9P9Lseu39cRfu9jp9nxdHRmfCZpmjXFmnA6r2eGeCrcADuEGE
+ ITbSv4ntSwYPCMCfEwsONOsMc6rf13mQrtdOBxKH2X2WD4TtRWLz/o6r2iJxqYz0nO
+ ergId4boQLEgA==
 From: Mattijs Korpershoek <mkorpershoek@kernel.org>
 To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>, Tom Rini
  <trini@konsulko.com>
-Subject: Re: [PATCH 1/3] usb: dwc3: am62: Staticize and constify driver ops
-In-Reply-To: <20260510171649.56837-1-marek.vasut+renesas@mailbox.org>
+Subject: Re: [PATCH 2/3] usb: dwc3: sti: Staticize and constify driver ops
+In-Reply-To: <20260510171649.56837-2-marek.vasut+renesas@mailbox.org>
 References: <20260510171649.56837-1-marek.vasut+renesas@mailbox.org>
-Date: Mon, 11 May 2026 11:07:42 +0200
-Message-ID: <87y0hquxep.fsf@kernel.org>
+ <20260510171649.56837-2-marek.vasut+renesas@mailbox.org>
+Date: Mon, 11 May 2026 11:07:57 +0200
+Message-ID: <87v7cuuxea.fsf@kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
