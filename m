@@ -4,57 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 291D0CD37B2
-	for <u-boot@archiver.kernel.org>; Sun, 10 May 2026 22:22:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7883CD3427
+	for <u-boot@archiver.kernel.org>; Mon, 11 May 2026 01:57:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 884C8846AC;
-	Mon, 11 May 2026 00:22:18 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=free.fr
+	by phobos.denx.de (Postfix) with ESMTP id D194C846C3;
+	Mon, 11 May 2026 03:57:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=bens.haus
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=free.fr header.i=@free.fr header.b="sRCb7ioK";
+	dkim=pass (2048-bit key; unprotected) header.d=bens.haus header.i=@bens.haus header.b="GSXAM2fK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 00900846D2; Mon, 11 May 2026 00:22:17 +0200 (CEST)
-Received: from smtp1-g21.free.fr (smtp1-g21.free.fr [212.27.42.1])
+ id 98D9F846D1; Mon, 11 May 2026 03:16:41 +0200 (CEST)
+Received: from mail-4317.protonmail.ch (mail-4317.protonmail.ch [185.70.43.17])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3818D846A7
- for <u-boot@lists.denx.de>; Mon, 11 May 2026 00:22:15 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=free.fr
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=vjardin@free.fr
-Received: from localhost.localdomain (unknown [91.160.0.144])
- (Authenticated sender: vjardin@free.fr)
- by smtp1-g21.free.fr (Postfix) with ESMTPSA id 1EDB9B00535;
- Mon, 11 May 2026 00:21:59 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=free.fr;
- s=smtp-20201208; t=1778451734;
- bh=cc4qnew4X0+0dKhu6tQdIhUir4zg8J5FU5wO3PYSKps=;
- h=From:To:Cc:Subject:Date:From;
- b=sRCb7ioKRp/J8d4QrVNwpYl2fCONqvsFfFpkpDssnZHqV0VLgdcOk997IIH/2zYBi
- CNTTcBmKLCGIbBPCYQrn4qBRoGMEmx5tNZETeZY4lyG8xlzgRZ6hjRj2KIqF8URJGk
- TvpuMbHFk3z5apJmaTMcS6IeaXw7irMpIVs86gmHLtBQDP/YiWNd4QQSHAmEPUP2Bz
- FqwS8c6xXH3/NDeAPzQv/ANIWAXKVd22cHDJRYt0eILWmV7/OwvgLx/dU6wJHRY0Al
- svKrlVMi4NavqvrlRLEc9PjDDhPm2v9Jm8vRZn0puqEHKDXAcvL1E781d8UqwEuCFT
- y5iSWgWqgqYIQ==
-From: Vincent Jardin <vjardin@free.fr>
-To: u-boot@lists.denx.de
-Cc: Vincent Jardin <vjardin@free.fr>,
- Christoph Reiter <christoph.reiter@evk.biz>,
- David Lechner <dlechner@baylibre.com>,
- Flaviu Nistor <flaviu.nistor@gmail.com>, Jeffrey Yu <jeyu@issi.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Miquel Raynal <miquel.raynal@bootlin.com>,
- Shiji Yang <yangshiji66@outlook.com>, Ssunk <ssunkkan@gmail.com>,
- Takahiro Kuwano <takahiro.kuwano@infineon.com>,
- Tom Rini <trini@konsulko.com>, Vignesh R <vigneshr@ti.com>
-Subject: [PATCH v1] mtd: spi-nor: Add gd55lb02gf chips
-Date: Mon, 11 May 2026 00:21:03 +0200
-Message-ID: <20260510222140.603755-1-vjardin@free.fr>
-X-Mailer: git-send-email 2.43.0
+ by phobos.denx.de (Postfix) with ESMTPS id 498BC846CA
+ for <u-boot@lists.denx.de>; Mon, 11 May 2026 03:16:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=bens.haus
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=ben@bens.haus
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bens.haus;
+ s=protonmail; t=1778462198; x=1778721398;
+ bh=gsQn2ZMysvyCIMKJc/qIUES/mDba5LXcNySgeCMi9AA=;
+ h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
+ Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
+ Message-ID:BIMI-Selector;
+ b=GSXAM2fK2uYLYCvBg6HuPj2W38RruiuluudsFViCu7ffhM4Pb+mZsi/YIIFuC8uML
+ ufYmNPRxMbYiTVG3YiGdKstq/t/1TbrmIui4s93YdR2nDSoaT6EjpFeOK1ZRctOf4G
+ HP7XWgqUZ/k4PfOgN3MVGuzNRQxKjcdyXCkX+MvzMLsVWA2movXpZZEST5yOsAM/Ra
+ 7/lo5xFBlvjOwIGki+qerAz66shVJsLb7/Ug75dMsBrcUlB1bnkAgVJOZ3mbWRyquM
+ mrrNMQjQskQMUH4e82D1Sc07sW46QN1stwf928yG4sToG6vdMCYOnP6hsgcvUgH1Oe
+ 6KWICst1xityw==
+Date: Mon, 11 May 2026 01:16:33 +0000
+To: Tony Dinh <mibodhi@gmail.com>
+From: Ben Schneider <ben@bens.haus>
+Cc: Quentin Schulz <quentin.schulz@cherry.de>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Subject: Re: v2026.04 crashing on Marvell Armada 3720
+Message-ID: <so1abs7pAg9MrPZOVyW7dGcSFp2m4Tf47UW6T_QYYtgqkQ8DqrHNCfPLytOKux86LMpRM9t3fcv_I1uIYIOkdKGFkH5OZ8cEpueoLEK7iwU=@bens.haus>
+In-Reply-To: <CAJaLiFzyOUV1r0gUAFpgGcQUGzmz_zneiC=AVbAnxKDcOMCvqg@mail.gmail.com>
+References: <IRefanijM8fTzOXeGe-H5hmhRkm7pt4Q83BV6VcWKlWp0s4i8mYcONTQz-IVhvNWlGta4LtnfK7ti6gxlrqq8h8cotgG1S0Fs6_DviAHvyo=@bens.haus>
+ <9b0f2989-5c78-4e74-a691-b873b9bb2649@cherry.de>
+ <ZJ8GNZXD-fYDaXZ4MCGrxvVAtJfaDjWWHRt6LlXWpQJpg3evBb4F-T9KO5yGvmFM3j643wz9PQa4ROK62TL6kKSnBW65XJmBep6yuxh2qUo=@bens.haus>
+ <CAJaLiFzyOUV1r0gUAFpgGcQUGzmz_zneiC=AVbAnxKDcOMCvqg@mail.gmail.com>
+Feedback-ID: 124562356:user:proton
+X-Pm-Message-ID: 517d990862dc4d3b539b101c4b97a91ff0b3467e
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-Mailman-Approved-At: Mon, 11 May 2026 03:57:38 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,34 +70,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add GigaDevice GD55LB02GF (256 MiB, JEDEC 0xc8 0x60 0x1c) to the
-spi-nor ID table.
+Hi Tony,
 
-Same die family as the existing gd55lb02g entry but a distinct memtype
-byte (0x60 versus 0x67), so the existing entry does not match.
+On Saturday, May 9th, 2026 at 4:06 PM, Tony Dinh <mibodhi@gmail.com> wrote:
+>=20
+> But indeed, it's strange that commit 284e1a0 would affect ARCH_MVEBU.
 
-Signed-off-by: Vincent Jardin <vjardin@free.fr>
+That's because I wasn't being careful. The first commit to cause
+problems is actually 217cf65 dm: core: Default to using DEVRES outside of x=
+PL. That change sets DEVRES=3Dy via
+many other options including PINCTRL_ARMADA_37XX=3Dy which makes
+much more sense given my device. With the previous commit, DEVRES was n.
 
----
+Thank you for your help. Let me know what else I can provide.
 
- drivers/mtd/spi/spi-nor-ids.c | 2 ++
- 1 file changed, 2 insertions(+)
+Ben
 
-diff --git a/drivers/mtd/spi/spi-nor-ids.c b/drivers/mtd/spi/spi-nor-ids.c
-index c0fa98424aa..50f6dd3e5c4 100644
---- a/drivers/mtd/spi/spi-nor-ids.c
-+++ b/drivers/mtd/spi/spi-nor-ids.c
-@@ -191,6 +191,8 @@ const struct flash_info spi_nor_ids[] = {
- 	SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_4B_OPCODES)},
- 	{INFO("gd55lb02g", 0xc8671C, 0, 64 * 1024, 4096,	SECT_4K |
- 	SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_4B_OPCODES)},
-+	{INFO("gd55lb02gf", 0xc8601C, 0, 64 * 1024, 4096,	SECT_4K |
-+	SPI_NOR_HAS_LOCK | SPI_NOR_4B_OPCODES)},
- 	{INFO("gd25lf80", 0xc86314, 0, 64 * 1024, 16,	SECT_4K |
- 	SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK)},
- 	{INFO("gd25lf16", 0xc86315, 0, 64 * 1024, 32,	SECT_4K |
--- 
-2.43.0
 
-base-commit: bfe90a308a94caa9d855440683521ff04122ae2a
-branch: for-upstream/spi-nor-gd55lb02gf
