@@ -4,95 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8884CD4840
-	for <u-boot@archiver.kernel.org>; Mon, 11 May 2026 18:11:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3EB3CCD37BE
+	for <u-boot@archiver.kernel.org>; Mon, 11 May 2026 18:13:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DD18483FEC;
-	Mon, 11 May 2026 20:10:59 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 7572683E76;
+	Mon, 11 May 2026 20:13:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=iki.fi
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="byPEbvKn";
+	dkim=pass (2048-bit key; secure) header.d=iki.fi header.i=@iki.fi header.b="VIlew3b7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A0AC883E81; Mon, 11 May 2026 20:10:58 +0200 (CEST)
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
- [IPv6:2a00:1450:4864:20::630])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 4375883FEC; Mon, 11 May 2026 20:13:05 +0200 (CEST)
+Received: from lahtoruutu.iki.fi (lahtoruutu.iki.fi [185.185.170.37])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8757F83F14
- for <u-boot@lists.denx.de>; Mon, 11 May 2026 20:10:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 362FA83E81
+ for <u-boot@lists.denx.de>; Mon, 11 May 2026 20:13:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-bd24f466598so16344466b.3
- for <u-boot@lists.denx.de>; Mon, 11 May 2026 11:10:56 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1778523056; cv=none;
- d=google.com; s=arc-20240605;
- b=Og5q05RswkEVk5XxmhoKh/DWjkHfTHFVal0b3+WrWcE23hdzxuuH5gZdpyLppkbBf4
- IQb0gy0tdsrBopfgFyN7b4QtCdlAMGwYzqmxBNvjWRU6RPbkjjJBowHxbnGfm2S6t21d
- 1Obn2c83oZWY6kDLGE7u+lRrPFa+/JltAJiDjw9/ynehUHptv1lyvNH7d8GtNz7g3jlS
- Fz3lWC8EUikziAz9LpHqYo1fgBwUtjW+k9uQhE9w/K9c4Rhx6+zGG7URiYRlv2TdB1Jq
- bCoZmDHu+OL8D2jRaE26g9tAcCMd4NOqZ0l1VG3Qr6fjdptBHyywC4DLaX85QxRlEC0r
- Oi2g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=vBt+cru+fyMMLXzPhhOldx3hK9KFcevTsBhx8mglMyo=;
- fh=lGcrtbD1PYLpLqC4pPnBjjQEkdTG8hK8idShVSln8L4=;
- b=BHtS8XHjeSyuI16QeHxfiL3yU5edCkKDGIb19PgIyLpA0oCnPQFqfM8xuy94NKcRMb
- C5kakoHMirikq948VhAJYeHBePITyYKoQDt+ynNooIW56yi2uEbt0YGQuKx+q0hs8PO9
- qVd6+501vLHH/evjJsxG2luLkZl/U3NhCs+hdNnSs2D5gSC9vkcuFJmVBU2DghBhZWRO
- bKNqYH+yEbqOoX/Zr1+LV2KJSvCSN7bWeLdNxD6JE0podV9cB78SjtcCnh/AYBLmT1sa
- Ftb30E+3ZPJvwo9TiSNT3O+MkmxJvphc2QTyTrDQqncUjlQxJkBHoQkqEiIl4K6OdW11
- hrWQ==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1778523056; x=1779127856; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=vBt+cru+fyMMLXzPhhOldx3hK9KFcevTsBhx8mglMyo=;
- b=byPEbvKnszZBc5S4D90Uh/Lgo8s4/39VTluWhT9o2d8s3ZqW3Ouqw8cUTAk8pq5ix/
- VFR/e4d0tbdaWftjroqsL4+KeyFxqIVbos0Bn/ZLPgpZdaM+9x501Q9MGmu3JqRIgtKi
- wMl/YwtWGgtotLtxaEQB4M22GRssk21tuW+VM=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778523056; x=1779127856;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=vBt+cru+fyMMLXzPhhOldx3hK9KFcevTsBhx8mglMyo=;
- b=fzA5u+2nA8p8OzyteKAfI1Rh+W4QGF5IGarl3VkJb1bByelJQorMuIESMb6TqATvV0
- F5wDoaKXUCDiRWMg/h6o2xDoxjX3hX2ONz79Oscywo2+9JM11KVr+HQ7sOJTiyTWcyLf
- 92/EISHfq5svvf0S+u5i4NhhYxmmK3m9rUBOwZrm6il6uAuxgor4eK4njH7VlbBZhpe6
- 2ym2lnHjq/MB7S3Hm/wpQZI+Z044lnywDehYza0Qnfv+Srblzxac2YE4zOZ8x/sYPbkP
- CV/Ckyz9SCzXT4Xd/wcljXGYbJeA8V/BCfYNvp3FU6Nuyl3mN9UEWm64EJGGOVOu6aNU
- kiEg==
-X-Gm-Message-State: AOJu0YzNGIU1nsZjIkaT3+D+x1z9xvQxrA1XEcq3YzJTLSTIdG7HDgWJ
- t0/gzu6KLyTZsfkDt9ZcNolECt1I9EUT9L5SVOlobd/EsYEb9UH//ucmujMx5QjNz6OcSAFLVQ1
- jv9t1ssgOroLAiZ1vXbg9aokv3mhxRL17faotBJne
-X-Gm-Gg: Acq92OFFvRs5dUiLBKxcQ4HY0uSjFJtasVeEYHH8xsxZSvx9eFzbDoPdfeXbPsEHMcT
- 61oJowhuEnDd+ZeyLgtoUu1LOJDWIQp4XiJQvaAl1CxPFYPPU0wM0Lc19dryNutPaooeK85wpf3
- HwCx480Ent9OabZwjv5pvEwmZOI8D2tpbcY86xud6IZwpsNrHal9AIlnHQcc5NoN3kVfQecVGcC
- o1/QalRraHcbp8CxM2frBvy1zBAFaky0fWlswrXp/SRnnwKhcUvaxCRoJNPwmDRg1i7gin3Pjm4
- L9G1Iw==
-X-Received: by 2002:a17:907:6d2a:b0:bcb:b88c:eb3f with SMTP id
- a640c23a62f3a-bcc13c96a1fmr575530066b.22.1778523055937; Mon, 11 May 2026
- 11:10:55 -0700 (PDT)
+ dmarc=none (p=none dis=none) header.from=iki.fi
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marko.makela@iki.fi
+Received: from kehys.lan (dsl-hkibng32-54fb5f-245.dhcp.inet.fi [84.251.95.245])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange secp256r1 server-signature RSA-PSS (2048 bits) server-digest
+ SHA256) (No client certificate requested)
+ (Authenticated sender: msmakela)
+ by lahtoruutu.iki.fi (Postfix) with ESMTPSA id 4gDnrn5qrpz49PwG;
+ Mon, 11 May 2026 21:12:57 +0300 (EEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iki.fi; s=lahtoruutu; 
+ t=1778523178;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=kdkb4gkkRSC4WJ3b/4svTh4Kf+wP9mi0PxZ3Qo4FogQ=;
+ b=VIlew3b786/LSZ8IxTBydzdiX4SVGDeFRST1sWsEqeTo0lvAhjWyPZRq4yvdd/oNe6PRso
+ VeWy3yDm2YTfJaL566gHMAp0+Te7orHpGb8Nb5C0cnfvAutEY1ORPjJIm3eUB00Rt5mw2v
+ TjqJfrXS603yeDqQ0upw3JoOW1Q9xfQ83ZzOXEyorVUNU8GoHMQbfgrGb5PPHZLInc+APG
+ KEuQNZSMVn6FOUEh7ZQPSrAIKJSu0WOqnpkvSkYuPDcl9Z84iMX+cNVaGSzoPJZB9rLNx9
+ IK2sWXi9DR/qKnaZ95EHBa9f0y6ZQrz/x1v4K5QDDa+Y+pncKYeaXxKnfQDS7w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=iki.fi;
+ s=lahtoruutu; t=1778523178;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=kdkb4gkkRSC4WJ3b/4svTh4Kf+wP9mi0PxZ3Qo4FogQ=;
+ b=HXynEfdPZYnxDOIzoEoY5m+e+y9RXYSleRHn99l2BvDfMas97lL4qNfBpK4fHxbHFDeAaU
+ ujXKyD4xBAZjnBRSbXdWMhM9pgC4VDn7+IWjgas3+Lkxayy35Ekgn4u4rIzYaCo4m7448d
+ C7rfLEWjlXkZ8pNERwIbxSAG2RplUFtsOaOUWBvWtfaWo5OuPUImC+P5Yr7MLNik68Emxj
+ WoCJGz41Ibyg7Jsb4LlXeGkFvOkY6egwAwqqgxG3x9Z9GGgQ54WVBge6ji9drImcQQRvrO
+ iomVT4HaE0SRf7Ic/FrrtRz2ZERlFErZTurTyPC3k/b3BZS/gDjaDiMPLUCV9A==
+ARC-Authentication-Results: i=1; ORIGINATING;
+ auth=pass smtp.auth=msmakela smtp.mailfrom=marko.makela@iki.fi
+ARC-Seal: i=1; a=rsa-sha256; d=iki.fi; s=lahtoruutu; cv=none; t=1778523178;
+ b=JCOyh+1TkpiRCOpxA5FQk2tINiQ2Xsknj5SSWeGD2aVW3z4haNTfU3wYfp7+Ej8W8hLtIF
+ FyLMJUqzaenkhBB/i3/xgOGHPT4VrbVFl4pq8uuzcWQ3n4/gMhJ9uCWTqoMgLTXyNGJ2vB
+ IzUut+O+s+oBrNdjmG1Q+0h3EeMXLFBE3klrMFt/nnLaTcT6fI3c/EQ5TB0j/OCBnmhup3
+ iu0t6lLFCVXp1Sb+Z2prpMHcsqgF8CsvXjpCJ9ILeKEcx0XudZsr5t8V1FC7ojcK8rh89P
+ nKnoAKLPt0vys9JZqtXCqVlUtMKo0ddX5O56gfI3DFYbDFAniqYu2Qs4XnWT0Q==
+Date: Mon, 11 May 2026 21:12:53 +0300
+From: Marko =?iso-8859-1?B?TeRrZWzk?= <marko.makela@iki.fi>
+To: Robert Nelson <robertcnelson@gmail.com>
+Cc: Randolph Sapp <rs@ti.com>, Erik Welsh <Erik.Welsh@octavosystems.com>,
+ Anshul Dalal <anshuld@ti.com>, bb@ti.com, nm@ti.com,
+ trini@konsulko.com, afd@ti.com, u-boot@lists.denx.de
+Subject: Re: [PATCH 2/3] k3-am62-pocketbeagle2: add initial board support
+Message-ID: <agIcJSyF5vf99ouY@kehys.lan>
+References: <acaTPyGbaUQj7hk3@kehys.lan>
+ <CAOCHtYidPpJMZeDj0KkLkuh6YYOFVAe80NMWWu5wbmV2ou+=UQ@mail.gmail.com>
+ <acbXV--BvxNuZxEa@kehys.lan> <aceOvTK4JGQvET11@kehys.lan>
+ <CAOCHtYhN42myMkq9zTUM2ETMP6oBA4mBAzPsYcOqVRG=ZskgfQ@mail.gmail.com>
+ <aeOdF46Ny1AfNsMi@kehys.lan>
+ <CAOCHtYguNVs+epQH8Lf80MXRJj-udsRfEuQO0LRO0cvG4HhKZw@mail.gmail.com>
+ <aeTeiZER1IJar_w6@kehys.lan>
+ <CAOCHtYin=6r86ThsagZrdFu5+_b2ACGmMZs3yK3tPd45PXJw4w@mail.gmail.com>
+ <aeZubllYVLLpznWr@kehys.lan>
 MIME-Version: 1.0
-References: <20260507164225.59325-1-marek.vasut+renesas@mailbox.org>
- <20260507164225.59325-3-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20260507164225.59325-3-marek.vasut+renesas@mailbox.org>
-From: Simon Glass <sjg@chromium.org>
-Date: Mon, 11 May 2026 12:10:40 -0600
-X-Gm-Features: AVHnY4IWAWdPuKGkhhAzLYZYA-lZG7ArFLLlAgRJzZC6pAKo4N5758ay_SqjxoY
-Message-ID: <CAFLszTiBtfSbaR_W3cYUAOZ1_4rA0pnZ2pw-oyxG3kHw4=mPoA@mail.gmail.com>
-Subject: Re: [PATCH 3/3] ata: sata_mv: Staticize and constify driver ops
-To: marek.vasut+renesas@mailbox.org
-Cc: u-boot@lists.denx.de, Andrew Goodbody <andrew.goodbody@linaro.org>, 
- Stefan Roese <stefan.roese@mailbox.org>, Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=us-ascii; format=flowed
+Content-Disposition: inline
+In-Reply-To: <aeZubllYVLLpznWr@kehys.lan>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -109,16 +99,89 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2026-05-07T16:42:06, Marek Vasut <marek.vasut+renesas@mailbox.org> wrote:
-> ata: sata_mv: Staticize and constify driver ops
->
-> Set the ops structure as static const. The structure is not accessible
-> from outside of this driver and is not going to be modified at runtime.
->
-> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
-> Reviewed-by: Stefan Roese <stefan.roese@mailbox.org>
->
-> drivers/ata/sata_mv.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+Hi Robert, all,
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+I finally came across to testing this again. A more careful comparison 
+between Robert's build script and mine showed that my build of 
+trusted-firmware-a was missing the parameter 
+PRELOADED_BL33_BASE=0x82000000. Once I specified that parameter, u-boot 
+would fully start up.
+
+Next, I applied this patch series to the current u-boot and reran my 
+build script. The output proceeded a little further, but it would hang 
+in the middle of U-boot initialization:
+
+--- snip ---
+U-Boot SPL 2026.07-rc1 (May 11 2026 - 17:57:58 +0000)
+SYSFW ABI: 4.0 (firmware rev 0x000b '11.2.5--v11.02.05 (Fancy Rat)')
+Set clock rates for '/a53@0', CPU: 1250MHz at Speed Grade 'T'
+SPL initial stack usage: 13464 bytes
+Trying to boot from MMC2
+Authentication passed
+Authentication passed
+Authentication passed
+Authentication passed
+Authentication passed
+Starting ATF on ARM64 core...
+
+
+U-Boot SPL 2026.07-rc1 (May 11 2026 - 17:58:12 +0000)
+SYSFW ABI: 4.0 (firmware rev 0x000b '11.2.5--v11.02.05 (Fancy Rat)')
+SPL initial stack usage: 2048 bytes
+Trying to boot from MMC2
+Authentication passed
+Authentication passed
+
+
+U-Boot 2026.07-rc1 (May 11 2026 - 17:58:12 +0000)
+
+SoC:   AM62X SR1.0 HS-FS
+Reset reason: POR
+Model: BeagleBoard.org PocketBeagle2
+DRAM:  448 MiB (total 512 MiB)
+--- snip ---
+
+When I compiled Robert's version of u-boot 
+(ef03e35488377a32cdd4f76d1a03ef7f60c798ef from January 30), I would land 
+in a menu like this:
+
+--- snip ---
+U-Boot 2026.01 (May 11 2026 - 17:38:46 +0000)
+
+SoC:   AM62X SR1.0 HS-FS
+Reset reason: POR
+Model: BeagleBoard.org PocketBeagle2
+DRAM:  512 MiB
+Core:  89 devices, 32 uclasses, devicetree: separate
+MMC:   mmc@fa10000: 0, mmc@fa00000: 1
+Loading Environment from nowhere... OK
+In:    serial@2860000
+Out:   serial@2860000
+Err:   serial@2860000
+Net:   No ethernet found.
+Press SPACE to abort autoboot in 0 seconds
+switch to partitions #0, OK
+mmc1 is current device
+SD/MMC found on device 1
+Failed to load 'uEnv.txt'
+Scanning for bootflows in all bootdevs
+Seq  Method       State   Uclass    Part  Name                      Filename
+---  -----------  ------  --------  ----  ------------------------  ----------------
+Scanning bootdev 'mmc@fa00000.bootdev':
+   0  extlinux     ready   mmc          1  mmc@fa00000.bootdev.part_ /extlinux/extlinux.conf
+** Booting bootflow 'mmc@fa00000.bootdev.part_1' with extlinux
+PocketBeagle 2 microSD (extlinux.conf) (swap enabled)
+1:	microSD (failsafe)
+2:	copy microSD to eMMC
+3:	microSD (debug)
+4:	microSD (default)
+5:	techlab
+6:	techlab workshop
+Enter choice:
+--- snip ---
+
+Should I apply the patch set to an older revision of U-boot? As far as I 
+can tell, it may now be hanging related to some DRAM layout or device 
+tree mismatch.
+
+	Marko
