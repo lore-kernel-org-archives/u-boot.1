@@ -4,94 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B692DCD37AC
-	for <u-boot@archiver.kernel.org>; Mon, 11 May 2026 13:29:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58B8DCD37AC
+	for <u-boot@archiver.kernel.org>; Mon, 11 May 2026 13:30:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 472C183BC8;
-	Mon, 11 May 2026 15:29:52 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E0E48838D7;
+	Mon, 11 May 2026 15:30:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="DddV+HWN";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="h/upgWGH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4883A83C51; Mon, 11 May 2026 15:29:51 +0200 (CEST)
-Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
- [IPv6:2a00:1450:4864:20::531])
+ id 42A96838D7; Mon, 11 May 2026 15:30:11 +0200 (CEST)
+Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
+ [IPv6:2a00:1450:4864:20::52b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4211B80398
- for <u-boot@lists.denx.de>; Mon, 11 May 2026 15:29:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BE68080398
+ for <u-boot@lists.denx.de>; Mon, 11 May 2026 15:30:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x531.google.com with SMTP id
- 4fb4d7f45d1cf-678adefbd26so7988339a12.3
- for <u-boot@lists.denx.de>; Mon, 11 May 2026 06:29:49 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1778506189; cv=none;
+Received: by mail-ed1-x52b.google.com with SMTP id
+ 4fb4d7f45d1cf-6763cc8775cso9603763a12.0
+ for <u-boot@lists.denx.de>; Mon, 11 May 2026 06:30:08 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1778506208; cv=none;
  d=google.com; s=arc-20240605;
- b=kU2rULOkEtB1MmniqhZyHfoUJ3LaL3MI6ygCxqhoTv+quVCZDiZyJeMVJgZPdJ4ry5
- NInff7g8lSVOjXrlpIToht/j5xgVRXhIwEnxNqSzZKaKssTAZ3MEOFzfvpEiOM/D5HpA
- T3MfawwgcnI70991KSls8v4kSwj1PMp/iJRIJKLevxWozf2o617QL4MQ81Jp6TutZu8M
- O3rViMjtk4EiqR0S7grQ+7rcDSmqfqeNkFpLeKLD4UBQwV6E9wt1P6v9jc2Rhq0bOQsR
- xH8EVMDjw11k2XwaTwomDAEjx95Nop6vXr4QB4c9DSF3SG7xnjipVWxRMZFcyUL7TUhw
- 0LPw==
+ b=AQLiCY0fgaXnnOc7b3hBBGXIohtwioKcVYBDXfylvaw5Uw8GxHfsiBsvqcT44gIJfR
+ uPLCuBlUigyVlvfCwpiEknXh03rnh1jvVs5AcK5efVMjKe8ipiFGnIV/DAeoTF3+fMcU
+ s8AYZKrhUDlskZv/V1ABntvUdc66Beeh+Gi2EO6jUzGea6V3P+ccWc5YBYCKnSBvZ7Of
+ 2EGovcTMZTVmNluuyu1oBqF5XJFpor4dDFueKOeJy+/XST+jZRi28rPJFA1JuncPEhOc
+ 57phrC8ToBhzIIj3DzzOjW+CypxSs/bFwgG9HA2jvWzZAzr26umeg7s8O+kX9f/HhJsF
+ pCcA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=ZSkMG4M5i27HgcYyJrQ+8+E3/R0rhjSBvpCE7CTYyF8=;
- fh=L35BJGl1eOCTAl0X8L2OQ78gjsGwLgv72NZeh8dCP+M=;
- b=d5RnABtMfb+t7MzMsSldYboTn6tI5qXj0pb+pyMvoAVf0NyAmAHPWFhEm0GNW3QeRn
- YxWEFWoenwh8SChEAFIW2LGQ3xlsNuJMBtd1LoHo2Sy31KFyxIX14MdCGp73m0r4tNaO
- XEyJWJIwrZwilGO0j7A7HphsZSgQJGZTdrgKBr8weutmhyCnbAOuYOmi5tt4Y7wVgUTD
- QRU6jlEu5j00jOQAExdZCeHfUfeyYYugSziz7a1tB8qnATyPExsDrz37FGNo331BBA1l
- sgfeF7kXdKjH43esYpodQZulwMNyBTosLbxEEdr8sMoV2loVibWK6keOt2XgkkzLDQyJ
- jYtw==; darn=lists.denx.de
+ bh=JjfE+F6s2ZbNPQcsZgsykBwKdYDljSABQbHVqqaaXKU=;
+ fh=MNq73r8Ygn0hn7yFFjGDct0t/82JW27+1b75IbPhr/Q=;
+ b=ZDDucehlrhaj+QKDBJjAzQXLCwGn4esE4kVt4hEvfKZWiGjvDbUgVLV4BJcngWjyQC
+ BF1d5ub8Bc46gkL9zSTTvAPlMYLtbh1xdZK2riBIC2DGh728MZO5DJNH/W/TDDrrvJql
+ YzY/m2JsT8W3F+4h6MQT9v2N4vyyINI0LroYusRkB2lBvoJKr2c8m0fdyTdWg6ON0PnT
+ SYqfUNswtLVaQB4Mc4KspziWRFuWPPLO5aR5yFtCthp5lK61PeUdrQw+pK2UMFzZnlWl
+ XOoxAN9dbze8aHY3dOMIbsHEZdilkl59Sn1aeoEfzxmrRxZqMxtHYBG77Q4/nQJfU7c5
+ FAag==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1778506189; x=1779110989; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1778506208; x=1779111008; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=ZSkMG4M5i27HgcYyJrQ+8+E3/R0rhjSBvpCE7CTYyF8=;
- b=DddV+HWNisBFf0w7Q4pX+jsfmCV+HNcRTAN34ja6R15ogxUbOOYKwgIgC4/H2OPRRM
- 8KlMSRInw21wJICMc8yHAsAtww7c0qdyef2c9vQ+hQ9+utVilEzlknGrG5FuEswAxaai
- 04KkyVihlrluZBqYQbxihD6mqYeCTdqqQ2BQk=
+ bh=JjfE+F6s2ZbNPQcsZgsykBwKdYDljSABQbHVqqaaXKU=;
+ b=h/upgWGHIBShotDKVxGqwxZ7oceX7Ino/pvIDahWCkZKRgGlrt3y1xCdzDd+RaNkh7
+ wBanlZrwq9IWHmIiM7bYhWZORLDlZrGDIX6k1I3XKvcLGPeeCWyaz2HV+/43mghXzX8C
+ WjFGwQE/FzbJIpsPJqyFeYlFU2CbvwcsC4ggc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778506189; x=1779110989;
+ d=1e100.net; s=20251104; t=1778506208; x=1779111008;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ZSkMG4M5i27HgcYyJrQ+8+E3/R0rhjSBvpCE7CTYyF8=;
- b=FyhbfbWdhSEv7QHh46T/XhGQIwDMz52VvQt7fOkuJeD1f26RA1E3GhsJG2ytjWh0sT
- /jJ3VLknOxkjwCxCe+BDByeMFQ+Mb7E3Q/Rs+2TS7fsMSmMjdfOBpDZYPrHLyTWuO/iE
- ne8XUt1OagdA8AYyFxylECfoXMYv/S0kzdXsqz43dpL7oubmWzo/ArFsqM6P7VwYCEqc
- sgNHqFZcX3V21oZNDoWNEVoJtCDWft79dHPgoDH16+jVTYd/9UEaJnSLqbNfSrpMW1sA
- RLoIBEUQ+lcKaHyEItOYb4j96z2tAJvwHbPtDcnHxxiNQ+PORGuPyRGLDx/FBXosP3In
- LpsQ==
-X-Gm-Message-State: AOJu0YzLD0XWQzorqOVJr0wKMOHrgm/vVq+sbcXduvrlGM69Gl6ArvDp
- NDwnotaqSHq3NNDmzfpF6IdOE2cxaMfhdtLOzuMYWIv6PRM7r5dTYqvmu5UlY9VIwdfncaq9pjE
- 9Q06d7zR8ScLFIqu5uF9YmGP0v85MCBvh+cGtVoVy
-X-Gm-Gg: Acq92OHZfBRzg8FoGgGUbIGgTwIV1QHr+X6tocdleWK3KQcedeK7ffZpZQosgZRb3pI
- hJnVk6IJvorM3C4vAknPbB56Xh/0utWdYc1vFYYKyXYNbKuczTA2J20eyozD3pEO9dNI+QNI81R
- ueun4l9xcjfKsHNlxy8RYtwHLD8i3wRx2wvVHxnlGAU01r1hRlJqxRl29OKyeFe5/KrwQtJi3wn
- haTsYeCqDPaX8VHwg7rhF/LrUo6p9axOAI0WoBSNTWDh53uAzk/vOBHjN75u05ATMxMFwWqSTis
- 3LEiTw==
-X-Received: by 2002:a17:906:478e:b0:ba5:885d:3280 with SMTP id
- a640c23a62f3a-bcaaa54ff6dmr783757166b.17.1778506188569; Mon, 11 May 2026
- 06:29:48 -0700 (PDT)
+ bh=JjfE+F6s2ZbNPQcsZgsykBwKdYDljSABQbHVqqaaXKU=;
+ b=nC54noZRg4Dn1VOHfRzilFPHbjV/w8A8qZNqkdowkDiHBe/BpyU3iZEVs7WJcr1fuK
+ HRlqNP+53406ke5ZfMlC93DNm/qeg4BjrDMJYa1m3fIc6nUH+Nu/q0Dz6xPzyJN0Mnjv
+ Ibl0TuZAsQvP6l3c3JOR3g9Tvs5bHhm0/xEifLjzAHiJQQkgknoBPVP68Y6Zqji75ZRR
+ UsmjMBpVIxztAEqGsTh5n3JzoeoImsTkuVy0XuGY5LgBtgyBSxS5zeFqZPfvaNZ48pRD
+ 9L25BxF8KHtvSWXg0vUN97O9D/0hK5k4KdKF6Pyb1COeaouy2iVMxFRlTH2ANd2LvPQH
+ f9Lw==
+X-Gm-Message-State: AOJu0YwYRbVsBxooeAZyE6uIucMT+iFRQeVMjf+gj8TPvcSJ6Ir6WPMi
+ 2QgOXnoJ5NACi1O2/4FMRutLzOq/dQW3h3BMA/O0qv2BCw7qTHE9UrogUO64+5Cbs2BTfg5fi0K
+ VaZMxNgBqOQA8bZ8bUmyqRxrIYc0KkRQ4J0FZ8l6Y
+X-Gm-Gg: Acq92OFy7IZXJcTDj2h4IwJYw1TMcg0aAfeH/t+u4PoArdJqDY6fh49qul9BTI+poAa
+ fmATkrodI6R+nQa4Ik3GyzYTrWvy41Wu0xIQkbNM3mYJ8Bwl4pkVZEOnnBu8Ef0Rtm8DRdscIwr
+ HCHIc5cQ0DqHUdifiDxesfKGOJYvPOqsF1p1kE8ZHp2kjRu6j8GFnb/3a9JK6pnoO7t47W5JBep
+ qsUYGXrxxGFx6SzKeVpCUDIONSiJzmOcb5o9IusaTSpUiqEvlfHk8h7WEXpf+/5fT6k/PipzMPV
+ P4Wy2Q==
+X-Received: by 2002:a17:907:da17:b0:bc6:3122:c241 with SMTP id
+ a640c23a62f3a-bc85c890f00mr884516966b.18.1778506206699; Mon, 11 May 2026
+ 06:30:06 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260511120917.1017866-1-Alexander.Feilke@ew.tq-group.com>
- <20260511120917.1017866-2-Alexander.Feilke@ew.tq-group.com>
-In-Reply-To: <20260511120917.1017866-2-Alexander.Feilke@ew.tq-group.com>
+References: <20260511085857.3933053-1-aristo.chen@canonical.com>
+In-Reply-To: <20260511085857.3933053-1-aristo.chen@canonical.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 11 May 2026 07:29:36 -0600
-X-Gm-Features: AVHnY4JyM6aiEoit63ObPAE6IiFig084N-EezsRsJwHlfFOYCN2Xj_q7tQEsMP8
-Message-ID: <CAFLszTjfq8g1xU=FTtsdLRwXC5nojbq+YwnwEcLcYaTRvd_vBQ@mail.gmail.com>
-Subject: Re: [PATCH v2 1/8] cmd: date: validate date using rtc_month_days()
-To: Alexander.Feilke@ew.tq-group.com
-Cc: u-boot@lists.denx.de, u-boot@ew.tq-group.com, 
- Markus Niebel <Markus.Niebel@ew.tq-group.com>, Tom Rini <trini@konsulko.com>
+Date: Mon, 11 May 2026 07:29:54 -0600
+X-Gm-Features: AVHnY4Lg4XVR9wvuDUpHJcF5pKVCmG9l3jD_RQJuL3ZhRxhzRofxo9uKi1e2U8c
+Message-ID: <CAFLszTj8kmRyf5_GrcP2zKRxouCwr3BNoPOk6GWse8RRVQ2BJg@mail.gmail.com>
+Subject: Re: [PATCH v1 1/1] test: fs: Use shared generate_file from utils
+To: aristo.chen@canonical.com
+Cc: u-boot@lists.denx.de, Huang Jianan <jnhuang95@gmail.com>, 
+ Tom Rini <trini@konsulko.com>, Joao Marcos Costa <joaomarcos.costa@bootlin.com>,
+ Richard Genoud <richard.genoud@bootlin.com>, 
+ Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>, linux-erofs@lists.ozlabs.org
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -109,59 +111,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Markus,
-
-On 2026-05-11T12:09:09, Alexander Feilke
-<Alexander.Feilke@ew.tq-group.com> wrote:
-> cmd: date: validate date using rtc_month_days()
+On 2026-05-11T08:58:50, Aristo Chen <aristo.chen@canonical.com> wrote:
+> test: fs: Use shared generate_file from utils
 >
-> The old check accepted day 0 as well as Feb 29th in non-leap years.
-> With this change, both day and month 0 are rejected, and the local day limit
-> logic is now handled by rtc_month_days(), which correctly accounts for month
-> length and leap years.
+> test_fs/test_erofs.py and test_fs/test_squashfs/sqfs_common.py both
+> defined a generate_file() helper that writes a file of a given size
+> filled with 'x'. The two functions were functionally identical and
+> differed only in parameter names and docstrings.
 >
-> Because of this, special attention must be taken in the 'MMDDhhmm' format case,
-> as tm_year is not initialized. The leap-year calculation in rtc_month_days()
-> therefore depends on the value provided by the caller. This is pre-existing
-> behaviour, but is now made more explicit.
+> Move the helper into the existing test/py/utils.py module, which is
+> the established home for generic test utilities (md5sum_file,
+> PersistentRandomFile, attempt_to_open_file). Update both call sites
+> to use it.
 >
-> Signed-off-by: Markus Niebel <Markus.Niebel@ew.tq-group.com>
-> Signed-off-by: Alexander Feilke <alexander.feilke@ew.tq-group.com>
+> Signed-off-by: Aristo Chen <aristo.chen@canonical.com>
 >
-> cmd/date.c | 7 ++++---
->  1 file changed, 4 insertions(+), 3 deletions(-)
-
-> diff --git a/cmd/date.c b/cmd/date.c
-> @@ -167,12 +167,13 @@ int mk_date (const char *datestr, struct rtc_time *tmp)
->               /* fall thru */
->       case 12:                /* MMDDhhmmCCYY */
->               if (cnvrt2 (datestr+0, &val) ||
-> -                 val > 12) {
-> +                 val > 12 || val < 1) {
->                       break;
->               }
->               tmp->tm_mon  = val;
-> -             if (cnvrt2 (datestr+2, &val) ||
-> -                 val > ((tmp->tm_mon==2) ? 29 : 31)) {
-> +             if (cnvrt2(datestr+2, &val) ||
-> +                 val < 1 ||
-> +                 val > rtc_month_days(tmp->tm_mon - 1, tmp->tm_year)) {
->                       break;
->               }
->               tmp->tm_mday = val;
-
-
-The commit message says tm_year is not initialised in the MMDDhhmm
-case, but do_date() calls dm_rtc_get() into the same struct before
-mk_date(), so tm_year holds the current RTC year on entry. That is
-what makes the leap-year check work. You could rephrase to something
-like 'tm_year is not set by mk_date() in this path, so the leap-year
-check relies on the caller having pre-populated it (do_date() does,
-via dm_rtc_get())'.
-
-I wonder if mk_date() could be static?
+> test/py/tests/test_fs/test_erofs.py                | 16 ++++------------
+>  test/py/tests/test_fs/test_squashfs/sqfs_common.py | 22 +++++-----------------
+>  test/py/utils.py                                   | 13 +++++++++++++
+>  3 files changed, 22 insertions(+), 29 deletions(-)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
-
-Regards,
-Simon
