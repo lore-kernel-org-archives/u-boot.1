@@ -4,109 +4,110 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB356CD37BE
-	for <u-boot@archiver.kernel.org>; Mon, 11 May 2026 18:09:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7EB4CD4840
+	for <u-boot@archiver.kernel.org>; Mon, 11 May 2026 18:10:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E994A81E18;
-	Mon, 11 May 2026 20:09:48 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 55AA381E18;
+	Mon, 11 May 2026 20:10:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="gBA2luQJ";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="f4al1A10";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 763EC83C51; Mon, 11 May 2026 20:09:47 +0200 (CEST)
-Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
- [IPv6:2a00:1450:4864:20::536])
+ id BD32B838BB; Mon, 11 May 2026 20:10:46 +0200 (CEST)
+Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
+ [IPv6:2a00:1450:4864:20::52e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 50D4D803C6
- for <u-boot@lists.denx.de>; Mon, 11 May 2026 20:09:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6779B803C6
+ for <u-boot@lists.denx.de>; Mon, 11 May 2026 20:10:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x536.google.com with SMTP id
- 4fb4d7f45d1cf-6763cc8775cso10148058a12.0
- for <u-boot@lists.denx.de>; Mon, 11 May 2026 11:09:45 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1778522985; cv=none;
+Received: by mail-ed1-x52e.google.com with SMTP id
+ 4fb4d7f45d1cf-67fd8befac7so2513801a12.2
+ for <u-boot@lists.denx.de>; Mon, 11 May 2026 11:10:44 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1778523044; cv=none;
  d=google.com; s=arc-20240605;
- b=b9iQjxFhjbdMRloLXJBeDOEpAjFlYui7/S9NjwWXAbJtKnOBeUILVbD+CPpQybqRNp
- p8Tw/gsIFzvSLYAgrV6RZTpoNXkkaD7hWbwCIRwDTdMwjwexQku77hk2kc9RCait0c7t
- uTBgvfA44WMyNZ9G1Pv/5a4kNCi2QmQk9/TkvXnu0+VtNrzhPpvQqzZdszAiWhL0742i
- FSNtQoi77TqiidUOEx3KdMCIQn6YtZtbxQbmlBbJdqsHtJI6m0lXnZHt2tp1ZHuMeWOD
- HO37Le0SV94oKZv7NAxUcBuKh4cK5uuUMF1m8jlb0l7loC042f8G3khsrMxIqvQZmdFj
- Ejng==
+ b=Vwu7BuvlNEfM7Pr/Il1da4poRiLebWX27lCGYU6MbEDOEdL+5W6zMXTOHcwDF4UX+h
+ EDC6LqOgQ6f4oev+8JFAGWl86F2/87jvIzHEpy80BOo4s4rv1JDTWcEJgpwb/qZt3GyL
+ ZjYPk5UZBmrO8xpvF+qsIsGkv6UsY7cWCMWJL1cU3y4rF7OlFCd6pGP6KeF0FyEjwcwg
+ t5FAG/DttCv1YWm5xVyK6qYe1az2sjjbZf/i1Ff8MkbSw3YrYjEC4zNeSZWvuYWCWMKC
+ 6YU125pk8MdAv8o5q3WNKNEKP0Oh3AIEpNwN8HHfrOkcbrBkwPGfaG2rp7I5BNiIYrum
+ MKfA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=3QJ+n6LFmtQngkqKzz7OhqEXTj+DRKIlEcv9LNK9OQY=;
- fh=Fv1NBrAS/1Q4rbYEPYqcwev7z9YmzvTvXaAau1zA4q4=;
- b=K9mWQKZ0aPaR2O5U82erIGWU+BFbcvBp/vJxD64r0FG/BTfqAjMhngbUvupv+5s8sa
- hTi6VrjT9R9WRtTfpGuf2icMiCL/nKLqlYu21QIm7gmP5KgyzQdSHk6Evn5sG9VEE9cd
- kwKkG+wYvnybCM+eHPmrn89d1QtXd+LaU4BnynZwd8Fl2G/xrIAo32386r08iv/rPnTG
- RP2cm5/neDfKIODP7w8enbXVzm4V2olPEdzQqh/krNQvEkvVo9Jg2mkFVCrxQgnM2xDL
- ftwef46VhUpPJr/b4nrnc1cJOuuedDMuQoMgOICCAmSIB19BceuMW5NgZ0C0cLF6/E03
- jY5w==; darn=lists.denx.de
+ bh=60GtXdguh+Zu9traolp6Rf9RJqEnewKaAlwkvPlIIlY=;
+ fh=i54dpIxGeZ+F0CeMGMfcubtzGCuskNYR8jut3UjgzxA=;
+ b=HODZDxWHIc62jp1rQpyf2RQBpeU3BVnyKCbHACPgtkga9dfol59XooDxp8mHYeoWdr
+ FKz8E4z33dhGxY9MF5FDn+1+aR6QAy5UVHOdv7Ig7tiL24rumki0Mo13y+ouDX+4oSrp
+ 8SiQtNVfLJgFb82/eG2tXefMz4dnc8JRzH2F5B69y3VVoqZjXh29WbczQff5gC0vF9tS
+ U8VkFF+tM24NudxvhwsgzMlsJ4OkMIfZ44vtHcHYquu4oKR89r4n3a3DMne6I/guBuAD
+ O55SLWF4Buh9GOq7xRwFtv+B/R3knbIpVwGRsbJe3TYsfhEIP0CHs3GDxCHkcujazm1Q
+ Pbpg==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1778522985; x=1779127785; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1778523044; x=1779127844; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=3QJ+n6LFmtQngkqKzz7OhqEXTj+DRKIlEcv9LNK9OQY=;
- b=gBA2luQJA5mFZVqLC3mT+m1DbGyMDZodJ6CFI2oYL29a7GFPFon5CgoFVD0hGfgUJc
- DYhD7Szh4cO51JqqvxZYyHoD1eOwI8PlUmA9QVZcl9+pBhwyxGYcPZsRaI5acE21HIxI
- dpY8biB+RqNtHUgdZOovzfZ0kBqMYzzb+MnL4=
+ bh=60GtXdguh+Zu9traolp6Rf9RJqEnewKaAlwkvPlIIlY=;
+ b=f4al1A10NhgzbBkl1To5ecIvEuIN/kdas7LNxNYyjDQkQIg1JL8+ug5lRNlHYAlnUG
+ os8qP/oqhmsoSbMKpO9LJpzH8ceVEJql2NgA7ZAIj6duHSdHw6auGN3JDTrfTj/9bwMe
+ PyxGRGcQW7Kz+XhjKxoRBkIA4pzx2YFlxvBRM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778522985; x=1779127785;
+ d=1e100.net; s=20251104; t=1778523044; x=1779127844;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=3QJ+n6LFmtQngkqKzz7OhqEXTj+DRKIlEcv9LNK9OQY=;
- b=cgkmS3X6IBDEkNQ24yOH0iFfG9EA6h2oauiloWXPURR7jgrjWY5DOmRDiMw9++rDJi
- /O7qjPDWXkvidibYIMkqVIhMRjStflOy85hbJvPT94dBMDtRc53aBwmHKDTfYTFcJoVA
- Nn1aZpVwyKOtwAmCcgi3Pnr1Oo5QYSKnBYZIiyCR77Grfghkl+G78fYNDf4/Sh3gvA/C
- rItKYjDX/DP/hZhzUuU95O4JtdUdGc4vuNpwEM/a28Yk0NR1IV7eCZXQfyX9fUElD4x1
- Ij070Ph8aknsCreO01slfGBqexc9I8vnRCHV+cdppIBpoknFMiywFh8RJcyDlbF7HN1O
- 7VIQ==
-X-Gm-Message-State: AOJu0YwFt8/+H6KJlS5EzIiswbsRV0u8mUhOsD2uMwSxoEMvcbdripWv
- pU9unH8iCIFhbOmP+QZnYr9L+dLA0G4f21YH4zLWaxslOvgmeoGvkFZajTih9Fkz0o8jDOKamGl
- CXqQBHzCG4Ee7XbElFKgC0d4M4qMs83IzkJGxOJe3
-X-Gm-Gg: Acq92OEIV962OtMqZFs2Uj5nwB5Gp+cUoIqWxAsd1Az0KozwRQPPh2dBK/Aqpj/jxFn
- Op/nu4xvnY0HE246ltfNM5tNsktM4HWHUlDC7UAW2fp0xC3Tmn2GXgFlwNYFUf5lEz8kYeKd2UK
- SdlmHJQwY+0naw3vykt4kY8iSwhML/wMF20a3iNr+G1h4hKG6W0+U44hFaxMbdlQGaH2tOx69cg
- HWhBMiQwwIknK1HpbFQ51rWlr3X7ayxwCJnjtZE1Hc9/dcqQ9VDGeiYJ9Izs7SsBTRIaTuVNXe2
- r751AQ==
-X-Received: by 2002:a17:907:1c10:b0:bce:7860:5161 with SMTP id
- a640c23a62f3a-bd23ae166ddmr43222866b.9.1778522984705; Mon, 11 May 2026
- 11:09:44 -0700 (PDT)
+ bh=60GtXdguh+Zu9traolp6Rf9RJqEnewKaAlwkvPlIIlY=;
+ b=YLennUUicR3zrpzvzsuxP+scUKT6rHVEJmc32y9U2Av9ndIeWdvkG9MsJtXOX21O0T
+ VHxznqUQ8Q2yIYiiH8kfjsRDWVpBH9h6Apl93y5cID5ooWt23C8JXewqKUCYUNpPywja
+ LRoedh8wcFhd8kM0Hm1nLor87nnFSu7UEMvXa13sGlzBZkkpy5nNo/rd2nS3CcHOBK/v
+ 0naBuegDM+fh/TU0kXVTERHFfeuiucfXabpYQeuEuWT4pLod8KQBWDRMMGtbCZ0C/ere
+ zrQfCkWayn6xhelNOBcsP4zGE957qRKzacwTRIaO9f373QlFsAf3CDxQESawOWakuBm2
+ m/NA==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ91fEvw0iJakJuxapcQXribLOhs5CHKZe61KszQ+Uy0N4EAiavvQVeMRRz3ut/iwi/+1SqyLLM=@lists.denx.de
+X-Gm-Message-State: AOJu0YwNNazKc5cmeodrBuEY3PPrmS1ZM81b2gBlcnnh4fZm3Ee1trNX
+ lFZ2g9rT/rwqTalMPO0RW4NJpf/K7LVs8PlX1DXIExz2NLgppj+/PSNu3TJ1SieXSgI1mOptxAc
+ 0GkN8jVv3UBQu4WrsiYQrL8WlwBNSJpKN0A6H18Mp
+X-Gm-Gg: Acq92OFEy1a0agMORHMD7L36p7rrrZ7UXqlWkEvtYepWPj2o4aIhx0wXwV/nNNvXsIA
+ pXGTDCYx7rQ4tIKQ6bEjNISiJNIb4mWRys1/fDfi4w8kRZ5MnEOKdkMHoZrV6kqtzao7Ldd3iyG
+ cU7yoVfZRIyM4Zagemu5YN81EgtqTKp/Pn3oR8mUwysIvYZ+rCwd03uNfioInTWgzWf4TgXbPRx
+ Fjz0cREzIUOIZmerrxLL856Zb7SGb2jjRVt9UgRVTyN29+jZMEuT+9dPvMJblcNjHIT8K647kHD
+ qDaNOg==
+X-Received: by 2002:a17:906:ee84:b0:bb2:71a9:37d7 with SMTP id
+ a640c23a62f3a-bc56dd1a539mr1472891866b.39.1778523043643; Mon, 11 May 2026
+ 11:10:43 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260511144437.46645-1-james.hilliard1@gmail.com>
-In-Reply-To: <20260511144437.46645-1-james.hilliard1@gmail.com>
+References: <f8f4e639-0e73-4d14-828a-92dbfe5526ba@cherry.de>
+ <CAFLszTjWZ9DBKVui_2EE-nSg8K+5eC9V8jvwp638dLeyp_p6vw@mail.gmail.com>
+ <175e1198-2ac4-48de-b68a-c29f786832cc@cherry.de>
+ <CAFLszThQ+kyCkojFm2=VNtLTtLDYT4iVmpqnto8awiMVqsct0Q@mail.gmail.com>
+ <20260427144630.GG41863@bill-the-cat>
+ <CAFLszTgga6eFp2aPF-MzJEqeqcEV-bMJhb4_ph_bE-1Dv4e_Cg@mail.gmail.com>
+ <20260429142547.GT41863@bill-the-cat>
+ <eab00828-0e87-4761-afc8-1a3295d18a26@cherry.de>
+ <CAFLszTgKRS7xebQ0Y7+fOsTM7aUwnEH55L_H_NbaN_p=70THDg@mail.gmail.com>
+ <20260504173544.GI1614990@bill-the-cat>
+ <CAFLszTjESKRGDD3wi4ftxRdXR1X2JZcqybOMHdUYboZ7xjN3Qg@mail.gmail.com>
+ <4ac27732-3697-43be-9585-35be67752938@cherry.de>
+In-Reply-To: <4ac27732-3697-43be-9585-35be67752938@cherry.de>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 11 May 2026 12:09:32 -0600
-X-Gm-Features: AVHnY4JATEaUosxOQgaDpSgPhytOjENNfLsP7dCY9o1JHqpuwdRG3cx-1IQA57A
-Message-ID: <CAFLszTijOgGA=9=LV+z7-MiHLHZje64vBw8G8JWvp+eY3Yv-yA@mail.gmail.com>
-Subject: Re: [PATCH v2] env: migrate static flags list to Kconfig
-To: james.hilliard1@gmail.com
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Heiko Schocher <hs@nabladev.com>, Sumit Garg <sumit.garg@kernel.org>, 
- Matthias Winker <matthias.winker@de.bosch.com>,
- Philip Oberfichtner <pro@denx.de>, 
- Alexander Sverdlin <alexander.sverdlin@siemens.com>, 
- Walter Schweizer <walter.schweizer@siemens.com>,
- Fabio Estevam <festevam@denx.de>, 
- Le Jin <le.jin@siemens.com>, Jan Kiszka <jan.kiszka@siemens.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Daniel Golle <daniel@makrotopia.org>, 
- Philip Molloy <philip.molloy@analog.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, 
- Peng Fan <peng.fan@nxp.com>, Adrian Freihofer <adrian.freihofer@siemens.com>, 
- David Lechner <dlechner@baylibre.com>, Michael Walle <mwalle@kernel.org>, 
- Varadarajan Narayanan <quic_varada@quicinc.com>,
- Peter Robinson <pbrobinson@gmail.com>, 
- Jerome Forissier <jerome.forissier@arm.com>, Benjamin ROBIN <dev@benjarobin.fr>
+Date: Mon, 11 May 2026 12:10:31 -0600
+X-Gm-Features: AVHnY4JOmvjEY-R91tKIBjSg4p-ZbmidCZdlBBCnUrdU9gFPhZodGiwRF-OVNak
+Message-ID: <CAFLszTgiB8qgoqAyFOMvuvjXuY88eYagPvfsrWe0vkeRnKqTqg@mail.gmail.com>
+Subject: Re: Couple of clang warnings for Rockchip boards
+To: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>, 
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>, 
+ Jonas Karlman <jonas@kwiboo.se>, Xuhui Lin <xuhui.lin@rock-chips.com>, 
+ Heiko Stuebner <heiko@sntech.de>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Sebastian Reichel <sebastian.reichel@collabora.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -124,107 +125,198 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi James,
+Hi Quentin,
 
-On 2026-05-11T14:44:31, James Hilliard <james.hilliard1@gmail.com> wrote:
-> env: migrate static flags list to Kconfig
+On Fri, 8 May 2026 at 03:33, Quentin Schulz <quentin.schulz@cherry.de> wrote:
 >
-> Environment callbacks can already be configured from Kconfig with
-> CONFIG_ENV_CALLBACK_LIST_STATIC, but static environment flags still
-> require board headers to define CFG_ENV_FLAGS_LIST_STATIC.
+> Hi Simon,
 >
-> Add CONFIG_ENV_FLAGS_LIST_STATIC and use it as the only board-provided
-> static environment flags list. Convert the remaining default-config users
-> from CFG_ENV_FLAGS_LIST_STATIC to defconfig settings and drop the legacy
-> header macro from ENV_FLAGS_LIST_STATIC.
+> On 5/4/26 10:40 PM, Simon Glass wrote:
+> > On Mon, 4 May 2026 at 11:35, Tom Rini <trini@konsulko.com> wrote:
+> >>
+> >> On Mon, May 04, 2026 at 05:14:13AM -0600, Simon Glass wrote:
+> >>> Hi Quentin,
+> >>>
+> >>> On Wed, 29 Apr 2026 at 10:32, Quentin Schulz <quentin.schulz@cherry.de> wrote:
+> >>>>
+> >>>> On 4/29/26 4:25 PM, Tom Rini wrote:
+> >>>>> On Wed, Apr 29, 2026 at 08:18:14AM -0600, Simon Glass wrote:
+> >>>>>> Hi Tom,
+> >>>>>>
+> >>>>>> On Mon, 27 Apr 2026 at 08:46, Tom Rini <trini@konsulko.com> wrote:
+> >>>>>>>
+> >>>>>>> On Mon, Apr 27, 2026 at 11:54:09PM +1200, Simon Glass wrote:
+> >>>>>>>> Hi Quentin,
+> >>>>>>>>
+> >>>>>>>> On Thu, 23 Apr 2026 at 22:24, Quentin Schulz <quentin.schulz@cherry.de> wrote:
+> >>>>>>>>>
+> >>>>>>>>> Hi Simon,
+> >>>>>>>>>
+> >>>>>>>>> On 4/22/26 11:57 PM, Simon Glass wrote:
+> >>>>>>>>>> Hi Quentin,
+> >>>>>>>>>>
+> >>>>>>>>>> On Thu, 23 Apr 2026 at 01:26, Quentin Schulz <quentin.schulz@cherry.de> wrote:
+> >>>>>>>>>>>
+> >>>>>>>>>>> Hi all,
+> >>>>>>>>>>>
+> >>>>>>>>>>> I'm looking into force-enabling CONFIG_WERROR for all Rockchip SoCs.
+> >>>>>>>>>>> First, let me know if this is a bad idea :)
+> >>>>>>>>>>
+> >>>>>>>>>> I don't like it, as it makes development slower. I like to see all the
+> >>>>>>>>>> warnings created by a change and tend to fix them iteratively. We
+> >>>>>>>>>> already have a warning check in CI. A better approach is to
+> >>>>>>>>>>
+> >>>>>>>>>> Can you use: KCFLAGS=-Werror
+> >>>>>>>>>>
+> >>>>>>>>>> either in your environment or on the 'make' cmdline?
+> >>>>>>>>>>
+> >>>>>>>>>
+> >>>>>>>>> Well, if it's during development, you can always disable WERROR? The
+> >>>>>>>>> fact that I've never actually enabled -Werror locally in about a decade
+> >>>>>>>>> in U-Boot probably isn't a good sign. One of the things that make me
+> >>>>>>>>> wary though is compiler updates with new warnings. I've tested with
+> >>>>>>>>> clang 22, don't know when clang 23 is planned to be released. GCC 16 is
+> >>>>>>>>> about to be released as well.
+> >>>>>>>>>
+> >>>>>>>>> By having the check in CI, we have a longer-than-necessary feedback loop
+> >>>>>>>>> for contributors. Has this been an issue in the past? /me shrugs
+> >>>>>>>>
+> >>>>>>>> This is strange though, because people should see the warnings during
+> >>>>>>>> development. I wonder if it is scrolling off the screen.
+> >>>>>>>>
+> >>>>>>>> One my bugbears is non-actionable output. When the build succeeds
+> >>>>>>>> (with no warnings) I see no output, using 'buildman -I --board xxx -w
+> >>>>>>>> -o /tmp/b/xxx' or in fact these days 'um build xxx'. This uses 'make
+> >>>>>>>> -s' under the hood, so that it doesn't print a huge list of filenames,
+> >>>>>>>> etc. I also sometimes do a 'fresh' build with 'um build -F xxx' to
+> >>>>>>>> check everything is clean ('buildman -m' does something similar).
+> >>>>>>>>
+> >>>>>>>> Note that buildman returns exit code 101 if there are any warnings, so
+> >>>>>>>> the build basically fails.
+> >>>>>>>>
+> >>>>>>>>>
+> >>>>>>>>> No defconfig seems to be setting this option, not sure exactly why that is.
+> >>>>>>>>
+> >>>>>>>> To me this is a difference between 'functionality' options and
+> >>>>>>>> development options. Putting development options in Kconfig makes it
+> >>>>>>>> harder to turn them on and off, since you must either edit the
+> >>>>>>>> defconfig or edit the .config file. It is easier to just pass an
+> >>>>>>>> environment variable.
+> >>>>>>>
+> >>>>>>> The point of a configuration is that it configures the build. Stuff in
+> >>>>>>> environment (directly or make FOO=bar) is a workaround and anti-pattern.
+> >>>>>>> Having to run one of the config front-end to change the config is a
+> >>>>>>> feature, and good thing.
+> >>>>>>
+> >>>>>> To give an example, we have boards which enable LTO, but it is
+> >>>>>> sometimes useful to disable it during development - it used to be a
+> >>>>>> huge time sync but something seems to have changed recently, as I
+> >>>>>> don't see much of a performance gap now. We don't want people
+> >>>>>> disabling LTO in the defconfig, though. The same applies for things
+> >>>>>> like V=1
+> >>>>>>
+> >>>>>> So I think there are build features which are of no use to end-users,
+> >>>>>> but are helpful for development. That is the distinction we have had
+> >>>>>> for a while and it would be a shame to lose it.
+> >>>>>
+> >>>>> Yes, the LTO thing is a good example of something we shouldn't have done
+> >>>>> really. Outside of sandbox you cannot just disable it.
+> >>>
+> >>> Are you sure about that?
+> >>
+> >> Yes. Outside of sandbox LTO is enabled because the platform binaries
+> >> will exceed their non-optional size constraints.
+> >
+> > That is certainly true for some boards, but I'm not sure it is very many.
+> >
+> >>
+> >>> I seldom build with LTO, except for CI. For
+> >>> an incremental build the non-LTO is often twice as fast. Most of the
+> >>> time when developing new features I am just trying to make things
+> >>> work, so it is big time-saver in the IDE. To some extent this is
+> >>> changing, though (LSPs and AI tools). The main impact for me is with
+> >>> sandbox incremental builds.
+> >>
+> >> We could maybe just drop LTO from sandbox, now that it's enabled more
+> >> widely on hardware.
+> >
+> > The nice thing about LTO for sandbox is that it tests a different
+> > build path. We could perhaps disable it for just the 'sandbox' board?
+> >
+> >>
+> >>>>>
+> >>>>
+> >>>> FYI, the Linux kernel defaults to CONFIG_WERROR=y. See commit
+> >>>> 3fe617ccafd6 ("Enable '-Werror' by default for all kernel builds")
+> >>>> (https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=3fe617ccafd6f5bb33c2391d6f4eeb41c1fd0151).
+> >>>
+> >>> Do we suffer from this same problem?
+> >>>
+> >>>>
+> >>>> I wouldn't necessarily recommend to switch it on right now, but I think
+> >>>> it could be a good idea in the mid-term. We're also very far behind in
+> >>>> terms of warn flags compared to the kernel. Syncing will take some time
+> >>>> though. For now I'm looking into enabling -Werror for host tools and
+> >>>> this resulted in (so far) 21 patches.
+> >>>
+> >>> I must be misunderstanding what you are referring to here. I don't see
+> >>> any warnings when building tools-only - certainly I would not put up
+> >>> with that. Do you mean that you are enabling additional warnings?
+> >>>
+> >>> We already have CI checking (which fails on the first warning) and we
+> >>> already show the warnings for normal builds. Importantly, without
+> >>> -Werror, we show *all* the warnings rather than just stopping at the
+> >>> first one depending on -j, etc.
+> >>>
+> >>> So forcing this option seems to be a tax on people who fix warnings,
+> >>> imposed by those who don't. It really should be the other way around
+> >>> :-)
+> >>>
+> >>> BTW we do have KCFLAGS which can be used to set Werror (and also
+> >>> perhaps other things).
+> >>
+> >> I'll note that I just had to request changes on another patch because
+> >> they didn't realize warnings had to be fixed. It's quite likely that
+> >> making CONFIG_WERROR=y will save more people more time (maybe document
+> >> make -k? I don't know what people don't know about these days, but I do
+> >> "make -kj" a lot when doing the randconfig stuff for example) than what
+> >> we do today.
+> >
+> > Yes, could be, particular if people are not using -s with make. I
+> > really dislike warnings quite a lot. I'd be happy enough with
+> > CONFIG_WERROR if we have an env var to disable -Werror like we have
+> > for LTO.
+> >
 >
-> Move the environment flags format documentation out of README and into
-> the developer environment documentation. Include the format in the
-> Kconfig help as well.
+> I'll let Tom speak his mind whether that's a good idea.
 >
-> This lets boards configure writeable-list policy and type validation
-> from defconfig without adding a config header solely for env flags.
+> I really don't want to be touching scripts/Makefile.extrawarn once
+> sync'ed with the one in Linux kernel's, so adding some logic in there is
+> a no-no in my book. So it means we can only change the CONFIG_WERROR
+> symbol. But we kinda don't want to rename it as it'll likely be used
+> throughout the source code (hopefully spreading more and more over time)
+> since we also want to sync as much as possible kbuild/makefiles from the
+> Linux kernel. So what I thought could be a way to make this more
+> palatable to you would be to introduce an invisible symbol which depends
+> on an env variable.
 >
-> Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
-> Reviewed-by: Tom Rini <trini@konsulko.com>
+> Something like
 >
-> README                               | 45 +-----------------------------------
->  configs/aristainetos2c_defconfig     |  1 +
->  configs/aristainetos2ccslb_defconfig |  1 +
->  configs/hmibsc_defconfig             |  1 +
->  configs/imx6q_bosch_acc_defconfig    |  1 +
->  configs/imx8qxp_capricorn.config     |  1 +
->  configs/smegw01_defconfig            |  1 +
->  configs/socrates_defconfig           |  1 +
->  doc/develop/environment.rst          | 40 ++++++++++++++++++++++++++++++++
->  env/Kconfig                          | 23 ++++++++++++++++++
->  include/configs/aristainetos2.h      |  3 ---
->  include/configs/capricorn-common.h   | 13 -----------
->  include/configs/hmibsc.h             |  4 ----
->  include/configs/imx6q-bosch-acc.h    | 12 ----------
->  include/configs/iot2050.h            |  8 -------
->  include/configs/smegw01.h            | 15 ------------
->  include/configs/socrates.h           |  2 --
->  include/env_flags.h                  |  6 +----
->  18 files changed, 72 insertions(+), 106 deletions(-)
-
-> diff --git a/include/configs/iot2050.h b/include/configs/iot2050.h
-> @@ -38,12 +38,4 @@
->         func(MMC, mmc, 0) \
->         BOOT_TARGET_USB(func)
+> config DISABLE_WERROR_FROM_ENV
+>    def_bool $(success, test "$(DISABLE_WERROR)" != "1" )
+>    help
+>      Allow to override CONFIG_WERROR from .config via the DISABLE_WERROR
+> environment variable.
 >
-> -#ifdef CONFIG_ENV_WRITEABLE_LIST
-> -#define CFG_ENV_FLAGS_LIST_STATIC                                    \
-> -     "board_uuid:sw,board_name:sw,board_serial:sw,board_a5e:sw,"     \
-> -     'mlfb:sw,fw_version:sw,seboot_version:sw,'                      \
-> -     'm2_manual_config:sw,'                                          \
-> -     "eth1addr:mw,eth2addr:mw,watchdog_timeout_ms:dw,boot_targets:sw"
-> -#endif
-> -
-
-Thanks for the clean-up!
-
-This one is being silently dropped, i.e. no matching
-CONFIG_ENV_FLAGS_LIST_STATIC is added to iot2050_defconfig
-
-The original commit (08cba536eff 'iot2050: Add
-CFG_ENV_FLAGS_LIST_STATIC') notes the list "will be needed when
-CONFIG_ENV_WRITEABLE_LIST is enabled", so it is waiting for the
-writeable-list to be turned on. You could carry the list over like the
-other boards, or make a note in the commit message about this, as I
-suppose the board maintainers can deal with it when needed.
-
-> diff --git a/include/configs/smegw01.h b/include/configs/smegw01.h
-> @@ -22,21 +22,6 @@
->  #define EXTRA_BOOTPARAMS
->  #endif
+> config WERROR
+>    depends on !DISABLE_WERROR_FROM_ENV
 >
-> -#ifdef CONFIG_SYS_BOOT_LOCKED
-> -#define EXTRA_ENV_FLAGS
-> -#else
-> -#define EXTRA_ENV_FLAGS 'mmcdev:dw,'
-> -#endif
-> -
-> -#define CFG_ENV_FLAGS_LIST_STATIC \
-> -     'mmcpart:dw,' \
-> -     'mmcpart_committed:dw,' \
-> -     'ustate:dw,' \
-> -     'bootcount:dw,' \
-> -     'bootlimit:dw,' \
-> -     'upgrade_available:dw,' \
-> -     EXTRA_ENV_FLAGS
+> for example (untested).
 
-This only captures the CONFIG_SYS_BOOT_LOCKED=y case (the defconfig
-default). For SYS_BOOT_LOCKED=n the old code added mmcdev:dw, so
-turning lockdown off via menuconfig silently loses write access to
-mmcdev under ENV_WRITEABLE_LIST.
+That's clever!
 
-For now you could just note in the commit message that the unlocked
-case is no longer supported, perhaps with a follow-up to move the
-SYS_BOOT_LOCKED dependency to Kconfig (e.g. defaulting
-CONFIG_ENV_FLAGS_LIST_STATIC on SYS_BOOT_LOCKED).
-
-Reviewed-by: Simon Glass <sjg@chromium.org>
+But Tom is very opposed to being able to disable -Werror from the
+environment for boards which enable it. Let's leave it alone.
 
 Regards,
 Simon
