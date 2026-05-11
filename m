@@ -4,54 +4,121 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30F7DCD37B5
-	for <u-boot@archiver.kernel.org>; Mon, 11 May 2026 07:38:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6FBBCD37AC
+	for <u-boot@archiver.kernel.org>; Mon, 11 May 2026 07:45:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9890484715;
-	Mon, 11 May 2026 09:38:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=free.fr
+	by phobos.denx.de (Postfix) with ESMTP id 30C3B84807;
+	Mon, 11 May 2026 09:45:09 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=free.fr header.i=@free.fr header.b="QMMt5cHa";
+	dkim=pass (2048-bit key; unprotected) header.d=nxp.com header.i=@nxp.com header.b="SBXbsO64";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 20BDF847C7; Mon, 11 May 2026 09:38:06 +0200 (CEST)
-Received: from smtp1-g21.free.fr (smtp1-g21.free.fr [212.27.42.1])
+ id 689F284815; Mon, 11 May 2026 09:45:07 +0200 (CEST)
+Received: from DB3PR0202CU003.outbound.protection.outlook.com
+ (mail-northeuropeazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0D090846C1
- for <u-boot@lists.denx.de>; Mon, 11 May 2026 09:38:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5F14A84715
+ for <u-boot@lists.denx.de>; Mon, 11 May 2026 09:45:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=free.fr
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=vjardin@free.fr
-Received: from localhost.localdomain (unknown [91.160.0.144])
- (Authenticated sender: vjardin@free.fr)
- by smtp1-g21.free.fr (Postfix) with ESMTPSA id 70269B0054C;
- Mon, 11 May 2026 09:37:48 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=free.fr;
- s=smtp-20201208; t=1778485081;
- bh=566IA549MdzllkQd80H3RxEbFvZz73x/oyXADZ1kpUM=;
- h=From:To:Cc:Subject:Date:From;
- b=QMMt5cHaj+ix6IBWj0MKXxmt5dVDzmmrIwRxkYmFrl5CE54GDQn0cZp7PNGH/vQzu
- U38nHojvE93Uj5bpTUmupJWSH+lsKyvmE58K1DaM2omVSJmwnwMT4XRbq7KYhwBZrF
- x6rgnrF0nu2B1+ggfdTZ47YE5gEhRfWA9H2jcgYyDiJb+imP+LmWVL9tJzyu4zY3m4
- b7z8UdNR9U2R8RGHq0IrSocJNU7yf0aEgOFdp/Uy+HDqZyK3x/Hfx2xf0ajPvPUSYO
- 9kcO3gY4RCCJrFHhPLb/eYs2c1jsnPUMPrNakzT56NwmUOnNNUC0AqyadgUQ4JSn3L
- 3UGRDsbQ1Ohhg==
-From: Vincent Jardin <vjardin@free.fr>
-To: u-boot@lists.denx.de
-Cc: Vincent Jardin <vjardin@free.fr>, Alice Guo <alice.guo@nxp.com>,
- Chunguang Li <chunguang.li_2@nxp.com>, Fabio Estevam <festevam@gmail.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Meenakshi Aggarwal <meenakshi.aggarwal@nxp.com>,
- Peng Fan <peng.fan@nxp.com>, Priyanka Jain <priyanka.jain@nxp.com>,
- Tom Rini <trini@konsulko.com>, Wasim Khan <wasim.khan@nxp.com>
-Subject: [PATCH v1] board: nxp: lx2160a: without QIXIS, MC-ENET, PCI, LTC3882
-Date: Mon, 11 May 2026 09:37:34 +0200
-Message-ID: <20260511073746.636424-1-vjardin@free.fr>
-X-Mailer: git-send-email 2.43.0
-MIME-Version: 1.0
+ dmarc=pass (p=none dis=none) header.from=nxp.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=ye.li@nxp.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=jKlm5MXPSbk2n7Tq/cHPhYHXNeY0unCgBnWne6nmK3Sa0C353hppu3jLlqzyMmKdIEjVntaF9iY1kYwDhxoHYcSQfdUzMemjiRZvNo/nLzPegXCSUPn+FcSmZ62Qc+6aBhTMc1k0sPABzRrtYBsQja2RNipmJuIA/o0RyMs5TxyM2qKWDGz4za86cAs9VY+Q7HY4TaBhUnyGTNNwlLaVlstQ2KGpSTs3YtU126UkGJh+ldgfO+BpCaAYevlrTh7tT838Mr/2AVvx8SfoQrjQaeDWTjqNkOrz6JUI0cg8TB7tjjCZrUynwe8W+ZuHVI6azzLjKzEInSnzYN2GRzjIpA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=TtU6VsPSgZP2kprSr7TwuDbCBYrNncDn1k/2Hoy0JSE=;
+ b=l8+aSxe86gz0CKCYXvd2IJRO8a8Pu9p/It+z1yh7T5H6ucK180w7cueifXeVhNlHUIrOlopCpiWlhvfURQlHOgWBJBcMaQDFhb4Kr/SLMzD9h4XvZWzUbUx/hXz0v4+7fnfcwIHZBJNpCO+Wlbh3Q9xvC8TPw/j7ZvFqPxvNKlfr6Cuv983Gc3DKLqnXPa7iztmqPuOm4cVgNG3cJFHISAMfp3zTLm/r2eLKNU+hXypBUHBwJZ7NgwljNJQIDVXCWdXgq8G7aMd0cfiHZoKlcC2ptUoystDTeKpdR8SzQkaX20pj0N6u10MvqDR/2zEDKR+xOcwQNRrosmEI48psrw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nxp.com; dmarc=pass action=none header.from=nxp.com; dkim=pass
+ header.d=nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nxp.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=TtU6VsPSgZP2kprSr7TwuDbCBYrNncDn1k/2Hoy0JSE=;
+ b=SBXbsO6411YCx0fdYC7nhNVOQFWEgYK46Z/CFZlZYBkz5/kAIDj73CqB9vrs+Y6hubWU/wSkABQwX27KB6PWQnx/p+npKR/KsIPU57XyEKmqjFAvInafXZJsPhbXmEaT6/i9nnwGf2cDKgkXOMfIfNqKHYTJwhVijpcykR3xvvzRxOv7H8nJSObFY1dACkyuOrqzD6he81MBg9h9w6tImh/ou+w34sAcDi21TP/hAzkK06eO1kRHW6b6Sc2iEedsA5v4krRL3SIZXvB24HXWEtIdbslAiFYgdceAQHLkzGaVR1t8RjUXFuFvrACHSOEr+RK4yngBHQwm4z1z0fca5g==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nxp.com;
+Received: from AM0PR04MB12051.eurprd04.prod.outlook.com
+ (2603:10a6:20b:743::24) by PAXPR04MB8606.eurprd04.prod.outlook.com
+ (2603:10a6:102:219::21) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9891.23; Mon, 11 May
+ 2026 07:45:01 +0000
+Received: from AM0PR04MB12051.eurprd04.prod.outlook.com
+ ([fe80::5839:856:e138:4029]) by AM0PR04MB12051.eurprd04.prod.outlook.com
+ ([fe80::5839:856:e138:4029%7]) with mapi id 15.20.9891.020; Mon, 11 May 2026
+ 07:45:01 +0000
+From: Ye Li <ye.li@nxp.com>
+To: festevam@gmail.com,
+	u-boot@lists.denx.de,
+	peng.fan@nxp.com
+Cc: uboot-imx@nxp.com,
+	ye.li@oss.nxp.com
+Subject: [PATCH] imx: priblob: Fix build break
+Date: Mon, 11 May 2026 15:47:12 +0800
+Message-Id: <20260511074712.3772830-1-ye.li@nxp.com>
+X-Mailer: git-send-email 2.37.1
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: SI2PR02CA0029.apcprd02.prod.outlook.com
+ (2603:1096:4:195::6) To AM0PR04MB12051.eurprd04.prod.outlook.com
+ (2603:10a6:20b:743::24)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AM0PR04MB12051:EE_|PAXPR04MB8606:EE_
+X-MS-Office365-Filtering-Correlation-Id: 80832c7c-fc1e-4bcf-63c5-08deaf3134c1
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|366016|19092799006|42112799006|376014|52116014|1800799024|56012099003|18002099003|38350700014;
+X-Microsoft-Antispam-Message-Info: BilNiwCdrkDo76uO9+S0BY2d3M/V6pP/Qef27ZTk8O+6wJAVaY5fAO+jQXgT7PA2EHvpsC6X9Ya3AbsuY1PocB5LcpfmuSRcJMlLIadm7/AuBClUNApr3vTAVypRGUKvn5vP53QwIEUgH4tBYxR2THCR7/PLump2FFZHjPVvGElPD3/Kt+XcPDMmxIpaHyWTyZFQxV8AOvpK3YFvTg0Mu9e2BRgOAx2n9B9XXPjdajpJpdYM51o1wkm9H/72RB85fi85p1wloEiieTqcyJC2V+MJ2VKeoMB90SmKzFscdZftVhDnM5kNMU1auu5EKpHOGweq1hsrrvXrlBTTx9FL5SYKEAH4+7+vGcbHjGc4cPkPeS7F+WzqCKoUqRmnVPjePNFRttpfb8pa5oJywwyFDN0xfALao4sIZ/bl/zqsiAWc1CP5DsEamiAmOGb2VHZMJNaEYrEwQ+e+DqxL+mws2Fv6tlsYJNNWCdEVLgOm7BFmlDSuwuJ4yTPu6A4dBqAYSCNGyQU50Ddzui/ulQqv37yClV0OZnz6CgOuj1YpbkuMmVICkyBbyRmnH/7ipF3y294mTANTBSllsdSGnAf24DFWM3463dloVv7jCPPU61ImsquTkCQvQL7Nc+aM+pmK850taTiIWoIe4rWpSIOg8obLWTw+hhCi7e7oHcki/zh5C3LfCS0hNvseXJ+zL22I1iWAhfRgJLj9LENU/RtuAzTpE5Q3uvglhCzlYGen+FIajiz4jYE4Qi/xrfyNV12Q
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AM0PR04MB12051.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(19092799006)(42112799006)(376014)(52116014)(1800799024)(56012099003)(18002099003)(38350700014);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?3R1YmfekYmoPaLph4uRw5VQxhdJSUekBTdDxbCVkzU0QdFW/vnu87bTB9O0p?=
+ =?us-ascii?Q?sQtYUN23djfFUjD0XQCP+0e7bDU50Lx5oBMZFU97HlgFlsw1p2v0hpWCJD0h?=
+ =?us-ascii?Q?sdFm/XTE9E/MqhnvDmIRH//jRcGEpgjrU4d6subVAEbyWn1utlUv8oKeq/rE?=
+ =?us-ascii?Q?h3JpYJ4V06MJ6nhfUTl/rqhoQxVKJlPRJIz0zDqAb+lVL2qcdS2xTRa/eXD0?=
+ =?us-ascii?Q?VhwENf/mLd0iX/jm1TBf3yo2uj4Vf4jHgBDZwWPQvoc8OvITYvhTwTp69DI6?=
+ =?us-ascii?Q?/QgHhoV3DzAr0kJxnLT6jgV1jo6cHfqxkFSQNIJ7JX3w2YDZ/psZeZOHIUWf?=
+ =?us-ascii?Q?WyEPhCWky760T+IgywWUxE7Vg43709YC/KA8l4wqIwjnz6IPYZJ/1noLUNHI?=
+ =?us-ascii?Q?+tj1GxzV6zuKh6yR+yC7tJLzwp8DRKLguWmCvDo9E73loHL42mpfznxojGDw?=
+ =?us-ascii?Q?rag+W2dmNCF4EG6rePg6PBrnuA2iG4nUTJ30WJDtsf94ZNu/0MZkieK5FFvk?=
+ =?us-ascii?Q?gp4/4zNHVIcesb1hwAHtDBEDxJ4mmXrDKJ9ADmDAtVTtR7MLSK3D620XiQ/N?=
+ =?us-ascii?Q?g6p3SmYKDjOs0EaEZ4+Xk8JHky0zCGFfvV5nSaPRfg92W2v6m4NHarF37Rd0?=
+ =?us-ascii?Q?IJilgqhIVBfSTc1UusJNY1ojaceQqOTJsJ/jPQzT8NJdPTb/H2SOvmGTYrbu?=
+ =?us-ascii?Q?Pya40wPRjSfjOqUirJ0MmTV0CDAkTcryExXcF02SdRRertT2GTsHPUHX3RWw?=
+ =?us-ascii?Q?pbta2SvK7FrMawvDhE3TIn824/JcgBYwoCyzoAIP06Kv5IXYRn6iBu6KnT2+?=
+ =?us-ascii?Q?TY4R50p29uoagUwHVujnfEx/3FUxHqG9MciTIg3gquGk9bPKZAt8zShJyeZb?=
+ =?us-ascii?Q?IZIK6BoQCk8UEhXcN2fQsDdz3U9BS2T+V1rsFa8eGM29aSf2aCnUq5n9Gcyf?=
+ =?us-ascii?Q?xERA8VcVCx1XFjUEAAIh0kPCZWLd3wlg6Q31UYvWRc0edw4U2T9ZB/o1seYK?=
+ =?us-ascii?Q?aMRiS/HgDvhpmJv6RpIEYeW228CPkybkqivrh9xmvLpYmWk/4H6zBa3NTpIU?=
+ =?us-ascii?Q?E3CQXXW4+LFqVujcKXfuN+DjtV/v7KJavNchAWdhTuI1sDkCyCD0mnfjTw/h?=
+ =?us-ascii?Q?yixJTOtJ+htXLTiV94EgAtX1C2cFhRslQ4Aofn6YO7BHwkROpcL53jA2pCZF?=
+ =?us-ascii?Q?D55xYjJqafVN7gJgfQZRQ9OTGNJC+NDioEAtJfjTav/3t1VVRsa0VmHLUNeT?=
+ =?us-ascii?Q?X59pwUf3ZFwJvGAu+ImqVXPDfcHVke9U621K568lW7uOZQRq24lviFT2TV89?=
+ =?us-ascii?Q?EvVmnLLzo9istwlxb9tekXthZcm/c2srbPIhEwTlUgkm+uRzgXf1/zCReX5u?=
+ =?us-ascii?Q?/3czhEN0sGhRcQm1lo7mhzOtxp5vtXmpiJ1E/E4tfrvTq7RLZKAbhOPYhBbT?=
+ =?us-ascii?Q?MOdIhXDClt7PPB3EkiP9NkooivRizoUU9hREVdF2TypCcEBzwshnzeCDzDh5?=
+ =?us-ascii?Q?dUxyhlXMGigMoXplzSBpfxeQVRWC6MVLZacB6wbsZjj5rsxM4TNZWniG9QVx?=
+ =?us-ascii?Q?cs/lA8K1kbTULnVoGzYKYE5x6dOV7yWAfn2TR/kqLsQZlSznO1iCQr19gzNB?=
+ =?us-ascii?Q?0BFVMGoAMYRQCgrnvvOE6qcJVJ6jK41ma1WWVPrmCLqSD99Di5G22KrdHLU8?=
+ =?us-ascii?Q?ZnnmWbBh3u8uvIoqUua7ViH+44yzeIP9wGkKfE+NNMW9JVX/?=
+X-OriginatorOrg: nxp.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 80832c7c-fc1e-4bcf-63c5-08deaf3134c1
+X-MS-Exchange-CrossTenant-AuthSource: AM0PR04MB12051.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 May 2026 07:45:00.9441 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: vTHE5MLOSDxVIE1wDD7EGrLkXaLeSogDZBNGTzVnscd2HupBKMmLJGint9wfOCAz
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXPR04MB8606
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -68,143 +135,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The shared LX2160A board file calls helpers that only exist when
-their subsystem is enabled. Gate them on the matching CONFIG_*:
- - pci_init() under CONFIG_PCI.
- - fdt_fixup_mc_ddr() and fsl_rgmii_init() under CONFIG_FSL_MC_ENET.
- - qixis_*() and the QIXIS branch of checkboard() under
-   CONFIG_FSL_QIXIS; cpu_name(buf) moves out so the non-QIXIS path
-   still prints "Board: <name>".
- - EVENT_SPY_SIMPLE on init_func_vid moves inside the
-   CONFIG_VOL_MONITOR_LTC3882_READ guard (was outside, dangling
-   symbol when LTC3882 off).
+Add config.h to fix CAAM_BASE_ADDR undeclared build error when
+CONFIG_CMD_PRIBLOB enabled.
 
- #if / #ifdef, not IS_ENABLED(), because the helpers are themselves
-conditionally compiled.
-
-While here, lx2160a_common.h: fix BOOT_TARGET_DEVICES_MMC
-1 arg vs 2 args and gate the MMC target on CONFIG_CMD_MMC,
-not CONFIG_MMC.
-
-No functional change for NXP boards: LX2160ARDB, LX2160AQDS, or
-LX2162AQDS, but mainly build clean up in order to support
-other NXP lx2160a boards without those HW dependencies.
-
-Signed-off-by: Vincent Jardin <vjardin@free.fr>
-
+Signed-off-by: Ye Li <ye.li@nxp.com>
 ---
+ arch/arm/mach-imx/priblob.c | 1 +
+ 1 file changed, 1 insertion(+)
 
- arch/arm/cpu/armv8/fsl-layerscape/cpu.c |  6 +++++-
- board/nxp/lx2160a/lx2160a.c             | 18 +++++++++++++-----
- include/configs/lx2160a_common.h        |  4 ++--
- 3 files changed, 20 insertions(+), 8 deletions(-)
-
-diff --git a/arch/arm/cpu/armv8/fsl-layerscape/cpu.c b/arch/arm/cpu/armv8/fsl-layerscape/cpu.c
-index cfbaa475701..5144a1e3c0e 100644
---- a/arch/arm/cpu/armv8/fsl-layerscape/cpu.c
-+++ b/arch/arm/cpu/armv8/fsl-layerscape/cpu.c
-@@ -1143,7 +1143,7 @@ int arch_early_init_r(void)
- #ifdef CONFIG_SYS_HAS_SERDES
- 	fsl_serdes_init();
- #endif
--#ifdef CONFIG_SYS_FSL_HAS_RGMII
-+#if defined(CONFIG_SYS_FSL_HAS_RGMII) && defined(CONFIG_FSL_MC_ENET)
- 	/* some dpmacs in armv8a based freescale layerscape SOCs can be
- 	 * configured via both serdes(sgmii, 10gbase-r, xlaui etc) bits and via
- 	 * EC*_PMUX(rgmii) bits in RCW.
-@@ -1158,6 +1158,10 @@ int arch_early_init_r(void)
- 	 * function of SOC, the dpmac will be enabled as RGMII even if it was
- 	 * also enabled before as SGMII. If ECx_PMUX is not configured for
- 	 * RGMII, DPMAC will remain configured as SGMII from fsl_serdes_init().
-+	 *
-+	 * fsl_rgmii_init() itself is only built under CONFIG_FSL_MC_ENET
-+	 * (drivers/net/ldpaa_eth/); gate the call the same way so builds
-+	 * without MC-ENET still link.
- 	 */
- 	fsl_rgmii_init();
- #endif
-diff --git a/board/nxp/lx2160a/lx2160a.c b/board/nxp/lx2160a/lx2160a.c
-index 341f82ce724..da943f161da 100644
---- a/board/nxp/lx2160a/lx2160a.c
-+++ b/board/nxp/lx2160a/lx2160a.c
-@@ -242,13 +242,17 @@ int init_func_vid(void)
+diff --git a/arch/arm/mach-imx/priblob.c b/arch/arm/mach-imx/priblob.c
+index 65924483bc8..c22435c1676 100644
+--- a/arch/arm/mach-imx/priblob.c
++++ b/arch/arm/mach-imx/priblob.c
+@@ -10,6 +10,7 @@
+  * to decrypt an encrypted boot image.
+  */
  
- 	return 0;
- }
--#endif
- EVENT_SPY_SIMPLE(EVT_MISC_INIT_F, init_func_vid);
-+#endif
- 
- int checkboard(void)
- {
--	enum boot_src src = get_boot_src();
- 	char buf[64];
-+
-+	cpu_name(buf);
-+
-+#if IS_ENABLED(CONFIG_FSL_QIXIS)
-+	enum boot_src src = get_boot_src();
- 	u8 sw;
- #if defined(CONFIG_TARGET_LX2160AQDS) || defined(CONFIG_TARGET_LX2162AQDS)
- 	int clock;
-@@ -258,7 +262,6 @@ int checkboard(void)
- 					   "100 separate SSCG"};
- #endif
- 
--	cpu_name(buf);
- #if defined(CONFIG_TARGET_LX2160AQDS) || defined(CONFIG_TARGET_LX2162AQDS)
- 	printf("Board: %s-QDS, ", buf);
- #else
-@@ -325,7 +328,10 @@ int checkboard(void)
- 	clock = sw >> 4;
- 	printf("Clock1 = %sMHz Clock2 = %sMHz\n", freq[clock], freq[clock]);
- #endif
--#endif
-+#endif /* LX2160ARDB-inside-QIXIS switch */
-+#else /* !CONFIG_FSL_QIXIS */
-+	printf("Board: %s\n", buf);
-+#endif /* CONFIG_FSL_QIXIS */
- 	return 0;
- }
- 
-@@ -554,7 +560,7 @@ int board_init(void)
- 	out_le32(irq_ccsr + IRQCR_OFFSET / 4, AQR107_IRQ_MASK);
- #endif
- 
--#if !defined(CONFIG_SYS_EARLY_PCI_INIT)
-+#if defined(CONFIG_PCI) && !defined(CONFIG_SYS_EARLY_PCI_INIT)
- 	pci_init();
- #endif
- 	return 0;
-@@ -788,7 +794,9 @@ int ft_board_setup(void *blob, struct bd_info *bd)
- 
- 	ft_cpu_setup(blob, bd);
- 
-+#if IS_ENABLED(CONFIG_FSL_MC_ENET)
- 	fdt_fixup_mc_ddr(&mc_memory_base, &mc_memory_size);
-+#endif
- 
- 	if (mc_memory_base != 0)
- 		mc_memory_bank++;
-diff --git a/include/configs/lx2160a_common.h b/include/configs/lx2160a_common.h
-index 45b5cbdd85a..dc0d24dca0a 100644
---- a/include/configs/lx2160a_common.h
-+++ b/include/configs/lx2160a_common.h
-@@ -197,10 +197,10 @@
- #define BOOT_TARGET_DEVICES_USB(func)
- #endif
- 
--#ifdef CONFIG_MMC
-+#ifdef CONFIG_CMD_MMC
- #define BOOT_TARGET_DEVICES_MMC(func, instance) func(MMC, mmc, instance)
- #else
--#define BOOT_TARGET_DEVICES_MMC(func)
-+#define BOOT_TARGET_DEVICES_MMC(func, instance)
- #endif
- 
- #ifdef CONFIG_SCSI
++#include <config.h>
+ #include <asm/io.h>
+ #include <command.h>
+ #include <fsl_sec.h>
 -- 
-2.43.0
+2.37.1
 
-base-commit: bfe90a308a94caa9d855440683521ff04122ae2a
-branch: for-upstream/lx2160a-gate-feature-subsystems
