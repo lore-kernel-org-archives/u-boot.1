@@ -4,81 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2710ECD37BE
-	for <u-boot@archiver.kernel.org>; Mon, 11 May 2026 13:25:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E4EFCD37AC
+	for <u-boot@archiver.kernel.org>; Mon, 11 May 2026 13:26:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8024184659;
-	Mon, 11 May 2026 15:25:55 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 270A48466C;
+	Mon, 11 May 2026 15:25:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="MYnwlNCf";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="qk7zZ7Np";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2542381E18; Mon, 11 May 2026 15:05:11 +0200 (CEST)
-Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
- [IPv6:2a00:1450:4864:20::531])
+ id 6390284659; Mon, 11 May 2026 15:19:17 +0200 (CEST)
+Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
+ [IPv6:2a00:1450:4864:20::52c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 28D0C800AE
- for <u-boot@lists.denx.de>; Mon, 11 May 2026 15:05:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EA29E8460C
+ for <u-boot@lists.denx.de>; Mon, 11 May 2026 15:19:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-ed1-x531.google.com with SMTP id
- 4fb4d7f45d1cf-6763cc8775cso9552430a12.0
- for <u-boot@lists.denx.de>; Mon, 11 May 2026 06:05:08 -0700 (PDT)
+Received: by mail-ed1-x52c.google.com with SMTP id
+ 4fb4d7f45d1cf-670ab084a39so7323141a12.3
+ for <u-boot@lists.denx.de>; Mon, 11 May 2026 06:19:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1778504708; x=1779109508; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1778505553; x=1779110353; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=HeF3I9x/2KjRT12yjxYWVzMtKn/Xo5ZTMmFlH576UTI=;
- b=MYnwlNCf6YfmBBQgThCGTyZIAnKUjHCy6efQil77Nsy2YGuZaAiXgm1RNjMoDN1oWb
- xMQ7H9OvMXJ4DZGp2+elVkETVOrWC9fCOcs3uGEKLfnlFv59MqMLDH8NFTDxyOR+Hg3d
- iXdwCjnAnAT+vStIaDQv7mnyeT1Np/IhrY7vH6+Ze+qHCvFVUIRCFywWPFWowQrnsqmp
- s12L+J06tW4R6qoo3J5SCMeKQ+Tt0ANxGkQgJpqU4d6d8FbswhzTLYms6KrKowzbEMAU
- OVurhVXDi5RtXwd9ALKhy5Q7k7H2BZoj0F9DQGs7mgrgs9vHTbGF53EcJsu1vJXVsWeS
- Ki5A==
+ bh=N7colbHD1L88YNwaUQwJi+hxfCnZ9sO4HW3Ynv8wVGE=;
+ b=qk7zZ7NplqdQz0vuohNzSiGWEl25gKXdFQbh32+mYNFFc66wdCVXDgZSbUjTNlJto4
+ OYpkgp6hlayaPu6KUbXKI+rLFhY25Mr4yRV01RnWPjB0bG+X0Oqan0I/oCToysrDQ3L7
+ lxnjP0QWEbt2l+O2FrOqCkKHOy1vb4huuEQf4mcXzlrDGGDERNPzB4Kx3BVJey4g1cEI
+ CEBS5VKKN/ZTer//GKzBqGWxFZo6PlbR3i6URC6kEvJaamvk5MGHTVH/JX6ADTyUzI4z
+ WSKpHgkAkVZYV51i/8Apxu7celZSRh8oVbQW+2XjuaQoatd2o755GmU09rQLrgSf4Id6
+ 3IZg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778504708; x=1779109508;
+ d=1e100.net; s=20251104; t=1778505553; x=1779110353;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=HeF3I9x/2KjRT12yjxYWVzMtKn/Xo5ZTMmFlH576UTI=;
- b=iomhZPyFnAAqDwg/xo/reTpBcMEHcpAitCqyzOX0Ew8JyU8Oo2zbQ/3VLLeVlUA4Ea
- 88CICKkmaihZ49TshoudJ8M8qCFCTwKuFM1iQQgON4IAouLFiwIfdiyP5LefZIOTz7Aq
- kMLVd9fGTib6oBq2ZBAy/jCFiyc4+63ISmDLgeNtyYmmYVfrvKGVcgD7UF9q8WdP3EPs
- /HRxRi9Mt0Hzsk/4P9HC0oK/Vdfkj26TY2ZpBMpKX3ZXHSQdHOgBadZHgcpCqyaXSdxz
- WwAu2itwtLNShiNXCBv68eWpWJzQB5mTOLha8MnPJHM1Vc4dFebKPtlmAv9gV4IwXPef
- n0SA==
+ bh=N7colbHD1L88YNwaUQwJi+hxfCnZ9sO4HW3Ynv8wVGE=;
+ b=gUsIXLjya8xtilGORlO59UrfhnPztUYZFmzO+Wymbtz0cvrGE5C6HYIUPYZDHHBMYw
+ 27lr+2zlKbzVaEjxIzRdubSWTLSz9DvIWpMYpRgTPQ55SvDwvd9Ug1/WDIiw+Q8h2k/X
+ 8pCU2pMIr6Iz9ndM5F0XZTsoK0ZVLRNbgL8ZrncQg5UYVBHq4FrXfyEGwLiAGR+mH9hX
+ YsDc7OYASdaWuKNIxN0ITKdV5PAIQOSgEp+JdSnjBmGR5ER7emax0DIM4HxP5emNHeW8
+ x90yZvK+iqZ87j7uQ4tzvvtPRVjLj0iYd6AuF3Dep5zmRczxJElf1q2Pj0ULzl/I+f7P
+ t6lw==
 X-Forwarded-Encrypted: i=1;
- AFNElJ+MiSgupS5Yltol33YT+fYlkU4YYy0H2Ja2zYwJ1m/hWVANKNjuF/7IdusB9gzthC9AcaCP0ao=@lists.denx.de
-X-Gm-Message-State: AOJu0YwW9JcKW65wxspTSEYP3l0TRWYnW6RhljNCleEpG9DcRvSr6wna
- ++ZR/WxCXVtGeOzJLXuHRTUK3lodff1N10stWybxOmhq1pWB+79AFK9YwPRWBBmaLNs=
-X-Gm-Gg: Acq92OFIpDIjOkQaOVUidZzmJEiKPR4A+PmJWx7UhomfnwtReolUuuAA30hR+tDGxww
- FKPCbo1nttTtkvzGay8iYgJnbgemwKjxq2LPZNxME9xWzGA2lIeBNc8H9lAeVH/n2efQxRCDKfk
- rWeoSFyZlPx9dKIEGE5V/Ze3GrADaa0wt++3o+jYLXYGCCFu4GVlePk9EzNdd8DnTe9rBpw523k
- 0ps7aOPCqcaTm9bfDjJmbQoC4x7R4OIz62zl+UH2Mqbl5XU3RQr6LUezQ/GzclwZcPr4rMCszNU
- EuHTMUyXEK/LEyK7rKv9NXaWPslOKdZWeloHEa9RB8Iu+JNd9k3/n9CSgz3frNi3A4sllVpxo4Q
- AnjKEH47j3xJwGnZKHFXDLH5lZlAzXB9erwk+LdEOdtJJl1T1dC1Go7yrAVjE3nR0c5tItkvfE7
- p91ntYvALZFmdQuucwFckT6alEOjdXJaYiRbkltgzXiojXyOorWDUGW2OK2LYGbXtT7Q==
-X-Received: by 2002:a17:907:2d11:b0:bd1:b97c:5c6e with SMTP id
- a640c23a62f3a-bd1b97c654amr68957266b.17.1778504708014; 
- Mon, 11 May 2026 06:05:08 -0700 (PDT)
+ AFNElJ+gQSVK3iWNSr9yV+1AMjUgIZfPXirXfEvvGNsaGf6OS59WJqHPpebHQlFD1cMlHthAWLZ8v+U=@lists.denx.de
+X-Gm-Message-State: AOJu0YznVBRQllWKkTQMbvt7aaXipEthBDwlDosoGTxdvNulcE5YUQjE
+ BWjU9WdHi501YrL21HKJwDi+8gEceKh9xMRD52LBmRFbdEJArE/o+RUQY1fJkcPiMYA=
+X-Gm-Gg: Acq92OEXhwTuLjfoBm3UZAPB+vsre7M6kylQRO+TdrMrYcPYyrj++R+CKX62YXCmS9e
+ Pl/uFoJgc1xmmwguisL1S5tzIff+9mJLN9wWcLryw89ydcgH9GQgIiA/b6OLrCWRs1n23Pdu1LQ
+ eC2WFyOCrxX4V8QNFrzoY+odHg/FhvWeDjmq3mHfkrJApjPqKqrxpdxVPlCprC1aCYFeFbkfr0U
+ 2r2894oCd+gLRWqWwWT/KtNuxqEcSI/2oX201TZHakEXCUCOZdGCTNKBgMTKnEVtr0fFULXuuBS
+ foJqc2FAQyXOlC3it61Kte5tSK5or7QDh0NCcqm8gAU61GylNfdElTRnZTpiGAOQ+sz8jIW4wXk
+ DJ7EInWNKuU162wAH0a/PhO7f+6wKVlQT16tIu0YWMT0g8TgP7jiQXgezYSzv410ZDQxwYUvTjo
+ jzVlSpz/C8ZMwAx65YkArrJxCN81IFJzR68c+9W/yaHz4rS54jFR7aZt2jWswUvPWdmQ==
+X-Received: by 2002:a05:6402:3509:b0:674:37b7:227c with SMTP id
+ 4fb4d7f45d1cf-67d63aa055amr12414374a12.2.1778505553198; 
+ Mon, 11 May 2026 06:19:13 -0700 (PDT)
 Received: from [192.168.1.36] (p4fc3dd86.dip0.t-ipconnect.de. [79.195.221.134])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-bcd60f726desm278217366b.25.2026.05.11.06.05.06
+ 4fb4d7f45d1cf-67f74af9ec6sm2570286a12.29.2026.05.11.06.19.10
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 11 May 2026 06:05:07 -0700 (PDT)
-Message-ID: <fc28d41d-957e-41b2-95ec-85b328dd611e@linaro.org>
-Date: Mon, 11 May 2026 15:05:05 +0200
+ Mon, 11 May 2026 06:19:12 -0700 (PDT)
+Message-ID: <7007cacb-bfa7-4034-a669-d24481ef063d@linaro.org>
+Date: Mon, 11 May 2026 15:19:10 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v7 07/11] mach-snapdragon: Kconfig: changes / additions to
- support SPL
+Subject: Re: [PATCH v7 10/11] qualcomm: add defconfig, env and docs for SPL on
+ sdm845
 Content-Language: en-US
 To: michael.srba@seznam.cz, u-boot@lists.denx.de,
  Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io
@@ -114,9 +114,9 @@ Cc: Tom Rini <trini@konsulko.com>,
  Alexey Charkov <alchark@gmail.com>, Ronald Wahl <ronald.wahl@legrand.com>,
  Michael Trimarchi <michael@amarulasolutions.com>
 References: <20260508-qcom_spl-v7-0-7d0e22aaaa8f@seznam.cz>
- <20260508-qcom_spl-v7-7-7d0e22aaaa8f@seznam.cz>
+ <20260508-qcom_spl-v7-10-7d0e22aaaa8f@seznam.cz>
 From: Casey Connolly <casey.connolly@linaro.org>
-In-Reply-To: <20260508-qcom_spl-v7-7-7d0e22aaaa8f@seznam.cz>
+In-Reply-To: <20260508-qcom_spl-v7-10-7d0e22aaaa8f@seznam.cz>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-Mailman-Approved-At: Mon, 11 May 2026 15:25:54 +0200
@@ -141,123 +141,301 @@ Hi Michael,
 On 08/05/2026 23:45, michael.srba@seznam.cz wrote:
 > From: Michael Srba <Michael.Srba@seznam.cz>
 > 
-> Select SUPPORT_SPL so SPL build can be enabled, disable SYSRESET_PSCI in SPL.
-> (SPL runs in EL3, so if SPL itself doesn't provide PSCI, nothing else will.)
-
-I'm not sure if this was mentioned in a previous revision, but would it
-be possible to introduce a SNAPDRAGON_SPL kconfig (mayyybe in the
-mach-snapdragon kconfig?) to contain all the "if SPL" options and just
-simplify the list here? It just feels wrong to have half the options in
-the list be gated like this.
-
-It seems quite likely that we will end up with a few different SPL
-variants for snapdragon:
-
-1. Your implementation for older SoCs doing many things from scratch
-2. Qualcomms version for IoT more tightly integrated with TF-A
-3. Another version I've seen where SPL is just used to chainload a full
-U-Boot and provide an extra level of redundancy
-
-These will all have slightly different requirements and code paths so
-being able to express this via kconfig seems like a good way to try and
-keep things manageable.
-
-> 
-> Also select (SPL_)OF_LIVE and DM_EVENT/SPL_EVENT, which are needed to fix up
-> upstream dt to make usb work.
-> 
-> Mirror u-boot proper selections like GPIO and pinctrl to ensure consistent
-> behavior, and select SPL_SPRINTF, SPL_LIBCOMMON_SUPPORT etc for similar
-> reasons.
+> The defconfig should in principle be board-agnostic. Environment
+> simply contains a dfu env specifying where to load u-boot proper
+> (TEXT_BASE - 64).
 > 
 > Signed-off-by: Michael Srba <Michael.Srba@seznam.cz>
 > Reviewed-by: Simon Glass <sjg@chromium.org>
 > ---
->  arch/arm/Kconfig                 | 33 ++++++++++++++++++++++++++++++++-
->  arch/arm/mach-snapdragon/Kconfig | 10 ++++++++++
->  2 files changed, 42 insertions(+), 1 deletion(-)
+>  MAINTAINERS                   |   1 +
+>  board/qualcomm/sdm845_spl.env |   2 +
+>  configs/sdm845_spl_defconfig  | 137 ++++++++++++++++++++++++++++++++++++++++++
+>  doc/board/qualcomm/index.rst  |   1 +
+>  doc/board/qualcomm/spl.rst    |  91 ++++++++++++++++++++++++++++
+>  5 files changed, 232 insertions(+)
 > 
-> diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
-> index f624675eadf..8e818071df6 100644
-> --- a/arch/arm/Kconfig
-> +++ b/arch/arm/Kconfig
-> @@ -1135,6 +1135,7 @@ config ARCH_SNAPDRAGON
->  	bool "Qualcomm Snapdragon SoCs"
->  	select ARM64
->  	select DM
-> +	select DM_EVENT if USB_DWC3_GENERIC
->  	select DM_GPIO
->  	select DM_SERIAL
->  	select DM_RESET
-> @@ -1149,9 +1150,39 @@ config ARCH_SNAPDRAGON
->  	select SAVE_PREV_BL_FDT_ADDR if !ENABLE_ARM_SOC_BOOT0_HOOK
->  	select LINUX_KERNEL_IMAGE_HEADER if !ENABLE_ARM_SOC_BOOT0_HOOK
->  	select SYSRESET
-> -	select SYSRESET_PSCI
-> +	select SYSRESET_PSCI if !SPL
->  	select ANDROID_BOOT_IMAGE_IGNORE_BLOB_ADDR
->  	select MMU_PGPROT
-> +	select SUPPORT_SPL
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index 0dcc7243124..be830658cfc 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -681,6 +681,7 @@ S:	Maintained
+>  T:	git https://source.denx.de/u-boot/custodians/u-boot-snapdragon.git
+>  F:	configs/qcm6490_defconfig
+>  F:	configs/qcs9100_defconfig
+> +F:	configs/sdm845_spl_defconfig
+>  F:	drivers/*/*/pm8???-*
+>  F:	drivers/gpio/msm_gpio.c
+>  F:	drivers/mmc/msm_sdhci.c
+> diff --git a/board/qualcomm/sdm845_spl.env b/board/qualcomm/sdm845_spl.env
+> new file mode 100644
+> index 00000000000..2396d003b0c
+> --- /dev/null
+> +++ b/board/qualcomm/sdm845_spl.env
+> @@ -0,0 +1,2 @@
+> +# U-Boot proper text base - 64
+> +dfu_alt_info_ram=uboot.bin ram 0x1487FFC0 0x180000
+> diff --git a/configs/sdm845_spl_defconfig b/configs/sdm845_spl_defconfig
+> new file mode 100644
+> index 00000000000..2db63876266
+> --- /dev/null
+> +++ b/configs/sdm845_spl_defconfig
+
+Please name this qcom_sdm845_spl_defconfig instead, that also means you
+can remove the MAINTAINERS change here.
+
+Would it make sense to try and strip this down to only the necessary
+stuff? I understand this is more of a PoC though, maybe some of the more
+debug-oriented stuff could go in a config fragment (like
+LOG_MAX_LEVEL=9)? Then the docs can make it clear that you probably want
+the debug fragment and if it becomes more usable in the future (like
+doing DDR training) it doesn't require changing/removing a bunch of
+stuff from here.
+
+> @@ -0,0 +1,137 @@
+> +CONFIG_ARM=y
+> +CONFIG_SKIP_LOWLEVEL_INIT=y
+> +CONFIG_COUNTER_FREQUENCY=19200000
+> +CONFIG_POSITION_INDEPENDENT=y
+> +# CONFIG_INIT_SP_RELATIVE is not set
+> +CONFIG_ARCH_SNAPDRAGON=y
+> +CONFIG_TEXT_BASE=0x14880000
+> +CONFIG_SYS_MALLOC_LEN=0x20000
+> +CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+> +CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x146bffff
+> +CONFIG_SPL_SYS_MALLOC_F_LEN=0x20000
+> +CONFIG_SPL_SERIAL=y
+> +CONFIG_SPL_DRIVERS_MISC=y
+> +CONFIG_SPL_STACK=0x146bffff
+> +CONFIG_SPL_TEXT_BASE=0x1483f000
+> +CONFIG_SPL_BSS_START_ADDR=0x14680000
+> +CONFIG_SPL_BSS_MAX_SIZE=0x2000
+> +CONFIG_SYS_BOOTM_LEN=0x4000000
+> +CONFIG_SYS_LOAD_ADDR=0x0
+> +CONFIG_WATCHDOG_TIMEOUT_MSECS=60000
+> +CONFIG_BOOT0_SDM845_WORKAROUND=y
+> +CONFIG_SPL=y
+> +CONFIG_SPL_PAYLOAD="u-boot.img"
+> +CONFIG_SKIP_RELOCATE=y
+> +# CONFIG_EFI_LOADER is not set
+> +CONFIG_OF_BOARD_SETUP=y
+> +CONFIG_USE_PREBOOT=y
+> +CONFIG_CONSOLE_RECORD=y
+> +CONFIG_CONSOLE_RECORD_OUT_SIZE=0xA000
+> +CONFIG_CONSOLE_RECORD_OUT_SIZE_F=0xA000
+> +CONFIG_LOGLEVEL=9
+> +CONFIG_SYS_STDIO_DEREGISTER=y
+> +CONFIG_LOG_MAX_LEVEL=9
+> +CONFIG_SPL_LOG=y
+> +CONFIG_SPL_LOG_MAX_LEVEL=9
+> +# CONFIG_DISPLAY_CPUINFO is not set
+> +CONFIG_SPL_MAX_SIZE=0x7ffc0
+> +CONFIG_SPL_PAD_TO=0x0
+> +CONFIG_SPL_REMAKE_ELF_LDSCRIPT="arch/arm/mach-snapdragon/u-boot-spl-elf-sdm845.lds"
+> +CONFIG_SPL_DMA=y
+> +CONFIG_SPL_REMAKE_ELF=y
+> +CONFIG_SPL_DM_RESET=y
+> +CONFIG_SPL_POWER_DOMAIN=y
+> +CONFIG_BOOTM_NETBSD=y
+> +CONFIG_CMD_CLK=y
+> +CONFIG_CMD_DFU=y
+> +CONFIG_CMD_GPIO=y
+> +CONFIG_CMD_I2C=y
+> +CONFIG_CMD_MMC=y
+> +CONFIG_CMD_UFS=y
+> +CONFIG_CMD_CAT=y
+> +CONFIG_CMD_RNG=y
+> +CONFIG_CMD_REGULATOR=y
+> +CONFIG_CMD_LOG=y
+> +CONFIG_OF_UPSTREAM_BUILD_VENDOR=y
+> +CONFIG_ENV_USE_DEFAULT_ENV_TEXT_FILE=y
+> +CONFIG_ENV_DEFAULT_ENV_TEXT_FILE="board/qualcomm/sdm845_spl.env"
+> +CONFIG_NET_RANDOM_ETHADDR=y
+> +# CONFIG_OFNODE_MULTI_TREE is not set
+> +CONFIG_BUTTON_QCOM_PMIC=y
+> +CONFIG_CLK=y
+> +CONFIG_SPL_CLK=y
+> +CONFIG_CLK_STUB=y
+> +CONFIG_SPL_CLK_STUB=y
+> +CONFIG_CLK_QCOM_SDM845=y
+> +CONFIG_DFU_MMC=y
+> +CONFIG_DFU_RAM=y
+> +CONFIG_DFU_SCSI=y
+> +CONFIG_SYS_DFU_DATA_BUF_SIZE=0x5000
+> +CONFIG_DMA=y
+> +CONFIG_DMA_CHANNELS=y
+> +CONFIG_USB_FUNCTION_FASTBOOT=y
+> +CONFIG_FASTBOOT_BUF_ADDR=0xdeadbeef
+> +CONFIG_MSM_GPIO=y
+> +CONFIG_QCOM_PMIC_GPIO=y
+> +CONFIG_DM_I2C=y
+> +CONFIG_SYS_I2C_QUP=y
+> +CONFIG_I2C_MUX=y
+> +CONFIG_IOMMU=y
+> +CONFIG_QCOM_HYP_SMMU=y
+> +CONFIG_MISC=y
+> +CONFIG_NVMEM=y
+> +CONFIG_I2C_EEPROM=y
+> +CONFIG_MMC_SDHCI=y
+> +CONFIG_MMC_SDHCI_ADMA=y
+> +CONFIG_MMC_SDHCI_MSM=y
+> +CONFIG_DM_ETH_PHY=y
+> +CONFIG_PHY=y
+> +CONFIG_SPL_PHY=y
+> +CONFIG_PHY_QCOM_QMP_UFS=y
+> +CONFIG_PHY_QCOM_QUSB2=y
+> +CONFIG_PHY_QCOM_USB_SNPS_FEMTO_V2=y
+> +CONFIG_PHY_QCOM_SNPS_EUSB2=y
+> +CONFIG_PHY_QCOM_USB_HS_28NM=y
+> +CONFIG_PHY_QCOM_USB_SS=y
+> +CONFIG_PINCTRL=y
+> +CONFIG_PINCONF=y
+> +CONFIG_PINCTRL_QCOM_APQ8016=y
+> +CONFIG_PINCTRL_QCOM_APQ8096=y
+> +CONFIG_PINCTRL_QCOM_QCM2290=y
+> +CONFIG_PINCTRL_QCOM_QCS404=y
+> +CONFIG_PINCTRL_QCOM_SDM845=y
+> +CONFIG_PINCTRL_QCOM_SM6115=y
+> +CONFIG_PINCTRL_QCOM_SM8250=y
+> +CONFIG_PINCTRL_QCOM_SM8550=y
+> +CONFIG_PINCTRL_QCOM_SM8650=y
+> +CONFIG_PINCTRL_QCOM_X1E80100=y
+> +CONFIG_DM_PMIC=y
+> +CONFIG_PMIC_QCOM=y
+> +CONFIG_DM_REGULATOR=y
+> +CONFIG_DM_REGULATOR_FIXED=y
+> +CONFIG_DM_REGULATOR_QCOM_RPMH=y
+> +CONFIG_DM_RNG=y
+> +CONFIG_RNG_MSM=y
+> +CONFIG_SCSI=y
+> +CONFIG_MSM_SERIAL=y
+> +CONFIG_SOC_QCOM=y
+> +CONFIG_QCOM_COMMAND_DB=y
+> +CONFIG_QCOM_RPMH=y
+> +CONFIG_SPMI_MSM=y
+> +CONFIG_SYSINFO=y
+> +CONFIG_SYSINFO_SMBIOS=y
+> +CONFIG_SYSRESET_QCOM_PSHOLD=y
+> +CONFIG_USB=y
+> +CONFIG_USB_DWC3=y
+> +CONFIG_USB_DWC3_GENERIC=y
+> +CONFIG_SPL_USB_DWC3_GENERIC=y
+> +CONFIG_USB_GADGET=y
+> +CONFIG_USB_GADGET_VENDOR_NUM=0x0525
+> +CONFIG_USB_GADGET_PRODUCT_NUM=0xb4a4
+> +CONFIG_USB_ETHER=y
+> +CONFIG_USB_ETH_CDC=y
+> +CONFIG_SPL_DFU=y
+> +CONFIG_SPL_USB_SDP_SUPPORT=y
+> +CONFIG_UFS=y
+> +# CONFIG_SPL_USE_TINY_PRINTF is not set
+> +CONFIG_CIRCBUF=y
+> diff --git a/doc/board/qualcomm/index.rst b/doc/board/qualcomm/index.rst
+> index 3238a68e859..65e3e222f68 100644
+> --- a/doc/board/qualcomm/index.rst
+> +++ b/doc/board/qualcomm/index.rst
+> @@ -14,3 +14,4 @@ Qualcomm
+>     iq8
+>     phones
+>     rdp
+> +   spl
+> diff --git a/doc/board/qualcomm/spl.rst b/doc/board/qualcomm/spl.rst
+> new file mode 100644
+> index 00000000000..0cf18c70e4a
+> --- /dev/null
+> +++ b/doc/board/qualcomm/spl.rst
+> @@ -0,0 +1,91 @@
+> +.. SPDX-License-Identifier: GPL-2.0+
+> +.. sectionauthor:: Michael Srba <Michael.Srba@seznam.cz>
 > +
-> +	select OF_LIVE if USB_DWC3_GENERIC
-> +	select SPL_OF_LIVE if SPL_USB_DWC3_GENERIC
-> +	select ARMV8_SPL_EXCEPTION_VECTORS if SPL
-> +	select ENABLE_ARM_SOC_BOOT0_HOOK if SPL
-> +	select SPL_DM if SPL
-> +	select SPL_DM_GPIO if SPL
-> +	select SPL_DM_PMIC if SPL
-> +	select SPL_DM_USB_GADGET if SPL
-> +	select SPL_ENV_SUPPORT if SPL
-> +	select SPL_EVENT if SPL_USB_DWC3_GENERIC
-> +	select SPL_GPIO if SPL
-> +	select SPL_HAS_BSS_LINKER_SECTION if SPL
-> +	select SPL_LIBCOMMON_SUPPORT if SPL
-> +	select SPL_LIBDISK_SUPPORT if SPL
-> +	select SPL_LIBGENERIC_SUPPORT if SPL
-> +	select SPL_OF_CONTROL if SPL
-> +	select SPL_PINCONF if SPL
-> +	select SPL_PINCTRL if SPL
-> +	select SPL_PINCTRL_FULL if SPL
-> +	select SPL_PINCTRL_GENERIC if SPL
-> +	select SPL_PINCONF_RECURSIVE if SPL
-> +	select SPL_PINMUX if SPL
-> +	select SPL_SPMI if SPL
-> +	select SPL_SPMI_MSM if SPL
-> +	select SPL_SPRINTF if SPL
-> +	select SPL_STRTO if SPL
-> +	select SPL_USB_GADGET if SPL
-> +	imply SPL_MMC if SPL
->  	imply OF_UPSTREAM
->  	imply CMD_DM
->  	imply DM_USB_GADGET
-> diff --git a/arch/arm/mach-snapdragon/Kconfig b/arch/arm/mach-snapdragon/Kconfig
-> index c195d478512..a2228e217af 100644
-> --- a/arch/arm/mach-snapdragon/Kconfig
-> +++ b/arch/arm/mach-snapdragon/Kconfig
-> @@ -14,6 +14,9 @@ config SYS_VENDOR
->  config SYS_MALLOC_F_LEN
->  	default 0x2000
->  
-> +config SPL_SYS_MALLOC_F
-> +	default y
+> +===================================
+> +Booting U-Boot SPL on Qualcomm SoCs
+> +===================================
 > +
->  config SPL_SYS_MALLOC_F_LEN
->  	default 0x2000
->  
-> @@ -39,6 +42,13 @@ config SYS_CONFIG_NAME
->  	  Based on this option include/configs/<CONFIG_SYS_CONFIG_NAME>.h header
->  	  will be used for board configuration.
->  
-> +config SPL_SHARES_INIT_SP_ADDR
-> +	# override the default from common/spl/Kconfig
-> +	default n
+> +Overview
+> +--------
+> +The boot process on sdm845 (and some other Qualcomm SoCs) starts with the bootrom
+> +of the Application Processor, which executes XBL_SEC, which jumps to "OEM" code
+> +in EL1. Production devices are typically "fused", with a hash of the OEM's signing
+> +key burnt into one of the "QFUSE" banks on the SoC making it impossible to run
+> +custom bootloader code. As a result U-Boot SPL is only supported on unfused
+> +("secureboot off") devices. XBL_SEC is always signed by Qualcomm, and the fuses
+> +to disable turning off signature verification for it are always burnt at the
+> +factory, so replacing XBL_SEC is impossible without using JTAG. Of course JTAG
+> +is typically disabled on devices that have secure boot enabled, or at minimum
+> +greatly neutered.
 > +
-> +config SPL_HAVE_INIT_STACK
-> +	default y
+> +U-Boot SPL for Qualcomm platforms uses a custom linker script (per SoC) to build a bootable ELF.
+> +For sdm845 (and some other platforms) this has two sections, u-boot code and an embedded
+> +xbl_sec elf (signed by Qualcomm). To boot on an unfused SoC, the elf additionally
+> +needs to have hash sections added, which can be accomplished with qtestsign.
 > +
->  choice
->  	prompt "Qualcomm boot0.h workaround"
->  	optional
+> +Currently, sdm845 is supported. You need a device with secure boot disabled
+> +(or with secure boot enabled if you enabled it yourself and have the private key,
+> +though for full security you'd also want to disable JTAG which will remove your ability
+> +to mess with the control flow in the bootrom (immutable) and in XBL_SEC (signed)).
+> +
+> +Building
+> +--------
+> +First, obtain an xbl_sec that includes the EL3 privilege escalation feature
+> +and place it at .output/xbl_sec.elf. You can extract it from an xbl elf.
+> +If you're unable to find one, you can also use JTAG/SWD to break at the SMC
+> +entry and use gdb to jump to the u-boot entry point in EL3.
+> +
+> +To build a bootable image, you need to use a defconfig specific to your SoC.
+> +This is because the ELF has to specify where in the address space to put u-boot SPL,
+> +and this may differ per SoC. There may be other SoC-dependent build time choices,
+> +though in principle those could be made at runtime.
+> +
+> +First run ``make sdm845_spl_defconfig``::
+> +
+> +	make CROSS_COMPILE=aarch64-suse-linux- O=.output DEVICE_TREE=qcom/sdm845-shift-axolotl sdm845_spl_defconfig
+> +
+> +Then compile u-boot and specify the dts for your board (technically nothing about the resulting
+> +SPL image should be board-specific, but there are no non-board-specific device trees in Linux)::
+> +
+> +	make CROSS_COMPILE=aarch64-suse-linux- O=.output DEVICE_TREE=qcom/sdm845-shift-axolotl
+> +
+> +Finally, use ``qtestsign`` to add the hash segments required by PBL::
+> +
+> +	qtestsign -v 5 -o .output/spl/u-boot-spl_signed.elf prog .output/spl/u-boot-spl.elf
+> +
+> +Running
+> +-------
+> +Currently, U-Boot SPL for Qualcomm platforms expects to be booted via EDL::
+> +
+> +	edl.py --loader=$PWD/.output/spl/u-boot-spl_signed.elf
+> +
+> +SPL will then launch the DFU gadget and wait for you to upload u-boot proper::
+> +
+> +	dfu-util -RD .output/u-boot.img
+> +
+> +u-boot proper will then likely crash, since SPL currently doesn't init DRAM on Qualcomm platforms
+> +and u-boot proper currently doesn't support running from SRAM. The latter should be an easy fix.
+> +
+> +Notes on memory map
+> +-------------------
+> +| There are various banks of SRAM on a Qualcomm SoC that we can use prior to DRAM init.
+> +| For example:
+> +| msm8916 - 512K L2-as-TCM (at ``0x08000000``), 16K OCIMEM (at ``0x08600000``)
+> +| msm8998 - 1M L2-as-TCM (at ``0x14000000``), 256K OCIMEM (at ``0x14680000``)
+> +| sdm845 - 1.5M BOOT_IMEM (at ``0x14800000``), 256K OCIMEM (at ``0x14680000``)
+> +
+> +There's also RPM code/data RAM and hexagon TCMs, but unless we want to boot dram-less Linux
+> +we can probably safely ignore those. On msm8916 they may come in handy though.
+> +
+> +sdm845 can also have 8M LLCC-as-TCM in theory, but this appears to be broken.
+> +L2-as-TCM is no longer present.
+> +
+> +Since a limited amount of not necessarily continuous SRAM is available, we need to manually
+> +specify where .text, .bss, the malloc pool and the stack go. The Kconfig contains reasonable
+> +defaults per SoC.
+> +
+> +On sdm845, we by default put U-Boot SPL in BOOT_IMEM, with .bss, malloc pool and the stack
+> +filling OCIMEM. We can also fit U-Boot proper in BOOT_IMEM, for dram-less DFU or peek/poke
+> +with a shell. To that end, we set ``CONFIG_TEXT_BASE`` at 512K into BOOT_IMEM, and set
+> +``CONFIG_SPL_MAX_SIZE`` to 512K - 64. We also configure dfu to load U-Boot proper
+> +to ``CONFIG_TEXT_BASE`` - 64. (64 bytes is the size of u-boot legacy header)
 > 
 
 -- 
