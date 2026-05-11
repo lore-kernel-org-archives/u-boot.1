@@ -4,74 +4,119 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40F94CD3427
-	for <u-boot@archiver.kernel.org>; Mon, 11 May 2026 02:13:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5C2ACD37AC
+	for <u-boot@archiver.kernel.org>; Mon, 11 May 2026 04:50:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 98601846C6;
-	Mon, 11 May 2026 04:13:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=mediatek.com
+	by phobos.denx.de (Postfix) with ESMTP id 1BA7E846CA;
+	Mon, 11 May 2026 06:50:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=mediatek.com header.i=@mediatek.com header.b="cEA7eooS";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="THWGmrep";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 206DB846CB; Mon, 11 May 2026 04:13:12 +0200 (CEST)
-Received: from mailgw02.mediatek.com (unknown [210.61.82.184])
+ id CA75D846CB; Mon, 11 May 2026 06:50:17 +0200 (CEST)
+Received: from DM5PR21CU001.outbound.protection.outlook.com
+ (mail-centralusazlp170110009.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c111::9])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9F73E846C3
- for <u-boot@lists.denx.de>; Mon, 11 May 2026 04:13:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=mediatek.com
+ by phobos.denx.de (Postfix) with ESMTPS id C5E63846C7
+ for <u-boot@lists.denx.de>; Mon, 11 May 2026 06:50:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=weijie.gao@mediatek.com
-X-UUID: f0c669984cde11f1a4e839cc21f16abe-20260511
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mediatek.com;
- s=dk; 
- h=Content-Transfer-Encoding:MIME-Version:Content-Type:References:In-Reply-To:Date:CC:To:From:Subject:Message-ID;
- bh=x8z4Da1P3y9GqyxEXaKq7nXeaVounjmTdlJJsIavmgQ=; 
- b=cEA7eooSN7+LnTef7rTyZQBf1xHhEpQpkag4/vkzT/LcZe2XGFIOyCNC36HQGAAIxQ4im4uhqiK9dXkmXiy7ELpLLt+SNGDxYjzs8pI2EJfqmDy2ePU0CXnDkljVilfaUf8W285onbGCkMr+/94fPhWbaThK4Tj99MD6e3599Os=;
-X-CID-P-RULE: Release_Ham
-X-CID-O-INFO: VERSION:1.3.12, REQID:b732f928-8b74-499e-97c6-23dad08db686, IP:0,
- U
- RL:0,TC:0,Content:0,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTION:
- release,TS:0
-X-CID-META: VersionHash:e7bac3a, CLOUDID:ac7e6545-8360-4d24-8500-9b9380fa4b0d,
- B
- ulkID:nil,BulkQuantity:0,Recheck:0,SF:80|81|82|83|102|836|865|888|898,TC:-
- 5,Content:0|15|50,EDM:-3,IP:nil,URL:0,File:130,RT:0,Bulk:nil,QS:nil,BEC:-1
- ,COL:0,OSI:0,OSA:0,AV:0,LES:1,SPR:NO,DKR:0,DKP:0,BRR:0,BRE:0,ARC:0
-X-CID-BVR: 2,SSN|SDN
-X-CID-BAS: 2,SSN|SDN,0,_
-X-CID-FACTOR: TF_CID_SPAM_SNR
-X-CID-RHF: D41D8CD98F00B204E9800998ECF8427E
-X-UUID: f0c669984cde11f1a4e839cc21f16abe-20260511
-Received: from mtkmbs10n1.mediatek.inc [(172.21.101.34)] by
- mailgw02.mediatek.com (envelope-from <weijie.gao@mediatek.com>)
- (Generic MTA with TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384 256/256)
- with ESMTP id 1994378110; Mon, 11 May 2026 10:13:03 +0800
-Received: from mtkmbs13n1.mediatek.inc (172.21.101.193) by
- mtkmbs10n1.mediatek.inc (172.21.101.34) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.29; Mon, 11 May 2026 10:13:01 +0800
-Received: from mcddlt001.gcn.mediatek.inc (10.19.240.15) by
- mtkmbs13n1.mediatek.inc (172.21.101.73) with Microsoft SMTP Server id
- 15.2.2562.29 via Frontend Transport; Mon, 11 May 2026 10:13:01 +0800
-Message-ID: <98a82a4dfb6174fdfa6e538729f96461816e8ef1.camel@mediatek.com>
-Subject: Re: [PATCH v3 07/10] cmd: ubi: export more APIs to public
-From: Weijie Gao <weijie.gao@mediatek.com>
-To: Simon Glass <sjg@chromium.org>
-CC: <u-boot@lists.denx.de>
-Date: Mon, 11 May 2026 10:13:01 +0800
-In-Reply-To: <CAFLszTjNBo_jgqv9wmceu=qeYNUrvXczM2Dft6DdMxDdJrhU-A@mail.gmail.com>
-References: <cover.1777272283.git.weijie.gao@mediatek.com>
- <cb7f6ba95951ed3437b6f0cc85179cf4b78f2a97.1777272283.git.weijie.gao@mediatek.com>
- <CAFLszTjNBo_jgqv9wmceu=qeYNUrvXczM2Dft6DdMxDdJrhU-A@mail.gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-X-Mailer: Evolution 3.28.5-0ubuntu0.18.04.2 
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=TnLh4Njd7n20yUFODYLhNKGKhA9cDLm9TMXbzwZlES/eRMG+3R+l7+JrSnB/zenDcmdCDSvPBEi/e2fYi1ZZ+l9rBwXM3aeir/JUxADGUInQABZPpuVEyonvpCUNg5AHsNrG+Yaj3uk9cg8CX2oXDjEBgtM3peqWB4wGiHBkvDDwRL7BAo0wUe+tieUW/b/OgE/6Re7xul8hbrai8tHbG4pup0msHeG/J2S0XTEHW1o5UlEaGSoUrjpaVf0g5zQ84ZYugwmXlhqCcU7Liefjy1LHPxHemTc2MCTv0UI+j/kKnjC9Lqhd9X1BSh6wUVySjwcvl3x+DZ64fVheciAweA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=QqRAAPtUpgETnRsSCFwIXBgY4cJiU/RAxEG7KiyHwog=;
+ b=H3j0DPGBDFZlaa265+20aZ1Lyuu8n4wdSU08GfDPtyr5+NoA5W43Y2h3nc7lrMFEvOvkWsz8zmg0rdMaPyPk6AcKBuNbt7nkLFeELIxWMuL2ysXqBXM+zXb2M6vlYdukvpkXiRklNP5LS8Tvqin8g/CtoL3E4gKUtaE2ja5+p5vTlwKZ9pqvGZZNfiIQ0DR0bOGdEP7QsR08JvnMYb+7jGqPkQPOnri3mpYuaBCddBP4h6/KdF9leUCcB5ZWc8M+BcWOSR6NNgSJWC7GRyDziYXHHXnHfhssqJ95qDQ+Sz2QARVNL3nvgnxXzCcNEI8OAYMWGj3ai4vcUQzVOqkFKQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.23.195) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
+ dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=QqRAAPtUpgETnRsSCFwIXBgY4cJiU/RAxEG7KiyHwog=;
+ b=THWGmrepaIqs+6SHTTzVQ+oYeAxz6HNfPY6DcYF+oRvr81ZdiJsNk++Oz7t8TZzT7VKqWFprEa8aEe8AblXL4FJ8+jmK+UpPh5IOI629rlHgB+PqdYuLxMnDdq9u/+v8CLLcIFnPN4w2dbwGLcCpE72LGwTe3/QMGP+wUow1x5s=
+Received: from BY5PR13CA0005.namprd13.prod.outlook.com (2603:10b6:a03:180::18)
+ by SA1PR10MB997678.namprd10.prod.outlook.com (2603:10b6:806:4b4::8)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9891.22; Mon, 11 May
+ 2026 04:50:12 +0000
+Received: from CO1PEPF000075ED.namprd03.prod.outlook.com
+ (2603:10b6:a03:180:cafe::77) by BY5PR13CA0005.outlook.office365.com
+ (2603:10b6:a03:180::18) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.25.15 via Frontend Transport; Mon, 11
+ May 2026 04:50:11 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.195)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.23.195 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.23.195; helo=lewvzet201.ext.ti.com; pr=C
+Received: from lewvzet201.ext.ti.com (198.47.23.195) by
+ CO1PEPF000075ED.mail.protection.outlook.com (10.167.249.36) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.25.13 via Frontend Transport; Mon, 11 May 2026 04:50:11 +0000
+Received: from DLEE202.ent.ti.com (157.170.170.77) by lewvzet201.ext.ti.com
+ (10.4.14.104) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Sun, 10 May
+ 2026 23:50:10 -0500
+Received: from DLEE207.ent.ti.com (157.170.170.95) by DLEE202.ent.ti.com
+ (157.170.170.77) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Sun, 10 May
+ 2026 23:50:10 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE207.ent.ti.com
+ (157.170.170.95) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37 via Frontend
+ Transport; Sun, 10 May 2026 23:50:10 -0500
+Received: from [172.24.20.81] (ltpw0g6znt.dhcp.ti.com [172.24.20.81])
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 64B4o8Pm2939831;
+ Sun, 10 May 2026 23:50:08 -0500
+Message-ID: <dd7aad86-aa6c-4153-8b60-e98c51b57fee@ti.com>
+Date: Mon, 11 May 2026 10:20:07 +0530
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] arm: mach-k3: j721s2: j784s4: Add errata i2378 workaround
+To: "Kumar, Udit" <u-kumar1@ti.com>, <trini@konsulko.com>, <m-chawdhry@ti.com>
+CC: <b-padhi@ti.com>, <u-boot@lists.denx.de>, <gehariprasath@ti.com>
+References: <20260508142507.1386946-1-n-francis@ti.com>
+ <b515a248-9a40-466b-a45f-e363465193e1@ti.com>
+Content-Language: en-US
+From: "Francis, Neha" <n-francis@ti.com>
+In-Reply-To: <b515a248-9a40-466b-a45f-e363465193e1@ti.com>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
-X-MTK: N
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CO1PEPF000075ED:EE_|SA1PR10MB997678:EE_
+X-MS-Office365-Filtering-Correlation-Id: 6859e463-b7c0-4991-5db0-08deaf18c8b4
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|376014|1800799024|36860700016|82310400026|22082099003|56012099003|18002099003;
+X-Microsoft-Antispam-Message-Info: 1mtyUmEjWgro2HumvI9bBqVpOq3fwIwfD/WV4ChBZdZiGQccrWCQilsq5mcpnyy5tMn8izaXElXjhilYmzVQwTOfR4qPQREthHaZc1W7vR76O5U4QCmuuPyIWyWvao2sifv+SCjqTXeeDChC1A76jMSAz7pIBrKSXFS7UyU+2pyRcp9dVsHH1d09l4siOP3VzogN/9QnebdRgLS6PCmXMinVjhsmn5ReMJ7HPe2Zj7u+JgmPNBbWKMJBrE0g9NUj4rRsEb79wWYwDkCv2tREqyIEcTL/nuUXKWzqkIWJT0m1mJQIpPbmT0a1cBYDrW9DpAOsVj0FJ/zNGPC2KmwudIAs56vULeVwRHCmoBNZNf6dQeS6vW63TgZKtwyuJoBYvNm9WXW9SFXs1O21Oy1JNu9KdXM4N5QPN5j8mEvYtd77Ur1bXRCxjfR+PAzbZ6XAFNMYpmlnxcwyftP+k1sUSearI52BskCOFNwwxv/xgEP/EVnxwk6N9Ef7Gd6PDcEGDOn4slgvb7sZSwVLTbVGjHdmCnLhf4AxYtcuS2TGmD5VKufQlkug+gkTFUunzT1tuDW4jgMl3N5grbKrtQTVSfUcXtCo5BpaZAQdlz6Dj/eAvilDnT7MFkNUSg8Jnls9i2bMGODgS92x5jy1tpYLeFlIKc3RpvtRu4X+90JmuHmIdMO35Bh4iUAYxc15eNuAx3YiYfHYyjF/TIeTlGh51lQid9t0F3D4Qym6NLhZpHM=
+X-Forefront-Antispam-Report: CIP:198.47.23.195; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:lewvzet201.ext.ti.com; PTR:InfoDomainNonexistent;
+ CAT:NONE;
+ SFS:(13230040)(376014)(1800799024)(36860700016)(82310400026)(22082099003)(56012099003)(18002099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 71S+TqPz+97W3TzlLOjYnkYpEAu0iREVfmOHGyuDABfCRi0WdkeZaFG4HE2cXmr/WlR/94vTpAum7DyRl5XFmiJ4q4ngE9p8zAr0K35mt7G17wgIh1kvG0ooMGxd7YBJyIEeZbtaw04bXD3J+5Rg1GmKzjp1IOIpuAkJy1x9sb49z5cLsil27BPEzYCx5F/20NurK6zYBc+ozq2qTbjPL/9B2hWKHS3qnKmWK2qbprkIIBXtSwJNisWYctaMrngJJv+n6z4CGCpnrb1ZzCH67aUBOh6wAYZ6q9KGE1GidsUrIT3tgwWM2wybx8pjrmvCQb7Ro9m6ykmBo5b7q6r60l+nhzLQoTquWvFHhycerki0xJU3bUVMOynRe3DHEL57tplv+pYFrq0zjHvXtQHOc5z3dZ1OlTv1pZkUM/ab5fmQ8Fzq6Q1LmukRyQIiMYvk
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 May 2026 04:50:11.3249 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 6859e463-b7c0-4991-5db0-08deaf18c8b4
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.195];
+ Helo=[lewvzet201.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: CO1PEPF000075ED.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR10MB997678
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,78 +133,129 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 2026-04-28 at 08:11 -0600, Simon Glass wrote:
-> Hi Weijie,
-> 
-> On 2026-04-27T07:09:11, Weijie Gao <weijie.gao@mediatek.com> wrote:
-> > cmd: ubi: export more APIs to public
-> > 
-> > Export the following functions to public:
-> > 
-> > - ubi_detach(): this is paired with ubi_part(). One may call this
-> > function
-> >   to completely clean up the ubi subsystem after using ubi_part().
-> > 
-> > - ubi_{create,find,remove}_vol: this is a set of functions for
-> > volume
-> >   management.
-> > 
-> > Signed-off-by: Weijie Gao <weijie.gao@mediatek.com>
-> > 
-> > cmd/ubi.c           | 10 +++++-----
-> >  include/ubi_uboot.h |  5 +++++
-> >  2 files changed, 10 insertions(+), 5 deletions(-)
-> > diff --git a/include/ubi_uboot.h b/include/ubi_uboot.h
-> > @@ -47,10 +47,15 @@
-> >  int ubi_mtd_param_parse(const char *val, struct kernel_param *kp);
-> >  int ubi_init(void);
-> >  void ubi_exit(void);
-> > +int ubi_detach(void);
-> >  int ubi_part(const char *part_name, const char
-> > *vid_header_offset);
-> >  int ubi_volume_write(const char *volume, const void *buf, loff_t
-> > offset,
-> >                    size_t size);
-> >  int ubi_volume_read(const char *volume, void *buf, loff_t offset,
-> > size_t size);
-> > +int ubi_create_vol(const char *volume, int64_t size, bool dynamic,
-> > int vol_id,
-> > +                bool skipcheck);
-> > +struct ubi_volume *ubi_find_volume(const char *volume);
-> > +int ubi_remove_vol(const char *volume);
-> 
-> Please squash patch 9 (the kernel-doc comments) into this one.
-> Exporting an API and documenting it belong in the same change -
-> otherwise reviewers cannot judge the function contract from this
-> patch
-> alone.
-> 
-> > diff --git a/cmd/ubi.c b/cmd/ubi.c
-> > @@ -270,7 +270,7 @@ static struct ubi_volume
-> > *ubi_require_volume(const char *volume)
-> >       return vol;
-> >  }
-> > 
-> > -static int ubi_remove_vol(const char *volume)
-> > +int ubi_remove_vol(const char *volume)
-> >  {
-> >       int err, reserved_pebs, i;
-> >       struct ubi_volume *vol;
-> 
-> Hmm, now that this is public, the mixed return convention is a bit
-> awkward: ubi_remove_vol() returns positive ENODEV/EROFS in some paths
-> and negative values from ubi_change_vtbl_record()/ubi_eba_unmap_leb()
-> in others. ubi_create_vol() has the same issue. Worth a follow-up so
-> external callers get a consistent convention - ideally negative errno
+Hi Udit
 
-Using uniformed negative return value is apparently better.
-Patch 9 will also benefit from this: we can safely say returning -ve on
-error.
+On 5/9/2026 7:15 AM, Kumar, Udit wrote:
+> 
+> 
+> On 5/8/2026 7:55 PM, Neha Malcom Francis wrote:
+>> The shadow copies of WAY_SELECT MSMC MMRs have incorrect reset values.
+>> The main copy has the correct reset value but MSMC functionality uses
+>> the shadow copy values. This incorrect reset value results in
+>> under-utilization of MSMC L3 data cache and snoop filter for DDR
+>> accesses.
+>>
+> 
+> Thanks Neha for rolling this out. Wondering if L3 set to zero then
+> will this hardcoded write will impact in some way ?
 
-The ubi layer does return negative value in all paths already. I plan
-to change all return value in ubi.c to negative in all functions and
-return 1 (CMD_RET_FAILURE) for the command handler. 
+I don't think it will, but I will confirm with the h/w team to make sure.
 
 > 
-> Reviewed-by: Simon Glass <sjg@chromium.org>
+>> The workaround is to write 0x00000303 to both MSMC MMRs after reset.
+>> This ensures that their shadow copies get the correct post-reset value.
+>>
+>> Link: https://www.ti.com/lit/er/sprz530c/sprz530c.pdf
+>> Link: https://www.ti.com/lit/er/sprz536b/sprz536b.pdf
+>> Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
+>> ---
+>>  arch/arm/mach-k3/include/mach/j721s2_hardware.h |  4 ++++
+>>  arch/arm/mach-k3/include/mach/j784s4_hardware.h |  4 ++++
+>>  arch/arm/mach-k3/j721s2/j721s2_init.c           | 11 +++++++++++
+>>  arch/arm/mach-k3/j784s4/j784s4_init.c           | 11 +++++++++++
+>>  4 files changed, 30 insertions(+)
+>>
+>> diff --git a/arch/arm/mach-k3/include/mach/j721s2_hardware.h b/arch/arm/mach-k3/include/mach/j721s2_hardware.h
+>> index 82f076a45e0..a4d7fe48662 100644
+>> --- a/arch/arm/mach-k3/include/mach/j721s2_hardware.h
+>> +++ b/arch/arm/mach-k3/include/mach/j721s2_hardware.h
+>> @@ -37,6 +37,10 @@
+>>  /* MCU SCRATCHPAD usage */
+>>  #define TI_SRAM_SCRATCH_BOARD_EEPROM_START	CONFIG_SYS_K3_MCU_SCRATCHPAD_BASE
+>>  
+>> +/* MSMC RT_WAY MMR addresses */
+>> +#define K3_MSMC_RT_WAY_SELECT		0x6E008000
+>> +#define K3_MSMC_NRT_WAY_SELECT		0x6E008008
+>> +
+>>  #if defined(CONFIG_SYS_K3_SPL_ATF) && !defined(__ASSEMBLY__)
+>>  
+>>  #define J721S2_DEV_MCU_RTI0			295
+>> diff --git a/arch/arm/mach-k3/include/mach/j784s4_hardware.h b/arch/arm/mach-k3/include/mach/j784s4_hardware.h
+>> index 29a894baed3..bb5c58d00e4 100644
+>> --- a/arch/arm/mach-k3/include/mach/j784s4_hardware.h
+>> +++ b/arch/arm/mach-k3/include/mach/j784s4_hardware.h
+>> @@ -37,6 +37,10 @@
+>>  /* MCU SCRATCHPAD usage */
+>>  #define TI_SRAM_SCRATCH_BOARD_EEPROM_START	CONFIG_SYS_K3_MCU_SCRATCHPAD_BASE
+>>  
+>> +/* MSMC RT_WAY MMR addresses */
+>> +#define K3_MSMC_RT_WAY_SELECT		0x6E008000
+>> +#define K3_MSMC_NRT_WAY_SELECT		0x6E008008
+>> +
+>>  #if defined(CONFIG_SYS_K3_SPL_ATF) && !defined(__ASSEMBLY__)
+>>  
+>>  #define J784S4_DEV_MCU_RTI0			367
+>> diff --git a/arch/arm/mach-k3/j721s2/j721s2_init.c b/arch/arm/mach-k3/j721s2/j721s2_init.c
+>> index b5453d8895d..d996dfcc332 100644
+>> --- a/arch/arm/mach-k3/j721s2/j721s2_init.c
+>> +++ b/arch/arm/mach-k3/j721s2/j721s2_init.c
+>> @@ -163,6 +163,14 @@ static void store_boot_info_from_rom(void)
+>>  	       sizeof(struct rom_extended_boot_data));
+>>  }
+>>  
+>> +void apply_msmc_shadow_copy_errata(void)
+>> +{
+>> +	/* Errata i2378: Write 0x00000303 to MSMC shadow copy MMRs */
+>> +	writel(0x00000303, K3_MSMC_RT_WAY_SELECT);
+>> +	writel(0x00000303, K3_MSMC_NRT_WAY_SELECT);
+>> +	debug("%s: Applied errata i2378\n", __func__);
+>> +}
+>> +
+>>  void k3_spl_init(void)
+>>  {
+>>  	struct udevice *dev;
+>> @@ -176,6 +184,9 @@ void k3_spl_init(void)
+>>  	/* Make all control module registers accessible */
+>>  	ctrl_mmr_unlock();
+>>  
+>> +	/* Apply MSMC shadow copy errata workaround */
+>> +	apply_msmc_shadow_copy_errata();
+>> +
+>>  	if (IS_ENABLED(CONFIG_CPU_V7R)) {
+>>  		disable_linefill_optimization();
+>>  		setup_k3_mpu_regions();
+>> diff --git a/arch/arm/mach-k3/j784s4/j784s4_init.c b/arch/arm/mach-k3/j784s4/j784s4_init.c
+>> index 53f152ccd9c..48b52fcb333 100644
+>> --- a/arch/arm/mach-k3/j784s4/j784s4_init.c
+>> +++ b/arch/arm/mach-k3/j784s4/j784s4_init.c
+>> @@ -180,6 +180,14 @@ static void store_boot_info_from_rom(void)
+>>  	       sizeof(struct rom_extended_boot_data));
+>>  }
+>>  
+>> +void apply_msmc_shadow_copy_errata(void)
+>> +{
+>> +	/* Errata i2378: Write 0x00000303 to MSMC shadow copy MMRs */
+>> +	writel(0x00000303, K3_MSMC_RT_WAY_SELECT);
+>> +	writel(0x00000303, K3_MSMC_NRT_WAY_SELECT);
+>> +	debug("%s: Applied errata i2378\n", __func__);	
+>> +}
+>> +
+>>  void k3_spl_init(void)
+>>  {
+>>  	struct udevice *dev;
+>> @@ -194,6 +202,9 @@ void k3_spl_init(void)
+>>  	/* Make all control module registers accessible */
+>>  	ctrl_mmr_unlock();
+>>  
+>> +	/* Apply MSMC shadow copy errata workaround */
+>> +	apply_msmc_shadow_copy_errata();
+>> +
+>>  	if (IS_ENABLED(CONFIG_CPU_V7R)) {
+>>  		disable_linefill_optimization();
+>>  		setup_k3_mpu_regions();
+> 
+
+-- 
+Thanking You
+Neha Malcom Francis
 
