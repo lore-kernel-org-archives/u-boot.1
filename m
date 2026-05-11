@@ -4,100 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9949ECD37BE
-	for <u-boot@archiver.kernel.org>; Mon, 11 May 2026 13:29:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B692DCD37AC
+	for <u-boot@archiver.kernel.org>; Mon, 11 May 2026 13:29:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 07195838D7;
-	Mon, 11 May 2026 15:29:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 472C183BC8;
+	Mon, 11 May 2026 15:29:52 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="nvR92gAU";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="DddV+HWN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CF40380398; Mon, 11 May 2026 15:29:36 +0200 (CEST)
-Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
- [IPv6:2a00:1450:4864:20::52d])
+ id 4883A83C51; Mon, 11 May 2026 15:29:51 +0200 (CEST)
+Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
+ [IPv6:2a00:1450:4864:20::531])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F3B2283A91
- for <u-boot@lists.denx.de>; Mon, 11 May 2026 15:29:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4211B80398
+ for <u-boot@lists.denx.de>; Mon, 11 May 2026 15:29:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-ed1-x52d.google.com with SMTP id
- 4fb4d7f45d1cf-67c4aaf76ecso6759359a12.3
- for <u-boot@lists.denx.de>; Mon, 11 May 2026 06:29:34 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1778506174; cv=none;
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ed1-x531.google.com with SMTP id
+ 4fb4d7f45d1cf-678adefbd26so7988339a12.3
+ for <u-boot@lists.denx.de>; Mon, 11 May 2026 06:29:49 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1778506189; cv=none;
  d=google.com; s=arc-20240605;
- b=PkT4tKmS2YrpLzIHFJRk4WuvPOSjHgKfX6Js/auYPRDS4p1qFagDqABG3ISqzl/STn
- s25fSCE/ao3CrINc1suuDU/3n9SqKBTJPbDxoUg7Nl0f69pZRGcM6q+SdlMaCYUawY5k
- FOsiVkjNPRwmq+rEPKml8wXj7qvnsAoBdeOC3mSjMKpVKOavm1FbdWrQigJWT1wJvfOp
- YoKZz8GibE/Hdfpd/0kt/he3qLi/vDUQzDzCPrS6tF58N+s0846tHRY+LN4ks8aYjBAH
- 7iqIH3POne83DUAac9CXCUqCKR153/tNq6xl2yAf9WNTGZKfF/o2mYQ915acm9wdmaKL
- YKxQ==
+ b=kU2rULOkEtB1MmniqhZyHfoUJ3LaL3MI6ygCxqhoTv+quVCZDiZyJeMVJgZPdJ4ry5
+ NInff7g8lSVOjXrlpIToht/j5xgVRXhIwEnxNqSzZKaKssTAZ3MEOFzfvpEiOM/D5HpA
+ T3MfawwgcnI70991KSls8v4kSwj1PMp/iJRIJKLevxWozf2o617QL4MQ81Jp6TutZu8M
+ O3rViMjtk4EiqR0S7grQ+7rcDSmqfqeNkFpLeKLD4UBQwV6E9wt1P6v9jc2Rhq0bOQsR
+ xH8EVMDjw11k2XwaTwomDAEjx95Nop6vXr4QB4c9DSF3SG7xnjipVWxRMZFcyUL7TUhw
+ 0LPw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=Y5MYVxhCqVURCgu/Q/pjVezeunG0Iy1BAdugwC7/VcI=;
- fh=GQ2cjfQn5sZJCXk7Y4miokBo6mkL3WClEi6ZZsPVrlo=;
- b=C6Iu3ZqrS6einTt1wz13vVgGu9TnmAeS5dzC9AazL5UF/Ga2sjSA0/W23j2E3oF27k
- DMEAI83T5zTujs86C4OT5QgS5gvrmaRU0Kt7mQKZcPr0ToHS60aASMDEWq5AG0of2f6h
- dEvmIXJcWVGBQAdmzipkp/+L6s5jqHFp3AgOv23MB5E272hwMtkNOFdH4USt/IfZy5Hd
- +jkZ7wndstUKcSPWKWoqSDgREWZb04FXVQwOxr7EhWoEQIEFUaGFgzEALPxi7E1CKyH5
- KrrzUH4KE3wDvinqqby0pUCwPOIWppU2fiv0+oBsWsaVUexROXXXsPjog/C6qnKb2ZPR
- T/Lw==; darn=lists.denx.de
+ bh=ZSkMG4M5i27HgcYyJrQ+8+E3/R0rhjSBvpCE7CTYyF8=;
+ fh=L35BJGl1eOCTAl0X8L2OQ78gjsGwLgv72NZeh8dCP+M=;
+ b=d5RnABtMfb+t7MzMsSldYboTn6tI5qXj0pb+pyMvoAVf0NyAmAHPWFhEm0GNW3QeRn
+ YxWEFWoenwh8SChEAFIW2LGQ3xlsNuJMBtd1LoHo2Sy31KFyxIX14MdCGp73m0r4tNaO
+ XEyJWJIwrZwilGO0j7A7HphsZSgQJGZTdrgKBr8weutmhyCnbAOuYOmi5tt4Y7wVgUTD
+ QRU6jlEu5j00jOQAExdZCeHfUfeyYYugSziz7a1tB8qnATyPExsDrz37FGNo331BBA1l
+ sgfeF7kXdKjH43esYpodQZulwMNyBTosLbxEEdr8sMoV2loVibWK6keOt2XgkkzLDQyJ
+ jYtw==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1778506174; x=1779110974; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1778506189; x=1779110989; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Y5MYVxhCqVURCgu/Q/pjVezeunG0Iy1BAdugwC7/VcI=;
- b=nvR92gAUCGRGZrWYiAm3VRxiUuzpmcgcPaKJBoEsUa7g6vyXTnrjb8JO6TQdFsxywv
- 6r3BZ02ZUSn4aeRtUBUlnnSgDT+7agR+EzCBHJ9MRI7Ch5Pgz5xk8Fsi+1OqNykljjqR
- TQohjfML4mgJQAvyZ0lCnhQbP2zZZfDPG0QRVcqEnSC0rGP/iZG7OccohN3MqCXasgfW
- uXDbE77J4YRB7etRSmpX5nkqQ01DFtHOa0DVmc/sHAI82jvU8dL2nHtihdDxX92/0qQZ
- eymO5+uUaY0Yhl3BUX6QqboW7TJI5Bx71zDfrP2pY0G27xUhIfdQoctk+BSUOarCcIgO
- 5dAA==
+ bh=ZSkMG4M5i27HgcYyJrQ+8+E3/R0rhjSBvpCE7CTYyF8=;
+ b=DddV+HWNisBFf0w7Q4pX+jsfmCV+HNcRTAN34ja6R15ogxUbOOYKwgIgC4/H2OPRRM
+ 8KlMSRInw21wJICMc8yHAsAtww7c0qdyef2c9vQ+hQ9+utVilEzlknGrG5FuEswAxaai
+ 04KkyVihlrluZBqYQbxihD6mqYeCTdqqQ2BQk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778506174; x=1779110974;
+ d=1e100.net; s=20251104; t=1778506189; x=1779110989;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Y5MYVxhCqVURCgu/Q/pjVezeunG0Iy1BAdugwC7/VcI=;
- b=kFC8mMdOvG/2WDTHMvfROXAxwkCf+ZVlc0PXqp9Qo5E3vcJ0vduuLRh3+fsPM/AuW1
- IrDbWLT4OdG7acXN+EVsRQk4353OhMP2qnmrzfXCGOHpMVZcWI4cR8Uh48Mzxy9iY3fu
- ZFhOdca/pjfAYG3PjV77MD0/07eWsYqKln/wqxsDxieEXN1ufqbpUiOzuvC8v3VqXPv0
- AYtT7Fgmyl2bt5/Q5Xm+FRw9ivu0ov4NFj00kyTqSjLCVhYkYREKVr8XLMkRSwDEZG3x
- qEcskr6OM4GPMvMfd/dXKlg0E2xfTGXL6owUcDIx2yzIJT8hLUzZrf+ZZEPiXXalqd4g
- DyRA==
-X-Gm-Message-State: AOJu0Yyb4n9vBjWdUPH3HniOPjQu+XOMWrEmUxivVXcCKnuQXMnTobsS
- a/GZ6tjgc4trUmQziY7H6UQ7W+yVc6z+0UIDvXiL95OAXqvop++A1fiMUQxUtmeaI9WrrOhEWIs
- eXjFIkBiMbOQWvST4SHYrPqNfRBo6zQc=
-X-Gm-Gg: Acq92OEkUEaC5jp8B2lJmrVQbrlfHVf8S3MrZf/INvCZf6uYGpttcp/BUtzS/n0IwFa
- 9a1z55K/P3ptXAWK4k4/ttT85qmJq2zv8mQobU+4stIDoggysbrmNeoGumpFrPuy3lQAKILFah+
- he9KRsZZTBujTO4hxSnVnSWkX8gDgiU/LCKy60wWZMs8Xmf1N5OjjwhsgA/ustGs7W7/oDkiCkH
- lYErrewPosJ42ttCI+FvTQmSzlvQXgh0WP62PBse2h7wGJFy9pXSoycw2VrpvjL9ZR0WZliM4w5
- NS0PoFPTQdqKWJ2J2eU8uaN44ooTwOZfgLeVO+Ml+NLGDEEiMkDYp3edp23sBUU2UCzxPfSK1wZ
- QTFAgWJWOFGWvNXiZsOTVS1+hN5UoDIfhmX4iDtDMUhIH+ffJ
-X-Received: by 2002:a05:6402:35c5:b0:673:b696:8823 with SMTP id
- 4fb4d7f45d1cf-67d642b99f0mr12230214a12.15.1778506174167; Mon, 11 May 2026
- 06:29:34 -0700 (PDT)
+ bh=ZSkMG4M5i27HgcYyJrQ+8+E3/R0rhjSBvpCE7CTYyF8=;
+ b=FyhbfbWdhSEv7QHh46T/XhGQIwDMz52VvQt7fOkuJeD1f26RA1E3GhsJG2ytjWh0sT
+ /jJ3VLknOxkjwCxCe+BDByeMFQ+Mb7E3Q/Rs+2TS7fsMSmMjdfOBpDZYPrHLyTWuO/iE
+ ne8XUt1OagdA8AYyFxylECfoXMYv/S0kzdXsqz43dpL7oubmWzo/ArFsqM6P7VwYCEqc
+ sgNHqFZcX3V21oZNDoWNEVoJtCDWft79dHPgoDH16+jVTYd/9UEaJnSLqbNfSrpMW1sA
+ RLoIBEUQ+lcKaHyEItOYb4j96z2tAJvwHbPtDcnHxxiNQ+PORGuPyRGLDx/FBXosP3In
+ LpsQ==
+X-Gm-Message-State: AOJu0YzLD0XWQzorqOVJr0wKMOHrgm/vVq+sbcXduvrlGM69Gl6ArvDp
+ NDwnotaqSHq3NNDmzfpF6IdOE2cxaMfhdtLOzuMYWIv6PRM7r5dTYqvmu5UlY9VIwdfncaq9pjE
+ 9Q06d7zR8ScLFIqu5uF9YmGP0v85MCBvh+cGtVoVy
+X-Gm-Gg: Acq92OHZfBRzg8FoGgGUbIGgTwIV1QHr+X6tocdleWK3KQcedeK7ffZpZQosgZRb3pI
+ hJnVk6IJvorM3C4vAknPbB56Xh/0utWdYc1vFYYKyXYNbKuczTA2J20eyozD3pEO9dNI+QNI81R
+ ueun4l9xcjfKsHNlxy8RYtwHLD8i3wRx2wvVHxnlGAU01r1hRlJqxRl29OKyeFe5/KrwQtJi3wn
+ haTsYeCqDPaX8VHwg7rhF/LrUo6p9axOAI0WoBSNTWDh53uAzk/vOBHjN75u05ATMxMFwWqSTis
+ 3LEiTw==
+X-Received: by 2002:a17:906:478e:b0:ba5:885d:3280 with SMTP id
+ a640c23a62f3a-bcaaa54ff6dmr783757166b.17.1778506188569; Mon, 11 May 2026
+ 06:29:48 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260508233254.2022495-1-sjg@chromium.org>
- <CALeDE9PLAf9-VrOCfKmDDiQHWFtMvowoB_U_35QZgixFiJ_s9g@mail.gmail.com>
-In-Reply-To: <CALeDE9PLAf9-VrOCfKmDDiQHWFtMvowoB_U_35QZgixFiJ_s9g@mail.gmail.com>
-From: Peter Robinson <pbrobinson@gmail.com>
-Date: Mon, 11 May 2026 14:29:22 +0100
-X-Gm-Features: AVHnY4JKWu_QvD9iI0q8qAtyh2rdAUL4jLnJ9kOhxHq0Su6LS-JunA0jkRm_4ZE
-Message-ID: <CALeDE9O+9fpn8Ada4=xbLsuNcqrMTkN4z9k+_XF5zcA+j+-Kmw@mail.gmail.com>
-Subject: Re: [PATCH] rpi: bcm2712: Extend DRAM mapping to 16 GiB
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Matthias Brugger <mbrugger@suse.com>, Stephen Warren <swarren@nvidia.com>, 
- Stephen Warren <swarren@wwwdotorg.org>, Tom Rini <trini@konsulko.com>
+References: <20260511120917.1017866-1-Alexander.Feilke@ew.tq-group.com>
+ <20260511120917.1017866-2-Alexander.Feilke@ew.tq-group.com>
+In-Reply-To: <20260511120917.1017866-2-Alexander.Feilke@ew.tq-group.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Mon, 11 May 2026 07:29:36 -0600
+X-Gm-Features: AVHnY4JyM6aiEoit63ObPAE6IiFig084N-EezsRsJwHlfFOYCN2Xj_q7tQEsMP8
+Message-ID: <CAFLszTjfq8g1xU=FTtsdLRwXC5nojbq+YwnwEcLcYaTRvd_vBQ@mail.gmail.com>
+Subject: Re: [PATCH v2 1/8] cmd: date: validate date using rtc_month_days()
+To: Alexander.Feilke@ew.tq-group.com
+Cc: u-boot@lists.denx.de, u-boot@ew.tq-group.com, 
+ Markus Niebel <Markus.Niebel@ew.tq-group.com>, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -115,69 +109,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 11 May 2026 at 12:40, Peter Robinson <pbrobinson@gmail.com> wrote:
->
-> Hi Simon,
->
-> Thanks for this.
->
-> On Sat, 9 May 2026 at 00:33, Simon Glass <sjg@chromium.org> wrote:
-> >
-> > The bcm2712 memory map only covers the first 1 GiB of DRAM, but Pi 5
-> > models ship with up to 16 GiB. Accesses above 1 GiB fault because the
-> > range is not present in the MMU page tables.
-> >
-> > Allocations above 1 GiB used to be blocked at the lmb layer because
-> > memory above ram_top was reserved as no-overwrite. Commit 0efb6bc3e36d
-> > ("lmb: Reinstate access to memory above ram_top") removed that
-> > reservation, so callers like tftp now route allocations into the
-> > unmapped range and trigger a fault.
-> >
-> > Extend the first DRAM entry to 16 GiB to cover the largest addressable
-> > range for any production Pi 5 model. Smaller models are unaffected
-> > because aarch64 only faults on actual access of unbacked memory, and
-> > no peripheral region lies between 1 GiB and 64 GiB on this SoC
-> > (peripherals start at 0x1000000000).
->
-> So a couple of questions:
-> 1) Do we need to do this for the Pi4 (bcm2711) too? It's currently at ~4Gb.
-> 2) On the bcm2711 it sits at just under 4gb, initially that was
-> 4Gb-16Mb AFAICT (917a1e9a78fe) and then it was reduced in a followup
-> commit (c44b3f523c48) because of overlap with "device's IO area"
-> 3) why doesn't the rpi5 have the overlap issues?
+Hi Markus,
 
-Also at least on a 1Gb RPi5 it's still crashing for me.
-
-> Peter
+On 2026-05-11T12:09:09, Alexander Feilke
+<Alexander.Feilke@ew.tq-group.com> wrote:
+> cmd: date: validate date using rtc_month_days()
 >
-> > Fixes: 0efb6bc3e36d ("lmb: Reinstate access to memory above ram_top")
-> > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > ---
-> >
-> >  arch/arm/mach-bcm283x/init.c | 4 ++--
-> >  1 file changed, 2 insertions(+), 2 deletions(-)
-> >
-> > diff --git a/arch/arm/mach-bcm283x/init.c b/arch/arm/mach-bcm283x/init.c
-> > index 7a1de22e0ae..3d11c9e5c3b 100644
-> > --- a/arch/arm/mach-bcm283x/init.c
-> > +++ b/arch/arm/mach-bcm283x/init.c
-> > @@ -69,10 +69,10 @@ static struct mm_region bcm2711_mem_map[MEM_MAP_MAX_ENTRIES] = {
-> >
-> >  static struct mm_region bcm2712_mem_map[MEM_MAP_MAX_ENTRIES] = {
-> >         {
-> > -               /* First 1GB of DRAM */
-> > +               /* DRAM, up to the 16 GiB maximum supported by Pi 5 models */
-> >                 .virt = 0x00000000UL,
-> >                 .phys = 0x00000000UL,
-> > -               .size = 0x40000000UL,
-> > +               .size = 0x400000000UL,
-> >                 .attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
-> >                          PTE_BLOCK_INNER_SHARE
-> >         }, {
-> > ---
-> > base-commit: 3cdd19089f1b1b7cd08530f33ff4708abcfd426c
-> > branch: rpi-us
-> >
-> > --
-> > 2.43.0
-> >
+> The old check accepted day 0 as well as Feb 29th in non-leap years.
+> With this change, both day and month 0 are rejected, and the local day limit
+> logic is now handled by rtc_month_days(), which correctly accounts for month
+> length and leap years.
+>
+> Because of this, special attention must be taken in the 'MMDDhhmm' format case,
+> as tm_year is not initialized. The leap-year calculation in rtc_month_days()
+> therefore depends on the value provided by the caller. This is pre-existing
+> behaviour, but is now made more explicit.
+>
+> Signed-off-by: Markus Niebel <Markus.Niebel@ew.tq-group.com>
+> Signed-off-by: Alexander Feilke <alexander.feilke@ew.tq-group.com>
+>
+> cmd/date.c | 7 ++++---
+>  1 file changed, 4 insertions(+), 3 deletions(-)
+
+> diff --git a/cmd/date.c b/cmd/date.c
+> @@ -167,12 +167,13 @@ int mk_date (const char *datestr, struct rtc_time *tmp)
+>               /* fall thru */
+>       case 12:                /* MMDDhhmmCCYY */
+>               if (cnvrt2 (datestr+0, &val) ||
+> -                 val > 12) {
+> +                 val > 12 || val < 1) {
+>                       break;
+>               }
+>               tmp->tm_mon  = val;
+> -             if (cnvrt2 (datestr+2, &val) ||
+> -                 val > ((tmp->tm_mon==2) ? 29 : 31)) {
+> +             if (cnvrt2(datestr+2, &val) ||
+> +                 val < 1 ||
+> +                 val > rtc_month_days(tmp->tm_mon - 1, tmp->tm_year)) {
+>                       break;
+>               }
+>               tmp->tm_mday = val;
+
+
+The commit message says tm_year is not initialised in the MMDDhhmm
+case, but do_date() calls dm_rtc_get() into the same struct before
+mk_date(), so tm_year holds the current RTC year on entry. That is
+what makes the leap-year check work. You could rephrase to something
+like 'tm_year is not set by mk_date() in this path, so the leap-year
+check relies on the caller having pre-populated it (do_date() does,
+via dm_rtc_get())'.
+
+I wonder if mk_date() could be static?
+
+Reviewed-by: Simon Glass <sjg@chromium.org>
+
+Regards,
+Simon
