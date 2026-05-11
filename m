@@ -4,101 +4,109 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07C95CD37AC
-	for <u-boot@archiver.kernel.org>; Mon, 11 May 2026 13:34:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8771BCD37AC
+	for <u-boot@archiver.kernel.org>; Mon, 11 May 2026 13:42:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9A24D83EF9;
-	Mon, 11 May 2026 15:34:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 0301F8394E;
+	Mon, 11 May 2026 15:42:16 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="qM5bX41X";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="cXZwdPEL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7CDA8845E3; Mon, 11 May 2026 15:34:12 +0200 (CEST)
-Received: from mail-vk1-xa29.google.com (mail-vk1-xa29.google.com
- [IPv6:2607:f8b0:4864:20::a29])
+ id 052AB83A91; Mon, 11 May 2026 15:42:15 +0200 (CEST)
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [IPv6:2a00:1450:4864:20::632])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 71060838D7
- for <u-boot@lists.denx.de>; Mon, 11 May 2026 15:34:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0B1E98341A
+ for <u-boot@lists.denx.de>; Mon, 11 May 2026 15:42:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=raymondmaoca@gmail.com
-Received: by mail-vk1-xa29.google.com with SMTP id
- 71dfb90a1353d-57512a429d1so2969293e0c.3
- for <u-boot@lists.denx.de>; Mon, 11 May 2026 06:34:10 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1778506449; cv=none;
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-b79f8f7ea43so684008566b.2
+ for <u-boot@lists.denx.de>; Mon, 11 May 2026 06:42:13 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1778506932; cv=none;
  d=google.com; s=arc-20240605;
- b=OWqkLGhFXVtyhU63VsDDJlAsjvYAgVLxRAs0ACyVD0mfNUKIUWwBZcG+aMAbG7cqRx
- efiVqeDkH1RwxssgER45Ippm0+n8298UiUSOEKX4KPFC0Ud0+pDzFEYFyHGqSrIvQs3f
- 9GTBoyuVGf+b2Mj4QBBKQBDOtmfuve6wpsNjwpl1LXnAl5xtLBNwN0+zBK15exTAjWJa
- QkkyRMhX8YL7qgesmWtWPZfjfo1AxYy2DBLM6m2mCA/3NYIEM+rVSiQH9/3QPvG5cxwI
- tFVAQENyBZ+q02faGkXEx7Ys6GnfSm+qdaEJU1raMTnQcXO2Cl2fy9tfjU4CFoQW6w5c
- wqPQ==
+ b=T/PkPXm0a0s7fvWC85yy356dzCnf0QdFo8QdDnVkUpoxR4pfZE6Y6QlpI8Db1buYC7
+ MPTq1cBf8aTxxAnW091B1jRAwK0JLGF5EAem5sYhLiLftwQQ6+99AJ/gte7Z9lRosv9b
+ xiiEWIRU4YvQXXQbTYB6GN6Ompowl2F0gREPNbReADfitLg+ijCTz/cuLFLyOoCYEP3U
+ BxpvEiAEYkTwIVPWD3e5UTmDwG/cjhIcD00mqt3dosu6K2ImGlDSL1CDEA7gdcAadT4J
+ BP/OJteT0HHqJEPuMK1BbC8Q2ek1UW1lnlid4CRZXQfGlNZYjBONFzPj6xHw206OXdFw
+ iZYg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=K0IodrZZ0LDDomd9go1czYrJ4TfeLowtx4Z+s11D6ks=;
- fh=bJsgV4Fow42DT1LyzRcp9VugVGrsGTmcIA/W2aWTvpA=;
- b=UuUfd9MsujF8vra+/pO4GjDh4RwFo1wsSAtQsNGJFwUZA1lS68hRRAAtxgMfMhfB+u
- +EuRjVbva+Si6aE0G0eZ/NdBvRA94GgQjY8G8UFU4sYoBb4DATcB/DK608j81AwX4i79
- EITaGyg0D9VyWjF8UI+koprnJGV2baskn3nClCErtt6HL3s10uycrtoWCUW5LX+c2uM8
- cudxPCAtVi68QkgLzJc2SdAagWBM87ucY+Q2Gi8Tqomgf8D3EqHyDg7lHDBMyMUaYpBA
- /ucPAKmD+uBs+Tc2gnb9l/HRUNeqgU6wY7GHCGaY3/pzvwt7jIdzLsL3sIiYV+odc/Wy
- /bXg==; darn=lists.denx.de
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=5Iwtaafb85c8jenn3dHN1MSuLi5ODebrufhEVWZKwiY=;
+ fh=j6i5ZvfNiHM/kHwTWtt4q7FhEz36924nugl6KwsTz8A=;
+ b=bznISmBINNoR41BPCf0XnSeKFZL5le8qjIPKYDSwcze4kWymQrUq5cAIve9hucXjTr
+ +IxoZEC3D+i+1Axvaa5IMCawY7s20hXaEZWtNmpdnhSYL3+tdoZuXVAs/I3ZdMC/IV4u
+ aFXjXepHgnENy7a3fJM51GZMCcAYP/8Z1GhhW7QLtDxH8gob+n5+AfTGCsNmm6UtqgHv
+ 3865V/0SyhAOy2F1RUWDYnjIOI1fz+j2N0QGgIGXxtaufu0bmgQMaCGeRX1jygvnP/nZ
+ pw2ckWUPy2Vq7NzSRAblCLpIkwONFeQhjl1mHBRwtSiRggH/xUfQmiZsvujnuy3kuo1a
+ LXBw==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1778506449; x=1779111249; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=K0IodrZZ0LDDomd9go1czYrJ4TfeLowtx4Z+s11D6ks=;
- b=qM5bX41XoA52KSQczJ631oAN2dan6+Z8EqnIKH+oArF3yxTb313r1oahRa4zcUN2uv
- k49ZrGiJKr62jinfix3Lr788+pcs3FTj33tghLuSV2rd5UNKdG+DDPA5IP3VOwhPbbdK
- hglyxupf96ecR1X3xcO0bHu+na11O23IRpaASv+le9CO/lNck3txWgSeoIvCLMDajwBm
- FvzdTrP4EVFpE5iL1d7dK2622yBcp9lI82u4XMVsgkfAaHmmb51o1Hr40U1+4/sXctNw
- tSLj/WmFTMIQzfNNdC6gQIZPwHHJcy34pOYdmyFCWrV0Jt0AbX9+KRkgqTIznvpXw1Mv
- rUQQ==
+ d=chromium.org; s=google; t=1778506932; x=1779111732; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=5Iwtaafb85c8jenn3dHN1MSuLi5ODebrufhEVWZKwiY=;
+ b=cXZwdPEL9bCCr/vKKlvLjgtUvaFx/ZbHQOA0gyhgRcU4qwLMPWMBfloUCBMfxLuxaf
+ p2P2tMunMQjpAv/gWt7Cn0rMpxxYH3NSkUUWJg+tHHAiK48+1zNEl8zBMQhPvGyLDRYr
+ LOvrjHTCl0whDnN6eCOP6MVlQEGW3UAhY0zMM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778506449; x=1779111249;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=K0IodrZZ0LDDomd9go1czYrJ4TfeLowtx4Z+s11D6ks=;
- b=beRFxsdOa0X7o4iuOv3ASysZaDgzvYC+oIlLlArxHnPBMM5/qUMuZX5regOfeEU303
- Z4O+/rSOfSIYJkzCU2ORkjexzO1i136wKp1J8i3+ReMvyCN5pF80itOZpuryyi7WYtGj
- XNje+Ir4O41MC0wQ89fAfVIozW7h0kzgJP6PzDu7ueViFMSaJwxTNK+KsT8+wFhCg9KT
- ElMZGKQRM5pRbtyswXK2GzufhQEBLVsGKxVwiLVtTahF88du2g2X53B9+z1h/Ez765iR
- 1evCI2RiIvtdm5vKRM+LpGiaz1oCqG1QLm89VBR7qowQhCFsZFUv/koSvVyuimGzs7Af
- TkDw==
-X-Gm-Message-State: AOJu0YzwVaejqw/lQRm1zoWSDkXwjGjpiHcaluAVkYMdRDLsWmL6lvp3
- hzn8fe3SHiqEKyJvUbabSCMcsP5bFJvYJZoe/cWUAXCcCUeWgDSgL54trr4WawhJhOV2HKFVfqW
- 0wUQqs3XJUQC++vcTmdBVONOmoKrrC4g=
-X-Gm-Gg: Acq92OHTrjqVnCSLfOxmSBypeHgzLnvCSCS2Y7u6LCGCqRVA696rl5CoCjMtNMIiz61
- CzxUqfpsXQcOvGh04WySWsicYNdxRl73PkuOiKpBOSc8RS0dkiVK6DmvPW9u69GBAjoRpzXdwqT
- 9l4uBupm69EMzpGdyV85gYtJbu7/4GdVzqRJg8NzlukJXgGshvbU4G+GbGbhZsR6sNADnuTXKP3
- sUDOq0js6MdEEWvI/dBqcRXlGUTCHP6qYqn0+k7rdasaQ09A4GOPlkP7p9FSlV6Qx/XnRC1zWjj
- 9TWa8Wt22EKd4GTFCGI=
-X-Received: by 2002:a05:6122:4b13:b0:56f:317a:65d9 with SMTP id
- 71dfb90a1353d-5755937d19emr13924483e0c.1.1778506449217; Mon, 11 May 2026
- 06:34:09 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1778506932; x=1779111732;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=5Iwtaafb85c8jenn3dHN1MSuLi5ODebrufhEVWZKwiY=;
+ b=YVFMI0y1PywrkwfE2y1Q6InPoxYNNnjW8wQ/raPc6t1YKO2upljr4LQEcC7qBo5UWV
+ WJ+mRle4R+4RKdMAejoHoGSgZiNLbUjDHNA1EqbTUc04CwnGRhVZOJsJ3sYhkXeDpUy0
+ guXsP9bf+vYK6MEoObzDn648mb3hYfRPM1Smlym4becVCHRSZ8WZh7Nx3oygFvpIVfsC
+ 96VjvzYmiqpZ65e02lBmq2i2yl7CN2pX2Hmlpk9/jqPeyTGdShmYX+HCb/Lt2fUMdC2U
+ NpoeC4/V/n3VLmcxiEPkpoFc/kvWXuEGG3rB56HszdB23/pgLVGtCz1mapuc5P98A6XB
+ CeEw==
+X-Gm-Message-State: AOJu0YzA1+eKBCWKkK0J4EYP8bvUUBAZ9HHznsvrpMonPX4+w8O6gHQS
+ UC1z9/X9k0D3la3ZdSAXoBI/Eo1lxcfXR7G2l0vp7cZ5Eise/bj6Q07bR51NYYaHFzcVKFyHTAS
+ OwqgMjpdzHnwQaBuhpqPL190bmMjhdTg4KPGU6fSD
+X-Gm-Gg: Acq92OFTRY7Vs+EkoeJSbvdn+mSaW6TuqLsXJUq+2G7+uois6P6UZc3b4k24miBjhj1
+ oJbex6RTRm9JS7oQ5R6Wmgy8RgqaKf9bEPmJrZSMZGYjPAGsBDO/I7eZhRl3bXeHO6tZeVYp0DH
+ 0GlRWJeweAOjZhDLcKAFIMpvGczKMw2jexK///TIBrqOzjA/6BDSELQm39E62RL2dDwyYC/WxMj
+ Z5Q31C/q0jM3AQrOOwddYlPZgmBlM6JHNchICEAA2gTmI8hAs8jpWWsmPMa4sAODgw9j6yM3T44
+ OOJ01SZbxOonWdhT
+X-Received: by 2002:a17:907:9802:b0:bc2:9733:9ecc with SMTP id
+ a640c23a62f3a-bc56cd2ed45mr1486728566b.32.1778506932410; Mon, 11 May 2026
+ 06:42:12 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260509203136.46745-1-kettenis@openbsd.org>
-In-Reply-To: <20260509203136.46745-1-kettenis@openbsd.org>
-From: Raymond Mao <raymondmaoca@gmail.com>
-Date: Mon, 11 May 2026 09:33:57 -0400
-X-Gm-Features: AVHnY4K8FcpNJwD5CGg9Fpl1TXQyb2Icz8Ja_Ya1_neHTkUK0i_DJMmQMj028OY
-Message-ID: <CAMDkj5x9q-64Z=ArNhOdULYB7xE=V53OQSkeWO3UjRoVZ9tYpw@mail.gmail.com>
-Subject: Re: [PATCH] smbios: Do not fall back on devicetree without valid
- mapping
-To: Mark Kettenis <kettenis@openbsd.org>
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Tom Rini <trini@konsulko.com>, Janne Grunau <j@jannau.net>
+References: <20260509230147.1308308-1-james.hilliard1@gmail.com>
+In-Reply-To: <20260509230147.1308308-1-james.hilliard1@gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Mon, 11 May 2026 07:41:59 -0600
+X-Gm-Features: AVHnY4LL-XCkk_rgqwRlciuKcIIKe29pOySEmrIvvwgsSULjJ_Y85cou-S1CErk
+Message-ID: <CAFLszTjq_zp_qge4QugAFFymMBMuuuFnfYRmv0Mbz4gUYtvwuw@mail.gmail.com>
+Subject: Re: [PATCH] env: add Kconfig option for static flags list
+To: james.hilliard1@gmail.com
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ Alexander Sverdlin <alexander.sverdlin@siemens.com>,
+ Heiko Schocher <hs@nabladev.com>, 
+ Walter Schweizer <walter.schweizer@siemens.com>,
+ Sumit Garg <sumit.garg@kernel.org>, 
+ Matthias Winker <matthias.winker@de.bosch.com>,
+ Philip Oberfichtner <pro@denx.de>, Le Jin <le.jin@siemens.com>, 
+ Jan Kiszka <jan.kiszka@siemens.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Quentin Schulz <quentin.schulz@cherry.de>, 
+ Daniel Golle <daniel@makrotopia.org>, Philip Molloy <philip.molloy@analog.com>,
+ David Lechner <dlechner@baylibre.com>, Michael Walle <mwalle@kernel.org>, 
+ Varadarajan Narayanan <quic_varada@quicinc.com>, Peng Fan <peng.fan@nxp.com>, 
+ Adrian Freihofer <adrian.freihofer@siemens.com>,
+ Peter Robinson <pbrobinson@gmail.com>, 
+ Simon Glass <sjg@chromium.org>, Benjamin ROBIN <dev@benjarobin.fr>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -115,44 +123,79 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Mark,
+Hi James,
 
-On Sat, May 9, 2026 at 4:31=E2=80=AFPM Mark Kettenis <kettenis@openbsd.org>=
- wrote:
+On 2026-05-09T23:01:44, James Hilliard <james.hilliard1@gmail.com> wrote:
+> env: add Kconfig option for static flags list
 >
-> The smbios_get_val_si() function may get called for a sysinfo
-> property for which there is no mapping to a devicetree property.
-> Avoid a NULL pointer dereference in this case by skipping the
-> read of the mapped property from the device tree.
+> Environment callbacks can already be configured from Kconfig with
+> CONFIG_ENV_CALLBACK_LIST_STATIC, but static environment flags still
+> require board headers to define CFG_ENV_FLAGS_LIST_STATIC.
 >
-> Fixes: 83b28b55d74f ("smbios: add support for dynamic generation of Type =
-9 system slot tables")
-> Signed-off-by: Mark Kettenis <kettenis@openbsd.org>
-> ---
->  lib/smbios.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+> Add CONFIG_ENV_FLAGS_LIST_STATIC and append it to ENV_FLAGS_LIST_STATIC
+> after the legacy CFG_ENV_FLAGS_LIST_STATIC value. Normalize existing
+> CFG_ENV_FLAGS_LIST_STATIC definitions to end with a comma so the Kconfig
+> list can be concatenated directly.
 >
+> This lets boards configure writeable-list policy and type validation
+> from defconfig without adding a config header solely for env flags.
+>
+> Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
+>
+> README                             |  6 ++++++
+>  env/Kconfig                        | 13 +++++++++++++
+>  include/configs/capricorn-common.h |  2 +-
+>  include/configs/hmibsc.h           |  2 +-
+>  include/configs/imx6q-bosch-acc.h  |  2 +-
+>  include/configs/iot2050.h          |  2 +-
+>  include/configs/socrates.h         |  2 +-
+>  include/env_flags.h                |  3 ++-
+>  8 files changed, 26 insertions(+), 6 deletions(-)
 
-Thanks for fixing this.
-Reviewed-by: Raymond Mao <raymondmaoca@gmail.com>
+We are trying to migrate away from the README, so would it be possible
+to move the docs to one of these files instead:
 
-Raymond
+doc/develop/environment.rst
+doc/usage/environment.rst
 
-> diff --git a/lib/smbios.c b/lib/smbios.c
-> index d5f18c8bd69..906d2753517 100644
-> --- a/lib/smbios.c
-> +++ b/lib/smbios.c
-> @@ -292,7 +292,7 @@ static int smbios_get_val_si(struct smbios_ctx * __ma=
-ybe_unused ctx,
->
->         /* If the node is still missing, try with the mapping values */
->         nprop =3D convert_sysinfo_to_dt(ctx->subnode_name, prop);
-> -       if (!ofnode_read_u32(ofnode_root(), nprop->dt_str, &val))
-> +       if (nprop && !ofnode_read_u32(ofnode_root(), nprop->dt_str, &val)=
-)
->                 return val;
->  #endif
->         return val_def;
-> --
-> 2.53.0
->
+> diff --git a/include/env_flags.h b/include/env_flags.h
+> @@ -89,7 +89,8 @@ enum env_flags_varaccess {
+>       NET_FLAGS \
+>       NET6_FLAGS \
+>       SERIAL_FLAGS \
+> -     CFG_ENV_FLAGS_LIST_STATIC
+> +     CFG_ENV_FLAGS_LIST_STATIC \
+> +     CONFIG_ENV_FLAGS_LIST_STATIC
+
+In include/configs/aristainetos2.h
+
+   #define CFG_ENV_FLAGS_LIST_STATIC 'ethaddr:mw,serial#:sw,board_type:sw,' \
+                   'sysnum:dw,panel:sw,ipaddr:iw,serverip:iw'
+
+No trailing comma, so setting both will run serverip:iw into the first
+Kconfig entry. Please normalise this one too.
+
+> diff --git a/env/Kconfig b/env/Kconfig
+> @@ -34,6 +34,19 @@ config ENV_CALLBACK_LIST_STATIC
+> +config ENV_FLAGS_LIST_STATIC
+> +     string "Static flags list"
+> +     default ""
+> +     help
+> +       The environment flags are associated with variables in a static
+> +       list. Define this list in the same format as
+> +       CFG_ENV_FLAGS_LIST_STATIC.
+
+I agree with Quentin, There are only five remaining users of
+CFG_ENV_FLAGS_LIST_STATIC, so you should consider converting each to a
+defconfig setting of CONFIG_ENV_FLAGS_LIST_STATIC and dropping
+CFG_ENV_FLAGS_LIST_STATIC entirely. Carrying two parallel mechanisms
+plus the trailing-comma rule seems more confusing than finishing the
+move.
+
+> diff --git a/env/Kconfig b/env/Kconfig
+> @@ -34,6 +34,19 @@ config ENV_CALLBACK_LIST_STATIC
+> +       When CONFIG_ENV_WRITEABLE_LIST is enabled, the 'w' access attribute
+> +       can be used to mark variables as writable.
+
+Regards,
+Simon
