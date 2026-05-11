@@ -4,215 +4,118 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 126AFCD37AC
-	for <u-boot@archiver.kernel.org>; Mon, 11 May 2026 12:51:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90279CD37AC
+	for <u-boot@archiver.kernel.org>; Mon, 11 May 2026 12:52:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9AF36845E3;
+	by phobos.denx.de (Postfix) with ESMTP id DB5928464D;
 	Mon, 11 May 2026 14:51:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=mediatek.com
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=mediatek.com header.i=@mediatek.com header.b="LNWrBHeU";
-	dkim=pass (1024-bit key; unprotected) header.d=mediateko365.onmicrosoft.com header.i=@mediateko365.onmicrosoft.com header.b="NkfiRA2e";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="UakZicbx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ABF1884860; Mon, 11 May 2026 12:19:30 +0200 (CEST)
-Received: from mailgw02.mediatek.com (unknown [210.61.82.184])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 066258485A; Mon, 11 May 2026 12:28:11 +0200 (CEST)
+Received: from mail-vk1-xa30.google.com (mail-vk1-xa30.google.com
+ [IPv6:2607:f8b0:4864:20::a30])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6FC9C847F6
- for <u-boot@lists.denx.de>; Mon, 11 May 2026 12:19:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=mediatek.com
+ by phobos.denx.de (Postfix) with ESMTPS id 59ED483A91
+ for <u-boot@lists.denx.de>; Mon, 11 May 2026 12:28:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=macpaul.lin@mediatek.com
-X-UUID: dde3b67a4d2211f1a4e839cc21f16abe-20260511
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mediatek.com;
- s=dk; 
- h=MIME-Version:Content-Transfer-Encoding:Content-ID:Content-Type:In-Reply-To:References:Message-ID:Date:Subject:CC:To:From;
- bh=xLzUBrSz8V7nC0YvKwzFF8Gl3UGhj6K/VogCZ0ou1c4=; 
- b=LNWrBHeUSNNwQaAAB7VqQJ05ZDqtSdcPNsz+X4L1paPgvHG1XfvTlQyvncmT+wF9OquAA5/avzzki7L9PHTd2hb/7lqWcaXzjL9xitywaG8jUBy+PN29hSkMMzMgGAJ+nvSlUT8DCGR+rKLHUy8QyqmZ0kAxajpazX+HZr54ssQ=;
-X-CID-P-RULE: Release_Ham
-X-CID-O-INFO: VERSION:1.3.12, REQID:e40943c2-d782-43bf-bdcd-d2e959786028, IP:0,
- U
- RL:0,TC:0,Content:0,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTION:
- release,TS:0
-X-CID-META: VersionHash:e7bac3a, CLOUDID:87c66c45-8360-4d24-8500-9b9380fa4b0d,
- B
- ulkID:nil,BulkQuantity:0,Recheck:0,SF:80|81|82|83|102|110|111|836|865|888|
- 898,TC:-5,Content:0|15|50,EDM:-3,IP:nil,URL:0,File:130,RT:0,Bulk:nil,QS:ni
- l,BEC:-1,COL:0,OSI:0,OSA:0,AV:0,LES:1,SPR:NO,DKR:0,DKP:0,BRR:0,BRE:0,ARC:0
-X-CID-BVR: 2,SSN|SDN
-X-CID-BAS: 2,SSN|SDN,0,_
-X-CID-FACTOR: TF_CID_SPAM_SNR
-X-CID-RHF: D41D8CD98F00B204E9800998ECF8427E
-X-UUID: dde3b67a4d2211f1a4e839cc21f16abe-20260511
-Received: from mtkmbs13n1.mediatek.inc [(172.21.101.193)] by
- mailgw02.mediatek.com (envelope-from <macpaul.lin@mediatek.com>)
- (Generic MTA with TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384 256/256)
- with ESMTP id 2021805226; Mon, 11 May 2026 18:19:17 +0800
-Received: from mtkmbs10n2.mediatek.inc (172.21.101.183) by
- mtkmbs13n1.mediatek.inc (172.21.101.193) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.29; Mon, 11 May 2026 18:19:15 +0800
-Received: from SI4PR04CU001.outbound.protection.outlook.com (172.21.101.237)
- by mtkmbs10n2.mediatek.inc (172.21.101.183) with Microsoft SMTP Server id
- 15.2.2562.29 via Frontend Transport; Mon, 11 May 2026 18:19:15 +0800
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ePD29UTN7ovXds3DXuGv8dd97NlLf8RgAksMN9WAwNt5S9IKOFFrttJNbcVypokykvfdwztoL/81Mj4M4jLXExSzzV/qm74PEfUHtfhyLyaJnYOwa4j3jr1NJi+D2cWOGPRSDKf4DgfsfhzJiUtxJ8wxa/XVM86SJpncmHfAXtJUEQP9uGqIy4saNTLOSNaHc6d6tRNZpevW63oTUQJbHNDvtCX4y5xxmweroHPYOy8OQrhE69DLAPGbg6jntAY7Gi0oDIRaFbyY4Fut7+Y6EVHTunwRP6jHlo86Qdi5vLqQD6cIrQi5sviiDvYj0f4PBcGEKnQNlwXbIPhx40pPAA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=xLzUBrSz8V7nC0YvKwzFF8Gl3UGhj6K/VogCZ0ou1c4=;
- b=mL4BEu9n7nEi6tHLYtHbcursSkMCGkZwl33cP5wfiUuDxiIocXDJMjxzUompAsmTU9/Y2+Xp/b5bcVxhIi/IPY/u6MHun2+zobGeT+85BsANo0+FVzs8y199QXn4D6QE14dajgKG0w95QuySil7VwZCrBywLKzmxGz5lhzS6UiM856IiBQs5QW92c4W0UtVqgL5seShaM2zMk/fi7LMYSmoYwtlOWuLItNUP5cFyvGyhGwJLA8fQCvBApisvqRRoz4y6YzDX3VZktiPgGdZ57vQu2/EiADHAzvUbdUXXayvvaI2a+4tmGNLQOPdaufgK7p4SHA6eO46llBDSwK7bRA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=mediatek.com; dmarc=pass action=none header.from=mediatek.com;
- dkim=pass header.d=mediatek.com; arc=none
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=jj251510319013@gmail.com
+Received: by mail-vk1-xa30.google.com with SMTP id
+ 71dfb90a1353d-5751136c561so3686712e0c.1
+ for <u-boot@lists.denx.de>; Mon, 11 May 2026 03:28:08 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1778495287; cv=none;
+ d=google.com; s=arc-20240605;
+ b=WHeiXuzqEQjLA603wC1IWA80DWMsBjX5WN9DSktboO/6VxwiiDHbiRstD5/6N+PeXw
+ IgTaiVwiUO0Xm90gKBi5rKr0n64rJLEKzgvnwabK/8NLcHymTVOHHaeKFdnmS8DEdaho
+ K97C6BSXhqZ2LkpRa2479dg5RW3VxJyiLHkgdcMOQPNq9CXc7hECK1MC/keoWR1+C7tP
+ 69cZg7sUQD/4WV98Y13sGxTkVxT9X9hkBMKizZaDekSqP04TlqZTHbAnaYwyTH2/VhtX
+ 2erCmAz+Gq/SB8mnkrsmcfcL8Gh/mnlOxYQVpo1/+eITvLQGjzMFkYZM1Py8nJLCvPUM
+ h2kw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=K/iMlUzOuH0N9xah4POxalefnPucKTZ0LNj+dUscvlg=;
+ fh=zeDNGmt08FfIJSdkZAXc8RjJrX7mJ4Bl5kRiiaiRAO4=;
+ b=OMi0Yk9ey8J/ZRUwRIwI/Aie2OLjpAa0/1cI252/Wnr5N06oNq7Z4eE1lH8aU2rus3
+ m0eMR9YPh2/9InsqIYSbANmluW6rtV8Zqdq9b3sVzXpUkfjBNQ8x25gQAC4KP3ZrIJfn
+ 5HyVgjpgJ3zASs5QejHqGvuvoIi53mBQQjWV02yWOpaXQy/+xdaWiGtzPXNPrGcLf1pf
+ KHvLOD+noGwXjubYD5ti4FGXKBo9CMsPgPSChq2Hz7Yyp3OvmyVzGc4OW0h62jJe3Tpo
+ 30nwTl3NaAxJNSUpAwFBwxjxbOhoyhw7MCXaMurS0O1Z243/RyeQWrtscNEwykikwlQJ
+ 35OQ==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=mediateko365.onmicrosoft.com; s=selector2-mediateko365-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=xLzUBrSz8V7nC0YvKwzFF8Gl3UGhj6K/VogCZ0ou1c4=;
- b=NkfiRA2eL1XtaN7PMZ7OkT9xS6jQpSPmiBiw/vCfIFVramD9d9U8i81otoStyKhAvkfMutgYnUjfkwIJUzxPebIRhpY7pl72lCXP13Vmj3S6RzH6AlqMTYSULIqSx4vNfXDzhELOyuz1FeY6EQCBp7JlzpBNPCIbMJ6QkT70sNg=
-Received: from SEZPR03MB7810.apcprd03.prod.outlook.com (2603:1096:101:184::13)
- by TYZPR03MB7790.apcprd03.prod.outlook.com (2603:1096:400:45c::7)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.25.14; Mon, 11 May
- 2026 10:19:11 +0000
-Received: from SEZPR03MB7810.apcprd03.prod.outlook.com
- ([fe80::2599:cb55:e0f0:92e8]) by SEZPR03MB7810.apcprd03.prod.outlook.com
- ([fe80::2599:cb55:e0f0:92e8%4]) with mapi id 15.21.0025.012; Mon, 11 May 2026
- 10:19:11 +0000
-From: =?utf-8?B?TWFjcGF1bCBMaW4gKOael+aZuuaWjCk=?= <Macpaul.Lin@mediatek.com>
-To: Julien Stephan <jstephan@baylibre.com>, "u-boot@lists.denx.de"
- <u-boot@lists.denx.de>, =?utf-8?B?TGFycnkgTGkgKOadjuejiik=?=
- <Larry.Li@mediatek.com>, =?utf-8?B?UGFibG8gU3VuICjlravmr5Pnv5Qp?=
- <pablo.sun@mediatek.com>, =?utf-8?B?QmVhciBXYW5nICjokKnljp/mg5/lvrcp?=
- <bear.wang@mediatek.com>, =?utf-8?B?QmlhbyBIdWFuZyAo6buE5b2qKQ==?=
- <Biao.Huang@mediatek.com>
-CC: "philip.molloy@analog.com" <philip.molloy@analog.com>,
- "igor.belwon@mentallysanemainliners.org"
- <igor.belwon@mentallysanemainliners.org>, "s-vadapalli@ti.com"
- <s-vadapalli@ti.com>, "jerome.forissier@arm.com" <jerome.forissier@arm.com>,
- "romain.gantois@bootlin.com" <romain.gantois@bootlin.com>,
- =?utf-8?B?V2VpamllIEdhbyAo6auY5oOf5p2wKQ==?= <Weijie.Gao@mediatek.com>,
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- "patrice.chotard@foss.st.com" <patrice.chotard@foss.st.com>,
- =?utf-8?B?U2t5TGFrZSBIdWFuZyAo6buD5ZWf5r6kKQ==?=
- <SkyLake.Huang@mediatek.com>, "stefan.roese@mailbox.org"
- <stefan.roese@mailbox.org>, "ilias.apalodimas@linaro.org"
- <ilias.apalodimas@linaro.org>, "heiko@sntech.de" <heiko@sntech.de>,
- "ycliang@andestech.com" <ycliang@andestech.com>,
- =?utf-8?B?Q2h1bmZlbmcgWXVuICjkupHmmKXls7Ap?= <Chunfeng.Yun@mediatek.com>,
- "pbrobinson@gmail.com" <pbrobinson@gmail.com>, "semen.protsenko@linaro.org"
- <semen.protsenko@linaro.org>, "mikhail.kshevetskiy@iopsys.eu"
- <mikhail.kshevetskiy@iopsys.eu>, "me@ziyao.cc" <me@ziyao.cc>, Ryder Lee
- <Ryder.Lee@mediatek.com>, "ansuelsmth@gmail.com" <ansuelsmth@gmail.com>,
- "raymond.mao@riscstar.com" <raymond.mao@riscstar.com>,
- =?utf-8?B?Q2hyaXMtcWogQ2hlbiAo6Zmz5aWH6YCyKQ==?=
- <Chris-qj.Chen@mediatek.com>,
- =?utf-8?B?S2V2aW4tS1cgSHVhbmcgKOm7g+alt+aWhyk=?= <kevin-kw.huang@airoha.com>, 
- "kever.yang@rock-chips.com" <kever.yang@rock-chips.com>,
- "marek.vasut@mailbox.org" <marek.vasut@mailbox.org>, "sjg@chromium.org"
- <sjg@chromium.org>, "peng.fan@nxp.com" <peng.fan@nxp.com>, "root@infi.wang"
- <root@infi.wang>, "visitorckw@gmail.com" <visitorckw@gmail.com>,
- "robert.marko@sartura.hr" <robert.marko@sartura.hr>,
- "samuel.holland@sifive.com" <samuel.holland@sifive.com>,
- =?utf-8?B?VG9tbXkgU2hpaCAo5pa95piT5bu3KQ==?= <tommy.shih@airoha.com>,
- "neil.armstrong@linaro.org" <neil.armstrong@linaro.org>,
- "marek.vasut+renesas@mailbox.org" <marek.vasut+renesas@mailbox.org>,
- "lucienzx159@gmail.com" <lucienzx159@gmail.com>,
- "patrick.delaunay@foss.st.com" <patrick.delaunay@foss.st.com>,
- =?utf-8?B?WWFucWluZyBXYW5nICjnjovnh5XmuIUp?= <ot_yanqing.wang@mediatek.com>,
- "quentin.schulz@cherry.de" <quentin.schulz@cherry.de>,
- "christophe.roullier@foss.st.com" <christophe.roullier@foss.st.com>,
- "michael@amarulasolutions.com" <michael@amarulasolutions.com>,
- "trini@konsulko.com" <trini@konsulko.com>, "kory.maincent@bootlin.com"
- <kory.maincent@bootlin.com>, David Lechner <dlechner@baylibre.com>,
- "jonas@kwiboo.se" <jonas@kwiboo.se>,
- =?utf-8?B?RmFueWkgWmhhbmcgKOW8oOmAuOW4hik=?= <Fanyi.Zhang@mediatek.com>
-Subject: Re: [PATCH v4 7/9] net: dwc_eth_qos: Add mediatek support
-Thread-Topic: [PATCH v4 7/9] net: dwc_eth_qos: Add mediatek support
-Thread-Index: AQHc1+B2ebAVs/BqpkqrmgG5pJMhorYIr3UA
-Date: Mon, 11 May 2026 10:19:11 +0000
-Message-ID: <8c5c2455c0db60128f8c2e091f29cb8cbbd72435.camel@mediatek.com>
-References: <20260429-add-ethernet-support-for-genio-520-720-v4-0-be54e17239b7@baylibre.com>
- <20260429-add-ethernet-support-for-genio-520-720-v4-7-be54e17239b7@baylibre.com>
-In-Reply-To: <20260429-add-ethernet-support-for-genio-520-720-v4-7-be54e17239b7@baylibre.com>
-Accept-Language: zh-TW, en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=mediatek.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: SEZPR03MB7810:EE_|TYZPR03MB7790:EE_
-x-ms-office365-filtering-correlation-id: 83f4f7e9-3772-4a52-fc17-08deaf46be9e
-x-ld-processed: a7687ede-7a6b-4ef6-bace-642f677fbe31,ExtAddr
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
- ARA:13230040|7416014|376014|366016|1800799024|18002099003|56012099003|22082099003|38070700021;
-x-microsoft-antispam-message-info: YzsfJwJbNYFT8LieP2C7BX6TZZ2wGYVrYW11TLIz6rYKwpPuLxynhyw00LhtQ+NMM4Q/gN6aXg/71zVM4Q6u0WhJRUcmJU3yRp2+WeXcTjBzG/qw203I2HRgbG3KVqShEWbYVo0go938W1A51+3kor9IWr27GVuXEOMcch09oLxhBIzH4yUZ4MaV7vEHitr1WAEfxnnEbE9U24bHJFrVeaRjUJ8H2sU3iAA9P9fuu7s4KLeH2aeKGwbSz8cKLOSu01FPQ9NQb1N7NyUTJAHzlMLQ79UfxeJNYKAJVkk3VPN0TDdu4hgxCfT8n4T8v8g6vZp+yQq2xTpA+1Y3xbtVHcByJd+/PC1/B56xc5p1Z7T380vKn1YA+nECc8Fk+DzqtsDzJxbzI0/78p4wbvAqvJ97tvaQVsLZ6msmvKXby97Nh6jvuH9vi2W024S+rItCp8emsOfPqIFK+AHTbz7tKHweYHj/qVy4JhihWHoV+YYhk/IINKTMZScQsIFFE7WN7yoOtVCl/9iaU4pQJUYdhZBgMCfPNQExFbaop84ZmYPqr5vyb8emVXSVsj1d0ibRLa+AkS/+oexC2nZnlAmpvb3DZvHXgERV8TwvPfZaStU4q1KH8AXJe39CjL6IGdlVlTgiW3UNKcw9WtzYdjVfqEK6NmnbIIlLLER9unwaJykqheYkHo0XJCuAuMTMiWIxVz98w91UISzOZOa22YUU8Vle/FWIanmGDOpTLjPqHCdBM4iCoa3xXOLnzXOsxX/j
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:SEZPR03MB7810.apcprd03.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(7416014)(376014)(366016)(1800799024)(18002099003)(56012099003)(22082099003)(38070700021);
- DIR:OUT; SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?SjVwR2p4OXRNUmpWQTl1dWVxc28zU2U5eXdOZk03S2U5WXlrL20xaVhZZ1Rv?=
- =?utf-8?B?RnVIYnpobncwLys4ckp3dUFQeWJXVHNVemsrOE93VEJIdmQ5N3JZVUNBTUQx?=
- =?utf-8?B?eVRRRGNOZ3p3Z0tkUHp3bnJWOUdKWWl4ZkVaQU90UkY5Z0ZqdGo3SjhabExN?=
- =?utf-8?B?QnpTYXVvL3Y3QS9hVnNQN250VzgzUHFJZUZYK0s0R3Z4anY4TzhSV1lZVkkv?=
- =?utf-8?B?aUhSQXNlQ0ZqdGtmSFJIVlhPWVdsTzJadmQ5K0dOcEwwUUdFc2p4Wko1N0Np?=
- =?utf-8?B?ajM0OE1uRzArdUZpa3RBUzJYSVMweCtEc0dKNU1GbXI0c3BYeUpvbXJ6RFhY?=
- =?utf-8?B?QkRDdmI2Vmx6SHQvblN3eTR2RERIYXJZSEFQMytCaXZadU1zZC9yeW96R3dR?=
- =?utf-8?B?VHlkd0Y0WUN2MFlZMFVTQ2pxakliMjFZeE9SVXVCck93czBuTVhQNlpaYm1D?=
- =?utf-8?B?Y3o3Q3BZM21qMFlHMjNIVGVsVTJMZ0xYcFBBZ0g4SkNBeFQ1anNaTktjYk4v?=
- =?utf-8?B?T2JhSHVYR1BHYndmS1pFQ3ZRSU5vaXlUTCs0WUFQZTQrNnBZamEzUmppNEdL?=
- =?utf-8?B?RFVzZGwvSnNtZHluSlI3elJUWm1vcDdWOGlsUlJibzlHR3ROZm1kbHJZVnc5?=
- =?utf-8?B?RWlvMFVZTjU4MFF6YVQzMVQ1NWxVV0dVSFY4a1l6QklWeHVGUyt1WkdLWElL?=
- =?utf-8?B?TVBsMmRkVlJGMWNRYTBQODhobDBoWGhPdS94ZmNIb3V1K0xKNGdSUGI5c3ha?=
- =?utf-8?B?elFZekpXZWtsMDN5dGlldHF4NS9ZTTMzNDZHUWJsYzZCY2dEOXZudlZXWWc4?=
- =?utf-8?B?NjhjZjM1dkl2dkk4ODk0THpRVFVobzBEU0JFOEQwaVdLQTh4YWhMTVNqWmdz?=
- =?utf-8?B?OGJEZ3ZYa00rNDVFcWwzcG0rVXZWSE02dlNobno5dkY2MVhVeDY3eG1KWGQy?=
- =?utf-8?B?RHVsT01xbldiUTNveC85bmo1dGhGOUd3aWlwalNsNEdYak1MR1g4c2hMTWdJ?=
- =?utf-8?B?RUN4djJqRFQwb1NwRmRGa3pmMXQ1ekF3ZDZmY0dTWHVYY3pRRXFMV0NwUUFh?=
- =?utf-8?B?bGJvbEtqcmNXbUlsZFdlU0VWSTA4T25UTEpOa3FRa2RPamEwT1pjYWxKOFJM?=
- =?utf-8?B?TkVqRldLN3ZZL2N4Ky92amY4cTd0bWtWTVRPMk1pMHlRTDNHUUV3RTZ1eFo4?=
- =?utf-8?B?a1JjWnFoR3V2czdKalhVYXJYSmZKV3RXM210S0t4SDR3dXRGYis0YmNqcnJN?=
- =?utf-8?B?Zlh5QVgwS25qc1c1Yk9hVjV2WUxDeVZ5dDFmdFJWbGpXb0lYaEs0aUQ2Ri85?=
- =?utf-8?B?Vm85VkJtZUd3a2hJMUkyYlJzTWhISXBRcG1sRk84eEk0Q3EzVThadHJZVnZD?=
- =?utf-8?B?STRIZXc0cy85dWVQeU5lYWREeUtCTFpzYnMwNHFYdGZFY1VPMTJrRnVyeC9q?=
- =?utf-8?B?YjBxY0c2VlJGQzZNQ0J0N0pkTVpPUVVCWHhIKzQ3ZWhFSnJwcnljUzcxdnVK?=
- =?utf-8?B?SmUzdWg4N0NDcEV6Y0F5L1NTeUhzVS81dzR4aWNvNlN6MDlUOFNmZ2pNZTlR?=
- =?utf-8?B?SWliOGZOL2JtRThRQU9TcnpyUEFjT0lZTkZmL1ZQbGwxZXZjQ0xoVml3WGl6?=
- =?utf-8?B?NGJyS3ZRR1VjajNxQ2N2eHoweHZnWVg2dG5kak9wT1plTzB3dnZiTFNZKzBO?=
- =?utf-8?B?b3RFaHA5Sks2c0dTQklqamIycXpGMEhTcFRsUk90QXljTUZoWjdaanVIV2RN?=
- =?utf-8?B?TUNDN3NUbkF2NU1DWHU3UUZLOXdzcFNPM3dWTUlhU1dJUWxSYW5nM1d3bVh6?=
- =?utf-8?B?RnNZTm1xUWhjM1hDTkFIRVJJTVUwMWVKZmR0d1A1TFNSR1hsRFQwZVA2SUcy?=
- =?utf-8?B?dEk2MW13SmhKeWRaazcwN0xOS0FoVVVrT2pQV1hxTmtNcGFtSGtHdDczVWxu?=
- =?utf-8?B?Nys5S3h1MThVOUpRUEsxdnJBU294ZlBxaDZQcGY0R1JTSUY0QjcxNDZUMFo4?=
- =?utf-8?B?UG52YyswSDJ1aDRYY0prNCtHeVBLUU9mZmVkMGwxTzFoMlpnYWZNOUVsQUc0?=
- =?utf-8?B?WUpLWXFVZHY5WkF1bWxUb3A2SDUyZHRxTWNUQlk5cFI4NkVHSU00N3MzUEtv?=
- =?utf-8?B?Qm5ieTVCV2t4MDBkRW9LNkZVRmN1bVhxWWdoamJTTll0OG1JMXNhb1lNVlRk?=
- =?utf-8?B?eG1SWE5FMkpKUFNleTlJZWp2QURhYi84czcyTU9TNUtKZFpYVVg2c3dJOU85?=
- =?utf-8?B?VnB5cjFaZDhtM3JDYUF2c0k4OG5GR0pKdjRVOVcxenJWV1ArYUNSbk5MOGdn?=
- =?utf-8?B?M0MzaUlQYjdhMi9KeC8rdDNsV1lMLzYzS0RUUUthc21XVGhYWHVTaDhNRjRt?=
- =?utf-8?Q?Vfp+Z7Hs+7coEG8I=3D?=
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <C8B4BF0A958ACE4B80007F0333B27830@apcprd03.prod.outlook.com>
-Content-Transfer-Encoding: base64
+ d=gmail.com; s=20251104; t=1778495287; x=1779100087; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=K/iMlUzOuH0N9xah4POxalefnPucKTZ0LNj+dUscvlg=;
+ b=UakZicbxNI6R3E8WJnCJQyoDM1Dag1swt3qhsU97TNIdZdlTlZe1Uvia6mcFtvbRXn
+ oQITG4whDZzR2Lt37O2/3JXEPfG3jnHw94OXURn3SODDCMskxQ1XYOMq4bWmZJ1wP9jb
+ g9Oa5T0rV/dBe1uakKaRxy+4wfyMgCuy2zJ6NMVZYmnBeadNJ8+M5gaQdwTavePa8eUe
+ CudUst6eVBmlPw2wlyWe+51NdlOxaQ/ylsXo8W9ML7cX8MPpDRApnTq+a5vbyfr07Wf0
+ bE4caO9LDr/XVOexUUpLgVCporaD6NgvbL6mxJ0x0TMomwFpjp4/FMmpxIT53K6jdDnu
+ qYcA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1778495287; x=1779100087;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=K/iMlUzOuH0N9xah4POxalefnPucKTZ0LNj+dUscvlg=;
+ b=M9zV4ejYvSCrqr8tdHoxViQ74/fhL2LxEMUmGIJ9yzUBzkrRgWcAec8Mi24lokr/kZ
+ fOQlUY5ijvMKb6F3pwFudSUs7Q5vSYMdbM5GyJQ5Q7PKShqAzKj0CuWD0uDQelvFcyA8
+ PEvhaANH5BYSrihHXQWidwp/PvoGcvaQQs/zgRuh01ziMTARvoDYhHi84Xe8ffuaq2p4
+ 8KQATQYeH/dvnvn4uXGRtiT8qltS0XXTHLOWg72hR3q7IdKqCX+3GuxjiuSYyasAy2vB
+ p1snNtmwAnRGaMKpDvrTTOtEFFcPmyL7B7U/PHO/aHv58/uOq47/Ua9ZHNFpyoFKt2o/
+ lJnQ==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ/xUo68aFfngTGIT4bKmv4GscoutKZzKCUxqt4RWSdANRK3LabhG5HNzLfs5ca9/ys7gdNNYQQ=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy5Ix4htOHo77CGTxhHfWiT+wpqO2ttERGFbT751wf9fwBD1/MU
+ EKyLZIx786L7l/X5SE9oSU0R8GgrcgqR1da9+yUoFWf+UhMNjkzpX0ejERq+gsf41vjTsTsg1/i
+ v6JIjJ1C91fKLlZH109/doXsmNqVS5PI=
+X-Gm-Gg: Acq92OHkGtkx+KNxaa8WJCWVadm4Xb2bb/2ipIcDnzbX6eXbRlhOQgW3iYBXH+IwMLv
+ HijDqG5MCY6UasOe6zcpfhrdjdITOJEOa0NF1RJwHH0uNi/5ltAHOPmZWZEQ9vD5ZoODM93XUdT
+ 4fWP5TCYc64b00OKSScFRh3NdRlK14I6Clda1zgQ/gdNrJTmSfoTy84fJlZRyjI1h68AkPyFN1v
+ 4DVZxM6742R582oqlaPOIVhxgiueSBxeZIx+NEhboXoued8VY1vverU6wk+S0hSm0KHHZ10RNw2
+ 1ukOPX+wGvcpdqOqt+k=
+X-Received: by 2002:ac5:c806:0:b0:575:a69a:a3c0 with SMTP id
+ 71dfb90a1353d-575a69aab76mr1350526e0c.7.1778495286698; Mon, 11 May 2026
+ 03:28:06 -0700 (PDT)
 MIME-Version: 1.0
-X-Exchange-RoutingPolicyChecked: uXQLFiFexEoNFJEc9DZb3C82E80hx7As4jlg9vdhoKjNVjslZTSm9M6N5bEgFrzWTQng39osop30RK0pckqK3xac3ITppg+WAbCArk+qPrG6djZUwIv9QijPpgDLGaJJBjo/LOgPE+Rb7aCr/wFOX5LkteS/vWZcQvHwOK+xyCiMwhB2Ubrhn8oMYMi4Z3mdzznTYWtkX2kGs51gn4sdjO3fYGwrGhyZoOmn+Up3jQJAndYLQEXFlie7nAwztnUWWOPBNc8oQnPEX1TIA916cZOr2tA0tR0US7ePfkYWeRZ8tSogwxarVCs+28YfX97fCZXBtj7+2eQAFH+6WZbDtw==
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: SEZPR03MB7810.apcprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 83f4f7e9-3772-4a52-fc17-08deaf46be9e
-X-MS-Exchange-CrossTenant-originalarrivaltime: 11 May 2026 10:19:11.3429 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: a7687ede-7a6b-4ef6-bace-642f677fbe31
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: k4vSurAiNT9MejUngkv8/EG/PllEO7ayAGdMiaGPMfDfYFsnQddOm/B/HeTwlwmsS4Ld6aTUIX64S8uZSlVWgbz32JmfjPiwECY4wbFWp9M=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: TYZPR03MB7790
-X-MTK: N
+References: <20250914110021.4103-1-aristo.chen@canonical.com>
+ <20250924113733.uz6hozszbuynemtc@giddy>
+ <20250924114317.742ae4ntrb4mvuyq@expert>
+ <b07919da-f3fe-49ca-8f76-ab057d8af58a@freeshell.de>
+ <CAJwFiGLHDEPMsFyBhX=ogQxX_C+8ac-_9_jeiZYyo=3o0M8ZHA@mail.gmail.com>
+ <CAJwFiGLXgsnb75HT45L5Xo-N4LmCBeLGwPi8Yr5zZzNo7mrVNg@mail.gmail.com>
+ <873d73f0-34fe-4445-8745-f98734637b0c@freeshell.de>
+ <CAJwFiGJsnK3CRhYBYmE0fGpds0AOvVhRv___JaBNPjGhiYRCNA@mail.gmail.com>
+ <CAJwFiGKVqRsNjvhd4Qjo8S8AxVMTpTvxu51tCaJA6j6a+7-RAw@mail.gmail.com>
+ <20260309130826.xz7m33vj672hthz2@bryanbrattlof.com>
+In-Reply-To: <20260309130826.xz7m33vj672hthz2@bryanbrattlof.com>
+From: Aristo Chen <jj251510319013@gmail.com>
+Date: Mon, 11 May 2026 12:27:29 +0200
+X-Gm-Features: AVHnY4IP3IT30OTuySZo556ZuK_eJ8jE-Wo_d3c1rj7fSpJ4fu1D63F5lk-kSYc
+Message-ID: <CAJwFiGL1OyX=MOWor-BkZsSmiVOH23wG_Y-kSZinFseXygUD8A@mail.gmail.com>
+Subject: Re: [PATCH v2 0/7] mkimage: Detect FIT image load address overlaps
+ and fix related test/DTS issues
+To: Bryan Brattlof <bb@ti.com>
+Cc: E Shattow <e@freeshell.de>, Nishanth Menon <nm@ti.com>,
+ u-boot@lists.denx.de, trini@konsulko.com, 
+ sjg@chromium.org, alpernebiyasak@gmail.com, al.kochet@gmail.com, 
+ paul.henrys_ext@softathome.com, y.moog@phytec.de, w.egorov@phytec.de, 
+ francesco.dolcini@toradex.com, ggiordano@phytec.com, n-francis@ti.com, 
+ afd@ti.com, d.schultz@phytec.de, d-gole@ti.com, ravi@prevas.dk, 
+ carlos.lopezr4096@gmail.com, quentin.schulz@cherry.de, alice.guo@nxp.com, 
+ Aristo Chen <aristo.chen@canonical.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-Mailman-Approved-At: Mon, 11 May 2026 14:51:08 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -230,59 +133,302 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-T24gV2VkLCAyMDI2LTA0LTI5IGF0IDE1OjU5ICswMjAwLCBKdWxpZW4gU3RlcGhhbiB3cm90ZToN
-Cj4gU3lub3BzeXMgRFdDIEV0aGVybmV0IFFPUyBkZXZpY2Ugc3VwcG9ydCBmb3IgTWVkaWFUZWsg
-U29Dcy4NCj4gaW4gcGFydGljdWxhciB0aGlzIGluaXRpYWwgY29tbWl0IGFkZHMgc3VwcG9ydCBm
-b3IgR2VuaW8gNTIwLzcyMCBhbmQNCj4gR2VuaW8gNTEwLzcwMCBFVktzDQo+IA0KPiBTaWduZWQt
-b2ZmLWJ5OiBmYW55aSB6aGFuZyA8ZmFueWkuemhhbmdAbWVkaWF0ZWsuY29tPg0KPiBTaWduZWQt
-b2ZmLWJ5OiBKdWxpZW4gU3RlcGhhbiA8anN0ZXBoYW5AYmF5bGlicmUuY29tPg0KPiAtLS0NCj4g
-wqBNQUlOVEFJTkVSU8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB8wqDCoCAx
-ICsNCj4gwqBkcml2ZXJzL25ldC9LY29uZmlnwqDCoMKgwqDCoMKgwqDCoMKgwqAgfMKgwqAgNyAr
-DQo+IMKgZHJpdmVycy9uZXQvTWFrZWZpbGXCoMKgwqDCoMKgwqDCoMKgwqAgfMKgwqAgMSArDQo+
-IMKgZHJpdmVycy9uZXQvZHdjX2V0aF9xb3MuY8KgwqDCoMKgIHzCoMKgIDYgKw0KPiDCoGRyaXZl
-cnMvbmV0L2R3Y19ldGhfcW9zLmjCoMKgwqDCoCB8wqDCoCAyICsNCj4gwqBkcml2ZXJzL25ldC9k
-d2NfZXRoX3Fvc19tdGsuYyB8IDQ0Mg0KPiArKysrKysrKysrKysrKysrKysrKysrKysrKysrKysr
-KysrKysrKysrKysNCj4gwqA2IGZpbGVzIGNoYW5nZWQsIDQ1OSBpbnNlcnRpb25zKCspDQo+IA0K
-PiBkaWZmIC0tZ2l0IGEvTUFJTlRBSU5FUlMgYi9NQUlOVEFJTkVSUw0KPiBpbmRleCAxNjU5OTRj
-ZDcyZi4uOWI2NWJiNDNkOGYgMTAwNjQ0DQo+IC0tLSBhL01BSU5UQUlORVJTDQo+ICsrKyBiL01B
-SU5UQUlORVJTDQo+IEBAIC00NDIsNiArNDQyLDcgQEAgRjoJZHJpdmVycy9jbGsvbWVkaWF0ZWsv
-DQo+IMKgRjoJZHJpdmVycy9jcHUvbXRrX2NwdS5jDQo+IMKgRjoJZHJpdmVycy9pMmMvbXRrX2ky
-Yy5jDQo+IMKgRjoJZHJpdmVycy9tbWMvbXRrLXNkLmMNCj4gK0Y6CWRyaXZlcnMvbmV0L2R3Y19l
-dGhfcW9zX210ay5jDQo+IMKgRjoJZHJpdmVycy9uZXQvbXRrX2V0aC8NCj4gwqBGOglkcml2ZXJz
-L25ldC9waHkvbWVkaWF0ZWsvDQo+IMKgRjoJZHJpdmVycy9waHkvcGh5LW10ay0qDQo+IGRpZmYg
-LS1naXQgYS9kcml2ZXJzL25ldC9LY29uZmlnIGIvZHJpdmVycy9uZXQvS2NvbmZpZw0KPiBpbmRl
-eCAxNWE0YjNiNzcwNS4uY2Q4Njg3MzFkMTEgMTAwNjQ0DQo+IC0tLSBhL2RyaXZlcnMvbmV0L0tj
-b25maWcNCj4gKysrIGIvZHJpdmVycy9uZXQvS2NvbmZpZw0KPiBAQCAtMjQ2LDYgKzI0NiwxMyBA
-QCBjb25maWcgRFdDX0VUSF9RT1NfSU5URUwNCj4gwqAJwqAgVGhlIFN5bm9wc3lzIERlc2lnbndh
-cmUgRXRoZXJuZXQgUU9TIElQIGJsb2NrIHdpdGggdGhlDQo+IHNwZWNpZmljDQo+IMKgCcKgIGNv
-bmZpZ3VyYXRpb24gdXNlZCBpbiB0aGUgSW50ZWwgRWxraGFydC1MYWtlIHNvYy4NCj4gwqANCj4g
-K2NvbmZpZyBEV0NfRVRIX1FPU19NVEsNCj4gKwlib29sICJTeW5vcHN5cyBEV0MgRXRoZXJuZXQg
-UU9TIGRldmljZSBzdXBwb3J0IGZvciBNZWRpYVRlaw0KPiBTb0NzIg0KPiArCWRlcGVuZHMgb24g
-RFdDX0VUSF9RT1MgJiYgQVJDSF9NRURJQVRFSw0KPiArCWhlbHANCj4gKwnCoCBUaGUgU3lub3Bz
-eXMgRGVzaWdud2FyZSBFdGhlcm5ldCBRT1MgSVAgYmxvY2sgd2l0aCB0aGUNCj4gc3BlY2lmaWMN
-Cj4gKwnCoCBjb25maWd1cmF0aW9uIHVzZWQgaW4gTWVkaWFUZWsgU29Dcy4NCj4gKw0KPiDCoGNv
-bmZpZyBEV0NfRVRIX1FPU19RQ09NDQo+IMKgCWJvb2wgIlN5bm9wc3lzIERXQyBFdGhlcm5ldCBR
-T1MgZGV2aWNlIHN1cHBvcnQgZm9yIFFjb20NCj4gU29DcyINCj4gwqAJZGVwZW5kcyBvbiBEV0Nf
-RVRIX1FPUw0KPiBkaWZmIC0tZ2l0IGEvZHJpdmVycy9uZXQvTWFrZWZpbGUgYi9kcml2ZXJzL25l
-dC9NYWtlZmlsZQ0KPiBpbmRleCBjNDg1MDY4ZTVkMi4uNzYxZjdmMGY0NTEgMTAwNjQ0DQo+IC0t
-LSBhL2RyaXZlcnMvbmV0L01ha2VmaWxlDQo+ICsrKyBiL2RyaXZlcnMvbmV0L01ha2VmaWxlDQo+
-IEBAIC0yMSw2ICsyMSw3IEBAIG9iai0kKENPTkZJR19EV0NfRVRIX1FPUykgKz0gZHdjX2V0aF9x
-b3Mubw0KPiDCoG9iai0kKENPTkZJR19EV0NfRVRIX1FPU19BREkpICs9IGR3Y19ldGhfcW9zX2Fk
-aS5vDQo+IMKgb2JqLSQoQ09ORklHX0RXQ19FVEhfUU9TX0lNWCkgKz0gZHdjX2V0aF9xb3NfaW14
-Lm8NCj4gwqBvYmotJChDT05GSUdfRFdDX0VUSF9RT1NfSU5URUwpICs9IGR3Y19ldGhfcW9zX2lu
-dGVsLm8NCj4gK29iai0kKENPTkZJR19EV0NfRVRIX1FPU19NVEspICs9IGR3Y19ldGhfcW9zX210
-ay5vDQo+IMKgb2JqLSQoQ09ORklHX0RXQ19FVEhfUU9TX1FDT00pICs9IGR3Y19ldGhfcW9zX3Fj
-b20ubw0KPiDCoG9iai0kKENPTkZJR19EV0NfRVRIX1FPU19ST0NLQ0hJUCkgKz0gZHdjX2V0aF9x
-b3Nfcm9ja2NoaXAubw0KPiDCoG9iai0kKENPTkZJR19EV0NfRVRIX1FPU19TVEFSRklWRSkgKz0g
-ZHdjX2V0aF9xb3Nfc3RhcmZpdmUubw0KPiBkaWZmIC0tZ2l0IGEvZHJpdmVycy9uZXQvZHdjX2V0
-aF9xb3MuYyBiL2RyaXZlcnMvbmV0L2R3Y19ldGhfcW9zLmMNCj4gaW5kZXggMGYzMWQ2NDY4NDUu
-LmI3ZTYyOTljMzA3IDEwMDY0NA0KPiAtLS0gYS9kcml2ZXJzL25ldC9kd2NfZXRoX3Fvcy5jDQo+
-ICsrKyBiL2RyaXZlcnMvbmV0L2R3Y19ldGhfcW9zLmMNCj4gQEAgLTE2NTgsNiArMTY1OCwxMiBA
-QCBzdGF0aWMgY29uc3Qgc3RydWN0IHVkZXZpY2VfaWQgZXFvc19pZHNbXSA9IHsNCj4gwqAJCS5j
-b21wYXRpYmxlID0gImFkaSxzYzU5eC1kd21hYy1lcW9zIiwNCj4gwqAJCS5kYXRhID0gKHVsb25n
-KSZlcW9zX2FkaV9jb25maWcNCj4gwqAJfSwNCj4gKyNlbmRpZg0KPiArI2lmIElTX0VOQUJMRUQo
-Q09ORklHX0RXQ19FVEhfUU9TX01USykNCj4gKwl7DQo+ICsJCS5jb21wYXRpYmxlID0gIm1lZGlh
-dGVrLG10ODE4OS1nbWFjIiwNCj4gKwkJLmRhdGEgPSAodWxvbmcpJmVxb3NfbXRrX2NvbmZpZw0K
-PiArCX0sDQo+IMKgI2VuZGlmDQo+IMKgCXsgfQ0KPiDCoH07DQoNCltzbmlwXQ0KDQpSZXZpZXdl
-ZC1ieTogTWFjcGF1bCBMaW4gPG1hY3BhdWwubGluQG1lZGlhdGVrLmNvbT4NCg0KVGhhbmtzIQ0K
-TWFjcGF1bCBMaW4NCg==
+Hi TI folks,
+
+I guess things have been busy on your end, so I went ahead and secured
+an SK-AM62 board (GP variant) to verify the patch[1] myself. I've
+tested it against the latest U-Boot master, and as far as I can tell,
+it boots without issues[2].
+
+Could you please take a look when you have a moment? If you=E2=80=99re happ=
+y
+with the changes, would you prefer I open a PR on the TI GitHub
+repo[3], or should I submit this directly to the U-Boot upstream
+mailing list?
+
+[1] https://github.com/open-source-firmware/flat-image-tree/issues/32#issue=
+comment-3948419217
+[2] https://github.com/open-source-firmware/flat-image-tree/issues/32#issue=
+comment-4344362533
+[3] https://github.com/TexasInstruments/ti-u-boot
+
+Best regards,
+Aristo
+
+Bryan Brattlof <bb@ti.com> =E6=96=BC 2026=E5=B9=B43=E6=9C=889=E6=97=A5=E9=
+=80=B1=E4=B8=80 =E4=B8=8B=E5=8D=882:08=E5=AF=AB=E9=81=93=EF=BC=9A
+>
+> On March  9, 2026 thus sayeth Aristo Chen:
+> > Hi TI folks,
+> >
+> > I have put some thoughts in the github issue[1] that we are discussing
+> > FIT image spec, could you please take a look when you have time?
+> >
+>
+> Absolutely. Sorry for the delay. I think I have a github filter set long
+> ago which probably needs adjusting.
+>
+> ~Bryan
+>
+> > Best regards,
+> > Aristo
+> >
+> > [1] https://github.com/open-source-firmware/flat-image-tree/issues/32
+> >
+> > Aristo Chen <jj251510319013@gmail.com> =E6=96=BC 2026=E5=B9=B42=E6=9C=
+=8810=E6=97=A5=E9=80=B1=E4=BA=8C =E4=B8=8B=E5=8D=884:16=E5=AF=AB=E9=81=93=
+=EF=BC=9A
+> > >
+> > > Hi E Shattow and all,
+> > >
+> > > E Shattow <e@freeshell.de> =E6=96=BC 2026=E5=B9=B41=E6=9C=8814=E6=97=
+=A5=E9=80=B1=E4=B8=89 =E4=B8=8A=E5=8D=881:29=E5=AF=AB=E9=81=93=EF=BC=9A
+> > > >
+> > > > Hi Aristo,
+> > > >
+> > > > On 1/13/26 07:09, Aristo Chen wrote:
+> > > > > Hi E Shattow,
+> > > > >
+> > > > > Aristo Chen <jj251510319013@gmail.com> =E6=96=BC 2025=E5=B9=B411=
+=E6=9C=885=E6=97=A5=E9=80=B1=E4=B8=89 =E4=B8=8B=E5=8D=888:21=E5=AF=AB=E9=81=
+=93=EF=BC=9A
+> > > > >>
+> > > > >> Hi E Shattow,
+> > > > >>
+> > > > >> E Shattow <e@freeshell.de> =E6=96=BC 2025=E5=B9=B49=E6=9C=8824=
+=E6=97=A5 =E9=80=B1=E4=B8=89 =E4=B8=8B=E5=8D=889:31=E5=AF=AB=E9=81=93=EF=BC=
+=9A
+> > > > >>>
+> > > > >>> Hi Aristo,
+> > > > >>>
+> > > > >>> On 9/24/25 04:43, Nishanth Menon wrote:
+> > > > >>>> On 06:37-20250924, Nishanth Menon wrote:
+> > > > >>>>> On 10:59-20250914, Aristo Chen wrote:
+> > > > >>>>>> This patch series enhances FIT image robustness by adding **=
+memory
+> > > > >>>>>> region overlap detection** to `mkimage` and fixing existing =
+overlaps
+> > > > >>>>>> in DTS files and `binman` tests.
+> > > > >>>>
+> > > > >>>> [...]
+> > > > >>>>>>
+> > > > >>>>>
+> > > > >>>>> Looks like i see a build regression in linux-next after this =
+series.
+> > > > >>>>
+> > > > >>>> I fat fingered that one.. sorry, I meant u-boot next.
+> > > > >>>>
+> > > > >>>>
+> > > > >>>> Fails at commit 4d84fa1261eb, last pass was on commit d81c1118=
+580f
+> > > > >>>>
+> > > > >>>>>
+> > > > >>>>> https://gist.github.com/nmenon/b2fc9e7680cc296062c7dced94105f=
+76
+> > > > >>>>
+> > > > >>>> I  believe there are outstanding comments on V1 that have'nt b=
+een
+> > > > >>>> addressed either. Can we revert/drop this series for now while=
+ the
+> > > > >>>> comments are addressed?
+> > > > >>>>
+> > > > >>>
+> > > > >>> Similar to Nishanth, I am seeing a build regression, itb.map:
+> > > > >>>
+> > > > >>> ImagePos    Offset      Size  Name
+> > > > >>> <none>      00000000  <none>    itb
+> > > > >>> <none>      00000000  <none>    fit
+> > > > >>> <none>      00000000  000c1698  uboot
+> > > > >>> <none>      00000000  000c1698  u-boot-nodtb
+> > > > >>> <none>      000c1698  00202128  opensbi
+> > > > >>> <none>      00000000  00202128  opensbi
+> > > > >>>
+> > > > >>> Yields this error:
+> > > > >>> ...
+> > > > >>>  MKIMAGE fit-dtb.blob
+> > > > >>> Warning: not able to get `load` of node 'fdt-1'
+> > > > >>> Warning: not able to get `load` of node 'fdt-2'
+> > > > >>> Warning: not able to get `load` of node 'fdt-3'
+> > > > >>> Warning: not able to get `load` of node 'fdt-4'
+> > > > >>> Warning: not able to get `load` of node 'fdt-5'
+> > > > >>> Warning: not able to get `load` of node 'fdt-6'
+> > > > >>> Warning: not able to get `load` of node 'fdt-7'
+> > > > >>>   CAT     u-boot-fit-dtb.bin
+> > > > >>> ...
+> > > > >>>   MKIMAGE u-boot.img
+> > > > >>> Warning: not able to get `load` of node 'fdt-1'
+> > > > >>> Warning: not able to get `load` of node 'fdt-2'
+> > > > >>> Warning: not able to get `load` of node 'fdt-3'
+> > > > >>> Warning: not able to get `load` of node 'fdt-4'
+> > > > >>> Warning: not able to get `load` of node 'fdt-5'
+> > > > >>> Warning: not able to get `load` of node 'fdt-6'
+> > > > >>> Warning: not able to get `load` of node 'fdt-7'
+> > > > >>>   COPY    u-boot.dtb
+> > > > >>>   MKIMAGE u-boot-dtb.img
+> > > > >>> Warning: not able to get `load` of node 'fdt-1'
+> > > > >>> Warning: not able to get `load` of node 'fdt-2'
+> > > > >>> Warning: not able to get `load` of node 'fdt-3'
+> > > > >>> Warning: not able to get `load` of node 'fdt-4'
+> > > > >>> Warning: not able to get `load` of node 'fdt-5'
+> > > > >>> Warning: not able to get `load` of node 'fdt-6'
+> > > > >>> Warning: not able to get `load` of node 'fdt-7'
+> > > > >>>   BINMAN  .binman_stamp
+> > > > >>> Wrote map file './itb.map' to show errors
+> > > > >>> binman: Error 1 running 'mkimage -t -F ./itb.fit.fit': Warning:=
+ not able
+> > > > >>> to get `load` of node 'fdt-1'
+> > > > >>> [Config: conf-1] Error: Overlap detected:
+> > > > >>>   - uboot: [0x40200000 - 0x402c1698]
+> > > > >>>   - opensbi: [0x40000000 - 0x40202128]
+> > > > >>>
+> > > > >>> make[1]: *** [/tmp/u-boot.2.git/Makefile:1339: .binman_stamp] E=
+rror 1
+> > > > >>> make[1]: Leaving directory '/home/es/build/u-boot'
+> > > > >>> make: *** [Makefile:198: sub-make] Error 2
+> > > > >>> make: Leaving directory '/tmp/u-boot.2.git'
+> > > > >>>
+> > > > >>> If you would like to reproduce the issue, use config
+> > > > >>> starfive_visionfive2_defconfig and pass to OPENSBI env variable=
+ the path
+> > > > >>> of opensbi object 'fw_dynamic.bin' built using PLATFORM=3Dgener=
+ic, with
+> > > > >>> the ordinary gcc riscv64 toolchain. The starfive visionfive2 bo=
+ard
+> > > > >>> target in U-Boot supports multiple vendors and boards selected =
+at
+> > > > >>> runtime and is an example of a more complex FIT usage that you =
+may be
+> > > > >>> interested in for comparison and testing.
+> > > > >>>
+> > > > >>> Best regards,
+> > > > >>>
+> > > > >>> -E
+> > > > >>
+> > > > >> Sorry that I didn't noticed that my previous email sent to you w=
+as not
+> > > > >> including other people
+> > > > >>
+> > > > >> Long story short, I am now able to reproduce the overlap issue t=
+hat
+> > > > >> you have encountered, and
+> > > > >> I spent some time trying to understand what is opensbi, please c=
+orrect
+> > > > >> me if I am wrong
+> > > > >>
+> > > > >> AFAICT, there will be 2 types of firmware built, one is
+> > > > >> `fw_payload.bin`, and the other is
+> > > > >> `fw_dynamic.bin`
+> > > > >> - fw_payload.bin: contains the next-stage binary, so the file si=
+ze
+> > > > >> will be bigger
+> > > > >> - fw_dynamic.bin: provides information about the next boot stage=
+ at
+> > > > >> runtime, so the size is smaller
+> > > > >>
+> > > > >> and here are the size of these 2 files built in my environment
+> > > > >> ```
+> > > > >> -rw-rw-r-- 1 ubuntu ubuntu  273048 Oct 25 14:49 fw_dynamic.bin
+> > > > >> -rw-rw-r-- 1 ubuntu ubuntu 2105656 Oct 25 14:49 fw_payload.bin
+> > > > >> ```
+> > > > >>
+> > > > >> When using my overlap checking mechanism, and passing the
+> > > > >> fw_dynamic.bin to build U-Boot,
+> > > > >> there is no overlap issue. However, when using fw_payload.bin, t=
+here
+> > > > >> will be an overlap issue.
+> > > > >>
+> > > > >> AFAICT, the SPL will load the opensbi firmware(assuming fw_paylo=
+ad.bin
+> > > > >> here) first, then load
+> > > > >> U-Boot into memory, and then jump to opensbi firmware, so I was =
+a bit
+> > > > >> confused why the
+> > > > >> overlapped opensbi still works?
+> > > > >>
+> > > > >> I will find some time to figure out how the whole loading/bootin=
+g
+> > > > >> process looks like, but it would
+> > > > >> be greatly appreciated if you can share some insight, thanks!
+> > > > >
+> > > > > I finally had some time to revisit this and managed to get a Visi=
+onFive2
+> > > > > board for local testing.
+> > > > >
+> > > > > While trying to make it bootable I noticed the following docs:
+> > > > >   - https://docs.u-boot.org/en/latest/board/starfive/visionfive2.=
+html#second-stage-bootloader-opensbi-fw-dynamic-bin-u-boot-main
+> > > > >   - https://wiki.gentoo.org/wiki/StarFive_VisionFive_2#Building_O=
+penSBI
+> > > > >
+> > > > > Both appear to recommend using OpenSBI=E2=80=99s fw_dynamic.bin w=
+hen building
+> > > > > U=E2=80=91Boot. I couldn=E2=80=99t find any guidance on using fw_=
+payload.bin together
+> > > > > with U=E2=80=91Boot, which made me wonder why fw_payload.bin was =
+used in your
+> > > > > earlier report.
+> > > > >
+> > > >
+> > > > Likely I mixed up the filenames when writing in conversation, as I =
+did
+> > > > when writing on the opensbi mailing list about a dependency trackin=
+g bug
+> > > > in opensbi build system:
+> > > >
+> > > > https://lore.kernel.org/opensbi/0d6bf7c7-7605-4ad6-a35c-54efc5230fb=
+8@sifive.com/
+> > > >
+> > > > and
+> > > >
+> > > > https://lore.kernel.org/opensbi/36cfe431-40fb-470d-b50e-00a139d480f=
+8@freeshell.de/
+> > > >
+> > > > ...which is clearly a mistake to write "OPENSBI=3D/path/to/fw_paylo=
+ad.bin"
+> > > > when it should instead be "OPENSBI=3D/path/to/fw_dynamic.bin",
+> > > > acknowledged in the follow-up message:
+> > > >
+> > > > https://lore.kernel.org/opensbi/32873fc7-2cc8-46d5-9f4e-3a16cf95f48=
+a@freeshell.de/
+> > > >
+> > > > > Could you clarify whether there is documentation (or a specific
+> > > > > requirement) that calls for fw_payload.bin in this flow? If the i=
+ntended
+> > > > > path is fw_dynamic.bin, then the overlap issue disappears for me
+> > > > >
+> > > >
+> > > > For the VisionFive2 and derivative boards, I intended to refer to
+> > > > fw_dynamic.bin only. If I mention otherwise it was in error or for =
+not
+> > > > knowing what I'm looking at and reporting more information than
+> > > > required. There are RISC-V boards not related to VisionFive2 or its
+> > > > StarFive JH-7110 SoC that do use the fw_payload.bin approach but I =
+think
+> > > > I just didn't notice the difference when transcribing to e-mail.
+> > > >
+> > > > > Thanks for your help and guidance.
+> > > > >>
+> > > > >> Best regards,
+> > > > >> Aristo
+> > > > >
+> > > > > Best regards,
+> > > > > Aristo
+> > > >
+> > > > Thanks very much for the follow-up,
+> > > Thanks for letting me know that StarFive VisionFive2 is not affected
+> > > by my patch!
+> > >
+> > > >
+> > > > -E
+> > >
+> > > We=E2=80=99re currently discussing a new proposal[1] for handling TI =
+platforms
+> > > in the FIT image spec. Ahmad Fatoum has a few questions about
+> > > TI-specific implementations=E2=80=94could the TI folks on this thread=
+ please
+> > > take a look when you have a moment?
+> > >
+> > > Best regards,
+> > > Aristo
+> > >
+> > > [1] https://github.com/open-source-firmware/flat-image-tree/issues/32
