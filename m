@@ -4,105 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7EFBCCD4840
-	for <u-boot@archiver.kernel.org>; Mon, 11 May 2026 18:08:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76AE5CD4840
+	for <u-boot@archiver.kernel.org>; Mon, 11 May 2026 18:08:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 750C5803C6;
-	Mon, 11 May 2026 20:08:06 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id AD05C838BB;
+	Mon, 11 May 2026 20:08:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="of48Hu3r";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="g/6wHnKM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ADFF580F0E; Mon, 11 May 2026 20:08:05 +0200 (CEST)
-Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
- [IPv6:2a00:1450:4864:20::52d])
+ id 658F180398; Mon, 11 May 2026 20:08:10 +0200 (CEST)
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [IPv6:2a00:1450:4864:20::632])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CDCB780398
- for <u-boot@lists.denx.de>; Mon, 11 May 2026 20:08:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DEBE68341A
+ for <u-boot@lists.denx.de>; Mon, 11 May 2026 20:08:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52d.google.com with SMTP id
- 4fb4d7f45d1cf-6804e24803bso1822233a12.1
- for <u-boot@lists.denx.de>; Mon, 11 May 2026 11:08:02 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1778522882; cv=none;
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-bcda7765d64so291650666b.1
+ for <u-boot@lists.denx.de>; Mon, 11 May 2026 11:08:06 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1778522886; cv=none;
  d=google.com; s=arc-20240605;
- b=JVkht40wx8BHajhZH/q/eYwJf/LvyYXjxFxKXlLg+BAFzGwTbhaLewOlZK1mfClWce
- otqDjwA+7gd2Wm2hFf9ytDw09Vw6FSkc1MeTDRPrpdVP66yYyOinOEhIx4id4LVApkUu
- Qk6VWXNsmR91WScs+ziBC34Xaua07m/F+6V4rjuXb08lnhkrDDhe2kSaaEPQzI1HTgi1
- qEM2tfKCXfo/zxLENiEGZWYkJDQsNJPyrpVnPDzXXnR8duoYZfeELCZ1l7yxu4hio4DQ
- nLJffw/9wWhxcPIbHVPXnbzXXwD1KXNW1NNYLbAyxFOWDHzdnyPSRmN+XOLpSFpWPfLK
- XHrQ==
+ b=Y0j5mNNVEhsKjzTP55wI6ccCblqRsXoz9n/y5TdQ/Bwg/XqYnEuj0Cr11xWaVv0Okp
+ xG+kzTV+Blok1ZKLxhnL3JLZgGlg5h6iYdu7FxDRkE2dTQR1dcNo/UO+UuuJ7DtJavjA
+ 3fQJUht/+dE2WHCrCnKiBVaieJt0VYw1v/EEhEut/yC/IBPY8w54LOUY7hhcer5ZDhP5
+ M1zPvzpn6NhOwzWJIrTg7Z+CkU6aTQP6tZVF8ZCT5vuUedIUYytWK4GHgvF70DcvlZMu
+ E0epLZ2hnC4JWStHDtqzeDONqRRA4hTUJUb0b3kuyO2fuTPPgu+l/QclVqeeqHvZ7rGW
+ BR1Q==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=gpoyzIFl6OFX5D/1DGHawVor/J+nfi0UWofV+KnjpH8=;
- fh=MnrnvWCmQksGp4DN91z/WigQEzLhsJgZ2mW/UTa57DY=;
- b=JY2279F05Hx4oDZF/gRQuESTXVupYjPROyQxU57L1Hg2Fxl07nD8vlbi9Z5wcj9HDJ
- EUL8l5YbDGeT58yzeEbkONtadcW6sMwRti9836ejHnWIlhmrXpke4D+NbX65Bklkb7sY
- u4OontCg0hxMP0rZx6CsKSPssIlysZYgt1RI58cRwy1Al3+xFvCDskJFczt7Ev7MreWQ
- JxKXE9JdthXN9jBVvumePYPPJo3q0lMU7VjjIFotavjVIFVeDqBXPABIeh5uiG/9cvE0
- RPI6Q+NI01/hK6j0tfPp9dKL6DTIma7a7u3SroZPfdyVKhTt1+SBGBBclJdRV9MdieI6
- KWsA==; darn=lists.denx.de
+ bh=geQUIbsdF6ZO7DPffX3jx2YFnn3sFXKfIRF4uTE0n8Y=;
+ fh=Scn8Joqle4yweNpfVUSjPYEkltLEef7DfonlSmtQc3M=;
+ b=jb2koysyj9EPVkPZlGd+Tlf65yxYHycdmc4wk4araT+zaljeG74Nh5kGmxV+Oz0hOO
+ 32CSmPnP5lGB9x6doHU2vRhqDg6uS29iCl4Z/FN74QTflX5U2wFFtdrMIRg/8Mp70Hfs
+ ZFovzBF+wCq/ZXuzWSmdKFRSBdKViWyyyLewwlX7RV7h0TfDYdj35vvUFV7a2wwY76jy
+ UU77gIUmvuBnVklVy2rEwDmDIMo7TR1A78aMP4kmm4TBatPyW+CLDzNws77JLS8O+mY7
+ FxRGTRw39aIYAwqmJ85gFyqvvCxvp2w+3M3YgbnWTgVc+I4s6HyhxHn4vcub8m7Y1AlW
+ 0GSQ==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1778522882; x=1779127682; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1778522886; x=1779127686; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=gpoyzIFl6OFX5D/1DGHawVor/J+nfi0UWofV+KnjpH8=;
- b=of48Hu3rCVvmbmC0m21tFGMtxg/VyumjJ1ibEv8Lk/j0bVq8cU8qWUFCm/p4exSsEN
- Xto/M3fy4ksmlH3mWXbtpBmn40HoocFymAgVGlDHK7kDcBacMa0vcdnUAM7dUHAhgTHp
- LNyud7nrZQqoaBDertB/dCZ/s4cnCUdvd1nBA=
+ bh=geQUIbsdF6ZO7DPffX3jx2YFnn3sFXKfIRF4uTE0n8Y=;
+ b=g/6wHnKMHp5nsAt7iX2b3VTOhfrF20PSptSkNXrnwfDK3O0GEGlk9k/mk/raNCU3fI
+ vYvD/nbPiDgevBLPm9Usn9RwX2NwtlfWQ0lUvc/BQpzpCFv4CJhc1XXWPrDZDxa7YNVu
+ gb/08oWxGf3BrwxfVB1FHAYyGmbxYAjz/7BhQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778522882; x=1779127682;
+ d=1e100.net; s=20251104; t=1778522886; x=1779127686;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=gpoyzIFl6OFX5D/1DGHawVor/J+nfi0UWofV+KnjpH8=;
- b=N+trZz9jgRNO2kgym1TDMWYtw/p5Wiv9haFe7f23XCFFCLujV1bt64mlPV5goZVlvY
- l7dKvP3J0adJv5cyIL6y4iq2vRI/YHsL6U44sRGXyCVIVc1noJd0whe6Z3mogzEiw54N
- eGkyijs4vSgBhEmaApK5u+a9vuSzaNDIy0zWJdSI6n7VScS577yLf29JQsktOMlSuP1O
- I2DBHclbh/p/d+iTlxJQG3iQs4rRQsTe+9Icsze9qO8gVl1cV5QJ63VLM9dyGnIaT18L
- aYbWkn+xykzzIpauKeB90PHymRpFfJn7j3bK7rfimnaQfIcurloGDeg500WCfaEPq1Gm
- H+8g==
-X-Gm-Message-State: AOJu0YzMStDIgl76dH1Be+tPMKEqItvOCkapo+uIilVXxmmIwcDM+zNo
- XR9kvUzq6fRkX0Y3RZ6QwLLBVROx0YJv2UKvbGUcFNQYggf2vSaDFPp9rkE1Awlo0YHVms2Wjot
- VLpSOtcibbBB7ted1QqmHXJrLc2VKxtLFl17d5I/3
-X-Gm-Gg: Acq92OE2jx+UydwW9B/INx9U4NtMjhVU/MJFr8IG0d86NJf/lHySIidHLojf9mFEHjl
- 5xwwO/Aty7/ORt16nPdEmOc/qb6lpoQHHciW2LNWlEiwOjbbyXqoG6mHE6bDcb+oPnM6bTzc2At
- 23mMCGL+ii1Mu7MatNKIF7cOrbbkkJFua/K7waNlK/qbyhdipcRBqM+3NIzFcZoHTa+lFHHZLQJ
- x/DMt+YxGj25rCnEvNgiH1Oig6EuHjnO/qZQlvWOZ4YWBnjUHqHVt7Yib57V9IZ3ivLSSPw+gRb
- 2z9N85Y33ag1dzaJ
-X-Received: by 2002:a17:907:6094:b0:bc5:ade9:ef13 with SMTP id
- a640c23a62f3a-bcaac93698fmr796880466b.36.1778522882115; Mon, 11 May 2026
- 11:08:02 -0700 (PDT)
+ bh=geQUIbsdF6ZO7DPffX3jx2YFnn3sFXKfIRF4uTE0n8Y=;
+ b=B/KqfzDszcqN56qcs1gXExF2l73umx1UYMpNSot572mPn3Sk1nVnhYqjvJihkTz0F2
+ cYbYCWgnTpK8aF2oAzRwh6mCy2ITYn9cmi2Ef7hSB+jq1gL+vr8QrMgq/NSNxFBPMTTH
+ SKXInLtDQOD/Fz3Pg6kMtmFbNDonvbn4DHQXjInex/0OG1dme+gtl98LDEG0ZJJeFV/m
+ fYWt4/89t7MyW9VrAINLh1DghDb12m8pnk1y6MOFrSIsnekpb20Ukulk34TvlMptR8rq
+ SWGgqEH3BdLxKsvb5JCbvmI/QHmvViw8sPebPbq5ZhalH53aFVWH3uGTsxk4dOc1OeOF
+ urVg==
+X-Gm-Message-State: AOJu0YxLipHKEgfFIcfScjpG8JkYUu7hl5knYpw08nIH7c31U38aft7w
+ yOjrXvlX8QcbU3MBYR/0JYs66v2ofG9ZLoGiafdKTTV1kyYVUEagcTqKGY5cYm59FHOuXEehuqS
+ czTjSwe4A4vS6agbc+ZQPJ6qqpu4uU/WfqFOBzI/AeX6lg2JWUfA=
+X-Gm-Gg: Acq92OHscYbRLt9oqTySwKYksIAmmHujn5p5fSwgASsCl9zbX0k+bSoP0XymSixzd3Y
+ TZbZyu2H+Rp4UMW0JgFjPX/qViQJtY+uzMsaLBb+O75TdX7x3g+KbFS/EEwin2q9wYtStIJ5HhK
+ rvRKffEx3xG2cp64bVAFgBYRNd3kltUk1PeAilGE6mdq4PMi5Bb2YlKNhG9iayf2S/z4RQEvAv0
+ LGbpu+J/g61y/eZxh7gyujJqmX+sE37NRmCp90loJTURnzB6h5B7dTjqPKKDblgrzDmC6FzVsEv
+ 80z41LGNiSsNRnfc
+X-Received: by 2002:a17:907:c8c4:b0:bc6:bb4b:1726 with SMTP id
+ a640c23a62f3a-bd23bff618emr38994366b.22.1778522886331; Mon, 11 May 2026
+ 11:08:06 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260507120735.310325-1-ludwig.nussel@siemens.com>
- <20260507140624.v3.4.eb9898db9115ab0e26701a962ff8b41b199e78b2@changeid>
- <CAFLszTgkgGh_o=_ACPkTPpeNw6O3qvM=ZDywranrZpgPn_c_wA@mail.gmail.com>
- <7a31d2d3-13c4-4789-86ce-f54b173771b8@siemens.com>
-In-Reply-To: <7a31d2d3-13c4-4789-86ce-f54b173771b8@siemens.com>
+References: <20260510171723.56866-1-marek.vasut+renesas@mailbox.org>
+ <20260510171723.56866-11-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20260510171723.56866-11-marek.vasut+renesas@mailbox.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 11 May 2026 12:07:48 -0600
-X-Gm-Features: AVHnY4KLeC0XupLjrj09KoOHFEnZxgH0ELcPR1FSSO8mNBgr3dbAxR2ncHh2WLU
-Message-ID: <CAFLszTge_7Tu7tJ_vL14ApGDHOhn+ZVrs-vVVF7J11w0Ae1xDw@mail.gmail.com>
-Subject: Re: [PATCH v3 4/4] iminfo: also verify signatures
-To: Ludwig Nussel <ludwig.nussel@siemens.com>
-Cc: u-boot@lists.denx.de, David Lechner <dlechner@baylibre.com>, 
- James Hilliard <james.hilliard1@gmail.com>, Jonas Karlman <jonas@kwiboo.se>, 
- Kunihiko Hayashi <hayashi.kunihiko@socionext.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Mayuresh Chitale <mchitale@ventanamicro.com>,
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Osama Abdelkader <osama.abdelkader@gmail.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>, 
- Peng Fan <peng.fan@nxp.com>, Quentin Schulz <quentin.schulz@cherry.de>, 
- Shiji Yang <yangshiji66@outlook.com>, Tom Rini <trini@konsulko.com>, 
- Wolfgang Wallner <wolfgang.wallner@at.abb.com>, Yao Zi <me@ziyao.cc>
+Date: Mon, 11 May 2026 12:07:53 -0600
+X-Gm-Features: AVHnY4KV3Q2w1jVIxWWT7pQZ24Wa2GZKxUpXlvgO-reczuUdd9KBMitLR69Yg14
+Message-ID: <CAFLszTgpRsBvTdM9=AfBSZ6nv=X7f7va69hNjiS4QASNfNPqLA@mail.gmail.com>
+Subject: Re: [PATCH 11/11] video: tegra: Staticize and constify driver ops
+To: marek.vasut+renesas@mailbox.org
+Cc: u-boot@lists.denx.de, Anatolij Gustschin <ag.dev.uboot@gmail.com>, 
+ Svyatoslav Ryhel <clamor95@gmail.com>, Thierry Reding <treding@nvidia.com>,
+ Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -120,35 +110,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ludwig,
-
-On Mon, 11 May 2026 at 05:25, Ludwig Nussel <ludwig.nussel@siemens.com> wrote:
+On 2026-05-10T17:16:56, Marek Vasut <marek.vasut+renesas@mailbox.org> wrote:
+> video: tegra: Staticize and constify driver ops
 >
-> On 5/7/26 18:49, Simon Glass wrote:
-> > [...]
-> >> diff --git a/cmd/bootm.c b/cmd/bootm.c
-> >> @@ -335,6 +335,13 @@ static int image_info(ulong addr)
-> >> +             if (CONFIG_IS_ENABLED(FIT_SIGNATURE) &&
-> >> +                 fit_all_configurations_verify(hdr) != 0) {
-> >> +                     puts("Signature verification failed!\n");
-> >> +                     unmap_sysmem(hdr);
-> >> +                     return CONFIG_IS_ENABLED(FIT_SIGNATURE_REQUIRED) == 1;
-> >> +             }
-> >
-> > A FIT with no /configurations node (an images-only FIT, which is
-> > valid) makes fit_all_configurations_verify() return -ENOENT and log
-> > 'Can't find configurations parent node' from inside the helper. That
-> > ends up here as 'Signature verification failed!' which is misleading.
-> > Please treat -ENOENT as 'nothing to do' in this caller, and don't
-> > log_err inside the helper for that case.
+> Set the ops structure as static const. The structure is not accessible
+> from outside of this driver and is not going to be modified at runtime.
 >
-> Ok, I can certainly omit the extra error message. What does 'nothing to
-> do' mean when FIT_SIGNATURE_REQUIRED is enabled though? IMO images-only
-> FITs are not acceptable in that case.
-> Maybe renaming the option to FIT_CONF_SIGS_REQUIRED or so would make
-> that more clear.
+> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+> Acked-by: Svyatoslav Ryhel <clamor95@gmail.com>
+>
+> drivers/video/tegra/dsi.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 
-Yes that makes sense, perhaps FIT_REQUIRE_CONFIG_SIGS ?
-
-Regards,
-Simon
+Reviewed-by: Simon Glass <sjg@chromium.org>
