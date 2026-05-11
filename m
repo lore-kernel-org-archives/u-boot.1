@@ -4,64 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3192CD3427
-	for <u-boot@archiver.kernel.org>; Mon, 11 May 2026 08:44:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69C86CD3427
+	for <u-boot@archiver.kernel.org>; Mon, 11 May 2026 08:45:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7904884715;
-	Mon, 11 May 2026 10:44:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=ew.tq-group.com
+	by phobos.denx.de (Postfix) with ESMTP id CDD7B84836;
+	Mon, 11 May 2026 10:45:20 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=dolcini.it
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=ew.tq-group.com header.i=@ew.tq-group.com header.b="jivrNQaS";
+	dkim=pass (2048-bit key; unprotected) header.d=dolcini.it header.i=@dolcini.it header.b="m96CApbt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E636C847F6; Mon, 11 May 2026 10:44:41 +0200 (CEST)
-Received: from www537.your-server.de (www537.your-server.de [188.40.3.216])
+ id BC2E284848; Mon, 11 May 2026 10:45:19 +0200 (CEST)
+Received: from mail11.truemail.it (mail11.truemail.it [IPv6:2001:4b7e:0:8::81])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1194584706
- for <u-boot@lists.denx.de>; Mon, 11 May 2026 10:44:40 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=ew.tq-group.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=alexander.feilke@ew.tq-group.com
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=ew.tq-group.com; s=default2602; h=Content-Transfer-Encoding:Content-Type:
- In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender
- :Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:
- Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID;
- bh=h9rPWlKopoXH6FuJLs+wrH/J9ZOnSh1sP40GY6ZknXY=; b=jivrNQaSCIBDjg4ppKrKG0cwcD
- nvfTSGHd3WC3GcrpzuEOcatbVZZG8XkVteLS5FN684MdSakxMqwSvTlJeMC6B6tYvdpPBi/27gzKb
- 9LzyqZ20InMoiqlBCjqhpFeOLOjEQMYf8LyQfFkiRYqqtYZfD66qzyqvDU+95/gNnz5rY9iXL2fPx
- sAaal0l0YhL38WZKfNrua74awmKc88MiygGFcD0HrsrFxrvQAkwcJW/y/3Gb1o8o0Q6Sdxy66DomK
- AvJm2uT/4PxStn4O/VsKzH07YR27A+lffTmcoeJXcD5UKvwekbYDJ8vCNA4kDtfZ2uoWOZ7lAaXA+
- 20yc7JFA==;
-Received: from sslproxy06.your-server.de ([78.46.172.3])
- by www537.your-server.de with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
- (Exim 4.96.2) (envelope-from <alexander.feilke@ew.tq-group.com>)
- id 1wMMFi-000E44-2G; Mon, 11 May 2026 10:44:38 +0200
-Received: from localhost ([127.0.0.1])
- by sslproxy06.your-server.de with esmtpsa (TLS1.3) tls TLS_AES_256_GCM_SHA384
- (Exim 4.96) (envelope-from <alexander.feilke@ew.tq-group.com>)
- id 1wMMFi-0000tK-2A; Mon, 11 May 2026 10:44:38 +0200
-Message-ID: <eb40afed-a4e1-440c-a8da-a6c7e1246ecd@ew.tq-group.com>
-Date: Mon, 11 May 2026 10:44:37 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id 6EA3E84715
+ for <u-boot@lists.denx.de>; Mon, 11 May 2026 10:45:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=dolcini.it
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=francesco@dolcini.it
+Received: from francesco-nb
+ (248.201.173.83.static.wline.lns.sme.cust.swisscom.ch [83.173.201.248])
+ by mail11.truemail.it (Postfix) with ESMTPA id 1AA491FA0B;
+ Mon, 11 May 2026 10:45:16 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dolcini.it;
+ s=default; t=1778489116;
+ bh=LlcCJDCrGBAv0GzGeA1Ww4PEFhpUWfi7H0N/ZZm9Yig=; h=From:To:Subject;
+ b=m96CApbt3WbdGnL7AkMKIO+z5m2SQBsYjTVWGVRD/PuY9J16Gi0zqi3/tYqfPeTrr
+ o08kIcZ374IwMF9ib9VsFcRvU8XR/wzQBgtwLSqPGB6ziUe+SyAdZ7I1uUV9kTmAzs
+ YNb063TNahnk7wcYCPLL2umr989byNFAm5Khh9Z1y+mwEihshpR6qJnDF2MSW6Hn4V
+ WVNVUDn237cDtc4SUFJKqB+TCSC9GEBa9Pv9BEOqur0EqBHMl4lh069VZRRvC9J+uQ
+ 6BqrFjk2GquVsqLb2gYeuT66mk/3P496cpEqIbnFUqf6JNjJPfRTGmJhicREO1AoI2
+ 2pU55NDZJg5zQ==
+Date: Mon, 11 May 2026 10:45:12 +0200
+From: Francesco Dolcini <francesco@dolcini.it>
+To: Ernest Van Hoecke <ernestvanhoecke@gmail.com>
+Cc: u-boot@lists.denx.de, Sparsh Kumar <sparsh-kumar@ti.com>,
+ Tom Rini <trini@konsulko.com>,
+ Francesco Dolcini <francesco.dolcini@toradex.com>,
+ Vitor Soares <vitor.soares@toradex.com>,
+ Neha Malcom Francis <n-francis@ti.com>,
+ Franz Schnyder <franz.schnyder@toradex.com>,
+ Emanuele Ghidoli <emanuele.ghidoli@toradex.com>,
+ Bryan Brattlof <bb@ti.com>,
+ Ernest Van Hoecke <ernest.vanhoecke@toradex.com>
+Subject: Re: [PATCH 0/4] board: toradex: k3: Sync rm-cfg with TIFS v12.00.00
+ firmware
+Message-ID: <20260511084512.GA29876@francesco-nb>
+References: <20260508-v1-update-rm-cfg-v1-0-ec9d033f8ec1@toradex.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 4/6] sysinfo: add IDs for RAM size and variant
-To: Simon Glass <sjg@chromium.org>
-Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@ew.tq-group.com,
- u-boot@lists.denx.de, Nora Schiffer <nora.schiffer@ew.tq-group.com>,
- Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>,
- Tom Rini <trini@konsulko.com>
-References: <20260508084834.45637-1-Alexander.Feilke@ew.tq-group.com>
- <20260508084834.45637-5-Alexander.Feilke@ew.tq-group.com>
- <CAFLszThq-VrJ5H6GmkgGiNN79wCc09gZ3bgcjxKcUWy+vEEiKA@mail.gmail.com>
-Content-Language: en-US
-From: "Feilke, Alexander" <alexander.feilke@ew.tq-group.com>
-In-Reply-To: <CAFLszThq-VrJ5H6GmkgGiNN79wCc09gZ3bgcjxKcUWy+vEEiKA@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260508-v1-update-rm-cfg-v1-0-ec9d033f8ec1@toradex.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,23 +74,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+On Fri, May 08, 2026 at 10:52:08AM +0200, Ernest Van Hoecke wrote:
+> This series updates the Resource Management configuration for Toradex
+> K3-based boards and makes sure the TIFS-specific RM configuration is
+> used where applicable.
+> 
+> For Verdin AM62P, the tifs-rm-cfg.yaml file is refreshed with
+> k3-resource-partition V12.00.00 so that it stays in sync with the
+> existing rm-cfg.yaml update for the v11.02.09 and v12.00.00 TIFS
+> firmware resource reservation.
+> 
+> For Verdin AM62, the missing tifs-rm-cfg.yaml file is added. The file
+> matches the TI AM62x configuration, and rm-cfg.yaml was verified to
+> remain unchanged when regenerated with the same tool version.
+> 
+> For Aquila AM69, both rm-cfg.yaml and tifs-rm-cfg.yaml are updated to
+> match the resource allocation changes already present in the TI J784S4
+> configuration files.
+> 
+> Finally, the Verdin AM62 and Verdin AM62P binman descriptions are
+> updated to use tifs-rm-cfg.yaml for the TIFS RM fragment when building
+> tiboot3 images, following the same pattern used by the corresponding TI
+> AM62x/AM62Px platforms.
+> 
+> The generated/updated files were compared against the matching TI board
+> configuration files where applicable.
+> 
+> Signed-off-by: Ernest Van Hoecke <ernest.vanhoecke@toradex.com>
 
-On 08/05/2026 20:00, Simon Glass wrote:
->> diff --git a/include/sysinfo.h b/include/sysinfo.h
->> @@ -161,6 +161,9 @@ enum sysinfo_id {
->>       SYSID_PRIOR_STAGE_VERSION,
->>       SYSID_PRIOR_STAGE_DATE,
->>
->> +     SYSID_RAM_SIZE,
->> +     SYSID_RAM_VARIANT,
->> +
-> Please document the units, e.g. SYSID_BOARD_RAM_SIZE_MB encodes the
-> unit in the name.
+Acked-by: Francesco Dolcini <francesco.dolcini@toradex.com>
 
-Since SYSID_BOARD_RAM_SIZE_MB is only used by siemens iot2050 and effectively serves the same
-purpose, it would be an option to simply rename it to SYSID_RAM_SIZE_MB and reuse this already
-existing ID, instead of introducing a new one for RAM soldered on the SoM.
-
-Regards,
-Alex
