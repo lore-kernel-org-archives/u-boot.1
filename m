@@ -4,86 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55CFBCD484E
-	for <u-boot@archiver.kernel.org>; Mon, 11 May 2026 20:43:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35032CD37BE
+	for <u-boot@archiver.kernel.org>; Mon, 11 May 2026 20:43:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C73AE83C2B;
-	Mon, 11 May 2026 22:43:42 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0C265845E3;
+	Mon, 11 May 2026 22:43:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="GXnfbh0q";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="NxpSe1Yh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6ED888460E; Mon, 11 May 2026 22:43:42 +0200 (CEST)
-Received: from mail-oi1-x22b.google.com (mail-oi1-x22b.google.com
- [IPv6:2607:f8b0:4864:20::22b])
+ id AD0EE84656; Mon, 11 May 2026 22:43:43 +0200 (CEST)
+Received: from mail-ot1-x342.google.com (mail-ot1-x342.google.com
+ [IPv6:2607:f8b0:4864:20::342])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5EAFA8394E
- for <u-boot@lists.denx.de>; Mon, 11 May 2026 22:43:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6706784198
+ for <u-boot@lists.denx.de>; Mon, 11 May 2026 22:43:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22b.google.com with SMTP id
- 5614622812f47-479e4835e26so2807255b6e.3
- for <u-boot@lists.denx.de>; Mon, 11 May 2026 13:43:40 -0700 (PDT)
+Received: by mail-ot1-x342.google.com with SMTP id
+ 46e09a7af769-7de4e6c5a30so5208643a34.0
+ for <u-boot@lists.denx.de>; Mon, 11 May 2026 13:43:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1778532219; x=1779137019; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1778532220; x=1779137020; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=drzz3D3mMFliFediqQzFfSrBHShrHcKAXAtNzBz8bMo=;
- b=GXnfbh0q/8KPVH089aeLQ0/i8AayCqntvEBZQZMyujbvrbGTtNPHMSWptJKRCsVoJg
- ApbJnpfHx89/Zei1OwZgazvS+5NfWagpWscO/pF2j1HsiRnkXlTi6DFmdJ6ipn78uSiD
- WtKYjtT84QbawYLrLvwhafgOOZ44PAZZt/x6k=
+ bh=RuoDPlnR/hBiE6LsCgMM0CnHUw9scou7ZjrrRWVLbdk=;
+ b=NxpSe1YhQaN/zQVfuqz4AUNJHg0ZWgCdGhjiZpQzTQCZj77wSrXZjbjXvzHQWgeH/l
+ 3DIuwbMeKsGK5YrMagTgkE6qH8+fmmWBYb/I5tMx9WJxXyMlJKWnQOA6glI2u3+2g5Yk
+ jU20szmD3F21Dl+3GaJPQNRUGLbvOK+nqQ6jE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778532219; x=1779137019;
+ d=1e100.net; s=20251104; t=1778532220; x=1779137020;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=drzz3D3mMFliFediqQzFfSrBHShrHcKAXAtNzBz8bMo=;
- b=adUAciMzL58OLk3B5yFNTCttiIqdXx5xOSuOXdxM4yLkcNHUGtN4c5J8RLvb8Ey7/J
- ydj7SRk3W7jxn+pxAS3SxofvtPgM2AGHTpGREFc5cqrcV3PssUCGSzJ7wDn/MXtwHhos
- XptlWFLDop5xMJxB+fdjwCeHO6FmJFYhV78rljL3cJMHOQspzH4E+5epDz+HpSS8qSPO
- QFWuxJtPrKykecoPzQk6fbrbJIjRN+wni27Bbe84sBoMZ+RXWYxNf2S6pvRosV2r0NO8
- TuBa/qM5uD0hFpyneDBwzdy/vo+QI0sd2qvIe9HaPT12KlI3GQAX/bWTT1PYGvMsTnFU
- Nclg==
+ bh=RuoDPlnR/hBiE6LsCgMM0CnHUw9scou7ZjrrRWVLbdk=;
+ b=VujE+ytD+GiOVc5ebg4+F4HYUT6YRMWK/AKAYm9buol4qoGxootqeiqpSeC7pYiw0w
+ CMf3YNzGL/u8/OdqO4920zGNsfgPsJFcb+iAjLGPLZW7TORtinTVZi+paZOWwOPg6mzd
+ fsfwr60S28ig/8wbTyeNevDcQ2WYxrp/J4iHG99XT1ZVf7cAOg/9YFjrmuyjB4ZdyV8A
+ 3s3mLhPDY0KSgYjeMkyByyjiclMMpsE2bffhAiS272j8UvnuZKmoEew8F575bQ/kAFAA
+ +hA4mGU1x6nxIg1k+BH5bnd5wfMBndPCYcFLRmc06nSkz4G6YMdwEAn00+/tZsDJgASK
+ NMJw==
 X-Forwarded-Encrypted: i=1;
- AFNElJ+UGwnjkXBUSQcSlnKbGe+6I7qLlV0UmvbpZZMpsdYq2VE5q1BZ8tVwYjUg3EDTTAhTAwLy1ak=@lists.denx.de
-X-Gm-Message-State: AOJu0YwnYoezjjIukQWCTTzsbYfyHY7K/hi5pEkzDNauNRXGoF/JdsZi
- vBfsz6hNnZ+/L0AjWsBOhQXMknkrWO0Y+OEC6VpkrdwcReUEae39qhQeebMvjYisTDte37Wygkh
- um/y3RjvzNtu8
-X-Gm-Gg: Acq92OFzD85CVmhr9NPR7sNGNenZhG6BeKtwrG2zNc0kLSuR9NnOnaK0Ic7QNs8x2dw
- 07rnxvpFHBIqhESNRYAbBZeyCuhqFPGCd+iA/VM3vYmQGUhByNhKu0+RFMnajmb1zTKIu8z2l4Y
- 3JyyXd2s5kGk8yx9Opxx7TEUJGyCEOIcRdlOQlndAlTNsOccAPQ+pmZUDOnuppPiJbHmU8Tf7v/
- ix+cFNxuPWmCBRzkon59wfsO3P7hD+0cDZi+hLeiUzLz0n8piDy2yn44uGyvLeFoI9I7EpKvRou
- eCCJ4SlunyIZ/osmV4qD/xAWlPDo65z1fftXejqr2SS/V1MBV25BWMsfslUcaPpJTD5eslIC8N5
- t7a51sBsM23Kz5x2ujpyD9KAk4YkbUlGjvl25gqmO4n3Qu2Rfdwv0kXdEshMYQAJe7AXzMrw5A7
- Fb2KYrROKnha838E3ayfxnPsrpbe3uN2jpR+VnDDc8388VsQ1isu/ko0cYFeQf6gWwp+Ey3Bax5
- Cb5+qwZw6lyrp5pGYIGa6C08EYyNbCKqDQ8XTxw5W3NAfrnZw==
-X-Received: by 2002:a05:6808:e3c5:b0:45e:f443:dc3d with SMTP id
- 5614622812f47-48297137030mr123255b6e.13.1778532219065; 
- Mon, 11 May 2026 13:43:39 -0700 (PDT)
+ AFNElJ9Xq+XPf+uaK0cf/DiUfNWohCw3vFsisWhqJRyxD2sMo1PEZGfcVXr7lfnDPRB4iiiQ36Thf/0=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx7leEq/hYI7qSIWdrNkvauisdkEcudbv1y9oIL6flbOtUVUi9O
+ eVhob80bXVCCvtgYa0bl0oJ5JyHqTo5PxGvXOn5y3rx2gEvijDDG/FOotdZl3E/qGivu1phHcQn
+ t2r6Q0YusvoD5D/c=
+X-Gm-Gg: Acq92OEnBhkoYJX+IKPgpnYdsR/JHfPZEX5jmo+YqBi0hEnukKpiw8qvaHd2UnVnFBH
+ IcGKaHD8hehn7mwUuHNjBMZc/uK42W1Fr3kKQQ6n4GbmVEXW+g48rBiIhhtadfcVh6MlLdwX4TH
+ CgLK6dbs6IAtljNl315aBsNxfW0h8ej1rPJ5iDEy0E0XviWveHB8jLXYACEMBb7a0H4mKVXTPwP
+ GJ1eTATSIpOrKpGSR+S4n2SpznTtpILg2UDY1ZlDNNaP57GszTITboTrw2jq4U0H/H1JTrlcOyN
+ 5iJHxrKqawCSykew8BThEXp6HOHTz8XFBszsi3Re1uHi9V6OKrSb0fp9lvF8eojbhz7C+KMqNqP
+ eieeSGk7c1Jsj/AKR/UIBaSdfNoJP2uvlabLMGwb/G3rYGmHPEphRyDeQqdTBJmgU7FzmQe+dkB
+ onAasq0oPcqS6fLVs7u9MjyqXON17Nqzv5B7DKxpwVglkIubaGWuwSzYbH20WokGgL1ISX8fVJn
+ RDRbL+aM2bLy5CHE9/51ZJwhnwW2SkmPCbWE1qwmqGTO9JYnQ==
+X-Received: by 2002:a05:6830:82b5:b0:7d7:f15b:bdcf with SMTP id
+ 46e09a7af769-7e1df1a93a3mr15606752a34.28.1778532220185; 
+ Mon, 11 May 2026 13:43:40 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-106-235.totalplay.net.
  [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7e367c04e00sm7505796a34.7.2026.05.11.13.43.38
+ 46e09a7af769-7e367c04e00sm7505796a34.7.2026.05.11.13.43.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 11 May 2026 13:43:38 -0700 (PDT)
+ Mon, 11 May 2026 13:43:39 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Peter Collingbourne <peter@pcc.me.uk>
-Cc: Peng Fan <peng.fan@nxp.com>, 
- Andrew Goodbody <andrew.goodbody@linaro.org>, 
- Patrice Chotard <patrice.chotard@foss.st.com>, Yao Zi <me@ziyao.cc>, 
- Simon Kagstrom <simon.kagstrom@netinsight.net>, Stefan Roese <sr@denx.de>, 
- u-boot@lists.denx.de, Kyungmin Park <kmpark@infradead.org>, 
- Heiko Schocher <hs@nabladev.com>
-In-Reply-To: <20260505103816.202758-1-peter@pcc.me.uk>
-References: <20260505103816.202758-1-peter@pcc.me.uk>
-Subject: Re: [PATCH] fs: ubifs: fix bugs involving symlinks in ubifs_findfile
-Message-Id: <177853221798.1608836.6191893582727653736.b4-ty@konsulko.com>
-Date: Mon, 11 May 2026 14:43:37 -0600
+To: vigneshr@ti.com, m-chawdhry@ti.com, Udit Kumar <u-kumar1@ti.com>
+Cc: bb@ti.com, n-francis@ti.com, nm@ti.com, gehariprasath@ti.com, 
+ u-boot@lists.denx.de
+In-Reply-To: <20260415152152.3048491-1-u-kumar1@ti.com>
+References: <20260415152152.3048491-1-u-kumar1@ti.com>
+Subject: Re: [PATCH v2 0/3] j721s2: j784s4: Add workaround for errata i2437
+Message-Id: <177853221920.1608836.14544515588240543947.b4-ty@konsulko.com>
+Date: Mon, 11 May 2026 14:43:39 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -104,25 +100,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 05 May 2026 03:38:16 -0700, Peter Collingbourne wrote:
+On Wed, 15 Apr 2026 20:51:49 +0530, Udit Kumar wrote:
 
-> When encountering a symlink pointing to an absolute path, ubifs_findfile
-> would return the target of the symlink as the result instead of resolving
-> any following components in the original path. Fix it by following the
-> same code path that is used for relative paths except that we set the
-> next inode to the root if we see a leading slash.
+> Add a necessary hardware errata workaround for J721S2 and J784S4.
 > 
-> The existing code used memcpy and sprintf to copy the symlink target
-> into a fixed size stack buffer and was therefore vulnerable to buffer
-> overflows with a sufficiently long symlink target. Fix it by using a
-> heap buffer for the temporary path during path resolution.
+> Bootlogs
+> https://gist.github.com/uditkumarti/da2a489a78d3241ecd2791c9df1c1317
+> 
+> Changelog:
+> Changes in v2:
+> 1- Added verified macro (this is new patch)
+> 2- updated macro from ERRATA2437 to ERRATA_2437
+> 3- instead of using hardcoded write, used verified write macro
 > 
 > [...]
 
 Applied to u-boot/master, thanks!
 
-[1/1] fs: ubifs: fix bugs involving symlinks in ubifs_findfile
-      commit: d5888d509cc43942ec98d993f2d129f5c8ddc432
+[1/3] arm: mach-k3: arm: mach-k3: Add writel_verify macro for register write verification
+      commit: ad681c816484c2246b4803de64553f760c0f44cd
+[2/3] arch: mach-k3: j721s2_init: Add workaround for errata i2437
+      commit: d99cb46a2cc4d735aea125e315d6ee257077b516
+[3/3] arch: mach-k3: j784s4_init: Add workaround for errata i2437
+      commit: c5c3b2787383e25b1882f7e8cf3db54eaf318b41
 -- 
 Tom
 
