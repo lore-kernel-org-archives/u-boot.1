@@ -4,64 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1AA9CD484E
-	for <u-boot@archiver.kernel.org>; Mon, 11 May 2026 20:13:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8EC68CD484E
+	for <u-boot@archiver.kernel.org>; Mon, 11 May 2026 20:14:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5B6F08466E;
-	Mon, 11 May 2026 22:13:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=siemens.com
+	by phobos.denx.de (Postfix) with ESMTP id 2634483FEC;
+	Mon, 11 May 2026 22:14:28 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=siemens.com header.i=alexander.sverdlin@siemens.com header.b="LcB39MmS";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="HMlHfFbM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 21F1483FEC; Mon, 11 May 2026 22:13:20 +0200 (CEST)
-Received: from mta-64-228.siemens.flowmailer.net
- (mta-64-228.siemens.flowmailer.net [185.136.64.228])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 2B41483FEC; Mon, 11 May 2026 22:14:27 +0200 (CEST)
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
+ [IPv6:2a00:1450:4864:20::62e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8848C84653
- for <u-boot@lists.denx.de>; Mon, 11 May 2026 22:13:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 429018460C
+ for <u-boot@lists.denx.de>; Mon, 11 May 2026 22:14:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=siemens.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=alexander.sverdlin@siemens.com
-Received: by mta-64-228.siemens.flowmailer.net with ESMTPSA id
- 2026051120131549bd1ff49b000207be for <u-boot@lists.denx.de>;
- Mon, 11 May 2026 22:13:16 +0200
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
- d=siemens.com; i=alexander.sverdlin@siemens.com;
- h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc:References:In-Reply-To;
- bh=0fRolhRQsPQoh2Aks726fHDdkPdXdLdOrfPiitHZUlw=;
- b=LcB39MmSxkb72k01ir5osJtheKlst+fpyt2EHFULq/Q49044fB42JDNJNTOdcGcob8EMBJ
- JYIjqCdfCNwzalPKYWBG2hXw2bkoqGOJ04zqSCD762oXh67B9drQMq5R+m7zNwqjKtVChHpc
- VQgobW5VXsv6BJJ2F+rV2B9c7L2Ytr9TOuYlJRarQ0pDeQgtqqJb8oHbDJnfsR5Z15KZlb/6
- ztlIYW9ZA6EAgKHXfB2fURj55RkkHXkZcikd2z4t0KsnyOhWSSyW26E1H4njK4rEBVcJGcvk
- D8v9Hs4pzPp99HbHi8KK8H8rWwzqqmuInJSzB99hIDI5XAOam5zGpjqw==;
-From: "A. Sverdlin" <alexander.sverdlin@siemens.com>
-To: u-boot@lists.denx.de
-Cc: Alexander Sverdlin <alexander.sverdlin@siemens.com>,
- Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Tom Rini <trini@konsulko.com>,
- Peng Fan <peng.fan@nxp.com>, Alice Guo <alice.guo@nxp.com>,
- Francesco Dolcini <francesco.dolcini@toradex.com>, Ye Li <ye.li@nxp.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- =?UTF-8?q?Jo=C3=A3o=20Paulo=20Gon=C3=A7alves?= <joao.goncalves@toradex.com>,
- Wadim Egorov <w.egorov@phytec.de>, Bryan Brattlof <bb@ti.com>,
- Anshul Dalal <anshuld@ti.com>, Dhruva Gole <d-gole@ti.com>,
- Devarsh Thakkar <devarsht@ti.com>, Beleswar Padhi <b-padhi@ti.com>,
- Moteen Shah <m-shah@ti.com>, Chintan Vankar <c-vankar@ti.com>,
- Ji Luo <ji.luo@nxp.com>, Richard Weinberger <richard@nod.at>,
- Simon Glass <sjg@chromium.org>
-Subject: [PATCH 3/4] common: Make TI K3 get_reset_reason() a weak global
-Date: Mon, 11 May 2026 22:12:32 +0200
-Message-ID: <20260511201235.1066697-4-alexander.sverdlin@siemens.com>
-In-Reply-To: <20260511201235.1066697-1-alexander.sverdlin@siemens.com>
-References: <20260511201235.1066697-1-alexander.sverdlin@siemens.com>
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x62e.google.com with SMTP id
+ a640c23a62f3a-bce386d5b85so289771966b.1
+ for <u-boot@lists.denx.de>; Mon, 11 May 2026 13:14:25 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1778530465; cv=none;
+ d=google.com; s=arc-20240605;
+ b=Bu10Y4cYx+cnqPn0o6vHzjdTf19Tzw7m667zYy8WYAXnxiIa4QG6aRrvb2L6AEd0pR
+ 4zypzLO45MlXtroMsGm2Il0Wwrn5yiAM1sW4X9gYfEOwivkzYMM6GZD7vr3dOb2frSVi
+ gJxwXhVJni0qM88KdSnctG3FIBqd7eDa0pqU/62Kg9nK6QC2cnFo8YQnEqzEVbpOdG5J
+ jpXq0TdytYjw/rmr2dZBFdBeuHPOnWCe5FapKmhEZ9dTn6vgFdk7a4CYaSdEn+u+xv2r
+ YBDV3c8MtguC0iAK+1MOO6TcLzVFuJHhISSAYfg+cLpVsV362xNnn+z0ZSsCaVHrBHmY
+ MOSA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=wN7/ochuA3RrV+dIoSCxUIV880Zw6YJf9LsKHBSMA0g=;
+ fh=0veFT79CiSOcOldaDcjKZ4h8J0gM9Ol8nAJRYwPMAcI=;
+ b=KEhv46B9xGFLdGLCHiyTsKeg9dKp7tLdf04eTDIJWxasLKdE+Vib9l7Z0tfnzGiMtw
+ V+ElldpqFmXl1ZwjXpJE4tZW6bp8qhTOoIdiyH8yi0FfPMzg2sb/9H6uuLLqwmVpwhxK
+ +yFnmMxZf/oM9JkyJIZ/TQJLs7hv44B1Til96gr3q70dIYj2UrM6ip9RU6ZCqFPztGLR
+ UrKDd8TS4dRDjuTAVDtk2YlvZciKSNpiE1ZrEldKntxrX3qXk312nTdgW6zchJcI5gaQ
+ LQnWUn/66UcdRoNhJqdZE1h6JGDJiw5Dl4I0WR5A7pQn8x7WOiHxstSAQPOQzFEJN1cd
+ S7ug==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1778530465; x=1779135265; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=wN7/ochuA3RrV+dIoSCxUIV880Zw6YJf9LsKHBSMA0g=;
+ b=HMlHfFbM5jTZWpTuUAaSqajiPPtyWi2kkRaoAoSndeUkhv9pwIZ7VGUJSKo5qfNCrS
+ imScLoXoj1o/ztvygZJ/SO/5vyYz8QmhfvmHjEWT1U9W8c4qABDGXSm67rM0j5fjmlQj
+ zP1AK6RYtqWpd/tYMTeh6f0gyHyAm4dA/iXC0=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1778530465; x=1779135265;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=wN7/ochuA3RrV+dIoSCxUIV880Zw6YJf9LsKHBSMA0g=;
+ b=FgHKK91FFwYQtkwk/YhH1TPg67mowCRrv/HLxC+AP1b5V335Y8j0dtT5YfltSNaGDU
+ 2BModGK1rG9VlbIUCpIQ0oJX8acc0ZKMaJQrMAQz5vIqisQ7DjgiAkkEwYF4iPNJjiwP
+ ImsoeucHdFg4Npoj5wuI75h0qnZYyCfFpO97WfBpfJbbn/ImMKQQzjkiMA1mSBu7+4St
+ JGnelsLGDyLvtb0VcI2T8tCuSr98MGcgRIyn8NXdwPidwyTfcpNTIjt2YzQyCosniFTs
+ q74hKnhxw0Gx6AiG25a2PG6Flh2HCxJPEyznEZahPsdE4CBtq8uA+2y4CnDg3+dykLWY
+ 6i2A==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ+8YQ8ycHT1Bj33wTjXyn9YKNy6/7JG4/9vEYcXRN3B1HNVVKBsKna2xDt+5PdkbcrH3ESbvuw=@lists.denx.de
+X-Gm-Message-State: AOJu0Yysittha2B305hd506EYVOglpBWvfA6hpgEWWNOVPH9ytyHPzEN
+ TwZcEoQVd15dAfPzpmI3FcqyeL22pcM+HrL/YH0NLN5Hz18NiJp4a7GJ1zRQ9dlXnir6rNajHic
+ 7ddKXgG0AyKGOfE8+/4mQirS2eQSB6MG7moSqGWqS
+X-Gm-Gg: Acq92OHuOobIbJplDWQ+BQrWIWoachtouOJgf9uSeBIh0BWWD4FB+emCjQz3/mY54ap
+ 7RQDgEkw+YAGJYEVf4kCudCBeEydus8LMJDmsZXQAX+uO1iSV8LT3zMcysXNdUSaFn5DqmOV7+P
+ G1EIw2ATuJwocTZvzCra/ZIIyep6X6RIc7iehzfpPL963l3aHBuLr6EO/FpWdXVfFpwj4GzXsgV
+ skJSxJQgZZN73WmnIUjpX5ULdjK0Cx/RtU51dk0MqEdxxaY8So4Ozx/QV02x7jeu4Bsaj2WoA97
+ OLuvIA==
+X-Received: by 2002:a17:907:849:b0:ba6:4e0f:e396 with SMTP id
+ a640c23a62f3a-bc56b41ef3fmr1399294766b.12.1778530464670; Mon, 11 May 2026
+ 13:14:24 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Flowmailer-Platform: Siemens
-Feedback-ID: 519:519-456497:519-21489:flowmailer
+References: <20260420164725.359539-1-heinrich.schuchardt@canonical.com>
+ <CAFLszTjAqjEtnLb1Ns7fLp7jt90XSfOwJ9iyG55aYA9EWv4fWQ@mail.gmail.com>
+In-Reply-To: <CAFLszTjAqjEtnLb1Ns7fLp7jt90XSfOwJ9iyG55aYA9EWv4fWQ@mail.gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Mon, 11 May 2026 14:14:12 -0600
+X-Gm-Features: AVHnY4IB4p8e_T02hOXxfibiAcKoWkgilO79lh2M1L0meLuFAzMGkXxjoWNeLPQ
+Message-ID: <CAFLszTiDjeM31cDTnjgva-hwe08jve4amEyd4WOd+ZxM9Tjt3g@mail.gmail.com>
+Subject: Re: [PATCH 1/1] acpi: fix initial RSDT and XSDT size
+To: heinrich.schuchardt@canonical.com
+Cc: Tom Rini <trini@konsulko.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Stefan Roese <sr@denx.de>, 
+ Saket Sinha <saket.sinha89@gmail.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,108 +112,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Alexander Sverdlin <alexander.sverdlin@siemens.com>
+Hi Heinrich,
 
-Make TI K3 get_reset_reason() a model for other SoCs/platforms by providing
-a weak global function. It will be used to populate /chosen/reset-reason
-property in the FDT.
+On Tue, 21 Apr 2026 at 16:48, Simon Glass <sjg@chromium.org> wrote:
+>
+> On 2026-04-20T16:47:25, Heinrich Schuchardt
+> <heinrich.schuchardt@canonical.com> wrote:
+> > acpi: fix initial RSDT and XSDT size
+> >
+> > When creating the RSDT and the XSDT table they contain no entries.
+> > The table size therefore must equal the header size.
+> >
+> > Without this change a NULL deference has been observed in
+> > acpi_find_table() when running ut dm on sandbox64_defconfig
+> > executed via sudo ./u-boot -D.
+> >
+> > Fixes: 94ba15a3f13f ("x86: Move base tables to a writer function")
+> > Fixes: 7e586f69070d ("acpi: Put table-setup code in its own function")
+> > Fixes: ab5efd576c4e ("x86: acpi: Adjust order in acpi_table.c")
+> > Fixes: 867bcb63e79f ("x86: Generate a valid ACPI table")
+> > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> >
+> > lib/acpi/base.c | 4 ++--
+> >  1 file changed, 2 insertions(+), 2 deletions(-)
+>
+> Reviewed-by: Simon Glass <sjg@chromium.org>
 
-No change in behaviour expected.
+This uncovered a test failure, so I fixed that up when applying.
 
-Signed-off-by: Alexander Sverdlin <alexander.sverdlin@siemens.com>
----
- arch/arm/mach-k3/am62x/boot.c            |  1 +
- arch/arm/mach-k3/am64x/boot.c            |  1 +
- arch/arm/mach-k3/common.c                |  5 -----
- arch/arm/mach-k3/include/mach/hardware.h |  1 -
- common/board_info.c                      |  5 +++++
- include/init.h                           | 11 +++++++++++
- 6 files changed, 18 insertions(+), 6 deletions(-)
-
-diff --git a/arch/arm/mach-k3/am62x/boot.c b/arch/arm/mach-k3/am62x/boot.c
-index bae53f1e459..8c46532113a 100644
---- a/arch/arm/mach-k3/am62x/boot.c
-+++ b/arch/arm/mach-k3/am62x/boot.c
-@@ -1,4 +1,5 @@
- // SPDX-License-Identifier: GPL-2.0+
-+#include <init.h>
- #include <asm/global_data.h>
- #include <asm/io.h>
- #include <asm/arch/hardware.h>
-diff --git a/arch/arm/mach-k3/am64x/boot.c b/arch/arm/mach-k3/am64x/boot.c
-index a5a6fe2659c..e9677d63471 100644
---- a/arch/arm/mach-k3/am64x/boot.c
-+++ b/arch/arm/mach-k3/am64x/boot.c
-@@ -1,4 +1,5 @@
- // SPDX-License-Identifier: GPL-2.0+
-+#include <init.h>
- #include <asm/global_data.h>
- #include <asm/io.h>
- #include <asm/arch/hardware.h>
-diff --git a/arch/arm/mach-k3/common.c b/arch/arm/mach-k3/common.c
-index b0a75988714..87ed134fcb9 100644
---- a/arch/arm/mach-k3/common.c
-+++ b/arch/arm/mach-k3/common.c
-@@ -212,11 +212,6 @@ static const char *get_device_type_name(void)
- 	}
- }
- 
--__weak const char *get_reset_reason(void)
--{
--	return NULL;
--}
--
- int print_cpuinfo(void)
- {
- 	struct udevice *soc;
-diff --git a/arch/arm/mach-k3/include/mach/hardware.h b/arch/arm/mach-k3/include/mach/hardware.h
-index 81b5f1fa45e..fc7bee4d00b 100644
---- a/arch/arm/mach-k3/include/mach/hardware.h
-+++ b/arch/arm/mach-k3/include/mach/hardware.h
-@@ -125,5 +125,4 @@ struct rom_extended_boot_data {
- };
- 
- u32 get_boot_device(void);
--const char *get_reset_reason(void);
- #endif /* _ASM_ARCH_HARDWARE_H_ */
-diff --git a/common/board_info.c b/common/board_info.c
-index dc26e1a33dd..e76d4cbbc2f 100644
---- a/common/board_info.c
-+++ b/common/board_info.c
-@@ -14,6 +14,11 @@ int __weak checkboard(void)
- 	return 0;
- }
- 
-+__weak const char *get_reset_reason(void)
-+{
-+	return NULL;
-+}
-+
- static const struct to_show {
- 	const char *name;
- 	enum sysinfo_id id;
-diff --git a/include/init.h b/include/init.h
-index c31ebd83b85..3ee35130268 100644
---- a/include/init.h
-+++ b/include/init.h
-@@ -238,6 +238,17 @@ int init_cache_f_r(void);
-  */
- int print_cpuinfo(void);
- #endif
-+
-+/**
-+ * get_reset_reason() - return a string describing the reset cause
-+ *
-+ * Platforms can override this weak function to provide the actual
-+ * reset reason.
-+ *
-+ * Return: reason string, or NULL if unknown/unsupported
-+ */
-+const char *get_reset_reason(void);
-+
- int timer_init(void);
- 
- #if defined(CONFIG_DTB_RESELECT)
--- 
-2.52.0
-
+Regards,
+Simon
