@@ -4,130 +4,101 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17B60CD37B5
-	for <u-boot@archiver.kernel.org>; Mon, 11 May 2026 10:05:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22519CD37B5
+	for <u-boot@archiver.kernel.org>; Mon, 11 May 2026 10:09:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 53492846C7;
-	Mon, 11 May 2026 12:05:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 7E3C0847F6;
+	Mon, 11 May 2026 12:09:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="jcEjtcsp";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="U4Gik2Dg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B979E846CA; Mon, 11 May 2026 12:05:37 +0200 (CEST)
-Received: from SJ2PR03CU001.outbound.protection.outlook.com
- (mail-westusazlp170120002.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c001::2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 17DBA84860; Mon, 11 May 2026 12:09:45 +0200 (CEST)
+Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
+ [IPv6:2a00:1450:4864:20::532])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 90878846C3
- for <u-boot@lists.denx.de>; Mon, 11 May 2026 12:05:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C4841846C7
+ for <u-boot@lists.denx.de>; Mon, 11 May 2026 12:09:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=qpcOvHyh8Opw3Fy+y3JTHfPCmY6r88viQ76Rb6cHYXUhxj9IZuheu7MSPn9StBvSy0mL3zT3MAnSFMqXEhiEdz/TiOrm1tqZQxReacAQ1SXC6qMa3JUlYqhh94oyb8v80+YRW2qZ6WaRZYsftejwMl8vCX2Nk9cwEka/si2hSq3gFN7vh805XJjhP4hPAKO9swPkwEwRr6DQuQVm2ZtTCDJGXOdFhaIjypgf3BchrijPucS6sqk/IE8dfMFo29Hxf55DxGJtnuJ8NfLJqpr8OzhwHOwKqvYZup6FUopFSMAX2PJf0qPwBCWNNh99ffYVdpTEYkI47Yjz3Wubm2oidQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=B0ciGeaZ6aPzdBX+D7lxIir/wY4jYe9YfwHiCAtauCc=;
- b=Jx226314rN1XD1sp1bHxKWTBNEOYe9WgryxxtaTrepcblOaeu5Vq6+AT3itnHOwxBtrCLVQsJqBRWQLnjkhomfbRD+g+u2UWNyPlYJMl5puyk9855pJEw0skHurxjZWn0DqrYIf1WDaCfPuCtFSQBwGDAb1eZUBfNX0h5HpyEiHM/2HTLKyArv81IGjMZ4yFvb3sDHcRobwy6TW98/WI3HRxisx/ULRGIMUx4AgoxjJmKorksZlbQJxxVvJEaunW3pheXKPQW62M6RzEXKamIWJ6kbCvk/Pf1DbZ5aQ4OXMzPD/9ajtWPG1RSC/61wwVTP57sA6vbJ57Uq3Lf6+PUQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.21.194) smtp.rcpttodomain=toradex.com smtp.mailfrom=ti.com; dmarc=pass
- (p=quarantine sp=none pct=100) action=none header.from=ti.com; dkim=none
- (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=B0ciGeaZ6aPzdBX+D7lxIir/wY4jYe9YfwHiCAtauCc=;
- b=jcEjtcspFpNaJveWX0hUy4iBsN7Zy6JK0Hu4VHvyNZSYbyxt1VgJfE5VgLt/U4c257TSAfEatYIDDimZA/pSSU4stiC0/IZBgD8FkoP66bsvSZR73NemvwgJ7t95gobB7oWUEBnyDi9cq1vkbPzdgDWJVjYHMxBLF9ftKlaF2Es=
-Received: from BN1PR14CA0015.namprd14.prod.outlook.com (2603:10b6:408:e3::20)
- by SJ1PR10MB6002.namprd10.prod.outlook.com (2603:10b6:a03:45f::18)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9891.20; Mon, 11 May
- 2026 10:05:32 +0000
-Received: from BN1PEPF00004684.namprd03.prod.outlook.com
- (2603:10b6:408:e3:cafe::82) by BN1PR14CA0015.outlook.office365.com
- (2603:10b6:408:e3::20) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9891.23 via Frontend Transport; Mon,
- 11 May 2026 10:05:31 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.194)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.21.194 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.21.194; helo=flwvzet200.ext.ti.com; pr=C
-Received: from flwvzet200.ext.ti.com (198.47.21.194) by
- BN1PEPF00004684.mail.protection.outlook.com (10.167.243.90) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.25.13 via Frontend Transport; Mon, 11 May 2026 10:05:29 +0000
-Received: from DFLE209.ent.ti.com (10.64.6.67) by flwvzet200.ext.ti.com
- (10.248.192.31) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Mon, 11 May
- 2026 05:05:29 -0500
-Received: from DFLE203.ent.ti.com (10.64.6.61) by DFLE209.ent.ti.com
- (10.64.6.67) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Mon, 11 May
- 2026 05:05:28 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE203.ent.ti.com
- (10.64.6.61) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37 via Frontend
- Transport; Mon, 11 May 2026 05:05:28 -0500
-Received: from [127.0.1.1]
- (a0497641-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [10.24.50.71])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 64BA5PdO3134170;
- Mon, 11 May 2026 05:05:26 -0500
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=pbrobinson@gmail.com
+Received: by mail-ed1-x532.google.com with SMTP id
+ 4fb4d7f45d1cf-67c9616b4feso6080197a12.1
+ for <u-boot@lists.denx.de>; Mon, 11 May 2026 03:09:42 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1778494182; cv=none;
+ d=google.com; s=arc-20240605;
+ b=W6QksjOomK3UoXrTQ1ktYnXcP5by+B/h5TcCEz5hVj4Yb0wnlycmYc9iqAzOMujfZM
+ KLKkP7LdKdG2vccykbrZPSJJGfaWiC32QpPgiQraL0wlm5iUhUpOIJ1S3J2Rd3pfS0fg
+ MFMx10inykLWJjSBdqXrlaaVDvCKW/BW8gGafVszT8AODVhlQk09uhXDUDXg8HA8FE8H
+ yvgwCGyHYYzjpQ67jkpTIIU8MoTfWgo9gwJPhZkWAuX8Q5W9bzmyMZaNu7A1qgKa/cQ7
+ hk+BhgBVHFWdIVGzR/NqfSr6cT9wjFZnJYxU8n6Y30wl4b2IbtxplTmS/wSJBvbaPU74
+ P3Og==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=8r20cNjJJZFC7l3E0ZzFiP93YY6tHBCl5VSAoqNh9Sk=;
+ fh=2K8JEZe89Cg9mIn12L3R2Gvj32qUAuMJvPugKb6ns28=;
+ b=NRNHlBKK0Vl+XEU+CPeENYD/PF1IUP7solSOhpS0Pr+YEbkEKORAFoON2QlabWotqo
+ a1zUnT2+HBAlEEsXajql+OyrvfivlK65YpbP4j+v/JSjkd/7yi//B+tsV6RSLFL2DRE5
+ gyErnV63gdZGYcnjfa6MGz6wcW20eDKjCWALVm/TUcxDK7/Ao6eV+yfbyOT70SrvOsBa
+ uaomyqIkLxzgSwUYY07hFsOglfErnuLNpT/R6D2bH/9mJeU0bcBeFU+Wvt7dwnOk0b+z
+ tPzyWI3zwfQ/P0PpGwn2Zuj9KoUF2KcKIwneknFmpoQnj6/ZtgiBN6pmEkI8rvAUZErB
+ dnPg==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1778494182; x=1779098982; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=8r20cNjJJZFC7l3E0ZzFiP93YY6tHBCl5VSAoqNh9Sk=;
+ b=U4Gik2DgrBx9BgX7DUenTH6JnJD0bf4NAsKAj9AfTqJIj067205yPX0wSzP0EgCD9s
+ txqYyumCKpKrDFaVdTQreMCdmcB5R30ZX3BvSW88FyfbuF0pqFg4zGGAYiMY5oz2opCz
+ TLPzXgNCZlbNdIoQ0cSUZtpC1QuQGuId0y/oMrJjGqu9B4VjHBe1yzBfXWFDl6rA297D
+ 0sEt4G2RiWF50z8C6exhCkVcO/IXB4aunzwxPdLcpgEf0zX74QNfUVDacjMfRm6dfhUm
+ ckBdfcolQzaTY77sNqS4ffL/hnPBe2Z0fcDfJowNc1OLslzAyTI/qDkm8Ov8k+WTFDmU
+ Wgzg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1778494182; x=1779098982;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=8r20cNjJJZFC7l3E0ZzFiP93YY6tHBCl5VSAoqNh9Sk=;
+ b=ReC6D5zdUs8p9WcgGE+YNftziAwR7LbTpsVhvde+ZUi8V8y7YUnUrjbcUH4pZrEURl
+ BqTQJUGe44t5EPBZp/2X5C7C09sAdPmJZsEgjnuHU4BF1tkBeOjiBohKvkRq876l7Sqo
+ Q3kHvlJ6VNtlxueLQgbpL0VaOYRfKc2iOoiBOVrn8SsmwTDi492MYTHrvunIQAqqN6xi
+ ZVqyrW/p/SCiSdzKgdWZ8SLOo02d60MqPmrVw1dJuirtO2RcXmwwWBLVKNzrjUcqTT8r
+ n5SVZi4rizcq6rVeRsISbieUv1a4IRiNegdqvt6JWpXRtW3uSmJCrTKO/2/g+lPGJ/OQ
+ RO2A==
+X-Gm-Message-State: AOJu0Yyg11Eq+C4EK0198v+bhV1O96es1CF7Hoc2TpGYcrAJxB9goxIz
+ xHQyd8dX+kBGhK2aBFNU7MnAUFZtSl4Yr2uJaht3q+n4jQ4l7injG7tUhExc9JvO+RBBB+Zy7pv
+ cUsMM9w8PbpEVafz5Pm3d9ZZsqktpnn4=
+X-Gm-Gg: Acq92OEJ2GVOtNOToTODVZep2vqKW00ZsKzgDeZan16tzzzhBbBg14OAf6eQKfIsMSb
+ 8LsLMYXcpZ3naqsX9NDNRRdnkEEXPmp6kCzTSqrUar8e3VL6e0irAeloxiBuXfvcSK9TL/m+4hw
+ SuPRiEMgo13DzxJLiDFSf90pETlTccpwtl/jXZjx7aepaZeRyV4k8z66Q5EZSL0TEc6nQCsIvu3
+ p8Ef4NAcTI2bGAq7g69E8SMqVBavdjOFiSyxsneJ5k7Nz0aGcMsoCNa4EQXxegVd0swmf8H2Sk0
+ VMxljqJ1OMRDsA4dTVdZ/koff/aIOT3J4OHTNvc/MOfM2Tm+RpdpWxxM3iXfjtss78KKB9FAxmF
+ 2alrXHdVM7Kg6qUNthgFtb9742XDcbvxLSSpH/naHneMOsZmIH6lXzx82OwDxbH+9OZ2Vgar6ui
+ r4
+X-Received: by 2002:a05:6402:428e:b0:67e:2498:f0d3 with SMTP id
+ 4fb4d7f45d1cf-67f704fe64bmr4578527a12.2.1778494181614; Mon, 11 May 2026
+ 03:09:41 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Subject: Re: [PATCH 0/4] board: toradex: k3: Sync rm-cfg with TIFS
- v12.00.00 firmware
-From: Neha Malcom Francis <n-francis@ti.com>
-To: Ernest Van Hoecke <ernestvanhoecke@gmail.com>
-CC: <u-boot@lists.denx.de>, Sparsh Kumar <sparsh-kumar@ti.com>, Tom Rini
- <trini@konsulko.com>, Francesco Dolcini <francesco.dolcini@toradex.com>,
- Vitor Soares <vitor.soares@toradex.com>, Neha Malcom Francis
- <n-francis@ti.com>, Franz Schnyder <franz.schnyder@toradex.com>, "Emanuele
- Ghidoli" <emanuele.ghidoli@toradex.com>, Bryan Brattlof <bb@ti.com>, "Ernest
- Van Hoecke" <ernest.vanhoecke@toradex.com>
-In-Reply-To: <20260508-v1-update-rm-cfg-v1-0-ec9d033f8ec1@toradex.com>
-References: <20260508-v1-update-rm-cfg-v1-0-ec9d033f8ec1@toradex.com>
-Date: Mon, 11 May 2026 15:35:19 +0530
-Message-ID: <177849391957.1452947.3072701683767310378.b4-review@b4>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1778493925; l=684;
- i=n-francis@ti.com; s=20260428; h=from:subject:message-id;
- bh=6Qfaf6ED0pxUmPYYT/32hqRCQ1es1iwGtwKA+A0yjj8=;
- b=i1rC+uHTuBOs8gU44L/VD3gR2uVNMGi1DpuTNs2c11HNUtCp7lPTtuIYXKPpkRDDysdnx9hj3
- Il8yUYqjr+7C1boRCFsr3VFZVpeyMMrGRWt95ZlAJU6CsC+vJUrFxMS
-X-Developer-Key: i=n-francis@ti.com; a=ed25519;
- pk=Z4nV5FmpAM9e1Jk0HnCKOoVUtHW8cscgDRncr2IngXg=
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN1PEPF00004684:EE_|SJ1PR10MB6002:EE_
-X-MS-Office365-Filtering-Correlation-Id: 54d03347-7fbe-4801-26f4-08deaf44d4cc
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|36860700016|1800799024|82310400026|22082099003|56012099003|18002099003;
-X-Microsoft-Antispam-Message-Info: gZXGjotMVU3QYgzm/OY6Fp5WvBdJrnehQQwMnFwh0fPUxuPCmRq8x0S/eFQCArEuXQjh3QCH4QhrA1DhfX2VB8vEa9lJaFq/UTpVTSpBs1Bp2F159U+0C3Km4MJIODjtgLfiYeqsGtr6Kto9GbLm3+iKDIBkvoBLmJUzej/F+HyumzJp7mMQasNhoNCSpJFaCg/q+2K1cuKuxASZWbRxQkeIz6St3rSjr5iCoavXlcs6W2rKtelc5gPpgo+Q6WjosyXodn2gomsAh0eOY2vuaNDg4doo4dwe0xmip0y5XZDDSkCyD1sQOwMV196t1Kh38+KjNZpvqjAF93lKSfqcZXlK+HkbnAEz2qEnY0DM7/f8hljVqoy3hMe9r/n6cQJ+wfOq7JSPbXWz6a4LQ/tX0HaTZk3Pt2fW9klIkSusuaDrXEBFQ4GRRFyKm0gmyqn2ivTpfbBRCj4rJAxjnvP+kJxRpCHwpWS/reOvsr2iPrcx6Uox7yjXag6qx+0I0JJvcSTC2CREqF/wuIR+Hn2b/0OoKEmdhutXtOpNsHGj5IcPof+FLphwRrcCb/W4ANURY2gVzJmYuHzDO+N+ek3ut1LGiPBGlpppvO9m5NyXdS5G3awqbifJbsF59FAjYkNbUx393a9Am54QLQvTaIBkFYkiFJBUSikdDVHhGq7B8Ealjf3aftWexkbjRsduT5T7hu47hXH750xQDk5NLNXntnDc8i0nYLTaE/wbBSQ4tQw=
-X-Forefront-Antispam-Report: CIP:198.47.21.194; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:flwvzet200.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
- SFS:(13230040)(376014)(36860700016)(1800799024)(82310400026)(22082099003)(56012099003)(18002099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: S3ocNAl0ZmslxZLhf8GfUZF26hZOySU5xtO6l2gX//P89Q3AQzJdFqR7oI69fuwxG26GIDx/aklJm6jEXUYC8u1P0khLrNUJD59XXkszeqzmOUhKbTW20pQJi1H/GTAsraE7Rd2ahQVInGENCJHr4IvganD79lw1cCpP0XCBCrmuBFtDYvZ47Vap4DGioR+F8LyKjn0xBTzeebJxaga4oC1m9YyuhkY95z10u9xeLVL4A/4bhIl1cM3eUzY4Xl9fT2ba44IhTraH1wM3YizTcdPUrBWfXNX0lw6e4BJSiuOPstOtIE7zmIa+/V3y1/RTwheTUzEGrDQaLRWjv0+2AGR0SdhNt8ugkb86eSuWn+VsbXBwA1KQD/m82laPY5OfrAMj09fjwIHi2AtQv2mBd48dxLn+MBx4BP/nWFP98k+6olUkyMcy1+De2V0wwzms
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 May 2026 10:05:29.4719 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 54d03347-7fbe-4801-26f4-08deaf44d4cc
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.194];
- Helo=[flwvzet200.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: BN1PEPF00004684.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ1PR10MB6002
+References: <cover.1778277334.git.aidan@wolfssl.com>
+ <CALeDE9MRtntqBo1cK+AyhuVXC-D7tM7djHzmNBSU65KB8PC=og@mail.gmail.com>
+In-Reply-To: <CALeDE9MRtntqBo1cK+AyhuVXC-D7tM7djHzmNBSU65KB8PC=og@mail.gmail.com>
+From: Peter Robinson <pbrobinson@gmail.com>
+Date: Mon, 11 May 2026 11:09:28 +0100
+X-Gm-Features: AVHnY4I3qfPX7uAKnt9WztTT_0pZ2VN90fSs-W5JzG_5OyYUP44kyhIH2qwH6sA
+Message-ID: <CALeDE9N-UDKDscCgGJ6Xsw=zesTRMhU=NSNxbvyZi-Dx+3NJCA@mail.gmail.com>
+Subject: Re: [PATCH v3 00/12] tpm: Add wolfTPM library support for TPM 2.0
+To: Aidan Garske <aidan@wolfssl.com>
+Cc: u-boot@lists.denx.de, David Garske <david@wolfssl.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -144,21 +115,107 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 08 May 2026 10:52:08 +0200, Ernest Van Hoecke <ernestvanhoecke@gmail.com> wrote:
-> board: toradex: k3: Sync rm-cfg with TIFS v12.00.00 firmware
-> 
-> This series updates the Resource Management configuration for Toradex
-> K3-based boards and makes sure the TIFS-specific RM configuration is
-> used where applicable.
-> 
-> For Verdin AM62P, the tifs-rm-cfg.yaml file is refreshed with
-> k3-resource-partition V12.00.00 so that it stays in sync with the
-> existing rm-cfg.yaml update for the v11.02.09 and v12.00.00 TIFS
-> firmware resource reservation.
-> 
-> [...]
+On Mon, 11 May 2026 at 10:15, Peter Robinson <pbrobinson@gmail.com> wrote:
+>
+> Hi Aidan,
+>
+> > This is v3 of the wolfTPM TPM 2.0 stack integration for U-Boot.
+> >
+> > wolfTPM (https://github.com/wolfSSL/wolfTPM) is a portable, GPLv2 TPM 2.0
+>
+> I go to the github link and it says  GPL-3.0 license so which is it?
+>
+> IANAL but I'm not sure if the GPLv3 is compatible with GPLv2 in the
+> context of U-Boot because it would make the whole output a GPLv3
+> application
 
-Reviewed-by: Neha Malcom Francis <n-francis@ti.com>
+In fact the majority of U-Boot code, like Linux, is GPLv2 only, not
+later which makes this directly incompatible with U-Boot.
 
--- 
-Neha Malcom Francis <n-francis@ti.com>
+> > library that provides a full TPM 2.0 command set, an SPI/MMIO HAL, and
+> > firmware-update support for Infineon SLB9672/SLB9673 hardware.  This
+> > series wires it into U-Boot as an optional backend behind the existing
+> > 'tpm2' command, alongside support for QEMU+swtpm, sandbox emulation, and
+> > real Raspberry Pi 4 + Infineon SLB9672 hardware.
+>
+> So that provides the technical detail, but what value does it provide
+> to U-Boot? We already have a relatively complete TPM stack, do people
+> do firmware updates in the early boot process, why else would someone
+> choose to use this over the existing implementation?
+>
+> One part of what I want to know in a cover letter is what value this
+> provides to the project, what are the pros/cons etc, like what
+> maintenance looks like.
+>
+> Peter
+>
+> > Branch (full 14-commit history including the subtree squash + merge):
+> >   https://github.com/aidangarske/u-boot wolftpm-v2-patches
+> >
+> > Note on the subtree commits omitted from this email thread:
+> >   The branch above contains 14 commits; the email series is 12 patches.
+> >   Two commits are deliberately not sent to the list:
+> >
+> >     * "Squashed 'lib/wolftpm/' content from commit 664db130d57"
+> >         - the parentless squash commit produced by `git subtree add`.
+> >           Its diff is ~3.4MB / ~90k lines and would be rejected by the
+> >           mailing list on size.
+> >     * "Merge commit 'd42fd7b146...' as 'lib/wolftpm'"
+> >         - the corresponding subtree merge commit. Merges have no patch
+> >           form and are routinely omitted by `git format-patch`.
+> >
+> >   Please pull from the branch above (or wolfssl/wolfTPM @ 664db130d57)
+> >   to inspect the imported wolfTPM source. Subsequent updates will go
+> >   via tools/update-subtree.sh, matching how mbedTLS, lwIP, and
+> >   dts/upstream are maintained in tree.
+> >
+> > Changes since v2:
+> >   - Replaced the lib/wolftpm git submodule with a git subtree import
+> >     (squash + merge), matching the convention used for mbedTLS, lwIP,
+> >     and dts/upstream.  tools/update-subtree.sh is updated to know
+> >     about the wolftpm subtree (path lib/wolftpm, upstream
+> >     https://github.com/wolfssl/wolfTPM.git).
+> >     [feedback: Ilias Apalodimas]
+> >   - Reverted the changes to include/linux/byteorder/generic.h.  The
+> >     redefinition workaround for cpu_to_beXX / beXX_to_cpu now lives
+> >     on the wolfTPM side: include/configs/user_settings.h pulls in
+> >     <asm/byteorder.h> up front so U-Boot's macros are defined before
+> >     wolfTPM's #ifndef-guarded fallbacks in tpm2_packet.h.
+> >     [feedback: Ilias Apalodimas]
+> >
+> > Testing:
+> >   - QEMU arm64 + swtpm Python test framework
+> >     (./test/py/test.py --bd qemu_arm64 -k "test_wolftpm and not ut_cmd"):
+> >     19 passed, 2 skipped (matching doc/usage/cmd/wolftpm.rst).
+> >   - Manual QEMU arm64 + swtpm walkthrough per
+> >     doc/usage/cmd/wolftpm.rst section "Building and Running wolfTPM
+> >     with U-Boot using QEMU": tpm2 help/info/autostart/startup/
+> >     get_capability/pcr_read/pcr_print/caps all return expected output.
+> >   - Raspberry Pi 4 + Infineon SLB9672 (real hardware): all wolfTPM
+> >     cmd tests pass, including firmware update path.
+> >
+> > v2 thread:
+> >   https://lore.kernel.org/u-boot/?q=PATCH+v2+tpm+wolfTPM
+> >
+> > Aidan Garske (12):
+> >   tpm: export tpm_show_device, tpm_set_device, and get_tpm
+> >   include/hash: add SHA384 hash wrapper declaration for wolfTPM
+> >   spi: add BCM2835/BCM2711 hardware SPI controller driver
+
+While I understand why you would put the above patch in it should in
+fact be sent on it's own as a standalone patch because it's really
+nothing to with this series.
+
+> >   dts: add TPM device tree nodes for RPi4, QEMU, and sandbox
+> >   tpm: add wolfTPM build rules and Kconfig
+> >   tpm: add wolfTPM headers and SHA384 glue code
+> >   tpm: add wolfTPM driver helpers and Kconfig options
+> >   cmd: refactor tpm2 command into frontend/backend architecture
+> >   tpm: add sandbox TPM SPI emulator
+> >   test: add wolfTPM C unit tests and Python integration tests
+> >   doc: add wolfTPM documentation
+> >   configs: enable wolfTPM in rpi_4_defconfig
+> >
+> > --
+> > 2.47.3
+> >
