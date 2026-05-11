@@ -4,97 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8EC68CD484E
-	for <u-boot@archiver.kernel.org>; Mon, 11 May 2026 20:14:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 284C6CD484E
+	for <u-boot@archiver.kernel.org>; Mon, 11 May 2026 20:15:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2634483FEC;
-	Mon, 11 May 2026 22:14:28 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B89C683FEC;
+	Mon, 11 May 2026 22:15:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="HMlHfFbM";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="PbMSO1Dx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2B41483FEC; Mon, 11 May 2026 22:14:27 +0200 (CEST)
-Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
- [IPv6:2a00:1450:4864:20::62e])
+ id C48428460E; Mon, 11 May 2026 22:15:42 +0200 (CEST)
+Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
+ [IPv6:2a00:1450:4864:20::52a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 429018460C
- for <u-boot@lists.denx.de>; Mon, 11 May 2026 22:14:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 88E2383C2B
+ for <u-boot@lists.denx.de>; Mon, 11 May 2026 22:15:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-bce386d5b85so289771966b.1
- for <u-boot@lists.denx.de>; Mon, 11 May 2026 13:14:25 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1778530465; cv=none;
+Received: by mail-ed1-x52a.google.com with SMTP id
+ 4fb4d7f45d1cf-6763cc8775cso10336888a12.0
+ for <u-boot@lists.denx.de>; Mon, 11 May 2026 13:15:40 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1778530538; cv=none;
  d=google.com; s=arc-20240605;
- b=Bu10Y4cYx+cnqPn0o6vHzjdTf19Tzw7m667zYy8WYAXnxiIa4QG6aRrvb2L6AEd0pR
- 4zypzLO45MlXtroMsGm2Il0Wwrn5yiAM1sW4X9gYfEOwivkzYMM6GZD7vr3dOb2frSVi
- gJxwXhVJni0qM88KdSnctG3FIBqd7eDa0pqU/62Kg9nK6QC2cnFo8YQnEqzEVbpOdG5J
- jpXq0TdytYjw/rmr2dZBFdBeuHPOnWCe5FapKmhEZ9dTn6vgFdk7a4CYaSdEn+u+xv2r
- YBDV3c8MtguC0iAK+1MOO6TcLzVFuJHhISSAYfg+cLpVsV362xNnn+z0ZSsCaVHrBHmY
- MOSA==
+ b=M+OIBkbzmQOUBNJyf8N8lzb9lskcjmj8NwDCFATdl/zrwO0bRVRlTEXeAJIVQJBS/b
+ hVZkrD19fexSi6R7HtwQ2cGmc7urd2HvEyVmg4bzOFjg/KCSm6qvtLR1imIf/sVUOcu7
+ 89NewvxzALxpokShDEPdz7WQojOaMnhZqj3tf1eDaPLwV8HK5Snh6TYA1v51kfEChlzA
+ n5uyT/PHy+zyPGjMVPbNg+YzdffN7jeotMZTA/ooisFuD4TXGNK50miniXVwIVEdBSlY
+ gOZzDk4WwLoMQTFWulgI9ALB4sKE/QlXI/h2k4njRCO2rLvCgDUyDgViSoh4ZdRUX2Ya
+ UVlQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=wN7/ochuA3RrV+dIoSCxUIV880Zw6YJf9LsKHBSMA0g=;
- fh=0veFT79CiSOcOldaDcjKZ4h8J0gM9Ol8nAJRYwPMAcI=;
- b=KEhv46B9xGFLdGLCHiyTsKeg9dKp7tLdf04eTDIJWxasLKdE+Vib9l7Z0tfnzGiMtw
- V+ElldpqFmXl1ZwjXpJE4tZW6bp8qhTOoIdiyH8yi0FfPMzg2sb/9H6uuLLqwmVpwhxK
- +yFnmMxZf/oM9JkyJIZ/TQJLs7hv44B1Til96gr3q70dIYj2UrM6ip9RU6ZCqFPztGLR
- UrKDd8TS4dRDjuTAVDtk2YlvZciKSNpiE1ZrEldKntxrX3qXk312nTdgW6zchJcI5gaQ
- LQnWUn/66UcdRoNhJqdZE1h6JGDJiw5Dl4I0WR5A7pQn8x7WOiHxstSAQPOQzFEJN1cd
- S7ug==; darn=lists.denx.de
+ h=cc:to:subject:message-id:date:from:mime-version:dkim-signature;
+ bh=TsSImFAXFyCmMcGXCS8ZBKmg/G44NZpBrIelGmR7OsM=;
+ fh=AoVEW340XNpvidYYnA4aNiS4cNS3eTFSgS3pBmJ/70w=;
+ b=Ij77yC+OUMFXW+vjY01Ft81nFd1SM+NiH4Icy7UoMpoGueeW/tfMNbhdnJ672SQjI8
+ jp6RxzOtNzDYWcFBwJcxGY9MggdhjQrgKvzpH6K0yEtQ1V0+2UJlG2GIkg+824YW1Mpd
+ a07+uHGxnIZQXsngcA1DxPPkP89/EAH1vqgkOGA6CUXFLpiN6pRZU7dsPumGILu5m6cf
+ c0j7issTgT4vNP7w4NayAwISe9n7rq3tXQO0THyX7xssBa0XVhTsFQpghkUmZWEMbNPA
+ rpNjUhXvrd7PvFoJdJnYmiH3pkTo1V6scX+IxdEU0eivgFv5qys/J7QgHkubIFv6/fg2
+ ociw==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1778530465; x=1779135265; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=wN7/ochuA3RrV+dIoSCxUIV880Zw6YJf9LsKHBSMA0g=;
- b=HMlHfFbM5jTZWpTuUAaSqajiPPtyWi2kkRaoAoSndeUkhv9pwIZ7VGUJSKo5qfNCrS
- imScLoXoj1o/ztvygZJ/SO/5vyYz8QmhfvmHjEWT1U9W8c4qABDGXSm67rM0j5fjmlQj
- zP1AK6RYtqWpd/tYMTeh6f0gyHyAm4dA/iXC0=
+ d=chromium.org; s=google; t=1778530538; x=1779135338; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=TsSImFAXFyCmMcGXCS8ZBKmg/G44NZpBrIelGmR7OsM=;
+ b=PbMSO1Dxab2EL/79l62bQuG57TgaawmRCMtJLA7cCz4cBDs6WIXrlRh7/1O0SwKNza
+ 6Uf0C1VrzOjy/8bIki61HeZtzIlL4fgLBgPSP3pvLxuPBWr1SFafX6IGfEyglfcGNrtH
+ iGSOLOx9Jn5El7mOn3YW8TDiF7gir1MtHdGlE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778530465; x=1779135265;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=wN7/ochuA3RrV+dIoSCxUIV880Zw6YJf9LsKHBSMA0g=;
- b=FgHKK91FFwYQtkwk/YhH1TPg67mowCRrv/HLxC+AP1b5V335Y8j0dtT5YfltSNaGDU
- 2BModGK1rG9VlbIUCpIQ0oJX8acc0ZKMaJQrMAQz5vIqisQ7DjgiAkkEwYF4iPNJjiwP
- ImsoeucHdFg4Npoj5wuI75h0qnZYyCfFpO97WfBpfJbbn/ImMKQQzjkiMA1mSBu7+4St
- JGnelsLGDyLvtb0VcI2T8tCuSr98MGcgRIyn8NXdwPidwyTfcpNTIjt2YzQyCosniFTs
- q74hKnhxw0Gx6AiG25a2PG6Flh2HCxJPEyznEZahPsdE4CBtq8uA+2y4CnDg3+dykLWY
- 6i2A==
-X-Forwarded-Encrypted: i=1;
- AFNElJ+8YQ8ycHT1Bj33wTjXyn9YKNy6/7JG4/9vEYcXRN3B1HNVVKBsKna2xDt+5PdkbcrH3ESbvuw=@lists.denx.de
-X-Gm-Message-State: AOJu0Yysittha2B305hd506EYVOglpBWvfA6hpgEWWNOVPH9ytyHPzEN
- TwZcEoQVd15dAfPzpmI3FcqyeL22pcM+HrL/YH0NLN5Hz18NiJp4a7GJ1zRQ9dlXnir6rNajHic
- 7ddKXgG0AyKGOfE8+/4mQirS2eQSB6MG7moSqGWqS
-X-Gm-Gg: Acq92OHuOobIbJplDWQ+BQrWIWoachtouOJgf9uSeBIh0BWWD4FB+emCjQz3/mY54ap
- 7RQDgEkw+YAGJYEVf4kCudCBeEydus8LMJDmsZXQAX+uO1iSV8LT3zMcysXNdUSaFn5DqmOV7+P
- G1EIw2ATuJwocTZvzCra/ZIIyep6X6RIc7iehzfpPL963l3aHBuLr6EO/FpWdXVfFpwj4GzXsgV
- skJSxJQgZZN73WmnIUjpX5ULdjK0Cx/RtU51dk0MqEdxxaY8So4Ozx/QV02x7jeu4Bsaj2WoA97
- OLuvIA==
-X-Received: by 2002:a17:907:849:b0:ba6:4e0f:e396 with SMTP id
- a640c23a62f3a-bc56b41ef3fmr1399294766b.12.1778530464670; Mon, 11 May 2026
- 13:14:24 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1778530538; x=1779135338;
+ h=cc:to:subject:message-id:date:from:mime-version:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=TsSImFAXFyCmMcGXCS8ZBKmg/G44NZpBrIelGmR7OsM=;
+ b=pyXjYLgLMZL9xNNDU+MqP3GzreUwZoG+gD7hlN53gSbS29vVirjJxqKSDBjCm8mZci
+ N0nh4huxxNht8Pb4d3p1DA1KMEmkj3mA98E200RKbITXLiKYdO+msZez11YnZlJlScQN
+ l2kDWYdlO+x/7+TtkKKKgQB9F6R2vcSeOmdLjcLMJtKJa+DhseU8SR5Q9CPyBBKAZTNa
+ bXEkKAIOximSIicUONtONGCCxyicYbu4eUzf+z3pkj6ROnW3+0Kx0HkQEF6Jz5xmYpSj
+ R56xtB1SKMy074UuyskTylaaQuOgSN28hnOVjFZSQuNag9F5S4BIuqZxrCPQ8S1B4TbF
+ /1UA==
+X-Gm-Message-State: AOJu0YzgPm9mEZ5q8Gi8QgPbke5Qg4w+zH1pabiuO9AsH2HjemK0vkKP
+ dps8TvviqfMzKbq6MJWDX/226cPErybAODJ0VnFFR0gOyCGhC5x4XaRCJMgqNDZVRGY9jLXgwRQ
+ tKckMYifM0r+bpjFvfMlIK21tDLyeOSW6JCHufA87TW5zeE+N42aKEw==
+X-Gm-Gg: Acq92OG590vM0NrlIFneVV+/oINe+yCeurTXVww1rKH7q4STfyWAt4oaPxr96JDvcqD
+ rMfwg1fcWyulfgKFCltt/U/lEw+9gDAWVmy1tLMHh4TN4BkuAKRDZGZihXhxOaho7aGR5SqHNz+
+ engzvXhEI341IkHSRAOXVb4RAPLj7B4tsyTwy6gNktZjmGkb8m/LveLl7y6sa2jyHA6DcxQ8lle
+ CQGWf72QyYEtBoUKmLB5FmD3LIMnj+v85GntbE4CgaBIJRPB8e1o1KhJ4NGSLnd/17SK9xbYZIS
+ 7ExZFVz4KbUAbEpU
+X-Received: by 2002:a17:906:209c:b0:bbf:bab5:ecd9 with SMTP id
+ a640c23a62f3a-bd23b508751mr49102666b.15.1778530538392; Mon, 11 May 2026
+ 13:15:38 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260420164725.359539-1-heinrich.schuchardt@canonical.com>
- <CAFLszTjAqjEtnLb1Ns7fLp7jt90XSfOwJ9iyG55aYA9EWv4fWQ@mail.gmail.com>
-In-Reply-To: <CAFLszTjAqjEtnLb1Ns7fLp7jt90XSfOwJ9iyG55aYA9EWv4fWQ@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 11 May 2026 14:14:12 -0600
-X-Gm-Features: AVHnY4IB4p8e_T02hOXxfibiAcKoWkgilO79lh2M1L0meLuFAzMGkXxjoWNeLPQ
-Message-ID: <CAFLszTiDjeM31cDTnjgva-hwe08jve4amEyd4WOd+ZxM9Tjt3g@mail.gmail.com>
-Subject: Re: [PATCH 1/1] acpi: fix initial RSDT and XSDT size
-To: heinrich.schuchardt@canonical.com
-Cc: Tom Rini <trini@konsulko.com>, Bin Meng <bmeng.cn@gmail.com>,
- Stefan Roese <sr@denx.de>, 
- Saket Sinha <saket.sinha89@gmail.com>, u-boot@lists.denx.de
+Date: Mon, 11 May 2026 14:15:26 -0600
+X-Gm-Features: AVHnY4Jab60MFBFjL_aGfOKWqa0vY105b9k6gustqQ_uFUlOxYKn01yp_L9p7OU
+Message-ID: <CAFLszThRPTPUs7H-2Cy2v2hw78uLGHrG2r9TFWZFdBkomUtGMg@mail.gmail.com>
+Subject: Please pull u-boot-dm
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -112,33 +103,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+Hi Tom,
 
-On Tue, 21 Apr 2026 at 16:48, Simon Glass <sjg@chromium.org> wrote:
->
-> On 2026-04-20T16:47:25, Heinrich Schuchardt
-> <heinrich.schuchardt@canonical.com> wrote:
-> > acpi: fix initial RSDT and XSDT size
-> >
-> > When creating the RSDT and the XSDT table they contain no entries.
-> > The table size therefore must equal the header size.
-> >
-> > Without this change a NULL deference has been observed in
-> > acpi_find_table() when running ut dm on sandbox64_defconfig
-> > executed via sudo ./u-boot -D.
-> >
-> > Fixes: 94ba15a3f13f ("x86: Move base tables to a writer function")
-> > Fixes: 7e586f69070d ("acpi: Put table-setup code in its own function")
-> > Fixes: ab5efd576c4e ("x86: acpi: Adjust order in acpi_table.c")
-> > Fixes: 867bcb63e79f ("x86: Generate a valid ACPI table")
-> > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> >
-> > lib/acpi/base.c | 4 ++--
-> >  1 file changed, 2 insertions(+), 2 deletions(-)
->
-> Reviewed-by: Simon Glass <sjg@chromium.org>
+https://source.denx.de/u-boot/custodians/u-boot-dm/-/pipelines/30065
 
-This uncovered a test failure, so I fixed that up when applying.
+
+The following changes since commit 22a285380e35a31d0a882af66278bc1edc1b917e:
+
+  Merge tag 'u-boot-at91-fixes-2026.07-a' of
+https://source.denx.de/u-boot/custodians/u-boot-at91 (2026-05-09
+07:31:55 -0600)
+
+are available in the Git repository at:
+
+  git://git.denx.de/u-boot-dm.git tags/dm-pull-11may26b
+
+for you to fetch changes up to 08bcf962c5fe1d2690ac3ff6dd75d3963325476b:
+
+  binman: Use bintool wrappers for PKCS#11 tools in tests (2026-05-11
+12:05:10 -0600)
+
+----------------------------------------------------------------
+Add missing bintool docstrings
+Minor patman fix
+Fix small ACPI bug
+
+----------------------------------------------------------------
+Heinrich Schuchardt (1):
+      acpi: fix initial RSDT and XSDT size
+
+Ludwig Nussel (1):
+      patman: fix use in worktree
+
+Simon Glass (4):
+      binman: Flesh out the p11-kit bintool docstring
+      binman: Flesh out the pkcs11-tool bintool docstring
+      binman: Flesh out the softhsm2-util bintool docstring
+      binman: Use bintool wrappers for PKCS#11 tools in tests
+
+ lib/acpi/base.c                     |  4 ++--
+ test/dm/acpi.c                      |  8 ++++----
+ tools/binman/btool/p11_kit.py       | 11 ++++++++++-
+ tools/binman/btool/pkcs11_tool.py   | 11 ++++++++++-
+ tools/binman/btool/softhsm2_util.py | 12 +++++++++++-
+ tools/binman/ftest.py               | 46
++++++++++++++++++++++++-----------------------
+ tools/patman/cser_helper.py         |  4 ++--
+ tools/patman/cseries.py             |  6 +++---
+ 8 files changed, 65 insertions(+), 37 deletions(-)
 
 Regards,
 Simon
