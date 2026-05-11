@@ -4,106 +4,104 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93FA4CD37BE
-	for <u-boot@archiver.kernel.org>; Mon, 11 May 2026 13:58:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79AFCCD37BE
+	for <u-boot@archiver.kernel.org>; Mon, 11 May 2026 14:00:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 820E184674;
-	Mon, 11 May 2026 15:58:07 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id CF6FA83CD3;
+	Mon, 11 May 2026 16:00:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="umyy4+wu";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="LAnJB+1t";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3B1098341A; Mon, 11 May 2026 15:58:04 +0200 (CEST)
-Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
- [IPv6:2a00:1450:4864:20::52c])
+ id 661B583CD3; Mon, 11 May 2026 16:00:53 +0200 (CEST)
+Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
+ [IPv6:2a00:1450:4864:20::52a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 97DE084661
- for <u-boot@lists.denx.de>; Mon, 11 May 2026 15:57:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2D5A0838D7
+ for <u-boot@lists.denx.de>; Mon, 11 May 2026 16:00:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-ed1-x52c.google.com with SMTP id
- 4fb4d7f45d1cf-67b6da5a618so5992455a12.2
- for <u-boot@lists.denx.de>; Mon, 11 May 2026 06:57:59 -0700 (PDT)
+Received: by mail-ed1-x52a.google.com with SMTP id
+ 4fb4d7f45d1cf-6763cc8775cso9663295a12.0
+ for <u-boot@lists.denx.de>; Mon, 11 May 2026 07:00:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1778507879; x=1779112679; darn=lists.denx.de;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=cqQs1JcXm1eUL7CfIgZCMoGxPWrlSxHVx9Aa+JWpc64=;
- b=umyy4+wueO/n+C0DTWNZIGvGALDKMpCHdOR9zJ1EuX2orTqepH+nCHViAr7RKguiDG
- isGSglTF8Gx6dsfd75etNUs2JisU2DxDSRz+5a9MH4k9RAIpstLYQATTgjrOgpSQu07a
- Iu2lsGFzZ4t/ERgdOnDy8LdJ0oLqtercd8GudM4Zey7I1xwoxKa6dlAwohduv5QubTkR
- 6zXV8yqAZan+G7s8hnP0UTvWG8rD28b0qP9j2wvGKvJ5JXhz3Mzfm80z/gnkxMft4/L3
- 1nkRx1qe4pI6O12eittxYl2MC/CXYTsjVzEzkLRqu/nqiSo+0gUiqVF73hZwhy3w4vh5
- z2tQ==
+ d=linaro.org; s=google; t=1778508049; x=1779112849; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=vZg9tCpQQCN0RCyKCQhD/47Lt87+Bvp9kVtxZYLGCDg=;
+ b=LAnJB+1tWgociggEzNWPMf9E7WA9LOYK2SHKzlv2LV8Idpy7waRC22ZRm70/H1jUWA
+ jdH8S4AJrf1wSSdSZRNnAXKCdgpC533Q5DbcbSMQheQ5HYCQTPWkTPMj9dnd0zr5lGFM
+ 82X2OruGPzd1aD4VNRDfkJEBHBKmx/wS9h/GZq298NU3mdAhYrVq++MAc/cXVag22Feu
+ JoG4jrFWvyJ4EKUm34jsWfaXHMlq2HHf0vqoxV0NMyyHVW/pzIj8jYh8ZyC5xRTVWWgo
+ Rwh3scWiMX2SgCyFfIckYn3YTqgnmmffl/rwlRz6CNfMFDTqYJAhAwXhlSgqrm34yveU
+ ZJcA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778507879; x=1779112679;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=cqQs1JcXm1eUL7CfIgZCMoGxPWrlSxHVx9Aa+JWpc64=;
- b=ltuXQxovuk/Gxa1hKiRaPsLnM1i4fLCfBs/lHEf5oUkvn5a8UKiCHdq8pBlgEjkBsq
- ELZG1ahUT2PN7MHobIAFhGEQWH1ljSG/Z/G+iRdLZbSuIa9eQjFR1O+Ml5+Gkdxi+1fU
- Vb1AlY738wVCxTmYfSzfJvHgVEtw90OgWfemyEdzlvexxu7hOdGPtxdYw6qkkSsmjEJV
- uwGmYilOYHH5SA+E5TkqFgNnlXuZY/gNIxoT8NrlVeUxpVaxGGf+xOJE3wk3lgn/rORg
- 7YW6Y8TgmL2dC7SLq8J5y5wd/wn9ewHhJWXX4q+grkH18JsZQiD7MK3uAzKVD6/gQPc7
- s+NQ==
-X-Gm-Message-State: AOJu0YyClp3Q4WN0F+01WAtEIrOTGFHhia3tjpMkb4qTlxOh0pHl/fNg
- LxHT0HwNdVqBTnNPGLyYmKYKiqeZg/i/LYJ8dY0dxuhTsNwFuJTpq7NY30w6VoaXypo=
-X-Gm-Gg: Acq92OH3/TR/FEwLVtZixiNsjEw/DoB7aOmmxz0X7UepUJWlwMWaaH5Ni6I5KFDr+35
- QC6C6vMNBCXl3yI5hzWYvpcYIhAMUk46aJZaUYA7mt36p37hVTScZ6tNoAuG/eruEnHuQmgXrdj
- Yk3wFeEFDo+RPnvcobY+lPolNzaj72wmxpDqqWx+Lsq/ahynVnfwa+vtsxmYeWcmrrHnSUnC57Z
- dF0nyZFvUXvOJdDNcruKIrxyeCP0yMLQ3SD1aTnd0UrXylWqh1/Pp6vL0cO87pAsRJXvYCuQTia
- 0DVCM/0GsSbpIp4KmOJqIS9JcGXAhyAYVZ1It+sRNs8JZTjo8fBpGBaaUHu+LLl13tNASfoI/Mu
- /0Yw3XwCB7ZpetcsuNVqMcHzBzOkwTYh7yWmWEYar5Nb++8bphInGein7Y31FSEzlo2f84aF6yV
- paOGispNF2IiMnq8E5v7npjyYaKUMCyM3eTCDhb++0gcuCBnHe9k5sSjPdHtAvG0y4sE26KDQxe
- 6Ew2fE=
-X-Received: by 2002:a05:6402:5288:b0:67e:43a7:1764 with SMTP id
- 4fb4d7f45d1cf-67f716e0b40mr4810692a12.26.1778507879066; 
- Mon, 11 May 2026 06:57:59 -0700 (PDT)
-Received: from lion.localdomain (p4fc3dd86.dip0.t-ipconnect.de.
- [79.195.221.134]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-67ef0dfd34fsm3805377a12.14.2026.05.11.06.57.58
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 11 May 2026 06:57:58 -0700 (PDT)
-From: Casey Connolly <casey.connolly@linaro.org>
-Date: Mon, 11 May 2026 15:57:48 +0200
-Subject: [PATCH v7 6/6] configs: qcom: use mkmbn and stop building ELF
- files
+ d=1e100.net; s=20251104; t=1778508049; x=1779112849;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=vZg9tCpQQCN0RCyKCQhD/47Lt87+Bvp9kVtxZYLGCDg=;
+ b=B+nDq/kCdnhRxfs0+H9EdjGc/ByTZrfqKMb4AAk5JUj21PwlJXMtKMhLx/10beusW3
+ RZKdPRNSvdBoPbL4gpOfnFykHTQ0e2ppFqzG2mssMaYunrvhlDakuBKAQsVG3KtGxmmn
+ C9eQGa8UKa8b69EV6eiP2y2Eoy1sM3FXYAS1PFjvDcwg6m7335LEEp/CGMRBoyFQ3yK7
+ t/sX5Dm8uRtBJk/prLP540LjWa7Y00tM1uFV7AG0zB/OCnwWRx8IsN3PTFetPaUj8ROk
+ ic0/biyPi3ic5acWNQMl9aFL03RXQVOCSgbGNV6TFNK28cWhoxN5ZSKFjy8m8L/KFksK
+ Bkxg==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ/EadnXUxlVYvg0p6aqpKJ80pFUeXSq0EEdni0r6qGhSvHcgVsuXHqdikWwEY0decJ52y6WvmM=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx3z0h1cvXDCh5kZm7fEsKW5OEifbp9hb2Y6bh7V72VTUX0JzIH
+ 1NLkFGRlMGiOR5gnpMJabiI3M3S1+kUSVk+pDY8Q1ZRJBXNf2PctGQPCEOnALLcCLWc=
+X-Gm-Gg: Acq92OHpShluSeipQEkJU3sup/67/mQcAqED/LjCMWmkIB1bq/4Nlx//aZy/EYtD9aM
+ b0ge0FiqssG7jQSh1pxXUz9QyfAdboxiELke10a3VL5BF0wALjTUkYpHvSlAGRgTx8uY8m2pNSn
+ Z3YwFMhPVCDCFu5UHyh6ZDywjuJ185BxrzY1lzGepQuQSs5uHRGlqucis4DmCRBbf7sOIOE2Jz+
+ 7LwSyYspyQoic8cpEvnovDvTTmT8b+hmTaMDeEiKuCh3YsDFC5cAAp8QMUlcjx735NUL2Mv8QzB
+ vEM1W9z+FvpAQ24IyQSlzmq0QOZSdjEVlN6qRMMX6bggzkX9xjIrExvWed6YrLLMmZUr+o3hx/B
+ 3/kv7Km4EgQmxRI3d3/L0b1e22Q5/6F7b+kdis+ONm4s7TERYS2bjn1bu+GDMosmxm9azLKNR1b
+ SYZQUT1/Od9ToH0S5a4W7Ka573SyAjBg7nGEM3INUs4c73G0OU7ZKRa3QsgELbfp6Z3sQ6++G4E
+ j8Y
+X-Received: by 2002:a17:907:e101:b0:bd2:15b5:bf60 with SMTP id
+ a640c23a62f3a-bd215b5c4b3mr12009266b.3.1778508048622; 
+ Mon, 11 May 2026 07:00:48 -0700 (PDT)
+Received: from [192.168.1.36] (p4fc3dd86.dip0.t-ipconnect.de. [79.195.221.134])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-bcac3a7f425sm501124866b.40.2026.05.11.07.00.47
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 11 May 2026 07:00:47 -0700 (PDT)
+Message-ID: <85e696ff-e66c-4cd3-92d7-61edfe6493ab@linaro.org>
+Date: Mon, 11 May 2026 16:00:46 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260511-b4-qcom-tooling-improvements-v7-6-0c06346e79a9@linaro.org>
-References: <20260511-b4-qcom-tooling-improvements-v7-0-0c06346e79a9@linaro.org>
-In-Reply-To: <20260511-b4-qcom-tooling-improvements-v7-0-0c06346e79a9@linaro.org>
-To: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>, 
- u-boot-qcom@groups.io
-Cc: Tom Rini <trini@konsulko.com>, 
- Casey Connolly <casey.connolly@linaro.org>, 
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>, 
- Varadarajan Narayanan <quic_varada@quicinc.com>, 
- Quentin Schulz <quentin.schulz@cherry.de>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Peng Fan <peng.fan@nxp.com>, 
- Jaehoon Chung <jh80.chung@samsung.com>, 
- Aswin Murugan <aswin.murugan@oss.qualcomm.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Michal Simek <michal.simek@amd.com>, David Lechner <dlechner@baylibre.com>
-X-Mailer: b4 0.16-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=4310;
- i=casey.connolly@linaro.org; h=from:subject:message-id;
- bh=QW95m6QX17dqnnGyQQlhoEHyB8Wu85GIJBC0DK3TyPQ=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhizGB7G1XS8Xty0q7294H9wZGnPn9FGzZQ0zNdbF3drqI
- vgn9lV5RykLgyAHg6yYIov4iWWWTWsv22tsX3ABZg4rE8gQBi5OAZgI11qG/wHd5aqvz3vWfYuJ
- W/f7eQfHf0ezFKF1F6Onrz0of/TugucM/2N63F+Y58/69z9gyu4XiT7OH21bcpUWLNtV/KRMfqL
- 0MVsA
-X-Developer-Key: i=casey.connolly@linaro.org; a=openpgp;
- fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v7 09/11] mach-snapdragon: add board_spl.c and split out
+ common code
+Content-Language: en-US
+To: Michael Srba <Michael.Srba@seznam.cz>, u-boot@lists.denx.de,
+ Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io
+Cc: Tom Rini <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Simon Glass <sjg@chromium.org>, Peng Fan <peng.fan@nxp.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Jerome Forissier <jerome.forissier@arm.com>, Heiko Schocher
+ <hs@nabladev.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Lukasz Majewski <lukma@denx.de>, Neil Armstrong <neil.armstrong@linaro.org>,
+ Patrice Chotard <patrice.chotard@foss.st.com>
+References: <20260508-qcom_spl-v7-0-7d0e22aaaa8f@seznam.cz>
+ <20260508-qcom_spl-v7-9-7d0e22aaaa8f@seznam.cz>
+ <d965e291-51eb-4120-8740-1f14d739bc5c@linaro.org>
+ <6bc4f999-b37f-4961-9bed-17d45e1b77ac@seznam.cz>
+From: Casey Connolly <casey.connolly@linaro.org>
+In-Reply-To: <6bc4f999-b37f-4961-9bed-17d45e1b77ac@seznam.cz>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -120,122 +118,1015 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-With mkmbn integrated we now no longer need CONFIG_REMAKE_ELF to then
-run qtestsign and can instead just enable QCOM_GENERATE_MBN to have
-mkmbn emit an MBN file directly.
 
-While we're here, finally rename the db410c and 820c defconfigs to have
-the qcom_ prefix.
 
-Tested on qcs6490 and sm8550.
+On 11/05/2026 15:55, Michael Srba wrote:
+> 
+> 
+> On 5/11/26 15:33, Casey Connolly wrote:
+>> Hi Michael,
+>>
+>> On 08/05/2026 23:45, michael.srba@seznam.cz wrote:
+>>> From: Michael Srba <Michael.Srba@seznam.cz>
+>>>
+>>> Code in board.c will now only be compiled into U-Boot proper,
+>>> and the new board_spl.c will only be built into SPL.
+>>> Code in board_common.c is common to both phases.
+>>>
+>>> Also split out mem_map.c, which is currently common to both
+>>> phases since it seems to not cause issues in SPL. In the future
+>>> it should probably behave differenly in SPL, especially if dram
+>>> initialization is supported.
+>> Sorry to be a pest with this one, could you rebase this on the SMEM
+>> series since it also pulls out all the memory mapping stuff.
+>>
+>> Since the only thing you left in board_common.c is the board_usb_init(),
+>> it seems like it's only actually used in db410c at least according to a
+>> quick grep. Could you just move it over to board/qualcomm/
+>> dragonboard410c?
+>>
+>> Along with the other changes maybe most of the contents of board_spl.c
+>> should go into some board/qualcomm/sdm845-spl/board.c file or something?
+> but there's nothing sdm845-specific about it? SPL won't ever be passed
+> dt by a previous stage, empty board-init is a sensible default even
+> if someone wants to override it in specific cases, reset-cpu is a stub and
+> if qcom wants to implement it there's no good reason to use PSCI for that
+> so it can be universal (though an ifdef for the non-typical case
+> of late-in-the-chain SPL would probably still be cleaner than multiple
+> separate board.c files), and fully implemented spl_boot_device should check
+> what medium the BROM booted from (or at least if it was EDL, which is
+> in a hw register, not sure if emmc vs ufs vs sdcard vs spi needs awareness
+> of data passed from PBL), so again can be perfectly shared.
+> If DFU is not enabled in config then the USB boot branch can even
+> be ifdef'd away at compile time.
 
-Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
----
- configs/qcm6490_defconfig                                             | 2 +-
- configs/{dragonboard410c_defconfig => qcom_dragonboard410c_defconfig} | 2 +-
- configs/{dragonboard820c_defconfig => qcom_dragonboard820c_defconfig} | 0
- configs/qcom_ipq9574_mmc_defconfig                                    | 2 +-
- configs/qcom_qcs615_defconfig                                         | 2 +-
- configs/qcom_qcs8300_defconfig                                        | 2 +-
- configs/qcom_qcs9100_defconfig                                        | 2 +-
- 7 files changed, 6 insertions(+), 6 deletions(-)
+Alright, I'm a bit unsure how Qualcomm want to base their stuff on top
+so I'll defer to you and we can keep this as-is. fwiw the "sdm845-spl"
+naming is just arbitrary, if you can pick a better name please do.
 
-diff --git a/configs/qcm6490_defconfig b/configs/qcm6490_defconfig
-index b088367f86c0..56ec771ba1e4 100644
---- a/configs/qcm6490_defconfig
-+++ b/configs/qcm6490_defconfig
-@@ -9,9 +9,9 @@
- CONFIG_ARM=y
- 
- # Address where U-Boot will be loaded
- CONFIG_TEXT_BASE=0x9fc00000
--CONFIG_REMAKE_ELF=y
-+CONFIG_QCOM_GENERATE_MBN=y
- 
- CONFIG_DEFAULT_DEVICE_TREE="qcom/qcs6490-rb3gen2"
- 
- CONFIG_FASTBOOT_BUF_ADDR=0xd8800000
-diff --git a/configs/dragonboard410c_defconfig b/configs/qcom_dragonboard410c_defconfig
-similarity index 98%
-rename from configs/dragonboard410c_defconfig
-rename to configs/qcom_dragonboard410c_defconfig
-index 51ad265688c4..e93f5f3094f4 100644
---- a/configs/dragonboard410c_defconfig
-+++ b/configs/qcom_dragonboard410c_defconfig
-@@ -11,9 +11,9 @@ CONFIG_ENV_OFFSET=0x0
- CONFIG_DEFAULT_DEVICE_TREE="qcom/apq8016-sbc"
- CONFIG_OF_LIBFDT_OVERLAY=y
- CONFIG_SYS_LOAD_ADDR=0x80080000
- CONFIG_IDENT_STRING="\nQualcomm-DragonBoard 410C"
--CONFIG_REMAKE_ELF=y
-+CONFIG_QCOM_GENERATE_MBN=y
- CONFIG_BUTTON_CMD=y
- CONFIG_FIT=y
- CONFIG_BOOTSTD_FULL=y
- CONFIG_OF_BOARD_SETUP=y
-diff --git a/configs/dragonboard820c_defconfig b/configs/qcom_dragonboard820c_defconfig
-similarity index 100%
-rename from configs/dragonboard820c_defconfig
-rename to configs/qcom_dragonboard820c_defconfig
-diff --git a/configs/qcom_ipq9574_mmc_defconfig b/configs/qcom_ipq9574_mmc_defconfig
-index 6592d9de39da..98614f6196b2 100644
---- a/configs/qcom_ipq9574_mmc_defconfig
-+++ b/configs/qcom_ipq9574_mmc_defconfig
-@@ -11,9 +11,9 @@ CONFIG_DEFAULT_DEVICE_TREE="qcom/ipq9574-rdp433"
- CONFIG_SYS_LOAD_ADDR=0x50000000
- CONFIG_DEBUG_UART_BASE=0x78b1000
- CONFIG_DEBUG_UART_CLOCK=1843200
- CONFIG_DEBUG_UART=y
--CONFIG_REMAKE_ELF=y
-+CONFIG_QCOM_GENERATE_MBN=y
- # CONFIG_EFI_LOADER is not set
- CONFIG_FIT=y
- CONFIG_FIT_VERBOSE=y
- # CONFIG_BOOTSTD is not set
-diff --git a/configs/qcom_qcs615_defconfig b/configs/qcom_qcs615_defconfig
-index 27666a8129d7..f4760703c94a 100644
---- a/configs/qcom_qcs615_defconfig
-+++ b/configs/qcom_qcs615_defconfig
-@@ -15,9 +15,9 @@ CONFIG_DEBUG_UART_MSM_GENI=y
- CONFIG_DEBUG_UART_CLOCK=7372800
- 
- CONFIG_DEFAULT_DEVICE_TREE="qcom/qcs615-ride"
- 
--CONFIG_REMAKE_ELF=y
-+CONFIG_QCOM_GENERATE_MBN=y
- 
- # Address where U-Boot will be loaded
- CONFIG_TEXT_BASE=0x9fc00000
- 
-diff --git a/configs/qcom_qcs8300_defconfig b/configs/qcom_qcs8300_defconfig
-index 5fffcddc16e9..8ff790f2889d 100644
---- a/configs/qcom_qcs8300_defconfig
-+++ b/configs/qcom_qcs8300_defconfig
-@@ -15,7 +15,7 @@ CONFIG_DEBUG_UART_MSM_GENI=y
- CONFIG_DEBUG_UART_CLOCK=14745600
- 
- # Address where U-Boot will be loaded
- CONFIG_TEXT_BASE=0xaf000000
--CONFIG_REMAKE_ELF=y
-+CONFIG_QCOM_GENERATE_MBN=y
- 
- CONFIG_DEFAULT_DEVICE_TREE="qcom/qcs8300-ride"
-diff --git a/configs/qcom_qcs9100_defconfig b/configs/qcom_qcs9100_defconfig
-index 082106157bbc..84b2b9a1bd1b 100644
---- a/configs/qcom_qcs9100_defconfig
-+++ b/configs/qcom_qcs9100_defconfig
-@@ -6,9 +6,9 @@
- #include "qcom_defconfig"
- 
- # Address where U-Boot will be loaded
- CONFIG_TEXT_BASE=0xaf000000
--CONFIG_REMAKE_ELF=y
-+CONFIG_QCOM_GENERATE_MBN=y
- CONFIG_FASTBOOT_BUF_ADDR=0xdb300000
- CONFIG_DEFAULT_DEVICE_TREE="qcom/qcs9100-ride-r3"
- CONFIG_ENV_IS_IN_SCSI=y
- CONFIG_ENV_SCSI_PART_UUID="71cb9cd0-acf1-b6cb-ad91-be9572fe11a9"
+Sumit: any thoughts on how to align these approaches and keep it all
+maintainable?
+
+>> I'd expect with qcom also doing SPL stuff there will be some conflicting
+>> implementations we'll need to handle at build time and this might be the
+>> easiest way to handle it.
+>>
+>>> Signed-off-by: Michael Srba <Michael.Srba@seznam.cz>
+>>> Reviewed-by: Simon Glass <sjg@chromium.org>
+>>> ---
+>>>   arch/arm/mach-snapdragon/Makefile       |   8 +
+>>>   arch/arm/mach-snapdragon/board.c        | 358
+>>> +-------------------------------
+>>>   arch/arm/mach-snapdragon/board_common.c |  56 +++++
+>>>   arch/arm/mach-snapdragon/board_spl.c    |  35 ++++
+>>>   arch/arm/mach-snapdragon/mem_map.c      | 318 +++++++++++++++++++++
+>>> +++++++
+>>>   arch/arm/mach-snapdragon/qcom-priv.h    |   4 +-
+>>>   6 files changed, 429 insertions(+), 350 deletions(-)
+>>>
+>>> diff --git a/arch/arm/mach-snapdragon/Makefile b/arch/arm/mach-
+>>> snapdragon/Makefile
+>>> index 343e825c6fd..4b265b746ce 100644
+>>> --- a/arch/arm/mach-snapdragon/Makefile
+>>> +++ b/arch/arm/mach-snapdragon/Makefile
+>>> @@ -2,6 +2,14 @@
+>>>   #
+>>>   # (C) Copyright 2015 Mateusz Kulikowski <mateusz.kulikowski@gmail.com>
+>>>   +obj-y += board_common.o
+>>> +obj-y += mem_map.o
+>>> +
+>>> +ifeq ($(CONFIG_SPL_BUILD),y)
+>>> +obj-y += board_spl.o
+>>> +else
+>>>   obj-y += board.o
+>>>   obj-$(CONFIG_EFI_HAVE_CAPSULE_SUPPORT) += capsule_update.o
+>>> +endif
+>>> +
+>>>   obj-$(CONFIG_OF_LIVE) += of_fixup.o
+>>> diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-
+>>> snapdragon/board.c
+>>> index 829a0109ac7..a20c9853789 100644
+>>> --- a/arch/arm/mach-snapdragon/board.c
+>>> +++ b/arch/arm/mach-snapdragon/board.c
+>>> @@ -1,6 +1,7 @@
+>>>   // SPDX-License-Identifier: GPL-2.0+
+>>>   /*
+>>>    * Common initialisation for Qualcomm Snapdragon boards.
+>>> + * U-Boot proper only, see board_common.c for parts shared with SPL
+>>>    *
+>>>    * Copyright (c) 2024 Linaro Ltd.
+>>>    * Author: Casey Connolly <casey.connolly@linaro.org>
+>>> @@ -9,155 +10,21 @@
+>>>   #define LOG_CATEGORY LOGC_BOARD
+>>>   #define pr_fmt(fmt) "QCOM: " fmt
+>>>   -#include <asm/armv8/mmu.h>
+>>> -#include <asm/gpio.h>
+>>> -#include <asm/io.h>
+>>> -#include <asm/psci.h>
+>>> -#include <asm/system.h>
+>>> -#include <dm/device.h>
+>>> -#include <dm/pinctrl.h>
+>>> -#include <dm/uclass-internal.h>
+>>> -#include <dm/read.h>
+>>> -#include <power/regulator.h>
+>>> +#include <dm/ofnode.h>
+>>>   #include <env.h>
+>>>   #include <fdt_support.h>
+>>>   #include <init.h>
+>>>   #include <linux/arm-smccc.h>
+>>> -#include <linux/bug.h>
+>>> +#include <linux/errno.h>
+>>>   #include <linux/psci.h>
+>>>   #include <linux/sizes.h>
+>>>   #include <lmb.h>
+>>> -#include <malloc.h>
+>>> -#include <fdt_support.h>
+>>> -#include <usb.h>
+>>> -#include <sort.h>
+>>> -#include <time.h>
+>>>     #include "qcom-priv.h"
+>>>   -DECLARE_GLOBAL_DATA_PTR;
+>>> -
+>>>   enum qcom_boot_source qcom_boot_source __section(".data") = 0;
+>>>   -static struct mm_region rbx_mem_map[CONFIG_NR_DRAM_BANKS + 2] =
+>>> { { 0 } };
+>>> -
+>>> -struct mm_region *mem_map = rbx_mem_map;
+>>> -
+>>> -static struct {
+>>> -    phys_addr_t start;
+>>> -    phys_size_t size;
+>>> -} prevbl_ddr_banks[CONFIG_NR_DRAM_BANKS] __section(".data") = { 0 };
+>>> -
+>>> -int dram_init(void)
+>>> -{
+>>> -    /*
+>>> -     * gd->ram_base / ram_size have been setup already
+>>> -     * in qcom_parse_memory().
+>>> -     */
+>>> -    return 0;
+>>> -}
+>>> -
+>>> -static int ddr_bank_cmp(const void *v1, const void *v2)
+>>> -{
+>>> -    const struct {
+>>> -        phys_addr_t start;
+>>> -        phys_size_t size;
+>>> -    } *res1 = v1, *res2 = v2;
+>>> -
+>>> -    if (!res1->size)
+>>> -        return 1;
+>>> -    if (!res2->size)
+>>> -        return -1;
+>>> -
+>>> -    return (res1->start >> 24) - (res2->start >> 24);
+>>> -}
+>>> -
+>>> -/* This has to be done post-relocation since gd->bd isn't preserved */
+>>> -static void qcom_configure_bi_dram(void)
+>>> -{
+>>> -    int i;
+>>> -
+>>> -    for (i = 0; i < CONFIG_NR_DRAM_BANKS; i++) {
+>>> -        gd->bd->bi_dram[i].start = prevbl_ddr_banks[i].start;
+>>> -        gd->bd->bi_dram[i].size = prevbl_ddr_banks[i].size;
+>>> -    }
+>>> -}
+>>> -
+>>> -int dram_init_banksize(void)
+>>> -{
+>>> -    qcom_configure_bi_dram();
+>>> -
+>>> -    return 0;
+>>> -}
+>>> -
+>>> -/**
+>>> - * The generic memory parsing code in U-Boot lacks a few things that we
+>>> - * need on Qualcomm:
+>>> - *
+>>> - * 1. It sets gd->ram_size and gd->ram_base to represent a single
+>>> memory block
+>>> - * 2. setup_dest_addr() later relocates U-Boot to ram_base +
+>>> ram_size, the end
+>>> - *    of that first memory block.
+>>> - *
+>>> - * This results in all memory beyond U-Boot being unusable in Linux
+>>> when booting
+>>> - * with EFI.
+>>> - *
+>>> - * Since the ranges in the memory node may be out of order, the only
+>>> way for us
+>>> - * to correctly determine the relocation address for U-Boot is to
+>>> parse all
+>>> - * memory regions and find the highest valid address.
+>>> - *
+>>> - * We can't use fdtdec_setup_memory_banksize() since it stores the
+>>> result in
+>>> - * gd->bd, which is not yet allocated.
+>>> - *
+>>> - * @fdt: FDT blob to parse /memory node from
+>>> - *
+>>> - * Return: 0 on success or -ENODATA if /memory node is missing or
+>>> incomplete
+>>> - */
+>>> -static int qcom_parse_memory(const void *fdt)
+>>> -{
+>>> -    int offset;
+>>> -    const fdt64_t *memory;
+>>> -    int memsize;
+>>> -    phys_addr_t ram_end = 0;
+>>> -    int i, j, banks;
+>>> -
+>>> -    offset = fdt_path_offset(fdt, "/memory");
+>>> -    if (offset < 0)
+>>> -        return -ENODATA;
+>>> -
+>>> -    memory = fdt_getprop(fdt, offset, "reg", &memsize);
+>>> -    if (!memory)
+>>> -        return -ENODATA;
+>>> -
+>>> -    banks = min(memsize / (2 * sizeof(u64)),
+>>> (ulong)CONFIG_NR_DRAM_BANKS);
+>>> -
+>>> -    if (memsize / sizeof(u64) > CONFIG_NR_DRAM_BANKS * 2)
+>>> -        log_err("Provided more than the max of %d memory banks\n",
+>>> CONFIG_NR_DRAM_BANKS);
+>>> -
+>>> -    if (banks > CONFIG_NR_DRAM_BANKS)
+>>> -        log_err("Provided more memory banks than we can handle\n");
+>>> -
+>>> -    for (i = 0, j = 0; i < banks * 2; i += 2, j++) {
+>>> -        prevbl_ddr_banks[j].start = get_unaligned_be64(&memory[i]);
+>>> -        prevbl_ddr_banks[j].size = get_unaligned_be64(&memory[i + 1]);
+>>> -        if (!prevbl_ddr_banks[j].size) {
+>>> -            j--;
+>>> -            continue;
+>>> -        }
+>>> -        ram_end = max(ram_end, prevbl_ddr_banks[j].start +
+>>> prevbl_ddr_banks[j].size);
+>>> -    }
+>>> -
+>>> -    if (!banks || !prevbl_ddr_banks[0].size)
+>>> -        return -ENODATA;
+>>> -
+>>> -    /* Sort our RAM banks -_- */
+>>> -    qsort(prevbl_ddr_banks, banks, sizeof(prevbl_ddr_banks[0]),
+>>> ddr_bank_cmp);
+>>> -
+>>> -    gd->ram_base = prevbl_ddr_banks[0].start;
+>>> -    gd->ram_size = ram_end - gd->ram_base;
+>>> -
+>>> -    return 0;
+>>> -}
+>>> -
+>>> +#if CONFIG_IS_ENABLED(SYSRESET_PSCI)
+>>>   static void show_psci_version(void)
+>>>   {
+>>>       struct arm_smccc_res res;
+>>> @@ -199,6 +66,7 @@ static void qcom_psci_fixup(void *fdt)
+>>>       if (ret)
+>>>           log_err("Failed to delete /psci node: %d\n", ret);
+>>>   }
+>>> +#endif
+>>>     /* We support booting U-Boot with an internal DT when running as
+>>> a first-stage bootloader
+>>>    * or for supporting quirky devices where it's easier to leave the
+>>> downstream DT in place
+>>> @@ -258,49 +126,13 @@ int board_fdt_blob_setup(void **fdtp)
+>>>           ret = 0;
+>>>       }
+>>>   +#if CONFIG_IS_ENABLED(SYSRESET_PSCI)
+>>>       qcom_psci_fixup(*fdtp);
+>>> +#endif
+>>>         return ret;
+>>>   }
+>>>   -/*
+>>> - * Some Qualcomm boards require GPIO configuration when switching
+>>> USB modes.
+>>> - * Support setting this configuration via pinctrl state.
+>>> - */
+>>> -int board_usb_init(int index, enum usb_init_type init)
+>>> -{
+>>> -    struct udevice *usb;
+>>> -    int ret = 0;
+>>> -
+>>> -    /* USB device */
+>>> -    ret = uclass_find_device_by_seq(UCLASS_USB, index, &usb);
+>>> -    if (ret) {
+>>> -        printf("Cannot find USB device\n");
+>>> -        return ret;
+>>> -    }
+>>> -
+>>> -    ret = dev_read_stringlist_search(usb, "pinctrl-names",
+>>> -                     "device");
+>>> -    /* No "device" pinctrl state, so just bail */
+>>> -    if (ret < 0)
+>>> -        return 0;
+>>> -
+>>> -    /* Select "default" or "device" pinctrl */
+>>> -    switch (init) {
+>>> -    case USB_INIT_HOST:
+>>> -        pinctrl_select_state(usb, "default");
+>>> -        break;
+>>> -    case USB_INIT_DEVICE:
+>>> -        pinctrl_select_state(usb, "device");
+>>> -        break;
+>>> -    default:
+>>> -        debug("Unknown usb_init_type %d\n", init);
+>>> -        break;
+>>> -    }
+>>> -
+>>> -    return 0;
+>>> -}
+>>> -
+>>>   /*
+>>>    * Some boards still need board specific init code, they can
+>>> implement that by
+>>>    * overriding this function.
+>>> @@ -313,7 +145,9 @@ void __weak qcom_board_init(void)
+>>>     int board_init(void)
+>>>   {
+>>> +#if CONFIG_IS_ENABLED(SYSRESET_PSCI) && !defined(CONFIG_SPL_BUILD)
+>>>       show_psci_version();
+>>> +#endif
+>>>       qcom_board_init();
+>>>       return 0;
+>>>   }
+>>> @@ -580,177 +414,3 @@ int board_late_init(void)
+>>>         return 0;
+>>>   }
+>>> -
+>>> -static void build_mem_map(void)
+>>> -{
+>>> -    int i, j;
+>>> -
+>>> -    /*
+>>> -     * Ensure the peripheral block is sized to correctly cover the
+>>> address range
+>>> -     * up to the first memory bank.
+>>> -     * Don't map the first page to ensure that we actually trigger
+>>> an abort on a
+>>> -     * null pointer access rather than just hanging.
+>>> -     * FIXME: we should probably split this into more precise regions
+>>> -     */
+>>> -    mem_map[0].phys = 0x1000;
+>>> -    mem_map[0].virt = mem_map[0].phys;
+>>> -    mem_map[0].size = gd->bd->bi_dram[0].start - mem_map[0].phys;
+>>> -    mem_map[0].attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
+>>> -             PTE_BLOCK_NON_SHARE |
+>>> -             PTE_BLOCK_PXN | PTE_BLOCK_UXN;
+>>> -
+>>> -    for (i = 1, j = 0; i < ARRAY_SIZE(rbx_mem_map) - 1 && gd->bd-
+>>> >bi_dram[j].size; i++, j++) {
+>>> -        mem_map[i].phys = gd->bd->bi_dram[j].start;
+>>> -        mem_map[i].virt = mem_map[i].phys;
+>>> -        mem_map[i].size = gd->bd->bi_dram[j].size;
+>>> -        mem_map[i].attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) | \
+>>> -                   PTE_BLOCK_INNER_SHARE;
+>>> -    }
+>>> -
+>>> -    mem_map[i].phys = UINT64_MAX;
+>>> -    mem_map[i].size = 0;
+>>> -
+>>> -#ifdef DEBUG
+>>> -    debug("Configured memory map:\n");
+>>> -    for (i = 0; mem_map[i].size; i++)
+>>> -        debug("  0x%016llx - 0x%016llx: entry %d\n",
+>>> -              mem_map[i].phys, mem_map[i].phys + mem_map[i].size, i);
+>>> -#endif
+>>> -}
+>>> -
+>>> -u64 get_page_table_size(void)
+>>> -{
+>>> -    return SZ_1M;
+>>> -}
+>>> -
+>>> -static int fdt_cmp_res(const void *v1, const void *v2)
+>>> -{
+>>> -    const struct fdt_resource *res1 = v1, *res2 = v2;
+>>> -
+>>> -    return res1->start - res2->start;
+>>> -}
+>>> -
+>>> -#define N_RESERVED_REGIONS 32
+>>> -
+>>> -/* Mark all no-map regions as PTE_TYPE_FAULT to prevent speculative
+>>> access.
+>>> - * On some platforms this is enough to trigger a security violation
+>>> and trap
+>>> - * to EL3.
+>>> - */
+>>> -static void carve_out_reserved_memory(void)
+>>> -{
+>>> -    static struct fdt_resource res[N_RESERVED_REGIONS] = { 0 };
+>>> -    int parent, rmem, count, i = 0;
+>>> -    phys_addr_t start;
+>>> -    size_t size;
+>>> -
+>>> -    /* Some reserved nodes must be carved out, as the cache-
+>>> prefetcher may otherwise
+>>> -     * attempt to access them, causing a security exception.
+>>> -     */
+>>> -    parent = fdt_path_offset(gd->fdt_blob, "/reserved-memory");
+>>> -    if (parent <= 0) {
+>>> -        log_err("No reserved memory regions found\n");
+>>> -        return;
+>>> -    }
+>>> -
+>>> -    /* Collect the reserved memory regions */
+>>> -    fdt_for_each_subnode(rmem, gd->fdt_blob, parent) {
+>>> -        const fdt32_t *ptr;
+>>> -        int len;
+>>> -        if (!fdt_getprop(gd->fdt_blob, rmem, "no-map", NULL))
+>>> -            continue;
+>>> -
+>>> -        if (i == N_RESERVED_REGIONS) {
+>>> -            log_err("Too many reserved regions!\n");
+>>> -            break;
+>>> -        }
+>>> -
+>>> -        /* Read the address and size out from the reg property.
+>>> Doing this "properly" with
+>>> -         * fdt_get_resource() takes ~70ms on SDM845, but open-coding
+>>> the happy path here
+>>> -         * takes <1ms... Oh the woes of no dcache.
+>>> -         */
+>>> -        ptr = fdt_getprop(gd->fdt_blob, rmem, "reg", &len);
+>>> -        if (ptr) {
+>>> -            /* Qualcomm devices use #address/size-cells = <2> but
+>>> all reserved regions are within
+>>> -             * the 32-bit address space. So we can cheat here for
+>>> speed.
+>>> -             */
+>>> -            res[i].start = fdt32_to_cpu(ptr[1]);
+>>> -            res[i].end = res[i].start + fdt32_to_cpu(ptr[3]);
+>>> -            i++;
+>>> -        }
+>>> -    }
+>>> -
+>>> -    /* Sort the reserved memory regions by address */
+>>> -    count = i;
+>>> -    qsort(res, count, sizeof(struct fdt_resource), fdt_cmp_res);
+>>> -
+>>> -    /* Now set the right attributes for them. Often a lot of the
+>>> regions are tightly packed together
+>>> -     * so we can optimise the number of calls to
+>>> mmu_change_region_attr() by combining adjacent
+>>> -     * regions.
+>>> -     */
+>>> -    start = ALIGN_DOWN(res[0].start, SZ_2M);
+>>> -    size = ALIGN(res[0].end - start, SZ_2M);
+>>> -    for (i = 1; i <= count; i++) {
+>>> -        /* We ideally want to 2M align everything for more efficient
+>>> pagetables, but we must avoid
+>>> -         * overwriting reserved memory regions which shouldn't be
+>>> mapped as FAULT (like those with
+>>> -         * compatible properties).
+>>> -         * If within 2M of the previous region, bump the size to
+>>> include this region. Otherwise
+>>> -         * start a new region.
+>>> -         */
+>>> -        if (i == count || start + size < res[i].start - SZ_2M) {
+>>> -            debug("  0x%016llx - 0x%016llx: reserved\n",
+>>> -                  start, start + size);
+>>> -            mmu_change_region_attr(start, size, PTE_TYPE_FAULT);
+>>> -            /* If this is the final region then quit here before we
+>>> index
+>>> -             * out of bounds...
+>>> -             */
+>>> -            if (i == count)
+>>> -                break;
+>>> -            start = ALIGN_DOWN(res[i].start, SZ_2M);
+>>> -            size = ALIGN(res[i].end - start, SZ_2M);
+>>> -        } else {
+>>> -            /* Bump size if this region is immediately after the
+>>> previous one */
+>>> -            size = ALIGN(res[i].end - start, SZ_2M);
+>>> -        }
+>>> -    }
+>>> -}
+>>> -
+>>> -/* This function open-codes setup_all_pgtables() so that we can
+>>> - * insert additional mappings *before* turning on the MMU.
+>>> - */
+>>> -void enable_caches(void)
+>>> -{
+>>> -    u64 tlb_addr = gd->arch.tlb_addr;
+>>> -    u64 tlb_size = gd->arch.tlb_size;
+>>> -    u64 pt_size;
+>>> -    ulong carveout_start;
+>>> -
+>>> -    gd->arch.tlb_fillptr = tlb_addr;
+>>> -
+>>> -    build_mem_map();
+>>> -
+>>> -    icache_enable();
+>>> -
+>>> -    /* Create normal system page tables */
+>>> -    setup_pgtables();
+>>> -
+>>> -    pt_size = (uintptr_t)gd->arch.tlb_fillptr -
+>>> -          (uintptr_t)gd->arch.tlb_addr;
+>>> -    debug("Primary pagetable size: %lluKiB\n", pt_size / 1024);
+>>> -
+>>> -    /* Create emergency page tables */
+>>> -    gd->arch.tlb_size -= pt_size;
+>>> -    gd->arch.tlb_addr = gd->arch.tlb_fillptr;
+>>> -    setup_pgtables();
+>>> -    gd->arch.tlb_emerg = gd->arch.tlb_addr;
+>>> -    gd->arch.tlb_addr = tlb_addr;
+>>> -    gd->arch.tlb_size = tlb_size;
+>>> -
+>>> -    /* We do the carveouts only for QCS404, for now. */
+>>> -    if (fdt_node_check_compatible(gd->fdt_blob, 0, "qcom,qcs404") ==
+>>> 0) {
+>>> -        carveout_start = get_timer(0);
+>>> -        /* Takes ~20-50ms on SDM845 */
+>>> -        carve_out_reserved_memory();
+>>> -        debug("carveout time: %lums\n", get_timer(carveout_start));
+>>> -    }
+>>> -    dcache_enable();
+>>> -}
+>>> diff --git a/arch/arm/mach-snapdragon/board_common.c b/arch/arm/mach-
+>>> snapdragon/board_common.c
+>>> new file mode 100644
+>>> index 00000000000..f6daeb6edf4
+>>> --- /dev/null
+>>> +++ b/arch/arm/mach-snapdragon/board_common.c
+>>> @@ -0,0 +1,56 @@
+>>> +// SPDX-License-Identifier: GPL-2.0+
+>>> +/*
+>>> + * Common initialisation for Qualcomm Snapdragon boards.
+>>> + *
+>>> + * Copyright (c) 2024 Linaro Ltd.
+>>> + * Author: Casey Connolly <casey.connolly@linaro.org>
+>>> + */
+>>> +
+>>> +#define LOG_CATEGORY LOGC_BOARD
+>>> +#define pr_fmt(fmt) "QCOM: " fmt
+>>> +
+>>> +#include <dm/device.h>
+>>> +#include <dm/pinctrl.h>
+>>> +#include <dm/uclass-internal.h>
+>>> +#include <dm/read.h>
+>>> +#include <usb.h>
+>>> +
+>>> +#include "qcom-priv.h"
+>>> +
+>>> +/*
+>>> + * Some Qualcomm boards require GPIO configuration when switching
+>>> USB modes.
+>>> + * Support setting this configuration via pinctrl state.
+>>> + */
+>>> +int board_usb_init(int index, enum usb_init_type init)
+>>> +{
+>>> +    struct udevice *usb;
+>>> +    int ret = 0;
+>>> +
+>>> +    /* USB device */
+>>> +    ret = uclass_find_device_by_seq(UCLASS_USB, index, &usb);
+>>> +    if (ret) {
+>>> +        printf("Cannot find USB device\n");
+>>> +        return ret;
+>>> +    }
+>>> +
+>>> +    ret = dev_read_stringlist_search(usb, "pinctrl-names",
+>>> +                     "device");
+>>> +    /* No "device" pinctrl state, so just bail */
+>>> +    if (ret < 0)
+>>> +        return 0;
+>>> +
+>>> +    /* Select "default" or "device" pinctrl */
+>>> +    switch (init) {
+>>> +    case USB_INIT_HOST:
+>>> +        pinctrl_select_state(usb, "default");
+>>> +        break;
+>>> +    case USB_INIT_DEVICE:
+>>> +        pinctrl_select_state(usb, "device");
+>>> +        break;
+>>> +    default:
+>>> +        debug("Unknown usb_init_type %d\n", init);
+>>> +        break;
+>>> +    }
+>>> +
+>>> +    return 0;
+>>> +}
+>>> diff --git a/arch/arm/mach-snapdragon/board_spl.c b/arch/arm/mach-
+>>> snapdragon/board_spl.c
+>>> new file mode 100644
+>>> index 00000000000..19260975063
+>>> --- /dev/null
+>>> +++ b/arch/arm/mach-snapdragon/board_spl.c
+>>> @@ -0,0 +1,35 @@
+>>> +// SPDX-License-Identifier: GPL-2.0+
+>>> +/*
+>>> + * Common SPL code for Qualcomm Snapdragon boards.
+>>> + *
+>>> + * Copyright (c) 2026 Michael Srba <Michael.Srba@seznam.cz>
+>>> + */
+>>> +
+>>> +#include <hang.h>
+>>> +#include <spl.h>
+>>> +
+>>> +/* in SPL, we always use internal DT */
+>>> +int board_fdt_blob_setup(void **fdtp)
+>>> +{
+>>> +    return -EEXIST;
+>>> +}
+>>> +
+>>> +int board_init(void)
+>>> +{
+>>> +    return 0;
+>>> +}
+>>> +
+>>> +__weak void reset_cpu(void)
+>>> +{
+>>> +    /* This should currently not get called in non-error paths, so
+>>> just hang */
+>>> +    printf("reset_cpu called, going to hang()\n");
+>>> +    hang();
+>>> +}
+>>> +
+>>> +u32 spl_boot_device(void)
+>>> +{
+>>> +    /* TODO: check boot reason to support UFS and sdcard */
+>>> +    u32 boot_device = BOOT_DEVICE_DFU;
+>>> +
+>>> +    return boot_device;
+>>> +}
+>>> diff --git a/arch/arm/mach-snapdragon/mem_map.c b/arch/arm/mach-
+>>> snapdragon/mem_map.c
+>>> new file mode 100644
+>>> index 00000000000..70e3c1d1fcc
+>>> --- /dev/null
+>>> +++ b/arch/arm/mach-snapdragon/mem_map.c
+>>> @@ -0,0 +1,318 @@
+>>> +// SPDX-License-Identifier: GPL-2.0+
+>>> +/*
+>>> + * Common initialisation for Qualcomm Snapdragon boards.
+>>> + *
+>>> + * Copyright (c) 2024 Linaro Ltd.
+>>> + * Author: Casey Connolly <casey.connolly@linaro.org>
+>>> + */
+>>> +
+>>> +#define LOG_CATEGORY LOGC_BOARD
+>>> +#define pr_fmt(fmt) "QCOM: " fmt
+>>> +
+>>> +#include <asm/armv8/mmu.h>
+>>> +#include <asm/global_data.h>
+>>> +#include <asm/system.h>
+>>> +#include <asm-generic/unaligned.h>
+>>> +#include <cpu_func.h>
+>>> +#include <fdt_support.h>
+>>> +#include <linux/errno.h>
+>>> +#include <linux/sizes.h>
+>>> +#include <sort.h>
+>>> +#include <time.h>
+>>> +
+>>> +#include "qcom-priv.h"
+>>> +
+>>> +DECLARE_GLOBAL_DATA_PTR;
+>>> +
+>>> +static struct mm_region rbx_mem_map[CONFIG_NR_DRAM_BANKS + 2] =
+>>> { { 0 } };
+>>> +
+>>> +struct mm_region *mem_map = rbx_mem_map;
+>>> +
+>>> +static struct {
+>>> +    phys_addr_t start;
+>>> +    phys_size_t size;
+>>> +} prevbl_ddr_banks[CONFIG_NR_DRAM_BANKS] __section(".data") = { 0 };
+>>> +
+>>> +int dram_init(void)
+>>> +{
+>>> +    /*
+>>> +     * gd->ram_base / ram_size have been setup already
+>>> +     * in qcom_parse_memory().
+>>> +     */
+>>> +    return 0;
+>>> +}
+>>> +
+>>> +static int ddr_bank_cmp(const void *v1, const void *v2)
+>>> +{
+>>> +    const struct {
+>>> +        phys_addr_t start;
+>>> +        phys_size_t size;
+>>> +    } *res1 = v1, *res2 = v2;
+>>> +
+>>> +    if (!res1->size)
+>>> +        return 1;
+>>> +    if (!res2->size)
+>>> +        return -1;
+>>> +
+>>> +    return (res1->start >> 24) - (res2->start >> 24);
+>>> +}
+>>> +
+>>> +/* This has to be done post-relocation since gd->bd isn't preserved */
+>>> +static void qcom_configure_bi_dram(void)
+>>> +{
+>>> +    int i;
+>>> +
+>>> +    for (i = 0; i < CONFIG_NR_DRAM_BANKS; i++) {
+>>> +        gd->bd->bi_dram[i].start = prevbl_ddr_banks[i].start;
+>>> +        gd->bd->bi_dram[i].size = prevbl_ddr_banks[i].size;
+>>> +    }
+>>> +}
+>>> +
+>>> +int dram_init_banksize(void)
+>>> +{
+>>> +    qcom_configure_bi_dram();
+>>> +
+>>> +    return 0;
+>>> +}
+>>> +
+>>> +/**
+>>> + * The generic memory parsing code in U-Boot lacks a few things that we
+>>> + * need on Qualcomm:
+>>> + *
+>>> + * 1. It sets gd->ram_size and gd->ram_base to represent a single
+>>> memory block
+>>> + * 2. setup_dest_addr() later relocates U-Boot to ram_base +
+>>> ram_size, the end
+>>> + *    of that first memory block.
+>>> + *
+>>> + * This results in all memory beyond U-Boot being unusable in Linux
+>>> when booting
+>>> + * with EFI.
+>>> + *
+>>> + * Since the ranges in the memory node may be out of order, the only
+>>> way for us
+>>> + * to correctly determine the relocation address for U-Boot is to
+>>> parse all
+>>> + * memory regions and find the highest valid address.
+>>> + *
+>>> + * We can't use fdtdec_setup_memory_banksize() since it stores the
+>>> result in
+>>> + * gd->bd, which is not yet allocated.
+>>> + *
+>>> + * @fdt: FDT blob to parse /memory node from
+>>> + *
+>>> + * Return: 0 on success or -ENODATA if /memory node is missing or
+>>> incomplete
+>>> + */
+>>> +int qcom_parse_memory(const void *fdt)
+>>> +{
+>>> +    int offset;
+>>> +    const fdt64_t *memory;
+>>> +    int memsize;
+>>> +    phys_addr_t ram_end = 0;
+>>> +    int i, j, banks;
+>>> +
+>>> +    offset = fdt_path_offset(fdt, "/memory");
+>>> +    if (offset < 0)
+>>> +        return -ENODATA;
+>>> +
+>>> +    memory = fdt_getprop(fdt, offset, "reg", &memsize);
+>>> +    if (!memory)
+>>> +        return -ENODATA;
+>>> +
+>>> +    banks = min(memsize / (2 * sizeof(u64)),
+>>> (ulong)CONFIG_NR_DRAM_BANKS);
+>>> +
+>>> +    if (memsize / sizeof(u64) > CONFIG_NR_DRAM_BANKS * 2)
+>>> +        log_err("Provided more than the max of %d memory banks\n",
+>>> CONFIG_NR_DRAM_BANKS);
+>>> +
+>>> +    if (banks > CONFIG_NR_DRAM_BANKS)
+>>> +        log_err("Provided more memory banks than we can handle\n");
+>>> +
+>>> +    for (i = 0, j = 0; i < banks * 2; i += 2, j++) {
+>>> +        prevbl_ddr_banks[j].start = get_unaligned_be64(&memory[i]);
+>>> +        prevbl_ddr_banks[j].size = get_unaligned_be64(&memory[i + 1]);
+>>> +        if (!prevbl_ddr_banks[j].size) {
+>>> +            j--;
+>>> +            continue;
+>>> +        }
+>>> +        ram_end = max(ram_end, prevbl_ddr_banks[j].start +
+>>> prevbl_ddr_banks[j].size);
+>>> +    }
+>>> +
+>>> +    if (!banks || !prevbl_ddr_banks[0].size)
+>>> +        return -ENODATA;
+>>> +
+>>> +    /* Sort our RAM banks -_- */
+>>> +    qsort(prevbl_ddr_banks, banks, sizeof(prevbl_ddr_banks[0]),
+>>> ddr_bank_cmp);
+>>> +
+>>> +    gd->ram_base = prevbl_ddr_banks[0].start;
+>>> +    gd->ram_size = ram_end - gd->ram_base;
+>>> +
+>>> +    return 0;
+>>> +}
+>>> +
+>>> +static void build_mem_map(void)
+>>> +{
+>>> +    int i, j;
+>>> +
+>>> +    /*
+>>> +     * Ensure the peripheral block is sized to correctly cover the
+>>> address range
+>>> +     * up to the first memory bank.
+>>> +     * Don't map the first page to ensure that we actually trigger
+>>> an abort on a
+>>> +     * null pointer access rather than just hanging.
+>>> +     * FIXME: we should probably split this into more precise regions
+>>> +     */
+>>> +    mem_map[0].phys = 0x1000;
+>>> +    mem_map[0].virt = mem_map[0].phys;
+>>> +    mem_map[0].size = gd->bd->bi_dram[0].start - mem_map[0].phys;
+>>> +    mem_map[0].attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
+>>> +             PTE_BLOCK_NON_SHARE |
+>>> +             PTE_BLOCK_PXN | PTE_BLOCK_UXN;
+>>> +
+>>> +    for (i = 1, j = 0; i < ARRAY_SIZE(rbx_mem_map) - 1 && gd->bd-
+>>> >bi_dram[j].size; i++, j++) {
+>>> +        mem_map[i].phys = gd->bd->bi_dram[j].start;
+>>> +        mem_map[i].virt = mem_map[i].phys;
+>>> +        mem_map[i].size = gd->bd->bi_dram[j].size;
+>>> +        mem_map[i].attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) | \
+>>> +                   PTE_BLOCK_INNER_SHARE;
+>>> +    }
+>>> +
+>>> +    mem_map[i].phys = UINT64_MAX;
+>>> +    mem_map[i].size = 0;
+>>> +
+>>> +#ifdef DEBUG
+>>> +    debug("Configured memory map:\n");
+>>> +    for (i = 0; mem_map[i].size; i++)
+>>> +        debug("  0x%016llx - 0x%016llx: entry %d\n",
+>>> +              mem_map[i].phys, mem_map[i].phys + mem_map[i].size, i);
+>>> +#endif
+>>> +}
+>>> +
+>>> +u64 get_page_table_size(void)
+>>> +{
+>>> +    return SZ_1M;
+>>> +}
+>>> +
+>>> +static int fdt_cmp_res(const void *v1, const void *v2)
+>>> +{
+>>> +    const struct fdt_resource *res1 = v1, *res2 = v2;
+>>> +
+>>> +    return res1->start - res2->start;
+>>> +}
+>>> +
+>>> +#define N_RESERVED_REGIONS 32
+>>> +
+>>> +/* Mark all no-map regions as PTE_TYPE_FAULT to prevent speculative
+>>> access.
+>>> + * On some platforms this is enough to trigger a security violation
+>>> and trap
+>>> + * to EL3.
+>>> + */
+>>> +static void carve_out_reserved_memory(void)
+>>> +{
+>>> +    static struct fdt_resource res[N_RESERVED_REGIONS] = { 0 };
+>>> +    int parent, rmem, count, i = 0;
+>>> +    phys_addr_t start;
+>>> +    size_t size;
+>>> +
+>>> +    /* Some reserved nodes must be carved out, as the cache-
+>>> prefetcher may otherwise
+>>> +     * attempt to access them, causing a security exception.
+>>> +     */
+>>> +    parent = fdt_path_offset(gd->fdt_blob, "/reserved-memory");
+>>> +    if (parent <= 0) {
+>>> +        log_err("No reserved memory regions found\n");
+>>> +        return;
+>>> +    }
+>>> +
+>>> +    /* Collect the reserved memory regions */
+>>> +    fdt_for_each_subnode(rmem, gd->fdt_blob, parent) {
+>>> +        const fdt32_t *ptr;
+>>> +        int len;
+>>> +        if (!fdt_getprop(gd->fdt_blob, rmem, "no-map", NULL))
+>>> +            continue;
+>>> +
+>>> +        if (i == N_RESERVED_REGIONS) {
+>>> +            log_err("Too many reserved regions!\n");
+>>> +            break;
+>>> +        }
+>>> +
+>>> +        /* Read the address and size out from the reg property.
+>>> Doing this "properly" with
+>>> +         * fdt_get_resource() takes ~70ms on SDM845, but open-coding
+>>> the happy path here
+>>> +         * takes <1ms... Oh the woes of no dcache.
+>>> +         */
+>>> +        ptr = fdt_getprop(gd->fdt_blob, rmem, "reg", &len);
+>>> +        if (ptr) {
+>>> +            /* Qualcomm devices use #address/size-cells = <2> but
+>>> all reserved regions are within
+>>> +             * the 32-bit address space. So we can cheat here for
+>>> speed.
+>>> +             */
+>>> +            res[i].start = fdt32_to_cpu(ptr[1]);
+>>> +            res[i].end = res[i].start + fdt32_to_cpu(ptr[3]);
+>>> +            i++;
+>>> +        }
+>>> +    }
+>>> +
+>>> +    /* Sort the reserved memory regions by address */
+>>> +    count = i;
+>>> +    qsort(res, count, sizeof(struct fdt_resource), fdt_cmp_res);
+>>> +
+>>> +    /* Now set the right attributes for them. Often a lot of the
+>>> regions are tightly packed together
+>>> +     * so we can optimise the number of calls to
+>>> mmu_change_region_attr() by combining adjacent
+>>> +     * regions.
+>>> +     */
+>>> +    start = ALIGN_DOWN(res[0].start, SZ_2M);
+>>> +    size = ALIGN(res[0].end - start, SZ_2M);
+>>> +    for (i = 1; i <= count; i++) {
+>>> +        /* We ideally want to 2M align everything for more efficient
+>>> pagetables, but we must avoid
+>>> +         * overwriting reserved memory regions which shouldn't be
+>>> mapped as FAULT (like those with
+>>> +         * compatible properties).
+>>> +         * If within 2M of the previous region, bump the size to
+>>> include this region. Otherwise
+>>> +         * start a new region.
+>>> +         */
+>>> +        if (i == count || start + size < res[i].start - SZ_2M) {
+>>> +            debug("  0x%016llx - 0x%016llx: reserved\n",
+>>> +                  start, start + size);
+>>> +            mmu_change_region_attr(start, size, PTE_TYPE_FAULT);
+>>> +            /* If this is the final region then quit here before we
+>>> index
+>>> +             * out of bounds...
+>>> +             */
+>>> +            if (i == count)
+>>> +                break;
+>>> +            start = ALIGN_DOWN(res[i].start, SZ_2M);
+>>> +            size = ALIGN(res[i].end - start, SZ_2M);
+>>> +        } else {
+>>> +            /* Bump size if this region is immediately after the
+>>> previous one */
+>>> +            size = ALIGN(res[i].end - start, SZ_2M);
+>>> +        }
+>>> +    }
+>>> +}
+>>> +
+>>> +/* This function open-codes setup_all_pgtables() so that we can
+>>> + * insert additional mappings *before* turning on the MMU.
+>>> + */
+>>> +void enable_caches(void)
+>>> +{
+>>> +    u64 tlb_addr = gd->arch.tlb_addr;
+>>> +    u64 tlb_size = gd->arch.tlb_size;
+>>> +    u64 pt_size;
+>>> +    ulong carveout_start;
+>>> +
+>>> +    gd->arch.tlb_fillptr = tlb_addr;
+>>> +
+>>> +    build_mem_map();
+>>> +
+>>> +    icache_enable();
+>>> +
+>>> +    /* Create normal system page tables */
+>>> +    setup_pgtables();
+>>> +
+>>> +    pt_size = (uintptr_t)gd->arch.tlb_fillptr -
+>>> +          (uintptr_t)gd->arch.tlb_addr;
+>>> +    debug("Primary pagetable size: %lluKiB\n", pt_size / 1024);
+>>> +
+>>> +    /* Create emergency page tables */
+>>> +    gd->arch.tlb_size -= pt_size;
+>>> +    gd->arch.tlb_addr = gd->arch.tlb_fillptr;
+>>> +    setup_pgtables();
+>>> +    gd->arch.tlb_emerg = gd->arch.tlb_addr;
+>>> +    gd->arch.tlb_addr = tlb_addr;
+>>> +    gd->arch.tlb_size = tlb_size;
+>>> +
+>>> +    /* We do the carveouts only for QCS404, for now. */
+>>> +    if (fdt_node_check_compatible(gd->fdt_blob, 0, "qcom,qcs404") ==
+>>> 0) {
+>>> +        carveout_start = get_timer(0);
+>>> +        /* Takes ~20-50ms on SDM845 */
+>>> +        carve_out_reserved_memory();
+>>> +        debug("carveout time: %lums\n", get_timer(carveout_start));
+>>> +    }
+>>> +    dcache_enable();
+>>> +}
+>>> diff --git a/arch/arm/mach-snapdragon/qcom-priv.h b/arch/arm/mach-
+>>> snapdragon/qcom-priv.h
+>>> index b8bf574e8bb..b372465d125 100644
+>>> --- a/arch/arm/mach-snapdragon/qcom-priv.h
+>>> +++ b/arch/arm/mach-snapdragon/qcom-priv.h
+>>> @@ -20,7 +20,9 @@ extern enum qcom_boot_source qcom_boot_source;
+>>>   #if IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT)
+>>>   void qcom_configure_capsule_updates(void);
+>>>   #else
+>>> -void qcom_configure_capsule_updates(void) {}
+>>> +static inline void qcom_configure_capsule_updates(void) {}
+>>>   #endif /* EFI_HAVE_CAPSULE_SUPPORT */
+>>>   +int qcom_parse_memory(const void *fdt);
+>>> +
+>>>   #endif /* __QCOM_PRIV_H__ */
+>>>
+> 
 
 -- 
-2.53.0
+// Casey (she/her)
 
