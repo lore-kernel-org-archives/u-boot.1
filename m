@@ -4,93 +4,105 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A95E7CD37BE
-	for <u-boot@archiver.kernel.org>; Mon, 11 May 2026 13:19:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8FF1CD37AC
+	for <u-boot@archiver.kernel.org>; Mon, 11 May 2026 13:21:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1B37B83E81;
-	Mon, 11 May 2026 15:19:15 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 079468460C;
+	Mon, 11 May 2026 15:21:40 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="iWaiMeEo";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Q2csuMRL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A746A83EEF; Mon, 11 May 2026 15:19:14 +0200 (CEST)
-Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
- [IPv6:2a00:1450:4864:20::62a])
+ id 085A18460E; Mon, 11 May 2026 15:21:38 +0200 (CEST)
+Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
+ [IPv6:2a00:1450:4864:20::536])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6064583E36
- for <u-boot@lists.denx.de>; Mon, 11 May 2026 15:19:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 894E283E36
+ for <u-boot@lists.denx.de>; Mon, 11 May 2026 15:21:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-ba7a1cc0380so769664266b.2
- for <u-boot@lists.denx.de>; Mon, 11 May 2026 06:19:11 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1778505550; cv=none;
- d=google.com; s=arc-20240605;
- b=j0IOHj9K6WSekzcRKHnIGih/hN5GwjngaTYtBebvpq8I5uteN6V9YLsBpsSXrs0HlE
- xnc25NXxkvpZDCTcA/HhK/PwmJv3TApUI2ZyzewoMtUrizE//J7+U2a8ipN4fBRLrNt0
- omCM+XuioqqVgGMefOKzIuQtK9NipFPW1fW89Dew4z7VaTlJDu69xmV1HE7KlHWuvbjy
- BDBMVdeE7pjO+RWFnK9Ct5iZHcdVfwzlsmNjDVyndBhC7kxeijL7AqN6hKADJ50amB0U
- mKM9UkiUa+axFjRf290D4SU4eNdmpKmUr+jAlnnpFYZh4CxPPaZzwnu0jvQu172nuPgV
- 3gYw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=GtbstkhLiTQ6Hr8QcIYx1DNSKApf+qPLkRLkwKnj5K0=;
- fh=7+NugGQ2fjuifNFbboBIeXRgPjkONDOweWugJxHsSfY=;
- b=g2/+C040exsiGA2sGN1bE9sty1AUDT+i4PSSPO1TYV8jcuV5GcM4hvkADbLteYNWDR
- k3OPY/eYfKmm9APA1oCkBDHCevvbejnEhqD0lolYQwfAFhfhR/d6kzYpav4r7VqXtflx
- JBycUefbeWvz5ybFbSzWcpY1Tvs/XZw2CN8SmcQc/cEEcURy6JsdAOVLMfsIo28WjxSn
- TWpm2Uf9tcVX4NboC9MxabjXnmw5bwPwODpX0e39DaME+wWEUQAMehciqMu6eU1xv/Lq
- fyOc+xNjxA48MrPIvbD/rYukkwzfKle5JFPhaZxjXWpy2zO/nZYsomnxmPJuheYSJekR
- a+7Q==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=casey.connolly@linaro.org
+Received: by mail-ed1-x536.google.com with SMTP id
+ 4fb4d7f45d1cf-67b6a6bd7b8so8906081a12.0
+ for <u-boot@lists.denx.de>; Mon, 11 May 2026 06:21:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1778505550; x=1779110350; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=GtbstkhLiTQ6Hr8QcIYx1DNSKApf+qPLkRLkwKnj5K0=;
- b=iWaiMeEo9BARo5Vu6XKCStRhUVRptUiDUMxZV4QsO3ZMml47hGEVHG2pPXwLV7vtY8
- 1Br/gIusacLqjt1Ofxtkgl0EpjAWRYVrsxdug1cWcKI6qEDeTAGcq/QTGFu1eUJnfoPl
- zFTqn2Q3lFNEJO1ynMuYei/XYZ+yZPg1PN1xI=
+ d=linaro.org; s=google; t=1778505694; x=1779110494; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=uNTCg8Ab4tOgiONwOOoV+SeK554bhQ6gNJGImjHYQyQ=;
+ b=Q2csuMRL2vwAa/doKWurDAzpP2+VNzx6ykzX9B2Faf8HCCTKM3/m5TtnvC8bPEwM77
+ gL3mJLXBMs6igQuzRGzv1AnsJGxRrOxUxqQebZzVME1+lN9mL/0xM5lm1E76w4YKFiXc
+ k30+HWIvMXtPcl+NbKVh349GBf4V4imEAghiIesG7D3IiTkkxOWJDbPjGVRl9oSKIbxO
+ DcPjCn5Os9pJaUQtOy8BeK+6rQfbHHDYg/uROQYMj/kth7WZTgXpX+W7P+tEaGpgMt8N
+ PYxC2HYE+oI5YrV2FbAnsyzecC91ZD1hNbXAj3yBKYqbPFVKrekbWeiz8kUPtsdolrLq
+ EGvQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778505550; x=1779110350;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=GtbstkhLiTQ6Hr8QcIYx1DNSKApf+qPLkRLkwKnj5K0=;
- b=qwRikSYf4lDkSCo77gu6kOVE9c/HGvBKuV0jXA1OIzMnMFQWtFviudClbXjyiXz6d6
- /a1SingYwEhShZyrqa9cKbkRLwyjPP9ViKdOvvZk8x0RxJ90omXsw2npifZias4uZWm9
- Wd3btlGLgy3iu3d2cpSBD+M0rslVDSwnkeSFlSCCCwxFEU0f+J8kVeCy9fqaP3qAHQe8
- 0piJpOKNjfBM44JeVhc0BGs9z3IvCFLPNaZ+kwXqG2vp8+iazz7cFsUAcdjvdIZALHFZ
- zJ5JXed9PyuR4BZKSafBtEu87r5H9BVsLQt/e1YTjb2e/FM6xSgGiTR2+pCfLu1bijYp
- FHQA==
-X-Gm-Message-State: AOJu0YyrEHk/yeXVWEMlrO9md03S7Zhb1QjirpD6mQxY9RAhODJjeJDh
- odMyqVIDbcZby+pUVqTnRT7luwbL3acN07C2m9WMbx+rbArr2wMT0i4gFZApV89kZB8aTdVvEJJ
- z6Xy6NT+AmGJKw72qvNPtZZlKQKxjM9FwB1Nrx2D/
-X-Gm-Gg: Acq92OHT8hU3obdBe/a20zSmTgL5KyZ2w4wqaVvnKbiwsmNCy2LuQSF22NABZBIHrOM
- vYBixa7gj1D1HbcUhvaezmWMhXAgI839YPGEHBheSS00kIhm/g1nDrAhkqgyqdaHKflEE0i5GBO
- 8cA5HMShGVmz0/R78P/un+2o4wqZM+r5Uy/tAMsWAOAU6p3WHiSibVsX3gbv5CoJ+URgyXmfi8/
- Ogym7puwJJYfN3VB4IuO3nx05InNANAce7D2NZUZyXQ3zCjPLquSW7nA64OMYTsmiqqf8kbG0M9
- rkfBlC+lApPQj1lX
-X-Received: by 2002:a17:907:c06:b0:ba9:2611:31e6 with SMTP id
- a640c23a62f3a-bc56be3f762mr1486874866b.6.1778505550207; Mon, 11 May 2026
- 06:19:10 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1778505694; x=1779110494;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=uNTCg8Ab4tOgiONwOOoV+SeK554bhQ6gNJGImjHYQyQ=;
+ b=hFoYGeqEDq2zbfDO9ECru9tBkjZsSlFVeY2PAmlLof+96QkFC06qLeLnS0vruP6oYQ
+ S6OL6wPbczimMAwn3DAopbXyp0L5a5WYymmWTN/oOFU9mLDARcLFxvkDAdwPobIbjGHY
+ O4ntyHSrsgn5VVmFGEV+z570BH0I4AHmKsu6ifj+0PHdA8Zgx44dbdsAgkqXUoZjLRAR
+ CtbAUdfxXQMNdsSF1oXJDEQQo49nGmDErL52oUrQNP9zczOsK24JPWDjwx/oTjZB7mZi
+ WzmeM17yQ6SGps0caeJc7sYLkrUBx1SPVcf2oVe0Qcnrb4g8cZXxuNSqPDj63FHC5XRf
+ vRxA==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ8Xxqa9GsnBsh1PZczi/5O63M4+7slH4mcq/qSKkNisD3n1736Nz+Y+YZLrK3J+ryiics11Ru4=@lists.denx.de
+X-Gm-Message-State: AOJu0YyKQVYCGcAJ33fztvFEUTLTKt+9o1LsUUjkHbZwtDRKUutOPm+G
+ KwcIt53YFBEUyt8LxLhMC31Th2YoBN6l2osTtJbCuIDpG370ohYjBzex0rzJZGrkI/VG6HGpOJD
+ EgWc3f1g=
+X-Gm-Gg: Acq92OF3ypXmZmyN1tENlFWvAndWrbpMvgQRsdk68yNpsuJNtkYer8NluIOrbzUl0zN
+ RzGhchHMvwU2QSZv1CFqLf7CY4PRideqTm2DLksLguy8CeIPjECPU4d1O7p9eO7ZXryM4IL1faK
+ OrXkLCy3pIz6Q2Jj/gDL8bHTz2xwufzeYhHfO9zsgaDCUFsN6BAfN3xhs6m2daAs5XWsiiV9f/G
+ 91LdXl3ulaH7MQZe1MFCC0xLBSmRTnLk2SWjMH5ZYwH6RzwcwGAxNu44BdJx+sTFS6k4LfemSYt
+ lz4pqg+pMXWQKms5OUwsn9h/yC2O1nSZNfNOY11iMZqzeob6pMu0ZV97+zZeq63xWB13Y4xKs2S
+ fy1njQBFckJz+F3DW365gGJRoOenLGF6i+VxoVageNXWLU21+7mVszn/mhKFEczJSlEomJzf0IA
+ MGy2s3YDk1BM5dQb+QB0IzXnNrNO2IMLPJ/8xNPeM4TGWMO3CZSBKZ7wtbdMEHgGfGlQ==
+X-Received: by 2002:a05:6402:370d:b0:672:524f:525d with SMTP id
+ 4fb4d7f45d1cf-67e0ddf7bf7mr8336774a12.8.1778505693894; 
+ Mon, 11 May 2026 06:21:33 -0700 (PDT)
+Received: from [192.168.1.36] (p4fc3dd86.dip0.t-ipconnect.de. [79.195.221.134])
+ by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-67ef0b6a11asm3743741a12.8.2026.05.11.06.21.32
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 11 May 2026 06:21:33 -0700 (PDT)
+Message-ID: <2242137c-5cbc-472e-bbae-a11224e02fac@linaro.org>
+Date: Mon, 11 May 2026 15:21:32 +0200
 MIME-Version: 1.0
-References: <20260509151339.23116-1-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20260509151339.23116-1-marek.vasut+renesas@mailbox.org>
-From: Simon Glass <sjg@chromium.org>
-Date: Mon, 11 May 2026 07:18:57 -0600
-X-Gm-Features: AVHnY4LrnvqclznxaJNDwgrjIAgHe1smr6tU2puf_TV_zkrrSUtJSC0nkKsd0hk
-Message-ID: <CAFLszTiep-M32JpLWZiB08xKuKa5vDVAwijWYrpefr187cVYGw@mail.gmail.com>
-Subject: Re: [PATCH] rtc: emul: Staticize and constify driver ops
-To: marek.vasut+renesas@mailbox.org
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v7 05/11] mach-snapdragon: add u-boot-spl-elf-sdm845.lds
+Content-Language: en-US
+To: michael.srba@seznam.cz, u-boot@lists.denx.de,
+ Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io
+Cc: Tom Rini <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@arm.com>,
+ Peng Fan <peng.fan@nxp.com>, Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Andrew Davis <afd@ti.com>,
+ Hrushikesh Salunke <h-salunke@ti.com>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Jerome Forissier <jerome.forissier@arm.com>, Heiko Schocher
+ <hs@nabladev.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Lukasz Majewski <lukma@denx.de>,
+ Mateusz Kulikowski <mateusz.kulikowski@gmail.com>,
+ Dinesh Maniyam <dinesh.maniyam@altera.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Michal Simek <michal.simek@amd.com>
+References: <20260508-qcom_spl-v7-0-7d0e22aaaa8f@seznam.cz>
+ <20260508-qcom_spl-v7-5-7d0e22aaaa8f@seznam.cz>
+From: Casey Connolly <casey.connolly@linaro.org>
+In-Reply-To: <20260508-qcom_spl-v7-5-7d0e22aaaa8f@seznam.cz>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,15 +119,78 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2026-05-09T15:13:32, Marek Vasut <marek.vasut+renesas@mailbox.org> wrote:
-> rtc: emul: Staticize and constify driver ops
->
-> Set the ops structure as static const. The structure is not accessible
-> from outside of this driver and is not going to be modified at runtime.
->
-> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
->
-> drivers/rtc/i2c_rtc_emul.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+Hi Michael,
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+On 08/05/2026 23:45, michael.srba@seznam.cz wrote:
+> From: Michael Srba <Michael.Srba@seznam.cz>
+> 
+> This custom linker script is required to produce a bootable ELF
+> for the sdm845 SoC. An xbl_sec.elf must be provided, which will
+> be put in a section in the ELF as required by the boot rom.
+> 
+> Signed-off-by: Michael Srba <Michael.Srba@seznam.cz>
+> Reviewed-by: Simon Glass <sjg@chromium.org>
+> ---
+>  arch/arm/mach-snapdragon/u-boot-spl-elf-sdm845.lds | 44 ++++++++++++++++++++++
+
+Can you put this in a new board/qualcomm/sdm845-spl directory? Also
+missed this with the other patch but the .env file can go there too (as
+well as a debug config fragment if you add that).
+
+>  1 file changed, 44 insertions(+)
+> 
+> diff --git a/arch/arm/mach-snapdragon/u-boot-spl-elf-sdm845.lds b/arch/arm/mach-snapdragon/u-boot-spl-elf-sdm845.lds
+> new file mode 100644
+> index 00000000000..3740209d499
+> --- /dev/null
+> +++ b/arch/arm/mach-snapdragon/u-boot-spl-elf-sdm845.lds
+> @@ -0,0 +1,44 @@
+> +/* SPDX-License-Identifier: GPL-2.0+ */
+> +
+> +/*
+> + * The boot rom uses the segment type to identify the xbl_sec program header.
+> + * See https://github.com/coreboot/coreboot/blob/643efabd2af9f7ac/util/qualcomm/mbn_tools.py#L143.
+> + */
+> +#define PF_SEGMENT_TYPE_XBL_SEC 5
+> +
+> +/*
+> + * The boot rom expects this to be equal to a seemingly magic value possibly specific
+> + * to a particular xbl_sec.elf. If you're extracting your xbl_sec.elf from an xbl elf,
+> + * you can just reuse the value; otherwise you can either compute it yourself or use
+> + * coreboot's tool.
+> + * See https://github.com/coreboot/coreboot/blob/643efabd2af9f7ac/util/qualcomm/createxbl.py#L638.
+> + */
+> +#define XLB_SEC_SEGMENT_ADDR 0x0000000014699000
+> +
+> +
+> +TARGET("binary")
+> +INPUT("./xbl_sec.elf")
+> +
+> +OUTPUT_FORMAT("default")
+> +
+> +ENTRY(CONFIG_PLATFORM_ELFENTRY)
+> +PHDRS
+> +{
+> +	data PT_LOAD FLAGS(7);
+> +	xbl_sec PT_LOAD FLAGS(5 | (PF_SEGMENT_TYPE_XBL_SEC << 24));
+> +}
+> +SECTIONS
+> +{
+> +
+> +	. = XLB_SEC_SEGMENT_ADDR;
+> +	.xbl_sec : { // XBL_SEC nested ELF
+> +		. = .;
+> +		"./xbl_sec.elf"
+> +	} :xbl_sec
+> +
+> +	. = CONFIG_PLATFORM_ELFENTRY;
+> +
+> +	.data : {
+> +		*(.data*)
+> +	} :data
+> +}
+> 
+
+-- 
+// Casey (she/her)
+
