@@ -4,94 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56EAECD484C
-	for <u-boot@archiver.kernel.org>; Mon, 11 May 2026 18:27:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77B34CD4840
+	for <u-boot@archiver.kernel.org>; Mon, 11 May 2026 18:29:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C2EEA83E76;
-	Mon, 11 May 2026 20:27:21 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E9A6C83E36;
+	Mon, 11 May 2026 20:29:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="YYbB2N6M";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="BTi7QdVC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6CC5A8460B; Mon, 11 May 2026 20:27:20 +0200 (CEST)
-Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
- [IPv6:2a00:1450:4864:20::52b])
+ id 3F4D983E76; Mon, 11 May 2026 20:29:04 +0200 (CEST)
+Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
+ [IPv6:2a00:1450:4864:20::62d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 75F8083E36
- for <u-boot@lists.denx.de>; Mon, 11 May 2026 20:27:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B0B4883C2B
+ for <u-boot@lists.denx.de>; Mon, 11 May 2026 20:29:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52b.google.com with SMTP id
- 4fb4d7f45d1cf-67e24b8ef55so6411344a12.1
- for <u-boot@lists.denx.de>; Mon, 11 May 2026 11:27:18 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1778524038; cv=none;
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-bcc2b199c17so308547066b.3
+ for <u-boot@lists.denx.de>; Mon, 11 May 2026 11:29:01 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1778524141; cv=none;
  d=google.com; s=arc-20240605;
- b=XqHYAEBeCorlMU5xDMxOEo+gtn5/dfBY/0mr/t9fLHOgzVn9cl4JTfdEMjiFZ+TvmK
- Z8OLXlomnv4LTS3svF07gNK0Q3rqy2L1g7kk8Le92LcQdd0wI8GrHnVyEldpnHHotVIV
- zvs9NIrwCwV8mAMjPItff7zTXcAMCxFGMjOjBWZDWJJm5rDINycTu80tCst9h0/Sn6Tr
- 6Rxk4E/oshZPhQiJRLXIjvrvEGnTeYzbIOZQr8KTDgWevl9/bwaT3qSOxtaw7ahjZGeL
- oPZzgBovfITKrFbbshYc+zp3GlLVobJEeVqZ+STCVCNEVskWB49cxlB5MvfWTZ500g88
- 0XrQ==
+ b=ELj7dMAx3cjMcQniSpl8aAPgB4X7HYcRAhyIwOjWIJOYVP9xxO0n7ccYybxGUMbL/r
+ 2ST4bBbv4+q4ToNgs4KN3mIwDnavjzCT1erm4QysMvZuJWtclz2nwQljulEN6AgrO2Eo
+ BSz6CF4nGUb9YlFntMY6zknaP1zktSNji0sRakOWWIhXuC5jod5GT2pb7oGe+DZPTxRN
+ uljQIF/1zkWqBD2zomyovPb5Q7YpGej2d5Qpj9UMa3LHjlYFghD617ZJ+fviMjD91iWj
+ 1JSotjjVfESbXr/JyhXVQZR5Ad/TKbcjsj9li690xN77F03LTChOgk2Cm/K4UBtSWjgQ
+ BdZw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=zL8nPTUKgN2HZpW+rKmmSGsrgoI0lcT+HU/P09Y1qW4=;
- fh=xWnM4bI9v4rl2OMQOk0VFj7YBxWYjPj0eDwE45J8Sx4=;
- b=ig0/XNIS560lB1Z0mZ77knsOj1bpjMgFiy4neWDMCiI90R4nehqbseuBXMNHCxpGc2
- NrAnP3Ah76QBqfwil2x442+ZOhDt99TWGoPBhiJ3eAsjvsJNok2yg4nI4qBRxVoVkxNJ
- 1XO0K2zjJvNwBYslh7sgMx76j5IO3SV5RvVvlFDh96h0omBYc8yb+X1ByeOiyI9imJ3Y
- zdYux2KBLKV4GJEWzrRcMrk/ppBHSgb97HyTPCmjVNxtir/f3A8F6+/XuBkpb5b5H8TZ
- CKx5wrNrF2tNxvb1e1ZnYF87olY52tVW6vYQ2cQeaMeEsG3clIkj+W+VAaxBPR+tjJXu
- ZHdw==; darn=lists.denx.de
+ bh=GafHjnUWcPcCeAL/ZfBNu5qQaFrK7LTSBAbaCln7DgY=;
+ fh=50QxIj9bNMkYLs8Y0MV/5ticH1BhzapD7QYdeldhBtA=;
+ b=Jb8dunYbqL3tGs7k9yDFPAZ/FstJ9B0byEtM8+WTQoQfJ0mviBY15pnM1kIUx6xYON
+ zjeCSZVFGtX02GkI0sDPs4BypeOspg8HiLXRs4JL1w7udNvRrzasXb6cp2DKHI+ARV5s
+ UiCc5h+1D3Hyq9EpdBbbbHBT/G5rZukNvThmpMaxzMyljgy8gh50mvDnRXECJ2ULlN3s
+ Cwgi5SUfnfPWFq1DM6egOdbfV+Sx2fdXot0YnioxbH/jSk1KpznPNJ/dNoL4kPp+rBWf
+ zOhXIfltLIWUC81PPAWxgHhbGjuJLzSZ26NMlBAtyUhAulCQgGqUYuv6hwyLDMlbT5fn
+ 33Jg==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1778524038; x=1779128838; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1778524141; x=1779128941; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=zL8nPTUKgN2HZpW+rKmmSGsrgoI0lcT+HU/P09Y1qW4=;
- b=YYbB2N6MVkF1KWe0sGs/ONw6d3nMeue4BWpJm74rIAntAMmmk5lUYtlkRluLNcmvJe
- KnoK6OoJQ35cFd6Ozu91CgtX9BYpXnAdAimPcEmXs56Gibdui5RZcO0jUrj1v0oXopz/
- zEO3KCB/5vh3UHQ9TyptzRj1DnPjqrtQRvpk0=
+ bh=GafHjnUWcPcCeAL/ZfBNu5qQaFrK7LTSBAbaCln7DgY=;
+ b=BTi7QdVCyZfYEFZIfv5t99Ix6C/F/LJQbpZ6jUFsXhdINQugasg1Yr54NATZpbCMA7
+ ymsp//6cVWwM7BW2kcr/kGLmTUmNrx0BoQuMRZbTvAIOHORb8HUYB/yrYkyJCa/ehNQV
+ UFEBvazvYQPvF9ZwUCpg2V2AcyxSQIZuNTA5Y=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778524038; x=1779128838;
+ d=1e100.net; s=20251104; t=1778524141; x=1779128941;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=zL8nPTUKgN2HZpW+rKmmSGsrgoI0lcT+HU/P09Y1qW4=;
- b=i80BxV48ugi0by3VvG5R4XupeDq/YReSPMaQhhSsLRuY0ESbHuByDM8hoXx/hJGhrc
- 0GD33loiAJ0mwT2kAg4odcvWRgngzplGhZbN8yJL8NxtJ4gMKZd+aaDUwP/7Iv4QBwna
- qWaHYNO5SttRKtwNTkwWu5GGYO+yNB71PJcet4ujsOsoC2XgvtSBQmfbqSML78i41C3d
- Syquqecre0sBSYkBAezBqTYGki+Z5wAXgSjE84OBVolDpSVfq/vPSCYM1Ir/yHkrj9M5
- 2qownLiUu2SV5S2P82Koc9+zl31bPcAmBjwuu+bmim9GHTuWsnVd/d2g/7R+NpE+bnIh
- 3UCw==
+ bh=GafHjnUWcPcCeAL/ZfBNu5qQaFrK7LTSBAbaCln7DgY=;
+ b=A/4S8CN4Ogz2ATcOr4vWZA9vir1/a5NoG1xzQntLKVuB+CMpiGX30IdiGLmIeS4dlZ
+ RbKxBZ5u+uNQEaQkkciJBofnchpoJXHkqABGBc3157XUNhsYZW6Ld/kJpnkDFIubeM6Z
+ bVf5JiMJ/4tsEcRU+iv8xCvxM3jmvpRvVFVWGLv1pTaWPtne5rjpAAonvAuBsKcX6sb0
+ Cl+lCo3tK1h8NV4CUjeRYEK6zlyysi5K8hyse9H5OfZpWjWmPLKH6ksNH6qQtPaIpmvr
+ P0ymllOxo1Kz2QVZ/xOm2h/13MP3rWmI1bj+j5FySEUcmCJ1cMyyu8/PKF+z+fjX0eXg
+ E+Vw==
 X-Forwarded-Encrypted: i=1;
- AFNElJ9G2n7cIlQatAlDD1uQ3VkfHylLROF84BoUKv8FmvNl1uZke0/mHxi1TBGmhPp8tzzf9nneXp0=@lists.denx.de
-X-Gm-Message-State: AOJu0YwzMhU6V3xG/K3mHqnEwwxMizzwsLdeHynCmeO5WifDCCPH9EMr
- di2XYk2+goQI+C7S+UhfvGAna7RGO0MyRzXawHhv0UQaSXGkjdnm4C5eZOrfkoztCrr0sQGkJhw
- OYYK4Idq5CiA9pRMhLWiovbyqZQdCeIce4w7zYQFG
-X-Gm-Gg: Acq92OEqMswK5ADx1Arzix3jwdkt8lWlc7r1QRI0PjCkC/8xHWIPA+EFC7R/ffEZ/Du
- +w2jVoNO1QWAcl2TjBJiLAEoHhlOdd+KLwFq9UZpUDouQ///EG/Q4X3qDGwnSulV2PPpZilI7Cn
- wsYqQoHohwYLtesvj79xhSfMrpcSKEW81vcaEdogcLULCnDHsO0N1hPx47kAShaYq9xDXxuLhVA
- 1wph4Y6zSAGtHwENRIxqLZtE/chbrmGRBkAnbER0A4xoIAWUo5K1qfa8gaOUy7RycKIKk2in1w9
- 2Q6B3g==
-X-Received: by 2002:a17:906:fe07:b0:b9d:8697:73b8 with SMTP id
- a640c23a62f3a-bc56dd15335mr1488237066b.22.1778524037873; Mon, 11 May 2026
- 11:27:17 -0700 (PDT)
+ AFNElJ9c8B71N6frFwUTcIpYALhNom0pU9gLQqcd/xWKwvI9nA0mtHkmMgc4dDYLDiYB3ciJP5fUloM=@lists.denx.de
+X-Gm-Message-State: AOJu0YypYnshIkAJrJwKMhNob14HoCiCCPAJ3WDyngT8nC9a6qiIeK0l
+ ChBRM1Ibns4hCSQV/fhSpJ+PoHHyzOyzM0YAKGGkF2dTP6gNXSArIfGexL1xpFstl+sftdl66jB
+ mUft8CGpJLKUA5bp5WiSGxR12g+SXecu+Ceank7vNJnWAxnzkQuc=
+X-Gm-Gg: Acq92OG6cZpopN6rXGiIJW09f3RPTy03/D0W31DL0sdADs5DS/OhWCYYO0aoyjk2tyS
+ P559/dBfq0a04TWfcbb0I2XbN52KWG5pxD4vqPfA6fTZ5Y+PRwsmHN/Illr4gocBMoryf1iPSeU
+ AFf7OyDBO4KCFO5/JpFfTI3VErLDuryz72Qf5ulbc3ctI1oZqwQ/gygrs4ZwEgQX2S0L1B2uG8i
+ 3N+LLwldip+hV5tKMSpSCaDV5UirkPAtDL+wtlqncfXKgNULm0b1YatOsoq8JfZrt4eCOH91UXh
+ aM7jRgxgQd57jNYX
+X-Received: by 2002:a17:907:3d10:b0:bcd:53e5:c8f1 with SMTP id
+ a640c23a62f3a-bcd53e5deb7mr493327866b.13.1778524140956; Mon, 11 May 2026
+ 11:29:00 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260508222911.450165-1-rs@ti.com>
- <20260508222911.450165-3-rs@ti.com>
-In-Reply-To: <20260508222911.450165-3-rs@ti.com>
+ <20260508222911.450165-4-rs@ti.com>
+In-Reply-To: <20260508222911.450165-4-rs@ti.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 11 May 2026 12:27:06 -0600
-X-Gm-Features: AVHnY4J1ty1_aZ8-Pa6fXs14E43coBoyLAH6Z2lzog-23PZ0vVvQZPErlp-_fU4
-Message-ID: <CAFLszThwhR=BaySior+Bev7Phi0AEGaR2_ASOVSFr00-cLPKpQ@mail.gmail.com>
-Subject: Re: [PATCHv6 2/3] boot_fdt_add_mem_rsv_regions: free old dtb
- reservations
+Date: Mon, 11 May 2026 12:28:47 -0600
+X-Gm-Features: AVHnY4JEziwJAxPNAAd7EETPl-YBRYDewrEVxqo8k9qEVQEduyZWKLRSOZaI-hQ
+Message-ID: <CAFLszTjPttabQ-Pqm3JrHmV8vBY77NFJmUKixkwEYYytkshgjA@mail.gmail.com>
+Subject: Re: [PATCHv6 3/3] memory: reserve from start_addr_sp to
+ initial_relocaddr
 To: rs@ti.com
 Cc: robertcnelson@gmail.com, ayush@beagleboard.org, 
  Erik.Welsh@octavosystems.com, anshuld@ti.com, bb@ti.com, trini@konsulko.com, 
@@ -117,89 +117,158 @@ X-Virus-Status: Clean
 Hi Randolph,
 
 On 2026-05-08T22:29:09, Randolph Sapp <rs@ti.com> wrote:
-> boot_fdt_add_mem_rsv_regions: free old dtb reservations
+> memory: reserve from start_addr_sp to initial_relocaddr
 >
-> Add a free flag and an initial call to free allocations covered by the
-> global FDT. This assumes that all calls to boot_fdt_add_mem_rsv_regions
-> occur before the transition to the new device tree, thus we can access
-> the currently active device tree through the global data pointer.
+> Add a new global data struct member called initial_relocaddr. This
+> stores the original value of relocaddr, directly from setup_dest_addr.
+> This is specifically to avoid any adjustments made by other init
+> functions.
 >
-> This allows us to clearly indicate to the user when a device tree
-> reservation fails. How we handle this can still use some improvement.
-> Right now we'll keep the default behavior and try to boot anyway.
+> Reserve the memory from gd->start_addr_sp - CONFIG_STACK_SIZE to
+> gd->initial_relocaddr instead of gd->ram_top. This allows platform
+> specific relocation addresses to work without unnecessarily painting
+> over a large range.
 >
-> This functionality was broken in:
-> 5a6aa7d ("boot: fdt: Handle already reserved memory in boot_fdt_reserve_region()")
+> Since PRAM comes out of this initial area up to initial_relocaddr, we no
+> longer need to account for it separately.
 >
 > Signed-off-by: Randolph Sapp <rs@ti.com>
-> Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 >
-> arch/mips/lib/bootm.c |  2 +-
->  boot/bootm.c          |  2 +-
->  boot/bootm_os.c       |  2 +-
->  boot/image-board.c    |  2 +-
->  boot/image-fdt.c      | 55 +++++++++++++++++++++++++++++++++++----------------
->  include/image.h       |  2 +-
->  lib/lmb.c             |  2 +-
->  7 files changed, 44 insertions(+), 23 deletions(-)
+> common/board_f.c                  |  9 ++++++++-
+>  include/asm-generic/global_data.h |  7 +++++++
+>  lib/efi_loader/efi_memory.c       |  2 +-
+>  lib/lmb.c                         | 39 ++++++---------------------------------
+>  4 files changed, 22 insertions(+), 35 deletions(-)
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+BTW I am missing a change long in this patch, so a bit of guesswork here.
 
-with some thoughts below
-
-> diff --git a/boot/image-fdt.c b/boot/image-fdt.c
-> @@ -108,12 +124,16 @@ void boot_fdt_add_mem_rsv_regions(void *fdt_blob)
-> +     /* Remove old regions */
-> +     if (gd->fdt_blob != fdt_blob)
-> +             boot_fdt_add_mem_rsv_regions((void *)gd->fdt_blob, true);
+> diff --git a/common/board_f.c b/common/board_f.c
+> @@ -330,6 +330,8 @@ __weak int arch_setup_dest_addr(void)
+>
+>  static int setup_dest_addr(void)
+>  {
+> +     int ret;
 > +
+>       debug("Monitor len: %08x\n", gd->mon_len);
+>       /*
+>        * Ram is setup, size stored in gd !!
+> @@ -356,7 +358,12 @@ static int setup_dest_addr(void)
+>       gd->relocaddr = gd->ram_top;
+>       debug("Ram top: %08llX\n", (unsigned long long)gd->ram_top);
+>
+> -     return arch_setup_dest_addr();
+> +     ret = arch_setup_dest_addr();
+> +     if (ret != 0)
+> +             return ret;
+> +
+> +     gd->initial_relocaddr = gd->relocaddr;
+> +     return ret;
+>  }
 
-Recursing through the public entry point with a flipped bool is hard
-to follow, and it relies on the implicit invariant that the recursive
-call will not itself recurse. I'd find this clearer as two named
-helpers. For example you could have boot_fdt_reserve_regions() and
-boot_fdt_free_regions() sharing a static walker. Then the intent at
-the call site would be obvious.
+Please use 'if (ret)' to match U-Boot style. The trailing 'return
+ret;' is misleading since ret is known to be zero - make it 'return
+0;'.
 
-Please also add a comment explaining the assumption from the commit
-message: this must run before gd->fdt_blob is swapped to the new tree
-(since nothing in the code itself enforces it)
+> diff --git a/include/asm-generic/global_data.h b/include/asm-generic/global_data.h
+> @@ -107,6 +107,13 @@ struct global_data {
+>        * GDB using the 'add-symbol-file u-boot <relocaddr>' command.
+>        */
+>       unsigned long relocaddr;
+> +     /**
+> +      * @initial_relocaddr: end of memory currently in use by uboot
+> +      *
+> +      * This should be the original value of relocaddr before any other
+> +      * allocations or reservations shift it.
+> +      */
+> +     unsigned long initial_relocaddr;
 
-> diff --git a/boot/image-fdt.c b/boot/image-fdt.c
-> @@ -69,35 +69,51 @@ static const struct legacy_img_hdr *image_get_fdt(ulong fdt_addr)
-> -     } else if (ret != -EEXIST && ret != -EINVAL) {
-> -             puts("ERROR: reserving fdt memory region failed ");
-> -             printf("(addr=%llx size=%llx flags=%x)\n",
-> -                    (unsigned long long)addr,
-> -                    (unsigned long long)size, flags);
-> +     } else {
-> +             printf("ERROR: %s fdt memory region failed (addr=%llx size=%llx flags=%x): %ld\n",
-> +                    free ? 'freeing' : 'reserving', (unsigned long long)addr,
-> +                    (unsigned long long)size, flags, ret);
->       }
+The kerneldoc summary is misleading: 'currently in use' suggests live
+state, but this is written once at the end of setup_dest_addr() and
+never updated. Please reword to something like 'initial top of the
+U-Boot reservation' and note that it is set once in setup_dest_addr().
+Also 'uboot' should be 'U-Boot'.
 
-Dropping the -EEXIST/-EINVAL filter only works on the reserve path
-once the free path always succeeds. On the free side, anything in the
-old fdt's reserved-memory that wasn't actually picked up by
-lmb_reserve_common() (a non-enabled subnode, or a region since
-split/coalesced inside LMB) will now produce a spurious "ERROR:
-freeing fdt memory region failed" line.
+> diff --git a/lib/lmb.c b/lib/lmb.c
+> @@ -534,46 +534,19 @@ static long lmb_reserve(phys_addr_t base, phys_size_t size, u32 flags)
+>
+>  static void lmb_reserve_uboot_region(void)
+>  {
+> -     int bank;
+> -     ulong end, bank_end;
+> +     ulong size;
+>       phys_addr_t rsv_start;
+> -     ulong pram = 0;
+>
+>       rsv_start = gd->start_addr_sp - CONFIG_STACK_SIZE;
+> -     end = gd->ram_top;
+> +     size = gd->initial_relocaddr - rsv_start;
+>
+> -     /*
+> -      * Reserve memory from aligned address below the bottom of U-Boot stack
+> -      * until end of RAM area to prevent LMB from overwriting that memory.
+> -      */
+> -     debug("## Current stack ends at 0x%08lx ", (ulong)rsv_start);
+> +     debug("## Current stack ends at 0x%08lx\n", (ulong)rsv_start);
 
-I'm not sure if this actually happens? You could try it on a board
-whose memreserve/reserved-memory layout differs between the U-Boot dtb
-and the kernel dtb? Perhaps for now, best to tolerate  -EINVAL on the
-free path at least.
+Please keep a trimmed version of the explanatory comment - it
+documents the intent of this reservation and is more useful than the
+surrounding context.
 
-> diff --git a/boot/image-fdt.c b/boot/image-fdt.c
-> @@ -108,12 +124,16 @@ void boot_fdt_add_mem_rsv_regions(void *fdt_blob)
-> +     /* Remove old regions */
-> +     if (gd->fdt_blob != fdt_blob)
-> +             boot_fdt_add_mem_rsv_regions((void *)gd->fdt_blob, true);
+> diff --git a/lib/lmb.c b/lib/lmb.c
+> @@ -534,46 +534,19 @@ static long lmb_reserve(phys_addr_t base, phys_size_t size, u32 flags)
+> -     for (bank = 0; bank < CONFIG_NR_DRAM_BANKS; bank++) {
+> -             if (!gd->bd->bi_dram[bank].size ||
+> -                 rsv_start < gd->bd->bi_dram[bank].start)
+> -                     continue;
+> -             /* Watch out for RAM at end of address space! */
+> -             bank_end = gd->bd->bi_dram[bank].start +
+> -                     gd->bd->bi_dram[bank].size - 1;
+> -             if (rsv_start > bank_end)
+> -                     continue;
+> -             if (bank_end > end)
+> -                     bank_end = end - 1;
+> +     lmb_reserve(rsv_start, size, LMB_NOOVERWRITE);
 
-Just to check - the cast drops the const from gd->fdt_blob and we then
-walk it read-only, which is fine, but boot_fdt_add_mem_rsv_regions()
-takes a non-const void * for no good reason that I can see? Worth a
-brief comment so a future reader doesn't try to 'fix' the cast.
+The old code walked CONFIG_NR_DRAM_BANKS and clamped the reservation
+to the bank containing rsv_start. The new code drops that and just
+reserves [rsv_start, initial_relocaddr). On platforms with
+non-contiguous banks (where U-Boot occupies the top bank and there is
+a hole below it), this can mark a range that is not all RAM. Is that
+intentional? If so the commit message should call it out; if not,
+please re-add a sanity check so we do not reserve across holes.
+
+> diff --git a/lib/lmb.c b/lib/lmb.c
+> @@ -534,46 +534,19 @@ static long lmb_reserve(phys_addr_t base, phys_size_t size, u32 flags)
+> -#ifdef CFG_PRAM
+> -     pram = env_get_ulong('pram', 10, CFG_PRAM);
+> -     pram = pram << 10; /* size is in kB */
+> -#endif
+
+PRAM previously sat above the LMB reservation (the old code subtracted
+pram from the size so PRAM was left out of used_mem). With this patch,
+PRAM ends up inside the [rsv_start, initial_relocaddr) range and is
+now marked LMB_NOOVERWRITE - likely this is more correct, but it is a
+behaviour change for boards setting pram at runtime to be larger than
+CFG_PRAM - those bytes used to be available to LMB clients and now are
+not.
+
+Please spell this out in the commit message rather than the brief
+'PRAM comes out of this initial area' line, so reviewers on PRAM-using
+boards know to look.
+
+> diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
+> @@ -869,7 +869,7 @@ static void add_u_boot_and_runtime(void)
+>       /* Add U-Boot */
+>       uboot_start = ((uintptr_t)map_sysmem(gd->start_addr_sp, 0) -
+>                      uboot_stack_size) & ~EFI_PAGE_MASK;
+> -     uboot_pages = ((uintptr_t)map_sysmem(gd->ram_top - 1, 0) -
+> +     uboot_pages = ((uintptr_t)map_sysmem(gd->initial_relocaddr, 0) -
+>                      uboot_start + EFI_PAGE_MASK) >> EFI_PAGE_SHIFT;
+
+Hmmm, the current expression uses ram_top - 1 (inclusive top byte) and
+then rounded up via EFI_PAGE_MASK. The new one passes
+initial_relocaddr without the - 1 - so when initial_relocaddr is
+page-aligned this adds an extra page. What is the intention here?
 
 Regards,
 Simon
