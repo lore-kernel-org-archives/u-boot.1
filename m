@@ -4,95 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE507CD37AC
-	for <u-boot@archiver.kernel.org>; Mon, 11 May 2026 13:11:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9739FCD37AC
+	for <u-boot@archiver.kernel.org>; Mon, 11 May 2026 13:11:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8D1828394E;
-	Mon, 11 May 2026 15:11:13 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A1C5784255;
+	Mon, 11 May 2026 15:11:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="eeWt8ZLr";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="SdNoMq1b";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BA3F383CD3; Mon, 11 May 2026 15:11:11 +0200 (CEST)
-Received: from mail-pg1-x529.google.com (mail-pg1-x529.google.com
- [IPv6:2607:f8b0:4864:20::529])
+ id DFC0484656; Mon, 11 May 2026 15:11:15 +0200 (CEST)
+Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
+ [IPv6:2a00:1450:4864:20::62f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 96D2C800AE
- for <u-boot@lists.denx.de>; Mon, 11 May 2026 15:11:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 19D228460B
+ for <u-boot@lists.denx.de>; Mon, 11 May 2026 15:11:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pg1-x529.google.com with SMTP id
- 41be03b00d2f7-c70c112cb61so3218441a12.0
- for <u-boot@lists.denx.de>; Mon, 11 May 2026 06:11:09 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1778505068; cv=none;
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-bd2087858c4so16018966b.0
+ for <u-boot@lists.denx.de>; Mon, 11 May 2026 06:11:14 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1778505073; cv=none;
  d=google.com; s=arc-20240605;
- b=NzxREibWRB1d7c/WTTXtN+MvTikeP2XpgDUeqmJMCq3HTnM2dI0HtWRP/ZrArZs0VI
- AdenK/e76dW/uf4BZFrrBJJJg9ST2oj8R9ZfmXCe59aVCS+fdiAyHgiO0ea/5zpXnmPb
- W7N3ruEpE5F1GWjk5acJxiqKFDQBoirVCCjEs5Th1wVqe7frfNZTRWAJcv935sk1Fb2b
- cghtEu79IEt3Nxp1OXarj3b266W6u10D6qlH95JUWjRIVZ1iOF9Ie6lFu8VJbc1IryGT
- xsa8iqMlOynRgQjQ5DS5bXKEfahu3JBVPBdls5u8Q6QMkmxsKfClvp9tg/0lFkAGMgDZ
- 7ZmQ==
+ b=TPiQRtUTQYHz+rVytAudYNcqX18NnWAAU7dY0uCrDpqzAzuMgEB4v8+rKyseFc2wHk
+ dZ5TBuhTFi/9F9uxVL12aFFi0eJGyy1sD6NE85bwy0P8BDIBkrR6wYV/njJmaWTNUZfb
+ 1MMTSPqJJkjhp8CV18K4EW4j6JCD2WXoTuxpaAg/LFm3vL8XVszpO1Mb3HwO2B81dFmu
+ S8Py9P11n7u3eOs7nYJ3AhgcvrMoAfGHVKN6jJv3zfaDeo9gdsS42uUBml6Cke1SYJk9
+ uq/lN+uhZovyNJL2X0eSPj0pbps2lbqwJuXd2TGj9fcHWWDZgU+Ri8TJnrC1tGblN0ob
+ YjYw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=O6l/QLtgRAdH1Yqt28IBgcrzKD65Jl/2YrahzN2pDW8=;
- fh=iPgt1bMIwV2uG6O8DMJiO3pmO2ll8c43yH00JVFIFGs=;
- b=jRchwVamSof4LAYq4vM0X8dn3qUuCKpXI1ZJNVCoDO3DECBU2vH8DrK0Ual2Sj6zaM
- /EOM6aMEftJjDsAv+bOgfaHrfCENTR15m6kUXx2lfaSl2/cC3+eLv0uszeYyplR1ZXip
- +aYZvD9Qa+f6oZ0Ekp+Capl6F/rESYfYpizzvdS9a4D/4flBtbTqG9wNE3GwJ1O1+HZd
- S+C0+tq1+MLL3NMDBuU1iBmV2XPjz1+Ago9/VwoRp7eTEmJWiyT+l7a1LjYpEr3x9oGH
- VYfQ0aXs7tZ5HV1XPAflllf9EIzK/ddpMy7PmnwCvLaiX0SaHKVbarXcieaWmEY18hoK
- lQVA==; darn=lists.denx.de
+ bh=L2zA3xi5jriHNacmPpvkKD7XPmPISfhopRqQwZUpeWA=;
+ fh=YDH4tYxYY/L18TkSaMEaPWRyobgWco5gBQA2N64+Pfk=;
+ b=lVrcP7znyjW8or2mpJeuzBoejPDjJo3qX4LoMECv9jxX97yRTPwrcC7oy/Ki3dSzFx
+ RqrwJrJF/+qnpFrVRP9MCuS5Z9sy4Bd9D756ZSn/f2ln1XCVFDTp2yHIKdEOG1SXDkVx
+ mEZC5NOeil9ZY/jeTneOzdl9hij1Ci2X7DqmN35y6HiFU7rDO2CvHimFaWe4Gg0zkZBH
+ N0qAeMAwsecqPWOFtEgCEJBBf6MaT2DO+PLecpexI4/CXbE+gwH/PIg2tKR/9VMq/jmM
+ ifNiEJjha1816VpBQ6GWp0SYTbnkm/fV4GbSLMNwM9t+yQspGfymOmGUSF51/9oADIHK
+ A6xA==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1778505068; x=1779109868; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1778505073; x=1779109873; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=O6l/QLtgRAdH1Yqt28IBgcrzKD65Jl/2YrahzN2pDW8=;
- b=eeWt8ZLrIy4RtOilIrlLpoLbUJiVhOVaSR4WA7D1DBoWD6rwSVrSoTkwop36K0uPhU
- oV+AZxd9o97KP5rVrMVJji31fhOtNFsb5U1y3PlV/RnjhROhePRcd3JoKtAqCU1tjxOy
- 4FbumPOWZVNkaaBedeZ+BKxlE2d2dB2GOf9pU=
+ bh=L2zA3xi5jriHNacmPpvkKD7XPmPISfhopRqQwZUpeWA=;
+ b=SdNoMq1b71mMMy9Ph21DVFmmwPjiENrfN3vdBHIpDVT8eQX8GD55nQFjTE7C0bW52m
+ ul4zhIW+qQ7VOmoL5kf+N8qOkCqmg8H4cb6fzhZBwYtKEz1n06UhC1reeoGcWF1gFUUZ
+ B+cfqLbKk4ImATQtKwyu+NJnJ5vzD8auxVWHI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778505068; x=1779109868;
+ d=1e100.net; s=20251104; t=1778505073; x=1779109873;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=O6l/QLtgRAdH1Yqt28IBgcrzKD65Jl/2YrahzN2pDW8=;
- b=KQb/euEAbIxcOEQjfEQb4uk51Ds1tVriSuSyBmZtp1wZoUElXahBL/ZFoPdN/BGcPY
- rFL/c+phjUya/Is/O/4GnhMfN3PkxxxKrij8tgbY2xOu/cw2LNGizpIWTjg/e9Hywwxy
- y2XdG9AXgasYT/77emvwxWF48MEqVL0dxB19GVN/RTgNoL5KVbSpX1GW/2e93zBvrGH/
- BecABdivld4+rzhn2u5/fXhxaUmx1Z9+R/K8hBOAlQaX2JmAZoUaGT69C+S782xZxEC3
- MUeZCjZ6DCZVI6Mik067w+EXGlSJ4NpJQE2FQkaT1/cDcM+5LKRuihdZXHyIwDh/hTWH
- F7aw==
-X-Gm-Message-State: AOJu0YxJ5Dpx00aOadD1MZs1pBdaq5Cx0HIcCDufwKMIdSkSgY/QkTmE
- F1lWFPulIFTeEPMUIPNDWlTAvUVcUmW41oFACXFEm/Wi+mE+yScWBBT/hOS2tjtdXYoznozSyt5
- ygnuh8oWcYAkst0rbXeEEoLraOpJJHl1Z8ON5bNss
-X-Gm-Gg: Acq92OFEBczR89VpHUoFn7PS8iBZQEYdL5ExHnt5Zmayi8wL7lx1G5BYV/woELp1Jr4
- nVEx+c+q2/4naCn6dPIg1xumMoLPOMDToJl23Lnoy6DQUisoLfSmUiAr6B5ZAlg6g96ZHQeCEhl
- 6G5CkiWKFtqfHsuZp1Mezuuk1d2TtAU2orjzNMWuMNeUkHK7zHxnM0y0aQISRVp7eUI3mAaDPZX
- X3IcwqGZ+M9LCx3yVaN0aBquV0cidp/CZTxU/A5QS/Grx/MvjKabrKTMr8h9Ey3PZHbqQff+fAB
- 2DALyw==
-X-Received: by 2002:a05:6a20:6a2c:b0:3a2:f2b1:1ac with SMTP id
- adf61e73a8af0-3aa5ababcb5mr26711319637.44.1778505068036; Mon, 11 May 2026
- 06:11:08 -0700 (PDT)
+ bh=L2zA3xi5jriHNacmPpvkKD7XPmPISfhopRqQwZUpeWA=;
+ b=S3L348gm67qJu7yRY25+gmlcvoq+vmQJGCAT4LJhzW5mNIiowwThDUX1DP+29bmss2
+ 51YGvOHt+HgJrysw44vUejA1i/vSSDSHCQcb0w0RshR/0XUAtNSwXLIJ2u9zcN5HgaeK
+ 2vpzFjSkwovBX1oWQiP7PH88JAUQPodNWI/wjYrVl5y8egrSJD8A/wpsEsRH+Np0B2ji
+ Z1DMePokIVB3CVTCWoYEEFK+/RNmOoPBpEFzuOGG7fqKSzGfkFj7+xxM/t9bHdkoIJ7y
+ CYAIOSOUijCzrpqbCxzylXBr4pDnqWXDC39CTgf2ZtnbeaBO6phMkIo36w6NGEC2ifIr
+ fS/g==
+X-Gm-Message-State: AOJu0Yy3HW0qeCLIwH3le3+z5kqqUyuatPGCuZq95Z+ksPnrfgJXOpdY
+ jh/r/YTqI5ytA4svqIwVQlk83aMbD9qcot8/vI3rvDho3LVyyf7O3uQGkrWrKn70xhtDUEVu2Q9
+ V8QKIebeIOS05RV6PSFJe0tqDDnj71T0ANFuUENkY
+X-Gm-Gg: Acq92OE271B65xBHamnWV3Sseq88gN1HF+QWq928xI6vZTsTdUjwm0vh/DdbSIsD+ph
+ ju3gJ+ZB7ILO/d6O8dWnQKNTq77oWrqZGwPRnwj5tjRc5rCjAicPLmxdG7vOwhOaOHFUXlIlUli
+ fo0uCrd5RuL6nANQZE1cSO4PGQwVmzdep1S2hoLhOtMGScRe8px/swHH0FrMWn+mFYYPo6MV5PD
+ MU9Q5dCbkvQmhglfx7nNuoPs8PHriMi3f43MDC6nOKCULYij/T51q1zScEvGLIwC/1PYewRdEHO
+ j8oltA==
+X-Received: by 2002:a17:906:478e:b0:ba5:885d:3280 with SMTP id
+ a640c23a62f3a-bcaaa54ff6dmr778842966b.17.1778505073350; Mon, 11 May 2026
+ 06:11:13 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260509203136.46745-1-kettenis@openbsd.org>
-In-Reply-To: <20260509203136.46745-1-kettenis@openbsd.org>
+References: <20260510171604.56788-1-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20260510171604.56788-1-marek.vasut+renesas@mailbox.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 11 May 2026 07:10:51 -0600
-X-Gm-Features: AVHnY4LzFbccVoaQ4Hn42aoUUjYXxgWtacEf243wIuVygI6YZVmg1gDaqh0YZrQ
-Message-ID: <CAFLszTga=8LFjUU=PjYKztMiMaHJ0MDQEh6+h9RnCiTMTOHzPQ@mail.gmail.com>
-Subject: Re: [PATCH] smbios: Do not fall back on devicetree without valid
- mapping
-To: kettenis@openbsd.org
-Cc: u-boot@lists.denx.de, Raymond Mao <raymondmaoca@gmail.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Tom Rini <trini@konsulko.com>, 
- Janne Grunau <j@jannau.net>
+Date: Mon, 11 May 2026 07:10:55 -0600
+X-Gm-Features: AVHnY4Lj2ZZiXYMMBBstieHHWEQNY7gOB9e4SmvQbJ-BmbjiRaFlwMoLjP9tpY4
+Message-ID: <CAFLszTitpkTwc8vgmHd7jaK87QmWOMQP3LW9F=ZheOA6++3xXg@mail.gmail.com>
+Subject: Re: [PATCH 1/2] scsi: sandbox: Staticize and constify driver ops
+To: marek.vasut+renesas@mailbox.org
+Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -110,33 +108,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Mark,
-
-On 2026-05-09T20:31:36, Mark Kettenis <kettenis@openbsd.org> wrote:
-> smbios: Do not fall back on devicetree without valid mapping
+On 2026-05-10T17:15:52, Marek Vasut <marek.vasut+renesas@mailbox.org> wrote:
+> scsi: sandbox: Staticize and constify driver ops
 >
-> The smbios_get_val_si() function may get called for a sysinfo
-> property for which there is no mapping to a devicetree property.
-> Avoid a NULL pointer dereference in this case by skipping the
-> read of the mapped property from the device tree.
+> Set the ops structure as static const. The structure is not accessible
+> from outside of this driver and is not going to be modified at runtime.
 >
-> Fixes: 83b28b55d74f ("smbios: add support for dynamic generation of Type 9 system slot tables")
-> Signed-off-by: Mark Kettenis <kettenis@openbsd.org>
-> Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 >
-> lib/smbios.c | 2 +-
+> drivers/scsi/sandbox_scsi.c | 2 +-
 >  1 file changed, 1 insertion(+), 1 deletion(-)
 
-> diff --git a/lib/smbios.c b/lib/smbios.c
-> @@ -292,7 +292,7 @@ static int smbios_get_val_si(struct smbios_ctx * __maybe_unused ctx,
->
->       /* If the node is still missing, try with the mapping values */
->       nprop = convert_sysinfo_to_dt(ctx->subnode_name, prop);
-> -     if (!ofnode_read_u32(ofnode_root(), nprop->dt_str, &val))
-> +     if (nprop && !ofnode_read_u32(ofnode_root(), nprop->dt_str, &val))
->               return val;
-
 Reviewed-by: Simon Glass <sjg@chromium.org>
-
-Regards,
-Simon
