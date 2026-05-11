@@ -4,116 +4,104 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 280EACD37AC
-	for <u-boot@archiver.kernel.org>; Mon, 11 May 2026 06:42:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F9F6CD37B5
+	for <u-boot@archiver.kernel.org>; Mon, 11 May 2026 06:50:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9C14B846CA;
-	Mon, 11 May 2026 08:42:56 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id 97688847C6;
+	Mon, 11 May 2026 08:50:36 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="MCtcS0oJ";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="GZ47TsWS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C6455846CB; Mon, 11 May 2026 08:42:54 +0200 (CEST)
-Received: from OSPPR02CU001.outbound.protection.outlook.com
- (mail-norwayeastazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c20f::7])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 3DBC0847C7; Mon, 11 May 2026 08:50:36 +0200 (CEST)
+Received: from mail-yx1-xb12f.google.com (mail-yx1-xb12f.google.com
+ [IPv6:2607:f8b0:4864:20::b12f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 705F2846B0
- for <u-boot@lists.denx.de>; Mon, 11 May 2026 08:42:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id ACE97846CA
+ for <u-boot@lists.denx.de>; Mon, 11 May 2026 08:50:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=patrice.chotard@foss.st.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=F5Q73fsqfA8Kors6hr0hYysPlN3cRcIYro86DD9Evxm1mzDuQAUmwDsk9KkpD2RS8BF6pN8QSrpGVpkjpn8OaIEfC1KPf/+JGh3SgcpDG/tLUwqR5Dl/Yaa0qCJ51QkUcCdeNzr67pQ5f7eNBp9YfZ7Wqxh0neHympsH9na/rwg6WojOJbYZoYVHvqHZWgOZdcLYA73ZqXUBr2fYIDxBEL6xUwunKlTe0vKd0kddyEtBtu/7bK3LtqAinxdzQwnNBwwXHjyozdmKRDiMLVPm90GQVR3FJbCgxqrMHGORjdp+DY6V6uRLMmb/ernAerJD6Cf4VKrHEZTpr0l3blahnQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=8MgsZfMqaNBVuBwuacZ186/OetJkSkYFTRF4lgph9YA=;
- b=qVE2V8N/gKBCRGOVx82XpJQ2zKgqPbVUySsL4+sqlj1WQ9E2coGcwuFkKYrDdlR9ylYhvGnlt6HrZIKwLpyNF525IJrrJrUcQP08Zpa5LiWpnyxbeTxGSg8dpY0vn8A4a82u4aTED+BUUWrmoS9pnVvjxZqf6fEdSpK6xW2/0wRu7jUoxo1m3XXHaWG4u69Z+k8tSq7r4zfrBEf7MQTi7J+zg8ypgKFrK7ldPN4Dew5ljoSkONsJnt2oAQ2Q8OpSmPIYlVDAGXq4SYb0xA38be1Y21cuiYxGnyzVVtQqNHzeDmxklMZ5oT32xhR3ztL+n5p9W3nDvNZ3iRcn6l0pvQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
- 164.130.1.60) smtp.rcpttodomain=mailbox.org smtp.mailfrom=foss.st.com;
- dmarc=fail (p=none sp=none pct=100) action=none header.from=foss.st.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=8MgsZfMqaNBVuBwuacZ186/OetJkSkYFTRF4lgph9YA=;
- b=MCtcS0oJWollYC4m2W+jZhfefIpthuis4Faa1Hd9QJU0NaZsWIk4Ng2RoezNLm/R8qXaMU2X2WN2ciHHJJEU8uABS6Pj1KqFuR/dHd6JSqyupp17YUwCMfik5qHHllJSaAbS+JPJPIaEPu1ceWcDsr56pyeurao6wrPA+S6SgABR5Glurdp5anmBFKnUTxVKORFOgR+YEZ0UVuiaLfQbHb0F2Ue8RPljF/c3cp8cYsmsvnejciv/KfKw4Y1YzSXUqOXL4BMbxpbBafRMbw5Aw/i66qzq/UYgNHsyv6yMHy7atXCg00fR+OjYZe8dSd5yQH1KtkOZHjxGJB62z7xTjA==
-Received: from CWLP123CA0117.GBRP123.PROD.OUTLOOK.COM (2603:10a6:401:5f::33)
- by AM0PR10MB3348.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:208:18a::23) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9891.23; Mon, 11 May
- 2026 06:42:48 +0000
-Received: from AMS1EPF00000090.eurprd05.prod.outlook.com
- (2603:10a6:401:5f:cafe::84) by CWLP123CA0117.outlook.office365.com
- (2603:10a6:401:5f::33) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9891.23 via Frontend Transport; Mon,
- 11 May 2026 06:42:48 +0000
-X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.60)
- smtp.mailfrom=foss.st.com; dkim=none (message not signed)
- header.d=none;dmarc=fail action=none header.from=foss.st.com;
-Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
- designate 164.130.1.60 as permitted sender) receiver=protection.outlook.com;
- client-ip=164.130.1.60; helo=smtpO365.st.com;
-Received: from smtpO365.st.com (164.130.1.60) by
- AMS1EPF00000090.mail.protection.outlook.com (10.167.242.87) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.25.13 via Frontend Transport; Mon, 11 May 2026 06:42:47 +0000
-Received: from STKDAG1NODE1.st.com (10.75.128.132) by smtpO365.st.com
- (10.250.44.72) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.35; Mon, 11 May
- 2026 08:46:13 +0200
-Received: from [10.48.87.93] (10.48.87.93) by STKDAG1NODE1.st.com
- (10.75.128.132) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.35; Mon, 11 May
- 2026 08:42:47 +0200
-Message-ID: <fc9c4c3a-cc8f-4f68-ae32-f867cc5b3a99@foss.st.com>
-Date: Mon, 11 May 2026 08:42:46 +0200
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yx1-xb12f.google.com with SMTP id
+ 956f58d0204a3-65c5361142fso4040118d50.0
+ for <u-boot@lists.denx.de>; Sun, 10 May 2026 23:50:32 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1778482231; cv=none;
+ d=google.com; s=arc-20240605;
+ b=VDu/M0g+0EN/1+ptujDDQU3zKeQZqPeHaDrPBeKXssHuqxQi14i/0sAt2kdiw7hR3o
+ 3KTxHwFhTYqVDj3ofWXp+59UJRhckj0SXUeayI5UKUbODr15Jm98nsU0ht0eXNLJE60v
+ yrsfw/keIkgqGQj5G09OLprR64BiZHDmqwXM3er3Qun4ue81FzRo0i7RE7Tdl+wTyKo+
+ E8CtphhNnSB70qnjZWHEC6JTpuJEN8EJQ39By/Xv82y92oy1Ndu4/YikSPL/oxrQ5bbC
+ 8q2873nLVY+ko5GgNQtGB9kzHXonVOau7vHvgLU6KiY1Ku7MclQrYgISYlWQRpfCjYWY
+ dZpw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=2+9Kbzy/dkO9RaUnH+mGCU30ewE14lXmrqHzjkozq1g=;
+ fh=b+5EN9h6A+M/DgVUqcLmKil7t6jN5CZ0jSWPWs/QfEg=;
+ b=R8GiAB3sJywzUXCDMTSmoIKY6TCjfL9f9xTcAoeZ/NNDAvDbAsitiJf7GtDxFUtTEY
+ QFnH27kG0ZuwR/bjgIiI+CJ6pGcM7BVEnfS2/HbYSDsY2UOUOJALoNKG6r42woerXUCw
+ FfU5hLQS1z+VPJyWDhyOSSGiBxEjP+dNgqTZpyHodC8MTzC/NHBc5X0oTP4ViHxA/T6o
+ x/LvC8nb/NnepYtx6D8sMaxGUohTwUTUhrzwJbPvBMJFpl2aB+3BTX0wb+Kusu/R6Knh
+ CHb0sxXXdLmvAJn+Y/NSJ++QwclCg8m5ULDqeErXIaaq867sK+wfL5h6jqwRkeVcDpr3
+ 0iBg==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1778482231; x=1779087031; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=2+9Kbzy/dkO9RaUnH+mGCU30ewE14lXmrqHzjkozq1g=;
+ b=GZ47TsWSPbG5CddlxHCkohHYtfs1Urc4iSE3YiMUsHHMVV06YZh5D/lGqbJL4xNs4L
+ V/ABU+Vq9QNUISb3EhoxrvWtQcw35n6vvTZyUEjQA4fo4fRx0S9kV9QUR6YlS6AOhaCd
+ uRqijQuIw+6vFcJYD+W7SgTHd/Gb6Tk01n8/FyZsHhR9N/hxJEvIVJQQqgG5OfPDv6Jl
+ rCKrep2k9yomshDn59B1S5NtCSAO/+AYgYB+RBjzrT4ux+4OPopMs+qgAGHqTHFdJr3h
+ 7DyQ1onZ3eNERjIFYiseesVVqKh7WzXi1gVGUNumaPm2ogH43UR1KGBjigTlAPk8jrlZ
+ f8hw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1778482231; x=1779087031;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=2+9Kbzy/dkO9RaUnH+mGCU30ewE14lXmrqHzjkozq1g=;
+ b=evEjJ6O+Gtdke5TI04wq0+wA6oYTpTKOEIqIGCG7t9EKnom9asqOTpCnkCqdm4sIks
+ pfI7wrCcU6+X0n6Pqz6SC0NKEBL4rtKANZnRe282fYAU40LMZaFWMnAPqcL86CA7GVPm
+ xNdGxrJU3sHDBjxhNDaRoGQoHgoUiGm3g5dSv7lbrpUPW2ytQdGTKGnxxO/lvnz7jNIZ
+ R54w8sjSCjjFPFP6w7XcD2sGnM7ujES0wo0HDhDo4uV+PX5nFqoLTukmd5UWigUorA0j
+ 1n9qOgUf7sP7au2VsgcPC8TaKbZ9rOMQydp1TeGr0Heasc9xpuAfdFdxDmLiOspg45i/
+ S+tQ==
+X-Gm-Message-State: AOJu0YwacZkGrYypx7T0pQwF92esUxG8KNJt1xBniQJWDLPuEEO5Aa2h
+ qX29Eery8jBSxDWIsGmPDuHnz/MIWGgIc10FntZXMGTiWMO220IKVOkfIyYNjrL7IjBFN4f4dpu
+ Wv2f32rYMVlzI9qTEyBJKcqFc17j+H6H5fNQkCcfChcTvnL0z9va7Wq8=
+X-Gm-Gg: Acq92OFtSh/NNxhc196zxaWoyPnxxXKprEGt9hWihdRKyIY4EskxhU09oXaOQOD/c0m
+ cIBQ1cpAeo8si5IECamfR5p3WEKo/C2VkobhGKIdDn9xll2e1ilFnxCSQjD5ygszqYgCgFoiU6P
+ wm8HC8YjFwMXF/nLb18uypIqmpFNztY4y4l/u/lF4ub0RtIt5SoA/iipBBoHt+iUqeZnIqHep1W
+ TbV3S2iGKay2Eb2+9JvMAYNnC5nT21uI4Dq/pirhw7eyyYUOXJMXWW/O7UnSUh28/FVwCbf+rdB
+ gK/GuKkKVMr3CoTlwnKhxQhIyz4KO//B/UwnShyzbXXR1L3NqCAyZMjtcEVaSxnwk6EInfs4FXY
+ 8RlRhZpf3BRqAtVWKVEuleWfv0sPYcOWycwXNeO2+p3dT2U0zJmdm/u2dNcbGkgJZQlwgZujDf0
+ 0Vhraa0AuACgsIo/eFip0SC0yUEJ3Hx9lVckevRbjTJblQ58Ug4hX/z9t3GEVqeE6irkWiCRN/s
+ 93BBRfRk/zf4vcYUK7dhPhev7Cm/W00hS3hZ3nCO/YIla9YrWWgAutq4QocjL/j/uTyCI5qC4wb
+ IdM39LQOBd3+T9CsmN2cbfgf1sTcDALLZxN8ccHiFVGf1mWrJSKZ930x0BQYctaujV4tQL7jyKL
+ oWjwNNQ==
+X-Received: by 2002:a05:690e:1c20:b0:65c:6ffb:303d with SMTP id
+ 956f58d0204a3-65da855d38emr7570548d50.62.1778482231433; Sun, 10 May 2026
+ 23:50:31 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 6/6] mailbox: stm32-ipcc: Staticize and constify driver ops
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>, <u-boot@lists.denx.de>
-CC: Patrick Delaunay <patrick.delaunay@foss.st.com>, Tom Rini
- <trini@konsulko.com>, <uboot-stm32@st-md-mailman.stormreply.com>
-References: <20260507220651.209168-1-marek.vasut+renesas@mailbox.org>
- <20260507220651.209168-6-marek.vasut+renesas@mailbox.org>
-Content-Language: en-US
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20260507220651.209168-6-marek.vasut+renesas@mailbox.org>
+References: <20260509203136.46745-1-kettenis@openbsd.org>
+In-Reply-To: <20260509203136.46745-1-kettenis@openbsd.org>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Mon, 11 May 2026 09:49:55 +0300
+X-Gm-Features: AVHnY4I_LjiopH3p1pu1jB5P5rw7KRp0jQRYO8HWbNA3xnrkexgIlzI4t_Md8VE
+Message-ID: <CAC_iWjJaVHmeuVo_SKE75ZU+c96iVj-YU+br_TCT+w_6rxmXRA@mail.gmail.com>
+Subject: Re: [PATCH] smbios: Do not fall back on devicetree without valid
+ mapping
+To: Mark Kettenis <kettenis@openbsd.org>
+Cc: u-boot@lists.denx.de, Raymond Mao <raymondmaoca@gmail.com>, 
+ Tom Rini <trini@konsulko.com>, Janne Grunau <j@jannau.net>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.48.87.93]
-X-ClientProxiedBy: ENXCAS1NODE2.st.com (10.75.128.138) To STKDAG1NODE1.st.com
- (10.75.128.132)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AMS1EPF00000090:EE_|AM0PR10MB3348:EE_
-X-MS-Office365-Filtering-Correlation-Id: e1833256-d69d-4a12-014e-08deaf2883ef
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|36860700016|82310400026|376014|56012099003|22082099003|18002099003;
-X-Microsoft-Antispam-Message-Info: IcK5hlXNG/q3AuouxBkf6/yflWSBg59XbgZuLWqU2VhyMDQUta3JLv73+BKfz6YeiXgGLZ8t+M3vr9hqqZ7ff2yAbSgTr2VivixRB+zD02E91j0c59fE3KXZlw//xeqBTf9aZ0tTmDR3OBfBw8IAQcFYDyD5yjfQDfOf1EXtoc4Czx+7IfT6M2b4HXBPQ+42YqBo7nSRAdJY424d8ZFQvIaNBcMQfSBBirLTlmeSiNq/axPzeUh5v/+atcT8pymYwDoT0i3LP+IsqyzLSGyLwx1eYZwEB+vNAnyWz1aBAlqpRohYAQ+E0Dgs8Q8KVDhhjeeizaDlC/pD/Jw2gn75GhITN+PD2rmD5rJUrKZEWqrqldqyOITC892nR7Av/MsEQ9gUOO7iHy5k27cDholqz5RTL5UxnJktqjTTJNBxSs89k6Abz3+FcgRDQ3Fd4z+SmNiQEYRf6WXYy3coXv9+2BnC/xQYbY1RzfxByqOYF5Npx51LZ8iITJOQ9ForINCvHA1mtUYsNSLYtIWWrXeikqpOu0qX2cYkri7gqzJ0C18U7l0peL8R4KhL/i2BAZmaSQd55VmDivPp6jQYUP5MEPZ1SWHRC3nhRHuJpHffvd1Ek6/yMA+vmLJTsA7bENI5amePDbUiWKEkaI+uNMXSGSmOLR3xK37mg1wFqQLrnTpUfOsKlPve6JQcttOhUbTATaD918NTOK3ES6AaYkBADkM4vXHnvWQGKsJN5cHkN5o=
-X-Forefront-Antispam-Report: CIP:164.130.1.60; CTRY:IT; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(1800799024)(36860700016)(82310400026)(376014)(56012099003)(22082099003)(18002099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: Ir0IupVxx6OwJYmqD0YXN2IY8w3nwSsj0w+/y+GoDV95abBZGtNuTFo8i+xUgqH9Mci3EHU07L1uEglU3K000009stlHy/Z9nreiG02Nhcno2vBCIoK97rVureXNS7NjJQz9mFrtgDtD3zHH7kxa1DtHNKMsGIwBN6TPuJe0osFj+8137Nt1TD/DskTvhQACmoTQz/DD11IRCAyXPCEUACZS4OttRp+3yUAsvUipKHprPE1golw2557VWZEV78BQLoVyoHmQ4cZToTNIbZuOULWBm6UvaDa4DN/ERi+Sx7SkYi9qk9N2Ir5ez5kEET/hKBEnxGTF/3GUePY+Knqc0S2HqdEGA99Js0ve5uX+QuCmAVj41kEV9y55plI3hTf4SIqks+fQ5Bjfni+jp3brczMYuUuEkFa7SIVEGmOtx+nzZeKJRfU0mpkpcCp1vgTa
-X-OriginatorOrg: foss.st.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 May 2026 06:42:47.9367 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: e1833256-d69d-4a12-014e-08deaf2883ef
-X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.60];
- Helo=[smtpO365.st.com]
-X-MS-Exchange-CrossTenant-AuthSource: AMS1EPF00000090.eurprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM0PR10MB3348
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -130,40 +118,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Thanks Mark,
 
+On Sat, 9 May 2026 at 23:31, Mark Kettenis <kettenis@openbsd.org> wrote:
+>
+> The smbios_get_val_si() function may get called for a sysinfo
+> property for which there is no mapping to a devicetree property.
+> Avoid a NULL pointer dereference in this case by skipping the
+> read of the mapped property from the device tree.
+>
+> Fixes: 83b28b55d74f ("smbios: add support for dynamic generation of Type 9 system slot tables")
+> Signed-off-by: Mark Kettenis <kettenis@openbsd.org>
+> ---
 
-On 5/8/26 00:06, Marek Vasut wrote:
-> Set the ops structure as static const. The structure is not accessible
-> from outside of this driver and is not going to be modified at runtime.
-> 
-> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
-> ---
-> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
-> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: u-boot@lists.denx.de
-> Cc: uboot-stm32@st-md-mailman.stormreply.com
-> ---
->  drivers/mailbox/stm32-ipcc.c | 2 +-
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+
+>  lib/smbios.c | 2 +-
 >  1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/drivers/mailbox/stm32-ipcc.c b/drivers/mailbox/stm32-ipcc.c
-> index dda108735fc..49f7795b3cd 100644
-> --- a/drivers/mailbox/stm32-ipcc.c
-> +++ b/drivers/mailbox/stm32-ipcc.c
-> @@ -147,7 +147,7 @@ static const struct udevice_id stm32_ipcc_ids[] = {
->  	{ }
->  };
->  
-> -struct mbox_ops stm32_ipcc_mbox_ops = {
-> +static const struct mbox_ops stm32_ipcc_mbox_ops = {
->  	.request = stm32_ipcc_request,
->  	.rfree = stm32_ipcc_free,
->  	.send = stm32_ipcc_send,
-
-Hi Marek
-
-Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
-
-Thanks
-Patrice
+>
+> diff --git a/lib/smbios.c b/lib/smbios.c
+> index d5f18c8bd69..906d2753517 100644
+> --- a/lib/smbios.c
+> +++ b/lib/smbios.c
+> @@ -292,7 +292,7 @@ static int smbios_get_val_si(struct smbios_ctx * __maybe_unused ctx,
+>
+>         /* If the node is still missing, try with the mapping values */
+>         nprop = convert_sysinfo_to_dt(ctx->subnode_name, prop);
+> -       if (!ofnode_read_u32(ofnode_root(), nprop->dt_str, &val))
+> +       if (nprop && !ofnode_read_u32(ofnode_root(), nprop->dt_str, &val))
+>                 return val;
+>  #endif
+>         return val_def;
+> --
+> 2.53.0
+>
