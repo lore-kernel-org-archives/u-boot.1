@@ -4,22 +4,22 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A6BBCD37AC
-	for <u-boot@archiver.kernel.org>; Mon, 11 May 2026 12:10:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6E96CD37AC
+	for <u-boot@archiver.kernel.org>; Mon, 11 May 2026 12:10:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1C9CC8394E;
+	by phobos.denx.de (Postfix) with ESMTP id 50F8C83C51;
 	Mon, 11 May 2026 14:09:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=ew.tq-group.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=ew.tq-group.com header.i=@ew.tq-group.com header.b="ZY2gV49a";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=ew.tq-group.com header.i=@ew.tq-group.com header.b="FncVAN+v";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A6B68803C6; Mon, 11 May 2026 14:09:35 +0200 (CEST)
+ id AA29B8341A; Mon, 11 May 2026 14:09:35 +0200 (CEST)
 Received: from www537.your-server.de (www537.your-server.de [188.40.3.216])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A98478341A
+ by phobos.denx.de (Postfix) with ESMTPS id B75B38394E
  for <u-boot@lists.denx.de>; Mon, 11 May 2026 14:09:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=ew.tq-group.com
@@ -30,29 +30,28 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
  Content-Type:Content-ID:Content-Description:Resent-Date:Resent-From:
  Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID;
- bh=Pf5q3jGKK2KEhKZjhY9BRR4TNqQR2QHK8ib4rUUMjDY=; b=ZY2gV49a1Nthkc21IBdyQ2u92D
- r+ig6/hwWW3d00kELdpuKDKVIAaYGN3oWoDpkTrWW6imo33OcEa49V/lxh0H+M0d/bx+R+ZscwMzT
- O2Il5OTIwczBHgS6ePqO2CF8FpBnplts7CGDQ/tWKuvXPivk9owpFU2I+p9tSmdQnsgkRpDSvFx0P
- jCPIZwaO2nBGAGJ/VIwL8Aem1g+hYGjy5kTtUSTn0VWnWJg1QgZhWU2D0O61H1XRvZtTDl9Tu72oK
- vS3RfWhjYYvzAbpiXYE1WZuOVqpETGyLqqksZoYD68wX3VRtrv+QP08Q5eLbabu+nvAnB05dwKNOn
- Gk0VTceg==;
+ bh=Zo8mG7i99bZ4YgMJMlaxoPyxb790Z8FCGb3ysSiaAvY=; b=FncVAN+vdk/VW4GIuRy2gFem3Q
+ v8dPflBgG5QS8elp2PFQU0YYdcuWS6HPR2dNdC+zqnWQmdTlyK8sEBvCadTsib2aQwF4g1WFH/iAG
+ 1mTnOcGriXrBcuh0uSj7nUZEJw7XVFZ1gYwtndMgMbKjqelUu/vZTNptL3GJ4fseaCe3X/u3v4V68
+ 9TkmNVnuq4temuWtHdn4HeQ2xgA9XhwqSjjpDSgXn4CgvAro+1Dp75pTB7vOZwBMyjAb/hWpXqsag
+ ZyI0gwXiZW5W6vbgd1NNaYaFPFoeaDFnW+soxQm/Hmaq01ssBMUujdhjamZ46U123H7W1Q8UG33C1
+ mgwtBydw==;
 Received: from sslproxy06.your-server.de ([78.46.172.3])
  by www537.your-server.de with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
  (Exim 4.96.2) (envelope-from <Alexander.Feilke@ew.tq-group.com>)
- id 1wMPS0-000MUO-0Y; Mon, 11 May 2026 14:09:32 +0200
+ id 1wMPS0-000MUm-15; Mon, 11 May 2026 14:09:32 +0200
 Received: from localhost ([127.0.0.1])
  by sslproxy06.your-server.de with esmtpsa (TLS1.3) tls TLS_AES_256_GCM_SHA384
  (Exim 4.96) (envelope-from <Alexander.Feilke@ew.tq-group.com>)
- id 1wMPS0-000GAr-0e; Mon, 11 May 2026 14:09:31 +0200
+ id 1wMPS0-000GAr-1N; Mon, 11 May 2026 14:09:32 +0200
 From: Alexander Feilke <Alexander.Feilke@ew.tq-group.com>
 To: u-boot@lists.denx.de
 Cc: u-boot@ew.tq-group.com,
  Alexander Feilke <alexander.feilke@ew.tq-group.com>,
- Tom Rini <trini@konsulko.com>,
- Markus Niebel <Markus.Niebel@ew.tq-group.com>
-Subject: [PATCH v2 3/8] rtc: pcf85063: add support for NXP PCF85063 family
-Date: Mon, 11 May 2026 14:09:12 +0200
-Message-Id: <20260511120917.1017866-4-Alexander.Feilke@ew.tq-group.com>
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2 4/8] rtc: pcf85063: add missing register definitions
+Date: Mon, 11 May 2026 14:09:13 +0200
+Message-Id: <20260511120917.1017866-5-Alexander.Feilke@ew.tq-group.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20260511120917.1017866-1-Alexander.Feilke@ew.tq-group.com>
 References: <20260511120917.1017866-1-Alexander.Feilke@ew.tq-group.com>
@@ -76,58 +75,61 @@ X-Virus-Status: Clean
 
 From: Alexander Feilke <alexander.feilke@ew.tq-group.com>
 
-Supported devices:
+Sync definitions from upstream linux v6.19.
 
-- generic PCF85063 / PCF85063TP (no alarm regs)
-- PCF85063A / PCF85073A (alarm regs)
-
-Tested with TQMa8MPxL SOM from TQ-Systems GmbH.
-
-Also add missing .data field to rv8263 which represents the number
-of available registers (= linux `pcf85063_config.max_register + 1`).
-
-Signed-off-by: Markus Niebel <Markus.Niebel@ew.tq-group.com>
 Signed-off-by: Alexander Feilke <alexander.feilke@ew.tq-group.com>
 ---
- drivers/rtc/pcf85063.c | 12 +++++++++++-
- 1 file changed, 11 insertions(+), 1 deletion(-)
+ drivers/rtc/pcf85063.c | 26 ++++++++++++++++++++++++--
+ 1 file changed, 24 insertions(+), 2 deletions(-)
 
 diff --git a/drivers/rtc/pcf85063.c b/drivers/rtc/pcf85063.c
-index 21640b039c1..183a214a3e9 100644
+index 183a214a3e9..06c85d939e0 100644
 --- a/drivers/rtc/pcf85063.c
 +++ b/drivers/rtc/pcf85063.c
-@@ -80,12 +80,18 @@ static int pcf85063_reset(struct udevice *dev)
+@@ -11,11 +11,33 @@
+ #include <dm/device_compat.h>
+ 
+ #define PCF85063_REG_CTRL1		0x00 /* status */
+-#define PCF85063_REG_CTRL1_SR		0x58
++#define PCF85063_REG_CTRL1_CAP_SEL	BIT(0)
++#define PCF85063_REG_CTRL1_STOP		BIT(5)
++#define PCF85063_REG_CTRL1_EXT_TEST	BIT(7)
++#define PCF85063_REG_CTRL1_SWR		0x58 /* Software reset command */
++
++#define PCF85063_REG_CTRL2		0x01
++#define PCF85063_CTRL2_AF		BIT(6)
++#define PCF85063_CTRL2_AIE		BIT(7)
++
++#define PCF85063_REG_OFFSET		0x02
++#define PCF85063_OFFSET_SIGN_BIT	6	/* 2's complement sign bit */
++#define PCF85063_OFFSET_MODE		BIT(7)
++#define PCF85063_OFFSET_STEP0		4340
++#define PCF85063_OFFSET_STEP1		4069
++
++#define PCF85063_REG_CLKO_F_MASK	0x07 /* frequency mask */
++#define PCF85063_REG_CLKO_F_32768HZ	0x00
++#define PCF85063_REG_CLKO_F_OFF		0x07
++
++#define PCF85063_REG_RAM		0x03
+ 
+ #define PCF85063_REG_SC			0x04 /* datetime */
+ #define PCF85063_REG_SC_OS		0x80
+ 
++#define PCF85063_REG_ALM_S		0x0b
++#define PCF85063_AEN			BIT(7)
++
+ static int pcf85063_get_time(struct udevice *dev, struct rtc_time *tm)
+ {
+ 	u8 regs[7];
+@@ -74,7 +96,7 @@ static int pcf85063_set_time(struct udevice *dev, const struct rtc_time *tm)
+ 
+ static int pcf85063_reset(struct udevice *dev)
+ {
+-	return dm_i2c_reg_write(dev, PCF85063_REG_CTRL1, PCF85063_REG_CTRL1_SR);
++	return dm_i2c_reg_write(dev, PCF85063_REG_CTRL1, PCF85063_REG_CTRL1_SWR);
+ }
+ 
  static int pcf85063_read(struct udevice *dev, unsigned int offset, u8 *buf,
- 			 unsigned int len)
- {
-+	if (offset + len > dev->driver_data)
-+		return -EINVAL;
-+
- 	return dm_i2c_read(dev, offset, buf, len);
- }
- 
- static int pcf85063_write(struct udevice *dev, unsigned int offset,
- 			  const u8 *buf, unsigned int len)
- {
-+	if (offset + len > dev->driver_data)
-+		return -EINVAL;
-+
- 	return dm_i2c_write(dev, offset, buf, len);
- }
- 
-@@ -105,7 +111,11 @@ static int pcf85063_probe(struct udevice *dev)
- }
- 
- static const struct udevice_id pcf85063_of_id[] = {
--	{ .compatible = "microcrystal,rv8263" },
-+	{ .compatible = "microcrystal,rv8263", .data = 0x12 },
-+	{ .compatible = "nxp,pcf85063", .data = 0xb },
-+	{ .compatible = "nxp,pcf85063a", .data = 0x12 },
-+	{ .compatible = "nxp,pcf85063tp", .data = 0xb },
-+	{ .compatible = "nxp,pcf85073a", .data = 0x12 },
- 	{ }
- };
- 
 -- 
 2.34.1
 
