@@ -4,121 +4,108 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80CAFCD37AC
-	for <u-boot@archiver.kernel.org>; Mon, 11 May 2026 14:50:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6831DCD37BE
+	for <u-boot@archiver.kernel.org>; Mon, 11 May 2026 14:58:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EB9968341A;
-	Mon, 11 May 2026 16:50:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id BD9E88341A;
+	Mon, 11 May 2026 16:58:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="IXpHMQzc";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="si07OmaV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EEBB483BC8; Mon, 11 May 2026 16:50:52 +0200 (CEST)
-Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
- [IPv6:2a00:1450:4864:20::330])
+ id CA1888394E; Mon, 11 May 2026 16:58:22 +0200 (CEST)
+Received: from mail-oa1-x43.google.com (mail-oa1-x43.google.com
+ [IPv6:2001:4860:4864:20::43])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 85BDC80F0E
- for <u-boot@lists.denx.de>; Mon, 11 May 2026 16:50:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C6FEE81E18
+ for <u-boot@lists.denx.de>; Mon, 11 May 2026 16:58:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-488b3f8fa2bso52359365e9.1
- for <u-boot@lists.denx.de>; Mon, 11 May 2026 07:50:50 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x43.google.com with SMTP id
+ 586e51a60fabf-40ea36b56b7so3286033fac.3
+ for <u-boot@lists.denx.de>; Mon, 11 May 2026 07:58:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1778511050; x=1779115850; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=CB8eOEKBMflall7lkmN5VTJaf1IksK+UCcPz5kXcq4s=;
- b=IXpHMQzcthz8gPpVoi96beRR3usLccUvMJ18kHO7LeKbg3hjvyKkTEGSDOYPePqdA0
- rXYWfiZYHY8jq9NlkuzameBM/sIpgvzc6Tl2x5Q5uzFTYY+M4rDLLJLJpuzng2GiVIo7
- iWSE8vNC1iK42ZG4NrMYOKVYX9jyfvIhZXs6S3Xda1YYFyr+ppyhG/5GRba8SgLXqSlH
- d9Y8uLgewGol9kW8HC80hVLMgKiUFy4T9c1FRu/U8XWgOk1fS77roazYTahDyyzHLccr
- Mak5Z6FYdiMcow2B0lrfYoNQdSarp4woLdwJ8k4vRzL8dcD19oYnMBr+4p1Ohsf5KVyj
- 7V5Q==
+ d=konsulko.com; s=google; t=1778511498; x=1779116298; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=FmfGvAhOblmmjYPxfKmQjAob14w1LMQdNX+xVzGclIM=;
+ b=si07OmaV9rpd/AbzozuALOzwXDCsmM8hfQl9eO+gkEH+rhlaruELTuMOJA004ZCm7A
+ IlgKSVn80lZUKEqKOhUs+TNRB8V1WvFEpwn14q7Z4+g2394828mEeVUvivljtmGKj4Tq
+ aw9wRIs5UYRpjeKLkMdoUErgeUtT/yZYgCpQ8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778511050; x=1779115850;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20251104; t=1778511498; x=1779116298;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=CB8eOEKBMflall7lkmN5VTJaf1IksK+UCcPz5kXcq4s=;
- b=eXpMkzGdBOfiPUYjpVLf3OA2bm9KYpJf1NVbrWImF+gaJyl9iIwi+Wgv6aXrA52Dj1
- pGBUrwlupNH1aLHpQYAxjRrEaBgvK9mwwgAtibR5z4Dg+za9EQRfcgrL8AtYSCzSoRPm
- WpaqRBOB7lieYgHf0qVE02bv5pgt+ax8R7J20UkrTxCduCm4mq3SdgeXguJzUSBUYiQY
- jtMg7Klqnw4Pvu7eVH6UGlm2sNqKHmXJsr70kjLaB7hmC/9bY9GsKaUbjb5O920tWO7y
- nYBn/dPl2gG7JXRpI+3CHklP14fBhESWKWIfepcM4DTcWdr57Ncgjz4Pox4WRiwl6TEk
- u4Mg==
+ bh=FmfGvAhOblmmjYPxfKmQjAob14w1LMQdNX+xVzGclIM=;
+ b=XiiPLA/Mg+AWG/EH8cAq+sIKGCIHeRoZWvtctMYITWg/ei/wdMZNx1DhxZVRi8Zlf0
+ jJw+Nu2WB4cr0I5MJInNgDCfI0igMaWb89x5AdAitBy+Cg75VwmDIdMNsdnP9m0yrEWj
+ 9/bCsOnIUFdLKLJUJLJoEXNUxnNVk4OOgbKULSzHjwKuuzdiBPKPDBd8235zSWGfgY5y
+ e4G+0axocQ2VU4lzEYDi8QYcE+KwxU1Qu/ot3fFo/FdK5xEd37AazoKtDY/iHzAB1oVG
+ 8klXAfECNDj2xp4TNOqnyHfF2QIXY0KjkcuhSsQwa2ME/z0i3+tW5oJq5A9e9v5WY/4K
+ uyCg==
 X-Forwarded-Encrypted: i=1;
- AFNElJ/0ie5O0X92HUV7DaS31gAhAbPd8V7HZZ2qwnyG2ZyjZJbqyaLwjRHyCt1fohzQqztR2VBAxE8=@lists.denx.de
-X-Gm-Message-State: AOJu0YwQIluM+NKNweP4+VO+/N0Q+zymyuM3qIYNoLmbw5bGlzn+tcUQ
- fSVrzDyXkvv14V2Fw1+fHcKRraRY9kQmmLU5By1G9HjUhmILXGpdl+ZCaQQcMHYTR1c=
-X-Gm-Gg: Acq92OHJFXn71pyarRum2nI6fAMMVu8/57vSTAk8LQCQj2mSnBvhaKGKOyDOAgShp+Z
- zimGSRmn7XaC694NQvwUdoZsC5XTMgK8nw1k+/p6J99CHtppfYmMBxU9BMFS2ThBrf2aCYt4Jee
- A1nKQeDgqlotppjDMXaG8zOkvqK+HNtOL1u4J+vS+5K/K+gPMSbQAj+VIHqBzOpWkuIfazG87ef
- mm9ftCWRQ3+4oFmq/GdeSd8xdJsx1Pr/6cnB1LFUQLoU5uhXCW4kZqFQLl952TkdlH2S7bq4rW8
- aVGOIj7Wy0U8FLHVFhRGXkHdt9jsEUdwwcSYIydb2cQp9lz2N2OUOMkh6d64X+wNn7s9KrddUNH
- +kfGmlei6VadUrQ3vqWorUrGy3L0EIcdzCwgWJ67GKbUDA58mSOAlgt2I3qEFLqEjTFzG94vk7H
- XMlJadAaGuOdE39J2NzJY3Kp7FsC6xw7M+vvBcgpED/YBe9sS0X9fBlsD3Xfyml1fsexY+wDtUB
- XVKWag=
-X-Received: by 2002:a05:600c:3e10:b0:485:3cef:d6ea with SMTP id
- 5b1f17b1804b1-48e5e0089e0mr298188885e9.13.1778511049684; 
- Mon, 11 May 2026 07:50:49 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:106d:1080:63dd:7879:45c5:21b9?
- ([2a01:e0a:106d:1080:63dd:7879:45c5:21b9])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-48e6fffb9bdsm177545885e9.1.2026.05.11.07.50.48
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 11 May 2026 07:50:49 -0700 (PDT)
-Message-ID: <0fd48f59-1309-45ff-ab21-8b037449ea86@linaro.org>
-Date: Mon, 11 May 2026 16:50:48 +0200
+ AFNElJ8m8Bnz0qxzacAPtedPMHzFVU+KfLCb27DSavZUj5RRN/9tNZZIl0buByz834soqQpHOZ7Mk7c=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy9tbAKOKZjWfPWhmX9ubFY9/16LxcbOlzSwrHFTzbeajaCSeUB
+ GBzA9iJeFK6LzY/XGJAdaJNZH90+6izQtFxRnMIV//D7OK1HoGkjqJHbJtgmDO3x8Gg=
+X-Gm-Gg: Acq92OEF3c29Hg6k9b/2YwBee1Z46h1pAfDh8brQ6to/G2jg0GO11xJvt9AEMNQgCkx
+ fatgWmm0BAkGROlsbRZT1pHd1se5aiClLpFjdOUKQatpXhv5gBAsPCjm8/ZDukptr9s9wRMHqdJ
+ PrCEro02D2sd8l/AppHS5P3wcBOgCzM9NZlr66b1Q0/3oXGzVogzpWu6ZWWtG0ORR9F2GO/ybvv
+ zVw328VyubVDonStOCzZyfVZs7GDyfDKtP8fqdmPVTS8IDfwq19hlXfpG/iHzxPU60E6ezIVR9E
+ Aw7xv4LxMeoIynv0hvUSSR0caJsulRjTFki0VNUI0lI3trrjk10JUKdlSUmOYzn7RS6OOrMOrx1
+ iff6G96mcPf36aGNHvNxQW8Am0nvZMXIssXSTNj6x/x0FkJy3I8pRP9pnH9YP7zWl7wm72xVvTq
+ MhMnf7lGS+F/7iKxpXrkluN34KBHBM0psrE9FUsd1Mn9OcNBYBpGhic1HarCpSMOiaHVyVAqYOm
+ dQxbH0IiJl1AHGcr6TUATWBUeYKbe1NRdsIN1vwCqWwI9twx0RmcjhHfHdw0Q==
+X-Received: by 2002:a05:6870:5b83:b0:409:5241:8abc with SMTP id
+ 586e51a60fabf-434f663d2e2mr14717326fac.20.1778511497575; 
+ Mon, 11 May 2026 07:58:17 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
+ [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-435570ad92dsm10151263fac.2.2026.05.11.07.58.14
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 11 May 2026 07:58:16 -0700 (PDT)
+Date: Mon, 11 May 2026 08:58:13 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Anshul Dalal <anshuld@ti.com>
+Cc: Jens Wiklander <jens.wiklander@linaro.org>, u-boot@lists.denx.de,
+ Marek Vasut <marex@denx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Andre Przywara <andre.przywara@arm.com>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Bin Meng <bmeng.cn@gmail.com>, Casey Connolly <casey.connolly@linaro.org>,
+ Chunfeng Yun <chunfeng.yun@mediatek.com>,
+ Eddie Cai <eddie.cai.linux@gmail.com>,
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
+ Ion Agorria <ion@agorria.com>, Junhui Liu <junhui.liu@pigmoral.tech>,
+ Kongyang Liu <seashell11234455@gmail.com>, Lukasz Majewski <lukma@denx.de>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Rasmus Villemoes <ravi@prevas.dk>,
+ Ryder Lee <ryder.lee@mediatek.com>, Simon Glass <sjg@chromium.org>,
+ Stephan Gerhold <stephan.gerhold@linaro.org>,
+ Svyatoslav Ryhel <clamor95@gmail.com>,
+ Varadarajan Narayanan <quic_varada@quicinc.com>,
+ Weijie Gao <weijie.gao@mediatek.com>, Zixun LI <admin@hifiphile.com>,
+ Jerome Forissier <jerome.forissier@arm.com>,
+ Chintan Vankar <c-vankar@ti.com>, Siddharth Vadapalli <s-vadapalli@ti.com>
+Subject: Re: [RFC PATCH v2 00/64] drivers: usb: dwc3: sync code with Linux
+ v6.16-rc7
+Message-ID: <20260511145813.GG1858239@bill-the-cat>
+References: <20260507092843.358908-1-jens.wiklander@linaro.org>
+ <DIFPE908BASV.3P48QMSO3YZ7I@ti.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH 2/3] nvme: Fix missing address translation for PCIe
- inbound access
-To: Torsten Duwe <duwe@lst.de>, Bin Meng <bmeng.cn@gmail.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>
-Cc: Peter Robinson <pbrobinson@gmail.com>,
- Matthias Brugger <mbrugger@suse.com>, Tom Rini <trini@konsulko.com>,
- Andrea della Porta <andrea.porta@suse.com>, Simon Glass <sjg@chromium.org>,
- =?UTF-8?B?SmFuIMSMZXJtw6Fr?= <sairon@sairon.cz>, u-boot@lists.denx.de
-References: <20260508154108.336B968BEB@verein.lst.de>
- <20260508154245.0E24868BFE@verein.lst.de>
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
-In-Reply-To: <20260508154245.0E24868BFE@verein.lst.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="5ydeMXRyQE+uePpm"
+Content-Disposition: inline
+In-Reply-To: <DIFPE908BASV.3P48QMSO3YZ7I@ti.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -130,187 +117,114 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 5/8/26 17:42, Torsten Duwe wrote:
-> From: Torsten Duwe <duwe@suse.de>
-> 
-> U-Boot currently does not account for PCIe bridges with a non-zero
-> inbound access offset when talking NVMe, it only works on platforms
-> where this offset happens to be zero.
-> 
-> This patch enhances the NVMe driver with the ability to also handle
-> these cases.
-> 
-> Signed-off-by: Torsten Duwe <duwe@suse.de>
-> 
-> ---
->   drivers/nvme/nvme.c | 34 +++++++++++++++++++++-------------
->   1 file changed, 21 insertions(+), 13 deletions(-)
-> 
-> diff --git a/drivers/nvme/nvme.c b/drivers/nvme/nvme.c
-> index 2b14437f69c..99a47bf25f2 100644
-> --- a/drivers/nvme/nvme.c
-> +++ b/drivers/nvme/nvme.c
-> @@ -12,6 +12,7 @@
->   #include <log.h>
->   #include <malloc.h>
->   #include <memalign.h>
-> +#include <phys2bus.h>
->   #include <time.h>
->   #include <dm/device-internal.h>
->   #include <linux/compat.h>
-> @@ -27,6 +28,13 @@
->   #define IO_TIMEOUT		30
->   #define MAX_PRP_POOL		512
->   
-> +/*
-> + * Convert a memory address to the value needed by the PCI device to
-> + * access the given location, taking into account inbound window
-> + * translations of PCI bridges:
-> + */
-> +#define DEV_ADDR(a)		dev_phys_to_bus(dev->udev, (a))
 
-This doesn't look very clean, I would do something closer to linux by precalculating
-the DMA addresses after allocation like:
-====================><================================
-diff --git a/drivers/nvme/nvme.c b/drivers/nvme/nvme.c
-index 2b14437f69c..1ce06402a90 100644
---- a/drivers/nvme/nvme.c
-+++ b/drivers/nvme/nvme.c
-@@ -241,6 +241,7 @@ static struct nvme_queue *nvme_alloc_queue(struct nvme_dev *dev,
-  	nvmeq->sq_cmds = (void *)memalign(4096, NVME_SQ_SIZE(depth));
-  	if (!nvmeq->sq_cmds)
-  		goto free_queue;
-+	nvmeq->sq_dma_addr = dev_phys_to_bus(dev->udev, nvmeq->sq_cmds);
-  	memset((void *)nvmeq->sq_cmds, 0, NVME_SQ_SIZE(depth));
+--5ydeMXRyQE+uePpm
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-  	nvmeq->dev = dev;
-@@ -393,7 +394,7 @@ static int nvme_configure_admin_queue(struct nvme_dev *dev)
-  	dev->ctrl_config |= NVME_CC_IOSQES | NVME_CC_IOCQES;
+On Mon, May 11, 2026 at 01:57:25PM +0530, Anshul Dalal wrote:
+> On Thu May 7, 2026 at 2:57 PM IST, Jens Wiklander wrote:
+> > Hi,
+> >
+> > This is a follow-up to Jerome's patchset [1], addressing previous feedb=
+ack
+> > regarding the monolithic nature of the driver update.
+> >
+> > The DWC3 USB driver was forked from the Linux kernel v3.19-rc1 eleven y=
+ears
+> > ago by commit 85d5e7075f33 ("usb: dwc3: add dwc3 folder from linux kern=
+el
+> > to u-boot"). Since then, not many kernel changes have been ported back =
+into
+> > U-Boot.
+> >
+> > This series synchronizes the DWC3 core with Linux v6.16-rc7. To provide=
+=20
+> > a clear audit trail and maintain bisectability, I have structured the=
+=20
+> > series as follows:
+> >
+> > 1. Restore to Baseline: The first commit reverts U-Boot-specific change=
+s=20
+> >    to drivers/usb/dwc3 to return the directory to a clean v3.19-rc1 sta=
+te.
+> > 2. Milestone Imports: A sequence of 50+ commits follows, each performin=
+g=20
+> >    a "snapshot" import of the drivers/usb/dwc3 directory for every majo=
+r=20
+> >    kernel version (v3.19 through v6.16-rc7).=20
+> > 3. U-Boot Adaptation: The final commits (based on Jerome's original wor=
+k)=20
+> >    re-introduce the necessary glue code, XHCI/UDC updates, and build fi=
+xes=20
+> >    required for U-Boot integration.
+> >
+> > The final diff is identical to [1]. I decided to stick with that for no=
+w to
+> > focus on the method of how we import or update the code.
+> >
+> > Note that this is compile-tested only. The CI pipeline on source.denx.de
+> > was used as an OK/NOK indicator [2].=20
+> >
+> > The previous patchset was tested on xilinx_zynqmp_kria_defconfig and si=
+nce
+> > this diff is identical to the previous, it should still work on that
+> > platform. With the help of a custom build script [3] and with an additi=
+onal
+> > patch [4], I could boot the Kria KV260 board and make it detect a USB S=
+SD
+> > plugged into one of its USB 3.0 ports. It certainly doesn't mean all
+> > platforms using the DWC3 driver are still OK, but at least there is some
+> > hope. If this breaks your platform I'd like to know, and if you can sen=
+d a
+> > fix it's even better.
+> >
+> > I tried cherry-picking all the 1000+ patches in v3.19-rc1..v6.16-rc7. T=
+here
+> > were a few conflicts, even when backing out the original U-Boot patches=
+ on
+> > top of the original v3.19-rc1 import. However, the resulting state still
+> > diverged significantly from [1].
+> >
+> > Instead, I've imported each new kernel in a separate commit. That way i=
+t's
+> > very clear which kernel patches are included. Since there aren't too ma=
+ny
+> > patches for each kernel I'm listing the relevant commits in the U-Boot
+> > commit message for easier reference. I did this with a script so it's e=
+asy
+> > to make changes, if the approach is OK but we need to tune it. With this
+> > approach it should be easy to tell if a Fixes patch for the kernel might
+> > also be needed here.
+>=20
+> Hi Jens,
+>=20
+> Thanks for the work though I wasn't able to test out the series since it
+> doesn't apply cleanly on master.
+>=20
+> Could you respin with a rebase?
 
-  	writel(aqa, &dev->bar->aqa);
--	nvme_writeq((ulong)nvmeq->sq_cmds, &dev->bar->asq);
-+	nvme_writeq((ulong)nvmeq->sq_dma_addr, &dev->bar->asq);
-  	nvme_writeq((ulong)nvmeq->cqes, &dev->bar->acq);
+For something this big and still RFC, perhaps a pointer to a public tree
+is OK, until there's some substantive feedback from Marek?
 
-  	result = nvme_enable_ctrl(dev);
-diff --git a/drivers/nvme/nvme.h b/drivers/nvme/nvme.h
-index bc1d612dde4..9c5e57cb586 100644
---- a/drivers/nvme/nvme.h
-+++ b/drivers/nvme/nvme.h
-@@ -637,6 +637,7 @@ enum nvme_queue_id {
-  struct nvme_queue {
-  	struct nvme_dev *dev;
-  	struct nvme_command *sq_cmds;
-+	dma_addr_t sq_dma_addr;
-  	struct nvme_completion *cqes;
-  	u32 __iomem *q_db;
-  	u16 q_depth;
-====================><================================
+--=20
+Tom
 
-and same for the orther allocated buffers.
+--5ydeMXRyQE+uePpm
+Content-Type: application/pgp-signature; name="signature.asc"
 
-Thanks,
-Neil
+-----BEGIN PGP SIGNATURE-----
 
-> +
->   static int nvme_wait_csts(struct nvme_dev *dev, u32 mask, u32 val)
->   {
->   	int timeout;
-> @@ -91,12 +99,12 @@ static int nvme_setup_prps(struct nvme_dev *dev, u64 *prp2,
->   	i = 0;
->   	while (nprps) {
->   		if ((i == (prps_per_page - 1)) && nprps > 1) {
-> -			*(prp_pool + i) = cpu_to_le64((ulong)prp_pool +
-> -					page_size);
-> +			*(prp_pool + i) = cpu_to_le64(DEV_ADDR((ulong)prp_pool +
-> +								page_size));
->   			i = 0;
->   			prp_pool += page_size;
->   		}
-> -		*(prp_pool + i++) = cpu_to_le64(dma_addr);
-> +		*(prp_pool + i++) = cpu_to_le64(DEV_ADDR(dma_addr));
->   		dma_addr += page_size;
->   		nprps--;
->   	}
-> @@ -393,8 +401,8 @@ static int nvme_configure_admin_queue(struct nvme_dev *dev)
->   	dev->ctrl_config |= NVME_CC_IOSQES | NVME_CC_IOCQES;
->   
->   	writel(aqa, &dev->bar->aqa);
-> -	nvme_writeq((ulong)nvmeq->sq_cmds, &dev->bar->asq);
-> -	nvme_writeq((ulong)nvmeq->cqes, &dev->bar->acq);
-> +	nvme_writeq(DEV_ADDR((ulong)nvmeq->sq_cmds), &dev->bar->asq);
-> +	nvme_writeq(DEV_ADDR((ulong)nvmeq->cqes), &dev->bar->acq);
->   
->   	result = nvme_enable_ctrl(dev);
->   	if (result)
-> @@ -420,7 +428,7 @@ static int nvme_alloc_cq(struct nvme_dev *dev, u16 qid,
->   
->   	memset(&c, 0, sizeof(c));
->   	c.create_cq.opcode = nvme_admin_create_cq;
-> -	c.create_cq.prp1 = cpu_to_le64((ulong)nvmeq->cqes);
-> +	c.create_cq.prp1 = cpu_to_le64(DEV_ADDR((ulong)nvmeq->cqes));
->   	c.create_cq.cqid = cpu_to_le16(qid);
->   	c.create_cq.qsize = cpu_to_le16(nvmeq->q_depth - 1);
->   	c.create_cq.cq_flags = cpu_to_le16(flags);
-> @@ -437,7 +445,7 @@ static int nvme_alloc_sq(struct nvme_dev *dev, u16 qid,
->   
->   	memset(&c, 0, sizeof(c));
->   	c.create_sq.opcode = nvme_admin_create_sq;
-> -	c.create_sq.prp1 = cpu_to_le64((ulong)nvmeq->sq_cmds);
-> +	c.create_sq.prp1 = cpu_to_le64(DEV_ADDR((ulong)nvmeq->sq_cmds));
->   	c.create_sq.sqid = cpu_to_le16(qid);
->   	c.create_sq.qsize = cpu_to_le16(nvmeq->q_depth - 1);
->   	c.create_sq.sq_flags = cpu_to_le16(flags);
-> @@ -458,14 +466,14 @@ int nvme_identify(struct nvme_dev *dev, unsigned nsid,
->   	memset(&c, 0, sizeof(c));
->   	c.identify.opcode = nvme_admin_identify;
->   	c.identify.nsid = cpu_to_le32(nsid);
-> -	c.identify.prp1 = cpu_to_le64(dma_addr);
-> +	c.identify.prp1 = cpu_to_le64(DEV_ADDR(dma_addr));
->   
->   	length -= (page_size - offset);
->   	if (length <= 0) {
->   		c.identify.prp2 = 0;
->   	} else {
->   		dma_addr += (page_size - offset);
-> -		c.identify.prp2 = cpu_to_le64(dma_addr);
-> +		c.identify.prp2 = cpu_to_le64(DEV_ADDR(dma_addr));
->   	}
->   
->   	c.identify.cns = cpu_to_le32(cns);
-> @@ -490,7 +498,7 @@ int nvme_get_features(struct nvme_dev *dev, unsigned fid, unsigned nsid,
->   	memset(&c, 0, sizeof(c));
->   	c.features.opcode = nvme_admin_get_features;
->   	c.features.nsid = cpu_to_le32(nsid);
-> -	c.features.prp1 = cpu_to_le64(dma_addr);
-> +	c.features.prp1 = cpu_to_le64(DEV_ADDR(dma_addr));
->   	c.features.fid = cpu_to_le32(fid);
->   
->   	ret = nvme_submit_admin_cmd(dev, &c, result);
-> @@ -516,7 +524,7 @@ int nvme_set_features(struct nvme_dev *dev, unsigned fid, unsigned dword11,
->   
->   	memset(&c, 0, sizeof(c));
->   	c.features.opcode = nvme_admin_set_features;
-> -	c.features.prp1 = cpu_to_le64(dma_addr);
-> +	c.features.prp1 = cpu_to_le64(DEV_ADDR(dma_addr));
->   	c.features.fid = cpu_to_le32(fid);
->   	c.features.dword11 = cpu_to_le32(dword11);
->   
-> @@ -785,8 +793,8 @@ static ulong nvme_blk_rw(struct udevice *udev, lbaint_t blknr,
->   		c.rw.slba = cpu_to_le64(slba);
->   		slba += lbas;
->   		c.rw.length = cpu_to_le16(lbas - 1);
-> -		c.rw.prp1 = cpu_to_le64(temp_buffer);
-> -		c.rw.prp2 = cpu_to_le64(prp2);
-> +		c.rw.prp1 = cpu_to_le64(DEV_ADDR(temp_buffer));
-> +		c.rw.prp2 = cpu_to_le64(DEV_ADDR(prp2));
->   		status = nvme_submit_sync_cmd(dev->queues[NVME_IO_Q],
->   				&c, NULL, IO_TIMEOUT);
->   		if (status)
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCagHugQAKCRAr4qD1Cr/k
+CkAKAQCgktuAM6OXibiufnzI9LW8nzOzpvcV6SRRjvjbHJOnTgD8DM9wXKyJeLlo
+VvGmAIc0AmRsknj9YxdVjvYSRvlO+AI=
+=ZzIh
+-----END PGP SIGNATURE-----
 
+--5ydeMXRyQE+uePpm--
