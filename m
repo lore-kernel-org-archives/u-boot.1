@@ -4,76 +4,115 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF430CD37AC
-	for <u-boot@archiver.kernel.org>; Mon, 11 May 2026 04:53:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 782ECCD37B7
+	for <u-boot@archiver.kernel.org>; Mon, 11 May 2026 06:01:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3A4AD846CA;
-	Mon, 11 May 2026 06:53:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=ziyao.cc
+	by phobos.denx.de (Postfix) with ESMTP id 7A3FC8467A;
+	Mon, 11 May 2026 08:01:57 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=ziyao.cc header.i=me@ziyao.cc header.b="eM7b5LEj";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="lJmNJMQi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CDAEB84706; Mon, 11 May 2026 06:53:14 +0200 (CEST)
-Received: from sender4-op-o12.zoho.com (sender4-op-o12.zoho.com
- [136.143.188.12])
+ id 0EE20846C3; Mon, 11 May 2026 08:01:57 +0200 (CEST)
+Received: from AS8PR04CU009.outbound.protection.outlook.com
+ (mail-westeuropeazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DBF46846C7
- for <u-boot@lists.denx.de>; Mon, 11 May 2026 06:53:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
- header.from=ziyao.cc
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=me@ziyao.cc
-ARC-Seal: i=1; a=rsa-sha256; t=1778475186; cv=none; 
- d=zohomail.com; s=zohoarc; 
- b=SfGB1/Y7UybMw+c/sSTm+FRSdYTOAl3VWBFFQQqVFpnNuP5OpDvdJme9aPN2JpaTtxg++74x5phJGduBldag1nTCcS9MtWmDcP+b3vdh4dPqn8xAFfSWaxmxWN6ynvN70zvKzr201v5lQKi87zl06coafbMGwIQ1vdREBqL011M=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
- s=zohoarc; t=1778475186;
- h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To;
- bh=hUMw3EK4uCn0OLMUE93iDZKZf6153KoojNVCmA6cM80=; 
- b=e4C0Io5D66yryoXc6Lvk0lNDlX+sYyRsteC+kMMoYo2L0061SEoOQ4XATHlpnjLyLEutaCI6s07C6VnqxOhL5QkZwsnPOJspHGHzU4ckdyHxtAXxMkA8ZEeQ2pJixO2ov7Ir6OeEBfQYoFR998abHtw2mFs+3N8/YGKnDUfvXIA=
-ARC-Authentication-Results: i=1; mx.zohomail.com; dkim=pass  header.i=ziyao.cc;
- spf=pass  smtp.mailfrom=me@ziyao.cc;
- dmarc=pass header.from=<me@ziyao.cc>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1778475186; 
- s=zmail; d=ziyao.cc; i=me@ziyao.cc;
- h=Date:Date:From:From:To:To:Cc:Cc:Subject:Subject:Message-ID:References:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:Message-Id:Reply-To;
- bh=hUMw3EK4uCn0OLMUE93iDZKZf6153KoojNVCmA6cM80=;
- b=eM7b5LEj7nAAJilTLpOPn0ZieLoXXLHXozjpZwDjKa6UefnEZyqM9LqIAx2vQ2FX
- korN4d2LnchlbpHC4eRNg9UU02eVU7RWb7RFGFLZYzPBnqy8/33C9///Q7qCIiV3Y+p
- vJZUB12OoC8eu6ft7f7lOumH+Ohvcr8Nh+3V/pKA=
-Received: by mx.zohomail.com with SMTPS id 1778475184059216.23393348748994;
- Sun, 10 May 2026 21:53:04 -0700 (PDT)
-Date: Mon, 11 May 2026 04:52:49 +0000
-From: Yao Zi <me@ziyao.cc>
-To: Vincent Legoll <legoll@online.fr>, Guodong Xu <guodong@riscstar.com>,
- u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Michal Simek <michal.simek@amd.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Junhui Liu <junhui.liu@pigmoral.tech>,
- Peter Korsgaard <peter@korsgaard.com>,
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Raymond Mao <raymond.mao@riscstar.com>,
- Gabriel Fernandez <gabriel.fernandez@foss.st.com>,
- Kever Yang <kever.yang@rock-chips.com>,
- Finley Xiao <finley.xiao@rock-chips.com>, Rick Chen <rick@andestech.com>,
- Conor Dooley <conor.dooley@microchip.com>,
- u-boot-spacemit@groups.io, Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: Re: [PATCH 0/8] riscv: spacemit: k1: add clock reset drivers, switch
- to upstream DT
-Message-ID: <agFgoT-HbPfzgVWT@pie>
-References: <20260510-b4-k1-clk-reset-upstream-dts-v1-0-db0b0503ee44@riscstar.com>
- <3fe472bc-b9aa-49f6-ab75-a45547815c28@online.fr>
+ by phobos.denx.de (Postfix) with ESMTPS id 8BF9484671
+ for <u-boot@lists.denx.de>; Mon, 11 May 2026 08:01:54 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=patrice.chotard@foss.st.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=tQsHVDUvn5DTovqd/UO/Bemb4rYJdQ2suMCkg8Brr0qPZHxDTwELryzxhKVyvJRCErPUCMV14OercGIhBS/uTFRMILFR4FFf63hLvskInQkx7tlV4ytKHpDBJ7fE3IjBoyEaGl3DVOP7Fniw/QDOh59tFa8Z8lpIM1inqx4CMMwt4BWH9Jqkmd+53ShNKrZQAavBTvh4n4rj3+ZhIJDXj+5P3fNLj4CUPKMiswe2mGyybBieGci8kfVsfE2N1duNptBFxZ7jKPdbbVd8T2ItNZPJ3bEcIecBQZ1EXWKUfJZRTHP8N0UgPboSvmUqf0+bPkLWYn0T7Zl9IwbbeHmoMA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=20dokVosM0106/5j8ppYK6GktkpxyQ0tWYGJ0YnWSI8=;
+ b=etWizn68w9DTuPOhkg+uV+WYnN9FWr3PBSQTiu9d7gzBBmyois4ulrDlFMLAMXXAqy6lKbFPu/dQ63t77+kKS0iIRcvs2/8YE0zVGbPF970hdqoTHQXVUuMa8425ASv5JtQHybwMZak2ofSE8QxvVGArTIquuCXdeEF91wLd9UwfauhjxZFboAfgQYhOG1zhfG5i6zsQ10g9BpgWx9rCOlAiUU7FaNkX8y+50hsRvQ1mF+QvaF2Aj1DxNrgUbs5ZNYTBJjYs0BVihCbWmkEV/OZnILGmfOLqQrln0VsS+ODHA0ba7O/lnb8HIBNC7HViWq8T2yBzrUmRUgtmjFriLg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
+ 164.130.1.60) smtp.rcpttodomain=deadband.dev smtp.mailfrom=foss.st.com;
+ dmarc=fail (p=none sp=none pct=100) action=none header.from=foss.st.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=20dokVosM0106/5j8ppYK6GktkpxyQ0tWYGJ0YnWSI8=;
+ b=lJmNJMQijGh7wYibGClpp8mpnXX3+tcU5uejXskPEeZGIYcpf+axpfV1Y3I5GMhYVzhSp7lVRMdofrLg7L6pcKDWNVKt/c7fFf6xjHrOA8oeMVtbM4kVKSE97mNa7q2U4A2lp154CbSZfFtfnWAMwaN8ffdyIgEOQcu+ubYLjK8sb1SjWrsISyrqkDUZDeDw8DWlSpRk8apIIgj+8MxzB67CFJt3tHxB3G8kiuqZYc21Tof3cTVymmGB5pgtrFlYumgbVnkXrgx+nKT7Y4V0cOdXYi0Ji/P7QJKVaL2+O4yNCiLPg7vVSfY8gleOTD1YSBqKwKb8hNdX8VZJbOoOUA==
+Received: from DU2PR04CA0224.eurprd04.prod.outlook.com (2603:10a6:10:2b1::19)
+ by AS8PR10MB7400.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:613::7)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9891.23; Mon, 11 May
+ 2026 06:01:48 +0000
+Received: from DU2PEPF00028D0F.eurprd03.prod.outlook.com
+ (2603:10a6:10:2b1:cafe::c1) by DU2PR04CA0224.outlook.office365.com
+ (2603:10a6:10:2b1::19) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9891.23 via Frontend Transport; Mon,
+ 11 May 2026 06:01:48 +0000
+X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.60)
+ smtp.mailfrom=foss.st.com; dkim=none (message not signed)
+ header.d=none;dmarc=fail action=none header.from=foss.st.com;
+Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
+ designate 164.130.1.60 as permitted sender) receiver=protection.outlook.com;
+ client-ip=164.130.1.60; helo=smtpO365.st.com;
+Received: from smtpO365.st.com (164.130.1.60) by
+ DU2PEPF00028D0F.mail.protection.outlook.com (10.167.242.23) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9913.8 via Frontend Transport; Mon, 11 May 2026 06:01:47 +0000
+Received: from STKDAG1NODE1.st.com (10.75.128.132) by smtpO365.st.com
+ (10.250.44.72) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.35; Mon, 11 May
+ 2026 08:05:13 +0200
+Received: from [10.48.87.93] (10.48.87.93) by STKDAG1NODE1.st.com
+ (10.75.128.132) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.35; Mon, 11 May
+ 2026 08:01:47 +0200
+Message-ID: <523bd0ae-10a7-4397-b9e5-a85e69dbe5b8@foss.st.com>
+Date: Mon, 11 May 2026 08:01:46 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <3fe472bc-b9aa-49f6-ab75-a45547815c28@online.fr>
-X-ZohoMailClient: External
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] configs: stm32mp13: add SPI-NAND UBI boot support
+To: Austin Shirley <austin@deadband.dev>, <u-boot@lists.denx.de>
+CC: <patrick.delaunay@foss.st.com>, <trini@konsulko.com>,
+ <uboot-stm32@st-md-mailman.stormreply.com>
+References: <20260506223758.3717574-1-austin@deadband.dev>
+Content-Language: en-US
+From: Patrice CHOTARD <patrice.chotard@foss.st.com>
+In-Reply-To: <20260506223758.3717574-1-austin@deadband.dev>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.48.87.93]
+X-ClientProxiedBy: ENXCAS1NODE2.st.com (10.75.128.138) To STKDAG1NODE1.st.com
+ (10.75.128.132)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DU2PEPF00028D0F:EE_|AS8PR10MB7400:EE_
+X-MS-Office365-Filtering-Correlation-Id: 884ceaa6-1676-48f4-042c-08deaf22c9ae
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|376014|36860700016|1800799024|82310400026|18002099003|22082099003|56012099003;
+X-Microsoft-Antispam-Message-Info: 9Pguow6lzAcWAJO5fItOXWThkCpUU19nqge7E7UgckKwTQKm35lPd3ujwac5IdTFA5d+LqtVMNI7Jzm1osU7UpuW9VCM5wrHOq5pu8HaGAnC6okZex4og9NK/+yOezIRLoCJupB/g8Dd23QINo5vmGnZRquj6QqYJCC0aIBx1f5q6TIG4hlt+64d11aBPC7XD2ASz8iW6c6Pk0qa5UqviKpCuST+EXTcKl2wJcOcszL09ClTfY57dctWrwoVdbVquEAt57v4w2A6cQSQVDHmUJ3peCCGUz/OtMmE8i+38Ki1T91e40SPY7pzheuDzF0mg1z6mpoiQvV4TVJ0EiM+6CAYlMBH5zwGhTcU6EnQ+LWpAH214csmwIzG5ICBLrU5AlE8/zLZYFPf4hH4LqPXZlCwuh9bglwxyb0bg4Zr7p+pHRhkqVHtaKrnQAjebVoXSMTxErIYbZcsfzW26WPpY0W/9lnO0ycW+k7q3TyX1VZDGlE+IeMqswwinEUHipEBFCP5X1wCEk3ttudJhU6ncUYvIWn8SWAS11oY2620AgTXrl0rp72aWZsNLIV2MHW6kC3MmoIfaSEXlY5xFZvtFWpwckP006Bg2tr1hbKrwWObSPY3JJ1ZQYtQRMom2wviN4B5U6kW54ORUO1qIejnTzFBUTAWiJd2iSu2a3ATiZrx6yK/rIzbafAf/Yl4Xdbb/01kl2ybBfvZ0GkNwU+f2rl1S6dJlKI5nJSTTkruINM=
+X-Forefront-Antispam-Report: CIP:164.130.1.60; CTRY:IT; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(376014)(36860700016)(1800799024)(82310400026)(18002099003)(22082099003)(56012099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: qNmaE+Sf7xbxS99dLcq97TgNdBEjpjuPPdWXUwsMFzBfipY2q+N1V5kVaNm3xowxvaaGx9SktbLgjZZF+EpsjZp0sSkaIZjenTS3SWOY5AW39cI9lAjZQ8/JFTlBwu8+HTrT+BZ/5s7N5Wj+IPh/p02dzREz4PMJvDNajaPaO52/mcqkrIG1T5hQpchDlTsxYov9gi34E4rWx61NpDR4U20nfhGcM7IpML/nXbUNAbVMpS8jw0GTUBIsxbHGJTxjem1hzbGlQsWpFBNiNQF6i9ncYj4D9a/+hn8m7983AK5H5NzFPU0sYC+Yx4xm2Kf2V6yvNw/wQ/l53DfdKI2yfkdokyGVxY56W+DWKJ1SYJTsa04/GTJreVdsiPcQYwtO2icLJOZ/M93hpgDTiKALBUx/z5aNlNlvCoOEBZumKilUngC47OMeDPCPb6QJgg0u
+X-OriginatorOrg: foss.st.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 May 2026 06:01:47.9486 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 884ceaa6-1676-48f4-042c-08deaf22c9ae
+X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.60];
+ Helo=[smtpO365.st.com]
+X-MS-Exchange-CrossTenant-AuthSource: DU2PEPF00028D0F.eurprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR10MB7400
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,101 +129,77 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, May 10, 2026 at 09:44:14PM +0200, Vincent Legoll wrote:
-> Hello Guodong Xu,
-> 
-> On 5/10/26 14:06, Guodong Xu wrote:
-> > Currently U-Boot's SpacemiT K1 ships its own arch/riscv/dts/k1.dtsi and a
-> > spacemit,k1-reset binding that has no node in the upstream
-> > (kernel-mainline) K1 dts. After list discussion [1], this series
-> > moves U-Boot to the upstream DT before further K1 work lands.
-> > 
-> > In the upstream DT, each K1 syscon provides both clocks and resets.
-> > The kernel's clock driver spawns the reset child via the auxiliary
-> > bus. This patchset does the same in U-Boot: each clock driver
-> > spawns a UCLASS_RESET sibling on the same ofnode.
-> > 
-> > Patch 1/8 adds the K1 clock driver.
-> > Patch 2/8 adds a new syscon-bound reset driver with no DT of_match. At this
-> >            point, the legacy reset driver and local dts are still there.
-> > Patch 3/8 has each per-syscon clock driver spawn the reset child on the
-> >            same ofnode, the way the kernel uses auxiliary devices.
-> > Patch 4/8 enables the clock driver.
-> > Patch 5/8 switches BPI-F3 to dts/upstream/.
-> > Patch 6/8, 7/8 and 8/8 clean up the legacy reset driver and local dts files.
-> > 
-> > Old and new reset drivers coexist from 2/8 through 6/8 so the series
-> > is bisectable.
-> > 
-> > The K1 SPL bring-up [2] and PIN/SPI [3] series will be rebased on
-> > this and resent once it lands.
-> > 
-> > Link: https://lore.kernel.org/u-boot/20260507140558.GU1614990@bill-the-cat/ [1]
-> > Link: https://lore.kernel.org/u-boot/20260325223232.1553212-1-raymondmaoca@gmail.com/ [2]
-> > Link: https://lore.kernel.org/u-boot/20260422143112.1329478-1-raymondmaoca@gmail.com/ [3]
-> > 
-> > [...]
-> > 
-> > ---
-> > base-commit: 24db98cdf911b6ca362209e674bf9412441c1095
-> > change-id: 20260510-b4-k1-clk-reset-upstream-dts-cbf1f3a79cfb
-> 
-> 
-> I tried to apply this locally but failed:
-> 
-> $ git log --oneline -1
-> 24db98cdf91 (HEAD -> test) Merge tag 'u-boot-imx-next-20260318' of
-> https://gitlab.denx.de/u-boot/custodians/u-boot-imx into next
-> 
-> $ git status
-> On branch test
-> nothing to commit, working tree clean
-> 
-> $ wget https://lore.kernel.org/u-boot/20260510-b4-k1-clk-reset-upstream-dts-v1-0-db0b0503ee44@riscstar.com/t.mbox.gz
-> \
-> 
->  -O ~/Downloads/PATCH-0-8-riscv-spacemit-k1-add-clock-reset-drivers-switch-to-upstream-DT.mbox.gz
-> 
-> 
-> $ gzip -dc ~/Downloads/PATCH-0-8-riscv-spacemit-k1-add-clock-reset-drivers-switch-to-upstream-DT.mbox.gz
-> | git am
-> Applying: riscv: spacemit: k1: add clock reset drivers, switch to upstream
-> DT
-> error: No valid patches in input (allow with "--allow-empty")
-> Patch failed at 0001 riscv: spacemit: k1: add clock reset drivers, switch to
-> upstream DT
-> hint: Use 'git am --show-current-patch=diff' to see the failed patch
-> hint: When you have resolved this problem, run "git am --continue".
-> hint: If you prefer to skip this patch, run "git am --skip" instead.
-> hint: To restore the original branch and stop patching, run "git am
-> --abort".
-> hint: Disable this message with "git config set advice.mergeConflict false"
-> 
-> I had a similar failure with the mbox downloaded with:
 
-Because the first mail in the mbox file is the cover letter, not a real
-patch, thus contains no code changes and couldn't be applied by default.
 
-Try
-
-	b4 shazam 20260510-b4-k1-clk-reset-upstream-dts-v1-0-db0b0503ee44@riscstar.com
-
-instead, which applies the series cleanly at least on my side. With
-git am you might skip application of the first mail manually by
-
-	git am --skip
-
-and continue with rest of the series.
-
-> $ b4 mbox https://lore.kernel.org/u-boot/20260510-b4-k1-clk-reset-upstream-dts-v1-0-db0b0503ee44@riscstar.com/T/#t
+On 5/7/26 00:37, Austin Shirley wrote:
+> The STM32MP13 default environment only handles MMC and serial/USB boot.
+> When TF-A reports BOOT_FLASH_SPINAND the boot_device variable is set to
+> 'spi-nand' but bootcmd_stm32mp never redirects boot_targets to ubifs0,
+> so distro_bootcmd falls through to MMC/USB.
 > 
+> This change mirrors the STM32MP15 logic:
+>  - Add a BOOT_TARGET_UBIFS entry to BOOT_TARGET_DEVICES so that
+>    bootcmd_ubifs0 is defined (ubi part UBI; ubifsmount ubi0:boot).
+>  - Add the 'spi-nand' / 'nand' clause to bootcmd_stm32mp so that
+>    boot_targets is set to 'ubifs0' when booting from NAND.
 > 
-> I also tried to apply to master branch without success
+> Signed-off-by: Austin Shirley <austin@deadband.dev>
+> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+> Cc: Tom Rini <trini@konsulko.com>
+> Cc: uboot-stm32@st-md-mailman.stormreply.com
+> ---
+>  include/configs/stm32mp13_common.h | 13 ++++++++++++-
+>  1 file changed, 12 insertions(+), 1 deletion(-)
 > 
-> Is there something I'm doing wrong ?
-> 
-> Regards
-> 
+> diff --git a/include/configs/stm32mp13_common.h b/include/configs/stm32mp13_common.h
+> index 3e3f49abae0..e707b146f90 100644
+> --- a/include/configs/stm32mp13_common.h
+> +++ b/include/configs/stm32mp13_common.h
+> @@ -33,6 +33,12 @@
+>  #define BOOT_TARGET_MMC1(func)
+>  #endif
+>  
+> +#ifdef CONFIG_CMD_UBIFS
+> +#define BOOT_TARGET_UBIFS(func)	func(UBIFS, ubifs, 0, UBI, boot)
+> +#else
+> +#define BOOT_TARGET_UBIFS(func)
+> +#endif
+> +
+>  #ifdef CONFIG_CMD_USB
+>  #define BOOT_TARGET_USB(func)	func(USB, usb, 0)
+>  #else
+> @@ -41,12 +47,14 @@
+>  
+>  #define BOOT_TARGET_DEVICES(func)	\
+>  	BOOT_TARGET_MMC1(func)		\
+> +	BOOT_TARGET_UBIFS(func)		\
+>  	BOOT_TARGET_MMC0(func)		\
+>  	BOOT_TARGET_USB(func)
+>  
+>  /*
+>   * default bootcmd for stm32mp13:
+>   * for serial/usb: execute the stm32prog command
+> + * for nand or spi-nand boot, distro boot with ubifs on UBI partition
+>   * for mmc boot (eMMC, SD card), distro boot on the same mmc device
+>   */
+>  #define STM32MP_BOOTCMD "bootcmd_stm32mp=" \
+> @@ -56,7 +64,10 @@
+>  	"else " \
+>  		"run env_check;" \
+>  		"if test ${boot_device} = mmc;" \
+> -		"then env set boot_targets \"mmc${boot_instance}\"; fi;" \
+> +		"then env set boot_targets \"mmc${boot_instance}\"; fi; " \
+> +		"if test ${boot_device} = nand ||" \
+> +		  " test ${boot_device} = spi-nand ;" \
+> +		"then env set boot_targets ubifs0; fi;" \
+>  		"run distro_bootcmd;" \
+>  	"fi;\0"
+>  
 
-Regards,
-Yao Zi
+Hi Austin
+
+Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
+
+Thanks
+Patrice
