@@ -4,53 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C4BECD37AC
-	for <u-boot@archiver.kernel.org>; Mon, 11 May 2026 11:53:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC24DCD37B9
+	for <u-boot@archiver.kernel.org>; Mon, 11 May 2026 12:09:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 77480800AE;
-	Mon, 11 May 2026 13:53:55 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=free.fr
+	by phobos.denx.de (Postfix) with ESMTP id 1380383CD3;
+	Mon, 11 May 2026 14:09:35 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=ew.tq-group.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=free.fr header.i=@free.fr header.b="ZQaGhCnK";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=ew.tq-group.com header.i=@ew.tq-group.com header.b="HDVHOvnl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A71C8801A9; Mon, 11 May 2026 13:53:53 +0200 (CEST)
-Received: from smtp1-g21.free.fr (smtp1-g21.free.fr [212.27.42.1])
+ id C7C8983C2B; Mon, 11 May 2026 14:09:33 +0200 (CEST)
+Received: from www537.your-server.de (www537.your-server.de [188.40.3.216])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C43CD80086
- for <u-boot@lists.denx.de>; Mon, 11 May 2026 13:53:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=free.fr
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=vjardin@free.fr
-Received: from localhost.localdomain (unknown [91.160.0.144])
- (Authenticated sender: vjardin@free.fr)
- by smtp1-g21.free.fr (Postfix) with ESMTPSA id 78819B00592;
- Mon, 11 May 2026 13:53:41 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=free.fr;
- s=smtp-20201208; t=1778500431;
- bh=wZ+u8PDHBB50J3kfxAJRB9fB7v/fOACS2iSX0iPl4+g=;
- h=From:To:Cc:Subject:Date:From;
- b=ZQaGhCnKg1wUvKmGPuJB50PJEuvpJlqrG5FO6lyAhADmzWpi/jo8nsGgGL9FIxkkT
- tWdB8j5H1WqmuajXxHXWJ0znCUuRY2oaknuUQRKgY7xXq3kyFs//xckUld0Z52CrHA
- BQC+O9+bojV7BuCP84lPilI3v6v7HoO7HMdal7TlXS9udfnDR4hpybcneqFttStLWZ
- mDwvOQ7lGjHgDBJuG/unMOHtYfpjc9rXCZSN79M0VOfuSYoiXqx7qfQH+3Y3GBebRK
- USTvuwlftIF6rDD7WymXrpOQEwxEXMbXAy45wZZPKcZ3p0sMv7W8elgO/7BD+Y8uWp
- TXDinez/ozoJA==
-From: Vincent Jardin <vjardin@free.fr>
+ by phobos.denx.de (Postfix) with ESMTPS id F13A680086
+ for <u-boot@lists.denx.de>; Mon, 11 May 2026 14:09:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=ew.tq-group.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=Alexander.Feilke@ew.tq-group.com
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=ew.tq-group.com; s=default2602; h=Content-Transfer-Encoding:MIME-Version:
+ Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References;
+ bh=xxpzVAD8iN19W1GTWquRyPxr1eb2Mz9FlDxO4VHPhdQ=; b=HDVHOvnlxIagLA22HsGOLm4sgP
+ PpUu+oA+Sk+zSeFVX1snl5XCu2jbVykJV4lBj7KD6EzUV3p6CAll8k2H1faoh4QWEM1EzmIEUR8Af
+ ksdr90DqYlu5dnZyVFSgpl4+ijQlobZFxr543wFXUunkOPxC+K3uxbccwxvFQEi8GYSWW6Ep7txQl
+ EL8pj9RUePP7h3o17hNM8dvm/a9D/7rf7GSBsKpOn8xwTTF1gKFMHvFinvm4X0AFzxLir0KZ7T8q6
+ /RhuNYPL4YazvBeHxzkqvVXVbFTxZAUunfv8NCCR00bSCod5m3yt2qKr31OL/EF2GDVkAefJAsSu5
+ vW6neIYw==;
+Received: from sslproxy06.your-server.de ([78.46.172.3])
+ by www537.your-server.de with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
+ (Exim 4.96.2) (envelope-from <Alexander.Feilke@ew.tq-group.com>)
+ id 1wMPRz-000MTx-1E; Mon, 11 May 2026 14:09:31 +0200
+Received: from localhost ([127.0.0.1])
+ by sslproxy06.your-server.de with esmtpsa (TLS1.3) tls TLS_AES_256_GCM_SHA384
+ (Exim 4.96) (envelope-from <Alexander.Feilke@ew.tq-group.com>)
+ id 1wMPRz-000GAr-1U; Mon, 11 May 2026 14:09:31 +0200
+From: Alexander Feilke <Alexander.Feilke@ew.tq-group.com>
 To: u-boot@lists.denx.de
-Cc: Vincent Jardin <vjardin@free.fr>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Patrice Chotard <patrice.chotard@foss.st.com>, Peng Fan <peng.fan@nxp.com>,
- Sughosh Ganu <sughosh.ganu@arm.com>,
- =?UTF-8?q?Timo=20tp=20Prei=C3=9Fl?= <t.preissl@proton.me>,
- Tom Rini <trini@konsulko.com>, Yao Zi <me@ziyao.cc>
-Subject: [PATCH v1] fs: dispatch null_dev_desc_ok filesystems before block
- lookup
-Date: Mon, 11 May 2026 13:53:35 +0200
-Message-ID: <20260511115340.675883-1-vjardin@free.fr>
-X-Mailer: git-send-email 2.43.0
+Cc: u-boot@ew.tq-group.com,
+ Alexander Feilke <alexander.feilke@ew.tq-group.com>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH 0/8] rtc: pcf85036: improve spec coherence and extend features
+Date: Mon, 11 May 2026 14:09:09 +0200
+Message-Id: <20260511120917.1017866-1-Alexander.Feilke@ew.tq-group.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -69,58 +71,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Filesystems that are null_dev_desc_ok (semihosting, ubifs) have
-no UCLASS_BLK device under their ifname, so on real hardware
-fs_set_blk_dev() always fails at the partition lookup.
-The workaround was to add a per-filesystem
-command (example cmd/ubifs.c), which duplicates thue plumbing of
-fstype_info.
+From: Alexander Feilke <alexander.feilke@ew.tq-group.com>
 
-Honour the opt-in directly: probe such entries with block_desc=NULL up
-front, so "load semihosting <addr> <file>" works without a new
-command.
+This series fixes some spec inconsistencies and oversimplifications in the initial
+PCF85063 support, and adds some missing features from mainline linux v6.19.
 
-Sandbox boards that exercise the existing fallback through "host
-bind" stay unchanged.
+Changes in v2:
+- reject day 0 in mk_date for tm_mday, analog to tm_mon
+- improve commit message of first commit regarding mk_date changes
+  - describe previous and new behaviour
+  - note tm_year not being initialized in the format case MMDDhhmm
 
-Signed-off-by: Vincent Jardin <vjardin@free.fr>
+Alexander Feilke (7):
+  rtc: pcf85063: adjust date format to adhere to the rtc_time spec
+  rtc: pcf85063: add support for NXP PCF85063 family
+  rtc: pcf85063: add missing register definitions
+  rtc: pcf85063: keep the divider chain in reset during set_time
+  rtc: pcf85063: support loading quartz-load capacitance from device
+    tree
+  rtc: pcf85063: add power loss detection during probe
+  drivers: Kconfig: rtc_pcf85063: note unsupported chip features
 
----
+Markus Niebel (1):
+  cmd: date: validate date using rtc_month_days()
 
- fs/fs.c | 18 ++++++++++++++++++
- 1 file changed, 18 insertions(+)
+ cmd/date.c             |   7 ++-
+ drivers/rtc/Kconfig    |   3 +
+ drivers/rtc/pcf85063.c | 134 ++++++++++++++++++++++++++++++++++++++---
+ 3 files changed, 133 insertions(+), 11 deletions(-)
 
-diff --git a/fs/fs.c b/fs/fs.c
-index 8ea50a6c13c..09295e95892 100644
---- a/fs/fs.c
-+++ b/fs/fs.c
-@@ -464,6 +464,24 @@ int fs_set_blk_dev(const char *ifname, const char *dev_part_str, int fstype)
- 	struct fstype_info *info;
- 	int part, i;
- 
-+	for (i = 0, info = fstypes; i < ARRAY_SIZE(fstypes); i++, info++) {
-+		if (fstype != FS_TYPE_ANY && info->fstype != FS_TYPE_ANY &&
-+		    fstype != info->fstype)
-+			continue;
-+		if (!info->null_dev_desc_ok || !info->name)
-+			continue;
-+		if (strcmp(info->name, ifname) != 0)
-+			continue;
-+
-+		fs_dev_desc = NULL;
-+		memset(&fs_partition, 0, sizeof(fs_partition));
-+		if (!info->probe(NULL, &fs_partition)) {
-+			fs_type = info->fstype;
-+			fs_dev_part = 0;
-+			return 0;
-+		}
-+	}
-+
- 	part = part_get_info_by_dev_and_name_or_num(ifname, dev_part_str, &fs_dev_desc,
- 						    &fs_partition, 1);
- 	if (part < 0)
 -- 
-2.43.0
+2.34.1
 
-base-commit: bfe90a308a94caa9d855440683521ff04122ae2a
-branch: for-upstream/fs-null-dev-desc-dispatch
