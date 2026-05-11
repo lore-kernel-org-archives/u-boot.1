@@ -4,134 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE77DCD37BE
-	for <u-boot@archiver.kernel.org>; Mon, 11 May 2026 13:09:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE507CD37AC
+	for <u-boot@archiver.kernel.org>; Mon, 11 May 2026 13:11:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 43C3D83DC9;
-	Mon, 11 May 2026 15:09:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
+	by phobos.denx.de (Postfix) with ESMTP id 8D1828394E;
+	Mon, 11 May 2026 15:11:13 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="FRbK/gsS";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="eeWt8ZLr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5273283DC9; Mon, 11 May 2026 15:09:46 +0200 (CEST)
-Received: from MRWPR03CU001.outbound.protection.outlook.com
- (mail-francesouthazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c207::3])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id BA3F383CD3; Mon, 11 May 2026 15:11:11 +0200 (CEST)
+Received: from mail-pg1-x529.google.com (mail-pg1-x529.google.com
+ [IPv6:2607:f8b0:4864:20::529])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DA87483F14
- for <u-boot@lists.denx.de>; Mon, 11 May 2026 15:09:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
+ by phobos.denx.de (Postfix) with ESMTPS id 96D2C800AE
+ for <u-boot@lists.denx.de>; Mon, 11 May 2026 15:11:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quentin.schulz@cherry.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=hTGXvC4XapnnlZPLsFHx1tIO+X103T3dfPLRH/wIQ9lbNqYaeyv2AnQBf+PgIEmUORh3Mqca0783Bhn5H4hJVeXFBpawZhjfI2kcmS58ZqmhDR+GJnSGku0TBRIV8TkncgEpD0bWDTA1raL5MWgz6smt+F5maPv+/gKL7L0rcVdhVjD/AHH4TwXM50OyBtrT/5MSwSJ81a94XqRjYcv3JsHMSAZj5acbuY1fwFy1bFtEvoq8wb5MaJd5JaU8L16CsKVKCv0xNYmqplamW9ZH1SxGTwR8vYS04jvlsLYTz95YqWxr4ulFecTY5z8yrbDSrC8ey8S2aEM2KQUdu3h03Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=JjqGoc1JnHO5tPIdL8Sj5zPOebPKtJQy46Vhsfqdd3w=;
- b=P7IhC9Y0+nUL0wLRVovTLstydAPB6f68VlYhFow2hyTGGROhZHKEFoe7KlDyQjumaE9R9VCvcJStvYWc43FJBjVN+WMYRbA2rIZk3+0FzjrbmfXgRrGFVxBdGGj1oi7Bl8qHyndR/s6W/v1qEdEBmSFQPsXPUTYaCFVD9/Wml/0bfl2NTCfrYXFONj99WWbW4aeoyrW+AXfBIwYsdLtc5RxHhzibEfNimYFfkhx3adO1RRt+Ci3jWJRByFo1SzUSavkZvg/QlrMyeOcgFSCpoDdRBiR7IPESvKVYcEdSY4iczjgaAkhOS2iIBbOKl8PQ3ttZS2/Ht6sMpUr3UAv5kQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=JjqGoc1JnHO5tPIdL8Sj5zPOebPKtJQy46Vhsfqdd3w=;
- b=FRbK/gsS1pz3w4sae0UYEbmHRRvY+NheNvE4m5FR/yDZDreBPv/92W4SMTz8oLPMFGUQ7Qsyu/FZxpm6EoOnDJUyjK9EiOkGO6sj1HUB9OM5CJPD52Vybbm5qULBZjqSrwRkMt4oQuwsx0zpkOvCFHn9vEDtyJSO7BY7p9nVAIU=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from DBBPR04MB7737.eurprd04.prod.outlook.com (2603:10a6:10:1e5::22)
- by AM8PR04MB7971.eurprd04.prod.outlook.com (2603:10a6:20b:234::23)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9891.23; Mon, 11 May
- 2026 13:09:40 +0000
-Received: from DBBPR04MB7737.eurprd04.prod.outlook.com
- ([fe80::5960:fb4b:9313:2b00]) by DBBPR04MB7737.eurprd04.prod.outlook.com
- ([fe80::5960:fb4b:9313:2b00%3]) with mapi id 15.20.9891.021; Mon, 11 May 2026
- 13:09:40 +0000
-Message-ID: <af2cd29f-8767-424a-ac01-4603f50a9ceb@cherry.de>
-Date: Mon, 11 May 2026 15:09:38 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH V3] board: rockchip: add Anbernic RG-DS
-To: Chris Morgan <macroalpha82@gmail.com>, u-boot@lists.denx.de
-Cc: jonas@kwiboo.se, trini@konsulko.com, kever.yang@rock-chips.com,
- philipp.tomsich@vrull.eu, sjg@chromium.org,
- Chris Morgan <macromorgan@hotmail.com>
-References: <20260510211713.68312-1-macroalpha82@gmail.com>
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <20260510211713.68312-1-macroalpha82@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: WA3PEPF00000519.POLP291.PROD.OUTLOOK.COM
- (2603:10a6:1d8::672) To DBBPR04MB7737.eurprd04.prod.outlook.com
- (2603:10a6:10:1e5::22)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-pg1-x529.google.com with SMTP id
+ 41be03b00d2f7-c70c112cb61so3218441a12.0
+ for <u-boot@lists.denx.de>; Mon, 11 May 2026 06:11:09 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1778505068; cv=none;
+ d=google.com; s=arc-20240605;
+ b=NzxREibWRB1d7c/WTTXtN+MvTikeP2XpgDUeqmJMCq3HTnM2dI0HtWRP/ZrArZs0VI
+ AdenK/e76dW/uf4BZFrrBJJJg9ST2oj8R9ZfmXCe59aVCS+fdiAyHgiO0ea/5zpXnmPb
+ W7N3ruEpE5F1GWjk5acJxiqKFDQBoirVCCjEs5Th1wVqe7frfNZTRWAJcv935sk1Fb2b
+ cghtEu79IEt3Nxp1OXarj3b266W6u10D6qlH95JUWjRIVZ1iOF9Ie6lFu8VJbc1IryGT
+ xsa8iqMlOynRgQjQ5DS5bXKEfahu3JBVPBdls5u8Q6QMkmxsKfClvp9tg/0lFkAGMgDZ
+ 7ZmQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=O6l/QLtgRAdH1Yqt28IBgcrzKD65Jl/2YrahzN2pDW8=;
+ fh=iPgt1bMIwV2uG6O8DMJiO3pmO2ll8c43yH00JVFIFGs=;
+ b=jRchwVamSof4LAYq4vM0X8dn3qUuCKpXI1ZJNVCoDO3DECBU2vH8DrK0Ual2Sj6zaM
+ /EOM6aMEftJjDsAv+bOgfaHrfCENTR15m6kUXx2lfaSl2/cC3+eLv0uszeYyplR1ZXip
+ +aYZvD9Qa+f6oZ0Ekp+Capl6F/rESYfYpizzvdS9a4D/4flBtbTqG9wNE3GwJ1O1+HZd
+ S+C0+tq1+MLL3NMDBuU1iBmV2XPjz1+Ago9/VwoRp7eTEmJWiyT+l7a1LjYpEr3x9oGH
+ VYfQ0aXs7tZ5HV1XPAflllf9EIzK/ddpMy7PmnwCvLaiX0SaHKVbarXcieaWmEY18hoK
+ lQVA==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1778505068; x=1779109868; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=O6l/QLtgRAdH1Yqt28IBgcrzKD65Jl/2YrahzN2pDW8=;
+ b=eeWt8ZLrIy4RtOilIrlLpoLbUJiVhOVaSR4WA7D1DBoWD6rwSVrSoTkwop36K0uPhU
+ oV+AZxd9o97KP5rVrMVJji31fhOtNFsb5U1y3PlV/RnjhROhePRcd3JoKtAqCU1tjxOy
+ 4FbumPOWZVNkaaBedeZ+BKxlE2d2dB2GOf9pU=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1778505068; x=1779109868;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=O6l/QLtgRAdH1Yqt28IBgcrzKD65Jl/2YrahzN2pDW8=;
+ b=KQb/euEAbIxcOEQjfEQb4uk51Ds1tVriSuSyBmZtp1wZoUElXahBL/ZFoPdN/BGcPY
+ rFL/c+phjUya/Is/O/4GnhMfN3PkxxxKrij8tgbY2xOu/cw2LNGizpIWTjg/e9Hywwxy
+ y2XdG9AXgasYT/77emvwxWF48MEqVL0dxB19GVN/RTgNoL5KVbSpX1GW/2e93zBvrGH/
+ BecABdivld4+rzhn2u5/fXhxaUmx1Z9+R/K8hBOAlQaX2JmAZoUaGT69C+S782xZxEC3
+ MUeZCjZ6DCZVI6Mik067w+EXGlSJ4NpJQE2FQkaT1/cDcM+5LKRuihdZXHyIwDh/hTWH
+ F7aw==
+X-Gm-Message-State: AOJu0YxJ5Dpx00aOadD1MZs1pBdaq5Cx0HIcCDufwKMIdSkSgY/QkTmE
+ F1lWFPulIFTeEPMUIPNDWlTAvUVcUmW41oFACXFEm/Wi+mE+yScWBBT/hOS2tjtdXYoznozSyt5
+ ygnuh8oWcYAkst0rbXeEEoLraOpJJHl1Z8ON5bNss
+X-Gm-Gg: Acq92OFEBczR89VpHUoFn7PS8iBZQEYdL5ExHnt5Zmayi8wL7lx1G5BYV/woELp1Jr4
+ nVEx+c+q2/4naCn6dPIg1xumMoLPOMDToJl23Lnoy6DQUisoLfSmUiAr6B5ZAlg6g96ZHQeCEhl
+ 6G5CkiWKFtqfHsuZp1Mezuuk1d2TtAU2orjzNMWuMNeUkHK7zHxnM0y0aQISRVp7eUI3mAaDPZX
+ X3IcwqGZ+M9LCx3yVaN0aBquV0cidp/CZTxU/A5QS/Grx/MvjKabrKTMr8h9Ey3PZHbqQff+fAB
+ 2DALyw==
+X-Received: by 2002:a05:6a20:6a2c:b0:3a2:f2b1:1ac with SMTP id
+ adf61e73a8af0-3aa5ababcb5mr26711319637.44.1778505068036; Mon, 11 May 2026
+ 06:11:08 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DBBPR04MB7737:EE_|AM8PR04MB7971:EE_
-X-MS-Office365-Filtering-Correlation-Id: 101ed0cc-bf13-4d64-f93a-08deaf5e8f72
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|366016|376014|11063799003|56012099003|22082099003|18002099003;
-X-Microsoft-Antispam-Message-Info: Fz3/upRLlkuGVXFi7hOldM/H/bYdQ+oRlmUzmNi6G0HRkdHOPs34RSsT4AYz9Hks/WIZVZTw7xdaTtrER1A4acjJtjpF0Svxx+QiYhfDYLuc06nDi0YnhEMIw6SGa76NJVdJi6w9c6lTZoDYdcXAeJI5ohpzoX0UXV13lS0rsrHNC2BI0DTVyaFWezXcnJ+UXGGaefwhYRJCF1iHebbTjFtivZiV4U4NdfSCC7D9T1PWZ4ytQO8UceOkmhUBCLiUg1sohNt18fDdsTkNNm/Eq7xMEAzSZH2FlWAU4WH/K1+Gt9zLSAn/oJO6k4SLVSLinACLz9hsLSicUWzAYyub7djFv7IpnCvqS5ujsakRJG6CwfDZb+fFKFbF31uQ4o8o6p2ExZTZ8NaD0ADBDveQXqGl+688u7vs4Y82Bdn0/T8Mc2APLu/yFakkU3tfCmKsaBsQMj7vwKPy3U3qlWD8c1cUpLIziA4InIxbo4/JVX7U33YlvsjoLJ3wfcB4DSi7XhqbpHRdZkNY1Q3dq4FfMlDqXZTPXDj5HpPntSSo+88OjGWT3NvBsv3ZVlAIHJ0KwWCLl3z/e+WLAZku60ChXNsEslMi9pYtSJMLt5RUBYBru/Nbi9aIFd/k6vGSiz9wBWw4BORtgF73fB80nKsNPw1jlhd1p+hr2sO6w/E6b32utyeDxAn7CBFkxg2qslCu
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:DBBPR04MB7737.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(366016)(376014)(11063799003)(56012099003)(22082099003)(18002099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?NGg3WTVRaEl0OHRlc09KRXRqTjVKNkVRY3BoQ0tGUDdjYlJ4czI1UzFFQ3h2?=
- =?utf-8?B?Q2hCL2VNdXFFVEVtY2JIWm9OaXVPQ3FrTS9qZU01OXh4SVZUYk1XNFYzTUhO?=
- =?utf-8?B?SlhDb2szRUp6eVVCcm9qTlZnbnlWUkRUNm9XQ09TOE9VYzJRRit1dUg4ZW1o?=
- =?utf-8?B?NUs2Uk9xakJFZlN2ZkxoSmMrQkZIcVliMUdEQ2pOZmJtZmtteFdVOVVQK1VB?=
- =?utf-8?B?cVVVckd3akI1VHdPejdsVW85OFN5M2t6ZDNHcFd4V1VTa3VhbWJRL25oUXdy?=
- =?utf-8?B?MnpDUThXWEJXS250TFJZb0tpdStzaXZDVDFJbmlhRStZUUdxb01qWFZvYlJK?=
- =?utf-8?B?Wnd3eEJXNUJITkRuTUVnbWh4SThlMmFxeE5RbzRJSThDT2pUZlZia2tHU3Jp?=
- =?utf-8?B?V0QyRlIwUStlZi82czN6ZEN5SHNEQTBpV3FFOU1KSlp4S3RKYUJaL3VnRjEz?=
- =?utf-8?B?QXMvUmJ6NU53NXZ0M1ZZbDNoUHZLTG9WOXhYMUZvN3FGRHd0OW9aVkw1dHIr?=
- =?utf-8?B?bk05YThGRy8vbjhKOTk4NUx2UUhGTVJvR3RFR1NQNUdXc2k1V0R4VkgxV3k5?=
- =?utf-8?B?VFovNWluYmM1N3VmenBTaFY0Ly8ybVZsbUY3dlBmYnQyampSL28xZDJ2YWg0?=
- =?utf-8?B?OFIycUxwbnJLSlE1S2drbEdKbzN5RnhBNUIzMUZ5c1lsaFlSQmVFbEpXM0tW?=
- =?utf-8?B?c1JmOXh4N0FpZy9GbWdWS3hZNThDRWtQMGprYXZkU1hMcGxpZWxIUEd1QWg0?=
- =?utf-8?B?cmdPVFM0REpDeEwrbGpJNElIcXFqYXcyV1FidUhkVHhZcHNTNTVxWlg0c2NX?=
- =?utf-8?B?bEJWM2dDVVpCbjE4SzNrNGFKSFdFOWM5V2gzQTc0TzYwZ3RtU1hYS2hLVjRW?=
- =?utf-8?B?YWVBVTRWNlRuN3p6MHQ3RlRTbVhFQjhpT0xiSTRRdzU2b0RWRDdIOVlMRWFJ?=
- =?utf-8?B?NXlVTUVhUFU3L2tEeDErZ0dZejduWmhWMWJwWXIrK2l0K1pNNEdXNzgxdGIy?=
- =?utf-8?B?UG55cmpRNFg2b3lTeXRQYVdFeFFabUxYdEJOMklFbXo1S1VaQWtSL29SN1p4?=
- =?utf-8?B?TjJvSHcxR0R4R2ZoSDNuSXJzUlhFeUh3WmZnMFFHaEpLeE9OTUE4Q3VSaldN?=
- =?utf-8?B?UEUreitRZEN5N3RxZDBmVTd0UW5ETWJwank3ZjZjbXhWTmdaRFBsZGllOWV3?=
- =?utf-8?B?b0lQdURlU3lVeWI3L0NDUmp3NE9Ha05wZ1lWNVE2Rm1KK0F5Nm1LYlBGOVo3?=
- =?utf-8?B?Qkw1b1RiN2NlSERRc2FwVUlDYy9FQ29YWEl4eXJKSUl6a0lzQzgrY3F2RWJr?=
- =?utf-8?B?WFRDOHNhUDZMZ28xcmRuWGVOUTBXZ01VcHNzTS9EelVuWlJlYWp4L2NjUVI3?=
- =?utf-8?B?dktLRmRwMm0vZWlkSUo2ZmJXQWU4N2RvZEV5ZTV0UExiNHBpbW5WMTZCZEEr?=
- =?utf-8?B?R2Yyczk1Kyt1aGp2VmZ4R1Ftb251VTlIRnJiSFNMYnlJRngvV3ZZVnUweEtn?=
- =?utf-8?B?ZjFkdG8xKys4YVhER2Y5L2RHc1BLc1JXTEVlcFRpejh3SHBaQWFRTEdacXR1?=
- =?utf-8?B?TWtNN0NVNmdQK3dYRzF6YmVFWUFBRDdpTzNwQTl6UzV3ejJtK0RhbGRVUWFE?=
- =?utf-8?B?UkVWc2FxYk0wYVcwK1M0Qkl5MzdWWGdFaGV3SWxNbjJhWE1SQnllbEtqdFBp?=
- =?utf-8?B?VTUzNTI5NG15NmpkTlhQTXpGZTBlNkpBTHZsUW1ObGlZbXBxVVlSQ0ZtWUZN?=
- =?utf-8?B?WXJQU1ZIaUx6UE90S0tXWXB6YUVzYW9LcFpEWExjSUtKSHRvZ0ZpaGVmVGZy?=
- =?utf-8?B?K0haYThhaDFucXFoYWJ3RHBkd1h5SWc5T1MzS1VuWG5uTzhYYnQ2aGgvOE5F?=
- =?utf-8?B?VElFdGNId21MZ2xwc3FPL01xbXhkVnMzOUhURUF5TmxVcWdmNFdlYXQraFB6?=
- =?utf-8?B?eWMrYXlJQWg1YjAyZ3VROHhBY0xqQzkzMUlFUi84emlwTW9DYkQ2cnI3VHRZ?=
- =?utf-8?B?UWNGV3NJb2VFR2Z0OGVBdTBOVi9Ib3gzdXJBaHdNKzFGWVZlWUVwTXFORGFl?=
- =?utf-8?B?YU53UU9GbkhTcW1pOVFhVHZoRW5wL0ZLa21qRWphcC9CRTZMaFpSOHYyUkxU?=
- =?utf-8?B?bER6U3hjTEt0Q1VrOU5PNGZKeEViUmNMaERnTGdxQkJ0M2R6VkVrVGgyWkpr?=
- =?utf-8?B?Q2twVTBkdFFoMDNrbkFrNjRxZENPNG1LMFdhalBoY1pKS2t0TTBXY1RZeXNj?=
- =?utf-8?B?TDlHM0tPNVNiaUlqQk5rZjdKT1lBSGhMQjRSODgwSnB3UkJLQ0RDakxQZXQ3?=
- =?utf-8?B?eC9Ga09VaHEyeU12Y041TElvT1hjREZPSmlLWDNDSVovMjR6UkRDZz09?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 101ed0cc-bf13-4d64-f93a-08deaf5e8f72
-X-MS-Exchange-CrossTenant-AuthSource: DBBPR04MB7737.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 May 2026 13:09:40.3719 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: m4AcON0uS37R5YGPr2WSVkL+EEhZ4IGvAZLlLsMkeOkhnbAWYvQAH02eE3/jJJIBtMEdIJsmi+ftgizgxSMA6/t5sO//CNjFZz3LT1A8FRo=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM8PR04MB7971
+References: <20260509203136.46745-1-kettenis@openbsd.org>
+In-Reply-To: <20260509203136.46745-1-kettenis@openbsd.org>
+From: Simon Glass <sjg@chromium.org>
+Date: Mon, 11 May 2026 07:10:51 -0600
+X-Gm-Features: AVHnY4LzFbccVoaQ4Hn42aoUUjYXxgWtacEf243wIuVygI6YZVmg1gDaqh0YZrQ
+Message-ID: <CAFLszTga=8LFjUU=PjYKztMiMaHJ0MDQEh6+h9RnCiTMTOHzPQ@mail.gmail.com>
+Subject: Re: [PATCH] smbios: Do not fall back on devicetree without valid
+ mapping
+To: kettenis@openbsd.org
+Cc: u-boot@lists.denx.de, Raymond Mao <raymondmaoca@gmail.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Tom Rini <trini@konsulko.com>, 
+ Janne Grunau <j@jannau.net>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -148,15 +110,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Chris,
+Hi Mark,
 
-On 5/10/26 11:17 PM, Chris Morgan wrote:
-> From: Chris Morgan <macromorgan@hotmail.com>
-> 
-> Add support for the Anbernic RG-DS dual-screen handheld gaming device.
-> 
+On 2026-05-09T20:31:36, Mark Kettenis <kettenis@openbsd.org> wrote:
+> smbios: Do not fall back on devicetree without valid mapping
+>
+> The smbios_get_val_si() function may get called for a sysinfo
+> property for which there is no mapping to a devicetree property.
+> Avoid a NULL pointer dereference in this case by skipping the
+> read of the mapped property from the device tree.
+>
+> Fixes: 83b28b55d74f ("smbios: add support for dynamic generation of Type 9 system slot tables")
+> Signed-off-by: Mark Kettenis <kettenis@openbsd.org>
+> Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+>
+> lib/smbios.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 
-Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
+> diff --git a/lib/smbios.c b/lib/smbios.c
+> @@ -292,7 +292,7 @@ static int smbios_get_val_si(struct smbios_ctx * __maybe_unused ctx,
+>
+>       /* If the node is still missing, try with the mapping values */
+>       nprop = convert_sysinfo_to_dt(ctx->subnode_name, prop);
+> -     if (!ofnode_read_u32(ofnode_root(), nprop->dt_str, &val))
+> +     if (nprop && !ofnode_read_u32(ofnode_root(), nprop->dt_str, &val))
+>               return val;
 
-Thanks!
-Quentin
+Reviewed-by: Simon Glass <sjg@chromium.org>
+
+Regards,
+Simon
