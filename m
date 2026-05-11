@@ -4,74 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F82CCD3427
-	for <u-boot@archiver.kernel.org>; Mon, 11 May 2026 08:27:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 425E6CD37AC
+	for <u-boot@archiver.kernel.org>; Mon, 11 May 2026 08:30:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EE24C84868;
-	Mon, 11 May 2026 10:27:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=mediatek.com
+	by phobos.denx.de (Postfix) with ESMTP id BE05584836;
+	Mon, 11 May 2026 10:30:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=mediatek.com header.i=@mediatek.com header.b="Bts/TiCH";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="Vt/GcnUX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 210CA84867; Mon, 11 May 2026 10:27:57 +0200 (CEST)
-Received: from mailgw01.mediatek.com (unknown [60.244.123.138])
+ id E084684837; Mon, 11 May 2026 10:30:40 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0457084844
- for <u-boot@lists.denx.de>; Mon, 11 May 2026 10:27:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6619884706
+ for <u-boot@lists.denx.de>; Mon, 11 May 2026 10:30:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=mediatek.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=weijie.gao@mediatek.com
-X-UUID: 4a5474084d1311f1b96f91537e34a508-20260511
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mediatek.com;
- s=dk; 
- h=Content-Transfer-Encoding:MIME-Version:Content-Type:References:In-Reply-To:Date:CC:To:From:Subject:Message-ID;
- bh=I0zHO45Lv5T8vngNzf16JCPf/kvDVY0cgGcF/dE2bJU=; 
- b=Bts/TiCHH+vN8u37NF6a13frljKhB/+UeZLAVv1NKECki9ESIk2Ng15fWYvb6vY1BYiXs6T7Rj3liSckb4sof1j8KaYs4UCD7p/InnhbFSIFTf0P1eOBzD0BRa+Lq+rOosIZWkUE6lsbXPGRt8wc8TcmMjbqFug285AiNFbZswY=;
-X-CID-P-RULE: Release_Ham
-X-CID-O-INFO: VERSION:1.3.12, REQID:f7513fa6-ae0b-4100-8fbc-0a031b9778e6, IP:0,
- U
- RL:0,TC:0,Content:0,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTION:
- release,TS:0
-X-CID-META: VersionHash:e7bac3a, CLOUDID:00f14171-3b7f-4b26-b2f9-40f0deecb36d,
- B
- ulkID:nil,BulkQuantity:0,Recheck:0,SF:80|81|82|83|102|836|865|888|898,TC:-
- 5,Content:0|15|50,EDM:-3,IP:nil,URL:0,File:130,RT:0,Bulk:nil,QS:nil,BEC:-1
- ,COL:0,OSI:0,OSA:0,AV:0,LES:1,SPR:NO,DKR:0,DKP:0,BRR:0,BRE:0,ARC:0
-X-CID-BVR: 2,SSN|SDN
-X-CID-BAS: 2,SSN|SDN,0,_
-X-CID-FACTOR: TF_CID_SPAM_SNR
-X-CID-RHF: D41D8CD98F00B204E9800998ECF8427E
-X-UUID: 4a5474084d1311f1b96f91537e34a508-20260511
-Received: from mtkmbs09n1.mediatek.inc [(172.21.101.35)] by
- mailgw01.mediatek.com (envelope-from <weijie.gao@mediatek.com>)
- (Generic MTA with TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384 256/256)
- with ESMTP id 1096287304; Mon, 11 May 2026 16:27:47 +0800
-Received: from mtkmbs13n2.mediatek.inc (172.21.101.108) by
- mtkmbs10n1.mediatek.inc (172.21.101.34) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.29; Mon, 11 May 2026 16:27:46 +0800
-Received: from mcddlt001.gcn.mediatek.inc (10.19.240.15) by
- mtkmbs13n2.mediatek.inc (172.21.101.73) with Microsoft SMTP Server id
- 15.2.2562.29 via Frontend Transport; Mon, 11 May 2026 16:27:45 +0800
-Message-ID: <a180a411ef345182c2177280e53d453a08bd5954.camel@mediatek.com>
-Subject: Re: [PATCH v3 09/10] ubi: add comments for exported ubi API functions
-From: Weijie Gao <weijie.gao@mediatek.com>
-To: Simon Glass <sjg@chromium.org>
-CC: <u-boot@lists.denx.de>
-Date: Mon, 11 May 2026 16:27:45 +0800
-In-Reply-To: <CAFLszThT-jyw5OjAkZGWpKKi0d0NARL8O1f6etR7YUCOvWc_vQ@mail.gmail.com>
-References: <cover.1777272283.git.weijie.gao@mediatek.com>
- <dd48da7aa5d821b56528824bfd4b57e014947a03.1777272283.git.weijie.gao@mediatek.com>
- <CAFLszThT-jyw5OjAkZGWpKKi0d0NARL8O1f6etR7YUCOvWc_vQ@mail.gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-X-Mailer: Evolution 3.28.5-0ubuntu0.18.04.2 
+ header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=cde5=DI=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1778488235;
+ bh=PmINEgrP4ljJ72w7Jag9wjkSyGUWqZmFXAoSIFtHVLw=;
+ b=Vt/GcnUXvq0y9iKRFXuvFTtPYtIJvogajAh5IXiLRV6aQhTuiaN/0nvTwG1UB4ouadf7mhHV1
+ +JNdzAD0nZ26u89ar8d1ViydqWeRx0w8J+QijP8w3ml+gdwbp1g4H12H3qTF4fgXj+2uF+RJrhb
+ hFs2mhqSwobx28CHRQDlo7Np4RqyZl/9U1DWt7nu+wd+G8N3wLCkGgWTcUWCIWYRnq9OybVpDvl
+ F3KqF2JH81BY0BmEs0XYFqs72xuqALwVLQHlvCi/ld+oqCbtoApWIm0DhvJ1e3o4Ev2oXNj4P58
+ GtEHskgVwEOgDmJ0AITXQnsxOGFQUdUCz1OZLxQvN3Lw==
+X-Forward-Email-ID: 6a01939cc267fa079be75585
+X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-Forward-Email-Version: 2.8.3
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+Message-ID: <c60ea578-30e9-49c2-8d45-0731b9fd74b0@kwiboo.se>
+Date: Mon, 11 May 2026 10:30:16 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] power: regulator: Fix power on/off delay issue
+To: Ye Li <ye.li@nxp.com>, ye.li@oss.nxp.com
+Cc: jh80.chung@samsung.com, peng.fan@nxp.com, festevam@gmail.com,
+ uboot-imx@nxp.com, u-boot@lists.denx.de
+References: <20260511074953.3777767-1-ye.li@nxp.com>
+Content-Language: en-US
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <20260511074953.3777767-1-ye.li@nxp.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-MTK: N
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,112 +73,72 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 2026-04-28 at 08:08 -0600, Simon Glass wrote:
-> Hi Weijie,
-> 
-> On 2026-04-27T07:09:11, Weijie Gao <weijie.gao@mediatek.com> wrote:
-> > ubi: add comments for exported ubi API functions
-> > 
-> > This patch adds comments for exported ubi command API functions.
-> > 
-> > Signed-off-by: Weijie Gao <weijie.gao@mediatek.com>
-> > 
-> > include/ubi_uboot.h | 86
-> > +++++++++++++++++++++++++++++++++++++++++++++++++++++
-> >  1 file changed, 86 insertions(+)
-> > diff --git a/include/ubi_uboot.h b/include/ubi_uboot.h
-> > @@ -47,14 +47,100 @@
-> > + * ubi_part() - attach UBI to MTD partition
-> > + * @part_name: name of the MTD partition to attach
-> > + * @vid_header_offset: VID header offset (string)
-> > + *
-> > + * This function detaches any existing UBI device, then probes for
-> > the
-> > + * specified MTD partition, and then scans it to initialize UBI.
-> > + *
-> > + * @vid_header_offset is optional and is usually set to NULL.
-> > + *
-> > + * Return: 0 on success, 1 if partition not found, or -ve on
-> > error.
-> > + */
-> > int ubi_part(const char *part_name, const char *vid_header_offset);
-> 
-> Most error paths in this file return positive errno values, so '-ve
-> on
-> error' is not quite right. Please double-check and document the
-> actual
-> convention.
-> 
-> > diff --git a/include/ubi_uboot.h b/include/ubi_uboot.h
-> > @@ -47,14 +47,100 @@
-> > + * ubi_volume_read() - read data from UBI volume
-> > + * @volume: name of the volume to read from
-> > + * @buf: buffer to hold the read data
-> > + * @offset: start offset for reading
-> > + * @size: number of bytes to read
-> > + *
-> > + * This function reads data from the specified UBI volume. If
-> > @size is zero,
-> > + * the function reads the entire volume content starting from
-> > @offset.
-> > + *
-> > + * Return: 0 on success, or -ve on error.
-> > + */
-> > int ubi_volume_read(const char *volume, void *buf, loff_t offset,
-> > size_t size);
-> 
-> Same here early-exit paths return positive errno (ENODEV, EBUSY,
-> EBADF, ENOMEM) while the read loop negates ubi_eba_read_leb()'s
-> error.
-> Better to normalise to one convention, and please be consistent
-> across
-> all of these.
+Hi,
 
-For the above two comments for returning -ve, I'll send another patch
-to change all return value to negative.
+On 5/11/2026 9:49 AM, Ye Li wrote:
+> SD initialization failure happens with some UHS-I SD cards on
+> iMX8MM/iMX93/iMX91 EVK after
+> commit 4fcba5d556b4 ("regulator: implement basic reference counter").
+> When sending operation condition to SD card, the OCR does not return
+> correct status. The root cause is regulator on/off delay is missed
+> in MMC power cycle with above commit, so SD card is not completely
+> power off.
+> 
+> When SD startup, the sequence of MMC power cycle is:
+> mmc_power_init(get vmmc_supply dev) -> mmc_power_off -> udelay(2000)
+> -> mmc_power_on
+> 
+> Before above commit, as a fixed regulator, the GPIO is set as:
+>   GPIO inactive (in mmc_power_init) ->
+>   GPIO inactive and delay off-on-delay-us (in mmc_power_off) ->
+>   udelay(2000) ->
+>   GPIO active (in mmc_power_on)
+> 
+> After the commit:
+>   GPIO inactive (in mmc_power_init) ->
+>   enable_count is 0, regulator_set_enable returns -EALREADY immediately,
+>       so GPIO is inactive but No off-on-delay-us (in mmc_power_off) ->
+>   udelay(2000) ->
+>   GPIO active (in mmc_power_on)
+> 
+> Add the on/off delay and startup delay after GPIO request in
+> regulator_common_of_to_plat which is called in regulator device probing.
+> So in mmc_power_init, after GPIO is set to default inactive, the
+> off-on-delay-us is applied.
+> 
+> Signed-off-by: Ye Li <ye.li@nxp.com>
+> ---
+>  drivers/power/regulator/regulator_common.c | 6 ++++++
+>  1 file changed, 6 insertions(+)
+> 
+> diff --git a/drivers/power/regulator/regulator_common.c b/drivers/power/regulator/regulator_common.c
+> index 85af8d599ad..158284a3309 100644
+> --- a/drivers/power/regulator/regulator_common.c
+> +++ b/drivers/power/regulator/regulator_common.c
+> @@ -46,6 +46,12 @@ int regulator_common_of_to_plat(struct udevice *dev,
+>  			dev_read_u32_default(dev, "u-boot,off-on-delay-us", 0);
+>  	}
+>  
+> +	if ((flags & GPIOD_IS_OUT_ACTIVE) && plat->startup_delay_us)
+> +		udelay(plat->startup_delay_us);
+> +
+> +	if (!(flags & GPIOD_IS_OUT_ACTIVE) && plat->off_on_delay_us)
+> +		udelay(plat->off_on_delay_us);
 
-> 
-> > diff --git a/include/ubi_uboot.h b/include/ubi_uboot.h
-> > @@ -47,14 +47,100 @@
-> > + * This function creates a new UBI volume with the specified
-> > parameters.
-> > + * If @size is negative, all available spaces will be used.
-> > + * if @vol_id is negative, volume ID will be selected and assigned
-> > by UBI.
-> > + *
-> > + * Return: 0 on success, or -ve on error.
-> > + */
-> > int ubi_create_vol(const char *volume, int64_t size, bool dynamic,
-> > int vol_id,
-> >                  bool skipcheck);
-> 
-> Capitlal I on 'If'. Also 'all available spaces' reads better as 'all
-> available space'. Also worth mentioning that @vol_id should be
-> UBI_VOL_NUM_AUTO for auto-assignment.
-> 
-> > diff --git a/include/ubi_uboot.h b/include/ubi_uboot.h
-> > @@ -47,14 +47,100 @@
-> > + * ubi_detach() - detach UBI from MTD partition
-> > + *
-> > + * This function performs the cleanup of the UBI subsystem to make
-> > sure the
-> > + * MTD partition can be safely used by other purpose, or be
-> > attached again
-> > + * with ubi_part().
-> > + *
-> > + * Any mounted UBIFS will be unmounted automatically.
-> > + *
-> > + * Return: 0 on success.
-> > + */
-> > int ubi_detach(void);
-> 
-> 'used by other purpose' should be 'used for another purpose'. Since
-> this only ever returns 0, you could say 'Return: 0' and drop 'on
-> success'.
+regulator_common_of_to_plat() is for parsing the values, no udelay()
+should be applied here.
 
-I'll fix the rest two comments.
+regulator_common_set_enable() applies udelay() when the regulator is
+enabled.
 
-> 
-> Regards,
-> Simon
+Does your regulator .get_enable() ops not being called or does it not
+implement its own udelay() based on parsed values?
+
+Regards,
+Jonas
+
+> +
+>  	return 0;
+>  }
+>  
 
