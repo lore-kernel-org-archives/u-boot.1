@@ -4,129 +4,105 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F283CD343F
-	for <u-boot@archiver.kernel.org>; Tue, 12 May 2026 19:42:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A414CD4F21
+	for <u-boot@archiver.kernel.org>; Tue, 12 May 2026 21:48:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D72DD83CD3;
-	Tue, 12 May 2026 21:42:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
+	by phobos.denx.de (Postfix) with ESMTP id B437E83F14;
+	Tue, 12 May 2026 23:48:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="MfFToBi2";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="XTi6lctH";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20251104.gappssmtp.com header.i=@baylibre-com.20251104.gappssmtp.com header.b="y42vx0aL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5FE7B83E81; Tue, 12 May 2026 21:42:21 +0200 (CEST)
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
- [205.220.180.131])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 1724D836AC; Tue, 12 May 2026 23:48:50 +0200 (CEST)
+Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
+ [IPv6:2607:f8b0:4864:20::32a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C9C6C836AC
- for <u-boot@lists.denx.de>; Tue, 12 May 2026 21:42:18 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=oss.qualcomm.com
+ by phobos.denx.de (Postfix) with ESMTPS id 68AD98341A
+ for <u-boot@lists.denx.de>; Tue, 12 May 2026 23:48:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=aswin.murugan@oss.qualcomm.com
-Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 64CHG7tP591860
- for <u-boot@lists.denx.de>; Tue, 12 May 2026 19:42:17 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- content-transfer-encoding:date:from:message-id:mime-version
- :subject:to; s=qcppdkim1; bh=+IcjHDOQ76fEJ/KsXiGA4sEGSkD1DG8SAkB
- qSL0R1po=; b=MfFToBi2oVvsOsX2dcLYv5BCL6VTD/i5L7Y4FkW0iJwS1P+HWYD
- luYZPncW/aoAsV+N8PoD1mLteUXpPL40fz6b3jTgWubPxS0bXDg1cogA74D6L/+8
- oOLtspR1JvnLmNVfI2KmTjnY9mJmkD8wYzvqlkWdLVLp5RBw+2Cxf2r6cnpZJAdf
- ADlX0+ElNmHteP+JkkfBvUQHkh2QU61e8ecp3FJD/Ag/1xu5o0Us+jvlWJ87k0KV
- p4hdfy8TpXqk7VcDoaBcYevfol93rJ3q/SET2oQ+DkoWsY/grD9sh+DoXWvxqe7/
- ZV35ysypSj/75ZpbGxYh3hKw+BLhHn45nmw==
-Received: from mail-pj1-f70.google.com (mail-pj1-f70.google.com
- [209.85.216.70])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4e4319t4r9-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Tue, 12 May 2026 19:42:17 +0000 (GMT)
-Received: by mail-pj1-f70.google.com with SMTP id
- 98e67ed59e1d1-368b0dc7731so859069a91.3
- for <u-boot@lists.denx.de>; Tue, 12 May 2026 12:42:17 -0700 (PDT)
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=dlechner@baylibre.com
+Received: by mail-ot1-x32a.google.com with SMTP id
+ 46e09a7af769-7dbca22dbfeso3512728a34.1
+ for <u-boot@lists.denx.de>; Tue, 12 May 2026 14:48:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1778614936; x=1779219736; darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=+IcjHDOQ76fEJ/KsXiGA4sEGSkD1DG8SAkBqSL0R1po=;
- b=XTi6lctHHKFTe7eeIrXAEeFDgZ8MVGO5dldwneyQMSPSyBxBEJ4SUOT+y/ZmszEVo7
- cWPVMR9/MfG1mw2dk+w1F1C0jiNzmcD7O09cSFuvq74JaJup62sIOEMV4OQTUxpuEXKg
- d37u1/fxhJp3EPhyVZx/D0P7P6TbUmLZixGzgMuZ0tO7iYilztcEiw7d4mLNCHSFa3fS
- UfQ89FIKr2flvkymZiPkckRthE6PIxZ/mn9MJbzg9aFPs4em6ehcPgSxjaNdgIvo83ri
- 1TQcynjTddN9TEHIs6T09jY5+lWw6Ikv2KXkgY+/ZUiprwnpgDLFyk6YMLMV9jkkCqk0
- +EMg==
+ d=baylibre-com.20251104.gappssmtp.com; s=20251104; t=1778622526; x=1779227326;
+ darn=lists.denx.de; 
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=UMx0KnMhqoJ8oMJFZHKHZdjGjogamSIb36XliSrZPTE=;
+ b=y42vx0aLNQTPorBvSADP+v7IspMfJpgl0791Lc9nbPcoq7i+M0wj0/pTMbZWVPPivg
+ 2zHXcxqTxNyeQEBSHop0eECnYdEoeTQSGIzy17mup+lO0kY9sof54V0J0FLpCuPs5zBe
+ eJD9UJ0oGv7lggvgFWPdEUF5xhBLUB7HxkXsjIZHPKJKawhSs2hSyyZ0ngjYN4QrK79b
+ 9W5sGzzLW0HYimzin9Drd9DC/lxtpsL8mKSp2o/2n6RJPZSGz3IJcYrosW4o8biA/iQA
+ 2taqPguJD585ceUzP8iUCGpaFX1HjisL1K0arX22BifB/3ZS4N/WKB2lplNojMOK2AED
+ id+w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778614936; x=1779219736;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=+IcjHDOQ76fEJ/KsXiGA4sEGSkD1DG8SAkBqSL0R1po=;
- b=ElXbblb34pbA17X/q/ky3Xo7W6BWOHt6X60gwmCL47DZHzgTLjSUMsOkzwy1sLYmVu
- 7+vvinA+4OEqTGYQ6jhgt5C6ius9xNBCrAjwm4r0zG83PFM65AVjqel5v/tmYX+h/NTO
- 1gEgWC279P7G7vz374KfsFDKr/N15SnPOK8q353wlQJr/+ALv4cb5Y5uOdqGnfZp8zo7
- pavNtt1khF1HGslrdMH0L3jKhY+7pG9m2V7cr+ctIg+WBIfEQLn/QrgL77zqnbXCM36Z
- ejnFl4ZfIcfcejOhMLzuP2Whzq64jSrAG3VZ5R21d2Uq8wOWK3F4OgDkSLNjzhIdMRDm
- bZuQ==
+ d=1e100.net; s=20251104; t=1778622526; x=1779227326;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=UMx0KnMhqoJ8oMJFZHKHZdjGjogamSIb36XliSrZPTE=;
+ b=VHzMyKQDG9ynVbmYco85ZrKgTTzJX1hCBDZkfOC7G0p+amU+wuPmg8Ud14mOPfZVYD
+ hXZrLLs2PPEYYtlY9lwSTUTh9U9oEDghVBhdcpIjdEQ5IyVpZ6vGpPZ/JhP2M3wKH8yE
+ zZJultOCJPLY6bxun+1RZpDsk7pFH8C9fdLrZwH6LfrU+bjTHkU/JEnsApyzH53YcqeI
+ PkNg3Ip5aXtD8tyaW0x8ToAh4r4ivu0CI0I9WQD6eiR0cXW5zzaUtzjB7KYXj770cYO/
+ bcnFbwLeOL86TGsdd53RupDOxO8XFjqZevE9jKQDpKg6dQsbeV7MIuwRfdfC/dKHAlRG
+ B5pw==
 X-Forwarded-Encrypted: i=1;
- AFNElJ9aptJ7b4atPCj3Yx26FIXYlyJvllGlfiRAZW0MH/dW2NzCEXPaphWD9XzGJiMiOhOsWYKtfyA=@lists.denx.de
-X-Gm-Message-State: AOJu0YynZskBFxQnUpo6vvohI4ZiqOUAofh2vAOhSTAh7FTudsLEjznW
- QeNutp2/slrCoCAaqIHOwej3llNCZN8yhERmgO5Dilk/MlCj5wioV0Y9/vTNwKcdmqgzLzXXn7p
- B/VCu0/q5CcSj65g0H4uRI6/x5wijYNkAa0Ykj3CqOrvyyw5ILzMZiRCb
-X-Gm-Gg: Acq92OFpLQqbq6MLMtyfIDUc9vMZKtzkwHryYQYpPnaYKONkagB+Mf9q4vY1u/EZDSR
- sB/hPhYm96AZG2BcrxaM3nXLiazLysnVRm2wAX7mUUBeX3oXdZlnEdBAPmDusZRf7DROVd5aCrT
- 7Pqq7ZeSjaG+VEhJuUKB1mLthDV3VYBFkkfmnEFa6aigvUqe/IWiTdHqVCeqRaOg4VBDc7wK7Xm
- O50D0m/ju9D6OWVQu3CW4fZnKzwTaM8p3s/MfknvLWLkfXMj7e3vfDY2YvtMd7OnziHCm35b2GP
- 18hXLDybe0f9NlcmmpgsRQXqLL7eyfKXXsSjNNdWDvg2VQBYr8wsG5NUra0RmF86VPmVOOXWu6j
- aKY3Ags11XWpdWZvrjnBxTQViHIDWlPQ1J7YnQf15QBR4TIVKmKsoihZxHa/vRsc3l7QU58kt/5
- YavK1yJ9dRqbE4hcJQgnOyEIor3LXQPTfXDVrqZI6b
-X-Received: by 2002:a17:90b:4c02:b0:35d:a38a:a117 with SMTP id
- 98e67ed59e1d1-368f3e6ffabmr470936a91.15.1778614936292; 
- Tue, 12 May 2026 12:42:16 -0700 (PDT)
-X-Received: by 2002:a17:90b:4c02:b0:35d:a38a:a117 with SMTP id
- 98e67ed59e1d1-368f3e6ffabmr470904a91.15.1778614935789; 
- Tue, 12 May 2026 12:42:15 -0700 (PDT)
-Received: from hu-aswinm-blr.qualcomm.com
- (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
+ AFNElJ+mN98E7PyptplrIUKyrsjNU22uE8EynYNhVg35EbWeOKTzlOlPeMu2/zD2oXbHkqzOIIblbi0=@lists.denx.de
+X-Gm-Message-State: AOJu0YzqnrejuUR/bJONwOAUkFIrk6IfSE+5h+iZjAY5EXk+fMaj1hjo
+ vefHtA6+huEvjLUuyuQJnDddGafFPXQ5G4Iaw37nrWOwr2t5ulX1Platy+vHqUgHbNQ=
+X-Gm-Gg: Acq92OHDTZM/gMxqO5LO0DC2Cn2NXr6CgE8TBcAOD38yrmr4t+gkTijZAqGuIx+3dOs
+ j2eenp9elV5xpqAS3/DAHrWkx/+vBtmGdAQ1V73K8enA00nNQas/C8s567jjr4B6qunFspue8eh
+ BFZTotWJ4ENAMl3MFThTZjnZuCEqDZsUe+JC6RkeSmEOcrogTpzYz6xD5h63RgHQzTOWo0Tie8d
+ HrryafjEP49+9iFS7Qtjgg6ogudW4/qcARbg9HOt1SzenkKLkzMPaXrjTGaTumhfO3trbASts9j
+ FTdX/CcMuzRP9KHfl1WfiGEolRAUzvy5xbcqnlRjMWzEipo1t1nIVUw7u5yuqqtHEx6WZTspiVo
+ Z7XFjdis8clmI/NUZCWBS0EiknESwVjczRYBm3bgT7/jkLNJ1MC+CI3D6xUKrcTOnBBFURAO2sg
+ /4wNEuIZhPomzxAsrp0UnH1W+M2Zgd
+X-Received: by 2002:a05:6830:928:b0:7dc:4947:36a1 with SMTP id
+ 46e09a7af769-7e3da15934emr387886a34.12.1778622526043; 
+ Tue, 12 May 2026 14:48:46 -0700 (PDT)
+Received: from [127.0.1.1] ([2600:8803:e7e4:500:baa4:f7fb:528a:2457])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-368edf4d940sm636230a91.7.2026.05.12.12.42.13
+ 46e09a7af769-7e367c04e66sm9671795a34.8.2026.05.12.14.48.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 12 May 2026 12:42:15 -0700 (PDT)
-From: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
-To: xypron.glpk@gmx.de, ilias.apalodimas@linaro.org, trini@konsulko.com,
- michal.simek@amd.com, aswin.murugan@oss.qualcomm.com, u-boot@lists.denx.de
-Subject: [PATCH v2] efi_loader: Remove authentication header in GetVariable()
-Date: Wed, 13 May 2026 01:12:05 +0530
-Message-Id: <20260512194205.1905069-1-aswin.murugan@oss.qualcomm.com>
-X-Mailer: git-send-email 2.34.1
+ Tue, 12 May 2026 14:48:45 -0700 (PDT)
+From: David Lechner <dlechner@baylibre.com>
+Subject: [PATCH v2 0/3] net: lwip: halt ethernet after network commands
+Date: Tue, 12 May 2026 16:48:12 -0500
+Message-Id: <20260512-net-lwip-add-stop-function-v2-0-85146da317dd@baylibre.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNTEyMDIwMyBTYWx0ZWRfXyseWUwIjDLzS
- C2xWov5XPg4dLB/nVNQIm2dPs1XNOoxvT1PfbFZAvt9yZpUcL98rCmWntTK+wJTja+AxmIr0M9d
- mS7cN9sTV49aDof/j9JAkBVHYZ27KjB/WSjPLOTzC/6T1r9/hedAQ3QYA21pY7nph4kJL+pN/yc
- xvreskUJRHL0OuS+HdhC0p9B+YTIFtxjl0H9FB4evDQyqAuQTDDkbPMErfVC+QL/b7FG9gDowZX
- SjYUpMn+pCOhNvJgyakmdEfCjxs1sXV+66IUlYZx4fTnpfzzuSkxFsvUFCo0l+rM1mt+9cik2fZ
- VifzQ+/nMFhcrkbmAmH+9jz2GZZIqx92tTttApB4QODKNaa4LlB1FIeC8vCYGMcVKjv1+pocDSe
- WULTPJNwx3x3Enna2l2IZmB4uTrC/NKKCVi2X89N9CJvJQz+Xm/hvgqTnGYuecwVwbPnVwTDx6Z
- qn+VXgDVjsch7w/DGRA==
-X-Proofpoint-GUID: oUHDMmuddeBUx9r58dcpSTglDPmIaFLm
-X-Authority-Analysis: v=2.4 cv=bp98wkai c=1 sm=1 tr=0 ts=6a038299 cx=c_pps
- a=0uOsjrqzRL749jD1oC5vDA==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
- a=NGcC8JguVDcA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22 a=VwQbUJbxAAAA:8
- a=EUspDBNiAAAA:8 a=YKpRDGN90cBrfkvr_dMA:9 a=mQ_c8vxmzFEMiUWkPHU9:22
-X-Proofpoint-ORIG-GUID: oUHDMmuddeBUx9r58dcpSTglDPmIaFLm
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
- definitions=2026-05-11_05,2026-05-08_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 adultscore=0 clxscore=1015 bulkscore=0 malwarescore=0
- lowpriorityscore=0 suspectscore=0 phishscore=0 spamscore=0 impostorscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2605050000 definitions=main-2605120203
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/42OQQ6CMBBFr0Jm7SiQWtCV9zAuWjrIGCnYFpQQ7
+ m5FD+DyJ/+/92fw5Jg8HJMZHI3subMx5JsEqkbZKyGbmCFPc5nu0wNaCnh/co/KGPSh67EebBX
+ iDIu6KA4iLUQpBERA76jm1wo/X77ZD/pGVfgQfw1HjyFaw7cGWnnCqmtbDsekc3xlu2uVD+Tgg
+ 2g4Kt203h2zdfHPszHDDGVuyr3QtZJSnbSa7qwdbaMLLsuyvAGc5sL0CgEAAA==
+X-Change-ID: 20260509-net-lwip-add-stop-function-7f7794074844
+To: Jerome Forissier <jerome.forissier@arm.com>, 
+ Tom Rini <trini@konsulko.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de, 
+ David Lechner <dlechner@baylibre.com>
+X-Mailer: b4 0.16-dev
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3199; i=dlechner@baylibre.com; 
+ h=from:subject:message-id;
+ bh=7Hch/t7Tvti0JEatkt7cI8iWKKerknmnoclhHXa6EMg=; 
+ b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBqA6AhVt4ttAan/PseERD8LVV0j6E1n0ZjDy3zM
+ swg+/5GjyeJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCagOgIRYcZGxlY2huZXJA
+ YmF5bGlicmUuY29tAAoJEMLMIAH/AY/A6qMH+wQVGa4NvA3sECi5EtIUTCPbxzVumzcv7nz85wz
+ gvKPUqtKRiUpV3QHyOq4lut/hmhiSjISPb6dFs+/e15AHTe471hm54DV4DyKjA7ahM+JoLZwH0v
+ wwzsp7SDo8xtFvbioxkdniWb2NrXG2N/is15rUu522KsQ7n4IcECwkRYtYOLuidhEUp3VPmaQ49
+ DaF9yVLRio+nR1XICHVC/ptMsJDxnmwz9A5R5kT/0RXNJCqVDeO4Emo2Nqo3c9/3xwEhShXIWn1
+ 472nhs/guiEaLFNtAdkTWFe9kRuAhHWy1zTXXRPe2iyasclnLualhnffazGgTmMHDqcTWNpJ7Bn
+ Lw9M=
+X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
+ fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -143,100 +119,86 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Currently, efi_get_variable_mem() returns the raw stored format for
-authenticated variables, which includes the EFI_VARIABLE_AUTHENTICATION_2
-descriptor . This causes image authentication failures when reading
-secure boot variables as callers receive wrong data containing
-authentication headers instead of the actual variable payload.
+Background:
 
-The UEFI Specification Section 8.2.6(EFI_VARIABLE_AUTHENTICATION_2 descriptor)
-explicitly states:
-"The authentication descriptor is not part of the variable data and is
-not returned by subsequent calls to GetVariable()."
+While testing [1], I found that it would take down my local network if
+I left the command prompt open for more than 30 seconds after running
+any network command. The network activity light on the board running
+U-Boot would go crazy and other network adapters on the network would
+start getting watchdog timeouts. So apparently, it is doing something
+quite low-level and I don't have any hardware to sniff that (Wireshark
+on another computer was no help since all network adapters on the
+network stopped working.) So I took a logical approach of looking at
+the code to see if I could find anything that would cause this. This
+seemed to only happen after I switched from the legacy network
+implementation to the lwIP implementation, so I looked for differences
+between the two implementations.
 
-This patch implements spec-compliant behavior by detecting variables with
-the EFI_VARIABLE_TIME_BASED_AUTHENTICATED_WRITE_ACCESS attribute and
-stripping the authentication descriptor before returning data to callers.
+After some investigation, I found that the lwIP implementation was
+different from the legacy implementation in that it does not call
+eth_halt() after a network command. Since the problem happened only
+when at the command prompt with no command running, this seemed like a
+likely culprit. And indeed, it does seem to fix the issue for me.
 
-Signed-off-by: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+For reference, the legacy implementation does something like this
+as documented in doc/develop/driver-model/ethernet.rst:
+
+	(some net operation (ping / tftp / whatever...))
+	eth_init()
+		ops->start()
+	eth_send()
+		ops->send()
+	eth_rx()
+		ops->recv()
+		(process packet)
+		if (ops->free_pkt)
+			ops->free_pkt()
+	eth_halt()
+		ops->stop()
+
+After this patch, the lwIP implementation will do the same thing for
+all ethernet commands.
+
+[1]: https://lore.kernel.org/u-boot/20260429-add-ethernet-support-for-genio-520-720-v4-0-be54e17239b7@baylibre.com/
+
+During review of v1, we noticed some existing bugs in wget_handle_request()
+so two new patches were added to fix those first before attempting the
+primary objective.
+
+Signed-off-by: David Lechner <dlechner@baylibre.com>
 ---
 Changes in v2:
-- Enhanced commit message with explicit UEFI spec reference
-Link to v1: https://lore.kernel.org/u-boot/20250725123653.513252-1-aswin.murugan@oss.qualcomm.com/
----
- lib/efi_loader/efi_var_mem.c | 44 +++++++++++++++++++++++++++++-------
- 1 file changed, 36 insertions(+), 8 deletions(-)
+- Added two new patches to address existing bugs in the code.
+- Don't remove eth_halt() before eth_init().
+- Link to v1: https://patch.msgid.link/20260509-net-lwip-add-stop-function-v1-1-62d854bfa66a@baylibre.com
 
-diff --git a/lib/efi_loader/efi_var_mem.c b/lib/efi_loader/efi_var_mem.c
-index 8d5f99f4870..edf4522e51f 100644
---- a/lib/efi_loader/efi_var_mem.c
-+++ b/lib/efi_loader/efi_var_mem.c
-@@ -336,9 +336,10 @@ efi_get_variable_mem(const u16 *variable_name, const efi_guid_t *vendor,
- 		     u32 *attributes, efi_uintn_t *data_size, void *data,
- 		     u64 *timep, u32 mask)
- {
--	efi_uintn_t old_size;
-+	efi_uintn_t old_size, var_data_size;
- 	struct efi_var_entry *var;
- 	u16 *pdata;
-+	void *var_data;
- 
- 	if (!variable_name || !vendor || !data_size)
- 		return EFI_INVALID_PARAMETER;
-@@ -362,19 +363,46 @@ efi_get_variable_mem(const u16 *variable_name, const efi_guid_t *vendor,
- 	if (!u16_strcmp(variable_name, vtf))
- 		return efi_var_collect_mem(data, data_size, EFI_VARIABLE_NON_VOLATILE);
- 
-+	for (pdata = var->name; *pdata; ++pdata)
-+		;
-+	++pdata;
-+
-+	var_data = (void *)pdata;
-+	var_data_size = var->length;
-+
-+	/* Handle EFI_VARIABLE_TIME_BASED_AUTHENTICATED_WRITE_ACCESS */
-+	if (var->attr & EFI_VARIABLE_TIME_BASED_AUTHENTICATED_WRITE_ACCESS) {
-+		if (var_data_size > sizeof(struct efi_time)) {
-+			struct efi_time *timestamp;
-+			struct win_certificate_uefi_guid *cert;
-+			efi_uintn_t auth_size;
-+
-+			timestamp = (struct efi_time *)var_data;
-+			cert = (struct win_certificate_uefi_guid *)(timestamp + 1);
-+			auth_size = sizeof(struct efi_time) + cert->hdr.dwLength;
-+			if (var_data_size > auth_size) {
-+				var_data = (u8 *)var_data + auth_size;
-+				var_data_size -= auth_size;
-+			}
-+		}
-+	}
-+	/*
-+	 * EFI_VARIABLE_AUTHENTICATED_WRITE_ACCESS type is old & not
-+	 * expected for auth variables
-+	 */
-+	else if (var->attr & EFI_VARIABLE_AUTHENTICATED_WRITE_ACCESS)
-+		return EFI_INVALID_PARAMETER;
-+
- 	old_size = *data_size;
--	*data_size = var->length;
--	if (old_size < var->length)
-+	*data_size = var_data_size;
-+
-+	if (old_size < var_data_size)
- 		return EFI_BUFFER_TOO_SMALL;
- 
- 	if (!data)
- 		return EFI_INVALID_PARAMETER;
- 
--	for (pdata = var->name; *pdata; ++pdata)
--		;
--	++pdata;
--
--	efi_memcpy_runtime(data, pdata, var->length);
-+	efi_memcpy_runtime(data, var_data, var_data_size);
- 
- 	return EFI_SUCCESS;
- }
--- 
-2.34.1
+To: Jerome Forissier <jerome.forissier@arm.com>
+To: Tom Rini <trini@konsulko.com>
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Julien Stephan <jstephan@baylibre.com>
+Cc: u-boot@lists.denx.de
+
+---
+David Lechner (3):
+      net: lwip: wget: fix error handling in wget_do_request()
+      net: lwip: wget: return errno codes from wget_do_request()
+      net: lwip: introduce net_lwip_eth_stop() function
+
+ cmd/lwip/ping.c     |  10 ++++-
+ cmd/lwip/sntp.c     |  10 ++++-
+ include/net-lwip.h  |   1 +
+ net/lwip/dhcp.c     |  15 ++++++--
+ net/lwip/dns.c      |   7 +++-
+ net/lwip/net-lwip.c |   5 +++
+ net/lwip/nfs.c      |   4 ++
+ net/lwip/tftp.c     |   4 ++
+ net/lwip/wget.c     | 107 ++++++++++++++++++++++++++++++----------------------
+ 9 files changed, 108 insertions(+), 55 deletions(-)
+---
+base-commit: 36d4c653580824b16574560b21d4401614d8b68e
+change-id: 20260509-net-lwip-add-stop-function-7f7794074844
+
+Best regards,
+--  
+David Lechner <dlechner@baylibre.com>
 
