@@ -4,139 +4,170 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2CD6CD37AC
-	for <u-boot@archiver.kernel.org>; Tue, 12 May 2026 04:35:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F0FDCD37AC
+	for <u-boot@archiver.kernel.org>; Tue, 12 May 2026 04:40:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E812C8341A;
-	Tue, 12 May 2026 06:35:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
+	by phobos.denx.de (Postfix) with ESMTP id 5072D8341A;
+	Tue, 12 May 2026 06:40:16 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="giXUPUdx";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="m46UkN6e";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 609958394E; Tue, 12 May 2026 06:35:21 +0200 (CEST)
-Received: from DM5PR21CU001.outbound.protection.outlook.com
- (mail-centralusazlp170110009.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c111::9])
+ id 41D138464D; Tue, 12 May 2026 05:08:06 +0200 (CEST)
+Received: from GVXPR05CU001.outbound.protection.outlook.com
+ (mail-swedencentralazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c202::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0B4C883015
- for <u-boot@lists.denx.de>; Tue, 12 May 2026 06:35:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E80A083CD3
+ for <u-boot@lists.denx.de>; Tue, 12 May 2026 05:07:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=altera.com
+ dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=alif.zakuan.yuslaimi@altera.com
+ spf=pass smtp.mailfrom=alice.guo@oss.nxp.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=MhZFuv+VnEG3+v/LiDYjQF2LvdWp7cyOXNNd5qEm77aDFebOdGFUrXCsCOd3DvFFMnmpzVakonN1jqY614t287o2L0tvzHMlUOi0/bJz11DLqqtO/z5FeBKMR7qSHuJnDcIjJ36h0E6iibE4QNRmA7f+bkE9Zb/ok2y3k9lhzPnM+CJA7+jKUFyYop28jT2U20h+Dn+hA5xQdd4ReNaIqXMGIHokGdj1hmrxpXCJxho3+XX72iOicaWfq1Y+HiIDXvLTQIRdQlqSkNQtzx1edIrG6+xq50oe5zN2UaL09AhiL3b4Hib1gCvoUyVP4RZpBsJVMmPAePxxyxsVGUP3lA==
+ b=QXX2hGu7KgFcMzKb0Ks8bjkOLzYQ4fpq42/EfuaLnNzirmtMHSNFcPajtV8N9O+Jq3egeyxRrpGUZK97BSwvoQ8/tDty4toW8dP4qRlbl+/kp/YrkQPVWkKrc6EGfpkaOd+pD305/GOQb2XQyL+omL9obrKCWFQ6RiShG3P6tVA/vOMocK0a31lRugoG94jBZofx4C8EqVXtMFip1geCSmijlbOT6UlWE4evkuqilILhppN23Sap6PAqfyAmXRlpAtGpLMW6H0vYupGooynLV0ReIuGSCeuvVmu4Id94Le6yIl5QZ2hoCC1VdbhdS1mbC1u3LxXzV90IORzM+rkquw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=COfr6+iIfhu5JPJgBnxYiDemQ4b1MEm6FQ+ZGZfiUp0=;
- b=UXWOz8ALgJrIv+hwmH4CYlN+QYV4mI7qmBvDkodK3RMybu1DIvlVbcRY1qeumINlAR0YtQC/s4HWcMbLU+Hz6F5koBDq+HhhUkxHxx9Vzpm9biDRsgpNSJhxxgiAe5YfVJj6jqCRUxdnhB1PhSOM3iBxhGenV8dSoL9T9MEC+2rJr4GpLWpggEaYn7pQQrAbosqMrdQsBfO00wzUwUAvLcF4il2//nqqYsDc+N6Og1IHsnGbV7G9FEVGfMihQFh6leyUTTwBjXUdJ67A6EuQqkSw4pHuE9v2dUukexM1Zc0qXwFSntJeqtbDYgyL1i5a8UpBREEZ8ZxjN5X8ToLqHg==
+ bh=+WqejgcuyEQN/Yg/Ntee1U3AuEjxGvUckN+QoqfXrws=;
+ b=ZEmOW2nMBSRZmG9+n3tCoTwNid9gB90pBVuQGUBxQE5IaHDeF6h5fY/JxJskv9J7nbDSpdYeL4uAi2lbqbiIr7P4KUnm9+nMUVhcLlfy7Bp0jymiDJLW44l51Wl/6Z5nesG1Fzt/D82fUO1l4tYdCbkFdAQxl+/dTxySGGyXNTO1x1U5tknuGaQveU8GoOAIUM5LipU0rHfmP9T0ML+dVQf4LlwPUHcEkv+hNMM73RoODplFe5l4FY0vKlI1OyjzJ4J+6AJAFXQtjJftuW2aRwmkN/QMDYc0N9PxVZyj6ncItdwFYos/RR0u3imkocWBwVhFj+f+NLqDr5l0e5HZEA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
- dkim=pass header.d=altera.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
- s=selector2;
+ smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
+ dkim=pass header.d=oss.nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
+ s=selector1-NXP1-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=COfr6+iIfhu5JPJgBnxYiDemQ4b1MEm6FQ+ZGZfiUp0=;
- b=giXUPUdxjAHgWM3nsOKRxxR+j9TnHb+CYDzM2Zis0e4KrF3xmRTI8neBeaq7akZ/fecRjT4yOmAVpcTeCjPPPGjxt1Kq5/I6JuNMRorB8XDw7gUMbACztVRPMJvva20YTodhEuaeb/IspY3n5E9vpUajWQGUTKKEIbCXDAJEane+HjQqdq3ysvAnbvPGjL1T6g6F9WR7jwWn6ko+oYjePvVUtU0C1+VadNUXceVjuz7D1Ks2Fr90zCsaZGp8fIHPkSbGN6tDe4PgHFyEyKF6+VhYOu3LzIH8kuRFKtt3/iQvH+b+dUsM/aqxlbr8hLHuoXmho5xLlrX0WnPyBF5Bnw==
+ bh=+WqejgcuyEQN/Yg/Ntee1U3AuEjxGvUckN+QoqfXrws=;
+ b=m46UkN6e++mkdOEMuiHnnTV4jAW/PexVasVb0Oe41iSL1sDwJTN4WTCJnCdUDZBt8tR9qroAZsbZZqfG4UONgAeOTMbRveO0Y37XJNb4/u1g9sAmHoy9e2kHG9xTgJMWxZdCHcLgBYAdaQTxR2CYBfL8onmeFHDK2OHMWmxclnXNVCifUsmuv38F5gg6x2mM91hWSJ2g3E+ivhaCeBdo5ExJ6naTsczfxXZ5lWLli1rJmxFSBBHDoAXovBkma+9wvx+EMuZNg3iWAxz0y8WMHtZEcVZi68QriNLxZE5rzUm/LO6ZPT1zk8FdsLUO9jiuEDZbdZw2gGIhyqY40XtV1w==
 Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=altera.com;
-Received: from PH7PR03MB7063.namprd03.prod.outlook.com (2603:10b6:510:2a4::6)
- by DM4PR03MB6192.namprd03.prod.outlook.com (2603:10b6:5:39c::23) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9870.25; Tue, 12 May
- 2026 04:35:15 +0000
-Received: from PH7PR03MB7063.namprd03.prod.outlook.com
- ([fe80::f6cf:4203:1cbc:cd21]) by PH7PR03MB7063.namprd03.prod.outlook.com
- ([fe80::f6cf:4203:1cbc:cd21%4]) with mapi id 15.20.9913.009; Tue, 12 May 2026
- 04:35:15 +0000
-Message-ID: <db94bc99-34f4-44b3-9511-025a8ba5e989@altera.com>
-Date: Tue, 12 May 2026 12:35:09 +0800
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 0/3] SoCFPGA: Update DDR Support for Gen5/Arria10 in
- U-Boot
-To: Sune Brian <briansune@gmail.com>,
- Tien Fong Chee <tien.fong.chee@altera.com>, Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, Marek Vasut <marex@denx.de>,
- Tom Rini <trini@konsulko.com>
-References: <20260423080637.30006-1-alif.zakuan.yuslaimi@altera.com>
- <CAN7C2SD8D4yHnSLAQfrs3-kgGfmZrqh6fMXmB=QOfZYq9Uq7EA@mail.gmail.com>
-Content-Language: en-US
-From: "Yuslaimi, Alif Zakuan" <alif.zakuan.yuslaimi@altera.com>
-In-Reply-To: <CAN7C2SD8D4yHnSLAQfrs3-kgGfmZrqh6fMXmB=QOfZYq9Uq7EA@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: SI1PR02CA0030.apcprd02.prod.outlook.com
- (2603:1096:4:1f4::8) To PH7PR03MB7063.namprd03.prod.outlook.com
- (2603:10b6:510:2a4::6)
+ header.d=none;dmarc=none action=none header.from=oss.nxp.com;
+Received: from PAXPR04MB9644.eurprd04.prod.outlook.com (2603:10a6:102:242::11)
+ by FRWPR04MB11271.eurprd04.prod.outlook.com (2603:10a6:d10:19c::6)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9913.11; Tue, 12 May
+ 2026 03:07:51 +0000
+Received: from PAXPR04MB9644.eurprd04.prod.outlook.com
+ ([fe80::cf3:c5b0:7a0c:d11b]) by PAXPR04MB9644.eurprd04.prod.outlook.com
+ ([fe80::cf3:c5b0:7a0c:d11b%5]) with mapi id 15.20.9913.009; Tue, 12 May 2026
+ 03:07:51 +0000
+From: alice.guo@oss.nxp.com
+Subject: [PATCH v3 0/9] imx: Switch watchdog addressing from macros to
+ devicetree
+Date: Tue, 12 May 2026 11:10:07 +0800
+Message-Id: <20260512-wdt-v1-0-0b9e1993557b@nxp.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAA+aAmoC/yWMyw5AQBAEf0X6bBNWEH5FHIwdjAOy65WIf7c4V
+ qe6Lji2wg5lcMHyLk7myUMcBmiHZupZifEMHeksSmOtDrMqQ0RJnnJhqIE3F8udnF+lwp6g/je
+ 30cjt+t5x3w/b9Bt4awAAAA==
+X-Change-ID: 20260512-wdt-dbbb375e9dba
+To: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@lists.denx.de, 
+ Christoph Stoidner <c.stoidner@phytec.de>, upstream@lists.phytec.de
+Cc: Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>, 
+ Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Joseph Guo <qijian.guo@nxp.com>, Sumit Garg <sumit.garg@oss.qualcomm.com>, 
+ Francesco Valla <francesco@valla.it>, Ye Li <ye.li@nxp.com>, 
+ Primoz Fiser <primoz.fiser@norik.com>, Jacky Bai <ping.bai@nxp.com>, 
+ Frieder Schrempf <frieder.schrempf@kontron.de>, 
+ Sam Protsenko <semen.protsenko@linaro.org>, 
+ Tien Fong Chee <tien.fong.chee@altera.com>, 
+ Svyatoslav Ryhel <clamor95@gmail.com>, 
+ Andre Przywara <andre.przywara@arm.com>, Brian Sune <briansune@gmail.com>, 
+ Johan Jonker <jbx6244@gmail.com>, Hai Pham <hai.pham.ud@renesas.com>, 
+ David Lechner <dlechner@baylibre.com>, 
+ Emanuele Ghidoli <emanuele.ghidoli@toradex.com>, 
+ Parth Pancholi <parth.pancholi@toradex.com>, Ion Agorria <ion@agorria.com>, 
+ Paul Kocialkowski <contact@paulk.fr>, 
+ Ernest Van Hoecke <ernest.vanhoecke@toradex.com>, 
+ Mathieu Dubois-Briand <mathieu.dubois-briand@bootlin.com>, 
+ Mathieu Othacehe <m.othacehe@gmail.com>, David Zang <davidzangcs@gmail.com>, 
+ Simon Glass <sjg@chromium.org>, 
+ =?utf-8?q?Jo=C3=A3o_Paulo_Gon=C3=A7alves?= <joao.goncalves@toradex.com>, 
+ =?utf-8?q?S=C3=A9bastien_Szymanski?= <sebastien.szymanski@armadeus.com>, 
+ =?utf-8?q?J=C3=A9r=C3=A9mie_Dautheribes_=28Schneider_Electric=29?=
+ <jeremie.dautheribes@bootlin.com>, 
+ Stefan Roese <stefan.roese@mailbox.org>, 
+ Francesco Dolcini <francesco.dolcini@toradex.com>, 
+ Lukasz Majewski <lukma@denx.de>, 
+ Max Krummenacher <max.krummenacher@toradex.com>, 
+ Wadim Egorov <w.egorov@phytec.de>, Martin Schwan <m.schwan@phytec.de>, 
+ Tim Harvey <tharvey@gateworks.com>, Simona Toaca <simona.toaca@nxp.com>, 
+ Franz Schnyder <franz.schnyder@toradex.com>, Alice Guo <alice.guo@nxp.com>
+X-Mailer: b4 0.15.2
+X-ClientProxiedBy: SI1PR02CA0054.apcprd02.prod.outlook.com
+ (2603:1096:4:1f5::13) To PAXPR04MB9644.eurprd04.prod.outlook.com
+ (2603:10a6:102:242::11)
 MIME-Version: 1.0
+X-MS-Exchange-MessageSentRepresentingType: 1
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PH7PR03MB7063:EE_|DM4PR03MB6192:EE_
-X-MS-Office365-Filtering-Correlation-Id: 6b53845f-5ce6-460c-dd17-08deafdfdcb1
-X-MS-Exchange-AtpMessageProperties: SA
+X-MS-TrafficTypeDiagnostic: PAXPR04MB9644:EE_|FRWPR04MB11271:EE_
+X-MS-Office365-Filtering-Correlation-Id: 21a235f7-9742-46e7-6ccc-08deafd3a702
+X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
+X-LD-Processed: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635,ExtAddr
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|366016|376014|1800799024|11063799003|56012099003|22082099003|18002099003|55112099003;
-X-Microsoft-Antispam-Message-Info: PIC7q9uv74oOVDuOQsDgOhT6Xnh7/+AW9AZpGKgZFv5gALNWwrU9kfDZOdKRqs+mrhiNl/0maxz76AvOawdvJBedZHslHPjHb8Au0W2xPDfwy4DevFzg8PD6mSdn91GsNodgAiikjHlOANo7uQPWzjFINyhwfPVYx8AWzQdYqOpAxrWywOpWwh5wBSFjDFvxMw8K8p5+7yScLxAWEyX4p5btd33uhKgIclVIm8rYLNSiVaAGAo6mrd1d2FPuK/Xzm3WCVo+UiXQGehEm1VM3ggVLSDVzUJOdZlbxLQ4tZigWTP1/2G8iwwsT9cz5jBVriSSBo5XItTj42cnvQM0YoAXijHjlVkzikBDg7B/ytJH/vRGGBWRv7yC8rV6CXjk+3FfKSeTBKUTUGVPwtHl8mJy/u0poQGu8y54I159rHEdWifVOiFuc/sD/wXESUKd2dS9h7ybzeFydOG5lsho7KfdCEeiAuKziRxySkgnqiPaIgxp5yRvICOQBiOTEzuJReV44Dh13VkBKbF0G62xMWoxcC4/YvfqAVYA20pDadV99yvWxC2oL1zWU8byuV3Tcij8LBni0onp7r4rdgxrlZFP0vEa5sA6dTa5a4v6mskvdEPnYh6iYNfHukYcr7mgGuxZMPQCnfOGUKAIVBiCl6w==
+ ARA:13230040|376014|1800799024|52116014|7416014|366016|19092799006|18002099003|56012099003|11063799003|38350700014;
+X-Microsoft-Antispam-Message-Info: CKfkfucGnrGKzNr6VDupuqhUlHVSBIiyjnAvhUYbLo6E+CvKBxvwJZ2Y6Hnru1MdM3siCWT7IXQQ+YBxpYJFMK/PohnUdv1P11cxhwEXBjSHBH0fpHrncdyQceU6neQtNXy9tvBVXGNOVMdwquTNCHgnvYhc/bqTCqzMHbNfWfP/2M65pP3+wxpT85sDofmwtLD3jXbFF1rvUK2zyeDOSeEsE0CE8lgqCwMBpDfVAXwNN1jyiD2MB004ICTGOubIbjUtgrM/iRvQjFASJp9moTKTugco9pbjzZNHLqOLOOvutor7nwdK+QyQzGItyV74sbYwrK56CjPemEI/70bi7ulqZS+/DHLY67tMz5Pd26hW0NzubJcsD2akOmMY9GFdQVd/ibYTBb3CQLL2s2+OYeliQsyJL22jE4/e8O20S4UyfR/d8YSY73NjBjk3XDcWDuQ7DaxsHCVrLflwxeC1Asw/KEbQhr97Vq0uKJ0qoRFGqKtYz+BPWoYiXGTNnNZpLpDrG/3FMyrwika/uZETWBccGNbPmlOKV5f0eB4qF80uJJVh3kQQEfyvTHGACsmzhSkcJrD63L4bS/xvebFAEdOGso2tdPjQD73nDNwh/JpzxcBltCJzE1+cuDHq8VncG8T9EOUZ+b94vglWxV8yN6ejH7FNUWQpkuQtdvZGZ3fa25OVbnSl4YGKuNhGqUyWVX4oqu2j+qNqvS/kKa2VrQBY3s/GQ/IrE+3QOtcJwFHhbOb+XHKmfLWS6QJ7HL/5
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PH7PR03MB7063.namprd03.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(376014)(1800799024)(11063799003)(56012099003)(22082099003)(18002099003)(55112099003);
+ IPV:NLI; SFV:NSPM; H:PAXPR04MB9644.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(1800799024)(52116014)(7416014)(366016)(19092799006)(18002099003)(56012099003)(11063799003)(38350700014);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?VUE1ZVBJWktoaXNOZjZMQ2l1bVBHS2V3R1BhSXV4ZUtQL00ydGVlQUxYV1V3?=
- =?utf-8?B?YnBGRkVOR2pzUGtmektCclhpL1I0TE9tTnpXclBKeEUrSjB6VjVWMEtUUTVi?=
- =?utf-8?B?aE5KWUNvMS9IVkFqNG1maklqOG5ZcllzalZpd282NzYzOWhiakYrSWVzTXFm?=
- =?utf-8?B?bmI1ViszQWtHQkgzY0g1UTZiOGFScXNlNngzQ3ZUZlRWeVcrQ1IxSU9iamZC?=
- =?utf-8?B?NWYrTjBGdTd4R0lUa0hJdVJkS1lZTDVhWjE2TGJ3bEFBWWhSMXdScEhhNnht?=
- =?utf-8?B?em9rZHBvUEhQOHRHOW1EQVZRSUx6OUVON0ZBczIrN25KY1dvL3NreWlrS2J5?=
- =?utf-8?B?OURzdnpJR1JXcURvcTRBOThnK0o2UWVPK2xzQ1c3YlcyeXA4dzhmK014OXFt?=
- =?utf-8?B?N205WHB5UFUwbjhVNDhheGVMR2NRaitXYjJvM21nejg1MSthcHJDYk5WQ043?=
- =?utf-8?B?NFd6LzFJcWNibXpmbUZXQm9qazZXSWEzZytUcGlXNVBDVXhlQTlPOEZxSG1M?=
- =?utf-8?B?cG5LR2hVS0N3SmRvS0JhRGxXalBPS21YejFIL2VvRE1OOGFzbUdYTldNeC90?=
- =?utf-8?B?R1JNbDNJNE1DdEtyUnVyd1hRcWdBa3A1RWZUN1M3VnhGSzRidzNsSnFDT1Fn?=
- =?utf-8?B?SjZ2THV5bEZoQnNOU2hYb2xwUVlXSU9Xd1V4MzBIQnVtN1lFOEhpYjROU1cr?=
- =?utf-8?B?TWg4Z25Wc3RneVAvVE9EemtYMlI4M3l3aStPeVExYWtJSUtHbU9pa3krRXh2?=
- =?utf-8?B?TUxVcEIreE0rSFhscUcrRmFGNFA0L1YwY0RaWXYzMTVUY00vUURqTjkySWxG?=
- =?utf-8?B?WTJ3d0FlbWErM3ZQYzN2a0pMR0Q4RlpiQ2d6amhmNDROeENXNWxRdTRUa04w?=
- =?utf-8?B?RW52R2xuQ0ZRMTJXUkt2K2Y0bUs1QWdHcUNqNHNQRGQwVmJGaWV4Z2Z4WVo1?=
- =?utf-8?B?WXFRQnZmTVhORTNnZENSVlhJTmMxUU8xVThEaU1Kd1F5Z3luSmxuQXM1eGJW?=
- =?utf-8?B?cVQzRllSSnRpU0p3V25KKzNTelp5VThIMjFNMFRZcFpjM0M0RmZTZStTZlZY?=
- =?utf-8?B?WUEyb2dQeUVKT0NNWE1oRFBjdzBZd1g5VXNZSUFRVjFvYUtxZGJmZnJoa0FU?=
- =?utf-8?B?dGdrMXY3TTBjU21zMmxpdjZsVnFJS1VRbDVHVHQvdEVTNG1MSmMzMjM1amVx?=
- =?utf-8?B?OFZjb0txamNXNXFzL3pNWG9HSFZlTndiN1E2bE9EN1ZpRE4zaHRVY2NVYjBo?=
- =?utf-8?B?SGxXd2lkaUVTb1JERUtzeFRvZXZ2RmpNOVkzZWdzTWN6d2psaUdqMlo3bW9P?=
- =?utf-8?B?M3FjdExGNXJ0UXdKQ2VlQmFYMEkyMmFOQys4dWxUcUtHb09yU2ErZHRKeTZZ?=
- =?utf-8?B?T0JqTUtQa1dRKzVpUFZ2Ykp3b3FkMW00aXRCdTlqV0poeGxxU2hZR05hNHN6?=
- =?utf-8?B?RVdCZnBUc282MUZOUnZiTGwvVjRIcXczQllrbVpzaVhlVm5lbmI4MTVnQjJ3?=
- =?utf-8?B?TmNiQ0tyQTJ0b1NvK1NFenF3OFZ0dGFSR0VZWWxSNnltd2J5d29DcktCKzhw?=
- =?utf-8?B?eDF0cWM3cWxwSnBqOWNwNFl2TTM0clBIVEdUVzUzTkMxSytDSUd0RW45eUkz?=
- =?utf-8?B?S3BsUVRXMk8xRnAxeW4yRmF2QUVLbm1KWFJiaDJjL1U5SkVHdFc2bGg1REE0?=
- =?utf-8?B?U0tRbW1vWEdBaUJubnpUbW94RHYvbU9MUmY1b2Nrdy9uRmltbnZDRXZ6b1Q4?=
- =?utf-8?B?c0Y1M29ROWlQWXRBM2h2NTVZL0gxTWw5SzZBeDRzVGFRVkZCLzZHWjU2Z1Bw?=
- =?utf-8?B?VHBWdHBhMys0ajMrMStBOUFqWSs4V01wZ2FHc1dBSWNzQkZrWnplVUZ0SjNP?=
- =?utf-8?B?d1kyaWw0WlRpVW01S2xTSFczc3pUYTh4UUNLYkVtQUpMSnRaRlBUcG5UcHlR?=
- =?utf-8?B?WVJvSjNFOXA5RW1tbTd1UVFHQlh1Q1VrdXJ3LzBubjlGNlZobTFweFkrK0dY?=
- =?utf-8?B?bC9kZVRteGxod1hlRDV4VU4xYjR2b0FQamhMYnNCQWxzUzRteDNEeWlOOE5Q?=
- =?utf-8?B?L0pyOFJlMHg3ejVRd0xuclZiSjNsM2E1NndMTERuVWo2RjJSMVUvSkk5bGxa?=
- =?utf-8?B?MU5qUFdDcUxHVWhxNE4zN3cwUVR5YVkyZ1RZQXlycGNRY3NxdUt3ei9uRDhM?=
- =?utf-8?B?Q1BmYmNEUUJrNVlxbTM3cnVLWmJHaFVPeHkwYzFHNExFdVU2bG85a1FGTUdH?=
- =?utf-8?B?Q25iMUVDbmVxWldjcGw2dnRMQU1sdUtMKzdmOUY3OHR3SytsRCt6NVl0RXZZ?=
- =?utf-8?B?MGdXcml5clQvdTltRzhmK212em9zbWkxRlpzUVlaSnhmVUVTRmNINi83OVN4?=
- =?utf-8?Q?u5DDIi31/7Y1L4RmwBQXqu3/eOMbO+B/3zpYw?=
-X-OriginatorOrg: altera.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 6b53845f-5ce6-460c-dd17-08deafdfdcb1
-X-MS-Exchange-CrossTenant-AuthSource: PH7PR03MB7063.namprd03.prod.outlook.com
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?MjRKS0RDMVB3L0JaTkhxYXA4UlNkdlJmUDJkQy92RTBZV1ZrbElTeXR2Kzd1?=
+ =?utf-8?B?bjA2Rm9RUlNYSHNhaXJQSG5YUHBTdzUwV0RyOXQ5aUZ4VjUrU1prOERhUmVs?=
+ =?utf-8?B?SW02dVpFV1A4T1loSGt6dE5ReEx0VWF5dG1OcHQ1clRvSTlxT2RmRFRjMHZ4?=
+ =?utf-8?B?VXgveVF0WHBwQmJjYkFnWE1qa09YNlFyclhJM2RPQWdtdmQ5bEI4WnBwNjBQ?=
+ =?utf-8?B?QWk3ZHUxYTkwRmhXcENBTVEwamJ0eXhLTlh2anNBSnl4OXJHRExSeGt1eTBX?=
+ =?utf-8?B?ak5YZTNDdFNxWndweGlYM1ozdVYwZm0reHg2K0ViaWlhM1A3VHFRQTZ1dDZQ?=
+ =?utf-8?B?dzJISlZGQ21CeUtPRW4rOTVraUZqQUIwaDYrWGxwK3Q5UTBFZlFXSkEvbGJy?=
+ =?utf-8?B?ZkZlajh4YW1tUXd1SHlPbUpQcDh1QnhsSThWd2ZFZWI2MVkxMUJZUkRwOWpW?=
+ =?utf-8?B?ay95d0Rxdi8vRnI4ckxSMWdSTmZrcmZuaHVpTUw3eEhHMUkxYXkraSszMVNG?=
+ =?utf-8?B?UzFMRHA2MWdZZEZXYnBPR0JmN3NLak1ZOEc3eHhOUk5vRDZoNnpkL1B1ZzRV?=
+ =?utf-8?B?a0oxMmNYN3Q5aG56SWJSVCtXczBzVDFVZzhudVNzaVZLNEVRZTl0RjBWNXQ2?=
+ =?utf-8?B?d3JzVW5GZHVLb0Q3TW9seU5QZThrK3NUSDF4OXZYdFYwckVDQzNtYW1oSjBE?=
+ =?utf-8?B?dU5paUtUdUFwanE5bVgyWU9PNVFlRTkvTHl3bGg4b1FEWThxcWkrYlFVdWh1?=
+ =?utf-8?B?aDN2WG1YNUo1MjdkUVlhYXhkZ1V3TzdVVEIzZzJOQ1Z4b2Vlcml2dkQ4RUw1?=
+ =?utf-8?B?R1hIYjVnU1lSWkNVakI1eEZZN05NQWR6MlhqRlBoUWY1V0IyYmpReit5UUR4?=
+ =?utf-8?B?bXJwR1FpNk5OeDduTy8xdHF3bEJNZnhXRnZTelB4WmdmUEFQckt3ZW1BSXlS?=
+ =?utf-8?B?cFYzV2V4WEk2dVpMZTUrS3BoQUt5YUM4N09WWHJDVWMyNkl6RXh5TmhFMlJO?=
+ =?utf-8?B?a2lENlpKRm94MGZsTktyTUVKOWdOLzdvYmYwOS90UVU2YlpONTNzWm1oTmVQ?=
+ =?utf-8?B?K2QvcHU3K0c5UlB6RzdteU1YZ2Z2QlR6Vm9vRWZ6aGNSa3NDUFl5eTIya1NV?=
+ =?utf-8?B?WGxySGdrVUZXbTkzeWNwTzVnVGtIMTluSVNPcU9VMTQyU2NJSXowUHFrMEJR?=
+ =?utf-8?B?YU9adXV5Z0RmYmp1UCtQa3AxcC9wOWFSOEQ3ZXdaZUg3a0xJNEpJWnN5R09i?=
+ =?utf-8?B?d2tjVE5RdTNBODdxRFovSi9pdU1iOTdiZytNMnVHaTR5Q0UyaXVjT2pHSGNZ?=
+ =?utf-8?B?b3g5S3FnV0NzRlk2dlJrZGdhU3EralBVdm90T0hyQjF0UXF3WHRoNmJ2TmN5?=
+ =?utf-8?B?T21udllBRTFVVlJxcmVscWltcktsR3hWa253UzRUL3dCK3NKVUxzMWpqOHZ0?=
+ =?utf-8?B?c1ZRTjBIekJVZ2J5MXQwR0N0dFIxcnVDbjBXdFU0S2NvSEo1QWNJdDNWOFdk?=
+ =?utf-8?B?emdKOFZxdVkzVHl2YTlMOCtBSkJRRmV0Q3JBOGVXT1lrc05UbUlPYlptcmlO?=
+ =?utf-8?B?SWFkQ3Y1R0FKWjZBb0VPSEo0VTNvTEV3bUY5T0FLNnh6UTh1RW5sclVCM0pw?=
+ =?utf-8?B?cHZDSWJzK1dPMHdtWHRJV2xmYTJmMjRJaDhkWUFCd3FRTTdSOTU4OEN6QU5D?=
+ =?utf-8?B?MUVaTVN0YWRGUnV5cVduN3QzRkViL2Rwa2VnK0dvanFWUEpWMmN4NmFBOFRL?=
+ =?utf-8?B?MW9yaU5SRmtSTkhmZXR6YW9nc3hWZ2N5NkFHbGJkQk56MXdxbjlKRzFwNzV0?=
+ =?utf-8?B?d1BiaEhwY09LVi95YklWb1JGYnBOWnkzU1BJclIvMWhwcFRQQWdHeXR5ZUUx?=
+ =?utf-8?B?cndQTFhDemNMVW05UTd4aTd6Q0tSalJvb3Vub09tdzZPM09DZFVQbUVpZUQw?=
+ =?utf-8?B?M2orVUh0ZjJBRmQ2RFMvbkUzQkNkZEJma1k2dElBcDlHL3hsYUlwMEhBMWIy?=
+ =?utf-8?B?V3dMQWpmdW9KeTFCNTR5NHNIcTB5amxkckZUQ1RVcExSVnBqQjFvZXdNdDBR?=
+ =?utf-8?B?cVIxV01vTVlYNVRLL2xPK3c0dFpaVGVVcytFcytKVVFaczB5R2g1bmc4RW9F?=
+ =?utf-8?B?SC9JSnh1YkRCbFFIN2ViRUgzazVkM3RkaE41VnRKZXdldGVCOG5YTkx1b05F?=
+ =?utf-8?B?ZDYyQVZqNU9KNDd0V0k3NG9KMWdFcSthMUMwN1hXeTc4SDAvQVdSTnhtWlJG?=
+ =?utf-8?B?NTRGbzQ4d1VuMmhHc3B3TWdueEZnQUVBSXYxTUh5OFBwYVoremxLRlZ3QlA1?=
+ =?utf-8?B?Rkk4TG9WdnkveVpBcEFpVW1jZkF2M0J4VnVoSjFUSUpuK3l6V09aUT09?=
+X-OriginatorOrg: oss.nxp.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 21a235f7-9742-46e7-6ccc-08deafd3a702
+X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB9644.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 May 2026 04:35:15.2172 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 May 2026 03:07:51.0016 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
+X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 8mCMYaqfVOYtnY6jPT7PXt6/tnLLGk7MMSD1aJGDXWTcB+UZnhUe0wXHgnSgGO049iPpdN97t5t5M9Hl36lVmkgiBkOrcpV7VKXrknBEO2k=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR03MB6192
+X-MS-Exchange-CrossTenant-UserPrincipalName: X2s0aQE90m7pnNv6FNg9/fQack2QxXyaTWDhHQ38MtaDJTU1be94WMRvglRU4dW6sR8mFFGhtPjn1O/e/vYz1g==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: FRWPR04MB11271
+X-Mailman-Approved-At: Tue, 12 May 2026 06:40:14 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -153,77 +184,104 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Brian,
+CI: https://github.com/u-boot/u-boot/pull/967/checks
 
-On 7/5/2026 7:04 pm, Sune Brian wrote:
-> [CAUTION: This email is from outside your organization. Unless you trust the sender, do not click on links or open attachments as it may be a fraudulent email attempting to steal your information and/or compromise your computer.]
-> 
-> On Thu, Apr 23, 2026 at 4:06 PM <alif.zakuan.yuslaimi@altera.com> wrote:
->>
->> From: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
->>
->> This patch set updates the boot support for the Altera SoCFPGA Gen5/Arria10 platform in U-Boot. The changes include:
->>          1. Update MMU/dcache setup across Gen5/Arria10 using common driver
->>          2. Add ECC scrubbing support for Gen5/Arria10
->>          3. Add DRAM size checking for Gen5/Arria10
->>
->> This patch set has been tested on CycloneV devkit with SDMMC boot and RAM boot (TFTP & ARM DS debugger).
->> Tested on Arria10 devkit with RAM boot as well
->>
->> v1->v2:
->> --------
->> - ECC scrubbing, Gen5 DRAM size checking, and shared dram_bank_mmu_setup() is set as optional via Kconfig and
->>    defaulted on only for the reference Arria10/CycloneV boards to avoid SPL overflows on size-limited Gen5
->>    defconfigs.
-> 
-> Well, I don't know I am only a contributor after all:
-> 1) But do some one or some ones clearly mentioned [1]
-> 2) Per-version change history must be placed below the '---' separator.
->      The required format is 'Changes in vN:'. Custom formats are not
->      acceptable.
-> 
-> So v1->v2 is considered as a valid format and not a custom format.
-> Hum, interesting.
-> 
-> What a wonderful world =]
-> 
-> Appreciated all the "reviewers" HAHA :D
-> 
-> Brian
-> 
-> [1] https://docs.u-boot.org/en/latest/develop/sending_patches.html#sending-updated-patch-versions
-> 
+The watchdog DT changes have already been posted to the upstream Linux
+kernel, addressing the concern about avoiding unnecessary growth of
+u-boot.dtsi. Linux DT changes are available at:
+https://lore.kernel.org/all/20260512024850.904551-1-alice.guo@oss.nxp.com/T/#u
 
-Thanks for pointing this out, I will correct the format for v3 submission.
+Changes for v2:
+- Iterate all watchdog nodes in device tree instead of wdog alias
+- Delete non-DM implementation of the ULP watchdog driver
+
+Changes for v3:
+- Convert imx7ulp, imx91, imx93-frdm and imx93_var_som to CONFIG_OF_UPSTREAM
+
+Signed-off-by: Alice Guo <alice.guo@nxp.com>
+---
+Alice Guo (9):
+      imx7ulp: Switch to OF_UPSTREAM
+      imx91: Switch to OF_UPSTREAM
+      imx93-frdm: Switch to OF_UPSTREAM
+      imx93_var_som: Switch to OF_UPSTREAM
+      imx: soc: Get watchdog base addresses from device tree
+      arm: dts: imx: Update watchdog nodes for dynamic base address lookup
+      watchdog: ulp_wdog: Use driver model for reset_cpu()
+      arm: dts: imx: Enable watchdog driver model support
+      imx: Remove hardcoded watchdog base address macros
+
+ arch/arm/dts/Makefile                            |   4 -
+ arch/arm/dts/imx7ulp-com-u-boot.dtsi             |   2 +
+ arch/arm/dts/imx7ulp-com.dts                     |  79 --
+ arch/arm/dts/imx7ulp-evk-u-boot.dtsi             |   6 +
+ arch/arm/dts/imx7ulp-evk.dts                     | 133 ----
+ arch/arm/dts/imx7ulp-u-boot.dtsi                 |  17 +
+ arch/arm/dts/imx7ulp.dtsi                        | 461 ------------
+ arch/arm/dts/imx8ulp-evk-u-boot.dtsi             |   4 -
+ arch/arm/dts/imx8ulp-u-boot.dtsi                 |   4 +
+ arch/arm/dts/imx91-11x11-evk.dts                 | 875 ----------------------
+ arch/arm/dts/imx91-11x11-frdm.dts                | 773 -------------------
+ arch/arm/dts/imx91-pinfunc.h                     | 770 -------------------
+ arch/arm/dts/imx91-u-boot.dtsi                   |  12 +
+ arch/arm/dts/imx91.dtsi                          |  53 --
+ arch/arm/dts/imx93-11x11-frdm.dts                | 603 ---------------
+ arch/arm/dts/imx93-u-boot.dtsi                   |  12 +
+ arch/arm/dts/imx93-var-som-symphony.dts          | 323 --------
+ arch/arm/dts/imx93-var-som.dtsi                  | 111 ---
+ arch/arm/dts/imx93.dtsi                          | 906 -----------------------
+ arch/arm/dts/imx943-evk-u-boot.dtsi              |   4 -
+ arch/arm/dts/imx943-u-boot.dtsi                  |  19 +
+ arch/arm/dts/imx95-15x15-evk-u-boot.dtsi         |   4 -
+ arch/arm/dts/imx95-19x19-evk-u-boot.dtsi         |   4 -
+ arch/arm/dts/imx95-toradex-smarc-dev-u-boot.dtsi |   4 -
+ arch/arm/dts/imx95-u-boot.dtsi                   |  14 +
+ arch/arm/dts/imx95-verdin-wifi-dev-u-boot.dtsi   |   4 -
+ arch/arm/dts/imx952-u-boot.dtsi                  |  14 +
+ arch/arm/include/asm/arch-imx8ulp/imx-regs.h     |   2 -
+ arch/arm/include/asm/arch-imx9/imx-regs.h        |   9 -
+ arch/arm/mach-imx/imx8ulp/soc.c                  |  14 +-
+ arch/arm/mach-imx/imx9/Kconfig                   |   4 +
+ arch/arm/mach-imx/imx9/scmi/soc.c                |  15 +-
+ arch/arm/mach-imx/imx9/soc.c                     |  16 +-
+ arch/arm/mach-imx/mx7ulp/Kconfig                 |   2 +
+ arch/arm/mach-imx/mx7ulp/soc.c                   |  24 +-
+ configs/imx8ulp_evk_defconfig                    |   1 +
+ configs/imx91_11x11_evk_defconfig                |   2 +-
+ configs/imx91_11x11_evk_inline_ecc_defconfig     |   2 +-
+ configs/imx91_11x11_frdm_defconfig               |   2 +-
+ configs/imx93-phycore_defconfig                  |   1 +
+ configs/imx93_frdm_defconfig                     |   2 +-
+ configs/imx93_var_som_defconfig                  |   2 +-
+ configs/imx943_evk_defconfig                     |   1 +
+ configs/imx95_15x15_evk_defconfig                |   1 +
+ configs/imx95_evk.config                         |   1 +
+ configs/mx7ulp_com_defconfig                     |   3 +-
+ configs/mx7ulp_evk_defconfig                     |   2 +-
+ configs/mx7ulp_evk_plugin_defconfig              |   2 +-
+ configs/toradex-smarc-imx95_defconfig            |   1 +
+ configs/verdin-imx95_defconfig                   |   1 +
+ drivers/watchdog/ulp_wdog.c                      |  79 +-
+ include/configs/imx8ulp_evk.h                    |   2 -
+ include/configs/imx91_evk.h                      |   2 -
+ include/configs/imx91_frdm.h                     |   2 -
+ include/configs/imx93_evk.h                      |   3 -
+ include/configs/imx93_frdm.h                     |   3 -
+ include/configs/imx93_qsb.h                      |   2 -
+ include/configs/imx93_var_som.h                  |   3 -
+ include/configs/imx94_evk.h                      |   3 -
+ include/configs/imx95_evk.h                      |   2 -
+ include/configs/kontron-osm-s-mx93.h             |   2 -
+ include/configs/mx7ulp_com.h                     |   3 -
+ include/configs/mx7ulp_evk.h                     |   3 -
+ include/configs/phycore_imx91_93.h               |   3 -
+ include/configs/toradex-smarc-imx95.h            |   2 -
+ 65 files changed, 206 insertions(+), 5233 deletions(-)
+---
+base-commit: 5732bd0f457b4c671e46574d64d4acb099c0f0a5
+change-id: 20260512-wdt-dbbb375e9dba
 
 Best regards,
-Alif
-
->>
->> History:
->> --------
->> [v1]: https://patchwork.ozlabs.org/project/uboot/cover/20251216084623.19589-1-alif.zakuan.yuslaimi@altera.com/
->>
->> Alif Zakuan Yuslaimi (3):
->>    arm: socfpga: Consolidate dram_bank_mmu_setup()
->>    ddr: altera: gen5: Add DRAM size checking
->>    ddr: socfpga: Add ECC DRAM scrubbing support for Gen5/Arria10
->>
->>   arch/arm/mach-socfpga/Kconfig        | 21 +++++++
->>   arch/arm/mach-socfpga/misc.c         | 31 ++++++++++
->>   arch/arm/mach-socfpga/misc_arria10.c | 26 ---------
->>   arch/arm/mach-socfpga/spl_a10.c      |  4 ++
->>   arch/arm/mach-socfpga/spl_gen5.c     | 17 ++++++
->>   drivers/ddr/altera/Makefile          |  4 +-
->>   drivers/ddr/altera/sdram_arria10.c   | 34 +++++------
->>   drivers/ddr/altera/sdram_gen5.c      | 64 ++++++++++++++++++++-
->>   drivers/ddr/altera/sdram_soc32.c     | 85 ++++++++++++++++++++++++++++
->>   drivers/ddr/altera/sdram_soc32.h     | 15 +++++
->>   10 files changed, 252 insertions(+), 49 deletions(-)
->>   create mode 100644 drivers/ddr/altera/sdram_soc32.c
->>   create mode 100644 drivers/ddr/altera/sdram_soc32.h
->>
->> --
->> 2.43.7
->>
+--  
+Alice Guo <alice.guo@nxp.com>
 
