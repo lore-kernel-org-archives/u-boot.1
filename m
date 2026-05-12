@@ -4,133 +4,106 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C8AECD4851
-	for <u-boot@archiver.kernel.org>; Tue, 12 May 2026 10:39:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34E90CD4851
+	for <u-boot@archiver.kernel.org>; Tue, 12 May 2026 10:53:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A456980398;
-	Tue, 12 May 2026 12:39:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=pbarker.dev
+	by phobos.denx.de (Postfix) with ESMTP id 8A2D080398;
+	Tue, 12 May 2026 12:53:42 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=pbarker.dev header.i=@pbarker.dev header.b="Ty2tYVjD";
-	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="aBZMAN+Y";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="x2DXwWRU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 96FCD803C6; Tue, 12 May 2026 12:39:41 +0200 (CEST)
-Received: from fout-b7-smtp.messagingengine.com
- (fout-b7-smtp.messagingengine.com [202.12.124.150])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id E5953803C6; Tue, 12 May 2026 12:53:39 +0200 (CEST)
+Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
+ [IPv6:2a00:1450:4864:20::32c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A0676801A9
- for <u-boot@lists.denx.de>; Tue, 12 May 2026 12:39:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4B195801A9
+ for <u-boot@lists.denx.de>; Tue, 12 May 2026 12:53:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=pbarker.dev
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=paul@pbarker.dev
-Received: from phl-compute-06.internal (phl-compute-06.internal [10.202.2.46])
- by mailfout.stl.internal (Postfix) with ESMTP id 3C8A01D0006F;
- Tue, 12 May 2026 06:39:37 -0400 (EDT)
-Received: from phl-frontend-04 ([10.202.2.163])
- by phl-compute-06.internal (MEProxy); Tue, 12 May 2026 06:39:37 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=pbarker.dev; h=
- cc:cc:content-type:content-type:date:date:from:from:in-reply-to
- :message-id:mime-version:reply-to:subject:subject:to:to; s=fm1;
- t=1778582376; x=1778668776; bh=tv3PHmur2o8clTN4xFoAAb3WRgALUCDd
- bUIfGPumFj0=; b=Ty2tYVjDylOf54WLwar/gE26eEjwUMkCSld1WyLcbb1UKk8H
- zblwyfBDMyZiBqBNxSmjtCCmWQNkqfGEPu6vYJXqIrDDA9uOLXU9s5Ewh6cNfGi+
- AnVSezPk0lreSiBBmIY2W0e+A2k1MSjhnMMRZ6WcdKzMKkW1PTKpLkBIGn2yKF77
- zymRWl6P3Z3Y0dDdnEKRaFtZ1huOGuVZhL1kC2EQ0QFJXvFVeHrNXVHA/o7XNsHB
- Rw266wu4omNvBzY3RWenbhqWWptUTH6M5T0TK9Qeg2dEsWf1kC7QmFAKGu6dLq5o
- ay+3ZUbqUvWzIRPkXnVkTV0jAnKGHyUyTNHu/A==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- messagingengine.com; h=cc:cc:content-type:content-type:date:date
- :feedback-id:feedback-id:from:from:in-reply-to:message-id
- :mime-version:reply-to:subject:subject:to:to:x-me-proxy
- :x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1778582376; x=
- 1778668776; bh=tv3PHmur2o8clTN4xFoAAb3WRgALUCDdbUIfGPumFj0=; b=a
- BZMAN+Yl0TRZRJUl7RtFdsaEv2wX/mMxWhZiW/Rv71NR0wy2s6v9SaSpa5btWlo8
- REPpeArCH8asQjuPaLEGtq7sV3+WC8+yI/DTzPYatcew+8flYIuHK8RJ99j689Fw
- qOEsTXOpSIHFYTe32yjhC6WptPutsS6f0cuwSQS2H9O1dDf+u0hHlyWQQ1b2KV4m
- cLKzl+300x87sp9PPhOdNiwYRA/5VxqVbb0z371nH/USTEY6mjLcmyuSdTCseVQG
- bj6n+tbzbxGJxdhLjUIp5L8cTf4/365D1ZM6+X7INCNNqDx7WF5mNIDPC3WwoZRy
- jHV+E4s3Hhgz37m+6booQ==
-X-ME-Sender: <xms:aAMDaiyERIIQ0G9qdcMEZS6xv-n_MPf1xHP1raPMiW2K7D9SPaClrQ>
- <xme:aAMDalvGTbi59DKxkQrY8OcJZoaTbtjyGroiPc92APSfkix5g7-BcypUhfvGSkLcn
- 8TJFTuzs06M62w2xE9TO3Qmfvd_7KnNwcqPmZw6Ba_PQqS5GOev6m4>
-X-ME-Received: <xmr:aAMDahs_tVMaW7CndULfEV7FbG3ofD0I3pHz2o-gNXXbFjm9kJxXcB4GdV3NYokebQLZaN2cwBgYvaFlF_vuUhgZH8cBuBTpvBzPVxY>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefhedrtddtgdduvdduheekucetufdoteggodetrf
- dotffvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfurfetoffkrfgpnffqhgenuceu
- rghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmnegfrh
- hlucfvnfffucdlqdeimdenucfjughrpefkuffhvfevffgtfgggsehgtderredtreejnecu
- hfhrohhmpefrrghulhcuuegrrhhkvghruceophgruhhlsehpsggrrhhkvghrrdguvghvqe
- enucggtffrrghtthgvrhhnpeetgfegjeffgeehleeutdelgfejleeufedvjedtffdtjeej
- vedvieelffffleegveenucffohhmrghinheptddurdhishdpnhhishhtrdhgohhvpdguvg
- hngidruggvnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhho
- mhepphgruhhlsehpsggrrhhkvghrrdguvghvpdhnsggprhgtphhtthhopeefpdhmohguvg
- epshhmthhpohhuthdprhgtphhtthhopehuqdgsohhotheslhhishhtshdruggvnhigrdgu
- vgdprhgtphhtthhopeihohgrnhhnrdgtohhnghgrlhesshhmihhlvgdrfhhrpdhrtghpth
- htohephhhonhhggihurdhjihgrseifihhnughrihhvvghrrdgtohhm
-X-ME-Proxy: <xmx:aAMDaiOkjPpYTMZwtySuCHnu-UpTHNkv6i46ukuhi1ILs90PZVZOjA>
- <xmx:aAMDan3Q_h3HzccgFztYYOgcmhqhjeHePfHQz3T6ooUNj-TmtfLTrw>
- <xmx:aAMDamOUnFgVn3tdGn6SqRIyA3EgTlkvqGBrpW8r29l_hvOjeVMpIg>
- <xmx:aAMDav0pE3tWHhzqBu5tUT0MtbSkb-OFUW1jDZxK0FnhXcYzFABXvA>
- <xmx:aAMDaoKFuO3dR9PgH-R4DZMs09cSQX5s0ipUcjSfOCmyIUzL9sW-kM90>
-Feedback-ID: i51494658:Fastmail
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Tue,
- 12 May 2026 06:39:36 -0400 (EDT)
-Message-ID: <cb01c903e27bd1aa6198a51b138409c08abd3373.camel@pbarker.dev>
-Subject: Status of CVE-2025-24857 in U-Boot
-From: Paul Barker <paul@pbarker.dev>
-To: u-boot@lists.denx.de
-Cc: yoann.congal@smile.fr, Hongxu Jia <hongxu.jia@windriver.com>
-Date: Tue, 12 May 2026 11:39:32 +0100
-Autocrypt: addr=paul@pbarker.dev; prefer-encrypt=mutual;
- keydata=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
- LUewj8JVy0aJsGTwI4invl
-Content-Type: multipart/signed; micalg="pgp-sha512";
- protocol="application/pgp-signature"; boundary="=-ev1odA6KmW31p5OtQb3H"
-User-Agent: Evolution 3.52.3-0ubuntu1.1 
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=casey.connolly@linaro.org
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-488a9033b2cso49309425e9.2
+ for <u-boot@lists.denx.de>; Tue, 12 May 2026 03:53:37 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1778583217; x=1779188017; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=3S7wT2ttyW76vGyVHy+kC9s7pQ95SI4e8B2FQ+GDLO4=;
+ b=x2DXwWRUpxKu8KOoNF110hQciy1EDgP1rEi9ft1f5yvmnCiZZBgJ9BIskcpBcke76z
+ cugsA2XGH9j0o7N5zzp+/GAMpSGWlkNrb3avUWUMhesgFy2hH+cU0j/+/aqVHJZQjDI0
+ RnodypCzNokdShQ8qxh+/53YSPfcr3uZWB3/wKnsUl/ohT407r8XJ550eOqeMN0e/uKb
+ EtYB3yB3KDC5XYVAUIRHBB4cy0tlCxW70GrsyBhu9lU1rZkq5rVMk/t8w0YVynX/9XpX
+ Om9G8ssRZSGOMPKi3+GlFWcavqxqphSurySVLM+hFciEJxjj209BpERnaHAMWnuM2Mws
+ Vpmg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1778583217; x=1779188017;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=3S7wT2ttyW76vGyVHy+kC9s7pQ95SI4e8B2FQ+GDLO4=;
+ b=CQkL2RG6CEQO+8JjwRtAYX68QYVU5pjRuaFDFqMsXODgQZHCPnFSSbBbMmokl/bmhe
+ MXI9idRwoxwqLCuOw+y6n78/DF2Fex+jcP8N6xsV17LCu0QxSyLmcv+SwPZdxKkWYb9q
+ hD089IQcjsTL1EnGPo08bjwEN2hQbQL5o2H+rhBeFBy4oTSjLzJKVNHeZFXmwyCVEV/n
+ e5Xsy6Q5L/FTT7V3jmWS8Nbpqbdgf3YWryoWXXRIp69eqwyKqgj+0cE+eY31q5gYyCHZ
+ 1gDtogpVgkwffGSFWPaz0OoUiiMOPH199fd0beJGjOT7kuUu8r1rY0i3sKLxF/5bFvRV
+ WI6Q==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ8EPezc8FtHgJQavQHiyZBMAHWHbEhqZoUKeh+SZj4AfZ+WOL1yAGMv+UuWncF/FIb8Moy5g0I=@lists.denx.de
+X-Gm-Message-State: AOJu0YxXpJeMvfTTLRk61qXIhXXoaURnpv5NjrloYTI/aSfycPi5uA3+
+ KuOsq4PAnWi+fhtAP5lIydi67XxxPa+EsX14LkDX2rHqFTNOEIBVAbfXCmyxNDRSacg=
+X-Gm-Gg: Acq92OGfxWGjBMuDggQmh0qxESxLdGO6WH0FxSVib6NM8YmZGGdfEsM1LLwbbDCPOqs
+ 4EhiRlhRRz7wJqaXWUBiEt6D6dPtiH6Nmp0OtJx4YsMXR/kZ+eh9WzIr7cvuWFdPHydydr2lWdd
+ AQ6E0/y0qFTKHGr5i4kryjAIW6i26jxAiRN/rdRHj5K9gfwHjvyUAB/8YSG+BJ82fwTJ2OUHnCL
+ trP3Fs3ezr/y2f2sO0QBTfglsN7KTjTWmPHAaB3HueqlltaEmU1foozFsF/pCCjGZps4KZ1666V
+ or9J4bimNfqb5mZgyBeSJFmmrM8GLgKD9nlJyISsyQydBsMQHzb8FB1vBlYeE2/sfkizPLVi1ef
+ Qq6N811XUl5osEU+Ry7zcOpDznd9ILCWBF6lrgrSlG3C/GF/pO+RmaHCZ+CzGuchH84yYYFfY3x
+ VDY89q3x6xdJQqoqUra/9MlAUeQIqGpuixKesrwk87zM74IVbqz58Brkytwl4MGHDd8Q==
+X-Received: by 2002:a05:600c:8214:b0:48a:6268:18a9 with SMTP id
+ 5b1f17b1804b1-48e706b262amr222225725e9.13.1778583216700; 
+ Tue, 12 May 2026 03:53:36 -0700 (PDT)
+Received: from [192.168.1.36] (p4fc3dd86.dip0.t-ipconnect.de. [79.195.221.134])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-48e906a95dfsm41634765e9.5.2026.05.12.03.53.35
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 12 May 2026 03:53:36 -0700 (PDT)
+Message-ID: <db04b031-2411-470e-aeeb-68b261b98c4a@linaro.org>
+Date: Tue, 12 May 2026 12:53:34 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v7 09/11] mach-snapdragon: add board_spl.c and split out
+ common code
+Content-Language: en-US
+To: Sumit Garg <sumit.garg@kernel.org>
+Cc: Michael Srba <Michael.Srba@seznam.cz>, u-boot@lists.denx.de,
+ u-boot-qcom@groups.io, Tom Rini <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Simon Glass <sjg@chromium.org>, Peng Fan <peng.fan@nxp.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Jerome Forissier <jerome.forissier@arm.com>, Heiko Schocher
+ <hs@nabladev.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Lukasz Majewski <lukma@denx.de>, Neil Armstrong <neil.armstrong@linaro.org>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Varadarajan Narayanan <quic_varada@quicinc.com>
+References: <20260508-qcom_spl-v7-0-7d0e22aaaa8f@seznam.cz>
+ <20260508-qcom_spl-v7-9-7d0e22aaaa8f@seznam.cz>
+ <d965e291-51eb-4120-8740-1f14d739bc5c@linaro.org>
+ <6bc4f999-b37f-4961-9bed-17d45e1b77ac@seznam.cz>
+ <85e696ff-e66c-4cd3-92d7-61edfe6493ab@linaro.org>
+ <agK1zQWeFmaEfs-J@sumit-xelite>
+From: Casey Connolly <casey.connolly@linaro.org>
+In-Reply-To: <agK1zQWeFmaEfs-J@sumit-xelite>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -148,51 +121,87 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---=-ev1odA6KmW31p5OtQb3H
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 
-Hi folks,
+On 12/05/2026 07:08, Sumit Garg wrote:
+> + Varda
+> 
+> Hi Casey,
+> 
+> On Mon, May 11, 2026 at 04:00:46PM +0200, Casey Connolly wrote:
+>>
+>>
+>> On 11/05/2026 15:55, Michael Srba wrote:
+>>>
+>>>
+>>> On 5/11/26 15:33, Casey Connolly wrote:
+>>>> Hi Michael,
+>>>>
+>>>> On 08/05/2026 23:45, michael.srba@seznam.cz wrote:
+>>>>> From: Michael Srba <Michael.Srba@seznam.cz>
+>>>>>
+>>>>> Code in board.c will now only be compiled into U-Boot proper,
+>>>>> and the new board_spl.c will only be built into SPL.
+>>>>> Code in board_common.c is common to both phases.
+>>>>>
+>>>>> Also split out mem_map.c, which is currently common to both
+>>>>> phases since it seems to not cause issues in SPL. In the future
+>>>>> it should probably behave differenly in SPL, especially if dram
+>>>>> initialization is supported.
+>>>> Sorry to be a pest with this one, could you rebase this on the SMEM
+>>>> series since it also pulls out all the memory mapping stuff.
+>>>>
+>>>> Since the only thing you left in board_common.c is the board_usb_init(),
+>>>> it seems like it's only actually used in db410c at least according to a
+>>>> quick grep. Could you just move it over to board/qualcomm/
+>>>> dragonboard410c?
+>>>>
+>>>> Along with the other changes maybe most of the contents of board_spl.c
+>>>> should go into some board/qualcomm/sdm845-spl/board.c file or something?
+>>> but there's nothing sdm845-specific about it? SPL won't ever be passed
+>>> dt by a previous stage, empty board-init is a sensible default even
+>>> if someone wants to override it in specific cases, reset-cpu is a stub and
+>>> if qcom wants to implement it there's no good reason to use PSCI for that
+>>> so it can be universal (though an ifdef for the non-typical case
+>>> of late-in-the-chain SPL would probably still be cleaner than multiple
+>>> separate board.c files), and fully implemented spl_boot_device should check
+>>> what medium the BROM booted from (or at least if it was EDL, which is
+>>> in a hw register, not sure if emmc vs ufs vs sdcard vs spi needs awareness
+>>> of data passed from PBL), so again can be perfectly shared.
+>>> If DFU is not enabled in config then the USB boot branch can even
+>>> be ifdef'd away at compile time.
+>>
+>> Alright, I'm a bit unsure how Qualcomm want to base their stuff on top
+>> so I'll defer to you and we can keep this as-is. fwiw the "sdm845-spl"
+>> naming is just arbitrary, if you can pick a better name please do.
+>>
+>> Sumit: any thoughts on how to align these approaches and keep it all
+>> maintainable?
+> 
+> Yeah I earlier asked Michael and Varda to converge on common Qcom SPL
+> architecture which can be used across SoCs.
+> 
+> Basically how I think the way forward here would be to have a common
+> Qcom SPL architecture which would then have the platform specific hooks
+> for functionality currently supported by that platform. Once more
+> platforms try to use the same functionality then we can migrate that to
+> common code.
+> 
+> Looking at Michael's series, I think it's mostly doing the base
+> infrastructure SPL setup without much boot functionality added. So we
+> should be able to merge that once it's rebased on your SMEM patch-set.
+> Then Varda should be able to rebase the IPQ series on top of it. I think
+> the QCLIB blob loading for DRAM setup can be a platform specific hook in
+> the common SPL code overriden for IPQ platform for now.
 
-We recently had a patch sent to Yocto Project to backport a fix for
-CVE-2025-24857 to our Scarthgap branch which uses U-Boot 2024.01.
-Looking at the CVE info, this has confused me a lot. It says [1]:
+Sounds sensible to me!
 
-  Improper access control for volatile memory containing boot code in
-  Universal Boot Loader (U-Boot) before 2017.11 and Qualcomm chips
-  IPQ4019, IPQ5018, IPQ5322, IPQ6018, IPQ8064, IPQ8074, and IPQ9574
-  could allow an attacker to execute arbitrary code.
+> 
+> Michael, Varda,
+> 
+> Let us know if there are any concerns to approach mentioned above.
+> 
+> -Sumit
 
-The NVD page says it affects U-Boot "Up to (excluding) 2017.11".
+-- 
+// Casey (she/her)
 
-But, the patch that says it addresses CVE-2025-24867 was committed to
-U-Boot in December 2025 [2]. The first release containing this patch was
-v2026.01.
-
-Is this commit actually needed to resolve that CVE? Or is it some other
-change back in 2017 that fixed the issue? (A yes/no is fine, I don't
-need a link to the exact commit)
-
-[1]: https://nvd.nist.gov/vuln/detail/CVE-2025-24857
-[2]: https://source.denx.de/u-boot/u-boot/-/commit/87d85139a96a39429120cca8=
-38e739408ef971a2
-
-Best regards,
-
---=20
-Paul Barker
-
-
---=-ev1odA6KmW31p5OtQb3H
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-
-iIcEABYKAC8WIQSzjPXf5Y1BDWhU2iCrY1Tsnbr0bgUCagMDZBEccGF1bEBwYmFy
-a2VyLmRldgAKCRCrY1Tsnbr0bjqmAQDAdKpgGe4W1yCMN89wy1YQaNB9U8SkR4to
-Zgp5WhCXbAEAlbba4v1jEdMpmWy6B/BbfPznqmSfXHP9K95uu352VQ4=
-=vd+C
------END PGP SIGNATURE-----
-
---=-ev1odA6KmW31p5OtQb3H--
