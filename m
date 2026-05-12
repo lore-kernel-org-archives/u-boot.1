@@ -4,101 +4,141 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97BD9CD4F26
-	for <u-boot@archiver.kernel.org>; Tue, 12 May 2026 08:44:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2330DCD4855
+	for <u-boot@archiver.kernel.org>; Tue, 12 May 2026 08:48:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0702F80398;
-	Tue, 12 May 2026 10:44:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernkonzept.com
+	by phobos.denx.de (Postfix) with ESMTP id 9F61480398;
+	Tue, 12 May 2026 10:48:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernkonzept.com header.i=@kernkonzept.com header.b="Zdfg5ALT";
+	dkim=pass (2048-bit key; unprotected) header.d=siemens.com header.i=@siemens.com header.b="dRkAlehm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8E79B801A9; Tue, 12 May 2026 10:44:53 +0200 (CEST)
-Received: from mx.kernkonzept.com (serv1.kernkonzept.com
- [IPv6:2a01:4f8:1c1c:b490::2])
+ id 27BF9803C6; Tue, 12 May 2026 10:48:49 +0200 (CEST)
+Received: from MRWPR03CU001.outbound.protection.outlook.com
+ (mail-francesouthazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c207::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2E8AB83015
- for <u-boot@lists.denx.de>; Tue, 12 May 2026 10:44:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=kernkonzept.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=christian.poetzsch@kernkonzept.com
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=kernkonzept.com; s=mx1; h=Content-Transfer-Encoding:Content-Type:
- In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:
- Reply-To:Content-ID:Content-Description;
- bh=lfQNz6xqz7rWvTlAfUeap6WP9jEmtEub7b7z0Szjq/w=; b=Zdfg5ALTX+aOcwQqqTxmMmGGol
- xaMzpzb2fJEBodDyBC2y5pnUmh0KHYmeMkHGmsJ5Sh8TDySMfhA+NlcY+ERJmONJuxJ+8go7GXiPa
- L/FjOlCRZG3jNjgF4+IIJ4MvsTjJM4w+FtDI/hWtzYo9e5e6H8tSKBreYmEqUlXPdvvJn6Xm7zRkG
- KuxpK1X1bAlGutLAnpwfs4esiv+/Xq+jk14fj52AG50yGDK0GUXnBPPZu0HcRdGdGIEWluyQrt+MA
- S6d/G0nPJekQLZVsBrbfUehTzmyERt7loUlhvnt1b1WLM1oB7ttzzpJUYqN6UdYSEJ4biRw/UoJ2g
- /UqjyZtg==;
-Received: from [10.22.3.169] by mx.kernkonzept.com with esmtpsa
- (TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_128_GCM:128) (Exim 4.98.2)
- id 1wMijR-0000000AwUH-2RC9; Tue, 12 May 2026 10:44:49 +0200
-Message-ID: <f3298612-fea3-4669-9264-03af727b436a@kernkonzept.com>
-Date: Tue, 12 May 2026 10:44:46 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: Fwd: New Defects reported by Coverity Scan for Das U-Boot
-To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-Cc: Raymond Mao <raymondmaoca@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Michal Simek <michal.simek@amd.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>
-References: <20260428140433.GQ41863@bill-the-cat>
+ by phobos.denx.de (Postfix) with ESMTPS id 0BD8D801A9
+ for <u-boot@lists.denx.de>; Tue, 12 May 2026 10:48:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=reject dis=none) header.from=siemens.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=alexander.sverdlin@siemens.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=CpC9LrRiLxRTFI2naRCCk/SY89JN8T1Ap0s0I/sgukZhuV1WZPRiKH2WJeychV8Xi6UeduyYBzVs5Tx2iQ+w8JrSzw8Fub8I/gilV/djZSxUzN4DmyBcCycwkCfCFH/85+U7tL4NBceu2p2KA4s46ZMRWw0uxe55PFih0LroJWYcQIUI5FBJCuKfUn0L8iaHH7JWXEIWvsaitm9P8G+x0OdLyYZni0SLmpaj+ukggUrXdJVHweaVkEHC+Rc0leIpHe5ZxBWrlqawNIMqJCr1hQMPLYwmyF24bkaObUiQ1VgxHSq+4vdDWLRac/qS1j/++0C5pyU2MbXvwOLiALoxvg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=XAfTrEGKmwsrQjNIwvaDfBhKTLnuN5/CPDbljeV2ZkA=;
+ b=yvMtcKiCpivxKWCpf7TSWD0A01F8tkdY5cLa70M5tJWmYREYka1UZ3nf1IeqRVFq+u9KDMAXNjAFBNgmTbRH3I5Rm2YCbsQ2RL/rLD8anyirzD6JIT84sz1f8877PbT2Evy+WOBhaRxq9RH4CuiFGnIQKZ5wdEf7fRmOsis3GBqvlVFS1ZnrEDLJQCCplYQKJBwGt8C5IDhx76D0/zd6zqCzeP7ZbGm0VHD2vOgF9+pd3DAt7i7Dr+IV9/hYlapQ/YRKQLqfBGzKBtOE3aTLIKrT1A60CBYrdxP3yfx4Hh4JhG4kUQd8MVtdYcr1BsI6EM+q6yLkx627AlgdED2qvA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=siemens.com; dmarc=pass action=none header.from=siemens.com;
+ dkim=pass header.d=siemens.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=siemens.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=XAfTrEGKmwsrQjNIwvaDfBhKTLnuN5/CPDbljeV2ZkA=;
+ b=dRkAlehm9OBCb6l5jM4lsxSDV0sVZsShsLRDRKIRtazY7Kut4vV0wZSzHU4c5bUxXpkb8FHkf5SMmJwaB+kCCIxmCNvgAP+0XvKfnrc5AIuP3HgcSz4+7Dn0Hs4ZkG3F6Dcy+kAozjwpMryvH3NQKgQbVRbOSr0gP0UJe27CCTklPyWvjDDTB0ktUlH+FGTFQRv0PohpVgIVcFp3g93h9YaPd10WpfRDgLQjkIwxgsW5hQKxfGA0EDVKr+H6gSXRNPupU1G5c5QUfVnJOJku5aTAvPsvkADSZTPE8YnRdMjX1B1VudcRkdRelDQo3/PlwwR/dRamgIMPIgRK5Ptv+Q==
+Received: from AS8PR10MB6867.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:5b6::22)
+ by VI1PR10MB8085.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:800:1e1::5)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9913.11; Tue, 12 May
+ 2026 08:48:43 +0000
+Received: from AS8PR10MB6867.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::9126:d21d:31c4:1b9f]) by AS8PR10MB6867.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::9126:d21d:31c4:1b9f%6]) with mapi id 15.20.9891.021; Tue, 12 May 2026
+ 08:48:43 +0000
+From: "Sverdlin, Alexander" <alexander.sverdlin@siemens.com>
+To: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ "Alexander.Feilke@ew.tq-group.com" <Alexander.Feilke@ew.tq-group.com>
+CC: "trini@konsulko.com" <trini@konsulko.com>, "u-boot@ew.tq-group.com"
+ <u-boot@ew.tq-group.com>
+Subject: Re: [PATCH v2 4/8] rtc: pcf85063: add missing register definitions
+Thread-Topic: [PATCH v2 4/8] rtc: pcf85063: add missing register definitions
+Thread-Index: AQHc4T8p2zhyDF48oUyHJIxmpudd97YKFcYA
+Date: Tue, 12 May 2026 08:48:43 +0000
+Message-ID: <7c39812371a60b3ffcaaa2f297d1428e478b620b.camel@siemens.com>
+References: <20260511120917.1017866-1-Alexander.Feilke@ew.tq-group.com>
+ <20260511120917.1017866-5-Alexander.Feilke@ew.tq-group.com>
+In-Reply-To: <20260511120917.1017866-5-Alexander.Feilke@ew.tq-group.com>
+Accept-Language: en-US
 Content-Language: en-US
-From: =?UTF-8?Q?Christian_P=C3=B6tzsch?= <christian.poetzsch@kernkonzept.com>
-Autocrypt: addr=christian.poetzsch@kernkonzept.com; keydata=
- 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
- T5WSo993xA==
-In-Reply-To: <20260428140433.GQ41863@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+user-agent: Evolution 3.54.3 (3.54.3-2.fc41) 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=siemens.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: AS8PR10MB6867:EE_|VI1PR10MB8085:EE_
+x-ms-office365-filtering-correlation-id: 330c9589-b5e6-47d9-77f5-08deb00345c4
+x-ms-exchange-atpmessageproperties: SA
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+ ARA:13230040|366016|376014|1800799024|38070700021|55112099003|56012099003|22082099003|18002099003|11063799003;
+x-microsoft-antispam-message-info: DxyCM6wJ/KZpPDbJHTh1ctq1+kusFSz9uupOiWJ4OwqHcAXJgJPFiac6XLYxD4m5NkmIU/vLTY//NMo9dMX5Rmdju02IR+jyyhIEKHG1PxNzjyZaHsdWdGh85RB/lZMZKoUuV2f/2WVBYI+tqPOMTwHCBLvh3fkp8YEKFCnFPghDR9ct6WPrwidqVR9lgQfo0zGQ6CZK5GNpU6a5qdOHz/N8Ik87uqAfzxP+vj8/olZFtZvzHYgwUYksLrX/FTiQ62znOAA57Gc1DSzrKXzZjC7+eQGnTLn+o7I+IJ460MwLvE+BZYvvSzJRPGpPTwUA0ff3H0yA1C01bFoIKH7ISJjGeTNqsbV1v7AvxCB2PPpPc/oqUy7KswJI7dF+qcPD9aHhyl++/vyfiDGoPUxY5CHSotPYD/DeRbEzLar5NOIYABd3xeS1SW94SUrLhX7WDyQk/e2k87+KJ3cJ0Hn6fvkNWaDcci1CdB+ZuBDhPWH4NZUf8LwxWfY1i2Tj0FnCJ+EyTfZ9ljMFmerQb/dpGZnjZAIZW1X5NA/K3QkOymarW3jFIBxxfMk5arRqRGJ2JPVFEdBPOlWQf0HDVz0Zt6HcBYbCv0hN+BVv2oSb5iw8lHEVymNIUaa3lCw5emgfFuCtfPPoxyQEdDUWUegwD887NjkNaVZuCVfvUWAVaP9K5yUVMfVhFmZ97Nzht540xhohKgF9Zf5FrLXTNFyKQw==
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AS8PR10MB6867.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(376014)(1800799024)(38070700021)(55112099003)(56012099003)(22082099003)(18002099003)(11063799003);
+ DIR:OUT; SFP:1101; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?utf-8?B?STVRU3FTSTE5NDhLT0dYRjkycGdVellsTFJXTERGL3E2SUJZMkVTbEdLeFFq?=
+ =?utf-8?B?QlZZd1dTY1czblVtenVtYThkNmVoamZHSFNWaDFnc1pYeCt2Q203akpsV1dq?=
+ =?utf-8?B?Ymg2cUxtc0kxYkYyN3Ezb0puNStWYVpKSktmNTdPZHFDQkg3TVdjcjE1aWU2?=
+ =?utf-8?B?Z0RjM2w3TnE0RmdBWFhDbXhZcFhyMXBUaDFNTlZFajV3MHJtcExWdXhlV2Rm?=
+ =?utf-8?B?ekZDRmJkd2xtb1NVSE9sNFY2NFhEbC9yS3kyU055dmMrL0hyT2xKNjRxU3hX?=
+ =?utf-8?B?OXlPZE9GSWtnbzdNNTdBa0czRzJxK0kzZFJVbGhtT1pqa2Q5bUN0M0pham1x?=
+ =?utf-8?B?Zzg5Rkxkb0gzOG82RlZtSSsrMkoyVFJ3QTZSQmlTYWo3ZUdQWkxoREpZUFJV?=
+ =?utf-8?B?dzE4c0I4ZXZ5Q0hrdVJFN09OUUxNZG5EeThJa0phSmM3N2hBMStYRDRFLzl5?=
+ =?utf-8?B?YzJQSHd3a1EzYTFuUkNlYnZGVmUxWU5KL3IvaXhKWGFlRkgrRFVtTllKQi96?=
+ =?utf-8?B?M1g3eXZyclEvQ3VTa0NCbEhjSENvYmVMSXJWKzdRc3NSdjNlcmN2Q0huYkVy?=
+ =?utf-8?B?WGEwdjFqZ0FnU2VoazdCK3ppTE1yMkRPM3N0UW9vRDlBczdMd0pxbE5xNWdk?=
+ =?utf-8?B?Y2ltUXJPbWlQNzRsVktxdnRlL3kzSEw3cUVTb3BHZTlrNFIwM3B6SC9Tb3Vo?=
+ =?utf-8?B?VW1sTGh0UzFNMmNOQjVSTjFGYWVnelJxWW5sTVU4cUFMWms4WDBldGlZZGNy?=
+ =?utf-8?B?SnJMMHZUQS9NRnBrd1VYQmd3Uk4zdExWSkkycDdKSHA0STFzTnQ0OVhhTmRw?=
+ =?utf-8?B?d2kyMzk3a0wrWEM3VnRVZjlIR0hOc093czVnNTJoRGc2ams0d1F2aUNPWnY1?=
+ =?utf-8?B?aGVsYXkxbG1HWGFGNm9MUndFOGp4MWJRMGRsRUgrZ0RRcmtMaEFjbUQya0Ru?=
+ =?utf-8?B?MDRKSDRzRE5xWlRnTEQxN3UrTm9XbW96dzcra2ZyTWc2YW5UWklKNG01Ymlr?=
+ =?utf-8?B?aXAzOXBKcVpQRzhGZUh4enFUMno4VEIxUStqK2FLRWdGbnkwQWtuUGljaS9L?=
+ =?utf-8?B?b1hPL3RHMVA1V3pSUE9jYk96SWdMcVlSZ0JnR1YwZHpKYW9DQVNJaDZnUnNN?=
+ =?utf-8?B?WUg5NVh3aUNHZ0tlL2s4ZHNLNWF4TGIrTjJDU2tUQ1ZPWDBSb3NzN1B3Szdv?=
+ =?utf-8?B?TnA5b3N5eUdsRXExYjdhWnhvWnJNZFM1NnFMRWtDTndQNEl0Tm5JMzZTOVla?=
+ =?utf-8?B?aE5mbHVKVFdqZ1IxUkRVZ2FjZ3gzTDlZa2RPRVFRS2V1OU9UOVNRcDhrRnJp?=
+ =?utf-8?B?WmRpSC8yODE2UkcwcFArR1F2TEZRams5ZzhmZ3BDOEVOazNNVHZwZlJvRExp?=
+ =?utf-8?B?VHFVelorUDhWS0dmdzlXdk5xWlhOLzlhN1d3RmlET0NvKzdwNVp6SnZEeGpz?=
+ =?utf-8?B?Tm8wTVp2YThiTFZWK3UrcURVdzl1MmlWYks1QmMybU94cUZSbVhCQUJHU05Q?=
+ =?utf-8?B?bGx0TmNHbm5UQnRTelJpNjR1UnhiQ21NOUFDeWtSQnRicDV6eWdYY25FYjZX?=
+ =?utf-8?B?V0lzamtZcVNSWmVEYVpPTkhVekhSUGxHYnRWdTVleXdES1VqZURhQk02MEND?=
+ =?utf-8?B?YUM3VXJYS2lVL05nTW5od2JWcldDRE5YUkUyS1NrRERHT3E1T1hScGEzTkZI?=
+ =?utf-8?B?cWZYOTlsOUdZT0ZGMUFoWDdQL3d0UkgyOVNENVRUMDYreW1MQVJ3d2l4R2Vq?=
+ =?utf-8?B?UEVyaUdpR2hVR3JhT00vSzNiOEFUVDZ5TzFROGZTVERPdHljY2FxUjBiUVhv?=
+ =?utf-8?B?L2o1eWYrK003bU1qc09Qa3JLaXZyRTBPVXpudlhDRDVrcldmWnJLcVEzL255?=
+ =?utf-8?B?SmJjMkQrZ0QzU25NQmQ0eG8reUVuUUtMSDZmTVBackFlOVM2dFlGb21aQ2Nl?=
+ =?utf-8?B?VmE5MHVta3pjeDdQbkZMK05YdTVWc0NaSGhCSGxvVzVQYXp4TFB1Z1FPbk56?=
+ =?utf-8?B?REtka2F0MTVkcUxudStPRC82NTVSaWoxK2d4c2YzVlVMb2NiaXowNWhYSVdI?=
+ =?utf-8?B?N042ZWthWG9mS1lTN2d0dGNkNGx6Qm1oejJaOXllOEJOdTQ4dmptd0xUNjVt?=
+ =?utf-8?B?bTkzYmsydWhqNkxTNjFhZGJPMFFOQmFFM01jUUozeEJmYmJsRWtyenRBbGZw?=
+ =?utf-8?B?M2wvdlpRc3c4dnpFeDRHdXB6UDBUeGhOQnJKb3VuSGRHZWp6eW5xcXNVanhv?=
+ =?utf-8?B?S2hnc3F5VHcrWU9QbTNVQ0k5cXJZbXF2eGx6K1ZBb1hOMGo3ditOcGpHaEh1?=
+ =?utf-8?B?dHZheWpTVHhCbWF0OVJLdXJCelRKNzZuT3BtM0c1SjE3MHQ1d1RWMXVWcmtN?=
+ =?utf-8?Q?V3iqKDPQLR6Bl4/M=3D?=
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <A43E128D9CE4DA46B0FD6B11CF479DA4@EURPRD10.PROD.OUTLOOK.COM>
+Content-Transfer-Encoding: base64
+MIME-Version: 1.0
+X-OriginatorOrg: siemens.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: AS8PR10MB6867.EURPRD10.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-Network-Message-Id: 330c9589-b5e6-47d9-77f5-08deb00345c4
+X-MS-Exchange-CrossTenant-originalarrivaltime: 12 May 2026 08:48:43.4672 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 38ae3bcd-9579-4fd4-adda-b42e1495d55a
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: RxkZvuWKFxli0YR8FSZ5Bt/JZKFALe+inFxNjzKamde6Y970XUm4iZl222DmldgSL4bpu7uHRDoQvuXjS7dPvD57zCeNI/pKEHlR00/SSv0=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR10MB8085
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -115,467 +155,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
-
-On 4/28/26 4:04 PM, Tom Rini wrote:
-> Here's the latest report.
-> 
-> ---------- Forwarded message ---------
-> From: <scan-admin@coverity.com>
-> Date: Mon, Apr 27, 2026, 5:41 PM
-> Subject: New Defects reported by Coverity Scan for Das U-Boot
-> To: <tom.rini@gmail.com>
-> 
-> 
-> Hi,
-> 
-> Please find the latest report on new defect(s) introduced to *Das U-Boot*
-> found with Coverity Scan.
-> 
->     - *New Defects Found:* 9
->     - 77 defect(s), reported by Coverity Scan earlier, were marked fixed in
->     the recent build analyzed by Coverity Scan.
->     - *Defects Shown:* Showing 9 of 9 defect(s)
-> 
-> Defect Details
-> 
-> 
-> ** CID 645841:       Incorrect expression  (BAD_COMPARE)
-> /common/bloblist.c: 303           in bloblist_apply_blobs()
-> 
-> 
-> _____________________________________________________________________________________________
-> *** CID 645841:         Incorrect expression  (BAD_COMPARE)
-> /common/bloblist.c: 303             in bloblist_apply_blobs()
-> 297     				log_err("Failed to apply blob with tag %d\n",
-> 298     					tag);
-> 299     				return ret;
-> 300     			}
-> 301
-> 302     			rec = rec_from_blob(blob - dat_off);
->>>>      CID 645841:         Incorrect expression  (BAD_COMPARE)
->>>>      Comparing pointer "rec" against "NULL" using anything besides "==" or "!=" is likely to be incorrect.
-> 303     			if (rec <= 0) {
-> 304     				log_err("Blob corrupted\n");
-> 305     				return -ENOENT;
-> 306     			}
-> 307
-> 308     			/* Mark applied blob record as void */
-> 
-> ** CID 645840:       Uninitialized variables  (UNINIT)
-> 
-> 
-> _____________________________________________________________________________________________
-> *** CID 645840:         Uninitialized variables  (UNINIT)
-> /lib/efi_loader/efi_device_path.c: 967             in efi_dp_from_http()
-> 961     	if ((server && strlen("http://") + strlen(server) + 1  >
-> sizeof(tmp)) ||
-> 962     	    (!server && IS_ENABLED(CONFIG_NET_LWIP)))
-> 963     		return NULL;
-> 964
-> 965     	efi_net_get_addr(&ip, &mask, NULL, dev);
-> 966
->>>>      CID 645840:         Uninitialized variables  (UNINIT)
->>>>      Using uninitialized value "ip" when calling "efi_dp_from_ipv4".
-> 967     	dp1 = efi_dp_from_ipv4(&ip, &mask, NULL, dev);
-> 968     	if (!dp1)
-> 969     		return NULL;
-> 970
-> 971
-> 972     	strcpy(tmp, "http://");
-> 
-> ** CID 645839:       Error handling issues  (CHECKED_RETURN)
-> /lib/fdtdec.c: 1785           in fdtdec_apply_bloblist_dtos()
-> 
-> 
-> _____________________________________________________________________________________________
-> *** CID 645839:         Error handling issues  (CHECKED_RETURN)
-> /lib/fdtdec.c: 1785             in fdtdec_apply_bloblist_dtos()
-> 1779
-> 1780     	ret = bloblist_apply_blobs(BLOBLISTT_FDT_OVERLAY,
-> fdtdec_apply_dto_blob);
-> 1781     	if (ret)
-> 1782     		return ret;
-> 1783
-> 1784     	/* Shink the blob to the actual FDT size */
->>>>      CID 645839:         Error handling issues  (CHECKED_RETURN)
->>>>      Calling "fdt_pack" without checking return value (as is done elsewhere 5 out of 6 times).
-> 1785     	fdt_pack(live_fdt);
-> 1786     	return bloblist_resize(BLOBLISTT_CONTROL_FDT,
-> fdt_totalsize(live_fdt));
-> 1787     }
-> 1788
-> 1789     int fdtdec_setup(void)
-> 1790     {
-> 
-> ** CID 645838:       Uninitialized variables  (UNINIT)
-> 
-> 
-> _____________________________________________________________________________________________
-> *** CID 645838:         Uninitialized variables  (UNINIT)
-> /lib/efi_loader/efi_device_path.c: 967             in efi_dp_from_http()
-> 961     	if ((server && strlen("http://") + strlen(server) + 1  >
-> sizeof(tmp)) ||
-> 962     	    (!server && IS_ENABLED(CONFIG_NET_LWIP)))
-> 963     		return NULL;
-> 964
-> 965     	efi_net_get_addr(&ip, &mask, NULL, dev);
-> 966
->>>>      CID 645838:         Uninitialized variables  (UNINIT)
->>>>      Using uninitialized value "mask" when calling "efi_dp_from_ipv4".
-> 967     	dp1 = efi_dp_from_ipv4(&ip, &mask, NULL, dev);
-> 968     	if (!dp1)
-> 969     		return NULL;
-> 970
-> 971
-> 972     	strcpy(tmp, "http://");
-> 
-> ** CID 645837:         (TAINTED_SCALAR)
-> 
-> 
-> _____________________________________________________________________________________________
-> *** CID 645837:           (TAINTED_SCALAR)
-> /lib/fdtdec.c: 1775             in fdtdec_apply_bloblist_dtos()
-> 1769     	/* Resize if the current space is not sufficient */
-> 1770     	if (blob_size < padded_size) {
-> 1771     		ret = bloblist_resize(BLOBLISTT_CONTROL_FDT, padded_size);
-> 1772     		if (ret)
-> 1773     			return ret;
-> 1774
->>>>      CID 645837:           (TAINTED_SCALAR)
->>>>      Passing tainted expression "live_fdt->size_dt_struct" to "fdt_open_into", which uses it as an offset.
-> 1775     		ret = fdt_open_into(live_fdt, live_fdt, padded_size);
-> 1776     		if (ret)
-> 1777     			return ret;
-> 1778     	}
-> 1779
-> 1780     	ret = bloblist_apply_blobs(BLOBLISTT_FDT_OVERLAY,
-> fdtdec_apply_dto_blob);
-> /lib/fdtdec.c: 1785             in fdtdec_apply_bloblist_dtos()
-> 1779
-> 1780     	ret = bloblist_apply_blobs(BLOBLISTT_FDT_OVERLAY,
-> fdtdec_apply_dto_blob);
-> 1781     	if (ret)
-> 1782     		return ret;
-> 1783
-> 1784     	/* Shink the blob to the actual FDT size */
->>>>      CID 645837:           (TAINTED_SCALAR)
->>>>      Passing tainted expression "live_fdt->size_dt_struct" to "fdt_pack", which uses it as an offset.
-> 1785     	fdt_pack(live_fdt);
-> 1786     	return bloblist_resize(BLOBLISTT_CONTROL_FDT,
-> fdt_totalsize(live_fdt));
-> 1787     }
-> 1788
-> 1789     int fdtdec_setup(void)
-> 1790     {
-> /lib/fdtdec.c: 1775             in fdtdec_apply_bloblist_dtos()
-> 1769     	/* Resize if the current space is not sufficient */
-> 1770     	if (blob_size < padded_size) {
-> 1771     		ret = bloblist_resize(BLOBLISTT_CONTROL_FDT, padded_size);
-> 1772     		if (ret)
-> 1773     			return ret;
-> 1774
->>>>      CID 645837:           (TAINTED_SCALAR)
->>>>      Passing tainted expression "live_fdt->totalsize" to "fdt_open_into", which uses it as an offset.
-> 1775     		ret = fdt_open_into(live_fdt, live_fdt, padded_size);
-> 1776     		if (ret)
-> 1777     			return ret;
-> 1778     	}
-> 1779
-> 1780     	ret = bloblist_apply_blobs(BLOBLISTT_FDT_OVERLAY,
-> fdtdec_apply_dto_blob);
-> /lib/fdtdec.c: 1786             in fdtdec_apply_bloblist_dtos()
-> 1780     	ret = bloblist_apply_blobs(BLOBLISTT_FDT_OVERLAY,
-> fdtdec_apply_dto_blob);
-> 1781     	if (ret)
-> 1782     		return ret;
-> 1783
-> 1784     	/* Shink the blob to the actual FDT size */
-> 1785     	fdt_pack(live_fdt);
->>>>      CID 645837:           (TAINTED_SCALAR)
->>>>      Passing tainted expression "fdt32_ld(&((struct fdt_header const *)live_fdt)->totalsize)" to "bloblist_resize", which uses it as an offset.
-> 1786     	return bloblist_resize(BLOBLISTT_CONTROL_FDT,
-> fdt_totalsize(live_fdt));
-> 1787     }
-> 1788
-> 1789     int fdtdec_setup(void)
-> 1790     {
-> 1791     	int ret = -ENOENT;
-> /lib/fdtdec.c: 1775             in fdtdec_apply_bloblist_dtos()
-> 1769     	/* Resize if the current space is not sufficient */
-> 1770     	if (blob_size < padded_size) {
-> 1771     		ret = bloblist_resize(BLOBLISTT_CONTROL_FDT, padded_size);
-> 1772     		if (ret)
-> 1773     			return ret;
-> 1774
->>>>      CID 645837:           (TAINTED_SCALAR)
->>>>      Passing tainted expression "live_fdt->size_dt_strings" to "fdt_open_into", which uses it as an offset.
-> 1775     		ret = fdt_open_into(live_fdt, live_fdt, padded_size);
-> 1776     		if (ret)
-> 1777     			return ret;
-> 1778     	}
-> 1779
-> 1780     	ret = bloblist_apply_blobs(BLOBLISTT_FDT_OVERLAY,
-> fdtdec_apply_dto_blob);
-> /lib/fdtdec.c: 1785             in fdtdec_apply_bloblist_dtos()
-> 1779
-> 1780     	ret = bloblist_apply_blobs(BLOBLISTT_FDT_OVERLAY,
-> fdtdec_apply_dto_blob);
-> 1781     	if (ret)
-> 1782     		return ret;
-> 1783
-> 1784     	/* Shink the blob to the actual FDT size */
->>>>      CID 645837:           (TAINTED_SCALAR)
->>>>      Passing tainted expression "live_fdt->size_dt_struct" to "fdt_pack", which uses it as an offset.
-> 1785     	fdt_pack(live_fdt);
-> 1786     	return bloblist_resize(BLOBLISTT_CONTROL_FDT,
-> fdt_totalsize(live_fdt));
-> 1787     }
-> 1788
-> 1789     int fdtdec_setup(void)
-> 1790     {
-> /lib/fdtdec.c: 1786             in fdtdec_apply_bloblist_dtos()
-> 1780     	ret = bloblist_apply_blobs(BLOBLISTT_FDT_OVERLAY,
-> fdtdec_apply_dto_blob);
-> 1781     	if (ret)
-> 1782     		return ret;
-> 1783
-> 1784     	/* Shink the blob to the actual FDT size */
-> 1785     	fdt_pack(live_fdt);
->>>>      CID 645837:           (TAINTED_SCALAR)
->>>>      Passing tainted expression "fdt32_ld(&((struct fdt_header const *)live_fdt)->totalsize)" to "bloblist_resize", which uses it as an offset.
-> 1786     	return bloblist_resize(BLOBLISTT_CONTROL_FDT,
-> fdt_totalsize(live_fdt));
-> 1787     }
-> 1788
-> 1789     int fdtdec_setup(void)
-> 1790     {
-> 1791     	int ret = -ENOENT;
-> /lib/fdtdec.c: 1785             in fdtdec_apply_bloblist_dtos()
-> 1779
-> 1780     	ret = bloblist_apply_blobs(BLOBLISTT_FDT_OVERLAY,
-> fdtdec_apply_dto_blob);
-> 1781     	if (ret)
-> 1782     		return ret;
-> 1783
-> 1784     	/* Shink the blob to the actual FDT size */
->>>>      CID 645837:           (TAINTED_SCALAR)
->>>>      Passing tainted expression "live_fdt->size_dt_strings" to "fdt_pack", which uses it as an offset.
-> 1785     	fdt_pack(live_fdt);
-> 1786     	return bloblist_resize(BLOBLISTT_CONTROL_FDT,
-> fdt_totalsize(live_fdt));
-> 1787     }
-> 1788
-> 1789     int fdtdec_setup(void)
-> 1790     {
-> /lib/fdtdec.c: 1786             in fdtdec_apply_bloblist_dtos()
-> 1780     	ret = bloblist_apply_blobs(BLOBLISTT_FDT_OVERLAY,
-> fdtdec_apply_dto_blob);
-> 1781     	if (ret)
-> 1782     		return ret;
-> 1783
-> 1784     	/* Shink the blob to the actual FDT size */
-> 1785     	fdt_pack(live_fdt);
->>>>      CID 645837:           (TAINTED_SCALAR)
->>>>      Passing tainted expression "fdt32_ld(&((struct fdt_header const *)live_fdt)->totalsize)" to "bloblist_resize", which uses it as an offset.
-> 1786     	return bloblist_resize(BLOBLISTT_CONTROL_FDT,
-> fdt_totalsize(live_fdt));
-> 1787     }
-> 1788
-> 1789     int fdtdec_setup(void)
-> 1790     {
-> 1791     	int ret = -ENOENT;
-> /lib/fdtdec.c: 1786             in fdtdec_apply_bloblist_dtos()
-> 1780     	ret = bloblist_apply_blobs(BLOBLISTT_FDT_OVERLAY,
-> fdtdec_apply_dto_blob);
-> 1781     	if (ret)
-> 1782     		return ret;
-> 1783
-> 1784     	/* Shink the blob to the actual FDT size */
-> 1785     	fdt_pack(live_fdt);
->>>>      CID 645837:           (TAINTED_SCALAR)
->>>>      Passing tainted expression "fdt32_ld(&((struct fdt_header const *)live_fdt)->totalsize)" to "bloblist_resize", which uses it as an offset.
-> 1786     	return bloblist_resize(BLOBLISTT_CONTROL_FDT,
-> fdt_totalsize(live_fdt));
-> 1787     }
-> 1788
-> 1789     int fdtdec_setup(void)
-> 1790     {
-> 1791     	int ret = -ENOENT;
-> /lib/fdtdec.c: 1786             in fdtdec_apply_bloblist_dtos()
-> 1780     	ret = bloblist_apply_blobs(BLOBLISTT_FDT_OVERLAY,
-> fdtdec_apply_dto_blob);
-> 1781     	if (ret)
-> 1782     		return ret;
-> 1783
-> 1784     	/* Shink the blob to the actual FDT size */
-> 1785     	fdt_pack(live_fdt);
->>>>      CID 645837:           (TAINTED_SCALAR)
->>>>      Passing tainted expression "fdt32_ld(&((struct fdt_header const *)live_fdt)->totalsize)" to "bloblist_resize", which uses it as an offset.
-> 1786     	return bloblist_resize(BLOBLISTT_CONTROL_FDT,
-> fdt_totalsize(live_fdt));
-> 1787     }
-> 1788
-> 1789     int fdtdec_setup(void)
-> 1790     {
-> 1791     	int ret = -ENOENT;
-> /lib/fdtdec.c: 1785             in fdtdec_apply_bloblist_dtos()
-> 1779
-> 1780     	ret = bloblist_apply_blobs(BLOBLISTT_FDT_OVERLAY,
-> fdtdec_apply_dto_blob);
-> 1781     	if (ret)
-> 1782     		return ret;
-> 1783
-> 1784     	/* Shink the blob to the actual FDT size */
->>>>      CID 645837:           (TAINTED_SCALAR)
->>>>      Passing tainted expression "live_fdt->size_dt_struct" to "fdt_pack", which uses it as an offset.
-> 1785     	fdt_pack(live_fdt);
-> 1786     	return bloblist_resize(BLOBLISTT_CONTROL_FDT,
-> fdt_totalsize(live_fdt));
-> 1787     }
-> 1788
-> 1789     int fdtdec_setup(void)
-> 1790     {
-> /lib/fdtdec.c: 1785             in fdtdec_apply_bloblist_dtos()
-> 1779
-> 1780     	ret = bloblist_apply_blobs(BLOBLISTT_FDT_OVERLAY,
-> fdtdec_apply_dto_blob);
-> 1781     	if (ret)
-> 1782     		return ret;
-> 1783
-> 1784     	/* Shink the blob to the actual FDT size */
->>>>      CID 645837:           (TAINTED_SCALAR)
->>>>      Passing tainted expression "live_fdt->size_dt_strings" to "fdt_pack", which uses it as an offset.
-> 1785     	fdt_pack(live_fdt);
-> 1786     	return bloblist_resize(BLOBLISTT_CONTROL_FDT,
-> fdt_totalsize(live_fdt));
-> 1787     }
-> 1788
-> 1789     int fdtdec_setup(void)
-> 1790     {
-> /lib/fdtdec.c: 1786             in fdtdec_apply_bloblist_dtos()
-> 1780     	ret = bloblist_apply_blobs(BLOBLISTT_FDT_OVERLAY,
-> fdtdec_apply_dto_blob);
-> 1781     	if (ret)
-> 1782     		return ret;
-> 1783
-> 1784     	/* Shink the blob to the actual FDT size */
-> 1785     	fdt_pack(live_fdt);
->>>>      CID 645837:           (TAINTED_SCALAR)
->>>>      Passing tainted expression "fdt32_ld(&((struct fdt_header const *)live_fdt)->totalsize)" to "bloblist_resize", which uses it as an offset.
-> 1786     	return bloblist_resize(BLOBLISTT_CONTROL_FDT,
-> fdt_totalsize(live_fdt));
-> 1787     }
-> 1788
-> 1789     int fdtdec_setup(void)
-> 1790     {
-> 1791     	int ret = -ENOENT;
-> 
-> ** CID 645836:       Resource leaks  (RESOURCE_LEAK)
-> /drivers/gpio/gpio_scmi.c: 201           in scmi_gpio_probe()
-> 
-> 
-> _____________________________________________________________________________________________
-> *** CID 645836:         Resource leaks  (RESOURCE_LEAK)
-> /drivers/gpio/gpio_scmi.c: 201             in scmi_gpio_probe()
-> 195     			return -ENOMEM;
-> 196
-> 197     		range->base = args.args[0];
-> 198     		if (range->base != priv->num_pins) {
-> 199     			dev_err(dev, "no gaps allowed in between pins %d vs %d\n",
-> 200     				priv->num_pins, range->base);
->>>>      CID 645836:         Resource leaks  (RESOURCE_LEAK)
->>>>      Variable "range" going out of scope leaks the storage it points to.
-> 201     			return -EINVAL;
-> 202     		}
-> 203     		range->offset = args.args[1];
-> 204     		range->npins = args.args[2];
-> 205     		priv->num_pins += args.args[2];
-> 206     		list_add_tail(&range->list, &priv->gpio_ranges);
-> 
-> ** CID 645835:       Memory - corruptions  (OVERRUN)
-> /lib/gunzip.c: 248           in gzwrite()
-> 
-> 
-> _____________________________________________________________________________________________
-> *** CID 645835:         Memory - corruptions  (OVERRUN)
-> /lib/gunzip.c: 248             in gzwrite()
-> 242     				s.avail_out = szwritebuf - numfilled;
-> 243     				s.next_out = writebuf + numfilled;
-> 244     			} else {
-> 245     				s.avail_out = szwritebuf;
-> 246     				s.next_out = writebuf;
-> 247     			}
->>>>      CID 645835:         Memory - corruptions  (OVERRUN)
->>>>      Calling "inflate" with "s.next_in" and "s.avail_in" is suspicious because of the very large index, 4294966272. The index may be due to a negative parameter being interpreted as unsigned. [Note: The source code implementation of the function has been overridden by a builtin model.]
-> 248     			r = inflate(&s, Z_SYNC_FLUSH);
-> 249     			if ((r != Z_OK) &&
-> 250     			    (r != Z_STREAM_END)) {
-> 251     				printf("Error: inflate() returned %d\n", r);
-> 252     				goto out;
-> 253     			}
-> 
-> ** CID 645834:       Control flow issues  (NO_EFFECT)
-> /drivers/virtio/virtio_blk.c: 184           in virtio_blk_do_req()
-> 
-> 
-> _____________________________________________________________________________________________
-> *** CID 645834:         Control flow issues  (NO_EFFECT)
-> /drivers/virtio/virtio_blk.c: 184             in virtio_blk_do_req()
-> 178     	*/
-> 179     	while (i < blkcnt) {
-> 180     		u32 blk_per_sg = min(blkcnt - i, seg_sec_cnt * priv->seg_max);
-> 181
-> 182     		ret = virtio_blk_do_single_req(dev, sector + i, blk_per_sg,
-> 183     					       buffer + i * 512, type);
->>>>      CID 645834:         Control flow issues  (NO_EFFECT)
->>>>      This less-than-zero comparison of an unsigned value is never true. "ret < 0UL".
-> 184     		if (ret < 0)
-> 185     			return ret;
-> 186     		i += blk_per_sg;
-> 187     	}
-> 188
-> 189     	return blkcnt >> priv->blksz_shift;
-> 
-> ** CID 645833:       Control flow issues  (DEADCODE)
-> /drivers/virtio/virtio_blk.c: 185           in virtio_blk_do_req()
-> 
-> 
-> _____________________________________________________________________________________________
-> *** CID 645833:         Control flow issues  (DEADCODE)
-> /drivers/virtio/virtio_blk.c: 185             in virtio_blk_do_req()
-> 179     	while (i < blkcnt) {
-> 180     		u32 blk_per_sg = min(blkcnt - i, seg_sec_cnt * priv->seg_max);
-> 181
-> 182     		ret = virtio_blk_do_single_req(dev, sector + i, blk_per_sg,
-> 183     					       buffer + i * 512, type);
-> 184     		if (ret < 0)
->>>>      CID 645833:         Control flow issues  (DEADCODE)
->>>>      Execution cannot reach this statement: "return ret;".
-> 185     			return ret;
-> 186     		i += blk_per_sg;
-> 187     	}
-> 188
-> 189     	return blkcnt >> priv->blksz_shift;
-> 190     }
-The last two errors should hopefully be fixed by https://patchwork.ozlabs.org/project/uboot/patch/20260512083949.3493010-1-christian.poetzsch@kernkonzept.com/
-
-> 
-> 
-> 
-> View Defects in Coverity Scan
-> <https://scan.coverity.com/projects/das-u-boot?tab=overview>
-> 
-> Best regards,
-> 
-> The Coverity Scan Admin Team
-> 
-> ----- End forwarded message -----
-> 
-
--- 
-http://www.kernkonzept.com
-
-Kernkonzept GmbH.  Sitz: Dresden.  Amtsgericht Dresden, HRB 31129.
-Geschäftsführer: Dr.-Ing. Michael Hohmuth
-
+T24gTW9uLCAyMDI2LTA1LTExIGF0IDE0OjA5ICswMjAwLCBBbGV4YW5kZXIgRmVpbGtlIHdyb3Rl
+Og0KPiBGcm9tOiBBbGV4YW5kZXIgRmVpbGtlIDxhbGV4YW5kZXIuZmVpbGtlQGV3LnRxLWdyb3Vw
+LmNvbT4NCj4gDQo+IFN5bmMgZGVmaW5pdGlvbnMgZnJvbSB1cHN0cmVhbSBsaW51eCB2Ni4xOS4N
+Cj4gDQo+IFNpZ25lZC1vZmYtYnk6IEFsZXhhbmRlciBGZWlsa2UgPGFsZXhhbmRlci5mZWlsa2VA
+ZXcudHEtZ3JvdXAuY29tPg0KDQpSZXZpZXdlZC1ieTogQWxleGFuZGVyIFN2ZXJkbGluIDxhbGV4
+YW5kZXIuc3ZlcmRsaW5Ac2llbWVucy5jb20+DQoNCj4gLS0tDQo+IMKgZHJpdmVycy9ydGMvcGNm
+ODUwNjMuYyB8IDI2ICsrKysrKysrKysrKysrKysrKysrKysrKy0tDQo+IMKgMSBmaWxlIGNoYW5n
+ZWQsIDI0IGluc2VydGlvbnMoKyksIDIgZGVsZXRpb25zKC0pDQo+IA0KPiBkaWZmIC0tZ2l0IGEv
+ZHJpdmVycy9ydGMvcGNmODUwNjMuYyBiL2RyaXZlcnMvcnRjL3BjZjg1MDYzLmMNCj4gaW5kZXgg
+MTgzYTIxNGEzZTkuLjA2Yzg1ZDkzOWUwIDEwMDY0NA0KPiAtLS0gYS9kcml2ZXJzL3J0Yy9wY2Y4
+NTA2My5jDQo+ICsrKyBiL2RyaXZlcnMvcnRjL3BjZjg1MDYzLmMNCj4gQEAgLTExLDExICsxMSwz
+MyBAQA0KPiDCoCNpbmNsdWRlIDxkbS9kZXZpY2VfY29tcGF0Lmg+DQo+IMKgDQo+IMKgI2RlZmlu
+ZSBQQ0Y4NTA2M19SRUdfQ1RSTDEJCTB4MDAgLyogc3RhdHVzICovDQo+IC0jZGVmaW5lIFBDRjg1
+MDYzX1JFR19DVFJMMV9TUgkJMHg1OA0KPiArI2RlZmluZSBQQ0Y4NTA2M19SRUdfQ1RSTDFfQ0FQ
+X1NFTAlCSVQoMCkNCj4gKyNkZWZpbmUgUENGODUwNjNfUkVHX0NUUkwxX1NUT1AJCUJJVCg1KQ0K
+PiArI2RlZmluZSBQQ0Y4NTA2M19SRUdfQ1RSTDFfRVhUX1RFU1QJQklUKDcpDQo+ICsjZGVmaW5l
+IFBDRjg1MDYzX1JFR19DVFJMMV9TV1IJCTB4NTggLyogU29mdHdhcmUgcmVzZXQgY29tbWFuZCAq
+Lw0KPiArDQo+ICsjZGVmaW5lIFBDRjg1MDYzX1JFR19DVFJMMgkJMHgwMQ0KPiArI2RlZmluZSBQ
+Q0Y4NTA2M19DVFJMMl9BRgkJQklUKDYpDQo+ICsjZGVmaW5lIFBDRjg1MDYzX0NUUkwyX0FJRQkJ
+QklUKDcpDQo+ICsNCj4gKyNkZWZpbmUgUENGODUwNjNfUkVHX09GRlNFVAkJMHgwMg0KPiArI2Rl
+ZmluZSBQQ0Y4NTA2M19PRkZTRVRfU0lHTl9CSVQJNgkvKiAyJ3MgY29tcGxlbWVudCBzaWduIGJp
+dCAqLw0KPiArI2RlZmluZSBQQ0Y4NTA2M19PRkZTRVRfTU9ERQkJQklUKDcpDQo+ICsjZGVmaW5l
+IFBDRjg1MDYzX09GRlNFVF9TVEVQMAkJNDM0MA0KPiArI2RlZmluZSBQQ0Y4NTA2M19PRkZTRVRf
+U1RFUDEJCTQwNjkNCj4gKw0KPiArI2RlZmluZSBQQ0Y4NTA2M19SRUdfQ0xLT19GX01BU0sJMHgw
+NyAvKiBmcmVxdWVuY3kgbWFzayAqLw0KPiArI2RlZmluZSBQQ0Y4NTA2M19SRUdfQ0xLT19GXzMy
+NzY4SFoJMHgwMA0KPiArI2RlZmluZSBQQ0Y4NTA2M19SRUdfQ0xLT19GX09GRgkJMHgwNw0KPiAr
+DQo+ICsjZGVmaW5lIFBDRjg1MDYzX1JFR19SQU0JCTB4MDMNCj4gwqANCj4gwqAjZGVmaW5lIFBD
+Rjg1MDYzX1JFR19TQwkJCTB4MDQgLyogZGF0ZXRpbWUgKi8NCj4gwqAjZGVmaW5lIFBDRjg1MDYz
+X1JFR19TQ19PUwkJMHg4MA0KPiDCoA0KPiArI2RlZmluZSBQQ0Y4NTA2M19SRUdfQUxNX1MJCTB4
+MGINCj4gKyNkZWZpbmUgUENGODUwNjNfQUVOCQkJQklUKDcpDQo+ICsNCj4gwqBzdGF0aWMgaW50
+IHBjZjg1MDYzX2dldF90aW1lKHN0cnVjdCB1ZGV2aWNlICpkZXYsIHN0cnVjdCBydGNfdGltZSAq
+dG0pDQo+IMKgew0KPiDCoAl1OCByZWdzWzddOw0KPiBAQCAtNzQsNyArOTYsNyBAQCBzdGF0aWMg
+aW50IHBjZjg1MDYzX3NldF90aW1lKHN0cnVjdCB1ZGV2aWNlICpkZXYsIGNvbnN0IHN0cnVjdCBy
+dGNfdGltZSAqdG0pDQo+IMKgDQo+IMKgc3RhdGljIGludCBwY2Y4NTA2M19yZXNldChzdHJ1Y3Qg
+dWRldmljZSAqZGV2KQ0KPiDCoHsNCj4gLQlyZXR1cm4gZG1faTJjX3JlZ193cml0ZShkZXYsIFBD
+Rjg1MDYzX1JFR19DVFJMMSwgUENGODUwNjNfUkVHX0NUUkwxX1NSKTsNCj4gKwlyZXR1cm4gZG1f
+aTJjX3JlZ193cml0ZShkZXYsIFBDRjg1MDYzX1JFR19DVFJMMSwgUENGODUwNjNfUkVHX0NUUkwx
+X1NXUik7DQo+IMKgfQ0KPiDCoA0KPiDCoHN0YXRpYyBpbnQgcGNmODUwNjNfcmVhZChzdHJ1Y3Qg
+dWRldmljZSAqZGV2LCB1bnNpZ25lZCBpbnQgb2Zmc2V0LCB1OCAqYnVmLA0KDQotLSANCkFsZXhh
+bmRlciBTdmVyZGxpbg0KU2llbWVucyBBRw0Kd3d3LnNpZW1lbnMuY29tDQo=
