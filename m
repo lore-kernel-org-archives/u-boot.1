@@ -4,103 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A219CD4F24
-	for <u-boot@archiver.kernel.org>; Tue, 12 May 2026 22:32:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07027CD343F
+	for <u-boot@archiver.kernel.org>; Tue, 12 May 2026 22:32:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B24A683EF9;
-	Wed, 13 May 2026 00:32:25 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 427B084198;
+	Wed, 13 May 2026 00:32:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20251104.gappssmtp.com header.i=@baylibre-com.20251104.gappssmtp.com header.b="thxUTZ3C";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20251104.gappssmtp.com header.i=@baylibre-com.20251104.gappssmtp.com header.b="wTM/yl3Q";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6462C83EF9; Wed, 13 May 2026 00:32:25 +0200 (CEST)
-Received: from mail-oo1-xc35.google.com (mail-oo1-xc35.google.com
- [IPv6:2607:f8b0:4864:20::c35])
+ id B7103845C8; Wed, 13 May 2026 00:32:27 +0200 (CEST)
+Received: from mail-ot1-x32d.google.com (mail-ot1-x32d.google.com
+ [IPv6:2607:f8b0:4864:20::32d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CF22883E36
- for <u-boot@lists.denx.de>; Wed, 13 May 2026 00:32:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A8E1C83E36
+ for <u-boot@lists.denx.de>; Wed, 13 May 2026 00:32:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=dlechner@baylibre.com
-Received: by mail-oo1-xc35.google.com with SMTP id
- 006d021491bc7-69489b43d66so1743012eaf.2
- for <u-boot@lists.denx.de>; Tue, 12 May 2026 15:32:22 -0700 (PDT)
+Received: by mail-ot1-x32d.google.com with SMTP id
+ 46e09a7af769-7de4e6c5a30so6541673a34.0
+ for <u-boot@lists.denx.de>; Tue, 12 May 2026 15:32:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20251104.gappssmtp.com; s=20251104; t=1778625141; x=1779229941;
+ d=baylibre-com.20251104.gappssmtp.com; s=20251104; t=1778625144; x=1779229944;
  darn=lists.denx.de; 
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:from:to:cc:subject:date:message-id:reply-to;
- bh=uvE5xnCuwU4CVV6PP5CMALjZpQHbyjhqVbnPD0bn9Ns=;
- b=thxUTZ3Crc3y+asy1VOpM1gdePhROCoCnYcQ6VQOFWNiGazXnvFCJsnWGBCVgDWGIb
- EmqbEgeeZBx0O02I+kxoiPnaJGCtqwS1oh+caVEZ4aXFutiANupJ391NqWleZSWasElW
- RUnlGf1+8xsq3GkTGayTA2cw//N0YK8sS3QcJoDjxpX1vxcZ7av7CoQ1A1P2j1qIRaEs
- MLeCKCivHn+aB9rFCowCvGbZJ17uNH/Gjvc/WA+2wDh6HNog0jY+lDNCBbmfubjCssk9
- ysnYVc9Xc7WqIo9Z3zsjwbcfvxRIWS7RUTojPwb2CJ/k+FepTPbJbvU3AQnReaKbLXP3
- ZN8w==
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=L7WUuaQ5Wlb7ZoqiQOpFGPE3Wo4OJIzN2O+W1QB26s0=;
+ b=wTM/yl3QJWbqNbivbSzn1ZauJvbUIABigkKpDqscXhd9TXf6RpPtRkaH3wcgMOQleD
+ si8Fr5IM8YCpV7KKwKv676a8zla4k50zTWbOieu4UERfvJb65giwDT1PTIHr0Pvc+XmO
+ wf2hvlsf/A1fQQ6RCI/bDWS+OGwnX6iHa7jTEBjdx090cTErgyiUwItm9DIjgspypjXW
+ aRxX7121+ps+qInkA7k+bckGCrWn3Zo7tqMZ5AqevoAHq+BjHGysGLf/m+OLBFVjQd4y
+ Xmrdi+HNoFulxxt1+BtLH+CBJ7qc20HOWWHOmEtNVZ68n/po0XT7qE4VxeYb2skJQOlQ
+ VY8w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778625141; x=1779229941;
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=uvE5xnCuwU4CVV6PP5CMALjZpQHbyjhqVbnPD0bn9Ns=;
- b=cHujZ5D7UHQClpxBZJ80CC2RtkR9nLB4TRUrBNbtpgQoyWHlJBNCZD9UMLWRrVEcms
- yzZcvnILcDF6noh746PfdrhgTwX/RTyCrOHLvNQ5gzilL8QYVHaxeY0Na+3E0Z8O8MMs
- TddwJmUPUFlewAtyEMRLzl9X6LsqeGhY4YT42/9tP/spLPRdUQIrwtCqo8ZuXZkcvdJg
- y24O1JV4jQPp2bOmnf3M4GzuExeE3g3fsdiblvEKpqERWtcUqoQZ3AmDxji+mnGG7wQL
- E8Gbk4wYkHCuGX8cqY2ogKY/tDSVfXkBEoLDYXamurHXR5itER8U6rTyS6eRfk1+u57O
- 7P0A==
+ d=1e100.net; s=20251104; t=1778625144; x=1779229944;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=L7WUuaQ5Wlb7ZoqiQOpFGPE3Wo4OJIzN2O+W1QB26s0=;
+ b=fsA9o9TWI29eCCWfgj20NkDKbHA7op4/7LIDexgZR/8OvnxCy69m/PTd9acFjTUYTe
+ IeEJykePYBSdF6tSuHgOtrBmkBeQapG+8bCeSWJhgFOp+gU/1cYWqfunuyzzvJjxDyho
+ GAkhDXwOfiItCy8FEy38xjzNlsBbyw4rK5MqCekAqSgH8yIZO6Z28K5S9rTEjr617vGp
+ 3o6KlOxFKe8BpF1zM/ncmGzM5NV4BP6TQFND2rPO5Yp0mD89y6m4378/UVn3pFdCTDXC
+ 0lSGisu9+QbFCtsIv7WTvjAGK5gy5Tig2B30mBu8dpoVVf2DvdPca2gJJ4FjQMIaZfJv
+ DzLQ==
 X-Forwarded-Encrypted: i=1;
- AFNElJ+CwTEoBUT1DXT//GXlGsFqMzIprEVXNfVzsy8RCOLlCTlRsuiUqflVfg1/i9n20To1JgEgj3I=@lists.denx.de
-X-Gm-Message-State: AOJu0YxP9KL5R0gyonxTqohMefoot+GQ5ilPZLc+l9CaTAZcqqnmONON
- glrRPROkfFY4IlxhKHkfcPrSCAzQIERYAT6c/dgI3FczFCRlbnEjEbyClf37Ee4MbKrR7yisv7n
- XzGbi
-X-Gm-Gg: Acq92OGp84bM9qXYkCnmqgaKKTMPypGdvsVfVRUv9lVYQ288BOg0FZODqm5xjpk4M5y
- HcbZjtfxdLrZQPnzk/qMUf6ArW7IR/E5iK/gML+9WuvTb3Miy2i84wia2Hre1Jks5TB2gH+jA3O
- +gwrH1xk6eOurRhfKT2zRFW/BATXamilzE7xcT820rnMwwx51FNAs6pnjJuK/FrxTL/AqB/iWNX
- U6GbYZvPq8+PYywflAWo/IehRBsxy+Qlgr8wv190PZpkjzmQpLQZfnHLlRPWk2uZYQLK6cyXTpl
- BtDuvSMIiMOGui47hzBQWRlJbaMYvlBlLNOk5IWjch5nw5924SLc2hbh7I7xiUAFfV3rjovZcVh
- iPvVDWsBoBQP/a/EGVo5T0t57lYLBuswDigTM7tW+Q0RsNDH09wX9T5Ioy0ua73CxRqcjqtyVnb
- BEvPho0iX7jI1eUzOmEovX5sF6Z6lN
-X-Received: by 2002:a05:6820:f034:b0:69b:4186:164 with SMTP id
- 006d021491bc7-69b78e44f70mr437434eaf.59.1778625141274; 
- Tue, 12 May 2026 15:32:21 -0700 (PDT)
+ AFNElJ8XsIRuxd4QBVnHK1j1qMVbG6+EVCRtT+3bCFmJrIxqv6MFajFxZxrTh9UeugK1nYEAJ3i4xMI=@lists.denx.de
+X-Gm-Message-State: AOJu0YytnxE9NCh6LxEGdpC+I6xcIJZzMzxzmHlUnBfiAkYTHULx7uV+
+ xnC+O00GsU9uN6grQkdRqrHy1ly1xBuwJ5XkDceVdtaVdoxg3iyl/eLxQVX8LpHpUdD0OyDBUMg
+ IYeMu
+X-Gm-Gg: Acq92OHu/aLYasu8wEnV17hFBsQ0Xk99XMO1gvLlGTDENmagdsIRrlq76ltJNCvubo1
+ yKSZXBFni4roFm6jaI6PBOB5nH4U+nPHM0ij66wU/U1oeTeANpysvmzM/oP0JBNjlW6YNBpLtm1
+ OlFevIM/Tda2Ijqjv7wa1fl4fxQ5kpXS3KjbEvvUX/8vC9jJ4Ttp08u43Y0YR8us+818vq79+KW
+ yYE2yEkuZfx06OMlzLs+1UF885zJpRC8nHJXgJI/eEtE2/mfg2f2bo51hBsCrop8uMnrr1xTZmC
+ Ckj4R706AqRuAYDEWZ3xRLhNGrXkomLRFP0LdIxptYhXSTTjrgeMeiQO3En0z7OUVusUyMu5j82
+ bq57mAcmV+PrOP9/l505QLHb8rYFoHxvgTb/5EOPNDXp0HixRC3Ib0jVKZvFR1ecraQFh6z3qMI
+ +ny9hzfU4rRuFGukNITUopPzRWDawy
+X-Received: by 2002:a05:6820:4cc4:b0:694:9070:8227 with SMTP id
+ 006d021491bc7-69b7ab62e5bmr28404eaf.41.1778625144406; 
+ Tue, 12 May 2026 15:32:24 -0700 (PDT)
 Received: from [127.0.1.1] ([2600:8803:e7e4:500:7ca1:aac3:aee4:c93f])
  by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-69b25dc0193sm8334545eaf.11.2026.05.12.15.32.20
+ 006d021491bc7-69b25dc0193sm8334545eaf.11.2026.05.12.15.32.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 12 May 2026 15:32:20 -0700 (PDT)
+ Tue, 12 May 2026 15:32:22 -0700 (PDT)
 From: David Lechner <dlechner@baylibre.com>
-Subject: [PATCH v2 0/3] configs: mediatek: genio: enable common options
-Date: Tue, 12 May 2026 17:31:50 -0500
-Message-Id: <20260512-mtk-genio-defconfig-v2-0-bf4c30ef7f14@baylibre.com>
+Date: Tue, 12 May 2026 17:31:51 -0500
+Subject: [PATCH v2 1/3] configs/mt8188: enable bootstd, FIT and DT overlays
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/32Nyw6CMBBFf4XM2pq2poCu/A/Doo8BRqU1LRIJ6
- b8LuHd5knPPXSBhJExwKRaIOFGi4FeQhwJsr32HjNzKILksueIVG8YH69BTYA5bG3xLHauMKJW
- rT7oWEtblK2JLn716a36c3uaOdtxSm9FTGkOc99tJbN7/h0kwzpTVyil7VqU1V6PnJ5mIRxsGa
- HLOX/ZeLc/LAAAA
-X-Change-ID: 20260507-mtk-genio-defconfig-7b165d83a812
+Message-Id: <20260512-mtk-genio-defconfig-v2-1-bf4c30ef7f14@baylibre.com>
+References: <20260512-mtk-genio-defconfig-v2-0-bf4c30ef7f14@baylibre.com>
+In-Reply-To: <20260512-mtk-genio-defconfig-v2-0-bf4c30ef7f14@baylibre.com>
 To: Macpaul Lin <Macpaul.Lin@mediatek.com>, Tom Rini <trini@konsulko.com>, 
  Julien Masson <jmasson@baylibre.com>
 Cc: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de, 
  David Lechner <dlechner@baylibre.com>
 X-Mailer: b4 0.16-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1290; i=dlechner@baylibre.com; 
+X-Developer-Signature: v=1; a=openpgp-sha256; l=950; i=dlechner@baylibre.com; 
  h=from:subject:message-id;
- bh=HQ0KuFsH5BfjcDZVH3nEMN+PJfLnL3KY2KBe8AhuDCw=; 
- b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBqA6pZ/fFdEEONTROmVhKk6GXkmg0hL0Zwj2CmN
- i9jwVBK7pKJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCagOqWRYcZGxlY2huZXJA
- YmF5bGlicmUuY29tAAoJEMLMIAH/AY/A1xAH/0/KCMBGZhy+evehw6d9uS0z9ZH2O+oehdg7TVp
- 31zecXXBfitd9P0dTIzwdyoRqPzkIM4xVLC9t+P7939TsgNAoBA/FZq7MwH7CdrcpS67va8FfTF
- JpXnAa+RByJ/lFsK9P1wk0/q7RsH51E7lLILYf5fKEDAAvFgKES9nL7l+370OiG/Bm2AkyPEUcB
- HbbkvCHSLVmNmGR6/zkmSCh07x5yImGLlrB4zCdO+rjFr6NNY+MZjNJMcuyyi26HGN6sMQfVMNs
- oG6EccMeNHTpL04iSvnJgYssBsNC6fqoAsPxzXTgiP1oFUGBlXhWFDIUvDdco5XkJBsaPNFyYvT
- HAog=
+ bh=cxxYNlxHkWfBx5ijoytTakJI942thx7x6guQK8O8XRs=; 
+ b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBqA6pgzH216Ht/bqdRjK+5qO/js8eduHjx3nObJ
+ vvbe0Oz8smJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCagOqYBYcZGxlY2huZXJA
+ YmF5bGlicmUuY29tAAoJEMLMIAH/AY/A7F4H/iBTiwW2V2Q9f04VLMH6/z3S9IZlPF+WWVxAmqC
+ 057cNX3+hhvPCkBR+ZU1IWO1v9A5V6lfTH0P+mUb5PeZfWi+kUDHupT6rXftP40B0FOMu6aDLQa
+ jZvp2Bm3KjyBUtwkRrCt4oAC8LZXB+faOOjlxPMr/DT8Tn/pz/gb4yPQOHcz/REq9qSe6UEf2Bj
+ ijN+OsAV9FaIEEpcUX+K8WnOm2hOJ6JYSohpXX3AKRSL9VL00IsmlUCLCkaHoFsJbGZVGhQI/tc
+ 0fn0xzhz34m7XhiCaLRlFDuA38FNEThr5WLbpb8hTKy4uaBKfdbHQINPtiJnUGWgxsDcNiK99ey
+ mQMw=
 X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
  fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
 X-BeenThere: u-boot@lists.denx.de
@@ -119,39 +116,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This enables some common options used by the default board support
-package for the MediaTek Genio EVK boards. These options are already
-enabled in mt8189.config for Genio 520/720 EVK boards. The patches in
-this series make the other recently added boards match that.
+Enable options needed by the default board support package for Genio
+510/700 EVK boards that use this config.
+
+CONFIG_CMD_PART is selected by the new options, so is removed here since
+it is now redundant.
 
 Signed-off-by: David Lechner <dlechner@baylibre.com>
 ---
-Changes in v2:
-- Removed CONFIG_CMD_PART from the defconfig.
-- Added a similar patch for mt8365 (Genio 350).
-- Link to v1: https://patch.msgid.link/20260507-mtk-genio-defconfig-v1-0-5ca5d5c956cb@baylibre.com
+ configs/mt8188.config | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-To: Macpaul Lin <Macpaul.Lin@mediatek.com>
-To: Tom Rini <trini@konsulko.com>
-To: Julien Masson <jmasson@baylibre.com>
-Cc: Julien Stephan <jstephan@baylibre.com>
-Cc: u-boot@lists.denx.de
+diff --git a/configs/mt8188.config b/configs/mt8188.config
+index 9dfba6bf99f..0f748415602 100644
+--- a/configs/mt8188.config
++++ b/configs/mt8188.config
+@@ -4,13 +4,15 @@ CONFIG_POSITION_INDEPENDENT=y
+ CONFIG_ARCH_MEDIATEK=y
+ CONFIG_TEXT_BASE=0x4c000000
+ CONFIG_NR_DRAM_BANKS=1
++CONFIG_OF_LIBFDT_OVERLAY=y
+ CONFIG_TARGET_MT8188=y
+ CONFIG_SYS_LOAD_ADDR=0x4c000000
++CONFIG_FIT=y
++CONFIG_BOOTSTD_FULL=y
+ # CONFIG_BOARD_INIT is not set
+ CONFIG_CMD_CLK=y
+ CONFIG_CMD_GPT=y
+ CONFIG_CMD_MMC=y
+-CONFIG_CMD_PART=y
+ CONFIG_OF_UPSTREAM=y
+ CONFIG_CLK=y
+ CONFIG_MMC_MTK=y
 
----
-David Lechner (3):
-      configs/mt8188: enable bootstd, FIT and DT overlays
-      configs/mt8195: enable bootstd, FIT and DT overlays
-      configs/mt8365: enable bootstd, FIT and DT overlays
-
- configs/mt8188.config        | 4 +++-
- configs/mt8195.config        | 4 +++-
- configs/mt8365_evk_defconfig | 4 +++-
- 3 files changed, 9 insertions(+), 3 deletions(-)
----
-base-commit: e662ef4ea8e18887f97c07f64f2ebe17bdb15cac
-change-id: 20260507-mtk-genio-defconfig-7b165d83a812
-
-Best regards,
---  
-David Lechner <dlechner@baylibre.com>
+-- 
+2.43.0
 
