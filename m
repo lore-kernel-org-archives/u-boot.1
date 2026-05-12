@@ -4,82 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12BF0CD4F21
-	for <u-boot@archiver.kernel.org>; Tue, 12 May 2026 19:31:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35836CD4F21
+	for <u-boot@archiver.kernel.org>; Tue, 12 May 2026 19:31:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8A12083E81;
-	Tue, 12 May 2026 21:31:49 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C822183EEF;
+	Tue, 12 May 2026 21:31:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="EoD9ojyv";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="K7qxs5du";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 617C583E81; Tue, 12 May 2026 21:31:48 +0200 (CEST)
-Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
- [IPv6:2607:f8b0:4864:20::336])
+ id 56ED1838BB; Tue, 12 May 2026 21:31:49 +0200 (CEST)
+Received: from mail-ot1-x335.google.com (mail-ot1-x335.google.com
+ [IPv6:2607:f8b0:4864:20::335])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 576F18341A
- for <u-boot@lists.denx.de>; Tue, 12 May 2026 21:31:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 21961838BB
+ for <u-boot@lists.denx.de>; Tue, 12 May 2026 21:31:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x336.google.com with SMTP id
- 46e09a7af769-7df05fc49e5so5644952a34.3
- for <u-boot@lists.denx.de>; Tue, 12 May 2026 12:31:46 -0700 (PDT)
+Received: by mail-ot1-x335.google.com with SMTP id
+ 46e09a7af769-7dcdd1b492eso5328835a34.1
+ for <u-boot@lists.denx.de>; Tue, 12 May 2026 12:31:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1778614305; x=1779219105; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1778614306; x=1779219106; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=IFcFP49Sx6mbgVXwkM2A5Tevude5ot50c4UIRAZvVmg=;
- b=EoD9ojyvVtTzk77JNCSQLl4ZQzHDJq3TBfvYiwKPV25SsaDCxViL2UTWm4yRtSVk3L
- mPZMtoXh9BnToOMdfZ+Kc7pCV4ZmhmJRbyrDyRw5Wyaay9pn5AmyCHJnGRxBM5EE9+Em
- tSfrYzutaO0K4DQ88Afc3BOlaPtlgHNKB6FRU=
+ bh=XJwr//OCxrAukZd0UokwcyR6dTeuGKWyeF3ELoZMj+k=;
+ b=K7qxs5du93rm/LVnhZtUTtOwXt+sgG+r/2t9lqGUO+UMWRzdyJk2XQdF+QLiRJRtSr
+ jNolqi371JjGcmmZll/y/gidT/iqjnKE8zd4ILNJJHzBb9niuI7tPjlff6V8TLqYf7q3
+ DNaYQQCHx37VXduJUNu4UJ0vEt+3+VMD+KGNw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778614305; x=1779219105;
+ d=1e100.net; s=20251104; t=1778614306; x=1779219106;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=IFcFP49Sx6mbgVXwkM2A5Tevude5ot50c4UIRAZvVmg=;
- b=N7+5Dw0Ynzfq+daEdwOP81YA2V/L4YqAMWwR+yJkl4CBmDCAqNfXwvlk1FjQLumbMp
- JWTBK8Ofnqiemqb8XXsDXy4RuRnczO1Y3NcRtA/tellrX0mSSsebtF9oY2zqvYJ766nz
- dRmPcMDap4lSzKu1G9MzEfYdtFSkGe0QyfKj7ckmDCh7/QJSV9r3olWjEtB7DtXMJvp1
- 8rnlDDpTDOqdcBsLfqJUOTv3/1wXmXrL/PvEQS9oQBb3DrnFfJ+bbTzi8VVnSd7by9sn
- rIeGGwPjAGUUoqrUV+2UmPjJpsevwW/A+VGbycVmfZsehjkyaM+aqTFfOtJmOmQQ5lmX
- F8fw==
-X-Gm-Message-State: AOJu0YzNes1I3/CTfEraykfTAmCuTp5ibpjrsOUqbg6yemc1hFH2byMh
- zReeoVKdMyMlkf8zZI2rHV1lO8bEoNixFRdXdnZajQL2/DaUiR8+QKnxRS4Cs30OFhJYgPkKP4u
- KlkN7MTIHwdQG
-X-Gm-Gg: Acq92OGNhHCTQOzpz8/PNRtAwqHMjlZ9r5NEgrVIG2Z5zzADsvZgQTM+HkX+1hwL+3T
- yO8D8BpuqjfKVD92MQqVyVrAC5QodQAu0PBAh9hHIAtlRljp7c+PyAkWBjF4k5wBqDQWO7Hcox8
- 33kRe8ag9msr3lTyGMMQNPWR7d4rlaQNtoenxKMS6v1FKUh6RzyzvDj/LJV4d8fck3su4ZrqnRQ
- mcXe0anUGE3yjERzegaaaBVRN22M/VzDzBVdl7/rLuydrRPNZEMFihC2UmHyZxYYzOg7jZCyyLN
- l0z8z0IXgZPQlFl5pCfdVXs07jSSIoOm+P7EEpOGTcpLFcGA3i4OJ+cyZ8MhVMFq8eaQtXegnYy
- xGqTbWSCPP8YYAiEsS/Wt2e0a7lUr6QTT4vnyzwFP8LWwFJmIKY/HjxsE3AxDvTuJG2odxJjIiG
- FuSY7yXnb27eJWIBouhvNR9soXjJjwBHCQFo4e8CRbMAgsYIXRH5esZVNnf+BvHwf4BMxNqkb06
- uNe13yEyNCfAJ7honlYYhEGC1/ffvhkbq6QPzFx4+1fc1IfLQ==
-X-Received: by 2002:a05:6830:67ed:b0:7dc:dd58:50ab with SMTP id
- 46e09a7af769-7e3da439f6dmr32070a34.14.1778614304987; 
- Tue, 12 May 2026 12:31:44 -0700 (PDT)
+ bh=XJwr//OCxrAukZd0UokwcyR6dTeuGKWyeF3ELoZMj+k=;
+ b=sPEfj2FSKeFxQcvP8qO2Hf823G2DeoNnJEIyZwx1mtTooa9hXYfY6M2Ntmhqu+FryE
+ JE4vvaNyEtt9gF84LhFEglhAWRIKRDkASpO7rXX0CS80H/SueKFOHwmAQ0E4NfZ8Qaeu
+ 965lyeh4P0NRXSXoXTbQfNJTAmGnI8fd6E5tGLnVEU19UGnxHOM7/6+hD4M9yQBW9xBb
+ SkarJHGSkHOjEIGXIeDrjcdzZJCAP/tIMAIDtI5knkAj2BIdct4CNW8hbpAV4FJBvMLl
+ ZnPGWoytpltBiSrwXGcqQGmnhNW09fdNxDY3NIMs9xyrUuJVD+AWxzfu0+oRz1do7tfY
+ lxUg==
+X-Gm-Message-State: AOJu0YzZpXi6uUE5HDos81DsaUaWrH/jOoR8q9Wdtx4xEIufiSye7Hmt
+ CxIKFfcaxXZyNPrVpIe9k9RtaLwJkYGBkuiRaayrflbZsMaEy2h64d3UJQME3tjchEY=
+X-Gm-Gg: Acq92OE77Nr49b32NtChekYj22a9M/wRxINVQ7X5qd6BzvQtrxKALLEr4MNcJQVwAB7
+ DDEPWPZM2EDhKC8hht6xfkZInQ7IypFg+IyvtTNisNDpN9GEXG8bjtpVGJa6fnGhJQXQoR19AKP
+ uBTGT+low6sWyStH1Fe7JHR9SJz/S6t2mHNRjerh2dtiH/p5VABUHaKqp/CRI2PIm/U+EJTiQXK
+ b4X1rDI+Hd5J2/z/A8cQZGJDuA0Q55mDjlk6TAELuszZs4qZ38JBmh8SBUePP+q+GZ0396QYH3F
+ PWf5cT6s9KV2JWiZfzHHRmkjX0cv5Q6HaJ8IdEJw9SYwGtG+QSd7kGZh/lVaCCakiqdhKHf22HB
+ 1Oo+BoM6sbzJ+DNUA4qgRZy8Ddb++ccqlC63R4jhXI1wIRDCI9hvc/4gul5eZvko1k1SaNDyGOu
+ 8K3uJCfTFUOU6lSChQqkhkPEDy9KQF0EQKGO7zd32rMqxFDgyZW1XNHK9LJVjJOxtEyCIs4RsqI
+ 8fI0QM0z/G1BI35VHAql0WJWqr+I7mlkA+4cbOZuUDZ2DVz6w==
+X-Received: by 2002:a05:6830:6107:b0:7de:9b99:a8ee with SMTP id
+ 46e09a7af769-7e3bd2cf26dmr2648333a34.9.1778614305827; 
+ Tue, 12 May 2026 12:31:45 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-106-235.totalplay.net.
  [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7e367d4f05csm10369170a34.17.2026.05.12.12.31.44
+ 46e09a7af769-7e367d4f05csm10369170a34.17.2026.05.12.12.31.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 12 May 2026 12:31:44 -0700 (PDT)
+ Tue, 12 May 2026 12:31:45 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Ernest Van Hoecke <ernestvanhoecke@gmail.com>
-Cc: Francesco Dolcini <francesco.dolcini@toradex.com>, 
- Franz Schnyder <franz.schnyder@toradex.com>, 
- Emanuele Ghidoli <emanuele.ghidoli@toradex.com>, 
- Ernest Van Hoecke <ernest.vanhoecke@toradex.com>
-In-Reply-To: <20260505-am69-combined-binary-v1-1-5b5dc65bcb19@toradex.com>
-References: <20260505-am69-combined-binary-v1-1-5b5dc65bcb19@toradex.com>
-Subject: Re: [PATCH] arm: dts: k3-am69-aquila: add combined boot firmware image
-Message-Id: <177861430413.3279584.12872811326250477219.b4-ty@konsulko.com>
-Date: Tue, 12 May 2026 13:31:44 -0600
+To: u-boot@lists.denx.de, Janne Grunau <j@jannau.net>
+Cc: Mark Kettenis <kettenis@openbsd.org>, Bin Meng <bmeng.cn@gmail.com>
+In-Reply-To: <20260430-apple-compat-nvme-v1-1-52c1e6e93aa6@jannau.net>
+References: <20260430-apple-compat-nvme-v1-1-52c1e6e93aa6@jannau.net>
+Subject: Re: [PATCH] nvme: apple: add "apple,t8103-nvme-ans2" compatible
+Message-Id: <177861430509.3279584.4403908225399284830.b4-ty@konsulko.com>
+Date: Tue, 12 May 2026 13:31:45 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -100,21 +96,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 05 May 2026 18:36:24 +0200, Ernest Van Hoecke wrote:
+On Thu, 30 Apr 2026 23:28:36 +0200, Janne Grunau wrote:
 
-> Add nodes to the binman configuration to create single binaries that
-> combine tiboot3-am69-*-aquila.bin, tispl.bin and u-boot.img into
-> firmware-aquila-am69-*.bin, with the proper offsets.
-> 
-> These binaries can be used to flash U-Boot via a single binary of three,
-> as it is done now.
+> After discussion with the devicetree maintainers we agreed to not extend
+> lists with the generic compatible "apple,nvme-ans2" anymore [1]. Add
+> "apple,t8103-nvme-ans2" as fallback compatible as this is the SoC the
+> driver and bindings were originally written for.
+> The t602x (M2 Pro/Max/Ultra) devicetrees submitted in [2] use this
+> compatible as fallback instead of "apple,t8103-nvme-ans2".
 > 
 > [...]
 
 Applied to u-boot/master, thanks!
 
-[1/1] arm: dts: k3-am69-aquila: add combined boot firmware image
-      commit: f62d4535cf172cebc7d7d752020a39306444b096
+[1/1] nvme: apple: add "apple,t8103-nvme-ans2" compatible
+      commit: 29080b2a9968437da4f53e38010c48c038a22991
 -- 
 Tom
 
