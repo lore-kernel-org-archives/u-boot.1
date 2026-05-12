@@ -4,105 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9575BCD4855
-	for <u-boot@archiver.kernel.org>; Tue, 12 May 2026 07:09:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 411DDCD4855
+	for <u-boot@archiver.kernel.org>; Tue, 12 May 2026 07:12:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2928C801A9;
-	Tue, 12 May 2026 09:09:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id B4530801A9;
+	Tue, 12 May 2026 09:12:09 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="JXeK8uMF";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="LaZ2Ceok";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F0FF980398; Tue, 12 May 2026 09:09:06 +0200 (CEST)
-Received: from mail-vk1-xa29.google.com (mail-vk1-xa29.google.com
- [IPv6:2607:f8b0:4864:20::a29])
+ id 3242680F0E; Tue, 12 May 2026 09:12:08 +0200 (CEST)
+Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
+ [IPv6:2a00:1450:4864:20::332])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E199B800AE
- for <u-boot@lists.denx.de>; Tue, 12 May 2026 09:09:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1946B800AE
+ for <u-boot@lists.denx.de>; Tue, 12 May 2026 09:12:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=dario.binacchi@amarulasolutions.com
-Received: by mail-vk1-xa29.google.com with SMTP id
- 71dfb90a1353d-5637886c92aso2480203e0c.0
- for <u-boot@lists.denx.de>; Tue, 12 May 2026 00:09:03 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1778569742; cv=none;
- d=google.com; s=arc-20240605;
- b=j2bzWApGlYy+HHMP18V7NkmcVKRJI3ifa50RiV5WieB5nkEJ6JElmOrju45ptmCmCo
- z2Qw3KSlVE3yGDWrKNPq3OU7UoabMkQX6DQD3eHTtq6xfRpBld0CdJ1ilaNqLGIkZQy8
- Jj5Cux7MIm8vvSp5gASKW7Tmem9zjsJoBisxqOPeQ9e9TQQ1aZidwp5gco1w1Ic/vBru
- 0/tGH+xz9XG1VtIsGGDkyArwre6dxVkqE7pqQQDoq5I8suNii87Hpryam4cPl0TlcLn7
- uTw9Z7yqlxAUcHmEiExXNwV2WSewuoHoObDg7v3WYHykfWFmktHl0U/djGO9FqChHBCR
- xTEw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=1fWZXaMs3GX/R1R3cp+rOa7kgAPbv4azPmJlMurqZqk=;
- fh=VQfG0fmv5KJzLQhl0ufYpqdXBYQXanyqisBUd6SiNas=;
- b=akwL0pskGBhYLaAJiiWRM9QZdOffFnd5NnxBG1Gph8KSh0qDUGXBs+hhk/aPdKNQbP
- /k2QYLrgxKHDnkhCfijR0ney2bGKqZjPtTrBQJLc4+jZoxsj2/gK2AeNC9zSgkyvWkvs
- IM9o/BeLc2q/fzDpLeh0AGiOu20/v8aUBEzI6atItIp9hBe2x0rogtgkXQlp6oEDOz9J
- KzvlaG5xECr6Q94lzPu7HdrtQ1RFVTdvAr/0gFVk6ttxPyOmTRFfwa4VL+eU5DnQJL8y
- K8YTwPmQ2y6DyJQai4WQ7JKky0N+S5hv0qH429jhzQDRmMU5heyKSkiuVd/5Q/+8/v6Q
- f5Xw==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-48a563e4ef7so46254515e9.0
+ for <u-boot@lists.denx.de>; Tue, 12 May 2026 00:12:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1778569742; x=1779174542;
+ d=amarulasolutions.com; s=google; t=1778569925; x=1779174725;
  darn=lists.denx.de; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=1fWZXaMs3GX/R1R3cp+rOa7kgAPbv4azPmJlMurqZqk=;
- b=JXeK8uMFk4MhJUXRCM+JgWdVSNLXvGUJX5kkvlLKjmmlrHyo1FwV3ICSKfM6HpLqz4
- zx4Wx01ta/s9nKN9LVq0Wff8bNAufkVhkl9J004n89VyQIw36zk0zFC6naYsrQYVZTup
- xM7hCTUMkwCLpsgn+0AzvQU82drckMTSOKMSU=
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=WzmnV3kggwSU5sM2eqbuwF2Q9DjxSpkrCPTMYcDnehY=;
+ b=LaZ2Ceok3uuNkF3L9OeeLKUrkKAwCimuLoop3nD7lflSguiuk1mM1jBTDBETG09P6d
+ C4dAukuGugjgq8vfcW7Bn1h5PPaH2t2ys58ej+g8iGotm+ZoL0YDad4E/P0Anbh8d7qt
+ fS09XIBYjhlc3TzppqFvupRoKVhkVh/EHK85E=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778569742; x=1779174542;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=1e100.net; s=20251104; t=1778569925; x=1779174725;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=1fWZXaMs3GX/R1R3cp+rOa7kgAPbv4azPmJlMurqZqk=;
- b=H1baJdU22RX2tsJ05/5GOZXwacSovDoasJFXP38KVV0OtDfchxrWGy/j1v5iTyzrNg
- 3UOLNj6F5PE9ognbp6nIruOFg+i6ABYVE9aOqIbgrtI+0MrM3vLPDzqOs4fy1Wxb3Fom
- 8oKdXcgu88NRkFzeGQYJKshPL21F6hdobKk+z9T3OlnZD4jjL7aBXfxIYN1zHz3NZfJU
- j8nNjleUknfyRchQq5aoIw70nScqyzJgPmaCSupTi+IpowB3oavz3KFzG9as+eT46vHv
- o/wbG7CMxpD9TjPRoZgIxYt/zbrZl9uTSAGmZc6IGgkSlZ1RwwFPfUjXCOm9Pzcj7wXy
- CLXg==
-X-Gm-Message-State: AOJu0Yy82Fltl0O6zZsUk4Q3ANon2s0tXhaCR0rBoj8hRc3gAeVHWko5
- we8vTzTG6awoBLb5Tu1Mgfztz0Bvf3D5JUX/4lzbs20ThP7OBafYWzXgzT4bbcGB3bTACaOqc5Q
- 67vZrPyhq8NAhq8b8OCKiosC4oJs2sHhqvDAYDFXGAg==
-X-Gm-Gg: Acq92OGE2fzH43SGitVSmedc/OO+bk5kyyC2DuQgDmW3h6V9CUB8JTQoDUczbZOSWRw
- piUvAbI2nMP2/vCcILG62OtrB0T2fb8gREpw2IWOvGoID4lH/ZttR65mmCTRn/klB9Cqbc2P81T
- Uw2nmtIBgPMGr2Qn4jJgYhHVq7wPwWoz7eT4gyvpHizhE5YPZ7x+qS81JiDUAWMGqZIVZ88C8QR
- t0smkq0tWPPmjtYUoy/xW5xFo1bzlSTAirVVDQ8HAXp82fhS7Yzpfc1fMq0m3C/9c3SBJ5+U6/4
- ZMBl2dWTOJqZj3VehAz0KyZK4d/yJLSVxLHb
-X-Received: by 2002:a05:6122:6584:b0:575:2f91:6fd3 with SMTP id
- 71dfb90a1353d-575d42410e2mr611322e0c.5.1778569742416; Tue, 12 May 2026
- 00:09:02 -0700 (PDT)
-MIME-Version: 1.0
-References: <20260430080627.849636-1-dario.binacchi@amarulasolutions.com>
- <20260430080627.849636-4-dario.binacchi@amarulasolutions.com>
- <5b02ed04-764c-4eee-ba58-0f84ef43446c@foss.st.com>
- <CABGWkvp-5GnhvOO46PoKBOKmh-XsTLbHQx63fMwm70J0NYZ55A@mail.gmail.com>
-In-Reply-To: <CABGWkvp-5GnhvOO46PoKBOKmh-XsTLbHQx63fMwm70J0NYZ55A@mail.gmail.com>
+ bh=WzmnV3kggwSU5sM2eqbuwF2Q9DjxSpkrCPTMYcDnehY=;
+ b=bt9/XXeqMUA92GuQTXcBSLdcxpmXE5Y8Zg4wjPEcIOGJkZCORVjoi07WCVOaxJRHaO
+ jnBiYytQq0aVIa1CesrkYTsqD9JYLc/aiAlK6tmA7g768de50fjsauuQwrUwu6YtXmZo
+ joXV4WHkXqKOc82WrYQUlb4J5QXc4MgXuJ2ucph72kU7hiftvBRsy3CKpQmcwma/dMVe
+ 5PgjVaP91QkRuLNaGmp8Z+Bv8GBj+RA11fc8OM9TkCgKtk2hnHotraFkXl5PEGUGggkz
+ DJ8oPJqTyKUgkhHp6UqRONO7BEOtVZlHBa+ACeeOYZ6UN5tXvnoVw/NySZybZB1BmbOE
+ sOdw==
+X-Gm-Message-State: AOJu0Yyf4Ce9b+DJXXqBCG9PqgAnt8TA6foTpj8rsnnlJafra5QpA0AA
+ mW5SSIkgvmd1KuUpqer4RG4UkKjRkYNniJpCDC91GWhRLVyGDREw8F0QrNcvX95m9rwd1kfHE/N
+ HRWQp
+X-Gm-Gg: Acq92OFy5ywyGTf/CSGEI8hADCrF+ItJRrI2WXyvNOQxiyLMjzfZ8HdWQbBUnjYwuqh
+ y6D1COPbRJwQSzYjHZAxC/w80/L/nUJGucoGCkFOCsVlfpnByVHaFetan1XweZSArlN/NJ0Sxa3
+ B7UgsbbG0L8KpzMYfY8gu8rKlvDWe9KtgjNGLyTuC7DbFjgSdA76m74IRQsqddwAr4/Esuzt9FC
+ 9ASPnZsWosRRfUs+DhciZYDbEobC07qiJhV+Y0umfFD3E1yV0/xX2tFWMXDe7KL/yyL3lnx/Kic
+ Zzm2FBlFANceGacVyWOpGJI64Nrk8AkPK8Lmn9WuupNnM1F5D4cAHxNeEaseLJGZ1G/G4IDAV0Z
+ uTuGwVTs3lz/o1sdmEBxsvi0Uq/j6Bzdv3kHfxGliuUmvSgl/z173ejEPPnY4Cgf3dOfWBIir/W
+ 9CS5Eb1zHr7Wvs4BLdA6D1x19PJunDI6v6/dtQuFS79mt4miCh6wo/AhHfEjnvF5tchDBIj1GHq
+ 6AeB52eXGIgOjpQIdyQ786Vb9E6405L
+X-Received: by 2002:a05:600c:528e:b0:48e:7f1c:8778 with SMTP id
+ 5b1f17b1804b1-48e8fe721bcmr27120735e9.17.1778569925057; 
+ Tue, 12 May 2026 00:12:05 -0700 (PDT)
+Received: from dario-ThinkPad-P14s-Gen-5.. ([2.196.40.90])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-48e908d890fsm24601385e9.15.2026.05.12.00.12.03
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 12 May 2026 00:12:04 -0700 (PDT)
 From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
-Date: Tue, 12 May 2026 09:08:51 +0200
-X-Gm-Features: AVHnY4IyVnhYngz5olqdD9qcAh972BlO0NCsAe1rgbkOJr_lEgP66PxH8fp0CqU
-Message-ID: <CABGWkvrBZPN4LGia169JdrjhUyN5cSvnMt1hxH=Tx6JZ0NbRTQ@mail.gmail.com>
-Subject: Re: [PATCH v8 3/8] test: cmd: add unit tests for part command
-To: Patrice CHOTARD <patrice.chotard@foss.st.com>
-Cc: u-boot@lists.denx.de, linux-amarula@amarulasolutions.com, 
- Simon Glass <sjg@chromium.org>, Dinesh Maniyam <dinesh.maniyam@altera.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+To: u-boot@lists.denx.de
+Cc: linux-amarula@amarulasolutions.com,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Tom Rini <trini@konsulko.com>, uboot-stm32@st-md-mailman.stormreply.com
+Subject: [PATCH] ARM: dts: stm32: add U-Boot specific dtsi for stm32mp157f-dk2
+Date: Tue, 12 May 2026 09:11:24 +0200
+Message-ID: <20260512071157.564081-1-dario.binacchi@amarulasolutions.com>
+X-Mailer: git-send-email 2.43.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -119,326 +98,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi everyone,
+The STM32MP157F-DK2 board is a direct derivative of the STM32MP157C-DK2.
+As explained by ST [1], the "STM32MP157F-DK2 is assembled with latest
+STM32MP15 RevZ cut which is the only one available for new product now.
+The major differences in this 'F' variant SoC are the increased max
+frequency of the Cortex-A7 cores and the correction of some HW bugs
+(Device Rev.Z, see errata ES0438)".
 
-I am resending my previous reply because I received a delivery failure
-notification last week indicating that Patrice's mailbox was full.
+Introducing arch/arm/dts/stm32mp157f-dk2-u-boot.dtsi by including
+stm32mp157c-dk2-u-boot.dtsi allows inheriting U-Boot specific properties
+(e.g., bootph, fwumdata), avoiding code duplication and ensuring
+feature parity.
 
-Patrice, did you have a chance to verify if the tests are passing fine now?
-Please let me know if everything looks good or if you need
+[1] https://community.st.com/t5/stm32-mpus-products-and-hardware/i-m-wondering-what-s-the-difference-point-between-stm32mp157c/td-p/213460
 
-me to make any further modifications.
+Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
 
-Thanks and regards
+---
 
-Dario
+ arch/arm/dts/stm32mp157f-dk2-u-boot.dtsi | 6 ++++++
+ 1 file changed, 6 insertions(+)
+ create mode 100644 arch/arm/dts/stm32mp157f-dk2-u-boot.dtsi
 
-On Tue, May 5, 2026 at 9:55=E2=80=AFAM Dario Binacchi <
-dario.binacchi@amarulasolutions.com> wrote:
-
-> Hi Patrice,
->
-> On Tue, May 5, 2026 at 9:26=E2=80=AFAM Patrice CHOTARD <
-> patrice.chotard@foss.st.com> wrote:
->
->>
->>
->> On 4/30/26 10:06, Dario Binacchi wrote:
->> > Add unit tests for the 'part' command, specifically for the 'number',
->> > 'start', and 'size' subcommands.
->> >
->> > These tests establish a baseline for the current partition lookup
->> > functionality by name. This foundation will be used by subsequent
->> > patches to extend the command, ensuring consistent behavior as new
->> > features are introduced.
->> >
->> > Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
->> > Reviewed-by: Simon Glass <sjg@chromium.org>
->> >
->> > ---
->> >
->> > Changes in v8:
->> > - Skip the test in case the CONFIG_MCC is not enabled or the mmc
->> >   device is not found.
->> >
->> > Changes in v6:
->> > - Add Reviewed-by of Simon Glass to patch 3/8 "test: cmd: add unit
->> >   tests for part command"
->> >
->> > Changes in v4:
->> > - Place the part command tests in the cmd suite rather than the dm
->> >   suite.
->> > - Order the include files according the U-Boot coding style.
->> >
->> > Changes in v3:
->> > - Wrap the lines exceeding 80 columns
->> > - Combine run_command() and ut_asserteq() -> ut_asserteq(1, run_comman=
-d(
->> >
->> >  test/cmd/Makefile |   1 +
->> >  test/cmd/part.c   | 183 +++++++++++++++++++++++++++++++++++++++++++++=
+diff --git a/arch/arm/dts/stm32mp157f-dk2-u-boot.dtsi b/arch/arm/dts/stm32mp157f-dk2-u-boot.dtsi
+new file mode 100644
+index 000000000000..456ba70ba9ca
+--- /dev/null
++++ b/arch/arm/dts/stm32mp157f-dk2-u-boot.dtsi
+@@ -0,0 +1,6 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Copyright (C) 2026 Amarula Solutions, Dario Binacchi <dario.binacchi@amarulasolutions.com>
++ */
 +
->> >  2 files changed, 184 insertions(+)
->> >  create mode 100644 test/cmd/part.c
->> >
->> > diff --git a/test/cmd/Makefile b/test/cmd/Makefile
->> > index 5f2815b1bb65..8d6932f1176c 100644
->> > --- a/test/cmd/Makefile
->> > +++ b/test/cmd/Makefile
->> > @@ -26,6 +26,7 @@ obj-$(CONFIG_CMD_LOADM) +=3D loadm.o
->> >  obj-$(CONFIG_CMD_MEMINFO) +=3D meminfo.o
->> >  obj-$(CONFIG_CMD_MEMORY) +=3D mem_copy.o
->> >  obj-$(CONFIG_CMD_MEM_SEARCH) +=3D mem_search.o
->> > +obj-$(CONFIG_CMD_PART) +=3D part.o
->> >  ifdef CONFIG_CMD_PCI
->> >  obj-$(CONFIG_CMD_PCI_MPS) +=3D pci_mps.o
->> >  endif
->> > diff --git a/test/cmd/part.c b/test/cmd/part.c
->> > new file mode 100644
->> > index 000000000000..cac57a1a0e35
->> > --- /dev/null
->> > +++ b/test/cmd/part.c
->> > @@ -0,0 +1,183 @@
->> > +// SPDX-License-Identifier: GPL-2.0+
->> > +/*
->> > + * Test for part command
->> > + *
->> > + * Copyright (C) 2026 Amarula Solutions
->> > + * Written by Dario Binacchi <dario.binacchi@amarulasolutions.com>
->> > + */
->> > +
->> > +#include <command.h>
->> > +#include <dm.h>
->> > +#include <env.h>
->> > +#include <part.h>
->> > +#include <vsprintf.h>
->> > +#include <dm/test.h>
->> > +#include <test/cmd.h>
->> > +#include <test/test.h>
->> > +#include <test/ut.h>
->> > +
->> > +static struct disk_partition gpt_parts[] =3D {
->> > +     {
->> > +             .start =3D 48,
->> > +             .size =3D 1,
->> > +             .name =3D "test1",
->> > +             .uuid =3D "c5bce7a2-03f0-4d03-9048-01ff23b9d527",
->> > +     },
->> > +     {
->> > +             .start =3D 49,
->> > +             .size =3D 2,
->> > +             .name =3D "test2",
->> > +             .uuid =3D "9df346e8-2c53-4cd8-b9ac-3af83f9a9b74",
->> > +     },
->> > +};
->> > +
->> > +static char disk_guid[UUID_STR_LEN + 1] =3D
->> > +     "8d60b397-1bb6-4d33-80ee-b1587d24c2f8";
->> > +
->> > +static int setup_gpt_partitions(struct unit_test_state *uts,
->> > +                             unsigned int mmc_dev_num)
->> > +{
->> > +     struct blk_desc *mmc_dev_desc;
->> > +     char dev_str[10];
->> > +     int i, ret;
->> > +
->> > +     if (!CONFIG_IS_ENABLED(MMC))
->> > +             return -EAGAIN;
->>
->> Hi Dario
->>
->> Is there any reason to return -EAGAIN ? -ENODEV seems more appropriate ?
->>
->
-> In the testing framework, returning -EAGAIN explicitly signals that the
-> test should be skipped*.*
->
-> As highlighted in the documentation for ut_run_test():
->
-> *Return: 0 if all tests passed, -EAGAIN if the test should be skipped, -1
-> if any failed*
->
->
-> Since the necessary preconditions weren't met for some configuration in
-> our case, I decided to skip.
->
-> Thanks and regards,
->
-> Dario
->
->
->> Thanks
->> Patrice
->>
->> > +
->> > +     snprintf(dev_str, sizeof(dev_str), "%u", mmc_dev_num);
->> > +
->> > +     ret =3D blk_get_device_by_str("mmc", dev_str, &mmc_dev_desc);
->> > +     if (ret =3D=3D -ENODEV)
->> > +             return -EAGAIN;
->> > +
->> > +     ut_asserteq(mmc_dev_num, ret);
->> > +
->> > +     if (CONFIG_IS_ENABLED(RANDOM_UUID)) {
->> > +             for (i =3D 0; i < ARRAY_SIZE(gpt_parts); i++)
->> > +                     gen_rand_uuid_str(gpt_parts[i].uuid,
->> > +                                       UUID_STR_FORMAT_STD);
->> > +
->> > +             gen_rand_uuid_str(disk_guid, UUID_STR_FORMAT_STD);
->> > +     }
->> > +
->> > +     ut_assertok(gpt_restore(mmc_dev_desc, disk_guid, gpt_parts,
->> > +                             ARRAY_SIZE(gpt_parts)));
->> > +     return 0;
->> > +}
->> > +
->> > +static int cmd_test_part_number(struct unit_test_state *uts)
->> > +{
->> > +     unsigned int mmc_dev_num =3D 2;
->> > +     char expected[10];
->> > +     int i, ret;
->> > +
->> > +     ret =3D setup_gpt_partitions(uts, mmc_dev_num);
->> > +     if (ret =3D=3D -EAGAIN)
->> > +             return ret;
->> > +
->> > +     ut_assertok(ret);
->> > +
->> > +     for (i =3D 0; i < ARRAY_SIZE(gpt_parts); i++) {
->> > +             env_set("partnum", NULL);
->> > +             ut_assertok(run_commandf("part number mmc %u %s partnum"=
-,
->> > +                                      mmc_dev_num, gpt_parts[i].name)=
-);
->> > +             snprintf(expected, sizeof(expected), "0x%x", i + 1);
->> > +             ut_asserteq_str(expected, env_get("partnum"));
->> > +     }
->> > +
->> > +     env_set("partnum", NULL);
->> > +     ut_asserteq(1, run_commandf("part number mmc %u bogus partnum",
->> > +                                 mmc_dev_num));
->> > +     ut_assertnull(env_get("partnum"));
->> > +
->> > +     return 0;
->> > +}
->> > +CMD_TEST(cmd_test_part_number, UTF_CONSOLE);
->> > +
->> > +static int cmd_test_part_start(struct unit_test_state *uts)
->> > +{
->> > +     unsigned int mmc_dev_num =3D 2;
->> > +     char expected[32];
->> > +     int i, ret;
->> > +
->> > +     ret =3D setup_gpt_partitions(uts, mmc_dev_num);
->> > +     if (ret =3D=3D -EAGAIN)
->> > +             return ret;
->> > +
->> > +     ut_assertok(ret);
->> > +
->> > +     for (i =3D 0; i < ARRAY_SIZE(gpt_parts); i++) {
->> > +             env_set("partstart", NULL);
->> > +             ut_assertok(run_commandf("part start mmc %u %d partstart=
-",
->> > +                                      mmc_dev_num, i + 1));
->> > +             snprintf(expected, sizeof(expected), "%lx",
->> > +                      (unsigned long)gpt_parts[i].start);
->> > +             ut_asserteq_str(expected, env_get("partstart"));
->> > +     }
->> > +
->> > +     env_set("partstart", NULL);
->> > +     ut_asserteq(1, run_commandf("part start mmc %u 3 partstart",
->> > +                                 mmc_dev_num));
->> > +     ut_assertnull(env_get("partstart"));
->> > +
->> > +     for (i =3D 0; i < ARRAY_SIZE(gpt_parts); i++) {
->> > +             env_set("partstart", NULL);
->> > +             ut_assertok(run_commandf("part start mmc %u %s partstart=
-",
->> > +                                      mmc_dev_num, gpt_parts[i].name)=
-);
->> > +             snprintf(expected, sizeof(expected), "%lx",
->> > +                      (unsigned long)gpt_parts[i].start);
->> > +             ut_asserteq_str(expected, env_get("partstart"));
->> > +     }
->> > +
->> > +     env_set("partstart", NULL);
->> > +     ut_asserteq(1, run_commandf("part start mmc %u bogus partstart",
->> > +                                 mmc_dev_num));
->> > +     ut_assertnull(env_get("partstart"));
->> > +
->> > +     return 0;
->> > +}
->> > +CMD_TEST(cmd_test_part_start, UTF_CONSOLE);
->> > +
->> > +static int cmd_test_part_size(struct unit_test_state *uts)
->> > +{
->> > +     unsigned int mmc_dev_num =3D 2;
->> > +     char expected[32];
->> > +     int i, ret;
->> > +
->> > +     ret =3D setup_gpt_partitions(uts, mmc_dev_num);
->> > +     if (ret =3D=3D -EAGAIN)
->> > +             return ret;
->> > +
->> > +     ut_assertok(ret);
->> > +
->> > +     for (i =3D 0; i < ARRAY_SIZE(gpt_parts); i++) {
->> > +             env_set("partsize", NULL);
->> > +             ut_assertok(run_commandf("part size mmc %u %d partsize",
->> > +                                      mmc_dev_num, i + 1));
->> > +             snprintf(expected, sizeof(expected), "%lx",
->> > +                      (unsigned long)gpt_parts[i].size);
->> > +             ut_asserteq_str(expected, env_get("partsize"));
->> > +     }
->> > +
->> > +     env_set("partsize", NULL);
->> > +     ut_asserteq(1, run_commandf("part size mmc %u 3 partsize",
->> > +                                 mmc_dev_num));
->> > +     ut_assertnull(env_get("partsize"));
->> > +
->> > +     for (i =3D 0; i < ARRAY_SIZE(gpt_parts); i++) {
->> > +             env_set("partsize", NULL);
->> > +             ut_assertok(run_commandf("part size mmc %u %s partsize",
->> > +                                      mmc_dev_num, gpt_parts[i].name)=
-);
->> > +             snprintf(expected, sizeof(expected), "%lx",
->> > +                      (unsigned long)gpt_parts[i].size);
->> > +             ut_asserteq_str(expected, env_get("partsize"));
->> > +     }
->> > +
->> > +     env_set("partsize", NULL);
->> > +     ut_asserteq(1, run_commandf("part size mmc %u bogus partsize",
->> > +                                 mmc_dev_num));
->> > +     ut_assertnull(env_get("partsize"));
->> > +
->> > +     return 0;
->> > +}
->> > +CMD_TEST(cmd_test_part_size, UTF_CONSOLE);
->>
->>
->
-> --
-> *Dario Binacchi*
-> Senior Embedded Software Engineer
-> M. +39 328 0625246
-> dario.binacchi@amarulasolutions.com
-> =E2=80=95=E2=80=95=E2=80=95=E2=80=95=E2=80=95=E2=80=95=E2=80=95=E2=80=95=
-=E2=80=95=E2=80=95=E2=80=95=E2=80=95=E2=80=95=E2=80=95=E2=80=95
-> Amarula Solutions SRL
->  Via Felice Cavallotti 25D, 41012 Carpi, MO, IT
-> info@amarulasolutions.com
-> www.amarulasolutions.com
->
++#include "stm32mp157c-dk2-u-boot.dtsi"
+-- 
+2.43.0
 
-
---=20
-*Dario Binacchi*
-Senior Embedded Software Engineer
-M. +39 328 0625246
-dario.binacchi@amarulasolutions.com
-=E2=80=95=E2=80=95=E2=80=95=E2=80=95=E2=80=95=E2=80=95=E2=80=95=E2=80=95=E2=
-=80=95=E2=80=95=E2=80=95=E2=80=95=E2=80=95=E2=80=95=E2=80=95
-Amarula Solutions SRL
- Via Felice Cavallotti 25D, 41012 Carpi, MO, IT
-info@amarulasolutions.com
-www.amarulasolutions.com
+base-commit: 5732bd0f457b4c671e46574d64d4acb099c0f0a5
+branch: stm32mp157f-dk2-u-boot
