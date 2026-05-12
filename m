@@ -4,74 +4,128 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5B4BCD37BE
-	for <u-boot@archiver.kernel.org>; Tue, 12 May 2026 02:40:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A62E1CD37BE
+	for <u-boot@archiver.kernel.org>; Tue, 12 May 2026 03:24:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EDEE883EEF;
-	Tue, 12 May 2026 04:40:56 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=mediatek.com
+	by phobos.denx.de (Postfix) with ESMTP id 4554F83EEF;
+	Tue, 12 May 2026 05:24:00 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=mediatek.com header.i=@mediatek.com header.b="OCmw8wke";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="vFTsbwcQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1F30F845E3; Tue, 12 May 2026 04:40:56 +0200 (CEST)
-Received: from mailgw01.mediatek.com (unknown [60.244.123.138])
+ id F268E8464D; Tue, 12 May 2026 05:23:58 +0200 (CEST)
+Received: from GVXPR05CU001.outbound.protection.outlook.com
+ (mail-swedencentralazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c202::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D3CE583CD3
- for <u-boot@lists.denx.de>; Tue, 12 May 2026 04:40:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=mediatek.com
+ by phobos.denx.de (Postfix) with ESMTPS id EE8AA83CD3
+ for <u-boot@lists.denx.de>; Tue, 12 May 2026 05:23:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=weijie.gao@mediatek.com
-X-UUID: f95d79484dab11f1b96f91537e34a508-20260512
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mediatek.com;
- s=dk; 
- h=Content-Transfer-Encoding:MIME-Version:Content-Type:References:In-Reply-To:Date:CC:To:From:Subject:Message-ID;
- bh=0jmLDs1e0xUtwGyP0AF4IvxinHYJLsL2hs7uiUBap+o=; 
- b=OCmw8wke7D1X/9WCNmtMnnqbR2Cz1F0DKKQNRKFSV1yFV4LZMq0hE07vEdREiipEqb8X1S4Kn/+x1oQrXGsxDep8uLhmlFK0fyMtcvGBOlnDwwWgKoC2GZW9amugIJRbZ60my510BkA5/PQIiIbCY/A7rvA8sio65rVmWxHu9Ro=;
-X-CID-P-RULE: Release_Ham
-X-CID-O-INFO: VERSION:1.3.12, REQID:0d638f2f-76a6-4cbc-b7b0-11c2cfaf17ee, IP:0,
- U
- RL:0,TC:0,Content:0,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTION:
- release,TS:0
-X-CID-META: VersionHash:e7bac3a, CLOUDID:614539bf-65a8-4b41-ac18-3671578a914d,
- B
- ulkID:nil,BulkQuantity:0,Recheck:0,SF:80|81|82|83|102|836|865|888|898,TC:-
- 5,Content:0|15|50,EDM:-3,IP:nil,URL:0,File:130,RT:0,Bulk:nil,QS:nil,BEC:-1
- ,COL:0,OSI:0,OSA:0,AV:0,LES:1,SPR:NO,DKR:0,DKP:0,BRR:0,BRE:0,ARC:0
-X-CID-BVR: 2,SSN|SDN
-X-CID-BAS: 2,SSN|SDN,0,_
-X-CID-FACTOR: TF_CID_SPAM_SNR
-X-CID-RHF: D41D8CD98F00B204E9800998ECF8427E
-X-UUID: f95d79484dab11f1b96f91537e34a508-20260512
-Received: from mtkmbs11n1.mediatek.inc [(172.21.101.185)] by
- mailgw01.mediatek.com (envelope-from <weijie.gao@mediatek.com>)
- (Generic MTA with TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384 256/256)
- with ESMTP id 1649440822; Tue, 12 May 2026 10:40:44 +0800
-Received: from mtkmbs13n2.mediatek.inc (172.21.101.108) by
- MTKMBS14N1.mediatek.inc (172.21.101.75) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.29; Tue, 12 May 2026 10:40:43 +0800
-Received: from mcddlt001.gcn.mediatek.inc (10.19.240.15) by
- mtkmbs13n2.mediatek.inc (172.21.101.73) with Microsoft SMTP Server id
- 15.2.2562.29 via Frontend Transport; Tue, 12 May 2026 10:40:43 +0800
-Message-ID: <119155049b093e293a536523036bbb3d939c4d39.camel@mediatek.com>
-Subject: Re: [PATCH v3 06/10] cmd: ubi: reorganize command messages
-From: Weijie Gao <weijie.gao@mediatek.com>
-To: Simon Glass <sjg@chromium.org>
-CC: <u-boot@lists.denx.de>
-Date: Tue, 12 May 2026 10:40:42 +0800
-In-Reply-To: <CAFLszTjjde593ZKoZcSTTkKndC2XBKXCFLJzcYTafdD+1tZT-g@mail.gmail.com>
-References: <cover.1777272283.git.weijie.gao@mediatek.com>
- <e9ca310e07d0e591339e0dbf3c1b893a1c43a03b.1777272283.git.weijie.gao@mediatek.com>
- <CAFLszTjjde593ZKoZcSTTkKndC2XBKXCFLJzcYTafdD+1tZT-g@mail.gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-X-Mailer: Evolution 3.28.5-0ubuntu0.18.04.2 
+ dmarc=none (p=none dis=none) header.from=oss.nxp.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=alice.guo@oss.nxp.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=qf7BsTR0ISt0tBEorbRBNFO8LWyTOqkbS77M1hQGnfmSMC+PmsytcG2qf0uCRlC8Os3aKbp5bdZakWBTsaTWZYnJ+W9usm69stMg00lY+wu0rA0MdC0mqmWBlVlar4OCKKryfoRoVBLYAfdiPDnSLgsLoZF7GEGe5uWjOL8Vb3KK4gTDPZyKW+3ZWUYgiQQ6hyrPBPywsIgP7W/eVV42uv7Nz0muZBRmfhgchM0aDfHSLdtdZ6aCj0lAfYAlLf5B1mQEVlKokUR8/sEsXOP9IhDQw/AqPS0G6T+vREib6CMx7JRyYdrvT02jW+rjt5a/6Jl8dcniTXeZPlmDDUcvGQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=+7pXWFNuEpMsvnLQnDUAnj8qvAWrb76VqENbvrIQYmk=;
+ b=e1BMNr1zhSyoeCFl6uryz4S4BKONms8tXYInU2d4YS3pph8EwRNDUb7wBcQvNCZBn7/0FPjjWNiFJkeW/fNHlPhFQyiRGrbHSMWu4VvdDUjraXOzqM9UHtCKo+ZcTQtJSkdzFEPwnPF8bOHpZRuqy5QOvkIk/dpccIVMnmknFUnvetnxN4DdBua+5OFxoIZYcMsrxQyaRH0yPYE3/n+Exz385ShqNcdcVv3p2xpYL8NiKPdS/PCx3oQ2kjPx+rgdFh/LG+eRbaO+v/im23gWli4ZLWGScUKzwsAavW42zjEJxuuCBhukClAjRVNn2ehTcpAbXlUiSOF28oXuTtjjWA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
+ dkim=pass header.d=oss.nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
+ s=selector1-NXP1-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=+7pXWFNuEpMsvnLQnDUAnj8qvAWrb76VqENbvrIQYmk=;
+ b=vFTsbwcQOxbPsuT5ud2bsYd6mDSZRxp7lp1iH2szSuGuEnL2pNUzVnhhZH/FvWNHyH0fA3rshZ+YMK86njrd7IPcPFb7rVFR65ZXTFAl8P1LsBdyG21LL9y1NxxL5LzoTMPYA2Ujw52z+Lv3Y0MZ8jD1UU+XSYo/qk73/fOZk6y3ZhSEPYj2oqFoNtimywQsDFmmzPtm18IHk5Vk4ghgppKvdNMCVI/J2CjuHa6vjRFmsKXcJwSjkjMNHszKt3hvSgZtqIekxHICy6eWJF9vynm3UNB/k2TjeEpHiEjW2GGutU8YSKEyMZV8UXtvrYab+1gN8EW+Dfr8N3jP57UPDg==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=oss.nxp.com;
+Received: from PAXPR04MB9644.eurprd04.prod.outlook.com (2603:10a6:102:242::11)
+ by DU7PR04MB11236.eurprd04.prod.outlook.com (2603:10a6:10:5b4::22)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9913.11; Tue, 12 May
+ 2026 03:23:53 +0000
+Received: from PAXPR04MB9644.eurprd04.prod.outlook.com
+ ([fe80::cf3:c5b0:7a0c:d11b]) by PAXPR04MB9644.eurprd04.prod.outlook.com
+ ([fe80::cf3:c5b0:7a0c:d11b%5]) with mapi id 15.20.9913.009; Tue, 12 May 2026
+ 03:23:53 +0000
+From: alice.guo@oss.nxp.com
+To: jerome.forissier@arm.com,
+	trini@konsulko.com,
+	u-boot@lists.denx.de
+Cc: alice.guo@nxp.com, ye.li@nxp.com, xiaoning.wang@nxp.com,
+ tharvey@gateworks.com, marek.vasut+renesas@mailbox.org
+Subject: [PATCH RESEND v1] net: fsl_enetc: fix the duplex setting on the iMX
+ platform
+Date: Tue, 12 May 2026 11:26:30 +0800
+Message-Id: <20260512032630.980534-1-alice.guo@oss.nxp.com>
+X-Mailer: git-send-email 2.34.1
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: MA5PR01CA0258.INDPRD01.PROD.OUTLOOK.COM
+ (2603:1096:a01:21c::11) To PAXPR04MB9644.eurprd04.prod.outlook.com
+ (2603:10a6:102:242::11)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-X-MTK: N
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PAXPR04MB9644:EE_|DU7PR04MB11236:EE_
+X-MS-Office365-Filtering-Correlation-Id: 1bb2fe7f-7cf8-4fb4-f4fd-08deafd5e462
+X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
+X-LD-Processed: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635,ExtAddr
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|366016|376014|19092799006|52116014|38350700014|11063799003|56012099003|18002099003;
+X-Microsoft-Antispam-Message-Info: SujI3Fg2acp/gnbkwe49q3zBd7/Xpls7sU8MeWPfMlwF9z+VNFkdBnbP3PzLCvfV4Zdn58WNyaQlMEclcGurHNrZZ3IJkFHMImGihq8sGJd+7ieYN0bRPKlN/YFiypjxj+TWx8gpjPz44Lsa9xULrWQFG3eVWmE2KZd5zLcWRoX9SZmbWWeAcVlIN1Akv3dYeMloOB3mj4qjUASKDVxGqTvC5ubLqZ8YZRyhDuclSgHNmsEF20ns10viy4uFgGRXwxdj14FPxszqHkf0/6IUyiDWC4A3qMwyFAuX+cirIV0pXPzqKdTEaBDsWabgmkY8XB2im1X6ziJSZzefY58XLYM4J4/iPVCJmZdhDaBRZP6B8sxYgiBmAycoEE0CnsusgWEhNGKUHLX32dYrshSUqUgu8mdm5rKYKXuwyO8JWdk/oawVue3DcUyzflhLOkN0sfVR1t1zi/kTboI14g274sM8X4laSQj7egLu2Yyj5xHq33cCsVdh+vgEAkH2FTOw+f+kIVZaWsJS0qVDrTrEPtE5Tpl5yLIDg4OsFpIw6I5JtXcDAaoTqA/ld/ZGxuTDqBeqjIU93qGF+mFofGSRB9NdE5Z5z4EfV1iNeCzyuFjsyuxl+VMzzAIAc9chZSgHneWk+aZCP8ELchyIbvevuvVJwrlzCvv9pHunKb2STfER5uOWRfP3vWLNnKivXBp3R0wiepsFXBDgxl2ws4YsmVUnRdOb/hqbwvYiNINSu2UD5I9HM3dBweZ+YDpMS2Z4
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PAXPR04MB9644.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(366016)(376014)(19092799006)(52116014)(38350700014)(11063799003)(56012099003)(18002099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?JahFMwdL35tcXe48AayjcIXuwMxrOqfMkSCoyqvHqzJVsOKy/EJM6jr3mSFA?=
+ =?us-ascii?Q?kjLggYLcc2FpbhgAY6r677UR0JeJrKAE2n1MhRS0jOSISRtzPs2XdBBLBhxv?=
+ =?us-ascii?Q?jLtyW+wteH7xn7u9IgczxQrGnHd5x3v/8QsKRpsC9ascSswxg8n78Xi/dsok?=
+ =?us-ascii?Q?TSZ0HWmdF2AQBbghH056oeR1BR5iufEXJgiQiPrOGbQPKgmoKLO0kFaeYzeK?=
+ =?us-ascii?Q?/CPD3DLIeHLHrERD822eZJT7deRoNhTb9dEgXsJztwZ/8wBgYASjKY2SyQJp?=
+ =?us-ascii?Q?2dm9rfCLQOl82ov893gx7xVxYTmjKuFR0SMaSAqzMIfzqLZb2v7gbC0hD4Rf?=
+ =?us-ascii?Q?MWcAxcbdyyl5+vrsyQyxq0IjKxQpoctUmaYulKyw5/I8SJ5zSYpNoyMdUo7E?=
+ =?us-ascii?Q?ekFOhs+DhROTy8atSSmP9TWKiRpU9f06dPeYMPbpATcZxvmXwggARpuWPb++?=
+ =?us-ascii?Q?V7JoeAy/OIQPAlIWhwaGl6todL/HeXZALV/MlbHYIoSR5ouW8WWJUkyCf8Mc?=
+ =?us-ascii?Q?3+bXq/4LO+B3GUzhFK++mhJ3qctotKxSyB2+vqWc7HXePrHuhm3twGgdLXYA?=
+ =?us-ascii?Q?KP91U4qBaeg36rBnm8acVr5qGPibtQlBIOSTm7UEfIXKtIrjBzKgg/KrHG0U?=
+ =?us-ascii?Q?GZtBPaPlqEGFxqZD7OnBr79NV8o1eC2HQ4GG/oycqV7msvJamMTrqz5IMxOI?=
+ =?us-ascii?Q?bQaMbyoPLmOByTdpXlDqu5i+oI38NKcEydZ3DPvZrs6t8xu80AYKYsY5SN7T?=
+ =?us-ascii?Q?r0/fEpfxwtlNCRpelDArXiiMm76z9l6PSFs4ue+PGmRSFy2+ZyrAPKmc4prS?=
+ =?us-ascii?Q?GpMmio36FLruh9YLPfvzw6pPXPOaxKtFKF1pdKzRvL3rVwRaFMtigVF4xeCN?=
+ =?us-ascii?Q?Sdoe4imTQbL0POkyWso9w3n79iADPHN7mvxG3OihyBFbBN4/fhd+bKpKP6pQ?=
+ =?us-ascii?Q?mKBLZ9ZL8ykajtXo60U0i7zPTMWQ9RKwYOs5uwlsvraJtLsyz+I9JV065GyO?=
+ =?us-ascii?Q?4Y/T2r5pRfhey43DIGQbkmbblukLB3DNm19w9m+WqL3ecGQAckfoJsjt/3Iw?=
+ =?us-ascii?Q?mmts9Q5zgNIvxl8a83/yijsaaCBfWsOvTECcH3gXAQfA/8xmVCv+MlnbUGrg?=
+ =?us-ascii?Q?UAcFeL0zvvclIlY2xb2BkRCfzgZiGG9Aw1r1iN8RBfI7Hp+/97DgzNfgewv6?=
+ =?us-ascii?Q?1/U/HGiNxqw838Z9RZXzRKI1MGnJFXXDE8SdMLqIX1TEzlmNRR/UMsl9isFg?=
+ =?us-ascii?Q?2oYqiBgO7CNNkPksLe7QK+db9K5DsP57xqKVUX/zlbjm/rHsTw2/WvdhDJXJ?=
+ =?us-ascii?Q?PaNsbOecfotwjq2CNXq/ysLhTzB5AZNUKDa0EIoVz6ROKdskbSunA4DYyk43?=
+ =?us-ascii?Q?VhAVxrU0/IcXG0tF6XedcDXO32NvXdjOkGXFSbR2xLKBlWWGsMc0Pwcax88r?=
+ =?us-ascii?Q?WcfwhcG81lST71s+hbUrR0iaoe2HIkJH3cs5b3qrpngIyxnJYlTs/DVUSaS+?=
+ =?us-ascii?Q?Tl0KeA+/n4hXAyojjPukb74nWa6oCUGAZR/OxaFncnz1+14CLz9A3mzDr7xf?=
+ =?us-ascii?Q?SMN6tN3AeK7kZXd9NWv5rgdlIm0AR9YtrCHluAI1/9Np9bQT3Bwu71mKI77Y?=
+ =?us-ascii?Q?jbYcU/ZQgh1DNsxNz2gOssX0FEmkKeHbDAF0EIcnOIkaPw8XIoGXzIWG6otk?=
+ =?us-ascii?Q?B6G4SXHt4f+5kch5/NMS+2JWQVD3Qev+wL/WBLZuKsvnKF4cg3Bbfi/bvwyn?=
+ =?us-ascii?Q?criUgMJwOg=3D=3D?=
+X-OriginatorOrg: oss.nxp.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1bb2fe7f-7cf8-4fb4-f4fd-08deafd5e462
+X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB9644.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 May 2026 03:23:53.0316 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: mWg6I/t6ce8CmlBMd/YkozYf2XqHEv9f8aiHpz2XKMXX9Y4Fu2GWQJqYTmcQyyLe+SNg1O7TWl/L7Y/MG5YC4g==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU7PR04MB11236
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,143 +142,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 2026-04-28 at 08:10 -0600, Simon Glass wrote:
-> Hi Weijie,
-> 
-> On 2026-04-27T07:09:11, Weijie Gao <weijie.gao@mediatek.com> wrote:
-> > cmd: ubi: reorganize command messages
-> > 
-> > This patch moves normal subcommand messages into the main command
-> > function.
-> > This will allow current and potential api functions being called
-> > with clean
-> > output.
-> > 
-> > A new function ubi_require_volume() is added for finding and
-> > printing error
-> > message if volume not found. The original ubi_find_volume() will be
-> > silent
-> > for being an api function.
-> > 
-> > Signed-off-by: Weijie Gao <weijie.gao@mediatek.com>
-> > 
-> > cmd/ubi.c | 109 +++++++++++++++++++++++++++++++++++++++++++++----
-> > -------------
-> >  1 file changed, 79 insertions(+), 30 deletions(-)
-> > diff --git a/cmd/ubi.c b/cmd/ubi.c
-> > @@ -806,31 +805,65 @@ static int do_ubi(struct cmd_tbl *cmdtp, int
-> > flag, int argc, char *const argv[])
-> >       if (strncmp(argv[1], 'remove', 6) == 0) {
-> >               /* E.g., remove volume */
-> > -             if (argc == 3)
-> > -                     return ubi_remove_vol(argv[2]);
-> > +             if (argc == 3) {
-> > +                     int vol_id;
-> > +
-> > +                     vol = ubi_find_volume(argv[2]);
-> > +                     if (!vol)
-> > +                             return 0;
-> > +
-> > +                     vol_id = vol->vol_id;
-> > +
-> > +                     ret = ubi_remove_vol(argv[2]);
-> 
-> This seems wrong - previously 'ubi remove nonexistent' printed an
-> error via ubi_find_volume() and returned ENODEV; now it silently
-> returns 0. I think you should use ubi_require_volume() here.
+From: Clark Wang <xiaoning.wang@nxp.com>
 
-I'll fix this.
+The iMX and LS platforms use different bits in the same register to
+set duplex, but their logics are opposite.
+The current settings will result in unexpected configurations in
+RGMII mode.
 
-> 
-> > diff --git a/cmd/ubi.c b/cmd/ubi.c
-> > @@ -806,31 +805,65 @@ static int do_ubi(struct cmd_tbl *cmdtp, int
-> > flag, int argc, char *const argv[])
-> >               if (argc == 3) {
-> > +                     if (!size) {
-> > +                             vol = ubi_require_volume(argv[3]);
-> > +                             if (!vol)
-> > +                                     return 1;
-> > +
-> > +                             printf("No size specified -> Using
-> > max size (%lld)\n",
-> > +                                    vol->used_bytes);
-> > +                             size = vol->used_bytes;
-> > +                     }
-> > +
-> > +                     ret = ubi_volume_read(argv[3], (void *)addr,
-> > 0, size);
-> 
-> When size is 0 the volume is now looked up twice,. i.e. here and
-> again
-> inside ubi_volume_read() - can you drop the fallback in
-> ubi_volume_read() or move the 'No size specified' print back there
-> guarded by a verbose flag.
+Fixes: e6df2f5e22c6 ("net: fsl_enetc: Update enetc driver to support i.MX95")
+Signed-off-by: Clark Wang <xiaoning.wang@nxp.com>
+Signed-off-by: Alice Guo <alice.guo@nxp.com>
+Reviewed-by: Tim Harvey <tharvey@gateworks.com>
+---
+ drivers/net/fsl_enetc.c | 18 +++++++++---------
+ 1 file changed, 9 insertions(+), 9 deletions(-)
 
-I think we can do some modifications to ubi_volume_read:
-
-static int __ubi_volume_read(struct ubi_volume *vol, ...) { ... }
-
-int ubi_volume_read(const char *volume, ...)
-{
-	struct ubi_volume *vol = ubi_require_volume(volume);
-	...
-	return __ubi_volume_read(vol, ...);
-}
-
-And in do_ubi() we always call ubi_require_volume() to get vol and call
-__ubi_volume_read with vol.
-
-> 
-> > diff --git a/cmd/ubi.c b/cmd/ubi.c
-> > @@ -806,31 +805,65 @@ static int do_ubi(struct cmd_tbl *cmdtp, int
-> > flag, int argc, char *const argv[])
-> > -     if (IS_ENABLED(CONFIG_CMD_UBI_RENAME) && !strncmp(argv[1],
-> > 'rename', 6))
-> > -             return ubi_rename_vol(argv[2], argv[3]);
-> > +     if (IS_ENABLED(CONFIG_CMD_UBI_RENAME) && !strncmp(argv[1],
-> > 'rename', 6)) {
-> > +             ret = ubi_rename_vol(argv[2], argv[3]);
-> > +             if (!ret) {
-> > +                     printf("UBI volume %s renamed to %s\n",
-> > argv[2],
-> > +                            argv[3]);
-> > +             }
-> > +
-> > +             return ret;
-> > +     }
-> 
-> While you are here, please add an 'argc == 4' check to fix a
-> pre-existing bug - i.e. argv[2]/argv[3] are dereferenced
-> unconditionally.
-
-OK.
-
-> 
-> > diff --git a/cmd/ubi.c b/cmd/ubi.c
-> > @@ -806,31 +805,65 @@ static int do_ubi(struct cmd_tbl *cmdtp, int
-> > flag, int argc, char *const argv[])
-> > +                     else if (ret == -EEXIST)
-> > +                             printf("Volume %s already exists!\n",
-> > argv[2]);
-> > +
-> > +                     return ret;
-> 
-> Just to check: ubi_create_volume() returns -EEXIST, but
-> verify_mkvol_req() returns positive errnos, so name-too-long or
-> bad-alignment failures get no friendly message here. What do you
-> think
-> about handling the verify_mkvol_req() errors here too, or making that
-> helper silent like ubi_find_volume()?
-
-I found that the ubi layer will print error message in this case:
-ubi0 error: ubi_create_volume: volume "test" exists (ID 2)
-ubi0 error: ubi_create_volume: cannot create volume 11, error -17
-
-So this modification is unnecessary and I'll remove this in next patch.
-
-All error messages will be kept in verify_mkvol_req().
-
-> 
-> Regards,
-> Simon
+diff --git a/drivers/net/fsl_enetc.c b/drivers/net/fsl_enetc.c
+index 206f1a381bb..b07193e4e83 100644
+--- a/drivers/net/fsl_enetc.c
++++ b/drivers/net/fsl_enetc.c
+@@ -18,6 +18,7 @@
+ #include <asm/io.h>
+ #include <pci.h>
+ #include <miiphy.h>
++#include <linux/bitfield.h>
+ #include <linux/bug.h>
+ #include <linux/delay.h>
+ #include <linux/build_bug.h>
+@@ -396,7 +397,7 @@ static int enetc_init_sgmii(struct udevice *dev)
+ /* set up MAC for RGMII */
+ static void enetc_init_rgmii(struct udevice *dev, struct phy_device *phydev)
+ {
+-	u32 old_val, val, dpx = 0;
++	u32 old_val, val = 0;
+ 
+ 	old_val = val = enetc_read_mac_port(dev, ENETC_PM_IF_MODE);
+ 
+@@ -416,15 +417,14 @@ static void enetc_init_rgmii(struct udevice *dev, struct phy_device *phydev)
+ 		val |= ENETC_PM_IFM_SSP_10;
+ 	}
+ 
+-	if (enetc_is_imx95(dev))
+-		dpx = ENETC_PM_IFM_FULL_DPX_IMX;
++	if  (enetc_is_imx95(dev))
++		val = u32_replace_bits(val,
++				       phydev->duplex == DUPLEX_FULL ? 0 : 1,
++				       ENETC_PM_IFM_FULL_DPX_IMX);
+ 	else if (enetc_is_ls1028a(dev))
+-		dpx = ENETC_PM_IFM_FULL_DPX_LS;
+-
+-	if (phydev->duplex == DUPLEX_FULL)
+-		val |= dpx;
+-	else
+-		val &= ~dpx;
++		val = u32_replace_bits(val,
++				       phydev->duplex == DUPLEX_FULL ? 1 : 0,
++				       ENETC_PM_IFM_FULL_DPX_LS);
+ 
+ 	if (val == old_val)
+ 		return;
+-- 
+2.34.1
 
