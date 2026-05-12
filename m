@@ -4,104 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25C3DCD4851
-	for <u-boot@archiver.kernel.org>; Tue, 12 May 2026 13:18:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8186ECD4851
+	for <u-boot@archiver.kernel.org>; Tue, 12 May 2026 13:21:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 70FD48341A;
-	Tue, 12 May 2026 15:18:56 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=flipper.net
+	by phobos.denx.de (Postfix) with ESMTP id 1A15B8341A;
+	Tue, 12 May 2026 15:21:10 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=flipper.net header.i=@flipper.net header.b="4iGDtYfb";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Qy7teBko";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 40891838BB; Tue, 12 May 2026 15:18:55 +0200 (CEST)
-Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
- [IPv6:2a00:1450:4864:20::636])
+ id 165788394E; Tue, 12 May 2026 15:21:08 +0200 (CEST)
+Received: from mail-oo1-xc42.google.com (mail-oo1-xc42.google.com
+ [IPv6:2607:f8b0:4864:20::c42])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1DFB0803C6
- for <u-boot@lists.denx.de>; Tue, 12 May 2026 15:18:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=flipper.net
+ by phobos.denx.de (Postfix) with ESMTPS id B623D803C6
+ for <u-boot@lists.denx.de>; Tue, 12 May 2026 15:21:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=alchark@flipper.net
-Received: by mail-ej1-x636.google.com with SMTP id
- a640c23a62f3a-bcc9fdc959cso439269466b.2
- for <u-boot@lists.denx.de>; Tue, 12 May 2026 06:18:53 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1778591932; cv=none;
- d=google.com; s=arc-20240605;
- b=bim/5+7GCkVQ02wLKphrCXYnlsuBhrms0QwYqlWi4rTeXedmkhk0HpCB/xrLSgMFc8
- tsnJTY8hmivWw9Rld7tGolGYVZh/BpmFfTIOowjgGRPjCC1knbyKD7aGaJpwZscwYESs
- UhxM62dhtd0gFW1EWtUk0jNp/hSCvNp5fdRvWrPWMorFy5txZYZ2uND76p2SX+ZfmFNk
- nYCouQzrbeW+bX5feYJRnDxO70KwJioY4ijqiBC3Xkd9qV/768gAuhpqMKLqw+PUmOrU
- lrZVibpytNAILqpW9lqbdQ672A/ZaGRvpki/nHWQ15EWL/r10anRwbX648f3zO3H8f0n
- sQjA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=s3jONyPBNYTaei0NKuJvEiN4I28T/1gszQgWyaZhaQs=;
- fh=kECiEVbGN5ZNL5uU9e+czpkcCbea+NVKkKY/05tCq/Y=;
- b=RBC/qYrhETmC1rAh3AThfrwey872mJVNYAy9dlDhVcgnuq7QuPU7uqtXNqp/7soATx
- xk6K2z2gRdseGp4u7rKSNLHOIzaUdXEKfAPiRfZHQcCRYchGYybbe383VriqjZTB+3aZ
- FizR8uhmkKnwpusOgPSRyaeO2lDCHVHzNzrVf2ky6cuUd49iAQjQgWIBEFjzBIiMl3Co
- Te1aIrPXqDZsZQTAfuJPB30U10Qru6ROr63C4w0NRE/e0A0wURvGTiz5bdLG/Xny+1hx
- +3X6uf9mrCJ9cXm8GFu8eoOaSoARrmE/UYk+0cXb6tGoOJsd/4+/dqkJ2FyfiQ2QF++D
- HDhw==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oo1-xc42.google.com with SMTP id
+ 006d021491bc7-694891f8f62so2916474eaf.2
+ for <u-boot@lists.denx.de>; Tue, 12 May 2026 06:21:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=flipper.net; s=google; t=1778591932; x=1779196732; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=s3jONyPBNYTaei0NKuJvEiN4I28T/1gszQgWyaZhaQs=;
- b=4iGDtYfbniEzjLIPt2K6o6IgV+yYXD+JeN7HyR4ZoFnR/ZSGcxU/wf1QS1N5ON/Hbf
- u06hV50bgc4SsfHQ5wL+MntvyTG1GDf4GDP5UrAFHUbp1/bNvok7REKmm17x8lgGn8x1
- OdB5R1UhGSUPkxVwE/lhtcCVeSC9l6ltL8sMgvYz8nxrg4Ofu/HN8SLtwuvenUrQhjYp
- JZvLGbp/kr312CCfnZviYNbIijm1l972GQpJmPYoxZQiEc/xLpKtWK+P8OXVIEgndTLD
- OXybmWzJ0wMlJr++psoKMEKbYtj0luhPP8heO0bNJOSIeL8VkdAGOpFbVPQ9xKhmC9lC
- 5Lvg==
+ d=konsulko.com; s=google; t=1778592064; x=1779196864; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=few1BVagtJSWWi7Tl/AFI8RJqcFuRGGfLsuTlISD2rc=;
+ b=Qy7teBkot/0IlTszLj0UrrzLP1uGBmDXdbUeKcTj91kIYTudeLRSIQFRgjuxTUoFYI
+ Sd7tm3zf2RFWJMD+d0L8TAXbMqVfFaiZ7GXWRRV5w2hBRACVuPauVV0ErxyqBY6gnCjS
+ KMwlIpOAuzJtNZAQNYa4cJpzv1OPGQnHaPI90=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778591932; x=1779196732;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=s3jONyPBNYTaei0NKuJvEiN4I28T/1gszQgWyaZhaQs=;
- b=DG0OV+Lx3AY754j6Nzdb3p5Uhfo6XO+ctNOg7gv9J8I/PGKnzr5lObSuS1cgfctbSb
- KAhMNMtR55GG50wi7ek0KaIuFkyxsGkTwxSMJwycM57znyPFJxL/hmhxcwQNCtSzuoHa
- qVLD+tJeoN97ZmQhLEHjMt/zToU4MMR1Pzxek0V/xOiXWb4D1QDFsaowMWeWj42/CO1G
- 0vjY1Ulf03nIQ019jqZxy910oesDsGUlI4D+dAGbGwoa3gYuV9uSFST1DT9NJclfBj9z
- t2fkEq1333VCWNbAYGDy8m7DcxdPZ80AGDx8A8WoOrO6jDlALsFZ1AdQmRgt/lOcUBp6
- 7PhQ==
-X-Gm-Message-State: AOJu0Yy+LYaKB44erZfJqScDVJ6vx4qHUvE/vuRmyRNXKAbyH2vlF+Sr
- oxkH9d1Y56IsSJth/pD3D/i7YN1WATY95/jfXD5jzkXGIdgq+lV/lU636Cjk0+ysIg6H4LndlpS
- p+27T5HwgXzmU0HgFUnVW24j4DnCsR1gUmp87TKiddA==
-X-Gm-Gg: Acq92OFaSZW/6BS9k4GQBvrO2aTmJbjVqLL2aTrkLc0Bx3SoLu2ukSGL7IkN6a0f67H
- iuiozmXnc+SuUcIb7dcFnRt2YdXpDb82AAgKLAPyYVYTUGbS5GS+ThIPwzosdbr64xioM3LINYB
- HO31s5ZEb7tkPE14fkY6MWjY1h+fOmOCPsIf3wUNIDPSByric6ISpYJmONOioGX2eHsfq+3P9YL
- 1ySRklBUk++A89z7REevnMFcQ4S0zbz5jaMd3NtFgSTaP8gu6qzY+2f5avrDSPs8fxNYW4KzaUf
- 0Mo7Iqba4fNJnoxIXzxeUW9MG4sXiMr2txf2i6aB
-X-Received: by 2002:a17:906:9c82:b0:ba4:f501:cb8b with SMTP id
- a640c23a62f3a-bd28e60b0e1mr194173266b.16.1778591932435; Tue, 12 May 2026
- 06:18:52 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1778592064; x=1779196864;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:to:from:x-gm-gg:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=few1BVagtJSWWi7Tl/AFI8RJqcFuRGGfLsuTlISD2rc=;
+ b=qAuQfohhOJza1bscn40gHUDKmLBfkFRQ/RHsQye64nZRD2EloRb92YwX+Kz8EL3vKY
+ Zj4/qGy79eHzPk+aYluxmSB9++K0v9hsFRlMlmy/gW95S3KhLKkToE+moH2cG0ek/suq
+ tKl6smM/GzC0NLO0SLn0PWu17R4XpsnWass1vz0YKBtUrbl3Ubqq3ZTONwts/OURpwTm
+ ts7KB2tQqacXbf9IVnHOJLW6zhBvon8SSr8Zk3Voy3B1XKme+MtGVFA2cqrbr27eVNpw
+ S7qQxgnls8QfPhAP9Ey7xRWYz1k7XdLlV/QSx4uIGJa9+hukLORQYpELXMUgN3jSorSW
+ EZ0A==
+X-Gm-Message-State: AOJu0YwEMWzSxImyhB59bK9DjP1zwhDncv2EwONwDhqRHqB7v11w3hFA
+ SvxNEj8+TAAiCXYDtoFcoSnCFVB+HQqO+uYja4LQysMX9cj7CdsBjPlVbPS2jxpOPqHize288FV
+ jp8+QglfNl8q99Nc=
+X-Gm-Gg: Acq92OEXP0zsYg+6L8Tu/3gbm3beW5rejzoGMxSJ+P48xgQUmOy9GCBp/ZJjwUcEpcF
+ rrnmAigGP/NSDI8V3BfrbsHt7WJf8XqgEGs3ezh+BzrZXT5R4i54K9YGrKTEzssWFQj5MZ+xmo0
+ gqMpDWICzH2FkPeX81ezVpWE6441xMrkYdGxY/cUWfdq7SXPk9CCW4wwjpehgugx/3MydDqIJth
+ MQU4Hv9ojKS2XpCBgwqPGH9R788u40u3OPWfP2AiY/SZ4RvvSK1o+i9lMDqQT421xsLfWvXuFMu
+ OW+HUk92uEs+exmqh0nTcSTRaG1SNoV4UA2IJ+Yu616lK16SJLb0ukRpzOct+vVnEQ1wliMZ5oz
+ +NtiWPQfg9EnXG1qFjkmstpDnX7E7mKQu7S7Ut9vhChPXf1gpLaz7I4njM++Rb1WnxKKivfwETH
+ Pm1oyv64BXRAr1cZ+H4dm06s4iYqDPHh5B2dHdtY/EzJgTTMRiBQC6DfXAGphS8LBNTqXDbSdrt
+ QDUTWYijUu0qGASZp2w4VkJhAFc8Byux5+cbf9UtRe8bpCKe3CKda0DEt/o
+X-Received: by 2002:a05:6820:339b:10b0:69b:3a3b:de68 with SMTP id
+ 006d021491bc7-69b3a3bea75mr4876081eaf.23.1778592064339; 
+ Tue, 12 May 2026 06:21:04 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-189-203-106-235.totalplay.net.
+ [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-69b25e0d124sm7111667eaf.12.2026.05.12.06.21.03
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 12 May 2026 06:21:03 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: U-Boot Mailing List <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>
+In-Reply-To: <CAFLszThRPTPUs7H-2Cy2v2hw78uLGHrG2r9TFWZFdBkomUtGMg@mail.gmail.com>
+References: <CAFLszThRPTPUs7H-2Cy2v2hw78uLGHrG2r9TFWZFdBkomUtGMg@mail.gmail.com>
+Subject: Re: Please pull u-boot-dm
+Message-Id: <177859206359.3198063.6788590545010828759.b4-ty@konsulko.com>
+Date: Tue, 12 May 2026 07:21:03 -0600
 MIME-Version: 1.0
-References: <20260512-sl6341-v1-1-2819ac19e050@flipper.net>
- <8b38020c-4d92-4d46-9c47-eb70dda757a7@mailbox.org>
-In-Reply-To: <8b38020c-4d92-4d46-9c47-eb70dda757a7@mailbox.org>
-From: Alexey Charkov <alchark@flipper.net>
-Date: Tue, 12 May 2026 17:18:42 +0400
-X-Gm-Features: AVHnY4IaPxwTmcUkrR70LygUCFjP1m-wIZUNXP0AdEUcwHFPS7CizDIgMzk-8oE
-Message-ID: <CAKTNdwEdgqmDOqqW5v1xmrixDKSvnPe8aDUiDbYQyeAoSKV_cQ@mail.gmail.com>
-Subject: Re: [PATCH] usb: onboard-hub: Add support for CoreChips SL6341
-To: Marek Vasut <marek.vasut@mailbox.org>
-Cc: u-boot@lists.denx.de, Patrick Delaunay <patrick.delaunay@st.com>, 
- Patrice CHOTARD <patrice.chotard@st.com>, Tom Rini <trini@konsulko.com>, 
- Lukasz Czechowski <lukasz.czechowski@thaumatec.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, 
- Michal Simek <michal.simek@amd.com>, Padmarao Begari <padmarao.begari@amd.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -118,70 +95,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, May 12, 2026 at 5:12=E2=80=AFPM Marek Vasut <marek.vasut@mailbox.or=
-g> wrote:
->
-> On 5/12/26 11:41 AM, Alexey Charkov wrote:
-> > CoreChips SL6341 is a 4-port USB 2.0 and 3.0 hub controller. It always
-> > requires external 1v1
->
-> 1V1 (V in caps), fix globally.
+On Mon, 11 May 2026 14:15:26 -0600, Simon Glass wrote:
 
-Ack
+> https://source.denx.de/u-boot/custodians/u-boot-dm/-/pipelines/30065
+> 
+> 
+> The following changes since commit 22a285380e35a31d0a882af66278bc1edc1b917e:
+> 
+>   Merge tag 'u-boot-at91-fixes-2026.07-a' of
+> https://source.denx.de/u-boot/custodians/u-boot-at91 (2026-05-09
+> 07:31:55 -0600)
+> 
+> [...]
 
-> > power and can optionally use external 3v3 power
-> > (or alternatively it has a 5v->3v3 LDO built in to derive 3v3 power fro=
-m
-> > VBUS). It also exposes a reset pin.
-> >
-> > Device tree bindings are queued up for upstream release with Linux 7.1
-> >
-> > Link: https://github.com/torvalds/linux/blob/master/Documentation/devic=
-etree/bindings/usb/corechips%2Csl6341.yaml
-> > Signed-off-by: Alexey Charkov <alchark@flipper.net>
-> > ---
-> >   common/usb_onboard_hub.c | 12 ++++++++++++
-> >   1 file changed, 12 insertions(+)
-> >
-> > diff --git a/common/usb_onboard_hub.c b/common/usb_onboard_hub.c
-> > index 6fc34489a98f..d15d7bbff87d 100644
-> > --- a/common/usb_onboard_hub.c
-> > +++ b/common/usb_onboard_hub.c
-> > @@ -262,6 +262,12 @@ static int usb_onboard_hub_remove(struct udevice *=
-dev)
-> >       return ret;
-> >   }
-> >
-> > +static const struct onboard_hub_data corechips_sl6341_data =3D {
-> > +     .reset_us =3D 10000,
-> > +     .num_supplies =3D 2,
-> > +     .supply_names =3D { "vdd1v1-supply", "vdd3v3-supply" },
->
-> Is there a YAML binding document patch which describes these supplies
-> already , maybe a patch posted to devicetree@ ?
+Merged into u-boot/master, thanks!
 
-Yes, the link is in the commit message :) Merged for 7.1 as commit
-bfcb86e58f3a ("dt-bindings: usb: Add Corechips SL6341 USB2.0/3.0 hub
-controller")
+-- 
+Tom
 
-> > +};
-> > +
-> >   static const struct onboard_hub_data usb2514_data =3D {
-> >       .power_on_delay_us =3D 500,
-> >       .reset_us =3D 1,
-> > @@ -299,6 +305,12 @@ static const struct udevice_id usb_onboard_hub_ids=
-[] =3D {
-> >       }, {
-> >               .compatible =3D "usb4b4,6506",    /* Cypress HX3 USB 2.0 =
-*/
-> >               .data =3D (ulong)&usbhx3_data,
-> > +     }, {
-> > +             .compatible =3D "usb3431,6241",   /* Corechips SL6341 USB=
- 2.0 */
-> Keep the list sorted, 3 goes before 4 .
 
-Alright. My thinking was that 0x04b4 goes before 0x3431. Will move further =
-up.
-
-Best regards,
-Alexey
