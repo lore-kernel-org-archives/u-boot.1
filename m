@@ -4,96 +4,117 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1851BCD4851
-	for <u-boot@archiver.kernel.org>; Tue, 12 May 2026 14:56:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A134ECD4F24
+	for <u-boot@archiver.kernel.org>; Tue, 12 May 2026 15:12:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7DDAB838BB;
-	Tue, 12 May 2026 16:56:04 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id DDF31838BB;
+	Tue, 12 May 2026 17:12:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=suse.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20251104.gappssmtp.com header.i=@baylibre-com.20251104.gappssmtp.com header.b="jiQ3yCTU";
+	dkim=pass (1024-bit key; unprotected) header.d=suse.de header.i=@suse.de header.b="JwMUP5QV";
+	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="0g9vm3CZ";
+	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="JwMUP5QV";
+	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="0g9vm3CZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F2DAD83CD3; Tue, 12 May 2026 16:56:02 +0200 (CEST)
-Received: from mail-oi1-x22c.google.com (mail-oi1-x22c.google.com
- [IPv6:2607:f8b0:4864:20::22c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id DCEBE83C2B; Tue, 12 May 2026 17:12:11 +0200 (CEST)
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.223.130])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 37F23836AC
- for <u-boot@lists.denx.de>; Tue, 12 May 2026 16:56:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 95146836AC
+ for <u-boot@lists.denx.de>; Tue, 12 May 2026 17:12:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dlechner@baylibre.com
-Received: by mail-oi1-x22c.google.com with SMTP id
- 5614622812f47-47bdee5bfc4so3864219b6e.1
- for <u-boot@lists.denx.de>; Tue, 12 May 2026 07:56:00 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20251104.gappssmtp.com; s=20251104; t=1778597759; x=1779202559;
- darn=lists.denx.de; 
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=VXyNLbeRFhqrb8ayEQuTXstvky5Yiyh5MOAreDTF6W4=;
- b=jiQ3yCTU/0g25q3a53vOtDb5c9snCs6ihcfJTgQUWM5p8861Yc0vz4O9UtoL70HM0C
- 6VvWdaOPQNNInNkjMszmjBO2TzlT6mhNNV2Hy1cCMc6CPRAinQHvejTVgmxZ/Z5OSZ3w
- cR3Cl0RQeqq9CTf9aRF+MVaKKKXCwsgLO+OiwE0ja56edzyiI1u0JBVKufvOHzS1gwxn
- 8SU7BKczXCFmZT2s6IpoEVERoNit81u/p/1XXS7XjK/crTzSgR17i16AWGC1OJpx2Bxn
- QGHWeVMBCunA33csBzKdXY9sUjQ3u2g7XBJzBCv6d0P5zCjZWf2aLUi0ow19aQtVfJq8
- 7Tqw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778597759; x=1779202559;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=VXyNLbeRFhqrb8ayEQuTXstvky5Yiyh5MOAreDTF6W4=;
- b=FOmKKlezOkDOD8zsib6xBaE5orKqhLZurpKXJRbGPikqmMlss0L/sxwIlvNvo4XIYK
- XoP2qqS0xRuawI/wxZq6JulFE6uIG/PIdpVtG2R43QoZQ2Ht9M3NDlk2hkbyHJ0ERBXZ
- 9A1MZvfeKqvuyODLDHvpf9GmTMx7f4SHd7PHpwis+6sNhC1iS4P+eLLXr9AbV1XqqU2M
- jH1YFhRSoAbcEORKoEgEG1063pOzTfzAkJnaopCBznouL1KR3op2CvF7w0OS1AnKlgIw
- jqIZkTJEALJzryskLJ7OH8kanqEkIIj4OwioG3DFVdT0l0HMJ/tNZEQH1B5Vlmr6Yqpy
- e7Vg==
-X-Forwarded-Encrypted: i=1;
- AFNElJ/jXMuOnWFi1Tqg+WJsu1WsVDlfrTxAetvq39/LSHCqwAZ5/WIDHdnowypw9jdKCHIrtu4OBTM=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx9jiktYp/fHkBrt8ZTdQLc9iw9j6QP6IHeGPpprhFG61oF/v2p
- wVrvU3VKztamJZ4EpOPbvEeDvzkrqPPrQsEGSLibO4ApD8p6xU72FGYUrhN0yY41JIs=
-X-Gm-Gg: Acq92OEaaMTXt9hPOla8rGyAzRHRX/N3T79SgsosoTfeWYX/bFu4LwtICkypqUCRNYD
- yCDsjXboT2/u2oSFDZ6eawrTpaKczy97GVz+HFB9htRtqCeQd/2apWr+ZksvBW3s57DSdAVOnAo
- KmiNoR6gBwqTRxhWM1kfTFncsxXroZDmpIsx3kzLXWXzTqWYGTeWoXsh2A+3ZxS3zZfj1sHo+D3
- PZDXgpnftsodsDo0OrZvO5hGbaXgTC/2Mha0O3QGso9e6zpPa88EeRzJ8zLx/uwptM3TykeplNK
- F+6r8VKJ0Psi5X+17WrzCRJVrRHJdu3ShIxO0YDV8TcAVHrAw3TXRxenZIeWViGKg44N0XygtFn
- YvtmCL59Xc6U9KkGkbur9fI56mU78HB/xh0I/9M6SlKFxHg+eOkOB1XETFQPk4z685t2MHJp/gQ
- nQCOjc29ClI45Zq93Rgs+MkK5+9LlB2fUsfefye5Yjlwu7jiOjNc73VxnLBZRO8jlWUjZ3EbiJr
- A==
-X-Received: by 2002:a54:438b:0:b0:479:dadd:5326 with SMTP id
- 5614622812f47-48293d1159emr1791279b6e.22.1778597758815; 
- Tue, 12 May 2026 07:55:58 -0700 (PDT)
-Received: from ?IPV6:2600:8803:e7e4:500:baa4:f7fb:528a:2457?
- ([2600:8803:e7e4:500:baa4:f7fb:528a:2457])
- by smtp.gmail.com with ESMTPSA id
- 5614622812f47-47c76936271sm22391006b6e.9.2026.05.12.07.55.58
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 12 May 2026 07:55:58 -0700 (PDT)
-Message-ID: <d6649879-a372-4be5-9b65-933896916ac8@baylibre.com>
-Date: Tue, 12 May 2026 09:55:57 -0500
+ dmarc=pass (p=none dis=none) header.from=suse.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=iivanov@suse.de
+Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
+ [IPv6:2a07:de40:b281:104:10:150:64:97])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 19EEF6C1DB;
+ Tue, 12 May 2026 15:12:05 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1778598725; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=LEFvl0YLsXFB/CfhLlFLB4OaER5Lg3kk0MoWnTSGofA=;
+ b=JwMUP5QVuXYTsDMpaLzxzLypVGJZI2ZXojekbR8Zi8y+KbbXxeoN37sTwhTIXyL+VC/SAM
+ QARnWy0SFZAsGTD2WU48CLDTEv2TwJEuhk5UdyK+KiJ9PXB9okFZiCiZYtBVF37zWAvHpr
+ NjMcYeMBbkGV9cCFMdFj4vCh4IEvQmU=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1778598725;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=LEFvl0YLsXFB/CfhLlFLB4OaER5Lg3kk0MoWnTSGofA=;
+ b=0g9vm3CZpKTpy5KUTmMN5s8h8c1TiGo2YKCGGVqIATnQOHTRrHvpZaMXIVYRNcQrjPQYTz
+ WVqi4LhrE66OP+DQ==
+Authentication-Results: smtp-out1.suse.de;
+ dkim=pass header.d=suse.de header.s=susede2_rsa header.b=JwMUP5QV;
+ dkim=pass header.d=suse.de header.s=susede2_ed25519 header.b=0g9vm3CZ
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1778598725; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=LEFvl0YLsXFB/CfhLlFLB4OaER5Lg3kk0MoWnTSGofA=;
+ b=JwMUP5QVuXYTsDMpaLzxzLypVGJZI2ZXojekbR8Zi8y+KbbXxeoN37sTwhTIXyL+VC/SAM
+ QARnWy0SFZAsGTD2WU48CLDTEv2TwJEuhk5UdyK+KiJ9PXB9okFZiCiZYtBVF37zWAvHpr
+ NjMcYeMBbkGV9cCFMdFj4vCh4IEvQmU=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1778598725;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=LEFvl0YLsXFB/CfhLlFLB4OaER5Lg3kk0MoWnTSGofA=;
+ b=0g9vm3CZpKTpy5KUTmMN5s8h8c1TiGo2YKCGGVqIATnQOHTRrHvpZaMXIVYRNcQrjPQYTz
+ WVqi4LhrE66OP+DQ==
+Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 019B7593A9;
+ Tue, 12 May 2026 15:12:04 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
+ by imap1.dmz-prg2.suse.org with ESMTPSA id REzsOURDA2oWQAAAD6G6ig
+ (envelope-from <iivanov@suse.de>); Tue, 12 May 2026 15:12:04 +0000
+Date: Tue, 12 May 2026 18:12:04 +0300
+From: "Ivan T . Ivanov" <iivanov@suse.de>
+To: Jan =?utf-8?B?xIxlcm3DoWs=?= <sairon@sairon.cz>
+Cc: u-boot@lists.denx.de, Thomas Fitzsimmons <fitzsim@fitzsim.org>, 
+ Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>, 
+ Tom Rini <trini@konsulko.com>, Matthias Brugger <mbrugger@suse.com>
+Subject: Re: [PATCH] mmc: bcmstb: Fix non-removable check in bcm2712 init
+Message-ID: <2czhyjwfqb7fnssvf2dwbaacez3r3x5w2tgvq3im47gz47o4fc@cjeetuhjau4l>
+References: <20260512122435.1118557-1-sairon@sairon.cz>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] net: lwip: introduce net_lwip_eth_stop() function
-To: Jerome Forissier <jerome.forissier@arm.com>, Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>, Julien Stephan <jstephan@baylibre.com>,
- u-boot@lists.denx.de, nd@arm.com
-References: <20260509-net-lwip-add-stop-function-v1-1-62d854bfa66a@baylibre.com>
- <CAFLszTg7tCbBu5pKivVq2q8DW4pZdGBny4+0PytE7QHXOdOHcg@mail.gmail.com>
- <c92efcca-0b81-4b67-a628-0ee93da6862c@baylibre.com>
- <CAFLszTj1y0=N2=PqW75q3-_3E88XLArDUPfVDOH9X_Zky6NQTA@mail.gmail.com>
- <15d24b12-a5c1-4d10-905c-c28d8c3fcb23@arm.com>
-Content-Language: en-US
-From: David Lechner <dlechner@baylibre.com>
-In-Reply-To: <15d24b12-a5c1-4d10-905c-c28d8c3fcb23@arm.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <20260512122435.1118557-1-sairon@sairon.cz>
+X-Rspamd-Action: no action
+X-Spamd-Result: default: False [-4.01 / 50.00]; BAYES_HAM(-3.00)[100.00%];
+ NEURAL_HAM_LONG(-1.00)[-1.000]; MID_RHS_NOT_FQDN(0.50)[];
+ R_DKIM_ALLOW(-0.20)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
+ NEURAL_HAM_SHORT(-0.20)[-1.000]; MIME_GOOD(-0.10)[text/plain];
+ MX_GOOD(-0.01)[]; FUZZY_RATELIMITED(0.00)[rspamd.com];
+ RCVD_VIA_SMTP_AUTH(0.00)[]; ARC_NA(0.00)[];
+ MIME_TRACE(0.00)[0:+]; MISSING_XM_UA(0.00)[];
+ TO_DN_SOME(0.00)[]; RCVD_TLS_ALL(0.00)[];
+ DNSWL_BLOCKED(0.00)[2a07:de40:b281:104:10:150:64:97:from];
+ SPAMHAUS_XBL(0.00)[2a07:de40:b281:104:10:150:64:97:from];
+ FROM_EQ_ENVFROM(0.00)[]; FROM_HAS_DN(0.00)[];
+ RCPT_COUNT_SEVEN(0.00)[7]; RCVD_COUNT_TWO(0.00)[2];
+ TO_MATCH_ENVRCPT_ALL(0.00)[];
+ DBL_BLOCKED_OPENRESOLVER(0.00)[suse.de:email,suse.de:dkim,suse.com:email,denx.de:email,nxp.com:email];
+ DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
+ DKIM_TRACE(0.00)[suse.de:+]
+X-Rspamd-Server: rspamd1.dmz-prg2.suse.org
+X-Rspamd-Queue-Id: 19EEF6C1DB
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -110,105 +131,78 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 5/12/26 9:36 AM, Jerome Forissier wrote:
+On 05-12 14:24, Jan Čermák wrote:
+> Date: Tue, 12 May 2026 14:24:35 +0200
+> From: Jan Čermák <sairon@sairon.cz>
+> To: u-boot@lists.denx.de
+> Cc: Thomas Fitzsimmons <fitzsim@fitzsim.org>, Peng Fan <peng.fan@nxp.com>,
+>   Jaehoon Chung <jh80.chung@samsung.com>, Tom Rini <trini@konsulko.com>,
+>   Matthias Brugger <mbrugger@suse.com>, "Ivan T . Ivanov"
+>  <iivanov@suse.de>,  Jan Čermák <sairon@sairon.cz>
+> Subject: [PATCH] mmc: bcmstb: Fix non-removable check in bcm2712 init
+> Message-ID: <20260512122435.1118557-1-sairon@sairon.cz>
 > 
+> sdhci_brcmstb_init_2712() reads host->mmc->host_caps to decide whether
+> to force card-detect for a non-removable eMMC, or to route the CD signal
+> for a removable SD card. At the time this function runs from
+> sdhci_bcmstb_probe(), however, host->mmc->host_caps is still zero, that
+> field is only populated later by the MMC uclass, after the driver's
+> probe returns. mmc_of_parse() has already filled plat->cfg.host_caps
+> from the device tree by this point, so check that field instead.
 > 
-> On 12/05/2026 13:41, Simon Glass wrote:
->> Hi David,
->>
->> On Mon, 11 May 2026 at 15:48, David Lechner <dlechner@baylibre.com> wrote:
->>>
->>> On 5/11/26 1:08 PM, Simon Glass wrote:
->>>> Hi David,
->>>>
->>>> On 2026-05-09T17:36:26, David Lechner <dlechner@baylibre.com> wrote:
->>>>> net: lwip: introduce net_lwip_eth_stop() function
->>>>>
->>>>> Add a introduce net_lwip_eth_stop() function and use that to stop the
->>>>> network interface after each command that uses the network.
->>>>>
->>>>> This makes the behavior the same as the legacy net code and avoids
->>>>> potential issues with the network interface being left in an active
->>>>> state after a command finishes.
->>>>>
->>>>> Signed-off-by: David Lechner <dlechner@baylibre.com>
->>>>>
->>>>> cmd/lwip/ping.c     | 10 ++++++++--
->>>>>  cmd/lwip/sntp.c     | 10 ++++++++--
->>>>>  include/net-lwip.h  |  1 +
->>>>>  net/lwip/dhcp.c     | 15 +++++++++++----
->>>>>  net/lwip/dns.c      |  6 +++++-
->>>>>  net/lwip/net-lwip.c |  6 +++++-
->>>>>  net/lwip/nfs.c      |  4 ++++
->>>>>  net/lwip/tftp.c     |  4 ++++
->>>>>  net/lwip/wget.c     | 34 ++++++++++++++++++++++------------
->>>>>  9 files changed, 68 insertions(+), 22 deletions(-)
->>>>
->>>>> diff --git a/net/lwip/wget.c b/net/lwip/wget.c
->>>>> @@ -302,6 +302,7 @@ int wget_do_request(ulong dst_addr, char *uri)
->>>>>       struct udevice *udev;
->>>>>       struct netif *netif;
->>>>>       struct wget_ctx ctx;
->>>>> +     int ret = CMD_RET_USAGE;
->>>>>       char *path;
->>>>>       bool is_https;
->>>>
->>>> Initialising ret to CMD_RET_USAGE changes error paths:
->>>>
->>>>    netif = net_lwip_new_netif(udev);
->>>>    if (!netif)
->>>>         goto out_stop;          /* ret is still CMD_RET_USAGE */
->>>>
->>>>    if (!tls_allocator.arg) {
->>>>         log_err(...);
->>>>         goto out_remove_netif;  /* ret is still CMD_RET_USAGE */
->>>>    }
->>>>
->>>> The fall-through after 'Certificate verification failed' also lands on
->>>> out_remove_netif with ret unchanged. These paths previously returned
->>>> -1; now they return CMD_RET_USAGE (1), so the command framework prints
->>>> usage for a network/TLS failure.
->>>
->>> The code I am looking at says:
->>>
->>> enum command_ret_t {
->>>         CMD_RET_SUCCESS,        /* 0 = Success */
->>>         CMD_RET_FAILURE,        /* 1 = Failure */
->>>         CMD_RET_USAGE = -1,     /* Failure, please report 'usage' error */
->>> };
->>>
->>> So I don't think these changed. CMD_RET_USAGE is -1.
->>>
->>> Happy to init it -1 though as you suggest if the name doesn't make
->>> sense here. That is might be why it was -1 before instead of using
->>> the macro anyway.
->>
->> Ah yes I missed that this is a pre-existing bug. We should return
->> usage only when parsing is wrong, not when something fails.
+> Without the fix, every BCM2712 SDHCI instance takes the else branch and
+> writes SDIO_CFG_SD_PIN_SEL = SDIO_CFG_SD_PIN_SEL_CARD (0x02), including
+> the non-removable eMMC on boards such as CM5 on Home Assistant Yellow.
+> The SDIO_CFG block lies outside the SDHCI core's reset scope, so this
+> value persists across SDHCI_RESET_ALL into the next stage. On the
+> BCM2712, having SD_PIN_SEL set to "SD" when the Linux kernel performs
+> its first set_power(MMC_POWER_UP) write racily prevents the SDHCI
+> POWER_ON bit from latching (see [1] for the whole backstory) - the
+> voltage bits stick but POWER_ON drops - which wedges the first CMD0 the
+> full 10 s software timeout. On Home Assistant Yellow this manifested as
+> a ~20 s eMMC probe delay on roughly one in two Linux boots when U-Boot
+> was the previous stage. Booting directly from the Pi firmware (no U-Boot
+> in between) left SD_PIN_SEL at its default and did not exhibit the race.
 > 
-> +1
+> Reading plat->cfg.host_caps lets init_2712 see the "non-removable"
+> property and take the correct branch, leaving SD_PIN_SEL untouched for
+> the eMMC.
+> 
+> [1] https://github.com/home-assistant/operating-system/pull/3700#issuecomment-4430229511
+> 
+> Fixes: 10127cdbab64 ("mmc: bcmstb: Add support for bcm2712 SD controller")
+> Signed-off-by: Jan Čermák <sairon@sairon.cz>
+
+
+Reviewed-by: Ivan T. Ivanov <iivanov@suse.de>
+
+Thank you!
+
+> ---
+>  drivers/mmc/bcmstb_sdhci.c | 6 +++---
+>  1 file changed, 3 insertions(+), 3 deletions(-)
+> 
+> diff --git a/drivers/mmc/bcmstb_sdhci.c b/drivers/mmc/bcmstb_sdhci.c
+> index 7bddbebb162..f27b84a6ee4 100644
+> --- a/drivers/mmc/bcmstb_sdhci.c
+> +++ b/drivers/mmc/bcmstb_sdhci.c
+> @@ -56,7 +56,7 @@ struct sdhci_brcmstb_dev_priv {
 >  
->> So what you have here is fine and actually makes the bug more obvious
->> in the code, which is good.
-> 
-> Yeah :)
+>  static int sdhci_brcmstb_init_2712(struct udevice *dev)
+>  {
+> -	struct sdhci_host *host = dev_get_priv(dev);
+> +	struct sdhci_bcmstb_plat *plat = dev_get_plat(dev);
+>  	void *cfg_regs;
+>  	u32 reg;
 >  
->> Reviewed-by: Simon Glass <sjg@chromium.org>
-> 
-> Reviewed-by: Jerome Forissier <jerome.forissier@arm.com>
-> 
-> Thanks,
-
-I have prepared a revision that splits this into two functions so
-the -1 is left untouched.
-
-If I am understanding correctly, it sounds like I should add another
-patch to make the return values of wget_do_request() consistent.
-
-The docs for this function says:
-
- * Return:	zero on success, negative if failed
-
-And there is one existing caller checking err < 0 (efi_bootmgr.c).
-So I plan to replace all `return CMD_RET_FAILURE` with `return -1`.
-Unless we should return errno codes?
+> @@ -65,8 +65,8 @@ static int sdhci_brcmstb_init_2712(struct udevice *dev)
+>  	if (!cfg_regs)
+>  		return -ENOENT;
+>  
+> -	if ((host->mmc->host_caps & MMC_CAP_NONREMOVABLE) ||
+> -	    (host->mmc->host_caps & MMC_CAP_NEEDS_POLL)) {
+> +	if ((plat->cfg.host_caps & MMC_CAP_NONREMOVABLE) ||
+> +	    (plat->cfg.host_caps & MMC_CAP_NEEDS_POLL)) {
+>  		/* Force presence */
+>  		reg = readl(cfg_regs + SDIO_CFG_CTRL);
+>  		reg &= ~SDIO_CFG_CTRL_SDCD_N_TEST_LEV;
