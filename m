@@ -4,119 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 591A1CD4F21
-	for <u-boot@archiver.kernel.org>; Tue, 12 May 2026 12:25:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1703ACD4851
+	for <u-boot@archiver.kernel.org>; Tue, 12 May 2026 12:25:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9C0A0838BB;
-	Tue, 12 May 2026 14:25:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id EC0D983C51;
+	Tue, 12 May 2026 14:25:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=sairon.cz
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="c4W43dKi";
+	dkim=pass (2048-bit key; secure) header.d=sairon.cz header.i=@sairon.cz header.b="QyEawGu/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D28E2838BB; Tue, 12 May 2026 14:25:08 +0200 (CEST)
-Received: from SN4PR2101CU001.outbound.protection.outlook.com
- (mail-southcentralusazlp170120001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c10d::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 39CBD83C51; Tue, 12 May 2026 14:25:11 +0200 (CEST)
+Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
+ [IPv6:2a00:1450:4864:20::335])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2130B801A9
- for <u-boot@lists.denx.de>; Tue, 12 May 2026 14:25:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D146F8341A
+ for <u-boot@lists.denx.de>; Tue, 12 May 2026 14:25:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=Pranav.VinayTilak@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=yBaFpNiXqKbh+p/0kDCegdId6qX8YJYtcTEJy+K0yB7gnzN5BZxhwH7sAt7/9wdSMNH667ab9qwO1k3CIXd+LbXLP+h5WOl1m/yT2aPrvM4xftHY8+OP/wkc/Kz9cteQmvpJbI701SSajw8UBqkPt9xSw3eS9PvHFSFAOOcDU5EuBUDwnTFj8lmbAsoSIh1EhsRXHzxfy9CjtjR/Gn1cQ+zI4W0bjqg2I5sFQD4AzE/oIWbHS7RGOjO/6CSIcXPi6TWrX+iRG4M4tQkPSi2eUZ/HGfDOHBjJh4PEy0JtbHHGnjEktj17wZ5+O284pJSXxXiE5yBEM5DbbJw9+L+UbA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=XDpAvTkqsT3LwJhZTZJ48VDFyRd+hmZa6eWpq9l7yxE=;
- b=Ttlsy+0TPDXfFcrEcJ2I3HsNCyuGntdFV61hORvqfqCugQvQqgwThQfkcQdVdfnVUjLumHYeZ/j0CB1CCPeoJQtAJxoIuMHmkt41ShVp/vslJmy2HHNeZKX39Le0LVh4hUayN5luTu4AsBDZ8wyFxsAcG/LpsXeiw09G7S3SVntpNtgG9RD/6K9Kak+++JRb/PP+i4L0il7zs7mfDsRyoTI5wx1/n/QVWSPJvBpuj7gBLwoIWN7Fh5+OKTDkoQTUuchzo2oVnVnLRRLQEOJQbVH02sgaIEEDBgkoOr8j7RgOAcHiMTwQGatECspZMOJXxBucwcupp8sHNJmoY3eNcQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=XDpAvTkqsT3LwJhZTZJ48VDFyRd+hmZa6eWpq9l7yxE=;
- b=c4W43dKiyKWx/asWp2G+2SrGPKLHZX+88dERhTW3D+wvnlcbBqoxyUzD1vmCNS5ugu2wd7b7xDaqqyoWURF/4Ktkqwzbiu8uPXupUSJL9Ioe8s0WRy5Hso7kFcRk/Lh9zD81W9JgapY7Dy+HFm4gKx4vvwgBJcRAiP8su//BNMg=
-Received: from PH8PR07CA0033.namprd07.prod.outlook.com (2603:10b6:510:2cf::20)
- by SN7PR12MB7935.namprd12.prod.outlook.com (2603:10b6:806:349::11)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9870.25; Tue, 12 May
- 2026 12:25:00 +0000
-Received: from SN1PEPF000397B3.namprd05.prod.outlook.com
- (2603:10b6:510:2cf:cafe::9c) by PH8PR07CA0033.outlook.office365.com
- (2603:10b6:510:2cf::20) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.25.17 via Frontend Transport; Tue, 12
- May 2026 12:25:00 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
-Received: from satlexmb08.amd.com (165.204.84.17) by
- SN1PEPF000397B3.mail.protection.outlook.com (10.167.248.57) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.25.13 via Frontend Transport; Tue, 12 May 2026 12:25:00 +0000
-Received: from SATLEXMB04.amd.com (10.181.40.145) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.2.2562.41; Tue, 12 May
- 2026 07:24:59 -0500
-Received: from satlexmb08.amd.com (10.181.42.217) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Tue, 12 May
- 2026 07:24:58 -0500
-Received: from xhdkummari40.xilinx.com (10.180.168.240) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.41 via Frontend
- Transport; Tue, 12 May 2026 07:24:54 -0500
-From: Pranav Tilak <pranav.vinaytilak@amd.com>
-To: <u-boot@lists.denx.de>, <michal.simek@amd.com>
-CC: <git@amd.com>, <padmarao.begari@amd.com>, Pranav Tilak
- <pranav.vinaytilak@amd.com>, Jerome Forissier <jerome.forissier@arm.com>, Tom
- Rini <trini@konsulko.com>, SkyLake.Huang <skylake.huang@mediatek.com>,
- Siddharth Vadapalli <s-vadapalli@ti.com>, Patrice Chotard
- <patrice.chotard@foss.st.com>, Yao Zi <me@ziyao.cc>, Lucien.Jheng
- <lucienzx159@gmail.com>, Peng Fan <peng.fan@nxp.com>, Marek Vasut
- <marek.vasut+renesas@mailbox.org>, Ramon Fried <rfried.dev@gmail.com>
-Subject: [PATCH v4] net: phy: fix duplicate eth_phy binding
-Date: Tue, 12 May 2026 17:53:23 +0530
-Message-ID: <20260512122440.677784-1-pranav.vinaytilak@amd.com>
-X-Mailer: git-send-email 2.34.1
+ dmarc=pass (p=none dis=none) header.from=sairon.cz
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sairon@sairon.cz
+Received: by mail-wm1-x335.google.com with SMTP id
+ 5b1f17b1804b1-4891e86fabeso63172615e9.1
+ for <u-boot@lists.denx.de>; Tue, 12 May 2026 05:25:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=sairon.cz; s=google; t=1778588708; x=1779193508; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=5jOD8I8I8fyAdkE2Et3QQYzi+7u/PuEMQBu6dOqcY4U=;
+ b=QyEawGu/uTmk7JIBI5fEFuyToS3r7cFV2mafAfHp8DpcXvpFFxTqAwAP5Lwr7ZL6SD
+ CdDK4XQAkf9Txa1ZJuXQ1yMdhEgX7F9Q01eTh5IrtnhBO+ziZqCimC00qPiehJMDyV+h
+ e9pxxjhs2slcPva6n1Qw+LYVM6Wz+k3jfAO0dwPu98M7iZssZVa/miFm6dsbmhtzMgSU
+ f6c8ii5Ldqt0CGQS4VgcSLITnlW3vZ4bBuCkeiCsRZKE1xfJzfmnthVOKXIZD5FW3tBB
+ fmVbNLq1tn1hVRAy2taC19KSyiqa8DccbIOUktjraZ58V60nRdKqreG1xPb+c2Xiy90u
+ VU5g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1778588708; x=1779193508;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=5jOD8I8I8fyAdkE2Et3QQYzi+7u/PuEMQBu6dOqcY4U=;
+ b=eWgLdLlmCcW9Qxdvat/P6k+YIiumVY9ne0TDzkECVHoFjbija66ZXSvk+ilV+S9IhD
+ IHm7QgmnWRwynYxpQCQHOcb5uAEAOPfkdtnwcytiG2Ftdp484mMKPHll/LFkVmuF70bt
+ fgGOrSE8BpQc3nIZr3Hn2cdOBWwlJ+p84KM1xLzY3K69mEUeOoAzoMyO+gju4U7aSpLg
+ yEY+ZgG8TP/TdkkbwnI/tw2hs1N7YFaM+KNgGIkJZiNCau6eaX+4Q+1vq4JaXOr3MwLH
+ c8Hkrk1yiQyTxKUu1PQj4sB2dHdjWwNCtDAcNo5gm75cvz375h0okMc2/5Hx1K9xisRH
+ bPHQ==
+X-Gm-Message-State: AOJu0YzjbsOtO87u0MlnknfJGuv+y++ihUC2Y15/968C9+bdbv3EMmKa
+ d7YztNLHoruWMgg1WdLNviD2n2UJuyn7ElaoC3AgQ6PP35NcYITkJJekSPsZhw2PjA3liMgh/5c
+ 1i0Tom1k=
+X-Gm-Gg: Acq92OH73I4H7kngFXnes6ghHtUie/smWEt72nPt+RzL9NCNuYrKpahEwB+cGbnCqB8
+ SpbLuUQxTRQh3w1bUI8YoMV40UXYoUZawHb0xswWruuITgyflIx32UorRsvvXRgyI2ropCQREAY
+ AkUe+3u3PvclKyuU9u6pRitjv0H0IhXylwPxnR7sw2L/0YpiIJm+0T3alE/Hs8dJI6ksaSxNWbD
+ e53j80VYeEaK7TjpGoVZHOEm3YwTHW7e+JVodm6sCAeI9DxqmtYA/Sqj8rZMc5PenGUrADCIj3g
+ Oq72EMGjmni5dXEvc08sjTHXziGsC6kGkdM/32C/hryMMB3EGwgNtdG5+UTxfwvYFsJML4fZ9OU
+ GZaELl0TEEKAe2NGSaf+dQ9EzMXgZg41E23A4OPy65DL0IGIW2YdR5IJLt4LY9+gbBk+1e1eAtU
+ DoQR/kZ13Np9TnW3jdJhmfJ5jqb5xxop0w8qkW5G3o3ZszRuKN/LBNpk7JNIbr0r1MBVWao8Gx6
+ NbwiJhbOathpsCadoGNuxK4/1fCUE20yBUwwWC8
+X-Received: by 2002:a05:600c:4f51:b0:48d:1a94:56c with SMTP id
+ 5b1f17b1804b1-48e51f3054cmr491876775e9.18.1778588707725; 
+ Tue, 12 May 2026 05:25:07 -0700 (PDT)
+Received: from krabice.lan (ip-89-103-66-201.bb.vodafone.cz. [89.103.66.201])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-48e8e606020sm18361395e9.5.2026.05.12.05.25.06
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 12 May 2026 05:25:06 -0700 (PDT)
+From: =?UTF-8?q?Jan=20=C4=8Cerm=C3=A1k?= <sairon@sairon.cz>
+To: u-boot@lists.denx.de
+Cc: Thomas Fitzsimmons <fitzsim@fitzsim.org>, Peng Fan <peng.fan@nxp.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>, Tom Rini <trini@konsulko.com>,
+ Matthias Brugger <mbrugger@suse.com>, "Ivan T . Ivanov" <iivanov@suse.de>,
+ =?UTF-8?q?Jan=20=C4=8Cerm=C3=A1k?= <sairon@sairon.cz>
+Subject: [PATCH] mmc: bcmstb: Fix non-removable check in bcm2712 init
+Date: Tue, 12 May 2026 14:24:35 +0200
+Message-ID: <20260512122435.1118557-1-sairon@sairon.cz>
+X-Mailer: git-send-email 2.54.0
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-Received-SPF: None (SATLEXMB04.amd.com: pranav.vinaytilak@amd.com does not
- designate permitted sender hosts)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SN1PEPF000397B3:EE_|SN7PR12MB7935:EE_
-X-MS-Office365-Filtering-Correlation-Id: c54d1b6d-1487-4fbe-46f1-08deb0217c8b
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|7416014|82310400026|36860700016|376014|56012099003|18002099003|11063799003;
-X-Microsoft-Antispam-Message-Info: qb+mdO0iXTg9hMjWIpNKudi5KRXEUKfWDchL9Syz5Qdq5xNirCsq89xUCV8bRBhl6YJPqGU+5Dr9cT5QT2Gkul3+JMFkEzHVOSsxAZK5Vxn0TfotUvk4w+Z8kkkilpX2eYRsXMunuv7HWcSir0w2Clo//yeIhP9B0d6qYLy+7VdCU8fxaE4pAbdlkzgYWszdksSvoKmsfLVJygck4hxmdzV/W2VjQYiy/Q3DmBfbBgyqcXDDXkAsqT7sWgfl2riQhY/fyd+TvYh842hXVP+N6x43kvAjK2eGBr2Ce8FkP3MeZvNT3981uwTKl3nUnfeqEX9q2HXV4H1GDZ/9kau3vYicmGcoseOKmHNZFC3qhuwc55Ss+MMceliTee/u9HzPtl4j+SayKl7Id/MPSDRvHdadFYHsElHw5FH5TFFZx52TxxGbRjgvZzyd3/Z5BpMSnb2SQSEXi0MgxR2X6GKT9NmuxJlDtZazj3FXBht7hjv6paW2869T2ypB8kdqH9PAwXsJCZj9TCM1i3IbqUlHPduD1MfPcUlvvNVC7d7OM80SADk1EB9bID0wgOEtl+s71WuUyW+/G0W+DuA9rI8HkAZO9B/0RsQC0XXhXLA8hBoSm/CDTBDeBhbfN5c9Y2ydaG7vIQFTlr1jdLhfFVV7mIpUPZ27k4XPndekAsu3Jgk2aZXFq02RQ0iTQ9E7wAelx70l+y1LNhLWpA2T4QnjMYMMMMsnkgf/LMBduyoINGM=
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:satlexmb08.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(1800799024)(7416014)(82310400026)(36860700016)(376014)(56012099003)(18002099003)(11063799003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: ZSJ2yohr6za7xG+hOxFQj878XsR9cR44EskbvAlCPVN4WMqdWf2ig+YeiHSSFDA9KIlTEWMcCcS4RHqwMqRooGznKXsZvJl7bibPRquMzQ+mqlT2QhOms51hYNwqv2s8IZnZAZfc54kovI67jKkvrEBarCw8yrzuFkvMtqMWk37BTHTwaojXZajPH5/Qht9SFMaMM10T4Rb/uzMiYaG1d68ZdkNB5PTF0QjrRlncpATSbJNAGct8uBRUAdmhQLYMw2DCsZoAgo2JnWqYME6ZQHYyxSvBTEZuWk2b6TSv2hCuqSHmJS2vV2iECAoWd3hYinCyW9OyNNaFtYg2LgF2g7bzAlsjRJrT7Uo/p8mkzZL2JLx7QlfNyOtcC7C5t9SwB7ud9Bj24LJqlqzYXfGTjQnhjR7tcNmopo86gH0jsLD8lj8nQv+iSautZB9TS/rA
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 May 2026 12:25:00.2438 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: c54d1b6d-1487-4fbe-46f1-08deb0217c8b
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[satlexmb08.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: SN1PEPF000397B3.namprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN7PR12MB7935
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -133,98 +99,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When both CONFIG_PHY_ETHERNET_ID and CONFIG_DM_ETH_PHY are enabled,
-eth_phy_binds_nodes() called from eth_post_bind() already binds the
-ethernet PHY node to eth_phy_generic_drv. However, phy_connect_phy_id()
-called via phy_connect() also binds the same PHY node, resulting in
-duplicate entries in the DM tree.
+sdhci_brcmstb_init_2712() reads host->mmc->host_caps to decide whether
+to force card-detect for a non-removable eMMC, or to route the CD signal
+for a removable SD card. At the time this function runs from
+sdhci_bcmstb_probe(), however, host->mmc->host_caps is still zero, that
+field is only populated later by the MMC uclass, after the driver's
+probe returns. mmc_of_parse() has already filled plat->cfg.host_caps
+from the device tree by this point, so check that field instead.
 
-Fix this by checking at the beginning of phy_connect() whether the PHY
-is already bound via uclass_find_device_by_phandle(). If so, skip all
-generic binding methods and fall through to phy_find_by_mask(). Also
-assign phydev->node from the already bound DM device.
+Without the fix, every BCM2712 SDHCI instance takes the else branch and
+writes SDIO_CFG_SD_PIN_SEL = SDIO_CFG_SD_PIN_SEL_CARD (0x02), including
+the non-removable eMMC on boards such as CM5 on Home Assistant Yellow.
+The SDIO_CFG block lies outside the SDHCI core's reset scope, so this
+value persists across SDHCI_RESET_ALL into the next stage. On the
+BCM2712, having SD_PIN_SEL set to "SD" when the Linux kernel performs
+its first set_power(MMC_POWER_UP) write racily prevents the SDHCI
+POWER_ON bit from latching (see [1] for the whole backstory) - the
+voltage bits stick but POWER_ON drops - which wedges the first CMD0 the
+full 10 s software timeout. On Home Assistant Yellow this manifested as
+a ~20 s eMMC probe delay on roughly one in two Linux boots when U-Boot
+was the previous stage. Booting directly from the Pi firmware (no U-Boot
+in between) left SD_PIN_SEL at its default and did not exhibit the race.
 
-Fixes: 68a4d1506109 ("net: phy: Bind ETH_PHY uclass driver to each new PHY")
-Signed-off-by: Pranav Tilak <pranav.vinaytilak@amd.com>
+Reading plat->cfg.host_caps lets init_2712 see the "non-removable"
+property and take the correct branch, leaving SD_PIN_SEL untouched for
+the eMMC.
+
+[1] https://github.com/home-assistant/operating-system/pull/3700#issuecomment-4430229511
+
+Fixes: 10127cdbab64 ("mmc: bcmstb: Add support for bcm2712 SD controller")
+Signed-off-by: Jan Čermák <sairon@sairon.cz>
 ---
-Changes in v4:
-- Removed IS_ENABLED(CONFIG_DM_ETH_PHY), use runtime check via
-  uclass_find_device_by_phandle()
-- Fix indentation of binding methods block
-- Assign phydev->node from the bound DM device's ofnode
-- Use phy_bound flag for clarity
+ drivers/mmc/bcmstb_sdhci.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-Changes in v3:
-- Moved duplicate binding check to beginning of phy_connect()
-
-Changes in v2:
-- Move duplicate binding check to caller phy_connect()
-- Update commit description
-
- drivers/net/phy/phy.c | 28 ++++++++++++++++++++--------
- 1 file changed, 20 insertions(+), 8 deletions(-)
-
-diff --git a/drivers/net/phy/phy.c b/drivers/net/phy/phy.c
-index d7e0c4fe02d..386d89aed24 100644
---- a/drivers/net/phy/phy.c
-+++ b/drivers/net/phy/phy.c
-@@ -24,6 +24,7 @@
- #include <linux/delay.h>
- #include <linux/err.h>
- #include <linux/compiler.h>
-+#include <dm/uclass-internal.h>
+diff --git a/drivers/mmc/bcmstb_sdhci.c b/drivers/mmc/bcmstb_sdhci.c
+index 7bddbebb162..f27b84a6ee4 100644
+--- a/drivers/mmc/bcmstb_sdhci.c
++++ b/drivers/mmc/bcmstb_sdhci.c
+@@ -56,7 +56,7 @@ struct sdhci_brcmstb_dev_priv {
  
- /* Generic PHY support and helper functions */
- 
-@@ -927,29 +928,40 @@ struct phy_device *phy_connect(struct mii_dev *bus, int addr,
+ static int sdhci_brcmstb_init_2712(struct udevice *dev)
  {
- 	struct phy_device *phydev = NULL;
- 	uint mask = (addr >= 0) ? (1 << addr) : 0xffffffff;
--
-+	struct udevice *phy_dev;
-+	bool phy_bound;
-+
-+	/* Skip binding if PHY already bound by eth_phy_binds_nodes(). */
-+	phy_bound = !uclass_find_device_by_phandle(UCLASS_ETH_PHY, dev,
-+						       "phy-handle",
-+						       &phy_dev);
-+	if (!phy_bound) {
- #ifdef CONFIG_PHY_FIXED
--	phydev = phy_connect_fixed(bus, dev);
-+		phydev = phy_connect_fixed(bus, dev);
- #endif
+-	struct sdhci_host *host = dev_get_priv(dev);
++	struct sdhci_bcmstb_plat *plat = dev_get_plat(dev);
+ 	void *cfg_regs;
+ 	u32 reg;
  
- #ifdef CONFIG_PHY_NCSI
--	if (!phydev && interface == PHY_INTERFACE_MODE_NCSI)
--		phydev = phy_device_create(bus, 0, PHY_NCSI_ID, false);
-+		if (!phydev && interface == PHY_INTERFACE_MODE_NCSI)
-+			phydev = phy_device_create(bus, 0, PHY_NCSI_ID, false);
- #endif
+@@ -65,8 +65,8 @@ static int sdhci_brcmstb_init_2712(struct udevice *dev)
+ 	if (!cfg_regs)
+ 		return -ENOENT;
  
- #ifdef CONFIG_PHY_ETHERNET_ID
--	if (!phydev)
--		phydev = phy_connect_phy_id(bus, dev, addr);
-+		if (!phydev)
-+			phydev = phy_connect_phy_id(bus, dev, addr);
- #endif
- 
- #ifdef CONFIG_PHY_XILINX_GMII2RGMII
--	if (!phydev)
--		phydev = phy_connect_gmii2rgmii(bus, dev);
-+		if (!phydev)
-+			phydev = phy_connect_gmii2rgmii(bus, dev);
- #endif
-+	}
- 
- 	if (!phydev)
- 		phydev = phy_find_by_mask(bus, mask);
- 
-+	if (phydev && phy_bound && !ofnode_valid(phydev->node))
-+		phydev->node = dev_ofnode(phy_dev);
-+
- 	if (phydev)
- 		phy_connect_dev(phydev, dev, interface);
- 	else
--- 
-2.34.1
-
+-	if ((host->mmc->host_caps & MMC_CAP_NONREMOVABLE) ||
+-	    (host->mmc->host_caps & MMC_CAP_NEEDS_POLL)) {
++	if ((plat->cfg.host_caps & MMC_CAP_NONREMOVABLE) ||
++	    (plat->cfg.host_caps & MMC_CAP_NEEDS_POLL)) {
+ 		/* Force presence */
+ 		reg = readl(cfg_regs + SDIO_CFG_CTRL);
+ 		reg &= ~SDIO_CFG_CTRL_SDCD_N_TEST_LEV;
