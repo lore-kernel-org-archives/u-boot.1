@@ -4,101 +4,127 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4480ACD4855
-	for <u-boot@archiver.kernel.org>; Tue, 12 May 2026 09:41:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C44A4CD4851
+	for <u-boot@archiver.kernel.org>; Tue, 12 May 2026 09:45:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B5F8080398;
-	Tue, 12 May 2026 11:41:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=flipper.net
+	by phobos.denx.de (Postfix) with ESMTP id 3E31A80398;
+	Tue, 12 May 2026 11:45:11 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=flipper.net header.i=@flipper.net header.b="NIzl48cl";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="MWVWzFPd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 36BDE8341A; Tue, 12 May 2026 11:41:23 +0200 (CEST)
-Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com
- [IPv6:2a00:1450:4864:20::42b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 0628980F0E; Tue, 12 May 2026 11:45:08 +0200 (CEST)
+Received: from PH0PR06CU001.outbound.protection.outlook.com
+ (mail-westus3azlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c107::3])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 79991801A9
- for <u-boot@lists.denx.de>; Tue, 12 May 2026 11:41:20 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=flipper.net
+ by phobos.denx.de (Postfix) with ESMTPS id 1D89E801A9
+ for <u-boot@lists.denx.de>; Tue, 12 May 2026 11:45:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=alchark@flipper.net
-Received: by mail-wr1-x42b.google.com with SMTP id
- ffacd0b85a97d-448528f4e69so3136381f8f.3
- for <u-boot@lists.denx.de>; Tue, 12 May 2026 02:41:20 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=flipper.net; s=google; t=1778578880; x=1779183680; darn=lists.denx.de;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=pQq0eDUtxdIUjFwaO2hk3BpYL+U7uGdG26UE+viWgSI=;
- b=NIzl48clNI7m31l4SMf0zMJyMJ4v3isBGhGzZAR6tKOJjKrAA6t79SbCjs6P/esA3v
- L1o6CAx1W1qT7vNaLPH/uvMZGODG8a6zT0LxewS6sIQY7kKDXWaiYTCMEhvg9GZ5JYaQ
- jqotlSnu3TIdf9Qx2PnmW5AOwVmv5YZ5FMgovwuuBwHSjDdiDo2S5tsVN9DvXHIjd3Vf
- nYUaHUhs5M7tpYYqD7DVZYNCoTO4j5AUcRcXxhR1O5ca9T5gSw/nmQl65PLAkpDCqmZN
- zFUldFsOz1SQKWGyGVGaNAEox7T5RXBtnLiNE5WaP8KWSdXQIGPB06fs+3U1F8DW97wf
- 0Aog==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778578880; x=1779183680;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=pQq0eDUtxdIUjFwaO2hk3BpYL+U7uGdG26UE+viWgSI=;
- b=rWKRgUHmYS17c/AZE0zNxP5jXCH2R0rHFvrgLw3Nv2oOFDLTGDrO3slo31QuaR3EqC
- 3MmVHzC1bTLjo1+JfCxxzEF/kk0itMheRTVmtJPWF785VHVuJQeYMzZGJDgUlvsDcPCP
- cyZbjv+LbTncwVLXKkYK7pj/AhPVshaqMfriMmXYzlH5UcRBsCtstcw5lFu2gu1GhCAq
- VgX3S3XZtEzmqCzo8EM1nTHOrnnk1AmbcQEkYGznLOpwTvY5O9koErab+8QinizxQa2v
- X3PhKMz0ldLqXLmzxvNabLtCc+gelhBEkjMBu/76l/3WPL8NFgkI6g2mJLtZFlRejd9D
- NJcw==
-X-Gm-Message-State: AOJu0YyWyCWrvCuQyyEl8+rni33ny8fxFWRzO+tHMtaN7kuE3RRZapcB
- pA3I41cMhrc3SyAWeKRHkovYSmg/VFvfLSytdcEzYm04iw9NaIClAno4Cn//W3xdAcz6cOVM4am
- BrFgZNb4=
-X-Gm-Gg: Acq92OFXu2CrWBqiIpoCc6KUip/bIQ8eMDHai08x4r1amn+z+dnro/Y3eHYGtCXDNI/
- FeTJPsh+sDtWkYPpm/reJG8YlMuNBSardMsTOoB7d4EpAW0PRhdFN2zCONUprTVtnX3j3Vj/SW+
- wdNyvAbKdRXNwUJ1fLay0q6MA2qxpWCKwYSYqVWWI9BOa9/Mi9bxjta90a5AAEtPDxf/Om92nWc
- RTailzyfwdqMwRLb3JB1ANyAlIfMSbRdg42rI9g7cXfZj4rY0jbdwBcRddnFY4LazC9SeP/3UsT
- c4imYdsTvCz5iXQFOv1CBHgmpX5cwsTNw7SBdwRh1q/U+LJGIoFmzS++U/+mtxdAAxVYHotTwGE
- NbmZ+x10T74Pchv51d0p6tE4QqmX92VkV03nPlM9/jBqlbivX9/jvfXRbNdZsygLQVgYoPYsSYT
- 73xVD5O4WwDtt9sW5N49SLmyPOJFLkbmf4AlZxOQqLBU0yZ5ANxXe1ChOp4OVI/A8yUieBNwpuR
- uASOqnj
-X-Received: by 2002:a05:6000:25c2:b0:448:5ec1:dcb5 with SMTP id
- ffacd0b85a97d-45460e3f48cmr25770059f8f.7.1778578879598; 
- Tue, 12 May 2026 02:41:19 -0700 (PDT)
-Received: from alchark-surface.localdomain
- (bba-83-110-135-253.alshamil.net.ae. [83.110.135.253])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-45491ca383asm30825045f8f.28.2026.05.12.02.41.17
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 12 May 2026 02:41:19 -0700 (PDT)
-From: Alexey Charkov <alchark@flipper.net>
-Date: Tue, 12 May 2026 13:41:04 +0400
-Subject: [PATCH] usb: onboard-hub: Add support for CoreChips SL6341
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=pXc9zeXz0E69ziF4Xtl8OvwkzmyK20BGV+AZiGvZ+5Ohy0Jtw92rgtaX3F7yEGldBi17oDiWNfON88KtUQMx7GV9PHvJmBn/IKxzOQ/2squQ7eq1fot/XhxCkvrrLpPSyOwcVuq9t8f4pPdtQr1U9jjb/03CSHx/9LQTFvN1cwq4jDztpGKtca28Q+mfb2+i8zRrT9PSnqs/0Y/oa0MGldOm3FLeudgieB29fbeAEGM+dHgWt0e0YxwkkzG8zi7lyca/YtkzfLPs+n9ZaqEY4zcSh+/aUYo8OTQmAxpAEGwyyAlMoqk9b4gd72CFk3JLQg6/v3l9NnZcH2To9MA/IQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=66RMMeoeXPwf+Zjexv3dpDx7hVb29seKagu6HsWI/QI=;
+ b=kBz19zEEsplPg3aUjV84Qplm5ppmCukug3+671j0R4/SNk8ct4FnKcftGBu1X8YrUf1MFwNNU69Mq2ujVbR37lI5pmCMxrHVAEs7IwdMIYasN5rpHDtySfYtcaqtEkyD3hgImg9MvMlhuuMiL7LWOhion2m0u1pQPOeY/UeTS3YcoeuZT+dabXQCpduwxsNiNUGTebSUrXaPH54nBGA7a8pLkznqtUZ/8rMjDUiohrsPmKZ67s9PYLsaRRdfgnd8fXhGXYYxrXyRtClN42xwdmu7JMI+jGF+Tt2IgV1e2Kq2E9HwuJkRdxiDUWVVejkVi+n5DjN9/ndBfTKcKZlwLQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.21.195) smtp.rcpttodomain=gmail.com smtp.mailfrom=ti.com; dmarc=pass
+ (p=quarantine sp=none pct=100) action=none header.from=ti.com; dkim=none
+ (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=66RMMeoeXPwf+Zjexv3dpDx7hVb29seKagu6HsWI/QI=;
+ b=MWVWzFPdN4Nr06kd8jlnY5ttJCOiQ++lx7NZbLrzA7hdenRg5T/3gSHOtXDtYssmgWl/Cr8ebSECiO07nYH40O8sWfY4/NX3BPFLWf3MhvxqUGF74J/4kkqqxbCrBMNcP88Th29JbrpdDd/vYvuLXptMAh3BVp49mN2AmEhtZxQ=
+Received: from SJ0PR05CA0150.namprd05.prod.outlook.com (2603:10b6:a03:33d::35)
+ by BY5PR10MB4290.namprd10.prod.outlook.com (2603:10b6:a03:203::15)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9891.23; Tue, 12 May
+ 2026 09:45:00 +0000
+Received: from SJ5PEPF000001CA.namprd05.prod.outlook.com
+ (2603:10b6:a03:33d:cafe::65) by SJ0PR05CA0150.outlook.office365.com
+ (2603:10b6:a03:33d::35) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.25.15 via Frontend Transport; Tue, 12
+ May 2026 09:45:00 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.195)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.21.195 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.21.195; helo=flwvzet201.ext.ti.com; pr=C
+Received: from flwvzet201.ext.ti.com (198.47.21.195) by
+ SJ5PEPF000001CA.mail.protection.outlook.com (10.167.242.39) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.25.13 via Frontend Transport; Tue, 12 May 2026 09:44:59 +0000
+Received: from DFLE209.ent.ti.com (10.64.6.67) by flwvzet201.ext.ti.com
+ (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Tue, 12 May
+ 2026 04:44:55 -0500
+Received: from DFLE213.ent.ti.com (10.64.6.71) by DFLE209.ent.ti.com
+ (10.64.6.67) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Tue, 12 May
+ 2026 04:44:55 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE213.ent.ti.com
+ (10.64.6.71) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37 via Frontend
+ Transport; Tue, 12 May 2026 04:44:55 -0500
+Received: from [127.0.1.1]
+ (a0497641-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [10.24.50.71])
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 64C9iqW21529333;
+ Tue, 12 May 2026 04:44:53 -0500
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260512-sl6341-v1-1-2819ac19e050@flipper.net>
-X-B4-Tracking: v=1; b=H4sIALD1AmoC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
- vPSU3UzU4B8JSMDIzMDU0Mj3eIcM2MTQ90UcwtLi0QLS9Nkk1QloOKCotS0zAqwQdGxtbUA9eC
- hdVgAAAA=
-X-Change-ID: 20260512-sl6341-d7898a895c4e
-To: u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, 
- Lukasz Czechowski <lukasz.czechowski@thaumatec.com>, 
- Quentin Schulz <quentin.schulz@cherry.de>, 
- Marek Vasut <marek.vasut@mailbox.org>, Michal Simek <michal.simek@amd.com>, 
- Padmarao Begari <padmarao.begari@amd.com>, 
- Alexey Charkov <alchark@flipper.net>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1739; i=alchark@flipper.net;
- h=from:subject:message-id; bh=hBTCXlKDozXQ7+2ZLJylawazZQtYzEGhk3ARVw5RNzw=;
- b=owGbwMvMwCW2adGNfoHIK0sZT6slMWQxfd3/+O6qM51rre4unGfbnuMx69zs56WfHjpLJs82O
- mj9o7zcqWMiC4MYF4OlmCLL3G9LbKca8c3a5eHxFWYOKxPIEGmRBgYgYGHgy03MKzXSMdIz1TbU
- MzTSMdYxYuDiFICpbl3C8D/t0euTmU4xXDMsTnRxzlmca7ZyVotbTaxKvcbNybUiyQcY/juLP91
- c8q81SOPFbZfQKsngyk6HCgHb24bHN71aIt5gxAUA
-X-Developer-Key: i=alchark@flipper.net; a=openpgp;
- fpr=9DF6A43D95320E9ABA4848F5B2A2D88F1059D4A5
+Subject: Re: [PATCH] arm: dts: k3-am69-aquila: add combined boot firmware image
+From: Neha Malcom Francis <n-francis@ti.com>
+To: Ernest Van Hoecke <ernestvanhoecke@gmail.com>
+CC: <u-boot@lists.denx.de>, Francesco Dolcini <francesco.dolcini@toradex.com>, 
+ Tom Rini <trini@konsulko.com>, Franz Schnyder <franz.schnyder@toradex.com>,
+ Emanuele Ghidoli <emanuele.ghidoli@toradex.com>, Ernest Van Hoecke
+ <ernest.vanhoecke@toradex.com>
+In-Reply-To: <20260505-am69-combined-binary-v1-1-5b5dc65bcb19@toradex.com>
+References: <20260505-am69-combined-binary-v1-1-5b5dc65bcb19@toradex.com>
+Date: Tue, 12 May 2026 15:14:49 +0530
+Message-ID: <177857908918.1655329.7242382998405759036.b4-review@b4>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1778579093; l=254;
+ i=n-francis@ti.com; s=20260428; h=from:subject:message-id;
+ bh=8kOO+/NPeqLXC3S4VgFcH8Z7XGFiqJqsiGnH4AkbF5U=;
+ b=QW3qN0QA+BDL/K9vY3lK6hjFX9RdpuTFaOHXYoahuZXXIB1ONmPCG4ebc0hYPpiQ6QTneqqbo
+ Co5RURuF2mgC+xmVvDTXcpU7Csht7jJC/FlTrSExcdtaI8OpFLa7GhB
+X-Developer-Key: i=n-francis@ti.com; a=ed25519;
+ pk=Z4nV5FmpAM9e1Jk0HnCKOoVUtHW8cscgDRncr2IngXg=
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SJ5PEPF000001CA:EE_|BY5PR10MB4290:EE_
+X-MS-Office365-Filtering-Correlation-Id: d3c6ff57-5742-40ff-7357-08deb00b2215
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|36860700016|376014|1800799024|82310400026|56012099003|18002099003|22082099003;
+X-Microsoft-Antispam-Message-Info: KpZ4YUaO8uvJaHnv1dcd1lUJE7X7FdRcNlcUNe9hhsbr3Mx/TzBMw/7ZKmtiR3PTqe05gY56mf6JIGAF2Jar4DrzBbKrr185DzCY/YQ5KLbLJr7XbsBSdQAp19Q/i49iDPp0x8gf29Eol75Xdubf6XqzoJ0BZyKQGuZLusPtcOCBeLC0dolM+SHewM+edvi257K5w1ua+SO0JJG2AmFdWJT4GzZmcz4f147YLTt+y8i+FgVsVt1F0O4OKhDVClwsKQnDYRIxflgVV2EXnUzVNbifz9/qcCECcJTkY1nubKV0wc8lhiTIhARIKtoH594aEew7yOXRa1RMs7nDMqWsB8F577P6dSDrcO52yntM9F36ZSVyuLRmGZZaksYVhK35RDfMug+MFCcYj5xpessOJv5nwUZb09rgogw7yozf3gc9OLRnTU5DCbUShZ3VYvkk2viZW7+PBC8y66FgRh22LX3wqb2yTMKM4NeW/kzDf4WrTJNyPckmoylzA7Du/T3qiU/OlFgiyO5tP3kJbEk2BqR2ORoDZN39GAmS+AbDW/KBcRN0bm71XfX0hd0nZz2Lh5mVhx/G9ibhHt3NnYfmGCWx0e2+qUuls50eo7XP16zFkqNxqOJj7Rfx9MGj5Qc2nV29uKU46kkINLuhPO65TRsY8Zw/+JN499B1pHHFll9hz+DPKX1aOPRDmYo8wSPg2rziZ+TkP0Xv1gQtrEgSPnxrbObll5GA2bmEFSG5M9g=
+X-Forefront-Antispam-Report: CIP:198.47.21.195; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:flwvzet201.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
+ SFS:(13230040)(36860700016)(376014)(1800799024)(82310400026)(56012099003)(18002099003)(22082099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: x7S8C3QL+3O1wHB21SW/9DDURtJvblvzr2aqExXtvayml5BHpdpO1Qq/rNfE+Pkvma5QZoItonFDjUiPb0UpYm+IScu2dkDwLnCS5DjWx0inKRMC65vSD8XzXAJnY1sG2KMBH5DRpKeDZupP20SAsC049aEBdVkbT7dn5bAm2gJOu2Pds0hUG0rU/l1KiBM8ZuLcTvJ9yI8Izbf1/CNtZOXGVh2S5fHSir7oofEG4Px8OgKy06eXelEm7YpyuTpDoroacXpcZJN+huiXAGnE2bU2Ydhjnh6DuA0PB333G8q5fE2lVV7TMk1QYq/PDLIvpuYwddkf1MkN/b5iYG7J0eejV0tV/lX+3XHoAs8Ohvm1UGuKZDjICNW8ocXPDrwgzc8fVnvNpHL186NFg9dtI5Ju5RXOJS29VtJuJHLOs9aqhBNuV2b/4s/UTY9j7rtL
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 May 2026 09:44:59.4865 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: d3c6ff57-5742-40ff-7357-08deb00b2215
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.195];
+ Helo=[flwvzet201.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: SJ5PEPF000001CA.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR10MB4290
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -115,55 +141,10 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-CoreChips SL6341 is a 4-port USB 2.0 and 3.0 hub controller. It always
-requires external 1v1 power and can optionally use external 3v3 power
-(or alternatively it has a 5v->3v3 LDO built in to derive 3v3 power from
-VBUS). It also exposes a reset pin.
+On Tue, 05 May 2026 18:36:24 +0200, Ernest Van Hoecke <ernestvanhoecke@gmail.com> wrote:
+> arm: dts: k3-am69-aquila: add combined boot firmware image
 
-Device tree bindings are queued up for upstream release with Linux 7.1
+Reviewed-by: Neha Malcom Francis <n-francis@ti.com>
 
-Link: https://github.com/torvalds/linux/blob/master/Documentation/devicetree/bindings/usb/corechips%2Csl6341.yaml
-Signed-off-by: Alexey Charkov <alchark@flipper.net>
----
- common/usb_onboard_hub.c | 12 ++++++++++++
- 1 file changed, 12 insertions(+)
-
-diff --git a/common/usb_onboard_hub.c b/common/usb_onboard_hub.c
-index 6fc34489a98f..d15d7bbff87d 100644
---- a/common/usb_onboard_hub.c
-+++ b/common/usb_onboard_hub.c
-@@ -262,6 +262,12 @@ static int usb_onboard_hub_remove(struct udevice *dev)
- 	return ret;
- }
- 
-+static const struct onboard_hub_data corechips_sl6341_data = {
-+	.reset_us = 10000,
-+	.num_supplies = 2,
-+	.supply_names = { "vdd1v1-supply", "vdd3v3-supply" },
-+};
-+
- static const struct onboard_hub_data usb2514_data = {
- 	.power_on_delay_us = 500,
- 	.reset_us = 1,
-@@ -299,6 +305,12 @@ static const struct udevice_id usb_onboard_hub_ids[] = {
- 	}, {
- 		.compatible = "usb4b4,6506",	/* Cypress HX3 USB 2.0 */
- 		.data = (ulong)&usbhx3_data,
-+	}, {
-+		.compatible = "usb3431,6241",	/* Corechips SL6341 USB 2.0 */
-+		.data = (ulong)&corechips_sl6341_data,
-+	}, {
-+		.compatible = "usb3431,6341",	/* Corechips SL6341 USB 2.0 */
-+		.data = (ulong)&corechips_sl6341_data,
- 	},
- 	{ /* sentinel */ }
- };
-
----
-base-commit: 5732bd0f457b4c671e46574d64d4acb099c0f0a5
-change-id: 20260512-sl6341-d7898a895c4e
-
-Best regards,
 -- 
-Alexey Charkov <alchark@flipper.net>
-
+Neha Malcom Francis <n-francis@ti.com>
