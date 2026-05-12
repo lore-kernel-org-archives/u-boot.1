@@ -4,79 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3E09CD4855
-	for <u-boot@archiver.kernel.org>; Tue, 12 May 2026 11:13:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36DA2CD4F35
+	for <u-boot@archiver.kernel.org>; Tue, 12 May 2026 11:13:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 80D0B83E81;
-	Tue, 12 May 2026 13:13:18 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C194A80398;
+	Tue, 12 May 2026 13:13:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="NTxADHD/";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="B9itvK+m";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7806A83E76; Tue, 12 May 2026 13:13:17 +0200 (CEST)
-Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
- [IPv6:2a00:1450:4864:20::42d])
+ id 1503183F14; Tue, 12 May 2026 13:13:19 +0200 (CEST)
+Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
+ [IPv6:2a00:1450:4864:20::435])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9A6CB801A9
- for <u-boot@lists.denx.de>; Tue, 12 May 2026 13:13:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1DBAD838BB
+ for <u-boot@lists.denx.de>; Tue, 12 May 2026 13:13:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wr1-x42d.google.com with SMTP id
- ffacd0b85a97d-44a14580111so3982691f8f.0
- for <u-boot@lists.denx.de>; Tue, 12 May 2026 04:13:15 -0700 (PDT)
+Received: by mail-wr1-x435.google.com with SMTP id
+ ffacd0b85a97d-44a14580111so3982709f8f.0
+ for <u-boot@lists.denx.de>; Tue, 12 May 2026 04:13:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1778584395; x=1779189195; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1778584396; x=1779189196; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=jHXEvYR3IkuEWMIU2Q/QFGu65N8K3C0Cc/OykN25ALQ=;
- b=NTxADHD/v9X2ZahM3i6C8v8U721engOu1MHKn5a3871o370dkyhteeP/NB/+MMxpvp
- 1rd/hQtE3kn6yopcdzIHhWmzoe0oweIbKm2i5oBsKTrON4yW20cvK7qbntDbjDZaMahT
- OcTpyfQqM0ZH4/txp73rLUqwvBBdIjI8UfGqQOLwNUdofU9up+gn3cdp6XDU6jwFOHrY
- bbHfAbVkAprA8kNQOYdcIOcft+9Z0kTKIqqpCeDepcczUtxukpBZDGL5s7zZJdsAJv0w
- AAkoXs//QgLkKukbOfpDnDLeMq0ppzxBGZY7l67hBt3KEQy7QWMHtMQwkNdEvWzhnjqJ
- bEjw==
+ :reply-to; bh=w5QMwIsaHtRcr/7PZogZy4KwP01izm+hDr81xLo+d60=;
+ b=B9itvK+mnLVINGx8HhRJWBM4kB588gGOBagV254n1h7gkJ7I94oefxA1dcCTRfe5mL
+ Mbr8m7vzC619qgtt5X/04nGX1K/ADY1h+QIpxM5KcuM8hQIyJ2FNpV8ECl7SlbsYjqKS
+ /ABsC5Th5kQ2YnM7lI2mHTykloAQZJ65mlOrs5PKEw6N02+wMMyoTDI0iyJJ1FMASrNM
+ 4DybKvd8DhBlpviyfR1FW3SN1C8/MPgdDska658UMgUb+D0lEwJuUl7Hnn8/5lGczqJK
+ zC+x6GvDzyj9Ag+zmugDoXdHJtNdtGvjLjdrqHu7tz8Less26GrLGUlVB8pwCiaqftw7
+ NjWg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778584395; x=1779189195;
+ d=1e100.net; s=20251104; t=1778584396; x=1779189196;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=jHXEvYR3IkuEWMIU2Q/QFGu65N8K3C0Cc/OykN25ALQ=;
- b=fmfCclF0kEwnbZ9r8HonWTRBUKDDem3H8TsQ/PhJ+aJYMzwL7bsRwR5D1DOmpWFeO4
- bOXT+DWl7Q2WtpoYpUs3VYrfCYFo0rRHcmGArfImQedBHY8ZSU+HQTwVsrURVbZn9ESr
- 4wHxfz04C3prU9kiqRj0KsK4as5Gxa9tVuP5WdoJ2Hzn+V4syUBnxafSh3wuLhQVvyYN
- IcvRrPQxcDkB4JV1ik19uifCmB+VCdARF1z9ObaiAyIBlrwsdA56gIurEpIGk020x7/f
- dfaKvnSMZz60YPwNDj9SjJF0Z5kQXe5hWpoPf+AN2oGIef7S2nKQqEhLxhTiKVvJ3nR3
- WtOw==
-X-Gm-Message-State: AOJu0Yz5DtHtekdxetXrwNi7kXFTkOmUXAps6xliVAzQf4oT4mbUG9Gz
- Q4RgVS6JcpXyioohQcJq32d/9Cf0lhO8x3YmbJ0Phk4E/+WliBuJCiH5pU8bJPd+r64=
-X-Gm-Gg: Acq92OGPNzqGOG+Ib45uxdcalNfCJWF63ElK/KOZzDrLsLYcVYTjQuRAuAoaUKXN5Xw
- 9TyZtwJJtLfAmk85KPR0JA4+p+Za6rAajys5Y+GRd6jo3FQr4lwKr98wZJkaNQi7WXHRUNPbhci
- 5hC8O2OzDzG/pWdMxSH1UUwwjLw69EzQ8QLIw4gq5gNyGwWzMPvoG9CXWbRUzWwRl7scwQfq+l9
- xtjK+Ck71Dj2EKz6L9+sZilH7PN69qXZgaRhUCJbEwb2B2azJDP86x3emJGZ/cpWfvlHxDVcuHD
- vcYqcNqPdNqsvlnEB958IKzHrfONGd9BYMARBvjlc2gjbO0GWHPW8ZZ3/yNnhrRoA+wZAMcOfks
- 6/eyyy3erCKRDhWU46ThWjVZne/G0d2bchl3Mil4yskpp87lMjuUEH1HWaYu1gkQatRQLdHnIcF
- +Trv/McnBfS/khSwW14OtV9YUKg/VPx87DCoGNraatlXw6qyZa4oG4VHJEzxwwpPTkSkBd
-X-Received: by 2002:a5d:5f42:0:b0:455:460a:33a5 with SMTP id
- ffacd0b85a97d-455460a3511mr24415543f8f.34.1778584395013; 
- Tue, 12 May 2026 04:13:15 -0700 (PDT)
+ bh=w5QMwIsaHtRcr/7PZogZy4KwP01izm+hDr81xLo+d60=;
+ b=Fji36S1hjXtWl5uaZvohVnY/gIwkom1LE0E3HjR8u1F0KI7E44PAHXmVbATqdogXNq
+ urEfccjZ2tJ9BkJdDqlkLvk6yjzta/iLzD7kASN5+T409t7LXU2q+MhTg4lm+SBWhze8
+ UPfIjjgCfX0gVNkNaYDCDahHd9I9q1y0iMDnqIgIR2lFfJgOWOPO2gEOJX/MEvkljRQb
+ zRFdw5vTeaQpX71iQGVqiI3rhzNBFqcerid25gbJzaHvL0CN3lJQKgTJIxdjxpTrE1G2
+ G6PfrJ0XkxV/gmc5/nmpizxSHU51mT8cJChJXrnNSvX1WWyo7zrRmwHY23RCjYsrYeEq
+ 941Q==
+X-Gm-Message-State: AOJu0YyVcUXEHcezJfsszeFNF0OHmVbkhGdf1713Evoa1z0sStwKsXmr
+ 1yFgu4if3XjZkyhvNqgrQcaudcoN4yRCoopOpmqgBfd/GLW7dMUAFbwvyBJmWtRhp1Q=
+X-Gm-Gg: Acq92OHr51sMwYqnIRcnbZPgLUM0K7cNuAppKZszZYPO88/wPgSg4LdVczpc4Ev6psX
+ 6Pd4REG4qpeJZemlBv3Vhhv6LNLQ0mU6ZyclOV3ApnNed0hMWlkcV3DDyQ+vq/q0xgBubsyf2Re
+ dZ5FZl/laz6gm5e955qkyEObawHuMbktuxhzx8BNb01JYi4nTrBQhUbiHtDfDx90G764vga8VFZ
+ cM8lTlTAmMSsUuE1dxpbjy1Yz0yTJBU7XyRTCu8KB5PCCdpFyy8ypHnUuRQ1NqiWp1VdiKOIkVt
+ teHzpI/zchLxGGDNMASKcmc9LzqdkFxGylPWaEWUjGKy3aeIn5Clv2hj/xKXPpqZwXxP+AGOuEb
+ 4PAl2f2TK6aWTTKlBcx5ncNJSf6iO4Qni1Mzg1JkqPxDU0QKFSQYZ248hiDlavqTWC32kgNcZHL
+ 3fzou61kGljNBs4urRva4qMffBgG0xLAVEZR1xe5enEZ8TmMY3WZkbgQs8RMM4eS+RWsiw
+X-Received: by 2002:a5d:6446:0:b0:453:e3a1:6580 with SMTP id
+ ffacd0b85a97d-453e3a16769mr26673546f8f.25.1778584396397; 
+ Tue, 12 May 2026 04:13:16 -0700 (PDT)
 Received: from lion.localdomain (p4fc3dd86.dip0.t-ipconnect.de.
  [79.195.221.134]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-4548ec6b00fsm35124259f8f.11.2026.05.12.04.13.13
+ ffacd0b85a97d-4548ec6b00fsm35124259f8f.11.2026.05.12.04.13.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 12 May 2026 04:13:14 -0700 (PDT)
+ Tue, 12 May 2026 04:13:15 -0700 (PDT)
 From: Casey Connolly <casey.connolly@linaro.org>
-Date: Tue, 12 May 2026 13:13:11 +0200
-Subject: [PATCH v4 2/4] armv8: mmu: teach the pagetable dumper to show
- explicit FAULT maps
+Date: Tue, 12 May 2026 13:13:12 +0200
+Subject: [PATCH v4 3/4] armv8: mmu: commonize the set_one_region() loop
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260512-b4-mmu-unmap-fixes-v4-2-fab802f647c9@linaro.org>
+Message-Id: <20260512-b4-mmu-unmap-fixes-v4-3-fab802f647c9@linaro.org>
 References: <20260512-b4-mmu-unmap-fixes-v4-0-fab802f647c9@linaro.org>
 In-Reply-To: <20260512-b4-mmu-unmap-fixes-v4-0-fab802f647c9@linaro.org>
 To: u-boot@lists.denx.de
@@ -87,13 +86,13 @@ Cc: Tom Rini <trini@konsulko.com>, Anshul Dalal <anshuld@ti.com>,
  Patrice Chotard <patrice.chotard@foss.st.com>, 
  Sumit Garg <sumit.garg@kernel.org>
 X-Mailer: b4 0.16-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1793;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=4596;
  i=casey.connolly@linaro.org; h=from:subject:message-id;
- bh=Fu7kjOhau2q2gnn/gGhvZs7871UvGg5NlOdRHBQT9FY=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhixmbrcLeuwHGL/vfRPwKvPeTs4Pi5sO9xWzM7VOsPUuX
- cTHqpnaUcrCIMjBICumyCJ+Ypll09rL9hrbF1yAmcPKBDKEgYtTACaiNp2RYcs7RrOPTNqTTj/J
- beDOPs1ix/l+qZ741G/f9CqCIrjC+hj+KToXltiY8X60NWw5o7hGYf6qWu//DS4nLdZP5V9u8v5
- tJAA=
+ bh=ekt4UPuBnE3jcJL0tHQiB8yx+uy+b7qMNorf75TBt5E=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhixmbvcZ5n27+k+uZpubuONu/+rntiwB113P77w5P7D4d
+ a3zUqcLHaUsDIIcDLJiiiziJ5ZZNq29bK+xfcEFmDmsTCBDGLg4BWAiP3QYGeZ+Fz9Qsuxw/K0r
+ BrP5H3d03J/zg7Fb96euIseqjkltP+cyMnQJGhroWvBfPMpQvXzmanPRsp+9yUt/lLk84MyLzOJ
+ wsQIA
 X-Developer-Key: i=casey.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -112,55 +111,156 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When a region is explicitly unmapped (like with
-mmu_change_region_attr(.... PTE_TYPE_FAULT)) the address translation
-still remains but won't be used since the region is marked invalid.
-Print these regions when we dump the pagetable to help with debugging.
+This loop is duplicated 3 times, put it into its own function and call
+it instead. This simplifies the logic in a few functions.
 
 Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
 ---
- arch/arm/cpu/armv8/cache_v8.c | 8 ++++++--
- 1 file changed, 6 insertions(+), 2 deletions(-)
+ arch/arm/cpu/armv8/cache_v8.c | 95 +++++++++++++------------------------------
+ 1 file changed, 29 insertions(+), 66 deletions(-)
 
 diff --git a/arch/arm/cpu/armv8/cache_v8.c b/arch/arm/cpu/armv8/cache_v8.c
-index 368c622cd18e..36d337378fcd 100644
+index 36d337378fcd..e9ce6335ee9e 100644
 --- a/arch/arm/cpu/armv8/cache_v8.c
 +++ b/arch/arm/cpu/armv8/cache_v8.c
-@@ -533,9 +533,9 @@ static void __pagetable_walk(u64 addr, u64 tcr, int level, pte_walker_cb_t cb, v
+@@ -1022,8 +1022,31 @@ static u64 set_one_region(u64 start, u64 size, u64 attrs, bool flag, int level)
+ 	/* Roll on to the next page table level */
+ 	return 0;
+ }
  
- 		if (exit)
- 			return;
- 
--		if (pte_type(&pte) == PTE_TYPE_FAULT)
-+		if (!pte)
- 			continue;
- 
- 		attrs = pte & ALL_ATTRS;
- 		/* If we're currently inside a block or set of pages */
-@@ -572,9 +572,9 @@ static void __pagetable_walk(u64 addr, u64 tcr, int level, pte_walker_cb_t cb, v
- 
- 			/* Go down a level */
- 			__pagetable_walk(_addr, tcr, level + 1, cb, priv);
- 			state[level] = WALKER_STATE_START;
--		} else if (pte_type(&pte) == PTE_TYPE_BLOCK || pte_type(&pte) == PTE_TYPE_PAGE) {
-+		} else {
- 			/* We foud a block or page, start walking */
- 			entry_start = pte;
- 			state[level] = WALKER_STATE_REGION;
- 		}
-@@ -707,8 +707,12 @@ static bool pagetable_print_entry(u64 start_attrs, u64 end, int va_bits, int lev
- {
- 	u64 _addr = start_attrs & GENMASK_ULL(va_bits, PAGE_SHIFT);
- 	int indent = va_bits < 39 ? level - 1 : level;
- 
-+	/* Ignore empty blocks */
-+	if (!start_attrs)
-+		return false;
++static void set_regions(u64 start, u64 size, u64 attrs, bool flag)
++{
++	int level;
++	u64 r, va_bits;
++	get_tcr(NULL, &va_bits);
 +
- 	printf("%*s", indent * 2, "");
- 	if (PTE_IS_TABLE(start_attrs, level))
- 		printf("[%#016llx]%19s", _addr, "");
- 	else
++	/*
++	 * Loop through the address range until we find a page granule that fits
++	 * our alignment constraints, then set it to the new cache attributes
++	 */
++	while (size > 0) {
++		for (level = 1; level < 4; level++) {
++			r = set_one_region(start, size, attrs, flag, level);
++			if (r) {
++				/* PTE successfully replaced */
++				size -= r;
++				start += r;
++				break;
++			}
++		}
++	}
++}
++
+ void mmu_set_region_dcache_behaviour(phys_addr_t start, size_t size,
+ 				     enum dcache_option option)
+ {
+ 	u64 attrs = PMD_ATTRINDX(option >> 2);
+@@ -1041,28 +1064,9 @@ void mmu_set_region_dcache_behaviour(phys_addr_t start, size_t size,
+ 	 * we can safely modify our primary page tables and then switch back
+ 	 */
+ 	__asm_switch_ttbr(gd->arch.tlb_emerg);
+ 
+-	/*
+-	 * Loop through the address range until we find a page granule that fits
+-	 * our alignment constraints, then set it to the new cache attributes
+-	 */
+-	while (size > 0) {
+-		int level;
+-		u64 r;
+-
+-		for (level = 1; level < 4; level++) {
+-			/* Set d-cache attributes only */
+-			r = set_one_region(start, size, attrs, false, level);
+-			if (r) {
+-				/* PTE successfully replaced */
+-				size -= r;
+-				start += r;
+-				break;
+-			}
+-		}
+-
+-	}
++	set_regions(start, size, attrs, false);
+ 
+ 	/* We're done modifying page tables, switch back to our primary ones */
+ 	__asm_switch_ttbr(gd->arch.tlb_addr);
+ 
+@@ -1072,31 +1076,11 @@ void mmu_set_region_dcache_behaviour(phys_addr_t start, size_t size,
+ 	 */
+ 	flush_dcache_range(real_start, real_start + real_size);
+ }
+ 
+-void mmu_change_region_attr_nobreak(phys_addr_t addr, size_t siz, u64 attrs)
++void mmu_change_region_attr_nobreak(phys_addr_t addr, size_t size, u64 attrs)
+ {
+-	int level;
+-	u64 r, size, start;
+-
+-	/*
+-	 * Loop through the address range until we find a page granule that fits
+-	 * our alignment constraints and set the new permissions
+-	 */
+-	start = addr;
+-	size = siz;
+-	while (size > 0) {
+-		for (level = 1; level < 4; level++) {
+-			/* Set PTE to new attributes */
+-			r = set_one_region(start, size, attrs, true, level);
+-			if (r) {
+-				/* PTE successfully updated */
+-				size -= r;
+-				start += r;
+-				break;
+-			}
+-		}
+-	}
++	set_regions(addr, size, attrs, true);
+ 	flush_dcache_range(gd->arch.tlb_addr,
+ 			   gd->arch.tlb_addr + gd->arch.tlb_size);
+ 	__asm_invalidate_tlb_all();
+ }
+@@ -1105,38 +1089,17 @@ void mmu_change_region_attr_nobreak(phys_addr_t addr, size_t siz, u64 attrs)
+  * Modify MMU table for a region with updated PXN/UXN/Memory type/valid bits.
+  * The procecess is break-before-make. The target region will be marked as
+  * invalid during the process of changing.
+  */
+-void mmu_change_region_attr(phys_addr_t addr, size_t siz, u64 attrs)
++void mmu_change_region_attr(phys_addr_t addr, size_t size, u64 attrs)
+ {
+-	int level;
+-	u64 r, size, start;
+-
+-	start = addr;
+-	size = siz;
+-	/*
+-	 * Loop through the address range until we find a page granule that fits
+-	 * our alignment constraints, then set it to "invalid".
+-	 */
+-	while (size > 0) {
+-		for (level = 1; level < 4; level++) {
+-			/* Set PTE to fault */
+-			r = set_one_region(start, size, PTE_TYPE_FAULT, true,
+-					   level);
+-			if (r) {
+-				/* PTE successfully invalidated */
+-				size -= r;
+-				start += r;
+-				break;
+-			}
+-		}
+-	}
++	set_regions(addr, size, PTE_TYPE_FAULT, true);
+ 
+ 	flush_dcache_range(gd->arch.tlb_addr,
+ 			   gd->arch.tlb_addr + gd->arch.tlb_size);
+ 	__asm_invalidate_tlb_all();
+ 
+-	mmu_change_region_attr_nobreak(addr, siz, attrs);
++	mmu_change_region_attr_nobreak(addr, size, attrs);
+ }
+ 
+ int pgprot_set_attrs(phys_addr_t addr, size_t size, enum pgprot_attrs perm)
+ {
 
 -- 
 2.53.0
