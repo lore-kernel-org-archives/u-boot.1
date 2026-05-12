@@ -4,102 +4,111 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71DFFCD4F21
-	for <u-boot@archiver.kernel.org>; Tue, 12 May 2026 19:10:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61F45CD4F21
+	for <u-boot@archiver.kernel.org>; Tue, 12 May 2026 19:19:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6A924836AC;
-	Tue, 12 May 2026 21:10:56 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9F003836AC;
+	Tue, 12 May 2026 21:19:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=flipper.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=flipper.net header.i=@flipper.net header.b="ov7i/nCq";
+	dkim=pass (2048-bit key; unprotected) header.d=flipper.net header.i=@flipper.net header.b="rHlF3KOS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3415783CD3; Tue, 12 May 2026 21:10:55 +0200 (CEST)
-Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
- [IPv6:2a00:1450:4864:20::534])
+ id AE512838BB; Tue, 12 May 2026 21:19:06 +0200 (CEST)
+Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
+ [IPv6:2a00:1450:4864:20::635])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F269F8341A
- for <u-boot@lists.denx.de>; Tue, 12 May 2026 21:10:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 002F08341A
+ for <u-boot@lists.denx.de>; Tue, 12 May 2026 21:19:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=flipper.net
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=alchark@flipper.net
-Received: by mail-ed1-x534.google.com with SMTP id
- 4fb4d7f45d1cf-6763cc8775cso12306469a12.0
- for <u-boot@lists.denx.de>; Tue, 12 May 2026 12:10:52 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1778613052; cv=none;
+Received: by mail-ej1-x635.google.com with SMTP id
+ a640c23a62f3a-b8f9568e074so919007666b.0
+ for <u-boot@lists.denx.de>; Tue, 12 May 2026 12:19:03 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1778613543; cv=none;
  d=google.com; s=arc-20240605;
- b=C7cCXjvgwgJN7YtbCJtv8qVNlI1qXkloIxmsJmeJCZ9qpmR04+VspWa25lJ1AKZS5W
- Q6XjUAx8wqe73KQ207R3tNKFTcVUDiTQBFUIA7POE4XYJP4VOMBilsXMR+u0/Uh7u4Dk
- kBY1VJOPQDtTogmLupvFfWtfKArJLdmVZzbVUUttyOcUpd53MVkXVcYW2iEZ5y86zspE
- UT+tKNy84TVMnvlQJ6PNlQhHVGxrFswj0GJnsFKfeIkHIKngEwwA8Dv2Jk1LpJAURIqB
- VgJwTqQ/HtHYTYGTYlMWede8FTHgTT3j+XkH3LkUBIpzI5y5qVFKB1s52LiLM6Ydxge5
- qrDQ==
+ b=fmQzxbX6GzmtqTkLGe3flQvl20vGDRcZM+QyXKcPlI/Zy2EKvcQuu1uObAjDSsCTjb
+ zSTvOlYvb/9ApslcMuTAvsqXKRj4meNq+OV1QWISdzlwtrdzsUqeRpqZAoJR8LJalAFi
+ fdNmV5ESNkw0Q+V0Gf9lsXnM22i5o6PC38rbnGoOhc4WC3WDx08hGf11pQClI0g7Yk1s
+ SoMe/zgS2mPEmjD2b4egxfzd8Y4Y33tLJZZ4PpT5dJk68lcYR1Tswz7YkygGFoM6h+m6
+ +t63OThqkmANRTynl3J66hkarTnu1C/Z8qBi1MMRsVwWRv5I0OsPCCHoZpCkTAON/Epr
+ O7qQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:dkim-signature;
- bh=DcM95zT3tqIaRgHVJvAUTEPYxP19YVy0C7lcGH0eIGM=;
- fh=irTjv1ICKVL4RK/3mKpZ6/UcR5bai5de/JLU+YBkX/Y=;
- b=ZDbVtmHHXlcmJ4bLMUMjjA+WrFQeDJtcRL90vClNion3Zceqx7lU0PE1xpT+ixvuPm
- 88NMTPJdYodtLgSdy8t0cDq6KRWFkr1ft7PxYkahP/JMydwrnS+hzDWdRlxDZdM2bVOt
- 0K0rN0xkDdHZ3bAwHmUeTGq6u3zSb77JJ94d5HCTus35nZt14pZRp4JpySErgKOXM2wX
- 4/AUJHsKfZuyvFfSUasGUwHKtYmvQ1bfTSWt9TsOt2ACUqP4ZB35ydQVndG/2YIS99HP
- XPi/jmh+DI7tXJx9sxyaU89tbWaqbO4ZrBuUf6oT9M4epjaqJiP9TDNysDvZo3NKa/VM
- DyiQ==; darn=lists.denx.de
+ bh=JH3HM+/4ctbbHOlMze61Za9VicDlN8xT70RmEOvmpC4=;
+ fh=rNuKogUt7IUMFnW1CZevYXh+KXev1DPEPh4F5ZwdyGc=;
+ b=C1fX5q7KPD/6TWJmGo0MZncEIP2W45GthoNgpwcdr2qVKKjAHdAaC7HCOT13xlbPCR
+ mJIO0ESDaujt9KlCUghjCO3gp8EcwWz3Ic0fuHxrFE069nZQZHNmNsUtf+Z98kbfYp8Y
+ FitLe7RznA4/PvdK9AgZhPvMWNG1vM1XMc+9YddmAlNw3+aBPPqZJEDjmzMyWtWypQsO
+ zesH4RR7xWaABt+ZsEzyxl+9XX8q6k1uP+H1BgGM+mpM/eRbSdf/HqQbQIf7hL3Zns5X
+ QdvvtYch5/UEHXIkJjEvsC9sCJ7d1GDiZgaHrxL5bgPSIvuztGgKvfcgZEf7Q0KbAN3x
+ M9jQ==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=flipper.net; s=google; t=1778613052; x=1779217852; darn=lists.denx.de;
+ d=flipper.net; s=google; t=1778613543; x=1779218343; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=DcM95zT3tqIaRgHVJvAUTEPYxP19YVy0C7lcGH0eIGM=;
- b=ov7i/nCqFsJpm150CuIkBKH4iderKnZKtNaAqjtnnmlc0Xul9z27YdKdx2pXC8VrwD
- Ib943j7eepqIjBnqp5Co7N22J4vtoeJ0YyeerSh+f79lpYNca5/8qkuuzeditScWwK14
- icAllkkQJ7eQcTkbgKIefRWhi3cNFzP5BqS7GAm1//VVSMvwNaM63yE0nhFmOiM9+4wA
- I28mLbs8LL4EYDhuTcE9GolN7iZu/4gRc7g1HZm+EZBc88AT0HwONxcpPrz0yOC/vhxD
- s2fJIFvXitDgbyI/v1MnWTv87j515LB3H+rkequOPYW5MjuiA7S7Vguax6pqWzrEdeL4
- J9xQ==
+ bh=JH3HM+/4ctbbHOlMze61Za9VicDlN8xT70RmEOvmpC4=;
+ b=rHlF3KOSIA2EiZ6vpWPOnnwmm3OH7le++MbTPeRt9D7dfSK46n0YMO5menhH8d08rp
+ middJUW/ikPlHKOdE+RberXQZSlWXrcLp40wSp8YMP7KQHamhnCefky+ppmF3HTvz/Tb
+ DllE/wm3Gyn723oWbi0rHsJ9cH9HrMRuotcoHoNyFmiEg1Mq8c/bNL/7suHF89MleAF1
+ 6RSu2+lcILirkratLXhXHUHiiBlHL2+BM5dJWxyRhKxA9I1z5czBsX08uHkLsaNaJ18q
+ 9uGvg8RmYlaz/j11B+ZQhilZvgM2nkQpzYMxlmpoxNa9NgM1hTx9Ro5ZjCuZYsWDHDK8
+ XClA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778613052; x=1779217852;
+ d=1e100.net; s=20251104; t=1778613543; x=1779218343;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=DcM95zT3tqIaRgHVJvAUTEPYxP19YVy0C7lcGH0eIGM=;
- b=fNwFV/VoEzpaj8ayk0wwGaW+ob29gznWbYm0XMEMjSb6xPDPXK9ZRu3YYbzN/aBBRW
- qyLsRdeIbC5ldocFoH02QCdOhSQMbT/3aLhk+8sIFGJ21i8CT9ZagU2tOD9+DistXwZT
- ypIYkxrYgsLElpLlLsy5o9WWKCuurlMnIPhvqTwMPVLTVuKYMZeI4MicLKqHZjazgtwV
- cJ5Rs16Koo8NhLO1PeJqfrA0dH+9yiqZO52uzUAuS5fV1lorDfWS1xQ0pBFKQip9SYQF
- B8rEyifyPf8Z+eDW9TkRzm3ebTGmave2Jpd+j7hrY55KEVdt6IbXmOMUaHSxNlwTA0wX
- 37CA==
-X-Gm-Message-State: AOJu0Yx5a6/GY17Sr0wCCyBe8NfbMmdcg82q2M58ibbUGT3/WFAYhjIU
- uSErJPOBKtevR+LYBdHbHmAgm4i6aYFmH361aYxR/YlkfteE7Af57NqE8AnNl0a2JNwDw7+TmGq
- cuHSVQeQ3XRNj+UXrzG2jqNsKzGliWxA3DVGdVyeoTw==
-X-Gm-Gg: Acq92OH6ZCmY7rUG8axPkrpX57/IZiZhMpHKrIAiwcM4vs4BqYMkYOK6nE7l+uijCMA
- zas66jKEIQaph1GQBdsKgfxWP3jB2H8wRS0de00g8h/9TKaqfBdviwVhf/5jZZy/k6UbMske+cG
- mmqmGn2D0znC5V+RoWqbp1dpfjJ+v/2ZW4x1MDYCt00AjK42Zql4nj4FwF8Vl2lV4j7ZjBzqdJF
- MWa5UXnUJ2QTxT5CqfNSI1PZ7fIgpRY9pU6bE5HxklYT2yLc2kvXMu4NBBonsVWnOjBRfRObscK
- tjpSIiu6i3lpj+bhZY0q/ixwK/QJzsLktFsMYeFbPq5LAaYdqlE=
-X-Received: by 2002:a17:907:3f86:b0:bd3:8be5:cf59 with SMTP id
- a640c23a62f3a-bd3add39c5fmr19276966b.12.1778613052099; Tue, 12 May 2026
- 12:10:52 -0700 (PDT)
+ bh=JH3HM+/4ctbbHOlMze61Za9VicDlN8xT70RmEOvmpC4=;
+ b=KPM2W/N0euEK5qAgzyWVCq3xRsOPUKnCoEKiikA6+b/7JrZL5KbshFuU91EkEkw6nb
+ CBWoVdFazYU27MhKtGPqIiT4H9l2j6zhfpWJib54IkVUJjhwfBdqOKeDXmHnuzUbvfEs
+ 4YD2HhtwE+NbMNFsGnTKEAHvYjlrejvsyFYsU8Lz9qSXMuhNVekqxsF1o4xwebjMZuHy
+ gdGI/OuACEU9fXJVT7HnpgoBtE5JgeFgOtEFWjrjBSq2nkpLLlCJsc8gSmgw8Au/vSEJ
+ cgPcbZvSYPuCWiB7/fLlJM2POwMQjSjdecGChS7p58OW3iYJzTgf117HEes4zB21RI9f
+ Ol5g==
+X-Gm-Message-State: AOJu0Yw+DO+rA1CI8OAkaQSJBJu/bJYSXTFtAHaMRsbxR61AB8Ka/R4q
+ 7th+tql90Xk3m9I0mAR1I7x+G+Qj+408knOdKcIEp0tnyEsqyBj4YxUzz/2RjJZm/7Y92IMGo17
+ SCFMbm2B7yahLGPlJGb7NrVA+vbcq4Stjp7T1A2N6/zKNpd/CbvVJruA=
+X-Gm-Gg: Acq92OES7r9OJ3BKbvo+kpdsUxaG40GKP7COd51QIyuR+0h+RIls8UzPT5IpNn4FGTz
+ lGcg8RwlLSzomfxR6SSzx9fdda3qCiMdkgBrlazOciGX7Z7rJui+3qy1BU+gqVIvzpJ5FX3qvcO
+ YXS33LNNSL8woZVc8++tXnCoRJZ47KWbldqMMn+e5aGRSfc6818mu3yB2VE2vDsij4SsJt082Xc
+ YuwiJVXZtMmxQQx7J7SAZbRqwRrgdb2tIaDCw/znLAN2ZKel/XxJoL3zwXfFS4MS46jGwSAoMgL
+ M6wIOiqDcYUTlBtyteAf4bqhpHGgjmIDob2fngVY
+X-Received: by 2002:a17:907:930b:b0:bd3:a7df:d32f with SMTP id
+ a640c23a62f3a-bd3c182e352mr5810866b.41.1778613542967; Tue, 12 May 2026
+ 12:19:02 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260512-font6x8-v1-1-8cee71a7cc71@flipper.net>
- <20260512170938.GO1858239@bill-the-cat>
-In-Reply-To: <20260512170938.GO1858239@bill-the-cat>
+References: <20260311-rk3576-ufs-v6-0-c7c353739242@flipper.net>
+In-Reply-To: <20260311-rk3576-ufs-v6-0-c7c353739242@flipper.net>
 From: Alexey Charkov <alchark@flipper.net>
-Date: Tue, 12 May 2026 23:10:41 +0400
-X-Gm-Features: AVHnY4IAf3qzy3iWQ6VCBYVulFgAlLSzKzMNuxnqFa3DXn8jyD9Jxh3z1QdtGnw
-Message-ID: <CAKTNdwEQcCzwegbA83N-7uFh4F-24PD4UDon1PXGrdor38Ec6Q@mail.gmail.com>
-Subject: Re: [PATCH] video console: add 6x8 console font from linux
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Anatolij Gustschin <ag.dev.uboot@gmail.com>, 
- Svyatoslav Ryhel <clamor95@gmail.com>, Ion Agorria <ion@agorria.com>, 
- Michael Trimarchi <michael@amarulasolutions.com>, 
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>
+Date: Tue, 12 May 2026 23:18:51 +0400
+X-Gm-Features: AVHnY4JOJ27Pnhg9pVONSiSR-IPNQOnTtzuao2tj2jBlUwRMHkiMtvvk_sFY8N8
+Message-ID: <CAKTNdwG1bWJb_d_7yzqFAHHhLPCFRaP3y6_Jw9HJ4ohWT9dyhQ@mail.gmail.com>
+Subject: Re: [PATCH v6 0/6] Enable full UFS boot on Rockchip RK3576
+To: u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, Kever Yang <kever.yang@rock-chips.com>, 
+ Heiko Stuebner <heiko@sntech.de>, Neil Armstrong <neil.armstrong@linaro.org>, 
+ Sumit Garg <sumit.garg@kernel.org>, Simon Glass <sjg@chromium.org>, 
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Quentin Schulz <quentin.schulz@cherry.de>, 
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Paul Barker <paul.barker.ct@bp.renesas.com>,
+ Christian Marangi <ansuelsmth@gmail.com>, 
+ Gabriel Fernandez <gabriel.fernandez@foss.st.com>,
+ Jonas Karlman <jonas@kwiboo.se>, Finley Xiao <finley.xiao@rock-chips.com>,
+ Elaine Zhang <zhangqing@rock-chips.com>, 
+ Joseph Chen <chenjh@rock-chips.com>, Xuhui Lin <xuhui.lin@rock-chips.com>, 
+ Dhruva Gole <d-gole@ti.com>, Anshul Dalal <anshuld@ti.com>,
+ Alexey Charkov <alchark@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -118,47 +127,160 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, May 12, 2026 at 9:09=E2=80=AFPM Tom Rini <trini@konsulko.com> wrote=
-:
+On Wed, Mar 11, 2026 at 5:31=E2=80=AFPM Alexey Charkov <alchark@flipper.net=
+> wrote:
 >
-> On Tue, May 12, 2026 at 04:38:14PM +0400, Alexey Charkov wrote:
+> Rockchip RK3576 can load its bootloader from UFS among other options,
+> so this series adds the necessary bits and pieces to enable an end-to-end
+> boot from UFS (boot ROM -> SPL -> U-boot proper -> kernel).
 >
-> > Small screens on the order of 256x144 pixels can't fit much text at 8x1=
-6,
-> > and 4x6 is virtually illegible, so add an in-between 6x8 font from Linu=
-x.
-> >
-> > Signed-off-by: Alexey Charkov <alchark@flipper.net>
+> This series contains the Rockchip-specific code to enable UFS boot in SPL=
+,
+> and relies on the architecture-independent bits [1], [2] already applied
+> by Neil Armstrong to the u-boot-ufs custodian tree.
 >
-> The commit message needs to say what commit / release from Linux this is
-> taken from, and since it's not obvious what file this is based on, that
-> should be in the commit message and...
-
-This is copied over from lib/fonts/font_6x8.c in the current Linux
-master (the last change to the file was commit db65872b38dc
-("lib/fonts: Remove internal symbols and macros from public header
-file"), but the font data itself seems the same as in the original
-commit e2028c8e6bf9 ("lib/fonts: add font 6x8 for OLED display") from
-August 2020).
-
-Will add it in v2.
-
-> [snip]
-> > diff --git a/include/video_font_6x8.h b/include/video_font_6x8.h
-> > new file mode 100644
-> > index 000000000000..c338377a0bd2
-> > --- /dev/null
-> > +++ b/include/video_font_6x8.h
-> > @@ -0,0 +1,2574 @@
-> > +/* SPDX-License-Identifier: GPL-2.0 */
-> > +/*
-> > + * 6x8 bitmap font from the Linux kernel adapted for U-boot video cons=
-ole
-> > + */
+> It also depends on the recent addition of Rockchip-specific code to allow
+> DMA writes to PMU SRAM by Jonas Karlman [3] already applied by Kever Yang
+> to the u-boot-rockchip custodian tree.
 >
-> here as well. Thanks!
+> To achieve the above, this series goes through the following:
+>  - Patches 1-2 cherry-pick recent additions to the upstream DTS files
+>    required to properly configure the pin mode for the UFS device reset
+>    pin on RK3576, as well as enable the UFSHC node on the NanoPi M5 board
+>  - Patch 3 adds an option to build the Rockchip reset driver for SPL
+>  - Patch 4 ties it all together for Rockchip RK3576
+>  - Patches 5-6 update defconfigs for two example boards to enable UFS boo=
+t
+>
+> This has been tested on a FriendlyElec NanoPi M5 board with a Biwin
+> BWU3AKC46C256G UFS module.
+>
+> Note that in my experience none of the RK3576 boards actually boot curren=
+t
+> mainline U-boot versions without a single-word SRAM write before jumping
+> to DDR initialization, as done in Kwiboo's commit at [4]. Therefore, to
+> test this series I additionally applied commits 117cd97627fd..04e6417226f=
+5
+> from Kwiboo's rk3576 branch [5] (including 117cd97627fd), so any testers
+> might want to:
+>
+> git cherry-pick 117cd97627fd^..04e6417226f5
+>
+> from there before or after applying this series
+>
+> [1] https://source.denx.de/u-boot/custodians/u-boot-ufs/-/commit/8ce3df3e=
+be6b8c0022a0c79780a2e1ce3e1c792a
+> [2] https://source.denx.de/u-boot/custodians/u-boot-ufs/-/commit/42dd7a5a=
+e1b166127766ce7e39f98badb311e56d
+> [3] https://source.denx.de/u-boot/custodians/u-boot-rockchip/-/commit/401=
+5faa32342fd9c494c318c21de106f98dd4674
+> [4] https://source.denx.de/u-boot/contributors/kwiboo/u-boot/-/commit/04e=
+6417226f50e4e3cb04272280922eb425c18ab
+> [5] https://source.denx.de/u-boot/contributors/kwiboo/u-boot/-/commits/rk=
+3576?ref_type=3Dheads
+>
+> Signed-off-by: Alexey Charkov <alchark@flipper.net>
+> ---
+> Changes in v6:
+> - Dropped patches already applied by Neil to the u-boot-ufs custodian tre=
+e (thanks Neil)
+> - Rebased to current next (thanks Jonas)
+> - Fixed the dependency on SPL_CLK instead of CLK for the SPL reset driver=
+ (thanks Jonas)
+> - Included newly required DT nodes into bootph-* filters for the u-boot-s=
+pl.dtb (thanks Jonas)
+> - Cherry-picked the relevant DTS additions from devicetree-rebasing (than=
+ks Jonas)
+> - Added a preprocessor conditional around the GPIO4 bootph-* node to avoi=
+d its inclusion
+>   without CONFIG_SPL_UFS_SUPPORT (thanks Jonas)
+> - Added relevant defconfig changes for Rock 4D and NanoPi M5 (thanks Jona=
+s)
+> - Link to v5: https://lore.kernel.org/r/20260120-rk3576-ufs-v5-0-0edb61b3=
+01b7@gmail.com
+>
+> Changes in v5:
+> - Reverse X-mas tree in spl_ufs:spl_ufs_load_image (thanks Quentin)
+> - Explicit "depends on UFS" from CONFIG_SPL_UFS_SUPPORT (thanks Quentin).
+>   This also pulls in SCSI to avoid compilation errors.
+> - Split out the patch enabling the Rockchip reset driver for SPL builds
+>   (thanks Quentin)
+> - Reworded the error message when requesting the UFS reset GPIO fails
+>   (thanks Quentin)
+> - Added a note in the commit message about reset-gpios being required by
+>   the DT binding (thanks Quentin)
+> - Dropped the redundant check of GPIO validity in the reset function
+>   (thanks Quentin)
+> - Added a note about GPIO4_D0 being the only GPIO usable for UFS reset
+>   on RK3576 (thanks Shawn)
+> - Dropped "imply" symbols from the arch Kconfig, now that both GPIO
+>   and RESET drivers are explicitly depended on from the UFS driver
+>   (thanks Quentinq)
+> - Link to v4: https://lore.kernel.org/r/20260108-rk3576-ufs-v4-0-e8e67649=
+f3f8@gmail.com
+>
+> Changes in v4:
+> - Added a dependency in b4 metadata on Jonas' new series enabling DMA
+>   writes to PMU SRAM (thanks Jonas)
+> - Dropped the bounce buffer quirk altogether, as it now works as-is
+> - Link to v3: https://lore.kernel.org/r/20260106-rk3576-ufs-v3-0-bfe259fd=
+6d17@gmail.com
+>
+> Changes in v3:
+> - Added a UFSHC quirk to use the SCSI bounce buffer for addresses outside
+>   SDRAM, and enabled it on Rockchip (thanks Neil and Tom)
+> - Dropped the open-coded bounce buffer from spl_ufs.c, now unneeded
+> - Link to v2: https://lore.kernel.org/r/20260105-rk3576-ufs-v2-0-caba979a=
+0d6b@gmail.com
+>
+> Changes in v2:
+> - Rename the SPL UFS read helper function more self-descriptively (thanks=
+ Neil)
+> - Add an option to configure the UFS LUN used to look for the U-boot imag=
+e
+>   in raw offset mode - or rather the SCSI device number, which most of th=
+e
+>   time coincides with the UFS LUN as long as the UFS device is the only
+>   SCSI block device the SPL sees (thanks Neil)
+> - Add an option to use a bounce buffer in RAM while loading U-boot from U=
+FS,
+>   which helps avoid changes to common spl_fit.c code which in v1 achieved=
+ a
+>   similar result at a performance cost to unrelated platforms (thanks Jon=
+as)
+> - Link to v1: https://lore.kernel.org/r/20251210-rk3576-ufs-v1-0-a3f9e76e=
+b66e@gmail.com
+>
+> ---
+> Alexey Charkov (5):
+>       arm64: dts: rockchip: Explicitly request UFS reset pin on RK3576
+>       arm64: dts: rockchip: enable UFS controller on FriendlyElec NanoPi =
+M5
+>       reset: rockchip: make device resets available in SPL
+>       rockchip: spl: Add support for booting from UFS
+>       rockchip: rk3576-nanopi-m5: Enable UFS support
+>
+> Jonas Karlman (1):
+>       rockchip: rk3576-rock-4d: Enable UFS support
+>
+>  arch/arm/dts/rk3576-u-boot.dtsi                    | 33 ++++++++++++++++=
++++++-
+>  arch/arm/include/asm/arch-rockchip/bootrom.h       |  1 +
+>  arch/arm/mach-rockchip/rk3576/rk3576.c             |  1 +
+>  arch/arm/mach-rockchip/spl-boot-order.c            | 14 +++++++++
+>  configs/nanopi-m5-rk3576_defconfig                 |  7 +++++
+>  configs/rock-4d-rk3576_defconfig                   |  7 +++++
+>  drivers/reset/Kconfig                              |  9 ++++++
+>  drivers/reset/Makefile                             |  2 +-
+>  .../src/arm64/rockchip/rk3576-nanopi-m5.dts        | 24 ++++++++++++++++
+>  .../src/arm64/rockchip/rk3576-pinctrl.dtsi         |  7 +++++
+>  dts/upstream/src/arm64/rockchip/rk3576.dtsi        |  2 +-
+>  11 files changed, 104 insertions(+), 3 deletions(-)
 
-Will do. Thanks for your feedback Tom!
+Hi Kever,
+
+Gentle ping regarding this series. Would you mind applying it? Shall I
+rebase and resend?
 
 Best regards,
 Alexey
