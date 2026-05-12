@@ -4,143 +4,123 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1707ACD4855
-	for <u-boot@archiver.kernel.org>; Tue, 12 May 2026 09:45:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83BD3CD4855
+	for <u-boot@archiver.kernel.org>; Tue, 12 May 2026 09:46:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9B52B80398;
-	Tue, 12 May 2026 11:45:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
+	by phobos.denx.de (Postfix) with ESMTP id E54C283C51;
+	Tue, 12 May 2026 11:45:59 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="Min9fS6h";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="V3qopbce";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E8C2F8394E; Tue, 12 May 2026 11:45:49 +0200 (CEST)
-Received: from BL0PR03CU003.outbound.protection.outlook.com
- (mail-eastusazlp170120007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c101::7])
+ id 8F56383EEF; Tue, 12 May 2026 11:45:58 +0200 (CEST)
+Received: from DB3PR0202CU003.outbound.protection.outlook.com
+ (mail-northeuropeazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 56425801A9
- for <u-boot@lists.denx.de>; Tue, 12 May 2026 11:45:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A92FA83C51
+ for <u-boot@lists.denx.de>; Tue, 12 May 2026 11:45:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=altera.com
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tanmay.kathpalia@altera.com
+ spf=pass smtp.mailfrom=patrice.chotard@foss.st.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=HVcl+XYliK0tsvj78n+K1GDdb4YW5UHQvYjwyiRRctrt9n1rCGgYlgbu99IIrPAbIRXjyu7xRtGGBcTDcNtL4S54Rx1BGth4IaCCVBCKWCFofFMq64icxzAEwqcSFC8kM7Fi/nOhKmXDqKmqVr4xY+gwLhfoJgDF6v6+tT00piztcobWkGROHp2fWBfnIaWZXUWn7uOStXXTvmKOQcJy4wyfNZvJy5H2VQLmHdmdbeRbjx6lsvVhbOv9SDAtYShin1S6OY7ut8l+9Xh2mnM33sp58hc1Nx+/r5Jc7SVB6HotdVyxVzw5kTKIpNTEOZXDrkJh4S56RA/zKj6WnEmvSw==
+ b=IqSEZC1w5VKoIITzDTrbPRb5ltfbnkVnKOBT9rULp1/lDMm4D4e51+UFG4tNbFRDt3XjDTZsgCiAZ5G+77QamyUZ4wEBxlu5T+niMzb1drgYepBiHXQ5GCzWhasB54CTY2fhpG+giGu2gSnebd7j+gM7H7pz2lmzxjx0kzuhoBiknsTEFnjBRIv+MpbmPe3rpB+VU4hWXt74E3T8MLMdNdgi6NATr7GbKbVaRo7ExjERDOH3dUb6FFtHIhMRtRUSJ1SZ5I9CPrymp9oaL0xnXxck0dbhHTUs7Ppdoi89+/pfw7clUy8h4k6f2TGSJ06vVZvQ+7Y5a2VhI/BMTP2Img==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=UpLJJSM7B0HU9Hxo9nlrhZhyniL/SrYZoSUiMHj1Z9Y=;
- b=W01OPwAEpZfdYgIT2f9BxtyX1U+92/P8kP1FrNHH6KVTqZeTBdi9KAGAgFGcUs+UlBjHDx2VkZSncWLQgqpber8/+2Y71KWwaW9y/1AmXdWPTI/3q5ewQWOj8WnIKDa0IlGn7AlialV0ukFx3LTA9Ygi1KohFjYooK43WGocgenLe7s1qoawA4LOoQE2+fnHoc9DSZHG2k7oA1kNX+CzJrNuws0kLAezxfSGb7KexT2s1Q6hgE/TJlFVyG90Uc4bTodjlaGszgZIIozBwy2j8+KwOxbxfZOxmQcqQTqYazRtOKQohTbIya0eQXyqb16XgoBs1u3V6KDGVDR1+qMh7A==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
- dkim=pass header.d=altera.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
+ bh=ioMPAMY1kYzfxiSOEDAW8e86TIn1Yp+x0jOtKiA51Uc=;
+ b=JSnhCrA8LEtmLk2TQBDnRlDRHBsdZSkw1HTiChWl+LjXZjW6lRYUfRW7Ss4D86TQGrHGAhOOa3ZfLEP6PoVyg5ETVcfIxrhnf/IecRFiEcs4VamkJBYWR+b02/GbgIUDnd9QTSpMZz3f7EQwPTEBh/J3MmvszbLnJ4kn52GSjRMIbnSVzm4K6wn7pB4YU3+XjpPSxxOPVOFu47a2QZ6y0MUzoR4pm9E98JIUgkz2nbOVstxkwiS0x0nq/Z1HfoWmFVTfooxAB6inPBi8vjwwrHuJyXHjTT7UITJmDWDVJPch10taQmRqVBDnT5ldADQ3+s2EaLnjYsEavatC+HpMJw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
+ 164.130.1.59) smtp.rcpttodomain=amarulasolutions.com
+ smtp.mailfrom=foss.st.com; dmarc=fail (p=none sp=none pct=100) action=none
+ header.from=foss.st.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=UpLJJSM7B0HU9Hxo9nlrhZhyniL/SrYZoSUiMHj1Z9Y=;
- b=Min9fS6h/56XbePPj45Ga38ai8WVbsCRJGzV4+1Qb1dmwSYKG/FPYf1mNKm49MLEyovzqCeGyhNPywBDzKoNt4Ist1p/GBFofdpOoAQGDIyZQdoy9yhy4lQY9BgdRdj1dzCPYYB2gXR6ItP5sQiX57lfuWcnenueG49UkJf5EdE02b2K1vmOB/lMB2OIYc3lHja/TaDsx+XvHEj5e0qOQh414xKaHH8aJYZL0zlkDGO037wZK1Un+THoccsd0RjZyAlvGIfbEj/WnATRwEE/LGfYBJlMxHoJxvv/eqbyc4ngHQR3e4Ejq3byhzV3v37ilaZUvpXHsGwy8tu/Tl4XXw==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=altera.com;
-Received: from DM4PR03MB6208.namprd03.prod.outlook.com (2603:10b6:5:39c::19)
- by CH2PR03MB8115.namprd03.prod.outlook.com (2603:10b6:610:27c::14) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9891.21; Tue, 12 May
- 2026 09:45:44 +0000
-Received: from DM4PR03MB6208.namprd03.prod.outlook.com
- ([fe80::2216:93ef:67b:9e04]) by DM4PR03MB6208.namprd03.prod.outlook.com
- ([fe80::2216:93ef:67b:9e04%6]) with mapi id 15.20.9913.009; Tue, 12 May 2026
- 09:45:43 +0000
-Message-ID: <eef968b9-c861-4c56-82c0-fb750d5e128a@altera.com>
-Date: Tue, 12 May 2026 15:15:31 +0530
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] mmc: sdhci-cadence: trigger tuning for SD HS mode on
- SD6HC (v6) PHY
-To: Peng Fan <peng.fan@oss.nxp.com>, tze.yee.ng@altera.com
-Cc: u-boot@lists.denx.de, Peng Fan <peng.fan@nxp.com>,
- Jaehoon Chung <jh80.chung@samsung.com>, Tom Rini <trini@konsulko.com>,
- Tien Fong Chee <tien.fong.chee@altera.com>,
- Kok Kiang Hea <kok.kiang.hea@altera.com>,
- Dinesh Maniyam <dinesh.maniyam@altera.com>,
- Chen Huei Lok <chen.huei.lok@altera.com>, alif.zakuan.yuslaimi@altera.com,
- Boon Khai Ng <boon.khai.ng@altera.com>
-References: <f385cf516e8a75fff5c90aa9e54f8e54044f0dd9.1777947009.git.tze.yee.ng@altera.com>
- <afqkA0gI773LcIqx@nxa18884-linux.ap.freescale.net>
-Content-Language: en-US
-From: "Kathpalia, Tanmay" <tanmay.kathpalia@altera.com>
-In-Reply-To: <afqkA0gI773LcIqx@nxa18884-linux.ap.freescale.net>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: MA5PR01CA0214.INDPRD01.PROD.OUTLOOK.COM
- (2603:1096:a01:1f3::10) To BN9PR03MB6204.namprd03.prod.outlook.com
- (2603:10b6:408:101::21)
+ bh=ioMPAMY1kYzfxiSOEDAW8e86TIn1Yp+x0jOtKiA51Uc=;
+ b=V3qopbce2qJaYPI7iPY6Ny0mj4EiUPXZGU5t/ZBt2J7Ot9C9/31H5JCMXgL07+k+4i/JCG6MG1Ig9Pc9tXC5AD4j+ehTB3jGodsOOpa1M0uruPAVGjuiVQYePAh9HcPrVoXJlXXn+z8ZBQLoLLaz6tWbHO0maVW8a1Bn6K8gBwlwivz/aLAeH1g6GMWZ4Q0h8nHHPuB0WpY7JsZGfx13g7G6R6HUSiJs/uzBaW/QWZe/4TifT4jI5G9QdetySuIvrYMH7BlvKZERa9GApRznz+6QaHlEXaILq/sqwtmw0w4wXA5KL/2r9ppsEn0W9hspZ8+S8FfMGhd0Zgdwe85M/w==
+Received: from DUZPR01CA0153.eurprd01.prod.exchangelabs.com
+ (2603:10a6:10:4bd::6) by AM7PR10MB3746.EURPRD10.PROD.OUTLOOK.COM
+ (2603:10a6:20b:172::23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9891.23; Tue, 12 May
+ 2026 09:45:50 +0000
+Received: from DB5PEPF00014B9B.eurprd02.prod.outlook.com
+ (2603:10a6:10:4bd:cafe::80) by DUZPR01CA0153.outlook.office365.com
+ (2603:10a6:10:4bd::6) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9891.23 via Frontend Transport; Tue,
+ 12 May 2026 09:45:50 +0000
+X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.59)
+ smtp.mailfrom=foss.st.com; dkim=none (message not signed)
+ header.d=none;dmarc=fail action=none header.from=foss.st.com;
+Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
+ designate 164.130.1.59 as permitted sender) receiver=protection.outlook.com;
+ client-ip=164.130.1.59; helo=smtpO365.st.com;
+Received: from smtpO365.st.com (164.130.1.59) by
+ DB5PEPF00014B9B.mail.protection.outlook.com (10.167.8.168) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.25.13 via Frontend Transport; Tue, 12 May 2026 09:45:49 +0000
+Received: from STKDAG1NODE1.st.com (10.75.128.132) by smtpo365.st.com
+ (10.250.44.71) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.35; Tue, 12 May
+ 2026 11:49:37 +0200
+Received: from [10.48.87.93] (10.48.87.93) by STKDAG1NODE1.st.com
+ (10.75.128.132) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.35; Tue, 12 May
+ 2026 11:45:48 +0200
+Message-ID: <e057518f-3f82-49d2-8e2c-7677c1c89e46@foss.st.com>
+Date: Tue, 12 May 2026 11:45:49 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v8 3/8] test: cmd: add unit tests for part command
+To: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+CC: <u-boot@lists.denx.de>, <linux-amarula@amarulasolutions.com>, Simon Glass
+ <sjg@chromium.org>, Dinesh Maniyam <dinesh.maniyam@altera.com>, "Heinrich
+ Schuchardt" <xypron.glpk@gmx.de>, Marek Vasut
+ <marek.vasut+renesas@mailbox.org>, Mattijs Korpershoek
+ <mkorpershoek@kernel.org>, Quentin Schulz <quentin.schulz@cherry.de>, "Tom
+ Rini" <trini@konsulko.com>
+References: <20260430080627.849636-1-dario.binacchi@amarulasolutions.com>
+ <20260430080627.849636-4-dario.binacchi@amarulasolutions.com>
+ <5b02ed04-764c-4eee-ba58-0f84ef43446c@foss.st.com>
+ <CABGWkvp-5GnhvOO46PoKBOKmh-XsTLbHQx63fMwm70J0NYZ55A@mail.gmail.com>
+ <CABGWkvrBZPN4LGia169JdrjhUyN5cSvnMt1hxH=Tx6JZ0NbRTQ@mail.gmail.com>
+Content-Language: en-US
+From: Patrice CHOTARD <patrice.chotard@foss.st.com>
+In-Reply-To: <CABGWkvrBZPN4LGia169JdrjhUyN5cSvnMt1hxH=Tx6JZ0NbRTQ@mail.gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+X-Originating-IP: [10.48.87.93]
+X-ClientProxiedBy: ENXCAS1NODE2.st.com (10.75.128.138) To STKDAG1NODE1.st.com
+ (10.75.128.132)
+X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DM4PR03MB6208:EE_|CH2PR03MB8115:EE_
-X-MS-Office365-Filtering-Correlation-Id: bd77387e-eaaf-416b-807f-08deb00b3b6c
-X-MS-Exchange-AtpMessageProperties: SA
+X-MS-TrafficTypeDiagnostic: DB5PEPF00014B9B:EE_|AM7PR10MB3746:EE_
+X-MS-Office365-Filtering-Correlation-Id: d7814bd8-2ee8-4a4b-8a8e-08deb00b4014
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|1800799024|366016|56012099003|22082099003|18002099003|11063799003|55112099003|10063799003|3023799003;
-X-Microsoft-Antispam-Message-Info: XeewfLy8KD8lgWklUL/LZtm2cmZGVjoVGU3l606bDH75iS1Y24Q6NFQmopXCyeChzC8FwNn5dL9uob9e90rZyAPt6gTstSbmM6Jf0e5wVjGgZ+42fQeEswRPhaGAfspAj5xatOM6ZTyyxwKO0cJmFSZnWm3inyP730zgOUjf37ywvfZLbbS7GUtBf53IhrcaxRZ3rrqhy2tPhDjdrFtQTQRNeRclKLlTWEUa8gYnF+POAgBx9elkcVwxE1jvliOtVBrpfTNa0MFa9H9GspEtAiNi0jC/ZuhmJsLHjEBzUFAH6U3MSx9UW9JMSdWITW02vJXjgMTKx3o17hNpI9ah16T9GIFIH0RoJqEwTjp8Hx+TT5LKIzWllurYsFeBjF/0/0hsRyWusQ0MOt4FcoNdHsbQuhNZ97dM350onqGxi8kqR/Cvn6XOH0/d+jElSey1zBLF/bx4u47TEV04gMdGhQssDfaLIuHl0h3YTCzdCwPb2cumpPP1uP1tFfx0O5qbUX/jh4nMFFRpeGGZqCzh47vbPoezoBI7Aw0R1YejRWGXBMUfx2f0l9ozsWdKfg73ZCLkAe0+KcHnSnqRKdnq9Uo1M6KosJmcjoPPMgjx2M0XAHyuPDAB544bnf72IeT7UDTSTfjVaKVvilSM8Xam6z9BTCfHXo2XyOrOQ49h69TW8OpWxw2g7o47yFe7qdyV
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:DM4PR03MB6208.namprd03.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(1800799024)(366016)(56012099003)(22082099003)(18002099003)(11063799003)(55112099003)(10063799003)(3023799003);
+ ARA:13230040|1800799024|376014|36860700016|82310400026|7416014|3023799003|11063799003|18002099003|56012099003|22082099003;
+X-Microsoft-Antispam-Message-Info: mY9FtH4DNh6F3aSch2t1LoEUVv5NUp1pPJbm6PMPc3MvnESW5PXipwNpwrvrp8m9I+sAuHglKslQfyk4YO1bnH3CU8gkVv/+uk5HxA8l7++8cTMZKCHL4aZkqX+TDczGZ8pYuIG3XPWK9In8i8qG4OxsWtiRLQUQA0G5oNAmtZ9YBfPJozs08P/CguwmAw+xgq7VaZswZPuxvFe4XMeHqW+JNueJ7dQzn70TBXFOBN8Eg2olRAK5mEwGRSJwX55d+udSBLlIL+rE7GQOOv+S9s56j+NZAmuiT5nFtxaddYXeTvhHZE562fiOvhMxY3wbbJ8ivPtHAHKDX9oZSOtsR4XfLb8MTZviERdPTH16W7zS/E5ZNkD2eKCvM8ruegqsIiQfZiBZBXUEL82LIZpmwJFyP/CLzHmm38MZQKmOF0nmpEdfh1C+UOxB0Xm1ZApzJcQuQVIOHELGBr62vtR/QpxD1USnYDaaawiJg1unTZ5MRmanC2+LAafRabnni3XHyNhDEi320eJ/JpLKhE+hSa5L7EyCravpaTN6uoJoHFs7iLwjqTkMAKiQhmcj6IeDUOy91+CYvBUu72rE9gWq+OiCUbUsgV/zsY4RPhBR0unZw84poq8Iuq6tqC96j+6yKmRkzTENR2i3iRa+hLHP10iI1nzmirNs2hXPPqMkEW4rCEr52nfH56kgU2A8rJ3z
+X-Forefront-Antispam-Report: CIP:164.130.1.59; CTRY:IT; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(1800799024)(376014)(36860700016)(82310400026)(7416014)(3023799003)(11063799003)(18002099003)(56012099003)(22082099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?cm1aTmJHUEVaRUsrdjhPUzdJaXN3d083cnpwaTc5K05SN1Q1Y2kyaHc0N2Fl?=
- =?utf-8?B?WVovMGdrQ1pMWUJuSDJaZWprb0NwL2J1TnNLMlVHRDFaYUpscmxPenc1aFYy?=
- =?utf-8?B?UEM5TTY5ZUNZaUk5a3dFS1ptWnYrSytkeG50YjZpMS9kRUtSd3M4WDc0TFFN?=
- =?utf-8?B?ZDAvWmVESkdpUSswWXdrS3JaSVJUcE5tdkdhWlpmbFdaS0FETC8vaWt4YXVX?=
- =?utf-8?B?eVE0WUkwaXBLVk9Tb3AxREx3L1QzanVOaWV2L1FqOW4zVm1HVHVuUzRXRFFM?=
- =?utf-8?B?RjRKUVc1YjBKeHoyK1VUWEdhSDJRV1ZJZjNBRGpKUG05TEdBWGVtSUMyOEkr?=
- =?utf-8?B?TjRBck9ZZTRHMHdDR2FqRmFwSXBhZUFiaHFMeXBZNGlMSGhDMVc1TUFzRWow?=
- =?utf-8?B?dE9RWGhXdTg3VTgzdXQwdlNZYStpeVJPOWdaN0V3WTkzR3NMSFBTZUJZT1dC?=
- =?utf-8?B?UHIxSWoxTE9CWFRUSVZGUEl1NFB2SEhNTk9tZjBkWVFHa1oyT3RMQmo5NjBy?=
- =?utf-8?B?K1YvWjRESEdBdU42Sk0xYjhvbUZ3RXFOQTRndHdYMlA1VDczMVBlK0U1Z2tD?=
- =?utf-8?B?MWNBY1o2Q0YxWjRLOTQvcUdPMG9PUUpsSytLNzhSU2xOK2wwV0N4OVBNWVlM?=
- =?utf-8?B?VmsxQ3ByRjJKKzg4QVBsRkNkUlhnUjdHUWQvQm1USGlCS2V5SituSERmcGpC?=
- =?utf-8?B?ZTJ5WHNFR3ROU0U4OXJvczJQb0tXZmY4RUtmaFE2RUhteWhvQUN3ZGdabVRq?=
- =?utf-8?B?UDFnUndkeDhYSzA0VFVCbEtiZXNObmwvcUF2V0hsOHJoR0NiY3R2ZmZaQU9E?=
- =?utf-8?B?V0liOVRrcnNKUk1FMmtkSFRxa1NQSkdHL2J1bjBoMVFJbGl6c3phRG9NVE54?=
- =?utf-8?B?MEp5amNxUGRoR2dCQyt1cjZMbzRuU2NpK3NXZU1qN3pFTU5HQ2JDS2h6Z2Fx?=
- =?utf-8?B?U0owVndTOTRDOGg2Z1NyVHI0Y09Pb0hwVXpPM2JpRU8rN3NTQ0s1aFI1ZVdW?=
- =?utf-8?B?eFkvd0FsdElDc0tvYnRVQnp6TUJsTzBHZE00WGx6Qnh4NTZOTGlyclVyVm8x?=
- =?utf-8?B?dWFYVUZMd1pmazF5QnNGRzhPUHROQTh3a1RDK09zZGdYSnNUUjFjV3NnVy84?=
- =?utf-8?B?VUY3cFM2cDl2U3BkNEc1eUIwRE9IMndVUTIyNkdCazlFQUVWcGZGOG5abEdY?=
- =?utf-8?B?NUNNbmlKTWg5TW04WmVUcmRJYlk0UU1JTGIvcXdWdGlrUEtzVS9CNVB3ajZx?=
- =?utf-8?B?Y05KYWZZK0JmU0pQWk1aVVF3eGFaTG44SmpqVXRiS0twcXRSREVsekp0Y1Ay?=
- =?utf-8?B?aXVZeEt1QklyQkJZSXlKdTIrVnNEZ0Z3TStsZmtoZFFjWmxlQXlEOEJYSm5K?=
- =?utf-8?B?TnJYYmpSdGxOaDI4YUgyY0JxRGpuZjNNTCt0NEJXeFRaVW1YZ090aDB5MHAz?=
- =?utf-8?B?akxZNUlmdW5wODA5R0J1Unk5VU9NUzl1ZzBJQmU2QklmSnh1VUVhVTlsbHU1?=
- =?utf-8?B?bWFrVklXUmpRQ0hWMWJ6NlNwWkswOEI4T0Z2aW1YMUZTeDRZRVlpTFY5Z3JB?=
- =?utf-8?B?dGlhcWFzeHF6dm5nNWdCam42QmFEY3lRTklhSHF4dEZxTGk0MFRSdGxkamFK?=
- =?utf-8?B?STdxRHRuMVNIVWxzbFhkcElMbTUrL0JYMzkrcVhUS1VJWElxL0JMQ1lXcjlP?=
- =?utf-8?B?ZWRKb3A3bVFpSHVTY0pSQTg0bE9QWTRMVlF2djRmSG0yMW5Mb1kwTWh6RldU?=
- =?utf-8?B?c01ETExicWpQV0pHczhFZ2JONXg1R3pBcVVxTkhpLzJjMEM2alovYnR1NXlC?=
- =?utf-8?B?QzBTazk3QUtOYmpNa094YVJTYUhOWjV3cFo5R2RvUGlNakN1bzFQYVo3bDJa?=
- =?utf-8?B?dklvTVgyK1B1b1NSTTQ2UlpNYVlxamNsMlcvNnNnMXovcFExTW5XcjYzN2Z0?=
- =?utf-8?B?K1RxRTEzd0dBV1R6c0p4UXQ1OFMxWFM4eC9FZzJveTdLV0JsM21lZTh5b0Jj?=
- =?utf-8?B?bjZLWVYxZlBHbG9LOFBhbTVUNThCL0R1Rmp2ekpJdExLY1JXenlqRktrbWJP?=
- =?utf-8?B?VFBXVmZpOG5uejFmTXZPemovQTlreVZ6a2RkM3JQVXBRQWVmY1hQaG9KeUd4?=
- =?utf-8?B?dmZnako2aXlLWmp5ZjlVUUx2dkJ5enNXRXhuNng3aEN1Ym5RSWNrR204bHJ3?=
- =?utf-8?B?cUN6NlVzR1YxeTBtVW1Qb0h3WXNZd0xJek9tUjE3ZlgyV0Z4eFJmd0VlK2Yy?=
- =?utf-8?B?Q3p4VmtzTVBIbUJhWW03L3p6NkJRbzRCN29RcHJFdXphNGh4L2JKUFRkWHcw?=
- =?utf-8?B?c0owOUhPalpzcTAzRFlWRkhpbUYvSkZjWUd0MmtLMDdocVpNcUZrR3IxajFr?=
- =?utf-8?Q?q7YQhEfTjlcE0+7I=3D?=
-X-OriginatorOrg: altera.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: bd77387e-eaaf-416b-807f-08deb00b3b6c
-X-MS-Exchange-CrossTenant-AuthSource: BN9PR03MB6204.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 May 2026 09:45:43.6938 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: /evLvxvGbG0z4pVuIkeDKnWZ5ncBtwlVxTShvwHcaN1U9OKuOFTiIt7KR72DWBPAMXm3Qmqfwuvc+DK7u0Zp/Uniqlyn6ZNjfljucCuu2gs=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH2PR03MB8115
+X-MS-Exchange-AntiSpam-MessageData-0: SnaZRaNtDCHKaNTtVJPwy3GcGlOUu7NIjvZ0BTLFjy4+O0efF4uDFzkSu1BKoiwpQ4kjvt4w4pam0hSwKfUs/TUhnqIgUzVhakbRoh9mjBoiNa+uAyrRVTVeqecVsicSwvI0igplo2AwRcMlDl4cbGl/N548NkGlFayijD+S6V1fNLTZqHVMFgzhBw+LuxERbCsvqcWY0HAjgcO/rzZswHMqrZYrh9xXHvMBCvvlbgXu2yNX5xRCDMqXodo4ADWLmXIgOeKC2oReL8Qxpoyg96tpcURkjJQ/NKi5Yibf4Ong8hxCtGWgVK/NV5N3hMsmLt6jtpQKG9RV+Zyd1wKUYAoYoyQSBaGj3jR2UbmvHviqy6xbYy/w2KF9tGGz3z65uglsFfvYxc+FkQOCkbB08r5+3n1hKuPS4/kKNtTQG7mAOSuQMlm6ZzKiIKpIwp6M
+X-OriginatorOrg: foss.st.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 May 2026 09:45:49.8322 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: d7814bd8-2ee8-4a4b-8a8e-08deb00b4014
+X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.59];
+ Helo=[smtpO365.st.com]
+X-MS-Exchange-CrossTenant-AuthSource: DB5PEPF00014B9B.eurprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM7PR10MB3746
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -157,314 +137,318 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tze,
 
-On 5/6/2026 7:44 AM, Peng Fan wrote:
-> On Mon, May 04, 2026 at 07:36:03PM -0700, tze.yee.ng@altera.com wrote:
->> From: Tze Yee Ng <tze.yee.ng@altera.com>
->>
->> The Cadence SD6HC (SDHCI spec v4.20+) controller uses a soft PHY whose
->> DLL delay characteristics vary with PVT (Process, Voltage, Temperature)
->> and board-level trace routing.
->>
->> A static delay value programmed via device tree for SD High Speed mode is
->> insufficient because the optimal sampling point varies per board, SD card,
->> and operating conditions. Runtime calibration is required.
->>
->> While the SD Physical Layer Specification does not mandate tuning for
->> SD HS mode (only for UHS-I SDR50/SDR104), the Cadence SD6HC PHY
->> requires runtime calibration of its receive data delay line to find a
->> valid sampling window under constrained clock conditions.
-This characterization is incorrect. The SD Physical Layer Simplified
-Specification v9.00 Section 4.2.4.5 explicitly states:
 
-"CMD19 can be executed in transfer state of 1.8V signaling mode
-while the card is unlocked. The other case, CMD19 is treated as
-illegal command."
+On 5/12/26 09:08, Dario Binacchi wrote:
+> Hi everyone,
+> 
+> I am resending my previous reply because I received a delivery failure
+> notification last week indicating that Patrice's mailbox was full.
+> 
+> Patrice, did you have a chance to verify if the tests are passing fine now?
+> Please let me know if everything looks good or if you need
+> 
+> me to make any further modifications.
+> 
+> Thanks and regards
+> 
+> Dario
 
-SD High Speed operates at 3.3V signaling. Issuing CMD19 in SD HS mode
-would cause a spec-compliant SD card to return an ILLEGAL_COMMAND error.
-The spec does not merely "not mandate" tuning for SD HS — it actively
-forbids CMD19 outside of 1.8V signaling mode.
->>
->> The tuning is triggered from the set_ios_post callback because at that
->> moment hardware has committed the new bus width, clock frequency, and speed
->> mode to the controller registers. This ensuring the tuning sequence runs
->> at the correct SD HS operating conditions.
->>
->> The tuning is gated by a device tree property "cdns,sd-hs-tuning" so
->> that only boards requiring runtime calibration opt in. When enabled,
->> the driver performs a 40-tap DLL sweep using CMD19 to find the largest
->> consecutive passing window, then programs the midpoint into
->> PHY_DLL_SLAVE_CTRL_REG.
->>
->> To enable on a board, add to the MMC node in device tree:
->>
->>     &mmc {
->>         cdns,sd-hs-tuning;
-> Has this property been accepted by Linux Upstream?
->
-> Regards
-> Peng
->
->>     };
-Please rework this to perform PHY calibration internally without issuing
-CMD19 to the card in SD HS mode.
 
-Regards,
-Tanmay
+Hi Dario
+
+My mailbox has been cleaned ;-), i expected to respin this series for test tomorrow or next week.
+
+Thanks
+Patrice
+> 
+> On Tue, May 5, 2026 at 9:55 AM Dario Binacchi <
+> dario.binacchi@amarulasolutions.com> wrote:
+> 
+>> Hi Patrice,
 >>
->> Signed-off-by: Tze Yee Ng <tze.yee.ng@altera.com>
->> ---
->> drivers/mmc/sdhci-cadence.c  | 108 ++++++++++++++++++++++++++++++++++-
->> drivers/mmc/sdhci-cadence.h  |   5 ++
->> drivers/mmc/sdhci-cadence6.c |  45 ++++++++++++++-
->> 3 files changed, 156 insertions(+), 2 deletions(-)
+>> On Tue, May 5, 2026 at 9:26 AM Patrice CHOTARD <
+>> patrice.chotard@foss.st.com> wrote:
 >>
->> diff --git a/drivers/mmc/sdhci-cadence.c b/drivers/mmc/sdhci-cadence.c
->> index 5bbc18dfa51..a76f9e8d6bd 100644
->> --- a/drivers/mmc/sdhci-cadence.c
->> +++ b/drivers/mmc/sdhci-cadence.c
->> @@ -39,6 +39,9 @@ static const struct sdhci_cdns_phy_cfg sdhci_cdns_phy_cfgs[] = {
->> 	{ "cdns,phy-dll-delay-strobe", SDHCI_CDNS_PHY_DLY_STROBE, },
->> };
+>>>
+>>>
+>>> On 4/30/26 10:06, Dario Binacchi wrote:
+>>>> Add unit tests for the 'part' command, specifically for the 'number',
+>>>> 'start', and 'size' subcommands.
+>>>>
+>>>> These tests establish a baseline for the current partition lookup
+>>>> functionality by name. This foundation will be used by subsequent
+>>>> patches to extend the command, ensuring consistent behavior as new
+>>>> features are introduced.
+>>>>
+>>>> Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+>>>> Reviewed-by: Simon Glass <sjg@chromium.org>
+>>>>
+>>>> ---
+>>>>
+>>>> Changes in v8:
+>>>> - Skip the test in case the CONFIG_MCC is not enabled or the mmc
+>>>>   device is not found.
+>>>>
+>>>> Changes in v6:
+>>>> - Add Reviewed-by of Simon Glass to patch 3/8 "test: cmd: add unit
+>>>>   tests for part command"
+>>>>
+>>>> Changes in v4:
+>>>> - Place the part command tests in the cmd suite rather than the dm
+>>>>   suite.
+>>>> - Order the include files according the U-Boot coding style.
+>>>>
+>>>> Changes in v3:
+>>>> - Wrap the lines exceeding 80 columns
+>>>> - Combine run_command() and ut_asserteq() -> ut_asserteq(1, run_command(
+>>>>
+>>>>  test/cmd/Makefile |   1 +
+>>>>  test/cmd/part.c   | 183 ++++++++++++++++++++++++++++++++++++++++++++++
+>>>>  2 files changed, 184 insertions(+)
+>>>>  create mode 100644 test/cmd/part.c
+>>>>
+>>>> diff --git a/test/cmd/Makefile b/test/cmd/Makefile
+>>>> index 5f2815b1bb65..8d6932f1176c 100644
+>>>> --- a/test/cmd/Makefile
+>>>> +++ b/test/cmd/Makefile
+>>>> @@ -26,6 +26,7 @@ obj-$(CONFIG_CMD_LOADM) += loadm.o
+>>>>  obj-$(CONFIG_CMD_MEMINFO) += meminfo.o
+>>>>  obj-$(CONFIG_CMD_MEMORY) += mem_copy.o
+>>>>  obj-$(CONFIG_CMD_MEM_SEARCH) += mem_search.o
+>>>> +obj-$(CONFIG_CMD_PART) += part.o
+>>>>  ifdef CONFIG_CMD_PCI
+>>>>  obj-$(CONFIG_CMD_PCI_MPS) += pci_mps.o
+>>>>  endif
+>>>> diff --git a/test/cmd/part.c b/test/cmd/part.c
+>>>> new file mode 100644
+>>>> index 000000000000..cac57a1a0e35
+>>>> --- /dev/null
+>>>> +++ b/test/cmd/part.c
+>>>> @@ -0,0 +1,183 @@
+>>>> +// SPDX-License-Identifier: GPL-2.0+
+>>>> +/*
+>>>> + * Test for part command
+>>>> + *
+>>>> + * Copyright (C) 2026 Amarula Solutions
+>>>> + * Written by Dario Binacchi <dario.binacchi@amarulasolutions.com>
+>>>> + */
+>>>> +
+>>>> +#include <command.h>
+>>>> +#include <dm.h>
+>>>> +#include <env.h>
+>>>> +#include <part.h>
+>>>> +#include <vsprintf.h>
+>>>> +#include <dm/test.h>
+>>>> +#include <test/cmd.h>
+>>>> +#include <test/test.h>
+>>>> +#include <test/ut.h>
+>>>> +
+>>>> +static struct disk_partition gpt_parts[] = {
+>>>> +     {
+>>>> +             .start = 48,
+>>>> +             .size = 1,
+>>>> +             .name = "test1",
+>>>> +             .uuid = "c5bce7a2-03f0-4d03-9048-01ff23b9d527",
+>>>> +     },
+>>>> +     {
+>>>> +             .start = 49,
+>>>> +             .size = 2,
+>>>> +             .name = "test2",
+>>>> +             .uuid = "9df346e8-2c53-4cd8-b9ac-3af83f9a9b74",
+>>>> +     },
+>>>> +};
+>>>> +
+>>>> +static char disk_guid[UUID_STR_LEN + 1] =
+>>>> +     "8d60b397-1bb6-4d33-80ee-b1587d24c2f8";
+>>>> +
+>>>> +static int setup_gpt_partitions(struct unit_test_state *uts,
+>>>> +                             unsigned int mmc_dev_num)
+>>>> +{
+>>>> +     struct blk_desc *mmc_dev_desc;
+>>>> +     char dev_str[10];
+>>>> +     int i, ret;
+>>>> +
+>>>> +     if (!CONFIG_IS_ENABLED(MMC))
+>>>> +             return -EAGAIN;
+>>>
+>>> Hi Dario
+>>>
+>>> Is there any reason to return -EAGAIN ? -ENODEV seems more appropriate ?
+>>>
 >>
->> +static int __maybe_unused sdhci_cdns_execute_tuning(struct udevice *dev,
->> +						    unsigned int opcode);
->> +
->> static int sdhci_cdns_write_phy_reg(struct sdhci_cdns_plat *plat,
->> 				    u8 addr, u8 data)
->> {
->> @@ -155,8 +158,93 @@ static void sdhci_cdns_set_control_reg(struct sdhci_host *host)
->> 		sdhci_cdns6_phy_adj(mmc->dev, plat, mmc->selected_mode);
->> }
+>> In the testing framework, returning -EAGAIN explicitly signals that the
+>> test should be skipped*.*
 >>
->> +static __maybe_unused bool sdhci_cdns_sd_needs_tuning(struct mmc *mmc)
->> +{
->> +	struct sdhci_cdns_plat *plat = dev_get_plat(mmc->dev);
->> +
->> +	if (!IS_SD(mmc))
->> +		return false;
->> +
->> +	if (!dev_read_bool(mmc->dev, "cdns,sd-hs-tuning"))
->> +		return false;
->> +
->> +	/* Already tuned for this mode */
->> +	if (plat->tuned_mode == mmc->selected_mode)
->> +		return false;
->> +
->> +	switch (mmc->selected_mode) {
->> +	case SD_HS:
->> +		return mmc->bus_width == 4;
->> +	/* Add future modes here, e.g.:
->> +	 * case UHS_SDR50:
->> +	 *	return true;
->> +	 */
->> +	default:
->> +		return false;
->> +	}
->> +}
->> +
->> +static int sdhci_cdns_set_ios_post(struct sdhci_host *host)
->> +{
->> +	struct mmc *mmc = host->mmc;
->> +	struct sdhci_cdns_plat *plat = dev_get_plat(mmc->dev);
->> +	int ret __maybe_unused;
->> +	/*
->> +	 * The SD6HC soft PHY requires runtime DLL delay calibration
->> +	 * for SD High Speed mode. The default PHY_DLL_SLAVE_CTRL_REG
->> +	 * values (READ_DQS_CMD_DELAY and READ_DQS_DELAY = 0) do not
->> +	 * provide sufficient timing margin due to PVT and board trace
->> +	 * variations.
->> +	 *
->> +	 * Tuning is performed once per entry into SD_HS mode
->> +	 * (tracked by plat->tuned_mode state). The calibrated PHY delay
->> +	 * values remain valid while the card stays in SD_HS mode, and
->> +	 * leaving that tuned mode clears the state so re-entering SD_HS
->> +	 * triggers tuning again.
->> +	 *
->> +	 * This must be done in set_ios_post (not set_control_reg)
->> +	 * because the SDHCI controller must already be operating at
->> +	 * the target bus width, clock, and speed mode before CMD19
->> +	 * tuning commands can succeed.
->> +	 */
->> +
->> +	if (IS_ENABLED(CONFIG_MMC_SUPPORTS_TUNING)) {
->> +		if (SDHCI_GET_VERSION(host) >= SDHCI_SPEC_420 &&
->> +		    sdhci_cdns_sd_needs_tuning(mmc)) {
->> +			ret = sdhci_cdns_execute_tuning(mmc->dev,
->> +							MMC_CMD_SEND_TUNING_BLOCK);
->> +			if (ret) {
->> +				dev_err(mmc->dev,
->> +					"SD_HS tuning failed (ret=%d), using default PHY\n",
->> +					ret);
->> +				/* Restore default PHY settings and avoid retrying in this mode */
->> +				sdhci_cdns6_phy_adj(mmc->dev, plat,
->> +						    mmc->selected_mode);
->> +				plat->tuned_mode = mmc->selected_mode;
->> +				plat->tuned_dll_slave_ctrl = sdhci_cdns6_phy_get_dll_slave(plat);
->> +				return 0;
->> +			}
->> +			/*
->> +			 * Tuning succeeded. The tuned_mode is already set by
->> +			 * execute_tuning(), so the tuned value will be preserved
->> +			 * across subsequent PHY reconfigurations.
->> +			 */
->> +			dev_dbg(mmc->dev, "SD_HS tuning successful\n");
->> +		}
->> +
->> +		/* Reset when mode changes away from a tuned mode */
->> +		if (mmc->selected_mode != plat->tuned_mode) {
->> +			plat->tuned_mode = MMC_MODES_END;
->> +			plat->tuned_dll_slave_ctrl = 0;
->> +		}
->> +	}
->> +
->> +	return 0;
->> +}
->> +
->> static const struct sdhci_ops sdhci_cdns_ops = {
->> 	.set_control_reg = sdhci_cdns_set_control_reg,
->> +	.set_ios_post = sdhci_cdns_set_ios_post,
->> };
+>> As highlighted in the documentation for ut_run_test():
 >>
->> static int sdhci_cdns_set_tune_val(struct sdhci_cdns_plat *plat,
->> @@ -204,6 +292,7 @@ static int __maybe_unused sdhci_cdns_execute_tuning(struct udevice *dev,
->> 	int cur_streak = 0;
->> 	int max_streak = 0;
->> 	int end_of_streak = 0;
->> +	int ret;
->> 	int i;
->>
->> 	/*
->> @@ -229,7 +318,24 @@ static int __maybe_unused sdhci_cdns_execute_tuning(struct udevice *dev,
->> 		return -EIO;
->> 	}
->>
->> -	return sdhci_cdns_set_tune_val(plat, end_of_streak - max_streak / 2);
->> +	ret = sdhci_cdns_set_tune_val(plat, end_of_streak - max_streak / 2);
->> +	if (ret)
->> +		return ret;
->> +
->> +	/*
->> +	 * Mark this mode as tuned. This is critical for both driver tuning
->> +	 * (SD_HS via set_ios_post) and framework tuning (UHS_SDR104, MMC_HS_200,
->> +	 * MMC_HS_400) so that subsequent PHY reconfigurations restore the
->> +	 * calibrated DLL value instead of overwriting with DT defaults.
->> +	 *
->> +	 * For HS400, tuning is performed while the controller is in HS200 mode
->> +	 * (mmc->selected_mode == MMC_HS_200 and mmc->hs400_tuning == true).
->> +	 * Record the tuned mode as MMC_HS_400 so the calibrated DLL value is
->> +	 * preserved across the HS200???HS400 transition.
->> +	 */
->> +	plat->tuned_mode = mmc->hs400_tuning ? MMC_HS_400 : mmc->selected_mode;
->> +
->> +	return 0;
->> }
->>
->> static struct dm_mmc_ops sdhci_cdns_mmc_ops;
->> diff --git a/drivers/mmc/sdhci-cadence.h b/drivers/mmc/sdhci-cadence.h
->> index 7101f00b75b..ea517491860 100644
->> --- a/drivers/mmc/sdhci-cadence.h
->> +++ b/drivers/mmc/sdhci-cadence.h
->> @@ -7,6 +7,8 @@
->> #ifndef SDHCI_CADENCE_H_
->> #define SDHCI_CADENCE_H_
->>
->> +#include <mmc.h>
->> +
->> /* HRS - Host Register Set (specific to Cadence) */
->> /* PHY access port */
->> #define SDHCI_CDNS_HRS04		0x10
->> @@ -60,10 +62,13 @@ struct sdhci_cdns_plat {
->> 	struct mmc_config cfg;
->> 	struct mmc mmc;
->> 	void __iomem *hrs_addr;
->> +	enum bus_mode tuned_mode;
->> +	u32 tuned_dll_slave_ctrl;
->> };
->>
->> int sdhci_cdns6_phy_adj(struct udevice *dev, struct sdhci_cdns_plat *plat, u32 mode);
->> int sdhci_cdns6_phy_init(struct udevice *dev, struct sdhci_cdns_plat *plat);
->> int sdhci_cdns6_set_tune_val(struct sdhci_cdns_plat *plat, unsigned int val);
->> +u32 sdhci_cdns6_phy_get_dll_slave(struct sdhci_cdns_plat *plat);
->>
->> #endif
->> diff --git a/drivers/mmc/sdhci-cadence6.c b/drivers/mmc/sdhci-cadence6.c
->> index ca1086e2359..c8b42532e17 100644
->> --- a/drivers/mmc/sdhci-cadence6.c
->> +++ b/drivers/mmc/sdhci-cadence6.c
->> @@ -173,6 +173,30 @@ static void sdhci_cdns6_write_phy_reg(struct sdhci_cdns_plat *plat, u32 addr, u3
->> 	writel(val, plat->hrs_addr + SDHCI_CDNS_HRS05);
->> }
->>
->> +static bool sdhci_cdns6_mode_is_tuned(struct sdhci_cdns_plat *plat, u32 mode)
->> +{
->> +	/*
->> +	 * Check if the given mode has a valid tuned DLL value.
->> +	 * Only modes that support tuning (driver or framework) can have
->> +	 * valid tuned values. This prevents the initial state (tuned_mode=0)
->> +	 * from falsely matching MMC_LEGACY.
->> +	 */
->> +	if (plat->tuned_mode != mode)
->> +		return false;
->> +
->> +	switch (mode) {
->> +	case SD_HS:		/* Driver tuning via set_ios_post */
->> +	case UHS_SDR50:		/* Future driver tuning support */
->> +	case UHS_SDR104:	/* Framework tuning */
->> +	case MMC_HS_200:	/* Framework tuning */
->> +	case MMC_HS_400:	/* Framework tuning */
->> +	case MMC_HS_400_ES:	/* Framework tuning */
->> +		return true;
->> +	default:
->> +		return false;
->> +	}
->> +}
->> +
->> static int sdhci_cdns6_reset_phy_dll(struct sdhci_cdns_plat *plat, bool reset)
->> {
->> 	void __iomem *reg = plat->hrs_addr + SDHCI_CDNS_HRS09;
->> @@ -259,7 +283,18 @@ int sdhci_cdns6_phy_adj(struct udevice *dev, struct sdhci_cdns_plat *plat, u32 m
->> 	sdhci_cdns6_write_phy_reg(plat, PHY_DQS_TIMING_REG_ADDR, sdhci_cdns6_phy_cfgs[0].val);
->> 	sdhci_cdns6_write_phy_reg(plat, PHY_GATE_LPBK_CTRL_REG_ADDR, sdhci_cdns6_phy_cfgs[1].val);
->> 	sdhci_cdns6_write_phy_reg(plat, PHY_DLL_MASTER_CTRL_REG_ADDR, sdhci_cdns6_phy_cfgs[4].val);
->> -	sdhci_cdns6_write_phy_reg(plat, PHY_DLL_SLAVE_CTRL_REG_ADDR, sdhci_cdns6_phy_cfgs[2].val);
->> +	if (sdhci_cdns6_mode_is_tuned(plat, mode)) {
->> +		/*
->> +		 * Use previously saved tuned DLL slave control value.
->> +		 * Note: 0 is a valid tuned value (e.g., optimal tap at position 0),
->> +		 * so we check both mode match AND that it's a tunable mode.
->> +		 */
->> +		sdhci_cdns6_write_phy_reg(plat, PHY_DLL_SLAVE_CTRL_REG_ADDR,
->> +					  plat->tuned_dll_slave_ctrl);
->> +	} else {
->> +		sdhci_cdns6_write_phy_reg(plat, PHY_DLL_SLAVE_CTRL_REG_ADDR,
->> +					  sdhci_cdns6_phy_cfgs[2].val);
->> +	}
->>
->> 	/* Switch Off the DLL Reset */
->> 	ret = sdhci_cdns6_reset_phy_dll(plat, false);
->> @@ -318,6 +353,9 @@ int sdhci_cdns6_set_tune_val(struct sdhci_cdns_plat *plat, unsigned int val)
->>
->> 	sdhci_cdns6_write_phy_reg(plat, PHY_DLL_SLAVE_CTRL_REG_ADDR, tmp);
->>
->> +	/* Store tuned DLL slave control value which will be reapplied via set_ios(). */
->> +	plat->tuned_dll_slave_ctrl = tmp;
->> +
->> 	/* Switch Off the DLL Reset */
->> 	ret = sdhci_cdns6_reset_phy_dll(plat, false);
->> 	if (ret) {
->> @@ -327,3 +365,8 @@ int sdhci_cdns6_set_tune_val(struct sdhci_cdns_plat *plat, unsigned int val)
->>
->> 	return 0;
->> }
->> +
->> +u32 sdhci_cdns6_phy_get_dll_slave(struct sdhci_cdns_plat *plat)
->> +{
->> +	return sdhci_cdns6_read_phy_reg(plat, PHY_DLL_SLAVE_CTRL_REG_ADDR);
->> +}
->> -- 
->> 2.43.7
+>> *Return: 0 if all tests passed, -EAGAIN if the test should be skipped, -1
+>> if any failed*
 >>
 >>
+>> Since the necessary preconditions weren't met for some configuration in
+>> our case, I decided to skip.
+>>
+>> Thanks and regards,
+>>
+>> Dario
+>>
+>>
+>>> Thanks
+>>> Patrice
+>>>
+>>>> +
+>>>> +     snprintf(dev_str, sizeof(dev_str), "%u", mmc_dev_num);
+>>>> +
+>>>> +     ret = blk_get_device_by_str("mmc", dev_str, &mmc_dev_desc);
+>>>> +     if (ret == -ENODEV)
+>>>> +             return -EAGAIN;
+>>>> +
+>>>> +     ut_asserteq(mmc_dev_num, ret);
+>>>> +
+>>>> +     if (CONFIG_IS_ENABLED(RANDOM_UUID)) {
+>>>> +             for (i = 0; i < ARRAY_SIZE(gpt_parts); i++)
+>>>> +                     gen_rand_uuid_str(gpt_parts[i].uuid,
+>>>> +                                       UUID_STR_FORMAT_STD);
+>>>> +
+>>>> +             gen_rand_uuid_str(disk_guid, UUID_STR_FORMAT_STD);
+>>>> +     }
+>>>> +
+>>>> +     ut_assertok(gpt_restore(mmc_dev_desc, disk_guid, gpt_parts,
+>>>> +                             ARRAY_SIZE(gpt_parts)));
+>>>> +     return 0;
+>>>> +}
+>>>> +
+>>>> +static int cmd_test_part_number(struct unit_test_state *uts)
+>>>> +{
+>>>> +     unsigned int mmc_dev_num = 2;
+>>>> +     char expected[10];
+>>>> +     int i, ret;
+>>>> +
+>>>> +     ret = setup_gpt_partitions(uts, mmc_dev_num);
+>>>> +     if (ret == -EAGAIN)
+>>>> +             return ret;
+>>>> +
+>>>> +     ut_assertok(ret);
+>>>> +
+>>>> +     for (i = 0; i < ARRAY_SIZE(gpt_parts); i++) {
+>>>> +             env_set("partnum", NULL);
+>>>> +             ut_assertok(run_commandf("part number mmc %u %s partnum",
+>>>> +                                      mmc_dev_num, gpt_parts[i].name));
+>>>> +             snprintf(expected, sizeof(expected), "0x%x", i + 1);
+>>>> +             ut_asserteq_str(expected, env_get("partnum"));
+>>>> +     }
+>>>> +
+>>>> +     env_set("partnum", NULL);
+>>>> +     ut_asserteq(1, run_commandf("part number mmc %u bogus partnum",
+>>>> +                                 mmc_dev_num));
+>>>> +     ut_assertnull(env_get("partnum"));
+>>>> +
+>>>> +     return 0;
+>>>> +}
+>>>> +CMD_TEST(cmd_test_part_number, UTF_CONSOLE);
+>>>> +
+>>>> +static int cmd_test_part_start(struct unit_test_state *uts)
+>>>> +{
+>>>> +     unsigned int mmc_dev_num = 2;
+>>>> +     char expected[32];
+>>>> +     int i, ret;
+>>>> +
+>>>> +     ret = setup_gpt_partitions(uts, mmc_dev_num);
+>>>> +     if (ret == -EAGAIN)
+>>>> +             return ret;
+>>>> +
+>>>> +     ut_assertok(ret);
+>>>> +
+>>>> +     for (i = 0; i < ARRAY_SIZE(gpt_parts); i++) {
+>>>> +             env_set("partstart", NULL);
+>>>> +             ut_assertok(run_commandf("part start mmc %u %d partstart",
+>>>> +                                      mmc_dev_num, i + 1));
+>>>> +             snprintf(expected, sizeof(expected), "%lx",
+>>>> +                      (unsigned long)gpt_parts[i].start);
+>>>> +             ut_asserteq_str(expected, env_get("partstart"));
+>>>> +     }
+>>>> +
+>>>> +     env_set("partstart", NULL);
+>>>> +     ut_asserteq(1, run_commandf("part start mmc %u 3 partstart",
+>>>> +                                 mmc_dev_num));
+>>>> +     ut_assertnull(env_get("partstart"));
+>>>> +
+>>>> +     for (i = 0; i < ARRAY_SIZE(gpt_parts); i++) {
+>>>> +             env_set("partstart", NULL);
+>>>> +             ut_assertok(run_commandf("part start mmc %u %s partstart",
+>>>> +                                      mmc_dev_num, gpt_parts[i].name));
+>>>> +             snprintf(expected, sizeof(expected), "%lx",
+>>>> +                      (unsigned long)gpt_parts[i].start);
+>>>> +             ut_asserteq_str(expected, env_get("partstart"));
+>>>> +     }
+>>>> +
+>>>> +     env_set("partstart", NULL);
+>>>> +     ut_asserteq(1, run_commandf("part start mmc %u bogus partstart",
+>>>> +                                 mmc_dev_num));
+>>>> +     ut_assertnull(env_get("partstart"));
+>>>> +
+>>>> +     return 0;
+>>>> +}
+>>>> +CMD_TEST(cmd_test_part_start, UTF_CONSOLE);
+>>>> +
+>>>> +static int cmd_test_part_size(struct unit_test_state *uts)
+>>>> +{
+>>>> +     unsigned int mmc_dev_num = 2;
+>>>> +     char expected[32];
+>>>> +     int i, ret;
+>>>> +
+>>>> +     ret = setup_gpt_partitions(uts, mmc_dev_num);
+>>>> +     if (ret == -EAGAIN)
+>>>> +             return ret;
+>>>> +
+>>>> +     ut_assertok(ret);
+>>>> +
+>>>> +     for (i = 0; i < ARRAY_SIZE(gpt_parts); i++) {
+>>>> +             env_set("partsize", NULL);
+>>>> +             ut_assertok(run_commandf("part size mmc %u %d partsize",
+>>>> +                                      mmc_dev_num, i + 1));
+>>>> +             snprintf(expected, sizeof(expected), "%lx",
+>>>> +                      (unsigned long)gpt_parts[i].size);
+>>>> +             ut_asserteq_str(expected, env_get("partsize"));
+>>>> +     }
+>>>> +
+>>>> +     env_set("partsize", NULL);
+>>>> +     ut_asserteq(1, run_commandf("part size mmc %u 3 partsize",
+>>>> +                                 mmc_dev_num));
+>>>> +     ut_assertnull(env_get("partsize"));
+>>>> +
+>>>> +     for (i = 0; i < ARRAY_SIZE(gpt_parts); i++) {
+>>>> +             env_set("partsize", NULL);
+>>>> +             ut_assertok(run_commandf("part size mmc %u %s partsize",
+>>>> +                                      mmc_dev_num, gpt_parts[i].name));
+>>>> +             snprintf(expected, sizeof(expected), "%lx",
+>>>> +                      (unsigned long)gpt_parts[i].size);
+>>>> +             ut_asserteq_str(expected, env_get("partsize"));
+>>>> +     }
+>>>> +
+>>>> +     env_set("partsize", NULL);
+>>>> +     ut_asserteq(1, run_commandf("part size mmc %u bogus partsize",
+>>>> +                                 mmc_dev_num));
+>>>> +     ut_assertnull(env_get("partsize"));
+>>>> +
+>>>> +     return 0;
+>>>> +}
+>>>> +CMD_TEST(cmd_test_part_size, UTF_CONSOLE);
+>>>
+>>>
+>>
+>> --
+>> *Dario Binacchi*
+>> Senior Embedded Software Engineer
+>> M. +39 328 0625246
+>> dario.binacchi@amarulasolutions.com
+>> ―――――――――――――――
+>> Amarula Solutions SRL
+>>  Via Felice Cavallotti 25D, 41012 Carpi, MO, IT
+>> info@amarulasolutions.com
+>> www.amarulasolutions.com
+>>
+> 
+> 
+
