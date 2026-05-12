@@ -4,87 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB62BCD4F26
-	for <u-boot@archiver.kernel.org>; Tue, 12 May 2026 07:54:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E258ECD4F26
+	for <u-boot@archiver.kernel.org>; Tue, 12 May 2026 08:12:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 155A080398;
-	Tue, 12 May 2026 09:54:20 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id 52DAB80398;
+	Tue, 12 May 2026 10:12:37 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=infineon.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="dRKfNgKJ";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=infineon.com header.i=@infineon.com header.b="UjbdaI6i";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 63F88803C6; Tue, 12 May 2026 09:54:18 +0200 (CEST)
-Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
- [IPv6:2a00:1450:4864:20::331])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 559C983015; Tue, 12 May 2026 07:18:25 +0200 (CEST)
+Received: from smtp2.infineon.com (smtp2.infineon.com
+ [IPv6:2a00:18f0:1e00:4::4])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 75ECD801A9
- for <u-boot@lists.denx.de>; Tue, 12 May 2026 09:54:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=dario.binacchi@amarulasolutions.com
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-488b0e1b870so87627065e9.2
- for <u-boot@lists.denx.de>; Tue, 12 May 2026 00:54:16 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1778572456; x=1779177256;
- darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=DL8PbuZ0UBX8hfxbAGo5l/6wcE6Im140K4F7tIm9894=;
- b=dRKfNgKJGN7sEt+D3EiZyrSlTol937HpHx8pl4cd559LJZ01dVlPbqdtTUQaf9Ij9t
- KmBGwuY+WKKn2KEhmrQQYYepoujrbrf246z398ON2ylUD5lLyhlSClDxKj38l8qpJnge
- d3TKQP9KfRgwo0YlFsNrlM1NrZEGK+2tOcYKY=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778572456; x=1779177256;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=DL8PbuZ0UBX8hfxbAGo5l/6wcE6Im140K4F7tIm9894=;
- b=bQxI81b6PVmUuiRwYcgnB7yCpucLGLAKeOK2c9RyZu49FEc25VpP8zcFxTYZi/LE97
- egmlC5XxAAYTBxZ2LKK4dq76lZNj3BLQKZmjOriy+7Ww8sFfwFn/e023ZM26nAuYlY5n
- 6z1yDBKo3cK2hU/3rVl/FZmUxZRpPSJAs0RQweAg2yJm5Uv4y0lvZk0ypZiKmNQSV00i
- qXsKvZaspmBp8ABSZmK+1RLUHQVxCUhCm6pCY1CplDOXFa2qXIJxtsus70PHM88ypwDr
- PLNntoF504y9vre4ztZ/qsZLI21v6dejk5NOrtKwX1pd0PYmluovT1Ft2oioYAdmbbJe
- pYmw==
-X-Gm-Message-State: AOJu0Yx1n5WOnx/ELZO1+i9NBCvqKe+M/ujdCLwoKq5h+QSTJuX+0ZO6
- 0ceLHpjICFktrE1XtZQDLcx9Hfgod4otuOF4dYRDGgfdr+A0xXLm7usS6G9g7r6600f6KrScOEF
- 1/ZUq
-X-Gm-Gg: Acq92OG0x/JZpaRHeQVszAUyWsOTRG59X3m98skWhKPAOLomkp3qzE3dYd+I31w1wlT
- yDKtwQHBYxkWuUPC+qfNAGFsvOsCkLnWGPDIojyjFcAq5ZDB3dp1IdCmlJAIc5ZPAg76o/QzKS0
- GKkec1fM1nlTcgeForu+7akiRB7gZLuuJWV0PaPhkOFsUHDtXNf6eNBAmZ8ZVUx1wUSTgkRH9Na
- KyEF9DoLB4r+i0XcDYX/2031JadLJ33AT9dPzpC0d7W4rABQ9f4JpXuC/ibQlt3OKJZYTxvdwOF
- /4TXHyY4OXi9OIwG13+z/goe29Q+yqVxRhjN1g1gt7yKjHUxPSZzVrFbn24FyZahrQnmBFeMvdI
- o+YjBquvjvn3zg2h6OPqjAI4uFIUzzmIszwYwZMogpA5cfy3X9aApt7wgt3dqS846lRRC04ZQS3
- SDIQtuRTtnorcDSkf88viKdSX1/oait77rbPrBk/iuYCI+tYT5qlWf4wqsxv8ZPwvScrgJLOM8h
- sjfVSo3H2/M0AVCDHnp8SvqA9zGazuJh413Hcn1NIR0DnI=
-X-Received: by 2002:a05:600c:a307:b0:485:4eaf:eb53 with SMTP id
- 5b1f17b1804b1-48e51f4111fmr333820855e9.19.1778572455061; 
- Tue, 12 May 2026 00:54:15 -0700 (PDT)
-Received: from dario-ThinkPad-P14s-Gen-5.amarulasolutions.com ([2.196.40.90])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-48e908cb403sm26760855e9.9.2026.05.12.00.54.13
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 12 May 2026 00:54:14 -0700 (PDT)
-From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
-To: u-boot@lists.denx.de
-Cc: Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Tom Rini <trini@konsulko.com>, Svyatoslav Ryhel <clamor95@gmail.com>,
- Anatolij Gustschin <ag.dev.uboot@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Ion Agorria <ion@agorria.com>,
- Masahiro Yamada <yamada.masahiro@socionext.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Simon Glass <sjg@chromium.org>
-Subject: [RESEND PATCH v2] video: kconfig: replace tristate with bool for LCD
- panel drivers
-Date: Tue, 12 May 2026 09:54:01 +0200
-Message-ID: <20260512075410.567751-1-dario.binacchi@amarulasolutions.com>
-X-Mailer: git-send-email 2.43.0
+ by phobos.denx.de (Postfix) with ESMTPS id EFA4F803C6
+ for <u-boot@lists.denx.de>; Tue, 12 May 2026 07:18:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=infineon.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=Takahiro.Kuwano@infineon.com
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=infineon.com; i=@infineon.com; q=dns/txt; s=IFXMAIL;
+ t=1778563103; x=1810099103;
+ h=from:to:cc:subject:date:message-id:references:
+ in-reply-to:content-transfer-encoding:mime-version;
+ bh=XyW2QRDij/glskk3mm1urDverf9IbeOmR0J0Eta8La4=;
+ b=UjbdaI6i5RPJCA2CwsGAtvYqZhMdRoRXFfyaPxQSgIV3OwsQb0NNHJHP
+ A9FJVtFinHNNRD4gw4ZYYNKmlkeBZX11XUpcavKZrxI6VK2HN9Kl/CTQW
+ VxyL1338CGnJWXsk9NawAM+HBbEgeTNxhXbTxELMNtgDDENJr20V+rGmj Q=;
+X-CSE-ConnectionGUID: ovRyjibbRBqVklsATLdk1w==
+X-CSE-MsgGUID: /zAiJtPITe+KyEu/UKoAgg==
+X-IronPort-AV: E=McAfee;i="6800,10657,11783"; a="157208690"
+X-IronPort-AV: E=Sophos;i="6.23,230,1770591600"; d="scan'208";a="157208690"
+X-Amp-Result: SKIPPED(no attachment in message)
+Received: from unknown (HELO MUCSE819.infineon.com) ([172.23.29.45])
+ by smtp2.infineon.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 12 May 2026 07:18:22 +0200
+Received: from MUCSE813.infineon.com (172.23.29.39) by MUCSE819.infineon.com
+ (172.23.29.45) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Tue, 12 May
+ 2026 07:18:22 +0200
+Received: from MUCSE815.infineon.com (172.23.29.41) by MUCSE813.infineon.com
+ (172.23.29.39) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Tue, 12 May
+ 2026 07:18:22 +0200
+Received: from MUCSE815.infineon.com ([fe80::b54c:c0bd:546c:c9be]) by
+ MUCSE815.infineon.com ([fe80::b54c:c0bd:546c:c9be%12]) with mapi id
+ 15.02.2562.037; Tue, 12 May 2026 07:18:22 +0200
+From: <Takahiro.Kuwano@infineon.com>
+To: <vjardin@free.fr>
+CC: <u-boot@lists.denx.de>, <christoph.reiter@evk.biz>,
+ <dlechner@baylibre.com>, <flaviu.nistor@gmail.com>, <jeyu@issi.com>,
+ <marek.vasut+renesas@mailbox.org>, <miquel.raynal@bootlin.com>,
+ <yangshiji66@outlook.com>, <ssunkkan@gmail.com>, <trini@konsulko.com>,
+ <vigneshr@ti.com>
+Subject: RE: [PATCH v1] mtd: spi-nor: Add gd55lb02gf chips
+Thread-Topic: [PATCH v1] mtd: spi-nor: Add gd55lb02gf chips
+Thread-Index: AQHc4Mt1nus7H+92dk68A3upwZMt9bYIkXXQgACqZ4CAAJU6sA==
+Date: Tue, 12 May 2026 05:18:21 +0000
+Message-ID: <e884dda604e24a7f9102270c49d15874@infineon.com>
+References: <20260510222140.603755-1-vjardin@free.fr>
+ <77e1b83ec3d549d0a2fe2816241446c7@infineon.com>
+ <agJN-3C_Pril04zA@L30177.local>
+In-Reply-To: <agJN-3C_Pril04zA@L30177.local>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.161.6.196]
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Tue, 12 May 2026 10:12:36 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,123 +95,88 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-U-Boot does not support loadable modules, therefore using 'tristate'
-in Kconfig is incorrect since the 'm' option cannot be selected.
+> Hi Takahiro,
+Hi Vincent,
 
-Replace tristate with bool for the affected LCD panel drivers to
-reflect the U-Boot build model and avoid misleading configuration
-options.
+>=20
+> Le 11/05/26 10:28, Takahiro.Kuwano@infineon.com a =E9crit :
+>=20
+> > 0xc8671c is for GD55LB02GE and there is duplicate entry appears in the =
+last
+> > part of GigaDevice entries. Besides SPI_NOR_HAS_TB flag is missing in t=
+he
+> > "gd55lb02g" entry...
+>=20
+> I deliberately did not copy SPI_NOR_HAS_TB. The GD55LB02GF
+> datasheet (Rev1.2) documents an SR layout that the uboot's current
+> SPI_NOR_HAS_TB handling cannot drive correctly from my understanding:
+>=20
+Thanks for pointing out. I just assumed GD55LB02GE flags were correct.
 
-No functional change intended.
+>   - datasheet table 4 (SR1): bits S6..S2 are BP4..BP0
+>     Bit S5 is BP3, not a TB bit.
 
-Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
-Reviewed-by: Tom Rini <trini@konsulko.com>
-Reviewed-by: Svyatoslav Ryhel <clamor95@gmail.com>
+Now I understand this device has 4-bit BPs (BP3..BP0) + TB (BP4).
+BP3..BP0 select the size of locked area and BP4 selects the location of
+locked area, upper or lower.
 
----
+>   - datasheet table 5 (SR2): bit S14 is CMP (Complement Protect). Default=
+ value CMP =3D 0.
+>   - datasheet tables 2 and 3: show that the BP4..BP0 region grows from th=
+e bottom of the
+>     array when CMP =3D 0, and from the top when CMP =3D 1. The TB-equival=
+ent direction
+>     selection lives at SR2 bit S14 on this die.
 
-Changes in v2:
-- Review-by tag of Tom Rini and Svyatoslav Ryhel
+CMP inverts the locked and unlocked area, not equivalent to TB.
 
- drivers/video/Kconfig | 20 ++++++++++----------
- 1 file changed, 10 insertions(+), 10 deletions(-)
+>=20
+> currently,
+>   - include/linux/mtd/spi-nor.h defines SR_TB =3D BIT(5).
+>   - drivers/mtd/spi/spi-nor-core.c reads and writes that bit in SR1 when
+>     SNOR_F_HAS_SR_TB is set.
 
-diff --git a/drivers/video/Kconfig b/drivers/video/Kconfig
-index c2acc13139c0..747c68e12cce 100644
---- a/drivers/video/Kconfig
-+++ b/drivers/video/Kconfig
-@@ -534,7 +534,7 @@ config VIDEO_BCM2835
- 	  that U-Boot can access it with full colour depth.
- 
- config VIDEO_LCD_ENDEAVORU
--	tristate "Endeavoru 720x1280 DSI video mode panel"
-+	bool "Endeavoru 720x1280 DSI video mode panel"
- 	depends on PANEL && BACKLIGHT
- 	select VIDEO_MIPI_DSI
- 	help
-@@ -561,7 +561,7 @@ config VIDEO_LCD_ILITEK_ILI9806E
- 	  is implemented.
- 
- config VIDEO_LCD_MOT
--	tristate "Atrix 4G and Droid X2 540x960 DSI video mode panel"
-+	bool "Atrix 4G and Droid X2 540x960 DSI video mode panel"
- 	depends on PANEL && BACKLIGHT
- 	select VIDEO_MIPI_DSI
- 	help
-@@ -608,7 +608,7 @@ config VIDEO_LCD_RAYDIUM_RM68200
- 	720x1280 DSI video mode panel.
- 
- config VIDEO_LCD_RENESAS_R61307
--	tristate "Renesas R61307 DSI video mode panel"
-+	bool "Renesas R61307 DSI video mode panel"
- 	depends on PANEL && BACKLIGHT
- 	select VIDEO_MIPI_DSI
- 	help
-@@ -617,7 +617,7 @@ config VIDEO_LCD_RENESAS_R61307
- 	  resolution and uses 24 bit RGB per pixel.
- 
- config VIDEO_LCD_RENESAS_R69328
--	tristate "Renesas R69328 720x1280 DSI video mode panel"
-+	bool "Renesas R69328 720x1280 DSI video mode panel"
- 	depends on PANEL && BACKLIGHT
- 	select VIDEO_MIPI_DSI
- 	help
-@@ -626,7 +626,7 @@ config VIDEO_LCD_RENESAS_R69328
- 	  resolution and uses 24 bit RGB per pixel.
- 
- config VIDEO_LCD_SAMSUNG_LTL106HL02
--	tristate "Samsung LTL106HL02 1920x1080 DSI video mode panel"
-+	bool "Samsung LTL106HL02 1920x1080 DSI video mode panel"
- 	depends on PANEL && BACKLIGHT
- 	select VIDEO_MIPI_DSI
- 	help
-@@ -635,7 +635,7 @@ config VIDEO_LCD_SAMSUNG_LTL106HL02
- 	  resolution (1920x1080).
- 
- config VIDEO_LCD_SHARP_LQ079L1SX01
--	tristate "Sharp LQ079L1SX01 1536x2048 DSI video mode panel"
-+	bool "Sharp LQ079L1SX01 1536x2048 DSI video mode panel"
- 	depends on PANEL && BACKLIGHT
- 	select VIDEO_MIPI_DSI
- 	help
-@@ -644,7 +644,7 @@ config VIDEO_LCD_SHARP_LQ079L1SX01
- 	  resolution (1536x2048).
- 
- config VIDEO_LCD_SHARP_LQ101R1SX01
--	tristate "Sharp LQ101R1SX01 2560x1600 DSI video mode panel"
-+	bool "Sharp LQ101R1SX01 2560x1600 DSI video mode panel"
- 	depends on PANEL && BACKLIGHT
- 	select VIDEO_MIPI_DSI
- 	help
-@@ -688,7 +688,7 @@ config VIDEO_LCD_TDO_TL070WSH30
- 	1024x600 DSI video mode panel.
- 
- config VIDEO_LCD_HITACHI_TX10D07VM0BAA
--	tristate "Hitachi TX10D07VM0BAA 480x800 MIPI DSI video mode panel"
-+	bool "Hitachi TX10D07VM0BAA 480x800 MIPI DSI video mode panel"
- 	depends on PANEL && BACKLIGHT
- 	select VIDEO_MIPI_DSI
- 	help
-@@ -703,7 +703,7 @@ config VIDEO_LCD_HITACHI_TX18D42VM
- 	done they work like a regular LVDS panel.
- 
- config VIDEO_LCD_SONY_L4F00430T01
--	tristate "Sony L4F00430T01 480x800 LCD panel support"
-+	bool "Sony L4F00430T01 480x800 LCD panel support"
- 	depends on PANEL
- 	help
- 	  Say Y here if you want to enable support for Sony L4F00430T01
-@@ -712,7 +712,7 @@ config VIDEO_LCD_SONY_L4F00430T01
- 	  data comes from RGB.
- 
- config VIDEO_LCD_SAMSUNG_S6E63M0
--	tristate "Samsung S6E63M0 controller based panel support"
-+	bool "Samsung S6E63M0 controller based panel support"
- 	depends on PANEL && BACKLIGHT
- 	help
- 	  Say Y here if you want to enable support for Samsung S6E63M0
--- 
-2.43.0
+In Linux, HAS_4BIT_BP and HAS_SR_TB_BIT6 flags handle that, but not in
+u-boot yet.
 
-base-commit: 5732bd0f457b4c671e46574d64d4acb099c0f0a5
-branch: video-fix-tristate-kconfig
+>   - the same file spi-nor-core.c has the comment "CMP: complement
+>     protect - only support CMP=3D0 (range is not complemented)", ie the
+>     framework never reads SR2 for CMP.
+>=20
+
+In Linux, CMP support will be applied soon.
+
+> If SPI_NOR_HAS_TB is set on the GD55LB02GF entry, the framework will togg=
+le
+> SR1 bit 5 on every direction change in sf protect which on this die is BP=
+3
+> not a direction selector.
+>=20
+> For the same reason, SPI_NOR_HAS_LOCK on this entry covers only a subset =
+of
+> the chip's protection levels,
+> SR_BP0/BP1/BP2 (defined at include/linux/mtd/spi-nor.h) as BITs 2..4
+> miss BP3 and BP4.
+>=20
+> A vendor hook handling the full 5-BP + SR2-CMP layout is out of scope for=
+ this patch.
+>=20
+We need to sync u-boot to Linux. For now, let's drop SPI_NOR_HAS_LOCK flag.
+
+> > >         SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_4B_OPCODES)},
+> > > +       {INFO("gd55lb02gf", 0xc8601C, 0, 64 * 1024, 4096,       SECT_=
+4K |
+> > > +       SPI_NOR_HAS_LOCK | SPI_NOR_4B_OPCODES)},
+> >
+> > Could you create a new entry just after "gd55lb02ge" with the same flag=
+s with
+> > it? GD55LB02G'F' should be a successor chip of GD55LB02G'E'.
+>=20
+> ok, I will move the entry next to gd55lb02ge in v2.
+>=20
+> Best regards,
+>   Vincent
+
+Thanks,
+Takahiro
+
