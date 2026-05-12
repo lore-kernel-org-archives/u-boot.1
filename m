@@ -4,77 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6BFA0CD4F24
-	for <u-boot@archiver.kernel.org>; Tue, 12 May 2026 16:11:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 903D0CD343F
+	for <u-boot@archiver.kernel.org>; Tue, 12 May 2026 16:11:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8BE9B838BB;
-	Tue, 12 May 2026 18:11:04 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=seznam.cz
+	by phobos.denx.de (Postfix) with ESMTP id E516683DBF;
+	Tue, 12 May 2026 18:11:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=hifiphile.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=seznam.cz header.i=@seznam.cz header.b="ElwT6O9b";
+	dkim=pass (2048-bit key; unprotected) header.d=hifiphile.com header.i=@hifiphile.com header.b="RfHrSVAv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CF9A18394E; Tue, 12 May 2026 14:44:12 +0200 (CEST)
-Received: from mxd-3-705.seznam.cz (mxd-3-705.seznam.cz
- [IPv6:2a02:598:96:8a00::1200:705])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 8383D8341A; Tue, 12 May 2026 15:11:20 +0200 (CEST)
+Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
+ [IPv6:2a00:1450:4864:20::330])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B755D801A9
- for <u-boot@lists.denx.de>; Tue, 12 May 2026 14:44:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AD87C80398
+ for <u-boot@lists.denx.de>; Tue, 12 May 2026 15:11:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=seznam.cz
+ dmarc=none (p=none dis=none) header.from=hifiphile.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=Michael.Srba@seznam.cz
-Received: from email.seznam.cz by smtpc-mxd-7994f94c68-kzzv6
- (smtpc-mxd-7994f94c68-kzzv6 [2a02:598:96:8a00::1200:705])
- id 145331044f5d656d15fafd5a; Tue, 12 May 2026 14:43:52 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=seznam.cz; s=szn1;
- t=1778589832; bh=dzODJxgN/5eUofBYkp2jirBQ4iZuLC9HJspYrP/21eQ=;
- h=Message-ID:Date:MIME-Version:User-Agent:Subject:To:Cc:
- Content-Language:From:Content-Type:Content-Transfer-Encoding;
- b=ElwT6O9b3RvHF3W2lGpggg2BXuAXBh1UNl+nkNwrIlGAAG5eMi6oU1di1psaQWT4A
- LubvAQa0LogmpNC+/WR7uKR8loWdmwiST15dJjWB2J9IPU0cqIPlPcF9X1NPjIX//o
- nQ2A2/Q2iCF6/UOCyuTU4T0BQLWO74EAJGTEDAhqSSYW04xTWNPGOzSv2ihQmbSu4p
- XNwoQCYqeykInyqxRP+fY5XZjvLpS1yz4r5KF30iRV87pIHK5dixYKslnflfoNp07T
- +BthHEpcZo4QVuyefgN/XfaT1ubsEHZ0LRCERkUh6U3hM9a4WBUM8jdNn7k92o5Kmv
- KLpyIZruDiKGw==
-Received: from [192.168.0.240] (ip-111-27.static.ccinternet.cz
- [147.161.27.111])
- by smtpd-relay-f997798f4-5q5rt (szn-email-smtpd/2.0.72) with ESMTPA
- id 83247dc3-534d-4e65-ac68-3f19d8f8f6c4;
- Tue, 12 May 2026 14:43:27 +0200
-Message-ID: <733ba7cc-cbcf-473a-aa31-22b673982702@seznam.cz>
-Date: Tue, 12 May 2026 14:43:25 +0200
+ spf=none smtp.mailfrom=admin@hifiphile.com
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-48a7fe4f40bso64113235e9.0
+ for <u-boot@lists.denx.de>; Tue, 12 May 2026 06:11:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=hifiphile.com; s=google; t=1778591478; x=1779196278; darn=lists.denx.de;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=VSvHUn6x6IU+aLHBxPbQLEaYZd8w3t0mah0fF4PIkJw=;
+ b=RfHrSVAvwoNKuS09rpcUZJgXMxT5bTXZIaJiOJLK4sNH3wyN+3RMvqbAr+8Ac4ZRe4
+ 38gfqej3+s81jW9vTyeR9LmTmrwEClvG5Ms8TA8Dc7agIave/ITl+mkwnkBH9b7dX6Ze
+ JkhwbL/aX4BGwxbdAJZHDrH9hcEZHW6tBo3jEJvtlWu0mmZ4HDx0Lipiad6Ohotgh6zJ
+ vKfFK+17w+YFlozgjwHFHKRzuXTyHeNfSsP9TbLTkADB84KAdd4LmQf+2n+S5Br/mD9l
+ YKV/WgzEDJ4qzW3U8JDLFcdCRA8LNYasVIIr8TBLbpVMqb37yS2DZa4VDJZvjSbD4lbX
+ FkOQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1778591478; x=1779196278;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=VSvHUn6x6IU+aLHBxPbQLEaYZd8w3t0mah0fF4PIkJw=;
+ b=Ywdxg2NSNRe0+K64fvLdO9468ZBhknvEfikgEx3iUZ7+wT13lrUh23kgfIjc8MS8xC
+ jz6/OQkDMuCZjnC8VzZTa7CJPr91rvNdzsy4DC2lHymCSQG7PXJI45fNuc7JEj20fQkJ
+ tbt3bhtgM/I8Jo7hgDGWLtTRzpdxZ/+xcWL7WnErzSHon2PQH2qv8GHEi61RIeuhVM2v
+ 2vboxbooI35xhCXzh/o9i77e44AuSUo2nFB6a9eHgeMy0rbmChgWGMjqgn99zv1K4hOI
+ AcEwDNqFOh27GGbz+HaeE6FMUfceXJm6uFHVtPnDG1Fk49Yq99B03/1Izy2GAvOJDYDs
+ yEPQ==
+X-Gm-Message-State: AOJu0YymE3OyKHjrEKz1+phamC2rS2eYFluEHDpSTjoy6dk20WtAQKut
+ uZmak62yuNVP81rFZiJr46r0F1BNkq6FL2djLiWIqSkoYIlh0G9u7mpU25Mn6HNQbU4=
+X-Gm-Gg: Acq92OEcXonXYhqkwN6pRlT0FTwvCjBphnSocdz+/8g66jC2J0I1mzoGqjQI6IDVQSS
+ 46QaV/1pYYgassPtmdbP7alZl3Qp+4HDOEKXBVOM1RCIXk3VJGGQuVh1FDLv1aW/iCLIFY8nV6Q
+ RPdOEPU/8NkomjdNo7SEdPHp8eVSBBkUXdLqaIoMiJP8ji9mdP5rUWXramh6Sgjj92H3D2XMVOe
+ QqM6X3eyAo4ByGYSqqhPQbzQ3MJZz/ScK6MgSRiD+UJ9xtl4JCqzyHdD5MuHw94n6rB7aBhQkcB
+ FLOf4htsddBCprxs7jmOINwgRrqFoJwOFtG2W9X7CziqXWQuuUcKgOG1w4xmfgoo9Sn1G5X+0tL
+ rdXXMJ1rEg69lUSKjb0GvtyX2FY/yRI3cLJ5q4Iw1waSDz1br+3KDY3Uu5mpAT+3GisVhobOQRW
+ iaNrFqoMMrvkz7qOmg2VsBNQ==
+X-Received: by 2002:a05:600c:3f0a:b0:48f:81ea:ebbb with SMTP id
+ 5b1f17b1804b1-48f81eaebc5mr8355155e9.6.1778591477856; 
+ Tue, 12 May 2026 06:11:17 -0700 (PDT)
+Received: from [127.0.1.1] ([78.199.60.143])
+ by smtp.googlemail.com with ESMTPSA id
+ 5b1f17b1804b1-48e9052cd24sm43035775e9.3.2026.05.12.06.11.17
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 12 May 2026 06:11:17 -0700 (PDT)
+From: Zixun LI <admin@hifiphile.com>
+Date: Tue, 12 May 2026 15:11:16 +0200
+Subject: [PATCH] usb: gadget: atmel: do not disable endpoints in
+ reset_all_endpoints()
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v7 09/11] mach-snapdragon: add board_spl.c and split out
- common code
-To: Sumit Garg <sumit.garg@kernel.org>,
- Casey Connolly <casey.connolly@linaro.org>
-Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io, Tom Rini
- <trini@konsulko.com>, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>, Peng Fan <peng.fan@nxp.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Jerome Forissier <jerome.forissier@arm.com>, Heiko Schocher
- <hs@nabladev.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Lukasz Majewski <lukma@denx.de>, Neil Armstrong <neil.armstrong@linaro.org>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Varadarajan Narayanan <quic_varada@quicinc.com>
-References: <20260508-qcom_spl-v7-0-7d0e22aaaa8f@seznam.cz>
- <20260508-qcom_spl-v7-9-7d0e22aaaa8f@seznam.cz>
- <d965e291-51eb-4120-8740-1f14d739bc5c@linaro.org>
- <6bc4f999-b37f-4961-9bed-17d45e1b77ac@seznam.cz>
- <85e696ff-e66c-4cd3-92d7-61edfe6493ab@linaro.org>
- <agK1zQWeFmaEfs-J@sumit-xelite>
-Content-Language: en-US
-From: Michael Srba <Michael.Srba@seznam.cz>
-In-Reply-To: <agK1zQWeFmaEfs-J@sumit-xelite>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+Message-Id: <20260512-udc_ep-v1-1-8a783e44cf7f@hifiphile.com>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMQQqAIBCF4avIrBPSyKCrRITaWNPCRCuC6O5ZL
+ T/437sgYSRM0LILIh6UaPUZomBgZ+0n5DRmgyylKmsh+T7aAQOvha5co5VBZyDHIaKj8zvq+t9
+ pNwva7V3DfT/r45JpagAAAA==
+X-Change-ID: 20260512-udc_ep-51a3f7a6befb
+To: u-boot@lists.denx.de
+Cc: Lukasz Majewski <lukma@denx.de>, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, Marek Vasut <marex@denx.de>, 
+ Tom Rini <trini@konsulko.com>, Zixun LI <zli@ogga.fr>, 
+ Andrew Goodbody <andrew.goodbody@linaro.org>, 
+ Zixun LI <admin@hifiphile.com>
+X-Mailer: b4 0.15.2
 X-Mailman-Approved-At: Tue, 12 May 2026 18:11:03 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -92,96 +105,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+Endpoints should not be disabled on bus reset event inside UDC driver,
+otherwise a racing condition will happen between gadget driver. Gadget
+driver will free the requests and disable endpoints in disconnect ops
+later.
 
-On 5/12/26 07:08, Sumit Garg wrote:
-> + Varda
->
-> Hi Casey,
->
-> On Mon, May 11, 2026 at 04:00:46PM +0200, Casey Connolly wrote:
->>
->> On 11/05/2026 15:55, Michael Srba wrote:
->>>
->>> On 5/11/26 15:33, Casey Connolly wrote:
->>>> Hi Michael,
->>>>
->>>> On 08/05/2026 23:45, michael.srba@seznam.cz wrote:
->>>>> From: Michael Srba <Michael.Srba@seznam.cz>
->>>>>
->>>>> Code in board.c will now only be compiled into U-Boot proper,
->>>>> and the new board_spl.c will only be built into SPL.
->>>>> Code in board_common.c is common to both phases.
->>>>>
->>>>> Also split out mem_map.c, which is currently common to both
->>>>> phases since it seems to not cause issues in SPL. In the future
->>>>> it should probably behave differenly in SPL, especially if dram
->>>>> initialization is supported.
->>>> Sorry to be a pest with this one, could you rebase this on the SMEM
->>>> series since it also pulls out all the memory mapping stuff.
->>>>
->>>> Since the only thing you left in board_common.c is the board_usb_init(),
->>>> it seems like it's only actually used in db410c at least according to a
->>>> quick grep. Could you just move it over to board/qualcomm/
->>>> dragonboard410c?
->>>>
->>>> Along with the other changes maybe most of the contents of board_spl.c
->>>> should go into some board/qualcomm/sdm845-spl/board.c file or something?
->>> but there's nothing sdm845-specific about it? SPL won't ever be passed
->>> dt by a previous stage, empty board-init is a sensible default even
->>> if someone wants to override it in specific cases, reset-cpu is a stub and
->>> if qcom wants to implement it there's no good reason to use PSCI for that
->>> so it can be universal (though an ifdef for the non-typical case
->>> of late-in-the-chain SPL would probably still be cleaner than multiple
->>> separate board.c files), and fully implemented spl_boot_device should check
->>> what medium the BROM booted from (or at least if it was EDL, which is
->>> in a hw register, not sure if emmc vs ufs vs sdcard vs spi needs awareness
->>> of data passed from PBL), so again can be perfectly shared.
->>> If DFU is not enabled in config then the USB boot branch can even
->>> be ifdef'd away at compile time.
->> Alright, I'm a bit unsure how Qualcomm want to base their stuff on top
->> so I'll defer to you and we can keep this as-is. fwiw the "sdm845-spl"
->> naming is just arbitrary, if you can pick a better name please do.
->>
->> Sumit: any thoughts on how to align these approaches and keep it all
->> maintainable?
-> Yeah I earlier asked Michael and Varda to converge on common Qcom SPL
-> architecture which can be used across SoCs.
->
-> Basically how I think the way forward here would be to have a common
-> Qcom SPL architecture which would then have the platform specific hooks
-> for functionality currently supported by that platform. Once more
-> platforms try to use the same functionality then we can migrate that to
-> common code.
->
-> Looking at Michael's series, I think it's mostly doing the base
-> infrastructure SPL setup without much boot functionality added. So we
-> should be able to merge that once it's rebased on your SMEM patch-set.
-> Then Varda should be able to rebase the IPQ series on top of it. I think
-> the QCLIB blob loading for DRAM setup can be a platform specific hook in
-> the common SPL code overriden for IPQ platform for now.
->
-> Michael, Varda,
->
-> Let us know if there are any concerns to approach mentioned above.
-Sounds good to me, one thing to mention is that technically the ipq
-platform doesn't *need* qclib, so qclib should be a special case path
-available for any SoC that Qualcomm releases it for and that doesn't
-have proper u-boot dram init support. It looks like the kodiak
-QCLib.elf is 500kB and includes stuff other than DDR training,
-but it could probably technically be used (even though the non-ddr
-part would make more sense to do in u-boot code).
+Signed-off-by: Zixun LI <admin@hifiphile.com>
+---
+ drivers/usb/gadget/atmel_usba_udc.c | 14 --------------
+ 1 file changed, 14 deletions(-)
 
-In any case no platform should be locked into assuming it will always
-use qclib, someone might RE it and implement a proper ddr init driver.
+diff --git a/drivers/usb/gadget/atmel_usba_udc.c b/drivers/usb/gadget/atmel_usba_udc.c
+index f7a92ded6da..b0de22961de 100644
+--- a/drivers/usb/gadget/atmel_usba_udc.c
++++ b/drivers/usb/gadget/atmel_usba_udc.c
+@@ -571,20 +571,6 @@ static void reset_all_endpoints(struct usba_udc *udc)
+ 		list_del_init(&req->queue);
+ 		request_complete(ep, req, -ECONNRESET);
+ 	}
+-
+-	/* NOTE:  normally, the next call to the gadget driver is in
+-	 * charge of disabling endpoints... usually disconnect().
+-	 * The exception would be entering a high speed test mode.
+-	 *
+-	 * FIXME remove this code ... and retest thoroughly.
+-	 */
+-	list_for_each_entry(ep, &udc->gadget.ep_list, ep.ep_list) {
+-		if (ep->desc) {
+-			spin_unlock(&udc->lock);
+-			usba_ep_disable(&ep->ep);
+-			spin_lock(&udc->lock);
+-		}
+-	}
+ }
+ 
+ static struct usba_ep *get_ep_by_addr(struct usba_udc *udc, u16 wIndex)
 
-Speaking of qclib, the license Qualcomm uses seems kinda insane to me,
-they reserve the right to terminate it at any time, and the whole license
-becomes invalid if any of it's provisions is invalid or unenforceable,
-which I'm pretty sure is the case. They also say you have to delete
-all copies of the files if they choose to terminate it, which if enforced
-against coreboot would require them to rewrite the git history.
-Could someone please force them to write a license that doesn't boil
-down to "this is what our legal team wrote and you can't take it at
-face value"?
-> -Sumit
+---
+base-commit: 5732bd0f457b4c671e46574d64d4acb099c0f0a5
+change-id: 20260512-udc_ep-51a3f7a6befb
+
+Best regards,
+--  
+Zixun LI <admin@hifiphile.com>
+
