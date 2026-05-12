@@ -4,82 +4,103 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69D09CD4F21
-	for <u-boot@archiver.kernel.org>; Tue, 12 May 2026 19:33:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ECEF1CD343F
+	for <u-boot@archiver.kernel.org>; Tue, 12 May 2026 19:33:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 32D7D84683;
-	Tue, 12 May 2026 21:32:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 6F76B8466F;
+	Tue, 12 May 2026 21:32:11 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=flipper.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="qlhqlD1U";
+	dkim=pass (2048-bit key; unprotected) header.d=flipper.net header.i=@flipper.net header.b="AP/h6SLO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 99D7584099; Tue, 12 May 2026 21:31:56 +0200 (CEST)
-Received: from mail-ot1-x331.google.com (mail-ot1-x331.google.com
- [IPv6:2607:f8b0:4864:20::331])
+ id 0319F8466F; Tue, 12 May 2026 21:32:06 +0200 (CEST)
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [IPv6:2a00:1450:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9CB0C8465A
- for <u-boot@lists.denx.de>; Tue, 12 May 2026 21:31:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1C27D845C8
+ for <u-boot@lists.denx.de>; Tue, 12 May 2026 21:31:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=flipper.net
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x331.google.com with SMTP id
- 46e09a7af769-7e36bb16a92so2300203a34.2
- for <u-boot@lists.denx.de>; Tue, 12 May 2026 12:31:54 -0700 (PDT)
+ spf=pass smtp.mailfrom=alchark@flipper.net
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-4891f625344so54923815e9.0
+ for <u-boot@lists.denx.de>; Tue, 12 May 2026 12:31:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1778614313; x=1779219113; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=zYsg1wSX/eGCCMGYt/tMQCpmSmke8iP9WrZYt4eWnFg=;
- b=qlhqlD1Uwn4mTkGWe+2uB44QQIdkjKjKqyi9/pojQpYCOIW6R8wXCQBuOYfRSeXjPp
- Zxqxz4kXShZW3mkKqFbnWDEAhE3s1g0gwfnCdkSvcgqsQnSURxh0RFOGFxKM4oaXodkJ
- 0Oic9WGeyzZLgB61yg8zZHcDPekXx1ZsI45Uw=
+ d=flipper.net; s=google; t=1778614317; x=1779219117; darn=lists.denx.de;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=8Bjf++TebMurPeIV//VjJ194vYpnt2QrnFr0+G87I1I=;
+ b=AP/h6SLO0ulG//rPqnLcVuBxdxyBz5Ur7AZU8SWxLiCpOPU77M4xWQQLzA5Tl4cCGj
+ jKxs4Imj+a0BjOBTOnqzqaVhz7E4vJ93WfFdSpuJb7NuAS59fyeruw0Bc87vzpcw+TcU
+ XKmt+iKwDe3RWSOlYzrbTDekRIi3yk4ESJ8lbbqxJnbjHIoThHyjExrE3co/fYR4gP+/
+ A/sMHonHg8X20ocgFIY3elliWvtWdl5M4V85t5AMWh5cvuXpIvVJSWIxg3N3s1T9Llpd
+ zIuMkpI02wsFS2x0Z/GwaKGyQmkwsQuUMFsoHcXGT5+i91FevrQ0NbghzIuW3xEUNUej
+ 4ByA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778614313; x=1779219113;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=zYsg1wSX/eGCCMGYt/tMQCpmSmke8iP9WrZYt4eWnFg=;
- b=QCgOasf3it7777+W+KVJsK0BtFk+kDZD9fsxG6LrgDa3SyIgZ1vlsDvarDNFgQ8oV8
- bPJU2T1KxQq0f6g70QNtQh11GzpL+eyvVmh800JxKjrKqzZyPlYtqlXmms+KE00mjk1a
- A17yLBe2jAFLzXQqapEwpDq7ouGq9YXxenpwN5c6iP0Ru6t8TtdDABVqr9snicHXPS7g
- YKSe7jZpfbnckLRZCAa0WfaE/ZUtSRMQ2Za6fv8kQmxYHI7gU70RJX0MUr9RO2rOoLHs
- JSXAt8zmOxcjnu0+mVzXmBr3E427TNzSJ1L1EBxIzJ9lprEOVTDAh5/puKDK3ROJLxzE
- 4h+g==
-X-Gm-Message-State: AOJu0Yxprl1ymkBD8+6oIx++lhlpYBNlhZhNqIRET2h1gpm4McMRIzUc
- ulrG6ncKUvABYPYBqS4yaQZivpf43Ux267hJNiL4nxK1m9073BehXCsOAB86wHdvonwv+f76e1r
- G0fR03ldAvRNw
-X-Gm-Gg: Acq92OG9Phez0giaIXCJmjlC9GiJTndWaiHBr15ZuZRQ8A2DqTQiaD6u/q64PnKZR4B
- iXzd/gloX6nyQEM+0LvohsTQi/lbS2QexcBfwThg2wRiTTJ3w0kFnKu0tHLLvPHxFa8TEHE7kdL
- rjexr7Vhh3ouuHmFb1PTjQWmOXdlXIdG08mYzNWWOXOtfBFzkFWbDskNlKSgHZOseccWeSUrj+w
- pQA/a15MPxENonv3Tnit2+3oWmMxiJRzL5hoP8ApSteOzoE2Ksai+PqiWR1wzPLFnqLagq59kb3
- D9B5dCo0uGAPaHrOe4yNyVm61xIVUTppXgw1vYITIFxLgglLSzTGv8F+s8vY/rhnXOsTcyEexsT
- S9Mk5NESF6t+ARG6+b3E5N38qniPu2JU4voKo7y+j43cR1aDUoPNFce7Y22OEQW0l3AekiAgYCP
- 76jnck083GYHfAv2Jz6b6ZAWeTmU4qGVyacsyESXkzPonsEQCiFppnH716l4NsO+kSrpzVazpn8
- +29JHeLuunjoHH1/hs1TmfwjGmqDup8lfHgSA2cb4rGUBtieA==
-X-Received: by 2002:a05:6830:4984:b0:7dc:e30d:6498 with SMTP id
- 46e09a7af769-7e3da040033mr53513a34.1.1778614313316; 
- Tue, 12 May 2026 12:31:53 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-189-203-106-235.totalplay.net.
- [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7e367d4f05csm10369170a34.17.2026.05.12.12.31.52
+ d=1e100.net; s=20251104; t=1778614317; x=1779219117;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=8Bjf++TebMurPeIV//VjJ194vYpnt2QrnFr0+G87I1I=;
+ b=KVFyvRWVbrhp3tOZw+wSOhWRSrJuQBSbkNPuFuMWsfB5fSELtpOYmiAVa2JpranIHQ
+ NVoGnxO0/Tadgmj4W03mTniZY7VsI69ygF6/ZBIaUz9duEgeT+M4IUUnyeXLU65PrLqK
+ Yb7H0qkEBriQrUhuoAWLFW8RQ+YnYkSMyYHkQGEgt/SWPJBFy5NkiIEZC0WUvGE9zSaD
+ V8ilsh8iGBkwjh96FyMVX62+lp1kIGzw7HdlOsVwTMgekZstXyrknX7v4P0FGasQwBCb
+ 0oy6oyWG+ieA4pJkU0SjkP8DI5c7WTj+FE0Sx9aQdGUsUi36OBir5/3z/avLHpllgbmw
+ tRUQ==
+X-Gm-Message-State: AOJu0YwuEJVJV2qIo686Jeb8x+HI1+88aVj0Q9zneTGW2NgtLGvj7RzQ
+ YsUNYv2MXtROS53ahHpJSOOhlsqUOW7wYd/dOIW47RkORUNCkR6dR7U+8g7OPTqrpF3jwNqmZSL
+ hhQDm
+X-Gm-Gg: Acq92OGtGe3lpePq6Fhi37GlY5nmjV8EuUsa8c6LMLAId0oNRsh5ws8O4xynAHWAs7m
+ w9/DmFs2IuZk6q1ygg0tPinUqwM0E5DD5wRhjDpFzNMlpF90Yob85/dvW5KTzW4atxY5uqsSQus
+ NdyNH0RdMcnfxIQD7TmhKNitr548YNpnU/wa8VF33NvvFzDfPiwRagjb41WtgsWv19405rx5Qmg
+ Qvd5NoeDt2C1D6KUmxwI2gXkDuOsK1lxPTyLpjRRwobmEg3ecJQQeSho0kYHC3zHyFv26YQqd5O
+ 2aCCyUc293oF06GNyebosnuAhUz/iPio3RimWv061HqgfInpvkOT2FR/1YTc63wWfTuUEyvgjRs
+ RLjxPMtejoLVK/f2qoGt+XUWFcYxLUGOgXrSxqKG8d6Ey3wKVKqjRP4C4m3Xet0NxGbIby9O93F
+ vqkCZ+sbpvPmdqulX5IWDt6jdzhDR0fGb1ujMzIYbBs34wXvvpehk55W/PhFVNhQJdQiAgv/HPP
+ rA2moo8
+X-Received: by 2002:a05:600c:3149:b0:48a:79d8:a8d6 with SMTP id
+ 5b1f17b1804b1-48fc99276ccmr4133395e9.7.1778614316457; 
+ Tue, 12 May 2026 12:31:56 -0700 (PDT)
+Received: from alchark-surface.localdomain
+ (bba-83-110-135-253.alshamil.net.ae. [83.110.135.253])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-48e8e566cf7sm44429845e9.0.2026.05.12.12.31.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 12 May 2026 12:31:53 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, 
- =?utf-8?q?Christian_P=C3=B6tzsch?= <christian.poetzsch@kernkonzept.com>
-In-Reply-To: <20260512083949.3493010-1-christian.poetzsch@kernkonzept.com>
-References: <20260512083949.3493010-1-christian.poetzsch@kernkonzept.com>
-Subject: Re: [PATCH] virtio: fix return value check
-Message-Id: <177861431275.3279584.4522787274568961298.b4-ty@konsulko.com>
-Date: Tue, 12 May 2026 13:31:52 -0600
+ Tue, 12 May 2026 12:31:55 -0700 (PDT)
+From: Alexey Charkov <alchark@flipper.net>
+Date: Tue, 12 May 2026 23:31:50 +0400
+Subject: [PATCH v2] video console: add 6x8 console font from linux
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260512-font6x8-v2-1-26e6e7eededb@flipper.net>
+X-B4-Tracking: v=1; b=H4sIACWAA2oC/2XMQQ7CIBCF4as0sxbTwVqqK+9hukAc7CQGCBBS0
+ 3B3sVuX/8vLt0GiyJTg2m0QqXBi71rIQwdm0e5Fgp+tQfZy7M8ohfUuj+skBq1OmgapLg+E9g6
+ RLK+7dJ9bL5yyj58dLvhb/42CAsVkiBRqZYzCm31zCBSPjjLMtdYvcYPrkKAAAAA=
+X-Change-ID: 20260512-font6x8-4a73ae4279b1
+To: u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, 
+ Anatolij Gustschin <ag.dev.uboot@gmail.com>, 
+ Svyatoslav Ryhel <clamor95@gmail.com>, Ion Agorria <ion@agorria.com>, 
+ Michael Trimarchi <michael@amarulasolutions.com>, 
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
+ Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Alexey Charkov <alchark@flipper.net>
 X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=openpgp-sha256; l=54876; i=alchark@flipper.net; 
+ h=from:subject:message-id;
+ bh=puNYhh/jT85enn/TZFHx+/3a4d9kWUXFuVWf4L700F8=; 
+ b=owGbwMvMwCW2adGNfoHIK0sZT6slMWQxN2h9VSrQWBr5ak65we/X0tzs/As3yMjG3OzO0At5/
+ akrg21Gx0QWBjEuBksxRZa535bYTjXim7XLw+MrzBxWJpAh0iINDEDAwsCXm5hXaqRjpGeqbahn
+ aKRjrGPEwMUpAFN9Ppbhf5lQiM2GjrvvHtWuXbq52PnNU1+B/2+MbCPsjXTCfk/hLWRkuOS/TKL
+ B9llrl0Po6eXXU39t5K6zSROd5Ngnk6e/UDGEHwA=
+X-Developer-Key: i=alchark@flipper.net; a=openpgp;
+ fpr=9DF6A43D95320E9ABA4848F5B2A2D88F1059D4A5
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,19 +117,2658 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 12 May 2026 10:39:49 +0200, Christian Pötzsch wrote:
+Small screens on the order of 256x144 pixels can't fit much text at 8x16,
+and 4x6 is virtually illegible, so add an in-between 6x8 font from Linux.
 
-> The virtio_blk_do_single_req function returns ulong, which normally is
-> the processed size, but in an error case can be the actual error. Use
-> the special IS_ERR_VALUE macro to test for error.
-> 
-> 
+Font data obtained from lib/fonts/font_6x8.c in the Linux kernel at commit
+db65872b38dc ("lib/fonts: Remove internal symbols and macros from public
+header file")
 
-Applied to u-boot/master, thanks!
+Link: https://github.com/torvalds/linux/blob/db65872b38dc9f18a62669d6ae1e4ec7868a85a9/lib/fonts/font_6x8.c
+Signed-off-by: Alexey Charkov <alchark@flipper.net>
+---
+Changes in v2:
+- Mention the specific Linux commit and file path where the original font
+  data was taken from (thanks Tom)
+- Link to v1: https://lore.kernel.org/r/20260512-font6x8-v1-1-8cee71a7cc71@flipper.net
+---
+ drivers/video/Kconfig    |    7 +
+ include/video_font.h     |    6 +
+ include/video_font_6x8.h | 2578 ++++++++++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 2591 insertions(+)
 
-[1/1] virtio: fix return value check
-      commit: 36d4c653580824b16574560b21d4401614d8b68e
+diff --git a/drivers/video/Kconfig b/drivers/video/Kconfig
+index c2acc13139c0..6e15b71d07ef 100644
+--- a/drivers/video/Kconfig
++++ b/drivers/video/Kconfig
+@@ -29,6 +29,13 @@ config VIDEO_FONT_4X6
+ 	  Provides character bitmap data in header file.
+ 	  When selecting multiple fonts, you may want to enable CMD_SELECT_FONT too.
+ 
++config VIDEO_FONT_6X8
++	bool "6 x 8 font size"
++	help
++	  Font for video console driver, 6 x 8 pixels.
++	  Provides character bitmap data in header file.
++	  When selecting multiple fonts, you may want to enable CMD_SELECT_FONT too.
++
+ config VIDEO_FONT_8X16
+ 	bool "8 x 16 font size"
+ 	default y
+diff --git a/include/video_font.h b/include/video_font.h
+index 05d3f989a77c..4bfb00eb80f3 100644
+--- a/include/video_font.h
++++ b/include/video_font.h
+@@ -12,6 +12,9 @@
+ #if defined(CONFIG_VIDEO_FONT_4X6)
+ #include <video_font_4x6.h>
+ #endif
++#if defined(CONFIG_VIDEO_FONT_6X8)
++#include <video_font_6x8.h>
++#endif
+ #if defined(CONFIG_VIDEO_FONT_8X16)
+ #include <video_font_8x16.h>
+ #endif
+@@ -29,6 +32,9 @@ static struct video_fontdata __maybe_unused fonts[] = {
+ #if defined(CONFIG_VIDEO_FONT_4X6)
+ 	FONT_ENTRY(4, 6, 4x6),
+ #endif
++#if defined(CONFIG_VIDEO_FONT_6X8)
++	FONT_ENTRY(6, 8, 6x8),
++#endif
+ #if defined(CONFIG_VIDEO_FONT_SUN12X22)
+ 	FONT_ENTRY(12, 22, 12x22),
+ #endif
+diff --git a/include/video_font_6x8.h b/include/video_font_6x8.h
+new file mode 100644
+index 000000000000..db5ec4cbe5e4
+--- /dev/null
++++ b/include/video_font_6x8.h
+@@ -0,0 +1,2578 @@
++/* SPDX-License-Identifier: GPL-2.0 */
++/*
++ * 6x8 bitmap font from the Linux kernel adapted for U-boot video console
++ *
++ * Original Linux file at lib/fonts/font_6x8.c retrieved at Linux commit
++ * db65872b38dc ("lib/fonts: Remove internal symbols and macros from public
++ * header file")
++ */
++
++#ifndef _VIDEO_FONT_6X8_
++#define _VIDEO_FONT_6X8_
++
++#include <video_font_data.h>
++
++static unsigned char video_fontdata_6x8[VIDEO_FONT_SIZE(256, 6, 8)] = {
++	/* 0 0x00 '^@' */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++
++	/* 1 0x01 '^A' */
++	0x78, /* 011110 */
++	0x84, /* 100001 */
++	0xCC, /* 110011 */
++	0x84, /* 100001 */
++	0xCC, /* 110011 */
++	0xB4, /* 101101 */
++	0x78, /* 011110 */
++	0x00, /* 000000 */
++
++	/* 2 0x02 '^B' */
++	0x78, /* 011110 */
++	0xFC, /* 111111 */
++	0xB4, /* 101101 */
++	0xFC, /* 111111 */
++	0xB4, /* 101101 */
++	0xCC, /* 110011 */
++	0x78, /* 011110 */
++	0x00, /* 000000 */
++
++	/* 3 0x03 '^C' */
++	0x00, /* 000000 */
++	0x28, /* 001010 */
++	0x7C, /* 011111 */
++	0x7C, /* 011111 */
++	0x38, /* 001110 */
++	0x10, /* 000100 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++
++	/* 4 0x04 '^D' */
++	0x00, /* 000000 */
++	0x10, /* 000100 */
++	0x38, /* 001110 */
++	0x7C, /* 011111 */
++	0x38, /* 001110 */
++	0x10, /* 000100 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++
++	/* 5 0x05 '^E' */
++	0x00, /* 000000 */
++	0x38, /* 001110 */
++	0x38, /* 001110 */
++	0x6C, /* 011011 */
++	0x6C, /* 011011 */
++	0x10, /* 000100 */
++	0x38, /* 001110 */
++	0x00, /* 000000 */
++
++	/* 6 0x06 '^F' */
++	0x00, /* 000000 */
++	0x10, /* 000100 */
++	0x38, /* 001110 */
++	0x7C, /* 011111 */
++	0x7C, /* 011111 */
++	0x10, /* 000100 */
++	0x38, /* 001110 */
++	0x00, /* 000000 */
++
++	/* 7 0x07 '^G' */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x30, /* 001100 */
++	0x78, /* 011110 */
++	0x30, /* 001100 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++
++	/* 8 0x08 '^H' */
++	0xFC, /* 111111 */
++	0xFC, /* 111111 */
++	0xCC, /* 110011 */
++	0x84, /* 100001 */
++	0xCC, /* 110011 */
++	0xFC, /* 111111 */
++	0xFC, /* 111111 */
++	0xFC, /* 111111 */
++
++	/* 9 0x09 '^I' */
++	0x00, /* 000000 */
++	0x30, /* 001100 */
++	0x48, /* 010010 */
++	0x84, /* 100001 */
++	0x48, /* 010010 */
++	0x30, /* 001100 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++
++	/* 10 0x0A '^J' */
++	0xFC, /* 111111 */
++	0xCC, /* 110011 */
++	0xB4, /* 101101 */
++	0x78, /* 011110 */
++	0xB4, /* 101101 */
++	0xCC, /* 110011 */
++	0xFC, /* 111111 */
++	0xFC, /* 111111 */
++
++	/* 11 0x0B '^K' */
++	0x3C, /* 001111 */
++	0x14, /* 000101 */
++	0x20, /* 001000 */
++	0x78, /* 011110 */
++	0x44, /* 010001 */
++	0x44, /* 010001 */
++	0x38, /* 001110 */
++	0x00, /* 000000 */
++
++	/* 12 0x0C '^L' */
++	0x38, /* 001110 */
++	0x44, /* 010001 */
++	0x44, /* 010001 */
++	0x38, /* 001110 */
++	0x10, /* 000100 */
++	0x38, /* 001110 */
++	0x10, /* 000100 */
++	0x00, /* 000000 */
++
++	/* 13 0x0D '^M' */
++	0x18, /* 000110 */
++	0x14, /* 000101 */
++	0x14, /* 000101 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x70, /* 011100 */
++	0x60, /* 011000 */
++	0x00, /* 000000 */
++
++	/* 14 0x0E '^N' */
++	0x3C, /* 001111 */
++	0x24, /* 001001 */
++	0x3C, /* 001111 */
++	0x24, /* 001001 */
++	0x24, /* 001001 */
++	0x6C, /* 011011 */
++	0x6C, /* 011011 */
++	0x00, /* 000000 */
++
++	/* 15 0x0F '^O' */
++	0x10, /* 000100 */
++	0x54, /* 010101 */
++	0x38, /* 001110 */
++	0x6C, /* 011011 */
++	0x38, /* 001110 */
++	0x54, /* 010101 */
++	0x10, /* 000100 */
++	0x00, /* 000000 */
++
++	/* 16 0x10 '^P' */
++	0x40, /* 010000 */
++	0x60, /* 011000 */
++	0x70, /* 011100 */
++	0x78, /* 011110 */
++	0x70, /* 011100 */
++	0x60, /* 011000 */
++	0x40, /* 010000 */
++	0x00, /* 000000 */
++
++	/* 17 0x11 '^Q' */
++	0x04, /* 000001 */
++	0x0C, /* 000011 */
++	0x1C, /* 000111 */
++	0x3C, /* 001111 */
++	0x1C, /* 000111 */
++	0x0C, /* 000011 */
++	0x04, /* 000001 */
++	0x00, /* 000000 */
++
++	/* 18 0x12 '^R' */
++	0x10, /* 000100 */
++	0x38, /* 001110 */
++	0x54, /* 010101 */
++	0x10, /* 000100 */
++	0x54, /* 010101 */
++	0x38, /* 001110 */
++	0x10, /* 000100 */
++	0x00, /* 000000 */
++
++	/* 19 0x13 '^S' */
++	0x48, /* 010010 */
++	0x48, /* 010010 */
++	0x48, /* 010010 */
++	0x48, /* 010010 */
++	0x48, /* 010010 */
++	0x00, /* 000000 */
++	0x48, /* 010010 */
++	0x00, /* 000000 */
++
++	/* 20 0x14 '^T' */
++	0x3C, /* 001111 */
++	0x54, /* 010101 */
++	0x54, /* 010101 */
++	0x3C, /* 001111 */
++	0x14, /* 000101 */
++	0x14, /* 000101 */
++	0x14, /* 000101 */
++	0x00, /* 000000 */
++
++	/* 21 0x15 '^U' */
++	0x38, /* 001110 */
++	0x44, /* 010001 */
++	0x30, /* 001100 */
++	0x28, /* 001010 */
++	0x14, /* 000101 */
++	0x0C, /* 000011 */
++	0x44, /* 010001 */
++	0x38, /* 001110 */
++
++	/* 22 0x16 '^V' */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0xF8, /* 111110 */
++	0xF8, /* 111110 */
++	0xF8, /* 111110 */
++	0x00, /* 000000 */
++
++	/* 23 0x17 '^W' */
++	0x10, /* 000100 */
++	0x38, /* 001110 */
++	0x54, /* 010101 */
++	0x10, /* 000100 */
++	0x54, /* 010101 */
++	0x38, /* 001110 */
++	0x10, /* 000100 */
++	0x7C, /* 011111 */
++
++	/* 24 0x18 '^X' */
++	0x10, /* 000100 */
++	0x38, /* 001110 */
++	0x54, /* 010101 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x00, /* 000000 */
++
++	/* 25 0x19 '^Y' */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x54, /* 010101 */
++	0x38, /* 001110 */
++	0x10, /* 000100 */
++	0x00, /* 000000 */
++
++	/* 26 0x1A '^Z' */
++	0x00, /* 000000 */
++	0x10, /* 000100 */
++	0x08, /* 000010 */
++	0x7C, /* 011111 */
++	0x08, /* 000010 */
++	0x10, /* 000100 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++
++	/* 27 0x1B '^[' */
++	0x00, /* 000000 */
++	0x10, /* 000100 */
++	0x20, /* 001000 */
++	0x7C, /* 011111 */
++	0x20, /* 001000 */
++	0x10, /* 000100 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++
++	/* 28 0x1C '^\' */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x40, /* 010000 */
++	0x40, /* 010000 */
++	0x40, /* 010000 */
++	0x78, /* 011110 */
++	0x00, /* 000000 */
++
++	/* 29 0x1D '^]' */
++	0x00, /* 000000 */
++	0x48, /* 010010 */
++	0x84, /* 100001 */
++	0xFC, /* 111111 */
++	0x84, /* 100001 */
++	0x48, /* 010010 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++
++	/* 30 0x1E '^^' */
++	0x00, /* 000000 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x38, /* 001110 */
++	0x38, /* 001110 */
++	0x7C, /* 011111 */
++	0x7C, /* 011111 */
++	0x00, /* 000000 */
++
++	/* 31 0x1F '^_' */
++	0x00, /* 000000 */
++	0x7C, /* 011111 */
++	0x7C, /* 011111 */
++	0x38, /* 001110 */
++	0x38, /* 001110 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x00, /* 000000 */
++
++	/* 32 0x20 ' ' */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++
++	/* 33 0x21 '!' */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x00, /* 000000 */
++	0x10, /* 000100 */
++	0x00, /* 000000 */
++
++	/* 34 0x22 '"' */
++	0x28, /* 001010 */
++	0x28, /* 001010 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++
++	/* 35 0x23 '#' */
++	0x00, /* 000000 */
++	0x28, /* 001010 */
++	0x7C, /* 011111 */
++	0x28, /* 001010 */
++	0x28, /* 001010 */
++	0x7C, /* 011111 */
++	0x28, /* 001010 */
++	0x00, /* 000000 */
++
++	/* 36 0x24 '$' */
++	0x10, /* 000000 */
++	0x38, /* 001000 */
++	0x40, /* 010000 */
++	0x30, /* 001000 */
++	0x08, /* 000000 */
++	0x70, /* 011000 */
++	0x20, /* 001000 */
++	0x00, /* 000000 */
++
++	/* 37 0x25 '%' */
++	0x64, /* 011001 */
++	0x64, /* 011001 */
++	0x08, /* 000010 */
++	0x10, /* 000100 */
++	0x20, /* 001000 */
++	0x4C, /* 010011 */
++	0x4C, /* 010011 */
++	0x00, /* 000000 */
++
++	/* 38 0x26 '&' */
++	0x30, /* 001100 */
++	0x48, /* 010010 */
++	0x50, /* 010100 */
++	0x20, /* 001000 */
++	0x54, /* 010101 */
++	0x48, /* 010010 */
++	0x34, /* 001101 */
++	0x00, /* 000000 */
++
++	/* 39 0x27 ''' */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++
++	/* 40 0x28 '(' */
++	0x08, /* 000010 */
++	0x10, /* 000100 */
++	0x20, /* 001000 */
++	0x20, /* 001000 */
++	0x20, /* 001000 */
++	0x10, /* 000100 */
++	0x08, /* 000010 */
++	0x00, /* 000000 */
++
++	/* 41 0x29 ')' */
++	0x20, /* 001000 */
++	0x10, /* 000100 */
++	0x08, /* 000010 */
++	0x08, /* 000010 */
++	0x08, /* 000010 */
++	0x10, /* 000100 */
++	0x20, /* 001000 */
++	0x00, /* 000000 */
++
++	/* 42 0x2A '*' */
++	0x10, /* 000100 */
++	0x54, /* 010101 */
++	0x38, /* 001110 */
++	0x54, /* 010101 */
++	0x10, /* 000100 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++
++	/* 43 0x2B '+' */
++	0x00, /* 000000 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x7C, /* 011111 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++
++	/* 44 0x2C ',' */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x30, /* 001100 */
++	0x30, /* 001100 */
++	0x20, /* 001000 */
++
++	/* 45 0x2D '-' */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x7C, /* 011111 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++
++	/* 46 0x2E '.' */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x18, /* 000110 */
++	0x18, /* 000110 */
++	0x00, /* 000000 */
++
++	/* 47 0x2F '/' */
++	0x04, /* 000001 */
++	0x08, /* 000010 */
++	0x08, /* 000010 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x20, /* 001000 */
++	0x20, /* 001000 */
++	0x40, /* 010000 */
++
++	/* 48 0x30 '0' */
++	0x38, /* 001110 */
++	0x44, /* 010001 */
++	0x4C, /* 010011 */
++	0x54, /* 010101 */
++	0x64, /* 011001 */
++	0x44, /* 010001 */
++	0x38, /* 001110 */
++	0x00, /* 000000 */
++
++	/* 49 0x31 '1' */
++	0x10, /* 000100 */
++	0x30, /* 001100 */
++	0x50, /* 010100 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x7C, /* 011111 */
++	0x00, /* 000000 */
++
++	/* 50 0x32 '2' */
++	0x38, /* 001110 */
++	0x44, /* 010001 */
++	0x04, /* 000001 */
++	0x08, /* 000010 */
++	0x10, /* 000100 */
++	0x20, /* 001000 */
++	0x7C, /* 011111 */
++	0x00, /* 000000 */
++
++	/* 51 0x33 '3' */
++	0x38, /* 001110 */
++	0x44, /* 010001 */
++	0x04, /* 000001 */
++	0x18, /* 000110 */
++	0x04, /* 000001 */
++	0x44, /* 010001 */
++	0x38, /* 001110 */
++	0x00, /* 000000 */
++
++	/* 52 0x34 '4' */
++	0x08, /* 000010 */
++	0x18, /* 000110 */
++	0x28, /* 001010 */
++	0x48, /* 010010 */
++	0x7C, /* 011111 */
++	0x08, /* 000010 */
++	0x08, /* 000010 */
++	0x00, /* 000000 */
++
++	/* 53 0x35 '5' */
++	0x7C, /* 011111 */
++	0x40, /* 010000 */
++	0x78, /* 011110 */
++	0x04, /* 000001 */
++	0x04, /* 000001 */
++	0x44, /* 010001 */
++	0x38, /* 001110 */
++	0x00, /* 000000 */
++
++	/* 54 0x36 '6' */
++	0x18, /* 000110 */
++	0x20, /* 001000 */
++	0x40, /* 010000 */
++	0x78, /* 011110 */
++	0x44, /* 010001 */
++	0x44, /* 010001 */
++	0x38, /* 001110 */
++	0x00, /* 000000 */
++
++	/* 55 0x37 '7' */
++	0x7C, /* 011111 */
++	0x04, /* 000001 */
++	0x04, /* 000001 */
++	0x08, /* 000010 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x00, /* 000000 */
++
++	/* 56 0x38 '8' */
++	0x38, /* 001110 */
++	0x44, /* 010001 */
++	0x44, /* 010001 */
++	0x38, /* 001110 */
++	0x44, /* 010001 */
++	0x44, /* 010001 */
++	0x38, /* 001110 */
++	0x00, /* 000000 */
++
++	/* 57 0x39 '9' */
++	0x38, /* 001110 */
++	0x44, /* 010001 */
++	0x44, /* 010001 */
++	0x3C, /* 001111 */
++	0x04, /* 000001 */
++	0x08, /* 000010 */
++	0x30, /* 001100 */
++	0x00, /* 000000 */
++
++	/* 58 0x3A ':' */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x18, /* 000110 */
++	0x18, /* 000110 */
++	0x00, /* 000000 */
++	0x18, /* 000110 */
++	0x18, /* 000110 */
++	0x00, /* 000000 */
++
++	/* 59 0x3B ';' */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x30, /* 001100 */
++	0x30, /* 001100 */
++	0x00, /* 000000 */
++	0x30, /* 001100 */
++	0x30, /* 001100 */
++	0x20, /* 001000 */
++
++	/* 60 0x3C '<' */
++	0x04, /* 000001 */
++	0x08, /* 000010 */
++	0x10, /* 000100 */
++	0x20, /* 001000 */
++	0x10, /* 000100 */
++	0x08, /* 000010 */
++	0x04, /* 000001 */
++	0x00, /* 000000 */
++
++	/* 61 0x3D '=' */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x7C, /* 011111 */
++	0x00, /* 000000 */
++	0x7C, /* 011111 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++
++	/* 62 0x3E '>' */
++	0x20, /* 001000 */
++	0x10, /* 000100 */
++	0x08, /* 000010 */
++	0x04, /* 000001 */
++	0x08, /* 000010 */
++	0x10, /* 000100 */
++	0x20, /* 001000 */
++	0x00, /* 000000 */
++
++	/* 63 0x3F '?' */
++	0x38, /* 001110 */
++	0x44, /* 010001 */
++	0x04, /* 000001 */
++	0x08, /* 000010 */
++	0x10, /* 000100 */
++	0x00, /* 000000 */
++	0x10, /* 000100 */
++	0x00, /* 000000 */
++
++	/* 64 0x40 '@' */
++	0x38, /* 001110 */
++	0x44, /* 010001 */
++	0x5C, /* 010111 */
++	0x54, /* 010101 */
++	0x5C, /* 010111 */
++	0x40, /* 010000 */
++	0x38, /* 001110 */
++	0x00, /* 000000 */
++
++	/* 65 0x41 'A' */
++	0x10, /* 000100 */
++	0x28, /* 001010 */
++	0x44, /* 010001 */
++	0x44, /* 010001 */
++	0x7C, /* 011111 */
++	0x44, /* 010001 */
++	0x44, /* 010001 */
++	0x00, /* 000000 */
++
++	/* 66 0x42 'B' */
++	0x78, /* 011110 */
++	0x24, /* 001001 */
++	0x24, /* 001001 */
++	0x38, /* 001110 */
++	0x24, /* 001001 */
++	0x24, /* 001001 */
++	0x78, /* 011110 */
++	0x00, /* 000000 */
++
++	/* 67 0x43 'C' */
++	0x38, /* 001110 */
++	0x44, /* 010001 */
++	0x40, /* 010000 */
++	0x40, /* 010000 */
++	0x40, /* 010000 */
++	0x44, /* 010001 */
++	0x38, /* 001110 */
++	0x00, /* 000000 */
++
++	/* 68 0x44 'D' */
++	0x78, /* 011110 */
++	0x24, /* 001001 */
++	0x24, /* 001001 */
++	0x24, /* 001001 */
++	0x24, /* 001001 */
++	0x24, /* 001001 */
++	0x78, /* 011110 */
++	0x00, /* 000000 */
++
++	/* 69 0x45 'E' */
++	0x7C, /* 011111 */
++	0x40, /* 010000 */
++	0x40, /* 010000 */
++	0x78, /* 011110 */
++	0x40, /* 010000 */
++	0x40, /* 010000 */
++	0x7C, /* 011111 */
++	0x00, /* 000000 */
++
++	/* 70 0x46 'F' */
++	0x7C, /* 011111 */
++	0x40, /* 010000 */
++	0x40, /* 010000 */
++	0x78, /* 011110 */
++	0x40, /* 010000 */
++	0x40, /* 010000 */
++	0x40, /* 010000 */
++	0x00, /* 000000 */
++
++	/* 71 0x47 'G' */
++	0x38, /* 001110 */
++	0x44, /* 010001 */
++	0x40, /* 010000 */
++	0x5C, /* 010111 */
++	0x44, /* 010001 */
++	0x44, /* 010001 */
++	0x38, /* 001110 */
++	0x00, /* 000000 */
++
++	/* 72 0x48 'H' */
++	0x44, /* 010001 */
++	0x44, /* 010001 */
++	0x44, /* 010001 */
++	0x7C, /* 011111 */
++	0x44, /* 010001 */
++	0x44, /* 010001 */
++	0x44, /* 010001 */
++	0x00, /* 000000 */
++
++	/* 73 0x49 'I' */
++	0x38, /* 001110 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x38, /* 001110 */
++	0x00, /* 000000 */
++
++	/* 74 0x4A 'J' */
++	0x1C, /* 000111 */
++	0x08, /* 000010 */
++	0x08, /* 000010 */
++	0x08, /* 000010 */
++	0x48, /* 010010 */
++	0x48, /* 010010 */
++	0x30, /* 001100 */
++	0x00, /* 000000 */
++
++	/* 75 0x4B 'K' */
++	0x44, /* 010001 */
++	0x48, /* 010010 */
++	0x50, /* 010100 */
++	0x60, /* 011000 */
++	0x50, /* 010100 */
++	0x48, /* 010010 */
++	0x44, /* 010001 */
++	0x00, /* 000000 */
++
++	/* 76 0x4C 'L' */
++	0x40, /* 010000 */
++	0x40, /* 010000 */
++	0x40, /* 010000 */
++	0x40, /* 010000 */
++	0x40, /* 010000 */
++	0x40, /* 010000 */
++	0x7C, /* 011111 */
++	0x00, /* 000000 */
++
++	/* 77 0x4D 'M' */
++	0x44, /* 010001 */
++	0x6C, /* 011011 */
++	0x54, /* 010101 */
++	0x54, /* 010101 */
++	0x44, /* 010001 */
++	0x44, /* 010001 */
++	0x44, /* 010001 */
++	0x00, /* 000000 */
++
++	/* 78 0x4E 'N' */
++	0x44, /* 010001 */
++	0x64, /* 011001 */
++	0x54, /* 010101 */
++	0x4C, /* 010011 */
++	0x44, /* 010001 */
++	0x44, /* 010001 */
++	0x44, /* 010001 */
++	0x00, /* 000000 */
++
++	/* 79 0x4F 'O' */
++	0x38, /* 001110 */
++	0x44, /* 010001 */
++	0x44, /* 010001 */
++	0x44, /* 010001 */
++	0x44, /* 010001 */
++	0x44, /* 010001 */
++	0x38, /* 001110 */
++	0x00, /* 000000 */
++
++	/* 80 0x50 'P' */
++	0x78, /* 011110 */
++	0x44, /* 010001 */
++	0x44, /* 010001 */
++	0x78, /* 011110 */
++	0x40, /* 010000 */
++	0x40, /* 010000 */
++	0x40, /* 010000 */
++	0x00, /* 000000 */
++
++	/* 81 0x51 'Q' */
++	0x38, /* 001110 */
++	0x44, /* 010001 */
++	0x44, /* 010001 */
++	0x44, /* 010001 */
++	0x54, /* 010101 */
++	0x48, /* 010010 */
++	0x34, /* 001101 */
++	0x00, /* 000000 */
++
++	/* 82 0x52 'R' */
++	0x78, /* 011110 */
++	0x44, /* 010001 */
++	0x44, /* 010001 */
++	0x78, /* 011110 */
++	0x50, /* 010100 */
++	0x48, /* 010010 */
++	0x44, /* 010001 */
++	0x00, /* 000000 */
++
++	/* 83 0x53 'S' */
++	0x38, /* 001110 */
++	0x44, /* 010001 */
++	0x40, /* 010000 */
++	0x38, /* 001110 */
++	0x04, /* 000001 */
++	0x44, /* 010001 */
++	0x38, /* 001110 */
++	0x00, /* 000000 */
++
++	/* 84 0x54 'T' */
++	0x7C, /* 011111 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x00, /* 000000 */
++
++	/* 85 0x55 'U' */
++	0x44, /* 010001 */
++	0x44, /* 010001 */
++	0x44, /* 010001 */
++	0x44, /* 010001 */
++	0x44, /* 010001 */
++	0x44, /* 010001 */
++	0x38, /* 001110 */
++	0x00, /* 000000 */
++
++	/* 86 0x56 'V' */
++	0x44, /* 010001 */
++	0x44, /* 010001 */
++	0x44, /* 010001 */
++	0x44, /* 010001 */
++	0x44, /* 010001 */
++	0x28, /* 001010 */
++	0x10, /* 000100 */
++	0x00, /* 000000 */
++
++	/* 87 0x57 'W' */
++	0x44, /* 010001 */
++	0x44, /* 010001 */
++	0x44, /* 010001 */
++	0x54, /* 010101 */
++	0x54, /* 010101 */
++	0x6C, /* 011011 */
++	0x44, /* 010001 */
++	0x00, /* 000000 */
++
++	/* 88 0x58 'X' */
++	0x44, /* 010001 */
++	0x44, /* 010001 */
++	0x28, /* 001010 */
++	0x10, /* 000100 */
++	0x28, /* 001010 */
++	0x44, /* 010001 */
++	0x44, /* 010001 */
++	0x00, /* 000000 */
++
++	/* 89 0x59 'Y' */
++	0x44, /* 010001 */
++	0x44, /* 010001 */
++	0x44, /* 010001 */
++	0x28, /* 001010 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x00, /* 000000 */
++
++	/* 90 0x5A 'Z' */
++	0x7C, /* 011111 */
++	0x04, /* 000001 */
++	0x08, /* 000010 */
++	0x10, /* 000100 */
++	0x20, /* 001000 */
++	0x40, /* 010000 */
++	0x7C, /* 011111 */
++	0x00, /* 000000 */
++
++	/* 91 0x5B '[' */
++	0x18, /* 000110 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x18, /* 000110 */
++	0x00, /* 000000 */
++
++	/* 92 0x5C '\' */
++	0x40, /* 010000 */
++	0x20, /* 001000 */
++	0x20, /* 001000 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x08, /* 000010 */
++	0x08, /* 000010 */
++	0x04, /* 000001 */
++
++	/* 93 0x5D ']' */
++	0x30, /* 001100 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x30, /* 001100 */
++	0x00, /* 000000 */
++
++	/* 94 0x5E '^' */
++	0x10, /* 000100 */
++	0x28, /* 001010 */
++	0x44, /* 010001 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++
++	/* 95 0x5F '_' */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x7C, /* 011111 */
++
++	/* 96 0x60 '`' */
++	0x20, /* 001000 */
++	0x10, /* 000100 */
++	0x08, /* 000010 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++
++	/* 97 0x61 'a' */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x38, /* 001110 */
++	0x04, /* 000001 */
++	0x3C, /* 001111 */
++	0x44, /* 010001 */
++	0x3C, /* 001111 */
++	0x00, /* 000000 */
++
++	/* 98 0x62 'b' */
++	0x40, /* 010000 */
++	0x40, /* 010000 */
++	0x58, /* 010110 */
++	0x64, /* 011001 */
++	0x44, /* 010001 */
++	0x64, /* 011001 */
++	0x58, /* 010110 */
++	0x00, /* 000000 */
++
++	/* 99 0x63 'c' */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x38, /* 001110 */
++	0x44, /* 010001 */
++	0x40, /* 010000 */
++	0x44, /* 010001 */
++	0x38, /* 001110 */
++	0x00, /* 000000 */
++
++	/* 100 0x64 'd' */
++	0x04, /* 000001 */
++	0x04, /* 000001 */
++	0x34, /* 001101 */
++	0x4C, /* 010011 */
++	0x44, /* 010001 */
++	0x4C, /* 010011 */
++	0x34, /* 001101 */
++	0x00, /* 000000 */
++
++	/* 101 0x65 'e' */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x38, /* 001110 */
++	0x44, /* 010001 */
++	0x7C, /* 011111 */
++	0x40, /* 010000 */
++	0x3C, /* 001111 */
++	0x00, /* 000000 */
++
++	/* 102 0x66 'f' */
++	0x0C, /* 000011 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x38, /* 001110 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x00, /* 000000 */
++
++	/* 103 0x67 'g' */
++	0x00, /* 000000 */
++	0x34, /* 001101 */
++	0x4C, /* 010011 */
++	0x44, /* 010001 */
++	0x4C, /* 010011 */
++	0x34, /* 001101 */
++	0x04, /* 000001 */
++	0x38, /* 001110 */
++
++	/* 104 0x68 'h' */
++	0x40, /* 010000 */
++	0x40, /* 010000 */
++	0x78, /* 011110 */
++	0x44, /* 010001 */
++	0x44, /* 010001 */
++	0x44, /* 010001 */
++	0x44, /* 010001 */
++	0x00, /* 000000 */
++
++	/* 105 0x69 'i' */
++	0x10, /* 000100 */
++	0x00, /* 000000 */
++	0x30, /* 001100 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x38, /* 001110 */
++	0x00, /* 000000 */
++
++	/* 106 0x6A 'j' */
++	0x10, /* 000100 */
++	0x00, /* 000000 */
++	0x30, /* 001100 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x60, /* 011000 */
++
++	/* 107 0x6B 'k' */
++	0x40, /* 010000 */
++	0x40, /* 010000 */
++	0x48, /* 010010 */
++	0x50, /* 010100 */
++	0x70, /* 011100 */
++	0x48, /* 010010 */
++	0x44, /* 010001 */
++	0x00, /* 000000 */
++
++	/* 108 0x6C 'l' */
++	0x30, /* 001100 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x38, /* 001110 */
++	0x00, /* 000000 */
++
++	/* 109 0x6D 'm' */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x68, /* 011010 */
++	0x54, /* 010101 */
++	0x54, /* 010101 */
++	0x54, /* 010101 */
++	0x54, /* 010101 */
++	0x00, /* 000000 */
++
++	/* 110 0x6E 'n' */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x58, /* 010110 */
++	0x64, /* 011001 */
++	0x44, /* 010001 */
++	0x44, /* 010001 */
++	0x44, /* 010001 */
++	0x00, /* 000000 */
++
++	/* 111 0x6F 'o' */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x38, /* 001110 */
++	0x44, /* 010001 */
++	0x44, /* 010001 */
++	0x44, /* 010001 */
++	0x38, /* 001110 */
++	0x00, /* 000000 */
++
++	/* 112 0x70 'p' */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x78, /* 011110 */
++	0x44, /* 010001 */
++	0x64, /* 011001 */
++	0x58, /* 010110 */
++	0x40, /* 010000 */
++	0x40, /* 010000 */
++
++	/* 113 0x71 'q' */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x3C, /* 001111 */
++	0x44, /* 010001 */
++	0x4C, /* 010011 */
++	0x34, /* 001101 */
++	0x04, /* 000001 */
++	0x04, /* 000001 */
++
++	/* 114 0x72 'r' */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x58, /* 010110 */
++	0x64, /* 011001 */
++	0x40, /* 010000 */
++	0x40, /* 010000 */
++	0x40, /* 010000 */
++	0x00, /* 000000 */
++
++	/* 115 0x73 's' */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x3C, /* 001111 */
++	0x40, /* 010000 */
++	0x38, /* 001110 */
++	0x04, /* 000001 */
++	0x78, /* 011110 */
++	0x00, /* 000000 */
++
++	/* 116 0x74 't' */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x38, /* 001110 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x0C, /* 000011 */
++	0x00, /* 000000 */
++
++	/* 117 0x75 'u' */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x44, /* 010001 */
++	0x44, /* 010001 */
++	0x44, /* 010001 */
++	0x4C, /* 010011 */
++	0x34, /* 001101 */
++	0x00, /* 000000 */
++
++	/* 118 0x76 'v' */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x44, /* 010001 */
++	0x44, /* 010001 */
++	0x44, /* 010001 */
++	0x28, /* 001010 */
++	0x10, /* 000100 */
++	0x00, /* 000000 */
++
++	/* 119 0x77 'w' */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x54, /* 010101 */
++	0x54, /* 010101 */
++	0x54, /* 010101 */
++	0x54, /* 010101 */
++	0x28, /* 001010 */
++	0x00, /* 000000 */
++
++	/* 120 0x78 'x' */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x44, /* 010001 */
++	0x28, /* 001010 */
++	0x10, /* 000100 */
++	0x28, /* 001010 */
++	0x44, /* 010001 */
++	0x00, /* 000000 */
++
++	/* 121 0x79 'y' */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x44, /* 010001 */
++	0x44, /* 010001 */
++	0x44, /* 010001 */
++	0x3C, /* 001111 */
++	0x04, /* 000001 */
++	0x38, /* 001110 */
++
++	/* 122 0x7A 'z' */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x7C, /* 011111 */
++	0x08, /* 000010 */
++	0x10, /* 000100 */
++	0x20, /* 001000 */
++	0x7C, /* 011111 */
++	0x00, /* 000000 */
++
++	/* 123 0x7B '{' */
++	0x08, /* 000010 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x20, /* 001000 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x08, /* 000010 */
++	0x00, /* 000000 */
++
++	/* 124 0x7C '|' */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x00, /* 000000 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x00, /* 000000 */
++
++	/* 125 0x7D '}' */
++	0x20, /* 001000 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x08, /* 000010 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x20, /* 001000 */
++	0x00, /* 000000 */
++
++	/* 126 0x7E '~' */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x20, /* 001000 */
++	0x54, /* 010101 */
++	0x08, /* 000010 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++
++	/* 127 0x7F 'DEL' */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x10, /* 000100 */
++	0x28, /* 001010 */
++	0x44, /* 010001 */
++	0x44, /* 010001 */
++	0x7C, /* 011111 */
++	0x00, /* 000000 */
++
++	/* 128 0x80 '\200' */
++	0x00, /* 000000 */
++	0x38, /* 001110 */
++	0x44, /* 010001 */
++	0x40, /* 010000 */
++	0x44, /* 010001 */
++	0x38, /* 001110 */
++	0x10, /* 000100 */
++	0x20, /* 001000 */
++
++	/* 129 0x81 '\201' */
++	0x00, /* 000000 */
++	0x28, /* 001010 */
++	0x00, /* 000000 */
++	0x44, /* 010001 */
++	0x44, /* 010001 */
++	0x4C, /* 010011 */
++	0x34, /* 001101 */
++	0x00, /* 000000 */
++
++	/* 130 0x82 '\202' */
++	0x18, /* 000110 */
++	0x00, /* 000000 */
++	0x38, /* 001110 */
++	0x44, /* 010001 */
++	0x7C, /* 011111 */
++	0x40, /* 010000 */
++	0x3C, /* 001111 */
++	0x00, /* 000000 */
++
++	/* 131 0x83 '\203' */
++	0x18, /* 000110 */
++	0x00, /* 000000 */
++	0x38, /* 001110 */
++	0x04, /* 000001 */
++	0x3C, /* 001111 */
++	0x44, /* 010001 */
++	0x3C, /* 001111 */
++	0x00, /* 000000 */
++
++	/* 132 0x84 '\204' */
++	0x28, /* 001010 */
++	0x00, /* 000000 */
++	0x38, /* 001110 */
++	0x04, /* 000001 */
++	0x3C, /* 001111 */
++	0x44, /* 010001 */
++	0x3C, /* 001111 */
++	0x00, /* 000000 */
++
++	/* 133 0x85 '\205' */
++	0x18, /* 000110 */
++	0x00, /* 000000 */
++	0x38, /* 001110 */
++	0x04, /* 000001 */
++	0x3C, /* 001111 */
++	0x44, /* 010001 */
++	0x3C, /* 001111 */
++	0x00, /* 000000 */
++
++	/* 134 0x86 '\206' */
++	0x3C, /* 001111 */
++	0x18, /* 000110 */
++	0x38, /* 001110 */
++	0x04, /* 000001 */
++	0x3C, /* 001111 */
++	0x44, /* 010001 */
++	0x3C, /* 001111 */
++	0x00, /* 000000 */
++
++	/* 135 0x87 '\207' */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x38, /* 001110 */
++	0x44, /* 010001 */
++	0x40, /* 010000 */
++	0x44, /* 010001 */
++	0x38, /* 001110 */
++	0x10, /* 000100 */
++
++	/* 136 0x88 '\210' */
++	0x18, /* 000110 */
++	0x00, /* 000000 */
++	0x38, /* 001110 */
++	0x44, /* 010001 */
++	0x7C, /* 011111 */
++	0x40, /* 010000 */
++	0x3C, /* 001111 */
++	0x00, /* 000000 */
++
++	/* 137 0x89 '\211' */
++	0x28, /* 001010 */
++	0x00, /* 000000 */
++	0x38, /* 001110 */
++	0x44, /* 010001 */
++	0x7C, /* 011111 */
++	0x40, /* 010000 */
++	0x3C, /* 001111 */
++	0x00, /* 000000 */
++
++	/* 138 0x8A '\212' */
++	0x18, /* 000110 */
++	0x00, /* 000000 */
++	0x38, /* 001110 */
++	0x44, /* 010001 */
++	0x7C, /* 011111 */
++	0x40, /* 010000 */
++	0x3C, /* 001111 */
++	0x00, /* 000000 */
++
++	/* 139 0x8B '\213' */
++	0x28, /* 001010 */
++	0x00, /* 000000 */
++	0x30, /* 001100 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x38, /* 001110 */
++	0x00, /* 000000 */
++
++	/* 140 0x8C '\214' */
++	0x18, /* 000110 */
++	0x00, /* 000000 */
++	0x30, /* 001100 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x38, /* 001110 */
++	0x00, /* 000000 */
++
++	/* 141 0x8D '\215' */
++	0x18, /* 000110 */
++	0x00, /* 000000 */
++	0x30, /* 001100 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x38, /* 001110 */
++	0x00, /* 000000 */
++
++	/* 142 0x8E '\216' */
++	0x44, /* 010001 */
++	0x10, /* 000100 */
++	0x28, /* 001010 */
++	0x44, /* 010001 */
++	0x7C, /* 011111 */
++	0x44, /* 010001 */
++	0x44, /* 010001 */
++	0x00, /* 000000 */
++
++	/* 143 0x8F '\217' */
++	0x30, /* 001100 */
++	0x48, /* 010010 */
++	0x38, /* 001110 */
++	0x44, /* 010001 */
++	0x7C, /* 011111 */
++	0x44, /* 010001 */
++	0x44, /* 010001 */
++	0x00, /* 000000 */
++
++	/* 144 0x90 '\220' */
++	0x10, /* 000100 */
++	0x7C, /* 011111 */
++	0x40, /* 010000 */
++	0x78, /* 011110 */
++	0x40, /* 010000 */
++	0x40, /* 010000 */
++	0x7C, /* 011111 */
++	0x00, /* 000000 */
++
++	/* 145 0x91 '\221' */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x78, /* 011110 */
++	0x14, /* 000101 */
++	0x7C, /* 011111 */
++	0x50, /* 010100 */
++	0x3C, /* 001111 */
++	0x00, /* 000000 */
++
++	/* 146 0x92 '\222' */
++	0x3C, /* 001111 */
++	0x50, /* 010100 */
++	0x50, /* 010100 */
++	0x78, /* 011110 */
++	0x50, /* 010100 */
++	0x50, /* 010100 */
++	0x5C, /* 010111 */
++	0x00, /* 000000 */
++
++	/* 147 0x93 '\223' */
++	0x18, /* 000110 */
++	0x00, /* 000000 */
++	0x38, /* 001110 */
++	0x44, /* 010001 */
++	0x44, /* 010001 */
++	0x44, /* 010001 */
++	0x38, /* 001110 */
++	0x00, /* 000000 */
++
++	/* 148 0x94 '\224' */
++	0x28, /* 001010 */
++	0x00, /* 000000 */
++	0x38, /* 001110 */
++	0x44, /* 010001 */
++	0x44, /* 010001 */
++	0x44, /* 010001 */
++	0x38, /* 001110 */
++	0x00, /* 000000 */
++
++	/* 149 0x95 '\225' */
++	0x18, /* 000110 */
++	0x00, /* 000000 */
++	0x38, /* 001110 */
++	0x44, /* 010001 */
++	0x44, /* 010001 */
++	0x44, /* 010001 */
++	0x38, /* 001110 */
++	0x00, /* 000000 */
++
++	/* 150 0x96 '\226' */
++	0x10, /* 000100 */
++	0x28, /* 001010 */
++	0x00, /* 000000 */
++	0x44, /* 010001 */
++	0x44, /* 010001 */
++	0x4C, /* 010011 */
++	0x34, /* 001101 */
++	0x00, /* 000000 */
++
++	/* 151 0x97 '\227' */
++	0x20, /* 001000 */
++	0x10, /* 000100 */
++	0x00, /* 000000 */
++	0x44, /* 010001 */
++	0x44, /* 010001 */
++	0x4C, /* 010011 */
++	0x34, /* 001101 */
++	0x00, /* 000000 */
++
++	/* 152 0x98 '\230' */
++	0x28, /* 001010 */
++	0x00, /* 000000 */
++	0x44, /* 010001 */
++	0x44, /* 010001 */
++	0x44, /* 010001 */
++	0x3C, /* 001111 */
++	0x04, /* 000001 */
++	0x38, /* 001110 */
++
++	/* 153 0x99 '\231' */
++	0x84, /* 100001 */
++	0x38, /* 001110 */
++	0x44, /* 010001 */
++	0x44, /* 010001 */
++	0x44, /* 010001 */
++	0x44, /* 010001 */
++	0x38, /* 001110 */
++	0x00, /* 000000 */
++
++	/* 154 0x9A '\232' */
++	0x88, /* 100010 */
++	0x44, /* 010001 */
++	0x44, /* 010001 */
++	0x44, /* 010001 */
++	0x44, /* 010001 */
++	0x44, /* 010001 */
++	0x38, /* 001110 */
++	0x00, /* 000000 */
++
++	/* 155 0x9B '\233' */
++	0x10, /* 000100 */
++	0x38, /* 001110 */
++	0x54, /* 010101 */
++	0x50, /* 010100 */
++	0x54, /* 010101 */
++	0x38, /* 001110 */
++	0x10, /* 000100 */
++	0x00, /* 000000 */
++
++	/* 156 0x9C '\234' */
++	0x30, /* 001100 */
++	0x48, /* 010010 */
++	0x40, /* 010000 */
++	0x70, /* 011100 */
++	0x40, /* 010000 */
++	0x44, /* 010001 */
++	0x78, /* 011110 */
++	0x00, /* 000000 */
++
++	/* 157 0x9D '\235' */
++	0x44, /* 010001 */
++	0x28, /* 001010 */
++	0x7C, /* 011111 */
++	0x10, /* 000100 */
++	0x7C, /* 011111 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x00, /* 000000 */
++
++	/* 158 0x9E '\236' */
++	0x70, /* 011100 */
++	0x48, /* 010010 */
++	0x70, /* 011100 */
++	0x48, /* 010010 */
++	0x5C, /* 010111 */
++	0x48, /* 010010 */
++	0x44, /* 010001 */
++	0x00, /* 000000 */
++
++	/* 159 0x9F '\237' */
++	0x0C, /* 000011 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x38, /* 001110 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x60, /* 011000 */
++	0x00, /* 000000 */
++
++	/* 160 0xA0 '\240' */
++	0x18, /* 000110 */
++	0x00, /* 000000 */
++	0x38, /* 001110 */
++	0x04, /* 000001 */
++	0x3C, /* 001111 */
++	0x44, /* 010001 */
++	0x3C, /* 001111 */
++	0x00, /* 000000 */
++
++	/* 161 0xA1 '\241' */
++	0x08, /* 000010 */
++	0x10, /* 000100 */
++	0x00, /* 000000 */
++	0x30, /* 001100 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x38, /* 001110 */
++	0x00, /* 000000 */
++
++	/* 162 0xA2 '\242' */
++	0x08, /* 000010 */
++	0x10, /* 000100 */
++	0x00, /* 000000 */
++	0x38, /* 001110 */
++	0x44, /* 010001 */
++	0x44, /* 010001 */
++	0x38, /* 001110 */
++	0x00, /* 000000 */
++
++	/* 163 0xA3 '\243' */
++	0x08, /* 000010 */
++	0x10, /* 000100 */
++	0x00, /* 000000 */
++	0x44, /* 010001 */
++	0x44, /* 010001 */
++	0x4C, /* 010011 */
++	0x34, /* 001101 */
++	0x00, /* 000000 */
++
++	/* 164 0xA4 '\244' */
++	0x34, /* 001101 */
++	0x58, /* 010110 */
++	0x00, /* 000000 */
++	0x58, /* 010110 */
++	0x64, /* 011001 */
++	0x44, /* 010001 */
++	0x44, /* 010001 */
++	0x00, /* 000000 */
++
++	/* 165 0xA5 '\245' */
++	0x58, /* 010110 */
++	0x44, /* 010001 */
++	0x64, /* 011001 */
++	0x54, /* 010101 */
++	0x4C, /* 010011 */
++	0x44, /* 010001 */
++	0x44, /* 010001 */
++	0x00, /* 000000 */
++
++	/* 166 0xA6 '\246' */
++	0x38, /* 001110 */
++	0x04, /* 000001 */
++	0x3C, /* 001111 */
++	0x44, /* 010001 */
++	0x3C, /* 001111 */
++	0x00, /* 000000 */
++	0x7C, /* 011111 */
++	0x00, /* 000000 */
++
++	/* 167 0xA7 '\247' */
++	0x38, /* 001110 */
++	0x44, /* 010001 */
++	0x44, /* 010001 */
++	0x44, /* 010001 */
++	0x38, /* 001110 */
++	0x00, /* 000000 */
++	0x7C, /* 011111 */
++	0x00, /* 000000 */
++
++	/* 168 0xA8 '\250' */
++	0x10, /* 000100 */
++	0x00, /* 000000 */
++	0x10, /* 000100 */
++	0x20, /* 001000 */
++	0x40, /* 010000 */
++	0x44, /* 010001 */
++	0x38, /* 001110 */
++	0x00, /* 000000 */
++
++	/* 169 0xA9 '\251' */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x7C, /* 011111 */
++	0x40, /* 010000 */
++	0x40, /* 010000 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++
++	/* 170 0xAA '\252' */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x7C, /* 011111 */
++	0x04, /* 000001 */
++	0x04, /* 000001 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++
++	/* 171 0xAB '\253' */
++	0x20, /* 001000 */
++	0x24, /* 001001 */
++	0x28, /* 001010 */
++	0x10, /* 000100 */
++	0x28, /* 001010 */
++	0x44, /* 010001 */
++	0x08, /* 000010 */
++	0x1C, /* 000111 */
++
++	/* 172 0xAC '\254' */
++	0x20, /* 001000 */
++	0x24, /* 001001 */
++	0x28, /* 001010 */
++	0x10, /* 000100 */
++	0x28, /* 001010 */
++	0x58, /* 010110 */
++	0x3C, /* 001111 */
++	0x08, /* 000010 */
++
++	/* 173 0xAD '\255' */
++	0x10, /* 000100 */
++	0x00, /* 000000 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x00, /* 000000 */
++
++	/* 174 0xAE '\256' */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x24, /* 001001 */
++	0x48, /* 010010 */
++	0x90, /* 100100 */
++	0x48, /* 010010 */
++	0x24, /* 001001 */
++	0x00, /* 000000 */
++
++	/* 175 0xAF '\257' */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x90, /* 100100 */
++	0x48, /* 010010 */
++	0x24, /* 001001 */
++	0x48, /* 010010 */
++	0x90, /* 100100 */
++	0x00, /* 000000 */
++
++	/* 176 0xB0 '\260' */
++	0x10, /* 000100 */
++	0x44, /* 010001 */
++	0x10, /* 000100 */
++	0x44, /* 010001 */
++	0x10, /* 000100 */
++	0x44, /* 010001 */
++	0x10, /* 000100 */
++	0x44, /* 010001 */
++
++	/* 177 0xB1 '\261' */
++	0xA8, /* 101010 */
++	0x54, /* 010101 */
++	0xA8, /* 101010 */
++	0x54, /* 010101 */
++	0xA8, /* 101010 */
++	0x54, /* 010101 */
++	0xA8, /* 101010 */
++	0x54, /* 010101 */
++
++	/* 178 0xB2 '\262' */
++	0xDC, /* 110111 */
++	0x74, /* 011101 */
++	0xDC, /* 110111 */
++	0x74, /* 011101 */
++	0xDC, /* 110111 */
++	0x74, /* 011101 */
++	0xDC, /* 110111 */
++	0x74, /* 011101 */
++
++	/* 179 0xB3 '\263' */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++
++	/* 180 0xB4 '\264' */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0xF0, /* 111100 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++
++	/* 181 0xB5 '\265' */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0xF0, /* 111100 */
++	0x10, /* 000100 */
++	0xF0, /* 111100 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++
++	/* 182 0xB6 '\266' */
++	0x28, /* 001010 */
++	0x28, /* 001010 */
++	0x28, /* 001010 */
++	0xE8, /* 111010 */
++	0x28, /* 001010 */
++	0x28, /* 001010 */
++	0x28, /* 001010 */
++	0x28, /* 001010 */
++
++	/* 183 0xB7 '\267' */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0xF8, /* 111110 */
++	0x28, /* 001010 */
++	0x28, /* 001010 */
++	0x28, /* 001010 */
++	0x28, /* 001010 */
++
++	/* 184 0xB8 '\270' */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0xF0, /* 111100 */
++	0x10, /* 000100 */
++	0xF0, /* 111100 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++
++	/* 185 0xB9 '\271' */
++	0x28, /* 001010 */
++	0x28, /* 001010 */
++	0xE8, /* 111010 */
++	0x08, /* 000010 */
++	0xE8, /* 111010 */
++	0x28, /* 001010 */
++	0x28, /* 001010 */
++	0x28, /* 001010 */
++
++	/* 186 0xBA '\272' */
++	0x28, /* 001010 */
++	0x28, /* 001010 */
++	0x28, /* 001010 */
++	0x28, /* 001010 */
++	0x28, /* 001010 */
++	0x28, /* 001010 */
++	0x28, /* 001010 */
++	0x28, /* 001010 */
++
++	/* 187 0xBB '\273' */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0xF8, /* 111110 */
++	0x08, /* 000010 */
++	0xE8, /* 111010 */
++	0x28, /* 001010 */
++	0x28, /* 001010 */
++	0x28, /* 001010 */
++
++	/* 188 0xBC '\274' */
++	0x28, /* 001010 */
++	0x28, /* 001010 */
++	0xE8, /* 111010 */
++	0x08, /* 000010 */
++	0xF8, /* 111110 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++
++	/* 189 0xBD '\275' */
++	0x28, /* 001010 */
++	0x28, /* 001010 */
++	0x28, /* 001010 */
++	0xF8, /* 111110 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++
++	/* 190 0xBE '\276' */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0xF0, /* 111100 */
++	0x10, /* 000100 */
++	0xF0, /* 111100 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++
++	/* 191 0xBF '\277' */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0xF0, /* 111100 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++
++	/* 192 0xC0 '\300' */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x1C, /* 000111 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++
++	/* 193 0xC1 '\301' */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0xFC, /* 111111 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++
++	/* 194 0xC2 '\302' */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0xFC, /* 111111 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++
++	/* 195 0xC3 '\303' */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x1C, /* 000111 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++
++	/* 196 0xC4 '\304' */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0xFC, /* 111111 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++
++	/* 197 0xC5 '\305' */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0xFC, /* 111111 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++
++	/* 198 0xC6 '\306' */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x1C, /* 000111 */
++	0x10, /* 000100 */
++	0x1C, /* 000111 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++
++	/* 199 0xC7 '\307' */
++	0x28, /* 001010 */
++	0x28, /* 001010 */
++	0x28, /* 001010 */
++	0x2C, /* 001011 */
++	0x28, /* 001010 */
++	0x28, /* 001010 */
++	0x28, /* 001010 */
++	0x28, /* 001010 */
++
++	/* 200 0xC8 '\310' */
++	0x28, /* 001010 */
++	0x28, /* 001010 */
++	0x2C, /* 001011 */
++	0x20, /* 001000 */
++	0x3C, /* 001111 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++
++	/* 201 0xC9 '\311' */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x3C, /* 001111 */
++	0x20, /* 001000 */
++	0x2C, /* 001011 */
++	0x28, /* 001010 */
++	0x28, /* 001010 */
++	0x28, /* 001010 */
++
++	/* 202 0xCA '\312' */
++	0x28, /* 001010 */
++	0x28, /* 001010 */
++	0xEC, /* 111011 */
++	0x00, /* 000000 */
++	0xFC, /* 111111 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++
++	/* 203 0xCB '\313' */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0xFC, /* 111111 */
++	0x00, /* 000000 */
++	0xEC, /* 111011 */
++	0x28, /* 001010 */
++	0x28, /* 001010 */
++	0x28, /* 001010 */
++
++	/* 204 0xCC '\314' */
++	0x28, /* 001010 */
++	0x28, /* 001010 */
++	0x2C, /* 001011 */
++	0x20, /* 001000 */
++	0x2C, /* 001011 */
++	0x28, /* 001010 */
++	0x28, /* 001010 */
++	0x28, /* 001010 */
++
++	/* 205 0xCD '\315' */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0xFC, /* 111111 */
++	0x00, /* 000000 */
++	0xFC, /* 111111 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++
++	/* 206 0xCE '\316' */
++	0x28, /* 001010 */
++	0x28, /* 001010 */
++	0xEC, /* 111011 */
++	0x00, /* 000000 */
++	0xEC, /* 111011 */
++	0x28, /* 001010 */
++	0x28, /* 001010 */
++	0x28, /* 001010 */
++
++	/* 207 0xCF '\317' */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0xFC, /* 111111 */
++	0x00, /* 000000 */
++	0xFC, /* 111111 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++
++	/* 208 0xD0 '\320' */
++	0x28, /* 001010 */
++	0x28, /* 001010 */
++	0x28, /* 001010 */
++	0xFC, /* 111111 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++
++	/* 209 0xD1 '\321' */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0xFC, /* 111111 */
++	0x00, /* 000000 */
++	0xFC, /* 111111 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++
++	/* 210 0xD2 '\322' */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0xFC, /* 111111 */
++	0x28, /* 001010 */
++	0x28, /* 001010 */
++	0x28, /* 001010 */
++	0x28, /* 001010 */
++
++	/* 211 0xD3 '\323' */
++	0x28, /* 001010 */
++	0x28, /* 001010 */
++	0x28, /* 001010 */
++	0x3C, /* 001111 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++
++	/* 212 0xD4 '\324' */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x1C, /* 000111 */
++	0x10, /* 000100 */
++	0x1C, /* 000111 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++
++	/* 213 0xD5 '\325' */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x1C, /* 000111 */
++	0x10, /* 000100 */
++	0x1C, /* 000111 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++
++	/* 214 0xD6 '\326' */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x3C, /* 001111 */
++	0x28, /* 001010 */
++	0x28, /* 001010 */
++	0x28, /* 001010 */
++	0x28, /* 001010 */
++
++	/* 215 0xD7 '\327' */
++	0x28, /* 001010 */
++	0x28, /* 001010 */
++	0x28, /* 001010 */
++	0xFC, /* 111111 */
++	0x28, /* 001010 */
++	0x28, /* 001010 */
++	0x28, /* 001010 */
++	0x28, /* 001010 */
++
++	/* 216 0xD8 '\330' */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0xFC, /* 111111 */
++	0x10, /* 000100 */
++	0xFC, /* 111111 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++
++	/* 217 0xD9 '\331' */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0xF0, /* 111100 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++
++	/* 218 0xDA '\332' */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x1C, /* 000111 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++
++	/* 219 0xDB '\333' */
++	0xFC, /* 111111 */
++	0xFC, /* 111111 */
++	0xFC, /* 111111 */
++	0xFC, /* 111111 */
++	0xFC, /* 111111 */
++	0xFC, /* 111111 */
++	0xFC, /* 111111 */
++	0xFC, /* 111111 */
++
++	/* 220 0xDC '\334' */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0xFC, /* 111111 */
++	0xFC, /* 111111 */
++	0xFC, /* 111111 */
++	0xFC, /* 111111 */
++
++	/* 221 0xDD '\335' */
++	0xE0, /* 111000 */
++	0xE0, /* 111000 */
++	0xE0, /* 111000 */
++	0xE0, /* 111000 */
++	0xE0, /* 111000 */
++	0xE0, /* 111000 */
++	0xE0, /* 111000 */
++	0xE0, /* 111000 */
++
++	/* 222 0xDE '\336' */
++	0x1C, /* 000111 */
++	0x1C, /* 000111 */
++	0x1C, /* 000111 */
++	0x1C, /* 000111 */
++	0x1C, /* 000111 */
++	0x1C, /* 000111 */
++	0x1C, /* 000111 */
++	0x1C, /* 000111 */
++
++	/* 223 0xDF '\337' */
++	0xFC, /* 111111 */
++	0xFC, /* 111111 */
++	0xFC, /* 111111 */
++	0xFC, /* 111111 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++
++	/* 224 0xE0 '\340' */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x34, /* 001101 */
++	0x48, /* 010010 */
++	0x48, /* 010010 */
++	0x48, /* 010010 */
++	0x34, /* 001101 */
++	0x00, /* 000000 */
++
++	/* 225 0xE1 '\341' */
++	0x24, /* 001001 */
++	0x44, /* 010001 */
++	0x48, /* 010010 */
++	0x48, /* 010010 */
++	0x44, /* 010001 */
++	0x44, /* 010001 */
++	0x58, /* 010110 */
++	0x40, /* 010000 */
++
++	/* 226 0xE2 '\342' */
++	0x7C, /* 011111 */
++	0x44, /* 010001 */
++	0x44, /* 010001 */
++	0x40, /* 010000 */
++	0x40, /* 010000 */
++	0x40, /* 010000 */
++	0x40, /* 010000 */
++	0x00, /* 000000 */
++
++	/* 227 0xE3 '\343' */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x7C, /* 011111 */
++	0x28, /* 001010 */
++	0x28, /* 001010 */
++	0x28, /* 001010 */
++	0x28, /* 001010 */
++	0x00, /* 000000 */
++
++	/* 228 0xE4 '\344' */
++	0x7C, /* 011111 */
++	0x24, /* 001001 */
++	0x10, /* 000100 */
++	0x08, /* 000010 */
++	0x10, /* 000100 */
++	0x24, /* 001001 */
++	0x7C, /* 011111 */
++	0x00, /* 000000 */
++
++	/* 229 0xE5 '\345' */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x3C, /* 001111 */
++	0x48, /* 010010 */
++	0x48, /* 010010 */
++	0x48, /* 010010 */
++	0x30, /* 001100 */
++	0x00, /* 000000 */
++
++	/* 230 0xE6 '\346' */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x48, /* 010010 */
++	0x48, /* 010010 */
++	0x48, /* 010010 */
++	0x48, /* 010010 */
++	0x74, /* 011101 */
++	0x40, /* 010000 */
++
++	/* 231 0xE7 '\347' */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x7C, /* 011111 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x0C, /* 000011 */
++	0x00, /* 000000 */
++
++	/* 232 0xE8 '\350' */
++	0x10, /* 000100 */
++	0x38, /* 001110 */
++	0x44, /* 010001 */
++	0x44, /* 010001 */
++	0x38, /* 001110 */
++	0x10, /* 000100 */
++	0x38, /* 001110 */
++	0x00, /* 000000 */
++
++	/* 233 0xE9 '\351' */
++	0x38, /* 001110 */
++	0x44, /* 010001 */
++	0x44, /* 010001 */
++	0x7C, /* 011111 */
++	0x44, /* 010001 */
++	0x44, /* 010001 */
++	0x38, /* 001110 */
++	0x00, /* 000000 */
++
++	/* 234 0xEA '\352' */
++	0x38, /* 001110 */
++	0x44, /* 010001 */
++	0x44, /* 010001 */
++	0x44, /* 010001 */
++	0x44, /* 010001 */
++	0x28, /* 001010 */
++	0x6C, /* 011011 */
++	0x00, /* 000000 */
++
++	/* 235 0xEB '\353' */
++	0x18, /* 000110 */
++	0x20, /* 001000 */
++	0x18, /* 000110 */
++	0x24, /* 001001 */
++	0x24, /* 001001 */
++	0x24, /* 001001 */
++	0x18, /* 000110 */
++	0x00, /* 000000 */
++
++	/* 236 0xEC '\354' */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x38, /* 001110 */
++	0x54, /* 010101 */
++	0x54, /* 010101 */
++	0x54, /* 010101 */
++	0x38, /* 001110 */
++	0x00, /* 000000 */
++
++	/* 237 0xED '\355' */
++	0x00, /* 000000 */
++	0x04, /* 000001 */
++	0x38, /* 001110 */
++	0x54, /* 010101 */
++	0x54, /* 010101 */
++	0x38, /* 001110 */
++	0x40, /* 010000 */
++	0x00, /* 000000 */
++
++	/* 238 0xEE '\356' */
++	0x3C, /* 001111 */
++	0x40, /* 010000 */
++	0x40, /* 010000 */
++	0x38, /* 001110 */
++	0x40, /* 010000 */
++	0x40, /* 010000 */
++	0x3C, /* 001111 */
++	0x00, /* 000000 */
++
++	/* 239 0xEF '\357' */
++	0x38, /* 001110 */
++	0x44, /* 010001 */
++	0x44, /* 010001 */
++	0x44, /* 010001 */
++	0x44, /* 010001 */
++	0x44, /* 010001 */
++	0x44, /* 010001 */
++	0x00, /* 000000 */
++
++	/* 240 0xF0 '\360' */
++	0x00, /* 000000 */
++	0xFC, /* 111111 */
++	0x00, /* 000000 */
++	0xFC, /* 111111 */
++	0x00, /* 000000 */
++	0xFC, /* 111111 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++
++	/* 241 0xF1 '\361' */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x7C, /* 011111 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x00, /* 000000 */
++	0x7C, /* 011111 */
++	0x00, /* 000000 */
++
++	/* 242 0xF2 '\362' */
++	0x20, /* 001000 */
++	0x10, /* 000100 */
++	0x08, /* 000010 */
++	0x10, /* 000100 */
++	0x20, /* 001000 */
++	0x00, /* 000000 */
++	0x38, /* 001110 */
++	0x00, /* 000000 */
++
++	/* 243 0xF3 '\363' */
++	0x08, /* 000010 */
++	0x10, /* 000100 */
++	0x20, /* 001000 */
++	0x10, /* 000100 */
++	0x08, /* 000010 */
++	0x00, /* 000000 */
++	0x38, /* 001110 */
++	0x00, /* 000000 */
++
++	/* 244 0xF4 '\364' */
++	0x0C, /* 000011 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++
++	/* 245 0xF5 '\365' */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x10, /* 000100 */
++	0x60, /* 011000 */
++
++	/* 246 0xF6 '\366' */
++	0x00, /* 000000 */
++	0x10, /* 000100 */
++	0x00, /* 000000 */
++	0x7C, /* 011111 */
++	0x00, /* 000000 */
++	0x10, /* 000100 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++
++	/* 247 0xF7 '\367' */
++	0x00, /* 000000 */
++	0x20, /* 001000 */
++	0x54, /* 010101 */
++	0x08, /* 000010 */
++	0x20, /* 001000 */
++	0x54, /* 010101 */
++	0x08, /* 000010 */
++	0x00, /* 000000 */
++
++	/* 248 0xF8 '\370' */
++	0x30, /* 001100 */
++	0x48, /* 010010 */
++	0x48, /* 010010 */
++	0x30, /* 001100 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++
++	/* 249 0xF9 '\371' */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x10, /* 000100 */
++	0x38, /* 001110 */
++	0x10, /* 000100 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++
++	/* 250 0xFA '\372' */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x10, /* 000100 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++
++	/* 251 0xFB '\373' */
++	0x04, /* 000001 */
++	0x08, /* 000010 */
++	0x08, /* 000010 */
++	0x50, /* 010100 */
++	0x50, /* 010100 */
++	0x20, /* 001000 */
++	0x20, /* 001000 */
++	0x00, /* 000000 */
++
++	/* 252 0xFC '\374' */
++	0x60, /* 011000 */
++	0x50, /* 010100 */
++	0x50, /* 010100 */
++	0x50, /* 010100 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++
++	/* 253 0xFD '\375' */
++	0x60, /* 011000 */
++	0x10, /* 000100 */
++	0x20, /* 001000 */
++	0x70, /* 011100 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++
++	/* 254 0xFE '\376' */
++	0x00, /* 000000 */
++	0x38, /* 001110 */
++	0x38, /* 001110 */
++	0x38, /* 001110 */
++	0x38, /* 001110 */
++	0x38, /* 001110 */
++	0x38, /* 001110 */
++	0x00, /* 000000 */
++
++	/* 255 0xFF '\377' */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++	0x00, /* 000000 */
++};
++
++#endif /* _VIDEO_FONT_6X8_ */
++
+
+---
+base-commit: 5732bd0f457b4c671e46574d64d4acb099c0f0a5
+change-id: 20260512-font6x8-4a73ae4279b1
+
+Best regards,
 -- 
-Tom
-
+Alexey Charkov <alchark@flipper.net>
 
