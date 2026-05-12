@@ -4,94 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D635CD343F
-	for <u-boot@archiver.kernel.org>; Tue, 12 May 2026 18:13:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1DD35CD4F24
+	for <u-boot@archiver.kernel.org>; Tue, 12 May 2026 18:36:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 414AB83C2B;
-	Tue, 12 May 2026 20:13:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 4E469836AC;
+	Tue, 12 May 2026 20:36:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="HLMwZPhZ";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="thGtEk+Y";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 33DA6838BB; Tue, 12 May 2026 20:13:32 +0200 (CEST)
-Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
- [IPv6:2a00:1450:4864:20::636])
+ id 5959F838BB; Tue, 12 May 2026 20:36:18 +0200 (CEST)
+Received: from mail-oi1-x243.google.com (mail-oi1-x243.google.com
+ [IPv6:2607:f8b0:4864:20::243])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0247C8341A
- for <u-boot@lists.denx.de>; Tue, 12 May 2026 20:13:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 83E058341A
+ for <u-boot@lists.denx.de>; Tue, 12 May 2026 20:36:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x636.google.com with SMTP id
- a640c23a62f3a-ba545100a13so1003381766b.2
- for <u-boot@lists.denx.de>; Tue, 12 May 2026 11:13:29 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1778609609; cv=none;
- d=google.com; s=arc-20240605;
- b=DlZiyTn9wlW452ub6CGfhgg0YjGyuNJXm7LxxQRqsPm9W9Gg87o8gE0Xq7EhFKcIbq
- I/ghPoKVw4ERlTHwIfRx2dA9pnI1wgsxiJ4KCOoO+3bjTb355sMbB4BrIrar4k2tJAwL
- K6oc4+rGmbKyHY3F3gKb+GgAU+kPJtrkxFHdbBvY2vQ1+3F/9Vt5Fas3vYUeUVUloOPA
- yqmHXVyDxc6H2xboUmXt0RyHpkFD3W5TcbNv/AOl+V3jPrWBtcEad8n6AaDcXRTAE5AY
- zjo9re8J2YA6vlY3PmYNNEfXlpJSd0Uh2fhsRfV6Eq7yIu6j9qTEdNjen3rOtlbPgTHJ
- UD3w==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=pS8gPDW8ofTqYXivI74N7OkX/bgp9zRMAir6UAeSoLo=;
- fh=BsH0Kx5UM60s7rlnN26WIKDveEm89bwRV0dUXUky/AU=;
- b=PmuZds/ZZVgCEZGOw5Op4DuyhkyYWr5BPCLSw06ieKUrWNa8njnF+BB6x9WOBnUpkd
- JPg1dnfGaxNJ7+A3ruKVS90D4RWroqg7pe3S+2Jynz1Y41yUdwvplcjcU9tbLRoTb1Hq
- 7vtNJVr+9U63ctaIz5aCwa8WHItpS9DKNb6TZZzwMYFd4ga9bexjGIl/GUh+eg99u7cu
- mKxUKkGSV0Q8DyulwCvpd+22lsXZ+kifH1VoI15Rbzyqu/gqcJLExDqRBD0qiKmTp2F/
- HjOKKDwuXprufqRoAc1YMEgl8I4M9QRyt7qd5F+XxtdHfGtMrg8m7pZDrtC1iDPnBqIm
- lsdQ==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x243.google.com with SMTP id
+ 5614622812f47-48270f099d5so1919191b6e.0
+ for <u-boot@lists.denx.de>; Tue, 12 May 2026 11:36:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1778609609; x=1779214409; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=pS8gPDW8ofTqYXivI74N7OkX/bgp9zRMAir6UAeSoLo=;
- b=HLMwZPhZI4fb7zJ2maJQGVscI1BA/sKbQc+zcnz6/nImalkUmTseH8DyTuk/Z81Weo
- Pi7PMjqFRMHIfITq7VaGnWK7P+0TC0Z8p8Y7U45bc7x/rAlabUYVunBSr9Q+6EVEFEwq
- AZZ57UgKdcRoZqp6yq+gYjktcR5KRsWHTc+og=
+ d=konsulko.com; s=google; t=1778610974; x=1779215774; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=fZCgzixvYSjVQcR3GIWfNIfLndkS7iy4iA06rHu5ezk=;
+ b=thGtEk+Yx6kzOK+5HiiIhILMtXO1aFE0eYzN0lIzsN84Sw5mBXNRbtI2Otk2sFoARf
+ 62YH7Zt/8l2D3S3olnIyqwop1ROjnJ+aCewc0U3Z/r7QVNUe/ws+xIA4AEhHV8eqnpFm
+ 06eCv7ifPiTwpyE0vsOrWEtio7zCHlQtTt+kI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778609609; x=1779214409;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=pS8gPDW8ofTqYXivI74N7OkX/bgp9zRMAir6UAeSoLo=;
- b=kS+MjYGXQEEXLnE7U+aIe6xXLw2GyVX2qiJPHb0Yhnq2z+ml81fqjCBjyKAHcWPX5T
- lPGPuumzCqX7KaqqTSYWOQFaTAapohq5ACustX+19EeCW5PF3BzE1BxXdCUa1CFAAXpT
- ghNqeRTMX/9Y03d767WbsT7KT0VBzNjvrrvJvKLF3HF9+tAwqHsFHDLWxk9nfYSSmk0L
- 4JlUHrFoQFdsN3BF38dmMUGpwWxRUC2QFBV9VOq+05tADmzYRr29gXOEko0VfrzSIXmN
- QbPmFYXTxAns9LA5EsPc9LuYOvZwEedVjQed7my6O/rPdHqcPFpcAV5gMBPb+xw95ERL
- kunA==
-X-Gm-Message-State: AOJu0YzgApfR1tnUZvudM5X+M45zQtEOUfIaWZIzFFaNNLd+B9tixu+S
- zaZjx6Th2T4QFUN8tRUKg+jOmFrW71kLA/LzLK9edUB9Gk3VUVst4BvtMvRYSwGcgoi9f8k9e5d
- 9+mL6KdS+KuAV+OHHG285Kl6B0b6ur7G6sGE1+mPL
-X-Gm-Gg: Acq92OGdF4YGGf0XM4nQDeFXIIM84sxLOx3QtljN9gOD9rkRIPWBq4AefPBCtY2T9Z5
- EQDB1IkzAgJzs5fbBEKl+qDMLRJGnatwAGE/oyZJog0Gw7sH9g3FujBIzo7G4frvEIRcNLVYPDu
- NsTtrcjXUrr+pW+ql3lscNzwkODL4OMKwsbrIPXl0yFVqbNgY6qcOtMwaELcSwrffiRROW/Rq5D
- gytE6CG9ahgdzwFfFE16YKmLT+yH+idQnEzlmY+qqhC3ZAjXK0OeCAsEPTWZ7x/gfVqcOluodVt
- cscK2w==
-X-Received: by 2002:a17:907:61a2:b0:bd2:47dd:e0c3 with SMTP id
- a640c23a62f3a-bd247dde148mr235995766b.20.1778609609463; Tue, 12 May 2026
- 11:13:29 -0700 (PDT)
-MIME-Version: 1.0
-References: <cb01c903e27bd1aa6198a51b138409c08abd3373.camel@pbarker.dev>
-In-Reply-To: <cb01c903e27bd1aa6198a51b138409c08abd3373.camel@pbarker.dev>
-From: Simon Glass <sjg@chromium.org>
-Date: Tue, 12 May 2026 12:13:17 -0600
-X-Gm-Features: AVHnY4IfVMlsFLzy63O40u0UMxEtdsmj3w9zApe7DUJxO8vMWWdQScchsdZ4pgA
-Message-ID: <CAFLszTg4v5H2T_NqJ8FbzKNpv2LwULm8iUqQsONJdgeLfu0Cuw@mail.gmail.com>
-Subject: Re: Status of CVE-2025-24857 in U-Boot
+ d=1e100.net; s=20251104; t=1778610974; x=1779215774;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=fZCgzixvYSjVQcR3GIWfNIfLndkS7iy4iA06rHu5ezk=;
+ b=mRIAqUDW0t2q2FKNMOh8VG6XfL+fiLmUip+b0KVQkIX1MU/W6GGAxKZCiW2fi610xT
+ lDqqlnUilZq1M36KMtsjp3NVK0U9euO7f7JFlatcYhGAS0U8U5RygbHXXZShiYhzVapD
+ G26ZVfk59Xc0vSGHRIVxxYUohgq+jDUgTOxdBwY+MI/XnP6Mv0q4JEHSnah2p5E0it2S
+ 3qizZF9/rVlNalx+m5/J3C4P0DheNgV/Ikd5pEOUe83KjFJpiBG9YdNalQB+JJC0Uinx
+ gKnS/FVA3w46s/V2d3BiFNGp8rRbBkef5bTS0m5j9FZjdI9ZotV6u54XpKwXmVFzoTID
+ k+Uw==
+X-Gm-Message-State: AOJu0Yz6HBi2xZbfa+rPCw+uBDayShzIlLwWaXUu83hHfl/kK+mUpmgi
+ 4edZgqu+1p3E1sXmP6ZPN7eFOKdaTcJwnD2ToWLa5iazmhGJjwiLrsT6VvByLi8PxMWsLovPBnM
+ O/3rGPXGp2V/7Waw=
+X-Gm-Gg: Acq92OFc9amO6w/rESvcFFkMA8my4NAMxGO9tgDwwW8JNIv6ZX3SHX0XSecm8Af5/0G
+ +PFdhRAMaf5MhIw+HZLU0YRpNWM4WwQJFkobQ0JvMkvoOFXIjeQELgddK596oEqANu2rG6hZwPM
+ hrsA4Sq3874WTUOVxW70Q8eMS5kqV6cr4vdseBD5t5NB1IP0kbI41X79NHP0LBg1eKiVbC3HBql
+ 62aCXr38jEshc1V5vsFmI99Hen4IKpeoUfBaK2GF8TxWNC3RdwQwIWRIofOCJPAyrCKZIMa7xe/
+ LFxdDa2KSJAcq31qZkynmvxOrssM5QoIWYnUn40uC/LiaeMhikGQMdOGirMcDa9SP4SxKui70SV
+ /yP4dSb+kyHdkwRtYfhwOnevyBTLzgGIuBZtk1XpzTZ9g74DJuN3UXAA0Oj0VKN+a5/U757bEok
+ VyMEgXaf/Cm0ryzP7Pw2KGwEasaupFldCUl3nX6roJuGpeglG3RnbLAXNtVbWD1XrdCL7zW4YsH
+ Lc02Lnv6ovJbEtaoHySjKmKmpxOFgBrapypvQzspn46F6yg0EE=
+X-Received: by 2002:a05:6808:1512:b0:46a:746c:2d53 with SMTP id
+ 5614622812f47-482b2834e24mr170056b6e.2.1778610974105; 
+ Tue, 12 May 2026 11:36:14 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
+ [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-47c76935904sm22639299b6e.11.2026.05.12.11.36.12
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 12 May 2026 11:36:13 -0700 (PDT)
+Date: Tue, 12 May 2026 12:36:11 -0600
+From: Tom Rini <trini@konsulko.com>
 To: Paul Barker <paul@pbarker.dev>
-Cc: u-boot@lists.denx.de, yoann.congal@smile.fr, 
- Hongxu Jia <hongxu.jia@windriver.com>, Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
+Cc: u-boot@lists.denx.de, yoann.congal@smile.fr,
+ Hongxu Jia <hongxu.jia@windriver.com>
+Subject: Re: Status of CVE-2025-24857 in U-Boot
+Message-ID: <20260512183611.GQ1858239@bill-the-cat>
+References: <cb01c903e27bd1aa6198a51b138409c08abd3373.camel@pbarker.dev>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="QjvUCiwNTFYKoB2D"
+Content-Disposition: inline
+In-Reply-To: <cb01c903e27bd1aa6198a51b138409c08abd3373.camel@pbarker.dev>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,42 +98,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-+Tom
 
-Hi Paul,
+--QjvUCiwNTFYKoB2D
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On Tue, 12 May 2026 at 04:39, Paul Barker <paul@pbarker.dev> wrote:
->
+On Tue, May 12, 2026 at 11:39:32AM +0100, Paul Barker wrote:
 > Hi folks,
->
+>=20
 > We recently had a patch sent to Yocto Project to backport a fix for
 > CVE-2025-24857 to our Scarthgap branch which uses U-Boot 2024.01.
 > Looking at the CVE info, this has confused me a lot. It says [1]:
->
+>=20
 >   Improper access control for volatile memory containing boot code in
 >   Universal Boot Loader (U-Boot) before 2017.11 and Qualcomm chips
 >   IPQ4019, IPQ5018, IPQ5322, IPQ6018, IPQ8064, IPQ8074, and IPQ9574
 >   could allow an attacker to execute arbitrary code.
->
+>=20
 > The NVD page says it affects U-Boot "Up to (excluding) 2017.11".
->
+>=20
 > But, the patch that says it addresses CVE-2025-24867 was committed to
 > U-Boot in December 2025 [2]. The first release containing this patch was
 > v2026.01.
->
+>=20
 > Is this commit actually needed to resolve that CVE? Or is it some other
 > change back in 2017 that fixed the issue? (A yes/no is fine, I don't
 > need a link to the exact commit)
-
-I believe this was the commit, from December 2016, which landed in 2017.01:
-
-6c1a808052b fs/fat: Avoid corruption of sectors following the FAT
-
-Tom's recent commit in [2] was just a belt-and-braces check on top.
-
-Regards,
-Simon
-
->
+>=20
 > [1]: https://nvd.nist.gov/vuln/detail/CVE-2025-24857
-> [2]: https://source.denx.de/u-boot/u-boot/-/commit/87d85139a96a39429120cca838e739408ef971a2
+> [2]: https://source.denx.de/u-boot/u-boot/-/commit/87d85139a96a39429120cc=
+a838e739408ef971a2
+
+This is a "funny" one. The reference to v2017.11 is due to when we had a
+large rework of the FAT code and so the most obvious way to trigger the
+problem was removed. The changes in commit 87d85139a96a ("fs: fat:
+Perform sanity checks on getsize in get_fatent()") may, or may not, be
+only a sanity check against performing similar attacks. So yes, it would
+make sense for Scarthgap to have this change.
+
+--=20
+Tom
+
+--QjvUCiwNTFYKoB2D
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCagNzFwAKCRAr4qD1Cr/k
+CpiaAQCOIzvgV36WxN5ncmzy5mffeVaOyrpmcBzf7hB374InAgEAvXpMJ1Vxvlhs
+Fykd7FsSCbb9lXp7q7I2mvawH5IVgwU=
+=0DDt
+-----END PGP SIGNATURE-----
+
+--QjvUCiwNTFYKoB2D--
