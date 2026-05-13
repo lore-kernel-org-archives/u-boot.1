@@ -4,94 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9DA4DCD4F21
-	for <u-boot@archiver.kernel.org>; Wed, 13 May 2026 16:27:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 521AACD4851
+	for <u-boot@archiver.kernel.org>; Wed, 13 May 2026 16:35:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5AA7F84688;
-	Wed, 13 May 2026 18:27:18 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B9A81836AC;
+	Wed, 13 May 2026 18:35:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="PIlSrgDQ";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ZoQf9bNv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A7B398341A; Wed, 13 May 2026 18:27:16 +0200 (CEST)
-Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
- [IPv6:2a00:1450:4864:20::534])
+ id DA51883EF9; Wed, 13 May 2026 18:35:02 +0200 (CEST)
+Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
+ [IPv6:2a00:1450:4864:20::62a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D21CF84687
- for <u-boot@lists.denx.de>; Wed, 13 May 2026 18:27:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 544AC80F0E
+ for <u-boot@lists.denx.de>; Wed, 13 May 2026 18:34:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x534.google.com with SMTP id
- 4fb4d7f45d1cf-67bc6098640so11256474a12.0
- for <u-boot@lists.denx.de>; Wed, 13 May 2026 09:27:14 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1778689634; cv=none;
+Received: by mail-ej1-x62a.google.com with SMTP id
+ a640c23a62f3a-bd3d7c29b4dso158387566b.2
+ for <u-boot@lists.denx.de>; Wed, 13 May 2026 09:34:59 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1778690099; cv=none;
  d=google.com; s=arc-20240605;
- b=MkG5wavu0iIjPcUa9osbOWKkEdTNHyRjomzBHsbFtV31DyZacLJV3zcNDsz4a+MFbw
- j6KoCQRKx0EGdEr3A/evmJqGvQ7cEvr2jpFG3zlqwgY97Gqe69JRG0utHJ3U3/BSxjWO
- XH5q6HTb0srCWq/M3sXQFbcPv6Jy4Ro4tIvdKR3m+Qi/u9jJiP77vYxmtr/C7YmaRSb2
- 3wTkrF3CqR1CblkcEtbcymaVGsppV+7mYc8JWd9qw8ikpAkwKhmRuxa96In6rik5XIty
- 70VDj9wNSJ7KUS6iz4N+A9mEqgHetwqZZ8kIcU6Pz94p1tAow/c1w/fB4r9gybV0N6ED
- 1EjA==
+ b=K/k2o/EX3t6MggztkrYRFSFIf6BWQdIrEjVS4SOklTwJKhlx2TtD3ICStaMczp/ous
+ 6CJ7xLaK3uS8iBoKsw7tXKgdwzC3MQwMTFNv94GO0rJODvcy6oxnsjTw1x8GaBt+APqs
+ VonAKUsvDpKt9wtlWAdDMGNxLrw+O9f/ONwbp+2SpiFtkd4nLsbNjkPaqq0ueLDVqUZ0
+ IiotFCGvyQ54Nz+epfHQOS9FTG1lZgPIlp3KqcnS7xhRh6niBL5vWHS9wdk2AWSIcDhn
+ alNzawH2DXq4Cyi31fD7EJRUdwJNOt/9lZR4+Gs50fjZH+Wif9iy3GtiB8UEvLVuuK1i
+ Y3/g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=UnnwPGHsVEVabYzQjE874BXVFIsGUpMjquNTmhv/eTY=;
- fh=k94s9/0BAWt0KBpKTCFdUTLOQcMKU2qx2KIXN/ON3L4=;
- b=fWNO9zGnPdd3n23A+4K7RjqEhRB7VpjFmxDy9bPBOeBkPZ4H6XEzKEF3W6gBVFG5pq
- fH9VfLa0RAR/XilUGxd4Wgi3NPbLQhhV8Z6i5k18uFlrcjOg32D/iaaGL0ChPi5SsBAk
- x6eCRrmzptGTObYczRwhuPAdoSoL2OR93croOTeqPwKieWN6NHjrdMRwemaltx/ybtWK
- 1Q6RbjQuJSnSgRgyO6NrFrKiq8YoDzQkJwIHRB34bcd2egqTLxDaThqFIqG/ETYT3L1M
- CmrZPCBfRQETq4r1LpC3hP3P0QL2Rc6HkiHj2bkYlRtRQAukTmd4VTKDvGYtkV1t7SMo
- MDCg==; darn=lists.denx.de
+ bh=W9oNXVJXjcNVvJcFaGx1SNvKPcBSfAkDSRND8piDANQ=;
+ fh=v6gdkGcUJpUpHa/R0oOi3ebuX33ZRHzAFtOCHgAuhq8=;
+ b=hiHU9Kjrqk3KsE4QZ0kGhgLJmvXlW/gpxZwQs8d8v7ppGjxvu4eVVfAJAIv0foEvcn
+ SPeUadQqvQ0IGUl/4j6KD0BN4xKKEQPYUsOL4n++CbHFE1hRLgpe/WtTovqzD6xQBtBh
+ vT41e1dOIr+8a2taxnp++mpMKJCvX0uJuPlLwNv3kCYI9/xYeKgtydrIgIzhbzuq548B
+ 0hnpTPJKhqtDSB3vgLdN5EC7SJdUcGP8bbdE58o09UeGG5DoKD/s4YOvOINy3rbuyr/X
+ R3fuuNjpdtrqee74ylKxaTjJnjiFmSRuNV1MbBMBblz7GXHJndgAdsH3FVg4E9uAlVDG
+ VQ0Q==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1778689634; x=1779294434; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1778690099; x=1779294899; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=UnnwPGHsVEVabYzQjE874BXVFIsGUpMjquNTmhv/eTY=;
- b=PIlSrgDQlTiG9+jSpawysPkWSeg1oV68hJxyT0LLE0jJP8HXfhObNqVdkcv8jewL4n
- XIYR5u0jX/xb8i1M1EpaoJ4uHPTnEvzpnU17iOIy0qpJAyq6s2ijSyu+OXGGTXAFUCez
- b22WC91O+pQA3XseYWTzkmVMPDYIK2BCbQ2C8=
+ bh=W9oNXVJXjcNVvJcFaGx1SNvKPcBSfAkDSRND8piDANQ=;
+ b=ZoQf9bNv1tE0jAMLyoKhzP2Uun6lxysDuaJooX5kk5ZUOXPOZ+nk4E+7TYBIxy7UkB
+ CDxSeDu7DuFSw/6SFyD4g5vTqnm2KmETZKIs/wOvryVcyohkBBnACU3X70dB/RuDCF1B
+ jN/5kdufIXd7qiz4dPjgLhJ3R1KDesVQTc+vw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778689634; x=1779294434;
+ d=1e100.net; s=20251104; t=1778690099; x=1779294899;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=UnnwPGHsVEVabYzQjE874BXVFIsGUpMjquNTmhv/eTY=;
- b=DcMHw6CaT5KYhEQ5IbN+g/jCKvV6ctfHcOJduNU2uyRm/S2auMGV6wIHolWY8WVUuK
- VSn+IpdudW4yoQbIS/WJJPIWICg6kK/z1NTFoi4FwaUaVWIF/Sefjz9rGz8fBfTgrNr0
- eh2cPc0Ybk4Vi0xl3jHROYW7zhdVOzbZNfyW6iGi0b9tMn11CbfapcGKZ5fQmvutQ6XW
- LuJAqYP3MTYEeM8VXpFdiYGXLTbRQZK72s72qtU0+9M9LYN0LRG0x7IpzqFnNuu4/3AU
- t78dq2fB830PtJQ2eVqVGihZJmcnK26ZLSnd3JlqVaADNsoTj9muhwS/xIt8MBogyZm5
- vGvA==
+ bh=W9oNXVJXjcNVvJcFaGx1SNvKPcBSfAkDSRND8piDANQ=;
+ b=e8sXS8OW4+fu+aUQxJ+qaPrAF2msMgcb3Tli9AEe27zl3+jK/fC3pgOhz2oLYNUY06
+ fpGgSmotgzUitc6owe8Jk5rUQLHeVwuy2TP8KBnJjOt8ZBB7xY1HxtCKeRJ2EABOt+pA
+ bwcP271P88pPwg+lJezRAP6QLjSUBWQQVke+SMgqWfXNWVMJaRslsJokCD552g9XjRyF
+ dNN/NpXJ8TqskdHLSyJobEKCpdSEC22++Fe15gjMi0+Rj0CFJAf0slFfLBwwLdUM+WWL
+ NRltDZprqH4gAdhJKcEOsaZY5VabOSrqM7mKCmslU9LDgSYmltSAsd9dU2YokF2lNrGU
+ UpyA==
 X-Forwarded-Encrypted: i=1;
- AFNElJ9Ij2A9NwicUr81nolncnaa05cgxNdzeTQt/2TJVq99iWGigxvZBUPSO6HiqqSj957itCKicFQ=@lists.denx.de
-X-Gm-Message-State: AOJu0YyyfpoRxkuU5ExSJbSv8rsw9kSLm1hXEoGX50cCL+/P5XxkVQng
- 10FILGMRWMHmXseYRctbLbZYjB5P7RUmLxnIZsmVyqQUKNYQkVy294w87k9/knsRQ29A5Sy95Rh
- URo63RFDMGt1Jrq/4Kl7D+eKa3RgTfLPnwPpx0I2k
-X-Gm-Gg: Acq92OEQsnBFuDfR39K3m/EX1AvxBjPkjefje6VPPWr5epcmcxNg6TiwXqhpqJWHsX+
- NQ3CZegO5elU0i5y/TiltdvDrd+n998fvizmX45pjtu29JPROkjWosamKnFD0w2OAuJL1tNUVtn
- VwRuI3Wbe3a5H8Z09GuTez9EMrU3nSnA6mSenkRn+7F2Q1OJTDbh7wY29CAywAxfGWkh7kXz3IV
- +ZYPev17X5PQJ5mXA1OyVmrNJVpTWduKUljSuhc5TbGzdqrkoGs6iB1hkhmROULGHPXrpbetElC
- krmXlA==
-X-Received: by 2002:a17:906:4786:b0:bd3:2b8a:2164 with SMTP id
- a640c23a62f3a-bd3bfb9f635mr273375666b.16.1778689634246; Wed, 13 May 2026
- 09:27:14 -0700 (PDT)
+ AFNElJ+In2aR4qZ3ABKNwDUv1LvVglcL5NeIIQSx+hsRnfaXDBiaL+UQSx9AkGGmf6NHGbQpZ4NqF5c=@lists.denx.de
+X-Gm-Message-State: AOJu0Yzz27+BZBmLktemPRCU2Ti+hEFqLIllGLgWsnvJt48xSe06OB5v
+ xpcPaCsdcWzEiZqxXU58zjwFl6icVN8bugcXrY/LZagN9gkxfBXVOalZX41iWb6UirrKclPu1OC
+ x/HYQX8lfYOJ2KZP1gBo++BoDiFVDVkGfRsVBiOoj
+X-Gm-Gg: Acq92OE6g1ZI3ZDcTIEvmUL01y5Ihc6GEh7TAKsqJHJM0bB2Pjy4Xuu7lSvaONQmtpz
+ Z2qmn0kBANN+NVQywWbUP7BwvsU5Tu38U5FzoSDRkSM24i2+bnwpqeREvMr2hQWABD0k84Ieph+
+ FqrA9WQxPLmCwjpN04rs3Leq98cTVuem3WjQCORGuFhN5FpL0IMExN2SxzCDe9YKqVXgGaYRhN6
+ JVbeqyAbMRLNluCkzl3+D6pzV6Eyl8ic8lxvG1dMg+lMRrL6se7OdA4lvP/xForW8e+Qt2lCRKe
+ i9io5g==
+X-Received: by 2002:a17:907:9455:b0:bcb:4eec:a879 with SMTP id
+ a640c23a62f3a-bd3c1407256mr291596066b.34.1778690098588; Wed, 13 May 2026
+ 09:34:58 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260513015606.591384-1-rs@ti.com>
- <20260513015606.591384-2-rs@ti.com>
-In-Reply-To: <20260513015606.591384-2-rs@ti.com>
+ <20260513015606.591384-3-rs@ti.com>
+In-Reply-To: <20260513015606.591384-3-rs@ti.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 13 May 2026 10:26:59 -0600
-X-Gm-Features: AVHnY4LqnR0k4qk9Wtof-dG1NTp2JvgP1CV7tPYTrqx0KMH-qJ7yeNJ3fkPhQao
-Message-ID: <CAFLszTiT_JYZcukxXapYfmzuCnRrgirj-JT6JGqXwUkHuzqcmA@mail.gmail.com>
-Subject: Re: [PATCHv7 1/3] boot_fdt_add_mem_rsv_regions: free old dtb
- reservations
+Date: Wed, 13 May 2026 10:34:42 -0600
+X-Gm-Features: AVHnY4LnEpnQ8XspDY0ocJEgwetAPzlxglcc2xX2OTRXBIk7Kt5N0WGYxOVNhJI
+Message-ID: <CAFLszTg+rP=UirpTzUZcg+qo0M2gY7T=BRxPfH=PV+aDSvnjHQ@mail.gmail.com>
+Subject: Re: [PATCHv7 2/3] test: boot: add a fdt reserved region check
 To: rs@ti.com
 Cc: robertcnelson@gmail.com, ayush@beagleboard.org, 
  Erik.Welsh@octavosystems.com, anshuld@ti.com, bb@ti.com, trini@konsulko.com, 
@@ -117,35 +116,88 @@ X-Virus-Status: Clean
 Hi Randolph,
 
 On 2026-05-13T01:56:06, Randolph Sapp <rs@ti.com> wrote:
-> boot_fdt_add_mem_rsv_regions: free old dtb reservations
+> test: boot: add a fdt reserved region check
 >
-> Add a free flag and an initial call to free allocations covered by the
-> global FDT. This assumes that all calls to boot_fdt_add_mem_rsv_regions
-> occur before the transition to the new device tree, thus we can access
-> the currently active device tree through the global data pointer.
->
-> This allows us to clearly indicate to the user when a device tree
-> reservation fails. How we handle this can still use some improvement.
-> Right now we'll keep the default behavior and try to boot anyway.
->
-> This functionality was broken in:
-> 5a6aa7d ("boot: fdt: Handle already reserved memory in boot_fdt_reserve_region()")
+> Add a image_fdt suite and a check for boot_fdt_add_mem_rsv_regions. This
+> will ensure the user is properly informed of any reservation failures.
+> It will also validate that reservations are cleaned up correctly when
+> switching FDTs.
 >
 > Signed-off-by: Randolph Sapp <rs@ti.com>
-> Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 >
-> boot/image-fdt.c | 77 +++++++++++++++++++++++++++++++++++++++++---------------
->  include/image.h  |  2 +-
->  2 files changed, 58 insertions(+), 21 deletions(-)
+> test/boot/Makefile          |  1 +
+>  test/boot/image_fdt.c       | 53 +++++++++++++++++++++++++++++++++++++++++++++
+>  test/cmd_ut.c               |  2 ++
+>  test/py/tests/test_suite.py |  2 +-
+>  4 files changed, 57 insertions(+), 1 deletion(-)
 
-Subject prefix should be something like 'boot: fdt:' rather than the
-function name. Please also turn the broken-in reference into a proper
-Fixes: tag with a 12-char hash:
+Change log?
 
-    Fixes: 5a6aa7d59133 ("boot: fdt: Handle already reserved memory in
-boot_fdt_reserve_region()")
+> diff --git a/test/boot/image_fdt.c b/test/boot/image_fdt.c
+> @@ -0,0 +1,53 @@
+> +#include <fdt_support.h>
+> +#include <asm/global_data.h>
+> +#include <config.h>
+> +#include <image.h>
+> +#include <lmb.h>
+> +#include <malloc.h>
+> +#include <test/test.h>
+> +#include <test/ut.h>
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+Please sort these: config.h (if needed) first, then the plain
+top-level headers alphabetically (fdt_support.h, image.h, lmb.h,
+malloc.h), then asm/global_data.h, then test/*.
+
+> diff --git a/test/boot/image_fdt.c b/test/boot/image_fdt.c
+> @@ -0,0 +1,53 @@
+> +#define FDTDEC_MAX_SIZE (2 * 1024 * 1024)
+> +
+> +#define IMAGE_FDT_TEST(_name, _flags) UNIT_TEST(_name, _flags, image_fdt)
+
+FDTDEC_MAX_SIZE is never referenced - looks copied from
+test/dm/fdtdec.c - please drop it.
+
+> diff --git a/test/boot/image_fdt.c b/test/boot/image_fdt.c
+> @@ -0,0 +1,53 @@
+> +     /* Loading a new device tree should be allowed */
+> +     blob = malloc(fdt_sz);
+> +     ut_assertok_ptr(blob);
+> +     memcpy(blob, gd->fdt_blob, fdt_sz);
+> +
+> +     nodeoffset = fdt_path_offset(blob, '/reserved-memory');
+> +     ut_assertok(fdt_del_node(blob, nodeoffset));
+
+If /reserved-memory is missing, fdt_path_offset() returns a negative
+libfdt error and fdt_del_node() then fails with a confusing message.
+Please ut_assert(nodeoffset >= 0) first.
+
+Also, blob is malloc()'d but never freed.
+
+> diff --git a/test/boot/image_fdt.c b/test/boot/image_fdt.c
+> @@ -0,0 +1,53 @@
+> +     boot_fdt_add_mem_rsv_regions(blob);
+> +     ut_assert_console_end();
+> +     boot_relocate_fdt((char **)&blob, &fdt_sz);
+> +
+> +     /* Reservation should not exist now */
+> +     ut_asserteq(0, lmb_is_reserved_flags(start, LMB_NOMAP));
+
+What is the boot_relocate_fdt() call testing - could you add a
+comment? The reservation at start is already gone after
+boot_fdt_add_mem_rsv_regions(blob), so the final ut_asserteq() does
+not depend on it. It also allocates from LMB for the relocated copy,
+which then leaks. I'd drop it, or split it into a separate test with
+its own assertions. The (char **)&blob cast is a hint that the call
+doesn't belong here.
+
+> diff --git a/test/boot/image_fdt.c b/test/boot/image_fdt.c
+> @@ -0,0 +1,53 @@
+> +IMAGE_FDT_TEST(test_boot_fdt_add_mem_rsv_regions, UTF_LIVE_TREE | UTF_CONSOLE);
+
+Just to check: the test only touches gd->fdt_blob (the flat tree), so
+why UTF_LIVE_TREE? If you want it to run regardless of OF_LIVE, drop
+the flag (or use UTF_FLAT_TREE). If the intent was to avoid running
+twice, please mention that in a comment.
 
 Regards,
 Simon
