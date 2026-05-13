@@ -4,108 +4,128 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3C44CD4F24
-	for <u-boot@archiver.kernel.org>; Wed, 13 May 2026 09:40:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 802ECCD4F24
+	for <u-boot@archiver.kernel.org>; Wed, 13 May 2026 09:42:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 48D78838BB;
-	Wed, 13 May 2026 11:40:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 0BAE384099;
+	Wed, 13 May 2026 11:42:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="l9YcajfG";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="sXbs5SPu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 32C2083E36; Wed, 13 May 2026 11:40:24 +0200 (CEST)
-Received: from mail-yx1-xb12c.google.com (mail-yx1-xb12c.google.com
- [IPv6:2607:f8b0:4864:20::b12c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 7FE2F83FB0; Wed, 13 May 2026 11:42:27 +0200 (CEST)
+Received: from CH5PR02CU005.outbound.protection.outlook.com
+ (mail-northcentralusazlp170120005.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c105::5])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6FBB98341A
- for <u-boot@lists.denx.de>; Wed, 13 May 2026 11:40:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 953528341A
+ for <u-boot@lists.denx.de>; Wed, 13 May 2026 11:42:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yx1-xb12c.google.com with SMTP id
- 956f58d0204a3-65c21049dafso6040579d50.2
- for <u-boot@lists.denx.de>; Wed, 13 May 2026 02:40:21 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1778665220; cv=none;
- d=google.com; s=arc-20240605;
- b=E2dQJKoGfTgk7bDfn4nFlklEC6rtMMUxIJje0Q2gg4aozy1LeJtd2ha2wSfKv+7LoN
- +gqgpfXKd1BQxrw31Z5+Zgqdut/5x7ZCFPxHZUBJNdMEjrFWmmoRcvNUj//Sapwl/Sv9
- S5pR5ywlCCeFaAwk2As8aOZscqEs0pQhfxtIp2eSFGdPYzgy9cCwwS3aSPlM5IWz5Pvp
- 79INW8Y5RVj/0EgHoa9NkwBt3MwDyYBJ2wFx4OZwoEP9q8yy5/WChFpb0ZWRJkeQrNbV
- nKW4pMHgGwc5zuL6YjiPi51kqWv+UaYzvTCbl8Y/61JnPWGd3+cToJ8PXK9R7+HkyMVc
- RoRA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=GSyWG+JKVk8g51NqdMpMwmwdm6ifZpn7c0pH9d9JN5o=;
- fh=afdFkhg+X0dJedjeczr8qfrLvDZpz9MX/GqWAgIgc5U=;
- b=F/Pc7k/hohN34P6vUaILDGp8heCbHdCMKDH0KxMQf0ruo70dFC7dZJvNKFySLgoHXs
- WgqENkIjLD+QuM47vUYmRFhS3/hTIf5gWxDR+35E0IYBTvjAnfubtWa6wxasL6EKJt2x
- RI2znTJDtEM2er+07PGzda5cdZ4x5dPf0+py/Ncu3wYersij7DCWMAb1wMT2Ac2Ymxqh
- EjbrW2JwieH9lGzswNdcJtax+82yLccGrX0ZXrFr2GHLkRsssj0oD9ruQKeEXUEKT8Ut
- Be8bCSUwJH4vA4Fycn9j1qiHAlA5t5hjCdHoAix/MCA99Jeh1qXlhps9JUtZ19iEEleS
- CBrg==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1778665220; x=1779270020; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=GSyWG+JKVk8g51NqdMpMwmwdm6ifZpn7c0pH9d9JN5o=;
- b=l9YcajfGtUuRGDnudW28xn6OWpO2YybZoYcTzkKddqwbhye296XGGA2w+Fdq91bouA
- Nbrgv4tglU5N0ss//omfehL0EdlgFY5QTO66iX8a+NSKMq4myUK2g7HQihe3Cn/1tBZK
- WHiMG9rMW6wNFJY+NuGq0nas1h93xF7GNJb2BIbLWLygHUU/PJfJW+yzPm63qVsUbLfo
- wN2HmZGnTLoo0asaLo3RtxdPx3XidjvBoXYuruvAUkOEaSoYazin/iBxDs2ndVbD+y7C
- XS8TbmqnqlLfl5rZvqOmM5x3SGGFLuq6gff/0PR3zfU6jACxXqSM7OayRqWyYpfy6K9P
- L84Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778665220; x=1779270020;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=GSyWG+JKVk8g51NqdMpMwmwdm6ifZpn7c0pH9d9JN5o=;
- b=YbU8lB18PUWkMXOxo/OrvM2kdlBhFciVmHz7CaMPsoHcv0iEaiYBd3tYetsP2duunU
- XSYWLKMLCLqZ72H21b4mXQARc02LHtaakqRFT48Nwxn7blbG8isms91pYOD2I2Us3oGR
- lQAPFj2IJAx3ZoQH0rwKb3YiK+KBOzO80JGRqyBvS/q5St+ckyExVGZDF37mZanjTM9h
- 7o3OHIO9FgigNTVA7KpyOtDAEDyZLPNN3fiOu4Xac18PkoAqPAjktysMDwAZhMitViUW
- 9k40tc/Y9jB6piT2YJ6Exe1tvw+agyE3fSyOwhlccuThe4HKnYYbabWMlvYxzrZtupc1
- IZ+g==
-X-Gm-Message-State: AOJu0YylT7iopGE8zbDnz1c4EqOHpIp/nxatXQxeNoQI3EZtQV8yD1XD
- EVn7sn+MwmGrfdFOGBfRGbrLD3B/j/TjL5+mY37B/wFrainL8o4SVbq11rV5LJh8rXP1AjcSus1
- irEoBczPHvneObWZnvacLBkWBmIBZiy6UmXCp6KJ3cw==
-X-Gm-Gg: Acq92OFH0GP76gC6GeK9jQFL2M+Z574Xm1BieEtOBLSniZX2PKPOt74hQZgbAl5NQJL
- IDiBsVK74ehkukJjfw1gR+YxQ2yzLgCr5PY76seJWdF0US3W8Q+dFMkv4gdJHjMFrW7sWtN7j5u
- mKtKMNQOGaee1RjPdaf2xb7zNm9STwJjGNNPDPzQiVxgiQ5ztX7C5Q9y1NKfDVIZDSNlaXy62/q
- JZJgJQl7tLR5o+Y4f1LmtMd0JtJgLvXWaBeHTIqYJ+kOKZoYL8AzQS/pVtfNPC3iLrteaN+KWZ2
- MogwV4v9VvmoFYHSG0Pav0O8nX5cOkT1SH9P34woN3RywTvuTfNsW5pPBoneeutA8cPXxvkBK8s
- xXfDiKB0op2DElEw6fz/N+3Fxp8CkfnT/7B6BXHLyvgLpQcuM9ZPNaGbq2XgF1ZS94cWwNcrvnL
- EKYRHR0psIaje5ih9DFftCwYpNJ1kCrpFB0DwUI5E247EUuwm9tu2erUE8GUVi1PsODPxZw+3H8
- cFPDJjAtHcwyrZQhuBsrY9ygKsFnmrBnKXc4wW51QgxvslTtikHRGXzxtWKt4fo37d3saD6+BzD
- s1C8MCTySlZyAE84mXQXgkvsgyNvHZ9HExywNdp1MdW5HCP/0ppo8LeXwXGbt3H4nxjGMofyjEG
- 8oOcyxQ==
-X-Received: by 2002:a05:690e:12c6:b0:651:b40a:d6ce with SMTP id
- 956f58d0204a3-65df621ea75mr2363985d50.14.1778665220097; Wed, 13 May 2026
- 02:40:20 -0700 (PDT)
+ spf=fail smtp.mailfrom=michal.simek@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=ObMihi5vmSwpOoaJEmUFzaHnz1i0mls950GQPSs5bFyaSy65oZ0UOACFn1k7w5Pte1/iCRcYk5YchW8RzTucSgVouY5ZKEwCaIjo77XJG7g6sI/efHUFEZNJc6fUhrYyGGTD8/Ol6BBtZL+pRLuMAf+166irDrlcEiNXr0bsm70CgUuSw8ddOBg3VcFmEwuuq181XOJlgqj7ObNcGB1ZZGOYpUBfXWMMDxlmBsC81bBdWA+lcjbyDa46DOJQQeWLSGgWMYPe/PB78q/6ZLBNnZAcLpe9M+uPyXudaY5iw3hzGX7urQ5sw1CCmphTZQ33XoTNZ/FmqzucNr9g09gsqQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=CaKi7nJbdgZzoKnJno5F2XifDvstxd4YQCS15tJETDc=;
+ b=aWLvxc946TASQxTKMiXFFhEY0NT/aAL9HbTblE2DfW+V++x4vYoX8FAnFFwNcDkWdQGqcfcHONeoScD4RBypm5PiN8NYvq1kHteLlhJl/4r2RUcuFy5gA4zdrtCkWDzRd5IPz01yYIlxN5IkfV2I+P1aWP3F5kGTYmrRTLVqN1+kvjEK0WuV/utLOJ5s7M+Acxhb0mCAAnZty8QLbP20mHyqXXNPtvdRcxUolETfkY9IBPp3rxnHZTmQgfy+/BGnvjudJySkF52mEygVymH3VFyM1lHHi7C93v48u49r0bqkSSx+VkrV4OFQ8gZGYvREU1UaFNEtfUMKhVqLk24VQA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=CaKi7nJbdgZzoKnJno5F2XifDvstxd4YQCS15tJETDc=;
+ b=sXbs5SPuzd2d6gsfJI3DEhVky+l59TY9prYT8j3AYBX4HzBChM7j+yscol5FFgWVQ8FRfC9Qg5i8KlTM3WbIn1lFGu8gotyAB1ste9H9bxYkdeZcQ58DtIWbhNRHuhD17fhYUOHcCkyQdHt3qJOXb50i+ePz1EiHgyEJz/G80kQ=
+Received: from BN9PR03CA0946.namprd03.prod.outlook.com (2603:10b6:408:108::21)
+ by BY5PR12MB4113.namprd12.prod.outlook.com (2603:10b6:a03:207::15)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9913.11; Wed, 13 May
+ 2026 09:42:20 +0000
+Received: from BN2PEPF000044A0.namprd02.prod.outlook.com
+ (2603:10b6:408:108:cafe::c8) by BN9PR03CA0946.outlook.office365.com
+ (2603:10b6:408:108::21) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9846.22 via Frontend Transport; Wed,
+ 13 May 2026 09:42:19 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
+Received: from satlexmb07.amd.com (165.204.84.17) by
+ BN2PEPF000044A0.mail.protection.outlook.com (10.167.243.151) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.25.13 via Frontend Transport; Wed, 13 May 2026 09:42:19 +0000
+Received: from satlexmb10.amd.com (10.181.42.219) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.41; Wed, 13 May
+ 2026 04:42:19 -0500
+Received: from satlexmb07.amd.com (10.181.42.216) by satlexmb10.amd.com
+ (10.181.42.219) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.41; Wed, 13 May
+ 2026 04:42:18 -0500
+Received: from localhost (10.180.168.240) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.41 via Frontend
+ Transport; Wed, 13 May 2026 04:42:17 -0500
+From: Michal Simek <michal.simek@amd.com>
+To: <u-boot@lists.denx.de>, <git@amd.com>, Simon Glass <sjg@chromium.org>
+CC: Andrew Goodbody <andrew.goodbody@linaro.org>, Dinesh Maniyam
+ <dinesh.maniyam@altera.com>, Heiko Schocher <hs@nabladev.com>, Lucien.Jheng
+ <lucienzx159@gmail.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Martin Schwan <m.schwan@phytec.de>, Mattijs Korpershoek
+ <mkorpershoek@kernel.org>, Naman Trivedi <naman.trivedimanojbhai@amd.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Padmarao Begari
+ <padmarao.begari@amd.com>, Rasmus Villemoes <ravi@prevas.dk>, "Senthil Nathan
+ Thangaraj" <senthilnathan.thangaraj@amd.com>, Svyatoslav Ryhel
+ <clamor95@gmail.com>, Tom Rini <trini@konsulko.com>, Venkatesh Yadav Abbarapu
+ <venkatesh.abbarapu@amd.com>
+Subject: [PATCH v3 0/5] reset: Introduce reset_reset.*() API
+Date: Wed, 13 May 2026 11:42:05 +0200
+Message-ID: <cover.1778665323.git.michal.simek@amd.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20260512-b4-mmu-unmap-fixes-v4-0-fab802f647c9@linaro.org>
- <20260512-b4-mmu-unmap-fixes-v4-1-fab802f647c9@linaro.org>
-In-Reply-To: <20260512-b4-mmu-unmap-fixes-v4-1-fab802f647c9@linaro.org>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 13 May 2026 12:39:44 +0300
-X-Gm-Features: AVHnY4KN_XEzSts88N-W8hfTYCvZJcNLktr1OrA9noCwqAolCYEABN2s-U_ZZKg
-Message-ID: <CAC_iWjLwTAhL0iTLupqAuRNtWoaO9aP0DH9zAVi5_eWdna7nKw@mail.gmail.com>
-Subject: Re: [PATCH v4 1/4] armv8: mmu: add a function to help debug TLB
- lookups
-To: Casey Connolly <casey.connolly@linaro.org>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
- Anshul Dalal <anshuld@ti.com>, 
- Dhruva Gole <d-gole@ti.com>, Mark Kettenis <kettenis@openbsd.org>, 
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Sumit Garg <sumit.garg@kernel.org>
-Content-Type: text/plain; charset="UTF-8"
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1851; i=michal.simek@amd.com;
+ h=from:subject:message-id; bh=vBlHB10Xe37Kvt3RHUP1ZCGS5yR681ewbRQeN5Em6zI=;
+ b=owGbwMvMwCG2mv3fB7+vgl8ZT6slMWSxuOd/KjLtlEkUnau+1j5SKaTc41p11YGK3mNPHkzz+
+ qV0TFevo5SFQYyDQVZMkWU6k47Dmm/Xlootj8yHmcPKBDKEgYtTACbSzsLIsOvpp1Vi80OF+wv6
+ dDz67+5VWtmc/+EXX8nlKeUVr5zvvmBkeBOjzVSy8uOC0x8btuvEpah9DNZczG5kPP2GVPq0wwc
+ e8AIA
+X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
+ fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BN2PEPF000044A0:EE_|BY5PR12MB4113:EE_
+X-MS-Office365-Filtering-Correlation-Id: 0cb289ec-ba4f-4671-aad0-08deb0d3ed0c
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|36860700016|376014|7416014|1800799024|82310400026|11063799003|18002099003|56012099003;
+X-Microsoft-Antispam-Message-Info: q2E9vxJif3zMeNrHVDmw1bAOX767UxKT26j7jrKmSqWE9rgOwBVhb7tEj4kAwNsxk5O5ofeO+Gt7oadx6JPixY48g7NKLKfifVHup3xvXAeVGE3KL45NAUOymTWPxUmwxtwNksHQxYKpaNGdlRr94vFENSlXtQgj/CjRUa1jwhnRi0ouvSXN21PPwA8U4S+tY+vg8huges9r6UDx7gaDvxI8t8TutVX6M56E0c2fQCLMNfctwlFFp+viOgT0XvqeJCx6kRaW43DdcBjl4oTWBMgh6cuInp/y64W+D43Fcvx056idAjaLm2bu8PknkgWrxgszNrC7FtwVJEgAMaxdd76H5Kd9ju0m2xi5NqxSGtj5zst5sdC13ul03XVX/jj6WGbmOo/uOdymqs++BsxSjFjhISUm8xIqo00RcWwCPy//cicVKFtDcGJri8fVMuh1PBs3Tl8RhUm88b98NdHODzvmi+pm4mPNoIVJ89Xrx9auwErQeWz7oqXA+0+nhQmX1DZ0U7aXpHBkUNPHpMYF0abrLovxOQTJZ2VetE7gqTjdsTQtWpWD3bba0kVyVFiFndjS8o4A1gZgB2a62+xBMn/LyEk4VWRcv6gd52snDhTchCuubz0pLlTK8TZmmJvkYTVpyBVRvPHhZwBkXY+OL+XjaWCfyiFsGsvlNg3gO9tUR1T1Q4Qxgsf9uQXPcIAfseL8EMiMyYYNK2kfru/PTwBSmKYF9eGnaOXmQFiVBMk=
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:satlexmb07.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(36860700016)(376014)(7416014)(1800799024)(82310400026)(11063799003)(18002099003)(56012099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 6v8EcwoUHO0hu+/+Qqqz8ZBkBR2Gh+dlnZ2UKbMUlbXFi1AXQ8ltfyEhHRzJZPdpmBZMkp6WT30zL8uubyFaJiFX3b0yp390eQ5EISlwri+x1vkXyHAL8sdRxqmsHjYzIwRBfjG0zvS661Dxp/sQhF08SkhMlNW6PL3ogz5oAS6CEzgaK4deyg7ZKqhcXXpa60ltSnm4AQsAHJl/Y74J/vakXZi16K71QUqcPRBLimoURvDVuik/m+736qeVk0Ni1Yg3qD0CqC3pZKHjP2Vs+n/F3+gmufhsYv6UoDloOKuiK8A2eQy3lojK5dOhd1/kqxqBWdurrS8Htkt6MDqf0U7N7H54gW0O2R/glS72G6nRbxJjDi8zK39bPxx/E/Up4GAl0Vq89hTmnm7TCBwtYd3HqiRZa9SdVJX+4RvBNcKSHmrBQiC+l4mQQDcz9lx5
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 May 2026 09:42:19.4390 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 0cb289ec-ba4f-4671-aad0-08deb0d3ed0c
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[satlexmb07.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: BN2PEPF000044A0.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR12MB4113
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -122,113 +142,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Casey,
+Hi,
 
-On Tue, 12 May 2026 at 14:13, Casey Connolly <casey.connolly@linaro.org> wrote:
->
-> Implement a super basic software TLB walk which can look up a single
-> address in the TLB and print each stage of the translation. This is
-> helpful for debugging TLB issues and will be compiled out if unused.
->
-> Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
-> ---
->  arch/arm/cpu/armv8/cache_v8.c    | 49 ++++++++++++++++++++++++++++++++++++++++
->  arch/arm/include/asm/armv8/mmu.h |  7 ++++++
->  2 files changed, 56 insertions(+)
->
-> diff --git a/arch/arm/cpu/armv8/cache_v8.c b/arch/arm/cpu/armv8/cache_v8.c
-> index 39479df7b21f..368c622cd18e 100644
-> --- a/arch/arm/cpu/armv8/cache_v8.c
-> +++ b/arch/arm/cpu/armv8/cache_v8.c
-> @@ -733,8 +733,57 @@ void dump_pagetable(u64 ttbr, u64 tcr)
->                va_bits, va_bits < 39 ? 3 : 4);
->         walk_pagetable(ttbr, tcr, pagetable_print_entry, NULL);
->  }
->
-> +/* Do a software pagetable walk for the given address */
-> +void tlb_debug_lookup(u64 addr)
-> +{
-> +       u64 tcr = get_tcr(NULL, NULL);
-> +       u64 va_bits = 64 - (tcr & (BIT(6) - 1));
+the patchset is adding reset_reset.*() interface which is common
+in Linux. And implement it for ZynqMP.
 
-Any reason you can't use va_bits from get_tcr?
+Thanks,
+Michal
 
-> +       u64 ttbr = gd->arch.tlb_addr, *pte;
-> +       int lshift, level = va_bits < 39 ? 1 : 0;
-> +
-> +       printf("Performing software TLB lookup of address %#010llx va_bits: %lld\n", addr, va_bits);
-> +
-> +       addr = ALIGN_DOWN(addr, 0x1000);
-> +       pte = ((u64 *)ttbr);
-> +       for (int i = level; i < 4; i++) {
-> +               int indent = (i - level + 1) * 2;
-> +               lshift = level2shift(i);
-> +               u32 idx = (addr >> lshift) & 0x1FF;
-> +               u64 _addr;
-> +
-> +               printf("%*sPTE: %#010llx. addr[%d:%d]: %#05x (offset %#07x)\n", indent, "", (u64)pte,
-> +                      lshift + 8, lshift, idx, idx * 8);
-> +               printf("%*sL%d: %#010llx -> ", indent, "", i, (u64)(&pte[idx]));
-> +
-> +               pte = &pte[idx];
-> +               _addr = *pte & GENMASK_ULL(va_bits, PAGE_SHIFT);
-> +
-> +               switch (pte_type(pte)) {
-> +               case PTE_TYPE_FAULT:
-> +                       printf("UNMAPPED!\n");
-> +                       return;
-> +               case PTE_TYPE_BLOCK:
-> +                       printf("BLOCK (%#010llx)\n", _addr);
-> +                       break;
-> +               case PTE_TYPE_TABLE: // || PTE_TYPE_PAGE
+Changes in v3:
+- extend function documentation
+- align commit message with implementation
+- new patch in series
 
-Get rid of comments with // etc
+Changes in v2:
+- Add delay_us parameter to specify delay between assert and deassert
+- Pass delay_us to rst_reset op so drivers can use it if needed
+- Return -ENOSYS in stubs when !CONFIG_DM_RESET (like clk.h)
+- Fix line length to stay within 80 characters
+- Add reset_count field to track reset pulse operations
+- Implement sandbox_reset_reset() for rst_reset op
+- Add sandbox_reset_get_count() to query reset pulse count
+- Clear reset_count when reset is requested
+- Update tests to verify reset pulse actually happened
+- Pass 10us via parameter
 
-> +                       if (i < 3) {
-> +                               printf("TABLE (%#010llx)\n", _addr);
-> +                               pte = (u64 *)_addr;
-> +                               continue;
-> +                       } else { // Page
-> +                               printf("PAGE (%#010llx)\n", _addr);
-> +                       }
-> +                       break;
+Michal Simek (5):
+  reset: Add reset_reset() and reset_reset_bulk() API
+  reset: Add sandbox tests for reset_reset() and reset_reset_bulk()
+  reset: sandbox: Cover reset_reset() fallback with second sandbox
+    provider
+  spi: cadence: Use reset_reset_bulk() for proper reset cycling
+  reset: zynqmp: Implement rst_reset using PM_RESET_ACTION_PULSE
 
-I think we should add a default here, so people can add more cases if
-they need them
+ arch/sandbox/dts/test.dts          |  10 ++-
+ arch/sandbox/include/asm/reset.h   |   3 +
+ drivers/reset/reset-uclass.c       |  34 ++++++++++
+ drivers/reset/reset-zynqmp.c       |  11 ++++
+ drivers/reset/sandbox-reset-test.c |  14 ++++
+ drivers/reset/sandbox-reset.c      |  58 ++++++++++++++++
+ drivers/spi/cadence_qspi.c         |  16 ++---
+ include/reset-uclass.h             |  19 ++++++
+ include/reset.h                    |  49 ++++++++++++++
+ test/dm/reset.c                    | 102 +++++++++++++++++++++++++++++
+ 10 files changed, 302 insertions(+), 14 deletions(-)
 
-> +               }
-> +
-> +               // We did the lookup!
-> +               printf("%*s[%#010llx - %#010llx]\n", indent + 2, "", _addr, _addr + (1 << lshift));
-> +               return;
-> +       }
-> +}
-> +
->  /* Returns the estimated required size of all page tables */
->  __weak u64 get_page_table_size(void)
->  {
->         u64 one_pt = MAX_PTE_ENTRIES * sizeof(u64);
-> diff --git a/arch/arm/include/asm/armv8/mmu.h b/arch/arm/include/asm/armv8/mmu.h
-> index 8aa5f9721c4a..ee81619a1843 100644
-> --- a/arch/arm/include/asm/armv8/mmu.h
-> +++ b/arch/arm/include/asm/armv8/mmu.h
-> @@ -186,8 +186,15 @@ void walk_pagetable(u64 ttbr, u64 tcr, pte_walker_cb_t cb, void *priv);
->   * @tcr: TCR value to use
->   */
->  void dump_pagetable(u64 ttbr, u64 tcr);
->
-> +/**
-> + * tlb_debug_lookup() - Perform a software TLB walk printing each stage
-> + *
-> + * @addr: the address to look-up in the TLB.
-> + */
-> +void tlb_debug_lookup(u64 addr);
-> +
->  struct mm_region {
->         u64 virt;
->         u64 phys;
->         u64 size;
->
-> --
-> 2.53.0
->
+-- 
+2.43.0
+
+base-commit: 36d4c653580824b16574560b21d4401614d8b68e
+branch: xnext/reset
