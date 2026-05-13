@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70DF0CD37B6
-	for <u-boot@archiver.kernel.org>; Wed, 13 May 2026 08:03:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F1F1CD37B6
+	for <u-boot@archiver.kernel.org>; Wed, 13 May 2026 08:04:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3313B8467C;
-	Wed, 13 May 2026 10:03:07 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6EBCD8467E;
+	Wed, 13 May 2026 10:03:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=mediatek.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=mediatek.com header.i=@mediatek.com header.b="W+kiU4JV";
+	dkim=pass (1024-bit key; unprotected) header.d=mediatek.com header.i=@mediatek.com header.b="MnoHI6xo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 350718341A; Wed, 13 May 2026 10:03:05 +0200 (CEST)
+ id 2AC5E8056B; Wed, 13 May 2026 10:03:06 +0200 (CEST)
 Received: from mailgw01.mediatek.com (unknown [60.244.123.138])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1A9278056B
- for <u-boot@lists.denx.de>; Wed, 13 May 2026 10:03:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D45338467C
+ for <u-boot@lists.denx.de>; Wed, 13 May 2026 10:03:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=mediatek.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=weijie.gao@mediatek.com
-X-UUID: 2714423a4ea211f1b5a00d44d12bea5a-20260513
+X-UUID: 27e0d8ea4ea211f1b5a00d44d12bea5a-20260513
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mediatek.com;
  s=dk; 
  h=Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:CC:To:From;
- bh=3G40GTERQ8rv1T9klt80T8ir4GGh5LlbCEStnnbuvuE=; 
- b=W+kiU4JVUYZJjZ8S7+nYPvT+1N/IjIYtPxcR1eYhO9mBfg+zLMHHzwRhxnmWL2i17GyLP5yhb0Iym5jilWzdWFJMJjLvdLTpeZvUH/ndrcEUqgdCxhQLaTWL5YHcDu/C8pq/gtidbmgxtt7ceV+FmeODhARV161NZ2Wljix7iWY=;
+ bh=nwJ3fUrgqbbOWeVz0pjoVD5z2LXj/XE/ZaGTOmlSRjk=; 
+ b=MnoHI6xoHROTQm3/fWeywZNNRUur9uggRR93qso++rnFuiSD+8g5zPUWWQw3owAhOpr8YMPMFvVSgvccXfxa4gaPEuHriUAT/wTkNBueq91Z90r/GHG/YDZkG5+dwP8qq4z6lj9AljJy6eVvlthBWFKkSu6iiB9YNkHyb+3RX/s=;
 X-CID-P-RULE: Release_Ham
-X-CID-O-INFO: VERSION:1.3.14, REQID:77e9211e-6b3c-41b5-913b-ad216b0de731, IP:0,
+X-CID-O-INFO: VERSION:1.3.14, REQID:19cc4ca0-481f-43b7-9552-05fe4f6500c0, IP:0,
  U
- RL:0,TC:0,Content:-5,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTION
- :release,TS:-5
-X-CID-META: VersionHash:9091e75, CLOUDID:a5a94dbf-65a8-4b41-ac18-3671578a914d,
+ RL:0,TC:0,Content:-25,EDM:25,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTI
+ ON:release,TS:0
+X-CID-META: VersionHash:9091e75, CLOUDID:3518c643-11c5-46fd-96b8-8ddde212c99a,
  B
  ulkID:nil,BulkQuantity:0,Recheck:0,SF:81|82|102|836|865|888|898,TC:-5,Cont
- ent:0|15|50,EDM:-3,IP:nil,URL:0,File:130,RT:0,Bulk:nil,QS:nil,BEC:-1,COL:0
- ,OSI:0,OSA:0,AV:0,LES:1,SPR:NO,DKR:0,DKP:0,BRR:0,BRE:0,ARC:0
+ ent:0|15|50,EDM:5,IP:nil,URL:0,File:130,RT:0,Bulk:nil,QS:nil,BEC:-1,COL:0,
+ OSI:0,OSA:0,AV:0,LES:1,SPR:NO,DKR:0,DKP:0,BRR:0,BRE:0,ARC:0
 X-CID-BVR: 2,SSN|SDN
 X-CID-BAS: 2,SSN|SDN,0,_
 X-CID-FACTOR: TF_CID_SPAM_SNR
 X-CID-RHF: D41D8CD98F00B204E9800998ECF8427E
-X-UUID: 2714423a4ea211f1b5a00d44d12bea5a-20260513
-Received: from mtkmbs14n1.mediatek.inc [(172.21.101.75)] by
+X-UUID: 27e0d8ea4ea211f1b5a00d44d12bea5a-20260513
+Received: from mtkmbs09n1.mediatek.inc [(172.21.101.35)] by
  mailgw01.mediatek.com (envelope-from <weijie.gao@mediatek.com>)
  (Generic MTA with TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384 256/256)
- with ESMTP id 2086953978; Wed, 13 May 2026 16:02:57 +0800
+ with ESMTP id 347639780; Wed, 13 May 2026 16:02:58 +0800
 Received: from mtkmbs11n1.mediatek.inc (172.21.101.185) by
- mtkmbs11n1.mediatek.inc (172.21.101.185) with Microsoft SMTP Server
+ mtkmbs11n2.mediatek.inc (172.21.101.187) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.29; Wed, 13 May 2026 16:02:55 +0800
+ 15.2.2562.29; Wed, 13 May 2026 16:02:57 +0800
 Received: from mcddlt001.gcn.mediatek.inc (10.19.240.15) by
  mtkmbs11n1.mediatek.inc (172.21.101.73) with Microsoft SMTP Server id
- 15.2.2562.29 via Frontend Transport; Wed, 13 May 2026 16:02:55 +0800
+ 15.2.2562.29 via Frontend Transport; Wed, 13 May 2026 16:02:57 +0800
 From: Weijie Gao <weijie.gao@mediatek.com>
 To: <u-boot@lists.denx.de>
 CC: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, Tom Rini
  <trini@konsulko.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>, Simon
  Glass <sjg@chromium.org>, Weijie Gao <weijie.gao@mediatek.com>
-Subject: [PATCH v4 05/10] cmd: ubi: change the type of parameter dynamic to
- bool
-Date: Wed, 13 May 2026 16:02:54 +0800
-Message-ID: <5840777d0366c5d2449115c4143c802213ad36b2.1778657347.git.weijie.gao@mediatek.com>
+Subject: [PATCH v4 06/10] cmd: ubi: change all positive error return value to
+ negative
+Date: Wed, 13 May 2026 16:02:56 +0800
+Message-ID: <8a1af52cc1bccfc0e98255118da9b2df0b420a9f.1778657347.git.weijie.gao@mediatek.com>
 X-Mailer: git-send-email 2.17.0
 In-Reply-To: <cover.1778657347.git.weijie.gao@mediatek.com>
 References: <cover.1778657347.git.weijie.gao@mediatek.com>
@@ -88,48 +88,360 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This patch changes the type of the 'dynamic' parameter of ubi_create_vol()
-to bool as it's used as a boolean.
+Change all return value using errno codes to negative. This makes it
+consistent with the linux ubi layer.
+
+Also, to follow the standard definition of U-Boot command, in the do_ubi()
+command handler, the return value is converted to CMD_RET_FAILURE for error
+returning, and CMD_RET_USAGE for incorrect usage.
 
 Signed-off-by: Weijie Gao <weijie.gao@mediatek.com>
 ---
-v4: not changed
-v3: new
+v4: new
 ---
- cmd/ubi.c | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ cmd/ubi.c | 106 +++++++++++++++++++++++++++++++-----------------------
+ 1 file changed, 62 insertions(+), 44 deletions(-)
 
 diff --git a/cmd/ubi.c b/cmd/ubi.c
-index 8e3cfaaddbb..8d04ff61fb6 100644
+index 8d04ff61fb6..23b846f22ce 100644
 --- a/cmd/ubi.c
 +++ b/cmd/ubi.c
-@@ -213,7 +213,7 @@ bad:
+@@ -172,7 +172,7 @@ static int ubi_check(const char *name)
+ static int verify_mkvol_req(const struct ubi_device *ubi,
+ 			    const struct ubi_mkvol_req *req)
+ {
+-	int n, err = EINVAL;
++	int n, err = -EINVAL;
+ 
+ 	if (req->bytes < 0 || req->alignment < 0 || req->vol_type < 0 ||
+ 	    req->name_len < 0)
+@@ -187,7 +187,7 @@ static int verify_mkvol_req(const struct ubi_device *ubi,
+ 
+ 	if (req->bytes == 0) {
+ 		printf("No space left in UBI device!\n");
+-		err = ENOMEM;
++		err = -ENOMEM;
+ 		goto bad;
+ 	}
+ 
+@@ -204,7 +204,7 @@ static int verify_mkvol_req(const struct ubi_device *ubi,
+ 
+ 	if (req->name_len > UBI_VOL_NAME_MAX) {
+ 		printf("Name too long!\n");
+-		err = ENAMETOOLONG;
++		err = -ENAMETOOLONG;
+ 		goto bad;
+ 	}
+ 
+@@ -269,13 +269,13 @@ static int ubi_remove_vol(const char *volume)
+ 
+ 	vol = ubi_find_volume(volume);
+ 	if (vol == NULL)
+-		return ENODEV;
++		return -ENODEV;
+ 
+ 	printf("Remove UBI volume %s (id %d)\n", vol->name, vol->vol_id);
+ 
+ 	if (ubi->ro_mode) {
+ 		printf("It's read-only mode\n");
+-		err = EROFS;
++		err = -EROFS;
+ 		goto out_err;
+ 	}
+ 
+@@ -311,8 +311,6 @@ static int ubi_remove_vol(const char *volume)
+ 	return 0;
+ out_err:
+ 	ubi_err(ubi, "cannot remove volume %s, error %d", volume, err);
+-	if (err < 0)
+-		err = -err;
  	return err;
  }
  
--static int ubi_create_vol(const char *volume, int64_t size, int dynamic,
-+static int ubi_create_vol(const char *volume, int64_t size, bool dynamic,
- 			  int vol_id, bool skipcheck)
- {
- 	struct ubi_mkvol_req req;
-@@ -765,7 +765,7 @@ static int do_ubi(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+@@ -326,19 +324,19 @@ static int ubi_rename_vol(const char *oldname, const char *newname)
+ 	vol = ubi_find_volume(oldname);
+ 	if (!vol) {
+ 		printf("%s: volume %s doesn't exist\n", __func__, oldname);
+-		return ENODEV;
++		return -ENODEV;
+ 	}
+ 
+ 	if (!ubi_check(newname)) {
+ 		printf("%s: volume %s already exist\n", __func__, newname);
+-		return EINVAL;
++		return -EINVAL;
+ 	}
+ 
+ 	printf("Rename UBI volume %s to %s\n", oldname, newname);
+ 
+ 	if (ubi->ro_mode) {
+ 		printf("%s: ubi device is in read-only mode\n", __func__);
+-		return EROFS;
++		return -EROFS;
+ 	}
+ 
+ 	rename.new_name_len = strlen(newname);
+@@ -362,17 +360,17 @@ static int ubi_volume_continue_write(const char *volume, const void *buf,
+ 
+ 	vol = ubi_find_volume(volume);
+ 	if (vol == NULL)
+-		return ENODEV;
++		return -ENODEV;
+ 
+ 	if (!vol->updating) {
+ 		printf("UBI volume update was not initiated\n");
+-		return EINVAL;
++		return -EINVAL;
+ 	}
+ 
+ 	err = ubi_more_update_data(ubi, vol, buf, size);
+ 	if (err < 0) {
+ 		printf("Couldnt or partially wrote data\n");
+-		return -err;
++		return err;
+ 	}
+ 
+ 	if (err) {
+@@ -380,7 +378,7 @@ static int ubi_volume_continue_write(const char *volume, const void *buf,
+ 
+ 		err = ubi_check_volume(ubi, vol->vol_id);
+ 		if (err < 0)
+-			return -err;
++			return err;
+ 
+ 		if (err) {
+ 			ubi_warn(ubi, "volume %d on UBI device %d is corrupt",
+@@ -404,18 +402,18 @@ int ubi_volume_begin_write(const char *volume, const void *buf, size_t size,
+ 
+ 	vol = ubi_find_volume(volume);
+ 	if (vol == NULL)
+-		return ENODEV;
++		return -ENODEV;
+ 
+ 	rsvd_bytes = vol->reserved_pebs * (ubi->leb_size - vol->data_pad);
+ 	if (size > rsvd_bytes) {
+ 		printf("size > volume size! Aborting!\n");
+-		return EINVAL;
++		return -EINVAL;
+ 	}
+ 
+ 	err = ubi_start_update(ubi, vol, full_size);
+ 	if (err < 0) {
+ 		printf("Cannot start volume update\n");
+-		return -err;
++		return err;
+ 	}
+ 
+ 	/* The volume is just wiped out */
+@@ -516,15 +514,15 @@ int ubi_volume_read(const char *volume, void *buf, loff_t offset, size_t size)
+ 
+ 	vol = ubi_find_volume(volume);
+ 	if (vol == NULL)
+-		return ENODEV;
++		return -ENODEV;
+ 
+ 	if (vol->updating) {
+ 		printf("updating");
+-		return EBUSY;
++		return -EBUSY;
+ 	}
+ 	if (vol->upd_marker) {
+ 		printf("damaged volume, update marker is set");
+-		return EBADF;
++		return -EBADF;
+ 	}
+ 	if (offp == vol->used_bytes)
+ 		return 0;
+@@ -547,7 +545,7 @@ int ubi_volume_read(const char *volume, void *buf, loff_t offset, size_t size)
+ 	tbuf = malloc_cache_aligned(tbuf_size);
+ 	if (!tbuf) {
+ 		printf("NO MEM\n");
+-		return ENOMEM;
++		return -ENOMEM;
+ 	}
+ 	len = size > tbuf_size ? tbuf_size : size;
+ 
+@@ -563,7 +561,6 @@ int ubi_volume_read(const char *volume, void *buf, loff_t offset, size_t size)
+ 		err = ubi_eba_read_leb(ubi, vol, lnum, tbuf, off, len, 0);
+ 		if (err) {
+ 			printf("read err %x\n", err);
+-			err = -err;
+ 			break;
+ 		}
+ 		off += len;
+@@ -603,13 +600,13 @@ static int ubi_dev_scan(const struct mtd_info *info,
+ 
+ 	err = ubi_mtd_param_parse(ubi_mtd_param_buffer, NULL);
+ 	if (err)
+-		return -err;
++		return err;
+ 
+ 	led_activity_blink();
+ 	err = ubi_init();
+ 	led_activity_off();
+ 	if (err)
+-		return -err;
++		return err;
+ 
+ 	return 0;
+ }
+@@ -621,7 +618,7 @@ static int ubi_set_skip_check(const char *volume, bool skip_check)
+ 
+ 	vol = ubi_find_volume(volume);
+ 	if (!vol)
+-		return ENODEV;
++		return -ENODEV;
+ 
+ 	printf("%sing skip_check on volume %s\n",
+ 	       skip_check ? "Sett" : "Clear", volume);
+@@ -677,7 +674,7 @@ int ubi_part(const char *part_name, const char *vid_header_offset)
+ 	mtd = get_mtd_device_nm(part_name);
+ 	if (IS_ERR(mtd)) {
+ 		printf("Partition %s not found!\n", part_name);
+-		return 1;
++		return PTR_ERR(mtd);
+ 	}
+ 	put_mtd_device(mtd);
+ 
+@@ -698,6 +695,7 @@ static int do_ubi(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ 	int64_t size;
+ 	ulong addr = 0;
+ 	bool skipcheck = false;
++	int ret;
+ 
+ 	if (argc < 2)
+ 		return CMD_RET_USAGE;
+@@ -712,7 +710,7 @@ static int do_ubi(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ 		if (argc == 2) {
+ 			if (!ubi) {
+ 				printf("Error, no UBI device selected!\n");
+-				return 1;
++				return CMD_RET_FAILURE;
+ 			}
+ 
+ 			printf("Device %d: %s, MTD partition %s\n",
+@@ -726,12 +724,15 @@ static int do_ubi(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ 		if (argc > 3)
+ 			vid_header_offset = argv[3];
+ 
+-		return ubi_part(argv[2], vid_header_offset);
++		ret = ubi_part(argv[2], vid_header_offset);
++		if (ret)
++			return CMD_RET_FAILURE;
++		return 0;
+ 	}
+ 
+ 	if ((strcmp(argv[1], "part") != 0) && !ubi) {
+ 		printf("Error, no UBI device selected!\n");
+-		return 1;
++		return CMD_RET_FAILURE;
+ 	}
+ 
+ 	if (strcmp(argv[1], "info") == 0) {
+@@ -761,7 +762,7 @@ static int do_ubi(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ 			return ubi_check(argv[2]);
+ 
+ 		printf("Error, no volume name passed\n");
+-		return 1;
++		return CMD_RET_FAILURE;
  	}
  
  	if (strncmp(argv[1], "create", 6) == 0) {
--		int dynamic = 1;	/* default: dynamic volume */
-+		bool dynamic = true;	/* default: dynamic volume */
- 		int id = UBI_VOL_NUM_AUTO;
- 
- 		/* Use maximum available size */
-@@ -786,7 +786,7 @@ static int do_ubi(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- 		/* E.g., create volume size type */
- 		if (argc == 5) {
- 			if (strncmp(argv[4], "s", 1) == 0)
--				dynamic = 0;
-+				dynamic = false;
+@@ -789,7 +790,7 @@ static int do_ubi(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ 				dynamic = false;
  			else if (strncmp(argv[4], "d", 1) != 0) {
  				printf("Incorrect type\n");
- 				return 1;
+-				return 1;
++				return CMD_RET_FAILURE;
+ 			}
+ 			argc--;
+ 		}
+@@ -806,34 +807,46 @@ static int do_ubi(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ 		}
+ 		/* E.g., create volume */
+ 		if (argc == 3) {
+-			return ubi_create_vol(argv[2], size, dynamic, id,
+-					      skipcheck);
++			ret = ubi_create_vol(argv[2], size, dynamic, id,
++					     skipcheck);
++			if (ret)
++				return CMD_RET_FAILURE;
++			return 0;
+ 		}
+ 	}
+ 
+ 	if (strncmp(argv[1], "remove", 6) == 0) {
+ 		/* E.g., remove volume */
+-		if (argc == 3)
+-			return ubi_remove_vol(argv[2]);
++		if (argc == 3) {
++			ret = ubi_remove_vol(argv[2]);
++			if (ret)
++				return CMD_RET_FAILURE;
++			return 0;
++		}
+ 	}
+ 
+-	if (IS_ENABLED(CONFIG_CMD_UBI_RENAME) && !strncmp(argv[1], "rename", 6))
+-		return ubi_rename_vol(argv[2], argv[3]);
++	if (IS_ENABLED(CONFIG_CMD_UBI_RENAME) && !strncmp(argv[1], "rename", 6)) {
++		ret = ubi_rename_vol(argv[2], argv[3]);
++		if (ret)
++			return CMD_RET_FAILURE;
++		return 0;
++	}
+ 
+ 	if (strncmp(argv[1], "skipcheck", 9) == 0) {
+ 		/* E.g., change skip_check flag */
+ 		if (argc == 4) {
+ 			skipcheck = strncmp(argv[3], "on", 2) == 0;
+-			return ubi_set_skip_check(argv[2], skipcheck);
++			ret = ubi_set_skip_check(argv[2], skipcheck);
++			if (ret)
++				return CMD_RET_FAILURE;
++			return 0;
+ 		}
+ 	}
+ 
+ 	if (strncmp(argv[1], "write", 5) == 0) {
+-		int ret;
+-
+ 		if (argc < 5) {
+ 			printf("Please see usage\n");
+-			return 1;
++			return CMD_RET_USAGE;
+ 		}
+ 
+ 		addr = hextoul(argv[2], NULL);
+@@ -858,7 +871,9 @@ static int do_ubi(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ 			       argv[3]);
+ 		}
+ 
+-		return ret;
++		if (ret)
++			return CMD_RET_FAILURE;
++		return 0;
+ 	}
+ 
+ 	if (strncmp(argv[1], "read", 4) == 0) {
+@@ -877,12 +892,15 @@ static int do_ubi(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ 		}
+ 
+ 		if (argc == 3) {
+-			return ubi_volume_read(argv[3], (void *)addr, 0, size);
++			ret = ubi_volume_read(argv[3], (void *)addr, 0, size);
++			if (ret)
++				return CMD_RET_FAILURE;
++			return 0;
+ 		}
+ 	}
+ 
+ 	printf("Please see usage\n");
+-	return 1;
++	return CMD_RET_USAGE;
+ }
+ 
+ U_BOOT_CMD(
 -- 
 2.45.2
 
