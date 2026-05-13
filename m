@@ -4,80 +4,124 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3557CD37B6
-	for <u-boot@archiver.kernel.org>; Wed, 13 May 2026 07:25:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6CDBCD4851
+	for <u-boot@archiver.kernel.org>; Wed, 13 May 2026 07:32:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CF53E846A4;
-	Wed, 13 May 2026 09:24:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=mediatek.com
+	by phobos.denx.de (Postfix) with ESMTP id 52F0D836AC;
+	Wed, 13 May 2026 09:32:49 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=mediatek.com header.i=@mediatek.com header.b="JL69wDtV";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="YXYWh2cI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 45056846A7; Wed, 13 May 2026 09:24:42 +0200 (CEST)
-Received: from mailgw02.mediatek.com (unknown [210.61.82.184])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 0238283E36; Wed, 13 May 2026 09:32:48 +0200 (CEST)
+Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
+ [IPv6:2a00:1450:4864:20::32a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5B40084690
- for <u-boot@lists.denx.de>; Wed, 13 May 2026 09:24:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=mediatek.com
+ by phobos.denx.de (Postfix) with ESMTPS id 7A7AE8056B
+ for <u-boot@lists.denx.de>; Wed, 13 May 2026 09:32:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=weijie.gao@mediatek.com
-X-UUID: ca3303444e9c11f1a3561939bc42ff46-20260513
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mediatek.com;
- s=dk; 
- h=Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:CC:To:From;
- bh=7T9GhBZgqG83Qlr0mieiOuiC9CU8/qXS/KlqWGnRezk=; 
- b=JL69wDtVgfbmCX9L4iEh7cXeSH9kMcEZTtzpHs5FyIA1RKK0jDLBdn69aQyHymwR1ApCCyR2vqxF83+ekIHj5yAVcfOBFdF4XKf4y2eIHmOfOd8XHBvs9Vgcei09+mBN+07irmybTnpFzA1gPFlF4wu3PtXWjXak2+13kaXwe/Q=;
-X-CID-P-RULE: Release_Ham
-X-CID-O-INFO: VERSION:1.3.14, REQID:4c1a9787-1c9c-4de5-a656-32566c49cc0c, IP:0,
- U
- RL:0,TC:0,Content:-25,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTIO
- N:release,TS:-25
-X-CID-META: VersionHash:9091e75, CLOUDID:10004dbf-65a8-4b41-ac18-3671578a914d,
- B
- ulkID:nil,BulkQuantity:0,Recheck:0,SF:81|82|102|836|865|888|898,TC:-5,Cont
- ent:0|15|50,EDM:-3,IP:nil,URL:99|1,File:130,RT:0,Bulk:nil,QS:nil,BEC:-1,CO
- L:0,OSI:0,OSA:0,AV:0,LES:1,SPR:NO,DKR:0,DKP:0,BRR:0,BRE:0,ARC:0
-X-CID-BVR: 2,SSN|SDN
-X-CID-BAS: 2,SSN|SDN,0,_
-X-CID-FACTOR: TF_CID_SPAM_SNR,TF_CID_SPAM_ULS
-X-CID-RHF: D41D8CD98F00B204E9800998ECF8427E
-X-UUID: ca3303444e9c11f1a3561939bc42ff46-20260513
-Received: from mtkmbs11n1.mediatek.inc [(172.21.101.185)] by
- mailgw02.mediatek.com (envelope-from <weijie.gao@mediatek.com>)
- (Generic MTA with TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384 256/256)
- with ESMTP id 1583780663; Wed, 13 May 2026 15:24:33 +0800
-Received: from mtkmbs11n2.mediatek.inc (172.21.101.187) by
- mtkmbs10n2.mediatek.inc (172.21.101.183) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.29; Wed, 13 May 2026 15:24:32 +0800
-Received: from mcddlt001.gcn.mediatek.inc (10.19.240.15) by
- mtkmbs11n2.mediatek.inc (172.21.101.73) with Microsoft SMTP Server id
- 15.2.2562.29 via Frontend Transport; Wed, 13 May 2026 15:24:31 +0800
-From: Weijie Gao <weijie.gao@mediatek.com>
-To: <u-boot@lists.denx.de>
-CC: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, Tom Rini
- <trini@konsulko.com>, Vignesh R <vigneshr@ti.com>, Takahiro Kuwano
- <takahiro.kuwano@infineon.com>, Marek Vasut
- <marek.vasut+renesas@mailbox.org>, Tudor Ambarus <tudor.ambarus@linaro.org>,
- Jeffrey Yu <jeyu@issi.com>, Christoph Reiter <christoph.reiter@evk.biz>,
- Miquel Raynal <miquel.raynal@bootlin.com>, Shiji Yang
- <yangshiji66@outlook.com>, Bernhard Messerklinger
- <bernhard.messerklinger@at.abb.com>, Vaishnav Achath <vaishnav.a@ti.com>,
- Prasad Kummari <prasad.kummari@amd.com>, Weijie Gao <weijie.gao@mediatek.com>
-Subject: [PATCH v3 7/7] mtd: spi-nor-ids: Add support for Winbond
- W25Q256JV-M/W25Q512JV-M
-Date: Wed, 13 May 2026 15:24:30 +0800
-Message-ID: <543dd164cbc1b7a33971eea3b5cd8e40b54e5ecf.1778655692.git.weijie.gao@mediatek.com>
-X-Mailer: git-send-email 2.17.0
-In-Reply-To: <cover.1778655692.git.weijie.gao@mediatek.com>
-References: <cover.1778655692.git.weijie.gao@mediatek.com>
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wm1-x32a.google.com with SMTP id
+ 5b1f17b1804b1-488a8ca4aadso58174465e9.3
+ for <u-boot@lists.denx.de>; Wed, 13 May 2026 00:32:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1778657564; x=1779262364; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:from:to:cc:subject:date:message-id
+ :reply-to; bh=gyoLF9XKLhUGlGizujxAtJ7u3Ql2riA42P7OQDTMrFY=;
+ b=YXYWh2cIj8JiF/4cR/ftKxExPZJYo2qN8ZnlegfSHYtNX0CniAoZu2OmyW2wYUZ3hf
+ uIB4NIw1oFTQGvzARN1Mu8WFC85mfBLvBekEyX+a9BERBrqlGIoXRv3aDTN6y0idCTbm
+ cdQJNXffGmiRLf1GCybw+X1/z1KHtwXBFgvIGoYpOr0yWvmQPNH4J/Ya4Zu2u+W7qNCA
+ Qg6U5VDax43S0irmGn38OW0m0iO6RLJ+lkWA458KsTBbNtJuJ8X+zoRjddmVccQoae9R
+ vfyrdegXj+Rc/pc05OK5SuowXRMVzyEMxBj34G/561bzNajj/057PatX2NDF9wnDMb1N
+ 2oaw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1778657564; x=1779262364;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=gyoLF9XKLhUGlGizujxAtJ7u3Ql2riA42P7OQDTMrFY=;
+ b=Gq7A8Gg/H4g/MkbDZa6NvmETUFEpMA4th0+WXNJhuIDmLIRnpiEDXYbsvIESpWX0bZ
+ L+t2Mkl4VTla4L3FHEizOlA9Odf0IRYtB6ahMjCi/Yf7w9NYgbqh87GX0ARxedUpTyUi
+ pwVT7FONbFjlNIbF6HvyL5mihs09hownPHfygd23VOvpu9IRPT6iwtivmuSxuM/Q/ELP
+ EgCUe5Lc66PERvJqBDjTRdUQjZ3fLb2nQXn464cJcGWE5QeRmzroVdIddqPC2nK2kIyh
+ X4H3slrkuGjYv0iJRkhqInCG5RwBzgCRIPecjrGLCAXRfzFl9wwFlUv5zj2psUvvNJwT
+ ftww==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ/Zy+d/0DizcN/BEFSj63LATZ+2NkwirUsFK5Vw2M6y4QXe5d2f3x57xY+IOnDP0EWUTddRFGY=@lists.denx.de
+X-Gm-Message-State: AOJu0YwRifyUaRP0TKzmFI1xlmSC9TZMvxT8p99795mDLulmF8qvAH9a
+ z0FzBZWBtBZ1vpNdmvw94BF4QD0NYC/Z0ERUNvHxdabhnXiYtqWniHU0mociUpgpCus=
+X-Gm-Gg: Acq92OEooqs4X3R6VS1JP2tRTV8w6RyV04NcEc7cpy8P/4Yb8JU/iVzcY5xu7wrpAsr
+ Vkiik6m9zKne5BWAoMtDXJphBcAUARqkAnhQDmlOGPk7v6vSrNIIbpYKqlfPb2V87PEVrVdzvdY
+ 181zpV9topiBYe/f6mHeTsXWr+yLvo1iIQxazxpvoG/1AvcxR3JeMEwCT4PF/xwymyHUZ90d9/Q
+ R9eNm5H+7Sfmb8+pbIffMcXW9HYtkKvdqs4bYEitP9cANQ8ZB9hDaVGtkSjM+dptiLcwts8ulkt
+ b1uE4Z+BYOnDmBOiekMzzFwepKruqT+LRIVKqMuOs+UVfbO5wU9tpk/lXsIlh2hkahOfxsh/OGg
+ q1lAtk2ZVedWm4JUBr/ntXKj/8Grz5PZIaM/iMpyc+iLyAooSpdbkAJgaMFHc+755JJn6Oqt7n5
+ /oN8FnAM+tvj2J0zCb66WwZTxcSoZgeAK2wmcQi/wWvSgZOfmREd4Yj7YCoRksQPTyQosMEQnWi
+ ox+
+X-Received: by 2002:a05:600c:1f91:b0:48a:7965:b943 with SMTP id
+ 5b1f17b1804b1-48fcea26600mr18891455e9.29.1778657563759; 
+ Wed, 13 May 2026 00:32:43 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:106d:1080:6ee4:8e37:145:d60b?
+ ([2a01:e0a:106d:1080:6ee4:8e37:145:d60b])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-48e8f41b0b1sm64601865e9.8.2026.05.13.00.32.42
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 13 May 2026 00:32:43 -0700 (PDT)
+Message-ID: <85323751-c371-44f9-9cda-df1ddbba1f1e@linaro.org>
+Date: Wed, 13 May 2026 09:32:42 +0200
 MIME-Version: 1.0
-Content-Type: text/plain
-X-MTK: N
+User-Agent: Mozilla Thunderbird
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Subject: Re: [PATCH 1/3] phy: qcom: Add SM6115 and SM6125 to QMP UFS PHY driver
+To: Biswapriyo Nath <nathbappai@gmail.com>, Sumit Garg
+ <sumit.garg@kernel.org>, u-boot-qcom@groups.io, u-boot@lists.denx.de,
+ Loic Poulain <loic.poulain@oss.qualcomm.com>
+Cc: Casey Connolly <casey.connolly@linaro.org>, Tom Rini
+ <trini@konsulko.com>, Luca Weiss <luca.weiss@fairphone.com>,
+ Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
+ Danila Tikhonov <danila@jiaxyga.com>, Lukasz Majewski <lukma@denx.de>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ ~postmarketos/upstreaming@lists.sr.ht
+References: <20260512-ufs-sm61x5-v1-0-c022cf988e89@gmail.com>
+ <20260512-ufs-sm61x5-v1-1-c022cf988e89@gmail.com>
+Content-Language: en-US, fr
+Autocrypt: addr=neil.armstrong@linaro.org; keydata=
+ xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
+ GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
+ BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
+ qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
+ 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
+ AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
+ OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
+ Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
+ YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
+ GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
+ UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
+ GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
+ yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
+ QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
+ SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
+ 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
+ Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
+ oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
+ M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
+ 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
+ KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
+ 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
+ QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
+Organization: Linaro
+In-Reply-To: <20260512-ufs-sm61x5-v1-1-c022cf988e89@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,43 +133,36 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-W25Q256JV-M/W25Q512JV-M are 256Mb/512Mb flash devices with Quad interface at
-max 104MHz clock rate. DTR is not supported.
-These flashes supports 2.7-3.6V voltage range.
+On 5/12/26 16:44, Biswapriyo Nath wrote:
+> The UFS on SM6125 can reuse SM6115 configuration, just like Linux.
+> 
+> Signed-off-by: Biswapriyo Nath <nathbappai@gmail.com>
+> ---
+>   drivers/phy/qcom/phy-qcom-qmp-ufs.c | 2 ++
+>   1 file changed, 2 insertions(+)
+> 
+> diff --git a/drivers/phy/qcom/phy-qcom-qmp-ufs.c b/drivers/phy/qcom/phy-qcom-qmp-ufs.c
+> index 80eba734a633..3df88189a907 100644
+> --- a/drivers/phy/qcom/phy-qcom-qmp-ufs.c
+> +++ b/drivers/phy/qcom/phy-qcom-qmp-ufs.c
+> @@ -1741,6 +1741,8 @@ static const struct udevice_id qmp_ufs_ids[] = {
+>   	{ .compatible = "qcom,milos-qmp-ufs-phy", .data = (ulong)&milos_ufsphy_cfg, },
+>   	{ .compatible = "qcom,sa8775p-qmp-ufs-phy", .data = (ulong)&sa8775p_ufsphy_cfg, },
+>   	{ .compatible = "qcom,sdm845-qmp-ufs-phy", .data = (ulong)&sdm845_ufsphy_cfg },
+> +	{ .compatible = "qcom,sm6115-qmp-ufs-phy", .data = (ulong)&sm6115_ufsphy_cfg, },
+> +	{ .compatible = "qcom,sm6125-qmp-ufs-phy", .data = (ulong)&sm6115_ufsphy_cfg, },
+>   	{ .compatible = "qcom,sm6350-qmp-ufs-phy", .data = (ulong)&sdm845_ufsphy_cfg },
+>   	{ .compatible = "qcom,sm7150-qmp-ufs-phy", .data = (ulong)&sm7150_ufsphy_cfg },
+>   	{ .compatible = "qcom,sm8150-qmp-ufs-phy", .data = (ulong)&sm8150_ufsphy_cfg },
+> 
 
-Both tested on MediaTek's filogic platform.
+Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
 
-Link: https://www.winbond.com/resource-files/W25Q256JV%20DTR%20RevK%2010202025%20Plus.pdf
-Link: https://www.winbond.com/resource-files/W25Q512JV%20DTR%20RevD%2006292020%20133.pdf
-
-Signed-off-by: Weijie Gao <weijie.gao@mediatek.com>
----
-v3: updated commit message
-v2: refactored with previous patch. updated commit message
----
- drivers/mtd/spi/spi-nor-ids.c | 4 ++++
- 1 file changed, 4 insertions(+)
-
-diff --git a/drivers/mtd/spi/spi-nor-ids.c b/drivers/mtd/spi/spi-nor-ids.c
-index 8d5862b8d4f..01fd3f42247 100644
---- a/drivers/mtd/spi/spi-nor-ids.c
-+++ b/drivers/mtd/spi/spi-nor-ids.c
-@@ -589,6 +589,10 @@ const struct flash_info spi_nor_ids[] = {
- 	       SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB) },
- 	{ INFO("w25q128jv-m", 0xef7018, 0, 64 * 1024, 256,
- 	       SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB) },
-+	{ INFO("w25q256jv-m", 0xef7019, 0, 64 * 1024, 512,
-+	       SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB) },
-+	{ INFO("w25q512jv-m", 0xef7020, 0, 64 * 1024, 1024,
-+	       SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB) },
- 	{ INFO("w25q01jv-m", 0xef7021, 0, 64 * 1024, 2048,
- 	       SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB) },
- 	{ INFO("w25q02jv-m", 0xef7022, 0, 64 * 1024, 4096,
--- 
-2.45.2
-
+Thanks,
+Neil
