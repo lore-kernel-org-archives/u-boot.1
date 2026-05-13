@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A124CD4F24
-	for <u-boot@archiver.kernel.org>; Wed, 13 May 2026 11:24:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94CFACD4F35
+	for <u-boot@archiver.kernel.org>; Wed, 13 May 2026 11:25:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7EFE283FB0;
-	Wed, 13 May 2026 13:24:16 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 29BA583FB0;
+	Wed, 13 May 2026 13:25:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="qlr7KGm/";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="brMpWyF7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BFC8784099; Wed, 13 May 2026 13:24:14 +0200 (CEST)
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+ id 3026684255; Wed, 13 May 2026 13:25:20 +0200 (CEST)
+Received: from sea.source.kernel.org (sea.source.kernel.org
+ [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 83C53836AC
- for <u-boot@lists.denx.de>; Wed, 13 May 2026 13:24:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D9BA5836AC
+ for <u-boot@lists.denx.de>; Wed, 13 May 2026 13:25:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mkorpershoek@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 8F16E41925;
- Wed, 13 May 2026 11:24:10 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 17F91C2BCB7;
- Wed, 13 May 2026 11:24:09 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id 4F2E843E5A;
+ Wed, 13 May 2026 11:25:16 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B37D8C2BCB7;
+ Wed, 13 May 2026 11:25:15 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1778671450;
- bh=OhPWXkB6utBT9sa5rdW0F5o5r84u6E0ZfP8U+OdgV+8=;
+ s=k20201202; t=1778671516;
+ bh=WJwytgZZiDRrPbgBu4yNUpGqXfnmXewWAjzWIm16whY=;
  h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
- b=qlr7KGm/EsQmU7M9Lr4NAHLrssoSbDGEVitiJg/vIAMy2+adONT6ltyUA7x/F1pEH
- MGuOPKgObuu6+wqZDIHL9OfSYj4ZFvtBvZTboF9Hvt8SfFknQ72aPP5hwkvmit698X
- R3GokEFnqNhithbqiD+oNtnlIyW6a38fvF7RgsYSGt+HHx7I7F1ZjjdOTokOoFphSE
- i8kf7WCNFjo+o1HTSJYEPI12D/jMtoCV/Bag0YIYhyKoJIAeDPy70QWPUXpr2XYZXL
- tmbRFP04y0VnSnMums7jY6ySBPyok8yyPHwilTU53lLmtKD/9QTOD/elgRUVC64kYm
- HksYSCxyOvfoA==
+ b=brMpWyF7NSQYG1ziqVKsBaIH+78gOj7vmckapffL9MhvGsd/mbc8UMHkqiZA0YjH5
+ g58K5nWobl9djyG7u7Icf64dsJLq1RJhn5hn5T4siQYaXet8XHc+v2mBdMG8V8B1MV
+ 0+OO9tgoKa+oFXTbbGRO794OJQdqOE9iUrywrwDjGONL939XSxoS2KTpwMDrOVtzPu
+ NWKbHYGWZETtHUIxxJmGpU76P7b4wYDDtsbW4oGU69a9rdjajiZcX7PVT2PT7+UQt2
+ mIFCeBnYGIkCEERVPg30Y3OYFGkT5iJLVPU/A/LQQlSKJxKJ8p76Ry5uwGe99yHFj8
+ JCi8/oKR63AFQ==
 From: Mattijs Korpershoek <mkorpershoek@kernel.org>
-To: Zixun LI <admin@hifiphile.com>, u-boot@lists.denx.de
-Cc: Lukasz Majewski <lukma@denx.de>, Marek Vasut <marex@denx.de>, Tom Rini
- <trini@konsulko.com>, Zixun LI <zli@ogga.fr>, Andrew Goodbody
- <andrew.goodbody@linaro.org>, Zixun LI <admin@hifiphile.com>
-Subject: Re: [PATCH] usb: gadget: atmel: do not disable endpoints in
- reset_all_endpoints()
-In-Reply-To: <20260512-udc_ep-v1-1-8a783e44cf7f@hifiphile.com>
-References: <20260512-udc_ep-v1-1-8a783e44cf7f@hifiphile.com>
-Date: Wed, 13 May 2026 13:24:07 +0200
-Message-ID: <87h5obv9go.fsf@kernel.org>
+To: Zixun LI <admin@hifiphile.com>, Lukasz Majewski <lukma@denx.de>, Mattijs
+ Korpershoek <mkorpershoek@kernel.org>
+Cc: u-boot@lists.denx.de, stephan.gerhold@linaro.org
+Subject: Re: Commit 59310d1ec (usb: gadget: introduce 'enabled' flag in
+ struct usb_ep) broke atmel_usba_udc
+In-Reply-To: <CA+GyqeZ8=P_i98Y4wT0Hfi9cmfvKsHn-upQ2h51zGB54-_JZvQ@mail.gmail.com>
+References: <CA+GyqeZ8=P_i98Y4wT0Hfi9cmfvKsHn-upQ2h51zGB54-_JZvQ@mail.gmail.com>
+Date: Wed, 13 May 2026 13:25:13 +0200
+Message-ID: <87ecjfv9eu.fsf@kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
@@ -71,87 +71,31 @@ X-Virus-Status: Clean
 
 Hi Zixun,
 
-Thank you for the patch.
+On Tue, May 12, 2026 at 12:23, Zixun LI <admin@hifiphile.com> wrote:
 
-On Tue, May 12, 2026 at 15:11, Zixun LI <admin@hifiphile.com> wrote:
-
-> Endpoints should not be disabled on bus reset event inside UDC driver,
-> otherwise a racing condition will happen between gadget driver. Gadget
-
-nitpick: a racing condition -> a race condition
-
-> driver will free the requests and disable endpoints in disconnect ops
-> later.
+> Hi,
+> With 59310d1ec an "enabled" flag has been introduced to guard ep->ops
+> against
+> disable before enable or vice versa.
+> In atmel_usba_udc/usba_ep_disable() returns an error if the endpoint is
+> already disabled.
+> When the gadget is re-attached, for example a dhcp command triggers
+> usb_gadget_ops.pullup event, the bus is reset and
+> atmel_usba_udc/reset_all_endpoints() is called. Since ep->enabled flag is
+> still
+> true, following usb_ep_disable()/usb_ep_enable() calls will fail.
 >
-Add:
+> What's the correct fix, change atmel_usba_udc/reset_all_endpoints() ?
 
-Fixes: 59310d1ecb9f ("usb: gadget: introduce 'enabled' flag in struct usb_ep")
-> Signed-off-by: Zixun LI <admin@hifiphile.com>
+Thank you for testing and reporting this problem.
+I've seen you have posted a patch fixing this here:
+https://lore.kernel.org/all/20260512-udc_ep-v1-1-8a783e44cf7f@hifiphile.com/
 
-Just above your Signed-off-by: to mark this as a fix.
+Let's continue the discussion there.
 
-> ---
->  drivers/usb/gadget/atmel_usba_udc.c | 14 --------------
->  1 file changed, 14 deletions(-)
-
-Earlier in the driver, in the usba_ep_disable() function, there is the
-following section:
-
-"""
-	if (!ep->desc) {
-		spin_unlock_irqrestore(&udc->lock, flags);
-		/* REVISIT because this driver disables endpoints in
-		 * reset_all_endpoints() before calling disconnect(),
-		 * most gadget drivers would trigger this non-error ...
-		 */
-		if (udc->gadget.speed != USB_SPEED_UNKNOWN)
-			DBG(DBG_ERR, "ep_disable: %s not enabled\n",
-			    ep->ep.name);
-		return -EINVAL;
-	}
-	ep->desc = NULL;
-"""
-
-With this patch, the REVISIT comment is no longer valid. Can we remove
-it?
-
-Also, I believe (but I may be wrong, please try it out) that we can
-maybe remove the whole if (!ep->desc) block from usba_ep_disable() since
-that should be handled by the enabled flag wrapper introduced by
-commit 59310d1ecb9f ("usb: gadget: introduce 'enabled' flag in struct usb_ep")
-
+Regards
+Mattijs
 
 >
-> diff --git a/drivers/usb/gadget/atmel_usba_udc.c b/drivers/usb/gadget/atmel_usba_udc.c
-> index f7a92ded6da..b0de22961de 100644
-> --- a/drivers/usb/gadget/atmel_usba_udc.c
-> +++ b/drivers/usb/gadget/atmel_usba_udc.c
-> @@ -571,20 +571,6 @@ static void reset_all_endpoints(struct usba_udc *udc)
->  		list_del_init(&req->queue);
->  		request_complete(ep, req, -ECONNRESET);
->  	}
-> -
-> -	/* NOTE:  normally, the next call to the gadget driver is in
-> -	 * charge of disabling endpoints... usually disconnect().
-> -	 * The exception would be entering a high speed test mode.
-> -	 *
-> -	 * FIXME remove this code ... and retest thoroughly.
-> -	 */
-> -	list_for_each_entry(ep, &udc->gadget.ep_list, ep.ep_list) {
-> -		if (ep->desc) {
-> -			spin_unlock(&udc->lock);
-> -			usba_ep_disable(&ep->ep);
-> -			spin_lock(&udc->lock);
-> -		}
-> -	}
->  }
->  
->  static struct usba_ep *get_ep_by_addr(struct usba_udc *udc, u16 wIndex)
->
-> ---
-> base-commit: 5732bd0f457b4c671e46574d64d4acb099c0f0a5
-> change-id: 20260512-udc_ep-51a3f7a6befb
->
-> Best regards,
-> --  
-> Zixun LI <admin@hifiphile.com>
+> Regards,
+> Zixun
