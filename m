@@ -4,162 +4,127 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ADCFECD37B6
-	for <u-boot@archiver.kernel.org>; Wed, 13 May 2026 04:13:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 202BFCD484C
+	for <u-boot@archiver.kernel.org>; Wed, 13 May 2026 04:45:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DBC2C83CD3;
-	Wed, 13 May 2026 06:13:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 5D96A838BB;
+	Wed, 13 May 2026 06:45:57 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mt.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="hxc0CUy6";
+	dkim=pass (2048-bit key; unprotected) header.d=mt.com header.i=@mt.com header.b="hwsbhzfy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3488483FB0; Wed, 13 May 2026 06:13:44 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
+ id 1EA6B83CD3; Wed, 13 May 2026 06:45:56 +0200 (CEST)
+Received: from OSPPR02CU001.outbound.protection.outlook.com
+ (mail-norwayeastazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20f::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A4BF4836AC
- for <u-boot@lists.denx.de>; Wed, 13 May 2026 06:13:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9AE2380F0E
+ for <u-boot@lists.denx.de>; Wed, 13 May 2026 06:45:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=reject dis=none) header.from=mt.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1778645602; x=1779250402; i=xypron.glpk@gmx.de;
- bh=bQm1gIXSXx6PxTuicyDO9i0tLhwXnE1nnShM3EpofSc=;
- h=X-UI-Sender-Class:Date:From:To:Subject:In-Reply-To:References:
- Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:cc:
- content-transfer-encoding:content-type:date:from:message-id:
- mime-version:reply-to:subject:to;
- b=hxc0CUy6NsCK8a9zXiXp/70KutIsiD5bJNhWZ0iBKfOtJSdIForxBT0Q3xvcWuee
- xDTanK5a3mTqxeEh2jdqr20YUgfFlJnCKs6rsdoI3Ve9PZ1ztgCN5haXGD7XE3rp6
- 19Kb09oDBf4vOGaAh3OV7QvisMrhGFmHqeXqbKg4gfvf6+OmlkfxCW5PFAfWTkgWL
- PhzYgnpgI78EAjkRJBg1YogD+8w8NAZ3jdmUZ657q0Ud+y+donyqe89hxXd7Onbms
- EicQi0eu/Tw+g2zny+mEI4qrha8ycBFI7CQHitNtr+1qWiqyrQGunQviniwCPtX7V
- aUGhoTmtgUOGoZtR4w==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from client.hidden.invalid by mail.gmx.net (mrgmx104
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MQe5u-1wjTmB3AkY-00V8SS; Wed, 13
- May 2026 06:13:22 +0200
-Date: Wed, 13 May 2026 06:13:14 +0200
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-To: Daniel Golle <daniel@makrotopia.org>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>, Mario Six <mario.six@gdsys.cc>,
+ spf=fail smtp.mailfrom=Wojciech.Dubowik@mt.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=dY4a2kGdzQha8ef1ko3PazztLwJgqVEPwrfe2xB0pj4ApqM3kH1FFKPD12w7t372qYqGfuALJzeZdm4tTX65wcji0A1WjJTuyTOuD/2NsYR9omu2zsiksqy8sT1w2pYjdljJhsRwATJltIghy9zZZ5d3+rpw8J2TbWIwyxFbFKRh6ejuMJ0o2iKOVn2QdUlo3LADtzbeCDne13UG7rWJ4Sau6sTxya4bjciK53uE2m0AB/QEAsDge5/W7lhb1tNCdUoTnIqWgrPUxdr20ujxM2rllMinSohZ55PUpjBlmrALoZM3wD93mViIMcW+v27spWxQ7eYTfK7WTBj90G3TqA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=RveRl7AshGSVwi0Mm/tQxLU4Mh4/qUMjbBOBfFNDHJo=;
+ b=IvUD3uj69cqEmFPHoKn84QfipTfj6MJu2Ey4w6aCpT7J/OtVKoyvHFqjuG7CnOj1sYMCxDjVr3DJkrMmSdzSXKmiOUK+tuwsqMOTADAIvBNfYwKhgiGoZrMSTALkJ2V8K9V9ThI6wDtglDN8gUfF8BQ0+GpBSrp4WbK+KR14n2QrbCAJ8cGTYJ5uEd6RiUOoe6lpHxP8xWDf4yyCPswROxEL0QHOgi17BWsymOmTOi11uZUCcGLPfDwL/5YdtxdTRVbkBQEaMOTlnz74swLeSoxnZiReH2SlV0ZH8J50Oz65tgkFDKzObkc57M7G3n8h/Kc5LCa9QKb+ZcyfFe1dvA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=mt.com; dmarc=pass action=none header.from=mt.com; dkim=pass
+ header.d=mt.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mt.com; s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=RveRl7AshGSVwi0Mm/tQxLU4Mh4/qUMjbBOBfFNDHJo=;
+ b=hwsbhzfyVAq21ynM4IKEpW31r/5a9isYBAaEkEv1rX+a+NfsxfijhvGExhl1+Oc1Zqk78oCVcZnjZPXf4XnFSniZJwQONhv76H9vPDs9yhveJTHIBH4ojO8lkv/tKC6BbMgXFglvtWlXLd+QN9qTOdQERyxO+/KCz8TY2OL9fxlANAEPOu8lsZhItk9HOwF6Z9Y96MSHC0rT+F/3/fDNGH9wOTKYtObDgdoVsKGUQwVlRg3CJi7m0At9ajqBwS6OL7w8YsuRSv+uxQaEdHAWUk1ZekZUfg3zwqGulAWqj0XNX3VRHfZXSRJL8Gxl8khVG56turUyA/O/sqaNtPPaoQ==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=mt.com;
+Received: from DB9PR03MB7180.eurprd03.prod.outlook.com (2603:10a6:10:22d::13)
+ by DB9PR03MB8775.eurprd03.prod.outlook.com (2603:10a6:10:3c5::12)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9891.23; Wed, 13 May
+ 2026 04:45:50 +0000
+Received: from DB9PR03MB7180.eurprd03.prod.outlook.com
+ ([fe80::6fd2:12a9:4423:8ddc]) by DB9PR03MB7180.eurprd03.prod.outlook.com
+ ([fe80::6fd2:12a9:4423:8ddc%3]) with mapi id 15.20.9913.009; Wed, 13 May 2026
+ 04:45:50 +0000
+From: Wojciech Dubowik <Wojciech.Dubowik@mt.com>
+To: u-boot@lists.denx.de
+Cc: Wojciech Dubowik <Wojciech.Dubowik@mt.com>,
+ Franz Schnyder <fra.schnyder@gmail.com>, trini@konsulko.com,
+ "openembedded-core @ lists . openembedded . org"
+ <openembedded-core@lists.openembedded.org>, 
+ Francesco Dolcini <francesco@dolcini.it>, Simon Glass <sjg@chromium.org>,
  Quentin Schulz <quentin.schulz@cherry.de>,
- Kory Maincent <kory.maincent@bootlin.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>, Anshul Dalal <anshuld@ti.com>, 
- Martin Schwan <m.schwan@phytec.de>, Sughosh Ganu <sughosh.ganu@arm.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Benjamin ROBIN <dev@benjarobin.fr>,
- Ludwig Nussel <ludwig.nussel@siemens.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- James Hilliard <james.hilliard1@gmail.com>,
- Wolfgang Wallner <wolfgang.wallner@at.abb.com>,
- Rasmus Villemoes <ravi@prevas.dk>, Peng Fan <peng.fan@nxp.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Sam Protsenko <semen.protsenko@linaro.org>,
- Svyatoslav Ryhel <clamor95@gmail.com>, Michal Simek <michal.simek@amd.com>,
- Pieter Van Trappen <pieter.van.trappen@cern.ch>,
- Dinesh Maniyam <dinesh.maniyam@altera.com>,
- Mayuresh Chitale <mchitale@ventanamicro.com>,
- Shiji Yang <yangshiji66@outlook.com>, Aristo Chen <jj251510319013@gmail.com>, 
- Francois Berder <fberder@outlook.fr>, u-boot@lists.denx.de
-Subject: =?US-ASCII?Q?Re=3A_=5BPATCH_v4_5/8=5D_doc=3A_fit=3A_add_dm?=
- =?US-ASCII?Q?-verity_boot_parameter_documentation?=
-User-Agent: Thunderbird for Android
-In-Reply-To: <731b6abb01956fa028697aad167e6f705b187ecd.1778637233.git.daniel@makrotopia.org>
-References: <cover.1778637233.git.daniel@makrotopia.org>
- <731b6abb01956fa028697aad167e6f705b187ecd.1778637233.git.daniel@makrotopia.org>
-Message-ID: <489A2B5F-17AB-4220-AEEF-705C544F973D@gmx.de>
+ David Lechner <dlechner@baylibre.com>
+Subject: [PATCH v4] tools: mkeficapsule: Rework pkcs11 support
+Date: Wed, 13 May 2026 06:45:35 +0200
+Message-ID: <20260513044537.22773-1-Wojciech.Dubowik@mt.com>
+X-Mailer: git-send-email 2.47.3
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: ZR0P278CA0093.CHEP278.PROD.OUTLOOK.COM
+ (2603:10a6:910:23::8) To DB9PR03MB7180.eurprd03.prod.outlook.com
+ (2603:10a6:10:22d::13)
 MIME-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:vYuQwRDgEofXVPEn0pPvT5DsEPxVyZCKk2BWffiupZKp5kKgDG7
- 94FNJoOyfLmHPjqclqZm+R4lpHBw9O+vZ8zvBO6CfeIpH7KTJh+KdRx5j0O7qk2REOgz5u/
- EKSrMJ7TVIyyka4Gp0PBl583zuDAo5Iu4tMa6eMP4xFYX5HZywe3m6Ax/0s1GPt+omhWZ/8
- g8QJX/hOvt9vPvdYdWe8A==
-UI-OutboundReport: notjunk:1;M01:P0:R8BwNF94LOU=;N7rnbXg1i6BIrDGJ/IC1jgeBepi
- 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
- 359kb6bN3yBkgicJRU=
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DB9PR03MB7180:EE_|DB9PR03MB8775:EE_
+X-MS-Office365-Filtering-Correlation-Id: 16e4838f-2e40-4212-dabd-08deb0aa8176
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|19092799006|52116014|376014|1800799024|366016|10070799003|56012099003|18002099003;
+X-Microsoft-Antispam-Message-Info: 8jvNt/Wc8izYCT7x4pHqtmYnpRUAbRNcdyNouof955MIQFUHeKAf3dqR5TFHNnQhSpGybSB9IhUADaxQUwlmB1ncyIZVyAr55GxYo6oZ3hBPqPW08+mElcxYVdZBXI6ArdDrd93T+tc5FlJ2lgHy1brfW7TpqtXE+EBGXgqVD+4hWvLOffhHR8Wm6cJQsUGHnXCpiXdNpCsCd4OJHNMEc4Ye1jf2JLW5JZiUzNAbUji+nmM8GLNn47LP1AtkAENHQTQW55ODBp4RfDS/+qE98vR4aH3OET7nzbPxXtUz0Ni67XhnxfGs1mexevVcr8p+0uGnKEldAt33W6bRGbORcLAdpnKHGF5jsIwgRslko5E3k9kAtT1b59einZ3O63UJ1ySkuuHPLkJvuu5AnqeeXBY3j8r1uaNgDx+BRTi5rOYCX/p/YYZ06u6TU1jb6FfBsTkc9vqTPy6//mjfBMlcLknQMpS+YP+XirvzYbRbixalIv2RA6/AABWDiB41bhZ9aV3vZybPVazgkzsbqMPPwj1eo2pOBRv+ydz2S8tRM53Cq7FYgIxFsPxqbD5/wWTJPtrVTtYOyoRmHGAazyRxmvFxjOkvAPXgmQ9C8vvQ0BVD98oT75yMFcvk5hzOpt0xhH60iHopJS77x7XB57YRpswBpoUC3Bc6ZMizkFoi/C7ReOqmdp2nZI2YZxw3Vepo
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DB9PR03MB7180.eurprd03.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(19092799006)(52116014)(376014)(1800799024)(366016)(10070799003)(56012099003)(18002099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 2
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?VMEItVhbMy3E/dD4ZzovRQSfkBLpunYb7q65DUmhmDt3vQoLK8hfUkqMUlqt?=
+ =?us-ascii?Q?wR0gGQujSgKXGj3ON2l9ax9M5x8l6m6IlUy3FrF8RWA6zSVPdGGHusyVZLxd?=
+ =?us-ascii?Q?9ZSO+azUBUV4zQ8sbM+RGzKZ0PX1ZcQpYcGzLwHaysX8RVwAMA4PW8nHyjiS?=
+ =?us-ascii?Q?GRzg/zuz5XmS0SrCIj//q16sj0Gp+Ofl+XjLj4b7ClvN0VLXEFiWpp7ZA3dE?=
+ =?us-ascii?Q?icIr0s4J6Yzsa8baZB5OrWRqfsqbmFGxLud8Xizq9W19nxjwAfPxKACYu9NY?=
+ =?us-ascii?Q?u1UmmKMQu/l9murJu/ODENGDkOkFFDOFgmNN4QTLvOhDSiOoQ8nihk3tUIcn?=
+ =?us-ascii?Q?rETNalS7yyJ4RN3JsbDAXE7yQzQaHUx/P9SXKAUQc9efTD5/c1YBnQIv0Xa7?=
+ =?us-ascii?Q?Yg2sGiUwNRc+tAMoFEjXP+f2+YgmsqYD5K9rCRI9xekRGPXKMXRGvvuDLcwk?=
+ =?us-ascii?Q?8B8/jw2wqlYkNbFLZFerNB3Dy7VVvQvIfb2s6U4J7wefmla4GZWD67/9QWVY?=
+ =?us-ascii?Q?iyhvHcFCaYcZmd8nRRpKTi9F+ZvYnBRecU6z/M3j8cnn0FFzy/j1LcHr9W3K?=
+ =?us-ascii?Q?eTHhJFPEsPgkk2gDyJAEzOU0XoDlK/e7l5btN28IMkfVGaS/ZSPe8GvuXDA+?=
+ =?us-ascii?Q?fUS/ubqDTpETCXp7eIVz86bCsFWP13wMoTV4oS76M0rWwHjhlDoBBm2IzLuB?=
+ =?us-ascii?Q?GHBfkLlWubV9NKP0Gway7l0wrCC5eXhtr8tuaEea3MuHlTSUxJVCPfxGwkjf?=
+ =?us-ascii?Q?DtPosRwqgJC0HC1h7UBu0eIy1+wGKXJR3ciZ9kHwmxVKEAIXSBpbR4BIaUvw?=
+ =?us-ascii?Q?PDq747e5/niw0WjXECJDlElyA5S7wh5VkR6exbneCGCfgj4/6fN6on3Cyo2M?=
+ =?us-ascii?Q?SM6YnqmYcV482NT5y48toIeEDY41P0CLY8PBh9KWaijmtx7NpnpWzjc6yE6e?=
+ =?us-ascii?Q?a7UUPUbtAJWbidZNgIDNcvjMwxH/I4uyu9pd/Uy2W/4zhyUtgZgDPmHjlsqa?=
+ =?us-ascii?Q?UMo8NwNTA9ztxo4EF6iJMsQPYnnGRmXtYL4n+7AHug5/zKwK2DB0aa/bxG+/?=
+ =?us-ascii?Q?x6TYQAeV9LPMUubkmKOlDZbpF821jhINA6Ml5VJcAHrqIAEcGRyF4wVfuJRM?=
+ =?us-ascii?Q?7vEarQ/hJIZ50gfy75bAMGig1Tx/8+27PioI8h5wT40CcrZ5Q0tkEfq6Pv2D?=
+ =?us-ascii?Q?Rhgx3npQUsAac5jci0eDLx1LCGCPmh75lu/cJZKTa42/7ecFhV14U/YJIpee?=
+ =?us-ascii?Q?5X8t4b+mFVvmi45tGByGAeXIOLmNKhrZaLAUMSWNJd66OqvcZ9iI45IxBhT9?=
+ =?us-ascii?Q?QE2bwfzw+Znx6zcpc72reKfew4RdyRqcTjaQpBWaFuupxgiccnRvCpmAbo7w?=
+ =?us-ascii?Q?Abvllerq6uJpJ2abaVjfPj3UM/+UXsyFsjsmAj+qXlubP8Yhf2dt3/aHIen8?=
+ =?us-ascii?Q?u5MDHNVDUnuhOLxr7BF7FLhAfdX+M5FfPo7lthAGKi7XINMo5VFMvZAdNlNF?=
+ =?us-ascii?Q?ngqdx2edW5SHKPzqFDR8aBYraLoDnPXSN6/CJgnys+h+HqO10Bz9HoZhX+mw?=
+ =?us-ascii?Q?S1R3eEoP8+4zdqe5PAviO1LWZi2LHvwzkMa9bxIihxo/xExFJ2+FGkRoDrzq?=
+ =?us-ascii?Q?VcTWeZPXizJNyQimXoKpzmNemi8UU8p8axzVZu6l77Kf+YKT3iyWQ2cINd9c?=
+ =?us-ascii?Q?FUVbXba4XQ7aTZRLYtoFUjcpVf6SqTjOxUGGFzrwQtI1IbVZb77O5aJrbH1D?=
+ =?us-ascii?Q?EhGkiNzZ0CGuIib/oXQhVm5sjrP9WaPl52uVB6C/RAbTtErJkQUWCbs4sTOi?=
+X-MS-Exchange-AntiSpam-MessageData-1: Mz/aMIliiqBHLZMh6Qi9lv3eSVqxu/wCYm0=
+X-OriginatorOrg: mt.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 16e4838f-2e40-4212-dabd-08deb0aa8176
+X-MS-Exchange-CrossTenant-AuthSource: DB9PR03MB7180.eurprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 May 2026 04:45:50.0312 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: fb4c0aee-6cd2-482f-a1a5-717e7c02496b
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: UUrTIRfuzCvOGy5J1SMy0uvZS7V8Hc45uBbepAlHdV0hBMjPUNizNB4AI+tGBEb9Pmb+2S9dmFtnz9hwwmTCdw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR03MB8775
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -176,382 +141,192 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Am 13=2E Mai 2026 04:09:29 MESZ schrieb Daniel Golle <daniel@makrotopia=2Eo=
-rg>:
->Add documentation for CONFIG_FIT_VERITY which allows U-Boot to
->construct dm-mod=2Ecreate=3D and dm-mod=2Ewaitfor=3D kernel command-line
->parameters from dm-verity metadata embedded in FIT filesystem
->sub-images=2E
->
->The new document covers the relationship between FIT loadable indices
->and the /dev/fitN block devices that the Linux uImage=2EFIT block driver
->creates, provides a complete =2Eits example with a dm-verity-protected
->SquashFS root filesystem, describes all required and optional dm-verity
->subnode properties and explains how mkimage generates the verity
->metadata automatically=2E
->
->dm-verity is only supported for external-data FIT images (mkimage -E);
->mkimage aborts with an error if the flag is omitted=2E
->
->Signed-off-by: Daniel Golle <daniel@makrotopia=2Eorg>
->Reviewed-by: Simon Glass <sjg@chromium=2Eorg>
->---
->v4: no changes
->v3: clarify that hash-start-block only equals num-data-blocks when
->    data-block-size =3D=3D hash-block-size; in the general case it is
->    data_size / hash-block-size
->v2: trim minimal =2Eits example to user-provided properties only and
->    remove stale references to a verity superblock
->
-> doc/usage/fit/dm-verity=2Erst | 284 ++++++++++++++++++++++++++++++++++++
-> doc/usage/fit/index=2Erst     |   1 +
-> 2 files changed, 285 insertions(+)
-> create mode 100644 doc/usage/fit/dm-verity=2Erst
->
->diff --git a/doc/usage/fit/dm-verity=2Erst b/doc/usage/fit/dm-verity=2Ers=
-t
->new file mode 100644
->index 00000000000=2E=2Eeddce9e7cf7
->--- /dev/null
->+++ b/doc/usage/fit/dm-verity=2Erst
->@@ -0,0 +1,284 @@
->+=2E=2E SPDX-License-Identifier: GPL-2=2E0+
->+
->+FIT dm-verity Boot Parameters
->+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D
->+
->+Introduction
->+------------
->+
->+Linux's dm-verity device-mapper target provides transparent integrity
->+checking of block devices using a Merkle tree=2E It is commonly used to
->+protect read-only root filesystems such as SquashFS images=2E
->+
->+When a FIT image packages the root filesystem as a loadable sub-image of
->+type ``filesystem`` (``IH_TYPE_FILESYSTEM``), the verity metadata can be
->+stored alongside the image data in a ``dm-verity`` subnode=2E U-Boot rea=
-ds
->+this metadata at boot time and generates the kernel command-line paramet=
-ers
->+that Linux needs to activate the verity target, eliminating the need for
->+an initramfs or userspace helper to set up dm-verity=2E
->+
->+This feature is enabled by ``CONFIG_FIT_VERITY`` (see ``boot/Kconfig``)=
-=2E
->+
->+Prerequisites
->+-------------
->+
->+* **Linux uImage=2EFIT block driver** =E2=80=93 the kernel must include =
-the FIT block
->+  driver that exposes loadable sub-images as ``/dev/fit0``, ``/dev/fit1`=
-`,
+Some distros like OpenEmbedded are using gnutls library
+without pkcs11 support and linking of mkeficapsule will fail.
+It would make maintenance of default configs a hurdle.
+Add detection of pkcs11 support in gnutls so it's enabled
+when available and doesn't need to be set explicitly.
 
+Suggested-by: Tom Rini <trini@konsulko.com>
+Cc: Franz Schnyder <fra.schnyder@gmail.com>
+Signed-off-by: Wojciech Dubowik <Wojciech.Dubowik@mt.com>
+---
+Changes in v4:
+- abstract pkcs11 init function
+- removed unreleted cleanup improvements, to be sent in
+  another patch later
+Changes in v3:
+- remove config option for pkcs11 support and add auto
+   detection in Makefile
+- reduce amount of ifdefs by abstracting import pkcs11
+   functions
+- add missing free and deinit functions
+Changes in v2:
+- make use of stderr more consistent
+- add missing ifndef around pkcs11 deinit functions
+---
+ tools/Makefile       |  5 +++
+ tools/mkeficapsule.c | 99 ++++++++++++++++++++++++++++++++++----------
+ 2 files changed, 81 insertions(+), 23 deletions(-)
 
-The dtb file format of FIT images only guarantees 4 byte alignment=2E Does=
- that match with the requirement of file-system drivers including dma acces=
-s if the FIT is for example on eMMC? Or do we need a mechanism to enforce h=
-igher alignment in FIT images?
-
-Best regards
-
-Heinrich
-
-
->+  etc=2E  The driver assigns device numbers in the order loadables appea=
-r in
->+  the FIT configuration=2E
->+
->+* **dm-verity support in the kernel** =E2=80=93 ``CONFIG_DM_VERITY`` mus=
-t be
->+  enabled so the kernel can process the ``dm-mod=2Ecreate=3D`` parameter=
-=2E
->+
->+* **CONFIG_FIT_VERITY** enabled in U-Boot=2E
->+
->+How it works
->+------------
->+
->+The implementation is split into a **build** phase and an **apply** phas=
-e,
->+both of which run automatically within the ``bootm`` state machine=2E No=
- boot
->+method needs to call verity functions explicitly=2E
->+
->+**Build phase** (``BOOTM_STATE_FINDOTHER`` =E2=86=92 ``boot_get_loadable=
-()``)
->+
->+1=2E After all loadable sub-images have been loaded,
->+   ``fit_verity_build_cmdline()`` iterates the configuration's
->+   ``loadables`` list=2E
->+
->+2=2E For each loadable that is an ``IH_TYPE_FILESYSTEM`` image **and**
->+   contains a ``dm-verity`` child node, a dm-verity target specification=
- is
->+   built by the helper ``fit_verity_build_target()``=2E
->+
->+3=2E The dm-verity target references ``/dev/fitN``, where *N* is the
->+   zero-based index of the loadable in the configuration=2E  This matche=
-s the
->+   numbering used by the Linux FIT block driver=2E
->+
->+4=2E The resulting fragments are stored in ``struct bootm_headers``:
->+
->+   ``images->dm_mod_create``
->+     The full dm-verity target table=2E Multiple targets are separated b=
-y ``;``=2E
->+
->+   ``images->dm_mod_waitfor``
->+     Comma-separated list of ``/dev/fitN`` devices so the kernel waits f=
-or
->+     the underlying FIT block devices to appear before activating
->+     device-mapper=2E
->+
->+**Apply phase** (``BOOTM_STATE_OS_PREP``)
->+
->+5=2E Just before ``bootm_process_cmdline_env()`` processes the ``bootarg=
-s``
->+   environment variable, ``fit_verity_apply_bootargs()`` appends the
->+   ``dm-mod=2Ecreate=3D`` and ``dm-mod=2Ewaitfor=3D`` parameters=2E
->+
->+**Bootmeth integration**
->+
->+  Because the fragments are stored in ``struct bootm_headers``, a boot
->+  method can check ``fit_verity_active(images)`` between bootm state
->+  invocations=2E A typical pattern splits ``bootm_run_states()`` into tw=
-o
->+  calls -- one for ``START|FINDOS|FINDOTHER|LOADOS`` and one for
->+  ``OS_PREP|OS_GO`` -- and inspects ``fit_verity_active()`` in
->+  between to decide whether to add a ``root=3D`` parameter pointing at t=
-he
->+  dm-verity device=2E
->+
->+FIT image source (=2Eits) example
->+-------------------------------
->+
->+Below is a minimal ``=2Eits`` file showing a kernel and a dm-verity-prot=
-ected
->+root filesystem packaged as a FIT=2E Only the three user-provided proper=
-ties
->+(``algo``, ``data-block-size``, ``hash-block-size``) are included; ``mki=
-mage``
->+computes and fills in ``digest``, ``salt``, ``num-data-blocks``, and
->+``hash-start-block`` automatically (see `Generating verity metadata`_ be=
-low)::
->+
->+    /dts-v1/;
->+
->+    / {
->+        description =3D "Kernel + dm-verity rootfs";
->+        #address-cells =3D <1>;
->+
->+        images {
->+            kernel {
->+                description =3D "Linux kernel";
->+                data =3D /incbin/("=2E/Image=2Egz");
->+                type =3D "kernel";
->+                arch =3D "arm64";
->+                os =3D "linux";
->+                compression =3D "gzip";
->+                load =3D <0x44000000>;
->+                entry =3D <0x44000000>;
->+                hash-1 {
->+                    algo =3D "sha256";
->+                };
->+            };
->+
->+            fdt {
->+                description =3D "Device tree blob";
->+                data =3D /incbin/("=2E/board=2Edtb");
->+                type =3D "flat_dt";
->+                arch =3D "arm64";
->+                compression =3D "none";
->+                hash-1 {
->+                    algo =3D "sha256";
->+                };
->+            };
->+
->+            rootfs {
->+                description =3D "SquashFS root filesystem";
->+                data =3D /incbin/("=2E/rootfs=2Esquashfs");
->+                type =3D "filesystem";
->+                arch =3D "arm64";
->+                compression =3D "none";
->+                hash-1 {
->+                    algo =3D "sha256";
->+                };
->+
->+                dm-verity {
->+                    algo =3D "sha256";
->+                    data-block-size =3D <4096>;
->+                    hash-block-size =3D <4096>;
->+                };
->+            };
->+        };
->+
->+        configurations {
->+            default =3D "config-1";
->+            config-1 {
->+                description =3D "Boot with dm-verity rootfs";
->+                kernel =3D "kernel";
->+                fdt =3D "fdt";
->+                loadables =3D "rootfs";
->+            };
->+        };
->+    };
->+
->+With this configuration U-Boot produces a kernel command line similar to=
-::
->+
->+    dm-mod=2Ecreate=3D"rootfs,,, ro,0 <data_sectors> verity 1 \
->+        /dev/fit0 /dev/fit0 4096 4096 3762 3762 sha256 \
->+        8e6791637f93cbb81fc45299e203cbe85ca2e47a38f5051bddeece92d7b1c9f9=
- \
->+        aa7b11f8db8fe2e5bfd4eca1d18a22b5de7ea39d2e1b93bb7272ce0c6ca3cc8e=
-" \
->+    dm-mod=2Ewaitfor=3D/dev/fit0
->+
->+dm-verity subnode properties
->+----------------------------
->+
->+User-provided properties (required in the ``=2Eits``):
->+
->+=2E=2E list-table::
->+   :header-rows: 1
->+   :widths: 20 15 65
->+
->+   * - Property
->+     - Type
->+     - Description
->+   * - ``algo``
->+     - string
->+     - Hash algorithm name, e=2Eg=2E ``"sha256"``=2E
->+   * - ``data-block-size``
->+     - u32
->+     - Data block size in bytes (>=3D 512, typically 4096)=2E
->+   * - ``hash-block-size``
->+     - u32
->+     - Hash block size in bytes (>=3D 512, typically 4096)=2E
->+
->+Computed properties (filled in by ``mkimage``):
->+
->+=2E=2E list-table::
->+   :header-rows: 1
->+   :widths: 20 15 65
->+
->+   * - Property
->+     - Type
->+     - Description
->+   * - ``num-data-blocks``
->+     - u32
->+     - Number of data blocks in the filesystem image (computed from the
->+       image size and ``data-block-size``)=2E
->+   * - ``hash-start-block``
->+     - u32
->+     - Offset in ``hash-block-size``-sized blocks from the start of the
->+       sub-image to the root block of the hash tree=2E
->+   * - ``digest``
->+     - byte array
->+     - Root hash of the Merkle tree, stored as raw bytes=2E Length must =
-match
->+       the output size of ``algo``=2E
->+   * - ``salt``
->+     - byte array
->+     - Salt used when computing the Merkle tree, stored as raw bytes=2E
->+
->+These values are the same ones produced by ``veritysetup format`` and ca=
-n
->+typically be obtained from its output=2E
->+The ``digest`` and ``salt`` byte arrays correspond to the hex-encoded
->+``Root hash`` and ``Salt`` printed by ``veritysetup format``=2E
->+
->+Optional boolean properties (when present, they are collected and append=
-ed
->+as dm-verity optional parameters with hyphens converted to underscores):
->+
->+=2E=2E list-table::
->+   :header-rows: 1
->+   :widths: 30 70
->+
->+   * - Property
->+     - Description
->+   * - ``restart-on-corruption``
->+     - Restart the system on data corruption=2E
->+   * - ``panic-on-corruption``
->+     - Panic the system on data corruption=2E
->+   * - ``restart-on-error``
->+     - Restart the system on I/O error=2E
->+   * - ``panic-on-error``
->+     - Panic the system on I/O error=2E
->+   * - ``check-at-most-once``
->+     - Verify data blocks only on first read=2E
->+
->+
->+Generating verity metadata
->+--------------------------
->+
->+``mkimage`` automates the entire process=2E When it encounters a
->+``dm-verity`` subnode, it:
->+
->+1=2E Writes the embedded image data to a temporary file=2E
->+2=2E Runs ``veritysetup format`` with the user-supplied algorithm and
->+   block sizes=2E
->+3=2E Parses ``Root hash`` and ``Salt`` from ``veritysetup`` stdout=2E
->+4=2E Reads back the expanded file (original data + Merkle hash tree) and
->+   replaces the image's ``data`` property=2E
->+5=2E Writes the computed ``digest``, ``salt``, ``num-data-blocks``, and
->+   ``hash-start-block`` properties into the ``dm-verity`` subnode=2E
->+
->+Images with ``dm-verity`` subnodes **must** use external data layout
->+(``mkimage -E``)=2E ``mkimage`` will abort with an error if ``-E`` is
->+not specified=2E
->+
->+Usage::
->+
->+    # Create the filesystem image
->+    mksquashfs rootfs/ rootfs=2Esquashfs -comp xz
->+
->+    # Build the FIT (dm-verity is computed automatically)
->+    mkimage -E -f image=2Eits image=2Eitb
->+
->+``veritysetup`` (from the cryptsetup_ package) must be installed on
->+the build host=2E
->+
->+=2E=2E _cryptsetup: https://gitlab=2Ecom/cryptsetup/cryptsetup
->+
->+=2E=2E note::
->+
->+   ``veritysetup format`` is invoked with ``--no-superblock``, so no
->+   on-disk superblock is written between the data and hash regions=2E
->+   The Merkle hash tree is appended directly to the image data within
->+   the FIT external data section=2E  ``hash-start-block`` is therefore
->+   computed as ``data_size / hash-block-size`` (the offset of the hash
->+   region in units of ``hash-block-size``)=2E  When ``data-block-size``
->+   equals ``hash-block-size`` this happens to equal ``num-data-blocks``=
-=2E
->+
->+Kconfig
->+-------
->+
->+``CONFIG_FIT_VERITY``
->+  Depends on ``CONFIG_FIT`` and ``CONFIG_OF_LIBFDT``=2E
->+  When enabled, ``fit_verity_build_cmdline()`` and
->+  ``fit_verity_apply_bootargs()`` are compiled into the boot path=2E
->+  When disabled, the functions are static inlines returning 0, so there
->+  is no code-size impact=2E  Works with both the ``bootm`` command and
->+  BOOTSTD boot methods=2E
->diff --git a/doc/usage/fit/index=2Erst b/doc/usage/fit/index=2Erst
->index 6c78d8584ed=2E=2Ed17582b1d64 100644
->--- a/doc/usage/fit/index=2Erst
->+++ b/doc/usage/fit/index=2Erst
->@@ -11,6 +11,7 @@ images that it reads and boots=2E Documentation about F=
-IT is available in
->     :maxdepth: 1
->=20
->     beaglebone_vboot
->+    dm-verity
->     howto
->     kernel_fdt
->     kernel_fdts_compressed
+diff --git a/tools/Makefile b/tools/Makefile
+index 1a5f425ecdaa..e85f5a354b81 100644
+--- a/tools/Makefile
++++ b/tools/Makefile
+@@ -271,6 +271,11 @@ mkeficapsule-objs := generated/lib/uuid.o \
+ 	$(LIBFDT_OBJS) \
+ 	mkeficapsule.o
+ hostprogs-always-$(CONFIG_TOOLS_MKEFICAPSULE) += mkeficapsule
++GNUTLS_SUPPORTS_P11KIT = $(shell pkg-config --libs gnutls --print-requires-private \
++			 2> /dev/null | grep p11-kit-1)
++ifeq ($(GNUTLS_SUPPORTS_P11KIT),p11-kit-1)
++HOSTCFLAGS_mkeficapsule.o += -DMKEFICAPSULE_PKCS11
++endif
+ 
+ include tools/fwumdata_src/fwumdata.mk
+ 
+diff --git a/tools/mkeficapsule.c b/tools/mkeficapsule.c
+index ec640c57e8a5..132bba286e4c 100644
+--- a/tools/mkeficapsule.c
++++ b/tools/mkeficapsule.c
+@@ -207,6 +207,75 @@ static int write_capsule_file(FILE *f, void *data, size_t size, const char *msg)
+ 	return 0;
+ }
+ 
++#ifdef MKEFICAPSULE_PKCS11
++static int pkcs11_init(void)
++{
++	const char *lib;
++	int ret;
++
++	lib = getenv("PKCS11_MODULE_PATH");
++	if (!lib) {
++		fprintf(stderr,
++			"PKCS11_MODULE_PATH not set in the environment\n");
++		return -1;
++	}
++
++	gnutls_pkcs11_init(GNUTLS_PKCS11_FLAG_MANUAL, NULL);
++	gnutls_global_init();
++
++	ret = gnutls_pkcs11_add_provider(lib, "trusted");
++	if (ret < 0) {
++		fprintf(stderr, "Failed to add pkcs11 provider\n");
++		return -1;
++	}
++
++	return 0;
++}
++
++static int import_pkcs11_crt(gnutls_x509_crt_t *x509, struct auth_context *ctx)
++{
++	gnutls_pkcs11_obj_t *obj_list;
++	unsigned int obj_list_size = 0;
++	int i, ret;
++
++	ret = gnutls_pkcs11_obj_list_import_url4(&obj_list, &obj_list_size,
++						 ctx->cert_file, 0);
++	if (ret < 0 || obj_list_size == 0)
++		return ret;
++
++	ret = gnutls_x509_crt_import_pkcs11(*x509, obj_list[0]);
++
++	for (i = 0; i < obj_list_size; i++)
++                gnutls_pkcs11_obj_deinit(obj_list[i]);
++	gnutls_free(obj_list);
++
++	return ret;
++}
++
++static int import_pkcs11_key(gnutls_privkey_t *pkey, struct auth_context *ctx)
++{
++	return gnutls_privkey_import_pkcs11_url(*pkey, ctx->key_file);
++}
++#else
++static int pkcs11_init(void)
++{
++	fprintf(stderr, "Pkcs11 support is disabled\n");
++	return -1;
++}
++
++static int import_pkcs11_crt(gnutls_x509_crt_t *x509, struct auth_context *ctx)
++{
++	fprintf(stderr, "Pkcs11 support is disabled\n");
++	return -1;
++}
++
++static int import_pkcs11_key(gnutls_privkey_t *pkey, struct auth_context *ctx)
++{
++	fprintf(stderr, "Pkcs11 support is disabled\n");
++	return -1;
++}
++#endif
++
+ /**
+  * create_auth_data - compose authentication data in capsule
+  * @auth_context:	Pointer to authentication context
+@@ -229,9 +298,6 @@ static int create_auth_data(struct auth_context *ctx)
+ 	gnutls_pkcs7_t pkcs7;
+ 	gnutls_datum_t data;
+ 	gnutls_datum_t signature;
+-	gnutls_pkcs11_obj_t *obj_list;
+-	unsigned int obj_list_size = 0;
+-	const char *lib;
+ 	int ret;
+ 	bool pkcs11_cert = false;
+ 	bool pkcs11_key = false;
+@@ -243,19 +309,8 @@ static int create_auth_data(struct auth_context *ctx)
+ 		pkcs11_key = true;
+ 
+ 	if (pkcs11_cert || pkcs11_key) {
+-		lib = getenv("PKCS11_MODULE_PATH");
+-		if (!lib) {
+-			fprintf(stdout,
+-				"PKCS11_MODULE_PATH not set in the environment\n");
+-			return -1;
+-		}
+-
+-		gnutls_pkcs11_init(GNUTLS_PKCS11_FLAG_MANUAL, NULL);
+-		gnutls_global_init();
+-
+-		ret = gnutls_pkcs11_add_provider(lib, "trusted");
++		ret = pkcs11_init();
+ 		if (ret < 0) {
+-			fprintf(stdout, "Failed to add pkcs11 provider\n");
+ 			return -1;
+ 		}
+ 	}
+@@ -301,14 +356,12 @@ static int create_auth_data(struct auth_context *ctx)
+ 
+ 	/* load x509 certificate */
+ 	if (pkcs11_cert) {
+-		ret = gnutls_pkcs11_obj_list_import_url4(&obj_list, &obj_list_size,
+-							 ctx->cert_file, 0);
+-		if (ret < 0 || obj_list_size == 0) {
+-			fprintf(stdout, "Failed to import crt_file URI objects\n");
++		ret =  import_pkcs11_crt(&x509, ctx);
++		if (ret < 0) {
++			fprintf(stderr, "error in import_pkcs11_crt(): %s\n",
++				gnutls_strerror(ret));
+ 			return -1;
+ 		}
+-
+-		gnutls_x509_crt_import_pkcs11(x509, obj_list[0]);
+ 	} else {
+ 		ret = gnutls_x509_crt_import(x509, &cert, GNUTLS_X509_FMT_PEM);
+ 		if (ret < 0) {
+@@ -320,9 +373,9 @@ static int create_auth_data(struct auth_context *ctx)
+ 
+ 	/* load a private key */
+ 	if (pkcs11_key) {
+-		ret = gnutls_privkey_import_pkcs11_url(pkey, ctx->key_file);
++		ret = import_pkcs11_key(&pkey, ctx);
+ 		if (ret < 0) {
+-			fprintf(stderr, "error in %d: %s\n", __LINE__,
++			fprintf(stderr,	"error in import_pkcs11_key(): %s\n",
+ 				gnutls_strerror(ret));
+ 			return -1;
+ 		}
+-- 
+2.47.3
 
