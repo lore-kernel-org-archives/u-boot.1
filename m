@@ -4,83 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6CDBCD4851
-	for <u-boot@archiver.kernel.org>; Wed, 13 May 2026 07:32:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08EDFCD4851
+	for <u-boot@archiver.kernel.org>; Wed, 13 May 2026 07:33:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 52F0D836AC;
-	Wed, 13 May 2026 09:32:49 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 91C9584198;
+	Wed, 13 May 2026 09:33:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="YXYWh2cI";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="NCT2Vr1z";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0238283E36; Wed, 13 May 2026 09:32:48 +0200 (CEST)
-Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
- [IPv6:2a00:1450:4864:20::32a])
+ id 143FC84255; Wed, 13 May 2026 09:33:07 +0200 (CEST)
+Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
+ [IPv6:2a00:1450:4864:20::330])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7A7AE8056B
- for <u-boot@lists.denx.de>; Wed, 13 May 2026 09:32:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3A7F783EF9
+ for <u-boot@lists.denx.de>; Wed, 13 May 2026 09:33:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-488a8ca4aadso58174465e9.3
- for <u-boot@lists.denx.de>; Wed, 13 May 2026 00:32:44 -0700 (PDT)
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-48d102471a4so63233965e9.2
+ for <u-boot@lists.denx.de>; Wed, 13 May 2026 00:33:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1778657564; x=1779262364; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1778657585; x=1779262385; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=gyoLF9XKLhUGlGizujxAtJ7u3Ql2riA42P7OQDTMrFY=;
- b=YXYWh2cIj8JiF/4cR/ftKxExPZJYo2qN8ZnlegfSHYtNX0CniAoZu2OmyW2wYUZ3hf
- uIB4NIw1oFTQGvzARN1Mu8WFC85mfBLvBekEyX+a9BERBrqlGIoXRv3aDTN6y0idCTbm
- cdQJNXffGmiRLf1GCybw+X1/z1KHtwXBFgvIGoYpOr0yWvmQPNH4J/Ya4Zu2u+W7qNCA
- Qg6U5VDax43S0irmGn38OW0m0iO6RLJ+lkWA458KsTBbNtJuJ8X+zoRjddmVccQoae9R
- vfyrdegXj+Rc/pc05OK5SuowXRMVzyEMxBj34G/561bzNajj/057PatX2NDF9wnDMb1N
- 2oaw==
+ :reply-to; bh=vNn6zbJ1NbXehc1RhVUlOjbPPNav6jWHjT5iUitPUlk=;
+ b=NCT2Vr1z4oxHcknpLqinmZcZjOu9euxkTvwtxPxfQMPrtEOUul4eBbynAzBrhNgbVt
+ MfLcUV50WghluS7dFHvyD83fwRszGtz17EBk+pFENmEjATCXY76ljKW2ufeqaTy387co
+ k0+9shAd+vA/99LGfDvdXx+9Zl4Uc2YLu9R6wobj1vQRLXy47AMP2b0TI3zZDVu7/tML
+ 2gPWJmfZmipcm+nUwtYDVDZKLmTsMHLg4HcfMTkRGt0gXJZjBoQEU9C3U83trWQImQ25
+ 2tui2jj/K9vdZbyQB0Vxf8IMlMo/BepI4S8AuiQW6VQ01nlSYiv5IRcRuQlW2DDAj01n
+ Rcaw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778657564; x=1779262364;
+ d=1e100.net; s=20251104; t=1778657585; x=1779262385;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=gyoLF9XKLhUGlGizujxAtJ7u3Ql2riA42P7OQDTMrFY=;
- b=Gq7A8Gg/H4g/MkbDZa6NvmETUFEpMA4th0+WXNJhuIDmLIRnpiEDXYbsvIESpWX0bZ
- L+t2Mkl4VTla4L3FHEizOlA9Odf0IRYtB6ahMjCi/Yf7w9NYgbqh87GX0ARxedUpTyUi
- pwVT7FONbFjlNIbF6HvyL5mihs09hownPHfygd23VOvpu9IRPT6iwtivmuSxuM/Q/ELP
- EgCUe5Lc66PERvJqBDjTRdUQjZ3fLb2nQXn464cJcGWE5QeRmzroVdIddqPC2nK2kIyh
- X4H3slrkuGjYv0iJRkhqInCG5RwBzgCRIPecjrGLCAXRfzFl9wwFlUv5zj2psUvvNJwT
- ftww==
+ bh=vNn6zbJ1NbXehc1RhVUlOjbPPNav6jWHjT5iUitPUlk=;
+ b=TtRwQh8GOD6d0JRM6wYm9UPgfKwWoJwiJ6ooGhcytv5/mJQ+5BN95Z91g+Pz36EZP7
+ GXo2NeuGrIYrUu9sPUchtuyQDa5RNVF60Cy4qGT2TdcfFI9GuuBbU+Dk/DEsKgsY+zDm
+ qrS+3U6RrDPU37YdomeqL1mgw9WnZSVV+LWI5ruazbrBgT4HVWHqF/9mqU33DYnDtdfK
+ Fn1fkPb6LR0P0DZl8ijAap/DY7BQ1BXnJ/9F2UFKQLquwSQIT/CLPJJ61l0g1ISbAhIK
+ kyXXQ/DLUldHrGC3V5M2xlDmhE1D6JA8xRhRb4u9wP7XgvOyiNy3xWIXikPBvDQKrowB
+ AEEQ==
 X-Forwarded-Encrypted: i=1;
- AFNElJ/Zy+d/0DizcN/BEFSj63LATZ+2NkwirUsFK5Vw2M6y4QXe5d2f3x57xY+IOnDP0EWUTddRFGY=@lists.denx.de
-X-Gm-Message-State: AOJu0YwRifyUaRP0TKzmFI1xlmSC9TZMvxT8p99795mDLulmF8qvAH9a
- z0FzBZWBtBZ1vpNdmvw94BF4QD0NYC/Z0ERUNvHxdabhnXiYtqWniHU0mociUpgpCus=
-X-Gm-Gg: Acq92OEooqs4X3R6VS1JP2tRTV8w6RyV04NcEc7cpy8P/4Yb8JU/iVzcY5xu7wrpAsr
- Vkiik6m9zKne5BWAoMtDXJphBcAUARqkAnhQDmlOGPk7v6vSrNIIbpYKqlfPb2V87PEVrVdzvdY
- 181zpV9topiBYe/f6mHeTsXWr+yLvo1iIQxazxpvoG/1AvcxR3JeMEwCT4PF/xwymyHUZ90d9/Q
- R9eNm5H+7Sfmb8+pbIffMcXW9HYtkKvdqs4bYEitP9cANQ8ZB9hDaVGtkSjM+dptiLcwts8ulkt
- b1uE4Z+BYOnDmBOiekMzzFwepKruqT+LRIVKqMuOs+UVfbO5wU9tpk/lXsIlh2hkahOfxsh/OGg
- q1lAtk2ZVedWm4JUBr/ntXKj/8Grz5PZIaM/iMpyc+iLyAooSpdbkAJgaMFHc+755JJn6Oqt7n5
- /oN8FnAM+tvj2J0zCb66WwZTxcSoZgeAK2wmcQi/wWvSgZOfmREd4Yj7YCoRksQPTyQosMEQnWi
- ox+
-X-Received: by 2002:a05:600c:1f91:b0:48a:7965:b943 with SMTP id
- 5b1f17b1804b1-48fcea26600mr18891455e9.29.1778657563759; 
- Wed, 13 May 2026 00:32:43 -0700 (PDT)
+ AFNElJ8jlSJJRw39QNHddgnIDi7QMU86/aNY1+N1mZE0SNA9IOPNwAP1BlV4ARugopNP+hSprVKW3eY=@lists.denx.de
+X-Gm-Message-State: AOJu0Yzmjb6ASbDWUzE3FEsWSQl0n9o7EMzmbZ79QwVhnr7lFpYy3JOc
+ Q9ItROfaL31kU3Cmfk/rPgBtUL4i1cJuYE5tydUgKbOU6dvRMqc49p1HBFIScr3wp0E=
+X-Gm-Gg: Acq92OET/sd0IsYLDaFMhgyLUJUAdMtvs5gQUei1lb6tvFp915eTY90/n89XCK7/c7U
+ /99G9fpbKOwFq36idHEwNKRVM1GTtrqhw7a9nm8g4ctyCafMpKrB3ylYpCo4mZhd37KdDtmoruy
+ eGG3938phpv72ZHfNcEQ14NerQSfBkUu12C6tx2VtROwe+msSCzxz7NqHhbTPn7nPQs6g1qfXve
+ MxSf7WwsC0KqZhUiL0dWUQ8r5a5c29MzASomRFxmxD+0tpObBwl9daeRyZR48rLLjQgeDQ7dkSe
+ P17cVH8QRAuOft9w59RjkUerPiNig566mazP+D7iiw1V9ABVmukDwmqgLKxqloINsbK4obpmJHl
+ q5FE1I8A1jCW0FAPcq6WLou7VFlP3A/ZuW2wHNMk9lG40Mg6oJd1cd0+2grChnUEs+tzQdnV80I
+ RM+YPLM+sxiQdMkV89jfVzpx5mFhfz0daO81MXnNq7mOn1uMvg24rgs9z2Xycv65kPnfqa+dmvk
+ 3R+
+X-Received: by 2002:a05:600c:5397:b0:48a:525b:e148 with SMTP id
+ 5b1f17b1804b1-48fc9a0775amr25295815e9.4.1778657584537; 
+ Wed, 13 May 2026 00:33:04 -0700 (PDT)
 Received: from ?IPV6:2a01:e0a:106d:1080:6ee4:8e37:145:d60b?
  ([2a01:e0a:106d:1080:6ee4:8e37:145:d60b])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-48e8f41b0b1sm64601865e9.8.2026.05.13.00.32.42
+ 5b1f17b1804b1-48fc8d625basm49304655e9.9.2026.05.13.00.33.03
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 13 May 2026 00:32:43 -0700 (PDT)
-Message-ID: <85323751-c371-44f9-9cda-df1ddbba1f1e@linaro.org>
-Date: Wed, 13 May 2026 09:32:42 +0200
+ Wed, 13 May 2026 00:33:04 -0700 (PDT)
+Message-ID: <6a10b0df-7183-47a0-a3ec-33573b6d14e7@linaro.org>
+Date: Wed, 13 May 2026 09:33:03 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH 1/3] phy: qcom: Add SM6115 and SM6125 to QMP UFS PHY driver
+Subject: Re: [PATCH 2/3] clk/qcom: qcm2290: Fix vote_bit of gpll6 clock
 To: Biswapriyo Nath <nathbappai@gmail.com>, Sumit Garg
  <sumit.garg@kernel.org>, u-boot-qcom@groups.io, u-boot@lists.denx.de,
  Loic Poulain <loic.poulain@oss.qualcomm.com>
@@ -92,7 +92,7 @@ Cc: Casey Connolly <casey.connolly@linaro.org>, Tom Rini
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
  ~postmarketos/upstreaming@lists.sr.ht
 References: <20260512-ufs-sm61x5-v1-0-c022cf988e89@gmail.com>
- <20260512-ufs-sm61x5-v1-1-c022cf988e89@gmail.com>
+ <20260512-ufs-sm61x5-v1-2-c022cf988e89@gmail.com>
 Content-Language: en-US, fr
 Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
@@ -119,7 +119,7 @@ Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
  QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
 Organization: Linaro
-In-Reply-To: <20260512-ufs-sm61x5-v1-1-c022cf988e89@gmail.com>
+In-Reply-To: <20260512-ufs-sm61x5-v1-2-c022cf988e89@gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -139,30 +139,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Please add a commit message
+
 On 5/12/26 16:44, Biswapriyo Nath wrote:
-> The UFS on SM6125 can reuse SM6115 configuration, just like Linux.
-> 
+> Fixes: 3ddc67573fab ("clk/qcom: qcm2290: Add SDCC1 apps clock frequency table")
 > Signed-off-by: Biswapriyo Nath <nathbappai@gmail.com>
 > ---
->   drivers/phy/qcom/phy-qcom-qmp-ufs.c | 2 ++
->   1 file changed, 2 insertions(+)
+>   drivers/clk/qcom/clock-qcm2290.c | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
 > 
-> diff --git a/drivers/phy/qcom/phy-qcom-qmp-ufs.c b/drivers/phy/qcom/phy-qcom-qmp-ufs.c
-> index 80eba734a633..3df88189a907 100644
-> --- a/drivers/phy/qcom/phy-qcom-qmp-ufs.c
-> +++ b/drivers/phy/qcom/phy-qcom-qmp-ufs.c
-> @@ -1741,6 +1741,8 @@ static const struct udevice_id qmp_ufs_ids[] = {
->   	{ .compatible = "qcom,milos-qmp-ufs-phy", .data = (ulong)&milos_ufsphy_cfg, },
->   	{ .compatible = "qcom,sa8775p-qmp-ufs-phy", .data = (ulong)&sa8775p_ufsphy_cfg, },
->   	{ .compatible = "qcom,sdm845-qmp-ufs-phy", .data = (ulong)&sdm845_ufsphy_cfg },
-> +	{ .compatible = "qcom,sm6115-qmp-ufs-phy", .data = (ulong)&sm6115_ufsphy_cfg, },
-> +	{ .compatible = "qcom,sm6125-qmp-ufs-phy", .data = (ulong)&sm6115_ufsphy_cfg, },
->   	{ .compatible = "qcom,sm6350-qmp-ufs-phy", .data = (ulong)&sdm845_ufsphy_cfg },
->   	{ .compatible = "qcom,sm7150-qmp-ufs-phy", .data = (ulong)&sm7150_ufsphy_cfg },
->   	{ .compatible = "qcom,sm8150-qmp-ufs-phy", .data = (ulong)&sm8150_ufsphy_cfg },
+> diff --git a/drivers/clk/qcom/clock-qcm2290.c b/drivers/clk/qcom/clock-qcm2290.c
+> index 5a599085b500..c38ff1a1e4a5 100644
+> --- a/drivers/clk/qcom/clock-qcm2290.c
+> +++ b/drivers/clk/qcom/clock-qcm2290.c
+> @@ -73,7 +73,7 @@ static const struct pll_vote_clk gpll6_clk = {
+>   	.status = 0x6000,
+>   	.status_bit = BIT(31),
+>   	.ena_vote = 0x79000,
+> -	.vote_bit = BIT(7),
+> +	.vote_bit = BIT(6),
+>   };
+>   
+>   static const struct gate_clk qcm2290_clks[] = {
 > 
 
-Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
-
-Thanks,
-Neil
