@@ -4,182 +4,132 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50504CD4F24
-	for <u-boot@archiver.kernel.org>; Wed, 13 May 2026 15:14:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E7A7CD4851
+	for <u-boot@archiver.kernel.org>; Wed, 13 May 2026 16:06:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AC83F84663;
-	Wed, 13 May 2026 17:14:46 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id A76C78341A;
+	Wed, 13 May 2026 18:06:10 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="rkhYDc4u";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="UL9mwbat";
+	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Q1PaszOD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 326D384676; Wed, 13 May 2026 17:14:46 +0200 (CEST)
-Received: from PH0PR06CU001.outbound.protection.outlook.com
- (mail-westus3azlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c107::3])
+ id 97D7084663; Wed, 13 May 2026 18:06:09 +0200 (CEST)
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
+ [205.220.180.131])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2B66983EF9
- for <u-boot@lists.denx.de>; Wed, 13 May 2026 17:14:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=cPBwPBMvzP6r/hZ0WHfTIxcWwQe0HJtAPyV+VpoEXf7vol4FWBzyi+0EorVoTb+xXN2gw/3OnMSDTui6tNzwF37AWzQpN4tyPk3ddApCHqpDYL5Q6oD9LvgIw00z7QtaSgN73NISdAOObDdnzUQES3W6MtdnA+qqvwPLj1Rya1e9ymRyWWIQH7I6J/WzQdtNdhlQ5STNoUkOG4CG3VsMfriud/ghX+SGO3Xe4fyAJojKC6f4cKrGApyMMIamxNj5dU/5zgiP9pqxt7q94WfvGy2N5WAb2BvZ7BjcrdWvC+PgWzyYA7f4PU2j/kS36n/eA6GGxLVcNQ0G+5B+lfbeyw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=8HRdLkUMFG3STVYhjq6wOArg2jt82gxkdikuU+o+bns=;
- b=MDQwkuwnVt2+aXIoa0wMZR4oAoywWAwM2Jfi3fRGz6bcAFmIUn5d/rvkJ/CoIzTwb2bnFH6v4yVp/3LuA1co0I0WgkblLtrIVei2p4OMt1quTQW5ayFm+PY8MPGUz0SlV/6Hxthgbr+34o/5a/x6inKIv9gUMZK66+SaSxYFmbbhL1kvjCrslh4uaO7hYyQrHk4QGjm2VQQ0ZGj1H5s7T8vDhseoAzPD6mbnkCz4OKDG3l3qnZmpi6B43+Z8cnBXQ6v8olq48yDtShfhBfLflvMk41v7CWZQGwq1FbFbEX5uDO6rjj82NzA1TDWtYgU1xG95ddUuAyjytzFVok01CA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=8HRdLkUMFG3STVYhjq6wOArg2jt82gxkdikuU+o+bns=;
- b=rkhYDc4u7HyysKf6RMdwk5lPJ8rkjuyMPE7V7qIdJh0tKoRn/4VwNd3Wc9Fu3paInIzwcml5UHGVvMehkmbK5TAJr0PCsRIPeIxv3HiFG3ZhGniM73bi9enwS1N/rizou6BcYL6KVnnHbV0yf1ZMpiXkUovPHk304RwvKEKagOs=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-Received: from LV5PR12MB9779.namprd12.prod.outlook.com (2603:10b6:408:301::14)
- by CH2PR12MB4070.namprd12.prod.outlook.com (2603:10b6:610:ae::22)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9913.11; Wed, 13 May
- 2026 15:14:16 +0000
-Received: from LV5PR12MB9779.namprd12.prod.outlook.com
- ([fe80::8ac8:e862:8ae9:9287]) by LV5PR12MB9779.namprd12.prod.outlook.com
- ([fe80::8ac8:e862:8ae9:9287%3]) with mapi id 15.20.9913.009; Wed, 13 May 2026
- 15:14:16 +0000
-Message-ID: <effd263e-bc3c-4f35-b710-783b08d82515@amd.com>
-Date: Wed, 13 May 2026 17:14:09 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/4] reset: Add sandbox tests for reset_reset() and
- reset_reset_bulk()
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, git@amd.com
-References: <cover.1777984225.git.michal.simek@amd.com>
- <21c23cc7403153b45a81c958118b8d9f85f73140.1777984225.git.michal.simek@amd.com>
- <CAFLszTiYJU028+L40rzNa=X-qqDYCfbPqYMfGhzpK3Xq2mr8ag@mail.gmail.com>
- <cbadd601-4337-4eaf-bf6b-8c98645dc089@amd.com>
- <CAFLszTgZzZ8LHZ5KWMWqx2a54dPLBk1V86AxPGd=jEK1PQrPpg@mail.gmail.com>
-Content-Language: en-US
-From: Michal Simek <michal.simek@amd.com>
-Autocrypt: addr=michal.simek@amd.com; keydata=
- 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
- mpwx1d8=
-In-Reply-To: <CAFLszTgZzZ8LHZ5KWMWqx2a54dPLBk1V86AxPGd=jEK1PQrPpg@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: VI1PR09CA0166.eurprd09.prod.outlook.com
- (2603:10a6:800:120::20) To LV5PR12MB9779.namprd12.prod.outlook.com
- (2603:10b6:408:301::14)
+ by phobos.denx.de (Postfix) with ESMTPS id 05C8980F0E
+ for <u-boot@lists.denx.de>; Wed, 13 May 2026 18:06:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=oss.qualcomm.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=varadarajan.narayanan@oss.qualcomm.com
+Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 64DAsolP978141
+ for <u-boot@lists.denx.de>; Wed, 13 May 2026 16:06:05 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-type:date:from:in-reply-to:message-id:mime-version
+ :references:subject:to; s=qcppdkim1; bh=/HKmuUdxXXple+YsxDzQk94o
+ K+FkexrvukhzNM3DPaI=; b=UL9mwbat7vgAC12oDRjVpTbT9EQ5KatpTSeUbFEz
+ m0b9eWrMelMf0m6g92wuxFabACVvuRzTWAr1+K3Y3Bni9nBvV7pLREE7Xc6vy9+1
+ 2lCAGNXrqybOioYH/LjPz0waOmddM7Gv6FulQrJjzU9Oy3kZv7yQb/LzOPpLqCpj
+ ovu4Rfa39jg+D1onUGErnw0PmUDeLu6+vHALDNYnYSELoUuQp4jnKV3Xkno+aNMc
+ gUwu85ibKTBz+TmbcyTQCzspI+LB8MpnbXApt7BwfKMHAGdQInT2x7xueVq8j3Co
+ byCqv/FE/VNrpMMjJZWbDCdAjRQ4Y4a1FlVCqQ6NU3JFyw==
+Received: from mail-pf1-f200.google.com (mail-pf1-f200.google.com
+ [209.85.210.200])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4e46s9w45a-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <u-boot@lists.denx.de>; Wed, 13 May 2026 16:06:05 +0000 (GMT)
+Received: by mail-pf1-f200.google.com with SMTP id
+ d2e1a72fcca58-82fa1c94b37so7681449b3a.0
+ for <u-boot@lists.denx.de>; Wed, 13 May 2026 09:06:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=oss.qualcomm.com; s=google; t=1778688364; x=1779293164; darn=lists.denx.de; 
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=/HKmuUdxXXple+YsxDzQk94oK+FkexrvukhzNM3DPaI=;
+ b=Q1PaszODkFyN1cASCFf3kiZwUQi0WN/4Ubb/HTfYAqkHf8v9BfvpkjsOctVfy5bJW4
+ Vrq8kuDCQGuTVufwn29o9wztlEjIsLwy3yWTF8Ac9YvNu9WkANv/nL6NKsHUJw0kl/uu
+ K5LkIZJDl+A2E7a7l24SbsYWl5cJEVAnII1HCKrOkOnIpkhgDvXBxGRIQdmCyF/2EHsU
+ XUKc8w+e1Xpk4z604pwo/Ie6GYrvocaYYEBEtMOPFG+BLlU2K7yilTCFIvMuMSI7eLfB
+ VQLaxquGB4UXXbnM9wjDrKTpchSXTt/7Gyhormqj5thHVHSeIvkAj6kX3j41wEj75hds
+ xllw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1778688364; x=1779293164;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=/HKmuUdxXXple+YsxDzQk94oK+FkexrvukhzNM3DPaI=;
+ b=lehTYPumv0ywLoV6CdL+pCsKUmwc6jqyDKwomlVPYlSZCeIFBR2+AqGls3iA/bVE5r
+ fdhp6L8UHG2AIp37w/g7OG6fw1ubhJ/Ae6m8wgP7gepBEC7bvTxCXL4FDr1h/+m9+Hi/
+ 5tFxTMMw1crzayuFcJ1fJ+of1V6Z4X4Eyglpj6BUY0hrEDy352nkwUPC7WecbRrHfSn4
+ 4otc1FygNhz5NoXZMePIOnqpXwA+2rqsmYc4SXegj9qpK1fj5zhbJ65D+gRUJV4cjo8G
+ pc/fIlNdNQAq0xxi6FwGOq4DazfN1I0vRKxDoGwyHcL30UPl9zOZJkqZBXZTLCfrpugk
+ aoAA==
+X-Gm-Message-State: AOJu0Yy161sQSxyafiU8IVDAmNmxzZDZ9Vttmh9o6E7ix2NiNluRYa2D
+ PPkts8rcFP2zl5DyGSJnKK1lxELOL0hwcL+ApLOolXATUxoCBLDzA5+9nH/llaQFilRYo+CeeqZ
+ UXsY62AVFnPvtHBOqlx0IraUrh6LJmgNgtyZdIsHPAfjRwXQgJCbJ60PWWOapFhW3
+X-Gm-Gg: Acq92OFjAbMU+v5+0Vz4yiZ8KDzmayPiQ3WHAPNB/CV1T4So+rx58hNT1FNtMIw8OK4
+ Q/hYdeDeaxsNtPNiB0h8DDNsvBaMoYzMuunhwcwiOd1Xw1RHRh4hiVN9Koj9eXOSDV+ffI/AQVI
+ gqgzEhOMfscn68RgpZ31kCGkinY44DF478XtJgq0cH7iy9GaaYzeaSwpJOTtZBv0qMQSquz5E1t
+ 7h++w1wfEDJgPZPkUCauru3wOSKuq0W62tbgcW1octTuRAJqgZikcqr/ASwkNPBvVGOiSE7sqgC
+ ntRQ4u29Fs9n3NDcr5StAYV8TJA8oVXC9WWMzcaQ2PXtXXmtrYjOR07HVzv+JUIMhNEriIHn+QF
+ 1KJzhPbu29siOBi0rFs7MSlY33TA6/gMxtaD6hZ7ewlSuNDG0XmbtPlgAimus3F6KqLWxzCX0VJ
+ rVTyzrHYfV7aSwVUaUUxdB2W8woIkYWTDrKcu4WuyEtjztBpH3pEE=
+X-Received: by 2002:a05:6a00:368d:b0:82c:7420:82bf with SMTP id
+ d2e1a72fcca58-83f18e7a624mr95208b3a.19.1778688363780; 
+ Wed, 13 May 2026 09:06:03 -0700 (PDT)
+X-Received: by 2002:a05:6a00:368d:b0:82c:7420:82bf with SMTP id
+ d2e1a72fcca58-83f18e7a624mr95155b3a.19.1778688362825; 
+ Wed, 13 May 2026 09:06:02 -0700 (PDT)
+Received: from hu-varada-blr.qualcomm.com
+ (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
+ by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-8396563f38fsm26321201b3a.8.2026.05.13.09.06.01
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 13 May 2026 09:06:02 -0700 (PDT)
+Date: Wed, 13 May 2026 21:35:58 +0530
+From: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
+To: Michael Srba <Michael.Srba@seznam.cz>
+Cc: u-boot@lists.denx.de
+Subject: Re: [PATCH v3 04/10] misc: qcom_geni: Add minicore support
+Message-ID: <agShZibHyuPCI8JA@hu-varada-blr.qualcomm.com>
+References: <20260416053928.2834699-1-varadarajan.narayanan@oss.qualcomm.com>
+ <20260416053928.2834699-5-varadarajan.narayanan@oss.qualcomm.com>
+ <37198853-5546-405f-90e3-54ee98e15744@seznam.cz>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: LV5PR12MB9779:EE_|CH2PR12MB4070:EE_
-X-MS-Office365-Filtering-Correlation-Id: b9eeddfc-4f86-4232-234f-08deb1024c3d
-X-LD-Processed: 3dd8961f-e488-4e60-8e11-a82d994e183d,ExtAddr
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|376014|366016|22082099003|18002099003|56012099003|11063799003;
-X-Microsoft-Antispam-Message-Info: oGK6z5mbPU3nqfsK2FyX+7xdx0QjB7qaDBRJFqCzDnHHWczmLhNwzU86EuSkR2x1BCBBkQ/CVmEE1ELVx32ikb0zUeQOl0vU+2mwGJXLKgUOGu59//xkq633Wu+HoeCMi/oO+4llpthBzrPqiVnmeI1p08MYrbJDXZ26XfNklwgwk7nKf0yXrtqgmuB3zxpzb3DTQwXw9ySBH3oZfNeCUDuVuQK+UV1zbZU0eKL8yWS9yCX3ChQACkUxs5sAyGLTyLS5DoPnWZf1q/158nl+znJcnvPB51wgsHVtgUIvZiN9iWUXmYyajE15CtB8CtTNf2ZwAJBuwMZLfP8n600vmtgM/WbCDd5E3jtF9cWaNrWHMvsNskLDY/Lw3fl5ugfN1w8psXnpOr1aEkKtQ8UgKDhZ/sVQFV8V3XwqxlZW+U8W6iX1aaSTUzZj6mcvJS8HYHkdGcjunbXkhYBQebaX87umFhl2ebiZiKFFKfER2PoJlwREee2Pb+KIgOPjSZBCYk+66NwCvdkPSCoaC8bYOouEK81Tl9G9650VCqXJKNpojcr6W7JeERZDM3kggL5Sy3rsfjRjMMVPdkZkLF5k2QMG+syw0IsbTC+VGzW/GQldXf3UkEvYWran4nFdYTnfnT1ewmjYqqAQe6AcLiTCdingKpH3nLf8ZsbA7plN42j5obDIcAB/ann4qNcVjlnA
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:LV5PR12MB9779.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(366016)(22082099003)(18002099003)(56012099003)(11063799003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?U0VxVWFoYXJ1cVFNb2IwS1FYaE1xZHJZdjRRaXZCbk9tcWE2MVdqQ1FVNlRJ?=
- =?utf-8?B?Y29qMVdMRFk5MHowOXFZZCs3NndEL1hiei9BaURmK21jeEhxV3d5ZnNZSjlI?=
- =?utf-8?B?UVZzRWtTMmtEdEs2THRwa2FvOEcxaitqM1ZTcWpwaXFiOVpsbWE1TnNIYXl5?=
- =?utf-8?B?dXRJaUxVVEdWdzFrYXNRYUZJTU9Wclg5RHJtakt4dEtVR1cvMFVPZmFTd0RT?=
- =?utf-8?B?N0FhcmY3UnUrSTJaVkpXQmlBMnMrczlQTSs2L3REczh0UFp1S1FOOWUyaG5l?=
- =?utf-8?B?TXREUXoxZnlKTmlSOFNJR1lWTHVPU1RlQU5CbnNlbnFFdG0vN3Yxdi9mNkg3?=
- =?utf-8?B?azNiYnErMGdIMHIvSHA2eGNhclpWdExRSUF0Y1JpckpjdWE5bFBTS2IvdVg0?=
- =?utf-8?B?RmVBNXZZNm5Na3ZsTlFVaWkyUjZoaCtFMFppRFlKOHRqSlRBdzNSbkdqNHJE?=
- =?utf-8?B?MmxOYWpLUEFIbU9CNGdRc2paYmkveWZ6aG13SjhXY2sxenJpdWFQZ3NzNDZF?=
- =?utf-8?B?YTAwMVBkbzZWSFFERGQwV1NqYmhVVHE5bWpXS1A2ZkozU1F5bWQwWFQxR05G?=
- =?utf-8?B?NWFaSXN4ZFpsWU1PcWFOMUxNVCtVYkFqNVg2cmdoNENVajFQRnN6T3h3bGVy?=
- =?utf-8?B?VkMzV2hYdXpLWUtWMTRiUER0dGJyVVJ5WEhVZW1mZnNEM3pFTlcvb2VQSm5I?=
- =?utf-8?B?MDhZWit6TDFpbk9lRXBnMytHck93cVg4S0Qzck1oMXM5SURvYXk4U2xYVjJB?=
- =?utf-8?B?c0NqbWNtUEpxa3hGeEVXWnY5cGphamxVd3pncmRXWlVmMGNYVHFEV2U3d3ds?=
- =?utf-8?B?UERRM0Y5UmRGbzZrRWZTWFpxRXBBTzRHOUplb1FteGZZMUxudWNneks2MDdD?=
- =?utf-8?B?eHdMQ3VwcW9QWFl3YTByaXhpT0RpN0xLMWlLUjJQaDhoeDZESnczbTJ6dEV5?=
- =?utf-8?B?aVdhclNlT2czQytZYnh2Mm1CU0RibHdzdWpvVklpZWtmNmJ6VFVzd0dyMnMx?=
- =?utf-8?B?K2xYRU5IbHZKTkJtNTF0ajg4eExseDkrMVpYUkJRcno1MDlRZy9JdHplK1ZV?=
- =?utf-8?B?RUF4RGJhT3BQOWZuekhZSmJuckUzenZFRFFXejl4VkQ4Vkdkd0wyVDZGT1ZY?=
- =?utf-8?B?Q2xFaHpWZ01hbU8rK0ZTWVVKSDg5RDNxblR5VmVLM0hTTEJsNjlzMXJQVlBZ?=
- =?utf-8?B?WnNxdndrVUdpY1ZGVVNpRW5sVXFvdXVaNEpuOWVzV3hyS3dzbERhNnVuUnM2?=
- =?utf-8?B?TjZoc3FsSzBTYmd5MU1qcDVtNjZmRkNpTDJUK05TZTRwTHJMSUNJcW1zY0Uw?=
- =?utf-8?B?dXZ1UGdEcm1tMzJnaWt0ZnZYQlNHT2ZtVGxlQ3RxQUdUNDZNRHZHSDJEdThx?=
- =?utf-8?B?WVRHUVlnMW5tTDdCVEd4d1NFNkF1c3FpMkQwM0pGYldMM3NKb3ZSK0VwWmFi?=
- =?utf-8?B?RlIzdC90Y3NDNXBoY2NFWWI3RkVLQ1JVT1UwaXZVc2R6UnR1QURqRTBTRVNo?=
- =?utf-8?B?VVBNR2hpUGpxdHVrY00yN1llbVJxbWFSRDRFejl5Y0JQa2owUWJKTnFDcEFv?=
- =?utf-8?B?WS9aL3dGQUxRZTNabThaVklkbDVwS1p6dlpPRGVDUk9JM0ZjNFpoOWVrYXJl?=
- =?utf-8?B?SlZydEtpS2VVVWRLVXpnZGJmeE9KRERMOXBkTDVzQXhELy9qU1pMY3pDWWtn?=
- =?utf-8?B?ekdVWng1MjZWckk4S3N0elFkM3c0ZG1tWG1GVC9tdE5DUUNHeGFDMzE3ZWNO?=
- =?utf-8?B?eEtETDZxekpsWTU3di9tZzFpenJ5ZThqaTh0dHdtZmxPeDJkYUQ2MnhxZHJC?=
- =?utf-8?B?NVlLbWNMODJ2WTJhUkZrNCtvZE9hRU9kVmVxRTdHc2dDTnVuUmdRbkZLZm9q?=
- =?utf-8?B?OFkwbXVVcCtQY1FJait2K1hYdGdub0lOSW1sVHQxbnNLVjkyRFI2cktWQUVI?=
- =?utf-8?B?SjZUSFNMa0pBR0l4dnpsQTNvRDdNRStlWHQzbHp0b0lCNFJxaGVYazcvcndZ?=
- =?utf-8?B?MmtHMzQvcmQyU0N4dFVXWHZEUSs2UklOQlNHQmVqeGRHbEZiK2E5SHFLM2x1?=
- =?utf-8?B?RW5vQU82U0dHaU5UZW9peWpLNmc1M0F0eUg3MXErN1ZHQnE5L2g0ejJhb3cx?=
- =?utf-8?B?b2V2V3I0TWlIY0k1eSs2NHJvR3hwU3ZoZUtQQ0VMTWs1ZXlJVnhqd0psWEJL?=
- =?utf-8?B?VTVuejN0RWNSdUFNTnpLdkZ3THVpQnV2Wk0yYXBSZml5STR3a0w1K1IraHYz?=
- =?utf-8?B?Mkx1SUloRElCYmJ3L2NGYkN6Tmt5Vno2VVV6cUdJVVN6MTQ3TVhyei9wdUdh?=
- =?utf-8?B?VmVITHM5T0M1VVdmR1VSZm1GdUp6RWEvcW4wVTBUZllLVGF6RXB4QT09?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: b9eeddfc-4f86-4232-234f-08deb1024c3d
-X-MS-Exchange-CrossTenant-AuthSource: LV5PR12MB9779.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 May 2026 15:14:16.1429 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 90gkJeFijXbLl0NZKENBL3pVyK+T06NPCbpkj6Rzf67ARSVlsPBlxiCzyMdEbAj3
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH2PR12MB4070
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <37198853-5546-405f-90e3-54ee98e15744@seznam.cz>
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNTEzMDE2NCBTYWx0ZWRfXw8jVLKv8aUtk
+ bdGV77+vIelNgfwuTYG4uMz2KWLME0ihVQN8XS8lyWaQIAyx53S+5OUSa+omLHVb54cs57kyfwr
+ lkmgZPK7ADQZRboJBmhYh6PKFWmLnPUX+DdWHUao6zBSR1zT3vuaRDkgU+P+tm702CxiYMDZmkq
+ baR7LVtOaBAamxipLW9ZsoiBidTeQAdMTbNIQ285MrA6YQ9uHS6PETTOdCbltefHIyys/0hr29k
+ PuPYPXaywocpWjmI7HHHbzdjF3+EpziXq/pBVh5V7pqynp90IAkMTfPj1uvwtJFkqfs+sgeVOxk
+ 22vPJCXE9V1z7fXHiphUmfQM4rjjhKZKDX2eF78zFTNeqGQ9VNFkT/1L1gTbiReBlUVZMxQp5rZ
+ v3o8/0OfHDoC/ILQqUVaLfG2B/0waYwz2DCT7DLZdFWn7yFNkaKIEKfuOR7ZcTH2xpY1ol/vAiI
+ EWd6J1uO8rCpCEmCgZg==
+X-Proofpoint-GUID: pKrc2ydjZGUlNTKd8XSo9PdlEyEJZEZ0
+X-Authority-Analysis: v=2.4 cv=L68theT8 c=1 sm=1 tr=0 ts=6a04a16d cx=c_pps
+ a=mDZGXZTwRPZaeRUbqKGCBw==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+ a=kj9zAlcOel0A:10 a=NGcC8JguVDcA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22
+ a=apn0q0EWAAAA:20 a=VwQbUJbxAAAA:8 a=gb_dzryzzhddaQT0KEQA:9 a=CjuIK1q_8ugA:10
+ a=zc0IvFSfCIW2DFIPzwfm:22 a=bA3UWDv6hWIuX7UZL3qL:22
+X-Proofpoint-ORIG-GUID: pKrc2ydjZGUlNTKd8XSo9PdlEyEJZEZ0
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
+ definitions=2026-05-13_01,2026-05-13_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ spamscore=0 bulkscore=0 impostorscore=0 adultscore=0 priorityscore=1501
+ suspectscore=0 clxscore=1015 malwarescore=0 lowpriorityscore=0 phishscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2605050000 definitions=main-2605130164
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -196,94 +146,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+> > +static u8 cfg_reg_idx[] = {
+> > +	/* 0 to 18 */
+> > +	0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
+> > +	/* 64 to 113 */
+> > +	64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80,
+> > +	81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97,
+> > +	98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111,
+> > +	112, 113,
+> > +};
+> This [1] says "Configure GENI primitive table.", and I have a sneaky suspicion
+> that only the first part is actually that (iirc the Linux driver even errors
+> out on writes to anything >256? I don't see any bound checking in u-boot,
+> which is worrying...).
 
+I see that the same loop is used both in U-Boot [1] and Linux [2].
 
-On 5/13/26 16:47, Simon Glass wrote:
-> Hi Michal,
-> 
-> On Wed, 13 May 2026 at 02:53, Michal Simek <michal.simek@amd.com> wrote:
->>
->>
->>
->> On 5/7/26 23:11, Simon Glass wrote:
->>> Hi Michal,
->>>
->>> On 2026-05-05T12:30:28, Michal Simek <michal.simek@amd.com> wrote:
->>>> reset: Add sandbox tests for reset_reset() and reset_reset_bulk()
->>>>
->>>> Add DM test coverage for the new reset_reset() and reset_reset_bulk()
->>>> API functions. The tests exercise the assert + deassert fallback path
->>>> since the sandbox reset driver does not implement the rst_reset op.
->>>>
->>>> Signed-off-by: Michal Simek <michal.simek@amd.com>
->>>>
->>>> arch/sandbox/include/asm/reset.h   |  3 ++
->>>>    drivers/reset/sandbox-reset-test.c | 14 ++++++++
->>>>    drivers/reset/sandbox-reset.c      | 31 ++++++++++++++++++
->>>>    test/dm/reset.c                    | 67 ++++++++++++++++++++++++++++++++++++++
->>>>    4 files changed, 115 insertions(+)
->>>
->>>> diff --git a/drivers/reset/sandbox-reset.c b/drivers/reset/sandbox-reset.c
->>>> @@ -66,6 +69,21 @@ static int sandbox_reset_deassert(struct reset_ctl *reset_ctl)
->>>>         return 0;
->>>>    }
->>>>
->>>> +static int sandbox_reset_reset(struct reset_ctl *reset_ctl, ulong delay_us)
->>>> +{
->>>> +     struct sandbox_reset *sbr = dev_get_priv(reset_ctl->dev);
->>>> +
->>>> +     debug("%s(reset_ctl=%p, delay_us=%lu)\n", __func__, reset_ctl,
->>>> +           delay_us);
->>>> +
->>>> +     sbr->signals[reset_ctl->id].asserted = true;
->>>> +     udelay(delay_us);
->>>> +     sbr->signals[reset_ctl->id].asserted = false;
->>>> +     sbr->signals[reset_ctl->id].reset_count++;
->>>> +
->>>> +     return 0;
->>>> +}
->>>
->>> Reviewed-by: Simon Glass <sjg@chromium.org>
->>>
->>> Some optional nits / thoughts below.
->>>
->>> The commit message says the tests exercise the fallback path since the
->>> sandbox reset driver doesn't have rst_reset op, this patch adds that
->>> method below - so the commit message could use an update.
->>
->> Will update.
->>
->>>
->>> If you want coverage for the fallback you could add a second
->>> sandbox-reset driver without rst_reset, or hack the rest to clear and
->>> restart ops->rst_reset,
->>>
->>>> diff --git a/drivers/reset/sandbox-reset-test.c b/drivers/reset/sandbox-reset-test.c
->>>> @@ -96,6 +96,20 @@ int sandbox_reset_test_deassert_bulk(struct udevice *dev)
->>>> +int sandbox_reset_test_reset(struct udevice *dev)
->>>> +{
->>>> +     struct sandbox_reset_test *sbrt = dev_get_priv(dev);
->>>> +
->>>> +     return reset_reset(sbrt->ctlp, 0);
->>>> +}
->>>> +
->>>> +int sandbox_reset_test_reset_bulk(struct udevice *dev)
->>>> +{
->>>> +     struct sandbox_reset_test *sbrt = dev_get_priv(dev);
->>>> +
->>>> +     return reset_reset_bulk(sbrt->bulkp, 0);
->>>> +}
->>>
->>> You could pass a non-zero value here if you want to test the delay.
->>
->> udelay is called and because there is missing check for 0 value it does timer
->> reading once. Don't think that make sense to delay tests.
-> 
-> We try to avoid delays in tests, although 10us wouldn't matter. We do
-> have timer_test_add_offset() but I don't think it helps with udelay()
+> Also, these are registers with names.
 
-I have created new version and also test fallback which has 1us delay there.
-Please take a look at that new patch and this part should be covered.
+For some reason, this space is arranged as 2 blocks.
+	1.  0 -  18 regs, from base to base+0x4c
+	2. 64 - 113 regs, from base+0x200 to base+0x2c4
 
-M
+These registers have the name GENI_CFG_REG_n with 'n' ranging
+from 0 to max as aliases and that has been used. Since we are
+dumping the content to these registers don't think names are
+needed here. If the registers were in a single block instead of
+the above arrangment it is just a memcpy_toio().
 
+> Since the firmware format can't be changed and this just mimics it, I'd say
+> it would make sense to improve that comment to explain what it's actually
+> doing (since it's setting more than just primitives, whatever that means),
+
+We are not privy to the information that is held in this array.
+We just get this code from the hardware block owners.
+
+> and if these indices are going to be in this array anyway, why not replace
+> them with defines of the register names? Or are those SoC-specific,
+> seems that whatever ones the driver is accessing by name are pretty
+> stable at least.
+
+Registers accessed by name are not part of this block.
+
+[1] https://github.com/u-boot/u-boot/blob/master/drivers/misc/qcom_geni.c#L204
+[2] https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/soc/qcom/qcom-geni-se.c#n1251
+
+Thanks
+Varada
+
+> [ . . . ]
