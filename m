@@ -4,108 +4,125 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6FB80CD4F24
-	for <u-boot@archiver.kernel.org>; Wed, 13 May 2026 09:46:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B935CD4F24
+	for <u-boot@archiver.kernel.org>; Wed, 13 May 2026 09:54:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8C8CC83FB0;
-	Wed, 13 May 2026 11:46:37 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id AFAF8838BB;
+	Wed, 13 May 2026 11:54:55 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="si6p20Nc";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="fjPy2Yjs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4694084099; Wed, 13 May 2026 11:46:36 +0200 (CEST)
-Received: from mail-yx1-xb132.google.com (mail-yx1-xb132.google.com
- [IPv6:2607:f8b0:4864:20::b132])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 023FE83E36; Wed, 13 May 2026 11:54:54 +0200 (CEST)
+Received: from PA4PR04CU001.outbound.protection.outlook.com
+ (mail-francecentralazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20a::7])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CD1858341A
- for <u-boot@lists.denx.de>; Wed, 13 May 2026 11:46:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2825D8341A
+ for <u-boot@lists.denx.de>; Wed, 13 May 2026 11:54:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yx1-xb132.google.com with SMTP id
- 956f58d0204a3-65c477a3278so6555976d50.3
- for <u-boot@lists.denx.de>; Wed, 13 May 2026 02:46:32 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1778665591; cv=none;
- d=google.com; s=arc-20240605;
- b=Gb+ibUbQ2D2xoi2ShjyGmf2PACQNpbKBZu9WM06V2WufUsfKH/zYRp1FB9Drm1LGFC
- yJyfYf1o4PnHxJDGBnV1WImnQhDSI81eGxj2BC5bKnKUDeLJh5BG7ZzXqwZMjvIio5sS
- b2uozi0Z3b6GvRoBl8GaeG/S2KPoS5w2CB9vGWR5w+uraxbmPHXRn2kpZ6VjfQUcfavp
- 3Q+YxXL4GhROlaRjYDaUECkXki+WrZ7KRKFTJ2bZ5i1B4PYDE2qd7Z0CO3pbLXZB9Fbg
- M4zP7Qpsel1MejdcElheUeKvIqkrJU85KT+DPuDA6odKv0LlaqGUVw0K9iujcyI9lYTS
- slBw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=dkdO8PZC5jzxelQnoWXil1ZcUQNQMeBpw8/tEFyUdKw=;
- fh=afdFkhg+X0dJedjeczr8qfrLvDZpz9MX/GqWAgIgc5U=;
- b=TVAsHHreE08YmSOqO+XB3XSIhV5rQWC+odHcEigQv240hAXHG6hDhzW9eztKor4CkS
- dBdwknZVoshYy2ENcobP2JYpARwGkEpH6+63hSCy88iSXU9LO6tZtUAmNCXqPo267+O2
- YEoZPxqepRc1CvEJDWBTguo9y+u3D5M09yhm6K+KQCLaMByjvYAFb4JuFwG+skt2jzXW
- HRuOEnXeLfCa1JgHA+aVXyJImHKPOq3+nrJ6DSusZImjOu8DzpP7IKLXxZ/IbfvXnIY9
- Vz0fmqRJK+AspCsmsuQdkHM2UZsMZHMLR0iHsPq6qUjzeG4+xvGzh3cqVmx7ytp5Jrak
- EuQg==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1778665591; x=1779270391; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=dkdO8PZC5jzxelQnoWXil1ZcUQNQMeBpw8/tEFyUdKw=;
- b=si6p20NcT5pEX9ZWZYS9ZWEC7d3x0NcXXlh4VEj3ef1JDK/g89igHa5r259kFm5lXr
- kN5XcRRfmfNMySQJXIV4ePtfGLAY5fyhTsdhVJrWZdy2vACDUdNb5ATiElylXeao5rYe
- 6XXpeDCy1P8MMv7APoNCFaXBr2oVRGkievA2ALtqPTG7zkTEWKUoOC5/fhuqXVc6GUqz
- EhHcCMQ7TA/ZhfejrqB3eAW/R+Vt5q/ten6GlJsZTgOvj+BLbb3StBw7O6bkNvFXEmxP
- 44efBJ/6Y2N3Dp92p3Pwi9yESsl+En22saSWPmwIeOUuVFFUUrkus7v3cpecQ1J+7kow
- EGDA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778665591; x=1779270391;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=dkdO8PZC5jzxelQnoWXil1ZcUQNQMeBpw8/tEFyUdKw=;
- b=eJa/VSXlDHZQgXZXAJl0Ycf08bTShpfSnwNBHcgatLgObyosufvyPZXyv7OFyfkwAA
- Ekm9hIGW1AewnWjUvIRGnkN9kVfqAFMYBe6s01QEjlbRV6hcqfKkn19jHoe7TzitnXzO
- h0UIGc9Bu4LWWOlWeABAgOHDB/zL9mFz6zHFmevBp+Kl2g1H/6FllEiBg1snQyqo+Yf4
- 9Cq6U6uDbay5tL686ZXM/ygYoLCM6Px1mi6mpdJqeYkjAXh+GSync9Ba7RTkhPVI8w4K
- rA/ndFri/Mq1IWek3UDVvejNQRUSmEu/gAj9esA21UYF53mWGDONEeJkJjO7OGl/cL47
- zM5g==
-X-Gm-Message-State: AOJu0YxALUU0rPyqRSbIDBtxtqaVbMuAvFdzpk4rNdQtMR6+NpQkygII
- MZtuJ1ZP1uyUipDa1ZZqJx2pG9ue20h6Go+dxHZkn3BekvgeAWNQnDJ6xQII9nQk1zPG6xE3iMs
- Qc8add/qcBlO0V4Adn0Ect+LPLZkxPY/ZqCmW7VsNow==
-X-Gm-Gg: Acq92OH6W0zPKEjqVET9mmU2SAMO9B80/F9HfqD77I92y0cSK1EC51EEqJBmPVpPGr6
- 0EidCv7NM5r1Kgzz/wJ0fWn1lsxRwRugvFQrUus8/hPm+PiI37F+aHf2xgrHW6YLYtNy7yGxDet
- ypD0pf2R2qZi8JwY86iM3GYl4O4QH/SzkVIhpBqL1uEnkezf02fqN3dLccsXekUoc6VrD4SpaUz
- 1zkfeM0oZcDo3jGqhPJPLwacrFWgr/OoeU86rFW2Px3RrpvOB80tEWnCUcF8K15s7Q6flgqjGSP
- 7gy6qyX8dBSiwRGMXgtwhnoGtqfX++dlpDcVnfKm+Mu6VbFE2Ag+vHKVXSXt5ItBHW7xQSikeJj
- kOnAnJM3aW//u/dOjUEMRr09QKuRn63p+PfS0qjXP6XcvAQwHR4v+5y/ox0NSrQTIl9hSbikYTu
- 3xtVyBw1Fv75p/dKVE2hNdk1JmNI1BdIFoUwLd6ZwCqDVhWVAPaKLKWl5/p9SvQRQNuGJnRdcdx
- HAPOnnr5yM0tdQGeFoOz7Y9Uvy1aUCqXzQ8ZMLckyWhZMpBJRu4dB/6vmEG/Y+gSXx2/hw8r6LN
- 3OT+6JoTGg8b0CXQBoIJKCpu/0geUgPZ8jirvtOdSKPCMIi3mybmlN/hbmw4qNirn6Xa+HMLeVM
- /vnlhSg==
-X-Received: by 2002:a53:d018:0:b0:651:be50:af09 with SMTP id
- 956f58d0204a3-65df80ce266mr1727101d50.3.1778665591510; Wed, 13 May 2026
- 02:46:31 -0700 (PDT)
+ spf=pass smtp.mailfrom=peng.fan@oss.nxp.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=ipTNY+sUEppDS4L1NA03GDI0zbXRSH9NH4PkBucUMpdFNCV8bvCSwCzImBfKzob5TCcZ7Y50Qc6DAktVtb5ZiqMsCktrVpy0JtT2vGpuJtFP7iecaFz9hGqRcnmRLiY1S2qc7q0dHAgq/nHfWJPHZMB0P8I9bF7iT/ocWC5pIQqObqMDGmRWxHOy2r8HkenLIiqG8OuNpxnPCDgJ6VpbV3eNs+yZ+bymd5jn19wdaxNNnfWiqGGY8rDmdHgekC5AnIgSNqWAiBC9Ycg2IgmeVpX2V3wtvzEtea1JzfD8nuB4fNFXa2wDCK8uL5Btp0DVtJXXVVUiqzFMwuzNDmjUNQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=4zDedNwQnQEe/R5USs2JMdSkkKUQ9V6UyojfY3w7AiI=;
+ b=vkzJch9y8g+AidPmtMkYb986zaAt696xUfH+69QUYOANbnx98nvkVseLRAzNaH/69a3ZbPYNPNVqL1ueJ1ds+AxP9l8RY44oxrpKVwbjLkF8LNZeNd9iQRlOGT6L0Fph5TyLvhDdPhk/RQeXZSfuGgb2yLOY6B7f/oXiK2VfcDqmwM4T7eJqfbU7kFvKUvddi75cvN7pDdhsMs25WYXQU/FeHkVuPNLBQ4iEZ+rEtC2bJ/FLRJc14OvRQyfG75jZaESVQmQQZPLu5wS+KooolOeo942RJk3MjdyNAkdGei9crqsNl6IvPWpR3fOuO7nVZHjCRLHVrc0slFPNegKWSA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
+ dkim=pass header.d=oss.nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
+ s=selector1-NXP1-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=4zDedNwQnQEe/R5USs2JMdSkkKUQ9V6UyojfY3w7AiI=;
+ b=fjPy2Yjsbup+9Ddn+y7TVYejxugkLag8Jip1H9mFks98i5vKzc/5oLOg4vtnRnSC+D8Bzv/0Wt3z4OCcR6EJ/Pvhf6XP8KliK2ikTbyZHvnq8jiuBCCx9hdyzFec5gu76LDtF65Kpe+cRydWEMmqsQ4qMzZiHp+vqEEh7+xjYJ+EjmSNNY/jzggejRS7KgWdFcgtcF2KSIBHNUXDKba3YRpKPByzgbZMTbEAbELWY5ShP+GpAbUTSQUsqHyyziFJ0z6npFd+xP9KdJDVFwf8T7YW4KYe+Mvei8glUy5Smv1gqNTIrc8xpuV5UBOK84lW0+/NRFcHW3ImoYL5uW9E0A==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=oss.nxp.com;
+Received: from MRWPR04MB12330.eurprd04.prod.outlook.com (2603:10a6:501:7f::23)
+ by AMBPR04MB11788.eurprd04.prod.outlook.com (2603:10a6:20b:6f7::5)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9913.11; Wed, 13 May
+ 2026 09:54:49 +0000
+Received: from MRWPR04MB12330.eurprd04.prod.outlook.com
+ ([fe80::ca22:f8c8:6aca:7889]) by MRWPR04MB12330.eurprd04.prod.outlook.com
+ ([fe80::ca22:f8c8:6aca:7889%6]) with mapi id 15.20.9913.009; Wed, 13 May 2026
+ 09:54:49 +0000
+Date: Wed, 13 May 2026 17:57:33 +0800
+From: Peng Fan <peng.fan@oss.nxp.com>
+To: Tanmay Kathpalia <tanmay.kathpalia@gmail.com>
+Cc: u-boot@lists.denx.de, Peng Fan <peng.fan@nxp.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>, Tom Rini <trini@konsulko.com>
+Subject: Re: [PATCH] mmc: sdhci: Start status timeout after command issue
+Message-ID: <agRLDbHj6jTXsJ9t@shlinux89>
+References: <20260509175932.263105-1-tanmay.kathpalia@gmail.com>
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260509175932.263105-1-tanmay.kathpalia@gmail.com>
+X-ClientProxiedBy: MA5PR01CA0206.INDPRD01.PROD.OUTLOOK.COM
+ (2603:1096:a01:1b0::10) To MRWPR04MB12330.eurprd04.prod.outlook.com
+ (2603:10a6:501:7f::23)
 MIME-Version: 1.0
-References: <20260512-b4-mmu-unmap-fixes-v4-0-fab802f647c9@linaro.org>
- <20260512-b4-mmu-unmap-fixes-v4-2-fab802f647c9@linaro.org>
-In-Reply-To: <20260512-b4-mmu-unmap-fixes-v4-2-fab802f647c9@linaro.org>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 13 May 2026 12:45:54 +0300
-X-Gm-Features: AVHnY4LQ_zlq28wp5o_Q3Ho08LKZB25zT6TwsKxfQ4R1p_s87fzd-ip10PlcOL0
-Message-ID: <CAC_iWjJnJ4T1F4difHoR8k6DPj5BmHeqjCeTtJ+jqc0Yr6RhMQ@mail.gmail.com>
-Subject: Re: [PATCH v4 2/4] armv8: mmu: teach the pagetable dumper to show
- explicit FAULT maps
-To: Casey Connolly <casey.connolly@linaro.org>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
- Anshul Dalal <anshuld@ti.com>, 
- Dhruva Gole <d-gole@ti.com>, Mark Kettenis <kettenis@openbsd.org>, 
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Sumit Garg <sumit.garg@kernel.org>
-Content-Type: text/plain; charset="UTF-8"
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: MRWPR04MB12330:EE_|AMBPR04MB11788:EE_
+X-MS-Office365-Filtering-Correlation-Id: 46646a04-67dd-45c0-32b0-08deb0d5abac
+X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|19092799006|376014|1800799024|52116014|366016|38350700014|56012099003|22082099003|18002099003|11063799003;
+X-Microsoft-Antispam-Message-Info: Q/KxKcK1XNy5hwiick7aigM7319INJJI2/tK9ousnTRNOT5+ScWTRpRkVqeHJ+z3XUymi3Ol3l2NwdniBWDNQ/EO6Uc3Y2bJL+lAQ0nAzAet4MB0p14p4YqZ+CT/vJVnUQocaSf1VRkEMcS9yoh9zj06nzmzVmQU5JLP4kXLhe5u089cn05EKwxRnn4os40HzPJf4rvWcvLoCVQWrMs16XafHcKT+f4G+4tR3pxOQXv7d5KDtBBQo8wBXNp6zZhsZHv4WSV2A5DIbQkb+FcZBt1Z+oEqSGruM4lXGKV0fGY13nWc+lmGsmjckoNvSjwneNysL0gaiB3Xo8wr+D1peOUDZmHBKAIgCsJkPhzgpYIfk7cTZSHBgBcFoUDHQeuPZ3A3sj98j1H5M0/o15x1Dio/iVzIXyHF0SGeU3cxMOvC1SgdKGGzZPC3y0vSKtzv+KrjYAM1GSKiew7rr56N3gTtX3ozNIR2qYXClqbFFE39YgMJOF6IcezfvRhtcpJ026pdUGN8ENLDx6Py36/If0uk8XKdEpmNU2ElfWJZ4LBEV/i8d9p2M63jz6pmf8ZJBQgodblB21SxWCTsKljijA+70as3Z8Lo2QlGHbnclDBbn72+hKpHyRGXtDVMdrS3Chji3HdGL2j/W3x2Z9VPg9XMgx2UwrieImv0TzeOwklyvBas0C4I0KWWTD0K4Kxjfha2+S68zwva9vu+5N+rLohukrQSMzetZpBqgdo7qayPUzKvZo8dV0DIA/xswXz0
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:MRWPR04MB12330.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(19092799006)(376014)(1800799024)(52116014)(366016)(38350700014)(56012099003)(22082099003)(18002099003)(11063799003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?M8iZFanHZYwA5bE2KA+09KoHwzAYylzp3EZCIz9B778BcXe3HjigLMDUo3K5?=
+ =?us-ascii?Q?syoRsm5zE4a/DZ+ugpo857yPhAVrX8zXvhqqMNcxu5YBhJxJEHMEmeJQ+3ZI?=
+ =?us-ascii?Q?VOayQak5RybdFZsd7hAZf37mGpN3V9cmoHcXhB3ISIQ1KyKEzm1J7xbCKq5B?=
+ =?us-ascii?Q?9DOaXvkfblnc5Zv4QPt3UEhNJZTVa+eZY6at1JPjxQ7D5jqQSeRrhPawoTIh?=
+ =?us-ascii?Q?Pyc1Q6LOdy3NnYR+XEIOvhtKXvl+7xe6eBPv8QBhJaWuJKRsc8qVquNmCtBQ?=
+ =?us-ascii?Q?gSk/c85n9ASPa4bRzQVPEvrc1BLxpF9NbU/CxKDUCpfs9ItHXeqHMqFTHA+O?=
+ =?us-ascii?Q?50H76FTzVMk98Gn8EkHElai9+b19Ee9N/HHPQyyDttJYPAtwLSwelQ2ID8bu?=
+ =?us-ascii?Q?cxo873dIH7fXOf+wOD+MpyRvFbSzuhnyWOb4wMVLorefswaNdb61NkWCKsEh?=
+ =?us-ascii?Q?5DzMtp8m73IqAx/iwb892ubfExdOj8faqatsQZ/T02UH3L5c1jl0+4V1ofd2?=
+ =?us-ascii?Q?TDLrRd9anR52DKyxpMKr64HVl/U5bJ3w4zCtfHqFuC4JQpxe7LBO2o4i4s15?=
+ =?us-ascii?Q?Mj2dCruzHoJvUpRkG3X5DU/fY2HTWHq9A1Ck8heV5ibM2hyAdsrzPm1KOcQi?=
+ =?us-ascii?Q?0oikQgbYwYVRhKLzDb6qtUia+H0IDwCRyzjIvUKg0I9+URw+5qvCttVHGAyR?=
+ =?us-ascii?Q?kqtZ6kk11oYCeiWdXlVWyoEoQbWybG+JptQxXqGK9sQbSinxt2oMv1pw+fDs?=
+ =?us-ascii?Q?OtYiWnuR+H9cuNpwT/HvXdrfJdrmBLex2/2FmNk8OJeCuPtL2BqT6zapNjm7?=
+ =?us-ascii?Q?3+F8+DfYBBZraUmBcnm9bWHhImNlqiR8VtweCNIdneDH5QYVnhyRfMT7jVNN?=
+ =?us-ascii?Q?ycp3rVStlFiCWNvTrefrfLNJQi9FXB9zL9GG1TkRm2SSsdX594Jcx2Pd/lDR?=
+ =?us-ascii?Q?ssivQvlzVROe5LcQDDdP3M0g926/x5YHNo+Xb7nzjm9ZnTNm++kVAiC74NPG?=
+ =?us-ascii?Q?4wo0O1W0SiMwpJ+wqX3P5w7Vt/V3c+16gT3SMhBPTvBPYhG/qVkDXODVqXcc?=
+ =?us-ascii?Q?/mEDsb7t/GVOqTtix97NqERSgiig0oiioVCjz3TKv3sxS3lcEz69BQdSxLM3?=
+ =?us-ascii?Q?LOWdd5p2lnrIzELtgYKS/v8lUmHYpmYYlVG5kr28wbroSzOhmvfM3CkhIxJf?=
+ =?us-ascii?Q?JHY+J5xOZYGPCMZoyHUFYETgAML/vASCPXWW+jaE/xCWCfwZ6rWAY3OPTtSK?=
+ =?us-ascii?Q?Jq9T6rkCDPPCWGA3p8R2B+MfU7pERERoyJ1x0ghmAa9Hw8EReRrWYduy/988?=
+ =?us-ascii?Q?wx87E2i6qj7dsS6BeCGvWtZfONL/LYBryI5v7358fW0Y0tu9mu7mGKvKvmqm?=
+ =?us-ascii?Q?JTOTqlB0lprQpy+UOduwKUIRy7qrQ1aa8wEI2M4XRxh5xAKt2ht9+MOC6kUC?=
+ =?us-ascii?Q?15KczwxtKASK6X1/llPhkS8N6uP9Jw+wd7E9t6YmbNtJD9yfxZTTaW068F7z?=
+ =?us-ascii?Q?o8Fj/voKyc2EUYNta/iFfDTO3G55n2pz/4xzl8x4Kt+lcjXojQGuzPqKCxIi?=
+ =?us-ascii?Q?M2/rda9EHMsBMudj5ie3ogjIGQICEx+JANFIy5OE6GuJ8omzrRqEr1WP57T9?=
+ =?us-ascii?Q?IX5ZkezVrLm+RhxteKQJVQ9rVcJ0RpP39y9wbd1b3qfNwWw/7XCGfGJOv1mq?=
+ =?us-ascii?Q?L8xUS2amoFHYTR/hxtRK8eBaV5vKDyim4chrVtxGcddKRS9WpgOjETnu1jKH?=
+ =?us-ascii?Q?zI9nsM/1oA=3D=3D?=
+X-OriginatorOrg: oss.nxp.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 46646a04-67dd-45c0-32b0-08deb0d5abac
+X-MS-Exchange-CrossTenant-AuthSource: MRWPR04MB12330.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 May 2026 09:54:48.9850 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: eXgTVFAVetVFSVwNmD4R++T+JfnSlmpNWnQUJb3KZ8FUuanOZmJbgixXWHumpIDmidw+KVUzBnwuAfMjrslZJA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AMBPR04MB11788
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -122,61 +139,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 12 May 2026 at 14:13, Casey Connolly <casey.connolly@linaro.org> wrote:
+On Sat, May 09, 2026 at 11:29:32PM +0530, Tanmay Kathpalia wrote:
+>The status polling timeout in sdhci_send_command() should measure the
+>time spent waiting for the command interrupt after the command has been
+>issued.
 >
-> When a region is explicitly unmapped (like with
-> mmu_change_region_attr(.... PTE_TYPE_FAULT)) the address translation
-> still remains but won't be used since the region is marked invalid.
-> Print these regions when we dump the pagetable to help with debugging.
+>Do not initialize the timer at function entry, since the command inhibit
+>wait and setup path can consume time before SDHCI_COMMAND is written.
+>Start the timer immediately after issuing the command instead.
 >
-> Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
-> ---
+>Signed-off-by: Tanmay Kathpalia <tanmay.kathpalia@gmail.com>
 
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-
->  arch/arm/cpu/armv8/cache_v8.c | 8 ++++++--
->  1 file changed, 6 insertions(+), 2 deletions(-)
->
-> diff --git a/arch/arm/cpu/armv8/cache_v8.c b/arch/arm/cpu/armv8/cache_v8.c
-> index 368c622cd18e..36d337378fcd 100644
-> --- a/arch/arm/cpu/armv8/cache_v8.c
-> +++ b/arch/arm/cpu/armv8/cache_v8.c
-> @@ -533,9 +533,9 @@ static void __pagetable_walk(u64 addr, u64 tcr, int level, pte_walker_cb_t cb, v
->
->                 if (exit)
->                         return;
->
-> -               if (pte_type(&pte) == PTE_TYPE_FAULT)
-> +               if (!pte)
->                         continue;
->
->                 attrs = pte & ALL_ATTRS;
->                 /* If we're currently inside a block or set of pages */
-> @@ -572,9 +572,9 @@ static void __pagetable_walk(u64 addr, u64 tcr, int level, pte_walker_cb_t cb, v
->
->                         /* Go down a level */
->                         __pagetable_walk(_addr, tcr, level + 1, cb, priv);
->                         state[level] = WALKER_STATE_START;
-> -               } else if (pte_type(&pte) == PTE_TYPE_BLOCK || pte_type(&pte) == PTE_TYPE_PAGE) {
-> +               } else {
->                         /* We foud a block or page, start walking */
->                         entry_start = pte;
->                         state[level] = WALKER_STATE_REGION;
->                 }
-> @@ -707,8 +707,12 @@ static bool pagetable_print_entry(u64 start_attrs, u64 end, int va_bits, int lev
->  {
->         u64 _addr = start_attrs & GENMASK_ULL(va_bits, PAGE_SHIFT);
->         int indent = va_bits < 39 ? level - 1 : level;
->
-> +       /* Ignore empty blocks */
-> +       if (!start_attrs)
-> +               return false;
-> +
->         printf("%*s", indent * 2, "");
->         if (PTE_IS_TABLE(start_attrs, level))
->                 printf("[%#016llx]%19s", _addr, "");
->         else
->
-> --
-> 2.53.0
->
+Reviewed-by: Peng Fan <peng.fan@nxp.com>
