@@ -4,124 +4,151 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08EDFCD4851
-	for <u-boot@archiver.kernel.org>; Wed, 13 May 2026 07:33:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0F44CD37B6
+	for <u-boot@archiver.kernel.org>; Wed, 13 May 2026 07:40:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 91C9584198;
-	Wed, 13 May 2026 09:33:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 6249D83EF9;
+	Wed, 13 May 2026 09:40:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="NCT2Vr1z";
+	dkim=pass (1024-bit key; unprotected) header.d=arm.com header.i=@arm.com header.b="Gr9aX0R5";
+	dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b="Gr9aX0R5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 143FC84255; Wed, 13 May 2026 09:33:07 +0200 (CEST)
-Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
- [IPv6:2a00:1450:4864:20::330])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 5205583FB0; Wed, 13 May 2026 09:40:52 +0200 (CEST)
+Received: from DUZPR83CU001.outbound.protection.outlook.com
+ (mail-northeuropeazlp170120005.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::5])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3A7F783EF9
- for <u-boot@lists.denx.de>; Wed, 13 May 2026 09:33:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E0CAF836AC
+ for <u-boot@lists.denx.de>; Wed, 13 May 2026 09:40:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-48d102471a4so63233965e9.2
- for <u-boot@lists.denx.de>; Wed, 13 May 2026 00:33:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1778657585; x=1779262385; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=vNn6zbJ1NbXehc1RhVUlOjbPPNav6jWHjT5iUitPUlk=;
- b=NCT2Vr1z4oxHcknpLqinmZcZjOu9euxkTvwtxPxfQMPrtEOUul4eBbynAzBrhNgbVt
- MfLcUV50WghluS7dFHvyD83fwRszGtz17EBk+pFENmEjATCXY76ljKW2ufeqaTy387co
- k0+9shAd+vA/99LGfDvdXx+9Zl4Uc2YLu9R6wobj1vQRLXy47AMP2b0TI3zZDVu7/tML
- 2gPWJmfZmipcm+nUwtYDVDZKLmTsMHLg4HcfMTkRGt0gXJZjBoQEU9C3U83trWQImQ25
- 2tui2jj/K9vdZbyQB0Vxf8IMlMo/BepI4S8AuiQW6VQ01nlSYiv5IRcRuQlW2DDAj01n
- Rcaw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778657585; x=1779262385;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=vNn6zbJ1NbXehc1RhVUlOjbPPNav6jWHjT5iUitPUlk=;
- b=TtRwQh8GOD6d0JRM6wYm9UPgfKwWoJwiJ6ooGhcytv5/mJQ+5BN95Z91g+Pz36EZP7
- GXo2NeuGrIYrUu9sPUchtuyQDa5RNVF60Cy4qGT2TdcfFI9GuuBbU+Dk/DEsKgsY+zDm
- qrS+3U6RrDPU37YdomeqL1mgw9WnZSVV+LWI5ruazbrBgT4HVWHqF/9mqU33DYnDtdfK
- Fn1fkPb6LR0P0DZl8ijAap/DY7BQ1BXnJ/9F2UFKQLquwSQIT/CLPJJ61l0g1ISbAhIK
- kyXXQ/DLUldHrGC3V5M2xlDmhE1D6JA8xRhRb4u9wP7XgvOyiNy3xWIXikPBvDQKrowB
- AEEQ==
-X-Forwarded-Encrypted: i=1;
- AFNElJ8jlSJJRw39QNHddgnIDi7QMU86/aNY1+N1mZE0SNA9IOPNwAP1BlV4ARugopNP+hSprVKW3eY=@lists.denx.de
-X-Gm-Message-State: AOJu0Yzmjb6ASbDWUzE3FEsWSQl0n9o7EMzmbZ79QwVhnr7lFpYy3JOc
- Q9ItROfaL31kU3Cmfk/rPgBtUL4i1cJuYE5tydUgKbOU6dvRMqc49p1HBFIScr3wp0E=
-X-Gm-Gg: Acq92OET/sd0IsYLDaFMhgyLUJUAdMtvs5gQUei1lb6tvFp915eTY90/n89XCK7/c7U
- /99G9fpbKOwFq36idHEwNKRVM1GTtrqhw7a9nm8g4ctyCafMpKrB3ylYpCo4mZhd37KdDtmoruy
- eGG3938phpv72ZHfNcEQ14NerQSfBkUu12C6tx2VtROwe+msSCzxz7NqHhbTPn7nPQs6g1qfXve
- MxSf7WwsC0KqZhUiL0dWUQ8r5a5c29MzASomRFxmxD+0tpObBwl9daeRyZR48rLLjQgeDQ7dkSe
- P17cVH8QRAuOft9w59RjkUerPiNig566mazP+D7iiw1V9ABVmukDwmqgLKxqloINsbK4obpmJHl
- q5FE1I8A1jCW0FAPcq6WLou7VFlP3A/ZuW2wHNMk9lG40Mg6oJd1cd0+2grChnUEs+tzQdnV80I
- RM+YPLM+sxiQdMkV89jfVzpx5mFhfz0daO81MXnNq7mOn1uMvg24rgs9z2Xycv65kPnfqa+dmvk
- 3R+
-X-Received: by 2002:a05:600c:5397:b0:48a:525b:e148 with SMTP id
- 5b1f17b1804b1-48fc9a0775amr25295815e9.4.1778657584537; 
- Wed, 13 May 2026 00:33:04 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:106d:1080:6ee4:8e37:145:d60b?
- ([2a01:e0a:106d:1080:6ee4:8e37:145:d60b])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-48fc8d625basm49304655e9.9.2026.05.13.00.33.03
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 13 May 2026 00:33:04 -0700 (PDT)
-Message-ID: <6a10b0df-7183-47a0-a3ec-33573b6d14e7@linaro.org>
-Date: Wed, 13 May 2026 09:33:03 +0200
-MIME-Version: 1.0
+ spf=pass smtp.mailfrom=Jerome.Forissier@arm.com
+ARC-Seal: i=2; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=pass;
+ b=cjqr3fNwpRkJSAfcU9jF1aUmZ9GqdbTs4iyrzW78XF7pzC72+iAwYf9LBF4PkbtPPPueY1nHWJlTpkThGv+gkeu2mhNIrLr7Ao3P4aWm8DgbJgQQFTEb9TCBVx7W5vLwL/L9ARLoPSZjQfhXJjSmB58Iq1Bs0cLSFhsw7LJj6SSHdsv3UuDNbjw1JJEOZEXRHrxfHZrHypHWd3RWFUG7wlcmUg1QWYkEKXPmMiiLmMe8G5H2Py3+ziBCD+tSU60dPBxKEOuYI158/ieubTJGpG0LGtReBN4gXfBqKPDICUyXCEA5Qqw99ULppubHklIXa5IPG3vlm3QK6UHYB4KgQQ==
+ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=zoCBGxUlnuhKZVY+/O19UvherVpyw6pXoMjnM25o/bs=;
+ b=MPQ0CLlpHEMQA2NzUI8Ejgz0DNhqAy3bR3CyH3PtVF948qUlt/ZoewPK/lJ7rEJXgdKx4fAbE4cH3datpIHk+LsZjU9o1364ldIumE/9UBKUFwYwfx4Jzvdk4KLRFaINAGIOplNm7CjjbckwC3MwolmYmXDnmEvZrtrMe0px5M/cPJWG1waRfMI5UUvo7sS1oL83T/O1BdVPI6c1gr1Bj6SY3jeGXXT8gtjIqtwXrjKCV/NTAH1gDab9F/jXRRsy+eGOmqzqD26wZ3tuEQ7MNteNWG+/kB5xu9moj9/mcAL8shjcqFQSEWTcJbaBcLgmYnS9vkv5ms/6q4gcDwjHNA==
+ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
+ 4.158.2.129) smtp.rcpttodomain=baylibre.com smtp.mailfrom=arm.com; dmarc=pass
+ (p=none sp=none pct=100) action=none header.from=arm.com; dkim=pass
+ (signature was verified) header.d=arm.com; arc=pass (0 oda=1 ltdi=1
+ spf=[1,1,smtp.mailfrom=arm.com] dkim=[1,1,header.d=arm.com]
+ dmarc=[1,1,header.from=arm.com])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=zoCBGxUlnuhKZVY+/O19UvherVpyw6pXoMjnM25o/bs=;
+ b=Gr9aX0R5Pih7IGID4q2z3mjv1aeL0mupIWJjK3naoDZd1NsF9Gn7cHbyTeu8SqTzaebObNmpLOq6tfKWH962X/JndJ/2q1pFhe72aYiOZTeTwGeLcogaPcF75Nz+Fe7Tt8eyrD6jhfJSsS7UWEsM/GU6O/nqgzKZ/blHHUDZ1W8=
+Received: from DU2PR04CA0158.eurprd04.prod.outlook.com (2603:10a6:10:2b0::13)
+ by AS8PR08MB7909.eurprd08.prod.outlook.com (2603:10a6:20b:52a::14)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9913.11; Wed, 13 May
+ 2026 07:40:45 +0000
+Received: from DU6PEPF0000A7DD.eurprd02.prod.outlook.com
+ (2603:10a6:10:2b0:cafe::2b) by DU2PR04CA0158.outlook.office365.com
+ (2603:10a6:10:2b0::13) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9913.12 via Frontend Transport; Wed,
+ 13 May 2026 07:40:45 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 4.158.2.129)
+ smtp.mailfrom=arm.com; dkim=pass (signature was verified)
+ header.d=arm.com;dmarc=pass action=none header.from=arm.com;
+Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
+ 4.158.2.129 as permitted sender) receiver=protection.outlook.com;
+ client-ip=4.158.2.129; helo=outbound-uk1.az.dlp.m.darktrace.com; pr=C
+Received: from outbound-uk1.az.dlp.m.darktrace.com (4.158.2.129) by
+ DU6PEPF0000A7DD.mail.protection.outlook.com (10.167.8.37) with Microsoft SMTP
+ Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.21.25.13 via
+ Frontend Transport; Wed, 13 May 2026 07:40:45 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=tdbdo3aeg2lZ2MlgUSnjLJ0afxGeM2hcyfiXU9aA8/GqN4TUpeySrswlwh270Fe4zzysnBdShw2RbxxI90a//esIOazviz5FrQku0kH8jQhnIqu8jsWDzm30KOTV+mQWf1wFZDwTQsvHqPrVi5XgU6QbBDlHR4SMEKKY+3b0VgqCU9I2/NYK3DE9DaW6FjlhnHzKF6sZgzrnbwb4j9aLuzQmNsDJ9zpwAg3XmNrZzyp1ze3jf0c6lri80Dm0kBa3SlL0Kl1KbywJPqFAQHvGWgnBaOlfxGJQYrH8nh1BsiOSaTAybEYZuTN/9V9q/yhsUpFohPMRXglyUdcV+Wmwyg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=zoCBGxUlnuhKZVY+/O19UvherVpyw6pXoMjnM25o/bs=;
+ b=yeoh5s/BwRHIgP4SsNuKuFUgXS1oMjwgKT78zPTV9Cy8ne9FvSJv2Q9PgLJ0jrNceIXfuKtSOlwtzZUfFXvHxLfj6Ibzeyi3qaPeSgyCmoV6wVl1kuh8VtIqflhloVLZBdj8Vwelnh6YeFS+I09nel3WyfAyTc4YTZJHKPPk78NKIieGZpm/f6y7qURpZ9YPYeOkhMF6easeSzuV3c09rpS52EBp7qPM9+nSpM/eo4BF4TI0S3vy2teKt4e0sxbAZ/cOfRDNGYt1ONTTNPxikcda4hG/wsRSGV3v6SO8pQQXcuXowq0oMrJNfvsngx6XHdK81sGWLzXDhAaanyUm4Q==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
+ header.d=arm.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=zoCBGxUlnuhKZVY+/O19UvherVpyw6pXoMjnM25o/bs=;
+ b=Gr9aX0R5Pih7IGID4q2z3mjv1aeL0mupIWJjK3naoDZd1NsF9Gn7cHbyTeu8SqTzaebObNmpLOq6tfKWH962X/JndJ/2q1pFhe72aYiOZTeTwGeLcogaPcF75Nz+Fe7Tt8eyrD6jhfJSsS7UWEsM/GU6O/nqgzKZ/blHHUDZ1W8=
+Authentication-Results-Original: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=arm.com;
+Received: from AM0PR08MB11733.eurprd08.prod.outlook.com
+ (2603:10a6:20b:740::16) by FRZPR08MB11217.eurprd08.prod.outlook.com
+ (2603:10a6:d10:138::9) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9913.11; Wed, 13 May
+ 2026 07:39:41 +0000
+Received: from AM0PR08MB11733.eurprd08.prod.outlook.com
+ ([fe80::29d7:e9ba:ff69:a0c3]) by AM0PR08MB11733.eurprd08.prod.outlook.com
+ ([fe80::29d7:e9ba:ff69:a0c3%3]) with mapi id 15.20.9913.009; Wed, 13 May 2026
+ 07:39:41 +0000
+Message-ID: <f33656e8-0fec-4678-8332-0752a499e9fb@arm.com>
+Date: Wed, 13 May 2026 09:39:39 +0200
 User-Agent: Mozilla Thunderbird
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH 2/3] clk/qcom: qcm2290: Fix vote_bit of gpll6 clock
-To: Biswapriyo Nath <nathbappai@gmail.com>, Sumit Garg
- <sumit.garg@kernel.org>, u-boot-qcom@groups.io, u-boot@lists.denx.de,
- Loic Poulain <loic.poulain@oss.qualcomm.com>
-Cc: Casey Connolly <casey.connolly@linaro.org>, Tom Rini
- <trini@konsulko.com>, Luca Weiss <luca.weiss@fairphone.com>,
- Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
- Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
- Danila Tikhonov <danila@jiaxyga.com>, Lukasz Majewski <lukma@denx.de>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- ~postmarketos/upstreaming@lists.sr.ht
-References: <20260512-ufs-sm61x5-v1-0-c022cf988e89@gmail.com>
- <20260512-ufs-sm61x5-v1-2-c022cf988e89@gmail.com>
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
-In-Reply-To: <20260512-ufs-sm61x5-v1-2-c022cf988e89@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Subject: Re: [PATCH v2 1/3] net: lwip: wget: fix error handling in
+ wget_do_request()
+To: David Lechner <dlechner@baylibre.com>, Tom Rini <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de
+References: <20260512-net-lwip-add-stop-function-v2-0-85146da317dd@baylibre.com>
+ <20260512-net-lwip-add-stop-function-v2-1-85146da317dd@baylibre.com>
+Content-Language: en-US
+From: Jerome Forissier <jerome.forissier@arm.com>
+In-Reply-To: <20260512-net-lwip-add-stop-function-v2-1-85146da317dd@baylibre.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+X-ClientProxiedBy: LO0P123CA0003.GBRP123.PROD.OUTLOOK.COM
+ (2603:10a6:600:354::11) To AM0PR08MB11733.eurprd08.prod.outlook.com
+ (2603:10a6:20b:740::16)
+MIME-Version: 1.0
+X-MS-TrafficTypeDiagnostic: AM0PR08MB11733:EE_|FRZPR08MB11217:EE_|DU6PEPF0000A7DD:EE_|AS8PR08MB7909:EE_
+X-MS-Office365-Filtering-Correlation-Id: 1b54402f-6362-4b9a-e72f-08deb0c2f193
+x-checkrecipientrouted: true
+NoDisclaimer: true
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam-Untrusted: BCL:0;
+ ARA:13230040|1800799024|366016|376014|56012099003|22082099003|18002099003|11063799003;
+X-Microsoft-Antispam-Message-Info-Original: +tgyhZCYO38IYcDOttsZnvthd3y+K7LC/K01Daur71AU8DxNq3ty+tJJHoEPQuBE4AlVYVDZFBZqZhKsHS3JnZCVgXU03eo9Bd55piI3UWH2Ud/yzaDVfgCGkUxOzzCjDkqlKNCFSMjBt6UetuDBeGuNrsk6Sgcxt7bFgTnicuwt52rZK3fZz6TadjtWXVYchImEjY4fK4fh1FIIBU7wI2lzX7G2V86cD3ei+2sOCsWAyyEn5Pn+KSF8KEbb5NTtgJCTbW+aSc0W53Bn3FlHC5fV9Hee7zUOpWQKXHU2Y0vHf777NcBi1yvrjBpvZe9ZCo1wMqJ6ADrAgN0tZtAcEl6ubIiQS7xgHyLMP7ydorZ/BiMIz67M3hk8HBRN2+yr3KgeBZVW6JX2HL1I5Ckt7BeH/tSxs4EYxzczTEE0wRIyJRHFapHUEm4W2MaeIe85B/lSLoAhxX8S1zSG+S5ddOsQtM9vUcyeEHeB0/UjtGOpO5Vc/mnNUIAHzzkDKyIrOVmS2LKZk8Hyf3DGsaewO7OOexIkD5i5Nc6Mp/QsOlSlZdLTz6BLLae+JCc29I+gQEKcYDjUQq8Sz/8bcWsC3RC9yntvfxtAaKd2T2ZG/I2rOu+lWhTU+GwwsMa+ZnhrJpNKz+1tDAyarHQTUyoELqvCWKxyFwE6lcAGyZbnPGeQZc5lh2Phh9ydUMz5+ps9
+X-Forefront-Antispam-Report-Untrusted: CIP:255.255.255.255; CTRY:; LANG:en;
+ SCL:1; SRV:; IPV:NLI; SFV:NSPM; H:AM0PR08MB11733.eurprd08.prod.outlook.com;
+ PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(366016)(376014)(56012099003)(22082099003)(18002099003)(11063799003);
+ DIR:OUT; SFP:1101; 
+X-Exchange-RoutingPolicyChecked: P1che0wE/6dgPJmoCVfwiPFuOZNTidKYCr9jAZAzsjluwJ9j71kgEBH41si8W/kesMSuQFsWO1QTgyi7kPIwE/jS21tiQ7vluKoC9i1/a77FeJg5tCihw+kXZyevJOMl1bZYBbsjkOIHRfW0HCVOSPFfwGA6WZffNfk8qAN3HZNReHL5jiNQvZbAu7EnO8Feg7S3WmTPlDZBFz5Pn+EKYVpzKeM/F0C1BUyWWQprXu2u1u6itzDtliOEHdLp2rEfZdeJS8bNPOWjs4Vj2n4zs17Af2S6uViw+oMSy0wgmB+o/ta/wYaiiZDgwSC6q9u8GS+qWF6HCJyk63sxP88BNQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: FRZPR08MB11217
+X-EOPAttributedMessage: 0
+X-MS-Exchange-Transport-CrossTenantHeadersStripped: DU6PEPF0000A7DD.eurprd02.prod.outlook.com
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id-Prvs: c29bcf0d-bc4f-4d7b-a54b-08deb0c2cb2f
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|82310400026|14060799003|376014|1800799024|36860700016|35042699022|11063799003|18002099003|56012099003|22082099003;
+X-Microsoft-Antispam-Message-Info: BXjLRkujJMv+Mr/cGh1wtD0WeQfp9WUyyQlzhVyMqrx9icViYoe21tKelaHAUISwexzzamWrBRRJG4ty7PBUPVJM0hAZPPOTmnnMk+7pRIrb6jE4VZjiNqhVJLDIkK6RiSCC6VgPjJuGYtz4wGMpvZ5+FfXe/e3d95SeaEC5KVEY3RMZMT5ILkqVGrKHrvP8cqWKwowiA032tubpitOyBNdQLswQN+xC6UsMAVgC4kHxzVq/k1dQqC54J9mQoQDglJrIPXsQ6OHPlSD6D+YTdWs5GXjwyVV+HR1gwIxDhPTBfp6xp7EeP7DtYYLGfML3IkLkxqOFPoO4e7/ADIuyG5a02rrurJcI1mpSfNPKwKfXTFKkdD/5D2ssceRiMkdR74BtSDhKBPzW6LfrvgNOYexAM1ZQ4rhO6EQ8Pas50IlPWOKvzY5SNNlsDhOV04FnwSiQT26MPGfUjviYy39i6vuwepkuJdBfIno/RaCY2hRrJgehmsqLPukTLba5AUVhkz9eOHzFj5vPZ8mrYgXAFQNa7QPffP6/i/M5GCmaygdStwkp0mEIIvQdwMVOb2oc6w36lWBoznrqEpqVuCFOeZ0awHTgWvLLGy9S0qc9gP5ubXylhMTIjZNLEv6fHpLyVq2cv6VUy50L8BSdzQEW2y6KA+BpU+q01Hv8zUuoznU+va7ASlgLeZD7Up7yb9ikbkHqYMfVu4dCOU4beP87Oe8/jrHByoviwk1Bq5zPMPw=
+X-Forefront-Antispam-Report: CIP:4.158.2.129; CTRY:GB; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:outbound-uk1.az.dlp.m.darktrace.com;
+ PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(82310400026)(14060799003)(376014)(1800799024)(36860700016)(35042699022)(11063799003)(18002099003)(56012099003)(22082099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 3pexKcJl3kMut/a21CtYe9pQQhlw3OeqdwMx1pxr9qYX3WPUYn8H0pMq0ehSLlCDjo091kjCd21+/Du56btYOoZ/DI1Ypu4y7TdgY0HLi8eymcXabb1Nxt0ltB1x3BwlGDWSNjd0YygJn1kc8HZvg9nvvxaDQEXDrZcRWv3sa5Oa+sdxSGPf81o/9pCbCB0ptM/SneDKXyB3ccf+Rw+jcgNSw4lF7W39vR2ai2tNf/rMkYOOcp3SmTG7mLFs3kqW6iB2l1PJbVduO2IYjIRpH/btowskWn2497agTMeO6u5iymrH9iCGM8RM421ux6p0ZhTtjxOVr2fPMTXHjAqrYfsakyEVWEDhJKNhG1Wzh1eHrkXtcreLgYSKOakkVrdchtClmWndNdkTPAX8/Y4fx8+vY5LSegSDtjvsjQwyde62OqbLMKCKtmU2ySdi0pFg
+X-OriginatorOrg: arm.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 May 2026 07:40:45.5212 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1b54402f-6362-4b9a-e72f-08deb0c2f193
+X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d; Ip=[4.158.2.129];
+ Helo=[outbound-uk1.az.dlp.m.darktrace.com]
+X-MS-Exchange-CrossTenant-AuthSource: DU6PEPF0000A7DD.eurprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR08MB7909
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -133,33 +160,188 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Please add a commit message
-
-On 5/12/26 16:44, Biswapriyo Nath wrote:
-> Fixes: 3ddc67573fab ("clk/qcom: qcm2290: Add SDCC1 apps clock frequency table")
-> Signed-off-by: Biswapriyo Nath <nathbappai@gmail.com>
+On 12/05/2026 23:48, David Lechner wrote:
+> Split wget_do_request() into two functions to make error handling less
+> error-prone.
+>
+> After a successful call to net_lwip_new_netif(), net_lwip_remove_netif()
+> must always be called to leaks. This was missed in the HTTPS section of
+> the code where we returned on error without cleaning up.
+>
+> Instead of adding more calls to net_lwip_remove_netif(), refactor the
+> code into two functions. The outer function handles managing the netif
+> lifecycle. The inner function no longer has to worry about cleaning up
+> before returning on error.
+>
+> To keep things simple, the `path` local variable is removed during the
+> refactoring. Instead, ctx.path is used directly everywhere.
+>
+> Fixes: 3c656c928bd7 ("net: lwip: add wget command")
+> Signed-off-by: David Lechner <dlechner@baylibre.com>
 > ---
->   drivers/clk/qcom/clock-qcm2290.c | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/drivers/clk/qcom/clock-qcm2290.c b/drivers/clk/qcom/clock-qcm2290.c
-> index 5a599085b500..c38ff1a1e4a5 100644
-> --- a/drivers/clk/qcom/clock-qcm2290.c
-> +++ b/drivers/clk/qcom/clock-qcm2290.c
-> @@ -73,7 +73,7 @@ static const struct pll_vote_clk gpll6_clk = {
->   	.status = 0x6000,
->   	.status_bit = BIT(31),
->   	.ena_vote = 0x79000,
-> -	.vote_bit = BIT(7),
-> +	.vote_bit = BIT(6),
->   };
->   
->   static const struct gate_clk qcm2290_clks[] = {
-> 
+>  net/lwip/wget.c | 88 ++++++++++++++++++++++++++++++---------------------=
+------
+>  1 file changed, 47 insertions(+), 41 deletions(-)
+>
+> diff --git a/net/lwip/wget.c b/net/lwip/wget.c
+> index 502c0faebb2..f89a6580b41 100644
+> --- a/net/lwip/wget.c
+> +++ b/net/lwip/wget.c
+> @@ -292,45 +292,17 @@ static err_t httpc_headers_done_cb(httpc_state_t *c=
+onnection, void *arg, struct
+>  #if CONFIG_IS_ENABLED(WGET_CACERT)
+>  #endif
+>
+> -int wget_do_request(ulong dst_addr, char *uri)
+> +static int wget_handle_request(struct wget_ctx *ctx, bool is_https,
+> +                            struct udevice *udev, struct netif *netif)
+>  {
+>  #if CONFIG_IS_ENABLED(WGET_HTTPS)
+>       altcp_allocator_t tls_allocator;
+>  #endif
+>       httpc_connection_t conn;
+>       httpc_state_t *state;
+> -     struct udevice *udev;
+> -     struct netif *netif;
+> -     struct wget_ctx ctx;
+> -     char *path;
+> -     bool is_https;
+> -
+> -     ctx.daddr =3D dst_addr;
+> -     ctx.saved_daddr =3D dst_addr;
+> -     ctx.done =3D NOT_DONE;
+> -     ctx.size =3D 0;
+> -     ctx.prevsize =3D 0;
+> -     ctx.start_time =3D 0;
+> -     ctx.content_len =3D 0;
+> -     ctx.hash_count =3D 0;
+> -
+> -     if (parse_url(uri, ctx.server_name, &ctx.port, &path, &is_https))
+> -             return CMD_RET_USAGE;
+> -
+> -     if (net_lwip_eth_start() < 0)
+> -             return CMD_RET_FAILURE;
+> -
+> -     if (!wget_info)
+> -             wget_info =3D &default_wget_info;
+> -
+> -     udev =3D eth_get_dev();
+> -
+> -     netif =3D net_lwip_new_netif(udev);
+> -     if (!netif)
+> -             return -1;
+>
+>       /* if URL with hostname init dns */
+> -     if (!ipaddr_aton(ctx.server_name, NULL) && net_lwip_dns_init())
+> +     if (!ipaddr_aton(ctx->server_name, NULL) && net_lwip_dns_init())
+>               return CMD_RET_FAILURE;
+>
+>       memset(&conn, 0, sizeof(conn));
+> @@ -374,11 +346,10 @@ int wget_do_request(ulong dst_addr, char *uri)
+>               tls_allocator.alloc =3D &altcp_tls_alloc;
+>               tls_allocator.arg =3D
+>                       altcp_tls_create_config_client(ca, ca_sz,
+> -                                                    ctx.server_name);
+> +                                                    ctx->server_name);
+>
+>               if (!tls_allocator.arg) {
+>                       log_err("error: Cannot create a TLS connection\n");
+> -                     net_lwip_remove_netif(netif);
+>                       return -1;
+>               }
+>
+> @@ -388,24 +359,20 @@ int wget_do_request(ulong dst_addr, char *uri)
+>
+>       conn.result_fn =3D httpc_result_cb;
+>       conn.headers_done_fn =3D httpc_headers_done_cb;
+> -     ctx.path =3D path;
+> -     if (httpc_get_file_dns(ctx.server_name, ctx.port, path, &conn, http=
+c_recv_cb,
+> -                            &ctx, &state)) {
+> -             net_lwip_remove_netif(netif);
+> +     if (httpc_get_file_dns(ctx->server_name, ctx->port, ctx->path, &con=
+n,
+> +                            httpc_recv_cb, ctx, &state)) {
+>               return CMD_RET_FAILURE;
+>       }
+>
+>       errno =3D 0;
+>
+> -     while (!ctx.done) {
+> +     while (!ctx->done) {
+>               net_lwip_rx(udev, netif);
+>               if (ctrlc())
+>                       break;
+>       }
+>
+> -     net_lwip_remove_netif(netif);
+> -
+> -     if (ctx.done =3D=3D SUCCESS)
+> +     if (ctx->done =3D=3D SUCCESS)
+>               return 0;
+>
+>       if (errno =3D=3D EPERM && !wget_info->silent)
+> @@ -414,6 +381,45 @@ int wget_do_request(ulong dst_addr, char *uri)
+>       return -1;
+>  }
+>
+> +int wget_do_request(ulong dst_addr, char *uri)
+> +{
+> +     struct udevice *udev;
+> +     struct wget_ctx ctx;
+> +     struct netif *netif;
+> +     bool is_https;
+> +     int ret;
+> +
+> +     ctx.daddr =3D dst_addr;
+> +     ctx.saved_daddr =3D dst_addr;
+> +     ctx.done =3D NOT_DONE;
+> +     ctx.size =3D 0;
+> +     ctx.prevsize =3D 0;
+> +     ctx.start_time =3D 0;
+> +     ctx.content_len =3D 0;
+> +     ctx.hash_count =3D 0;
+> +
+> +     if (parse_url(uri, ctx.server_name, &ctx.port, &ctx.path, &is_https=
+))
+> +             return CMD_RET_USAGE;
+> +
+> +     if (net_lwip_eth_start() < 0)
+> +             return CMD_RET_FAILURE;
+> +
+> +     if (!wget_info)
+> +             wget_info =3D &default_wget_info;
+> +
+> +     udev =3D eth_get_dev();
+> +
+> +     netif =3D net_lwip_new_netif(udev);
+> +     if (!netif)
+> +             return -1;
+> +
+> +     ret =3D wget_handle_request(&ctx, is_https, udev, netif);
+> +
+> +     net_lwip_remove_netif(netif);
+> +
+> +     return ret;
+> +}
+> +
+>  /**
+>   * wget_validate_uri() - validate the uri for wget
+>   *
+>
 
+Reviewed-by: Jerome Forissier <jerome.forissier@arm.com>
+
+Thanks,
+--
+Jerome
+IMPORTANT NOTICE: The contents of this email and any attachments are confid=
+ential and may also be privileged. If you are not the intended recipient, p=
+lease notify the sender immediately and do not disclose the contents to any=
+ other person, use it for any purpose, or store or copy the information in =
+any medium. Thank you.
