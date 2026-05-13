@@ -4,62 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3FA3CD4F21
-	for <u-boot@archiver.kernel.org>; Wed, 13 May 2026 14:10:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2C70CD4851
+	for <u-boot@archiver.kernel.org>; Wed, 13 May 2026 14:10:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 55A5784686;
-	Wed, 13 May 2026 16:10:41 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 03CD98467E;
+	Wed, 13 May 2026 16:10:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=siemens.com header.i=ludwig.nussel@siemens.com header.b="TpPTwQvy";
+	dkim=pass (2048-bit key; secure) header.d=siemens.com header.i=ludwig.nussel@siemens.com header.b="l0m2byqp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7B0C28341A; Wed, 13 May 2026 16:10:40 +0200 (CEST)
-Received: from mta-65-227.siemens.flowmailer.net
- (mta-65-227.siemens.flowmailer.net [185.136.65.227])
+ id 4E58B846A4; Wed, 13 May 2026 16:10:42 +0200 (CEST)
+Received: from mta-65-226.siemens.flowmailer.net
+ (mta-65-226.siemens.flowmailer.net [185.136.65.226])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DBDF38467B
- for <u-boot@lists.denx.de>; Wed, 13 May 2026 16:10:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F2D0584671
+ for <u-boot@lists.denx.de>; Wed, 13 May 2026 16:10:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ludwig.nussel@siemens.com
-Received: by mta-65-227.siemens.flowmailer.net with ESMTPSA id
- 2026051314103538b32273ed000207f5 for <u-boot@lists.denx.de>;
- Wed, 13 May 2026 16:10:35 +0200
+Received: by mta-65-226.siemens.flowmailer.net with ESMTPSA id
+ 20260513141038b212320d5f00020737 for <u-boot@lists.denx.de>;
+ Wed, 13 May 2026 16:10:38 +0200
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
  d=siemens.com; i=ludwig.nussel@siemens.com;
- h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
- bh=sXz416zngb3pH0moKlMOHTjIkMj4fP3hdyNVWLOkL30=;
- b=TpPTwQvy0/mVNSxLSaG8OKYKRbUgvYkD/V00fcJRFJmb6chrStIv78BCl1OIa9/8j62nZB
- W7h0kG1QduOj5cYB/SzJONfqEvQ9tqLlUAAWRybGKLwzSXUAU/UhAsfW+WXqy1mDaCqC7Ly4
- WaYiQOCoFLEx1Ua1vNvUNEFzBNd2BLaS+UD0IKXsDzc30k1IQ3ymTVa4BTKQaNotIVhvkejW
- biUPWq4Y9ZvHN7rWP4efkr+PA1c1bu8As7nb2K7eXMRnbswPHWMucPs2XR4aXQlWsNM8wWjP
- rsJSA0VKsy9XkECHB3Nee7GQYvSUa/MG8mjc07Y/Rx2ManA6mu1TLytQ==;
+ h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc:References:In-Reply-To;
+ bh=sY8GmOhdDsRwT2OOlQOGzJUCDMzD+4rDWQm4jpnkFWU=;
+ b=l0m2byqpI2lcpoKbV+OL0MohHCv97CT0qoSNC38Jj7PDpHNGgwX1dxiYsw6jzltk+VfFGa
+ JTFG2ZqGzRBSKzIkwu4KyM1EQv0d0sUdMcSLRqlCTvOxcnAfofhkdD2Ty1kMRCeYYHWBSSdq
+ xfjBmJUp0PcPveZZiDWNFhX9+sr/z0aBSQ/evDpiG3n9heGAMrYuzG5J+QYlC4dvvcsenrJU
+ j10obnYUptGIQbCpAHyXOtGwIO1GUMjmNNowGC7gTmrtbKmrFn+S14CSch9E46kRQDyk0fjj
+ 6M9uYmu1Jk2R97NDOinu+7BoKXH9NJHX4wUBVkWIyQLyg9lF6wFPnsKw==;
 From: Ludwig Nussel <ludwig.nussel@siemens.com>
 To: u-boot@lists.denx.de
-Cc: Ludwig Nussel <ludwig.nussel@siemens.com>, Anshul Dalal
- <anshuld@ti.com>, Dinesh Maniyam <dinesh.maniyam@altera.com>, Ferass El
- Hafidi <funderscore@postmarketos.org>, Heinrich Schuchardt
- <xypron.glpk@gmx.de>, Ilias Apalodimas <ilias.apalodimas@linaro.org>, James
- Hilliard <james.hilliard1@gmail.com>, "Kory Maincent (TI.com)"
- <kory.maincent@bootlin.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Martin Schwan <m.schwan@phytec.de>, Mattijs Korpershoek
- <mkorpershoek@kernel.org>, Mayuresh Chitale <mchitale@ventanamicro.com>,
- Michal Simek <michal.simek@amd.com>, Neil Armstrong
- <neil.armstrong@linaro.org>, Osama Abdelkader <osama.abdelkader@gmail.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>, Peng Fan <peng.fan@nxp.com>,
- Pieter Van Trappen <pieter.van.trappen@cern.ch>, Quentin Schulz
- <quentin.schulz@cherry.de>, Rasmus Villemoes <ravi@prevas.dk>, Raymond Mao
- <raymondmaoca@gmail.com>, Sam Protsenko <semen.protsenko@linaro.org>, Shiji
- Yang <yangshiji66@outlook.com>, Simon Glass <sjg@chromium.org>, Tom Rini
- <trini@konsulko.com>, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Wolfgang
- Wallner <wolfgang.wallner@at.abb.com>, Yao Zi <me@ziyao.cc>
-Subject: [PATCH v4 0/6] Improve FIT signature handling
-Date: Wed, 13 May 2026 16:08:10 +0200
-Message-ID: <20260513141027.351280-1-ludwig.nussel@siemens.com>
+Cc: Ludwig Nussel <ludwig.nussel@siemens.com>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH v4 2/6] mkimage: define log_err and log_info
+Date: Wed, 13 May 2026 16:08:12 +0200
+Message-ID: <20260513160816.v4.2.2405ba52fddd2e9ff1bbc24585e1e3140f660637@changeid>
+In-Reply-To: <20260513141027.351280-1-ludwig.nussel@siemens.com>
+References: <20260513141027.351280-1-ludwig.nussel@siemens.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Flowmailer-Platform: Siemens
@@ -80,74 +67,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This patch series tries to improve dealing with FIT
-(configuration-)signatures a bit:
-  - make signatures work with QEMU. QEMU brings it's own device tree at
-    a memory address. U-Boot expects public keys in it's own DT though.
-    So merge both.
-  - (optionally) enforce signatures so we can't accidentally boot
-    unsigned fit images. Quite an easy oversight, esp when qemu
-    previously didn't even use the built in DT.
-  - make iminfo verify configuration signatures, not just image hashes
+Define log_err and log_info centrally in mkimage.h so any file used in
+this context benefits from it.
 
-The tests were created with the help of copilot and manual fixups. I
-have to admit that the log output of those tests is not something I can
-grok. I've left the tags copilot added in the commits even though
-checkpatch complains. Not sure what the policy is.
+This patch is in preparation for a change in image-fit-sig.c in the
+next patch.
+
+Signed-off-by: Ludwig Nussel <ludwig.nussel@siemens.com>
+Reviewed-by: Simon Glass <sjg@chromium.org>
+
+---
 
 Changes in v4:
-- mention arm in subject
-- correctly change defconfig
 - fix and reword comment
-- reword Kconfig help text
-- rename option to FIT_REQUIRE_CONFIG_SIGS
-- introduce SPL_FIT_REQUIRE_CONFIG_SIGS
-- test CONFIG_FIT_REQUIRE_CONFIG_SIGS in test_vboot
-- set CONFIG_FIT_REQUIRE_CONFIG_SIGS in sandbox_defconfig
-- fix documentation to use kdoc style
-- test iminfo in test_vboot
 
 Changes in v3:
-- enable CONFIG_OF_OMIT_DTB=n in defconfig
-- add error returns
-- document decission about dt merging direction
 - make log_err use stdout too
-- clarify error message when no keys were found
-- change printfs to log_err
-- reword Kconfig
-- keep FIT_SIGNATURE_REQUIRED off by default
-- use log_err instead of printf in fit_config_verify_required_keys()
-- don't make iminfo fail unless FIT_SIGNATURE_REQUIRED is set
-- update fit_all_configurations_verify documentation
-- stub fit_all_configurations_verify unless FIT_SIGNATURES
 
-Changes in v2:
-- introduce FIT_SIGNATURE_REQUIRED
-- document fit_all_configurations_verify()
+ boot/image-pre-load.c | 3 ---
+ tools/mkimage.h       | 6 ++++++
+ 2 files changed, 6 insertions(+), 3 deletions(-)
 
-Ludwig Nussel (6):
-  qemu-arm: merge built-in DT
-  mkimage: define log_err and log_info
-  image-fit-sig: Optionally require signatures
-  test: vboot: handle CONFIG_FIT_REQUIRE_CONFIG_SIGS in test_vboot
-  iminfo: also verify signatures
-  test: vboot: add iminfo checks for config signature verification
-
- board/emulation/qemu-arm/qemu-arm.c |  47 ++++++++++++-
- boot/Kconfig                        |  22 ++++++
- boot/image-fit-sig.c                |  22 +++---
- boot/image-fit.c                    |  53 ++++++++++++++
- boot/image-pre-load.c               |   3 -
- cmd/bootm.c                         |  10 +++
- configs/qemu_arm64_defconfig        |   1 +
- configs/sandbox_defconfig           |   1 +
- include/image.h                     |   8 +++
- test/py/tests/test_vboot.py         | 105 ++++++++++++++++++++++++----
- tools/mkimage.h                     |   6 ++
- 11 files changed, 253 insertions(+), 25 deletions(-)
-
+diff --git a/boot/image-pre-load.c b/boot/image-pre-load.c
+index 2f851ebb28c..cd319ddb777 100644
+--- a/boot/image-pre-load.c
++++ b/boot/image-pre-load.c
+@@ -35,9 +35,6 @@ ulong image_load_offset;
+  */
+ static struct image_sig_info *host_info;
+ 
+-#define log_info(fmt, args...)	printf(fmt, ##args)
+-#define log_err(fmt, args...)	printf(fmt, ##args)
+-
+ void image_pre_load_sig_set_info(struct image_sig_info *info)
+ {
+ 	host_info = info;
+diff --git a/tools/mkimage.h b/tools/mkimage.h
+index 5d6bcc9301a..d8d292a8098 100644
+--- a/tools/mkimage.h
++++ b/tools/mkimage.h
+@@ -31,6 +31,12 @@
+ #endif /* MKIMAGE_DEBUG */
+ 
+ #define log_debug(fmt, args...)	debug(fmt, ##args)
++#define log_info(fmt, args...)	printf(fmt, ##args)
++/*
++ * Use stdout rather than stderr so error messages stay
++ * interleaved with normal output in the order produced.
++ */
++#define log_err(fmt, args...)	printf(fmt, ##args)
+ 
+ static inline void *map_sysmem(ulong paddr, unsigned long len)
+ {
 -- 
 2.43.0
 
-base-commit: 47dc2c9f758a82bdc98572d7afbf61e5870f0b5d
-branch: us-qemu-signatures4
