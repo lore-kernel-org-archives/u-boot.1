@@ -4,63 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EAC9FCD37B6
-	for <u-boot@archiver.kernel.org>; Wed, 13 May 2026 08:25:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1237FCD37B6
+	for <u-boot@archiver.kernel.org>; Wed, 13 May 2026 08:53:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7783B838BB;
-	Wed, 13 May 2026 10:25:23 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 148C2838BB;
+	Wed, 13 May 2026 10:53:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="LTia3kTF";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="txQAQpmV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7400683E36; Wed, 13 May 2026 10:25:22 +0200 (CEST)
-Received: from PH8PR06CU001.outbound.protection.outlook.com
- (mail-westus3azlp170120001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c107::1])
+ id A60AA83E36; Wed, 13 May 2026 10:53:05 +0200 (CEST)
+Received: from BN1PR04CU002.outbound.protection.outlook.com
+ (mail-eastus2azlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c110::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EEE7B8341A
- for <u-boot@lists.denx.de>; Wed, 13 May 2026 10:25:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 72FA58341A
+ for <u-boot@lists.denx.de>; Wed, 13 May 2026 10:53:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=michal.simek@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=t/54FGIrZE/QZYgvxqulktSTRQT/SwBYhOwFEmxqZWNyKFju5HbiXq7yPg6vMg+RaAXDzBxBvPAlYMWEbwRXFXLhCWc90YPz38CWCIisstmEfp1OD413M833n0GMq8t93XWMo37vPojoA7H6rFbl2PXeQf7UeJCn8LKCnBTImxsrUzKwbn0m/azvGPAQabk12tVcBA/tsJDQF4YkUpHyuPbm+xh9Wr2Kt1MiDDZwzMgQVi73ydZX+Dd59OdowuiX3/VfQBOF4Zc7d4eUUzCLzccWuJmqzOvlZ7hFjOMQGtYyqjuuaWpCIZFm6yu7c238yUBOPM9baYZhzqniazl5VQ==
+ b=YjQKA9ADnzZ8G0XVcsbLTyaB14GqaOcLBbqyxcH19APwnzejIx2i4Hun7bH77ACwaEP2ig8erpbJpNnxjQeOMZC+QydvMXmjP/N0TOELSr4Ad/KRq5JUQ1yrnNcK36ftKvklFc3KaKT0K1G1VEHXNEBPvJu63nm3DbdVphpz7/NfyHrfY2K+asALpNLCVTI8h2Ted+bUs6YfW+0fRYM5YtdaG7oacgziMc+ByVtqkTPsiC9ISWhfz6UoHC6LnO0BKtLXoT1LZO37bFjr+pJ5EW+mnQF+t3pvLBgqAnJ8ACyd7dvU48MzZ85U3tnxyCJBaaP+7aDELtTFoR1y68kk7Q==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=wIjWzvt0CWXpA1GDBj0DleanDINcu3Mi8RrPL6QBMow=;
- b=PhmC3SlrtLUiEP5T4w+kEFfzqJNl7tDe1Hxat86dehTvlirfHbKuVYG8bag+Pfl9dyD/DtHBDXzjNTvoCkBLfFQlEzsJCMPUfzYvD1KngWuyhogNpGiLf5In56Ez/4Dyv6ZL2uuY5IW5bERz8SlrRwl64wnSuMKhKtzWEmTAOCyVbJiIT46QVJPuupCysopkxxeSsJoNLXuQRpPg1zJ4sEOiPBVe8l++FEuqoYCu4PLE+aQ7RollGhALSL0fLXc1Xm+WOHM9Fpl6M3gJF1j7yl99Db4RHilORaEh6dZnTjuVnqa5OrLk7dp+yysNIhlsg9xRqVOorNMMul8pZQTBUA==
+ bh=QAuIhhlbzAESNryRxcDCJnpZCtI4dFt7I2LlQvLxNWw=;
+ b=MlZ3/PFDHxzVoeg65HC6HUjfOYdigN5TCPLsbjy2ZxkOV6JZ/eEDBbYSX73EbAa74rnHCTfRvKq+ZCNuSxWsz0+vLKv6uhNGB6oKJVVKGgUoHrYksdEQyLduIDRU5/fAz5umntnBkxDUOSpa3F/mVd2eqnX8l52Bb3PgLz5GFNMGUq9xMa+qhije3WQtGadg4BnunFu836193XWMqTK3cjI7mVkuqzDGigAO4vEXWWgEFPBeR26bP8/PjY6lSWGuwVsUqtfWQYIpkcqwISR48N4CwLLR31bb5xGcclQnXMg/TvdATxnQdoKdl19VadVdSPqZT8EVXCz80WFpRIHJ8Q==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
  header.d=amd.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=wIjWzvt0CWXpA1GDBj0DleanDINcu3Mi8RrPL6QBMow=;
- b=LTia3kTFo2nQwf5fZF1Pf1Yeglzgmm343wB0oVN0mlEv/qUYeHIBos9SZymfcQdw/eshNmabSNJ3vErOjxaliah6tJ97OIZNObwiJOh2auNo7Jh7fLpb8NJu1ySfvaCVGmWxGugGrlrl4i5fbBiP+FtMx36UZ8LG6BUISe20sfE=
+ bh=QAuIhhlbzAESNryRxcDCJnpZCtI4dFt7I2LlQvLxNWw=;
+ b=txQAQpmVscZbo3FBF6HO4wTOXrBVb9u/vubu1a6AmT4QnRe5no1VGYSTARAgb05GC/w8v+heH64C8tcky5HDDWTNN+ukO+5BabCRhhaXx1gidA58d+/Wg4t6iTKWIOKCL+XhNOcqyFTZFPRdlP0ZNGa7j/BwROl+jgMkN3ocfc0=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=amd.com;
 Received: from LV5PR12MB9779.namprd12.prod.outlook.com (2603:10b6:408:301::14)
- by SA0PR12MB4351.namprd12.prod.outlook.com (2603:10b6:806:71::14)
+ by SJ1PR12MB6363.namprd12.prod.outlook.com (2603:10b6:a03:453::9)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9913.11; Wed, 13 May
- 2026 08:25:14 +0000
+ 2026 08:52:57 +0000
 Received: from LV5PR12MB9779.namprd12.prod.outlook.com
  ([fe80::8ac8:e862:8ae9:9287]) by LV5PR12MB9779.namprd12.prod.outlook.com
  ([fe80::8ac8:e862:8ae9:9287%3]) with mapi id 15.20.9913.009; Wed, 13 May 2026
- 08:25:14 +0000
-Message-ID: <25bffa37-8be9-406f-9433-483796431288@amd.com>
-Date: Wed, 13 May 2026 10:25:10 +0200
+ 08:52:57 +0000
+Message-ID: <cbadd601-4337-4eaf-bf6b-8c98645dc089@amd.com>
+Date: Wed, 13 May 2026 10:52:53 +0200
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/4] reset: Add reset_reset() and reset_reset_bulk() API
+Subject: Re: [PATCH v2 2/4] reset: Add sandbox tests for reset_reset() and
+ reset_reset_bulk()
 To: Simon Glass <sjg@chromium.org>
 Cc: u-boot@lists.denx.de, git@amd.com
 References: <cover.1777984225.git.michal.simek@amd.com>
- <2a5fee05be84fa1cb333f3ab3db732311da321cf.1777984225.git.michal.simek@amd.com>
- <CAFLszTgRUg5Dk82Gq9FVJ99cn+15Fw7RkwVsiRgZwH2tqHVS=w@mail.gmail.com>
+ <21c23cc7403153b45a81c958118b8d9f85f73140.1777984225.git.michal.simek@amd.com>
+ <CAFLszTiYJU028+L40rzNa=X-qqDYCfbPqYMfGhzpK3Xq2mr8ag@mail.gmail.com>
 Content-Language: en-US
 From: Michal Simek <michal.simek@amd.com>
 Autocrypt: addr=michal.simek@amd.com; keydata=
@@ -107,76 +108,76 @@ Autocrypt: addr=michal.simek@amd.com; keydata=
  otYa9+7v0j0WOBTJaj16LFxdSRq/jZ1y/EIHs3Ysd85mUWXOB8xZ6h+WEMzqAvOt02oWJVbr
  ZLqxG/3ScDXZEUJ6EDJVoLAK50zMk87ece2+4GWGOKfFsiDfh7fnEMXQcykxuowBYUD0tMd2
  mpwx1d8=
-In-Reply-To: <CAFLszTgRUg5Dk82Gq9FVJ99cn+15Fw7RkwVsiRgZwH2tqHVS=w@mail.gmail.com>
+In-Reply-To: <CAFLszTiYJU028+L40rzNa=X-qqDYCfbPqYMfGhzpK3Xq2mr8ag@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: BY1P220CA0044.NAMP220.PROD.OUTLOOK.COM
- (2603:10b6:a03:59e::10) To LV5PR12MB9779.namprd12.prod.outlook.com
+X-ClientProxiedBy: PH2PEPF00003847.namprd17.prod.outlook.com
+ (2603:10b6:518:1::64) To LV5PR12MB9779.namprd12.prod.outlook.com
  (2603:10b6:408:301::14)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: LV5PR12MB9779:EE_|SA0PR12MB4351:EE_
-X-MS-Office365-Filtering-Correlation-Id: 9ae424a6-664f-42bb-6c83-08deb0c92855
+X-MS-TrafficTypeDiagnostic: LV5PR12MB9779:EE_|SJ1PR12MB6363:EE_
+X-MS-Office365-Filtering-Correlation-Id: 763a3ee1-1b87-4d75-d248-08deb0cd078c
 X-LD-Processed: 3dd8961f-e488-4e60-8e11-a82d994e183d,ExtAddr
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
  ARA:13230040|366016|1800799024|376014|11063799003|22082099003|18002099003|56012099003;
-X-Microsoft-Antispam-Message-Info: uRShK1D0pw/Hbs5fXta+AzZ0YFP3Oga+uxO9JsJqEsk2jt4G7u4ZlH/pEXp+2aJ36TNVls06U8MaGyaAywir2q3CZHtObWl6V7+xwoU2Ct955gXA5glGnahr+NnhVN9anN6wstXb2rGYqO4uNrhRxRG860e+8xKEXBtY1vPj0Ou7WqOZkcUXmR2+mF0nUizTmAjtjmz/ygx4NOuKBOxt3h7mAORRGMa/OKbTZ7K8KlssDdd969w3QGoUoyTFstpLYKzvIEZeRSAKKP7/wYHQHvducWUsgcjZawGvfNtjLmhlBMHKyFoZcQkqEfxmx8mFRSdDoQXCVaBIB1pKexxJSX8CbV9i78m8A/OOmcAqzMoyoiRmsip1ncraqihh6x81WCMCacDFw+Rr72O8p8bmnE9w2WqlT/YGOR5lbtI+xfgBChrAiYEhAP6yeyF1ubxc2GJYsLlx+QtxR7yvJlKKnpMXLEIVZIWMeWgRlguC5ovMIJQ7BdEqKKsZ0xBteOcnN+Ooondx/g4EJsSQ0GwsDLHPubJ5kg4cAhVs7jyz40Yc+p0w5InI3059kQEGzpQdSdwY1uZlHTSuiHu+J0XhR9NvdmT1VTF84aXlryuRlF1oC72UWsD5QoCMwUdqFr5gG7DJsmGyl0yKPWdRmeV4+vGdTOuAhwHOTBjX2XRUHP9OfXgyZXc4cJhg+cfH0DP9
+X-Microsoft-Antispam-Message-Info: czVsSN7F6nv7ZG+w2rgncHTQ54Fq9uPGqtdiXEeg3WBYpYbveMKJTo0eVFojjzLBI9cmmyQZgAuLtHl8ZxnMhY9XK83LR79Xc+QreZvhOZ0DzgkdbgSUhtbs/m35E06Qb7vmOq80wv+J6FJMw8hVX1x8IgJgxtgq5tXTAoGLlBsQjk3NFf74L3J8Xeeo4LZqRNxnHBZCftoKGs8/mkKawDm5N8Zs453S3oRIHaat8H7T67FbS88M7owi2ERmWiUWWt1rm9hoAEf8L/In2GZFfF0zeiJY2DoGCmx3RgF1DBv2Z6KgSNzKZZJ5HOvhV7s1EkXyCoJ6FL9NmpwR6j2exIABoTBwpD9F15AHN5I/MwOp0XM4dURh1E8fbUK6uX9DnBYguC5YW9RhLhy00WVwd4sWE2GvlSBvbTB4P1G5DuWaWMA7APD4OdGyKZv2D4L4DmWvTkOEZAPG1UsgCFqU3/r3A5O/VArXqlSd2kNe2KzalaREBPqMHO15n3uR4iVQErzgyKdmyQ/SZ4wnkxAtisbRrYZHt+r2TuwQNGvo/2SwZIRMKJYy+9tkAZrIAyy+DKSNGn2dE0nX/j66Kml1MgDS7KW1dj7roXVMcNq2mVeOnRmuhXX/NMyavcMLvhZvbJrza72CLbMNLAf+/kfF2We0hnDw4uaQtdQUV2FjEDV73t0XMQbVrVb7FJpK6K/9
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:LV5PR12MB9779.namprd12.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(366016)(1800799024)(376014)(11063799003)(22082099003)(18002099003)(56012099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?bTVEM2lKcjFFM1J1c2RTbE9rQk5lVWR3eGtLTHo4bDlzMW92YThNYlZzVzNO?=
- =?utf-8?B?ZUxxRFRHeWJIQVAwbCtWdkVqem55Zk1DQllKYjZaVWZNYUpOZ3RyTGR2bzQv?=
- =?utf-8?B?TEtQZEZOaVpoZXg2bnBpbkVvcmZ2cFd5SlErTVhhUCtpWG84aGoxV1VqYWtL?=
- =?utf-8?B?eUdud25oNmsrZXNyUTNyZThDVi9yVHBTcHBsL2JXS3pJNnV6TTJLUmpDZ3du?=
- =?utf-8?B?d3Y1blpXWldQMStENmtBMjBTTVVLYjdqcnRaZGFvcVI2Ky9WZGVJUE1tSHhu?=
- =?utf-8?B?bnRwZXBsY0tXQUxyTVRQTmw4WVRKYVpvR0xTVFl5Z2lBb21HdHMrTHplM3Ew?=
- =?utf-8?B?cVRVNE9VK1FQL2c4bWdHcHJJVUpuelVHS1VCQVREVGNJYzBHY01pc0pNMGM3?=
- =?utf-8?B?M0pEbjVYV3RHaVR4T3BCUzFQWmNlR0d5V2JWdERZdm5KZEJjYy8rQXpHdDRK?=
- =?utf-8?B?T3NENHVFVjdpVUg1ZHUrckhwQmtqSDNSOHJLODFVZUw3Qm13TjFaTk1KeGtR?=
- =?utf-8?B?a3JCZXFqQVByYkdKUStRU2hISjVRYnBLQWttSmVYV1crc1ZvNkc4cjJPbXVt?=
- =?utf-8?B?blV4WkxvVUJKZXZzNURCdFRwQXQ2TmdSOVdaZlNSZFVTY0t3eXR3VTlteStF?=
- =?utf-8?B?Y21Od1o3U0ZoSVRLaXlCaVg1ZW4wZGhINmp6VWlxZFBVMkhxZzVpa1Yxd3I3?=
- =?utf-8?B?RG5Wc2lYUlZ3dUk4MGxSSUFKNHp0b3dEampkQVlzM0NDY2JPM2hhN0NIUmx5?=
- =?utf-8?B?MHlMdDNWRGZLWGFWMWRXVGt2d3dmdGZreTFxQnY1Wk5tczRlY0g0d3ZXN2Zi?=
- =?utf-8?B?Wlp3cWRJQmNNdVV2TUhzUjVUT3N6dmVwYXliUWNjR3YrL0xBVTNnM2p5cG00?=
- =?utf-8?B?TURQN2tsS3dEdTQ2Qnl0QXhTVm9YYTNNMHhNTUh1ajF5c3JkQncrTjgyMy9U?=
- =?utf-8?B?OU1rcitWNmFVSTg1RzYwN2ZOQzMwREpNRHJwd2psbkFmMnVkRVV6YytKSURt?=
- =?utf-8?B?N0cvV2RoYStlR1JKNlFDeFYxcldWeFFxUko1OU1RV2MrakVnekYxSmdibW1k?=
- =?utf-8?B?cFdMUjMyRzdMcU42TDVWa1B5bW1jN2I4NGFuSXlLS1lQRHdIRVN4WFpIUERh?=
- =?utf-8?B?RmNGRjg4c0t1c21SVDlrZWl3aE96djlHelIzc1VLSUhVaWxRSVI2OG9qNkN2?=
- =?utf-8?B?dFZBWDRKNlp3enU5QzBYcEhSZ1gxZHA0Um1OV09DV0pXWFRjMy92UGNKbWw4?=
- =?utf-8?B?OU4zeUFlb0FZajZGMnU1N0hqYUYwMnFDQjFrSjQrcWtyWGNLRXRPaThUeW0w?=
- =?utf-8?B?T1VJVE9CT2hiMUMxanFIYkhTM3Q1SW9IYXVsUW1HeldoT3I5SzVHWHNJaWRR?=
- =?utf-8?B?bkc4RlBPV0E1S3lFaWlDNC9JdGp5NC9pSUFCcVVSVEhmbWRiU280bVpPbExi?=
- =?utf-8?B?TXJjVm1TY0o0WUpZejNnTEhwWTNKdlZGRkZIL3htcTJUNFI0a3ZHbDQyNmhJ?=
- =?utf-8?B?d016aXF1dy9qVWVkSXVRZnM0UWtGKzRvcWl6clBTK3F2ZXQzUUNLODlBWWQ4?=
- =?utf-8?B?Vy9pRVRjNGpVQ0RkK2xIbUJVaDFMZzhHMTIrSmFMYlNjckpxN09jUEpQRVNS?=
- =?utf-8?B?Ky9PemhuTnhYd2E2eWJJaHdNR1cxMm9DYXMveTNBVmtvRTZCaFozZVpiTTdj?=
- =?utf-8?B?Z2xubUl3V0F4eFRwVVBWbkg5eUhNWjF3bndOMklXalQvR3BDQ09aMU5XSWV0?=
- =?utf-8?B?UElFKzRDbyttaHRuUjBXSVJwUU5adS9Ybm05MlJ4OEx2dzRlV3hWdWs2aXQ0?=
- =?utf-8?B?bm5EWXh0b1czaXZpLzdpVkdNTm9hUFZocUtycFdYTllqYjhub01WMXZ6a2xo?=
- =?utf-8?B?Wlo0SHVab01iVks0ZDBiRWtjeTlVVmhUc1NlMVdsRCtPa3U3ejZuTGMwaGo0?=
- =?utf-8?B?MEhSKzUzMGdqNTR4cFRML1E0Y2lRbTF6TWMzUjBoR2JndDJnOXc5VFNCb2VJ?=
- =?utf-8?B?LzlKSFRseTVvMTFNNUhhMWE5cURyUDRpZHRacGNLcS9aME1UNE5CclB1QndI?=
- =?utf-8?B?TTcvL0ZaaGpwM3QySzBWOURaWW5rcm9Cbi8vUDZhWVpOZys1bW1JM1NoQnM3?=
- =?utf-8?B?UkVrT1hoc2FsRFk4WE0rVWhma1B2cFhkUnp2YkwzaUZLb1lwRTdyREozYnZ4?=
- =?utf-8?B?MFhQM0xEdnF2YzJleUx4YXErRk8ySnFKTmVSblBmazNIeWNOa3o5VlhFa3Qw?=
- =?utf-8?B?ekZNN1dYM0lXcmp4V2ZBdHVsNTBUUmtEN0FheVhvZVE5ZjJXYVo2Y0RqSnQ3?=
- =?utf-8?B?OFhwZEsvZ2JjdXo0cjlOUFkwcnlyWlpWZnBLOXlPK0JuSmxzOS9jQT09?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?S0ZEcVBuZk9scE5HMVVyaUI5K3UxOFZCSkh1VGt6WUhQQU12ZDFpY25mdmhO?=
+ =?utf-8?B?OFBKdEJncDk0WS81R0xXZDNXWUUwelFtQUlEUzJZT0N3Q1E3NW5JYlpwdnlY?=
+ =?utf-8?B?WXZ1WW9qVzcrZFlodzNSSTgzVXBlcDlXR0NFZFFaaGtIUDJiRzdiVS90ZDlM?=
+ =?utf-8?B?ODJ1dG1PZmNDb3hGVy8yaWVDT2NTS1NyZitqRzdZajUxSi9XUFRnTFJ4VnRz?=
+ =?utf-8?B?c3F3ZTcwdklWdGNhVlRRaGIyQTlLTUZxdTlmVm0xaGFGTXV5ZUwyLys4U1Nm?=
+ =?utf-8?B?dFUzRXE3TGVJc3FiTktjTlJvSGg0NVoyQzJJT3I1ZXE4WkFHbmY3MDBHaE5P?=
+ =?utf-8?B?WWNJS01qaWtIaUtaSmp4bFJLbWtCSkREcHlFM2dmUjJmbVRjRG9VT1JiVUFx?=
+ =?utf-8?B?VzlaeVFpWVR3NWpaaDB2TUJiZ2xrR3RmUkw5WEhtRjh0d01RUS93d3NBcFQz?=
+ =?utf-8?B?U09aTVArUDFIK3dxUWJTR1AyTnVLcGFXNm42M1YrTEM5bWYvY0ZWK0I0Nmwz?=
+ =?utf-8?B?cnh6dFY4OWhmQlFnQ1IvTGNmdVBNMnNsMTY0UVVvS3Q4NEhQOVJ1ZDk5My9O?=
+ =?utf-8?B?RWJ6c2l5clNxRGhHV2pmVWpIYityRytHRUZSbktUaWNpNDBBZXFlQXQ3Q1lh?=
+ =?utf-8?B?dW5LTy9DS1FUekc0Nmw2ZitBOTY5enpsQ3lyejFsc2JYclFFWTZNTWFHekJi?=
+ =?utf-8?B?V3U2REZLK3E0eUtuV1VJODN4bUZVSG0yakdHV3pvYXNGbmxRU3ZHQ2wzSkN2?=
+ =?utf-8?B?MXppTnZDLzB5bUpWY3AvVHBaQ1V0WEpsNUJCN0E4ZVhhQVBDeENwVHM0cld5?=
+ =?utf-8?B?ZzBTQXoyYW55UFVtUWtEWEpRK3VuY2dVWWIzT0lmSjV4b0hwWXFoeGt0RFU5?=
+ =?utf-8?B?Tm85cmRUSDJrSysyTTNKa1pyZmFGVzZxU2Y2NWtpV1d0WlBneDY2TllaYmNU?=
+ =?utf-8?B?NStlQVlQSkxRT1BZd3hkOVpyVGRMWllPTEJmMUhOMnhlWlZmMlJzc0NoMDAy?=
+ =?utf-8?B?Njd3MFFlKzRwTHVIMUV4SGtFRkRkdnlieGNPdDBKZmZqTk00WkZvRzUvanlk?=
+ =?utf-8?B?L2hrMkJMQ1VDQm91Q0VVMmtGNjJjZ0s0WkhFS3FJZDJFSVJzS1lGN3JhU1RG?=
+ =?utf-8?B?ckdMZDBCM29ncGFGN3VSVHIwRVdmOXJhWDRrVkhzNHMvSFVsSnBTVEw4SXc2?=
+ =?utf-8?B?VHRNUDhSbDdCVEVxNkhBZEJseWM3SHBvRDJaV0k2dzdVRWVteXF2eVRDUGFX?=
+ =?utf-8?B?WGFkRkhKd1paREN5RjZHTDZGYU1oRE92bXRjRERHY3l0K1k3eE9mZ1czYUxk?=
+ =?utf-8?B?Ri9qT3ZDbUhiUWtkK2szSllITlIwemZXVEpMLy9NOENsRzNJSEpjRjZjTFVy?=
+ =?utf-8?B?WmJxSXJlV1VERzBnay94VC9icmEyamVMSTVrVUs4S1BPeDcrTWg0MnVuWGlZ?=
+ =?utf-8?B?Nk1USjJWS1I5a05zNkhTdDlueGZidTBISDRIVlBwbmpicjNQQ0g2eU9VTzl3?=
+ =?utf-8?B?bDhKV0J1NTVqT2puQXBPSU5YL1hmaUhKNm05RjdHVnpnbzdBSXZpQWluRS9a?=
+ =?utf-8?B?eU1sK0VNQnRGMXkzTy85elNvVCs5emRuSERLZE5wNERUbTdCZnVZdUxzdGdR?=
+ =?utf-8?B?V1RkNk1wTHJYb3NxN3dHQjdDNWFJa0VMRmtuVXJxWGphTEdWNXJFRmd5Nlht?=
+ =?utf-8?B?VkluZWV1clFWa3dOUWFaY1VhODhRRVZGckJXSEJoMEhFTDRnOFVvMGg1OE05?=
+ =?utf-8?B?ejBHUnhuUDQvVEFZY0pZNWdIdHlMeFY4eGdoY3BIbVB0SFRxTFpZdWh3V2xJ?=
+ =?utf-8?B?ckFCaWtHVEVrWEsvczdMeU5ZMU9lL2JrRExEblppQXdtWEE0UmZjUFVCTUUx?=
+ =?utf-8?B?VW8xZm4vZUFueTF5cngrUHhQZjVsMXd0Z283OUg1UTBwa3YwZ0VlUFdCaVlO?=
+ =?utf-8?B?NHh1ZWk4V1kwWFJzZmVTa2M2di9LNm81YVRBZnAwaERMeFV4bkNzRkRQdUVs?=
+ =?utf-8?B?Y2dtQVlaVUp5bzhZcGllclQ0YWwyd29FU1ZaaGtadCtocWJqdldMNk1IcHJk?=
+ =?utf-8?B?eFBKQUVaVm0vZ2Z0RzJ2YUJEWFB6bGp6UXNXUkRnMVZhTjJMK294YW9jYko1?=
+ =?utf-8?B?b3JMT0RTU2J5UWtwOXFsMnBMZW1lSUhvcm9ESk1RYWRMa2FJeWFpN3l3Nmpj?=
+ =?utf-8?B?VGtZS0hLdFZOOTlmTTIrRkpiRmNFK2VHdzQvcytIbTBTRktQc1haaWltL1pa?=
+ =?utf-8?B?Wmp4NWlJcDVyUGN3MzhIeGN1TzBpajFQYytUZ2NhYSt0ZHQ4NTZ4dmdwWnR5?=
+ =?utf-8?B?aU1XUlMyTUJ4ZjUvYytMVjN2WFBzOTBEQ2txd2xXaytMNGpENktadz09?=
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 9ae424a6-664f-42bb-6c83-08deb0c92855
+X-MS-Exchange-CrossTenant-Network-Message-Id: 763a3ee1-1b87-4d75-d248-08deb0cd078c
 X-MS-Exchange-CrossTenant-AuthSource: LV5PR12MB9779.namprd12.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 May 2026 08:25:14.6121 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 May 2026 08:52:57.6295 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: Pc9Op/Kq2KNIhAISjO2wgcaJJaCXPTRwgUVtgAZRli2YqFX/7SOodlmOWyGoKxh8
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA0PR12MB4351
+X-MS-Exchange-CrossTenant-UserPrincipalName: OSu4hT8LNb4d3h+m0gimCWDny3x5NEPvn2aYHpU1kXuIxBCWkMn8otH2rRp0L8PG
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ1PR12MB6363
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -199,105 +200,75 @@ On 5/7/26 23:11, Simon Glass wrote:
 > Hi Michal,
 > 
 > On 2026-05-05T12:30:28, Michal Simek <michal.simek@amd.com> wrote:
->> reset: Add reset_reset() and reset_reset_bulk() API
+>> reset: Add sandbox tests for reset_reset() and reset_reset_bulk()
 >>
->> Add reset_reset() and reset_reset_bulk() functions to the reset
->> controller API. These functions assert and then deassert reset signals
->> in a single call, providing a convenient way to pulse/toggle a reset
->> line.
->>
->> This mimics the Linux kernel's reset_control_reset() and
->> reset_control_bulk_reset() APIs. The new functions are useful for
->> drivers that need to cycle a reset line during initialization or
->> error recovery but with also passing delay parameter.
->>
->> If a driver implements the rst_reset op, it will be called directly
->> with the delay parameter. Otherwise, the reset core performs
->> reset_assert(), optional udelay(), and reset_deassert() as fallback.
+>> Add DM test coverage for the new reset_reset() and reset_reset_bulk()
+>> API functions. The tests exercise the assert + deassert fallback path
+>> since the sandbox reset driver does not implement the rst_reset op.
 >>
 >> Signed-off-by: Michal Simek <michal.simek@amd.com>
 >>
->> drivers/reset/reset-uclass.c | 34 ++++++++++++++++++++++++++++++++++
->>   include/reset-uclass.h       | 12 ++++++++++++
->>   include/reset.h              | 41 +++++++++++++++++++++++++++++++++++++++++
->>   3 files changed, 87 insertions(+)
+>> arch/sandbox/include/asm/reset.h   |  3 ++
+>>   drivers/reset/sandbox-reset-test.c | 14 ++++++++
+>>   drivers/reset/sandbox-reset.c      | 31 ++++++++++++++++++
+>>   test/dm/reset.c                    | 67 ++++++++++++++++++++++++++++++++++++++
+>>   4 files changed, 115 insertions(+)
 > 
-> Reviewed-by: Simon Glass <sjg@chromium.org>
-> 
-> optional nits / thoughts below
-> 
->> diff --git a/include/reset-uclass.h b/include/reset-uclass.h
->> @@ -76,6 +76,18 @@ struct reset_ops {
->> +     /**
->> +      * rst_reset - Reset a HW module.
->> +      *
->> +      * This optional function triggers a reset pulse on the reset line,
->> +      * asserting and then deasserting the reset signal. If not implemented,
->> +      * the reset core will use rst_assert followed by rst_deassert.
->> +      *
->> +      * @reset_ctl:  The reset signal to pulse.
->> +      * @delay_us:   Delay in microseconds between assert and deassert.
->> +      * @return 0 if OK, or a negative error code.
->> +      */
->> +     int (*rst_reset)(struct reset_ctl *reset_ctl, ulong delay_us);
-> 
-> Please document that the core inserts a udelay(delay_us) between
-> rst_assert and rst_deassert in the fallback path, and clarify whether
-> an rst_reset implementation must honour delay_us or may treat it as a
-> hint. Without that, authors don't really know what to do with the
-> value.
-
-ok. Will fix in v3.
-
-
->> diff --git a/drivers/reset/reset-uclass.c b/drivers/reset/reset-uclass.c
->> @@ -225,6 +226,39 @@ int reset_deassert_bulk(struct reset_ctl_bulk *bulk)
->> +int reset_reset_bulk(struct reset_ctl_bulk *bulk, ulong delay_us)
+>> diff --git a/drivers/reset/sandbox-reset.c b/drivers/reset/sandbox-reset.c
+>> @@ -66,6 +69,21 @@ static int sandbox_reset_deassert(struct reset_ctl *reset_ctl)
+>>        return 0;
+>>   }
+>>
+>> +static int sandbox_reset_reset(struct reset_ctl *reset_ctl, ulong delay_us)
 >> +{
->> +     int i, ret;
+>> +     struct sandbox_reset *sbr = dev_get_priv(reset_ctl->dev);
 >> +
->> +     for (i = 0; i < bulk->count; i++) {
->> +             ret = reset_reset(&bulk->resets[i], delay_us);
->> +             if (ret < 0)
->> +                     return ret;
->> +     }
+>> +     debug("%s(reset_ctl=%p, delay_us=%lu)\n", __func__, reset_ctl,
+>> +           delay_us);
+>> +
+>> +     sbr->signals[reset_ctl->id].asserted = true;
+>> +     udelay(delay_us);
+>> +     sbr->signals[reset_ctl->id].asserted = false;
+>> +     sbr->signals[reset_ctl->id].reset_count++;
 >> +
 >> +     return 0;
 >> +}
 > 
-> Just to check - pulsing each reset sequentially means the first
-> finishes its full assert/delay/deassert before the next starts
-> asserting. For the cadence_qspi case in 3/4, where multiple OSPI reset
-> lines are expected to be asserted together, the previous code did
-> assert_bulk() / udelay() / deassert_bulk() so all lines were held low
-> simultaneously. The new behaviour is different. Is that intentional,
-> and have you confirmed the cadence controller is happy with it?
+> Reviewed-by: Simon Glass <sjg@chromium.org>
+> 
+> Some optional nits / thoughts below.
+> 
+> The commit message says the tests exercise the fallback path since the
+> sandbox reset driver doesn't have rst_reset op, this patch adds that
+> method below - so the commit message could use an update.
 
-You are right that behavior has changed but it is aligned with what Linux kernel 
-is doing.
-We are using only one reset line that's why not an issue for us. But it saves 
-one firmware call (per reset line).
+Will update.
 
-int reset_control_bulk_reset(int num_rstcs,
-                              struct reset_control_bulk_data *rstcs)
-{
-         int ret, i;
+> 
+> If you want coverage for the fallback you could add a second
+> sandbox-reset driver without rst_reset, or hack the rest to clear and
+> restart ops->rst_reset,
+> 
+>> diff --git a/drivers/reset/sandbox-reset-test.c b/drivers/reset/sandbox-reset-test.c
+>> @@ -96,6 +96,20 @@ int sandbox_reset_test_deassert_bulk(struct udevice *dev)
+>> +int sandbox_reset_test_reset(struct udevice *dev)
+>> +{
+>> +     struct sandbox_reset_test *sbrt = dev_get_priv(dev);
+>> +
+>> +     return reset_reset(sbrt->ctlp, 0);
+>> +}
+>> +
+>> +int sandbox_reset_test_reset_bulk(struct udevice *dev)
+>> +{
+>> +     struct sandbox_reset_test *sbrt = dev_get_priv(dev);
+>> +
+>> +     return reset_reset_bulk(sbrt->bulkp, 0);
+>> +}
+> 
+> You could pass a non-zero value here if you want to test the delay.
 
-         for (i = 0; i < num_rstcs; i++) {
-                 ret = reset_control_reset(rstcs[i].rstc);
-                 if (ret)
-                         return ret;
-         }
-
-         return 0;
-}
-EXPORT_SYMBOL_GPL(reset_control_bulk_reset);
-
-
-If it is problematic we can go back to assert_bulk/delay/deassert_bulk in 
-cadence driver.
+udelay is called and because there is missing check for 0 value it does timer 
+reading once. Don't think that make sense to delay tests.
 
 Thanks,
 Michal
-
-
