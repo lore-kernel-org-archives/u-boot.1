@@ -4,105 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA392CD4F24
-	for <u-boot@archiver.kernel.org>; Wed, 13 May 2026 14:39:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D766BCD4F24
+	for <u-boot@archiver.kernel.org>; Wed, 13 May 2026 14:47:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CA6E284688;
-	Wed, 13 May 2026 16:39:23 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=hifiphile.com
+	by phobos.denx.de (Postfix) with ESMTP id 3ABF88467C;
+	Wed, 13 May 2026 16:47:48 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=hifiphile.com header.i=@hifiphile.com header.b="H/SLgeu1";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="lxRz+mMs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CC24C8460E; Wed, 13 May 2026 16:05:33 +0200 (CEST)
-Received: from mail-lj1-x235.google.com (mail-lj1-x235.google.com
- [IPv6:2a00:1450:4864:20::235])
+ id 49E0784686; Wed, 13 May 2026 16:47:47 +0200 (CEST)
+Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
+ [IPv6:2a00:1450:4864:20::633])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E5FB480F0E
- for <u-boot@lists.denx.de>; Wed, 13 May 2026 16:05:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 46B7F83EF9
+ for <u-boot@lists.denx.de>; Wed, 13 May 2026 16:47:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=hifiphile.com
-Authentication-Results: phobos.denx.de;
- spf=none smtp.mailfrom=admin@hifiphile.com
-Received: by mail-lj1-x235.google.com with SMTP id
- 38308e7fff4ca-393da8f389bso69209951fa.1
- for <u-boot@lists.denx.de>; Wed, 13 May 2026 07:05:31 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1778681131; cv=none;
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x633.google.com with SMTP id
+ a640c23a62f3a-bce57c132b2so575615766b.0
+ for <u-boot@lists.denx.de>; Wed, 13 May 2026 07:47:45 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1778683665; cv=none;
  d=google.com; s=arc-20240605;
- b=UAiLNrWTbNIQ8XLTar4MI3HzuYCzW1vN8i/+qtTimoYvBPv6gP+eFyBwT17BThX2kH
- TM+Om/NihywNrNlJVSodInNA3RqNdS9fg2QzuGolkfweO+bjKdqofOpJhtEPOr3cJifU
- n25AMAfgWiqb5VXwKO/lhCdckNYiXBb8mRWoZS+t7syEa6jU0RxQvYovHsbrOD2U6Wez
- 9XSBNdoNcs+L7DKtvKh/7+Sb/aayJ3caJpt5IKUAp/J59OtH2+GF2fUDMlAxnLdJVN6h
- F12LVm2YXjil1KN6O3Xp56ojjdTZuPnRSh/vopHuUJ3iH5Mf8JB2Y4UW5Bc6lm0wOjOt
- MoxQ==
+ b=FseCrGLybVQjkDguP7Xde2d7n9okRxF5WSiQqHL8UkIeQCWubeQXp4tRNcTrYkHYjt
+ Y6vDjmY3jvVbEJqcO3sJpmDET/YGs3O+AYAcfaqTBQzxotDb0jMvBjhDuB8Ly3f74OtL
+ or8PuA3VuWLmIymvimh1dyc1afYg3xCWN/oFNLbzFbYt42mZktWuFPiVKW0aLTv2GutX
+ HgCe4XE+LkPDtD1MULTmX74Ds416RIOIu7OIVg2rjWlXeUhiDbQ3uldUGoEb5yWLRkDU
+ gmq/qaBEDQBGloSSyKUliPNvP0iZ67PhigOuGit4SZ54LZzkAatj4dA4z17F/2Xna19n
+ AdLg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=rKQzatD/o0LdgFG6PUif3FrbRHbZN6aZqoMEcOhmid4=;
- fh=o7sUg971Ngl6mgo5MSxn3xSPCveE/PUo3diUxw4WzeY=;
- b=h/SWKp5OlwtVfe3aHoEcxBTCDmp/fPyoSlRMx+iuiWancOBwu7WQ+JQbQpHWRoF6GH
- wpkjPvS8rhwgo5j5cXjanBsRQo9smxzrc+r0XvPNuNQcxNQ2suwadf7qYS0Wcr0Y8d5Y
- tE5FM9FBe1fc0GjDeOZyRkwpsa0+3bp7Omb526kBan70aMUVHHytOkYTTBn+zPCwzxUi
- kV3iaRuMxPy4NKGwGbCWh7N4oTF39rwUHu3vOgYXtYRqkjQvKDyoR7rbhZJxQ6rT6dxc
- 8H5A49VDohgq1r0RluKFDCCBYfz86v5kgs7gQ9kuwdqrbJDoKp15e79iFhxpedetZ8DO
- 8PCQ==; darn=lists.denx.de
+ bh=GtRROAR8eyC+l8ZCv62CFMmqt6epSfbE1cxEER4Lz9k=;
+ fh=DFckRsv0qokwsicMGANTSyuTqOOhjVTjcJimUrc7cIQ=;
+ b=FDtY7cwa+7ynMevyZQ9B7LVCLXS/TU79mnksW7beq/Kao2yv/VF8aY/DHHcRdrZ6k/
+ WWhrh1XTO6MhkL0AkH4X4RZuPNj6tlIw6amxgF0t62TB48WbBDco5COMvHqSXSjIiMpf
+ vYhxtnuCVyiFL3P1PZTwbXnHDKTnJBsZrLif8EV1M1m/DB+dyLEnXTIKnSsU/r39RAu8
+ DkZwtACjYjgB15xKyDMurRmYSW0yOtBylsiOlrlQ92F/BwJm9JVzGjzpjQpYSarM8Aa2
+ Ud2ei0yQr4Tg2fn+kn/LvnmBlvzr0xDVujpcQBOyEsYSu6wRAPLBT0EH59g/ZIReyoTz
+ 5cmg==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=hifiphile.com; s=google; t=1778681131; x=1779285931; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1778683665; x=1779288465; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=rKQzatD/o0LdgFG6PUif3FrbRHbZN6aZqoMEcOhmid4=;
- b=H/SLgeu1aHu66PPAurjDmdyCVxuWU3aJYSGU392L/tRlRYaldJsxVxcvChq889wiE5
- e2cRn7cRg/JpmVCLP9ysvTuJXOQ0GhVG8aeBD5WWjyUhnW8HJUmnTH4nhe3/0OsDgtxb
- 1+QUkrFhL9B2nM/a2MNpI2K1IhBdc5X/3sTtcjm5Jl2GnQupy+Omehd7+UZejz9/JNJ/
- D/DHNKQjiB0yD+Hzq3JNmBYnb86mqK8S6MNjZVBdBtzCd9EI5f+Ihm7M6ViLBKXQXbYp
- EqhBnvUq3X41EQG+8UKAJ9uy+MZ1SMqj7H0dxBv3grG9QAgo8PMl/idA5S6D3MmEEEWD
- Kbpw==
+ bh=GtRROAR8eyC+l8ZCv62CFMmqt6epSfbE1cxEER4Lz9k=;
+ b=lxRz+mMsfL16RN3a9qezbv81o2FGLiPcLyCeDux7WN/Mg/5H7xhrb/TDTjJsazlVsd
+ jtkLuuOFjw6gd2vORiuCj9kLWg3CvmJ6E8N00Oy9hCWiHOdo8C0XbtnIob4113s+pZjx
+ AktlBRiXgmP77IogxqtPDF/9EbAJE0i/SXBNo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778681131; x=1779285931;
+ d=1e100.net; s=20251104; t=1778683665; x=1779288465;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=rKQzatD/o0LdgFG6PUif3FrbRHbZN6aZqoMEcOhmid4=;
- b=kDm0gcheqzqSE+tYv5A7V9hn2peanbKxnfJJC5kID/4ZdYC+ZQ+nuVaMXUASP0MBWA
- B2sNhl8hHHkK3WQcAfcKGEPxaas0zew5LQmElufVweJde/gHNklqkOmHoGGPjFLfi/AV
- rik1GapMxrege3/GZAB/OFqCeIqqI9oQy7OqFZZcT9sN9E3PF3uhxETJyuM8M5b1oKHK
- sAUo4U6q7UlJbSWCjzJqVgwWcRTGZsg2yJ9zSZslnyiujfGCLvK7gLCUgrfeyuotmxcu
- BXMJH3oqJhWLbwJDO3rO1emdScDdZGQfBeyCoq12hfFRFyVtOeue/DSPIohAAzoLrHBC
- eKZw==
-X-Gm-Message-State: AOJu0YwNE9aB7JJqUga2RNKzmGPSftxngUi/7NdEi50fDEmrr2yAdgGQ
- GKAHwBM3iBF/MsEd5rxfhBBpn66WjKW+5g1Urf6/EjyZIrUF4OwzMGehFGrci7ucAE+SQ2UfoYS
- au2vPdcuI+T+7DuQG2F6swKcEtzsmWjPn6I/NNyBLWQ==
-X-Gm-Gg: Acq92OH2OFd7Dchk8e+GvDzNv6q/CjxgwT9Nm2Auv9Y+qvyHMff/oycKRQgNlXermot
- 03goLymZgquF8wiI0yqPCupPlup0UIhd7bb6xdkXIPbDKxLazsOxJqU64+hFFamsnUJaTCHGarY
- o4BTNWo1U408BIbPixzTZ63qneREQlmVmgM6KvR1RV5JHbAvmOwqVBau0JTedNNg58cZinzUYEt
- K2GZmnhBcMwHXOcNhPP5YSr0p9A9kPTf6Od3pHjY+nkK4SvRxwp/VGuSEcNd6SEvZO9PbeSvN89
- wi8BG2c=
-X-Received: by 2002:a05:6512:3ca5:b0:5a4:6f3:ddd with SMTP id
- 2adb3069b0e04-5a8ef93a9ffmr1226240e87.13.1778681130818; Wed, 13 May 2026
- 07:05:30 -0700 (PDT)
+ bh=GtRROAR8eyC+l8ZCv62CFMmqt6epSfbE1cxEER4Lz9k=;
+ b=Sd0sF8+mEWKYbtW9QbVIPb2nTMp1vmH0UvvqXvVICKv815ANCG0FpGW55t0hJG7Llb
+ X4bbbROtXUOiWt38TvFVs+7q6ahumv037+7M+IjChREbVdUx0mES1l5c1Ee4P5jaesPo
+ EnufkTSXJOk3RCXPEPZzhRyae7XW95KzjOBANINtPpNLEZ/VJldjOYdESWK6+GmwLiEU
+ ijpNvRf+jeLiw6UUiqbHy5sD2N8Nuxc9AbzSK/WmJ6RCe2dDp8nbrXRErrjyR+w+Yum6
+ /2eryLU0kHMUIQbo31dhW9Eev7EM2TfEnbfRd02bXMVJj41scPWYxJfwqAhjhbFEq9c0
+ Ingg==
+X-Gm-Message-State: AOJu0YyNNlkRMTW8dDddEk0XJMOeeja/XOmTDlsgskjRErXm1Oeky3Xo
+ QN7XrE3/xusRUn2t842H6RRY+6QoBjWhe9oRTu/uRtlUtggwLL9ISlPTUADjMRVFLMqpspZlkRa
+ FPUd63NmZnEs1ZV3oA1KcLTfv9xgo8fnjYbukOm/0
+X-Gm-Gg: Acq92OEneE3TnlxxoG14orBAdDDXCiWWv7m39KM23fjZU2EBaBt+YJL8A41mdlIrEeM
+ nDpednUKWwGsnobVVT3xxO+5x9dcRUs96MEZl+J1ca82Vfsig7Sa8WqxHv1p6Ko5F6KNonXRpGA
+ 7ZTmkqZuZhBcWD9bxIPu3auv7JpXTF/xIX8C5+RbAzEWgRf2zGfUCEDqF8iJw9emCQqh/wNIMxP
+ pNSsuis/d/dhc/NNcO16r4SpaxPpfoEEI/wm8bfTLa2SuMMVaKkJFcEUe/UTTFBThGM6UVVdlQX
+ EzmPMA==
+X-Received: by 2002:a17:906:9f8a:b0:bd0:def9:4119 with SMTP id
+ a640c23a62f3a-bd3ae250c67mr225731366b.16.1778683664701; Wed, 13 May 2026
+ 07:47:44 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260512-udc_ep-v1-1-8a783e44cf7f@hifiphile.com>
- <87h5obv9go.fsf@kernel.org>
-In-Reply-To: <87h5obv9go.fsf@kernel.org>
-From: Zixun LI <admin@hifiphile.com>
-Date: Wed, 13 May 2026 16:05:17 +0200
-X-Gm-Features: AVHnY4LS04WPZJpCyL5AioNPTViqSMBIqUUm23KIvvlveaRZe9PVNvqEsI5tkJA
-Message-ID: <CA+GyqebQKevme6u+tvp1LCKAhVxsSuKo7PQq-saQOx3dTBZ5hA@mail.gmail.com>
-Subject: Re: [PATCH] usb: gadget: atmel: do not disable endpoints in
- reset_all_endpoints()
-To: Mattijs Korpershoek <mkorpershoek@kernel.org>
-Cc: u-boot@lists.denx.de, Lukasz Majewski <lukma@denx.de>,
- Marek Vasut <marex@denx.de>, 
- Tom Rini <trini@konsulko.com>, Zixun LI <zli@ogga.fr>, 
- Andrew Goodbody <andrew.goodbody@linaro.org>
-X-Mailman-Approved-At: Wed, 13 May 2026 16:39:21 +0200
+References: <cover.1777984225.git.michal.simek@amd.com>
+ <21c23cc7403153b45a81c958118b8d9f85f73140.1777984225.git.michal.simek@amd.com>
+ <CAFLszTiYJU028+L40rzNa=X-qqDYCfbPqYMfGhzpK3Xq2mr8ag@mail.gmail.com>
+ <cbadd601-4337-4eaf-bf6b-8c98645dc089@amd.com>
+In-Reply-To: <cbadd601-4337-4eaf-bf6b-8c98645dc089@amd.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Wed, 13 May 2026 08:47:33 -0600
+X-Gm-Features: AVHnY4JGk50B7V9afPfZhLcUsw_jo1fBLOxwp-Dkk4HGyvFrEEaOOnP3gjH2pAY
+Message-ID: <CAFLszTgZzZ8LHZ5KWMWqx2a54dPLBk1V86AxPGd=jEK1PQrPpg@mail.gmail.com>
+Subject: Re: [PATCH v2 2/4] reset: Add sandbox tests for reset_reset() and
+ reset_reset_bulk()
+To: Michal Simek <michal.simek@amd.com>
+Cc: u-boot@lists.denx.de, git@amd.com
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -119,23 +111,88 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Mattijs,
+Hi Michal,
 
-On Wed, May 13, 2026 at 1:24=E2=80=AFPM Mattijs Korpershoek <mkorpershoek@k=
-ernel.org>
-wrote:
-
->
-> Also, I believe (but I may be wrong, please try it out) that we can
-> maybe remove the whole if (!ep->desc) block from usba_ep_disable() since
-> that should be handled by the enabled flag wrapper introduced by
-> commit 59310d1ecb9f ("usb: gadget: introduce 'enabled' flag in struct
-> usb_ep")
+On Wed, 13 May 2026 at 02:53, Michal Simek <michal.simek@amd.com> wrote:
 >
 >
-I agree we can remove the whole if block but it will desync with kernel
-code.
-Do you want me to send a patch ?
+>
+> On 5/7/26 23:11, Simon Glass wrote:
+> > Hi Michal,
+> >
+> > On 2026-05-05T12:30:28, Michal Simek <michal.simek@amd.com> wrote:
+> >> reset: Add sandbox tests for reset_reset() and reset_reset_bulk()
+> >>
+> >> Add DM test coverage for the new reset_reset() and reset_reset_bulk()
+> >> API functions. The tests exercise the assert + deassert fallback path
+> >> since the sandbox reset driver does not implement the rst_reset op.
+> >>
+> >> Signed-off-by: Michal Simek <michal.simek@amd.com>
+> >>
+> >> arch/sandbox/include/asm/reset.h   |  3 ++
+> >>   drivers/reset/sandbox-reset-test.c | 14 ++++++++
+> >>   drivers/reset/sandbox-reset.c      | 31 ++++++++++++++++++
+> >>   test/dm/reset.c                    | 67 ++++++++++++++++++++++++++++++++++++++
+> >>   4 files changed, 115 insertions(+)
+> >
+> >> diff --git a/drivers/reset/sandbox-reset.c b/drivers/reset/sandbox-reset.c
+> >> @@ -66,6 +69,21 @@ static int sandbox_reset_deassert(struct reset_ctl *reset_ctl)
+> >>        return 0;
+> >>   }
+> >>
+> >> +static int sandbox_reset_reset(struct reset_ctl *reset_ctl, ulong delay_us)
+> >> +{
+> >> +     struct sandbox_reset *sbr = dev_get_priv(reset_ctl->dev);
+> >> +
+> >> +     debug("%s(reset_ctl=%p, delay_us=%lu)\n", __func__, reset_ctl,
+> >> +           delay_us);
+> >> +
+> >> +     sbr->signals[reset_ctl->id].asserted = true;
+> >> +     udelay(delay_us);
+> >> +     sbr->signals[reset_ctl->id].asserted = false;
+> >> +     sbr->signals[reset_ctl->id].reset_count++;
+> >> +
+> >> +     return 0;
+> >> +}
+> >
+> > Reviewed-by: Simon Glass <sjg@chromium.org>
+> >
+> > Some optional nits / thoughts below.
+> >
+> > The commit message says the tests exercise the fallback path since the
+> > sandbox reset driver doesn't have rst_reset op, this patch adds that
+> > method below - so the commit message could use an update.
+>
+> Will update.
+>
+> >
+> > If you want coverage for the fallback you could add a second
+> > sandbox-reset driver without rst_reset, or hack the rest to clear and
+> > restart ops->rst_reset,
+> >
+> >> diff --git a/drivers/reset/sandbox-reset-test.c b/drivers/reset/sandbox-reset-test.c
+> >> @@ -96,6 +96,20 @@ int sandbox_reset_test_deassert_bulk(struct udevice *dev)
+> >> +int sandbox_reset_test_reset(struct udevice *dev)
+> >> +{
+> >> +     struct sandbox_reset_test *sbrt = dev_get_priv(dev);
+> >> +
+> >> +     return reset_reset(sbrt->ctlp, 0);
+> >> +}
+> >> +
+> >> +int sandbox_reset_test_reset_bulk(struct udevice *dev)
+> >> +{
+> >> +     struct sandbox_reset_test *sbrt = dev_get_priv(dev);
+> >> +
+> >> +     return reset_reset_bulk(sbrt->bulkp, 0);
+> >> +}
+> >
+> > You could pass a non-zero value here if you want to test the delay.
+>
+> udelay is called and because there is missing check for 0 value it does timer
+> reading once. Don't think that make sense to delay tests.
 
-Best regards,
-Zixun LI
+We try to avoid delays in tests, although 10us wouldn't matter. We do
+have timer_test_add_offset() but I don't think it helps with udelay()
+
+Regards,
+Simon
