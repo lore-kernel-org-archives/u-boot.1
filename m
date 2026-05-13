@@ -4,119 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2535CD37AC
-	for <u-boot@archiver.kernel.org>; Wed, 13 May 2026 20:50:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5807ECD4F21
+	for <u-boot@archiver.kernel.org>; Wed, 13 May 2026 21:36:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 44CC2846A5;
-	Wed, 13 May 2026 22:49:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 7789883E36;
+	Wed, 13 May 2026 23:36:40 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="pGaQ4lnm";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="buSDuZIp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 47741845E3; Wed, 13 May 2026 22:49:57 +0200 (CEST)
-Received: from BN8PR05CU002.outbound.protection.outlook.com
- (mail-eastus2azlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c110::3])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id AC9DB8469A; Wed, 13 May 2026 19:57:23 +0200 (CEST)
+Received: from mail-pg1-x534.google.com (mail-pg1-x534.google.com
+ [IPv6:2607:f8b0:4864:20::534])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 380B184663
- for <u-boot@lists.denx.de>; Wed, 13 May 2026 22:49:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4E37083FB0
+ for <u-boot@lists.denx.de>; Wed, 13 May 2026 19:57:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=rs@ti.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=da8gv6tqWAChLf/vAPYf3+nqgMHTj6YJpsGriUMQV0fKso2V1mUpc8NW5Kg7VED/Iy5sj1Ny5EM8mjrHBpml+ktSJ2APudYvVx5nTZ8cQpxG0p7NEE5UP6lkY5eMmncIGe7JgNSwGT03BZ/EzLvOPWn+NdZXOK+ApNiRTu9TBRlYDFhoJ0ORrli9Gd3hBzHcLoO7S8nQBx7C+crbAre8NqBBGjk0R8+fyTCeGJujEkiYLLPiv7HRpo5z/z8KWldAT5jjbGMmVHA05GSZUv5qMMkPMnnPXZvJnfxfqToBiP3l/AHag1BDXt3uIps19p1EJgif9YUuSrOSP7nguhPzhw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=jXdhYjM4VR9cawkhDuBq0lx+uFZMqWldoABL2qBv8r4=;
- b=EB4s6kkGC+j/R44Rm64PwIiihz//Do4umUq34teHGWYkKLnUMFMwsD+mVduyWo3CBDMAw34CvPfZmzOUIPOZ7EMP5UXAU1DHAPQpQW9nWeP+20rEx/pmVaI1kXJUDQ/a209RTPhQfNXuBr7OKO1EB8yr2/dDLaTvXqsUy4Z+qSfx442fl7PsN+FhBYvtIqrk7ufikD8gMmuFB/mc+onrgVtvRM0a/Jk+jC7b0oFTTP/y/nSWbxrPqp4GjwSth1y8KvMmRc5l6bI49yVmI7IoiVfd+TfBYlpghRIlS+Oco3/qt5zY06MZnXlHlkJc0m/NncrP+Wl6cYgJBZdWJ1lEew==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.21.194) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
- dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=jXdhYjM4VR9cawkhDuBq0lx+uFZMqWldoABL2qBv8r4=;
- b=pGaQ4lnmenz4izg028XY0+1p1b0mNZlCKqrvA43SyzRJ/9aXHIJVulozwOObR/ZTfKYwib60FjLnBo4Zc5i8PKsyWZFhKT/beWOhrPLZxxxH8YSA/geXMY2BSX+4T1YNZQ9UuhtrrdC5oalbDkXdGqYQ9P1JnOygEAYLXz7w2ZY=
-Received: from BY1P220CA0014.NAMP220.PROD.OUTLOOK.COM (2603:10b6:a03:59d::9)
- by BN0PR10MB5110.namprd10.prod.outlook.com (2603:10b6:408:114::9) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9913.12; Wed, 13 May
- 2026 20:49:51 +0000
-Received: from SJ1PEPF0000231D.namprd03.prod.outlook.com
- (2603:10b6:a03:59d:cafe::d5) by BY1P220CA0014.outlook.office365.com
- (2603:10b6:a03:59d::9) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9913.12 via Frontend Transport; Wed,
- 13 May 2026 20:49:51 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.194)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.21.194 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.21.194; helo=flwvzet200.ext.ti.com; pr=C
-Received: from flwvzet200.ext.ti.com (198.47.21.194) by
- SJ1PEPF0000231D.mail.protection.outlook.com (10.167.242.234) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.25.13 via Frontend Transport; Wed, 13 May 2026 20:49:50 +0000
-Received: from DFLE212.ent.ti.com (10.64.6.70) by flwvzet200.ext.ti.com
- (10.248.192.31) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Wed, 13 May
- 2026 15:49:45 -0500
-Received: from DFLE211.ent.ti.com (10.64.6.69) by DFLE212.ent.ti.com
- (10.64.6.70) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Wed, 13 May
- 2026 15:49:45 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE211.ent.ti.com
- (10.64.6.69) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37 via Frontend
- Transport; Wed, 13 May 2026 15:49:45 -0500
-Received: from rs-desk.dhcp.ti.com (rs-desk.dhcp.ti.com [128.247.81.39])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 64DKnipF269440;
- Wed, 13 May 2026 15:49:44 -0500
-From: <rs@ti.com>
-To: <robertcnelson@gmail.com>, <ayush@beagleboard.org>,
- <Erik.Welsh@octavosystems.com>, <anshuld@ti.com>, <bb@ti.com>,
- <trini@konsulko.com>, <afd@ti.com>, <xypron.glpk@gmx.de>,
- <ilias.apalodimas@linaro.org>, <sjg@chromium.org>
-CC: <u-boot@lists.denx.de>
-Subject: [PATCHv8 3/3] memory: reserve from start_addr_sp to initial_relocaddr
-Date: Wed, 13 May 2026 15:49:43 -0500
-Message-ID: <20260513204943.736142-4-rs@ti.com>
-X-Mailer: git-send-email 2.54.0
-In-Reply-To: <20260513204943.736142-1-rs@ti.com>
-References: <20260513204943.736142-1-rs@ti.com>
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=allan.elkaim@gmail.com
+Received: by mail-pg1-x534.google.com with SMTP id
+ 41be03b00d2f7-c8028fa6039so4759286a12.2
+ for <u-boot@lists.denx.de>; Wed, 13 May 2026 10:57:21 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1778695040; cv=none;
+ d=google.com; s=arc-20240605;
+ b=QgMc/sRK8cub1xkO83GinQdGSdBdVgiHab80JS8LiZz79YE5yFZZQHk5fb6X90HEdG
+ UZ4RYYC6KQTEJsltJMbM2yBK0NM2zOwNLllT0vnfvgQKa+rpzU7OUGfq9UUZVHcXcxPm
+ CzmPB2FVSWTZ1nnDaSFyuoAr5DwzjKOo7hoNlJMauOhpCsofPjfvlPRbulK17JTKMXyo
+ T1KUnS/hIiZFfy9OwMqBM7gBeXS2YjZO9OEs0niST0UfAYLNV/+bCVKzvjIu2Gwye4rs
+ 7MwKiZ+ny+rZ4EwyKCEV535VwJDGHyYVklrbIKwehvY5gZ81+cu/b2zyMCYkohKoe54c
+ k5Ww==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=to:subject:message-id:date:from:mime-version:dkim-signature;
+ bh=PMqbp7wQmxOMQQ+iM7B+aOmMpOcLsRX9Hu+BEvmvJHs=;
+ fh=ea3Lb1kmqTyoSSOGd3r79PdCdfQHXBjS15GzGXd6hwE=;
+ b=g5hzbMDbJ35h1yarIGytVS01fVi14EKRopYP5YGGQzHGkBXpyP1P0LWXW5bksd+RYw
+ ftjAGcc+vWFB0GTmt9YV4d3cCpnOmDBL5dTMOFY6TKJOi07i8zg/33dtPsMSGabaFZE0
+ XsL4EzmnrIUzWHCaUTiVfqVFC/LsOLm5RgKKasJc5eSG2KiXu/nFiIKEJRy3+qdnQs7z
+ 2cbVXBx+WTPtdLFktUnkU9JS20XpcNZNUxyfbcidBj6512dXI5hSLy44Qs/xh6ANJ+tA
+ k1LD2sCBCULtMaJ12sI6i3vp5s6POblws53qe4gnEh+bnsYmSUbgBLzdgB6MKH8tFZh1
+ kzXQ==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1778695040; x=1779299840; darn=lists.denx.de;
+ h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=PMqbp7wQmxOMQQ+iM7B+aOmMpOcLsRX9Hu+BEvmvJHs=;
+ b=buSDuZIp1+J5WUEjwDQFtQ5uVVsckD8a9ZR/uUpKqfT1L9eVKpkAYQkO/Vk2eMhCiH
+ nbQ2oqZ5G7YHwJamedDaOS2oQFJi7TzjCHielHRa9hkB8Gdt7ImSIUo5S2kjnV8cK4To
+ 6D07kCvN+e8apdzZ7CljzZS/zxg0ZL2DeuYayvrYYP9+rSVOufRp0zltrjshwhXkWlea
+ M/ZiqGYLksVvlvXbDjp7fPpl0WppnsiS+Bt2Dm4gFTSH/omstUNor3FKNtXqTA+6jd7i
+ 9+p6b+XGpqSEj8Xcn2xqlsxBoOGlnWjK3sStbfY9v5uc2TLWFPBbneH/nNoyR2ojslTp
+ rJtg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1778695040; x=1779299840;
+ h=to:subject:message-id:date:from:mime-version:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=PMqbp7wQmxOMQQ+iM7B+aOmMpOcLsRX9Hu+BEvmvJHs=;
+ b=ewa3O5ON/aeFD9ohwXFfhdTG4Bp3sk0TdX3Jx8/1qvvhBkaDJfAcRkxKI4W23PL1uz
+ yoKCMcTZDPDYRAfvSjMgZXlQAzdnAAPq7CvW0syrNAJQBdIQVN/5ZvCXGzamZBA1iq6a
+ HvAZYXNUk6wy8fqAp800RGrqAVxHIOv4NRhfNCyKt509wetT6lHe75qB8k8ucaV74bG7
+ 8+dt/UpcW3w14hL+UxVqIpOfpyIzslOP/Iy9d9TV8JMH0WO7uireNEJyy4VO1TI2zcF/
+ hSIeK188ZVlV3EYXj7fpAqtss0TUZ7mhsOAtqiHbXEnWHEpbdBNiot+UOLcH3nc9azj4
+ LN2A==
+X-Gm-Message-State: AOJu0YyZZ+tP9gqUNwUd1LY38Iwn4Zk0ZSgdb4aBZtTn1lFTS8g5Op9e
+ 0FFLfyw9G3Q9yPDAOPSBPr8xvxkqw7XVxzUvr8lXreRkhCM3U4yrelUJWZ/9Ivp0qmHcNwKOlMk
+ iQZhmAzR2tFudEVT+RwqVg+ftKrNs+L+Y6d35DlE=
+X-Gm-Gg: Acq92OHa8pJWPUeHzVLFqvqzXC//ISzsIy/1XoGHKBjZZGbfrKvpcVeDq8mUZztzrRT
+ ybjQG6OmSz+H7U0Imyaxkmng/c1AVtf84NS6Bt3YIwCu0D/aVkJykTQ5/DkyaLwqP1Zl3vGkMtb
+ xst2ZNpu6J0zeGgOyV4r12QQ29eaBuA/HnqNp5Ng4a6hZMfC4ab+Ov7odzRuL5YBb18YgOvqvni
+ tOitEFjP8vnNIl1/+hfeo5XK8amnuDmctlqHOxt/WhoZywPL/c++JDF/DMGMwH9oClqT+Me/fvQ
+ PZLzus8IeOaKMGmj0dn6T80kqEd/yjzBbGXEEpqdTHnxmSptx3fDmNhMJ8X2pb6qXbjWzVqJNS2
+ KKQU5vDIghSRwb3gkj16Rp9UTbhof6uNuOqEhNhNco+THH2gxrH3whM+DiIsljgEmpnyB/OT6BQ
+ ZSiY04
+X-Received: by 2002:a05:6a20:7289:b0:39c:1f90:284e with SMTP id
+ adf61e73a8af0-3af83e46908mr5063966637.53.1778695039594; Wed, 13 May 2026
+ 10:57:19 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ1PEPF0000231D:EE_|BN0PR10MB5110:EE_
-X-MS-Office365-Filtering-Correlation-Id: 415c85aa-0273-410b-6a07-08deb1312d9b
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|82310400026|36860700016|376014|921020|56012099003|22082099003|18002099003;
-X-Microsoft-Antispam-Message-Info: UlAJOxg3WyfNAkH4b2CGNs6pZlPaHBgQBmvXIj5NDq7vsbC643EID8jx+ccDnT41wEl7J0IvXF7SErQdMAYavcmQP5ErcvXglMf5GcY9JVW3Cu6/6HT+YaJsTV7kJDSwdxgafyZ0aECqcqIhak2+0oIbnl6tLVHysN2ftH4FWB0SfV6+K/f5aVS5Y2Q+/k8WSAZhmydZ46Tok3K8eJokTglAkgx3vQQ63we48JY6hL8/56NFFHbRcYjp1nKR37j4wkBlALoYCM6AN0YMPkpmwpXyqldH1z+ghJEjPyPrDprmE69qejw3bBG1G55PaKkL6N/pGOgf9YUSxpo1ShP3TWrG8nAohLcbrgNbGGkx/0ukETwthPd96XXQtrYx/V67ZYbo1NClBz7LEUMTUjs0KkMcGELn7BN/OkDRHThUkljn/K5gweYD2MeYYyk219GySmOKUybzD3aKUipFBq7aojGDQrBiGHabK2rMioODTZ92nYkO4F02eh3PTyP5vFxDdXoNoz7E60CONedSrsgSFtGGIcUtfZxhIriBdP69w6OZw4JEcG4Q4w4ffDpvqwRhCIp6aHlYKMxb64gzeLIyE7TvjTblCcnBzVruwv6gZtcSnN5P7e0K7u58MZ9USLedeFSsn/dfzsA3Eo+2MR9U1qysbdxxNrGALDs+IBzMyaTaTtZwvhlSt1+j35KAfn/lfSkGNmb3PsmDcbWbS/LAgToBzTHm11cRXt1pg0B3wGcl6260wn6EY/5fKiZX8A2+mq/lkDh4QGK5IvTv3SDJ4Q==
-X-Forefront-Antispam-Report: CIP:198.47.21.194; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:flwvzet200.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
- SFS:(13230040)(1800799024)(82310400026)(36860700016)(376014)(921020)(56012099003)(22082099003)(18002099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: HXTuTgrFhESzM8ryoCT7qdEGO1X3N6AkYzeSfKVZZrTdLzHd83xa/44Qe+SKq7+OlOSUaMdFkbBAtLeaS+dzHwkc95NHY94ByhAjECJPRy5ZI+YmdWDAb6IxFzLzjPDjTIc78oCd8tRyH3pIcyMWC1HE5et5tEvNxgaJcTShNKtp3iuFvY7u/Kj+/I/kQTpx9cKKVeegreIqYwPMyzH0PelqtwK6i9GglbMbvVCgzO0T9oEmpQSdx69bBLaaPBX1R+DFG4m+Iu8JnflpljIkGKp7sl6MR8HWadNOsYlQY3ubYETjx7sDLOpuzZHjm+ckxGwDVQRLEyMosb2mwJrPKEWajkB3dm7dF5eHkE8T03q1nsa1rrDgAZJrFJM/v+AT65astVMxb/E1tVKilthno7NA4y4SveEpHAjm67KrOgvPXS6vG6raf/+pS7R5vCAv
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 May 2026 20:49:50.8460 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 415c85aa-0273-410b-6a07-08deb1312d9b
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.194];
- Helo=[flwvzet200.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: SJ1PEPF0000231D.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN0PR10MB5110
+From: Allan Elkaim <allan.elkaim@gmail.com>
+Date: Wed, 13 May 2026 19:57:02 +0200
+X-Gm-Features: AVHnY4L092HXuRkXORIDZz2ovdYARocWEs0C_Z6sGXLFsLYXmVsShDnzjvLkS_4
+Message-ID: <CACgNL-F2=KJtZ+gThpx_BuWsn6puqFxK0uLOmnABSS9=rRQmeQ@mail.gmail.com>
+Subject: Bug: Synchronous Abort in sqfsload resolving symlinks (aarch64) after
+ increasing inode count
+To: u-boot@lists.denx.de
+X-Mailman-Approved-At: Wed, 13 May 2026 23:36:38 +0200
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -133,119 +111,124 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Randolph Sapp <rs@ti.com>
+Hello U-Boot team,
 
-Add a new global data struct member called initial_relocaddr. This
-stores the original value of relocaddr, directly from setup_dest_addr.
-This is specifically to avoid any adjustments made by other init
-functions.
+I have encountered a Synchronous Abort bug in the U-Boot squashfs driver
+when attempting to load a kernel image via a symlink.
 
-Reserve the memory from gd->start_addr_sp - CONFIG_STACK_SIZE to
-gd->initial_relocaddr instead of gd->ram_top. This allows platform
-specific relocation addresses to work without unnecessarily painting
-over a large range.
+*Environment:*
 
-Signed-off-by: Randolph Sapp <rs@ti.com>
-Reviewed-by: Simon Glass <sjg@chromium.org>
----
+   -
 
-v7:
-	- Reinstate bank hopping logic for U-Boot reserved region
-	- Update description for gd->initial_relocaddr, make it clear this is
-	  also an exclusive value
-	- Leave the PRAM region out of the reservation. Previous commit messages
-	  indicate that this is intended.
-v8:
-	- Adjust initial_relocaddr doc string
+   Architecture: aarch64 (ARM64 / Raspberry Pi CM4)
+   -
 
- common/board_f.c                  | 9 ++++++++-
- include/asm-generic/global_data.h | 9 +++++++++
- lib/efi_loader/efi_memory.c       | 2 +-
- lib/lmb.c                         | 7 ++++---
- 4 files changed, 22 insertions(+), 5 deletions(-)
+   OS: Yocto-built Embedded Linux
+   -
 
-diff --git a/common/board_f.c b/common/board_f.c
-index ce87c619e68..aeb53b4c274 100644
---- a/common/board_f.c
-+++ b/common/board_f.c
-@@ -330,6 +330,8 @@ __weak int arch_setup_dest_addr(void)
- 
- static int setup_dest_addr(void)
- {
-+	int ret;
-+
- 	debug("Monitor len: %08x\n", gd->mon_len);
- 	/*
- 	 * Ram is setup, size stored in gd !!
-@@ -356,7 +358,12 @@ static int setup_dest_addr(void)
- 	gd->relocaddr = gd->ram_top;
- 	debug("Ram top: %08llX\n", (unsigned long long)gd->ram_top);
- 
--	return arch_setup_dest_addr();
-+	ret = arch_setup_dest_addr();
-+	if (ret)
-+		return ret;
-+
-+	gd->initial_relocaddr = gd->relocaddr;
-+	return 0;
- }
- 
- #ifdef CFG_PRAM
-diff --git a/include/asm-generic/global_data.h b/include/asm-generic/global_data.h
-index 745d2c3a966..8d1d49b1133 100644
---- a/include/asm-generic/global_data.h
-+++ b/include/asm-generic/global_data.h
-@@ -107,6 +107,15 @@ struct global_data {
- 	 * GDB using the 'add-symbol-file u-boot <relocaddr>' command.
- 	 */
- 	unsigned long relocaddr;
-+	/**
-+	 * @initial_relocaddr: top address of U-Boot in RAM
-+	 *
-+	 * This should be the value of relocaddr after setup_dest_addr() and
-+	 * before reserve_pram() or any other allocations or reservations shift
-+	 * it. This address will, depending on the platform, be equivalent to
-+	 * ram_top and should also be considered an exclusive address.
-+	 */
-+	unsigned long initial_relocaddr;
- 	/**
- 	 * @irq_sp: IRQ stack pointer
- 	 */
-diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
-index 046a2bb4641..9d7eda9422f 100644
---- a/lib/efi_loader/efi_memory.c
-+++ b/lib/efi_loader/efi_memory.c
-@@ -869,7 +869,7 @@ static void add_u_boot_and_runtime(void)
- 	/* Add U-Boot */
- 	uboot_start = ((uintptr_t)map_sysmem(gd->start_addr_sp, 0) -
- 		       uboot_stack_size) & ~EFI_PAGE_MASK;
--	uboot_pages = ((uintptr_t)map_sysmem(gd->ram_top - 1, 0) -
-+	uboot_pages = ((uintptr_t)map_sysmem(gd->initial_relocaddr - 1, 0) -
- 		       uboot_start + EFI_PAGE_MASK) >> EFI_PAGE_SHIFT;
- 	efi_update_memory_map(uboot_start, uboot_pages, EFI_BOOT_SERVICES_CODE,
- 			      false, false);
-diff --git a/lib/lmb.c b/lib/lmb.c
-index 8f12c6ad8e5..27c8565e590 100644
---- a/lib/lmb.c
-+++ b/lib/lmb.c
-@@ -540,13 +540,14 @@ static void lmb_reserve_uboot_region(void)
- 	ulong pram = 0;
- 
- 	rsv_start = gd->start_addr_sp - CONFIG_STACK_SIZE;
--	end = gd->ram_top;
-+	end = gd->initial_relocaddr;
- 
- 	/*
- 	 * Reserve memory from aligned address below the bottom of U-Boot stack
--	 * until end of RAM area to prevent LMB from overwriting that memory.
-+	 * until the original relocation address to prevent LMB from
-+	 * overwriting that memory.
- 	 */
--	debug("## Current stack ends at 0x%08lx ", (ulong)rsv_start);
-+	debug("## Current stack ends at 0x%08lx\n", (ulong)rsv_start);
- 
- #ifdef CFG_PRAM
- 	pram = env_get_ulong("pram", 10, CFG_PRAM);
--- 
-2.54.0
+   U-Boot version: 2026.04 (Latest Release)
+   -
 
+   Filesystem: Squashfs (A/B partitioned rootfs)
+
+*Context & Use Case:*
+
+To support a robust OTA update strategy (using RAUC), I require strict [kernel
++ rootfs] atomic slots for my A/B partitioning. Therefore, the kernel is
+intentionally baked directly into the squashfs rootfs partition and loaded
+via /boot/Image, rather than residing on a shared FAT boot partition. This
+guarantees that an OTA update or rollback applies to both the rootfs and
+its specific kernel simultaneously.
+
+*Description:*
+
+My custom boot script successfully uses sqfsload to load /boot/Image (which
+is a symlink to /boot/Image-6.6.63-v8) directly from the active squashfs
+slot. This setup worked perfectly until I added the tzdata package to my
+Yocto rootfs.
+
+After adding tzdata (which introduces hundreds of timezone files and
+symlinks into the squashfs image), sqfsload crashes with a Synchronous
+Abort when parsing the /boot/Image symlink.
+
+If I bypass the symlink and load the target file directly (sqfsload mmc 0:2
+2 /boot/Image-6.6.63-v8), it works flawlessly, even with the bloated tzdata
+filesystem.
+
+*Crash Log:*
+
+U-Boot> sqfsload mmc 0:2 2 /boot/Image
+Error: invalid inode reference to directory table.
+"Synchronous Abort" handler, esr 0x96000004, far 0xffffffffffffffea
+elr: 00000000000e73c0 lr : 00000000000c8da4 (reloc)
+elr: 0000000037fb13c0 lr : 0000000037f92da4
+x0 : 0000000037b51780 x1 : ffffffffffffffea
+x2 : 000000000000000c x3 : 0000000000000000
+x4 : 0000000037b51780 x5 : 000000000000005f
+x6 : 0000000000000000 x7 : 0000000037b1b100
+x8 : 0000000000000001 x9 : fffffffffffffff0
+x10: 0000000037b514d0 x11: 0000000000124c8b
+x12: 000000000002d196 x13: 0000000037e838cd
+x14: 0000000000016dc1 x15: 0000000000016c97
+x16: 0000000037f7a80c x17: 0000000000016c97
+x18: 0000000037b29d60 x19: 0000000037b51800
+x20: 0000000037e838ad x21: 0000000000000001
+x22: 0000000037b512c0 x23: ffffffffffffffea
+x24: 0000000000000000 x25: 000000000000005f
+x26: 0000000037b512a0 x27: 0000000000000001
+x28: 000000000000012e x29: 0000000037b1b110
+
+Code: 8b030042 cb030004 cb030021 17fffff0 (38636825)
+Resetting CPU ...
+
+*Relevant U-Boot Configuration:*
+
+CONFIG_USB=y
+CONFIG_DM_USB=y
+CONFIG_USB_DWC2=y
+CONFIG_USB_HOST=y
+CONFIG_USB_KEYBOARD=y
+CONFIG_SYS_USB_EVENT_POLL=y
+CONFIG_USE_PREBOOT=y
+CONFIG_PREBOOT="usb start; setenv stdin serial,usbkbd"
+
+CONFIG_ENV_IS_IN_FAT=n
+CONFIG_ENV_IS_IN_MMC=y
+CONFIG_SYS_MMC_ENV_DEV=0
+CONFIG_SYS_MMC_ENV_PART=0
+CONFIG_ENV_OFFSET=0x100000
+CONFIG_ENV_SIZE=0x20000
+
+CONFIG_FS_SQUASHFS=y
+CONFIG_CMD_SQUASHFS=y
+
+*Steps to Reproduce:*
+
+   1.
+
+   Generate a squashfs image with a few files and a symlink to a kernel
+   image.
+   2.
+
+   Verify sqfsload can load the kernel via the symlink.
+   3.
+
+   Install tzdata (or pad the filesystem with thousands of dummy
+   symlinks/inodes).
+   4.
+
+   Attempt to sqfsload the kernel via the symlink again.
+
+*Workaround:*
+
+Currently, my workaround is to use a ROOTFS_POSTPROCESS_COMMAND in Yocto to
+remove the symlink and rename the kernel binary to /boot/Image directly,
+which loads without issue.
+
+Please let me know if you need any further information. I am fully
+available to help investigate this, provide additional debug logs, or test
+out any potential fixes and patches on my hardware.
+
+Best regards,
+
+Allan
