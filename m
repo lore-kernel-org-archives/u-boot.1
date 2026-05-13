@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47FB0CD4F24
-	for <u-boot@archiver.kernel.org>; Wed, 13 May 2026 07:41:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D240CD4851
+	for <u-boot@archiver.kernel.org>; Wed, 13 May 2026 07:58:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D3C9083EF9;
-	Wed, 13 May 2026 09:41:40 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6AE32836AC;
+	Wed, 13 May 2026 09:58:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=arm.com header.i=@arm.com header.b="qAzZoDc6";
-	dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b="qAzZoDc6";
+	dkim=pass (1024-bit key; unprotected) header.d=arm.com header.i=@arm.com header.b="FxaQkQVO";
+	dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b="FxaQkQVO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 85DD48464D; Wed, 13 May 2026 09:41:39 +0200 (CEST)
-Received: from DU2PR03CU002.outbound.protection.outlook.com
- (mail-northeuropeazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::3])
+ id 158D3838BB; Wed, 13 May 2026 09:58:14 +0200 (CEST)
+Received: from PA4PR04CU001.outbound.protection.outlook.com
+ (mail-francecentralazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20a::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7EA60836AC
- for <u-boot@lists.denx.de>; Wed, 13 May 2026 09:41:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B4F568056B
+ for <u-boot@lists.denx.de>; Wed, 13 May 2026 09:58:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=Jerome.Forissier@arm.com
 ARC-Seal: i=2; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=pass;
- b=e/LSXjrH3Q4lIW5Rfvjaz0e/u1s9pw8nAiB92Uw1iS7TuBAN9UW+SRwAmaDT0DuKo/ng5wUKTBOx8P7k2v6/FQfu8Hu53B4VAHPs31Vs/GngUMtTZ+jxukGwqEKsWMTitt5/SUdQEWx1j9KBoh4miuH3jBwDePiA+vhozZl2sf08N58EEOUS+F7nNFKUevJkHvemAvKdwE0YVMF+zTc2BvXRQtc7R2WCnlxAT6MeH+B4HwRkz6UKS14Azq0BAMiEOHP8s5Xw3U/d/fhZ6lZzeYU6uShmusRcBe4hewMU60FgtyfuvoxEG2644gg44TBmkVKj1+zjAI2Fc15KGVZhKg==
+ b=D8M96hmYirnfNgXNM2d1f58ij131ZpkOmSmMu9jYgYKM9yE6PXSSv1znqSEfpUeutBQCoBYSGEOTsKU0YIGgZrYQ/Wy252t4x7mog5Moj5cUmJL90VpT4y3IolNwrcVmegc3MwVO/qjkxntvVPN1m2gtmr68eArjrLXe3eQktCaTfnyFSFqLCphUzUg+ynTJozutcTj/zU41iixfKDnC0OLDTvyqfw9xZFMI4zMv06xLdxNLpO6tlZkT2E1to/eRcfL1uJHvYgpbAa/M14wrh2z+rIXTo/LZ9f/DrfpLVVKObwU1Vl0cLKsZLm6BC8VSdptiqbbo76yDbhbP8puxGA==
 ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=2r9KMBKetTG1fvQqoShiMAOJr1SY/uwdjqYTXDTQ9ts=;
- b=lYaMc9Z2yjWc5jWKIgnbzZB1hKCu8xJ4mVF1MUjCYiclS0ROxH8456Iwgln6mubC3Y6qUOVPYxvUdxG2DN1AmKXqirglq7kfhIWS+SiE11KobNjEogrrfAFqLQHy3YYof6+iNQBM81sxZbGAHjZYPzWTWtLEDHKIIrDkWlaiM2No0mZNpqbiItA312niWtI8IjcpgGxyxvZ5TUYWfOIBtYzheiaom1BbPZTe760lDui1jchs8DOMU9Go5VzBapTS1yTs8Yf5ofD7wDes3Zv5XWdf1R7GSF+bNdeNC0NfSODMRpCceV+IqvbmY1BdMHKzxAgSuHdisCMeP+D2JEmPqQ==
+ bh=87EegO5snZgVg026+EOePZoW7IwFiCAec3cu6He5qCk=;
+ b=GNe3634D+Zvs8GPAy8ZXYrWPajaoPZz4iiEklHW0O/ybLecjtIxX4YkHt6qq+eHRR0Y6jIIPQq3CPA4BNFpCYr/uKJmQDIt8RhDIUOWEuzOu1L4yC7s4pxJIhIdbxBoHqFzQ55qIRS3IVBU0n97f/HlnIlZfv7UtNc+SBVV79i/LzZnCZGoNOrXJ/qlkcQu2tie0NOnkteJyaqPSAkuFTCcr2sfDY1vCahcCW0FjqmBSPSBnmyKxIFuRCAXGhShq7l++b8msruoF70zPsuibrHLaW7Fb4//ZOht8ixFQEOQQw1kYoNidjusyMCCM7m0x5Zx+g/yC6FIowNjFtX581Q==
 ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
  4.158.2.129) smtp.rcpttodomain=baylibre.com smtp.mailfrom=arm.com; dmarc=pass
  (p=none sp=none pct=100) action=none header.from=arm.com; dkim=pass
@@ -43,18 +43,18 @@ ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
  dmarc=[1,1,header.from=arm.com])
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=2r9KMBKetTG1fvQqoShiMAOJr1SY/uwdjqYTXDTQ9ts=;
- b=qAzZoDc6mDzAMR7qnZ28ViDQCIubAIlxGmILlxaIgzAimKijQtp3eiKBrrNgaUHIueGMmWH1x4VhakPT2wCtbD0MGBphcB9MnOCXPcnjNzjk2iUN3Q034BFNidIXoWvoTKYzblhAU0cR4DJJR5q5keADhLGEbpupM3sm+mnQRqU=
-Received: from DB8PR04CA0006.eurprd04.prod.outlook.com (2603:10a6:10:110::16)
- by AS8PR08MB5958.eurprd08.prod.outlook.com (2603:10a6:20b:299::16)
- with Microsoft SMTP Server (version=TLS1_2,
+ bh=87EegO5snZgVg026+EOePZoW7IwFiCAec3cu6He5qCk=;
+ b=FxaQkQVOZ2Rm+QiGRfhRkxrWb0E0Sg/mEpXjbR7xzAZdyUi1MgYTlHx7aWDdsknFMWue9tR7oAlwUCoMGD4oiX1JsFwvD/xdBAVgJe2zkaGTj9ET2mTfpQqLagGKoLKJAIUyyZWWuth1UBA1PbTGhXp5h/EGYh+EQz08P5tK0qI=
+Received: from CWLP123CA0080.GBRP123.PROD.OUTLOOK.COM (2603:10a6:401:5b::20)
+ by AM9PR08MB6226.eurprd08.prod.outlook.com (2603:10a6:20b:2d8::23) with
+ Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9913.11; Wed, 13 May
- 2026 07:41:31 +0000
-Received: from DB3PEPF0000885B.eurprd02.prod.outlook.com
- (2603:10a6:10:110:cafe::bf) by DB8PR04CA0006.outlook.office365.com
- (2603:10a6:10:110::16) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9870.25 via Frontend Transport; Wed,
- 13 May 2026 07:41:31 +0000
+ 2026 07:58:07 +0000
+Received: from AM3PEPF00009BA0.eurprd04.prod.outlook.com
+ (2603:10a6:401:5b:cafe::a2) by CWLP123CA0080.outlook.office365.com
+ (2603:10a6:401:5b::20) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.25.18 via Frontend Transport; Wed, 13
+ May 2026 07:58:06 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 4.158.2.129)
  smtp.mailfrom=arm.com; dkim=pass (signature was verified)
  header.d=arm.com;dmarc=pass action=none header.from=arm.com;
@@ -62,93 +62,92 @@ Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
  4.158.2.129 as permitted sender) receiver=protection.outlook.com;
  client-ip=4.158.2.129; helo=outbound-uk1.az.dlp.m.darktrace.com; pr=C
 Received: from outbound-uk1.az.dlp.m.darktrace.com (4.158.2.129) by
- DB3PEPF0000885B.mail.protection.outlook.com (10.167.242.6) with Microsoft
+ AM3PEPF00009BA0.mail.protection.outlook.com (10.167.16.25) with Microsoft
  SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.21.25.13
- via Frontend Transport; Wed, 13 May 2026 07:41:31 +0000
+ via Frontend Transport; Wed, 13 May 2026 07:58:06 +0000
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=NUp0O8EyoEUpGd4z5tEeVTgJUegR6NOz5fKMp4BVt4+l3L5oz366ZUQFpElCl9KhQ0cSPhrWBKx6ISLdHH/xHBnN/Jh1BSFUjcWUAuUP9nLRQahCCC35lBO6+cS5LMnEZqWdt8R4qB5hy9Vll1j3T2gT+gGzOoJolF/D59HOiELg1Z/VOVh9AXVbl/A8hKUF3OYsj8y9jMSoG94LzZ54IlO7galchPxy1F1ajg+zt65dN3OCg8mcbqo/3eMzhQfZ/ktUgbJ0ITl2pPrJToMfYJLRK5pJ+8Y9cJAG3UfSGc9cvwVWpl2RpmwWBlfOHdfYb1L8kV3yvfWWtZsquqVZ9g==
+ b=ggbWij+kv4W5ZC28S2ujdC5bqFqMApB4AHUwL/HYn8PV7DoDzyKfWxVJNQU40Ek6Ts0iWbp+3ZjOVLLkMYEfli8Zhm5byQsACTn4+JCYdZnnbXLjSvgVvh9pUS65ahQwgR+rKCVcFXTXmoXII4NVRsaYEPr9LTe7tSdoqqwaxRpgfC5qynBRmLZBvnZFMCExQZ7CffKkU4TqT8lqux3v0gMZxtxGUPqIkan2qdddeV324us/yy99opbk+Ygb7QYWFM/Reh6M3PsjDVu0I/hiCrBUbK2eaA600jvZiGiW7mFuiw7SfFQMYi6lxXd0qwOH+qsZQkk12b1A+ME92NX/xg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=2r9KMBKetTG1fvQqoShiMAOJr1SY/uwdjqYTXDTQ9ts=;
- b=nXoZYM17i1+2K+wn3MU/j7WV4DE94s2CpJJxEi6NEc3gzV3Nydrntqc9k8rWmVFXY9Yoy44FszUXDnQRWfbxNQ/eUD6pjfrpA2QZseh8ZX36Dww81ODKYuFEv4H+TOmgR7ma44UCrp5sSZ4PeZzenWoKb5oGLQrM6ENaArpZkFbcbdn9N5TKU81t5/3h0A/b990rmlGE2lJ4P2OHuGZiaKnTMpANREcrMY/DFAWTb8xfx508Mf8IfF/qT+pruq+HzP23BDJJ6sO65dotAfYynBGwKRwCsM54leyK1l7B5cpqxbYfDaS4tV7avvb1Gq5Fl+bwqmKAaIP5QmzckiLVog==
+ bh=87EegO5snZgVg026+EOePZoW7IwFiCAec3cu6He5qCk=;
+ b=wByoKbFFpRw/sWrPoCM5oWzzXQ4qFKHZB/9lr2pA8XyyiRxKTqaJR9/TfykvSGwU6UnOPzK0yWMn6k9fWFR7yHmNE19Jx8Mw1ybUSNoir46yM5eA8UEv1oMaPbDyKknzsHNWhUO3H8CZMmIqVUBkBDn8AqQpyxrNPxlTqzsKU+o+A76RSwQfhBP2lf+C9GXTuG34KpDLBwkLaK5uOexPYBv85YkTkeqwZMlA67c6lCz0f40XX/3S9s8mewOv3o+SoFHv2+u8UNIN1kQW/M/1V0XJcS5Uy/mxABxvvYzwoWG1etn+AujNTz58c1QqBEhKlRxj4f/IKZM2nZyG2lApHg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
  header.d=arm.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=2r9KMBKetTG1fvQqoShiMAOJr1SY/uwdjqYTXDTQ9ts=;
- b=qAzZoDc6mDzAMR7qnZ28ViDQCIubAIlxGmILlxaIgzAimKijQtp3eiKBrrNgaUHIueGMmWH1x4VhakPT2wCtbD0MGBphcB9MnOCXPcnjNzjk2iUN3Q034BFNidIXoWvoTKYzblhAU0cR4DJJR5q5keADhLGEbpupM3sm+mnQRqU=
+ bh=87EegO5snZgVg026+EOePZoW7IwFiCAec3cu6He5qCk=;
+ b=FxaQkQVOZ2Rm+QiGRfhRkxrWb0E0Sg/mEpXjbR7xzAZdyUi1MgYTlHx7aWDdsknFMWue9tR7oAlwUCoMGD4oiX1JsFwvD/xdBAVgJe2zkaGTj9ET2mTfpQqLagGKoLKJAIUyyZWWuth1UBA1PbTGhXp5h/EGYh+EQz08P5tK0qI=
 Authentication-Results-Original: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=arm.com;
 Received: from AM0PR08MB11733.eurprd08.prod.outlook.com
- (2603:10a6:20b:740::16) by DU0PR08MB8711.eurprd08.prod.outlook.com
- (2603:10a6:10:401::15) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9913.11; Wed, 13 May
- 2026 07:40:20 +0000
+ (2603:10a6:20b:740::16) by PR3PR08MB5625.eurprd08.prod.outlook.com
+ (2603:10a6:102:89::14) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9913.12; Wed, 13 May
+ 2026 07:57:03 +0000
 Received: from AM0PR08MB11733.eurprd08.prod.outlook.com
  ([fe80::29d7:e9ba:ff69:a0c3]) by AM0PR08MB11733.eurprd08.prod.outlook.com
  ([fe80::29d7:e9ba:ff69:a0c3%3]) with mapi id 15.20.9913.009; Wed, 13 May 2026
- 07:40:20 +0000
-Message-ID: <4be0141c-dd60-41f3-a8d3-4c3458092aed@arm.com>
-Date: Wed, 13 May 2026 09:40:18 +0200
+ 07:57:02 +0000
+Message-ID: <3260fdac-8c9f-4eed-a23d-b70865e54381@arm.com>
+Date: Wed, 13 May 2026 09:57:01 +0200
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/3] net: lwip: wget: return errno codes from
- wget_do_request()
+Subject: Re: [PATCH v2 3/3] net: lwip: introduce net_lwip_eth_stop() function
 To: David Lechner <dlechner@baylibre.com>, Tom Rini <trini@konsulko.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Cc: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de, nd@arm.com
 References: <20260512-net-lwip-add-stop-function-v2-0-85146da317dd@baylibre.com>
- <20260512-net-lwip-add-stop-function-v2-2-85146da317dd@baylibre.com>
+ <20260512-net-lwip-add-stop-function-v2-3-85146da317dd@baylibre.com>
 Content-Language: en-US
 From: Jerome Forissier <jerome.forissier@arm.com>
-In-Reply-To: <20260512-net-lwip-add-stop-function-v2-2-85146da317dd@baylibre.com>
+In-Reply-To: <20260512-net-lwip-add-stop-function-v2-3-85146da317dd@baylibre.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: LO0P123CA0004.GBRP123.PROD.OUTLOOK.COM
- (2603:10a6:600:354::9) To AM0PR08MB11733.eurprd08.prod.outlook.com
+X-ClientProxiedBy: PA7P264CA0411.FRAP264.PROD.OUTLOOK.COM
+ (2603:10a6:102:39b::6) To AM0PR08MB11733.eurprd08.prod.outlook.com
  (2603:10a6:20b:740::16)
 MIME-Version: 1.0
-X-MS-TrafficTypeDiagnostic: AM0PR08MB11733:EE_|DU0PR08MB8711:EE_|DB3PEPF0000885B:EE_|AS8PR08MB5958:EE_
-X-MS-Office365-Filtering-Correlation-Id: 810b529b-4fbd-4b49-be41-08deb0c30cd2
+X-MS-TrafficTypeDiagnostic: AM0PR08MB11733:EE_|PR3PR08MB5625:EE_|AM3PEPF00009BA0:EE_|AM9PR08MB6226:EE_
+X-MS-Office365-Filtering-Correlation-Id: 173e5bbe-9aad-4697-d4f2-08deb0c55dfa
 x-checkrecipientrouted: true
 NoDisclaimer: true
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam-Untrusted: BCL:0;
- ARA:13230040|366016|376014|1800799024|18002099003|22082099003|11063799003|56012099003;
-X-Microsoft-Antispam-Message-Info-Original: 8xZn612bvouO13darBQ0Xmg++5VBHjGtzXqB6JJkiTqXNvaZCjBt7hUnaks4+IELml9V1JQrZaT/W/cni++1rZ9nHLpSEKTq7la7NyiiVHDt3BdIVvDO/IecJpGRfXe8t+BumfVvZZzjNYFb2xbvYh4vHdp6iKKnY8Hi93OsWXvyFZka/T3kl5fzwsSE6ISVlVlNTo2QvQFcwshxOOysYjN0YJtN1ZwSbXDxS8UnBfiTU8ff2UHb0ob2yJBILSh1b6vhiF7T7jZ3ZMBWs+2zug2H8DFJ7xX6CCMsVwYOP8/NLU8c8puifzq6CiSxhq41A6iPYEyw0ZHSPwTEWHF/e/CwfXKM0eMF4pQssHGEQujQEe1rolPYwoppSRhuVYde0CikS8/zk8NV7wPC9edv66PfZbRrN98uVstnZ+nfx+XZAADvOJ+xs5St11cyfZAhsTITcZAqs4Uez/mODwupeFcKEDmL62t9IknKwUP/SEf9c2L9/pUqlL3kJde6M6eTb6c9nbZv9ERyMzKX0ehF38/8UmkCfFrpo6R7wtf4HqEC77yUd4xSO9nAtDL53zBgL+PusWU0S31wH/KWPRG4OPtEEFW+cO3JjGviwWTHvDlK5kD51E3tvWlmzwX55ekN5QH/zHtLmB3P2GWNLACZvmeiZeWsWn7oDk4MWOIAc+eX0Ji2XVOyMieY+xbwqrMz
+ ARA:13230040|366016|376014|1800799024|22082099003|18002099003|56012099003|11063799003;
+X-Microsoft-Antispam-Message-Info-Original: QfhY8h9rhO8m5jhjIi7ZXH/9j20YrKXNEK1XatIrb5bQ7j74lVBSWQ0+us/pBtiQ2Uyhu19VKsq6ZXuT3EsqJlrFnMiD7vtQgb4M0HWSOMyg/3Qjyb6oubhqxc+iG7FZBXcmda4RbEkcsuHJ9Eo96RvuSn3BU2C4QpSo3cV/wy01/e1UJq7hTq/ZHf1yvVvRL6T7S7S2A/QVk+fiQGkJotXiu2kUpXFz+bm5daz+tM2dvdIIyYziSo+J8Doy+wbtrYOvxsbFBB6l034fDPIyFN0+MCAruEhV8YMgTZLPauYkgNO7Jdwv3m8+avha4qL47zaMu+LFQRN8ENwud5I4L3m9Dvx+IKZWL0q83UA3fnp+NZ9Es6Kvo0Fp2uBcHiu2sjAiiIr/OiZBZbf0Ja7ioZe2idx4/e1dDr+i3ocetlz2FsI/ETHZYWvhfACLxE+u/6PKbL1h7qN8X4Qjjy90McyBP1DzCCyOXS/kdI9MmrD4Urs4ANhqTM4wa0bav66fhzs6h3unSTmZQog/MXLqoW9D1lWj+u3i6gytV1w/aHGECemvt2B5mx7F9xRQAVRXfpT5hs2VShc1ahMTDFxhzYR+Bd/k/If3Z0kduCh/bkpbgNBonBIH8A1ikl8zRueDAoV+xuUKueoG9x/Eo+6vdJBPiuPpPgAbwFrp/ZEw4XbEkbIIYa0i8CsV3VS94GuG
 X-Forefront-Antispam-Report-Untrusted: CIP:255.255.255.255; CTRY:; LANG:en;
  SCL:1; SRV:; IPV:NLI; SFV:NSPM; H:AM0PR08MB11733.eurprd08.prod.outlook.com;
  PTR:; CAT:NONE;
- SFS:(13230040)(366016)(376014)(1800799024)(18002099003)(22082099003)(11063799003)(56012099003);
+ SFS:(13230040)(366016)(376014)(1800799024)(22082099003)(18002099003)(56012099003)(11063799003);
  DIR:OUT; SFP:1101; 
-X-Exchange-RoutingPolicyChecked: KbONvdJ3BpyMfTPzG9RFgXHWRRWOy50PM5svZvoiHGUlGzR6ezZbR8u1Chlh9V6Ll6wZAZBCZRHXvTTlZEDXiib6u51BRoIlknQyBwzIhII/l29U1SsYt5lYM9nXAkFwmZLCtRWqnNIlHVgyAsWn2fX0y7IKTVi/07gCR/rs5AJ1IYh22AEjRfNt3KTzDtmXcEvUGjiZYLfs/jEiXFmgy97Fc1fw2BibviCYvjMJsd1dlt0VAPE8TnavexzcaAODs26DKuj2SseFrNohFptP87SNSL+y1p+JrPuj7XHITvuDHpbfEUlNPFht+uEZ1nWc9RtZOUeAusav5ayiumMXIQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU0PR08MB8711
+X-Exchange-RoutingPolicyChecked: sI030coy8FKNTYrBJ+ZrkVoRKrVkd+aae8N+MZs3VnLjgXSdLrjhGsBvkmU2YsvMsODTkwW83uqtU80WsMcHoKGpcunApsFt276OAn6nJD3eA7XBVNP+WOVC6yenph0VsknQ7HcHZhj2JO1DbeTeRI82QPack0c3+/kp60KL7XjaEsydWFRq/uT/DMKR91kDylT++oBmej/vYb0VhUxlFYuI1vAXg/1eQi8Re9maoSmTjtknkcf29ivBlnCESgTNuXHqGXY9WY/ItVu9Xnmt3HdhzTV7S4ziPXnaYKAqhiEbgvyml5SyRuZDlF6514UcH8HOfdfohIjr6G9fMjLmyw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PR3PR08MB5625
 X-EOPAttributedMessage: 0
-X-MS-Exchange-Transport-CrossTenantHeadersStripped: DB3PEPF0000885B.eurprd02.prod.outlook.com
+X-MS-Exchange-Transport-CrossTenantHeadersStripped: AM3PEPF00009BA0.eurprd04.prod.outlook.com
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id-Prvs: 8561c44a-e5a6-48e2-a664-08deb0c2e276
+X-MS-Office365-Filtering-Correlation-Id-Prvs: 59c84c63-efd1-490a-8f87-08deb0c537e9
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|14060799003|82310400026|1800799024|35042699022|36860700016|376014|11063799003|22082099003|18002099003|56012099003;
-X-Microsoft-Antispam-Message-Info: 5pngTTfe4QGAvhilhAJkxY9z3iw/l1oEpZPyA56C+esYnByQbgDg0hCLr3FfAux1iCoA8ga9Hzsk8/+7hZp5rI+EmSx24KJv6s9mWTKbGA83hsmHvLdzURyHIbzkkfF46Xn5YREit/j159bdLEZZcQ1dh/YWVe8U8vDaWDrwYYAVhR7II3gJT1eSXniid8oc+OkJrzMnVKL1MQCqjEnUGljvV86XEtipE5my7Db6u8yhm3mTRZFCluDXTU4vgVALMsDO+3WU+tfKeQTaePXWJYq5ntzAdgOiHPjVnnQPgJ0BEaoKqM/mKYXNssn+cj6vqmllbpAMi1jPMTSl959Z+FWvJz6TAOcfxMG+Kb6j9sDpleXnRW7py+evxl75sjk0KTdhohD5ThiLRAUgkSrePrWU2P6RV1ecaLzyvQowgKZyynL+pj/cTj408m4MDmoX/2ryBcOqZKZoCia57jFhJiICkcyYuKEzmzNfZqFEyA3tqvx5Sc3BhxgTdzyed/u+463vfmWJRO5vIN266hccPmBDIn87d1cWBkwTrL61M6NQPluPqQtiHZcuUc22IkYM224Uyx5tuTC9yK8ZM6+WErahgkEvtElYtA7BNOH7coS+lrjvpfEt33ecMcbVlPG1hQosHoO3wFB0EGln7ydHGBXf1pjpJJdQiNXLhPSNLvmDqgGSAZP+RMnSSHVogd7TPfWz6LCKTnfuCn8fuEXQe/i2I/RZXK4JWl7DEP42abM=
+ ARA:13230040|82310400026|1800799024|35042699022|376014|14060799003|36860700016|56012099003|22082099003|18002099003|11063799003;
+X-Microsoft-Antispam-Message-Info: pkavcs7nyQFOU7l9LPHRLG5aqlABVUEMhxIc/sV1AxxVw4JQ3aPyKIyq6ME2VCJWKGkH/yGM4fq4IozvRpFAqqFMeJYbhS3M0UY0jFaeCBjHpTeivLwh6AYTanledZTZUkZY5aZqozwBmE3LoEYudDucVQgy4rUS8Uk427JVASarUj42VYYqLN4c/EBqTV9jML3Pvd9ofUXpxZiF4rjZM4rfXgj0LbV6V6g1aoEBgrI6CsyJIi0pfhDB1eUw/QKhdUEwP8Yay+g1V0eimChI1edLPMalev1YZ53IXySW4OTNEOXp30dk1GpiJav22TXS06B5Ibsi59ZQDdHoP/Tb+vZUp86F5kW1CFrZrbowL+39/2eIQdgUFGs1jIqy+f876mhqsPLt9xobI0JZz1hyPhd3OO9VFcIpQJDIoaszJSoUzfdHAKizydP9tn93CEifO+D5CqmHgnZYaxKxinzap2JaDZ6IbaTU/z3isPFBY6qm8S1mklfaFwL1DMAHrPjXS7qR6JUS1vWvMjmuiHYkdXOMRl5ziAQ/DHjJtER1VXw26fZeyGtqw82YKKtkQCEC6/xh5novdwgcyQI82Tr6BNcZxcFCzuw5Qfu8qjsB1qJXcSzGXVXSxO08WaY6epMwqorrx1ykSvaft1wCbXwCT7TmVce1vw0SFepwOB8dkeYNlt7DmybOuFNfwDh9W0u0Y3vIPNFioHOO2Egkb6WZmHXagjTymoTPbdJOf9J6JnA=
 X-Forefront-Antispam-Report: CIP:4.158.2.129; CTRY:GB; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:outbound-uk1.az.dlp.m.darktrace.com;
  PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(14060799003)(82310400026)(1800799024)(35042699022)(36860700016)(376014)(11063799003)(22082099003)(18002099003)(56012099003);
+ SFS:(13230040)(82310400026)(1800799024)(35042699022)(376014)(14060799003)(36860700016)(56012099003)(22082099003)(18002099003)(11063799003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: V7vdcQ/LG0qX8wOmYjO0LzHBIKV6NsNDSiOVNGV4PR+Jr/oVRhJ6EoKJtpZbbYE2gCusW0k8G/DKcMJTCd2lcLDOSaxKc00K28or3OONTC3GGuI44hzG35OAynC+P8YVpltBsq54VpxbaFkpeB6jZKhr+wLsS06ecg+b091gwWPhwSgOgw6Lypo8TOTQ8sOkjU/nituADunekZVM9SO8z/FQMdWbNeQ3RLTHbY8XNvXPvsu9pFMXtPlCXVBXoQqfIrOqDv+7UZDgu6Yxk105M5zUrjaqNBQ/8yFqtiwERDR5pAFYsjNpfdOIgFrrrlrJUxAnN2fj/iqbrejQIJu07RdU8ITs99OI7EZ1JtIaC3FMReNAn0TYXlUS4E2a9mU7anOQRgJybnpEveVsuM9nTq25Ul7dWdmWwXxrtZ/Sk0tV0c13/oQ2xaPoq+I8ehzc
+X-MS-Exchange-AntiSpam-MessageData-0: ks0CW4oNNLh3lKGYNPylUYb6qMKETyIg3AssGlIEJkHSJ+ewkTUxidIHtCV2Ejn0ivDnFP5ei48uAnnsjYufyISHWccGKWI+XsL9AscU/76G/hnui+3Rc55Dv2H7GrLCx4b0ypyJ2L9YAIMLVvd7enpnHxYcvM7zaFt6gwy8mtKwCvURDMoKoea4A4T28OP1F+cqfHULHlUkuTUL+3YYtJyFwAUlWNwW84SXi4Of3F2gU2a3KOEbqUqIh/3PBd7tMEdlPxEyyAPwvdNiIkpTFGEjMyXUgyCYmvJ3NHThUNGfnkhTmyGyL71XwxpCjUbB6orkx1SFrPmMEobjpa7ZBTBVC07Nci8qrfZKqsCylFbwc3qVLFSK1yJmv5bu4WaPCIn9tHcF4VPDV8VvlrYZtC3nz7vRT02fkr2UKG9TiDeqLwin4q9CEh4glihj9P+8
 X-OriginatorOrg: arm.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 May 2026 07:41:31.2469 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 810b529b-4fbd-4b49-be41-08deb0c30cd2
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 May 2026 07:58:06.3898 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 173e5bbe-9aad-4697-d4f2-08deb0c55dfa
 X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d; Ip=[4.158.2.129];
  Helo=[outbound-uk1.az.dlp.m.darktrace.com]
-X-MS-Exchange-CrossTenant-AuthSource: DB3PEPF0000885B.eurprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: AM3PEPF00009BA0.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR08MB5958
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM9PR08MB6226
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -168,120 +167,289 @@ X-Virus-Status: Clean
 
 
 On 12/05/2026 23:48, David Lechner wrote:
-> Change the return values of the lwip implementation of wget_do_request()
-> to be errno codes instead of command return codes.
+> Add a introduce net_lwip_eth_stop() function and use that to stop the
+> network interface after each command that uses the network.
 > 
-> wget_do_request() is not a command, so it does not make sense to return
-> command return codes from it. Also, the legacy network implementation of
-> wget_do_request() already returns errno codes so it is logical for the
-> lwip implementation to do the same.
+> This makes the behavior the same as the legacy net code and avoids
+> potential issues with the network interface being left in an active
+> state after a command finishes.
 > 
-> This fixes a bug in try_load_from_uri_path() in efi_manager.c where it
-> checks that the return value of wget_do_request() is < 0. Before this
-> change, CMD_RET_FAILURE would not be considered an error since it has a
-> value of 1.
-> 
-> The value of ENODEV is used in places where there could actually be a
-> number of different causes of failure and it isn't possible to
-> discriminate (i.e. failing function returns NULL for all errors). Since
-> all callers of wget_do_request() don't propagate the error code, it
-> doesn't matter so much that this is not ideal, at least at this point in
-> time.
-> 
-> Fixes: 3c656c928bd7 ("net: lwip: add wget command")
 > Signed-off-by: David Lechner <dlechner@baylibre.com>
 > ---
->  net/lwip/wget.c | 28 +++++++++++++++++-----------
->  1 file changed, 17 insertions(+), 11 deletions(-)
+>  cmd/lwip/ping.c     | 10 ++++++++--
+>  cmd/lwip/sntp.c     | 10 ++++++++--
+>  include/net-lwip.h  |  1 +
+>  net/lwip/dhcp.c     | 15 +++++++++++----
+>  net/lwip/dns.c      |  7 ++++++-
+>  net/lwip/net-lwip.c |  5 +++++
+>  net/lwip/nfs.c      |  4 ++++
+>  net/lwip/tftp.c     |  4 ++++
+>  net/lwip/wget.c     |  5 ++++-
+>  9 files changed, 51 insertions(+), 10 deletions(-)
 > 
-> diff --git a/net/lwip/wget.c b/net/lwip/wget.c
-> index f89a6580b41..3a0b0dca145 100644
-> --- a/net/lwip/wget.c
-> +++ b/net/lwip/wget.c
-> @@ -300,10 +300,14 @@ static int wget_handle_request(struct wget_ctx *ctx, bool is_https,
->  #endif
->  	httpc_connection_t conn;
->  	httpc_state_t *state;
-> +	int ret;
+> diff --git a/cmd/lwip/ping.c b/cmd/lwip/ping.c
+> index fc4cf7bde5f..836d1d8287f 100644
+> --- a/cmd/lwip/ping.c
+> +++ b/cmd/lwip/ping.c
+> @@ -163,6 +163,7 @@ static int ping_loop(struct udevice *udev, const ip_addr_t *addr)
+>  int do_ping(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+>  {
+>  	ip_addr_t addr;
+> +	int ret = CMD_RET_FAILURE;
 >  
->  	/* if URL with hostname init dns */
-> -	if (!ipaddr_aton(ctx->server_name, NULL) && net_lwip_dns_init())
-> -		return CMD_RET_FAILURE;
-> +	if (!ipaddr_aton(ctx->server_name, NULL)) {
-> +		ret = net_lwip_dns_init();
-> +		if (ret)
-> +			return ret;
-> +	}
->  
->  	memset(&conn, 0, sizeof(conn));
->  #if CONFIG_IS_ENABLED(WGET_HTTPS)
-> @@ -325,7 +329,7 @@ static int wget_handle_request(struct wget_ctx *ctx, bool is_https,
->  					printf("Error: cacert authentication "
->  					       "mode is 'required' but no CA "
->  					       "certificates given\n");
-> -				return CMD_RET_FAILURE;
-> +				return -EINVAL;
->  		       }
->  		} else if (cacert_auth_mode == AUTH_NONE) {
->  			ca = NULL;
-> @@ -350,7 +354,7 @@ static int wget_handle_request(struct wget_ctx *ctx, bool is_https,
->  
->  		if (!tls_allocator.arg) {
->  			log_err("error: Cannot create a TLS connection\n");
-> -			return -1;
-> +			return -ENODEV;
->  		}
->  
->  		conn.altcp_allocator = &tls_allocator;
-> @@ -361,7 +365,7 @@ static int wget_handle_request(struct wget_ctx *ctx, bool is_https,
->  	conn.headers_done_fn = httpc_headers_done_cb;
->  	if (httpc_get_file_dns(ctx->server_name, ctx->port, ctx->path, &conn,
->  			       httpc_recv_cb, ctx, &state)) {
-> -		return CMD_RET_FAILURE;
-> +		return -ENODEV;
+>  	if (argc < 2)
+>  		return CMD_RET_USAGE;
+> @@ -176,8 +177,13 @@ restart:
+>  		if (net_start_again() == 0)
+>  			goto restart;
+>  		else
+> -			return CMD_RET_FAILURE;
+> +			goto out;
 >  	}
 >  
->  	errno = 0;
-> @@ -378,7 +382,7 @@ static int wget_handle_request(struct wget_ctx *ctx, bool is_https,
->  	if (errno == EPERM && !wget_info->silent)
->  		printf("Certificate verification failed\n");
->  
-> -	return -1;
-> +	return -errno ?: -EIO;
+> -	return CMD_RET_SUCCESS;
+> +	ret = CMD_RET_SUCCESS;
+> +
+> +out:
+> +	net_lwip_eth_stop();
+> +
+> +	return ret;
 >  }
+> diff --git a/cmd/lwip/sntp.c b/cmd/lwip/sntp.c
+> index 608345c873b..5fa400b104a 100644
+> --- a/cmd/lwip/sntp.c
+> +++ b/cmd/lwip/sntp.c
+> @@ -101,6 +101,7 @@ int do_sntp(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+>  	ip_addr_t *srvip;
+>  	char *server;
+>  	ip_addr_t ipaddr;
+> +	int ret = CMD_RET_FAILURE;
 >  
->  int wget_do_request(ulong dst_addr, char *uri)
-> @@ -398,11 +402,13 @@ int wget_do_request(ulong dst_addr, char *uri)
->  	ctx.content_len = 0;
->  	ctx.hash_count = 0;
+>  	switch (argc) {
+>  	case 1:
+> @@ -127,7 +128,12 @@ int do_sntp(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+>  		return CMD_RET_FAILURE;
 >  
-> -	if (parse_url(uri, ctx.server_name, &ctx.port, &ctx.path, &is_https))
-> -		return CMD_RET_USAGE;
-> +	ret = parse_url(uri, ctx.server_name, &ctx.port, &ctx.path, &is_https);
-> +	if (ret)
-> +		return ret;
->  
-> -	if (net_lwip_eth_start() < 0)
+>  	if (sntp_loop(eth_get_dev(), srvip) < 0)
 > -		return CMD_RET_FAILURE;
-> +	ret = net_lwip_eth_start();
-> +	if (ret)
-> +		return ret;
+> +		goto out;
+> +
+> +	ret = CMD_RET_SUCCESS;
+> +
+> +out:
+> +	net_lwip_eth_stop();
 >  
->  	if (!wget_info)
->  		wget_info = &default_wget_info;
-> @@ -411,7 +417,7 @@ int wget_do_request(ulong dst_addr, char *uri)
+> -	return CMD_RET_SUCCESS;
+> +	return ret;
+>  }
+> diff --git a/include/net-lwip.h b/include/net-lwip.h
+> index 20cb0992cce..5d0627eb271 100644
+> --- a/include/net-lwip.h
+> +++ b/include/net-lwip.h
+> @@ -35,6 +35,7 @@ int eth_init_state_only(void); /* Set active state */
 >  
->  	netif = net_lwip_new_netif(udev);
->  	if (!netif)
-> -		return -1;
-> +		return -ENODEV;
+>  int net_lwip_dns_init(void);
+>  int net_lwip_eth_start(void);
+> +void net_lwip_eth_stop(void);
+>  struct netif *net_lwip_new_netif(struct udevice *udev);
+>  struct netif *net_lwip_new_netif_noip(struct udevice *udev);
+>  void net_lwip_remove_netif(struct netif *netif);
+> diff --git a/net/lwip/dhcp.c b/net/lwip/dhcp.c
+> index acdf601d7eb..18dc36ae7ca 100644
+> --- a/net/lwip/dhcp.c
+> +++ b/net/lwip/dhcp.c
+> @@ -138,18 +138,25 @@ int do_dhcp(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+>  	dev = eth_get_dev();
+>  	if (!dev) {
+>  		log_err("No network device\n");
+> -		return CMD_RET_FAILURE;
+> +		ret = CMD_RET_FAILURE;
+> +		goto out;
+>  	}
 >  
->  	ret = wget_handle_request(&ctx, is_https, udev, netif);
+>  	ret = dhcp_loop(dev);
+>  	if (ret)
+> -		return ret;
+> +		goto out;
 >  
-> 
+>  	if (argc > 1) {
+>  		struct cmd_tbl cmdtp = {};
+>  
+> -		return do_tftpb(&cmdtp, 0, argc, argv);
+> +		ret = do_tftpb(&cmdtp, 0, argc, argv);
+> +		goto out;
 
-Reviewed-by: Jerome Forissier <jerome.forissier@arm.com>
+do_tftpb() already takes care of net_lwip_eth_stop() so this should
+probably be:
+
++		return do_tftpb(&cmdtp, 0, argc, argv);
+
+But this also raises the qestion of the double call to
+net_lwip_eth_start():
+
+do_dhcp()
+	net_lwip_eth_start()
+ 	do_tftpb()
+		net_lwip_eth_start()
+
+How about adding a static counter to better deal with the nested case?
+
+static int net_lwip_eth_started;
+
+int net_lwip_eth_start(void)
+{
+	int ret;
+
+	if (net_lwip_eth_started++ > 0)
+		return 0;
+
+	ret = eth_init();
+	if (ret) {
+		net_lwip_eth_started--;
+		return ret;
+	}
+
+	return 0;
+}
+
+void net_lwip_eth_stop(void)
+{
+	if (!net_lwip_eth_started)
+		return;
+
+	if (--net_lwip_eth_started)
+		return;
+
+	eth_halt();
+}
 
 Thanks,
 -- 
 Jerome
+
+>  	}
+>  
+> -	return CMD_RET_SUCCESS;
+> +	ret = CMD_RET_SUCCESS;
+> +
+> +out:
+> +	net_lwip_eth_stop();
+> +
+> +	return ret;
+>  }
+> diff --git a/net/lwip/dns.c b/net/lwip/dns.c
+> index 8b7b3b7f970..b620b0611d6 100644
+> --- a/net/lwip/dns.c
+> +++ b/net/lwip/dns.c
+> @@ -91,6 +91,7 @@ int do_dns(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+>  {
+>  	char *name;
+>  	char *var = NULL;
+> +	int ret;
+>  
+>  	if (argc == 1 || argc > 3)
+>  		return CMD_RET_USAGE;
+> @@ -103,5 +104,9 @@ int do_dns(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+>  	if (net_lwip_eth_start() < 0)
+>  		return CMD_RET_FAILURE;
+>  
+> -	return dns_loop(eth_get_dev(), name, var);
+> +	ret = dns_loop(eth_get_dev(), name, var);
+> +
+> +	net_lwip_eth_stop();
+> +
+> +	return ret;
+>  }
+> diff --git a/net/lwip/net-lwip.c b/net/lwip/net-lwip.c
+> index 0c83c004cab..be63531c2a2 100644
+> --- a/net/lwip/net-lwip.c
+> +++ b/net/lwip/net-lwip.c
+> @@ -192,6 +192,11 @@ int net_lwip_eth_start(void)
+>  	return 0;
+>  }
+>  
+> +void net_lwip_eth_stop(void)
+> +{
+> +	eth_halt();
+> +}
+> +
+>  static struct netif *new_netif(struct udevice *udev, bool with_ip)
+>  {
+>  	unsigned char enetaddr[ARP_HLEN];
+> diff --git a/net/lwip/nfs.c b/net/lwip/nfs.c
+> index 9e6b801e465..4cc36373fdd 100644
+> --- a/net/lwip/nfs.c
+> +++ b/net/lwip/nfs.c
+> @@ -187,6 +187,7 @@ static int nfs_loop(struct udevice *udev, ulong addr, char *fname,
+>  int do_nfs(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+>  {
+>  	int ret = CMD_RET_SUCCESS;
+> +	bool started = false;
+>  	char *arg = NULL;
+>  	char *words[2] = { };
+>  	char *fname = NULL;
+> @@ -281,10 +282,13 @@ int do_nfs(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+>  		ret = CMD_RET_FAILURE;
+>  		goto out;
+>  	}
+> +	started = true;
+>  
+>  	if (nfs_loop(eth_get_dev(), laddr, fname, srvip) < 0)
+>  		ret = CMD_RET_FAILURE;
+>  out:
+> +	if (started)
+> +		net_lwip_eth_stop();
+>  	if (arg != net_boot_file_name)
+>  		free(arg);
+>  	return ret;
+> diff --git a/net/lwip/tftp.c b/net/lwip/tftp.c
+> index 7f3b28b8507..571c38172f9 100644
+> --- a/net/lwip/tftp.c
+> +++ b/net/lwip/tftp.c
+> @@ -261,6 +261,7 @@ static int tftp_loop(struct udevice *udev, ulong addr, char *fname,
+>  int do_tftpb(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+>  {
+>  	int ret = CMD_RET_SUCCESS;
+> +	bool started = false;
+>  	char *arg = NULL;
+>  	char *words[3] = { };
+>  	char *fname = NULL;
+> @@ -365,12 +366,15 @@ int do_tftpb(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+>  		ret = CMD_RET_FAILURE;
+>  		goto out;
+>  	}
+> +	started = true;
+>  
+>  	if (tftp_loop(eth_get_dev(), laddr, fname, srvip, port) < 0)
+>  		ret = CMD_RET_FAILURE;
+>  	else
+>  		image_load_addr = laddr;
+>  out:
+> +	if (started)
+> +		net_lwip_eth_stop();
+>  	if (arg != net_boot_file_name)
+>  		free(arg);
+>  	return ret;
+> diff --git a/net/lwip/wget.c b/net/lwip/wget.c
+> index 3a0b0dca145..247ece18e2b 100644
+> --- a/net/lwip/wget.c
+> +++ b/net/lwip/wget.c
+> @@ -416,12 +416,15 @@ int wget_do_request(ulong dst_addr, char *uri)
+>  	udev = eth_get_dev();
+>  
+>  	netif = net_lwip_new_netif(udev);
+> -	if (!netif)
+> +	if (!netif) {
+> +		net_lwip_eth_stop();
+>  		return -ENODEV;
+> +	}
+>  
+>  	ret = wget_handle_request(&ctx, is_https, udev, netif);
+>  
+>  	net_lwip_remove_netif(netif);
+> +	net_lwip_eth_stop();
+>  
+>  	return ret;
+>  }
+> 
+
