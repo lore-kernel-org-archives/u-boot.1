@@ -4,124 +4,144 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52818CD4851
-	for <u-boot@archiver.kernel.org>; Wed, 13 May 2026 08:05:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9F84CD37B6
+	for <u-boot@archiver.kernel.org>; Wed, 13 May 2026 08:08:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 217F3846AA;
-	Wed, 13 May 2026 10:04:04 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=prevas.dk
+	by phobos.denx.de (Postfix) with ESMTP id 6432383EF9;
+	Wed, 13 May 2026 10:08:55 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=prevas.dk header.i=@prevas.dk header.b="QJHEsRhF";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="xDVFyucI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 39532836AC; Wed, 13 May 2026 10:04:02 +0200 (CEST)
-Received: from AM0PR02CU008.outbound.protection.outlook.com
- (mail-westeuropeazlp170130006.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::6])
+ id 3A65283FB0; Wed, 13 May 2026 10:08:54 +0200 (CEST)
+Received: from DU2PR03CU002.outbound.protection.outlook.com
+ (mail-northeuropeazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 093A98460E
- for <u-boot@lists.denx.de>; Wed, 13 May 2026 10:03:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5858E83EEF
+ for <u-boot@lists.denx.de>; Wed, 13 May 2026 10:08:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=prevas.dk
+ dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=rasmus.villemoes@prevas.dk
+ spf=pass smtp.mailfrom=peng.fan@oss.nxp.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=gI93Gh5pIaBFp3xMUk+Tprv0a2UGQxOdHF7gUg7kv1jyTTLjI8ktBegs+Yr+foT9BR7OevPWeyZyrWzo76vesdbqO4xE1THqtLPbYCXgsuOI3vIcU4jGW/oPDAiS55r6CGbQeR0uxHySFHbdrBIxmSH/tDZHKYew5kb5w0bV5HTkZuBfql2WuN9gtNlu+ERmxu0aHFsUYY7hZvDSC+nTd0cw+5uXRf0/zQmRNSZouKjmt2TmX8pW9eDM5KnlzuJrZa8a0uD98t8FxdgLBEHTGz9dF9fVBgX7NR3ytM5Bo7uExAlt/QXwOAw/UNw3Ne8SXfLZqUUEv8E5haNwY+leMw==
+ b=XgKkEPHy26TzvbygrT9y+jBCvqKDU5E9sHeK7ypHN5k3gZ90oE+bqNhkecrq7dJvWnIDwUYBrvkbMx3jDWDwTxxVvZZThQ+5f7jRufx+WrHzcnqH6eIiwZeQ2AUVOnHEEFTMPjUZDkQ42dPhwjBYsr+YWe6VxZ6IlYrVTNZ8l8ed7ULFGTyLtm0P709EDwxm3radRjXiObLwVBzVNAX5/ovX3ev37BcPlVosTbXf3GK0WwET+bjkwn5JGH905Nx6J3CUG8QnIb8wY/BaYx3LbONtDi9bhER7bEF+NZw2ZIN818hdQ39aOtx3oZ7oFecPwbJVx43bSyoNtsuqgPbxBw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=4cSPQQRISRAYvF1ZvNqwK2Im8Pt2lnpBoVq/yKfM/oQ=;
- b=nckui6S6SQafyf+iZbzFnsAGQsQHbXRh6RfPTEG1k67xGAn32WMpCLhBN9DU5eCBqCuU4OdNR44rliV5I9+bQ2Oiw9M0wkkCjzIGaNaMAOqreX4i1/X1Z7VzF+3+6kWTzxtNur0UjrZEPjMp0wBvbk29eZzXefh4RZhCbodCgVocp4/Vy/fQ/GsV6uWrzHshYXS1BSUwtrBfVOebGNRgY5NscR75GX3pUKJreA8D/J9fyIGlqVwdjxTp+i7bB8NNrHqE8kYvRYHLFFNxQHT6CvcLqG7ypLDT7c3Nh6GqOrW4V9IR+PLMCNuAoa6xZxwgw+Ww0ffAkJnvMmwqWJFKYQ==
+ bh=NHfgsHNv9iNsNmmRfZoCU8tga84By4x+nU3fcYtGIyM=;
+ b=abY0quz7onO4TGIUbVKNgT+QdpdwsUebV7OgxN2AhoodHt62j0EygXF/YPJDG3Is1woFeXxsDoQ9lIUPdvY3bovYa1Dxf0tSTcBUqOQjD/LKafWHn6T5h2duGa1zWztDS8qtQwpfUQrIxGZIxjcIg3Xbquz2alu1mxqIEW2EKwO1PHQV9jBduI6LaGY0ZRz4BbbCC51OXB7EvqEGJqc/haFn80b6XwJjJvZ4ZMxVLWi6kXVH+dMP7wFToazzVuGgP+/iZ9hRHwBDxDf3NA1BnArQsr+nvIYrYXaiVM6nhtvwxyWQhOOtRARHPCKN8HZDjGY5aRjrUWP1h7eSQMOcMw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=prevas.dk; dmarc=pass action=none header.from=prevas.dk;
- dkim=pass header.d=prevas.dk; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prevas.dk; s=selector1;
+ smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
+ dkim=pass header.d=oss.nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
+ s=selector1-NXP1-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=4cSPQQRISRAYvF1ZvNqwK2Im8Pt2lnpBoVq/yKfM/oQ=;
- b=QJHEsRhFSkKjPfCK654MzTXVwa+IsRRoeBwkb8/ybYItieC5Nor0ZoAkUGI2HcryNKjW8+TkUHmICefxo4RV5ekPOGKRgWHZnvQi2nzJa1Www+dv8GNxEiah1e30urc4hgwTIsfG4clu9gPilLNhUUokV39aydn6ZIZpOQJKLhw=
+ bh=NHfgsHNv9iNsNmmRfZoCU8tga84By4x+nU3fcYtGIyM=;
+ b=xDVFyucIWrhspm++QvslHlzGm+rGpDaHkrkSLp2RTMkVE4IpyO4CZ3Fty2WKtURGu7PPuo43kYKLFUULgoBgfVWX6l/eDdumbjG/vFbCbAlkWFoCm9M3goZDWp2+4sm1hMVBN2JDoAKgB+P3mYQmbjusPDsrf3Ek44wQ568eCs6+CSFooVBWUvkPj6sb/mowFiQoOY3hNn4e6wd1h08IpA01kISgM8d7YIiK0tr0yc6BzxoWHIJnKTxxidug0andbtD3N8V3sf9e8xQR1rDBXxuerdzL3tU7UWAFQIQysHx1wVjB1v2jqs4/ek7Rn6DkWP/ugwM6lkSxnVn3MuVnDA==
 Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=prevas.dk;
-Received: from AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:681::18)
- by AMBPR10MB9819.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:725::14)
+ header.d=none;dmarc=none action=none header.from=oss.nxp.com;
+Received: from MRWPR04MB12330.eurprd04.prod.outlook.com (2603:10a6:501:7f::23)
+ by PA1PR04MB10208.eurprd04.prod.outlook.com (2603:10a6:102:454::8)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9913.11; Wed, 13 May
- 2026 08:03:55 +0000
-Received: from AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::ebc6:4e0d:5d6b:95d8]) by AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::ebc6:4e0d:5d6b:95d8%6]) with mapi id 15.20.9913.009; Wed, 13 May 2026
- 08:03:55 +0000
-From: Rasmus Villemoes <ravi@prevas.dk>
-To: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: <u-boot@lists.denx.de>,  Tom Rini <trini@konsulko.com>,  Simon Glass
- <sjg@chromium.org>
-Subject: Re: [PATCH 0/2] allow control DTB to double as "FIT image"
-In-Reply-To: <c6e0418e-9544-4553-a3d3-5f371b61233d@cherry.de> (Quentin
- Schulz's message of "Tue, 12 May 2026 18:39:52 +0200")
-References: <20260512161631.284143-1-ravi@prevas.dk>
- <c6e0418e-9544-4553-a3d3-5f371b61233d@cherry.de>
-Date: Wed, 13 May 2026 10:03:54 +0200
-Message-ID: <871pffg2hh.fsf@prevas.dk>
-User-Agent: Gnus/5.13 (Gnus v5.13)
-Content-Type: text/plain
-X-ClientProxiedBy: CPBP307CA0009.DNKP307.PROD.OUTLOOK.COM
- (2603:10a6:380:1::12) To AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
- (2603:10a6:20b:681::18)
+ 2026 08:08:49 +0000
+Received: from MRWPR04MB12330.eurprd04.prod.outlook.com
+ ([fe80::ca22:f8c8:6aca:7889]) by MRWPR04MB12330.eurprd04.prod.outlook.com
+ ([fe80::ca22:f8c8:6aca:7889%6]) with mapi id 15.20.9913.009; Wed, 13 May 2026
+ 08:08:49 +0000
+Date: Wed, 13 May 2026 16:11:30 +0800
+From: Peng Fan <peng.fan@oss.nxp.com>
+To: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+Cc: Tom Rini <trini@konsulko.com>, Christian Marangi <ansuelsmth@gmail.com>,
+ Simon Glass <sjg@chromium.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Peng Fan <peng.fan@nxp.com>, Anis Chali <chalianis1@gmail.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>, Yao Zi <me@ziyao.cc>,
+ Sean Anderson <sean.anderson@linux.dev>,
+ Michal Simek <michal.simek@amd.com>,
+ "Yury Norov (NVIDIA)" <yury.norov@gmail.com>,
+ Geert Uytterhoeven <geert+renesas@glider.be>,
+ Jonathan Cameron <Jonathan.Cameron@huawei.com>,
+ Nuno =?iso-8859-1?Q?S=E1?= <nuno.sa@analog.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Heiko Schocher <hs@nabladev.com>, u-boot@lists.denx.de,
+ David Lechner <dlechner@baylibre.com>,
+ Lorenzo Bianconi <lorenzo@kernel.org>,
+ Markus Gothe <markus.gothe@genexis.eu>,
+ Matheus Sampaio Queiroga <srherobrine20@gmail.com>,
+ Benjamin Larsson <benjamin.larsson@genexis.eu>
+Subject: Re: [PATCH v5 06/11] pinctrl: airoha: add pin controller and gpio
+ driver for AN7581 SoC
+Message-ID: <agQyMsKJ1gmW2vMW@shlinux89>
+References: <20260509111157.4039434-1-mikhail.kshevetskiy@iopsys.eu>
+ <20260509111157.4039434-7-mikhail.kshevetskiy@iopsys.eu>
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260509111157.4039434-7-mikhail.kshevetskiy@iopsys.eu>
+X-ClientProxiedBy: SG2PR01CA0172.apcprd01.prod.exchangelabs.com
+ (2603:1096:4:28::28) To MRWPR04MB12330.eurprd04.prod.outlook.com
+ (2603:10a6:501:7f::23)
 MIME-Version: 1.0
+X-MS-Exchange-MessageSentRepresentingType: 1
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS5PR10MB8243:EE_|AMBPR10MB9819:EE_
-X-MS-Office365-Filtering-Correlation-Id: 22d878b5-0e99-41fd-7c72-08deb0c62dfc
+X-MS-TrafficTypeDiagnostic: MRWPR04MB12330:EE_|PA1PR04MB10208:EE_
+X-MS-Office365-Filtering-Correlation-Id: db632296-ccf1-43e0-ff20-08deb0c6dd0e
+X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|52116014|376014|366016|1800799024|56012099003|18002099003|3023799003|11063799003|22082099003|38350700014;
-X-Microsoft-Antispam-Message-Info: 1FS1OjJZ/2mGogULM2q8gwpb31aeJ8oNE9RkI0r737MEqLKcZ75e1/uyYZgVroMO5xsmTHwmtYT753YW6eL9hc6g/mRdoX4u2albIVW28QIDew4cc7wCzmzO4mAHlohdB65kcY/7z4uxDXVa6ld/N0ugUdzscQO9DxA58gKOHXbRpePs7hUbcBLOOm1g89qNb2KnwJ8BWkpy7m8Z1YXe2w9yRTavNAAxQWnOc3PVfR+4GnCSo8bN54LleeuRZNSzGb9cA2P6fm54+GWOj749ITX4pOjkryaKXWqOhH27gjeKI+jUBy7g8kR4tXtZfYKnyhqUNkjScX7E08+l3XLa3rJgebFjIhFT9/Ifsuh7CjuMJMVOy6P7K+8Z5OCtFdevRZHbKMoXXJEq+3/4HZbvrMotCPzuO6Txmn/vVTsL96/YzgWKYPamL8QffKc7vagaGiRmcNTRGDIOJ0THc7+oL6fA9wJGkWOzm7WCD+imt0GKyjWCydyISqruzLyk8uU1QrqXyO18upHfdcM1ZNECxDaXyK0otd/4/tn9cR0IQWjM6dYlTQLRoYYjuAnwFmh81tAeVVxpAywgJ/B6Owm4WP5ikzgB5tSCiR4iX1JBFbiodd62HIIVY5F/N/YKY7mJirM5QMUPfi62VwnhmWoK/TXyO1Hawx0LpfxyOs26kC+RcCXeAVVWVSSHMo0Cv8hsthMG1hZzX4B6CerLLEN8Zg==
+ ARA:13230040|1800799024|366016|376014|19092799006|52116014|7416014|38350700014|11063799003|22082099003|18002099003|56012099003;
+X-Microsoft-Antispam-Message-Info: c325CQQn5fW4K4Ujo3SgHj89t8mya3usBRmsEBO9D3bkFG2lR9NXloNH/ED9oIa+ho5YJXxZM7RgdcSSZpS8zpFTnmPkjT7bAr1Bd7srhFXJXta1i8K1pSCZdoAz3qFF3xhclDy12Qsk75yKdABMyq7+TXEgzl+iHug7HrD4vkctyf6GXKxGNug1Ye5sgTgSZQyffgZ3b0LB0IKt3jwhsUgWPIE1th233WnJkQ46q4ErI1q2Tr6+cMvbRuwdnxIPeplm4dIK2jG8qDr8fj6N0ehZwYAcnhQ5jqzuF/VYpos3h0SRXPeZQ2EMw/GE5r2tRTulHeNHexdBjDtE2YPNGqrgXFOOaEAvEwyXojvk2Kxh5yt06zPbUEWgW3JgDi6nfLNQmqb9Ar6UgQSRlXmzWVojgLJ8aJ6W8j2rsGETwjQpvVHUIP4ZgAU5j3lkRBF5fiIR5i7HpmQU9xmVVTRSGZZ66YoLZ7tGH9hAiONSWgh3BQVGjvNv9CcKrxveF2UnMUwxstbwhalOnPD7jHNCylQPmtcp0UFCkW3ARy7Vij9ZrX3783nTGPUb/Cb5OEtZc6K2Sbvh16PSmVeLxnYq1k3xWXbAfJLv+2ZkQLnuORf08jP5MFgHV2W41ergU2oO1dcL1nLu+nhoQSEGwcquHJD+4eHe2MIVulWMjuYO7ZbaU4fsX/xzfEOQLINXce2WdIFQKimQr+4QEOPuVmfquolHCB66r6ZFyRy2uGMy7mj7Kba2IOjy5gaihmBP32xg
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230040)(52116014)(376014)(366016)(1800799024)(56012099003)(18002099003)(3023799003)(11063799003)(22082099003)(38350700014);
+ IPV:NLI; SFV:NSPM; H:MRWPR04MB12330.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(366016)(376014)(19092799006)(52116014)(7416014)(38350700014)(11063799003)(22082099003)(18002099003)(56012099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?4pXdZMkmWAKJp2c1HnxGY0kpCF+ANOdd7yosdDZBcCH1W5hiInmuE+dX0JEY?=
- =?us-ascii?Q?EZ3rJO6IV8l88UZBS20i36q1hkcbwjHdDmFvsgdwK4oK6bMvRMR3JvFmvQrN?=
- =?us-ascii?Q?5KNraFWdGBtKxDey9PgHFeVAxgL0ThrZK2MSCN0Bcs4mTWVzQAvXCJgcGVxh?=
- =?us-ascii?Q?5iaNxqfhmVSK0WL3b1kru7cgHM3NyWV4SgEcDJj6ABy57M+ZObFV8c3SWVhb?=
- =?us-ascii?Q?rD+wexm3vMH2Z1ulnPAVA5+ymGJyfTK3mBMvhHyTE66SlOYrz2N/6zZ8Dp9y?=
- =?us-ascii?Q?f/XDANlGa2ukVN3GzF9rnFDZd+SoksOrzN+yvmuK9RayxYmPOWVPAAVzRKer?=
- =?us-ascii?Q?gva+ldaTLooDw+D6dwmhuzumJ4LPZevOkJ9SwuglrI2qnuk2oNcW64UCVR1z?=
- =?us-ascii?Q?K0z3CPcI+wWlGlZSbP4DVg8gQ28PCFNrDLsCJuYuuczz82yvEwvlB/qBMYId?=
- =?us-ascii?Q?PH5XVTlLGnqpXge2vtyd8C7SyEgkUhURgoXOe8h2uRNygaKdVCkmHelQkU1r?=
- =?us-ascii?Q?S/xfCnmlKXT5Z9D1geOeZxyB+2jYUtKqX/dcGQqdsJv2jsy2MTgX6CVOQzMl?=
- =?us-ascii?Q?sQ06DnmGO+j93hLBjT6jo7EOnckdXE1b+NfV8H9mW+yxShiZjU6heIBCJA2Z?=
- =?us-ascii?Q?B7pjNIZ7Gxvg51ux5fWIY8tpRT2SB0zFxd+H6O/hxbXntcx3a/GAH7RpvYwF?=
- =?us-ascii?Q?6E1I1mw2dAJjVFOhgnhpnon8FzqLha4Drxk1HDYm/bjONnq+DqaqwalV+psC?=
- =?us-ascii?Q?7e2jV1WKSxdZaTqep9m8AoZfzgbaoZqsq4W82HEyIF2tGPiNasC+Hpt6csmu?=
- =?us-ascii?Q?PA/bubxURtmdWJO2oE47UZ2Q2MO4s9YPVHvTIU8ss4lwl9+wKj6MtVzG5tcN?=
- =?us-ascii?Q?Y/T7mYvI5KvOYIyohzAThCdeJQZkHv/nSJ67uUi0T7DyAfEznDNI61FZ/H/9?=
- =?us-ascii?Q?hK9OQVT7FN18rJyfoImzh/MF97tK/kFtCjqt68XbiM5CsyQby6BWUxPGD0dn?=
- =?us-ascii?Q?eZ3sR/eLNhdGew6Qi/Tfi8zeUBvBrZHhmjfYU6nTCM0CEE4vhPTfdWMOPGo+?=
- =?us-ascii?Q?f5QPDuz/YCaC/NUyV+ziMBHrXh3rCVW1C5/vijQK9+oNrGIWemsIZRA/wbxn?=
- =?us-ascii?Q?TQKXwhLiIXA5R/wj5QypgH0YQbZD28mCaf0SzejbPBfT++u0R6qa1NQerpUL?=
- =?us-ascii?Q?1LxI34hM1kgBTULWSBRJFLYRTuhDGqWTwvIyAcsjKUOFV65/qdj4iUtIvSjg?=
- =?us-ascii?Q?FiN4jiWoBb6VHfTBjcIWKg6Kelg1JfqGylGWngKP2y+DBx8EclnrmIaOXQ+e?=
- =?us-ascii?Q?QhI/2HM+w/vAcZ2ITBWz3R17Uff5Fgi4cTlRj7RrV0Y5uOZnxzC0a6D4Frdr?=
- =?us-ascii?Q?3+g4Lg4FCoLW/zMbDA/MlkPP+/LtdPgxs4jXbPQOYZehcJpBxXFyShAEY11c?=
- =?us-ascii?Q?kkOh3vF2QjdnZZ6HGuXlbybdoOzpgfYsQ98AyLp/uKIuiSUccZfkXn3uzKPA?=
- =?us-ascii?Q?61DIjZktSI7qnLQ2PEf16MTWIUJTDFWMqJzKkh/Ra4d8q0UucvlIXfxApRLC?=
- =?us-ascii?Q?2X9Hc7Vz7A/KjwvNg6oCpCawbc9qtcts27zjLZ4nsDAJ0rhgosEr2c/zn2NH?=
- =?us-ascii?Q?CqHgfxw1C0vY9/oHJoQGVqfj0qOhKFLBEseLO3kw+fEks2rd0Z1arNe1Bcv/?=
- =?us-ascii?Q?JkW0vZsbGU+x4rzLJPFJq0AiUhOFLSIYLm2GZryYw775QuSnqqiycpwMdqGf?=
- =?us-ascii?Q?SboY45UwGpKXmw4vHlgI+Iqtx8XYr68=3D?=
-X-OriginatorOrg: prevas.dk
-X-MS-Exchange-CrossTenant-Network-Message-Id: 22d878b5-0e99-41fd-7c72-08deb0c62dfc
-X-MS-Exchange-CrossTenant-AuthSource: AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?plTuhiV2sl+4KqkGggEGTCNl76aJl+MMoUzJzZ8m3GDCV1vfW6NLpFX8CT45?=
+ =?us-ascii?Q?q9eV9I4AnEakub4ivBW+Jyd23gsaHI0uqM+6WCQkB2rdaUjClmuBrEHpn9hX?=
+ =?us-ascii?Q?sDUVOQtc8T8KFcGFYOYxKerRfl3xG7GaR8DqPiPemHH+yH0L2tuRVtx+fLXf?=
+ =?us-ascii?Q?JCZ5Z8qwxPky9XTC6ZIG/Vui9zcKfqL/ok4WoQppWzKo8TO5sjRnotqTT/vh?=
+ =?us-ascii?Q?oFB6Ows1jbQz9Wczryku/q6PoMnKJTBj9aLW+n2ZdVYWJgMmCH6AU0RyMJ/g?=
+ =?us-ascii?Q?vjfR6oTv5c2fXyWV6y9ODpXieJ2D5cwpXfOcC3oq+GLyL5nEAvFYYn9KvEXl?=
+ =?us-ascii?Q?Fjhd6Hgs9hCtdnI/2CeEGJrnjubybA9Tq+6E42oK5M9sm2svForGL2ceczF1?=
+ =?us-ascii?Q?pIAPqBscj/uMHbZOLpg70DGtu00b0UGkmHILBJrnlmk1+LdNeGOvm+Gz9000?=
+ =?us-ascii?Q?giUa5kQfOpDqS5IJpEXW4FcLm9ABFu6hKXjJ94bM3OmmZEKiYb4ozxT0kf2c?=
+ =?us-ascii?Q?WgjaDGP8ji9+B6Ni1vb9a750L/LkK+YcvnEZubXuo+/snbubiWDH2EywqkHd?=
+ =?us-ascii?Q?UCqI1BAzvMwiUR538W3w9GDidCe4unYdgTpFgSIqWrfA4gm8JZaHEkYEWEtf?=
+ =?us-ascii?Q?3I68QhODIITIbTZriKtDlF+HMcQkUJhgfHDP1ZQRYuaIwZSkHnxoEBWo4jTm?=
+ =?us-ascii?Q?DTYlDu2yIOrrYNOd4pJMODTvjXxYpXQsWVmArXZzqQZpIw4ZXsVp3fySLlq5?=
+ =?us-ascii?Q?ulSLP2pZowoMEWJWtcxaY4R/MS/UDjZScoCcCGxiYnOS3cFP3aCDjVw/Oq5W?=
+ =?us-ascii?Q?0pjA+RAp0mQGEvvZuisslx3B4qRND/8xgryd3Lkkvo2wG5Olor5SIcAeOgfi?=
+ =?us-ascii?Q?AKmisF+dmH/kXJCbbdzlp0e07kOiokqQPBEmlUqBvL20J4HgIzfpRkMlE8oO?=
+ =?us-ascii?Q?S7c8eDKrqNUMA/RQ/bgZpllOMqBVF6V74reB2imgPjcQqmp4oCo37fQ9dZ2J?=
+ =?us-ascii?Q?rtiDd5yMmV8Ylu3C3/Hlb7SiJ0jG9rdbzKPJudxlCCxgrHgpWv/xh8Vd2Y59?=
+ =?us-ascii?Q?nUHZWvqRVJkf0IImHDtD3ZZrRnBF2V5u2XicW2MKXDmWMqdQKqz3KSgaWBGr?=
+ =?us-ascii?Q?u2IT7L60g+CK3c+bYFkm2rrdsiwrvqibYNSp79Ik5GIUKXl75Ku07QdzeOt4?=
+ =?us-ascii?Q?rEBPnMxKpd3F6ccPblDY4TW1DMtTRi8II4j4F34bL+46kZ4+nhSql25lQTSv?=
+ =?us-ascii?Q?te/jenCDcafhjIGqhzLVkOB7FmZzwZ1XYoxk1CQRf56dECG1+Qcycm+t51AQ?=
+ =?us-ascii?Q?RFgatKcxLdhuWzE2GEwqs1qMF6LTE3n/HsX0B7f9xT+aLIIcU4nxImWZM1YD?=
+ =?us-ascii?Q?v83ULvDl46oYVWmOINuDUfucCy9Gj5q4UWyTPN4XyuKukVxJVbqItaGe/J2p?=
+ =?us-ascii?Q?GQfqabGg8iA2BYHbyRLjIqXpmhi+r68Fnsz3Q6NrxqlNe9eQ3AdJQ5PWNCaz?=
+ =?us-ascii?Q?jpB0X9Czpfu8NJ2b3aEfdZ9idPWEchMNrLBCofq9Dytju582JwU8wF2DSefD?=
+ =?us-ascii?Q?Bl4b9MkfZU5Q8E15hS4BsTPRKjjtcv7JhiCfTdxIpyjUlgCF+QPDnZi4VSfv?=
+ =?us-ascii?Q?6ZiNwa8th2Ug+ksz/66gLv+cGuFYrL3766m2F18E7qAxL/3Aj/QnGkOrjsYt?=
+ =?us-ascii?Q?U7xn3PUVUf/kTK1dbvsdLjxCqXB6NpgP6wBoT9wcRV4oJth7dejVmPAnhXB3?=
+ =?us-ascii?Q?ZEMJCcNP/Q=3D=3D?=
+X-OriginatorOrg: oss.nxp.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: db632296-ccf1-43e0-ff20-08deb0c6dd0e
+X-MS-Exchange-CrossTenant-AuthSource: MRWPR04MB12330.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 May 2026 08:03:55.7136 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 May 2026 08:08:49.3263 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: d350cf71-778d-4780-88f5-071a4cb1ed61
+X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: m178q7Ztl0QjKgbjMSmPsFJMnjX1WOXdse+TP0J4Z1OeiKWTpDs5xxhjVLJofxejXEQV3KSOtSZulMiDH03YEm0pwuXuzfoZMU46hPibsgc=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AMBPR10MB9819
+X-MS-Exchange-CrossTenant-UserPrincipalName: lY6XC43vdlop3Iw7OJ1yGt96I9NHDmxwypYx3/2MHivvwwQPkf6/8QD8tlXowz2jWMdBHsEKCYDjrADhYsyLKg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA1PR04MB10208
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -138,67 +158,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, May 12 2026, Quentin Schulz <quentin.schulz@cherry.de> wrote:
-
-> Hi Rasmus,
+On Sat, May 09, 2026 at 02:11:52PM +0300, Mikhail Kshevetskiy wrote:
+>This patch adds U-Boot pin controller and gpio driver for Airoha AN7581 SoC.
 >
-> On 5/12/26 6:16 PM, Rasmus Villemoes wrote:
->> The commit message for patch 1 explains what it is I'd like to be able
->> to do, but here's some more background:
->> 
+>Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+>---
+> drivers/pinctrl/airoha/Kconfig          |    5 +
+> drivers/pinctrl/airoha/Makefile         |    2 +
+> drivers/pinctrl/airoha/pinctrl-an7581.c | 1076 +++++++++++++++++++++++
+> 3 files changed, 1083 insertions(+)
+> create mode 100644 drivers/pinctrl/airoha/pinctrl-an7581.c
 >
-> For reference:
->
-> """
-> Writing those scripts in the built-in environment leads to
-> backslatitis and missing or wrong quoting and is generally not very
-> readable or maintainable.
-> """
->
->
-> Have you tried to use the text-based environment mechanism as
-> described in
-> https://docs.u-boot.org/en/latest/usage/environment.html#text-based-environment?
-> (I've learned about this only very recently with the Apple devices
-> being migrated to it)
->
+>diff --git a/drivers/pinctrl/airoha/Kconfig b/drivers/pinctrl/airoha/Kconfig
+>index eb87afbb374..986d23c2e3d 100644
+>--- a/drivers/pinctrl/airoha/Kconfig
+>+++ b/drivers/pinctrl/airoha/Kconfig
+>@@ -9,3 +9,8 @@ config PINCTRL_AIROHA
+> 	select REGMAP
+> 	select SYSCON
+> 	bool
+>+
+>+config PINCTRL_AIROHA_AN7581
+>+	tristate "AN7581 pin controller and gpio driver"
 
-Hi Quentin
+Nit:
+Use bool. No need module build for U-Boot.
 
-Thanks for the suggestion. However, not only do I know about that
-concept, I'm the author of f3d8f7dd73a ("Allow providing default
-environment from file") which is a slightly different mechanism from the
-one you refer to (and predates it by a few years), and which we've been
-using ever since.
-
-While both represent a definite improvement in the handling of the
-_environment variables_ over definining it as a giant C string, it is
-still not a very good way of writing whole scripts.
-
-So the "text-based environment" method does allow you to (and
-encouarages) indentation, but you don't get your editor's help to do the
-if/while/... nesting properly because it's not a real script, and you
-can't run shellcheck on those embedded snippets.
-
-Moreover, while it _looks_ like a normal, commands-terminate-at-newline,
-script, the stuff you put in those env variables must have all
-individual commands terminated by a semicolon. Which to some extent
-makes it even worse, because that is extremely easy to forget or
-overlook. Imagine something like
-
-   if something something ; then
-      echo "yay";
-      go_on_to_other_stuff;
-   else
-      echo "uh oh, something failed"                         <----
-      handle_that_error;
-   fi
-
-Writing "scripts" in an env variable that can be called with "run foo"
-is a bit like having to write normal shell scripts in a one-liner one
-can pass to "sh -c '...'".
-
-So no, I don't that's really a useful substitute for having a way to
-properly embed real scripts in U-Boot.
-
-Rasmus
+Regards
+Peng
