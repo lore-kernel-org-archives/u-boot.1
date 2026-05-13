@@ -4,124 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9ADDCD4F24
-	for <u-boot@archiver.kernel.org>; Wed, 13 May 2026 11:59:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36889CD4F24
+	for <u-boot@archiver.kernel.org>; Wed, 13 May 2026 12:09:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3C149844BF;
-	Wed, 13 May 2026 13:59:17 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 84DE384099;
+	Wed, 13 May 2026 14:09:49 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ZZIdx/BM";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="dxFSA2yG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 20A75845E3; Wed, 13 May 2026 13:59:16 +0200 (CEST)
-Received: from mail-yx1-xb12b.google.com (mail-yx1-xb12b.google.com
- [IPv6:2607:f8b0:4864:20::b12b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 96C11844BF; Wed, 13 May 2026 14:09:48 +0200 (CEST)
+Received: from tor.source.kernel.org (tor.source.kernel.org
+ [IPv6:2600:3c04:e001:324:0:1991:8:25])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EB4D9836AC
- for <u-boot@lists.denx.de>; Wed, 13 May 2026 13:59:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E060C836AC
+ for <u-boot@lists.denx.de>; Wed, 13 May 2026 14:09:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yx1-xb12b.google.com with SMTP id
- 956f58d0204a3-656d749109cso3885570d50.3
- for <u-boot@lists.denx.de>; Wed, 13 May 2026 04:59:12 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1778673552; cv=none;
- d=google.com; s=arc-20240605;
- b=EGXMJd5uGWhXaXxY/XRbrq1ltTz/oP5NEAnydoQ9ikhKQV5jEg5zNOlB/8FpfLbs29
- hmlt1sP3amPIAP9G2jo0WqROsy3A/C+nPrxNBi+mY36E/QFSkYZUM5NCwx7aQxydcDmw
- Sr3xfT4bwpZ5yo8JczcJvipYllt1VfIcCUOhaaMmEs68We1lyJanVTMvfUyUWYA9MeUd
- SV2t9r2m3vAhkZk+GQRXx8e8eNXzt5qY+nQMrqaUYPLqBckFHY2GKjr5XclWhhpV7U90
- 38bK9VliSYcVemxHkVV7sevfcpsQIExShgfHn+oX1oLoezgTXWkpphK/Pq8K027lUYPq
- v/vg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=5vvwS9hoZx8wbN7EvGS9aBvcCYryu1CZA9iR91bh4yo=;
- fh=XcbmqoyqH4WbqoC+n8Nn0hwh8HqkWgNmcxokjaFJNbM=;
- b=ZzjpzIj8Hm0RwjbkvigsMOMbEreyIDJyZ9YKhDjsYaTMNuYQl8/d1y5TyCh1skGkMb
- rH2ojA307lvfUCv2Y2fa3gCSKC31Yz+jHShDn096Sty5z1mnQm/zJfdBVTHu26gGNqHD
- gE2jYuSLqFhiPF4n9x/c17llozy8oW7cMJjaN2SVo6XDkR8dbcAUuGkqo4sfZlumEuKg
- B1zxXnqQB0qQckWejmNP/eA1/SEKdWJNINYCLmQHIVJfOZAlJbVK8CUFiFpuwnX4mYiN
- 8WIOncrfkXao9UvOB5Bn0+0B8aUVK8Odf3I4kHJL+Ja2XjJZ7F4iufultd/DS32A838a
- lX6Q==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1778673552; x=1779278352; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=5vvwS9hoZx8wbN7EvGS9aBvcCYryu1CZA9iR91bh4yo=;
- b=ZZIdx/BM1DA6f7RqFka3FJ7wbvdJ9UkeLLtv9teIGEDwHHB3fxWYah+SRrm9zKMpVj
- tXaozA6olFFvaZmRHh4l7c8qpWJDXaocRvp8g5EcDWIMwgl38W/QzZ3o/WlMqXAmNphi
- Vef0rHpLLg+jL/b4O0BEf3yzA2gy0eZ4hrTCcgNQd59TC+JqrD6+N9HTyWeuFrFbcEj9
- xjaQe9EB/2+iXNAcx9L9FwdXzj4f3tAcAHOadNsk1T5SLo8DHg/XQDwn2O5LpHaQyyPL
- mjjVJf3r2tx+muOS+ny75QyhKCx9sUNy0JnXyaIDb7KuPvflWfs22jgQkQd2rtvwcJnR
- 5ygA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778673552; x=1779278352;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=5vvwS9hoZx8wbN7EvGS9aBvcCYryu1CZA9iR91bh4yo=;
- b=aQArISmqGQriM+OhUWXhtV1bMOjbW/kLCeUynC5liuC28YQfd184ldVqe5Rapps4GO
- mRAd5bEiEan0iVEDIEiR/Ce9wp0nB440Cx9JsQ/ZFtWjCu/agiIeFXMK8Fk4oLdRr5o3
- H3f8obLJU11AaOpN4K807jEoTPZLc4AjSD73RKuQNLGPyYKveZpuy0uXYknmmHg+VaWT
- CrWtez+sPMx382p5q/k65weN7XA9wh2HhGgffm8MIQoK2ACq1rVp+ZW2nMVQpNRhspij
- zvVqc2P8z1D6grn+rLSqfqwFVQ7vkROu4V3kUQK/Q+Dz8qhLS6LCpg3RwFBzGihaL/az
- c+KQ==
-X-Forwarded-Encrypted: i=1;
- AFNElJ9N1Bkq9VZMgH56fweS4fyLtMxYkH5T3p98N6leQxmlBXRApbpj2sMoLylt8x6QNUmj8N+NNDE=@lists.denx.de
-X-Gm-Message-State: AOJu0Yxd8k95LsSx2/C6s2kWr/ZPb/fJFA2SwgpPy+sXygUR8vr08LWc
- oZ/BhN6vOs/U3AFWqXrkbO8pBlqYKcXNef0PUn0O/Md7Ny9Z3RAv43hEBp3Gb17mu+bF2h48yXD
- oMl1sdBfxqnXRdzYU47nSnxX7cucpxFcJ/O82ZTYlnQ==
-X-Gm-Gg: Acq92OFzZE4g3gndpG4T0LSaVnEggni/H4e5lz8WECshS1JnInfRSluCo3Q2tN7780x
- 6KNqJHWTkVVG1ox7MQMo+w3S91hgpfuhd+1iZPu+nQ/oNYwptTUprc3JDCMOR8YSv8C0tHIFhnb
- Rf7fgPIQOKH4pz3g/Jsn4tTXiid1X1dfJFgPmQ3TqpErsj6AOSQ8qsnBKFJryOyKi3Cc/2aduUO
- U7yyOFMkUl2kpeE5hpizfjWLaFofi7Zzb0Ssbw/gQU+Gka4lSfeVcLbJ4uyRQkVHxd3AtfUV0YZ
- OepObMLcIJbqkZOvSHLuM5a/Is+KD9iO7xnepj54+VH9U+OImnYWrPq6dCINsapkYdm8UC9OpWx
- oolTwxHgDIgpE8sVc+nr3w1deZ4U8Kz1P3FzCyQXRyEAgQOVoK2Byb1c2sKrJg8b1IgdmGm3aIP
- BM8uR/iehtSoR/5FRxY2tTf7tMPRixBiEyJ1mVacqLT6sGk8s+qCNkSTpwY+z3uI0b2IjVdOTHp
- oqe6qAVaHC7zxog7x2xHwEUJMKcc4qKSAxpBb6ZEbNBWBzKPF1ITkGUAqzTv/Tk4JbmQ8hbCSnl
- 5yiO8pw1b+6OMs7pRzjFbCilJQM5z1LTkOXVBfkJiJ3vT1M/odxhwcs7f691mVjR+9KVAetmRNj
- QZt0X3Q==
-X-Received: by 2002:a05:690e:13c2:b0:65d:8f98:6bb4 with SMTP id
- 956f58d0204a3-65df62339ecmr2796001d50.29.1778673551660; Wed, 13 May 2026
- 04:59:11 -0700 (PDT)
+ spf=pass smtp.mailfrom=mkorpershoek@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by tor.source.kernel.org (Postfix) with ESMTP id B8CC8600CB;
+ Wed, 13 May 2026 12:09:44 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id DC8E2C2BCB7;
+ Wed, 13 May 2026 12:09:43 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1778674184;
+ bh=whriFQ/Uo1oYXMQpgqULk5lFViG0EOzyB2DukkmRVuo=;
+ h=From:To:Subject:In-Reply-To:References:Date:From;
+ b=dxFSA2yGcsFDhj88FhpyN7hsI6OHq06Z4SGuTBId+el3igR4l5UrFuCE31e14KmFy
+ 6N/c1bguqvr+v8XOwTPa20uDLZHMGZAP+PaSAfsMIgNOawJm55Yw+Sw5M/Fo0xLnOq
+ 1DuKZh/tH32NZki2o+1myuoxhxp9TLE+id5WKiZl+YIQtOrHg1wkzkhRfGTApwHT00
+ euuKVXlr1d5fwK2EzJbI55/mHpoB6xqG21ZkGYX3blL9vPDr+AA0v2+CMudLkX4jp6
+ 7TXAKPkLTwAmTKxfo/Qu2pFGHa1REdFV03nQ3biJwr/gHR71/YjxmOPZ0nzgyOsVPZ
+ VN1c2/mFRZD9w==
+From: Mattijs Korpershoek <mkorpershoek@kernel.org>
+To: "Pinnell McAllister, Colin" <Colin.McAllister@garmin.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Subject: Re: [PATCH] android_ab: fix slot selection
+In-Reply-To: <PH7PR04MB8731B036A282B4DC1644B052F4582@PH7PR04MB8731.namprd04.prod.outlook.com>
+References: <20260313201415.255744-1-colin.mcallister@garmin.com>
+ <87zf3ccu3l.fsf@kernel.org>
+ <PH7PR04MB8731B036A282B4DC1644B052F4582@PH7PR04MB8731.namprd04.prod.outlook.com>
+Date: Wed, 13 May 2026 14:09:41 +0200
+Message-ID: <878q9nv7cq.fsf@kernel.org>
 MIME-Version: 1.0
-References: <20260430080627.849636-1-dario.binacchi@amarulasolutions.com>
- <0f23738b-b6cb-44f5-8b89-2f74760f1bf2@foss.st.com>
- <CAC_iWjLe9cv9C=uMjuMJVhLJ7P=RA020PO4GqZ8UjX8z0yfdyw@mail.gmail.com>
- <731224c0-a38a-41d4-959b-1b05d608cf28@foss.st.com>
-In-Reply-To: <731224c0-a38a-41d4-959b-1b05d608cf28@foss.st.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 13 May 2026 14:58:35 +0300
-X-Gm-Features: AVHnY4JSqFi92mlQlqwc_9IGUCUKe_kjCjl0XoqeTpDN4ss9vDnx31D_M0fzwJg
-Message-ID: <CAC_iWjKM1MOLdnd2WyGgAkZwzdZ6_sBvA4HMYnOOQbzXNQzk9A@mail.gmail.com>
-Subject: Re: [PATCH v8 0/8] Support metadata-driven A/B boot for STM32MP25
-To: Patrice CHOTARD <patrice.chotard@foss.st.com>
-Cc: Sughosh Ganu <sughosh.ganu@arm.com>, 
- Dario Binacchi <dario.binacchi@amarulasolutions.com>, u-boot@lists.denx.de, 
- linux-amarula@amarulasolutions.com, 
- Dinesh Maniyam <dinesh.maniyam@altera.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Javier Martinez Canillas <javierm@redhat.com>,
- Jerome Forissier <jerome.forissier@arm.com>, 
- John Toomey <john.toomey@amd.com>, Jonathan GUILLOT <jonathan@joggee.fr>, 
- Kory Maincent <kory.maincent@bootlin.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Michal Simek <michal.simek@amd.com>, 
- Padmarao Begari <padmarao.begari@amd.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>, 
- Quentin Schulz <quentin.schulz@cherry.de>, Rasmus Villemoes <ravi@prevas.dk>, 
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, 
- =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>, 
- uboot-stm32@st-md-mailman.stormreply.com
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -138,136 +70,270 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 13 May 2026 at 11:15, Patrice CHOTARD
-<patrice.chotard@foss.st.com> wrote:
->
->
->
-> On 5/13/26 10:00, Ilias Apalodimas wrote:
-> > Hi Patrice,
-> >
-> > Can you please get an Ack from Sughosh before queuing these up? I'll
-> > also ping him and see if has time to havea  look
-> >
-> > Thanks
-> > /Ilias
->
-> Hi Ilias
->
-> Oups, i already submitted the pull request including this series.
+Hi Colin,
 
-Ok, I don't really mind the changes to go in. But I dont have the
-bandwidth to have a look, so an ACK from Sughosh would be great
+On Thu, Apr 09, 2026 at 15:34, "Pinnell McAllister, Colin" <Colin.McAlliste=
+r@garmin.com> wrote:
 
-Cheers
-/Ilias
+> Hi Mattijs,
 >
-> Patrice
+> Thank you for the response! This wasn't a critical change, so no worries =
+about the delay.
 >
-> >
-> >
-> > On Wed, 13 May 2026 at 08:48, Patrice CHOTARD
-> > <patrice.chotard@foss.st.com> wrote:
-> >>
-> >>
-> >>
-> >> On 4/30/26 10:06, Dario Binacchi wrote:
-> >>> This series, the mainline version of [1], provides the necessary changes
-> >>> in U-Boot to support the metadata-driven A/B update flow for STM32MP25
-> >>> boards. It implements the logic required to dynamically select the boot
-> >>> bank based on FWU metadata.
-> >>>
-> >>> These changes are designed to be backward compatible while providing
-> >>> the necessary infrastructure for the A/B scheme.
-> >>>
-> >>> The series has been tested on the STM32MP257F-EV1 board.
-> >>>
-> >>> Additionally, some patches in the series propose changes with
-> >>> general-purpose utility:
-> >>>
-> >>>  1/7 lib: uuid: add partition type GUID for extended bootloader
-> >>>  4/7 cmd: part: support lookup by UUID in 'part number'
-> >>>  6/7 fwu: add helper to get image GUID by type and bank index
-> >>>
-> >>> [1] https://github.com/STMicroelectronics/u-boot/pull/6
-> >>>
-> >>> Changes in v8:
-> >>> - Skip the test in case the CONFIG_MCC is not enabled or the mmc
-> >>>   device is not found.
-> >>> - Add Reviewed-by of Patrice Chotard
-> >>> - Skip cmd_test_part tests for configurations where MMC is not enabled
-> >>>   or the device is missing
-> >>>
-> >>> Changes in v7:
-> >>> - Add Reviewed-by of Simon Glass for patc 7/8 of "test: dm:
-> >>> fwu_mdata: add test for fwu_mdata_get_image_guid"
-> >>>
-> >>> Changes in v6:
-> >>> - Add Reviewed-by of Simon Glass to patch 3/8 "test: cmd: add unit
-> >>>   tests for part command"
-> >>>
-> >>> Changes in v5:
-> >>> - Update doc/usage/cmd/part.rst to reflect the changes related to the
-> >>>   part command.
-> >>> - Add Acked-by of Ilias Apalodimas to patch 6/8 "fwu: add helper to get
-> >>>   image GUID by type and bank index"
-> >>>
-> >>> Changes in v4:
-> >>> - Place the part command tests in the cmd suite rather than the dm
-> >>>   suite.
-> >>> - Order the include files according the U-Boot coding style.
-> >>> - Add patch 7/8 test: dm: fwu_mdata: add test for fwu_mdata_get_image_guid
-> >>>
-> >>> Changes in v3:
-> >>> - Wrap lines exceeding 80 columns in test/cmd/part.c file.
-> >>> - Combine run_command() and ut_asserteq() -> ut_asserteq(1, run_command(
-> >>> - Add kerneldoc comment for fwu_mdata_get_image_guid() above its declaration
-> >>>   in fwu.h.
-> >>> - Add log_warning() messages to fwu_platform_hook() to catch inconsistent
-> >>>   FWU metadata (boot GUID found but root GUID missing or viceversa), as
-> >>>   suggested by Simon Glass.
-> >>>
-> >>> Changes in v2:
-> >>> - Add links to the XBOOTLDR specification in the commit message of patch
-> >>>    1/7 lib: uuid: add partition type GUID for extended bootloader.
-> >>> - Update help for 'part start', 'part size' to mention UUID.
-> >>> - Add kerneldoc comment for fwu_mdata_get_image_guid().
-> >>> - Pass efi_guid_t by pointer in fwu_mdata_get_image_guid().
-> >>> - Add patches:
-> >>>    5/7 test: cmd: part: add UUID lookup tests
-> >>>    3/7 test: cmd: add unit tests for part command
-> >>>    2/7 test: dm: part: add test for part_get_info_by_uuid
-> >>>
-> >>> Dario Binacchi (8):
-> >>>   lib: uuid: add partition type GUID for extended bootloader
-> >>>   test: dm: part: add test for part_get_info_by_uuid
-> >>>   test: cmd: add unit tests for part command
-> >>>   cmd: part: support lookup by UUID
-> >>>   test: cmd: part: add UUID lookup tests
-> >>>   fwu: add helper to get image GUID by type and bank index
-> >>>   test: dm: fwu_mdata: add test for fwu_mdata_get_image_guid
-> >>>   board: st: stm32mp25: support dynamic A/B bank bootup
-> >>>
-> >>>  board/st/stm32mp2/stm32mp2.c          |  32 ++++
-> >>>  cmd/part.c                            |  12 +-
-> >>>  doc/README.gpt                        |   2 +
-> >>>  doc/usage/cmd/part.rst                |   6 +-
-> >>>  include/configs/stm32mp25_st_common.h |  15 ++
-> >>>  include/fwu.h                         |  11 ++
-> >>>  include/part_efi.h                    |   3 +
-> >>>  lib/fwu_updates/fwu.c                 |  33 ++++
-> >>>  lib/uuid.c                            |   1 +
-> >>>  test/cmd/Makefile                     |   1 +
-> >>>  test/cmd/part.c                       | 227 ++++++++++++++++++++++++++
-> >>>  test/dm/fwu_mdata.c                   |  48 ++++++
-> >>>  test/dm/part.c                        |  53 ++++++
-> >>>  13 files changed, 437 insertions(+), 7 deletions(-)
-> >>>  create mode 100644 test/cmd/part.c
-> >>>
-> >> For the whole series
-> >>
-> >> Applied to u-boot-stm32/master
-> >>
-> >> Thanks
-> >> Patrice
+> Outlook is kind of terrible for replying inline...I should have used my g=
+mail account for this patch. My responses to you message are below.
+
+I agree that Outlook is not very good here.
+I can't seem to be able to apply the patch:
+
+$ b4 shazam -s -l --check 20260313201415.255744-1-colin.mcallister@garmin.c=
+om
+Looking up 20260313201415.255744-1-colin.mcallister@garmin.com
+Checking for newer revisions
+Grabbing search results from lore.kernel.org
+Analyzing 3 messages in the thread
+Looking for additional code-review trailers on lore.kernel.org
+Analyzing 0 code-review messages
+Checking attestation on all messages, may take a moment...
+Retrieving patchwork CI status, may take a moment...
+---
+  =E2=9C=93 [PATCH] android_ab: fix slot selection
+    + Link: https://patch.msgid.link/20260313201415.255744-1-colin.mcallist=
+er@garmin.com
+    + Signed-off-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
+    =E2=97=8F checkpatch.pl: 196: ERROR: code indent should use tabs where =
+possible
+    =E2=97=8F checkpatch.pl: 196: WARNING: please, no spaces at the start o=
+f a line
+    =E2=97=8F checkpatch.pl: 197: ERROR: code indent should use tabs where =
+possible
+    =E2=97=8F checkpatch.pl: 197: WARNING: please, no spaces at the start o=
+f a line
+    =E2=97=8F checkpatch.pl: 201: ERROR: code indent should use tabs where =
+possible
+    =E2=97=8F checkpatch.pl: 201: WARNING: please, no spaces at the start o=
+f a line
+    =E2=97=8F checkpatch.pl: 203: ERROR: code indent should use tabs where =
+possible
+    =E2=97=8F checkpatch.pl: 203: WARNING: please, no spaces at the start o=
+f a line
+    =E2=97=8F checkpatch.pl: 204: ERROR: code indent should use tabs where =
+possible
+    =E2=97=8F checkpatch.pl: 204: WARNING: please, no spaces at the start o=
+f a line
+  ---
+  =E2=9C=93 Signed: DKIM/garmin.com
+---
+Total patches: 1
+
+Can you resend it?
+More information below.
+
 >
+>> Please use ./scripts/get_maintainer.pl -f boot/android_ab.c next time yo=
+u send a patch.
+>
+> ack
+>
+>> Can you please give me more references to the boot selection rules?
+>> Is this just the code comment that's mentioned (boot/android_ab.c:276) ?
+>
+> Yes, that is correct. I do not have any other references to cite.
+>
+>> It seems to be using libboot_control as a static library.
+>> libboot_control tells us that a slot is considered unbootable when:
+>> tries_remaining !=3D 0;
+>
+> I also see that tries_remaining is set to 1 on successful boot:
+> https://cs.android.com/android/platform/superproject/+/android-latest-rel=
+ease:hardware/interfaces/boot/1.1/default/boot_control/libboot_control.cpp;=
+l=3D260?q=3Dlibboot_control
+>
+> This is what we also currently do when marking a boot as successful. Howe=
+ver, it is unclear if this is a requirement in the spec and what the behavi=
+or in u-boot should be if successful_boot =3D=3D 1 and tries_remaining =3D=
+=3D 0.
+>
+>> What happens if the tries counter is zero and we attempt to boot with
+>> dec_tries=3Dtrue? In that case, we will decrement tries_remaining which =
+is
+>> an uint8_t (see: android_bootloader_message.h).
+>
+> As I read the code, dec_tries only decrements tries_remaining if successf=
+ul_boot =3D=3D 0. So in the case where dec_tries =3D=3D true, tries_remaini=
+ng =3D=3D 0, and successful_boot =3D=3D 1, the decrement would be skipped, =
+which aligns with the behavior for a case where tries_remaining > 0.
+>
+> I'm not too picky with a solution here. A valid alternative solution woul=
+d be to simply update the comment at android_ab.c:276. I do think I prefer =
+aligning the code to match the comment as it makes more sense to be able to=
+ boot a slot when successful_boot =3D=3D 1, regardless of tries_remaining. =
+However, if that goes against the spec, simply fixing the comment makes mor=
+e sense.
+>
+> Please let me know what you think and what solution is preferred.
+
+I've looked at another implementation of A/B slot booting in Qualcomm's
+bootloader (EDK2):
+
+https://git.codelinaro.org/clo/la/abl/tianocore/edk2/-/blob/uefi.lnx.5.0.r2=
+5-rel/QcomModulePkg/Library/BootLib/PartitionTableUpdate.c?ref_type=3Dheads=
+#L1846
+
+We can see in FindBootableSlot() that it's possible to boot a
+slot with successful_boot =3D=3D 1 and tries_remaining =3D=3D 0
+
+Therefore, I believe your patch is correct.
+
+Again, sorry for the long delays. I'll do my best to be a bit more
+response once you have resend this patch in an applicable format (with
+proper whitespacing and such)
+
+Consider tooling such as b4 to help you with sending:
+https://b4.docs.kernel.org/en/latest/contributor/overview.html
+https://people.kernel.org/monsieuricon/sending-a-kernel-patch-with-b4-part-1
+
+Thanks!
+Mattijs
+
+>
+> Best,
+> Colin
+>
+> ________________________________________
+> From: Mattijs Korpershoek <mkorpershoek@kernel.org>
+> Sent: Thursday, April 9, 2026 05:21
+> To: Pinnell McAllister, Colin <Colin.McAllister@garmin.com>; u-boot@lists=
+.denx.de <u-boot@lists.denx.de>
+> Cc: Pinnell McAllister, Colin <Colin.McAllister@garmin.com>
+> Subject: Re: [PATCH] android_ab: fix slot selection
+>
+> Hi Colin,
+>
+> Thank you for the patch.
+> Sorry for the late review. For some reason I have not been cc'ed so I
+> missed this.
+>
+> Please use ./scripts/get_maintainer.pl -f boot/android_ab.c next time
+> you send a patch.
+> See: https://urldefense.com/v3/__https://docs.u-boot.org/en/latest/CONTRI=
+BUTE.html*contributions__;Iw!!EJc4YC3iFmQ!Tlm_0_94q_aNcwZ072h7OjCsbyXAaN6bx=
+5DgRMsDkFUXhf8ofhAJ1slRLYnu1EpkNnuaZHqRBDVgEpNOTGCclGX-d_1n$
+>
+> On Fri, Mar 13, 2026 at 15:14, Colin Pinnell McAllister <colin.mcallister=
+@garmin.com> wrote:
+>
+>> The boot selection rules state that a slot is bootable if it is not
+>> corrupted and either has tries remaining or has already booted
+>> successfully. However, slots that have tries_remaining =3D=3D 0 and
+>> successful_boot =3D=3D 1 will be disregarded when picking the slot to
+>> attempt.
+>
+> Can you please give me more references to the boot selection rules?
+> Is this just the code comment that's mentioned (boot/android_ab.c:276) ?
+>
+> I've checked:
+> * https://urldefense.com/v3/__https://source.android.com/docs/core/ota/ab=
+__;!!EJc4YC3iFmQ!Tlm_0_94q_aNcwZ072h7OjCsbyXAaN6bx5DgRMsDkFUXhf8ofhAJ1slRLY=
+nu1EpkNnuaZHqRBDVgEpNOTGCclOK45V17$
+> * https://urldefense.com/v3/__https://source.android.com/docs/core/ota/ab=
+/ab_implement__;!!EJc4YC3iFmQ!Tlm_0_94q_aNcwZ072h7OjCsbyXAaN6bx5DgRMsDkFUXh=
+f8ofhAJ1slRLYnu1EpkNnuaZHqRBDVgEpNOTGCclDWZu3M8$
+> and it's unclear to me from that.
+>
+> Then, I've looked a bit at the default bootcontrol AIDL hal at:
+> https://urldefense.com/v3/__https://android.googlesource.com/platform/har=
+dware/interfaces/*/refs/heads/main/boot/aidl/default/Android.bp__;Kw!!EJc4Y=
+C3iFmQ!Tlm_0_94q_aNcwZ072h7OjCsbyXAaN6bx5DgRMsDkFUXhf8ofhAJ1slRLYnu1EpkNnua=
+ZHqRBDVgEpNOTGCclARJQAuu$
+>
+> It seems to be using libboot_control as a static library.
+> libboot_control tells us that a slot is considered unbootable when:
+> tries_remaining !=3D 0;
+>
+> See:
+> https://urldefense.com/v3/__https://cs.android.com/android/platform/super=
+project/*/android-latest-release:hardware/interfaces/boot/1.1/default/boot_=
+control/libboot_control.cpp;l=3D332?q=3Dlibboot_control__;Kw!!EJc4YC3iFmQ!T=
+lm_0_94q_aNcwZ072h7OjCsbyXAaN6bx5DgRMsDkFUXhf8ofhAJ1slRLYnu1EpkNnuaZHqRBDVg=
+EpNOTGCclOsUzpyr$
+>
+>>
+>> Update the selection logic so slots marked successful remain eligible
+>> even when their tries counter is zero. Also include the successful_boot
+>> state in the unbootable-slot debug output.
+>
+> What happens if the tries counter is zero and we attempt to boot with
+> dec_tries=3Dtrue? In that case, we will decrement tries_remaining which is
+> an uint8_t (see: android_bootloader_message.h).
+>
+>>
+>> Signed-off-by: Colin Pinnell McAllister <colin.mcallister@garmin.com>
+>> ---
+>>
+>> An alternative would be to keep the existing behavior and update the
+>> comment in boot/android_ab.c:276 to remove the successful_boot
+>> condition. I do prefer updating the logic to match the documented rules.
+>> Currently, the userspace AB code will need to increment the tries
+>> counter for a slot that has booted successfully but has no tries left.
+>>
+>>  boot/android_ab.c | 7 +++++--
+>>  1 file changed, 5 insertions(+), 2 deletions(-)
+>>
+>> diff --git a/boot/android_ab.c b/boot/android_ab.c
+>> index 13e82dbcb7f..93e74f81d4b 100644
+>> --- a/boot/android_ab.c
+>> +++ b/boot/android_ab.c
+>> @@ -289,11 +289,14 @@ int ab_select_slot(struct blk_desc *dev_desc, stru=
+ct disk_partition *part_info,
+>>         slot =3D -1;
+>>         for (i =3D 0; i < abc->nb_slot; ++i) {
+>>                 if (abc->slot_info[i].verity_corrupted ||
+>> -                   !abc->slot_info[i].tries_remaining) {
+>> +                   (!abc->slot_info[i].tries_remaining &&
+>> +                        !abc->slot_info[i].successful_boot)) {
+>>                         log_debug("ANDROID: unbootable slot %d tries: %d=
+, ",
+>>                                   i, abc->slot_info[i].tries_remaining);
+>> -                       log_debug("corrupt: %d\n",
+>> +                       log_debug("corrupt: %d, ",
+>>                                   abc->slot_info[i].verity_corrupted);
+>> +                       log_debug("successful: %d\n",
+>> +                                 abc->slot_info[i].successful_boot);
+>>                         continue;
+>>                 }
+>>                 log_debug("ANDROID: bootable slot %d pri: %d, tries: %d,=
+ ",
+>> --
+>> 2.53.0
+>>
+>>
+>> ________________________________
+>>
+>> CONFIDENTIALITY NOTICE: This email and any attachments are for the sole =
+use of the intended recipient(s) and contain information that may be Garmin=
+ confidential and/or Garmin legally privileged. If you have received this e=
+mail in error, please notify the sender by reply email and delete the messa=
+ge. Any disclosure, copying, distribution or use of this communication (inc=
+luding attachments) by someone other than the intended recipient is prohibi=
+ted. Thank you.
+>>
+>> ________________________________
+>>
+>> CONFIDENTIALITY NOTICE: This email and any attachments are for the sole =
+use of the intended recipient(s) and contain information that may be Garmin=
+ confidential and/or Garmin legally privileged. If you have received this e=
+mail in error, please notify the sender by reply email and delete the messa=
+ge. Any disclosure, copying, distribution or use of this communication (inc=
+luding attachments) by someone other than the intended recipient is prohibi=
+ted. Thank you.
+>
+> ________________________________
+>
+> CONFIDENTIALITY NOTICE: This email and any attachments are for the sole u=
+se of the intended recipient(s) and contain information that may be Garmin =
+confidential and/or Garmin legally privileged. If you have received this em=
+ail in error, please notify the sender by reply email and delete the messag=
+e. Any disclosure, copying, distribution or use of this communication (incl=
+uding attachments) by someone other than the intended recipient is prohibit=
+ed. Thank you.
