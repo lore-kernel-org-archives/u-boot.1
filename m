@@ -4,109 +4,160 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C8CACD4851
-	for <u-boot@archiver.kernel.org>; Wed, 13 May 2026 12:17:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 245F6CD4851
+	for <u-boot@archiver.kernel.org>; Wed, 13 May 2026 12:35:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 89BD284099;
-	Wed, 13 May 2026 14:17:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 4B0C5844BF;
+	Wed, 13 May 2026 14:35:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="nZGdJFzH";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="LR9IDpoT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DCD748460C; Wed, 13 May 2026 14:17:48 +0200 (CEST)
-Received: from mail-yx1-xb12e.google.com (mail-yx1-xb12e.google.com
- [IPv6:2607:f8b0:4864:20::b12e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id D27C083E36; Wed, 13 May 2026 10:33:54 +0200 (CEST)
+Received: from AM0PR02CU008.outbound.protection.outlook.com
+ (mail-westeuropeazlp170130006.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::6])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6A111836AC
- for <u-boot@lists.denx.de>; Wed, 13 May 2026 14:17:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id ECC478341A
+ for <u-boot@lists.denx.de>; Wed, 13 May 2026 10:33:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yx1-xb12e.google.com with SMTP id
- 956f58d0204a3-65c3ea2ebf7so7161645d50.0
- for <u-boot@lists.denx.de>; Wed, 13 May 2026 05:17:45 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1778674664; cv=none;
- d=google.com; s=arc-20240605;
- b=OSmqgql+tda5MrSQOsvRGcynkT8tJ6KfwHhIY8udn4XAmv4P6T1t54oPOXzn7/Cpzi
- D+OlDVdOAV4VRkeEUSP8uduRyByYSu1t6rJcPlVykp4TIMNJgaku+KOhOdMtq/pQVbxE
- J0MyzirHOohGNet5ItUvY4ICtownofjmGMu7fVxVevesimdkwB/V4lxTF8IXt8gUVtYr
- IPTIhnT3oirpybFSwiKjqBSu6qBV+zwpCBoapDuphfK5GNFkGjGPo0KMve2yrkJXQJEW
- hG+kLfw3bLx0I2iK9FGaHikaLWpkuYkFR7MBHxcuKKzrC+H+3lQX1/GjAWYHf2KQ1s7L
- 15ag==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=G/EiQfJ3eJr6HO5ETSZrWbtO3leAuSMyzGbjnvaVWN8=;
- fh=afdFkhg+X0dJedjeczr8qfrLvDZpz9MX/GqWAgIgc5U=;
- b=M0DST6oXykXDFTxPeUtOOQkYnidS7psmzHhaX3pcbHh1e9mTBmkwzt629EX5+oRw38
- URPtjVWs688ZigG3E8Svo1XgVZS6Hm9zc8PJgxp+EdUAEYKLyrNlwMeVxNmQZBhgS9jq
- ljaODslWnlUK8arAcNvK9ynyowkk4avMKOoFImbvtyAXmQuUD32Az32jIH0E73c2tThU
- YHRviY9YEa5KEjq5KJJDy3q2XVcogg7JpqOObNZGQC/6H6JMq7yiPvGLxEe+5cSsSMmk
- fZFN0hU8mTav/ktQ0Fk7JoLdACg2qFXKkFgGYsJkiLIrCjTPGCedshjY3/4BsEnq5l2h
- G8DA==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1778674664; x=1779279464; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=G/EiQfJ3eJr6HO5ETSZrWbtO3leAuSMyzGbjnvaVWN8=;
- b=nZGdJFzH2yS7LTO5OiKldNYf2As4W+ShMX2f5ETqXtc9UaP8zDST89t9sjlF6w70v2
- y2ZZOSRMjUyWU1vs2ntKcYyECppHTD4gCi9wMIIQuQlsQayDQ9+2tMEOsjwHFDxihFeU
- LaxWOtLJRKthoUujcWqP0yH5oUjoY4R0p+w9m4N1QJUIJO0WOwyv2npUjD5ZbG9j2w92
- gMUagOplvDpg0xN83i1N/zU4WgcDaH17SycSK90YhTNr10PIj6gSgu3zEePIXfTJUlla
- aJ5s1H31DLXj9LH3lTv818tHk3vBwEWqKhxrBPTa56X9iySTn/st8NmlGFmWxzUDIugD
- rZpA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778674664; x=1779279464;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=G/EiQfJ3eJr6HO5ETSZrWbtO3leAuSMyzGbjnvaVWN8=;
- b=ZCLU2bbB5o6F7g7QZyS73MXr1bRBYNwdnZDRTLxSVLUluQbEXDBdOEXjuHQVeVBruS
- /SkGaNq7LOXqz0LNXN3U/R/XCGNcLRZUfPB1ACXqjEJlI/vKfm5Is8RaNaYg1CCX7ENL
- HhI4aaovKbVYShhHRcs3kKclxCcP8buOAJZUWsZGrq4t6eQarqujS8bWe6SvFevZfHzx
- 2zgU/JJQ04uqsrOdcBV5qSZ3mkuGU8+74b9AbNRuIlz0278dDFIJsl1LtuPynq/jKsFY
- NLJoazLeAk2hlNzrIlL1HEEq5T330bCLuo9gxtvimeUnmBMs9EnHq8VlSvUjvBeHDlgN
- JkdQ==
-X-Gm-Message-State: AOJu0YwrWln4zWFq6ydjcvg+9+hwVWwIhm1DRjzf3KxmiL79ABeDoF3i
- FbJtxyaOxUqvZdXeXGS5vSqiBvdUtNpyxVDh56QxNxXBrFNfl111GXXn/AmsY8y4T8hPme+RK6C
- NeT2zd+jhIuSobMVzm+s34mqfMeKWF+bJYW3k2+djf8LuLEvRHg+9dKU=
-X-Gm-Gg: Acq92OH8a9eDToc7EJ43+hVJDr5spkQDlXBSTmc6xQgpe52PFjAQoE7m48O2ajjROnT
- IdZN0EbOFYwjtiM9Q1LMLempqe9u9dt2pFQ3hW5frq6aXoXDDAgyvFX1C7onht5rA9gfvuesZ3K
- m8Ol+qUH9vDjzlftjOXH7vkXnjUVdV+PzQTQKCavmwW7pJAi67oxnLf5mMVWHCL6wbrlcl9A6bC
- ggVkAn/hjI5Y3lfBUJezCaLyQhJst+MX3U7Yzw+k8jc89LMCLHEWomThk/Cyy9fgsr6y0YWCshl
- mZnNo92/TJjNonqwRWlE7nvkEjIBLW8um3Sh/W/VW47Q/kmjPvWS6Kplp6uNJezFtf3gCItzq6K
- ZCuNSrUZQV094PLt9lcb1m8moHLo1oRMm0xRUFTwWChYL+PEibCF3otJvxa15znOHKX8jBXh+NX
- UOdXYtT1yNlCCmx7DqcAJXgGxiamc/f5tKTSW7oz2SInbFfY1JQd02l67DG/UKaabvqdCQmS5P2
- e4zk9AHqVsj3IjzZ8LKuNyjlev5i9IS++m3YXYGLlIdvGA2hDxU0Z4clh4v0cCm24tUq+Jefsp4
- sFyst7uAJL3G0iAHajvHp89vHSwdqPo7FgaIRpq5JgO5AfqK67lPISKwdYf/G8WDvHw1TDnS1DG
- BGicpgw==
-X-Received: by 2002:a53:a4cd:0:b0:652:53cc:dfb3 with SMTP id
- 956f58d0204a3-65df63d3eccmr2241494d50.52.1778674663855; Wed, 13 May 2026
- 05:17:43 -0700 (PDT)
+ spf=pass smtp.mailfrom=peng.fan@oss.nxp.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=bWKWrKAbVbfUEOlcIL2j0nldLwRYxVk+cWNaHVNUsgNbZlHBKxYNHXRPhSIgIcsvb2O98CmKehzQDA04ZS6TSgHybGEXNppuQqlm41OcPHBWFfn/WVErp7MwrSD0rCtg8qXzVs6HfIHuoJXCfXzhJfMKEJXE6beQhx8bndc+gc3mu4qEHROnmZJiYdEssnm3P/Pahbj72UohYavCFq9QRnVXckEwZjuwcIaH9ek2yIa4fIinFo/e/K56rFjHohdjZnDS6Bg+WxsvALzgPyN/t8ZnKRZvB8iQtmhIy1ffh47yhFnU9njdj05vBIdWwvLsuqrzFXH9H6p8rQDzXaE1Lg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=4AtJlJVGlaiz8WMvChazACygQ4WwMFFWiq3dLilfqeo=;
+ b=e7rTNX+BmxKPgdULQvxGQ1oxzOvcY5g154LxrBxOlxNanbslchnGX4IU8Tr14hxKtcbi5851yEZiFos4Zm2MIPF+yUwzeI9Z5919shSQeBY7tzPAVS+FDfx96wbWW9rHkH7jen81UknvDlTbNMQu6iMu50hhDTYfK1DCOzj7KV97lBA/XKyX4zTrYn8WVS1PJO2xpbBYGnYpmRGSBvCsInrfWJC6vWPNPlm61BQJy1BsOpSAgf1NqAqlqnA/nBRXi+qQbaY6vTNeSXvC49tIZPmQSxbfrkb3FSmjULzJrzjVfZYKp1/QW5MjXGAo0bUUemIknLFsm+FukWwQOem3iA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
+ dkim=pass header.d=oss.nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
+ s=selector1-NXP1-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=4AtJlJVGlaiz8WMvChazACygQ4WwMFFWiq3dLilfqeo=;
+ b=LR9IDpoTR7gzUTVYFjUz00aDczxSu87ctU2iu5rzodQrFTMN2vPtPU+oxTpxeYlbT3PLHhN/6j//fw/OeJuK7EEu1FBCZeh3g8MK0QP76WOHZQ+4+zR9oz6UvarZUDe/lvFT0zjbgwVu1ZEh6PwpdsA8sPjkVh534CE0W+3x2GMaHiWokFHTyvZpvs0faAvkX5mz6ZcHEFO2kz+dpa+D3IbBu/kCRqQVUjjUN6xqZiYgG9+t1X6BY9j1eM8sFD4VpgdtVNRAzjPvprJKK+6esq1tuz0gqP2952C7wuUKmhgYUbd6LGpVtKmWRFVWHzWiTHsnptsJrMfT/Q4SFLInNA==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=oss.nxp.com;
+Received: from MRWPR04MB12330.eurprd04.prod.outlook.com (2603:10a6:501:7f::23)
+ by DU2PR04MB8806.eurprd04.prod.outlook.com (2603:10a6:10:2e1::24)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9891.19; Wed, 13 May
+ 2026 08:33:50 +0000
+Received: from MRWPR04MB12330.eurprd04.prod.outlook.com
+ ([fe80::ca22:f8c8:6aca:7889]) by MRWPR04MB12330.eurprd04.prod.outlook.com
+ ([fe80::ca22:f8c8:6aca:7889%6]) with mapi id 15.20.9913.009; Wed, 13 May 2026
+ 08:33:49 +0000
+Date: Wed, 13 May 2026 16:36:30 +0800
+From: Peng Fan <peng.fan@oss.nxp.com>
+To: alice.guo@oss.nxp.com
+Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@lists.denx.de,
+ Christoph Stoidner <c.stoidner@phytec.de>, upstream@lists.phytec.de,
+ Stefano Babic <sbabic@nabladev.com>,
+ Fabio Estevam <festevam@gmail.com>, Tom Rini <trini@konsulko.com>,
+ Peng Fan <peng.fan@nxp.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Joseph Guo <qijian.guo@nxp.com>, Sumit Garg <sumit.garg@oss.qualcomm.com>,
+ Francesco Valla <francesco@valla.it>, Ye Li <ye.li@nxp.com>,
+ Primoz Fiser <primoz.fiser@norik.com>, Jacky Bai <ping.bai@nxp.com>,
+ Frieder Schrempf <frieder.schrempf@kontron.de>,
+ Sam Protsenko <semen.protsenko@linaro.org>,
+ Tien Fong Chee <tien.fong.chee@altera.com>,
+ Svyatoslav Ryhel <clamor95@gmail.com>,
+ Andre Przywara <andre.przywara@arm.com>,
+ Brian Sune <briansune@gmail.com>, Johan Jonker <jbx6244@gmail.com>,
+ Hai Pham <hai.pham.ud@renesas.com>, David Lechner <dlechner@baylibre.com>,
+ Emanuele Ghidoli <emanuele.ghidoli@toradex.com>,
+ Parth Pancholi <parth.pancholi@toradex.com>,
+ Ion Agorria <ion@agorria.com>, Paul Kocialkowski <contact@paulk.fr>,
+ Ernest Van Hoecke <ernest.vanhoecke@toradex.com>,
+ Mathieu Dubois-Briand <mathieu.dubois-briand@bootlin.com>,
+ Mathieu Othacehe <m.othacehe@gmail.com>,
+ David Zang <davidzangcs@gmail.com>, Simon Glass <sjg@chromium.org>,
+ =?iso-8859-1?Q?Jo=E3o_Paulo_Gon=E7alves?= <joao.goncalves@toradex.com>,
+ =?iso-8859-1?Q?S=E9bastien?= Szymanski <sebastien.szymanski@armadeus.com>,
+ =?iso-8859-1?Q?J=E9r=E9mie_Dautheribes_=28Schneider_Electric=29?=
+ <jeremie.dautheribes@bootlin.com>, 
+ Stefan Roese <stefan.roese@mailbox.org>,
+ Francesco Dolcini <francesco.dolcini@toradex.com>,
+ Lukasz Majewski <lukma@denx.de>,
+ Max Krummenacher <max.krummenacher@toradex.com>,
+ Wadim Egorov <w.egorov@phytec.de>, Martin Schwan <m.schwan@phytec.de>,
+ Tim Harvey <tharvey@gateworks.com>, Simona Toaca <simona.toaca@nxp.com>,
+ Franz Schnyder <franz.schnyder@toradex.com>, Alice Guo <alice.guo@nxp.com>
+Subject: Re: [PATCH v3 5/9] imx: soc: Get watchdog base addresses from device
+ tree
+Message-ID: <agQ4DkOO0M42nmki@shlinux89>
+References: <20260512-wdt-v1-0-0b9e1993557b@nxp.com>
+ <20260512-wdt-v1-5-0b9e1993557b@nxp.com>
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260512-wdt-v1-5-0b9e1993557b@nxp.com>
+X-ClientProxiedBy: SI2P153CA0028.APCP153.PROD.OUTLOOK.COM (2603:1096:4:190::9)
+ To MRWPR04MB12330.eurprd04.prod.outlook.com
+ (2603:10a6:501:7f::23)
 MIME-Version: 1.0
-References: <20260512-b4-mmu-unmap-fixes-v4-0-fab802f647c9@linaro.org>
- <20260512-b4-mmu-unmap-fixes-v4-4-fab802f647c9@linaro.org>
- <CAC_iWjKgQhx2G1hpjBSzqKE0QJmuGFNoiMWE5=JNZaJvcA-9HQ@mail.gmail.com>
-In-Reply-To: <CAC_iWjKgQhx2G1hpjBSzqKE0QJmuGFNoiMWE5=JNZaJvcA-9HQ@mail.gmail.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 13 May 2026 15:17:07 +0300
-X-Gm-Features: AVHnY4LpeUeDxKRYW3YkUjhzHetno54fWArkdmeIFNihgj8EOObo2rts01J2xVw
-Message-ID: <CAC_iWjJi-cD+UkO5Z5_hMCRE01DeXv8o9gTtJH8mreu5b1xxPA@mail.gmail.com>
-Subject: Re: [PATCH v4 4/4] armv8: mmu: fix and optimise explicitly unmapping
- regions
-To: Casey Connolly <casey.connolly@linaro.org>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
- Anshul Dalal <anshuld@ti.com>, 
- Dhruva Gole <d-gole@ti.com>, Mark Kettenis <kettenis@openbsd.org>, 
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Sumit Garg <sumit.garg@kernel.org>
-Content-Type: text/plain; charset="UTF-8"
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: MRWPR04MB12330:EE_|DU2PR04MB8806:EE_
+X-MS-Office365-Filtering-Correlation-Id: 052c8e8c-ec3a-4a48-cb6c-08deb0ca5b6a
+X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
+X-LD-Processed: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635,ExtAddr
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|366016|19092799006|52116014|1800799024|376014|7416014|18002099003|22082099003|56012099003|38350700014|11063799003;
+X-Microsoft-Antispam-Message-Info: 66AbXaMpyFqUU1nAEmWUxmhX1TS/A9B82kYLvuHViWV25JJi+UfD3iEPMUpkyz0Hk7B5paVZpScJtNoD6PxYOkxgcE720IlsnCrTBWJj9OCFoQVklMsF6wfCJPoQpidvTILtcYfSiqhmshqzd3yHP6IcL3F8V1fWSYnzJRAQT51zqwOQYtgrn0Bu4uAYrL0MjK098GtK9kjC5rjoaiv6ADjeH1jJnL4MHhCfM5CBXl8/AS83zpaQ3hzi6Af45GyRGzKqIfXae27gSpC9dLikbPBG2A/ghWnwMRaUXThIudw3Kwo4oBErLn8SefytScN5WzM7GQTrh0+TdiVDwicOLoLbJ4Zcs2U8gn7MBK56o4pmqm6uH7CFJLE7i5vs2nVYtoh9twb0ByAQlep4rJ3pyiUlBHXfiAo46gRhP9QtmVmlTGa5zWCR1eKDPUYFx9MwhTtP6zup+OGVD6hFtDr96lKemnDgsz3u2AwBEXYiimbDyIvfaepjDKhntMHkef0ewo+ez8UMXNG6oqaOoAI2lDpfWRUFk/wgt99HsqDlFP159wCsHnerrBy4R+WKS4y/lyyyaugFGj11Lhmh6r5p9LixIMmlQHaHo7QVhA9FZoUabtErxxI1++8dx+rrse0/3GDqWQbCelEoJh5eyN28tWEhykLePXo33xSe/a25IOo80M3BoGK1EwrVlXfSQuABnrvhJvsZ6i5BqvhNwvkYaBHqevzoPrd5EHAaSgnQmySDlXpaeSd+QWCFy3QkAK8y
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:MRWPR04MB12330.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(19092799006)(52116014)(1800799024)(376014)(7416014)(18002099003)(22082099003)(56012099003)(38350700014)(11063799003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?zob/oxuM/h7CYg2QECR+VdnQ0mGuG42wTXg1QWWizh5CrVYTrbnr8L4DT+mf?=
+ =?us-ascii?Q?PLXCskcH+ktPwn1gZUEiG58o4vF++3tXCfHA7Lpe53DTkkAUHQUtGQyGbntJ?=
+ =?us-ascii?Q?EEOq5BXx7mdi0WPzudA1ok7GmqmMWczKv3/p9yxY0gpYdzcckdRMht6lBubg?=
+ =?us-ascii?Q?dOJesko5lb3+SK1e/HKG1amEAV2JJ3K0o6LFq4+TcGOycudL3pvrlW8izkOH?=
+ =?us-ascii?Q?eS1cHc7gormQW4ts4quovFiMin5SdkJm9dEWOEonrbi61vLtWRm3sVceXEUu?=
+ =?us-ascii?Q?geKf90NNzTXMmXhd8w1xhGNeFWyVtLxlvLkFTpdddpxW0yRdt+jWYW8V3cSr?=
+ =?us-ascii?Q?ox3j5Q78szKXkgzswJ/GH3DgLRaE8Z9OvXwkYWdmecEs6bJ8i645PJjmFamj?=
+ =?us-ascii?Q?BDgO8YgGdb3Ezu85/vKU17ZhBWR53d+k9AqfVKg5Kqs7ITdhl8oLdEzeR14x?=
+ =?us-ascii?Q?WHRHxcj+gUg+HZGaq6xVgFy8jOdowjWVTPAripoIqFkd3IhoDjdTwqWddczI?=
+ =?us-ascii?Q?WWjHVNFQMC5+PF83sRtUrmLMkivpMPa5GqclWZMOK3XxsiLyW6H14Cl3FLzr?=
+ =?us-ascii?Q?5nkhiW1zMJb55+u7wi6YZYj5yIn4cDLFxd6U+XzL+XKpLwI9vNbyQ6BK1LE9?=
+ =?us-ascii?Q?FBqFEXwhlVfjKdb7LD5cZo/Xuw/IReZZ1rIfCQG+ZBEBgC5eLDR3Em7snd3D?=
+ =?us-ascii?Q?87vI6fY4QXATARzWjMckwLvtHx4DoLIjCCJEq/qMaVkbYJ7UPIA0VKnhmEYn?=
+ =?us-ascii?Q?TSPlEAlb5Xa7iGXAit4YNOW4mV1j0PMc0Qszlfc2xdWYqXaUVP8qa3FBv0/6?=
+ =?us-ascii?Q?0OgsX6j4fO4L+f8T4xwF8g/V0MYh1mu7sZcw7+XkWr1570DPzW3bUkP3cRJa?=
+ =?us-ascii?Q?mBj62TXCjKkMZ2qMrCrQtBbuwRMs0aEAof0r5ZUAA73s9XUNef3LbG/SlP1Z?=
+ =?us-ascii?Q?4E+vF20SqwSvcFTGFH6Wlb7xjuBQTYbKRvc+z+cCnMDUiNy5ynlV8qcwqNUK?=
+ =?us-ascii?Q?1SIyzqzSuRJl8kc4KypByR9HbZ0x/ctgAIPdc41bhx4+T0DL1y6gKqiN0qGA?=
+ =?us-ascii?Q?qkzCjOTLOAQfZcsaHkrNL8RgaE7iPmItBddFkU3RLZcpRnatmR38DicX8Ja8?=
+ =?us-ascii?Q?A7X/dtIm3FJZYB+FZ9DvcyA3fWYHddGMZUN4AnpXVbiKV/Zimez+Bz4F2OlV?=
+ =?us-ascii?Q?kuhbs8QrJuHq8eMVOtcXdTTGNsJFFiTJu0jQHc/ZFPf4gT3MVsMEj/ZspLjo?=
+ =?us-ascii?Q?J0+/SXzI8FqvcLf7C+ZUBc/N2da42EKmkelUesWtLMr+Rs2KKeso9UDUyruJ?=
+ =?us-ascii?Q?txSznzUCeo9SoGqSwR015ztpbgOb0PQ3Xkdv8u/VxY2seNzR84p/nt0uzjKN?=
+ =?us-ascii?Q?ldS54QVZUNLsT1YFZ8RZDdqn/u0lT8pNdea2ltDc18ceW9Av2EFKuxaCKaUa?=
+ =?us-ascii?Q?ncF/bSdqwykj97d+ZIGs6R7uyBbkhEq9nZHBL7ImljrHQQlH+tyYR6Ceb3a1?=
+ =?us-ascii?Q?HIbEOERyuXvzlpMsZ/49ezQIU2ETOgKQgS+HpHrAUNF0TCz/+ujgEz9W34CX?=
+ =?us-ascii?Q?F/6wAOEBfuUlkfJuqI7g0+gs7alMAO7zCNUfC0rg4tdqV49VCR/p02xLxwHA?=
+ =?us-ascii?Q?sz7u95eXuE14Tf94zPPHTPyoBi0o83KUoBf0a8HG1pc7DZ2SBbwRiHt2hK22?=
+ =?us-ascii?Q?pxjB045DH2pr80BLsNb/jQ8xY4sGmQbe5PLMr/Sp9xgwD1eEKAONqNNVQLIT?=
+ =?us-ascii?Q?xUJ86LIAig=3D=3D?=
+X-OriginatorOrg: oss.nxp.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 052c8e8c-ec3a-4a48-cb6c-08deb0ca5b6a
+X-MS-Exchange-CrossTenant-AuthSource: MRWPR04MB12330.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 May 2026 08:33:49.8625 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: qF+EPk+5tY/nzqbl/l3qd1pjUopxgVxUvYJA5DJliYfjllldJsKw6HFCPvmHtm7Ck5Csfspj60QhZ8efRcBHIg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU2PR04MB8806
+X-Mailman-Approved-At: Wed, 13 May 2026 14:35:03 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -123,140 +174,73 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Replying to myself here, but as we discussed in private the *pte &=
-~0; is basically a nop as well
+On Tue, May 12, 2026 at 11:10:12AM +0800, alice.guo@oss.nxp.com wrote:
+>From: Alice Guo <alice.guo@nxp.com>
+>
+>Replace hardcoded watchdog base addresses with dynamic address lookup
+>from device tree for i.MX7ULP, i.MX8ULP, i.MX91, i.MX93, i.MX943, i.MX95
+>and i.MX952.
+>
+>Move i.MX7ULP watchdog initialization from s_init() to
+>arch_cpu_init() because ofnode_* APIs depend on FDT, which is not
+>available during s_init().
+>
+>Signed-off-by: Alice Guo <alice.guo@nxp.com>
+>---
+> arch/arm/mach-imx/imx8ulp/soc.c   | 14 +++++++++++++-
+> arch/arm/mach-imx/imx9/scmi/soc.c | 15 ++++++++++++---
+> arch/arm/mach-imx/imx9/soc.c      | 16 +++++++++++++---
+> arch/arm/mach-imx/mx7ulp/soc.c    | 24 ++++++++++++++++++------
+> 4 files changed, 56 insertions(+), 13 deletions(-)
+>
+>diff --git a/arch/arm/mach-imx/imx8ulp/soc.c b/arch/arm/mach-imx/imx8ulp/soc.c
+>index 1ee483065e8..ec85625ea25 100644
+>--- a/arch/arm/mach-imx/imx8ulp/soc.c
+>+++ b/arch/arm/mach-imx/imx8ulp/soc.c
+>@@ -343,7 +343,19 @@ static void disable_wdog(void __iomem *wdog_base)
+> 
+> void init_wdog(void)
+> {
+>-	disable_wdog((void __iomem *)WDG3_RBASE);
+>+	ofnode node;
+>+
+>+	for (node = ofnode_by_compatible(ofnode_null(), "fsl,imx8ulp-wdt");
+>+	     ofnode_valid(node);
+>+	     node = ofnode_by_compatible(node, "fsl,imx8ulp-wdt")) {
 
-Cheers
-/Ilias
+Use ofnode_for_each_compatible_node.
 
-On Wed, 13 May 2026 at 14:57, Ilias Apalodimas
-<ilias.apalodimas@linaro.org> wrote:
->
-> Hi Casey,
->
-> On Tue, 12 May 2026 at 14:13, Casey Connolly <casey.connolly@linaro.org> wrote:
-> >
-> > As more platforms start ensuring they explicitly unmap reserved-memory
-> > regions a few issues have appeared with how the existing dynamic mapping
-> > code works. Fix these and get a small optimisation as well.
-> >
-> > 1. Teach pte_type() to actually respect the PTE_TYPE_VALID bit
-> > 2. Don't walk the TLB a second time if we call mmu_change_region_attr()
-> >    with PTE_TYPE_FAULT (since it would just be a slow nop)
-> > 3. Fix how set_one_region() decides to split blocks.
-> >
-> > Today set_one_region() will always split blocks until it reaches the
-> > smallest granule size (4k) and then update all of these pages. This
-> > appears to be due to a big in how is_aligned() is implemented, since
-> > it only evaluates to true if addr and size are both multiples of the
-> > current granule size, so a mapping aligned to 2M which is 4M in size
-> > will cleanly result in 2 blocks being set, but a mapping aligned to
-> > 2M which is 4M + 8k in size will result in blocks being split and 1026
-> > individual pages being set.
-> >
-> > While for the address it is correct to enforce that it is aligned to
-> > the current granule size, we only need to check if the region size is
-> > greater than the current granule size. This allows us to simplify our
-> > second example above to only 4 entries being updated (assuming no blocks
-> > have to be split) since we only need to update 2 blocks to map the first
-> > 4M, drastically improving the best-case performance.
-> >
-> > In the case where the address is 4k aligned rather than 2M aligned we
-> > will still be restricted to mapping 4k pages until we reach 2M alignment
-> > where we could then map a larger 2M granule which previously would never
-> > happen.
-> >
-> > Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
-> > ---
-> >  arch/arm/cpu/armv8/cache_v8.c | 18 ++++++++++++++----
-> >  1 file changed, 14 insertions(+), 4 deletions(-)
-> >
-> > diff --git a/arch/arm/cpu/armv8/cache_v8.c b/arch/arm/cpu/armv8/cache_v8.c
-> > index e9ce6335ee9e..bcfc36603adb 100644
-> > --- a/arch/arm/cpu/armv8/cache_v8.c
-> > +++ b/arch/arm/cpu/armv8/cache_v8.c
-> > @@ -162,9 +162,9 @@ u64 get_tcr(u64 *pips, u64 *pva_bits)
-> >  #define MAX_PTE_ENTRIES 512
-> >
-> >  static int pte_type(u64 *pte)
-> >  {
-> > -       return *pte & PTE_TYPE_MASK;
-> > +       return *pte & PTE_TYPE_VALID ? *pte & PTE_TYPE_MASK : PTE_TYPE_FAULT;
-> >  }
-> >
-> >  /* Returns the LSB number for a PTE on level <level> */
-> >  static int level2shift(int level)
-> > @@ -980,11 +980,12 @@ u64 *__weak arch_get_page_table(void) {
-> >
-> >         return NULL;
-> >  }
-> >
-> > +/* Checks if the current PTE is an aligned subset of the region */
-> >  static bool is_aligned(u64 addr, u64 size, u64 align)
-> >  {
-> > -       return !(addr & (align - 1)) && !(size & (align - 1));
-> > +       return !(addr & (align - 1)) && size >= align;
-> >  }
-> >
-> >  /* Use flag to indicate if attrs has more than d-cache attributes */
-> >  static u64 set_one_region(u64 start, u64 size, u64 attrs, bool flag, int level)
-> > @@ -992,11 +993,16 @@ static u64 set_one_region(u64 start, u64 size, u64 attrs, bool flag, int level)
-> >         int levelshift = level2shift(level);
-> >         u64 levelsize = 1ULL << levelshift;
-> >         u64 *pte = find_pte(start, level);
-> >
-> > -       /* Can we can just modify the current level block PTE? */
-> > +       /* Can we can just modify the current level block/page? */
-> >         if (is_aligned(start, size, levelsize)) {
-> > -               if (flag) {
-> > +               if (attrs == PTE_TYPE_FAULT) {
-> > +                       if (pte_type(pte) == PTE_TYPE_TABLE)
->
-> The code will still unmap the wrong regions here. One easy to way to
-> reprod this is apply this for QEMU, enabme meminfo and have a look at
-> the output.
->
-> index 38f0ec5f2fbb..c001ccca878d 100644
-> --- a/board/emulation/qemu-arm/qemu-arm.c
-> +++ b/board/emulation/qemu-arm/qemu-arm.c
-> @@ -114,6 +114,7 @@ int board_late_init(void)
->         if (CONFIG_IS_ENABLED(USB_KEYBOARD))
->                 usb_init();
->
-> +       mmu_change_region_attr(0x50100000, 0x200000, PTE_TYPE_FAULT);
->         return 0;
->  }
->
-> So, what I think is happening is that pte_type() doesn't take the
-> level into account. But For L3 entries PTE_TYPE_TABLE (which is really
-> PTE_TYPE_PAGE for that level) will alway be true on level 3.
->
-> Cheers
-> /Ilias
->
-> /Ilias
-> > +                               *pte &= ~0;
-> > +                       else
-> > +                               *pte &= ~(PMD_ATTRMASK | PTE_TYPE_MASK | PTE_BLOCK_INNER_SHARE);
-> > +               } else if (flag) {
-> >                         *pte &= ~PMD_ATTRMASK;
-> >                         *pte |= attrs & PMD_ATTRMASK;
-> >                 } else {
-> >                         *pte &= ~PMD_ATTRINDX_MASK;
-> > @@ -1097,8 +1103,12 @@ void mmu_change_region_attr(phys_addr_t addr, size_t size, u64 attrs)
-> >         flush_dcache_range(gd->arch.tlb_addr,
-> >                            gd->arch.tlb_addr + gd->arch.tlb_size);
-> >         __asm_invalidate_tlb_all();
-> >
-> > +       /* If we were unmapping a region then we have nothing to make and can return. */
-> > +       if (attrs == PTE_TYPE_FAULT)
-> > +               return;
-> > +
-> >         mmu_change_region_attr_nobreak(addr, size, attrs);
-> >  }
-> >
-> >  int pgprot_set_attrs(phys_addr_t addr, size_t size, enum pgprot_attrs perm)
-> >
-> > --
-> > 2.53.0
-> >
+>+		phys_addr_t base;
+>+
+>+		base = ofnode_get_addr(node);
+>+		if (base == FDT_ADDR_T_NONE)
+>+			continue;
+>+
+>+		disable_wdog((void __iomem *)base);
+>+	}
+> }
+> 
+> static struct mm_region imx8ulp_arm64_mem_map[] = {
+>diff --git a/arch/arm/mach-imx/imx9/scmi/soc.c b/arch/arm/mach-imx/imx9/scmi/soc.c
+>index fbee435786c..365891d1d1a 100644
+>--- a/arch/arm/mach-imx/imx9/scmi/soc.c
+>+++ b/arch/arm/mach-imx/imx9/scmi/soc.c
+>@@ -786,9 +786,18 @@ static void gpio_reset(ulong gpio_base)
+> int arch_cpu_init(void)
+> {
+> 	if (IS_ENABLED(CONFIG_SPL_BUILD)) {
+>-		if (!IS_ENABLED(CONFIG_IMX952)) {
+>-			disable_wdog((void __iomem *)WDG3_BASE_ADDR);
+>-			disable_wdog((void __iomem *)WDG4_BASE_ADDR);
+>+		ofnode node;
+>+
+>+		for (node = ofnode_by_compatible(ofnode_null(), "fsl,imx93-wdt");
+>+		     ofnode_valid(node);
+>+		     node = ofnode_by_compatible(node, "fsl,imx93-wdt")) {
+
+Ditto.
+
+And same to other changes in this patch.
+
+Regards
+Peng
