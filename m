@@ -4,105 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC21FCD4F3D
-	for <u-boot@archiver.kernel.org>; Wed, 13 May 2026 13:56:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36210CD4F21
+	for <u-boot@archiver.kernel.org>; Wed, 13 May 2026 13:56:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 50F85836AC;
-	Wed, 13 May 2026 15:56:15 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 960E3836AC;
+	Wed, 13 May 2026 15:56:54 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="l60KocdR";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20251104.gappssmtp.com header.i=@baylibre-com.20251104.gappssmtp.com header.b="otkfyFol";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0501483FB0; Wed, 13 May 2026 15:56:14 +0200 (CEST)
-Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
- [IPv6:2607:f8b0:4864:20::32f])
+ id 7604A838BB; Wed, 13 May 2026 15:56:53 +0200 (CEST)
+Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
+ [IPv6:2607:f8b0:4864:20::329])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D5E3A8341A
- for <u-boot@lists.denx.de>; Wed, 13 May 2026 15:56:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0F19D8341A
+ for <u-boot@lists.denx.de>; Wed, 13 May 2026 15:56:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32f.google.com with SMTP id
- 46e09a7af769-7de4e6c5a30so7290784a34.0
- for <u-boot@lists.denx.de>; Wed, 13 May 2026 06:56:11 -0700 (PDT)
+ spf=pass smtp.mailfrom=dlechner@baylibre.com
+Received: by mail-ot1-x329.google.com with SMTP id
+ 46e09a7af769-7dcdd1b492eso6153546a34.1
+ for <u-boot@lists.denx.de>; Wed, 13 May 2026 06:56:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1778680570; x=1779285370; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=AsKbcgGqzCbAga9VF/eW6HLesYFy6rb++ULDupN4e4o=;
- b=l60KocdRLN+YXU9u8WRadIeTmJDvs3rqvqBTSs/8nmou34t4SO6Z703rC9o2wYyZn8
- NtUbIpftDD9tgVrPQzVQ0vIaySG4mF1RV5Y+t+DUytDqhlTU4er+qsMZPNTL//qIe4ml
- OrsFMlZ5jHBMDVZfrmgOI3PeCUkewsYLhm6NA=
+ d=baylibre-com.20251104.gappssmtp.com; s=20251104; t=1778680607; x=1779285407;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=ye3aeRvrjQzXxO6Tt2+slms76y1Ge2VpvySYBSf4bH4=;
+ b=otkfyFolO+3y2suvZNEWQzb2uQ57HPxty/EkBN2PSWqUb8u0t+gNXCoz8fGTNtaG2d
+ M7w56bViBSgbi3SQziVJiA1cdU5rOwsf1Piso0o0s2iDcotJpWOK7EA1rcp/pXTcWqWm
+ P06Z1syzL+Wnt3+xV3S8hGwkxReH73JkYo15FgMvLuq22xGYp+4tbjPKFJnxcU27w8iQ
+ 1hnSjXknW24u3xMtzcINCQHNbCGW/gNbd7XQJ7QyU9fZtK7KJOERyDXvtIQ4liUXYNFR
+ WGlM5MlqvN40cTUtVizbuAFo3nlWT2sHJ7UgfnbU6Y70HPflEZ5rbYclLwOwWQv6ZiNK
+ E7nA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778680570; x=1779285370;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=AsKbcgGqzCbAga9VF/eW6HLesYFy6rb++ULDupN4e4o=;
- b=R2xpHvXz8/Uwa2AZB9q6BvKaN42bU1HTFcgbzcbyTntuvIom4rP6HPnSZHLSgC4nEz
- TbfJfcHDY5j3Fl2pvxPNeMeWzLBoBHVCQ/pXHaii+GhUXUlLDq5kZ5qlQawxV3s+DhbA
- 6S+lPc2ANCF5YuoW7v2m8bFnA9KBueobdNFHRaqhPLJyZMnbUNf2HruVf+1QmUbSX985
- l7acDO0MRC5xUJOJWuSSpoOSHKxE0PIdfg+k42NudrScl71k0muWkoA+j8kWvBxmvBc+
- An/Zq7Qyt+rLigU8jv3R5LOije0z6UAsew9hbYQW76BTv+JLrJqIdIFjtbrLfniH9a+G
- iLUA==
+ d=1e100.net; s=20251104; t=1778680607; x=1779285407;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=ye3aeRvrjQzXxO6Tt2+slms76y1Ge2VpvySYBSf4bH4=;
+ b=g8FsxGTF0DtODzmTWACLKKb3u8gLNq0P2AiekJIEKeGeqvi+YtMxbyBhqALelGO29M
+ rluHwr8IXIaCyv6MmQ0IOuBnY6/z3DKS3aMzIq1PWFUa4hJClkuDbnWySH7qJu8ADRTC
+ 1PUP/1bJ5gNz/bHmhpPMOqVGtMgmVzEPnhO4UFTII0d0PI1fxvhT0IZRvoXVstI8Qy9G
+ GpX0c7VBT0vDH13W9UDMaws1jvFAAyuhGVbSDhf/LH4FYAToDg824OM0Ofz/YzIqL3Vt
+ 8VZHBilZk1oGUbBLp1qRLNb6TvtoIfrLRPtO+KLNOEZJOplOfBpMpg0gKC1todsuIYxb
+ jaDw==
 X-Forwarded-Encrypted: i=1;
- AFNElJ/mlftwTOyjKhLzUyehetmKkOh0SYe/nWVdbUmTmktr5DzZN0y7xwmjxvtrZtBugm4EkLz+vxM=@lists.denx.de
-X-Gm-Message-State: AOJu0YwzJYx+7ZBSQ/prOugKJLLUkGP7RVhi+uUYHh1x0+YR5CV3J07+
- zAYUAzMtbcrs41+6nnIQFAbcOe/kh7nQQBlcM3HGN47xcugNQpzeOC/l7Zgh/apl4Lk=
-X-Gm-Gg: Acq92OHAlQ/tew4s517eGqghcanAJf8bmCtM379/qnRCSm3FIpyxYSdXJ6IlAHNYdLv
- E4rPmCAYHTK/ELHXS45LdgcD2FvTjR9oZH/tQJLHB8cjnMf40kegdEz1SE3wayBtdVuNnU3MkoR
- 4qFVmrwcq1rbw8YWrNimxEMxmlGrxWTbHUKIKA55IKNZhkU8Jmxcjnhv2IgPD8vQehnhNOq8k7B
- 1uuFb3Q1S5Z0WZ1EF2DE2vDfBxzeDysdgfw/QcovsB1RovIOlwBWhmoyqSCOwOgwvAlMN8ro51j
- Yd+Qw4cMsLWvElgM1KWDIVDhvSQDx81jWnvCWkgI6pFmQRcX0/wpJuzMORx0ULhJ0Rl1ltMw2ry
- D5XXIcKQfzXJZHA1XDCIRcaIpv9l0x7uqm7RCzW9teuCFqm1vPM3tRKbLg/nJqlkC67n0mqypHv
- beOYzSiJYurXa4crUD6+m4VwzrP6lIX5lX7p/eDUoVpXzEydb6ZFQIUdSP8WO08qLFUw5iqD3bX
- UzxX7yuVLWerwt7q2RNbPt5xdirPoDJkn1v3W1XKbPWMBXIAdJ6FOUuC1RXog==
-X-Received: by 2002:a05:6830:618d:b0:7dd:f615:a84e with SMTP id
- 46e09a7af769-7e3dc882950mr1534367a34.18.1778680570558; 
- Wed, 13 May 2026 06:56:10 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
- [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7e367dfb66csm11040846a34.27.2026.05.13.06.56.08
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 13 May 2026 06:56:09 -0700 (PDT)
-Date: Wed, 13 May 2026 07:56:06 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Benjamin Larsson <benjamin.larsson@genexis.eu>
-Cc: David Lechner <dlechner@baylibre.com>,
- Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
- Christian Marangi <ansuelsmth@gmail.com>, Simon Glass <sjg@chromium.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Peng Fan <peng.fan@nxp.com>, Anis Chali <chalianis1@gmail.com>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Leo Yu-Chi Liang <ycliang@andestech.com>, Yao Zi <me@ziyao.cc>,
- Sean Anderson <sean.anderson@linux.dev>,
- Michal Simek <michal.simek@amd.com>,
- "Yury Norov (NVIDIA)" <yury.norov@gmail.com>,
- Geert Uytterhoeven <geert+renesas@glider.be>,
- Jonathan Cameron <Jonathan.Cameron@huawei.com>,
- Nuno =?iso-8859-1?Q?S=E1?= <nuno.sa@analog.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heiko Schocher <hs@nabladev.com>, u-boot@lists.denx.de,
- Lorenzo Bianconi <lorenzo@kernel.org>,
- Markus Gothe <markus.gothe@genexis.eu>,
- Matheus Sampaio Queiroga <srherobrine20@gmail.com>
-Subject: Re: [PATCH v5 06/11] pinctrl: airoha: add pin controller and gpio
- driver for AN7581 SoC
-Message-ID: <20260513135606.GS1858239@bill-the-cat>
-References: <20260509111157.4039434-1-mikhail.kshevetskiy@iopsys.eu>
- <20260509111157.4039434-7-mikhail.kshevetskiy@iopsys.eu>
- <fd91e95b-d45b-4fdf-807d-54f87a19b26a@baylibre.com>
- <633941db-10eb-49ad-a2dd-a81a71e6b6c9@genexis.eu>
+ AFNElJ9gMSSKDEhXDlf79QRDHu6SWA2XezNRxdSCTYlc1ZOdlqFdpsOp36nk7mVl3lek5St/xtjcO7o=@lists.denx.de
+X-Gm-Message-State: AOJu0YxTOmMuMFYhp10orBunCkWA+VY0EmbChV9JUotp/qn/EEPiLYe+
+ hjoPr6euTBUGmwCHJQMK6ZACelCvoCjHcUxKIGyuf3H/T5cyjpz1UN49iAC3nSCJRh1WokuyckR
+ trWAX
+X-Gm-Gg: Acq92OEylHcyiwsH9VclmgjAxT9WFr0ahrE5a4zJYlmpEP5DlREICDJdKAwXt5t0cOp
+ zGc95GsRI4fnWmepo3acN9nFIq+W7yHWFu52q1bm30QrIk9E5tg419QrV5SUm7pSIsyPEEtonHO
+ zgmV8xkfhgqlb8++9kC1TPp3ORQzCcGaczDuSwOqWyAGZSejJSJnHiT5Gpe1K3ytaUHbz8hBDJ7
+ nsNo6NQYBFzdX6Am8mYomTPw9omZN5sH67xxRtfDbMRuyUgfSyGodPw+5rxUKhv6sw6MZlKtmYR
+ +rC4kpfxlFaags3zbDc13uMaon3sW5IqlFr7Q+ZL2nMYKeza1Br4LVc7BwrIvOvW2ItpdxmS3i4
+ /HHQ2p6+lQskAFA9wYkNRkQ4Bo0ab+X9Pc8D5dOfrfJPnOx5uXlNjslK3ufjQFmk0JcUY1ZU1eZ
+ ZGxSfcHVn7HyGPjbaMJ9uaM37psPiQlapqkQ0W6i0LYQ4SLeJkG2iCBWfZM9vVCFXzvVDjL0i+q
+ XTmiApG+JkS
+X-Received: by 2002:a05:6830:1d9b:b0:7db:a297:9e62 with SMTP id
+ 46e09a7af769-7e3bd12278bmr3554429a34.8.1778680606750; 
+ Wed, 13 May 2026 06:56:46 -0700 (PDT)
+Received: from ?IPV6:2600:8803:e7e4:500:597d:f2e2:6bf1:a5e9?
+ ([2600:8803:e7e4:500:597d:f2e2:6bf1:a5e9])
+ by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7e367d8ffb7sm11138508a34.22.2026.05.13.06.56.46
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 13 May 2026 06:56:46 -0700 (PDT)
+Message-ID: <1c5c5a08-403a-4846-b0fa-96319805f4fa@baylibre.com>
+Date: Wed, 13 May 2026 08:56:45 -0500
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="TPO/U4YnyVcRv1hb"
-Content-Disposition: inline
-In-Reply-To: <633941db-10eb-49ad-a2dd-a81a71e6b6c9@genexis.eu>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 3/3] net: lwip: introduce net_lwip_eth_stop() function
+To: Jerome Forissier <jerome.forissier@arm.com>, Tom Rini
+ <trini@konsulko.com>, Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de, nd@arm.com
+References: <20260512-net-lwip-add-stop-function-v2-0-85146da317dd@baylibre.com>
+ <20260512-net-lwip-add-stop-function-v2-3-85146da317dd@baylibre.com>
+ <3260fdac-8c9f-4eed-a23d-b70865e54381@arm.com>
+Content-Language: en-US
+From: David Lechner <dlechner@baylibre.com>
+In-Reply-To: <3260fdac-8c9f-4eed-a23d-b70865e54381@arm.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -119,95 +109,172 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 5/13/26 2:57 AM, Jerome Forissier wrote:
+> 
+> 
+> On 12/05/2026 23:48, David Lechner wrote:
+>> Add a introduce net_lwip_eth_stop() function and use that to stop the
+>> network interface after each command that uses the network.
+>>
+>> This makes the behavior the same as the legacy net code and avoids
+>> potential issues with the network interface being left in an active
+>> state after a command finishes.
+>>
+>> Signed-off-by: David Lechner <dlechner@baylibre.com>
+>> ---
+>>  cmd/lwip/ping.c     | 10 ++++++++--
+>>  cmd/lwip/sntp.c     | 10 ++++++++--
+>>  include/net-lwip.h  |  1 +
+>>  net/lwip/dhcp.c     | 15 +++++++++++----
+>>  net/lwip/dns.c      |  7 ++++++-
+>>  net/lwip/net-lwip.c |  5 +++++
+>>  net/lwip/nfs.c      |  4 ++++
+>>  net/lwip/tftp.c     |  4 ++++
+>>  net/lwip/wget.c     |  5 ++++-
+>>  9 files changed, 51 insertions(+), 10 deletions(-)
+>>
+>> diff --git a/cmd/lwip/ping.c b/cmd/lwip/ping.c
+>> index fc4cf7bde5f..836d1d8287f 100644
+>> --- a/cmd/lwip/ping.c
+>> +++ b/cmd/lwip/ping.c
+>> @@ -163,6 +163,7 @@ static int ping_loop(struct udevice *udev, const ip_addr_t *addr)
+>>  int do_ping(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+>>  {
+>>  	ip_addr_t addr;
+>> +	int ret = CMD_RET_FAILURE;
+>>  
+>>  	if (argc < 2)
+>>  		return CMD_RET_USAGE;
+>> @@ -176,8 +177,13 @@ restart:
+>>  		if (net_start_again() == 0)
+>>  			goto restart;
+>>  		else
+>> -			return CMD_RET_FAILURE;
+>> +			goto out;
+>>  	}
+>>  
+>> -	return CMD_RET_SUCCESS;
+>> +	ret = CMD_RET_SUCCESS;
+>> +
+>> +out:
+>> +	net_lwip_eth_stop();
+>> +
+>> +	return ret;
+>>  }
+>> diff --git a/cmd/lwip/sntp.c b/cmd/lwip/sntp.c
+>> index 608345c873b..5fa400b104a 100644
+>> --- a/cmd/lwip/sntp.c
+>> +++ b/cmd/lwip/sntp.c
+>> @@ -101,6 +101,7 @@ int do_sntp(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+>>  	ip_addr_t *srvip;
+>>  	char *server;
+>>  	ip_addr_t ipaddr;
+>> +	int ret = CMD_RET_FAILURE;
+>>  
+>>  	switch (argc) {
+>>  	case 1:
+>> @@ -127,7 +128,12 @@ int do_sntp(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+>>  		return CMD_RET_FAILURE;
+>>  
+>>  	if (sntp_loop(eth_get_dev(), srvip) < 0)
+>> -		return CMD_RET_FAILURE;
+>> +		goto out;
+>> +
+>> +	ret = CMD_RET_SUCCESS;
+>> +
+>> +out:
+>> +	net_lwip_eth_stop();
+>>  
+>> -	return CMD_RET_SUCCESS;
+>> +	return ret;
+>>  }
+>> diff --git a/include/net-lwip.h b/include/net-lwip.h
+>> index 20cb0992cce..5d0627eb271 100644
+>> --- a/include/net-lwip.h
+>> +++ b/include/net-lwip.h
+>> @@ -35,6 +35,7 @@ int eth_init_state_only(void); /* Set active state */
+>>  
+>>  int net_lwip_dns_init(void);
+>>  int net_lwip_eth_start(void);
+>> +void net_lwip_eth_stop(void);
+>>  struct netif *net_lwip_new_netif(struct udevice *udev);
+>>  struct netif *net_lwip_new_netif_noip(struct udevice *udev);
+>>  void net_lwip_remove_netif(struct netif *netif);
+>> diff --git a/net/lwip/dhcp.c b/net/lwip/dhcp.c
+>> index acdf601d7eb..18dc36ae7ca 100644
+>> --- a/net/lwip/dhcp.c
+>> +++ b/net/lwip/dhcp.c
+>> @@ -138,18 +138,25 @@ int do_dhcp(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+>>  	dev = eth_get_dev();
+>>  	if (!dev) {
+>>  		log_err("No network device\n");
+>> -		return CMD_RET_FAILURE;
+>> +		ret = CMD_RET_FAILURE;
+>> +		goto out;
+>>  	}
+>>  
+>>  	ret = dhcp_loop(dev);
+>>  	if (ret)
+>> -		return ret;
+>> +		goto out;
+>>  
+>>  	if (argc > 1) {
+>>  		struct cmd_tbl cmdtp = {};
+>>  
+>> -		return do_tftpb(&cmdtp, 0, argc, argv);
+>> +		ret = do_tftpb(&cmdtp, 0, argc, argv);
+>> +		goto out;
+> 
+> do_tftpb() already takes care of net_lwip_eth_stop() so this should
+> probably be:
+> 
+> +		return do_tftpb(&cmdtp, 0, argc, argv);
+> 
+> But this also raises the qestion of the double call to
+> net_lwip_eth_start():
+> 
+> do_dhcp()
+> 	net_lwip_eth_start()
+>  	do_tftpb()
+> 		net_lwip_eth_start()
+> 
+> How about adding a static counter to better deal with the nested case?
+> 
+> static int net_lwip_eth_started;
+> 
+> int net_lwip_eth_start(void)
+> {
+> 	int ret;
+> 
+> 	if (net_lwip_eth_started++ > 0)
+> 		return 0;
+> 
+> 	ret = eth_init();
+> 	if (ret) {
+> 		net_lwip_eth_started--;
+> 		return ret;
+> 	}
+> 
+> 	return 0;
+> }
+> 
+> void net_lwip_eth_stop(void)
+> {
+> 	if (!net_lwip_eth_started)
+> 		return;
+> 
+> 	if (--net_lwip_eth_started)
+> 		return;
+> 
+> 	eth_halt();
+> }
+> 
+> Thanks,
 
---TPO/U4YnyVcRv1hb
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Yes, I like this idea. There is also an odd case in do_ping() that
+we will need to look at though. It currently would not work with
+reference counting since net_lwip_eth_start() can be called multiple
+times on retries.
 
-On Wed, May 13, 2026 at 01:30:47PM +0200, Benjamin Larsson wrote:
-> Hi.
->=20
-> On 13/05/2026 01:42, David Lechner wrote:
-> > On 5/9/26 6:11 AM, Mikhail Kshevetskiy wrote:
-> > > This patch adds U-Boot pin controller and gpio driver for Airoha AN75=
-81 SoC.
-> > >=20
-> > > Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
-> > > ---
-> > >   drivers/pinctrl/airoha/Kconfig          |    5 +
-> > >   drivers/pinctrl/airoha/Makefile         |    2 +
-> > >   drivers/pinctrl/airoha/pinctrl-an7581.c | 1076 ++++++++++++++++++++=
-+++
-> > >   3 files changed, 1083 insertions(+)
-> > >   create mode 100644 drivers/pinctrl/airoha/pinctrl-an7581.c
-> > >=20
-> > > diff --git a/drivers/pinctrl/airoha/Kconfig b/drivers/pinctrl/airoha/=
-Kconfig
-> > > index eb87afbb374..986d23c2e3d 100644
-> > > --- a/drivers/pinctrl/airoha/Kconfig
-> > > +++ b/drivers/pinctrl/airoha/Kconfig
-> > > @@ -9,3 +9,8 @@ config PINCTRL_AIROHA
-> > >   	select REGMAP
-> > >   	select SYSCON
-> > >   	bool
-> > > +
-> > > +config PINCTRL_AIROHA_AN7581
-> > > +	tristate "AN7581 pin controller and gpio driver"
-> > > +	depends on TARGET_AN7581
-> > > +	select PINCTRL_AIROHA
-> > > diff --git a/drivers/pinctrl/airoha/Makefile b/drivers/pinctrl/airoha=
-/Makefile
-> > > index a25b744dd7a..909bd9a04d9 100644
-> > > --- a/drivers/pinctrl/airoha/Makefile
-> > > +++ b/drivers/pinctrl/airoha/Makefile
-> > > @@ -1,3 +1,5 @@
-> > >   # SPDX-License-Identifier: GPL-2.0
-> > >   obj-$(CONFIG_PINCTRL_AIROHA)		+=3D pinctrl-airoha.o
-> > > +
-> > > +obj-$(CONFIG_PINCTRL_AIROHA_AN7581)	+=3D pinctrl-an7581.o
-> > > diff --git a/drivers/pinctrl/airoha/pinctrl-an7581.c b/drivers/pinctr=
-l/airoha/pinctrl-an7581.c
-> > > new file mode 100644
-> > > index 00000000000..606e042b069
-> > > --- /dev/null
-> > > +++ b/drivers/pinctrl/airoha/pinctrl-an7581.c
-> > > @@ -0,0 +1,1076 @@
-> > > +// SPDX-License-Identifier: GPL-2.0-only
-> > > +/*
-> > > + * Author: Lorenzo Bianconi <lorenzo@kernel.org>
-> > > + * Author: Benjamin Larsson <benjamin.larsson@genexis.eu>
-> > > + * Author: Markus Gothe <markus.gothe@genexis.eu>
-> > > + */
-> > > +#include "airoha-common.h"
-> > > +
-> > It still throws me off that the en7581_ prefix is not the same
-> > as the file name/driver name/config symbol name. If en7581
-> > is preferred, can we change everything (an7581) to match?
->=20
-> The physical chip is marked AN7581 but I have seen some old EN7581 uses in
-> Airoha(Econet) material. I'm not really happy with this situation but for
-> some reason the en7581 name has been pushed for this SoC in mainline kern=
-el
-> code.
->=20
-> Ideally linux and uboot should use the same naming but I'm fine with
-> whatever gets code landing upstream.
 
-I agree consistent naming with the linux kernel is important here.
 
---=20
-Tom
-
---TPO/U4YnyVcRv1hb
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCagSC8wAKCRAr4qD1Cr/k
-Cla1AQClM5czO7uDJ4CEN19IVv4FaW1tV2cEA9boGdGIDceEFQEA9gfmYQw6xljZ
-CSY606/Yracwo1u6+/W5XjZz61bBeQo=
-=3uGA
------END PGP SIGNATURE-----
-
---TPO/U4YnyVcRv1hb--
