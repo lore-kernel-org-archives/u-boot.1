@@ -4,56 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0049CD4F24
-	for <u-boot@archiver.kernel.org>; Wed, 13 May 2026 14:23:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33BCFCD4851
+	for <u-boot@archiver.kernel.org>; Wed, 13 May 2026 14:29:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 76E2B845E3;
-	Wed, 13 May 2026 16:23:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=dolcini.it
+	by phobos.denx.de (Postfix) with ESMTP id B2CF1845E3;
+	Wed, 13 May 2026 16:29:32 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=dolcini.it header.i=@dolcini.it header.b="R2Ca5xbM";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="PaQ2OCQS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6875A8466C; Wed, 13 May 2026 16:23:43 +0200 (CEST)
-Received: from mail11.truemail.it (mail11.truemail.it [217.194.8.81])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id EB2DC84674; Wed, 13 May 2026 16:29:31 +0200 (CEST)
+Received: from mail-oa1-x29.google.com (mail-oa1-x29.google.com
+ [IPv6:2001:4860:4864:20::29])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ED43D8341A
- for <u-boot@lists.denx.de>; Wed, 13 May 2026 16:23:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E21B28341A
+ for <u-boot@lists.denx.de>; Wed, 13 May 2026 16:29:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=dolcini.it
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=francesco@dolcini.it
-Received: from francesco-nb (93-49-2-63.ip317.fastwebnet.it [93.49.2.63])
- by mail11.truemail.it (Postfix) with ESMTPA id E4F6C1F9B3;
- Wed, 13 May 2026 16:23:39 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dolcini.it;
- s=default; t=1778682220;
- bh=RkffR5ziQqnoLZFrGOIQSUkRiuVMDQfsSxE6WrMtClE=; h=From:To:Subject;
- b=R2Ca5xbMA1Io2qIcm3S9qKuj9QfazKRFWmo19JuL/spis1KK2bdoaHJcCuw7Bapx2
- MHXP6KUE6wKOz2HClZt/9hIbRNFQBGEYQlBiH842M6ufR7WXG7xihc2Iob1QL27AYv
- ESgSPzxdoWGW4cBzz1VVm190LDrpPvOZ4MvoQFGXOcpiYpQICG+yHqe2tIIfVF55D/
- 4ZqtqwxREFpvsF/VGbhRICP7cRHGgAb1b3ZDmGY3EMZFHaliCqcsLT7nfaHEjNOe3j
- gAGwoNc8zFvITUjKTY35/PgynjSpnYJWtkDDnE7EOpHQuUtrOt6hNMtyCTH29Kulad
- 2i+atR+Amt5OA==
-Date: Wed, 13 May 2026 16:23:36 +0200
-From: Francesco Dolcini <francesco@dolcini.it>
-To: Andrew Davis <afd@ti.com>, Shiva Tripathi <s-tripathi1@ti.com>
-Cc: Ernest Van Hoecke <ernestvanhoecke@gmail.com>, trini@konsulko.com,
- vigneshr@ti.com, bb@ti.com, u-boot@lists.denx.de, u-kumar1@ti.com,
- praneeth@ti.com, kamlesh@ti.com, vishalm@ti.com,
- k-malarvizhi@ti.com, anshuld@ti.com
-Subject: Re: [PATCH v2] arm: k3: Kconfig: Enable fTPM and RPMB support
-Message-ID: <20260513142336.GA123538@francesco-nb>
-References: <20260225112438.1035185-1-s-tripathi1@ti.com>
- <momeoh6chz4swvgj3oj36p57os2cejpbcx37qyc7f3pydvwdlt@gaucmqmtpjso>
- <677d1d7c-8276-44f2-b563-d2b0d0a263ea@ti.com>
- <b42fe4a0-a0f3-4773-be29-ac881c750799@ti.com>
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x29.google.com with SMTP id
+ 586e51a60fabf-439c00ed7e0so1239331fac.0
+ for <u-boot@lists.denx.de>; Wed, 13 May 2026 07:29:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1778682568; x=1779287368; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=q7ByGeCNTml4ITZAOseQE1KKaVbL6ifXhp3I4QlzLaM=;
+ b=PaQ2OCQS7gKqyhmeU14h6LNxbDxzNlgqaY/oqWEvUgwbr8GX8Mp8TeZW6OQvfmh1zY
+ xDFBo4yw3I9FO6DJtjyB/4F03+Ngx/InXagXhW95j9SoY4lSw1a2hDRp/ILIQQFpm2Zg
+ qUwboUllwJ9moZufbwqnVhRgYTEwzrzVhC6SQ=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1778682568; x=1779287368;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=q7ByGeCNTml4ITZAOseQE1KKaVbL6ifXhp3I4QlzLaM=;
+ b=KxDTM7CZdCGZUYVa0yVicAtp6+DQAFspTTn8z1ZLYzgo8a5CQD3Hf3SFx5xHENPmGM
+ KWD08QbR2o9mgzyZ52KaVt+jt9ig1/MGko5FKFnehdoHZwNDBfmtNgIT6Zi2r42a2wdj
+ Am+cZC3htSoDcbViFPPlyymyVHwJEc8WKqvZIJQ/NrvcyHT0A8RoDTWYZYNo7fC3lU0q
+ X1pWAdnM6V6ya9wZ2R1Y1+JwMZJFCYUg+VyTnstATas4E4Agau5WLZg9/dIv14Mwabtd
+ dl+SAn5Fh3P0d8w2bQd9W9haBsZ+FL8SgFuBgyZ4X6Tmv5TjRnmS07YblZ3ALt0nqI7c
+ e2OA==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ9fSc4P1jUlXU8SmQkEE80jITVU+GfQUGJm2eIJ4Qad6easp5EmQhrOHwyK2xY1BHgK8uPqm9M=@lists.denx.de
+X-Gm-Message-State: AOJu0YxD4LGI8nleLsvJG1rX1CckZ5mPtapO8CW4fEad+7ArQaYFh7Vg
+ G2r4jRg86q907tPj/AyDt0fhsA4+5iVVou9KHe28omqwlKVPfpRDsiwZY301Spara48=
+X-Gm-Gg: Acq92OES3yWmL8LB8LajsO+3T8GKFcaSEe2bQ/cOvjRbONqbDptZOAsHwWS4ha0qFNp
+ 4eBQN6qBG8Sdf81HT5PGaaJ3WGXOXz12Fzgzb3tyZTCkl37nsM8snVNBpiATC8y4hjMSWl28xXk
+ +KxWiPYI034jpbrDVIwdhXbMzEIx2T9ObR6EyE0QP45t7yT1y6/fmLswbVhNpOzZSL1nNnPkmuE
+ PHD4hUcAu9iUWac0ZB2YP7eGt03fEbeKMRy2Yk3zjERzulWIdKYWGqpfteFCdpJnm/2G+mSkyeh
+ IkHwpg59vfa7m1RX1t5Xg8D22PX80rRAKGMZXfyJ5Rk8mowVxV+AuM/wzfsnlikJ/K34bfhVGnD
+ c7uolTdQdmCeuZi9Cf5zEygkOiBXEeSVd8Ss/jtG9A8PLzVafCzwmKcfeeAza0ifGaQLWitXpKG
+ ywfpkYxYTeHSrakWr9DrfjdL1O5/VWFKuF5PjlSjVzKCDeGH3NwBQ6DajTbphMjZJSlThIAMSHd
+ ZDa4DXAbPaQirMmScglxreLLnU9VlyuNMIXFx0irittvXzTbKxMRD5Q0hGr5A==
+X-Received: by 2002:a05:6870:8a20:b0:439:ca41:d517 with SMTP id
+ 586e51a60fabf-439d2ff8f2fmr1499768fac.27.1778682568585; 
+ Wed, 13 May 2026 07:29:28 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
+ [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-435aec16e0dsm9702852fac.10.2026.05.13.07.29.27
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 13 May 2026 07:29:27 -0700 (PDT)
+Date: Wed, 13 May 2026 08:29:25 -0600
+From: Tom Rini <trini@konsulko.com>
+To: David Lechner <dlechner@baylibre.com>
+Cc: Casey Connolly <casey.connolly@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Sumit Garg <sumit.garg@kernel.org>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de,
+ u-boot-qcom@groups.io
+Subject: Re: [PATCH] phy: Kconfig: use bool instead of tristate
+Message-ID: <20260513142925.GT1858239@bill-the-cat>
+References: <20260513-phy-kconfig-no-tristate-v1-1-c4cbee0c1831@baylibre.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="B3twRpxTGofncPZi"
 Content-Disposition: inline
-In-Reply-To: <b42fe4a0-a0f3-4773-be29-ac881c750799@ti.com>
+In-Reply-To: <20260513-phy-kconfig-no-tristate-v1-1-c4cbee0c1831@baylibre.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,81 +106,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Andrew, Shiva
 
-On Wed, May 13, 2026 at 08:49:31AM -0500, Andrew Davis wrote:
-> On 5/13/26 8:06 AM, Shiva Tripathi wrote:
-> > On 5/12/26 22:14, Ernest Van Hoecke wrote:
-> > > On Wed, Feb 25, 2026 at 04:54:38PM +0530, Shiva Tripathi wrote:
-> > > > Enable firmware TPM (fTPM) support via OP-TEE for K3 platforms with
-> > > > MMC hardware. This provides TPM 2.0 functionality through
-> > > > Microsoft's fTPM Trusted Application running in OP-TEE secure world,
-> > > > using eMMC RPMB as persistent storage.
-> > > > 
-> > > > fTPM support in U-Boot provides the foundation for measured boot
-> > > > and disk encryption use cases.
-> > > > 
-> > > > The ARM64 condition ensures these apply only to A53/A72 cores and the
-> > > > MMC condition ensures fTPM is enabled only on platforms with eMMC
-> > > > hardware support.
+--B3twRpxTGofncPZi
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-...
+On Wed, May 13, 2026 at 09:11:52AM -0500, David Lechner wrote:
 
-> > > Do these changes mean you expect any K3-based board to follow by
-> > > building OP-TEE with RPMB support (and in production provisioning an
-> > > authentication key on first boot) now?
-> > > 
-> > > I'm asking because we noticed errors in the below form appeared during
-> > > boot of our Verdin AM62P and Aquila AM69 now:
-> > > E/LD:  Status of TA bc50d971-d4c9-42c4-82cb-343fb7f37896
-> > > E/LD:   arch: aarch64
-> > > E/LD:  region  0: va 0x40005000 pa 0x9e900000 size 0x002000 flags rw-s (ldelf)
-> > > E/LD:  region  1: va 0x40007000 pa 0x9e902000 size 0x008000 flags r-xs (ldelf)
-> > > E/LD:  region  2: va 0x4000f000 pa 0x9e90a000 size 0x001000 flags rw-s (ldelf)
-> > > E/LD:  region  3: va 0x40010000 pa 0x9e90b000 size 0x004000 flags rw-s (ldelf)
-> > > E/LD:  region  4: va 0x40014000 pa 0x9e90f000 size 0x001000 flags r--s
-> > > E/LD:  region  5: va 0x40015000 pa 0x9e980000 size 0x011000 flags rw-s (stack)
-> > > E/LD:  region  6: va 0x4005a000 pa 0x9e910000 size 0x055000 flags r-xs [0]
-> > > E/LD:  region  7: va 0x400af000 pa 0x9e965000 size 0x01b000 flags rw-s [0]
-> > > E/LD:   [0] bc50d971-d4c9-42c4-82cb-343fb7f37896 @ 0x4005a000
-> > > E/LD:  Call stack:
-> > > E/LD:   0x4005b7b0
-> > > E/LD:   0x4008f220
-> > > E/LD:   0x40083298
-> > > 
-> > > Interestingly this did not appear on our Verdin AM62 SoM.
-> > > 
-> > > Of course, we can simply disable the fTPM until our support improves, or
-> > > ignore this error if it is harmless, but I wanted to ask about your
-> > > intentions before digging much deeper.
-> > 
-> > It's not expected for all K3-platforms to build OP-TEE with RPMB
-> > support, some platforms lack eMMC entirely. fTPM is an optional
-> > configuration for users who need measured boot, disk encryption, or
-> > similar TPM related use-cases.
-> > 
-> > The Yocto SDK we release for K3 platforms includes the fTPM TA embedded
-> > in the OP-TEE, not sure if the same is true in your case.
-> > 
-> > RPMB provisioning is needed for full functionality, but even without it
-> > you shouldn't see these errors. Maybe the fTPM TA is missing from your
-> > OP-TEE build, or something similar is causing loader error.
-> > 
-> 
-> Given the above log shows the fTPM UUID, the fTPM does look to be
-> loaded and running in this case. Given a more complete log from
-> a different thread on this issue I'm seeing:
+> Change all uses of tristate in the PHY Kconfigs to bool. U-Boot does
+> not support modules, so tristate does not make sense here.
+>=20
+> Signed-off-by: David Lechner <dlechner@baylibre.com>
 
-The whole integration / optee and so on is current mainline U-Boot
-v2026.07-rcX + meta-ti master branch, built together in OE with this
-https://git.toradex.com/meta-toradex-bsp.git/
+Thanks for the cleanup.
 
+Reviewed-by: Tom Rini <trini@konsulko.com>
 
-> So this should be harmless, but why there is such a large error
-> printout we need to investigate and try to make it less verbose.
+--=20
+Tom
 
-We have the same concern here. It is not clear to us why we do not
-see the same on am62.
+--B3twRpxTGofncPZi
+Content-Type: application/pgp-signature; name="signature.asc"
 
-Francesco
+-----BEGIN PGP SIGNATURE-----
 
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCagSKuAAKCRAr4qD1Cr/k
+CkwcAQDrJuXUZauGz9loWSNkcax76qZaG85m/k2xs7i8eak6fQEApYB+g2q7Vn4t
+1cqB7PiBPDArTfiA9OUXf1lI8YBkhg0=
+=KgVm
+-----END PGP SIGNATURE-----
+
+--B3twRpxTGofncPZi--
