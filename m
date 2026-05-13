@@ -4,130 +4,179 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B86FBCD37B6
-	for <u-boot@archiver.kernel.org>; Wed, 13 May 2026 08:15:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EAC9FCD37B6
+	for <u-boot@archiver.kernel.org>; Wed, 13 May 2026 08:25:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 429C484255;
-	Wed, 13 May 2026 10:15:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id 7783B838BB;
+	Wed, 13 May 2026 10:25:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="bf1PX6Kj";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="LTia3kTF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9BAA983E36; Wed, 13 May 2026 10:15:04 +0200 (CEST)
-Received: from DUZPR83CU001.outbound.protection.outlook.com
- (mail-northeuropeazlp170120005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::5])
+ id 7400683E36; Wed, 13 May 2026 10:25:22 +0200 (CEST)
+Received: from PH8PR06CU001.outbound.protection.outlook.com
+ (mail-westus3azlp170120001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c107::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5A3B383EEF
- for <u-boot@lists.denx.de>; Wed, 13 May 2026 10:15:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EEE7B8341A
+ for <u-boot@lists.denx.de>; Wed, 13 May 2026 10:25:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=patrice.chotard@foss.st.com
+ spf=fail smtp.mailfrom=michal.simek@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=qksDLdFhN3HlbqRPGKst5VjSjQ5Sg6dxNaumgN4zWuEQsCV2w6rFu6Fb24ogOi/YEkP3/scRg6ZFOStSI1Cw1oXr3Fq33rJYxbPPG5PXv90JId7TkXP1QfDOIBe6rm2Z/9stjGum/l7ASsi9ryb0t3vPB4prtElQhgMUB+Ie1Gv+/Fg12uRBV88jJj1aLICbYqrvSeT3lOOXAHCWst28u2PbQHsVhQt7JnN2dB4k//bhjgE2OlajObFU/jNpwzVdVq/P2p0TWs32TEE2csgtr4epQoL714hEBJEYzlQgz1i1lNp4UgWEwoK1Dgrne5GTnBZKAUibEu040a08PNsGag==
+ b=t/54FGIrZE/QZYgvxqulktSTRQT/SwBYhOwFEmxqZWNyKFju5HbiXq7yPg6vMg+RaAXDzBxBvPAlYMWEbwRXFXLhCWc90YPz38CWCIisstmEfp1OD413M833n0GMq8t93XWMo37vPojoA7H6rFbl2PXeQf7UeJCn8LKCnBTImxsrUzKwbn0m/azvGPAQabk12tVcBA/tsJDQF4YkUpHyuPbm+xh9Wr2Kt1MiDDZwzMgQVi73ydZX+Dd59OdowuiX3/VfQBOF4Zc7d4eUUzCLzccWuJmqzOvlZ7hFjOMQGtYyqjuuaWpCIZFm6yu7c238yUBOPM9baYZhzqniazl5VQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=4xyaw3i/ymWNujkSKtiAMqKZlPJ6NxhRreNrdxou2Pw=;
- b=Qu9Pb9BPKmLhthBw3XKD1/2gTfFT8UhqwLD2HoOGG7y8lB0ZSYxLqc/0KGaS4TqNR+8727rWIAg3v+u1qQebPMpszSmWSo0PK97cD42ERQRsju2pL/ZpXltiRJGE8H5pWclqJOny6GjmB9Reo0Wv7JLNplKwuUqL2NlQjrcRgHQe1b+Ezay54W0PxHz6SqwIh4T6OXaUHqOhJSdeTixLjvuiyuXNUSca48VqRiSPmq/CJNHDouRw55r8hL9OVOk31hUErHwfP2JmF2gG20tJtBd7Fv7vKr/AhHuCXTPAX28JhstEazNS1Y5A/Cz4uXAjYE3STV/4sZskL1C0U8ktoQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
- 164.130.1.60) smtp.rcpttodomain=linaro.org smtp.mailfrom=foss.st.com;
- dmarc=fail (p=none sp=none pct=100) action=none header.from=foss.st.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- s=selector2;
+ bh=wIjWzvt0CWXpA1GDBj0DleanDINcu3Mi8RrPL6QBMow=;
+ b=PhmC3SlrtLUiEP5T4w+kEFfzqJNl7tDe1Hxat86dehTvlirfHbKuVYG8bag+Pfl9dyD/DtHBDXzjNTvoCkBLfFQlEzsJCMPUfzYvD1KngWuyhogNpGiLf5In56Ez/4Dyv6ZL2uuY5IW5bERz8SlrRwl64wnSuMKhKtzWEmTAOCyVbJiIT46QVJPuupCysopkxxeSsJoNLXuQRpPg1zJ4sEOiPBVe8l++FEuqoYCu4PLE+aQ7RollGhALSL0fLXc1Xm+WOHM9Fpl6M3gJF1j7yl99Db4RHilORaEh6dZnTjuVnqa5OrLk7dp+yysNIhlsg9xRqVOorNMMul8pZQTBUA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=4xyaw3i/ymWNujkSKtiAMqKZlPJ6NxhRreNrdxou2Pw=;
- b=bf1PX6KjjqECiGFCKWjgW9V+Ic0yFxgHvl4539tPMMrKWjtqf9CdO9lVIjEuoregiYzmE2kUmKr/Dio3WfmzHizRdqHjTb/rlKzUGjDD/edlpncPiJzzfGzYaT05mSWy1VkDm4Nn7+r1cHbYhGqYvFXtnipmHQWSqzbwJfHVKQr4zLqeVjlAEbv8tYuCVE+wGBv5gL4rDLZxb9yZuM7uQcKA2VNgEGws7iXAkTYtuh+2t5WRexKL+fO7zgDweynnJ3lrrxTFIL5AizkSYmNSHXbNepA+U4TCHi86DXE0l7NE9njBmPZnxj4kl5D95G0/JJCkxk1nHbrRiAav81a7bg==
-Received: from DB9PR06CA0019.eurprd06.prod.outlook.com (2603:10a6:10:1db::24)
- by AS2PR10MB7177.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:60f::15)
+ bh=wIjWzvt0CWXpA1GDBj0DleanDINcu3Mi8RrPL6QBMow=;
+ b=LTia3kTFo2nQwf5fZF1Pf1Yeglzgmm343wB0oVN0mlEv/qUYeHIBos9SZymfcQdw/eshNmabSNJ3vErOjxaliah6tJ97OIZNObwiJOh2auNo7Jh7fLpb8NJu1ySfvaCVGmWxGugGrlrl4i5fbBiP+FtMx36UZ8LG6BUISe20sfE=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=amd.com;
+Received: from LV5PR12MB9779.namprd12.prod.outlook.com (2603:10b6:408:301::14)
+ by SA0PR12MB4351.namprd12.prod.outlook.com (2603:10b6:806:71::14)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.25.17; Wed, 13 May
- 2026 08:14:55 +0000
-Received: from DU2PEPF00028D03.eurprd03.prod.outlook.com
- (2603:10a6:10:1db:cafe::f5) by DB9PR06CA0019.outlook.office365.com
- (2603:10a6:10:1db::24) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.25.17 via Frontend Transport; Wed, 13
- May 2026 08:14:55 +0000
-X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.60)
- smtp.mailfrom=foss.st.com; dkim=none (message not signed)
- header.d=none;dmarc=fail action=none header.from=foss.st.com;
-Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
- designate 164.130.1.60 as permitted sender) receiver=protection.outlook.com;
- client-ip=164.130.1.60; helo=smtpO365.st.com;
-Received: from smtpO365.st.com (164.130.1.60) by
- DU2PEPF00028D03.mail.protection.outlook.com (10.167.242.187) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9913.8 via Frontend Transport; Wed, 13 May 2026 08:14:55 +0000
-Received: from STKDAG1NODE1.st.com (10.75.128.132) by smtpO365.st.com
- (10.250.44.72) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.35; Wed, 13 May
- 2026 10:18:21 +0200
-Received: from [10.48.87.93] (10.48.87.93) by STKDAG1NODE1.st.com
- (10.75.128.132) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.35; Wed, 13 May
- 2026 10:14:54 +0200
-Message-ID: <731224c0-a38a-41d4-959b-1b05d608cf28@foss.st.com>
-Date: Wed, 13 May 2026 10:14:54 +0200
-MIME-Version: 1.0
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9913.11; Wed, 13 May
+ 2026 08:25:14 +0000
+Received: from LV5PR12MB9779.namprd12.prod.outlook.com
+ ([fe80::8ac8:e862:8ae9:9287]) by LV5PR12MB9779.namprd12.prod.outlook.com
+ ([fe80::8ac8:e862:8ae9:9287%3]) with mapi id 15.20.9913.009; Wed, 13 May 2026
+ 08:25:14 +0000
+Message-ID: <25bffa37-8be9-406f-9433-483796431288@amd.com>
+Date: Wed, 13 May 2026 10:25:10 +0200
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v8 0/8] Support metadata-driven A/B boot for STM32MP25
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>, Sughosh Ganu
- <sughosh.ganu@arm.com>
-CC: Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- <u-boot@lists.denx.de>, <linux-amarula@amarulasolutions.com>, Dinesh Maniyam
- <dinesh.maniyam@altera.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- "Javier Martinez Canillas" <javierm@redhat.com>, Jerome Forissier
- <jerome.forissier@arm.com>, John Toomey <john.toomey@amd.com>, "Jonathan
- GUILLOT" <jonathan@joggee.fr>, Kory Maincent <kory.maincent@bootlin.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Mattijs Korpershoek
- <mkorpershoek@kernel.org>, Michal Simek <michal.simek@amd.com>, "Padmarao
- Begari" <padmarao.begari@amd.com>, Patrick Delaunay
- <patrick.delaunay@foss.st.com>, Quentin Schulz <quentin.schulz@cherry.de>,
- Rasmus Villemoes <ravi@prevas.dk>, Simon Glass <sjg@chromium.org>, Tom Rini
- <trini@konsulko.com>, =?UTF-8?Q?Vincent_Stehl=C3=A9?=
- <vincent.stehle@arm.com>, <uboot-stm32@st-md-mailman.stormreply.com>
-References: <20260430080627.849636-1-dario.binacchi@amarulasolutions.com>
- <0f23738b-b6cb-44f5-8b89-2f74760f1bf2@foss.st.com>
- <CAC_iWjLe9cv9C=uMjuMJVhLJ7P=RA020PO4GqZ8UjX8z0yfdyw@mail.gmail.com>
+Subject: Re: [PATCH v2 1/4] reset: Add reset_reset() and reset_reset_bulk() API
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de, git@amd.com
+References: <cover.1777984225.git.michal.simek@amd.com>
+ <2a5fee05be84fa1cb333f3ab3db732311da321cf.1777984225.git.michal.simek@amd.com>
+ <CAFLszTgRUg5Dk82Gq9FVJ99cn+15Fw7RkwVsiRgZwH2tqHVS=w@mail.gmail.com>
 Content-Language: en-US
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <CAC_iWjLe9cv9C=uMjuMJVhLJ7P=RA020PO4GqZ8UjX8z0yfdyw@mail.gmail.com>
-Content-Type: text/plain; charset="UTF-8"
+From: Michal Simek <michal.simek@amd.com>
+Autocrypt: addr=michal.simek@amd.com; keydata=
+ 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
+ mpwx1d8=
+In-Reply-To: <CAFLszTgRUg5Dk82Gq9FVJ99cn+15Fw7RkwVsiRgZwH2tqHVS=w@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.48.87.93]
-X-ClientProxiedBy: ENXCAS1NODE2.st.com (10.75.128.138) To STKDAG1NODE1.st.com
- (10.75.128.132)
-X-EOPAttributedMessage: 0
+X-ClientProxiedBy: BY1P220CA0044.NAMP220.PROD.OUTLOOK.COM
+ (2603:10b6:a03:59e::10) To LV5PR12MB9779.namprd12.prod.outlook.com
+ (2603:10b6:408:301::14)
+MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DU2PEPF00028D03:EE_|AS2PR10MB7177:EE_
-X-MS-Office365-Filtering-Correlation-Id: 8ac100ad-889e-404f-ae56-08deb0c7b786
-X-LD-Processed: 75e027c9-20d5-47d5-b82f-77d7cd041e8f,ExtAddr
+X-MS-TrafficTypeDiagnostic: LV5PR12MB9779:EE_|SA0PR12MB4351:EE_
+X-MS-Office365-Filtering-Correlation-Id: 9ae424a6-664f-42bb-6c83-08deb0c92855
+X-LD-Processed: 3dd8961f-e488-4e60-8e11-a82d994e183d,ExtAddr
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700016|1800799024|7416014|376014|82310400026|18002099003|22082099003|56012099003|13003099007|11063799003;
-X-Microsoft-Antispam-Message-Info: Goj17ycCKzHYwom/c462UK/xpWZLsfTjGp8M4hQgcAXBQCej7jH3ql3vKMIXF5qQ0F4t7JR1go5la/Mfj9gAaXYC1r9wByaUa8zj8kOb4UCOo7Lzgi62etG3yFtmFgor2MrndKm3J4aChWAh9G7pf0TY55rfjsUVNVFJtwKyP7MHHUyvLaM1TDreEBny3lsthOrGgTDAZm1IxNlOofkXMWNeUQOTqL0aN53EgNGsrbOuEcFYiJAoOAIqppRJF8CUa6do2+0pc3goFIT7EPgb0U9vXPt5HcDyVaINbffESsC2HsnlaAY3aD/yHJS7rb2Edl8sq6hwWyRXWnUty2ugTIMARKN5YAbsBQs00xpWG/R0bzY243n+hbAfkaUmY4Y2oteZMYHhamNj47B9VCwZmHOds2TBBBkZ3y02amxjEosNBMTIa1tEI9/mr/rcSeS5NDKq9/G/5ZRH/VeV/HUQQwjmZbKycXPpEvJ/ymDYgknUrfvZLWfE12TK6axQepRP8l8+YvW3zPCpviN7GAbnfEAnMBwvR217QRf9d6qW2XB2fmN9gpT7rwSh5qobMqU0mcIPuMDmuQj6ogK0gp0jk4QUQzFdLoiiBf8qC5vxK+pekcnyt81PFrly7R87ZQ+u25m+IA2H/igB1N8L6YfzHDy0OGoZwE3bmqfS/aCAqggFJ6Dxa5tBSOwXYeIZjXDs3kvlDcyLX2eEGpf/z80yQVH2dAq7cDya8bifUQDYaPA=
-X-Forefront-Antispam-Report: CIP:164.130.1.60; CTRY:IT; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(36860700016)(1800799024)(7416014)(376014)(82310400026)(18002099003)(22082099003)(56012099003)(13003099007)(11063799003);
+ ARA:13230040|366016|1800799024|376014|11063799003|22082099003|18002099003|56012099003;
+X-Microsoft-Antispam-Message-Info: uRShK1D0pw/Hbs5fXta+AzZ0YFP3Oga+uxO9JsJqEsk2jt4G7u4ZlH/pEXp+2aJ36TNVls06U8MaGyaAywir2q3CZHtObWl6V7+xwoU2Ct955gXA5glGnahr+NnhVN9anN6wstXb2rGYqO4uNrhRxRG860e+8xKEXBtY1vPj0Ou7WqOZkcUXmR2+mF0nUizTmAjtjmz/ygx4NOuKBOxt3h7mAORRGMa/OKbTZ7K8KlssDdd969w3QGoUoyTFstpLYKzvIEZeRSAKKP7/wYHQHvducWUsgcjZawGvfNtjLmhlBMHKyFoZcQkqEfxmx8mFRSdDoQXCVaBIB1pKexxJSX8CbV9i78m8A/OOmcAqzMoyoiRmsip1ncraqihh6x81WCMCacDFw+Rr72O8p8bmnE9w2WqlT/YGOR5lbtI+xfgBChrAiYEhAP6yeyF1ubxc2GJYsLlx+QtxR7yvJlKKnpMXLEIVZIWMeWgRlguC5ovMIJQ7BdEqKKsZ0xBteOcnN+Ooondx/g4EJsSQ0GwsDLHPubJ5kg4cAhVs7jyz40Yc+p0w5InI3059kQEGzpQdSdwY1uZlHTSuiHu+J0XhR9NvdmT1VTF84aXlryuRlF1oC72UWsD5QoCMwUdqFr5gG7DJsmGyl0yKPWdRmeV4+vGdTOuAhwHOTBjX2XRUHP9OfXgyZXc4cJhg+cfH0DP9
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:LV5PR12MB9779.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(1800799024)(376014)(11063799003)(22082099003)(18002099003)(56012099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: ur8SOlij+Jz8BcJrKFnOa6yhwiBgaFvlS77SPHzybzLVbl1v7WfjN8EOMUSrzLsLEZBiLe0yEWlsrF4xmdfsO4KXKSVw0twe+SV+tgTFw7oVkm7ItfwvSNL2PCdR5poSBpm+2YeMfl2daAE4JWSD3A2Nnjg4kgWLzzHRNlDZMaSDMkBC/4V0n/YiiocioRxUlCvN4Xbg66UYLZ/kTDzjmaqDH+Gz8io7LQrE45BipD/GFiAtruFGNIz7SrQst9a1wrw3qJam2jhop3dJjD6lEO8i8sMeC3Chu5jBZdiG1OlWWy2fva85If73Z+RtQ03fpl//9t8+HpDS0eqJeBQIwJqx5qgeRK3wE4X5OdlDc28FxY49vAzMbc6tqYxPbgq6Z396BZOEiIc62ODLm558Q8sVTFGD28d4XpkjXF6CRRvzxIswl5UuPLTM60E7XlZt
-X-OriginatorOrg: foss.st.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 May 2026 08:14:55.6160 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 8ac100ad-889e-404f-ae56-08deb0c7b786
-X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.60];
- Helo=[smtpO365.st.com]
-X-MS-Exchange-CrossTenant-AuthSource: DU2PEPF00028D03.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS2PR10MB7177
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?bTVEM2lKcjFFM1J1c2RTbE9rQk5lVWR3eGtLTHo4bDlzMW92YThNYlZzVzNO?=
+ =?utf-8?B?ZUxxRFRHeWJIQVAwbCtWdkVqem55Zk1DQllKYjZaVWZNYUpOZ3RyTGR2bzQv?=
+ =?utf-8?B?TEtQZEZOaVpoZXg2bnBpbkVvcmZ2cFd5SlErTVhhUCtpWG84aGoxV1VqYWtL?=
+ =?utf-8?B?eUdud25oNmsrZXNyUTNyZThDVi9yVHBTcHBsL2JXS3pJNnV6TTJLUmpDZ3du?=
+ =?utf-8?B?d3Y1blpXWldQMStENmtBMjBTTVVLYjdqcnRaZGFvcVI2Ky9WZGVJUE1tSHhu?=
+ =?utf-8?B?bnRwZXBsY0tXQUxyTVRQTmw4WVRKYVpvR0xTVFl5Z2lBb21HdHMrTHplM3Ew?=
+ =?utf-8?B?cVRVNE9VK1FQL2c4bWdHcHJJVUpuelVHS1VCQVREVGNJYzBHY01pc0pNMGM3?=
+ =?utf-8?B?M0pEbjVYV3RHaVR4T3BCUzFQWmNlR0d5V2JWdERZdm5KZEJjYy8rQXpHdDRK?=
+ =?utf-8?B?T3NENHVFVjdpVUg1ZHUrckhwQmtqSDNSOHJLODFVZUw3Qm13TjFaTk1KeGtR?=
+ =?utf-8?B?a3JCZXFqQVByYkdKUStRU2hISjVRYnBLQWttSmVYV1crc1ZvNkc4cjJPbXVt?=
+ =?utf-8?B?blV4WkxvVUJKZXZzNURCdFRwQXQ2TmdSOVdaZlNSZFVTY0t3eXR3VTlteStF?=
+ =?utf-8?B?Y21Od1o3U0ZoSVRLaXlCaVg1ZW4wZGhINmp6VWlxZFBVMkhxZzVpa1Yxd3I3?=
+ =?utf-8?B?RG5Wc2lYUlZ3dUk4MGxSSUFKNHp0b3dEampkQVlzM0NDY2JPM2hhN0NIUmx5?=
+ =?utf-8?B?MHlMdDNWRGZLWGFWMWRXVGt2d3dmdGZreTFxQnY1Wk5tczRlY0g0d3ZXN2Zi?=
+ =?utf-8?B?Wlp3cWRJQmNNdVV2TUhzUjVUT3N6dmVwYXliUWNjR3YrL0xBVTNnM2p5cG00?=
+ =?utf-8?B?TURQN2tsS3dEdTQ2Qnl0QXhTVm9YYTNNMHhNTUh1ajF5c3JkQncrTjgyMy9U?=
+ =?utf-8?B?OU1rcitWNmFVSTg1RzYwN2ZOQzMwREpNRHJwd2psbkFmMnVkRVV6YytKSURt?=
+ =?utf-8?B?N0cvV2RoYStlR1JKNlFDeFYxcldWeFFxUko1OU1RV2MrakVnekYxSmdibW1k?=
+ =?utf-8?B?cFdMUjMyRzdMcU42TDVWa1B5bW1jN2I4NGFuSXlLS1lQRHdIRVN4WFpIUERh?=
+ =?utf-8?B?RmNGRjg4c0t1c21SVDlrZWl3aE96djlHelIzc1VLSUhVaWxRSVI2OG9qNkN2?=
+ =?utf-8?B?dFZBWDRKNlp3enU5QzBYcEhSZ1gxZHA0Um1OV09DV0pXWFRjMy92UGNKbWw4?=
+ =?utf-8?B?OU4zeUFlb0FZajZGMnU1N0hqYUYwMnFDQjFrSjQrcWtyWGNLRXRPaThUeW0w?=
+ =?utf-8?B?T1VJVE9CT2hiMUMxanFIYkhTM3Q1SW9IYXVsUW1HeldoT3I5SzVHWHNJaWRR?=
+ =?utf-8?B?bkc4RlBPV0E1S3lFaWlDNC9JdGp5NC9pSUFCcVVSVEhmbWRiU280bVpPbExi?=
+ =?utf-8?B?TXJjVm1TY0o0WUpZejNnTEhwWTNKdlZGRkZIL3htcTJUNFI0a3ZHbDQyNmhJ?=
+ =?utf-8?B?d016aXF1dy9qVWVkSXVRZnM0UWtGKzRvcWl6clBTK3F2ZXQzUUNLODlBWWQ4?=
+ =?utf-8?B?Vy9pRVRjNGpVQ0RkK2xIbUJVaDFMZzhHMTIrSmFMYlNjckpxN09jUEpQRVNS?=
+ =?utf-8?B?Ky9PemhuTnhYd2E2eWJJaHdNR1cxMm9DYXMveTNBVmtvRTZCaFozZVpiTTdj?=
+ =?utf-8?B?Z2xubUl3V0F4eFRwVVBWbkg5eUhNWjF3bndOMklXalQvR3BDQ09aMU5XSWV0?=
+ =?utf-8?B?UElFKzRDbyttaHRuUjBXSVJwUU5adS9Ybm05MlJ4OEx2dzRlV3hWdWs2aXQ0?=
+ =?utf-8?B?bm5EWXh0b1czaXZpLzdpVkdNTm9hUFZocUtycFdYTllqYjhub01WMXZ6a2xo?=
+ =?utf-8?B?Wlo0SHVab01iVks0ZDBiRWtjeTlVVmhUc1NlMVdsRCtPa3U3ejZuTGMwaGo0?=
+ =?utf-8?B?MEhSKzUzMGdqNTR4cFRML1E0Y2lRbTF6TWMzUjBoR2JndDJnOXc5VFNCb2VJ?=
+ =?utf-8?B?LzlKSFRseTVvMTFNNUhhMWE5cURyUDRpZHRacGNLcS9aME1UNE5CclB1QndI?=
+ =?utf-8?B?TTcvL0ZaaGpwM3QySzBWOURaWW5rcm9Cbi8vUDZhWVpOZys1bW1JM1NoQnM3?=
+ =?utf-8?B?UkVrT1hoc2FsRFk4WE0rVWhma1B2cFhkUnp2YkwzaUZLb1lwRTdyREozYnZ4?=
+ =?utf-8?B?MFhQM0xEdnF2YzJleUx4YXErRk8ySnFKTmVSblBmazNIeWNOa3o5VlhFa3Qw?=
+ =?utf-8?B?ekZNN1dYM0lXcmp4V2ZBdHVsNTBUUmtEN0FheVhvZVE5ZjJXYVo2Y0RqSnQ3?=
+ =?utf-8?B?OFhwZEsvZ2JjdXo0cjlOUFkwcnlyWlpWZnBLOXlPK0JuSmxzOS9jQT09?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9ae424a6-664f-42bb-6c83-08deb0c92855
+X-MS-Exchange-CrossTenant-AuthSource: LV5PR12MB9779.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 May 2026 08:25:14.6121 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: Pc9Op/Kq2KNIhAISjO2wgcaJJaCXPTRwgUVtgAZRli2YqFX/7SOodlmOWyGoKxh8
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA0PR12MB4351
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -146,125 +195,109 @@ X-Virus-Status: Clean
 
 
 
-On 5/13/26 10:00, Ilias Apalodimas wrote:
-> Hi Patrice,
+On 5/7/26 23:11, Simon Glass wrote:
+> Hi Michal,
 > 
-> Can you please get an Ack from Sughosh before queuing these up? I'll
-> also ping him and see if has time to havea  look
+> On 2026-05-05T12:30:28, Michal Simek <michal.simek@amd.com> wrote:
+>> reset: Add reset_reset() and reset_reset_bulk() API
+>>
+>> Add reset_reset() and reset_reset_bulk() functions to the reset
+>> controller API. These functions assert and then deassert reset signals
+>> in a single call, providing a convenient way to pulse/toggle a reset
+>> line.
+>>
+>> This mimics the Linux kernel's reset_control_reset() and
+>> reset_control_bulk_reset() APIs. The new functions are useful for
+>> drivers that need to cycle a reset line during initialization or
+>> error recovery but with also passing delay parameter.
+>>
+>> If a driver implements the rst_reset op, it will be called directly
+>> with the delay parameter. Otherwise, the reset core performs
+>> reset_assert(), optional udelay(), and reset_deassert() as fallback.
+>>
+>> Signed-off-by: Michal Simek <michal.simek@amd.com>
+>>
+>> drivers/reset/reset-uclass.c | 34 ++++++++++++++++++++++++++++++++++
+>>   include/reset-uclass.h       | 12 ++++++++++++
+>>   include/reset.h              | 41 +++++++++++++++++++++++++++++++++++++++++
+>>   3 files changed, 87 insertions(+)
 > 
-> Thanks
-> /Ilias
-
-Hi Ilias
-
-Oups, i already submitted the pull request including this series.
-
-Patrice
-
+> Reviewed-by: Simon Glass <sjg@chromium.org>
 > 
+> optional nits / thoughts below
 > 
-> On Wed, 13 May 2026 at 08:48, Patrice CHOTARD
-> <patrice.chotard@foss.st.com> wrote:
->>
->>
->>
->> On 4/30/26 10:06, Dario Binacchi wrote:
->>> This series, the mainline version of [1], provides the necessary changes
->>> in U-Boot to support the metadata-driven A/B update flow for STM32MP25
->>> boards. It implements the logic required to dynamically select the boot
->>> bank based on FWU metadata.
->>>
->>> These changes are designed to be backward compatible while providing
->>> the necessary infrastructure for the A/B scheme.
->>>
->>> The series has been tested on the STM32MP257F-EV1 board.
->>>
->>> Additionally, some patches in the series propose changes with
->>> general-purpose utility:
->>>
->>>  1/7 lib: uuid: add partition type GUID for extended bootloader
->>>  4/7 cmd: part: support lookup by UUID in 'part number'
->>>  6/7 fwu: add helper to get image GUID by type and bank index
->>>
->>> [1] https://github.com/STMicroelectronics/u-boot/pull/6
->>>
->>> Changes in v8:
->>> - Skip the test in case the CONFIG_MCC is not enabled or the mmc
->>>   device is not found.
->>> - Add Reviewed-by of Patrice Chotard
->>> - Skip cmd_test_part tests for configurations where MMC is not enabled
->>>   or the device is missing
->>>
->>> Changes in v7:
->>> - Add Reviewed-by of Simon Glass for patc 7/8 of "test: dm:
->>> fwu_mdata: add test for fwu_mdata_get_image_guid"
->>>
->>> Changes in v6:
->>> - Add Reviewed-by of Simon Glass to patch 3/8 "test: cmd: add unit
->>>   tests for part command"
->>>
->>> Changes in v5:
->>> - Update doc/usage/cmd/part.rst to reflect the changes related to the
->>>   part command.
->>> - Add Acked-by of Ilias Apalodimas to patch 6/8 "fwu: add helper to get
->>>   image GUID by type and bank index"
->>>
->>> Changes in v4:
->>> - Place the part command tests in the cmd suite rather than the dm
->>>   suite.
->>> - Order the include files according the U-Boot coding style.
->>> - Add patch 7/8 test: dm: fwu_mdata: add test for fwu_mdata_get_image_guid
->>>
->>> Changes in v3:
->>> - Wrap lines exceeding 80 columns in test/cmd/part.c file.
->>> - Combine run_command() and ut_asserteq() -> ut_asserteq(1, run_command(
->>> - Add kerneldoc comment for fwu_mdata_get_image_guid() above its declaration
->>>   in fwu.h.
->>> - Add log_warning() messages to fwu_platform_hook() to catch inconsistent
->>>   FWU metadata (boot GUID found but root GUID missing or viceversa), as
->>>   suggested by Simon Glass.
->>>
->>> Changes in v2:
->>> - Add links to the XBOOTLDR specification in the commit message of patch
->>>    1/7 lib: uuid: add partition type GUID for extended bootloader.
->>> - Update help for 'part start', 'part size' to mention UUID.
->>> - Add kerneldoc comment for fwu_mdata_get_image_guid().
->>> - Pass efi_guid_t by pointer in fwu_mdata_get_image_guid().
->>> - Add patches:
->>>    5/7 test: cmd: part: add UUID lookup tests
->>>    3/7 test: cmd: add unit tests for part command
->>>    2/7 test: dm: part: add test for part_get_info_by_uuid
->>>
->>> Dario Binacchi (8):
->>>   lib: uuid: add partition type GUID for extended bootloader
->>>   test: dm: part: add test for part_get_info_by_uuid
->>>   test: cmd: add unit tests for part command
->>>   cmd: part: support lookup by UUID
->>>   test: cmd: part: add UUID lookup tests
->>>   fwu: add helper to get image GUID by type and bank index
->>>   test: dm: fwu_mdata: add test for fwu_mdata_get_image_guid
->>>   board: st: stm32mp25: support dynamic A/B bank bootup
->>>
->>>  board/st/stm32mp2/stm32mp2.c          |  32 ++++
->>>  cmd/part.c                            |  12 +-
->>>  doc/README.gpt                        |   2 +
->>>  doc/usage/cmd/part.rst                |   6 +-
->>>  include/configs/stm32mp25_st_common.h |  15 ++
->>>  include/fwu.h                         |  11 ++
->>>  include/part_efi.h                    |   3 +
->>>  lib/fwu_updates/fwu.c                 |  33 ++++
->>>  lib/uuid.c                            |   1 +
->>>  test/cmd/Makefile                     |   1 +
->>>  test/cmd/part.c                       | 227 ++++++++++++++++++++++++++
->>>  test/dm/fwu_mdata.c                   |  48 ++++++
->>>  test/dm/part.c                        |  53 ++++++
->>>  13 files changed, 437 insertions(+), 7 deletions(-)
->>>  create mode 100644 test/cmd/part.c
->>>
->> For the whole series
->>
->> Applied to u-boot-stm32/master
->>
->> Thanks
->> Patrice
+>> diff --git a/include/reset-uclass.h b/include/reset-uclass.h
+>> @@ -76,6 +76,18 @@ struct reset_ops {
+>> +     /**
+>> +      * rst_reset - Reset a HW module.
+>> +      *
+>> +      * This optional function triggers a reset pulse on the reset line,
+>> +      * asserting and then deasserting the reset signal. If not implemented,
+>> +      * the reset core will use rst_assert followed by rst_deassert.
+>> +      *
+>> +      * @reset_ctl:  The reset signal to pulse.
+>> +      * @delay_us:   Delay in microseconds between assert and deassert.
+>> +      * @return 0 if OK, or a negative error code.
+>> +      */
+>> +     int (*rst_reset)(struct reset_ctl *reset_ctl, ulong delay_us);
+> 
+> Please document that the core inserts a udelay(delay_us) between
+> rst_assert and rst_deassert in the fallback path, and clarify whether
+> an rst_reset implementation must honour delay_us or may treat it as a
+> hint. Without that, authors don't really know what to do with the
+> value.
+
+ok. Will fix in v3.
+
+
+>> diff --git a/drivers/reset/reset-uclass.c b/drivers/reset/reset-uclass.c
+>> @@ -225,6 +226,39 @@ int reset_deassert_bulk(struct reset_ctl_bulk *bulk)
+>> +int reset_reset_bulk(struct reset_ctl_bulk *bulk, ulong delay_us)
+>> +{
+>> +     int i, ret;
+>> +
+>> +     for (i = 0; i < bulk->count; i++) {
+>> +             ret = reset_reset(&bulk->resets[i], delay_us);
+>> +             if (ret < 0)
+>> +                     return ret;
+>> +     }
+>> +
+>> +     return 0;
+>> +}
+> 
+> Just to check - pulsing each reset sequentially means the first
+> finishes its full assert/delay/deassert before the next starts
+> asserting. For the cadence_qspi case in 3/4, where multiple OSPI reset
+> lines are expected to be asserted together, the previous code did
+> assert_bulk() / udelay() / deassert_bulk() so all lines were held low
+> simultaneously. The new behaviour is different. Is that intentional,
+> and have you confirmed the cadence controller is happy with it?
+
+You are right that behavior has changed but it is aligned with what Linux kernel 
+is doing.
+We are using only one reset line that's why not an issue for us. But it saves 
+one firmware call (per reset line).
+
+int reset_control_bulk_reset(int num_rstcs,
+                              struct reset_control_bulk_data *rstcs)
+{
+         int ret, i;
+
+         for (i = 0; i < num_rstcs; i++) {
+                 ret = reset_control_reset(rstcs[i].rstc);
+                 if (ret)
+                         return ret;
+         }
+
+         return 0;
+}
+EXPORT_SYMBOL_GPL(reset_control_bulk_reset);
+
+
+If it is problematic we can go back to assert_bulk/delay/deassert_bulk in 
+cadence driver.
+
+Thanks,
+Michal
+
 
