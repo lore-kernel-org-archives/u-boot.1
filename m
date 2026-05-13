@@ -4,135 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB1BDCD4F21
-	for <u-boot@archiver.kernel.org>; Wed, 13 May 2026 14:18:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0049CD4F24
+	for <u-boot@archiver.kernel.org>; Wed, 13 May 2026 14:23:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3D832845E3;
-	Wed, 13 May 2026 16:18:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
+	by phobos.denx.de (Postfix) with ESMTP id 76E2B845E3;
+	Wed, 13 May 2026 16:23:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=dolcini.it
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="HYLBL0ET";
+	dkim=pass (2048-bit key; unprotected) header.d=dolcini.it header.i=@dolcini.it header.b="R2Ca5xbM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7F33F845E3; Wed, 13 May 2026 16:18:41 +0200 (CEST)
-Received: from OSPPR02CU001.outbound.protection.outlook.com
- (mail-norwayeastazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c20f::7])
+ id 6875A8466C; Wed, 13 May 2026 16:23:43 +0200 (CEST)
+Received: from mail11.truemail.it (mail11.truemail.it [217.194.8.81])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 825318341A
- for <u-boot@lists.denx.de>; Wed, 13 May 2026 16:18:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
+ by phobos.denx.de (Postfix) with ESMTPS id ED43D8341A
+ for <u-boot@lists.denx.de>; Wed, 13 May 2026 16:23:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quentin.schulz@cherry.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=BQkDeTfeSgokpatevuXUINZv1t/AUXLme+qn6xqgeVMnfCD34Y9ZuCCU/9QNVe19qS5faBmcT+cvzM9d6nFWcPOuzvkQTyH+WZyC79CQmnUPf/PEyy8R5Xg7H2SzHEKLMwYpffpM7bQQe2LLem688VWJ6Qu/qQExYzfEu4Yr+BjZvxcl6q1AyzG/ryAl8ZCA+wY5B1RotjOkga90QZDKz+0GolLzWY0sCrp6qOefe065IRLitAYdh9cEYzyk4MYw9LA12ufd+E7LcR3kFjIXTMf+hIcb5tuGCul/7VAuZ41gXjjqgu7EpnxtOfeltVVMXOdh995cvTHesi/Jp4PXzA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=fLbOEuGlNb4KXiibn4icUAlaiDRZo7TMQGO6u6jy//s=;
- b=fPCKrXccVU9OlvxSenxp+nQe2U56cWTiYneUZZjKn+JhoqLPBTMU4hgkh2kFeoZrdZ1/TTq4VSgdSiBTmhHpSO6yD9VmPbESBe7bQBH2ozV4h0uDzTnA/s5jPg6ViBN/VZMpaNqkvSflZo87MUELcrkwcn0ubTmUiZXEZbTcq/mupY4Uw4ICE7T07my/J5Hn8Ja0uUD3nLp5AfWwv6cIzeRehXDzUiT2OGZw4ClopeEPJ7BTe+L54WazCdfafKZ5XLSbjPA7IsLkWq0ALIjBzfkWWSVy3f2kr9PPwlA0CC0xZYxd1Pz1hOw4kkt6gPamhaswFzA+IS1uCEwtxqBB6g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=fLbOEuGlNb4KXiibn4icUAlaiDRZo7TMQGO6u6jy//s=;
- b=HYLBL0ET4WZDPLoqCJiHG8OBim3m+WB95VORX8zOGfa7/faiAEZJ1am7tJ7JdrUuHUlzPNh8ruRMjAm7pjXWTjBC23vD5m+3puKQwin9P2Z5qLm0XgumECzeGdDNkF4n4grnRoAs6xzPIfPeA++5DKF3jHWDF2gFlzGNEAnSdDo=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from DBBPR04MB7737.eurprd04.prod.outlook.com (2603:10a6:10:1e5::22)
- by GVXPR04MB10429.eurprd04.prod.outlook.com (2603:10a6:150:1da::16)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9913.12; Wed, 13 May
- 2026 14:18:34 +0000
-Received: from DBBPR04MB7737.eurprd04.prod.outlook.com
- ([fe80::5960:fb4b:9313:2b00]) by DBBPR04MB7737.eurprd04.prod.outlook.com
- ([fe80::5960:fb4b:9313:2b00%3]) with mapi id 15.20.9913.009; Wed, 13 May 2026
- 14:18:34 +0000
-Message-ID: <7d1c3a1b-1a85-4adc-a294-45b3dc34108d@cherry.de>
-Date: Wed, 13 May 2026 16:18:33 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] ufs: Kconfig: use bool instead of tristate
-To: David Lechner <dlechner@baylibre.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Bhupesh Sharma <bhupesh.linux@gmail.com>,
- Neha Malcom Francis <n-francis@ti.com>, Tom Rini <trini@konsulko.com>
-Cc: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de
-References: <20260513-ufs-kconfig-no-tristate-v1-1-1aa5b53f29a4@baylibre.com>
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <20260513-ufs-kconfig-no-tristate-v1-1-1aa5b53f29a4@baylibre.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: FR4P281CA0113.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:bb::7) To DBBPR04MB7737.eurprd04.prod.outlook.com
- (2603:10a6:10:1e5::22)
+ dmarc=pass (p=none dis=none) header.from=dolcini.it
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=francesco@dolcini.it
+Received: from francesco-nb (93-49-2-63.ip317.fastwebnet.it [93.49.2.63])
+ by mail11.truemail.it (Postfix) with ESMTPA id E4F6C1F9B3;
+ Wed, 13 May 2026 16:23:39 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dolcini.it;
+ s=default; t=1778682220;
+ bh=RkffR5ziQqnoLZFrGOIQSUkRiuVMDQfsSxE6WrMtClE=; h=From:To:Subject;
+ b=R2Ca5xbMA1Io2qIcm3S9qKuj9QfazKRFWmo19JuL/spis1KK2bdoaHJcCuw7Bapx2
+ MHXP6KUE6wKOz2HClZt/9hIbRNFQBGEYQlBiH842M6ufR7WXG7xihc2Iob1QL27AYv
+ ESgSPzxdoWGW4cBzz1VVm190LDrpPvOZ4MvoQFGXOcpiYpQICG+yHqe2tIIfVF55D/
+ 4ZqtqwxREFpvsF/VGbhRICP7cRHGgAb1b3ZDmGY3EMZFHaliCqcsLT7nfaHEjNOe3j
+ gAGwoNc8zFvITUjKTY35/PgynjSpnYJWtkDDnE7EOpHQuUtrOt6hNMtyCTH29Kulad
+ 2i+atR+Amt5OA==
+Date: Wed, 13 May 2026 16:23:36 +0200
+From: Francesco Dolcini <francesco@dolcini.it>
+To: Andrew Davis <afd@ti.com>, Shiva Tripathi <s-tripathi1@ti.com>
+Cc: Ernest Van Hoecke <ernestvanhoecke@gmail.com>, trini@konsulko.com,
+ vigneshr@ti.com, bb@ti.com, u-boot@lists.denx.de, u-kumar1@ti.com,
+ praneeth@ti.com, kamlesh@ti.com, vishalm@ti.com,
+ k-malarvizhi@ti.com, anshuld@ti.com
+Subject: Re: [PATCH v2] arm: k3: Kconfig: Enable fTPM and RPMB support
+Message-ID: <20260513142336.GA123538@francesco-nb>
+References: <20260225112438.1035185-1-s-tripathi1@ti.com>
+ <momeoh6chz4swvgj3oj36p57os2cejpbcx37qyc7f3pydvwdlt@gaucmqmtpjso>
+ <677d1d7c-8276-44f2-b563-d2b0d0a263ea@ti.com>
+ <b42fe4a0-a0f3-4773-be29-ac881c750799@ti.com>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DBBPR04MB7737:EE_|GVXPR04MB10429:EE_
-X-MS-Office365-Filtering-Correlation-Id: 8928d623-f472-4f0a-90e8-08deb0fa8440
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|1800799024|366016|11063799003|56012099003|22082099003|18002099003;
-X-Microsoft-Antispam-Message-Info: Js9rjjBDNJYhj8SqW9/6SA+Uade0ObCaSe9G7dDwvdaLioBlQAW8oXdZaZ8vGDxi6N92VUI6NKWVNFsb79UbHCPfuEdEyBdx0Y3BNMJtFu0AlGsaK4CtznwYN5/ft7lmeY07g9f3G5GorsnPtQ1AmPRLxZilCe1AMsVGPwdbOX66CoqAhoWO2UR2l1r7+L2VIqaspI0G+YXJ6rGATDRt/AuzHbzMGLSpMYBWhc4EMq8/RBVSbbRowy5hsdWJwta6aOWQvZpsvf2vf4wIPnTvFlc0Xda9+BdDwRy6+LFzgzUPX70ZsO0XC2KgHmofERaAILu1TYMQ/Y77A6J/ZRahYnEzOLKslgIBrW4uaKSJA8NNiWaN+CkAdcRfcrH8/6jqw/pZFJzC0zgXtmzYkWOUdxIYbIf/0TL2AwaqYj35gkIEInjY5DSXoCu3LzKHWB5W+FUZezhJAPGu87uQHI4gLopEqA/wbg1VeaAAVOlG7oOdWVjlIsjn/neTum+hjGdxf9jJa0uv+tuYB+TENESTKFgnDt0uhkxA8Z6UN2qFN7h3ahnMiR4NvUNYsBZUoMiguEGQfr0o+b4AgM7kdJ3Kjr/4MihnwIJ+H2YPblDwpJAOkJ7izuKE/l3iuhH4QKreSq27WGZJNBh8vE8P5zxlPyIOVPzMdLucyXt3hRF4+G9iSkHB1kmzOgvgFEH69AAc
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:DBBPR04MB7737.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(1800799024)(366016)(11063799003)(56012099003)(22082099003)(18002099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?SlV3T2VyNnNxbVE3Q21Vb2NRcHAwcDFqSHFmOHU3VG80eGZ0Mi9aYzdjZ1E1?=
- =?utf-8?B?TXI3UWtub1Z6L05SbTI2MG1DZGJoVlNaZ1ZTL3BqZkJjM1gwQ1Y3STMxQ0pr?=
- =?utf-8?B?cVRIZVBYZUFpdTJGNUhkck42N3dNTTg0T0RCS1g1YjRQbFlmN093T1JwNTdI?=
- =?utf-8?B?VlV5OHlzR1dZY09XVjRtcjhramRHdlhZK3UwMzI1WlNFR2d4N2R1YUdKTzZ5?=
- =?utf-8?B?VGhyWlcxWWtXd00rVjM3WG9sbnA4V3pQYTBrcEpNcjJFcUpjdTJ0azV3QkRL?=
- =?utf-8?B?aFRkdDhMZXRCQ0RESXNGR2lKMEp6OG16UEZpNDVNaU9rdHNzam1FbGNOM0RN?=
- =?utf-8?B?d1lpeWRsbUI4N0JEVGV2WmRiMTdaZFdBYU9ENXVKRnRoeU5QTzl3L0c4Z21r?=
- =?utf-8?B?dTg3TWNtV1NZaEl2V0dENGVYUld6QmIwTnVKRW91SDZvdWYyTE9sSXR4VDV4?=
- =?utf-8?B?enBrc0swbzNoV00zUWJEU1Y0Smh3WnlzZDhIUTlBVHFQcWRNNnFQTFBoTTdL?=
- =?utf-8?B?ZE1ldDQ5SzBzVE1CSGtsMitrcTU0Mjc1SkdGajJleWx2SDM0Y0pGMTJDa3hw?=
- =?utf-8?B?N0pGQmdzaCtwc0VUc1R2aXJraVNIREo4MDBTT01LeGtBL3BhQldIQjl3UVNO?=
- =?utf-8?B?UVptWUxLUThUMVl4dE5Yam50UE9aWE1DdmViSzVoRDdiaWtVTWloeWMyS1hG?=
- =?utf-8?B?Y212dTBIbVEzZUh0VmtvSzZPcDBaRS9LZEhBRCtTQzcwQU0wclhFcGRrUFF3?=
- =?utf-8?B?RmdleldGQUUwcUlPb1p5dGdxRW00aGZYdHF2Q1lneXVOdTRNMGlMU0p6RWdQ?=
- =?utf-8?B?d29jbDlLUFFJK0pqdTV6UE1zQzdXN0h0RVA1QlJPaHQ4eE9RM3J6b3liQ0Rx?=
- =?utf-8?B?YTczL21HektiOWZJQk9NSUZWSWJUbUpiRk5KUVNwdkNZZmJtdEZ6RVNNWjEz?=
- =?utf-8?B?bmpwc1Q0QTF2Q0ZrK0VGK3ZNenRKemU3Q3hISndBZXZPVWprOHhzQjZNa2hm?=
- =?utf-8?B?TWUvbXVYQkY2ZElESlVTYkx5dk5pZnhSbFhiNmg2S1BRa2hERVZNUTlPODZM?=
- =?utf-8?B?WHIrdWU2QU5OT1JiTGd5OHQ1YXRDaEJnYTdqbGRSamI3WitDZ3RVY3RZbld4?=
- =?utf-8?B?dVUrNDdaU0FLamMwTTlYTmUvcG1aSTNjZnZGL2hIWkIvRmhFc0dUYk1tRXU4?=
- =?utf-8?B?RGZyTHhWVHY4RzlQTWNVRW1UcS9HUTk3bmhQSnZvekk1Mmh0RlFXSmtkSVMr?=
- =?utf-8?B?LzBkQ2FhajJFZWtGOGFkdEc4TVRBTkwycllTTW5ZaVl3S2ZYaGJSM1pZalFp?=
- =?utf-8?B?aXA1RzBENCtud3Uza1BpRlB0L2luZWpqbi9VUlpHMWt5ZUh3R0V0ZVlYenlL?=
- =?utf-8?B?WlpFTkY1V3RVc1NNeVdaZXNNKy9vV0JoUCtjMTNkanNBUllKOFJOeVErbERE?=
- =?utf-8?B?WDgwczBFcEV3b2cvSy9iZkRoNWtlQUtXUXZSNXQwaEtxanBHS3hmMkhuaWVR?=
- =?utf-8?B?YjM1Lzk4QnpuYWlwYnZuaDJhcm5RdHFucGtMbFhGcTU4eFE5WlFXZXZFQWox?=
- =?utf-8?B?enBtU09DTkE0MnpHY0wxdy9GQmZXV3Z3OExlWE50cDBxRkUwTVA0MU0xNDFQ?=
- =?utf-8?B?a0RVbTYwcVpzUW9lcUJvL0c3cURZMUpvQmNjTG1qVDN0OThVZHE3L004UEMy?=
- =?utf-8?B?VllZNGYvN08xM1dBbUZoKy9FNkY0Ukh0YjFHTy9IVFhJSjFBb3pWWTArSzNq?=
- =?utf-8?B?MWdVbTB2VWtxdG9YVlpkSHFsL0pKOEIzYjhuaXUrbnFVZkJTSDU3N2lKaW9T?=
- =?utf-8?B?V0k5QkIxWHpFdVBaNjVxUTlaOWhyVThQczNETEJqQ2d5eXFhQzYyRVR3Y3Ex?=
- =?utf-8?B?c2wvOHRJYkl2dzU4cndDQ2Z5U0V3WlFMMm9XcS96TWZlY21EZld0bC9WNk81?=
- =?utf-8?B?QWtyNUlrWktoYjB3VU1UTXBJemxlK3J2UWVsbFFUdi9ja3FuSDhnYURDbHFq?=
- =?utf-8?B?Rm9HTkZoN2dPd2N1Ly9uYjk1bFpyVGFKTXRIS2w4TmFPOVh6L2kwdS92K0Mw?=
- =?utf-8?B?U0ZzQURhT1ZVbDVxNW5kS1JkcXVGZkwrY1FxRDVuRXMwUjQ5QXBMQjJ6RFJk?=
- =?utf-8?B?Unh0eGpBTm0vcUQyMUdTaTBzMVdCeDYrbnlVeWZTMmIrMU0wQk4yMm56dyt0?=
- =?utf-8?B?ckFWQVVzR1E3VmUrMmg4djRtTWQxeXBvbVJ5RCs1M2t0ckMrMGd3Sk4wVk11?=
- =?utf-8?B?b1dqUHl5TzRZUU5GeWpxOFZsV2d5SCsrRU5jTTVJSDhVb2tWL053bDBaWlRZ?=
- =?utf-8?B?aVl3Y250dkVKWVRCV0dxT2h6NDcxNzNKN0xGdkNXeFNKZW1rbjJGUT09?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 8928d623-f472-4f0a-90e8-08deb0fa8440
-X-MS-Exchange-CrossTenant-AuthSource: DBBPR04MB7737.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 May 2026 14:18:34.2322 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: f3gWdRC95gKK+57+piN6nuS7BqklbroBLlzDcAp53i4a75fYi6uhtEdiW0zD58NboM5hLEAWtfOy67xo81/z/tfKT5kaTqlsY+mlihF2RcE=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: GVXPR04MB10429
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <b42fe4a0-a0f3-4773-be29-ac881c750799@ti.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -149,16 +70,81 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi David,
+Hello Andrew, Shiva
 
-On 5/13/26 4:09 PM, David Lechner wrote:
-> Change the lone use of tristate in the UFS Kconfig to bool. U-Boot does
-> not support modules, so tristate does not make sense here.
+On Wed, May 13, 2026 at 08:49:31AM -0500, Andrew Davis wrote:
+> On 5/13/26 8:06 AM, Shiva Tripathi wrote:
+> > On 5/12/26 22:14, Ernest Van Hoecke wrote:
+> > > On Wed, Feb 25, 2026 at 04:54:38PM +0530, Shiva Tripathi wrote:
+> > > > Enable firmware TPM (fTPM) support via OP-TEE for K3 platforms with
+> > > > MMC hardware. This provides TPM 2.0 functionality through
+> > > > Microsoft's fTPM Trusted Application running in OP-TEE secure world,
+> > > > using eMMC RPMB as persistent storage.
+> > > > 
+> > > > fTPM support in U-Boot provides the foundation for measured boot
+> > > > and disk encryption use cases.
+> > > > 
+> > > > The ARM64 condition ensures these apply only to A53/A72 cores and the
+> > > > MMC condition ensures fTPM is enabled only on platforms with eMMC
+> > > > hardware support.
+
+...
+
+> > > Do these changes mean you expect any K3-based board to follow by
+> > > building OP-TEE with RPMB support (and in production provisioning an
+> > > authentication key on first boot) now?
+> > > 
+> > > I'm asking because we noticed errors in the below form appeared during
+> > > boot of our Verdin AM62P and Aquila AM69 now:
+> > > E/LD:  Status of TA bc50d971-d4c9-42c4-82cb-343fb7f37896
+> > > E/LD:   arch: aarch64
+> > > E/LD:  region  0: va 0x40005000 pa 0x9e900000 size 0x002000 flags rw-s (ldelf)
+> > > E/LD:  region  1: va 0x40007000 pa 0x9e902000 size 0x008000 flags r-xs (ldelf)
+> > > E/LD:  region  2: va 0x4000f000 pa 0x9e90a000 size 0x001000 flags rw-s (ldelf)
+> > > E/LD:  region  3: va 0x40010000 pa 0x9e90b000 size 0x004000 flags rw-s (ldelf)
+> > > E/LD:  region  4: va 0x40014000 pa 0x9e90f000 size 0x001000 flags r--s
+> > > E/LD:  region  5: va 0x40015000 pa 0x9e980000 size 0x011000 flags rw-s (stack)
+> > > E/LD:  region  6: va 0x4005a000 pa 0x9e910000 size 0x055000 flags r-xs [0]
+> > > E/LD:  region  7: va 0x400af000 pa 0x9e965000 size 0x01b000 flags rw-s [0]
+> > > E/LD:   [0] bc50d971-d4c9-42c4-82cb-343fb7f37896 @ 0x4005a000
+> > > E/LD:  Call stack:
+> > > E/LD:   0x4005b7b0
+> > > E/LD:   0x4008f220
+> > > E/LD:   0x40083298
+> > > 
+> > > Interestingly this did not appear on our Verdin AM62 SoM.
+> > > 
+> > > Of course, we can simply disable the fTPM until our support improves, or
+> > > ignore this error if it is harmless, but I wanted to ask about your
+> > > intentions before digging much deeper.
+> > 
+> > It's not expected for all K3-platforms to build OP-TEE with RPMB
+> > support, some platforms lack eMMC entirely. fTPM is an optional
+> > configuration for users who need measured boot, disk encryption, or
+> > similar TPM related use-cases.
+> > 
+> > The Yocto SDK we release for K3 platforms includes the fTPM TA embedded
+> > in the OP-TEE, not sure if the same is true in your case.
+> > 
+> > RPMB provisioning is needed for full functionality, but even without it
+> > you shouldn't see these errors. Maybe the fTPM TA is missing from your
+> > OP-TEE build, or something similar is causing loader error.
+> > 
 > 
+> Given the above log shows the fTPM UUID, the fTPM does look to be
+> loaded and running in this case. Given a more complete log from
+> a different thread on this issue I'm seeing:
 
-Fixes: 6cca3db2bd91 ("ufs: Add MediaTek UFS driver")
+The whole integration / optee and so on is current mainline U-Boot
+v2026.07-rcX + meta-ti master branch, built together in OE with this
+https://git.toradex.com/meta-toradex-bsp.git/
 
-Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
 
-Thanks!
-Quentin
+> So this should be harmless, but why there is such a large error
+> printout we need to investigate and try to make it less verbose.
+
+We have the same concern here. It is not clear to us why we do not
+see the same on am62.
+
+Francesco
+
