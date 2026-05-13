@@ -4,94 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B647BCD4851
-	for <u-boot@archiver.kernel.org>; Wed, 13 May 2026 16:27:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9DA4DCD4F21
+	for <u-boot@archiver.kernel.org>; Wed, 13 May 2026 16:27:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1CD6D83EF9;
-	Wed, 13 May 2026 18:27:12 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5AA7F84688;
+	Wed, 13 May 2026 18:27:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="nmygY3yI";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="PIlSrgDQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BFAF48467B; Wed, 13 May 2026 18:27:10 +0200 (CEST)
-Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
- [IPv6:2a00:1450:4864:20::533])
+ id A7B398341A; Wed, 13 May 2026 18:27:16 +0200 (CEST)
+Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
+ [IPv6:2a00:1450:4864:20::534])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D270E8341A
- for <u-boot@lists.denx.de>; Wed, 13 May 2026 18:27:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D21CF84687
+ for <u-boot@lists.denx.de>; Wed, 13 May 2026 18:27:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x533.google.com with SMTP id
- 4fb4d7f45d1cf-67bb5ad91bfso12968831a12.0
- for <u-boot@lists.denx.de>; Wed, 13 May 2026 09:27:08 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1778689628; cv=none;
+Received: by mail-ed1-x534.google.com with SMTP id
+ 4fb4d7f45d1cf-67bc6098640so11256474a12.0
+ for <u-boot@lists.denx.de>; Wed, 13 May 2026 09:27:14 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1778689634; cv=none;
  d=google.com; s=arc-20240605;
- b=f7iu2bNlLJ+QZrz1U/A4R1nczlLu6TgZE7XQXhDY3yzecJWJXB1ZbZ8F228b3dkMMS
- EPecfexB4hZZaMOwz/5x3b51+mqeNFMzb+btpTS2KDzCUBOplHrXCf0wqfWGMkiPKo1f
- DhBkzNGmNHPypr4A7HlrDn3JcwTuFpt3weEZUeAvU1O9gOTP/hfxkLnbT7JQLJ9y1QZ7
- AJykE6hN6Kqyok5Ftly4cSixOmvf0KMWZntF1Lp7zpTThQ9sfv723/LJHA1x3Vvk+cHt
- MSsHjDN/vAYWkH/WZohr9+KRsj4SdclpK2AG2M1dqDYryabjVZfU4chyV3YYLGZUQNAz
- ojZQ==
+ b=MkG5wavu0iIjPcUa9osbOWKkEdTNHyRjomzBHsbFtV31DyZacLJV3zcNDsz4a+MFbw
+ j6KoCQRKx0EGdEr3A/evmJqGvQ7cEvr2jpFG3zlqwgY97Gqe69JRG0utHJ3U3/BSxjWO
+ XH5q6HTb0srCWq/M3sXQFbcPv6Jy4Ro4tIvdKR3m+Qi/u9jJiP77vYxmtr/C7YmaRSb2
+ 3wTkrF3CqR1CblkcEtbcymaVGsppV+7mYc8JWd9qw8ikpAkwKhmRuxa96In6rik5XIty
+ 70VDj9wNSJ7KUS6iz4N+A9mEqgHetwqZZ8kIcU6Pz94p1tAow/c1w/fB4r9gybV0N6ED
+ 1EjA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=HB07/0nDfDf2UyEVLEwUyrQUiTuq1kKHkICiGeVIqxY=;
- fh=fHga0ntAKbTtcWD0E57+rqrNxme3m6w5h3W/8Ez4J88=;
- b=Nha2QKcXTXlOnNNepVTtr6ohQF4pWcqBO+aIDrYlVWt/mRUBU63i3F+b/A2oHLbQZR
- hzyrgb0TugC79ySqx5NcU2Tad89IEEHoa53BtUEZHpzHJysIPCt+4UThCQMvoQOBVi6I
- /ztHOE4xMY6CgA0WGH57+vFO4mHcprlxazilFSIs7bCn0OXQqEEnK4vlMBAe5UXixxU6
- lqVQzkF8Edfrd/8yGlTIoJOj1ocNy1djDq0bewC2uvC/PvClmjowVmMMxvKDtGJQVBQB
- kaDmKmYVgPjJ7F15KtigOa5+0mAyFmOdqoHQhVPIWBHZRpafiaNl6ZXHqNF1FDL8nrvG
- cS+A==; darn=lists.denx.de
+ bh=UnnwPGHsVEVabYzQjE874BXVFIsGUpMjquNTmhv/eTY=;
+ fh=k94s9/0BAWt0KBpKTCFdUTLOQcMKU2qx2KIXN/ON3L4=;
+ b=fWNO9zGnPdd3n23A+4K7RjqEhRB7VpjFmxDy9bPBOeBkPZ4H6XEzKEF3W6gBVFG5pq
+ fH9VfLa0RAR/XilUGxd4Wgi3NPbLQhhV8Z6i5k18uFlrcjOg32D/iaaGL0ChPi5SsBAk
+ x6eCRrmzptGTObYczRwhuPAdoSoL2OR93croOTeqPwKieWN6NHjrdMRwemaltx/ybtWK
+ 1Q6RbjQuJSnSgRgyO6NrFrKiq8YoDzQkJwIHRB34bcd2egqTLxDaThqFIqG/ETYT3L1M
+ CmrZPCBfRQETq4r1LpC3hP3P0QL2Rc6HkiHj2bkYlRtRQAukTmd4VTKDvGYtkV1t7SMo
+ MDCg==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1778689628; x=1779294428; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1778689634; x=1779294434; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=HB07/0nDfDf2UyEVLEwUyrQUiTuq1kKHkICiGeVIqxY=;
- b=nmygY3yIQRtDCdevSR7ObkCZY4jeobhGAWM5KgHB9dvuwNsqQtMNiXHIO2MG/YZo5r
- fw0fEjRmfkDT8KkkEHBUEdUcnRpLVBFCtmVq+xDJnaF4l0YvT03CJqQg24N1mv9y8Vi/
- qa+xYQAV6fkeiAnmP+m/UMXLrJ24wm2w3byHA=
+ bh=UnnwPGHsVEVabYzQjE874BXVFIsGUpMjquNTmhv/eTY=;
+ b=PIlSrgDQlTiG9+jSpawysPkWSeg1oV68hJxyT0LLE0jJP8HXfhObNqVdkcv8jewL4n
+ XIYR5u0jX/xb8i1M1EpaoJ4uHPTnEvzpnU17iOIy0qpJAyq6s2ijSyu+OXGGTXAFUCez
+ b22WC91O+pQA3XseYWTzkmVMPDYIK2BCbQ2C8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778689628; x=1779294428;
+ d=1e100.net; s=20251104; t=1778689634; x=1779294434;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=HB07/0nDfDf2UyEVLEwUyrQUiTuq1kKHkICiGeVIqxY=;
- b=DYBN24Sz6jlWdnge4LKmVNHLFlpTShuFFN8S2H9UBLXpUJKMWFNlX5WA0ZbIQlyPDe
- GFda5oS3EgXRgbEBjUPHQ59p2X637WZ6ldkKZGKhJn7xkHULGRxZuSgMxQWmDyL5R3vW
- Rlt7fMwqcJK8R6KuOyc1M3E/SY/J9IMn+5wLQMbnD1PAy7j1t5KS1PMeIa/IUfupdAEq
- Mh0U5ksKC1Mszrr7CZ4YgNdABmNrFHNDWuid8KCSynPBoUDWtmjHvX5qcmTGUF5cBF3b
- H0g2rWykYXXeO5iQ/3ZDr97a8gINAL02jrJbswkIlB6iRAPYaz4ktEqI/lHbgvSxQ8L1
- Y9hQ==
+ bh=UnnwPGHsVEVabYzQjE874BXVFIsGUpMjquNTmhv/eTY=;
+ b=DcMHw6CaT5KYhEQ5IbN+g/jCKvV6ctfHcOJduNU2uyRm/S2auMGV6wIHolWY8WVUuK
+ VSn+IpdudW4yoQbIS/WJJPIWICg6kK/z1NTFoi4FwaUaVWIF/Sefjz9rGz8fBfTgrNr0
+ eh2cPc0Ybk4Vi0xl3jHROYW7zhdVOzbZNfyW6iGi0b9tMn11CbfapcGKZ5fQmvutQ6XW
+ LuJAqYP3MTYEeM8VXpFdiYGXLTbRQZK72s72qtU0+9M9LYN0LRG0x7IpzqFnNuu4/3AU
+ t78dq2fB830PtJQ2eVqVGihZJmcnK26ZLSnd3JlqVaADNsoTj9muhwS/xIt8MBogyZm5
+ vGvA==
 X-Forwarded-Encrypted: i=1;
- AFNElJ/CT2KENQe5kxQK7ozDLCiHSeiepVqpoFapTP//7SQM9U74zTnp6p1h9lS7hO5YpkJ7hCVybJA=@lists.denx.de
-X-Gm-Message-State: AOJu0YwtiM/gnwykv80cjkT5J6eFq4BJPjUMTs+uyU/cUdg6xQGeuUug
- 9pp8AnvIdfM+NGdBmtR9SmVFk6nd0inlbt+Ny5X84cZNawPkeB6dsFy9UzWoBNGza1TR0Z9LFUC
- Hl5Ze92CVvP8XJF31g/UnAhZ8vjQi3tPtRk/8INOF
-X-Gm-Gg: Acq92OG9C2Sz53vxAYllKpY+t9wKoQRxaktp42bK/+/zrc6M6XpNYQItEfmyd9Q4mQT
- 7aFz2JANRSUqkYRfzjSFlydoEw29nJth1BtuJ+bAYc1aG0ARhtzgr7OPb6acwYexU0NQcnD0F4m
- RWIAtWFKrOuRfcBI+0PTWifbFHg+gU+fCPoSVaFfYDQzZMSomBF/Uw/pxfaFQFKaiM4gUPXqE+Y
- uPt/Ek6lsbpU1ZZkvxrUHfXqbHTob/dyZB3jnCCnMEbqMQj9ihwOGDtrKM+hakwyLHkKdsHc/kR
- /8J+iPnoU3YeCorj
-X-Received: by 2002:a17:907:3e89:b0:bd4:d6d6:b4bc with SMTP id
- a640c23a62f3a-bd4d6d6c29amr71013466b.27.1778689628215; Wed, 13 May 2026
- 09:27:08 -0700 (PDT)
+ AFNElJ9Ij2A9NwicUr81nolncnaa05cgxNdzeTQt/2TJVq99iWGigxvZBUPSO6HiqqSj957itCKicFQ=@lists.denx.de
+X-Gm-Message-State: AOJu0YyyfpoRxkuU5ExSJbSv8rsw9kSLm1hXEoGX50cCL+/P5XxkVQng
+ 10FILGMRWMHmXseYRctbLbZYjB5P7RUmLxnIZsmVyqQUKNYQkVy294w87k9/knsRQ29A5Sy95Rh
+ URo63RFDMGt1Jrq/4Kl7D+eKa3RgTfLPnwPpx0I2k
+X-Gm-Gg: Acq92OEQsnBFuDfR39K3m/EX1AvxBjPkjefje6VPPWr5epcmcxNg6TiwXqhpqJWHsX+
+ NQ3CZegO5elU0i5y/TiltdvDrd+n998fvizmX45pjtu29JPROkjWosamKnFD0w2OAuJL1tNUVtn
+ VwRuI3Wbe3a5H8Z09GuTez9EMrU3nSnA6mSenkRn+7F2Q1OJTDbh7wY29CAywAxfGWkh7kXz3IV
+ +ZYPev17X5PQJ5mXA1OyVmrNJVpTWduKUljSuhc5TbGzdqrkoGs6iB1hkhmROULGHPXrpbetElC
+ krmXlA==
+X-Received: by 2002:a17:906:4786:b0:bd3:2b8a:2164 with SMTP id
+ a640c23a62f3a-bd3bfb9f635mr273375666b.16.1778689634246; Wed, 13 May 2026
+ 09:27:14 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260513015606.591384-1-rs@ti.com>
- <20260513015606.591384-4-rs@ti.com>
-In-Reply-To: <20260513015606.591384-4-rs@ti.com>
+ <20260513015606.591384-2-rs@ti.com>
+In-Reply-To: <20260513015606.591384-2-rs@ti.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 13 May 2026 10:26:56 -0600
-X-Gm-Features: AVHnY4LEAJLsAvz5eu_2ln8I2e2fkVrKoVZKd4GOR9esQ1xp7IPt8OBXoIk1qzk
-Message-ID: <CAFLszThL2H3iRTb8jozephjwZNSJYo1mFrq6Ymta6bRZnE+CTg@mail.gmail.com>
-Subject: Re: [PATCHv7 3/3] memory: reserve from start_addr_sp to
- initial_relocaddr
+Date: Wed, 13 May 2026 10:26:59 -0600
+X-Gm-Features: AVHnY4LqnR0k4qk9Wtof-dG1NTp2JvgP1CV7tPYTrqx0KMH-qJ7yeNJ3fkPhQao
+Message-ID: <CAFLszTiT_JYZcukxXapYfmzuCnRrgirj-JT6JGqXwUkHuzqcmA@mail.gmail.com>
+Subject: Re: [PATCHv7 1/3] boot_fdt_add_mem_rsv_regions: free old dtb
+ reservations
 To: rs@ti.com
 Cc: robertcnelson@gmail.com, ayush@beagleboard.org, 
  Erik.Welsh@octavosystems.com, anshuld@ti.com, bb@ti.com, trini@konsulko.com, 
@@ -117,43 +117,33 @@ X-Virus-Status: Clean
 Hi Randolph,
 
 On 2026-05-13T01:56:06, Randolph Sapp <rs@ti.com> wrote:
-> memory: reserve from start_addr_sp to initial_relocaddr
+> boot_fdt_add_mem_rsv_regions: free old dtb reservations
 >
-> Add a new global data struct member called initial_relocaddr. This
-> stores the original value of relocaddr, directly from setup_dest_addr.
-> This is specifically to avoid any adjustments made by other init
-> functions.
+> Add a free flag and an initial call to free allocations covered by the
+> global FDT. This assumes that all calls to boot_fdt_add_mem_rsv_regions
+> occur before the transition to the new device tree, thus we can access
+> the currently active device tree through the global data pointer.
 >
-> Reserve the memory from gd->start_addr_sp - CONFIG_STACK_SIZE to
-> gd->initial_relocaddr instead of gd->ram_top. This allows platform
-> specific relocation addresses to work without unnecessarily painting
-> over a large range.
+> This allows us to clearly indicate to the user when a device tree
+> reservation fails. How we handle this can still use some improvement.
+> Right now we'll keep the default behavior and try to boot anyway.
+>
+> This functionality was broken in:
+> 5a6aa7d ("boot: fdt: Handle already reserved memory in boot_fdt_reserve_region()")
 >
 > Signed-off-by: Randolph Sapp <rs@ti.com>
+> Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 >
-> common/board_f.c                  | 9 ++++++++-
->  include/asm-generic/global_data.h | 9 +++++++++
->  lib/efi_loader/efi_memory.c       | 2 +-
->  lib/lmb.c                         | 7 ++++---
->  4 files changed, 22 insertions(+), 5 deletions(-)
+> boot/image-fdt.c | 77 +++++++++++++++++++++++++++++++++++++++++---------------
+>  include/image.h  |  2 +-
+>  2 files changed, 58 insertions(+), 21 deletions(-)
 
-> diff --git a/include/asm-generic/global_data.h b/include/asm-generic/global_data.h
-> @@ -107,6 +107,15 @@ struct global_data {
-> +     /**
-> +      * @initial_relocaddr: top address of U-Boot in RAM
-> +      *
-> +      * This should be the original value of relocaddr before any other
-> +      * allocations or reservations shift it. This address will, depending on
-> +      * the platform, be equivilent to ram_top and should also be considered
-> +      * an exclusive address.
-> +      */
-> +     unsigned long initial_relocaddr;
+Subject prefix should be something like 'boot: fdt:' rather than the
+function name. Please also turn the broken-in reference into a proper
+Fixes: tag with a 12-char hash:
 
-Typo: equivilent -> equivalent.
-
-How about: "...the value of relocaddr after setup_dest_addr()
-completes, before reserve_pram() or any later init function adjusts
-it"
+    Fixes: 5a6aa7d59133 ("boot: fdt: Handle already reserved memory in
+boot_fdt_reserve_region()")
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
 
