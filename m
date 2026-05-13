@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8702CD37B6
-	for <u-boot@archiver.kernel.org>; Wed, 13 May 2026 07:19:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE52CCD4851
+	for <u-boot@archiver.kernel.org>; Wed, 13 May 2026 07:20:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 416648466C;
-	Wed, 13 May 2026 09:19:24 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7ED648341A;
+	Wed, 13 May 2026 09:19:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="DB8rr6DT";
+	dkim=pass (2048-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="FwnPgaLa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0A65B8056B; Wed, 13 May 2026 09:19:23 +0200 (CEST)
-Received: from PA4PR04CU001.outbound.protection.outlook.com
- (mail-francecentralazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c20a::7])
+ id 2892C8056B; Wed, 13 May 2026 09:19:23 +0200 (CEST)
+Received: from AM0PR83CU005.outbound.protection.outlook.com
+ (mail-westeuropeazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 396F583EF9
+ by phobos.denx.de (Postfix) with ESMTPS id B8FD784198
  for <u-boot@lists.denx.de>; Wed, 13 May 2026 09:19:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=phytec.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=W.Egorov@phytec.de
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ZicWZNwMOgFPv9ohYt1Hf4clwLZpjzVtgoTDx0JIHb9uclA+Ln/vcyuQ0Mbta+IJhlu2pOYZUvHnR6AcMx2f2WHJIRNYC6u0BQ9mhxk2Cy9+caVSRUllxhJNVZXb+a12zPFZaRhFHGojTGps2tKgWQTBM3redyxsfkTwTDKpQhfS/26M8pSNCJdCKMGNkj3dNuT0g4LK0yjBbpvLvU7fcvkxG9mkBusd41bv3pNud2/lpbPsM+HG5rCVLc5bnApK6iWO8J5KT6QcdtlM9TIMArlBWQAdbP2TiSaAFkF+Fo4svlb553Pd+QMmnE6N4RZBwPQG/FrNM+i7leRCr/bX0w==
+ b=Qr7Oe57WaFrT4PkWL03fKltXRavSXv/b/mqg0LX42xaXu3alHE5NxaxQaZFzXgzQ6SpQacmeP8ewlxjBeeV0stC+AL/PTE9311SAeK0R/Hx/GS19lCye7jR6OXI0GzseIvISwy/Gl6buhlPIjrYyz3OBAkmRYIUBLFiEEjT5gpyNHp4pN1KRmhcVkVemJmUeU7o7sAGRxv3zvtixM66DYfjByNR5Gvw7zaHHLuMOscB6/CHM5EYUR2bb/lzOMg6Te1vLGjwik2hMAewPr6eUvPbKZ8WBxy3dQO8pJkQ5ts8pMFh3RvnAMpsiHC1vaIB4CRG25XSQKEdDkhDNJwLSHA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Tw/SI/a03uJ9c02u+BKOwCz2oaXSGILlwE3fNId2TYY=;
- b=c1pVRZWSJtv4FIoiJkQP5p/6MyhFXTBuxcLFggGl6NZi2WePkyRu6h6EqRu0ISCjS/tF17v57SO0TihvUV/dnROIuFjM2j+x9OeW1fzlxvKVxq77pgf8/sPbQ2tlsv46HUDqIct0XDVZPW5lwH7ni/D1gFwNnp5gxKdXqIBUD8W7GdoTWq3D+IlpfY2ZV5SH9LEg5TlMvKM5Q9nCSwNHcLzXe44fLR4WOlffdWYJtx/JpajrsL6bBc443NI7f5Y5uxVug/vTiGfQjNzcQp2YeUXBPYpdJR5YxMQmKxmJ6RyeAm8GKiD5cXHJTijJbd8uLplenhpzqIsXxjuVjiWZiA==
+ bh=79MYO86EKPPs1dhoxYMGT55lak8oMrm8B55T0yCpU/Q=;
+ b=DzZo23w7+GvYddImkeEeRlSwYMKqj00FUSrWijQnSLCjHFnmCk5AU3V4hW9H4I1VShyyjMbOKfQmH3lhn1SEUImA1/CjuKrrGEbQMf+/WlT/WDnX7m2jKk1CwoQJnT8RVYTfMD2+Zm9teXeqLh6z5Gl89z6+Cxb1gMvL6SE/iFlqzE9MB1Kq/b9SgfLY7xb6ttMJhCZJuHhAglNVzW+X1SuyklqBquuCLltwBNXFIkBHQ+2Y2FmTq3jn5+okS/tqEWsQTwdXWK4YTRXybDhKswRK3ScjR0m56VI6vuh9Vudn5dZyx9s0mMwc0vhp8JfOWKwftRxk4MnvFPJeWIPLNQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=softfail (sender ip
  is 91.26.50.189) smtp.rcpttodomain=konsulko.com smtp.mailfrom=phytec.de;
  dmarc=fail (p=quarantine sp=quarantine pct=100) action=quarantine
  header.from=phytec.de; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=phytec.de; s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Tw/SI/a03uJ9c02u+BKOwCz2oaXSGILlwE3fNId2TYY=;
- b=DB8rr6DTog6hsutNNnbuSMJg4zt+7X5ahmWEtuOcCYsULKFkJhiEj/DOp0qZb1CziTF63NovocxeAmWgmYBmBlHe+oyLz+gtlGdFBndem+AWLlERiG0J1xrHq8hTXNl7JqDqJO+gmt0ytD98fzxAS36utkEEW/kkEUB53kpv0jmGlEw0FvPnSFASZRfGG/X9mAd7e+qrlEGR+sP/h/eQdCm3eEIaXi04XyPYVIpKxUOkoWPosM33J5pEwD0Bk7z0tJFiBm7AwdXPOifWyhguy8TbyoqkQTZ2yw4GX4dhdf19MbjyFZmbCCEIhQi2MRxiXCpFhPxL747Uq8TysTJToA==
-Received: from AS4P189CA0059.EURP189.PROD.OUTLOOK.COM (2603:10a6:20b:659::29)
- by DU0P195MB1524.EURP195.PROD.OUTLOOK.COM (2603:10a6:10:328::6) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9913.12; Wed, 13 May
- 2026 07:19:14 +0000
+ bh=79MYO86EKPPs1dhoxYMGT55lak8oMrm8B55T0yCpU/Q=;
+ b=FwnPgaLa9A2hR1VOWTcbwplmmFgoqYjD3dFQhkaANcBzg2ACNnUVWdhtyWDo/cRBijVkW8lA2qEtvAJWJqfyANblQkJ/kVyUQeX7rJLVZPrs/mrR3mvXZqKq4sEQVIS7kps53gEAB7DEz1ouGF0UHRdCacFgxkjhPAVuhnnqKT/6+Aqemsy13VdkQx0EHeoZgQhVMM069Pne/upEen3vWC9IY3KQtiYscwZ3xVGSbdz4+jj5tSAK/1UORJxCCv1aSofzl5NS3GQ+zhgPirkkWUm7+hwA7HsjAFkNiOx9EwFCShojZDgay7sdpCeWhPd/a3akRI57jJKNvl+6lfQA1Q==
+Received: from AS4P189CA0052.EURP189.PROD.OUTLOOK.COM (2603:10a6:20b:659::21)
+ by PAXP195MB1168.EURP195.PROD.OUTLOOK.COM (2603:10a6:102:199::20)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9913.11; Wed, 13 May
+ 2026 07:19:17 +0000
 Received: from AMS0EPF0000019B.eurprd05.prod.outlook.com
- (2603:10a6:20b:659:cafe::8) by AS4P189CA0059.outlook.office365.com
- (2603:10a6:20b:659::29) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.25.18 via Frontend Transport; Wed, 13
- May 2026 07:19:14 +0000
+ (2603:10a6:20b:659:cafe::42) by AS4P189CA0052.outlook.office365.com
+ (2603:10a6:20b:659::21) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.25.17 via Frontend Transport; Wed, 13
+ May 2026 07:19:17 +0000
 X-MS-Exchange-Authentication-Results: spf=softfail (sender IP is 91.26.50.189)
  smtp.mailfrom=phytec.de;
  dkim=none (message not signed)
@@ -61,18 +61,18 @@ Received-SPF: SoftFail (protection.outlook.com: domain of transitioning
 Received: from Postix.phytec.de (91.26.50.189) by
  AMS0EPF0000019B.mail.protection.outlook.com (10.167.16.247) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.25.13 via Frontend Transport; Wed, 13 May 2026 07:19:14 +0000
+ 15.21.25.13 via Frontend Transport; Wed, 13 May 2026 07:19:17 +0000
 Received: from phytec.de (172.25.0.51) by Postix.phytec.de (172.25.0.11) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Wed, 13 May
- 2026 09:19:13 +0200
+ 2026 09:19:14 +0200
 From: Wadim Egorov <w.egorov@phytec.de>
 To: <trini@konsulko.com>, <d.haller@phytec.de>, <peng.fan@nxp.com>,
  <jh80.chung@samsung.com>, <m.schwan@phytec.de>
 CC: <u-boot@lists.denx.de>, <upstream@lists.phytec.de>
-Subject: [PATCH 1/7] board: phytec: phycore_am62x: Add tifs-rm-cfg
-Date: Wed, 13 May 2026 09:18:59 +0200
-Message-ID: <20260513071905.83522-2-w.egorov@phytec.de>
+Subject: [PATCH 7/7] doc: board: phytec: Document DDR size override Kconfigs
+Date: Wed, 13 May 2026 09:19:05 +0200
+Message-ID: <20260513071905.83522-8-w.egorov@phytec.de>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260513071905.83522-1-w.egorov@phytec.de>
 References: <20260513071905.83522-1-w.egorov@phytec.de>
@@ -84,29 +84,29 @@ X-ClientProxiedBy: Postix.phytec.de (172.25.0.11) To Postix.phytec.de
  (172.25.0.11)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AMS0EPF0000019B:EE_|DU0P195MB1524:EE_
-X-MS-Office365-Filtering-Correlation-Id: 6d014aca-4ee0-405a-41ac-08deb0bff02f
+X-MS-TrafficTypeDiagnostic: AMS0EPF0000019B:EE_|PAXP195MB1168:EE_
+X-MS-Office365-Filtering-Correlation-Id: 836101fa-a06f-402a-9214-08deb0bff195
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700016|1800799024|376014|82310400026|18002099003|56012099003|22082099003|3023799003|13003099007|11063799003;
-X-Microsoft-Antispam-Message-Info: 6WVXZeHOctz3+/+SrCl9sLgEPp0WW/qMl55jVjIF2q9a9vY6GZIOCkeU3woDtjLXotteUH1onxWuHRCpUtX3Yo2SYRkq6XVS0URd3Ywwyc8qAxRYnRHj1AGMXAZOC/eunBFz9RXMQlkLd5vMBA6PnBeohB0+IpVTub3z23ygMJRNy6H8aGG6hV7EbeyYyQoLUR23rvMy5GvLj9cXb+I3vC8a5ZFg1tC5xvbZ2uUOyzOHsXYJo+oXv0ja8bRdcqOBT062FjbbHvd9PBRnonuwD2jM0CqbKeSVu268KnXlV+DO6yLq2oMOjmQuRqYdQ+uw0J+cDl6yzdk8nu8kDfwJr3NVlbI/upXCPf8d6XWcHxltiX7DK8wTcFGYmvo/QA4opHRkEF71lc5TOsjtBx1hep672PdImxVw+hrr/mXWXnA4BO30vLACGqfGUKflhCcwZKMNZsl9AY6Tv8BBydk3oFhArNuGxjX0rQbbSUsbxzbmoNtDUipbk0Ob7iyKOFa+HDas1sMVy9KQCqXLuAgavbeizKOVZLGkxk+fBc2h8ZnRDaFR8jsY88L8IzLKDLuKOiDwOwXmOkmU2MBQq369OSQtWMytSOCYei2VTw1CFkR7FLKUV5d4JfQWDhmZ0Bkk3ek65Bq/cxksb+925h3kqeVI/4+8VSFZI4RdQ+NS5phXagEdn8QJ7eT1D5fsIoTX
+ ARA:13230040|36860700016|1800799024|82310400026|376014|11063799003|22082099003|18002099003|56012099003;
+X-Microsoft-Antispam-Message-Info: dpqRZ7lircSTGkkygHQjjiBSIk/oVU26w1MTRrZKqAIUPZdZdVwU6p4AHZirbh69aKW1g2dLaqE1BGxVZGYqkXjkEi4382TZWNTjQpzyooMMHneBs52kJTi/pQWFqpXo9BMeVOPzy/07VoYRh35ZfxA6Mce79PlFtPyaP51c4dUCzmh3hVpGt2smQJ50E1BU/XSdYOn57NrYlZmB8oKL53Ua856XrfcwKhrQYNCmcMWNLSi4Hj6w14XIdrtGuX+6kqxM20vJlS6fTM5ouz8NF3de+Dnn33uAmA/jrdopgj7fnxiD6AwMnl4eL2hmIdjfi4XoPJzlc9cwahRyxu9G2g1aO+D9iAptBSYQfHZkaRUqZhk87nW8erJvWs/i3jm4mMbaTJhlIw8AGVoxspO5mBy8qIkQypZyxP1015nOfrXQHkZiQhoJXnyo88lGXv1YJ1JtdpA5dcC1WGc1t5iNrAnvVxgoOwN6RMxcuSK+lBbnxuV0UhFv10aWMdu9arvFlcBq29ih+15u2uM+/ZpjVIKBXtcIWk8Jh7LPUz/Fo32pLnk65NWU2AzyKHtT2GUoRHbrD6KZxfrpPM4bxJJ0C7/UfCKUmfGREzH5Ws2Frfz+OMwZnVVyyeFe7onVOaDDqvbzwcDUMitHhixK3p7kpP0x0XhC3MQ1SSfd/fsl6QNFdc9CQN1uFCfUH8Ln7TUG2b2UvtoVQ3+MA4/gceGbdDHoFvX6XglMXVyOjq27rlw=
 X-Forefront-Antispam-Report: CIP:91.26.50.189; CTRY:DE; LANG:en; SCL:1; SRV:;
  IPV:CAL; SFV:NSPM; H:Postix.phytec.de; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(36860700016)(1800799024)(376014)(82310400026)(18002099003)(56012099003)(22082099003)(3023799003)(13003099007)(11063799003);
+ SFS:(13230040)(36860700016)(1800799024)(82310400026)(376014)(11063799003)(22082099003)(18002099003)(56012099003);
  DIR:OUT; SFP:1102; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: dL3XLnj3/CwNwUBkk7vDAwWzeo/Ex8xaNhSMbKCm/L600R5uLGXou/wFYNHI4P5gCVoRRRnxLQ1tFdVWijRqvZCbgG9FsyNUDfGWm/zJHbbpkvaASCYRpBOUGfN8adeyHG/RqXQUp174vd7Qu4BG9XAZQQJOn/DtkA/tYOMQU1zKvSfQfbcxp7OfxZCjDBkyhHfyyulENolXH418I5GleT7gKKM91igl1h113tBPUl83XH21e7A9H/i2H59uEOVybrjl3VENuQX09NTfbQZnEe9LC/JDxtOaEoCM92QjhxAOoE0PYQc8lfjWoZR+jLirUTByGNxsqe1EU3gV99EgO7yaOKFrTfMxa12Yytwtmuq306mzlVp4xt1P2A04Frq0nnpCwMZKkU+bS6spXR/ofuJC6YuZ2VDeFVCgeDmSR3x45L4GUPjj4wr+pdIBmqH7
+X-MS-Exchange-AntiSpam-MessageData-0: s/lSHL/RC5+7lUfe8LE9wuJXZA4hKiaWpRSRCOM/zWbiHSnGveNXrwi0Vt7MN4lTT0hFfHqY23tPODa4Mv+r6DUCuRi9XFT0p8kmadKnjmEZDl0zj5fwwqFHgaP11mddcy/k0KfcWo7Gh9dIPhhlcAPRphJePrjjQItrgDBeeGtbPgcX/nLWfcFriGo6bGp+C/IRxoMHHYD97kzTvHSe/s7pW2Y6O+1viqGSpET1Kyu+i4EJaF35bmCGwTlW8wWLtYe/gcYTQtutrA6pbHiGh2xb7eYlrqQRz8D+1E3oDd0xFrXodaa56H6wjNzoCcEhWUv66NbZUMD/Mg2DBNKr+46aFLdQY00DK9poLFkXJYCM3wY1dRl2bcCJ6c8NMZKiIg4JEfK4g7EE8h0s9nPPLtQyRQ9w1jtuZm/5h7gWiYML/Tz8Tgkpo1Nuo767nRT3
 X-OriginatorOrg: phytec.de
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 May 2026 07:19:14.7584 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 6d014aca-4ee0-405a-41ac-08deb0bff02f
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 May 2026 07:19:17.1068 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 836101fa-a06f-402a-9214-08deb0bff195
 X-MS-Exchange-CrossTenant-Id: e609157c-80e2-446d-9be3-9c99c2399d29
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e609157c-80e2-446d-9be3-9c99c2399d29; Ip=[91.26.50.189];
  Helo=[Postix.phytec.de]
 X-MS-Exchange-CrossTenant-AuthSource: AMS0EPF0000019B.eurprd05.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU0P195MB1524
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXP195MB1168
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -123,892 +123,81 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a separate tifs-rm-cfg.yaml so the TIFS bundle uses the trimmed
-TIFS view instead of reusing rm-cfg.yaml, matching the rest of the
-AM62 boards.
+The phyCORE-AM62x and phyCORE-AM64x R5 SPL detects the populated DDR
+size from the SoM EEPROM and falls back to 2 GB if detection fails. For
+boards without a populated EEPROM or if no detection needed, the detection
+can be bypassed via CONFIG_PHYCORE_AM6{2,4}X_RAM_SIZE_FIX and one of
+the CONFIG_PHYCORE_AM6{2,4}X_RAM_SIZE_<size> choices.
 
-Mirrors commit 964bda9e805d ("board: ti: am62x: tifs-rm-cfg: Add the
-missing tifs-rm-cfg:") for the phyCORE-AM62x SoM.
+Add a "DDR RAM Size" section to both board docs describing this
+behaviour and listing the available size options (1/2/4 GB for AM62x,
+1/2 GB for AM64x).
 
 Signed-off-by: Wadim Egorov <w.egorov@phytec.de>
 ---
- board/phytec/phycore_am62x/tifs-rm-cfg.yaml | 867 ++++++++++++++++++++
- 1 file changed, 867 insertions(+)
- create mode 100644 board/phytec/phycore_am62x/tifs-rm-cfg.yaml
+ doc/board/phytec/phycore-am62x.rst | 19 +++++++++++++++++++
+ doc/board/phytec/phycore-am64x.rst | 18 ++++++++++++++++++
+ 2 files changed, 37 insertions(+)
 
-diff --git a/board/phytec/phycore_am62x/tifs-rm-cfg.yaml b/board/phytec/phycore_am62x/tifs-rm-cfg.yaml
-new file mode 100644
-index 00000000000..8510fe9526e
---- /dev/null
-+++ b/board/phytec/phycore_am62x/tifs-rm-cfg.yaml
-@@ -0,0 +1,867 @@
-+# SPDX-License-Identifier: GPL-2.0+
-+# Copyright (C) 2022-2026 Texas Instruments Incorporated - https://www.ti.com/
-+#
-+# Resource management configuration for AM62X
-+#
+diff --git a/doc/board/phytec/phycore-am62x.rst b/doc/board/phytec/phycore-am62x.rst
+index f5a0d51240a..5349ba429d4 100644
+--- a/doc/board/phytec/phycore-am62x.rst
++++ b/doc/board/phytec/phycore-am62x.rst
+@@ -177,6 +177,25 @@ Boot switches should be changed with power off.
+      - 11001010
+      - 00100000
+ 
++DDR RAM Size
++------------
 +
-+---
++By default, the R5 SPL detects the populated DDR size by reading the SoM
++EEPROM and configures the DDR controller and the U-Boot device-tree memory
++node accordingly. The phyCORE-AM62x is available with 1 GB, 2 GB, or 4 GB of
++DDR. If the EEPROM cannot be read or is invalid, the SPL falls back to a
++2 GB configuration.
 +
-+tifs-rm-cfg:
-+    rm_boardcfg:
-+        rev:
-+            boardcfg_abi_maj: 0x0
-+            boardcfg_abi_min: 0x1
-+        host_cfg:
-+            subhdr:
-+                magic: 0x4C41
-+                size: 356
-+            host_cfg_entries:
-+                -  # 1
-+                    host_id: 12
-+                    allowed_atype: 0x2A
-+                    allowed_qos: 0xAAAA
-+                    allowed_orderid: 0xAAAAAAAA
-+                    allowed_priority: 0xAAAA
-+                    allowed_sched_priority: 0xAA
-+                -  # 2
-+                    host_id: 30
-+                    allowed_atype: 0x2A
-+                    allowed_qos: 0xAAAA
-+                    allowed_orderid: 0xAAAAAAAA
-+                    allowed_priority: 0xAAAA
-+                    allowed_sched_priority: 0xAA
-+                -  # 3
-+                    host_id: 36
-+                    allowed_atype: 0x2A
-+                    allowed_qos: 0xAAAA
-+                    allowed_orderid: 0xAAAAAAAA
-+                    allowed_priority: 0xAAAA
-+                    allowed_sched_priority: 0xAA
-+                -  # 4
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                -  # 5
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                -  # 6
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                -  # 7
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                -  # 8
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                -  # 9
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                -  # 10
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                -  # 11
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                -  # 12
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                -  # 13
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                -  # 14
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                -  # 15
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                -  # 16
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                -  # 17
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                -  # 18
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                -  # 19
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                -  # 20
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                -  # 21
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                -  # 22
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                -  # 23
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                -  # 24
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                -  # 25
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                -  # 26
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                -  # 27
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                -  # 28
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                -  # 29
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                -  # 30
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                -  # 31
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                -  # 32
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+        resasg:
-+            subhdr:
-+                magic: 0x7B25
-+                size: 8
-+            resasg_entries_size: 824
-+            reserved: 0
-+    resasg_entries:
-+        -
-+            start_resource: 0
-+            num_resource: 18
-+            type: 1677
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 18
-+            num_resource: 6
-+            type: 1677
-+            host_id: 35
-+            reserved: 0
-+        -
-+            start_resource: 18
-+            num_resource: 6
-+            type: 1677
-+            host_id: 36
-+            reserved: 0
-+        -
-+            start_resource: 24
-+            num_resource: 2
-+            type: 1677
-+            host_id: 30
-+            reserved: 0
-+        -
-+            start_resource: 26
-+            num_resource: 6
-+            type: 1677
-+            host_id: 128
-+            reserved: 0
-+        -
-+            start_resource: 54
-+            num_resource: 18
-+            type: 1678
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 72
-+            num_resource: 6
-+            type: 1678
-+            host_id: 35
-+            reserved: 0
-+        -
-+            start_resource: 72
-+            num_resource: 6
-+            type: 1678
-+            host_id: 36
-+            reserved: 0
-+        -
-+            start_resource: 78
-+            num_resource: 2
-+            type: 1678
-+            host_id: 30
-+            reserved: 0
-+        -
-+            start_resource: 80
-+            num_resource: 2
-+            type: 1678
-+            host_id: 128
-+            reserved: 0
-+        -
-+            start_resource: 32
-+            num_resource: 12
-+            type: 1679
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 44
-+            num_resource: 6
-+            type: 1679
-+            host_id: 35
-+            reserved: 0
-+        -
-+            start_resource: 44
-+            num_resource: 6
-+            type: 1679
-+            host_id: 36
-+            reserved: 0
-+        -
-+            start_resource: 50
-+            num_resource: 2
-+            type: 1679
-+            host_id: 30
-+            reserved: 0
-+        -
-+            start_resource: 52
-+            num_resource: 2
-+            type: 1679
-+            host_id: 128
-+            reserved: 0
-+        -
-+            start_resource: 0
-+            num_resource: 18
-+            type: 1696
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 18
-+            num_resource: 6
-+            type: 1696
-+            host_id: 35
-+            reserved: 0
-+        -
-+            start_resource: 18
-+            num_resource: 6
-+            type: 1696
-+            host_id: 36
-+            reserved: 0
-+        -
-+            start_resource: 24
-+            num_resource: 2
-+            type: 1696
-+            host_id: 30
-+            reserved: 0
-+        -
-+            start_resource: 26
-+            num_resource: 6
-+            type: 1696
-+            host_id: 128
-+            reserved: 0
-+        -
-+            start_resource: 0
-+            num_resource: 18
-+            type: 1697
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 18
-+            num_resource: 6
-+            type: 1697
-+            host_id: 35
-+            reserved: 0
-+        -
-+            start_resource: 18
-+            num_resource: 6
-+            type: 1697
-+            host_id: 36
-+            reserved: 0
-+        -
-+            start_resource: 24
-+            num_resource: 2
-+            type: 1697
-+            host_id: 30
-+            reserved: 0
-+        -
-+            start_resource: 26
-+            num_resource: 2
-+            type: 1697
-+            host_id: 128
-+            reserved: 0
-+        -
-+            start_resource: 0
-+            num_resource: 12
-+            type: 1698
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 12
-+            num_resource: 6
-+            type: 1698
-+            host_id: 35
-+            reserved: 0
-+        -
-+            start_resource: 12
-+            num_resource: 6
-+            type: 1698
-+            host_id: 36
-+            reserved: 0
-+        -
-+            start_resource: 18
-+            num_resource: 2
-+            type: 1698
-+            host_id: 30
-+            reserved: 0
-+        -
-+            start_resource: 20
-+            num_resource: 2
-+            type: 1698
-+            host_id: 128
-+            reserved: 0
-+        -
-+            start_resource: 5
-+            num_resource: 35
-+            type: 1802
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 44
-+            num_resource: 35
-+            type: 1802
-+            host_id: 35
-+            reserved: 0
-+        -
-+            start_resource: 44
-+            num_resource: 35
-+            type: 1802
-+            host_id: 36
-+            reserved: 0
-+        -
-+            start_resource: 168
-+            num_resource: 7
-+            type: 1802
-+            host_id: 30
-+            reserved: 0
-+        -
-+            start_resource: 0
-+            num_resource: 1024
-+            type: 1807
-+            host_id: 128
-+            reserved: 0
-+        -
-+            start_resource: 4096
-+            num_resource: 29
-+            type: 1808
-+            host_id: 128
-+            reserved: 0
-+        -
-+            start_resource: 4608
-+            num_resource: 99
-+            type: 1809
-+            host_id: 128
-+            reserved: 0
-+        -
-+            start_resource: 5120
-+            num_resource: 24
-+            type: 1810
-+            host_id: 128
-+            reserved: 0
-+        -
-+            start_resource: 5632
-+            num_resource: 51
-+            type: 1811
-+            host_id: 128
-+            reserved: 0
-+        -
-+            start_resource: 6144
-+            num_resource: 51
-+            type: 1812
-+            host_id: 128
-+            reserved: 0
-+        -
-+            start_resource: 6656
-+            num_resource: 51
-+            type: 1813
-+            host_id: 128
-+            reserved: 0
-+        -
-+            start_resource: 8192
-+            num_resource: 32
-+            type: 1814
-+            host_id: 128
-+            reserved: 0
-+        -
-+            start_resource: 8704
-+            num_resource: 32
-+            type: 1815
-+            host_id: 128
-+            reserved: 0
-+        -
-+            start_resource: 9216
-+            num_resource: 32
-+            type: 1816
-+            host_id: 128
-+            reserved: 0
-+        -
-+            start_resource: 9728
-+            num_resource: 22
-+            type: 1817
-+            host_id: 128
-+            reserved: 0
-+        -
-+            start_resource: 10240
-+            num_resource: 22
-+            type: 1818
-+            host_id: 128
-+            reserved: 0
-+        -
-+            start_resource: 10752
-+            num_resource: 22
-+            type: 1819
-+            host_id: 128
-+            reserved: 0
-+        -
-+            start_resource: 11264
-+            num_resource: 28
-+            type: 1820
-+            host_id: 128
-+            reserved: 0
-+        -
-+            start_resource: 11776
-+            num_resource: 28
-+            type: 1821
-+            host_id: 128
-+            reserved: 0
-+        -
-+            start_resource: 12288
-+            num_resource: 28
-+            type: 1822
-+            host_id: 128
-+            reserved: 0
-+        -
-+            start_resource: 0
-+            num_resource: 10
-+            type: 1936
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 10
-+            num_resource: 3
-+            type: 1936
-+            host_id: 35
-+            reserved: 0
-+        -
-+            start_resource: 10
-+            num_resource: 3
-+            type: 1936
-+            host_id: 36
-+            reserved: 0
-+        -
-+            start_resource: 13
-+            num_resource: 3
-+            type: 1936
-+            host_id: 30
-+            reserved: 0
-+        -
-+            start_resource: 16
-+            num_resource: 3
-+            type: 1936
-+            host_id: 128
-+            reserved: 0
-+        -
-+            start_resource: 19
-+            num_resource: 64
-+            type: 1937
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 19
-+            num_resource: 64
-+            type: 1937
-+            host_id: 36
-+            reserved: 0
-+        -
-+            start_resource: 83
-+            num_resource: 8
-+            type: 1938
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 91
-+            num_resource: 8
-+            type: 1939
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 99
-+            num_resource: 10
-+            type: 1942
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 109
-+            num_resource: 3
-+            type: 1942
-+            host_id: 35
-+            reserved: 0
-+        -
-+            start_resource: 109
-+            num_resource: 3
-+            type: 1942
-+            host_id: 36
-+            reserved: 0
-+        -
-+            start_resource: 112
-+            num_resource: 3
-+            type: 1942
-+            host_id: 30
-+            reserved: 0
-+        -
-+            start_resource: 115
-+            num_resource: 3
-+            type: 1942
-+            host_id: 128
-+            reserved: 0
-+        -
-+            start_resource: 118
-+            num_resource: 16
-+            type: 1943
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 118
-+            num_resource: 16
-+            type: 1943
-+            host_id: 36
-+            reserved: 0
-+        -
-+            start_resource: 134
-+            num_resource: 8
-+            type: 1944
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 134
-+            num_resource: 8
-+            type: 1945
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 142
-+            num_resource: 8
-+            type: 1946
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 142
-+            num_resource: 8
-+            type: 1947
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 0
-+            num_resource: 10
-+            type: 1955
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 10
-+            num_resource: 3
-+            type: 1955
-+            host_id: 35
-+            reserved: 0
-+        -
-+            start_resource: 10
-+            num_resource: 3
-+            type: 1955
-+            host_id: 36
-+            reserved: 0
-+        -
-+            start_resource: 13
-+            num_resource: 3
-+            type: 1955
-+            host_id: 30
-+            reserved: 0
-+        -
-+            start_resource: 16
-+            num_resource: 3
-+            type: 1955
-+            host_id: 128
-+            reserved: 0
-+        -
-+            start_resource: 19
-+            num_resource: 8
-+            type: 1956
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 19
-+            num_resource: 8
-+            type: 1956
-+            host_id: 36
-+            reserved: 0
-+        -
-+            start_resource: 27
-+            num_resource: 1
-+            type: 1957
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 28
-+            num_resource: 1
-+            type: 1958
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 0
-+            num_resource: 10
-+            type: 1961
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 10
-+            num_resource: 3
-+            type: 1961
-+            host_id: 35
-+            reserved: 0
-+        -
-+            start_resource: 10
-+            num_resource: 3
-+            type: 1961
-+            host_id: 36
-+            reserved: 0
-+        -
-+            start_resource: 13
-+            num_resource: 3
-+            type: 1961
-+            host_id: 30
-+            reserved: 0
-+        -
-+            start_resource: 16
-+            num_resource: 3
-+            type: 1961
-+            host_id: 128
-+            reserved: 0
-+        -
-+            start_resource: 0
-+            num_resource: 10
-+            type: 1962
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 10
-+            num_resource: 3
-+            type: 1962
-+            host_id: 35
-+            reserved: 0
-+        -
-+            start_resource: 10
-+            num_resource: 3
-+            type: 1962
-+            host_id: 36
-+            reserved: 0
-+        -
-+            start_resource: 13
-+            num_resource: 3
-+            type: 1962
-+            host_id: 30
-+            reserved: 0
-+        -
-+            start_resource: 16
-+            num_resource: 3
-+            type: 1962
-+            host_id: 128
-+            reserved: 0
-+        -
-+            start_resource: 19
-+            num_resource: 1
-+            type: 1963
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 19
-+            num_resource: 1
-+            type: 1963
-+            host_id: 36
-+            reserved: 0
-+        -
-+            start_resource: 19
-+            num_resource: 16
-+            type: 1964
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 19
-+            num_resource: 16
-+            type: 1964
-+            host_id: 36
-+            reserved: 0
-+        -
-+            start_resource: 20
-+            num_resource: 1
-+            type: 1965
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 35
-+            num_resource: 8
-+            type: 1966
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 21
-+            num_resource: 1
-+            type: 1967
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 35
-+            num_resource: 8
-+            type: 1968
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 22
-+            num_resource: 1
-+            type: 1969
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 43
-+            num_resource: 8
-+            type: 1970
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 23
-+            num_resource: 1
-+            type: 1971
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 43
-+            num_resource: 8
-+            type: 1972
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 0
-+            num_resource: 1
-+            type: 2112
-+            host_id: 128
-+            reserved: 0
-+        -
-+            start_resource: 2
-+            num_resource: 2
-+            type: 2122
-+            host_id: 12
-+            reserved: 0
++EEPROM-based detection can be bypassed by enabling
++`CONFIG_PHYCORE_AM62X_RAM_SIZE_FIX` in the R5 defconfig and selecting one of:
++
++* `CONFIG_PHYCORE_AM62X_RAM_SIZE_1GB`
++* `CONFIG_PHYCORE_AM62X_RAM_SIZE_2GB`
++* `CONFIG_PHYCORE_AM62X_RAM_SIZE_4GB`
++
++This is mainly useful if no detection is needed or for boards without a
++populated SoM EEPROM.
++
+ .. include:: k3-common.rst
+ 
+ Further Information
+diff --git a/doc/board/phytec/phycore-am64x.rst b/doc/board/phytec/phycore-am64x.rst
+index c6677f6a440..20887d443a9 100644
+--- a/doc/board/phytec/phycore-am64x.rst
++++ b/doc/board/phytec/phycore-am64x.rst
+@@ -175,6 +175,24 @@ Boot switches should be changed with power off.
+      - 11011100
+      - 00000000
+ 
++DDR RAM Size
++------------
++
++By default, the R5 SPL detects the populated DDR size by reading the SoM
++EEPROM and configures the DDR controller and the U-Boot device-tree memory
++node accordingly. The phyCORE-AM64x is available with 1 GB or 2 GB of DDR.
++If the EEPROM cannot be read or is invalid, the SPL falls back to a 2 GB
++configuration.
++
++EEPROM-based detection can be bypassed by enabling
++`CONFIG_PHYCORE_AM64X_RAM_SIZE_FIX` in the R5 defconfig and selecting one of:
++
++* `CONFIG_PHYCORE_AM64X_RAM_SIZE_1GB`
++* `CONFIG_PHYCORE_AM64X_RAM_SIZE_2GB`
++
++This is mainly useful if no detection is needed or for boards without a
++populated SoM EEPROM.
++
+ .. include:: k3-common.rst
+ 
+ Further Information
 -- 
 2.48.1
 
