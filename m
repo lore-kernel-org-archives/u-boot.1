@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8DC41CD4F24
-	for <u-boot@archiver.kernel.org>; Wed, 13 May 2026 08:03:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70DF0CD37B6
+	for <u-boot@archiver.kernel.org>; Wed, 13 May 2026 08:03:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EB34B84255;
-	Wed, 13 May 2026 10:03:06 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3313B8467C;
+	Wed, 13 May 2026 10:03:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=mediatek.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=mediatek.com header.i=@mediatek.com header.b="DOVz1aKu";
+	dkim=pass (1024-bit key; unprotected) header.d=mediatek.com header.i=@mediatek.com header.b="W+kiU4JV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6939484255; Wed, 13 May 2026 10:03:02 +0200 (CEST)
+ id 350718341A; Wed, 13 May 2026 10:03:05 +0200 (CEST)
 Received: from mailgw01.mediatek.com (unknown [60.244.123.138])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DF3518056B
- for <u-boot@lists.denx.de>; Wed, 13 May 2026 10:02:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1A9278056B
+ for <u-boot@lists.denx.de>; Wed, 13 May 2026 10:03:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=mediatek.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=weijie.gao@mediatek.com
-X-UUID: 262ad88e4ea211f1b5a00d44d12bea5a-20260513
+X-UUID: 2714423a4ea211f1b5a00d44d12bea5a-20260513
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mediatek.com;
  s=dk; 
  h=Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:CC:To:From;
- bh=9jFPpLyDYEkC/5SuT5jJsY7mE8IaVw4HZ0UrtFc5RB0=; 
- b=DOVz1aKun4jurbEmE0jeGNJ5pKbUwOyEylgxCw7lzdytmoBwwvlfJjFX1MKXNnh1Pzlrf5hc3ryYa7M6NdD8cILkaZhzsdCjnPFg4qrWSg53Ay8qj0UxeQh3XZ7slApez6LJf8VPCMs5bQvC+0zcuVbLkogbfufxErLUwdY8mzI=;
+ bh=3G40GTERQ8rv1T9klt80T8ir4GGh5LlbCEStnnbuvuE=; 
+ b=W+kiU4JVUYZJjZ8S7+nYPvT+1N/IjIYtPxcR1eYhO9mBfg+zLMHHzwRhxnmWL2i17GyLP5yhb0Iym5jilWzdWFJMJjLvdLTpeZvUH/ndrcEUqgdCxhQLaTWL5YHcDu/C8pq/gtidbmgxtt7ceV+FmeODhARV161NZ2Wljix7iWY=;
 X-CID-P-RULE: Release_Ham
-X-CID-O-INFO: VERSION:1.3.14, REQID:24ffbf48-548b-4fa9-a02a-24764dcfca4b, IP:0,
+X-CID-O-INFO: VERSION:1.3.14, REQID:77e9211e-6b3c-41b5-913b-ad216b0de731, IP:0,
  U
- RL:0,TC:0,Content:-25,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTIO
- N:release,TS:-25
-X-CID-META: VersionHash:9091e75, CLOUDID:976c6071-3b7f-4b26-b2f9-40f0deecb36d,
+ RL:0,TC:0,Content:-5,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTION
+ :release,TS:-5
+X-CID-META: VersionHash:9091e75, CLOUDID:a5a94dbf-65a8-4b41-ac18-3671578a914d,
  B
  ulkID:nil,BulkQuantity:0,Recheck:0,SF:81|82|102|836|865|888|898,TC:-5,Cont
  ent:0|15|50,EDM:-3,IP:nil,URL:0,File:130,RT:0,Bulk:nil,QS:nil,BEC:-1,COL:0
@@ -45,26 +45,27 @@ X-CID-BVR: 2,SSN|SDN
 X-CID-BAS: 2,SSN|SDN,0,_
 X-CID-FACTOR: TF_CID_SPAM_SNR
 X-CID-RHF: D41D8CD98F00B204E9800998ECF8427E
-X-UUID: 262ad88e4ea211f1b5a00d44d12bea5a-20260513
-Received: from mtkmbs10n1.mediatek.inc [(172.21.101.34)] by
+X-UUID: 2714423a4ea211f1b5a00d44d12bea5a-20260513
+Received: from mtkmbs14n1.mediatek.inc [(172.21.101.75)] by
  mailgw01.mediatek.com (envelope-from <weijie.gao@mediatek.com>)
  (Generic MTA with TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384 256/256)
- with ESMTP id 1946086198; Wed, 13 May 2026 16:02:55 +0800
+ with ESMTP id 2086953978; Wed, 13 May 2026 16:02:57 +0800
 Received: from mtkmbs11n1.mediatek.inc (172.21.101.185) by
- mtkmbs13n1.mediatek.inc (172.21.101.193) with Microsoft SMTP Server
+ mtkmbs11n1.mediatek.inc (172.21.101.185) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.29; Wed, 13 May 2026 16:02:54 +0800
+ 15.2.2562.29; Wed, 13 May 2026 16:02:55 +0800
 Received: from mcddlt001.gcn.mediatek.inc (10.19.240.15) by
  mtkmbs11n1.mediatek.inc (172.21.101.73) with Microsoft SMTP Server id
- 15.2.2562.29 via Frontend Transport; Wed, 13 May 2026 16:02:53 +0800
+ 15.2.2562.29 via Frontend Transport; Wed, 13 May 2026 16:02:55 +0800
 From: Weijie Gao <weijie.gao@mediatek.com>
 To: <u-boot@lists.denx.de>
 CC: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, Tom Rini
  <trini@konsulko.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>, Simon
  Glass <sjg@chromium.org>, Weijie Gao <weijie.gao@mediatek.com>
-Subject: [PATCH v4 04/10] cmd: ubifs: mark string parameters with const
-Date: Wed, 13 May 2026 16:02:53 +0800
-Message-ID: <4088657fbf35750f00ce57d58d2b0775e3914087.1778657347.git.weijie.gao@mediatek.com>
+Subject: [PATCH v4 05/10] cmd: ubi: change the type of parameter dynamic to
+ bool
+Date: Wed, 13 May 2026 16:02:54 +0800
+Message-ID: <5840777d0366c5d2449115c4143c802213ad36b2.1778657347.git.weijie.gao@mediatek.com>
 X-Mailer: git-send-email 2.17.0
 In-Reply-To: <cover.1778657347.git.weijie.gao@mediatek.com>
 References: <cover.1778657347.git.weijie.gao@mediatek.com>
@@ -87,92 +88,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-File name and volume name should be const as they will not be modified in
-these functions.
+This patch changes the type of the 'dynamic' parameter of ubi_create_vol()
+to bool as it's used as a boolean.
 
 Signed-off-by: Weijie Gao <weijie.gao@mediatek.com>
-Reviewed-by: Simon Glass <sjg@chromium.org>
 ---
 v4: not changed
-v3: not changed
-v2: new
+v3: new
 ---
- cmd/ubifs.c           | 2 +-
- fs/ubifs/super.c      | 2 +-
- fs/ubifs/ubifs.c      | 2 +-
- include/ubi_uboot.h   | 2 +-
- include/ubifs_uboot.h | 4 ++--
- 5 files changed, 6 insertions(+), 6 deletions(-)
+ cmd/ubi.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/cmd/ubifs.c b/cmd/ubifs.c
-index 22e95db8ca5..81f2d37fc7b 100644
---- a/cmd/ubifs.c
-+++ b/cmd/ubifs.c
-@@ -19,7 +19,7 @@
- static int ubifs_initialized;
- static int ubifs_mounted;
- 
--int cmd_ubifs_mount(char *vol_name)
-+int cmd_ubifs_mount(const char *vol_name)
- {
- 	int ret;
- 
-diff --git a/fs/ubifs/super.c b/fs/ubifs/super.c
-index b6004b88f4e..9c8974a97a5 100644
---- a/fs/ubifs/super.c
-+++ b/fs/ubifs/super.c
-@@ -2694,7 +2694,7 @@ MODULE_VERSION(__stringify(UBIFS_VERSION));
- MODULE_AUTHOR("Artem Bityutskiy, Adrian Hunter");
- MODULE_DESCRIPTION("UBIFS - UBI File System");
- #else
--int uboot_ubifs_mount(char *vol_name)
-+int uboot_ubifs_mount(const char *vol_name)
- {
- 	struct dentry *ret;
- 	int flags;
-diff --git a/fs/ubifs/ubifs.c b/fs/ubifs/ubifs.c
-index b0cc0d2e1b2..f6f21e6af22 100644
---- a/fs/ubifs/ubifs.c
-+++ b/fs/ubifs/ubifs.c
-@@ -974,7 +974,7 @@ void ubifs_close(void)
+diff --git a/cmd/ubi.c b/cmd/ubi.c
+index 8e3cfaaddbb..8d04ff61fb6 100644
+--- a/cmd/ubi.c
++++ b/cmd/ubi.c
+@@ -213,7 +213,7 @@ bad:
+ 	return err;
  }
  
- /* Compat wrappers for common/cmd_ubifs.c */
--int ubifs_load(char *filename, unsigned long addr, u32 size)
-+int ubifs_load(const char *filename, unsigned long addr, u32 size)
+-static int ubi_create_vol(const char *volume, int64_t size, int dynamic,
++static int ubi_create_vol(const char *volume, int64_t size, bool dynamic,
+ 			  int vol_id, bool skipcheck)
  {
- 	loff_t actread;
- 	int err;
-diff --git a/include/ubi_uboot.h b/include/ubi_uboot.h
-index dd22ec7537a..6ebd8a3b613 100644
---- a/include/ubi_uboot.h
-+++ b/include/ubi_uboot.h
-@@ -53,7 +53,7 @@ int ubi_volume_write(const char *volume, const void *buf, loff_t offset,
- int ubi_volume_read(const char *volume, void *buf, loff_t offset, size_t size);
+ 	struct ubi_mkvol_req req;
+@@ -765,7 +765,7 @@ static int do_ubi(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ 	}
  
- extern struct ubi_device *ubi_devices[];
--int cmd_ubifs_mount(char *vol_name);
-+int cmd_ubifs_mount(const char *vol_name);
- int cmd_ubifs_umount(void);
+ 	if (strncmp(argv[1], "create", 6) == 0) {
+-		int dynamic = 1;	/* default: dynamic volume */
++		bool dynamic = true;	/* default: dynamic volume */
+ 		int id = UBI_VOL_NUM_AUTO;
  
- #if IS_ENABLED(CONFIG_UBI_BLOCK)
-diff --git a/include/ubifs_uboot.h b/include/ubifs_uboot.h
-index db8a29e9bbd..0877dd84f99 100644
---- a/include/ubifs_uboot.h
-+++ b/include/ubifs_uboot.h
-@@ -18,10 +18,10 @@ struct blk_desc;
- struct disk_partition;
- 
- int ubifs_init(void);
--int uboot_ubifs_mount(char *vol_name);
-+int uboot_ubifs_mount(const char *vol_name);
- void uboot_ubifs_umount(void);
- int ubifs_is_mounted(void);
--int ubifs_load(char *filename, unsigned long addr, u32 size);
-+int ubifs_load(const char *filename, unsigned long addr, u32 size);
- 
- int ubifs_set_blk_dev(struct blk_desc *rbdd, struct disk_partition *info);
- int ubifs_ls(const char *dir_name);
+ 		/* Use maximum available size */
+@@ -786,7 +786,7 @@ static int do_ubi(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ 		/* E.g., create volume size type */
+ 		if (argc == 5) {
+ 			if (strncmp(argv[4], "s", 1) == 0)
+-				dynamic = 0;
++				dynamic = false;
+ 			else if (strncmp(argv[4], "d", 1) != 0) {
+ 				printf("Incorrect type\n");
+ 				return 1;
 -- 
 2.45.2
 
