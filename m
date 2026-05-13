@@ -4,180 +4,108 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1237FCD37B6
-	for <u-boot@archiver.kernel.org>; Wed, 13 May 2026 08:53:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3C44CD4F24
+	for <u-boot@archiver.kernel.org>; Wed, 13 May 2026 09:40:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 148C2838BB;
-	Wed, 13 May 2026 10:53:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 48D78838BB;
+	Wed, 13 May 2026 11:40:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="txQAQpmV";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="l9YcajfG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A60AA83E36; Wed, 13 May 2026 10:53:05 +0200 (CEST)
-Received: from BN1PR04CU002.outbound.protection.outlook.com
- (mail-eastus2azlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c110::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 32C2083E36; Wed, 13 May 2026 11:40:24 +0200 (CEST)
+Received: from mail-yx1-xb12c.google.com (mail-yx1-xb12c.google.com
+ [IPv6:2607:f8b0:4864:20::b12c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 72FA58341A
- for <u-boot@lists.denx.de>; Wed, 13 May 2026 10:53:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6FBB98341A
+ for <u-boot@lists.denx.de>; Wed, 13 May 2026 11:40:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=YjQKA9ADnzZ8G0XVcsbLTyaB14GqaOcLBbqyxcH19APwnzejIx2i4Hun7bH77ACwaEP2ig8erpbJpNnxjQeOMZC+QydvMXmjP/N0TOELSr4Ad/KRq5JUQ1yrnNcK36ftKvklFc3KaKT0K1G1VEHXNEBPvJu63nm3DbdVphpz7/NfyHrfY2K+asALpNLCVTI8h2Ted+bUs6YfW+0fRYM5YtdaG7oacgziMc+ByVtqkTPsiC9ISWhfz6UoHC6LnO0BKtLXoT1LZO37bFjr+pJ5EW+mnQF+t3pvLBgqAnJ8ACyd7dvU48MzZ85U3tnxyCJBaaP+7aDELtTFoR1y68kk7Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=QAuIhhlbzAESNryRxcDCJnpZCtI4dFt7I2LlQvLxNWw=;
- b=MlZ3/PFDHxzVoeg65HC6HUjfOYdigN5TCPLsbjy2ZxkOV6JZ/eEDBbYSX73EbAa74rnHCTfRvKq+ZCNuSxWsz0+vLKv6uhNGB6oKJVVKGgUoHrYksdEQyLduIDRU5/fAz5umntnBkxDUOSpa3F/mVd2eqnX8l52Bb3PgLz5GFNMGUq9xMa+qhije3WQtGadg4BnunFu836193XWMqTK3cjI7mVkuqzDGigAO4vEXWWgEFPBeR26bP8/PjY6lSWGuwVsUqtfWQYIpkcqwISR48N4CwLLR31bb5xGcclQnXMg/TvdATxnQdoKdl19VadVdSPqZT8EVXCz80WFpRIHJ8Q==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=QAuIhhlbzAESNryRxcDCJnpZCtI4dFt7I2LlQvLxNWw=;
- b=txQAQpmVscZbo3FBF6HO4wTOXrBVb9u/vubu1a6AmT4QnRe5no1VGYSTARAgb05GC/w8v+heH64C8tcky5HDDWTNN+ukO+5BabCRhhaXx1gidA58d+/Wg4t6iTKWIOKCL+XhNOcqyFTZFPRdlP0ZNGa7j/BwROl+jgMkN3ocfc0=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-Received: from LV5PR12MB9779.namprd12.prod.outlook.com (2603:10b6:408:301::14)
- by SJ1PR12MB6363.namprd12.prod.outlook.com (2603:10b6:a03:453::9)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9913.11; Wed, 13 May
- 2026 08:52:57 +0000
-Received: from LV5PR12MB9779.namprd12.prod.outlook.com
- ([fe80::8ac8:e862:8ae9:9287]) by LV5PR12MB9779.namprd12.prod.outlook.com
- ([fe80::8ac8:e862:8ae9:9287%3]) with mapi id 15.20.9913.009; Wed, 13 May 2026
- 08:52:57 +0000
-Message-ID: <cbadd601-4337-4eaf-bf6b-8c98645dc089@amd.com>
-Date: Wed, 13 May 2026 10:52:53 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/4] reset: Add sandbox tests for reset_reset() and
- reset_reset_bulk()
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, git@amd.com
-References: <cover.1777984225.git.michal.simek@amd.com>
- <21c23cc7403153b45a81c958118b8d9f85f73140.1777984225.git.michal.simek@amd.com>
- <CAFLszTiYJU028+L40rzNa=X-qqDYCfbPqYMfGhzpK3Xq2mr8ag@mail.gmail.com>
-Content-Language: en-US
-From: Michal Simek <michal.simek@amd.com>
-Autocrypt: addr=michal.simek@amd.com; keydata=
- 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
- mpwx1d8=
-In-Reply-To: <CAFLszTiYJU028+L40rzNa=X-qqDYCfbPqYMfGhzpK3Xq2mr8ag@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: PH2PEPF00003847.namprd17.prod.outlook.com
- (2603:10b6:518:1::64) To LV5PR12MB9779.namprd12.prod.outlook.com
- (2603:10b6:408:301::14)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yx1-xb12c.google.com with SMTP id
+ 956f58d0204a3-65c21049dafso6040579d50.2
+ for <u-boot@lists.denx.de>; Wed, 13 May 2026 02:40:21 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1778665220; cv=none;
+ d=google.com; s=arc-20240605;
+ b=E2dQJKoGfTgk7bDfn4nFlklEC6rtMMUxIJje0Q2gg4aozy1LeJtd2ha2wSfKv+7LoN
+ +gqgpfXKd1BQxrw31Z5+Zgqdut/5x7ZCFPxHZUBJNdMEjrFWmmoRcvNUj//Sapwl/Sv9
+ S5pR5ywlCCeFaAwk2As8aOZscqEs0pQhfxtIp2eSFGdPYzgy9cCwwS3aSPlM5IWz5Pvp
+ 79INW8Y5RVj/0EgHoa9NkwBt3MwDyYBJ2wFx4OZwoEP9q8yy5/WChFpb0ZWRJkeQrNbV
+ nKW4pMHgGwc5zuL6YjiPi51kqWv+UaYzvTCbl8Y/61JnPWGd3+cToJ8PXK9R7+HkyMVc
+ RoRA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=GSyWG+JKVk8g51NqdMpMwmwdm6ifZpn7c0pH9d9JN5o=;
+ fh=afdFkhg+X0dJedjeczr8qfrLvDZpz9MX/GqWAgIgc5U=;
+ b=F/Pc7k/hohN34P6vUaILDGp8heCbHdCMKDH0KxMQf0ruo70dFC7dZJvNKFySLgoHXs
+ WgqENkIjLD+QuM47vUYmRFhS3/hTIf5gWxDR+35E0IYBTvjAnfubtWa6wxasL6EKJt2x
+ RI2znTJDtEM2er+07PGzda5cdZ4x5dPf0+py/Ncu3wYersij7DCWMAb1wMT2Ac2Ymxqh
+ EjbrW2JwieH9lGzswNdcJtax+82yLccGrX0ZXrFr2GHLkRsssj0oD9ruQKeEXUEKT8Ut
+ Be8bCSUwJH4vA4Fycn9j1qiHAlA5t5hjCdHoAix/MCA99Jeh1qXlhps9JUtZ19iEEleS
+ CBrg==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1778665220; x=1779270020; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=GSyWG+JKVk8g51NqdMpMwmwdm6ifZpn7c0pH9d9JN5o=;
+ b=l9YcajfGtUuRGDnudW28xn6OWpO2YybZoYcTzkKddqwbhye296XGGA2w+Fdq91bouA
+ Nbrgv4tglU5N0ss//omfehL0EdlgFY5QTO66iX8a+NSKMq4myUK2g7HQihe3Cn/1tBZK
+ WHiMG9rMW6wNFJY+NuGq0nas1h93xF7GNJb2BIbLWLygHUU/PJfJW+yzPm63qVsUbLfo
+ wN2HmZGnTLoo0asaLo3RtxdPx3XidjvBoXYuruvAUkOEaSoYazin/iBxDs2ndVbD+y7C
+ XS8TbmqnqlLfl5rZvqOmM5x3SGGFLuq6gff/0PR3zfU6jACxXqSM7OayRqWyYpfy6K9P
+ L84Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1778665220; x=1779270020;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=GSyWG+JKVk8g51NqdMpMwmwdm6ifZpn7c0pH9d9JN5o=;
+ b=YbU8lB18PUWkMXOxo/OrvM2kdlBhFciVmHz7CaMPsoHcv0iEaiYBd3tYetsP2duunU
+ XSYWLKMLCLqZ72H21b4mXQARc02LHtaakqRFT48Nwxn7blbG8isms91pYOD2I2Us3oGR
+ lQAPFj2IJAx3ZoQH0rwKb3YiK+KBOzO80JGRqyBvS/q5St+ckyExVGZDF37mZanjTM9h
+ 7o3OHIO9FgigNTVA7KpyOtDAEDyZLPNN3fiOu4Xac18PkoAqPAjktysMDwAZhMitViUW
+ 9k40tc/Y9jB6piT2YJ6Exe1tvw+agyE3fSyOwhlccuThe4HKnYYbabWMlvYxzrZtupc1
+ IZ+g==
+X-Gm-Message-State: AOJu0YylT7iopGE8zbDnz1c4EqOHpIp/nxatXQxeNoQI3EZtQV8yD1XD
+ EVn7sn+MwmGrfdFOGBfRGbrLD3B/j/TjL5+mY37B/wFrainL8o4SVbq11rV5LJh8rXP1AjcSus1
+ irEoBczPHvneObWZnvacLBkWBmIBZiy6UmXCp6KJ3cw==
+X-Gm-Gg: Acq92OFH0GP76gC6GeK9jQFL2M+Z574Xm1BieEtOBLSniZX2PKPOt74hQZgbAl5NQJL
+ IDiBsVK74ehkukJjfw1gR+YxQ2yzLgCr5PY76seJWdF0US3W8Q+dFMkv4gdJHjMFrW7sWtN7j5u
+ mKtKMNQOGaee1RjPdaf2xb7zNm9STwJjGNNPDPzQiVxgiQ5ztX7C5Q9y1NKfDVIZDSNlaXy62/q
+ JZJgJQl7tLR5o+Y4f1LmtMd0JtJgLvXWaBeHTIqYJ+kOKZoYL8AzQS/pVtfNPC3iLrteaN+KWZ2
+ MogwV4v9VvmoFYHSG0Pav0O8nX5cOkT1SH9P34woN3RywTvuTfNsW5pPBoneeutA8cPXxvkBK8s
+ xXfDiKB0op2DElEw6fz/N+3Fxp8CkfnT/7B6BXHLyvgLpQcuM9ZPNaGbq2XgF1ZS94cWwNcrvnL
+ EKYRHR0psIaje5ih9DFftCwYpNJ1kCrpFB0DwUI5E247EUuwm9tu2erUE8GUVi1PsODPxZw+3H8
+ cFPDJjAtHcwyrZQhuBsrY9ygKsFnmrBnKXc4wW51QgxvslTtikHRGXzxtWKt4fo37d3saD6+BzD
+ s1C8MCTySlZyAE84mXQXgkvsgyNvHZ9HExywNdp1MdW5HCP/0ppo8LeXwXGbt3H4nxjGMofyjEG
+ 8oOcyxQ==
+X-Received: by 2002:a05:690e:12c6:b0:651:b40a:d6ce with SMTP id
+ 956f58d0204a3-65df621ea75mr2363985d50.14.1778665220097; Wed, 13 May 2026
+ 02:40:20 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: LV5PR12MB9779:EE_|SJ1PR12MB6363:EE_
-X-MS-Office365-Filtering-Correlation-Id: 763a3ee1-1b87-4d75-d248-08deb0cd078c
-X-LD-Processed: 3dd8961f-e488-4e60-8e11-a82d994e183d,ExtAddr
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|366016|1800799024|376014|11063799003|22082099003|18002099003|56012099003;
-X-Microsoft-Antispam-Message-Info: czVsSN7F6nv7ZG+w2rgncHTQ54Fq9uPGqtdiXEeg3WBYpYbveMKJTo0eVFojjzLBI9cmmyQZgAuLtHl8ZxnMhY9XK83LR79Xc+QreZvhOZ0DzgkdbgSUhtbs/m35E06Qb7vmOq80wv+J6FJMw8hVX1x8IgJgxtgq5tXTAoGLlBsQjk3NFf74L3J8Xeeo4LZqRNxnHBZCftoKGs8/mkKawDm5N8Zs453S3oRIHaat8H7T67FbS88M7owi2ERmWiUWWt1rm9hoAEf8L/In2GZFfF0zeiJY2DoGCmx3RgF1DBv2Z6KgSNzKZZJ5HOvhV7s1EkXyCoJ6FL9NmpwR6j2exIABoTBwpD9F15AHN5I/MwOp0XM4dURh1E8fbUK6uX9DnBYguC5YW9RhLhy00WVwd4sWE2GvlSBvbTB4P1G5DuWaWMA7APD4OdGyKZv2D4L4DmWvTkOEZAPG1UsgCFqU3/r3A5O/VArXqlSd2kNe2KzalaREBPqMHO15n3uR4iVQErzgyKdmyQ/SZ4wnkxAtisbRrYZHt+r2TuwQNGvo/2SwZIRMKJYy+9tkAZrIAyy+DKSNGn2dE0nX/j66Kml1MgDS7KW1dj7roXVMcNq2mVeOnRmuhXX/NMyavcMLvhZvbJrza72CLbMNLAf+/kfF2We0hnDw4uaQtdQUV2FjEDV73t0XMQbVrVb7FJpK6K/9
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:LV5PR12MB9779.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(1800799024)(376014)(11063799003)(22082099003)(18002099003)(56012099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?S0ZEcVBuZk9scE5HMVVyaUI5K3UxOFZCSkh1VGt6WUhQQU12ZDFpY25mdmhO?=
- =?utf-8?B?OFBKdEJncDk0WS81R0xXZDNXWUUwelFtQUlEUzJZT0N3Q1E3NW5JYlpwdnlY?=
- =?utf-8?B?WXZ1WW9qVzcrZFlodzNSSTgzVXBlcDlXR0NFZFFaaGtIUDJiRzdiVS90ZDlM?=
- =?utf-8?B?ODJ1dG1PZmNDb3hGVy8yaWVDT2NTS1NyZitqRzdZajUxSi9XUFRnTFJ4VnRz?=
- =?utf-8?B?c3F3ZTcwdklWdGNhVlRRaGIyQTlLTUZxdTlmVm0xaGFGTXV5ZUwyLys4U1Nm?=
- =?utf-8?B?dFUzRXE3TGVJc3FiTktjTlJvSGg0NVoyQzJJT3I1ZXE4WkFHbmY3MDBHaE5P?=
- =?utf-8?B?WWNJS01qaWtIaUtaSmp4bFJLbWtCSkREcHlFM2dmUjJmbVRjRG9VT1JiVUFx?=
- =?utf-8?B?VzlaeVFpWVR3NWpaaDB2TUJiZ2xrR3RmUkw5WEhtRjh0d01RUS93d3NBcFQz?=
- =?utf-8?B?U09aTVArUDFIK3dxUWJTR1AyTnVLcGFXNm42M1YrTEM5bWYvY0ZWK0I0Nmwz?=
- =?utf-8?B?cnh6dFY4OWhmQlFnQ1IvTGNmdVBNMnNsMTY0UVVvS3Q4NEhQOVJ1ZDk5My9O?=
- =?utf-8?B?RWJ6c2l5clNxRGhHV2pmVWpIYityRytHRUZSbktUaWNpNDBBZXFlQXQ3Q1lh?=
- =?utf-8?B?dW5LTy9DS1FUekc0Nmw2ZitBOTY5enpsQ3lyejFsc2JYclFFWTZNTWFHekJi?=
- =?utf-8?B?V3U2REZLK3E0eUtuV1VJODN4bUZVSG0yakdHV3pvYXNGbmxRU3ZHQ2wzSkN2?=
- =?utf-8?B?MXppTnZDLzB5bUpWY3AvVHBaQ1V0WEpsNUJCN0E4ZVhhQVBDeENwVHM0cld5?=
- =?utf-8?B?ZzBTQXoyYW55UFVtUWtEWEpRK3VuY2dVWWIzT0lmSjV4b0hwWXFoeGt0RFU5?=
- =?utf-8?B?Tm85cmRUSDJrSysyTTNKa1pyZmFGVzZxU2Y2NWtpV1d0WlBneDY2TllaYmNU?=
- =?utf-8?B?NStlQVlQSkxRT1BZd3hkOVpyVGRMWllPTEJmMUhOMnhlWlZmMlJzc0NoMDAy?=
- =?utf-8?B?Njd3MFFlKzRwTHVIMUV4SGtFRkRkdnlieGNPdDBKZmZqTk00WkZvRzUvanlk?=
- =?utf-8?B?L2hrMkJMQ1VDQm91Q0VVMmtGNjJjZ0s0WkhFS3FJZDJFSVJzS1lGN3JhU1RG?=
- =?utf-8?B?ckdMZDBCM29ncGFGN3VSVHIwRVdmOXJhWDRrVkhzNHMvSFVsSnBTVEw4SXc2?=
- =?utf-8?B?VHRNUDhSbDdCVEVxNkhBZEJseWM3SHBvRDJaV0k2dzdVRWVteXF2eVRDUGFX?=
- =?utf-8?B?WGFkRkhKd1paREN5RjZHTDZGYU1oRE92bXRjRERHY3l0K1k3eE9mZ1czYUxk?=
- =?utf-8?B?Ri9qT3ZDbUhiUWtkK2szSllITlIwemZXVEpMLy9NOENsRzNJSEpjRjZjTFVy?=
- =?utf-8?B?WmJxSXJlV1VERzBnay94VC9icmEyamVMSTVrVUs4S1BPeDcrTWg0MnVuWGlZ?=
- =?utf-8?B?Nk1USjJWS1I5a05zNkhTdDlueGZidTBISDRIVlBwbmpicjNQQ0g2eU9VTzl3?=
- =?utf-8?B?bDhKV0J1NTVqT2puQXBPSU5YL1hmaUhKNm05RjdHVnpnbzdBSXZpQWluRS9a?=
- =?utf-8?B?eU1sK0VNQnRGMXkzTy85elNvVCs5emRuSERLZE5wNERUbTdCZnVZdUxzdGdR?=
- =?utf-8?B?V1RkNk1wTHJYb3NxN3dHQjdDNWFJa0VMRmtuVXJxWGphTEdWNXJFRmd5Nlht?=
- =?utf-8?B?VkluZWV1clFWa3dOUWFaY1VhODhRRVZGckJXSEJoMEhFTDRnOFVvMGg1OE05?=
- =?utf-8?B?ejBHUnhuUDQvVEFZY0pZNWdIdHlMeFY4eGdoY3BIbVB0SFRxTFpZdWh3V2xJ?=
- =?utf-8?B?ckFCaWtHVEVrWEsvczdMeU5ZMU9lL2JrRExEblppQXdtWEE0UmZjUFVCTUUx?=
- =?utf-8?B?VW8xZm4vZUFueTF5cngrUHhQZjVsMXd0Z283OUg1UTBwa3YwZ0VlUFdCaVlO?=
- =?utf-8?B?NHh1ZWk4V1kwWFJzZmVTa2M2di9LNm81YVRBZnAwaERMeFV4bkNzRkRQdUVs?=
- =?utf-8?B?Y2dtQVlaVUp5bzhZcGllclQ0YWwyd29FU1ZaaGtadCtocWJqdldMNk1IcHJk?=
- =?utf-8?B?eFBKQUVaVm0vZ2Z0RzJ2YUJEWFB6bGp6UXNXUkRnMVZhTjJMK294YW9jYko1?=
- =?utf-8?B?b3JMT0RTU2J5UWtwOXFsMnBMZW1lSUhvcm9ESk1RYWRMa2FJeWFpN3l3Nmpj?=
- =?utf-8?B?VGtZS0hLdFZOOTlmTTIrRkpiRmNFK2VHdzQvcytIbTBTRktQc1haaWltL1pa?=
- =?utf-8?B?Wmp4NWlJcDVyUGN3MzhIeGN1TzBpajFQYytUZ2NhYSt0ZHQ4NTZ4dmdwWnR5?=
- =?utf-8?B?aU1XUlMyTUJ4ZjUvYytMVjN2WFBzOTBEQ2txd2xXaytMNGpENktadz09?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 763a3ee1-1b87-4d75-d248-08deb0cd078c
-X-MS-Exchange-CrossTenant-AuthSource: LV5PR12MB9779.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 May 2026 08:52:57.6295 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: OSu4hT8LNb4d3h+m0gimCWDny3x5NEPvn2aYHpU1kXuIxBCWkMn8otH2rRp0L8PG
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ1PR12MB6363
+References: <20260512-b4-mmu-unmap-fixes-v4-0-fab802f647c9@linaro.org>
+ <20260512-b4-mmu-unmap-fixes-v4-1-fab802f647c9@linaro.org>
+In-Reply-To: <20260512-b4-mmu-unmap-fixes-v4-1-fab802f647c9@linaro.org>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Wed, 13 May 2026 12:39:44 +0300
+X-Gm-Features: AVHnY4KN_XEzSts88N-W8hfTYCvZJcNLktr1OrA9noCwqAolCYEABN2s-U_ZZKg
+Message-ID: <CAC_iWjLwTAhL0iTLupqAuRNtWoaO9aP0DH9zAVi5_eWdna7nKw@mail.gmail.com>
+Subject: Re: [PATCH v4 1/4] armv8: mmu: add a function to help debug TLB
+ lookups
+To: Casey Connolly <casey.connolly@linaro.org>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
+ Anshul Dalal <anshuld@ti.com>, 
+ Dhruva Gole <d-gole@ti.com>, Mark Kettenis <kettenis@openbsd.org>, 
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Sumit Garg <sumit.garg@kernel.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -194,81 +122,113 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Casey,
 
+On Tue, 12 May 2026 at 14:13, Casey Connolly <casey.connolly@linaro.org> wrote:
+>
+> Implement a super basic software TLB walk which can look up a single
+> address in the TLB and print each stage of the translation. This is
+> helpful for debugging TLB issues and will be compiled out if unused.
+>
+> Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
+> ---
+>  arch/arm/cpu/armv8/cache_v8.c    | 49 ++++++++++++++++++++++++++++++++++++++++
+>  arch/arm/include/asm/armv8/mmu.h |  7 ++++++
+>  2 files changed, 56 insertions(+)
+>
+> diff --git a/arch/arm/cpu/armv8/cache_v8.c b/arch/arm/cpu/armv8/cache_v8.c
+> index 39479df7b21f..368c622cd18e 100644
+> --- a/arch/arm/cpu/armv8/cache_v8.c
+> +++ b/arch/arm/cpu/armv8/cache_v8.c
+> @@ -733,8 +733,57 @@ void dump_pagetable(u64 ttbr, u64 tcr)
+>                va_bits, va_bits < 39 ? 3 : 4);
+>         walk_pagetable(ttbr, tcr, pagetable_print_entry, NULL);
+>  }
+>
+> +/* Do a software pagetable walk for the given address */
+> +void tlb_debug_lookup(u64 addr)
+> +{
+> +       u64 tcr = get_tcr(NULL, NULL);
+> +       u64 va_bits = 64 - (tcr & (BIT(6) - 1));
 
-On 5/7/26 23:11, Simon Glass wrote:
-> Hi Michal,
-> 
-> On 2026-05-05T12:30:28, Michal Simek <michal.simek@amd.com> wrote:
->> reset: Add sandbox tests for reset_reset() and reset_reset_bulk()
->>
->> Add DM test coverage for the new reset_reset() and reset_reset_bulk()
->> API functions. The tests exercise the assert + deassert fallback path
->> since the sandbox reset driver does not implement the rst_reset op.
->>
->> Signed-off-by: Michal Simek <michal.simek@amd.com>
->>
->> arch/sandbox/include/asm/reset.h   |  3 ++
->>   drivers/reset/sandbox-reset-test.c | 14 ++++++++
->>   drivers/reset/sandbox-reset.c      | 31 ++++++++++++++++++
->>   test/dm/reset.c                    | 67 ++++++++++++++++++++++++++++++++++++++
->>   4 files changed, 115 insertions(+)
-> 
->> diff --git a/drivers/reset/sandbox-reset.c b/drivers/reset/sandbox-reset.c
->> @@ -66,6 +69,21 @@ static int sandbox_reset_deassert(struct reset_ctl *reset_ctl)
->>        return 0;
->>   }
->>
->> +static int sandbox_reset_reset(struct reset_ctl *reset_ctl, ulong delay_us)
->> +{
->> +     struct sandbox_reset *sbr = dev_get_priv(reset_ctl->dev);
->> +
->> +     debug("%s(reset_ctl=%p, delay_us=%lu)\n", __func__, reset_ctl,
->> +           delay_us);
->> +
->> +     sbr->signals[reset_ctl->id].asserted = true;
->> +     udelay(delay_us);
->> +     sbr->signals[reset_ctl->id].asserted = false;
->> +     sbr->signals[reset_ctl->id].reset_count++;
->> +
->> +     return 0;
->> +}
-> 
-> Reviewed-by: Simon Glass <sjg@chromium.org>
-> 
-> Some optional nits / thoughts below.
-> 
-> The commit message says the tests exercise the fallback path since the
-> sandbox reset driver doesn't have rst_reset op, this patch adds that
-> method below - so the commit message could use an update.
+Any reason you can't use va_bits from get_tcr?
 
-Will update.
+> +       u64 ttbr = gd->arch.tlb_addr, *pte;
+> +       int lshift, level = va_bits < 39 ? 1 : 0;
+> +
+> +       printf("Performing software TLB lookup of address %#010llx va_bits: %lld\n", addr, va_bits);
+> +
+> +       addr = ALIGN_DOWN(addr, 0x1000);
+> +       pte = ((u64 *)ttbr);
+> +       for (int i = level; i < 4; i++) {
+> +               int indent = (i - level + 1) * 2;
+> +               lshift = level2shift(i);
+> +               u32 idx = (addr >> lshift) & 0x1FF;
+> +               u64 _addr;
+> +
+> +               printf("%*sPTE: %#010llx. addr[%d:%d]: %#05x (offset %#07x)\n", indent, "", (u64)pte,
+> +                      lshift + 8, lshift, idx, idx * 8);
+> +               printf("%*sL%d: %#010llx -> ", indent, "", i, (u64)(&pte[idx]));
+> +
+> +               pte = &pte[idx];
+> +               _addr = *pte & GENMASK_ULL(va_bits, PAGE_SHIFT);
+> +
+> +               switch (pte_type(pte)) {
+> +               case PTE_TYPE_FAULT:
+> +                       printf("UNMAPPED!\n");
+> +                       return;
+> +               case PTE_TYPE_BLOCK:
+> +                       printf("BLOCK (%#010llx)\n", _addr);
+> +                       break;
+> +               case PTE_TYPE_TABLE: // || PTE_TYPE_PAGE
 
-> 
-> If you want coverage for the fallback you could add a second
-> sandbox-reset driver without rst_reset, or hack the rest to clear and
-> restart ops->rst_reset,
-> 
->> diff --git a/drivers/reset/sandbox-reset-test.c b/drivers/reset/sandbox-reset-test.c
->> @@ -96,6 +96,20 @@ int sandbox_reset_test_deassert_bulk(struct udevice *dev)
->> +int sandbox_reset_test_reset(struct udevice *dev)
->> +{
->> +     struct sandbox_reset_test *sbrt = dev_get_priv(dev);
->> +
->> +     return reset_reset(sbrt->ctlp, 0);
->> +}
->> +
->> +int sandbox_reset_test_reset_bulk(struct udevice *dev)
->> +{
->> +     struct sandbox_reset_test *sbrt = dev_get_priv(dev);
->> +
->> +     return reset_reset_bulk(sbrt->bulkp, 0);
->> +}
-> 
-> You could pass a non-zero value here if you want to test the delay.
+Get rid of comments with // etc
 
-udelay is called and because there is missing check for 0 value it does timer 
-reading once. Don't think that make sense to delay tests.
+> +                       if (i < 3) {
+> +                               printf("TABLE (%#010llx)\n", _addr);
+> +                               pte = (u64 *)_addr;
+> +                               continue;
+> +                       } else { // Page
+> +                               printf("PAGE (%#010llx)\n", _addr);
+> +                       }
+> +                       break;
 
-Thanks,
-Michal
+I think we should add a default here, so people can add more cases if
+they need them
+
+> +               }
+> +
+> +               // We did the lookup!
+> +               printf("%*s[%#010llx - %#010llx]\n", indent + 2, "", _addr, _addr + (1 << lshift));
+> +               return;
+> +       }
+> +}
+> +
+>  /* Returns the estimated required size of all page tables */
+>  __weak u64 get_page_table_size(void)
+>  {
+>         u64 one_pt = MAX_PTE_ENTRIES * sizeof(u64);
+> diff --git a/arch/arm/include/asm/armv8/mmu.h b/arch/arm/include/asm/armv8/mmu.h
+> index 8aa5f9721c4a..ee81619a1843 100644
+> --- a/arch/arm/include/asm/armv8/mmu.h
+> +++ b/arch/arm/include/asm/armv8/mmu.h
+> @@ -186,8 +186,15 @@ void walk_pagetable(u64 ttbr, u64 tcr, pte_walker_cb_t cb, void *priv);
+>   * @tcr: TCR value to use
+>   */
+>  void dump_pagetable(u64 ttbr, u64 tcr);
+>
+> +/**
+> + * tlb_debug_lookup() - Perform a software TLB walk printing each stage
+> + *
+> + * @addr: the address to look-up in the TLB.
+> + */
+> +void tlb_debug_lookup(u64 addr);
+> +
+>  struct mm_region {
+>         u64 virt;
+>         u64 phys;
+>         u64 size;
+>
+> --
+> 2.53.0
+>
