@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A03B9CD37B6
-	for <u-boot@archiver.kernel.org>; Wed, 13 May 2026 08:04:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24FC6CD4851
+	for <u-boot@archiver.kernel.org>; Wed, 13 May 2026 08:04:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7BF1B84690;
-	Wed, 13 May 2026 10:03:13 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B921E8341A;
+	Wed, 13 May 2026 10:03:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=mediatek.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=mediatek.com header.i=@mediatek.com header.b="KVPK4NvT";
+	dkim=pass (1024-bit key; unprotected) header.d=mediatek.com header.i=@mediatek.com header.b="RIYbNsad";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 348BA8056B; Wed, 13 May 2026 10:03:11 +0200 (CEST)
+ id 1B783846A5; Wed, 13 May 2026 10:03:14 +0200 (CEST)
 Received: from mailgw01.mediatek.com (unknown [60.244.123.138])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E1B828468E
- for <u-boot@lists.denx.de>; Wed, 13 May 2026 10:03:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DC86A8341A
+ for <u-boot@lists.denx.de>; Wed, 13 May 2026 10:03:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=mediatek.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=weijie.gao@mediatek.com
-X-UUID: 2a0861244ea211f1b5a00d44d12bea5a-20260513
+X-UUID: 2bdb21804ea211f1b5a00d44d12bea5a-20260513
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mediatek.com;
  s=dk; 
  h=Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:CC:To:From;
- bh=iIPJPFE2BhsKCHA8zJcl70mlHCYqY9D82yS/TE4x3zQ=; 
- b=KVPK4NvTzJesGr+vSa1yThz5hgBE0e4vVuN4hXO113PHfrXkOKLFyyy1JTxYf2COSXPYsi1+5UKseu3oACOCQqmOsouIw/3S8J3YPtdHkExS+i6n0GijdW1uj1MSkMRU2U33FwwVYUMLBVseuPmrX1SNHSaXPP7zhTt+msmsTL4=;
+ bh=uWTyvTZm8/mLT8qf5pdWvHKsCeVX9xndPDRCJ9XHu9A=; 
+ b=RIYbNsado+bSlVDYDH6ufPkYtVQbjJWW4r/pTa9eq3NJhxFIOZceX5rHuz1+3bRpFx3lHHLdsnkYTtbDCGhAGwHV1D5oyLOevxb1FaQWDr8O4d5AsrnVLGOY9JohjtC7ac9OFhtnlnBNMB+SrV35FzOCRT0RRs/kueAQYZPZJMw=;
 X-CID-P-RULE: Release_Ham
-X-CID-O-INFO: VERSION:1.3.14, REQID:d177f1c6-ea72-42e3-82c9-c26baa9ab555, IP:0,
+X-CID-O-INFO: VERSION:1.3.14, REQID:0efe78f9-e0fb-4df0-9ca6-2b4e744636c8, IP:0,
  U
- RL:0,TC:0,Content:-5,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTION
- :release,TS:-5
-X-CID-META: VersionHash:9091e75, CLOUDID:c318c643-11c5-46fd-96b8-8ddde212c99a,
+ RL:0,TC:0,Content:0,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTION:
+ release,TS:0
+X-CID-META: VersionHash:9091e75, CLOUDID:a4aa4dbf-65a8-4b41-ac18-3671578a914d,
  B
  ulkID:nil,BulkQuantity:0,Recheck:0,SF:81|82|102|836|865|888|898,TC:-5,Cont
  ent:0|15|50,EDM:-3,IP:nil,URL:0,File:130,RT:0,Bulk:nil,QS:nil,BEC:-1,COL:0
@@ -45,26 +45,27 @@ X-CID-BVR: 2,SSN|SDN
 X-CID-BAS: 2,SSN|SDN,0,_
 X-CID-FACTOR: TF_CID_SPAM_SNR
 X-CID-RHF: D41D8CD98F00B204E9800998ECF8427E
-X-UUID: 2a0861244ea211f1b5a00d44d12bea5a-20260513
-Received: from mtkmbs09n2.mediatek.inc [(172.21.101.94)] by
+X-UUID: 2bdb21804ea211f1b5a00d44d12bea5a-20260513
+Received: from mtkmbs14n2.mediatek.inc [(172.21.101.76)] by
  mailgw01.mediatek.com (envelope-from <weijie.gao@mediatek.com>)
  (Generic MTA with TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384 256/256)
- with ESMTP id 1456878820; Wed, 13 May 2026 16:03:02 +0800
+ with ESMTP id 610398285; Wed, 13 May 2026 16:03:05 +0800
 Received: from mtkmbs11n1.mediatek.inc (172.21.101.185) by
- mtkmbs11n2.mediatek.inc (172.21.101.187) with Microsoft SMTP Server
+ mtkmbs11n1.mediatek.inc (172.21.101.185) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.29; Wed, 13 May 2026 16:03:00 +0800
+ 15.2.2562.29; Wed, 13 May 2026 16:03:03 +0800
 Received: from mcddlt001.gcn.mediatek.inc (10.19.240.15) by
  mtkmbs11n1.mediatek.inc (172.21.101.73) with Microsoft SMTP Server id
- 15.2.2562.29 via Frontend Transport; Wed, 13 May 2026 16:03:00 +0800
+ 15.2.2562.29 via Frontend Transport; Wed, 13 May 2026 16:03:03 +0800
 From: Weijie Gao <weijie.gao@mediatek.com>
 To: <u-boot@lists.denx.de>
 CC: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, Tom Rini
  <trini@konsulko.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>, Simon
  Glass <sjg@chromium.org>, Weijie Gao <weijie.gao@mediatek.com>
-Subject: [PATCH v4 08/10] cmd: ubi: export more APIs to public
-Date: Wed, 13 May 2026 16:02:59 +0800
-Message-ID: <84adac247cd407e093dd7455138fbd794e91d933.1778657347.git.weijie.gao@mediatek.com>
+Subject: [PATCH v4 10/10] env: ubi: add support to create environment volume
+ if it does not exist
+Date: Wed, 13 May 2026 16:03:02 +0800
+Message-ID: <4139e7bef0bb12225a18e3b205dd66b77d8ce543.1778657347.git.weijie.gao@mediatek.com>
 X-Mailer: git-send-email 2.17.0
 In-Reply-To: <cover.1778657347.git.weijie.gao@mediatek.com>
 References: <cover.1778657347.git.weijie.gao@mediatek.com>
@@ -87,208 +88,159 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Export the following functions to public:
+When U-Boot is booting from a fresh device, the environment volume may not
+exist in the factory UBI image. This is a common case where factory UBI
+image contains only volumes with valid data.
 
-- ubi_detach(): this is paired with ubi_part(). One may call this function
-  to completely clean up the ubi subsystem after using ubi_part().
+With the current design, even if the volume is created manually, the
+environment will still be unusable (e.g., saveenv) before a reboot.
 
-- ubi_{create,find,remove}_vol: this is a set of functions for volume
-  management.
+This patch adds support to automatically create missing volumes before
+loading environment. This will make environment available at first boot.
 
-The original ubi_create_vol is renamed to __ubi_create_vol to allow the new
-ubi_create_vol() being used as a wrapper for __ubi_create_vol() with volume
-name.
-
-Also, comments are added for all exported functions.
+There are two options:
+CONFIG_ENV_UBI_VOLUME_CREATE: whether to enable volume creation
+CONFIG_ENV_UBI_VOLUME_STATIC: create static volume (default is dynamic)
 
 Signed-off-by: Weijie Gao <weijie.gao@mediatek.com>
 ---
-v4: squashed api function comments into this patch.
-    make ubi_remove_vol() as a wrapper of __ubi_remove_vol() due to changes
-     of previous patch.
-v3: updated commit message
-v2: not changed
+v4: Add option to control whether to create static volume
+    Read environment volume only when it exists or has been created.
+v3: fix error handling and default env setting
+v2: updated kconfig help text
+    added error output when failed to create volume
 ---
- cmd/ubi.c           | 23 +++++++++---
- include/ubi_uboot.h | 91 +++++++++++++++++++++++++++++++++++++++++++++
- 2 files changed, 108 insertions(+), 6 deletions(-)
+ env/Kconfig | 20 +++++++++++++++++
+ env/ubi.c   | 65 ++++++++++++++++++++++++++++++++++++++++++++---------
+ 2 files changed, 74 insertions(+), 11 deletions(-)
 
-diff --git a/cmd/ubi.c b/cmd/ubi.c
-index b0b513cfe53..9b2b66b5a99 100644
---- a/cmd/ubi.c
-+++ b/cmd/ubi.c
-@@ -213,8 +213,8 @@ bad:
- 	return err;
+diff --git a/env/Kconfig b/env/Kconfig
+index 7abd82ab6f3..9ec3e090481 100644
+--- a/env/Kconfig
++++ b/env/Kconfig
+@@ -716,6 +716,26 @@ config ENV_UBI_VOLUME_REDUND
+ 	help
+ 	  Name of the redundant volume that you want to store the environment in.
+ 
++config ENV_UBI_VOLUME_CREATE
++	bool "Create UBI volume if it does not exist"
++	depends on ENV_IS_IN_UBI
++	help
++	  This option is useful if U-Boot will be booted from a fresh device
++	  where the environment volume has not been created.
++	  This is a common case where factory UBI image contains only volumes
++	  with valid data.
++	  By enabling this option, any missing environment volumes will be
++	  created before loading.
++	  If CONFIG_ENV_UBI_VOLUME_REDUND is also enabled, both volumes will be
++	  created,
++
++config ENV_UBI_VOLUME_STATIC
++	bool "Create static UBI volume"
++	depends on ENV_UBI_VOLUME_CREATE
++	help
++	  By default environment volume will be dynamic.
++	  Enable this option to create static volume.
++
+ config ENV_UBI_VID_OFFSET
+ 	int "ubi environment VID offset"
+ 	depends on ENV_IS_IN_UBI
+diff --git a/env/ubi.c b/env/ubi.c
+index 46970ba754f..810faaf7744 100644
+--- a/env/ubi.c
++++ b/env/ubi.c
+@@ -103,12 +103,30 @@ static int env_ubi_save(void)
  }
+ #endif /* CONFIG_ENV_REDUNDANT */
  
--static int ubi_create_vol(const char *volume, int64_t size, bool dynamic,
--			  int vol_id, bool skipcheck)
-+int ubi_create_vol(const char *volume, int64_t size, bool dynamic, int vol_id,
-+		   bool skipcheck)
- {
- 	struct ubi_mkvol_req req;
- 	int err;
-@@ -246,7 +246,7 @@ static int ubi_create_vol(const char *volume, int64_t size, bool dynamic,
- 	return ubi_create_volume(ubi, &req);
- }
- 
--static struct ubi_volume *ubi_find_volume(const char *volume)
-+struct ubi_volume *ubi_find_volume(const char *volume)
- {
- 	struct ubi_volume *vol;
- 	int i;
-@@ -270,7 +270,7 @@ static struct ubi_volume *ubi_require_volume(const char *volume)
- 	return vol;
- }
- 
--static int ubi_remove_vol(struct ubi_volume *vol)
-+static int __ubi_remove_vol(struct ubi_volume *vol)
- {
- 	int err, reserved_pebs, i;
- 
-@@ -315,6 +315,17 @@ out_err:
- 	return err;
- }
- 
-+int ubi_remove_vol(const char *volume)
++static int env_ubi_volume_create(const char *volume)
 +{
++	bool dynamic = !IS_ENABLED(CONFIG_ENV_UBI_VOLUME_STATIC);
 +	struct ubi_volume *vol;
++	int ret;
 +
-+	vol = ubi_require_volume(volume);
-+	if (!vol)
-+		return -ENODEV;
++	vol = ubi_find_volume(volume);
++	if (vol)
++		return 0;
 +
-+	return __ubi_remove_vol(vol);
++	ret = ubi_create_vol(volume, CONFIG_ENV_SIZE, dynamic, UBI_VOL_NUM_AUTO,
++			     false);
++	if (ret)
++		printf("Failed to create environment volume '%s'\n", volume);
++
++	return ret;
 +}
 +
- static int ubi_rename_vol(const char *oldname, const char *newname)
+ #ifdef CONFIG_ENV_REDUNDANT
+ static int env_ubi_load(void)
  {
- 	struct ubi_volume *vol;
-@@ -632,7 +643,7 @@ static int ubi_set_skip_check(const char *volume, bool skip_check)
- 	return ubi_change_vtbl_record(ubi, vol->vol_id, &vtbl_rec);
- }
+ 	ALLOC_CACHE_ALIGN_BUFFER(char, env1_buf, CONFIG_ENV_SIZE);
+ 	ALLOC_CACHE_ALIGN_BUFFER(char, env2_buf, CONFIG_ENV_SIZE);
+-	int read1_fail, read2_fail;
++	int read1_fail, read2_fail, create1_fail = 0, create2_fail = 0;
+ 	env_t *tmp_env1, *tmp_env2;
  
--static int ubi_detach(void)
-+int ubi_detach(void)
- {
- #ifdef CONFIG_CMD_UBIFS
  	/*
-@@ -830,7 +841,7 @@ static int do_ubi(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+@@ -132,17 +150,35 @@ static int env_ubi_load(void)
+ 		return -EIO;
+ 	}
  
- 			vol_id = vol->vol_id;
+-	read1_fail = ubi_volume_read(CONFIG_ENV_UBI_VOLUME, tmp_env1, 0,
+-				     CONFIG_ENV_SIZE);
+-	if (read1_fail)
+-		printf("\n** Unable to read env from %s:%s **\n",
+-		       CONFIG_ENV_UBI_PART, CONFIG_ENV_UBI_VOLUME);
++	if (IS_ENABLED(CONFIG_ENV_UBI_VOLUME_CREATE)) {
++		create1_fail = env_ubi_volume_create(CONFIG_ENV_UBI_VOLUME);
++		create2_fail = env_ubi_volume_create(CONFIG_ENV_UBI_VOLUME_REDUND);
++		if (create1_fail && create2_fail) {
++			env_set_default(NULL, 0);
++			return -ENODEV;
++		}
++	}
  
--			ret = ubi_remove_vol(vol);
-+			ret = __ubi_remove_vol(vol);
- 			if (ret)
- 				return CMD_RET_FAILURE;
+-	read2_fail = ubi_volume_read(CONFIG_ENV_UBI_VOLUME_REDUND,
+-				     tmp_env2, 0, CONFIG_ENV_SIZE);
+-	if (read2_fail)
+-		printf("\n** Unable to read redundant env from %s:%s **\n",
+-		       CONFIG_ENV_UBI_PART, CONFIG_ENV_UBI_VOLUME_REDUND);
++	if (!create1_fail) {
++		read1_fail = ubi_volume_read(CONFIG_ENV_UBI_VOLUME, tmp_env1, 0,
++					     CONFIG_ENV_SIZE);
++		if (read1_fail)
++			printf("\n** Unable to read env from %s:%s **\n",
++			       CONFIG_ENV_UBI_PART, CONFIG_ENV_UBI_VOLUME);
++	} else {
++		read1_fail = create1_fail;
++	}
++
++	if (!create2_fail) {
++		read2_fail = ubi_volume_read(CONFIG_ENV_UBI_VOLUME_REDUND,
++					     tmp_env2, 0, CONFIG_ENV_SIZE);
++		if (read2_fail)
++			printf("\n** Unable to read redundant env from %s:%s **\n",
++			       CONFIG_ENV_UBI_PART,
++			       CONFIG_ENV_UBI_VOLUME_REDUND);
++	} else {
++		read2_fail = create2_fail;
++	}
  
-diff --git a/include/ubi_uboot.h b/include/ubi_uboot.h
-index 6ebd8a3b613..c337b760e96 100644
---- a/include/ubi_uboot.h
-+++ b/include/ubi_uboot.h
-@@ -47,11 +47,102 @@
- int ubi_mtd_param_parse(const char *val, struct kernel_param *kp);
- int ubi_init(void);
- void ubi_exit(void);
-+
-+/**
-+ * ubi_detach() - detach UBI from MTD partition
-+ *
-+ * This function performs the cleanup of the UBI subsystem to make sure the
-+ * MTD partition can be safely used for another purpose, or be attached again
-+ * with ubi_part().
-+ *
-+ * Any mounted UBIFS will be unmounted automatically.
-+ *
-+ * Return: 0
-+ */
-+int ubi_detach(void);
-+
-+/**
-+ * ubi_part() - attach UBI to MTD partition
-+ * @part_name: name of the MTD partition to attach
-+ * @vid_header_offset: VID header offset (string)
-+ *
-+ * This function detaches any existing UBI device, then probes for the
-+ * specified MTD partition, and then scans it to initialize UBI.
-+ *
-+ * @vid_header_offset is optional and is usually set to NULL.
-+ *
-+ * Return: 0 on success, 1 if partition not found, or -ve on error.
-+ */
- int ubi_part(const char *part_name, const char *vid_header_offset);
-+
-+/**
-+ * ubi_volume_write() - write data to UBI volume
-+ * @volume: name of the volume to write to
-+ * @buf: data buffer to be written
-+ * @offset: start offset for writing
-+ * @size: number of bytes to write
-+ *
-+ * This function writes data to the specific UBI volume. If the offset is zero,
-+ * it initiates a full volume update. Otherwise, it performs an offset-based
-+ * write using LEB changes.
-+ *
-+ * Return: 0 on success, or -ve on error.
-+ */
- int ubi_volume_write(const char *volume, const void *buf, loff_t offset,
- 		     size_t size);
-+
-+/**
-+ * ubi_volume_read() - read data from UBI volume
-+ * @volume: name of the volume to read from
-+ * @buf: buffer to hold the read data
-+ * @offset: start offset for reading
-+ * @size: number of bytes to read
-+ *
-+ * This function reads data from the specified UBI volume. If @size is zero,
-+ * the function reads the entire volume content starting from @offset.
-+ *
-+ * Return: 0 on success, or -ve on error.
-+ */
- int ubi_volume_read(const char *volume, void *buf, loff_t offset, size_t size);
+ 	return env_import_redund((char *)tmp_env1, read1_fail, (char *)tmp_env2,
+ 				 read2_fail, H_EXTERNAL);
+@@ -169,6 +205,13 @@ static int env_ubi_load(void)
+ 		return -EIO;
+ 	}
  
-+/**
-+ * ubi_create_vol() - create UBI volume
-+ * @volume: name of the volume to create
-+ * @size: size of the volume in bytes
-+ * @dynamic: create dynamic volume if set to true
-+ * @vol_id: volume ID
-+ * @skipcheck: skip CRC check on this volume if set to true
-+ *
-+ * This function creates a new UBI volume with the specified parameters.
-+ * If @size is negative, all available space will be used.
-+ * For volume ID auto assignment, pass %UBI_VOL_NUM_AUTO to @vol_id.
-+ *
-+ * Return: 0 on success, or -ve on error.
-+ */
-+int ubi_create_vol(const char *volume, int64_t size, bool dynamic, int vol_id,
-+		   bool skipcheck);
++	if (IS_ENABLED(CONFIG_ENV_UBI_VOLUME_CREATE)) {
++		if (env_ubi_volume_create(CONFIG_ENV_UBI_VOLUME)) {
++			env_set_default(NULL, 0);
++			return -ENODEV;
++		}
++	}
 +
-+/**
-+ * ubi_find_volume() - find UBI volume by name
-+ * @volume: name of the volume to find
-+ *
-+ * This function searches for a UBI volume with the specified name in the
-+ * current UBI device.
-+ *
-+ * Return: pointer to the UBI volume structure, or %NULL if not found.
-+ */
-+struct ubi_volume *ubi_find_volume(const char *volume);
-+
-+/**
-+ * ubi_remove_vol() - remove UBI volume
-+ * @volume: name of the volume to remove
-+ *
-+ * This function removes an existing UBI volume from the current UBI device.
-+ *
-+ * Return: 0 on success, or -ve on error.
-+ */
-+int ubi_remove_vol(const char *volume);
-+
- extern struct ubi_device *ubi_devices[];
- int cmd_ubifs_mount(const char *vol_name);
- int cmd_ubifs_umount(void);
+ 	if (ubi_volume_read(CONFIG_ENV_UBI_VOLUME, buf, 0, CONFIG_ENV_SIZE)) {
+ 		printf("\n** Unable to read env from %s:%s **\n",
+ 		       CONFIG_ENV_UBI_PART, CONFIG_ENV_UBI_VOLUME);
 -- 
 2.45.2
 
