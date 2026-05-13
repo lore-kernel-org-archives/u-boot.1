@@ -4,117 +4,122 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0C29CD4F21
-	for <u-boot@archiver.kernel.org>; Wed, 13 May 2026 13:34:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85DC0CD4F21
+	for <u-boot@archiver.kernel.org>; Wed, 13 May 2026 13:50:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1DF37836AC;
-	Wed, 13 May 2026 15:34:20 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id E3F2C836AC;
+	Wed, 13 May 2026 15:50:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="OXncI7wR";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="O4HuoTNz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 22A2C83E36; Wed, 13 May 2026 15:34:18 +0200 (CEST)
-Received: from CH1PR05CU001.outbound.protection.outlook.com
- (mail-northcentralusazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c105::1])
+ id DFE3184099; Wed, 13 May 2026 15:50:05 +0200 (CEST)
+Received: from DM1PR04CU001.outbound.protection.outlook.com
+ (mail-centralusazlp170100005.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c111::5])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8CE638341A
- for <u-boot@lists.denx.de>; Wed, 13 May 2026 15:34:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AD40C8341A
+ for <u-boot@lists.denx.de>; Wed, 13 May 2026 15:50:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=Pranav.VinayTilak@amd.com
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=uuUn7GFT75U2DcxGx3ooWLQukMRAmoz5xL6Zlr2wv6xfAFr6fmLjvhUv6o5lQ/SXfvPB/GeDWFpWwam8//A5z07L7+v7ylyXT9gDERg+TDBP1FOSpR8d2dh/SDSH0oNJ1yHSaKWZTAgQ2UbTYZMuMWiQ711/2ixFMyNts4wjUaXDPhEQe8M4U9jiFdtJaxSKyKqagXUhg9C/c7cgXeGsEwWmt+MkV5PABUrwhm7TcScMUVi2gf1Czx48hAQU6vg6ZRCU+JEi0Cj2ASqnKT+Yp2wkeGiibwJ1Wv1nanw5AoLfo39o5yXOYRPWmpCVNND4d5KuNMNqr4WjjG7oOOmuww==
+ b=d9wxekwD3pXMXoM9nY7qnUO13xMBEU8jF/rDTto+wKQf6KH3u/kamYCSjqUDwKiv2/k4soLwzIMZFkbzsuMJewmfxvwcUtbeK5aDklbvQrh+TQl2uXEeqgvLbk79qT7wAjIevVdy2GEmzsKz9lzi3+leA6XKQjAt8ZCaHm8B15vzZf4+WzyxiNHyHJpdVJFVnrtal95YsFzr7JX9GYsyEFVWwcyQ2y0NHoA10jMe7ca81GAe5RNPE3ZiL98xDS3H+5MPPr9mYVagHMgKZW7JO4lcqm9Y2EGzEs5rozU6p1F7GMrsIiaUOauNItt0t+YAuznI9YeNDKx2s2SLX2FqNg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=G2FmOZyFSmya7lU/1YdezEqfcNrG3Js3xLfW8pzd700=;
- b=kJzHNAJQycpTzb64WOfntbRH9jttoREEVIt/Sits/YI4I4Yfh5FuqO8kf5zcpIl3oQ2Wi7MQXlpX6MKHjoBRg/YP3r5IOhW2jANjdoD2/whHB8fcTQT3+QwPkQTidZ/uwHZdJf0wUC02l/erbgDhUh6Ie/1Qr4npsK5CG0IcY++iNI3TLq8I4pP/MPmgxdGk947aCwk6fLuKjSDxLTM+K8tUGMEhseCtqsut6Lqzhrc5FACYQ124vJBsBxavm/SDw01MJf+cbm7/UWxhZrMNiblULRQ+huZyq6yRds2teH3ZX/TrRQsdtAnWMNmv1qWHum31sSE+9CueCv9DRFgIBg==
+ bh=J9smQbY8R9x8zdIQD/MLWyMHamZWO8LGkDerctyNNUA=;
+ b=tYrsKFBley9phMYzSNgjpIqw971Rg/H4xUFjJ0QBGacBbRjrCybkauOozkKpYBHiKWZTtNzfmiOJj+Mj1CzRm95EBt3HAhzI6PhuzNy6lvcx/P6YDt3UypXWOkqzMC5yoq2ftZPVTOhTKprWEkkHw9QvyK4+C5Dg5fWcew8YePAUExaKkpJb93vs5flZaM3nxh5F8JhUdnfPqh8WLFYw+TK7we7vXSZg1aKe8wcT1YFYhi2d7QoVV98KTx24B4FFgHxEWEjwlzn9YUCd/4Gc8EDgmkXGikG1396Oqq9reDuB81s10LK4qct8A3f1wikEcOVWZFA/+ml/jOchj7zMkA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ 198.47.21.194) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
+ dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=G2FmOZyFSmya7lU/1YdezEqfcNrG3Js3xLfW8pzd700=;
- b=OXncI7wR1qHb3GzIdFGwJ/vykDU8qvrBCvDBbtIi7sktLeyYRWHCF/rhxvvdckNLEmI45H+Hse5j0fHSCEdb7+2BcmXqXf/2d5a9SID18wEGpdxlHCXuGmdLTronM+ge6tb19r/0lpgDWyuGdiDd3yX+D6Va3Wq9K12opzpFgmE=
-Received: from SA1PR04CA0024.namprd04.prod.outlook.com (2603:10b6:806:2ce::28)
- by SA5PPF5D41D38AD.namprd12.prod.outlook.com
- (2603:10b6:80f:fc04::8cb) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9891.21; Wed, 13 May
- 2026 13:34:06 +0000
-Received: from SA2PEPF00003AE9.namprd02.prod.outlook.com
- (2603:10b6:806:2ce:cafe::2b) by SA1PR04CA0024.outlook.office365.com
- (2603:10b6:806:2ce::28) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9913.12 via Frontend Transport; Wed,
- 13 May 2026 13:34:06 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
-Received: from satlexmb08.amd.com (165.204.84.17) by
- SA2PEPF00003AE9.mail.protection.outlook.com (10.167.248.9) with Microsoft
+ bh=J9smQbY8R9x8zdIQD/MLWyMHamZWO8LGkDerctyNNUA=;
+ b=O4HuoTNz5vFhGRbi/HwV3LTB08IPfCSgZqhz6WWicQCVoDG45xN+TM/a11MuLwJcZKzgOjd9XjgiJDU7eGdHrCXsiHyohoNdOrkUXBYOrd09HkCeOugR9Ij0wypcl1L+JEOEBJ7wsYhMZwzGgIyVuDl3PtPpuyHGnowq0XAkFJc=
+Received: from BN9PR03CA0511.namprd03.prod.outlook.com (2603:10b6:408:131::6)
+ by BL3PR10MB6020.namprd10.prod.outlook.com (2603:10b6:208:3b3::9)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9891.20; Wed, 13 May
+ 2026 13:49:57 +0000
+Received: from BN1PEPF00004688.namprd05.prod.outlook.com
+ (2603:10b6:408:131:cafe::b1) by BN9PR03CA0511.outlook.office365.com
+ (2603:10b6:408:131::6) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9913.11 via Frontend Transport; Wed,
+ 13 May 2026 13:49:57 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.194)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.21.194 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.21.194; helo=flwvzet200.ext.ti.com; pr=C
+Received: from flwvzet200.ext.ti.com (198.47.21.194) by
+ BN1PEPF00004688.mail.protection.outlook.com (10.167.243.133) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.25.13 via Frontend Transport; Wed, 13 May 2026 13:34:06 +0000
-Received: from satlexmb10.amd.com (10.181.42.219) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.41; Wed, 13 May
- 2026 08:34:00 -0500
-Received: from satlexmb07.amd.com (10.181.42.216) by satlexmb10.amd.com
- (10.181.42.219) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.41; Wed, 13 May
- 2026 08:34:00 -0500
-Received: from xhdkummari40.xilinx.com (10.180.168.240) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.41 via Frontend
- Transport; Wed, 13 May 2026 08:33:56 -0500
-From: Pranav Tilak <pranav.vinaytilak@amd.com>
-To: <u-boot@lists.denx.de>, <michal.simek@amd.com>
-CC: <git@amd.com>, <padmarao.begari@amd.com>, Pranav Tilak
- <pranav.vinaytilak@amd.com>, Jerome Forissier <jerome.forissier@arm.com>, Tom
- Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>, Patrice Chotard
- <patrice.chotard@foss.st.com>, Lucien.Jheng <lucienzx159@gmail.com>,
- Siddharth Vadapalli <s-vadapalli@ti.com>, SkyLake.Huang
- <skylake.huang@mediatek.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Ramon Fried <rfried.dev@gmail.com>
-Subject: [PATCH v5] net: phy: fix duplicate eth_phy binding
-Date: Wed, 13 May 2026 19:03:06 +0530
-Message-ID: <20260513133344.1288865-1-pranav.vinaytilak@amd.com>
-X-Mailer: git-send-email 2.34.1
+ 15.21.25.13 via Frontend Transport; Wed, 13 May 2026 13:49:56 +0000
+Received: from DFLE214.ent.ti.com (10.64.6.72) by flwvzet200.ext.ti.com
+ (10.248.192.31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Wed, 13 May
+ 2026 08:49:32 -0500
+Received: from DFLE211.ent.ti.com (10.64.6.69) by DFLE214.ent.ti.com
+ (10.64.6.72) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Wed, 13 May
+ 2026 08:49:32 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE211.ent.ti.com
+ (10.64.6.69) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37 via Frontend
+ Transport; Wed, 13 May 2026 08:49:32 -0500
+Received: from [10.249.42.149] ([10.249.42.149])
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 64DDnWHY4165279;
+ Wed, 13 May 2026 08:49:32 -0500
+Message-ID: <b42fe4a0-a0f3-4773-be29-ac881c750799@ti.com>
+Date: Wed, 13 May 2026 08:49:31 -0500
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] arm: k3: Kconfig: Enable fTPM and RPMB support
+To: Shiva Tripathi <s-tripathi1@ti.com>, Ernest Van Hoecke
+ <ernestvanhoecke@gmail.com>
+CC: <trini@konsulko.com>, <vigneshr@ti.com>, <bb@ti.com>,
+ <u-boot@lists.denx.de>, <u-kumar1@ti.com>, <praneeth@ti.com>,
+ <kamlesh@ti.com>, <vishalm@ti.com>, <k-malarvizhi@ti.com>, <anshuld@ti.com>
+References: <20260225112438.1035185-1-s-tripathi1@ti.com>
+ <momeoh6chz4swvgj3oj36p57os2cejpbcx37qyc7f3pydvwdlt@gaucmqmtpjso>
+ <677d1d7c-8276-44f2-b563-d2b0d0a263ea@ti.com>
+Content-Language: en-US
+From: Andrew Davis <afd@ti.com>
+In-Reply-To: <677d1d7c-8276-44f2-b563-d2b0d0a263ea@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SA2PEPF00003AE9:EE_|SA5PPF5D41D38AD:EE_
-X-MS-Office365-Filtering-Correlation-Id: cf6b3cb8-17a6-4e0b-86ac-08deb0f44e2a
+X-MS-TrafficTypeDiagnostic: BN1PEPF00004688:EE_|BL3PR10MB6020:EE_
+X-MS-Office365-Filtering-Correlation-Id: 587b7fd7-4376-48f9-12e2-08deb0f68468
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|7416014|36860700016|82310400026|376014|1800799024|18002099003|56012099003|11063799003;
-X-Microsoft-Antispam-Message-Info: Ba++iCgnhoTn0M3Pg79286m+ACYhaggaeM6EMR73icioglew3bJ7P+mN+Fh1Zp8o5xqUSljv+esa+6wJPAOInh7Mh5yWNo3rr1HlrIIEkwe7rtP6Q5tM+5cUHRKfPYOej5DwsSVI+sRTWa+W+hxxqSYpcuZa41VySeKKkOZxF0msC3Ld3BMxUpwJ4fSP7a0swNcy5LLjfzT+mgj0BjtRy/5nPdRbLmnscFuIIU5I8QBEv8Knijh5T6PpVF8r17jhSIqiVvIQ3RNb7eCzNKYQHHQ1HQwxtgMS1+mJZ490eebOfI6+G1wAad2EwMZjZRGLtVVJnr+Bfu844JAKfPpomD/NyzAM0Tf/jl6aGzzMgQCH3QDZISkItQRByjVr+b5AsX5hPMy4P1TTszc/dQ/trT1J42tWxFSRXXrjKSMR6EBXf0BcFNQZqtsvIkhe72u4U+vU4C/oJu8RluOy1JpIT2ohRlQmur8l+Fi1dOhLP/EOj9noLSYCDnesw0lBwnEC03VWDlMFQXmidEog4MpuNaaHamJcKp9Z5YixPxF6WSz2RaIilm3qky1UOjK8eBdG9xL2jeHvOqo3d0YASG4ACBPT5JIJZMz5ZbNp1r0n6vMZCT3jlMyuYSm3uZQe9V3FCE8yL+VVIYaFzmJPWM3xQzjqWo5kA7LSUXzY8/IcQdmGOpUdgWbwlTkkYYqOVF6C+Udc6A5wNhbTCw/BMxhty5LTjnlzluwfg5dpUHwGK3w=
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:satlexmb08.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(7416014)(36860700016)(82310400026)(376014)(1800799024)(18002099003)(56012099003)(11063799003);
+ ARA:13230040|1800799024|376014|36860700016|82310400026|18002099003|22082099003|56012099003|3023799003;
+X-Microsoft-Antispam-Message-Info: EOwj9Mq0Nk+W4ACDFKpduT0NCCHJTr2sra6w36dn8eeeCRdqhMKYImuSO8QPB5WVEykrkvENJGFexaClurHHMlgEb/vCA0e2rwafc7grM8oNJAcixkyk8BDQG7FSQbAzsqaMNYpB58nl5cbFa3cQazSs8s5usGRCO73Z2BviaE9oypCYrTc8EplzvdTuoulILYwABBay0ONz+9Fyc+6Ha1Vh2jzIbVDgy1Hau+rf7imVGkebJc8pLSwZfebMdQepWmu3fCJCZkUS92hQZbxwEHLghHhsdNYPfcZ9OjD9MvZwUW4ww1BHlI7p9BFQcZyyQNdx/FRjLgbSZMKA323vfm2u+bYlUJ6c0L1lOSIpBUYZXZ0UqZgSUmYMi6voAGr6cWZc/n8cSA/AmY/Y+HzrLWrcKpdOMUyjrYJUrsFTs64oppiZXJWhDuSPdhSf4/b4d2waytJ9nU3oyhG1E8ptaki0631i/NCzYj6LQbyXXJvzludrA9OJfTyljCvd0jqms/0dewB92cuVJ9ZTmaOKnRmSyuj77xMPB03pMyYE6iULyuvWJFFFaZzthv7HSvkFUG7a1QKCvIL5KBPY+ZNay0jIMKmwfOgY8cTVD/GtketCm65mfj8ILgxLSJJDKet1OFCe9tuArwQ6s++7DUsqo8I7WuYNSF6kcr3/X3bteuDb9Tb9wAu3o111tWltYDIQc311YcsvlNR63+c8+Pn5Q3kjWzLsRxDi1tyj01vFJ5I=
+X-Forefront-Antispam-Report: CIP:198.47.21.194; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:flwvzet200.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
+ SFS:(13230040)(1800799024)(376014)(36860700016)(82310400026)(18002099003)(22082099003)(56012099003)(3023799003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 9cIqDdeMRtSOYJ+iAFa7OYbRnMSLIgt457xcmtLE68+7f9GlWifv444aMChvNcG66iEUnhg+VQjf32hBw1wOFcAj/5DCYRR12S9/sLGsKkVIX2j1GzQk4bw3IOUW+DUbSr7xASfmiHra0BiLe2u2u8A/Qw2sl6C7mml9UCCRb7eD+am6hoAH8bVAwHW+mr1WfAY4KVRalgZpmlkLFrj+7P966m0kLJOnC40eRBUd83GDSBhkV/SeAFzI55kIE8puhDDJCuWYwXP10/VZGCvxJq0E6dTYo4q2sOwnJaTx0cmtPknqqyh4pXzqrapmGjCLZA24qm1RPQpSNCl0cQ5EeU2KwfLX6Vp48urrEmPgjooOYn66IkELcxp1FB85OMSa5V7r0wuOq5EjmpyrTTE5FegiSdRY5GHtrKT8cGU9xAcouSywRpKt+5esgHB03Qi6
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 May 2026 13:34:06.2702 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: cf6b3cb8-17a6-4e0b-86ac-08deb0f44e2a
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[satlexmb08.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: SA2PEPF00003AE9.namprd02.prod.outlook.com
+X-MS-Exchange-AntiSpam-MessageData-0: tyl3fKvonDG7pxDZpgZlo9qiVxEysR04m828V17RYpMGdymSpRFneEIdzKDDd+PBjeJTrfaWRgEE522VWl907oaru3tSLRKhvO+dDhF0rAxGvlW9eg3HICSb2ZZIl04zf5h13CC+l69JwHHsu9kscf1SqPdYET4X3mWJ+FOmH/Afda75f5A0ZSk/HR6Z2aY+BGepM9i/6hmtzr7PSCMwiRRPPD9l34P7aiYd964SBQ5I+DIhiuYyTEOUqpd+uxDVVcqExMWjrb7IMuqfDabFwUcjcJ7IONm8PaXihR2H6Bz9vGWkyu45BRMMIREtJoXIaXXY8l8Qx4YP1EIjekhrdGUGV7rtDYfzodIzVu2Ynmh9m24KPBfAbtQM0yFJAThIxJxrE+XoJqZFmuaktFXxVB1Yd6vfhwrVwHwtrb4S4k58dditfy5sM1+G16jB7IzQ
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 May 2026 13:49:56.1899 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 587b7fd7-4376-48f9-12e2-08deb0f68468
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.194];
+ Helo=[flwvzet200.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: BN1PEPF00004688.namprd05.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA5PPF5D41D38AD
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL3PR10MB6020
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -131,80 +136,135 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When both CONFIG_PHY_ETHERNET_ID and CONFIG_DM_ETH_PHY are enabled,
-eth_phy_binds_nodes() called from eth_post_bind() already binds the
-ethernet PHY node to eth_phy_generic_drv. However, phy_connect_phy_id()
-called via phy_connect() also binds the same PHY node, resulting in
-duplicate entries in the DM tree.
+On 5/13/26 8:06 AM, Shiva Tripathi wrote:
+> 
+> 
+> On 5/12/26 22:14, Ernest Van Hoecke wrote:
+>> On Wed, Feb 25, 2026 at 04:54:38PM +0530, Shiva Tripathi wrote:
+>>> Enable firmware TPM (fTPM) support via OP-TEE for K3 platforms with
+>>> MMC hardware. This provides TPM 2.0 functionality through
+>>> Microsoft's fTPM Trusted Application running in OP-TEE secure world,
+>>> using eMMC RPMB as persistent storage.
+>>>
+>>> fTPM support in U-Boot provides the foundation for measured boot
+>>> and disk encryption use cases.
+>>>
+>>> The ARM64 condition ensures these apply only to A53/A72 cores and the
+>>> MMC condition ensures fTPM is enabled only on platforms with eMMC
+>>> hardware support.
+>>>
+>>> Signed-off-by: Shiva Tripathi <s-tripathi1@ti.com>
+>>> ---
+>>> Changes in v2:
+>>> - Moved fTPM enablement from per-board defconfig files to common Kconfig
+>>> - Added configs to ARCH_K3 (arch/arm/Kconfig) to enable for all K3 platforms
+>>> - Added command configs to TI_COMMON_CMD_OPTIONS (board/ti/common/Kconfig)
+>>> - Added MMC dependency to address concern about boards without eMMC hardware
+>>> - Link to v1: https://lore.kernel.org/all/20260223091314.586968-1-s-tripathi1@ti.com/
+>>>
+>>> ---
+>>>   arch/arm/Kconfig        | 3 +++
+>>>   board/ti/common/Kconfig | 2 ++
+>>>   2 files changed, 5 insertions(+)
+>>>
+>>> diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
+>>> index 5508fce796a..eb83b5c35f1 100644
+>>> --- a/arch/arm/Kconfig
+>>> +++ b/arch/arm/Kconfig
+>>> @@ -834,6 +834,9 @@ config ARCH_K3
+>>>   	imply DM_RNG if ARM64
+>>>   	imply TEE if ARM64
+>>>   	imply OPTEE if ARM64
+>>> +	imply TPM if ARM64 && MMC
+>>> +	imply TPM2_FTPM_TEE if ARM64 && MMC
+>>> +	imply SUPPORT_EMMC_RPMB if ARM64 && MMC
+>>>   
+>>>   config ARCH_OMAP2PLUS
+>>>   	bool "TI OMAP2+"
+>>> diff --git a/board/ti/common/Kconfig b/board/ti/common/Kconfig
+>>> index 409454813f3..149909093b3 100644
+>>> --- a/board/ti/common/Kconfig
+>>> +++ b/board/ti/common/Kconfig
+>>> @@ -61,4 +61,6 @@ config TI_COMMON_CMD_OPTIONS
+>>>   	imply CMD_SPL
+>>>   	imply CMD_TIME
+>>>   	imply CMD_USB if USB
+>>> +	imply CMD_TPM if TPM
+>>> +	imply CMD_OPTEE_RPMB if OPTEE && SUPPORT_EMMC_RPMB
+>>>   
+>>> -- 
+>>> 2.34.1
+>>>
+>>
+>> Hi Shiva,
+>>
+>> Do these changes mean you expect any K3-based board to follow by
+>> building OP-TEE with RPMB support (and in production provisioning an
+>> authentication key on first boot) now?
+>>
+>> I'm asking because we noticed errors in the below form appeared during
+>> boot of our Verdin AM62P and Aquila AM69 now:
+>> E/LD:  Status of TA bc50d971-d4c9-42c4-82cb-343fb7f37896
+>> E/LD:   arch: aarch64
+>> E/LD:  region  0: va 0x40005000 pa 0x9e900000 size 0x002000 flags rw-s (ldelf)
+>> E/LD:  region  1: va 0x40007000 pa 0x9e902000 size 0x008000 flags r-xs (ldelf)
+>> E/LD:  region  2: va 0x4000f000 pa 0x9e90a000 size 0x001000 flags rw-s (ldelf)
+>> E/LD:  region  3: va 0x40010000 pa 0x9e90b000 size 0x004000 flags rw-s (ldelf)
+>> E/LD:  region  4: va 0x40014000 pa 0x9e90f000 size 0x001000 flags r--s
+>> E/LD:  region  5: va 0x40015000 pa 0x9e980000 size 0x011000 flags rw-s (stack)
+>> E/LD:  region  6: va 0x4005a000 pa 0x9e910000 size 0x055000 flags r-xs [0]
+>> E/LD:  region  7: va 0x400af000 pa 0x9e965000 size 0x01b000 flags rw-s [0]
+>> E/LD:   [0] bc50d971-d4c9-42c4-82cb-343fb7f37896 @ 0x4005a000
+>> E/LD:  Call stack:
+>> E/LD:   0x4005b7b0
+>> E/LD:   0x4008f220
+>> E/LD:   0x40083298
+>>
+>> Interestingly this did not appear on our Verdin AM62 SoM.
+>>
+>> Of course, we can simply disable the fTPM until our support improves, or
+>> ignore this error if it is harmless, but I wanted to ask about your
+>> intentions before digging much deeper.
+>>
+>> Thanks!
+>>
+>> Kind regards,
+>> Ernest
+> 
+> Hi Ernest,
+> 
+> It's not expected for all K3-platforms to build OP-TEE with RPMB
+> support, some platforms lack eMMC entirely. fTPM is an optional
+> configuration for users who need measured boot, disk encryption, or
+> similar TPM related use-cases.
+> 
+> The Yocto SDK we release for K3 platforms includes the fTPM TA embedded
+> in the OP-TEE, not sure if the same is true in your case.
+> 
+> RPMB provisioning is needed for full functionality, but even without it
+> you shouldn't see these errors. Maybe the fTPM TA is missing from your
+> OP-TEE build, or something similar is causing loader error.
+> 
 
-Fix this by checking at the beginning of phy_connect() whether the PHY
-is already bound via uclass_find_device_by_phandle(). If so, skip all
-generic binding methods and fall through to phy_find_by_mask(). Also
-assign phydev->node from the already bound DM device.
+Given the above log shows the fTPM UUID, the fTPM does look to be
+loaded and running in this case. Given a more complete log from
+a different thread on this issue I'm seeing:
 
-Fixes: 68a4d1506109 ("net: phy: Bind ETH_PHY uclass driver to each new PHY")
-Signed-off-by: Pranav Tilak <pranav.vinaytilak@amd.com>
----
-Changes in v5:
-- Use int ret instead of bool phy_bound and goto out
+> Cannot persist EFI variables without system partition
+> <error printout above>
+> Missing TPMv2 device for EFI_TCG_PROTOCOL
 
-Changes in v4:
-- Removed IS_ENABLED(CONFIG_DM_ETH_PHY), use runtime check via
-  uclass_find_device_by_phandle()
-- Fix indentation of binding methods block
-- Assign phydev->node from the bound DM device's ofnode
+This makes me think we are at the stage in boot where EFI variables
+are trying to be persisted to some media, and when trying to use
+the fTPM for this it fails (as would be expected without RPMB).
+So this should be harmless, but why there is such a large error
+printout we need to investigate and try to make it less verbose.
 
-Changes in v3:
-- Moved duplicate binding check to beginning of phy_connect()
+Andrew
 
-Changes in v2:
-- Move duplicate binding check to caller phy_connect()
-- Update commit description
----
- drivers/net/phy/phy.c | 13 +++++++++++++
- 1 file changed, 13 insertions(+)
-
-diff --git a/drivers/net/phy/phy.c b/drivers/net/phy/phy.c
-index d7e0c4fe02d..7d698f00c09 100644
---- a/drivers/net/phy/phy.c
-+++ b/drivers/net/phy/phy.c
-@@ -24,6 +24,7 @@
- #include <linux/delay.h>
- #include <linux/err.h>
- #include <linux/compiler.h>
-+#include <dm/uclass-internal.h>
- 
- /* Generic PHY support and helper functions */
- 
-@@ -927,6 +928,14 @@ struct phy_device *phy_connect(struct mii_dev *bus, int addr,
- {
- 	struct phy_device *phydev = NULL;
- 	uint mask = (addr >= 0) ? (1 << addr) : 0xffffffff;
-+	struct udevice *phy_dev;
-+	int ret;
-+
-+	/* Skip binding if PHY already bound by eth_phy_binds_nodes(). */
-+	ret = uclass_find_device_by_phandle(UCLASS_ETH_PHY, dev,
-+					    "phy-handle", &phy_dev);
-+	if (!ret)
-+		goto out;
- 
- #ifdef CONFIG_PHY_FIXED
- 	phydev = phy_connect_fixed(bus, dev);
-@@ -947,9 +956,13 @@ struct phy_device *phy_connect(struct mii_dev *bus, int addr,
- 		phydev = phy_connect_gmii2rgmii(bus, dev);
- #endif
- 
-+out:
- 	if (!phydev)
- 		phydev = phy_find_by_mask(bus, mask);
- 
-+	if (phydev && !ret && !ofnode_valid(phydev->node))
-+		phydev->node = dev_ofnode(phy_dev);
-+
- 	if (phydev)
- 		phy_connect_dev(phydev, dev, interface);
- 	else
--- 
-2.34.1
+> Regards,
+> Shiva
+> 
+>>
+> 
 
