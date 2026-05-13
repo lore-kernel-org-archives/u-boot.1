@@ -4,93 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D98B4CD4851
-	for <u-boot@archiver.kernel.org>; Wed, 13 May 2026 16:12:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B647BCD4851
+	for <u-boot@archiver.kernel.org>; Wed, 13 May 2026 16:27:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4EE998341A;
-	Wed, 13 May 2026 18:12:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=wolfssl.com
+	by phobos.denx.de (Postfix) with ESMTP id 1CD6D83EF9;
+	Wed, 13 May 2026 18:27:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=wolfssl-com.20251104.gappssmtp.com header.i=@wolfssl-com.20251104.gappssmtp.com header.b="hdcwsEXY";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="nmygY3yI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B127E84663; Wed, 13 May 2026 18:05:03 +0200 (CEST)
-Received: from mail-dy1-x132e.google.com (mail-dy1-x132e.google.com
- [IPv6:2607:f8b0:4864:20::132e])
+ id BFAF48467B; Wed, 13 May 2026 18:27:10 +0200 (CEST)
+Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
+ [IPv6:2a00:1450:4864:20::533])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0461080F0E
- for <u-boot@lists.denx.de>; Wed, 13 May 2026 18:05:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D270E8341A
+ for <u-boot@lists.denx.de>; Wed, 13 May 2026 18:27:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=wolfssl.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=aidan@wolfssl.com
-Received: by mail-dy1-x132e.google.com with SMTP id
- 5a478bee46e88-2b4520f6b32so11845335eec.0
- for <u-boot@lists.denx.de>; Wed, 13 May 2026 09:05:00 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ed1-x533.google.com with SMTP id
+ 4fb4d7f45d1cf-67bb5ad91bfso12968831a12.0
+ for <u-boot@lists.denx.de>; Wed, 13 May 2026 09:27:08 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1778689628; cv=none;
+ d=google.com; s=arc-20240605;
+ b=f7iu2bNlLJ+QZrz1U/A4R1nczlLu6TgZE7XQXhDY3yzecJWJXB1ZbZ8F228b3dkMMS
+ EPecfexB4hZZaMOwz/5x3b51+mqeNFMzb+btpTS2KDzCUBOplHrXCf0wqfWGMkiPKo1f
+ DhBkzNGmNHPypr4A7HlrDn3JcwTuFpt3weEZUeAvU1O9gOTP/hfxkLnbT7JQLJ9y1QZ7
+ AJykE6hN6Kqyok5Ftly4cSixOmvf0KMWZntF1Lp7zpTThQ9sfv723/LJHA1x3Vvk+cHt
+ MSsHjDN/vAYWkH/WZohr9+KRsj4SdclpK2AG2M1dqDYryabjVZfU4chyV3YYLGZUQNAz
+ ojZQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=HB07/0nDfDf2UyEVLEwUyrQUiTuq1kKHkICiGeVIqxY=;
+ fh=fHga0ntAKbTtcWD0E57+rqrNxme3m6w5h3W/8Ez4J88=;
+ b=Nha2QKcXTXlOnNNepVTtr6ohQF4pWcqBO+aIDrYlVWt/mRUBU63i3F+b/A2oHLbQZR
+ hzyrgb0TugC79ySqx5NcU2Tad89IEEHoa53BtUEZHpzHJysIPCt+4UThCQMvoQOBVi6I
+ /ztHOE4xMY6CgA0WGH57+vFO4mHcprlxazilFSIs7bCn0OXQqEEnK4vlMBAe5UXixxU6
+ lqVQzkF8Edfrd/8yGlTIoJOj1ocNy1djDq0bewC2uvC/PvClmjowVmMMxvKDtGJQVBQB
+ kaDmKmYVgPjJ7F15KtigOa5+0mAyFmOdqoHQhVPIWBHZRpafiaNl6ZXHqNF1FDL8nrvG
+ cS+A==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=wolfssl-com.20251104.gappssmtp.com; s=20251104; t=1778688297; x=1779293097;
- darn=lists.denx.de; 
- h=references:to:cc:in-reply-to:date:subject:mime-version:message-id
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=NQccJVrmZbdJHJ3GvM+ZWLCexPtPjS9cPS55GSUjwtQ=;
- b=hdcwsEXYCGuvoCs6RjVAfuMM6rxQ/5cNDmX9UfxcNO2xxIcuXsl6aphVuy5L3qkgKZ
- Zdma9INHQ1CDm3dlg3drEK0OFwWqPerxh/QmyYIN9y2lhV8BvynwKaF457yUi+QpYjDA
- KkQqk/hqOHHfrljOElOkPVMqWwzM7mpfOwU2NV7OFPqyGZIXWyViOdbRUG8tYSHQ93MJ
- yoR99l/9d4V5ZdAaGjKbkpuMvIJowYNoE6bQPY/cNGS52cg834ExrQxGfDKXj6AP4tu6
- RGHLLZvX9US9UoZrxh2F9GY3kww0e4WokO91it22x6xDrWLkeNTnvePBsqLTbhAuq2Iy
- LwYw==
+ d=chromium.org; s=google; t=1778689628; x=1779294428; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=HB07/0nDfDf2UyEVLEwUyrQUiTuq1kKHkICiGeVIqxY=;
+ b=nmygY3yIQRtDCdevSR7ObkCZY4jeobhGAWM5KgHB9dvuwNsqQtMNiXHIO2MG/YZo5r
+ fw0fEjRmfkDT8KkkEHBUEdUcnRpLVBFCtmVq+xDJnaF4l0YvT03CJqQg24N1mv9y8Vi/
+ qa+xYQAV6fkeiAnmP+m/UMXLrJ24wm2w3byHA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778688297; x=1779293097;
- h=references:to:cc:in-reply-to:date:subject:mime-version:message-id
- :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=NQccJVrmZbdJHJ3GvM+ZWLCexPtPjS9cPS55GSUjwtQ=;
- b=XW7oSnYwx3K4eQ3XtRks4S4akFmHUB1kCed5MFFNGUXjP00lLdWMZDfJLkKVYte+K7
- jOKUevqMAqOwcwJA5BtLjs5dJT5rGnWhSRPbXOdaV11ZaNDNGWSbpY2Unr4849AglYdI
- 7hztScP4+6Ivme/uaa4ARMTlk6Fdj4joAU0z5gj2z6CDE2QqNLUKuSJO/T41lhfPDT71
- ezdlmGP+6eQMAN6pHpOiWCvRAuUpKxGb9Fqju9FmceJTBikPWOdDurn5WlyORDBiPy8D
- QOEIurL2u5k1PRAhMRXiGBg1Ysc13ZPTojOSI+VayuOki6uUYTeKsOF2r3ce0gvAfOns
- XV4g==
-X-Gm-Message-State: AOJu0YzZ8HtLCDVg6UId9ul/UBxuup+hXGcjOG5o8yVsHZPvJOkX5CPf
- mjhWjz+hfkGDMWn542gOoZqdz2fEGbJVe+Q5o9NstqHuvIjkakW29OIFKbrq9t+NaPk=
-X-Gm-Gg: Acq92OGMFW3vkqiEjeE+mwnba25WT8pLm/k+UTo1M0Cvgh2WdtqNEFwCFO2ybZCPy3R
- phiXyL/yISiGfQOy/1WjcbbWXwZU7Ps7cdte/JVTHSeBHjaf16LVl7zZMkYBtEOyPIY2jJqpXnG
- rcGAlt/nydlVGYTlekB/FHW0VrPsYNA27iIE91ogvwZE/3Yg9Fjep+ynVmL/v/JHPS1cDqu4f1P
- dASN3om9eewQUoLgEAamLz6VUfGs70zRlQMNFM55OvuRcjt05Mi8KE8Rpw8YHLXftL/+90IqbRD
- A+ThPSyMLo2jToo3AZP+rtlmoPFxMQufem5wDuHfLBy6CxdqMn1/AbGleoTNUE3zEsu5s/yvohC
- /PaoPWCxRu1zFhxRFfVjoz2Q9z3SJZ0b56oSKVVlog+rrA5zg+bmZ07rGecFet0XrZccgBb04w6
- W5NPErPXhT3ORfhSmVZ4tOnzvsj01LlikIaUlBqFmsbUFS4xHgLV+Yfamwhua1WHBcfKRbURDMM
- 3FAiSp062JSm0lJ2UjdoDz5VQ==
-X-Received: by 2002:a05:7300:e12a:b0:2ef:83d4:647f with SMTP id
- 5a478bee46e88-301565140c6mr1848582eec.25.1778688296981; 
- Wed, 13 May 2026 09:04:56 -0700 (PDT)
-Received: from smtpclient.apple ([207.231.76.218])
- by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-2f888e381c9sm22468891eec.26.2026.05.13.09.04.55
- (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Wed, 13 May 2026 09:04:56 -0700 (PDT)
-From: Aidan Garske <aidan@wolfssl.com>
-Message-Id: <39404C01-685F-41AD-937B-7CCC4501F9D3@wolfssl.com>
-Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3731.700.6.1.21\))
-Subject: Re: [PATCH v4 00/14] tpm: Add wolfTPM library support for TPM 2.0
-Date: Wed, 13 May 2026 09:04:45 -0700
-In-Reply-To: <20260513143423.GU1858239@bill-the-cat>
-Cc: u-boot@lists.denx.de,
- David Garske <david@wolfssl.com>
-To: Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Peter Robinson <pbrobinson@gmail.com>
-References: <cover.1778619453.git.aidan@wolfssl.com>
- <CAC_iWjKGzwsb88AEx=Q5nibTnqpMf0j-tFxaPsjKrpmGfUCpiA@mail.gmail.com>
- <20260513143423.GU1858239@bill-the-cat>
-X-Mailer: Apple Mail (2.3731.700.6.1.21)
-X-Mailman-Approved-At: Wed, 13 May 2026 18:12:56 +0200
-Content-Type: text/plain;
-	charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+ d=1e100.net; s=20251104; t=1778689628; x=1779294428;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=HB07/0nDfDf2UyEVLEwUyrQUiTuq1kKHkICiGeVIqxY=;
+ b=DYBN24Sz6jlWdnge4LKmVNHLFlpTShuFFN8S2H9UBLXpUJKMWFNlX5WA0ZbIQlyPDe
+ GFda5oS3EgXRgbEBjUPHQ59p2X637WZ6ldkKZGKhJn7xkHULGRxZuSgMxQWmDyL5R3vW
+ Rlt7fMwqcJK8R6KuOyc1M3E/SY/J9IMn+5wLQMbnD1PAy7j1t5KS1PMeIa/IUfupdAEq
+ Mh0U5ksKC1Mszrr7CZ4YgNdABmNrFHNDWuid8KCSynPBoUDWtmjHvX5qcmTGUF5cBF3b
+ H0g2rWykYXXeO5iQ/3ZDr97a8gINAL02jrJbswkIlB6iRAPYaz4ktEqI/lHbgvSxQ8L1
+ Y9hQ==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ/CT2KENQe5kxQK7ozDLCiHSeiepVqpoFapTP//7SQM9U74zTnp6p1h9lS7hO5YpkJ7hCVybJA=@lists.denx.de
+X-Gm-Message-State: AOJu0YwtiM/gnwykv80cjkT5J6eFq4BJPjUMTs+uyU/cUdg6xQGeuUug
+ 9pp8AnvIdfM+NGdBmtR9SmVFk6nd0inlbt+Ny5X84cZNawPkeB6dsFy9UzWoBNGza1TR0Z9LFUC
+ Hl5Ze92CVvP8XJF31g/UnAhZ8vjQi3tPtRk/8INOF
+X-Gm-Gg: Acq92OG9C2Sz53vxAYllKpY+t9wKoQRxaktp42bK/+/zrc6M6XpNYQItEfmyd9Q4mQT
+ 7aFz2JANRSUqkYRfzjSFlydoEw29nJth1BtuJ+bAYc1aG0ARhtzgr7OPb6acwYexU0NQcnD0F4m
+ RWIAtWFKrOuRfcBI+0PTWifbFHg+gU+fCPoSVaFfYDQzZMSomBF/Uw/pxfaFQFKaiM4gUPXqE+Y
+ uPt/Ek6lsbpU1ZZkvxrUHfXqbHTob/dyZB3jnCCnMEbqMQj9ihwOGDtrKM+hakwyLHkKdsHc/kR
+ /8J+iPnoU3YeCorj
+X-Received: by 2002:a17:907:3e89:b0:bd4:d6d6:b4bc with SMTP id
+ a640c23a62f3a-bd4d6d6c29amr71013466b.27.1778689628215; Wed, 13 May 2026
+ 09:27:08 -0700 (PDT)
+MIME-Version: 1.0
+References: <20260513015606.591384-1-rs@ti.com>
+ <20260513015606.591384-4-rs@ti.com>
+In-Reply-To: <20260513015606.591384-4-rs@ti.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Wed, 13 May 2026 10:26:56 -0600
+X-Gm-Features: AVHnY4LEAJLsAvz5eu_2ln8I2e2fkVrKoVZKd4GOR9esQ1xp7IPt8OBXoIk1qzk
+Message-ID: <CAFLszThL2H3iRTb8jozephjwZNSJYo1mFrq6Ymta6bRZnE+CTg@mail.gmail.com>
+Subject: Re: [PATCHv7 3/3] memory: reserve from start_addr_sp to
+ initial_relocaddr
+To: rs@ti.com
+Cc: robertcnelson@gmail.com, ayush@beagleboard.org, 
+ Erik.Welsh@octavosystems.com, anshuld@ti.com, bb@ti.com, trini@konsulko.com, 
+ afd@ti.com, xypron.glpk@gmx.de, ilias.apalodimas@linaro.org, sjg@chromium.org, 
+ u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,33 +114,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi all,=20
+Hi Randolph,
 
-Yes we have moved all our libraries to GPLv3. We have made exceptions =
-for some open source projects to allow GPLv2 see here: =
-https://github.com/wolfSSL/wolfssl/blob/master/LICENSING#L8. We are =
-willing to do this for wolfTPM and DENX/U-Boot.
+On 2026-05-13T01:56:06, Randolph Sapp <rs@ti.com> wrote:
+> memory: reserve from start_addr_sp to initial_relocaddr
+>
+> Add a new global data struct member called initial_relocaddr. This
+> stores the original value of relocaddr, directly from setup_dest_addr.
+> This is specifically to avoid any adjustments made by other init
+> functions.
+>
+> Reserve the memory from gd->start_addr_sp - CONFIG_STACK_SIZE to
+> gd->initial_relocaddr instead of gd->ram_top. This allows platform
+> specific relocation addresses to work without unnecessarily painting
+> over a large range.
+>
+> Signed-off-by: Randolph Sapp <rs@ti.com>
+>
+> common/board_f.c                  | 9 ++++++++-
+>  include/asm-generic/global_data.h | 9 +++++++++
+>  lib/efi_loader/efi_memory.c       | 2 +-
+>  lib/lmb.c                         | 7 ++++---
+>  4 files changed, 22 insertions(+), 5 deletions(-)
 
-Thanks,=20
-Aidan
+> diff --git a/include/asm-generic/global_data.h b/include/asm-generic/global_data.h
+> @@ -107,6 +107,15 @@ struct global_data {
+> +     /**
+> +      * @initial_relocaddr: top address of U-Boot in RAM
+> +      *
+> +      * This should be the original value of relocaddr before any other
+> +      * allocations or reservations shift it. This address will, depending on
+> +      * the platform, be equivilent to ram_top and should also be considered
+> +      * an exclusive address.
+> +      */
+> +     unsigned long initial_relocaddr;
 
-> On May 13, 2026, at 7:34 AM, Tom Rini <trini@konsulko.com> wrote:
->=20
-> On Wed, May 13, 2026 at 09:35:44AM +0300, Ilias Apalodimas wrote:
->> Hi Aidan
->>=20
->> On Wed, 13 May 2026 at 03:26, Aidan Garske <aidan@wolfssl.com> wrote:
->>>=20
->>> Hi all,
->>=20
->> Thanks for all the efforts. Unfortunaltely I don't think we can pick
->> any of these up. WolfTPM is listed as GPLv3, which is incompatible
->> with U-Boot [0]. Tom am I misunderstanding any of this?
->=20
-> Yes, as I understand it as well (and Peter raised this question on v3
-> yesterday too), this is GPLv3 and not GPLv2 (older wolfSSL used to be
-> v2) and so no, isn't compatible.
->=20
-> --=20
-> Tom
+Typo: equivilent -> equivalent.
 
+How about: "...the value of relocaddr after setup_dest_addr()
+completes, before reserve_pram() or any later init function adjusts
+it"
+
+Reviewed-by: Simon Glass <sjg@chromium.org>
+
+Regards,
+Simon
