@@ -4,94 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B76CCD4851
-	for <u-boot@archiver.kernel.org>; Fri, 15 May 2026 12:27:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D0F6CD4851
+	for <u-boot@archiver.kernel.org>; Fri, 15 May 2026 12:27:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8731484609;
-	Fri, 15 May 2026 14:27:20 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=hifiphile.com
+	by phobos.denx.de (Postfix) with ESMTP id E588C83EF9;
+	Fri, 15 May 2026 14:27:43 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=hifiphile.com header.i=@hifiphile.com header.b="B2Ty5e0V";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="olLcyrJG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 13C0B83FF5; Fri, 15 May 2026 12:05:56 +0200 (CEST)
-Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
- [IPv6:2a00:1450:4864:20::333])
+ id C4C8684683; Fri, 15 May 2026 04:55:51 +0200 (CEST)
+Received: from mail-oa1-x2e.google.com (mail-oa1-x2e.google.com
+ [IPv6:2001:4860:4864:20::2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B47818341A
- for <u-boot@lists.denx.de>; Fri, 15 May 2026 12:05:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B7AC18464D
+ for <u-boot@lists.denx.de>; Fri, 15 May 2026 04:55:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=hifiphile.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=none smtp.mailfrom=admin@hifiphile.com
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-488b150559bso70738005e9.1
- for <u-boot@lists.denx.de>; Fri, 15 May 2026 03:05:53 -0700 (PDT)
+ spf=pass smtp.mailfrom=xiaaltabano@gmail.com
+Received: by mail-oa1-x2e.google.com with SMTP id
+ 586e51a60fabf-439bdbc86b1so409975fac.1
+ for <u-boot@lists.denx.de>; Thu, 14 May 2026 19:55:49 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1778813748; cv=none;
+ d=google.com; s=arc-20240605;
+ b=apX6XEHFdtTTciVshkae9RcIc3U8sIDu+/xUy6cqBt5ilYWpx19jtMvo4EHnKfH21u
+ oXEuru/wyyCq4L7bE+pM5a6sk0ftEj7U3NLJ0d9YEHnbvS/ObV/PCiF1eSkftTVEQjVL
+ W4N8ej63ksaNgHkiIiU3ra4ilBO86DMm3ujOhh66J+OsKc9tA95VHtIvGSuC4jOIR9LH
+ aY5ysvKcPoxVIrozv0PhW4PwymD7za1baaD9PGqY6MRzjcSxIDhL/U0FxN+hfwZRYnqy
+ SrTPNBsPda+RgpmKLfqsTEmCSKP3c5R8HpCRBKOWQQBTt0/xLk9s7X06LBF4ZSGhkmA4
+ OR5w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=to:subject:message-id:date:from:mime-version:dkim-signature;
+ bh=Sddkb9mpe4Qk3p848eYeVXjW0ek17rT6a8Vf401BMHQ=;
+ fh=ea3Lb1kmqTyoSSOGd3r79PdCdfQHXBjS15GzGXd6hwE=;
+ b=llzjHEaGyaKrPQLMfhnatjZInGCWazHSVOIFIEuOU3qUhcJu5fSryNNu6rO5KokjXI
+ /2cS1beceE5BIQp+JhI8ce9uI2xxPOvv7uTBdVH6geLiVQ1UCV9/YdV8wFtIh9DtzGkh
+ M3e+zn2ffMkTI8vT1GC5LKYp2nmv1ACRdgpeUadu7HRX7IVspAv7GCIHn8XieoA7kWCV
+ KyK03gOlITX2rQ16z0h/obRSHTUhWZyvgEYe9o+uN3iDPq3h1+0GGa4D1PmHeFlWsiBb
+ 9T2jqsNHY/iK82iyETrT476L1EgNwuYClscse0ewvH0C7nBKzJmi0KLf70bePYX31hBr
+ qEww==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=hifiphile.com; s=google; t=1778839553; x=1779444353; darn=lists.denx.de;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=fmPPY/owvD99lC4E1KxDKEJvf0Zecgg+c0gkLUA+pGU=;
- b=B2Ty5e0V+qgeG6s8ACzObmIk/q6pnQ6Mj5RC/zQ8dzb+yuTxpVJ0qqJGJwIbNjcxmh
- 8m00HOJ0SAukf2AEtP6sNiqliLeYXtRl1LRuvNdvNLM7rH7H9+dBQL8Nvc78VBwDNQXE
- NeVvTyM2nuQ4qeKjMm6O7A12Na+rOIP/mk8k/s1jO0pEyexgNi8ZG6hqMkKMTGm0csvq
- 3/DFkYnMdEAA9USZYszlsDynW3nKGJvRdGvWC4BTgn+Ai53bWZgmIY2g9e6+vUYn8qDt
- he8psGYcjezFQPo83VyLKwleuFgQhNUE9Rko6UTdYTQeF9qbod2h54Y+vNRdXhsseW2j
- ZrrQ==
+ d=gmail.com; s=20251104; t=1778813748; x=1779418548; darn=lists.denx.de;
+ h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=Sddkb9mpe4Qk3p848eYeVXjW0ek17rT6a8Vf401BMHQ=;
+ b=olLcyrJG9jTJlkPCQa1yHPPUp4xSeT3RJiCMbc9oNUPYuL2H8y/KDSbvkLs6hWl1+M
+ EuGPhbWcL7LtwS0Qrsdbz6qoAC02nPge2S4SVimFCgQ4B8dOol8c+aeNx7GHTd5xo76J
+ sgL5XpTuRBlK8DPwMl8iItmvT7PJg1qqTeCE0Y6R1qvCQ9KCwRfRYuseLsfKrK8L5akc
+ T1+dZTaTLaMvFbsnMbZT11oMgacQvbkcweGQn31VeTM8kivoGxeyVOK+iyozMraEOqq3
+ LlvVIEfb34j9WOfKXMq0hRzCj6auGFp7qJKG7GvrSwvf5ZaF6iiV0KJVl5/N2AyK9h3p
+ 7NEQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778839553; x=1779444353;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=fmPPY/owvD99lC4E1KxDKEJvf0Zecgg+c0gkLUA+pGU=;
- b=lgxeaBvWj6SkOLClZHwB6DOG8QhtdkzyjAx9iZjgk4pu/4iMcMz5TXC+Hz2HhiriI6
- B1PGM0QjOUvMkkRukkO+mC0VqZIDZbYbcVAjWL65Ztx8LyxyG6lXgLa6qW/23wd3t3jY
- 1TqC0+cfuP9fEIT91/uu86H9W3nDYVO6kIZ1MlYcVWPaPtlGkLRAO8IL8zgzFkzbp+Sw
- JxBwbs6hIhdkiaHCqMPSllSom1F6/G6waBpISkmu+hxCvue7u3ogxGZIVVE/+WG5CrQ9
- vNE7Hg4WOgBN8a+C1IwpHCF8qifKt0AFPG0hgkymPJK9en13/Hpt/BcDjGlr7aAGZL8m
- F+cA==
-X-Gm-Message-State: AOJu0YwvqqRw2NdoTKPzNEVWDovtWR6asTfRrukz7kI21b5fJowkLwWM
- /oaSgiNTWBR8+GrkIHXbR0JQjxgasSmX/KliuOgxySnjgpJmohO+VI8LEysHjYuoWAbSEA77BXe
- spHfrIVsn5Q==
-X-Gm-Gg: Acq92OEtfi8kBx5Y+9rSWj4sbc97qLHeeGQW+XGB4YbMZTPsQ3QUNplOLmN9Sg7uG3k
- T+tgWifhgVZgmh98mC31on0fKqzNq+HpS4CM/3JmZyn0wn6Px74Tpf+WFhwTv4m0+ZztkGbnFBt
- 5oAr57Up99Fxl21K5mrOHo6Hql4VYJt2cQ64eAZKqUDOB0kFLLqQBVmbyypEt1T2RTLY64w+SDb
- TOR00jrsiRBnOBX9UZSrydtJVcRyf2emfJZk2HOwzH+mOoCKDFcWm/FlmGy93oL/fb8OEWSIZ0N
- si+jukLUgR76rIHz32PmThSGYLqlslqpTQzeGpMcQncwyRd+AKvaWUDKQ3TPPQ0zhHGWXmuX47J
- ooHCGCznxPJ3c2Zb0Eo137qIVmSyPamX7q28dg29Mmki0d6xOzrxkOp5DFdb7bFhnhiBJAqPAln
- c6d8NM9MjooZiI+1TYJbzmOQ==
-X-Received: by 2002:a05:600c:4e46:b0:488:bc6a:528d with SMTP id
- 5b1f17b1804b1-48fe632243cmr46320865e9.22.1778839552810; 
- Fri, 15 May 2026 03:05:52 -0700 (PDT)
-Received: from [127.0.1.1] ([78.199.60.143])
- by smtp.googlemail.com with ESMTPSA id
- 5b1f17b1804b1-48fe5694f2csm50430365e9.4.2026.05.15.03.05.51
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 15 May 2026 03:05:52 -0700 (PDT)
-From: Zixun LI <admin@hifiphile.com>
-Date: Fri, 15 May 2026 12:05:41 +0200
-Subject: [PATCH v2] usb: gadget: atmel: do not disable endpoints in
- reset_all_endpoints()
+ d=1e100.net; s=20251104; t=1778813748; x=1779418548;
+ h=to:subject:message-id:date:from:mime-version:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=Sddkb9mpe4Qk3p848eYeVXjW0ek17rT6a8Vf401BMHQ=;
+ b=P3xCvlSaeRZhf98zE+MF1/q8S7KoK+H0tOgiOeKlSol2zTmD1M88TbnQ1IdPD9EFBh
+ 9IxrRr8EMSmmjzfSxfb8xiGRoJhx/XGvfyarAuuyrLp+ETsu10IsmyM124tPHOKVy4FR
+ ghm7iQWqC7Qzypeetnm1uFAIw2XYnprbko/3uKZbP4gw+uDUHw0DjXZOZqE/WPh9Y0Ri
+ knY2YifyDYub8oOBpnxcP2FwZ6CE9ywP9r5BaGTxo2rPiKmV8v++lL6OUHD80DMcoqDh
+ w4qgDHybUfLcJG0YoFubQUfQQ1ja3xbZJfn/ycEXzs/LFaBTfqMKKhqXOYN0ep1dk1bJ
+ 908w==
+X-Gm-Message-State: AOJu0Yzz5ce4biM/H5WT34EsnQU+G1ytIeRlW4evLBvA+/FhDpoJo+SS
+ a/iaYrqUvg4ICDGHyD58sTFfAv9TvSaI1+OR/kJmw3lwO8D9WDxK5GXGxhqifuCYw/21PJ1+H/i
+ QsJ+AX/biix/+hAl3OQT4z/uI3W6jLKIl6g==
+X-Gm-Gg: Acq92OEVjgsNnhSlwhDg7IA0PcWZmcFQjNadCU4DWwooykRFwLP6HyJQeLexYlt++MP
+ 1LZTcgH8xqjY79pJ/hTKG+MQgHsAeW7KJbvXrrbaMP7+/mfyWdX4nRBOvGkW9saVzQ5uCpRFyJg
+ OWVLNld3weg/8c8dZvdxB3WHxjeytf6hNBhIMqnoRTZr6Opo8eD5sxLXGaJMok24THdoG5LV85W
+ B0BGwDNH7LtoUsbFzGFUFdCKFvAqN2kUccb5DvOAgPQV8sV1jAxntd8FbDwaPb0Vo7CbWstDdn4
+ MDiUMwz9dQs901svX2NAcPK/
+X-Received: by 2002:a05:6870:6107:b0:439:d375:618c with SMTP id
+ 586e51a60fabf-439f91f105emr3100997fac.10.1778813748210; Thu, 14 May 2026
+ 19:55:48 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260515-udc_ep-v2-1-cd335b4e62e4@hifiphile.com>
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/2WNyw6CMBBFf4XM2hpannHFfxhiSpnaMUqbFoiG9
- N8tuHR5knPP3SCgJwxwyTbwuFIgOyUQpwyUkdMdGY2JQeSizisu2DKqGzpWcVnoRtYD6gGS7Dx
- qeh+ha//jsAwPVPO+3g1DYbb+czytfPf+oitnnLWyaQssS6Ub3RnS5Aw98azsC/oY4xcaY7xBs
- gAAAA==
-X-Change-ID: 20260512-udc_ep-51a3f7a6befb
+From: Xia altabano <xiaaltabano@gmail.com>
+Date: Thu, 14 May 2026 13:17:05 +0800
+X-Gm-Features: AVHnY4JOs7WN0ZEMzlavWbA6xVLbeteu0OWOLZxoo6NTZo-61nxC14xM8UnQ9OI
+Message-ID: <CABKpJy38t91qLUJn2sQpRucPdYq-tft5pfFcU0autA+Z9mpB6Q@mail.gmail.com>
+Subject: Re: [PATCH 4/4] upl: Update documentation
 To: u-boot@lists.denx.de
-Cc: Lukasz Majewski <lukma@denx.de>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>, Marek Vasut <marex@denx.de>, 
- Tom Rini <trini@konsulko.com>, Zixun LI <zli@ogga.fr>, 
- Andrew Goodbody <andrew.goodbody@linaro.org>, 
- Zixun LI <admin@hifiphile.com>, 
- Stephan Gerhold <stephan.gerhold@linaro.org>
-X-Mailer: b4 0.15.2
-X-Mailman-Approved-At: Fri, 15 May 2026 14:27:19 +0200
+X-Mailman-Approved-At: Fri, 15 May 2026 14:27:41 +0200
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,75 +108,4 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Endpoints should not be disabled on bus reset inside UDC driver,
-otherwise a race condition will happen between gadget driver. Gadget
-driver will free the requests and disable endpoints in disconnect ops.
-
-Also remove outdated comment about it in usba_ep_disable().
-
-Fixes: 59310d1ecb9f ("usb: gadget: introduce 'enabled' flag in struct usb_ep")
-
-Signed-off-by: Zixun LI <admin@hifiphile.com>
----
-Changes in v2:
-- Remove outdated comment in usba_ep_disable()
-- Reword commit message
-- Link to v1: https://patch.msgid.link/20260512-udc_ep-v1-1-8a783e44cf7f@hifiphile.com
-
-To: Mattijs Korpershoek <mkorpershoek@kernel.org>
-To: Stephan Gerhold <stephan.gerhold@linaro.org>
-To: u-boot@lists.denx.de
-Cc: Lukasz Majewski <lukma@denx.de>
-Cc: Marek Vasut <marex@denx.de>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: Zixun LI <admin@hifiphile.com>
-Cc: Andrew Goodbody <andrew.goodbody@linaro.org>
----
- drivers/usb/gadget/atmel_usba_udc.c | 18 ------------------
- 1 file changed, 18 deletions(-)
-
-diff --git a/drivers/usb/gadget/atmel_usba_udc.c b/drivers/usb/gadget/atmel_usba_udc.c
-index f7a92ded6da..a2eee2bca2c 100644
---- a/drivers/usb/gadget/atmel_usba_udc.c
-+++ b/drivers/usb/gadget/atmel_usba_udc.c
-@@ -289,10 +289,6 @@ static int usba_ep_disable(struct usb_ep *_ep)
- 
- 	if (!ep->desc) {
- 		spin_unlock_irqrestore(&udc->lock, flags);
--		/* REVISIT because this driver disables endpoints in
--		 * reset_all_endpoints() before calling disconnect(),
--		 * most gadget drivers would trigger this non-error ...
--		 */
- 		if (udc->gadget.speed != USB_SPEED_UNKNOWN)
- 			DBG(DBG_ERR, "ep_disable: %s not enabled\n",
- 			    ep->ep.name);
-@@ -571,20 +567,6 @@ static void reset_all_endpoints(struct usba_udc *udc)
- 		list_del_init(&req->queue);
- 		request_complete(ep, req, -ECONNRESET);
- 	}
--
--	/* NOTE:  normally, the next call to the gadget driver is in
--	 * charge of disabling endpoints... usually disconnect().
--	 * The exception would be entering a high speed test mode.
--	 *
--	 * FIXME remove this code ... and retest thoroughly.
--	 */
--	list_for_each_entry(ep, &udc->gadget.ep_list, ep.ep_list) {
--		if (ep->desc) {
--			spin_unlock(&udc->lock);
--			usba_ep_disable(&ep->ep);
--			spin_lock(&udc->lock);
--		}
--	}
- }
- 
- static struct usba_ep *get_ep_by_addr(struct usba_udc *udc, u16 wIndex)
-
----
-base-commit: 5732bd0f457b4c671e46574d64d4acb099c0f0a5
-change-id: 20260512-udc_ep-51a3f7a6befb
-
-Best regards,
---  
-Zixun LI <admin@hifiphile.com>
 
