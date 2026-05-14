@@ -4,88 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1730ECD4F25
-	for <u-boot@archiver.kernel.org>; Thu, 14 May 2026 23:16:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C388ECD4F25
+	for <u-boot@archiver.kernel.org>; Thu, 14 May 2026 23:39:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 370EA8467A;
-	Fri, 15 May 2026 01:16:01 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 38FAD8464D;
+	Fri, 15 May 2026 01:39:55 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="XsjbfKBk";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="rIptkBIj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 28604846C3; Fri, 15 May 2026 01:15:57 +0200 (CEST)
-Received: from mail-oa1-x2b.google.com (mail-oa1-x2b.google.com
- [IPv6:2001:4860:4864:20::2b])
+ id A6CB1846A4; Thu, 14 May 2026 20:20:44 +0200 (CEST)
+Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
+ [IPv6:2a00:1450:4864:20::329])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1C9778467C
- for <u-boot@lists.denx.de>; Fri, 15 May 2026 01:15:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7DA3684687
+ for <u-boot@lists.denx.de>; Thu, 14 May 2026 20:20:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2b.google.com with SMTP id
- 586e51a60fabf-408778a8ec4so4857719fac.0
- for <u-boot@lists.denx.de>; Thu, 14 May 2026 16:15:55 -0700 (PDT)
+ spf=pass smtp.mailfrom=allan.elkaim@gmail.com
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-4893940bb5eso51809025e9.3
+ for <u-boot@lists.denx.de>; Thu, 14 May 2026 11:20:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1778800554; x=1779405354; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ d=gmail.com; s=20251104; t=1778782841; x=1779387641; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ftrI2KWjcMaPYt6kn+L3iKySYyoiY25jRaRtUXBuqQM=;
- b=XsjbfKBk0rkcJZfKb7ZVXzsdNJCSDJE84h/77w2RgNu69AfKi2S2Ub6iD4puxtOlM8
- 1IRaiH/HW1KJHXaeoHSJfLDcYi5h1mTa5gACyZPhz5+jxTlPoAaRSxYGluRL+Lus++0g
- P9qpGqaevcQNBzhyyRkJdI2VcdTw5GnzhlJ6A=
+ bh=zgmfv3WxPsswfn3OpFM+x1W6RSzPAjdGt228EsTxFz0=;
+ b=rIptkBIjjeXY4GsVR9ltAO841DXD04OBoYqblSnxQfQQDibvvrmNzOqsY54Uw6j2pt
+ kTPKeqCEYNG4w17sBCVeM7Nq/ALfjn5JD5feU2+wSu1FAgquoZYc0RIcXcs5Kc7iyO6n
+ XaK8Sbx9Kji4OQtWYxRfH8KABFgQ6aJ0Hh7qzhDBkl89Clqo9bXrx5PvpRHZ4DLZ5cWS
+ vdvfxDSPsve8j+aECGXKw+QKSJ1e77bFiETziuMxJLbPQL0bIUeqYfr9ZKst4GH373VN
+ b7VpWkIRE8+/ITmVlXeB7izAVz3Mf6binKjAzpVCzbIAM9ktTdXISWwEE6t/cgwSuw7p
+ RPeA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778800554; x=1779405354;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
+ d=1e100.net; s=20251104; t=1778782841; x=1779387641;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=ftrI2KWjcMaPYt6kn+L3iKySYyoiY25jRaRtUXBuqQM=;
- b=FKiTXvSEL1kV8o7Z1R7nxZO3CF51kwiJB/MMr4FO+lVmNIFP6Ov1SayPf6fnRL6hc6
- zj4v1eHnMp+8izoSGh3jiiBrStP1xTISaZE/lpkyqyAyGHkiRJPqGAcxN0HVsixfmP4C
- VV9FzAIVjsfAZNu368VsxXZ2zafz1ioNuzIfpLxvTmhmaAixqxgxCxCgAHRt4aslzr5F
- nncNvis4bjpbDLsIVxvBJ/gfs86ZPAaicDyHVR1UAhBanx4Ev1TTdAz6W2/CYfdAY488
- Ire7t1xCq5VKXlIE+ZHOYqS2xfeCyawrQh6FAn2RC5fDhdX9de1vUEZjUVipTr+vr5r4
- 6ogg==
-X-Gm-Message-State: AOJu0Yz/HxyXV7UIR/XwHTI2HNFu4zzRKm4mALIeQtEeQqdRUcoe/GUa
- aSNEHWDoS9VpWWwe+MIU9fqERakTiZn1/JKSfHUkEjVXHV7as/5vzT6ova27Vlr96MsC0FSHGXw
- jpGntUX4uc/nk
-X-Gm-Gg: Acq92OHvzz6rfTkzieO/Kt91Zcmzzi+X2fiXEj+/ZjKj/PAy97BGo7jGYthW6UJEqwb
- 4B84QUKKtx1okUygj60teplwRIhg8H/v7DzNkgZMcbwrZcUQSu911So6G31ZPy8oTX4HFPZ8BTs
- pGJWsDJF/oxcI8uKCBDfVE4/NgnnnSiGs4NmFeE/cGumxfn9fPe0NwWUQft/Qz3OY/k7VD0Jcmm
- Y2hzWyUll/ySJ3WkA39V88CLlvoDX5DEUnxVoaOAt1U9CZLwDBfH/PX8n++zs/hCKe+HmT8eeNm
- HFJT7f3OeL7bwwU1KM9dstzQpQa6P1uXyKsRxBs1rre0fPVZo+9D7ooY27aTOK0tqFan3ZjohLt
- YSPwHESVLoKwpczKIGywIB9iwmiy//u6cMbliAel/Vc3TaxPFhnR44IgAYrjlJlOJsWR8GaqahW
- e3tBKXrR+iLUTW+UB9Kp+E4ENv3qr73+lXltjXlQ7+bv+dHyW2Cv18/QUOKEv2vq2uLNTQH6uX1
- v4M8Df6Fy6s/SiHDCGyJbOV0drjP49zjLe4xPPblpRujD8EQA==
-X-Received: by 2002:a05:6870:ff04:b0:42f:caff:34e6 with SMTP id
- 586e51a60fabf-43a2de07a4fmr1146007fac.31.1778800553852; 
- Thu, 14 May 2026 16:15:53 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-189-203-106-235.totalplay.net.
- [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-439fc144b86sm3020885fac.1.2026.05.14.16.15.52
+ bh=zgmfv3WxPsswfn3OpFM+x1W6RSzPAjdGt228EsTxFz0=;
+ b=GqRer7hcN8shA5tnfojprzS9OYJ0NXN8ZXhf1xVJZLeDGfLm5yj5SOzqUnQeCJQKMx
+ U3SO9FtvMXrcZIVtUTCwg6o69zj01F3mtn5Kp0KuGDGpZxHHgrlfXPo8ygd/8giKNsQp
+ EyF5bJEvqsbXlZJNO5MIdYmrPVA8HA4lmSrND74BlUuISnQOBk4+L36eACzLuw/4UTuQ
+ OPZNA7cidu50IohL5VZGJLOgX5N1cqrfewvADXq7HmkhTItexaAAoWbs4R37ghknMtJU
+ /NUS487NaMBTcj9guDelIZT4mpWqK8n21Q8YLad8WlWfbgIDR/8CI/IK9GxVfkBn3oAQ
+ CMDw==
+X-Gm-Message-State: AOJu0YyOF27XxF6oyzfJTIcWH3/Dp3hlXM7oCVSLgcXjTuryAtshUC5a
+ rt+QHVEl85HFDCSdJLDNmCSJbLjBZpg3w2Vk6BgFXcZJp+zesbDAQ+5aoWdYywfCDLM=
+X-Gm-Gg: Acq92OFC7ukKsEqZUaKdmoVHzY3Toz0k6LqMmEwrl7XIGDjrwdgl0lHxy8m81RTLMtG
+ ZL7CpEvJLihyMjiUrKuTKOFBUXKEuSTsBaKsTpMaAsNw1ZBWJNXS4kvnwQYhsG3R5EY0zYTuV1C
+ Ez2mNEX5Wc0uy2kgormsDkRyP+C2W3lLjJRjMIpsgLY4AIhk9pawzhYFGIACwEqNVzQTSvAw2u4
+ LwIO0PY8tMnSO52TEc9oIXTX+LPPu+Ck5DfhHUqc8OfxEiLA4kxYEJT7R4eiiykKNFHajIEymwL
+ hZKXY7FmgJrzFKRqOidxAZONQcI3VqpCVME/0ik9tqVXpnm5fUpfWu1ColPr6S++hb4nkrVik9Y
+ +nYaxk7OnV8afOVZ7Afz4wLQt/Z7mzo+fjiDv22GH2qwAFxpnGtZHu2r0+qr92qmoY4rJ3BYkby
+ nU6ff50+n7XkgSLYnNRb9CEPtGp6/3db+brgHSTzniSaFgAy28hCVsyhwhzOJepWd0s9zmCx1za
+ FlBxE/eOo27zcXcg17+AWsLWR8Yw8XUo58Y8Uwr5VQm3KMiTqloXsA5f61GIn3oGFpqDHufH2ce
+ RW0h
+X-Received: by 2002:a05:600c:858d:b0:48f:e230:80a3 with SMTP id
+ 5b1f17b1804b1-48fe6514c31mr5473445e9.33.1778782841232; 
+ Thu, 14 May 2026 11:20:41 -0700 (PDT)
+Received: from thinkpad-t15g-g2 ([2a01:e0a:905:5c10:111d:8a59:d7b9:c8a9])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-48fe53ab773sm7973575e9.3.2026.05.14.11.20.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 14 May 2026 16:15:53 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Charles Perry <charles.perry@microchip.com>
-Cc: Quentin Schulz <quentin.schulz@cherry.de>, 
- Leo Yu-Chi Liang <ycliang@andestech.com>, Rasmus Villemoes <ravi@prevas.dk>, 
- Yegor Yefremov <yegorslists@googlemail.com>, 
- Michal Simek <michal.simek@amd.com>, 
- Tanmay Kathpalia <tanmay.kathpalia@altera.com>, 
- Piotr Wojtaszczyk <piotr.wojtaszczyk@timesys.com>
-In-Reply-To: <20260507185123.2210247-1-charles.perry@microchip.com>
-References: <20260507185123.2210247-1-charles.perry@microchip.com>
-Subject: Re: [PATCH v2] gpio: Correct dependencies for MCP230xx
-Message-Id: <177880055257.4123088.3542194348515751358.b4-ty@konsulko.com>
-Date: Thu, 14 May 2026 17:15:52 -0600
+ Thu, 14 May 2026 11:20:40 -0700 (PDT)
+From: Allan ELKAIM <allan.elkaim@gmail.com>
+To: u-boot@lists.denx.de
+Cc: Miquel Raynal <miquel.raynal@bootlin.com>,
+ Joao Marcos Costa <jmcosta944@gmail.com>,
+ Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
+ Tom Rini <trini@konsulko.com>, Allan ELKAIM <allan.elkaim@gmail.com>
+Subject: [PATCH v1 0/2] fs/squashfs: fix symlink load failure on large images
+Date: Thu, 14 May 2026 20:18:50 +0200
+Message-ID: <20260514181854.399679-3-allan.elkaim@gmail.com>
+X-Mailer: git-send-email 2.53.0
+In-Reply-To: <"CACgNL-F2=KJtZ+gThpx_BuWsn6puqFxK0uLOmnABSS9=rRQmeQ@mail.gmail.com">
+References: <"CACgNL-F2=KJtZ+gThpx_BuWsn6puqFxK0uLOmnABSS9=rRQmeQ@mail.gmail.com">
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.3
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Fri, 15 May 2026 01:39:52 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,17 +103,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 07 May 2026 11:51:22 -0700, Charles Perry wrote:
 
-> This driver depends on DM_I2C and DM_SPI, add it.
-> 
-> 
+sqfsload fails to load a file through a symlink when the squashfs
+image contains a large number of inodes (e.g. a rootfs that includes
+the tzdata timezone database).
 
-Applied to u-boot/next, thanks!
+Root cause: sqfs_read_nest() resolves the symlink by calling itself
+recursively without first freeing the parent directory's inode and
+directory table buffers. This causes a temporary double allocation
+that can exhaust the U-Boot heap. When malloc() subsequently fails
+inside sqfs_read_directory_table(), the error goes undetected and
+sqfs_search_dir() is called with a NULL pos_list pointer, leading to:
 
-[1/1] gpio: Correct dependencies for MCP230xx
-      commit: 88338f9d147397c42bb996937b1ce31bca096626
+  Error: invalid inode reference to directory table.
+  Failed to load '/boot/Image'
+
+Patch 1 fixes the structural problem (temporary double allocation)
+and plugs the silent NULL pointer path in sqfs_read_directory_table().
+Patch 2 adds the missing return-value checks on sqfs_dir_offset() that
+turn any residual lookup failure into a clean error propagation.
+
+Both patches are independent and can be reviewed separately.
+
+The bug was first observed on U-Boot v2024.01 and is still present
+on v2026.04. The patches have been tested on a Raspberry Pi CM4
+running U-Boot v2026.04 (Yocto Scarthgap 5.0.17) with a 325 MB
+squashfs rootfs containing 22 517 inodes. The symlink
+/boot/Image -> Image-6.6.63-v8 now resolves successfully.
+
+This series addresses the bug reported at:
+https://lists.denx.de/pipermail/u-boot/2026-May/618533.html
+
+
+Allan ELKAIM (2):
+  fs/squashfs: fix heap exhaustion during symlink resolution
+  fs/squashfs: add sqfs_dir_offset() error checks
+
+ fs/squashfs/sqfs.c | 32 ++++++++++++++++++++++++++++++--
+ 1 file changed, 30 insertions(+), 2 deletions(-)
+
 -- 
-Tom
+2.53.0
 
-
+base-commit: 88dc2788777babfd6322fa655df549a019aa1e69
