@@ -4,86 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C388ECD4F25
-	for <u-boot@archiver.kernel.org>; Thu, 14 May 2026 23:39:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E553CD4F39
+	for <u-boot@archiver.kernel.org>; Thu, 14 May 2026 23:40:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 38FAD8464D;
+	by phobos.denx.de (Postfix) with ESMTP id 6B80A84687;
 	Fri, 15 May 2026 01:39:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="rIptkBIj";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="J7R8Mx5U";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A6CB1846A4; Thu, 14 May 2026 20:20:44 +0200 (CEST)
-Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
- [IPv6:2a00:1450:4864:20::329])
+ id 4259D846A4; Thu, 14 May 2026 20:21:00 +0200 (CEST)
+Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
+ [IPv6:2a00:1450:4864:20::333])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7DA3684687
- for <u-boot@lists.denx.de>; Thu, 14 May 2026 20:20:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1141684687
+ for <u-boot@lists.denx.de>; Thu, 14 May 2026 20:20:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=allan.elkaim@gmail.com
-Received: by mail-wm1-x329.google.com with SMTP id
- 5b1f17b1804b1-4893940bb5eso51809025e9.3
- for <u-boot@lists.denx.de>; Thu, 14 May 2026 11:20:42 -0700 (PDT)
+Received: by mail-wm1-x333.google.com with SMTP id
+ 5b1f17b1804b1-48a563e4ef7so75434685e9.0
+ for <u-boot@lists.denx.de>; Thu, 14 May 2026 11:20:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1778782841; x=1779387641; darn=lists.denx.de;
+ d=gmail.com; s=20251104; t=1778782857; x=1779387657; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=zgmfv3WxPsswfn3OpFM+x1W6RSzPAjdGt228EsTxFz0=;
- b=rIptkBIjjeXY4GsVR9ltAO841DXD04OBoYqblSnxQfQQDibvvrmNzOqsY54Uw6j2pt
- kTPKeqCEYNG4w17sBCVeM7Nq/ALfjn5JD5feU2+wSu1FAgquoZYc0RIcXcs5Kc7iyO6n
- XaK8Sbx9Kji4OQtWYxRfH8KABFgQ6aJ0Hh7qzhDBkl89Clqo9bXrx5PvpRHZ4DLZ5cWS
- vdvfxDSPsve8j+aECGXKw+QKSJ1e77bFiETziuMxJLbPQL0bIUeqYfr9ZKst4GH373VN
- b7VpWkIRE8+/ITmVlXeB7izAVz3Mf6binKjAzpVCzbIAM9ktTdXISWwEE6t/cgwSuw7p
- RPeA==
+ bh=+0kxSL0bSp1ZdArz4mOTepGjPK4tLbGYwxqTVr9cm+A=;
+ b=J7R8Mx5UlPC+35Wj0RnIo3JjejR3oOHRwBKY1qPeDL3G5RnGKybeyhhviohcciaGjJ
+ UjwZuBn/sx5aIBBxxOzbnl7eqIj3l9uWGuclrZsHl9QHM1m/Gbmz+gYz8HiJeIgTHsko
+ m6Z8b9YKDWYzEG6Le1VTMhoGwdyCPct++jtrSYJrc7I2Kb+g0xhpom72ma+kqKlXKL45
+ 8HTz1NwwljjjIh3bayr70P6nUjRRVKsQX/Lnvht5iUNA42FMMnCRL1hfYFG6K2tEB5X0
+ 2mxH75HJO5kFF6LEyJ98M/oRM2WTwD8bUo7MlonnxL14nb0wg0K+p+UEi9OphWVL/aZ+
+ U1pQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778782841; x=1779387641;
+ d=1e100.net; s=20251104; t=1778782857; x=1779387657;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=zgmfv3WxPsswfn3OpFM+x1W6RSzPAjdGt228EsTxFz0=;
- b=GqRer7hcN8shA5tnfojprzS9OYJ0NXN8ZXhf1xVJZLeDGfLm5yj5SOzqUnQeCJQKMx
- U3SO9FtvMXrcZIVtUTCwg6o69zj01F3mtn5Kp0KuGDGpZxHHgrlfXPo8ygd/8giKNsQp
- EyF5bJEvqsbXlZJNO5MIdYmrPVA8HA4lmSrND74BlUuISnQOBk4+L36eACzLuw/4UTuQ
- OPZNA7cidu50IohL5VZGJLOgX5N1cqrfewvADXq7HmkhTItexaAAoWbs4R37ghknMtJU
- /NUS487NaMBTcj9guDelIZT4mpWqK8n21Q8YLad8WlWfbgIDR/8CI/IK9GxVfkBn3oAQ
- CMDw==
-X-Gm-Message-State: AOJu0YyOF27XxF6oyzfJTIcWH3/Dp3hlXM7oCVSLgcXjTuryAtshUC5a
- rt+QHVEl85HFDCSdJLDNmCSJbLjBZpg3w2Vk6BgFXcZJp+zesbDAQ+5aoWdYywfCDLM=
-X-Gm-Gg: Acq92OFC7ukKsEqZUaKdmoVHzY3Toz0k6LqMmEwrl7XIGDjrwdgl0lHxy8m81RTLMtG
- ZL7CpEvJLihyMjiUrKuTKOFBUXKEuSTsBaKsTpMaAsNw1ZBWJNXS4kvnwQYhsG3R5EY0zYTuV1C
- Ez2mNEX5Wc0uy2kgormsDkRyP+C2W3lLjJRjMIpsgLY4AIhk9pawzhYFGIACwEqNVzQTSvAw2u4
- LwIO0PY8tMnSO52TEc9oIXTX+LPPu+Ck5DfhHUqc8OfxEiLA4kxYEJT7R4eiiykKNFHajIEymwL
- hZKXY7FmgJrzFKRqOidxAZONQcI3VqpCVME/0ik9tqVXpnm5fUpfWu1ColPr6S++hb4nkrVik9Y
- +nYaxk7OnV8afOVZ7Afz4wLQt/Z7mzo+fjiDv22GH2qwAFxpnGtZHu2r0+qr92qmoY4rJ3BYkby
- nU6ff50+n7XkgSLYnNRb9CEPtGp6/3db+brgHSTzniSaFgAy28hCVsyhwhzOJepWd0s9zmCx1za
- FlBxE/eOo27zcXcg17+AWsLWR8Yw8XUo58Y8Uwr5VQm3KMiTqloXsA5f61GIn3oGFpqDHufH2ce
- RW0h
-X-Received: by 2002:a05:600c:858d:b0:48f:e230:80a3 with SMTP id
- 5b1f17b1804b1-48fe6514c31mr5473445e9.33.1778782841232; 
- Thu, 14 May 2026 11:20:41 -0700 (PDT)
+ bh=+0kxSL0bSp1ZdArz4mOTepGjPK4tLbGYwxqTVr9cm+A=;
+ b=sF9ArR/wIi3jIXQGnwDzSp887Y3WznPvF/6NkZou+vnEXzTOLNrJUZoDu73bUuOScl
+ Cu0ZBjKlucuY+nB75GxNu7R7vGBem6h+T71schI3PsqmUaNno1J3ml8MhXNoTs0RGPIg
+ QADKXdVcmUhKcryIB9I9LQFvkf/lkWs42IAbezKRuTYsy9NH5YF/2xCeVRwpFAhHYhN9
+ WTOlRcMqRx8W2xkXFdCvdWYxES+sEcdr7vonl+vFb53cKA8GWnZwssZlkcYKaJn+On/b
+ pfcEPer+mLBWE2ryIBIfYXbMRouCIfsNRa9bvJ/F8S4PZJ58bSkzO3d2WMxnL0s39PIj
+ rYYA==
+X-Gm-Message-State: AOJu0Ywwv5nrD1vcYyl3RYucnPfcqFjG3FQ2wOtSTKhVI21/QHX2Tkt3
+ wfthRQlqiCVb6GU/fGWMPaARJXvuBxRFyOrFmOru3KK7J2ribQCiFLh3xO1HPufxUzI=
+X-Gm-Gg: Acq92OFJNfxpQdBfDNohTbSfR0o+ICmj3PtbvG/WdTeFvdH8pq8/x8ZDkn6h1LVE83L
+ EqYOO+yTstOSV0ZHDX6adWuqb3TfGh6BgeYcEjQNm75vfqHhf5dzagrGMKWlrS2KXpacDPFJBWD
+ iHGkNzA6sf0X6UWhQ1UGvMXemGqHVY0L42kIEiTK2lW6yis84MjCXl5sUCeKUpuwZ4Bpot9lFNc
+ hjVMMz3Q8Nu4wQ0GzdGrxojVEocPHXCNpUEE+/sLoidb93nwAZ0CyCjSNIGI/PXBldIeSXgwUvS
+ g123Tr7Fmi1v05jGLXrrleX07f6nf9B4LgairOOA6RXUD3g6DTlJq+5rgmBMQOx9YlO6UrkwreS
+ I0hPX4lKdTKHMYcT9tOlRD739QhWppF95fvmjIRRlJodiRE2by0qMmbOWym9S6VFVFezPYg5pgg
+ WM79D/XFzVd1TllfZTP3R1ORvjSK1mzAIc5UUuPj2uwtMtmr/cYBfgZsJKp+e0yh7vDjivBg4S/
+ Zs53yKdbM6rI1i3mIXq/dc8tkGW09j4TQagyYnAHwb30cYoJwQu2fIDygy91BKnyQ/29ukG2MfZ
+ GGKH
+X-Received: by 2002:a05:600c:4fcb:b0:488:a797:f0ac with SMTP id
+ 5b1f17b1804b1-48fe6613ab3mr6682715e9.28.1778782857016; 
+ Thu, 14 May 2026 11:20:57 -0700 (PDT)
 Received: from thinkpad-t15g-g2 ([2a01:e0a:905:5c10:111d:8a59:d7b9:c8a9])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-48fe53ab773sm7973575e9.3.2026.05.14.11.20.39
+ 5b1f17b1804b1-48fe53ab773sm7973575e9.3.2026.05.14.11.20.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 14 May 2026 11:20:40 -0700 (PDT)
+ Thu, 14 May 2026 11:20:56 -0700 (PDT)
 From: Allan ELKAIM <allan.elkaim@gmail.com>
 To: u-boot@lists.denx.de
 Cc: Miquel Raynal <miquel.raynal@bootlin.com>,
  Joao Marcos Costa <jmcosta944@gmail.com>,
  Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
  Tom Rini <trini@konsulko.com>, Allan ELKAIM <allan.elkaim@gmail.com>
-Subject: [PATCH v1 0/2] fs/squashfs: fix symlink load failure on large images
-Date: Thu, 14 May 2026 20:18:50 +0200
-Message-ID: <20260514181854.399679-3-allan.elkaim@gmail.com>
+Subject: [PATCH v1 1/2] fs/squashfs: fix heap exhaustion during symlink
+ resolution
+Date: Thu, 14 May 2026 20:18:52 +0200
+Message-ID: <20260514181854.399679-5-allan.elkaim@gmail.com>
 X-Mailer: git-send-email 2.53.0
-In-Reply-To: <"CACgNL-F2=KJtZ+gThpx_BuWsn6puqFxK0uLOmnABSS9=rRQmeQ@mail.gmail.com">
+In-Reply-To: <20260514181854.399679-3-allan.elkaim@gmail.com>
 References: <"CACgNL-F2=KJtZ+gThpx_BuWsn6puqFxK0uLOmnABSS9=rRQmeQ@mail.gmail.com">
+ <20260514181854.399679-3-allan.elkaim@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Fri, 15 May 2026 01:39:52 +0200
@@ -103,46 +105,120 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+When sqfs_read_nest() encounters a symlink it resolves it by calling
+itself recursively. In the unfixed code this looks like:
 
-sqfsload fails to load a file through a symlink when the squashfs
-image contains a large number of inodes (e.g. a rootfs that includes
-the tzdata timezone database).
+  // dirsp is open: inode_table + dir_table still on heap
+  resolved = sqfs_resolve_symlink(symlink, filename);
+  ret = sqfs_read_nest(resolved, ...); // recursive: allocates a new
+                                       // inode_table + dir_table pair
+  free(resolved);
+  goto out;
+  // out: sqfs_closedir(dirsp) <- parent tables freed HERE, too late
 
-Root cause: sqfs_read_nest() resolves the symlink by calling itself
-recursively without first freeing the parent directory's inode and
-directory table buffers. This causes a temporary double allocation
-that can exhaust the U-Boot heap. When malloc() subsequently fails
-inside sqfs_read_directory_table(), the error goes undetected and
-sqfs_search_dir() is called with a NULL pos_list pointer, leading to:
+There is no permanent leak: the parent's tables are freed at the
+out: label once the recursive call returns. However, for the entire
+duration of the recursive call both the parent's inode_table +
+dir_table and the child's inode_table + dir_table are live on the
+heap simultaneously. On large squashfs images these tables can be
+significant in size, and this temporary double allocation may exhaust
+the heap budget.
 
-  Error: invalid inode reference to directory table.
-  Failed to load '/boot/Image'
+A superficial workaround would be to increase CONFIG_SYS_MALLOC_LEN,
+but that wastes memory on all boards and does not address the
+structural problem. The correct fix is to change the freeing order:
+release the parent directory's resources before recursing. This way
+only one set of inode and directory tables is live at any given time,
+halving the peak heap usage during symlink resolution.
 
-Patch 1 fixes the structural problem (temporary double allocation)
-and plugs the silent NULL pointer path in sqfs_read_directory_table().
-Patch 2 adds the missing return-value checks on sqfs_dir_offset() that
-turn any residual lookup failure into a clean error propagation.
+When heap exhaustion does occur and malloc returns NULL for dir_table
+or pos_list inside sqfs_read_directory_table(), the failure is
+currently silent and cascading:
 
-Both patches are independent and can be reviewed separately.
+  - metablks_count is not reset to -1 before the goto out, so the
+    function returns a positive block count alongside a NULL pointer.
+  - sqfs_opendir_nest() does not detect the failure (it only checks
+    metablks_count < 1) and calls sqfs_search_dir() with m_list=NULL.
+  - sqfs_dir_offset() iterates over m_list[0..n], reading from
+    addresses 0x0, 0x4, 0x8, ... None of those values match the
+    inode's start_block, so the function returns -EINVAL.
+  - The error propagates up as a load failure with no indication
+    that the root cause was heap exhaustion:
 
-The bug was first observed on U-Boot v2024.01 and is still present
-on v2026.04. The patches have been tested on a Raspberry Pi CM4
-running U-Boot v2026.04 (Yocto Scarthgap 5.0.17) with a 325 MB
-squashfs rootfs containing 22 517 inodes. The symlink
-/boot/Image -> Image-6.6.63-v8 now resolves successfully.
+      Error: invalid inode reference to directory table.
+      Failed to load '<symlink path>'
 
-This series addresses the bug reported at:
-https://lists.denx.de/pipermail/u-boot/2026-May/618533.html
+Two fixes:
+1. In sqfs_read_directory_table(), set metablks_count = -1 whenever
+   malloc fails after sqfs_count_metablks() returns a positive value,
+   so that the caller's "metablks_count < 1" check correctly detects
+   the failure and avoids calling sqfs_search_dir() with a NULL
+   pos_list.
+2. In sqfs_read_nest() and sqfs_size_nest(), call sqfs_closedir() on
+   the parent dirsp before the recursive call so that the parent's
+   inode and directory tables are freed before the child allocates
+   its own. Only one set of tables is then live at any given time,
+   halving peak heap usage during symlink resolution.
 
+Link: https://lists.denx.de/pipermail/u-boot/2026-May/618533.html
 
-Allan ELKAIM (2):
-  fs/squashfs: fix heap exhaustion during symlink resolution
-  fs/squashfs: add sqfs_dir_offset() error checks
+Signed-off-by: Allan ELKAIM <allan.elkaim@gmail.com>
+---
 
- fs/squashfs/sqfs.c | 32 ++++++++++++++++++++++++++++++--
- 1 file changed, 30 insertions(+), 2 deletions(-)
+ fs/squashfs/sqfs.c | 22 ++++++++++++++++++++--
+ 1 file changed, 20 insertions(+), 2 deletions(-)
 
+diff --git a/fs/squashfs/sqfs.c b/fs/squashfs/sqfs.c
+index 9cb8b4af..07e2bd82 100644
+--- a/fs/squashfs/sqfs.c
++++ b/fs/squashfs/sqfs.c
+@@ -853,12 +853,16 @@ static int sqfs_read_directory_table(unsigned char **dir_table, u32 **pos_list)
+ 		goto out;
+ 
+ 	*dir_table = malloc(metablks_count * SQFS_METADATA_BLOCK_SIZE);
+-	if (!*dir_table)
++	if (!*dir_table) {
++		metablks_count = -1;
+ 		goto out;
++	}
+ 
+ 	*pos_list = malloc(metablks_count * sizeof(u32));
+-	if (!*pos_list)
++	if (!*pos_list) {
++		metablks_count = -1;
+ 		goto out;
++	}
+ 
+ 	ret = sqfs_get_metablk_pos(*pos_list, dtb, table_offset,
+ 				   metablks_count);
+@@ -1473,6 +1477,15 @@ static int sqfs_read_nest(const char *filename, void *buf, loff_t offset,
+ 
+ 		symlink = (struct squashfs_symlink_inode *)ipos;
+ 		resolved = sqfs_resolve_symlink(symlink, filename);
++		/*
++		 * Free the parent directory resources before recursing so that
++		 * the recursive call can allocate its own inode and directory
++		 * tables without exhausting the heap.
++		 */
++		free(dirs->entry);
++		dirs->entry = NULL;
++		sqfs_closedir(dirsp);
++		dirsp = NULL;
+ 		ret = sqfs_read_nest(resolved, buf, offset, len, actread);
+ 		free(resolved);
+ 		goto out;
+@@ -1731,6 +1744,11 @@ static int sqfs_size_nest(const char *filename, loff_t *size)
+ 
+ 		symlink = (struct squashfs_symlink_inode *)ipos;
+ 		resolved = sqfs_resolve_symlink(symlink, filename);
++		/*
++		 * Free the parent directory resources before recursing.
++		 */
++		sqfs_closedir(dirsp);
++		dirsp = NULL;
+ 		ret = sqfs_size(resolved, size);
+ 		free(resolved);
+ 		break;
 -- 
 2.53.0
 
-base-commit: 88dc2788777babfd6322fa655df549a019aa1e69
