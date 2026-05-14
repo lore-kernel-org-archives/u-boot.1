@@ -4,58 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51421CD4F25
-	for <u-boot@archiver.kernel.org>; Thu, 14 May 2026 15:20:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 043CACD4851
+	for <u-boot@archiver.kernel.org>; Thu, 14 May 2026 16:14:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8490D846C7;
-	Thu, 14 May 2026 17:20:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id 0A4D284687;
+	Thu, 14 May 2026 18:14:54 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=arm.com header.i=@arm.com header.b="OrJUzVQK";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="slZDyrdC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 728AF8468A; Thu, 14 May 2026 17:11:20 +0200 (CEST)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id D978284683
- for <u-boot@lists.denx.de>; Thu, 14 May 2026 17:11:17 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=arm.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=harsimransingh.tungal@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 785D31477;
- Thu, 14 May 2026 08:11:11 -0700 (PDT)
-Received: from e132995.arm.com (unknown [10.57.69.131])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 57E623FAF5;
- Thu, 14 May 2026 08:11:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
- t=1778771476; bh=LWgMxt5EKzqnFU2e/woBsJjfqmF2IOPs7qhYAyZCtyA=;
- h=Subject:From:To:Cc:In-Reply-To:References:Date:From;
- b=OrJUzVQKfnlwL7tNLGdvjf3E2p2MSXdfj8H1M8QqE/jjtXw6aK6uU+FY6wNJ9aA/S
- qWfjkgTdE/zBad5lVt0p/HZEsERBiFudgdniNnz9VU9J22y6gFwF4k18VYVzWcmLbq
- MtwoQrO9JaDtaL+r25WX6FZ6RAG2Yny0Jj/ka6Xw=
+ id 81DA084690; Thu, 14 May 2026 18:14:52 +0200 (CEST)
+Received: from sea.source.kernel.org (sea.source.kernel.org
+ [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id D606B8467C
+ for <u-boot@lists.denx.de>; Thu, 14 May 2026 18:14:49 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=conor@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sea.source.kernel.org (Postfix) with ESMTP id 25A1B4012E;
+ Thu, 14 May 2026 16:14:48 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 12300C2BCB3;
+ Thu, 14 May 2026 16:14:46 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1778775288;
+ bh=nQAKwxGURJKwWDi2s7Z/9s67lI+9f9xv3JXpG5Fx/zc=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=slZDyrdCwf9OCnVGEMP7jxEUJerSDui4sgnwebUnJvEm8NJS3mdpWukITGXMm1cjp
+ kPPG325lmn+p+mCqoBK4sJFh949AxyqwK8kA3EzfTESVCAXdjcUDxkXhHvqisV0h1X
+ NtGVlwem2V1IX43MHmah8QJKAMkHoUUFRh+YA7qXyvU2bTG0oSVJfjkpacflwqkqeY
+ AhLHTSCMsClJ3/hNB/QwHRebXt62oPrM+uhsri0Zw/iPQXx1ik5vSWR1qQBGMqkb+Q
+ kuQ63UR19Jk+sdVZzY1ieW8nVSnWDIhmFSyLtVwaklwlSBx21xrrYenYErb7zRnGzw
+ /7jPwbObUpjXw==
+Date: Thu, 14 May 2026 17:14:44 +0100
+From: Conor Dooley <conor@kernel.org>
+To: Sune Brian <briansune@gmail.com>
+Cc: Peter Robinson <pbrobinson@gmail.com>, Tom Rini <trini@konsulko.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
+Subject: Re: U-Boot patch submit standard and requirement
+Message-ID: <20260514-spotted-happier-0ccb77ca8f24@spud>
+References: <CAN7C2SCYCwE=BRoeCedqQYjv-Gf6x6ETOdKeeDBE=CG=-rSk9w@mail.gmail.com>
+ <CALeDE9PU0-fW_+erR9QHK1ST8fcStx0FWWk_0M8ELjtADugd7Q@mail.gmail.com>
+ <CAN7C2SCATJL_rhpBZWwZuQVpLdnbDh5+DRFbtGHoxCXu62AVmw@mail.gmail.com>
+ <CALeDE9PesKLwzt=uu_b8+pq5QXFnnK1YAO9WL3f8=CHx93w61w@mail.gmail.com>
+ <CAN7C2SC_YwotE2-PS=eAFEnMOXp7jVrhaOSbKsuChLVr4zEa8A@mail.gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Subject: Re: [PATCH 12/12] efi_loader: align FF-A cache maintenance with
- runtime path
-From: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: harsimransingh.tungal@arm.com, u-boot@lists.denx.de, 
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>, 
- Tom Rini <trini@konsulko.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Hugues Kamba Mpiana <hugues.kambampiana@arm.com>
-In-Reply-To: <CAFLszTjVEhDxLN0btbo=Uczr7QMQpJF-T_7Sp78vvft-FYTPZQ@mail.gmail.com>
-References: <20260424173151.371134-1-harsimransingh.tungal@arm.com>
- <20260424173151.371134-13-harsimransingh.tungal@arm.com>
- <CAFLszTjVEhDxLN0btbo=Uczr7QMQpJF-T_7Sp78vvft-FYTPZQ@mail.gmail.com>
-Date: Thu, 14 May 2026 16:11:08 +0100
-Message-Id: <177877146833.2318147.10627034621280951705.b4-reply@b4>
-X-Mailer: b4 0.15.2
-X-Mailman-Approved-At: Thu, 14 May 2026 17:20:09 +0200
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="l021XDUKB0ZJeF1b"
+Content-Disposition: inline
+In-Reply-To: <CAN7C2SC_YwotE2-PS=eAFEnMOXp7jVrhaOSbKsuChLVr4zEa8A@mail.gmail.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,101 +73,171 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2026-04-28 12:14 -0600, Simon Glass wrote:
-> Hi Harsimran,
-> 
-> On 2026-04-24T17:31:50, Harsimran Singh Tungal
-> <harsimransingh.tungal@arm.com> wrote:
-> > efi_loader: align FF-A cache maintenance with runtime path
-> >
-> > Match boot-time FF-A cache handling to runtime behavior
-> >
-> > The boot-time FF-A MM communication path used invalidate_dcache_all()
-> > after copying the message into the shared buffer. This differs from the
-> > runtime path, which performs range-based maintenance to avoid global cache
-> > operations.
-> >
-> > Update ffa_mm_communicate() to use the same pattern as the runtime helper:
-> > clean the shared buffer range before the SMC and invalidate the same range
-> > after the response. This keeps boot-time and runtime behavior consistent
-> > and avoids whole-cache invalidation.
-> >
-> > Signed-off-by: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
-> > Signed-off-by: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
-> >
-> > lib/efi_loader/efi_variable_tee.c | 33 ++++++++++++++++++++++++++-------
-> >  1 file changed, 26 insertions(+), 7 deletions(-)
-> 
-> > diff --git a/lib/efi_loader/efi_variable_tee.c b/lib/efi_loader/efi_variable_tee.c
-> > @@ -389,19 +389,38 @@ static efi_status_t ffa_mm_communicate(void *comm_buf, ulong comm_buf_size)
-> >       memcpy(virt_shared_buf, comm_buf, tx_data_size);
-> >
-> >       /*
-> > -      * The secure world might have cache disabled for
-> > -      * the device region used for shared buffer (which is the case for Optee).
-> > -      * In this case, the secure world reads the data from DRAM.
-> > -      * Let's flush the cache so the DRAM is updated with the latest data.
-> > +      * Shared buffer cache maintenance for FF-A / OP-TEE communication:
-> > +      *
-> > +      * NS -> S (request path):
-> > +      *
-> > +      * The non-secure side populates the shared buffer. If the buffer is cached
-> > +      * in NS, the updated bytes may reside in dirty D-cache lines and not yet be
-> > +      * visible in DDR. Since the secure world typically reads the shared buffer
-> > +      * directly from DDR (e.g. with caches disabled / non-coherent mapping), we
-> > +      * must clean the corresponding cache lines to the Point of Coherency (PoC)
-> > +      * before entering secure world.
-> > +      *
-> > +      * S -> NS (response path):
-> > +      *
-> > +      * The secure world may update the same shared buffer in DDR. After returning
-> > +      * to non-secure, any cached copies of that region in NS may be stale. We
-> > +      * therefore invalidate the shared buffer range after the FF-A call to drop
-> > +      * those lines and force subsequent reads to fetch the latest data from DDR.
-> >        */
-> 
-> This 20-line comment is now duplicated verbatim with the one in
-> ffa_mm_communicate_runtime() introduced earlier in the series. Please
-> factor the clean-before / invalidate-after sequence into a small
-> helper (e.g. ffa_mm_buf_pre_call() / ffa_mm_buf_post_call()) so the
-> commentary lives in one place and the two paths cannot drift. The
-> runtime helper would add the extra 'no whole-cache invalidation after
-> ExitBootServices()' note at the call site.
-> 
-> > diff --git a/lib/efi_loader/efi_variable_tee.c b/lib/efi_loader/efi_variable_tee.c
-> > @@ -389,19 +389,38 @@ static efi_status_t ffa_mm_communicate(void *comm_buf, ulong comm_buf_size)
-> > -#ifdef CONFIG_ARM64
-> > -     invalidate_dcache_all();
-> > -#endif
-> > +     if (IS_ENABLED(CONFIG_ARM64))
-> > +             flush_dcache_range((unsigned long)virt_shared_buf,
-> > +                                (unsigned long)virt_shared_buf +
-> > +                                CONFIG_FFA_SHARED_MM_BUF_SIZE);
-> 
-> Just to check - flush_dcache_range() and invalidate_dcache_range() on
-> arm64 require start and end to be cache-line aligned, otherwise the
-> arch code warns and falls back to clean+invalidate of the partial
-> lines. CONFIG_FFA_SHARED_MM_BUF_ADDR and _SIZE need to be at least
-> CONFIG_SYS_CACHELINE_SIZE aligned - is that documented or enforced
-> anywhere? You could use BUILD_BUG_ON() near the call, perhaps?
-> 
-> > diff --git a/lib/efi_loader/efi_variable_tee.c b/lib/efi_loader/efi_variable_tee.c
-> > @@ -389,19 +389,38 @@ static efi_status_t ffa_mm_communicate(void *comm_buf, ulong comm_buf_size)
-> 
-> The commit message body opens with 'Match boot-time FF-A cache
-> handling to runtime behavior', which restates the subject. Please drop
-> that line and start directly with the problem paragraph per the U-Boot
-> convention of leading with motivation.
-> 
-> Regards,
-> Simon
-> 
 
-In v2, ffa_mm_communicate() itself handles both boot time and runtime
-capabilities, so this patch is no longer required. This patch has been
-removed in v2 but the review comments have been addressed.
-Link to v2: https://lore.kernel.org/u-boot/20260514124924.1804332-1-harsimransingh.tungal@arm.com/
+--l021XDUKB0ZJeF1b
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Regards
-Harsimran Singh Tungal
+On Thu, May 14, 2026 at 07:46:46PM +0800, Sune Brian wrote:
+> On Thu, May 14, 2026 at 6:37=E2=80=AFPM Peter Robinson <pbrobinson@gmail.=
+com> wrote:
+> >
+> > Hi Brian,
+> >
+> > You have made a very generic statement about levels of accountability
+> > on patch sets and consistency in reviews.
+> >
+> > Can you be more specific?
+> >
+> > Ultimately there are subsystem maintainers and each maintainer has
+> > variation on how they deal with their subsystem. You reference one doc
+> > three times in your statement.
+>=20
+> Hi Peter,
+>=20
+> Now I understand what you mean.
+> Simply one sentence is a bit hard to read what your thoughts are.
+>=20
+> That document I am quoting does not refer to the entire docs but only one
+> section of the docs with that link.
+>=20
+> Before quoting, my declarations as follows:
+> 1) I am not referring to specific people or party
+> 2) I experienced reviewer which again not being specific to one that
+> mentioned this docs is a supreme rules to follow otherwise patch
+> that is committed is not able to push to mainstream
+> 3) I simply do a quick check on u-boot mailing pool and do see a lot
+> of uncompiled reviewed patches that are not following that supreme
+> docs.
+>=20
+> As such I will being to quote:
+>=20
+> The mailing that are reported as not passing the standard of [1]
+> Full mailing:
+> https://patchwork.ozlabs.org/project/uboot/patch/20260423042824.3480-1-br=
+iansune@gmail.com/#3684415
 
+patchwork isn't loading for me, but it's on lore here:
+https://lore.kernel.org/all/20260423042824.3480-1-briansune@gmail.com/
+
+The comment about the changelog format seems to be very harsh, I doubt
+it really makes any difference. What you did and what the maintainer
+requested are effectively the same thing at the end of the day.
+
+The real problem with your patch is that you put the changelog into the
+commit message itself, rather than under the --- line.
+None of the examples you quote below do that.
+
+Also, your responses to Simon in the thread you link are very
+aggressive and antagonistic. Please try to be kinder to those that take
+time to review your submissions.
+
+Cheers,
+Conor.
+
+>=20
+> Quoting message [A]:
+>=20
+> - The required format is 'Changes in vN:'. Custom formats such as
+>    'Changelog vN -> vN+1:' are not acceptable.
+>=20
+> Now quoting those examples that don't follow this supreme rule.
+>=20
+> Example 1: Reviewed without any change requests as [A] complained
+> also aginsted [1] supreme standard
+> https://patchwork.ozlabs.org/project/uboot/patch/20260508-qcom_spl-v6-1-a=
+aac1ab17b50@seznam.cz/
+>=20
+> Example 2: Reviewed without any change requests as [A] complained
+> also aginsted [1] supreme standard
+> https://patchwork.ozlabs.org/project/uboot/patch/20260513015606.591384-2-=
+rs@ti.com/
+>=20
+> Example 3: Reviewed without any change requests as [A] complained
+> also aginsted [1] supreme standard and even "Accepted Stage"
+> https://patchwork.ozlabs.org/project/uboot/patch/BESP194MB2805271AD5DBE47=
+B322F8DC3DA3A2@BESP194MB2805.EURP194.PROD.OUTLOOK.COM/
+>=20
+> Example 4: Reviewed without any change requests as [A] complained
+> also aginsted [1] supreme standard and even "Accepted Stage"
+> https://patchwork.ozlabs.org/project/uboot/patch/20260511144437.46645-1-j=
+ames.hilliard1@gmail.com/
+>=20
+> If you want more examples I can keep listing but I think this is more
+> than enough.
+>=20
+> Well in order one t o follow the rules other should do the same.
+> Under such bases I have no issue however I cannot see this is
+> the real case.
+>=20
+> Enjoy!
+> Brian
+>=20
+> >
+> > Ultimately the rules are there as guidance and if someone chooses not
+> > to follow them to the letter there is little that can be done. if the
+> > individual becomes problematic they will be asked, publicly or
+> > privately depending on the situation, if they could better comply and
+> > there may be further action.
+> >
+> > It's very hard to act on your generic statement without examples,.
+> >
+> > Peter
+> >
+> > On Thu, 14 May 2026 at 09:41, Sune Brian <briansune@gmail.com> wrote:
+> > >
+> > > On Thu, May 14, 2026 at 3:29=E2=80=AFPM Peter Robinson <pbrobinson@gm=
+ail.com> wrote:
+> > > >
+> > > > Hi Brian,
+> > > >
+> > > > Can you provide more context?
+> > >
+> > > Hi Peter,
+> > >
+> > > Not getting you sorry.
+> > > Context means?
+> > >
+> > > Thanks,
+> > > Brian
+> > >
+> > > >
+> > > > Peter
+> > > >
+> > > > On Thu, 14 May 2026 at 03:02, Sune Brian <briansune@gmail.com> wrot=
+e:
+> > > > >
+> > > > > Hi Tom,
+> > > > >
+> > > > > Sorry to bother you.
+> > > > >
+> > > > > I am curious that for me myself I had no issue to follow
+> > > > > the requirements [1] as long as all patches that are
+> > > > > passing the review stage do follow the rules in [1].
+> > > > > However based on most recent commits and reviews
+> > > > > most of those are not even close to what [1] mentioned.
+> > > > >
+> > > > > So at the end, reviewers in U-Boot just made their own
+> > > > > standard and requested contributors to follow?
+> > > > >
+> > > > > Rather the U-Boot itself should all follow the docs rules?
+> > > > >
+> > > > > [1] https://docs.u-boot.org/en/latest/develop/sending_patches.htm=
+l#sending-updated-patch-versions
+> > > > >
+> > > > > Thanks,
+> > > > > Brian
+
+--l021XDUKB0ZJeF1b
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCagX09AAKCRB4tDGHoIJi
+0vC1AP42Px5zHWwpTZUouhFIl08qSX+OhhjO+jY5q6KZ4UBVEAD/U0/sNISO2FgE
+u8dgpeq+FKR4+40nYeI2uMjo2Vovzgo=
+=udf8
+-----END PGP SIGNATURE-----
+
+--l021XDUKB0ZJeF1b--
