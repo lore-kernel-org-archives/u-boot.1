@@ -4,102 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9FFAACD4F25
-	for <u-boot@archiver.kernel.org>; Thu, 14 May 2026 08:42:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1B25CD4851
+	for <u-boot@archiver.kernel.org>; Thu, 14 May 2026 09:15:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D5FD080F0E;
-	Thu, 14 May 2026 10:41:59 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 02FFD8341A;
+	Thu, 14 May 2026 11:15:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="aBub0jDl";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="BVHMKXcb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9B9028341A; Thu, 14 May 2026 10:41:58 +0200 (CEST)
-Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
- [IPv6:2607:f8b0:4864:20::32c])
+ id 3DA9583EF9; Thu, 14 May 2026 11:15:31 +0200 (CEST)
+Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
+ [IPv6:2a00:1450:4864:20::331])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 48A698056B
- for <u-boot@lists.denx.de>; Thu, 14 May 2026 10:41:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1251C8056B
+ for <u-boot@lists.denx.de>; Thu, 14 May 2026 11:15:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=briansune@gmail.com
-Received: by mail-ot1-x32c.google.com with SMTP id
- 46e09a7af769-7dea20cf21aso7013970a34.1
- for <u-boot@lists.denx.de>; Thu, 14 May 2026 01:41:56 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1778748115; cv=none;
- d=google.com; s=arc-20240605;
- b=Q56/z7u84avpuGNuD4p7TtgzwhRRdAJm8Ftg014Dns8hA6lm2V/CRGbChgibFwVaxR
- QzJlCcOmvStaW5mAKroyNtW402lAZWmGkWMLUSnWybk8W4T5TOwG46rfJzH88AXWCYSl
- 29Q5U144lPo96jxBjwrOuXZIJz0DoB1eEwea7FEo/2xOsjQevet+P1379Wv2hkfo94E/
- 1jDnHcE/SwUn8hNF6X+Qf5xI4shGV56j27sUmdnd2wBm+wQpTQGEhy0JVzBrXJBLf+C6
- COYHo/3G0Iaxd6n69YjOsCf2Xnn7lEwi/nmu2mp8x7zyvnynujbYP5WmruLRAUUA/slP
- bWaA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=MkjI7Ns0gEyUpKjaRa+lieiFnMgl026znojr/fHbFiQ=;
- fh=ZzgklZcdm1tzzJg83NUV/yph4rlJAq9K42MXhIGvrGA=;
- b=coJZMr1bNW2PZpMIPcEiAEbYtjW8hDRZn30QCEGT+XQ1MIBiYKqSgIXVfroaPlxrYj
- iOaZbQvGjlv4yE5Kyv9D+yoqmi7Fpy8qMeW7YM3Qy3XJrSDnsbEXsOUmYBPjP1MI64B7
- xk5v2fi5sOuygAAb8yeRL96UKxcGYFzli/kr9xy0FPDDhJaFelbAhSmgim6y287R89hs
- VB6tvBMKxrOroKJB6zK4Xrfu2EvMbi0cnJo9dhJRoJyXsNEJF+cYdcCdcCxPmEsv/BNN
- W6YsgJ+eoFCfvkxJ7aPcDlYT29DfTAb/inlj6ombpkwUMeb6rrRapIElPbpvKuRU3AGp
- VMcQ==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ spf=pass smtp.mailfrom=ghidoliemanuele@gmail.com
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-488a8ca4aadso68970025e9.3
+ for <u-boot@lists.denx.de>; Thu, 14 May 2026 02:15:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1778748115; x=1779352915; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=MkjI7Ns0gEyUpKjaRa+lieiFnMgl026znojr/fHbFiQ=;
- b=aBub0jDlDVoxbQzW4AW5nsRiE8QPNJ36XA4tjzfQWobS+tf+ffNhYV5sd1RYw9dvsB
- FwPLs4J3wAoN5TRF8B653jR0ioshhsSAvm9QnRk6d9mo/k9PJhFuQVno1reQxfLKN1JX
- wP36x5qWor8E8fX0jYDJXPLfVm0rPUTT+X89QN/Sp8EI5/9e4yVI/CZDpnE7svNfssiy
- 213niIcX1xWrgJKCayWA9MvxngXi9rFAwkW+WFKNhZjb8rKEaAHqVI8RvECIrZsyhbVg
- xo0PG0XgY1Ldy+GAZ2EYJef0rJjmYQRkzt7sSohUYhTGgWFJ0ABZENDcmOTkzKZQ7JGN
- yRLw==
+ d=gmail.com; s=20251104; t=1778750126; x=1779354926; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=WzH5AvQnXxwwUZ2fXGojWhoilbUechWmfL/9LBap5i4=;
+ b=BVHMKXcbUMn+BjwDLoI64hoAvYW4rW4lcx4Hge7ayK3xWUVYXRXwGdo0WoXZvokGdp
+ HLvGMYulUtbtDPA4nSa2VkxCSH7Q9UTfCd4fV+kHkyuI1yskgJi7Kb14bJvwEeeNR3nk
+ sPH5CssmAWL423/timnAleOyuYUsyC8c+oSCW/Aa1t3El/d+1EoEaJuoMe10OqSXBozU
+ sRQanXRS2GhRxc922gWAF0JZmBnXYx77taZowo65TEZesMv2D25GDh1kwthwJZxDhzld
+ 4ItVqejJheDmxoONxUiCUimBQJmcJZY7h7QpFnKCo/yy+LPEY3IEMdO1mFZeNveibl+R
+ aWdA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778748115; x=1779352915;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=MkjI7Ns0gEyUpKjaRa+lieiFnMgl026znojr/fHbFiQ=;
- b=FFTZQw3X04O7oOZ3xbn1aNZW/D9X+Vo5b+Q6y462bZavI77iYahT9QVQXVSiidV9Nq
- O6S7DtEhsyOeteLpoZfCxA/xLd02H9DsqrXp17xZUSj7OS58Rxa+AXT1jORsEYeLpunN
- r18q55mVf/BVwP6aAlYiSHy/zwp/9cTgpi+ZRP3Bj/4HWn2W6QLQ6H/CUydzrw981gEE
- LzNeiblLv8cabywvWXm1SKOijYNbf86uakorBxGOYwkQWCRCTpWhSvc7AJgLcC0L/a0O
- 48N5f1XZvpLaOJl9ZbhGIEYY1AnJuM2hucovMQaL+C0EbffgrbR5Rf8cXb76FKL77uOb
- 9jIg==
-X-Forwarded-Encrypted: i=1;
- AFNElJ9mVL9pqZO9Sy1uzg25D4D/90fIRoJExCYrQ86P4MF47f4z1Bgzp2GIS29HCmx+T1uhg1l+FPg=@lists.denx.de
-X-Gm-Message-State: AOJu0Yyj12/6L0d8OMpxwGtKP7U2lJ5OQVLwENBvPPZSq6DvmZGGbJN0
- ZyQwbTUJ/ZZIM2vRa7jrRD3yT0w+MvTkkfo9cbyqyOFXECM5Sj9/S7O+0YoCFOg8EXCZB5pgraX
- QJw1WJFcEQ7uO/MwnQzxBRqNB+WQixBc=
-X-Gm-Gg: Acq92OF/k+2oSJHoPOqVlBFEt95VmhnY5bhO0ouHuRFApNsxh8EGySg4y0pEBfjThI4
- B7EK50rv/LqYRNnpmtpMRKo9bMjivSIUWngafYaLxiykN1IoAsIqagqZDr8fGXlVsuQJlK+wg7y
- Vzt7PXqUC/WFy+FYkPwdL71tOpK68TmeDWPK+czcnUHORvs/M9DxFFaDDvOM/7by1fRNKbDjInZ
- SBc3gxldCP7lifMjTAC7qjg47+73m+9f3tuVmhyGm6rqtJWus3wTekDPIagkahykB4pqWEQWUyh
- IvkvatIw
-X-Received: by 2002:a05:6830:f95:b0:7d9:b58e:55f2 with SMTP id
- 46e09a7af769-7e3da4e61ebmr4306429a34.24.1778748115030; Thu, 14 May 2026
- 01:41:55 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1778750126; x=1779354926;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=WzH5AvQnXxwwUZ2fXGojWhoilbUechWmfL/9LBap5i4=;
+ b=Ju2sUsat6qKbXVICgcLhxJp+tjR+etKYh8z8bEbz6Diho3sUsvgVSfrqGuNUTGhTGq
+ ryVEUtia1RHGBTn9FkMHwLbD82t4Ic+JSyLD51KHXZeVLaxqsIgaaQ7KSr64KUisJQHU
+ WGoXFP0Om+s/CnboiiCnMTRvmWOvOgjcEtzq02qexH21xcN5HhSnYZAraqga1CB2qzNo
+ K5nJnNy7G38oAMKi/nWQvBPivdaDzUdnBPNb1ycxW502haV/GfujKKVol/elu6RZsZD7
+ t+Vpo5hz2NuQFnLOZgsUXBzhnLOvgY5og8Jzymf6mfIMfMP1ZvFeUIXKtfnom0B2cCjT
+ r84A==
+X-Gm-Message-State: AOJu0YzxYDnp4J4/HKuUBA6xGZ7W5IqYLbHWM2maYdYvCfF5RWV8OHSk
+ LX/LagGVKwr4ZATa1k8rhMP73VreFptRfT47v8if4ZSzo51DtxlS0KOdp1nrhPlL
+X-Gm-Gg: Acq92OE1QYlvjiSFjDVzenI40ahyqEILNjVYYqUCr2qY3o5RBmN8NX3FZug/zVYQqnZ
+ 3a1JadkxlEo+Bc+AyqNd+/JTpUPdijJAfCXUgFg9MzUdnPMHZwmj8iKsMAdrB0rWDNbwumYoAd4
+ /vS73Re3iQJIhwTN232je+xr/KTmk/MqgwUoC6XSwJsLar5sirmjvfGw2T/qfYt4M6bH569sDk/
+ 4cMGnJH9rjdbaBiHNTwP1+PaUgmfJh9j6yNlgE1kzmww/sqiV87Eyw2n8NPOfpNk5seilYh4iGz
+ e9IG4Uja1WOkR+hnSLtZBhqPWgN/PWT4pBEORvTSid4SA8VRdpzje5AswEkc/h6r7Ngmn2o1yl6
+ ir1KhwpoqzlJzGjq+/sF/YCubkVVBOeUlvHDBcYR7pcly1XrAJ+Aha6byQsuW11MjRwODGjLsVJ
+ 4/2DXDl/rcNambd0YZChH0qk5eZzM89GsCaJ9LPlZCPIr4Cr2jDOpm09+0cRu96ok115sI0rBLO
+ NX+xFugOhO1Z9Vdojo6888L41eG4PA2+u40SZcpHxCZZFcSvIGq+jFYmcd+q/lDxA==
+X-Received: by 2002:a05:600c:4583:b0:489:1d23:4524 with SMTP id
+ 5b1f17b1804b1-48fce9b30eemr93796555e9.5.1778750126158; 
+ Thu, 14 May 2026 02:15:26 -0700 (PDT)
+Received: from emanueleg-nb.corp.toradex.com
+ (248.201.173.83.static.wline.lns.sme.cust.swisscom.ch. [83.173.201.248])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-48fd62b4d34sm16503535e9.2.2026.05.14.02.15.25
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 14 May 2026 02:15:25 -0700 (PDT)
+From: Emanuele Ghidoli <ghidoliemanuele@gmail.com>
+To: u-boot@lists.denx.de,
+	Tom Rini <trini@konsulko.com>
+Cc: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>,
+ Francesco Dolcini <francesco.dolcini@toradex.com>,
+ Franz Schnyder <franz.schnyder@toradex.com>,
+ Ernest Van Hoecke <ernest.vanhoecke@toradex.com>,
+ Neha Malcom Francis <n-francis@ti.com>
+Subject: [PATCH v1] arm: dts: k3-am69-aquila: fix combined boot firmware image
+ build
+Date: Thu, 14 May 2026 11:15:12 +0200
+Message-ID: <20260514091516.2784772-1-ghidoliemanuele@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <CAN7C2SCYCwE=BRoeCedqQYjv-Gf6x6ETOdKeeDBE=CG=-rSk9w@mail.gmail.com>
- <CALeDE9PU0-fW_+erR9QHK1ST8fcStx0FWWk_0M8ELjtADugd7Q@mail.gmail.com>
-In-Reply-To: <CALeDE9PU0-fW_+erR9QHK1ST8fcStx0FWWk_0M8ELjtADugd7Q@mail.gmail.com>
-From: Sune Brian <briansune@gmail.com>
-Date: Thu, 14 May 2026 16:41:45 +0800
-X-Gm-Features: AVHnY4JggkXbvTm963_8lXMebO1A_4Wc5uPH1XdP9UQqml3HDzUKcKxkkP44Z6k
-Message-ID: <CAN7C2SCATJL_rhpBZWwZuQVpLdnbDh5+DRFbtGHoxCXu62AVmw@mail.gmail.com>
-Subject: Re: U-Boot patch submit standard and requirement
-To: Peter Robinson <pbrobinson@gmail.com>
-Cc: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -116,43 +102,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, May 14, 2026 at 3:29=E2=80=AFPM Peter Robinson <pbrobinson@gmail.co=
-m> wrote:
->
-> Hi Brian,
->
-> Can you provide more context?
+From: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
 
-Hi Peter,
+The combined boot firmware firmware-aquila-am69-gp.bin depends on
+tiboot3-am69-gp-aquila.bin, which in turn requires the GP variant
+of the TI system firmware blob (ti-fs-firmware-j784s4-gp.bin).
 
-Not getting you sorry.
-Context means?
+Fix the combined boot firmware image build by adding the missing binman
+nodes.
 
-Thanks,
-Brian
+Fixes: f62d4535cf17 ("arm: dts: k3-am69-aquila: add combined boot firmware image")
+Signed-off-by: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
+---
+ arch/arm/dts/k3-am69-aquila-dev-u-boot.dtsi | 9 +++++++++
+ 1 file changed, 9 insertions(+)
 
->
-> Peter
->
-> On Thu, 14 May 2026 at 03:02, Sune Brian <briansune@gmail.com> wrote:
-> >
-> > Hi Tom,
-> >
-> > Sorry to bother you.
-> >
-> > I am curious that for me myself I had no issue to follow
-> > the requirements [1] as long as all patches that are
-> > passing the review stage do follow the rules in [1].
-> > However based on most recent commits and reviews
-> > most of those are not even close to what [1] mentioned.
-> >
-> > So at the end, reviewers in U-Boot just made their own
-> > standard and requested contributors to follow?
-> >
-> > Rather the U-Boot itself should all follow the docs rules?
-> >
-> > [1] https://docs.u-boot.org/en/latest/develop/sending_patches.html#send=
-ing-updated-patch-versions
-> >
-> > Thanks,
-> > Brian
+diff --git a/arch/arm/dts/k3-am69-aquila-dev-u-boot.dtsi b/arch/arm/dts/k3-am69-aquila-dev-u-boot.dtsi
+index f91cdf15aff3..c3a66ac8dae2 100644
+--- a/arch/arm/dts/k3-am69-aquila-dev-u-boot.dtsi
++++ b/arch/arm/dts/k3-am69-aquila-dev-u-boot.dtsi
+@@ -12,6 +12,11 @@
+ #if defined(CONFIG_CPU_V7R)
+ 
+ &binman {
++	tiboot3_am69_gp {
++		insert-template = <&tiboot3_j784s4_gp>;
++		filename = "tiboot3-am69-gp-aquila.bin";
++	};
++
+ 	tiboot3-am69-hs {
+ 		insert-template = <&tiboot3_j784s4_hs>;
+ 		filename = "tiboot3-am69-hs-aquila.bin";
+@@ -28,6 +33,10 @@
+ 	filename = "ti-sysfw/ti-fs-firmware-j784s4-hs-enc.bin";
+ };
+ 
++&ti_fs_gp {
++	filename = "ti-sysfw/ti-fs-firmware-j784s4-gp.bin";
++};
++
+ &sysfw_inner_cert {
+ 	filename = "ti-sysfw/ti-fs-firmware-j784s4-hs-cert.bin";
+ };
+-- 
+2.43.0
+
