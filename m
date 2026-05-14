@@ -4,121 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43E8BCD4F21
-	for <u-boot@archiver.kernel.org>; Wed, 13 May 2026 23:53:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5E06CD37AC
+	for <u-boot@archiver.kernel.org>; Thu, 14 May 2026 00:41:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 411E0838BB;
-	Thu, 14 May 2026 01:53:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 045418341A;
+	Thu, 14 May 2026 02:41:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="ML39EMJM";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="o2If2hNx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EF7FA83E36; Thu, 14 May 2026 01:39:17 +0200 (CEST)
-Received: from SJ2PR03CU001.outbound.protection.outlook.com
- (mail-westusazlp170120002.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c001::2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 97C188341A; Thu, 14 May 2026 02:41:07 +0200 (CEST)
+Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
+ [IPv6:2607:f8b0:4864:20::333])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 295278341A
- for <u-boot@lists.denx.de>; Thu, 14 May 2026 01:39:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 40BA1800AE
+ for <u-boot@lists.denx.de>; Thu, 14 May 2026 02:41:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=jm@ti.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=axz+uxHaSb/hFwE4dKmIrWq0V8Qg4S4CnWUGBbCEhzT7kd0wzY23cURcnEb1qBnhdGglLxTKIagIwID7QBGdehIxUFJLqF0ZUiFjEOJhownFOAzbQGVgRajHLJmXIYLHZVL2H6Mt4sIp+AWfLHWu5zs2QaxujujHiJ8OueyKI6HP4eAb3peq1kIyFDo3jLBO2K5quuf2vlokDvMBG1yokgVJc5V50qKqQFeSbZzq7AC75vRYUnynUUsQB8+/KGAJePuYOUozPaxusLRXf7tp3gwB78Ti1w27EUgqSVkI0nLTIFwGMKz/4qctOOkrY32FWe3y4OenuQ9bIFyv3kKGZg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=vjziKNUB8E49Oxbvw4mVJ0NZBtOZhkseFAvj/jPYSJ4=;
- b=yxuoRz1sSNGQL+wSYk364Mu0bJofj0PvK8nMFeALGTka9HK3bITWBtPoYVbuCb3vk51X62VBckYMo4piwCMd4xH+9oz6IukB15vs8blBqX0I8CLxSb4xpLDnoSmxXl16b3JKIn03mSpDBtM52fx+gqZcNME6tWnDzMt5JHWXFkWMd5woVVzhalyXGrE1MMdNVV4Mb6mWRLEfI78Zw4mmbAA0T4hcWS9hmcyzwfQEE5ppU2+Eq98pQdLBTsc0Gc5jBdm6yvOfKJ2Mw0WdE7wKJWeggUD8bhzMxvyDx3kHDRHGbGs9ltHecLZCaBZhHTLYhNPIkoCLo6PfWMjPVELpUA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.23.194) smtp.rcpttodomain=altera.com smtp.mailfrom=ti.com; dmarc=pass
- (p=quarantine sp=none pct=100) action=none header.from=ti.com; dkim=none
- (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=vjziKNUB8E49Oxbvw4mVJ0NZBtOZhkseFAvj/jPYSJ4=;
- b=ML39EMJMrL8LkwXDpm/qhDgoaFFwTaOpqPg8tuXssbxyxf/gwXTUF1suHnp9BAeduxyZkP1BsKbSgXpit4Wqsclq0LMY6gHcJlSryhKV0TjqYh6kcCxsxQRiBnonvtAlu0AFBJ6SgdM+pzJrZzQrd7/WFM0ZJpPZA6IZbpSFWLc=
-Received: from MN0P222CA0005.NAMP222.PROD.OUTLOOK.COM (2603:10b6:208:531::8)
- by LV8PR10MB7725.namprd10.prod.outlook.com (2603:10b6:408:1e6::18) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9913.12; Wed, 13 May
- 2026 23:39:11 +0000
-Received: from BL02EPF0002992B.namprd02.prod.outlook.com
- (2603:10b6:208:531:cafe::30) by MN0P222CA0005.outlook.office365.com
- (2603:10b6:208:531::8) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9913.12 via Frontend Transport; Wed,
- 13 May 2026 23:39:11 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.194)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.23.194 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.23.194; helo=lewvzet200.ext.ti.com; pr=C
-Received: from lewvzet200.ext.ti.com (198.47.23.194) by
- BL02EPF0002992B.mail.protection.outlook.com (10.167.249.56) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.25.13 via Frontend Transport; Wed, 13 May 2026 23:39:10 +0000
-Received: from DLEE207.ent.ti.com (157.170.170.95) by lewvzet200.ext.ti.com
- (10.4.14.103) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Wed, 13 May
- 2026 18:39:10 -0500
-Received: from DLEE205.ent.ti.com (157.170.170.85) by DLEE207.ent.ti.com
- (157.170.170.95) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Wed, 13 May
- 2026 18:39:10 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE205.ent.ti.com
- (157.170.170.85) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37 via Frontend
- Transport; Wed, 13 May 2026 18:39:10 -0500
-Received: from [128.247.81.105] (judy-hp.dhcp.ti.com [128.247.81.105])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 64DNdAnx859369;
- Wed, 13 May 2026 18:39:10 -0500
-Message-ID: <52ec8007-ce50-4f12-b796-4b8c2aa1822e@ti.com>
-Date: Wed, 13 May 2026 18:39:09 -0500
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=briansune@gmail.com
+Received: by mail-ot1-x333.google.com with SMTP id
+ 46e09a7af769-7dbe07d3ec3so3905887a34.0
+ for <u-boot@lists.denx.de>; Wed, 13 May 2026 17:41:05 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1778719264; cv=none;
+ d=google.com; s=arc-20240605;
+ b=Yl29o6Y8863LQXPrxxJS1Jq6H+qOb2vn8hMIxzoe8344etHbKarFSBiSmR0lk0C2WG
+ iQ9SXz7E0mWVTTzhrxIUn73iq5zC2UfbbVWDhLWtJw9N/PSrM5/xu/sX7woPzQaqxkfI
+ pF/8Qq5bEiLWjWYmJzbdxmTzLZbFN6u8BbRXwfMJFLODjGXdP/Kg07hPZvBOUfqd7i7f
+ 4pwVwqkpQh3mUWuYSgcJCPZbFSlNlc5JBsaWAwKuBt+FAebloep+X4RBasx43tE3GOQZ
+ W4dbnAfZwjktLbE1obwPIkjcCScfiMohbq1yZDVI2CUTMdxyBgKlYyF3ReL5pj5B5xU+
+ Q2qg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=mWW82G0jL7qPFUy34+zIIOQwUwVAytKgIQE4UzXVUTs=;
+ fh=gY8vf0MZ/WI6+etoEbv8Sy0jtSRnd/4dp1m+lysTAZo=;
+ b=lnrOkearHMpDWAzXeFDIUkjBZ4Hxoc/enWyLJzOjMFygeqPZFATlgDShia51rXiNJl
+ zgUS8Am0Hj34TpuVFuLCRucNZFNR/6dsSmnRHTw+wBp0hXAOErzXB1Big66OOBrRhVnc
+ hWIIL1cQse5W+0EDf4vXsN0/bLW+0+N3wgVY0FHaRZ/kg4JMFFqspvcBID32UAONLzym
+ 1LFbCLPwZcKd56OCvc63x/535055ubPB9XGt+L1YTQdVmVex9chIDjv3XT4RQg2luP0z
+ LaHmup5n8BVIWgVRVGkUehpJlGHJh4iIQNzB/BrZh506Ph6FKanyl3RdFDyrw7sDvNK/
+ P31A==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1778719264; x=1779324064; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=mWW82G0jL7qPFUy34+zIIOQwUwVAytKgIQE4UzXVUTs=;
+ b=o2If2hNxL9Mvtc5dFngulRASp0KUxdhhcBrOMd92/8rEq/qZXR2XonVuvJWEhX8QIZ
+ tD5f5/RrTRv5OVU7l04iM9v2lodTFwxKmGz/blk9qBhWJTIrvqGk1/DxSc943Wo8Iic6
+ VeC/t9gQE/cXIT/wTskw+3MtZMlpJqmt6jVx9OHitCk2/wwbtkPUvTwWa3rUr7AKPP4Y
+ buGlpnHN1Rv78IGfSiPNqbINBRZEvyQGHbbry3ROb3i0CN3USZ2eAPXzCcEysJPzAefJ
+ 1ZokafKfHFtIus2QnCDSJjmZWaeJrJXMssm6B1zdxGxE837lZxUSowCr8j/dEUPHp1cp
+ bzpg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1778719264; x=1779324064;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=mWW82G0jL7qPFUy34+zIIOQwUwVAytKgIQE4UzXVUTs=;
+ b=c/Scnr13xBYhGokKcBfvRkMOVypeOYDhX/M0eJg4sptDdbMd+AOb5gcBMNLaGLNmUe
+ ZIpTU+70hTQBJ0WSC8xe2JYieCby4tmDv/kCiMUUspAbHGpPDBxDssZtJsrlnH78Qz65
+ pebVJpaKyjJbMol1tvVaa7RrAN6N9a0ytBh7DdqAbLLcxxME5emX3FPCVinZ015BL+kg
+ I5S5XfhM58wWVn1XbXRfZ+6qQlRYS9TZiEgyVGdB/pt4vbNoYqaRgTh9LKHp9W8N1Fhc
+ Vshogno0Tmby6nPEwtHFjxL2p/B3zsgSVR1ZaGYdjbsHv2JodVs/kfUNRntdnzeBsEb4
+ sQLw==
+X-Gm-Message-State: AOJu0YzLX7e81qy2Img6bO3DDtZoi33NmNjs4GTp/T8hHjAJErgO/LeD
+ jo876xuYLd92nbZ4vpOlNI/Qt6xrT3dCS9O4v9MZOy/47el+YIDvAEUaXucpp2gHPhPxtcFzglK
+ VN63fNr9Gdj3953NCQ4tv5FTB/IPAl3M=
+X-Gm-Gg: Acq92OFqyiVZsp653pl4yZtwDFDh9d7HOGxDQcLYbvNkqLajIl+Bu8Ne0HsM8C80sbj
+ 3N6JaMw2CqRHx7KeqxM205o56JnfAhxGKlg0HoEU8eYfVhKB1S2t8QUhreVpFFhZUQpTV4t/GD6
+ Qq7LPFuf1IDRdCQCXvhGB0wjXgoBeRTgvzJUEYQ26fbNGEqPb1G7XVxR3hhfa9NLaHhBysfAr1W
+ PqxDGbrQxOvnpaG01ngNdK7QLF1NY/m2tnAfg5gdftQQ0at2PofFy2TDRkYG5BCTjdZu6gjgk2r
+ RIKZJUAy2nTrxUlwSxg=
+X-Received: by 2002:a05:6830:f95:b0:7dc:c620:aa12 with SMTP id
+ 46e09a7af769-7e3da4f794dmr3495035a34.20.1778719263907; Wed, 13 May 2026
+ 17:41:03 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] mmc: sd: Handle UHS-I voltage signaling without power
- cycle
-To: Tanmay Kathpalia <tanmay.kathpalia@altera.com>, <u-boot@lists.denx.de>
-CC: <trini@konsulko.com>, <peng.fan@nxp.com>, <jh80.chung@samsung.com>,
- <marex@denx.de>, <tien.fong.chee@altera.com>
-References: <20251021204526.22701-1-tanmay.kathpalia@altera.com>
-Content-Language: en-US
-From: Judith Mendez <jm@ti.com>
-In-Reply-To: <20251021204526.22701-1-tanmay.kathpalia@altera.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BL02EPF0002992B:EE_|LV8PR10MB7725:EE_
-X-MS-Office365-Filtering-Correlation-Id: 9df93b19-10e1-4af3-14da-08deb148d567
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|82310400026|36860700016|376014|1800799024|56012099003|22082099003|18002099003;
-X-Microsoft-Antispam-Message-Info: NMHdgr7X5VkOg/XQSPMl8M/GwIOZYv2yvXYLECq9LFdzwD+YpJGulped5HKM1cLtFLA5AqLZIM6cqufr+/WDICHLUcshfuOgpa7fYIOJKEtd9wzRuL15bnh3UkSIWhGAXo6SxWpYKE/5U1YI5eys5shW87mVtNKNnNQeoh4/ZMhV72VCvMinaKMaR1HMAWPUVrgJu/gXy4BCfMza7AAw9AtL6+wtUo/99KSax3An7GOFL4zIenRvuBIwTowXFsiAyyv8dc8kosF66NTyMf7QmWfTTVX14iqfGnogBMr4yjBr04K1DAbmex0pWjr2dcThhYfzvOtnTpIfzPTuzP9WOrxF/hpk7s5P67YRyBjtDIhuxWINedB/W4I2fouLUAw034st0dF+fcLDTB3JqkbbMnxP6g6T92hmEoVfGnlHPolMbLJm5I4Nq++1i8S2IG2wjjxhSzQ/thMRkDC9JZx+WDZZX5S4XXkKtNkmyFO5J17z7HY51/Pjty+QGU7lrr/f0FzfHgL0jXVsBgyzgXV+wWY0ce73w1xcOBR0ZQDKNOIPFGFmpAgSPMwH6NLAQ90chVmc9is/7wPEZJusVHAMzOGFtb5GNvuW/PB41afG6eF+YtUK5q4wyw4W1Thn3yhe4ajwxf80NFWetmj2LlkqytEZntKWyN/EoN1jTEZV+UdSPaBlHiuAxtWESqmj37DuUrlUk3xWMAi+Qq6lL0cs2nQqPzDjd7KfId797oNwqrc=
-X-Forefront-Antispam-Report: CIP:198.47.23.194; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:lewvzet200.ext.ti.com; PTR:InfoDomainNonexistent;
- CAT:NONE;
- SFS:(13230040)(82310400026)(36860700016)(376014)(1800799024)(56012099003)(22082099003)(18002099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: wP7Qbh3XGbus8ahSZqGGlUd/FkupP3kJ3tNtiwyqCsE5icFaJkqKA54waHOvMZM6aU6fH4kgH0JzPiX1MUP5zQ6hQISjkaQXzROtOSi5NdzsJ/2mYGkLBiSIEQLmEMaV1hd/V2YN+H3iZ14yrckNU2KAi9we1fqrIokKn8rKAyxyZ1kmR+e1TDS+JqkuNdVRKGXND9kI9q1C1CA+Q4ftvwKbBOkwJDQlPq4AbQnWI6v65mbgFyQDNNbBIrJuKG3RYwvYrWzRwckvJ7dlyBkviSFVi8t8Q2VZvEvE779GguDALU3WAE70RmKWN2vcKu7uXTZLN/KZzh7S6gmzZ/Ms2t2zYy3uoSKfO+eVUeJbEwzQHmHrh14f17YH9uxS7K2m8+EH7SwIXacDPXKdFtPg0XZ0V8Nbg+qCEA5EvjmMFXNHzLsnfuLPEeXXrvfglqLA
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 May 2026 23:39:10.8063 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 9df93b19-10e1-4af3-14da-08deb148d567
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.194];
- Helo=[lewvzet200.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: BL02EPF0002992B.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV8PR10MB7725
-X-Mailman-Approved-At: Thu, 14 May 2026 01:53:29 +0200
+References: <20260512064957.32497-1-alif.zakuan.yuslaimi@altera.com>
+ <20260512064957.32497-2-alif.zakuan.yuslaimi@altera.com>
+In-Reply-To: <20260512064957.32497-2-alif.zakuan.yuslaimi@altera.com>
+From: Sune Brian <briansune@gmail.com>
+Date: Thu, 14 May 2026 08:40:53 +0800
+X-Gm-Features: AVHnY4Kc647DeTWFii3_5JdOxH_Mh0SjyzGZ8YjFjX9EbMX5qzDmO8ie84Aa9ic
+Message-ID: <CAN7C2SDCM0rvnumHC7yK1JJcMmtk1AN3qYOcKs+7J6ZAwDJwtA@mail.gmail.com>
+Subject: Re: [PATCH v3 1/3] arm: socfpga: Consolidate dram_bank_mmu_setup()
+To: alif.zakuan.yuslaimi@altera.com
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -135,26 +114,72 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tanmay, all,
+On Tue, May 12, 2026 at 2:50=E2=80=AFPM <alif.zakuan.yuslaimi@altera.com> w=
+rote:
+>
+> From: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
+>
+> Relocate the dram_bank_mmu_setup() implementation from misc_arria10.c to
+> the common socfpga misc.c and update the function to correctly handle bot=
+h
+> pre-relocation and post-relocation cases for DRAM cache enabling for
+> consistent MMU/dcache setup across Arria10 and CycloneV platforms.
+>
+> These changes help to improve maintainability and consistency of DRAM
+> initialization as well as MMU configuration for Arria10 and CycloneV
+> platforms.
+>
+> New Kconfig is introduced to enable this implementation only on the defau=
+lt
+> Arria10 and CycloneV boards as this will increase the SPL size which
+> will exceed some Gen5 devices' SPL size limit.
+>
+> Fixes: e26ecebc684b ("socfpga: arria10: Allow dcache_enable before reloca=
+tion")
+>
+> Signed-off-by: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
+> ---
+>
+> Changes in v3:
+> - Removed 'select SPL_CACHE if SPL' Kconfig guard from this patch and
+>   applied this condition alongside SOCFPGA_ECC_SUPPORT on patch 3
+>
+> Changes in v2:
+> - Shared dram_bank_mmu_setup() is set as optional via Kconfig and default=
+ed
+>   on only for the reference Arria10/CycloneV boards to avoid SPL overflow=
+s
+>   on size-limited Gen5 defconfigs.
+>
+>  arch/arm/mach-socfpga/misc.c         | 31 ++++++++++++++++++++++++++++
+>  arch/arm/mach-socfpga/misc_arria10.c | 26 -----------------------
+>  2 files changed, 31 insertions(+), 26 deletions(-)
+>
+> diff --git a/arch/arm/mach-socfpga/misc.c b/arch/arm/mach-socfpga/misc.c
+> index 1eef7893e54..80b054dcae9 100644
+> --- a/arch/arm/mach-socfpga/misc.c
+> +++ b/arch/arm/mach-socfpga/misc.c
 
-On 10/21/25 3:45 PM, Tanmay Kathpalia wrote:
-> Some boards have SD card connectors where the power rail cannot be switched
-> off by the driver. However there are various circumstances when a card
-> might be re-initialized, such as after system resume, warm re-boot, or
-> error handling. However, a UHS card will continue to use 1.8V signaling
-> unless it is power cycled.
-> 
-> If the card has not been power cycled, it may still be using 1.8V
-> signaling. According to the SD spec., the Bus Speed Mode (function group 1)
-> bits 2 to 4 are zero if the card is initialized at 3.3V signal level. Thus
-> they can be used to determine if the card has already switched to 1.8V
-> signaling. Detect that situation and try to initialize a UHS-I (1.8V)
-> transfer mode.
+Tested-by: Brian Sune <briansune@gmail.com>
 
-This implementation broke am65 IDK board SD card boot, I have still
-to check why this breaks only one board, potentially there might
-be a quirk only for this board... But for now sending the question
-in case anyone might have an idea what is going on & save me some
-time.
+Testing environment:
+- Latest repository
+- Custom board 2G max capacity SoCFPGA Cyclone V can handle.
+- SDMMC Boot
 
-~ Judith
+Both cold warm reset shows no issue:
+
+Boot log:
+U-Boot SPL 2026.07-rc2-00016-g36d4c6535808-dirty (May 14 2026 - 08:24:01 +0=
+800)
+DDRCAL: Scrubbing ECC RAM (2048 MiB).
+DDRCAL: SDRAM-ECC initialized success with 1053 ms
+Trying to boot from MMC1
+
+
+U-Boot 2026.07-rc2-00016-g36d4c6535808-dirty (May 14 2026 - 08:24:01 +0800)
+
+Thanks,
+Brian
+
+>
