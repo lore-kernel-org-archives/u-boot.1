@@ -4,46 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5BC94CD4851
-	for <u-boot@archiver.kernel.org>; Thu, 14 May 2026 14:51:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84731CD4F25
+	for <u-boot@archiver.kernel.org>; Thu, 14 May 2026 14:51:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 687B7846CF;
+	by phobos.denx.de (Postfix) with ESMTP id 9EEE8846D5;
 	Thu, 14 May 2026 16:49:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=arm.com header.i=@arm.com header.b="Cz7dvr1h";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=arm.com header.i=@arm.com header.b="LIH3gJG6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D83848467B; Thu, 14 May 2026 14:50:12 +0200 (CEST)
+ id 17DB284683; Thu, 14 May 2026 14:50:15 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id BDB7783AA9
- for <u-boot@lists.denx.de>; Thu, 14 May 2026 14:50:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id 58D988467C
+ for <u-boot@lists.denx.de>; Thu, 14 May 2026 14:50:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=harsimransingh.tungal@arm.com
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id C5C033501;
- Thu, 14 May 2026 05:50:03 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 0AC99244C;
+ Thu, 14 May 2026 05:50:06 -0700 (PDT)
 Received: from e132995.arm.com (unknown [10.57.69.131])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 4F6FC3F7B4;
- Thu, 14 May 2026 05:50:07 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 79A9D3F7B4;
+ Thu, 14 May 2026 05:50:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
- t=1778763009; bh=lrv7h9KWZueY+xhJrToDWW9VCPDh4Bl37eiJsW5CAEY=;
+ t=1778763011; bh=Mh9Ilq7MBJSxQSJpyR9oHGUGPJZijJMrXDRlGwR9MZs=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=Cz7dvr1hzdGMUrQqt0jEPU7ujw40sNu2A/EqvmZLZR3bt9oTJh4mniVBbJJlaOOPE
- MHaRZjbVfKimWE89bBTLkcUM2t1gHPO3XnmeW8Vj2BuhGCJWeXBdK6xWEwfojCmpA7
- WwTmaF4wFd/1zOIcM4MggQB0krgwIR6PLqrIGtTM=
+ b=LIH3gJG6t9zOEVuQ5U3/y1S9IUppipsAlfYbBphYdufln1gEB/LNIY3yt3LspqLLx
+ ZJl36vB7+v1lFaEC0ZR+XgFVJAZR9zOOd9JARSEn7c60tsrvsmu+vWszSn49uqWpA3
+ 6RqnG2PYdoUGRzZuixk5hJS1H23KImTXJfYVmXiI=
 From: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
 To: u-boot@lists.denx.de
 Cc: abdellatif.elkhlifi@arm.com, trini@konsulko.com,
  ilias.apalodimas@linaro.org, xypron.glpk@gmx.de,
  hugues.kambampiana@arm.com, sjg@chromium.org,
  Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
-Subject: [PATCH v2 09/11] test: dm: add sandbox FF-A runtime transport tests
-Date: Thu, 14 May 2026 13:49:22 +0100
-Message-Id: <20260514124924.1804332-10-harsimransingh.tungal@arm.com>
+Subject: [PATCH v2 10/11] doc: arm64: document FF-A runtime path for EFI
+ variables
+Date: Thu, 14 May 2026 13:49:23 +0100
+Message-Id: <20260514124924.1804332-11-harsimransingh.tungal@arm.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20260514124924.1804332-1-harsimransingh.tungal@arm.com>
 References: <20260424173151.371134-1-harsimransingh.tungal@arm.com>
@@ -67,28 +68,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Exercise FF-A runtime helpers via sandbox DM tests
+The arm64 FF-A documentation still said EFI runtime support was a
+future development, so readers had no description of the current FF-A
+runtime transport or how EFI runtime variable services use it.
 
-Test the successful runtime direct-message round trip and the invalid
-destination-partition case, using the shared FF-A prepare step so the
-sandbox emulator has initialized partition state before exercising the
-runtime-only messaging helpers.
-Add a dedicated no-context test that calls
-ffa_sync_send_receive_runtime() before enabling the runtime context and
-checks that it returns -EPERM. Reset the resident FF-A runtime context
-around the transport tests so the runtime flag and private data do not
-leak across test cases.
-Split the ffa_to_std_errno() checks into a separate DM test so
-error-mapping regressions are reported independently from transport
-failures. Cover both the valid mappings and the boundary inputs that
-must return -EINVAL.
+Document the FF-A runtime transport, the shared MM communication path,
+and the EFI runtime variable flow on arm64. Also clarify that the
+armffa command is boot-time only and point readers to the architecture
+documentation for EFI runtime variable services over FF-A.
 
-Replace the hard-coded synthetic partition execution-context and
-property values in ffa-emul-uclass.c with the shared
-SANDBOX_SP*_EXEC_CTXT and SANDBOX_SP*_PROPERTIES macros. This lets the
-sandbox emulator and tests reuse a single definition of the synthetic
-partition metadata.
-
+Acked-by: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
 Signed-off-by: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
 
 ---
@@ -100,287 +89,166 @@ v2:
 
 Simon:
 
-- Drop unused `sp_id` handling from the negative-path test
-- Add no-context `-EPERM` coverage
-- Reset the FF-A runtime context between tests
-- Split errno-mapping checks into a dedicated DM test
-- Add invalid-input boundary coverage
+- Normalize `Secure world` capitalization
+- Drop low-level cache-maintenance detail
+- Remove internal helper names from the public flow
+- Refresh `doc/usage/cmd/armffa.rst` to match final wording
 
- arch/sandbox/include/asm/sandbox_arm_ffa.h |  16 ++-
- drivers/firmware/arm-ffa/ffa-emul-uclass.c |  36 ++++--
- test/dm/Makefile                           |   3 +-
- test/dm/ffa_runtime.c                      | 129 +++++++++++++++++++++
- 4 files changed, 172 insertions(+), 12 deletions(-)
- create mode 100644 test/dm/ffa_runtime.c
+ doc/arch/arm64.ffa.rst   | 86 ++++++++++++++++++++++++++++++++++++----
+ doc/usage/cmd/armffa.rst | 11 +++++
+ 2 files changed, 90 insertions(+), 7 deletions(-)
 
-diff --git a/arch/sandbox/include/asm/sandbox_arm_ffa.h b/arch/sandbox/include/asm/sandbox_arm_ffa.h
-index be2790f4960..a20eb159b73 100644
---- a/arch/sandbox/include/asm/sandbox_arm_ffa.h
-+++ b/arch/sandbox/include/asm/sandbox_arm_ffa.h
-@@ -1,6 +1,6 @@
- /* SPDX-License-Identifier: GPL-2.0+ */
- /*
-- * Copyright 2022-2023 Arm Limited and/or its affiliates <open-source-office@arm.com>
-+ * Copyright 2022-2023, 2026 Arm Limited and/or its affiliates <open-source-office@arm.com>
-  *
-  * Authors:
-  *   Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
-@@ -26,6 +26,20 @@
- #define SANDBOX_SP3_ID 0x6452
- #define SANDBOX_SP4_ID 0x7814
+diff --git a/doc/arch/arm64.ffa.rst b/doc/arch/arm64.ffa.rst
+index f966f8ba6af..e9a5375ce24 100644
+--- a/doc/arch/arm64.ffa.rst
++++ b/doc/arch/arm64.ffa.rst
+@@ -15,10 +15,10 @@ application in S-EL0, or a Trusted OS in S-EL1.
+ The U-Boot FF-A support (the bus) implements the interfaces to communicate
+ with partitions in the Secure world aka Secure partitions (SPs).
  
-+/*
-+ * The sandbox FF-A emulator uses fixed, synthetic execution-context counts and
-+ * property bitfields for each partition.
-+ */
-+#define SANDBOX_SP1_EXEC_CTXT 0x5687
-+#define SANDBOX_SP2_EXEC_CTXT 0x9587
-+#define SANDBOX_SP3_EXEC_CTXT 0x7687
-+#define SANDBOX_SP4_EXEC_CTXT 0x1487
-+
-+#define SANDBOX_SP1_PROPERTIES 0x89325621
-+#define SANDBOX_SP2_PROPERTIES 0x45325621
-+#define SANDBOX_SP3_PROPERTIES 0x23325621
-+#define SANDBOX_SP4_PROPERTIES 0x70325621
-+
- /* Invalid service UUID (no matching SP) */
- #define SANDBOX_SERVICE3_UUID	"55d532ed-0942-e699-722d-c09ca798d9cd"
+-The FF-A support specifically focuses on communicating with SPs that
+-isolate portions of EFI runtime services that must run in a protected
+-environment which is inaccessible by the Host OS or Hypervisor.
+-Examples of such services are set/get variables.
++U-Boot's FF-A bus support exposes an optional transport that EFI runtime
++services can use to communicate with Secure partitions. Through this
++interface, EFI services (such as variable access) can request or exchange
++data with the Secure world using FF-A.
  
-diff --git a/drivers/firmware/arm-ffa/ffa-emul-uclass.c b/drivers/firmware/arm-ffa/ffa-emul-uclass.c
-index d270f7b614e..a8c6d3010eb 100644
---- a/drivers/firmware/arm-ffa/ffa-emul-uclass.c
-+++ b/drivers/firmware/arm-ffa/ffa-emul-uclass.c
-@@ -1,6 +1,6 @@
- // SPDX-License-Identifier: GPL-2.0+
- /*
-- * Copyright 2022-2023 Arm Limited and/or its affiliates <open-source-office@arm.com>
-+ * Copyright 2022-2023, 2026 Arm Limited and/or its affiliates <open-source-office@arm.com>
-  *
-  * Authors:
-  *   Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
-@@ -19,41 +19,57 @@
- /* The partitions (SPs) table */
- static struct ffa_partition_desc sandbox_partitions[SANDBOX_PARTITIONS_CNT] = {
- 	{
--		.info = { .id = SANDBOX_SP1_ID, .exec_ctxt = 0x5687, .properties = 0x89325621 },
-+		.info = {
-+			.id = SANDBOX_SP1_ID,
-+			.exec_ctxt = SANDBOX_SP1_EXEC_CTXT,
-+			.properties = SANDBOX_SP1_PROPERTIES,
-+		},
- 		.sp_uuid = {
- 			.a1 = SANDBOX_SERVICE1_UUID_A1,
- 			.a2 = SANDBOX_SERVICE1_UUID_A2,
- 			.a3 = SANDBOX_SERVICE1_UUID_A3,
- 			.a4 = SANDBOX_SERVICE1_UUID_A4,
--		}
-+		},
- 	},
- 	{
--		.info = { .id = SANDBOX_SP3_ID, .exec_ctxt = 0x7687, .properties = 0x23325621 },
-+		.info = {
-+			.id = SANDBOX_SP3_ID,
-+			.exec_ctxt = SANDBOX_SP3_EXEC_CTXT,
-+			.properties = SANDBOX_SP3_PROPERTIES,
-+		},
- 		.sp_uuid = {
- 			.a1 = SANDBOX_SERVICE2_UUID_A1,
- 			.a2 = SANDBOX_SERVICE2_UUID_A2,
- 			.a3 = SANDBOX_SERVICE2_UUID_A3,
- 			.a4 = SANDBOX_SERVICE2_UUID_A4,
--		}
-+		},
- 	},
- 	{
--		.info = { .id = SANDBOX_SP2_ID, .exec_ctxt = 0x9587, .properties = 0x45325621 },
-+		.info = {
-+			.id = SANDBOX_SP2_ID,
-+			.exec_ctxt = SANDBOX_SP2_EXEC_CTXT,
-+			.properties = SANDBOX_SP2_PROPERTIES,
-+		},
- 		.sp_uuid = {
- 			.a1 = SANDBOX_SERVICE1_UUID_A1,
- 			.a2 = SANDBOX_SERVICE1_UUID_A2,
- 			.a3 = SANDBOX_SERVICE1_UUID_A3,
- 			.a4 = SANDBOX_SERVICE1_UUID_A4,
--		}
-+		},
- 	},
- 	{
--		.info = { .id = SANDBOX_SP4_ID, .exec_ctxt = 0x1487, .properties = 0x70325621 },
-+		.info = {
-+			.id = SANDBOX_SP4_ID,
-+			.exec_ctxt = SANDBOX_SP4_EXEC_CTXT,
-+			.properties = SANDBOX_SP4_PROPERTIES,
-+		},
- 		.sp_uuid = {
- 			.a1 = SANDBOX_SERVICE2_UUID_A1,
- 			.a2 = SANDBOX_SERVICE2_UUID_A2,
- 			.a3 = SANDBOX_SERVICE2_UUID_A3,
- 			.a4 = SANDBOX_SERVICE2_UUID_A4,
--		}
--	}
-+		},
-+	},
+ The FF-A support uses the SMC ABIs defined by the FF-A specification to:
  
- };
+@@ -26,13 +26,13 @@ The FF-A support uses the SMC ABIs defined by the FF-A specification to:
+ - Access an SP's service through communication protocols
+   e.g. EFI MM communication protocol
  
-diff --git a/test/dm/Makefile b/test/dm/Makefile
-index d69b0e08d66..383cec13666 100644
---- a/test/dm/Makefile
-+++ b/test/dm/Makefile
-@@ -1,7 +1,7 @@
- # SPDX-License-Identifier: GPL-2.0+
- #
- # Copyright (c) 2013 Google, Inc
--# Copyright 2022-2023 Arm Limited and/or its affiliates <open-source-office@arm.com>
-+# Copyright 2022-2023, 2026 Arm Limited and/or its affiliates <open-source-office@arm.com>
+-At this stage of development only EFI boot-time services are supported.
+-Runtime support will be added in future developments.
+-
+ The U-Boot FF-A support provides the following parts:
  
- # Tests for particular subsystems - when enabling driver model for a new
- # subsystem you must add sandbox tests here.
-@@ -97,6 +97,7 @@ obj-$(CONFIG_ACPI_PMC) += pmc.o
- obj-$(CONFIG_DM_PMIC) += pmic.o
- obj-$(CONFIG_DM_PWM) += pwm.o
- obj-$(CONFIG_ARM_FFA_TRANSPORT) += ffa.o
-+obj-$(CONFIG_ARM_FFA_TRANSPORT) += ffa_runtime.o
- obj-$(CONFIG_QFW) += qfw.o
- obj-$(CONFIG_RAM) += ram.o
- obj-y += regmap.o
-diff --git a/test/dm/ffa_runtime.c b/test/dm/ffa_runtime.c
-new file mode 100644
-index 00000000000..b48a6b363af
---- /dev/null
-+++ b/test/dm/ffa_runtime.c
-@@ -0,0 +1,129 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Functional tests for FF-A runtime helpers
-+ *
-+ * Copyright 2026 Arm Limited and/or its affiliates <open-source-office@arm.com>
-+ *
-+ * Authors:
-+ *      Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
-+ */
+ - A Uclass driver providing generic FF-A methods.
+ - An Arm FF-A device driver providing Arm-specific methods and reusing the Uclass methods.
++- An optional runtime FF-A transport (toggled via CONFIG_ARM_FFA_RT_MODE) that is
++  resident after ExitBootServices() and enables EFI runtime variable services
++  via FF-A helpers and a shared MM communication buffer.
+ - A sandbox emulator for Arm FF-A, emulates the FF-A side of the Secure World and provides
+   FF-A ABIs inspection methods.
+ - An FF-A sandbox device driver for FF-A communication with the emulated Secure World.
+@@ -69,6 +69,12 @@ CONFIG_ARM_FFA_TRANSPORT
+     When using an Arm 64-bit platform, the Arm FF-A driver will be used.
+     When using sandbox, the sandbox FF-A emulator and FF-A sandbox driver will be used.
+ 
++CONFIG_ARM_FFA_RT_MODE
++    Enables the FF-A runtime transport. This option depends on
++    CONFIG_ARM_FFA_TRANSPORT and CONFIG_EFI_LOADER, and is enabled by default.
++    When enabled, a minimal set of FF-A operations remains available after
++    ExitBootServices().
 +
-+#include <dm.h>
-+#include <dm/test.h>
-+#include <asm/sandbox_arm_ffa.h>
-+#include <asm/sandbox_arm_ffa_priv.h>
-+#include <arm_ffa_runtime.h>
-+#include <test/ut.h>
+ FF-A ABIs under the hood
+ ------------------------
+ 
+@@ -158,6 +164,71 @@ they want to use (32-bit vs 64-bit). Selecting the protocol means using
+ the 32-bit or 64-bit version of FFA_MSG_SEND_DIRECT_{REQ, RESP}.
+ The calling convention between U-Boot and the secure world stays the same: SMC32.
+ 
++FF-A runtime support for EFI variables
++--------------------------------------
 +
-+static int ffa_runtime_prepare(struct unit_test_state *uts, u16 *sp_id)
-+{
-+	struct ffa_partition_desc *descs;
-+	u32 count;
-+	struct udevice *dev;
-+	const char *svc_uuid = SANDBOX_SERVICE1_UUID;
++U-Boot provides an FF-A runtime transport to keep a minimal set of FF-A operations
++available after ExitBootServices(). This runtime transport is enabled with
++CONFIG_ARM_FFA_RT_MODE. The runtime helpers and data are marked with
++``__efi_runtime`` / ``__efi_runtime_data`` through the
++``__ffa_runtime`` / ``__ffa_runtime_data`` aliases in
++``include/arm_ffa_runtime.h``.
 +
-+	ut_assertok(uclass_first_device_err(UCLASS_FFA, &dev));
-+	ut_assertok(ffa_partition_info_get(dev, svc_uuid, &count, &descs));
-+	ut_assert(count > 0);
++Runtime context is enabled at ExitBootServices(), and the following prerequisites
++are prepared during FF-A bus probe:
 +
-+	if (sp_id)
-+		*sp_id = descs[0].info.id;
++- The U-Boot FF-A endpoint ID is discovered at boot time with FFA_ID_GET and
++  stored in the runtime private data.
++- An ExitBootServices() event is registered by the FF-A runtime transport so
++  the resident runtime context is enabled when EFI transitions to runtime.
 +
-+	return 0;
-+}
++At runtime, the driver model is no longer available. Runtime users should
++use the resident FF-A runtime transport, which verifies the runtime context
++before issuing FF-A calls.
 +
-+static int dm_test_ffa_runtime_no_context(struct unit_test_state *uts)
-+{
-+	struct ffa_send_direct_data msg = {0};
-+	u16 sp_id;
++EFI variable services over FF-A
++-------------------------------
 +
-+	ffa_reset_runtime_context();
-+	ut_assert(!ffa_get_status_runtime_context());
++When CONFIG_EFI_MM_COMM_TEE and CONFIG_ARM_FFA_TRANSPORT are enabled, U-Boot
++routes EFI variable services to an MM Secure Partition (SP) over FF-A.
++The MM SP is discovered at boot time using FFA_PARTITION_INFO_GET and its
++partition ID is cached in runtime data.
 +
-+	ut_assertok(ffa_runtime_prepare(uts, &sp_id));
++The data path uses a shared MM communication buffer and a door-bell style
++direct message:
 +
-+	/* Runtime messaging must fail until the runtime context is enabled */
-+	ut_asserteq(-EPERM, ffa_sync_send_receive_runtime(sp_id, &msg, true));
++- The communication buffer is located at CONFIG_FFA_SHARED_MM_BUF_ADDR and
++  sized by CONFIG_FFA_SHARED_MM_BUF_SIZE.
++- CONFIG_FFA_SHARED_MM_BUF_OFFSET is sent in the FF-A direct message payload
++  to indicate where the data begins.
 +
-+	ffa_reset_runtime_context();
-+	return 0;
-+}
++After ExitBootServices(), EFI SetVariable()/GetVariable() call paths use the
++runtime MM communication path:
 +
-+DM_TEST(dm_test_ffa_runtime_no_context, UTF_SCAN_FDT | UTF_CONSOLE);
++- A pre-reserved shared buffer is used for the MM communication payload.
++- The cached MM SP partition ID and FF-A runtime transport are used to
++  dispatch direct FF-A messages to the Secure world after
++  ExitBootServices().
 +
-+static int dm_test_ffa_to_std_errno(struct unit_test_state *uts)
-+{
-+	(void)uts;
++Configuration notes
++-------------------
 +
-+	ut_asserteq(-EINVAL, ffa_to_std_errno(0));
-+	ut_asserteq(-EINVAL, ffa_to_std_errno(MAX_NUMBER_FFA_ERR));
-+	ut_asserteq(-EINVAL, ffa_to_std_errno(-MAX_NUMBER_FFA_ERR));
-+	ut_asserteq(-EINVAL, ffa_to_std_errno(-(MAX_NUMBER_FFA_ERR + 1)));
++Enable FF-A transport and MM communication:
 +
-+	ut_asserteq(-EINVAL, ffa_to_std_errno(-INVALID_PARAMETERS));
-+	ut_asserteq(-EOPNOTSUPP, ffa_to_std_errno(-NOT_SUPPORTED));
++- CONFIG_ARM_FFA_TRANSPORT
++- CONFIG_ARM_FFA_RT_MODE
++- CONFIG_EFI_MM_COMM_TEE
 +
-+	return 0;
-+}
++CONFIG_ARM_FFA_RT_MODE is enabled by default. It turns on MM communication for
++EFI runtime and may be disabled when EFI services over FF-A are not required
++after ExitBootServices().
 +
-+DM_TEST(dm_test_ffa_to_std_errno, UTF_SCAN_FDT | UTF_CONSOLE);
++Configure the shared MM communication buffer:
 +
-+static int dm_test_ffa_runtime_ack(struct unit_test_state *uts)
-+{
-+	struct ffa_send_direct_data msg = {0};
-+	u16 sp_id;
-+	u8 cnt;
++- CONFIG_FFA_SHARED_MM_BUF_ADDR
++- CONFIG_FFA_SHARED_MM_BUF_SIZE
++- CONFIG_FFA_SHARED_MM_BUF_OFFSET
 +
-+	ffa_reset_runtime_context();
-+	ut_assert(!ffa_get_status_runtime_context());
+ Requirements for user drivers
+ -----------------------------
+ 
+@@ -256,6 +327,7 @@ For example, when using FF-A with Corstone-1000, debug logs enabled, the output
+ Contributors
+ ------------
+    * Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
++   * Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
+ 
+ .. _`FF-A v1.0 specification`: https://documentation-service.arm.com/static/5fb7e8a6ca04df4095c1d65e
+ .. _`SMC Calling Convention v1.2 specification`: https://documentation-service.arm.com/static/5f8edaeff86e16515cdbe4c6
+diff --git a/doc/usage/cmd/armffa.rst b/doc/usage/cmd/armffa.rst
+index dbe4d5bc842..64571d615cb 100644
+--- a/doc/usage/cmd/armffa.rst
++++ b/doc/usage/cmd/armffa.rst
+@@ -39,6 +39,17 @@ The command also allows to gather secure partitions information and ping these
+ 
+ The command is also helpful in testing the communication with secure partitions.
+ 
++Notes
++-----
 +
-+	ut_assertok(ffa_runtime_prepare(uts, &sp_id));
++armffa is a boot-time test command. It relies on the FF-A driver model device
++(UCLASS_FFA) and is not part of the resident FF-A runtime transport used after
++ExitBootServices().
 +
-+	ffa_copy_runtime_priv(&(struct ffa_priv_runtime){
-+		.id = NS_PHYS_ENDPOINT_ID,
-+	});
-+	ffa_enable_runtime_context();
++armffa does not provide EFI variable operations. For more information about
++the FF-A runtime transport and EFI runtime variable services over FF-A please see
++:doc:`../../arch/arm64.ffa`.
 +
-+	/* Ensure runtime context is available before attempting runtime-only paths */
-+	ut_assert(ffa_get_status_runtime_context());
-+
-+	/* Runtime messaging should reuse the sandbox emulator and return 0xff pattern */
-+	ut_assertok(ffa_sync_send_receive_runtime(sp_id, &msg, true));
-+	for (cnt = 0; cnt < sizeof(struct ffa_send_direct_data) / sizeof(u64); cnt++)
-+		ut_asserteq_64(-1UL, ((u64 *)&msg)[cnt]);
-+
-+	ffa_reset_runtime_context();
-+	return 0;
-+}
-+
-+DM_TEST(dm_test_ffa_runtime_ack, UTF_SCAN_FDT | UTF_CONSOLE);
-+
-+static int dm_test_ffa_runtime_nack(struct unit_test_state *uts)
-+{
-+	struct ffa_send_direct_data msg = {0};
-+
-+	ffa_reset_runtime_context();
-+	ut_assert(!ffa_get_status_runtime_context());
-+
-+	/*
-+	 * Prime the sandbox partition table so the invalid-ID path reaches
-+	 * the emulator's validation logic with initialized partition state.
-+	 */
-+	ut_assertok(ffa_runtime_prepare(uts, NULL));
-+
-+	ffa_copy_runtime_priv(&(struct ffa_priv_runtime){
-+		.id = NS_PHYS_ENDPOINT_ID,
-+	});
-+	ffa_enable_runtime_context();
-+
-+	/* Ensure runtime context is available before attempting runtime-only paths */
-+	ut_assert(ffa_get_status_runtime_context());
-+
-+	/* Invalid partition IDs must be rejected and mapped to -EINVAL */
-+	ut_asserteq(-EINVAL, ffa_sync_send_receive_runtime(0, &msg, true));
-+
-+	ffa_reset_runtime_context();
-+	return 0;
-+}
-+
-+DM_TEST(dm_test_ffa_runtime_nack, UTF_SCAN_FDT | UTF_CONSOLE);
+ Example
+ -------
+ 
 -- 
 2.34.1
 
