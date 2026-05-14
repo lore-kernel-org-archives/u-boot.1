@@ -4,84 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E553CD4F39
-	for <u-boot@archiver.kernel.org>; Thu, 14 May 2026 23:40:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1828BCD4F39
+	for <u-boot@archiver.kernel.org>; Thu, 14 May 2026 23:40:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6B80A84687;
+	by phobos.denx.de (Postfix) with ESMTP id 9F5C4846B0;
 	Fri, 15 May 2026 01:39:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="J7R8Mx5U";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="MIm0IbH/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4259D846A4; Thu, 14 May 2026 20:21:00 +0200 (CEST)
-Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
- [IPv6:2a00:1450:4864:20::333])
+ id 6EDCC84687; Thu, 14 May 2026 20:21:04 +0200 (CEST)
+Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
+ [IPv6:2a00:1450:4864:20::32a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1141684687
- for <u-boot@lists.denx.de>; Thu, 14 May 2026 20:20:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8B75284694
+ for <u-boot@lists.denx.de>; Thu, 14 May 2026 20:21:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=allan.elkaim@gmail.com
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-48a563e4ef7so75434685e9.0
- for <u-boot@lists.denx.de>; Thu, 14 May 2026 11:20:58 -0700 (PDT)
+Received: by mail-wm1-x32a.google.com with SMTP id
+ 5b1f17b1804b1-48e6db3ff7eso35536805e9.0
+ for <u-boot@lists.denx.de>; Thu, 14 May 2026 11:21:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1778782857; x=1779387657; darn=lists.denx.de;
+ d=gmail.com; s=20251104; t=1778782862; x=1779387662; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=+0kxSL0bSp1ZdArz4mOTepGjPK4tLbGYwxqTVr9cm+A=;
- b=J7R8Mx5UlPC+35Wj0RnIo3JjejR3oOHRwBKY1qPeDL3G5RnGKybeyhhviohcciaGjJ
- UjwZuBn/sx5aIBBxxOzbnl7eqIj3l9uWGuclrZsHl9QHM1m/Gbmz+gYz8HiJeIgTHsko
- m6Z8b9YKDWYzEG6Le1VTMhoGwdyCPct++jtrSYJrc7I2Kb+g0xhpom72ma+kqKlXKL45
- 8HTz1NwwljjjIh3bayr70P6nUjRRVKsQX/Lnvht5iUNA42FMMnCRL1hfYFG6K2tEB5X0
- 2mxH75HJO5kFF6LEyJ98M/oRM2WTwD8bUo7MlonnxL14nb0wg0K+p+UEi9OphWVL/aZ+
- U1pQ==
+ bh=GaFvlXpt75ZOpyvmvnvs1APaQpKRoH37rU5Th9XuiWg=;
+ b=MIm0IbH/XNMQpItr3IMLevUrepyco9nFHvoz0xGA6Ea4pQK8j9Rkxwo2PS6Apv+8nd
+ tn34zLTbMbKFETk+dLJYQOtblTkQfMIfG7pU5yPRLSrKH8xfwOF1LXX9D+E19uCIqMdw
+ 6rrpkv1EgFWEVPuu+lYHHp8A4Nyo/2QD1GXHIuStWw6nzFFJ0WULUpqBCGEIU9OUCaw9
+ /Lr1lGQSpe7P94yuMOiAWR3nXLw6dIvMr/MqyO0GTD9GoBA+2euIy8kDtPxzhJGBqnr3
+ vF4aE7zKC6cNJZHEGeqjot1KZdDgXMR35R28L7KHx89JKrXMOAzg6qI8Pj7wr5L/1NAO
+ 4jHg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778782857; x=1779387657;
+ d=1e100.net; s=20251104; t=1778782862; x=1779387662;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=+0kxSL0bSp1ZdArz4mOTepGjPK4tLbGYwxqTVr9cm+A=;
- b=sF9ArR/wIi3jIXQGnwDzSp887Y3WznPvF/6NkZou+vnEXzTOLNrJUZoDu73bUuOScl
- Cu0ZBjKlucuY+nB75GxNu7R7vGBem6h+T71schI3PsqmUaNno1J3ml8MhXNoTs0RGPIg
- QADKXdVcmUhKcryIB9I9LQFvkf/lkWs42IAbezKRuTYsy9NH5YF/2xCeVRwpFAhHYhN9
- WTOlRcMqRx8W2xkXFdCvdWYxES+sEcdr7vonl+vFb53cKA8GWnZwssZlkcYKaJn+On/b
- pfcEPer+mLBWE2ryIBIfYXbMRouCIfsNRa9bvJ/F8S4PZJ58bSkzO3d2WMxnL0s39PIj
- rYYA==
-X-Gm-Message-State: AOJu0Ywwv5nrD1vcYyl3RYucnPfcqFjG3FQ2wOtSTKhVI21/QHX2Tkt3
- wfthRQlqiCVb6GU/fGWMPaARJXvuBxRFyOrFmOru3KK7J2ribQCiFLh3xO1HPufxUzI=
-X-Gm-Gg: Acq92OFJNfxpQdBfDNohTbSfR0o+ICmj3PtbvG/WdTeFvdH8pq8/x8ZDkn6h1LVE83L
- EqYOO+yTstOSV0ZHDX6adWuqb3TfGh6BgeYcEjQNm75vfqHhf5dzagrGMKWlrS2KXpacDPFJBWD
- iHGkNzA6sf0X6UWhQ1UGvMXemGqHVY0L42kIEiTK2lW6yis84MjCXl5sUCeKUpuwZ4Bpot9lFNc
- hjVMMz3Q8Nu4wQ0GzdGrxojVEocPHXCNpUEE+/sLoidb93nwAZ0CyCjSNIGI/PXBldIeSXgwUvS
- g123Tr7Fmi1v05jGLXrrleX07f6nf9B4LgairOOA6RXUD3g6DTlJq+5rgmBMQOx9YlO6UrkwreS
- I0hPX4lKdTKHMYcT9tOlRD739QhWppF95fvmjIRRlJodiRE2by0qMmbOWym9S6VFVFezPYg5pgg
- WM79D/XFzVd1TllfZTP3R1ORvjSK1mzAIc5UUuPj2uwtMtmr/cYBfgZsJKp+e0yh7vDjivBg4S/
- Zs53yKdbM6rI1i3mIXq/dc8tkGW09j4TQagyYnAHwb30cYoJwQu2fIDygy91BKnyQ/29ukG2MfZ
- GGKH
-X-Received: by 2002:a05:600c:4fcb:b0:488:a797:f0ac with SMTP id
- 5b1f17b1804b1-48fe6613ab3mr6682715e9.28.1778782857016; 
- Thu, 14 May 2026 11:20:57 -0700 (PDT)
+ bh=GaFvlXpt75ZOpyvmvnvs1APaQpKRoH37rU5Th9XuiWg=;
+ b=fxFhQMirtZvCVEBEwhKJ1f9pi6RiSYjPwdly4rQWo+RevnTN1BqOObghyQy+J+6HxB
+ N3E9owLG7RwoO6RoiBGY5XW+KCsUpRgW0k2u12dxcul/oODLtJHRngjtAyTJZvIanBRO
+ nMQOhdim5d37E8S4+JHifhTKJfbyra9hIetLUG4/KXraQUsDu2Z+WjdoKRPAW4ud+2qp
+ cfXvo0PMTEBl4nU6A7gxCNG4UdzKgySpQFBmzzDdgeAZ+R0A6G+IwXGcmCRzMUw7aUjI
+ +3RugLUeQLBy1+1JVjYUDdd34r7G5OUkr4a+BzpPGBgTP/OTw9mjWYhZklV59zDR4GRO
+ euKw==
+X-Gm-Message-State: AOJu0YzZxhFOXzhVvB5r7UOXpe0LWBogua/tdpPPJ9vbRimWtDBh6fod
+ VxEnJgty/CzK69vzlf86V7p+2081HqeuF+F5zkL5DetWmzkv6AFoLEMdP4BXUpKukOw=
+X-Gm-Gg: Acq92OG8PsBOcbJiS/rmLDbF6BNWO5SdC135FQGvehyyURWnROMIaut/nCPzNwJfOeW
+ WDPQf+snKdqGw8k/FsWqd+dAk7jTUK672SxGeIVjZPYiz27zbTedq7rdi0FqaMeaYn9Elmv0qWn
+ Aacaio7LzWsCg3BEsGGgBBR49DCIzBJcK9pBXoNH4IhL5reytnYjWCMfH8gyx1Z6r4ziN5XHtoY
+ 1cwl1lBoJgyF4vYjvFy1ZBA3855A/D6nYXRvDa/SMsW0wc3/fmgcI5vyl3zsMozYAhGwWV4wHbF
+ sX8uGzo1VCkvn+MUI+r3Les9UXKFx0Vi+RDA3JgPBA0zKMpvszh3+68/hMSXgeRVXdTBsAgK+TH
+ QiekvAs3jT7mlt5TI85sRtGBdAGvDTwUuTGplo2keAQKWQA1W80WcqoS0u/1nzhSohTEyIlz4Bc
+ xf7CTvaCsjvtXQVD+wW10bjxkAX+4M9aumo29c9uLwml/8S+Odztb8qdce1nvqxqjFAxg0YcGNx
+ FsrpoJFGLqSMfdBaWqKzibs+WvE/q7E/mRbAyFOUw4XN8fkAhuJ4g940IEzXU/5pxW2GFzqcCQj
+ 6X0Z
+X-Received: by 2002:a05:600c:3b0f:b0:48f:e230:72fb with SMTP id
+ 5b1f17b1804b1-48fe6631512mr6557305e9.32.1778782861972; 
+ Thu, 14 May 2026 11:21:01 -0700 (PDT)
 Received: from thinkpad-t15g-g2 ([2a01:e0a:905:5c10:111d:8a59:d7b9:c8a9])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-48fe53ab773sm7973575e9.3.2026.05.14.11.20.55
+ 5b1f17b1804b1-48fe53ab773sm7973575e9.3.2026.05.14.11.21.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 14 May 2026 11:20:56 -0700 (PDT)
+ Thu, 14 May 2026 11:21:01 -0700 (PDT)
 From: Allan ELKAIM <allan.elkaim@gmail.com>
 To: u-boot@lists.denx.de
 Cc: Miquel Raynal <miquel.raynal@bootlin.com>,
  Joao Marcos Costa <jmcosta944@gmail.com>,
  Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
  Tom Rini <trini@konsulko.com>, Allan ELKAIM <allan.elkaim@gmail.com>
-Subject: [PATCH v1 1/2] fs/squashfs: fix heap exhaustion during symlink
- resolution
-Date: Thu, 14 May 2026 20:18:52 +0200
-Message-ID: <20260514181854.399679-5-allan.elkaim@gmail.com>
+Subject: [PATCH v1 2/2] fs/squashfs: add sqfs_dir_offset() error checks
+Date: Thu, 14 May 2026 20:18:53 +0200
+Message-ID: <20260514181854.399679-6-allan.elkaim@gmail.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260514181854.399679-3-allan.elkaim@gmail.com>
 References: <"CACgNL-F2=KJtZ+gThpx_BuWsn6puqFxK0uLOmnABSS9=rRQmeQ@mail.gmail.com">
@@ -105,120 +104,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When sqfs_read_nest() encounters a symlink it resolves it by calling
-itself recursively. In the unfixed code this looks like:
+sqfs_dir_offset() returns a negative errno on failure, but three
+call sites in sqfs_search_dir() use the return value as an array
+index without checking for errors first. If the lookup fails,
+dirs->table is set to an invalid address, leading to undefined
+behavior.
 
-  // dirsp is open: inode_table + dir_table still on heap
-  resolved = sqfs_resolve_symlink(symlink, filename);
-  ret = sqfs_read_nest(resolved, ...); // recursive: allocates a new
-                                       // inode_table + dir_table pair
-  free(resolved);
-  goto out;
-  // out: sqfs_closedir(dirsp) <- parent tables freed HERE, too late
+Add negative-value guards after each sqfs_dir_offset() call so
+that any lookup failure propagates cleanly as an error rather
+than producing incorrect results.
 
-There is no permanent leak: the parent's tables are freed at the
-out: label once the recursive call returns. However, for the entire
-duration of the recursive call both the parent's inode_table +
-dir_table and the child's inode_table + dir_table are live on the
-heap simultaneously. On large squashfs images these tables can be
-significant in size, and this temporary double allocation may exhaust
-the heap budget.
-
-A superficial workaround would be to increase CONFIG_SYS_MALLOC_LEN,
-but that wastes memory on all boards and does not address the
-structural problem. The correct fix is to change the freeing order:
-release the parent directory's resources before recursing. This way
-only one set of inode and directory tables is live at any given time,
-halving the peak heap usage during symlink resolution.
-
-When heap exhaustion does occur and malloc returns NULL for dir_table
-or pos_list inside sqfs_read_directory_table(), the failure is
-currently silent and cascading:
-
-  - metablks_count is not reset to -1 before the goto out, so the
-    function returns a positive block count alongside a NULL pointer.
-  - sqfs_opendir_nest() does not detect the failure (it only checks
-    metablks_count < 1) and calls sqfs_search_dir() with m_list=NULL.
-  - sqfs_dir_offset() iterates over m_list[0..n], reading from
-    addresses 0x0, 0x4, 0x8, ... None of those values match the
-    inode's start_block, so the function returns -EINVAL.
-  - The error propagates up as a load failure with no indication
-    that the root cause was heap exhaustion:
-
-      Error: invalid inode reference to directory table.
-      Failed to load '<symlink path>'
-
-Two fixes:
-1. In sqfs_read_directory_table(), set metablks_count = -1 whenever
-   malloc fails after sqfs_count_metablks() returns a positive value,
-   so that the caller's "metablks_count < 1" check correctly detects
-   the failure and avoids calling sqfs_search_dir() with a NULL
-   pos_list.
-2. In sqfs_read_nest() and sqfs_size_nest(), call sqfs_closedir() on
-   the parent dirsp before the recursive call so that the parent's
-   inode and directory tables are freed before the child allocates
-   its own. Only one set of tables is then live at any given time,
-   halving peak heap usage during symlink resolution.
-
-Link: https://lists.denx.de/pipermail/u-boot/2026-May/618533.html
+Note: the corresponding sqfs_find_inode() NULL checks and the
+heap exhaustion fix during symlink resolution are applied in
+separate patches.
 
 Signed-off-by: Allan ELKAIM <allan.elkaim@gmail.com>
 ---
 
- fs/squashfs/sqfs.c | 22 ++++++++++++++++++++--
- 1 file changed, 20 insertions(+), 2 deletions(-)
+ fs/squashfs/sqfs.c | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
 
 diff --git a/fs/squashfs/sqfs.c b/fs/squashfs/sqfs.c
-index 9cb8b4af..07e2bd82 100644
+index 07e2bd82..430e9bac 100644
 --- a/fs/squashfs/sqfs.c
 +++ b/fs/squashfs/sqfs.c
-@@ -853,12 +853,16 @@ static int sqfs_read_directory_table(unsigned char **dir_table, u32 **pos_list)
- 		goto out;
+@@ -496,6 +496,8 @@ static int sqfs_search_dir(struct squashfs_dir_stream *dirs, char **token_list,
  
- 	*dir_table = malloc(metablks_count * SQFS_METADATA_BLOCK_SIZE);
--	if (!*dir_table)
-+	if (!*dir_table) {
-+		metablks_count = -1;
- 		goto out;
+ 	/* get directory offset in directory table */
+ 	offset = sqfs_dir_offset(table, m_list, m_count);
++	if (offset < 0)
++		return offset;
+ 	dirs->table = &dirs->dir_table[offset];
+ 
+ 	/* Setup directory header */
+@@ -627,6 +629,10 @@ static int sqfs_search_dir(struct squashfs_dir_stream *dirs, char **token_list,
+ 
+ 		/* Get dir. offset into the directory table */
+ 		offset = sqfs_dir_offset(table, m_list, m_count);
++		if (offset < 0) {
++			ret = offset;
++			goto out;
++		}
+ 		dirs->table = &dirs->dir_table[offset];
+ 
+ 		/* Copy directory header */
+@@ -651,6 +657,10 @@ static int sqfs_search_dir(struct squashfs_dir_stream *dirs, char **token_list,
+ 	}
+ 
+ 	offset = sqfs_dir_offset(table, m_list, m_count);
++	if (offset < 0) {
++		ret = offset;
++		goto out;
 +	}
+ 	dirs->table = &dirs->dir_table[offset];
  
- 	*pos_list = malloc(metablks_count * sizeof(u32));
--	if (!*pos_list)
-+	if (!*pos_list) {
-+		metablks_count = -1;
- 		goto out;
-+	}
- 
- 	ret = sqfs_get_metablk_pos(*pos_list, dtb, table_offset,
- 				   metablks_count);
-@@ -1473,6 +1477,15 @@ static int sqfs_read_nest(const char *filename, void *buf, loff_t offset,
- 
- 		symlink = (struct squashfs_symlink_inode *)ipos;
- 		resolved = sqfs_resolve_symlink(symlink, filename);
-+		/*
-+		 * Free the parent directory resources before recursing so that
-+		 * the recursive call can allocate its own inode and directory
-+		 * tables without exhausting the heap.
-+		 */
-+		free(dirs->entry);
-+		dirs->entry = NULL;
-+		sqfs_closedir(dirsp);
-+		dirsp = NULL;
- 		ret = sqfs_read_nest(resolved, buf, offset, len, actread);
- 		free(resolved);
- 		goto out;
-@@ -1731,6 +1744,11 @@ static int sqfs_size_nest(const char *filename, loff_t *size)
- 
- 		symlink = (struct squashfs_symlink_inode *)ipos;
- 		resolved = sqfs_resolve_symlink(symlink, filename);
-+		/*
-+		 * Free the parent directory resources before recursing.
-+		 */
-+		sqfs_closedir(dirsp);
-+		dirsp = NULL;
- 		ret = sqfs_size(resolved, size);
- 		free(resolved);
- 		break;
+ 	if (get_unaligned_le16(&dir->inode_type) == SQFS_DIR_TYPE)
 -- 
 2.53.0
 
