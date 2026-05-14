@@ -4,89 +4,130 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58BF8CD4851
-	for <u-boot@archiver.kernel.org>; Thu, 14 May 2026 17:13:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 819A4CD4F25
+	for <u-boot@archiver.kernel.org>; Thu, 14 May 2026 17:17:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 85AFB84690;
-	Thu, 14 May 2026 19:13:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 8BA9A8466F;
+	Thu, 14 May 2026 19:17:10 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ZRXx8+vw";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="bBmMFGZG";
+	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="PmfZVSha";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3CAD78469A; Thu, 14 May 2026 17:39:19 +0200 (CEST)
-Received: from mail-pj1-x102d.google.com (mail-pj1-x102d.google.com
- [IPv6:2607:f8b0:4864:20::102d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 7A0CF84686; Thu, 14 May 2026 19:17:09 +0200 (CEST)
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
+ [205.220.180.131])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 52E138464D
- for <u-boot@lists.denx.de>; Thu, 14 May 2026 17:39:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 846F4844BF
+ for <u-boot@lists.denx.de>; Thu, 14 May 2026 19:17:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=lucienzx159@gmail.com
-Received: by mail-pj1-x102d.google.com with SMTP id
- 98e67ed59e1d1-3684a6f3b0bso2145083a91.1
- for <u-boot@lists.denx.de>; Thu, 14 May 2026 08:39:16 -0700 (PDT)
+ spf=pass smtp.mailfrom=aswin.murugan@oss.qualcomm.com
+Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 64EBeWFR2554571
+ for <u-boot@lists.denx.de>; Thu, 14 May 2026 17:17:05 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ content-transfer-encoding:date:from:message-id:mime-version
+ :subject:to; s=qcppdkim1; bh=pdEFuyxSaXfeclYfoHHXpmnfZpEFuWqCl+x
+ XiqouAK8=; b=bBmMFGZGHKtgvl7EXReEfjdd25A2nxHdPbqu59yC/Rsfqx2+5br
+ E7vn2nev03JlVAfEZO1xdtAmjSj42DqCPvgCFl+1J1eiB9DzjUm4qldnAAkUI5Hs
+ xa6opBbOPDXfcwWJ/Oyy3qBddlDFETSVmdDVfmC/3rvtk9E4VhICZ5tPzCNcbNYG
+ DJAdRIL775+O9RYw22huGtr9zQtPdrR5n4cUOFIvTexhY2oI9ZuTNJ7EotjOJqUV
+ VbsmG9sIj/sUWqko97bXxDPAMY2nJZIcOQitXG21HBaZGOTxJojq7WrYUfxQuV5v
+ NLT80g0+5CMdY5CW0pev09vTmYWam644QAg==
+Received: from mail-pl1-f197.google.com (mail-pl1-f197.google.com
+ [209.85.214.197])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4e5b0bswy2-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <u-boot@lists.denx.de>; Thu, 14 May 2026 17:17:04 +0000 (GMT)
+Received: by mail-pl1-f197.google.com with SMTP id
+ d9443c01a7336-2babc42244aso151884135ad.3
+ for <u-boot@lists.denx.de>; Thu, 14 May 2026 10:17:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1778773155; x=1779377955; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:to:subject:user-agent:mime-version:date:message-id:from
- :to:cc:subject:date:message-id:reply-to;
- bh=7hSKs7NJLJdko221WcMrZM31BmFeyw36M449R8Vo5GM=;
- b=ZRXx8+vwBKQ+HU0wGbGUGiPUZYgzGS7X7BZvzi94eF3P3Yg9a02R2gjaUoZFJpRrmT
- jY7FNY0X3+zeK96Hed3Lxk4qKlT3/YF95fZDc6n0Er4YjaZs39cRfOmzGmQ44zLHF/Ug
- efST3FBOQ2BqeqVbUfGS5mCCbZoR70FlS6zlibyDgZPP9CuBWv/ui4/1aH0jv/Px+Pgf
- 9IPFxpaiUA7QCyEOeR4TZfIJ5q+9oq8rLkdimlCT9JmlqUYia48sbzteKgUZzGuy1WiV
- duHx76PauJ7WoAeZSmKpXzE85Fvo1rLQ9Rn5LKiS8AoOVj/T44CeRwrLyprsIuQbmzZi
- IM2Q==
+ d=oss.qualcomm.com; s=google; t=1778779024; x=1779383824; darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=pdEFuyxSaXfeclYfoHHXpmnfZpEFuWqCl+xXiqouAK8=;
+ b=PmfZVShacyvE3eoy8/PkBVi84/SlrgdtF9PqjPSbZi8AXTRvC5NfO6AF6VmDRW2QIg
+ 8UFXxH92jbe5Biic1nH8ZxlGbkZjyWlX/yJKhyyqqFFdxdGHiuEXyCy0jL1wfLQKI5tL
+ pB1E/FjWaOjmvdkm0M24vdR9FWpMA63xiEMQdeWpMZWzPTCgF19T6opzP6NyVBE3Wzq/
+ 2cVLGq1AGSCDFUOmtmTH7erUzrbce0MYeZlyH4zIkHsIPKWp2SEj2DXLSDxKw1Ddeyuh
+ MqsbRArrvvZOGGfdCIh36cb77cWj9p8iBcbTz79EIN4dxUiZhMI0sS0H8vlxNuzBgEoZ
+ uDnQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778773155; x=1779377955;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:to:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20251104; t=1778779024; x=1779383824;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=7hSKs7NJLJdko221WcMrZM31BmFeyw36M449R8Vo5GM=;
- b=EoSzmTTn+7rUkv3lb8cEhIZI38dvNGyC/vgw/TDCDc+w/1pNshqU2W8QTwwsiFClhe
- YKqgXsY0jT+Be0rwULXo+TFzTZr44xpM8TMGFTGUn9A8m+85pEH+/8i4wMEY30uG1f9o
- vM1gW5wBTHwl3FoD/2vjVDNLiVnXDCsXR3Ek4dVQYSw4iQd35jGjo+BOhdSR4o0I53K7
- exD2nu9jAYbfpq+TYcPSvG2RYTh0g1THrUzTrIMyvOGTsIKywi/Kuz8KV9J4d9AcfxTM
- SC6zj84ajH2PJ0iWRH56ohvu+hoVNdpFbsTeR7hzP5+yT4jmlhgr4BEkWvBgUoLZVrwi
- wO2w==
+ bh=pdEFuyxSaXfeclYfoHHXpmnfZpEFuWqCl+xXiqouAK8=;
+ b=Vp99mlzxlbuOUHpF1IwnFLUgdiOu+WG0ZRzrhbzLfVuvj4OAfWT+95RRx+gH8pOQPs
+ uWo0L7MOm1DVXSbnudFb/4/ioWbN02ryg6qHzfNZtBxGcYJgXIgVD1d7eZD6U2l+Z0+D
+ OuPsxux3k/dhDA7usgsoC6vLHagOS6JI3ulfNqiXDTJHcF9S4qKDgPC1GyJkylHytDFy
+ F+9ygL3XJgihzkgwzv4iclQT47Rksdj5772vYaEv/5RHx9KVCi4PKAqDNBoY08007ykM
+ GVA9xohcupMooz+s5iomKZ1p1oZ7KB4yl5qttdMvu4PJOutWF7w7U3E0Rgd8499YiaTa
+ KyhA==
 X-Forwarded-Encrypted: i=1;
- AFNElJ9iVY5YHSZ+lDrJkBwOExwKu+0ShsqDdJ6oBoaS4MvGNdLdzqnI94RYBkMzl7N+F6DWwV5+R8s=@lists.denx.de
-X-Gm-Message-State: AOJu0YxOW99nqzk2yCXbkWEWTyBrm1CSoro79FPvH+xzIGbxfoiHjnGv
- E9K0rs3IFLt5JQcpp8Eo6gtHGhThdOOzYlt6EplaKqR2mETslb0b1cRu
-X-Gm-Gg: Acq92OEmEM8GLE61EgpjVDY4p904ZT6RxVzYGo/m8fdDo4OesCyTqSqRXWI2ovhekkj
- CbheI/a3t4UKY3mQA97s9nhXPmrvzzeUkDj+vIlmawd5EjW9XO4CAyt+VeYbbS8lmvAfEiG2Xpp
- lskdQg9vr3EWWPuBZInkzS7/eOMvyeyd11K2YE1fsVymBCm6iWy2Fq7UyFKKAx2Ry2LABQ5r/3b
- X7RVXzb5uxKWkSatX4UgF4IXh2cdSmsbBTzIdw55CMPFHu09eWbeny1QTuix5M9mvHrpS+nypwW
- wZ94mXUGuuHIS5nclST7ewbn8K75PidyQ2tAxnyXm+mEPVzYLhKlu4GrUdYY3A2atddz/U9Fc32
- WtcFimBi5DetBU2RuvSOjCEODxlupBom/F5zcu6vlNfSAHI+xsqNBcYgg0e1MCNvs55UgCmwCE9
- IdL7lc8TwOYYVLfQ05zc7yDItEAAscyZskiZG4fpRK24Nw251eH0G63YxH0DrCcuXHR4CnCr8en
- hVU9+7cuDo=
-X-Received: by 2002:a17:90b:4f81:b0:368:65d1:893 with SMTP id
- 98e67ed59e1d1-3692344690amr3962195a91.5.1778773154626; 
- Thu, 14 May 2026 08:39:14 -0700 (PDT)
-Received: from [192.168.0.3] (124-218-201-66.cm.dynamic.apol.com.tw.
- [124.218.201.66]) by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-c82bb115c38sm2861424a12.28.2026.05.14.08.39.12
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 14 May 2026 08:39:14 -0700 (PDT)
-Message-ID: <44a6161b-7560-4221-9b4b-432a8e5f4bcf@gmail.com>
-Date: Thu, 14 May 2026 23:39:11 +0800
+ AFNElJ+HMuACO30MjJby544WplKuP0xJC/ns4KeipRCMH/l4rIP4OrT8ySpHt4woFNQxJBHCyGMASt8=@lists.denx.de
+X-Gm-Message-State: AOJu0YxkYAc2j0T5qUKUehZe6lEBAKFp0+aQfM1n9DEf1hyBuYic/xGm
+ RQiTeAgT3bLsabOt2UlTT+IFN1TJVSTuykTcsybE5cT4BpbQOJZrER/7AN7j5z4TGDZ93kbLaK3
+ u7z6vBdyl9/ejELGbKVue5cKO9xVbYPh858ZFEYe61FzZRZgqtkNcKthF
+X-Gm-Gg: Acq92OHlUAw1i5rcXjNJhWoCzNhYWlbz891STqgawcv+lwChJ6QXPK/kP4L/niwfpAv
+ EBY2tLFh1bpC057IBpi3xLf5zm0KsPdI9ZlC18EHlgjPhw2NZMZnGtyE6uovJ5wjQMWZXr/oH9v
+ qT+QPLgdcyoq1HK7ILbXg0H7Md4FeI0mhZOLQgAEh+1ZVvD1DXI55wlR6SPeRWgYbMjVeeLP70w
+ 1S+EauTZNXtCWUlepFRJy3j/lRiDkbHPqYEIxYW928dNsFKHGziPo/aRr8upQ++NlJujxx+N2i+
+ Pi+EPQuLdsf3FxzrCLZ+WiuEpOeebTos6JKD9pJ7EGhat4m5dLQ7AC8uTgcHqNTV+gEcjgqvJwn
+ zU6VIDb+bSn+chWZOFgDKFTndIzX7LGeD/ZIhliLRWWTpm44ZOQareJRLcPH+2fP8yOXvRJzc3e
+ jE03nEx9J8ls3Z4esX8pAaXB166A2O3ohf5TkAX9ZY
+X-Received: by 2002:a17:902:a701:b0:2bd:5b20:a5b5 with SMTP id
+ d9443c01a7336-2bd7e951360mr3238435ad.37.1778779023904; 
+ Thu, 14 May 2026 10:17:03 -0700 (PDT)
+X-Received: by 2002:a17:902:a701:b0:2bd:5b20:a5b5 with SMTP id
+ d9443c01a7336-2bd7e951360mr3238015ad.37.1778779023223; 
+ Thu, 14 May 2026 10:17:03 -0700 (PDT)
+Received: from hu-aswinm-blr.qualcomm.com
+ (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-2bd5d235c18sm29139975ad.81.2026.05.14.10.17.01
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 14 May 2026 10:17:02 -0700 (PDT)
+From: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+To: xypron.glpk@gmx.de, ilias.apalodimas@linaro.org, trini@konsulko.com,
+ aswin.murugan@oss.qualcomm.com, u-boot@lists.denx.de
+Subject: [PATCH v3] tools: efivar: strip auth descriptor for authenticated
+ variables
+Date: Thu, 14 May 2026 22:46:49 +0530
+Message-Id: <20260514171649.3708107-1-aswin.murugan@oss.qualcomm.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: Fwd: New Defects reported by Coverity Scan for Das U-Boot
-To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-References: <20260508234231.GF1858239@bill-the-cat>
-Content-Language: en-US
-From: "Lucien.Jheng" <lucienzx159@gmail.com>
-In-Reply-To: <20260508234231.GF1858239@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Thu, 14 May 2026 19:13:12 +0200
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNTE0MDE3MyBTYWx0ZWRfX94OijpUlVdes
+ 6KEFZi0MuBP9JYF2zEmpkZM3y+lWEU/btqFdqcdui6Jc/mi1aLiwVo5AEBXw00FfHXNEUs0K9E0
+ onZI2QMb3/iBIBIO9KtVn+gN/+FNoZmiWb3OzMtyt2KwgdJ98j/PrNr4WuI1uctBjMxRFzhrIGq
+ sGVGS/lGL2hJtx+AAW+RTbSgmH3+lMc4z7Q/HagjrJziLZfSY+Gel1kYfFV9d/xbHhQrmaUJtBT
+ L9iUImSr9hgFw+53fbyyU+EScKK/3dgzIMNbydpHpWoLDgnR7wjTJ/U94Ndkh9SvhdMZh/8WI8P
+ JKvitDILHMxSdcjAZgJXwh3N52qSt0GAGHS/631z+9yeIvTBl1d60qtQgMfEhPNMpyWUagt+H2K
+ NxGqSS5U1m+2b+T18Wi70ucP2TR5DYKdY3GZMLXJmsuXyyLw+XoIoWdbBKlS83TTI0X5ZfzMVOp
+ kglLL2ubodHBpPqi6/Q==
+X-Authority-Analysis: v=2.4 cv=b+2CJNGx c=1 sm=1 tr=0 ts=6a060390 cx=c_pps
+ a=cmESyDAEBpBGqyK7t0alAg==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+ a=NGcC8JguVDcA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22 a=VwQbUJbxAAAA:8
+ a=EUspDBNiAAAA:8 a=rf8p9UtI3xT0bhGoYccA:9 a=1OuFwYUASf3TG4hYMiVC:22
+X-Proofpoint-GUID: UJa3WNZ7rUDqSelfCXIj9z3_AaMgvtdT
+X-Proofpoint-ORIG-GUID: UJa3WNZ7rUDqSelfCXIj9z3_AaMgvtdT
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
+ definitions=2026-05-14_04,2026-05-13_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ malwarescore=0 spamscore=0 phishscore=0 adultscore=0 lowpriorityscore=0
+ clxscore=1015 priorityscore=1501 suspectscore=0 impostorscore=0 bulkscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2605050000 definitions=main-2605140173
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,537 +144,104 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom
+efivar.py currently stores authenticated variables including the
+EFI_VARIABLE_AUTHENTICATION_2 descriptor (timestamp + WIN_CERTIFICATE)
+along with the payload.
 
-I will fix coverity issue in the next patch.
+When variables are set via U-Boot, SetVariable() validates and strips
+this authentication descriptor before persisting the variable data,
+resulting in only the payload being stored and returned by GetVariable().
 
-Tom Rini 於 2026/5/9 上午 07:42 寫道:
-> Here's the latest report. I think test code matters because it sets bad
-> examples, or might not really end up testing things the way we want them
-> to, and so should be fixed. Thanks!
->
-> ---------- Forwarded message ---------
-> From: <scan-admin@coverity.com>
-> Date: Fri, May 8, 2026 at 5:31 PM
-> Subject: New Defects reported by Coverity Scan for Das U-Boot
-> To: <tom.rini@gmail.com>
->
->
-> Hi,
->
-> Please find the latest report on new defect(s) introduced to *Das U-Boot*
-> found with Coverity Scan.
->
->     - *New Defects Found:* 17
->     - 3 defect(s), reported by Coverity Scan earlier, were marked fixed in
->     the recent build analyzed by Coverity Scan.
->     - *Defects Shown:* Showing 17 of 17 defect(s)
->
-> Defect Details
->
-> ** CID 646011:       Integer handling issues  (INTEGER_OVERFLOW)
-> /test/dm/phy_common_props.c: 164           in
-> dm_test_phy_common_props_rx_unsupported()
->
->
-> _____________________________________________________________________________________________
-> *** CID 646011:         Integer handling issues  (INTEGER_OVERFLOW)
-> /test/dm/phy_common_props.c: 164             in
-> dm_test_phy_common_props_rx_unsupported()
-> 158     	unsigned int val;
-> 159     	int ret;
-> 160
-> 161     	ut_assert(ofnode_valid(node));
-> 162
-> 163     	ret = phy_get_manual_rx_polarity(node, "sgmii", &val);
->>>>      CID 646011:         Integer handling issues  (INTEGER_OVERFLOW)
->>>>      Expression "_val2", where "ret" is known to be equal to -95, overflows the type of "_val2", which is type "unsigned int".
-> 164     	ut_asserteq(-EOPNOTSUPP, ret);
-> 165
-> 166     	return 0;
-> 167     }
-> 168
-> 169     DM_TEST(dm_test_phy_common_props_rx_unsupported, UTF_SCAN_FDT);
->
-> ** CID 646010:       Integer handling issues  (INTEGER_OVERFLOW)
-> /test/dm/phy_common_props.c: 236           in
-> dm_test_phy_common_props_tx_more_names()
->
->
-> _____________________________________________________________________________________________
-> *** CID 646010:         Integer handling issues  (INTEGER_OVERFLOW)
-> /test/dm/phy_common_props.c: 236             in
-> dm_test_phy_common_props_tx_more_names()
-> 230     	unsigned int val;
-> 231     	int ret;
-> 232
-> 233     	ut_assert(ofnode_valid(node));
-> 234
-> 235     	ret = phy_get_manual_tx_polarity(node, "sgmii", &val);
->>>>      CID 646010:         Integer handling issues  (INTEGER_OVERFLOW)
->>>>      Expression "_val2", where "ret" is known to be equal to -95, overflows the type of "_val2", which is type "unsigned int".
-> 236     	ut_asserteq(-EINVAL, ret);
-> 237
-> 238     	return 0;
-> 239     }
-> 240
-> 241     DM_TEST(dm_test_phy_common_props_tx_more_names, UTF_SCAN_FDT);
->
-> ** CID 646009:         (INTEGER_OVERFLOW)
-> /test/dm/phy_common_props.c: 253           in
-> dm_test_phy_common_props_tx_find_by_name()
-> /test/dm/phy_common_props.c: 257           in
-> dm_test_phy_common_props_tx_find_by_name()
-> /test/dm/phy_common_props.c: 261           in
-> dm_test_phy_common_props_tx_find_by_name()
->
->
-> _____________________________________________________________________________________________
-> *** CID 646009:           (INTEGER_OVERFLOW)
-> /test/dm/phy_common_props.c: 253             in
-> dm_test_phy_common_props_tx_find_by_name()
-> 247     	unsigned int val;
-> 248     	int ret;
-> 249
-> 250     	ut_assert(ofnode_valid(node));
-> 251
-> 252     	ret = phy_get_manual_tx_polarity(node, "sgmii", &val);
->>>>      CID 646009:           (INTEGER_OVERFLOW)
->>>>      Expression "_val2", where "ret" is known to be equal to -95, overflows the type of "_val2", which is type "unsigned int".
-> 253     	ut_asserteq(0, ret);
-> 254     	ut_asserteq(PHY_POL_NORMAL, val);
-> 255
-> 256     	ret = phy_get_manual_tx_polarity(node, "2500base-x", &val);
-> 257     	ut_asserteq(0, ret);
-> 258     	ut_asserteq(PHY_POL_INVERT, val);
-> /test/dm/phy_common_props.c: 257             in
-> dm_test_phy_common_props_tx_find_by_name()
-> 251
-> 252     	ret = phy_get_manual_tx_polarity(node, "sgmii", &val);
-> 253     	ut_asserteq(0, ret);
-> 254     	ut_asserteq(PHY_POL_NORMAL, val);
-> 255
-> 256     	ret = phy_get_manual_tx_polarity(node, "2500base-x", &val);
->>>>      CID 646009:           (INTEGER_OVERFLOW)
->>>>      Expression "_val2", where "ret" is known to be equal to -95, overflows the type of "_val2", which is type "unsigned int".
-> 257     	ut_asserteq(0, ret);
-> 258     	ut_asserteq(PHY_POL_INVERT, val);
-> 259
-> 260     	ret = phy_get_manual_tx_polarity(node, "1000base-x", &val);
-> 261     	ut_asserteq(0, ret);
-> 262     	ut_asserteq(PHY_POL_NORMAL, val);
-> /test/dm/phy_common_props.c: 261             in
-> dm_test_phy_common_props_tx_find_by_name()
-> 255
-> 256     	ret = phy_get_manual_tx_polarity(node, "2500base-x", &val);
-> 257     	ut_asserteq(0, ret);
-> 258     	ut_asserteq(PHY_POL_INVERT, val);
-> 259
-> 260     	ret = phy_get_manual_tx_polarity(node, "1000base-x", &val);
->>>>      CID 646009:           (INTEGER_OVERFLOW)
->>>>      Expression "_val2", where "ret" is known to be equal to -95, overflows the type of "_val2", which is type "unsigned int".
-> 261     	ut_asserteq(0, ret);
-> 262     	ut_asserteq(PHY_POL_NORMAL, val);
-> 263
-> 264     	return 0;
-> 265     }
-> 266
->
-> ** CID 646008:       Integer handling issues  (INTEGER_OVERFLOW)
-> /test/dm/phy_common_props.c: 31           in
-> dm_test_phy_common_props_rx_missing()
->
->
-> _____________________________________________________________________________________________
-> *** CID 646008:         Integer handling issues  (INTEGER_OVERFLOW)
-> /test/dm/phy_common_props.c: 31             in
-> dm_test_phy_common_props_rx_missing()
-> 25     	unsigned int val;
-> 26     	int ret;
-> 27
-> 28     	ut_assert(ofnode_valid(node));
-> 29
-> 30     	ret = phy_get_manual_rx_polarity(node, "sgmii", &val);
->>>>      CID 646008:         Integer handling issues  (INTEGER_OVERFLOW)
->>>>      Expression "_val2", where "ret" is known to be equal to -95, overflows the type of "_val2", which is type "unsigned int".
-> 31     	ut_asserteq(0, ret);
-> 32     	ut_asserteq(PHY_POL_NORMAL, val);
-> 33
-> 34     	return 0;
-> 35     }
-> 36
->
-> ** CID 646007:       Integer handling issues  (INTEGER_OVERFLOW)
-> /test/dm/phy_common_props.c: 296           in
-> dm_test_phy_common_props_tx_with_default()
->
->
-> _____________________________________________________________________________________________
-> *** CID 646007:         Integer handling issues  (INTEGER_OVERFLOW)
-> /test/dm/phy_common_props.c: 296             in
-> dm_test_phy_common_props_tx_with_default()
-> 290     	unsigned int val;
-> 291     	int ret;
-> 292
-> 293     	ut_assert(ofnode_valid(node));
-> 294
-> 295     	ret = phy_get_manual_tx_polarity(node, "sgmii", &val);
->>>>      CID 646007:         Integer handling issues  (INTEGER_OVERFLOW)
->>>>      Expression "_val2", where "ret" is known to be equal to -95, overflows the type of "_val2", which is type "unsigned int".
-> 296     	ut_asserteq(0, ret);
-> 297     	ut_asserteq(PHY_POL_INVERT, val);
-> 298
-> 299     	return 0;
-> 300     }
-> 301
->
-> ** CID 646006:       Integer handling issues  (INTEGER_OVERFLOW)
-> /test/dm/phy_common_props.c: 314           in
-> dm_test_phy_common_props_tx_unsupported()
->
->
-> _____________________________________________________________________________________________
-> *** CID 646006:         Integer handling issues  (INTEGER_OVERFLOW)
-> /test/dm/phy_common_props.c: 314             in
-> dm_test_phy_common_props_tx_unsupported()
-> 308     	unsigned int val;
-> 309     	int ret;
-> 310
-> 311     	ut_assert(ofnode_valid(node));
-> 312
-> 313     	ret = phy_get_manual_tx_polarity(node, "sgmii", &val);
->>>>      CID 646006:         Integer handling issues  (INTEGER_OVERFLOW)
->>>>      Expression "_val2", where "ret" is known to be equal to -95, overflows the type of "_val2", which is type "unsigned int".
-> 314     	ut_asserteq(-EOPNOTSUPP, ret);
-> 315
-> 316     	return 0;
-> 317     }
-> 318
->
-> ** CID 646005:         (INTEGER_OVERFLOW)
-> /test/dm/phy_common_props.c: 111           in
-> dm_test_phy_common_props_rx_find_by_name()
-> /test/dm/phy_common_props.c: 105           in
-> dm_test_phy_common_props_rx_find_by_name()
-> /test/dm/phy_common_props.c: 101           in
-> dm_test_phy_common_props_rx_find_by_name()
->
->
-> _____________________________________________________________________________________________
-> *** CID 646005:           (INTEGER_OVERFLOW)
-> /test/dm/phy_common_props.c: 111             in
-> dm_test_phy_common_props_rx_find_by_name()
-> 105     	ut_asserteq(0, ret);
-> 106     	ut_asserteq(PHY_POL_INVERT, val);
-> 107
-> 108     	/* "usb-ss" has PHY_POL_AUTO; auto is supported here */
-> 109     	ret = phy_get_rx_polarity(node, "usb-ss", BIT(PHY_POL_AUTO),
-> 110     				  PHY_POL_AUTO, &val);
->>>>      CID 646005:           (INTEGER_OVERFLOW)
->>>>      Expression "_val2", where "ret" is known to be equal to -95, overflows the type of "_val2", which is type "unsigned int".
-> 111     	ut_asserteq(0, ret);
-> 112     	ut_asserteq(PHY_POL_AUTO, val);
-> 113
-> 114     	return 0;
-> 115     }
-> 116
-> /test/dm/phy_common_props.c: 105             in
-> dm_test_phy_common_props_rx_find_by_name()
-> 99
-> 100     	ret = phy_get_manual_rx_polarity(node, "sgmii", &val);
-> 101     	ut_asserteq(0, ret);
-> 102     	ut_asserteq(PHY_POL_NORMAL, val);
-> 103
-> 104     	ret = phy_get_manual_rx_polarity(node, "2500base-x", &val);
->>>>      CID 646005:           (INTEGER_OVERFLOW)
->>>>      Expression "_val2", where "ret" is known to be equal to -95, overflows the type of "_val2", which is type "unsigned int".
-> 105     	ut_asserteq(0, ret);
-> 106     	ut_asserteq(PHY_POL_INVERT, val);
-> 107
-> 108     	/* "usb-ss" has PHY_POL_AUTO; auto is supported here */
-> 109     	ret = phy_get_rx_polarity(node, "usb-ss", BIT(PHY_POL_AUTO),
-> 110     				  PHY_POL_AUTO, &val);
-> /test/dm/phy_common_props.c: 101             in
-> dm_test_phy_common_props_rx_find_by_name()
-> 95     	unsigned int val;
-> 96     	int ret;
-> 97
-> 98     	ut_assert(ofnode_valid(node));
-> 99
-> 100     	ret = phy_get_manual_rx_polarity(node, "sgmii", &val);
->>>>      CID 646005:           (INTEGER_OVERFLOW)
->>>>      Expression "_val2", where "ret" is known to be equal to -95, overflows the type of "_val2", which is type "unsigned int".
-> 101     	ut_asserteq(0, ret);
-> 102     	ut_asserteq(PHY_POL_NORMAL, val);
-> 103
-> 104     	ret = phy_get_manual_rx_polarity(node, "2500base-x", &val);
-> 105     	ut_asserteq(0, ret);
-> 106     	ut_asserteq(PHY_POL_INVERT, val);
->
-> ** CID 646004:       Integer handling issues  (INTEGER_OVERFLOW)
-> /test/dm/phy_common_props.c: 183           in
-> dm_test_phy_common_props_tx_missing()
->
->
-> _____________________________________________________________________________________________
-> *** CID 646004:         Integer handling issues  (INTEGER_OVERFLOW)
-> /test/dm/phy_common_props.c: 183             in
-> dm_test_phy_common_props_tx_missing()
-> 177     	unsigned int val;
-> 178     	int ret;
-> 179
-> 180     	ut_assert(ofnode_valid(node));
-> 181
-> 182     	ret = phy_get_manual_tx_polarity(node, "sgmii", &val);
->>>>      CID 646004:         Integer handling issues  (INTEGER_OVERFLOW)
->>>>      Expression "_val2", where "ret" is known to be equal to -95, overflows the type of "_val2", which is type "unsigned int".
-> 183     	ut_asserteq(0, ret);
-> 184     	ut_asserteq(PHY_POL_NORMAL, val);
-> 185
-> 186     	return 0;
-> 187     }
-> 188
->
-> ** CID 646003:       Integer handling issues  (INTEGER_OVERFLOW)
-> /test/dm/phy_common_props.c: 49           in
-> dm_test_phy_common_props_rx_more_values()
->
->
-> _____________________________________________________________________________________________
-> *** CID 646003:         Integer handling issues  (INTEGER_OVERFLOW)
-> /test/dm/phy_common_props.c: 49             in
-> dm_test_phy_common_props_rx_more_values()
-> 43     	unsigned int val;
-> 44     	int ret;
-> 45
-> 46     	ut_assert(ofnode_valid(node));
-> 47
-> 48     	ret = phy_get_manual_rx_polarity(node, "sgmii", &val);
->>>>      CID 646003:         Integer handling issues  (INTEGER_OVERFLOW)
->>>>      Expression "_val2", where "ret" is known to be equal to -95, overflows the type of "_val2", which is type "unsigned int".
-> 49     	ut_asserteq(-EINVAL, ret);
-> 50
-> 51     	return 0;
-> 52     }
-> 53
-> 54     DM_TEST(dm_test_phy_common_props_rx_more_values, UTF_SCAN_FDT);
->
-> ** CID 646002:       Integer handling issues  (INTEGER_OVERFLOW)
-> /test/dm/phy_common_props.c: 146           in
-> dm_test_phy_common_props_rx_with_default()
->
->
-> _____________________________________________________________________________________________
-> *** CID 646002:         Integer handling issues  (INTEGER_OVERFLOW)
-> /test/dm/phy_common_props.c: 146             in
-> dm_test_phy_common_props_rx_with_default()
-> 140     	unsigned int val;
-> 141     	int ret;
-> 142
-> 143     	ut_assert(ofnode_valid(node));
-> 144
-> 145     	ret = phy_get_manual_rx_polarity(node, "sgmii", &val);
->>>>      CID 646002:         Integer handling issues  (INTEGER_OVERFLOW)
->>>>      Expression "_val2", where "ret" is known to be equal to -95, overflows the type of "_val2", which is type "unsigned int".
-> 146     	ut_asserteq(0, ret);
-> 147     	ut_asserteq(PHY_POL_INVERT, val);
-> 148
-> 149     	return 0;
-> 150     }
-> 151
->
-> ** CID 646001:       Integer handling issues  (INTEGER_OVERFLOW)
-> /test/dm/phy_common_props.c: 66           in
-> dm_test_phy_common_props_rx_single_value()
->
->
-> _____________________________________________________________________________________________
-> *** CID 646001:         Integer handling issues  (INTEGER_OVERFLOW)
-> /test/dm/phy_common_props.c: 66             in
-> dm_test_phy_common_props_rx_single_value()
-> 60     	unsigned int val;
-> 61     	int ret;
-> 62
-> 63     	ut_assert(ofnode_valid(node));
-> 64
-> 65     	ret = phy_get_manual_rx_polarity(node, "sgmii", &val);
->>>>      CID 646001:         Integer handling issues  (INTEGER_OVERFLOW)
->>>>      Expression "_val2", where "ret" is known to be equal to -95, overflows the type of "_val2", which is type "unsigned int".
-> 66     	ut_asserteq(0, ret);
-> 67     	ut_asserteq(PHY_POL_INVERT, val);
-> 68
-> 69     	return 0;
-> 70     }
-> 71
->
-> ** CID 646000:       Integer handling issues  (INTEGER_OVERFLOW)
-> /test/dm/phy_common_props.c: 129           in
-> dm_test_phy_common_props_rx_no_default()
->
->
-> _____________________________________________________________________________________________
-> *** CID 646000:         Integer handling issues  (INTEGER_OVERFLOW)
-> /test/dm/phy_common_props.c: 129             in
-> dm_test_phy_common_props_rx_no_default()
-> 123     	unsigned int val;
-> 124     	int ret;
-> 125
-> 126     	ut_assert(ofnode_valid(node));
-> 127
-> 128     	ret = phy_get_manual_rx_polarity(node, "sgmii", &val);
->>>>      CID 646000:         Integer handling issues  (INTEGER_OVERFLOW)
->>>>      Expression "_val2", where "ret" is known to be equal to -95, overflows the type of "_val2", which is type "unsigned int".
-> 129     	ut_asserteq(-EINVAL, ret);
-> 130
-> 131     	return 0;
-> 132     }
-> 133
-> 134     DM_TEST(dm_test_phy_common_props_rx_no_default, UTF_SCAN_FDT);
->
-> ** CID 645999:       Integer handling issues  (INTEGER_OVERFLOW)
-> /test/dm/phy_common_props.c: 84           in
-> dm_test_phy_common_props_rx_more_names()
->
->
-> _____________________________________________________________________________________________
-> *** CID 645999:         Integer handling issues  (INTEGER_OVERFLOW)
-> /test/dm/phy_common_props.c: 84             in
-> dm_test_phy_common_props_rx_more_names()
-> 78     	unsigned int val;
-> 79     	int ret;
-> 80
-> 81     	ut_assert(ofnode_valid(node));
-> 82
-> 83     	ret = phy_get_manual_rx_polarity(node, "sgmii", &val);
->>>>      CID 645999:         Integer handling issues  (INTEGER_OVERFLOW)
->>>>      Expression "_val2", where "ret" is known to be equal to -95, overflows the type of "_val2", which is type "unsigned int".
-> 84     	ut_asserteq(-EINVAL, ret);
-> 85
-> 86     	return 0;
-> 87     }
-> 88
-> 89     DM_TEST(dm_test_phy_common_props_rx_more_names, UTF_SCAN_FDT);
->
-> ** CID 645998:       Integer handling issues  (INTEGER_OVERFLOW)
-> /test/dm/phy_common_props.c: 218           in
-> dm_test_phy_common_props_tx_single_value()
->
->
-> _____________________________________________________________________________________________
-> *** CID 645998:         Integer handling issues  (INTEGER_OVERFLOW)
-> /test/dm/phy_common_props.c: 218             in
-> dm_test_phy_common_props_tx_single_value()
-> 212     	unsigned int val;
-> 213     	int ret;
-> 214
-> 215     	ut_assert(ofnode_valid(node));
-> 216
-> 217     	ret = phy_get_manual_tx_polarity(node, "sgmii", &val);
->>>>      CID 645998:         Integer handling issues  (INTEGER_OVERFLOW)
->>>>      Expression "_val2", where "ret" is known to be equal to -95, overflows the type of "_val2", which is type "unsigned int".
-> 218     	ut_asserteq(0, ret);
-> 219     	ut_asserteq(PHY_POL_INVERT, val);
-> 220
-> 221     	return 0;
-> 222     }
-> 223
->
-> ** CID 646014:       Integer handling issues  (INTEGER_OVERFLOW)
-> /test/dm/phy_common_props.c: 201           in
-> dm_test_phy_common_props_tx_more_values()
->
->
-> _____________________________________________________________________________________________
-> *** CID 646014:         Integer handling issues  (INTEGER_OVERFLOW)
-> /test/dm/phy_common_props.c: 201             in
-> dm_test_phy_common_props_tx_more_values()
-> 195     	unsigned int val;
-> 196     	int ret;
-> 197
-> 198     	ut_assert(ofnode_valid(node));
-> 199
-> 200     	ret = phy_get_manual_tx_polarity(node, "sgmii", &val);
->>>>      CID 646014:         Integer handling issues  (INTEGER_OVERFLOW)
->>>>      Expression "_val2", where "ret" is known to be equal to -95, overflows the type of "_val2", which is type "unsigned int".
-> 201     	ut_asserteq(-EINVAL, ret);
-> 202
-> 203     	return 0;
-> 204     }
-> 205
-> 206     DM_TEST(dm_test_phy_common_props_tx_more_values, UTF_SCAN_FDT);
->
-> ** CID 646013:       Integer handling issues  (INTEGER_OVERFLOW)
-> /test/dm/phy_common_props.c: 279           in
-> dm_test_phy_common_props_tx_no_default()
->
->
-> _____________________________________________________________________________________________
-> *** CID 646013:         Integer handling issues  (INTEGER_OVERFLOW)
-> /test/dm/phy_common_props.c: 279             in
-> dm_test_phy_common_props_tx_no_default()
-> 273     	unsigned int val;
-> 274     	int ret;
-> 275
-> 276     	ut_assert(ofnode_valid(node));
-> 277
-> 278     	ret = phy_get_manual_tx_polarity(node, "sgmii", &val);
->>>>      CID 646013:         Integer handling issues  (INTEGER_OVERFLOW)
->>>>      Expression "_val2", where "ret" is known to be equal to -95, overflows the type of "_val2", which is type "unsigned int".
-> 279     	ut_asserteq(-EINVAL, ret);
-> 280
-> 281     	return 0;
-> 282     }
-> 283
-> 284     DM_TEST(dm_test_phy_common_props_tx_no_default, UTF_SCAN_FDT);
->
-> ** CID 646012:         (TAINTED_SCALAR)
-> /drivers/phy/phy-common-props.c: 156           in ofnode_get_u32_prop_for_name()
->
->
-> _____________________________________________________________________________________________
-> *** CID 646012:           (TAINTED_SCALAR)
-> /drivers/phy/phy-common-props.c: 156             in
-> ofnode_get_u32_prop_for_name()
-> 150     	props = calloc(n_props, sizeof(*props));
-> 151     	if (!props)
-> 152     		return -ENOMEM;
-> 153
-> 154     	err = ofnode_read_u32_array(node, props_title, props, n_props);
-> 155     	if (err >= 0) {
->>>>      CID 646012:           (TAINTED_SCALAR)
->>>>      Using tainted variable "idx" as an index to pointer "props".
-> 156     		*val = props[idx];
-> 157     		pr_debug("%s: resolved value %u at index %d for name '%s'
-> from '%s'\n",
-> 158     			 __func__, *val, idx, name, props_title);
-> 159     	} else {
-> 160     		pr_debug("%s: failed to read u32 array '%s' (err=%d)\n",
-> 161     			 __func__, props_title, err);
-> /drivers/phy/phy-common-props.c: 164             in
-> ofnode_get_u32_prop_for_name()
-> 158     			 __func__, *val, idx, name, props_title);
-> 159     	} else {
-> 160     		pr_debug("%s: failed to read u32 array '%s' (err=%d)\n",
-> 161     			 __func__, props_title, err);
-> 162     	}
-> 163
->>>>      CID 646012:           (TAINTED_SCALAR)
->>>>      Passing tainted expression "*props" to "dlfree", which uses it as an offset.
-> 164     	free(props);
-> 165
-> 166     	return err;
-> 167     }
-> 168
-> 169     /**
->
->
->
-> View Defects in Coverity Scan
-> <https://scan.coverity.com/projects/das-u-boot?tab=overview>
->
-> Best regards,
->
-> The Coverity Scan Admin Team
->
-> ----- End forwarded message -----
->
+This mismatch causes efivar.py-generated stores to differ from U-Boot
+runtime behavior and leads to incorrect GetVariable() results.
+
+Update efivar.py to strip the authentication descriptor and store only
+the payload for authenticated variables, ensuring consistency with
+U-Boot behavior and compliance with UEFI expectations.
+
+Signed-off-by: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+---
+Changes in v3:
+- Previously stripped the authentication descriptor at GetVariable(),
+  now moved to strip it in efivar.py during variable pre-seeding/set.
+Link to v2: https://lore.kernel.org/u-boot/20260512194205.1905069-1-aswin.murugan@oss.qualcomm.com/
+
+Changes in v2:
+- Enhanced commit message with explicit UEFI spec reference
+Link to v1: https://lore.kernel.org/u-boot/20250725123653.513252-1-aswin.murugan@oss.qualcomm.com/
+---
+ tools/efivar.py | 50 ++++++++++++++++++++++++++++++++++++++++++++++++-
+ 1 file changed, 49 insertions(+), 1 deletion(-)
+
+diff --git a/tools/efivar.py b/tools/efivar.py
+index 67729fa8505..d248cd868ba 100755
+--- a/tools/efivar.py
++++ b/tools/efivar.py
+@@ -79,6 +79,50 @@ class EfiVariable:
+ def calc_crc32(buf):
+     return zlib.crc32(buf) & 0xffffffff
+ 
++def strip_auth_descriptor(data, attrs):
++    """
++    Strip the EFI auth descriptor from authenticated variable data.
++
++    This is used during efivar.py-based pre-seeding of ubootefi.var to
++    match U-Boot SetVariable() behavior, where the authentication header
++    is consumed during validation and only the payload is stored.
++
++    For variables with EFI_VARIABLE_TIME_BASED_AUTHENTICATED_WRITE_ACCESS:
++    - Input format: [EFI_VARIABLE_AUTHENTICATION_2 | payload]
++    - Stored format: [payload only]
++
++    Auth header size calculation (aligned with U-Boot efi_variable_authenticate()):
++        auth_size = sizeof(EFI_TIME) + WIN_CERTIFICATE.dwLength
++
++    Only the payload portion is retained after stripping the header.
++    """
++    if not (attrs & EFI_VARIABLE_TIME_BASED_AUTHENTICATED_WRITE_ACCESS):
++        return data
++    if not data:
++        return data
++
++    efi = EfiStruct()
++    if len(data) < efi.var_time_size:
++        return data
++
++    offset = efi.var_time_size
++    if len(data) < offset + efi.var_win_cert_size:
++        return data
++
++    try:
++        cert_hdr = struct.unpack_from(efi.var_win_cert_fmt, data, offset)
++        dwLength = cert_hdr[0]
++    except struct.error:
++        return data
++
++    auth_size = efi.var_time_size + dwLength
++    if auth_size <= 0 or auth_size > len(data):
++        return data
++
++    if len(data) <= auth_size:
++        return b''
++    return data[auth_size:]
++
+ class EfiVariableStore:
+     def __init__(self, infile):
+         self.infile = infile
+@@ -172,8 +216,12 @@ class EfiVariableStore:
+                 break
+             offs = loffs
+ 
++        if data and (attrs & EFI_VARIABLE_TIME_BASED_AUTHENTICATED_WRITE_ACCESS):
++            data = strip_auth_descriptor(data, attrs)
++            size = len(data) if data else 0
++
+         tsec = int(time.time()) if attrs & EFI_VARIABLE_TIME_BASED_AUTHENTICATED_WRITE_ACCESS else 0
+-        nd = name.encode('utf_16_le') + b"\x00\x00" + data
++        nd = name.encode('utf_16_le') + b"\x00\x00" + (data if data else b'')
+         # U-Boot variable format requires the name + data blob to be 8-byte aligned
+         pad = ((len(nd) + 7) & ~7) - len(nd)
+         nd += bytes([0] * pad)
+-- 
+2.34.1
+
