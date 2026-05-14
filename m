@@ -4,53 +4,48 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EABBDCD4851
-	for <u-boot@archiver.kernel.org>; Thu, 14 May 2026 14:51:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0700CD4851
+	for <u-boot@archiver.kernel.org>; Thu, 14 May 2026 14:51:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D7443846DF;
-	Thu, 14 May 2026 16:49:32 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id 1C8D3846E7;
+	Thu, 14 May 2026 16:49:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=l4re.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=arm.com header.i=@arm.com header.b="P0BMzV8n";
+	dkim=pass (2048-bit key; secure) header.d=l4re.org header.i=@l4re.org header.b="W7Q/qzjg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CD2368467B; Thu, 14 May 2026 14:50:16 +0200 (CEST)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id AF38D83AA9
- for <u-boot@lists.denx.de>; Thu, 14 May 2026 14:50:14 +0200 (CEST)
+ id 3923184683; Thu, 14 May 2026 16:06:46 +0200 (CEST)
+Received: from os.inf.tu-dresden.de (os.inf.tu-dresden.de [141.76.48.99])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 3C4E68467C
+ for <u-boot@lists.denx.de>; Thu, 14 May 2026 16:06:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=arm.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=harsimransingh.tungal@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 7C89A244C;
- Thu, 14 May 2026 05:50:08 -0700 (PDT)
-Received: from e132995.arm.com (unknown [10.57.69.131])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id B77163F7B4;
- Thu, 14 May 2026 05:50:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
- t=1778763013; bh=1MXp9lfqHLywAt+N0aQvPPoa48kL/s58CAeirM/vpqA=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=P0BMzV8nTYo4BK+iq9AM93D4BbhwiC5vrHdOxmJ79F4U/FBI9PmzVeH8bxBPUSPK0
- wJCbviaSl51xkwcWxjvLAJkvTn4Sboemn5Su6vVnabzKLB+pxCZq78OiDtrZTvavzO
- DIEJR5LW1sVyuKMxe+AqFOcjhhB8LamIY/4LceJM=
-From: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
-To: u-boot@lists.denx.de
-Cc: abdellatif.elkhlifi@arm.com, trini@konsulko.com,
- ilias.apalodimas@linaro.org, xypron.glpk@gmx.de,
- hugues.kambampiana@arm.com, sjg@chromium.org,
- Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
-Subject: [PATCH v2 11/11] doc: bootefi: note two-phase runtime variables
- selftest
-Date: Thu, 14 May 2026 13:49:24 +0100
-Message-Id: <20260514124924.1804332-12-harsimransingh.tungal@arm.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20260514124924.1804332-1-harsimransingh.tungal@arm.com>
-References: <20260424173151.371134-1-harsimransingh.tungal@arm.com>
- <20260514124924.1804332-1-harsimransingh.tungal@arm.com>
+ dmarc=pass (p=none dis=none) header.from=l4re.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=adam@l4re.org
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=l4re.org;
+ s=mx; h=Content-Type:MIME-Version:Message-ID:Subject:To:From:Date:
+ Content-Transfer-Encoding:References:In-Reply-To:Cc:Reply-To:Content-ID:
+ Content-Description; bh=kWJjJt+N/7aMYpV2BdsrMBugDPjETzTtU+TLhVDJg8E=; b=W7Q/q
+ zjglTdjrTULoxpJpC4zLuOMpgfO03Kb0oLyFz9QRrPtrX9VJHsQ9UwkMkWP/BsorM2E02E532q5xe
+ CuEmJyhTsjLlpHs2yJnhr8m1NWb1j6UZhEqpvR9bAJIPdjksi/ucZftYnWfZAy9CQZ/wuh3S6URtS
+ Fl/Cb4AU7iSbb/nneUc6ZP3En2z+2zyo+7Lc5rQ0KX63PNneASrT9xsgbuDKu24TREUbWgEMMOSMP
+ J5E9movQBdDSIj6XeiSU37LhX/U/Emv0aTAGWwKYim923OwTG8+5br7IQP7NVDfSuANpz0fDOu4P9
+ mDBmjkLEvdfZv1ZGWHo7/U803rXQA==;
+Received: from erwin.inf.tu-dresden.de ([141.76.48.80]
+ helo=os.inf.tu-dresden.de)
+ by os.inf.tu-dresden.de with esmtps (TLS1.3:TLS_AES_256_GCM_SHA384:256) (Exim
+ 4.99.2) id 1wNWi3-0000000CAlJ-43Co; Thu, 14 May 2026 16:06:44 +0200
+Date: Thu, 14 May 2026 16:06:41 +0200
+From: Adam Lackorzynski <adam@l4re.org>
+To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
+Subject: [PATCH] common/command.c: Avoid NULL pointer use in cmd_auto_complete
+Message-ID: <agXW8eM2DdZLEqt4@os.inf.tu-dresden.de>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+User-Agent: Mutt/2.2.13 (2024-03-09)
 X-Mailman-Approved-At: Thu, 14 May 2026 16:49:29 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -68,70 +63,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The bootefi documentation did not describe how to run the
-runtime-variable selftest, so users had no guidance on its reboot
-requirements or on which flow applies to their configuration.
+Avoid putting a potential NULL pointer to strcmp, which would lead to a
+load at address 0.
 
-Document the runtime-variable selftest flow in bootefi.rst. Describe
-the non-volatile path, note the single-run
-CONFIG_EFI_RT_VOLATILE_STORE=y case, and show how to select the
-runtime-variable selftest with efi_selftest.
-
-Signed-off-by: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
-
+Signed-off-by: Adam Lackorzynski <adam@l4re.org>
 ---
+ common/command.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Changelog:
-===============
-
-v2:
-
-Simon:
-
-- Update the doc to match the v2 new efi selftest flow
-- Document single-run behavior for volatile-store builds
-
- doc/usage/cmd/bootefi.rst | 27 +++++++++++++++++++++++++++
- 1 file changed, 27 insertions(+)
-
-diff --git a/doc/usage/cmd/bootefi.rst b/doc/usage/cmd/bootefi.rst
-index 7c5448586b7..e44d345cab2 100644
---- a/doc/usage/cmd/bootefi.rst
-+++ b/doc/usage/cmd/bootefi.rst
-@@ -160,6 +160,33 @@ environment variable to match one of the listed identifiers
- Some of the tests execute the ExitBootServices() UEFI boot service and will not
- return to the command line but require a board reset.
+diff --git a/common/command.c b/common/command.c
+index 0f9dd06d72b..55bd9e44b1f 100644
+--- a/common/command.c
++++ b/common/command.c
+@@ -373,7 +373,7 @@ int cmd_auto_complete(const char *const prompt, char *buf, int *np, int *colp)
+ 	const char *ps_prompt = CONFIG_SYS_PROMPT;
+ #endif
  
-+When CONFIG_EFI_RT_VOLATILE_STORE is enabled, the test
-+*variables at runtime* completes in a single run and does not require
-+a reboot.
-+
-+::
-+
-+    => setenv efi_selftest 'variables at runtime'
-+    => bootefi selftest
-+
-+When CONFIG_EFI_RT_VOLATILE_STORE is not enabled, the runtime-variable
-+flow is split into *variables at runtime setup* and
-+*variables at runtime verify*. Run the setup test once to create the
-+runtime-accessible variable in non-volatile storage, reboot, then run
-+the verify test to validate, append, and delete that variable.
-+
-+::
-+
-+    => setenv efi_selftest 'variables at runtime setup'
-+    => bootefi selftest
-+
-+After reboot:
-+
-+::
-+
-+    => setenv efi_selftest 'variables at runtime verify'
-+    => bootefi selftest
-+
- Configuration
- -------------
+-	if (strcmp(prompt, ps_prompt) != 0)
++	if (ps_prompt && strcmp(prompt, ps_prompt) != 0)
+ 		return 0;	/* not in normal console */
  
+ 	cnt = strlen(buf);
 -- 
-2.34.1
+2.53.0
 
