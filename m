@@ -4,138 +4,103 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A4E9CD4F39
-	for <u-boot@archiver.kernel.org>; Thu, 14 May 2026 22:28:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46185CD4F39
+	for <u-boot@archiver.kernel.org>; Thu, 14 May 2026 23:15:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 01A4684663;
-	Fri, 15 May 2026 00:28:46 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 813E58464D;
+	Fri, 15 May 2026 01:15:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="jDachWHm";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="H5hNzlq/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8AA958467A; Fri, 15 May 2026 00:28:44 +0200 (CEST)
-Received: from PH0PR06CU001.outbound.protection.outlook.com
- (mail-westus3azlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c107::3])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 18C6D84687; Fri, 15 May 2026 01:15:53 +0200 (CEST)
+Received: from mail-oa1-x36.google.com (mail-oa1-x36.google.com
+ [IPv6:2001:4860:4864:20::36])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7FA988464D
- for <u-boot@lists.denx.de>; Fri, 15 May 2026 00:28:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DA5808407D
+ for <u-boot@lists.denx.de>; Fri, 15 May 2026 01:15:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=jm@ti.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ha6ySr7klTpXenjGOaGdtH4/dhaZHHnmERYzq+xJAL9x40PENbgzvL1U6FMnYeiUhq0IOaGKbFMXF+TU1ANeSov/qGUgbLvgXfcB00CuW0R0vTPWn6SJqGBk9lvI3AyJkN9rBqjpQV+oe/I2ouDce+bNce46H8eX6KwwdnnK2d9aIstpISSvIU/7mTKqw7oeuPdFe2D4J0o01ahki6sUSn9QB6A+aF90e/d0GAoj9Dq9jA0QGaOSzRYFM8N9R0zsiGKsFsitElA5OKcMdFxVAVJLLX+J66FMRxu4tA2ySwfcxLi+hz13x5gkl5sM77DwTa52HiQ4GFbOz1x32aC7bg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=nH3nDVytDkpVqnz/Z2UkuVs56rRdh2UWtTWtaNCT/xg=;
- b=e5Cv6RYU+DGpygyvOIikFm4sZ8ob/uSwH+5+8B8zmR1Fkkvgvm7DXYeV6LRETn8h37a2rDZTjeiQrx5PMnQWfO4SkCUU80wsIhrbiT8YMTS8iFa0VSDFcmsJy1ZcMEcwbrAryCO6cvAbQblWWA9RS8vbx3kfJQlyIiI4+JSKGzK86RMAgMeCaKzZfIdOi0hSsMU1gTKdfjlN8zwrZxS6DZaB8dqMBzWCEt3l2lUWYz7x2twsCg0uL4ma+RBk8NbceCnlWrt9qVVL/fZXFBRi3usqlDcgh0IIUnuYFuPS+z3sFD9mKc0tP/ymO4qC1B8TVq2OM45O6H9unlOI1wYSSw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.21.195) smtp.rcpttodomain=paulk.fr smtp.mailfrom=ti.com; dmarc=pass
- (p=quarantine sp=none pct=100) action=none header.from=ti.com; dkim=none
- (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=nH3nDVytDkpVqnz/Z2UkuVs56rRdh2UWtTWtaNCT/xg=;
- b=jDachWHmQ45mGV7goGqZedc8BrcERfpCmt/v5rBTcqTnp2V5pqkdPgG4gpRjkpeNcJXQhhQd2w7htnc/F1BAAitYq2l3FYZ52smz7AFdVlAwbm1bt/XEQTe1XplgupIyHDYJPpVS/PzRzSIW4lgEacaZgJgUO34000eroGNe5iI=
-Received: from SJ0PR03CA0269.namprd03.prod.outlook.com (2603:10b6:a03:3a0::34)
- by SA1PR10MB7664.namprd10.prod.outlook.com (2603:10b6:806:38e::6)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9913.12; Thu, 14 May
- 2026 22:28:36 +0000
-Received: from CO1PEPF00012E80.namprd03.prod.outlook.com
- (2603:10b6:a03:3a0:cafe::17) by SJ0PR03CA0269.outlook.office365.com
- (2603:10b6:a03:3a0::34) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9913.13 via Frontend Transport; Thu,
- 14 May 2026 22:28:36 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.195)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.21.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.21.195; helo=flwvzet201.ext.ti.com; pr=C
-Received: from flwvzet201.ext.ti.com (198.47.21.195) by
- CO1PEPF00012E80.mail.protection.outlook.com (10.167.249.55) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.25.13 via Frontend Transport; Thu, 14 May 2026 22:28:35 +0000
-Received: from DFLE208.ent.ti.com (10.64.6.66) by flwvzet201.ext.ti.com
- (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Thu, 14 May
- 2026 17:28:34 -0500
-Received: from DFLE208.ent.ti.com (10.64.6.66) by DFLE208.ent.ti.com
- (10.64.6.66) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Thu, 14 May
- 2026 17:28:34 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE208.ent.ti.com
- (10.64.6.66) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37 via Frontend
- Transport; Thu, 14 May 2026 17:28:34 -0500
-Received: from [128.247.81.105] (judy-hp.dhcp.ti.com [128.247.81.105])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 64EMSYGg3127838;
- Thu, 14 May 2026 17:28:34 -0500
-Message-ID: <a47677b2-3e70-49c4-a92a-a3463e02ad53@ti.com>
-Date: Thu, 14 May 2026 17:28:34 -0500
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x36.google.com with SMTP id
+ 586e51a60fabf-40f1a1f77a6so6413955fac.2
+ for <u-boot@lists.denx.de>; Thu, 14 May 2026 16:15:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1778800549; x=1779405349; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=GbIsYnc53C7qFa+yRbFFyx39toDLUOMeILFTuFaFFS0=;
+ b=H5hNzlq/jOEyY/ACYEW5dk6FSIVdOgmvJGUszvVSy8OSbVDkdVqwb0d5o/YRSbnUhV
+ G7xZLHweevzsnBFyBJ/e4R3lMyjSZGuZ2eOgWc2Y2GCOzusdjJfAhVEneXEBYzuNf19L
+ oTiiX/x/L1GwSD9el17q1T0By3SLZFFzfhxYU=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1778800549; x=1779405349;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=GbIsYnc53C7qFa+yRbFFyx39toDLUOMeILFTuFaFFS0=;
+ b=hyO2vBRf4CZu+rxCgAKWMKPHpK6zLUEBSxcgGGSuY4MB4P5dwE1z+8idtpiXyj9g5o
+ 3lRd6NvtKkdTa4gZVn77apme3DW99/OKJX2VtQnqUtXe+4PfA4OPKcPyNvtSI7Z9j/n6
+ 6BM6sunYmNMaaO+/BqT60g92sGrincSAm/yHefp0nLnaIJ8j1oWQupdCQxrGXS2Asl1E
+ 4F7RzAe/PeWM7jLwSln1I/NUly7luVIP37vnnEi2x3eF7aGEYbm2F2a5Gt8JpPKVb7TO
+ WmKJPFpxeVKOyshJvplRFvgoXDyADoIOpnH34d+bB0vqwYDSYfy9mzqbd5uBd6itEE24
+ Li9A==
+X-Gm-Message-State: AOJu0YxgvH8o7PcWfngZuSsFtF1P59fg7qCewV8wYAzbLGJBmh6Q4ClE
+ LDWAEhlbDWg7i9aLzeRZMcAgJh5CFW1GwIHG1sOqJuOmZOCuBs3EOg2YxpGdBomdVOg=
+X-Gm-Gg: Acq92OH2XTKTmpmJ5UxursXYMXRX9qtm0qtlJXapGKloEkGrH6oHHHUJzYGyuGKZi1x
+ t9mcZarNXUZHeGb4PDgRrPTvTPK6CCyyVJ1HlfSljZmLjN0Ok8UgA7iiS1J5A7BC3qZxjRQOO4I
+ n2PK7B0HmjQFUeKTZoTf/Kfi4LYhiVIgXHkOnicu2y8M+yh5OKi71bR3nnzUy/GirDs4jU15f67
+ i4ZZuJxN2Ypo0Pg6PIdf3MfN2zmK/mVqVFEiEUmS6OKIxZUMRyLuonBC2tpUtU5+Sy0JCFhnSMp
+ Vr/oP0v+5riy4tlx95GG/o4x7d3BknGT5FMRSz5crLP+qY96IzYhW/Ib8Yyqfe/3Sh5fL+o9C9I
+ gfgd+ZxkE3AjjSeDIr4FcGWIPKAFL54uINROG6kxuiuF+KX9dVVmNXKP5HgdF3zOuTfr82n9b27
+ dwxeBx7jHmhz03+Fe4lPaaptblvUh8p6n1+wFlNdgYPe75B5liHsd4BZnCGMENiY3cwdltQiWVP
+ NzUDVB8V0FTHoRYddXVC5Bt0VXU8+UUpcj/kUsFwwW/R3tMLA==
+X-Received: by 2002:a05:6870:8e10:b0:439:baeb:7ee with SMTP id
+ 586e51a60fabf-43a2dd990demr1212376fac.15.1778800549560; 
+ Thu, 14 May 2026 16:15:49 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-189-203-106-235.totalplay.net.
+ [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-439fc144b86sm3020885fac.1.2026.05.14.16.15.47
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 14 May 2026 16:15:49 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>
+Cc: Alice Guo <alice.guo@nxp.com>, Andrew Davis <afd@ti.com>, 
+ Anshul Dalal <anshuld@ti.com>, Bryan Brattlof <bb@ti.com>, 
+ Cyril Jean <cyril.jean@microchip.com>, 
+ Emanuele Ghidoli <emanuele.ghidoli@toradex.com>, 
+ Enrico Leto <enrico.leto@siemens.com>, 
+ Ernest Van Hoecke <ernest.vanhoecke@toradex.com>, 
+ Fabio Estevam <festevam@gmail.com>, 
+ Francesco Dolcini <francesco.dolcini@toradex.com>, 
+ Franz Schnyder <franz.schnyder@toradex.com>, 
+ Heiko Schocher <hs@nabladev.com>, 
+ Hiago De Franco <hiago.franco@toradex.com>, 
+ Jaehoon Chung <jh80.chung@samsung.com>, 
+ Jamie Gibbons <jamie.gibbons@microchip.com>, 
+ Leo Yu-Chi Liang <ycliang@andestech.com>, Lukasz Majewski <lukma@denx.de>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Max Krummenacher <max.krummenacher@toradex.com>, 
+ Parth Pancholi <parth.pancholi@toradex.com>, Peng Fan <peng.fan@nxp.com>, 
+ Rasmus Villemoes <ravi@prevas.dk>, 
+ Sam Protsenko <semen.protsenko@linaro.org>, 
+ Siddharth Vadapalli <s-vadapalli@ti.com>, Udit Kumar <u-kumar1@ti.com>, 
+ =?utf-8?q?=C5=81ukasz_Majewski?= <lukma@nabladev.com>
+In-Reply-To: <20260503204936.3151124-1-sjg@chromium.org>
+References: <20260503204936.3151124-1-sjg@chromium.org>
+Subject: Re: (subset) [PATCH 0/6] test: Quote variables in 'test -n'
+ expressions across boards
+Message-Id: <177880054740.4123088.9492425771246164880.b4-ty@konsulko.com>
+Date: Thu, 14 May 2026 17:15:47 -0600
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v6 00/14] arm: am335x: Switch to upstream devicetree
-To: Markus Schneider-Pargmann <msp@baylibre.com>, <u-boot@lists.denx.de>,
- "Marc Murphy" <marc.murphy@sancloud.com>
-CC: Tom Rini <trini@konsulko.com>, Rasmus Villemoes <ravi@prevas.dk>, "Kory
- Maincent" <kory.maincent@bootlin.com>, Marek Vasut
- <marek.vasut+renesas@mailbox.org>, Romain Gantois
- <romain.gantois@bootlin.com>, Parvathi Pudi <parvathi@couthit.com>,
- "Basharath Hussain Khaja" <basharath@couthit.com>, Paul Barker
- <paul.barker@sancloud.com>, "Andrew F. Davis" <afd@ti.com>, Simon Glass
- <sjg@chromium.org>, Anshul Dalal <anshuld@ti.com>, Michael Trimarchi
- <michael@amarulasolutions.com>, Patrick Delaunay
- <patrick.delaunay@foss.st.com>, Patrice Chotard
- <patrice.chotard@foss.st.com>, Svyatoslav Ryhel <clamor95@gmail.com>, "Tien
- Fong Chee" <tien.fong.chee@altera.com>, Frieder Schrempf
- <frieder.schrempf@kontron.de>, Johan Jonker <jbx6244@gmail.com>, Brian Sune
- <briansune@gmail.com>, Hai Pham <hai.pham.ud@renesas.com>, "Bernhard
- Messerklinger" <bernhard.messerklinger@at.abb.com>, Emanuele Ghidoli
- <emanuele.ghidoli@toradex.com>, Parth Pancholi <parth.pancholi@toradex.com>,
- =?UTF-8?Q?Jonas_Schw=C3=B6bel?= <jonasschwoebel@yahoo.de>, Paul Kocialkowski
- <contact@paulk.fr>
-References: <20260415-topic-am33-evm-oftree-v2026-01-v6-0-94cde349bb01@baylibre.com>
- <39c2f5f1-ba0d-45ec-92f8-2e87ddff1aae@ti.com>
- <a02cf44e-c7ad-4abd-a102-59ab1963eb32@ti.com>
- <DHZWV3X6T3B5.2WVH8JEVPPH10@baylibre.com>
-Content-Language: en-US
-From: Judith Mendez <jm@ti.com>
-In-Reply-To: <DHZWV3X6T3B5.2WVH8JEVPPH10@baylibre.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CO1PEPF00012E80:EE_|SA1PR10MB7664:EE_
-X-MS-Office365-Filtering-Correlation-Id: 85f6030a-8e6f-412c-47cd-08deb2082346
-X-LD-Processed: e5b49634-450b-4709-8abb-1e2b19b982b7,ExtAddr
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|82310400026|7416014|376014|36860700016|13003099007|18002099003|22082099003|56012099003|3023799003|4143699003;
-X-Microsoft-Antispam-Message-Info: 8AaBuazQNsPyOiAFD9Qg6GVe6nHoQQqJ3AtUTVSYozYoxpRv8gVWC9sExkRC/ON+DGQyZF6Xa6LT+VdNdu7Z7hJ6thVx5+UjomLDb+ooFO8dIxrH/kC2EivR99EyGG5nJnztjo4FsEXoE8j4qZndHn4CpVDSYc5U5kvRh3Z9BIVe9nE83qbLFFOXFAkwRdHbD6a9XxzKGlrQRCH8kRVumKIgRTq05I/gP+FrxYa6t9dhc1xRcHro5I0ueRnzMo1GtdIyihTBpXqdhjBKg0RBY9fYzFU/AD81nJPYKcI4tiVwOy0zdg609zL9MXIK+F9SSg+rmwd1dl4kebIZxS1btz2W/f44GDSVzVzRe6TtTCmrkAaBNa0bh1joEhHgV68Tx4Pgi7ZHRM0dbwxLZAHhYgajfJeEMNzNGfGOnCdwnUzfVKCOoBaGN1uanKoeBfFrHyQt7Mn0jThcZnBiP5uEu9ErO6O1HL5ryUi3Lmgavg3HoCVRy3HdzAjjF7UyU41/XP8zp1as2WcJdc3Wv45qzLbNjUZYgE55AC2C0jYE7yXcJ3sjPy/xYyXj18fhyI63c8QHZ51QuIX80DuPSDvMAGvlZcf9nqu7H+v5AGabkLMXwBSxjPjJxKKrDJy9hTiye3oINpK6BIRN3VBwTqxRI1WFdKCFwdt/JwDQCT0tNzyz5P5nL94CRkatt1Gs9u/V
-X-Forefront-Antispam-Report: CIP:198.47.21.195; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:flwvzet201.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
- SFS:(13230040)(1800799024)(82310400026)(7416014)(376014)(36860700016)(13003099007)(18002099003)(22082099003)(56012099003)(3023799003)(4143699003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: /mA7r75zYFX9PJXnnVFSolZQ2mnwgWoEQtOUfWGGzm40p5p4wZlIMYR/aeHUelizMXfoR04WQeIUciQnx9B6ui/gRmW1c5qCGveUvRslJdMiXLhNGRS9UT2UR15IIfPe0xIHvR2fRekD3bC1wOl5+++sHHymLXqfltFfacxfa/VH55oa8QqjfYYwV+w94VzIpLX99O+71tdyrLCo4EgQ9LgOLnyuzqD0m2xJyPHgkeyw2RxNmffXAZ2t0qOsZ3yJWRoJWCjXWPYY1yVuUWgqXR+G16NQTIUobA6c2cYgL2rJ/LfyiO+MlajtvWIT/6HWcYf6S9eEf4Wx/ZfiZ+3k9NXkVgB7qo6F9MCZt89AfRZxingTaQN7FpNAxDH7BNJHu007l7mxDEj7BeCaz4A1so+Zp488cxNVsSI4EdGGU+YLLv1ZAw4OwPZVpK8c0Ml0
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 May 2026 22:28:35.3247 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 85f6030a-8e6f-412c-47cd-08deb2082346
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.195];
- Helo=[flwvzet201.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: CO1PEPF00012E80.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR10MB7664
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -152,92 +117,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Markus,
+On Sun, 03 May 2026 14:49:18 -0600, Simon Glass wrote:
 
-On 4/22/26 1:55 PM, Markus Schneider-Pargmann wrote:
-> Hi Judith,
+> Several boards use 'test -n ${var}' (unquoted) in env scripts to
+> detect an empty variable and trigger a fallback or skip a hook. That
+> works only because of a U-Boot 'test' quirk where calls with argc <
+> 3 returned false; an empty variable made the expression 'test -n'
+> (one operand) and hit that path.
 > 
-> On Thu Apr 16, 2026 at 10:33 PM CEST, Judith Mendez wrote:
->> Hi Markus,
->>
->> On 4/16/26 2:55 PM, Judith Mendez wrote:
->>> Hi Markus,
->>>
->>> On 4/15/26 11:02 AM, Markus Schneider-Pargmann (TI) wrote:
->>>> The series is split into two logical groups:
->>>>
->>>> - Patches 1-3: Fixes for am335x-evm to boot and support the LCD panel
->>>>     with the current u-boot devicetree.
->>>> - Patches 4-14: Make upstream devicetree working with uboot. This
->>>>     adds tick-timer, adds compatibility of the board code for different
->>>>     USB probing, makes SPL smaller and updates the defconfig.
->>>>
->>>> The series has been tested on am335x-evm. Note that I don't have all
->>>> other boards built with the am335x_*evm_*defconfig, so tests are
->>>> appreciated. buildman reports builds are working.
->>>>
->>>> Dependencies:
->>>>     - net: cpsw: Add cpsw-switch DT binding support
->>>>         https://lore.kernel.org/r/20260410-topic-cpsw-switch-v2026-07-
->>>> next-v1-0-c914724b13e4@baylibre.com
->>>>
->>>
->>> I have been planning to test this series on a couple of AM335 boards,
->>> So far :
->>>
->>> - am335 EVM: Pass
->>> - am335 SK: Fail (at least SD boot regression)
->>>
->>> Pending to test:
->>> - beaglebone black and am335 ice boards.
->>>
->>>
->>> am335 sk:
->>> without of_upstream: https://gist.github.com/jmenti/
->>> e51e1fc1b25c19f94786ad39a38737b7
->>> with of_upstream: https://gist.github.com/jmenti/
->>> fc17347eff33991a78ce365c42a76a25
->>>
->> BBB boot without of_upstream:
->> https://gist.github.com/jmenti/b8f7151e7666ca16b9bec7ec5b2efe17
->> BBB with of_upstream:
->> https://gist.github.com/jmenti/c22e017605d3d6c20189eaf3cfce6231
+> 8b0619579b22 ("cmd: test: fix handling of single-argument form of
+> test") aligned 'test' with POSIX so those expressions flipped to
+> true.  f7e7c55e53e8 ("cmd: test: add bug-compatibility special case
+> for 'test -n'") restored the old behaviour for the exact 'test -n'
+> (one arg) case, so the boards are not broken at runtime today, but
+> the reliance on a bug-compat path isn't great.
 > 
-> Thank you for testing!
-> 
->> Seems like MMC enumeration is switched, BBB now boots to emergency shell.
->>
->> Also forgot to mentioned that there are more failures on AM335 SK
->> than just MMC, related to USB and NAND I think.
-> 
-> Yes, the mmc node names are different now and it seems that's how uboot
-> enumerates the devices. With the next version I have
-> CONFIG_PHANDLE_CHECK_SEQ set which should use phandles to distinguish
-> them.
-> 
-> I found an issue with the USB setup which was different from the old
-> behaviour. The USB drivers were always probed which was only done on
-> demand before OF_UPSTREAM. I fixed that as well.
-> 
-> Then I noticed in the logs that MMC doesn't properly populate PARTUUID
-> for the one board because of the mmc numbering change and it boots from
-> the wrong mmc on the other board booting an old kernel and dropping you
-> to the emergency shell.
-> 
-> I didn't see NAND issues in the log I think. Can you point me to it
-> please?
-> 
-> Also I noticed ethernet is not there, probably you are missing the cpsw
-> series here:
->    https://lore.kernel.org/r/20260410-topic-cpsw-switch-v2026-07-next-v1-0-c914724b13e4@baylibre.com
-> 
+> [...]
 
-Ok, if you are aware of the issues, I have no problem with the patch
-series. I seem to have misplaced my logs where I thought I saw NAND
-failure, and I will be out of office until May 25, if I find it then,
-I will post an update if series is still unmerged.
+Applied to u-boot/next, thanks!
 
-And thanks for Ethernet patch series, indeed I did not apply, I will
-also apply and test once I come back if the series is not merged. (:
+[2/6] ti: Quote board_init in ti_common.env
+      commit: 825f8ee2fcf64ef5875a0bc0a3e2d8650acdc298
+[3/6] siemens: Quote A/B flags in env tests
+      commit: 6b109a1304a03b35ad489e551964737ad80f6a82
+[4/6] beaglev_fire: Quote no_of_overlays in design test
+      commit: 2120834c25d525b754a8473565d4e0f9c158d806
+[5/6] mccmon6: Quote recovery_status in bootcmd test
+      commit: 9458e39c6595e2e00a1d0a645676eaf935e783c7
+[6/6] aristainetos2: Quote rescue_reason in rescueboot test
+      commit: 93d7dc20e80e33ace9b871de44877548642f86cb
+-- 
+Tom
 
-~ Judith
+
