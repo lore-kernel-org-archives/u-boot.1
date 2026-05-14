@@ -4,52 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21E68CD4F25
-	for <u-boot@archiver.kernel.org>; Thu, 14 May 2026 09:16:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D007CD4F25
+	for <u-boot@archiver.kernel.org>; Thu, 14 May 2026 09:19:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9E54F8341A;
-	Thu, 14 May 2026 11:16:47 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
+	by phobos.denx.de (Postfix) with ESMTP id CB2BF8341A;
+	Thu, 14 May 2026 11:19:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=dolcini.it
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="RFDne7DU";
+	dkim=pass (2048-bit key; unprotected) header.d=dolcini.it header.i=@dolcini.it header.b="VUDmzgVH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 063D4836AC; Thu, 14 May 2026 11:16:47 +0200 (CEST)
-Received: from mx.nabladev.com (mx.nabladev.com [178.251.229.89])
+ id 95978838BB; Thu, 14 May 2026 11:19:49 +0200 (CEST)
+Received: from mail11.truemail.it (mail11.truemail.it [IPv6:2001:4b7e:0:8::81])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3434480F0E
- for <u-boot@lists.denx.de>; Thu, 14 May 2026 11:16:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=nabladev.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@nabladev.com
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 8C322115BF5; Thu, 14 May 2026 11:16:43 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
- s=dkim; t=1778750204;
- h=from:subject:date:message-id:to:mime-version:content-type:
- content-transfer-encoding:content-language:in-reply-to:references;
- bh=xz7ywd0+Asobq5VgovtBYfniKWeWpZhjdMPb+tsCy18=;
- b=RFDne7DUTYY7vRwm8Jk5PojsD0AZ9fWtG8mvOQYpG8Fzfwjllj+dPyBF2gQEZg63EBmeyl
- +V7qka4Sln2L5bKLI+kWzcFdK5UWCCfoWEF8Xw1bkWFPbVFMJ7KyKbCt1ziiFEnjO2o/kq
- h0Ev9igE2putvh0uuK8LFU5knNkjuqtM5pTIb6tZv6tr8N5GwnKQ9SnZU8pC+D3v6FXLqL
- qSOurT1USNndlufFzU5agZ3PHmk2CsxWkRY6DmK+G32Ly9l/H5kYJJW1kmfacUpWZkYE0O
- OafDmQMxHBDPvT5/PjULxC70zRqPZmBEY5dbA3wSyEvpXqI/LApApOPgghhLMg==
-Message-ID: <c62b18de-0e32-4fb2-e127-bae5ef7ed476@nabladev.com>
-Date: Thu, 14 May 2026 11:16:25 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id 6511180F0E
+ for <u-boot@lists.denx.de>; Thu, 14 May 2026 11:19:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=dolcini.it
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=francesco@dolcini.it
+Received: from francesco-nb (93-49-2-63.ip317.fastwebnet.it [93.49.2.63])
+ by mail11.truemail.it (Postfix) with ESMTPA id 742C52292C;
+ Thu, 14 May 2026 11:19:46 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dolcini.it;
+ s=default; t=1778750386;
+ bh=jCbubNtMvBOfoNhsQEKeBIKf3NKL2FaCZDUVdj+HFVQ=; h=From:To:Subject;
+ b=VUDmzgVHyOog3wnpeP+U7uoGQvEjaq5g74aawEgnC7a4Q0tPxM4OrGGe/I7ub2tbJ
+ dG2kQpSGNv9LOffNCgePyNoRf23SPTRpT7QmhVSVzhCCE02jAFgjgt3MsQXXo6bdh5
+ NuYIhMh9r26lAIMm5jUjN4z1LzObfsrjSqLzy5ie4DfGdQTYEXUi6IFWSn4S/9Qpg5
+ m/UfhudE3Q6OD7s00mhjNJ/ixxTIQ2z2WRzpYzPyNI5XR4zVvVu2Ugu8noxHcwKM6w
+ ZlHpJUFDro39CEyImxKHFI8qT1ktXjD0g8pLGvRYIwwf2dRlocYYm3ctlbX34ticdM
+ RjJsFj7+m4OPQ==
+Date: Thu, 14 May 2026 11:19:42 +0200
+From: Francesco Dolcini <francesco@dolcini.it>
+To: Emanuele Ghidoli <ghidoliemanuele@gmail.com>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Emanuele Ghidoli <emanuele.ghidoli@toradex.com>,
+ Francesco Dolcini <francesco.dolcini@toradex.com>,
+ Franz Schnyder <franz.schnyder@toradex.com>,
+ Ernest Van Hoecke <ernest.vanhoecke@toradex.com>,
+ Neha Malcom Francis <n-francis@ti.com>
+Subject: Re: [PATCH v1] arm: dts: k3-am69-aquila: fix combined boot firmware
+ image build
+Message-ID: <20260514091942.GA11740@francesco-nb>
+References: <20260514091516.2784772-1-ghidoliemanuele@gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.2.0
-Subject: Re: [PATCH] i2c: Remove legacy CONFIG_SYS_I2C_SOFT
-Content-Language: en-US
-To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-References: <20260320205321.3788559-1-trini@konsulko.com>
-From: Heiko Schocher <hs@nabladev.com>
-In-Reply-To: <20260320205321.3788559-1-trini@konsulko.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260514091516.2784772-1-ghidoliemanuele@gmail.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -66,32 +69,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Tom,
-
-On 20.03.26 21:53, Tom Rini wrote:
-> The last users of this legacy i2c stack have been removed or converted
-> to a modern part of the stack instead. Remove this code and references
-> to it.
+On Thu, May 14, 2026 at 11:15:12AM +0200, Emanuele Ghidoli wrote:
+> From: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
 > 
-> Signed-off-by: Tom Rini <trini@konsulko.com>
-> ---
->   README                     |  92 --------
->   board/nxp/m53017evb/README |   4 -
->   board/nxp/m5373evb/README  |   4 -
->   drivers/i2c/Kconfig        |  20 --
->   drivers/i2c/Makefile       |   1 -
->   drivers/i2c/soft_i2c.c     | 418 -------------------------------------
->   6 files changed, 539 deletions(-)
+> The combined boot firmware firmware-aquila-am69-gp.bin depends on
+> tiboot3-am69-gp-aquila.bin, which in turn requires the GP variant
+> of the TI system firmware blob (ti-fs-firmware-j784s4-gp.bin).
+> 
+> Fix the combined boot firmware image build by adding the missing binman
+> nodes.
+> 
+> Fixes: f62d4535cf17 ("arm: dts: k3-am69-aquila: add combined boot firmware image")
+> Signed-off-by: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
 
-Thanks!
+Reviewed-by: Francesco Dolcini <francesco.dolcini@toradex.com>
 
-Reviewed-by: Heiko Schocher <hs@nabladev.com>
+Tom: for master, thanks
 
-bye,
-Heiko
--- 
-Nabla Software Engineering
-HRB 40522 Augsburg
-Phone: +49 821 45592596
-E-Mail: office@nabladev.com
-Geschäftsführer : Stefano Babic
