@@ -4,53 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 691E2CD4851
-	for <u-boot@archiver.kernel.org>; Thu, 14 May 2026 13:37:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 477A8CD4F39
+	for <u-boot@archiver.kernel.org>; Thu, 14 May 2026 13:51:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E45CC80F0E;
-	Thu, 14 May 2026 15:37:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
+	by phobos.denx.de (Postfix) with ESMTP id AE85980F0E;
+	Thu, 14 May 2026 15:51:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="O1Yb4v3j";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="IdME/lQj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4D3CB8467B; Thu, 14 May 2026 15:37:16 +0200 (CEST)
-Received: from mx.nabladev.com (mx.nabladev.com
- [IPv6:2a00:f820:417:0:178:251:229:89])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 45E4F80F0E; Thu, 14 May 2026 15:51:31 +0200 (CEST)
+Received: from mail-oa1-x44.google.com (mail-oa1-x44.google.com
+ [IPv6:2001:4860:4864:20::44])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1E65A8039B
- for <u-boot@lists.denx.de>; Thu, 14 May 2026 15:37:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=nabladev.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@nabladev.com
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 6112210D133; Thu, 14 May 2026 15:37:09 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
- s=dkim; t=1778765830;
- h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:content-language;
- bh=5Q+rMcLMbdpTu4HfRDArnxWjWpD3OGfmv/BaUtdthbI=;
- b=O1Yb4v3jQPyZJkc7P4H8IwjotX1Kw9Z84wxKi4wAZZ0uY5pUEbuadn3b1O3GrLtZpdjN8R
- Q8ZjMH6Pw7ll8GClKviKVaLJcaj60MveCTjjm2500YsWkQwh23MIifhu/k9y/ovH0HX06j
- UN5QE47B8XICKh5NUriKgZtmAK5d0yWyiXhYpx0eh5fuSmaIoMUNoYrG/oxIDzkS932B2u
- E9/T8lriJYIc92sr3SEJhg4WMLAVe0toRCgQnI4d4NVUGfAJLZQHAKmrnj8bAOCpmB7/FE
- mOJSJ3ZsQtWo+2zfcnQ687Rz9nDc1mAgIuGD/gW1QE/w9cwr907riLa32Bo0VA==
-Message-ID: <1f922957-e56d-1187-4441-e98e9f8fe25e@nabladev.com>
-Date: Thu, 14 May 2026 15:36:51 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id B22898039B
+ for <u-boot@lists.denx.de>; Thu, 14 May 2026 15:51:28 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x44.google.com with SMTP id
+ 586e51a60fabf-415b23dd6e5so2997337fac.3
+ for <u-boot@lists.denx.de>; Thu, 14 May 2026 06:51:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1778766687; x=1779371487; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=KfnaEnd3kJUuun1v0Vje7g53aAqTc9wm0EqeA4D4wn4=;
+ b=IdME/lQj88lOj65HyLwvKtMN08Td7Ka0jBaeVYAN7EM+ANzr3cCFZfSDQ6TMcNmUJR
+ dXVpiWBhbvBDvs5zAMX4gavcWpIAurgUwqg/9qYNy46FfORXcGZ9CzzlY0SNpbsCSM3i
+ RaEH+T4+Ub+oCOLqL3FYUGcnevvY4r1aoxmys=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1778766687; x=1779371487;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=KfnaEnd3kJUuun1v0Vje7g53aAqTc9wm0EqeA4D4wn4=;
+ b=m8TYuSIIE5/EOSdqMXhP9RS+Pklj8gL9+KfgnLnrbip/2nySzJZEaXMIWjv5N9grCD
+ JY49gFytrb6bENopGZviNtwiHsqZptNKs7VXQSmRfYA2FaksTNgnc443HWf4IRWUNce3
+ GC6UVYGCFJW2oukWk43L1X7D+yBy1khO3V+xpQAAvBTaG3X1LXprtkmnZja/XItzKH7E
+ 0+4aXatbY8e4CvSX1s3mvOfqhljARo8NgK90Nt3lMG1bzdpomH3fzQRvtf7qiMhVifTj
+ dy/amgY662K/PMQ6pkuKQ9I3Iw56CrS9I8jGHoVi9DwrK5OGgIIBWbS8XmWCwJHVX9Mk
+ RqSw==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ/7Fgvjkz033Opu3Z220sehopZEzAuP3EUQEiUL7rl6eR888xVDCZaMwaL6BEMICyn+DeLBOI4=@lists.denx.de
+X-Gm-Message-State: AOJu0YyBS9q9S2gXrghB5wQwN8ssT2U70if4KeK+mYN7R8iPsomf2J3Y
+ jrNPH4re6kwan+mETtheN6NEs3q0G0+NCmgGPRMCxdzwzggQYxW4t1ur9eT07+xylNA=
+X-Gm-Gg: Acq92OHSchvGesAogxKfVwursCGYqSUKaz6DuFotdr/UV1xoCTowvvCPQRd6pio8r9s
+ QrJO2rFM4t0jR/909fnCh0rUB2UYngHG6PzuNjU4+GMi8e2kNiwjwSntf8Z6JR/a+oi8M0NG+u1
+ W44BZ3ANXNofs/qYVGdLHGc+ikazKmNxg9XY8XXf52paKnx8kpdU+hu0SZhl+GwANfHbZcWXQ71
+ 9rf6ejvVGCfAEBK4cb47czntFp4ycuGHIs1S8Zvf7myTFuuICCetPDYws4eqFlD5m0xPhFja1ov
+ GHB/Mx5crq6VvEe69xEJ6eQdi1S0I7Uo4pgUO5qh/v3qh3x75b1bmWyui9Yyq7qR6dN7IsLViRo
+ v4IgAEVw/0TX7WcqAwde2GZKl7G65Wd+UjFjQiym4/InZ737OGMkmf21Qsjm8r90nvQ+sVp49B8
+ u0QS0toBMy/rui06gHBlPeilV+o2suLc/+gXVQT7rzajjHLNACKea9f7o2k8WLQWKj5HaJUW5KT
+ JB1QenFRx+e5vtG0F5r1xWlfOvYN9EPjTl/jjS/wKKaqpwS2AJ8CkK6cnN6Ug==
+X-Received: by 2002:a05:6870:2d3:b0:424:6bf4:314e with SMTP id
+ 586e51a60fabf-439ce34673amr4224018fac.18.1778766687327; 
+ Thu, 14 May 2026 06:51:27 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
+ [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-439fc4d8027sm1994476fac.10.2026.05.14.06.51.25
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 14 May 2026 06:51:26 -0700 (PDT)
+Date: Thu, 14 May 2026 07:51:24 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Daniel Palmer <daniel@thingy.jp>
+Cc: visitorckw@gmail.com, angelo@kernel-space.org, bmeng.cn@gmail.com,
+ sjg@chromium.org, u-boot@lists.denx.de
+Subject: Re: [PATCH v6 0/8] Add virtio-mmio support to m68k virt machine
+Message-ID: <20260514135124.GW1858239@bill-the-cat>
+References: <20260505074948.2603870-1-daniel@thingy.jp>
+ <20260508192952.GA1948090@bill-the-cat>
+ <CAFr9PXnAt2y9-yRqmTdUmn9CHQHZ3HjJ=MWeW6Mi4MxHRx9ivw@mail.gmail.com>
+ <20260511150038.GH1858239@bill-the-cat>
+ <CAFr9PXkTm2ufq9cbkQQ+gPhORq-prhSf6GQP1cpjFk65+7TJKQ@mail.gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.2.0
-Content-Language: en-US
-To: Tom Rini <trini@konsulko.com>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- Marek Vasut <marek.vasut@mailbox.org>
-From: Heiko Schocher <hs@nabladev.com>
-Subject: Please pull u-boot-i2c
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="BCIlL9Mh4Q/uyyjB"
+Content-Disposition: inline
+In-Reply-To: <CAFr9PXkTm2ufq9cbkQQ+gPhORq-prhSf6GQP1cpjFk65+7TJKQ@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -67,56 +103,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Tom,
 
-The following changes since commit 36d4c653580824b16574560b21d4401614d8b68e:
+--BCIlL9Mh4Q/uyyjB
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-   virtio: fix return value check (2026-05-12 12:38:49 -0600)
+On Thu, May 14, 2026 at 09:35:49PM +0900, Daniel Palmer wrote:
+> Hi Tom,
+>=20
+> On Tue, 12 May 2026 at 00:00, Tom Rini <trini@konsulko.com> wrote:
+> > > I didn't realise I could trigger a pipeline run so thanks for the
+> > > information. Anyhow, I triggered a run for v6 and it completed and I
+> > > couldn't actually find where the error in the result. I triggered it
+> > > again for the v7 and it passed too. Is there something I should check
+> > > before I send it again? The run is here:
+> > > https://github.com/u-boot/u-boot/pull/964/checks
+> >
+> > That's very strange. I just re-checked v6 and still get:
+> > https://source.denx.de/u-boot/u-boot/-/jobs/1446347 and both Azure and
+> > Gitlab run the job the same way. Can you trigger it locally with
+> > allyesconfig ?
+>=20
+> Before adding a new patch to fix the issue, building allyesconfig
+> locally gave me the same error as your CI pipeline had and that went
+> away when I fixed it.
 
-are available in the Git repository at:
+Ah good, thanks.
 
-   https://source.denx.de/u-boot/custodians/u-boot-i2c.git tags/i2c-updates-for-2026.07-rc3
+--=20
+Tom
 
-for you to fetch changes up to 0c464b6cc3ead31a5b3bfe23d38871380f3fb6fa:
+--BCIlL9Mh4Q/uyyjB
+Content-Type: application/pgp-signature; name="signature.asc"
 
-   i2c: Remove legacy CONFIG_SYS_I2C_SOFT (2026-05-14 11:17:20 +0200)
+-----BEGIN PGP SIGNATURE-----
 
-----------------------------------------------------------------
-updates for 2026.07-rc3
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCagXTWAAKCRAr4qD1Cr/k
+CiS7AP9reQuorTx/ayFCmDrlFWEugSatYgnhKADECR9DM4catQEAh/Z8ocfOet9f
+cn3SsC7sCPiVQY2hsYTNP1SWBvxGng4=
+=cgoJ
+-----END PGP SIGNATURE-----
 
-- designware_i2c: Staticize driver ops from Marek
-- i2c: Remove legacy CONFIG_SYS_I2C_SOFT
--
-
-----------------------------------------------------------------
-Marek Vasut (1):
-       i2c: designware_i2c: Staticize driver ops
-
-Tom Rini (1):
-       i2c: Remove legacy CONFIG_SYS_I2C_SOFT
-
-  README                           |  92 ---------------------------------
-  board/nxp/m53017evb/README       |   4 --
-  board/nxp/m5373evb/README        |   4 --
-  drivers/i2c/Kconfig              |  20 --------
-  drivers/i2c/Makefile             |   1 -
-  drivers/i2c/designware_i2c_pci.c |   2 +-
-  drivers/i2c/soft_i2c.c           | 418 
------------------------------------------------------------------------------------------------------------------------------------------------------
-  7 files changed, 1 insertion(+), 540 deletions(-)
-
-
-Azure build looks good:
-
-https://dev.azure.com/hs0298/hs/_build/results?buildId=207&view=results
-
-Thanks!
-
-bye,
-Heiko
--- 
-Nabla Software Engineering
-HRB 40522 Augsburg
-Phone: +49 821 45592596
-E-Mail: office@nabladev.com
-Geschäftsführer : Stefano Babic
+--BCIlL9Mh4Q/uyyjB--
