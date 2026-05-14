@@ -4,51 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8AC7CD4F25
-	for <u-boot@archiver.kernel.org>; Thu, 14 May 2026 14:49:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68C7ECD4F25
+	for <u-boot@archiver.kernel.org>; Thu, 14 May 2026 14:49:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 434C58467C;
+	by phobos.denx.de (Postfix) with ESMTP id 7E7AA84687;
 	Thu, 14 May 2026 16:49:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=arm.com header.i=@arm.com header.b="CSbZBgJI";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=arm.com header.i=@arm.com header.b="iMVgvJ1H";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EC1CA84676; Thu, 14 May 2026 14:49:47 +0200 (CEST)
+ id B898A8467B; Thu, 14 May 2026 14:49:50 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 01C0183AA9
- for <u-boot@lists.denx.de>; Thu, 14 May 2026 14:49:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id C09CC83AA9
+ for <u-boot@lists.denx.de>; Thu, 14 May 2026 14:49:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=harsimransingh.tungal@arm.com
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 8A911244C;
- Thu, 14 May 2026 05:49:38 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id C7CD1244C;
+ Thu, 14 May 2026 05:49:42 -0700 (PDT)
 Received: from e132995.arm.com (unknown [10.57.69.131])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id E01283F7B4;
- Thu, 14 May 2026 05:49:41 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 24C8A3F7B4;
+ Thu, 14 May 2026 05:49:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
- t=1778762983; bh=yQaKCVvsEBCOa+8J7N7OgSvhRMdLxAIPsONlvYkNmZs=;
+ t=1778762988; bh=yHws4pVDS7YVZgKk6UJ8dpC3ZKaqzrRp9JuAIzudN1Q=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=CSbZBgJIV6cV4oM9BSbpvDniAOyBFTeHWmsoE6vNtMY+PDVmg9Jp5ei9fFMNKc/c9
- /V5Ko9RPsWqmMpUiO3UDZdvxTz25oqXKw9ELSvb9YrR+Gr2w6YvYzD3qfYbr6cUqlY
- W3mZtg9tKQNg0CdJBDYjGKt104FhXKKt5grn6O18=
+ b=iMVgvJ1H+M6Gg48pypgNyVu1jWvlAKUFBN6uaT+xGPdsCP2tHqVbCXbQNFweVomsl
+ PBORniNJUS0z+kAUYhPQQ4wT+tfdB4ncPdUug+N7rxfEWzfxZpJgcoCBNxjds1QPXI
+ Pnex94i1ifIDezxPVlUngPbmXjvbnpvItmKw+CrA=
 From: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
 To: u-boot@lists.denx.de
 Cc: abdellatif.elkhlifi@arm.com, trini@konsulko.com,
  ilias.apalodimas@linaro.org, xypron.glpk@gmx.de,
  hugues.kambampiana@arm.com, sjg@chromium.org,
  Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
-Subject: [PATCH v2 00/11] arm64: FF-A runtime transport for EFI variables
-Date: Thu, 14 May 2026 13:49:13 +0100
-Message-Id: <20260514124924.1804332-1-harsimransingh.tungal@arm.com>
+Subject: [PATCH v2 01/11] efi_loader: add runtime memset helper
+Date: Thu, 14 May 2026 13:49:14 +0100
+Message-Id: <20260514124924.1804332-2-harsimransingh.tungal@arm.com>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20260424173151.371134-1-harsimransingh.tungal@arm.com>
+In-Reply-To: <20260514124924.1804332-1-harsimransingh.tungal@arm.com>
 References: <20260424173151.371134-1-harsimransingh.tungal@arm.com>
+ <20260514124924.1804332-1-harsimransingh.tungal@arm.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Thu, 14 May 2026 16:49:29 +0200
 X-BeenThere: u-boot@lists.denx.de
@@ -67,98 +67,77 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi all,
+Add efi_memset_runtime() for EFI runtime paths
 
-This series adds FF-A runtime transport support so EFI variable runtime
-services can communicate with the secure world after ExitBootServices().
-It also extends tests, docs, and board configs to validate the runtime
-path and keep boot‑time behavior aligned with the runtime flow.
+This keeps buffer initialization in runtime-resident code after
+ExitBootServices() and avoids relying on non-runtime helpers.
 
-Changes in this series:
-- Add EFI runtime-safe memset helper and FF-A runtime transport support.
-- Implement FF-A runtime communication in the EFI variable TEE backend.
-- Enable runtime variable operations and move helpers to avoid conflicts.
-- Add sandbox runtime transport tests and metadata reuse.
-- Extend EFI selftests for runtime variables and bootefi selftest config.
-- Document the FF-A runtime transport and selftest behavior.
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Signed-off-by: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
 
-Changes in v2:
+---
 
-Address Simon Glass's review comments:
-- Fix `efi_memset_runtime()` style, declaration, and byte cast
-- Tighten the FF-A runtime context failure path, clean up `arm-ffa-runtime.c`
-  style issues, and move ExitBootServices event registration earlier in probe
-- Add shared-buffer bounds/alignment checks, and tightening comments/kernel-doc
-- Document the FF-A shared buffer cacheline-alignment requirement and add
-  BUILD_BUG_ON() checks for the address
-- Cache attributes before the shared buffer is reused, moving the read-only
-  check earlier, and split the `u16_strsize()` related change in separate patch
-- Reword commit messages for the runtime helper relocation
-- Rework the non-volatile runtime variable selftest into setup/verify phases
-- Extend the sandbox FF-A runtime tests with no-context coverage,
-  runtime-context reset, and separate errno-mapping coverage
-- Refresh the FF-A runtime transport and bootefi documentation
-- Drop patch 12 in v1, as ffa_mm_communicate handles both runtime and
-  boottime capabilities in v2
-- Squash patch 8 and patch 9 from v1
+Changelog:
+===============
 
-Address Ilias Apalodimas's review comments:
-- Reuse common MM SP error mapping for boot and runtime paths
-- Rename runtime-phase tracking to reflect the ExitBootServices transition
-- Collapse duplicated boot-time and runtime MM communication helpers into common
-  implementations
-- Keep the arm64 cache-maintenance path runtime-safe.
-- Move FF-A shared-buffer runtime memory-map registration to the end of
-  variable-service initialization
+v2:
 
-Link to v1: https://lore.kernel.org/u-boot/20260424173151.371134-1-harsimransingh.tungal@arm.com/
+Simon:
 
-Harsimran Singh Tungal (11):
-  efi_loader: add runtime memset helper
-  arm-ffa: add FF-A bus runtime support
-  efi_loader: add FF-A runtime support in EFI variable TEE driver
-  efi_loader: enable EFI runtime SetVariable()/GetVariable() using FF-A
-    transport
-  charset: mark u16_strsize() as __efi_runtime
-  efi_loader: move runtime variable read helpers to efi_variable.c
-  corstone1000: enable bootefi selftest
-  efi: selftest: add runtime variable tests with non-volatile storage
-  test: dm: add sandbox FF-A runtime transport tests
-  doc: arm64: document FF-A runtime path for EFI variables
-  doc: bootefi: note two-phase runtime variables selftest
+- Fix the `efi_memset_runtime()` comment and kernel-doc style
+- Drop `__efi_runtime` from the header prototype
+- Align the definition signature with nearby helpers
+- Cast the stored byte to `u8`
 
- arch/arm/cpu/armv8/cache.S                    |   8 +
- arch/arm/cpu/armv8/cache_v8.c                 |  13 +-
- arch/sandbox/include/asm/sandbox_arm_ffa.h    |  16 +-
- configs/corstone1000_defconfig                |   3 +
- doc/arch/arm64.ffa.rst                        |  86 ++-
- doc/usage/cmd/armffa.rst                      |  11 +
- doc/usage/cmd/bootefi.rst                     |  27 +
- drivers/firmware/arm-ffa/Kconfig              |  11 +
- drivers/firmware/arm-ffa/Makefile             |   4 +-
- drivers/firmware/arm-ffa/arm-ffa-runtime.c    | 295 ++++++++
- drivers/firmware/arm-ffa/arm-ffa-uclass.c     | 113 +--
- drivers/firmware/arm-ffa/arm-ffa.c            |  16 +-
- drivers/firmware/arm-ffa/ffa-emul-uclass.c    |  48 +-
- include/arm_ffa.h                             |  16 +-
- include/arm_ffa_priv.h                        |  22 +-
- include/arm_ffa_runtime.h                     | 191 +++++
- include/efi_loader.h                          |   3 +
- lib/charset.c                                 |   2 +-
- lib/efi_loader/Kconfig                        |   4 +
- lib/efi_loader/efi_runtime.c                  |  20 +
- lib/efi_loader/efi_var_common.c               |  24 -
- lib/efi_loader/efi_variable.c                 |  24 +
- lib/efi_loader/efi_variable_tee.c             | 650 +++++++++++++---
- .../efi_selftest_variables_runtime.c          | 713 ++++++++++++------
- test/dm/Makefile                              |   3 +-
- test/dm/ffa.c                                 |   6 +-
- test/dm/ffa_runtime.c                         | 129 ++++
- 27 files changed, 1962 insertions(+), 496 deletions(-)
- create mode 100644 drivers/firmware/arm-ffa/arm-ffa-runtime.c
- create mode 100644 include/arm_ffa_runtime.h
- create mode 100644 test/dm/ffa_runtime.c
+ include/efi_loader.h         |  3 +++
+ lib/efi_loader/efi_runtime.c | 20 ++++++++++++++++++++
+ 2 files changed, 23 insertions(+)
 
+diff --git a/include/efi_loader.h b/include/efi_loader.h
+index 3a4d502631c..9dfea1fd7de 100644
+--- a/include/efi_loader.h
++++ b/include/efi_loader.h
+@@ -1151,6 +1151,9 @@ void efi_memcpy_runtime(void *dest, const void *src, size_t n);
+ /* runtime implementation of memcmp() */
+ int efi_memcmp_runtime(const void *s1, const void *s2, size_t n);
+ 
++/* runtime implementation of memset() */
++void *efi_memset_runtime(void *dest, int c, size_t n);
++
+ /* commonly used helper functions */
+ u16 *efi_create_indexed_name(u16 *buffer, size_t buffer_size, const char *name,
+ 			     unsigned int index);
+diff --git a/lib/efi_loader/efi_runtime.c b/lib/efi_loader/efi_runtime.c
+index 73d4097464c..c0182931c42 100644
+--- a/lib/efi_loader/efi_runtime.c
++++ b/lib/efi_loader/efi_runtime.c
+@@ -233,6 +233,26 @@ int __efi_runtime efi_memcmp_runtime(const void *s1, const void *s2, size_t n)
+ 	return 0;
+ }
+ 
++/**
++ * efi_memset_runtime() - fill memory area
++ *
++ * At runtime memset() is not available.
++ *
++ * @dest:	destination buffer
++ * @c:		byte value used to fill destination buffer
++ * @n:		number of bytes to set
++ * Return:	pointer to destination buffer
++ */
++__efi_runtime void *efi_memset_runtime(void *dest, int c, size_t n)
++{
++	u8 *d = dest;
++
++	for (; n; --n)
++		*d++ = (u8)c;
++
++	return dest;
++}
++
+ /**
+  * efi_update_table_header_crc32() - Update crc32 in table header
+  *
 -- 
 2.34.1
 
