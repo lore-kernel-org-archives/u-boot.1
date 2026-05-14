@@ -4,59 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 043CACD4851
-	for <u-boot@archiver.kernel.org>; Thu, 14 May 2026 16:14:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03305CD4F25
+	for <u-boot@archiver.kernel.org>; Thu, 14 May 2026 17:13:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0A4D284687;
-	Thu, 14 May 2026 18:14:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 293858466F;
+	Thu, 14 May 2026 19:13:13 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="slZDyrdC";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=arm.com header.i=@arm.com header.b="J8GQ2H9D";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 81DA084690; Thu, 14 May 2026 18:14:52 +0200 (CEST)
-Received: from sea.source.kernel.org (sea.source.kernel.org
- [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D606B8467C
- for <u-boot@lists.denx.de>; Thu, 14 May 2026 18:14:49 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=conor@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 25A1B4012E;
- Thu, 14 May 2026 16:14:48 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 12300C2BCB3;
- Thu, 14 May 2026 16:14:46 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1778775288;
- bh=nQAKwxGURJKwWDi2s7Z/9s67lI+9f9xv3JXpG5Fx/zc=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=slZDyrdCwf9OCnVGEMP7jxEUJerSDui4sgnwebUnJvEm8NJS3mdpWukITGXMm1cjp
- kPPG325lmn+p+mCqoBK4sJFh949AxyqwK8kA3EzfTESVCAXdjcUDxkXhHvqisV0h1X
- NtGVlwem2V1IX43MHmah8QJKAMkHoUUFRh+YA7qXyvU2bTG0oSVJfjkpacflwqkqeY
- AhLHTSCMsClJ3/hNB/QwHRebXt62oPrM+uhsri0Zw/iPQXx1ik5vSWR1qQBGMqkb+Q
- kuQ63UR19Jk+sdVZzY1ieW8nVSnWDIhmFSyLtVwaklwlSBx21xrrYenYErb7zRnGzw
- /7jPwbObUpjXw==
-Date: Thu, 14 May 2026 17:14:44 +0100
-From: Conor Dooley <conor@kernel.org>
-To: Sune Brian <briansune@gmail.com>
-Cc: Peter Robinson <pbrobinson@gmail.com>, Tom Rini <trini@konsulko.com>,
- U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: U-Boot patch submit standard and requirement
-Message-ID: <20260514-spotted-happier-0ccb77ca8f24@spud>
-References: <CAN7C2SCYCwE=BRoeCedqQYjv-Gf6x6ETOdKeeDBE=CG=-rSk9w@mail.gmail.com>
- <CALeDE9PU0-fW_+erR9QHK1ST8fcStx0FWWk_0M8ELjtADugd7Q@mail.gmail.com>
- <CAN7C2SCATJL_rhpBZWwZuQVpLdnbDh5+DRFbtGHoxCXu62AVmw@mail.gmail.com>
- <CALeDE9PesKLwzt=uu_b8+pq5QXFnnK1YAO9WL3f8=CHx93w61w@mail.gmail.com>
- <CAN7C2SC_YwotE2-PS=eAFEnMOXp7jVrhaOSbKsuChLVr4zEa8A@mail.gmail.com>
+ id AC6938469A; Thu, 14 May 2026 17:37:33 +0200 (CEST)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id 3EA5084690
+ for <u-boot@lists.denx.de>; Thu, 14 May 2026 17:37:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=arm.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=harsimransingh.tungal@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id AA7C7165C;
+ Thu, 14 May 2026 08:37:24 -0700 (PDT)
+Received: from e132995.arm.com (unknown [10.57.69.131])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 119823F836;
+ Thu, 14 May 2026 08:37:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
+ t=1778773049; bh=sCKgsjBGhHWgEBoK/vpF31bYTTgispDUZ0UTeEyIfHA=;
+ h=Subject:From:To:Cc:In-Reply-To:References:Date:From;
+ b=J8GQ2H9DfBqSTCRO6xHBrTbqQdZKOpBSr5pQk95rYEz52+MYyk4LvG80EBBrrd6Py
+ cDQnFinoUfL382MiDti7dmcHQTz3xmV1C+0QFFeYO2mQCKGVT9jtpr58itj38qJP4I
+ kSsxB6RUt1x4YUoZ5X0pk/649WG/0ZpJ0BW9f078=
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="l021XDUKB0ZJeF1b"
-Content-Disposition: inline
-In-Reply-To: <CAN7C2SC_YwotE2-PS=eAFEnMOXp7jVrhaOSbKsuChLVr4zEa8A@mail.gmail.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Subject: Re: [00/12] arm64: FF-A runtime transport for EFI variables
+From: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: harsimransingh.tungal@arm.com, u-boot@lists.denx.de
+In-Reply-To: <CAFLszTiY1HHER7fbGz+0BwDBGcfG7Kkp29641rvWOv7DyD_scg@mail.gmail.com>
+References: <20260424173151.371134-1-harsimransingh.tungal@arm.com>
+ <CAFLszTiY1HHER7fbGz+0BwDBGcfG7Kkp29641rvWOv7DyD_scg@mail.gmail.com>
+Date: Thu, 14 May 2026 16:37:23 +0100
+Message-Id: <177877304327.2444524.10919676649935386355.b4-reply@b4>
+X-Mailer: b4 0.15.2
+X-Mailman-Approved-At: Thu, 14 May 2026 19:13:12 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,171 +65,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 2026-04-28 12:16 -0600, Simon Glass wrote:
+> Hi Harsimran,
+> 
+> On 2026-04-24T17:31:50, Harsimran Singh Tungal
+> <harsimransingh.tungal@arm.com> wrote:
+> 
+> > efi_loader: align FF-A cache maintenance with runtime path
+> 
+> Patch 12 changes the boot-time path to match the runtime path, but
+> sits at the end of the series. Between patch 3 (which introduces the
+> runtime cache pattern) and patch 12 the two paths are deliberately
+> inconsistent. I'd prefer this alignment before patch 3, so patch 3
+> simply adopts the established pattern. It would also make the
+> rationale in patch 12's commit message read more naturally. What do
+> you think?
+> 
+> Regards,
+> Simon
+> 
 
---l021XDUKB0ZJeF1b
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+In v2, patch 12 is no longer required as ffa_mm_communicate() handles
+both boot time and runtime capabilities. Patch 12 is eventually dropped
+from v2. Patch 3 of v2 is now taking care of cache related changes.
+Link to v2: https://lore.kernel.org/u-boot/20260514124924.1804332-1-harsimransingh.tungal@arm.com/
 
-On Thu, May 14, 2026 at 07:46:46PM +0800, Sune Brian wrote:
-> On Thu, May 14, 2026 at 6:37=E2=80=AFPM Peter Robinson <pbrobinson@gmail.=
-com> wrote:
-> >
-> > Hi Brian,
-> >
-> > You have made a very generic statement about levels of accountability
-> > on patch sets and consistency in reviews.
-> >
-> > Can you be more specific?
-> >
-> > Ultimately there are subsystem maintainers and each maintainer has
-> > variation on how they deal with their subsystem. You reference one doc
-> > three times in your statement.
->=20
-> Hi Peter,
->=20
-> Now I understand what you mean.
-> Simply one sentence is a bit hard to read what your thoughts are.
->=20
-> That document I am quoting does not refer to the entire docs but only one
-> section of the docs with that link.
->=20
-> Before quoting, my declarations as follows:
-> 1) I am not referring to specific people or party
-> 2) I experienced reviewer which again not being specific to one that
-> mentioned this docs is a supreme rules to follow otherwise patch
-> that is committed is not able to push to mainstream
-> 3) I simply do a quick check on u-boot mailing pool and do see a lot
-> of uncompiled reviewed patches that are not following that supreme
-> docs.
->=20
-> As such I will being to quote:
->=20
-> The mailing that are reported as not passing the standard of [1]
-> Full mailing:
-> https://patchwork.ozlabs.org/project/uboot/patch/20260423042824.3480-1-br=
-iansune@gmail.com/#3684415
+Regards
+Harsimran Singh Tungal
 
-patchwork isn't loading for me, but it's on lore here:
-https://lore.kernel.org/all/20260423042824.3480-1-briansune@gmail.com/
-
-The comment about the changelog format seems to be very harsh, I doubt
-it really makes any difference. What you did and what the maintainer
-requested are effectively the same thing at the end of the day.
-
-The real problem with your patch is that you put the changelog into the
-commit message itself, rather than under the --- line.
-None of the examples you quote below do that.
-
-Also, your responses to Simon in the thread you link are very
-aggressive and antagonistic. Please try to be kinder to those that take
-time to review your submissions.
-
-Cheers,
-Conor.
-
->=20
-> Quoting message [A]:
->=20
-> - The required format is 'Changes in vN:'. Custom formats such as
->    'Changelog vN -> vN+1:' are not acceptable.
->=20
-> Now quoting those examples that don't follow this supreme rule.
->=20
-> Example 1: Reviewed without any change requests as [A] complained
-> also aginsted [1] supreme standard
-> https://patchwork.ozlabs.org/project/uboot/patch/20260508-qcom_spl-v6-1-a=
-aac1ab17b50@seznam.cz/
->=20
-> Example 2: Reviewed without any change requests as [A] complained
-> also aginsted [1] supreme standard
-> https://patchwork.ozlabs.org/project/uboot/patch/20260513015606.591384-2-=
-rs@ti.com/
->=20
-> Example 3: Reviewed without any change requests as [A] complained
-> also aginsted [1] supreme standard and even "Accepted Stage"
-> https://patchwork.ozlabs.org/project/uboot/patch/BESP194MB2805271AD5DBE47=
-B322F8DC3DA3A2@BESP194MB2805.EURP194.PROD.OUTLOOK.COM/
->=20
-> Example 4: Reviewed without any change requests as [A] complained
-> also aginsted [1] supreme standard and even "Accepted Stage"
-> https://patchwork.ozlabs.org/project/uboot/patch/20260511144437.46645-1-j=
-ames.hilliard1@gmail.com/
->=20
-> If you want more examples I can keep listing but I think this is more
-> than enough.
->=20
-> Well in order one t o follow the rules other should do the same.
-> Under such bases I have no issue however I cannot see this is
-> the real case.
->=20
-> Enjoy!
-> Brian
->=20
-> >
-> > Ultimately the rules are there as guidance and if someone chooses not
-> > to follow them to the letter there is little that can be done. if the
-> > individual becomes problematic they will be asked, publicly or
-> > privately depending on the situation, if they could better comply and
-> > there may be further action.
-> >
-> > It's very hard to act on your generic statement without examples,.
-> >
-> > Peter
-> >
-> > On Thu, 14 May 2026 at 09:41, Sune Brian <briansune@gmail.com> wrote:
-> > >
-> > > On Thu, May 14, 2026 at 3:29=E2=80=AFPM Peter Robinson <pbrobinson@gm=
-ail.com> wrote:
-> > > >
-> > > > Hi Brian,
-> > > >
-> > > > Can you provide more context?
-> > >
-> > > Hi Peter,
-> > >
-> > > Not getting you sorry.
-> > > Context means?
-> > >
-> > > Thanks,
-> > > Brian
-> > >
-> > > >
-> > > > Peter
-> > > >
-> > > > On Thu, 14 May 2026 at 03:02, Sune Brian <briansune@gmail.com> wrot=
-e:
-> > > > >
-> > > > > Hi Tom,
-> > > > >
-> > > > > Sorry to bother you.
-> > > > >
-> > > > > I am curious that for me myself I had no issue to follow
-> > > > > the requirements [1] as long as all patches that are
-> > > > > passing the review stage do follow the rules in [1].
-> > > > > However based on most recent commits and reviews
-> > > > > most of those are not even close to what [1] mentioned.
-> > > > >
-> > > > > So at the end, reviewers in U-Boot just made their own
-> > > > > standard and requested contributors to follow?
-> > > > >
-> > > > > Rather the U-Boot itself should all follow the docs rules?
-> > > > >
-> > > > > [1] https://docs.u-boot.org/en/latest/develop/sending_patches.htm=
-l#sending-updated-patch-versions
-> > > > >
-> > > > > Thanks,
-> > > > > Brian
-
---l021XDUKB0ZJeF1b
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCagX09AAKCRB4tDGHoIJi
-0vC1AP42Px5zHWwpTZUouhFIl08qSX+OhhjO+jY5q6KZ4UBVEAD/U0/sNISO2FgE
-u8dgpeq+FKR4+40nYeI2uMjo2Vovzgo=
-=udf8
------END PGP SIGNATURE-----
-
---l021XDUKB0ZJeF1b--
