@@ -4,46 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DBA47CD4F25
-	for <u-boot@archiver.kernel.org>; Thu, 14 May 2026 14:49:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0732CD4F25
+	for <u-boot@archiver.kernel.org>; Thu, 14 May 2026 14:49:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B9FBA84690;
+	by phobos.denx.de (Postfix) with ESMTP id F3D538469F;
 	Thu, 14 May 2026 16:49:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=arm.com header.i=@arm.com header.b="WSqH2tVD";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=arm.com header.i=@arm.com header.b="XdC8hSKi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CA7088467C; Thu, 14 May 2026 14:49:57 +0200 (CEST)
+ id 3E94784687; Thu, 14 May 2026 14:49:59 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 6696584676
- for <u-boot@lists.denx.de>; Thu, 14 May 2026 14:49:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id 81C2D83FB0
+ for <u-boot@lists.denx.de>; Thu, 14 May 2026 14:49:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=harsimransingh.tungal@arm.com
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 059F9244C;
- Thu, 14 May 2026 05:49:48 -0700 (PDT)
-Received: from e132995.arm.com (unknown [10.57.69.131])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 0EB0C3F7B4;
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 684FF244C;
  Thu, 14 May 2026 05:49:50 -0700 (PDT)
+Received: from e132995.arm.com (unknown [10.57.69.131])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id A92B53F7B4;
+ Thu, 14 May 2026 05:49:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
- t=1778762993; bh=lPdrxd7ebTea/KcvEkwB/LDqb2JF/kqN+DozKAMwsRs=;
+ t=1778762995; bh=3y4AebcocouDI4ZsFRvLHYV5wvYXXn2VojxfodN7pc0=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=WSqH2tVDj1G45clgIEPWhgT/8YTMYO5fvDmYtGe4xKCcAuCIJRGApkUQr2D0eAb4t
- ncTiIZi8cwKWjEk7zhi5Bu87Khc6+RWtpEOd0W6wYDEh5gfjaFIobvxOy+ipaNa8Ti
- oxOPeOs/flzGF1+oU8HnxqT8QcF/+eKbGqSVtNdk=
+ b=XdC8hSKiiYMKT1iPpRYsDWLyQA5BiSoQ7quc21m6tdaj3gok5mjtEdasJJWWBCQ8I
+ 8Q4Fe1w+RrR0qlbxC9OnfE3zDII3GkHFO2WxN3T9XyXvgMa3+99wvhCXc7TaQ3DsSa
+ 9CQwtEAzCF0zP95cQ98HcaVvCGbqT+BuFC7TyKIg=
 From: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
 To: u-boot@lists.denx.de
 Cc: abdellatif.elkhlifi@arm.com, trini@konsulko.com,
  ilias.apalodimas@linaro.org, xypron.glpk@gmx.de,
  hugues.kambampiana@arm.com, sjg@chromium.org,
  Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
-Subject: [PATCH v2 02/11] arm-ffa: add FF-A bus runtime support
-Date: Thu, 14 May 2026 13:49:15 +0100
-Message-Id: <20260514124924.1804332-3-harsimransingh.tungal@arm.com>
+Subject: [PATCH v2 03/11] efi_loader: add FF-A runtime support in EFI variable
+ TEE driver
+Date: Thu, 14 May 2026 13:49:16 +0100
+Message-Id: <20260514124924.1804332-4-harsimransingh.tungal@arm.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20260514124924.1804332-1-harsimransingh.tungal@arm.com>
 References: <20260424173151.371134-1-harsimransingh.tungal@arm.com>
@@ -67,982 +68,690 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable FF-A runtime transport for EFI services
+Enable MM variable services over FF-A after ExitBootServices
 
-Add the FF-A runtime infrastructure needed after ExitBootServices() so
-EFI runtime services can continue to use the FF-A transport layer.
-Introduce `drivers/firmware/arm-ffa/arm-ffa-runtime.c` and
-`include/arm_ffa_runtime.h` with runtime-resident FF-A helpers for
-direct messaging, SMC invocation, and error translation. Add the
-sandbox runtime SMC wrapper, the `ARM_FFA_RT_MODE` Kconfig option, and
-the ExitBootServices hook that copies the required FF-A runtime data
-into resident storage before enabling the runtime context.
+Extend lib/efi_loader/efi_variable_tee.c to support FF-A
+communication with the secure world during EFI runtime. Reuse the
+statically reserved FF-A shared buffer after ExitBootServices(),
+make the MM communication path runtime-safe so runtime variable
+operations continue to reach the secure partition.
 
-Tag the runtime code and data with `__efi_runtime` and
-`__efi_runtime_data` so they remain available after
-ExitBootServices().
+Share the MM communication and MM SP notification helpers between the
+boot and runtime paths instead of maintaining separate runtime-only
+variants. Select dynamic allocation during boot and the fixed FF-A
+shared buffer at runtime, and reject requests that would exceed the
+shared buffer size.
+
+Mark the required code and data with __efi_runtime and
+__efi_runtime_data, use range-based cache maintenance on the shared
+buffer for the runtime FF-A path, and add the shared buffer to the EFI
+runtime memory map. Document the FF-A shared MM buffer
+cacheline-alignment requirement in Kconfig and add BUILD_BUG_ON()
+checks for the shared buffer address and size in the arm64
+cache-maintenance path.
 
 Signed-off-by: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
 
-----
+---
 
 Changelog:
 ===============
 
 v2:
 
-Simon:
+Ilias, Simon:
 
-- Leave runtime mode disabled if private data is missing
-  and update the log message
-- Remove unused global-data plumbing
-- Switch to `IS_ENABLED(CONFIG_ARM_FFA_RT_MODE)`
-- Fix style issues
-- Register the ExitBootServices event earlier in probe
-- Keep the runtime-enabled flag separate from copied boot time data
+- Reuse common MM SP error mapping
+- Rename runtime-phase tracking to `efi_at_runtime()`
+- Collapse boot and runtime MM communication helpers
+- Fold runtime MM SP notification into the common path
+- Make the arm64 cache-maintenance path runtime-safe
+- Document the FF-A shared buffer cacheline-alignment requirement and
+  add BUILD_BUG_ON() checks for the address and size
+- Move shared-buffer reservation to the end of init
+- Add a runtime shared-buffer bounds check
+- Document the shared-buffer page-alignment assumption
+- Reword `setup_mm_hdr()` documentation
+- Narrow `mm_var_guid` variable scope
+- Update the copyright header
 
- drivers/firmware/arm-ffa/Kconfig           |  11 +
- drivers/firmware/arm-ffa/Makefile          |   4 +-
- drivers/firmware/arm-ffa/arm-ffa-runtime.c | 295 +++++++++++++++++++++
- drivers/firmware/arm-ffa/arm-ffa-uclass.c  | 113 ++------
- drivers/firmware/arm-ffa/arm-ffa.c         |  16 +-
- drivers/firmware/arm-ffa/ffa-emul-uclass.c |  12 +
- include/arm_ffa.h                          |  16 +-
- include/arm_ffa_priv.h                     |  22 +-
- include/arm_ffa_runtime.h                  | 191 +++++++++++++
- test/dm/ffa.c                              |   6 +-
- 10 files changed, 566 insertions(+), 120 deletions(-)
- create mode 100644 drivers/firmware/arm-ffa/arm-ffa-runtime.c
- create mode 100644 include/arm_ffa_runtime.h
+ arch/arm/cpu/armv8/cache.S        |   8 +
+ arch/arm/cpu/armv8/cache_v8.c     |  13 +-
+ lib/efi_loader/Kconfig            |   4 +
+ lib/efi_loader/efi_variable_tee.c | 330 ++++++++++++++++++++++--------
+ 4 files changed, 260 insertions(+), 95 deletions(-)
 
-diff --git a/drivers/firmware/arm-ffa/Kconfig b/drivers/firmware/arm-ffa/Kconfig
-index 3706a889305..7aaf25fdb58 100644
---- a/drivers/firmware/arm-ffa/Kconfig
-+++ b/drivers/firmware/arm-ffa/Kconfig
-@@ -18,6 +18,9 @@ config ARM_FFA_TRANSPORT
- 	  The FF-A support in U-Boot is based on FF-A specification v1.0 and uses SMC32
- 	  calling convention.
- 
-+	  The FF-A bus also provides a runtime layer to keep a minimal set of FF-A
-+	  operations available after ExitBootServices().
-+
- 	  FF-A specification:
- 
- 	  https://developer.arm.com/documentation/den0077/a/?lang=en
-@@ -41,3 +44,11 @@ config ARM_FFA_TRANSPORT
- 	  Secure World (sandbox_ffa.c).
- 
- 	  For more details about the FF-A support, please refer to doc/arch/arm64.ffa.rst
-+
-+config ARM_FFA_RT_MODE
-+	bool "Enable FF-A runtime support"
-+	depends on ARM_FFA_TRANSPORT && EFI_LOADER
-+	default y
-+	help
-+	  Enable the FF-A runtime layer, keeping a minimal set of FF-A
-+	  operations available after ExitBootServices().
-diff --git a/drivers/firmware/arm-ffa/Makefile b/drivers/firmware/arm-ffa/Makefile
-index 318123a7f42..9deb59ba640 100644
---- a/drivers/firmware/arm-ffa/Makefile
-+++ b/drivers/firmware/arm-ffa/Makefile
-@@ -1,12 +1,12 @@
- # SPDX-License-Identifier: GPL-2.0+
- #
--# Copyright 2022-2023 Arm Limited and/or its affiliates <open-source-office@arm.com>
-+# Copyright 2022-2023, 2026 Arm Limited and/or its affiliates <open-source-office@arm.com>
- #
- # Authors:
- #   Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
- 
- # build the generic FF-A methods
--obj-y += arm-ffa-uclass.o
-+obj-y += arm-ffa-uclass.o arm-ffa-runtime.o
- ifeq ($(CONFIG_SANDBOX),y)
- # build the FF-A sandbox emulator and driver
- obj-y += ffa-emul-uclass.o sandbox_ffa.o
-diff --git a/drivers/firmware/arm-ffa/arm-ffa-runtime.c b/drivers/firmware/arm-ffa/arm-ffa-runtime.c
-new file mode 100644
-index 00000000000..4261e8ddf24
---- /dev/null
-+++ b/drivers/firmware/arm-ffa/arm-ffa-runtime.c
-@@ -0,0 +1,295 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright 2026 Arm Limited and/or its affiliates <open-source-office@arm.com>
-+ *
-+ * Authors:
-+ *      Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
-+ *      Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
-+ */
-+
-+#include <arm_ffa_runtime.h>
-+#include <arm_ffa_priv.h>
-+#include <log.h>
-+#include <linux/errno.h>
-+#include <linux/types.h>
-+
-+/* Error mapping declarations */
-+
-+int __ffa_runtime_data ffa_to_std_errmap[MAX_NUMBER_FFA_ERR] = {
-+	[NOT_SUPPORTED] = -EOPNOTSUPP,
-+	[INVALID_PARAMETERS] = -EINVAL,
-+	[NO_MEMORY] = -ENOMEM,
-+	[BUSY] = -EBUSY,
-+	[INTERRUPTED] = -EINTR,
-+	[DENIED] = -EACCES,
-+	[RETRY] = -EAGAIN,
-+	[ABORTED] = -ECANCELED,
-+};
-+
-+static __ffa_runtime_data struct ffa_priv_runtime ffa_priv_rt = {0};
-+static __ffa_runtime_data bool ffa_runtime_enabled;
-+
-+/* Arm FF-A driver runtime operations */
-+static const __ffa_runtime_data struct ffa_bus_ops_runtime ffa_ops_rt = {
-+	.sync_send_receive = ffa_msg_send_direct_req_hdlr_runtime,
-+};
-+
-+#define ffa_get_ops_runtime()		(&ffa_ops_rt)
-+#define ffa_get_priv_runtime()		(&ffa_priv_rt)
-+
-+#if IS_ENABLED(CONFIG_ARM_FFA_RT_MODE)
-+static void EFIAPI ffa_rt_exit_boot_services_notify(struct efi_event *event,
-+						    void *context)
-+{
-+	struct ffa_priv *priv = context;
-+
-+	if (priv) {
-+		ffa_copy_runtime_priv(&priv->rt);
-+	} else {
-+		log_err("FF-A: runtime data missing, keeping RT mode disabled\n");
-+		return;
-+	}
-+
-+	ffa_enable_runtime_context();
-+}
-+
-+/**
-+ * ffa_setup_efi_exit_boot_services_event() - register ExitBootServices event
-+ * @priv: pointer to the FF-A private data
-+ *
-+ * Register an EFI event that enables the FF-A runtime context when
-+ * ExitBootServices() is invoked.
-+ *
-+ * Return: 0 on success, -EPERM on failure to create the event.
-+ */
-+int ffa_setup_efi_exit_boot_services_event(struct ffa_priv *priv)
-+{
-+	efi_status_t efi_ret;
-+	struct efi_event *evt = NULL;
-+
-+	efi_ret = efi_create_event(EVT_SIGNAL_EXIT_BOOT_SERVICES, TPL_CALLBACK,
-+				   ffa_rt_exit_boot_services_notify, priv,
-+				   &efi_guid_event_group_exit_boot_services,
-+				   &evt);
-+	if (efi_ret != EFI_SUCCESS) {
-+		log_err("FF-A: cannot install ExitBootServices event %p, err (%lu)\n",
-+			evt, efi_ret);
-+		return -EPERM;
-+	}
-+
-+	return 0;
-+}
-+#endif
-+
-+/**
-+ * ffa_copy_runtime_priv() - copy runtime data into resident storage
-+ * @priv: pointer to the runtime private data
-+ *
-+ * Copy boot-time runtime data into the resident runtime storage to be used
-+ * after ExitBootServices().
-+ */
-+void ffa_copy_runtime_priv(const struct ffa_priv_runtime *priv)
-+{
-+	struct ffa_priv_runtime *priv_rt = ffa_get_priv_runtime();
-+
-+	if (priv)
-+		*priv_rt = *priv;
-+}
-+
-+/**
-+ * ffa_enable_runtime_context() - Enable FF-A runtime context
-+ *
-+ * This function marks the FF-A runtime environment as ready for use by
-+ * EFI runtime services. It is called when ExitBootServices() is invoked,
-+ * after the FF-A bus device has successfully probed and U-Boot's FF-A
-+ * endpoint ID has been discovered and stored in the runtime private data
-+ * structure.
-+ *
-+ * The FF-A runtime flag allows the EFI runtime layer to verify that the
-+ * FF-A transport was initialized during the boot phase and that all
-+ * runtime-safe FF-A operations may now be used after ExitBootServices().
-+ *
-+ */
-+void ffa_enable_runtime_context(void)
-+{
-+	ffa_runtime_enabled = true;
-+}
-+
-+/**
-+ * ffa_reset_runtime_context() - Reset FF-A runtime resident state
-+ *
-+ * Clear the resident runtime flag and private data. This is used by the
-+ * FF-A unit tests to avoid leaking runtime state across test cases.
-+ */
-+void ffa_reset_runtime_context(void)
-+{
-+	struct ffa_priv_runtime *priv_rt = ffa_get_priv_runtime();
-+
-+	*priv_rt = (struct ffa_priv_runtime){0};
-+	ffa_runtime_enabled = false;
-+}
-+
-+/**
-+ * ffa_get_status_runtime_context() - Query FF-A runtime readiness
-+ *
-+ * This helper returns whether the FF-A runtime environment has been
-+ * enabled during the boot phase. Runtime FF-A operations must check this
-+ * flag before attempting any FF-A access, as the U-Boot driver model
-+ * (DM/uclass) is no longer available after ExitBootServices().
-+ *
-+ * The runtime context becomes enabled when ffa_enable_runtime_context()
-+ * is called, typically after the FF-A bus device has probed and the
-+ * endpoint ID has been discovered and stored in the runtime private
-+ * data structure.
-+ *
-+ * Return: true if FF-A runtime support is ready, false otherwise.
-+ */
-+bool __ffa_runtime ffa_get_status_runtime_context(void)
-+{
-+	return ffa_runtime_enabled;
-+}
-+
-+/**
-+ * ffa_to_std_errno() - convert FF-A error code to standard error code
-+ * @ffa_errno:	Error code returned by the FF-A ABI
-+ *
-+ * Map the given FF-A error code as specified
-+ * by the spec to a u-boot standard error code.
-+ *
-+ * Return: Standard U-Boot errno for known FF-A errors, or -EINVAL otherwise.
-+ */
-+int __ffa_runtime ffa_to_std_errno(int ffa_errno)
-+{
-+	int err_idx = -ffa_errno;
-+
-+	/* Map the FF-A error code to the standard u-boot error code */
-+	if (err_idx > 0 && err_idx < MAX_NUMBER_FFA_ERR)
-+		return ffa_to_std_errmap[err_idx];
-+	return -EINVAL;
-+}
-+
-+/**
-+ * ffa_invoke_msg_send_direct_req() - Invokes FFA_MSG_SEND_DIRECT_{REQ,RESP}
-+ * @endpoint_id: u-boot endpoint id
-+ * @dst_part_id: destination partition ID
-+ * @msg: pointer to the message data preallocated by the client (in/out)
-+ * @is_smc64: select 64-bit or 32-bit FF-A ABI
-+ *
-+ * This function invokes FFA_MSG_SEND_DIRECT_{REQ,RESP} FF-A functions.
-+ *
-+ * FFA_MSG_SEND_DIRECT_REQ is used to send the data to the secure partition.
-+ * The response from the secure partition is handled by reading the
-+ * FFA_MSG_SEND_DIRECT_RESP arguments.
-+ *
-+ * The maximum size of the data that can be exchanged is 40 bytes which is
-+ * sizeof(struct ffa_send_direct_data) as defined by the FF-A specification 1.0
-+ * in the section relevant to FFA_MSG_SEND_DIRECT_{REQ,RESP}
-+ *
-+ * Return: 0 on success, negative errno on failure.
-+ */
-+int __ffa_runtime ffa_invoke_msg_send_direct_req(u16 endpoint_id, u16 dst_part_id,
-+						 struct ffa_send_direct_data *msg, bool is_smc64)
-+{
-+	int ffa_errno;
-+	u64 req_mode;
-+	ffa_value_t ffa_args_rt;
-+	ffa_value_t ffa_res_rt;
-+
-+	if (is_smc64)
-+		req_mode = FFA_SMC_64(FFA_MSG_SEND_DIRECT_REQ);
-+	else
-+		req_mode = FFA_SMC_32(FFA_MSG_SEND_DIRECT_REQ);
-+	efi_memset_runtime(&ffa_args_rt, 0, sizeof(ffa_args_rt));
-+	efi_memset_runtime(&ffa_res_rt, 0, sizeof(ffa_res_rt));
-+	ffa_args_rt.a0 = req_mode;
-+	ffa_args_rt.a1 = PREP_SELF_ENDPOINT_ID(endpoint_id) |
-+			 PREP_PART_ENDPOINT_ID(dst_part_id);
-+	ffa_args_rt.a2 = 0;
-+	ffa_args_rt.a3 = msg->data0;
-+	ffa_args_rt.a4 = msg->data1;
-+	ffa_args_rt.a5 = msg->data2;
-+	ffa_args_rt.a6 = msg->data3;
-+	ffa_args_rt.a7 = msg->data4;
-+
-+	invoke_ffa_fn_runtime(&ffa_args_rt, &ffa_res_rt);
-+
-+	while (ffa_res_rt.a0 == FFA_SMC_32(FFA_INTERRUPT) ||
-+	       ffa_res_rt.a0 == FFA_SMC_64(FFA_INTERRUPT)) {
-+		efi_memset_runtime(&ffa_args_rt, 0, sizeof(ffa_args_rt));
-+		ffa_args_rt.a0 = (ffa_res_rt.a0 == FFA_SMC_64(FFA_INTERRUPT)) ?
-+				  FFA_SMC_64(FFA_RUN) : FFA_SMC_32(FFA_RUN);
-+		ffa_args_rt.a1 = ffa_res_rt.a1;
-+
-+		invoke_ffa_fn_runtime(&ffa_args_rt, &ffa_res_rt);
-+	}
-+	if (ffa_res_rt.a0 == FFA_SMC_32(FFA_SUCCESS) ||
-+	    ffa_res_rt.a0 == FFA_SMC_64(FFA_SUCCESS)) {
-+		/* Message sent with no response */
-+		return 0;
-+	}
-+
-+	if (ffa_res_rt.a0 == FFA_SMC_32(FFA_MSG_SEND_DIRECT_RESP) ||
-+	    ffa_res_rt.a0 == FFA_SMC_64(FFA_MSG_SEND_DIRECT_RESP)) {
-+		/* Message sent with response extract the return data */
-+		msg->data0 = ffa_res_rt.a3;
-+		msg->data1 = ffa_res_rt.a4;
-+		msg->data2 = ffa_res_rt.a5;
-+		msg->data3 = ffa_res_rt.a6;
-+		msg->data4 = ffa_res_rt.a7;
-+		return 0;
-+	}
-+
-+	ffa_errno = ffa_res_rt.a2;
-+	return ffa_to_std_errno(ffa_errno);
-+}
-+
-+/**
-+ * ffa_msg_send_direct_req_hdlr_runtime() - Runtime implementation of
-+ * FFA_MSG_SEND_DIRECT_{REQ,RESP} handler function
-+ * @dst_part_id: destination partition ID
-+ * @msg: pointer to the message data preallocated by the client (in/out)
-+ * @is_smc64: select 64-bit or 32-bit FF-A ABI
-+ *
-+ * This function calls the ffa_invoke_msg_send_direct_req() function which
-+ * invokes FFA_MSG_SEND_DIRECT_{REQ,RESP} FF-A functions.
-+ *
-+ * Return:
-+ *
-+ * 0 on success. Otherwise, failure
-+ */
-+int __ffa_runtime ffa_msg_send_direct_req_hdlr_runtime(u16 dst_part_id,
-+						       struct ffa_send_direct_data *msg,
-+						       bool is_smc64)
-+{
-+	struct ffa_priv_runtime *priv_rt = ffa_get_priv_runtime();
-+
-+	return ffa_invoke_msg_send_direct_req(priv_rt->id, dst_part_id, msg, is_smc64);
-+}
-+
-+/**
-+ * ffa_sync_send_receive_runtime() - Runtime implementation of
-+ *                              ffa_sync_send_receive()
-+ * @dst_part_id: destination partition ID
-+ * @msg: pointer to the message data preallocated by the client (in/out)
-+ * @is_smc64: select 64-bit or 32-bit FF-A ABI
-+ *
-+ * Please see ffa_msg_send_direct_req_hdlr_runtime() description for more details.
-+ *
-+ * Return:
-+ *
-+ * 0 on success. Otherwise, failure
-+ */
-+int __ffa_runtime ffa_sync_send_receive_runtime(u16 dst_part_id,
-+						struct ffa_send_direct_data *msg,
-+						bool is_smc64)
-+{
-+	const struct ffa_bus_ops_runtime *ops_rt = ffa_get_ops_runtime();
-+
-+	if (!ffa_get_status_runtime_context())
-+		return -EPERM;
-+
-+	if (!ops_rt->sync_send_receive)
-+		return -ENOSYS;
-+
-+	return ops_rt->sync_send_receive(dst_part_id, msg, is_smc64);
-+}
-diff --git a/drivers/firmware/arm-ffa/arm-ffa-uclass.c b/drivers/firmware/arm-ffa/arm-ffa-uclass.c
-index 76a8775e911..548268a42d0 100644
---- a/drivers/firmware/arm-ffa/arm-ffa-uclass.c
-+++ b/drivers/firmware/arm-ffa/arm-ffa-uclass.c
-@@ -1,12 +1,13 @@
- // SPDX-License-Identifier: GPL-2.0+
- /*
-- * Copyright 2022-2023 Arm Limited and/or its affiliates <open-source-office@arm.com>
-+ * Copyright 2022-2023, 2026 Arm Limited and/or its affiliates <open-source-office@arm.com>
-  *
-  * Authors:
-  *   Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
+diff --git a/arch/arm/cpu/armv8/cache.S b/arch/arm/cpu/armv8/cache.S
+index c9e46859b4f..916558fe477 100644
+--- a/arch/arm/cpu/armv8/cache.S
++++ b/arch/arm/cpu/armv8/cache.S
+@@ -169,7 +169,11 @@ ENDPROC(__asm_flush_l3_dcache)
+  * x0: start address
+  * x1: end address
   */
- #include <arm_ffa.h>
- #include <arm_ffa_priv.h>
-+#include <arm_ffa_runtime.h>
- #include <dm.h>
++#ifdef CONFIG_EFI_LOADER
++.pushsection .text.efi_runtime.__asm_flush_dcache_range, "ax"
++#else
+ .pushsection .text.__asm_flush_dcache_range, "ax"
++#endif
+ ENTRY(__asm_flush_dcache_range)
+ 	mrs	x3, ctr_el0
+ 	ubfx	x3, x3, #16, #4
+@@ -195,7 +199,11 @@ ENDPROC(__asm_flush_dcache_range)
+  * x0: start address
+  * x1: end address
+  */
++#ifdef CONFIG_EFI_LOADER
++.pushsection .text.efi_runtime.__asm_invalidate_dcache_range, "ax"
++#else
+ .pushsection .text.__asm_invalidate_dcache_range, "ax"
++#endif
+ ENTRY(__asm_invalidate_dcache_range)
+ 	mrs	x3, ctr_el0
+ 	ubfx	x3, x3, #16, #4
+diff --git a/arch/arm/cpu/armv8/cache_v8.c b/arch/arm/cpu/armv8/cache_v8.c
+index 39479df7b21..7c2840fc545 100644
+--- a/arch/arm/cpu/armv8/cache_v8.c
++++ b/arch/arm/cpu/armv8/cache_v8.c
+@@ -8,6 +8,7 @@
+  */
+ 
+ #include <cpu_func.h>
++#include <efi_loader.h>
+ #include <hang.h>
  #include <log.h>
- #include <malloc.h>
-@@ -18,19 +19,6 @@
- #include <linux/errno.h>
- #include <linux/sizes.h>
- 
--/* Error mapping declarations */
--
--int ffa_to_std_errmap[MAX_NUMBER_FFA_ERR] = {
--	[NOT_SUPPORTED] = -EOPNOTSUPP,
--	[INVALID_PARAMETERS] = -EINVAL,
--	[NO_MEMORY] = -ENOMEM,
--	[BUSY] = -EBUSY,
--	[INTERRUPTED] = -EINTR,
--	[DENIED] = -EACCES,
--	[RETRY] = -EAGAIN,
--	[ABORTED] = -ECANCELED,
--};
--
- static struct ffa_abi_errmap err_msg_map[FFA_ERRMAP_COUNT] = {
- 	[FFA_ID_TO_ERRMAP_ID(FFA_VERSION)] = {
- 		{
-@@ -94,27 +82,6 @@ static struct ffa_abi_errmap err_msg_map[FFA_ERRMAP_COUNT] = {
- 	},
- };
- 
--/**
-- * ffa_to_std_errno() - convert FF-A error code to standard error code
-- * @ffa_errno:	Error code returned by the FF-A ABI
-- *
-- * Map the given FF-A error code as specified
-- * by the spec to a u-boot standard error code.
-- *
-- * Return:
-- *
-- * The standard error code on success. . Otherwise, failure
-- */
--static int ffa_to_std_errno(int ffa_errno)
--{
--	int err_idx = -ffa_errno;
--
--	/* Map the FF-A error code to the standard u-boot error code */
--	if (err_idx > 0 && err_idx < MAX_NUMBER_FFA_ERR)
--		return ffa_to_std_errmap[err_idx];
--	return -EINVAL;
--}
--
- /**
-  * ffa_print_error_log() - print the error log corresponding to the selected FF-A ABI
-  * @ffa_id:	FF-A ABI ID
-@@ -204,7 +171,7 @@ int ffa_get_version_hdlr(struct udevice *dev)
- 		if (dev) {
- 			uc_priv = dev_get_uclass_priv(dev);
- 			if (uc_priv)
--				uc_priv->fwk_version = res.a0;
-+				uc_priv->rt.fwk_version = res.a0;
- 		}
- 
- 		return 0;
-@@ -238,8 +205,8 @@ static int ffa_get_endpoint_id(struct udevice *dev)
- 			}, &res);
- 
- 	if (res.a0 == FFA_SMC_32(FFA_SUCCESS)) {
--		uc_priv->id = GET_SELF_ENDPOINT_ID((u32)res.a2);
--		log_debug("FF-A endpoint ID is %u\n", uc_priv->id);
-+		uc_priv->rt.id = GET_SELF_ENDPOINT_ID((u32)res.a2);
-+		log_debug("FF-A endpoint ID is %u\n", uc_priv->rt.id);
- 
- 		return 0;
- 	}
-@@ -461,7 +428,7 @@ int ffa_unmap_rxtx_buffers_hdlr(struct udevice *dev)
- 
- 	invoke_ffa_fn((ffa_value_t){
- 			.a0 = FFA_SMC_32(FFA_RXTX_UNMAP),
--			.a1 = PREP_SELF_ENDPOINT_ID(uc_priv->id),
-+			.a1 = PREP_SELF_ENDPOINT_ID(uc_priv->rt.id),
- 			}, &res);
- 
- 	if (res.a0 == FFA_SMC_32(FFA_SUCCESS)) {
-@@ -851,16 +818,8 @@ static int ffa_cache_partitions_info(struct udevice *dev)
-  * @msg: pointer to the message data preallocated by the client (in/out)
-  * @is_smc64: select 64-bit or 32-bit FF-A ABI
-  *
-- * Implement FFA_MSG_SEND_DIRECT_{REQ,RESP}
-- * FF-A functions.
-- *
-- * FFA_MSG_SEND_DIRECT_REQ is used to send the data to the secure partition.
-- * The response from the secure partition is handled by reading the
-- * FFA_MSG_SEND_DIRECT_RESP arguments.
-- *
-- * The maximum size of the data that can be exchanged is 40 bytes which is
-- * sizeof(struct ffa_send_direct_data) as defined by the FF-A specification 1.0
-- * in the section relevant to FFA_MSG_SEND_DIRECT_{REQ,RESP}
-+ * This function calls the ffa_invoke_msg_send_direct_req() function which
-+ * invokes FFA_MSG_SEND_DIRECT_{REQ,RESP} FF-A functions.
-  *
-  * Return:
-  *
-@@ -869,9 +828,6 @@ static int ffa_cache_partitions_info(struct udevice *dev)
- int ffa_msg_send_direct_req_hdlr(struct udevice *dev, u16 dst_part_id,
- 				 struct ffa_send_direct_data *msg, bool is_smc64)
+ #include <asm/cache.h>
+@@ -853,7 +854,8 @@ inline void flush_dcache_all(void)
+ /*
+  * Invalidates range in all levels of D-cache/unified cache
+  */
+-void invalidate_dcache_range(unsigned long start, unsigned long stop)
++void __efi_runtime invalidate_dcache_range(unsigned long start,
++					   unsigned long stop)
  {
--	ffa_value_t res = {0};
--	int ffa_errno;
--	u64 req_mode, resp_mode;
- 	struct ffa_priv *uc_priv;
- 
- 	uc_priv = dev_get_uclass_priv(dev);
-@@ -880,50 +836,7 @@ int ffa_msg_send_direct_req_hdlr(struct udevice *dev, u16 dst_part_id,
- 	if (!uc_priv->partitions.count || !uc_priv->partitions.descs)
- 		return -ENODEV;
- 
--	if (is_smc64) {
--		req_mode = FFA_SMC_64(FFA_MSG_SEND_DIRECT_REQ);
--		resp_mode = FFA_SMC_64(FFA_MSG_SEND_DIRECT_RESP);
--	} else {
--		req_mode = FFA_SMC_32(FFA_MSG_SEND_DIRECT_REQ);
--		resp_mode = FFA_SMC_32(FFA_MSG_SEND_DIRECT_RESP);
--	}
--
--	invoke_ffa_fn((ffa_value_t){
--			.a0 = req_mode,
--			.a1 = PREP_SELF_ENDPOINT_ID(uc_priv->id) |
--				PREP_PART_ENDPOINT_ID(dst_part_id),
--			.a2 = 0,
--			.a3 = msg->data0,
--			.a4 = msg->data1,
--			.a5 = msg->data2,
--			.a6 = msg->data3,
--			.a7 = msg->data4,
--			}, &res);
--
--	while (res.a0 == FFA_SMC_32(FFA_INTERRUPT))
--		invoke_ffa_fn((ffa_value_t){
--			.a0 = FFA_SMC_32(FFA_RUN),
--			.a1 = res.a1,
--			}, &res);
--
--	if (res.a0 == FFA_SMC_32(FFA_SUCCESS)) {
--		/* Message sent with no response */
--		return 0;
--	}
--
--	if (res.a0 == resp_mode) {
--		/* Message sent with response extract the return data */
--		msg->data0 = res.a3;
--		msg->data1 = res.a4;
--		msg->data2 = res.a5;
--		msg->data3 = res.a6;
--		msg->data4 = res.a7;
--
--		return 0;
--	}
--
--	ffa_errno = res.a2;
--	return ffa_to_std_errno(ffa_errno);
-+	return ffa_invoke_msg_send_direct_req(uc_priv->rt.id, dst_part_id, msg, is_smc64);
+ 	__asm_invalidate_dcache_range(start, stop);
+ }
+@@ -861,16 +863,19 @@ void invalidate_dcache_range(unsigned long start, unsigned long stop)
+ /*
+  * Flush range(clean & invalidate) from all levels of D-cache/unified cache
+  */
+-void flush_dcache_range(unsigned long start, unsigned long stop)
++void __efi_runtime flush_dcache_range(unsigned long start,
++				      unsigned long stop)
+ {
+ 	__asm_flush_dcache_range(start, stop);
+ }
+ #else
+-void invalidate_dcache_range(unsigned long start, unsigned long stop)
++void __efi_runtime invalidate_dcache_range(unsigned long start,
++					   unsigned long stop)
+ {
  }
  
- /* FF-A driver operations (used by clients for communicating with FF-A)*/
-@@ -1024,6 +937,7 @@ int ffa_rxtx_unmap(struct udevice *dev)
- static int ffa_do_probe(struct udevice *dev)
+-void flush_dcache_range(unsigned long start, unsigned long stop)
++void __efi_runtime flush_dcache_range(unsigned long start,
++				      unsigned long stop)
  {
- 	int ret;
-+	struct ffa_priv *uc_priv = dev_get_uclass_priv(dev);
+ }
+ #endif /* CONFIG_SYS_DISABLE_DCACHE_OPS */
+diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
+index 4cb13ae7c8a..a9791b8f2e3 100644
+--- a/lib/efi_loader/Kconfig
++++ b/lib/efi_loader/Kconfig
+@@ -195,6 +195,8 @@ config FFA_SHARED_MM_BUF_SIZE
+ 	  the MM SP in secure world.
+ 	  The size of the memory region must be a multiple of the size of the maximum
+ 	  translation granule size that is specified in the ID_AA64MMFR0_EL1 System register.
++	  For arm64 FF-A cache maintenance, this size must also be aligned to
++	  CONFIG_SYS_CACHELINE_SIZE.
+ 	  It is assumed that the MM SP knows the size of the shared MM communication buffer.
  
- 	ret = ffa_get_version_hdlr(dev);
+ config FFA_SHARED_MM_BUF_OFFSET
+@@ -211,6 +213,8 @@ config FFA_SHARED_MM_BUF_ADDR
+ 	  This defines the address of the shared MM communication buffer
+ 	  used for communication between the MM feature in U-Boot and
+ 	  the MM SP in secure world.
++	  For arm64 FF-A cache maintenance, this address must also be aligned to
++	  CONFIG_SYS_CACHELINE_SIZE.
+ 	  It is assumed that the MM SP knows the address of the shared MM communication buffer.
+ 
+ config EFI_VARIABLE_SF_OFFSET
+diff --git a/lib/efi_loader/efi_variable_tee.c b/lib/efi_loader/efi_variable_tee.c
+index 6a1fa39bb6f..ccd8d94a51e 100644
+--- a/lib/efi_loader/efi_variable_tee.c
++++ b/lib/efi_loader/efi_variable_tee.c
+@@ -4,7 +4,7 @@
+  *
+  *  Copyright (C) 2019 Linaro Ltd. <sughosh.ganu@linaro.org>
+  *  Copyright (C) 2019 Linaro Ltd. <ilias.apalodimas@linaro.org>
+- *  Copyright 2022-2023 Arm Limited and/or its affiliates <open-source-office@arm.com>
++ *  Copyright 2022-2026 Arm Limited and/or its affiliates <open-source-office@arm.com>
+  *
+  *  Authors:
+  *    Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
+@@ -14,6 +14,7 @@
+ 
+ #if CONFIG_IS_ENABLED(ARM_FFA_TRANSPORT)
+ #include <arm_ffa.h>
++#include <arm_ffa_runtime.h>
+ #endif
+ #include <cpu_func.h>
+ #include <dm.h>
+@@ -21,6 +22,7 @@
+ #include <efi_api.h>
+ #include <efi_loader.h>
+ #include <efi_variable.h>
++#include <linux/build_bug.h>
+ #include <malloc.h>
+ #include <mapmem.h>
+ #include <mm_communication.h>
+@@ -34,20 +36,44 @@
+ #define MM_DENIED (-3)
+ #define MM_NO_MEMORY (-5)
+ 
++static const int __efi_runtime_rodata mm_sp_errmap[] = {
++	[-MM_NOT_SUPPORTED]	 = -EINVAL,
++	[-MM_INVALID_PARAMETER]	 = -EPERM,
++	[-MM_DENIED]		 = -EACCES,
++	[-MM_NO_MEMORY]		 = -EBUSY,
++};
++
+ static const char *mm_sp_svc_uuid = MM_SP_UUID;
+-static u16 mm_sp_id;
++static u16 __efi_runtime_data mm_sp_id;
+ #endif
+ 
++static void *__efi_runtime_data ffa_shared_buf;
+ extern struct efi_var_file __efi_runtime_data *efi_var_buf;
+-static efi_uintn_t max_buffer_size;	/* comm + var + func + data */
+-static efi_uintn_t max_payload_size;	/* func + data */
++static efi_uintn_t __efi_runtime_data max_buffer_size;	/* comm + var + func + data */
++static efi_uintn_t __efi_runtime_data max_payload_size;	/* func + data */
+ static const u16 __efi_runtime_rodata pk[] = u"PK";
++static bool __efi_runtime_data ebs_called;
+ 
+ struct mm_connection {
+ 	struct udevice *tee;
+ 	u32 session;
+ };
+ 
++/**
++ * efi_at_runtime() - Indicate whether the system is in the UEFI runtime phase
++ *
++ * This helper returns whether the firmware has transitioned into the
++ * UEFI runtime phase, meaning that ExitBootServices() has been invoked.
++ *
++ * Return:
++ *   true  - The system is operating in UEFI runtime mode.
++ *   false - The system is still in the boot services phase.
++ */
++static bool __efi_runtime efi_at_runtime(void)
++{
++	return ebs_called;
++}
++
+ /**
+  * get_connection() - Retrieve OP-TEE session for a specific UUID.
+  *
+@@ -169,6 +195,28 @@ static efi_status_t optee_mm_communicate(void *comm_buf, ulong dsize)
+ }
+ 
+ #if CONFIG_IS_ENABLED(ARM_FFA_TRANSPORT)
++/**
++ * ffa_map_sp_event() - Map MM SP response to errno
++ * @sp_event_ret: MM SP return code from MM SP notification
++ *
++ * Convert the MM SP return code into a standard U-Boot errno. This helper
++ * is marked __efi_runtime so it can be shared by both the boot and runtime
++ * FF-A notification paths.
++ *
++ * Return: 0 on success, negative errno on failure
++ */
++static int __efi_runtime ffa_map_sp_event(int sp_event_ret)
++{
++	int idx = -sp_event_ret;
++
++	if (sp_event_ret == MM_SUCCESS)
++		return 0;
++	if (idx > 0 && idx < (int)ARRAY_SIZE(mm_sp_errmap) &&
++	    mm_sp_errmap[idx])
++		return mm_sp_errmap[idx];
++	return -EACCES;
++}
++
+ /**
+  * ffa_notify_mm_sp() - Announce there is data in the shared buffer
+  *
+@@ -177,52 +225,36 @@ static efi_status_t optee_mm_communicate(void *comm_buf, ulong dsize)
+  * This is a blocking call during which trusted world has exclusive access
+  * to the MM shared buffer.
+  *
+- * Return:
+- *
+- * 0 on success
++ * Return: 0 on success
+  */
+-static int ffa_notify_mm_sp(void)
++static int __efi_runtime ffa_notify_mm_sp(void)
+ {
+ 	struct ffa_send_direct_data msg = {0};
+ 	int ret;
+ 	int sp_event_ret;
+-	struct udevice *dev;
++	bool at_runtime = efi_at_runtime();
+ 
+-	ret = uclass_first_device_err(UCLASS_FFA, &dev);
+-	if (ret) {
+-		log_err("EFI: Cannot find FF-A bus device, notify MM SP failure\n");
+-		return ret;
+-	}
++	msg.data0 = CONFIG_FFA_SHARED_MM_BUF_OFFSET;
++
++	if (at_runtime) {
++		ret = ffa_sync_send_receive_runtime(mm_sp_id, &msg, 1);
++	} else {
++		struct udevice *dev;
+ 
+-	msg.data0 = CONFIG_FFA_SHARED_MM_BUF_OFFSET; /* x3 */
++		ret = uclass_first_device_err(UCLASS_FFA, &dev);
++		if (ret) {
++			log_err("EFI: Cannot find FF-A bus device, notify MM SP failure\n");
++			return ret;
++		}
+ 
+-	ret = ffa_sync_send_receive(dev, mm_sp_id, &msg, 1);
++		ret = ffa_sync_send_receive(dev, mm_sp_id, &msg, 1);
++	}
  	if (ret)
-@@ -1033,6 +947,12 @@ static int ffa_do_probe(struct udevice *dev)
- 	if (ret)
+ 		return ret;
+ 
+-	sp_event_ret = msg.data0; /* x3 */
+-
+-	switch (sp_event_ret) {
+-	case MM_SUCCESS:
+-		ret = 0;
+-		break;
+-	case MM_NOT_SUPPORTED:
+-		ret = -EINVAL;
+-		break;
+-	case MM_INVALID_PARAMETER:
+-		ret = -EPERM;
+-		break;
+-	case MM_DENIED:
+-		ret = -EACCES;
+-		break;
+-	case MM_NO_MEMORY:
+-		ret = -EBUSY;
+-		break;
+-	default:
+-		ret = -EACCES;
+-	}
++	sp_event_ret = msg.data0;
+ 
+-	return ret;
++	return ffa_map_sp_event(sp_event_ret);
+ }
+ 
+ /**
+@@ -266,36 +298,41 @@ static int ffa_discover_mm_sp_id(void)
+ }
+ 
+ /**
+- * ffa_mm_communicate() - Exchange EFI services data with  the MM partition using FF-A
++ * ffa_mm_communicate() - Exchange EFI services data with the MM partition using FF-A
+  * @comm_buf:		locally allocated communication buffer used for rx/tx
+- * @dsize:				communication buffer size
++ * @comm_buf_size:	communication buffer size
+  *
+  * Issue a door bell event to notify the MM partition (SP) running in OP-TEE
+  * that there is data to read from the shared buffer.
+  * Communication with the MM SP is performed using FF-A transport.
+  * On the event, MM SP can read the data from the buffer and
+  * update the MM shared buffer with response data.
+- * The response data is copied back to the communication buffer.
+- *
+- * Return:
++ * The response data is copied back to the communication buffer during the
++ * boot phase. At runtime, the communication buffer is already the FF-A
++ * shared buffer and is updated in place.
+  *
+- * EFI status code
++ * Return: EFI status code
+  */
+-static efi_status_t ffa_mm_communicate(void *comm_buf, ulong comm_buf_size)
++static efi_status_t __efi_runtime ffa_mm_communicate(void *comm_buf,
++						     ulong comm_buf_size)
+ {
+ 	ulong tx_data_size;
+ 	int ffa_ret;
+ 	efi_status_t efi_ret;
+ 	struct efi_mm_communicate_header *mm_hdr;
+-	void *virt_shared_buf;
++	u8 *shared_buf;
++	bool at_runtime = efi_at_runtime();
+ 
+ 	if (!comm_buf)
+ 		return EFI_INVALID_PARAMETER;
+ 
+-	/* Discover MM partition ID at boot time */
+-	if (!mm_sp_id && ffa_discover_mm_sp_id()) {
+-		log_err("EFI: Failure to discover MM SP ID at boot time, FF-A MM comms failure\n");
+-		return EFI_UNSUPPORTED;
++	if (!mm_sp_id) {
++		if (at_runtime)
++			return EFI_UNSUPPORTED;
++		if (ffa_discover_mm_sp_id()) {
++			log_err("EFI: Failure to discover MM SP ID at boot time, FF-A MM comms failure\n");
++			return EFI_UNSUPPORTED;
++		}
+ 	}
+ 
+ 	mm_hdr = (struct efi_mm_communicate_header *)comm_buf;
+@@ -304,30 +341,61 @@ static efi_status_t ffa_mm_communicate(void *comm_buf, ulong comm_buf_size)
+ 	if (comm_buf_size != tx_data_size || tx_data_size > CONFIG_FFA_SHARED_MM_BUF_SIZE)
+ 		return EFI_INVALID_PARAMETER;
+ 
+-	/* Copy the data to the shared buffer */
+-
+-	virt_shared_buf = map_sysmem((phys_addr_t)CONFIG_FFA_SHARED_MM_BUF_ADDR, 0);
+-	memcpy(virt_shared_buf, comm_buf, tx_data_size);
++	if (at_runtime) {
++		shared_buf = comm_buf;
++	} else {
++		/* Copy the data to the shared buffer */
++		shared_buf = map_sysmem((phys_addr_t)CONFIG_FFA_SHARED_MM_BUF_ADDR, 0);
++		memcpy(shared_buf, comm_buf, tx_data_size);
++	}
+ 
+ 	/*
+-	 * The secure world might have cache disabled for
+-	 * the device region used for shared buffer (which is the case for Optee).
+-	 * In this case, the secure world reads the data from DRAM.
+-	 * Let's flush the cache so the DRAM is updated with the latest data.
++	 * Shared buffer cache maintenance for FF-A / OP-TEE communication:
++	 *
++	 * NS -> S (request path):
++	 *
++	 * The non-secure side populates the shared buffer. If the buffer is cached
++	 * in NS, the updated bytes may reside in dirty D-cache lines and not yet be
++	 * visible in DDR. Since the secure world typically reads the shared buffer
++	 * directly from DDR (e.g. with caches disabled / non-coherent mapping), we
++	 * must clean the corresponding cache lines to the Point of Coherency (PoC)
++	 * before entering secure world.
++	 *
++	 * S -> NS (response path):
++	 *
++	 * The secure world may update the same shared buffer in DDR. After returning
++	 * to non-secure, any cached copies of that region in NS may be stale. We
++	 * therefore invalidate the shared buffer range after the FF-A call to drop
++	 * those lines and force subsequent reads to fetch the latest data from DDR.
++	 *
++	 * Note: Whole-cache invalidation must not be used in EFI runtime context.
++	 * After ExitBootServices(), the OS owns the cache hierarchy; global
++	 * invalidation could drop OS dirty lines and violate the OS coherency
++	 * model. Always operate on the shared buffer range only.
+ 	 */
+-#ifdef CONFIG_ARM64
+-	invalidate_dcache_all();
+-#endif
++	if (IS_ENABLED(CONFIG_ARM64)) {
++		BUILD_BUG_ON(CONFIG_FFA_SHARED_MM_BUF_ADDR %
++			     CONFIG_SYS_CACHELINE_SIZE);
++		BUILD_BUG_ON(CONFIG_FFA_SHARED_MM_BUF_SIZE %
++			     CONFIG_SYS_CACHELINE_SIZE);
++		flush_dcache_range((unsigned long)shared_buf,
++				   (unsigned long)(shared_buf +
++					   CONFIG_FFA_SHARED_MM_BUF_SIZE));
++	}
+ 
+ 	/* Announce there is data in the shared buffer */
+-
+ 	ffa_ret = ffa_notify_mm_sp();
+ 
++	if (IS_ENABLED(CONFIG_ARM64))
++		invalidate_dcache_range((unsigned long)shared_buf,
++					(unsigned long)(shared_buf +
++						CONFIG_FFA_SHARED_MM_BUF_SIZE));
++
+ 	switch (ffa_ret) {
+ 	case 0: {
+ 		ulong rx_data_size;
+-		/* Copy the MM SP response from the shared buffer to the communication buffer */
+-		rx_data_size = ((struct efi_mm_communicate_header *)virt_shared_buf)->message_len +
++
++		rx_data_size = ((struct efi_mm_communicate_header *)shared_buf)->message_len +
+ 			sizeof(efi_guid_t) +
+ 			sizeof(size_t);
+ 
+@@ -336,7 +404,8 @@ static efi_status_t ffa_mm_communicate(void *comm_buf, ulong comm_buf_size)
+ 			break;
+ 		}
+ 
+-		memcpy(comm_buf, virt_shared_buf, rx_data_size);
++		if (!at_runtime)
++			memcpy(comm_buf, shared_buf, rx_data_size);
+ 		efi_ret = EFI_SUCCESS;
+ 		break;
+ 	}
+@@ -356,28 +425,34 @@ static efi_status_t ffa_mm_communicate(void *comm_buf, ulong comm_buf_size)
+ 		efi_ret = EFI_ACCESS_DENIED;
+ 	}
+ 
+-	unmap_sysmem(virt_shared_buf);
++	if (!at_runtime)
++		unmap_sysmem(shared_buf);
+ 	return efi_ret;
+ }
+ 
+ /**
+  * get_mm_comms() - detect the available MM transport
+  *
+- * Make sure the FF-A bus is probed successfully
+- * which means FF-A communication with secure world works and ready
+- * for use.
+- *
+- * If FF-A bus is not ready, use OPTEE comms.
++ * Make sure the FF-A bus is probed successfully during the boot phase,
++ * which means FF-A communication with secure world works and is ready for
++ * use. During the runtime phase, only the FF-A runtime transport can be
++ * selected.
+  *
+- * Return:
++ * If FF-A bus is not ready at boot, use OP-TEE comms.
+  *
+- * MM_COMMS_FFA or MM_COMMS_OPTEE
++ * Return: MM_COMMS_FFA, MM_COMMS_OPTEE, or MM_COMMS_UNDEFINED
+  */
+-static enum mm_comms_select get_mm_comms(void)
++static enum mm_comms_select __efi_runtime get_mm_comms(void)
+ {
+ 	struct udevice *dev;
+ 	int ret;
+ 
++	if (efi_at_runtime()) {
++		if (IS_ENABLED(CONFIG_ARM_FFA_RT_MODE))
++			return MM_COMMS_FFA;
++		return MM_COMMS_UNDEFINED;
++	}
++
+ 	ret = uclass_first_device_err(UCLASS_FFA, &dev);
+ 	if (ret) {
+ 		log_debug("EFI: Cannot find FF-A bus device, trying Optee comms\n");
+@@ -389,8 +464,8 @@ static enum mm_comms_select get_mm_comms(void)
+ #endif
+ 
+ /**
+- * mm_communicate() - Adjust the communication buffer to the MM SP and send
+- * it to OP-TEE
++ * mm_communicate() - Adjust the communication buffer to the MM SP and send it
++ * to the selected MM transport
+  *
+  * @comm_buf:		locally allocated communication buffer
+  * @dsize:		buffer size
+@@ -400,11 +475,12 @@ static enum mm_comms_select get_mm_comms(void)
+  * When using the u-boot OP-TEE driver, StandAlonneMM is supported.
+  * When using the u-boot FF-A  driver, any MM SP is supported.
+  *
+- * Return:		status code
++ * Return: status code
+  */
+-static efi_status_t mm_communicate(u8 *comm_buf, efi_uintn_t dsize)
++static efi_status_t __efi_runtime mm_communicate(u8 *comm_buf,
++						 efi_uintn_t dsize)
+ {
+-	efi_status_t ret;
++	efi_status_t ret = EFI_UNSUPPORTED;
+ 	struct efi_mm_communicate_header *mm_hdr;
+ 	struct smm_variable_communicate_header *var_hdr;
+ #if CONFIG_IS_ENABLED(ARM_FFA_TRANSPORT)
+@@ -419,14 +495,15 @@ static efi_status_t mm_communicate(u8 *comm_buf, efi_uintn_t dsize)
+ 	mm_comms = get_mm_comms();
+ 	if (mm_comms == MM_COMMS_FFA)
+ 		ret = ffa_mm_communicate(comm_buf, dsize);
+-	else
++	else if (mm_comms == MM_COMMS_OPTEE)
+ 		ret = optee_mm_communicate(comm_buf, dsize);
+ #else
+-		ret = optee_mm_communicate(comm_buf, dsize);
++	ret = optee_mm_communicate(comm_buf, dsize);
+ #endif
+ 
+ 	if (ret != EFI_SUCCESS) {
+-		log_err("%s failed!\n", __func__);
++		if (!efi_at_runtime())
++			log_err("%s failed!\n", __func__);
+ 		return ret;
+ 	}
+ 
+@@ -434,8 +511,55 @@ static efi_status_t mm_communicate(u8 *comm_buf, efi_uintn_t dsize)
+ }
+ 
+ /**
+- * setup_mm_hdr() -	Allocate a buffer for StandAloneMM and initialize the
+- *			header data.
++ * get_comm_buf() - Obtain a communication buffer for MM/FF-A exchange
++ * @payload_size: size of the payload that will be appended to the
++ *                MM communication header
++ * This helper returns a buffer suitable for constructing an
++ * EFI_MM_COMMUNICATE message. During the boot phase a new buffer is
++ * dynamically allocated. After ExitBootServices(), dynamic
++ * allocation is no longer permitted, and all runtime communication must
++ * use the statically reserved FF-A shared buffer.
++ *
++ * Return:
++ *   Pointer to a valid communication buffer on success,
++ *   NULL if allocation fails during the boot phase.
++ */
++static __efi_runtime u8 *get_comm_buf(efi_uintn_t payload_size)
++{
++	efi_uintn_t comm_buf_size;
++	u8 *comm_buf;
++
++	comm_buf_size = MM_COMMUNICATE_HEADER_SIZE +
++			MM_VARIABLE_COMMUNICATE_SIZE +
++			payload_size;
++
++	/*
++	 * After ExitBootServices(), dynamic allocation is no longer permitted.
++	 * Use the predefined FF-A shared buffer at runtime; otherwise allocate
++	 * a fresh buffer during the boot phase.
++	 */
++	if (efi_at_runtime()) {
++		if (IS_ENABLED(CONFIG_ARM_FFA_RT_MODE)) {
++			if (comm_buf_size > CONFIG_FFA_SHARED_MM_BUF_SIZE)
++				return NULL;
++			comm_buf = ffa_shared_buf;
++			if (!comm_buf)
++				return NULL;
++			efi_memset_runtime(comm_buf, 0, CONFIG_FFA_SHARED_MM_BUF_SIZE);
++		} else {
++			return NULL;
++		}
++	} else {
++		comm_buf = calloc(1, comm_buf_size);
++		if (!comm_buf)
++			return NULL;
++	}
++	return comm_buf;
++}
++
++/**
++ * setup_mm_hdr() -	Obtain a communication buffer for StandAloneMM and
++ *			initialize the MM header
+  *
+  * @dptr:		pointer address of the corresponding StandAloneMM
+  *			function
+@@ -444,10 +568,11 @@ static efi_status_t mm_communicate(u8 *comm_buf, efi_uintn_t dsize)
+  * @ret:		EFI return code
+  * Return:		buffer or NULL
+  */
+-static u8 *setup_mm_hdr(void **dptr, efi_uintn_t payload_size,
+-			efi_uintn_t func, efi_status_t *ret)
++static __efi_runtime u8 *setup_mm_hdr(void **dptr, efi_uintn_t payload_size,
++				      efi_uintn_t func, efi_status_t *ret)
+ {
+-	const efi_guid_t mm_var_guid = EFI_MM_VARIABLE_GUID;
++	static const __efi_runtime_rodata efi_guid_t mm_var_guid =
++		EFI_MM_VARIABLE_GUID;
+ 	struct efi_mm_communicate_header *mm_hdr;
+ 	struct smm_variable_communicate_header *var_hdr;
+ 	u8 *comm_buf;
+@@ -465,16 +590,15 @@ static u8 *setup_mm_hdr(void **dptr, efi_uintn_t payload_size,
+ 		return NULL;
+ 	}
+ 
+-	comm_buf = calloc(1, MM_COMMUNICATE_HEADER_SIZE +
+-			  MM_VARIABLE_COMMUNICATE_SIZE +
+-			  payload_size);
++	comm_buf = get_comm_buf(payload_size);
+ 	if (!comm_buf) {
+ 		*ret = EFI_OUT_OF_RESOURCES;
+ 		return NULL;
+ 	}
+ 
+ 	mm_hdr = (struct efi_mm_communicate_header *)comm_buf;
+-	guidcpy(&mm_hdr->header_guid, &mm_var_guid);
++	efi_memcpy_runtime(&mm_hdr->header_guid, &mm_var_guid,
++			   sizeof(mm_hdr->header_guid));
+ 	mm_hdr->message_len = MM_VARIABLE_COMMUNICATE_SIZE + payload_size;
+ 
+ 	var_hdr = (struct smm_variable_communicate_header *)mm_hdr->data;
+@@ -982,6 +1106,9 @@ void efi_variables_boot_exit_notify(void)
+ 			efi_get_next_variable_name_runtime;
+ 	efi_runtime_services.set_variable = efi_set_variable_runtime;
+ 	efi_update_table_header_crc32(&efi_runtime_services.hdr);
++
++	/* Record that ExitBootServices() has been called */
++	ebs_called = true;
+ }
+ 
+ /**
+@@ -1010,5 +1137,26 @@ efi_status_t efi_init_variables(void)
+ 	if (ret != EFI_SUCCESS)
  		return ret;
  
 +	if (IS_ENABLED(CONFIG_ARM_FFA_RT_MODE)) {
-+		ret = ffa_setup_efi_exit_boot_services_event(uc_priv);
-+		if (ret)
++		/*
++		 * The FF-A shared buffer is accessed by EFI runtime services, so it
++		 * must be marked as runtime memory in the EFI memory map.
++		 *
++		 * CONFIG_FFA_SHARED_MM_BUF_ADDR is expected to be EFI-page aligned.
++		 */
++		ffa_shared_buf = (void *)CONFIG_FFA_SHARED_MM_BUF_ADDR;
++		ret = efi_add_memory_map(CONFIG_FFA_SHARED_MM_BUF_ADDR,
++					 CONFIG_FFA_SHARED_MM_BUF_SIZE,
++					 EFI_RUNTIME_SERVICES_DATA);
++		if (ret != EFI_SUCCESS) {
++			log_err("EFI: failed to add FF-A shared buffer to runtime map (%lu)\n",
++				ret);
 +			return ret;
++		}
++		log_info("EFI: FF-A shared buffer runtime map: addr=0x%lx size=0x%lx\n",
++			 (ulong)CONFIG_FFA_SHARED_MM_BUF_ADDR,
++			 (ulong)CONFIG_FFA_SHARED_MM_BUF_SIZE);
 +	}
 +
- 	ret = ffa_get_rxtx_map_features_hdlr(dev);
- 	if (ret)
- 		return ret;
-@@ -1046,7 +966,6 @@ static int ffa_do_probe(struct udevice *dev)
- 		ffa_unmap_rxtx_buffers_hdlr(dev);
- 		return ret;
- 	}
--
- 	return 0;
- }
- 
-diff --git a/drivers/firmware/arm-ffa/arm-ffa.c b/drivers/firmware/arm-ffa/arm-ffa.c
-index 9e6b5dcc542..241ef018817 100644
---- a/drivers/firmware/arm-ffa/arm-ffa.c
-+++ b/drivers/firmware/arm-ffa/arm-ffa.c
-@@ -1,6 +1,6 @@
- // SPDX-License-Identifier: GPL-2.0+
- /*
-- * Copyright 2022-2023 Arm Limited and/or its affiliates <open-source-office@arm.com>
-+ * Copyright 2022-2023, 2026 Arm Limited and/or its affiliates <open-source-office@arm.com>
-  *
-  * Authors:
-  *   Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
-@@ -8,6 +8,7 @@
- 
- #include <arm_ffa.h>
- #include <arm_ffa_priv.h>
-+#include <arm_ffa_runtime.h>
- #include <dm.h>
- #include <log.h>
- #include <dm/device-internal.h>
-@@ -25,6 +26,19 @@ void invoke_ffa_fn(ffa_value_t args, ffa_value_t *res)
- 	arm_smccc_1_2_smc(&args, res);
- }
- 
-+/**
-+ * invoke_ffa_fn_runtime() - Runtime-safe SMC wrapper
-+ * @args: FF-A ABI arguments to be copied to Xn registers
-+ * @res:  FF-A ABI return values copied from Xn registers
-+ *
-+ * Calls the SMCCC SMC 1.2 helper from EFI runtime context. This wrapper
-+ * is marked __ffa_runtime so it remains available after ExitBootServices().
-+ */
-+void __ffa_runtime invoke_ffa_fn_runtime(ffa_value_t *args, ffa_value_t *res)
-+{
-+	arm_smccc_1_2_smc(args, res);
-+}
-+
- /**
-  * arm_ffa_discover() - perform FF-A discovery
-  * @dev: The Arm FF-A bus device (arm_ffa)
-diff --git a/drivers/firmware/arm-ffa/ffa-emul-uclass.c b/drivers/firmware/arm-ffa/ffa-emul-uclass.c
-index 6198d687354..d270f7b614e 100644
---- a/drivers/firmware/arm-ffa/ffa-emul-uclass.c
-+++ b/drivers/firmware/arm-ffa/ffa-emul-uclass.c
-@@ -671,6 +671,18 @@ void invoke_ffa_fn(ffa_value_t args, ffa_value_t *res)
- 	sandbox_arm_ffa_smccc_smc(&args, res);
- }
- 
-+/**
-+ * invoke_ffa_fn_runtime() - Runtime-safe SMC wrapper
-+ * @args: FF-A ABI arguments to be copied to Xn registers
-+ * @res: FF-A ABI return data to be copied from Xn registers
-+ *
-+ * Calls the emulated SMC call.
-+ */
-+void invoke_ffa_fn_runtime(ffa_value_t *args, ffa_value_t *res)
-+{
-+	sandbox_arm_ffa_smccc_smc(args, res);
-+}
-+
- /**
-  * ffa_emul_find() - Find the FF-A emulator
-  * @dev:	the sandbox FF-A device (sandbox-arm-ffa)
-diff --git a/include/arm_ffa.h b/include/arm_ffa.h
-index 2994d8ee3ae..6a03aad81a8 100644
---- a/include/arm_ffa.h
-+++ b/include/arm_ffa.h
-@@ -1,6 +1,6 @@
- /* SPDX-License-Identifier: GPL-2.0+ */
- /*
-- * Copyright 2022-2023 Arm Limited and/or its affiliates <open-source-office@arm.com>
-+ * Copyright 2022-2023, 2026 Arm Limited and/or its affiliates <open-source-office@arm.com>
-  *
-  * Authors:
-  *   Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
-@@ -129,21 +129,13 @@ int ffa_sync_send_receive(struct udevice *dev, u16 dst_part_id,
- 
- /**
-  * ffa_msg_send_direct_req_hdlr() - FFA_MSG_SEND_DIRECT_{REQ,RESP} handler function
-- * @dev: The arm_ffa bus device
-+ * @dev: The FF-A bus device
-  * @dst_part_id: destination partition ID
-  * @msg: pointer to the message data preallocated by the client (in/out)
-  * @is_smc64: select 64-bit or 32-bit FF-A ABI
-  *
-- * This function implements FFA_MSG_SEND_DIRECT_{REQ,RESP}
-- * FF-A functions.
-- *
-- * FFA_MSG_SEND_DIRECT_REQ is used to send the data to the secure partition.
-- * The response from the secure partition is handled by reading the
-- * FFA_MSG_SEND_DIRECT_RESP arguments.
-- *
-- * The maximum size of the data that can be exchanged is 40 bytes which is
-- * sizeof(struct ffa_send_direct_data) as defined by the FF-A specification 1.0
-- * in the section relevant to FFA_MSG_SEND_DIRECT_{REQ,RESP}
-+ * This function calls the ffa_invoke_msg_send_direct_req() function which
-+ * invokes FFA_MSG_SEND_DIRECT_{REQ,RESP} FF-A functions.
-  *
-  * Return:
-  *
-diff --git a/include/arm_ffa_priv.h b/include/arm_ffa_priv.h
-index d564c33c647..3c74c63dfa6 100644
---- a/include/arm_ffa_priv.h
-+++ b/include/arm_ffa_priv.h
-@@ -1,6 +1,6 @@
- /* SPDX-License-Identifier: GPL-2.0+ */
- /*
-- * Copyright 2022-2023 Arm Limited and/or its affiliates <open-source-office@arm.com>
-+ * Copyright 2022-2023, 2026 Arm Limited and/or its affiliates <open-source-office@arm.com>
-  *
-  * Authors:
-  *   Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
-@@ -200,11 +200,24 @@ struct ffa_partitions {
- };
- 
- /**
-- * struct ffa_priv - the driver private data structure
-+ * struct ffa_priv_runtime - the driver's private runtime data structure
-  *
-  * @fwk_version:	FF-A framework version
-- * @emul:	FF-A sandbox emulator
-  * @id:	u-boot endpoint ID
-+ *
-+ * The device private runtime data structure containing all the
-+ * data read from secure world.
-+ */
-+struct ffa_priv_runtime {
-+	u32 fwk_version;
-+	u16 id;
-+};
-+
-+/**
-+ * struct ffa_priv - the driver private data structure
-+ *
-+ * @rt:		Runtime data captured at boot time
-+ * @emul:	FF-A sandbox emulator
-  * @partitions:	The partitions descriptors structure
-  * @pair:	The RX/TX buffers pair
-  *
-@@ -212,9 +225,8 @@ struct ffa_partitions {
-  * data read from secure world.
-  */
- struct ffa_priv {
--	u32 fwk_version;
-+	struct ffa_priv_runtime rt;
- 	struct udevice *emul;
--	u16 id;
- 	struct ffa_partitions partitions;
- 	struct ffa_rxtxpair pair;
- };
-diff --git a/include/arm_ffa_runtime.h b/include/arm_ffa_runtime.h
-new file mode 100644
-index 00000000000..2411218cb12
---- /dev/null
-+++ b/include/arm_ffa_runtime.h
-@@ -0,0 +1,191 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+/*
-+ * Copyright 2026 Arm Limited and/or its affiliates <open-source-office@arm.com>
-+ *
-+ * Authors:
-+ *   Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
-+ *   Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
-+ */
-+
-+#ifndef __ARM_FFA_RUNTIME_H
-+#define __ARM_FFA_RUNTIME_H
-+
-+#include <linux/types.h>
-+#include <arm_ffa.h>
-+#include <arm_ffa_priv.h>
-+#include <efi_loader.h>
-+
-+/**
-+ *  __ffa_runtime - controls whether functions are
-+ * available after calling the EFI ExitBootServices service.
-+ * Functions tagged with these keywords are resident (available at boot time and
-+ * at runtime)
-+ */
-+#if IS_ENABLED(CONFIG_ARM_FFA_RT_MODE)
-+#define __ffa_runtime_data __efi_runtime_data
-+#define __ffa_runtime __efi_runtime
-+#else
-+#define __ffa_runtime_data
-+#define __ffa_runtime
-+#endif
-+
-+/**
-+ * invoke_ffa_fn_runtime() - Runtime-safe SMC wrapper
-+ * @args: FF-A ABI arguments to be copied to Xn registers
-+ * @res:  FF-A ABI return values copied from Xn registers
-+ *
-+ * Calls low level SMC implementation. This wrapper
-+ * is marked __ffa_runtime so it remains available after ExitBootServices().
-+ */
-+void __ffa_runtime invoke_ffa_fn_runtime(ffa_value_t *args, ffa_value_t *res);
-+
-+/**
-+ * struct ffa_bus_ops_runtime - Operations for FF-A runtime
-+ * @sync_send_receive:	callback for the FFA_MSG_SEND_DIRECT_REQ
-+ *
-+ * The data structure providing all the runtime operations supported by the driver.
-+ * This structure is an EFI runtime resident.
-+ */
-+struct ffa_bus_ops_runtime {
-+	int (*sync_send_receive)(u16 dst_part_id, struct ffa_send_direct_data *msg,
-+				 bool is_smc64);
-+};
-+
-+/**
-+ * ffa_enable_runtime_context() - Enable FF-A runtime context
-+ *
-+ * This function marks the FF-A runtime environment as ready for use by
-+ * EFI runtime services. It is called when ExitBootServices() is invoked,
-+ * after the FF-A bus device has successfully probed and U-Boot's FF-A
-+ * endpoint ID has been discovered and stored in the runtime private data
-+ * structure.
-+ *
-+ * The FF-A runtime flag allows the EFI runtime layer to verify that the
-+ * FF-A transport was initialized during the boot phase and that all
-+ * runtime-safe FF-A operations may now be used after ExitBootServices().
-+ *
-+ */
-+void ffa_enable_runtime_context(void);
-+
-+/**
-+ * ffa_reset_runtime_context() - Reset FF-A runtime resident state
-+ *
-+ * Clear the resident runtime flag and private data. This is used by the
-+ * FF-A unit tests to avoid leaking runtime state across test cases.
-+ */
-+void ffa_reset_runtime_context(void);
-+
-+/**
-+ * ffa_copy_runtime_priv() - copy runtime data into resident storage
-+ * @priv: pointer to the runtime private data
-+ *
-+ * Copy boot-time runtime data into the resident runtime storage to be used
-+ * after ExitBootServices().
-+ */
-+void ffa_copy_runtime_priv(const struct ffa_priv_runtime *priv);
-+
-+/**
-+ * ffa_setup_efi_exit_boot_services_event() - register ExitBootServices event
-+ * @priv: pointer to the FF-A private data
-+ *
-+ * Register an EFI event that enables the FF-A runtime context when
-+ * ExitBootServices() is invoked.
-+ *
-+ * Return: 0 on success, -EPERM on failure to create the event.
-+ */
-+#if IS_ENABLED(CONFIG_ARM_FFA_RT_MODE)
-+int ffa_setup_efi_exit_boot_services_event(struct ffa_priv *priv);
-+#else
-+static inline int ffa_setup_efi_exit_boot_services_event(struct ffa_priv *priv)
-+{
-+	return 0;
-+}
-+#endif
-+
-+/**
-+ * ffa_get_status_runtime_context() - Query FF-A runtime readiness
-+ *
-+ * This helper returns whether the FF-A runtime environment has been
-+ * enabled during the boot phase. Runtime FF-A operations must check this
-+ * flag before attempting any FF-A access, as the U-Boot driver model
-+ * (DM/uclass) is no longer available after ExitBootServices().
-+ *
-+ * The runtime context becomes enabled when ffa_enable_runtime_context()
-+ * is called, typically after the FF-A bus device has probed and the
-+ * endpoint ID has been discovered and stored in the runtime private
-+ * data structure.
-+ *
-+ * Return: true if FF-A runtime support is ready, false otherwise.
-+ */
-+bool __ffa_runtime ffa_get_status_runtime_context(void);
-+
-+/**
-+ * ffa_to_std_errno() - convert FF-A error code to standard error code
-+ * @ffa_errno:	Error code returned by the FF-A ABI
-+ *
-+ * Map the given FF-A error code as specified
-+ * by the spec to a u-boot standard error code.
-+ *
-+ * Return: Standard U-Boot errno for known FF-A errors, or -EINVAL otherwise.
-+ */
-+int __ffa_runtime ffa_to_std_errno(int ffa_errno);
-+
-+/**
-+ * ffa_sync_send_receive_runtime() - Runtime implementation of
-+ *                              ffa_sync_send_receive()
-+ * @dst_part_id: destination partition ID
-+ * @msg: pointer to the message data preallocated by the client (in/out)
-+ * @is_smc64: select 64-bit or 32-bit FF-A ABI
-+ *
-+ * Please see ffa_msg_send_direct_req_hdlr_runtime() description for more details.
-+ *
-+ * Return: 0 on success, negative errno on failure.
-+ */
-+int __ffa_runtime ffa_sync_send_receive_runtime(u16 dst_part_id,
-+						struct ffa_send_direct_data *msg,
-+						bool is_smc64);
-+
-+/**
-+ * ffa_invoke_msg_send_direct_req() - Invokes FFA_MSG_SEND_DIRECT_{REQ,RESP}
-+ * @endpoint_id: u-boot endpoint id
-+ * @dst_part_id: destination partition ID
-+ * @msg: pointer to the message data preallocated by the client (in/out)
-+ * @is_smc64: select 64-bit or 32-bit FF-A ABI
-+ *
-+ * This function invokes FFA_MSG_SEND_DIRECT_{REQ,RESP} FF-A functions.
-+ *
-+ * FFA_MSG_SEND_DIRECT_REQ is used to send the data to the secure partition.
-+ * The response from the secure partition is handled by reading the
-+ * FFA_MSG_SEND_DIRECT_RESP arguments.
-+ *
-+ * The maximum size of the data that can be exchanged is 40 bytes which is
-+ * sizeof(struct ffa_send_direct_data) as defined by the FF-A specification 1.0
-+ * in the section relevant to FFA_MSG_SEND_DIRECT_{REQ,RESP}
-+ *
-+ * Return:
-+ *
-+ * 0 on success. Otherwise, error on failure
-+ */
-+int __ffa_runtime ffa_invoke_msg_send_direct_req(u16 endpoint_id, u16 dst_part_id,
-+						 struct ffa_send_direct_data *msg,
-+						 bool is_smc64);
-+
-+/**
-+ * ffa_msg_send_direct_req_hdlr_runtime() - Runtime implementation of
-+ * FFA_MSG_SEND_DIRECT_{REQ,RESP} handler function
-+ * @dst_part_id: destination partition ID
-+ * @msg: pointer to the message data preallocated by the client (in/out)
-+ * @is_smc64: select 64-bit or 32-bit FF-A ABI
-+ *
-+ * This function calls the ffa_invoke_msg_send_direct_req() function which
-+ * invokes FFA_MSG_SEND_DIRECT_{REQ,RESP} FF-A functions.
-+ *
-+ * Return:
-+ *
-+ * 0 on success. Otherwise, failure
-+ */
-+int __ffa_runtime ffa_msg_send_direct_req_hdlr_runtime(u16 dst_part_id,
-+						       struct ffa_send_direct_data *msg,
-+						       bool is_smc64);
-+
-+#endif
-diff --git a/test/dm/ffa.c b/test/dm/ffa.c
-index 593b7177fce..a0c95e62607 100644
---- a/test/dm/ffa.c
-+++ b/test/dm/ffa.c
-@@ -2,7 +2,7 @@
- /*
-  * Functional tests for UCLASS_FFA  class
-  *
-- * Copyright 2022-2023 Arm Limited and/or its affiliates <open-source-office@arm.com>
-+ * Copyright 2022-2023, 2026 Arm Limited and/or its affiliates <open-source-office@arm.com>
-  *
-  * Authors:
-  *   Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
-@@ -26,14 +26,14 @@ static int check_fwk_version(struct ffa_priv *uc_priv, struct unit_test_state *u
- 	func_data.data0 = &fwk_version;
- 	func_data.data0_size = sizeof(fwk_version);
- 	ut_assertok(sandbox_query_ffa_emul_state(FFA_VERSION, &func_data));
--	ut_asserteq(uc_priv->fwk_version, fwk_version);
-+	ut_asserteq(uc_priv->rt.fwk_version, fwk_version);
- 
- 	return 0;
- }
- 
- static int check_endpoint_id(struct ffa_priv *uc_priv, struct unit_test_state *uts)
- {
--	ut_asserteq(0, uc_priv->id);
-+	ut_asserteq(0, uc_priv->rt.id);
- 
- 	return 0;
+ 	return EFI_SUCCESS;
  }
 -- 
 2.34.1
