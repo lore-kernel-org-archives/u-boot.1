@@ -4,111 +4,115 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD1CACD4851
-	for <u-boot@archiver.kernel.org>; Thu, 14 May 2026 10:30:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8236CCD4851
+	for <u-boot@archiver.kernel.org>; Thu, 14 May 2026 10:32:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CC2A6839D9;
-	Thu, 14 May 2026 12:30:08 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 08E4A839D9;
+	Thu, 14 May 2026 12:32:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="dMCNNV9t";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="wbzuN7XG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E787683FF5; Thu, 14 May 2026 12:30:06 +0200 (CEST)
-Received: from DM5PR21CU001.outbound.protection.outlook.com
- (mail-centralusazlp170110009.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c111::9])
+ id 46E62844BF; Thu, 14 May 2026 12:32:35 +0200 (CEST)
+Received: from CH4PR04CU002.outbound.protection.outlook.com
+ (mail-northcentralusazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c105::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D6B438341A
- for <u-boot@lists.denx.de>; Thu, 14 May 2026 12:30:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EAAD48341A
+ for <u-boot@lists.denx.de>; Thu, 14 May 2026 12:32:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=Padmarao.Begari@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=La2FQRhsw3PBqPsI6wT0na+emMn7qH6XqWEQzJYuToiXsllhh22+lXGxTIMRO3rAo97wVxV71Zi852y2HskYvcWOg/oLs8IOY3OBP5uNKgFoE14v9sspvtYNQn2T5wzxEdqLG03Npm0TpAobjP6sXbB5Tp/RWy6p1OQNUiVa7yu1rMrFM8Dpjtk80URxl93SGAph71NFVEXAjuuLGVEIzM1/wizUllVp3l/CWocutG4yw0kOf6vlqf5rVcyzLwotvqtaCwfaF7JfYPK4Y3kZFR1diQAQkPcVToTysVqXz1goZN7wUuU9X16jVbpxipkxXNKVCEajHIIBkiKsqZXL5w==
+ b=ap3rG/WNqEGbw+vk+cPSd+Uqw9UaibqHyQJh4gkVakfEhUu4sw1wsgWMahflwNxDDKccT0m5yM24r5mL+aXsolDBU4lYVRcMTdCZBe1xiNsbIhejhy5LsjJu2mZJheRC/rZYFP6x+wWoxtMjXeuckMIFBrPPzZTYk8NCqw1xrvvY1qynQYM4DqJNWezXolts4f4DeCKstEvfJ3ajsqmStgUnoqwkcfwrbLu0X1RoprCXK68eAjsYtjOEDkXL7g7JFURAKWQoxQB4/h1QI73wYJba3UnRsGcZz7xyQel/U3AAhSb1y5UlHMNaVhQUh3qeqavmYdUydQqOZKeJfAWCXg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=vW1mypylyWZsTSrXNvtyMRjwLPZVP0DfksYmRBFME7s=;
- b=Vlb2dNOUv31voLJB/9EzZP7j9MP/zBiq76uCuWNDtDMWX8ejTgYNDAybPKN8iJjUhTKaSUsGdrSTgM4djxhrTmiVe2OpFQFJQm5RuwP+Dk6OxAMAYSolR3v8h9wgnDaUdyIeY1InV0OJaI3vbOqSb97e7LCs9sAmhii2O4gmQWxMNg3/bY5mIagO3kFE1XYpMbGLwP35dMT+lXMi2wcOJKAiaVge3X0DFwfFb5jRvWit85GkvV64oTD5wkqQyhYGzq1wa21O0y/2L6hwX8NooWDRa6bvm3ackIFfZOlKIOtkfo9pUfm22TStpf/WH6FxVhHGsQ0j8jgoav3We86YCg==
+ bh=zGbLePCGV071jZNIkMuAjH0NjskOsIE2X2Sn639+6L0=;
+ b=QcU1QqxGDURm2OrmdxpB9WFfLoFsbWFX6luWnrcvrhgdSY7cF/0hbrMa9i/JvTXMxQI4KwbtIUkYIIwTwR7aR3+Oho9qUXfPiNbebHewfWsYz6WwDm4UjOTlW+HSWXnxb4osUQPjA6tPJU8g8ypb+SWManR2UsUFkWHOwlaQmqoMez8SDD/w6z8w/JpYk1N2nJIs8zFsjoV24u+onz71uB3IjE5pAByatptmlAQ1werF4NAm4bZ4fZvONw/cj7AYzAhZO54pQdIei42DPhRp7aeXofpXRlBrElv1lY4LC3kaECrnswHpTtDyr83GD2aT7u0kcgw4YXyZr/MywK4eFg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=vW1mypylyWZsTSrXNvtyMRjwLPZVP0DfksYmRBFME7s=;
- b=dMCNNV9t7q6G4vGY5x5jtwN+hhhPcTu+KwTbFFKyaTAXkLzRreQ0gGguiIexY2Y65bDfcrBp+16MEovN6cxAgOAVCbftrFSj3za4UYtJDd/BgvFJCIYLYTTwdC7ZmEQWDUpQRoDUrJnpmdnqSY2AtQbQkEDfS9y9AdtMyQuRhv4=
-Received: from BL1PR13CA0242.namprd13.prod.outlook.com (2603:10b6:208:2ba::7)
- by IA0PPF002462CFE.namprd12.prod.outlook.com
- (2603:10b6:20f:fc04::bc4) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9891.20; Thu, 14 May
- 2026 10:29:52 +0000
-Received: from MN1PEPF0000F0E4.namprd04.prod.outlook.com
- (2603:10b6:208:2ba:cafe::33) by BL1PR13CA0242.outlook.office365.com
- (2603:10b6:208:2ba::7) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.25.18 via Frontend Transport; Thu, 14
- May 2026 10:29:19 +0000
+ bh=zGbLePCGV071jZNIkMuAjH0NjskOsIE2X2Sn639+6L0=;
+ b=wbzuN7XGO9P0muhg45PbKePjL0XwllxaXUcJd0/30/zCSjdvIn7Jz/hfmMdBRlKxGOb/4H6Y28kWkLTDDB2GVHyKLjB6t9zMYsMn4sBbvkIR7fggHJERZi4vvjBcNoeNdNsRmbCLFqwd15XXHCUwwDpkzFM6HGuH/Qnz31ANfyM=
+Received: from MN0PR02CA0009.namprd02.prod.outlook.com (2603:10b6:208:530::12)
+ by DS7PR12MB5743.namprd12.prod.outlook.com (2603:10b6:8:72::14) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9913.11; Thu, 14 May
+ 2026 10:32:26 +0000
+Received: from BL02EPF00021F6F.namprd02.prod.outlook.com
+ (2603:10b6:208:530:cafe::cc) by MN0PR02CA0009.outlook.office365.com
+ (2603:10b6:208:530::12) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.25.19 via Frontend Transport; Thu, 14
+ May 2026 10:32:26 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
 Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
-Received: from satlexmb08.amd.com (165.204.84.17) by
- MN1PEPF0000F0E4.mail.protection.outlook.com (10.167.242.42) with Microsoft
+ client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
+Received: from satlexmb07.amd.com (165.204.84.17) by
+ BL02EPF00021F6F.mail.protection.outlook.com (10.167.249.11) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.25.13 via Frontend Transport; Thu, 14 May 2026 10:29:18 +0000
-Received: from satlexmb07.amd.com (10.181.42.216) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.41; Thu, 14 May
- 2026 05:29:17 -0500
+ 15.21.25.13 via Frontend Transport; Thu, 14 May 2026 10:32:26 +0000
+Received: from SATLEXMB04.amd.com (10.181.40.145) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.2.2562.41; Thu, 14 May
+ 2026 05:32:17 -0500
+Received: from satlexmb07.amd.com (10.181.42.216) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 14 May
+ 2026 05:32:16 -0500
 Received: from xhdkummari40.xilinx.com (10.180.168.240) by satlexmb07.amd.com
  (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.41 via Frontend
- Transport; Thu, 14 May 2026 05:29:15 -0500
+ Transport; Thu, 14 May 2026 05:32:14 -0500
 From: Padmarao Begari <padmarao.begari@amd.com>
 To: <u-boot@lists.denx.de>, <michal.simek@amd.com>
-CC: <git@amd.com>, <padmarao.begari@amd.com>, Tom Rini <trini@konsulko.com>,
- Sean Anderson <sean.anderson@linux.dev>, Venkatesh Yadav Abbarapu
- <venkatesh.abbarapu@amd.com>, Naman Trivedi <naman.trivedimanojbhai@amd.com>
-Subject: [PATCH 2/7] firmware: zynqmp: Add PMC PGGS register read API
-Date: Thu, 14 May 2026 15:52:19 +0530
-Message-ID: <20260514102601.1759779-3-padmarao.begari@amd.com>
+CC: <git@amd.com>, <padmarao.begari@amd.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH 3/7] board: xilinx: Add capsule and FWU support
+Date: Thu, 14 May 2026 15:52:20 +0530
+Message-ID: <20260514102601.1759779-4-padmarao.begari@amd.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20260514102601.1759779-1-padmarao.begari@amd.com>
 References: <20260514102601.1759779-1-padmarao.begari@amd.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
+Received-SPF: None (SATLEXMB04.amd.com: padmarao.begari@amd.com does not
+ designate permitted sender hosts)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: MN1PEPF0000F0E4:EE_|IA0PPF002462CFE:EE_
-X-MS-Office365-Filtering-Correlation-Id: 46daf884-059b-4718-6e3f-08deb1a3a7de
+X-MS-TrafficTypeDiagnostic: BL02EPF00021F6F:EE_|DS7PR12MB5743:EE_
+X-MS-Office365-Filtering-Correlation-Id: a30f8720-3b0e-4a84-abc9-08deb1a417ca
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700016|82310400026|376014|1800799024|11063799003|18002099003|22082099003|56012099003;
-X-Microsoft-Antispam-Message-Info: JIa9buC8+8h4QkD1L9wsYm01WnQbc/w9SxPaKiURLah9a/AdHmWrjaSQFpNd4apd0s5dj+KeHDMJ04j6l6Ll6A3ElUpqVzjzCGZKAry++3Q8UzJ6tCL61xMTVlqbUORsMiWJYZgWc+cylTq6KN45rb6GMXEAbr1MPW4YqemwZ6rpMOFaibMH050KoFTBBTOHo+f455LBi72RXJnCJbY5R3vQVcYFAKdq4rhr3DaqoYFwCGcLlSvkSzo1BHcv241vs+NmB7+p/YnjKVk31v1hY9rebxrJqz2a9Jr8NhCjgFe3tPtbrt5/TTbL7IAS3GV5EmyN76G7OfhF1NEsDzD0lvSt/uK9L5K9kwcPInCCEnVAIb3qTUoxSEJPuxwl5fla9qzPL+cNfclgRgq9MIai4vEvLN5KR5UWjZS3fkeuoHW9o5IAx4I7ApiUgKh2uAvTxAEttMiB4JM1U883DrEr29smRmMRMAv0N5xWlsoqB31ccuywVNTV7HHmNLOuJmvghCOEWvwqiXkzWhjiY63cJfJE57h+zzI+4tovmYWIIkxfSTszOus1TCM01q6JWcuvAZW5dRW01AvcbSoC6x3itdzJfLLZvtGbBVYFloPAer9+B0KBXThim+UxHlGBm4D6RVEnrKJVCRttyUuQFPSZAXlUn1T5VACJtRHsQtgpuUmYaqRJ4EwEMCaC+a8X0fklbmGlm/KzGamW9RQ7Sd9Rnr7n1Ey6GUB+kDx/ZjcQw8w=
+ ARA:13230040|36860700016|1800799024|82310400026|376014|18002099003|22082099003|11063799003|56012099003;
+X-Microsoft-Antispam-Message-Info: qTp/LMy3I4grdwrj5w15teKwAylrNac0NQE4MO1Cz8ah3M0TFBcwIBdysqat0SIaqGiA1VpibYvCY/j4qKvaWr+z8CvWOfbDsCb5sCMV85duCOfmQjfqC8ciMCZ3g9rwJyNbVz0JRWXw2bwj5JmGDKah4M5n04IMHPZF5+XXj9+p6+XWBm4jl/00M1FLPEBocS5qPqiiQnLAliBeiakOuRc0EIufw6LFZylpuEruZrHgfD0iuWks8vzguu3GV+NdaOO6xGeW6nGStSuGKFU/LyQVJoo8NedXbD6Qs1vV6AqnCc82DFnLpNvbr46oVbIDkAauNnR9lfe97bASIn2yezAKS97A5GQCa7qtcYc6wfeSbRCUItQK9ZquWoFUuWSkWxvAA33GkMa3mO7TSv65Qn0FkSwK8bjN0Ar+44ITPX+yHTd5Ala7+NQduZax94nbkxOajqslwzaCdWyy4Tuiye/srfh2EzSpucbCbK8fosU5IJvqMmXzeSxKGMLpcCu0LeA9ONWsG8GuLk/PuNCPPPPjVghf4kdkfPrwkavAGGchH6jeseJ34CgUbCplQT7IH3ynh+QFgHIxVIh+91ymBCpkOxS0z/qlYqusywkk3hVvQcGITQd4+ns5OrEe+XIN0a9sOUZ9/su4joXmc5GaHTGiSaZXzwZWXEMlHFCYMBX1y6UaEyEReOQYmPa9nAk1DAVRO3DmN1Ev9ni4AweksV+vdEyWFY62rg1JP94XOa4=
 X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:satlexmb08.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(36860700016)(82310400026)(376014)(1800799024)(11063799003)(18002099003)(22082099003)(56012099003);
+ IPV:NLI; SFV:NSPM; H:satlexmb07.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(36860700016)(1800799024)(82310400026)(376014)(18002099003)(22082099003)(11063799003)(56012099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: lakvnfzFShlUqYK9ZV8ixTix/rIv2PKgQnTuXzFtthtweX9s9CoLdbxKWaEwZ0nU63aB9GOMLaSoowMFSMkC7U+5z3Z92XyD/sur1gGde8WdxiynJtGdMqdhIGQI65BH1yeE0DAQHgFWD/Wjx+6b2tYV4MEs4YZL3Zij56qcREd/me7h5qaYyqhTJ9RYTk2ozU528WJF37nPNUvJM3eZnKwA/BZQr1VrJW1LYexKRN+qe3M83r/jWuVVuJ7f9G0xRLh17zcPIIJqZxif4VPZJwZqS0IizPh0hpJmMnrQUFyY4Lhl2oywg71LKs182OUczxzgvsVCLmOAq5YAtGCcRrqmAIbOfXDi7TjvxOp7qszhShwzOAVBgc9X7vMABZEwfmVQkk6EVZkJbsqSeQPgNyIFDL/2nhOBVW1jpMbJQVWR+zo1S0gsHFYV3qbG42hI
+X-MS-Exchange-AntiSpam-MessageData-0: ca/Ai74/MV3QF8/BfWaeQXDF0xCv53dQpczBOdoTFBci7/1GoeZbASPGx2U3XXh0dMQ4Pa98DEkWrSjhoo9JkGikArG8Y29xuBDI0JuNam2bstIhggqBKz2BtcWpNUeOZ5sMQCvdjJ7uZAMWcFj++Y3wtb5a3ePu96QyA66iV5mk+hypjBP8pB4+6LRXLzboTDFkyZgkTxe/B3eiyTFJCWVFjxRBxRhMy8nKFU2l4joV6s91KuM3HdhkKlTVRV1609K74meMHj9PXOI5ZyehWSKEj9k/1yTNGsrC0hgwBX6JLB3P2cVWgK+LwPNFLNi3Hg9NjEqZBGr6o2rIRyf+9+ohcJQTBDowcM6vZxafBVkUphlWzy/X5tOBMcFcGug/EU50ueDEEmn+/rKR59j6ZCRDYPWeRCzuImh2BO9DcEWmsnroD6gbtj8pIOk+HXOr
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 May 2026 10:29:18.6925 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 46daf884-059b-4718-6e3f-08deb1a3a7de
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 May 2026 10:32:26.4749 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: a30f8720-3b0e-4a84-abc9-08deb1a417ca
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[satlexmb08.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: MN1PEPF0000F0E4.namprd04.prod.outlook.com
+ Helo=[satlexmb07.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: BL02EPF00021F6F.namprd02.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA0PPF002462CFE
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS7PR12MB5743
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -125,109 +129,87 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add zynqmp_pm_get_pmc_global_pggs_reg() to read PMC Global PGGS3
-and PGGS4 registers via firmware IOCTL. Supports IOCTL_READ_PGGS
-as the preferred path and falls back to IOCTL_READ_REG for older
-PLM firmware versions that do not support IOCTL_READ_PGGS.
+Guard configure_capsule_updates() so it is skipped when FWU
+multi-bank update is enabled. Add set_dfu_alt_info() for FWU
+multi-bank mode to generate DFU alt info dynamically from NOR
+flash MTD partitions using fwu_gen_alt_info_from_mtd().
 
 Signed-off-by: Padmarao Begari <padmarao.begari@amd.com>
 ---
- drivers/firmware/firmware-zynqmp.c | 54 +++++++++++++++++++++++++++++-
- include/zynqmp_firmware.h          |  4 +++
- 2 files changed, 57 insertions(+), 1 deletion(-)
+ board/xilinx/versal/board.c | 42 ++++++++++++++++++++++++++++++++++++-
+ 1 file changed, 41 insertions(+), 1 deletion(-)
 
-diff --git a/drivers/firmware/firmware-zynqmp.c b/drivers/firmware/firmware-zynqmp.c
-index fb583580ebe..ea14ed4ef95 100644
---- a/drivers/firmware/firmware-zynqmp.c
-+++ b/drivers/firmware/firmware-zynqmp.c
-@@ -3,7 +3,7 @@
-  * Xilinx Zynq MPSoC Firmware driver
-  *
-  * Copyright (C) 2018-2019 Xilinx, Inc.
-- * Copyright (C) 2022 - 2025, Advanced Micro Devices, Inc.
-+ * Copyright (C) 2022 - 2026, Advanced Micro Devices, Inc.
-  */
+diff --git a/board/xilinx/versal/board.c b/board/xilinx/versal/board.c
+index 9371c30ea27..8666f2ceff4 100644
+--- a/board/xilinx/versal/board.c
++++ b/board/xilinx/versal/board.c
+@@ -10,6 +10,7 @@
+ #include <env.h>
+ #include <efi_loader.h>
+ #include <fdtdec.h>
++#include <fwu.h>
+ #include <init.h>
+ #include <env_internal.h>
+ #include <log.h>
+@@ -293,7 +294,8 @@ int board_late_init(void)
+ {
+ 	int ret;
  
- #include <asm/arch/hardware.h>
-@@ -197,6 +197,58 @@ int zynqmp_pm_ufs_cal_reg(u32 *value)
- 	*value = readl(PMXC_EFUSE_CACHE_BASE_ADDRESS + PMXC_UFS_CAL_1_OFFSET);
- 	return 0;
+-	if (IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT))
++	if (IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT) &&
++	    !IS_ENABLED(CONFIG_FWU_MULTI_BANK_UPDATE))
+ 		configure_capsule_updates();
+ 
+ 	if (!(gd->flags & GD_FLG_ENV_DEFAULT)) {
+@@ -374,6 +376,8 @@ enum env_location env_get_location(enum env_operation op, int prio)
+ 
+ #define DFU_ALT_BUF_LEN		SZ_1K
+ 
++#if defined(CONFIG_EFI_HAVE_CAPSULE_SUPPORT) && \
++	!defined(CONFIG_FWU_MULTI_BANK_UPDATE)
+ static void mtd_found_part(u32 *base, u32 *size)
+ {
+ 	struct mtd_info *part, *mtd;
+@@ -450,3 +454,39 @@ void configure_capsule_updates(void)
+ 	update_info.dfu_string = strdup(buf);
+ 	debug("Capsule DFU: %s\n", update_info.dfu_string);
  }
-+#endif /* CONFIG_ARCH_VERSAL2 */
++#endif
 +
-+#if defined(CONFIG_ARCH_VERSAL) || defined(CONFIG_ARCH_VERSAL2)
-+u32 zynqmp_pm_get_pmc_global_pggs_reg(u32 reg_addr)
++#if defined(CONFIG_FWU_MULTI_BANK_UPDATE)
++
++/* Generate dfu_alt_info from partitions */
++void set_dfu_alt_info(char *interface, char *devstr)
 +{
 +	int ret;
-+	u32 value = 0;
-+	u32 ret_payload[PAYLOAD_ARG_CNT];
++	struct mtd_info *mtd;
 +
-+	if (reg_addr == PMC_GLOBAL_PGGS3_REG) {
-+		value = 0;
-+	} else if (reg_addr == PMC_GLOBAL_PGGS4_REG) {
-+		value = 1;
-+	} else {
-+		printf("%s: not supported pggs register 0x%x\n",
-+		       __func__, reg_addr);
-+		return 0;
++	/*
++	 * It is called multiple times for every image
++	 * per bank that's why enough to set it up once.
++	 */
++	if (env_get("dfu_alt_info"))
++		return;
++
++	ALLOC_CACHE_ALIGN_BUFFER(char, buf, DFU_ALT_BUF_LEN);
++	memset(buf, 0, DFU_ALT_BUF_LEN);
++
++	mtd_probe_devices();
++
++	mtd = get_mtd_device_nm("nor0");
++	if (IS_ERR_OR_NULL(mtd))
++		return;
++
++	ret = fwu_gen_alt_info_from_mtd(buf, DFU_ALT_BUF_LEN, mtd);
++	if (ret < 0) {
++		log_err("Error: Failed to generate dfu_alt_info. (%d)\n", ret);
++		return;
 +	}
++	log_debug("Make dfu_alt_info: '%s'\n", buf);
 +
-+	ret = zynqmp_pm_is_function_supported(PM_IOCTL, IOCTL_READ_PGGS);
-+	if (ret) {
-+		ret = zynqmp_pm_is_function_supported(PM_IOCTL, IOCTL_READ_REG);
-+		if (ret) {
-+			printf("%s: IOCTL_READ_REG is not supported : %d\n"
-+				, __func__, ret);
-+			return 0;
-+		}
-+
-+		/* find node ID from the pggs3 offset */
-+		value = PM_REG_PGGS3 + value;
-+
-+		ret = xilinx_pm_request(PM_IOCTL, value,
-+					IOCTL_READ_REG, 0, 0, 0, 0,
-+					ret_payload);
-+		if (ret) {
-+			printf("%s: node 0x%x get pggs register failed\n",
-+			       __func__, value);
-+			return 0;
-+		}
-+	} else {
-+		ret = xilinx_pm_request(PM_IOCTL, PMC_GLOBAL_PGGS3_REG_NODE,
-+					IOCTL_READ_PGGS, value, 0, 0, 0,
-+					ret_payload);
-+		if (ret) {
-+			printf("%s: node 0x%x get pggs register failed\n",
-+			       __func__, PMC_GLOBAL_PGGS3_REG_NODE);
-+			return 0;
-+		}
-+	}
-+
-+	return ret_payload[1];
++	env_set("dfu_alt_info", buf);
 +}
- #endif
- 
- int zynqmp_pm_set_gem_config(u32 node, enum pm_gem_config_type config, u32 value)
-diff --git a/include/zynqmp_firmware.h b/include/zynqmp_firmware.h
-index f5e72625e53..0e545e3db1b 100644
---- a/include/zynqmp_firmware.h
-+++ b/include/zynqmp_firmware.h
-@@ -470,6 +470,7 @@ int zynqmp_pm_ufs_sram_csr_read(u32 *value);
- int zynqmp_pm_ufs_sram_csr_write(u32 *value);
- int zynqmp_pm_ufs_cal_reg(u32 *value);
- u32 zynqmp_pm_get_pmc_multi_boot_reg(void);
-+u32 zynqmp_pm_get_pmc_global_pggs_reg(u32 reg_addr);
- 
- /* Type of Config Object */
- #define PM_CONFIG_OBJECT_TYPE_BASE	0x1U
-@@ -534,4 +535,7 @@ extern smc_call_handler_t __data smc_call_handler;
- 
- #define PM_DEV_OSPI		(0x1822402aU)
- 
-+#define PM_REG_PGGS3	0x30004003
-+#define PMC_GLOBAL_PGGS3_REG_NODE	0x1824C005
-+
- #endif /* _ZYNQMP_FIRMWARE_H_ */
++#endif
 -- 
 2.34.1
 
