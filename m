@@ -4,83 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69AF4CD4F25
-	for <u-boot@archiver.kernel.org>; Fri, 15 May 2026 15:59:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34651CD343F
+	for <u-boot@archiver.kernel.org>; Fri, 15 May 2026 16:03:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E44EA846B5;
-	Fri, 15 May 2026 17:59:00 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A412F846B5;
+	Fri, 15 May 2026 18:03:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="UHOEhFk/";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="QB+tf9Wt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 79ECA846BE; Fri, 15 May 2026 17:58:59 +0200 (CEST)
-Received: from mail-ot1-x342.google.com (mail-ot1-x342.google.com
- [IPv6:2607:f8b0:4864:20::342])
+ id 18F45846B5; Fri, 15 May 2026 18:03:04 +0200 (CEST)
+Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
+ [IPv6:2607:f8b0:4864:20::32c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 43754846A5
- for <u-boot@lists.denx.de>; Fri, 15 May 2026 17:58:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 839FD846A5
+ for <u-boot@lists.denx.de>; Fri, 15 May 2026 18:03:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x342.google.com with SMTP id
- 46e09a7af769-7e568ab0bc5so366624a34.0
- for <u-boot@lists.denx.de>; Fri, 15 May 2026 08:58:56 -0700 (PDT)
+Received: by mail-ot1-x32c.google.com with SMTP id
+ 46e09a7af769-7dbe07d3ec3so5056942a34.0
+ for <u-boot@lists.denx.de>; Fri, 15 May 2026 09:03:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1778860735; x=1779465535; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1778860980; x=1779465780; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=psqtQdnLM0BNe6nDHAZHpgJqf/+7Db2xiH74jjdKuA4=;
- b=UHOEhFk/mmoy80P9asNNubXTLEYPYHDReFXmS9yWUAtv7Cc0dDr9DxibXupJE+oS2W
- mt4wvxcR9sNiBQsciqLVlWQN+dxGS3Hmpo0BEVZTiZ3u6UWD1zYH2lHgQvQo/PIYLUah
- ketQHTWlBof8gFg0CNOXVKtVghxrCZKRGDmys=
+ bh=NsfM3Bq/2KsjkTnPXYT6RC7YZlpw8X6IsRw017xUjsc=;
+ b=QB+tf9WttIqPdryKzRj1PGKLTmLvMSjlRcR6BFu6gYW4TFmEJ0Ple832TzanMO0RAQ
+ M88VMa/4O16UuAuKlIz5/WA5TdRiwm+bRcrId3KHdHNT5dd8WD0BsxtlYvJkYiYkxEhV
+ Gxiv5NJO45X3th5oIeNdrmG/RXOEHil1ZJ8hg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778860735; x=1779465535;
+ d=1e100.net; s=20251104; t=1778860980; x=1779465780;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=psqtQdnLM0BNe6nDHAZHpgJqf/+7Db2xiH74jjdKuA4=;
- b=mU3OrA/3Xh7Niw4TA+/Kb+0kUVKIQkKQPUdn3F4imHNhYkSALM5G6uyStjuJFlAgMQ
- v7LrQ43znM+IagavjDogWmXSfPglAjdhopXC0W2ul2tYbb+2jt8PfF6q/z+eb2y1GUKg
- mSygbPtE2oA30z+kN/MaxpOzsq07kQtFIP5R4RZGTye1NihdAtYYfEce4AACJTxeIEfW
- uqrPISl0Ib5E2MvGO422/9tdTnBsAu/V9fCecv3/4YB9d9fYaQ+DFMGwmzZqTJSZz99Z
- EYGaMnBQdZU/SPHHbdBDwGCLzfXI7R+EKqUR1h2j/NKwLlcPNBg4Oe3OHlmA9moAZl9R
- 8uhA==
-X-Gm-Message-State: AOJu0Yz2l3yU4FxFgLEvq5QwEO2J61utYPm+3qCZwXPAI0Xd/lnqD+C0
- 8NI/s+YBjxFrCszCfrY4Awa7DKg9ZzbqiTHWOT27vbQSifDlP3Q8Ce14glLbqlZ8Z05OLeRR9x1
- dK88MdM6B5LP/tbQ=
-X-Gm-Gg: Acq92OHxaBcRu322H53jkz/5u1NrHb/lwgFOLbV8xAJRje3e8V4JOdrrjlGBfxuZAxc
- wst5l4J2QvWV8pxOMNvYMN4ybVUG68zqd7hJB1tY1PMujEwyEG1PLH6+Cp+t1IEc1D6Br/O23Ki
- wJqFPnbeluwsznfIwMFA0pccx0hqgcXMYChfZA+G8EJ6qRS080umg7SDAaeyHVU6QEhP6Mgavc1
- nhEutYysKN1ll6pPsCnCjK67bfPuF3gFAPz0Mqi1C5PIACf//EvSON5oQm1rlpxhV6wdAdOKtEG
- 7w3Hk5U5EDX0Ei7AFeC7De6YuskJULzdozT8fXmGkyL5Wx1E4TQ3aObHdVpzaeyctvy4Aw6SLHe
- taXVf08nvq27eLQg37EetX+JGZ9pWcyHhU2baS1JzwWWTK7uQt0LC+v0kAP1ai7a5w/Choq1X1k
- hDqNmWEprz7m+OVnBrw0NETl+JPX0VORfj5WMEigpPklCfC5TsBXQMFxF50v9FppA1zms0n87o9
- hPpMpXl0ZeDEdmvL2CI2sHHVwRwcaFpLGIf/5KUJ1gBsZWr8YTVSEof7q109Q==
-X-Received: by 2002:a05:6830:90b:b0:7dc:1bcd:43be with SMTP id
- 46e09a7af769-7e49a9379f2mr2739247a34.5.1778860734956; 
- Fri, 15 May 2026 08:58:54 -0700 (PDT)
+ bh=NsfM3Bq/2KsjkTnPXYT6RC7YZlpw8X6IsRw017xUjsc=;
+ b=SAXn4T0Z2H73weZx94CFUmgdBs4wJNuFgV69GDKBAvsuZefVCUdKsFIE+/oem7jaFh
+ ajCgnABeKo/Ggne59nkKKsehONsdUC50qPAcyqExOz9lVmQdtALJ0354WWBseKS/aX0l
+ UfDai0Qf+z8g1pIdxkE8xTiFjVzJ6ULAoaRw3Y9kF/lKUgnP2dU5Nmbb0n8ryFKwaEa/
+ srshwelacZ6CjCCgiS+nXXdDb+EKDy1C1uZaHqxBPCvLtM2mxgL5lx5Ypk2XJqTV8TGn
+ H/mtOsK4iQCLovd3GV/+AnlQuZ6dO/3t5Q83AkPSWwumdz9ILvYCsrrtqB5BiFUwtu9l
+ zJwg==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ9cOTGxQaBn1RjoZPX6Ghc5gfIAHGsmCNLwCnQdRjhlVrnAnI6Bu29xo8SnaSCwMlo/N76P3lU=@lists.denx.de
+X-Gm-Message-State: AOJu0YznFcNEjBsKo9Tjgzftj+rqbS00/LigXTGIOnPxgHEBRgFMBPqt
+ /lAT1coi52vmupKBm3scBUXVgBG8PMGjNCE3QbyzrHp0H+5IVvqAFpYS3rBO6KayAWI=
+X-Gm-Gg: Acq92OHfyUQsaYpLm/NAObCgedI56oEor27dtJyBtssMh5Lj9sQ2AanXjnJzi7dPNtT
+ PW93rWjNS+bbhOjCIIK7QIBhPtUfBpQMdpUC0m9j2vnVuoVbpo7/keaZ7b3JePlx5zMV/hziGDf
+ 8ZvdN0LgWUKzfu0KpQM3OKJSU0cOWejUbC/kHJUdGAT4Tw8hrdJ3epLUWOk25SISwhPQD7AMwGE
+ 1Hlw7HyPNuwOJlnz6ujJh1usnu2yn0X4Rdkc8F181igAHnY+ZxKs1pW8WWs817kJ5IUvXSH8aio
+ ofPIIk0O/a2432yIz8wje0Y32fMNWX0qgCR54id8Xt/zHP8WlzHqzo6ZKHDUksdnGUS6SMFVZyq
+ tAOQYnS0mwqVJ0L7jQA9IezZ/vuJ5r/bpTnHEEtcrbJS5u816BYMm+O06Vwr5jroolYjUIVzbPV
+ JyPmyL+N2AHB3daq+ZQr72kjka1TSQjX8yGh5pAXkqUAaBCO1BMvZs6DkdA2tKitbfm5Onk0OFY
+ 0dALaTkEDlBH4OWPSz+mkDaC95/HA1U9VOaq+6yLtYooSoY1mJItaWseaY2ww==
+X-Received: by 2002:a05:6830:d04:b0:7d9:f50f:968a with SMTP id
+ 46e09a7af769-7e4ea03b63amr2844420a34.5.1778860979903; 
+ Fri, 15 May 2026 09:02:59 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
  [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7e55b7cce95sm1745716a34.6.2026.05.15.08.58.53
+ 46e09a7af769-7e55bc4b0adsm1606004a34.25.2026.05.15.09.02.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 15 May 2026 08:58:54 -0700 (PDT)
-Date: Fri, 15 May 2026 09:58:52 -0600
+ Fri, 15 May 2026 09:02:59 -0700 (PDT)
+Date: Fri, 15 May 2026 10:02:56 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, Eddie Kovsky <ekovsky@redhat.com>
-Subject: Re: [PATCH] Azure CI: Drop Windows host tools builds
-Message-ID: <20260515155852.GE1858239@bill-the-cat>
-References: <20260515145942.133279-1-trini@konsulko.com>
- <CAFLszThwpS8ULztWURncyZa1hCGbam9Fw02FSxQDgqMVZKkeuA@mail.gmail.com>
+To: Simon Glass <sjg@chromium.org>, nm@ti.com
+Cc: Wadim Egorov <w.egorov@phytec.de>, ilias.apalodimas@linaro.org,
+ marek.vasut+renesas@mailbox.org, sughosh.ganu@arm.com,
+ u-boot@lists.denx.de, upstream@lists.phytec.de
+Subject: Re: [PATCH] Makefile: binman: Search board directory before srctree
+Message-ID: <20260515160256.GF1858239@bill-the-cat>
+References: <20260515054327.1033466-1-w.egorov@phytec.de>
+ <20260515145400.GB1858239@bill-the-cat>
+ <CAFLszTid-e+NWrFxoorfrUT23_mztUZP8FRbmT9FJ55M8A+FXA@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="puwbK/O2MQRD3HK7"
+ protocol="application/pgp-signature"; boundary="N1PJXNfiJfEe/Kyx"
 Content-Disposition: inline
-In-Reply-To: <CAFLszThwpS8ULztWURncyZa1hCGbam9Fw02FSxQDgqMVZKkeuA@mail.gmail.com>
+In-Reply-To: <CAFLszTid-e+NWrFxoorfrUT23_mztUZP8FRbmT9FJ55M8A+FXA@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -99,106 +103,78 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---puwbK/O2MQRD3HK7
-Content-Type: text/plain; charset=utf-8
+--N1PJXNfiJfEe/Kyx
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, May 15, 2026 at 09:06:01AM -0600, Simon Glass wrote:
+On Fri, May 15, 2026 at 09:35:10AM -0600, Simon Glass wrote:
 > Hi Tom,
 >=20
-> On Fri, 15 May 2026 at 08:59, Tom Rini <trini@konsulko.com> wrote:
+> On Fri, 15 May 2026 at 08:54, Tom Rini <trini@konsulko.com> wrote:
 > >
-> > In preparation for being able to support more recent OpenSSL versions,
-> > we need to add support for the OpenSSL Provider API. This in turn isn't
-> > something that MSYS has all of the required packages to support. Given a
-> > lack of user feedback that these tools are still used in this manner,
-> > remove Windows host tool builds from CI.
+> > On Fri, May 15, 2026 at 07:43:27AM +0200, Wadim Egorov wrote:
 > >
-> > Link: https://lore.kernel.org/u-boot/20260429180247.83091-1-ekovsky@red=
-hat.com/
-> > Signed-off-by: Tom Rini <trini@konsulko.com>
-> > ---
-> > This is intended for the next branch, and to allow for a more visible
-> > part of the removal to be made now. This means v2026.07 will be the last
-> > version to support MSYS for host tool builds.
-> > ---
-> >  .azure-pipelines.yml | 28 ----------------------------
-> >  1 file changed, 28 deletions(-)
+> > > A file like rm-cfg.yaml accidentally left in the source tree root
+> > > shadows the board-specific copy. binman builds the wrong YAML, the
+> > > resulting rm-cfg.bin may match a different SoC, and we end up with
+> > > the following error:
+> > >
+> > >   k3_system_controller sysctrler: k3_sysctrler_start:
+> > >       Boot Notification response failed. ret =3D -110
+> > >
+> > > Move the board directory ahead of the srctree root so that the
+> > > most-specific match wins.
+> > >
+> > > Signed-off-by: Wadim Egorov <w.egorov@phytec.de>
+> > > ---
+> > >  Makefile | 2 +-
+> > >  1 file changed, 1 insertion(+), 1 deletion(-)
+> > >
+> > > diff --git a/Makefile b/Makefile
+> > > index 552328f9f2c..1ec29dfe0be 100644
+> > > --- a/Makefile
+> > > +++ b/Makefile
+> > > @@ -1682,7 +1682,7 @@ cmd_binman =3D $(srctree)/tools/binman/binman $=
+(if $(BINMAN_DEBUG),-D) \
+> > >               build -u -d $(binman_dtb) -O . -m \
+> > >               --allow-missing --fake-ext-blobs \
+> > >               $(if $(BINMAN_ALLOW_MISSING),--ignore-missing) \
+> > > -             -I . -I $(srctree) -I $(srctree)/board/$(BOARDDIR) \
+> > > +             -I . -I $(srctree)/board/$(BOARDDIR) -I $(srctree) \
+> > >               $(foreach f,$(of_list_dirs),-I $(f)) -a of-list=3D$(of_=
+list) \
+> > >               $(foreach f,$(BINMAN_INDIRS),-I $(f)) \
+> > >               -a atf-bl1-path=3D${BL1} \
 > >
-> > diff --git a/.azure-pipelines.yml b/.azure-pipelines.yml
-> > index 4417ef4e5a50..b2a59bafa83d 100644
-> > --- a/.azure-pipelines.yml
-> > +++ b/.azure-pipelines.yml
-> > @@ -1,5 +1,4 @@
-> >  variables:
-> > -  windows_vm: windows-2022
-> >    ubuntu_vm: ubuntu-24.04
-> >    macos_vm: macOS-14
-> >    ci_runner_image: trini/u-boot-gitlab-ci-runner:noble-20251013-23Jan2=
-026
-> > @@ -44,33 +43,6 @@ variables:
-> >  stages:
-> >  - stage: testsuites
-> >    jobs:
-> > -  - job: tools_only_windows
-> > -    displayName: 'Ensure host tools build for Windows'
-> > -    pool:
-> > -      vmImage: $(windows_vm)
-> > -    steps:
-> > -      - powershell: |
-> > -          (New-Object Net.WebClient).DownloadFile("https://github.com/=
-msys2/msys2-installer/releases/download/2021-06-04/msys2-base-x86_64-202106=
-04.sfx.exe", "sfx.exe")
-> > -        displayName: 'Install MSYS2'
-> > -      - script: |
-> > -          sfx.exe -y -o%CD:~0,2%\
-> > -          %CD:~0,2%\msys64\usr\bin\bash -lc " "
-> > -          %CD:~0,2%\msys64\usr\bin\bash -lc "pacman --noconfirm -Syuu"
-> > -          %CD:~0,2%\msys64\usr\bin\bash -lc "pacman --noconfirm -Syuu"
-> > -        displayName: 'Update MSYS2'
-> > -      - script: |
-> > -          %CD:~0,2%\msys64\usr\bin\bash -lc "pacman --noconfirm --need=
-ed -Sy make gcc bison flex diffutils openssl-devel libgnutls-devel libutil-=
-linux-devel"
-> > -        displayName: 'Install Toolchain'
-> > -      - script: |
-> > -          echo make tools-only_defconfig tools-only > build-tools.sh
-> > -          %CD:~0,2%\msys64\usr\bin\bash -lc "bash build-tools.sh"
-> > -        displayName: 'Build Host Tools'
-> > -        env:
-> > -          # Tell MSYS2 we need a POSIX emulation layer
-> > -          MSYSTEM: MSYS
-> > -          # Tell MSYS2 not to =E2=80=98cd=E2=80=99 our startup directo=
-ry to HOME
-> > -          CHERE_INVOKING: yes
-> > -
-> >    - job: tools_only_macOS
-> >      displayName: 'Ensure host tools build for macOS X'
-> >      pool:
-> > --
-> > 2.43.0
-> >
+> > Why do we need to look in $(srctree) itself?
 >=20
-> Reviewed-by: Simon Glass <sjg@chromium.org>
+> See for example:
 >=20
-> How should we document this use of WSL to run the tools on Windows?
+> arch/arm/dts/k3-j721e-binman.dtsi:308:  private-key =3D
+> "arch/arm/mach-k3/keys/custMpk.pem";
 
-I suppose the bit about WSL that many of the TI platforms have
-copy/pasted could be moved up to a more generic location.
+That's not great, I'm sorry I missed it at the time. I wonder how easy
+replacing that key is with a non-dummy key. Hopefully it's done in a way
+that doesn't encourage checking private keys in to repositories..
+
+> Also, people sometimes put files in the source tree, e.g. BL31 images,
+> in the hope that they will be found.
+
+That's also a bad practice and what BINMAN_INDIRS is for.
 
 --=20
 Tom
 
---puwbK/O2MQRD3HK7
+--N1PJXNfiJfEe/Kyx
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCagdCvAAKCRAr4qD1Cr/k
-CoaoAP9quRJhcgYgfNKJK9IqqadxTSu8cbWxnlBaJJxjunoyRgD+PghF78LfekFc
-w8796dTK82yhV5wsYNvtk8Es2FsEYAQ=
-=zVOB
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCagdDsAAKCRAr4qD1Cr/k
+CjW4AQD5mtHY+efAd0OWrGXEph6agrCR170b/pJATNGb7hqLZQD/bASaOwE6k1fr
+dqK2yu/uld6S0//owAfL9u4gZ9QAEwI=
+=T3AF
 -----END PGP SIGNATURE-----
 
---puwbK/O2MQRD3HK7--
+--N1PJXNfiJfEe/Kyx--
