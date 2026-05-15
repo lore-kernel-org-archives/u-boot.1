@@ -4,93 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2144CD343F
-	for <u-boot@archiver.kernel.org>; Fri, 15 May 2026 20:33:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FE1ECD4F3C
+	for <u-boot@archiver.kernel.org>; Fri, 15 May 2026 20:33:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 36A9184713;
-	Fri, 15 May 2026 22:33:30 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 732A68481F;
+	Fri, 15 May 2026 22:33:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Pscyj69R";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="aL15n6vL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D1039847FD; Fri, 15 May 2026 22:33:28 +0200 (CEST)
-Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
- [IPv6:2607:f8b0:4864:20::32c])
+ id B625784694; Fri, 15 May 2026 22:33:33 +0200 (CEST)
+Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
+ [IPv6:2607:f8b0:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8B4C784694
- for <u-boot@lists.denx.de>; Fri, 15 May 2026 22:33:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8C29A84812
+ for <u-boot@lists.denx.de>; Fri, 15 May 2026 22:33:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ot1-x32c.google.com with SMTP id
- 46e09a7af769-7de44ed7a11so321817a34.1
- for <u-boot@lists.denx.de>; Fri, 15 May 2026 13:33:26 -0700 (PDT)
+Received: by mail-ot1-x32f.google.com with SMTP id
+ 46e09a7af769-7dea1272943so178154a34.0
+ for <u-boot@lists.denx.de>; Fri, 15 May 2026 13:33:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1778877205; x=1779482005; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=hgc6mwUg9KUOZtRHpo/Iekle1IiIF5b1Zv2ygKEIQiM=;
- b=Pscyj69R7ZVvNUgHlmCcPBa7PBABmk0Lfck0H7FOZSu1e90okN/ET8oUhmg0sgS84l
- 1Fft4ywEH3haZV47dt31hRiiAgTUn63Qe3T1eeVUozqY57feBUWmFcDSutqjyf2Bv+m0
- PnN4znbe8sMvbNR1Mljhr/qozH90effN0nAxE=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778877205; x=1779482005;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=chromium.org; s=google; t=1778877210; x=1779482010; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=hgc6mwUg9KUOZtRHpo/Iekle1IiIF5b1Zv2ygKEIQiM=;
- b=pqK7RCGYStbjvzkeg0kkfF7YpdgkRTYEv8xWrUC5uLkTP4t2rkDE3XV4N2Ef2z1hPC
- JRBRa1XZ3bHMnXudClIR4tLlFI45BAYVx1vT8a4k6BffQD0zJhAQKtnt6OpiK8iQH0UQ
- IBSJa/363uFM03QxTsyrvC7AC/AGvaRx+8cwMO0SxxGEBGFSzPxRrEAkIX7/blMYm6uB
- i/z4D2anP5GgNWtk1jCsmmwWvTXJ09RIYieTjQvDeGITi/7lk7rUYvXkHIou2TZ6p1WX
- S95NUyX6sSxqYuLPHVWkc/MpugtLoRb3E6t6n3nzl3OfFEziOcdTGlm2RRhjpwnJuxr9
- JRsQ==
-X-Gm-Message-State: AOJu0YxQNuZchD3xZoulU+V7QDGZZsqAvmQUPd7u7ikfkeXeyY/GgZGA
- +E3RZo+rfCpcpCJIXhDqXqXDWh9s/PG6nfiNht1WPPuZ0r+M+rnsEKLjrUKW0J/aIeuuUWkKdms
- GywbuRg==
-X-Gm-Gg: Acq92OE+lVPP2dfSkLB0yNYDuWoxSVa2wt9tLlIseE/l1COE7ts3bGgXhUZQ7pVv5kp
- IlM6L181IR5KG4Ua1x9XwRJuYxXOlqImEsdV9DQzrbRpwOaw0J4/i3shKZoUENC6lb57ZEO77+s
- pO2H1nnIwbSWO2X7B9t/jcKBeJ3X/O+wcRnf6z5vmfkAeeI65/czOILOTOU+AumfI+VL9utpGSt
- Z/R5OAMhfWMSwHSdFamxVxN+xkIQ/Wdvk+csB2g2Y/Wt5wCgY6oBhIJzKe4886n9tQA02gK2h6k
- Bsqld/QnFSAkYcPcuW5KHwBIh6InZmjWSe4qu2Bcxp0yGKys+Mdd4GeXbbqM4slHfReK0M5a8Sx
- m/K+/1t1GPAjnqBGjbsiaoqdMx3J4Xguqnon3kbegqqtRyUzfxScCpffifernIksg/JaX3NXHlp
- vI+CDw2ZeTx7KemR/0UQ==
-X-Received: by 2002:a05:6830:3697:b0:7dc:c4ae:a66f with SMTP id
- 46e09a7af769-7e4ea19ab40mr3935083a34.7.1778877204683; 
- Fri, 15 May 2026 13:33:24 -0700 (PDT)
+ bh=NkggH63DXB/H8Omit3u2Gx5HjXEYQf3dPQMSpLjEuC8=;
+ b=aL15n6vL7SgWh1ZK+JjYNG5xIneVJen4kJpnkec3R3pg1rofVmfjY0amGAkAkPvVG8
+ RXVIrpSPVWisCaY9mQS6mqnsuq/FZatjMb0/fSQSoncoiHQaGL2o8m1+iFZ5QAARTHdt
+ 7w3kzhwtHRIzyH63No6PiwnoThqc71y+pxs6g=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1778877210; x=1779482010;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=NkggH63DXB/H8Omit3u2Gx5HjXEYQf3dPQMSpLjEuC8=;
+ b=af/TzEGcZ0+x/D7DezWaHl4DkjEkUhXvJQM1IN7T3KITwa7gT1ywGJRo0oV47MLisQ
+ VmJKnCrZ+9gxhz2Ud+JObPuERlx5jcICSiuKwA7SrnjzgF51eRtx4sf1SnE8NGgm9B2N
+ 1/wcY89J7/yVq6ZcNohLKccB5mEwm80SnoKx4IJTqyxGjNtSTTjTCihKSvtrY2F/h3Jx
+ IbNEOqJ8NPvtT26N5/mAobauaWaqbfBV3P8aAGP2CR21tD9JE8CNvDtIsScbLQ0vLW3x
+ 2Tjat4DmyOGcnqXm7EMRbBQhZBW69Ha3TNTPW6A+JZ6h/llJc1BQ5ZekhqNRlBAhFNzU
+ FmpQ==
+X-Gm-Message-State: AOJu0Yzb6vameUdNUt2PaNTZZRBH6eK/P0qb27OE4NM2eaN6w0KPLhwv
+ SeEFeQQ9vH6Nixitsl5bbv97E8eMYhshDny0inzcxW3GIDoyG1SF8GGELOCqY7TNzNWbiAgMEzp
+ 5exgB8A==
+X-Gm-Gg: Acq92OH8+vmYY8yUDM6GSDNNqW+DbJr8ElpCm4wIzTOVj0ByJDizgt9W25Rasg2TVSo
+ gjP0DgNMFcm7zgDX04FgaX8eXKKqX+XvyiRBxwvKHI8JQ4zvs8Ljufb6aWDEXeTv95gP1rIHIEP
+ qTQueB6CoKDmaXjfTXf1LPqrHFdi/rHAP0l+Vlxykp1jkyYDcYdaG62v+SwE1YfCv9SyboqCk+M
+ DDTrSP7GR43E6mnqCEcLiUro/RxRayq+L5cI4IYpVfRwIRy6dBRCnc3/xK0GJY16WGgtDBfSRHj
+ pD5EO955NTbD9hgqbjXorZQrWBawQjd55bvgouAu8nw0YFh8qhOioZ35k1paMnogiMcKPzjw1JI
+ dDcmhAXUVJKTF42HwzmwwQZzKU9AhXGbxF2gUIVawDS+rTTu2a1/m0dyADYUiqR7LZMmnzboLsX
+ EekHQ/VlL7Ew7srLdc1nf86nr4f962
+X-Received: by 2002:a05:6830:6689:b0:7dc:d0e3:5bdd with SMTP id
+ 46e09a7af769-7e4f2ba16d0mr3703073a34.19.1778877209759; 
+ Fri, 15 May 2026 13:33:29 -0700 (PDT)
 Received: from chromium.org ([174.51.25.52]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7e55b95b82fsm2414906a34.12.2026.05.15.13.33.22
+ 46e09a7af769-7e55b95b82fsm2414906a34.12.2026.05.15.13.33.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 15 May 2026 13:33:23 -0700 (PDT)
+ Fri, 15 May 2026 13:33:29 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: u-boot@lists.denx.de
 Cc: Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- =?UTF-8?q?Beno=C3=AEt=20Th=C3=A9baudeau?= <benoit.thebaudeau@advansee.com>,
- Casey Connolly <casey.connolly@linaro.org>,
- Daniel Palmer <daniel@thingy.jp>, Heiko Schocher <hs@nabladev.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Hugo Villeneuve <hvilleneuve@dimonoff.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@arm.com>,
- Joe Hershberger <joe.hershberger@ni.com>,
- "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Michal Simek <michal.simek@amd.com>,
- Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
- Patrice Chotard <patrice.chotard@foss.st.com>, Peng Fan <peng.fan@nxp.com>,
- Peter Robinson <pbrobinson@gmail.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>,
- Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>,
- Yao Zi <me@ziyao.cc>
-Subject: [RFC PATCH 00/11] Tidy command option parsing and use it a bit
-Date: Fri, 15 May 2026 14:32:51 -0600
-Message-ID: <20260515203311.2555651-1-sjg@chromium.org>
+ Casey Connolly <casey.connolly@linaro.org>, Tom Rini <trini@konsulko.com>
+Subject: [RFC PATCH 01/11] lib: string: Add strlower()
+Date: Fri, 15 May 2026 14:32:52 -0600
+Message-ID: <20260515203311.2555651-2-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260515203311.2555651-1-sjg@chromium.org>
+References: <20260515203311.2555651-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -109,103 +94,100 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-We have had getopt() for over five years but it is not much used. It is
-much easier to understand arg-parsing using getopt() and it avoids
-common errors. As the named maintainer I decided to look at how to make
-more use of it.
+Add a helper that lower-cases an ASCII string in place. It returns
+the input pointer so calls can be chained:
 
-So this series explores the impact of converting a few commands to use
-getopt() instead of ad-hoc parsing. It updates getopt() to handle flags
-anywhere in the cmdline and provides a few helpers to reduce
-boilerplate.
+    do_thing(strlower(name));
 
-The chosen commands are:
+A new test in test/lib/string.c covers the basic cases.
 
-- echo: very simple with no flags
-- hash: fairly simple with just one flag
-- env grep/export/import - fuller examples
-
-The series also adds a recommendation to use getopt() for new commands.
-
-To try to reduce the code-size increase, a lower-case function is added
-and called from a few places. The difference is fairly marginal.
-
-Overall, the result is not pretty (see below) with about a 1.1K size
-increase on arm64:
-
-   01: Prepare v2026.07-rc2
-      aarch64:  w+   firefly-rk3399
-   02: lib: string: Add strlower()
-      aarch64: (for 1/1 boards) all +40.0 rodata +40.0 spl/u-boot-spl:all
-         +20.0 spl/u-boot-spl:rodata +20.0 tpl/u-boot-tpl:all +20.0
-         tpl/u-boot-tpl:rodata +20.0
-   03: cmd: ini: Use strlower() to normalise case
-   04: fs: fat: Use strlower() to normalise case
-      aarch64: (for 1/1 boards) all -24.0 text -24.0
-   05: boot: pxe_utils: Use strlower() in get_string()
-      aarch64: (for 1/1 boards) all -56.0 text -56.0
-   06: doc: commands: Recommend getopt() for option parsing
-   07: lib: getopt: Permute by default with inline reorder
-   08: lib: getopt: Add getopt_pop() helper
-   09: cmd: echo: Use getopt() with '+' prefix for option parsing
-      aarch64: (for 1/1 boards) all +1235.0 rodata +175.0 text +1060.0
-   10: cmd: hash: Use getopt() for option parsing
-   11: cmd: nvedit: Use getopt() in env grep
-   12: cmd: nvedit: Use getopt() in env export and env import
-      aarch64: (for 1/1 boards) all +176.0 rodata +12.0 text +164.0
-
-Ideally we would use getopt() everywhere, but at least with these
-examples it does seem to produce at least a small increase in each case,
-even ignoring the 'hit' of about 1K for the function itself.
-
-One option would be to make the getopt_init_state() in command.c and
-pass struct getopt_state to the commands. This would reduce code size at
-each size, but obviously requires a different command signature, unless
-a global is used.
-
-Another small improvement could be to include a getopt function to
-return the next arg as hex.
-
-Ideas are welcome!
-
-
-Simon Glass (11):
-  lib: string: Add strlower()
-  cmd: ini: Use strlower() to normalise case
-  fs: fat: Use strlower() to normalise case
-  boot: pxe_utils: Use strlower() in get_string()
-  lib: getopt: Permute by default with inline reorder
-  lib: getopt: Add getopt_pop() helper
-  cmd: echo: Use getopt() with '+' prefix for option parsing
-  cmd: hash: Use getopt() for option parsing
-  cmd: nvedit: Use getopt() in env grep
-  cmd: nvedit: Use getopt() in env export and env import
-  doc: commands: Recommend getopt() for option parsing
-
- boot/pxe_utils.c         |  12 +--
- cmd/Kconfig              |   5 +
- cmd/bdinfo.c             |   4 +-
- cmd/echo.c               |  23 ++--
- cmd/hash.c               |  37 ++++---
- cmd/ini.c                |  21 ++--
- cmd/log.c                |  12 +--
- cmd/nvedit.c             | 219 +++++++++++++++++++--------------------
- doc/develop/commands.rst |  62 +++++++++++
- fs/fat/fat.c             |  20 +---
- fs/fat/fat_write.c       |   2 +-
- include/getopt.h         | 169 +++++++++++++++++-------------
- include/linux/string.h   |  12 +++
- lib/getopt.c             |  67 +++++++++---
- lib/string.c             |  10 ++
- test/cmd/test_echo.c     |  10 ++
- test/lib/getopt.c        |   6 +-
- test/lib/string.c        |  27 +++++
- 18 files changed, 441 insertions(+), 277 deletions(-)
-
+Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
-base-commit: 215496fec59b3fa09256b4fb62f92af46e2ec7f9
-branch: clid
 
+ include/linux/string.h | 12 ++++++++++++
+ lib/string.c           | 10 ++++++++++
+ test/lib/string.c      | 27 +++++++++++++++++++++++++++
+ 3 files changed, 49 insertions(+)
+
+diff --git a/include/linux/string.h b/include/linux/string.h
+index a8a6cf4af50..15efe0ff5dd 100644
+--- a/include/linux/string.h
++++ b/include/linux/string.h
+@@ -49,6 +49,18 @@ int strcasecmp(const char *s1, const char *s2);
+ #ifndef __HAVE_ARCH_STRNCASECMP
+ extern int strncasecmp(const char *s1, const char *s2, __kernel_size_t len);
+ #endif
++
++/**
++ * strlower() - Lower-case an ASCII string in place
++ * @s: The string to convert
++ *
++ * Walks @s and replaces each character with its lower-case equivalent.
++ * Returns @s so the call can be chained, e.g. ``foo(strlower(buf))``.
++ *
++ * Return: @s.
++ */
++char *strlower(char *s);
++
+ #ifndef __HAVE_ARCH_STRCHR
+ extern char * strchr(const char *,int);
+ #endif
+diff --git a/lib/string.c b/lib/string.c
+index 302efe048b0..8464366dac9 100644
+--- a/lib/string.c
++++ b/lib/string.c
+@@ -65,6 +65,16 @@ int strcasecmp(const char *s1, const char *s2)
+ 	return strncasecmp(s1, s2, -1U);
+ }
+ 
++char *strlower(char *s)
++{
++	char *p;
++
++	for (p = s; *p; p++)
++		*p = tolower(*p);
++
++	return s;
++}
++
+ char * ___strtok;
+ 
+ #ifndef __HAVE_ARCH_STRCPY
+diff --git a/test/lib/string.c b/test/lib/string.c
+index f56c2e4c946..598be1101a1 100644
+--- a/test/lib/string.c
++++ b/test/lib/string.c
+@@ -298,3 +298,30 @@ static int lib_strim(struct unit_test_state *uts)
+ 	return 0;
+ }
+ LIB_TEST(lib_strim, 0);
++
++static int lib_strlower(struct unit_test_state *uts)
++{
++	char buf[32];
++	char *p;
++
++	/* Mixed case is fully lowered, returns @s */
++	strcpy(buf, "SHA256");
++	p = strlower(buf);
++	ut_asserteq_ptr(p, buf);
++	ut_asserteq_str("sha256", buf);
++
++	/* Already lower-case is unchanged */
++	strcpy(buf, "abc");
++	ut_asserteq_str("abc", strlower(buf));
++
++	/* Non-letters and digits pass through */
++	strcpy(buf, "Hello, World! 1234");
++	ut_asserteq_str("hello, world! 1234", strlower(buf));
++
++	/* Empty string */
++	strcpy(buf, "");
++	ut_asserteq_str("", strlower(buf));
++
++	return 0;
++}
++LIB_TEST(lib_strlower, 0);
 -- 
 2.43.0
 
