@@ -4,84 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E88A9CD4F3C
-	for <u-boot@archiver.kernel.org>; Fri, 15 May 2026 18:14:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1DE09CD343F
+	for <u-boot@archiver.kernel.org>; Fri, 15 May 2026 18:14:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 36F0A8483C;
-	Fri, 15 May 2026 20:14:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 7300684832;
+	Fri, 15 May 2026 20:14:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="syzWtbbD";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="kVP/nfF9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EDAE38483A; Fri, 15 May 2026 20:14:24 +0200 (CEST)
-Received: from mail-oa1-x30.google.com (mail-oa1-x30.google.com
- [IPv6:2001:4860:4864:20::30])
+ id 31DC9846EB; Fri, 15 May 2026 20:14:40 +0200 (CEST)
+Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
+ [IPv6:2a00:1450:4864:20::631])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 89BF7846EB
- for <u-boot@lists.denx.de>; Fri, 15 May 2026 20:14:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 070A88482F
+ for <u-boot@lists.denx.de>; Fri, 15 May 2026 20:14:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x30.google.com with SMTP id
- 586e51a60fabf-439acb393f7so144735fac.1
- for <u-boot@lists.denx.de>; Fri, 15 May 2026 11:14:22 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x631.google.com with SMTP id
+ a640c23a62f3a-bd0fc4c336eso8333366b.3
+ for <u-boot@lists.denx.de>; Fri, 15 May 2026 11:14:38 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1778868877; cv=none;
+ d=google.com; s=arc-20240605;
+ b=j8u39sHu06KD6BNgBD79qL+AtUPvNbY6FsfM0v/vzztRqTVJJn8CWvN3O5zqxy21s7
+ iuY/hKkAHkL6m2rFBQO8AWzLzqx5KutHVWTz35rJ9+wVsC5HJeR3iIUGFpWdYTaut40Q
+ RL4+DP+36NpBMMDI5v9p9HOuMnazpXN8/BBnvn7T1Jer8L1HWUBdtqaqZWKX9V+A0UbM
+ SDiapIGxnyjFoUne4dwcsokH8hA16Ni+6jK3Vfl4l5Y+QYlu/Oz8LuksJnkpw3Soog13
+ NI/l63D4m2YrUbThT1+FbUEk2Jw93I3O9mw1/qpW7Kj04IAQy4kpUATwZGZFvt4uhZI/
+ rMaQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=sWrnUVV/etlaBf2oDSoCs5K35pfDloP8A/yKIGng1ws=;
+ fh=sKlYf1RYFkU7W57k8Hb0RqRH+ropi6os4Aw4ruwQ2Xw=;
+ b=VgkdYMZodQCd92G7ZYj4Cwj7Hor2JzI/PPnI4Q0EyKPSG1Wo00B58iLBCy2pWahYEu
+ 3kouKi12OtA/EYSA6/U4C/RBz7woXw9X63B4QjYyVEiTkl7Jg1sPGqoCa3Xk9dBh2jjH
+ Pnam2bB6wg95SI5D6t6hx1OW8QUS/yCU/2FOIG9BmnZ2qm0+ng2JuG8c+Itb8MgQ07c9
+ XX2OvZvQcpW2gL+CxNWEHN8UnpA6xOrO/Ks4FZl/j7y/LC2xpKQ9hrSX7TbFS7+tXl51
+ 2jWbvvdiXLnX8CEv/h/ymkUJJTuEslsLo9obVYjVc3/KLmNOyMQszd4NhJR6cNOIkx1K
+ ndYg==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1778868861; x=1779473661; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=yyOZXDEuGnFgW9ho/WY8BWKuNqYpsK8eGfn0HQbUYfM=;
- b=syzWtbbDNry5X7wOPy9qCZ8Q8VCURggUUKwO9qtv6vWdEtS/pKndYw49buTrhkKaKp
- ukPfRrL4kEHzysE5dEg7k12d+8TR3NlBHB95LlsNkXIiTuEQnw80tZ/U3fJ+NPxFZRKe
- ANgtDu58WI2/+knYlJ++XQvNcOwYfOQjxSm4Y=
+ d=chromium.org; s=google; t=1778868877; x=1779473677; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=sWrnUVV/etlaBf2oDSoCs5K35pfDloP8A/yKIGng1ws=;
+ b=kVP/nfF9GTuwlGalOfgKHQxOk5y6IYnkIvJYGFk/D9On5oBNL52kwONNHFQHbZ7LoX
+ lFR/rxmw9J5PdnwOdVpqbIg7cM/qd0S/kK1OiA9rc/fg5nzBhMiNi0vt99aC0BLppROe
+ kJxLsXxb/AvgzblOJOqNSIFsl3/bqtuWizQ5A=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778868861; x=1779473661;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=yyOZXDEuGnFgW9ho/WY8BWKuNqYpsK8eGfn0HQbUYfM=;
- b=l58Eu3Lfz9fG2Kgz6+cPQ4+iC5W2GZlm8MfwzEohJAgde2PvDC/HPLl+nf5oC2wjWP
- AzFooTB6HHQS5KgUkPq7Tb3ZojPsBOSizCPrlBXUYosl800S4CA09oDodpXcjiXekDBh
- KHOxh6Z7IKKkNvm496Stjhst0lqgGgBGyKfi9BP853VNbDnXoXrkWEFs2yiHgM9wkAqU
- SAp4OwXYLfTHx4OUEuPjSzxhIREjWOe8ABWCWJ27X4gK1PLZkj7YsHFuEtfl6mhiEuMO
- M7qLTctWbPZPKKhQz55ofsKh8rHm1mMACjAkUeiPFwhw7+ya8jBKtD6Yx4J64e7f8/Fi
- D5Zg==
-X-Gm-Message-State: AOJu0YwFvYNgBbH/fd2cbWIklQNeFFKbX/KYGiIZP7pxS/vBRa6KJ64E
- Bei1yMRYeMHRlVF+epPnjJ4bx5wnTn+HahSOpeN1dMLeOIKevOwWByt/eupuywpgxh4=
-X-Gm-Gg: Acq92OFn7/c0VtmgE1lz7DhJWbYuN1PayQfBH2YO9fHmiS5bLc8YrUOBDsIin8jH3J1
- BSHxwHHhUcNmTHuG3nXJ7wGy/zhXZwH1cZgtc3EpuBS1tFL5fPZgPHmQamBJ39gMjAKczi0YLF1
- 1q++/afG4raErr0r5QZ2d+5f53fTFCvLiHD9vuXZFFm3Un7u9+dwhzsz2VxJLFICthsjYA5J5YH
- GJkPW/GkKIsDVRSfhFC5I2kOaKKY+8AnZubRrAmBVCJFGgkQyd0YVhT2C1KyGihfnWi9kWQqV9Q
- VHQtN+nTb+UJFKw1+Wi6KmsJpss+vDSuGkpDFOnBX5kFbZ0P81RLEWUlZN4Z1NQz70UJ/SC9bYB
- HZfj4VCwzVJthQXqVhVeiqxPXGDl9Y+hTttg63IPit1ZQm77p1Ghxa1eUQU2iIK/jUrajwU/EFB
- X1cXsVHsLEIdsapOY7nZzaa9XOGB28Ws7YFvTuo9ntoNt3/vd70kmBNvXRksqN+vshaUosarK2y
- C89Xahrd8/mjKcPUZzWVmsWSt0NPYrlqQ+zK5WLVe0qGGTJkyoxkkHEmpOP5gjb5NQUG0o=
-X-Received: by 2002:a05:6870:31b6:b0:42c:24e7:f074 with SMTP id
- 586e51a60fabf-43a2defc241mr3668072fac.17.1778868861268; 
- Fri, 15 May 2026 11:14:21 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-189-203-106-235.totalplay.net.
- [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-439fc1fc14csm4678982fac.6.2026.05.15.11.14.20
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 15 May 2026 11:14:20 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Mark Kettenis <kettenis@openbsd.org>
-Cc: Raymond Mao <raymondmaoca@gmail.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Janne Grunau <j@jannau.net>
-In-Reply-To: <20260509203136.46745-1-kettenis@openbsd.org>
-References: <20260509203136.46745-1-kettenis@openbsd.org>
-Subject: Re: [PATCH] smbios: Do not fall back on devicetree without valid
- mapping
-Message-Id: <177886886042.657307.13496734434434902855.b4-ty@konsulko.com>
-Date: Fri, 15 May 2026 12:14:20 -0600
+ d=1e100.net; s=20251104; t=1778868877; x=1779473677;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=sWrnUVV/etlaBf2oDSoCs5K35pfDloP8A/yKIGng1ws=;
+ b=RkzSi6AnbS7MrFXt9XOfI7H9ILNp8JuYSXEja/Qy34J7RCauLaEsi3OoC9R1ogJ26h
+ J5MXCAVq+XeNUBrRtsZjgPEgex5buz2yA7H3/yjuACgimPKW7j9/pu4TEAh3RNInmqWA
+ cv2rK46DNuMwn5uAy2zlChj0qjq1c/nWlzNOwx5e5uVUSN51F/wNOvbYaJaaJjmZ1Lj8
+ q0FvWpMGk1aQlqvY0D3+hzCb/DYoaC9X7AUCBrWYoAjHcsdsloMyIEMpRVdS6ni/25nB
+ kCfXm+RxG6Foz4L5IApda23dvMOdPW4oM4TLZfiefgBHlgyVM6Lq/0nhFSAKpvCdyapL
+ preA==
+X-Gm-Message-State: AOJu0Yy5rheO8e0asDp+3yjR8fSttt8OaM90z0sUtBlF43lgoHjigIcu
+ QPkRHi8ec9kh+blcdrOHhcdQhmu0OTQAdkgwv71je2yH9a6/zfY+vGLX3bzFCbtO9vc5JCkTQFE
+ ZR18QZjNgZlac5EvoFOqd2sb+BmnLtfIPK/adJbuTQJuXBRcHmlw=
+X-Gm-Gg: Acq92OFEl+TBvdX5o3WPCOVSZr2p5QXYtxjOHtLlMbS6ry3uqqswet0SwBjWsEUGyo/
+ 1P6Pzh48l8M0t6yOLnjuO3gPn25b+BA1v3huNnBljgnLaLVIz+IrIrPHfYg3HasFm1PUPUPO81x
+ iXzureagviXqKw2bQor0wCQy+QCLpPGsiZ2Rb5udXjn0LxD2TFoafg0Ka4gk1GgN3gLA3BeyB7Z
+ 4nDZWR1SyEbPFxaYoI4GTPfkL4Wc16mHqqh7Sz920Lw26itcPJmKp082GCYLKl0n46ugpuRhSzp
+ 4w9yx8edMlTmpB79
+X-Received: by 2002:a17:906:9fd1:b0:bd0:8b28:1e13 with SMTP id
+ a640c23a62f3a-bd5177dcc3bmr285357066b.17.1778868877424; Fri, 15 May 2026
+ 11:14:37 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.3
+References: <20260424173151.371134-1-harsimransingh.tungal@arm.com>
+ <20260514124924.1804332-1-harsimransingh.tungal@arm.com>
+ <20260514124924.1804332-2-harsimransingh.tungal@arm.com>
+In-Reply-To: <20260514124924.1804332-2-harsimransingh.tungal@arm.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Fri, 15 May 2026 12:14:24 -0600
+X-Gm-Features: AVHnY4KvSRYbQ5DkPgIZOUsZyivA27xoCsMYytaE3kkkQ9cHli9wBhuDJHBCHSs
+Message-ID: <CAFLszTi-Uf9yvEbrOBi12OMzC+N1kUWuJ8vyiE7Txb-hz2aTPg@mail.gmail.com>
+Subject: Re: [PATCH v2 01/11] efi_loader: add runtime memset helper
+To: harsimransingh.tungal@arm.com
+Cc: u-boot@lists.denx.de, abdellatif.elkhlifi@arm.com, trini@konsulko.com, 
+ ilias.apalodimas@linaro.org, xypron.glpk@gmx.de, hugues.kambampiana@arm.com, 
+ sjg@chromium.org
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,20 +111,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, 09 May 2026 22:31:36 +0200, Mark Kettenis wrote:
+On 2026-05-14T12:49:13, Harsimran Singh Tungal
+<harsimransingh.tungal@arm.com> wrote:
+> efi_loader: add runtime memset helper
+>
+> Add efi_memset_runtime() for EFI runtime paths
+>
+> This keeps buffer initialization in runtime-resident code after
+> ExitBootServices() and avoids relying on non-runtime helpers.
+>
+> Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> Signed-off-by: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
+>
+> include/efi_loader.h         |  3 +++
+>  lib/efi_loader/efi_runtime.c | 20 ++++++++++++++++++++
+>  2 files changed, 23 insertions(+)
 
-> The smbios_get_val_si() function may get called for a sysinfo
-> property for which there is no mapping to a devicetree property.
-> Avoid a NULL pointer dereference in this case by skipping the
-> read of the mapped property from the device tree.
-> 
-> 
-
-Applied to u-boot/master, thanks!
-
-[1/1] smbios: Do not fall back on devicetree without valid mapping
-      commit: 215496fec59b3fa09256b4fb62f92af46e2ec7f9
--- 
-Tom
-
-
+Reviewed-by: Simon Glass <sjg@chromium.org>
