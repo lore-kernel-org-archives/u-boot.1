@@ -4,21 +4,21 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92D28CD4851
-	for <u-boot@archiver.kernel.org>; Sat, 16 May 2026 01:04:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E40F6CD4851
+	for <u-boot@archiver.kernel.org>; Sat, 16 May 2026 01:04:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B3345848A2;
-	Sat, 16 May 2026 03:04:02 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 00CA0848B8;
+	Sat, 16 May 2026 03:04:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=makrotopia.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0A00184812; Sat, 16 May 2026 01:38:14 +0200 (CEST)
+ id B747884884; Sat, 16 May 2026 01:38:17 +0200 (CEST)
 Received: from pidgin.makrotopia.org (pidgin.makrotopia.org
  [IPv6:2a07:2ec0:3002::65])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6EA738480B
- for <u-boot@lists.denx.de>; Sat, 16 May 2026 01:38:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 404CA8480B
+ for <u-boot@lists.denx.de>; Sat, 16 May 2026 01:38:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=makrotopia.org
 Authentication-Results: phobos.denx.de;
@@ -26,8 +26,8 @@ Authentication-Results: phobos.denx.de;
 Received: from local
  by pidgin.makrotopia.org with esmtpsa (TLS1.3:TLS_AES_256_GCM_SHA384:256)
  (Exim 4.99) (envelope-from <daniel@makrotopia.org>)
- id 1wO267-000000004g0-0Jx7; Fri, 15 May 2026 23:37:39 +0000
-Date: Sat, 16 May 2026 00:37:31 +0100
+ id 1wO26N-000000004gi-3p2C; Fri, 15 May 2026 23:37:56 +0000
+Date: Sat, 16 May 2026 00:37:52 +0100
 From: Daniel Golle <daniel@makrotopia.org>
 To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Mario Six <mario.six@gdsys.cc>, Quentin Schulz <quentin.schulz@cherry.de>,
@@ -54,11 +54,14 @@ To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Wolfgang Wallner <wolfgang.wallner@at.abb.com>,
  Aristo Chen <jj251510319013@gmail.com>, Rasmus Villemoes <ravi@prevas.dk>,
  Francois Berder <fberder@outlook.fr>, u-boot@lists.denx.de
-Subject: [PATCH v5 0/8] fit: dm-verity support
-Message-ID: <cover.1778887196.git.daniel@makrotopia.org>
+Subject: [PATCH v5 2/8] boot: fit: support generating DM verity cmdline
+ parameters
+Message-ID: <5acb1323c0d2405fce89a2a66b979084b4587bb0.1778887196.git.daniel@makrotopia.org>
+References: <cover.1778887196.git.daniel@makrotopia.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
+In-Reply-To: <cover.1778887196.git.daniel@makrotopia.org>
 X-Mailman-Approved-At: Sat, 16 May 2026 03:04:00 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -76,132 +79,585 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This series adds dm-verity support to U-Boot's FIT image infrastructure.
-It is the first logical subset of the larger OpenWrt boot method series
-posted as an RFC in February 2026 [1], extracted here for independent
-review and merging.
+Add fit_verity_build_cmdline(): when a FILESYSTEM loadable carries a
+dm-verity subnode, construct the dm-mod.create= kernel cmdline parameter
+from the verity metadata (block-size, data-blocks, algo, root-hash,
+salt) and append it to bootargs.
 
-OpenWrt's firmware model embeds a read-only squashfs or erofs root
-filesystem directly inside a uImage.FIT container as a FILESYSTEM-type
-loadable FIT image. At boot the kernel maps this sub-image directly from
-the underlying block device via the fitblk driver (/dev/fit0, /dev/fit1,
-...), the goal is that the bootloader never even copies it to RAM.
+Also add dm-mod.waitfor=/dev/fit0[,/dev/fitN] for each dm-verity device
+so the kernel waits for the underlying FIT block device to appear before
+setting up device-mapper targets. This is needed when the block driver
+probes late, e.g. because it depends on NVMEM calibration data.
 
-dm-verity enables the kernel to verify the integrity of those mapped
-filesystems at read time, with a Merkle hash tree stored contiguously in
-the same sub-image just after the data. Two kernel command-line
-parameters are required:
+The dm-verity target references /dev/fitN where N is the loadable's
+index in the configuration -- matching the order Linux's FIT block
+driver assigns block devices.  hash-start-block is read directly from
+the FIT dm-verity node; mkimage ensures its value equals num-data-blocks
+by invoking veritysetup with --no-superblock.
 
-  dm-mod.create=   -- the device-mapper target table for the verity device
-  dm-mod.waitfor=  -- a comma-separated list of block devices to wait for
-                      before dm-init sets up the targets (needed when fitblk
-                      probes late, e.g. because it depends on NVMEM
-                      calibration data)
-
-The FIT dm-verity node schema was upstreamed into the flat-image-tree
-specification [2], which this implementation tries to follow exactly.
-
-The runtime feature is guarded behind CONFIG_FIT_VERITY. If not
-enabled the resulting binary size remains unchanged. If enabled the
-binary size increases by about 3kB.
-
-[1] previous submissions:
-    RFC: https://www.mail-archive.com/u-boot@lists.denx.de/msg565945.html
-    v1:  https://www.mail-archive.com/u-boot@lists.denx.de/msg569472.html
-    v2:  https://www.mail-archive.com/u-boot@lists.denx.de/msg570599.html
-    v3:  https://www.mail-archive.com/u-boot@lists.denx.de/msg573223.html
-    v4:  https://www.mail-archive.com/u-boot@lists.denx.de/msg574000.html
-
-[2] flat-image-tree dm-verity node spec:
-    https://github.com/open-source-firmware/flat-image-tree/commit/795fd5fd7f0121d0cb03efb1900aafc61c704771
-
-v5: address comments by Heinrich Schuchardt and Simon Glass
- * mkimage: drop unused image_noffset parameter from
-   fit_image_process_verity()
- * mkimage: replace popen() and the valid_algos[] allowlist with
-   fork()/execvp(), eliminating shell-injection risk and allowlist
-   drift
- * mkimage: drop the verity-data-file FDT property; cache the
-   expanded buffer (original data + Merkle hash tree) in memory keyed
-   by image name, unlink the temporary file immediately after read-
-   back, and expose fit_verity_get_expanded() so fit_extract_data()
-   consumes the buffer directly -- removes the tmpfile-leak surface
-   along the way
- * mkimage: use unsigned int for data-block-size / hash-block-size
-   on the host side too (consistency with v3 runtime change)
- * doc: document that the fitblk driver requires each filesystem
-   sub-image to be aligned to the underlying block-device block size,
-   and that 'mkimage -B <align>' (typically -B 0x1000) achieves this;
-   clarify that this is independent of the dm-verity data-block-size
-   / hash-block-size properties
-
-v4: address comments by Simon Glass
- * pytest: verify the computed digest with veritysetup verify against
-   the external data section
- * pytest: parametrize test_mkimage_verity with matched and mismatched
-   block sizes to exercise hash-start-block != num-data-blocks
- * pytest: use run_and_log_expect_exception() with the expected
-   diagnostic for the no-external-data case
-
-v3: address comments by Heinrich Schuchardt and Simon Glass
- * use unsigned int instead of int for data-block-size and hash-block-size
+Signed-off-by: Daniel Golle <daniel@makrotopia.org>
+Reviewed-by: Simon Glass <sjg@chromium.org>
+---
+v5: no changes
+v4: no changes
+v3:
+ * use unsigned int for data_block_size and hash_block_size
  * replace printf() with log_err() for the "broken dm-verity metadata"
-   diagnostic
- * use FIT_VERITY_*_PROP, FIT_TYPE_PROP and FIT_LOADABLE_PROP constants
-   in the unit test instead of literal strings
- * extend the mkimage block-count overflow check to also cover
-   hash_start_block (matters when hash-block-size < data-block-size)
- * doc: clarify that hash-start-block only equals num-data-blocks when
-   data-block-size == hash-block-size
- * pytest: drop unused 'struct' import and the home-rolled
-   have_veritysetup() helper in favour of
-   @pytest.mark.requiredtool('veritysetup')
-
-v2: address comments by Simon Glass
+v2:
  * use is_power_of_2() for pre-boot sanity check
  * let fit_verity_build_cmdline() return 0 on success
  * add comment explaining why bootm_start() calls fit_verity_free()
- * use existing hex2bin() (and adapt it to be usable for host-tools)
- * fix stale comment still including superblock despite veritysetup
-   being called with --no-superblock
- * add power-of-two check for data-block-size and hash-block-size to
-   mkimage
- * don't ignore return value of fdt_delprop()
- * various documentation fixes, minimal example
- * add pytest for mkimage part
- * add run-time unit test for cmdline generation part
+---
+ boot/Kconfig       |  20 +++
+ boot/bootm.c       |  13 ++
+ boot/image-board.c |   5 +
+ boot/image-fit.c   | 337 +++++++++++++++++++++++++++++++++++++++++++++
+ include/image.h    |  80 ++++++++++-
+ 5 files changed, 454 insertions(+), 1 deletion(-)
 
-Daniel Golle (8):
-  image: fit: add dm-verity property name constants
-  boot: fit: support generating DM verity cmdline parameters
-  include: hexdump: make hex2bin() usable from host tools
-  tools: mkimage: add dm-verity Merkle-tree generation
-  doc: fit: add dm-verity boot parameter documentation
-  test: boot: add runtime unit test for fit_verity_build_cmdline()
-  test: py: add mkimage dm-verity round-trip test
-  configs: sandbox: enable CONFIG_FIT_VERITY
-
- boot/Kconfig                       |  20 ++
- boot/bootm.c                       |  13 +
- boot/image-board.c                 |   5 +
- boot/image-fit.c                   | 337 +++++++++++++++++++++++
- configs/sandbox64_defconfig        |   1 +
- configs/sandbox_defconfig          |   1 +
- configs/sandbox_flattree_defconfig |   1 +
- doc/usage/fit/dm-verity.rst        | 304 +++++++++++++++++++++
- doc/usage/fit/index.rst            |   1 +
- include/hexdump.h                  |   8 +-
- include/image.h                    | 115 +++++++-
- test/boot/Makefile                 |   1 +
- test/boot/fit_verity.c             | 306 +++++++++++++++++++++
- test/cmd_ut.c                      |   2 +
- test/py/tests/test_fit_verity.py   | 175 ++++++++++++
- tools/fit_image.c                  |  91 ++++++-
- tools/image-host.c                 | 414 ++++++++++++++++++++++++++++-
- 17 files changed, 1783 insertions(+), 12 deletions(-)
- create mode 100644 doc/usage/fit/dm-verity.rst
- create mode 100644 test/boot/fit_verity.c
- create mode 100644 test/py/tests/test_fit_verity.py
-
+diff --git a/boot/Kconfig b/boot/Kconfig
+index ae6f09a6ede..e1114aea843 100644
+--- a/boot/Kconfig
++++ b/boot/Kconfig
+@@ -142,6 +142,26 @@ config FIT_CIPHER
+ 	  Enable the feature of data ciphering/unciphering in the tool mkimage
+ 	  and in the u-boot support of the FIT image.
+ 
++config FIT_VERITY
++	bool "dm-verity boot parameter generation from FIT metadata"
++	depends on FIT && OF_LIBFDT
++	help
++	  When a FIT configuration contains loadable sub-images of type
++	  IH_TYPE_FILESYSTEM with a dm-verity subnode, this option enables
++	  building the dm-mod.create= and dm-mod.waitfor= kernel
++	  command-line parameters from the verity metadata
++	  (data-block-size, hash-block-size, num-data-blocks,
++	  hash-start-block, algorithm, digest, salt) stored in the FIT.
++
++	  The generated parameters reference /dev/fitN block devices that
++	  Linux's uImage.FIT block driver assigns to loadable sub-images.
++
++	  During FIT parsing (BOOTM_STATE_FINDOTHER), verity cmdline
++	  fragments are stored in struct bootm_headers and automatically
++	  appended to the bootargs environment variable during
++	  BOOTM_STATE_OS_PREP.  This works from both the bootm command
++	  and BOOTSTD bootmeths.
++
+ config FIT_VERBOSE
+ 	bool "Show verbose messages when FIT images fail"
+ 	help
+diff --git a/boot/bootm.c b/boot/bootm.c
+index 4836d6b2d41..d6a54a49fce 100644
+--- a/boot/bootm.c
++++ b/boot/bootm.c
+@@ -243,6 +243,13 @@ static int boot_get_kernel(const char *addr_fit, struct bootm_headers *images,
+ 
+ static int bootm_start(void)
+ {
++	/*
++	 * Free dm-verity allocations from a prior boot attempt before
++	 * zeroing the structure. The pointers are guaranteed to be valid
++	 * or NULL: .bss is zero-initialised, and memset() below zeroes
++	 * them again after every boot.
++	 */
++	fit_verity_free(&images);
+ 	memset((void *)&images, 0, sizeof(images));
+ 	images.verify = env_get_yesno("verify");
+ 
+@@ -1071,6 +1078,12 @@ int bootm_run_states(struct bootm_info *bmi, int states)
+ 		/* For Linux OS do all substitutions at console processing */
+ 		if (images->os.os == IH_OS_LINUX)
+ 			flags = BOOTM_CL_ALL;
++		ret = fit_verity_apply_bootargs(images);
++		if (ret) {
++			printf("dm-verity bootargs failed (err=%d)\n", ret);
++			ret = CMD_RET_FAILURE;
++			goto err;
++		}
+ 		ret = bootm_process_cmdline_env(flags);
+ 		if (ret) {
+ 			printf("Cmdline setup failed (err=%d)\n", ret);
+diff --git a/boot/image-board.c b/boot/image-board.c
+index 005d60caf5c..265f29d44ff 100644
+--- a/boot/image-board.c
++++ b/boot/image-board.c
+@@ -810,6 +810,11 @@ int boot_get_loadable(struct bootm_headers *images)
+ 
+ 			fit_loadable_process(img_type, img_data, img_len);
+ 		}
++
++		fit_img_result = fit_verity_build_cmdline(buf, conf_noffset,
++							  images);
++		if (fit_img_result < 0)
++			return fit_img_result;
+ 		break;
+ 	default:
+ 		printf("The given image format is not supported (corrupt?)\n");
+diff --git a/boot/image-fit.c b/boot/image-fit.c
+index b0fcaf6e17f..906b75216b2 100644
+--- a/boot/image-fit.c
++++ b/boot/image-fit.c
+@@ -21,8 +21,11 @@
+ extern void *aligned_alloc(size_t alignment, size_t size);
+ #else
+ #include <linux/compiler.h>
++#include <linux/log2.h>
+ #include <linux/sizes.h>
++#include <env.h>
+ #include <errno.h>
++#include <hexdump.h>
+ #include <log.h>
+ #include <mapmem.h>
+ #include <asm/io.h>
+@@ -243,6 +246,39 @@ static void fit_image_print_data(const void *fit, int noffset, const char *p,
+ 	}
+ }
+ 
++static __maybe_unused void fit_image_print_dm_verity(const void *fit,
++						     int noffset,
++						     const char *p)
++{
++#if defined(USE_HOSTCC) || CONFIG_IS_ENABLED(FIT_VERITY)
++	const char *algo;
++	const uint8_t *bin;
++	int len, i;
++
++	algo = fdt_getprop(fit, noffset, FIT_VERITY_ALGO_PROP, NULL);
++	if (algo)
++		printf("%s  Verity algo:  %s\n", p, algo);
++
++	bin = fdt_getprop(fit, noffset, FIT_VERITY_DIGEST_PROP,
++			  &len);
++	if (bin && len > 0) {
++		printf("%s  Verity hash:  ", p);
++		for (i = 0; i < len; i++)
++			printf("%02x", bin[i]);
++		printf("\n");
++	}
++
++	bin = fdt_getprop(fit, noffset, FIT_VERITY_SALT_PROP,
++			  &len);
++	if (bin && len > 0) {
++		printf("%s  Verity salt:  ", p);
++		for (i = 0; i < len; i++)
++			printf("%02x", bin[i]);
++		printf("\n");
++	}
++#endif
++}
++
+ /**
+  * fit_image_print_verification_data() - prints out the hash/signature details
+  * @fit: pointer to the FIT format image header
+@@ -271,6 +307,11 @@ static void fit_image_print_verification_data(const void *fit, int noffset,
+ 				strlen(FIT_SIG_NODENAME))) {
+ 		fit_image_print_data(fit, noffset, p, "Sign");
+ 	}
++#if defined(USE_HOSTCC) || CONFIG_IS_ENABLED(FIT_VERITY)
++	else if (!strcmp(name, FIT_VERITY_NODENAME)) {
++		fit_image_print_dm_verity(fit, noffset, p);
++	}
++#endif
+ }
+ 
+ /**
+@@ -2642,3 +2683,299 @@ out:
+ 	return fdt_noffset;
+ }
+ #endif
++
++#if !defined(USE_HOSTCC) && CONFIG_IS_ENABLED(FIT_VERITY)
++
++static const char *const verity_opt_props[] = {
++	FIT_VERITY_OPT_RESTART,
++	FIT_VERITY_OPT_PANIC,
++	FIT_VERITY_OPT_RERR,
++	FIT_VERITY_OPT_PERR,
++	FIT_VERITY_OPT_ONCE,
++};
++
++/**
++ * fit_verity_build_target() - build one dm-verity target specification
++ * @fit:	pointer to the FIT blob
++ * @img_noffset:	image node offset containing the dm-verity subnode
++ * @loadable_idx:	index of this loadable (for /dev/fitN)
++ * @uname:	unit name of the image
++ * @separator:	true if a ";" prefix is needed (not the first target)
++ * @buf:	output buffer, or NULL to measure only
++ * @bufsize:	size of @buf (ignored when @buf is NULL)
++ *
++ * Parses all dm-verity properties from the image's ``dm-verity`` child
++ * node and writes (or measures) a dm target specification string of the
++ * form used by the ``dm-mod.create`` kernel parameter.
++ *
++ * Return: number of characters that would be written (excluding '\0'),
++ *	    or -ve errno on error (e.g. missing mandatory property)
++ */
++static int fit_verity_build_target(const void *fit, int img_noffset,
++				   int loadable_idx, const char *uname,
++				   bool separator, char *buf, int bufsize)
++{
++	const char *algorithm;
++	const u8 *digest_raw, *salt_raw;
++	const fdt32_t *val;
++	char *digest_hex = NULL, *salt_hex = NULL, *opt_buf = NULL;
++	int verity_node;
++	unsigned int data_block_size, hash_block_size;
++	int num_data_blocks, hash_start_block;
++	u64 data_sectors;
++	int digest_len, salt_len;
++	int opt_count, opt_off, opt_buf_size;
++	int len;
++	int i;
++
++	verity_node = fdt_subnode_offset(fit, img_noffset, FIT_VERITY_NODENAME);
++	if (verity_node < 0)
++		return -ENOENT;
++
++	/* Mandatory u32 properties */
++	val = fdt_getprop(fit, verity_node, FIT_VERITY_DBS_PROP, NULL);
++	if (!val)
++		return -EINVAL;
++	data_block_size = fdt32_to_cpu(*val);
++
++	val = fdt_getprop(fit, verity_node, FIT_VERITY_HBS_PROP, NULL);
++	if (!val)
++		return -EINVAL;
++	hash_block_size = fdt32_to_cpu(*val);
++
++	val = fdt_getprop(fit, verity_node, FIT_VERITY_NBLK_PROP, NULL);
++	if (!val)
++		return -EINVAL;
++	num_data_blocks = fdt32_to_cpu(*val);
++
++	val = fdt_getprop(fit, verity_node, FIT_VERITY_HBLK_PROP, NULL);
++	if (!val)
++		return -EINVAL;
++	hash_start_block = fdt32_to_cpu(*val);
++
++	if (data_block_size < 512U || !is_power_of_2(data_block_size) ||
++	    hash_block_size < 512U || !is_power_of_2(hash_block_size) ||
++	    !num_data_blocks)
++		return -EINVAL;
++
++	/* Mandatory string */
++	algorithm = fdt_getprop(fit, verity_node, FIT_VERITY_ALGO_PROP, NULL);
++	if (!algorithm)
++		return -EINVAL;
++
++	/* Mandatory byte arrays */
++	digest_raw = fdt_getprop(fit, verity_node, FIT_VERITY_DIGEST_PROP,
++				 &digest_len);
++	if (!digest_raw || digest_len <= 0)
++		return -EINVAL;
++
++	salt_raw = fdt_getprop(fit, verity_node, FIT_VERITY_SALT_PROP,
++			       &salt_len);
++	if (!salt_raw || salt_len <= 0)
++		return -EINVAL;
++
++	/* Hex-encode digest and salt into dynamically sized buffers */
++	digest_hex = malloc(digest_len * 2 + 1);
++	salt_hex = malloc(salt_len * 2 + 1);
++	if (!digest_hex || !salt_hex) {
++		len = -ENOMEM;
++		goto out;
++	}
++	*bin2hex(digest_hex, digest_raw, digest_len) = '\0';
++	*bin2hex(salt_hex, salt_raw, salt_len) = '\0';
++
++	data_sectors = (u64)num_data_blocks * ((u64)data_block_size / 512);
++
++	/* Compute space needed for optional boolean properties */
++	opt_buf_size = 1; /* NUL terminator */
++	for (i = 0; i < ARRAY_SIZE(verity_opt_props); i++)
++		opt_buf_size += strlen(verity_opt_props[i]) + 1;
++	opt_buf = malloc(opt_buf_size);
++	if (!opt_buf) {
++		len = -ENOMEM;
++		goto out;
++	}
++
++	/* Collect optional boolean properties */
++	opt_count = 0;
++	opt_off = 0;
++	opt_buf[0] = '\0';
++	for (i = 0; i < ARRAY_SIZE(verity_opt_props); i++) {
++		if (fdt_getprop(fit, verity_node,
++				verity_opt_props[i], NULL)) {
++			const char *s = verity_opt_props[i];
++			int slen = strlen(s);
++
++			if (opt_off)
++				opt_buf[opt_off++] = ' ';
++			/* Copy with hyphen-to-underscore conversion */
++			while (slen-- > 0) {
++				opt_buf[opt_off++] =
++					(*s == '-') ? '_' : *s;
++				s++;
++			}
++			opt_buf[opt_off] = '\0';
++			opt_count++;
++		}
++	}
++
++	/* Emit (or measure) the target spec */
++	len = snprintf(buf, buf ? bufsize : 0,
++		       "%s%s,,, ro,0 %llu verity 1 /dev/fit%d /dev/fit%d %u %u %d %d %s %s %s",
++		       separator ? ";" : "", uname,
++		       (unsigned long long)data_sectors, loadable_idx, loadable_idx,
++		       data_block_size, hash_block_size,
++		       num_data_blocks, hash_start_block,
++		       algorithm, digest_hex, salt_hex);
++	if (opt_count) {
++		int extra = snprintf(buf ? buf + len : NULL,
++				     buf ? bufsize - len : 0,
++				     " %d %s", opt_count, opt_buf);
++		len += extra;
++	}
++
++out:
++	free(digest_hex);
++	free(salt_hex);
++	free(opt_buf);
++	return len;
++}
++
++int fit_verity_build_cmdline(const void *fit, int conf_noffset,
++			     struct bootm_headers *images)
++{
++	int images_noffset;
++	int dm_create_len = 0, dm_waitfor_len = 0;
++	char *dm_create = NULL, *dm_waitfor = NULL;
++	const char *uname;
++	int loadable_idx;
++	int found = 0;
++	int ret = 0;
++
++	images_noffset = fdt_path_offset(fit, FIT_IMAGES_PATH);
++	if (images_noffset < 0)
++		return 0;
++
++	for (loadable_idx = 0;
++	     (uname = fdt_stringlist_get(fit, conf_noffset,
++					 FIT_LOADABLE_PROP,
++					 loadable_idx, NULL));
++	     loadable_idx++) {
++		int img_noffset, need;
++		u8 img_type;
++		char *tmp;
++
++		img_noffset = fdt_subnode_offset(fit, images_noffset, uname);
++		if (img_noffset < 0)
++			continue;
++
++		if (fit_image_get_type(fit, img_noffset, &img_type) ||
++		    img_type != IH_TYPE_FILESYSTEM)
++			continue;
++
++		/* Measure first, then allocate and write */
++		need = fit_verity_build_target(fit, img_noffset,
++					       loadable_idx, uname,
++					       found > 0, NULL, 0);
++		if (need == -ENOENT)
++			continue;	/* no dm-verity subnode -- fine */
++		if (need < 0) {
++			log_err("FIT: broken dm-verity metadata in '%s'\n",
++				uname);
++			ret = need;
++			goto err;
++		}
++
++		tmp = realloc(dm_create, dm_create_len + need + 1);
++		if (!tmp) {
++			ret = -ENOMEM;
++			goto err;
++		}
++		dm_create = tmp;
++		fit_verity_build_target(fit, img_noffset, loadable_idx,
++					uname, found > 0,
++					dm_create + dm_create_len,
++					need + 1);
++		dm_create_len += need;
++
++		/* Grow dm_waitfor buffer */
++		need = snprintf(NULL, 0, "%s/dev/fit%d",
++				dm_waitfor_len ? "," : "",
++				loadable_idx);
++		tmp = realloc(dm_waitfor, dm_waitfor_len + need + 1);
++		if (!tmp) {
++			ret = -ENOMEM;
++			goto err;
++		}
++		dm_waitfor = tmp;
++		sprintf(dm_waitfor + dm_waitfor_len, "%s/dev/fit%d",
++			dm_waitfor_len ? "," : "",
++			loadable_idx);
++		dm_waitfor_len += need;
++
++		found++;
++	}
++
++	if (found) {
++		/* Transfer ownership to the bootm_headers */
++		images->dm_mod_create = dm_create;
++		images->dm_mod_waitfor = dm_waitfor;
++	} else {
++		free(dm_create);
++		free(dm_waitfor);
++	}
++
++	return 0;
++
++err:
++	free(dm_create);
++	free(dm_waitfor);
++	return ret;
++}
++
++/**
++ * fmt used by both the measurement and the actual write of bootargs.
++ * Shared to guarantee they stay in sync.
++ */
++#define VERITY_BOOTARGS_FMT	"%s%sdm-mod.create=\"%s\" dm-mod.waitfor=\"%s\""
++
++int fit_verity_apply_bootargs(const struct bootm_headers *images)
++{
++	const char *existing;
++	char *newargs;
++	int len;
++
++	if (!images->dm_mod_create)
++		return 0;
++
++	existing = env_get("bootargs");
++	if (!existing)
++		existing = "";
++
++	/* Measure */
++	len = snprintf(NULL, 0, VERITY_BOOTARGS_FMT,
++		       existing, existing[0] ? " " : "",
++		       images->dm_mod_create, images->dm_mod_waitfor);
++
++	newargs = malloc(len + 1);
++	if (!newargs)
++		return -ENOMEM;
++
++	snprintf(newargs, len + 1, VERITY_BOOTARGS_FMT,
++		 existing, existing[0] ? " " : "",
++		 images->dm_mod_create, images->dm_mod_waitfor);
++
++	env_set("bootargs", newargs);
++	free(newargs);
++
++	return 0;
++}
++
++void fit_verity_free(struct bootm_headers *images)
++{
++	free(images->dm_mod_create);
++	free(images->dm_mod_waitfor);
++	images->dm_mod_create = NULL;
++	images->dm_mod_waitfor = NULL;
++}
++#endif /* FIT_VERITY */
+diff --git a/include/image.h b/include/image.h
+index 482446a8115..fe2361a667e 100644
+--- a/include/image.h
++++ b/include/image.h
+@@ -396,7 +396,19 @@ struct bootm_headers {
+ 	ulong		cmdline_start;
+ 	ulong		cmdline_end;
+ 	struct bd_info		*kbd;
+-#endif
++
++#if CONFIG_IS_ENABLED(FIT_VERITY)
++	/*
++	 * dm-verity kernel command-line fragments, populated during FIT
++	 * parsing by fit_verity_build_cmdline().  Bootmeths can check
++	 * fit_verity_active() between bootm states, and
++	 * fit_verity_apply_bootargs() appends these to the "bootargs"
++	 * env var during BOOTM_STATE_OS_PREP.
++	 */
++	char *dm_mod_create;
++	char *dm_mod_waitfor;
++#endif /* FIT_VERITY */
++#endif /* !USE_HOSTCC */
+ 
+ 	int		verify;		/* env_get("verify")[0] != 'n' */
+ 
+@@ -756,6 +768,72 @@ int fit_image_load(struct bootm_headers *images, ulong addr,
+ 		   int arch, int image_ph_type, int bootstage_id,
+ 		   enum fit_load_op load_op, ulong *datap, ulong *lenp);
+ 
++#if !defined(USE_HOSTCC) && CONFIG_IS_ENABLED(FIT_VERITY)
++/**
++ * fit_verity_build_cmdline() - build dm-verity cmdline from FIT metadata
++ * @fit:		pointer to the FIT blob
++ * @conf_noffset:	configuration node offset in @fit
++ * @images:		bootm headers; dm_mod_create / dm_mod_waitfor are
++ *			populated on success
++ *
++ * Called automatically from boot_get_loadable() during FIT parsing.
++ * For each IH_TYPE_FILESYSTEM loadable with a dm-verity subnode,
++ * builds the corresponding dm target specification.
++ *
++ * Return: 0 on success, -ve errno on error
++ */
++int fit_verity_build_cmdline(const void *fit, int conf_noffset,
++			     struct bootm_headers *images);
++
++/**
++ * fit_verity_apply_bootargs() - append dm-verity params to bootargs env
++ * @images:	bootm headers with dm-verity cmdline fragments
++ *
++ * Called from BOOTM_STATE_OS_PREP before bootm_process_cmdline_env().
++ *
++ * Return: 0 on success, -ve errno on error
++ */
++int fit_verity_apply_bootargs(const struct bootm_headers *images);
++
++/**
++ * fit_verity_active() - check whether dm-verity targets were found
++ * @images:	bootm headers
++ *
++ * Return: true if at least one dm-verity target was built
++ */
++static inline bool fit_verity_active(const struct bootm_headers *images)
++{
++	return !!images->dm_mod_create;
++}
++
++/**
++ * fit_verity_free() - free dm-verity cmdline allocations
++ * @images:	bootm headers
++ */
++void fit_verity_free(struct bootm_headers *images);
++
++#else /* !FIT_VERITY */
++
++static inline int fit_verity_build_cmdline(const void *fit, int conf_noffset,
++					   struct bootm_headers *images)
++{
++	return 0;
++}
++
++static inline int fit_verity_apply_bootargs(const struct bootm_headers *images)
++{
++	return 0;
++}
++
++static inline bool fit_verity_active(const struct bootm_headers *images)
++{
++	return false;
++}
++
++static inline void fit_verity_free(struct bootm_headers *images) {}
++
++#endif /* FIT_VERITY */
++
+ /**
+  * image_locate_script() - Locate the raw script in an image
+  *
 -- 
 2.54.0
