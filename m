@@ -4,80 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B74E1CD343F
-	for <u-boot@archiver.kernel.org>; Fri, 15 May 2026 18:10:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4EE00CD4F3C
+	for <u-boot@archiver.kernel.org>; Fri, 15 May 2026 18:10:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DFBCD847E8;
-	Fri, 15 May 2026 20:10:27 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2285B847C8;
+	Fri, 15 May 2026 20:10:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="EIw04gAf";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="eefNc+VQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E87E3847E1; Fri, 15 May 2026 20:10:26 +0200 (CEST)
-Received: from mail-pl1-x636.google.com (mail-pl1-x636.google.com
- [IPv6:2607:f8b0:4864:20::636])
+ id B151B847C8; Fri, 15 May 2026 20:10:32 +0200 (CEST)
+Received: from mail-pl1-x62f.google.com (mail-pl1-x62f.google.com
+ [IPv6:2607:f8b0:4864:20::62f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C27C5847C4
- for <u-boot@lists.denx.de>; Fri, 15 May 2026 20:10:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 68B16847C4
+ for <u-boot@lists.denx.de>; Fri, 15 May 2026 20:10:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=nathbappai@gmail.com
-Received: by mail-pl1-x636.google.com with SMTP id
- d9443c01a7336-2bab82d75fdso843345ad.2
- for <u-boot@lists.denx.de>; Fri, 15 May 2026 11:10:24 -0700 (PDT)
+Received: by mail-pl1-x62f.google.com with SMTP id
+ d9443c01a7336-2ba6485d219so1266935ad.3
+ for <u-boot@lists.denx.de>; Fri, 15 May 2026 11:10:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1778868623; x=1779473423; darn=lists.denx.de;
+ d=gmail.com; s=20251104; t=1778868629; x=1779473429; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=T9S9Yf2lFQE0pxfBxVF5FdDmUIVWfpa8g7w+1ozz0Kk=;
- b=EIw04gAfgvcjbAA7rP3RiJ4y2adoxhFNh4q0PnAICspIeMUeMGk/TPaEXDz7v0Emf2
- cVIGDvioa076w+atE4obE7fiHL7yJJfrqMnGtYIhCz/DWblyLLDv0xROPL+7cYW49pk4
- MurfDN1cHsr4pXBnmctfZ6Tx9oU5Gg5OJRS0Hkdx8CKCMiyo1knzx7ZL9rwZb6VV0QAl
- meEIts59IB9ZxzSiaLfsR9wr2REgZ3Of5TszQtdwyRauZViSdBoHnZM2nNMqrSv9LQvb
- GEVDf5FYlssxY3EK+jG/MEVmne4SiofSjTo7LGfKEfichd/BHUkzw7d7Wpqpivmw4aFC
- U5Ig==
+ :reply-to; bh=xF9IPsAWu8W3PZ463w8Ocl2Czu+YoHNw36az8sCGAWw=;
+ b=eefNc+VQmaALzzM6XmcEeWzqyGHcmNjjM9y/6XH/Dc7NEQsEqFWGSCz9ui4eD2KykO
+ F8faeE1RHxDVGot34i9xJGs/gBY83QdPo5nL1pUsg4RExSFeSo6VW0WePxK25dEgdKn2
+ jvI7PRp6xSOVxZVh0JX3l7RdKFLJyH5KODR+H4meXtThmdkAz7tIb+1p76KD3jeB3b9J
+ pAi19Hf4JRQnL9cuItl4J4cGeq7Z9iLuYIxxihWJmSCbFutY9Cak+O1NEVIGcU4Cx0Pv
+ zVYDAlyU9xYoMUOfuzZ06Oox+AqQR564YJ3aXJbXILIVSpEJFMNkBNk0UFT5FpfL9B/I
+ 7ETw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778868623; x=1779473423;
+ d=1e100.net; s=20251104; t=1778868629; x=1779473429;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=T9S9Yf2lFQE0pxfBxVF5FdDmUIVWfpa8g7w+1ozz0Kk=;
- b=ORjY6B+Y4i3X3ZIKi6I8/Cbd3XSHAKk/YJI7p0lUnzgo3E8MwyHjZYElZ0bf+/AIJ3
- mM7D8dsTLDgvYOmV4Q01Df3/jEZiI+WRC/CiMR46mw/a09qwNzKkY1e4nbrnFaLIARxu
- 1IrlN+53DvY3ZdU5hctUf1rJdDC7vvsJQqNWg7PSxSyPBGDoXJXc38Ica7utckWa74bz
- 4tIEVHwHZgCFBFSP3/DcQx2bgHGv9hoiijhuVBDY92CDND3j9EQQIpPSPd6TRNIsHy7a
- obYE/ImaTjfQFeKy9qtqJGz7CiUgrlJJotJpW45EZ7bJHOvqGpdSe0XFPcqwpI0ozpPA
- J68g==
+ bh=xF9IPsAWu8W3PZ463w8Ocl2Czu+YoHNw36az8sCGAWw=;
+ b=KbZlEv8+j1lgEMJ0RfJBxtm+q4lE+Gw1Recai1bsHmjZmyo+lDLqZOF4k9Fman+Fqh
+ YVPz2Iv2oUxg4lTg7XWp+9GozRxmLZ7r3JkzQ3vlLqbfbnSBXQTJsKJW4yjzdTlzOPw9
+ 9ZTi8aEuUL+i9oAqNs78NZDPu0Rb5Gmvy2RvNE8+AYNJqG0qHWcobfEJV7OX6gub+x+y
+ l56V4JphB31MlSw4KIN6SdhHW/+DHVHueZwJGhcfGtHxbNqtCrlreSHnwFbYSXskNNLv
+ H2OvCUHIOirH5AdgstYSDemX+BymsfBrC3+eqkpl9x2FDKh3X8VU/s6QHkQbZW3LnSJA
+ uyBA==
 X-Forwarded-Encrypted: i=1;
- AFNElJ9Ch9a5ZvqeZPuhExibEZSO6jkPUoUwv/2hwMi0/8jbd2V+HRtbxU9z2V+ctsL2Kh9ppiQhmEg=@lists.denx.de
-X-Gm-Message-State: AOJu0YyNbbt7OQeoVl1YHibmvP5/E1/7kRykzYA6f/AnVeldNg/uj63j
- QcM8bq4ACTZ9HVDu5BzlkO+BWsPg+QBe2bJY8CFpbu3Y1tuGmHz3rRe/
-X-Gm-Gg: Acq92OF1YMWsjH0qRvb5ZYcDmJ5U8V8nYpu5GhBRGBAxQBuYF1QZ0ys2mbhT0ZS/s5B
- hJCByIhjKnWxY2wE+E7aV//w7zcEob7sx0i3TsbXOuoS1i0cY5R9AsBtG6RNI3GwoOxtCMdGgEJ
- 9bKzsKteVTYFicr76iEZvLS9DnbDHebJBNBUlrHQhVLBPrA+4uai+bFpWAI++d0NDjUX0QahqS4
- 4cbxRDhyB4A4SJxObPVtFQBtHjyJJjoS84QJxP3KpDeC++55oMZ9juXhKfd3jPnx/J1WkX51+s3
- D6J74KAjl9glo7r25lp0xA5voVQltjiWN1S1UUwxBnMEAz1915P/pgHWjI5NZwQcFmWBT7nONyM
- WM5U8xk5a1mVGZoJHxxyRqBJMjFG6fHpgg8aBOJh4xHNhlykI4bnqPlwb97zGdOmsTlET49MD1W
- SzgQRGkTAj8zbLuDbGbrs7w7e9pIvL
-X-Received: by 2002:a17:903:245:b0:2bc:8f30:74f0 with SMTP id
- d9443c01a7336-2bd7e8b7afamr61274025ad.26.1778868623236; 
- Fri, 15 May 2026 11:10:23 -0700 (PDT)
+ AFNElJ9niuU/VRkVMK2OWZpLJ7oXRoS84GQ3FSAJjtJ/lR2dHuTsbzDKeFu3RqjBGbT/BvhdXBoDdt4=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz6kTWai3XPdnqrc8KjJd2SXIbq8RUt9lkax+FuOLYjsMCNMKe1
+ QjGNAWU91SERakOLk+9AW5kuedAQrRBfmPr+ceXKuiVmGWC9e3c8GnlB
+X-Gm-Gg: Acq92OEfFWuSp9XP8S8Sp0libyZCWLBJ3+ocJwGI7A3lKvP0y5RJSWeEgkHjx8+d/Jk
+ qLmX1cLtvWaHGEvDoacqlXvNL7IX/D0u2TB7xs8UeJ9tXiF/nkLfYenY0RL2IXleBaAZw/Y4kHq
+ 8Yln2r3pXxcUHljqGI11vX6UjnVQg/G3kZ+BehtDov+8xP/kUBIVsqHg9VVBgUxCDaspVcFASnJ
+ WqGpDylkvBdcQUSPvf7VdxfoCJurbWb+8rMabBlHnvHZWpuwR/3mnCOqW7Q9EmWDv6z/GhpQJAR
+ wrO3gwGux7Ug/kGDZ+f0tIF8G+G3Fv6Q/ncgbtwhQWPAb9WTpYkWpVDANySIz9ABrCYo+d+gGKs
+ Eq8GNaIaqBJX86MN+rl9/sSxHKcC0v1jAOzHYWLWuf5CsPKhPZ6/7d8pnJgcXNV2gOxgyqmmQuT
+ crZTCqgivmcwUGmr8knRdgFVYH/ex6A8H2OjRGKSc=
+X-Received: by 2002:a17:903:3ba4:b0:2b2:ccfb:8387 with SMTP id
+ d9443c01a7336-2bd7e9769edmr60382745ad.28.1778868628859; 
+ Fri, 15 May 2026 11:10:28 -0700 (PDT)
 Received: from [192.168.0.102] ([43.251.88.142])
  by smtp.googlemail.com with ESMTPSA id
- d9443c01a7336-2bd791e0b11sm42338535ad.18.2026.05.15.11.10.18
+ d9443c01a7336-2bd791e0b11sm42338535ad.18.2026.05.15.11.10.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 15 May 2026 11:10:22 -0700 (PDT)
+ Fri, 15 May 2026 11:10:28 -0700 (PDT)
 From: Biswapriyo Nath <nathbappai@gmail.com>
-Date: Fri, 15 May 2026 18:10:03 +0000
-Subject: [PATCH v2 2/3] clk/qcom: qcm2290: Fix vote_bit of gpll6 clock
+Date: Fri, 15 May 2026 18:10:04 +0000
+Subject: [PATCH v2 3/3] board/qualcomm: qcom-phone: Add poweroff command
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260515-ufs-sm61x5-v2-2-0a35d083d2da@gmail.com>
+Message-Id: <20260515-ufs-sm61x5-v2-3-0a35d083d2da@gmail.com>
 References: <20260515-ufs-sm61x5-v2-0-0a35d083d2da@gmail.com>
 In-Reply-To: <20260515-ufs-sm61x5-v2-0-0a35d083d2da@gmail.com>
 To: Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io, 
@@ -92,11 +92,11 @@ Cc: Casey Connolly <casey.connolly@linaro.org>,
  ~postmarketos/upstreaming@lists.sr.ht, 
  Biswapriyo Nath <nathbappai@gmail.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1778868606; l=764;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1778868606; l=1322;
  i=nathbappai@gmail.com; s=20260118; h=from:subject:message-id;
- bh=GnXbRCxpnvc6qn1IfUwlmVEnf8kT77cPuzMvJxTeVyU=;
- b=0iSi5GqQceBDxAvxfqXCLZOk0Z3/wsWhRDMvTmFoGhZhW9GfCoSo0FuK/wCIS+gaDLv7QFzo7
- 5BQzZmCzJTuDEZ/fT8bR5mkn/FM6HeBcfziScR4C03x1CVw9iH1b+ot
+ bh=aaAqC35MCMYpLmylINSOSfAlM9rXfX0AFHjZQuduZ8w=;
+ b=QGhBy24+X7F8e0/Ga34XhcFtTFuGpiKHRNNp4HgT5NM74CYwF4hwQPl6+B6f1FrxmR2QJDSRr
+ aNu+u7bOIqsCOLcCQhg0ngoERGglfPNCR+CpH8lPDtmWPBR5FfDM6Ji
 X-Developer-Key: i=nathbappai@gmail.com; a=ed25519;
  pk=slmb/9yXbet+KTiT3EYLCp0p0MEOYa3EdjUXP+HXfjg=
 X-BeenThere: u-boot@lists.denx.de
@@ -115,27 +115,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This changes the vote_bit same as enable_mask in Linux clock driver.
+This command helps to shutdown the device directly from serial command
+line. Or, the phone has to be booted into recovery mode to power off.
 
-Fixes: 3ddc67573fab ("clk/qcom: qcm2290: Add SDCC1 apps clock frequency table")
 Signed-off-by: Biswapriyo Nath <nathbappai@gmail.com>
 ---
- drivers/clk/qcom/clock-qcm2290.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ board/qualcomm/qcom-phone.config | 1 +
+ board/qualcomm/qcom-phone.env    | 1 +
+ 2 files changed, 2 insertions(+)
 
-diff --git a/drivers/clk/qcom/clock-qcm2290.c b/drivers/clk/qcom/clock-qcm2290.c
-index 5a599085b500..c38ff1a1e4a5 100644
---- a/drivers/clk/qcom/clock-qcm2290.c
-+++ b/drivers/clk/qcom/clock-qcm2290.c
-@@ -73,7 +73,7 @@ static const struct pll_vote_clk gpll6_clk = {
- 	.status = 0x6000,
- 	.status_bit = BIT(31),
- 	.ena_vote = 0x79000,
--	.vote_bit = BIT(7),
-+	.vote_bit = BIT(6),
- };
+diff --git a/board/qualcomm/qcom-phone.config b/board/qualcomm/qcom-phone.config
+index d24094eefddb..e4727fa8b930 100644
+--- a/board/qualcomm/qcom-phone.config
++++ b/board/qualcomm/qcom-phone.config
+@@ -5,6 +5,7 @@ CONFIG_PANIC_HANG=y
+ # We use pause in various places to allow text to be read
+ # before it scrolls off the screen
+ CONFIG_CMD_PAUSE=y
++CONFIG_CMD_POWEROFF=y
+ CONFIG_BOOT_RETRY=y
+ CONFIG_BOOT_RETRY_TIME=1
+ CONFIG_BUTTON_REMAP_PHONE_KEYS=y
+diff --git a/board/qualcomm/qcom-phone.env b/board/qualcomm/qcom-phone.env
+index e91ae3ecdfbd..f9911340295f 100644
+--- a/board/qualcomm/qcom-phone.env
++++ b/board/qualcomm/qcom-phone.env
+@@ -40,6 +40,7 @@ bootmenu_6=Dump clocks=clk dump; pause
+ bootmenu_7=Dump environment=printenv; pause
+ bootmenu_8=Board info=bdinfo; pause
+ bootmenu_9=Dump bootargs=fdt print /chosen bootargs; pause
++bootmenu_10=Power off=poweroff
  
- static const struct gate_clk qcm2290_clks[] = {
+ # Allow holding the volume down button while U-Boot loads to enter
+ # the boot menu
 
 -- 
 2.54.0
