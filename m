@@ -4,92 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1DE09CD343F
-	for <u-boot@archiver.kernel.org>; Fri, 15 May 2026 18:14:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4824CD343F
+	for <u-boot@archiver.kernel.org>; Fri, 15 May 2026 18:22:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7300684832;
-	Fri, 15 May 2026 20:14:41 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 238D0847C5;
+	Fri, 15 May 2026 20:22:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="kVP/nfF9";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="UbTCXTi1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 31DC9846EB; Fri, 15 May 2026 20:14:40 +0200 (CEST)
-Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
- [IPv6:2a00:1450:4864:20::631])
+ id 3037D847E8; Fri, 15 May 2026 20:21:59 +0200 (CEST)
+Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
+ [IPv6:2a00:1450:4864:20::52e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 070A88482F
- for <u-boot@lists.denx.de>; Fri, 15 May 2026 20:14:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 405DE846E6
+ for <u-boot@lists.denx.de>; Fri, 15 May 2026 20:21:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x631.google.com with SMTP id
- a640c23a62f3a-bd0fc4c336eso8333366b.3
- for <u-boot@lists.denx.de>; Fri, 15 May 2026 11:14:38 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1778868877; cv=none;
+Received: by mail-ed1-x52e.google.com with SMTP id
+ 4fb4d7f45d1cf-67bc8609a9bso339932a12.0
+ for <u-boot@lists.denx.de>; Fri, 15 May 2026 11:21:57 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1778869317; cv=none;
  d=google.com; s=arc-20240605;
- b=j8u39sHu06KD6BNgBD79qL+AtUPvNbY6FsfM0v/vzztRqTVJJn8CWvN3O5zqxy21s7
- iuY/hKkAHkL6m2rFBQO8AWzLzqx5KutHVWTz35rJ9+wVsC5HJeR3iIUGFpWdYTaut40Q
- RL4+DP+36NpBMMDI5v9p9HOuMnazpXN8/BBnvn7T1Jer8L1HWUBdtqaqZWKX9V+A0UbM
- SDiapIGxnyjFoUne4dwcsokH8hA16Ni+6jK3Vfl4l5Y+QYlu/Oz8LuksJnkpw3Soog13
- NI/l63D4m2YrUbThT1+FbUEk2Jw93I3O9mw1/qpW7Kj04IAQy4kpUATwZGZFvt4uhZI/
- rMaQ==
+ b=fa2bXrJF5QzHGEngUXjhKbloGK3Nb1dFZrCQe5/5gwVQyHcySwUwtESrgik5jEa230
+ IINjV+1eukUJVlIYQoHy1jk1YBFaaGPKXUCUOfYAz+XoDsJqBcP43O4jftadd60U1Yw3
+ DICh1j4VPVxZArOx9pST+LCHMuRn8g5Ll6s3yq0nTikyvAQ1pHMJYKM8UO5cD5OP9p7i
+ v62f9Z9Cw1Q/c16idK1w2OcKKKRXhUtlITDgTxDgF82tEvpI+TAwn49gXwG/zhCql30v
+ TfJX+TuBS1yTgHPZ5FTmyRICvxS7c2alRawvaM40+/xoqRUWSJuF0hHcXJwZvmxrsZAV
+ 7d7w==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=sWrnUVV/etlaBf2oDSoCs5K35pfDloP8A/yKIGng1ws=;
+ bh=gNT6X+gI/EKDg5+Mqhq2Xlg5hPFiZ/IJ1wqNYwBONUg=;
  fh=sKlYf1RYFkU7W57k8Hb0RqRH+ropi6os4Aw4ruwQ2Xw=;
- b=VgkdYMZodQCd92G7ZYj4Cwj7Hor2JzI/PPnI4Q0EyKPSG1Wo00B58iLBCy2pWahYEu
- 3kouKi12OtA/EYSA6/U4C/RBz7woXw9X63B4QjYyVEiTkl7Jg1sPGqoCa3Xk9dBh2jjH
- Pnam2bB6wg95SI5D6t6hx1OW8QUS/yCU/2FOIG9BmnZ2qm0+ng2JuG8c+Itb8MgQ07c9
- XX2OvZvQcpW2gL+CxNWEHN8UnpA6xOrO/Ks4FZl/j7y/LC2xpKQ9hrSX7TbFS7+tXl51
- 2jWbvvdiXLnX8CEv/h/ymkUJJTuEslsLo9obVYjVc3/KLmNOyMQszd4NhJR6cNOIkx1K
- ndYg==; darn=lists.denx.de
+ b=LnYxzUyErfYZOR16qdG3BIGLBN61jWngYx8iqvahphE57jxm9XXg/of0BehQfhEZ7F
+ CZkooxZAd1QV5QHcd9hWsuM4I9QMWDGvilKme0wX53ov19R1d33i1keltGiMP0/em3Jq
+ VrKCAurRnTk9+TwCJZqkQtzSzcRnWKeLFt9CKmiVNlpjmpan9rK5qMGFHk9VTXIP70iv
+ 8MZoQswrySgdnYQ8KFSvCslYKIjRGUEve2sspr7St+zZ8CvrJO9aZzustuL8QphXbfhW
+ 0FmJ19fuJT2MihSA34eg5AhM9JsQNy368I4LAZEpYhFwCYr+iGfi5dAij8K1r4fydNcx
+ z4VQ==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1778868877; x=1779473677; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1778869317; x=1779474117; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=sWrnUVV/etlaBf2oDSoCs5K35pfDloP8A/yKIGng1ws=;
- b=kVP/nfF9GTuwlGalOfgKHQxOk5y6IYnkIvJYGFk/D9On5oBNL52kwONNHFQHbZ7LoX
- lFR/rxmw9J5PdnwOdVpqbIg7cM/qd0S/kK1OiA9rc/fg5nzBhMiNi0vt99aC0BLppROe
- kJxLsXxb/AvgzblOJOqNSIFsl3/bqtuWizQ5A=
+ bh=gNT6X+gI/EKDg5+Mqhq2Xlg5hPFiZ/IJ1wqNYwBONUg=;
+ b=UbTCXTi14Wl+Yw3oxAsGHc2BLzjL9bzM5cVLngNR3Rgq8egLXZjgxp8Hr5ArdO1AEl
+ c/ULyPRBlTzwRqnHrAYmH2ouUisBlLIIuRdu2kZ6Q7LYFQHPqa8klkAutv4ugnwqAS2x
+ 3mDre3tqNqfCYELqiUOlyWZ/W/Vd+U0gWajtQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778868877; x=1779473677;
+ d=1e100.net; s=20251104; t=1778869317; x=1779474117;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=sWrnUVV/etlaBf2oDSoCs5K35pfDloP8A/yKIGng1ws=;
- b=RkzSi6AnbS7MrFXt9XOfI7H9ILNp8JuYSXEja/Qy34J7RCauLaEsi3OoC9R1ogJ26h
- J5MXCAVq+XeNUBrRtsZjgPEgex5buz2yA7H3/yjuACgimPKW7j9/pu4TEAh3RNInmqWA
- cv2rK46DNuMwn5uAy2zlChj0qjq1c/nWlzNOwx5e5uVUSN51F/wNOvbYaJaaJjmZ1Lj8
- q0FvWpMGk1aQlqvY0D3+hzCb/DYoaC9X7AUCBrWYoAjHcsdsloMyIEMpRVdS6ni/25nB
- kCfXm+RxG6Foz4L5IApda23dvMOdPW4oM4TLZfiefgBHlgyVM6Lq/0nhFSAKpvCdyapL
- preA==
-X-Gm-Message-State: AOJu0Yy5rheO8e0asDp+3yjR8fSttt8OaM90z0sUtBlF43lgoHjigIcu
- QPkRHi8ec9kh+blcdrOHhcdQhmu0OTQAdkgwv71je2yH9a6/zfY+vGLX3bzFCbtO9vc5JCkTQFE
- ZR18QZjNgZlac5EvoFOqd2sb+BmnLtfIPK/adJbuTQJuXBRcHmlw=
-X-Gm-Gg: Acq92OFEl+TBvdX5o3WPCOVSZr2p5QXYtxjOHtLlMbS6ry3uqqswet0SwBjWsEUGyo/
- 1P6Pzh48l8M0t6yOLnjuO3gPn25b+BA1v3huNnBljgnLaLVIz+IrIrPHfYg3HasFm1PUPUPO81x
- iXzureagviXqKw2bQor0wCQy+QCLpPGsiZ2Rb5udXjn0LxD2TFoafg0Ka4gk1GgN3gLA3BeyB7Z
- 4nDZWR1SyEbPFxaYoI4GTPfkL4Wc16mHqqh7Sz920Lw26itcPJmKp082GCYLKl0n46ugpuRhSzp
- 4w9yx8edMlTmpB79
-X-Received: by 2002:a17:906:9fd1:b0:bd0:8b28:1e13 with SMTP id
- a640c23a62f3a-bd5177dcc3bmr285357066b.17.1778868877424; Fri, 15 May 2026
- 11:14:37 -0700 (PDT)
+ bh=gNT6X+gI/EKDg5+Mqhq2Xlg5hPFiZ/IJ1wqNYwBONUg=;
+ b=bqhHKs+HxobhQ5XwfuooOiZvkRVadilaTMrCwQRPYW08Oeqy9EY+HASK1CqiUnpzY7
+ Y5zzSOeM0Xe5NMczOPI8xPv7072PAjeloXRbsXrNf8J2yyf/BlrzmP67cAUEZAyKRelg
+ OMQ4iS+XFAzMrE0BH4y3IWjHsSjRIzLRoYj8q3tmcYQMfDgfV1T76/BTfGmEwtmdWdHE
+ EyDtZvOBmYSaqMBemiduRwbcjhEIqAdMHQLX4wI22NAmGWFfMQ2w9Sa1tRiEmY/QK3PJ
+ ZuMYPhW4ezRBCtU74Ek9Nxgo7WSdXzUF3Sjp7iQfQhSomi9f3Bi2LOuOGS/nZEs7kDwK
+ vrGg==
+X-Gm-Message-State: AOJu0YwESvVgUpsgtT4MS+Lq2aKscipTn83ltYA+VRn8aEeFC9NBxEaD
+ a1mtLtpSxjESXGDIlEdmlKAY7mvQ15+flBm7rA99XrZgHtoOZeTjflqmfgzAYMIOn+R1X7+kgba
+ fTlJbExkjszUD3EDgAUab5kSP+DbpZBvJGAK7fG+p
+X-Gm-Gg: Acq92OEaDhtGmL3kBKhwjeipiPz5uLgv/U8VnkUl9isHuV5bnri3oZT4KaqmVR5mMsC
+ bNAUCBds3V3g0lCedK9qyR4WO46NCdEi2PB13Hdpv2+BuatQ2xjK9dnUAdRaIoSYItkqlDlBhxT
+ FVn+6vPtJnwINmCKkGEdeh7h8l/s/dhzZhKDIdeE/UR7eP0Cd/TEFZsnTkQmfLRoXqYQYpcTRgF
+ Jadc/CP5hCkMCk6/OC7yBsAIC9/ZR332usZQU2U6cNH5NwkQwPW+K5kDJTkvTpRn5BzwCn/PpZ/
+ dwOYIjEw7QaMqyIh
+X-Received: by 2002:a17:907:c8c7:b0:bac:3bb7:268b with SMTP id
+ a640c23a62f3a-bd517aa8873mr309791866b.38.1778869316680; Fri, 15 May 2026
+ 11:21:56 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260424173151.371134-1-harsimransingh.tungal@arm.com>
  <20260514124924.1804332-1-harsimransingh.tungal@arm.com>
- <20260514124924.1804332-2-harsimransingh.tungal@arm.com>
-In-Reply-To: <20260514124924.1804332-2-harsimransingh.tungal@arm.com>
+ <20260514124924.1804332-6-harsimransingh.tungal@arm.com>
+In-Reply-To: <20260514124924.1804332-6-harsimransingh.tungal@arm.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 15 May 2026 12:14:24 -0600
-X-Gm-Features: AVHnY4KvSRYbQ5DkPgIZOUsZyivA27xoCsMYytaE3kkkQ9cHli9wBhuDJHBCHSs
-Message-ID: <CAFLszTi-Uf9yvEbrOBi12OMzC+N1kUWuJ8vyiE7Txb-hz2aTPg@mail.gmail.com>
-Subject: Re: [PATCH v2 01/11] efi_loader: add runtime memset helper
+Date: Fri, 15 May 2026 12:21:43 -0600
+X-Gm-Features: AVHnY4KcmjUvqxNu4BkZAE4Y27mfvzRIXOXcCppj1_RAEoOw_ZldK4Yo4Y_eehs
+Message-ID: <CAFLszTiDTOutq7w6UDwwYNd+hBTQUMRx3uAUK9SLoWh2POU6-w@mail.gmail.com>
+Subject: Re: [PATCH v2 05/11] charset: mark u16_strsize() as __efi_runtime
 To: harsimransingh.tungal@arm.com
 Cc: u-boot@lists.denx.de, abdellatif.elkhlifi@arm.com, trini@konsulko.com, 
  ilias.apalodimas@linaro.org, xypron.glpk@gmx.de, hugues.kambampiana@arm.com, 
@@ -113,18 +113,15 @@ X-Virus-Status: Clean
 
 On 2026-05-14T12:49:13, Harsimran Singh Tungal
 <harsimransingh.tungal@arm.com> wrote:
-> efi_loader: add runtime memset helper
+> charset: mark u16_strsize() as __efi_runtime
 >
-> Add efi_memset_runtime() for EFI runtime paths
+> Mark u16_strsize() as __efi_runtime so it can be called from the EFI
+> runtime variable paths added for FF-A/MM communication after
+> ExitBootServices().
 >
-> This keeps buffer initialization in runtime-resident code after
-> ExitBootServices() and avoids relying on non-runtime helpers.
->
-> Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 > Signed-off-by: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
 >
-> include/efi_loader.h         |  3 +++
->  lib/efi_loader/efi_runtime.c | 20 ++++++++++++++++++++
->  2 files changed, 23 insertions(+)
+> lib/charset.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
