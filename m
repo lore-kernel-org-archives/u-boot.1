@@ -4,104 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 360C5CD343F
-	for <u-boot@archiver.kernel.org>; Fri, 15 May 2026 13:55:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BAC07CD4F25
+	for <u-boot@archiver.kernel.org>; Fri, 15 May 2026 13:58:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C2D65846A5;
-	Fri, 15 May 2026 15:55:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 20E7D846A5;
+	Fri, 15 May 2026 15:58:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="I20jja6U";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="O07RH42b";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9ABB7846B4; Fri, 15 May 2026 15:55:10 +0200 (CEST)
-Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
- [IPv6:2a00:1450:4864:20::136])
+ id B962A846CA; Fri, 15 May 2026 15:58:54 +0200 (CEST)
+Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
+ [IPv6:2a00:1450:4864:20::630])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9D3EB80086
- for <u-boot@lists.denx.de>; Fri, 15 May 2026 15:55:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C2AFB80086
+ for <u-boot@lists.denx.de>; Fri, 15 May 2026 15:58:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x136.google.com with SMTP id
- 2adb3069b0e04-5a995ab70d1so2783383e87.3
- for <u-boot@lists.denx.de>; Fri, 15 May 2026 06:55:08 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1778853308; cv=none;
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x630.google.com with SMTP id
+ a640c23a62f3a-bd2d8bb1068so763014266b.1
+ for <u-boot@lists.denx.de>; Fri, 15 May 2026 06:58:52 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1778853532; cv=none;
  d=google.com; s=arc-20240605;
- b=QjE4Dnl0YTB+dtxhWJ8uSqsf5NVcxq4EqdKtvv5hIg/YA+iUNx9TPZWsTXlux2yKxr
- jRfrASmjoxiXenAXucqa6Uh9IrQEo2BPK9oUH0yHfgXRCaCYQCdyKq9W/T4Udk0JFqqD
- m05bAk5RSvzCblwJbSDCofIDyAtlg0WeDIdtrHb5jP9+ABZEiEpl31rZPucpowUrnZy8
- PWcTvSBp5nGeKjNAAizUfDl83JLaKAfO6WR2UN1rzeuBRYZaJAkfK7qjDoCXGs8f/Tod
- wuolUpO97VUc07g/sQaYI3Wiav9uC7N2thncSrrnoMRFle47d3IhteDQ9QxukgJKntd4
- cf/w==
+ b=FNKUGrJupuZncMUANvCcnditV54XuHrvKVSzUOUgzZdbS8luChmX7dGkZjhgtDzykh
+ wVg0skUj0eVeiZwsEd3fTh4e57IOR7ykUK6tBSc63V033NWPdDd+b3LkTG9mbUC6RmP7
+ v7FXkzzpZ7GCI9/wqWrcA5YbqZXkUmi3C3JexAwrz5jLAGHXGa04Q3fPynlPY47657DM
+ W01YPX+Nf3qjRm70w5c/VkWMnDag3aAqRtKuIG0MOgPOblrlmzj7461avnoE43ImdGid
+ bkIIcra3s31QFcZqStlUOw5eaWR/68xDss+r29y5KRrUO4sva9h1anWLsgFE5p2VtygQ
+ ZpYQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=S8RBZWzGq8AYr+RlPGaoYF89zNYBUkQKb3YhiJBI8/M=;
- fh=b8XmvhVbpxvKJhJIbUxSVGL0h2xFXOSGFnT3KJuTvoQ=;
- b=D02Y8jDuwzreExFGe2GdBDWTHBJh46tTYcdaZ+MCM5fJ/KgtjYI6HRXSKbRVIe8UzD
- rLCpn0WCdHrZSATMp2/Aojd92+ycXr7ypq3/ood4sdj9CfIguwUl1zX4GHF5VGJExYBD
- D+EWCAIHC6moSruzLEt27PlME/DLzXMJvCRDnK6ehAf2v4zeV4aEM8qQyzP3tTmksHXI
- 9+2BDTlFm5IWrd/0R6VQvkZe+bd+rH6Zf323NyEPgWHTe3gHQvSNWb4T6/ZXqzACmmUv
- 5cOBPRJqmfjKx/zTWA1H2b83A+o0Tbj/UaCJxjct6uL0FRKL/C22JcHn9F4C7b3gl5wP
- 90yg==; darn=lists.denx.de
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=YO3agu0gp2Zj5kAdOjHgbFvXeMayrZzl2PQ4Y9ieZv4=;
+ fh=ieaTsSYvgt2SieZEzsiTDAhh9eeO/3bTH+LGjyp/MAU=;
+ b=T2NiairqrTBIjVUgAx/pfrcfAXcGaqbEh/bHVts+RHUBhlCNWYa9GQBP3KM0jF+Y1a
+ Akds/Mpd5OMnSv0Yp9fZEl3hRj0ABEYQVLMuL2dS7cxQZzd1B8HkMTtrV7biWZhAz+HC
+ K2UOEYms6khXN7r1Sq08JUbVTWc3Bnb6om4b6ousxAuETzKiSgDONTW8gl6+0vTOW4xN
+ wFEr8gcYt/AokNv6F44ILbkavG4XG0mL4kKqMjZBpUEihwms9vn26+Q4aPtvm4642I1i
+ 0w87gaTKniIqoY12Bo3L0+jV2doMFc0YLcn30/1/CmTB5DYUNrn7VaLnnNumid+YZbWb
+ wG6Q==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1778853308; x=1779458108; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=S8RBZWzGq8AYr+RlPGaoYF89zNYBUkQKb3YhiJBI8/M=;
- b=I20jja6UkI7c/SuRHH5NQYN9rFcIix85g7V/6JsDWp9gtORwf60vpYWTjh/XeKVMRs
- XDyEVIOP998kq7zS5OCFMDN8Vm8d07n6Weeqps2SoWY2YjnTz8Vo3elNZkGcidsJ7w/N
- EAe7pNf6C4ke2oOBhgbZ7RfI0RBKjGU19AXOyPwtnr8RwUBzMMSgnwhK/7TyZQY4gxp8
- eKBQ1LjJpqMkopXbp/q9jj0ofLfIn6aDYO3v+wsbKjhqrMmt2AlcRSFa7JNVwQIGtCtn
- yH0PrcJXm8CEe/CUo/oY8yO8Hq9zWOtCyq8e19doDR4GmCg3SH2x8CM2EV4Coetq1fpK
- CIrA==
+ d=chromium.org; s=google; t=1778853532; x=1779458332; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=YO3agu0gp2Zj5kAdOjHgbFvXeMayrZzl2PQ4Y9ieZv4=;
+ b=O07RH42bhKt2zH9mGUODy8FmLmrCl2HG7Zj0jEx5JKcq7LaUu1zF90vEvnOuk48QHZ
+ U7N6GozbLSvVaYYdbceJAj8IOAR4VtvOkFk/IjsacFSEzT39aQwM1yVgcgbeeLCNFbNW
+ 1B1cJShe79QMCEaGNorZEgb9IXKUTcT8XW60s=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778853308; x=1779458108;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=S8RBZWzGq8AYr+RlPGaoYF89zNYBUkQKb3YhiJBI8/M=;
- b=BT4CtOgiElfxSgoguURO9n0ocFfMo5ZJc18vRpS2OM/pXX6RwTOLFbq0Ca7+hQLHSe
- 082tScmiWD2dUjJtxF2b5Z0hsCiS3IMZy4PqGpOtDEZOZ29LeXHJFzWNIQTl1HBNHaAv
- oAlBnhlGqn4IENS6ZlRGyzdJS6fmPpVWtZ8EjfqE3DEUMBOzwuUd1ISam2y5qgxeiGCf
- XPWue+pm5s/vss025VF543hHgwW9Nn7YtGJqJ6nCqm8f8MTr6egPBTCqUCpDxaSOG44e
- qdDiPDXkTHYreU40CXxgPNyhZk20B58TjzX+ELXVlkmSN652VMJcCacEG584rAp4H2qF
- cxlw==
-X-Gm-Message-State: AOJu0Yx2n+cp6VaFLBkqWfyLI4x2frmPD7aIdZyQl0c3vIByHRRBlTur
- G1D3+c45vDEY91CJTnCWecXfRNX7IyhOAoFFEfsvN0yU7CBr2UB9fehcuB44EnfyTQcTPPyB3p9
- ghHIzJtmY7aETVlZEplEt3/g8ZTq/6SIa4+IC
-X-Gm-Gg: Acq92OENY5MUf0q/3tnPNP0sYHXbc/x53EOSb9wYXxWOJVHSlR4IknrzOQUKFxfI0mi
- kzUJWbAgslBHduzTk7wy9/oMT0WvVDS+uJcCVecvChmK0bdUXRCm9RksPKhNjx75mAL87GwIey6
- +YGk8LMqqNSwjZ+Orku8O0WNB2a0ZUxj96tY6nBUV85YK3tDzeyAHL5G+TcX/vTW5C44jBhVMp0
- q7MXnD17TVGtrDCALXixmvjsRkQKUWArUnIEekQf+91FsiIwqp0AqTp5/Ntm/jkOJTQQKZXsACF
- Y/YhsDObddLhjv3INHMgYKKvHUMfkikxLgkKK1fNoq3RjM/zDE5n1FzLhsbVBm2E7tntIGNEStZ
- w4a/ZQ/M=
-X-Received: by 2002:a05:6512:3a81:b0:5aa:b6a:6028 with SMTP id
- 2adb3069b0e04-5aa0e753337mr1110847e87.45.1778853307569; Fri, 15 May 2026
- 06:55:07 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1778853532; x=1779458332;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=YO3agu0gp2Zj5kAdOjHgbFvXeMayrZzl2PQ4Y9ieZv4=;
+ b=BJbuvVR7LI3hblQk0AiK37IvUxlli8PsrSPhUur5TRp3eiE8OhcMXRF0N3hsrPJtmv
+ InD9EZ/RjDx8l5HgPqIljPVFI+B5FDLQf38bQmvwj5ceLpOFl3jlYHMAbHINeB8Nt5LZ
+ 0kJ3AjfH3WEGWeI0KpmtXiJMOYBseHuQMIL+H6L1STN6DbGDymrgqv+ypd8ZVdwXw9CQ
+ yYGs8a0z0+WT7LVkvdF87CUnYTfQAL5NP7ILzHqM8VdrqrDclcR+XltbZ9ukm3jwjpqk
+ 3E5pgLzOnJIB6fjuMoKvoyShomQasv03UThGEkEyPXI5hwkT90it7Nw0bG8i7LGCaGTq
+ tK0g==
+X-Gm-Message-State: AOJu0YwxtocShg1C94rfaQl8ekQP+RdK8p34cAUPWELGWea3GziP+b/v
+ dXOa06fbo9hoedjdsqaf5UQGGIUGQM6us4jGr/7imHd5dDpHfVKiMw756ONJZgXrVqXkkeR2n84
+ zyYSRxE5Xp1jhLYh3mMpvDWS2+3I8TzPakzyezbdbs+4O7sVj2ypyYg==
+X-Gm-Gg: Acq92OHUBFQm2OP/L+Q0emYVTdzVg9zcohuGKGPNd75UeZsGNF4I3WCpr/WUza8i+P6
+ m91lEGiZmjYNb2YBG2m7fXQqq60lDYijOCB90HtpRdpVyQx2MHUPw7Xp7AgzYjYvqYi3/QwttkY
+ rjiZsqg1VVLevVFttZi/YdjTIZV4HsiKCd1o+tRJ1AcrXavLT9CSwVOdu5QYOIIkQLU8fJ/v+mo
+ 4O4EmON5CJ10+GxZ/Es0PbrLlaejiV8E3DDKUUfkAdY9IP24hCvwGW6NuRWVXv9mX805T2AeSYb
+ UaBH2w==
+X-Received: by 2002:a17:907:a45:b0:bc5:bac6:5d5e with SMTP id
+ a640c23a62f3a-bd51790581emr236416866b.23.1778853532049; Fri, 15 May 2026
+ 06:58:52 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260501162706.543779-1-alexander.sverdlin@siemens.com>
-In-Reply-To: <20260501162706.543779-1-alexander.sverdlin@siemens.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Fri, 15 May 2026 10:54:56 -0300
-X-Gm-Features: AVHnY4LwAc169TBvEmHmkzUgq9WKrpsTUajzFlxGB0TLM7AIJ84AU5CiPlBcW3Q
-Message-ID: <CAOMZO5B9W=WOXHRKdj-gpirD3z1WeODiFkYFB9ULZR-a=QE8sg@mail.gmail.com>
-Subject: Re: [PATCH] clk: imx: don't build i.MX6/RTxxxx code for all users of
- CCF
-To: "A. Sverdlin" <alexander.sverdlin@siemens.com>
-Cc: u-boot@lists.denx.de, Lukasz Majewski <lukma@denx.de>,
- Tom Rini <trini@konsulko.com>, 
- Ye Li <ye.li@nxp.com>, Christoph Niedermaier <cniedermaier@dh-electronics.com>,
- Michael Trimarchi <michael@amarulasolutions.com>, Peng Fan <peng.fan@nxp.com>
+References: <agXW8eM2DdZLEqt4@os.inf.tu-dresden.de>
+In-Reply-To: <agXW8eM2DdZLEqt4@os.inf.tu-dresden.de>
+From: Simon Glass <sjg@chromium.org>
+Date: Fri, 15 May 2026 07:58:38 -0600
+X-Gm-Features: AVHnY4LvNVRFAqYMYRdc8L0ySbOgd95vkjwlRkR0J19V6gNKN00SFdUe70XRlo4
+Message-ID: <CAFLszTjn8H=3x2=UcBEVX22FGP+_27fsvFksE7CoeORL810xOQ@mail.gmail.com>
+Subject: Re: [PATCH] common/command.c: Avoid NULL pointer use in
+ cmd_auto_complete
+To: adam@l4re.org
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -118,70 +108,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, May 1, 2026 at 1:52=E2=80=AFPM A. Sverdlin
-<alexander.sverdlin@siemens.com> wrote:
->
-> From: Alexander Sverdlin <alexander.sverdlin@siemens.com>
->
-> When commit 1d7993d1d0ef
-> ("clk: Port Linux common clock framework [CCF] for imx6q to U-boot (tag: =
-v5.1.12)")
-> introduced the parts of Linux Common Clock Framework, it was done for i.M=
-X6
-> only and even had "depends on SPL_CLK_IMX6Q" conditions. Since commit
-> ccab06689aa2 ("clk: imx: expose CCF entry for all") the framework can be
-> re-used with SoCs of other vendors (say, TI), but NXP SoC-specific code i=
-s
-> still being build. Is is especially problematic for size-constrained SPL
-> images on TI AM62x.
->
-> Make the build of the i.MX6/RTxxxx code not only dependent on
-> CONFIG_$(PHASE_)CLK_CCF, but also on the corresponding CONFIG_ARCH_*
-> options taking into account that only two platforms seem to use the code =
-in
-> question.
->
-> This saves 2264 bytes on ARM platforms [using CCF].
->
-> Signed-off-by: Alexander Sverdlin <alexander.sverdlin@siemens.com>
+Hi Adam,
 
-This breaks the build.
+On 2026-05-14T14:06:41, Adam Lackorzynski <adam@l4re.org> wrote:
+> common/command.c: Avoid NULL pointer use in cmd_auto_complete
+>
+> Avoid putting a potential NULL pointer to strcmp, which would lead to a
+> load at address 0.
+>
+> Signed-off-by: Adam Lackorzynski <adam@l4re.org>
+>
+> common/command.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 
-make imx8mm-icore-mx8mm-ctouch2_defconfig
-make
-/usr/lib/gcc-cross/aarch64-linux-gnu/13/../../../../aarch64-linux-gnu/bin/l=
-d:
-/tmp/cc1Ra7A0.ltrans4.ltrans.o: in function `imx8mm_clk_probe':
-/home/fabio/custodian/u-boot-imx/drivers/clk/imx/clk.h:129:(.text.imx8mm_cl=
-k_probe+0xbd0):
-undefined reference to `clk_register_gate2'
-/usr/lib/gcc-cross/aarch64-linux-gnu/13/../../../../aarch64-linux-gnu/bin/l=
-d:
-/home/fabio/custodian/u-boot-imx/drivers/clk/imx/clk.h:129:(.text.imx8mm_cl=
-k_probe+0xc10):
-undefined reference to `clk_register_gate2'
-/usr/lib/gcc-cross/aarch64-linux-gnu/13/../../../../aarch64-linux-gnu/bin/l=
-d:
-/home/fabio/custodian/u-boot-imx/drivers/clk/imx/clk.h:129:(.text.imx8mm_cl=
-k_probe+0xc50):
-undefined reference to `clk_register_gate2'
-/usr/lib/gcc-cross/aarch64-linux-gnu/13/../../../../aarch64-linux-gnu/bin/l=
-d:
-/home/fabio/custodian/u-boot-imx/drivers/clk/imx/clk.h:129:(.text.imx8mm_cl=
-k_probe+0xc90):
-undefined reference to `clk_register_gate2'
-/usr/lib/gcc-cross/aarch64-linux-gnu/13/../../../../aarch64-linux-gnu/bin/l=
-d:
-/home/fabio/custodian/u-boot-imx/drivers/clk/imx/clk.h:129:(.text.imx8mm_cl=
-k_probe+0xdb8):
-undefined reference to `clk_register_gate2'
-/usr/lib/gcc-cross/aarch64-linux-gnu/13/../../../../aarch64-linux-gnu/bin/l=
-d:
-/tmp/cc1Ra7A0.ltrans4.ltrans.o:/home/fabio/custodian/u-boot-imx/drivers/clk=
-/imx/clk.h:129:
-more undefined references to `clk_register_gate2' follow
-collect2: fatal error: ld terminated with signal 11 [Segmentation
-fault], core dumped
-compilation terminated.
-make: *** [Makefile:2109: u-boot] Error 1
-make: *** Deleting file 'u-boot'
+> diff --git a/common/command.c b/common/command.c
+> @@ -373,7 +373,7 @@ int cmd_auto_complete(const char *const prompt, char *buf, int *np, int *colp)
+>       const char *ps_prompt = CONFIG_SYS_PROMPT;
+>  #endif
+>
+> -     if (strcmp(prompt, ps_prompt) != 0)
+> +     if (ps_prompt && strcmp(prompt, ps_prompt) != 0)
+>               return 0;       /* not in normal console */
+
+This avoids the deref but isn't quite right. uboot_cli_readline() in
+common/cli_hush.c falls back to CONFIG_SYS_PROMPT (or
+CONFIG_SYS_PROMPT_HUSH_PS2 for promptmode 2) when PS1 is unset, so
+prompt here is never NULL. With your change, a NULL PS1 makes the
+comparison succeed unconditionally and promptmode 2 gets treated as
+the normal console.
+
+Please can you fall back to the default when env_get() returns NULL,
+mirroring the readline path:
+
+    const char *ps_prompt;
+
+    if (IS_ENABLED(CONFIG_CMDLINE_PS_SUPPORT)) {
+        ps_prompt = env_get('PS1');
+
+        if (!ps_prompt)
+                ps_prompt = CONFIG_SYS_PROMPT;
+    } else {
+        ps_prompt = CONFIG_SYS_PROMPT;
+    }
+
+What do you think?
+
+Regards,
+Simon
