@@ -4,93 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34BD1CD343F
-	for <u-boot@archiver.kernel.org>; Fri, 15 May 2026 18:22:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1393BCD4F3C
+	for <u-boot@archiver.kernel.org>; Fri, 15 May 2026 18:22:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 60CBB8482F;
-	Fri, 15 May 2026 20:22:06 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9DE6F847C5;
+	Fri, 15 May 2026 20:22:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="UYKotFVi";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="dKGYovew";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B2ED1846E6; Fri, 15 May 2026 20:22:05 +0200 (CEST)
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [IPv6:2a00:1450:4864:20::632])
+ id C46608483A; Fri, 15 May 2026 20:22:38 +0200 (CEST)
+Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
+ [IPv6:2a00:1450:4864:20::636])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C900D8482F
- for <u-boot@lists.denx.de>; Fri, 15 May 2026 20:22:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 79677846E6
+ for <u-boot@lists.denx.de>; Fri, 15 May 2026 20:22:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-b8f97c626aaso7726666b.2
- for <u-boot@lists.denx.de>; Fri, 15 May 2026 11:22:03 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1778869323; cv=none;
+Received: by mail-ej1-x636.google.com with SMTP id
+ a640c23a62f3a-b9358bc9c50so9511366b.1
+ for <u-boot@lists.denx.de>; Fri, 15 May 2026 11:22:35 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1778869355; cv=none;
  d=google.com; s=arc-20240605;
- b=ij8KsAoMMq5hFxTKQmvSPE4ZvPOyvsxXha6km4AzgMd917oOLywN/4p1TSjtMVY7ff
- QzVEgbpkTW+HJx5ZFYH4fVi71D13l7SOdSRNB52nHWCSCg02TdEJSsMKjA3V3fjo8AO0
- LpXJBQ0sakzIPuZcnX3LnAhQAyYkZgpcYCWyDAgiaU/OZ0/RkPg7v+ScdPuKxkdHeb20
- DORhqDeQIp7dkn9hVdGk/tECRb62Au9XwDLBcxwsDAbcV+zUWjDRcb8PD6/WlcgLvtbl
- rcuPnlvy+P6C7w/cI5n/0ACOozTkhvFlSuBX71B4xPum7iBOmHiLjbDgL5MEPV24zlNn
- cXkw==
+ b=Vde39iCpA0cAKD+hSoPQ2c2qq8Qd+g3HfQxCGQ9OPuExpL9ZjkenIN/pX5xfDfTWSS
+ 5JgT6rebqKcdsTHmR83ugVzji9XnDjHTdjDSp89TOaYVrARW+FBzOxAIxkpwKM25U7Cd
+ aBCsD+q2BYumx9YRz9JHURosZgihmp5jDR5PJIY06wK4AURjOIH5UKOVgz7KgEwOwnS0
+ pjoNwubdTSGcDU3Ft2IOTiJNV0/Lgj/OBxCjGMDJxfOikJeyhMtXvLin7qUBLgXv5DO+
+ /a34tfdhtBNdQqq8p/+lim+4EXx3nVbSpBi3ILcDGgrRXm43tn8IcgKmylW72QldVEya
+ YFOg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=OhDlaQ5ffZffcev2IKvA9XNk1Uf9MTk2ax7U/PhyXdg=;
+ bh=JgJE7D4DYNpkovFZrsf5mkqGCUZv7j5EEeF/NIT3G0s=;
  fh=sKlYf1RYFkU7W57k8Hb0RqRH+ropi6os4Aw4ruwQ2Xw=;
- b=dUwR+9p6C9V9GbRFbUrDXw6+NQ3Y8KwMqNbL8rrVNzGTa7QjD2IMVes4O4jv3u9f7n
- ILSWsnMh8eReGVaGKNDA6xU5UkYM681yTp8LE41+PjRLu09hu+VW20meszV6ny5Leu79
- zBF+TnXu0zqMa57WFbLZiBBBeBAaaSdlo4R/AHm83JIP7Gc+gw4i3R0E098r/DlyWF6x
- L+n1bnpbHcXeH/IHPm27A/vaGI5/Yj5VZOc2c0jEKnvkThoZMKMW5tHjuvm6mf/KLyD6
- JWWZRC2qz2Uhw0GNEtX2mjg7+ET2TuOcDX5CiNh7tRLtaEcAy8hySwiUqvOwBw1HNkf7
- bR8g==; darn=lists.denx.de
+ b=DFVkcNBRynYgtke//JBaAcvoteByYQDooZtzVHizYd77raqdPVie0vd652IYfhilRI
+ BrkKbh71nMhePpZlY+TabhnYkkffTrEEHDsrTB+zHxi0V/bE0G0XIUz1nNh3Ok9z7QKS
+ qtruyrfwYF5yuouip+p2m7CI25wlZexE2gyICIfy13XGmYYWIxwQabBfgzdJ7VmrAXsh
+ NMhtT82jeSBaxAuLuZgYLkmsakjyObzOr7N7DgGSHwBviEiC2KuGJxrEuEUx8d5DqZRe
+ zhJopa7GgHReHyf3K9tWTfLgI/tfQ8xpZuoyzhIvEAaEFmwRRyZNHOWdy1XLaM8ssH3t
+ 81cg==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1778869323; x=1779474123; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1778869355; x=1779474155; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=OhDlaQ5ffZffcev2IKvA9XNk1Uf9MTk2ax7U/PhyXdg=;
- b=UYKotFViUdvVA/y0UhISL9TX9l1rpm2OS225Nc9TF08PEF/E8LKYh15FMff1zof26g
- qVJzj7qLKnB3FVo+VRheTS3f3PL2Y9omdprcxXgewcqFFippc4CtcrMWtQXCCbgiBuwX
- gzqNSSRzMktLA/hjrqWFL54vi0GAH9CWcPFN8=
+ bh=JgJE7D4DYNpkovFZrsf5mkqGCUZv7j5EEeF/NIT3G0s=;
+ b=dKGYovew/Rdj+XNtDYnsFBKwOcJq1Hn6FqvffeUrhEmR9XF9tNW2uRLwPlRaTFcEJf
+ Iw90o73Aq2XkKhZ/QFmDIv0lC10mxRA8b5nnfvqA+Rs4zLgFCv1Lu0KSK16foqSAPNj5
+ sQdqLlw3ojHuOjVw7Mh8Ec+e2mvbs2dSsma+c=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778869323; x=1779474123;
+ d=1e100.net; s=20251104; t=1778869355; x=1779474155;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=OhDlaQ5ffZffcev2IKvA9XNk1Uf9MTk2ax7U/PhyXdg=;
- b=paG6RGKLaNU9gYQLOVsdvFE2jVSp2HG6EkPb2xIFjPwnn+HcNbQrsCIAEYGO6Sk8Wn
- SU1wNnVbOb/2pqNcqgA193GEci9m9zoDyBd7Q0yKG5nLwFxc+lJDgWAtlKaCGg1YL7z0
- n45BSz5AWbUV+eL+/GTOL82VQUfwlaJlpxSVJZhJIQSlOOAJIpgXDkdXrr4f8Ffei0/r
- HO9ufkWM4/skgS6abodICbnFzWcq4YH93CdU/HsZbjkKj5nVPu1Vu+40wHNTJ6q7xzON
- MOX8WQolUrDeQ+ErplB1CScZJ9w3Y+hTIGT23lN+cFAOWOg9OW4iGWpYyLacUW37NGjL
- wEoA==
-X-Gm-Message-State: AOJu0YyKfnhlvhPbh14UST0EP1zNRv9Wa+m68s0Khf9Xq2J1/HfK5ob/
- Fsy2UFsgJ8sGSljDc+obYGcKCOXJzc8dW4/jiazWHJR6+Bt41png/p14Cb4dqUVMfHkwiji3H+X
- CHxQaeGyjDWc6oPekgwbMUqnjecjjVpypvixs6AiX
-X-Gm-Gg: Acq92OGvujR+ir1dwzGIrZF4T5FGihYO7JxrTfyroH7b1QhgtAwhnT/ean2Bl/NBYth
- KLFYb9rALnPDQsh/+UmPgVxmedf/+qCAvIPEPokrwtaX/daNM8rABz9rhpidpN6TjMeitkaoWk9
- h6dWki13L3C23d+KviJTz+epOM2QZY8iyWcUQ54QLRtLXGcp5YyjDrcRnjeQqqxIEzXQo1b/iMU
- lWV5fm6G7rDQ/BpOpmxsUYhpQOrfbINESWMsqm+MmeFwRnpQSobjBvwF+tlyNi2wGhOLULPAtpJ
- lfgQPA==
-X-Received: by 2002:a17:907:3cc1:b0:bd3:5e5d:336 with SMTP id
- a640c23a62f3a-bd51777bbfemr279460766b.5.1778869323189; Fri, 15 May 2026
- 11:22:03 -0700 (PDT)
+ bh=JgJE7D4DYNpkovFZrsf5mkqGCUZv7j5EEeF/NIT3G0s=;
+ b=W5WgxsthG//IA3IzfDYiwQ4KJ9gT7d292GCsR9bIH9Yv+nkiH2YnLkBR3G6Hc6crKl
+ eVC+fexa2S9eX8RGK/bk6x2dxjp/Vl37LbCj0fHrp/ojqDkC7hVw92JitXC7IW8CucJr
+ RoVuZvEJTgkLY8+59NFGzIMTupcsqoeV9n1IyOEYtyt9m2U2pQ0K1JfZttoa3MltYUQ2
+ advlewc584vLuKUedA/+S5Jbyrr1tHFIXTpjTvFwKZJ2rR1WmN+n2elDH46xOzRVOSd7
+ T4TT+V9NmXjk8rcsxAWchU9vZoZIie24QTJPots5VRvMLWTn+Qm4KIp5UlChsKmXWjcU
+ TsuA==
+X-Gm-Message-State: AOJu0Yy7CPLnfrHWsRNE9KUJAU6vc5VWxeR6/8faeBctvu9uS2fPwWXq
+ 3ypgAEYyx/Sc3glWUMWb3z2IZ9ozEBeEiRx0IP1nH8NqsIdd+HwTXBGR4u21ci8AOI5r2QOHX0E
+ 3HjIMSQzbKRwhysU/iD/yphFcsKP1h1V0SNv/vUzK
+X-Gm-Gg: Acq92OGScabARxqWSi/S8/9+OXzNPTAnOjrV5rj3g9l6guNZu4Qi7GiyGfAjf7Fq4bN
+ Ji2IPs9mIp/448iUc8/vUUBJy3hSSrtNhcvOfQrbiFi72K+CbZnDy+lKsNiHtmBF+LqWeSj3eq8
+ jfa3cRKGGdIOv9h6MUIka3NlTBvS4xEJfqTycFTVCgDH6o+dxCSq3ZCrH0Z4BT+gHHv+U1YaaUu
+ fEeaWlgEO7S1drgsIEYU68cq0KEW6qjKu/e2TVIzieQSF63C2Rhi+wDf1CKz6pCY/ifImkUxuOp
+ uT3+AA==
+X-Received: by 2002:a17:907:c22:b0:bc3:c6a4:a819 with SMTP id
+ a640c23a62f3a-bd51796e738mr264292766b.36.1778869354855; Fri, 15 May 2026
+ 11:22:34 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260424173151.371134-1-harsimransingh.tungal@arm.com>
  <20260514124924.1804332-1-harsimransingh.tungal@arm.com>
- <20260514124924.1804332-7-harsimransingh.tungal@arm.com>
-In-Reply-To: <20260514124924.1804332-7-harsimransingh.tungal@arm.com>
+ <20260514124924.1804332-8-harsimransingh.tungal@arm.com>
+In-Reply-To: <20260514124924.1804332-8-harsimransingh.tungal@arm.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 15 May 2026 12:21:49 -0600
-X-Gm-Features: AVHnY4Iy0jDhB3rYsUrJuQ1BXNv6PqrOFSsD5kgvIx8xE2p9Yn8k1xbx8JF59J4
-Message-ID: <CAFLszTgdjP3m+ai-9acqUNiWkz2aqfxz19k6qt_HY5WSLMoLrg@mail.gmail.com>
-Subject: Re: [PATCH v2 06/11] efi_loader: move runtime variable read helpers
- to efi_variable.c
+Date: Fri, 15 May 2026 12:22:22 -0600
+X-Gm-Features: AVHnY4Ig8HZUOS6Auo6C76Z8XZa1uxEqIgyO4qZEk1SAd2Hk2Vh-4LmgrB-QbaU
+Message-ID: <CAFLszTjHDTALNScPLaRLRB3r1GqN7vvK6rP4qspqCXK6JCFRgg@mail.gmail.com>
+Subject: Re: [PATCH v2 07/11] corstone1000: enable bootefi selftest
 To: harsimransingh.tungal@arm.com
 Cc: u-boot@lists.denx.de, abdellatif.elkhlifi@arm.com, trini@konsulko.com, 
  ilias.apalodimas@linaro.org, xypron.glpk@gmx.de, hugues.kambampiana@arm.com, 
@@ -114,27 +113,21 @@ X-Virus-Status: Clean
 
 On 2026-05-14T12:49:13, Harsimran Singh Tungal
 <harsimransingh.tungal@arm.com> wrote:
-> efi_loader: move runtime variable read helpers to efi_variable.c
+> corstone1000: enable bootefi selftest
 >
-> Relocate the generic runtime variable read helpers from
-> efi_var_common.c to efi_variable.c.
+> Enable CMD_BOOTEFI_SELFTEST in corstone1000_defconfig so the later
+> runtime-variable selftest patch in this series can be exercised on
+> Corstone-1000.
 >
-> efi_var_common.c is always built, while efi_variable.c is only built
-> when CONFIG_EFI_MM_COMM_TEE is unset. Earlier patches in this series
-> add TEE/FF-A-specific runtime read helpers in efi_variable_tee.c.
-> Leaving the generic definitions in efi_var_common.c would therefore
-> cause a symbol clash in EFI_MM_COMM_TEE builds.
->
-> Move efi_get_variable_runtime() and
-> efi_get_next_variable_name_runtime() into efi_variable.c so the
-> non-TEE backend keeps the generic memory-backed implementations,
-> while the TEE/FF-A backend continues to provide its own runtime read
-> helpers in efi_variable_tee.c.
+> Keep CMD_BOOTEFI_HELLO and CMD_POWEROFF explicitly disabled.
+> Enabling CMD_BOOTEFI_SELFTEST would otherwise make
+> CMD_BOOTEFI_HELLO default to y and pull in CMD_POWEROFF on this
+> PSCI-based defconfig. The intent here is to enable the selftest command
+> without broadening the rest of the board command set.
 >
 > Signed-off-by: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
 >
-> lib/efi_loader/efi_var_common.c | 24 ------------------------
->  lib/efi_loader/efi_variable.c   | 24 ++++++++++++++++++++++++
->  2 files changed, 24 insertions(+), 24 deletions(-)
+> configs/corstone1000_defconfig | 3 +++
+>  1 file changed, 3 insertions(+)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
