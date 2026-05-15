@@ -4,112 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7BDB8CD4851
-	for <u-boot@archiver.kernel.org>; Fri, 15 May 2026 23:11:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54BE4CD4851
+	for <u-boot@archiver.kernel.org>; Fri, 15 May 2026 23:30:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B6A9984812;
-	Sat, 16 May 2026 01:11:55 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 78A4184812;
+	Sat, 16 May 2026 01:30:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="XFR28IL4";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Tl3B5dre";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9421584869; Sat, 16 May 2026 01:11:54 +0200 (CEST)
-Received: from mail-oi1-x230.google.com (mail-oi1-x230.google.com
- [IPv6:2607:f8b0:4864:20::230])
+ id 6796F84884; Sat, 16 May 2026 01:30:35 +0200 (CEST)
+Received: from mail-qk1-x72b.google.com (mail-qk1-x72b.google.com
+ [IPv6:2607:f8b0:4864:20::72b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0FF4784713
- for <u-boot@lists.denx.de>; Sat, 16 May 2026 01:11:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DC0978480B
+ for <u-boot@lists.denx.de>; Sat, 16 May 2026 01:30:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=briansune@gmail.com
-Received: by mail-oi1-x230.google.com with SMTP id
- 5614622812f47-47c7b282e21so187478b6e.1
- for <u-boot@lists.denx.de>; Fri, 15 May 2026 16:11:51 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1778886711; cv=none;
- d=google.com; s=arc-20240605;
- b=JEf1hyUqQwehOsOFr+FieAplZ9ayRWXJrt/tEtwgMpZNVX+KizKwCZkRBB5Fiq7plQ
- xuIbzSSU67sy4hLkLAouPlmz+c8fCiMqdB26HKN6brh30SG32ItWpmJ54Y1JZnOm+Jhx
- ApuCS/yeC6e4QU4Znt1ToUlb2XGSQ5FiSUj5puCMPJR9DMh+dtyGi2dSFV51wapd31bN
- VcggYUQoSaAk1HEl3gBQuX4/dHOWZAdprOC6QsLSl/6cEp/ytIVWrnnTPrV8b3umw6US
- c17DpaQDGc5WSgVYWCCbxFuOZLaDI6DMExv2MUMYfBwu7xs9V/JHW0DllsCslWtM56Hk
- b25Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=c36LsoF7NwGzx2oLAgF0EN8Bh/98KJmDgaYaEJ3G4Ew=;
- fh=WZ5gdBIPClJvaOLUN4gZuxwRaqg2moCepTlohn5msQs=;
- b=OEB6HnZJ70M8UsgAyg4eFd42jQ1tKj96bFROvby4r+o13zLRw45Hq/Sbg1peOwLmZl
- jD0XrIMTDPh2ghGR/k4aaVoBeSE3zNf5GE4b4eTd3uIg+F5jidx4DSNcN9q3eZkgSxdo
- 0uVlICqZY2pP/1ufFTMYVbXkah3cDjU1rxVHSrT8+qVi5P+BpRlPPOsvvb7XdzN8IyIo
- 4V3HwlHek33A3/bTtfZalqhux1Dfg0eF3gcnlOU/UOdHcP31bVZIOgtRC3C6Jmj+FOAo
- g7yjJKP2OKy/xPs9f8pCtkwD+geAHh4OWhv8Gsq8VD+XGKwLOaJj4A/wm20DqMO6DACA
- vJoA==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-qk1-x72b.google.com with SMTP id
+ af79cd13be357-9116861f004so110924785a.3
+ for <u-boot@lists.denx.de>; Fri, 15 May 2026 16:30:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1778886711; x=1779491511; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=c36LsoF7NwGzx2oLAgF0EN8Bh/98KJmDgaYaEJ3G4Ew=;
- b=XFR28IL4QZoc7hTtl01DzO/eu9I4Evv86vqGlIS//oEnK7aOfBPOgXKAXweV7FwiJW
- tCCFaOFH2w4/MlE30MA6ssZMz4XLLl4jGZ/IlJh1YsKdHTx45YDdKJa6GwJWf5GZHSZC
- l0ZZ5iIBbkublNJjZI0ho6jkihbiu60eHr9eyKKcFe1FkvEOhCuJH48TrfSqyfjcqMqx
- HINXha522hRXkkJRm9J2WVLWWDt2qilmykh/H48A/U64o7l2/7RKSGEkoN2bbrTLHxm7
- zqIPAFA2Fcf54nMPupLyUHBzNI208cY3RZakZ9ylygol0PILXp3ubmlOBnEuUh5Tclkb
- GIaQ==
+ d=gmail.com; s=20251104; t=1778887831; x=1779492631; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=1k3WFPYn7k0tHxbBToF30Jhcn3+lA7I2lLngwPCUGQk=;
+ b=Tl3B5dren4CAC/k+r3z2uzll73bsipG6KIIWfGa2g6bHwoR/T7UAXuepz3pzRKBImH
+ zN70FL8PuclIY12ze06dbOxat1KefZlXfrNLMgvMv+5ZPDNidabLXGSDxZBFaEU5ZYqJ
+ lUSj31JHbOLfsaqh3gxjNR8ATMy32HfSanexPzOFBUBEOk6vEtHK5AFw0N/6s239Zyiy
+ QQpl1rlVR2X3UcdCJevy5z63L9easuraJURk6eR4e+fjJT6B/H9+Fqb6hRpZlgWRgAgS
+ /KFXOqfKPo+8SOnG16ssffkdcWRHY7lEFSm/AoCL09/KtZDgdfuE5KW+No5uYFc74IGG
+ 0U6g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778886711; x=1779491511;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=c36LsoF7NwGzx2oLAgF0EN8Bh/98KJmDgaYaEJ3G4Ew=;
- b=eu6p41XqIoHxBwLuljmES48hhCBvbiZfKXPNSg5BRqyQ+sY4yerOJgEzXN7Y79KEoR
- Bu2NcI1VE1lTjN8f1CVdxo1TlEJETCYPMtLjF6MFO38vdufXqYNT8Yzr3zxf5a99FMR5
- ls9uoZq3V70Fva3fCP3s3wIyr0CMZHDjF8nmi7vIpesDVoOI5HdRXKbcVn2qZUDAArAY
- W4zzEvurlyMDeD6OzX2cKDThas8SRuE36I3060Abewk8/h4rFvsqRuH6RhYH/Rkenu9L
- nFEV6FzYZRjTtvCGHss0Mn7XjBGblfTlKVjmChpXymsmpiltPVEhfMWSIuKs7qLKnsFz
- hM5A==
-X-Forwarded-Encrypted: i=1;
- AFNElJ++nAFEJiQqDKXJFKVQWY3sd3ztU1O9X8bOKeJVN4LQMpACXHrS9z3700W6X51iu8B0Gfpr270=@lists.denx.de
-X-Gm-Message-State: AOJu0YxDSguFdcYOlknJGF8s6DmGVXyxQJPhVPy1AutuHwk0GTXeyfiY
- kRPV5Ex7WKiUq5R/clPNSohpCeRSB9wZCw5/j57LQIIIO18fE3LGZPoroX1mbGlT5ojlThwJSIS
- nV5wGoNXuCl8OJXTnwosh10b8zxKoR4U=
-X-Gm-Gg: Acq92OFOrHko7xaeoMVxBbppLaZpZe+Lw8l0i1M7cGFYPJPNTqtg/DjHvRpG+hQLMVu
- LNqxwOvgnDb6sugERuOXFuBHuECqbdq6XMnidsIiGVBpYkkiYXskLPcDXNw2CvfNhXqRglHrSsd
- mp9URMwlTt03V89o2SgM8SkrHiGERi+juBNd5ruNXJqvEAbDuaS3K6GigZuGxqKgFcEQg8QrLa2
- JRxm+TXg0sJuQ1FkSUMr2BnkP6MQ03XfkM/ZImTNxlz9xdtwyB+PJBPT+8fdilrxxlFffxsH7gL
- 0h8SU6urnFi64QcQwQ==
-X-Received: by 2002:a05:6808:148e:b0:482:6b8a:33a6 with SMTP id
- 5614622812f47-482e57ba674mr4167300b6e.23.1778886710656; Fri, 15 May 2026
- 16:11:50 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1778887831; x=1779492631;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=1k3WFPYn7k0tHxbBToF30Jhcn3+lA7I2lLngwPCUGQk=;
+ b=KZVV1lNOEdmGGpgCola4gjBgTiWbOK81UOhogdPWX9rTUYFS0+tNrMxixM4MHKgd0M
+ utI5JR/phV0ZK+7QhUWKdTsUFTHhmznM63Y9QFwWuVN5B6lqokcwvcHm6jHsSQ/PdmWj
+ g2GnF5jlAfiTK5idM4gBJDPZi65xqiUJiGIyzGTjeElAAO3YulcvCr/HIBZgBHAItmB2
+ DaXaES5Wyv01eGrTzSiaSTIPM4gnPSkWeuED3sivdeoAgrammSubwicnyddhcsdU9ah7
+ VCMEROjTHwEMLWVHUu3vlA31l5a9JoE93O0lu02OUabJoM1qSzSfBZWwWJLBu+wDy4a2
+ fciw==
+X-Gm-Message-State: AOJu0Ywo/BP1JFno6wGg6C8Cd4kLSEl8CVo0ZLiLol65Gl4OoO7E8VRR
+ zBxz5hoRvArjtFK9bRVVqZwIcDyhZAWn/230nXNfQ3J7s+wQt1BhcKCr
+X-Gm-Gg: Acq92OFjBeK2oTXH6uU8JfiIHRedZxRtvw7c6RJ4gYK50aecbcemDvV7muKymXE9Ehk
+ GlnrjNeKioVk39AiN32ULlYJgrF85zPsy3qPFbCyBvgliYZuJcJB88ZO3iJ9k0smMUF2tDl+IX4
+ LrEIniuRahjVY/lW1+4/RU8gAd2gXDLBd3Pg/RBMFUyRtbkzvZ463eKWk3WP5EQAH2I8cTO/+8z
+ Bhfme77LCHLEq6HC/wisGsBj6rrmmkvBAAJeMoX0+VkyomdKj4veqKa30/OQPCE2Yar1/riNXut
+ nsHDVy6aupxJ71tngfJCwqXqrx0EzElUexJLXGcXhcPN4xBrvZNjeDNtmQkmH4lA/YQFvDMJfiL
+ 1HRqlF0noIOEEavrPqB/rUMDC4sxxTfuUvOptoeSOePqEHSeU3RniJL5K5opo63R7DSI8rlw0q4
+ FpudlLCfD2X7sTfEIiVFHVjLZ68SmP8RVh0aRNVAW1MN4fl+PcKeQ/CusKKWuvwfsKLURLUctn2
+ HnYFPyb
+X-Received: by 2002:a05:620a:4042:b0:8ec:c4a7:f8ec with SMTP id
+ af79cd13be357-911cdd44042mr1066197385a.4.1778887831118; 
+ Fri, 15 May 2026 16:30:31 -0700 (PDT)
+Received: from fabio-Precision-3551..
+ ([2804:1b3:a801:e132:14ba:749b:ce1a:b5a7])
+ by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-910c0ec392bsm669380785a.41.2026.05.15.16.30.25
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 15 May 2026 16:30:29 -0700 (PDT)
+From: Fabio Estevam <festevam@gmail.com>
+To: trini@konsulko.com
+Cc: u-boot@lists.denx.de, antoine.gouby@toradex.com, xiaoning.wang@nxp.com,
+ fedor.ross@ifm.com, fberder@outlook.fr, ping.bai@nxp.com,
+ Jacky.Cao@sony.com, marek.vasut@mailbox.org, peng.fan@nxp.com,
+ simona.toaca@oss.nxp.com, ye.li@nxp.com
+Subject: [GIT PULL] Please pull u-boot-imx-next-20260515
+Date: Fri, 15 May 2026 20:30:22 -0300
+Message-ID: <20260515233022.2898860-1-festevam@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <CAN7C2SCYCwE=BRoeCedqQYjv-Gf6x6ETOdKeeDBE=CG=-rSk9w@mail.gmail.com>
- <CALeDE9PU0-fW_+erR9QHK1ST8fcStx0FWWk_0M8ELjtADugd7Q@mail.gmail.com>
- <CAN7C2SCATJL_rhpBZWwZuQVpLdnbDh5+DRFbtGHoxCXu62AVmw@mail.gmail.com>
- <CALeDE9PesKLwzt=uu_b8+pq5QXFnnK1YAO9WL3f8=CHx93w61w@mail.gmail.com>
- <CAN7C2SC_YwotE2-PS=eAFEnMOXp7jVrhaOSbKsuChLVr4zEa8A@mail.gmail.com>
- <20260514-spotted-happier-0ccb77ca8f24@spud>
- <CAN7C2SAVWp23mKeG77MoV6kUKQDBN_Ge3CUMa_quAXP5YbV6UA@mail.gmail.com>
- <20260515-finished-womanly-675afb9b0c7c@wendy>
- <CAN7C2SDDjM+MJbx2d0N8zC74bytb6gKvjw_6auMPLLNGJVwvfA@mail.gmail.com>
- <20260515150227.GC1858239@bill-the-cat>
-In-Reply-To: <20260515150227.GC1858239@bill-the-cat>
-From: Sune Brian <briansune@gmail.com>
-Date: Sat, 16 May 2026 07:11:38 +0800
-X-Gm-Features: AVHnY4K6z9JssBXGrqrGIhfvj1Zyt1aIvJoLZSp8S9_TUYEhE-R01fDkw9iOdN0
-Message-ID: <CAN7C2SApq8ah+NP3k1Jj4kbMhK2s50bN10vfCfXkZaBxkq2w9w@mail.gmail.com>
-Subject: Re: U-Boot patch submit standard and requirement
-To: Tom Rini <trini@konsulko.com>
-Cc: Conor Dooley <conor.dooley@microchip.com>, Conor Dooley <conor@kernel.org>,
- Peter Robinson <pbrobinson@gmail.com>,
- U-Boot Mailing List <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -126,211 +99,154 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, May 15, 2026 at 11:02=E2=80=AFPM Tom Rini <trini@konsulko.com> wrot=
-e:
->
-> On Fri, May 15, 2026 at 04:23:49PM +0800, Sune Brian wrote:
-> > On Fri, May 15, 2026 at 3:46=E2=80=AFPM Conor Dooley <conor.dooley@micr=
-ochip.com> wrote:
-> > >
-> > > On Fri, May 15, 2026 at 08:46:25AM +0800, Sune Brian wrote:
-> > > > On Fri, May 15, 2026 at 12:14=E2=80=AFAM Conor Dooley <conor@kernel=
-.org> wrote:
-> > > > >
-> > > > > On Thu, May 14, 2026 at 07:46:46PM +0800, Sune Brian wrote:
-> > > > > > On Thu, May 14, 2026 at 6:37=E2=80=AFPM Peter Robinson <pbrobin=
-son@gmail.com> wrote:
-> > > > > > >
-> > > > > > > Hi Brian,
-> > > > > > >
-> > > > > > > You have made a very generic statement about levels of accoun=
-tability
-> > > > > > > on patch sets and consistency in reviews.
-> > > > > > >
-> > > > > > > Can you be more specific?
-> > > > > > >
-> > > > > > > Ultimately there are subsystem maintainers and each maintaine=
-r has
-> > > > > > > variation on how they deal with their subsystem. You referenc=
-e one doc
-> > > > > > > three times in your statement.
-> > > > > >
-> > > > > > Hi Peter,
-> > > > > >
-> > > > > > Now I understand what you mean.
-> > > > > > Simply one sentence is a bit hard to read what your thoughts ar=
-e.
-> > > > > >
-> > > > > > That document I am quoting does not refer to the entire docs bu=
-t only one
-> > > > > > section of the docs with that link.
-> > > > > >
-> > > > > > Before quoting, my declarations as follows:
-> > > > > > 1) I am not referring to specific people or party
-> > > > > > 2) I experienced reviewer which again not being specific to one=
- that
-> > > > > > mentioned this docs is a supreme rules to follow otherwise patc=
-h
-> > > > > > that is committed is not able to push to mainstream
-> > > > > > 3) I simply do a quick check on u-boot mailing pool and do see =
-a lot
-> > > > > > of uncompiled reviewed patches that are not following that supr=
-eme
-> > > > > > docs.
-> > > > > >
-> > > > > > As such I will being to quote:
-> > > > > >
-> > > > > > The mailing that are reported as not passing the standard of [1=
-]
-> > > > > > Full mailing:
-> > > > > > https://patchwork.ozlabs.org/project/uboot/patch/20260423042824=
-.3480-1-briansune@gmail.com/#3684415
-> > > > >
-> > > > > patchwork isn't loading for me, but it's on lore here:
-> > > > > https://lore.kernel.org/all/20260423042824.3480-1-briansune@gmail=
-.com/
-> > > > >
-> > > >
-> > > > Hi Dooley,
-> > > >
-> > > > Well I am sure you did not have the full picture.
-> > > >
-> > > > The request had nothing to do with under the --- line if this is
-> > > > really the case:
-> > >
-> > > > Let me bring you back to the history of wonders:
-> > > >
-> > > > https://patchwork.ozlabs.org/project/uboot/patch/20260421004719.734=
-91-1-briansune@gmail.com/#3680232
-> > > >
-> > > > https://patchwork.ozlabs.org/project/uboot/patch/20260422065910.539=
-8-1-briansune@gmail.com/
-> > > >
-> > > > None of those reviewers had mentioned this issue once "---" rather =
-they all
-> > > > just alarmingly repeated the wordings.
-> > >
-> > > The first mail in the thread mentions it:
-> > > https://lore.kernel.org/all/CAFLszThg=3DEamyRohxNA7V+nk+OMVK356nUjAVS=
-bu4+kokOJpdA@mail.gmail.com/
-> > >
-> > > >
-> > > > > The comment about the changelog format seems to be very harsh, I =
-doubt
-> > > > > it really makes any difference. What you did and what the maintai=
-ner
-> > > > > requested are effectively the same thing at the end of the day.
-> > > > >
-> > > >
-> > > > Of course after reading the docs I got it immediately.
-> > > > However did those who request contributors quote this from first pl=
-ace?
-> > > >
-> > > > > The real problem with your patch is that you put the changelog in=
-to the
-> > > > > commit message itself, rather than under the --- line.
-> > > > > None of the examples you quote below do that.
-> > > > >
-> > > >
-> > > > Well after 4 patches of ridiculous request and logic change.
-> > > > I guess you will do the same. At least I am not doing it at the
-> > > > first moment on replying to the mails who or whom you had mentioned=
-.
-> > >
-> > > I think this is a reply to the comment below?
-> > > The aggressive/antagonistic responses begin in your first reply to
-> > > Simon:
-> > > https://lore.kernel.org/all/CAN7C2SAdg1MX3ZfEt5-68iiw3pdjyqva48F_uJjN=
-wsHAhdmY3Q@mail.gmail.com/
-> > > "So forgive me I really don't give a damn on whatever the header
-> > > requirements." "There are many better things to do rather than compla=
-ining
-> > > about the patch headers."
-> >
-> > Hi Dooley,
-> >
-> > You are a bit off topic here sorry if you don't think this is the case =
-but
-> > please do finish reading.
-> >
-> > For what the accused I will give out specific mailing dialogs to explai=
-n
-> > [HERE].
-> >
-> > The major discussion or query is all about the standards or rules.
-> > There is nothing to do with the reply.
-> >
-> > Meantime, I cannot see this as "aggressive/antagonistic responses".
-> > When the request changes it is ridiculous as you also agree:
-> > The header text /  wordings from the updated patch itself
-> > had zero impact on the patch itself.
-> >
-> > You are just simply telling me that if you get hit by someone 4 times,
-> > the man who stands out and responds is "aggressive/antagonistic".
-> >
-> > Again we are NOT discussing any mailing dialogs but the U-Boot
-> > patch header standards and rules.
-> >
-> > Meantime you had failed to respond or comment the entire mailing
-> > dialogs do mention any "---" header requirements nor the
-> > necessaries of following docs supreme rule / standard from first place.
-> >
-> > [HERE]
-> > Allow me to quote the request of header and modifications mail history:
-> >
-> > No docs cited nor clearly mentioned the need of specific wordings:
-> > https://patchwork.ozlabs.org/project/uboot/patch/20260420074601.24988-1=
--briansune@gmail.com/#3680096
-> >
-> > No docs cited nor clearly mentioned the need of specific wordings:
-> > https://patchwork.ozlabs.org/project/uboot/patch/20260421004719.73491-1=
--briansune@gmail.com/#3680232
-> >
-> > So now you are telling me after at least 2 versions of modifications
-> > reviewers suddenly think oh this is not good enough (by my rules)
-> > I think it should be other styles etc.
-> >
-> > Now "LOOK INTO MY EYES" and tell me what is the actual U-Boot
-> > header standard? Reviewer mood or docs that are given out?
->
-> Brain, I understand being frustrated with the process. Ultimately,
-> everyone here is a volunteer and trying their best. Which means that
-> yes, we are not entirely consistent about some parts of the review
-> process. I would ask you to please be kind to everyone, and expect being
-> kind in return.
-
 Hi Tom,
 
-Sorry for the additional reply:
-First I need to apologize that I am also blinded by emotion and
-off-topic.
+Please pull from u-boot-imx/next, thanks.
 
-Back to the topic:
+The following changes since commit 88338f9d147397c42bb996937b1ce31bca096626:
 
-Patch header standard is not consistent so docs is not a
-supreme standard or supreme rules on the commit changes vN.
+  gpio: Correct dependencies for MCP230xx (2026-05-14 15:54:17 -0600)
 
-Based on the above response we should conclude one fact!
+are available in the Git repository at:
 
-In those mailing pools that are citations or quotations;
-responses or changes requested have no inherent issue
-to pass and accept.
-The changes requested on very specific wordings are
-unreasonable.
+  https://gitlab.denx.de/u-boot/custodians/u-boot-imx.git tags/u-boot-imx-next-20260515
 
-Of course Dooley had mentioned the request of after "---"
-placement however again based on this reply it should also not
-an issue to push to master.
+for you to fetch changes up to 9e46861a01dd0a011616bf219f393303580dcd8b:
 
-Again basically speaking the entire change request or requirement
-is not a must nor really needed in the first place.
+  net: fsl_enetc: Add support for i.MX952 (2026-05-15 17:31:40 -0300)
 
-I hope this should provide a very good baseline to contributors
-and reviewers how they should review and create patches / commits.
+u-boot-imx-next-20260515
+------------------------
 
-Thanks,
-Brian
+CI: https://source.denx.de/u-boot/custodians/u-boot-imx/-/pipelines/30134
 
->
-> --
-> Tom
+- Several conversions to OF_UPSTREAM.
+- Added i.MX9 Quickboot support.
+- Added support for i.MX952 in the fsl_enetc driver.
+- Update i.MX91 part number detection.
+----------------------------------------------------------------
+Antoine Gouby (2):
+      board: toradex: smarc-imx95: remove gpio1 reg
+      board: toradex: verdin-imx95: remove gpio1 reg
+
+Clark Wang (1):
+      net: fsl_enetc: fix the duplex setting on the iMX platform
+
+Fedor Ross (1):
+      imx9: scmi: soc: Add support for detecting primary/secondary bmode on MX95
+
+Francois Berder (1):
+      power: regulator: pfuze100: Fix unchecked pmic_reg_read, return value
+
+Jacky Bai (1):
+      imx8mp_evk: Fix the ND mode VDD_SOC voltage
+
+Jacky Cao (1):
+      nitrogen6x: Fix compile error if VIDEO_IPUV3 is disabled
+
+Marek Vasut (3):
+      MAINTAINERS: Use N: for NXP entry
+      imx: Add SPI NOR A/B switching support
+      arm: mx6: cm-fx6: Staticize and constify driver ops
+
+Peng Fan (8):
+      imx8mq: reform2: Switch to OF_UPSTREAM
+      imx8mq: phanbell: Switch OF_UPSTREAM
+      imx8mq: pico: Switch OF_UPSTREAM
+      imx8mq: librem5: Switch to OF_UPSTREAM
+      imx8mq: kontron-pitx-imx8m: Switch OF_UPSTREAM
+      imx8mq: Drop arch/arm/dts/imx8mq.dtsi
+      imx8mm/n: Drop unused dtsi
+      arm: mx6: module_fuse: update node path for Linux 6.13
+
+Simona Toaca (4):
+      imx9: Add support for saving DDR training data to NVM
+      arm: mach-imx: Add command to expose QB functionality
+      board: nxp: imx9{4, 5, 52}_evk: Add qb save option in SPL
+      doc: board: nxp: Add Quickboot documentation
+
+Ye Li (8):
+      imx9: scmi: Support iMX95/94/952 secondary boot
+      net: phy: nxp-c45-tja11xx: Fix incorrect usage of devm_kzalloc
+      i2c: imx_lpi2c: Fix MSR status check issue in STOP
+      imx9: clock: Fix missing break in get_clk_src_rate
+      imx: ahab: Use authenticated header for images loading
+      imx: priblob: Fix build break
+      arm: imx9: Update i.MX91 part number detection
+      net: fsl_enetc: Add support for i.MX952
+
+ MAINTAINERS                                      |   21 +-
+ arch/arm/dts/Makefile                            |    7 +-
+ arch/arm/dts/imx8mm-beacon-baseboard.dtsi        |  437 ------
+ arch/arm/dts/imx8mn-beacon-baseboard.dtsi        |  309 -----
+ arch/arm/dts/imx8mn-evk.dtsi                     |  533 -------
+ arch/arm/dts/imx8mq-kontron-pitx-imx8m.dts       |  613 --------
+ arch/arm/dts/imx8mq-librem5-r3.dtsi              |   45 -
+ arch/arm/dts/imx8mq-librem5-r4.dts               |   27 -
+ arch/arm/dts/imx8mq-librem5.dtsi                 | 1382 ------------------
+ arch/arm/dts/imx8mq-mnt-reform2-u-boot.dtsi      |    4 +
+ arch/arm/dts/imx8mq-mnt-reform2.dts              |  354 -----
+ arch/arm/dts/imx8mq-nitrogen-som.dtsi            |  278 ----
+ arch/arm/dts/imx8mq-phanbell.dts                 |  481 -------
+ arch/arm/dts/imx8mq-pico-pi.dts                  |  418 ------
+ arch/arm/dts/imx8mq.dtsi                         | 1615 ----------------------
+ arch/arm/dts/imx95-toradex-smarc-dev-u-boot.dtsi |    1 -
+ arch/arm/dts/imx95-verdin-wifi-dev-u-boot.dtsi   |    1 -
+ arch/arm/include/asm/arch-imx9/ddr.h             |   48 +-
+ arch/arm/include/asm/arch-imx9/sys_proto.h       |    4 +
+ arch/arm/include/asm/mach-imx/ahab.h             |    2 +-
+ arch/arm/include/asm/mach-imx/qb.h               |   15 +
+ arch/arm/mach-imx/Kconfig                        |   30 +-
+ arch/arm/mach-imx/Makefile                       |    1 +
+ arch/arm/mach-imx/cmd_qb.c                       |  102 ++
+ arch/arm/mach-imx/ele_ahab.c                     |   12 +-
+ arch/arm/mach-imx/image-container.c              |   19 +-
+ arch/arm/mach-imx/imx8/ahab.c                    |   16 +-
+ arch/arm/mach-imx/imx8m/Kconfig                  |    5 +
+ arch/arm/mach-imx/imx9/Makefile                  |    6 +-
+ arch/arm/mach-imx/imx9/clock.c                   |    1 +
+ arch/arm/mach-imx/imx9/qb.c                      |  403 ++++++
+ arch/arm/mach-imx/imx9/scmi/soc.c                |   47 +
+ arch/arm/mach-imx/imx9/soc.c                     |   21 +-
+ arch/arm/mach-imx/mx6/module_fuse.c              |   97 ++
+ arch/arm/mach-imx/priblob.c                      |    1 +
+ board/boundary/nitrogen6x/nitrogen6x.c           |    2 +
+ board/compulab/cm_fx6/cm_fx6.c                   |    2 +-
+ board/kontron/pitx_imx8m/MAINTAINERS             |    1 -
+ board/nxp/imx8mp_evk/spl.c                       |    2 +-
+ board/nxp/imx94_evk/spl.c                        |    6 +-
+ board/nxp/imx952_evk/spl.c                       |    4 +
+ board/nxp/imx95_evk/spl.c                        |    6 +-
+ board/purism/librem5/MAINTAINERS                 |    1 -
+ common/spl/spl_imx_container.c                   |   13 +-
+ configs/imx8mq_phanbell_defconfig                |    2 +-
+ configs/imx8mq_reform2_defconfig                 |    2 +-
+ configs/kontron_pitx_imx8m_defconfig             |    2 +-
+ configs/librem5_defconfig                        |    2 +-
+ configs/pico-imx8mq_defconfig                    |    2 +-
+ doc/board/nxp/index.rst                          |    1 +
+ doc/board/nxp/quickboot.rst                      |   59 +
+ drivers/ddr/imx/imx9/Kconfig                     |    7 +
+ drivers/i2c/imx_lpi2c.c                          |    4 +-
+ drivers/net/Kconfig                              |    4 +-
+ drivers/net/fsl_enetc.c                          |   46 +-
+ drivers/net/fsl_enetc_netc_blk_ctrl.c            |   72 +
+ drivers/net/phy/nxp-c45-tja11xx.c                |    2 +-
+ drivers/power/regulator/pfuze100.c               |    2 +
+ 58 files changed, 1018 insertions(+), 6582 deletions(-)
+ delete mode 100644 arch/arm/dts/imx8mm-beacon-baseboard.dtsi
+ delete mode 100644 arch/arm/dts/imx8mn-beacon-baseboard.dtsi
+ delete mode 100644 arch/arm/dts/imx8mn-evk.dtsi
+ delete mode 100644 arch/arm/dts/imx8mq-kontron-pitx-imx8m.dts
+ delete mode 100644 arch/arm/dts/imx8mq-librem5-r3.dtsi
+ delete mode 100644 arch/arm/dts/imx8mq-librem5-r4.dts
+ delete mode 100644 arch/arm/dts/imx8mq-librem5.dtsi
+ delete mode 100644 arch/arm/dts/imx8mq-mnt-reform2.dts
+ delete mode 100644 arch/arm/dts/imx8mq-nitrogen-som.dtsi
+ delete mode 100644 arch/arm/dts/imx8mq-phanbell.dts
+ delete mode 100644 arch/arm/dts/imx8mq-pico-pi.dts
+ delete mode 100644 arch/arm/dts/imx8mq.dtsi
+ create mode 100644 arch/arm/include/asm/mach-imx/qb.h
+ create mode 100644 arch/arm/mach-imx/cmd_qb.c
+ create mode 100644 arch/arm/mach-imx/imx9/qb.c
+ create mode 100644 doc/board/nxp/quickboot.rst
