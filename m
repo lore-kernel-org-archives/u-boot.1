@@ -4,139 +4,143 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E081CD4F3C
-	for <u-boot@archiver.kernel.org>; Fri, 15 May 2026 18:13:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DAADFCD4F3C
+	for <u-boot@archiver.kernel.org>; Fri, 15 May 2026 18:13:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3C6C5847E8;
+	by phobos.denx.de (Postfix) with ESMTP id 71A668481F;
 	Fri, 15 May 2026 20:12:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=outlook.fr
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=OUTLOOK.FR header.i=@OUTLOOK.FR header.b="qfJ20I2r";
+	dkim=pass (2048-bit key; unprotected) header.d=OUTLOOK.FR header.i=@OUTLOOK.FR header.b="C6PbpBAS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A34D2847EF; Fri, 15 May 2026 18:53:39 +0200 (CEST)
-Received: from AM0PR83CU005.outbound.protection.outlook.com
- (mail-westeuropeazolkn19010007.outbound.protection.outlook.com [52.103.33.7])
+ id 7D644846E6; Fri, 15 May 2026 18:56:57 +0200 (CEST)
+Received: from OSPPR02CU001.outbound.protection.outlook.com
+ (mail-norwayeastazolkn190130003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:d20f::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4BF428481F
- for <u-boot@lists.denx.de>; Fri, 15 May 2026 18:53:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 78A19846A5
+ for <u-boot@lists.denx.de>; Fri, 15 May 2026 18:56:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=outlook.fr
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=fberder@outlook.fr
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ZBWY1/n/wE91spiXOi7m/9QSAb7n0dh4hbnLsV8xHavxOi/hsxVocJvih7WUwS2ITCkBG8hiyeFZz0v1a3iqwj/F6DONEHTfQlwVDbw1upnm1lL8wSYZGt8Wt8JnPXuryh0M7ggou9TJkkpCJQ5Qqi+KZk6b/9TcaDbgSZAvQFAiepXdVc5W/toGrP9rUw5JxZoe6RildaPrMDa8d3BvUStWVUx4KPdAFTK5aF0442U19+F1zLxhPeu9uiJWLIXo/2DBg140zcK9GnGiUwgiNcqVBush+l8NC1GkYbL03x6Y62zbFLOsLcaOedJgr2p4ekc2Iywsnl8+79qfyiv99w==
+ b=vQ0IgZwSMIIMbJXQ/cjZdR3C37TcI3JCvG3+g6fn0lr4VtbN5xBak21J5qra43qOqOCLI1xKnOS/Ns4kSGQr1KY3km8CumIWhhc6CwFH1+AstwwgwsQXh3xk9vUvwYvgWqtKNOs9jXadDBI0d95PYx5a0U8INcXosdrg1hYN4XkjEQ6p+z9zRvpuFyQdeVl3ub+6hARjrfbl1y3NCF+LM9Tt1y6yc4sE0by5RTJPB/wKs/jk8Eg+/5jmHOI8v40vUZs0P/lRGGqQqFvYpu08P7RW4FgvvCjKJBJK3dT0JeAtJhzWYJdB8+lk06i4rAUpKiJcMoSseHx72X2HjUMxdA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=w0cPwI9TDYtYBgrCXFnlBUnCzGGqkRaqTqd1Q5nOMbI=;
- b=hHNDlFtYk9I+Qvehmu3wDwSUcQPqmmVHGKQgXcv3nvcHTISQLo2CVV3kOXaLRTmczAATmvyRfXCuDyRHuHXy5p5f8NA9Y416L8o9NcyK9Q3K1fZlxF1Fi0RfZuRTvB5VtoOGzcAwXWmX/LhoV/8YKauJIdDUs7lRaKIpO4L2rPPDGFIs94C7S7caEGCZ9Po87nJssgBMGZ1p+pqXBJL6G4ej53dSdG8qC4DXdlQvvOnLO34xz+2T1t3vldu1Q4TCL4qMJh/0heIJlFix5WsO/4KOIrli5qCg6hvZlDgCze41Hta7wOU47o1atmGqfIZFYy/tklfJQhJtYNUCQZwyag==
+ bh=MuealieImDAF9glLRCGk7P+RBfu9T+U+PLbaHti4Ykg=;
+ b=kjH41WusYogRGNTGAKs8Pw8MIBQcJAYPHWq14Xo1/3Mrm/CyucSYdymne/0g68R0fphVC3oLuhST2MF4/LmVjowRRP9O+U3I6EhDCMVqmsZKvZZkEqJCYtUZBghaRo6Ls6VZYFpuSEM0mOXsVcQk5qYTlf4Ul53b4I34H3ysX4yDUMt2FHPw3/Rn7PgE551MbdIfpL21duUq6P+JzIxZ31iSpfUOTKgDRyUO260FOvE/ZmW7rHJpqSvtRK3Li4EdTaIc5K3NUNQCBE6JXRxRSJAngzlyZ0olIMX+jlBm8MTLaDaEgLPBbtTKpKImLo/i4G7uMwFYus+Iq5C+Iyxm1A==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
  dkim=none; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=OUTLOOK.FR;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=w0cPwI9TDYtYBgrCXFnlBUnCzGGqkRaqTqd1Q5nOMbI=;
- b=qfJ20I2rZ+/U1ctnugWM541uuNkB1QZbPdTaChrrAF5JcYluSDMLBmsF9Ie/Gs8RXd0vgpEG6zD6wlc86FGVC1WZYu4CHtphr2nDhDqVm8Gnn5jecyCfFwPnpNqKdjkl0Y1StvMglje5NAE4g67jtATP6CZg0bKjOgWNiHWCOSMiq29I6tIKIqfATh89xwwa3qO5pZriKWHmMMf0KqjYWS5DZuDLWwbrsaDaDIsAX7gDpSyBGZ9EOzl6H1DjO3wARekd20yxAqywBSyO4MeuSsqXPshk3FuAxHnv9M9c86ACLBmdXO+qExb8cbQJRhDV/rHS6y5teFED4nwPSW2x/g==
+ bh=MuealieImDAF9glLRCGk7P+RBfu9T+U+PLbaHti4Ykg=;
+ b=C6PbpBASNTgce98vCJqAjvI7mfDadeADnHTiKjvNA19+Pp9ZJ87V48+tESmvLsngwViT9IEVweMB7PkVfR9LroAQyLOZvjLfldVVagM+mry9iFD0ZhmgJKmCz6wCBMy6ob3+8yZLOHMmhRHLcMIsbGF+I1Uk4HczbnkT5qHyeiYMP4PvHuu8csXGiRD7GAQVWc5NtEUsQxSUg7On0/QmR6M6gndOA634XlqmeNk759QP8RvLEJV5l/Gd9xVoRUzjNPW7T+qA93kcozNBldEyomkS69kLw98usEz32NhAMrZfpL2rWnvqBaiypSrZ4WP6OnRIymonb4Di+yeJsj+NIg==
 Received: from BESP194MB2805.EURP194.PROD.OUTLOOK.COM (2603:10a6:b10:e8::5) by
- DU2PPF52311D3AB.EURP194.PROD.OUTLOOK.COM (2603:10a6:18:3::950) with
+ VI1P194MB0541.EURP194.PROD.OUTLOOK.COM (2603:10a6:800:156::17) with
  Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9913.12; Fri, 15 May 2026 16:53:34 +0000
+ 15.20.9913.12; Fri, 15 May 2026 16:56:53 +0000
 Received: from BESP194MB2805.EURP194.PROD.OUTLOOK.COM
  ([fe80::5ae3:1158:9ce8:90]) by BESP194MB2805.EURP194.PROD.OUTLOOK.COM
  ([fe80::5ae3:1158:9ce8:90%3]) with mapi id 15.20.9913.009; Fri, 15 May 2026
- 16:53:34 +0000
-Message-ID: <BESP194MB28053D6BAD2F0C937D848461DA042@BESP194MB2805.EURP194.PROD.OUTLOOK.COM>
-Date: Fri, 15 May 2026 18:53:32 +0200
+ 16:56:53 +0000
+Message-ID: <BESP194MB2805D4957FB23F4FC2C7F370DA042@BESP194MB2805.EURP194.PROD.OUTLOOK.COM>
+Date: Fri, 15 May 2026 18:56:51 +0200
 User-Agent: Mozilla Thunderbird
 Content-Language: en-US
 To: u-boot@lists.denx.de
-Cc: Jerome Forissier <jerome.forissier@arm.com>, Tom Rini <trini@konsulko.com>
+Cc: Jerome Forissier <jerome.forissier@arm.com>, Tom Rini
+ <trini@konsulko.com>, Paul HENRYS <paul.henrys_ext@softathome.com>
 From: Francois Berder <fberder@outlook.fr>
-Subject: [PATCH] net: dhcpv6: Prevent out-of-bounds reads while parsing options
+Subject: [PATCH] net: bootp: Prevent out-of-bounds read in dhcp_message_type
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: PA7P264CA0203.FRAP264.PROD.OUTLOOK.COM
- (2603:10a6:102:36d::13) To BESP194MB2805.EURP194.PROD.OUTLOOK.COM
+X-ClientProxiedBy: PA7P264CA0073.FRAP264.PROD.OUTLOOK.COM
+ (2603:10a6:102:2de::10) To BESP194MB2805.EURP194.PROD.OUTLOOK.COM
  (2603:10a6:b10:e8::5)
-X-Microsoft-Original-Message-ID: <a55f8606-7017-4a6c-9833-7ba126bd3491@outlook.fr>
+X-Microsoft-Original-Message-ID: <e1dd4050-2ec7-4af2-99be-806176c970a7@outlook.fr>
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BESP194MB2805:EE_|DU2PPF52311D3AB:EE_
-X-MS-Office365-Filtering-Correlation-Id: ee47bd55-74b7-4617-afe2-08deb2a28098
+X-MS-TrafficTypeDiagnostic: BESP194MB2805:EE_|VI1P194MB0541:EE_
+X-MS-Office365-Filtering-Correlation-Id: 1e523e28-b9f0-4048-2a88-08deb2a2f709
 X-Microsoft-Antispam: BCL:0;
- ARA:14566002|6090799003|55001999006|37011999003|5072599009|5062599005|12121999013|23021999003|15080799012|24021099003|19110799012|8060799015|51005399006|3412199025|440099028|40105399003;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?NmJlRlVLUDA1VWp6NnVodm9keEdJK3FVc2VGSWc1YWpFWHBtOGpDdC93Rk9R?=
- =?utf-8?B?WEFEVTBYdEg1Y2NFYWx3cUtWMkUvZk51czNWTjJ1TDF4V2hMbHNwM3RKU0Ex?=
- =?utf-8?B?WjFETFBYd3NINHlJbndjcjJGbXFDa0hXS0dSdXpEUHNxc0tSaGVaSnVMVWl5?=
- =?utf-8?B?T0NxVzdWMndaTWpzV0NDdkNMd0NMTkhjd2I3V2RFKzRzWjc1YjFzeXdYMkNL?=
- =?utf-8?B?aUo5VFVpUXVweUFQb1V6emZWV3g1V21nTlZsdTRodmZZdzV3YWZBKzZxV1JN?=
- =?utf-8?B?TFJnSDZHSU15UzRlaytJUStId3RxR0M5clNSUm0yL0t5bWtVRDlSRGplcTRI?=
- =?utf-8?B?SklhRGI0UmE1VDgrSEF3NWRPNE1EcVBBS3RDbUxOb3BGbUpJd2lSdGlwb3B1?=
- =?utf-8?B?eDBJVnJ6dnBkdWk5dVRYeVhENzE1M1RNSlJLaWxzeVdkTGxDWXFXRGIzcUNZ?=
- =?utf-8?B?Wm5vTTBmVFJUeUl2Ykw5LzVnUUNaYnF1bHNwZ3ZON21NUEZIaDU3OTdCQkpN?=
- =?utf-8?B?dEN2Q0Rzd0ZrdXFpbmR1NVlLWFJ1TXFMc0pRbDAwcWRSOFlldlJ5Z3g2bm5v?=
- =?utf-8?B?MjRvL3FMRG9sZmtselk5anl1bkxTZWdrd2VhVXoyZG9VR0tKYThNRER0Q2pn?=
- =?utf-8?B?bHlHUjlMSStmRzRkK2ttNkx5Nld0REo3eVZuSnFIcmhxeHRHVEwvK2tQZDE1?=
- =?utf-8?B?WVgraUU0Wkl2U1hQZDRIOXhJdG1hbit0aFYvQ0NPVk5zdEhyUzkvdEVYMS96?=
- =?utf-8?B?Q05BSm52RUlpQzVQQTMyQUR1RjBXanZtd29iMWNLK1Q4bldZWDZLQlpsdSts?=
- =?utf-8?B?RkdMRFdZUnBydUtVeWlYY05ISFNOWUkxaUVUOVdFWGt5R1pRZVM0ZzdKNkhR?=
- =?utf-8?B?Vkd1cEpMZElMc1ZOSkFLVmFHZ1BHRWx2ZVEvb2l6dG1ZMkJCVUxUVmFyd3ll?=
- =?utf-8?B?QU56NGdmbzRnalRMWEhjbWx3cHI1dHZ2K1JJc0RITGcyKzd4M3A1SHhoRk1K?=
- =?utf-8?B?Q1dRcG9LYkFCa2E0V1E5ak1OS2VRdzVZRkIrZEkwa3ZObC9yQy9ZdEd2bnk3?=
- =?utf-8?B?WlhJVmhBZXB3MDJCbjh1b2QvMFdNSksydHNWSG5sNlVpa3JXTUd5cG8yYnUz?=
- =?utf-8?B?MHVaSi9pQWdCSGc5ZzZNOEx6ZklqUlFYYjY5WWZHaGc2TW9DaHYrUzlMNHNK?=
- =?utf-8?B?ZEM2QktZNmp5SUpSU1pmcDJMdVFGTkw2Z1NqRTJPQjhjNVVaUlppZFBWV0xu?=
- =?utf-8?B?cm96NHhpVUptZDBIMTJXREttb0IwTFJ4aGIzUHNFV25BRVJYMXNDOFZ1bnd3?=
- =?utf-8?B?VnlxeHp3S05McTZZaDZVaUp5V21abWszMExTdFpOZVNuMnl6NkFLZGdTSFcz?=
- =?utf-8?B?UEdtRzVzM3NLMzBPTjBscjFYeVBtSnpvWWlrdFdERDZ3Y1FybytyWmdMZTNM?=
- =?utf-8?B?ZDluT1VPUFhGYWNLd1VUOHJITHdXdU1VeDdaVGZBPT0=?=
+ ARA:14566002|51005399006|23021999003|12121999013|55001999006|37011999003|24021099003|41001999006|8060799015|6090799003|15080799012|5062599005|19110799012|5072599009|56899033|40105399003|440099028|3412199025|12091999003;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?U2Mxb1BESWE4cHlRMnplekJDVXAyek50cGNwbVU0K0RIMzFMOExEUEFhaDF1?=
+ =?utf-8?B?U0l1RS9QYlNTYlpwUGNpa3g5UUszVTB3bDdXYUYxQnM4MjZNMytLVFRUdjRk?=
+ =?utf-8?B?S29yMVRHYlh5cHlIb1NjcTVScUdDeHhxTjFVTlRCUU9Cb2szNmVOZEZVK1hI?=
+ =?utf-8?B?dThXK3B3TlpOazBOSE1HMDlxdUdQVytMNDFjTjdPSEI5Z2VnZ2lUUTJSYnAv?=
+ =?utf-8?B?WERpUVgwZ21tWlg1bmpFODJpQVMwUTJKN01Odmwyekp5ZUwvM3N2d25pM2FP?=
+ =?utf-8?B?SFRkcWlXQWczYVNsRlFuL2FVaEhtOU91R0c2bjNsSTBUMWpVcDdpWlhqMzZG?=
+ =?utf-8?B?V0R3Z1NiSWNLSXNlRld2M2xNWXkxTG5ienBtcnFiTk1oMjFwbGtTei9kbGVS?=
+ =?utf-8?B?WURpVmZTbS9iUWpjRTdGNVBXZXR4NHBLVlRMRkNEMEtCSnZvU2ExcFJYdmNk?=
+ =?utf-8?B?RDJ3cTAyVHE4dlU5c0lJaHdTdTBzeUlUcm5MeW9mWW5UUzVvMnVPb3lZc1Zr?=
+ =?utf-8?B?UmcxeUozOW1uT2xHaXRZN3BtS3FFRi9xMk9vdXYxOUZGNkw3aEFPbFdEZW5K?=
+ =?utf-8?B?eVVQSjQxek9YOVA0VFpoWHlkcjNmbW1ydk5heTliZ254VGhwemo5amhjVzF2?=
+ =?utf-8?B?NUpHcnVNUEtDSHVPeHhXc0F1ekRacEhYamF1ZEkzY3IvZkxTUG5GeWtTS2lu?=
+ =?utf-8?B?Qlp2SDBsNkV1bUl6RFJUV0xlcnE2RlVWQjhXaVdqUlFOZmlXMUtYSEJMZ1Q4?=
+ =?utf-8?B?cnF4Q3NBY1BTMWorVzNhYWNaK2FrQ2xIaXcwTjA5ZDFMYXYzc283N2Q0Sk1J?=
+ =?utf-8?B?WnNuZ3VoTGRXUTI3NzRYNzB2WVR0Vmd0N0xCQXNzUTc0OVNIMWJkdjV1RmdM?=
+ =?utf-8?B?VXNMaC9wRWxVMWZSSFFGZ2JPL0c0Q1o1Q01HZmVmNEE3Rm9tNVQ2L1hNam9Z?=
+ =?utf-8?B?YmkwaWFtZHNmMlM5SS9UVFlJbzVTTnc0d25SVm15NEpiL09Ed1JjUzA0bU1L?=
+ =?utf-8?B?S1JNVWtzU1puSklFWS9YNlhvSmFuSHBPaGJvMmZXemMwTFpra3pXZk9Cc0I2?=
+ =?utf-8?B?YlN6MnhtMmg5R1RZTFl2Uk5uV0JiMEordWZZZzFqL0NyUEx3aDF3NjZ4U096?=
+ =?utf-8?B?b0p6THB2V0RzZk5GK2JzemNmM3BIMng2RE5FYkpsWGtMQTc1S1FycWdoMjNF?=
+ =?utf-8?B?blhsM212YzloU1laek9ienpmNUVPVWVwY2FBMm1ZcWQwQVlCZDBpa3MxZllC?=
+ =?utf-8?B?U3VKejRlSkpDQ0JhVnE3MlVDYXpsZStXcldQWElhb0VtQlI1M3FyVXk5WW9Y?=
+ =?utf-8?B?MmNiRXQ2MnU4dkZ6bUpmdlNTVGNUL0tZME55SFRGYlYyblJRRStNT0liZXBl?=
+ =?utf-8?B?c2RpdXRTUXdoT240THJmTCtkRkE4bVFDYmErdHozYkoyMlVSM3hPZkVwNERN?=
+ =?utf-8?B?TE90Q0ZKZWpUL09WQUJ4VzBzNytMVklJNTFzd2ZNYXdqMmJsWWR2NGR0cjdK?=
+ =?utf-8?B?WS9UaGJaM3ZrelEydm1TdmFyRkFadXVKcEJob3BheEN3N0RGY0FMc1laVUNp?=
+ =?utf-8?B?aGtKZz09?=
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?NmJCS3YvZnZCMExJek16cFVNbGwrNWd3ZXNUcE1sWUJMM0tRUCtrYUhnQWVW?=
- =?utf-8?B?UGhwZThCZzZtMTVNVlRMc1FxOExCdk1pUzFsTU04Y0dHTTZDMkt5L3djN0Vn?=
- =?utf-8?B?dWRMVnp1MWdIRnZpTGRRTm9QSDhQVE9xSUNacSs4STcyWXA1V3gwWThCRCtX?=
- =?utf-8?B?cXhrK000L3RUWDQ0WTlMQnN1RGFTaTllZkdnVzlaSWkwYVdvMkZhVHZwZ3Nk?=
- =?utf-8?B?RXI5ekhpTE90ekFjVWk4akg1V0tDSVMybVRWcWR5Y0xsRkwycUdnZmdZU2pY?=
- =?utf-8?B?MVZnTFNITTZTSDQxRk1iNjZvR3ZrSTcwOXhRcGRZcW5TU0xGWWt3ZVgvamlj?=
- =?utf-8?B?ZG8vRXEzSUtUdGM0MDRyMmdoY29Ub08xa2xiYmdaM1J2eHBjR2t5R296MUlI?=
- =?utf-8?B?Wm1jUzc2VWtuYU5JZk9CeThqVmFCWDE2ZUhYZk1iUVIzOUtqL0NCREVrNnFS?=
- =?utf-8?B?MFZqU3o3UXp2dC80VENtOUNsV3FadExYM21wV0paNVVyNzRZNG5BM0MwRFU1?=
- =?utf-8?B?WUlLdkpzT3hsV3MwSFJpUGVnbzVHNW9jOVYyRmM5TnlFVlkwa1F5bEJ1ZGtt?=
- =?utf-8?B?N1dTb1hJZ2EzNmNTaTlSdUVwWSs1NE56bFFlSk4wOG90NWZzMlVjL1B0RHY4?=
- =?utf-8?B?YWt6TUUvZE12dDhBdTBIZVZLcWszNHNQYWw2citQWmpDUU5MYWlVMXlHVElk?=
- =?utf-8?B?Y0l0bVJBVktkZnlmRmNXczBmQjk5Zld5WGx0cWRxTHI5U1hwMUFsMnhCeGwv?=
- =?utf-8?B?STZ3RXBQR3FJZTU1VExkRkFKMTM3cUVhSXhzMkl3NllrdnNvdjI5Y2VYL1Nk?=
- =?utf-8?B?ZVdHT1I4eUR0VTVJOEk3cDQ5YXYyMHUzYnh0eHBLMjR1aERyejZwK1B6YnJJ?=
- =?utf-8?B?QjliQmhjZlY5YldRRTg2TkZoZjVUdkY0ckV3KzZJVnR4OFhHRG1DUmxkYzZT?=
- =?utf-8?B?MnZpZHpZWWpCamVOSDFrK0xwTmZjR0Z5UkJvUHNwcWZFdU5ta2huNm8rUGtv?=
- =?utf-8?B?NEw0QWdHRk5MVjRycE1nank0ZzgwWlprdUpyVU1BSWpxa0VDRHpYS2NjWUwr?=
- =?utf-8?B?MTh1YW92bUpVZWhsRVhKaVlOcG1wM3R0bjU3Q2dQQ1lqVE5FTjJHWjljRkl0?=
- =?utf-8?B?Qk5jSjRFVi9MSzBaamRjUzR3OU1rK0tYL0tEaTRGbWUrQnFTUnFHcGkwKzdP?=
- =?utf-8?B?THNMNG52Z3pUemVhckNTTE5Nd0U5Rlkyb3ZFeTluSHlFL3FJdUl1SW5DeHJD?=
- =?utf-8?B?enA0L0RobnBhNnhBQTFQWFpJU28xclBLM2I5Z3hrRnJtZitJdFFvcmZTTi9y?=
- =?utf-8?B?bkUxOTVvRHYxQVJkTkRRcHgzWGsvNEc5L1cvL2pUWkh5QWNSc014Uk5BekpT?=
- =?utf-8?B?QzUwOVd4eVc1dDE2VDUxTi91eGhONGtZcXM5SEVybzRPQjE0S0NSNnNYckZu?=
- =?utf-8?B?TWV2NHJkQmhWUzVzQm1JZGY0TFVNNytIMW0rTWxzRk9jY1Mvc2NQNG14eWpj?=
- =?utf-8?B?N3o3K29BNnNHeUMyaFI5RTdERWFuMGNCR1ZqaXFQa0xsSngvSWlPYlFmRUs3?=
- =?utf-8?B?dTJ4M29PakplbzFUZjNjdVUwMWRTNmJtbXQyRHRYV3hDbUN6ajByUFp1bVRG?=
- =?utf-8?B?YjRBNjhRaVBqQ296RnZUMmp3L2hqWE4wOGR1TU9oZEtiOWFZdC9RZmVEaFNT?=
- =?utf-8?B?dSt0ZDZCeHRScTFkZkt2R0xxQzdpc3IwZ1lSNnB5czBHSnNDeTFuQktOY29Z?=
- =?utf-8?B?aHVpUkhmcUFZSkt5dURyTitlK1pqa1VaYkhXR0F0dWlkZzd2bjV4RkpmZFhp?=
- =?utf-8?B?b1htZGVmZDN6WmIrNFZtdm5MWEdTVHBTcVk0ZlMyZ3doanNkSklVR0h4WUN4?=
- =?utf-8?Q?b/8ma7+98jBLK?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?aFdEbCt3ME9hSE05clNaZkp1S2pnSkluLytyWnh4RHJoMEV1VGVwWFRBcllF?=
+ =?utf-8?B?cW9GQVFqODVLY2M3clhGQzhQUk5jMUk2RDBHYXdFTmYyM25kUVdxWFBkYTdl?=
+ =?utf-8?B?NTN2WlhoZU9qbkFSbTVNdi9qUkgzNmN6NXBQNHo4OEJscklBV2FOVEVKUDBV?=
+ =?utf-8?B?OC8wb0JaRmFYcU5VN1FWTUVBT2tHbXdWcmYrb2tlWlVtTVo3MEFLSWNqSnFk?=
+ =?utf-8?B?ZHBJOUdoaXFoc1RWVEFWR1NTS283Wld3K3Y5K3QwcGpVSGRMT3EwVWVURHRT?=
+ =?utf-8?B?bUNjdEh4Sm4rSk9aODlOSkZmRm9ybE9qNGx0SW9vTVRQVHpzaTRoeFBJb1Vy?=
+ =?utf-8?B?eS9WdnVjNjc2VlRxOTBnSjNNZVRoQzdvUWRPbFZJUzFuRDZrUVVuMkFrZHYv?=
+ =?utf-8?B?czg2V1ZqMEI5VVhPclROZGM0Szh3bFB1dlpNcFRyV1lsUFJaRHVnYXExRXJ0?=
+ =?utf-8?B?bkozY25kWXZjNXB0dFJaV2FDVG9LblN4eTdWMWl3OHZlQlpqZzNoYnd4Z2Z5?=
+ =?utf-8?B?SGliUXM2T0NrblhZUXJkdmhVNGhDWi8xY1BoUDViSXB6WW9NYlUvK29JTWJ0?=
+ =?utf-8?B?UnJ3S3JhcmxpRE9zZFkvRTk5Y0Q4Q3hTbXNKMUNld2xvdGR4UERUcEtaS29V?=
+ =?utf-8?B?bHRBY0Fyem5wbVpBM0lGbXAxaXFFUlBvTTJBd05wOWljK3hlY0EzSnh5Snp0?=
+ =?utf-8?B?NTJyMjViRFE2bitFQm5JckIvTkVmRFNZVVN4SHJYbWMwN1dJM21yajJzdDlE?=
+ =?utf-8?B?VElNdTBZMngxeXcrcU1MK3dFZlhZbm9yN1plcGsybGpOWDdaTWNBYWM0TytZ?=
+ =?utf-8?B?OFoxK2ZNdnVOYTdqNGxLZVFTZjVLa0lMSkNmRXZsOGc1elBjS2ZjcmVTSzla?=
+ =?utf-8?B?T1lmTmVEbGx0VmhiYWlHV0oxY0hndGtuQTlGTlNRc3I1SElnM0ZheDFCSmdR?=
+ =?utf-8?B?alhjYmlQOXFwUzBONzd0ZEJWNEJCNy8zSTUvZGQ5TEpnQ01MOHBvTkE0MVp2?=
+ =?utf-8?B?ZS81aVQxMzBmd1F1V2RVWXp0TUpTcFpMblp1MXFMaWF4Sm9tTHZMWXZqeTJs?=
+ =?utf-8?B?Q3dweEZPUHRTcEl4TDB2WnRRVFNuMmpuYWttMVlFOWptZjNlSjFqSDhIVkdn?=
+ =?utf-8?B?cFpXcGpscEQwU0tNbi9WVHJXTTVzbVphMzNCdmdrbDEvTkxFeHAvNHBDKzh6?=
+ =?utf-8?B?VHJQOEI5bG8xUHBORCtqN2lmYVVMLzRnZW1tUHZVQkd5VlhnUXhkRC9lU0pH?=
+ =?utf-8?B?M1Excmh1dk9lL2xwMUpjN1QxVVc1dWNER3E2N1RsMkdWZ3doaEdUUFdPWmdZ?=
+ =?utf-8?B?VUx0NnVZZ3ZnMHdMVzJUK0lqM2xHWitlcDBZKzVIbFg4REgxQXhnVVdnUkpP?=
+ =?utf-8?B?L0ptK1M5MkVnZ1JWNlE4Y1M1eDNmdHVCRUJKU1BNYUszbVJ2QkM2S2J0SWNT?=
+ =?utf-8?B?U3VBNWdGbXJRTVc3Z2pUSDV3OTFjOGFncTNOaVhqZlFBdGdjelowL0kxak4x?=
+ =?utf-8?B?VEx2dVpRYm9pampteGV4WTF2YlNGQnk2RFBLNUdnLzlxcnhzTW1BU1diQTVZ?=
+ =?utf-8?B?SnlUM05rdHgvL3prK0RNcDRmdXNydHllM3ZyNm5xTUVSSFA5OE5ydWpNRU02?=
+ =?utf-8?B?dzdxdVVLQ3pvSEpmcXJvbzZiaWFoVHFuRTZEdHgxTUl3TUJyQ3ZJZnJmYVFJ?=
+ =?utf-8?B?ejBmeFc5cFYrYnJZVE1tSkFzWE9pVWtGTlFaY2Evb00xQTNMaDBXZUlvaWZC?=
+ =?utf-8?B?ZEkwdzNIdlpsSFEwY2J2NnYrRXRMUjJVVW1FeklJWHNYSGc2ZzBLTTR0cXNp?=
+ =?utf-8?B?cUE1Q2FUOEhCZzIyRlY2aGQxN0tGb0R5UU9qMVVBYXVBWDk1bU1BRmFlZ0JZ?=
+ =?utf-8?Q?vjIkKnWMfdxdL?=
 X-OriginatorOrg: sct-15-20-9412-4-msonline-outlook-3927c.templateTenant
-X-MS-Exchange-CrossTenant-Network-Message-Id: ee47bd55-74b7-4617-afe2-08deb2a28098
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1e523e28-b9f0-4048-2a88-08deb2a2f709
 X-MS-Exchange-CrossTenant-AuthSource: BESP194MB2805.EURP194.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 May 2026 16:53:34.8478 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 May 2026 16:56:53.3807 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
 X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU2PPF52311D3AB
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1P194MB0541
 X-Mailman-Approved-At: Fri, 15 May 2026 20:12:56 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -154,92 +158,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-dhcp6_parse_options() verifies that an option's declared data fits
-within the packet, but does not check that option_len is large
-enough for the fixed-size read each case performs. A malicious
-DHCP server can send an ADVERTISE with a zero-length IA_NA,
-STATUS_CODE, SOL_MAX_RT, or BOOTFILE_PARAM option, causing the
-parser to read 2-4 bytes past the option's declared data.
+dhcp_message_type() scans DHCP options looking for a 0xff
+end-of-options marker with no check that the scan pointer stays
+within the received packet. A server can send a crafted OFFER with
+no 0xff terminator and large option length fields, advancing the
+pointer past bp_vend[312] into adjacent heap memory.
 
-Check option_len value before each dereference of option_ptr.
+This is the same class of bug as CVE-2024-42040, which fixed the
+related bootp_process_vendor() call site. Fix it by adding an end
+parameter to dhcp_message_type() and checking that popt is lower
+than end.
 
 Signed-off-by: Francois Berder <fberder@outlook.fr>
 ---
- net/dhcpv6.c | 27 +++++++++++++++++++++++++++
- 1 file changed, 27 insertions(+)
+ net/bootp.c | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/net/dhcpv6.c b/net/dhcpv6.c
-index 51f44979f8e..640f089a2e1 100644
---- a/net/dhcpv6.c
-+++ b/net/dhcpv6.c
-@@ -339,6 +339,11 @@ static void dhcp6_parse_options(uchar *rx_pkt, unsigned int len)
- 			break;
- 		case DHCP6_OPTION_IA_TA:
- 		case DHCP6_OPTION_IA_NA:
-+			if (option_len < sizeof(u32)) {
-+				debug("Invalid IA_NA/IA_TA option length\n");
-+				break;
-+			}
-+
- 			/* check the IA_ID */
- 			if (*((u32 *)option_ptr) !=  htonl(sm_params.ia_id)) {
- 				debug("IA_ID mismatch 0x%08x 0x%08x\n",
-@@ -347,6 +352,10 @@ static void dhcp6_parse_options(uchar *rx_pkt, unsigned int len)
+diff --git a/net/bootp.c b/net/bootp.c
+index 8976936b184..f0dc329d6e4 100644
+--- a/net/bootp.c
++++ b/net/bootp.c
+@@ -997,13 +997,13 @@ static void dhcp_packet_process_options(struct bootp_hdr *bp)
+ 	}
+ }
+ 
+-static int dhcp_message_type(unsigned char *popt)
++static int dhcp_message_type(unsigned char *popt, unsigned char *end)
+ {
+ 	if (net_read_u32((u32 *)popt) != htonl(BOOTP_VENDOR_MAGIC))
+ 		return -1;
+ 
+ 	popt += 4;
+-	while (*popt != 0xff) {
++	while (popt < end && *popt != 0xff) {
+ 		if (*popt == 53)	/* DHCP Message Type */
+ 			return *(popt + 2);
+ 		if (*popt == 0)	{
+@@ -1120,7 +1120,7 @@ static void dhcp_handler(uchar *pkt, unsigned dest, struct in_addr sip,
+ 			    strlen(CONFIG_SYS_BOOTFILE_PREFIX)) == 0) {
+ #endif	/* CONFIG_SYS_BOOTFILE_PREFIX */
+ 			if (CONFIG_IS_ENABLED(UNIT_TEST) &&
+-			    dhcp_message_type((u8 *)bp->bp_vend) == -1) {
++			    dhcp_message_type((u8 *)bp->bp_vend, (u8 *)pkt + len) == -1) {
+ 				debug("got BOOTP response; transitioning to BOUND\n");
+ 				goto dhcp_got_bootp;
  			}
+@@ -1149,7 +1149,7 @@ static void dhcp_handler(uchar *pkt, unsigned dest, struct in_addr sip,
+ 	case REQUESTING:
+ 		debug("DHCP State: REQUESTING\n");
  
- 			if (ntohs(option_hdr->option_id) == DHCP6_OPTION_IA_NA) {
-+				if (option_len < 3 * sizeof(u32)) {
-+					debug("Invalid IA_NA option length\n");
-+					break;
-+				}
- 				/* skip past IA_ID/T1/T2 */
- 				option_ptr += 3 * sizeof(u32);
- 			} else if (ntohs(option_hdr->option_id) == DHCP6_OPTION_IA_TA) {
-@@ -358,12 +367,20 @@ static void dhcp6_parse_options(uchar *rx_pkt, unsigned int len)
- 			break;
- 		case DHCP6_OPTION_STATUS_CODE:
- 			debug("DHCP6_OPTION_STATUS_CODE FOUND\n");
-+			if (option_len < sizeof(u16)) {
-+				debug("Invalid status code option length\n");
-+				break;
-+			}
- 			sm_params.rx_status.status_code = ntohs(*((u16 *)option_ptr));
- 			debug("DHCP6 top-level status code %d\n", sm_params.rx_status.status_code);
- 			debug("DHCP6 status message: %.*s\n", len, option_ptr + 2);
- 			break;
- 		case DHCP6_OPTION_SOL_MAX_RT:
- 			debug("DHCP6_OPTION_SOL_MAX_RT FOUND\n");
-+			if (option_len != sizeof(u32)) {
-+				debug("Invalid SOL_MAX_RT option length\n");
-+				break;
-+			}
- 			sol_max_rt_sec = ntohl(*((u32 *)option_ptr));
- 
- 			/* A DHCP client MUST ignore any SOL_MAX_RT option values that are less
-@@ -394,6 +411,12 @@ static void dhcp6_parse_options(uchar *rx_pkt, unsigned int len)
- 		case DHCP6_OPTION_OPT_BOOTFILE_PARAM:
- 			if (IS_ENABLED(CONFIG_DHCP6_PXE_DHCP_OPTION)) {
- 				debug("DHCP6_OPTION_OPT_BOOTFILE_PARAM FOUND\n");
-+
-+				if (option_len < sizeof(u16)) {
-+					debug("Invalid BOOTFILE_PARAM option length\n");
-+					break;
-+				}
-+
- 				/* if CONFIG_DHCP6_PXE_DHCP_OPTION is set the PXE config file path
- 				 * is contained in the first OPT_BOOTFILE_PARAM argument
- 				 */
-@@ -419,6 +442,10 @@ static void dhcp6_parse_options(uchar *rx_pkt, unsigned int len)
- 			break;
- 		case DHCP6_OPTION_PREFERENCE:
- 			debug("DHCP6_OPTION_PREFERENCE FOUND\n");
-+			if (option_len != 1) {
-+				debug("Invalid preference option length\n");
-+				break;
-+			}
- 			sm_params.rx_status.preference = *option_ptr;
- 			break;
- 		default:
+-		if (dhcp_message_type((u8 *)bp->bp_vend) == DHCP_ACK) {
++		if (dhcp_message_type((u8 *)bp->bp_vend, (u8 *)pkt + len) == DHCP_ACK) {
+ dhcp_got_bootp:
+ 			dhcp_packet_process_options(bp);
+ 			/* Store net params from reply */
 -- 
 2.43.0
-
