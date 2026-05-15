@@ -4,92 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4824CD343F
-	for <u-boot@archiver.kernel.org>; Fri, 15 May 2026 18:22:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34BD1CD343F
+	for <u-boot@archiver.kernel.org>; Fri, 15 May 2026 18:22:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 238D0847C5;
-	Fri, 15 May 2026 20:22:00 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 60CBB8482F;
+	Fri, 15 May 2026 20:22:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="UbTCXTi1";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="UYKotFVi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3037D847E8; Fri, 15 May 2026 20:21:59 +0200 (CEST)
-Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
- [IPv6:2a00:1450:4864:20::52e])
+ id B2ED1846E6; Fri, 15 May 2026 20:22:05 +0200 (CEST)
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [IPv6:2a00:1450:4864:20::632])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 405DE846E6
- for <u-boot@lists.denx.de>; Fri, 15 May 2026 20:21:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C900D8482F
+ for <u-boot@lists.denx.de>; Fri, 15 May 2026 20:22:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52e.google.com with SMTP id
- 4fb4d7f45d1cf-67bc8609a9bso339932a12.0
- for <u-boot@lists.denx.de>; Fri, 15 May 2026 11:21:57 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1778869317; cv=none;
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-b8f97c626aaso7726666b.2
+ for <u-boot@lists.denx.de>; Fri, 15 May 2026 11:22:03 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1778869323; cv=none;
  d=google.com; s=arc-20240605;
- b=fa2bXrJF5QzHGEngUXjhKbloGK3Nb1dFZrCQe5/5gwVQyHcySwUwtESrgik5jEa230
- IINjV+1eukUJVlIYQoHy1jk1YBFaaGPKXUCUOfYAz+XoDsJqBcP43O4jftadd60U1Yw3
- DICh1j4VPVxZArOx9pST+LCHMuRn8g5Ll6s3yq0nTikyvAQ1pHMJYKM8UO5cD5OP9p7i
- v62f9Z9Cw1Q/c16idK1w2OcKKKRXhUtlITDgTxDgF82tEvpI+TAwn49gXwG/zhCql30v
- TfJX+TuBS1yTgHPZ5FTmyRICvxS7c2alRawvaM40+/xoqRUWSJuF0hHcXJwZvmxrsZAV
- 7d7w==
+ b=ij8KsAoMMq5hFxTKQmvSPE4ZvPOyvsxXha6km4AzgMd917oOLywN/4p1TSjtMVY7ff
+ QzVEgbpkTW+HJx5ZFYH4fVi71D13l7SOdSRNB52nHWCSCg02TdEJSsMKjA3V3fjo8AO0
+ LpXJBQ0sakzIPuZcnX3LnAhQAyYkZgpcYCWyDAgiaU/OZ0/RkPg7v+ScdPuKxkdHeb20
+ DORhqDeQIp7dkn9hVdGk/tECRb62Au9XwDLBcxwsDAbcV+zUWjDRcb8PD6/WlcgLvtbl
+ rcuPnlvy+P6C7w/cI5n/0ACOozTkhvFlSuBX71B4xPum7iBOmHiLjbDgL5MEPV24zlNn
+ cXkw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=gNT6X+gI/EKDg5+Mqhq2Xlg5hPFiZ/IJ1wqNYwBONUg=;
+ bh=OhDlaQ5ffZffcev2IKvA9XNk1Uf9MTk2ax7U/PhyXdg=;
  fh=sKlYf1RYFkU7W57k8Hb0RqRH+ropi6os4Aw4ruwQ2Xw=;
- b=LnYxzUyErfYZOR16qdG3BIGLBN61jWngYx8iqvahphE57jxm9XXg/of0BehQfhEZ7F
- CZkooxZAd1QV5QHcd9hWsuM4I9QMWDGvilKme0wX53ov19R1d33i1keltGiMP0/em3Jq
- VrKCAurRnTk9+TwCJZqkQtzSzcRnWKeLFt9CKmiVNlpjmpan9rK5qMGFHk9VTXIP70iv
- 8MZoQswrySgdnYQ8KFSvCslYKIjRGUEve2sspr7St+zZ8CvrJO9aZzustuL8QphXbfhW
- 0FmJ19fuJT2MihSA34eg5AhM9JsQNy368I4LAZEpYhFwCYr+iGfi5dAij8K1r4fydNcx
- z4VQ==; darn=lists.denx.de
+ b=dUwR+9p6C9V9GbRFbUrDXw6+NQ3Y8KwMqNbL8rrVNzGTa7QjD2IMVes4O4jv3u9f7n
+ ILSWsnMh8eReGVaGKNDA6xU5UkYM681yTp8LE41+PjRLu09hu+VW20meszV6ny5Leu79
+ zBF+TnXu0zqMa57WFbLZiBBBeBAaaSdlo4R/AHm83JIP7Gc+gw4i3R0E098r/DlyWF6x
+ L+n1bnpbHcXeH/IHPm27A/vaGI5/Yj5VZOc2c0jEKnvkThoZMKMW5tHjuvm6mf/KLyD6
+ JWWZRC2qz2Uhw0GNEtX2mjg7+ET2TuOcDX5CiNh7tRLtaEcAy8hySwiUqvOwBw1HNkf7
+ bR8g==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1778869317; x=1779474117; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1778869323; x=1779474123; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=gNT6X+gI/EKDg5+Mqhq2Xlg5hPFiZ/IJ1wqNYwBONUg=;
- b=UbTCXTi14Wl+Yw3oxAsGHc2BLzjL9bzM5cVLngNR3Rgq8egLXZjgxp8Hr5ArdO1AEl
- c/ULyPRBlTzwRqnHrAYmH2ouUisBlLIIuRdu2kZ6Q7LYFQHPqa8klkAutv4ugnwqAS2x
- 3mDre3tqNqfCYELqiUOlyWZ/W/Vd+U0gWajtQ=
+ bh=OhDlaQ5ffZffcev2IKvA9XNk1Uf9MTk2ax7U/PhyXdg=;
+ b=UYKotFViUdvVA/y0UhISL9TX9l1rpm2OS225Nc9TF08PEF/E8LKYh15FMff1zof26g
+ qVJzj7qLKnB3FVo+VRheTS3f3PL2Y9omdprcxXgewcqFFippc4CtcrMWtQXCCbgiBuwX
+ gzqNSSRzMktLA/hjrqWFL54vi0GAH9CWcPFN8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778869317; x=1779474117;
+ d=1e100.net; s=20251104; t=1778869323; x=1779474123;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=gNT6X+gI/EKDg5+Mqhq2Xlg5hPFiZ/IJ1wqNYwBONUg=;
- b=bqhHKs+HxobhQ5XwfuooOiZvkRVadilaTMrCwQRPYW08Oeqy9EY+HASK1CqiUnpzY7
- Y5zzSOeM0Xe5NMczOPI8xPv7072PAjeloXRbsXrNf8J2yyf/BlrzmP67cAUEZAyKRelg
- OMQ4iS+XFAzMrE0BH4y3IWjHsSjRIzLRoYj8q3tmcYQMfDgfV1T76/BTfGmEwtmdWdHE
- EyDtZvOBmYSaqMBemiduRwbcjhEIqAdMHQLX4wI22NAmGWFfMQ2w9Sa1tRiEmY/QK3PJ
- ZuMYPhW4ezRBCtU74Ek9Nxgo7WSdXzUF3Sjp7iQfQhSomi9f3Bi2LOuOGS/nZEs7kDwK
- vrGg==
-X-Gm-Message-State: AOJu0YwESvVgUpsgtT4MS+Lq2aKscipTn83ltYA+VRn8aEeFC9NBxEaD
- a1mtLtpSxjESXGDIlEdmlKAY7mvQ15+flBm7rA99XrZgHtoOZeTjflqmfgzAYMIOn+R1X7+kgba
- fTlJbExkjszUD3EDgAUab5kSP+DbpZBvJGAK7fG+p
-X-Gm-Gg: Acq92OEaDhtGmL3kBKhwjeipiPz5uLgv/U8VnkUl9isHuV5bnri3oZT4KaqmVR5mMsC
- bNAUCBds3V3g0lCedK9qyR4WO46NCdEi2PB13Hdpv2+BuatQ2xjK9dnUAdRaIoSYItkqlDlBhxT
- FVn+6vPtJnwINmCKkGEdeh7h8l/s/dhzZhKDIdeE/UR7eP0Cd/TEFZsnTkQmfLRoXqYQYpcTRgF
- Jadc/CP5hCkMCk6/OC7yBsAIC9/ZR332usZQU2U6cNH5NwkQwPW+K5kDJTkvTpRn5BzwCn/PpZ/
- dwOYIjEw7QaMqyIh
-X-Received: by 2002:a17:907:c8c7:b0:bac:3bb7:268b with SMTP id
- a640c23a62f3a-bd517aa8873mr309791866b.38.1778869316680; Fri, 15 May 2026
- 11:21:56 -0700 (PDT)
+ bh=OhDlaQ5ffZffcev2IKvA9XNk1Uf9MTk2ax7U/PhyXdg=;
+ b=paG6RGKLaNU9gYQLOVsdvFE2jVSp2HG6EkPb2xIFjPwnn+HcNbQrsCIAEYGO6Sk8Wn
+ SU1wNnVbOb/2pqNcqgA193GEci9m9zoDyBd7Q0yKG5nLwFxc+lJDgWAtlKaCGg1YL7z0
+ n45BSz5AWbUV+eL+/GTOL82VQUfwlaJlpxSVJZhJIQSlOOAJIpgXDkdXrr4f8Ffei0/r
+ HO9ufkWM4/skgS6abodICbnFzWcq4YH93CdU/HsZbjkKj5nVPu1Vu+40wHNTJ6q7xzON
+ MOX8WQolUrDeQ+ErplB1CScZJ9w3Y+hTIGT23lN+cFAOWOg9OW4iGWpYyLacUW37NGjL
+ wEoA==
+X-Gm-Message-State: AOJu0YyKfnhlvhPbh14UST0EP1zNRv9Wa+m68s0Khf9Xq2J1/HfK5ob/
+ Fsy2UFsgJ8sGSljDc+obYGcKCOXJzc8dW4/jiazWHJR6+Bt41png/p14Cb4dqUVMfHkwiji3H+X
+ CHxQaeGyjDWc6oPekgwbMUqnjecjjVpypvixs6AiX
+X-Gm-Gg: Acq92OGvujR+ir1dwzGIrZF4T5FGihYO7JxrTfyroH7b1QhgtAwhnT/ean2Bl/NBYth
+ KLFYb9rALnPDQsh/+UmPgVxmedf/+qCAvIPEPokrwtaX/daNM8rABz9rhpidpN6TjMeitkaoWk9
+ h6dWki13L3C23d+KviJTz+epOM2QZY8iyWcUQ54QLRtLXGcp5YyjDrcRnjeQqqxIEzXQo1b/iMU
+ lWV5fm6G7rDQ/BpOpmxsUYhpQOrfbINESWMsqm+MmeFwRnpQSobjBvwF+tlyNi2wGhOLULPAtpJ
+ lfgQPA==
+X-Received: by 2002:a17:907:3cc1:b0:bd3:5e5d:336 with SMTP id
+ a640c23a62f3a-bd51777bbfemr279460766b.5.1778869323189; Fri, 15 May 2026
+ 11:22:03 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260424173151.371134-1-harsimransingh.tungal@arm.com>
  <20260514124924.1804332-1-harsimransingh.tungal@arm.com>
- <20260514124924.1804332-6-harsimransingh.tungal@arm.com>
-In-Reply-To: <20260514124924.1804332-6-harsimransingh.tungal@arm.com>
+ <20260514124924.1804332-7-harsimransingh.tungal@arm.com>
+In-Reply-To: <20260514124924.1804332-7-harsimransingh.tungal@arm.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 15 May 2026 12:21:43 -0600
-X-Gm-Features: AVHnY4KcmjUvqxNu4BkZAE4Y27mfvzRIXOXcCppj1_RAEoOw_ZldK4Yo4Y_eehs
-Message-ID: <CAFLszTiDTOutq7w6UDwwYNd+hBTQUMRx3uAUK9SLoWh2POU6-w@mail.gmail.com>
-Subject: Re: [PATCH v2 05/11] charset: mark u16_strsize() as __efi_runtime
+Date: Fri, 15 May 2026 12:21:49 -0600
+X-Gm-Features: AVHnY4Iy0jDhB3rYsUrJuQ1BXNv6PqrOFSsD5kgvIx8xE2p9Yn8k1xbx8JF59J4
+Message-ID: <CAFLszTgdjP3m+ai-9acqUNiWkz2aqfxz19k6qt_HY5WSLMoLrg@mail.gmail.com>
+Subject: Re: [PATCH v2 06/11] efi_loader: move runtime variable read helpers
+ to efi_variable.c
 To: harsimransingh.tungal@arm.com
 Cc: u-boot@lists.denx.de, abdellatif.elkhlifi@arm.com, trini@konsulko.com, 
  ilias.apalodimas@linaro.org, xypron.glpk@gmx.de, hugues.kambampiana@arm.com, 
@@ -113,15 +114,27 @@ X-Virus-Status: Clean
 
 On 2026-05-14T12:49:13, Harsimran Singh Tungal
 <harsimransingh.tungal@arm.com> wrote:
-> charset: mark u16_strsize() as __efi_runtime
+> efi_loader: move runtime variable read helpers to efi_variable.c
 >
-> Mark u16_strsize() as __efi_runtime so it can be called from the EFI
-> runtime variable paths added for FF-A/MM communication after
-> ExitBootServices().
+> Relocate the generic runtime variable read helpers from
+> efi_var_common.c to efi_variable.c.
+>
+> efi_var_common.c is always built, while efi_variable.c is only built
+> when CONFIG_EFI_MM_COMM_TEE is unset. Earlier patches in this series
+> add TEE/FF-A-specific runtime read helpers in efi_variable_tee.c.
+> Leaving the generic definitions in efi_var_common.c would therefore
+> cause a symbol clash in EFI_MM_COMM_TEE builds.
+>
+> Move efi_get_variable_runtime() and
+> efi_get_next_variable_name_runtime() into efi_variable.c so the
+> non-TEE backend keeps the generic memory-backed implementations,
+> while the TEE/FF-A backend continues to provide its own runtime read
+> helpers in efi_variable_tee.c.
 >
 > Signed-off-by: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
 >
-> lib/charset.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+> lib/efi_loader/efi_var_common.c | 24 ------------------------
+>  lib/efi_loader/efi_variable.c   | 24 ++++++++++++++++++++++++
+>  2 files changed, 24 insertions(+), 24 deletions(-)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
