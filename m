@@ -4,91 +4,104 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 403CCCD343F
-	for <u-boot@archiver.kernel.org>; Fri, 15 May 2026 13:54:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 360C5CD343F
+	for <u-boot@archiver.kernel.org>; Fri, 15 May 2026 13:55:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1655C846B4;
-	Fri, 15 May 2026 15:53:18 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id C2D65846A5;
+	Fri, 15 May 2026 15:55:13 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Tj2CYlxb";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="I20jja6U";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 666D784707; Fri, 15 May 2026 15:53:16 +0200 (CEST)
-Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
- [IPv6:2a00:1450:4864:20::32a])
+ id 9ABB7846B4; Fri, 15 May 2026 15:55:10 +0200 (CEST)
+Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
+ [IPv6:2a00:1450:4864:20::136])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7474580086
- for <u-boot@lists.denx.de>; Fri, 15 May 2026 15:53:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9D3EB80086
+ for <u-boot@lists.denx.de>; Fri, 15 May 2026 15:55:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-48a7fe4f40bso105742825e9.0
- for <u-boot@lists.denx.de>; Fri, 15 May 2026 06:53:14 -0700 (PDT)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lf1-x136.google.com with SMTP id
+ 2adb3069b0e04-5a995ab70d1so2783383e87.3
+ for <u-boot@lists.denx.de>; Fri, 15 May 2026 06:55:08 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1778853308; cv=none;
+ d=google.com; s=arc-20240605;
+ b=QjE4Dnl0YTB+dtxhWJ8uSqsf5NVcxq4EqdKtvv5hIg/YA+iUNx9TPZWsTXlux2yKxr
+ jRfrASmjoxiXenAXucqa6Uh9IrQEo2BPK9oUH0yHfgXRCaCYQCdyKq9W/T4Udk0JFqqD
+ m05bAk5RSvzCblwJbSDCofIDyAtlg0WeDIdtrHb5jP9+ABZEiEpl31rZPucpowUrnZy8
+ PWcTvSBp5nGeKjNAAizUfDl83JLaKAfO6WR2UN1rzeuBRYZaJAkfK7qjDoCXGs8f/Tod
+ wuolUpO97VUc07g/sQaYI3Wiav9uC7N2thncSrrnoMRFle47d3IhteDQ9QxukgJKntd4
+ cf/w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=S8RBZWzGq8AYr+RlPGaoYF89zNYBUkQKb3YhiJBI8/M=;
+ fh=b8XmvhVbpxvKJhJIbUxSVGL0h2xFXOSGFnT3KJuTvoQ=;
+ b=D02Y8jDuwzreExFGe2GdBDWTHBJh46tTYcdaZ+MCM5fJ/KgtjYI6HRXSKbRVIe8UzD
+ rLCpn0WCdHrZSATMp2/Aojd92+ycXr7ypq3/ood4sdj9CfIguwUl1zX4GHF5VGJExYBD
+ D+EWCAIHC6moSruzLEt27PlME/DLzXMJvCRDnK6ehAf2v4zeV4aEM8qQyzP3tTmksHXI
+ 9+2BDTlFm5IWrd/0R6VQvkZe+bd+rH6Zf323NyEPgWHTe3gHQvSNWb4T6/ZXqzACmmUv
+ 5cOBPRJqmfjKx/zTWA1H2b83A+o0Tbj/UaCJxjct6uL0FRKL/C22JcHn9F4C7b3gl5wP
+ 90yg==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1778853194; x=1779457994; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ d=gmail.com; s=20251104; t=1778853308; x=1779458108; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=w1pPiJxYSBR7uOhsrOEauZ6bnsK/ZKpZyZak9BiCiiw=;
- b=Tj2CYlxb0Ot5cFYG8FyjlR/3UGdlabHKOjrP79NzIsTyZBWewtIvQKP8zQguuhtjs0
- +fyUvO15bNNi1HARu33NtjfZToK7rwzNh+f+MGB1RCAi9o+bSKegaaB465Hkivzqzg/x
- 8jadbvbOSgZWSgcK5RjG9XEVilGq9ompjZwWbSo5Mahv1UAQqL2XVZPK31QzDdgHK068
- ajEbEwfg/ahU5Ygfva4oL0nZCYV6eeF8OSYDQ+T2zq8IH6H4kU4rWYICj38wE1cOdObh
- fK70gOI7LTmweLLGdjhWD9u02E5QN0DI+iOnKSQEDa2Zn3QVwzPOLOGhPFt9UfTEhrr/
- MZUg==
+ bh=S8RBZWzGq8AYr+RlPGaoYF89zNYBUkQKb3YhiJBI8/M=;
+ b=I20jja6UkI7c/SuRHH5NQYN9rFcIix85g7V/6JsDWp9gtORwf60vpYWTjh/XeKVMRs
+ XDyEVIOP998kq7zS5OCFMDN8Vm8d07n6Weeqps2SoWY2YjnTz8Vo3elNZkGcidsJ7w/N
+ EAe7pNf6C4ke2oOBhgbZ7RfI0RBKjGU19AXOyPwtnr8RwUBzMMSgnwhK/7TyZQY4gxp8
+ eKBQ1LjJpqMkopXbp/q9jj0ofLfIn6aDYO3v+wsbKjhqrMmt2AlcRSFa7JNVwQIGtCtn
+ yH0PrcJXm8CEe/CUo/oY8yO8Hq9zWOtCyq8e19doDR4GmCg3SH2x8CM2EV4Coetq1fpK
+ CIrA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778853194; x=1779457994;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ d=1e100.net; s=20251104; t=1778853308; x=1779458108;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=w1pPiJxYSBR7uOhsrOEauZ6bnsK/ZKpZyZak9BiCiiw=;
- b=VufXuD1Khzu4xbPbWPydaoZUhsynKr41tymmxA+YUwzGOQgwQ8FLnXC4+IXPTw+SQI
- pJ+OoGy4TZ2B5+pVbJJ99Bkyb1+/6KY02jQfHhU7X/27bnJfwtEy5AzfKzqBu9hEveaM
- Pe2D06B3ZfnRaX3dskPYvc5JJY+F33BavalcvllkZFKrMQm3CmOEmdLSx8ws8ZPCsLVa
- ARk8F/V5k+Nysmu0EcIj/h/xmJn0e+LNdzg/AO7OvBjoijHMlCiShIOThdlLl6129u6S
- CcPTfi+bRWf7fFOf8adm9ilcQXTolVs7BrG9DoETcgymQMKbBZWnvnOY4EwIZjp+cQHP
- sbTw==
-X-Forwarded-Encrypted: i=1;
- AFNElJ/znId2FtSZCYzAu1EENsQJYs0vsbCFEKTSbdLEfOu8wVohKhzzOwHTg1et9Qyd6bdEDeGengs=@lists.denx.de
-X-Gm-Message-State: AOJu0YweacqfiLlLv7xWuq9CmiqypeVldY9vQFf8BlK7gFjG/lxEXNA9
- gZHR62NnxGw/dZ/77qoojLVV042NC1/gaDzThNvO5JUrd1rP9/BgnuzgEuLkwli/wu8=
-X-Gm-Gg: Acq92OH/dg/hxYZLObfLLMCW2QVOSdCS6GxrZXOTnY2zhdy+7YOJYBEZ3jfXBWQUdAM
- oM2TWPtX4hxbvzNcsZSWQpOCMWASxPKvkLBo51FHFfvyF8H3INaIgOe7s4Ed8rLN0dVlNercAIw
- 8rx+Luc6iY3QTZdOg+jMQuN1H9T6X5fv4CNhWy7c+i/WnITHnMHF6q+X+1ZWxu/hqdKT3mhqpJh
- eXv44Yx8riFbj3LLB4BwX1pnPhFE2VpLJpAbmfFocNmPIeoG58rlFlydezVtMWFMIpUNWIyBPhY
- aZo3/l5CtzZYGP0Ni4qTiDKwK0ouPtOJhqiA4xDm9odq9sr1IuYoJ2NqIbc7HgFxAEU8vwHu+iz
- l+uToohSadzUHEX/8dng5pTuJtPvBqDPqeE0Os5GvF2GNprJPI0/RbWXuuBluQQhdOs/uIx0J7B
- yjQ/vXfdS9/IHw5NGjXLBr1eukGRiYsepSL3dd8Q0w8NmR82Ve42YriDM6yrb2DY8m8u+lwCJ4o
- 4DreHQJ89GMfMP0GmU7GlNHo2txB1zmG6skz2gCq/gom6Z/3J08ZzEZZkc30BedrkxMvIKLis0Z
- BmSFw69fPPj+/3UHHdfaRCOCh9hRZ8Nu5XWqDCC9U8TVHf737CLUK4Wxenxr6Ln3FEMJUcrMAMW
- p4gF9D2k0aCuaqJ/yYSCbjzCaDqkXe0mcN6CQtkKyyL6JCE5kI20s8KjdRQI4uTO83/S/aSglI6
- 3mrU4hMiJ0m5U4UZjZ9znAxqzHMwjnr7WMNSpy653tkwPVf18FTWdhPHEWxp19ks+H4HQlUOiGE
- Ebqb4UEsC0Idqgw/GYGj9Q+tydY
-X-Received: by 2002:a05:600d:8:b0:48f:e6b9:c740 with SMTP id
- 5b1f17b1804b1-48fe6b9c811mr55098855e9.30.1778853193958; 
- Fri, 15 May 2026 06:53:13 -0700 (PDT)
-Received: from hades.. ([94.131.143.12]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-48fe4c88e5asm65854525e9.6.2026.05.15.06.53.13
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 15 May 2026 06:53:13 -0700 (PDT)
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-To: trini@konsulko.com
-Cc: marek.vasut+renesas@mailbox.org, jonas@kwiboo.se, anshuld@ti.com,
- sjg@chromium.org, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- u-boot@lists.denx.de
-Subject: [PATCH v4 6/6] doc: Add a warning about using RELOC_ADDR_TOP
-Date: Fri, 15 May 2026 16:52:27 +0300
-Message-ID: <20260515135245.45067-7-ilias.apalodimas@linaro.org>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260515135245.45067-1-ilias.apalodimas@linaro.org>
-References: <20260515135245.45067-1-ilias.apalodimas@linaro.org>
+ bh=S8RBZWzGq8AYr+RlPGaoYF89zNYBUkQKb3YhiJBI8/M=;
+ b=BT4CtOgiElfxSgoguURO9n0ocFfMo5ZJc18vRpS2OM/pXX6RwTOLFbq0Ca7+hQLHSe
+ 082tScmiWD2dUjJtxF2b5Z0hsCiS3IMZy4PqGpOtDEZOZ29LeXHJFzWNIQTl1HBNHaAv
+ oAlBnhlGqn4IENS6ZlRGyzdJS6fmPpVWtZ8EjfqE3DEUMBOzwuUd1ISam2y5qgxeiGCf
+ XPWue+pm5s/vss025VF543hHgwW9Nn7YtGJqJ6nCqm8f8MTr6egPBTCqUCpDxaSOG44e
+ qdDiPDXkTHYreU40CXxgPNyhZk20B58TjzX+ELXVlkmSN652VMJcCacEG584rAp4H2qF
+ cxlw==
+X-Gm-Message-State: AOJu0Yx2n+cp6VaFLBkqWfyLI4x2frmPD7aIdZyQl0c3vIByHRRBlTur
+ G1D3+c45vDEY91CJTnCWecXfRNX7IyhOAoFFEfsvN0yU7CBr2UB9fehcuB44EnfyTQcTPPyB3p9
+ ghHIzJtmY7aETVlZEplEt3/g8ZTq/6SIa4+IC
+X-Gm-Gg: Acq92OENY5MUf0q/3tnPNP0sYHXbc/x53EOSb9wYXxWOJVHSlR4IknrzOQUKFxfI0mi
+ kzUJWbAgslBHduzTk7wy9/oMT0WvVDS+uJcCVecvChmK0bdUXRCm9RksPKhNjx75mAL87GwIey6
+ +YGk8LMqqNSwjZ+Orku8O0WNB2a0ZUxj96tY6nBUV85YK3tDzeyAHL5G+TcX/vTW5C44jBhVMp0
+ q7MXnD17TVGtrDCALXixmvjsRkQKUWArUnIEekQf+91FsiIwqp0AqTp5/Ntm/jkOJTQQKZXsACF
+ Y/YhsDObddLhjv3INHMgYKKvHUMfkikxLgkKK1fNoq3RjM/zDE5n1FzLhsbVBm2E7tntIGNEStZ
+ w4a/ZQ/M=
+X-Received: by 2002:a05:6512:3a81:b0:5aa:b6a:6028 with SMTP id
+ 2adb3069b0e04-5aa0e753337mr1110847e87.45.1778853307569; Fri, 15 May 2026
+ 06:55:07 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20260501162706.543779-1-alexander.sverdlin@siemens.com>
+In-Reply-To: <20260501162706.543779-1-alexander.sverdlin@siemens.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Fri, 15 May 2026 10:54:56 -0300
+X-Gm-Features: AVHnY4LwAc169TBvEmHmkzUgq9WKrpsTUajzFlxGB0TLM7AIJ84AU5CiPlBcW3Q
+Message-ID: <CAOMZO5B9W=WOXHRKdj-gpirD3z1WeODiFkYFB9ULZR-a=QE8sg@mail.gmail.com>
+Subject: Re: [PATCH] clk: imx: don't build i.MX6/RTxxxx code for all users of
+ CCF
+To: "A. Sverdlin" <alexander.sverdlin@siemens.com>
+Cc: u-boot@lists.denx.de, Lukasz Majewski <lukma@denx.de>,
+ Tom Rini <trini@konsulko.com>, 
+ Ye Li <ye.li@nxp.com>, Christoph Niedermaier <cniedermaier@dh-electronics.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>, Peng Fan <peng.fan@nxp.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,31 +118,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Since devices that can't DMA above 4GiB will misbehave with this option
-enabled add a warning on the documentation.
+On Fri, May 1, 2026 at 1:52=E2=80=AFPM A. Sverdlin
+<alexander.sverdlin@siemens.com> wrote:
+>
+> From: Alexander Sverdlin <alexander.sverdlin@siemens.com>
+>
+> When commit 1d7993d1d0ef
+> ("clk: Port Linux common clock framework [CCF] for imx6q to U-boot (tag: =
+v5.1.12)")
+> introduced the parts of Linux Common Clock Framework, it was done for i.M=
+X6
+> only and even had "depends on SPL_CLK_IMX6Q" conditions. Since commit
+> ccab06689aa2 ("clk: imx: expose CCF entry for all") the framework can be
+> re-used with SoCs of other vendors (say, TI), but NXP SoC-specific code i=
+s
+> still being build. Is is especially problematic for size-constrained SPL
+> images on TI AM62x.
+>
+> Make the build of the i.MX6/RTxxxx code not only dependent on
+> CONFIG_$(PHASE_)CLK_CCF, but also on the corresponding CONFIG_ARCH_*
+> options taking into account that only two platforms seem to use the code =
+in
+> question.
+>
+> This saves 2264 bytes on ARM platforms [using CCF].
+>
+> Signed-off-by: Alexander Sverdlin <alexander.sverdlin@siemens.com>
 
-Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
----
- doc/develop/memory.rst | 6 ++++++
- 1 file changed, 6 insertions(+)
+This breaks the build.
 
-diff --git a/doc/develop/memory.rst b/doc/develop/memory.rst
-index 5177229630d1..ffee06c1530c 100644
---- a/doc/develop/memory.rst
-+++ b/doc/develop/memory.rst
-@@ -110,6 +110,12 @@ U-Boot Proper Flow
- 
-       This follows the same as in SPL flow. In board_init_f(), a part of memory
-       is reserved at the end of RAM (see reserve_* functions in init_sequence_f)
-+   #. Relocation address
-+      By default U-Boot will try to relocate below the 4GiB boundary. If
-+      RELOC_ADDR_TOP is enabled U-Boot will look into the dram bank config of
-+      gd->dram[] and try to relocate to the highest available bank. Use this
-+      with caution as devices that can only DMA below 4GiB will misbehave
-+      since their buffers may be allocated above the 32-bit boundary.
- 
-    #. Code Relocation
- 
--- 
-2.53.0
-
+make imx8mm-icore-mx8mm-ctouch2_defconfig
+make
+/usr/lib/gcc-cross/aarch64-linux-gnu/13/../../../../aarch64-linux-gnu/bin/l=
+d:
+/tmp/cc1Ra7A0.ltrans4.ltrans.o: in function `imx8mm_clk_probe':
+/home/fabio/custodian/u-boot-imx/drivers/clk/imx/clk.h:129:(.text.imx8mm_cl=
+k_probe+0xbd0):
+undefined reference to `clk_register_gate2'
+/usr/lib/gcc-cross/aarch64-linux-gnu/13/../../../../aarch64-linux-gnu/bin/l=
+d:
+/home/fabio/custodian/u-boot-imx/drivers/clk/imx/clk.h:129:(.text.imx8mm_cl=
+k_probe+0xc10):
+undefined reference to `clk_register_gate2'
+/usr/lib/gcc-cross/aarch64-linux-gnu/13/../../../../aarch64-linux-gnu/bin/l=
+d:
+/home/fabio/custodian/u-boot-imx/drivers/clk/imx/clk.h:129:(.text.imx8mm_cl=
+k_probe+0xc50):
+undefined reference to `clk_register_gate2'
+/usr/lib/gcc-cross/aarch64-linux-gnu/13/../../../../aarch64-linux-gnu/bin/l=
+d:
+/home/fabio/custodian/u-boot-imx/drivers/clk/imx/clk.h:129:(.text.imx8mm_cl=
+k_probe+0xc90):
+undefined reference to `clk_register_gate2'
+/usr/lib/gcc-cross/aarch64-linux-gnu/13/../../../../aarch64-linux-gnu/bin/l=
+d:
+/home/fabio/custodian/u-boot-imx/drivers/clk/imx/clk.h:129:(.text.imx8mm_cl=
+k_probe+0xdb8):
+undefined reference to `clk_register_gate2'
+/usr/lib/gcc-cross/aarch64-linux-gnu/13/../../../../aarch64-linux-gnu/bin/l=
+d:
+/tmp/cc1Ra7A0.ltrans4.ltrans.o:/home/fabio/custodian/u-boot-imx/drivers/clk=
+/imx/clk.h:129:
+more undefined references to `clk_register_gate2' follow
+collect2: fatal error: ld terminated with signal 11 [Segmentation
+fault], core dumped
+compilation terminated.
+make: *** [Makefile:2109: u-boot] Error 1
+make: *** Deleting file 'u-boot'
