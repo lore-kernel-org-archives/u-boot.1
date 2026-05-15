@@ -4,89 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33461CD343F
-	for <u-boot@archiver.kernel.org>; Fri, 15 May 2026 22:30:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7BDB8CD4851
+	for <u-boot@archiver.kernel.org>; Fri, 15 May 2026 23:11:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A026C84885;
-	Sat, 16 May 2026 00:30:21 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B6A9984812;
+	Sat, 16 May 2026 01:11:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="lE/eFWt6";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="XFR28IL4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5B06184886; Sat, 16 May 2026 00:30:20 +0200 (CEST)
-Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
- [IPv6:2607:f8b0:4864:20::336])
+ id 9421584869; Sat, 16 May 2026 01:11:54 +0200 (CEST)
+Received: from mail-oi1-x230.google.com (mail-oi1-x230.google.com
+ [IPv6:2607:f8b0:4864:20::230])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AA6DF84713
- for <u-boot@lists.denx.de>; Sat, 16 May 2026 00:30:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0FF4784713
+ for <u-boot@lists.denx.de>; Sat, 16 May 2026 01:11:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=briansune@gmail.com
-Received: by mail-ot1-x336.google.com with SMTP id
- 46e09a7af769-7de7dc85b74so402846a34.2
- for <u-boot@lists.denx.de>; Fri, 15 May 2026 15:30:17 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1778884216; cv=none;
+Received: by mail-oi1-x230.google.com with SMTP id
+ 5614622812f47-47c7b282e21so187478b6e.1
+ for <u-boot@lists.denx.de>; Fri, 15 May 2026 16:11:51 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1778886711; cv=none;
  d=google.com; s=arc-20240605;
- b=l1qnaq0Gk0LZUPCJ20kCFtNnSGqqRTNMVdBmMWJqYazSMiJvds81N4dvtZx0EgQCDw
- j3nFr0Nciq9GyGWHZDHec0OKpWQG2VPpd6ndg8ZEdoCdXUrS0QRSQLv8w1+48AzQOgTr
- tmal3b+KFwLHcIT7J+EdkPmnTopITsjZPO0mIizV0falsQfWk2kNa0OyA95mjPRWc7VD
- FcY8Dee0SodLWPeXGk6zheYeJMatzgd7qq35RpWnU9zxtmY5sVQnnFTLteTaVDqT+mRO
- 8WtFN7+Va7nSlkkYkWIKf17vb3ORgwOXFycc/tbZUpbZpf0FBv8nhLNWPAZY0SVmKmeg
- 0eyw==
+ b=JEf1hyUqQwehOsOFr+FieAplZ9ayRWXJrt/tEtwgMpZNVX+KizKwCZkRBB5Fiq7plQ
+ xuIbzSSU67sy4hLkLAouPlmz+c8fCiMqdB26HKN6brh30SG32ItWpmJ54Y1JZnOm+Jhx
+ ApuCS/yeC6e4QU4Znt1ToUlb2XGSQ5FiSUj5puCMPJR9DMh+dtyGi2dSFV51wapd31bN
+ VcggYUQoSaAk1HEl3gBQuX4/dHOWZAdprOC6QsLSl/6cEp/ytIVWrnnTPrV8b3umw6US
+ c17DpaQDGc5WSgVYWCCbxFuOZLaDI6DMExv2MUMYfBwu7xs9V/JHW0DllsCslWtM56Hk
+ b25Q==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:dkim-signature;
- bh=1BhdUj9o+n5cPW2shIA2Uf2aEf/j4yk1bvXjx5/Bxrw=;
- fh=uC4KV75ls8UXUqv4fxi5COunsPsfv7YgqIasgzsVA7s=;
- b=UGrtj9bFPGJcpedQm10rJH3Wr2EqzNyVAwjvfCtEAMe0Ny2uz3+zhUK+uGaw+e/3dZ
- C79qwPwlZsOn/vyPaRdI80iNgv3xwzTRvdn7udiEyENPmOCYwDWoajofnWxDsF06rz/F
- 8tb7YfMzXwJfddBzmGqSal+uSgeR30KsA1dMFMSmiLam47/hhms20p8IgKJalZvm6Npr
- tz80F9KH0DynWppElzb+LAK9EPXp6Z3Z6bk7cFVr1/WLjPxffJgbB6u/V1s9jKxAavDW
- GzhUBz8a8477JoenvQaGVP6I+EOC0T1SpGA2BmV6pQ/dXQCNx2g8x3jrIl7hEx/rPUOF
- LWyA==; darn=lists.denx.de
+ bh=c36LsoF7NwGzx2oLAgF0EN8Bh/98KJmDgaYaEJ3G4Ew=;
+ fh=WZ5gdBIPClJvaOLUN4gZuxwRaqg2moCepTlohn5msQs=;
+ b=OEB6HnZJ70M8UsgAyg4eFd42jQ1tKj96bFROvby4r+o13zLRw45Hq/Sbg1peOwLmZl
+ jD0XrIMTDPh2ghGR/k4aaVoBeSE3zNf5GE4b4eTd3uIg+F5jidx4DSNcN9q3eZkgSxdo
+ 0uVlICqZY2pP/1ufFTMYVbXkah3cDjU1rxVHSrT8+qVi5P+BpRlPPOsvvb7XdzN8IyIo
+ 4V3HwlHek33A3/bTtfZalqhux1Dfg0eF3gcnlOU/UOdHcP31bVZIOgtRC3C6Jmj+FOAo
+ g7yjJKP2OKy/xPs9f8pCtkwD+geAHh4OWhv8Gsq8VD+XGKwLOaJj4A/wm20DqMO6DACA
+ vJoA==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1778884216; x=1779489016; darn=lists.denx.de;
+ d=gmail.com; s=20251104; t=1778886711; x=1779491511; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=1BhdUj9o+n5cPW2shIA2Uf2aEf/j4yk1bvXjx5/Bxrw=;
- b=lE/eFWt6Spee6UUyv+LZjiodCZhAGkIuU89z1sLBKYFrCP0Dq+Yqst/ZSwplAOy4aN
- Xr+ZXb2mtCvPLgNj8ZHeEdtxUjCIg8oTvs4NBcZplpng7Y63LAlsaSsf7nqLAguIUZXb
- 6DkHX4Ay4XZT36D3OtQwC4wxk1szcB9fHH8Rp6+hUzgE8kMlSPBS2vWQz51c+2V10TSH
- 1ZFmy0kNfpwvPi6hLMMaq2SZMLHZxPjUV/ipq2i/61J7s9F5RZ9QKlNoArb9EamH/esq
- yoMM16UR+Q7Phx2IBRJ5fyl5S3FCsyBiZ+XL8NMg/p0baIHCM0llaIy5P1nbDXvVKRMi
- lzPQ==
+ bh=c36LsoF7NwGzx2oLAgF0EN8Bh/98KJmDgaYaEJ3G4Ew=;
+ b=XFR28IL4QZoc7hTtl01DzO/eu9I4Evv86vqGlIS//oEnK7aOfBPOgXKAXweV7FwiJW
+ tCCFaOFH2w4/MlE30MA6ssZMz4XLLl4jGZ/IlJh1YsKdHTx45YDdKJa6GwJWf5GZHSZC
+ l0ZZ5iIBbkublNJjZI0ho6jkihbiu60eHr9eyKKcFe1FkvEOhCuJH48TrfSqyfjcqMqx
+ HINXha522hRXkkJRm9J2WVLWWDt2qilmykh/H48A/U64o7l2/7RKSGEkoN2bbrTLHxm7
+ zqIPAFA2Fcf54nMPupLyUHBzNI208cY3RZakZ9ylygol0PILXp3ubmlOBnEuUh5Tclkb
+ GIaQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778884216; x=1779489016;
+ d=1e100.net; s=20251104; t=1778886711; x=1779491511;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=1BhdUj9o+n5cPW2shIA2Uf2aEf/j4yk1bvXjx5/Bxrw=;
- b=nk/flhZj2tnOUMEHG+aLUjtpJPbXrtNVuF0XUJZtK6gR4Id8rVAGHwGr2j1wXA6SYd
- gLcPEed6omNjh/beBiaMnOD7MESopmyQ2lmphcL9mkdm6qImgWkCEA8iWxRyxyFz4mq1
- imfIJwdWrt7lpAB5zhNZ3Zw8nAKZYOd+AxVyDNBxWIi7YFHYCiAddy33Dsc1E3CFEd2T
- CBiv0ypkdZMaYOeKhWKrelgcNr0/qo0dCU059C6e3mfeYMWmvNGdgfKGQCybVork5n6k
- ZGewIVqiwBTGNycU/dFYYNyjFHOghPY5tuDB2NeKuj929rDyXiD1q5BBEXErAbABb472
- dk3w==
+ bh=c36LsoF7NwGzx2oLAgF0EN8Bh/98KJmDgaYaEJ3G4Ew=;
+ b=eu6p41XqIoHxBwLuljmES48hhCBvbiZfKXPNSg5BRqyQ+sY4yerOJgEzXN7Y79KEoR
+ Bu2NcI1VE1lTjN8f1CVdxo1TlEJETCYPMtLjF6MFO38vdufXqYNT8Yzr3zxf5a99FMR5
+ ls9uoZq3V70Fva3fCP3s3wIyr0CMZHDjF8nmi7vIpesDVoOI5HdRXKbcVn2qZUDAArAY
+ W4zzEvurlyMDeD6OzX2cKDThas8SRuE36I3060Abewk8/h4rFvsqRuH6RhYH/Rkenu9L
+ nFEV6FzYZRjTtvCGHss0Mn7XjBGblfTlKVjmChpXymsmpiltPVEhfMWSIuKs7qLKnsFz
+ hM5A==
 X-Forwarded-Encrypted: i=1;
- AFNElJ/atOqNDxx8dslxMI731SQOknSnvQ+bgXTA0RMfx870ndBMdPQ23U9zlvRfxaqZQj4gi6gVD8E=@lists.denx.de
-X-Gm-Message-State: AOJu0YxG3ELqnWQK/bi/22bco943VoYTJmbVBMp7DpdKAl1/FpP4ZqAM
- 6U4HS6oVYOotY0HFJvbjP7XFLuTDCDyTi0/++QQul0qFaUNdpZIA2pSQ0cabmOYLBBFVmgBLzM8
- 0llECWTzz/YxQ5eJTxMtuD7Gp8MM69gE=
-X-Gm-Gg: Acq92OFeIIZXFtTds1WCGO2eNxJ3f6OJBsq8fjC/NQty85TYTEvfLf3Km4DDetCORyO
- nQZWlUv+tQULuaF/SL8rJDPAsmYSUnaIf5fiD80/NrBAhCVdPIl1tWb+FwlLkXQbmasDDkSTe4o
- 2atwXhNZyqFMW0whrhxSJmsYhZB013c1UTKdRmM41H3v+hmdKX36lkceDMZeqpEs3kdqsTemy2f
- Z3j1MyQVcdgrL5eJD7ofx3K1GHKbZ564vs0s3gIIHSqr2mSuAjrT/tMPtlBMl3msRpteY9RBwmV
- D70gmShKSj8Bwy97CA==
-X-Received: by 2002:a05:6830:6d0c:b0:7dc:cd0b:58ba with SMTP id
- 46e09a7af769-7e4ea028c78mr4165607a34.4.1778884216223; Fri, 15 May 2026
- 15:30:16 -0700 (PDT)
+ AFNElJ++nAFEJiQqDKXJFKVQWY3sd3ztU1O9X8bOKeJVN4LQMpACXHrS9z3700W6X51iu8B0Gfpr270=@lists.denx.de
+X-Gm-Message-State: AOJu0YxDSguFdcYOlknJGF8s6DmGVXyxQJPhVPy1AutuHwk0GTXeyfiY
+ kRPV5Ex7WKiUq5R/clPNSohpCeRSB9wZCw5/j57LQIIIO18fE3LGZPoroX1mbGlT5ojlThwJSIS
+ nV5wGoNXuCl8OJXTnwosh10b8zxKoR4U=
+X-Gm-Gg: Acq92OFOrHko7xaeoMVxBbppLaZpZe+Lw8l0i1M7cGFYPJPNTqtg/DjHvRpG+hQLMVu
+ LNqxwOvgnDb6sugERuOXFuBHuECqbdq6XMnidsIiGVBpYkkiYXskLPcDXNw2CvfNhXqRglHrSsd
+ mp9URMwlTt03V89o2SgM8SkrHiGERi+juBNd5ruNXJqvEAbDuaS3K6GigZuGxqKgFcEQg8QrLa2
+ JRxm+TXg0sJuQ1FkSUMr2BnkP6MQ03XfkM/ZImTNxlz9xdtwyB+PJBPT+8fdilrxxlFffxsH7gL
+ 0h8SU6urnFi64QcQwQ==
+X-Received: by 2002:a05:6808:148e:b0:482:6b8a:33a6 with SMTP id
+ 5614622812f47-482e57ba674mr4167300b6e.23.1778886710656; Fri, 15 May 2026
+ 16:11:50 -0700 (PDT)
 MIME-Version: 1.0
 References: <CAN7C2SCYCwE=BRoeCedqQYjv-Gf6x6ETOdKeeDBE=CG=-rSk9w@mail.gmail.com>
  <CALeDE9PU0-fW_+erR9QHK1ST8fcStx0FWWk_0M8ELjtADugd7Q@mail.gmail.com>
@@ -100,9 +100,9 @@ References: <CAN7C2SCYCwE=BRoeCedqQYjv-Gf6x6ETOdKeeDBE=CG=-rSk9w@mail.gmail.com>
  <20260515150227.GC1858239@bill-the-cat>
 In-Reply-To: <20260515150227.GC1858239@bill-the-cat>
 From: Sune Brian <briansune@gmail.com>
-Date: Sat, 16 May 2026 06:30:04 +0800
-X-Gm-Features: AVHnY4LXMo3xcRVqyry6lgevE6cjQvI8GVAfc0diq7AsTnouQUeM_Ed5ph2yijs
-Message-ID: <CAN7C2SCfhWttCAUBwwzPvj078fDRdUvM01Xj2tryXCCPLYbcrg@mail.gmail.com>
+Date: Sat, 16 May 2026 07:11:38 +0800
+X-Gm-Features: AVHnY4K6z9JssBXGrqrGIhfvj1Zyt1aIvJoLZSp8S9_TUYEhE-R01fDkw9iOdN0
+Message-ID: <CAN7C2SApq8ah+NP3k1Jj4kbMhK2s50bN10vfCfXkZaBxkq2w9w@mail.gmail.com>
 Subject: Re: U-Boot patch submit standard and requirement
 To: Tom Rini <trini@konsulko.com>
 Cc: Conor Dooley <conor.dooley@microchip.com>, Conor Dooley <conor@kernel.org>,
@@ -301,42 +301,34 @@ n
 
 Hi Tom,
 
-First  appreciate the reply.
+Sorry for the additional reply:
+First I need to apologize that I am also blinded by emotion and
+off-topic.
 
-Of course being kind and expecting the same returns is fair and even.
-However, being kind and returning with teasing on the requirements
-considered as appropriate action?
+Back to the topic:
 
-Then simply charge the teased unit or units with unkind behavior?
-Again I had given out rooms and kindnesses from first place, however the
-return is not as even as you had described.
-Of course you can 100% recap it as me who shows unkindness on
-the table by "verbally".
-Without the double standards or even multi standards are being
-shown on the table, why do I act unkindly in the first place?
+Patch header standard is not consistent so docs is not a
+supreme standard or supreme rules on the commit changes vN.
 
-Simple logic:
+Based on the above response we should conclude one fact!
 
-for(int i=3D0;i<standards;i++){
-kind =3D ture;
-if(reviewers_mood =3D=3D you_shall_not_pass)
-return teasing_func();
-}
+In those mailing pools that are citations or quotations;
+responses or changes requested have no inherent issue
+to pass and accept.
+The changes requested on very specific wordings are
+unreasonable.
 
-void teasing_func(void){
-int bottom_line =3D false;
-while(1){
-bottom_line  =3D infinite_sta_bottom_line_trigger();
-if(bottom_line){
-kind =3D false;
-return done_with_you();
-}
-}
-}
+Of course Dooley had mentioned the request of after "---"
+placement however again based on this reply it should also not
+an issue to push to master.
 
-Fair enough =3D]
+Again basically speaking the entire change request or requirement
+is not a must nor really needed in the first place.
 
-Cheers,
+I hope this should provide a very good baseline to contributors
+and reviewers how they should review and create patches / commits.
+
+Thanks,
 Brian
 
 >
