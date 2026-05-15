@@ -4,107 +4,130 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3E54CD343F
-	for <u-boot@archiver.kernel.org>; Fri, 15 May 2026 05:43:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00DE2CD4851
+	for <u-boot@archiver.kernel.org>; Fri, 15 May 2026 06:56:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ACEEB836AC;
-	Fri, 15 May 2026 07:43:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=phytec.de
+	by phobos.denx.de (Postfix) with ESMTP id 1998D838BB;
+	Fri, 15 May 2026 08:56:54 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="SqEknw2L";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="cSRWEUzN";
+	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="K80xq2rw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 91C47838BB; Fri, 15 May 2026 07:43:41 +0200 (CEST)
-Received: from MRWPR03CU001.outbound.protection.outlook.com
- (mail-francesouthazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c207::3])
+ id F229783AA9; Fri, 15 May 2026 08:56:52 +0200 (CEST)
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
+ [205.220.180.131])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3198D8341A
- for <u-boot@lists.denx.de>; Fri, 15 May 2026 07:43:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=phytec.de
+ by phobos.denx.de (Postfix) with ESMTPS id 5F2338341A
+ for <u-boot@lists.denx.de>; Fri, 15 May 2026 08:56:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=W.Egorov@phytec.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=bhGAzuPKJ2C+za7pxRxk7LbNRXU5s01OEl2aDFzN7a6IR4z7J+jl3xrEFdu3U+fSJxuf4bS/9OMf+Xox42+KrPCex3x3MLCUnrtYvovb4uR4Y0a1qqmQXh3RVw9v09kzzsk4BoOLEU3YKs7ZpKcQu3jED+7hBdBV1UpClZfuP4y0gSrpLnd+mo+78BxfBhhMLhSnkPeMkxAn5/F4SBgATlgQMolJfno+lp8uC5ZSzod3u7Ru9WAsRFKGYbQdQSR/1HeyQe0nQJ/va8T4iAEfLRpjsLY8gaz0Jmk/8B37K/BzWQfMmr8EADC384Zmguys8/5OXs0eccAeMn0Q/ikPwg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=j5TF934jhdggwpprGFSm4SOaEImwRE8wdJKV2kW2i04=;
- b=WOEUZYMHB35b0clQK4woryz5kQWwk+4EEpRrwczJ7PPkGhz+MvtN9BHrKAREHIMVU3ciY2h4hVzSgmGelO7YZBd0il4Oki18PWqHxeMKlYhVmjJtmucpgsvJMbV3Ecs54It700aXoslnc6++VTIhUpf2U3yKkmkW+bYQbRXsYo8sztsk4YNrGtxLUIhb6XPgJZpy7rAp7CiwScqMKgHwocWwUzFcd28sKyBjeWC0LzIgtdfr1uar0rcAn9VQS/iWkDJIZAjEP4nf4fCpr7/3Qg+ezWPNeamzu3DKwxFx2uSQJ044UddF7L5Nwpg+M//EzatU8SAEyBN8FwTxH+h26g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=softfail (sender ip
- is 91.26.50.189) smtp.rcpttodomain=konsulko.com smtp.mailfrom=phytec.de;
- dmarc=fail (p=quarantine sp=quarantine pct=100) action=quarantine
- header.from=phytec.de; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=phytec.de; s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=j5TF934jhdggwpprGFSm4SOaEImwRE8wdJKV2kW2i04=;
- b=SqEknw2LOP00FGcK9vXdjr3VD7o80R2MyDoVXJfbFSTC9dMuwqG+LzMEUTUD7QuCT904lEJVnTP5Rx+IKAEDhuWOJNhKtGxsOenQM5EtFug8eUvcVRYhoR74zQzYDb0RR3i2SnlXCrmMiogzWZ9BwsFtHxQWKeiDPp3SoEf4f9A8Ie5cYDmAq70USt6sizO2Y/VVr7yCypbV5fNDFY1s1KNiRIxL6xRaqRKPwwwLKAqG3fIlUk966nDM+nI0eVBGKWuoDBNXtFPoGZxx88w6vpyRWe44F0eD4sw/6I97QSOjLWxph2FPpN8Viu9gn32APKJv0N5vJ8X+PhHOE1Kijw==
-Received: from AS9P194CA0011.EURP194.PROD.OUTLOOK.COM (2603:10a6:20b:46d::16)
- by DB9P195MB2105.EURP195.PROD.OUTLOOK.COM (2603:10a6:10:3da::20) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9913.11; Fri, 15 May
- 2026 05:43:36 +0000
-Received: from AM4PEPF00025F9B.EURPRD83.prod.outlook.com
- (2603:10a6:20b:46d:cafe::b3) by AS9P194CA0011.outlook.office365.com
- (2603:10a6:20b:46d::16) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9913.13 via Frontend Transport; Fri,
- 15 May 2026 05:43:35 +0000
-X-MS-Exchange-Authentication-Results: spf=softfail (sender IP is 91.26.50.189)
- smtp.mailfrom=phytec.de;
- dkim=none (message not signed)
- header.d=none;dmarc=fail action=quarantine header.from=phytec.de;
-Received-SPF: SoftFail (protection.outlook.com: domain of transitioning
- phytec.de discourages use of 91.26.50.189 as permitted sender)
-Received: from Postix.phytec.de (91.26.50.189) by
- AM4PEPF00025F9B.mail.protection.outlook.com (10.167.16.10) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.48.3 via Frontend Transport; Fri, 15 May 2026 05:43:35 +0000
-Received: from phytec.de (172.25.0.51) by Postix.phytec.de (172.25.0.11) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Fri, 15 May
- 2026 07:43:34 +0200
-From: Wadim Egorov <w.egorov@phytec.de>
-To: <trini@konsulko.com>, <ilias.apalodimas@linaro.org>, <sjg@chromium.org>,
- <marek.vasut+renesas@mailbox.org>, <sughosh.ganu@arm.com>
-CC: <u-boot@lists.denx.de>, <upstream@lists.phytec.de>
-Subject: [PATCH] Makefile: binman: Search board directory before srctree
-Date: Fri, 15 May 2026 07:43:27 +0200
-Message-ID: <20260515054327.1033466-1-w.egorov@phytec.de>
-X-Mailer: git-send-email 2.43.0
+ spf=pass smtp.mailfrom=aswin.murugan@oss.qualcomm.com
+Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 64F53HUN3219660
+ for <u-boot@lists.denx.de>; Fri, 15 May 2026 06:56:49 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ content-transfer-encoding:date:from:message-id:mime-version
+ :subject:to; s=qcppdkim1; bh=4VzHcYmFkw0vpvxofLuDWDBKUFTcl9xCKoY
+ KT0SNKnE=; b=cSRWEUzNATzQD6jmlq0BecixNCoLxry2kG9fUyJH7BkqCgo+Ee0
+ q/8ZhZpCEqfdkdWQ5ZVSc/G0rXfN1iR2e8TVUIcX/dx/POZAcF5+akZkVm1YzD1Z
+ jjc53rzQ0HeIVaGXHEYS92USCutDTXJWyD3sOcjcQmLJc/PoNu2Bb6YSfGZvZhUW
+ /6nYHsethstahBldYh7dWPHumPSst6FLNaKmdOVPdzMoX5FP03ba05FuXBY/nQA8
+ RMDn/rzr6pDgvDkr3vBpxtmUQ0ezn7f8139s0pMEErXpcxWIpjb5X/srMM2OwX6N
+ k4FWbZJrckPuJ2cXoLo+Uw18oNRVIwF2JYA==
+Received: from mail-pj1-f70.google.com (mail-pj1-f70.google.com
+ [209.85.216.70])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4e5m1s20ps-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <u-boot@lists.denx.de>; Fri, 15 May 2026 06:56:48 +0000 (GMT)
+Received: by mail-pj1-f70.google.com with SMTP id
+ 98e67ed59e1d1-365ff2ab7beso636585a91.1
+ for <u-boot@lists.denx.de>; Thu, 14 May 2026 23:56:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=oss.qualcomm.com; s=google; t=1778828208; x=1779433008; darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=4VzHcYmFkw0vpvxofLuDWDBKUFTcl9xCKoYKT0SNKnE=;
+ b=K80xq2rwwNjr3VB3UlaT0kjis5EnxtP+m0dPcHbjEXhNsLeglh2KocfKDyJ4g0eP2M
+ +ZB+BsdR+hX3zm7OQO8LJm4jIOQFm9vdNMiamnE2ijAYK20x4B6pJF+bN98ijBpJytcA
+ XRVlz2YZ3CIw/FY39SgTjTPZjbdF1udCQ3428fzjvceLzQ4jxfoOx7feLzwws8kzHe8H
+ KRVzgEEYs11WqW98CFItuY46VdKdSvPUD0gMTgohmDZTt4ssjHD98quNe09d63CoMDc5
+ YLe8rx+z5K1KgLGuSubb7gGrXy155ciRjBVYECSw5mKspSnUNmaNQpTuG3JjANxh1NPD
+ rCiw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1778828208; x=1779433008;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=4VzHcYmFkw0vpvxofLuDWDBKUFTcl9xCKoYKT0SNKnE=;
+ b=svR/yAzwIehLRsloL1OysTSkUDd2SbT+0sc2x8xutouNFpQIok3XKXAOmKcGhNnu18
+ mMq4V2/1z4fDeopmz4QyoexF4k4Bnns8I3d8lZn/utnf180l4IV1G7J5sBkpZe4adk72
+ FX5zHEsarAnwVx/IA28HEmbvHEsuo35P9Y+ZQBrWaadXhuCROYYbQ4dez6IGBihQoJZ5
+ lfy5BJ40ivy+YPZ3JJXvbG2D9QnkUyhl1B+UFs5T6N6v2evBvAJ7R8wzwsgC8EX3R4UL
+ 6ebi1ysOedpDDsR0ytro937cHZKgmEPMH9vZ0ONku27xdZrFZaQX26aE2iXff/lm6HAc
+ S8hQ==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ+k7FminR2woFvPwdECudP64bKC3qQAsJNQ9hBwNyrFg2hexApdBTVKkVAWuwkYqZ5y9Zy5GX8=@lists.denx.de
+X-Gm-Message-State: AOJu0YyB7uWbd7B2iq+oa/MQ8tUOU0DR22zdHvV8g/udRGthcIbu9c0j
+ r2nZxB/fFOLYg6t2kggZMwqavBCtUaAwPACmRbGcf6fBU78AhtzpNUDp9+0Mk1U9fgw4sFAVOXA
+ OBr7RVGINbFUkgm3TtcmZzwNCayoFXbj4SeJQDL4RBWu+eORbI0w/nDr5
+X-Gm-Gg: Acq92OGy5Hx9TCyZVr9ovgyYLf/qnK9602Oxds8UkVeCHGxHO5Xdjsdz+/T3hV7+F+x
+ sSwe7Bq4sG+5WF7jEoGC9pftUW8IFobmGPB4ZRogUYLhCDcLn/kpwPLbvgUo/khXE8O5pbjZAB0
+ WXXFmFYx0h+AA+VXaiJ71lT21LIJoO64BY78R1zrvSH8WXfApiiCwfOYCErsbnqfdd/GFQ62/iT
+ hHK3OJU5cgsnXPfjpsocyt94G/mYPASTougtKSVwXcKN+JrSHhf0f+Xr/XfAo+D4VkkqybKtUNt
+ KJz1V5V75P3aA2O0Xl5kSGIs8bXfmnSiySAMgXN82Tx7OLATMdPj5v3RH9inUG6qVGDSHT9D5QJ
+ T9s2KbmjbCKhRLoTWpq8NEbrrtncxhNtQlFce2UJPBzR6Oxy4oOQg2g79NN4o2aFUZ6M2A58IPg
+ 4iLC016s5klZY9J3pk1/oVOxMKUnKtk9Eea3lV9tYt
+X-Received: by 2002:a17:90a:a78d:b0:369:277b:38de with SMTP id
+ 98e67ed59e1d1-369277b3eb9mr3936178a91.18.1778828207602; 
+ Thu, 14 May 2026 23:56:47 -0700 (PDT)
+X-Received: by 2002:a17:90a:a78d:b0:369:277b:38de with SMTP id
+ 98e67ed59e1d1-369277b3eb9mr3936163a91.18.1778828207101; 
+ Thu, 14 May 2026 23:56:47 -0700 (PDT)
+Received: from hu-aswinm-blr.qualcomm.com
+ (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
+ by smtp.gmail.com with ESMTPSA id
+ 98e67ed59e1d1-3695126fc8asm1739674a91.7.2026.05.14.23.56.44
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 14 May 2026 23:56:46 -0700 (PDT)
+From: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+To: trini@konsulko.com, casey.connolly@linaro.org, neil.armstrong@linaro.org, 
+ sumit.garg@kernel.org, Michael.Srba@seznam.cz, sjg@chromium.org,
+ aswin.murugan@oss.qualcomm.com, u-boot-qcom@groups.io, u-boot@lists.denx.de
+Subject: [PATCH v2] mach-snapdragon: Add early EL2 hypervisor switch support
+Date: Fri, 15 May 2026 12:26:32 +0530
+Message-Id: <20260515065632.90772-1-aswin.murugan@oss.qualcomm.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [172.25.0.51]
-X-ClientProxiedBy: Postix.phytec.de (172.25.0.11) To Postix.phytec.de
- (172.25.0.11)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AM4PEPF00025F9B:EE_|DB9P195MB2105:EE_
-X-MS-Office365-Filtering-Correlation-Id: 5a416eb2-94a4-4f71-28d9-08deb244e7e9
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|36860700016|1800799024|82310400026|56012099003|18002099003|11063799003;
-X-Microsoft-Antispam-Message-Info: 9y7j1RJlNBAXa7QDK2GQ7gs9eeXLvqMWmiIRZEvebwuGDphNHli2oDyobXz0tHqJ6xgsXmWGccAE6xYtoE8BvsIjA0I3uhpJZt/Mmu2FCFcIFHqmXfglAKyxhotUTtpf1rYC1sUBL1HV8MpOAbuMena14RT2FGksbu6golb44Gvp9iPStszb4+VeYEL+yvBlir5jbILNMDIyFhh/x86CS6iPmJ9f68zJrR2R2W09tTK0pmD4xBv5YLqZW8LVJ0OMpJBDYHTuNpEZxLB52q+rDSdpm8MWt05I6zaOZuKELr7fh0FGPThgQfkwzNDZeICoI16BRY7Lpwx2L51TLvBqruf7EzfL9N/M1eZlAE5PcQXI5lBs9wa1lMpYB6Y9b68VA9yYtCaBUtLAdX/oKbrPCBzdXRS63xGM/wkPRHjO47PFEc4rGDeGOvU/cRtMG9o/SOlzG0RJy83y2cPWf1SutvGhZHae44DvRdObaA7+ZVo0jKsNNqfKBN2aq12fnAmVuGE2c53CL+mO6t8/5OFhjNeTdf16lQY3vKdE+Lac6LgKujDCVJ673G3DbpM/BwUuktTCMwridvA9EKK4KZt0xU8OdszP93Y1PRHkWiVcQRfNiiCY0IMMWtSQ6w8XXzhS+QREH9Ksgksu/MEaD1NplAnfVkaOJ4tHRmj33XtGDkIaraTPmX7j2Gh2gwL8J4dYcvz5DQkbn+vcrU07NhJgqOhRitzjWWxkelKTFbLsaRM=
-X-Forefront-Antispam-Report: CIP:91.26.50.189; CTRY:DE; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:Postix.phytec.de; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(376014)(36860700016)(1800799024)(82310400026)(56012099003)(18002099003)(11063799003);
- DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: rsOpRsEm7h8l8bdm8XxvPLdCyyJXiJHP5juZTLWaJ7/lbNOLdwv8hvpXUUVpfxEWB1r3WK7yyN1LD7xfNt682bkEASZ7TK8SyqG6HU2KClfzj/oNkEgvFhCMFHgY1vtiKulWNNg2G5jZSBRuoyrjP7KAKI7eZm3jFhdNb5vBnhrVeJwmrjh2TLZgnp3TrsI8UmeLUi4LOog4zRXldjvowcwyaMKJqxK4oJ5+a0nKs88oUhl9RC+HD7uHkX3gnwdjpaXSBio8rOpur1x+SDuAZxYYP21dwjJe3pBNYO9ouTgLmPHnClErGY1dJUvZOHwbA+YxJqVyhj/YrCMr9jHMDpex8PwWGJ1i+UwwaswCMGp/dZtvD7429Ppr88O2feqav6PuZznSAC4fvzc0J9b/Ss2+KeZTkStVFRthKtZ7tdkNC3vqtS60iTWBeG0LPdNF
-X-OriginatorOrg: phytec.de
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 May 2026 05:43:35.1053 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5a416eb2-94a4-4f71-28d9-08deb244e7e9
-X-MS-Exchange-CrossTenant-Id: e609157c-80e2-446d-9be3-9c99c2399d29
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e609157c-80e2-446d-9be3-9c99c2399d29; Ip=[91.26.50.189];
- Helo=[Postix.phytec.de]
-X-MS-Exchange-CrossTenant-AuthSource: AM4PEPF00025F9B.EURPRD83.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9P195MB2105
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNTE1MDA2OCBTYWx0ZWRfXyhdEwAyLanbg
+ r7C/cGDClvZ3M45+Bq7xYq91VS2Woxelg8ADAJ/GVDXzdmdBKgbdpe8RwS1VoTVVM3Lenc6hDiw
+ heO3nt6O5CWsM5kwpCAG6ma5gupnb4EU/Kb5Ke4XiJFtqjpZNvReWcPssZ6RGE6/6A0zCpe0Dk5
+ fd8EM0pkP3hbbTovGGn22s3oZ/KXNmK0fqJRAgrTvLR3GHtXvTU+EbVrIvwIcvuEB8B5RO8vEwX
+ 7cQkW+CaqPM+iXq2UlQ1x5eJd/I9s8HQL+cXJJYyrG5i58S2OA5pxh5n0Kzvl7mSjD7eKoAFlO3
+ 5YJpX4OR7sxfES42jBPZ6g0vpPS/nNvcQxGYkefvHVDVvH0pEK37bsTez863A6eDXFAlErdpsiT
+ beu8Ij/JFWQrUAwWQ5lbiQkGIE6j8Mq0nEsLz7G/KLXyL8eEkR+/7kqIA4pSxprRuYhesTGIVy4
+ J6ek+z91037uUsFAoTg==
+X-Proofpoint-GUID: FK-g21sS4DU94W3Ox0fVFM9eAmQztYyP
+X-Proofpoint-ORIG-GUID: FK-g21sS4DU94W3Ox0fVFM9eAmQztYyP
+X-Authority-Analysis: v=2.4 cv=HJ7z0Itv c=1 sm=1 tr=0 ts=6a06c3b0 cx=c_pps
+ a=0uOsjrqzRL749jD1oC5vDA==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+ a=NGcC8JguVDcA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22 a=VwQbUJbxAAAA:8
+ a=EUspDBNiAAAA:8 a=Il_tCLDDmL0aIamoW0IA:9 a=mQ_c8vxmzFEMiUWkPHU9:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
+ definitions=2026-05-15_01,2026-05-13_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ priorityscore=1501 lowpriorityscore=0 suspectscore=0 phishscore=0 spamscore=0
+ clxscore=1015 impostorscore=0 adultscore=0 bulkscore=0 malwarescore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2605130000 definitions=main-2605150068
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -121,35 +144,115 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-A file like rm-cfg.yaml accidentally left in the source tree root
-shadows the board-specific copy. binman builds the wrong YAML, the
-resulting rm-cfg.bin may match a different SoC, and we end up with
-the following error:
+Add support for exiting Gunyah hypervisor and switching to EL2 during
+early boot. This is required for platforms that boot U-Boot in a
+hypervisor guest environment where U-Boot needs to run at EL2 to
+enable other hypervisors like KVM.
 
-  k3_system_controller sysctrler: k3_sysctrler_start:
-      Boot Notification response failed. ret = -110
+The switch is performed via TrustZone SMC call before EL register
+configuration in start.S. The implementation:
 
-Move the board directory ahead of the srctree root so that the
-most-specific match wins.
+- Checks current exception level and only executes at EL1
+- Uses TrustZone SMC to exit Gunyah and transition to EL2
+- Integrates with existing boot0.h infrastructure
 
-Signed-off-by: Wadim Egorov <w.egorov@phytec.de>
+A new Kconfig option CONFIG_QCOM_EL2_GUNYAH_EXIT_SUPPORT enables this
+functionality.
+
+Signed-off-by: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
 ---
- Makefile | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Change in v2:
+- EL2 switch is made at early stage instead of doing at the very last stage in
+  the previous version
+- This change is based on the patch [1]
 
-diff --git a/Makefile b/Makefile
-index 552328f9f2c..1ec29dfe0be 100644
---- a/Makefile
-+++ b/Makefile
-@@ -1682,7 +1682,7 @@ cmd_binman = $(srctree)/tools/binman/binman $(if $(BINMAN_DEBUG),-D) \
- 		build -u -d $(binman_dtb) -O . -m \
- 		--allow-missing --fake-ext-blobs \
- 		$(if $(BINMAN_ALLOW_MISSING),--ignore-missing) \
--		-I . -I $(srctree) -I $(srctree)/board/$(BOARDDIR) \
-+		-I . -I $(srctree)/board/$(BOARDDIR) -I $(srctree) \
- 		$(foreach f,$(of_list_dirs),-I $(f)) -a of-list=$(of_list) \
- 		$(foreach f,$(BINMAN_INDIRS),-I $(f)) \
- 		-a atf-bl1-path=${BL1} \
+[1] https://lore.kernel.org/all/20260508-qcom_spl-v7-4-7d0e22aaaa8f@seznam.cz/
+
+Link to v1: https://lore.kernel.org/u-boot/20260419173829.1074404-1-aswin.murugan@oss.qualcomm.com/
+---
+ arch/arm/mach-snapdragon/Kconfig              |  7 ++++
+ arch/arm/mach-snapdragon/include/mach/boot0.h |  3 ++
+ .../include/mach/gunyah_exit_boot0.h          | 36 +++++++++++++++++++
+ 3 files changed, 46 insertions(+)
+ create mode 100644 arch/arm/mach-snapdragon/include/mach/gunyah_exit_boot0.h
+
+diff --git a/arch/arm/mach-snapdragon/Kconfig b/arch/arm/mach-snapdragon/Kconfig
+index f863daf6bb9..931d25c1023 100644
+--- a/arch/arm/mach-snapdragon/Kconfig
++++ b/arch/arm/mach-snapdragon/Kconfig
+@@ -56,6 +56,13 @@ config BOOT0_MSM8916_PSCI_WORKAROUND
+ 	help
+ 	  Select this if you are building U-Boot proper for an msm8916 board that
+ 	  uses the buggy PSCI implementation.
++
++config QCOM_EL2_GUNYAH_EXIT_SUPPORT
++	bool "Enable early EL2 switch by exiting Gunyah"
++	help
++	  Exit Gunyah hypervisor and switch to EL2 during early boot. This must
++	  happen before EL register configuration in start.S so that U-Boot can
++	  run properly at EL2.
+ endchoice
+ 
+ endif
+diff --git a/arch/arm/mach-snapdragon/include/mach/boot0.h b/arch/arm/mach-snapdragon/include/mach/boot0.h
+index b3c76d6d97d..032a9fbdb12 100644
+--- a/arch/arm/mach-snapdragon/include/mach/boot0.h
++++ b/arch/arm/mach-snapdragon/include/mach/boot0.h
+@@ -1,9 +1,12 @@
+ /* SPDX-License-Identifier: GPL-2.0+ */
++
+ #if defined(CONFIG_SPL_BUILD)
+ 	b	reset
+ #else
+ #if defined(CONFIG_BOOT0_MSM8916_PSCI_WORKAROUND)
+ #include "msm8916_boot0.h"
++#elif defined(CONFIG_QCOM_EL2_GUNYAH_EXIT_SUPPORT)
++#include "gunyah_exit_boot0.h"
+ #else
+ 	b	reset
+ #endif
+diff --git a/arch/arm/mach-snapdragon/include/mach/gunyah_exit_boot0.h b/arch/arm/mach-snapdragon/include/mach/gunyah_exit_boot0.h
+new file mode 100644
+index 00000000000..f69678018ea
+--- /dev/null
++++ b/arch/arm/mach-snapdragon/include/mach/gunyah_exit_boot0.h
+@@ -0,0 +1,36 @@
++/* SPDX-License-Identifier: GPL-2.0 */
++/*
++ * Early Gunyah Hypervisor Exit
++ *
++ * Exit Gunyah hypervisor and switch to EL2 during early boot. This must
++ * happen before EL register configuration in start.S so that U-Boot can
++ * run properly at EL2.
++ */
++
++#include <linux/arm-smccc.h>
++
++/* TrustZone SMC IDs for hypervisor configuration */
++#define TZ_EL2_SWITCH_SMC_ID			0x02000121
++#define TZ_EL2_SWITCH_PARAM_ID			0x00000023
++#define TZ_EL2_SWITCH_PARAM2_EXIT_GUNYAH	0x1
++
++	/* Save FDT address before we modify x0 */
++	mov	x9, x0
++
++	/* Only perform hypervisor switch if we're at EL1 */
++	mrs	x0, CurrentEL
++	cmp	x0, #(1 << 2)
++	bne	1f
++
++	/* Switch to EL2 (exit Gunyah) */
++	ldr	w0, =TZ_EL2_SWITCH_SMC_ID
++	ldr	w1, =TZ_EL2_SWITCH_PARAM_ID
++	mov	w2, wzr
++	mov	w3, wzr
++	ldr	w4, =TZ_EL2_SWITCH_PARAM2_EXIT_GUNYAH
++	smc	#0
++
++	/* Restore FDT address */
++	mov	x0, x9
++1:
++	b	reset
 -- 
-2.48.1
+2.34.1
 
