@@ -4,84 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 610EECD4F25
-	for <u-boot@archiver.kernel.org>; Fri, 15 May 2026 14:10:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2DC85CD4F47
+	for <u-boot@archiver.kernel.org>; Fri, 15 May 2026 14:11:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CEF23846DF;
-	Fri, 15 May 2026 16:10:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 3694384707;
+	Fri, 15 May 2026 16:10:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="XoKOtZ1g";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="bjfhJosz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2E851846FA; Fri, 15 May 2026 16:10:50 +0200 (CEST)
-Received: from mail-oi1-x242.google.com (mail-oi1-x242.google.com
- [IPv6:2607:f8b0:4864:20::242])
+ id 7745584707; Fri, 15 May 2026 16:10:57 +0200 (CEST)
+Received: from mail-ua1-x931.google.com (mail-ua1-x931.google.com
+ [IPv6:2607:f8b0:4864:20::931])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 03381846A5
- for <u-boot@lists.denx.de>; Fri, 15 May 2026 16:10:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6BBF0846AE
+ for <u-boot@lists.denx.de>; Fri, 15 May 2026 16:10:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x242.google.com with SMTP id
- 5614622812f47-47bdee5bfc4so918999b6e.1
- for <u-boot@lists.denx.de>; Fri, 15 May 2026 07:10:47 -0700 (PDT)
+ spf=pass smtp.mailfrom=raymondmaoca@gmail.com
+Received: by mail-ua1-x931.google.com with SMTP id
+ a1e0cc1a2514c-95699e8e26aso2749496241.0
+ for <u-boot@lists.denx.de>; Fri, 15 May 2026 07:10:55 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1778854254; cv=none;
+ d=google.com; s=arc-20240605;
+ b=VY48QCTNakAGvJnvOqAaC6k8QFIpZ+WqupA1Aqfpx3EcriJrlxVIw9E8f7MEQbB65+
+ pHphqYGN79+2Vqx+iWcgeslFfoqybHRQP2GZLap0wYVYenzVyECiaaJRrpGgEz0s2eoO
+ VDH8xcWusq4myU2O8Dvjvmitpd1E5ivNOZL5QFR6yfZm6XnjipB9GGXAP2C02SQy/8Ir
+ w7zYGUEg3uTb6wG0ZVcBSDTueqgQDv+qFegsGHH4ArypnMNNgS+yrrUZnZXlJICxfJTu
+ tJmV1HeOFovzEwDMwv3NlhDHaFLEtMESLL3H71XDFce0/JDziZcK8kOXcZpmHcnAE4st
+ qfQQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=kPEX6BELjbFEr8DQmzcKgY8FZPyL7BOLdCyyTnR1dPs=;
+ fh=3cGkqt4Xgv2w9dTeeIJFEJ5AO4AvGobPArcY4WlS1wc=;
+ b=T4ij+Iw9Z+xNfBCZ9Yi5XB6c9rdWR1DId3xA5/XpKtMJZerw66xbaHM81hDNGMxyf2
+ bK2z1ttAzjfS8vXfbQsIZp6atZEQaUqUY75DOlxs6GctzJ+Dd9TvnaP/BEHJ5PWbJZ4B
+ rUYZQPv1xXfagcUvmewxun9dvqXTBkG+vKirCvdDTiwcfEjf9MQXoMDhz+AUkofNMRic
+ cIQUMts7NOT55SioWCv78Pw+PuV9iHNZ44SblKZb+FiL4vzgTRzuQf36gm7NO5PgkMX9
+ ajjUCyXXmrxniY3XHd0xfBlPpvKgkUlW/2JQs9VEozepapnkaTSxq1PT8feW7PRN85I+
+ WLuQ==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1778854247; x=1779459047; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=wLd5gNYnnEX+LurEhtQnrVm7EfXty1UA15ai04ZSJeY=;
- b=XoKOtZ1gg/BY6qGUDWeyZz0Ef3nW1CJLmAej2K3H0PPR6zRqV8Eq248vGCeNkeENYe
- aNR8HHzcCK45UCIgPrPVHMduBTHaqUY6VJiNklhWryd4JG3RC8jCThtUuf5W3B8Ga4ez
- UwcEciP0V03DAYuAPhbyPZOUYfE0Cv9sLOp90=
+ d=gmail.com; s=20251104; t=1778854254; x=1779459054; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=kPEX6BELjbFEr8DQmzcKgY8FZPyL7BOLdCyyTnR1dPs=;
+ b=bjfhJoszy80txWDYrDeRZgQRMe3cBaS9c4WEYEfAO3buiz3P6bO2rC59FXEIpKtfLT
+ 5JnpABB14dchWCRicXy+jHOWYLZvamnRMGs48hH4wK5WCxgGpdlt72cOazupS7SFoknR
+ 6G1H/afl9lYfqJIe6txgRgxEA2KOXNI9QA/Hc6SqAtnUuDLS7Z7/xlcutTACmiEogZtC
+ QM9Gxgxuxu6XLlYptXXAOjH05bnTjhIEdnp+k9IOBF9O5M7upZM88P/UgFhnAM9E5Wni
+ bI18pVauSzN4dxyCc0avDHxNLVtxMG4jRNMonUmOcmAjU31pODBRtkmfJ26/lVVAwDXV
+ Fq9w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778854247; x=1779459047;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=wLd5gNYnnEX+LurEhtQnrVm7EfXty1UA15ai04ZSJeY=;
- b=LpjBdQRAUlfz9MijOz9RnaB9nsu0VGb8/beWWkY2/pPALDJyz8UF2fQd3vXO/CQ2QH
- 3qRmG84fwi/FmsZLc1v9xJhTClra5z+5bgnCIaX4hXovWh8Oo6jW7w+waQDGK50ttUyP
- jpk28d7STEKxDj+0M7cCWMlGAirpsWPzYrqg+tbpzdKOLNrtp3288N3hpuWkC5uCg7PG
- Rs9rKM35I0Q/tRAmwxXSA1/C71W6n32Rv5wBFgRLuQ4Q6wiWScWOaWUt7EDRATnpZ5tn
- 0YzTdBHnY2j4HEi8C0T5E2apDwB4Nb9WIKLsWaORvisCGafkg3/1tANh2fbdMrzR7co4
- 9Zug==
-X-Gm-Message-State: AOJu0Yz9RAvGEGUKzHkQeyWH8j1cLUkf8bsrW/D+jFpA2XOG9zEgjWdy
- PyN3yE26x7MKmaCAZ8aLbIfvjGqNyAr3cOM70wSGzSYn2vid/pLhvUb6f2Dd+Xa/y5Y=
-X-Gm-Gg: Acq92OEOzZUjurPR704PJK+hI22/9So+Z8i3S2kUSU0iiLkAYQxp6g/caG9Ph8IxfNa
- LkNMPtUwOhb9mwSMyuTBDnBTmlURLj2RLymRT3CrcpIgExRJBHhMEuHaMBz/ZZ/KiZ/BdbZfGKR
- aypZRXohcGf6H0HrVZRNVt1Hyf6Pm8y/xhvrvgOU9b5EU2ZcQhvx9S/8hMduSGonf7w4e0mMeds
- Suq44+HkPZu1xOfnA8+DknS8W87i3ohrXlwkpybfnTodBQ/d+NuNMhymjRn+buspl8dqEfNU4+P
- w/8xHR0IKVJEzxtyomretpmUgHSkuB12V1S0y65Ok4+DlDY7ZwtyPI/skJR+XTxwySTMmunGZZV
- 1njq1l6BmoXCpZSpO1By6i/UlgtbxyJn2ObCv7hQt+k0iUPpRx3bYzXzjBBKMDKII57d7Gy5TfG
- H4ouiX+opF4078522j9uKz1zLpwqmjEexsBHYlnf/XNSiMTx0RuQk8+//v9DeENXLbeJ4XdRhkK
- YUZXfLHvltbjvLtut9NwTdb3MWTp0+GNQ4Ob9AkVwf5gH2cvA0=
-X-Received: by 2002:a05:6808:3095:b0:47c:17b1:e69e with SMTP id
- 5614622812f47-482cb771383mr5164974b6e.11.1778854246674; 
- Fri, 15 May 2026 07:10:46 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
- [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-482ee333d00sm881853b6e.3.2026.05.15.07.10.45
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 15 May 2026 07:10:46 -0700 (PDT)
-Date: Fri, 15 May 2026 08:10:43 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, u-boot-custodians@lists.denx.de,
- u-boot-board-maintainers@lists.denx.de
-Subject: Re: [ANN] U-Boot v2026.07-rc2 released
-Message-ID: <20260515141043.GY1858239@bill-the-cat>
-References: <20260511220555.GM1858239@bill-the-cat>
- <CAFLszThULFjq_R4A1nWYjQcQ4Odw3aZ200RPmQ56Ecf3gO4UYA@mail.gmail.com>
+ d=1e100.net; s=20251104; t=1778854254; x=1779459054;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=kPEX6BELjbFEr8DQmzcKgY8FZPyL7BOLdCyyTnR1dPs=;
+ b=UvHV9DK3cXON8JKynG/mlRphlkUL0hi8x8IPP9xb7pfZdALC3wVLhhdxV9E4YqlZ0T
+ otOkXft9oLRVjT8Sr3ew3h9E4zvRT2/cKuaSnZCJdt89mWVhcr/5lXC0RSSuWP+7M1oA
+ YQQ454lQ89KlV4QUwVJra3PsBwoabLE7Kv2qBhOBXQs9VuUO8uFVZwaRaspkFrLBuTfd
+ cUK7Ag80lZxfld8ECb+TCyEs9sn1aQlOQrDq+R3hVZE0gZmoHLqKO42wMrVl1T0o3R2Z
+ fMnr6O8wEnP4wPSZQ4frNgsvV7x7PhMQI/iKjNHoLSFIXFKjwZLSailxNRTtaDKmtFIH
+ zU+Q==
+X-Gm-Message-State: AOJu0YzlKyCEvyPOmNPPLvEd0QAFAYDHRZnnV7dXySIcDygqaU7rZbXF
+ iTJTpEffAudsthXPB/NfYa+ppsd+frtEdqzzOTeTzsXiwCjznq0kIwhj5MhzwzCFFlc/TBbzbzf
+ DFtS+/vvSkR11GYYcdy3swBvSjqOP5FibWByx
+X-Gm-Gg: Acq92OETO7LrlTJK3sYX9hX1kTiQ6l1Ql2v47uWbltiVTeUH4+skvaT/Bp7t0o5nz9K
+ shH26Yclvk5F6UKKp3f1IpVr7mlTLyu/UWvYrrrsb3rdyUfVzpVjk0rCGBU0hNtyySGqOIMY4bb
+ l6X15N9nbp/cKeS6872+jLDhwj4hSNYahDdz/WmpvXuGcWWZ/OOcY5uuyA+qWOy4AOHevR8A/lC
+ HwCuhZ3fsCiFdBacKWN7DN7aYYQ+E7yur/jCXR7V7+rnkIgDyE3BpL5je6C/CbEYP4hDDmYj+de
+ 5Lh2Fh+k
+X-Received: by 2002:a05:6102:cc8:b0:636:46ee:2f0b with SMTP id
+ ada2fe7eead31-63a3cf2201cmr2080364137.12.1778854254114; Fri, 15 May 2026
+ 07:10:54 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="ePw1yOSkX62jVeuX"
-Content-Disposition: inline
-In-Reply-To: <CAFLszThULFjq_R4A1nWYjQcQ4Odw3aZ200RPmQ56Ecf3gO4UYA@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20260514175457.4047707-1-trini@konsulko.com>
+ <20260514175457.4047707-3-trini@konsulko.com>
+In-Reply-To: <20260514175457.4047707-3-trini@konsulko.com>
+From: Raymond Mao <raymondmaoca@gmail.com>
+Date: Fri, 15 May 2026 10:10:42 -0400
+X-Gm-Features: AVHnY4K7Yf0Lak_0ffMondx6RqWvVDvCnDlOl-uBwRkQ61ClWI0T1XQ2nmKh0Zg
+Message-ID: <CAMDkj5yW4C9qxPHMkapv+ZSKOBQCR_Knr_O8+FfmmfrMzyJBuQ@mail.gmail.com>
+Subject: Re: [PATCH 2/3] bloblist: Demote not finding a bloblist to a debug
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,59 +114,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Tom,
 
---ePw1yOSkX62jVeuX
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Thu, May 14, 2026 at 2:02=E2=80=AFPM Tom Rini <trini@konsulko.com> wrote=
+:
+>
+> The message about not finding a bloblist will quite often be seen at
+> least once, and is non-fatal. Demote this to a log_debug message from a
+> log_warning message.
+>
+> Signed-off-by: Tom Rini <trini@konsulko.com>
+> ---
+>  common/bloblist.c | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>
 
-On Fri, May 15, 2026 at 06:49:25AM -0600, Simon Glass wrote:
-> Hi Tom,
->=20
-> On Mon, 11 May 2026 at 16:06, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > Hey all,
-> >
-> > So it's release day and I have tagged and pushed things out.
-> >
-> > As I mentioned earlier today[1], I would like to again thank DENX (and
-> > the Denk family) for supporting the project for so long, and we're
-> > starting the process of moving our infrastructure to the OSU OSL lab and
-> > the u-boot-project.org domain.
-> >
-> > The delta between -rc1 and -rc2 looks OK to me, and I do still think
-> > there's a few outstanding PRs to come in and a few things I should pick
-> > up as well. But, the next branch is now open and so bigger changes
-> > should target that and I will be applying a few things there shortly.
-> >
-> > To repeat what I said in rc2 (and will keep repeatint) is that it might
-> > really be time to retire support for running our tools on Windows under
-> > MSYS, rather than something like WSL. The move to support more modern
-> > OpenSSL versions has hit a lack of support problem in MSYS[2].
->=20
-> I'm not really the right person to answer this, since I'm not a
-> Windows user. But as I understand it, this would mean not building
-> Windows executables anymore. Is that right?
->=20
-> Should we perhaps just build without the pkcs11-provider feature?
+Looks fine to me.
+Reviewed-by: Raymond Mao <raymondmaoca@gmail.com>
 
-In the age of WSL, I'm not sure the value of supporting MSYS. If someone
-is using this, and steps up to resolve the problem, great. Otherwise we
-should end up dropping it. Unlike the macOS side, we haven't had a
-report of a user in well over a decade I think at this point.
+Raymond
 
---=20
-Tom
-
---ePw1yOSkX62jVeuX
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCagcpXwAKCRAr4qD1Cr/k
-Ci69AQDWoFaeHD83MPBnzLXipb8YL+yNqjBqygldWIflgE4JNQD/dRsVL1JxO8vF
-yHjB//Do0P9B6McBo3XUMjQmjqTL6Qo=
-=HHyp
------END PGP SIGNATURE-----
-
---ePw1yOSkX62jVeuX--
+> diff --git a/common/bloblist.c b/common/bloblist.c
+> index d084be899588..09afdd1f96b4 100644
+> --- a/common/bloblist.c
+> +++ b/common/bloblist.c
+> @@ -613,8 +613,8 @@ int bloblist_init(void)
+>                         ret =3D bloblist_check(addr, size);
+>
+>                 if (ret)
+> -                       log_warning("Bloblist at %lx not found (err=3D%d)=
+\n",
+> -                                   addr, ret);
+> +                       log_debug("Bloblist at %lx not found (err=3D%d)\n=
+",
+> +                                 addr, ret);
+>                 else
+>                         /* Get the real size */
+>                         size =3D gd->bloblist->total_size;
+> --
+> 2.43.0
+>
