@@ -4,96 +4,128 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50BA4CD343F
-	for <u-boot@archiver.kernel.org>; Fri, 15 May 2026 12:49:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB309CD343F
+	for <u-boot@archiver.kernel.org>; Fri, 15 May 2026 12:50:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E422084099;
-	Fri, 15 May 2026 14:49:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 5236984099;
+	Fri, 15 May 2026 14:50:09 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="n4bn80S2";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="PhseRrZm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 04AE884683; Fri, 15 May 2026 14:49:43 +0200 (CEST)
-Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
- [IPv6:2a00:1450:4864:20::530])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 670E484663; Fri, 15 May 2026 14:50:07 +0200 (CEST)
+Received: from DU2PR03CU002.outbound.protection.outlook.com
+ (mail-northeuropeazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::3])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 64B7484099
- for <u-boot@lists.denx.de>; Fri, 15 May 2026 14:49:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1C13583AA9
+ for <u-boot@lists.denx.de>; Fri, 15 May 2026 14:50:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x530.google.com with SMTP id
- 4fb4d7f45d1cf-6763cc8775cso1818427a12.0
- for <u-boot@lists.denx.de>; Fri, 15 May 2026 05:49:38 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1778849378; cv=none;
- d=google.com; s=arc-20240605;
- b=go2bO0YhgUER919DPdkwUUnbErhnQCNbleTSauS6pmtN6/gRKjHiwNl8NhYZhw/lKZ
- x1WIEvW6g/0EB1tYQUMwhPJo7C2MiZOVHsKTTC364LCmkkyS0UHdLIJ+2n/CzWDy3nVg
- zUdMJ9cex7kit3y4Nfi/Yg+hSdLqH2ERxGRbAB5y18HFevqGYd/FWi5djtQuFSp3iGL2
- RrnnGX+P90dR/9OFKUm2TvXd8KAYG+WEKOoY/s7Z5JsnNf/ZwrionfWjzjaSPFrbdV4g
- 4oNWlZtmfvnguf/ojMv9wcnE1z/NsqCQUxjdfcQPwQXXSrR97COC/Pl8kCG3Erwj8NoT
- NQag==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=91VbVHHMfZJ9MZ4rUXbiz2r7oAONk82jdgQlZpKrgf0=;
- fh=bnupiERZn2PI+MmEvXIHvRvb/x9C+g9PVm9rW1kLi8I=;
- b=QI6P8mG9ig0r9KaQ7qbTY1VZjYvrSAHXQ+Lb6F4Mk/mR6q2+B4Y+tRR1hXfApjR2w2
- JF6LCyLGC21tel4k/DTK4YVX94mfmWNeArAftSpueII3jDMPNJadAJhRvgm767tr7PSp
- J4C/9xHGfSlqLItqIDBKRm4/IH32W10Cf0KUHfETSogbIdickzoeova95VfO7lc96Zhm
- S8SMCxRTTdEMfxlrywX+9ybOUNFpbDX3DihyZlRCpbhuARAlzjDQ3zbmERp88lcjHmfl
- 93GmrLqvc7IzlIm5zh0oOkNEt2j5YjS6/C4Dh4NxsqmBXmM3ul3AERciXp5Gy7n7lAWL
- XmUQ==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1778849378; x=1779454178; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=91VbVHHMfZJ9MZ4rUXbiz2r7oAONk82jdgQlZpKrgf0=;
- b=n4bn80S2QMxyjDBR8h8xIMTtgrC4wOZQPnhjhJaXextgdts3S0qp0FhZu4ynMc+iJz
- 4IJnoJnHW2TBo2mWAWnzSaFjOUBMFJSMaStYy95CKcek98s8xB6ysjpvejeGhfacJmXE
- rFCGI1HBmzv9mqSCYnG8XX0OZLq6DdTNH4aMs=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778849378; x=1779454178;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=91VbVHHMfZJ9MZ4rUXbiz2r7oAONk82jdgQlZpKrgf0=;
- b=MrCMdnydoC7pG5z59pfkboC9xZirfT5IjSH2EzbkTjs3a+kphGDXgY3+C2k+LM0KIo
- KSZ+DAMw6ugNGV1j0W6EZ15WejbCx2CJQ3F524ZrKNX+13JaLBi0bi0vswaCMxV0+Kr0
- arDkpkAkZkY9z0tlrU+KQIKLRinh+oyEBmbR64SRwBO45wW9eLEGQspBpDk2BUkBck3U
- nBc/sTGc8+e9BV3vKPytHa/2Hl6dN3vPIj4H2GEa1rnXCHiAw1VrzYFBE77U0PwtqIOI
- JvV2GPPmdwxFEUIEHVO5UPACy0DnE9M5VQzfuaSVNSCEJPYFmY/nsiK9OpV+91iezODD
- JqGg==
-X-Gm-Message-State: AOJu0YwOoG3n1It9oUKYkW7UD3x4U9zxzaHGmsvNxCu+CHdTqasPO31I
- 8ISARvDcvJjbdRHQuW+CdzX760QAp4oHw8qX/FegIHDb00G+uQkyXFv2IgJzHddFK/csIiJYDOs
- ZNF5eHF1U7F4WTbjQVAyEUyqCtFFJexvsJzj0Mvpw
-X-Gm-Gg: Acq92OEV3jCMMJXtNN0kAPPVKsAlukiMSccknVZqF5ToYKI7xHljQHW82bDc3KG2ZNQ
- iVYwraMBIo2gFQvfy6Q6py4vTIuiNs/3NysjfcvQ6jtt+qF0/smqdzr6IdquVJLVSoagZAirjlu
- eLPLm27ycv7SloqCRjTYsZdMUBRb60fWVt2JYEtFd2G1TlEUpwxeNT2axJF39Rfu83xoiIQoRZP
- AGzVZB5Kp/jT3A4JcKBP2gO2XpZcaZEvQfu7UxoLevU9MeDZVYiRBDO19ayp/SKmA8Fv056DxXQ
- 2RpiFki8Ntkzy9yD
-X-Received: by 2002:a17:907:e105:b0:bd0:6293:bd0d with SMTP id
- a640c23a62f3a-bd51538f0bcmr126700266b.7.1778849377787; Fri, 15 May 2026
- 05:49:37 -0700 (PDT)
+ dmarc=none (p=none dis=none) header.from=oss.nxp.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=peng.fan@oss.nxp.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=O8slqpLs+8o1LPH6+ocCRgSKDaEE1T5eZaJkmAYrixBH2Q3Id28PBQfYIUP3i9bsI+tRbYyQtkyDl3l1ugKMfTa0a0EpGm0PX2DGKFSisOqjGqKs65CL0pPUuIfIw6AGUVtnb8mOeY3x+IlP6lSmgHG9UY8tlr0a5NkTedAv/1TUmChxrmmL6hOJBc7S4TtGMplli4YdqE9mKYEMN5dqp8mi1VcjXhTQv9yQuahXEfHi4vrVSaJIUkpHlPGUFjd2NZqhEixh8BQu8QxqkxIhfgfEuOcXMm6Or2byYcsFLo47CzmHOTxqkHDjAqFdWErqpgtOElj4ORSQEo0EHEWLwA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=1dX3n7CEF/klRG1MiW4v6RIjtddVBVd2K9kAbIktetc=;
+ b=wFclRCzIm8V5Dgt2HwhCy4Brdq9YW/bLOnE2bl08QAqe6IYstGkNfaevuj/zV5wmkQSob8qSUXvnfXRP8UbT+Wi6I6vOnVjhW/27Ot+jnJd9z3/OB/0aaJbNiv+u3H12EWeK1St5ilL7ZaN0n6V1oxbAsWt/RU5LPE20ZcTZAHWZz6Y0PfhooA9DMZxI/ckL4A6kEop/1IvOhqSs6JgP8Eo+Sga3LrLHkipmSxK/tFrkf8gZQv8Iuive2W92gPZ1TABTZ9I8xzw/h3DwwjaW+IISnXji3LiIGB7pXmCx9ZeHT4WZSh689WsZCH0YfHdyaeDtl749Ev7XIGJvKbTtFw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
+ dkim=pass header.d=oss.nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
+ s=selector1-NXP1-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=1dX3n7CEF/klRG1MiW4v6RIjtddVBVd2K9kAbIktetc=;
+ b=PhseRrZmBbsYRk4Zji1L2RRU4AVM1sNSZTn93hWsT9S44m1GaiFk/JkIizQ6T4yfNESjKXEWMclhrd39KAIzzmt9oDG3LrorXqdadsqfseIm0uzghupjqreh92Ak1tnpMk4rOkihGW78LgpMim6F2wiFeKsvy5webLrdyk5bQ9i4/PO1aiwJU8kxXlru+ztlwRVtJpbuqHl648Kb1ByizVgM38Nugz/TYzjzmDGM2bBD02zeLu3y0GQ6MfCCsqeyC+MovfGK++hOqxzbh9sO80kYAvsJCoDiRhyQNgiyW6MCkUBU5BpW8GplNUB6yOnQ4K6N4Z/TLdZdpEv5YZhdYA==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=oss.nxp.com;
+Received: from MRWPR04MB12330.eurprd04.prod.outlook.com (2603:10a6:501:7f::23)
+ by DB8PR04MB7130.eurprd04.prod.outlook.com (2603:10a6:10:123::9) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9913.12; Fri, 15 May
+ 2026 12:49:59 +0000
+Received: from MRWPR04MB12330.eurprd04.prod.outlook.com
+ ([fe80::ca22:f8c8:6aca:7889]) by MRWPR04MB12330.eurprd04.prod.outlook.com
+ ([fe80::ca22:f8c8:6aca:7889%6]) with mapi id 15.20.9913.009; Fri, 15 May 2026
+ 12:49:59 +0000
+Date: Fri, 15 May 2026 22:07:08 +0800
+From: Peng Fan <peng.fan@oss.nxp.com>
+To: Jonas Karlman <jonas@kwiboo.se>
+Cc: Ye Li <ye.li@nxp.com>, ye.li@oss.nxp.com, jh80.chung@samsung.com,
+ peng.fan@nxp.com, festevam@gmail.com, uboot-imx@nxp.com,
+ u-boot@lists.denx.de
+Subject: Re: [PATCH] power: regulator: Fix power on/off delay issue
+Message-ID: <agcojGdjiWq8B25L@nxa18884-linux.ap.freescale.net>
+References: <20260511074953.3777767-1-ye.li@nxp.com>
+ <c60ea578-30e9-49c2-8d45-0731b9fd74b0@kwiboo.se>
+ <32618820-7e62-44d0-bbbd-da90be7327de@kwiboo.se>
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <32618820-7e62-44d0-bbbd-da90be7327de@kwiboo.se>
+X-ClientProxiedBy: MA5PR01CA0244.INDPRD01.PROD.OUTLOOK.COM
+ (2603:1096:a01:223::15) To MRWPR04MB12330.eurprd04.prod.outlook.com
+ (2603:10a6:501:7f::23)
 MIME-Version: 1.0
-References: <20260511220555.GM1858239@bill-the-cat>
-In-Reply-To: <20260511220555.GM1858239@bill-the-cat>
-From: Simon Glass <sjg@chromium.org>
-Date: Fri, 15 May 2026 06:49:25 -0600
-X-Gm-Features: AVHnY4Jo166GnKOEjNxHP_SG9poTlIxRhU4FTvcu5rH8Og-3Bl__bYsBMlxWH0g
-Message-ID: <CAFLszThULFjq_R4A1nWYjQcQ4Odw3aZ200RPmQ56Ecf3gO4UYA@mail.gmail.com>
-Subject: Re: [ANN] U-Boot v2026.07-rc2 released
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, u-boot-custodians@lists.denx.de, 
- u-boot-board-maintainers@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: MRWPR04MB12330:EE_|DB8PR04MB7130:EE_
+X-MS-Office365-Filtering-Correlation-Id: 4707d849-395a-40c9-1b49-08deb2807963
+X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|52116014|366016|376014|1800799024|19092799006|56012099003|22082099003|4143699003|18002099003|38350700014|11063799003;
+X-Microsoft-Antispam-Message-Info: F+q6E4qj+RreLOtLsl747OVsNMMHtJRs+wkJDvIdtzepihFwcfQ5FkE5rK0kDsPj3KCVfKXJhdhHFIVV5JPLaOviwNZRxXGXDCUo0X2wtpHvOShguQ/K1/r0Crx8vLs4eLnIkJGNNx5OYwAIN4TTTIQzj19UlgDZMWF/p4ReaFJmhdntHZlS0QYtAShFLvPLntAg1s14gReh6YAVCZJJr3iXD9rc9aBxgVjSs19dG+9W1uZoAsUy9hahcXKQFcOMVGO+B45ChRVrAF9nPdfMiDOdCJfA2vqVugIlq7ePrLPMulQo+qaiqoTzm6F3FoAstiXDEcrfEhDWbH3+zSyraZsObj+HJqi36bXE7HEQCX9FZzamPsB5HC56cj5ShVhqZCW2/ApKXjaFuE2bGV7WXqxpScG7fDf8eQDOAc5hq8MLUwDoeLgRHUdv9xIeSIwRz1Ime70Th4sMhnRrre0ePCekHZahe9urCGZUtPpSTz4x+G3YROaL00EqWnBpAGQ8yhzYiRKaFse0YEquCWQUX2wRJATuLBiQaqNk61coZDzA7+TMA/CYz5AxYh/gc4BNY/FIvefdWZVwBG2jpGmsZ1ANpE3WY2tOC5eLNJOE939FcoswOiU1Ccbkk5NWjRK3IRyM+1oFh96WZdywFDFBhXyGYfm7BzD45zSdzCkZYC0dPJCWXQqiZUb8kZZe4MT9YyNcTr42O5WSVMjmWN0fIpn9nw3Hq6Na0syftt1ZPkUGBEu6tQzQ+coWLodySoTo
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:MRWPR04MB12330.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(52116014)(366016)(376014)(1800799024)(19092799006)(56012099003)(22082099003)(4143699003)(18002099003)(38350700014)(11063799003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?lbb+jeLgu214ZZqmZ48CLOlDNobgyOqjvd9IiSGt0ViFrkbpq/QmXF5PK0TP?=
+ =?us-ascii?Q?C4und24NsfWADkkfkgpA6EyVXxdTVVvk73VXKQCAg2cZ1FrObpXvVaREvHOV?=
+ =?us-ascii?Q?s41biiYw9hfr1kqQg6uUhS2ajTCaKlalDzLF4qYuFgqP5n2r35s5D9SeZ3wP?=
+ =?us-ascii?Q?QYD9RCaK/de4I8N2veXBvWcdhyBsjgSFqBugglCSNmRsPe2HCn+ebWGQGFPL?=
+ =?us-ascii?Q?ehCOz5uurPO6eIGK30e2CVsVR07yRdWD0Lwz6Scin5Oon5Mibs4S14hnUS17?=
+ =?us-ascii?Q?4durLQHek3IvWoqVTdWe9dBPaG3gMpDSvS9TGol1ehfYB0NWMQTIgwN4J6Ct?=
+ =?us-ascii?Q?17UA5XUPIupaGzHIykcv8gG47cTZXl4mVyOU7sts2DfBroIXhkHaCoPyfljz?=
+ =?us-ascii?Q?9wk7q14z/70QsflrZsUY12t62woqMv08LKJiN+QDZnLO3IENLFsCZ0+qPDer?=
+ =?us-ascii?Q?7Gzn6ZXxxhgkKCTdk8q+qEGXbvMLUs5WYjXJTEHIIRY4PHwxPahedQSHN6dD?=
+ =?us-ascii?Q?E3y/D2vPB+m+I2/TgQc5+mwaU3ybi/ujnWk5B8wR/8QRUqtvdJ2egLy5uPae?=
+ =?us-ascii?Q?6MNxHoBLlovUyBwnMjlD02vlkkuDxvlLZmFKSK2+Mybp3zr96ygHreir/DE5?=
+ =?us-ascii?Q?nx4+gJipR/EK5DJPcZ1aEAOD7NzKdowVCmUEvLpLZ2vBe8Rex63C2D5gftc6?=
+ =?us-ascii?Q?PCE3xmYTOARSEX4+D0eciLlzLwLXCYFDcMQPGr+6DvQpPa5pzclY0VDm7Xc3?=
+ =?us-ascii?Q?51nx/BZo4jMcalB/oMB/05+8gWjDeHjflWQKkSno4IPdAI3ZcNX2Qli+8LCW?=
+ =?us-ascii?Q?Hi9/O2fmpcwDhawW9dfh/3b3Xyxdixz9yiw33C+M/eqX8GgC2cOvS2w6hcZC?=
+ =?us-ascii?Q?kW4bCxD6M9zUZzs2AdVRJM0xRTnF59xyuMA18+koAO39QrRqFHwy2oJjfShy?=
+ =?us-ascii?Q?a2k4wTPxZfkqdJ2uIrUaxO1HpGYGp8NSfSQliiKv75OEnmynEajuBzgolPlA?=
+ =?us-ascii?Q?osZchOgIkJdUpA7LKz170rLN56CO0ELLpb6UMsYZ3KGGpxj9q59WWXGUniTr?=
+ =?us-ascii?Q?mBykk14NUUP0LPPqF5w2rdLQPT4exSXu7m2WhWmhHXdKgcHrxbBcpcL19gYO?=
+ =?us-ascii?Q?m5zu50biaTuSW0gekgp7lqlgUWOVLio7XdnWN/4jEIry5x03V9aSc9C65A4k?=
+ =?us-ascii?Q?KsAhcJEOlwvrT3MKw4T5StC8thLZ//jwV5jzze8P2SrXCds13Yihmrshq0UN?=
+ =?us-ascii?Q?Eja815rKGOu7XiXKykfMEuytHHhouG73l6Ji9qcZeqAa7mZeeyUaIUgZBmTB?=
+ =?us-ascii?Q?517nOxHXWVXGKu115WRkqAzxrdamfoFyMqA+ZQEIwAkKiPS8buw/7z3bXH+i?=
+ =?us-ascii?Q?7n/iDjU0a8WRYvsUrslZAUYcQbt1Hgm64q3svXZtks6boHNU7VgnZcPMZe3q?=
+ =?us-ascii?Q?T/+9wyzYdQV2ogjmiZVn1h7bHZc1xatJSyew5ZfPOe5iM/how0Y+VsMDf3kI?=
+ =?us-ascii?Q?DQT6VBiqnnASoCb2IXah8x+Yk+RU5qudOSX6v3T24BPyZOMf7F3mBdUvllWp?=
+ =?us-ascii?Q?s5V5pC8rZRvGJ8QW+APfxWRMX2tGxY0bU+reMRwgu4ixKuAR/6KMGbDTIGMz?=
+ =?us-ascii?Q?3g5BmcxZP8PEF5etAOC7Ds2HhmTw6RU2tJxFGlHr7QKKySjRt863PqtvxUeP?=
+ =?us-ascii?Q?Pi/EDzpljc++Z/Pwa0LQr/v5IecBki/jTv46ZDu3xoDO+YHLmERRZmkHUz18?=
+ =?us-ascii?Q?c9bcZrzN5A=3D=3D?=
+X-OriginatorOrg: oss.nxp.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4707d849-395a-40c9-1b49-08deb2807963
+X-MS-Exchange-CrossTenant-AuthSource: MRWPR04MB12330.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 May 2026 12:49:59.7102 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 0ebZEZPFvYkGQKKjZcuCn/6i34LC/SHneCRN37up6e4pJb7Zw1JY+a4Oa87qiE4++FdM/VYTulX3oiCWET767A==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB8PR04MB7130
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -110,66 +142,131 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+On Mon, May 11, 2026 at 03:10:16PM +0200, Jonas Karlman wrote:
+>Hi again,
+>
+>On 5/11/2026 10:30 AM, Jonas Karlman wrote:
+>> Hi,
+>> 
+>> On 5/11/2026 9:49 AM, Ye Li wrote:
+>>> SD initialization failure happens with some UHS-I SD cards on
+>>> iMX8MM/iMX93/iMX91 EVK after
+>>> commit 4fcba5d556b4 ("regulator: implement basic reference counter").
+>>> When sending operation condition to SD card, the OCR does not return
+>>> correct status. The root cause is regulator on/off delay is missed
+>>> in MMC power cycle with above commit, so SD card is not completely
+>>> power off.
+>>>
+>>> When SD startup, the sequence of MMC power cycle is:
+>>> mmc_power_init(get vmmc_supply dev) -> mmc_power_off -> udelay(2000)
+>>> -> mmc_power_on
+>>>
+>>> Before above commit, as a fixed regulator, the GPIO is set as:
+>>>   GPIO inactive (in mmc_power_init) ->
+>>>   GPIO inactive and delay off-on-delay-us (in mmc_power_off) ->
+>>>   udelay(2000) ->
+>>>   GPIO active (in mmc_power_on)
+>>>
+>>> After the commit:
+>>>   GPIO inactive (in mmc_power_init) ->
+>>>   enable_count is 0, regulator_set_enable returns -EALREADY immediately,
+>>>       so GPIO is inactive but No off-on-delay-us (in mmc_power_off) ->
+>
+>If the regulator is off at boot-on then this is working as intended.
+>
+>However, if probing the regulator turns it off and that requires a
+>off-on-delay-us delay, maybe you are missing a regulator-boot-on
+>property to indicate that the regulator is on at boot/reset. That should
+>also align the enable count with boot-on state of the regulator.
+>
+>Looking at the kernel the off-on-delay-us is applied before a regulator
+>is enabled, not after it is disabled like in U-Boot. Maybe U-Boot should
+>do something similar, in simplest form always udelay off-on-delay-us
+>before the regulator is enabled.
 
-On Mon, 11 May 2026 at 16:06, Tom Rini <trini@konsulko.com> wrote:
->
-> Hey all,
->
-> So it's release day and I have tagged and pushed things out.
->
-> As I mentioned earlier today[1], I would like to again thank DENX (and
-> the Denk family) for supporting the project for so long, and we're
-> starting the process of moving our infrastructure to the OSU OSL lab and
-> the u-boot-project.org domain.
->
-> The delta between -rc1 and -rc2 looks OK to me, and I do still think
-> there's a few outstanding PRs to come in and a few things I should pick
-> up as well. But, the next branch is now open and so bigger changes
-> should target that and I will be applying a few things there shortly.
->
-> To repeat what I said in rc2 (and will keep repeatint) is that it might
-> really be time to retire support for running our tools on Windows under
-> MSYS, rather than something like WSL. The move to support more modern
-> OpenSSL versions has hit a lack of support problem in MSYS[2].
+Yeah. Something below should work(Not tested).
 
-I'm not really the right person to answer this, since I'm not a
-Windows user. But as I understand it, this would mean not building
-Windows executables anymore. Is that right?
+diff --git a/drivers/power/regulator/regulator_common.c b/drivers/power/regulator/regulator_common.c
+index 85af8d599ad..7bf25f6a176 100644
+--- a/drivers/power/regulator/regulator_common.c
++++ b/drivers/power/regulator/regulator_common.c
+@@ -68,6 +68,9 @@ int regulator_common_set_enable(const struct udevice *dev,
+ 	      dev->name, enable, plat->startup_delay_us,
+ 	      dm_gpio_is_valid(&plat->gpio));
+ 
++	if (enable && plat->off_on_delay_us)
++		udelay(plat->off_on_delay_us);
++
+ 	/* Enable GPIO is optional */
+ 	if (CONFIG_IS_ENABLED(DM_GPIO) && dm_gpio_is_valid(&plat->gpio)) {
+ 		/* If previously enabled, increase count */
+@@ -97,9 +100,6 @@ int regulator_common_set_enable(const struct udevice *dev,
+ 		if (enable && plat->startup_delay_us)
+ 			udelay(plat->startup_delay_us);
+ 
+-		if (!enable && plat->off_on_delay_us)
+-			udelay(plat->off_on_delay_us);
+-
+ 		if (enable)
+ 			plat->enable_count++;
+ 		else
 
-Should we perhaps just build without the pkcs11-provider feature?
+Regards
+Peng.
 
 >
-> We're continuing with a community meeting following the release and the
-> calendar link is
-> https://calendar.google.com/calendar/event?action=3DTEMPLATE&tmeid=3DMHYz=
-YzQ1dWh2bnRjcm80czVmcDczYmhsNThfMjAyNjAxMjdUMTUwMDAwWiA4OWJlN2I4MTMxMzZiZWM=
-wNmE4M2RlNGRhNTk3NDVmMGFiZDExYzFiODM2MDYxYWUwNmMxYzdkYmNkMThkZjQxQGc&tmsrc=
-=3D89be7b813136bec06a83de4da59745f0abd11c1b836061ae06c1c7dbcd18df41%40group=
-.calendar.google.com&scp=3DALL
-> and once again this is the same time as the previous meeting. The
-> meeting details itself are:
-> https://meet.google.com/yyx-dsaj-iwr
-> May 12th, 2025. 9am (GMT -06:00)
+>>>   udelay(2000) ->
+>>>   GPIO active (in mmc_power_on)
+>>>
+>>> Add the on/off delay and startup delay after GPIO request in
+>>> regulator_common_of_to_plat which is called in regulator device probing.
+>>> So in mmc_power_init, after GPIO is set to default inactive, the
+>>> off-on-delay-us is applied.
+>>>
+>>> Signed-off-by: Ye Li <ye.li@nxp.com>
+>>> ---
+>>>  drivers/power/regulator/regulator_common.c | 6 ++++++
+>>>  1 file changed, 6 insertions(+)
+>>>
+>>> diff --git a/drivers/power/regulator/regulator_common.c b/drivers/power/regulator/regulator_common.c
+>>> index 85af8d599ad..158284a3309 100644
+>>> --- a/drivers/power/regulator/regulator_common.c
+>>> +++ b/drivers/power/regulator/regulator_common.c
+>>> @@ -46,6 +46,12 @@ int regulator_common_of_to_plat(struct udevice *dev,
+>>>  			dev_read_u32_default(dev, "u-boot,off-on-delay-us", 0);
+>>>  	}
+>>>  
+>>> +	if ((flags & GPIOD_IS_OUT_ACTIVE) && plat->startup_delay_us)
+>>> +		udelay(plat->startup_delay_us);
+>>> +
+>>> +	if (!(flags & GPIOD_IS_OUT_ACTIVE) && plat->off_on_delay_us)
+>>> +		udelay(plat->off_on_delay_us);
+>> 
+>> regulator_common_of_to_plat() is for parsing the values, no udelay()
+>> should be applied here.
+>> 
+>> regulator_common_set_enable() applies udelay() when the regulator is
+>> enabled.
 >
-> To join by phone:
-> https://meet.google.com/tel/yyx-dsaj-iwr?pin=3D7760044274127&hs=3D1
+>Or disabled.
 >
-> In terms of a rough changelog:
-> - Platform fixes for Atmel, MediaTek, STM32, m68k, Renesas,
->   QorIQ/Layerscape, MIPS and TI K3
-> - Fixes in our USB, UEFI, Documentation, and networking subsystems.
-> - Updates to our binman tooling
+>> 
+>> Does your regulator .get_enable() ops not being called or does it not
+>> implement its own udelay() based on parsed values?
 >
-> I continue to plan to do an rc release every two weeks and the final
-> release will be 06 July 2026.
+>I meant set_enable() here :-)
 >
-> Thanks all!
+>Regards,
+>Jonas
 >
-> [1]: https://lore.kernel.org/u-boot/20260511174116.GJ1858239@bill-the-cat=
-/
-> [2]: https://lore.kernel.org/u-boot/ae_KfGqNrsWZ1rfQ@daedalus/
+>> 
+>> Regards,
+>> Jonas
+>> 
+>>> +
+>>>  	return 0;
+>>>  }
+>>>  
+>> 
 >
-
-Regards,
-Simon
+>
