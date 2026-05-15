@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 438C2CD4F3C
-	for <u-boot@archiver.kernel.org>; Fri, 15 May 2026 20:34:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F607CD4F3C
+	for <u-boot@archiver.kernel.org>; Fri, 15 May 2026 20:34:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CFA668484C;
-	Fri, 15 May 2026 22:33:49 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 140618486D;
+	Fri, 15 May 2026 22:33:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="PWkRF+XD";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="M2XVjqK2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2CBC58483C; Fri, 15 May 2026 22:33:48 +0200 (CEST)
-Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
- [IPv6:2607:f8b0:4864:20::329])
+ id 04C5C8486D; Fri, 15 May 2026 22:33:51 +0200 (CEST)
+Received: from mail-ot1-x335.google.com (mail-ot1-x335.google.com
+ [IPv6:2607:f8b0:4864:20::335])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DA15E84867
- for <u-boot@lists.denx.de>; Fri, 15 May 2026 22:33:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D26408483F
+ for <u-boot@lists.denx.de>; Fri, 15 May 2026 22:33:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ot1-x329.google.com with SMTP id
- 46e09a7af769-7dca5f64e86so289876a34.0
- for <u-boot@lists.denx.de>; Fri, 15 May 2026 13:33:45 -0700 (PDT)
+Received: by mail-ot1-x335.google.com with SMTP id
+ 46e09a7af769-7dcdd1b492eso227905a34.1
+ for <u-boot@lists.denx.de>; Fri, 15 May 2026 13:33:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1778877224; x=1779482024; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1778877227; x=1779482027; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=HWXzil8Za8eMTvx5P4Ig+qtNR2rYUWylqACp9O7BElY=;
- b=PWkRF+XDpJJ+Ixupoh6srZ0tqqyeMkOBr9WjfwW7T6bsDNVEQBRlzY2XzbZf9/bIFX
- trvz3tDLYhkl2Etr+L3JJR4gI+XspJk83fjgmocF/rAJKr4U7/8q4YuWaYO5zDsI6218
- H5b7dUBzmS6ZrEb+F1ehjrj2MfPThhoiLrnes=
+ bh=uz1GGs6xG2mxBM5mMa5jZ3tgQsjYqpGEVRQ7+XZJiy0=;
+ b=M2XVjqK2RUIC1Ijq+hlYzuLfAdybG8tb+qJNUFNOAI6umc3vEWUB5WyuLl5xNRSuVy
+ ILxJ5EFSFrmtXlM6NxASfWEAbk5aOr5U2fdcfSj1ISvaR8cOmWGvAmBNdP7NXJ0S08I2
+ rR4hzAsO2AqZD4mY4LEzm9mh65/BcJmPz9v/g=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778877224; x=1779482024;
+ d=1e100.net; s=20251104; t=1778877227; x=1779482027;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=HWXzil8Za8eMTvx5P4Ig+qtNR2rYUWylqACp9O7BElY=;
- b=njgiXm3SQ97b0DcislSxSML1E8RANajkWONdeir0ydHuXeH/JMTzZ8qYlEw5m6hwfa
- xHOuAAYGScHdqGjfRaN/tUWJQRMBC9Sj2w+6Lq26UmlGbtmhlL/PVSpFSFGGUiMmHDAt
- zinf5Xxr3qkGtg8eg8qKj/2Jbq1SiGHsNpIFeAO88uJIbFkq6n97rPIq7zjufOYxFhJm
- +H9DTIL8PQ8b+Ph0MJCbIbhuuKReEbquXLLgoNAde1oFNaN3gNjwz+hhVaDgiOeJVfUd
- s88KTmYMU3WvKvT8mbZxBHYLiHEMETE2rtY6DqdpU5o2OLPYbMaDXgYF1KBPj/m1Vs+R
- IP/w==
-X-Gm-Message-State: AOJu0YzEpOYYkit94wfuScN7P8al4XHzkWSCErD8tJa7Z5IyGQaZ1Knp
- 0S0oKYqOh0DOMZ/tnrMP71w1lQOOpyHSXqZnU245hEv7v64idKlTBjWjiHk2AM6ONEZhciyz2Go
- p4G8pTQ==
-X-Gm-Gg: Acq92OEOt+tNXp617P9Y4m0UQwof/T1bOlcB3Z5fQ0TIuK+3B4V+H/JWqRimTlq6aKo
- KpKCPcAwQjfyTnSFgWDW/IttelCRthYQkf51drVvsoAWcrECRVz24oQRHMnVm6SivgXe54YgHHU
- 6x0ajHhx9+hIdXJ0KHR8CHBsWjIXC0WBXVPGDwyKl1FX5n8VACVwfN293jqJazb1yFNouuLKKBJ
- c6DpuiSmO70haUhlqLLBaO6le3ZER6KxTN8ULc2bkD6oWNgyjvPMr9p/AKhKtGQuK3MmiRL+K91
- 2HJQSdXasw+5NTun14ANu2cvhhyRBlNr5+NNE1OqpCcVAZD9tZkz/HyHc5Bd6mVPHQM8eUuWQAU
- 0eT3tEKnPrlrCbOzO2IkIuadqR6/aJgTplLalA4C75xWSWbpDxyH1AB3dyGm0tw5LHqq/UNLMVc
- dE09YD2ddWjAfgv+k5QA==
-X-Received: by 2002:a05:6830:4887:b0:7db:a184:2b35 with SMTP id
- 46e09a7af769-7e4ea083bdamr3690761a34.8.1778877224584; 
- Fri, 15 May 2026 13:33:44 -0700 (PDT)
+ bh=uz1GGs6xG2mxBM5mMa5jZ3tgQsjYqpGEVRQ7+XZJiy0=;
+ b=fDIlfHLRRJw0+vRAQOGJV3fIQl9LhYdUxOb4nKO0lf+GkH9HJ1sexIwfFeBLdvPona
+ TJpofxB00KM4PUfoTxVIrJCwuXOgY0nqhGZ60swOM0jFkDm5iQu+pP1MXjt8hDNqCsCi
+ 2b33kBlG1P3K9sXlzTeaxi9ejK0HJ2J80KqLKjx8Jtyiv81JnyMu+Q9e53rILAa0SoCe
+ HsB8N8jvKa7Wk/W4v1pb4mvZ6HqeNYZ6QOFjrfoC7otCSMJ1p9vUXcv54zf91hnz/oxI
+ DtBTOTO6vVEZwIrvkgEtcFwqr+yKZHoZGLxz8eHi48XQPeJtj6eeOkMN3EjB40z9TyqL
+ 1gug==
+X-Gm-Message-State: AOJu0YzZL5+6Zjf/28ZJcQuY6wcRJXQi/eSpE0sjOkzeKZfNLA2nXdYg
+ O5k+XaMuHdCMfA7x4e3pHoNaQ5YRr5MbsU/djVoI3dw5cIKD4zmjMbBulwfxw+2Ugg10y5LXuPv
+ SS0tbZA==
+X-Gm-Gg: Acq92OFIJkEPnDhsidjFtriXsI7paAABq4k/VIjOkreQvz9v9PPYZVsyG4AtJRlF5Vv
+ GadSx4i4s37FWzMKYeYZ0WsbLiWxZzLiJFwCjR1/mVlB0+FNS6s8nQLpIHYdVGdty1ir09+1GiH
+ /KkVMI2KwWsCoXWWuxDjv6EdphGd+lQLSSKAGXit3tYKLsBx5UaEWnlU/5cnI0qBvKucCQCb50s
+ Xzd/SQPHd2rOyFo2qa3agpVwFPU867JUUh4mwYqC4BbH09reEY3A9/63N0tpcbHiTFlUzOTNLE4
+ 6STdkt1KVdKOp/CYVxt337YtN71Upv5SgfMA4/CVTJoeYPxE29A93cp5CP9XCMJzJ6aHqaGHz0N
+ bR6Us1BsDCDVnFmFLV1TfbZlMTeVVVYOSgKM3mGQeNfT8OuTYVpcrOnpkfTU7wXbHf76r1nB/Dv
+ c3xkm6YGePksAP7pa/PI6ULk4+Z7ST
+X-Received: by 2002:a9d:4f15:0:b0:7dc:e43f:4b31 with SMTP id
+ 46e09a7af769-7e3f14c8d19mr4112390a34.12.1778877226747; 
+ Fri, 15 May 2026 13:33:46 -0700 (PDT)
 Received: from chromium.org ([174.51.25.52]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7e55b95b82fsm2414906a34.12.2026.05.15.13.33.43
+ 46e09a7af769-7e55b95b82fsm2414906a34.12.2026.05.15.13.33.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 15 May 2026 13:33:43 -0700 (PDT)
+ Fri, 15 May 2026 13:33:46 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: u-boot@lists.denx.de
 Cc: Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
@@ -73,15 +73,14 @@ Cc: Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
  Heiko Schocher <hs@nabladev.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Jerome Forissier <jerome.forissier@arm.com>,
+ Joe Hershberger <joe.hershberger@ni.com>,
  "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
  Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
- Patrice Chotard <patrice.chotard@foss.st.com>, Peng Fan <peng.fan@nxp.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>,
- Yao Zi <me@ziyao.cc>
-Subject: [RFC PATCH 07/11] cmd: echo: Use getopt() with '+' prefix for option
- parsing
-Date: Fri, 15 May 2026 14:32:58 -0600
-Message-ID: <20260515203311.2555651-8-sjg@chromium.org>
+ Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>
+Subject: [RFC PATCH 08/11] cmd: hash: Use getopt() for option parsing
+Date: Fri, 15 May 2026 14:32:59 -0600
+Message-ID: <20260515203311.2555651-9-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260515203311.2555651-1-sjg@chromium.org>
 References: <20260515203311.2555651-1-sjg@chromium.org>
@@ -103,117 +102,100 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The 'echo' command's option parser is a single strcmp against argv[1]
-that decides whether to suppress the trailing newline. Convert it to
-getopt() so echo follows the same shape as the other commands in this
-series and exercises the '+' prefix that POSIX-style 'stop at first
-non-option' callers need.
+The open-coded check for -v only matches it as the first argument, so
+'hash sha256 -v 0 4 <expected>' treats -v as the algorithm name and
+fails. Replace with getopt(), which also lets -v appear anywhere in the
+command line.
 
-The optstring uses the '+' prefix to preserve bash echo behaviour: -n is
-honoured only as the very first argument, so 'echo hello -n' still
-prints 'hello -n\n' verbatim.
+Guard the option-parsing loop with IS_ENABLED(CONFIG_HASH_VERIFY) so it
+is compiled out when verification is disabled. After parsing,
+getopt_pop() pulls the algorithm off the positional list, strlower()
+normalises it, and the tail is forwarded to hash_command() unchanged.
 
-Two minor differences from the bash builtin remain, both of which
-the user can work around with quoting or --:
+CMD_HASH selects GETOPT so the parser is linked in on boards that did
+not already enable it.
 
-* -x (an unknown short option) returns CMD_RET_USAGE rather than
-  printing literally; use 'echo -- -x' to print it.
-* -nfoo (joined form) parses -n and then errors on the trailing
-  characters.
-
-Add three test cases that pin down the new behaviour: trailing -n stays
-literal, -- ends option parsing, and -- is consumed even after a
-recognised flag. The positional loop uses getopt_pop() as an iterator.
-CMD_ECHO selects GETOPT so the parser is linked in on boards that don't
-already enable it.
+Tweak the var declarations to use Reverse Christmas Tree.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- cmd/Kconfig          |  1 +
- cmd/echo.c           | 23 ++++++++++++++---------
- test/cmd/test_echo.c | 10 ++++++++++
- 3 files changed, 25 insertions(+), 9 deletions(-)
+ cmd/Kconfig |  1 +
+ cmd/hash.c  | 37 +++++++++++++++++++++----------------
+ 2 files changed, 22 insertions(+), 16 deletions(-)
 
 diff --git a/cmd/Kconfig b/cmd/Kconfig
-index c71c6824a19..709696c3c41 100644
+index 709696c3c41..eb7c85c1fe9 100644
 --- a/cmd/Kconfig
 +++ b/cmd/Kconfig
-@@ -1916,6 +1916,7 @@ config CMD_CAT
- config CMD_ECHO
- 	bool "echo"
- 	default y
-+	select GETOPT
- 	help
- 	  Echo args to console
+@@ -2798,6 +2798,7 @@ config CMD_BLOB
  
-diff --git a/cmd/echo.c b/cmd/echo.c
-index d1346504cfb..63422c75cc6 100644
---- a/cmd/echo.c
-+++ b/cmd/echo.c
-@@ -5,27 +5,32 @@
-  */
+ config CMD_HASH
+ 	bool "Support 'hash' command"
++	select GETOPT
+ 	select HASH
+ 	help
+ 	  This provides a way to hash data in memory using various supported
+diff --git a/cmd/hash.c b/cmd/hash.c
+index 96d0e443a5b..566bb617328 100644
+--- a/cmd/hash.c
++++ b/cmd/hash.c
+@@ -11,8 +11,9 @@
  
  #include <command.h>
--#include <linux/string.h>
+ #include <env.h>
 +#include <getopt.h>
+ #include <hash.h>
+-#include <linux/ctype.h>
++#include <linux/string.h>
  
- static int do_echo(struct cmd_tbl *cmdtp, int flag, int argc,
+ #if IS_ENABLED(CONFIG_HASH_VERIFY)
+ #define HARGS 6
+@@ -23,25 +24,29 @@
+ static int do_hash(struct cmd_tbl *cmdtp, int flag, int argc,
  		   char *const argv[])
  {
--	int i = 1;
+-	char *s;
+ 	int flags = HASH_FLAG_ENV;
 +	struct getopt_state gs;
- 	bool space = false;
- 	bool newline = true;
-+	char *arg;
-+	int opt;
++	char *algo;
  
--	if (argc > 1) {
--		if (!strcmp(argv[1], "-n")) {
+-	if (argc < 4)
+-		return CMD_RET_USAGE;
 +	getopt_init_state(&gs, argc, argv);
-+	while ((opt = getopt(&gs, "+n")) > 0) {
-+		switch (opt) {
-+		case 'n':
- 			newline = false;
--			++i;
-+			break;
-+		default:
-+			return CMD_RET_USAGE;
- 		}
++	if (IS_ENABLED(CONFIG_HASH_VERIFY)) {
++		int opt;
+ 
+-#if IS_ENABLED(CONFIG_HASH_VERIFY)
+-	if (!strcmp(argv[1], "-v")) {
+-		flags |= HASH_FLAG_VERIFY;
+-		argc--;
+-		argv++;
++		while ((opt = getopt(&gs, "v")) > 0) {
++			if (opt != 'v')
++				return CMD_RET_USAGE;
++			flags |= HASH_FLAG_VERIFY;
++		}
  	}
+-#endif
+-	/* Move forward to 'algorithm' parameter */
+-	argc--;
+-	argv++;
+-	for (s = *argv; *s; s++)
+-		*s = tolower(*s);
+-	return hash_command(*argv, flags, cmdtp, flag, argc - 1, argv + 1);
++
++	/* Need at least: algorithm address count */
++	if (gs.nonopts < 3)
++		return CMD_RET_USAGE;
++
++	algo = strlower(getopt_pop(&gs));
++
++	return hash_command(algo, flags, cmdtp, flag,
++			    gs.nonopts, &gs.args[gs.index]);
+ }
  
--	for (; i < argc; ++i) {
--		if (space) {
-+	while ((arg = getopt_pop(&gs))) {
-+		if (space)
- 			putc(' ');
--		}
--		puts(argv[i]);
-+		puts(arg);
- 		space = true;
- 	}
- 
-diff --git a/test/cmd/test_echo.c b/test/cmd/test_echo.c
-index 7ed534742f7..5fc139fbe68 100644
---- a/test/cmd/test_echo.c
-+++ b/test/cmd/test_echo.c
-@@ -35,6 +35,16 @@ static struct test_data echo_data[] = {
- 	/* Test handling of shell variables. */
- 	{"setenv jQx; for jQx in 1 2 3; do echo -n \"${jQx}, \"; done; echo;",
- 	 "1, 2, 3, "},
-+	/* -n only suppresses the newline when it comes before any
-+	 * positional argument; a trailing -n is just another argument.
-+	 */
-+	{"echo hello -n", "hello -n"},
-+	/* "--" ends option parsing, so a following dash-prefixed token
-+	 * is printed verbatim instead of being rejected.
-+	 */
-+	{"echo -- -x", "-x"},
-+	/* "--" is consumed even when it follows a recognised flag. */
-+	{"echo -n -- foo; echo done", "foodone"},
- };
- 
- static int lib_test_hush_echo(struct unit_test_state *uts)
+ U_BOOT_CMD(
 -- 
 2.43.0
 
