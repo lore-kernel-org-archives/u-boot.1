@@ -4,113 +4,112 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F24D4CD4851
-	for <u-boot@archiver.kernel.org>; Fri, 15 May 2026 22:27:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33461CD343F
+	for <u-boot@archiver.kernel.org>; Fri, 15 May 2026 22:30:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5CD0384713;
-	Sat, 16 May 2026 00:27:45 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A026C84885;
+	Sat, 16 May 2026 00:30:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="aPV2wF3G";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="lE/eFWt6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DD544847D9; Sat, 16 May 2026 00:27:43 +0200 (CEST)
-Received: from mail-qv1-xf2e.google.com (mail-qv1-xf2e.google.com
- [IPv6:2607:f8b0:4864:20::f2e])
+ id 5B06184886; Sat, 16 May 2026 00:30:20 +0200 (CEST)
+Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
+ [IPv6:2607:f8b0:4864:20::336])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B0BF88467C
- for <u-boot@lists.denx.de>; Sat, 16 May 2026 00:27:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AA6DF84713
+ for <u-boot@lists.denx.de>; Sat, 16 May 2026 00:30:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=seanga2@gmail.com
-Received: by mail-qv1-xf2e.google.com with SMTP id
- 6a1803df08f44-8b8abc633f4so420166d6.3
- for <u-boot@lists.denx.de>; Fri, 15 May 2026 15:27:41 -0700 (PDT)
+ spf=pass smtp.mailfrom=briansune@gmail.com
+Received: by mail-ot1-x336.google.com with SMTP id
+ 46e09a7af769-7de7dc85b74so402846a34.2
+ for <u-boot@lists.denx.de>; Fri, 15 May 2026 15:30:17 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1778884216; cv=none;
+ d=google.com; s=arc-20240605;
+ b=l1qnaq0Gk0LZUPCJ20kCFtNnSGqqRTNMVdBmMWJqYazSMiJvds81N4dvtZx0EgQCDw
+ j3nFr0Nciq9GyGWHZDHec0OKpWQG2VPpd6ndg8ZEdoCdXUrS0QRSQLv8w1+48AzQOgTr
+ tmal3b+KFwLHcIT7J+EdkPmnTopITsjZPO0mIizV0falsQfWk2kNa0OyA95mjPRWc7VD
+ FcY8Dee0SodLWPeXGk6zheYeJMatzgd7qq35RpWnU9zxtmY5sVQnnFTLteTaVDqT+mRO
+ 8WtFN7+Va7nSlkkYkWIKf17vb3ORgwOXFycc/tbZUpbZpf0FBv8nhLNWPAZY0SVmKmeg
+ 0eyw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=1BhdUj9o+n5cPW2shIA2Uf2aEf/j4yk1bvXjx5/Bxrw=;
+ fh=uC4KV75ls8UXUqv4fxi5COunsPsfv7YgqIasgzsVA7s=;
+ b=UGrtj9bFPGJcpedQm10rJH3Wr2EqzNyVAwjvfCtEAMe0Ny2uz3+zhUK+uGaw+e/3dZ
+ C79qwPwlZsOn/vyPaRdI80iNgv3xwzTRvdn7udiEyENPmOCYwDWoajofnWxDsF06rz/F
+ 8tb7YfMzXwJfddBzmGqSal+uSgeR30KsA1dMFMSmiLam47/hhms20p8IgKJalZvm6Npr
+ tz80F9KH0DynWppElzb+LAK9EPXp6Z3Z6bk7cFVr1/WLjPxffJgbB6u/V1s9jKxAavDW
+ GzhUBz8a8477JoenvQaGVP6I+EOC0T1SpGA2BmV6pQ/dXQCNx2g8x3jrIl7hEx/rPUOF
+ LWyA==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1778884060; x=1779488860; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=Oi52S5W2MJhnSz2n7q57KbZXFHNeE1JnJd8L5o9vUEc=;
- b=aPV2wF3GOti9IJFI01o0lWw1tPSrjc9o3Z4GP+gC/CBisc39tHvtURJH7Tzo/wQj+w
- EimWMlcDBjY5hFhFYdlCn+aER4NZy7COxqWd1emQDprPDyTXzSDjsFqBsNyXJoCeJCf4
- KwPJI8f2jv4aN4RQ0MMuA9eP1fCJsFLADi0d8LACXKU0XrZWcXi7lUWBt0hsAbN67jBS
- bMD/buO7s7ozJ2mDUyxo7PI6mr3uMEA0xWWVik0cbwQ5pZGbqyHJemKDEDCFv7PQN2Z1
- WhJ7H7Ia5w6VVrCB0ABTtrOLTOJlRpViDkeshhvy05ZxSmyYsgRRNW1rQ2nmrlpsxXaH
- XqNA==
+ d=gmail.com; s=20251104; t=1778884216; x=1779489016; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=1BhdUj9o+n5cPW2shIA2Uf2aEf/j4yk1bvXjx5/Bxrw=;
+ b=lE/eFWt6Spee6UUyv+LZjiodCZhAGkIuU89z1sLBKYFrCP0Dq+Yqst/ZSwplAOy4aN
+ Xr+ZXb2mtCvPLgNj8ZHeEdtxUjCIg8oTvs4NBcZplpng7Y63LAlsaSsf7nqLAguIUZXb
+ 6DkHX4Ay4XZT36D3OtQwC4wxk1szcB9fHH8Rp6+hUzgE8kMlSPBS2vWQz51c+2V10TSH
+ 1ZFmy0kNfpwvPi6hLMMaq2SZMLHZxPjUV/ipq2i/61J7s9F5RZ9QKlNoArb9EamH/esq
+ yoMM16UR+Q7Phx2IBRJ5fyl5S3FCsyBiZ+XL8NMg/p0baIHCM0llaIy5P1nbDXvVKRMi
+ lzPQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778884060; x=1779488860;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Oi52S5W2MJhnSz2n7q57KbZXFHNeE1JnJd8L5o9vUEc=;
- b=f6gZHBBnlqbpYbdLRAI7mIH5hF1/LmO5g7aTIaBqwXnG5NtPZyjRF5QNClpNYBjzN+
- ETfyUyjf9qIq/OMf8KF+aUpud5n2+oEHFRyIvk8r1KnCp4mNbPpbJnbQ2CCEaln/L/Y5
- aOKuLh5P18L2+J9eyWkeGoPxCFw/xundXxjyItCHGUUSPyNGrxpp/r7Oycxz3yN3UBhJ
- L6+HXdd1l+oII7WevODG83QGfE8J0ZvCx/1ZmWyfzzlvRpd+FgFxAIYn6M5OqLHLewdg
- V2+4VYA7hvbmq4sJoX+zea2etu5YMtsWG4tG3G4509VI+4yuy6W/Nxndf1vU19Yd4Fhz
- fHNQ==
+ d=1e100.net; s=20251104; t=1778884216; x=1779489016;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=1BhdUj9o+n5cPW2shIA2Uf2aEf/j4yk1bvXjx5/Bxrw=;
+ b=nk/flhZj2tnOUMEHG+aLUjtpJPbXrtNVuF0XUJZtK6gR4Id8rVAGHwGr2j1wXA6SYd
+ gLcPEed6omNjh/beBiaMnOD7MESopmyQ2lmphcL9mkdm6qImgWkCEA8iWxRyxyFz4mq1
+ imfIJwdWrt7lpAB5zhNZ3Zw8nAKZYOd+AxVyDNBxWIi7YFHYCiAddy33Dsc1E3CFEd2T
+ CBiv0ypkdZMaYOeKhWKrelgcNr0/qo0dCU059C6e3mfeYMWmvNGdgfKGQCybVork5n6k
+ ZGewIVqiwBTGNycU/dFYYNyjFHOghPY5tuDB2NeKuj929rDyXiD1q5BBEXErAbABb472
+ dk3w==
 X-Forwarded-Encrypted: i=1;
- AFNElJ/ufLczw2rW62g9QYcFWkJRgLWXKuo5zfnpmEEvICKc9DeSBV85Vm79qZlFYe6hTlCYK1Raxms=@lists.denx.de
-X-Gm-Message-State: AOJu0YwM/mWuq0Yqqc6HaQZxqoNXRyOtgBWh6ANwqupLihMSAruNr1kv
- giHSf0TFVbzoDiay35sOa22ZR7PcLT33pPT5kj8zAXwL3UcgS0s01RWg
-X-Gm-Gg: Acq92OExkYgZKaiKYDZ1mZgZDibA7TONoJ49lPrCtWK9TM65C4rjY0+7RjVTUAc3jiR
- sut6mVw+UNhUi5K/uldaSKolwjGe2wCfEEckmG8HUAXGEAvemcRO432e4g3LNnmWf6ewYN9nU+I
- nyhQo8tvv79zyohljlUYoYvxCp2WHehjfSgjpARfNU9T3heQgTMVDm/1nuCiZBTy3JVyXkzHlTF
- 6JxOTDXfa85EJuueUovqPG00TklwT335obCghKV37WbV8YLXv808wIJYSnaKzUILrkfr7VlppGa
- qEfNJUGAp2D5As5E//oXNFf3hLCDXeEoBsFPdHxRTzD10vtfnn1HW87ojSPBs90v8Ich7k3jm2K
- hkwCW2VBcRnNa/BdiObtxnokIwxCEUute0xxJJqHfrjfONA3h5wPBKtGQFb1mW7NzLrKFezrEK6
- wdOZvC8Mu6uaYo9Ahw/ozsMaGfn2xrJvEkaSq3latAVO91lDPDVqTG+GBRqvWZgfb9khI=
-X-Received: by 2002:a05:6214:4585:b0:8ac:a0f4:5aa0 with SMTP id
- 6a1803df08f44-8ca0fc20b8cmr72274616d6.8.1778884060473; 
- Fri, 15 May 2026 15:27:40 -0700 (PDT)
-Received: from ?IPV6:2600:4040:4477:d400:2d8:61ff:fe7c:5d59?
- ([2600:4040:4477:d400:2d8:61ff:fe7c:5d59])
- by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-8c908d1d2e7sm64486636d6.16.2026.05.15.15.27.39
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 15 May 2026 15:27:39 -0700 (PDT)
-Message-ID: <936f6df3-2bb9-f99a-45f1-4dcfa915f2c0@gmail.com>
-Date: Fri, 15 May 2026 18:27:38 -0400
+ AFNElJ/atOqNDxx8dslxMI731SQOknSnvQ+bgXTA0RMfx870ndBMdPQ23U9zlvRfxaqZQj4gi6gVD8E=@lists.denx.de
+X-Gm-Message-State: AOJu0YxG3ELqnWQK/bi/22bco943VoYTJmbVBMp7DpdKAl1/FpP4ZqAM
+ 6U4HS6oVYOotY0HFJvbjP7XFLuTDCDyTi0/++QQul0qFaUNdpZIA2pSQ0cabmOYLBBFVmgBLzM8
+ 0llECWTzz/YxQ5eJTxMtuD7Gp8MM69gE=
+X-Gm-Gg: Acq92OFeIIZXFtTds1WCGO2eNxJ3f6OJBsq8fjC/NQty85TYTEvfLf3Km4DDetCORyO
+ nQZWlUv+tQULuaF/SL8rJDPAsmYSUnaIf5fiD80/NrBAhCVdPIl1tWb+FwlLkXQbmasDDkSTe4o
+ 2atwXhNZyqFMW0whrhxSJmsYhZB013c1UTKdRmM41H3v+hmdKX36lkceDMZeqpEs3kdqsTemy2f
+ Z3j1MyQVcdgrL5eJD7ofx3K1GHKbZ564vs0s3gIIHSqr2mSuAjrT/tMPtlBMl3msRpteY9RBwmV
+ D70gmShKSj8Bwy97CA==
+X-Received: by 2002:a05:6830:6d0c:b0:7dc:cd0b:58ba with SMTP id
+ 46e09a7af769-7e4ea028c78mr4165607a34.4.1778884216223; Fri, 15 May 2026
+ 15:30:16 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.11.0
-Subject: Re: [RFC PATCH 00/11] Tidy command option parsing and use it a bit
-Content-Language: en-US
+References: <CAN7C2SCYCwE=BRoeCedqQYjv-Gf6x6ETOdKeeDBE=CG=-rSk9w@mail.gmail.com>
+ <CALeDE9PU0-fW_+erR9QHK1ST8fcStx0FWWk_0M8ELjtADugd7Q@mail.gmail.com>
+ <CAN7C2SCATJL_rhpBZWwZuQVpLdnbDh5+DRFbtGHoxCXu62AVmw@mail.gmail.com>
+ <CALeDE9PesKLwzt=uu_b8+pq5QXFnnK1YAO9WL3f8=CHx93w61w@mail.gmail.com>
+ <CAN7C2SC_YwotE2-PS=eAFEnMOXp7jVrhaOSbKsuChLVr4zEa8A@mail.gmail.com>
+ <20260514-spotted-happier-0ccb77ca8f24@spud>
+ <CAN7C2SAVWp23mKeG77MoV6kUKQDBN_Ge3CUMa_quAXP5YbV6UA@mail.gmail.com>
+ <20260515-finished-womanly-675afb9b0c7c@wendy>
+ <CAN7C2SDDjM+MJbx2d0N8zC74bytb6gKvjw_6auMPLLNGJVwvfA@mail.gmail.com>
+ <20260515150227.GC1858239@bill-the-cat>
+In-Reply-To: <20260515150227.GC1858239@bill-the-cat>
+From: Sune Brian <briansune@gmail.com>
+Date: Sat, 16 May 2026 06:30:04 +0800
+X-Gm-Features: AVHnY4LXMo3xcRVqyry6lgevE6cjQvI8GVAfc0diq7AsTnouQUeM_Ed5ph2yijs
+Message-ID: <CAN7C2SCfhWttCAUBwwzPvj078fDRdUvM01Xj2tryXCCPLYbcrg@mail.gmail.com>
+Subject: Re: U-Boot patch submit standard and requirement
 To: Tom Rini <trini@konsulko.com>
-Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- =?UTF-8?Q?Beno=c3=aet_Th=c3=a9baudeau?= <benoit.thebaudeau@advansee.com>,
- Casey Connolly <casey.connolly@linaro.org>, Daniel Palmer
- <daniel@thingy.jp>, Heiko Schocher <hs@nabladev.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Hugo Villeneuve <hvilleneuve@dimonoff.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@arm.com>,
- Joe Hershberger <joe.hershberger@ni.com>,
- "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Michal Simek <michal.simek@amd.com>,
- Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
- Patrice Chotard <patrice.chotard@foss.st.com>, Peng Fan <peng.fan@nxp.com>,
+Cc: Conor Dooley <conor.dooley@microchip.com>, Conor Dooley <conor@kernel.org>,
  Peter Robinson <pbrobinson@gmail.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>,
- Yao Zi <me@ziyao.cc>
-References: <20260515203311.2555651-1-sjg@chromium.org>
- <20260515214305.GL1858239@bill-the-cat>
- <15041974-8838-56b6-b9d5-250383ed2625@gmail.com>
- <aa023095-2b32-070f-ff43-1f6922918b51@gmail.com>
- <20260515222107.GN1858239@bill-the-cat>
-From: Sean Anderson <seanga2@gmail.com>
-In-Reply-To: <20260515222107.GN1858239@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+ U-Boot Mailing List <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -127,105 +126,219 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 5/15/26 18:21, Tom Rini wrote:
-> On Fri, May 15, 2026 at 06:06:38PM -0400, Sean Anderson wrote:
->> On 5/15/26 17:59, Sean Anderson wrote:
->>> On 5/15/26 17:43, Tom Rini wrote:
->>>> On Fri, May 15, 2026 at 02:32:51PM -0600, Simon Glass wrote:
->>>>
->>>>> We have had getopt() for over five years but it is not much used. It is
->>>>> much easier to understand arg-parsing using getopt() and it avoids
->>>>> common errors. As the named maintainer I decided to look at how to make
->>>>> more use of it.
->>>>>
->>>>> So this series explores the impact of converting a few commands to use
->>>>> getopt() instead of ad-hoc parsing. It updates getopt() to handle flags
->>>>> anywhere in the cmdline and provides a few helpers to reduce
->>>>> boilerplate.
->>>>>
->>>>> The chosen commands are:
->>>>>
->>>>> - echo: very simple with no flags
->>>>> - hash: fairly simple with just one flag
->>>>> - env grep/export/import - fuller examples
->>>>>
->>>>> The series also adds a recommendation to use getopt() for new commands.
->>>>>
->>>>> To try to reduce the code-size increase, a lower-case function is added
->>>>> and called from a few places. The difference is fairly marginal.
->>>>>
->>>>> Overall, the result is not pretty (see below) with about a 1.1K size
->>>>> increase on arm64:
->>>>
->>>> I think that means this is a no-go, and you need to work out what might
->>>> lead to a much smaller growth here.
->>>>
->>>
->>> Unfortunately, the only way to get a size reduction is to convert as many
->>> commands as possible.
->>>
->>> --Sean
->>
->> And to expand on this, you really only get a reduction for any given command
->> when there are several options being parsed already like in the nvedit stuff.
->> Since most U-Boot commands don't use options it will be difficult to get a
->> reduction even when converting most commands on a board.
-> 
-> We don't even see a reduction on "qcom" which is a platform that already
-> enabled GETOPT. nvedit is growth too:
-> 01: Prepare v2026.07-rc2
-> 02: lib: string: Add strlower()
->     aarch64: (for 1/1 boards) data -40.0 rodata +40.0
->              qcom           : data -40 rodata +40
-> 03: cmd: ini: Use strlower() to normalise case
-> 04: fs: fat: Use strlower() to normalise case
-> 05: boot: pxe_utils: Use strlower() in get_string()
-> 06: lib: getopt: Permute by default with inline reorder
->     aarch64: (for 1/1 boards) all -6.0 data -24.0 rodata +18.0
->              qcom           : all -6 data -24 rodata +18
->                 u-boot: add: 0/0, grow: 5/-1 bytes: 272/-8 (264)
->                   function                                   old     new   delta
->                   __getopt                                   576     756    +180
->                   getopt_init_state                           12      88     +76
->                   do_log_filter_remove                       364     372      +8
->                   do_log_filter_list                         444     448      +4
->                   do_log_filter_add                          580     584      +4
->                   do_bdinfo                                  160     152      -8
+On Fri, May 15, 2026 at 11:02=E2=80=AFPM Tom Rini <trini@konsulko.com> wrot=
+e:
+>
+> On Fri, May 15, 2026 at 04:23:49PM +0800, Sune Brian wrote:
+> > On Fri, May 15, 2026 at 3:46=E2=80=AFPM Conor Dooley <conor.dooley@micr=
+ochip.com> wrote:
+> > >
+> > > On Fri, May 15, 2026 at 08:46:25AM +0800, Sune Brian wrote:
+> > > > On Fri, May 15, 2026 at 12:14=E2=80=AFAM Conor Dooley <conor@kernel=
+.org> wrote:
+> > > > >
+> > > > > On Thu, May 14, 2026 at 07:46:46PM +0800, Sune Brian wrote:
+> > > > > > On Thu, May 14, 2026 at 6:37=E2=80=AFPM Peter Robinson <pbrobin=
+son@gmail.com> wrote:
+> > > > > > >
+> > > > > > > Hi Brian,
+> > > > > > >
+> > > > > > > You have made a very generic statement about levels of accoun=
+tability
+> > > > > > > on patch sets and consistency in reviews.
+> > > > > > >
+> > > > > > > Can you be more specific?
+> > > > > > >
+> > > > > > > Ultimately there are subsystem maintainers and each maintaine=
+r has
+> > > > > > > variation on how they deal with their subsystem. You referenc=
+e one doc
+> > > > > > > three times in your statement.
+> > > > > >
+> > > > > > Hi Peter,
+> > > > > >
+> > > > > > Now I understand what you mean.
+> > > > > > Simply one sentence is a bit hard to read what your thoughts ar=
+e.
+> > > > > >
+> > > > > > That document I am quoting does not refer to the entire docs bu=
+t only one
+> > > > > > section of the docs with that link.
+> > > > > >
+> > > > > > Before quoting, my declarations as follows:
+> > > > > > 1) I am not referring to specific people or party
+> > > > > > 2) I experienced reviewer which again not being specific to one=
+ that
+> > > > > > mentioned this docs is a supreme rules to follow otherwise patc=
+h
+> > > > > > that is committed is not able to push to mainstream
+> > > > > > 3) I simply do a quick check on u-boot mailing pool and do see =
+a lot
+> > > > > > of uncompiled reviewed patches that are not following that supr=
+eme
+> > > > > > docs.
+> > > > > >
+> > > > > > As such I will being to quote:
+> > > > > >
+> > > > > > The mailing that are reported as not passing the standard of [1=
+]
+> > > > > > Full mailing:
+> > > > > > https://patchwork.ozlabs.org/project/uboot/patch/20260423042824=
+.3480-1-briansune@gmail.com/#3684415
+> > > > >
+> > > > > patchwork isn't loading for me, but it's on lore here:
+> > > > > https://lore.kernel.org/all/20260423042824.3480-1-briansune@gmail=
+.com/
+> > > > >
+> > > >
+> > > > Hi Dooley,
+> > > >
+> > > > Well I am sure you did not have the full picture.
+> > > >
+> > > > The request had nothing to do with under the --- line if this is
+> > > > really the case:
+> > >
+> > > > Let me bring you back to the history of wonders:
+> > > >
+> > > > https://patchwork.ozlabs.org/project/uboot/patch/20260421004719.734=
+91-1-briansune@gmail.com/#3680232
+> > > >
+> > > > https://patchwork.ozlabs.org/project/uboot/patch/20260422065910.539=
+8-1-briansune@gmail.com/
+> > > >
+> > > > None of those reviewers had mentioned this issue once "---" rather =
+they all
+> > > > just alarmingly repeated the wordings.
+> > >
+> > > The first mail in the thread mentions it:
+> > > https://lore.kernel.org/all/CAFLszThg=3DEamyRohxNA7V+nk+OMVK356nUjAVS=
+bu4+kokOJpdA@mail.gmail.com/
+> > >
+> > > >
+> > > > > The comment about the changelog format seems to be very harsh, I =
+doubt
+> > > > > it really makes any difference. What you did and what the maintai=
+ner
+> > > > > requested are effectively the same thing at the end of the day.
+> > > > >
+> > > >
+> > > > Of course after reading the docs I got it immediately.
+> > > > However did those who request contributors quote this from first pl=
+ace?
+> > > >
+> > > > > The real problem with your patch is that you put the changelog in=
+to the
+> > > > > commit message itself, rather than under the --- line.
+> > > > > None of the examples you quote below do that.
+> > > > >
+> > > >
+> > > > Well after 4 patches of ridiculous request and logic change.
+> > > > I guess you will do the same. At least I am not doing it at the
+> > > > first moment on replying to the mails who or whom you had mentioned=
+.
+> > >
+> > > I think this is a reply to the comment below?
+> > > The aggressive/antagonistic responses begin in your first reply to
+> > > Simon:
+> > > https://lore.kernel.org/all/CAN7C2SAdg1MX3ZfEt5-68iiw3pdjyqva48F_uJjN=
+wsHAhdmY3Q@mail.gmail.com/
+> > > "So forgive me I really don't give a damn on whatever the header
+> > > requirements." "There are many better things to do rather than compla=
+ining
+> > > about the patch headers."
+> >
+> > Hi Dooley,
+> >
+> > You are a bit off topic here sorry if you don't think this is the case =
+but
+> > please do finish reading.
+> >
+> > For what the accused I will give out specific mailing dialogs to explai=
+n
+> > [HERE].
+> >
+> > The major discussion or query is all about the standards or rules.
+> > There is nothing to do with the reply.
+> >
+> > Meantime, I cannot see this as "aggressive/antagonistic responses".
+> > When the request changes it is ridiculous as you also agree:
+> > The header text /  wordings from the updated patch itself
+> > had zero impact on the patch itself.
+> >
+> > You are just simply telling me that if you get hit by someone 4 times,
+> > the man who stands out and responds is "aggressive/antagonistic".
+> >
+> > Again we are NOT discussing any mailing dialogs but the U-Boot
+> > patch header standards and rules.
+> >
+> > Meantime you had failed to respond or comment the entire mailing
+> > dialogs do mention any "---" header requirements nor the
+> > necessaries of following docs supreme rule / standard from first place.
+> >
+> > [HERE]
+> > Allow me to quote the request of header and modifications mail history:
+> >
+> > No docs cited nor clearly mentioned the need of specific wordings:
+> > https://patchwork.ozlabs.org/project/uboot/patch/20260420074601.24988-1=
+-briansune@gmail.com/#3680096
+> >
+> > No docs cited nor clearly mentioned the need of specific wordings:
+> > https://patchwork.ozlabs.org/project/uboot/patch/20260421004719.73491-1=
+-briansune@gmail.com/#3680232
+> >
+> > So now you are telling me after at least 2 versions of modifications
+> > reviewers suddenly think oh this is not good enough (by my rules)
+> > I think it should be other styles etc.
+> >
+> > Now "LOOK INTO MY EYES" and tell me what is the actual U-Boot
+> > header standard? Reviewer mood or docs that are given out?
+>
+> Brain, I understand being frustrated with the process. Ultimately,
+> everyone here is a volunteer and trying their best. Which means that
+> yes, we are not entirely consistent about some parts of the review
+> process. I would ask you to please be kind to everyone, and expect being
+> kind in return.
 
-I expected this to grow due to reordering
+Hi Tom,
 
-> 07: lib: getopt: Add getopt_pop() helper
-> 08: cmd: echo: Use getopt() with '+' prefix for option parsing
->     aarch64: (for 1/1 boards) all +3.0 rodata +3.0
->              qcom           : all +3 rodata +3
->                 u-boot: add: 0/0, grow: 1/0 bytes: 68/0 (68)
->                   function                                   old     new   delta
->                   do_echo                                    156     224     +68
-> 09: cmd: hash: Use getopt() for option parsing
-> 10: cmd: nvedit: Use getopt() in env grep
-> 11: cmd: nvedit: Use getopt() in env export and env import
->     aarch64: (for 1/1 boards) all -4.0 data -16.0 rodata +12.0
->              qcom           : all -4 data -16 rodata +12
->                 u-boot: add: 0/0, grow: 2/0 bytes: 164/0 (164)
->                   function                                   old     new   delta
->                   do_env_import                              692     832    +140
->                   do_env_export                              608     632     +24
+First  appreciate the reply.
 
-But I thought the nvedit stuff would result in a size reduction. There are 4-5 options
-for each command, so the env stuff is basically a best-case scenario. Maybe we
-need to revisit the getopt interface.
+Of course being kind and expecting the same returns is fair and even.
+However, being kind and returning with teasing on the requirements
+considered as appropriate action?
 
-> 12: doc: commands: Recommend getopt() for option parsing
-> 
->> That's why I used it for new commands where no one could complain that
->> I grew their board.
->>
->> I think it would be nice for all u-boot commands to have proper option support
->> like in barebox, but it's a lot of effort.
-> 
-> Yes, it would be good to move in that direction. But we need to figure
-> out how to do it in such a way that's not such a big size loss. If we
-> have to do a big conversion to start with, fine. If we have to
-> restructure a few other things, fine. But "convert echo so everyone
-> links it now and it's sunk-cost" isn't the right path.
+Then simply charge the teased unit or units with unkind behavior?
+Again I had given out rooms and kindnesses from first place, however the
+return is not as even as you had described.
+Of course you can 100% recap it as me who shows unkindness on
+the table by "verbally".
+Without the double standards or even multi standards are being
+shown on the table, why do I act unkindly in the first place?
 
+Simple logic:
+
+for(int i=3D0;i<standards;i++){
+kind =3D ture;
+if(reviewers_mood =3D=3D you_shall_not_pass)
+return teasing_func();
+}
+
+void teasing_func(void){
+int bottom_line =3D false;
+while(1){
+bottom_line  =3D infinite_sta_bottom_line_trigger();
+if(bottom_line){
+kind =3D false;
+return done_with_you();
+}
+}
+}
+
+Fair enough =3D]
+
+Cheers,
+Brian
+
+>
+> --
+> Tom
