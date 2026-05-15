@@ -4,127 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3324CD4851
-	for <u-boot@archiver.kernel.org>; Fri, 15 May 2026 12:48:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50BA4CD343F
+	for <u-boot@archiver.kernel.org>; Fri, 15 May 2026 12:49:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CA7BD83EF9;
-	Fri, 15 May 2026 14:48:18 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id E422084099;
+	Fri, 15 May 2026 14:49:44 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="2t4QFMRP";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="n4bn80S2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 85F8C8466F; Fri, 15 May 2026 14:48:17 +0200 (CEST)
-Received: from CY3PR05CU001.outbound.protection.outlook.com
- (mail-westcentralusazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c112::7])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 04AE884683; Fri, 15 May 2026 14:49:43 +0200 (CEST)
+Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
+ [IPv6:2a00:1450:4864:20::530])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 78CC983AA9
- for <u-boot@lists.denx.de>; Fri, 15 May 2026 14:48:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 64B7484099
+ for <u-boot@lists.denx.de>; Fri, 15 May 2026 14:49:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Rd5YgYLJuL/gggtIKxFePbBuEuQ5dYBUBTjdS/Zp/6e+ibEVTDmebQGCT/F5BkPuMH6CNoRAqQ0cviHP+xwkG9fsKfUf2ex0aP5G/ACC+JM6qp5QDnE2Bzed1MmxA4G8glwe+kdEltC7LRak8ImSvCLO9a6CEd70YPaRFe4dEj8xmQtYFmqcVVoBMKSS39zqC+G2GGoH2TlQtEpWo2az0IGCJ4su8MfpgQOuGyCNTz0OYlY94eMLT957tDvaxNE829v754RIP4xYbdRop3ePBvkDc6mMRZPiwY+fZiYc8eO6M/I0YtXNPQOoljAttltantfHxXmUKAF246tJDu5NCA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=/jCtCipNU3ro8txWkO3AMNX01XYBTHYjtQMrUnenIfs=;
- b=ueJZtoMwlYVlxyOrF474ZSgBvHye4Hl13QWp0uJ7k4WAGNOTgX78V8R9bk8coX6wo1kP/OrQkMkcaw4bZWMl68ZGDtHbftyza/vBeaktgMwST26ve3O+TkBSm/QF6ty4szxokY4DsjhdeHrSAM/1J9RTFIJsGvdMN2He2YNz4uEZZcGMqYtkOqjeisBWh82dSO9zlwVEFblE3hV8HuNoG8s3Nn9cRDvnO9m7hT9FZUZIfX+A3jqnjGmgJgUBkm8p5bGW3c5uS7T1S+5bOu66u4Q3YIxo6yUbmYITO6d9QPKHy8VNCcOPvmbGBBqnvgco4uXz2StT7a6VE7tRwOog5g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=/jCtCipNU3ro8txWkO3AMNX01XYBTHYjtQMrUnenIfs=;
- b=2t4QFMRPpKWoT8LY4GWpjydCUUcNMSmku3Oln8/5oDRIu/g1dD/AN4w5qG1GQT1r+oZWUCcqTblJ9/65G0QIilxTCOtfnH+/eJYVyolgWwvc3fIofhMs7C6yM4VXJMCpJSanPWoHZqL2P1/8wCTuutkQHCOx8VLuzbN0b6xCkqk=
-Received: from MW4PR03CA0251.namprd03.prod.outlook.com (2603:10b6:303:b4::16)
- by DS0PR12MB8454.namprd12.prod.outlook.com (2603:10b6:8:15e::10) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9913.11; Fri, 15 May
- 2026 12:48:10 +0000
-Received: from MWH0EPF000C6184.namprd02.prod.outlook.com
- (2603:10b6:303:b4:cafe::3a) by MW4PR03CA0251.outlook.office365.com
- (2603:10b6:303:b4::16) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9913.13 via Frontend Transport; Fri,
- 15 May 2026 12:48:09 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
-Received: from satlexmb07.amd.com (165.204.84.17) by
- MWH0EPF000C6184.mail.protection.outlook.com (10.167.249.116) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.25.13 via Frontend Transport; Fri, 15 May 2026 12:48:09 +0000
-Received: from SATLEXMB04.amd.com (10.181.40.145) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.2.2562.41; Fri, 15 May
- 2026 07:48:06 -0500
-Received: from satlexmb08.amd.com (10.181.42.217) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 15 May
- 2026 07:48:05 -0500
-Received: from localhost (10.180.168.240) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.41 via Frontend
- Transport; Fri, 15 May 2026 07:48:05 -0500
-From: Michal Simek <michal.simek@amd.com>
-To: <u-boot@lists.denx.de>, <git@amd.com>
-CC: Heinrich Schuchardt <xypron.glpk@gmx.de>, Leo Yu-Chi Liang
- <ycliang@andestech.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Padmarao Begari <padmarao.begari@amd.com>, Peng Fan <peng.fan@nxp.com>, "Sam
- Protsenko" <semen.protsenko@linaro.org>, Sandeep Gundlupet Raju
- <sandeep.gundlupet-raju@amd.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v3 2/2] riscv: Exclude ACLINT for TARGET_XILINX_MBV
-Date: Fri, 15 May 2026 14:47:53 +0200
-Message-ID: <c01d51e5eb85295b48bc939fff505fd59afeac6b.1778849270.git.michal.simek@amd.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <f5c30c9faeba9e0f519fdf89c10e04c768c5f92b.1778849270.git.michal.simek@amd.com>
-References: <f5c30c9faeba9e0f519fdf89c10e04c768c5f92b.1778849270.git.michal.simek@amd.com>
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ed1-x530.google.com with SMTP id
+ 4fb4d7f45d1cf-6763cc8775cso1818427a12.0
+ for <u-boot@lists.denx.de>; Fri, 15 May 2026 05:49:38 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1778849378; cv=none;
+ d=google.com; s=arc-20240605;
+ b=go2bO0YhgUER919DPdkwUUnbErhnQCNbleTSauS6pmtN6/gRKjHiwNl8NhYZhw/lKZ
+ x1WIEvW6g/0EB1tYQUMwhPJo7C2MiZOVHsKTTC364LCmkkyS0UHdLIJ+2n/CzWDy3nVg
+ zUdMJ9cex7kit3y4Nfi/Yg+hSdLqH2ERxGRbAB5y18HFevqGYd/FWi5djtQuFSp3iGL2
+ RrnnGX+P90dR/9OFKUm2TvXd8KAYG+WEKOoY/s7Z5JsnNf/ZwrionfWjzjaSPFrbdV4g
+ 4oNWlZtmfvnguf/ojMv9wcnE1z/NsqCQUxjdfcQPwQXXSrR97COC/Pl8kCG3Erwj8NoT
+ NQag==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=91VbVHHMfZJ9MZ4rUXbiz2r7oAONk82jdgQlZpKrgf0=;
+ fh=bnupiERZn2PI+MmEvXIHvRvb/x9C+g9PVm9rW1kLi8I=;
+ b=QI6P8mG9ig0r9KaQ7qbTY1VZjYvrSAHXQ+Lb6F4Mk/mR6q2+B4Y+tRR1hXfApjR2w2
+ JF6LCyLGC21tel4k/DTK4YVX94mfmWNeArAftSpueII3jDMPNJadAJhRvgm767tr7PSp
+ J4C/9xHGfSlqLItqIDBKRm4/IH32W10Cf0KUHfETSogbIdickzoeova95VfO7lc96Zhm
+ S8SMCxRTTdEMfxlrywX+9ybOUNFpbDX3DihyZlRCpbhuARAlzjDQ3zbmERp88lcjHmfl
+ 93GmrLqvc7IzlIm5zh0oOkNEt2j5YjS6/C4Dh4NxsqmBXmM3ul3AERciXp5Gy7n7lAWL
+ XmUQ==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1778849378; x=1779454178; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=91VbVHHMfZJ9MZ4rUXbiz2r7oAONk82jdgQlZpKrgf0=;
+ b=n4bn80S2QMxyjDBR8h8xIMTtgrC4wOZQPnhjhJaXextgdts3S0qp0FhZu4ynMc+iJz
+ 4IJnoJnHW2TBo2mWAWnzSaFjOUBMFJSMaStYy95CKcek98s8xB6ysjpvejeGhfacJmXE
+ rFCGI1HBmzv9mqSCYnG8XX0OZLq6DdTNH4aMs=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1778849378; x=1779454178;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=91VbVHHMfZJ9MZ4rUXbiz2r7oAONk82jdgQlZpKrgf0=;
+ b=MrCMdnydoC7pG5z59pfkboC9xZirfT5IjSH2EzbkTjs3a+kphGDXgY3+C2k+LM0KIo
+ KSZ+DAMw6ugNGV1j0W6EZ15WejbCx2CJQ3F524ZrKNX+13JaLBi0bi0vswaCMxV0+Kr0
+ arDkpkAkZkY9z0tlrU+KQIKLRinh+oyEBmbR64SRwBO45wW9eLEGQspBpDk2BUkBck3U
+ nBc/sTGc8+e9BV3vKPytHa/2Hl6dN3vPIj4H2GEa1rnXCHiAw1VrzYFBE77U0PwtqIOI
+ JvV2GPPmdwxFEUIEHVO5UPACy0DnE9M5VQzfuaSVNSCEJPYFmY/nsiK9OpV+91iezODD
+ JqGg==
+X-Gm-Message-State: AOJu0YwOoG3n1It9oUKYkW7UD3x4U9zxzaHGmsvNxCu+CHdTqasPO31I
+ 8ISARvDcvJjbdRHQuW+CdzX760QAp4oHw8qX/FegIHDb00G+uQkyXFv2IgJzHddFK/csIiJYDOs
+ ZNF5eHF1U7F4WTbjQVAyEUyqCtFFJexvsJzj0Mvpw
+X-Gm-Gg: Acq92OEV3jCMMJXtNN0kAPPVKsAlukiMSccknVZqF5ToYKI7xHljQHW82bDc3KG2ZNQ
+ iVYwraMBIo2gFQvfy6Q6py4vTIuiNs/3NysjfcvQ6jtt+qF0/smqdzr6IdquVJLVSoagZAirjlu
+ eLPLm27ycv7SloqCRjTYsZdMUBRb60fWVt2JYEtFd2G1TlEUpwxeNT2axJF39Rfu83xoiIQoRZP
+ AGzVZB5Kp/jT3A4JcKBP2gO2XpZcaZEvQfu7UxoLevU9MeDZVYiRBDO19ayp/SKmA8Fv056DxXQ
+ 2RpiFki8Ntkzy9yD
+X-Received: by 2002:a17:907:e105:b0:bd0:6293:bd0d with SMTP id
+ a640c23a62f3a-bd51538f0bcmr126700266b.7.1778849377787; Fri, 15 May 2026
+ 05:49:37 -0700 (PDT)
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1267; i=michal.simek@amd.com;
- h=from:subject:message-id; bh=OUCsR16+jx4v79APuDu8xjW+8PdiFQ2OVrwbcSUuViQ=;
- b=owGbwMvMwCG2mv3fB7+vgl8ZT6slMWSxi/4/ECvvMSfUSy9vO7+qdJtkUI0YR1hw2Labc/9vP
- C4610mno5SFQYyDQVZMkWU6k47Dmm/Xlootj8yHmcPKBDKEgYtTACZy7Rwjw94lahd2LI5PuKgU
- oT5VKv+M1EzWK7suWGUcDWk74DutSojhn8GVmTbLfO5VvngzZZdzCvcyW5lWxWYttbytT61nnLg
- hwwQA
-X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
- fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-Received-SPF: None (SATLEXMB04.amd.com: michal.simek@amd.com does not
- designate permitted sender hosts)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: MWH0EPF000C6184:EE_|DS0PR12MB8454:EE_
-X-MS-Office365-Filtering-Correlation-Id: bdb66bc1-38b5-4c7f-d402-08deb28037e0
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700016|1800799024|82310400026|376014|56012099003|18002099003|22082099003|11063799003;
-X-Microsoft-Antispam-Message-Info: vkf25vuMnsaZAPTnaNalgeg8fN8RFbO2sc7B7KcNYZk3quH/pLX5aKF2j2VA3Xivfnbe/khQEe4PNqV5ZHvAPWbNY0asPm76xNNCkTySHj+rAWQlrIDLmi5X3er/wbBvTw9DQT+hYqu2+aybq56iAPK4QM30FRQTubHzewiqggcEffTI4YP68P+6uVj0d7CIA8FmXccaO7hnZHA8R4KKDwfQhNJ/5yrT7k4MG3VVRL//sQsjAYivuSl8p8wxkd5Zf6rTesL/Tqz3rnyfPQVkfJugq6m08X5zQFxpV+CT0xR262FImwy33DZEBP//91PlkAqnmCQPrXvi6msfjkHoswA0FrFFj9lBAm1yleoD6lvyupz4YdG21iHHLFWqyzFn5cwLsF6xQxmKiktf8/H1ewoiA2WH7PkcM+qK+QN0CAqfNq3+KQfZPU9idfjz7X6lZw9Ytiyahlet3ElV2iIWnEo5e+lmMM28al2/ytHt7ddcCIFt4jkqDjQ/2ms7mS/7SF98sG9QpoU3YaAHVKB6dnI9+1KgAzjDyGAIYQESDZTRVG2g5LPL2AAoo38qDjwN2Xk4LmHN2NKR1wa45SsZn/fbV5waSTUIBCsjxJWibKlA/tMs3XIgsbtuu2W+UM3k9q6ibLsQSa0OeboS9TA7RiABWklA92qNcGilGNTPJwCHskKlUXQB1GV/eGXJY8m+yAkqb3ilYGmC4qd459crmvwdV94qNFEw56daAkVOzBQ=
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:satlexmb07.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(36860700016)(1800799024)(82310400026)(376014)(56012099003)(18002099003)(22082099003)(11063799003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: oP3FBZDI5/9aJpLKoCwHZvh+yRmTefnl4V+rdpG6y8naeh7CTO3DHnJhhd/uuCwkzys/jWvdjookuDzRszhJjfC/sBewFblz1Z2qy9ak+iUvM+Bqlit94RxVCrfpURFjlWTcrBfwY1uV+LF+0MN1PsZo5Vo6H+hVcPWDDsgiF+kICe8s/pp0sXCpvSWFfVIlMF2Olqp4Dhg7ZMomhkdVhoxOhp/gC0qFx3nUvgS/cWz9Nh6J6g1bIt0kRUtg9EpcXWStO+GKKGzGY8XdZnCOxoXjeImwR9TyCLwSHVHo273XCAr/TXr9t6NetppgaFdt+c6vNzA8XOaaqjGKh+ZVjMrI2o+rglJSQQuTG2jvdwvCn1qJtswX7hrKnExz9fm5KCDkCAXaFfvNsKFP6X7poAawbD51xQ4RPlIc9KHPPJ6zLYQij2Qg7TUwlZ4m/KWZ
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 May 2026 12:48:09.5430 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: bdb66bc1-38b5-4c7f-d402-08deb28037e0
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[satlexmb07.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: MWH0EPF000C6184.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR12MB8454
+References: <20260511220555.GM1858239@bill-the-cat>
+In-Reply-To: <20260511220555.GM1858239@bill-the-cat>
+From: Simon Glass <sjg@chromium.org>
+Date: Fri, 15 May 2026 06:49:25 -0600
+X-Gm-Features: AVHnY4Jo166GnKOEjNxHP_SG9poTlIxRhU4FTvcu5rH8Og-3Bl__bYsBMlxWH0g
+Message-ID: <CAFLszThULFjq_R4A1nWYjQcQ4Odw3aZ200RPmQ56Ecf3gO4UYA@mail.gmail.com>
+Subject: Re: [ANN] U-Boot v2026.07-rc2 released
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, u-boot-custodians@lists.denx.de, 
+ u-boot-board-maintainers@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -141,42 +110,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The Xilinx MicroBlaze V platform does not have an ACLINT (Advanced
-Core Local Interruptor) hardware block. The timer functionality is
-provided through a different mechanism.
+Hi Tom,
 
-Exclude both RISCV_ACLINT and SPL_RISCV_ACLINT from being implied
-for TARGET_XILINX_MBV while keeping the default behavior for other
-generic RISC-V targets that do have ACLINT hardware.
+On Mon, 11 May 2026 at 16:06, Tom Rini <trini@konsulko.com> wrote:
+>
+> Hey all,
+>
+> So it's release day and I have tagged and pushed things out.
+>
+> As I mentioned earlier today[1], I would like to again thank DENX (and
+> the Denk family) for supporting the project for so long, and we're
+> starting the process of moving our infrastructure to the OSU OSL lab and
+> the u-boot-project.org domain.
+>
+> The delta between -rc1 and -rc2 looks OK to me, and I do still think
+> there's a few outstanding PRs to come in and a few things I should pick
+> up as well. But, the next branch is now open and so bigger changes
+> should target that and I will be applying a few things there shortly.
+>
+> To repeat what I said in rc2 (and will keep repeatint) is that it might
+> really be time to retire support for running our tools on Windows under
+> MSYS, rather than something like WSL. The move to support more modern
+> OpenSSL versions has hit a lack of support problem in MSYS[2].
 
-   spl/u-boot-spl: all -1382 data -360 rodata -200 text -822
+I'm not really the right person to answer this, since I'm not a
+Windows user. But as I understand it, this would mean not building
+Windows executables anymore. Is that right?
 
-Signed-off-by: Michal Simek <michal.simek@amd.com>
----
+Should we perhaps just build without the pkcs11-provider feature?
 
-(no changes since v2)
+>
+> We're continuing with a community meeting following the release and the
+> calendar link is
+> https://calendar.google.com/calendar/event?action=3DTEMPLATE&tmeid=3DMHYz=
+YzQ1dWh2bnRjcm80czVmcDczYmhsNThfMjAyNjAxMjdUMTUwMDAwWiA4OWJlN2I4MTMxMzZiZWM=
+wNmE4M2RlNGRhNTk3NDVmMGFiZDExYzFiODM2MDYxYWUwNmMxYzdkYmNkMThkZjQxQGc&tmsrc=
+=3D89be7b813136bec06a83de4da59745f0abd11c1b836061ae06c1c7dbcd18df41%40group=
+.calendar.google.com&scp=3DALL
+> and once again this is the same time as the previous meeting. The
+> meeting details itself are:
+> https://meet.google.com/yyx-dsaj-iwr
+> May 12th, 2025. 9am (GMT -06:00)
+>
+> To join by phone:
+> https://meet.google.com/tel/yyx-dsaj-iwr?pin=3D7760044274127&hs=3D1
+>
+> In terms of a rough changelog:
+> - Platform fixes for Atmel, MediaTek, STM32, m68k, Renesas,
+>   QorIQ/Layerscape, MIPS and TI K3
+> - Fixes in our USB, UEFI, Documentation, and networking subsystems.
+> - Updates to our binman tooling
+>
+> I continue to plan to do an rc release every two weeks and the final
+> release will be 06 July 2026.
+>
+> Thanks all!
+>
+> [1]: https://lore.kernel.org/u-boot/20260511174116.GJ1858239@bill-the-cat=
+/
+> [2]: https://lore.kernel.org/u-boot/ae_KfGqNrsWZ1rfQ@daedalus/
+>
 
-Changes in v2:
-- Separate platform defconfig from core Kconfig
-
- configs/xilinx_mbv32_defconfig | 2 ++
- 1 file changed, 2 insertions(+)
-
-diff --git a/configs/xilinx_mbv32_defconfig b/configs/xilinx_mbv32_defconfig
-index 67b7db94d745..82bbba6d0f00 100644
---- a/configs/xilinx_mbv32_defconfig
-+++ b/configs/xilinx_mbv32_defconfig
-@@ -20,6 +20,8 @@ CONFIG_SYS_CLK_FREQ=100000000
- CONFIG_BOOT_SCRIPT_OFFSET=0x0
- CONFIG_TARGET_XILINX_MBV=y
- # CONFIG_RISCV_ISA_F is not set
-+# CONFIG_RISCV_ACLINT is not set
-+# CONFIG_SPL_RISCV_ACLINT is not set
- # CONFIG_SPL_SMP is not set
- # CONFIG_AVAILABLE_HARTS is not set
- CONFIG_SPL_OPTIMIZE_INLINING=y
--- 
-2.43.0
-
-base-commit: 6267afe7f46f3ae1cd58671e57aae88646c835bd
-branch: debian-sent3
+Regards,
+Simon
