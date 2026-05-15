@@ -4,99 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD1ABCD4F25
-	for <u-boot@archiver.kernel.org>; Fri, 15 May 2026 14:03:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8A28CD4F25
+	for <u-boot@archiver.kernel.org>; Fri, 15 May 2026 14:08:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6AC76846B5;
-	Fri, 15 May 2026 16:03:31 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 29225846B5;
+	Fri, 15 May 2026 16:08:57 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="k+UzkTS/";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="rwNsGyvo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 331B3846D5; Fri, 15 May 2026 16:03:30 +0200 (CEST)
-Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
- [IPv6:2a00:1450:4864:20::635])
+ id 4F77E846D1; Fri, 15 May 2026 16:08:55 +0200 (CEST)
+Received: from mail-vs1-xe30.google.com (mail-vs1-xe30.google.com
+ [IPv6:2607:f8b0:4864:20::e30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 42AE7846A5
- for <u-boot@lists.denx.de>; Fri, 15 May 2026 16:03:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2AB91846A5
+ for <u-boot@lists.denx.de>; Fri, 15 May 2026 16:08:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x635.google.com with SMTP id
- a640c23a62f3a-bd3eb594960so398590566b.0
- for <u-boot@lists.denx.de>; Fri, 15 May 2026 07:03:28 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1778853808; cv=none;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=raymondmaoca@gmail.com
+Received: by mail-vs1-xe30.google.com with SMTP id
+ ada2fe7eead31-6313c800372so5626379137.0
+ for <u-boot@lists.denx.de>; Fri, 15 May 2026 07:08:52 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1778854132; cv=none;
  d=google.com; s=arc-20240605;
- b=bG/jDEZDB8ofsXNxfFBbUCMwbQBcp9lUnkFk7ScTlbo/u37uB8EvYmX1mpDTK14aiB
- elF/CO3nfC9jYGx//VOpj6U5EY1xjkInORPvALWCehdVYCxgF2YEaSy1kniwAqjqULQp
- NjExFbgUcbTx2f1f2X3tfWS1iVQSgaJfNT7ySleQvrjkLbrk1UrRK+0qyn1ttY9GsM+V
- 6EbImo4zFPhDjmwrv7NZE0WN1wJ+C5PcDGvv1ZoTCAjoQOs0SfBbhUy/KEJEtWTHRnso
- SZDxqqfxw8jX3wEVf1yBwgWPOHwi3MfJuDP+IJD542w+kYxnRREADCJupnuyPywFg5W4
- vH+A==
+ b=d5li78ttfDJd9qIUe8Pod8zC6OissVxs5cMl67jY6NKMdT6rx61rDauzqwNuLpHXNs
+ QwPvRgZNaozgoNpToSfQUYaEvnjSLYzitO9Sj7nmXgXw0Z/+ckY/YxgYbQW1L8YPOQDO
+ 3CzZNSE8eCrJ8uvxh7L+bboHjJjO9jhCmjNXCZiqQXxWOUkCsL178dFy/qHYA706+Doy
+ 4oJ1PJjfL4iDJVh3Vo1SoqrO+LgoGpA3RRu8j8ypKzr0nc6eTQszzwPIXvDh803HxpPy
+ VoispP7WktqiblT9hWmWH2wyyb3WFN93JROgqlJ3oyuDEXLqwq8mdreAIUlJ37rk5VQg
+ Umdw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=YtqQUJkAFML8UjvxRNId7AVrd6aXlndYVxN8ZSnPNyY=;
- fh=+ceJQh3oVwWvE3LiSVLh/MmNmprgA9HTP18ogsdfNYI=;
- b=TUcvi50hVaoyRC0F9wVbw+SdBTLn+1/khb8zVjbtURonelCuuP4rlYXg+zEgtLmnLY
- isTZUfttjk0FB+ndrAvmuvKOprEFgfl7R3mFgPPWi6ofVGZmjufF6uy1VXXPDnlamGM0
- Sjn27xj6/vZusnuAFridGuKu1s1ziNpCyttAdmTkw2M4ZCOVnzeYPdBHzBo5FdGj5Mx8
- F86qHFMBv26luR17N0tauAJlIWNEOtHbZIjeoeqJY/S/qBMRzIwp6dr1f12hUU7HIfH7
- B75NuEDB/JfJAztaVwwnxoj/5lGiRLQmSo1r/Z6PjxkzerhajrBJD76Y+4N7afKO0tND
- XIgQ==; darn=lists.denx.de
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=vJwtm9aQr22PvE9agvvtBmOdMDopIfhxdO7kugkazGk=;
+ fh=3cGkqt4Xgv2w9dTeeIJFEJ5AO4AvGobPArcY4WlS1wc=;
+ b=kqmZ4tSzCnt/lHg5xgYb8n/42jzujW3lQ7JdFmOqBehKFBjv97FaCKbvoPuBRQ7nEp
+ n+why7ckm38KbkL747Id2Z2il6eXUVUVdyK4VVjUODCEfIjAFhqIocKBQ0CdduklxCzM
+ Hg4yUie2iQYKa7ImGwKxYx9WWU1TnQIKqwvoHnat3kb1zIJruEweUiNENQq1VQ62ypXc
+ UeUyGdDoIRhNE4MAZHWTAVroZ7wP5pWyYTa6VZHTEK7m+xrvb3R8SAYBLIpPlwV+Uh6T
+ rAg+3SCsR0UwWYIuH+sff9PeB2pVkPrtTHJ0xFpZXUsLCgEG732BJr7fOJdH7G3VvMnH
+ zrEQ==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1778853808; x=1779458608; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=YtqQUJkAFML8UjvxRNId7AVrd6aXlndYVxN8ZSnPNyY=;
- b=k+UzkTS/emOZ2Dh7kj+fcp8szQ6qnp/pRuToibBeE8z97NXXJb+AUtg65yGGWBBjtW
- T9lnVo11L40HydbRLU5G6ksjO2jhRusR1Pywpsz0iU8IeI323KZRLXYCJjBOmixoUDkm
- CE2ViL/DFCV5sURV9Lf+JmGUcp1BIMy8H4gDc=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778853808; x=1779458608;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=gmail.com; s=20251104; t=1778854132; x=1779458932; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=YtqQUJkAFML8UjvxRNId7AVrd6aXlndYVxN8ZSnPNyY=;
- b=ixuD1VhcSuJVzqh6/N92sML/zbQDd2cBhkqIW2oXUPTOocz0YWXw//U5hlLehShBVw
- +uM/wN8vc2e4BcxMdeJxz9LvudwIDdplcnV3us9B/H6XzAL1eurLDND04LLRAonmQ9H0
- ncUqB+0Rk/+vqPYc9Ak26Y7+M2UXXypAOi+6l3PJLnRtByIavAdA3gE4uzsNcdvn1wOT
- O9yuw9brUpe5UDl82xrdE6u0scXdhXbnYGwAVYkP8T7NbqgPCvVZp0mv+mC6j2UeG7Ex
- UeFbfX8hnEm8Z+QjvmLCfEWXYbsfIflGblyNzSm4YWm5TJpw1uNp8cOUq9vO11BIOT29
- NJ3w==
-X-Forwarded-Encrypted: i=1;
- AFNElJ/ULGD4e3vt9HCFPpGbZXEgrsmZ2QONhOYxLMf8Fg/gx/nOTgfcsmSgOEAeFNZ8yFIIim490og=@lists.denx.de
-X-Gm-Message-State: AOJu0YwI3jhpggB88wqagnRQ/+3GI3wkGuO32MFkuYFuNutYL+gE6iFq
- pcz9QE0b1gbAKD1YWqt+vhNBolfmVxrq7TFxP8kLpQV/cYXc3Ow5IGcos98zbfZI3IRw79d7Oat
- /5MNLP/2dGmqI28x/QoAfqWSyitY+xafXAH6Dn/Tq
-X-Gm-Gg: Acq92OHnSTkF+ZcwQLuXR7UbegMqFy7OPNR6SOHl/d9jnHGkyKmIRC/9tu7gkjBFCVI
- dcr9nEuc+HFOesLlxselTrTaMqCmpRbFJ+bdykoYhrifoaZxEAtLpZcY5vQs8I6AeNp0rqabmGR
- mYuBL87lSAIw5dzgFRU6Mtm7WIfGPQUu4Cj+hK/eTAD6fW/Tc6ileiTNjXSctqauiPwhtGjC3lL
- XonimnLDZIJzuOnH5+wkOJHrYqpcRTQNOkU183oH0QbAWF705MNNYNqMk7Jy7q/9YMTUJnh8wZx
- vbvP9A==
-X-Received: by 2002:a17:907:6d04:b0:ba7:fbfb:4caf with SMTP id
- a640c23a62f3a-bd517aba010mr202365766b.43.1778853807429; Fri, 15 May 2026
- 07:03:27 -0700 (PDT)
+ bh=vJwtm9aQr22PvE9agvvtBmOdMDopIfhxdO7kugkazGk=;
+ b=rwNsGyvo2JCvm7d+SRwypX3Lm8jRpRufRgOEoNL8ZjEgHf5P/IalNKbjsfZZpOt2B/
+ gjkpvsmGKnSLLJz05ipuwt4hE0KK5o7RA5kbCpWDi2gozu0BMVSYZhpfUj3qVdEAv/u9
+ DMNMrNj+9Y7r+EbfKnODpFWoOtF2EI4BhYM5m4Am4yonihh3JQ7Ii7BsBsL4C5XCKhb2
+ zoqTQSi05KPuLf/2RfejzjgFs4qnpeFlBW/O4OtbtRixhPF1vIqQT87Clz+n7poYaw79
+ SuaLlkfyX0L65hnL9HBevkQheFzaeibBcCododIHqgzDhqdYco1hHuGklK0cfI7DwPLJ
+ ZDaw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1778854132; x=1779458932;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=vJwtm9aQr22PvE9agvvtBmOdMDopIfhxdO7kugkazGk=;
+ b=CU8Xwnx67bfhOP/JCd2uUAd4VEmrfXT02BtEKvk22kWUbihCF8lzeDyZ1JV1j1C4PL
+ CKSnW+JGxzM8CMUVIsrN0D373NM9v2FYM3xSU1mWAvxcPmcZ4lm2sxqKiDEswCA+nD6a
+ LkqWVnDS8L2pZiuYf46ohkOGv1XDqmLT9vqh08/0bYV+eqXltKu/2HtQ58SFQJSQ7467
+ GcyctLmOCM7BbcFWl5jFoZQ61b/KzP3hqExnClU+dWf4ij08EjhoNIlVQ/xq27tLF0BQ
+ RegABmc+2KpHqXcPp6JipgqpHUbr2K1/5R4KPX5IDlnrZWgpWZboWvLnnp6I2AliClJL
+ yaSA==
+X-Gm-Message-State: AOJu0YxGQXhI2DVVyKJjKauG4QRER0xMxpMK2QhzZl+VX0w+acGF5QvQ
+ mwkRsJ7LAXDNCFu6weqd+TtoTWcVis3IGBIpK04qZPBaH4QLQL5j7GT2aEJFxeqxm6wKQg4FQ8y
+ gNLNsnnPY624w48bR1WkqL/3lbUMkDpJoPA==
+X-Gm-Gg: Acq92OFEWLPDRt5DTYE8essc9T00i98kD/p3bQriXgSfL31fOd8SeIZMHPmkOlXWOym
+ i9ceItOfYfDnT/6KQexH94q5KPBQKbjmPlfBSq2xzP5oUrwVeg6lbtk70U+QQbV6vnC/LprVs4r
+ YH1QCttUMbMbeDxLEFTGNGAc+c7FrRZSEcGMeUEiXJfcsVLDi15ZF5InET1Kd1n6TTBMGmkWCGo
+ sp1DSsIDQWfWgQYfhk+L5BO/5djY8L8k9l7pypw4l1x07m2m+7VZzmOFzVTnyKmemNUuvUn6xxr
+ YYMqs0XoEijaXRZq2Kk=
+X-Received: by 2002:a05:6102:6e85:b0:606:49d:1861 with SMTP id
+ ada2fe7eead31-63a3fb9d96cmr2058634137.27.1778854131594; Fri, 15 May 2026
+ 07:08:51 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260513204943.736142-1-rs@ti.com>
- <20260513204943.736142-3-rs@ti.com>
-In-Reply-To: <20260513204943.736142-3-rs@ti.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Fri, 15 May 2026 08:03:15 -0600
-X-Gm-Features: AVHnY4JXBsSn7nb9JGB_V1ga5uTZ7bY7TEp6KcgQKw47qDgPx14EhayHK8gnr8c
-Message-ID: <CAFLszTjQXbQVx11QyMRW4FbpdQ5B1KPRWO28O1ssSVznv8KYpg@mail.gmail.com>
-Subject: Re: [PATCHv8 2/3] test: boot: add a fdt reserved region check
-To: rs@ti.com
-Cc: robertcnelson@gmail.com, ayush@beagleboard.org, 
- Erik.Welsh@octavosystems.com, anshuld@ti.com, bb@ti.com, trini@konsulko.com, 
- afd@ti.com, xypron.glpk@gmx.de, ilias.apalodimas@linaro.org, sjg@chromium.org, 
- u-boot@lists.denx.de
+References: <20260514175457.4047707-1-trini@konsulko.com>
+ <20260514175457.4047707-2-trini@konsulko.com>
+In-Reply-To: <20260514175457.4047707-2-trini@konsulko.com>
+From: Raymond Mao <raymondmaoca@gmail.com>
+Date: Fri, 15 May 2026 10:08:39 -0400
+X-Gm-Features: AVHnY4K2LQwVtFv5MrIS5A0PTpxeilY7fLeL1lJsPyVfLIgMPVssQ6B940rxo2U
+Message-ID: <CAMDkj5xKePrX+Q7qhUq1KQpuGr6poyDFcdXxKnwhzQL8K9AJOQ@mail.gmail.com>
+Subject: Re: [PATCH 1/3] bloblist / handoff: Make this depend on BLOBLIST_FIXED
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -113,59 +114,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Randolph,
+Hi Tom,
 
-On 2026-05-13T20:49:42, Randolph Sapp <rs@ti.com> wrote:
-> test: boot: add a fdt reserved region check
+On Thu, May 14, 2026 at 2:02=E2=80=AFPM Tom Rini <trini@konsulko.com> wrote=
+:
 >
-> Add a image_fdt suite and a check for boot_fdt_add_mem_rsv_regions. This
-> will ensure the user is properly informed of any reservation failures.
-> It will also validate that reservations are cleaned up correctly when
-> switching FDTs.
+> Currently, the only way we support passing a bloblist from one stage to
+> the next is via the BLOBLIST_FIXED mechanism. Update the Kconfig logic
+> to express this constraint.
 >
-> Signed-off-by: Randolph Sapp <rs@ti.com>
-> Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> Signed-off-by: Tom Rini <trini@konsulko.com>
+> ---
+>  common/spl/Kconfig | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 >
-> test/boot/Makefile          |  1 +
->  test/boot/image_fdt.c       | 70 +++++++++++++++++++++++++++++++++++++++++++++
->  test/cmd_ut.c               |  2 ++
->  test/py/tests/test_suite.py |  2 +-
->  4 files changed, 74 insertions(+), 1 deletion(-)
+> diff --git a/common/spl/Kconfig b/common/spl/Kconfig
+> index 5fa94098e498..cc819344cad2 100644
+> --- a/common/spl/Kconfig
+> +++ b/common/spl/Kconfig
+> @@ -220,7 +220,7 @@ source "common/spl/Kconfig.nxp"
+>
+>  config HANDOFF
+>         bool "Pass hand-off information from SPL to U-Boot proper"
+> -       depends on BLOBLIST
+> +       depends on BLOBLIST_FIXED
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
-
-> diff --git a/test/boot/image_fdt.c b/test/boot/image_fdt.c
-> @@ -0,0 +1,70 @@
-> +     fdt_sz = fdt_totalsize(gd->fdt_blob);
-> +     new_blob = malloc(fdt_sz);
-> +     ut_assertok_ptr(new_blob);
-> +     memcpy(new_blob, gd->fdt_blob, fdt_sz);
-
-ut_assertok_ptr() only checks IS_ERR(), but malloc() returns NULL on
-failure. IS_ERR(NULL) is false, so a failed allocation sails through
-and crashes in the memcpy() below. Please use
-ut_assertnonnull(new_blob) here.
-
-> diff --git a/test/boot/image_fdt.c b/test/boot/image_fdt.c
-> @@ -0,0 +1,70 @@
-> +     boot_fdt_add_mem_rsv_regions(new_blob);
-> +     gd->fdt_blob = new_blob;
-> +
-> +     if (ut_assert_console_end())
-> +             goto switch_fdt;
-
-This doesn't do what it looks like. ut_assert_console_end() expands to
-a block that does 'return CMD_RET_FAILURE' on failure, so the if
-condition is always 0 and the goto is dead code. If the assertion
-fails, the function returns immediately, leaving gd->fdt_blob pointing
-at new_blob and leaking it.
-
-To defer cleanup, either restructure so gd->fdt_blob isn't changed
-until after the check, or use ut_check_console_end() and handle the
-result yourself. The same applies to the
-ut_assertok_ptr()/ut_assertnonnull() above - once gd->fdt_blob is
-mutated, any macro that early-returns skips the cleanup labels. We
-have a similar problem in the bootstd tests...
+I am wondering if SPL can use the same way as we did for Arm Firmware
+Handoff - the address is not defined by Kconfig but via register
+conventions?
 
 Regards,
-Simon
+Raymond
+
+>         help
+>           It is useful to be able to pass information from SPL to U-Boot
+>           proper to preserve state that is known in SPL and is needed in =
+U-Boot.
+> --
+> 2.43.0
+>
