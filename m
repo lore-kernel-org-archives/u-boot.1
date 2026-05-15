@@ -4,75 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B07BFCD343F
-	for <u-boot@archiver.kernel.org>; Fri, 15 May 2026 20:34:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 438C2CD4F3C
+	for <u-boot@archiver.kernel.org>; Fri, 15 May 2026 20:34:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9AD0184873;
-	Fri, 15 May 2026 22:33:47 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id CFA668484C;
+	Fri, 15 May 2026 22:33:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="DM6gOjse";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="PWkRF+XD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 82B9F8483F; Fri, 15 May 2026 22:33:46 +0200 (CEST)
-Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
- [IPv6:2607:f8b0:4864:20::336])
+ id 2CBC58483C; Fri, 15 May 2026 22:33:48 +0200 (CEST)
+Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
+ [IPv6:2607:f8b0:4864:20::329])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4EB838483F
- for <u-boot@lists.denx.de>; Fri, 15 May 2026 22:33:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DA15E84867
+ for <u-boot@lists.denx.de>; Fri, 15 May 2026 22:33:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ot1-x336.google.com with SMTP id
- 46e09a7af769-7dcd17e19b6so137734a34.1
- for <u-boot@lists.denx.de>; Fri, 15 May 2026 13:33:44 -0700 (PDT)
+Received: by mail-ot1-x329.google.com with SMTP id
+ 46e09a7af769-7dca5f64e86so289876a34.0
+ for <u-boot@lists.denx.de>; Fri, 15 May 2026 13:33:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1778877222; x=1779482022; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1778877224; x=1779482024; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=vNCzOFtBp0eqqWXkcqSDc54bRDcUrKpveg7v8KOOaU0=;
- b=DM6gOjseqF+7lFvnG9/rz4LdleovcfjK0twLb5SF16SXzy2rQbSqitDF+T5jB6T/G2
- IB1mJdE/2sX71FnK4vLSMRAZLjP/IEZW88WuRubxzH3hcX1cQ1C74cntRxjszB/in1p2
- N6OFy7VEkyxXyqNSIKaxuAY4ho/Hk82jyX+4I=
+ bh=HWXzil8Za8eMTvx5P4Ig+qtNR2rYUWylqACp9O7BElY=;
+ b=PWkRF+XDpJJ+Ixupoh6srZ0tqqyeMkOBr9WjfwW7T6bsDNVEQBRlzY2XzbZf9/bIFX
+ trvz3tDLYhkl2Etr+L3JJR4gI+XspJk83fjgmocF/rAJKr4U7/8q4YuWaYO5zDsI6218
+ H5b7dUBzmS6ZrEb+F1ehjrj2MfPThhoiLrnes=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778877222; x=1779482022;
+ d=1e100.net; s=20251104; t=1778877224; x=1779482024;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=vNCzOFtBp0eqqWXkcqSDc54bRDcUrKpveg7v8KOOaU0=;
- b=KWryEDn5Y0nBkTo0MXqJmSaLMkq3BbU1EeNuF/fopfqnQSSe7jXnyjyGpzsT/LqRs9
- ypRt/bPmZMnNTAmTdhXtSoHbmx9qBwGVkYJlrXtG3hXG+25JndVCzs487G2QBKrvEHGu
- Nj8RV85ilpJQO5M6COGXIk2TzW6axSICZB4IPACSaBRMtqjmaZPNmi7o88WqEx1mNF8+
- VTkDetsxMKwUTCGl+iyZ/VSnTO68EFlzM5eMNkh0oD/qsTlF1LufpUVgzcJ9td24uDv6
- U8BxLOfgQ1xPNpUxWlmnjv+qWEOyjPGw7eNr6Hr9t1yGgFfIlOvkexWckLNmUzew/nuk
- F47A==
-X-Gm-Message-State: AOJu0YxZ2dWE3SfokR3kfzsrwzeyR84uM9E61+ghYRqEgdzmdk7YyD1l
- 0O17/nnMy/WYlTFKd3uGAkzo9B78KS0MG/MAz31GYkJPEX2V5+6J5NX1t9Tl08Dgx/DEmpVZE6E
- CzbvIRg==
-X-Gm-Gg: Acq92OHl8MBur48aCXoU7GA0Hh60dk2h9/UvtUlERQkZh2qKldAqfXDaAuTt0WRebwp
- bcv9KbUbZlcQctk++X15g8JsR9vHwjTSieY0p1MtGXiNOzZ8gICTJU1kjMtLZBKZcWfP3EdoChL
- KAfuegjV1HKjotCjlGl2NDJAxEApEpqFkqL/IXaA2aB5EbLEryFpaHqjTOENDoBdpnC0nmlXzw5
- XhspsKL164rvpA/t8CznnUUN1FZJYevf7JiBGUEPNwCoUzfmAm4WCOr1LdWqRqYlFbbftgzJLm/
- S+MgTL0dACE/qZjYO4txA79FHHFufv/Fckf6FlYKv/3Q4RBFlHvcL5Tl+/Njyh82IZGoi2+r4q3
- 1qSygwHaY33dpBFsh1TB5rturPjlwZ2YEC4OwKhKN9FWv4StTaAGzpjY+l89mjNSe1GXs0Pd7Mq
- CnSaEewNPm9OuXBDgaJw==
-X-Received: by 2002:a05:6830:4983:b0:7dc:a6f8:e3be with SMTP id
- 46e09a7af769-7e4fa0d50c8mr3896804a34.26.1778877222418; 
- Fri, 15 May 2026 13:33:42 -0700 (PDT)
+ bh=HWXzil8Za8eMTvx5P4Ig+qtNR2rYUWylqACp9O7BElY=;
+ b=njgiXm3SQ97b0DcislSxSML1E8RANajkWONdeir0ydHuXeH/JMTzZ8qYlEw5m6hwfa
+ xHOuAAYGScHdqGjfRaN/tUWJQRMBC9Sj2w+6Lq26UmlGbtmhlL/PVSpFSFGGUiMmHDAt
+ zinf5Xxr3qkGtg8eg8qKj/2Jbq1SiGHsNpIFeAO88uJIbFkq6n97rPIq7zjufOYxFhJm
+ +H9DTIL8PQ8b+Ph0MJCbIbhuuKReEbquXLLgoNAde1oFNaN3gNjwz+hhVaDgiOeJVfUd
+ s88KTmYMU3WvKvT8mbZxBHYLiHEMETE2rtY6DqdpU5o2OLPYbMaDXgYF1KBPj/m1Vs+R
+ IP/w==
+X-Gm-Message-State: AOJu0YzEpOYYkit94wfuScN7P8al4XHzkWSCErD8tJa7Z5IyGQaZ1Knp
+ 0S0oKYqOh0DOMZ/tnrMP71w1lQOOpyHSXqZnU245hEv7v64idKlTBjWjiHk2AM6ONEZhciyz2Go
+ p4G8pTQ==
+X-Gm-Gg: Acq92OEOt+tNXp617P9Y4m0UQwof/T1bOlcB3Z5fQ0TIuK+3B4V+H/JWqRimTlq6aKo
+ KpKCPcAwQjfyTnSFgWDW/IttelCRthYQkf51drVvsoAWcrECRVz24oQRHMnVm6SivgXe54YgHHU
+ 6x0ajHhx9+hIdXJ0KHR8CHBsWjIXC0WBXVPGDwyKl1FX5n8VACVwfN293jqJazb1yFNouuLKKBJ
+ c6DpuiSmO70haUhlqLLBaO6le3ZER6KxTN8ULc2bkD6oWNgyjvPMr9p/AKhKtGQuK3MmiRL+K91
+ 2HJQSdXasw+5NTun14ANu2cvhhyRBlNr5+NNE1OqpCcVAZD9tZkz/HyHc5Bd6mVPHQM8eUuWQAU
+ 0eT3tEKnPrlrCbOzO2IkIuadqR6/aJgTplLalA4C75xWSWbpDxyH1AB3dyGm0tw5LHqq/UNLMVc
+ dE09YD2ddWjAfgv+k5QA==
+X-Received: by 2002:a05:6830:4887:b0:7db:a184:2b35 with SMTP id
+ 46e09a7af769-7e4ea083bdamr3690761a34.8.1778877224584; 
+ Fri, 15 May 2026 13:33:44 -0700 (PDT)
 Received: from chromium.org ([174.51.25.52]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7e55b95b82fsm2414906a34.12.2026.05.15.13.33.40
+ 46e09a7af769-7e55b95b82fsm2414906a34.12.2026.05.15.13.33.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 15 May 2026 13:33:41 -0700 (PDT)
+ Fri, 15 May 2026 13:33:43 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: u-boot@lists.denx.de
 Cc: Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>
-Subject: [RFC PATCH 06/11] lib: getopt: Add getopt_pop() helper
-Date: Fri, 15 May 2026 14:32:57 -0600
-Message-ID: <20260515203311.2555651-7-sjg@chromium.org>
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Heiko Schocher <hs@nabladev.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jerome Forissier <jerome.forissier@arm.com>,
+ "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+ Patrice Chotard <patrice.chotard@foss.st.com>, Peng Fan <peng.fan@nxp.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>,
+ Yao Zi <me@ziyao.cc>
+Subject: [RFC PATCH 07/11] cmd: echo: Use getopt() with '+' prefix for option
+ parsing
+Date: Fri, 15 May 2026 14:32:58 -0600
+Message-ID: <20260515203311.2555651-8-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260515203311.2555651-1-sjg@chromium.org>
 References: <20260515203311.2555651-1-sjg@chromium.org>
@@ -94,67 +103,117 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Callers that consume positional arguments after parsing routinely write
-the same shape:
+The 'echo' command's option parser is a single strcmp against argv[1]
+that decides whether to suppress the trailing newline. Convert it to
+getopt() so echo follows the same shape as the other commands in this
+series and exercises the '+' prefix that POSIX-style 'stop at first
+non-option' callers need.
 
-    algo = gs.args[gs.index];
-    /* advance past algo */
-    return hash_command(algo, ..., gs.nonopts - 1, &gs.args[gs.index + 1]);
+The optstring uses the '+' prefix to preserve bash echo behaviour: -n is
+honoured only as the very first argument, so 'echo hello -n' still
+prints 'hello -n\n' verbatim.
 
-Wrap that in a small inline helper that returns the next positional,
-advances gs.index, decrements gs.nonopts, and returns NULL when no
-positionals remain. The same helper doubles as an iterator:
+Two minor differences from the bash builtin remain, both of which
+the user can work around with quoting or --:
 
-    while ((arg = getopt_pop(&gs)))
-        process(arg);
+* -x (an unknown short option) returns CMD_RET_USAGE rather than
+  printing literally; use 'echo -- -x' to print it.
+* -nfoo (joined form) parses -n and then errors on the trailing
+  characters.
 
-stddef.h is now included from getopt.h for the NULL macro.
+Add three test cases that pin down the new behaviour: trailing -n stays
+literal, -- ends option parsing, and -- is consumed even after a
+recognised flag. The positional loop uses getopt_pop() as an iterator.
+CMD_ECHO selects GETOPT so the parser is linked in on boards that don't
+already enable it.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- include/getopt.h | 23 +++++++++++++++++++++++
- 1 file changed, 23 insertions(+)
+ cmd/Kconfig          |  1 +
+ cmd/echo.c           | 23 ++++++++++++++---------
+ test/cmd/test_echo.c | 10 ++++++++++
+ 3 files changed, 25 insertions(+), 9 deletions(-)
 
-diff --git a/include/getopt.h b/include/getopt.h
-index 5a9e7802e65..013431807ff 100644
---- a/include/getopt.h
-+++ b/include/getopt.h
-@@ -10,6 +10,7 @@
- #define __GETOPT_H
+diff --git a/cmd/Kconfig b/cmd/Kconfig
+index c71c6824a19..709696c3c41 100644
+--- a/cmd/Kconfig
++++ b/cmd/Kconfig
+@@ -1916,6 +1916,7 @@ config CMD_CAT
+ config CMD_ECHO
+ 	bool "echo"
+ 	default y
++	select GETOPT
+ 	help
+ 	  Echo args to console
  
- #include <stdbool.h>
-+#include <stddef.h>
- #include <linux/kconfig.h>
+diff --git a/cmd/echo.c b/cmd/echo.c
+index d1346504cfb..63422c75cc6 100644
+--- a/cmd/echo.c
++++ b/cmd/echo.c
+@@ -5,27 +5,32 @@
+  */
  
- /**
-@@ -126,4 +127,26 @@ static inline int getopt_silent(struct getopt_state *gs,
- 	return __getopt(gs, optstring, true);
- }
+ #include <command.h>
+-#include <linux/string.h>
++#include <getopt.h>
  
-+/**
-+ * getopt_pop() - Take the next remaining positional argument
-+ * @gs: State, after getopt() has returned -1
-+ *
-+ * Returns the first parked non-option (``gs->args[gs->index]``),
-+ * advances the index, and decrements ``gs->nonopts``. Returns NULL
-+ * when no positional arguments remain.
-+ *
-+ * Useful for consuming positionals one at a time after parsing::
-+ *
-+ *     algo = getopt_pop(&gs);
-+ *     return hash_command(algo, ..., gs.nonopts, &gs.args[gs.index]);
-+ */
-+static inline char *getopt_pop(struct getopt_state *gs)
-+{
-+	if (gs->index >= gs->argc)
-+		return NULL;
-+	if (gs->nonopts > 0)
-+		gs->nonopts--;
-+	return gs->args[gs->index++];
-+}
-+
- #endif /* __GETOPT_H */
+ static int do_echo(struct cmd_tbl *cmdtp, int flag, int argc,
+ 		   char *const argv[])
+ {
+-	int i = 1;
++	struct getopt_state gs;
+ 	bool space = false;
+ 	bool newline = true;
++	char *arg;
++	int opt;
+ 
+-	if (argc > 1) {
+-		if (!strcmp(argv[1], "-n")) {
++	getopt_init_state(&gs, argc, argv);
++	while ((opt = getopt(&gs, "+n")) > 0) {
++		switch (opt) {
++		case 'n':
+ 			newline = false;
+-			++i;
++			break;
++		default:
++			return CMD_RET_USAGE;
+ 		}
+ 	}
+ 
+-	for (; i < argc; ++i) {
+-		if (space) {
++	while ((arg = getopt_pop(&gs))) {
++		if (space)
+ 			putc(' ');
+-		}
+-		puts(argv[i]);
++		puts(arg);
+ 		space = true;
+ 	}
+ 
+diff --git a/test/cmd/test_echo.c b/test/cmd/test_echo.c
+index 7ed534742f7..5fc139fbe68 100644
+--- a/test/cmd/test_echo.c
++++ b/test/cmd/test_echo.c
+@@ -35,6 +35,16 @@ static struct test_data echo_data[] = {
+ 	/* Test handling of shell variables. */
+ 	{"setenv jQx; for jQx in 1 2 3; do echo -n \"${jQx}, \"; done; echo;",
+ 	 "1, 2, 3, "},
++	/* -n only suppresses the newline when it comes before any
++	 * positional argument; a trailing -n is just another argument.
++	 */
++	{"echo hello -n", "hello -n"},
++	/* "--" ends option parsing, so a following dash-prefixed token
++	 * is printed verbatim instead of being rejected.
++	 */
++	{"echo -- -x", "-x"},
++	/* "--" is consumed even when it follows a recognised flag. */
++	{"echo -n -- foo; echo done", "foodone"},
+ };
+ 
+ static int lib_test_hush_echo(struct unit_test_state *uts)
 -- 
 2.43.0
 
