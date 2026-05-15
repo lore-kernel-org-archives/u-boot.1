@@ -4,101 +4,101 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A47D4CD4851
-	for <u-boot@archiver.kernel.org>; Fri, 15 May 2026 21:43:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 708B8CD4851
+	for <u-boot@archiver.kernel.org>; Fri, 15 May 2026 21:54:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 267E884843;
-	Fri, 15 May 2026 23:43:14 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id EDDFB846DE;
+	Fri, 15 May 2026 23:54:44 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="YLyCbPLH";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="NF6s9IFV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1FE5584865; Fri, 15 May 2026 23:43:13 +0200 (CEST)
-Received: from mail-oi1-x235.google.com (mail-oi1-x235.google.com
- [IPv6:2607:f8b0:4864:20::235])
+ id 9BE4D84875; Fri, 15 May 2026 23:54:43 +0200 (CEST)
+Received: from mail-dy1-x1331.google.com (mail-dy1-x1331.google.com
+ [IPv6:2607:f8b0:4864:20::1331])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F305084812
- for <u-boot@lists.denx.de>; Fri, 15 May 2026 23:43:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2DBBF846DB
+ for <u-boot@lists.denx.de>; Fri, 15 May 2026 23:54:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x235.google.com with SMTP id
- 5614622812f47-47c35be031dso257670b6e.3
- for <u-boot@lists.denx.de>; Fri, 15 May 2026 14:43:10 -0700 (PDT)
+ spf=pass smtp.mailfrom=malysagreg@gmail.com
+Received: by mail-dy1-x1331.google.com with SMTP id
+ 5a478bee46e88-2ef2a1cc06dso1511187eec.0
+ for <u-boot@lists.denx.de>; Fri, 15 May 2026 14:54:41 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1778882079; cv=none;
+ d=google.com; s=arc-20240605;
+ b=L/UsT00m8wu2rQPt0eO1L/Cvc9uT+6KOY9jRbroirnUpcmxPRnYShuufjtH5yBCK0l
+ IlSul8ipp74fvI4+vn2Cy0a7i3rau8ltuxkWw0ubOYCIWMncIyl6Xz+RX6VKl+tNiS1/
+ gOEDEXHOM0D2qRx3IQghXTE4YIM03OTJkJbfoyKgkCqW15ZiZ7iZXbrLeySd2ICl+dc7
+ FEC84nWfKwm0uonROB05eHCPkT+0JuZ/NkCwf9AiOJLO6/nMS2JIWCbPqk46vHHaIA0U
+ 5sP3OklbYX8Yqu2kwZ+L0jjHFIXVfEX8SNewPk+H+t+BhfK6EbXVBuj3hkWC/ZJlH7pO
+ AYHg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=opktGtsLMksMe+jtuD7NL1ZdZ73zwPVnvS6IiRN3PR8=;
+ fh=50Ge1u9w97r4fqa0Aoff/yuk/aYP2M/P6IYryZhGDGE=;
+ b=bkK1Na84/sQT6g35CHHSVqxng1JKWdlM0SZfCRlD1x98r7GlpTRohs1oueITFqKa2J
+ jZWoGwP/k+uN+5iypPLqi07HS/WENvrP0P/mtK69nUcWoOhLI9yTDXhg6cLHPL7O54FL
+ gcz4+I0U34lFtV/IwfZmq249zLcjt8rsLdR6XgitvG3H/65UuJil8L+GJP3Y8GBmMgyN
+ TPqUmiPQepsYXU7IPg/Pjk4WqZNAiip8HbbubOZP4mOrUMnyGj+4A0zjjoNDSyIT0x/r
+ T9T0JKTZUBZ0GHA2nhwyj1Cr+gTK/srPCh92Ta3rtuVHyPrfVOhDe4+VEMIbBZDcaDv4
+ comw==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1778881390; x=1779486190; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=+FFwCSAEfSCa6Xmh9Agx+/fC8WNAOnHMhFCl43Z6gV8=;
- b=YLyCbPLHBYxBIFE9HWW0FgT3fOsMqMa4w0ISNViDkTt25GFI9riy4Je9DzqrexrsrI
- J2hDsG9SPSKPckkvzbYv4AQnPyXIS1tN8VI4hB54+DoXYn57qt784F7wcerJxekqMuks
- n5Z6dC/nMro23IvN/xMKOX6OG37uTqAmRmn2U=
+ d=gmail.com; s=20251104; t=1778882079; x=1779486879; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=opktGtsLMksMe+jtuD7NL1ZdZ73zwPVnvS6IiRN3PR8=;
+ b=NF6s9IFVPNzKfpLdxhtzJpyiCtToOQ2PBQ1a7JgiUq7AUmtZAg9BRgm0KWiVhugIXR
+ pciSZQZZQ4r6ub1MT5H3DPnH6663DpUjVT78AosFnWtw1NKA1Y7REi4GHb6V4uAntoYG
+ WZxv3XRnBjfUW71vR6wRoBKV76PjLCVqLWpE6qTU3yZ+suupp8lkIIvZOLo1cwq5lGeU
+ A5RD7HdNjwaJX0F3FCMzlYN6Y2VtwwMTivAAQVWyd4fqXAURdZKvwSP7y9v6QMeHYofi
+ gkIlpE2kELJ127BZE8/1YAiW8kGOxeSJLUhgGEikEya408VMgAi8rFIdIGKqRBfaC3XQ
+ 2kLg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778881390; x=1779486190;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=+FFwCSAEfSCa6Xmh9Agx+/fC8WNAOnHMhFCl43Z6gV8=;
- b=LGw2dv37DZ+nTJFMdvUJor/RY3DO4OGWe/z+yMfJ4uZNaCiXdUV3WhB4lOKCExqbaU
- pKAuVEIIMUwcigqJMrJ6LDDwYfWMfzz1I5S2Au0iCU7Pk5hxnYwMeAjxQ0oFpvOia6LD
- D1GAoziGEjePNfuVaAuhRYeD8wEz1bQ5ZnxQXnmyoKK+V7T0Ou7k5nYrqpMMxl4stFJo
- Q96hxsWzybz8Q9DcRig15phFoL3QOYfW9t62cIT6lHQuRcVpGcZFBU1nas8euupW+yBz
- xycrVWlFS/AO1iObkTUCeNskcuxK+2oN43zHaoIIEXylxeAtZO5m4w4O3Jot2pCWvtxP
- NbeQ==
-X-Gm-Message-State: AOJu0YzrwswSry01S4hkJNUvYJjUD519TMhtSZuG+gRpKEgf2ViqjFdF
- o2mYHA8s9WdsokqK8ZTAHeosG5/RbsF/eo3tdtwKfrIFwzgaN/UsGRK0xTNjkdxfCx0=
-X-Gm-Gg: Acq92OFyTIaO9gI5X5B6dMGC7dLsdUnVgOThgAjS7QwAQXu67Nr/ZIX+/m1Fe7qHikM
- VE5ggpr78ur9dKMuIEat5J8eqLAlZy2ZopEkTE5q5sTv3IYMOWyx1JeonfP1wcCZFejpjfaCFdg
- sCqfDFQwhyuTYvGuaY1mUN8acIBFvzdEytuz2QMWwgwir8hrhJ8nvmkdmfDKVT9Iy5kQDsozxD3
- I0rNEw9+Nab2glyL8EN0jeBQqJgKwxa889viNVgv8vpaiOmOsrdqUm8s199Z88zOsP2tyjYV4hb
- hEZdZcEXhMOw6qcPCdQ7HpzZzdgJDkfQNkzBJ5qgrZtrJqAsC7n81QluYyALYWTi3Kwg8prR1Qc
- VdTV+JfAggxg07HFPsn78o7tjanhM5lmCDRahGVXj5tt8ydSdjZBGX95dESHAYL8cyPG3fzRgKF
- gvOzMVnXq/tcZ1Ymt4tvtkcpkV7VyBKWj49q1CW47ScVNp0kyjHLZEhIWWuT27qxhRA/4Rc8PeA
- udo531zvnZTZK04gvB8udUu6UJYdK8gCJ8ZckGLUyZN1Ey7u4SpVLCY3uTlaA==
-X-Received: by 2002:a05:6808:1a07:b0:482:5bd1:d8e5 with SMTP id
- 5614622812f47-482e55afc67mr3682025b6e.9.1778881389613; 
- Fri, 15 May 2026 14:43:09 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
- [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7e55b95b82fsm2560042a34.12.2026.05.15.14.43.07
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 15 May 2026 14:43:08 -0700 (PDT)
-Date: Fri, 15 May 2026 15:43:05 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, Sean Anderson <seanga2@gmail.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- =?iso-8859-1?Q?Beno=EEt_Th=E9baudeau?= <benoit.thebaudeau@advansee.com>,
- Casey Connolly <casey.connolly@linaro.org>,
- Daniel Palmer <daniel@thingy.jp>, Heiko Schocher <hs@nabladev.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Hugo Villeneuve <hvilleneuve@dimonoff.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@arm.com>,
- Joe Hershberger <joe.hershberger@ni.com>,
- "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Michal Simek <michal.simek@amd.com>,
- Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Peng Fan <peng.fan@nxp.com>, Peter Robinson <pbrobinson@gmail.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>,
- Yao Zi <me@ziyao.cc>
-Subject: Re: [RFC PATCH 00/11] Tidy command option parsing and use it a bit
-Message-ID: <20260515214305.GL1858239@bill-the-cat>
-References: <20260515203311.2555651-1-sjg@chromium.org>
+ d=1e100.net; s=20251104; t=1778882079; x=1779486879;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=opktGtsLMksMe+jtuD7NL1ZdZ73zwPVnvS6IiRN3PR8=;
+ b=B5YS5VwQkKhzD8TcHzTW6bUzWJGu3H9u97FtN8IPCVBp1guwC1tpMnZR2l9ysI8hYh
+ 4dGzpsINmDdl+B185lppgH/ZbcWiHiFaNhVZ5IUoAw+IxTaNZjA1m4tBUm93V2tPculI
+ 74JHjnxx/w9T3RYcFqaS85BK1G158qx383urNfW+zyUVn9T2LGzd6tjoqdN9ufqdgkQw
+ GtUM+3kOyMkyFNKbf6I/mose33f3L6rpxOAVHfhN+vLe2Z3IDGGOg2GPRsvn9SYjHK1s
+ UacNs/1KaLZE/nmGLhwlw3CAqVOglWcWPXJn5iXKtjjZ6BymWWT+KrWzPr0p/Z8Mt9y2
+ e5dg==
+X-Gm-Message-State: AOJu0YwXV41djWym97SqLWRvXSDohnghXoNUZVccC+esTIL7HoKMCojo
+ FekeQtw+zoSxUWsuYfzrW4S2FJTbZUuEn3ffYII3/OrUsplQuXkaM7+wQrDnKcQ1Neh7rDbNRLq
+ YIAV90iyKVWwKjc1FG4EUAKPJTssZPg==
+X-Gm-Gg: Acq92OGQ4CQKbo2z7Mymm1s8XMICGfPiOS3f4Wiun3fzo5T6upw01cBhxkngwQzfu4X
+ rGbWmefghDQtOygE8Kau/qeO7go6hB9UgO+E4U6xN6C2gVolyy6fDSXiKCnTwGqOWI7Cx/u8Kd3
+ df2mQRU22fTodH2DrHIj2S1Md/QNu4W4X3lHcpNy5ilyhzd+fWlz4tK6Px8BuHwqRfBibjO9jxC
+ UgXQHIA4uZo+kpIg237WwLu/EfzCoofeZzljdlEVwUQ7zhw8pBUGmzOG4OC2cWlZsJ2QS5BiCpi
+ uZpES7RqY+ZyLUiS4M24toDVowl7SIGXaUEM284=
+X-Received: by 2002:a05:7301:2c8a:b0:2f2:32bc:787d with SMTP id
+ 5a478bee46e88-30398637044mr2571446eec.23.1778882079337; Fri, 15 May 2026
+ 14:54:39 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="funH3/SH6/6AQip2"
-Content-Disposition: inline
-In-Reply-To: <20260515203311.2555651-1-sjg@chromium.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <CAFLszTjeQ2mvnkPeVPsWwK7ay4Ac-+h=3pApff6CUxaaHq45JA@mail.gmail.com>
+ <CAFLszTgbu6Q3r5D4-ijH5Vqhwp6p1j3PMLZhi0QnYxyuUzcRmQ@mail.gmail.com>
+In-Reply-To: <CAFLszTgbu6Q3r5D4-ijH5Vqhwp6p1j3PMLZhi0QnYxyuUzcRmQ@mail.gmail.com>
+From: Greg Malysa <malysagreg@gmail.com>
+Date: Fri, 15 May 2026 17:54:27 -0400
+X-Gm-Features: AVHnY4ISH8QYB9p0yxwrTGdHtU7Uq1g4Lqtdzpm72oieW_fUOJF229RzayqPctY
+Message-ID: <CABdDSeVq_R9KSFf2dydzNmCgrsCQfEneDCAgR-h=ieAx3vWQLQ@mail.gmail.com>
+Subject: Re: In-tree Python tools (patman, buildman, binman, etc.)
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
+ U-Boot Custodians <u-boot-custodians@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -115,53 +115,97 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Simon,
 
---funH3/SH6/6AQip2
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Fri, May 15, 2026 at 4:58=E2=80=AFPM Simon Glass <sjg@chromium.org> wrot=
+e:
+>
+> Hi,
+>
+> On Mon, 4 May 2026 at 06:16, Simon Glass <sjg@chromium.org> wrote:
+> >
+> > Hi,
+> >
+> > As you know, I maintain several tools which are part of the U-Boot tree=
+.
+> >
+> > Tom has previously suggested that it would be better to move patman
+> > out of the U-Boot tree, e.g. to its own Github project. It is a
+> > general tool which can be used with Linux and other
+> > mailing-list/patchwork-based projects. I have never been keen on
+> > taking on the extra effort required, but I've recently added more
+> > features and am wondering whether now might be a good time to do this.
+> >
+> > Buildman is quite obviously designed specifically for U-Boot. I have
+> > made some improvements recently (a large code refactor and distributed
+> > builds). I would like to push those changes to mainline. Do people
+> > think it should be in a separate tree somewhere?
+> >
+> > Binman was written with U-Boot in mind but supports other projects
+> > (such as Zephyr). It is generic enough that it could be separated. The
+> > impact would be harder code review.
 
-On Fri, May 15, 2026 at 02:32:51PM -0600, Simon Glass wrote:
+I'm not sure if this is the place for this discussion, but I don't
+really understand the placement of binman. It seems like a meta build
+tool that combines multiple build artifacts into one, but integrating
+it as a build step in uboot is strange, since we might rely on TFA or
+even a kernel image that is built externally (which is what we tried
+to do originally for the ADI SoCs when we thought binman was a
+necessary part of getting the boards into mainline).
 
-> We have had getopt() for over five years but it is not much used. It is
-> much easier to understand arg-parsing using getopt() and it avoids
-> common errors. As the named maintainer I decided to look at how to make
-> more use of it.
->=20
-> So this series explores the impact of converting a few commands to use
-> getopt() instead of ad-hoc parsing. It updates getopt() to handle flags
-> anywhere in the cmdline and provides a few helpers to reduce
-> boilerplate.
->=20
-> The chosen commands are:
->=20
-> - echo: very simple with no flags
-> - hash: fairly simple with just one flag
-> - env grep/export/import - fuller examples
->=20
-> The series also adds a recommendation to use getopt() for new commands.
->=20
-> To try to reduce the code-size increase, a lower-case function is added
-> and called from a few places. The difference is fairly marginal.
->=20
-> Overall, the result is not pretty (see below) with about a 1.1K size
-> increase on arm64:
+My ideal usage would be something like: in my yocto recipes I maintain
+configuration settings that are passed to uboot for any hardcoded
+addresses or offset, and I also fill in an image layout dts with those
+details (both happen programmatically from the single config), then I
+use binman instead of wic to create an image for my entire boot
+device, or just a FIT image for kernel+initramfs, and ideally I can
+integrate code signing or dm-verity immediately at this point, rather
+than some of the hacks I've had for it in the past. We tried to link
+some of the offsets and image details to Kconfigs at first to
+propagate from a single point of configuration, but binman is not
+selectable as part of a defconfig normally (I think?), so having
+dependencies and configuring the details in a normal way didn't really
+work and our result was pretty messy (and is being removed for that
+reason).
 
-I think that means this is a no-go, and you need to work out what might
-lead to a much smaller growth here.
+If my understanding is correct then it is a kind of competitor for the
+wic tool we use in our yocto builds. To be frank I don't like the wic
+input format and a device tree-based solution, especially with more
+options, would be a great alternative, but I think binman would need
+to be outside the tree for this to be the most useful. I don't know
+what buildroot uses by default but surely it could benefit from this
+kind of a tool for image assembly as well, especially if it emerges
+with the most robust set of capabilities.
 
---=20
-Tom
+> >
+> > We also have smaller things like qconfig (which I have substantially
+> > rewritten to make it fast) and dtoc, which is very tailored to U-Boot.
+> >
+> > What do people think? Of all of these, patman would be the easiest to
+> > move, with the least impact on existing workflows.
+>
+> Are there any actualy patman users on the list who have an opinion? So
+> far the replies are from people who don't actually use it :-)
 
---funH3/SH6/6AQip2
-Content-Type: application/pgp-signature; name="signature.asc"
+I've been using patman to submit all of the ADI patches I've sent and
+the results have mostly looked good, and I have encouraged the team at
+Analog to do the same, although I know they are using/have tried to
+use b4 (with some misfires we've been working on along the way). b4
+seems to be a bit more complicated to configure properly in exchange
+for more powerful features for subsystem maintainers especially, but I
+have not tried it so I cannot speak to a real comparison.
 
------BEGIN PGP SIGNATURE-----
+Patman being present in the tree has made it very easy to use, but I
+see the value of maintaining it separately, as it doesn't really
+affect any part of the uboot source itself. However, newcomers who do
+not yet use b4 may find it simpler to work with, so in my opinion it
+is desirable to keep it accessible in some way. I'm very unfamiliar
+with the python ecosystem, but is there a way to provide some kind of
+reference list where I might be able to clone the uboot repository and
+then with one command install suggested python tools that live
+externally, perhaps under the tools directory still? If it is too far
+removed or requires too many commands to make available, nobody will
+use it.
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCageTZQAKCRAr4qD1Cr/k
-CsyRAP97xhPnOCIyzCvjIf7Iaq3YuniKqnNY59fsl5B+k2saCgD/aBfYfIPmE21M
-3beRwSRkq75MjXGCIWZ2OdZju+xbtgg=
-=vAZB
------END PGP SIGNATURE-----
-
---funH3/SH6/6AQip2--
+Thanks,
+Greg
