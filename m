@@ -4,91 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B5D3CD343F
-	for <u-boot@archiver.kernel.org>; Fri, 15 May 2026 12:57:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B39BCD4851
+	for <u-boot@archiver.kernel.org>; Fri, 15 May 2026 12:58:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1FD798465D;
-	Fri, 15 May 2026 14:57:08 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0D1E28464D;
+	Fri, 15 May 2026 14:58:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="YMF5Ptgd";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="B9mM9KAW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2D03784687; Fri, 15 May 2026 14:57:07 +0200 (CEST)
-Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
- [IPv6:2a00:1450:4864:20::536])
+ id E28908465D; Fri, 15 May 2026 14:58:18 +0200 (CEST)
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
+ [IPv6:2a00:1450:4864:20::62e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 89EE68464D
- for <u-boot@lists.denx.de>; Fri, 15 May 2026 14:57:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0684784099
+ for <u-boot@lists.denx.de>; Fri, 15 May 2026 14:58:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x536.google.com with SMTP id
- 4fb4d7f45d1cf-67e2498f3a7so15505669a12.2
- for <u-boot@lists.denx.de>; Fri, 15 May 2026 05:57:03 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1778849823; cv=none;
+Received: by mail-ej1-x62e.google.com with SMTP id
+ a640c23a62f3a-b8f97c626aaso683359466b.2
+ for <u-boot@lists.denx.de>; Fri, 15 May 2026 05:58:17 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1778849896; cv=none;
  d=google.com; s=arc-20240605;
- b=O3MLWz9nZOqmGqLojQ6kVXhaFWSZQvsX5iQuJvn/jp463ZqpjvYtp8gOsQBvYvXbd8
- HrRRb3NBrQ568rXpaQ1ekncgPjIxImTRhV9LgQfEKtY7fj7a4FxzLHRazlSuH2SH+4s8
- lke4tTU4GbRcDaBqUmBvghxDxIW+v+xMASsXYLtMlBWZe+944fbE8GbVc/+lQociy22H
- xwWy8MjAAufpvnNSn4V1DqB4Lxou/TloEMZycvgxdPcA5eerJoUJ4dLy13o9Q9k2w58Q
- KM8b18TPuPHNRt3tkd1jzO5veZiRudyDx46KOHkL8RwV801pebE77nh1DYbQSgUHYwc/
- xJFg==
+ b=iUPzA0kpm8CvOt85Cyc8LWbi/zGmgfidmOrnjbzwCL5bi8pP77OpLrBpckkSPuICoR
+ 1VouYphdZdL+mtHzhAuU0BfHSxDZQ9WMTbpG3lLxEYkkRDJ2Xu0NL9qc3sGN/4AjK+QF
+ WMHRlSlygHNfbssO4uvXPJ1K4dYICxOX374EHUH7GwD/2bMKNyY7wGZ0D0i3lHxw2v+8
+ ct3iPGQ0C6WoWm3vpvcKwSCl1kmDYd+xF1rc7GKSOW4BFmzWpejOKJCoOXQU1qbigNoX
+ e5gfRgOF+BTbiUj+gueS9kd6c6LsP4Ju7UAmmQCvavFQzNxFWqPEYF0Ekx8q/tcTaRvf
+ lCJA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=23fHjP9Hj9fLwA5pOUOduSFPYpHzOwaj3qezLt0pXhs=;
+ bh=ADQ9GtO6sM4mFAZsesk9Pstq9ohxEDeCOR3VdRI0ifA=;
  fh=fJAGB8LvxCJalDRE+ziaXIW21+gD5jSCb0B1QEwHsvE=;
- b=apJirAHM2Agk/PjSMlEFa/JUbUUY03cm6UpOQe5JhMElPN9dWozUUSow+2vaj5Dswz
- MgmubMwqezzICMoS9Pf7/YWfmLPQ41k4h33P7dqwdZRxENqZgfBnQYVHhAHG9sj53rmZ
- IR0Km3hareUcPhT2cEKdrN0w+8l7/Ns4sgd1pGMcg4NGHDzRhlcYXHehxkuNT1oDWI1n
- BlaDTiPIIxwL3Uicw8Lxv1BJqhymtCqZUliGPRx6iB/wZQv4Z303X5KDu0d96/BSkGQa
- JGam9fgW6dxbnhfmkvImzRwSsL5HqDMK94NjeqZQBmQaR/ZbYq9BVixMQB2mut6+IG95
- 65ug==; darn=lists.denx.de
+ b=MVqJS968by3W0dLYkQpDOMzpbQfzOiY4s7ypiZiC2uLNSlsGWPY++dyuhnQQSthCVS
+ XyJTIA+oaOyslwtRSbUBRTgHCibGrNjyxABdIKch5i9/F9A3+nG8gkGM8uqK/vkaL/gk
+ v3U4sBq7QHEzEX21xGsNKR47j6Hj1+OBik+ytWTMK9DPpwkQZOco9ogVU3jRgo+WbQYr
+ CoRTnZ8xJHSHY7cwBiiXiJ5W23+OWixrOG7nxRDvnKKfGAT61xU9yY5L+a24BT3mIBk3
+ U4OtyrwHzAmQGjYPjekYC8uVxZKBMAP5cG3tH9YfvqONw0MZwGyVy94w2HqvAjCfBqrI
+ yXxQ==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1778849823; x=1779454623; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1778849896; x=1779454696; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=23fHjP9Hj9fLwA5pOUOduSFPYpHzOwaj3qezLt0pXhs=;
- b=YMF5PtgdRyR0EKuupoTbYAkykbvLb3ZOKrHgV6LmZstDg5Ytgk4FLOaQKJazxh+WOe
- R/myzuwPeRYr6zJzgqfRkMM2i9MNCoUuCvMabf1YdW7EhEzwCVan9E1UDtZojsOlh7h1
- BxaDbwFoOWkiikfOHYWfYWbCmphlMPv1zhmcc=
+ bh=ADQ9GtO6sM4mFAZsesk9Pstq9ohxEDeCOR3VdRI0ifA=;
+ b=B9mM9KAWMAhX6VFajoXxYf0aOOt4NUJUkXmaqlz/jeawFLZJCrAcNdSZCfwqmBsPlG
+ +tF/rcbobTGheJmULGenQFXaeTrL1LCy5KoXdV5qibOl4mRrWPyu9UhdZAloI++aHERl
+ +zizDsPaFT3BQKT7bLVHNACb9A5hdJhjII8/c=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778849823; x=1779454623;
+ d=1e100.net; s=20251104; t=1778849896; x=1779454696;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=23fHjP9Hj9fLwA5pOUOduSFPYpHzOwaj3qezLt0pXhs=;
- b=pNb6JkQdDg6BYwzSSCXsMXjgUxdIknqnJVwi3m5Pwzk4ynd0nmDlPP7qxD6PhFfqzb
- t2+B1NK3Ul1F3xhqKxCW+Rt+6UhsE6uFFpDFJdHoArQrX9K2zNX4HNJ/aIc+OirOwURp
- MOI22ncfZ8NkwhwSSYUAyeknz9Lj0DEwJcIpsSTLozApzdOB1fOF5XQhoWON0IEGadV8
- EG8+e9OCQN5UCgxK4vxUaCE95PNXjvWNekhsy97uTnnIL+PUw1VHQCL2b8qAynOH1VHe
- rwU/1YC5lG4yRWipY+DNv4B/uen0Gp7QW0PZTPHTpP62faLLiyRLXSLFOJGDE0Ekwn1r
- DrJQ==
-X-Gm-Message-State: AOJu0YwzHOUOjZDnf6YzjWGwnDg9mfRrsP/uHBlDNosNUd4Y5+R9Y+aj
- XNQJqHyGAhmeoAcnLJoVeiQjIgNBybbCtonJAmEuqIPOvOz97R5HYpoGudz2OuHOstql9xmTx1e
- kRBSHvsLpSeEDMEg0Kh4Kl/TO7iOMaISx4tojvnrzpKxFCSRaaSKDXQ==
-X-Gm-Gg: Acq92OFPFkofINfEB8UMyZIQ3yyTHDhxho8zCS0dQZAzXpxz3kqLb1xD2jnOoI40ib6
- TKn/Z+ruhKt3k3aEcB4O2qyWNDHKC1xJEFYaGhkkLwuVzvg1RlM9U6LBxPjBq1hFJ/RZlUaZI+E
- kU9yQa4EtkUGjC606QW2IyZAijdiYZdE5IY8SVRt3lFvLA0TwJwbS4hJ319Tdqwrx6caDYZc9G8
- yfEtIaYZFzwWh9fWLBYOmRIWcM/1VNNppGzAC09N+knI2rDENzyPSoRldJ21lQzYDt0I7euKZk4
- EJ2kCA==
-X-Received: by 2002:a17:907:706:b0:bcc:c8ea:3b01 with SMTP id
- a640c23a62f3a-bd51781379dmr196666966b.12.1778849822982; Fri, 15 May 2026
- 05:57:02 -0700 (PDT)
+ bh=ADQ9GtO6sM4mFAZsesk9Pstq9ohxEDeCOR3VdRI0ifA=;
+ b=pdI56c1XDwyYm5QPRaRtI+kmICKncH7I9DUYbvxX1HuP1GD7Q/gBNHq9zsMjAXNIcK
+ EGrADQ/WkF+1aq4d7soOCj7fQlVNzqN43dANf/CuWPS+NAWZts4gZrFR8A4jNNvupgqX
+ 4eH5wbMixjwrvNYowGjWMjcc2v6rljFNq3w/nchhbX1LSCxI5ga6Q93WWpZ/kasrWdc3
+ wtqOvFD+nbTDBHRJWHAY+hErXr7wWJ6Uq8tLp6l4mD/AAWc6sXrGD7FlQRWkPjpTGhoj
+ 30i+rvrVASPM7kpVEXq/3x5u5lSuQrm8zWpjhazqtpxPlQ7xJZ3qEcv26Dslj5UYKURz
+ 54uA==
+X-Gm-Message-State: AOJu0YxPk+UZrNOpwZnuhHPo310ZedVZNLEwxStbi9R0WlB/Y1IDPh8G
+ ces0cXGWGklOc47jOhPogdgARCv9+SZ7uzl7aCnSmZ2bR1XK0P/rhg+w6Ajh2jjAciX2felWByS
+ X6z24exiKxrhTIsNDbOot4zQJ7NIdcUqRCJs88XQSh5uA7xzddwfejg==
+X-Gm-Gg: Acq92OFEF/jEA8EYSxsKGTePkJgWOq4kDufSUyCYazZLfznzIOWwG7BJJkA1jlGwLAb
+ pRDXDNcujheiSnBLihyMQD9WAjMrAgNvYvrye9w8XTTSzLunq9TxspiDxf1PYhKRlxUQahbclqr
+ m3y9vRn/bMoNCXkA6upMgx+mOx1Tj2KIG7ltnVbRkm1sGynwbCALKVlerByvFKkF26dKDGf9XN7
+ OCasnhEAQQAsvr1JpO8Ezx4Q28+uqj+S58E4hawwqqOJ3x44Hr0zFrVK2sLjZj2lF6c1iQioEyW
+ swzD2A==
+X-Received: by 2002:a17:906:6207:b0:bd2:2852:683b with SMTP id
+ a640c23a62f3a-bd5177c7dd5mr214019466b.16.1778849896413; Fri, 15 May 2026
+ 05:58:16 -0700 (PDT)
 MIME-Version: 1.0
 References: <cover.1778657347.git.weijie.gao@mediatek.com>
- <1b513aa72b3f4db27d752c8f9f734d4e2cf8d71d.1778657347.git.weijie.gao@mediatek.com>
-In-Reply-To: <1b513aa72b3f4db27d752c8f9f734d4e2cf8d71d.1778657347.git.weijie.gao@mediatek.com>
+ <84adac247cd407e093dd7455138fbd794e91d933.1778657347.git.weijie.gao@mediatek.com>
+In-Reply-To: <84adac247cd407e093dd7455138fbd794e91d933.1778657347.git.weijie.gao@mediatek.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 15 May 2026 06:56:50 -0600
-X-Gm-Features: AVHnY4Ji95HlQV0jU7r_x8fb3Gr8EyZ9cRBzC-EeRrKF6TV62DyAZOavqNAddW4
-Message-ID: <CAFLszTiRoyxB2H=HC0Uug3jsw3ve_sHX02Udnw0BiC8HXxQKPA@mail.gmail.com>
-Subject: Re: [PATCH v4 07/10] cmd: ubi: reorganize command messages
+Date: Fri, 15 May 2026 06:58:01 -0600
+X-Gm-Features: AVHnY4IpOSGX-fx9CaE7JU5P7oLQll2vUxFmFrCokIbyRZGjwwYdy3pP0I3kbkQ
+Message-ID: <CAFLszTi8ii_CM7HQQw_rjON6izUzQ89dt4xhXSD7EceU1O+n7A@mail.gmail.com>
+Subject: Re: [PATCH v4 08/10] cmd: ubi: export more APIs to public
 To: weijie.gao@mediatek.com
 Cc: u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
@@ -108,29 +108,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Weijie,
+
 On 2026-05-13T08:02:45, Weijie Gao <weijie.gao@mediatek.com> wrote:
-> cmd: ubi: reorganize command messages
+> cmd: ubi: export more APIs to public
 >
-> This patch moves normal subcommand messages into the main command function.
-> This will allow current and potential api functions being called with clean
-> output on success.
+> Export the following functions to public:
 >
-> A new function ubi_require_volume() is added for finding and printing error
-> message if volume not found. The original ubi_find_volume() will be silent
-> for being an api function.
+> - ubi_detach(): this is paired with ubi_part(). One may call this function
+>   to completely clean up the ubi subsystem after using ubi_part().
 >
-> To avoid ubi_require_volume() being called twice for volume read/remove,
-> some changes are required:
-> - The parameter of ubi_remove_vol() is changed to accept
-> 'struct ubi_volume *' directly.
-> - The original ubi_volume_read() is renamed to __ubi_volume_read, with its
->   first parameter changed to accept also 'struct ubi_volume *' directly.
-> - A new ubi_volume_read() is added to wraps __ubi_volume_read() to accept
->   volume name as its first parameter.
+> - ubi_{create,find,remove}_vol: this is a set of functions for volume
+>   management.
+>
+> The original ubi_create_vol is renamed to __ubi_create_vol to allow the new
+> ubi_create_vol() being used as a wrapper for __ubi_create_vol() with volume
+> name.
+>
+> Also, comments are added for all exported functions.
 >
 > Signed-off-by: Weijie Gao <weijie.gao@mediatek.com>
 >
-> cmd/ubi.c | 118 ++++++++++++++++++++++++++++++++++++++++++--------------------
->  1 file changed, 80 insertions(+), 38 deletions(-)
+> cmd/ubi.c           | 23 ++++++++++----
+>  include/ubi_uboot.h | 91 +++++++++++++++++++++++++++++++++++++++++++++++++++++
+>  2 files changed, 108 insertions(+), 6 deletions(-)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
+
+> diff --git a/cmd/ubi.c b/cmd/ubi.c
+> @@ -213,8 +213,8 @@ bad:
+>       return err;
+>  }
+>
+> -static int ubi_create_vol(const char *volume, int64_t size, bool dynamic,
+> -                       int vol_id, bool skipcheck)
+> +int ubi_create_vol(const char *volume, int64_t size, bool dynamic, int vol_id,
+> +                bool skipcheck)
+
+The commit message is now out of date - it says ubi_create_vol() is
+renamed to __ubi_create_vol() and wrapped.
+
+> diff --git a/include/ubi_uboot.h b/include/ubi_uboot.h
+> @@ -47,11 +47,102 @@
+> + * ubi_part() - attach UBI to MTD partition
+> + * @part_name: name of the MTD partition to attach
+> + * @vid_header_offset: VID header offset (string)
+> + *
+> + * This function detaches any existing UBI device, then probes for the
+> + * specified MTD partition, and then scans it to initialize UBI.
+> + *
+> + * @vid_header_offset is optional and is usually set to NULL.
+> + *
+> + * Return: 0 on success, 1 if partition not found, or -ve on error.
+> + */
+>  int ubi_part(const char *part_name, const char *vid_header_offset);
+
+Just to check, where does the '1 if partition not found' come from? My
+reading of ubi_dev_scan() / do_ubi() is that a missing partition
+surfaces as a negative errno. If there is no path that returns +1,
+please drop that clause.
+
+Regards,
+Simon
