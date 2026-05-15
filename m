@@ -4,92 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B4E4CD4F48
-	for <u-boot@archiver.kernel.org>; Fri, 15 May 2026 13:33:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78B31CD4F25
+	for <u-boot@archiver.kernel.org>; Fri, 15 May 2026 13:34:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 203188467A;
-	Fri, 15 May 2026 15:33:22 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id EF9358467A;
+	Fri, 15 May 2026 15:34:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="fnfOOTFB";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="LbR3AJyB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4B4A6846A4; Fri, 15 May 2026 15:33:20 +0200 (CEST)
-Received: from mail-pg1-x52e.google.com (mail-pg1-x52e.google.com
- [IPv6:2607:f8b0:4864:20::52e])
+ id 7D4318467A; Fri, 15 May 2026 15:34:51 +0200 (CEST)
+Received: from mail-pg1-x532.google.com (mail-pg1-x532.google.com
+ [IPv6:2607:f8b0:4864:20::532])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 28B8384676
- for <u-boot@lists.denx.de>; Fri, 15 May 2026 15:33:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3F2C684676
+ for <u-boot@lists.denx.de>; Fri, 15 May 2026 15:34:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pg1-x52e.google.com with SMTP id
- 41be03b00d2f7-c801d732058so460308a12.1
- for <u-boot@lists.denx.de>; Fri, 15 May 2026 06:33:18 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1778851996; cv=none;
+Received: by mail-pg1-x532.google.com with SMTP id
+ 41be03b00d2f7-c822652f82aso6801633a12.3
+ for <u-boot@lists.denx.de>; Fri, 15 May 2026 06:34:49 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1778852088; cv=none;
  d=google.com; s=arc-20240605;
- b=hOiMYP7vPI5CP/DZIdWn3EolMjO2eeROoGcJu17iq6jHsjNsuHMtUToHHLlssImy8T
- snwlEi3YMadvNmf8r55ekdWAmFHthLaDm3g7sRHP8oGIy4k3HqPNHWOMKmXPn/+zLCgC
- uOvsLABv0oR7HdoNzCevxISsS/tLySkOn1dDo6d5y0sa0T4iSu4T2gr6idJxHrvNGtRn
- 5SiuL9zdHcUFVd4iAoebHV6KHu1YIyaij5kP0STQvQJ9xlgwdmjf4hubh3vvyVI/C/ZC
- qK0T+UXxHDhNmaIRMa0CEmBZa4Xy8KmC5wUcUB8wCY+EyWETUtuk5u77QZvT+OLzYnJ7
- Qezg==
+ b=G4EdJZnuDASBA1HwR5LZRI/jls2MMJhGJhxi3iVdRFJ/79vvuO5rkSbpciIpDt9qBB
+ JIENtsWy7MBXu+QsFTVfL9dTRW8dW74pFzobCq7NTpdu9anl8EvQuKRytU4HbvHc3TXm
+ MY5Z56JaDJeoW78e46uo9/SzPFDbfqszjQ6/GENqh2mfZQMHjk47wHDKdNcqIyU7I4Cm
+ GyoBCxoWZxqLeh1uztnffk4lmnZcl5VJEmhZ9i/RP0E+UB6nUl04lmsdH8o82JBONOGj
+ 6q60njAprxylIW8/Zoai9jZZ0LJeeR/RgUyRbpdyvIpFZSQqB1X6hJQQR722a71MjP8g
+ qTQA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=AIgf6GA6T2kECzqosHZbtyb6rZwBXDOE8oL8GvOsOf0=;
- fh=is6TKv49MgERBAcyxHwJilOvaFSawPXqsCYNk2VrlTs=;
- b=GiGlcA6DH/eMOmjyY+dgGZ+w9Y3+g9Hkime/dhBGyhd1+5Neq8gXJ2BWutNl+I8PND
- Le5vWe62JopEFcSPzkdw8uxJUsBn/A5D97oVx0TBX1TAjA77Q4Gr8+V3tusDVB+y/cY0
- a0VvdsLNfrePhDVr4pOFoebsQ45wzSYEHmU70WX62LiFJ5aUVBUlOzPoubRLOAOtXPhJ
- RJT+et4fn2g6rBi7g3yxpJbzCn4HWRzPn+Vj/uVTe1L9nl6U6Hu6w/UEN+xySGigPkyz
- gYFQmglfwBU9NpEm6cY4U7IPMATJC8vPGlNGm5G7uzJkTg+TeHljIK+gH5WwVbwCAsID
- msyg==; darn=lists.denx.de
+ bh=vrH1+i9ANv8kcO0i7a7gNq463pJJjkaNwiQhL/d6MF8=;
+ fh=qmb99AbYrxQTqbU8c3YoikZ37BstHm/br0rQHEGk45c=;
+ b=PFZy+jzkfAnPfWA1a8mWEl8kbMauFBgWPYFwv/bfjUXXxlC5PabYB+DlXQDujcR9Uf
+ s/OkFiXlxoHZseUuMjGULsWF36M7ZLq364SoCatksfEXN5nNayuP4yACE4qXo2b9yPSH
+ rnJVU/pK51Za4y1x+naaNToq0kYuWzdWJMuGF1CU8KjZwNyI5dFjzh0jIJ6453XM9WZ6
+ rDyB7PtNgqWKmR18tWFqt/InykKeNdv+bxSRVFefRPGZ0TE2qGKRikdmpJ2GZXap8B+9
+ flQAP/vJkqtsP/BwKH2a79n/OUkCWKZZjon2qhJoBTTox1G1+kuxlXnB2okQVaeRBqcD
+ cuDg==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1778851996; x=1779456796; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1778852088; x=1779456888; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=AIgf6GA6T2kECzqosHZbtyb6rZwBXDOE8oL8GvOsOf0=;
- b=fnfOOTFBHv4kQfoipXY3upF5AEP1GdnMl3x1s3FSLD0Wxo3Z+EpxVceB7Di4u1ZPcJ
- BdYhCzXZ7jniIEG5TjZbEwpgC1Mx1TGsc7Ecrks1tN/zlTkQXfmMbEfVGwlsp88S5E7s
- eb4u0PAeKxfZ025sa3nCkPSd0UHaBeCwZ7K4Y=
+ bh=vrH1+i9ANv8kcO0i7a7gNq463pJJjkaNwiQhL/d6MF8=;
+ b=LbR3AJyBaduMNkF6ho9Fe1FeX87GWaDieFkPCtbbdOZHRF0vCBVTPDXkgeCcxXIxSp
+ CiCfZMuRQr0KPTOUU5MxM3la+u4ouNEIsdDkj7zIpKlTxlv2yfj6A1uq5oh9ZUP+uSQH
+ n3DAHDssQKqHkipS92EfGwO4hmsQmCcaivKoI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778851996; x=1779456796;
+ d=1e100.net; s=20251104; t=1778852088; x=1779456888;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=AIgf6GA6T2kECzqosHZbtyb6rZwBXDOE8oL8GvOsOf0=;
- b=q5FIidDz5M6mORgFhQ2F9H+hvwio3iIcTxcU4+rL4VIWj3N9OwAvOq8dPkrkR/g2OE
- B3vPxZvxLcVkoLp17W1YlrcU1Ntbfoh7QCXHUVIVtNdXqTeYQrGOStBGE/m4Axl+8j3e
- gF2JIvA8bbzJbzxeTCrYzHKVEf+OwBKD3698jXCbkNlunSOVvPwcc2xte+7NQboc/uEv
- K17Ln5hNlqIVrQK0jZt+RxKoYTTwnFXIn0938lXOoycl5gVu+S0Z+gqRtlMD7wMaY/kU
- pWfBMqw2atwzoTH2Dc4F7S3A8NO5Xiz2Ycx9jSdyr0fU/8Lfc/+FRG6qZH00DDORUy/h
- yvWA==
-X-Gm-Message-State: AOJu0Yx6ozcyVT6Kg+YqjXe0NzRPmQ218pduMgfb7oISOVXA42DICdsB
- NsMw933aTcB/BHZb+s3OfPqUAixrhQM8YIH8EP6VzTWgJV+M8Sp0y2GUXzjiZLRR7MHCwrEL/Ci
- N0C7dkc8zLV4L9r/O2dszKa94RQ//9TsdIG+ozg65Wui+UYBP//0=
-X-Gm-Gg: Acq92OGCqBodO7AZIKUkyXJ+zghZInZRn1Wq/JQNBTJo4RWwxvf2fPTcc5F+Gv09k6G
- WZf8xc7wBiD5/Q06u064ktYuor9SaJzkWF0m2PZY5PsSbPdD0G9pFp3jxN02mrR2/E8r0BskBKe
- 9w3s/4eIdhgjEpwc/3l4+I3c6309CYUrYOTJVG+b4VmzlcUqtWnTzXm3boU4bLfX8XAg+HuFrtj
- MMm3PUbEpc2Okq4o/x1O8pfVKpxmpN3K5+Grz3/UC4uzF2neWjbx4o9owbd+KAAGp8N98rqqnN5
- LFgr0w==
-X-Received: by 2002:a05:6a20:12c3:b0:3a2:c7e1:ff93 with SMTP id
- adf61e73a8af0-3b22d16984emr4225268637.8.1778851996613; Fri, 15 May 2026
- 06:33:16 -0700 (PDT)
+ bh=vrH1+i9ANv8kcO0i7a7gNq463pJJjkaNwiQhL/d6MF8=;
+ b=IUctZFrLv/z6cEwiMqnA7lu5wItcIrxAa74q16ni83sQaEaMqZ1Fip9YXyf1zaLrrU
+ eHBEUr+YvnOFKgPXj7P2W3Um43mzsUx3JAgXjVJO7zgZXgltPwvHG1SnWoo3AXfCbTY4
+ hvHvxu4a2wVYCoJnsdM3/QvmDeKrK0W0WLr85cv8o8mbDEdHbheojkRFtSl+Nq0eMbYZ
+ T0aegtl4EOW4uWs6HVxZJ13XYSXDgzMt6mHdg/yebIwb4qZUjxsyBPHAXn1+VToqd2wl
+ xtnGqGtEPqoV4z/q60AdCdP1sKpL/D/+/JdLh1FjLNR6BdpY/LrWfVGleW4eeJ75nsQ0
+ 8HJg==
+X-Gm-Message-State: AOJu0YzFWl8g0FBMt3M4qXoBOZ014y6sCfU//DsvksuTc9MC5y8IOd7T
+ Ih8wQPvFHDyHMBQbfiW46vxt0+4Yju9qEB4gG1uTDA4cp//6EYG4iIj1SodsIirgo6g8aFunCZV
+ JjnzBcQT69MVmMR2WgMwl4M88HnFwAZU1kIYPNmj9
+X-Gm-Gg: Acq92OHf0JkRo2uAXhhONJIUf6h8lM0M7dd3kb7/HTRwL9OeHXFVHwpzDSvFts5bjex
+ veX2pQi7sKGc5biRkx0SDY9HNYKSfimXU34njFlTsww5HYqf85zSP7j9EIr11FBGm8QUNs6EdwM
+ qMIhwuwWOonHYbjRUqj1AaIdIwfMAbORFoO6+Gp+T/RNMrdjXndbi3mGp+ZL5g6kqnY8o/PmHwj
+ BxUUP+O7qKiLAgjWtLClxYoCYvpGlewl5KVi8rL37aRnYREPZxAVxYBr3IY7G+1ZCNqxiwGufLM
+ M9/NxVKYvzmx2G/y
+X-Received: by 2002:a05:6a20:3d8f:b0:3a2:f402:50fb with SMTP id
+ adf61e73a8af0-3b22ec9780bmr4659695637.34.1778852087663; Fri, 15 May 2026
+ 06:34:47 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260512161631.284143-1-ravi@prevas.dk>
-In-Reply-To: <20260512161631.284143-1-ravi@prevas.dk>
+References: <cover.1778665323.git.michal.simek@amd.com>
+ <ced1fd0e7b531fcfae9ee7c0a107ee660d27d580.1778665323.git.michal.simek@amd.com>
+In-Reply-To: <ced1fd0e7b531fcfae9ee7c0a107ee660d27d580.1778665323.git.michal.simek@amd.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 15 May 2026 07:33:03 -0600
-X-Gm-Features: AVHnY4LMGkH0pWbboIPPwWAyQ_r7sOhwAR15u0LnDQzPkgoCO0xSNL0eAybpCEU
-Message-ID: <CAFLszTisVttLYAOt5ZTR8un=MUMFGQ1Sa_sZ4UHZsTvkXK858g@mail.gmail.com>
-Subject: Re: [0/2] allow control DTB to double as "FIT image"
-To: ravi@prevas.dk
-Cc: u-boot@lists.denx.de
+Date: Fri, 15 May 2026 07:34:10 -0600
+X-Gm-Features: AVHnY4ILfWqz36KHZxg82RkFmOjffAi8GGImbVGS3RK4mNXcThJWoc055qcfiho
+Message-ID: <CAFLszTjgoxeVkyr+TLNOY0mURhRQPv=RUCp+4ZP0zjSD30vfAQ@mail.gmail.com>
+Subject: Re: [PATCH v3 3/5] reset: sandbox: Cover reset_reset() fallback with
+ second sandbox provider
+To: michal.simek@amd.com
+Cc: u-boot@lists.denx.de, git@amd.com, Simon Glass <sjg@chromium.org>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -107,31 +109,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Rasmus,
+Hi Michal,
 
-On 2026-05-12T16:16:29, Rasmus Villemoes <ravi@prevas.dk> wrote:
+On 2026-05-13T09:42:05, Michal Simek <michal.simek@amd.com> wrote:
+> reset: sandbox: Cover reset_reset() fallback with second sandbox provider
+>
+> Add a sandbox reset controller compatible string
+> 'sandbox,reset-ctl-fallback-only' that reuses the existing sandbox assert,
+> deassert, request, and free helpers but omits rst_reset. That forces
+> reset_reset() through the core assert / udelay / deassert fallback.
+>
+> Extend the reset-ctl-test DT node with a fifth reset line named 'fallback'
+> that points at the new provider, and add dm_test_reset_reset_fallback_path
+> which verifies sandbox_reset_get_count() stays zero (rst_reset is never
+> invoked) while the line ends deasserted after reset_reset().
+>
+> This complements the existing rst_reset coverage on sandbox,reset-ctl and
+> matches the approach of using a separate controller to exercise the
+> fallback path in unit tests.
+>
+> Signed-off-by: Michal Simek <michal.simek@amd.com>
+>
+> arch/sandbox/dts/test.dts     | 10 ++++++++--
+>  drivers/reset/sandbox-reset.c | 27 +++++++++++++++++++++++++++
+>  test/dm/reset.c               | 35 +++++++++++++++++++++++++++++++++++
+>  3 files changed, 70 insertions(+), 2 deletions(-)
 
-> RFC: allow the control DTB to act as a FIT image
+Reviewed-by: Simon Glass <sjg@chromium.org>
 
-Thanks for the write-up. Makes sense to me.
+> diff --git a/test/dm/reset.c b/test/dm/reset.c
+> @@ -151,6 +154,38 @@ static int dm_test_reset_reset(struct unit_test_state *uts)
+> +     ut_asserteq(0, sandbox_reset_query(dev_reset_fb, FALLBACK_RESET_ID));
+> +     ut_asserteq(0, sandbox_reset_get_count(dev_reset_fb, FALLBACK_RESET_ID));
+> +
+> +     ut_assertok(uclass_get_device_by_name(UCLASS_MISC, 'reset-ctl-test',
+> +                                           &dev_test));
+> +     ut_assertok(reset_get_by_name(dev_test, 'fallback', &ctl));
+> +     ut_asserteq_ptr(ctl.dev, dev_reset_fb);
+> +     ut_asserteq(ctl.id, FALLBACK_RESET_ID);
+> +
+> +     ut_assertok(reset_reset(&ctl, 1));
+> +     ut_asserteq(0, sandbox_reset_get_count(dev_reset_fb, FALLBACK_RESET_ID));
+> +     ut_asserteq(0, sandbox_reset_query(dev_reset_fb, FALLBACK_RESET_ID));
 
-A couple of series-level concerns beyond the per-patch comments.
+The line starts and ends deasserted, so this only proves rst_reset()
+was not invoked, not that the fallback pulsed the line. An
+implementation where reset_reset() returns 0 without doing anything
+would still pass.
 
-First, this needs documentation. The control DTB doubling as a FIT
-image, and 'source ${fdtcontroladdr}:foo' becoming a supported idiom,
-deserves a short page under doc/usage/ covering how to set up
-CONFIG_DEVICE_TREE_INCLUDES with an 'images' node, the constraints
-(script type, compression none, etc.) and the security argument from
-the cover letter.
+You could reset_assert() first, check the line reads asserted, then
+call reset_reset() and verify it comes back deasserted. That mirrors
+dm_test_reset_reset() from patch 2 and actually exercises the assert /
+udelay / deassert sequence.
 
-> I am of course happy to put this exemption for gd->fdt_blob under a
-> CONFIG_ knob if that is deemed necessary.
+> +     ut_asserteq_ptr(ctl.dev, dev_reset_fb);
+> +     ut_asserteq(ctl.id, FALLBACK_RESET_ID);
 
-Please decide this now rather than leaving it open. My preference is a
-Kconfig option (default n) so boards keep the strict
-fit_check_format() behaviour unless they opt in. That also gives a
-natural home for the doc/usage/ page and makes it discoverable via
-menuconfig. What do you think?
+ut_asserteq() takes (expected, actual), so this should be
+ut_asserteq(FALLBACK_RESET_ID, ctl.id).
 
 Regards,
 Simon
