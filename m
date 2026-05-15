@@ -4,90 +4,99 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08E87CD343F
-	for <u-boot@archiver.kernel.org>; Fri, 15 May 2026 18:24:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DFB9BCD4F3C
+	for <u-boot@archiver.kernel.org>; Fri, 15 May 2026 18:25:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 84748847C5;
-	Fri, 15 May 2026 20:24:49 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 7BEEF847C5;
+	Fri, 15 May 2026 20:25:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="niPSR1Lb";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="BShKTolZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 091028482F; Fri, 15 May 2026 20:24:48 +0200 (CEST)
-Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
- [IPv6:2607:f8b0:4864:20::32b])
+ id 9D7D484844; Fri, 15 May 2026 20:25:49 +0200 (CEST)
+Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
+ [IPv6:2a00:1450:4864:20::630])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CB26E846AE
- for <u-boot@lists.denx.de>; Fri, 15 May 2026 20:24:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 96B9D846AE
+ for <u-boot@lists.denx.de>; Fri, 15 May 2026 20:25:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32b.google.com with SMTP id
- 46e09a7af769-7e36bb16a92so84201a34.2
- for <u-boot@lists.denx.de>; Fri, 15 May 2026 11:24:45 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x630.google.com with SMTP id
+ a640c23a62f3a-bd0fc4c336eso11171866b.3
+ for <u-boot@lists.denx.de>; Fri, 15 May 2026 11:25:47 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1778869547; cv=none;
+ d=google.com; s=arc-20240605;
+ b=gF1Yq24pmpKx/vtAecVHu4VB2WakY71JsGChuY0IVJHbUKoVyhVp4Bi2IGYNlVxINM
+ rPAFzA0cWvE6TPz5cpg6IfbIbuRgpoSltEYFq2nKrQBzd1klK/PKIKnK4XxWq+IjJsYY
+ 2SaKtsmr+oQXYDi7zR71YzDL6va96r4sKXjjD+ZeHbJ5FP/dvJECN2O2IiI3+T0wJl5N
+ fgrNMFJC5FadywAKmRGJAhYjnWG9zNKJKqkUKPulqHW/YG7MRFTi8ctrQ313tQb5nFvz
+ kAv+x5eOnDkX4OPTlbZURd2rxmYyNhd0/fb4vbFq9kCRkyXjYUW2nZuLZFhFad0GUB7A
+ kTVQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=NKrxsh7vlFrvzpTe5HV7sEkvjSwqZFAx1avx2AlZ0XY=;
+ fh=sKlYf1RYFkU7W57k8Hb0RqRH+ropi6os4Aw4ruwQ2Xw=;
+ b=ZDT7Rt+ljTiSClGX7GuXk0+ACzx86bE3jucJ5rEnvjRR9W9eyPZc8yJn4x1WWZGq2l
+ zDWmtIm2IzN9pzOZ0L/K1Yt68CqlJokRMhTueNKAcokE62hQ/GmZ2qPbgVZ75C99KmVN
+ +YS/76lWJfTjP+8Gtd6ps0I6gTYCjBP8XJsTJ2kPD1ZbKRNSaIo23yJIU7iUQI9i8LtW
+ zPdNs1o/p3qF6RanEXYto/U+LT3MyvV1HrtJyyEb1aU+Z+/uXVfjPMXhUvlT+V8JSZhO
+ HjitWdAkhEMakoSqH6c81YL0g/YQBtPUXSx1UAjpPVmus0OYuUcGOGHRbV5Y0Pt+UGxu
+ 4YIQ==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1778869484; x=1779474284; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=U2cIhH8zY/kBt5spawXVm66sSHpR4B+S92qIO4pQIac=;
- b=niPSR1Lbg9L/DDJA9eihQo43udMHHBgoeSLaa2tEiCDxMHxgNDLnB1NEnxFnVZoAyV
- pxtcY9YEF2VY+lD0PG0LAOMEGI5zpEcNr+Gd66cFsiOaPNJJGliZ9w0GNw6GBV6wV/7w
- HFhAxbIy0qIz0vka9JS+FHguubXTG65P5grvo=
+ d=chromium.org; s=google; t=1778869547; x=1779474347; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=NKrxsh7vlFrvzpTe5HV7sEkvjSwqZFAx1avx2AlZ0XY=;
+ b=BShKTolZQLVNyTosvZok6jjPGNnoqOcNuqYw+U5NGVLAvnQEj4A/03ABrNwoiqxLW4
+ tlsYQNAz2DCF/dubAVsyPl+u6YDe6LtijUaGmJuTnsXqenGrEtVGzaNvWEtoXZgU4CRU
+ lzjT07Y98qODJ14ytDuY1VFK1TPhk33WJdEiw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778869484; x=1779474284;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=U2cIhH8zY/kBt5spawXVm66sSHpR4B+S92qIO4pQIac=;
- b=XZCm0UninMPm1Ht9A+TKnLGSq9xhNw8UDuJ3GSekggW2YmEDhZx85BPOrTFsxaJDnu
- IrlmvZG8GnvCQ/Vqxx9QpqSAfvI6rGt8R8UlNwt/Sx0fM9sd3SDMvHgkiz1U0tzE/xwS
- fa8/ZfPZR/5JwJKbJ+AwdP7qF6EAPJMC+UmiMfXGuP3gFucxTjWMFWnV91xGZzEKYvfz
- +9mtXJBtUBygln1Bwa93QXDE/UBeK3o0gECUwDhPLZyUlAeuQ8oPcPAaoGm9RYzkAHAB
- Q4jneXvMVrvAeUA/hla8n1gFRjo3teqIgoU+FPszRoQoZhF6gUYHFI4f19HWYDcfuDxp
- ZszQ==
-X-Forwarded-Encrypted: i=1;
- AFNElJ/0iYtR7whO9rfw1UcvsipknETetw3Rw+MhZ4dZAGbA/1hsOOFBXnkd+B480kKXYZW7XDCdo/A=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx+yjKaiTS39l7ijEeWa4oqV28edGvcQvtB9jMiUUNmJrhEsdm9
- Jut//7lSt1kJjRH590v4Kb9eVhht3+KyRqatUlWZ8stTDQGLBwULhWY0RsVuMU0xr58=
-X-Gm-Gg: Acq92OGSAHBd+MGT2lcqaCQFWfRd+Jm0EMuAMI6+Pcg0w4OD2aIptkzTld+VU8LAPRL
- Z8UQwrgJlMcKfrzHJOBs7mJVpqCDTq7ryN1jieev3UmlbbxqkmM2kony732FEXM5O/qvm951H07
- tRoAV45CyhqNfg9tFY8D/Kx+6OW90JxgA8pWChOUZ1zDjwD58JOUVupKWBxsrTJK1QfvSYWW/T1
- smdPf9c9Zh6qETEsQzpYfGgX1xBkaW5NSQRhYQCf8y1b6GYtBJWqJnePEvyZyaT+AT9wYylz8bc
- EEsu4OYaSmqBO7U7s1asjCf9jkl3Lrbffx+TSw6kCmsOoGGP2ISuMmws7lnnPWYN7I+oAi2EGxQ
- QyQFmo4yHqJ5zzN3vqlYFp9QvcltN/Kghjw/FLU9Y2cco3d1Gueg3BSqTchx7ySYr9tGh1KScrT
- RUF426DrCn94BUkRJWaXAUpe097bxXm3SPgHjLimo54VvnYHdyjPBTHluQNzJDV6CXpGNAeF9cm
- GcNlhGeicp/jlZsyYlQWYHWdpHD4vKXghnXcRf5wItbUEvZ1XHtL7F5oy8y7g==
-X-Received: by 2002:a05:6830:258a:b0:7dd:f615:a84e with SMTP id
- 46e09a7af769-7e4f2b667dcmr3705491a34.18.1778869484484; 
- Fri, 15 May 2026 11:24:44 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
- [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7e55b7c6b38sm1870528a34.2.2026.05.15.11.24.43
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 15 May 2026 11:24:43 -0700 (PDT)
-Date: Fri, 15 May 2026 12:24:41 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: nm@ti.com, Wadim Egorov <w.egorov@phytec.de>,
- ilias.apalodimas@linaro.org, marek.vasut+renesas@mailbox.org,
- sughosh.ganu@arm.com, u-boot@lists.denx.de, upstream@lists.phytec.de
-Subject: Re: [PATCH] Makefile: binman: Search board directory before srctree
-Message-ID: <20260515182441.GI1858239@bill-the-cat>
-References: <20260515054327.1033466-1-w.egorov@phytec.de>
- <20260515145400.GB1858239@bill-the-cat>
- <CAFLszTid-e+NWrFxoorfrUT23_mztUZP8FRbmT9FJ55M8A+FXA@mail.gmail.com>
- <20260515160256.GF1858239@bill-the-cat>
- <CAFLszThfUMe=67xwzbv6TvugH3iCOO=-EoYk6oUshKru-wpDQw@mail.gmail.com>
+ d=1e100.net; s=20251104; t=1778869547; x=1779474347;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=NKrxsh7vlFrvzpTe5HV7sEkvjSwqZFAx1avx2AlZ0XY=;
+ b=JovyNlZoCeLEEIlmBk/GpwB0eezMs6BD4uifGOcFfPDuMadec4XOYm/M4VkooF2bYk
+ PuWlxZACfd17qh3NGaIRyPqNB7Jyx8dbDYQpysfROnMXAVs48gGAf4OF4FxRoDr5dhS0
+ 6qG0P46XR/E0SolbJvmxoCVBbgJd+3ABGcR98fAhdGJpP+VdpEBZBuPv3YJ2yuI5xA5h
+ 3QDXynDmeUJnhsQBPVssFucR7rvXjGKr5w2cGlhh4HPli5k/yO0lHFgux8IlnemYPi6N
+ PG5PsLYdvC9PnJkBUYl88d9AS5kX51drfojreyYp3rMdMReBSxWj2YtLONT6Byfhh3cj
+ oLoA==
+X-Gm-Message-State: AOJu0YwlMIUB+SvNhXAchxkvJ1lKr7BYFTPxKBj2WEMk3OWnfMzOFPYH
+ 8+NsaHRmeVPKOsTIuz2G6XwtfSwFzM2hjtHIv4CqSOxxuykv2KXdfOG0hGIoRM6bsl7rrLeAd36
+ W9FXx+kGvBkh1pQIFMEUSSaWvtnL9kKmSVGOon4ohw2aAGjCTla4=
+X-Gm-Gg: Acq92OH0XpMife+YyPb2Gzw9F2uNOH7xQ74NLhL/AbSdiNC5YX8fr/CDMNlyyV8xZaR
+ vRhE3PybL55WepW7roWNfubNMsRPV/iCKcZkjRM7oyqnHgFDsSQaOj4o1lAi2VdeFjxW+3lQXlJ
+ G7Zi17KDrxqoxtAYCwkVbSh1ngaPJ7HFECoyVK6wtn0rT99NbFQr40RTfwBE38rdOlaaCRfNvOr
+ /8svt75b1/IyLwZeCIUgXiKeY/TClBBouEzlMlNReCQXqdljXSxE9TgD2XTFyJ923EKUPZ7oKrU
+ OwPxzQ==
+X-Received: by 2002:a17:906:7304:b0:bd5:2ed3:a407 with SMTP id
+ a640c23a62f3a-bd52ed3a7ffmr96228666b.5.1778869546876; Fri, 15 May 2026
+ 11:25:46 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="OW7sM1K8np7yahVq"
-Content-Disposition: inline
-In-Reply-To: <CAFLszThfUMe=67xwzbv6TvugH3iCOO=-EoYk6oUshKru-wpDQw@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20260424173151.371134-1-harsimransingh.tungal@arm.com>
+ <20260514124924.1804332-1-harsimransingh.tungal@arm.com>
+ <20260514124924.1804332-3-harsimransingh.tungal@arm.com>
+In-Reply-To: <20260514124924.1804332-3-harsimransingh.tungal@arm.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Fri, 15 May 2026 12:25:35 -0600
+X-Gm-Features: AVHnY4JtaRMiZ87sJIrvxSWQyGlBD3DwFf0jmNjhKzLvJe0OavexfD-n54DHCFM
+Message-ID: <CAFLszTiHPguTVCYGMqWWAj_efuzLTh7gGObi82Lky9dXvrbD3Q@mail.gmail.com>
+Subject: Re: [PATCH v2 02/11] arm-ffa: add FF-A bus runtime support
+To: harsimransingh.tungal@arm.com
+Cc: u-boot@lists.denx.de, abdellatif.elkhlifi@arm.com, trini@konsulko.com, 
+ ilias.apalodimas@linaro.org, xypron.glpk@gmx.de, hugues.kambampiana@arm.com, 
+ sjg@chromium.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,98 +113,166 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Harsimran,
 
---OW7sM1K8np7yahVq
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 2026-05-14T12:49:13, Harsimran Singh Tungal
+<harsimransingh.tungal@arm.com> wrote:
+> arm-ffa: add FF-A bus runtime support
+>
+> Enable FF-A runtime transport for EFI services
+>
+> Add the FF-A runtime infrastructure needed after ExitBootServices() so
+> EFI runtime services can continue to use the FF-A transport layer.
+> Introduce drivers/firmware/arm-ffa/arm-ffa-runtime.c and
+> include/arm_ffa_runtime.h with runtime-resident FF-A helpers for
+> direct messaging, SMC invocation, and error translation. Add the
+> sandbox runtime SMC wrapper, the ARM_FFA_RT_MODE Kconfig option, and
+> the ExitBootServices hook that copies the required FF-A runtime data
+> into resident storage before enabling the runtime context.
+>
+> Tag the runtime code and data with __efi_runtime and
+> __efi_runtime_data so they remain available after
+> ExitBootServices().
+>
+> Signed-off-by: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
+>
+> ----
+> [...]
+>
+> drivers/firmware/arm-ffa/Kconfig           |  11 ++
+>  drivers/firmware/arm-ffa/Makefile          |   4 +-
+>  drivers/firmware/arm-ffa/arm-ffa-runtime.c | 295 +++++++++++++++++++++++=
+++++++
+>  drivers/firmware/arm-ffa/arm-ffa-uclass.c  | 113 ++---------
+>  drivers/firmware/arm-ffa/arm-ffa.c         |  16 +-
+>  drivers/firmware/arm-ffa/ffa-emul-uclass.c |  12 ++
+>  include/arm_ffa.h                          |  16 +-
+>  include/arm_ffa_priv.h                     |  22 ++-
+>  include/arm_ffa_runtime.h                  | 191 +++++++++++++++++++
+>  test/dm/ffa.c                              |   6 +-
+>  10 files changed, 566 insertions(+), 120 deletions(-)
 
-On Fri, May 15, 2026 at 12:13:50PM -0600, Simon Glass wrote:
-> Hi Tom,
->=20
-> On Fri, 15 May 2026 at 10:03, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Fri, May 15, 2026 at 09:35:10AM -0600, Simon Glass wrote:
-> > > Hi Tom,
-> > >
-> > > On Fri, 15 May 2026 at 08:54, Tom Rini <trini@konsulko.com> wrote:
-> > > >
-> > > > On Fri, May 15, 2026 at 07:43:27AM +0200, Wadim Egorov wrote:
-> > > >
-> > > > > A file like rm-cfg.yaml accidentally left in the source tree root
-> > > > > shadows the board-specific copy. binman builds the wrong YAML, the
-> > > > > resulting rm-cfg.bin may match a different SoC, and we end up with
-> > > > > the following error:
-> > > > >
-> > > > >   k3_system_controller sysctrler: k3_sysctrler_start:
-> > > > >       Boot Notification response failed. ret =3D -110
-> > > > >
-> > > > > Move the board directory ahead of the srctree root so that the
-> > > > > most-specific match wins.
-> > > > >
-> > > > > Signed-off-by: Wadim Egorov <w.egorov@phytec.de>
-> > > > > ---
-> > > > >  Makefile | 2 +-
-> > > > >  1 file changed, 1 insertion(+), 1 deletion(-)
-> > > > >
-> > > > > diff --git a/Makefile b/Makefile
-> > > > > index 552328f9f2c..1ec29dfe0be 100644
-> > > > > --- a/Makefile
-> > > > > +++ b/Makefile
-> > > > > @@ -1682,7 +1682,7 @@ cmd_binman =3D $(srctree)/tools/binman/binm=
-an $(if $(BINMAN_DEBUG),-D) \
-> > > > >               build -u -d $(binman_dtb) -O . -m \
-> > > > >               --allow-missing --fake-ext-blobs \
-> > > > >               $(if $(BINMAN_ALLOW_MISSING),--ignore-missing) \
-> > > > > -             -I . -I $(srctree) -I $(srctree)/board/$(BOARDDIR) \
-> > > > > +             -I . -I $(srctree)/board/$(BOARDDIR) -I $(srctree) \
-> > > > >               $(foreach f,$(of_list_dirs),-I $(f)) -a of-list=3D$=
-(of_list) \
-> > > > >               $(foreach f,$(BINMAN_INDIRS),-I $(f)) \
-> > > > >               -a atf-bl1-path=3D${BL1} \
-> > > >
-> > > > Why do we need to look in $(srctree) itself?
-> > >
-> > > See for example:
-> > >
-> > > arch/arm/dts/k3-j721e-binman.dtsi:308:  private-key =3D
-> > > "arch/arm/mach-k3/keys/custMpk.pem";
-> >
-> > That's not great, I'm sorry I missed it at the time. I wonder how easy
-> > replacing that key is with a non-dummy key. Hopefully it's done in a way
-> > that doesn't encourage checking private keys in to repositories..
->=20
-> Typically we would use an environment var passed in from the Makefile,
-> as we do with BL31, TEE, TI_DM, etc.
->=20
-> >
-> > > Also, people sometimes put files in the source tree, e.g. BL31 images,
-> > > in the hope that they will be found.
-> >
-> > That's also a bad practice and what BINMAN_INDIRS is for.
->=20
-> Yes, but that came quite a bit later with the bintool stuff (2021).
->=20
-> Anyway, with a bit of work I believe we could drop the source dir.
-> Would you like to look at it, or should I?
+Reviewed-by: Simon Glass <sjg@chromium.org>
 
-Well, the first step would be getting some more feedback on how people
-override some of these files for example. Even more environment files
-seems like a bad idea and I'm not sure what BINMAN_INDIRS can't cover
-today.
+> diff --git a/drivers/firmware/arm-ffa/arm-ffa-uclass.c b/drivers/firmware=
+/arm-ffa/arm-ffa-uclass.c
+> @@ -1024,6 +937,7 @@ int ffa_rxtx_unmap(struct udevice *dev)
+>  static int ffa_do_probe(struct udevice *dev)
+>  {
+>       int ret;
+> +     struct ffa_priv *uc_priv =3D dev_get_uclass_priv(dev);
+>
+>       ret =3D ffa_get_version_hdlr(dev);
+>       if (ret)
+> @@ -1033,6 +947,12 @@ static int ffa_do_probe(struct udevice *dev)
+>       if (ret)
+>               return ret;
+>
+> +     if (IS_ENABLED(CONFIG_ARM_FFA_RT_MODE)) {
+> +             ret =3D ffa_setup_efi_exit_boot_services_event(uc_priv);
+> +             if (ret)
+> +                     return ret;
+> +     }
+> +
+>       ret =3D ffa_get_rxtx_map_features_hdlr(dev);
 
---=20
-Tom
+The event is installed before the rxtx-map and partition-cache steps.
+If any of those later steps fail, probe returns nonzero but the EBS
+event stays registered against this uc_priv. When ExitBootServices()
+fires the notifier still copies priv->rt and calls
+ffa_enable_runtime_context(), so runtime FF-A appears ready even
+though the bus never finished probing. Either install the event at the
+end of probe, or tear it down on the error paths.
 
---OW7sM1K8np7yahVq
-Content-Type: application/pgp-signature; name="signature.asc"
+> diff --git a/drivers/firmware/arm-ffa/arm-ffa-runtime.c b/drivers/firmwar=
+e/arm-ffa/arm-ffa-runtime.c
+> @@ -0,0 +1,295 @@
+> +#if IS_ENABLED(CONFIG_ARM_FFA_RT_MODE)
+> +static void EFIAPI ffa_rt_exit_boot_services_notify(struct efi_event *ev=
+ent,
+> +                                                 void *context)
+> +{
+> +     struct ffa_priv *priv =3D context;
+> +
+> +     if (priv) {
+> +             ffa_copy_runtime_priv(&priv->rt);
+> +     } else {
+> +             log_err("FF-A: runtime data missing, keeping RT mode disabl=
+ed\n");
+> +             return;
+> +     }
+> +
+> +     ffa_enable_runtime_context();
+> +}
 
------BEGIN PGP SIGNATURE-----
+Please flip this around - the usual U-Boot thing is an early-return guard:
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCagdk5gAKCRAr4qD1Cr/k
-CidlAP43kkK329OMyvw4l5jnUr/ho8UrquMfBp8/JAuASKFYggEAhLST0oTInPLr
-dNcDasgOkEczPYxG4Ll76sCiSbnQ8gY=
-=uFiT
------END PGP SIGNATURE-----
+   if (!priv) {
+           log_err("FF-A: runtime data missing, keeping RT mode disabled\n"=
+);
+           return;
+   }
+   ffa_copy_runtime_priv(&priv->rt);
+   ffa_enable_runtime_context();
 
---OW7sM1K8np7yahVq--
+Also, since the context is set when we create the event, this is
+essentially can't happen - drop to log_warn() or an assert.
+
+> diff --git a/drivers/firmware/arm-ffa/arm-ffa-runtime.c b/drivers/firmwar=
+e/arm-ffa/arm-ffa-runtime.c
+> @@ -0,0 +1,295 @@
+> +/* Error mapping declarations */
+> +
+> +int __ffa_runtime_data ffa_to_std_errmap[MAX_NUMBER_FFA_ERR] =3D {
+> +     [NOT_SUPPORTED] =3D -EOPNOTSUPP,
+
+Only referenced inside ffa_to_std_errno() in this file =E2=80=94 please mak=
+e
+it static. Also this is a definition, not a declaration.
+
+> diff --git a/drivers/firmware/arm-ffa/arm-ffa-uclass.c b/drivers/firmware=
+/arm-ffa/arm-ffa-uclass.c
+> @@ -1046,7 +966,6 @@ static int ffa_do_probe(struct udevice *dev)
+>               ffa_unmap_rxtx_buffers_hdlr(dev);
+>               return ret;
+>       }
+> -
+>       return 0;
+>  }
+
+Unrelated whitespace change - please drop (we normally have a blank
+line before the final return in a function).
+
+> diff --git a/drivers/firmware/arm-ffa/arm-ffa-runtime.c b/drivers/firmwar=
+e/arm-ffa/arm-ffa-runtime.c
+> @@ -0,0 +1,295 @@
+> +bool __ffa_runtime ffa_get_status_runtime_context(void)
+> +{
+> +     return ffa_runtime_enabled;
+> +}
+
+The name reads awkwardly - how about ffa_runtime_is_ready() or
+ffa_runtime_context_ready() ?. Same for ffa_enable_runtime_context() /
+ffa_reset_runtime_context() if you want to keep them parallel.
+
+>     arm-ffa: add FF-A bus runtime support
+>
+>     Enable FF-A runtime transport for EFI services
+>
+>     Add the FF-A runtime infrastructure needed after ExitBootServices() s=
+o
+>     EFI runtime services can continue to use the FF-A transport layer.
+>     Introduce drivers/firmware/arm-ffa/arm-ffa-runtime.c and
+>     include/arm_ffa_runtime.h with runtime-resident FF-A helpers for
+
+Please use single quotes rather than backticks throughout the commit
+message if you need them at all, also for CONFIG_ARM_FFA_RT_MODE /
+efi_memset_runtime() later on. Filenames such as
+drivers/firmware/arm-ffa/arm-ffa-runtime.c don't need quoting at all.
+
+Also, the single-line lede ('Enable FF-A runtime transport for EFI
+services') is redundant with the paragraph that follows - drop it and
+let the first paragraph carry the motivation.
+
+Regards,
+Simon
