@@ -4,130 +4,99 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08FAACD343F
-	for <u-boot@archiver.kernel.org>; Fri, 15 May 2026 13:09:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 227CACD4851
+	for <u-boot@archiver.kernel.org>; Fri, 15 May 2026 13:11:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9EE9F846A7;
-	Fri, 15 May 2026 15:09:47 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
+	by phobos.denx.de (Postfix) with ESMTP id A9F0D846A7;
+	Fri, 15 May 2026 15:11:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="QVSsNIWR";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="hbkTgBSl";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="jh5gG9An";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CD4DB846A7; Fri, 15 May 2026 15:09:46 +0200 (CEST)
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
- [205.220.180.131])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 54B73846AC; Fri, 15 May 2026 15:11:50 +0200 (CEST)
+Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
+ [IPv6:2a00:1450:4864:20::62c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 322F38464D
- for <u-boot@lists.denx.de>; Fri, 15 May 2026 15:09:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=oss.qualcomm.com
+ by phobos.denx.de (Postfix) with ESMTPS id 60D9F846A4
+ for <u-boot@lists.denx.de>; Fri, 15 May 2026 15:11:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=aswin.murugan@oss.qualcomm.com
-Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 64FBUdah3797373
- for <u-boot@lists.denx.de>; Fri, 15 May 2026 13:09:42 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- content-transfer-encoding:date:from:message-id:mime-version
- :subject:to; s=qcppdkim1; bh=+J+INwTeswAdg7vvqdhO8/bOz0jmUFFiyy+
- 04wRINwM=; b=QVSsNIWRywiMrTK8jUfYXX+mTbkp5Z8tdrHQ3aWSuVdB2EaqJ7m
- 468pdtRrTNET/2f8cqsOcvGcE54Nqkrcno4zkoo8GjBBg/JHZjaiypQNn6FnHRiE
- 8KyAicCwHh4HnTQl6nJrQF610nQqd/kq8cYKo/p5fj7ErmoH6OXKEc2ctqPlCAsR
- WMNY09mjI/cItsZOrH35Y9gM9oZjbbALkcZ9NpJCXCNWI0uWQDfkKtEoE/F9FemK
- 3JgOiIvApliX2OpANgZwHPvLXECdj8P2e7pEDBeHbxYVR9wigO+JEkB0JPRrN3KR
- p4h5F+z/SucvwEhGAQxSy3/7KlNbC53dvxg==
-Received: from mail-pf1-f198.google.com (mail-pf1-f198.google.com
- [209.85.210.198])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4e5m1sua26-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Fri, 15 May 2026 13:09:42 +0000 (GMT)
-Received: by mail-pf1-f198.google.com with SMTP id
- d2e1a72fcca58-83836443305so5258240b3a.1
- for <u-boot@lists.denx.de>; Fri, 15 May 2026 06:09:42 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-b936331786dso1166045566b.3
+ for <u-boot@lists.denx.de>; Fri, 15 May 2026 06:11:48 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1778850708; cv=none;
+ d=google.com; s=arc-20240605;
+ b=UeiG3wqsTmQj2twEyfvKTocXRFZW55/ZjG7/SlCGrP5+GAj0RGbHicpV6E+Rd/13yE
+ jTccbs55LrKXabkfyMymDVrgB/ehIuvNnuDaJX9qmsjR82+aXKCXT4elipjb/bWv3LRQ
+ Og00ZpjWdbMGQbHspSKi0qUQ823k0gBXT5YmSzYT9YlXdH5Mt8VDp1BEwG08wyv91B4i
+ RRWizWXn5vDrPECcsPWjKMgR0rfgheAU/jKtR4+keh1spzdYE9lm1Yq7BeFgpcPEFzwO
+ ZYpGS4Du78AhPkz8+dOq0AF4bvLesdHixh78Qj57il2UqA5AYj9Mf5b5lwD7m9rttabV
+ QCRw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=fwHSC6ndZ+el3QzmNy5qDLmH6FgKEyH51LTVrqbWueE=;
+ fh=BHJwo1NCU5Q1RuouQFc6mIvO5V5nJA16WaR8JNdAU2s=;
+ b=XVXqzN1e+mw+9iDhqyw1Vd+aE46GMd74zw+xDiW9mcGKJ0FLZkrxD2fdL3x8n18rV6
+ MCZptO1y+D4pHnTuY1pWY96wdi4mo4+dvxvcLeDcpxg7RAh1GZXerUF3UBV9WwUci5uX
+ cdc7pVjTpupVdgU8LOz5730duSqa6wRWycq+ZsyQc6fGxQX9IAH7WpxvoKkx9vOZ0Gp7
+ v+FVEA7Pny3UTo0pTU1kL6HSVLafs24oUwtxcsq9pBjDH2l+KfDfpx/SyxY2gYtlDuOD
+ 6RiwBfBuCpuZ/6nrs6Q+JD8m1OeYO5Yv/QZRXAMH4egpJ0GmK9ekTFLq/w0aK/3MdnIs
+ eBVQ==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1778850581; x=1779455381; darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=+J+INwTeswAdg7vvqdhO8/bOz0jmUFFiyy+04wRINwM=;
- b=hbkTgBSlpfRCOHaHpx9laIdU8ny1o9BKtF6DlvpHDZANYxTWeYlYKZs4t9FRR2EFR0
- p8nJlYmHR05r4kiPP6wW8AyeGT0wukpJUyYTXO560m6+gJk2HwaeIaju/8ePAUh9frzr
- 0wqKapTXiPG4vTnnmqC4RwiZHw3rpXehZxwPyhqYJ/MrCJ9iRdhnemo51mMSqdjndUFt
- 1vKQCTqgeKleFYqlKTcX4NPtJoBAl+aCvhl3kRMh22a0ZgfN5xDlMI6yBuTICxYgLXuD
- t7NQqkmAPcocdbf1NcwcM5CZ3Lm3xvjh8f+I3/WKTMj9+bPMvjH8cOXqOKAMEUCD2blS
- O52g==
+ d=chromium.org; s=google; t=1778850708; x=1779455508; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=fwHSC6ndZ+el3QzmNy5qDLmH6FgKEyH51LTVrqbWueE=;
+ b=jh5gG9AngRFsYe9e6emnGnEc/1iA6bQHkbHdU0mkcfnqprZZ6mC6ZNvxlwKfrBY15J
+ +2KKTbX4AZVu13gislxwp6C6dzdn/1Rd9sGFhHOeCP7PlPQZGO27Pmey+Ke2b07VdBVW
+ L+fdArd3oNp/pxDK9JcDTqs3XTywhlQNATgS8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778850581; x=1779455381;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=+J+INwTeswAdg7vvqdhO8/bOz0jmUFFiyy+04wRINwM=;
- b=CKyhgiV+t9sOOKBBZFRvjOm5CAlSI3y7GEXbqytZv0/xtQLzXDKoLd7v+4Iwivsi4S
- lFG5U8RJFD3vj2l7310XnzfnDoEzq0t0WKiI8IXCqNc+rO8V2YKvNeKO+ozvNGnlpqm7
- 9e7KMVraaOCYkwfjpkWCvIkqfXbSaUgRIX+dH/uLOk6YZCzrxgbLDrqhxUyY8Y1EcVeN
- d2fgf37DvYFT38jyHeQBVHe23v2zQ6vM0P38KlUX1NVVXQDsokT9gZumRj4Ah/gd03jK
- 7zyHcuxXKo5LpDzFBynvgCAdjVrzMbfB11nFGTG3s9NfNaz2BDhUs4eBGC6cc4SdIqeF
- xfXg==
-X-Forwarded-Encrypted: i=1;
- AFNElJ8V+BECRvDiXosw67ngdVaaKWlHqJ+o6V/h7AVPNreYrWOSC/BU2R6dPZKJVLikUNwzrvRiL2s=@lists.denx.de
-X-Gm-Message-State: AOJu0YxgwSW8UafeY8cBmnr6MEsiEjyNnRjzf0SXs526yHX+WKOBtjwt
- 3sGPcRudEw2FXKXeyMSxTtsCTrYSlSzdmzDR8devkG8CwQch/bTkrWGRxCjgEwPkjvHh1KZ9nHN
- 1MmU0/pmsyTMtl9QMNBqMfIjtshMPnCxPB9U1G+ZE+L92+ATT/xUefgSg
-X-Gm-Gg: Acq92OFgnPQ41Fr0VPI6+tuwoV/F5m/kkYZBu0LYymir744trXIMoQB6/PyxM+s1rLc
- PdMmbgw+n3EcBAXRDFW3zWO1Qjze2JpHCtMn+mIYAGRLaK3ObPJvXnCETNDQKd/HT4abZ7k22bg
- PrP25O6Ch6S7lCCY6jWwYBJkOpXMFwJdnKEUEOP5xyT2S0wsBOGuff30lRgR+85qu59lYKQ4zJq
- Hl0BmlMHhWF5HacNF5tiLQmB7ce2dRIXVIebUnandCf3WFW63VGyI7+JlvLYjyADsjbsLntF/Bi
- dl+xU5APTWjFe5t2QmS9bb8FQaK18KlblbOG0C4inRrQLBVfSPkBuZJbNc8D89HT7yxC/g+yVvx
- eU6nCN1N6WZOINUN7sy/41XZmOtsqDoN2JSiec5nw5qsYjZ2MnuKxpJmWuWnqdutUmW1b3ua++S
- DPY+UcYSjpRn2Nh58BHEErtA8Xq2F67mOZch2p1oWZ
-X-Received: by 2002:a05:6a00:4094:b0:82d:29f:d003 with SMTP id
- d2e1a72fcca58-83f33bf6a49mr5276464b3a.12.1778850581236; 
- Fri, 15 May 2026 06:09:41 -0700 (PDT)
-X-Received: by 2002:a05:6a00:4094:b0:82d:29f:d003 with SMTP id
- d2e1a72fcca58-83f33bf6a49mr5276419b3a.12.1778850580645; 
- Fri, 15 May 2026 06:09:40 -0700 (PDT)
-Received: from hu-aswinm-blr.qualcomm.com
- (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
- by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-83f19c5c045sm7493640b3a.37.2026.05.15.06.09.37
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 15 May 2026 06:09:40 -0700 (PDT)
-From: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
-To: trini@konsulko.com, casey.connolly@linaro.org, neil.armstrong@linaro.org, 
- sumit.garg@kernel.org, sjg@chromium.org, Michael.Srba@seznam.cz,
- aswin.murugan@oss.qualcomm.com, u-boot-qcom@groups.io, u-boot@lists.denx.de
-Subject: [PATCH v3] mach-snapdragon: Add early EL2 hypervisor switch support
-Date: Fri, 15 May 2026 18:39:34 +0530
-Message-Id: <20260515130934.388894-1-aswin.murugan@oss.qualcomm.com>
-X-Mailer: git-send-email 2.34.1
+ d=1e100.net; s=20251104; t=1778850708; x=1779455508;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=fwHSC6ndZ+el3QzmNy5qDLmH6FgKEyH51LTVrqbWueE=;
+ b=jByY6aBa3mALRjQlblBh6UhoHY/TqDRQoYcQM4bmLp+4gF2QQ15NnYLsx/7SmM2U0L
+ U4/5HOl+6u3sDLeyAI+BNi5umJTRD82xh2LfEpO37hVQS+T/A/R3/9wgWqE6Ly/Uokv+
+ XSnQBfA+WxTaiZ1uNTTDhte8h+t+2Afb6Ctf3a9Nh1jiLkrXViAzCOYG5cY2Fxq0rT6D
+ 7Q0XGpR0pfX6derBsvP7T8bHRoGagrq3aJYNQFIu45S2WRZI1XoXH+x7pewOG/+tiiYz
+ H7F0gapwLoASH3bBZwaQD+2ephxxbtSwPGiA4BVT32oetDNgKwQ35d6bCgZLDi4irJ9G
+ WTVw==
+X-Gm-Message-State: AOJu0YzgWLDKEknwgmqjz1CcOyuc1j6KN5wxXsFQkcUMbSLiBUDeJb6w
+ W0QPfBL5bNf4Xqt4+JzqqDzp9R4g40v+nBdx9A+ctFF7wvkbhY5Ko26IVHPPWKt03CiLzlahlXK
+ G7ErnXkKrKagXZ783M9dIYUCscGIUVwXUdACsgvhM
+X-Gm-Gg: Acq92OFKU+7/DMoByeKnlsU8T5XSLOeg+0s7P6a9WWjTvUX9u1Zh4YzEfOwR4CjxTzE
+ 5IVFjouq9RXgBbNK58POAx1VyeYkUiXkTGgJifEOkxXBpo1j0opaFnozwdaOTDFGKFr+GuRhtzj
+ x7vKY+4IfxnPGUfq1odA08rkLhz34H2T2NElBlQbiyy58C7Gg4KdWLSgQLqkzhEyFQgxFYkxCp/
+ WcvRevvntqa7GwEhwYLoJ4765JpG1UhS97kv+RVsJ5iNjjN4LDdTAWw9uxQN6M8TRRMYr09OiLT
+ d3q7wkJwEkJSSrx6
+X-Received: by 2002:a17:907:26c2:b0:bd4:72c8:140b with SMTP id
+ a640c23a62f3a-bd5177afec6mr205183166b.10.1778850707764; Fri, 15 May 2026
+ 06:11:47 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNTE1MDEzMyBTYWx0ZWRfX5eTLnF8azDsO
- KXbcMTcvWCRHhUUzsP0udaaWIKhMDUq3JXkHfqJhYc5JxQ67x2YJgk9TOBH1zQmJroBrMuGuWrl
- 2ZCAClfK893EltsOXppmBEPV89nGZQPrXln2kfshPv99c/tCZgYsEIQ6bzFV005ODfCOWoM2sne
- kOugVLxWc3tWj8cbEbW7oOdDJ65tcRCgiFGkRMZfnNR9bbMmjfJEimLZrsCpufVU//rm2h1j8GY
- /Wga+1ewqaHca/wL1reprV47vGXSH4U0yAXDFAkqhHTQYMBQJjTGpd7zw3BcXJ1ee2+qUUZ44fg
- vYy7z9FHqNJZDLJzCaUb+T52ir/WKSLnbmiLLm7Ib+SWpr4ic7oBraLIlWPJ8HUoZ+bwTOBcN2Y
- VHpPFOLl3/FcwevBP6o2s37q52GOLDwNldOejEWCQp0p954zd9O/4lLKM2/YD2N2KByMKhRhBXK
- pDCAJ6fYdQPZoXs54aw==
-X-Authority-Analysis: v=2.4 cv=cZXiaHDM c=1 sm=1 tr=0 ts=6a071b16 cx=c_pps
- a=m5Vt/hrsBiPMCU0y4gIsQw==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
- a=NGcC8JguVDcA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22 a=VwQbUJbxAAAA:8
- a=EUspDBNiAAAA:8 a=aHHwf1IshyYoWWdMeKcA:9 a=IoOABgeZipijB_acs4fv:22
-X-Proofpoint-GUID: 8sFHgs4yw8rxUDFNCyGR73pR-4e3a3I5
-X-Proofpoint-ORIG-GUID: 8sFHgs4yw8rxUDFNCyGR73pR-4e3a3I5
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
- definitions=2026-05-15_03,2026-05-13_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 spamscore=0 phishscore=0 suspectscore=0 adultscore=0
- bulkscore=0 impostorscore=0 malwarescore=0 clxscore=1015 priorityscore=1501
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2605130000 definitions=main-2605150133
+References: <cover.1778619453.git.aidan@wolfssl.com>
+ <20260513002625.76915-6-aidan@wolfssl.com>
+In-Reply-To: <20260513002625.76915-6-aidan@wolfssl.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Fri, 15 May 2026 07:11:35 -0600
+X-Gm-Features: AVHnY4KijeDTi9_MVPDsIdrxX0nBSFyztiLSuR-0goy7RfYOnMJzga2wpt_XvXU
+Message-ID: <CAFLszTjOuzKUug1te52YRdKLHdrmFVxTkPG4gg8bPmTYEADCeQ@mail.gmail.com>
+Subject: Re: [PATCH v4 06/14] sandbox: dts: add TPM SPI emulator node
+To: aidan@wolfssl.com
+Cc: u-boot@lists.denx.de, Peter Robinson <pbrobinson@gmail.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Tom Rini <trini@konsulko.com>, 
+ David Garske <david@wolfssl.com>, Simon Glass <sjg@chromium.org>,
+ Heiko Schocher <hs@nabladev.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -144,120 +113,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add support for exiting Gunyah hypervisor and switching to EL2 during
-early boot. This is required for platforms that boot U-Boot in a
-hypervisor guest environment where U-Boot needs to run at EL2 to
-enable other hypervisors like KVM.
+Hi Aidan,
 
-The switch is performed via TrustZone SMC call before EL register
-configuration in start.S. The implementation:
+On 2026-05-13T00:26:04, Aidan Garske <aidan@wolfssl.com> wrote:
+> sandbox: dts: add TPM SPI emulator node
+>
+> Add a 'sandbox,tpm-spi' slave on the existing sandbox SPI bus and
+> a matching 'sandbox,tpm-spi-emul' emulator node, so the sandbox
+> unit-test target can exercise SPI-attached TPM code paths without
+> real hardware.
+>
+> The slave device sits on CS 1 (CS 0 is the SPI-NOR flash emulator
+> that other sandbox tests use), and the slave's sandbox,emul
+> phandle points at the emulator node added at the root of the
+> sandbox device tree.
+>
+> Signed-off-by: Aidan Garske <aidan@wolfssl.com>
+>
+> arch/sandbox/dts/sandbox.dtsi | 11 +++++++++++
+>  1 file changed, 11 insertions(+)
 
-- Checks current exception level and only executes at EL1
-- Uses TrustZone SMC to exit Gunyah and transition to EL2
-- Integrates with existing boot0.h workaround infrastructure
+Reviewed-by: Simon Glass <sjg@chromium.org>
 
-A new Kconfig option CONFIG_QCOM_EL2_GUNYAH_EXIT_SUPPORT enables this
-functionality.
+> diff --git a/arch/sandbox/dts/sandbox.dtsi b/arch/sandbox/dts/sandbox.dtsi
+> @@ -286,6 +286,17 @@
+> +             tpm_spi: tpm@1 {
+> +                     reg = <1>;
+> +                     compatible = 'sandbox,tpm-spi';
+> +                     spi-max-frequency = <10000000>;
+> +                     sandbox,emul = <&tpm_spi_emul>;
+> +             };
 
-Signed-off-by: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
----
-Change in v3:
-- Corrected the logic to accurately detect the current Exception Level (EL)
-  and fuction properly when U-Boot enters either EL2 or EL1.
+Just to check - is there a reason this is in sandbox.dtsi rather than
+test.dts? Only the C unit tests in patch 12 exercise this emulator,
+and test-only nodes normally live in test.dts. The existing sandbox
+TPM nodes in sandbox.dtsi are arguably an exception rather than the
+rule. It's fine to have the node in both, though.
 
-Link to v2: https://lore.kernel.org/u-boot/20260515065632.90772-1-aswin.murugan@oss.qualcomm.com/
-
-Change in v2:
-- EL2 switch is made at early stage instead of doing at the very last stage in
-  the previous version
-- This change is based on the patch [1]
-
-[1] https://lore.kernel.org/all/20260508-qcom_spl-v7-4-7d0e22aaaa8f@seznam.cz/
-
-Link to v1: https://lore.kernel.org/u-boot/20260419173829.1074404-1-aswin.murugan@oss.qualcomm.com/
----
- arch/arm/mach-snapdragon/Kconfig              |  7 ++++
- arch/arm/mach-snapdragon/include/mach/boot0.h |  3 ++
- .../include/mach/gunyah_exit_boot0.h          | 35 +++++++++++++++++++
- 3 files changed, 45 insertions(+)
- create mode 100644 arch/arm/mach-snapdragon/include/mach/gunyah_exit_boot0.h
-
-diff --git a/arch/arm/mach-snapdragon/Kconfig b/arch/arm/mach-snapdragon/Kconfig
-index f863daf6bb9..931d25c1023 100644
---- a/arch/arm/mach-snapdragon/Kconfig
-+++ b/arch/arm/mach-snapdragon/Kconfig
-@@ -56,6 +56,13 @@ config BOOT0_MSM8916_PSCI_WORKAROUND
- 	help
- 	  Select this if you are building U-Boot proper for an msm8916 board that
- 	  uses the buggy PSCI implementation.
-+
-+config QCOM_EL2_GUNYAH_EXIT_SUPPORT
-+	bool "Enable early EL2 switch by exiting Gunyah"
-+	help
-+	  Exit Gunyah hypervisor and switch to EL2 during early boot. This must
-+	  happen before EL register configuration in start.S so that U-Boot can
-+	  run properly at EL2.
- endchoice
- 
- endif
-diff --git a/arch/arm/mach-snapdragon/include/mach/boot0.h b/arch/arm/mach-snapdragon/include/mach/boot0.h
-index b3c76d6d97d..032a9fbdb12 100644
---- a/arch/arm/mach-snapdragon/include/mach/boot0.h
-+++ b/arch/arm/mach-snapdragon/include/mach/boot0.h
-@@ -1,9 +1,12 @@
- /* SPDX-License-Identifier: GPL-2.0+ */
-+
- #if defined(CONFIG_SPL_BUILD)
- 	b	reset
- #else
- #if defined(CONFIG_BOOT0_MSM8916_PSCI_WORKAROUND)
- #include "msm8916_boot0.h"
-+#elif defined(CONFIG_QCOM_EL2_GUNYAH_EXIT_SUPPORT)
-+#include "gunyah_exit_boot0.h"
- #else
- 	b	reset
- #endif
-diff --git a/arch/arm/mach-snapdragon/include/mach/gunyah_exit_boot0.h b/arch/arm/mach-snapdragon/include/mach/gunyah_exit_boot0.h
-new file mode 100644
-index 00000000000..5c5bd3b6691
---- /dev/null
-+++ b/arch/arm/mach-snapdragon/include/mach/gunyah_exit_boot0.h
-@@ -0,0 +1,35 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+/*
-+ * Early Gunyah Hypervisor Exit
-+ *
-+ * Exit Gunyah hypervisor and switch to EL2 during early boot. This must
-+ * happen before EL register configuration in start.S so that U-Boot can
-+ * run properly at EL2.
-+ */
-+
-+#include <asm/macro.h>
-+#include <linux/arm-smccc.h>
-+
-+/* TrustZone SMC IDs for hypervisor configuration */
-+#define TZ_EL2_SWITCH_SMC_ID			0x02000121
-+#define TZ_EL2_SWITCH_PARAM_ID			0x00000023
-+#define TZ_EL2_SWITCH_PARAM2_EXIT_GUNYAH	0x1
-+
-+	/* Only perform hypervisor switch if we're at EL1 */
-+	switch_el x9, 3f, 2f, 1f
-+
-+	/* Save FDT address before we modify x0 */
-+1:	mov	x9, x0
-+
-+	/* Switch to EL2 (exit Gunyah) */
-+	ldr	w0, =TZ_EL2_SWITCH_SMC_ID
-+	ldr	w1, =TZ_EL2_SWITCH_PARAM_ID
-+	mov	w2, wzr
-+	mov	w3, wzr
-+	ldr	w4, =TZ_EL2_SWITCH_PARAM2_EXIT_GUNYAH
-+	smc	#0
-+
-+	/* Restore FDT address */
-+	mov	x0, x9
-+2:
-+3:	b	reset
--- 
-2.34.1
-
+Regards,
+Simon
