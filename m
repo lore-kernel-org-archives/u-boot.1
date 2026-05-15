@@ -4,102 +4,103 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8153BCD4851
-	for <u-boot@archiver.kernel.org>; Fri, 15 May 2026 07:34:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 470ACCD4851
+	for <u-boot@archiver.kernel.org>; Fri, 15 May 2026 07:39:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CDBD283AA9;
-	Fri, 15 May 2026 09:34:36 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 98F98838BB;
+	Fri, 15 May 2026 09:39:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="sAwQ9TVw";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="XyCYjNtC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5AF0B83EF9; Fri, 15 May 2026 09:34:35 +0200 (CEST)
-Received: from mail-yx1-xb12c.google.com (mail-yx1-xb12c.google.com
- [IPv6:2607:f8b0:4864:20::b12c])
+ id B46D2839D9; Fri, 15 May 2026 09:39:13 +0200 (CEST)
+Received: from mail-yx1-xb131.google.com (mail-yx1-xb131.google.com
+ [IPv6:2607:f8b0:4864:20::b131])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A0487838BB
- for <u-boot@lists.denx.de>; Fri, 15 May 2026 09:34:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 55AC5836AC
+ for <u-boot@lists.denx.de>; Fri, 15 May 2026 09:39:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yx1-xb12c.google.com with SMTP id
- 956f58d0204a3-65c7efdb7d8so11468883d50.3
- for <u-boot@lists.denx.de>; Fri, 15 May 2026 00:34:31 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1778830470; cv=none;
+Received: by mail-yx1-xb131.google.com with SMTP id
+ 956f58d0204a3-65c477a3278so10991619d50.3
+ for <u-boot@lists.denx.de>; Fri, 15 May 2026 00:39:10 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1778830749; cv=none;
  d=google.com; s=arc-20240605;
- b=eTxI9oUD3XPnZn4ss/ELnZ6O/r/QD+Fsb7IqDFAAt9BwwjMsHgcMrx9szi53alZQ8X
- zAQdSIFtusp8rwUPyI5Yjez36lSSeyQCILRLynKq60HmSYRr/hOqJAgJgnb7V25WERiZ
- lKWfYp0nDti5XYrLjdNE6fKPgEkBx5ROjFNwn8FbuelAfIY6q6UsVsdKMu63oQqhjtY2
- EUBV5A6dm98iUrZpWka4CUZ6WVnJEVthkBCM3dqSOr3jviqu57IWYyNVPjiXwg9Aztfv
- PSo+z3Y6L+1r/i8u8VwAb/fa2m3EwGYusXy5G+x7Q9DkXg2Cc9PNUrZgcZz1ZUrjXkIZ
- LKmg==
+ b=iDABhSkprkFRyAJgqXTzdCtFIIUVlfjVGIEeSHhDrjMD/GyQ43t471rRS0mfYnF+ke
+ BtPEDAbJ6L8K6ScgXTcheeZ1ZtKXxk3mBYFUWaq3o+QmNGjvtl94KRZwDF8L3XaCkpJ8
+ Ky7W32zY9E4NIVembcgcyBF/GgCTVYRCQEhyPU6fiUdJM/HGDmYcl85RyFm8R8a2tEg2
+ UZ3/SOcVLi1C5C/qQv2uyEymBHJiEwZY1iE5inCRp32Eev0j2jTjxoCzgk2KIIPu1mfe
+ iZ+bEvPJBGfurMuf0Bmu7KaamrEWqNBY+sJdcbKuLkQF/iH/zf6Z6GITY6w5ZYD9zIPn
+ LywA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=G3ItBA1HCCxdI+Aah5WL/t6YwLeEm8ZjUZ4I+NQYMVs=;
- fh=n3NeBbVEsH896qmKKSj+P5XnYtn+NtG3sfnKu/Fm1ic=;
- b=AMHVRbGufWmknPagSXR5rXV3K+xnwQEU15uY7Oc9BqK/wMs55bpa3aA14e0qINyp8D
- kW27ILZ/GtFYiXQl9LYAxCiRtPK8XJ5o69950UbcO6hDy2l6nCx6xcc4jUhRtMpMpjyh
- 0ErAm2cQvptV/3al6XPNwm7H7V9lRE0GBhTR+KU9f9/BvnQQgjmeV53DZsXQujirb97W
- qJrm1envWyImpgxUJQYz+LTu/hF9vaXh5tXUXNodO/IXqGeABl7bCFdM6d8req63fyUZ
- 6LCzlVIHRtRc439kDrfe+zTEDxwS1nhejZQdlOgUrIiPDWhaHr7KiLhUnCyoTQBOslpl
- 6mVg==; darn=lists.denx.de
+ bh=YWhvcbNhc3evB4nV7DZ4YrnkqFGFGqsKbEdYWXpsRqU=;
+ fh=dVa0TW8tP86BWtD/Q+x7fjJG8AULtcK3I90hkN1QKj4=;
+ b=DXdK6EaYB8XL7ekBQl/juMBAGj8Fgl9dDEex/ulV9p9lBHjC8FkLCCrSkpdZgA/2Uy
+ AU4AW1TaFi5ZthyDGJo/th2y+Hu0NZNBDfounKxc8KhDF0sZquqxHBEeBRoq7iezGwjU
+ yZ0hM2uAaZllB/GDK7kdKKwLn86laM+vjLJBNZyLXdRoc5lYKm4aur8jrZyB92Jwwp8f
+ G7HAlJ43QBqyGmxW64kGF8xwCNULy9tvrn6lKvTsMMeGwj4nPcI0O+z+IR6IxGZYOxDR
+ GTNHA+JA8dRFsFNkFbkj1HkVqRdHgRVgWw8hzXuLDFoKXFlUiffQuS5DfN6X9gto7aC0
+ l3AQ==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1778830470; x=1779435270; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1778830749; x=1779435549; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=G3ItBA1HCCxdI+Aah5WL/t6YwLeEm8ZjUZ4I+NQYMVs=;
- b=sAwQ9TVw+Q14+/5Wj+2cvp5hg7WaNvFniqfKFtYuOoUXaylSqRZkQGF3ObYqxYliiX
- Qvgqr3lxXgRnudQBJFqpJSOkiZuI9s+DZ3WsLuERIXjAeZ2F90ynZg0Y1Tr5cN9bs8K8
- upoKMdb4bBFW3cDarKkARZs2I9Pb/1JGddvhgGkKihs6c9bP+rDiY0+ggXjRf2xmAZWF
- yO1ixfSc5FYifOiw1dJ+G3GYWCcCsgTnB204X42E29H8KnpUAzzZQc8RIhE2Fy0cM5FQ
- O5xhKrw6EnCavvbypQaQksjZqaLjyoftd+cSZgixAjIw6gMbNeeSq7EwzazCC2vewHk5
- xJsQ==
+ bh=YWhvcbNhc3evB4nV7DZ4YrnkqFGFGqsKbEdYWXpsRqU=;
+ b=XyCYjNtCVmcIjgQD30aLrURQbQoS19/yc5ftNZjU47A+SCGo3oenNw59cA8Jx8jDu1
+ ITTcrHDGWePJELG6egVhC8oQFytiBpjY7XEB1vkTjA8NNR7A1bkiGmYYBQgZER9JHGi1
+ n1/j4EclNSPA5gCGMDcR1m+XKzLekJi0gRVtfrLdn9Q2cGGQNZb99v8LlzM28xSPXZFB
+ Sq6hTl6/Qxk8CAZ8QGmfTiOgnIiVeBApvxDNjQDMGAU+p/H01ZJw+yIKXlzcd4SAeo+O
+ +vdepjpzsodJC7nuIIhQ+4sYCivCY4LSwTuUlubNFNhFb+nRduwy9pFiKGuUpkYPMXrV
+ vOcA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778830470; x=1779435270;
+ d=1e100.net; s=20251104; t=1778830749; x=1779435549;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=G3ItBA1HCCxdI+Aah5WL/t6YwLeEm8ZjUZ4I+NQYMVs=;
- b=lTj/3DPhOM9gyAbOMoCZ95pF9FHOUPHfAOk1yCdkHQLjJ1Xtqh4H5DqBFzRxGLhApZ
- pQA2Em869fZiqyMfZDvFttCZniZX8iTbV3NhzDgFYxq3UmFrPcFqBk1EpA96+f7qQeoH
- ezn8fMGDm79v1ONK2UgW/qS0fLvQcCuT8jlSih5SeAujTH/0j9Ihgxip6wCeW8Xmv/k0
- kWJ6qGJZNEIreMdz2Q+Xx6xyDcOdB75ClOqVqBA55iD0/Ep71jLmxOmK8tJFVMrlveTp
- OvgNER1fcam0FobyL9l8bz4E+8HRMCdMERiqUGnWpBOGd8O6bak1I/A6R8Ld1mmmUYN8
- lVdA==
+ bh=YWhvcbNhc3evB4nV7DZ4YrnkqFGFGqsKbEdYWXpsRqU=;
+ b=JAn8MA160eNWCZG4vsV++HJrYGt0/whqvyhYZP1C+efjcxwlYFlP6IyaiG6JDuJugm
+ GBsBNApud2Hph6rM4jIKfPfmixiCcBIc/sjJYmQcWZ4wAUwDcRJT8UUc6NPjuhvuKF/e
+ SiVEM7rj2ZkNBkFNFOHbqTaoaah3eb6BOOEAUxTeHbXFiO6uXbq0xG9lxduZPXSht7iV
+ 8oOG6ctZkRum45c/fk0TlcVDgUbR0IcTzTSqn80u/t55fAHUpbW6PZctJJgRkWtxUi/R
+ JQoqLuf5HDWCHQS8nOpDRVRkrFpIg494nRYMrfjenVtezTFVspTgdFVjJ8fov3n3tF1D
+ r3+A==
 X-Forwarded-Encrypted: i=1;
- AFNElJ9QNLPEmGP9jkL0MtesMTY2jNDRNSRjZIHga+5lm6FuN3L8knVTo+GasgqNOv/7CwNWEGnxk+o=@lists.denx.de
-X-Gm-Message-State: AOJu0YwRgL92qNUMTt8ynDJQPlBeQpggnHxbkIC0rL/SssvwJF06FyNA
- uQueg6c6ggeX1pV4O73Hd7JapWnZ489a1BnCQVFmtc9EeBugxnlZBpCstoVXkDDTE9FL/PROnJn
- dzpSte2cSsUyyVfLu1yHR7JdQhp/abhdHijoTgc5yQw==
-X-Gm-Gg: Acq92OHeFJaGHQTu8PrGQZVRrZn3JuWy0CKjnXzklUNwtIgVdXUD/BuQivaMjVc8zfG
- Tj3Y1HrkbeIuLZgGEHOi+pmEE/Vr2dPcNkORCc0V00KpfGiSqkNZAdNd2S2p4wnbIQ8Q6MrAigN
- AM5rl40DlYttj+lCOl8TriPk3rRrDZa63Vs36IuB90JFvQ87JtkAVpTRwB4C0HpERW7RWaqID+2
- hUopQcgRBO2TMgF1ch6G9CQ2O6wpPT7HxDgqI2/KijWe5vg9i3hGvHcij5ejhkIyU3uOlm1lKmo
- 4bPuotA4P2L+qjmjsJ/hrJwiF+FK6i/zPgai+iLBJffNCmSIU7jV77yGq440hFTqRdICAs8sfWy
- vJw+9aW5uPaxpgTAod8e1aMnfZlnZTXQ7vblW1JBTU99RWGnWg+ZqHWwq204IeVrQz2ziMkGBtb
- gIYKthp9SQuHK8ytcfIYqionIdCs4XtRbmD732s/Gb/BTIpZPEcxnwx3fTWRBCo2x+ygnR2KAJ4
- Up00chsv1Z+XM/0JOqH//9Fggf0nUjq33ONiaZ7S8WdjrY1uj4XId6QTLa7sPwvktGCgPuCJ27j
- oxaemClxjPVUXs2FEoqOW4Mlaha8p9bfzlqVLkOlZoNQxC+oqA2c5cnZVlXIkir1hXmehh5/NkJ
- wHUV7Pg==
-X-Received: by 2002:a05:690e:4403:b0:651:be8b:e87e with SMTP id
- 956f58d0204a3-65e2284f03bmr2199964d50.34.1778830470374; Fri, 15 May 2026
- 00:34:30 -0700 (PDT)
+ AFNElJ9mRXmSt3S+WZzFziq8dxracrZoyxvhcMY7QCCZowF9xI/CnAVojOjgiRKj2W/OwVaHOhvsQ0s=@lists.denx.de
+X-Gm-Message-State: AOJu0YypV8Rim0tOVFXiC3TRGU8XYTSYSJS5XIXM68Gp/LcjFIgi7z67
+ mJwB4cNUUkGuQSSmcjN9dbgxEx5O8Gg+S5pkj53JOJJiVdUfOlQg76QBHcqc39+MLj1Lv/nWep2
+ H1iNxbn8Xl3FgMP532T+mVq2E12Z44dc1BdkE30RpNw==
+X-Gm-Gg: Acq92OH65z44YugxjSxQF8wLbF5OlkLFtJCDryFz6n2f4XESDAlwGYvCjKTfeATrGEE
+ NUdpBKqhnF5rY3fC05DHSRm8ToO7n8734VmA0Q4pA/VvXNEqKEuI7HHZ+Tf4aEs8mzJDQfT+Fjy
+ shSEikt0VFEsGxc6rZhJ9E6tW+ejePi0/Vbs6+8WbnEdNc2PMd726EZz4mEetkFWWHQP8eeIbKX
+ TkZmzus8Em2Elhy0yi/b0D2CtXK2rEDfZicX5D3itHAtOpBGNhbXlrNDtBStQPEI1u/hostJTFD
+ PzqLHkLqStLS3u/ziHpdZOceE9Eezy8b1VZ2mNmqvVbdWVzGWOnOe7UKUKgE6c4BGvyUYzzHINn
+ qF5NuQ8Cpsrc96JKKJSAl77LWRawQdL2UOhASCiWJ7f1i8LzPon04+K00KsybehxBNDpNsPLsMz
+ HSPjV+Pzc/suwDwk9DfME42t851bX/xiC77nqFDc/4BafnwjZVrzusOQ1VKNhQ55k9S6pS7GUOD
+ GubejJXFrRe3o5+F7kJY7CxGL57OHMz1D5rYJhmznTTP+BGwad7+B1pvxmiONT4Z/61kvlK/7Kq
+ ORo994i6owBxLmx86e78/pIxjapV+Ip2dFcp/G7XrbXHrvbzJJ3k57GdRdmCIcBiFud7PwkV7tO
+ 8lVsM2A==
+X-Received: by 2002:a05:690e:4385:b0:65c:1a0f:d8bf with SMTP id
+ 956f58d0204a3-65e2285e665mr2065949d50.50.1778830748860; Fri, 15 May 2026
+ 00:39:08 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260513204943.736142-1-rs@ti.com>
- <20260513204943.736142-3-rs@ti.com>
-In-Reply-To: <20260513204943.736142-3-rs@ti.com>
+ <20260513204943.736142-4-rs@ti.com>
+In-Reply-To: <20260513204943.736142-4-rs@ti.com>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 15 May 2026 10:33:54 +0300
-X-Gm-Features: AVHnY4IrE1T-jrRq3UU7d-4GiFSggehDhGKsZPrXZPqtG6vQ9KRrp8x7cq66E_4
-Message-ID: <CAC_iWjJwNLfLoPKrzK8=ZOsdR4VeH3wkYBDqZqRf4hP+_ObnHQ@mail.gmail.com>
-Subject: Re: [PATCHv8 2/3] test: boot: add a fdt reserved region check
+Date: Fri, 15 May 2026 10:38:32 +0300
+X-Gm-Features: AVHnY4L4H7imJVFdxWYZnj7tnOM-9n8rwr5EKisCbKFQbkHv4NEBkBAfRnQBN7o
+Message-ID: <CAC_iWjJnLi4apE7LY4b4VB5yujyjZhxEk+sbB50snkPk0wqiYA@mail.gmail.com>
+Subject: Re: [PATCHv8 3/3] memory: reserve from start_addr_sp to
+ initial_relocaddr
 To: rs@ti.com
 Cc: robertcnelson@gmail.com, ayush@beagleboard.org, 
  Erik.Welsh@octavosystems.com, anshuld@ti.com, bb@ti.com, trini@konsulko.com, 
@@ -125,148 +126,120 @@ On Wed, 13 May 2026 at 23:49, <rs@ti.com> wrote:
 >
 > From: Randolph Sapp <rs@ti.com>
 >
-> Add a image_fdt suite and a check for boot_fdt_add_mem_rsv_regions. This
-> will ensure the user is properly informed of any reservation failures.
-> It will also validate that reservations are cleaned up correctly when
-> switching FDTs.
+> Add a new global data struct member called initial_relocaddr. This
+> stores the original value of relocaddr, directly from setup_dest_addr.
+> This is specifically to avoid any adjustments made by other init
+> functions.
+>
+> Reserve the memory from gd->start_addr_sp - CONFIG_STACK_SIZE to
+> gd->initial_relocaddr instead of gd->ram_top. This allows platform
+> specific relocation addresses to work without unnecessarily painting
+> over a large range.
 >
 > Signed-off-by: Randolph Sapp <rs@ti.com>
+> Reviewed-by: Simon Glass <sjg@chromium.org>
 > ---
 
-Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 
 >
+> v7:
+>         - Reinstate bank hopping logic for U-Boot reserved region
+>         - Update description for gd->initial_relocaddr, make it clear this is
+>           also an exclusive value
+>         - Leave the PRAM region out of the reservation. Previous commit messages
+>           indicate that this is intended.
 > v8:
->         - Rework test_boot_fdt_add_mem_rsv_regions to mitigate lingering state
+>         - Adjust initial_relocaddr doc string
 >
->  test/boot/Makefile          |  1 +
->  test/boot/image_fdt.c       | 70 +++++++++++++++++++++++++++++++++++++
->  test/cmd_ut.c               |  2 ++
->  test/py/tests/test_suite.py |  2 +-
->  4 files changed, 74 insertions(+), 1 deletion(-)
->  create mode 100644 test/boot/image_fdt.c
+>  common/board_f.c                  | 9 ++++++++-
+>  include/asm-generic/global_data.h | 9 +++++++++
+>  lib/efi_loader/efi_memory.c       | 2 +-
+>  lib/lmb.c                         | 7 ++++---
+>  4 files changed, 22 insertions(+), 5 deletions(-)
 >
-> diff --git a/test/boot/Makefile b/test/boot/Makefile
-> index 89538d4f0a6..640af6593cd 100644
-> --- a/test/boot/Makefile
-> +++ b/test/boot/Makefile
-> @@ -14,6 +14,7 @@ endif
+> diff --git a/common/board_f.c b/common/board_f.c
+> index ce87c619e68..aeb53b4c274 100644
+> --- a/common/board_f.c
+> +++ b/common/board_f.c
+> @@ -330,6 +330,8 @@ __weak int arch_setup_dest_addr(void)
 >
->  ifdef CONFIG_SANDBOX
->  obj-$(CONFIG_$(PHASE_)CMDLINE) += bootm.o
-> +obj-$(CONFIG_$(PHASE_)OF_LIBFDT) += image_fdt.o
->  endif
->  obj-$(CONFIG_MEASURED_BOOT) += measurement.o
+>  static int setup_dest_addr(void)
+>  {
+> +       int ret;
+> +
+>         debug("Monitor len: %08x\n", gd->mon_len);
+>         /*
+>          * Ram is setup, size stored in gd !!
+> @@ -356,7 +358,12 @@ static int setup_dest_addr(void)
+>         gd->relocaddr = gd->ram_top;
+>         debug("Ram top: %08llX\n", (unsigned long long)gd->ram_top);
 >
-> diff --git a/test/boot/image_fdt.c b/test/boot/image_fdt.c
-> new file mode 100644
-> index 00000000000..778951c1290
-> --- /dev/null
-> +++ b/test/boot/image_fdt.c
-> @@ -0,0 +1,70 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +/*
-> + * Copyright (C) 2026 Texas Instruments Incorporated - https://www.ti.com/
-> + */
+> -       return arch_setup_dest_addr();
+> +       ret = arch_setup_dest_addr();
+> +       if (ret)
+> +               return ret;
 > +
-> +#include <config.h>
-> +
-> +#include <fdt_support.h>
-> +#include <image.h>
-> +#include <lmb.h>
-> +#include <malloc.h>
-> +
-> +#include <asm/global_data.h>
-> +
-> +#include <test/test.h>
-> +#include <test/ut.h>
-> +
-> +#define IMAGE_FDT_TEST(_name, _flags) UNIT_TEST(_name, _flags, image_fdt)
-> +
-> +DECLARE_GLOBAL_DATA_PTR;
-> +
-> +static int test_boot_fdt_add_mem_rsv_regions(struct unit_test_state *uts)
-> +{
-> +       phys_addr_t start = CFG_SYS_SDRAM_BASE + 0x100000;
-> +       const void *old_blob = gd->fdt_blob;
-> +       int ret = CMD_RET_FAILURE;
-> +       ulong fdt_sz;
-> +       int nodeoffset;
-> +       void *new_blob;
-> +
-> +       /* Default reservation should exist */
-> +       ut_asserteq(1, lmb_is_reserved_flags(start, LMB_NOMAP));
-> +
-> +       /* Attempting to re-reserve should warn the user */
-> +       boot_fdt_add_mem_rsv_regions(gd->fdt_blob);
-> +       ut_assert_nextlinen("ERROR: reserving");
-> +       ut_assert_console_end();
-> +
-> +       /* Loading a new_blob device tree should be allowed */
-> +       fdt_sz = fdt_totalsize(gd->fdt_blob);
-> +       new_blob = malloc(fdt_sz);
-> +       ut_assertok_ptr(new_blob);
-> +       memcpy(new_blob, gd->fdt_blob, fdt_sz);
-> +
-> +       nodeoffset = fdt_path_offset(new_blob, "/reserved-memory");
-> +       if (nodeoffset < 0)
-> +               goto free_blob;
-> +
-> +       if (fdt_del_node(new_blob, nodeoffset))
-> +               goto free_blob;
-> +
-> +       boot_fdt_add_mem_rsv_regions(new_blob);
-> +       gd->fdt_blob = new_blob;
-> +
-> +       if (ut_assert_console_end())
-> +               goto switch_fdt;
-> +
-> +       /* Reservation should not exist now */
-> +       if (!lmb_is_reserved_flags(start, LMB_NOMAP))
-> +               ret = 0;
-> +
-> +       /* Cleanup */
-> +switch_fdt:
-> +       boot_fdt_add_mem_rsv_regions(old_blob);
-> +       gd->fdt_blob = old_blob;
-> +free_blob:
-> +       free(new_blob);
-> +       return ret;
-> +}
-> +IMAGE_FDT_TEST(test_boot_fdt_add_mem_rsv_regions, UTF_LIVE_TREE | UTF_CONSOLE);
-> diff --git a/test/cmd_ut.c b/test/cmd_ut.c
-> index 44e5fdfdaa6..363ed4eab30 100644
-> --- a/test/cmd_ut.c
-> +++ b/test/cmd_ut.c
-> @@ -61,6 +61,7 @@ SUITE_DECL(fdt);
->  SUITE_DECL(fdt_overlay);
->  SUITE_DECL(font);
->  SUITE_DECL(hush);
-> +SUITE_DECL(image_fdt);
->  SUITE_DECL(lib);
->  SUITE_DECL(loadm);
->  SUITE_DECL(log);
-> @@ -88,6 +89,7 @@ static struct suite suites[] = {
->         SUITE(fdt_overlay, "device tree overlays"),
->         SUITE(font, "font command"),
->         SUITE(hush, "hush behaviour"),
-> +       SUITE(image_fdt, "image fdt parsing"),
->         SUITE(lib, "library functions"),
->         SUITE(loadm, "loadm command parameters and loading memory blob"),
->         SUITE(log, "logging functions"),
-> diff --git a/test/py/tests/test_suite.py b/test/py/tests/test_suite.py
-> index 7fe9a90dfd3..08285f12a5f 100644
-> --- a/test/py/tests/test_suite.py
-> +++ b/test/py/tests/test_suite.py
-> @@ -8,7 +8,7 @@ import re
->  EXPECTED_SUITES = [
->      'addrmap', 'bdinfo', 'bloblist', 'bootm', 'bootstd',
->      'cmd', 'common', 'dm', 'env', 'exit', 'fdt_overlay',
-> -    'fdt', 'font', 'hush', 'lib',
-> +    'fdt', 'font', 'hush', 'image_fdt', 'lib',
->      'loadm', 'log', 'mbr', 'measurement', 'mem',
->      'pci_mps', 'setexpr', 'upl',
->      ]
+> +       gd->initial_relocaddr = gd->relocaddr;
+> +       return 0;
+>  }
+>
+>  #ifdef CFG_PRAM
+> diff --git a/include/asm-generic/global_data.h b/include/asm-generic/global_data.h
+> index 745d2c3a966..8d1d49b1133 100644
+> --- a/include/asm-generic/global_data.h
+> +++ b/include/asm-generic/global_data.h
+> @@ -107,6 +107,15 @@ struct global_data {
+>          * GDB using the 'add-symbol-file u-boot <relocaddr>' command.
+>          */
+>         unsigned long relocaddr;
+> +       /**
+> +        * @initial_relocaddr: top address of U-Boot in RAM
+> +        *
+> +        * This should be the value of relocaddr after setup_dest_addr() and
+> +        * before reserve_pram() or any other allocations or reservations shift
+> +        * it. This address will, depending on the platform, be equivalent to
+> +        * ram_top and should also be considered an exclusive address.
+> +        */
+> +       unsigned long initial_relocaddr;
+>         /**
+>          * @irq_sp: IRQ stack pointer
+>          */
+> diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
+> index 046a2bb4641..9d7eda9422f 100644
+> --- a/lib/efi_loader/efi_memory.c
+> +++ b/lib/efi_loader/efi_memory.c
+> @@ -869,7 +869,7 @@ static void add_u_boot_and_runtime(void)
+>         /* Add U-Boot */
+>         uboot_start = ((uintptr_t)map_sysmem(gd->start_addr_sp, 0) -
+>                        uboot_stack_size) & ~EFI_PAGE_MASK;
+> -       uboot_pages = ((uintptr_t)map_sysmem(gd->ram_top - 1, 0) -
+> +       uboot_pages = ((uintptr_t)map_sysmem(gd->initial_relocaddr - 1, 0) -
+>                        uboot_start + EFI_PAGE_MASK) >> EFI_PAGE_SHIFT;
+>         efi_update_memory_map(uboot_start, uboot_pages, EFI_BOOT_SERVICES_CODE,
+>                               false, false);
+> diff --git a/lib/lmb.c b/lib/lmb.c
+> index 8f12c6ad8e5..27c8565e590 100644
+> --- a/lib/lmb.c
+> +++ b/lib/lmb.c
+> @@ -540,13 +540,14 @@ static void lmb_reserve_uboot_region(void)
+>         ulong pram = 0;
+>
+>         rsv_start = gd->start_addr_sp - CONFIG_STACK_SIZE;
+> -       end = gd->ram_top;
+> +       end = gd->initial_relocaddr;
+>
+>         /*
+>          * Reserve memory from aligned address below the bottom of U-Boot stack
+> -        * until end of RAM area to prevent LMB from overwriting that memory.
+> +        * until the original relocation address to prevent LMB from
+> +        * overwriting that memory.
+>          */
+> -       debug("## Current stack ends at 0x%08lx ", (ulong)rsv_start);
+> +       debug("## Current stack ends at 0x%08lx\n", (ulong)rsv_start);
+>
+>  #ifdef CFG_PRAM
+>         pram = env_get_ulong("pram", 10, CFG_PRAM);
 > --
 > 2.54.0
 >
