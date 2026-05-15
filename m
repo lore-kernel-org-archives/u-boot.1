@@ -4,107 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61BA2CD4851
-	for <u-boot@archiver.kernel.org>; Fri, 15 May 2026 21:59:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50D35CD343F
+	for <u-boot@archiver.kernel.org>; Fri, 15 May 2026 22:03:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EF32784713;
-	Fri, 15 May 2026 23:59:47 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id A6E9784713;
+	Sat, 16 May 2026 00:03:54 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="labb7VUI";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=arm.com header.i=@arm.com header.b="l+pBklfX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 73F41846DE; Fri, 15 May 2026 23:59:46 +0200 (CEST)
-Received: from mail-qk1-x731.google.com (mail-qk1-x731.google.com
- [IPv6:2607:f8b0:4864:20::731])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6281A8484C
- for <u-boot@lists.denx.de>; Fri, 15 May 2026 23:59:44 +0200 (CEST)
+ id AF4E784875; Sat, 16 May 2026 00:03:53 +0200 (CEST)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id EC4E9846DE
+ for <u-boot@lists.denx.de>; Sat, 16 May 2026 00:03:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=seanga2@gmail.com
-Received: by mail-qk1-x731.google.com with SMTP id
- af79cd13be357-90d665407baso5235685a.1
- for <u-boot@lists.denx.de>; Fri, 15 May 2026 14:59:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1778882383; x=1779487183; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=cWgETKwPBhkfKC/bp8ZhmhCXh1mVNu7krn1NSPYcG4Y=;
- b=labb7VUINoG0zTQ9o8vJ2CbPRaGHJZriQyWK1R215/PSd5hyZa5wvyKLYNJ61Gxnz5
- i6rom4hkPDaBIHirB/v7ZXOUHd9aSJ5aA4pGaeC7ax5I0BtSDCLG5wYi846zQo1Vo7J4
- 9JVacccMPhhGoO+NDI4TGCq/WJfjVugb6gwYIi4qm0ARswfKxYmuRJdKaomojux17KwT
- JXTc1NxxZ66YB4K5De/DND6PsqvJ01Xh7v1lp6C+pLbRtPKgXGqLeXLZreyFnywUtuAE
- gIWLfytXGNWQAbtkqnCjTVoGpPFepQQlRbIl3RqkDmUVWNta4/Jwp7RTmsnImWQxangz
- pmEw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778882383; x=1779487183;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=cWgETKwPBhkfKC/bp8ZhmhCXh1mVNu7krn1NSPYcG4Y=;
- b=BgBivkjLkvWZPiF5Qzjf8ubYbX3i05ukXx4e49lVm5LcGDKMF9jnOwxXQlgipsvWjk
- i5ak6uVeR2iQOToj+5KM7heFv4HbRBwmkbrsnfxCxzyi/khZzRgWwCNpyTKP14IywLWN
- 6TJM1x7J7W4X8kPJb0bXYvkDA/Z43lNSDrCwktHKoTfr3a4G7wzjliy5IQhubkJxXR82
- 1nz2NQp+j2vSUJEnhVj31oPbdWDa3BMer2kliYa1DEfobl39Kw+DZNAXNCWidO6hp5DJ
- eg8UPWXXWstnelUiS/0D/XjW4T1xlTU4xcyGVZ43QgXFehqasSH7SiLz5FJJ1my7XDUP
- /geQ==
-X-Gm-Message-State: AOJu0YzU1Mpgi1PJZarN3C+mzzjecwsL1wHR1runvYX9y+Ro6U5Wjymx
- 1OfZwrJTwRaECEbZssYu3JGXrF8wiu+0UwHGbke/l5jwwiR3r1xHCt85
-X-Gm-Gg: Acq92OF6VotX9uJlrOLvH4M0437FMvScK7+BMYsUHRT+l+coS1V1IU2+ewWiUmChTV2
- ADg7IMeAiR4HMaL1nVRbWzIm3SjlZNHfid9CJgtacUX8SDl6VgwIUuJyxncSodTZ5z6+Asd9CjU
- WnaYMiEnjVzUSXq/TZOd4btOaiNgafDEPCFZYfGB8DQuLH8Qy11KnmDVTITf5XFQRAhMdRqg23A
- tYBf7hdCLS92YTO92zeMA26UkSIE7T5AMVqxlnatF48SgU2Fqjla5/eYTCnKrHg/ciLReoRfUJP
- +31hH3dY1KH6nVLvbK2c6Ik4DjMXc1oTzrQH5SV50zh8LH6yI+uLg7ASbzN0zHgoUFbDV1dRx2T
- 8OPlhf8EnOq+23tG+8eHpzS3+ZT/93DjsCVh6KN3YT4AFTLGNA0qxWSYiCR+D6SBngjDNRGAc/p
- Ip70sbvHkTO814gogw6hXtviwdIDO7aY5jvhvQrrgVtSu4BOnVt7C26neuldvKU09hh4A=
-X-Received: by 2002:a05:620a:1997:b0:8ef:2118:aecd with SMTP id
- af79cd13be357-911cae1542emr634320585a.0.1778882383050; 
- Fri, 15 May 2026 14:59:43 -0700 (PDT)
-Received: from ?IPV6:2600:4040:4477:d400:2d8:61ff:fe7c:5d59?
- ([2600:4040:4477:d400:2d8:61ff:fe7c:5d59])
- by smtp.gmail.com with ESMTPSA id
- af79cd13be357-910bc83bbf5sm672516285a.28.2026.05.15.14.59.41
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 15 May 2026 14:59:42 -0700 (PDT)
-Message-ID: <15041974-8838-56b6-b9d5-250383ed2625@gmail.com>
-Date: Fri, 15 May 2026 17:59:41 -0400
+ spf=pass smtp.mailfrom=andre.przywara@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 01C801C2B;
+ Fri, 15 May 2026 15:03:45 -0700 (PDT)
+Received: from ryzen.lan (usa-sjc-mx-foss1.foss.arm.com [172.31.20.19])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id E7F853F836;
+ Fri, 15 May 2026 15:03:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
+ t=1778882630; bh=BfX9ofK59ORHm/0n+D+Hs177I1pYVM1TC+R3ortadn0=;
+ h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+ b=l+pBklfXdGvLNMSckncl4erMwa1vAPbwCVRa92X1IjYNSvWDsYN6nVZQbde89T/R1
+ g/3yVD/HHHItcF4g1W+LVsiFFakYiGXw0PJ/sdLDfujQyRgRk9H3e39rwqkItHYzc7
+ CDfQiY/1dOEAZQqvvZLsGfiLTbYS5L0Ye8Rw6BR0=
+Date: Sat, 16 May 2026 00:03:06 +0200
+From: Andre Przywara <andre.przywara@arm.com>
+To: Jernej =?UTF-8?B?xaBrcmFiZWM=?= <jernej.skrabec@gmail.com>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, Chen-Yu Tsai
+ <wens@kernel.org>, Paul Kocialkowski <contact@paulk.fr>,
+ linux-sunxi@lists.linux.dev
+Subject: Re: [PATCH 2/5] sunxi: spl: spi: Clean up SPI0 pinmux setting
+Message-ID: <20260516000306.51d585d4@ryzen.lan>
+In-Reply-To: <hxKgmanzT_ibK5FkulnCYg@gmail.com>
+References: <20260511213713.15943-1-andre.przywara@arm.com>
+ <20260511213713.15943-3-andre.przywara@arm.com>
+ <hxKgmanzT_ibK5FkulnCYg@gmail.com>
+Organization: Arm Ltd.
+X-Mailer: Claws Mail 4.4.0 (GTK 3.24.31; x86_64-slackware-linux-gnu)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.11.0
-Subject: Re: [RFC PATCH 00/11] Tidy command option parsing and use it a bit
-Content-Language: en-US
-To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, Andrew Goodbody <andrew.goodbody@linaro.org>,
- =?UTF-8?Q?Beno=c3=aet_Th=c3=a9baudeau?= <benoit.thebaudeau@advansee.com>,
- Casey Connolly <casey.connolly@linaro.org>, Daniel Palmer
- <daniel@thingy.jp>, Heiko Schocher <hs@nabladev.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Hugo Villeneuve <hvilleneuve@dimonoff.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@arm.com>,
- Joe Hershberger <joe.hershberger@ni.com>,
- "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Michal Simek <michal.simek@amd.com>,
- Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
- Patrice Chotard <patrice.chotard@foss.st.com>, Peng Fan <peng.fan@nxp.com>,
- Peter Robinson <pbrobinson@gmail.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>,
- Yao Zi <me@ziyao.cc>
-References: <20260515203311.2555651-1-sjg@chromium.org>
- <20260515214305.GL1858239@bill-the-cat>
-From: Sean Anderson <seanga2@gmail.com>
-In-Reply-To: <20260515214305.GL1858239@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -121,38 +68,107 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 5/15/26 17:43, Tom Rini wrote:
-> On Fri, May 15, 2026 at 02:32:51PM -0600, Simon Glass wrote:
-> 
->> We have had getopt() for over five years but it is not much used. It is
->> much easier to understand arg-parsing using getopt() and it avoids
->> common errors. As the named maintainer I decided to look at how to make
->> more use of it.
->>
->> So this series explores the impact of converting a few commands to use
->> getopt() instead of ad-hoc parsing. It updates getopt() to handle flags
->> anywhere in the cmdline and provides a few helpers to reduce
->> boilerplate.
->>
->> The chosen commands are:
->>
->> - echo: very simple with no flags
->> - hash: fairly simple with just one flag
->> - env grep/export/import - fuller examples
->>
->> The series also adds a recommendation to use getopt() for new commands.
->>
->> To try to reduce the code-size increase, a lower-case function is added
->> and called from a few places. The difference is fairly marginal.
->>
->> Overall, the result is not pretty (see below) with about a 1.1K size
->> increase on arm64:
-> 
-> I think that means this is a no-go, and you need to work out what might
-> lead to a much smaller growth here.
-> 
+On Tue, 12 May 2026 19:37:06 +0200
+Jernej =C5=A0krabec <jernej.skrabec@gmail.com> wrote:
 
-Unfortunately, the only way to get a size reduction is to convert as many
-commands as possible.
+> Dne ponedeljek, 11. maj 2026 ob 23:37:10 Srednjeevropski poletni =C4=8Das=
+ je Andre Przywara napisal(a):
+> > The function to set the pinmux for the Port C SPI0 pins was looking more
+> > like a logic puzzle from a magazine than something that readers could
+> > understand and extend.
+> >=20
+> > Replace the convoluted pinmux setup, grouped by pin, with a simple array
+> > of the four pins involved, and just initialise this array at build time,
+> > based on the selected SoC.
+> >=20
+> > This makes it easy to see which pins are needed, and even easier to ext=
+end.
+> >=20
+> > Signed-off-by: Andre Przywara <andre.przywara@arm.com>
+> > ---
+> >  arch/arm/mach-sunxi/spl_spi_sunxi.c | 43 ++++++++++++-----------------
+> >  1 file changed, 18 insertions(+), 25 deletions(-)
+> >=20
+> > diff --git a/arch/arm/mach-sunxi/spl_spi_sunxi.c b/arch/arm/mach-sunxi/=
+spl_spi_sunxi.c
+> > index 5f72e809952..905a7db2a77 100644
+> > --- a/arch/arm/mach-sunxi/spl_spi_sunxi.c
+> > +++ b/arch/arm/mach-sunxi/spl_spi_sunxi.c
+> > @@ -105,35 +105,28 @@
+> > =20
+> >  /*
+> >   * Allwinner A10/A20 SoCs were using pins PC0,PC1,PC2,PC23 for booting
+> > - * from SPI Flash, everything else is using pins PC0,PC1,PC2,PC3.
+> > - * The H6 uses PC0, PC2, PC3, PC5, the H616 PC0, PC2, PC3, PC4.
+> > + * from SPI Flash, later SoCs are using pins PC0,PC1,PC2,PC3.
+> > + * Newer SoCs are all over the place.
+> >   */
+> >  static void spi0_pinmux_setup(unsigned int pin_function)
+> >  {
+> > -	/* All chips use PC2. And all chips use PC0, except R528/T113 */
+> > -	if (!IS_ENABLED(CONFIG_MACH_SUN8I_R528))
+> > -		sunxi_gpio_set_cfgpin(SUNXI_GPC(0), pin_function);
+> > -
+> > -	sunxi_gpio_set_cfgpin(SUNXI_GPC(2), pin_function);
+> > +	const u16 spi0_pc_pins[4] =3D {
+> > +#if IS_ENABLED(CONFIG_MACH_SUN8I_R528)
+> > +		SUNXI_GPC(2), SUNXI_GPC(3), SUNXI_GPC(4), SUNXI_GPC(5)
+> > +#elif IS_ENABLED(CONFIG_MACH_SUN50I_H616)
+> > +		SUNXI_GPC(0), SUNXI_GPC(2), SUNXI_GPC(3), SUNXI_GPC(4)
+> > +#elif IS_ENABLED(CONFIG_MACH_SUN50I_H6)
+> > +		SUNXI_GPC(0), SUNXI_GPC(2), SUNXI_GPC(3), SUNXI_GPC(5)
+> > +#elif IS_ENABLED(CONFIG_MACH_SUN4I) || IS_ENABLED(CONFIG_MACH_SUN5I) |=
+| \ =20
+>=20
+> Are you sure about CONFIG_MACH_SUN5I? It seems to me that it should fall =
+to PC3 pin.
+> Also A13 datasheet confirms it.
 
---Sean
+Yes, you are right, good catch, will fix that!
+
+Thanks for having a look!
+
+Cheers,
+Andre
+
+>=20
+> Best regards,
+> Jernej
+>=20
+> > +      IS_ENABLED(CONFIG_MACH_SUN7I) || IS_ENABLED(CONFIG_MACH_SUN8I_R4=
+0)
+> > +		SUNXI_GPC(0), SUNXI_GPC(1), SUNXI_GPC(2), SUNXI_GPC(23)
+> > +#else
+> > +		SUNXI_GPC(0), SUNXI_GPC(1), SUNXI_GPC(2), SUNXI_GPC(3)
+> > +#endif
+> > +	};
+> > =20
+> > -	/* All chips except H6/H616/R528/T113 use PC1. */
+> > -	if (!IS_ENABLED(CONFIG_SUN50I_GEN_H6) &&
+> > -	    !IS_ENABLED(CONFIG_MACH_SUN8I_R528))
+> > -		sunxi_gpio_set_cfgpin(SUNXI_GPC(1), pin_function);
+> > -
+> > -	if (IS_ENABLED(CONFIG_MACH_SUN50I_H6) ||
+> > -	    IS_ENABLED(CONFIG_MACH_SUN8I_R528))
+> > -		sunxi_gpio_set_cfgpin(SUNXI_GPC(5), pin_function);
+> > -	if (IS_ENABLED(CONFIG_MACH_SUN50I_H616) ||
+> > -	    IS_ENABLED(CONFIG_MACH_SUN8I_R528))
+> > -		sunxi_gpio_set_cfgpin(SUNXI_GPC(4), pin_function);
+> > -
+> > -	/* Older generations use PC23 for CS, newer ones use PC3. */
+> > -	if (IS_ENABLED(CONFIG_MACH_SUN4I) || IS_ENABLED(CONFIG_MACH_SUN7I) ||
+> > -	    IS_ENABLED(CONFIG_MACH_SUN8I_R40))
+> > -		sunxi_gpio_set_cfgpin(SUNXI_GPC(23), pin_function);
+> > -	else
+> > -		sunxi_gpio_set_cfgpin(SUNXI_GPC(3), pin_function);
+> > +	for (int i =3D 0; i < 4; i++)
+> > +		sunxi_gpio_set_cfgpin(spi0_pc_pins[i], pin_function);
+> >  }
+> > =20
+> >  static bool is_sun6i_gen_spi(void)
+> >  =20
+>=20
+>=20
+>=20
+>=20
+
