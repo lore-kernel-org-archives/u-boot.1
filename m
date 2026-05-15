@@ -4,93 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 925A2CD4851
-	for <u-boot@archiver.kernel.org>; Fri, 15 May 2026 20:58:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87172CD4851
+	for <u-boot@archiver.kernel.org>; Fri, 15 May 2026 21:03:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1C92484812;
-	Fri, 15 May 2026 22:58:09 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8FD2B84812;
+	Fri, 15 May 2026 23:03:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="hQ0hT7QO";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="SPkKPFze";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D86098484C; Fri, 15 May 2026 22:58:07 +0200 (CEST)
-Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
- [IPv6:2a00:1450:4864:20::634])
+ id EE7D68483C; Fri, 15 May 2026 23:03:35 +0200 (CEST)
+Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
+ [IPv6:2a00:1450:4864:20::62f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E6DA584812
- for <u-boot@lists.denx.de>; Fri, 15 May 2026 22:58:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EEB3F8480B
+ for <u-boot@lists.denx.de>; Fri, 15 May 2026 23:03:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-b8f9568e074so70303766b.0
- for <u-boot@lists.denx.de>; Fri, 15 May 2026 13:58:05 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1778878684; cv=none;
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-bd36614d329so35946566b.3
+ for <u-boot@lists.denx.de>; Fri, 15 May 2026 14:03:33 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1778879013; cv=none;
  d=google.com; s=arc-20240605;
- b=ehi2OHCK0hs2zzqTO92Kl+sFTlwhuNFqzq7MFgQ5KnwLNiv6XHI/O3zCt/CvOxKW9m
- G/QNs1Purr9pTIvEiClBWTsZZWo1/I/XayBa2oWLozMUE0RsJLEh7wC3bgBZ8SykQaG7
- hcFgyCOU3iL7U4qEMkJQQor6Ry5t/KcAqOArHu0SrTD6O5uClxFd6/B2p0QjE3wz5kOK
- 33kIk/m0Ri7tLe8U4MBH7/+DEMcWEealXUts0V7KZ6OeSF/4H14SUYrA3W26TgDRMVfa
- HU2d1W4scA3Bs8nlXVQFHZK9+yy40AwaWV66cSz3LqmHytZ9XHUvgreY95lGtFAGJpWu
- sGew==
+ b=K3n1tKDI209hPxaiOBFIkMlxugje8kYy50wCKmKNlLkHjVr+P76ivvw+OKOGVIzet0
+ iWT8ra6i5O4HlD1MALL4nVemVMdg9JrRNyRrTMCnb65onpQWzb3tVwuHG7FGGa7yeljI
+ O9QLjl3BtHR7LuV628cNkLmdrMn9z7izhxMM21Grq0KhBHPlGA52eb42N18E6tMnZsGu
+ x1KWTXhhRljKVuSte8gLsmxqKuk1GLtEyDsc69wB3tIIAWzoztOHolIDLqPRc6oYlL/U
+ acbVd4f6f+Ap9MTguOFQqUpfS5T9eOoGEcCKf7ZUup5zXi/Dah2aziuiFy3TNu2K5vZF
+ fpzQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=v/+sLlSFlW3S2/+BTlJcRwOO7myufrATI+IC+lYuMm8=;
- fh=1Rj5Iy6AYTVFICKN1ytNA1aIol2wPtRnCaE60wRA0L4=;
- b=QcbybQBK/xraQafEbdwVtXpfvpY6LiGGDn+2fE+bI6SU7isgHw+aEGwmIrni6NNsNG
- bRe8+31ocK9FpSDNPyjqNZSkzwlE/j+Q8A3A6wLZZSEi4upcdUgNHgn0S/FqcgRcuUVw
- sBZbgCBuMrt4r2fVayqb9gIxfvMgECSo8/mOB+CUJ0tmnU3Ce5OOlFyht6JhemcgGjCt
- uNcBdVCwZmRJ1fb7fXzm0US3ZLlC/ncaVZlyjqR59AdFR6BTeF99Vx49EEcNccG3LboZ
- geUjoDw+YJ6ghPJMvdJQtq1pKhU9aR+XjxGi2aDUOBczsPoCssD93mJhCJfExWowX5t9
- 5ovA==; darn=lists.denx.de
+ h=cc:to:subject:message-id:date:from:mime-version:dkim-signature;
+ bh=70UuHCv45Y2btHNsZYl0znLB21PyYu/Rk6dJcrxg4kw=;
+ fh=9+jZvay9w64t93Hw19m2fgKOrN9xLfjgjeeHNkkWmjM=;
+ b=VVgSiPw/L+Bw0ImHcmEsvkOp5ifErTiBDG0eET3olUymR0LsKlEAhy4uzljhBZ0Zea
+ NB2Xl5AUrGyXJroRyw+vD8uHLTpbNTJYgdmERdXWe+4Q3hy307D0QFDXEnzErT9OKKQe
+ ElahwXMfqp0eoWpkxdNXVW7sHgvphJKWF9qNdpMr7BwIVxIsP7tuTGFJ69yskaV3OxHo
+ 5Iv0MmJp21JB+AzNh+xMswThTcwTZ8zztJTXvz2HZ08mWFL2kFLFmkEgmyLapWEQWQm5
+ 1nX+qK5yyHd87JgzyZ6Pni2nkGGh2K4Ok9ZJrOlT28lmtMDCm3qkArmGBfThuy2OLlDv
+ bKHQ==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1778878684; x=1779483484; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=v/+sLlSFlW3S2/+BTlJcRwOO7myufrATI+IC+lYuMm8=;
- b=hQ0hT7QOJS9NNv3pqfu/1LG03I82eaw4xHu3hnY/QNYa8bcVve7YewSJBqUyIQRTNJ
- yyshDooJSnKzLVcyUX3MU7DHBCdkNLmFe8D/tvrovenMqkbq7CiPu4LXMoY76b1l5auJ
- XbZBtE2rH26UHTj5Nqu/08+pn62ZOjZn1oMtc=
+ d=chromium.org; s=google; t=1778879013; x=1779483813; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=70UuHCv45Y2btHNsZYl0znLB21PyYu/Rk6dJcrxg4kw=;
+ b=SPkKPFzez7Ygd6X8kT5mBbLHjn10Evuca3HPoH4NCursK6Hua1JZhYHlfkCWWeW87Z
+ AEyK4rriT3Cq6XySC2EK0JF3MbiIfE0oT/KaF/1dw8td9M1mVyo6Aj3v7s1OhFEeYlgn
+ PHsrZa1fYa9cvTkIbolNDBOTliCiK28TEmrWw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778878684; x=1779483484;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=v/+sLlSFlW3S2/+BTlJcRwOO7myufrATI+IC+lYuMm8=;
- b=RsfLuO7NKu0gdCDnAlu4TrRsx8qz80tLgqLL0nbhShzblyJ79Gbebx450j9lSdiUcM
- 2QR78fExWLcP+AGNRqjE1DljMNypgMYh0YIQuxDQlBbQOfbRKDbd108ToxlCYsL65i9u
- EF6m2nFTPQjLYWYZqdqB87PvETD9qrCdHxyNwrz9c3nJblk03b/UfqU5q0E+Kqn/mG+a
- tNlXgNQwZ3Q5/OZk42uTF2aXv7fnHqsTl9QuKUzqZp8kQ9YW4xOqnxV381wRmc33yq5f
- aO7VTK3qQF9VbGXhG5QUEU/NIUg9ym1TCxb6xZ6qHC2dEWnI1NKPzFAoWu1W20Qe8jPo
- H7aA==
-X-Gm-Message-State: AOJu0Yy+QGNOanydmfGMlkVogmKrzLTUBTDHtazuWkPqsVF6heCEfajb
- FaDXQ4zCpfukBtuh3pRCMT3XRppRFfqbK7OToVyPL2gLnYyreqUhoaPlwNKxi8a5bi9YKZoEtyx
- w3/pljkZmQlM6dFkvog37xtV/x+lXqQ0sIu/8G1LGUih1K9MZfrs=
-X-Gm-Gg: Acq92OHHYTONZgSft185bmFLv08wMa1EA4JtC0xFE4bg28msbAokIJcyCEQo8NOMnhq
- aHea8uOkTNgzGlhijVWRkzrnAte/imIUHGHLx0fCGUP38Pc+gYaekOXF8LzsLxvrtyJen6jJezT
- MrBTf2Cgy7B6vO8Ik1M7deL/B/2n9FAY38UGxCweBiHga2+aFrXmAWC/EwhvNMpoNVl2S3DFv1w
- OK5bLTcbEPKvSyBKfQEK3MBntVmKWaM9qt4fVOh6UuGGmbnnDdCbeFw/HjIL/ty5uS2Cx8cIIsP
- nEbveA==
-X-Received: by 2002:a17:907:7f9e:b0:bd5:25bb:4e9 with SMTP id
- a640c23a62f3a-bd525bb09efmr223870766b.11.1778878684295; Fri, 15 May 2026
- 13:58:04 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1778879013; x=1779483813;
+ h=cc:to:subject:message-id:date:from:mime-version:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=70UuHCv45Y2btHNsZYl0znLB21PyYu/Rk6dJcrxg4kw=;
+ b=N5xNQIMqVzX+St0firc7NzzFyvt3Zvt8kIfYPv+HQFV6enB8VyjjosCOuXFeovZ4Tm
+ KunM9UM9naZdfLt7x/7UQW5B/XGSZqhWn39t8onL+6Fr6es9n9nck3ZeSfIWB/IDuFpK
+ TnCbCPIoMrWqqlZYm0gWZtiWeK859SO8qa/KlDF0ShLPMUO3EO9BNNWiq0CSiTmwXzID
+ mBaW4B0bKaIHo3kjLGgwdzOnlcU8+M+Qjdw92IvTRsxX8/2q88AUvDypbCYbCmqKapYq
+ 0HtCKoAXdtdP/zcJRoZ1Aj5WUjw1MO5v6nEWCUKb7vEWdH/mJ1S2YRgU9vzdK2T+5BUX
+ 7bPg==
+X-Gm-Message-State: AOJu0YxgJpP5ZGQAUNOMuBI3JyWdtPKjjX7ViENIB/cf6GgUqKBf/NDw
+ bLW6fdac2kOONbiTY9gMYw4umPFvxTTkbmy5kurIMAYjBB7gKHCVnhuiGd/+zR9NDCFmH8koIWw
+ Q3dXVDwwes4Nmb3YIplutlo4YDTACO0j+FatVeiJGFRyajZBxCiY=
+X-Gm-Gg: Acq92OE0qbhqHy3DNbxzsdbrMPAehl989XD8CvpyfTkxUAuzmiFgVHxXp3z40z78Jsw
+ t/rYDfXe+SHeldt1U7FYPxbmFLV0uucEIdlQAspsHeNdEu5Q3gmcX/HvRGWxM4hBLj3E9jzubYm
+ Rs8/ggLctfit3sZjUnnjoWb2YKANdPYXGnuk/cI8OgF5O4Iudjtuw5hoBGmlegQhPb10NV3XX77
+ MLLFTvHok75Uf9SlYXgM5BtJSMNsMK8/8nG2PcQOKjUCXt8hGQA2iscV4+Zk84F3eunbfqPLZvH
+ Iy+7xA==
+X-Received: by 2002:a17:906:f59e:b0:bd4:8b86:9026 with SMTP id
+ a640c23a62f3a-bd51795bc15mr419536866b.25.1778879012927; Fri, 15 May 2026
+ 14:03:32 -0700 (PDT)
 MIME-Version: 1.0
-References: <CAFLszTjeQ2mvnkPeVPsWwK7ay4Ac-+h=3pApff6CUxaaHq45JA@mail.gmail.com>
-In-Reply-To: <CAFLszTjeQ2mvnkPeVPsWwK7ay4Ac-+h=3pApff6CUxaaHq45JA@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 15 May 2026 14:57:52 -0600
-X-Gm-Features: AVHnY4IWir3TSYzcrfmdI6EiXrP6P5q_YWjx_G3WHdjp3ecCCrQNqs67uhxYJxI
-Message-ID: <CAFLszTgbu6Q3r5D4-ijH5Vqhwp6p1j3PMLZhi0QnYxyuUzcRmQ@mail.gmail.com>
-Subject: Re: In-tree Python tools (patman, buildman, binman, etc.)
+Date: Fri, 15 May 2026 15:03:21 -0600
+X-Gm-Features: AVHnY4LnMJxw6_8BvJ8k7AapJ4k9sNToecj6ggJaKZ5J_GY60T7MwunJbDg058w
+Message-ID: <CAFLszTjnL6rn_mTA+jhcrRLF0yEtN4FVwTeGGy9GeGbgdB9fYw@mail.gmail.com>
+Subject: AI-assisted review
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>,
- U-Boot Custodians <u-boot-custodians@lists.denx.de>
+Cc: Michal Simek <michal.simek@amd.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -110,41 +105,31 @@ X-Virus-Status: Clean
 
 Hi,
 
-On Mon, 4 May 2026 at 06:16, Simon Glass <sjg@chromium.org> wrote:
->
-> Hi,
->
-> As you know, I maintain several tools which are part of the U-Boot tree.
->
-> Tom has previously suggested that it would be better to move patman
-> out of the U-Boot tree, e.g. to its own Github project. It is a
-> general tool which can be used with Linux and other
-> mailing-list/patchwork-based projects. I have never been keen on
-> taking on the extra effort required, but I've recently added more
-> features and am wondering whether now might be a good time to do this.
->
-> Buildman is quite obviously designed specifically for U-Boot. I have
-> made some improvements recently (a large code refactor and distributed
-> builds). I would like to push those changes to mainline. Do people
-> think it should be in a separate tree somewhere?
->
-> Binman was written with U-Boot in mind but supports other projects
-> (such as Zephyr). It is generic enough that it could be separated. The
-> impact would be harder code review.
->
-> We also have smaller things like qconfig (which I have substantially
-> rewritten to make it fast) and dtoc, which is very tailored to U-Boot.
->
-> What do people think? Of all of these, patman would be the easiest to
-> move, with the least impact on existing workflows.
+There was a query on the call this week about whether I am doing
+AI-assisted code review. As I said on the call: yes. Here is a brief
+description of how it works.
 
-Are there any actualy patman users on the list who have an opinion? So
-far the replies are from people who don't actually use it :-)
+It is built into Patman (on the Concept tree) with a new 'patman
+review' command. You give it the series name / number, or perhaps a
+patch name/number and it applies the patches to a new branch, does a
+review then adds its comments to its database.
 
-Barring any other comments, I'm going to try to set up a new project
-on Github. Re u_boot_pylib, the easiest thing is to duplicate it,
-particularly as the newer version includes claude libraries not useful
-for mainline.
+A '-d' flag can be used to create draft emails in Gmail (sorry, it
+doesn't support other email programs yet). You then check and update
+the emails and send them (or delete them). I am not an expert in
+handling the 'user voice' part of AI, but have made an attempt to make
+it follow any provided configuration, as well as to scan recent
+reviews to actually create to create a voice.
+
+Obviously this is very rudimentary and could be expanded considerably.
+But the mere fact that it creates draft emails is a win for me, even
+if I ultimately delete or rewrite most of the comments. I can imagine
+10 different ways to improve it to be more useful.
+
+I wrote a blog post about it if you want more details, or you can ask me here.
+
+I am very interested in hearing how others are using these new tools
+for code review.
 
 Regards,
 Simon
