@@ -4,82 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6AD4CD343F
-	for <u-boot@archiver.kernel.org>; Fri, 15 May 2026 14:59:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63B67CD343F
+	for <u-boot@archiver.kernel.org>; Fri, 15 May 2026 15:02:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0D3B4846FA;
-	Fri, 15 May 2026 16:59:50 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D492C846FA;
+	Fri, 15 May 2026 17:02:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="KOqu2HH6";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="bLEaa+n4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D914A846FC; Fri, 15 May 2026 16:59:48 +0200 (CEST)
-Received: from mail-oa1-x41.google.com (mail-oa1-x41.google.com
- [IPv6:2001:4860:4864:20::41])
+ id D2F0084706; Fri, 15 May 2026 17:02:35 +0200 (CEST)
+Received: from mail-oi1-x241.google.com (mail-oi1-x241.google.com
+ [IPv6:2607:f8b0:4864:20::241])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 667E4846CC
- for <u-boot@lists.denx.de>; Fri, 15 May 2026 16:59:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3A260846CC
+ for <u-boot@lists.denx.de>; Fri, 15 May 2026 17:02:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x41.google.com with SMTP id
- 586e51a60fabf-439b2aad735so2204490fac.0
- for <u-boot@lists.denx.de>; Fri, 15 May 2026 07:59:45 -0700 (PDT)
+Received: by mail-oi1-x241.google.com with SMTP id
+ 5614622812f47-47cbd445021so5947134b6e.1
+ for <u-boot@lists.denx.de>; Fri, 15 May 2026 08:02:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1778857184; x=1779461984; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=ni5LFjChazqcS4fv15PFmUyW42Q22CywErD1XezhL3s=;
- b=KOqu2HH6V934Lt7QkySy5LdLs95oITYp9Dt42gTW/CJsigvLvJYZVIZVsyfhVtOG4y
- sLG4pva4g2QJ0MdqtaMll+2FcZ/4pIX5+69KSWEsaCsMm0ncM6mXbeA1H8vEi43QTIeo
- qpOseAD1S+UFN40YlX+nREUXDdjZTMnJTdtwM=
+ d=konsulko.com; s=google; t=1778857352; x=1779462152; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=kU9LbzXsbKQQRC22RUNRvyEldvbF7UJEibLi759fbyw=;
+ b=bLEaa+n4V1wEwuAy+pCbq1jHFmT/liRM/Oq6B9VKQoq8PHdt5NI2U4clgRhdVw0FNN
+ yHSz5Z4eebpaGNX2IRvZ6RiSqae6NL3qsqIfKuBKNvaX6cXDuDgDQRxfFivnIWaC3UdB
+ q42XM/3J6oSxYC54NpUYHEc9fFYhsx+hbUqi8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778857184; x=1779461984;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ni5LFjChazqcS4fv15PFmUyW42Q22CywErD1XezhL3s=;
- b=oTbo58/7zyK3nVIRiBFvqgfGFum1auWlG5YtX/o9G3amwAQ2WVj5/AocKp6yfxT8lo
- vU2MeTSd8OnYp1Rgnkbcz3PcR3vUpm+F3HcwIv1PjNKRav3BTatiNEHquL/JaTQ8YW8n
- SEi+tqbJwurJhTgHjQAzyGgxma+VDCSYbiZ1fWlOYDHsVdwhAwNYyvC5AG4jPvM1lHyi
- V8y6Dj/ohuy0/Oje6wI39zbNd+R68s7HCl3poMExXg3zS5BxUsUMaeN7O4E4Dj9KmANb
- TWqnRzIQ0KIaIqlCqwcS0PLFemEhLJ6o0aVdPxQvRUd9bfMEEKLD2IqT2jxQiGmoh3kx
- oCJw==
-X-Gm-Message-State: AOJu0YzapfgCMRzTINnG4bcIgVceMm7wphSHvN/bVYfBbgUjoZc+9JXt
- pvlxaPZF67Q1Xxbc+O8SfOQOcDwK5M/oUo/FbC94bvK3UgsflxOUlaj94eso6eqIIzHoT0cEnCM
- zHAqdA1pVo81qFIM=
-X-Gm-Gg: Acq92OHiufEKOK3o2SvDGO0Nl1TOPE1h6FuZNHWvkOAXTrN9Fg/l+KXTZzI/hPJY/8m
- drsFT7bGS5UfQQjgiOqeMc8vwSEMpozWo6r9g1pVC1fXbN9Kr2RHX5UVgBIFi/lBIXPKcGtikJL
- hvLXtFSoFb8j4w9QKHEqnehmvj91IM1ugj0yhVwg3d88NaWGxGQJEOq1ZWgrFfAvKt6kM1NKaeY
- vIClwLw2jsuPs3JI5xgsFUtTQu85/UoyxGL1xUgsIM9w+fVBtsLAwL67XX86FiUC6I0E+Xs3ciR
- 4QrAXRb8h0BhEzmg3AJQkunGtfHL+8P76hV61O7fCXATJZMAgi7vvB5wa3SRf39fD+F5ed1Qjy8
- t4EcH9Ygtd4/ekqGSu96F9AYzY6vyMeNZtc9RxaYYHAQCnf+PdOKBm9c2dn/lx+U+a6Qx9QY7km
- hl8MkXlQZDHIGSquOXflptTMbqxWnPF9eaX02a4MEYQCNfmvYCZ2CTjh1e40YXAolMKmdBkblBp
- A+21jsGIfbNXJnHmCeZ51kjQtrjdJN1sutSQUWupSg2ipn3xx0RgcFaiFIPqud0g+ZHgUASB6Ck
- 4pqWwv9L2w==
-X-Received: by 2002:a05:6870:b3e1:b0:430:12f7:71cd with SMTP id
- 586e51a60fabf-43a2dd74cb4mr2937288fac.23.1778857183928; 
- Fri, 15 May 2026 07:59:43 -0700 (PDT)
-Received: from bill-the-cat.tailc58245.ts.net
- (fixed-189-203-106-235.totalplay.net. [189.203.106.235])
- by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-439fc4dcb89sm4380002fac.12.2026.05.15.07.59.43
+ d=1e100.net; s=20251104; t=1778857352; x=1779462152;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=kU9LbzXsbKQQRC22RUNRvyEldvbF7UJEibLi759fbyw=;
+ b=JilJROwa+EdX7j532NOq4CDh+1q/XsWcAad5TEc3rpvCYIpm9CdBSiDypYPMBMJ+IV
+ 5U7hDCX0+qrfwWda8cs+5okb9g0isYenqiea9q5BsJgwj/K6aNXSRNS35nSFucPRDMTD
+ jE6YagB6GHJK+vsKFVTEIXK+yPpmGTSpfNq9zfQFGYRkJBxNnvQWi3zbrpMpXGW3fGRi
+ RBovXxEAm/G3hK6A+yF7tCRClvL6/Td/r277eQEpUN6JoI5NDe6+YolS7Eb7AtAxKMpR
+ Vas/oBUefWSLUI7RfrNC3R0iRaTRKWtpuhZk7XG9tPAoB33GW/68U7WXjJgr/DGtaDZ2
+ BuvA==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ9EnujZjIxMg+9orYOzzoC4FIqU/H4+rU0zf5y3ebjF9SpXoMuw5XyliP1iumD/Hlwbicq94DM=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz/QvNr3Vgv3mwG4SUBxpLDE2N6/lCJ8iuZiS+mf/myQod/KbDv
+ DhhQodc2/T/8dE/bn/0GBlxZ9qlEwfSOK2VM5r1KFVxYGF1BnU9MYW0pS/tRNa0FRK4=
+X-Gm-Gg: Acq92OGy4yWWVp6bb2HkRoOk9Cyrf80KwBaqiLY1r8faqTzjkann4hJd9e6BPTx53Lf
+ Ck/oIR/RgqtjGSsai4pBzHvC9KfXbpY0Si3yAEaT2Dxq92+5S726oDhrs3ZP/1JrxOgyBHY9IC1
+ LHzEvrNzf1301sYrXLQUTftCOs/x0/Nl9nO95tUzqMlU4aPqe2y0p3Ab62+emBwmhQhjta6I5x4
+ LDMZELKHfjBmQRKJKozBq7ViSbC0EPsaZL1W0Io/0Jknw+wssjEaNNIIHRoXpeXguhF6h3W1I2Q
+ gqU1eYFldztWsq4BaxvmOLiLM7cjrjK9wP6NMtt5uL4KTwhl2HS/oC8SX+EgzM4VhIIHptzpM6o
+ 53uPaXVEgtpTyCvPhPH5SW4NDqKFn8eaBcyxTQGCzZmx3Gr6FRuj62G+mJQex/N02dgbs4mXHTW
+ sqiGn1i5I6XrJ/Ppnow12aqf/nSBCR6D2yBgL6aVLziLVubNprFit6pgCg6wFN6O+YWlLgKIyVe
+ d9TH2yulrA2F83iUDMkQBQg/Z4WY++J3l/s8bs8urgzI4Js3WQ=
+X-Received: by 2002:a05:6820:6ac4:b0:67e:294b:7246 with SMTP id
+ 006d021491bc7-69c942ff872mr2765294eaf.14.1778857351368; 
+ Fri, 15 May 2026 08:02:31 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
+ [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-69d045e6567sm1029608eaf.3.2026.05.15.08.02.30
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 15 May 2026 07:59:43 -0700 (PDT)
+ Fri, 15 May 2026 08:02:30 -0700 (PDT)
+Date: Fri, 15 May 2026 09:02:27 -0600
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Cc: Eddie Kovsky <ekovsky@redhat.com>
-Subject: [PATCH] Azure CI: Drop Windows host tools builds
-Date: Fri, 15 May 2026 08:59:40 -0600
-Message-ID: <20260515145942.133279-1-trini@konsulko.com>
-X-Mailer: git-send-email 2.43.0
+To: Sune Brian <briansune@gmail.com>
+Cc: Conor Dooley <conor.dooley@microchip.com>, Conor Dooley <conor@kernel.org>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
+Subject: Re: U-Boot patch submit standard and requirement
+Message-ID: <20260515150227.GC1858239@bill-the-cat>
+References: <CAN7C2SCYCwE=BRoeCedqQYjv-Gf6x6ETOdKeeDBE=CG=-rSk9w@mail.gmail.com>
+ <CALeDE9PU0-fW_+erR9QHK1ST8fcStx0FWWk_0M8ELjtADugd7Q@mail.gmail.com>
+ <CAN7C2SCATJL_rhpBZWwZuQVpLdnbDh5+DRFbtGHoxCXu62AVmw@mail.gmail.com>
+ <CALeDE9PesKLwzt=uu_b8+pq5QXFnnK1YAO9WL3f8=CHx93w61w@mail.gmail.com>
+ <CAN7C2SC_YwotE2-PS=eAFEnMOXp7jVrhaOSbKsuChLVr4zEa8A@mail.gmail.com>
+ <20260514-spotted-happier-0ccb77ca8f24@spud>
+ <CAN7C2SAVWp23mKeG77MoV6kUKQDBN_Ge3CUMa_quAXP5YbV6UA@mail.gmail.com>
+ <20260515-finished-womanly-675afb9b0c7c@wendy>
+ <CAN7C2SDDjM+MJbx2d0N8zC74bytb6gKvjw_6auMPLLNGJVwvfA@mail.gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="J8bCdK0rvUHjBLrA"
+Content-Disposition: inline
+In-Reply-To: <CAN7C2SDDjM+MJbx2d0N8zC74bytb6gKvjw_6auMPLLNGJVwvfA@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,66 +108,186 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In preparation for being able to support more recent OpenSSL versions,
-we need to add support for the OpenSSL Provider API. This in turn isn't
-something that MSYS has all of the required packages to support. Given a
-lack of user feedback that these tools are still used in this manner,
-remove Windows host tool builds from CI.
 
-Link: https://lore.kernel.org/u-boot/20260429180247.83091-1-ekovsky@redhat.com/
-Signed-off-by: Tom Rini <trini@konsulko.com>
----
-This is intended for the next branch, and to allow for a more visible
-part of the removal to be made now. This means v2026.07 will be the last
-version to support MSYS for host tool builds.
----
- .azure-pipelines.yml | 28 ----------------------------
- 1 file changed, 28 deletions(-)
+--J8bCdK0rvUHjBLrA
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/.azure-pipelines.yml b/.azure-pipelines.yml
-index 4417ef4e5a50..b2a59bafa83d 100644
---- a/.azure-pipelines.yml
-+++ b/.azure-pipelines.yml
-@@ -1,5 +1,4 @@
- variables:
--  windows_vm: windows-2022
-   ubuntu_vm: ubuntu-24.04
-   macos_vm: macOS-14
-   ci_runner_image: trini/u-boot-gitlab-ci-runner:noble-20251013-23Jan2026
-@@ -44,33 +43,6 @@ variables:
- stages:
- - stage: testsuites
-   jobs:
--  - job: tools_only_windows
--    displayName: 'Ensure host tools build for Windows'
--    pool:
--      vmImage: $(windows_vm)
--    steps:
--      - powershell: |
--          (New-Object Net.WebClient).DownloadFile("https://github.com/msys2/msys2-installer/releases/download/2021-06-04/msys2-base-x86_64-20210604.sfx.exe", "sfx.exe")
--        displayName: 'Install MSYS2'
--      - script: |
--          sfx.exe -y -o%CD:~0,2%\
--          %CD:~0,2%\msys64\usr\bin\bash -lc " "
--          %CD:~0,2%\msys64\usr\bin\bash -lc "pacman --noconfirm -Syuu"
--          %CD:~0,2%\msys64\usr\bin\bash -lc "pacman --noconfirm -Syuu"
--        displayName: 'Update MSYS2'
--      - script: |
--          %CD:~0,2%\msys64\usr\bin\bash -lc "pacman --noconfirm --needed -Sy make gcc bison flex diffutils openssl-devel libgnutls-devel libutil-linux-devel"
--        displayName: 'Install Toolchain'
--      - script: |
--          echo make tools-only_defconfig tools-only > build-tools.sh
--          %CD:~0,2%\msys64\usr\bin\bash -lc "bash build-tools.sh"
--        displayName: 'Build Host Tools'
--        env:
--          # Tell MSYS2 we need a POSIX emulation layer
--          MSYSTEM: MSYS
--          # Tell MSYS2 not to ‘cd’ our startup directory to HOME
--          CHERE_INVOKING: yes
--
-   - job: tools_only_macOS
-     displayName: 'Ensure host tools build for macOS X'
-     pool:
--- 
-2.43.0
+On Fri, May 15, 2026 at 04:23:49PM +0800, Sune Brian wrote:
+> On Fri, May 15, 2026 at 3:46=E2=80=AFPM Conor Dooley <conor.dooley@microc=
+hip.com> wrote:
+> >
+> > On Fri, May 15, 2026 at 08:46:25AM +0800, Sune Brian wrote:
+> > > On Fri, May 15, 2026 at 12:14=E2=80=AFAM Conor Dooley <conor@kernel.o=
+rg> wrote:
+> > > >
+> > > > On Thu, May 14, 2026 at 07:46:46PM +0800, Sune Brian wrote:
+> > > > > On Thu, May 14, 2026 at 6:37=E2=80=AFPM Peter Robinson <pbrobinso=
+n@gmail.com> wrote:
+> > > > > >
+> > > > > > Hi Brian,
+> > > > > >
+> > > > > > You have made a very generic statement about levels of accounta=
+bility
+> > > > > > on patch sets and consistency in reviews.
+> > > > > >
+> > > > > > Can you be more specific?
+> > > > > >
+> > > > > > Ultimately there are subsystem maintainers and each maintainer =
+has
+> > > > > > variation on how they deal with their subsystem. You reference =
+one doc
+> > > > > > three times in your statement.
+> > > > >
+> > > > > Hi Peter,
+> > > > >
+> > > > > Now I understand what you mean.
+> > > > > Simply one sentence is a bit hard to read what your thoughts are.
+> > > > >
+> > > > > That document I am quoting does not refer to the entire docs but =
+only one
+> > > > > section of the docs with that link.
+> > > > >
+> > > > > Before quoting, my declarations as follows:
+> > > > > 1) I am not referring to specific people or party
+> > > > > 2) I experienced reviewer which again not being specific to one t=
+hat
+> > > > > mentioned this docs is a supreme rules to follow otherwise patch
+> > > > > that is committed is not able to push to mainstream
+> > > > > 3) I simply do a quick check on u-boot mailing pool and do see a =
+lot
+> > > > > of uncompiled reviewed patches that are not following that supreme
+> > > > > docs.
+> > > > >
+> > > > > As such I will being to quote:
+> > > > >
+> > > > > The mailing that are reported as not passing the standard of [1]
+> > > > > Full mailing:
+> > > > > https://patchwork.ozlabs.org/project/uboot/patch/20260423042824.3=
+480-1-briansune@gmail.com/#3684415
+> > > >
+> > > > patchwork isn't loading for me, but it's on lore here:
+> > > > https://lore.kernel.org/all/20260423042824.3480-1-briansune@gmail.c=
+om/
+> > > >
+> > >
+> > > Hi Dooley,
+> > >
+> > > Well I am sure you did not have the full picture.
+> > >
+> > > The request had nothing to do with under the --- line if this is
+> > > really the case:
+> >
+> > > Let me bring you back to the history of wonders:
+> > >
+> > > https://patchwork.ozlabs.org/project/uboot/patch/20260421004719.73491=
+-1-briansune@gmail.com/#3680232
+> > >
+> > > https://patchwork.ozlabs.org/project/uboot/patch/20260422065910.5398-=
+1-briansune@gmail.com/
+> > >
+> > > None of those reviewers had mentioned this issue once "---" rather th=
+ey all
+> > > just alarmingly repeated the wordings.
+> >
+> > The first mail in the thread mentions it:
+> > https://lore.kernel.org/all/CAFLszThg=3DEamyRohxNA7V+nk+OMVK356nUjAVSbu=
+4+kokOJpdA@mail.gmail.com/
+> >
+> > >
+> > > > The comment about the changelog format seems to be very harsh, I do=
+ubt
+> > > > it really makes any difference. What you did and what the maintainer
+> > > > requested are effectively the same thing at the end of the day.
+> > > >
+> > >
+> > > Of course after reading the docs I got it immediately.
+> > > However did those who request contributors quote this from first plac=
+e?
+> > >
+> > > > The real problem with your patch is that you put the changelog into=
+ the
+> > > > commit message itself, rather than under the --- line.
+> > > > None of the examples you quote below do that.
+> > > >
+> > >
+> > > Well after 4 patches of ridiculous request and logic change.
+> > > I guess you will do the same. At least I am not doing it at the
+> > > first moment on replying to the mails who or whom you had mentioned.
+> >
+> > I think this is a reply to the comment below?
+> > The aggressive/antagonistic responses begin in your first reply to
+> > Simon:
+> > https://lore.kernel.org/all/CAN7C2SAdg1MX3ZfEt5-68iiw3pdjyqva48F_uJjNws=
+HAhdmY3Q@mail.gmail.com/
+> > "So forgive me I really don't give a damn on whatever the header
+> > requirements." "There are many better things to do rather than complain=
+ing
+> > about the patch headers."
+>=20
+> Hi Dooley,
+>=20
+> You are a bit off topic here sorry if you don't think this is the case but
+> please do finish reading.
+>=20
+> For what the accused I will give out specific mailing dialogs to explain
+> [HERE].
+>=20
+> The major discussion or query is all about the standards or rules.
+> There is nothing to do with the reply.
+>=20
+> Meantime, I cannot see this as "aggressive/antagonistic responses".
+> When the request changes it is ridiculous as you also agree:
+> The header text /  wordings from the updated patch itself
+> had zero impact on the patch itself.
+>=20
+> You are just simply telling me that if you get hit by someone 4 times,
+> the man who stands out and responds is "aggressive/antagonistic".
+>=20
+> Again we are NOT discussing any mailing dialogs but the U-Boot
+> patch header standards and rules.
+>=20
+> Meantime you had failed to respond or comment the entire mailing
+> dialogs do mention any "---" header requirements nor the
+> necessaries of following docs supreme rule / standard from first place.
+>=20
+> [HERE]
+> Allow me to quote the request of header and modifications mail history:
+>=20
+> No docs cited nor clearly mentioned the need of specific wordings:
+> https://patchwork.ozlabs.org/project/uboot/patch/20260420074601.24988-1-b=
+riansune@gmail.com/#3680096
+>=20
+> No docs cited nor clearly mentioned the need of specific wordings:
+> https://patchwork.ozlabs.org/project/uboot/patch/20260421004719.73491-1-b=
+riansune@gmail.com/#3680232
+>=20
+> So now you are telling me after at least 2 versions of modifications
+> reviewers suddenly think oh this is not good enough (by my rules)
+> I think it should be other styles etc.
+>=20
+> Now "LOOK INTO MY EYES" and tell me what is the actual U-Boot
+> header standard? Reviewer mood or docs that are given out?
 
+Brain, I understand being frustrated with the process. Ultimately,
+everyone here is a volunteer and trying their best. Which means that
+yes, we are not entirely consistent about some parts of the review
+process. I would ask you to please be kind to everyone, and expect being
+kind in return.
+
+--=20
+Tom
+
+--J8bCdK0rvUHjBLrA
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHQEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCagc1gwAKCRAr4qD1Cr/k
+CvDDAP4/wkrax007B3KFfwld0dbszPn6eYbENueusWvgw56t1AD48TrD2qFvSkKO
+VCKjV6mrZ3k7BJIvTJWT0yECLlD7AQ==
+=Evvc
+-----END PGP SIGNATURE-----
+
+--J8bCdK0rvUHjBLrA--
