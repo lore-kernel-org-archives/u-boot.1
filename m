@@ -4,109 +4,139 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4CF78CD4F3C
-	for <u-boot@archiver.kernel.org>; Fri, 15 May 2026 18:12:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E081CD4F3C
+	for <u-boot@archiver.kernel.org>; Fri, 15 May 2026 18:13:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D5D28846EB;
-	Fri, 15 May 2026 20:12:56 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 3C6C5847E8;
+	Fri, 15 May 2026 20:12:57 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=outlook.fr
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20251104.gappssmtp.com header.i=@baylibre-com.20251104.gappssmtp.com header.b="q75JT8wo";
+	dkim=pass (2048-bit key; unprotected) header.d=OUTLOOK.FR header.i=@OUTLOOK.FR header.b="qfJ20I2r";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5E96A84099; Fri, 15 May 2026 14:40:18 +0200 (CEST)
-Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
- [IPv6:2a00:1450:4864:20::336])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id A34D2847EF; Fri, 15 May 2026 18:53:39 +0200 (CEST)
+Received: from AM0PR83CU005.outbound.protection.outlook.com
+ (mail-westeuropeazolkn19010007.outbound.protection.outlook.com [52.103.33.7])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4BC578407D
- for <u-boot@lists.denx.de>; Fri, 15 May 2026 14:40:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4BF428481F
+ for <u-boot@lists.denx.de>; Fri, 15 May 2026 18:53:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=msp@baylibre.com
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-48e8132c6d0so46454565e9.1
- for <u-boot@lists.denx.de>; Fri, 15 May 2026 05:40:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20251104.gappssmtp.com; s=20251104; t=1778848815; x=1779453615;
- darn=lists.denx.de; 
- h=in-reply-to:references:cc:to:from:subject:message-id:date
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=QhddF92xmBvFZUtQ8Lq8eCt5NOmfHhH2iReD/cKKkRI=;
- b=q75JT8woCcNLwJEXp3ZN9pewbaWccHzZS3350vtrLZf8RD/DMbgk4ibQanOaJiLHjS
- /MKmB/91odzej9FUy+RwIxp45vddMfGzIwC3A4ck4sVdThfXmsm1NCJ0eXUZQAf0G2Xe
- BxNp8sUwCbq5OrqSRSqdfqXclSOgHDj+CpQYEAYFTUfLLeinhqhmqVCeXK73cjFzQy4D
- Zas0rGuJtquK+bDs8L64npmruf2Bi+hJ9V1S6LYDf9jlC6m7jaBqyD/DRnHcwbYVg1sW
- aalwA6BOItEFVbVZctx0ND0Zxj6yJi9HwHH19E0P8Eefv44yLO+sdUrHG6G7mcEWHCTf
- txYw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778848815; x=1779453615;
- h=in-reply-to:references:cc:to:from:subject:message-id:date
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=QhddF92xmBvFZUtQ8Lq8eCt5NOmfHhH2iReD/cKKkRI=;
- b=f48hR/Ak3HNLf+vpydZ4kaDXQNBt4AJzDrNURjvKyC2buKMDHjLKVAEJ9JGM2V3FfQ
- p7OvVOdZSHPGuPxzop8G/kGTlH6PaIljS7KZF9CtLlWqicKxc+9DQK6kfaT8up0uUA/K
- Pxpfu9bOHFbuqhPpiddYZ3FG6f/CKVaj5tMR8Z5/LrCygse67vZODLBXFbeXOetPATkM
- WDlYJdlZePp0BLK6zl7APSFS9b46TDww/RaJrv+z7yzZ0u/HItlSA1siAX7gcdfCkGyV
- fv2PZp0+SAoL++YaqWROVHXQa7oz//4Vrwm52oTCfaHbiFsqGhY7nQm5tUfvHR9EFkDE
- mC/A==
-X-Forwarded-Encrypted: i=1;
- AFNElJ/ocaLN5PiY/ddoxx4BBlDzXi6lhkWQQCtGIWHoC+ArFF+FjwgISYVQjZjg43TnNwE8CZkA+j8=@lists.denx.de
-X-Gm-Message-State: AOJu0YwTKSo3LA5EKmnndz7k3Fx+uqfT4+w4TL2IJkdfi1OXmQHoK5cR
- 2c5qlhJz3oEi/1HDCmwOhAJoZYbfChWgNCW0YcfAbEh9wNgtPcFmMwQbwFNv0fQ5Fng=
-X-Gm-Gg: Acq92OFrKru2FoCSx2qnhh3lgRw4l9xeMneusfFYscXgD5ekflGAXNpfK+G6NCYs+17
- EVL4aFaSuz4Hq4wk4mwdJ3ASxMzIHsADT+BeKZPyZO24hxvUoAngAhwBZ5NJJAvO/c49QXALGWw
- rqu0a3Y+Hk6b0au+b+uyqbNdC+paKKR/hc7ZAgN8UaTFZp+YwaUjNUkmy7NmXny5xI8G/HR7j+4
- oYqHSLlJsxMpH4EgGf2KoYW+VxuHPSXoOg3AqKheAEfYTyublFA6tnkWfHqqjDpHWWg8lQZWFtY
- bjzoOeZyDDjIgSg20W8tOgCkKuX9gMl4ENvwdf/m2h+jC+NVytHybchoeI96KzoHoOWqNucIUaG
- xMp1JFN8RbbspbuWBb51FdiBYBlWcgrpsJfw2D5WMOrF7VjNE6nRpRn6oDMVwG9w/qFlfabnnlp
- NV25HszMIMbQxQdXG4
-X-Received: by 2002:a05:600c:34d4:b0:48f:e230:c3fa with SMTP id
- 5b1f17b1804b1-48fe6626a58mr51816765e9.32.1778848814578; 
- Fri, 15 May 2026 05:40:14 -0700 (PDT)
-Received: from localhost ([2001:4090:a246:83ca:298c:ceb1:1a:f428])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-48fe4c833fcsm56584905e9.2.2026.05.15.05.40.13
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 15 May 2026 05:40:13 -0700 (PDT)
-Mime-Version: 1.0
-Content-Type: multipart/signed;
- boundary=a683b65d35d71b1cbbde9fe2e0594c45f561c8fa4e850bd1e7c7e5146f91;
- micalg=pgp-sha512; protocol="application/pgp-signature"
-Date: Fri, 15 May 2026 14:40:05 +0200
-Message-Id: <DIJ99VT9BM31.1Z4PKVT91JLZP@baylibre.com>
-Subject: Re: [PATCH v7 13/14] arm: dts: am335x: Remove unused uboot devicetrees
-From: "Markus Schneider-Pargmann" <msp@baylibre.com>
-To: "Tom Rini" <trini@konsulko.com>, "Kory Maincent"
- <kory.maincent@bootlin.com>
-Cc: "Markus Schneider-Pargmann (TI)" <msp@baylibre.com>,
- <u-boot@lists.denx.de>, "Marc Murphy" <marc.murphy@sancloud.com>, "Rasmus
- Villemoes" <ravi@prevas.dk>, "Marek Vasut"
- <marek.vasut+renesas@mailbox.org>, "Romain Gantois"
- <romain.gantois@bootlin.com>, "Parvathi Pudi" <parvathi@couthit.com>,
- "Basharath Hussain Khaja" <basharath@couthit.com>, "Paul Barker"
- <paul.barker@sancloud.com>, "Andrew F. Davis" <afd@ti.com>, "Simon Glass"
- <sjg@chromium.org>, "Anshul Dalal" <anshuld@ti.com>, "Michael Trimarchi"
- <michael@amarulasolutions.com>, "Patrick Delaunay"
- <patrick.delaunay@foss.st.com>, "Patrice Chotard"
- <patrice.chotard@foss.st.com>, "Svyatoslav Ryhel" <clamor95@gmail.com>,
- "Tien Fong Chee" <tien.fong.chee@altera.com>, "Frieder Schrempf"
- <frieder.schrempf@kontron.de>, "Johan Jonker" <jbx6244@gmail.com>, "Brian
- Sune" <briansune@gmail.com>, "Hai Pham" <hai.pham.ud@renesas.com>,
- "Bernhard Messerklinger" <bernhard.messerklinger@at.abb.com>, "Emanuele
- Ghidoli" <emanuele.ghidoli@toradex.com>, "Parth Pancholi"
- <parth.pancholi@toradex.com>, =?utf-8?q?Jonas_Schw=C3=B6bel?=
- <jonasschwoebel@yahoo.de>, "Paul Kocialkowski" <contact@paulk.fr>, "Andre
- Przywara" <andre.przywara@arm.com>, "Paresh Bhagat" <p-bhagat@ti.com>, "Ion
- Agorria" <ion@agorria.com>, "Peng Fan" <peng.fan@nxp.com>
-X-Mailer: aerc 0.21.0-126-g9e77103592fe
-References: <20260427-topic-am33-evm-oftree-v2026-01-v7-0-7e6cd1a805a1@baylibre.com>
- <20260427-topic-am33-evm-oftree-v2026-01-v7-13-7e6cd1a805a1@baylibre.com>
- <20260428104133.5b437e99@kmaincent-XPS-13-7390>
- <20260505163941.GA2508910@bill-the-cat>
-In-Reply-To: <20260505163941.GA2508910@bill-the-cat>
+ dmarc=pass (p=none dis=none) header.from=outlook.fr
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=fberder@outlook.fr
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=ZBWY1/n/wE91spiXOi7m/9QSAb7n0dh4hbnLsV8xHavxOi/hsxVocJvih7WUwS2ITCkBG8hiyeFZz0v1a3iqwj/F6DONEHTfQlwVDbw1upnm1lL8wSYZGt8Wt8JnPXuryh0M7ggou9TJkkpCJQ5Qqi+KZk6b/9TcaDbgSZAvQFAiepXdVc5W/toGrP9rUw5JxZoe6RildaPrMDa8d3BvUStWVUx4KPdAFTK5aF0442U19+F1zLxhPeu9uiJWLIXo/2DBg140zcK9GnGiUwgiNcqVBush+l8NC1GkYbL03x6Y62zbFLOsLcaOedJgr2p4ekc2Iywsnl8+79qfyiv99w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=w0cPwI9TDYtYBgrCXFnlBUnCzGGqkRaqTqd1Q5nOMbI=;
+ b=hHNDlFtYk9I+Qvehmu3wDwSUcQPqmmVHGKQgXcv3nvcHTISQLo2CVV3kOXaLRTmczAATmvyRfXCuDyRHuHXy5p5f8NA9Y416L8o9NcyK9Q3K1fZlxF1Fi0RfZuRTvB5VtoOGzcAwXWmX/LhoV/8YKauJIdDUs7lRaKIpO4L2rPPDGFIs94C7S7caEGCZ9Po87nJssgBMGZ1p+pqXBJL6G4ej53dSdG8qC4DXdlQvvOnLO34xz+2T1t3vldu1Q4TCL4qMJh/0heIJlFix5WsO/4KOIrli5qCg6hvZlDgCze41Hta7wOU47o1atmGqfIZFYy/tklfJQhJtYNUCQZwyag==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
+ dkim=none; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=OUTLOOK.FR;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=w0cPwI9TDYtYBgrCXFnlBUnCzGGqkRaqTqd1Q5nOMbI=;
+ b=qfJ20I2rZ+/U1ctnugWM541uuNkB1QZbPdTaChrrAF5JcYluSDMLBmsF9Ie/Gs8RXd0vgpEG6zD6wlc86FGVC1WZYu4CHtphr2nDhDqVm8Gnn5jecyCfFwPnpNqKdjkl0Y1StvMglje5NAE4g67jtATP6CZg0bKjOgWNiHWCOSMiq29I6tIKIqfATh89xwwa3qO5pZriKWHmMMf0KqjYWS5DZuDLWwbrsaDaDIsAX7gDpSyBGZ9EOzl6H1DjO3wARekd20yxAqywBSyO4MeuSsqXPshk3FuAxHnv9M9c86ACLBmdXO+qExb8cbQJRhDV/rHS6y5teFED4nwPSW2x/g==
+Received: from BESP194MB2805.EURP194.PROD.OUTLOOK.COM (2603:10a6:b10:e8::5) by
+ DU2PPF52311D3AB.EURP194.PROD.OUTLOOK.COM (2603:10a6:18:3::950) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9913.12; Fri, 15 May 2026 16:53:34 +0000
+Received: from BESP194MB2805.EURP194.PROD.OUTLOOK.COM
+ ([fe80::5ae3:1158:9ce8:90]) by BESP194MB2805.EURP194.PROD.OUTLOOK.COM
+ ([fe80::5ae3:1158:9ce8:90%3]) with mapi id 15.20.9913.009; Fri, 15 May 2026
+ 16:53:34 +0000
+Message-ID: <BESP194MB28053D6BAD2F0C937D848461DA042@BESP194MB2805.EURP194.PROD.OUTLOOK.COM>
+Date: Fri, 15 May 2026 18:53:32 +0200
+User-Agent: Mozilla Thunderbird
+Content-Language: en-US
+To: u-boot@lists.denx.de
+Cc: Jerome Forissier <jerome.forissier@arm.com>, Tom Rini <trini@konsulko.com>
+From: Francois Berder <fberder@outlook.fr>
+Subject: [PATCH] net: dhcpv6: Prevent out-of-bounds reads while parsing options
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: PA7P264CA0203.FRAP264.PROD.OUTLOOK.COM
+ (2603:10a6:102:36d::13) To BESP194MB2805.EURP194.PROD.OUTLOOK.COM
+ (2603:10a6:b10:e8::5)
+X-Microsoft-Original-Message-ID: <a55f8606-7017-4a6c-9833-7ba126bd3491@outlook.fr>
+MIME-Version: 1.0
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BESP194MB2805:EE_|DU2PPF52311D3AB:EE_
+X-MS-Office365-Filtering-Correlation-Id: ee47bd55-74b7-4617-afe2-08deb2a28098
+X-Microsoft-Antispam: BCL:0;
+ ARA:14566002|6090799003|55001999006|37011999003|5072599009|5062599005|12121999013|23021999003|15080799012|24021099003|19110799012|8060799015|51005399006|3412199025|440099028|40105399003;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?NmJlRlVLUDA1VWp6NnVodm9keEdJK3FVc2VGSWc1YWpFWHBtOGpDdC93Rk9R?=
+ =?utf-8?B?WEFEVTBYdEg1Y2NFYWx3cUtWMkUvZk51czNWTjJ1TDF4V2hMbHNwM3RKU0Ex?=
+ =?utf-8?B?WjFETFBYd3NINHlJbndjcjJGbXFDa0hXS0dSdXpEUHNxc0tSaGVaSnVMVWl5?=
+ =?utf-8?B?T0NxVzdWMndaTWpzV0NDdkNMd0NMTkhjd2I3V2RFKzRzWjc1YjFzeXdYMkNL?=
+ =?utf-8?B?aUo5VFVpUXVweUFQb1V6emZWV3g1V21nTlZsdTRodmZZdzV3YWZBKzZxV1JN?=
+ =?utf-8?B?TFJnSDZHSU15UzRlaytJUStId3RxR0M5clNSUm0yL0t5bWtVRDlSRGplcTRI?=
+ =?utf-8?B?SklhRGI0UmE1VDgrSEF3NWRPNE1EcVBBS3RDbUxOb3BGbUpJd2lSdGlwb3B1?=
+ =?utf-8?B?eDBJVnJ6dnBkdWk5dVRYeVhENzE1M1RNSlJLaWxzeVdkTGxDWXFXRGIzcUNZ?=
+ =?utf-8?B?Wm5vTTBmVFJUeUl2Ykw5LzVnUUNaYnF1bHNwZ3ZON21NUEZIaDU3OTdCQkpN?=
+ =?utf-8?B?dEN2Q0Rzd0ZrdXFpbmR1NVlLWFJ1TXFMc0pRbDAwcWRSOFlldlJ5Z3g2bm5v?=
+ =?utf-8?B?MjRvL3FMRG9sZmtselk5anl1bkxTZWdrd2VhVXoyZG9VR0tKYThNRER0Q2pn?=
+ =?utf-8?B?bHlHUjlMSStmRzRkK2ttNkx5Nld0REo3eVZuSnFIcmhxeHRHVEwvK2tQZDE1?=
+ =?utf-8?B?WVgraUU0Wkl2U1hQZDRIOXhJdG1hbit0aFYvQ0NPVk5zdEhyUzkvdEVYMS96?=
+ =?utf-8?B?Q05BSm52RUlpQzVQQTMyQUR1RjBXanZtd29iMWNLK1Q4bldZWDZLQlpsdSts?=
+ =?utf-8?B?RkdMRFdZUnBydUtVeWlYY05ISFNOWUkxaUVUOVdFWGt5R1pRZVM0ZzdKNkhR?=
+ =?utf-8?B?Vkd1cEpMZElMc1ZOSkFLVmFHZ1BHRWx2ZVEvb2l6dG1ZMkJCVUxUVmFyd3ll?=
+ =?utf-8?B?QU56NGdmbzRnalRMWEhjbWx3cHI1dHZ2K1JJc0RITGcyKzd4M3A1SHhoRk1K?=
+ =?utf-8?B?Q1dRcG9LYkFCa2E0V1E5ak1OS2VRdzVZRkIrZEkwa3ZObC9yQy9ZdEd2bnk3?=
+ =?utf-8?B?WlhJVmhBZXB3MDJCbjh1b2QvMFdNSksydHNWSG5sNlVpa3JXTUd5cG8yYnUz?=
+ =?utf-8?B?MHVaSi9pQWdCSGc5ZzZNOEx6ZklqUlFYYjY5WWZHaGc2TW9DaHYrUzlMNHNK?=
+ =?utf-8?B?ZEM2QktZNmp5SUpSU1pmcDJMdVFGTkw2Z1NqRTJPQjhjNVVaUlppZFBWV0xu?=
+ =?utf-8?B?cm96NHhpVUptZDBIMTJXREttb0IwTFJ4aGIzUHNFV25BRVJYMXNDOFZ1bnd3?=
+ =?utf-8?B?VnlxeHp3S05McTZZaDZVaUp5V21abWszMExTdFpOZVNuMnl6NkFLZGdTSFcz?=
+ =?utf-8?B?UEdtRzVzM3NLMzBPTjBscjFYeVBtSnpvWWlrdFdERDZ3Y1FybytyWmdMZTNM?=
+ =?utf-8?B?ZDluT1VPUFhGYWNLd1VUOHJITHdXdU1VeDdaVGZBPT0=?=
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?NmJCS3YvZnZCMExJek16cFVNbGwrNWd3ZXNUcE1sWUJMM0tRUCtrYUhnQWVW?=
+ =?utf-8?B?UGhwZThCZzZtMTVNVlRMc1FxOExCdk1pUzFsTU04Y0dHTTZDMkt5L3djN0Vn?=
+ =?utf-8?B?dWRMVnp1MWdIRnZpTGRRTm9QSDhQVE9xSUNacSs4STcyWXA1V3gwWThCRCtX?=
+ =?utf-8?B?cXhrK000L3RUWDQ0WTlMQnN1RGFTaTllZkdnVzlaSWkwYVdvMkZhVHZwZ3Nk?=
+ =?utf-8?B?RXI5ekhpTE90ekFjVWk4akg1V0tDSVMybVRWcWR5Y0xsRkwycUdnZmdZU2pY?=
+ =?utf-8?B?MVZnTFNITTZTSDQxRk1iNjZvR3ZrSTcwOXhRcGRZcW5TU0xGWWt3ZVgvamlj?=
+ =?utf-8?B?ZG8vRXEzSUtUdGM0MDRyMmdoY29Ub08xa2xiYmdaM1J2eHBjR2t5R296MUlI?=
+ =?utf-8?B?Wm1jUzc2VWtuYU5JZk9CeThqVmFCWDE2ZUhYZk1iUVIzOUtqL0NCREVrNnFS?=
+ =?utf-8?B?MFZqU3o3UXp2dC80VENtOUNsV3FadExYM21wV0paNVVyNzRZNG5BM0MwRFU1?=
+ =?utf-8?B?WUlLdkpzT3hsV3MwSFJpUGVnbzVHNW9jOVYyRmM5TnlFVlkwa1F5bEJ1ZGtt?=
+ =?utf-8?B?N1dTb1hJZ2EzNmNTaTlSdUVwWSs1NE56bFFlSk4wOG90NWZzMlVjL1B0RHY4?=
+ =?utf-8?B?YWt6TUUvZE12dDhBdTBIZVZLcWszNHNQYWw2citQWmpDUU5MYWlVMXlHVElk?=
+ =?utf-8?B?Y0l0bVJBVktkZnlmRmNXczBmQjk5Zld5WGx0cWRxTHI5U1hwMUFsMnhCeGwv?=
+ =?utf-8?B?STZ3RXBQR3FJZTU1VExkRkFKMTM3cUVhSXhzMkl3NllrdnNvdjI5Y2VYL1Nk?=
+ =?utf-8?B?ZVdHT1I4eUR0VTVJOEk3cDQ5YXYyMHUzYnh0eHBLMjR1aERyejZwK1B6YnJJ?=
+ =?utf-8?B?QjliQmhjZlY5YldRRTg2TkZoZjVUdkY0ckV3KzZJVnR4OFhHRG1DUmxkYzZT?=
+ =?utf-8?B?MnZpZHpZWWpCamVOSDFrK0xwTmZjR0Z5UkJvUHNwcWZFdU5ta2huNm8rUGtv?=
+ =?utf-8?B?NEw0QWdHRk5MVjRycE1nank0ZzgwWlprdUpyVU1BSWpxa0VDRHpYS2NjWUwr?=
+ =?utf-8?B?MTh1YW92bUpVZWhsRVhKaVlOcG1wM3R0bjU3Q2dQQ1lqVE5FTjJHWjljRkl0?=
+ =?utf-8?B?Qk5jSjRFVi9MSzBaamRjUzR3OU1rK0tYL0tEaTRGbWUrQnFTUnFHcGkwKzdP?=
+ =?utf-8?B?THNMNG52Z3pUemVhckNTTE5Nd0U5Rlkyb3ZFeTluSHlFL3FJdUl1SW5DeHJD?=
+ =?utf-8?B?enA0L0RobnBhNnhBQTFQWFpJU28xclBLM2I5Z3hrRnJtZitJdFFvcmZTTi9y?=
+ =?utf-8?B?bkUxOTVvRHYxQVJkTkRRcHgzWGsvNEc5L1cvL2pUWkh5QWNSc014Uk5BekpT?=
+ =?utf-8?B?QzUwOVd4eVc1dDE2VDUxTi91eGhONGtZcXM5SEVybzRPQjE0S0NSNnNYckZu?=
+ =?utf-8?B?TWV2NHJkQmhWUzVzQm1JZGY0TFVNNytIMW0rTWxzRk9jY1Mvc2NQNG14eWpj?=
+ =?utf-8?B?N3o3K29BNnNHeUMyaFI5RTdERWFuMGNCR1ZqaXFQa0xsSngvSWlPYlFmRUs3?=
+ =?utf-8?B?dTJ4M29PakplbzFUZjNjdVUwMWRTNmJtbXQyRHRYV3hDbUN6ajByUFp1bVRG?=
+ =?utf-8?B?YjRBNjhRaVBqQ296RnZUMmp3L2hqWE4wOGR1TU9oZEtiOWFZdC9RZmVEaFNT?=
+ =?utf-8?B?dSt0ZDZCeHRScTFkZkt2R0xxQzdpc3IwZ1lSNnB5czBHSnNDeTFuQktOY29Z?=
+ =?utf-8?B?aHVpUkhmcUFZSkt5dURyTitlK1pqa1VaYkhXR0F0dWlkZzd2bjV4RkpmZFhp?=
+ =?utf-8?B?b1htZGVmZDN6WmIrNFZtdm5MWEdTVHBTcVk0ZlMyZ3doanNkSklVR0h4WUN4?=
+ =?utf-8?Q?b/8ma7+98jBLK?=
+X-OriginatorOrg: sct-15-20-9412-4-msonline-outlook-3927c.templateTenant
+X-MS-Exchange-CrossTenant-Network-Message-Id: ee47bd55-74b7-4617-afe2-08deb2a28098
+X-MS-Exchange-CrossTenant-AuthSource: BESP194MB2805.EURP194.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 May 2026 16:53:34.8478 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
+X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU2PPF52311D3AB
 X-Mailman-Approved-At: Fri, 15 May 2026 20:12:56 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -124,79 +154,92 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
---a683b65d35d71b1cbbde9fe2e0594c45f561c8fa4e850bd1e7c7e5146f91
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
+dhcp6_parse_options() verifies that an option's declared data fits
+within the packet, but does not check that option_len is large
+enough for the fixed-size read each case performs. A malicious
+DHCP server can send an ADVERTISE with a zero-length IA_NA,
+STATUS_CODE, SOL_MAX_RT, or BOOTFILE_PARAM option, causing the
+parser to read 2-4 bytes past the option's declared data.
 
-On Tue May 5, 2026 at 6:39 PM CEST, Tom Rini wrote:
-> On Tue, Apr 28, 2026 at 10:41:33AM +0200, Kory Maincent wrote:
->> On Mon, 27 Apr 2026 11:01:29 +0200
->> "Markus Schneider-Pargmann (TI)" <msp@baylibre.com> wrote:
->>=20
->> > These devicetrees are not used anymore because the boards are using
->> > upstream devicetrees now.
->> >=20
->> > Acked-by: Andrew Davis <afd@ti.com>
->> > Signed-off-by: Markus Schneider-Pargmann (TI) <msp@baylibre.com>
->> > ---
->> >  arch/arm/dts/Makefile                              |  11 -
->> >  arch/arm/dts/am335x-bone.dts                       |  23 -
->> >  arch/arm/dts/am335x-boneblack.dts                  | 174 -----
->> >  arch/arm/dts/am335x-bonegreen-eco.dts              |  53 --
->> >  arch/arm/dts/am335x-bonegreen.dts                  |  14 -
->> >  arch/arm/dts/am335x-evm.dts                        | 767
->> > --------------------- arch/arm/dts/am335x-evmsk.dts                   =
-   |
->> > 730 -------------------- arch/arm/dts/am335x-icev2.dts                =
-      |
->> > 486 ------------- arch/arm/dts/am335x-pocketbeagle.dts               |=
- 237
->> > ------- arch/arm/dts/am335x-sancloud-bbe-common.dtsi       |  67 --
->> >  arch/arm/dts/am335x-sancloud-bbe-extended-wifi.dts | 113 ---
->> >  arch/arm/dts/am335x-sancloud-bbe-lite.dts          |  50 --
->> >  arch/arm/dts/am335x-sancloud-bbe.dts               |  53 --
->> >  13 files changed, 2778 deletions(-)
->> >=20
->> > diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
->> > index
->> > d90e02ca4e5c73534ce4c5f41173c897780bc6fe..35145d7e01176e320ebbf5e4004a=
-46540f8933f1
->> > 100644 --- a/arch/arm/dts/Makefile +++ b/arch/arm/dts/Makefile
->> > @@ -403,26 +403,15 @@ dtb-$(CONFIG_ARCH_ZYNQMP_R5) +=3D \
->> >  	zynqmp-r5.dtb
->> >  dtb-$(CONFIG_AM33XX) +=3D \
->> >  	am335x-baltos.dtb \
->> > -	am335x-bone.dtb \
->> > -	am335x-boneblack.dtb \
->> >  	am335x-boneblack-wireless.dtb \
->> >  	am335x-boneblue.dtb \
->>=20
->> I think you can also remove these ones.
->> IMHO all of the devicetree described here
->> https://elixir.bootlin.com/u-boot/v2026.04/source/include/configs/am335x=
-_evm.h#L117
->> could be removed. Even if they are missing from CONFIG_OF_LIST, which co=
-uld also
->> be corrected.
->
-> I'm OK with that being a follow-up since there's been no other changes
-> requested / problems reported at this point.
+Check option_len value before each dereference of option_ptr.
 
-Thanks, I will create a follow-up for these boards.
+Signed-off-by: Francois Berder <fberder@outlook.fr>
+---
+ net/dhcpv6.c | 27 +++++++++++++++++++++++++++
+ 1 file changed, 27 insertions(+)
 
-Best
-Markus
+diff --git a/net/dhcpv6.c b/net/dhcpv6.c
+index 51f44979f8e..640f089a2e1 100644
+--- a/net/dhcpv6.c
++++ b/net/dhcpv6.c
+@@ -339,6 +339,11 @@ static void dhcp6_parse_options(uchar *rx_pkt, unsigned int len)
+ 			break;
+ 		case DHCP6_OPTION_IA_TA:
+ 		case DHCP6_OPTION_IA_NA:
++			if (option_len < sizeof(u32)) {
++				debug("Invalid IA_NA/IA_TA option length\n");
++				break;
++			}
++
+ 			/* check the IA_ID */
+ 			if (*((u32 *)option_ptr) !=  htonl(sm_params.ia_id)) {
+ 				debug("IA_ID mismatch 0x%08x 0x%08x\n",
+@@ -347,6 +352,10 @@ static void dhcp6_parse_options(uchar *rx_pkt, unsigned int len)
+ 			}
+ 
+ 			if (ntohs(option_hdr->option_id) == DHCP6_OPTION_IA_NA) {
++				if (option_len < 3 * sizeof(u32)) {
++					debug("Invalid IA_NA option length\n");
++					break;
++				}
+ 				/* skip past IA_ID/T1/T2 */
+ 				option_ptr += 3 * sizeof(u32);
+ 			} else if (ntohs(option_hdr->option_id) == DHCP6_OPTION_IA_TA) {
+@@ -358,12 +367,20 @@ static void dhcp6_parse_options(uchar *rx_pkt, unsigned int len)
+ 			break;
+ 		case DHCP6_OPTION_STATUS_CODE:
+ 			debug("DHCP6_OPTION_STATUS_CODE FOUND\n");
++			if (option_len < sizeof(u16)) {
++				debug("Invalid status code option length\n");
++				break;
++			}
+ 			sm_params.rx_status.status_code = ntohs(*((u16 *)option_ptr));
+ 			debug("DHCP6 top-level status code %d\n", sm_params.rx_status.status_code);
+ 			debug("DHCP6 status message: %.*s\n", len, option_ptr + 2);
+ 			break;
+ 		case DHCP6_OPTION_SOL_MAX_RT:
+ 			debug("DHCP6_OPTION_SOL_MAX_RT FOUND\n");
++			if (option_len != sizeof(u32)) {
++				debug("Invalid SOL_MAX_RT option length\n");
++				break;
++			}
+ 			sol_max_rt_sec = ntohl(*((u32 *)option_ptr));
+ 
+ 			/* A DHCP client MUST ignore any SOL_MAX_RT option values that are less
+@@ -394,6 +411,12 @@ static void dhcp6_parse_options(uchar *rx_pkt, unsigned int len)
+ 		case DHCP6_OPTION_OPT_BOOTFILE_PARAM:
+ 			if (IS_ENABLED(CONFIG_DHCP6_PXE_DHCP_OPTION)) {
+ 				debug("DHCP6_OPTION_OPT_BOOTFILE_PARAM FOUND\n");
++
++				if (option_len < sizeof(u16)) {
++					debug("Invalid BOOTFILE_PARAM option length\n");
++					break;
++				}
++
+ 				/* if CONFIG_DHCP6_PXE_DHCP_OPTION is set the PXE config file path
+ 				 * is contained in the first OPT_BOOTFILE_PARAM argument
+ 				 */
+@@ -419,6 +442,10 @@ static void dhcp6_parse_options(uchar *rx_pkt, unsigned int len)
+ 			break;
+ 		case DHCP6_OPTION_PREFERENCE:
+ 			debug("DHCP6_OPTION_PREFERENCE FOUND\n");
++			if (option_len != 1) {
++				debug("Invalid preference option length\n");
++				break;
++			}
+ 			sm_params.rx_status.preference = *option_ptr;
+ 			break;
+ 		default:
+-- 
+2.43.0
 
---a683b65d35d71b1cbbde9fe2e0594c45f561c8fa4e850bd1e7c7e5146f91
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iKMEABYKAEsWIQSJYVVm/x+5xmOiprOFwVZpkBVKUwUCagcUJRsUgAAAAAAEAA5t
-YW51MiwyLjUrMS4xMiwyLDIRHG1zcEBiYXlsaWJyZS5jb20ACgkQhcFWaZAVSlMC
-jAD+MMCfiQyPDzBNk1CyEY0Z35afjerSS+lpmdRRP4x2lQ0A+gNG0sdPFaRoCIPy
-VVbSelY8OqOnZbZwexrQ4uGXPNQI
-=AknH
------END PGP SIGNATURE-----
-
---a683b65d35d71b1cbbde9fe2e0594c45f561c8fa4e850bd1e7c7e5146f91--
