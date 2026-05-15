@@ -4,94 +4,99 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78B31CD4F25
-	for <u-boot@archiver.kernel.org>; Fri, 15 May 2026 13:34:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4C9ACD343F
+	for <u-boot@archiver.kernel.org>; Fri, 15 May 2026 13:36:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EF9358467A;
-	Fri, 15 May 2026 15:34:52 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4C82D8467A;
+	Fri, 15 May 2026 15:36:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="LbR3AJyB";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="EHkHt4a1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7D4318467A; Fri, 15 May 2026 15:34:51 +0200 (CEST)
-Received: from mail-pg1-x532.google.com (mail-pg1-x532.google.com
- [IPv6:2607:f8b0:4864:20::532])
+ id 05EDC846BD; Fri, 15 May 2026 15:36:52 +0200 (CEST)
+Received: from mail-pj1-x102a.google.com (mail-pj1-x102a.google.com
+ [IPv6:2607:f8b0:4864:20::102a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3F2C684676
- for <u-boot@lists.denx.de>; Fri, 15 May 2026 15:34:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id ADB4F84676
+ for <u-boot@lists.denx.de>; Fri, 15 May 2026 15:36:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pg1-x532.google.com with SMTP id
- 41be03b00d2f7-c822652f82aso6801633a12.3
- for <u-boot@lists.denx.de>; Fri, 15 May 2026 06:34:49 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1778852088; cv=none;
+Received: by mail-pj1-x102a.google.com with SMTP id
+ 98e67ed59e1d1-365cae89bf5so4081659a91.3
+ for <u-boot@lists.denx.de>; Fri, 15 May 2026 06:36:49 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1778852208; cv=none;
  d=google.com; s=arc-20240605;
- b=G4EdJZnuDASBA1HwR5LZRI/jls2MMJhGJhxi3iVdRFJ/79vvuO5rkSbpciIpDt9qBB
- JIENtsWy7MBXu+QsFTVfL9dTRW8dW74pFzobCq7NTpdu9anl8EvQuKRytU4HbvHc3TXm
- MY5Z56JaDJeoW78e46uo9/SzPFDbfqszjQ6/GENqh2mfZQMHjk47wHDKdNcqIyU7I4Cm
- GyoBCxoWZxqLeh1uztnffk4lmnZcl5VJEmhZ9i/RP0E+UB6nUl04lmsdH8o82JBONOGj
- 6q60njAprxylIW8/Zoai9jZZ0LJeeR/RgUyRbpdyvIpFZSQqB1X6hJQQR722a71MjP8g
- qTQA==
+ b=DMFO7pRdfnMVH4sUPRwwvTXygrNfpXOba3aP/zJTOaYRzSu2U2t66pJwB6MaT/Xv9m
+ BRU0EM39Lw/iXe/xTZpqecqN742uiCPwK+SxV83yoG7B9wIFnyuN1wFlyj79N0FtDMaa
+ kIZxW36E/qS1YpkMvOZPesIAB0IcM8R18GU/TXjYljbDEHZ7JmDSkPuHbqf6Crq9BNYv
+ kpBz/iJZt7aUSPkWtfTfTGPNDIuqcohKQ5DvLaOloCEHdM7w3DDbeVkne0WH/9isLIvm
+ ryRLG/GqkUBNXdfIebSxiwNEa8nor1j/3Y94zdGzkDUJ5sv8DTBOD7fnhOsixf8roHlp
+ K2fA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=vrH1+i9ANv8kcO0i7a7gNq463pJJjkaNwiQhL/d6MF8=;
- fh=qmb99AbYrxQTqbU8c3YoikZ37BstHm/br0rQHEGk45c=;
- b=PFZy+jzkfAnPfWA1a8mWEl8kbMauFBgWPYFwv/bfjUXXxlC5PabYB+DlXQDujcR9Uf
- s/OkFiXlxoHZseUuMjGULsWF36M7ZLq364SoCatksfEXN5nNayuP4yACE4qXo2b9yPSH
- rnJVU/pK51Za4y1x+naaNToq0kYuWzdWJMuGF1CU8KjZwNyI5dFjzh0jIJ6453XM9WZ6
- rDyB7PtNgqWKmR18tWFqt/InykKeNdv+bxSRVFefRPGZ0TE2qGKRikdmpJ2GZXap8B+9
- flQAP/vJkqtsP/BwKH2a79n/OUkCWKZZjon2qhJoBTTox1G1+kuxlXnB2okQVaeRBqcD
- cuDg==; darn=lists.denx.de
+ bh=eLXq7Lq5kykAq6ahMnL4A2dcaiBV9/D8vIDVnc0Jlb0=;
+ fh=VGw2T5L2m7Yh9U17+9EpcVjHk1AL8r4EmR5Gn6A4xk4=;
+ b=ipHKRCAFs4on6YafZFKz8uYkc/peT+22NoJQ2/ryiYCRqeN9O8HHFuTiTJAZ1fmeyh
+ PMC2A9NOn6cv9ijn5/l0pcsBWQMgH9qFhmlmwLFkx7+s4ETBuXaA/Hty7ryXe/D6PiY6
+ HwlUg3GuhmxBNR8wB4hPy0f8/1bYYQCIQsMt8j/H3Ui4jIhuSgJTgxheJHFRnZ5Rj6sj
+ t5zijivYCXYaXwaflOmePwuJLhj5jZXEfdT1adQ06FgQ+3yuLlbJ2FS9m71PSr2uI4CA
+ +Vy/Ker6kXMllljFnJ7GtxhvWN6Gms5QVuncGPsyvr/RF882/5x3JK/zF607vhYvjiNH
+ 0YPg==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1778852088; x=1779456888; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1778852208; x=1779457008; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=vrH1+i9ANv8kcO0i7a7gNq463pJJjkaNwiQhL/d6MF8=;
- b=LbR3AJyBaduMNkF6ho9Fe1FeX87GWaDieFkPCtbbdOZHRF0vCBVTPDXkgeCcxXIxSp
- CiCfZMuRQr0KPTOUU5MxM3la+u4ouNEIsdDkj7zIpKlTxlv2yfj6A1uq5oh9ZUP+uSQH
- n3DAHDssQKqHkipS92EfGwO4hmsQmCcaivKoI=
+ bh=eLXq7Lq5kykAq6ahMnL4A2dcaiBV9/D8vIDVnc0Jlb0=;
+ b=EHkHt4a1yzW2T6O+oS/YskOcOUgHIjhi1Iv6iLReH4igRxLLQCuYsIDVwxhzKHiCkl
+ AmMzmUJGPvy9GNMLHRj9iaAK4mQbCrTI+omPSFH0RNSXSlXt8hnZDMYFiGoAPRtTnYGW
+ KH1S9//90yl0WY4fOmu8l4RnUe6CBX5v6X1dI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778852088; x=1779456888;
+ d=1e100.net; s=20251104; t=1778852208; x=1779457008;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=vrH1+i9ANv8kcO0i7a7gNq463pJJjkaNwiQhL/d6MF8=;
- b=IUctZFrLv/z6cEwiMqnA7lu5wItcIrxAa74q16ni83sQaEaMqZ1Fip9YXyf1zaLrrU
- eHBEUr+YvnOFKgPXj7P2W3Um43mzsUx3JAgXjVJO7zgZXgltPwvHG1SnWoo3AXfCbTY4
- hvHvxu4a2wVYCoJnsdM3/QvmDeKrK0W0WLr85cv8o8mbDEdHbheojkRFtSl+Nq0eMbYZ
- T0aegtl4EOW4uWs6HVxZJ13XYSXDgzMt6mHdg/yebIwb4qZUjxsyBPHAXn1+VToqd2wl
- xtnGqGtEPqoV4z/q60AdCdP1sKpL/D/+/JdLh1FjLNR6BdpY/LrWfVGleW4eeJ75nsQ0
- 8HJg==
-X-Gm-Message-State: AOJu0YzFWl8g0FBMt3M4qXoBOZ014y6sCfU//DsvksuTc9MC5y8IOd7T
- Ih8wQPvFHDyHMBQbfiW46vxt0+4Yju9qEB4gG1uTDA4cp//6EYG4iIj1SodsIirgo6g8aFunCZV
- JjnzBcQT69MVmMR2WgMwl4M88HnFwAZU1kIYPNmj9
-X-Gm-Gg: Acq92OHf0JkRo2uAXhhONJIUf6h8lM0M7dd3kb7/HTRwL9OeHXFVHwpzDSvFts5bjex
- veX2pQi7sKGc5biRkx0SDY9HNYKSfimXU34njFlTsww5HYqf85zSP7j9EIr11FBGm8QUNs6EdwM
- qMIhwuwWOonHYbjRUqj1AaIdIwfMAbORFoO6+Gp+T/RNMrdjXndbi3mGp+ZL5g6kqnY8o/PmHwj
- BxUUP+O7qKiLAgjWtLClxYoCYvpGlewl5KVi8rL37aRnYREPZxAVxYBr3IY7G+1ZCNqxiwGufLM
- M9/NxVKYvzmx2G/y
-X-Received: by 2002:a05:6a20:3d8f:b0:3a2:f402:50fb with SMTP id
- adf61e73a8af0-3b22ec9780bmr4659695637.34.1778852087663; Fri, 15 May 2026
- 06:34:47 -0700 (PDT)
+ bh=eLXq7Lq5kykAq6ahMnL4A2dcaiBV9/D8vIDVnc0Jlb0=;
+ b=Ncj6pkIfdLshoe5q1bxFcenNydt4KjZwwsAClfc7eDWd32NYCN92XNCaRbxn6QOVv2
+ eQb3501kXfXpEqOnxzDxEQCkIDdnSLjovKbzqYHVbIDgtqEW6C951JUcZ/YzDVbPHl/l
+ ON72QDdyNchLD8zNrlmA4ebmnnSc/X8udO0q1a11rqUjKWgEhnLUaflrgA2z4PyIULEc
+ 14NW4cZ168baCM5hHIkscSKRuFGPkgS43lI3HpUDHIlpUNnGKBOiGeB+8LHlPhX1FWX5
+ bOJRcZokir1C0y6gDZ5By+Hq2B0cof9sNIr6yS1Xx1fJfSXN3q/zFPsEpIZye6YopQsA
+ wirA==
+X-Gm-Message-State: AOJu0YyvQY2NQJ5Z12/I93nrJETqAxNxswtj5nrlXx5/Orpa3nKbm0dm
+ jMv8F01HHD2nfrWPRZMsawVecA3+UexDBgmKu07Id/FtRfMS1BosGlhVt798PzSz+ciQoLuP7Ou
+ rsgYFj5RiRNn3uXofgcCCgLT5UgUCQuY1TaJbQXhp
+X-Gm-Gg: Acq92OHPjM1BtYoPMgJZTCqiusJqgQa7J5bWgjhDh6qQkLV9zeYJABPDWWXk4rjG1GL
+ ryRkJFBWV99F74uSPyqdDOGHhnhOmNx41Ng9Ng/OJzLkULMSSmUc68kCegvmBXZhLeG9050gZZN
+ IUubAJyd9qff54q2SqCfosSQR591oVbyC0MFrYlrE99N4FbpZf47CFkPeCcK8OOaJrYDxt2L2P/
+ +/LytNKzf6eIqhTF7j/rKcM/iLpOhnfZQ8oTHUNDIvw6slaANyuJDokAUD0LxLxfybJWMs0THir
+ SH74zQ==
+X-Received: by 2002:a17:90b:1c82:b0:368:a1c2:57fc with SMTP id
+ 98e67ed59e1d1-36951a1d593mr4253360a91.12.1778852207889; Fri, 15 May 2026
+ 06:36:47 -0700 (PDT)
 MIME-Version: 1.0
-References: <cover.1778665323.git.michal.simek@amd.com>
- <ced1fd0e7b531fcfae9ee7c0a107ee660d27d580.1778665323.git.michal.simek@amd.com>
-In-Reply-To: <ced1fd0e7b531fcfae9ee7c0a107ee660d27d580.1778665323.git.michal.simek@amd.com>
+References: <20260513141027.351280-1-ludwig.nussel@siemens.com>
+ <20260513141027.351280-2-ludwig.nussel@siemens.com>
+In-Reply-To: <20260513141027.351280-2-ludwig.nussel@siemens.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 15 May 2026 07:34:10 -0600
-X-Gm-Features: AVHnY4ILfWqz36KHZxg82RkFmOjffAi8GGImbVGS3RK4mNXcThJWoc055qcfiho
-Message-ID: <CAFLszTjgoxeVkyr+TLNOY0mURhRQPv=RUCp+4ZP0zjSD30vfAQ@mail.gmail.com>
-Subject: Re: [PATCH v3 3/5] reset: sandbox: Cover reset_reset() fallback with
- second sandbox provider
-To: michal.simek@amd.com
-Cc: u-boot@lists.denx.de, git@amd.com, Simon Glass <sjg@chromium.org>
+Date: Fri, 15 May 2026 07:36:33 -0600
+X-Gm-Features: AVHnY4LY6lOLllz-CLt4gPqc9cDIMRC29uhiw3q0wIi82UGd-zylflYWEDk6mUo
+Message-ID: <CAFLszTg5BuodFz-CGpgABoqiA+OEWq3rfBCyw9y-Nms7=xUHGw@mail.gmail.com>
+Subject: Re: [PATCH v4 4/6] test: vboot: handle CONFIG_FIT_REQUIRE_CONFIG_SIGS
+ in test_vboot
+To: ludwig.nussel@siemens.com
+Cc: u-boot@lists.denx.de, Copilot <223556219+Copilot@users.noreply.github.com>,
+ Dinesh Maniyam <dinesh.maniyam@altera.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Michal Simek <michal.simek@amd.com>, Peng Fan <peng.fan@nxp.com>, 
+ Pieter Van Trappen <pieter.van.trappen@cern.ch>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -109,64 +114,80 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Michal,
+Hi Ludwig,
 
-On 2026-05-13T09:42:05, Michal Simek <michal.simek@amd.com> wrote:
-> reset: sandbox: Cover reset_reset() fallback with second sandbox provider
+On 2026-05-13T14:08:10, Ludwig Nussel <ludwig.nussel@siemens.com> wrote:
+> test: vboot: handle CONFIG_FIT_REQUIRE_CONFIG_SIGS in test_vboot
 >
-> Add a sandbox reset controller compatible string
-> 'sandbox,reset-ctl-fallback-only' that reuses the existing sandbox assert,
-> deassert, request, and free helpers but omits rst_reset. That forces
-> reset_reset() through the core assert / udelay / deassert fallback.
+> Make sure test_vboot works with CONFIG_FIT_REQUIRE_CONFIG_SIGS set
+> and unset.
+> Enable CONFIG_FIT_REQUIRE_CONFIG_SIGS in sandbox_defconfig and leave
+> it off in other sandbox configs
 >
-> Extend the reset-ctl-test DT node with a fifth reset line named 'fallback'
-> that points at the new provider, and add dm_test_reset_reset_fallback_path
-> which verifies sandbox_reset_get_count() stays zero (rst_reset is never
-> invoked) while the line ends deasserted after reset_reset().
+> Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>
 >
-> This complements the existing rst_reset coverage on sandbox,reset-ctl and
-> matches the approach of using a separate controller to exercise the
-> fallback path in unit tests.
+> Signed-off-by: Ludwig Nussel <ludwig.nussel@siemens.com>
 >
-> Signed-off-by: Michal Simek <michal.simek@amd.com>
->
-> arch/sandbox/dts/test.dts     | 10 ++++++++--
->  drivers/reset/sandbox-reset.c | 27 +++++++++++++++++++++++++++
->  test/dm/reset.c               | 35 +++++++++++++++++++++++++++++++++++
->  3 files changed, 70 insertions(+), 2 deletions(-)
+> configs/sandbox_defconfig   |  1 +
+>  test/py/tests/test_vboot.py | 60 ++++++++++++++++++++++++++++++++++++---------
+>  2 files changed, 49 insertions(+), 12 deletions(-)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
 
-> diff --git a/test/dm/reset.c b/test/dm/reset.c
-> @@ -151,6 +154,38 @@ static int dm_test_reset_reset(struct unit_test_state *uts)
-> +     ut_asserteq(0, sandbox_reset_query(dev_reset_fb, FALLBACK_RESET_ID));
-> +     ut_asserteq(0, sandbox_reset_get_count(dev_reset_fb, FALLBACK_RESET_ID));
+> diff --git a/configs/sandbox_defconfig b/configs/sandbox_defconfig
+> @@ -21,6 +21,7 @@ CONFIG_EFI_CAPSULE_CRT_FILE='board/sandbox/capsule_pub_key_good.crt'
+>  CONFIG_BUTTON_CMD=y
+>  CONFIG_FIT=y
+>  CONFIG_FIT_SIGNATURE=y
+> +CONFIG_FIT_REQUIRE_CONFIG_SIGS=y
+>  CONFIG_FIT_CIPHER=y
+>  CONFIG_FIT_VERBOSE=y
+
+Turning this on in the main sandbox_defconfig means the 'Test FIT with
+signed images' section (behind 'if not require_config_sigs:') is no
+longer exercised in CI, and test_global_sign() is skipped entirely. We
+lose coverage of image-level signatures and the pre-load global
+signature path on the primary sandbox build, both still supported
+features.
+
+Please leave sandbox_defconfig alone and turn this on in a secondary
+config (eg sandbox_noinst or sandbox_spl) so both paths keep getting
+tested. Or restructure the test so the image-level path still runs
+when require_config_sigs is set. Worse cas I suppose we could provide
+a runtime mechanism which the tests can control. What do you think?
+
+> diff --git a/test/py/tests/test_vboot.py b/test/py/tests/test_vboot.py
+> @@ -306,26 +306,54 @@ def test_vboot(ubman, name, sha_algo, padding, sign_options, required,
+> +        bcfg = ubman.config.buildconfig
+> +        require_config_sigs = bcfg.get('config_fit_require_config_sigs', False)
+
+The same idiom is repeated in test_global_sign() below. Please put
+this into the outer test_vboot() scope (or a small helper) so the
+build config is read once.
+
+> diff --git a/test/py/tests/test_vboot.py b/test/py/tests/test_vboot.py
+> @@ -485,6 +513,14 @@ def test_vboot(ubman, name, sha_algo, padding, sign_options, required,
+> +        # test_fdt_add_pubkey reuses this tmpdir and needs sandbox-kernel.dtb,
+> +        # so compile it unconditionally before any early exit.
+> +        dtc('sandbox-kernel.dts', ubman, dtc_args, datadir, tmpdir, None)
 > +
-> +     ut_assertok(uclass_get_device_by_name(UCLASS_MISC, 'reset-ctl-test',
-> +                                           &dev_test));
-> +     ut_assertok(reset_get_by_name(dev_test, 'fallback', &ctl));
-> +     ut_asserteq_ptr(ctl.dev, dev_reset_fb);
-> +     ut_asserteq(ctl.id, FALLBACK_RESET_ID);
-> +
-> +     ut_assertok(reset_reset(&ctl, 1));
-> +     ut_asserteq(0, sandbox_reset_get_count(dev_reset_fb, FALLBACK_RESET_ID));
-> +     ut_asserteq(0, sandbox_reset_query(dev_reset_fb, FALLBACK_RESET_ID));
+> +        bcfg = ubman.config.buildconfig
+> +        if bcfg.get('config_fit_require_config_sigs', False):
+> +            pytest.skip('simple-images.its has no config-level signatures; '
+> +                        'incompatible with CONFIG_FIT_REQUIRE_CONFIG_SIGS')
 
-The line starts and ends deasserted, so this only proves rst_reset()
-was not invoked, not that the fallback pulsed the line. An
-implementation where reset_reset() returns 0 without doing anything
-would still pass.
+Worth mentioning in the commit message that test_global_sign() gets
+skipped, otherwise it's easy to miss that we silently stop testing the
+pre-load global signature path. Also, the comment suggests the right
+fix may be to provide an .its with config signatures rather than skip
+- is there a reason that won't work?
 
-You could reset_assert() first, check the line reads asserted, then
-call reset_reset() and verify it comes back deasserted. That mirrors
-dm_test_reset_reset() from patch 2 and actually exercises the assert /
-udelay / deassert sequence.
+> diff --git a/test/py/tests/test_vboot.py b/test/py/tests/test_vboot.py
+> @@ -306,26 +306,54 @@ def test_vboot(ubman, name, sha_algo, padding, sign_options, required,
+> -        ubman.log.action('%s: Test FIT with signed configuration' % sha_algo)
+> +        ubman.log.action('%s: Test FIT with unsigned configuration' % sha_algo)
 
-> +     ut_asserteq_ptr(ctl.dev, dev_reset_fb);
-> +     ut_asserteq(ctl.id, FALLBACK_RESET_ID);
-
-ut_asserteq() takes (expected, actual), so this should be
-ut_asserteq(FALLBACK_RESET_ID, ctl.id).
+Good catch!
 
 Regards,
 Simon
