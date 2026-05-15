@@ -4,105 +4,105 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CDBB8CD4F39
-	for <u-boot@archiver.kernel.org>; Fri, 15 May 2026 00:46:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B47A1CD4F3C
+	for <u-boot@archiver.kernel.org>; Fri, 15 May 2026 02:19:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 121B884671;
-	Fri, 15 May 2026 02:46:38 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A524184671;
+	Fri, 15 May 2026 04:19:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="bInQe8Ax";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="e9Y23yql";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B253D84676; Fri, 15 May 2026 02:46:37 +0200 (CEST)
-Received: from mail-oi1-x234.google.com (mail-oi1-x234.google.com
- [IPv6:2607:f8b0:4864:20::234])
+ id 430E78467A; Fri, 15 May 2026 04:19:13 +0200 (CEST)
+Received: from mail-lj1-x233.google.com (mail-lj1-x233.google.com
+ [IPv6:2a00:1450:4864:20::233])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1F9F9836AC
- for <u-boot@lists.denx.de>; Fri, 15 May 2026 02:46:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 07C848464D
+ for <u-boot@lists.denx.de>; Fri, 15 May 2026 04:19:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=briansune@gmail.com
-Received: by mail-oi1-x234.google.com with SMTP id
- 5614622812f47-479aa2dbea2so3760560b6e.0
- for <u-boot@lists.denx.de>; Thu, 14 May 2026 17:46:35 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1778805994; cv=none;
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lj1-x233.google.com with SMTP id
+ 38308e7fff4ca-3937014be0cso81014451fa.0
+ for <u-boot@lists.denx.de>; Thu, 14 May 2026 19:19:10 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1778811550; cv=none;
  d=google.com; s=arc-20240605;
- b=CxKgcU0LZVglXcELl25ohvZEkFZNO5zrEu/JD2igCBf8wdzuzjZQvUUPyyIw3ns3Zv
- gD4z0X6RBtYruLyR7vtSLAmX6ohQKurFijlL3dDaaUO5Q0Pd3rnLMyswRvRQ+USpMmnl
- EYH6Arb9m5e/+Jbtm1IdBNSTd/hj2m/X8q7nl56Mixu9UY60IiyJ4xRWT0VBLdI2tkrc
- La9SFDWB8S2eTnVeh2aHN1GsCw1UOk8DtqK68NZGHlasyhZND7vlQMRvftC+kHURXWvo
- c/wx2Gy7GmagQ+cmBqTclifDjc8IcUdplpR7QH7THzKcMeQysVqEU0V33xZ20iUTaD7F
- 6MZw==
+ b=dO1PTJzDt9qNDEprNZPrMUyqR8GoS+Q2AOvZF4W84BT6DdVDPFsrBsDefm0BBp95Jg
+ g6e3VRI4d5R8alz9RLmUmfQZ/FEdZoaOBxX5+ueUnHXjwhgdDGcS+I5acs8TcLk6OekC
+ WOAIIYS6js8TrabqvZZMK5RHtnt616CHjNESjxBvn8fbCR3yCUEDqR9bM6Gjlov/VYHg
+ tPWX8/1WpFtyDXKLkUFJaJqCiKBGUGlInFgOfux/2lB8MEfjeyChZD4xygQAUBXKYF9g
+ dhsxFoCeqxJolztwvdGD2GcPeDF2lHXtTm3eP8CaKGUH6t64OiQ4jurCtyXsutxtXeIs
+ Up3w==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:dkim-signature;
- bh=jKp098lpvpHDAQf7Zz/09PLD13pfyekS6g8gbIg+hd4=;
- fh=RqRCtJ1kBghELp2W4GFVUm6WEit4LD84SAwsVzeWs6s=;
- b=hlJTbwM7y4pb/uthl352OdFtNUUSzsBci4JWy39vuujEjuCD4DKpe0HkejGoPdbIyo
- 8Yp14QUl+h71Q3GmItghn2qFSi3ta+XLjcbVHARUM6Ut3KG9XyUc5FM4Eli1Br/baZ52
- EaejOuLNeqy4ViUR7F7dvdtJdKmAwRYelw17Mp/Ad+Naq9XMUZ1vkx3SYdqIlw7DnqSH
- FLmCY33PI4cAYJXOxnnt3QSuzazmQWoHKFCTMv1JSyU+eGzwQEo584lSs+eZr+3uKEPM
- ZTlWzUqtXlGLmUyA1ckiSTh0/bQvnbvZjbEqubDVFTFo5x76BszqiNE3ZKmHZpwxBEJQ
- cKtg==; darn=lists.denx.de
+ bh=wUhxNzfdFIy3K+yWareVZd1hfjNvaFk/qfZdnBlBaMA=;
+ fh=wR+86S+xvD+GQRuAaos8ddh2YMywLITwsKKGC2pMVFQ=;
+ b=RYOuLW1N6Y0/3cKirz+QuC9/RdBSZEDrysM35xz3PMeQKeTisAo0Xvy2/wWaoY7/cZ
+ SB4d2T0x9zyuG4bH4sI+9+IRmcwGKM4JXg/OLHX1nU4qFpwJ6Ss6HUxfO7I+zeHmYbkM
+ zvyXoHSPlwJvHhoM7kOq4NgL/YSHkvRgf5SgjeuFG5pOSaHCSmBwwAoDmLXJI867vXqs
+ s3SFp95rlFJtC1aL0q+y2k6pH2UU8HmtELFQzm+SC1LbyzKXVQSldQ3tRQSy/RJ1t6IS
+ L8QCorHUP+6nsvi2Gj5hQ6U22E8J5I6gjBK8rNwayIIuY9nJh3IxO6KmnWyIPwtdfBeU
+ XsHQ==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1778805994; x=1779410794; darn=lists.denx.de;
+ d=gmail.com; s=20251104; t=1778811550; x=1779416350; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=jKp098lpvpHDAQf7Zz/09PLD13pfyekS6g8gbIg+hd4=;
- b=bInQe8AxbT9/Fs7fYsYa8qfl6mBdLhy9AsKyvRitMX06gaFA7K2vJm0qm18thyxo7G
- RY9/WhGGa2CWmOa/SczImIfajzRwYUF68e5Ous8sYmw8XdASbBLCHHH91sGQR6ZU//rB
- R+etz0NYXukh0a4x+fSAs4rrpwmdOd7tAHVc6ll68lFABlXkff+AMp23Cw/LGMGjkWEY
- XqeUspGdTb8aX6WT6p9cfZNZ934S5MtRHJ4e3GO7VVpE7Rclz88QScmGG8gDtCWHaRwE
- uCRMvxka/SyQ5lTCJd7WrrLo+s/Mt1S87LBw7POglKQeKQYtY12ydCK5D2mqg3qr0uEW
- 93Sw==
+ bh=wUhxNzfdFIy3K+yWareVZd1hfjNvaFk/qfZdnBlBaMA=;
+ b=e9Y23yqlRCopy61c0Ya7+6R4ATJ2TpGNTZFSn/JpBsQ30IU4xDdLXKabVV8iI6mwPg
+ s35pW65LHVFnPqdEdBjN7vSZv4n7o4abILiy75f1MM2msUBpy9Ci6yQRV0gszOH4mKwM
+ 0yG4LGpE6YhN1gKdLsHon93gi50QYFAjXC3QeuqD3gbsWy4qEMzABj26MCDCyj3SJoMl
+ 6eslTzbj+5Itk1XQJ8mFtrwjeSRnk9mT5C+I8IP/kVQsa6WXGqmYKOjxVSsT4TDYflI1
+ cOZeEaCVsMhQaWHA03xqDIvoXf23th+k7sR5pesAqT8I07pTp9T6ZcSWWZREXHJC4tXb
+ 95GA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778805994; x=1779410794;
+ d=1e100.net; s=20251104; t=1778811550; x=1779416350;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=jKp098lpvpHDAQf7Zz/09PLD13pfyekS6g8gbIg+hd4=;
- b=Jn/XlTm+1AgTf73q35ZWl3dlkdmqqFV0YbVs2603lZGVi85PSjRByDQZpoRxUPRoEv
- KH9PfMTcq16RHIpMDViia64WxM/VqB7npgCN/18PQNZafxunQH5BuxZEJo6ua/7GrC/D
- 4T4eaczkU5v7JKJLFLoBDix4a7THX8EMbJBuB1DYwSorJssu/dpWtltBDOCRq5REzelM
- ygl7TvELMlDLGbW2bSMxnESTjJo7Dwt1b30Jdbzmu19/wZkAyrAubylwgCQAtJIRmcdL
- H12QPqgymGVWgcfZ/6+hZ0eN/EC/k2uDPeV0y9moXPXJ/9YZ6DFo6AbsuTwDYB1Ptx0c
- GvFw==
+ bh=wUhxNzfdFIy3K+yWareVZd1hfjNvaFk/qfZdnBlBaMA=;
+ b=caWWPugigbEtp96OAR86sQeIf+sgkizi6hy8JJfX15As9uyFGGCsf+EC9LotwWPa7c
+ X9TmMhBJbmH4X/HEFwufXrR4rS05g5BqXW6X8ALFtk0+lXREvbreddpr9smaC2NdU9UN
+ MnFGQN2ZDfiaJBmP+S2vrp2lNPAGevYxYlMKuXKHGV7eLkmoQmp/OOj9qdZrub/Tasv/
+ UmMcZjhEWNaOwb5tNpGSq5fE72on8nkZL0a5nlRAFwnUc0yEFR+sF1cqHrL/l/BW5A+/
+ 9S06sgJUvPhBZbi4QixKus6GfQjOXYWdsesrcuGaX66AZICvtsOvxWY8o0VCnMUmzzJr
+ ne+w==
 X-Forwarded-Encrypted: i=1;
- AFNElJ8SFh0mr68KxSa3VpMbinIUNhJxv26FxzXLHvdlu8Kp78Wy0EH7QBJGQPGdS63bRL/bvSPegp4=@lists.denx.de
-X-Gm-Message-State: AOJu0YyAC/xmlCrPzZEMWNbA+8J3LuhJbRXtXnbHDtjKatllK9eMBLXc
- 6B5Y02wZCiuckXd1oiSqVRbD8cmxIde+7TyEUfjyQOkXl+tvZtDYJrofxJjkJWLsBQ5Wq/ndYf9
- /+VPXLFFOzj2s9vCEH7pZBMPGttBWnCQ=
-X-Gm-Gg: Acq92OFvB1oRkrMif0q0iKfbGxQVlDXZrGeJlzMQ8BSs5DNjevL9v/BEjjmhAALZa+W
- xCPlFz4147z2ueh41oxHupyYuOGmCrwT35LbXHzcmU4cu9yezmVIjUau9//5b1Fg7mEOCCefCC5
- C9Yi4WEn3FbLIPxFyq1tAr9rKHfTCbHmYab+fniGVcNwT4nE81S0i9gDN6y14+dLgwkW/apgGA3
- lED7ZoVvJGaGfQcPcRwNXgGMy7+MA2WWU3aPBGsoMvDnpcfKqYrOCb27M5kbKwuD95yV+P4Jcw9
- B/XfEGkiwiYm1UIF1YRcQMuOzS0xtw==
-X-Received: by 2002:a05:6808:23cd:b0:479:ac7d:6d8a with SMTP id
- 5614622812f47-482e57b92c8mr1230319b6e.24.1778805993735; Thu, 14 May 2026
- 17:46:33 -0700 (PDT)
+ AFNElJ8/dMU6iJdHZk1B15Fmu+b1e1nmI3DGhrjOjkum5fovhmvW5uKSVm3CyVu7INq0/WhWkj04xrY=@lists.denx.de
+X-Gm-Message-State: AOJu0YzuCxKiTaa1Qvifro4k0s8cWkdGCUJcoIoX6o7arGWmEEh61L2f
+ GjnEkiZljTHqcPmNMeZs+Msnppw1YvkGwVf4Atg9EICo9vAnfcnjN0djf4YEzX3KrzVb1Ve5Luf
+ xjRfXDthvSBSlgckewN6AOKel/puw0x8=
+X-Gm-Gg: Acq92OEZ+KI9OMTwa7qvL5NpDmGSYCPl0lkC/+RgM3uTQcsu7CSz9vHOJi8UjPH+lH+
+ iSO8HeATB35OMp0FTcYOuLAZqQvrfoZmnedJA4x6bqZVezbOY4Pw+NsdTU5WCL/aOAWcaGs97Te
+ BOdKo7MbVPh2a+G9glfESun7+M/ISNpm/9GHq+P9E7vCTeJuRwMpCHgVsTlgVsjQZ8tYdFhmLwp
+ GvPuw2Gs4W3YiK7W3YG8icRXbz/k18QiwW4rj+1vphob/DGx6EwyppsvlyCaStfU8zmud0f0V83
+ /csfk4/QYklsBmHZK3fyvwmGDtVQeKApCufs60JG+gQULR/CeER/skVxXyAzHZNzNFyZUa6w
+X-Received: by 2002:a05:651c:12c1:b0:38e:2fcc:78ed with SMTP id
+ 38308e7fff4ca-395619baddcmr4970021fa.0.1778811549903; Thu, 14 May 2026
+ 19:19:09 -0700 (PDT)
 MIME-Version: 1.0
-References: <CAN7C2SCYCwE=BRoeCedqQYjv-Gf6x6ETOdKeeDBE=CG=-rSk9w@mail.gmail.com>
- <CALeDE9PU0-fW_+erR9QHK1ST8fcStx0FWWk_0M8ELjtADugd7Q@mail.gmail.com>
- <CAN7C2SCATJL_rhpBZWwZuQVpLdnbDh5+DRFbtGHoxCXu62AVmw@mail.gmail.com>
- <CALeDE9PesKLwzt=uu_b8+pq5QXFnnK1YAO9WL3f8=CHx93w61w@mail.gmail.com>
- <CAN7C2SC_YwotE2-PS=eAFEnMOXp7jVrhaOSbKsuChLVr4zEa8A@mail.gmail.com>
- <20260514-spotted-happier-0ccb77ca8f24@spud>
-In-Reply-To: <20260514-spotted-happier-0ccb77ca8f24@spud>
-From: Sune Brian <briansune@gmail.com>
-Date: Fri, 15 May 2026 08:46:25 +0800
-X-Gm-Features: AVHnY4IXLonnic-yfQlcFUJNiZcmNVfZBxE_gd2xWtdnItgXae8ipgt8KCGD4cU
-Message-ID: <CAN7C2SAVWp23mKeG77MoV6kUKQDBN_Ge3CUMa_quAXP5YbV6UA@mail.gmail.com>
-Subject: Re: U-Boot patch submit standard and requirement
-To: Conor Dooley <conor@kernel.org>
-Cc: Peter Robinson <pbrobinson@gmail.com>, Tom Rini <trini@konsulko.com>, 
- U-Boot Mailing List <u-boot@lists.denx.de>
+References: <20260428085117.402523-1-brian.ruley@gehealthcare.com>
+ <20260428085117.402523-3-brian.ruley@gehealthcare.com>
+In-Reply-To: <20260428085117.402523-3-brian.ruley@gehealthcare.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Thu, 14 May 2026 23:18:58 -0300
+X-Gm-Features: AVHnY4LoSLW2uPDh_QEeadPc_VCpll5ep6cPFBF5_9ds4p884lUekg4MThw7XJQ
+Message-ID: <CAOMZO5De=9ECdSZ=VxvhrAJxRX7vpHu65hCueUn7VChmBnYPxQ@mail.gmail.com>
+Subject: Re: [PATCH v2 3/7] imx6: clock: allow different clock sources for ldb
+To: Brian Ruley <brian.ruley@gehealthcare.com>
+Cc: Stefano Babic <sbabic@nabladev.com>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, 
+ Tom Rini <trini@konsulko.com>, Heiko Schocher <hs@nabladev.com>, 
+ "Huan 'Kitty' Wang" <HuanWang@gehealthcare.com>,
+ Ian Ray <ian.ray@gehealthcare.com>, 
+ Martyn Welch <martyn.welch@collabora.com>, lukma@denx.de, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -121,188 +121,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, May 15, 2026 at 12:14=E2=80=AFAM Conor Dooley <conor@kernel.org> wr=
-ote:
+On Tue, Apr 28, 2026 at 5:51=E2=80=AFAM Brian Ruley
+<brian.ruley@gehealthcare.com> wrote:
 >
-> On Thu, May 14, 2026 at 07:46:46PM +0800, Sune Brian wrote:
-> > On Thu, May 14, 2026 at 6:37=E2=80=AFPM Peter Robinson <pbrobinson@gmai=
-l.com> wrote:
-> > >
-> > > Hi Brian,
-> > >
-> > > You have made a very generic statement about levels of accountability
-> > > on patch sets and consistency in reviews.
-> > >
-> > > Can you be more specific?
-> > >
-> > > Ultimately there are subsystem maintainers and each maintainer has
-> > > variation on how they deal with their subsystem. You reference one do=
-c
-> > > three times in your statement.
-> >
-> > Hi Peter,
-> >
-> > Now I understand what you mean.
-> > Simply one sentence is a bit hard to read what your thoughts are.
-> >
-> > That document I am quoting does not refer to the entire docs but only o=
-ne
-> > section of the docs with that link.
-> >
-> > Before quoting, my declarations as follows:
-> > 1) I am not referring to specific people or party
-> > 2) I experienced reviewer which again not being specific to one that
-> > mentioned this docs is a supreme rules to follow otherwise patch
-> > that is committed is not able to push to mainstream
-> > 3) I simply do a quick check on u-boot mailing pool and do see a lot
-> > of uncompiled reviewed patches that are not following that supreme
-> > docs.
-> >
-> > As such I will being to quote:
-> >
-> > The mailing that are reported as not passing the standard of [1]
-> > Full mailing:
-> > https://patchwork.ozlabs.org/project/uboot/patch/20260423042824.3480-1-=
-briansune@gmail.com/#3684415
+> The LDB clock sources don't have to be the same, so allow DI1 clock to
+> be configured separately.
 >
-> patchwork isn't loading for me, but it's on lore here:
-> https://lore.kernel.org/all/20260423042824.3480-1-briansune@gmail.com/
+> Unlikely to be significant, but the reason will become apparent in the
+> following commit.
 >
+> Signed-off-by: Brian Ruley <brian.ruley@gehealthcare.com>
 
-Hi Dooley,
+Once again, this series does not pass CI:
 
-Well I am sure you did not have the full picture.
+https://source.denx.de/u-boot/custodians/u-boot-imx/-/jobs/1450024
 
-The request had nothing to do with under the --- line if this is
-really the case:
-Let me bring you back to the history of wonders:
+arm: + kp_imx6q_tpc
++arm-linux-gnueabi-ld: u-boot-spl section `__u_boot_list' will not fit
+in region `.sram'
++arm-linux-gnueabi-ld: region `.sram' overflowed by 200 bytes
++arm-linux-gnueabi-ld: drivers/clk/imx/clk-imx6q.o: in function
+`imx6q_init_ldb_clks':
++drivers/clk/imx/clk-imx6q.c:271:(.text.imx6q_clk_probe+0x1458):
+undefined reference to `select_ldb_di_clock_source'
++make[2]: *** [scripts/Makefile.xpl:546: spl/u-boot-spl] Error 1
++make[1]: *** [Makefile:2440: spl/u-boot-spl] Error 2
++make: *** [Makefile:189: __sub-make] Error 2
 
-https://patchwork.ozlabs.org/project/uboot/patch/20260421004719.73491-1-bri=
-ansune@gmail.com/#3680232
-
-https://patchwork.ozlabs.org/project/uboot/patch/20260422065910.5398-1-bria=
-nsune@gmail.com/
-
-None of those reviewers had mentioned this issue once "---" rather they all
-just alarmingly repeated the wordings.
-
-> The comment about the changelog format seems to be very harsh, I doubt
-> it really makes any difference. What you did and what the maintainer
-> requested are effectively the same thing at the end of the day.
->
-
-Of course after reading the docs I got it immediately.
-However did those who request contributors quote this from first place?
-
-> The real problem with your patch is that you put the changelog into the
-> commit message itself, rather than under the --- line.
-> None of the examples you quote below do that.
->
-
-Well after 4 patches of ridiculous request and logic change.
-I guess you will do the same. At least I am not doing it at the
-first moment on replying to the mails who or whom you had mentioned.
-
-> Also, your responses to Simon in the thread you link are very
-> aggressive and antagonistic. Please try to be kinder to those that take
-> time to review your submissions.
->
-
-Regards,
-Brian
-
-> Cheers,
-> Conor.
->
-> >
-> > Quoting message [A]:
-> >
-> > - The required format is 'Changes in vN:'. Custom formats such as
-> >    'Changelog vN -> vN+1:' are not acceptable.
-> >
-> > Now quoting those examples that don't follow this supreme rule.
-> >
-> > Example 1: Reviewed without any change requests as [A] complained
-> > also aginsted [1] supreme standard
-> > https://patchwork.ozlabs.org/project/uboot/patch/20260508-qcom_spl-v6-1=
--aaac1ab17b50@seznam.cz/
-> >
-> > Example 2: Reviewed without any change requests as [A] complained
-> > also aginsted [1] supreme standard
-> > https://patchwork.ozlabs.org/project/uboot/patch/20260513015606.591384-=
-2-rs@ti.com/
-> >
-> > Example 3: Reviewed without any change requests as [A] complained
-> > also aginsted [1] supreme standard and even "Accepted Stage"
-> > https://patchwork.ozlabs.org/project/uboot/patch/BESP194MB2805271AD5DBE=
-47B322F8DC3DA3A2@BESP194MB2805.EURP194.PROD.OUTLOOK.COM/
-> >
-> > Example 4: Reviewed without any change requests as [A] complained
-> > also aginsted [1] supreme standard and even "Accepted Stage"
-> > https://patchwork.ozlabs.org/project/uboot/patch/20260511144437.46645-1=
--james.hilliard1@gmail.com/
-> >
-> > If you want more examples I can keep listing but I think this is more
-> > than enough.
-> >
-> > Well in order one t o follow the rules other should do the same.
-> > Under such bases I have no issue however I cannot see this is
-> > the real case.
-> >
-> > Enjoy!
-> > Brian
-> >
-> > >
-> > > Ultimately the rules are there as guidance and if someone chooses not
-> > > to follow them to the letter there is little that can be done. if the
-> > > individual becomes problematic they will be asked, publicly or
-> > > privately depending on the situation, if they could better comply and
-> > > there may be further action.
-> > >
-> > > It's very hard to act on your generic statement without examples,.
-> > >
-> > > Peter
-> > >
-> > > On Thu, 14 May 2026 at 09:41, Sune Brian <briansune@gmail.com> wrote:
-> > > >
-> > > > On Thu, May 14, 2026 at 3:29=E2=80=AFPM Peter Robinson <pbrobinson@=
-gmail.com> wrote:
-> > > > >
-> > > > > Hi Brian,
-> > > > >
-> > > > > Can you provide more context?
-> > > >
-> > > > Hi Peter,
-> > > >
-> > > > Not getting you sorry.
-> > > > Context means?
-> > > >
-> > > > Thanks,
-> > > > Brian
-> > > >
-> > > > >
-> > > > > Peter
-> > > > >
-> > > > > On Thu, 14 May 2026 at 03:02, Sune Brian <briansune@gmail.com> wr=
-ote:
-> > > > > >
-> > > > > > Hi Tom,
-> > > > > >
-> > > > > > Sorry to bother you.
-> > > > > >
-> > > > > > I am curious that for me myself I had no issue to follow
-> > > > > > the requirements [1] as long as all patches that are
-> > > > > > passing the review stage do follow the rules in [1].
-> > > > > > However based on most recent commits and reviews
-> > > > > > most of those are not even close to what [1] mentioned.
-> > > > > >
-> > > > > > So at the end, reviewers in U-Boot just made their own
-> > > > > > standard and requested contributors to follow?
-> > > > > >
-> > > > > > Rather the U-Boot itself should all follow the docs rules?
-> > > > > >
-> > > > > > [1] https://docs.u-boot.org/en/latest/develop/sending_patches.h=
-tml#sending-updated-patch-versions
-> > > > > >
-> > > > > > Thanks,
-> > > > > > Brian
+For v3, please share a URL with a green CI pass; otherwise, I'll need
+to ignore it.
