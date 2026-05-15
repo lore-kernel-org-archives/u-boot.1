@@ -4,92 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0BD25CD4851
-	for <u-boot@archiver.kernel.org>; Fri, 15 May 2026 13:08:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB662CD343F
+	for <u-boot@archiver.kernel.org>; Fri, 15 May 2026 13:09:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9624C8468B;
-	Fri, 15 May 2026 15:08:18 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5A0A48468B;
+	Fri, 15 May 2026 15:09:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="d9I8tPFu";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ALZf9Exz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D95928469A; Fri, 15 May 2026 15:08:16 +0200 (CEST)
-Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
- [IPv6:2a00:1450:4864:20::62f])
+ id 0EEA78464D; Fri, 15 May 2026 15:09:26 +0200 (CEST)
+Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
+ [IPv6:2a00:1450:4864:20::62d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EBC278464D
- for <u-boot@lists.denx.de>; Fri, 15 May 2026 15:08:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D444B84690
+ for <u-boot@lists.denx.de>; Fri, 15 May 2026 15:09:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62f.google.com with SMTP id
- a640c23a62f3a-bd3eb594960so388278766b.0
- for <u-boot@lists.denx.de>; Fri, 15 May 2026 06:08:14 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1778850494; cv=none;
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-bd3eb594960so388466266b.0
+ for <u-boot@lists.denx.de>; Fri, 15 May 2026 06:09:23 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1778850563; cv=none;
  d=google.com; s=arc-20240605;
- b=W/N9jeAjt7oMO22tF5EpLT6cNw/njXfJjyqBx/clWoOX3yUykpa0z9wzmI6//uPZlK
- apdHMXGK518qYVt2Baskjfviu8CA3R8lYMQNU03ITqkWs72YZTJstfcFL6VnD1fyX7iF
- siPWd7c3OZtkoJ3Pcbso2mfpkpnrGDJg0K1Xz6ew6rUBro0AdNhY83KoA/Xxq58Tc9pm
- 1FMAo1emfBTizQs6egx43u9gsuKk9HpRA6m8rBzxavd+vA7o+FTNshiFcVyZ5olkJisv
- nvrKVQdqvf+IqiaztcXqenVRhAU4xjfusNE/8jVFOnmYOhCTxgz5WJ+x5JtFy/VLaCT/
- WCQw==
+ b=J0WgEpuwfCijT3heJoqHqlilNDgY7aGVC8rJKvX623eILsgq9GSxQbuDemKHeiohWS
+ qN0aowKfWykoEBAxyiBpQtoRQi+P3kQrVq4kQZ4tSXYatKas+323NqipVezpgSsjdqcY
+ J3kL5P3dUcMGdb2hWvbuvIdLpCvmC76LjrRJXcbxhDDqanM+k7LOAGgf+rrI28hFYqbe
+ s+SOqt5ERXiQ2cIOpM8LavpglV2dLz5sj2xiGDyEDovBEgpI4QGlNacs0ey38F1vSHbU
+ NyT3WZo375l5x1fXocLMkoJcBzjauU/LR54vdfpEkrDrdQV6nNLf2Aw208q9r2ObYEMA
+ K4mA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=+xlp1g376EOrLtCPrwisZF+YbIypr+STUyWCQ8zRCPw=;
+ bh=HPvIKYQNcV0BeP2ytRrfxV1nGAKO+yoDyXihFk2MSKY=;
  fh=p+5qEY7KshK5nNBu/OO78N81bwUQ6GeR8eoG5BHzLcY=;
- b=kwWqBocj/rzj0PB7478Oq3wnFBt7n427E0eTmd3kJgypDv5ZMSEzkkJu+8aN/hs6M4
- trSZsPJrHlCnD7/+qB5eAHXeRfhwJoYoGqwYlDeh8D5PBLbyhJibR3yOcY1uP+oS9ns1
- gOtISMT25wdb5VEcIlEozdtMpKe0L1KhceGWn0sfrO5Z0MFABLTaneDqJXVpsZwa2m0a
- k4tjzEF6AGvK7m15smBJPgAQH1Iw5Uix5YyUjtUXm8scJbPqTaisjGTza6p1KM8jpICQ
- BDSBuzzOJN7cQXEshyC4S3Q7lWSr1xz8IGH2sTpcpW3+GXLW6KQmEbhtfitRVhXW6vuq
- Ya6g==; darn=lists.denx.de
+ b=Yxe2TonfWi9eRIVb2bBXcdw8AREFWGDa9tVH8lnxrnWb6bq8WbLiQnutKzxwiVloeb
+ +gBqcQlR/TxHlP+rfS8tNErMmPU3+4SbswmOWZXfPu8nLBU2dhw2mex+Ks+1Df6KnBlx
+ C6TglaEQPK4I2WB9PEVPC4qXVNuZBApUD2rYu9JrzcSRK3oHweai3dZE0ft5E4qXCW+U
+ ACUlPuvh52jpJJqeYdU5VbnJRNWRPSXjhOxcaoqp88hx/wvz3ZZpa/v//Efryk52EHjD
+ eViKC3duUiopkx30rR/pkItjYBL02Z45fEaubqRxkUlXtkX2ZS/AoALeIk4McCMHJ8g3
+ AZwA==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1778850494; x=1779455294; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1778850563; x=1779455363; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=+xlp1g376EOrLtCPrwisZF+YbIypr+STUyWCQ8zRCPw=;
- b=d9I8tPFu8hxjosyQ42ecCwZkABv7u7G0mEZyjSmlgDA6ZwUpgAZMxAOekKBIfMKdF7
- jklDnJfSo0BSCUWFX5FhEvkKVfNyvcWclRwelOrVUcQdfJLIBgF1Ksn9w7QIJuvWjQjh
- rkj3sbb2MmfeV0SkBq8qaUtaVELL6FClT8tyU=
+ bh=HPvIKYQNcV0BeP2ytRrfxV1nGAKO+yoDyXihFk2MSKY=;
+ b=ALZf9ExzfdlIH5rHqsPCncQPf7DUWDgsCRoiI7bJrA+flsU8Y12VPN9UsxgzUxnTTm
+ H9+LUIYxmD7y+u64HC+LDPb/YsT8axwbtfU/xZXRm2eBXVZIy8jwUGBOY4d7Imcnjvg8
+ jBvM5aLFLm8rwQcdgJ5LmLVk5wqCxSULaSGVY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778850494; x=1779455294;
+ d=1e100.net; s=20251104; t=1778850563; x=1779455363;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=+xlp1g376EOrLtCPrwisZF+YbIypr+STUyWCQ8zRCPw=;
- b=FX/0Z7P1PTDJn8Ju5bGIbll72VtFSY+CPPIQp8KYKwD52ZRUEYFC3a2RKZBaqDGRR5
- gQOKvsBW3PNPiFwjCgKQ/PZDsOWGRNcZxNC9Z6sJc/Fz8Vw129jtUpzWrtmCLNy3O0A4
- YDbYNQ21EPGKS52ZqYN5JZDF0QvCeo3kSQ3ro0520MIkra76Vu+zmMLmceVA8o+2N8WE
- 5ZldHZk6L87lwDgC7or1KgMKUvL6fj38npzdRfn6f494wNYIQYRZvVCtvUFRywtZVayB
- DYjQHQSekOaOuC5OwKBC20jktDPTAMUIeBYBA7Z3jx9Fw/BvP1SZnUzE92JHrZwVSkF1
- agJg==
-X-Gm-Message-State: AOJu0YybgObdNrN1hGd9pOxUylUteEOxA7a+TN4CdFuu+N5kBLS0Xylo
- Av8Y8w54GsVk+PV/LyhyRH6mRURwwlfIvboJR3SY7mA2gwwoS8Z7pQfn9orS8/GTbUbG+tlScHr
- Hf+rGJ6NeFh/5iqbmGUOMFDxd+yXjmgcNxuHxyrT9
-X-Gm-Gg: Acq92OFVjoSYEhbLsML0dPPNfKwmtg1b/l+4Yqxk0OrlMveIV401lpxIKQP+tWtznCS
- yGwuGKL5Io2OS6GAHnFLuZsnvHTMWJJGpca8mULIryzA4z6zBCs/t3jy6kBsqKC4MeC3rHwxrLy
- Fj4t1IYvLuN9I/3+yg1qLOIf+NvALTJEyYEQbIjrD70CenzQRqTzrx4tIL6uNXa3VQZCs7RVTk1
- GouUd0F8MZQktpigJ8xSDScdslO40BF7/gSdp8DMUAxCZcf5LT6cvfwe53ZibHsgAZAewxRR3M8
- L/qThA==
-X-Received: by 2002:a17:907:b801:b0:ba8:2ebd:dfb6 with SMTP id
- a640c23a62f3a-bd517929a34mr193424766b.23.1778850494146; Fri, 15 May 2026
- 06:08:14 -0700 (PDT)
+ bh=HPvIKYQNcV0BeP2ytRrfxV1nGAKO+yoDyXihFk2MSKY=;
+ b=Juxg6XO7JF+oazEVFfkN5JTNzbfj0U3IYA0AyHnk2BOsDqJG6AuG68TPftG5Id3jOY
+ DdSJVItUbfmcPeFLdpJVJwR0G+fQmAsblND5khXf3AJjOYRMP9MX8NeqenrlO+k2HtwG
+ AQSYq8TCvfykFwQXMUkQUx2yax0icditigTRv9KaL2UHDvJ3wh0HcHLic7fZKMvhoxf1
+ KyC9q+Y1wVJWwlYp1aIGxHyQjunSp4wPusjiSYbMlS2fG39mWd4EmF3OH88NuhND0Ihz
+ wAVIpc70I4yG9d95wXLUPdQgC0cbY1xt9bXFUxZp5h4iWRy7L28HxXOIxDQufkyY8zw/
+ WEMw==
+X-Gm-Message-State: AOJu0YwX8MjTgpgzH/iKkksodzyqzx1qapbIxLEvxuc0QKc3dghhRCzx
+ USJ229aihXjQ1fWaKJwulcgKh8ryHQBtZmRvrn7JuqzEgSzs/vAJXJWrzvXFrdhyC/fvQH/HJw2
+ B+zN0ztm/AABrpDrpwfwKM6j2cduKJGY11plM1tz5
+X-Gm-Gg: Acq92OFEgoDufE2sXsKH67GS60LyXU2uPNUUmdfjmQXyl2lGiMH57FbJexITjiIUQca
+ 3Uhx8qSKao8KFBr+gpYzHb4aB7UL671VBJNUkCCm6s9HFZTkF6/eHj8DejPRMuNyJitk92wQb2j
+ fWUWzX7h8dDbct70WiLlxaZsA/WyLQpup6AAFEdd22mwrDy3vwP3Q/am7dvJuD2Y5/ijkLQ9CzF
+ kwHMVuhZUEtfZrJvQNu+22Vf1pPutdvDiEuhNM9/09MSqAAJPt697E3Vb1mFiPx4EVnZzlnfAXU
+ H+L8+w==
+X-Received: by 2002:a17:907:1c8f:b0:bb8:b593:edba with SMTP id
+ a640c23a62f3a-bd517970900mr217333966b.38.1778850563229; Fri, 15 May 2026
+ 06:09:23 -0700 (PDT)
 MIME-Version: 1.0
 References: <cover.1778619453.git.aidan@wolfssl.com>
- <20260513002625.76915-4-aidan@wolfssl.com>
-In-Reply-To: <20260513002625.76915-4-aidan@wolfssl.com>
+ <20260513002625.76915-5-aidan@wolfssl.com>
+In-Reply-To: <20260513002625.76915-5-aidan@wolfssl.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 15 May 2026 07:08:02 -0600
-X-Gm-Features: AVHnY4JRD6r2CCBgCAXxcpJkA3cRziMqTjg8K6iVxw-PkngctJREQoPNR1DxYLY
-Message-ID: <CAFLszThYYgAK9kk-0muWsf+E2N7eV0NwvB1HKaf_D1UxiJKG9Q@mail.gmail.com>
-Subject: Re: [PATCH v4 04/14] arm: dts: bcm2711-rpi-4-b: add Infineon
- SLB9670/9672 TPM in U-Boot dtsi
+Date: Fri, 15 May 2026 07:09:10 -0600
+X-Gm-Features: AVHnY4IxNk0x7_jbhpoZTZFSbnZ69XXuVRSsqmyblk3ijBtZwqOH7JtH7QgB5js
+Message-ID: <CAFLszTjAxmdrabtLzE8-ucEbpUfv5CH_zYSY35+bJAQP6vOf3w@mail.gmail.com>
+Subject: Re: [PATCH v4 05/14] arm: dts: qemu-arm64: add TPM TIS MMIO node
 To: aidan@wolfssl.com
 Cc: u-boot@lists.denx.de, Peter Robinson <pbrobinson@gmail.com>, 
  Ilias Apalodimas <ilias.apalodimas@linaro.org>, Tom Rini <trini@konsulko.com>, 
@@ -114,64 +113,64 @@ X-Virus-Status: Clean
 Hi Aidan,
 
 On 2026-05-13T00:26:04, Aidan Garske <aidan@wolfssl.com> wrote:
-> arm: dts: bcm2711-rpi-4-b: add Infineon SLB9670/9672 TPM in U-Boot dtsi
+> arm: dts: qemu-arm64: add TPM TIS MMIO node
 >
-> Add a TPM 2.0 device-tree node on SPI0 CE1 for the Infineon
-> SLB9670 / SLB9672 TPM HAT.  The pinout matches the standard Linux
-> tpm-slb9670 overlay, so a board configured for U-Boot with this
-> addition behaves the same as a Linux kernel using that overlay.
+> Add a TPM 2.0 TIS MMIO node at the address QEMU's virt machine
+> exposes when started with -device tpm-tis-device.  This lets the
+> in-tree QEMU+swtpm test path (used by the wolfTPM Python test
+> suite, and similarly usable by anyone bringing up the existing
+> TPM 2.0 stack against swtpm) work without having to inject a DT
+> overlay at runtime.
 >
-> The node is placed in bcm2711-rpi-4-b-u-boot.dtsi (the U-Boot-only
-> DT augmentation file) rather than in bcm2711-rpi-4-b.dts.  This
-> keeps the upstream-Linux-derived .dts unchanged, so SystemReady
-> firmware-provided FDTs and the upstream Linux device tree continue
-> to match what kernel.org ships - which addresses the concern raised
-> in v3 review about polluting the Linux DT path.
->
-> A spi0 alias is added pointing at the BCM2711 SPI controller, so
-> that wolfTPM's SPI HAL (which addresses the bus by number) finds
-> the TPM at bus 0 CS 1.
+> Address 0x0c000000 / size 0x5000 matches QEMU's virt machine TPM
+> TIS region.
 >
 > Signed-off-by: Aidan Garske <aidan@wolfssl.com>
 >
-> arch/arm/dts/bcm2711-rpi-4-b-u-boot.dtsi | 39 ++++++++++++++++++++++++++++++++
->  1 file changed, 39 insertions(+)
+> arch/arm/dts/qemu-arm64.dts | 4 ++++
+>  1 file changed, 4 insertions(+)
 
-> diff --git a/arch/arm/dts/bcm2711-rpi-4-b-u-boot.dtsi b/arch/arm/dts/bcm2711-rpi-4-b-u-boot.dtsi
-> @@ -0,0 +1,39 @@
-> +#include 'bcm283x-u-boot.dtsi'
-> +
-> +/ {
-> +     aliases {
-> +             spi0 = &spi;
+> diff --git a/arch/arm/dts/qemu-arm64.dts b/arch/arm/dts/qemu-arm64.dts
+> @@ -12,4 +12,8 @@
+>  / {
+> +     tpm@0c000000 {
+> +             compatible = 'tcg,tpm-tis-mmio';
+> +             reg = <0x0 0x0c000000 0x0 0x5000>;
 > +     };
-> +};
-> +
-> +&gpio {
-> +     bootph-all;
-> +};
+>  };
 
-bcm283x-u-boot.dtsi (included a few lines above) already adds
-bootph-all to &gpio, so you shouldn't need this.
+I don't think this addition takes effect at runtime. qemu_arm64 sets
+imply OF_HAS_PRIOR_STAGE and board_fdt_blob_setup() returns the DTB
+QEMU loaded into RAM, so U-Boot uses QEMU's generated DT, not the
+compiled-in qemu-arm64.dtb. OF_OMIT_DTB defaults to y when
+OF_HAS_PRIOR_STAGE is set, so the compiled DT isn't even bundled into
+u-boot.bin. See doc/develop/devicetree/dt_qemu.rst
 
-> diff --git a/arch/arm/dts/bcm2711-rpi-4-b-u-boot.dtsi b/arch/arm/dts/bcm2711-rpi-4-b-u-boot.dtsi
-> @@ -0,0 +1,39 @@
-> +     /* Infineon SLB9670 / SLB9672 TPM 2.0 on CE1 (GPIO7) */
-> +     tpm@1 {
-> +             compatible = 'infineon,slb9670', 'tcg,tpm_tis-spi';
-> +             reg = <1>;
-> +             spi-max-frequency = <32000000>;
-> +             bootph-all;
-> +     };
+When QEMU is started with -device tpm-tis-device it already adds a tpm
+node at the same 0x0c000000 region, so the existing TPM 2.0 stack
+picks it up without any change here. Have you confirmed that removing
+this hunk actually breaks the test path? If not, please drop the
+patch; if it does help in some specific path (e.g. -dtb u-boot.dtb),
+the commit message should call that out.
 
-Just to note - drivers/tpm/tpm2_tis_spi.c already binds to
-tcg,tpm_tis-spi, so this node is not wolfTPM-specific; the in-tree
-TPM2 stack will probe it too. Combined with Peter's request to split
-the BCM2835 SPI driver out, one option is a small standalone series
-that lands patch 3 plus this DT node and lets the existing TPM2 stack
-drive the SLB9670 on a Pi 4, independent of the wolfTPM question.
-Anyway, please adjust the commit message, since it under-sells what it
-enables.
+See also this patch where a similar thing came up (due to a QEMU
+maintainer refusing to support DT additions, U-Boot needs to do the
+overlay itself).
+
+https://patchwork.ozlabs.org/project/uboot/patch/20260507140624.v3.1.5f8ce2dc2b00328d29e64be2684b10d9f52c6a7b@changeid/
+
+I also found the context re QEMU expectations (basically Tianocore).
+
+https://patchwork.ozlabs.org/project/uboot/patch/20240911062511.494855-23-patrick.rudolph@9elements.com/
+
+Also, the reg property uses four cells but the root node doesn't
+declare #address-cells/#size-cells, so the defaults (2/1) apply and
+the cell count is wrong. Per
+dts/upstream/Bindings/tpm/tcg,tpm-tis-mmio.yaml the compatible needs a
+vendor-specific string first with tcg,tpm-tis-mmio as the fallback -
+tcg,tpm-tis-mmio alone fails the schema. If the node really is needed,
+please match what QEMU emits (or pick a sensible vendor prefix) and
+wrap it in a parent that sets the address/size cells.
 
 Regards,
 Simon
