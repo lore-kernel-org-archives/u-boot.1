@@ -4,137 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3769CD4851
-	for <u-boot@archiver.kernel.org>; Fri, 15 May 2026 13:17:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2DBE4CD343F
+	for <u-boot@archiver.kernel.org>; Fri, 15 May 2026 13:25:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 59637846A4;
-	Fri, 15 May 2026 15:17:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
+	by phobos.denx.de (Postfix) with ESMTP id AE80F8467A;
+	Fri, 15 May 2026 15:24:59 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="WlfaU/bw";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="VL0ALSV3";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Lo3SwVFx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4DCBB846A7; Fri, 15 May 2026 15:17:44 +0200 (CEST)
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
- [205.220.180.131])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id C8F8884694; Fri, 15 May 2026 15:24:57 +0200 (CEST)
+Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
+ [IPv6:2a00:1450:4864:20::636])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BBCE984694
- for <u-boot@lists.denx.de>; Fri, 15 May 2026 15:17:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=oss.qualcomm.com
+ by phobos.denx.de (Postfix) with ESMTPS id AA54684674
+ for <u-boot@lists.denx.de>; Fri, 15 May 2026 15:24:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=aswin.murugan@oss.qualcomm.com
-Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 64FBHMiX3219669
- for <u-boot@lists.denx.de>; Fri, 15 May 2026 13:17:40 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- PxDGmHIAnDvqpn0xhG2TRRONUidUEJaZOJCcTScfVtE=; b=WlfaU/bwFtWIU88W
- hEpougB7LQ1maXQvi3P+r0NV//tITLAMzK1O3JzGyiNqa3En33UwF17CbFWGyUAU
- tAn56BWZ2gKxhwGPr6WvHrDYqrHuPOtfdIKE/feY3Y97ekZPIsos4/OYk8lUeGPZ
- P67D9KsLMjI6bCX2AQCwbErYPpVj4c2gQJmJ1ZUg2oiIlWxkgHS9jc5DulqZV6xw
- eMlwLo4ZSYycRk5sWQ3qknwFTzoKbTc5xD9uyQlzP7Tkb0WrjZHHF28ftoenQM28
- RfHeBB1TDpsGJ2rbxVqI6iWgPBPxC1iC6mXBGBTWYUpbmeJquC8Yc/K2dVN3CDE0
- 4Pzzgw==
-Received: from mail-pj1-f69.google.com (mail-pj1-f69.google.com
- [209.85.216.69])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4e5m1s3bxw-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Fri, 15 May 2026 13:17:40 +0000 (GMT)
-Received: by mail-pj1-f69.google.com with SMTP id
- 98e67ed59e1d1-365fc4636bbso18755983a91.2
- for <u-boot@lists.denx.de>; Fri, 15 May 2026 06:17:40 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x636.google.com with SMTP id
+ a640c23a62f3a-bce386d5b85so1062132966b.1
+ for <u-boot@lists.denx.de>; Fri, 15 May 2026 06:24:55 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1778851495; cv=none;
+ d=google.com; s=arc-20240605;
+ b=UZ6q3dFH7/gL6GVCvrMnSIoT07JD1/BJvpxi0XrZDQdOeT+e3HMyCx9dG3ZWdOKj6p
+ AxKbUV2Q4kFsslRLFns0MnIKgH/jx/eccp+kdeo0O9tNJEmydrFg0OCfOmKGZhrUX3qk
+ A6c1flx8OeSuWpG+mZpSVEf7O7I9cBtK9rTQyf4WY5U+dHpHl+2QGLdLFLD3+P+kg9/E
+ ftix/LJyUtb4pNUeKTzPMyqcsshdVkGgUBdVdtTpLejdaoaukIwWiVFPFh2IGp5OKRII
+ zJUnNBCvu2ZMKMNtJdtGkIpNlzllde/cbqSBnniLIT/2mpwHuwY5jvAQIytXWY6iYmFi
+ 4b2Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=4KZ6rv/GWWJ52Lx4UNdnB10JbVU/FnMyIQKyFO6AGG8=;
+ fh=HwJnEC+xd4QKdPJNFFfV4yjwbumrPIfArwVBKmoTzh0=;
+ b=H2T3AGcV8aVfHKGshf3NiS0FEEYqTSB6ihTrVM5XkZ+j0DwrIqQy43IIwK2wJKIL0Q
+ kBYJM37h/VrnaibezOc3ZumEULkkU/tjDdTyIWtApHHKEY58qcEhLtiWA42NWQ9GfMwl
+ Dl9ou66/zw4ntso9ZLa6Ray/757bXS95wVOEXbkfex1E8M4vX32XQdxmoUXdzeYrzZfu
+ EKOwUcupF9PsNh6ehWeEo7pypAvkfMtSjSP/wBAuTNK/tkZ5hMV1OvdffLTqTsNmvNJz
+ 3gznYwE9QVVr0trgh5MRJFVLvBwj86YEOyTLYsNNm3cSKYD71+vSwkPnLoV1WI3TmwZ0
+ B8AA==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1778851059; x=1779455859; darn=lists.denx.de; 
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=PxDGmHIAnDvqpn0xhG2TRRONUidUEJaZOJCcTScfVtE=;
- b=VL0ALSV36i9WoY7QPWufJuk+RoPSASRrhIo88YrzZvZEeOJQ3M4eC/3vsd8EWAqmoO
- D0brCPoK2BMOl8dB6y/tlaLdowa1Y+Qjq7RyhH0uROn7wzA0L06SPe6KULNl4WzN5atG
- eLBLEAm07R5SMVGZ5vIOjgdaAABxjeIUOUrQ/eNw8sDMjnjrEvbN4Kc7wveQoGfh6YJq
- fK+u6o2p2/wc75YU63bZL7ye/N7tIK3gKB+VB3Yn3xucnGlUqJ9Jp0hE+H9OJSCRllQ2
- rE8LiwpAuuFD2nqA1NEqnQh8nk0/S+dR/nUVnLW1r0OH/iFamE3rJrBJeFx6sR8Wr/PW
- jL/g==
+ d=chromium.org; s=google; t=1778851495; x=1779456295; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=4KZ6rv/GWWJ52Lx4UNdnB10JbVU/FnMyIQKyFO6AGG8=;
+ b=Lo3SwVFxDoRwQOtkQVH91ucZ1bS4xvlFRebtV8rlbOZEO+xkLmQ4dnMU/Qhi0y7EWj
+ 51ffuMGKbF8mbfEJnDqL3I0SOcdFiW/R1W0wIeK+OG7lI66DNQA02CbHjSMDde1UszIc
+ MqYbxq87va7izBYcdNXWZUhZLjtcftnTnIjPY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778851059; x=1779455859;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=PxDGmHIAnDvqpn0xhG2TRRONUidUEJaZOJCcTScfVtE=;
- b=iCOYavxVhhORVDsYAzokSkce2xFVYXq1rWJnpRqkRFZyo2QQkHjzrYrnSFPo3pJLGg
- GOjclJyrCSepM6exoUngGMntOTtwtYtylTkzAvi3NiKz7u340LgWyPGMyGSlzpzuoB5D
- +A1U6ZutBBTDyy3Is/kwTya16xgX+FWNTerfCOWhcUpLi4lwuVymvI5lQgjWrH64d+A1
- ujCOJ/L/FQpRINXw7hUy94a6vrJw9eX0ZHITIoJI90xq6a71odwGPHC+IR+8Gg5+E4wC
- k54xzG9ycGFMF1HfM/RjNHq304rUdjh9/ZCgEvoF9jK2Kwnaggc9VvkwjK2aIetlinDP
- neZA==
-X-Forwarded-Encrypted: i=1;
- AFNElJ/lYaIEQ8JRNBUOJ6dYehGpH8grQzmhVqSPaK9TzjcrvZkQsG6KLR3WX8rwNDpNaZ2xDw12sB0=@lists.denx.de
-X-Gm-Message-State: AOJu0YzKmEVJR9bL1Qg3rMgHA9ia9Y1ZV7EnKQ6Z/kOvp/rAzo7PVKR5
- otS94hUXk/+coKqu9W9+xe7NN3MF5FipFBu4gz3kNKV0HagCme37A1sD6TPYQeBnXj2RgLZEOc+
- NoWE4DSBakLjhXkiwmhufpVX/zdXbQgLmTcGIylOgVg2Kta/hz9/KVL3w
-X-Gm-Gg: Acq92OFVvBwkLcCpM1QPF9kgOAsFzqRcc8RHMB7g3oE99rz8Tn+GxzM+ZdjFd7C7Jw0
- cmJ4w3p7/KgdkQHw94W1V1MyrLd8+1fGC1HXl7GIjMpVCpK0fRf3+BG+4ufJef0/4U2nlukfRmb
- E+7WB3hImFjdwRmhI14M51/vhPvTrHsNiHw7HhSCi4cfoHqH5e4w2ikvZFvXgEg42R0yTEDrCyr
- elzuXD54AYFC9OSodF0qTT6K6PZdkmmFGXs//dHg5gSaDAGuMTwy5iaCt0/SAvUoB06CLSmxVnM
- tmOyp/jaLoVY9s5vLcZmfoPs4pls0f6jkzjdDoAQMF6Yp4Kd1J34xLnbtDiFyN1if3uRPBOGUjG
- xhSzWyWMnTBq2ruFruRBHOe7bJf7BByzWGPbWntmi0HXaf8S3BDDxPA==
-X-Received: by 2002:a17:90b:4ec8:b0:368:6a47:83f4 with SMTP id
- 98e67ed59e1d1-369519af6demr4295831a91.6.1778851059071; 
- Fri, 15 May 2026 06:17:39 -0700 (PDT)
-X-Received: by 2002:a17:90b:4ec8:b0:368:6a47:83f4 with SMTP id
- 98e67ed59e1d1-369519af6demr4295766a91.6.1778851058498; 
- Fri, 15 May 2026 06:17:38 -0700 (PDT)
-Received: from [10.152.202.155] ([202.46.23.19])
- by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-3695124601asm2791783a91.2.2026.05.15.06.17.36
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 15 May 2026 06:17:38 -0700 (PDT)
-Message-ID: <da733868-79d2-4425-acd1-f1a9ce83feba@oss.qualcomm.com>
-Date: Fri, 15 May 2026 18:47:34 +0530
+ d=1e100.net; s=20251104; t=1778851495; x=1779456295;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=4KZ6rv/GWWJ52Lx4UNdnB10JbVU/FnMyIQKyFO6AGG8=;
+ b=Cp8xn+QYSD/zbsS6eWgtRw8BQjbSBMZxrx4Xvv9Lbufjq9iakE2q4GjaSOFyix2FDA
+ AWzuuEQAkXh1yDsvThhGtPvBn18+QfL/G2C9SbLLajswUxVOsMj7WahvSFY4IaE3rrZd
+ W0kdXHjPsWQAotApAcY5tPGBXsuhV54bGx3jKyr3gk05UA7WZ5f/ahe/2wy5IODec5c8
+ 8EfqFzLwYI574zFK+rUa6Fkq2JHVyWrwVrsSPf79Qj6rwwBaRx7nxC6XcTCuPVndPZ/O
+ XD6KvcMWvG0antSFDNry9Iwnr1y5fopzHvEPP86kJk5d2Q8X9Xm5rvv5MGbn/d/h0Zj4
+ p6Tg==
+X-Gm-Message-State: AOJu0YyC/cu8S14duQ34uqPfMohs/i/4b0WV3Bf8Y3VgP52pgQ7hbZXC
+ oUJoEzc5I3XLLd3NrcghaJwB8EGdtW2thU8LMTejzZ/nwiXd8uNAaVwC8FZGs846PoiaUbNWRuv
+ u+MJW3/QB+xlEl9DkjzgdzpMKLUFgeWmNaHm6vHZU
+X-Gm-Gg: Acq92OHR7QEJLwUXpFPHcwcJGn2Rdl75ONWyuNwvUbk5IPo3Z87CyF6+ZJpZUD8fRSx
+ GV73QPsE5WbWWKP2kje2fOYWzZPgC41dGNTtPetSizqfKeo0+xUPTKXuvnXWOOKwpfXgU6v2vPo
+ 6et8vha5fLxld/yO3jy7xBZoAJryzNWwSQLjAy2/mB8l70RL1KJUKcRRB7o0m2CDRpDxJMOguQS
+ /UBU8KpGDVFczD9OpKx5F+SAgrY/vbghfipxRNqUdBQ6ggRIFfaNPWwudKGtQVffefy3/kNdxkL
+ BVx4yQ==
+X-Received: by 2002:a17:907:c291:b0:bd4:e590:4238 with SMTP id
+ a640c23a62f3a-bd517812d92mr224927466b.17.1778851494978; Fri, 15 May 2026
+ 06:24:54 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3] tools: efivar: strip auth descriptor for authenticated
- variables
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: xypron.glpk@gmx.de, trini@konsulko.com, u-boot@lists.denx.de
-References: <20260514171649.3708107-1-aswin.murugan@oss.qualcomm.com>
- <CAC_iWj+bgFhPbxNH-BqU1fFD0j3wzBE_9FT_kfhZ-r48Ztb7pQ@mail.gmail.com>
-Content-Language: en-US
-From: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
-In-Reply-To: <CAC_iWj+bgFhPbxNH-BqU1fFD0j3wzBE_9FT_kfhZ-r48Ztb7pQ@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNTE1MDEzNSBTYWx0ZWRfX6v15qm6g0VlG
- TyzIwyrR6JwYFGDanBgCeJBLnvw48tK519R03XVjoQvsuVJDnDVy1V1jAR1uRqtFb4arL1VTtES
- tphFkaLaG2Z8Rfpm6FaM1iGzssoX9kiNtX6VO5LUB0eUYXxuO7umhjXe5tDM1eEhEqh1a+II3X2
- dZD6AUxs09l2BVYyvGj2Kt1IyLb8r4bb+dEQ6F+r6C+LU3TT9w40Be6SERd+6AzC5tynTWW+iL/
- 9GiHlxJcwyHAA/SS89cEDnLoq2UicBR6CCdabtIZjIq3LGYIAgIfHqC8BvjqQUFDBN1CfZPDX+O
- 3LyV84nVBGo/Xs6MR7SomGUwpeNfxHvQzNRg1YAE0KOWWUsBf7g3hvd18Vh+R63bnTu9Et/HVsD
- DYUhO4/eClAIMbMdaLo7qc3NpJtYSB8r80fbVQw9cCvpMczTJEfLAtnGm2HYsyNKYk6/AZiFwvt
- /9LKqHwg8KlhtOPPBMw==
-X-Proofpoint-GUID: CUwl4mnyvZO61fxn_LuclfS6WRbDLsJU
-X-Proofpoint-ORIG-GUID: CUwl4mnyvZO61fxn_LuclfS6WRbDLsJU
-X-Authority-Analysis: v=2.4 cv=HJ7z0Itv c=1 sm=1 tr=0 ts=6a071cf4 cx=c_pps
- a=vVfyC5vLCtgYJKYeQD43oA==:117 a=j4ogTh8yFefVWWEFDRgCtg==:17
- a=IkcTkHD0fZMA:10 a=NGcC8JguVDcA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
- a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=KTSAc_bGXdCbCS0F4BsA:9 a=QEXdDO2ut3YA:10
- a=rl5im9kqc5Lf4LNbBjHf:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
- definitions=2026-05-15_03,2026-05-13_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 lowpriorityscore=0 suspectscore=0 phishscore=0 spamscore=0
- clxscore=1015 impostorscore=0 adultscore=0 bulkscore=0 malwarescore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2605130000 definitions=main-2605150135
+References: <cover.1778619453.git.aidan@wolfssl.com>
+ <20260513002625.76915-11-aidan@wolfssl.com>
+In-Reply-To: <20260513002625.76915-11-aidan@wolfssl.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Fri, 15 May 2026 07:24:42 -0600
+X-Gm-Features: AVHnY4KIoJVARKmoWxuvBJgHJOLWvkDyElDKmiro96xoUS7PYn19YpuSwXs53aE
+Message-ID: <CAFLszTj0EwKxC47eE3HrwDUWpjzaKcfn6shT0rgr+fDaN3rzJQ@mail.gmail.com>
+Subject: Re: [PATCH v4 11/14] tpm: add sandbox TPM SPI emulator
+To: aidan@wolfssl.com
+Cc: u-boot@lists.denx.de, Peter Robinson <pbrobinson@gmail.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Tom Rini <trini@konsulko.com>, 
+ David Garske <david@wolfssl.com>, Jagan Teki <jagan@amarulasolutions.com>, 
+ Vignesh R <vigneshr@ti.com>, Tudor Ambarus <tudor.ambarus@linaro.org>, 
+ Simon Glass <sjg@chromium.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -151,125 +114,149 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ilias,
+Hi Aidan,
 
-This change has been verified locally with our setups on qcs615 & 
-QCS9100 SOCs
+On 2026-05-13T00:26:04, Aidan Garske <aidan@wolfssl.com> wrote:
+> tpm: add sandbox TPM SPI emulator
+>
+> Add a TPM SPI emulator for sandbox testing that implements the TIS
+> (TPM Interface Specification) SPI protocol, allowing wolfTPM's SPI
+> HAL code to be tested without physical hardware.
+>
+> drivers/tpm/tpm_spi_sandbox.c (new):
+>   Emulates a TPM connected via SPI by implementing the TIS register
+>   set and SPI protocol:
+>   - SPI protocol state machine: parses 4-byte TIS SPI headers
+>     (R/W bit, transfer length, register address) and handles data
+>     phase with immediate ready signaling (no wait states)
+>   - TIS register emulation: TPM_ACCESS (locality request/grant),
+>     TPM_STS (command ready, data expect, data available, burst
+>     count), TPM_INTF_CAPS, TPM_DID_VID (Infineon SLB9670 IDs),
+>     TPM_RID, and TPM_DATA_FIFO (command/response buffering)
+>   - TIS state machine: IDLE -> READY -> RECEPTION -> EXECUTION ->
+>     COMPLETION, with command-ready abort support
+>   - Generates simple TPM_RC_SUCCESS responses (a full implementation
+>     would integrate the sandbox TPM2 state machine)
+> [...]
+>
+> drivers/mtd/spi/sandbox.c     |  30 +++-
+>  drivers/tpm/tpm_spi_sandbox.c | 410 ++++++++++++++++++++++++++++++++++++=
+++++++
+>  2 files changed, 431 insertions(+), 9 deletions(-)
+
+> diff --git a/drivers/tpm/tpm_spi_sandbox.c b/drivers/tpm/tpm_spi_sandbox.=
+c
+> @@ -0,0 +1,410 @@
+> +                      * Generate a simple success response.
+> +                      * A full implementation would call the
+> +                      * sandbox TPM2 state machine here.
+> +                      */
+> +                     priv->rsp_buf[0] =3D 0x80;  /* TPM_ST_NO_SESSIONS *=
+/
+> +                     priv->rsp_buf[1] =3D 0x01;
+> +                     priv->rsp_buf[2] =3D 0x00;  /* Response size: 10 */
+> +                     priv->rsp_buf[3] =3D 0x00;
+> +                     priv->rsp_buf[4] =3D 0x00;
+> +                     priv->rsp_buf[5] =3D 0x0A;
+> +                     priv->rsp_buf[6] =3D 0x00;  /* TPM_RC_SUCCESS */
+> +                     priv->rsp_buf[7] =3D 0x00;
+> +                     priv->rsp_buf[8] =3D 0x00;
+> +                     priv->rsp_buf[9] =3D 0x00;
+> +                     priv->rsp_len =3D 10;
+
+Every command returns the same canned 10-byte TPM_RC_SUCCESS. Any test
+exercising tpm2 get_capability, pcr_read, pcr_extend etc. would either
+fail to parse the response or silently accept garbage as success.
+As-is, this emulator just lets SPI bytes flow.
+
+Please use lower-case hex.
+
+The real sandbox TPM2 state machine already lives next door in
+drivers/tpm/tpm2_tis_sandbox.c with sandbox_common.c. Please wire this
+emulator into sandbox_tpm2_fill_buf() and the existing
+nvdata/PCR/hierarchy logic so commands actually do what they say.
+Otherwise the wolfTPM C unit tests in patch 12 can't meaningfully run
+on sandbox.
+
+> diff --git a/drivers/mtd/spi/sandbox.c b/drivers/mtd/spi/sandbox.c
+> @@ -571,16 +571,28 @@ int sandbox_spi_get_emul(struct sandbox_state *stat=
+e,
+> +             struct udevice *emul;
+> +             ofnode node =3D dev_ofnode(slave);
+> +
+> +             /* First check for sandbox,emul phandle property */
+> +             ret =3D uclass_get_device_by_phandle(UCLASS_SPI_EMUL, slave=
+,
+> +                                                'sandbox,emul', &emul);
+> +             if (!ret) {
+> +                     debug("%s: busnum=3D%u, cs=3D%u: using phandle emul=
+ator\n",
+> +                           __func__, busnum, cs);
+> +                     info->emul =3D emul;
+
+This is a generic change to sandbox SPI emulation that affects every
+existing sandbox SPI user. Please split it into its own patch ahead of
+this one, with a commit message justifying the sandbox,emul phandle
+convention on its own terms, and ideally a doc update. Bundled with
+the TPM emulator, the reasoning gets lost.
+
+> diff --git a/drivers/tpm/tpm_spi_sandbox.c b/drivers/tpm/tpm_spi_sandbox.=
+c
+> @@ -0,0 +1,410 @@
+> +             /*
+> +              * Handle FIFO writes - the FIFO is at 0x0024 but any addre=
+ss
+> +              * from 0x0024 up to 0x0F00 can be used for FIFO access whe=
+n
+> +              * doing multi-byte transfers (address auto-increments).
+> +              */
+> +             if (reg >=3D TPM_DATA_FIFO_REG && reg < TPM_DID_VID_REG) {
+
+The comment doesn't match up - the TIS FIFO is a single register at
+0x0024 and the address does not auto-increment; the host repeats the
+same address while burst-count drains. Because the SPI layer does
+priv->addr + priv->data_pos for every byte, you treat a 3000-byte
+window as FIFO, which masks the issue but is wrong if anything reads
+e.g. TPM_INT_ENABLE_REG (0x0008) - one of your #defines, is never
+handled. Please hold priv->addr constant for FIFO accesses, and either
+implement the other registers you've declared or drop the #defines.
+
+> diff --git a/drivers/tpm/tpm_spi_sandbox.c b/drivers/tpm/tpm_spi_sandbox.=
+c
+> @@ -0,0 +1,410 @@
+> +static const struct udevice_id sandbox_tpm_spi_slave_ids[] =3D {
+> +     { .compatible =3D 'sandbox,tpm-spi' },
+> +     { }
+> +};
+> +
+> +U_BOOT_DRIVER(sandbox_tpm_spi) =3D {
+> +     .name =3D 'sandbox_tpm_spi',
+> +     .id =3D UCLASS_SPI_GENERIC,
+> +     .of_match =3D sandbox_tpm_spi_slave_ids,
+> +     .probe =3D sandbox_tpm_spi_slave_probe,
+> +};
+
+Why a UCLASS_SPI_GENERIC stub with a sandbox-specific compatible,
+rather than reusing tcg,tpm_tis-spi so the existing tpm2_tis_spi.c
+driver binds on top of the emulator? That would give actual U-Boot TPM
+uclass coverage on sandbox (currently zero for the SPI path) and let
+the standard ut dm tpm tests run against this emulator without wolfTPM
+in the picture. As written, the slave driver exists only to make the
+DT node bind, and the emulator only ever sees raw bytes from wolfTPM's
+native HAL, so the U-Boot TPM stack still has no SPI sandbox coverage.
+
+> diff --git a/drivers/tpm/tpm_spi_sandbox.c b/drivers/tpm/tpm_spi_sandbox.=
+c
+> @@ -0,0 +1,410 @@
+> +/* Maximum buffer sizes */
+> +#define TPM_CMD_BUF_SIZE     4096
+> +#define TPM_RSP_BUF_SIZE     4096
+
+These 4 KiB buffers live in priv_auto, which is fine, but the existing
+sandbox TPM2 emulator caps responses at TPM2_MAX_BUF_SIZE in tpm-v2.h
+=E2=80=94 please reuse that rather than inventing new sizes, especially sin=
+ce
+the goal is to integrate with that state machine.
 
 Regards,
-Aswin
-
-On 5/15/2026 4:02 PM, Ilias Apalodimas wrote:
-> Hi Ashwin,
->
-> On Thu, 14 May 2026 at 20:17, Aswin Murugan
-> <aswin.murugan@oss.qualcomm.com> wrote:
->> efivar.py currently stores authenticated variables including the
->> EFI_VARIABLE_AUTHENTICATION_2 descriptor (timestamp + WIN_CERTIFICATE)
->> along with the payload.
->>
->> When variables are set via U-Boot, SetVariable() validates and strips
->> this authentication descriptor before persisting the variable data,
->> resulting in only the payload being stored and returned by GetVariable().
->>
->> This mismatch causes efivar.py-generated stores to differ from U-Boot
->> runtime behavior and leads to incorrect GetVariable() results.
->>
->> Update efivar.py to strip the authentication descriptor and store only
->> the payload for authenticated variables, ensuring consistency with
->> U-Boot behavior and compliance with UEFI expectations.
-> The approach is fine, but when I use the tool now to create signatures
-> and enable secure boot I am getting
-> => bootefi bootmgr
-> Getting signature database(db) failed"
->
-> Have you tried a built that worked locally?
->
-> Thanks
-> /Ilias
->> Signed-off-by: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
->> ---
->> Changes in v3:
->> - Previously stripped the authentication descriptor at GetVariable(),
->>    now moved to strip it in efivar.py during variable pre-seeding/set.
->> Link to v2: https://lore.kernel.org/u-boot/20260512194205.1905069-1-aswin.murugan@oss.qualcomm.com/
->>
->> Changes in v2:
->> - Enhanced commit message with explicit UEFI spec reference
->> Link to v1: https://lore.kernel.org/u-boot/20250725123653.513252-1-aswin.murugan@oss.qualcomm.com/
->> ---
->>   tools/efivar.py | 50 ++++++++++++++++++++++++++++++++++++++++++++++++-
->>   1 file changed, 49 insertions(+), 1 deletion(-)
->>
->> diff --git a/tools/efivar.py b/tools/efivar.py
->> index 67729fa8505..d248cd868ba 100755
->> --- a/tools/efivar.py
->> +++ b/tools/efivar.py
->> @@ -79,6 +79,50 @@ class EfiVariable:
->>   def calc_crc32(buf):
->>       return zlib.crc32(buf) & 0xffffffff
->>
->> +def strip_auth_descriptor(data, attrs):
->> +    """
->> +    Strip the EFI auth descriptor from authenticated variable data.
->> +
->> +    This is used during efivar.py-based pre-seeding of ubootefi.var to
->> +    match U-Boot SetVariable() behavior, where the authentication header
->> +    is consumed during validation and only the payload is stored.
->> +
->> +    For variables with EFI_VARIABLE_TIME_BASED_AUTHENTICATED_WRITE_ACCESS:
->> +    - Input format: [EFI_VARIABLE_AUTHENTICATION_2 | payload]
->> +    - Stored format: [payload only]
->> +
->> +    Auth header size calculation (aligned with U-Boot efi_variable_authenticate()):
->> +        auth_size = sizeof(EFI_TIME) + WIN_CERTIFICATE.dwLength
->> +
->> +    Only the payload portion is retained after stripping the header.
->> +    """
->> +    if not (attrs & EFI_VARIABLE_TIME_BASED_AUTHENTICATED_WRITE_ACCESS):
->> +        return data
->> +    if not data:
->> +        return data
->> +
->> +    efi = EfiStruct()
->> +    if len(data) < efi.var_time_size:
->> +        return data
->> +
->> +    offset = efi.var_time_size
->> +    if len(data) < offset + efi.var_win_cert_size:
->> +        return data
->> +
->> +    try:
->> +        cert_hdr = struct.unpack_from(efi.var_win_cert_fmt, data, offset)
->> +        dwLength = cert_hdr[0]
->> +    except struct.error:
->> +        return data
->> +
->> +    auth_size = efi.var_time_size + dwLength
->> +    if auth_size <= 0 or auth_size > len(data):
->> +        return data
->> +
->> +    if len(data) <= auth_size:
->> +        return b''
->> +    return data[auth_size:]
->> +
->>   class EfiVariableStore:
->>       def __init__(self, infile):
->>           self.infile = infile
->> @@ -172,8 +216,12 @@ class EfiVariableStore:
->>                   break
->>               offs = loffs
->>
->> +        if data and (attrs & EFI_VARIABLE_TIME_BASED_AUTHENTICATED_WRITE_ACCESS):
->> +            data = strip_auth_descriptor(data, attrs)
->> +            size = len(data) if data else 0
->> +
->>           tsec = int(time.time()) if attrs & EFI_VARIABLE_TIME_BASED_AUTHENTICATED_WRITE_ACCESS else 0
->> -        nd = name.encode('utf_16_le') + b"\x00\x00" + data
->> +        nd = name.encode('utf_16_le') + b"\x00\x00" + (data if data else b'')
->>           # U-Boot variable format requires the name + data blob to be 8-byte aligned
->>           pad = ((len(nd) + 7) & ~7) - len(nd)
->>           nd += bytes([0] * pad)
->> --
->> 2.34.1
->>
+Simon
