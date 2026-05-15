@@ -4,91 +4,101 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6132CD4851
-	for <u-boot@archiver.kernel.org>; Fri, 15 May 2026 21:40:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A47D4CD4851
+	for <u-boot@archiver.kernel.org>; Fri, 15 May 2026 21:43:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4D5C684843;
-	Fri, 15 May 2026 23:40:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 267E884843;
+	Fri, 15 May 2026 23:43:14 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Prrmw54+";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="YLyCbPLH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B24108485A; Fri, 15 May 2026 23:40:24 +0200 (CEST)
-Received: from mail-qk1-x72f.google.com (mail-qk1-x72f.google.com
- [IPv6:2607:f8b0:4864:20::72f])
+ id 1FE5584865; Fri, 15 May 2026 23:43:13 +0200 (CEST)
+Received: from mail-oi1-x235.google.com (mail-oi1-x235.google.com
+ [IPv6:2607:f8b0:4864:20::235])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9D79B84812
- for <u-boot@lists.denx.de>; Fri, 15 May 2026 23:40:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F305084812
+ for <u-boot@lists.denx.de>; Fri, 15 May 2026 23:43:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=seanga2@gmail.com
-Received: by mail-qk1-x72f.google.com with SMTP id
- af79cd13be357-910f5120172so5010485a.2
- for <u-boot@lists.denx.de>; Fri, 15 May 2026 14:40:22 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x235.google.com with SMTP id
+ 5614622812f47-47c35be031dso257670b6e.3
+ for <u-boot@lists.denx.de>; Fri, 15 May 2026 14:43:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1778881221; x=1779486021; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=P+10taS13nQ+zWVSBiXgIXEVNrf5WdyWlcnsZgvDiRw=;
- b=Prrmw54+pQHZNqGjJ/P6J2xzkkXBoKZDJKpNB/R0Wz0PL2brpAsJGFB6e4r5lOBYqD
- Ra1XCJCPJ/Sp+6m9NPmJ4aOg/PEBVbL+XhBxD4I2Lq/JqP9noJlT0aClCsJmhisTEcEM
- 5Kb5oNP7Vo8AjA7hpmRlwXFC/4kB4jmTirmy3mB1KWfQHvtFcKru7I2jikH7sqECHRL+
- 2p18YW7puRrSFNmKQwScHbo/V8z4qEVPXPAeogeFLsBK9hApFkxiDSNqAECOEVJyYoar
- VTniwJJZ9CTJWBKqEsXS3WLkYm4pQHvIbxBT9zLbaaQlb64FrlVu0sB7dWzt2+CQf+m7
- rF3w==
+ d=konsulko.com; s=google; t=1778881390; x=1779486190; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=+FFwCSAEfSCa6Xmh9Agx+/fC8WNAOnHMhFCl43Z6gV8=;
+ b=YLyCbPLHBYxBIFE9HWW0FgT3fOsMqMa4w0ISNViDkTt25GFI9riy4Je9DzqrexrsrI
+ J2hDsG9SPSKPckkvzbYv4AQnPyXIS1tN8VI4hB54+DoXYn57qt784F7wcerJxekqMuks
+ n5Z6dC/nMro23IvN/xMKOX6OG37uTqAmRmn2U=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778881221; x=1779486021;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=P+10taS13nQ+zWVSBiXgIXEVNrf5WdyWlcnsZgvDiRw=;
- b=Ujzuob38OnceiJsAZwPoXahON7LkMhjXci1kBRWiVcrEo1xXYcbaeZZtovtBcuayjG
- usYUb8JE9WK1/Iv3VglJ63VQSUxTmd2HmU8bV8QB5Rmhkn1XtgfufUZkk4e6XLltDtF6
- x2TXx94ybO69wUGRhdFPcqaVm84MR46BQvoYHgX0Zxkl/D17IgMcyFATX8qtr+MLR7EQ
- peCojE+5fkBkm2s6DlqGCWUEozdMBImLDwQLfT2b5PewCTf8SqqALs9PqxVxcz9KcTuN
- 0XSk1Dt3QvMYikqFAc0NB4i1/HmAOzx2btuflDBV2LcVcRl7QgeIDGy/xqCnuyEl5SZD
- RTDA==
-X-Forwarded-Encrypted: i=1;
- AFNElJ+1oCz/Nfh4Jt/jWNUj9EeMqnH8i5zIdgWET+4T5VEVG9seUjfZtsUzuyP5S0aX9HCm4JLMhx0=@lists.denx.de
-X-Gm-Message-State: AOJu0Yxkv5w3EanKNizGFwSWqL+oSUnyjMZElRUOyAq0YA6ujrDnib+z
- YaJsqn65oRVGoSzaGu21y6KWobzS1RariNSfpk/LMT7W9kvtaGGhQ5otJR0zUw==
-X-Gm-Gg: Acq92OG/tSA/54sRtp0zEbqiHiu/l/eubmaoKuXn+Fjz6mzqTkjD7/P1sfl4xwjYUC9
- 10kXp/ka+tHwICNFCD62Xu8hONLffK+jffsLJH6UTflJfacibdCZMX9LUSgBQfyQNmxpY3XMm7Z
- Q57eXZ1zMee76IA6WJNcDJRkydA8ipE/jQDJugKELJWjf3E+vvne//6KojMALvebrSDsuqOd0Xg
- gvnAU+SBnphuHNuF7vNrXSKwreTGY4VbFNYY9RV+xD+tnVNyAzih7Sgbsx1YkJT/4axjCSL7IHR
- d15HkEwXoxFYRps6kavEAmkbYircXj0A8H1zH39Qw9axy5yJ3zEidSyvTPs5OZSb5hwd6U5RZjk
- qL5B/1gVQybB8ADrkxjXkMC9e/zysaONsyJpt3SFG3FU3G1Q2+as8sS8U3kr/1k1+UoOQ8L7dmu
- 3XVJoUt9No2/779XgG+809dFpeCHfjgtv0CT/uNdr2f76dRoP6JJ7Lba/FnqMSZSvB0E4=
-X-Received: by 2002:a05:620a:17a3:b0:90d:11b2:80f3 with SMTP id
- af79cd13be357-911d13317fdmr627691785a.7.1778881221282; 
- Fri, 15 May 2026 14:40:21 -0700 (PDT)
-Received: from ?IPV6:2600:4040:4477:d400:2d8:61ff:fe7c:5d59?
- ([2600:4040:4477:d400:2d8:61ff:fe7c:5d59])
- by smtp.gmail.com with ESMTPSA id
- af79cd13be357-910bcf35843sm656688985a.38.2026.05.15.14.40.20
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 15 May 2026 14:40:20 -0700 (PDT)
-Message-ID: <2ca02f73-20b9-22fe-5ec3-97c56c0f11bf@gmail.com>
-Date: Fri, 15 May 2026 17:40:20 -0400
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.11.0
-Subject: Re: [RFC PATCH 06/11] lib: getopt: Add getopt_pop() helper
-Content-Language: en-US
-To: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>
+ d=1e100.net; s=20251104; t=1778881390; x=1779486190;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=+FFwCSAEfSCa6Xmh9Agx+/fC8WNAOnHMhFCl43Z6gV8=;
+ b=LGw2dv37DZ+nTJFMdvUJor/RY3DO4OGWe/z+yMfJ4uZNaCiXdUV3WhB4lOKCExqbaU
+ pKAuVEIIMUwcigqJMrJ6LDDwYfWMfzz1I5S2Au0iCU7Pk5hxnYwMeAjxQ0oFpvOia6LD
+ D1GAoziGEjePNfuVaAuhRYeD8wEz1bQ5ZnxQXnmyoKK+V7T0Ou7k5nYrqpMMxl4stFJo
+ Q96hxsWzybz8Q9DcRig15phFoL3QOYfW9t62cIT6lHQuRcVpGcZFBU1nas8euupW+yBz
+ xycrVWlFS/AO1iObkTUCeNskcuxK+2oN43zHaoIIEXylxeAtZO5m4w4O3Jot2pCWvtxP
+ NbeQ==
+X-Gm-Message-State: AOJu0YzrwswSry01S4hkJNUvYJjUD519TMhtSZuG+gRpKEgf2ViqjFdF
+ o2mYHA8s9WdsokqK8ZTAHeosG5/RbsF/eo3tdtwKfrIFwzgaN/UsGRK0xTNjkdxfCx0=
+X-Gm-Gg: Acq92OFyTIaO9gI5X5B6dMGC7dLsdUnVgOThgAjS7QwAQXu67Nr/ZIX+/m1Fe7qHikM
+ VE5ggpr78ur9dKMuIEat5J8eqLAlZy2ZopEkTE5q5sTv3IYMOWyx1JeonfP1wcCZFejpjfaCFdg
+ sCqfDFQwhyuTYvGuaY1mUN8acIBFvzdEytuz2QMWwgwir8hrhJ8nvmkdmfDKVT9Iy5kQDsozxD3
+ I0rNEw9+Nab2glyL8EN0jeBQqJgKwxa889viNVgv8vpaiOmOsrdqUm8s199Z88zOsP2tyjYV4hb
+ hEZdZcEXhMOw6qcPCdQ7HpzZzdgJDkfQNkzBJ5qgrZtrJqAsC7n81QluYyALYWTi3Kwg8prR1Qc
+ VdTV+JfAggxg07HFPsn78o7tjanhM5lmCDRahGVXj5tt8ydSdjZBGX95dESHAYL8cyPG3fzRgKF
+ gvOzMVnXq/tcZ1Ymt4tvtkcpkV7VyBKWj49q1CW47ScVNp0kyjHLZEhIWWuT27qxhRA/4Rc8PeA
+ udo531zvnZTZK04gvB8udUu6UJYdK8gCJ8ZckGLUyZN1Ey7u4SpVLCY3uTlaA==
+X-Received: by 2002:a05:6808:1a07:b0:482:5bd1:d8e5 with SMTP id
+ 5614622812f47-482e55afc67mr3682025b6e.9.1778881389613; 
+ Fri, 15 May 2026 14:43:09 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
+ [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7e55b95b82fsm2560042a34.12.2026.05.15.14.43.07
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 15 May 2026 14:43:08 -0700 (PDT)
+Date: Fri, 15 May 2026 15:43:05 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de, Sean Anderson <seanga2@gmail.com>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ =?iso-8859-1?Q?Beno=EEt_Th=E9baudeau?= <benoit.thebaudeau@advansee.com>,
+ Casey Connolly <casey.connolly@linaro.org>,
+ Daniel Palmer <daniel@thingy.jp>, Heiko Schocher <hs@nabladev.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Hugo Villeneuve <hvilleneuve@dimonoff.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jerome Forissier <jerome.forissier@arm.com>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Michal Simek <michal.simek@amd.com>,
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Peng Fan <peng.fan@nxp.com>, Peter Robinson <pbrobinson@gmail.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>,
+ Yao Zi <me@ziyao.cc>
+Subject: Re: [RFC PATCH 00/11] Tidy command option parsing and use it a bit
+Message-ID: <20260515214305.GL1858239@bill-the-cat>
 References: <20260515203311.2555651-1-sjg@chromium.org>
- <20260515203311.2555651-7-sjg@chromium.org>
-From: Sean Anderson <seanga2@gmail.com>
-In-Reply-To: <20260515203311.2555651-7-sjg@chromium.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="funH3/SH6/6AQip2"
+Content-Disposition: inline
+In-Reply-To: <20260515203311.2555651-1-sjg@chromium.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,69 +115,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 5/15/26 16:32, Simon Glass wrote:
-> Callers that consume positional arguments after parsing routinely write
-> the same shape:
-> 
->      algo = gs.args[gs.index];
->      /* advance past algo */
->      return hash_command(algo, ..., gs.nonopts - 1, &gs.args[gs.index + 1]);
 
-I think it's better to be explicit.
+--funH3/SH6/6AQip2
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-> 
-> Wrap that in a small inline helper that returns the next positional,
-> advances gs.index, decrements gs.nonopts, and returns NULL when no
-> positionals remain. The same helper doubles as an iterator:
-> 
->      while ((arg = getopt_pop(&gs)))
->          process(arg);
-> 
-> stddef.h is now included from getopt.h for the NULL macro.
-> 
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
-> 
->   include/getopt.h | 23 +++++++++++++++++++++++
->   1 file changed, 23 insertions(+)
-> 
-> diff --git a/include/getopt.h b/include/getopt.h
-> index 5a9e7802e65..013431807ff 100644
-> --- a/include/getopt.h
-> +++ b/include/getopt.h
-> @@ -10,6 +10,7 @@
->   #define __GETOPT_H
->   
->   #include <stdbool.h>
-> +#include <stddef.h>
->   #include <linux/kconfig.h>
->   
->   /**
-> @@ -126,4 +127,26 @@ static inline int getopt_silent(struct getopt_state *gs,
->   	return __getopt(gs, optstring, true);
->   }
->   
-> +/**
-> + * getopt_pop() - Take the next remaining positional argument
-> + * @gs: State, after getopt() has returned -1
-> + *
-> + * Returns the first parked non-option (``gs->args[gs->index]``),
-> + * advances the index, and decrements ``gs->nonopts``. Returns NULL
-> + * when no positional arguments remain.
-> + *
-> + * Useful for consuming positionals one at a time after parsing::
-> + *
-> + *     algo = getopt_pop(&gs);
-> + *     return hash_command(algo, ..., gs.nonopts, &gs.args[gs.index]);
-> + */
-> +static inline char *getopt_pop(struct getopt_state *gs)
-> +{
-> +	if (gs->index >= gs->argc)
-> +		return NULL;
-> +	if (gs->nonopts > 0)
-> +		gs->nonopts--;
-> +	return gs->args[gs->index++];
-> +}
-> +
->   #endif /* __GETOPT_H */
+On Fri, May 15, 2026 at 02:32:51PM -0600, Simon Glass wrote:
 
+> We have had getopt() for over five years but it is not much used. It is
+> much easier to understand arg-parsing using getopt() and it avoids
+> common errors. As the named maintainer I decided to look at how to make
+> more use of it.
+>=20
+> So this series explores the impact of converting a few commands to use
+> getopt() instead of ad-hoc parsing. It updates getopt() to handle flags
+> anywhere in the cmdline and provides a few helpers to reduce
+> boilerplate.
+>=20
+> The chosen commands are:
+>=20
+> - echo: very simple with no flags
+> - hash: fairly simple with just one flag
+> - env grep/export/import - fuller examples
+>=20
+> The series also adds a recommendation to use getopt() for new commands.
+>=20
+> To try to reduce the code-size increase, a lower-case function is added
+> and called from a few places. The difference is fairly marginal.
+>=20
+> Overall, the result is not pretty (see below) with about a 1.1K size
+> increase on arm64:
+
+I think that means this is a no-go, and you need to work out what might
+lead to a much smaller growth here.
+
+--=20
+Tom
+
+--funH3/SH6/6AQip2
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCageTZQAKCRAr4qD1Cr/k
+CsyRAP97xhPnOCIyzCvjIf7Iaq3YuniKqnNY59fsl5B+k2saCgD/aBfYfIPmE21M
+3beRwSRkq75MjXGCIWZ2OdZju+xbtgg=
+=vAZB
+-----END PGP SIGNATURE-----
+
+--funH3/SH6/6AQip2--
