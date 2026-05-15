@@ -4,92 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06A2ACD4851
-	for <u-boot@archiver.kernel.org>; Fri, 15 May 2026 12:55:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38360CD343F
+	for <u-boot@archiver.kernel.org>; Fri, 15 May 2026 12:56:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 824AE8465D;
-	Fri, 15 May 2026 14:55:22 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C84978465D;
+	Fri, 15 May 2026 14:56:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Nsw6sft4";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="iq65UuNk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A031E8467F; Fri, 15 May 2026 14:55:19 +0200 (CEST)
-Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
- [IPv6:2a00:1450:4864:20::636])
+ id 6B27984683; Fri, 15 May 2026 14:56:16 +0200 (CEST)
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [IPv6:2a00:1450:4864:20::632])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 23F408464D
- for <u-boot@lists.denx.de>; Fri, 15 May 2026 14:55:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 204158464D
+ for <u-boot@lists.denx.de>; Fri, 15 May 2026 14:56:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x636.google.com with SMTP id
- a640c23a62f3a-bce57c132b2so169503466b.0
- for <u-boot@lists.denx.de>; Fri, 15 May 2026 05:55:17 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1778849716; cv=none;
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-bcda7765d64so161256666b.1
+ for <u-boot@lists.denx.de>; Fri, 15 May 2026 05:56:14 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1778849773; cv=none;
  d=google.com; s=arc-20240605;
- b=jVkKAmW/LXlKuG8kQGkSu4nPXNbYIYE1rPC7FFruJQzE71vYjEezmEX79hqJxd6BxU
- sQyb7PEcp0UlQLoBei8Z55DknKgC60pTDI+WV/2qswNm5vWw2F5jYX34ldSpfur2+roI
- D1eRuY54+nh3McicaFRGnWhN3iEx5UmESnRP4yEtL0vEpyV80q98hbYRKegEdlcoT5t/
- PMqytcRlGamvOknuk3r2C11BkE2bVjYON5EdjJqrBbJya+zuv6eHuAyMeIjrd2lx3jLB
- zGV9d5o2GIVjuI+K5irYQxOOgBYfFanMd3kWlwm+dZLgL8a29Ogsmjv0ew5uvoklumuz
- 3ukw==
+ b=O3k1m1YXRqiMziRy8llOLVZkncqiLQJmBAK3Vz88XoKN3Jz9ay+HQytrw089rPdj8T
+ Jn0eOxTLt1NOhloP1EzIS0fjiJ/k4/OejsOTV8XuTY42LJT0ZSa5NHsQBCf6MEQn3Pdf
+ ry3B7Yo8xcCaibOOPa4nCKKL1MiYB0tV4nXBGPyqSwcKB5QIjVcNljRGseFQEwQ/bDW0
+ Vqt7WhwwPFa6ppmFzhnG7pxK6AJIbRJJi6DiKVcTyD+pKYvKgdEwlBaQ/lJTk+Zl+l3F
+ bLRnmiLqxFoOPiVj9ZaXxBJq30BhedKIT7iQj9G1ylIILgGWPytosdpqqo+5I7KJ0RFA
+ kFbA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=d5g6/2Zgiibogt9ex30r5UZrDAmdn/KI+gz4Mj6BI54=;
+ bh=9roG3peWzpDmDx583gN2fczOIXNg1GMqnT2JyCi7Lms=;
  fh=fJAGB8LvxCJalDRE+ziaXIW21+gD5jSCb0B1QEwHsvE=;
- b=RqnclwByQIVKPvIn6ttatPOBJBXABpt5tnE5rne7L6CzDP7xCUvOakll9tC5/xIVKv
- vJ4q8wkUe+0IQ+B+IJXoRRSbZTsDGkI3HY9IM4ADKZgXRwowINs5idr2mtYE93fFHLv1
- rhLw6ZtGevqDM28QgWFGn0+4xXWAcBuywgfDRooIdkXbbF37v/PXYv8+FBiormSIMXlc
- exd9i0IV40P0OxN9hRsZI7RtgQcmwk0JxFjiLlj+eLwq9KhWaL6DpqVebck/qF3jQThS
- N3PYqmg5tBPvxlUU5s4u4Qe/wyD5aGe9Y1fPijDtsBiVJrF4VQeQHE6HKM89lx60lV2D
- p5lg==; darn=lists.denx.de
+ b=SRmKUp1yOLsZCgncuLM65ocDlHTi2q/lGDWpwKAn6l0Mm07RhHmyl9fnKZDQ45CXtB
+ zlocwa1YRjvqZMhuGul8TyA8QeIahDm01xSzQct8UuCVeQ5vSDdb88cKqe4Rf10/TUVZ
+ cFLwx0ctvU+y+6C73NSToaaHrC2FaYY831OGM5dErGFinP7N5yl54sxnb6vSH4S11eVR
+ aa0MBTwipKnhpfMTF54/XmpqoJblWhlHWyYge4gB5L+XIDr2f0BV4GlG7Qm5SLZNjcbT
+ eZghuRGwwcj4gXx7cDi2M3+mjm0ips9abBPodg+s9Bp1Xyo7bZX91kB1ikh9vO9wzvHh
+ WbcQ==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1778849716; x=1779454516; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1778849773; x=1779454573; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=d5g6/2Zgiibogt9ex30r5UZrDAmdn/KI+gz4Mj6BI54=;
- b=Nsw6sft4tSjoGMPNXdKKNaL/QC47jrWZHtN1kV1ziFgMY8RckF9Sl52b5dAsn9JkTC
- /E5vwMdjnrpdcCXkZGeXTfbTL7SFrABY4Nw+2aXALk8tUVlwzT524ZD1akCTIgNaFwiF
- jfInbEspdntXKietdOBKhBCa30KRe0AsOn43g=
+ bh=9roG3peWzpDmDx583gN2fczOIXNg1GMqnT2JyCi7Lms=;
+ b=iq65UuNkAkgURB2csIVRT1QaOXF3bAz0nWM/1+iH8wuLUVTbwmsXciXbiKEuehyHnM
+ eraDNgOEo/+f1IYr5ZdJryH29w64I9gqH3+vlU2wL0TLFfEPpkq+nue0mmxmMHugC7ex
+ +uMujnLHruUArsew6C8pWS4K3P7x5uOqfXZPo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778849716; x=1779454516;
+ d=1e100.net; s=20251104; t=1778849773; x=1779454573;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=d5g6/2Zgiibogt9ex30r5UZrDAmdn/KI+gz4Mj6BI54=;
- b=QotFuphHtdfsSsyCL9uc6/VhkOFXaQ/1+ZZH4vP7AifCJ3PJmAPPTK9x8XhZ6qQEkh
- CklNs7yQB2yefRL1jjeSYKLzOyNZ2LZ53Hc5+PYWP3W5EpK9k4okP23LQp31MbYByqC8
- M4pyxACM5ByYKq6DLXE233jWA5tcsFObcPdVUf9fYCuwIVH9IhzA7jZ1Czu0w+oRwAfM
- LuPK05G/16Dk73uwKWjJb+8EgUGnPy1X7+KsBQDb8jkMxvx6/SO3P9YvGIdKm4nQSxWL
- nGSjGBGIdVjxtXQL1zz96CB6A8u9Ou2M903rStpBZB6ne8PxxFt5wg3S7L1BKfPLvVqK
- gSAA==
-X-Gm-Message-State: AOJu0YzxqK9DL4h5aL5KsFA3zd+Di3SFwAqDpxV4k6l/WNERYFKBRQc9
- 7GxwjAxhHRrOdyombKoY+WsNbYQCjYdWjf87rtkUX6c8ryCkl8eKjjxF2krZXznif/2YcRfn1Uk
- BOz/G+UQuSCGk/MpNOy+72/NqMqgVF4aPDFHh/ke9
-X-Gm-Gg: Acq92OG2hq4Kyr73Zbz/ga1426oIfOvZPCZR3/qLeBBVxF32uqtjMBqZcty+F6iaDN2
- dwzn0ipio/ebOSNdvd/NMl64cKiOPy/eiC2kHUBDHQNQVTcweTNyxxzkGIQL32BtXZGZ+qbagwF
- 9H+EcP4bPcIbb60sqFs/wwEgiBgy4+y/mnG9f86bDuxtTGhjOM65D+Zj8zoRBX/SIts3mUwEOcc
- YS4svaZody5mGppXLictllPa9C8qR5PNi0iIIZysOKCCuWalX6ID3/Npg1FADmwIcWKyNfyfHc+
- B0wjOM6Ih5Gp5by9
-X-Received: by 2002:a17:907:1c0a:b0:bc1:d3d2:9348 with SMTP id
- a640c23a62f3a-bd4f346164amr385459066b.20.1778849716563; Fri, 15 May 2026
- 05:55:16 -0700 (PDT)
+ bh=9roG3peWzpDmDx583gN2fczOIXNg1GMqnT2JyCi7Lms=;
+ b=XL+HhofDN/uQaJP4/uoL9sOQGP2yeudJuXb1F2svRybU1whGvff5FkMeu8abeXAEuz
+ is7fpq6lWAVwd37X/kg+YhAJ9PDbo0CpRpAKiclIWtr8GGFxwj+8kS0u7hfDGBOi6IF/
+ a3V3WLdX52ExEeJhTsh7jMyZkM2h+9dByTisEZcgGOwTJh1K6fK1Z2lzmDs//quhY0C5
+ Ipt3eRsiT39esdblrJzFVPCy3TW4ZhkqJvA7u7cxpuENp/krOhc1frS7IqpOUv8ljNzD
+ nholk4a1bciM99uZBEEmQaKt4gCSkPfYhQg0V5Cws2rHqcBeTr4QG6DuxQSwVjudGoNz
+ JCvA==
+X-Gm-Message-State: AOJu0YzdHf6RH+iiVFDcXix8IvcdOJ1A806s+Vl4M3EogrYikmfZVKO4
+ Ctt+59mcKeaunMICHSjQg8/DOvQQi8sCRIWRGXJnl7sPznWiE+liHJh8DH4uYSd89bF7Gl2V3d2
+ r2cbRU6OC77ET02ERLWMl8eqi2RGcx1E5frvOTprnc4gA8GrllrGuTw==
+X-Gm-Gg: Acq92OGgiMfWY5ex3kHwPiwsEyzN+okCvrwDL7WQMdRQyBjwe5r/j/pJ7KEQYjAxvev
+ awKVROf/IKcwFjcpx87kcRtCdCqHi9wgFmK3NPSKqMe6FmuxULAZfWRbtkHDS11lvNZv1pVMsea
+ 52xKvsNtfM+DP/bap2XMxB/GcJ15TGzpkSpxOG/t12r6q5GaIru0r7V8pUySEBLm42kEiPxvgdQ
+ YJciCuoKAekoDRkbMu6b7F2tuRpno2cr4WGopfXf54d7Rsh+NNF5lS18KWvMSic+V3ZL26d9SMh
+ UYCc4Q==
+X-Received: by 2002:a17:907:2d92:b0:bd2:44de:d698 with SMTP id
+ a640c23a62f3a-bd4f346141dmr484801766b.17.1778849773472; Fri, 15 May 2026
+ 05:56:13 -0700 (PDT)
 MIME-Version: 1.0
 References: <cover.1778657347.git.weijie.gao@mediatek.com>
- <5840777d0366c5d2449115c4143c802213ad36b2.1778657347.git.weijie.gao@mediatek.com>
-In-Reply-To: <5840777d0366c5d2449115c4143c802213ad36b2.1778657347.git.weijie.gao@mediatek.com>
+ <8a1af52cc1bccfc0e98255118da9b2df0b420a9f.1778657347.git.weijie.gao@mediatek.com>
+In-Reply-To: <8a1af52cc1bccfc0e98255118da9b2df0b420a9f.1778657347.git.weijie.gao@mediatek.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 15 May 2026 06:55:04 -0600
-X-Gm-Features: AVHnY4K50Z2EtNQVvmthGdezVNoVKnVwJLT7WjH2nx05JF_tAzCih35PQOIOf1A
-Message-ID: <CAFLszTi=1mKZ8YjPy30qQJ1ZZb3UjRjZtEiSk9g2GUwi8F-UFA@mail.gmail.com>
-Subject: Re: [PATCH v4 05/10] cmd: ubi: change the type of parameter dynamic
- to bool
+Date: Fri, 15 May 2026 06:56:01 -0600
+X-Gm-Features: AVHnY4JrCvbYK3hrVTjC0DhUE8-Y5uWHVZpw5E7ACNeaGOxUGknvk2XtT6y20Cg
+Message-ID: <CAFLszTjNQr71HkgTFf6vtc7z7VnUt-EtCx2OCgCvC=aG4mPSMg@mail.gmail.com>
+Subject: Re: [PATCH v4 06/10] cmd: ubi: change all positive error return value
+ to negative
 To: weijie.gao@mediatek.com
 Cc: u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
@@ -109,15 +109,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Weijie,
+
 On 2026-05-13T08:02:45, Weijie Gao <weijie.gao@mediatek.com> wrote:
-> cmd: ubi: change the type of parameter dynamic to bool
+> cmd: ubi: change all positive error return value to negative
 >
-> This patch changes the type of the 'dynamic' parameter of ubi_create_vol()
-> to bool as it's used as a boolean.
+> Change all return value using errno codes to negative. This makes it
+> consistent with the linux ubi layer.
+>
+> Also, to follow the standard definition of U-Boot command, in the do_ubi()
+> command handler, the return value is converted to CMD_RET_FAILURE for error
+> returning, and CMD_RET_USAGE for incorrect usage.
 >
 > Signed-off-by: Weijie Gao <weijie.gao@mediatek.com>
 >
-> cmd/ubi.c | 6 +++---
->  1 file changed, 3 insertions(+), 3 deletions(-)
+> cmd/ubi.c | 106 ++++++++++++++++++++++++++++++++++++--------------------------
+>  1 file changed, 62 insertions(+), 44 deletions(-)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
+
+> diff --git a/cmd/ubi.c b/cmd/ubi.c
+> @@ -761,7 +762,7 @@ static int do_ubi(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+>                       return ubi_check(argv[2]);
+>
+>               printf("Error, no volume name passed\n");
+> -             return 1;
+> +             return CMD_RET_FAILURE;
+
+A missing argument is a usage error, not a runtime failure. Please use
+CMD_RET_USAGE here, and likewise for the 'Incorrect type' and 'no
+volume name passed' paths in the create handler, so the user sees the
+help text.
+
+> diff --git a/cmd/ubi.c b/cmd/ubi.c
+> @@ -677,7 +674,7 @@ int ubi_part(const char *part_name, const char *vid_header_offset)
+>       mtd = get_mtd_device_nm(part_name);
+>       if (IS_ERR(mtd)) {
+>               printf("Partition %s not found!\n", part_name);
+> -             return 1;
+> +             return PTR_ERR(mtd);
+>       }
+
+PTR_ERR() returns long but ubi_part() returns int. Please cast, or
+just return a specific errno like -ENODEV
+
+> diff --git a/cmd/ubi.c b/cmd/ubi.c
+> @@ -806,34 +807,46 @@ static int do_ubi(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+>               }
+>               /* E.g., create volume */
+>               if (argc == 3) {
+> -                     return ubi_create_vol(argv[2], size, dynamic, id,
+> -                                           skipcheck);
+> +                     ret = ubi_create_vol(argv[2], size, dynamic, id,
+> +                                          skipcheck);
+> +                     if (ret)
+> +                             return CMD_RET_FAILURE;
+> +                     return 0;
+>               }
+
+This three-line conversion is repeated about seven times in do_ubi().
+Since the called functions already print their own errors, a helper or
+just 'return ret ? CMD_RET_FAILURE : 0;' would cut the duplication.
+What do you think?
+
+Regards,
+Simon
