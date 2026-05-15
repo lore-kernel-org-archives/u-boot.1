@@ -4,94 +4,118 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D0F6CD4851
-	for <u-boot@archiver.kernel.org>; Fri, 15 May 2026 12:27:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E5B4CD343F
+	for <u-boot@archiver.kernel.org>; Fri, 15 May 2026 12:27:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E588C83EF9;
-	Fri, 15 May 2026 14:27:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 36A638466F;
+	Fri, 15 May 2026 14:27:44 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gehealthcare.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="olLcyrJG";
+	dkim=pass (2048-bit key; unprotected) header.d=gehealthcare.com header.i=@gehealthcare.com header.b="jywLYPif";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C4C8684683; Fri, 15 May 2026 04:55:51 +0200 (CEST)
-Received: from mail-oa1-x2e.google.com (mail-oa1-x2e.google.com
- [IPv6:2001:4860:4864:20::2e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 2D4BD838BB; Fri, 15 May 2026 08:05:50 +0200 (CEST)
+Received: from BN8PR05CU002.outbound.protection.outlook.com
+ (mail-eastus2azlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c110::3])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B7AC18464D
- for <u-boot@lists.denx.de>; Fri, 15 May 2026 04:55:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AE2A683E81
+ for <u-boot@lists.denx.de>; Fri, 15 May 2026 08:05:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=gehealthcare.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xiaaltabano@gmail.com
-Received: by mail-oa1-x2e.google.com with SMTP id
- 586e51a60fabf-439bdbc86b1so409975fac.1
- for <u-boot@lists.denx.de>; Thu, 14 May 2026 19:55:49 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1778813748; cv=none;
- d=google.com; s=arc-20240605;
- b=apX6XEHFdtTTciVshkae9RcIc3U8sIDu+/xUy6cqBt5ilYWpx19jtMvo4EHnKfH21u
- oXEuru/wyyCq4L7bE+pM5a6sk0ftEj7U3NLJ0d9YEHnbvS/ObV/PCiF1eSkftTVEQjVL
- W4N8ej63ksaNgHkiIiU3ra4ilBO86DMm3ujOhh66J+OsKc9tA95VHtIvGSuC4jOIR9LH
- aY5ysvKcPoxVIrozv0PhW4PwymD7za1baaD9PGqY6MRzjcSxIDhL/U0FxN+hfwZRYnqy
- SrTPNBsPda+RgpmKLfqsTEmCSKP3c5R8HpCRBKOWQQBTt0/xLk9s7X06LBF4ZSGhkmA4
- OR5w==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=to:subject:message-id:date:from:mime-version:dkim-signature;
- bh=Sddkb9mpe4Qk3p848eYeVXjW0ek17rT6a8Vf401BMHQ=;
- fh=ea3Lb1kmqTyoSSOGd3r79PdCdfQHXBjS15GzGXd6hwE=;
- b=llzjHEaGyaKrPQLMfhnatjZInGCWazHSVOIFIEuOU3qUhcJu5fSryNNu6rO5KokjXI
- /2cS1beceE5BIQp+JhI8ce9uI2xxPOvv7uTBdVH6geLiVQ1UCV9/YdV8wFtIh9DtzGkh
- M3e+zn2ffMkTI8vT1GC5LKYp2nmv1ACRdgpeUadu7HRX7IVspAv7GCIHn8XieoA7kWCV
- KyK03gOlITX2rQ16z0h/obRSHTUhWZyvgEYe9o+uN3iDPq3h1+0GGa4D1PmHeFlWsiBb
- 9T2jqsNHY/iK82iyETrT476L1EgNwuYClscse0ewvH0C7nBKzJmi0KLf70bePYX31hBr
- qEww==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1778813748; x=1779418548; darn=lists.denx.de;
- h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=Sddkb9mpe4Qk3p848eYeVXjW0ek17rT6a8Vf401BMHQ=;
- b=olLcyrJG9jTJlkPCQa1yHPPUp4xSeT3RJiCMbc9oNUPYuL2H8y/KDSbvkLs6hWl1+M
- EuGPhbWcL7LtwS0Qrsdbz6qoAC02nPge2S4SVimFCgQ4B8dOol8c+aeNx7GHTd5xo76J
- sgL5XpTuRBlK8DPwMl8iItmvT7PJg1qqTeCE0Y6R1qvCQ9KCwRfRYuseLsfKrK8L5akc
- T1+dZTaTLaMvFbsnMbZT11oMgacQvbkcweGQn31VeTM8kivoGxeyVOK+iyozMraEOqq3
- LlvVIEfb34j9WOfKXMq0hRzCj6auGFp7qJKG7GvrSwvf5ZaF6iiV0KJVl5/N2AyK9h3p
- 7NEQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778813748; x=1779418548;
- h=to:subject:message-id:date:from:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Sddkb9mpe4Qk3p848eYeVXjW0ek17rT6a8Vf401BMHQ=;
- b=P3xCvlSaeRZhf98zE+MF1/q8S7KoK+H0tOgiOeKlSol2zTmD1M88TbnQ1IdPD9EFBh
- 9IxrRr8EMSmmjzfSxfb8xiGRoJhx/XGvfyarAuuyrLp+ETsu10IsmyM124tPHOKVy4FR
- ghm7iQWqC7Qzypeetnm1uFAIw2XYnprbko/3uKZbP4gw+uDUHw0DjXZOZqE/WPh9Y0Ri
- knY2YifyDYub8oOBpnxcP2FwZ6CE9ywP9r5BaGTxo2rPiKmV8v++lL6OUHD80DMcoqDh
- w4qgDHybUfLcJG0YoFubQUfQQ1ja3xbZJfn/ycEXzs/LFaBTfqMKKhqXOYN0ep1dk1bJ
- 908w==
-X-Gm-Message-State: AOJu0Yzz5ce4biM/H5WT34EsnQU+G1ytIeRlW4evLBvA+/FhDpoJo+SS
- a/iaYrqUvg4ICDGHyD58sTFfAv9TvSaI1+OR/kJmw3lwO8D9WDxK5GXGxhqifuCYw/21PJ1+H/i
- QsJ+AX/biix/+hAl3OQT4z/uI3W6jLKIl6g==
-X-Gm-Gg: Acq92OEVjgsNnhSlwhDg7IA0PcWZmcFQjNadCU4DWwooykRFwLP6HyJQeLexYlt++MP
- 1LZTcgH8xqjY79pJ/hTKG+MQgHsAeW7KJbvXrrbaMP7+/mfyWdX4nRBOvGkW9saVzQ5uCpRFyJg
- OWVLNld3weg/8c8dZvdxB3WHxjeytf6hNBhIMqnoRTZr6Opo8eD5sxLXGaJMok24THdoG5LV85W
- B0BGwDNH7LtoUsbFzGFUFdCKFvAqN2kUccb5DvOAgPQV8sV1jAxntd8FbDwaPb0Vo7CbWstDdn4
- MDiUMwz9dQs901svX2NAcPK/
-X-Received: by 2002:a05:6870:6107:b0:439:d375:618c with SMTP id
- 586e51a60fabf-439f91f105emr3100997fac.10.1778813748210; Thu, 14 May 2026
- 19:55:48 -0700 (PDT)
+ spf=pass smtp.mailfrom=Brian.Ruley@gehealthcare.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=fBeCjwqL/FBCsseCC1Acm973fqyVkBXrZSfbl/rsFuL5fgHp98WPvoyt8+BwHsiX5tP7b9kP+sVgv7OWe6OYVBcszeek/jQ5jzXEDNSxyJT0GfCenXPUAoqYMUTerhGjkXakK2KZoFNIi9ec6ioJ/bvPkjQQYtE5voWgPaPeYlpHdxMlqy+ztcEIY3NSBzCQR9oIEZeaMRMPQD0cZacImJ4xQPmBJE35XGmdkODu1pWi9NhuyZd7+1UVCOy20H6tdobNCqGQJxfU5G9f0ieucxdS1N76MecCOT2MFzyB1uXkzSnfuRDc0bkv+zBdjMvctUAQmjIJ0gOOzgrY2yvcpA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=cBftp7r07qE2w6IZZrmjw+xHv6m9WbH9P7hkaZsKijE=;
+ b=FlqXK5Yvb4VgnTi/SnezCebA8fvXTb7tlTfouIoQfD3K0FErJRbcNDQFSpw6nUbirfcfq1pSsksDvtxu3Oj/R9s2OL9npaLeqXGVw9d9IHSDZZQk6dOcXkgCatBuWXS7vEaKevOyjJ5xggEnFMfr30fO+0THD5Rsjasn9108qOzfye6ggxHOrtkZGMq5Q6zSjMa5hBmbh7r4264M4SePLv5KlGpQ2W6YK7b+3NCPwJi9GKiOrRjkgwXEFIFXLRAMttUw3gUbt7h7y6ImvuHUwM8YAtYTj6CGNBok3/ykjFVuRRCank/Pwuvz/3PcmLXzkuMuttHYtB3bxtCVkIYfzg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
+ 165.85.157.49) smtp.rcpttodomain=lists.denx.de
+ smtp.mailfrom=gehealthcare.com; dmarc=fail (p=quarantine sp=quarantine
+ pct=100) action=quarantine header.from=gehealthcare.com; dkim=none (message
+ not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gehealthcare.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=cBftp7r07qE2w6IZZrmjw+xHv6m9WbH9P7hkaZsKijE=;
+ b=jywLYPifcP2rD1zVNvZFKHUglhV+JshOEI8R3cFqcWlASpJ6WTRPaeFynzjI5srLBCXhnWyrDxDoa/2x70ozIpiGBhezND52mN9u9tvWaD0sTyHIqalS3e8hIRH9bzljYbPU9ccAEhvRnytI0fevyJ5EZ75ZNhB5rRbxntfi0xjXMtzU8neswNSfF6YuDuHyW0qM0upsmZwMCkkiYlkhDri3qRduw8h2p8xxjLU6gtdbdUmDbkU4+lKxJzRvH76d7FK8uLNJpWcaD+3al77xbkAXV+EwgfljZe72SmXWxJ8JWwkDZRWLQO/p1nbQfbHzbl/v+g7SocfoRyhMpX/xJA==
+Received: from BN9P220CA0006.NAMP220.PROD.OUTLOOK.COM (2603:10b6:408:13e::11)
+ by SA1PR22MB5271.namprd22.prod.outlook.com (2603:10b6:806:3ce::20)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.25.19; Fri, 15 May
+ 2026 06:05:36 +0000
+Received: from BN1PEPF0000468D.namprd05.prod.outlook.com
+ (2603:10b6:408:13e:cafe::d9) by BN9P220CA0006.outlook.office365.com
+ (2603:10b6:408:13e::11) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9913.13 via Frontend Transport; Fri,
+ 15 May 2026 06:05:35 +0000
+X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 165.85.157.49)
+ smtp.mailfrom=gehealthcare.com; dkim=none (message not signed)
+ header.d=none;dmarc=fail action=quarantine header.from=gehealthcare.com;
+Received-SPF: Fail (protection.outlook.com: domain of gehealthcare.com does
+ not designate 165.85.157.49 as permitted sender)
+ receiver=protection.outlook.com; client-ip=165.85.157.49;
+ helo=mkerelay1.compute.ge-healthcare.net;
+Received: from mkerelay1.compute.ge-healthcare.net (165.85.157.49) by
+ BN1PEPF0000468D.mail.protection.outlook.com (10.167.243.138) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.25.13 via Frontend Transport; Fri, 15 May 2026 06:05:35 +0000
+Received: from zoo11.fihel.lab.ge-healthcare.net
+ (zoo11.fihel.lab.ge-healthcare.net [10.168.174.93])
+ by builder1.fihel.lab.ge-healthcare.net (Postfix) with ESMTP id 8B1AA131E4;
+ Fri, 15 May 2026 09:05:32 +0300 (EEST)
+Date: Fri, 15 May 2026 09:05:32 +0300
+From: Brian Ruley <brian.ruley@gehealthcare.com>
+To: Fabio Estevam <festevam@gmail.com>
+Cc: Stefano Babic <sbabic@nabladev.com>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Tom Rini <trini@konsulko.com>, Heiko Schocher <hs@nabladev.com>,
+ Huan 'Kitty' Wang <HuanWang@gehealthcare.com>,
+ Ian Ray <ian.ray@gehealthcare.com>,
+ Martyn Welch <martyn.welch@collabora.com>, lukma@denx.de,
+ u-boot@lists.denx.de
+Subject: Re: [PATCH v2 3/7] imx6: clock: allow different clock sources for ldb
+Message-ID: <aga3rIW9M49mf-VD@zoo11.fihel.lab.ge-healthcare.net>
+References: <20260428085117.402523-1-brian.ruley@gehealthcare.com>
+ <20260428085117.402523-3-brian.ruley@gehealthcare.com>
+ <CAOMZO5De=9ECdSZ=VxvhrAJxRX7vpHu65hCueUn7VChmBnYPxQ@mail.gmail.com>
 MIME-Version: 1.0
-From: Xia altabano <xiaaltabano@gmail.com>
-Date: Thu, 14 May 2026 13:17:05 +0800
-X-Gm-Features: AVHnY4JOs7WN0ZEMzlavWbA6xVLbeteu0OWOLZxoo6NTZo-61nxC14xM8UnQ9OI
-Message-ID: <CABKpJy38t91qLUJn2sQpRucPdYq-tft5pfFcU0autA+Z9mpB6Q@mail.gmail.com>
-Subject: Re: [PATCH 4/4] upl: Update documentation
-To: u-boot@lists.denx.de
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <CAOMZO5De=9ECdSZ=VxvhrAJxRX7vpHu65hCueUn7VChmBnYPxQ@mail.gmail.com>
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BN1PEPF0000468D:EE_|SA1PR22MB5271:EE_
+X-MS-Office365-Filtering-Correlation-Id: 12ebd364-ade9-4637-575a-08deb247fb0a
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|376014|82310400026|36860700016|30052699003|13003099007|11063799003|4143699003|18002099003|22082099003|56012099003;
+X-Microsoft-Antispam-Message-Info: bHt57bJaOSq1yMOYIR81v5EfvZ957kXNtyijYyel+EO7mcqI09idPzb6yf7o5Cu8Co8kvRnhIbaHz6iOnpxFVA014rOjKrwaLtBMeypOXuVpGKhDx3sWo0vSxGo+Xt7iYb57En8/HVqFR4/uYjuBH8nqBOo39FULBQ5dkMgIXmq0Ta+BjHu1tCLK/C2kRxOhiLZKusMbEX+eBtmBKq0BqlERL5YqKk9FRXSgtuekjFoWE0VcMrWAA/T0zgGFThJTBDfhlPBVe8hAPRGq1EnF/6964FJ9RR7Idn4WiiuRMrjQS0fsTG/1rWg9ZjGAqUuQ7KHrtkK4fG3cwfGFcvYVTPjnNoFp/HW7YDDYVbx5WCwD5lYFap4aVRaGPTYwBAhTFnt0Lq3Y1jkzM2tO9qXRJ8Zu9UpGuasRsw2dMHSmE4ZVxSAAAMoy8GzP/0FnppKn+RB8oYj5rpPFW3RXa83NKmLLC2wj8SXvf/nc/qz7QTj1edYtWdOKPwamuwjUiyVlWkTvjyQx3Bvj8Bc1pV/z1JdUZM1QG+t3ct2Hne1c/SawNmu9LbCahFXOYVbMAXqCU46nlemT466OBY130OoDuqi6mfZH/LJQdI8Rlj3uX5zNh89jJNWLoHmLBymYks/c5HotBiFmyy3fqaXxOwOad1NNv1fKCJxmtc3G/5J5nwJeRZ7VZDezEVcNdoNYjFAd
+X-Forefront-Antispam-Report: CIP:165.85.157.49; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:mkerelay1.compute.ge-healthcare.net;
+ PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(1800799024)(376014)(82310400026)(36860700016)(30052699003)(13003099007)(11063799003)(4143699003)(18002099003)(22082099003)(56012099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: bkmWjGmDs7rQ4Lzt1o4MOyVyBirdyc0fcjkKxgAjgVuyQgTRXalomV7NCm80vmhYCNOQRgzn3lxQUsSnMSbVr8nnTYOp2qvjNlS4YW9OtW09ihP+3NdVRJztI0d+OdQnPa9tD44y8UVG1MiDJB8bJfuVhGPbKi8JdLF85xpPX/TAavBguxkxXZm1b8UrCtff5eVr1mHWpziqU1QfO9ZIlnT/r74I2Bc108gmi/wSd0qyRHHJ56yHmfxDFxlGwiNQOMG/F1A8DtqTp4suiOvDG7PQbSxQpiXtPg/KIjEeblpGFJTVP23Qazjo0QfR/MqSztbALVRzD/gmlebDUvVWRIcwqsEr+e97j4oEl+llEerq2eVKj4/AnkzoFNp8Xuzzh5WaQSdCv9/gVpHdNwCGdbXPK67cn1Mzds9nf34rZI4h8YFwIn64TxiL0PjeOsZB
+X-OriginatorOrg: gehealthcare.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 May 2026 06:05:35.5023 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 12ebd364-ade9-4637-575a-08deb247fb0a
+X-MS-Exchange-CrossTenant-Id: 9a309606-d6ec-4188-a28a-298812b4bbbf
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=9a309606-d6ec-4188-a28a-298812b4bbbf; Ip=[165.85.157.49];
+ Helo=[mkerelay1.compute.ge-healthcare.net]
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: TreatMessagesAsInternal-BN1PEPF0000468D.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR22MB5271
 X-Mailman-Approved-At: Fri, 15 May 2026 14:27:41 +0200
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,4 +132,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On May 14, Fabio Estevam wrote:
+> CAUTION: This email originated from outside of GE HealthCare. Only open links or attachments if you trust the sender. Report suspicious emails using Outlook’s “Report” button.
+> 
+> On Tue, Apr 28, 2026 at 5:51 AM Brian Ruley
+> <brian.ruley@gehealthcare.com> wrote:
+> >
+> > The LDB clock sources don't have to be the same, so allow DI1 clock to
+> > be configured separately.
+> >
+> > Unlikely to be significant, but the reason will become apparent in the
+> > following commit.
+> >
+> > Signed-off-by: Brian Ruley <brian.ruley@gehealthcare.com>
+> 
+> Once again, this series does not pass CI:
+> 
+> https://source.denx.de/u-boot/custodians/u-boot-imx/-/jobs/1450024
+> 
+> arm: + kp_imx6q_tpc
+> +arm-linux-gnueabi-ld: u-boot-spl section `__u_boot_list' will not fit
+> in region `.sram'
+> +arm-linux-gnueabi-ld: region `.sram' overflowed by 200 bytes
+> +arm-linux-gnueabi-ld: drivers/clk/imx/clk-imx6q.o: in function
+> `imx6q_init_ldb_clks':
+> +drivers/clk/imx/clk-imx6q.c:271:(.text.imx6q_clk_probe+0x1458):
+> undefined reference to `select_ldb_di_clock_source'
+> +make[2]: *** [scripts/Makefile.xpl:546: spl/u-boot-spl] Error 1
+> +make[1]: *** [Makefile:2440: spl/u-boot-spl] Error 2
+> +make: *** [Makefile:189: __sub-make] Error 2
+> 
+> For v3, please share a URL with a green CI pass; otherwise, I'll need
+> to ignore it.
 
+Apologies! 
+
+I honestly did not believe there to be any issues anymore, and at the
+time I did not have access to the GitLab CI, so I ran some additional
+tests locally.
+
+This was an error of judgement on my part, V3 will have a link to
+passed CI.
+
+Best regards,
+Brian
