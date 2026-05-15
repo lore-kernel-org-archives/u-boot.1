@@ -4,99 +4,137 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 227CACD4851
-	for <u-boot@archiver.kernel.org>; Fri, 15 May 2026 13:11:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3769CD4851
+	for <u-boot@archiver.kernel.org>; Fri, 15 May 2026 13:17:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A9F0D846A7;
-	Fri, 15 May 2026 15:11:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 59637846A4;
+	Fri, 15 May 2026 15:17:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="jh5gG9An";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="WlfaU/bw";
+	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="VL0ALSV3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 54B73846AC; Fri, 15 May 2026 15:11:50 +0200 (CEST)
-Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
- [IPv6:2a00:1450:4864:20::62c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 4DCBB846A7; Fri, 15 May 2026 15:17:44 +0200 (CEST)
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
+ [205.220.180.131])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 60D9F846A4
- for <u-boot@lists.denx.de>; Fri, 15 May 2026 15:11:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BBCE984694
+ for <u-boot@lists.denx.de>; Fri, 15 May 2026 15:17:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62c.google.com with SMTP id
- a640c23a62f3a-b936331786dso1166045566b.3
- for <u-boot@lists.denx.de>; Fri, 15 May 2026 06:11:48 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1778850708; cv=none;
- d=google.com; s=arc-20240605;
- b=UeiG3wqsTmQj2twEyfvKTocXRFZW55/ZjG7/SlCGrP5+GAj0RGbHicpV6E+Rd/13yE
- jTccbs55LrKXabkfyMymDVrgB/ehIuvNnuDaJX9qmsjR82+aXKCXT4elipjb/bWv3LRQ
- Og00ZpjWdbMGQbHspSKi0qUQ823k0gBXT5YmSzYT9YlXdH5Mt8VDp1BEwG08wyv91B4i
- RRWizWXn5vDrPECcsPWjKMgR0rfgheAU/jKtR4+keh1spzdYE9lm1Yq7BeFgpcPEFzwO
- ZYpGS4Du78AhPkz8+dOq0AF4bvLesdHixh78Qj57il2UqA5AYj9Mf5b5lwD7m9rttabV
- QCRw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=fwHSC6ndZ+el3QzmNy5qDLmH6FgKEyH51LTVrqbWueE=;
- fh=BHJwo1NCU5Q1RuouQFc6mIvO5V5nJA16WaR8JNdAU2s=;
- b=XVXqzN1e+mw+9iDhqyw1Vd+aE46GMd74zw+xDiW9mcGKJ0FLZkrxD2fdL3x8n18rV6
- MCZptO1y+D4pHnTuY1pWY96wdi4mo4+dvxvcLeDcpxg7RAh1GZXerUF3UBV9WwUci5uX
- cdc7pVjTpupVdgU8LOz5730duSqa6wRWycq+ZsyQc6fGxQX9IAH7WpxvoKkx9vOZ0Gp7
- v+FVEA7Pny3UTo0pTU1kL6HSVLafs24oUwtxcsq9pBjDH2l+KfDfpx/SyxY2gYtlDuOD
- 6RiwBfBuCpuZ/6nrs6Q+JD8m1OeYO5Yv/QZRXAMH4egpJ0GmK9ekTFLq/w0aK/3MdnIs
- eBVQ==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ spf=pass smtp.mailfrom=aswin.murugan@oss.qualcomm.com
+Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 64FBHMiX3219669
+ for <u-boot@lists.denx.de>; Fri, 15 May 2026 13:17:40 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ PxDGmHIAnDvqpn0xhG2TRRONUidUEJaZOJCcTScfVtE=; b=WlfaU/bwFtWIU88W
+ hEpougB7LQ1maXQvi3P+r0NV//tITLAMzK1O3JzGyiNqa3En33UwF17CbFWGyUAU
+ tAn56BWZ2gKxhwGPr6WvHrDYqrHuPOtfdIKE/feY3Y97ekZPIsos4/OYk8lUeGPZ
+ P67D9KsLMjI6bCX2AQCwbErYPpVj4c2gQJmJ1ZUg2oiIlWxkgHS9jc5DulqZV6xw
+ eMlwLo4ZSYycRk5sWQ3qknwFTzoKbTc5xD9uyQlzP7Tkb0WrjZHHF28ftoenQM28
+ RfHeBB1TDpsGJ2rbxVqI6iWgPBPxC1iC6mXBGBTWYUpbmeJquC8Yc/K2dVN3CDE0
+ 4Pzzgw==
+Received: from mail-pj1-f69.google.com (mail-pj1-f69.google.com
+ [209.85.216.69])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4e5m1s3bxw-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <u-boot@lists.denx.de>; Fri, 15 May 2026 13:17:40 +0000 (GMT)
+Received: by mail-pj1-f69.google.com with SMTP id
+ 98e67ed59e1d1-365fc4636bbso18755983a91.2
+ for <u-boot@lists.denx.de>; Fri, 15 May 2026 06:17:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1778850708; x=1779455508; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=fwHSC6ndZ+el3QzmNy5qDLmH6FgKEyH51LTVrqbWueE=;
- b=jh5gG9AngRFsYe9e6emnGnEc/1iA6bQHkbHdU0mkcfnqprZZ6mC6ZNvxlwKfrBY15J
- +2KKTbX4AZVu13gislxwp6C6dzdn/1Rd9sGFhHOeCP7PlPQZGO27Pmey+Ke2b07VdBVW
- L+fdArd3oNp/pxDK9JcDTqs3XTywhlQNATgS8=
+ d=oss.qualcomm.com; s=google; t=1778851059; x=1779455859; darn=lists.denx.de; 
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=PxDGmHIAnDvqpn0xhG2TRRONUidUEJaZOJCcTScfVtE=;
+ b=VL0ALSV36i9WoY7QPWufJuk+RoPSASRrhIo88YrzZvZEeOJQ3M4eC/3vsd8EWAqmoO
+ D0brCPoK2BMOl8dB6y/tlaLdowa1Y+Qjq7RyhH0uROn7wzA0L06SPe6KULNl4WzN5atG
+ eLBLEAm07R5SMVGZ5vIOjgdaAABxjeIUOUrQ/eNw8sDMjnjrEvbN4Kc7wveQoGfh6YJq
+ fK+u6o2p2/wc75YU63bZL7ye/N7tIK3gKB+VB3Yn3xucnGlUqJ9Jp0hE+H9OJSCRllQ2
+ rE8LiwpAuuFD2nqA1NEqnQh8nk0/S+dR/nUVnLW1r0OH/iFamE3rJrBJeFx6sR8Wr/PW
+ jL/g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778850708; x=1779455508;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=fwHSC6ndZ+el3QzmNy5qDLmH6FgKEyH51LTVrqbWueE=;
- b=jByY6aBa3mALRjQlblBh6UhoHY/TqDRQoYcQM4bmLp+4gF2QQ15NnYLsx/7SmM2U0L
- U4/5HOl+6u3sDLeyAI+BNi5umJTRD82xh2LfEpO37hVQS+T/A/R3/9wgWqE6Ly/Uokv+
- XSnQBfA+WxTaiZ1uNTTDhte8h+t+2Afb6Ctf3a9Nh1jiLkrXViAzCOYG5cY2Fxq0rT6D
- 7Q0XGpR0pfX6derBsvP7T8bHRoGagrq3aJYNQFIu45S2WRZI1XoXH+x7pewOG/+tiiYz
- H7F0gapwLoASH3bBZwaQD+2ephxxbtSwPGiA4BVT32oetDNgKwQ35d6bCgZLDi4irJ9G
- WTVw==
-X-Gm-Message-State: AOJu0YzgWLDKEknwgmqjz1CcOyuc1j6KN5wxXsFQkcUMbSLiBUDeJb6w
- W0QPfBL5bNf4Xqt4+JzqqDzp9R4g40v+nBdx9A+ctFF7wvkbhY5Ko26IVHPPWKt03CiLzlahlXK
- G7ErnXkKrKagXZ783M9dIYUCscGIUVwXUdACsgvhM
-X-Gm-Gg: Acq92OFKU+7/DMoByeKnlsU8T5XSLOeg+0s7P6a9WWjTvUX9u1Zh4YzEfOwR4CjxTzE
- 5IVFjouq9RXgBbNK58POAx1VyeYkUiXkTGgJifEOkxXBpo1j0opaFnozwdaOTDFGKFr+GuRhtzj
- x7vKY+4IfxnPGUfq1odA08rkLhz34H2T2NElBlQbiyy58C7Gg4KdWLSgQLqkzhEyFQgxFYkxCp/
- WcvRevvntqa7GwEhwYLoJ4765JpG1UhS97kv+RVsJ5iNjjN4LDdTAWw9uxQN6M8TRRMYr09OiLT
- d3q7wkJwEkJSSrx6
-X-Received: by 2002:a17:907:26c2:b0:bd4:72c8:140b with SMTP id
- a640c23a62f3a-bd5177afec6mr205183166b.10.1778850707764; Fri, 15 May 2026
- 06:11:47 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1778851059; x=1779455859;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=PxDGmHIAnDvqpn0xhG2TRRONUidUEJaZOJCcTScfVtE=;
+ b=iCOYavxVhhORVDsYAzokSkce2xFVYXq1rWJnpRqkRFZyo2QQkHjzrYrnSFPo3pJLGg
+ GOjclJyrCSepM6exoUngGMntOTtwtYtylTkzAvi3NiKz7u340LgWyPGMyGSlzpzuoB5D
+ +A1U6ZutBBTDyy3Is/kwTya16xgX+FWNTerfCOWhcUpLi4lwuVymvI5lQgjWrH64d+A1
+ ujCOJ/L/FQpRINXw7hUy94a6vrJw9eX0ZHITIoJI90xq6a71odwGPHC+IR+8Gg5+E4wC
+ k54xzG9ycGFMF1HfM/RjNHq304rUdjh9/ZCgEvoF9jK2Kwnaggc9VvkwjK2aIetlinDP
+ neZA==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ/lYaIEQ8JRNBUOJ6dYehGpH8grQzmhVqSPaK9TzjcrvZkQsG6KLR3WX8rwNDpNaZ2xDw12sB0=@lists.denx.de
+X-Gm-Message-State: AOJu0YzKmEVJR9bL1Qg3rMgHA9ia9Y1ZV7EnKQ6Z/kOvp/rAzo7PVKR5
+ otS94hUXk/+coKqu9W9+xe7NN3MF5FipFBu4gz3kNKV0HagCme37A1sD6TPYQeBnXj2RgLZEOc+
+ NoWE4DSBakLjhXkiwmhufpVX/zdXbQgLmTcGIylOgVg2Kta/hz9/KVL3w
+X-Gm-Gg: Acq92OFVvBwkLcCpM1QPF9kgOAsFzqRcc8RHMB7g3oE99rz8Tn+GxzM+ZdjFd7C7Jw0
+ cmJ4w3p7/KgdkQHw94W1V1MyrLd8+1fGC1HXl7GIjMpVCpK0fRf3+BG+4ufJef0/4U2nlukfRmb
+ E+7WB3hImFjdwRmhI14M51/vhPvTrHsNiHw7HhSCi4cfoHqH5e4w2ikvZFvXgEg42R0yTEDrCyr
+ elzuXD54AYFC9OSodF0qTT6K6PZdkmmFGXs//dHg5gSaDAGuMTwy5iaCt0/SAvUoB06CLSmxVnM
+ tmOyp/jaLoVY9s5vLcZmfoPs4pls0f6jkzjdDoAQMF6Yp4Kd1J34xLnbtDiFyN1if3uRPBOGUjG
+ xhSzWyWMnTBq2ruFruRBHOe7bJf7BByzWGPbWntmi0HXaf8S3BDDxPA==
+X-Received: by 2002:a17:90b:4ec8:b0:368:6a47:83f4 with SMTP id
+ 98e67ed59e1d1-369519af6demr4295831a91.6.1778851059071; 
+ Fri, 15 May 2026 06:17:39 -0700 (PDT)
+X-Received: by 2002:a17:90b:4ec8:b0:368:6a47:83f4 with SMTP id
+ 98e67ed59e1d1-369519af6demr4295766a91.6.1778851058498; 
+ Fri, 15 May 2026 06:17:38 -0700 (PDT)
+Received: from [10.152.202.155] ([202.46.23.19])
+ by smtp.gmail.com with ESMTPSA id
+ 98e67ed59e1d1-3695124601asm2791783a91.2.2026.05.15.06.17.36
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 15 May 2026 06:17:38 -0700 (PDT)
+Message-ID: <da733868-79d2-4425-acd1-f1a9ce83feba@oss.qualcomm.com>
+Date: Fri, 15 May 2026 18:47:34 +0530
 MIME-Version: 1.0
-References: <cover.1778619453.git.aidan@wolfssl.com>
- <20260513002625.76915-6-aidan@wolfssl.com>
-In-Reply-To: <20260513002625.76915-6-aidan@wolfssl.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Fri, 15 May 2026 07:11:35 -0600
-X-Gm-Features: AVHnY4KijeDTi9_MVPDsIdrxX0nBSFyztiLSuR-0goy7RfYOnMJzga2wpt_XvXU
-Message-ID: <CAFLszTjOuzKUug1te52YRdKLHdrmFVxTkPG4gg8bPmTYEADCeQ@mail.gmail.com>
-Subject: Re: [PATCH v4 06/14] sandbox: dts: add TPM SPI emulator node
-To: aidan@wolfssl.com
-Cc: u-boot@lists.denx.de, Peter Robinson <pbrobinson@gmail.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Tom Rini <trini@konsulko.com>, 
- David Garske <david@wolfssl.com>, Simon Glass <sjg@chromium.org>,
- Heiko Schocher <hs@nabladev.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3] tools: efivar: strip auth descriptor for authenticated
+ variables
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: xypron.glpk@gmx.de, trini@konsulko.com, u-boot@lists.denx.de
+References: <20260514171649.3708107-1-aswin.murugan@oss.qualcomm.com>
+ <CAC_iWj+bgFhPbxNH-BqU1fFD0j3wzBE_9FT_kfhZ-r48Ztb7pQ@mail.gmail.com>
+Content-Language: en-US
+From: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+In-Reply-To: <CAC_iWj+bgFhPbxNH-BqU1fFD0j3wzBE_9FT_kfhZ-r48Ztb7pQ@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNTE1MDEzNSBTYWx0ZWRfX6v15qm6g0VlG
+ TyzIwyrR6JwYFGDanBgCeJBLnvw48tK519R03XVjoQvsuVJDnDVy1V1jAR1uRqtFb4arL1VTtES
+ tphFkaLaG2Z8Rfpm6FaM1iGzssoX9kiNtX6VO5LUB0eUYXxuO7umhjXe5tDM1eEhEqh1a+II3X2
+ dZD6AUxs09l2BVYyvGj2Kt1IyLb8r4bb+dEQ6F+r6C+LU3TT9w40Be6SERd+6AzC5tynTWW+iL/
+ 9GiHlxJcwyHAA/SS89cEDnLoq2UicBR6CCdabtIZjIq3LGYIAgIfHqC8BvjqQUFDBN1CfZPDX+O
+ 3LyV84nVBGo/Xs6MR7SomGUwpeNfxHvQzNRg1YAE0KOWWUsBf7g3hvd18Vh+R63bnTu9Et/HVsD
+ DYUhO4/eClAIMbMdaLo7qc3NpJtYSB8r80fbVQw9cCvpMczTJEfLAtnGm2HYsyNKYk6/AZiFwvt
+ /9LKqHwg8KlhtOPPBMw==
+X-Proofpoint-GUID: CUwl4mnyvZO61fxn_LuclfS6WRbDLsJU
+X-Proofpoint-ORIG-GUID: CUwl4mnyvZO61fxn_LuclfS6WRbDLsJU
+X-Authority-Analysis: v=2.4 cv=HJ7z0Itv c=1 sm=1 tr=0 ts=6a071cf4 cx=c_pps
+ a=vVfyC5vLCtgYJKYeQD43oA==:117 a=j4ogTh8yFefVWWEFDRgCtg==:17
+ a=IkcTkHD0fZMA:10 a=NGcC8JguVDcA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=KTSAc_bGXdCbCS0F4BsA:9 a=QEXdDO2ut3YA:10
+ a=rl5im9kqc5Lf4LNbBjHf:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
+ definitions=2026-05-15_03,2026-05-13_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ priorityscore=1501 lowpriorityscore=0 suspectscore=0 phishscore=0 spamscore=0
+ clxscore=1015 impostorscore=0 adultscore=0 bulkscore=0 malwarescore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2605130000 definitions=main-2605150135
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -113,42 +151,125 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Aidan,
+Hi Ilias,
 
-On 2026-05-13T00:26:04, Aidan Garske <aidan@wolfssl.com> wrote:
-> sandbox: dts: add TPM SPI emulator node
->
-> Add a 'sandbox,tpm-spi' slave on the existing sandbox SPI bus and
-> a matching 'sandbox,tpm-spi-emul' emulator node, so the sandbox
-> unit-test target can exercise SPI-attached TPM code paths without
-> real hardware.
->
-> The slave device sits on CS 1 (CS 0 is the SPI-NOR flash emulator
-> that other sandbox tests use), and the slave's sandbox,emul
-> phandle points at the emulator node added at the root of the
-> sandbox device tree.
->
-> Signed-off-by: Aidan Garske <aidan@wolfssl.com>
->
-> arch/sandbox/dts/sandbox.dtsi | 11 +++++++++++
->  1 file changed, 11 insertions(+)
-
-Reviewed-by: Simon Glass <sjg@chromium.org>
-
-> diff --git a/arch/sandbox/dts/sandbox.dtsi b/arch/sandbox/dts/sandbox.dtsi
-> @@ -286,6 +286,17 @@
-> +             tpm_spi: tpm@1 {
-> +                     reg = <1>;
-> +                     compatible = 'sandbox,tpm-spi';
-> +                     spi-max-frequency = <10000000>;
-> +                     sandbox,emul = <&tpm_spi_emul>;
-> +             };
-
-Just to check - is there a reason this is in sandbox.dtsi rather than
-test.dts? Only the C unit tests in patch 12 exercise this emulator,
-and test-only nodes normally live in test.dts. The existing sandbox
-TPM nodes in sandbox.dtsi are arguably an exception rather than the
-rule. It's fine to have the node in both, though.
+This change has been verified locally with our setups on qcs615 & 
+QCS9100 SOCs
 
 Regards,
-Simon
+Aswin
+
+On 5/15/2026 4:02 PM, Ilias Apalodimas wrote:
+> Hi Ashwin,
+>
+> On Thu, 14 May 2026 at 20:17, Aswin Murugan
+> <aswin.murugan@oss.qualcomm.com> wrote:
+>> efivar.py currently stores authenticated variables including the
+>> EFI_VARIABLE_AUTHENTICATION_2 descriptor (timestamp + WIN_CERTIFICATE)
+>> along with the payload.
+>>
+>> When variables are set via U-Boot, SetVariable() validates and strips
+>> this authentication descriptor before persisting the variable data,
+>> resulting in only the payload being stored and returned by GetVariable().
+>>
+>> This mismatch causes efivar.py-generated stores to differ from U-Boot
+>> runtime behavior and leads to incorrect GetVariable() results.
+>>
+>> Update efivar.py to strip the authentication descriptor and store only
+>> the payload for authenticated variables, ensuring consistency with
+>> U-Boot behavior and compliance with UEFI expectations.
+> The approach is fine, but when I use the tool now to create signatures
+> and enable secure boot I am getting
+> => bootefi bootmgr
+> Getting signature database(db) failed"
+>
+> Have you tried a built that worked locally?
+>
+> Thanks
+> /Ilias
+>> Signed-off-by: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+>> ---
+>> Changes in v3:
+>> - Previously stripped the authentication descriptor at GetVariable(),
+>>    now moved to strip it in efivar.py during variable pre-seeding/set.
+>> Link to v2: https://lore.kernel.org/u-boot/20260512194205.1905069-1-aswin.murugan@oss.qualcomm.com/
+>>
+>> Changes in v2:
+>> - Enhanced commit message with explicit UEFI spec reference
+>> Link to v1: https://lore.kernel.org/u-boot/20250725123653.513252-1-aswin.murugan@oss.qualcomm.com/
+>> ---
+>>   tools/efivar.py | 50 ++++++++++++++++++++++++++++++++++++++++++++++++-
+>>   1 file changed, 49 insertions(+), 1 deletion(-)
+>>
+>> diff --git a/tools/efivar.py b/tools/efivar.py
+>> index 67729fa8505..d248cd868ba 100755
+>> --- a/tools/efivar.py
+>> +++ b/tools/efivar.py
+>> @@ -79,6 +79,50 @@ class EfiVariable:
+>>   def calc_crc32(buf):
+>>       return zlib.crc32(buf) & 0xffffffff
+>>
+>> +def strip_auth_descriptor(data, attrs):
+>> +    """
+>> +    Strip the EFI auth descriptor from authenticated variable data.
+>> +
+>> +    This is used during efivar.py-based pre-seeding of ubootefi.var to
+>> +    match U-Boot SetVariable() behavior, where the authentication header
+>> +    is consumed during validation and only the payload is stored.
+>> +
+>> +    For variables with EFI_VARIABLE_TIME_BASED_AUTHENTICATED_WRITE_ACCESS:
+>> +    - Input format: [EFI_VARIABLE_AUTHENTICATION_2 | payload]
+>> +    - Stored format: [payload only]
+>> +
+>> +    Auth header size calculation (aligned with U-Boot efi_variable_authenticate()):
+>> +        auth_size = sizeof(EFI_TIME) + WIN_CERTIFICATE.dwLength
+>> +
+>> +    Only the payload portion is retained after stripping the header.
+>> +    """
+>> +    if not (attrs & EFI_VARIABLE_TIME_BASED_AUTHENTICATED_WRITE_ACCESS):
+>> +        return data
+>> +    if not data:
+>> +        return data
+>> +
+>> +    efi = EfiStruct()
+>> +    if len(data) < efi.var_time_size:
+>> +        return data
+>> +
+>> +    offset = efi.var_time_size
+>> +    if len(data) < offset + efi.var_win_cert_size:
+>> +        return data
+>> +
+>> +    try:
+>> +        cert_hdr = struct.unpack_from(efi.var_win_cert_fmt, data, offset)
+>> +        dwLength = cert_hdr[0]
+>> +    except struct.error:
+>> +        return data
+>> +
+>> +    auth_size = efi.var_time_size + dwLength
+>> +    if auth_size <= 0 or auth_size > len(data):
+>> +        return data
+>> +
+>> +    if len(data) <= auth_size:
+>> +        return b''
+>> +    return data[auth_size:]
+>> +
+>>   class EfiVariableStore:
+>>       def __init__(self, infile):
+>>           self.infile = infile
+>> @@ -172,8 +216,12 @@ class EfiVariableStore:
+>>                   break
+>>               offs = loffs
+>>
+>> +        if data and (attrs & EFI_VARIABLE_TIME_BASED_AUTHENTICATED_WRITE_ACCESS):
+>> +            data = strip_auth_descriptor(data, attrs)
+>> +            size = len(data) if data else 0
+>> +
+>>           tsec = int(time.time()) if attrs & EFI_VARIABLE_TIME_BASED_AUTHENTICATED_WRITE_ACCESS else 0
+>> -        nd = name.encode('utf_16_le') + b"\x00\x00" + data
+>> +        nd = name.encode('utf_16_le') + b"\x00\x00" + (data if data else b'')
+>>           # U-Boot variable format requires the name + data blob to be 8-byte aligned
+>>           pad = ((len(nd) + 7) & ~7) - len(nd)
+>>           nd += bytes([0] * pad)
+>> --
+>> 2.34.1
+>>
