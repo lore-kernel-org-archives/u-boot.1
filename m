@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F607CD4F3C
-	for <u-boot@archiver.kernel.org>; Fri, 15 May 2026 20:34:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1547ACD343F
+	for <u-boot@archiver.kernel.org>; Fri, 15 May 2026 20:34:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 140618486D;
-	Fri, 15 May 2026 22:33:52 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 489BF84878;
+	Fri, 15 May 2026 22:33:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="M2XVjqK2";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="CU35wTly";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 04C5C8486D; Fri, 15 May 2026 22:33:51 +0200 (CEST)
-Received: from mail-ot1-x335.google.com (mail-ot1-x335.google.com
- [IPv6:2607:f8b0:4864:20::335])
+ id 361F684878; Fri, 15 May 2026 22:33:53 +0200 (CEST)
+Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
+ [IPv6:2607:f8b0:4864:20::32c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D26408483F
- for <u-boot@lists.denx.de>; Fri, 15 May 2026 22:33:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D344E8486A
+ for <u-boot@lists.denx.de>; Fri, 15 May 2026 22:33:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ot1-x335.google.com with SMTP id
- 46e09a7af769-7dcdd1b492eso227905a34.1
- for <u-boot@lists.denx.de>; Fri, 15 May 2026 13:33:48 -0700 (PDT)
+Received: by mail-ot1-x32c.google.com with SMTP id
+ 46e09a7af769-7dbca22dbfeso131931a34.1
+ for <u-boot@lists.denx.de>; Fri, 15 May 2026 13:33:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1778877227; x=1779482027; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1778877229; x=1779482029; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=uz1GGs6xG2mxBM5mMa5jZ3tgQsjYqpGEVRQ7+XZJiy0=;
- b=M2XVjqK2RUIC1Ijq+hlYzuLfAdybG8tb+qJNUFNOAI6umc3vEWUB5WyuLl5xNRSuVy
- ILxJ5EFSFrmtXlM6NxASfWEAbk5aOr5U2fdcfSj1ISvaR8cOmWGvAmBNdP7NXJ0S08I2
- rR4hzAsO2AqZD4mY4LEzm9mh65/BcJmPz9v/g=
+ bh=07LfXONg6/MQ3wTNpVGBCPIKxhnZ2Ou0k5o4gtzyG0s=;
+ b=CU35wTlyCJpiSLKfGBcbAS5/FlC+901CHu5cNkMfUSHKZPVbBMb5hib/NGM2HguHdW
+ +2RF7PBv3XZkfEBylY73u33pg2CiJ792qk+FeMTlUMGX3agzSG5Z5KN/igYDktCsbcHG
+ 8ijVNKCSSWgenaAPaXj6MM/H2DOworiQL/658=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778877227; x=1779482027;
+ d=1e100.net; s=20251104; t=1778877229; x=1779482029;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=uz1GGs6xG2mxBM5mMa5jZ3tgQsjYqpGEVRQ7+XZJiy0=;
- b=fDIlfHLRRJw0+vRAQOGJV3fIQl9LhYdUxOb4nKO0lf+GkH9HJ1sexIwfFeBLdvPona
- TJpofxB00KM4PUfoTxVIrJCwuXOgY0nqhGZ60swOM0jFkDm5iQu+pP1MXjt8hDNqCsCi
- 2b33kBlG1P3K9sXlzTeaxi9ejK0HJ2J80KqLKjx8Jtyiv81JnyMu+Q9e53rILAa0SoCe
- HsB8N8jvKa7Wk/W4v1pb4mvZ6HqeNYZ6QOFjrfoC7otCSMJ1p9vUXcv54zf91hnz/oxI
- DtBTOTO6vVEZwIrvkgEtcFwqr+yKZHoZGLxz8eHi48XQPeJtj6eeOkMN3EjB40z9TyqL
- 1gug==
-X-Gm-Message-State: AOJu0YzZL5+6Zjf/28ZJcQuY6wcRJXQi/eSpE0sjOkzeKZfNLA2nXdYg
- O5k+XaMuHdCMfA7x4e3pHoNaQ5YRr5MbsU/djVoI3dw5cIKD4zmjMbBulwfxw+2Ugg10y5LXuPv
- SS0tbZA==
-X-Gm-Gg: Acq92OFIJkEPnDhsidjFtriXsI7paAABq4k/VIjOkreQvz9v9PPYZVsyG4AtJRlF5Vv
- GadSx4i4s37FWzMKYeYZ0WsbLiWxZzLiJFwCjR1/mVlB0+FNS6s8nQLpIHYdVGdty1ir09+1GiH
- /KkVMI2KwWsCoXWWuxDjv6EdphGd+lQLSSKAGXit3tYKLsBx5UaEWnlU/5cnI0qBvKucCQCb50s
- Xzd/SQPHd2rOyFo2qa3agpVwFPU867JUUh4mwYqC4BbH09reEY3A9/63N0tpcbHiTFlUzOTNLE4
- 6STdkt1KVdKOp/CYVxt337YtN71Upv5SgfMA4/CVTJoeYPxE29A93cp5CP9XCMJzJ6aHqaGHz0N
- bR6Us1BsDCDVnFmFLV1TfbZlMTeVVVYOSgKM3mGQeNfT8OuTYVpcrOnpkfTU7wXbHf76r1nB/Dv
- c3xkm6YGePksAP7pa/PI6ULk4+Z7ST
-X-Received: by 2002:a9d:4f15:0:b0:7dc:e43f:4b31 with SMTP id
- 46e09a7af769-7e3f14c8d19mr4112390a34.12.1778877226747; 
- Fri, 15 May 2026 13:33:46 -0700 (PDT)
+ bh=07LfXONg6/MQ3wTNpVGBCPIKxhnZ2Ou0k5o4gtzyG0s=;
+ b=G82Rb9zs3+0q2ATqrPZFYCIklqIwASYwKTHsjosJ80Lw2fJr0C2ZWW/TfBSMpXFv6E
+ nCtkp4ghLZQSAayBOQWp/Q5qOTeV0mwKJzxZkDVLgw9yazciOPLz3370zNY/7EHUefSP
+ rc3OrGH1jo7oVeK8PftI1muOQnQDx4tlg/66Xu62D8/0S0Y20QXY0DMGHKEbhS/blUmj
+ FH+QvONfMk3Dd+4v72OZuQTacSujA+k2QatElHOTcSZ4MwcsFK7fVVbx4fKaEVau+GJm
+ m3a80mOjA9XSWv2skpPWNjBSuXeUXK1093KuTFTmCQmWx84eelDkxUs09JKlPwrBrZ8k
+ BnOQ==
+X-Gm-Message-State: AOJu0YxFVT+V5OTu+O3DBFLyZZ44okkuDd54qhLzQxYfOm4BBFMn5PQ0
+ Lj+SJnH25JlyGbbPFztY8mYnMBrjm94dayoEkGmqIn90WjG3i0oO6LWKtVlxtpnbT9FPLNTiWIk
+ /zm14AQ==
+X-Gm-Gg: Acq92OGjI1TJF9TGYAbCDjOJ3WviTeH5DoYUC45SBFGQOegFz6owjhyUcM9Am7+kk4B
+ mG3eM0IKuj0Njj/715QNYFPJcjYtoFlc8ypJNxRwQhwzBqpCtPIYzIMbltmcfySqwVpxzwrFegB
+ WKDI6W0IqhZF9c1+JmmKFM4tQIscmTkblxgA7uo40KBmay0tMzW1zIIHYBe+4rH0jdgCyB7+2l4
+ i7Otae1Mwd/ZflarvC79n33VKU/A5YSGpoutagvm5QR49CoZKIYUObnIQJhDZbmtyt47wtf2XP1
+ nqokYO16hLeGLI1I4Lc2ouXEr2CI8t6KWgx0OKWLsJ1564i2EAP9JY2jJHDmNQ6LThosFdWKaQS
+ dzFbD7XO2i122ra1Vvu2AZ2KgimOSrHLC5jA4xf82mWS2cNOxi7F83+On1AS3KALUITw0KPK/q7
+ wznzj2IT5854qaSQ9rnQ==
+X-Received: by 2002:a05:6830:2117:b0:7d7:da05:f2d2 with SMTP id
+ 46e09a7af769-7e4f2b3dfc9mr4072943a34.16.1778877229634; 
+ Fri, 15 May 2026 13:33:49 -0700 (PDT)
 Received: from chromium.org ([174.51.25.52]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7e55b95b82fsm2414906a34.12.2026.05.15.13.33.45
+ 46e09a7af769-7e55b95b82fsm2414906a34.12.2026.05.15.13.33.47
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 15 May 2026 13:33:46 -0700 (PDT)
+ Fri, 15 May 2026 13:33:48 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: u-boot@lists.denx.de
 Cc: Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
@@ -73,14 +73,13 @@ Cc: Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
  Heiko Schocher <hs@nabladev.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Jerome Forissier <jerome.forissier@arm.com>,
- Joe Hershberger <joe.hershberger@ni.com>,
  "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
  Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>
-Subject: [RFC PATCH 08/11] cmd: hash: Use getopt() for option parsing
-Date: Fri, 15 May 2026 14:32:59 -0600
-Message-ID: <20260515203311.2555651-9-sjg@chromium.org>
+Subject: [RFC PATCH 09/11] cmd: nvedit: Use getopt() in env grep
+Date: Fri, 15 May 2026 14:33:00 -0600
+Message-ID: <20260515203311.2555651-10-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260515203311.2555651-1-sjg@chromium.org>
 References: <20260515203311.2555651-1-sjg@chromium.org>
@@ -102,17 +101,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The open-coded check for -v only matches it as the first argument, so
-'hash sha256 -v 0 4 <expected>' treats -v as the algorithm name and
-fails. Replace with getopt(), which also lets -v appear anywhere in the
-command line.
+The nested while/switch parser walks each -prefixed argv element by
+hand. The -- end-of-options marker is implemented by a case '-' arm
+that does 'goto DONE' to jump out of both the inner switch and the
+outer argv walker, leaving the remaining argv to be treated as
+positionals by hexport_r().
 
-Guard the option-parsing loop with IS_ENABLED(CONFIG_HASH_VERIFY) so it
-is compiled out when verification is disabled. After parsing,
-getopt_pop() pulls the algorithm off the positional list, strlower()
-normalises it, and the tail is forwarded to hash_command() unchanged.
+getopt() handles all of that natively: grouped flags (-nb), the '--'
+boundary (it returns -1 and advances past --), unknown-option errors
+and option permutation so 'env grep arch -n' works the same as
+'env grep -n arch'. The goto, the label, and the case '-' arm all
+disappear.
 
-CMD_HASH selects GETOPT so the parser is linked in on boards that did
+Pass "envb" or "nvb" to getopt() depending on IS_ENABLED(CONFIG_REGEX)
+so -e is not advertised when regex is compiled out, and guard the
+case 'e' arm with the same check so it costs nothing in the regex-off
+build.
+
+Move the missing-argument check to after parsing. The existing argc < 2
+check fires only when no args at all are given; the new gs.nonopts < 1
+check also catches 'env grep -n' (options but no search pattern), where
+the previous version would silently let hexport_r() run with an empty
+pattern list.
+
+CMD_GREPENV selects GETOPT so the parser is linked in on boards that did
 not already enable it.
 
 Tweak the var declarations to use Reverse Christmas Tree.
@@ -120,82 +132,106 @@ Tweak the var declarations to use Reverse Christmas Tree.
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- cmd/Kconfig |  1 +
- cmd/hash.c  | 37 +++++++++++++++++++++----------------
- 2 files changed, 22 insertions(+), 16 deletions(-)
+ cmd/Kconfig  |  1 +
+ cmd/nvedit.c | 56 +++++++++++++++++++++++++---------------------------
+ 2 files changed, 28 insertions(+), 29 deletions(-)
 
 diff --git a/cmd/Kconfig b/cmd/Kconfig
-index 709696c3c41..eb7c85c1fe9 100644
+index eb7c85c1fe9..8ba7b1e6bd1 100644
 --- a/cmd/Kconfig
 +++ b/cmd/Kconfig
-@@ -2798,6 +2798,7 @@ config CMD_BLOB
+@@ -721,6 +721,7 @@ config CMD_EDITENV
  
- config CMD_HASH
- 	bool "Support 'hash' command"
+ config CMD_GREPENV
+ 	bool "search env"
 +	select GETOPT
- 	select HASH
  	help
- 	  This provides a way to hash data in memory using various supported
-diff --git a/cmd/hash.c b/cmd/hash.c
-index 96d0e443a5b..566bb617328 100644
---- a/cmd/hash.c
-+++ b/cmd/hash.c
-@@ -11,8 +11,9 @@
+ 	  Allow for searching environment variables
  
- #include <command.h>
+diff --git a/cmd/nvedit.c b/cmd/nvedit.c
+index 636bddee1be..8561c408992 100644
+--- a/cmd/nvedit.c
++++ b/cmd/nvedit.c
+@@ -29,6 +29,7 @@
+ #include <console.h>
  #include <env.h>
+ #include <env_internal.h>
 +#include <getopt.h>
- #include <hash.h>
--#include <linux/ctype.h>
-+#include <linux/string.h>
- 
- #if IS_ENABLED(CONFIG_HASH_VERIFY)
- #define HARGS 6
-@@ -23,25 +24,29 @@
- static int do_hash(struct cmd_tbl *cmdtp, int flag, int argc,
- 		   char *const argv[])
+ #include <log.h>
+ #include <search.h>
+ #include <errno.h>
+@@ -131,45 +132,42 @@ static int do_env_print(struct cmd_tbl *cmdtp, int flag, int argc,
+ static int do_env_grep(struct cmd_tbl *cmdtp, int flag,
+ 		       int argc, char *const argv[])
  {
--	char *s;
- 	int flags = HASH_FLAG_ENV;
-+	struct getopt_state gs;
-+	char *algo;
- 
--	if (argc < 4)
+-	char *res = NULL;
+ 	int len, grep_how, grep_what;
+-
+-	if (argc < 2)
 -		return CMD_RET_USAGE;
-+	getopt_init_state(&gs, argc, argv);
-+	if (IS_ENABLED(CONFIG_HASH_VERIFY)) {
-+		int opt;
++	struct getopt_state gs;
++	char *res = NULL;
++	int opt;
  
--#if IS_ENABLED(CONFIG_HASH_VERIFY)
--	if (!strcmp(argv[1], "-v")) {
--		flags |= HASH_FLAG_VERIFY;
--		argc--;
--		argv++;
-+		while ((opt = getopt(&gs, "v")) > 0) {
-+			if (opt != 'v')
-+				return CMD_RET_USAGE;
-+			flags |= HASH_FLAG_VERIFY;
-+		}
- 	}
+ 	grep_how  = H_MATCH_SUBSTR;	/* default: substring search	*/
+ 	grep_what = H_MATCH_BOTH;	/* default: grep names and values */
+ 
+-	while (--argc > 0 && **++argv == '-') {
+-		char *arg = *argv;
+-		while (*++arg) {
+-			switch (*arg) {
+-#ifdef CONFIG_REGEX
+-			case 'e':		/* use regex matching */
+-				grep_how  = H_MATCH_REGEX;
+-				break;
 -#endif
--	/* Move forward to 'algorithm' parameter */
--	argc--;
--	argv++;
--	for (s = *argv; *s; s++)
--		*s = tolower(*s);
--	return hash_command(*argv, flags, cmdtp, flag, argc - 1, argv + 1);
-+
-+	/* Need at least: algorithm address count */
-+	if (gs.nonopts < 3)
+-			case 'n':		/* grep for name */
+-				grep_what = H_MATCH_KEY;
+-				break;
+-			case 'v':		/* grep for value */
+-				grep_what = H_MATCH_DATA;
+-				break;
+-			case 'b':		/* grep for both */
+-				grep_what = H_MATCH_BOTH;
+-				break;
+-			case '-':
+-				goto DONE;
+-			default:
+-				return CMD_RET_USAGE;
+-			}
++	getopt_init_state(&gs, argc, argv);
++	while ((opt = getopt(&gs, IS_ENABLED(CONFIG_REGEX) ? "envb"
++							   : "nvb")) > 0) {
++		switch (opt) {
++		case 'e':		/* use regex matching */
++			if (IS_ENABLED(CONFIG_REGEX))
++				grep_how = H_MATCH_REGEX;
++			break;
++		case 'n':		/* grep for name */
++			grep_what = H_MATCH_KEY;
++			break;
++		case 'v':		/* grep for value */
++			grep_what = H_MATCH_DATA;
++			break;
++		case 'b':		/* grep for both */
++			grep_what = H_MATCH_BOTH;
++			break;
++		default:
++			return CMD_RET_USAGE;
+ 		}
+ 	}
+ 
+-DONE:
++	if (gs.nonopts < 1)
 +		return CMD_RET_USAGE;
 +
-+	algo = strlower(getopt_pop(&gs));
-+
-+	return hash_command(algo, flags, cmdtp, flag,
-+			    gs.nonopts, &gs.args[gs.index]);
- }
+ 	len = hexport_r(&env_htab, '\n',
+ 			flag | grep_what | grep_how,
+-			&res, 0, argc, argv);
++			&res, 0, gs.nonopts, &gs.args[gs.index]);
  
- U_BOOT_CMD(
+ 	if (len > 0) {
+ 		puts(res);
 -- 
 2.43.0
 
