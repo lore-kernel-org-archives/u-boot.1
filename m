@@ -4,91 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B39BCD4851
-	for <u-boot@archiver.kernel.org>; Fri, 15 May 2026 12:58:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2C68CD343F
+	for <u-boot@archiver.kernel.org>; Fri, 15 May 2026 12:59:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0D1E28464D;
-	Fri, 15 May 2026 14:58:20 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6EA398464D;
+	Fri, 15 May 2026 14:59:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="B9mM9KAW";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="FDHKfxLk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E28908465D; Fri, 15 May 2026 14:58:18 +0200 (CEST)
-Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
- [IPv6:2a00:1450:4864:20::62e])
+ id 073F684688; Fri, 15 May 2026 14:59:44 +0200 (CEST)
+Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
+ [IPv6:2a00:1450:4864:20::630])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0684784099
- for <u-boot@lists.denx.de>; Fri, 15 May 2026 14:58:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1DA3184099
+ for <u-boot@lists.denx.de>; Fri, 15 May 2026 14:59:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-b8f97c626aaso683359466b.2
- for <u-boot@lists.denx.de>; Fri, 15 May 2026 05:58:17 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1778849896; cv=none;
+Received: by mail-ej1-x630.google.com with SMTP id
+ a640c23a62f3a-bce386d5b85so1057685266b.1
+ for <u-boot@lists.denx.de>; Fri, 15 May 2026 05:59:42 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1778849981; cv=none;
  d=google.com; s=arc-20240605;
- b=iUPzA0kpm8CvOt85Cyc8LWbi/zGmgfidmOrnjbzwCL5bi8pP77OpLrBpckkSPuICoR
- 1VouYphdZdL+mtHzhAuU0BfHSxDZQ9WMTbpG3lLxEYkkRDJ2Xu0NL9qc3sGN/4AjK+QF
- WMHRlSlygHNfbssO4uvXPJ1K4dYICxOX374EHUH7GwD/2bMKNyY7wGZ0D0i3lHxw2v+8
- ct3iPGQ0C6WoWm3vpvcKwSCl1kmDYd+xF1rc7GKSOW4BFmzWpejOKJCoOXQU1qbigNoX
- e5gfRgOF+BTbiUj+gueS9kd6c6LsP4Ju7UAmmQCvavFQzNxFWqPEYF0Ekx8q/tcTaRvf
- lCJA==
+ b=kMP4foiAwqcuHyTkEiHDbzm8+NEcX7E18nDuRDOyPjiQ5WrSTxnUCPihzdzFqE8VsI
+ X3nlOA+bDFVx646mGM3bHOHMDBROyse6+9J18RHRFhQAj+l2RMnYusmL/uNi/5J8x7MH
+ vCdncMO39AhS2HX6ngqc9Wd5LA1n0Exp+AZP3dJ7SqrhiiaNjgsw4rh0M2RPxf061oeE
+ aRQ2yAy0T/9J3946Y3FGU9gebX0nfFbffKaDcb+Rw46dR/nWwxCjwgQPOxS5n96YFtw7
+ ATRELM9iczcYN3O0rluktVpk8zfjZe7DNDCU0l4mC6WKMR7xTvlWR/OQNAww+zfNeUpi
+ 0JKA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=ADQ9GtO6sM4mFAZsesk9Pstq9ohxEDeCOR3VdRI0ifA=;
+ bh=FxF+gkCL/XGZQRnWTlDkr1DjBsMHgjUI9orLdCXXXTY=;
  fh=fJAGB8LvxCJalDRE+ziaXIW21+gD5jSCb0B1QEwHsvE=;
- b=MVqJS968by3W0dLYkQpDOMzpbQfzOiY4s7ypiZiC2uLNSlsGWPY++dyuhnQQSthCVS
- XyJTIA+oaOyslwtRSbUBRTgHCibGrNjyxABdIKch5i9/F9A3+nG8gkGM8uqK/vkaL/gk
- v3U4sBq7QHEzEX21xGsNKR47j6Hj1+OBik+ytWTMK9DPpwkQZOco9ogVU3jRgo+WbQYr
- CoRTnZ8xJHSHY7cwBiiXiJ5W23+OWixrOG7nxRDvnKKfGAT61xU9yY5L+a24BT3mIBk3
- U4OtyrwHzAmQGjYPjekYC8uVxZKBMAP5cG3tH9YfvqONw0MZwGyVy94w2HqvAjCfBqrI
- yXxQ==; darn=lists.denx.de
+ b=MApDNHXtpCa1Hat73kEwuyLWr2Dk48du9MWZeB3mNKqIDhzGGLu30zrhBQIc6bwchd
+ Fcgr9rjBPG52QA70VP8hojLDT4ywIniM98PK+JNEQtJ82FYB6ZL3sl8l6WQiHIUCIg76
+ nabTc6PzzuqYcVCzXM0cxuy7jzR1Fr6QIundTzF/fhuHLq6o67g4vf+az1qsidHfho9D
+ 4+uLekZxw2o2r9zKZT+VD7gNXN6pGk2CJZSfvxRpkij66EuLh55JSHZsVkbnrloobjZ6
+ qd52lzRnjSx4tCl/xY/fqzh/4Cw4ilvGjRuP450CKjaMlYDfQd2ZbDDQKECUWMUG9TkE
+ 1JXg==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1778849896; x=1779454696; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1778849981; x=1779454781; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=ADQ9GtO6sM4mFAZsesk9Pstq9ohxEDeCOR3VdRI0ifA=;
- b=B9mM9KAWMAhX6VFajoXxYf0aOOt4NUJUkXmaqlz/jeawFLZJCrAcNdSZCfwqmBsPlG
- +tF/rcbobTGheJmULGenQFXaeTrL1LCy5KoXdV5qibOl4mRrWPyu9UhdZAloI++aHERl
- +zizDsPaFT3BQKT7bLVHNACb9A5hdJhjII8/c=
+ bh=FxF+gkCL/XGZQRnWTlDkr1DjBsMHgjUI9orLdCXXXTY=;
+ b=FDHKfxLkoJno2JJL5HCDBbQYp92js/dr0ftPf5FB7pDJopWLOjz1lWhVPDT8Yw1n7j
+ OGPhQKbUXwOFYua/+ytHUABEEmUQG0HpYMzm+zrOnFUtQj6B5ZTT+Lm0becEbMRKnqvM
+ 94cugOUpW/13U0GaXwuXxqZevAAkRUUFiX2Ok=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778849896; x=1779454696;
+ d=1e100.net; s=20251104; t=1778849981; x=1779454781;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ADQ9GtO6sM4mFAZsesk9Pstq9ohxEDeCOR3VdRI0ifA=;
- b=pdI56c1XDwyYm5QPRaRtI+kmICKncH7I9DUYbvxX1HuP1GD7Q/gBNHq9zsMjAXNIcK
- EGrADQ/WkF+1aq4d7soOCj7fQlVNzqN43dANf/CuWPS+NAWZts4gZrFR8A4jNNvupgqX
- 4eH5wbMixjwrvNYowGjWMjcc2v6rljFNq3w/nchhbX1LSCxI5ga6Q93WWpZ/kasrWdc3
- wtqOvFD+nbTDBHRJWHAY+hErXr7wWJ6Uq8tLp6l4mD/AAWc6sXrGD7FlQRWkPjpTGhoj
- 30i+rvrVASPM7kpVEXq/3x5u5lSuQrm8zWpjhazqtpxPlQ7xJZ3qEcv26Dslj5UYKURz
- 54uA==
-X-Gm-Message-State: AOJu0YxPk+UZrNOpwZnuhHPo310ZedVZNLEwxStbi9R0WlB/Y1IDPh8G
- ces0cXGWGklOc47jOhPogdgARCv9+SZ7uzl7aCnSmZ2bR1XK0P/rhg+w6Ajh2jjAciX2felWByS
- X6z24exiKxrhTIsNDbOot4zQJ7NIdcUqRCJs88XQSh5uA7xzddwfejg==
-X-Gm-Gg: Acq92OFEF/jEA8EYSxsKGTePkJgWOq4kDufSUyCYazZLfznzIOWwG7BJJkA1jlGwLAb
- pRDXDNcujheiSnBLihyMQD9WAjMrAgNvYvrye9w8XTTSzLunq9TxspiDxf1PYhKRlxUQahbclqr
- m3y9vRn/bMoNCXkA6upMgx+mOx1Tj2KIG7ltnVbRkm1sGynwbCALKVlerByvFKkF26dKDGf9XN7
- OCasnhEAQQAsvr1JpO8Ezx4Q28+uqj+S58E4hawwqqOJ3x44Hr0zFrVK2sLjZj2lF6c1iQioEyW
- swzD2A==
-X-Received: by 2002:a17:906:6207:b0:bd2:2852:683b with SMTP id
- a640c23a62f3a-bd5177c7dd5mr214019466b.16.1778849896413; Fri, 15 May 2026
- 05:58:16 -0700 (PDT)
+ bh=FxF+gkCL/XGZQRnWTlDkr1DjBsMHgjUI9orLdCXXXTY=;
+ b=VpaCoAt8YRR8EsFcOhB3zHWEiLEh9BcQDz4VX/GKN5GPQjM6kwvQjSOBs4h4JP7vFt
+ rsAIJ1KRAWf5lZ06r4TV2P11DcFTGdVZk+UYi6s9UT5qbgiNqoQnEMwY9TpGeT24vJyT
+ zyQGeNf8Upy2oolpQ7wTVYuyWDMdvO2LYlE2wqkLEirGvQyte1wIbGwidFymrCQ4Zkgs
+ tDuiHOGmI1ZZKksjI7vGxA20eAwRgkybtwyJ3rlGyrllW0GOw7iSZ1ILi8PqzvZsA23A
+ k4S2Kn8VX9H3dQfO0jdvC9TJGu7qeK55jwCZLI8m03on5fVCo/UvdCBh7lbMZ0dAUER3
+ zJmQ==
+X-Gm-Message-State: AOJu0YxqkIP+hACcR5v8H6mrf1y5sfACZ0CJJeTif+PzfOLdUmgEwVqK
+ r8q3zajsWfARxrn+uk4KrxzW3VipDYMniyBrDu67M6AY0yKgtyG/F4CHHbF8biX/zB4zfoFl78l
+ tDevoGgybFY732Py+UQj0PUe0MdyfrpdkjXqygsNKwSn0mRu7P+Tq/w==
+X-Gm-Gg: Acq92OELEeTOx7JH278bAb1clqp/JdMzfGREFT/GaWwCHQM7D5Hh9pf+J2t8DUqAo84
+ luxuFNPxGE0hZymRR+UY/GGo+VuCiyuAeXesI96t7tqcSO96nWt4+aEepXwfxchZtEN2/WsVjsc
+ oRj6H0+UvDs1ZrbSiXnfpAv5GCujTtj/xflt9grkEmmme+LwVf4mCn3FUY5QBK1Ve/AV0lI/LQT
+ suOru3vkGa+d33eTLCoO+7Ahw49f2K80rPKcQHLDkZObfjjiMDv+m+VdHu13xgGnmTNXVIluyiE
+ g4RmudXPMI/3aQYqC5MQtiBP57A=
+X-Received: by 2002:a17:907:e849:b0:bd0:6293:bd0a with SMTP id
+ a640c23a62f3a-bd5177aa3e1mr211880866b.7.1778849981512; Fri, 15 May 2026
+ 05:59:41 -0700 (PDT)
 MIME-Version: 1.0
 References: <cover.1778657347.git.weijie.gao@mediatek.com>
- <84adac247cd407e093dd7455138fbd794e91d933.1778657347.git.weijie.gao@mediatek.com>
-In-Reply-To: <84adac247cd407e093dd7455138fbd794e91d933.1778657347.git.weijie.gao@mediatek.com>
+ <4139e7bef0bb12225a18e3b205dd66b77d8ce543.1778657347.git.weijie.gao@mediatek.com>
+In-Reply-To: <4139e7bef0bb12225a18e3b205dd66b77d8ce543.1778657347.git.weijie.gao@mediatek.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 15 May 2026 06:58:01 -0600
-X-Gm-Features: AVHnY4IpOSGX-fx9CaE7JU5P7oLQll2vUxFmFrCokIbyRZGjwwYdy3pP0I3kbkQ
-Message-ID: <CAFLszTi8ii_CM7HQQw_rjON6izUzQ89dt4xhXSD7EceU1O+n7A@mail.gmail.com>
-Subject: Re: [PATCH v4 08/10] cmd: ubi: export more APIs to public
+Date: Fri, 15 May 2026 06:59:28 -0600
+X-Gm-Features: AVHnY4IpJmg5Ie8u1B5NcAuLviDfvJBzB_IEj9Kv9mZ6uLVoTq0pjcyvcm-7f9s
+Message-ID: <CAFLszTj2akYxyTix3gLCgNo1b0ee7-mMnMvDxV+tPwtAQ3Uxhg@mail.gmail.com>
+Subject: Re: [PATCH v4 10/10] env: ubi: add support to create environment
+ volume if it does not exist
 To: weijie.gao@mediatek.com
 Cc: u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
@@ -111,62 +112,48 @@ X-Virus-Status: Clean
 Hi Weijie,
 
 On 2026-05-13T08:02:45, Weijie Gao <weijie.gao@mediatek.com> wrote:
-> cmd: ubi: export more APIs to public
+> env: ubi: add support to create environment volume if it does not exist
 >
-> Export the following functions to public:
+> When U-Boot is booting from a fresh device, the environment volume may not
+> exist in the factory UBI image. This is a common case where factory UBI
+> image contains only volumes with valid data.
 >
-> - ubi_detach(): this is paired with ubi_part(). One may call this function
->   to completely clean up the ubi subsystem after using ubi_part().
+> With the current design, even if the volume is created manually, the
+> environment will still be unusable (e.g., saveenv) before a reboot.
 >
-> - ubi_{create,find,remove}_vol: this is a set of functions for volume
->   management.
+> This patch adds support to automatically create missing volumes before
+> loading environment. This will make environment available at first boot.
 >
-> The original ubi_create_vol is renamed to __ubi_create_vol to allow the new
-> ubi_create_vol() being used as a wrapper for __ubi_create_vol() with volume
-> name.
->
-> Also, comments are added for all exported functions.
+> There are two options:
+> CONFIG_ENV_UBI_VOLUME_CREATE: whether to enable volume creation
+> CONFIG_ENV_UBI_VOLUME_STATIC: create static volume (default is dynamic)
 >
 > Signed-off-by: Weijie Gao <weijie.gao@mediatek.com>
 >
-> cmd/ubi.c           | 23 ++++++++++----
->  include/ubi_uboot.h | 91 +++++++++++++++++++++++++++++++++++++++++++++++++++++
->  2 files changed, 108 insertions(+), 6 deletions(-)
+> env/Kconfig | 20 +++++++++++++++++++
+>  env/ubi.c   | 65 ++++++++++++++++++++++++++++++++++++++++++++++++++-----------
+>  2 files changed, 74 insertions(+), 11 deletions(-)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
 
-> diff --git a/cmd/ubi.c b/cmd/ubi.c
-> @@ -213,8 +213,8 @@ bad:
->       return err;
->  }
->
-> -static int ubi_create_vol(const char *volume, int64_t size, bool dynamic,
-> -                       int vol_id, bool skipcheck)
-> +int ubi_create_vol(const char *volume, int64_t size, bool dynamic, int vol_id,
-> +                bool skipcheck)
+> diff --git a/env/Kconfig b/env/Kconfig
+> @@ -716,6 +716,26 @@ config ENV_UBI_VOLUME_REDUND
+> +config ENV_UBI_VOLUME_CREATE
+> +     bool "Create UBI volume if it does not exist"
+> +     depends on ENV_IS_IN_UBI
+> +     help
+> +       This option is useful if U-Boot will be booted from a fresh device
+> +       where the environment volume has not been created.
+> +       This is a common case where factory UBI image contains only volumes
+> +       with valid data.
+> +       By enabling this option, any missing environment volumes will be
+> +       created before loading.
+> +       If CONFIG_ENV_UBI_VOLUME_REDUND is also enabled, both volumes will be
+> +       created,
 
-The commit message is now out of date - it says ubi_create_vol() is
-renamed to __ubi_create_vol() and wrapped.
-
-> diff --git a/include/ubi_uboot.h b/include/ubi_uboot.h
-> @@ -47,11 +47,102 @@
-> + * ubi_part() - attach UBI to MTD partition
-> + * @part_name: name of the MTD partition to attach
-> + * @vid_header_offset: VID header offset (string)
-> + *
-> + * This function detaches any existing UBI device, then probes for the
-> + * specified MTD partition, and then scans it to initialize UBI.
-> + *
-> + * @vid_header_offset is optional and is usually set to NULL.
-> + *
-> + * Return: 0 on success, 1 if partition not found, or -ve on error.
-> + */
->  int ubi_part(const char *part_name, const char *vid_header_offset);
-
-Just to check, where does the '1 if partition not found' come from? My
-reading of ubi_dev_scan() / do_ubi() is that a missing partition
-surfaces as a negative errno. If there is no path that returns +1,
-please drop that clause.
+Trailing comma should be a full stop. Also drop the CONFIG_ prefix -
+the Kconfig convention is to refer to the symbol as
+ENV_UBI_VOLUME_REDUND.
 
 Regards,
 Simon
