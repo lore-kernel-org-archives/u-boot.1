@@ -4,80 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CBB84CD4F3C
-	for <u-boot@archiver.kernel.org>; Fri, 15 May 2026 20:35:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A052CCD343F
+	for <u-boot@archiver.kernel.org>; Fri, 15 May 2026 20:40:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BFA5E8487F;
-	Fri, 15 May 2026 22:33:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 70D258486D;
+	Fri, 15 May 2026 22:40:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=l4re.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="CoxexzWu";
+	dkim=pass (2048-bit key; secure) header.d=l4re.org header.i=@l4re.org header.b="nFyo8fsH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AE15E8487F; Fri, 15 May 2026 22:33:57 +0200 (CEST)
-Received: from mail-ot1-x331.google.com (mail-ot1-x331.google.com
- [IPv6:2607:f8b0:4864:20::331])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id EE4E0847D9; Fri, 15 May 2026 22:40:43 +0200 (CEST)
+Received: from os.inf.tu-dresden.de (os.inf.tu-dresden.de [141.76.48.99])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 799C58483C
- for <u-boot@lists.denx.de>; Fri, 15 May 2026 22:33:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 174938481F
+ for <u-boot@lists.denx.de>; Fri, 15 May 2026 22:40:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ot1-x331.google.com with SMTP id
- 46e09a7af769-7dea1272943so178370a34.0
- for <u-boot@lists.denx.de>; Fri, 15 May 2026 13:33:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1778877233; x=1779482033; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=tt9eSTdKvaBZN7kFnackIwxUbOyH7DHw46vEqXpQkpk=;
- b=CoxexzWuudIzzPwSudPuROyRbrjfIkSeDWhTAcou8ccQeW9ShKVOFMa7dFL7Sluvcd
- 7PgW0M5+EPeu8Eg1KGZwgaRjAZo6Kkx5DZ66eA34tcCNZtc3SzTBc+HtZZvLjxLXWfXz
- S7Xjh5ff64v3n1NUEQfbAYEjdeuq5kNWC5ky4=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778877233; x=1779482033;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=tt9eSTdKvaBZN7kFnackIwxUbOyH7DHw46vEqXpQkpk=;
- b=d9TdLnYL4df0a7iUsVujwPLoTaJ8Of2uP5kINHo2y250iQD5IhLEvM6zhXo5hGRgH1
- WQ3n3kWNg+rv4RDZPargL1yQV2dg1IbdyFlB4iqBsj6gbljj6WgU+T5ybD0gDesMjrHy
- ASMen4bHN4/OBIMuCnxePI8TOZBOpaKggNcDE8uEoTt88O/Kos8xPHDq/sO81ukN7Roy
- VAHgOxWe2FUK4xHvvnSt0hIXeUP12iPzcgOhBsvgZ1y5Ek8XeTT50X163pQCkbKvbtBn
- 9yR3IcxkJ4BGwOoOyNndPS7je434fPrFh6Qt00jt7NDcKD7IjdmmwJhXbuaOKPt5AsK1
- 75Aw==
-X-Gm-Message-State: AOJu0YyAVh98Tu9Sxicj+psPC/DTI7T66s64NG7IEy2JkVClG4W5PTmS
- QngBT5bK8ljM90tvNd5SC7jYpH60d3JqkDC+ZZ4N5+nfs8FJuVMHU0XFbDu1YOCCidYX0mSp+S6
- NYaD0BQ==
-X-Gm-Gg: Acq92OH8pju4HJfBzhg0Tr0I/nWNm+am+QNFpuz869kbTsshFOW7SVPHdOLRBIrixJP
- R/bi8CF+vLCGWxdYw3wYsyfFcH7OYd9JrYC2NfGehvVdxApK74jyb8kfE7Y6ENL0JIWfOMXK6Yq
- UpyfInDK9hmPrxAhRQYfNyNCwKLNOEXoBpwQmP6GrdS2CeBaoSYlky4XXTJrc6/rpvYn/6euaqV
- zbLBQm3FB7NBuRZLkct+/7+MyKDmXagQUyZhYTLDkHqQIS3x5fdFc+cC6ma5dCVnZwMI3Svy8zS
- qSdSJWY6TJrc2VSYWT8g5BWVEPst/BPDlHorB5RlPjFMBHOViPhBN6LoUnDBf6pvnneTCbKCmCq
- AbPL2wpqRhcE3MyFPMG3lK1MvhzTI3zTE3patCPjIznu05V2Xrx4IMnbocne9FA3fytGazj0y6b
- 7gqoXisay5TnstaiSLkg==
-X-Received: by 2002:a05:6830:6f4b:b0:7d7:d0f1:a132 with SMTP id
- 46e09a7af769-7e4fa0455d6mr4101210a34.22.1778877233420; 
- Fri, 15 May 2026 13:33:53 -0700 (PDT)
-Received: from chromium.org ([174.51.25.52]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7e55b95b82fsm2414906a34.12.2026.05.15.13.33.52
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 15 May 2026 13:33:52 -0700 (PDT)
-From: Simon Glass <sjg@chromium.org>
-To: u-boot@lists.denx.de
-Cc: Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>
-Subject: [RFC PATCH 11/11] doc: commands: Recommend getopt() for option parsing
-Date: Fri, 15 May 2026 14:33:02 -0600
-Message-ID: <20260515203311.2555651-12-sjg@chromium.org>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260515203311.2555651-1-sjg@chromium.org>
-References: <20260515203311.2555651-1-sjg@chromium.org>
+ dmarc=pass (p=none dis=none) header.from=l4re.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=adam@l4re.org
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=l4re.org;
+ s=mx; h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:
+ Cc:To:From:Date:Content-Transfer-Encoding:Reply-To:Content-ID:
+ Content-Description; bh=rjaRNg3AS2JhKMmVWpy15ILrJFm5HusDqlBGdY4FB2g=; b=nFyo8
+ fsHS5F8YnZUuxrfSF2F2NdORY1rt1EfPFq7h2/QFYURrqumweJ4GpX7QV4v9d68yKqU5lCavbI1sD
+ tVJDAH3L48GUxzBXCJBu+CPxZa0KMOKO798J3+pgO0+D7/GCZ3Z+mNi/fjfgeQsqykuKCKmSiB70j
+ 70J3DHIfnbjqPSPBSVqRuLGAVB3YaPP0b2IwRBP7Lau/U86wAMKFUJdKieGyy1alvQorMX0CLRESW
+ DKWhZUPZJ5sbBSe01l/95i+sHuhmI3JlEFWletumuUUy3nrWduuRf3cxQlf1lha0tqJnpEfKZm2AG
+ 3Ea0FHz1xcPauJojvOFOLetgb7m6w==;
+Received: from erwin.inf.tu-dresden.de ([141.76.48.80]
+ helo=os.inf.tu-dresden.de)
+ by os.inf.tu-dresden.de with esmtps (TLS1.3:TLS_AES_256_GCM_SHA384:256) (Exim
+ 4.99.3) id 1wNzKr-000000010yT-3IXn; Fri, 15 May 2026 22:40:41 +0200
+Date: Fri, 15 May 2026 22:40:37 +0200
+From: Adam Lackorzynski <adam@l4re.org>
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
+Subject: Re: [PATCH] common/command.c: Avoid NULL pointer use in
+ cmd_auto_complete
+Message-ID: <ageExbncTevFp7jB@os.inf.tu-dresden.de>
+References: <agXW8eM2DdZLEqt4@os.inf.tu-dresden.de>
+ <CAFLszTjn8H=3x2=UcBEVX22FGP+_27fsvFksE7CoeORL810xOQ@mail.gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+In-Reply-To: <CAFLszTjn8H=3x2=UcBEVX22FGP+_27fsvFksE7CoeORL810xOQ@mail.gmail.com>
+User-Agent: Mutt/2.2.13 (2024-03-09)
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,94 +67,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The getopt() helper in <getopt.h> has been available since 2020 but
-only two files in cmd/ actually use it; everything else hand-rolls
-argv loops to detect -x style flags. New commands keep using ad-hoc
-parsers because the developer guide for commands does not mention that
-a shared helper exists.
+Hi Simon,
 
-Add a "Parsing options" section to the commands documentation with a
-worked example.
+On Fri May 15, 2026 at 07:58:38 -0600, Simon Glass wrote:
+> Hi Adam,
+> 
+> On 2026-05-14T14:06:41, Adam Lackorzynski <adam@l4re.org> wrote:
+> > common/command.c: Avoid NULL pointer use in cmd_auto_complete
+> >
+> > Avoid putting a potential NULL pointer to strcmp, which would lead to a
+> > load at address 0.
+> >
+> > Signed-off-by: Adam Lackorzynski <adam@l4re.org>
+> >
+> > common/command.c | 2 +-
+> >  1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> > diff --git a/common/command.c b/common/command.c
+> > @@ -373,7 +373,7 @@ int cmd_auto_complete(const char *const prompt, char *buf, int *np, int *colp)
+> >       const char *ps_prompt = CONFIG_SYS_PROMPT;
+> >  #endif
+> >
+> > -     if (strcmp(prompt, ps_prompt) != 0)
+> > +     if (ps_prompt && strcmp(prompt, ps_prompt) != 0)
+> >               return 0;       /* not in normal console */
+> 
+> This avoids the deref but isn't quite right. uboot_cli_readline() in
+> common/cli_hush.c falls back to CONFIG_SYS_PROMPT (or
+> CONFIG_SYS_PROMPT_HUSH_PS2 for promptmode 2) when PS1 is unset, so
+> prompt here is never NULL. With your change, a NULL PS1 makes the
+> comparison succeed unconditionally and promptmode 2 gets treated as
+> the normal console.
+> 
+> Please can you fall back to the default when env_get() returns NULL,
+> mirroring the readline path:
+> 
+>     const char *ps_prompt;
+> 
+>     if (IS_ENABLED(CONFIG_CMDLINE_PS_SUPPORT)) {
+>         ps_prompt = env_get('PS1');
+> 
+>         if (!ps_prompt)
+>                 ps_prompt = CONFIG_SYS_PROMPT;
+>     } else {
+>         ps_prompt = CONFIG_SYS_PROMPT;
+>     }
+> 
+> What do you think?
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
+Thanks, looks good to me, will send a v2.
 
- doc/develop/commands.rst | 62 ++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 62 insertions(+)
 
-diff --git a/doc/develop/commands.rst b/doc/develop/commands.rst
-index 77a7a4d9c02..a1f0b59501d 100644
---- a/doc/develop/commands.rst
-+++ b/doc/develop/commands.rst
-@@ -118,6 +118,68 @@ CMD_RET_USAGE
-     The command was called with invalid parameters. This value
-     leads to the display of the usage string.
- 
-+Parsing options
-+---------------
-+
-+Commands that take options (``-x``, ``-f file``, etc.) should use the
-+getopt() helper in ``<getopt.h>`` rather than walking ``argv`` by hand. This
-+keeps option handling consistent across commands, supports grouped flags
-+(``-abc``) and arguments attached either to the option (``-ffile``) or in
-+the next argv entry (``-f file``), and produces sensible errors for unknown
-+or incomplete options.
-+
-+A typical use looks like:
-+
-+.. code-block:: c
-+
-+    #include <getopt.h>
-+
-+    static int do_foo(struct cmd_tbl *cmdtp, int flag, int argc,
-+                      char *const argv[])
-+    {
-+        struct getopt_state gs;
-+        const char *file = NULL;
-+        bool verbose = false;
-+        int opt;
-+
-+        getopt_init_state(&gs);
-+        while ((opt = getopt(&gs, argc, argv, "vf:")) > 0) {
-+            switch (opt) {
-+            case 'v':
-+                verbose = true;
-+                break;
-+            case 'f':
-+                file = gs.arg;
-+                break;
-+            default:
-+                return CMD_RET_USAGE;
-+            }
-+        }
-+
-+        /* Positional arguments start at gs.index */
-+        if (gs.index >= argc)
-+            return CMD_RET_USAGE;
-+
-+        return do_the_work(file, verbose, argv[gs.index]);
-+    }
-+
-+A few points worth noting:
-+
-+* Each command owns a ``struct getopt_state`` on the stack, so getopt() is
-+  reentrant. There are no globals like ``optind`` or ``optarg``; the next
-+  unparsed argument is at ``gs.index`` and the option argument (when one is
-+  expected) is in ``gs.arg``.
-+* In the option string, ``x`` is a flag, ``x:`` requires an argument, and
-+  ``x::`` takes an optional argument.
-+* Unlike POSIX getopt(), this implementation does **not** reorder ``argv``,
-+  so options must appear before positional arguments.
-+* Returning ``CMD_RET_USAGE`` from the ``default`` case prints the command's
-+  usage string for free; there is no need to call ``cmd_usage()`` directly.
-+* Use getopt_silent() if the command should suppress the built-in error
-+  messages and report problems itself.
-+
-+For the full API, see :doc:`../api/getopt`.
-+
- Completion function
- -------------------
- 
--- 
-2.43.0
-
+BR, Adam
