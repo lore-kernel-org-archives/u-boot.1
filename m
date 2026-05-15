@@ -4,109 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 675BDCD343F
-	for <u-boot@archiver.kernel.org>; Fri, 15 May 2026 22:06:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F96DCD4851
+	for <u-boot@archiver.kernel.org>; Fri, 15 May 2026 22:08:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 88AE084713;
-	Sat, 16 May 2026 00:06:46 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 070FE8480B;
+	Sat, 16 May 2026 00:08:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="dc/JX5ZE";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="JPhng06R";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 79E678487C; Sat, 16 May 2026 00:06:44 +0200 (CEST)
-Received: from mail-qk1-x72d.google.com (mail-qk1-x72d.google.com
- [IPv6:2607:f8b0:4864:20::72d])
+ id 5E24A8487F; Sat, 16 May 2026 00:08:07 +0200 (CEST)
+Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
+ [IPv6:2607:f8b0:4864:20::333])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E4E8F846DE
- for <u-boot@lists.denx.de>; Sat, 16 May 2026 00:06:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DA84084713
+ for <u-boot@lists.denx.de>; Sat, 16 May 2026 00:08:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=seanga2@gmail.com
-Received: by mail-qk1-x72d.google.com with SMTP id
- af79cd13be357-91171bc5a7aso5735285a.3
- for <u-boot@lists.denx.de>; Fri, 15 May 2026 15:06:41 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x333.google.com with SMTP id
+ 46e09a7af769-7dcd17e19b6so178879a34.1
+ for <u-boot@lists.denx.de>; Fri, 15 May 2026 15:08:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1778882800; x=1779487600; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:references:cc:to:from
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=9Bu5aq514U/lyIhC4o5GwfHVFr3MHXRIc5JGPulDdZ4=;
- b=dc/JX5ZE7euKpcdSibKnXAvEt/k2ZKnK8kN2r3F3j2ls9imQcrhpgX9L6WxJcaKGIn
- b4B4PetdD0sWEub5X4INjFvTNaT+OyND9sAxmwyangzdD9HGX7NQc1j6eAayFQs+APSc
- Ds6/cXh3KeF8bev9YwEjmUO0+rynWpUgz961mfLfYO5nfGVWAhNQfCS8CvhbjGFBrmP+
- 0gCZVcDtspP8GKHReipykapJLEHg1oPxEiWSbJw8G0etiu6kjIYhE+zMiajL3S5zYKub
- ubg6yoQlkZt/xeMxI3dX22dKlRWQh2r+BnVqu/BwEub9xKj23GaHNNKG4jHYbnJ3oq2B
- 8PDg==
+ d=konsulko.com; s=google; t=1778882881; x=1779487681; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=XH4wtrQqh3X7Zc+FldlF9/uvXKfRhnBRXVAhRWUyjNE=;
+ b=JPhng06RiPkwoZ9wmblsuVyjNyQF+s2teL21Hwmn/GQHl85vF3pAPUPNxxPQUsxFWy
+ igvC9zrh8qIsAax37I6mewgxgrysNg6FK3m16Uj4HbL7sGFKgtBiO53NSU34SZy8yfjq
+ vtxoXhtK1Vzs91Ld0Mel0OgpYqdPQVR7UlXjI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778882800; x=1779487600;
- h=content-transfer-encoding:in-reply-to:references:cc:to:from
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=9Bu5aq514U/lyIhC4o5GwfHVFr3MHXRIc5JGPulDdZ4=;
- b=CJiImCg95KNy9gv2HFJqBeJuqi3YIyxCWbJC4gg0/uk86sQ+Bi1dTQBhruhHISFwoc
- z6aS/HFZPpXMEZvpmGE2WNxzEc2sPTiz5Go77/MGYWSqv4b3nM8t3f+6VoOQcjXs2viP
- ur4I+MgkGyo4Z95W6q89iYb/Q2t6sljMWRnlodFSbuGLMGGJoGCQlaHaQ77lC1iqtESf
- OX/iLG+i8CS9TDazr3vp6of/Q4lwUfFX0pRiJkFmILa54QRa+nh/xJmSTtjTZ+/RsWIN
- S21fMrHtPa6SF/busWAAafNlyb+/7vCAMMyivVF9KyaZLTQDt6BqX0zf7m1Kylx9d2ZZ
- n0uA==
-X-Gm-Message-State: AOJu0Yx52DhCgDPK8J9rQ5A4d6bZNYWUDGNx7Xkx/F3VbesFm4gMJ4K1
- fB6VDaQHuslfulxsM3QxCVyJapwrXOVjVHCEebXPmRusF6n7g+K3qtYT
-X-Gm-Gg: Acq92OEveFgcXdwhgFs3FQR8dFjL4iWUvhzJPV7BqRhM4QTtYqu+11j+dy4r1gilxj9
- RlnEx52f6FCYNSIt4r7ZGDPE4V7sehRkqLBiQ/V2ePN/xeO/gNlGcVePus1cUiewnqLrKDWu4mf
- empjzeAZnB2uthYFKHeJEcZ3RlIbmOtoR7gQ39m2Vt6rJl0xSfwMx30x51P2wfPBhO40WoPS5u9
- IUrePKUMSVcZU+w2ymDIHc4la/elqMjMPrIzuW4D1M89WjjngrKDeM9fuuOSmHnIoe6iHPbEyer
- 5OfDqjB/ofyAwoBtTOw0fO3lApTgqSgaMXpHopZL76aiErbfo2i7Cz1yShRdcTRKILkzIpj+YDn
- q79hMRT+lXcgwdGPZ9MQtWO9K7sJXBe7zHnCP32rxKh/0V35MTDdBfnPZpC6iuSB5/G8roZemJl
- ZrFyMT0En/r8x/NfZEcU/MSmcZegfIU1fIEDiXz9pIJnPuhx+ZAKDqdoFppBLL13RvXIKk0ILGA
- RWIpQ==
-X-Received: by 2002:a05:620a:268f:b0:912:54d8:1d95 with SMTP id
- af79cd13be357-91254d81fc7mr400073785a.3.1778882799800; 
- Fri, 15 May 2026 15:06:39 -0700 (PDT)
-Received: from ?IPV6:2600:4040:4477:d400:2d8:61ff:fe7c:5d59?
- ([2600:4040:4477:d400:2d8:61ff:fe7c:5d59])
- by smtp.gmail.com with ESMTPSA id
- af79cd13be357-910bae24879sm721264085a.18.2026.05.15.15.06.38
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 15 May 2026 15:06:39 -0700 (PDT)
-Message-ID: <aa023095-2b32-070f-ff43-1f6922918b51@gmail.com>
-Date: Fri, 15 May 2026 18:06:38 -0400
+ d=1e100.net; s=20251104; t=1778882881; x=1779487681;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=XH4wtrQqh3X7Zc+FldlF9/uvXKfRhnBRXVAhRWUyjNE=;
+ b=WNyNyJD/DO7GOFYHch8Iqp3w7undMEAhgny73/1JNyWlxgaBUn2gmebSXN9axPPiJQ
+ z5xxFX6mhntabKlvBBFOeuARuJWJxjOc5UufCx6Y4jcs/YTJaCKqmg7v2Jjhx70X1c3M
+ vrfVeqCtkAflvMLM16F3HVwz7T+HZLsu65qys1NVjsOMi1MXTaWxlIe9HA4kJMxTFIBn
+ vi3mtkVsUn9RZbQhs2xdNoXKag/5MGhMlj/Jyn0nrZKjPpa+17mELWU9MNfIOLObEkHr
+ L+zTxkHduk/EimA331j1At7JSRh9qd2IU02+1jEU9q8sXGbisOUn2r3LNI0HtANBpFC/
+ 2c0w==
+X-Gm-Message-State: AOJu0YyoaEnYO3U99BEjN1lGueQlP6DP+FCuQYwuHRoC7NAUF2wqbos3
+ VVJSkteCaBKhpt1cqBtbePk8FuV9e7K/J5e+iBW8w9AfO+kd0x3WQ1YSDH/O5WnGE0rDCJQz3Em
+ NTQTH7dXEGAEg
+X-Gm-Gg: Acq92OFVlbKnUqqrlYqBJ6SSJz+BZMjzAFrAhQVAZ02bhsZK1Ji9VSENij50iBvZQSS
+ LNsZfM3kMTIH/nuN9BZPDsEbzCdABteeQKQYdofIPJfaE/WPd8lQPq0KUCmX9nYZKXyuHqAwN1Z
+ eGptRNrWJSq4z6TGE5GMm3+4db8erypJD9Wh84bfoSxINDss32BWeTB8hRFhlPwApI9dU9qSY95
+ h0d49RWQrxtjP0gYznFeFP5k7PWGUZDeDKt90uWf0AhNSfim73HBWb2ou0Kl5UPw438Hb9gMtVT
+ KWkIAqMelthQ835c9ApIiMIrp3WBriUHKTtcCXoxuVy/pPi0ELe0iqH0/1Ee6kEeTIQuKnRk2b9
+ hT+JauS1Wi4rInDnjTzz2SfUtrh9ih4q7eQDt0d8rrJmHIlirctD+i0jRNOYFGF32qo4PXOgKoX
+ oHZtpH5SE+vVJp/UlLjOiOMN29K3Zd8yxH5m7+Pidveb0lOapya+K8JRxG5zLQ1EBn8c7x4yRBT
+ 9h3hlsysKaVXLjWrahO9eWUduD2RhChDv+eJbB/fSEQMiYSEkp51nmD4IciEA==
+X-Received: by 2002:a05:6830:4989:b0:7dc:da06:c0f0 with SMTP id
+ 46e09a7af769-7e4ea087f57mr3790125a34.4.1778882881506; 
+ Fri, 15 May 2026 15:08:01 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
+ [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7e55bbd0be3sm2256378a34.15.2026.05.15.15.08.00
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 15 May 2026 15:08:00 -0700 (PDT)
+Date: Fri, 15 May 2026 16:07:58 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Michal Simek <michal.simek@amd.com>
+Subject: Re: AI-assisted review
+Message-ID: <20260515220758.GM1858239@bill-the-cat>
+References: <CAFLszTjnL6rn_mTA+jhcrRLF0yEtN4FVwTeGGy9GeGbgdB9fYw@mail.gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.11.0
-Subject: Re: [RFC PATCH 00/11] Tidy command option parsing and use it a bit
-Content-Language: en-US
-From: Sean Anderson <seanga2@gmail.com>
-To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, Andrew Goodbody <andrew.goodbody@linaro.org>,
- =?UTF-8?Q?Beno=c3=aet_Th=c3=a9baudeau?= <benoit.thebaudeau@advansee.com>,
- Casey Connolly <casey.connolly@linaro.org>, Daniel Palmer
- <daniel@thingy.jp>, Heiko Schocher <hs@nabladev.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Hugo Villeneuve <hvilleneuve@dimonoff.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@arm.com>,
- Joe Hershberger <joe.hershberger@ni.com>,
- "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Michal Simek <michal.simek@amd.com>,
- Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
- Patrice Chotard <patrice.chotard@foss.st.com>, Peng Fan <peng.fan@nxp.com>,
- Peter Robinson <pbrobinson@gmail.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>,
- Yao Zi <me@ziyao.cc>
-References: <20260515203311.2555651-1-sjg@chromium.org>
- <20260515214305.GL1858239@bill-the-cat>
- <15041974-8838-56b6-b9d5-250383ed2625@gmail.com>
-In-Reply-To: <15041974-8838-56b6-b9d5-250383ed2625@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="WI9kxSV5A7dn/TFQ"
+Content-Disposition: inline
+In-Reply-To: <CAFLszTjnL6rn_mTA+jhcrRLF0yEtN4FVwTeGGy9GeGbgdB9fYw@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -123,52 +98,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 5/15/26 17:59, Sean Anderson wrote:
-> On 5/15/26 17:43, Tom Rini wrote:
->> On Fri, May 15, 2026 at 02:32:51PM -0600, Simon Glass wrote:
->>
->>> We have had getopt() for over five years but it is not much used. It is
->>> much easier to understand arg-parsing using getopt() and it avoids
->>> common errors. As the named maintainer I decided to look at how to make
->>> more use of it.
->>>
->>> So this series explores the impact of converting a few commands to use
->>> getopt() instead of ad-hoc parsing. It updates getopt() to handle flags
->>> anywhere in the cmdline and provides a few helpers to reduce
->>> boilerplate.
->>>
->>> The chosen commands are:
->>>
->>> - echo: very simple with no flags
->>> - hash: fairly simple with just one flag
->>> - env grep/export/import - fuller examples
->>>
->>> The series also adds a recommendation to use getopt() for new commands.
->>>
->>> To try to reduce the code-size increase, a lower-case function is added
->>> and called from a few places. The difference is fairly marginal.
->>>
->>> Overall, the result is not pretty (see below) with about a 1.1K size
->>> increase on arm64:
->>
->> I think that means this is a no-go, and you need to work out what might
->> lead to a much smaller growth here.
->>
-> 
-> Unfortunately, the only way to get a size reduction is to convert as many
-> commands as possible.
-> 
-> --Sean
 
-And to expand on this, you really only get a reduction for any given command
-when there are several options being parsed already like in the nvedit stuff.
-Since most U-Boot commands don't use options it will be difficult to get a
-reduction even when converting most commands on a board.
+--WI9kxSV5A7dn/TFQ
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-That's why I used it for new commands where no one could complain that
-I grew their board.
+On Fri, May 15, 2026 at 03:03:21PM -0600, Simon Glass wrote:
 
-I think it would be nice for all u-boot commands to have proper option support
-like in barebox, but it's a lot of effort.
+> Hi,
+>=20
+> There was a query on the call this week about whether I am doing
+> AI-assisted code review. As I said on the call: yes. Here is a brief
+> description of how it works.
+>=20
+> It is built into Patman (on the Concept tree) with a new 'patman
+> review' command. You give it the series name / number, or perhaps a
+> patch name/number and it applies the patches to a new branch, does a
+> review then adds its comments to its database.
+>=20
+> A '-d' flag can be used to create draft emails in Gmail (sorry, it
+> doesn't support other email programs yet). You then check and update
+> the emails and send them (or delete them). I am not an expert in
+> handling the 'user voice' part of AI, but have made an attempt to make
+> it follow any provided configuration, as well as to scan recent
+> reviews to actually create to create a voice.
+>=20
+> Obviously this is very rudimentary and could be expanded considerably.
+> But the mere fact that it creates draft emails is a win for me, even
+> if I ultimately delete or rewrite most of the comments. I can imagine
+> 10 different ways to improve it to be more useful.
+>=20
+> I wrote a blog post about it if you want more details, or you can ask me =
+here.
+>=20
+> I am very interested in hearing how others are using these new tools
+> for code review.
 
---Sean
+And the big thing for now is that since we as a project do not yet have
+an AI policy aside from "please don't". One of the points I was making
+on the call is that there's a difference in value between "Human
+reviewed it, looks fine" and "Human spent some tokens, agent didn't see
+any problems".
+
+And I know several other people have been doing at least first pass
+reviews with various agent-tools, it's just no one else has been posting
+reviews at your scale. And lessons learned from other projects is that
+the prompts are more important than whatever wrapper around the agent
+one is using.
+
+--=20
+Tom
+
+--WI9kxSV5A7dn/TFQ
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCageZOwAKCRAr4qD1Cr/k
+CgxwAQC9D8peEO/W8A+UZfddfpRnrj1lIFEDSlmPq8Y2bzGm7QEApIzvn9GCEpYp
+nPCUNZ3ucBcKHFDJJiwZBN23xPcrnQM=
+=hRzf
+-----END PGP SIGNATURE-----
+
+--WI9kxSV5A7dn/TFQ--
