@@ -4,101 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35681CD343F
-	for <u-boot@archiver.kernel.org>; Fri, 15 May 2026 18:32:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9DFD6CD4F3C
+	for <u-boot@archiver.kernel.org>; Fri, 15 May 2026 18:35:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BA437846CF;
-	Fri, 15 May 2026 20:32:46 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9A7AE84865;
+	Fri, 15 May 2026 20:35:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="dYX5j4+c";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="PdSCHSVd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E2A2D84852; Fri, 15 May 2026 20:32:44 +0200 (CEST)
-Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
- [IPv6:2a00:1450:4864:20::62e])
+ id 29AB384815; Fri, 15 May 2026 20:35:12 +0200 (CEST)
+Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
+ [IPv6:2a00:1450:4864:20::634])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E06A2846AE
- for <u-boot@lists.denx.de>; Fri, 15 May 2026 20:32:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0FC31846CF
+ for <u-boot@lists.denx.de>; Fri, 15 May 2026 20:35:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-bb91b426e40so18682166b.0
- for <u-boot@lists.denx.de>; Fri, 15 May 2026 11:32:42 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1778869962; cv=none;
+Received: by mail-ej1-x634.google.com with SMTP id
+ a640c23a62f3a-bd4f7f05e90so14734166b.2
+ for <u-boot@lists.denx.de>; Fri, 15 May 2026 11:35:09 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1778870109; cv=none;
  d=google.com; s=arc-20240605;
- b=OWx/ReJza8YZpAsKmACwDJPKa+hGsB29tfcXUq4DF6gUDniW2hdNITLHMvBrjfcKQC
- N9xgNnKs0CcCZlBm8nZC130LezfhvpPSX/nXuEjBVhHeOPRjzHWpo2BkFwl8Oqaqj9Wh
- RQjoacbCKaGD7Motgb/6fVqRQx0yxUoryj/rlhwSrlcB2JWR0oiWpf6gB3cfIjEn/TSy
- E4RbA7NiyT2/GJ33wRJiuT80qHleW9Bpkqpw7reFEtZUWc/rmlm3LtRgsjyMJq38Qn8Q
- HN8ur1U8M3lsKFnA+aKzHQ8rdPVWyaCUz1vpmRQVlDGfTo5+2oVhxxOCcDeGCVqyHq3v
- WwEg==
+ b=h0ct/noNdNzuvWaxech+uhzDNi2FTe3+ZI5ZWeJXu27wNjpNrXBXIX7JU/kOlemxDI
+ kkCMmejJuO6usLuSdyZIBXSbkKKJXnYJuCD9QdRwpPYNhL8yyGhG4VwJ9kmGZIj4McrX
+ fRK8njg5iaDIhVZPI5mNwjPV+2kvvjw/bUwgfU64B0NT18lQrAKJrV89ceal5phigLGs
+ VqiGpCT/gZ6QuYiUVeAluk/QtIxCtAL6gXjrR2gHn5TAQ1hFBmvZKWarZnRYfBABOpMO
+ 0LyTA0IzIfm8Yu40MyU5WW+t7o+UnMCHB9HmNNlE8N64VFgdcnRThNJ/HQhsCmJcHeRw
+ unWA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=T2w0rmmerPNXxBwkJTCYJPXWrDFX4LSaepKORi44mTc=;
- fh=ZSXGB0WL1g63NMiq65Je9X/TXbVo2/HfjGa4sXbWdA8=;
- b=DRoTmLPdRFrBSGPdREF60oberRViO0IUgIUPEsBHKKLfWd/BKPZl6ATGy2Vvg9a5OY
- 1g+tk6onRqU0hB6E9BfW5Gz5Ix7tgd6YHDB4dw6nMFDZGOEsSie+Wa67AROqjnsCgE0m
- tNMQx+lPraAMzC6LDbBUc4BRHwx2YHx2GzYrWtb8aYk3kYIWW6iNkqBTNsiBnuUqagTS
- J67DQYVl5jRpqU0fHAOL+7yUOJJ7JYMQbGdjkrvEJ0HAFtSf0ZhtA4k6DigDiNg5EzEk
- oQ0T4skphVOXkK5xA9wJeC0EuLgKKknb6CUeKTImP+jvCbaS0kR6TGQJHsgjxuiO9Lgm
- cDcw==; darn=lists.denx.de
+ bh=J8SZXyZvjhzXoLbdbAEQecGzYZpFaUvkNChpaqb6Fl4=;
+ fh=bnupiERZn2PI+MmEvXIHvRvb/x9C+g9PVm9rW1kLi8I=;
+ b=KtorLrabOZ26Y6JIpjgtBg490qv/bbnDKQGbtbTP1dMHfadfUn/v7GM8sgC988w8kl
+ aVoeixL1kiDC+ascqvjxdixMbENyHfJ+MHclz017skKuFWqNfvFEkq7PcfZnoMogcguf
+ LOZz6vXIQffvkzmqq98/XdN5e0DmjncYmIys4I9GgU1DVA5cnRXAIrfpuTaQIywp7c4/
+ bZGqqpXoeKLwMnpmooBIMGNsHwF5w4rkKRG1aUAiaN2kytK0Mfp7wzc2Fd2ht3y++Qtd
+ OjQa6Yekbcws+KDgtp5QbrfS1/UJT5jdTarvSoETVLHGvVIFBA3v50XQDCxUJPRIOdan
+ VIIQ==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1778869962; x=1779474762; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1778870109; x=1779474909; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=T2w0rmmerPNXxBwkJTCYJPXWrDFX4LSaepKORi44mTc=;
- b=dYX5j4+cPQ/Bs6hZmw3EXEq+YpQ42+TkEYWciv6spJ20IsmCwUjoZMjbDuOVYdUT9h
- yTwTAmbzoHXvaR1z5LzBX56u31aDUwl7oUHvEZ6+FbA8nQBZ7/uRAsYViae6N8tavXxF
- OcM7zpoyu/HpsKGYAqa/c1i/2XLHWadzzuhRA=
+ bh=J8SZXyZvjhzXoLbdbAEQecGzYZpFaUvkNChpaqb6Fl4=;
+ b=PdSCHSVdWOYqTkcGCmGUwmYGiQ0DLxcLBgtDG6sAh+073ZcIlZZ6qGZ8RLw8/aCSe8
+ r28uyoqXqu+as/WYul9fKBOJuf2l9OEUVppDt9M5MLD1H9rZZ1B4miVuXkNmM1DsgY7p
+ R1tDhswJ0eCPG2arKfzVcPKciUdI3L/ogBc98=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778869962; x=1779474762;
+ d=1e100.net; s=20251104; t=1778870109; x=1779474909;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=T2w0rmmerPNXxBwkJTCYJPXWrDFX4LSaepKORi44mTc=;
- b=dU4qUPOIyy8YjwxZa7jcAOMeLepGwy+HQsnDmMK50a+FpmOLTWXwPzrc6yn/uLAgfb
- +srwMoo7zYw3VIRedt+Gu7VLBLwNL/lj5xPbvcOyFog7qH2DCGZAmShvfJM5QgPt+gr3
- uDFUuM8NSm7tknUmryA93Ww4v0J5dbHcHPXxilRStIa+g2psyCHoE7EP6Wnp5Iu11dNV
- pu6LC67PcW1rj2N1oU+Cb+5VFs//QeWvLdC43CrhCizBmJ84Xai5j+yjwetOUZVGPOd9
- 9mCcOQQrhJ3NHzAuhP9yi9Kcxuk8lwoW3ukocewC77TZBZCMgHxraEFEDmLKb9BVBI/k
- 68pQ==
-X-Forwarded-Encrypted: i=1;
- AFNElJ/JnZP2eYYjBxWjiSKPC43S/3Hn+M8/B7oZfUdfwH6PVkc10Ry76Gp6qofJQdtyBpmgTEZyJyY=@lists.denx.de
-X-Gm-Message-State: AOJu0YyE1ZDHQHbqYN8sasJOgEHO9AaJV/wI6UzMLg59E9z5l94LkYRl
- nM5Kb21J6T/fyr5KqkaaEiySaCacDPGviEnhNiJ6QiGJA6hyjgFiYQI1UAcgFsHbjqlmorYNDF8
- +IZRRWOvBSenv4JbGHulgL8QOCYt7eK3t579nEeXe
-X-Gm-Gg: Acq92OHhIRuyMU55KALMmQKQXbdeEpSqvJSXwJrbdJpX+lzUgYyky2vsFl5IJVcaz6P
- mTD66xPrnmppHuUsFbdGlz/bxjTw0YR6JA0vxo0G6rptq6yvnFwpaOIMuAvBcDjdyHicVrLtX+b
- QzB7aHLBs0LEkcHFItU+qEIoRPScLxxG5mCBOAbrXTAN8nduhRY5UZ9gE8RGAUttlm2BOY3A/TP
- qwZoT/ntQhTqjoidkhL9ATc5jCdp3jVfcf6iTktbgjRasvUzwDc1JyjB+0FjFlYxGL2EGtmmyJp
- HIg/Ag==
-X-Received: by 2002:a17:907:3cd5:b0:bd2:6089:e72b with SMTP id
- a640c23a62f3a-bd5178f9640mr258345666b.25.1778869962260; Fri, 15 May 2026
- 11:32:42 -0700 (PDT)
+ bh=J8SZXyZvjhzXoLbdbAEQecGzYZpFaUvkNChpaqb6Fl4=;
+ b=PfWCaz/1OVETNqzxaAwpSmPPKeAtAqqdGV4W/UIKFbEyJ1/Row1ojbmiUEaXtaJDv5
+ wCxxqWB4R2C2+ThiXpmdojuMv58tlkvEateNkQ//N4RE0+hDgMzCBcqM07wZWW/a7XdN
+ jenhQ8oEUDOqd33hl02O29xHQG5z5tpjCSmZ8e4BuCD1BA3ChCyqqw/jS9hbbLR1zLNp
+ V/wadXEHTUZ15N7/UWL+v0o+Wy+z3MKQVd1tvV2bxKHL4tPzQjLA/qN/S/2W4gyB+VVI
+ SyDfInyyUC+tGYvYxe+/1XgCzKonknn/FJnR/RXGYPG17F/LWM7YK4pGkiBjZ+iUPghO
+ sxzw==
+X-Gm-Message-State: AOJu0YxWQe+Ty48b5jyXPsle6ejJ0U3oqC54/GJujTajFYzIfPFKXPl3
+ pMwVnPEoS+GB4noBJJMQ6qeQmSTDAJ3ZOZZHBE7V24JNjpcLmrd3TDG9Wvv2VpsPUPzPzYpSyKn
+ ljLtRE471LJ397T2/4yM7PaTKaooTpYvWPThJQ2lv
+X-Gm-Gg: Acq92OGv04EB3IhqkkX6HZIIbK3L3nLvbXUzQYF86VVxaHeoRVGwwFrfaAbUmzwwI3Y
+ 0HipRD9d1YgaLYBzotk0EaOKDaTxDl15aOMfG5t9Q5/32nTI238r6mFsaZY5q9fa32Ko4nCoJtk
+ uFBVU+v1vlXQvWtocrpiCBV0ecQzRM0/w0poWnRVnl9NDQqVpko3v5KUJ1km5MICcoKhELmurXn
+ EOOF4jFeYDg16/gBYgrvcLj6V8GelPI57xmOpuAXkTAejQwBDaV72y5L3kXtBHArQqQmeqrP7rJ
+ 7kLpQg==
+X-Received: by 2002:a17:907:c8c5:b0:bd1:1391:c326 with SMTP id
+ a640c23a62f3a-bd517813aecmr316160966b.15.1778870109239; Fri, 15 May 2026
+ 11:35:09 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260515054327.1033466-1-w.egorov@phytec.de>
- <20260515145400.GB1858239@bill-the-cat>
- <CAFLszTid-e+NWrFxoorfrUT23_mztUZP8FRbmT9FJ55M8A+FXA@mail.gmail.com>
- <20260515160256.GF1858239@bill-the-cat>
- <CAFLszThfUMe=67xwzbv6TvugH3iCOO=-EoYk6oUshKru-wpDQw@mail.gmail.com>
- <20260515182441.GI1858239@bill-the-cat>
-In-Reply-To: <20260515182441.GI1858239@bill-the-cat>
+References: <20260511220555.GM1858239@bill-the-cat>
+ <CAFLszThULFjq_R4A1nWYjQcQ4Odw3aZ200RPmQ56Ecf3gO4UYA@mail.gmail.com>
+ <20260515141043.GY1858239@bill-the-cat>
+ <CAFLszTg8HQK-tkCnGkH_Reju6frdNzPZNF6d+ekwKtWvWTrLmA@mail.gmail.com>
+ <20260515155535.GD1858239@bill-the-cat>
+In-Reply-To: <20260515155535.GD1858239@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 15 May 2026 12:32:30 -0600
-X-Gm-Features: AVHnY4KlxEnTlEU2X3JYYUeMU3lZsjSr9eAAT2cCuosIg2wseRj7QmTCiwrZ_mQ
-Message-ID: <CAFLszTjHaqck4gVDSiBw0M9V3yZLzUa8+EjaW94G9JcO=-Ny8Q@mail.gmail.com>
-Subject: Re: [PATCH] Makefile: binman: Search board directory before srctree
+Date: Fri, 15 May 2026 12:34:55 -0600
+X-Gm-Features: AVHnY4KhlJnZlPuVYsiYdwOin9llGpgSW0nX5oIFBKmuHFakSGM-bs7WatbsDz8
+Message-ID: <CAFLszTiKLMkvbL86QXbOC6cKXUt2gLYo5c3w2coFFcFk5mBR-w@mail.gmail.com>
+Subject: Re: [ANN] U-Boot v2026.07-rc2 released
 To: Tom Rini <trini@konsulko.com>
-Cc: nm@ti.com, Wadim Egorov <w.egorov@phytec.de>, ilias.apalodimas@linaro.org, 
- marek.vasut+renesas@mailbox.org, sughosh.ganu@arm.com, u-boot@lists.denx.de,
- upstream@lists.phytec.de
+Cc: u-boot@lists.denx.de, u-boot-custodians@lists.denx.de, 
+ u-boot-board-maintainers@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -118,83 +114,66 @@ X-Virus-Status: Clean
 
 Hi Tom,
 
-On Fri, 15 May 2026 at 12:24, Tom Rini <trini@konsulko.com> wrote:
+On Fri, 15 May 2026 at 09:55, Tom Rini <trini@konsulko.com> wrote:
 >
-> On Fri, May 15, 2026 at 12:13:50PM -0600, Simon Glass wrote:
+> On Fri, May 15, 2026 at 09:05:37AM -0600, Simon Glass wrote:
 > > Hi Tom,
 > >
-> > On Fri, 15 May 2026 at 10:03, Tom Rini <trini@konsulko.com> wrote:
+> > On Fri, 15 May 2026 at 08:10, Tom Rini <trini@konsulko.com> wrote:
 > > >
-> > > On Fri, May 15, 2026 at 09:35:10AM -0600, Simon Glass wrote:
+> > > On Fri, May 15, 2026 at 06:49:25AM -0600, Simon Glass wrote:
 > > > > Hi Tom,
 > > > >
-> > > > On Fri, 15 May 2026 at 08:54, Tom Rini <trini@konsulko.com> wrote:
+> > > > On Mon, 11 May 2026 at 16:06, Tom Rini <trini@konsulko.com> wrote:
 > > > > >
-> > > > > On Fri, May 15, 2026 at 07:43:27AM +0200, Wadim Egorov wrote:
+> > > > > Hey all,
 > > > > >
-> > > > > > A file like rm-cfg.yaml accidentally left in the source tree root
-> > > > > > shadows the board-specific copy. binman builds the wrong YAML, the
-> > > > > > resulting rm-cfg.bin may match a different SoC, and we end up with
-> > > > > > the following error:
-> > > > > >
-> > > > > >   k3_system_controller sysctrler: k3_sysctrler_start:
-> > > > > >       Boot Notification response failed. ret = -110
-> > > > > >
-> > > > > > Move the board directory ahead of the srctree root so that the
-> > > > > > most-specific match wins.
-> > > > > >
-> > > > > > Signed-off-by: Wadim Egorov <w.egorov@phytec.de>
-> > > > > > ---
-> > > > > >  Makefile | 2 +-
-> > > > > >  1 file changed, 1 insertion(+), 1 deletion(-)
-> > > > > >
-> > > > > > diff --git a/Makefile b/Makefile
-> > > > > > index 552328f9f2c..1ec29dfe0be 100644
-> > > > > > --- a/Makefile
-> > > > > > +++ b/Makefile
-> > > > > > @@ -1682,7 +1682,7 @@ cmd_binman = $(srctree)/tools/binman/binman $(if $(BINMAN_DEBUG),-D) \
-> > > > > >               build -u -d $(binman_dtb) -O . -m \
-> > > > > >               --allow-missing --fake-ext-blobs \
-> > > > > >               $(if $(BINMAN_ALLOW_MISSING),--ignore-missing) \
-> > > > > > -             -I . -I $(srctree) -I $(srctree)/board/$(BOARDDIR) \
-> > > > > > +             -I . -I $(srctree)/board/$(BOARDDIR) -I $(srctree) \
-> > > > > >               $(foreach f,$(of_list_dirs),-I $(f)) -a of-list=$(of_list) \
-> > > > > >               $(foreach f,$(BINMAN_INDIRS),-I $(f)) \
-> > > > > >               -a atf-bl1-path=${BL1} \
+> > > > > So it's release day and I have tagged and pushed things out.
 > > > > >
-> > > > > Why do we need to look in $(srctree) itself?
+> > > > > As I mentioned earlier today[1], I would like to again thank DENX (and
+> > > > > the Denk family) for supporting the project for so long, and we're
+> > > > > starting the process of moving our infrastructure to the OSU OSL lab and
+> > > > > the u-boot-project.org domain.
+> > > > >
+> > > > > The delta between -rc1 and -rc2 looks OK to me, and I do still think
+> > > > > there's a few outstanding PRs to come in and a few things I should pick
+> > > > > up as well. But, the next branch is now open and so bigger changes
+> > > > > should target that and I will be applying a few things there shortly.
+> > > > >
+> > > > > To repeat what I said in rc2 (and will keep repeatint) is that it might
+> > > > > really be time to retire support for running our tools on Windows under
+> > > > > MSYS, rather than something like WSL. The move to support more modern
+> > > > > OpenSSL versions has hit a lack of support problem in MSYS[2].
 > > > >
-> > > > See for example:
+> > > > I'm not really the right person to answer this, since I'm not a
+> > > > Windows user. But as I understand it, this would mean not building
+> > > > Windows executables anymore. Is that right?
 > > > >
-> > > > arch/arm/dts/k3-j721e-binman.dtsi:308:  private-key =
-> > > > "arch/arm/mach-k3/keys/custMpk.pem";
+> > > > Should we perhaps just build without the pkcs11-provider feature?
 > > >
-> > > That's not great, I'm sorry I missed it at the time. I wonder how easy
-> > > replacing that key is with a non-dummy key. Hopefully it's done in a way
-> > > that doesn't encourage checking private keys in to repositories..
+> > > In the age of WSL, I'm not sure the value of supporting MSYS. If someone
+> > > is using this, and steps up to resolve the problem, great. Otherwise we
+> > > should end up dropping it. Unlike the macOS side, we haven't had a
+> > > report of a user in well over a decade I think at this point.
 > >
-> > Typically we would use an environment var passed in from the Makefile,
-> > as we do with BL31, TEE, TI_DM, etc.
+> > We were certainly using this when UPL was being worked on- 2023 I
+> > think. The Tianocore people use Windows and needed mkimage.
 > >
-> > >
-> > > > Also, people sometimes put files in the source tree, e.g. BL31 images,
-> > > > in the hope that they will be found.
-> > >
-> > > That's also a bad practice and what BINMAN_INDIRS is for.
+> > I took a bit of a look at what is involved here. Basically with WSL
+> > you should be able to run 'wsl.exe mkimage ...' and things should
+> > work. I haven't actually tried it though.
 > >
-> > Yes, but that came quite a bit later with the bintool stuff (2021).
+> > It would not be too hard to add the package to MSYS, but that just
+> > makes it build...it would not actually be useful without hooking into
+> > Windows APIs about which I have no knowledge.
 > >
-> > Anyway, with a bit of work I believe we could drop the source dir.
-> > Would you like to look at it, or should I?
+> > So I agree it is best to retire it, perhaps document WSL as the means
+> > to run mkimage - will we be able to have some CI tests for it?
 >
-> Well, the first step would be getting some more feedback on how people
-> override some of these files for example. Even more environment files
-> seems like a bad idea and I'm not sure what BINMAN_INDIRS can't cover
-> today.
+> WSL is just Linux userspace, I don't think there's a need to for us to
+> add a test on top there.
 
-Assuming you mean 'environment variables', we do need the actual
-filename, not just the directory. We could have default filenames for
-each entry type, I suppose. Some do already.
+Ah yes.
 
 Regards,
 Simon
