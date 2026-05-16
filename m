@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29FCCCD4851
-	for <u-boot@archiver.kernel.org>; Sun, 17 May 2026 03:17:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37B16CD4F3C
+	for <u-boot@archiver.kernel.org>; Sun, 17 May 2026 03:17:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CB988846CB;
-	Sun, 17 May 2026 05:15:44 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 155FA84807;
+	Sun, 17 May 2026 05:15:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=seznam.cz
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=seznam.cz header.i=@seznam.cz header.b="J+XlmVNB";
+	dkim=pass (2048-bit key; secure) header.d=seznam.cz header.i=@seznam.cz header.b="t2zba1Ww";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C299384690; Sat, 16 May 2026 20:21:37 +0200 (CEST)
+ id 15B208465A; Sat, 16 May 2026 20:21:38 +0200 (CEST)
 Received: from mxd-3-706.seznam.cz (mxd-3-706.seznam.cz
  [IPv6:2a02:598:96:8a00::1200:706])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D27B483AA9
- for <u-boot@lists.denx.de>; Sat, 16 May 2026 20:21:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2497C84686
+ for <u-boot@lists.denx.de>; Sat, 16 May 2026 20:21:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=seznam.cz
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=michael.srba@seznam.cz
 Received: from email.seznam.cz by smtpc-mxd-85fb448c55-l247v
  (smtpc-mxd-85fb448c55-l247v [2a02:598:96:8a00::1200:706])
- id 019161d85a9f35b10038ad86; Sat, 16 May 2026 20:21:07 +0200 (CEST)
+ id 73537e27285d2a4e72fab279; Sat, 16 May 2026 20:21:07 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=seznam.cz; s=szn1;
- t=1778955667; bh=vyKAlEKchfptvJhC/zT86tbfKDq+gmg225q31xQlLX8=;
+ t=1778955667; bh=GwxyOhlD2XpG2XnMo5fBTDo1G8Q0ci6gkhAmcwDEz+g=;
  h=From:Date:Subject:MIME-Version:Content-Type:
  Content-Transfer-Encoding:Message-Id:To:Cc;
- b=J+XlmVNBwLThSyqgsJiAeh0NHaUZzSXR4QDIT3cOb0Ml7XH+OUHNgh2qXDoDry9//
- 5AsL1IxS1Egt+wf5HzkrUXFYHCz6tK4FzuVgfLfe+w3YsnUS83e/eFe2aPNDj8fo7K
- tAI6nRQuuPjxhAYiUrxSO/6g2YU+g/5pL+UUZV6aJxr1PePA5PziahVGxR3k8TZTmf
- MJeUcw+wckIcFWKyGd/YVku/4uQ567urfvTwhyvBCF0e+EbL3O17wsaJJQg01kyIcq
- Cyc7eyWV5y8Taymfac4adr8ATmbISBlwUPhWRr9X+boXwZmxyttr1+BlLTE00uIJwV
- RjPVa6XWZ64kA==
+ b=t2zba1WweWEe5C7QhZ3s+lrUqSPpSnMh1tU74NRrNbVsMMlznjo38bMNSjXtWFL+N
+ yipz6hqN0/K+RYiHXkb0IXZyqDUbpmI4X26HdXfPGiOnSb75MV45uK5sYpwFinGAUG
+ Trmc2fVvi/2J2VrGpmXjH4/UKHPnSkxwkoMcxM8kCMrqWpR4ThXOkufls+C2kxcjC1
+ tv5WfxpnHCIpbT9xBagbGMS2Xnpyi8kNT3fZ72t0dtP1uHU+4c4Q8h1Eunmt0gXGyo
+ XXfQom5Skj6t2sPgXMJD9kakj5OtsLfdQ5DYc/TlpdYpynNp9PzxbLu3OT6z8/IDvh
+ TlP7hI1ZtcvQA==
 Received: from [127.0.0.1] (ip-111-27.static.ccinternet.cz [147.161.27.111])
  by smtpd-relay-745c4d9bbb-4gnxc (szn-email-smtpd/2.0.73) with ESMTPA
- id 03fd7213-c969-49c1-beef-32edb9e3972a;
- Sat, 16 May 2026 20:20:33 +0200
+ id b0b1f2ca-85cc-46a9-82cf-118286504a34;
+ Sat, 16 May 2026 20:20:37 +0200
 From: michael.srba@seznam.cz
-Date: Sat, 16 May 2026 20:19:55 +0200
-Subject: [PATCH v8 06/12] mach-snapdragon: Kconfig: fix duplicate
- SYS_MALLOC_LEN
+Date: Sat, 16 May 2026 20:20:01 +0200
+Subject: [PATCH v8 12/12] dts: add u-boot specific sdm845 .dtsi and a .dtsi
+ for shift-axolotl
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260516-qcom_spl-v8-6-69b55c9abffe@seznam.cz>
+Message-Id: <20260516-qcom_spl-v8-12-69b55c9abffe@seznam.cz>
 References: <20260516-qcom_spl-v8-0-69b55c9abffe@seznam.cz>
 In-Reply-To: <20260516-qcom_spl-v8-0-69b55c9abffe@seznam.cz>
 To: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>, 
@@ -109,26 +109,47 @@ X-Virus-Status: Clean
 
 From: Michael Srba <Michael.Srba@seznam.cz>
 
+The board .dtsi just includes the SoC-specific .dtsi, which
+adds bootph-all markings to upstream dts nodes which are
+needed in SPL.
+
 Signed-off-by: Michael Srba <Michael.Srba@seznam.cz>
 Reviewed-by: Simon Glass <sjg@chromium.org>
 ---
- arch/arm/mach-snapdragon/Kconfig | 3 ---
- 1 file changed, 3 deletions(-)
+ arch/arm/dts/sdm845-shift-axolotl-u-boot.dtsi |  2 ++
+ arch/arm/dts/sdm845-u-boot.dtsi               | 16 ++++++++++++++++
+ 2 files changed, 18 insertions(+)
 
-diff --git a/arch/arm/mach-snapdragon/Kconfig b/arch/arm/mach-snapdragon/Kconfig
-index f863daf6bb9..c195d478512 100644
---- a/arch/arm/mach-snapdragon/Kconfig
-+++ b/arch/arm/mach-snapdragon/Kconfig
-@@ -11,9 +11,6 @@ config SYS_VENDOR
- 	  Based on this option board/<CONFIG_SYS_VENDOR>/<CONFIG_SYS_BOARD>
- 	  will be used as the custom board directory.
- 
--config SYS_MALLOC_LEN
--	default 0x10000000
--
- config SYS_MALLOC_F_LEN
- 	default 0x2000
- 
+diff --git a/arch/arm/dts/sdm845-shift-axolotl-u-boot.dtsi b/arch/arm/dts/sdm845-shift-axolotl-u-boot.dtsi
+new file mode 100644
+index 00000000000..d41210ab23a
+--- /dev/null
++++ b/arch/arm/dts/sdm845-shift-axolotl-u-boot.dtsi
+@@ -0,0 +1,2 @@
++// SPDX-License-Identifier: GPL-2.0
++#include "sdm845-u-boot.dtsi"
+diff --git a/arch/arm/dts/sdm845-u-boot.dtsi b/arch/arm/dts/sdm845-u-boot.dtsi
+new file mode 100644
+index 00000000000..b029264555b
+--- /dev/null
++++ b/arch/arm/dts/sdm845-u-boot.dtsi
+@@ -0,0 +1,16 @@
++// SPDX-License-Identifier: GPL-2.0
++&gcc {
++	bootph-all;
++};
++
++&usb_1_hsphy {
++	bootph-all;
++};
++
++&usb_1_dwc3 {
++	bootph-all;
++};
++
++&rpmhcc {
++	bootph-all;
++};
 
 -- 
 2.54.0
