@@ -4,102 +4,145 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3CA89CD4851
-	for <u-boot@archiver.kernel.org>; Sat, 16 May 2026 00:11:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88064CD343F
+	for <u-boot@archiver.kernel.org>; Sat, 16 May 2026 01:00:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ABB1384877;
-	Sat, 16 May 2026 02:11:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 77FED84877;
+	Sat, 16 May 2026 03:00:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="TIoW46kZ";
+	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="l3E/SRpQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3362F84886; Sat, 16 May 2026 02:11:07 +0200 (CEST)
-Received: from mail-ua1-x92b.google.com (mail-ua1-x92b.google.com
- [IPv6:2607:f8b0:4864:20::92b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id DE0EF8488A; Sat, 16 May 2026 03:00:51 +0200 (CEST)
+Received: from AS8PR04CU009.outbound.protection.outlook.com
+ (mail-westeuropeazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::3])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 867DE84812
- for <u-boot@lists.denx.de>; Sat, 16 May 2026 02:11:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4CA4E84713
+ for <u-boot@lists.denx.de>; Sat, 16 May 2026 03:00:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=raymondmaoca@gmail.com
-Received: by mail-ua1-x92b.google.com with SMTP id
- a1e0cc1a2514c-95f6b47b309so50756241.0
- for <u-boot@lists.denx.de>; Fri, 15 May 2026 17:11:01 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1778890261; cv=none;
- d=google.com; s=arc-20240605;
- b=B2d0BggI2SNk/kZSXwp8nOpRpQgwGlGibHqDgzU1WAb46Azpuj0J9UP31k+yRWbrNB
- aeSl4VGu244Pf80kBj6bqeVsbY7N2zKqTOgiywgUl6b+46pteJl164yHbGjsxGlc/P8C
- ib5Gjdyg0KGK3tX43PLr2ltGKBjt/7m1FOhgbIb6LJljzkY9QP+YLqd4C+t+DYxEuKSG
- 7wqDTKjRIUOeO+du4z307P/bxyQPEOp/qDy+LlMDww88CqsEYg3kByckBjoqZwiHWxbW
- sTrQTyJeF+7BvqB8itLHMU53jvSsZ4Pev7NAdoBohkyF+75MbMEjPhj+sPpEaMQelRD2
- 5v2g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=xWGve6nAq0oy2xY/P4XlvKrHBnlY0TqCFw9SrvowwCU=;
- fh=3cGkqt4Xgv2w9dTeeIJFEJ5AO4AvGobPArcY4WlS1wc=;
- b=hA13HqfNoP31TvYkC26K/S/0usZo+twh40s27nqD+H9QMH5B+utQrm14xEjJrRmGaj
- S40FxM1fKL4fVscMO2S6Yi5dkZ5zd9WcCg9/GdENZhUlCfzOe6FqEOFpZjxr2TqR03kb
- 9VpLy3ZykhMIerp9olIYw1MR3RycTyT2yS0fJU/M7A1gPMPRZ8pGBGl7+FR5KcR6eGB4
- zB9rL72LpudN0d5mOjQteqH7J81LeWMbs6R+c4gMIqWxV/UD5v79fWC85utYF7IKMUB5
- OsOcVoad04o8ZtYgWoUrWYQJxHBDDy4I8TLJUqViMF3ocz613Y4aJpNH3bO6pqN7HFOn
- v6VA==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1778890261; x=1779495061; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=xWGve6nAq0oy2xY/P4XlvKrHBnlY0TqCFw9SrvowwCU=;
- b=TIoW46kZX0ajonPd1Rk4EpfAdymZUWQ+g0sjIFr9Of/7t2koB+KxtMxOcgIFFSiEcq
- +bCJQct01/VOEkMrsWyumNDk8Tr4M3Bw+DE8J+gJyuSvQIDxod9LgleGW8tcgWvqiePn
- Q9SLyMkeV5Ak8t1FTkykqFz3CiICd92d0SWyvDMY3pdsjhSyuPNHxhEU3p0gpPS+vJ4G
- GYSWzU7v1glUBdBpjV9ZmkxtMJVE6SqPxqy2VjKcz6eBbaxXvE6lLPdXyJxNuDn75I8V
- 8laJtqhN/dJA8qbTp+T3qBTJTC+czM2cV0QmghozOGQ5vYeRLe/XsM73n+15XL2uavQD
- 7dDQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778890261; x=1779495061;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=xWGve6nAq0oy2xY/P4XlvKrHBnlY0TqCFw9SrvowwCU=;
- b=YP/2252vAlR5BoQjvjl911AABy7V1tUi6E5qRaFFIWTztAbaXj4Dw/pZz06Au2Xv/1
- COQEKAt6gWy+P2IeW8RcttqK8Gy2ppwwmXTL5qpbKAzwpwcJwBJjWKTRr2I6jUjklBE8
- JVSBREnn5YHStzoVbko2oPHyNIRibi8KBMe/cStvZdcCQC/f6dJrRMJSsCcZRgP5tpOg
- bwoBMZv+/K/y9JGA2pNRwKQcCqB9l6nZ8zMhP6YbgTYyW3N2Kva0O9eTjBrqF2TihnS1
- 0QcSdjpQr1cUkAomGpQZZaZk6nkZuQe7vYB51DKl01j98tSmJ0E4py/LWHwc7JGMRSRW
- dt9g==
-X-Gm-Message-State: AOJu0Yx4Xjz/oYJLAPmxwwTUYvK8DKSr7kSSI43IvLCA5a+DQbzw0qTJ
- g2w3/cVHEIQ2tpfnX0BNQkkaJQ3T9pHKzCUwBKRzQFPTGqnQkK1k8J4d70f6hCAF0vrd0V8jgtc
- gl4ZpPK1zJcS202QMlr1PiHVRU0wMpPVjoQ==
-X-Gm-Gg: Acq92OFAeYsjhqchg2N5BnxuS4JHhKxFAIunqmJfM5SGTrjH2JLpY17t4jMvuLRC42e
- j8D94hqWJElQ7yuOkQWPCRmSIS4W8MVRIQcv2k6p/wb8tt/n9sMvN9pru7DENBQPacfhmhU1VbS
- ELaBe1arWsHi3yvYLKRdom7Wk37NEwrLMnb3OT4ygFILHBB0DCQingwJJaSgN0yu5D1DT/7KA2p
- Cb+SQj3c4UEm0u8RwybXnh875UKf0Moy2Vv73NDy9HxKrGA8Ut5b+mEMX7V3PkMuv3NTMpP7L86
- iG2kHR+fJ7tTwoo2wnE=
-X-Received: by 2002:a05:6102:6444:b0:611:6fef:90d with SMTP id
- ada2fe7eead31-63a404b93c7mr3840687137.31.1778890260526; Fri, 15 May 2026
- 17:11:00 -0700 (PDT)
+ spf=pass smtp.mailfrom=mikhail.kshevetskiy@genexis.eu
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=LTWpgSH0xFcZcoIa+4VDNdsEURX1JKpWqWjTEuGQAXyV/fmCZfEu4MCQL3AIj84zbOaMT0hV21VsiHavJZZUICsMF1mwF4Fe6Bp1iSfLq3UyuRgYGSHsb2ji74AYPHi0l4ALggm5ziwKmFs7xzyc6bYayG4x5bpGwhRH8ZgNT7i8EnWq8aMZHaQGBlSKMa3DgbC1Ae4L0qigVWCDKkUT3HnNMRlxssYD4KUtJvknGcB+5GpugozWQbvUCgfBHWHSVEnabNAbF3u1bkOezkpWgZauPKiw90ZP+XG1HYWyiGbqUPC94M7cezWgaETLWuY/y5lwxSXqHeK3dCNFolmeJg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=/PFDGK4SPFrRF8+EXdt4Y87gmL0VkZZaHoFLAsG2DpM=;
+ b=BCmA0UxoOM7Dk+3bl1LNs571oLl/MvdEbXEegYdkb5SlgXpOaqx8mpZ4NU9UYRuXjaikNKAnW6wa4PwAeTsU59EG2y6FpLqGB+oeQg+xZVRpmMv2Rfb4vJjm8AE1eaaBvtiK1jedIAy5iQjLv53WmkkILEZux+gqNQLueng10tfdeoK8v6gqDL14IExTdqp3PtxU536kiRpeZbakGLh7BH2EKL4xuKOoCCmWgeAohf7az2d6l4gyOP5PesabpQJfF3ukmick1QiA/aHya6DHjkVgarQHhX+RUD5Ub6/JiwadRBxFwnRwlt2s04Mrrk55NEVBPGmvsuAib7jx0aBQpg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=genexis.eu; dmarc=pass action=none header.from=iopsys.eu;
+ dkim=pass header.d=iopsys.eu; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iopsys.eu; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=/PFDGK4SPFrRF8+EXdt4Y87gmL0VkZZaHoFLAsG2DpM=;
+ b=l3E/SRpQzk6e1u4bnE6ExySokhZqw4JmwCO/pIJyiVlvshk3uHF3PMfHYxk4+THuPwHfQYI7dDbjRM84AYYEQQPLa5im2q5xaj67W0wRpcZVyz7uqUM29EU/Hh6udzqQ2AXp4Ty01znmvlocanlWDMQ1x44RkVmQRLq8p7ypdEn2E6VymLGORG82+fkJ7Y/eMf2MC2pqHZvcWhgB59qXVbmprGZghXrbLBABCbXBsWm0JmMeVjFvTlK3ryQZDjDyePFsbDVroC508lLQ40mr093rKRdlRddvH5Tx7aJ/KZJKbkwHkU908hFko35QTVctoYcW2tl4/KH+73khZv1Lbg==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=iopsys.eu;
+Received: from DU2PR08MB10037.eurprd08.prod.outlook.com (2603:10a6:10:49a::20)
+ by AS8PR08MB7917.eurprd08.prod.outlook.com (2603:10a6:20b:538::18)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.25.21; Sat, 16 May
+ 2026 01:00:45 +0000
+Received: from DU2PR08MB10037.eurprd08.prod.outlook.com
+ ([fe80::3c7:6d2e:8afe:e4dc]) by DU2PR08MB10037.eurprd08.prod.outlook.com
+ ([fe80::3c7:6d2e:8afe:e4dc%5]) with mapi id 15.21.0025.016; Sat, 16 May 2026
+ 01:00:45 +0000
+From: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+To: Tom Rini <trini@konsulko.com>, Christian Marangi <ansuelsmth@gmail.com>,
+ Simon Glass <sjg@chromium.org>, David Lechner <dlechner@baylibre.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Peng Fan <peng.fan@nxp.com>,
+ Anis Chali <chalianis1@gmail.com>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Sean Anderson <sean.anderson@linux.dev>, Yao Zi <me@ziyao.cc>,
+ "Yury Norov (NVIDIA)" <yury.norov@gmail.com>,
+ Geert Uytterhoeven <geert+renesas@glider.be>,
+ Alexandre Belloni <alexandre.belloni@bootlin.com>,
+ Andy Shevchenko <andriy.shevchenko@intel.com>,
+ Heiko Schocher <hs@nabladev.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de,
+ Lorenzo Bianconi <lorenzo@kernel.org>,
+ Markus Gothe <markus.gothe@genexis.eu>,
+ Matheus Sampaio Queiroga <srherobrine20@gmail.com>,
+ Benjamin Larsson <benjamin.larsson@genexis.eu>
+Cc: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+Subject: [PATCH v7 00/12] pinctrl: add support of Airoha SoCs
+Date: Sat, 16 May 2026 04:00:23 +0300
+Message-ID: <20260516010036.1034352-1-mikhail.kshevetskiy@iopsys.eu>
+X-Mailer: git-send-email 2.53.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: GV3PEPF0001DBD3.SWEP280.PROD.OUTLOOK.COM
+ (2603:10a6:158:401::6a5) To DU2PR08MB10037.eurprd08.prod.outlook.com
+ (2603:10a6:10:49a::20)
 MIME-Version: 1.0
-References: <20260514175457.4047707-1-trini@konsulko.com>
- <20260514175457.4047707-4-trini@konsulko.com>
- <CAMDkj5zyg1YcjwphhqKiZYX9DpzwjzDWLdecT2=a_0sGbhSCjw@mail.gmail.com>
- <20260515163054.GG1858239@bill-the-cat>
-In-Reply-To: <20260515163054.GG1858239@bill-the-cat>
-From: Raymond Mao <raymondmaoca@gmail.com>
-Date: Fri, 15 May 2026 20:10:48 -0400
-X-Gm-Features: AVHnY4LWzR_EMX4S9g-uABiu5qGgVFopw_SSnHPzmT3Qbz_-IVsCRZLXf4ntZY4
-Message-ID: <CAMDkj5yb1cmqe3FEYnoQzPpG5+VCasi4FX7+RGwe8BLMDwo36w@mail.gmail.com>
-Subject: Re: [PATCH 3/3] bloblist: Rework bloblist_init and bloblist_maybe_init
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DU2PR08MB10037:EE_|AS8PR08MB7917:EE_
+X-MS-Office365-Filtering-Correlation-Id: 6b8cafa4-2caf-4905-d95e-08deb2e68f70
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|52116014|7416014|376014|366016|56012099003|921020|11063799003|18002099003|38350700014;
+X-Microsoft-Antispam-Message-Info: AL45H3kVh6U7milxupo7DdodLo9rnv6WwCYv9Umj98M0qsR6/ksBdYKSTHG+t0THujnx5yIBr8oi0PNhFsxgx91Y1BiLklyRvgMdOBI1nUsR7YIgTkvCpVMjhwIZ0S2vYz9BF6gYnktgSV41GBEMNTobbwe1nDMDuqnznb7FmXEoAE+OPMz2GcydDyraolAKPkKsHDkYma6CXWuVWjgRHGxij4qvBCpEtVcCJoQfIg8CuLt4mvc+eSs9A/XjsieEYDg9WLj5XvKqW2PG4ZUZx+K3FK6j7vulbz1E2ShiqKZ0MnNDBirXBFMldqnW0gdoTfiT+bTyDbIjeHLyqXHHCRrSx+NgHPfca0oG9j5iOUBHxSids9MXUUz3aAqtEoRI4BmhdHtOpDUgfsAjAENLif6Y7nq5Fh0phg7HPH2JyqEekKqZvP20382nASDv1a9Je1tT0jJvzbUFRV54l6OWM9quli/5KAf0PUAT9PeDugZBMdeL5stiFdsjht0xZ5bZpFoY65qcSWII5AkNnAyDRPiahDlm/iepgfioU+g8zsUwX7mVd2HomjUG/rmjlHVpEBqQkgn2gTYj9SWIybUJIp51xtR5Qr+rDfzIGul2dbEY3D3kFAycU0gzO7n30ZpjF3vVCijhuYz0Mnk/Rrl9VGLiUqHqfENTRFchFA+3TUgiSo58re1LWyzV1FmBGQLTXuC/OAPQxs7xER8yMHNkOw280QS2qWyGHB6H5QtYCRDUpGodQOaSPb97GouifeTg+eiwPnJBMyx+Y+jGp2hLUQ==
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DU2PR08MB10037.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(52116014)(7416014)(376014)(366016)(56012099003)(921020)(11063799003)(18002099003)(38350700014);
+ DIR:OUT; SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?TTd0TDMwRWR2ZFg3djB1WE90SFpZSUMwUlhzS2k0Sy9vMnN5V2RuL01nRVhP?=
+ =?utf-8?B?NWVWdlFuN2lZanMwYmFMR1NERU8zTkRVZ0FRN2N3eEdhOEgzT0FpZzg1dDZy?=
+ =?utf-8?B?V1NZYUdOLzZEWndMbkNOVjRXYlpPQVlGZnFXSlRQem5tbWxIL3hmNW5hK0Ir?=
+ =?utf-8?B?UGIzd1FvQzVlYVl3MnZYdXhhbFdySUg1MXIwR3BRcEc5QlVlaTdHVlNrZnNF?=
+ =?utf-8?B?b2tPeGY0ZHVuM1F6dWczNnJTQkZlNW1HR1MwMjlVZ0hNaTBDOUJvVU1IdVJo?=
+ =?utf-8?B?TW9xeE11Y2gyN3I2Y1JqZkZJcHNTWWIxRkxqZnY0a3dGTVRYekJwSmJ0N1Bk?=
+ =?utf-8?B?MGFyWThzQ0k3RUw3dnM0YVFMSE51UUkralY1cTh0Q0JsL01JNTBySzh4NTVF?=
+ =?utf-8?B?bnVhVjR5azRJSWxydkhqN2N2b0VFMWpza2kvTjdvSkRSR3puSzI3bzJ6eFIy?=
+ =?utf-8?B?TGxkWU12cDZTYUNLK0EyUmtIS0wzTGROcGRMdHBGcDU5U0twSnR3bUV5VkQy?=
+ =?utf-8?B?bG8rOGc4ZU1ZWTd2YzhWS1pIRDdqQ2FvMHhRWTk4YlkzRnB1c1Z4dmtkeTl6?=
+ =?utf-8?B?NFo4MVFWSU10bGhYSzJKa1Q1RmUzbGFxU01pWFpaZEE3SEdYS2QrL0ZIakRK?=
+ =?utf-8?B?NTFOSTg1cEtIdkNZN0NiQ0JSa1NiRGsrQzZqOFNnbHVqSys3TmZWZ3FVSjZ0?=
+ =?utf-8?B?WThJM25oVnJ4ZlN1dmFvNTVDaWFkRTRzUks1MndROWhVbGZSN3NJU3BHWjYr?=
+ =?utf-8?B?dUFXWllBMUNCWnZOUGF2Vlkwci9oYWo1VEE3MDlXY3VOT1lTQ01QQ3VXRDNh?=
+ =?utf-8?B?Zi9GUHYxcXp3OWhKcXBFQ0d4VTdGRmN4NjE3RE1pa04xSzV1cjNHNkRrcDJ4?=
+ =?utf-8?B?WDdvZ1pVMzUrbG9Mek5JNENTMkpqMXBaSmVPWUpKamdETVhwc01PeTlwYWV5?=
+ =?utf-8?B?Nk1qTGZNRGprcnNDTFJRRFFBZlZPM1l2dXpCWmJYd3BxSUh5V0lGWlZSVURu?=
+ =?utf-8?B?bUpKZGQzVlVtZDhxd0JNajA4ZE1jMVFLRzZCQ2dYd056WVArYkxlVGhVSnIx?=
+ =?utf-8?B?SlFNYmE5K0NZcGEvbjFWWEdhRENLNnloSEV3RjA5RjVRT3ZWb0k3Y3dpaEVh?=
+ =?utf-8?B?VGFwNkR3MUpxZmVQSzQ0UkdQb2NrVStPS0JFRGNDOHRtYWppaUIzbkVtK2JI?=
+ =?utf-8?B?WUkvcGE2dVJOcEpNemoyUVhxN05aWjV5RGdrT0Q1ZnBFeFJFbzNCZ0hiYlpx?=
+ =?utf-8?B?RmUvK3RoWXN6d0VWVmxkbUFoQzg3RzFwTmNFdWJnSHNHQXc4cVpDWVdQbVdx?=
+ =?utf-8?B?VDkvaUZFaE0zaStIalJVbzBieU5pQ2VGUnhsZDhDWkFRc0JTSGNRVzBFckhx?=
+ =?utf-8?B?WnhIZHVESjRZVFl6cGg2a0xhSEhwZ3pGeDN3V3dhQW0xZmxlTHhYOXVFQ3Fk?=
+ =?utf-8?B?c21vWFVqYndma2xmVHJVaC9GMTRBUG54MytnNXJTREJkVVE1dk9BTURjaVFF?=
+ =?utf-8?B?bTBLclFSdTJIVEZhV0k1UndvYTBlRGl0QlJHZTJBbjA4STRNcDAzckxDZk9I?=
+ =?utf-8?B?OHBmbUllMjVaNTU0aFZNbENiQ0Z1MTc0QnFwN2crSEFsQ3ZqcTVjY2hYUjFv?=
+ =?utf-8?B?UWdFdm9seXoyYm5lcGVSMlFuVzlBMzY4dzlRU0VyUEhLQUtSN0JlcEZjQVdn?=
+ =?utf-8?B?VUQ1bGVqOUJJcEUvL0Fra1pRWUtxdGxLQ256K0p6dGxWT2hMMU00QUdkUW0r?=
+ =?utf-8?B?bzc1RUdTdU5XdHZ2NHY4aGM4Qy9JUU90aFd3b2h6cDlySk5PTTFwRDk1Tjcw?=
+ =?utf-8?B?b1h6WXNQallRWFpwWm9lUlVxbmI2V01FNHowVCt1Smg1NStQMjZyaDdEeFRk?=
+ =?utf-8?B?QlBEaytNTkFFOFBtbWJWWVl6aTB6OG0xRnRaTjdzL04zc2szK1VYR3FjZ0dJ?=
+ =?utf-8?B?aFBCdjZ0ZHY5eWI4L3FBL2pzeG91WGNiaUh6ZVdRQkZGNjRBY0FnSnFWMDVR?=
+ =?utf-8?B?QXpkelhxYUxYb0I1MGFxaTFxbzBkNmpOSzRFWUJZOGpKSVBvWTNmMVA0aTM4?=
+ =?utf-8?B?d3p4b2RkYVhybDRNSnNpQXdDVXZHVWJEY1NXd0czbzgvRGlPYm9IdFJvZXd1?=
+ =?utf-8?B?OTJwcWp6azhvdHV3VGtkRWxaTGk3Z1FSTGVMUy8xSGhRL0lHbHJpc09EcW9C?=
+ =?utf-8?B?U2l4RlZKY29jaDE4eE9EZEdITDBzQ1JoSlNoRUFDa3pMOW05QmtjcEdKM0d3?=
+ =?utf-8?B?N2hYaUNpeU1ZMHBSYlBLVmxIbjE4dlFzalFURW1iSnovN3pCc2hjMUIvak9J?=
+ =?utf-8?B?RTQ3TzJZMnJLamFhWUJrK0UwbytyelpjelgrMm42aGdhb0gxclN3Vm5BbndR?=
+ =?utf-8?Q?rpmcueiPxOtJfvP8=3D?=
+X-OriginatorOrg: iopsys.eu
+X-MS-Exchange-CrossTenant-Network-Message-Id: 6b8cafa4-2caf-4905-d95e-08deb2e68f70
+X-MS-Exchange-CrossTenant-AuthSource: DU2PR08MB10037.eurprd08.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 May 2026 01:00:45.5080 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8d891be1-7bce-4216-9a99-bee9de02ba58
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: CiURa1Mz7XM0tx0Oe5HPguZoPbewsCYI3KxwHXWHfHcvBQoIxmqqgJpQaVp+e985BZu0eqdMzfwL7JUl71m8UN9G/1tvmAp+O3Blfao3bfg=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR08MB7917
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -116,390 +159,103 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+This patch series add pin controller and gpio driver support for EN7523/
+AN7581/AN7583 SoCs. The driver based on official linux airoha pinctrl and
+gpio driver with Matheus Sampaio Queiroga changes.
 
-On Fri, May 15, 2026 at 12:30=E2=80=AFPM Tom Rini <trini@konsulko.com> wrot=
-e:
->
-> On Fri, May 15, 2026 at 11:05:47AM -0400, Raymond Mao wrote:
-> > Hi Tom,
-> >
-> > On Thu, May 14, 2026 at 1:55=E2=80=AFPM Tom Rini <trini@konsulko.com> w=
-rote:
-> > >
-> > > With bloblist, we need to both see if one already exists as well as
-> > > create one if it does not. However, the current implementation leads =
-to
-> > > odd cases where we attempt to create a bloblist before this is possib=
-le
-> > > and have things be overly complicated when we are given one to work
-> > > with.
-> > >
-> > > This reworks things to instead have a bloblist_exists function, which=
- as
-> > > the name implies checks for an existing bloblist. This is used in
-> > > the case of booting, to see if we have one and in turn if we have a
-> > > device tree there as well as in the bloblist_init function to see if =
-we
-> > > need to do anything.
-> > >
-> > > In practical details, we move the logic from bloblist_init that was
-> > > checking for a bloblist to the new bloblist_exists function and then =
-can
-> > > clarify the logic as it is much easier to state when we know we do no=
-t
-> > > have one rather than all the ways we might have one. Then we have the
-> > > locations that set gd->bloblist now also set the GD_FLG_BLOBLIST_READ=
-Y
-> > > flag.
-> > >
-> > > Signed-off-by: Tom Rini <trini@konsulko.com>
-> > > ---
-> > >  common/bloblist.c  | 144 +++++++++++++++++++++++--------------------=
---
-> > >  common/board_f.c   |   4 +-
-> > >  include/bloblist.h |  32 +++++-----
-> > >  lib/fdtdec.c       |  15 ++---
-> > >  4 files changed, 96 insertions(+), 99 deletions(-)
-> > >
-> > > diff --git a/common/bloblist.c b/common/bloblist.c
-> > > index 09afdd1f96b4..51ae9cc50a5f 100644
-> > > --- a/common/bloblist.c
-> > > +++ b/common/bloblist.c
-> > > @@ -448,6 +448,7 @@ int bloblist_new(ulong addr, uint size, uint flag=
-s, uint align_log2)
-> > >         hdr->align_log2 =3D align_log2 ? align_log2 : BLOBLIST_BLOB_A=
-LIGN_LOG2;
-> > >         hdr->chksum =3D 0;
-> > >         gd->bloblist =3D hdr;
-> > > +       gd->flags |=3D GD_FLG_BLOBLIST_READY;
-> > >
-> > >         return 0;
-> > >  }
-> > > @@ -475,6 +476,7 @@ int bloblist_check(ulong addr, uint size)
-> > >                 return log_msg_ret("Bad checksum", -EIO);
-> > >         }
-> > >         gd->bloblist =3D hdr;
-> > > +       gd->flags |=3D GD_FLG_BLOBLIST_READY;
-> > >
-> > >         return 0;
-> > >  }
-> > > @@ -576,90 +578,88 @@ int __weak xferlist_from_boot_arg(ulong __alway=
-s_unused *addr)
-> > >         return -ENOENT;
-> > >  }
-> > >
-> > > -int bloblist_init(void)
-> > > +bool bloblist_exists(void)
-> > >  {
-> > > -       bool fixed =3D IS_ENABLED(CONFIG_BLOBLIST_FIXED);
-> > > -       int ret =3D 0;
-> > > -       ulong addr =3D 0, size;
-> > > +       int ret;
-> > > +       ulong addr =3D 0;
-> > >
-> > >         /* Check if a valid transfer list passed in */
-> > > -       if (!xferlist_from_boot_arg(&addr)) {
-> > > -               size =3D bloblist_get_total_size();
-> > > -       } else {
-> > > -               /*
-> > > -                * If U-Boot is not in the first phase, an existing b=
-loblist must
-> > > -                * be at a fixed address.
-> > > -                */
-> > > -               bool from_addr =3D fixed && !xpl_is_first_phase();
-> > > -
-> > > -               /*
-> > > -                * If Firmware Handoff is mandatory but no transfer l=
-ist is
-> > > -                * observed, report it as an error.
-> > > -                */
-> > > -               if (IS_ENABLED(CONFIG_BLOBLIST_PASSAGE_MANDATORY))
-> > > -                       return -ENOENT;
-> > > -
-> > > -               ret =3D -ENOENT;
-> > > -
-> > > -               if (xpl_prev_phase() =3D=3D PHASE_TPL &&
-> > > -                   !IS_ENABLED(CONFIG_TPL_BLOBLIST))
-> > > -                       from_addr =3D false;
-> > > -               if (fixed)
-> > > -                       addr =3D IF_ENABLED_INT(CONFIG_BLOBLIST_FIXED=
-,
-> > > -                                             CONFIG_BLOBLIST_ADDR);
-> > > -               size =3D CONFIG_BLOBLIST_SIZE;
-> > > -
-> > > -               if (from_addr)
-> > > -                       ret =3D bloblist_check(addr, size);
-> > > +       if (!xferlist_from_boot_arg(&addr))
-> > > +               goto found;
-> > >
-> > > -               if (ret)
-> > > -                       log_debug("Bloblist at %lx not found (err=3D%=
-d)\n",
-> > > -                                 addr, ret);
-> > > -               else
-> > > -                       /* Get the real size */
-> > > -                       size =3D gd->bloblist->total_size;
-> > > -       }
-> > > +       /*
-> > > +        * If Firmware Handoff is mandatory but no transfer list is
-> > > +        * observed, report it as an error.
-> > > +        */
-> > > +       if (IS_ENABLED(CONFIG_BLOBLIST_PASSAGE_MANDATORY))
-> > > +               return false;
-> > >
-> > > -       if (ret) {
-> > > -               /*
-> > > -                * If we don't have a bloblist from a fixed address, =
-or the one
-> > > -                * in the fixed address is not valid. we must allocat=
-e the
-> > > -                * memory for it now.
-> > > -                */
-> > > -               if (CONFIG_IS_ENABLED(BLOBLIST_ALLOC)) {
-> > > -                       void *ptr =3D memalign(BLOBLIST_ALIGN, size);
-> > > -
-> > > -                       if (!ptr)
-> > > -                               return log_msg_ret("alloc", -ENOMEM);
-> > > -                       addr =3D map_to_sysmem(ptr);
-> > > -               } else if (!fixed) {
-> > > -                       return log_msg_ret("BLOBLIST_FIXED is not ena=
-bled",
-> > > -                                          ret);
-> > > -               }
-> > > -               log_debug("Creating new bloblist size %lx at %lx\n", =
-size,
-> > > -                         addr);
-> > > -               ret =3D bloblist_new(addr, size, 0, 0);
-> > > -       } else {
-> > > -               log_debug("Found existing bloblist size %lx at %lx\n"=
-, size,
-> > > -                         addr);
-> > > -       }
-> > > +       /*
-> > > +        * We have checked for a valid transfer list being passed. At=
- this
-> > > +        * point, if we do not have a fixed address for the bloblist,=
- we cannot
-> > > +        * be provided with one.
-> > > +        */
-> > > +       if (xpl_is_first_phase() || !IS_ENABLED(CONFIG_BLOBLIST_FIXED=
-))
-> > > +               return false;
-> > >
-> > > -       if (ret)
-> > > -               return log_msg_ret("ini", ret);
-> > > -       gd->flags |=3D GD_FLG_BLOBLIST_READY;
-> > > +       /*
-> > > +        * Check for a valid list as the configured address.
-> > > +        */
-> > > +       addr =3D IF_ENABLED_INT(CONFIG_BLOBLIST_FIXED,
-> > > +                             CONFIG_BLOBLIST_ADDR);
-> > > +       ret =3D bloblist_check(addr, CONFIG_BLOBLIST_SIZE);
-> > > +       if (!ret)
-> > > +               goto found;
-> > > +
-> > > +       log_debug("Bloblist at %lx not found (err=3D%d)\n", addr, ret=
-);
-> > > +       return false;
-> > >
-> > > +found:
-> > >  #ifdef DEBUG
-> > >         bloblist_show_stats();
-> > >         bloblist_show_list();
-> > >  #endif
-> > > -
-> > > -       return 0;
-> > > +       return true;
-> > >  }
-> > >
-> > > -int bloblist_maybe_init(void)
-> > > +int bloblist_init(void)
-> > >  {
-> > > -       if (CONFIG_IS_ENABLED(BLOBLIST) && !(gd->flags & GD_FLG_BLOBL=
-IST_READY))
-> > > -               return bloblist_init();
-> > > +       int ret;
-> > > +       ulong addr =3D 0, size =3D CONFIG_BLOBLIST_SIZE;
-> > > +
-> > > +       if (gd->flags & GD_FLG_BLOBLIST_READY) {
-> > > +               log_debug("Found existing bloblist size %x at %p\n",
-> > > +                         gd->bloblist->total_size, gd->bloblist);
-> > > +               return 0;
-> > > +       }
-> > > +
-> > > +       /*
-> > > +        * If Firmware Handoff is mandatory but no transfer list has =
-been
-> > > +        * observed by fdtdec_setup, report it as an error.
-> > > +        */
-> > > +       if (IS_ENABLED(CONFIG_BLOBLIST_PASSAGE_MANDATORY))
-> > > +               return -ENOENT;
-> > > +
-> > > +       /*
-> > > +        * If we don't have an existing bloblist, we either need
-> > > +        * to allocate one now, or initialize the fixed address
-> > > +        * space as a bloblist.
-> > > +        */
-> > > +       if (CONFIG_IS_ENABLED(BLOBLIST_ALLOC)) {
-> > > +               void *ptr =3D memalign(BLOBLIST_ALIGN, size);
-> > > +
-> > > +               if (!ptr)
-> > > +                       return log_msg_ret("alloc", -ENOMEM);
-> > > +               addr =3D map_to_sysmem(ptr);
-> > > +       } else
-> > > +               addr =3D IF_ENABLED_INT(CONFIG_BLOBLIST_FIXED,
-> > > +                                     CONFIG_BLOBLIST_ADDR);
-> > > +
-> > > +       log_debug("Creating new bloblist size %lx at %lx\n", size,
-> > > +                 addr);
-> > > +       ret =3D bloblist_new(addr, size, 0, 0);
-> > > +       if (ret)
-> > > +               return log_msg_ret("ini", ret);
-> > >
-> > >         return 0;
-> > >  }
-> > > @@ -687,7 +687,9 @@ int bloblist_check_reg_conv(ulong rfdt, ulong rze=
-ro, ulong rsig, ulong xlist)
-> > >                 return ret;
-> > >
-> > >         if (rfdt !=3D (ulong)bloblist_find(BLOBLISTT_CONTROL_FDT, 0))=
- {
-> > > -               gd->bloblist =3D NULL;  /* Reset the gd bloblist poin=
-ter */
-> > > +               /* Remove this bloblist from gd */
-> > > +               gd->bloblist =3D NULL;
-> > > +               gd->flags &=3D ~GD_FLG_BLOBLIST_READY;
-> > >                 return -EIO;
-> > >         }
-> > >
-> > > diff --git a/common/board_f.c b/common/board_f.c
-> > > index ce87c619e680..c39e3b940d3b 100644
-> > > --- a/common/board_f.c
-> > > +++ b/common/board_f.c
-> > > @@ -894,7 +894,9 @@ static void initcall_run_f(void)
-> > >         INITCALL(log_init);
-> > >         INITCALL(initf_bootstage); /* uses its own timer, so does not=
- need DM */
-> > >         INITCALL(event_init);
-> > > -       INITCALL(bloblist_maybe_init);
-> > > +#if CONFIG_IS_ENABLED(BLOBLIST)
-> > > +       INITCALL(bloblist_init);
-> > > +#endif
-> > >         INITCALL(setup_spl_handoff);
-> > >  #if CONFIG_IS_ENABLED(CONSOLE_RECORD_INIT_F)
-> > >         INITCALL(console_record_init);
-> > > diff --git a/include/bloblist.h b/include/bloblist.h
-> > > index e67b2a76358d..4c5787729654 100644
-> > > --- a/include/bloblist.h
-> > > +++ b/include/bloblist.h
-> > > @@ -488,10 +488,24 @@ const char *bloblist_tag_name(enum bloblist_tag=
-_t tag);
-> > >   */
-> > >  int bloblist_reloc(void *to, uint to_size);
-> > >
-> > > +/**
-> > > + * bloblist_exists() - Check for the prior existence of a bloblist
-> > > + *
-> > > + * This will check for a transfer list having been passed via standa=
-rd
-> > > + * convention. If CONFIG_BLOBLIST_PASSAGE_MANDATORY is selected and =
-one is not
-> > > + * found, we return false.
-> > > + *
-> > > + * If CONFIG_BLOBLIST_FIXED is selected, it uses CONFIG_BLOBLIST_ADD=
-R and
-> > > + * CONFIG_BLOBLIST_SIZE to check for a bloblist.
-> > > + *
-> > > + * Return: true if found, false if not
-> > > + */
-> > > +bool bloblist_exists(void);
-> > > +
-> > >  /**
-> > >   * bloblist_init() - Init the bloblist system with a single bloblist
-> > >   *
-> > > - * This locates and sets up the blocklist for use.
-> > > + * This creates a bloblist for use, if not already found.
-> > >   *
-> > >   * If CONFIG_BLOBLIST_FIXED is selected, it uses CONFIG_BLOBLIST_ADD=
-R and
-> > >   * CONFIG_BLOBLIST_SIZE to set up a bloblist for use by U-Boot.
-> > > @@ -508,22 +522,6 @@ int bloblist_reloc(void *to, uint to_size);
-> > >   */
-> > >  int bloblist_init(void);
-> > >
-> > > -#if CONFIG_IS_ENABLED(BLOBLIST)
-> > > -/**
-> > > - * bloblist_maybe_init() - Init the bloblist system if not already d=
-one
-> > > - *
-> > > - * Calls bloblist_init() if the GD_FLG_BLOBLIST_READY flag is not se=
-t
-> > > - *
-> > > - * Return: 0 if OK, -ve on error
-> > > - */
-> > > -int bloblist_maybe_init(void);
-> > > -#else
-> > > -static inline int bloblist_maybe_init(void)
-> > > -{
-> > > -       return 0;
-> > > -}
-> > > -#endif /* BLOBLIST */
-> > > -
-> > >  /**
-> > >   * bloblist_check_reg_conv() - Check whether the bloblist is complia=
-nt to
-> > >   *                            the register conventions according to =
-the
-> > > diff --git a/lib/fdtdec.c b/lib/fdtdec.c
-> > > index c67b6e8c133e..7fd7f7ff01e5 100644
-> > > --- a/lib/fdtdec.c
-> > > +++ b/lib/fdtdec.c
-> > > @@ -1822,17 +1822,12 @@ int fdtdec_setup(void)
-> > >         int ret =3D -ENOENT;
-> > >
-> > >         /*
-> > > -        * If allowing a bloblist, check that first. There was discus=
-sion about
-> > > -        * adding an OF_BLOBLIST Kconfig, but this was rejected.
-> > > -        *
-> > > -        * The necessary test is whether the previous phase passed a =
-bloblist,
-> > > -        * not whether this phase creates one.
-> > > +        * If allowing a bloblist, check that first. The necessary te=
-st is
-> > > +        * whether the previous phase passed a bloblist, not whether =
-this phase
-> > > +        * creates one.
-> > >          */
-> > > -       if (CONFIG_IS_ENABLED(BLOBLIST) &&
-> > > -           (xpl_prev_phase() !=3D PHASE_TPL ||
-> > > -            IS_ENABLED(CONFIG_TPL_BLOBLIST))) {
-> > > -               ret =3D bloblist_maybe_init();
-> > > -               if (!ret) {
-> > > +       if (CONFIG_IS_ENABLED(BLOBLIST) && (xpl_prev_phase() !=3D PHA=
-SE_TPL)) {
-> >
-> > I think this change drops the TPL-provided blobs on TPL->SPL boots.
-> > When TPL_BLOBLIST is selected, the next phase starts with
-> > xpl_prev_phase() =3D=3D PHASE_TPL.
-> > This new guard now skips bloblist_exists(), so gd->flags never gets
-> > GD_FLG_BLOBLIST_READY; the later bloblist_init() in common/spl/spl.c
-> > then creates a fresh bloblist and overwrites the fixed-address list
-> > from TPL.
->
-> Ah right, oops. I guess the only question is if we should continue to
-> optimize the TPL case (it can't exist) or just always check (maybe
-> there's some 4 stage boot..).
->
+The original Matheus Sampaio Queiroga driver can be taken from the repo:
+  https://sirherobrine23.com.br/airoha_an7523/kernel/commits/branch/airoha_an7523_pinctrl
 
-That really depends on whether we shall consider the scenario of TPL.
-For the case of the Arm Firmware Handoff, stages before BL2 are not
-considered to hand information over to the next stage via Transfer
-List (aka. bloblist in U-Boot).
+Additionally in the EN7523 case the patches removes existing gpio dts nodes
+and replaces them with pinctrl node. It should not be very dangerous, because:
+ * No official EN7523 gpio support present in U-Boot
+ * Legacy Linux EN7523 GPIO driver is mostly abandoned
+ * The same driver is planned for upstream linux/openwrt
 
-Regards,
-Raymond
+This patchset includes bitfield.h patches created for Linux kernel
+by Geert Uytterhoeven. It suits U-Boot fine. I preserve original author
+and original commit messages. It might be not a best strategy, because
+these patches refers to other linux kernel commits not added to U-Boot.
+Please note me, if there is a better way.
 
-> --
-> Tom
+The patches were tested on EN7523/AN7581/AN7583 boards.
+---
+Changes v2:
+ * pinctrl driver was split on common and per SoC parts
+ * EN7523 SoC support was added
+ * EN7523/AN7581 defconfigs were updated to activate
+   pinctrl/gpio support
+ * Board/SoC independent pinconf/pinctrl definitions
+   were moved to global includes
+
+Changes v3:
+ * add non-constant field_{prep,get}() helpers
+ * put airoha common code to a separate patch
+ * put en7523 dts change to a separate patch
+ * add support of "pinmux status" command
+ * address a lot of comments from David Lechner
+
+Changes v4:
+ * minor refactoring
+ * fix gpio initialization, so gpio driver becomes probed
+
+Changes v5:
+ * more bitfield changes
+ * sort contents of pinctrl makefile
+ * address more issues found by David Lechner
+
+Changes v6:
+ * pinctrl makefile sorting/formatting was moved to separate commit
+ * replace 'tristate' by 'bool' in airoha Kconfig (thanks to Peng Fan)
+ * a bit improve menu entry names
+ * add an explanation why en7581 prefix used for an7581 chips.
+ * add reviewed by David Lechner line to all patches
+
+Changes v7:
+ * an7583: add missed gpio22 pin group
+
+Geert Uytterhoeven (2):
+  bitfield: Add less-checking __FIELD_{GET,PREP}()
+  bitfield: Add non-constant field_{prep,get}() helpers
+
+Mikhail Kshevetskiy (10):
+  bitops: import BITS_PER_TYPE() macro from linux
+  pinctrl: add more pinconf/pinctrl definitions
+  pinctrl: sort and format the contents of the makefile
+  pinctrl: airoha: add shared pinctrl code
+  pinctrl: airoha: add pin controller and gpio driver for AN7581 SoC
+  pinctrl: airoha: add pin controller and gpio driver for AN7583 SoC
+  pinctrl: airoha: add pin controller and gpio driver for EN7523 SoC
+  configs: airoha: an7581: enable pinctrl/gpio support
+  configs: airoha: en7523: enable pinctrl/gpio support
+  arm: dts: en7523: add pinctrl/gpio support, drop legacy gpio support
+
+ arch/arm/dts/en7523-u-boot.dtsi         |   21 +
+ configs/an7581_evb_defconfig            |    2 +-
+ configs/en7523_evb_defconfig            |    2 +-
+ drivers/pinctrl/Kconfig                 |    1 +
+ drivers/pinctrl/Makefile                |   61 +-
+ drivers/pinctrl/airoha/Kconfig          |   26 +
+ drivers/pinctrl/airoha/Makefile         |    7 +
+ drivers/pinctrl/airoha/airoha-common.h  |  476 ++++++++++
+ drivers/pinctrl/airoha/pinctrl-airoha.c |  927 +++++++++++++++++++
+ drivers/pinctrl/airoha/pinctrl-an7581.c | 1084 +++++++++++++++++++++++
+ drivers/pinctrl/airoha/pinctrl-an7583.c |  980 ++++++++++++++++++++
+ drivers/pinctrl/airoha/pinctrl-en7523.c |  648 ++++++++++++++
+ include/dm/pinctrl.h                    |   28 +
+ include/linux/bitfield.h                |   95 +-
+ include/linux/bitops.h                  |    1 +
+ include/linux/pinctrl/pinctrl.h         |   74 ++
+ 16 files changed, 4394 insertions(+), 39 deletions(-)
+ create mode 100644 drivers/pinctrl/airoha/Kconfig
+ create mode 100644 drivers/pinctrl/airoha/Makefile
+ create mode 100644 drivers/pinctrl/airoha/airoha-common.h
+ create mode 100644 drivers/pinctrl/airoha/pinctrl-airoha.c
+ create mode 100644 drivers/pinctrl/airoha/pinctrl-an7581.c
+ create mode 100644 drivers/pinctrl/airoha/pinctrl-an7583.c
+ create mode 100644 drivers/pinctrl/airoha/pinctrl-en7523.c
+ create mode 100644 include/linux/pinctrl/pinctrl.h
+
+-- 
+2.53.0
+
