@@ -4,70 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7421BCD4F3C
-	for <u-boot@archiver.kernel.org>; Sun, 17 May 2026 02:13:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D401DCD4F3C
+	for <u-boot@archiver.kernel.org>; Sun, 17 May 2026 03:15:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 48E9A83EF9;
-	Sun, 17 May 2026 04:13:02 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 18AA884659;
+	Sun, 17 May 2026 05:15:42 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=seznam.cz
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="faE8t5gG";
+	dkim=pass (2048-bit key; secure) header.d=seznam.cz header.i=@seznam.cz header.b="JIdGxO/i";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AE5A083FEE; Sun, 17 May 2026 04:13:00 +0200 (CEST)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
+ id F34C2846AC; Sat, 16 May 2026 20:21:26 +0200 (CEST)
+Received: from mxd-2-a08.seznam.cz (mxd-2-a08.seznam.cz
+ [IPv6:2a02:598:64:8a00::1000:a08])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BC6AF83E76
- for <u-boot@lists.denx.de>; Sun, 17 May 2026 04:12:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A7C0383AA9
+ for <u-boot@lists.denx.de>; Sat, 16 May 2026 20:21:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=none dis=none) header.from=seznam.cz
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4gJ4GK3YNhz9vN7;
- Sun, 17 May 2026 04:12:57 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1778983977;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=N/XLmBgZLq2EYVqdldF+MxV5M+XXhjmsJjRTgqsWilg=;
- b=faE8t5gGtWPkDcqOlN7ZS9nLP9gYGoEybgqMQpDuh6GgYtFyWTe3aPtZsiRv3dZLGAfqC2
- MyYdhzNrjFcwTl77WW0zUqjoSNtChSbmUgFJyB7TgD9I4nIlMO5FCX1W5pxvc6OWXYXf//
- E+1SKY7F9RfjkTPbOvJ/5ZnizjwdCkfDc/S8bNwJ9hMSKkjwci2kcPX2y4PaWhXngkahoS
- Ta6ZNJqcs7QIUtsvS+Dah5Iq9k/ZX1xe0CsgTMgjuJ0dw9jpojzbaOFBfwXehJ3Xm5JK9I
- 8xPieqauBpXZ9e+nvvmT2HFLSeE+VUkejY4d+XaqEkEF8ui+/rXBON/pdcYtqg==
-Message-ID: <1f68f8fb-eb3a-4e3d-982c-3761e7be5caa@mailbox.org>
-Date: Sun, 17 May 2026 00:02:08 +0200
+ spf=pass smtp.mailfrom=michael.srba@seznam.cz
+Received: from email.seznam.cz by smtpc-mxd-f659df87d-k746b
+ (smtpc-mxd-f659df87d-k746b [2a02:598:64:8a00::1000:a08])
+ id 53c0713308ce255a5269bd6d; Sat, 16 May 2026 20:20:35 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=seznam.cz; s=szn1;
+ t=1778955635; bh=6Mg0zjJXqHt74di4Uh6Be1QASeGZab4sHyaLTBGVDd4=;
+ h=From:Date:Subject:MIME-Version:Content-Type:
+ Content-Transfer-Encoding:Message-Id:To:Cc;
+ b=JIdGxO/i9XYXi3RUGWkN/oFKkFOoPvCcudeqpRtxO9nboEzvVXiycGBFpXUyl7yfN
+ w5lq2FAQJqyOnxBb+D0Kl+3e8ITPfVV+MJyg6VQoXd4y2+UYQdH9RZbbGLyw3MoWFK
+ 4UYJk6J1By6QDt0Cb5hGODE7OAQOPDW74w+lqhlhYZozBXv3sa5oZhsYX3FbAYbVzL
+ YyKpn+GgMMtNqD7fvpem5BmPL2VHMhxJILU5Ii8oSKfUutVhJUE+AIyq9QThrwDR40
+ NZpTHAC/VeR6ZUv/BZH297sDvhKCxekfjExh30Pk6hdeUiCDy8Ghhbi7Y51J0S8r+m
+ 8iE1LY3RVTREA==
+Received: from [127.0.0.1] (ip-111-27.static.ccinternet.cz [147.161.27.111])
+ by smtpd-relay-745c4d9bbb-4gnxc (szn-email-smtpd/2.0.73) with ESMTPA
+ id 6a31f819-823b-4ae2-9ff7-07b08e2e1151;
+ Sat, 16 May 2026 20:20:31 +0200
+From: michael.srba@seznam.cz
+Date: Sat, 16 May 2026 20:19:52 +0200
+Subject: [PATCH v8 03/12] drivers: allow clk_stub and spmi in SPL
 MIME-Version: 1.0
-Subject: Re: [PATCH v5] net: phy: fix duplicate eth_phy binding
-To: "Vinay Tilak, Pranav" <Pranav.VinayTilak@amd.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- "Simek, Michal" <michal.simek@amd.com>
-Cc: "git (AMD-Xilinx)" <git@amd.com>,
- "Begari, Padmarao" <Padmarao.Begari@amd.com>,
- Jerome Forissier <jerome.forissier@arm.com>, Tom Rini <trini@konsulko.com>,
- Peng Fan <peng.fan@nxp.com>, Patrice Chotard <patrice.chotard@foss.st.com>,
- "Lucien.Jheng" <lucienzx159@gmail.com>,
- Siddharth Vadapalli <s-vadapalli@ti.com>,
- "SkyLake.Huang" <skylake.huang@mediatek.com>,
- Ramon Fried <rfried.dev@gmail.com>
-References: <20260513133344.1288865-1-pranav.vinaytilak@amd.com>
- <5f8a52d8-765b-4a52-96b3-1258558bd500@mailbox.org>
- <MW6PR12MB708859452C870D4233A80B12FB042@MW6PR12MB7088.namprd12.prod.outlook.com>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <MW6PR12MB708859452C870D4233A80B12FB042@MW6PR12MB7088.namprd12.prod.outlook.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: nz9yxwz46ru7tfp8xbxwf9soyckbt6cf
-X-MBO-RS-ID: e4679a67096ec66e4d4
+Message-Id: <20260516-qcom_spl-v8-3-69b55c9abffe@seznam.cz>
+References: <20260516-qcom_spl-v8-0-69b55c9abffe@seznam.cz>
+In-Reply-To: <20260516-qcom_spl-v8-0-69b55c9abffe@seznam.cz>
+To: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>, 
+ u-boot-qcom@groups.io
+Cc: Tom Rini <trini@konsulko.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@arm.com>, 
+ Anshul Dalal <anshuld@ti.com>, Peng Fan <peng.fan@nxp.com>, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Andrew Davis <afd@ti.com>, 
+ Hrushikesh Salunke <h-salunke@ti.com>, 
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>, Ye Li <ye.li@nxp.com>, 
+ Andre Przywara <andre.przywara@arm.com>, 
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>, 
+ Leo Yu-Chi Liang <ycliang@andestech.com>, 
+ Andrew Goodbody <andrew.goodbody@linaro.org>, Dhruva Gole <d-gole@ti.com>, 
+ Kaustabh Chakraborty <kauschluss@disroot.org>, 
+ Jerome Forissier <jerome.forissier@arm.com>, 
+ Heiko Schocher <hs@nabladev.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Lukasz Majewski <lukma@denx.de>, 
+ Mateusz Kulikowski <mateusz.kulikowski@gmail.com>, 
+ Dinesh Maniyam <dinesh.maniyam@altera.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Patrice Chotard <patrice.chotard@foss.st.com>, 
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, 
+ Michal Simek <michal.simek@amd.com>, Yao Zi <me@ziyao.cc>, 
+ Peter Korsgaard <peter@korsgaard.com>, 
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>, 
+ Casey Connolly <casey.connolly@linaro.org>, 
+ Tingting Meng <tingting.meng@altera.com>, 
+ Tien Fong Chee <tien.fong.chee@altera.com>, Alice Guo <alice.guo@nxp.com>, 
+ George Chan <gchan9527@gmail.com>, 
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>, 
+ Alexey Charkov <alchark@gmail.com>, Ronald Wahl <ronald.wahl@legrand.com>, 
+ Michael Trimarchi <michael@amarulasolutions.com>, 
+ Michael Srba <Michael.Srba@seznam.cz>
+X-Mailer: b4 0.15.2
+X-Mailman-Approved-At: Sun, 17 May 2026 05:15:41 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,74 +106,101 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 5/15/26 1:13 PM, Vinay Tilak, Pranav wrote:
+From: Michael Srba <Michael.Srba@seznam.cz>
 
-[...]
+Only Makefile and Kconfig changes necessary.
 
->>> diff --git a/drivers/net/phy/phy.c b/drivers/net/phy/phy.c index
->>> d7e0c4fe02d..7d698f00c09 100644
->>> --- a/drivers/net/phy/phy.c
->>> +++ b/drivers/net/phy/phy.c
->>> @@ -24,6 +24,7 @@
->>>    #include <linux/delay.h>
->>>    #include <linux/err.h>
->>>    #include <linux/compiler.h>
->>> +#include <dm/uclass-internal.h>
->>>
->>>    /* Generic PHY support and helper functions */
->>>
->>> @@ -927,6 +928,14 @@ struct phy_device *phy_connect(struct mii_dev
->> *bus, int addr,
->>>    {
->>>      struct phy_device *phydev = NULL;
->>>      uint mask = (addr >= 0) ? (1 << addr) : 0xffffffff;
->>> +   struct udevice *phy_dev;
+Signed-off-by: Michael Srba <Michael.Srba@seznam.cz>
+Reviewed-by: Simon Glass <sjg@chromium.org>
+---
+ drivers/Makefile      |  2 +-
+ drivers/clk/Kconfig   |  7 +++++++
+ drivers/spmi/Kconfig  | 13 +++++++++++++
+ drivers/spmi/Makefile |  4 ++--
+ 4 files changed, 23 insertions(+), 3 deletions(-)
 
-Please pick a variable name which is not phy_dev , there is already a 
-phydev variable in this function and the naming is VERY confusing.
+diff --git a/drivers/Makefile b/drivers/Makefile
+index ca3e87ffb10..fe97f3c1fd3 100644
+--- a/drivers/Makefile
++++ b/drivers/Makefile
+@@ -35,6 +35,7 @@ obj-$(CONFIG_$(PHASE_)RAM) += ram/
+ obj-$(CONFIG_$(PHASE_)RTC) += rtc/
+ obj-$(CONFIG_$(PHASE_)SERIAL) += serial/
+ obj-$(CONFIG_$(PHASE_)SPI) += spi/
++obj-$(CONFIG_$(PHASE_)SPMI) += spmi/
+ obj-$(CONFIG_$(PHASE_)TIMER) += timer/
+ obj-$(CONFIG_$(PHASE_)VIRTIO) += virtio/
+ obj-$(CONFIG_$(PHASE_)DM_MAILBOX) += mailbox/
+@@ -106,7 +107,6 @@ obj-$(CONFIG_DM_REBOOT_MODE) += reboot-mode/
+ obj-y += rtc/
+ obj-y += scsi/
+ obj-y += sound/
+-obj-y += spmi/
+ obj-y += watchdog/
+ obj-$(CONFIG_QE) += qe/
+ obj-$(CONFIG_U_QE) += qe/
+diff --git a/drivers/clk/Kconfig b/drivers/clk/Kconfig
+index c2da7b3938b..a50e0b89be7 100644
+--- a/drivers/clk/Kconfig
++++ b/drivers/clk/Kconfig
+@@ -114,6 +114,13 @@ config CLK_STUB
+ 	  Enable this to provide a stub clock driver for non-essential clock
+ 	  controllers.
+ 
++config SPL_CLK_STUB
++	bool "Stub clock driver"
++	depends on SPL_CLK
++	help
++	  Enable this to provide a stub clock driver in SPL for non-essential
++	  clock controllers
++
+ config CLK_BCM6345
+ 	bool "Clock controller driver for BCM6345"
+ 	depends on CLK && ARCH_BMIPS
+diff --git a/drivers/spmi/Kconfig b/drivers/spmi/Kconfig
+index ab4878ebae4..ace4a3be75b 100644
+--- a/drivers/spmi/Kconfig
++++ b/drivers/spmi/Kconfig
+@@ -8,12 +8,25 @@ config SPMI
+ 	  SPMI (System Power Management Interface) bus is used
+ 	  to connect PMIC devices on various SoCs.
+ 
++config SPL_SPMI
++	bool "Enable SPMI bus support in SPL"
++	depends on SPL_DM
++	help
++	  Select this to enable SPMI bus support in SPL
++
+ config SPMI_MSM
+ 	bool "Support Qualcomm SPMI bus"
+ 	depends on SPMI
+ 	---help---
+ 	  Support SPMI bus implementation found on Qualcomm Snapdragon SoCs.
+ 
++config SPL_SPMI_MSM
++	bool "Support Qualcomm SPMI bus"
++	depends on SPL_SPMI
++	help
++	  Support SPMI bus implementation found on Qualcomm Snapdragon SoCs
++	  in SPL.
++
+ config SPMI_SANDBOX
+ 	bool "Support for Sandbox SPMI bus"
+ 	depends on SPMI
+diff --git a/drivers/spmi/Makefile b/drivers/spmi/Makefile
+index 1b3d57f36a9..8cb93c820e0 100644
+--- a/drivers/spmi/Makefile
++++ b/drivers/spmi/Makefile
+@@ -2,6 +2,6 @@
+ #
+ # (C) Copyright 2015 Mateusz Kulikowski <mateusz.kulikowski@gmail.com>
+ 
+-obj-$(CONFIG_SPMI)  += spmi-uclass.o
+-obj-$(CONFIG_SPMI_MSM) += spmi-msm.o
++obj-$(CONFIG_$(PHASE_)SPMI)  += spmi-uclass.o
++obj-$(CONFIG_$(PHASE_)SPMI_MSM) += spmi-msm.o
+ obj-$(CONFIG_SPMI_SANDBOX) += spmi-sandbox.o
 
->>> +   int ret;
->>> +
->>> +   /* Skip binding if PHY already bound by eth_phy_binds_nodes(). */
->>> +   ret = uclass_find_device_by_phandle(UCLASS_ETH_PHY, dev,
->>> +                                       "phy-handle", &phy_dev);
->>> +   if (!ret)
->>> +           goto out;
+-- 
+2.54.0
 
-You already check if (!ret) here ...
-
->>>    #ifdef CONFIG_PHY_FIXED
->>>      phydev = phy_connect_fixed(bus, dev); @@ -947,9 +956,13 @@
->> struct
->>> phy_device *phy_connect(struct mii_dev *bus, int addr,
->>>              phydev = phy_connect_gmii2rgmii(bus, dev);
->>>    #endif
->>>
->>> +out:
->>>      if (!phydev)
->>>              phydev = phy_find_by_mask(bus, mask);
->>>
->>> +   if (phydev && !ret && !ofnode_valid(phydev->node))
->>> +           phydev->node = dev_ofnode(phy_dev);
->> Is the !ret test necessary in this conditional ?
-> 
-> Yes i checked, !ret is necessary as uclass_find_device_by_phandle() always sets phy_dev= NULL on entry, when it fails to find an already bound PHY phy_dev is NULL. Removing !ret would call dev_ofnode(NULL) which dereferences a NULL pointer and crashes.
-
-... so I think the goto jump target needs to be adjusted ?
-
-In fact, I do not understand why does this code call phy_find_by_mask() 
-if the PHY udevice was already found by uclass_find_device_by_phandle() 
-? Can you not convert that already found PHY udevice into phydev ?
-
-> !ret also serves as a guard for the assignment of phydev->node it should only happen when the PHY is already DM bound. When binding methods run (ret != 0), they already set phydev->node correctly so no need to again set phydev->node in that case.
-
-If uclass_find_device_by_phandle() does locate PHY udevice , it will 
-return 0, and the !ret conditional will evaluate to true , so 
-phydev->node = dev_ofnode(phy_dev); will run in that case ?
-
-> The !ofnode_valid(phydev->node) check is redundant and can be dropped. In the ret == 0 path, only phy_find_by_mask() runs and it never sets phydev->node, so !ofnode_valid(phydev->node) is always true.
-> Hence condition can be simplified to:
-> 
-> if (phydev && !ret)
->      phydev->node = dev_ofnode(phy_dev);
-[...]
