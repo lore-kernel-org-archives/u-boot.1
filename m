@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 256A1CD4F3C
-	for <u-boot@archiver.kernel.org>; Sun, 17 May 2026 03:16:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0AF9BCD4F3C
+	for <u-boot@archiver.kernel.org>; Sun, 17 May 2026 03:16:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A2D1A846E7;
+	by phobos.denx.de (Postfix) with ESMTP id F374B846F2;
 	Sun, 17 May 2026 05:15:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=seznam.cz
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=seznam.cz header.i=@seznam.cz header.b="dwKznXz1";
+	dkim=pass (2048-bit key; secure) header.d=seznam.cz header.i=@seznam.cz header.b="MjcwMFcm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4210B84693; Sat, 16 May 2026 20:21:30 +0200 (CEST)
+ id 4855184692; Sat, 16 May 2026 20:21:31 +0200 (CEST)
 Received: from mxd-1-a07.seznam.cz (mxd-1-a07.seznam.cz
  [IPv6:2a02:598:128:8a00::1000:a07])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 60C1F846AA
- for <u-boot@lists.denx.de>; Sat, 16 May 2026 20:21:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9BA7A846B0
+ for <u-boot@lists.denx.de>; Sat, 16 May 2026 20:21:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=seznam.cz
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=michael.srba@seznam.cz
 Received: from email.seznam.cz by smtpc-mxd-5757bcb9c-s9zn4
  (smtpc-mxd-5757bcb9c-s9zn4 [2a02:598:128:8a00::1000:a07])
- id 0580c05a5e8e943304290c04; Sat, 16 May 2026 20:20:54 +0200 (CEST)
+ id 4fbc881d14b2dc744e154443; Sat, 16 May 2026 20:20:50 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=seznam.cz; s=szn1;
- t=1778955654; bh=S0LvbzvvQH5ip1IT1lEmbUENiDFypOw+Q2t3OLOHRAw=;
+ t=1778955650; bh=40807IPBkRzBXA4QcAjB/7g8tSbvlWbskVPbrikMlFY=;
  h=From:Date:Subject:MIME-Version:Content-Type:
  Content-Transfer-Encoding:Message-Id:To:Cc;
- b=dwKznXz1tEOUMPcHnT+CYCwfdqmgNSZs284hwA1QmKMjJd2AlxKpSgAfyl6hdLNdO
- nvK9OExJOdYoqsgchelpuF5M8PR9lMGhSTziRmoO+ZGvKmupoUS6ulKpEp1qegYdvF
- WgEhxOxuAGANDafs6hlH2JoENZOvj9Rbx1ryLWyvEFei5Z/FT1OzraCY9+ikMRpJ91
- 2SKCE2xr5UYH6Aba3hUuQRSbZj1ihuyQzw2lbZjHTHjLaH9tnxwLOD7+pdGwcsHrXv
- h/+0qy0Dq7ie91M/VOZzSFB1e7f8py41vZxBIt11wSiuem2ZWDeaIkGP0+c8sZ1LD/
- S1Qb9dp6g4zXA==
+ b=MjcwMFcmZLpGbWH7dNkgnaGmSM8f/qvJSsuFEz3ob7WvRLT1yvsP+jX3XJGA+t3dO
+ tO6JGYdtLaP8+1/3aBPsqUX8OaGN+bSPCrlSz9aOFmPiXhG+xCrMB10+L467vuUwRV
+ gAxbBUn32A833N/+GV6bOSpq4AFRjpuS1Aa8d/zn3Hc/rW6cVFrv4hXsavuhUUu7Xy
+ QB6z5DTlIbGhNnJk673x/uZH4v94rfPfjOPDnWWO+GzGDs7ISp/JMJpUlQs4R0wGRa
+ Bm56Nrh1TxncI1yAYl7AKafIRGEH65XxA1wmLFP8WBaS1r6bi33XTPW/2Eoum/v8wh
+ P+h6/IExQfCDg==
 Received: from [127.0.0.1] (ip-111-27.static.ccinternet.cz [147.161.27.111])
  by smtpd-relay-745c4d9bbb-4gnxc (szn-email-smtpd/2.0.73) with ESMTPA
- id 7ccb7a25-a8c7-4a62-ac47-e64692bf8755;
- Sat, 16 May 2026 20:20:35 +0200
+ id 7a104dc8-b2a5-44a9-944c-0691afcb15bd;
+ Sat, 16 May 2026 20:20:33 +0200
 From: michael.srba@seznam.cz
-Date: Sat, 16 May 2026 20:19:57 +0200
-Subject: [PATCH v8 08/12] mach-snapdragon: boot0.h: add sdm845_spl_boot0.h
+Date: Sat, 16 May 2026 20:19:54 +0200
+Subject: [PATCH v8 05/12] qualcomm: add u-boot-spl-elf-sdm845.lds
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260516-qcom_spl-v8-8-69b55c9abffe@seznam.cz>
+Message-Id: <20260516-qcom_spl-v8-5-69b55c9abffe@seznam.cz>
 References: <20260516-qcom_spl-v8-0-69b55c9abffe@seznam.cz>
 In-Reply-To: <20260516-qcom_spl-v8-0-69b55c9abffe@seznam.cz>
 To: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>, 
@@ -108,179 +108,66 @@ X-Virus-Status: Clean
 
 From: Michael Srba <Michael.Srba@seznam.cz>
 
-On sdm845, running u-boot SPL in EL3 requires escalting by using
-an unintentional feature in old builds of xbl_sec.elf. We do this
-in boot0.h so the rest of U-Boot can stay blissfully unaware
-of XBL_SEC. If we are already in EL3 for whatever reason, the
-code is skipped.
+This custom linker script is required to produce a bootable ELF
+for the sdm845 SoC. An xbl_sec.elf must be provided, which will
+be put in a section in the ELF as required by the boot rom.
 
 Signed-off-by: Michael Srba <Michael.Srba@seznam.cz>
 Reviewed-by: Simon Glass <sjg@chromium.org>
 ---
- arch/arm/mach-snapdragon/Kconfig                   |   6 +
- arch/arm/mach-snapdragon/include/mach/boot0.h      |   4 +
- .../include/mach/sdm845_spl_boot0.h                | 121 +++++++++++++++++++++
- 3 files changed, 131 insertions(+)
+ .../qualcomm/sdm845_spl/u-boot-spl-elf-sdm845.lds  | 44 ++++++++++++++++++++++
+ 1 file changed, 44 insertions(+)
 
-diff --git a/arch/arm/mach-snapdragon/Kconfig b/arch/arm/mach-snapdragon/Kconfig
-index a2228e217af..aa7273f6095 100644
---- a/arch/arm/mach-snapdragon/Kconfig
-+++ b/arch/arm/mach-snapdragon/Kconfig
-@@ -63,6 +63,12 @@ config BOOT0_MSM8916_PSCI_WORKAROUND
- 	help
- 	  Select this if you are building U-Boot proper for an msm8916 board that
- 	  uses the buggy PSCI implementation.
-+
-+config BOOT0_SDM845_WORKAROUND
-+	bool "boot0.h workaround for SPL on the sdm845 SoC"
-+	depends on SPL
-+	help
-+	  Select this if you are building U-Boot SPL for sdm845.
- endchoice
- 
- endif
-diff --git a/arch/arm/mach-snapdragon/include/mach/boot0.h b/arch/arm/mach-snapdragon/include/mach/boot0.h
-index b3c76d6d97d..b71aab37f44 100644
---- a/arch/arm/mach-snapdragon/include/mach/boot0.h
-+++ b/arch/arm/mach-snapdragon/include/mach/boot0.h
-@@ -1,6 +1,10 @@
- /* SPDX-License-Identifier: GPL-2.0+ */
- #if defined(CONFIG_SPL_BUILD)
-+#if defined(CONFIG_BOOT0_SDM845_WORKAROUND)
-+#include "sdm845_spl_boot0.h"
-+#else
- 	b	reset
-+#endif
- #else
- #if defined(CONFIG_BOOT0_MSM8916_PSCI_WORKAROUND)
- #include "msm8916_boot0.h"
-diff --git a/arch/arm/mach-snapdragon/include/mach/sdm845_spl_boot0.h b/arch/arm/mach-snapdragon/include/mach/sdm845_spl_boot0.h
+diff --git a/board/qualcomm/sdm845_spl/u-boot-spl-elf-sdm845.lds b/board/qualcomm/sdm845_spl/u-boot-spl-elf-sdm845.lds
 new file mode 100644
-index 00000000000..11fe229ef56
+index 00000000000..3740209d499
 --- /dev/null
-+++ b/arch/arm/mach-snapdragon/include/mach/sdm845_spl_boot0.h
-@@ -0,0 +1,121 @@
++++ b/board/qualcomm/sdm845_spl/u-boot-spl-elf-sdm845.lds
+@@ -0,0 +1,44 @@
 +/* SPDX-License-Identifier: GPL-2.0+ */
-+/*
-+ * Workaround for non-qcom-signed code being entered in EL1 on sdm845
-+ * Copyright (C) 2026 Michael Srba <Michael.Srba@seznam.cz>
-+ *
-+ * This code uses an unintentional ownership enhancing feature in older builds of XBL_SEC
-+ * in order to elevate our privileges to EL3 as soon as possible after a system reset.
-+ * This allows for a very close approximation of a clean state.
-+ *
-+ * Do note that you still need to own the device in the sense that you control the code that
-+ * XBL_SEC jumps to in EL1, which is sadly not a level of ownership commonly afforded to you
-+ * by the device manufacturer. On such devices, CVE-2021-30327 could help, but it's not documented
-+ * and there is no PoC available utilizing it
-+ *
-+ */
-+#include <linux/arm-smccc.h>
-+
-+#define SCM_SMC_FNID(s, c)	((((s) & 0xFF) << 8) | ((c) & 0xFF))
-+
-+#define ARM_SMCCC_SIP32_FAST_CALL \
-+	ARM_SMCCC_CALL_VAL(ARM_SMCCC_FAST_CALL, ARM_SMCCC_SMC_32, ARM_SMCCC_OWNER_SIP, 0)
-+
-+/* same as with qcom's TZ */
-+#define QCOM_SCM_SVC_MEM_DUMP 0x03
-+/* unlike the TZ counterpart, in XBL_SEC this simply unlocks the XPUs */
-+#define QCOM_SCM_MEM_DUMP_UNLOCK_SECURE_REGIONS 0x10
 +
 +/*
-+ * We put our payload in place of some SCM call, the important thing is that it's hopefully
-+ * in a memory region that is not in cache.
-+ *
-+ * It would be cleaner to just put our code at the scm entry point in the vector table,
-+ * however it seems that we can't force cache coherency from EL1 if EL3 doesn't have
-+ * any reason to care about that.
++ * The boot rom uses the segment type to identify the xbl_sec program header.
++ * See https://github.com/coreboot/coreboot/blob/643efabd2af9f7ac/util/qualcomm/mbn_tools.py#L143.
 + */
-+#define QCOM_SCM_SVC_DONOR 0x01
-+#define QCOM_SCM_DONOR 0x16
-+/* we replace the instructions at this address with a jump to the start of u-boot */
-+/* NOTE: this address is specific to a particular XBL_SEC elf */
-+#define XBL_SEC_DONOR_SCM_ADDR 0x146a0ce0
++#define PF_SEGMENT_TYPE_XBL_SEC 5
 +
-+/* gnu as doesn't implement these useful pseudoinstructions */
-+.macro movq Xn, imm
-+	movz    \Xn,  \imm & 0xFFFF
-+	movk    \Xn, (\imm >> 16) & 0xFFFF, lsl 16
-+	movk    \Xn, (\imm >> 32) & 0xFFFF, lsl 32
-+	movk    \Xn, (\imm >> 48) & 0xFFFF, lsl 48
-+.endm
++/*
++ * The boot rom expects this to be equal to a seemingly magic value possibly specific
++ * to a particular xbl_sec.elf. If you're extracting your xbl_sec.elf from an xbl elf,
++ * you can just reuse the value; otherwise you can either compute it yourself or use
++ * coreboot's tool.
++ * See https://github.com/coreboot/coreboot/blob/643efabd2af9f7ac/util/qualcomm/createxbl.py#L638.
++ */
++#define XLB_SEC_SEGMENT_ADDR 0x0000000014699000
 +
-+.macro movl Wn, imm
-+	movz    \Wn,  \imm & 0xFFFF
-+	movk    \Wn, (\imm >> 16) & 0xFFFF, lsl 16
-+.endm
 +
-+/* copy 32 bits to an address from a label */
-+.macro copy32 addr, text_base, addrofval, offset
-+	movl	x0, \addr
-+	add	x0, x0, \offset
-+	movq	x1, \text_base
-+	add	x1, x1, \addrofval
-+	add	x1, x1, \offset
-+	ldr	w2, [x1]
-+	str	w2, [x0]
-+	dc	cvau, x0 // flush cache to RAM straight away, we need to do it by address anyway
-+.endm
++TARGET("binary")
++INPUT("./xbl_sec.elf")
 +
-+.macro copy_instructions addr, text_base, start_addr, num_bytes // num_bytes must be a multiple of 4
-+	mov x3,	#0x0 // x0, x1 and w2 used by copy32
-+1:
-+	copy32	\addr, \text_base, \start_addr, x3
-+	add	x3, x3, #0x4 // i+=4
-+	cmp	x3, \num_bytes
-+	blo	1b
-+.endm
++OUTPUT_FORMAT("default")
 +
-+	/*  If we're already in EL3 for some reason,  skip this whole thing */
-+	mrs	x0, CurrentEL
-+	cmp	x0, #(3 << 2)	/* EL3 */
-+	beq	reset
++ENTRY(CONFIG_PLATFORM_ELFENTRY)
++PHDRS
++{
++	data PT_LOAD FLAGS(7);
++	xbl_sec PT_LOAD FLAGS(5 | (PF_SEGMENT_TYPE_XBL_SEC << 24));
++}
++SECTIONS
++{
 +
-+	/* disable the mmu */
-+	mrs	x0, sctlr_el1
-+	and     x0, x0, #~(1 << 0) // CTRL_M
-+	msr	sctlr_el1, x0
++	. = XLB_SEC_SEGMENT_ADDR;
++	.xbl_sec : { // XBL_SEC nested ELF
++		. = .;
++		"./xbl_sec.elf"
++	} :xbl_sec
 +
-+	mov	x0, #ARM_SMCCC_SIP32_FAST_CALL
-+	movk	x0, #SCM_SMC_FNID(QCOM_SCM_SVC_MEM_DUMP, QCOM_SCM_MEM_DUMP_UNLOCK_SECURE_REGIONS)
-+	mov	x1, #0x0	/* no params */
-+	mov	x6, #0x0
++	. = CONFIG_PLATFORM_ELFENTRY;
 +
-+	smc	#0 /* unlock XBL_SEC code area for writing (assuming old enough XBL_SEC build) */
-+
-+	/* this will also flush the writes from cache */
-+	copy_instructions XBL_SEC_DONOR_SCM_ADDR, CONFIG_SPL_TEXT_BASE, el3_payload, #((el3_payload_end - el3_payload))
-+
-+	/* this probably doesn't affect EL3, but it doesn't hurt */
-+	dsb	ish	/* block until cache is flushed */
-+	ic	iallu	/* force re-fetch of our shiny new instructions */
-+	dsb	ish	/* block until invalidation is finished */
-+	isb	sy	/* unify here ? */
-+
-+	mov	x0, #ARM_SMCCC_SIP32_FAST_CALL
-+	movk	x0, #SCM_SMC_FNID(QCOM_SCM_SVC_DONOR, QCOM_SCM_DONOR)
-+	mov	x1, #0x0	/* no params */
-+	smc	#0	/* call the payload */
-+
-+el3_ret_point:
-+	b	reset
-+
-+el3_payload:
-+	/* disable the mmu for EL3 too */
-+	mrs	x0, sctlr_el3
-+	and     x0, x0, #~(1 << 0) // CTRL_M
-+	msr	sctlr_el3, x0
-+	isb
-+
-+	/* jump back to our code, but now in EL3 */
-+	movl	x0, CONFIG_SPL_TEXT_BASE
-+	add	x0, x0, (el3_ret_point - _start)
-+	br	x0
-+el3_payload_end:
++	.data : {
++		*(.data*)
++	} :data
++}
 
 -- 
 2.54.0
