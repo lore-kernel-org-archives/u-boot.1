@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F222CD343F
-	for <u-boot@archiver.kernel.org>; Sat, 16 May 2026 01:01:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 780C5CD4851
+	for <u-boot@archiver.kernel.org>; Sat, 16 May 2026 01:01:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B59A684893;
-	Sat, 16 May 2026 03:00:55 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 214BE8489D;
+	Sat, 16 May 2026 03:00:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="m5slPKFf";
+	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="G+v9seC7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CC6E78488A; Sat, 16 May 2026 03:00:52 +0200 (CEST)
-Received: from GVXPR05CU001.outbound.protection.outlook.com
- (mail-swedencentralazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c202::7])
+ id E59F38488F; Sat, 16 May 2026 03:00:54 +0200 (CEST)
+Received: from DU2PR03CU002.outbound.protection.outlook.com
+ (mail-northeuropeazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DE61D84868
- for <u-boot@lists.denx.de>; Sat, 16 May 2026 03:00:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 95CD684713
+ for <u-boot@lists.denx.de>; Sat, 16 May 2026 03:00:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mikhail.kshevetskiy@genexis.eu
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=OlgKKHlk6Lp/4QOZWUe0VC6B6U3gZN/1641PcAOjMzy9f4mFv6f2O9o4Rn7ewDrhseNdjJPQ06dEOrbI6t9EzZjJYsUNS+NfYbSciMq2USfLpYzY89M6n0YvwFUDTNgijk1/nM2tsqoWDQcpS30nBgZUT4VR8P1TDwRRH9XtkQqgacRIaczgjr43tjt574p4MZwzWmIk5H/3X2QxOr+0nz4oHDYIGzMi45M79hgsHPQelB0Jg6q7SVPgU7hlerJcqc23PhI4PBk8lQR24+UwhdKFMFel78ZeT99kCTyDcf0zT5SkQc5f85r9f4Tk0+o2NxGfem4M2DU7CaGXmlj2+Q==
+ b=UAOGoid2rFf3ZHAnEVGtKngZHZjKTVEpKXKUL1P0ueLMun1hmk9Q7PwEO9+vec3hMzSHOCS6x/xPWZu5WDkr7HRtWsGRm+ICuvcISuvrwbdzwZ/3IRzH5uXdF//36NcFu3HEayjLXTdcAVehoJKj/TtAMxaHqjcgtx0Tf1uzzngZ5FIq9H5qOsHOqaF77QUVIIqiMwT0oZupFjQu/ERP0VLP06AW1Rg/sMsuTqcgqxLS34IJP8Zj+h1AnfW1iVZUXzy6i6AL5fg4GhV6Q9gRlM8yaK5JGpjyANHYdf/SHGkL6ej9MxNOP7pe4GQcS6sg+2GYroT9nAJXhErFhGC89w==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=gQ8Ldl/ganmFv+oUmvcsQeXOt+3SVTZqXxHsrNRa0to=;
- b=Gshr1xj/5IEVj/8nnFErwJRcNWUwo143/lyey0Nl2dXcHDzm3mntpbu6ZI1V28NCH/vd53+Cplak+CN/RtpTG7Yy1a+ZU1YBH5QUHBBRemk0H0o9r+FgF62/9LHQjvcqFnUr6o68PPP2369K4lGezxCOd74TyhWW7SFf8KjRRMD4beipoVA97E4Rs3q39l06ImsvhKoEHqlesLW/oQ1/FV8Z9CQ6ctfHJCZmfSCDFu2mxO4IiwoTHYjfLgyMAK9udo2X//WUEYaK5t09Ej6+to5zyiB68eoQXjGPWIMpXqpVfiNIo87FpuqX1uhmLu8G222aIkJV1ZJnxIasplMNCA==
+ bh=n9bsESbOgnG5/Ssiv5Xg0vJKyPumO2ALYL9yKZb5cjg=;
+ b=RgAfrOfgRbimZt3mL+RUuzb0rmmRKXLSHHXGowQVOyUoQwGqvA3a2mMPjGR0hFgPcABZ0FRSUZLm1oSccV+YIPqZPSBjPKfoVd+FHouyf0XJsO9psVuVkuvTnfaB7ozWdvcJ7yE4vVgkCyo3JufdWPAEkAAMUv1tFO9B4zayfSI1WuJ7GqX0vbBd1DH8NuKtB0Zov5wJYiT8YtXqBp90BmkGKEE9HtMtdlW06DUFRS9AljeGAQzxGvjn4OHPICSc/9KRtNqpf4LY86NAhc14S5gBgqA1SSHsl/0sIlqvvUvfWtKSSWaSDSm7jzuunx4kaCdxjOwvcm3TGolzcgNzAA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=genexis.eu; dmarc=pass action=none header.from=iopsys.eu;
  dkim=pass header.d=iopsys.eu; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iopsys.eu; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=gQ8Ldl/ganmFv+oUmvcsQeXOt+3SVTZqXxHsrNRa0to=;
- b=m5slPKFfO37M53jZbcBxk/7QMdFhWv0UvSaZ5uS8ckcscfMrGuyIfbKZDXv15CBkSApG2PPp1+TVsZv9yJtidO4HOU7+tBY/tOX0+F5IlIwny7YSDThcpg+R4o80rva3znHesbQzihEwK+vbBANW6oDXx0nEWo4pIZ6jreMLUw4FnaiF2q8sD/eTn7zOpjJQWH84Huc+33XASROKRgalKvLY9i5GQAQO0TJGt+JSazpQj3IugZiyIHiElvjEAo1ft9ZZQ7e8EKA9Mkdmt6Lt4d/LdEjWOv+tLNYgvmmWD5lvvOscob/B7mNqJrSQpstepTZ1xnD75FyVgQRiZlAjFg==
+ bh=n9bsESbOgnG5/Ssiv5Xg0vJKyPumO2ALYL9yKZb5cjg=;
+ b=G+v9seC7S9etClzrkYi9BJDC5I/cvNshbBCRyuhtmaMQExoZ0Sr9zcJrYvlwsaprjyGOKgNIOtfD3tPQ87R7bR06Yl5S+UD14e3ihzEQieEycaU+CSxfxgVgZYOKSWBDW/qAgPOjCj9WiZHEMs0RLrgpUf4Br+cYJBMjDvWwO0v4MaqKFBBZaZHjS+Adw0kD9kU0MSXtl85TaaDBvr9nAlwdLw/jXeu4/G/h6ZjE5Bolbn/S+iZQz33q/LTBUX2f8I2vFXKa50rdxmBcaVeyFaMurGo3OtMUwkB5Pv2cxucY/U+ATrhB85D8Vl/b5puZRslgJ9ai8zusaiSXTcKI/g==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=iopsys.eu;
 Received: from DU2PR08MB10037.eurprd08.prod.outlook.com (2603:10a6:10:49a::20)
  by AS8PR08MB7917.eurprd08.prod.outlook.com (2603:10a6:20b:538::18)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.25.21; Sat, 16 May
- 2026 01:00:48 +0000
+ 2026 01:00:50 +0000
 Received: from DU2PR08MB10037.eurprd08.prod.outlook.com
  ([fe80::3c7:6d2e:8afe:e4dc]) by DU2PR08MB10037.eurprd08.prod.outlook.com
  ([fe80::3c7:6d2e:8afe:e4dc%5]) with mapi id 15.21.0025.016; Sat, 16 May 2026
- 01:00:48 +0000
+ 01:00:50 +0000
 From: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
 To: Tom Rini <trini@konsulko.com>, Christian Marangi <ansuelsmth@gmail.com>,
  Simon Glass <sjg@chromium.org>, David Lechner <dlechner@baylibre.com>,
@@ -70,9 +70,9 @@ To: Tom Rini <trini@konsulko.com>, Christian Marangi <ansuelsmth@gmail.com>,
  Matheus Sampaio Queiroga <srherobrine20@gmail.com>,
  Benjamin Larsson <benjamin.larsson@genexis.eu>
 Cc: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
-Subject: [PATCH v7 01/12] bitops: import BITS_PER_TYPE() macro from linux
-Date: Sat, 16 May 2026 04:00:24 +0300
-Message-ID: <20260516010036.1034352-2-mikhail.kshevetskiy@iopsys.eu>
+Subject: [PATCH v7 02/12] bitfield: Add less-checking __FIELD_{GET,PREP}()
+Date: Sat, 16 May 2026 04:00:25 +0300
+Message-ID: <20260516010036.1034352-3-mikhail.kshevetskiy@iopsys.eu>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260516010036.1034352-1-mikhail.kshevetskiy@iopsys.eu>
 References: <20260516010036.1034352-1-mikhail.kshevetskiy@iopsys.eu>
@@ -84,56 +84,56 @@ X-ClientProxiedBy: GV3PEPF0001DBD3.SWEP280.PROD.OUTLOOK.COM
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: DU2PR08MB10037:EE_|AS8PR08MB7917:EE_
-X-MS-Office365-Filtering-Correlation-Id: d3cd062a-9168-4bbe-94e7-08deb2e69113
+X-MS-Office365-Filtering-Correlation-Id: 6b90b129-6c17-427b-8138-08deb2e69284
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
  ARA:13230040|1800799024|52116014|7416014|376014|366016|56012099003|921020|11063799003|22082099003|18002099003|38350700014;
-X-Microsoft-Antispam-Message-Info: d5zuRdIPcpZOj2+a34y5W1zU9xFDH5Ejsj54PC54+7b8HJFw8R/YuyEmNCHdovM5Gob+GwwVW0ao4RcCzeAhNUEUkPaa5QkZJTc9bUgCcwm2h3YeIru08LvlVXbz0O4/PG93KKcP/uoaVklKVxEem/FmH199Stef0EnGJVCtXhJ20J1jyvDoHEIAFBFxhg3wF+qkUZTQ55HrzMgHCE9onZMghsafAGGnUO0HNXjf8XcSQbfPLDYSfFVgAa2BC7m5XxWYy3ap1CSp+kLI5OvUCnpk7G8BnvpyRoAK2ouecn9wDJkzie4kXelgnr3gs/cf2yTlGbgcPOx3aSb51LVv/AeqzA0eHTU8SZx9sIUZONo9resE5r4MK9c5/65MbfJSFcLYlPWMwi6Lb8S3MjDEEZ3pexBd9HQucDiPdK4sFlYloPOHcrVf76IGGwSnsVuLSGPrVYT6ejwHHms/ndLMw8G86xp40H4wjMSvyJGf785o9VaOp0H8gOw1WYO665E/k7CI4+tEY90oa9pSfBMm2acfxr3/ThiCNLllw97MEJoCDIePhjaPnJt2wYu2bMtRBjtRF7m/gihdoJ/1ZusMUJz2QVW/d0alBexXgPCrwTEWxAVR8eRxR47m9i+w4HeGOnHipOB85wGurCmXLxYiXA6Dc70Gv0jYJ8H/vQoVqR2zFnpNTtBT6ulz0BqB0XKBAZ2gpGhO2dYdhXn30SxcDixwyBf4/DE4K0n+n9oPs3yudfWdxqAzd/nKN3UIs3YO5vOQUo2ad/iXYBuVZ92K/g==
+X-Microsoft-Antispam-Message-Info: rO6GqerkBsVGDPFtyEJ5Mp3UfbP634IxpXZZBS5sfbeAGeN1cpIAaSy6aIvm0R1HTT7KFkE0MowLUPum8dWU4vZ7xmLeHlwVI+XOwJFp6Tkt44ekpQI44o0ONYNeSWpSDIy7L6QRzX85Og4NqoLKDW/LLExxc0WuIhSB6OaQbYEvWOuOI4fntHkZbXX10msjnZTwqepxmK18ZFWDBfILjJqRIGTI51x/IF1Oc/RpjaISVdyDPKWgzI6rNK6LWsMHp38Q3wPxNNXpBWdLMYw4ParhJX6cKWAjpoW8fL3fg2SBha/PMU5kRRqjHbExc7UO8Osz2A9g9GxrEtIX4Id1l/NIdkbVIP9OSdk+1HbqC42u3o2Qp1yRMtP5YiGvZQrrTpV8MqJLiV8EGB+7SLjtnSPqrfLzmIfngBBW4B/xZ08UnZFVvgs3zOdmmkepGOO8I8pC/DyYy5RDaJWI3+F20SW6sOmx0ny8Ae+YtCBeaPrvsBszP+yag6w9DhUKTOdV3YmBPwlJtb1pIbzI2mczPp/uoMTZC36qqbYjRnV9XcjXo/uVWNhcccIRZYWQp8km1ExJZhryD+6LMd5D25ZSNhh3zE7TxMTz8fJ+gQPQrcgkVX9/NJ5eFQD5HqyghxLiUjoms6Zou7miNLbUkzmZnuXoslwjNQPUUKk5Q5FWTSx7w+6nximm6OxS+RHwB76oF61YoP45aEhi9vtHZZ5iGS/XsOJFpCbJtfkw4JBhnMPTNSscXbrPVPwLHrDkeG6CUsaQ0tiRcYRjOyjPBrqgkQ==
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:DU2PR08MB10037.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(1800799024)(52116014)(7416014)(376014)(366016)(56012099003)(921020)(11063799003)(22082099003)(18002099003)(38350700014);
  DIR:OUT; SFP:1102; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?jOVB7m7l/dQob4fA6DRFzQ0sxB4CoLPG44z5rfRmUmlSFdUyiatT5WoiSBMg?=
- =?us-ascii?Q?W/MqcFzeS/r3VX8W2OtiNoJTJIDFazNvgGn2bAWVZVkLS4XIHAvDW5EmN+8A?=
- =?us-ascii?Q?FzTKT0XL570DACOAq1V2DnQdp052/V3MpoHJyeyqKvxGs1op/Y8z39dD9qtb?=
- =?us-ascii?Q?K1pkeZPdCn6rNdkZFtIn4o/KHOBmXPDaF3icxxWWvXkzufzy7zEI03+snhDw?=
- =?us-ascii?Q?TP8a8OnIVy82juROMuaVqX2TuU5Q65lRjlOhRWGPb17JlmYS1QtLHZt4CpZU?=
- =?us-ascii?Q?kNpNIiTrWnhRVme4cICXxAdTIdDWFD+KioRaQ6rFxNhJEJSq+9AVlb7uVfEc?=
- =?us-ascii?Q?S88S7S5mFUpRWDnMsKW6zVUqWqnMTZepryFIx1fp/zxh9JVwd9psyjh5cx+0?=
- =?us-ascii?Q?tVlWiHGbD/6IszRahMRMNDHFAtRAX41k30OfdU3YDCEgonpsTNgjkaoB6sj9?=
- =?us-ascii?Q?l06k/SdilQ09T1KDpUJDWKutjT1OvuBVgSSTLpefqvA9hwKXgGhw+RuENNuT?=
- =?us-ascii?Q?2iBvYrYZtuyyopzDZssOJgPgae4GMoLf5syISTRFPbvVx31xDYKVGPk4Ukzm?=
- =?us-ascii?Q?BwSYULixwg9+0v86gf0c/9/y33zH9+zWfZyJ5WhqjTBuRUYJ7ce3QXOvD7Ss?=
- =?us-ascii?Q?LXQOPkbaTt3gwXwZIseZe0P+TqfJtZjzXE4l92Y8I1jvm+7ZrQ9msNlPA/S/?=
- =?us-ascii?Q?CQbcAXNYf//u27+e+AaXF+AT3MduYVlk0IJPJARDms6yHsFjm8boqDWqfLRB?=
- =?us-ascii?Q?WPXr8IKN7uIWjJ0aNPnEMek+hsUkWIWq7uQVa4ao5HGqv2wJH9x7XxuLgKKN?=
- =?us-ascii?Q?qen7688g8/01o/1Z9ax1adnkQir0WCjfzTMoAPt+PORGvTtb63RSc4JVDLzN?=
- =?us-ascii?Q?yN8zmPZRuQFXhdCE3MJd6CL33oGLwTmOO1/BjU9/JJIZhx6XvmG03GNh10B1?=
- =?us-ascii?Q?PjPI/GGzuYN1ZYNC9EeOCVxr/IwzNyG8ttpqqg1aT9hW4cS/3em2uN57m5ZA?=
- =?us-ascii?Q?BLc1TJOWyUBi6kiwpioGmcwY1MqMXs2kt32GjvOYbyPx5Ct78tGi4zz56HLg?=
- =?us-ascii?Q?8/jlTWHXda35+/SYk2cffD7NC1cwWJqm1EfQhR3JAW0Eb8h3UUwF8i/8D+9F?=
- =?us-ascii?Q?llbhADBPNyD0s2AyZGSUrfQVC1YvnTYyXoFvohzufzWEK57IFyH75wSWJfHc?=
- =?us-ascii?Q?bxmau6rakqRVmqcN9KkVDh4jkXo83i2EuAxOd/M5H7zeR4LjCzSmi7o1tLit?=
- =?us-ascii?Q?FmU++YZ/AqTRhBLJc0NposMlUpG4qkZQbbYKp62Q2KYcYtfAntpeV7bHZjQv?=
- =?us-ascii?Q?Jq+0DtKys3BofpaGHto2Sy2rb4ds5Rgiv+iPnOLN/q4TIYxqoVfj56Txlm58?=
- =?us-ascii?Q?7b9PmYjN4+TmN2OWpLn4UWhuwYqsM4YN13ZwJlmiCM/MpDEjAYpEIoWLgGgO?=
- =?us-ascii?Q?/SFCfwbe0IYGR0litGhkjoXjlQ5vlnYP44fCcGXZCdwpqqiJC1kAVwPat1v/?=
- =?us-ascii?Q?EEA9KCoI1w6e2by+9IaaYIRv12WGCihzVVbO9u5m4bv+ejbz1WF81CODHQ3B?=
- =?us-ascii?Q?v22iqWye9CFHwuW0PUbD7RJ2DJENLPHOgQJFBff7cjb2skAV5qqeMLAQQsq0?=
- =?us-ascii?Q?ceV0clexcVUKY4gPW4VJ9p+IAbpds2kTyI2yQ8aMNTvAsfM1S6XHAQwu04td?=
- =?us-ascii?Q?y+q3HBG2SRrPWO3TuXaVI8NAzl1VK1ktcV7mXKFRYbITy0m8AfBwr/NF32t/?=
- =?us-ascii?Q?p/lgVJPCDTwAqUzLEOdF6Rv8CqlXpeU=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?/UYfNvvtC0mIfdW7ghJGbqa0aNIwV9sOoXxaxdTsV/ObA5emwttTSM8mQ5vH?=
+ =?us-ascii?Q?rzWj2XMoQSrhCkub/chdr71McSdGbpT3BDgowZoj24Y9/muQJRqRbS/a+tau?=
+ =?us-ascii?Q?lBFtaq0+IZ6qyzTe2YPn21D8UBQzDc2WbrxOKtrtxh0hPnAPS5o/q4ho37yx?=
+ =?us-ascii?Q?E8tfJfFgVK5nST5PedbNa1SY3eM9+zIxvpTVHJtbORu+3obHLXIK3mydj7SG?=
+ =?us-ascii?Q?nGkYH2TraXrAfB0AwuzU1i/iU2SgnfEBpsESfog7EQ1DRlxb7Gg7wR41Z2ib?=
+ =?us-ascii?Q?2YueuxFehDMvgwdCdz/5OFxwUiQCFOtMY+hKukYMRRaumu8sfDH/iiiqgmnh?=
+ =?us-ascii?Q?cgun6/OTRWslU3aiDFqC6/QJtxjsugjjxbic+W4aF8RY1IchfXRSRkitWNA6?=
+ =?us-ascii?Q?+wNfvSArnvu9Y0drr0vsEaJc2Ur4K+cfi8VaNo2jeqVkcLDkxJqebVOIx2w4?=
+ =?us-ascii?Q?L2gPkF6EV3jXc7qRYwhC9FQKF1U0XEibjw1D+nFhMBQ7LTyH7JsSJFv1P3DB?=
+ =?us-ascii?Q?UZy0z1xDjHujjJ7x51ZhqIdxUKWLQudFJcifrYt2Uae0fXgKk2rIPn+Mc0v9?=
+ =?us-ascii?Q?SukKKTTflk9+I8ygRtm0eDTpXcf0kVmjazijvgfH4CcOASbaG50uNEebPWoq?=
+ =?us-ascii?Q?TZNoeBOPEV27jq1Z3QXHa0v1QCiR8Dp0/ZRbdKJJZp1dmT3EJqPZkwU+BnYF?=
+ =?us-ascii?Q?na2IUoNR+SZNI2Y1Pqp9I46Dsm1VQA8Gu5W05QqhM6NMQaMrfyHDhvlE6pbn?=
+ =?us-ascii?Q?bec+JzNAJz/C98bj9usTnzaFX1K2CwDfJVYtbDjm80QfS/8N/YsCms09Iwp9?=
+ =?us-ascii?Q?wEVN22fubZbSha0fCwvPHClbRw7OpKmSyA0aaf5e5ZhsRQRlCqERBrx8Ibvk?=
+ =?us-ascii?Q?wm9EDQa/DipfmvwwtOuFzBzy/VhTQ/l4NJbzRd+/Yg7nLemBqguCeXlBTr7k?=
+ =?us-ascii?Q?hsOwpljfBNn4G37MXbLzAlpeLCNtGnw/F3YCK347yApNyZZd3T8O54fxcekf?=
+ =?us-ascii?Q?rFvqHYKjgISxUooD8WkPc883BwKRlbJdPhVZ8TxswVn02JMGgjzaU0C8+1d/?=
+ =?us-ascii?Q?rBnL99DVUP8MRxCCPbuQyq1053wAtzsAzlHUTvW+QEPsTATwjbVSFinDQpot?=
+ =?us-ascii?Q?3bQFzoeagWvLRfxs1b0tCPLKIz/YwHN59iXbpWceWwk1CdCE6v6B9Uz1mwY1?=
+ =?us-ascii?Q?58RmT4UEFRWY+4QJpVS76Ou2eg0NzU7oCbDT019qZSRdr9/Gtozh185loTnU?=
+ =?us-ascii?Q?VygC3pFCjKOXopEskywXxG3O+Laii1iMb31Yc8u0MskyOc0cl7TL/DdxlnL9?=
+ =?us-ascii?Q?mH8rwTQtt0FkJqjUbtreM6pLDJnQZGcqzyeEftgTu5XldveaKq9883IQCPI9?=
+ =?us-ascii?Q?NgwazZaDh5lFLMeDO+UQWoqJKohhFqZXpXaCo95vVSF1AISX/nltITK5drj5?=
+ =?us-ascii?Q?gXNH5eyc9yuj+RzcHEvm3A08yMVoQrB7/YiMAyfTiTi4tKpjMcl6kjGLgQTg?=
+ =?us-ascii?Q?QAokx3V2TQiHcnev6nqzddk+TgnnJ0VRqHJoOzXER19ZxUCC2/tdASBMwJFj?=
+ =?us-ascii?Q?uGDJvrb0oB77FfpnDF/XQw6OA6KizdHuvEQsLNszqzOGRAbwLxkEELyip1d9?=
+ =?us-ascii?Q?azjbVbXX5pS9rLwe7aSUakrJ8Cc9jWeyBFSVTeBnKnpYoUfSZhcaY+aspA2j?=
+ =?us-ascii?Q?xTY0oK+0cq35UNG+D6FiBIaTRFYFicwPZIh0SKEGT1SXz1F7CP1ZRTVwgAuf?=
+ =?us-ascii?Q?vTPOUquQ6Les1Jh8JvDPD1IAGt5zOXQ=3D?=
 X-OriginatorOrg: iopsys.eu
-X-MS-Exchange-CrossTenant-Network-Message-Id: d3cd062a-9168-4bbe-94e7-08deb2e69113
+X-MS-Exchange-CrossTenant-Network-Message-Id: 6b90b129-6c17-427b-8138-08deb2e69284
 X-MS-Exchange-CrossTenant-AuthSource: DU2PR08MB10037.eurprd08.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 May 2026 01:00:48.1228 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 May 2026 01:00:50.5108 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8d891be1-7bce-4216-9a99-bee9de02ba58
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: LSLYOblOkwEusbjWn3DrSP2NOpXGCGztklnB++/xiyFGttyAKLkFbbzoV48CnnH2sDMY3IxGjCGRHmYLbrPwSVhuGFl3obrpwu4PCCJYoMY=
+X-MS-Exchange-CrossTenant-UserPrincipalName: swTby5Ya2p6mxMpU9JtXTOo/QiAMU3LlJBqEnWbjsejjf/IksCLFB/xnKxHO3B4ylokWPV4ZQSj0NfpXbhmX3CQ3KyqLxHyryBwpMCX4fAg=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR08MB7917
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -151,26 +151,109 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This macro will be used by include/linux/bitfield.h header.
+From: Geert Uytterhoeven <geert+renesas@glider.be>
 
-Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+The BUILD_BUG_ON_MSG() check against "~0ull" works only with "unsigned
+(long) long" _mask types.  For constant masks, that condition is usually
+met, as GENMASK() yields an UL value.  The few places where the
+constant mask is stored in an intermediate variable were fixed by
+changing the variable type to u64 (see e.g. [1] and [2]).
+
+However, for non-constant masks, smaller unsigned types should be valid,
+too, but currently lead to "result of comparison of constant
+18446744073709551615 with expression of type ... is always
+false"-warnings with clang and W=1.
+
+Hence refactor the __BF_FIELD_CHECK() helper, and factor out
+__FIELD_{GET,PREP}().  The later lack the single problematic check, but
+are otherwise identical to FIELD_{GET,PREP}(), and are intended to be
+used in the fully non-const variants later.
+
+[1] commit 5c667d5a5a3ec166 ("clk: sp7021: Adjust width of _m in
+    HWM_FIELD_PREP()")
+[2] commit cfd6fb45cfaf46fa ("crypto: ccree - avoid out-of-range
+    warnings from clang")
+
+Signed-off-by: Geert Uytterhoeven <geert+renesas@glider.be>
+Link: https://git.kernel.org/torvalds/c/5c667d5a5a3ec166 [1]
+Signed-off-by: Yury Norov (NVIDIA) <yury.norov@gmail.com>
 Reviewed-by: David Lechner <dlechner@baylibre.com>
 ---
- include/linux/bitops.h | 1 +
- 1 file changed, 1 insertion(+)
+ include/linux/bitfield.h | 36 ++++++++++++++++++++++++++++--------
+ 1 file changed, 28 insertions(+), 8 deletions(-)
 
-diff --git a/include/linux/bitops.h b/include/linux/bitops.h
-index 29e0da48de8..52eea4f8380 100644
---- a/include/linux/bitops.h
-+++ b/include/linux/bitops.h
-@@ -15,6 +15,7 @@
- #define BIT_ULL_MASK(nr)	(1ULL << ((nr) % BITS_PER_LONG_LONG))
- #define BIT_ULL_WORD(nr)	((nr) / BITS_PER_LONG_LONG)
- #define BITS_PER_BYTE		8
-+#define BITS_PER_TYPE(type)	(sizeof(type) * BITS_PER_BYTE)
- #define BITS_TO_LONGS(nr)	DIV_ROUND_UP(nr, BITS_PER_BYTE * sizeof(long))
- #endif
+diff --git a/include/linux/bitfield.h b/include/linux/bitfield.h
+index 63928f17322..ef81901bc41 100644
+--- a/include/linux/bitfield.h
++++ b/include/linux/bitfield.h
+@@ -60,7 +60,7 @@
  
+ #define __bf_cast_unsigned(type, x)	((__unsigned_scalar_typeof(type))(x))
+ 
+-#define __BF_FIELD_CHECK(_mask, _reg, _val, _pfx)			\
++#define __BF_FIELD_CHECK_MASK(_mask, _val, _pfx)			\
+ 	({								\
+ 		BUILD_BUG_ON_MSG(!__builtin_constant_p(_mask),		\
+ 				 _pfx "mask is not constant");		\
+@@ -69,13 +69,33 @@
+ 				 ~((_mask) >> __bf_shf(_mask)) &	\
+ 					(0 + (_val)) : 0,		\
+ 				 _pfx "value too large for the field"); \
+-		BUILD_BUG_ON_MSG(__bf_cast_unsigned(_mask, _mask) >	\
+-				 __bf_cast_unsigned(_reg, ~0ull),	\
+-				 _pfx "type of reg too small for mask"); \
+ 		__BUILD_BUG_ON_NOT_POWER_OF_2((_mask) +			\
+ 					      (1ULL << __bf_shf(_mask))); \
+ 	})
+ 
++#define __BF_FIELD_CHECK_REG(mask, reg, pfx)				\
++	BUILD_BUG_ON_MSG(__bf_cast_unsigned(mask, mask) >		\
++			 __bf_cast_unsigned(reg, ~0ull),		\
++			 pfx "type of reg too small for mask")
++
++#define __BF_FIELD_CHECK(mask, reg, val, pfx)				\
++	({								\
++		__BF_FIELD_CHECK_MASK(mask, val, pfx);			\
++		__BF_FIELD_CHECK_REG(mask, reg, pfx);			\
++	})
++
++#define __FIELD_PREP(mask, val, pfx)					\
++	({								\
++		__BF_FIELD_CHECK_MASK(mask, val, pfx);			\
++		((typeof(mask))(val) << __bf_shf(mask)) & (mask);	\
++	})
++
++#define __FIELD_GET(mask, reg, pfx)					\
++	({								\
++		__BF_FIELD_CHECK_MASK(mask, 0U, pfx);			\
++		(typeof(mask))(((reg) & (mask)) >> __bf_shf(mask));	\
++	})
++
+ /**
+  * FIELD_MAX() - produce the maximum value representable by a field
+  * @_mask: shifted mask defining the field's length and position
+@@ -112,8 +132,8 @@
+  */
+ #define FIELD_PREP(_mask, _val)						\
+ 	({								\
+-		__BF_FIELD_CHECK(_mask, 0ULL, _val, "FIELD_PREP: ");	\
+-		((typeof(_mask))(_val) << __bf_shf(_mask)) & (_mask);	\
++		__BF_FIELD_CHECK_REG(_mask, 0ULL, "FIELD_PREP: ");	\
++		__FIELD_PREP(_mask, _val, "FIELD_PREP: ");		\
+ 	})
+ 
+ #define __BF_CHECK_POW2(n)	BUILD_BUG_ON_ZERO(((n) & ((n) - 1)) != 0)
+@@ -152,8 +172,8 @@
+  */
+ #define FIELD_GET(_mask, _reg)						\
+ 	({								\
+-		__BF_FIELD_CHECK(_mask, _reg, 0U, "FIELD_GET: ");	\
+-		(typeof(_mask))(((_reg) & (_mask)) >> __bf_shf(_mask));	\
++		__BF_FIELD_CHECK_REG(_mask, _reg, "FIELD_GET: ");	\
++		__FIELD_GET(_mask, _reg, "FIELD_GET: ");		\
+ 	})
+ 
+ extern void __compiletime_error("value doesn't fit into mask")
 -- 
 2.53.0
 
