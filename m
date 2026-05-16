@@ -4,82 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AFE53CD4F25
-	for <u-boot@archiver.kernel.org>; Sat, 16 May 2026 07:40:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A84DCD4F25
+	for <u-boot@archiver.kernel.org>; Sat, 16 May 2026 07:40:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B723A845E3;
+	by phobos.denx.de (Postfix) with ESMTP id EAF4D8465A;
 	Sat, 16 May 2026 09:40:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=thingy.jp
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=thingy.jp header.i=@thingy.jp header.b="m4MwF5PR";
+	dkim=pass (1024-bit key; unprotected) header.d=thingy.jp header.i=@thingy.jp header.b="LhEgQqSp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 919BE84609; Sat, 16 May 2026 09:40:38 +0200 (CEST)
-Received: from mail-pj1-x102f.google.com (mail-pj1-x102f.google.com
- [IPv6:2607:f8b0:4864:20::102f])
+ id 5071583EF9; Sat, 16 May 2026 09:40:39 +0200 (CEST)
+Received: from mail-pg1-x52b.google.com (mail-pg1-x52b.google.com
+ [IPv6:2607:f8b0:4864:20::52b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1B45083EF9
- for <u-boot@lists.denx.de>; Sat, 16 May 2026 09:40:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2BAA984099
+ for <u-boot@lists.denx.de>; Sat, 16 May 2026 09:40:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=thingy.jp
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=daniel@0x0f.com
-Received: by mail-pj1-x102f.google.com with SMTP id
- 98e67ed59e1d1-365eecc5885so639850a91.0
- for <u-boot@lists.denx.de>; Sat, 16 May 2026 00:40:34 -0700 (PDT)
+Received: by mail-pg1-x52b.google.com with SMTP id
+ 41be03b00d2f7-c802803ac17so225707a12.1
+ for <u-boot@lists.denx.de>; Sat, 16 May 2026 00:40:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=thingy.jp; s=google; t=1778917233; x=1779522033; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=KkYZddDvKQu4f5MYrqXRlf6WyNY97FIgWwFFbnDjnrY=;
- b=m4MwF5PRgF+3chAGC+f/YrnXW3JK9ZVRUNecrxrFY4+VFZKZbiTSEz1oZCWWq8nVdu
- feDW/QiTvOzpD1hLAnpZWcfSJMKu/dugAy57464LKYX3VlsswJxmq9bOkHdmQrJkQlRX
- Shc84G/8LhFE6dUyqPAVNLfhbCfxxeXt0YO4I=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778917233; x=1779522033;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=thingy.jp; s=google; t=1778917236; x=1779522036; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=KkYZddDvKQu4f5MYrqXRlf6WyNY97FIgWwFFbnDjnrY=;
- b=GJQ/gRRQe8OH5+hYU+yWOUZ1BgPjPgYRlf7ir6bPq8eeWEV1S2K9mxf261OsSSzl4q
- uINQevSE5HqSGalzptrAb7RRnSbBJWZxkGeKbtk3T3Zpml1CnbelKReNedeJx+juhj0R
- IlTh3NxZvTbBRg2yTODTA7FzzilevTowfeLK67XZnIrHMlyBzAiX4FC4mEAnbthuZ5zG
- 9L8v+yVfVTMg14fgu7SwC3wV40HYbwp/kGvtR/LDLcR3ae+2utBkz0mHAl0tG5LLLhUq
- 9Duamq9WViKA395GXXepfipA4+ho4yFaXV70ENQEaMeCf8rproFhNdF2GUfpY8UAYmx4
- hONQ==
+ bh=uPT0u/p3Cx0fa7/C6PMMMedxuAs+vVkTrlpsQQfmkio=;
+ b=LhEgQqSpDvxPwcVJcbzBmtgyUtWZ0DFUmkQskK6G65WSwlAL8X7EEsYpPrEiqsKZfT
+ QFn7EweOw6eouGru6SYbA2i92sHIEKQVRGCkhgOtpseHzj7ILOBXbnRfgmbg+Zidbjuu
+ QSGO0fZN5q3AkcAgHR4yq1pB0f1TqLCnSyZnk=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1778917236; x=1779522036;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=uPT0u/p3Cx0fa7/C6PMMMedxuAs+vVkTrlpsQQfmkio=;
+ b=o+Yn9NmfXgk/R+1HykH8ymU0F9EtjESp2K48YqNBsWIJeCYT2ZsZB7CV0oY3yo+W4t
+ B+iwnvXZQFIyfVR4nkXSp9MrU7wNYiRNP7AF+RBZcsZHwdz6p960RQeZof1BqR5gUEGF
+ 8QTAwxBHiUe6v2RUJw+hIzMHzi9OBPaHJ0w0ITjiN8EJ6mbPYwR4asH9+SgQKlhD4OYE
+ eFz2h6qUJhxnNHZehfQii0gD1WZV7O7vK1sK8lx/dqAJy9urSoOT3ScMdZfgLhDlI2/v
+ OIGJwk+b1k0twk1qyBVnG4SgzpAPVqcATOFRZPglrXP0kgOzkI2+reLEe0xqA5md3lU+
+ njvA==
 X-Forwarded-Encrypted: i=1;
- AFNElJ9foBlKvB/39Jv6/2bhdZDUyaWX2fedFkDMW21d4JBiR3UFkUmLd3JjMI8C8ZXXt2wMgSs3LkU=@lists.denx.de
-X-Gm-Message-State: AOJu0YwuJbmespyEhkB62Nng84wpAxSmbWYrgtHcoAR+1Eu6pE1cTSk2
- KNahZ324jCOc/qzx3nKWa9bHr6qgllLNk2WvT0NGifg8FCGC6scQrbYT2mskpOxpje8=
-X-Gm-Gg: Acq92OFOr286zp1CE+wxgmWYq771aYZLcZL/LcMiTiCw3VE6wFJL3M04Bqh/xu5pB/z
- PnEV1DG9MuiNFL86U13nxn8WS62ofK2A4IXXrWFV0GL1soq/HQPrmlFZBwCjq1kwO8JjLRrwVxB
- J7abCbhX2w9JQL4i8ehFeFyQTr4lzMLJNILRsbkI0Sj+wDaAnTINVeachi71jqUNnBxDgihu8WB
- yL2GmNgtUFN7U4prWYnu/OWGOzGZBqkmqtkDcmY33w92JBzKf+MhkXmYPzMt1KpzXqB/5Hz3kjS
- fQ1gE6lFPvw6yZZPHr78uis8DL1AUhVg1DCrsXWkktlBcVX0vamxh7e9L1StqxySg5lXaLjztE8
- ++jGHGTm4GSg3NXu69agolBK6XcRvLcO3xxYlzo/zWzpm+0h0ktbKEhuVMneU1Jm3lPEbN3kD8g
- LME3KxGX/8B0E78YoWgO4rjl7dzon4DOEOPVwxqHFDFK+HLGpkCVHC6NnBH97oR1AqzQ5lhntfG
- CDOodGfEJBRKg==
-X-Received: by 2002:a17:90a:501:b0:369:7421:75c3 with SMTP id
- 98e67ed59e1d1-3697421c76amr908733a91.16.1778917233225; 
- Sat, 16 May 2026 00:40:33 -0700 (PDT)
+ AFNElJ/dQ49dW4AD/AAuL4aSbbsp5SDfqc5NqsHACq3KtPoByh2s5rM04CdkgxE/sKS1Ra4XNcOBP7E=@lists.denx.de
+X-Gm-Message-State: AOJu0Ywg0AQ/wEakhYKAnrKityPi6vCMBPmhKjyfqMvSkLxgI/apqvXl
+ 6VohExAyMK254Jun8zPqJzoNmeDdTQx+PCVDcUhoPJMzK92i120NsE1Fng5IyrnHBn0=
+X-Gm-Gg: Acq92OFEHhBBnG5uYDPGcmz2JewDvu7/NmAdGvbuyZL5wvXghkJqoZ6U2g/L7Y/3+ZU
+ MFCVfMnS3c2Ed+maeMpqU12GZZahNK2T+mcT8kj4S+QlOxiCtcurKBOzDPO5dG8TPRk7amCizIN
+ fYyZfw2qI1DVOwEYwW8qxnh4Upx/OhxHL1EwGvE+p9P5JL0pMjsx8YXz3wMK1fwmik+DmZLf/14
+ 6SC41meBFpXV0OPb05RVSItnRDlUo/PHdmB2IpD8UH2nxi4SR9O8W8k9t5fbfCwYdDx4Jj9SBDL
+ 9uHedRUEEQQpZ+2qSp7sRqBeQGSSLWWr32guNKsMiPx17CEZUTRN4HjK+wcRD0PHggSx+wiJflM
+ 3EYvwte30IQJLDbSJpcgIw7sSIB4mo4NeSU6SCz1V06N91yWHGsTlxpPxn9nxU087Fde3UeELJ+
+ jgIrYqrqzUGkezs0L4e3weZPQSgurGRe1keUzLyd2kTg2u4LluCPvFFJUIU5suOOjxbfRqOwmrk
+ UIj34BMQ9pj7g==
+X-Received: by 2002:a17:90b:1344:b0:366:4782:138c with SMTP id
+ 98e67ed59e1d1-36951b971ccmr7714595a91.17.1778917235638; 
+ Sat, 16 May 2026 00:40:35 -0700 (PDT)
 Received: from kinako.work.home.arpa
  (p1620034-ipxg00d01sizuokaden.shizuoka.ocn.ne.jp. [122.29.136.34])
  by smtp.googlemail.com with ESMTPSA id
- 98e67ed59e1d1-369514361b6sm4702672a91.12.2026.05.16.00.40.31
+ 98e67ed59e1d1-369514361b6sm4702672a91.12.2026.05.16.00.40.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 16 May 2026 00:40:32 -0700 (PDT)
+ Sat, 16 May 2026 00:40:35 -0700 (PDT)
 From: Daniel Palmer <daniel@thingy.jp>
 To: 
 Cc: Daniel Palmer <daniel@thingy.jp>, trini@konsulko.com, visitorckw@gmail.com,
  angelo@kernel-space.org, bmeng.cn@gmail.com, sjg@chromium.org,
  u-boot@lists.denx.de
-Subject: [PATCH v7 0/9] Add virtio-mmio support to m68k virt machine
-Date: Sat, 16 May 2026 16:39:52 +0900
-Message-ID: <20260516074016.885146-1-daniel@thingy.jp>
+Subject: [PATCH v7 1/9] sysreset: qemu virt: Use map_sysmem()
+Date: Sat, 16 May 2026 16:39:53 +0900
+Message-ID: <20260516074016.885146-2-daniel@thingy.jp>
 X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20260516074016.885146-1-daniel@thingy.jp>
+References: <20260516074016.885146-1-daniel@thingy.jp>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -97,89 +99,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Lets start making the m68k virt machine support useful.
+In the platform data there is a phys_addr_t (an integer) for the address
+of the register and we pass that as-is into writel() which is fine in most
+places because we don't need to do any mapping and the macro for writel()
+does a cast to a pointer.
 
-First we need to fix some m68k endian issues.
+If writel() is a static inline function the address argument is a pointer
+so passing it in as an integer without casting it first causes warnings or
+build failure.
 
-Then allow virtio mmio driver instances to be created with
-platform data and fix a minor endian issue.
+map_sysmem() handles the casting part and if phys_addr_t is 32bits when
+on a 64bit machine.
 
-Finally, add the code for the board to create the instances.
+Signed-off-by: Daniel Palmer <daniel@thingy.jp>
+---
+ drivers/sysreset/sysreset_qemu_virt_ctrl.c | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-v7:
- - An extra patch is added before changing the qemu sysreset driver
-   to use __raw_writel() to fix issues with versions of writel()/__raw_writel()
-   that don't cast the address to a pointer.
- - Hopefully this fixes all of the CI issues. I have tested locally by building
-   a few different targets with allyesconfig. A github pipeline passed with this
-   patch and its running again now since I rebase and force pushed.
-
-v6:
-  - Remove an extra signed-of-by that go added by b4 or me somehow.
-  - Fix the warning about a phys_addr_t being cast to a pointer of different
-    size if phys_addr_t is 32bits but the target cpu is 64bits.
-
-  CC      drivers/virtio/virtio_mmio.o
-drivers/virtio/virtio_mmio.c: In function ‘virtio_mmio_probe’:
-drivers/virtio/virtio_mmio.c:359:22: warning: cast to pointer from integer of different size [-Wint-to-pointer-cast]
-  359 |         priv->base = (void __iomem *)plat->base;
-      |
-
-v5:
-  - Add Kuan-Wei's fixes for the two other goldfish endian issues
-    I hadn't spotted. Should be good to go!
-
-v4:
-  - Small changes to "board: qemu: m68k: Create virtio mmio instances"
-    requested by Simon.
-  - Add another patch to make the virtio cmd depend on CONFIG_VIRTIO_BLK
-    as the build breaks if it isn't selected.
-
-v3:
-  - Fix the bug with the vendor string in virtio-blk properly,
-    this removes the last endian hack in virtio-mmio
-  - Leave the current behaviour for readl() for coldfire as it
-    breaks thing.
-
-v2:
-  - Added patch to fix readl() etc on m68k, hopefully this
-    doesn't break everything. This should match Linux now.
-  - Added patch to fix sys reset which is broken by the above
-  - Hacks to virtio-mmio are gone because they aren't needed
-    anymore, just one minor endian fix now.
-  - Removed RFC because it looks good to me*.
-
-
-* I wouldn't trust me. :)
-
-Daniel Palmer (7):
-  sysreset: qemu virt: Use map_sysmem()
-  sysreset: qemu virt: Use __raw_writel()
-  m68k: Fix writew(), writel(), readw(), readl() endianness for classic
-    m68k
-  virtio: mmio: Allow instantiation via platform data
-  virtio: cmd: Depend on VIRTIO_BLK
-  virtio: blk: Fix converting the vendor id to a string
-  board: qemu: m68k: Create virtio mmio instances
-
-Kuan-Wei Chiu (2):
-  rtc: goldfish: Use __raw_readl() and __raw_writel()
-  timer: goldfish: Use __raw_readl()
-
- arch/m68k/Kconfig                          | 14 ++++---
- arch/m68k/include/asm/io.h                 | 31 +++++++++------
- board/emulation/qemu-m68k/qemu-m68k.c      | 45 ++++++++++++++++++++++
- cmd/Kconfig                                |  4 +-
- drivers/rtc/goldfish_rtc.c                 |  8 ++--
- drivers/sysreset/sysreset_qemu_virt_ctrl.c |  4 +-
- drivers/timer/goldfish_timer.c             |  4 +-
- drivers/virtio/virtio_blk.c                | 11 ++----
- drivers/virtio/virtio_mmio.c               | 27 ++++++++-----
- include/virtio.h                           |  3 ++
- include/virtio_mmio.h                      | 12 ++++++
- 11 files changed, 121 insertions(+), 42 deletions(-)
- create mode 100644 include/virtio_mmio.h
-
+diff --git a/drivers/sysreset/sysreset_qemu_virt_ctrl.c b/drivers/sysreset/sysreset_qemu_virt_ctrl.c
+index e7cacc9b6e98..61b38d507fc5 100644
+--- a/drivers/sysreset/sysreset_qemu_virt_ctrl.c
++++ b/drivers/sysreset/sysreset_qemu_virt_ctrl.c
+@@ -8,6 +8,7 @@
+ #include <dm.h>
+ #include <qemu_virt_ctrl.h>
+ #include <sysreset.h>
++#include <mapmem.h>
+ #include <asm/io.h>
+ #include <linux/err.h>
+ 
+@@ -24,6 +25,7 @@
+ static int qemu_virt_ctrl_request(struct udevice *dev, enum sysreset_t type)
+ {
+ 	struct qemu_virt_ctrl_plat *plat = dev_get_plat(dev);
++	void __iomem *reg = map_sysmem(plat->reg + VIRT_CTRL_REG_CMD, 0x4);
+ 	u32 val;
+ 
+ 	switch (type) {
+@@ -38,7 +40,7 @@ static int qemu_virt_ctrl_request(struct udevice *dev, enum sysreset_t type)
+ 		return -EPROTONOSUPPORT;
+ 	}
+ 
+-	writel(val, plat->reg + VIRT_CTRL_REG_CMD);
++	writel(val, reg);
+ 
+ 	return -EINPROGRESS;
+ }
 -- 
 2.53.0
 
