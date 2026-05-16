@@ -4,53 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3EDD5CD4851
-	for <u-boot@archiver.kernel.org>; Sun, 17 May 2026 03:15:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EDA81CD4F47
+	for <u-boot@archiver.kernel.org>; Sun, 17 May 2026 03:16:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 560828469A;
+	by phobos.denx.de (Postfix) with ESMTP id 98B27846AE;
 	Sun, 17 May 2026 05:15:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=seznam.cz
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=seznam.cz header.i=@seznam.cz header.b="n0NFlUKN";
+	dkim=pass (2048-bit key; secure) header.d=seznam.cz header.i=@seznam.cz header.b="YDQtYIn3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 30FD5846AE; Sat, 16 May 2026 20:21:28 +0200 (CEST)
-Received: from mxd-2-a08.seznam.cz (mxd-2-a08.seznam.cz
- [IPv6:2a02:598:64:8a00::1000:a08])
+ id EBD1A846AE; Sat, 16 May 2026 20:21:28 +0200 (CEST)
+Received: from mxd-1-a07.seznam.cz (mxd-1-a07.seznam.cz
+ [IPv6:2a02:598:128:8a00::1000:a07])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DAE098465A
- for <u-boot@lists.denx.de>; Sat, 16 May 2026 20:21:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2107084690
+ for <u-boot@lists.denx.de>; Sat, 16 May 2026 20:21:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=seznam.cz
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=michael.srba@seznam.cz
-Received: from email.seznam.cz by smtpc-mxd-f659df87d-k746b
- (smtpc-mxd-f659df87d-k746b [2a02:598:64:8a00::1000:a08])
- id 6645b6f13d4be29867ec7aaf; Sat, 16 May 2026 20:20:39 +0200 (CEST)
+Received: from email.seznam.cz by smtpc-mxd-5757bcb9c-s9zn4
+ (smtpc-mxd-5757bcb9c-s9zn4 [2a02:598:128:8a00::1000:a07])
+ id 69293d643227690d6880f13a; Sat, 16 May 2026 20:20:37 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=seznam.cz; s=szn1;
- t=1778955639; bh=/+uo+4EjpeeJCP6AzwYRg/310syzjxs2kb2a8QLyXs0=;
+ t=1778955637; bh=BLKi/X2jO1+RZdqoTWp62eJraM2FqM/HTCsCc++UiJI=;
  h=From:Date:Subject:MIME-Version:Content-Type:
  Content-Transfer-Encoding:Message-Id:To:Cc;
- b=n0NFlUKN9QD5EZi1jQSEwSb/q6Xy2H46OPN6ceL+dT4SjbzGSaZZqRItlne8M5z/2
- qWI1iTsv3s+8NBrXOaFP361a+GOARq0GLdb8WPbVNbToYvKcqZgoF3enJFiVNBNuXU
- DH+5GEPiiGVrbbJYhj26/sU09VyFSdqvPd2MXyiuE5Xu+vhmV5tILhOjL36knThfiB
- jJZUL3Pl65FKvhyxF4xOYX6LMqq0NMqQv5wArTFCKxvKm7e4dgBHC0MAKUn1OuaR7j
- 7ZYY794Vlvm8zMUq8l3MqSQFZ6zed0VJcMxNAWGuy3a/mO1KPTU2jRq4NnqG9HBKET
- x1+e2v8dDeRiw==
+ b=YDQtYIn3qZb2t6CQeJBb7fdYQDm7IBpwfBXotgOr1ZdRLuoGAZxxCp63G/440ixsm
+ njbanoGqIj6jDLXZNckNk0sJaNEEQ4j2ztlVKHpjjHYVyLbBFs/adDWHoPmccnHtfE
+ rdor2XeS0cCC3/A51z6uLsxwJpcfNP0suW7wrShNnt2zGC3d04qCQM0nBEpEwaz9Dg
+ kyuqg6JtDa3VH06yoWxppV+hmCW8A+ch7J9nQ4RUMn2bxcJgXrk9Vv0PMTevMKXptc
+ +ZK/V7m+LKSMTtzs5yYcUrYxJtg/Np0gY4uoa1J0q9gh5zRQr7W0uezpXWs3se+X6t
+ vM+ePbbLzKc7A==
 Received: from [127.0.0.1] (ip-111-27.static.ccinternet.cz [147.161.27.111])
  by smtpd-relay-745c4d9bbb-4gnxc (szn-email-smtpd/2.0.73) with ESMTPA
- id f99e19b5-fd4b-4d81-bb2a-8aabfb1d0d8c;
- Sat, 16 May 2026 20:20:34 +0200
+ id cd0b37dd-fdb1-45df-9e8c-531796abef3c;
+ Sat, 16 May 2026 20:20:30 +0200
 From: michael.srba@seznam.cz
-Date: Sat, 16 May 2026 20:19:56 +0200
-Subject: [PATCH v8 07/12] mach-snapdragon: Kconfig: changes / additions to
- support SPL
+Date: Sat, 16 May 2026 20:19:50 +0200
+Subject: [PATCH v8 01/12] Makefile: add SPL_REMAKE_ELF_LDSCRIPT feature
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260516-qcom_spl-v8-7-69b55c9abffe@seznam.cz>
+Message-Id: <20260516-qcom_spl-v8-1-69b55c9abffe@seznam.cz>
 References: <20260516-qcom_spl-v8-0-69b55c9abffe@seznam.cz>
 In-Reply-To: <20260516-qcom_spl-v8-0-69b55c9abffe@seznam.cz>
 To: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>, 
@@ -109,104 +108,65 @@ X-Virus-Status: Clean
 
 From: Michael Srba <Michael.Srba@seznam.cz>
 
-Select SUPPORT_SPL so SPL build can be enabled, disable SYSRESET_PSCI in SPL.
-(SPL runs in EL3, so if SPL itself doesn't provide PSCI, nothing else will.)
-
-Also select (SPL_)OF_LIVE and DM_EVENT/SPL_EVENT, which are needed to fix up
-upstream dt to make usb work.
-
-Mirror u-boot proper selections like GPIO and pinctrl to ensure consistent
-behavior, and select SPL_SPRINTF, SPL_LIBCOMMON_SUPPORT etc for similar
-reasons.
+Some platforms (e.g. at least Qualcomm) use the ELF format in creative
+ways, including in the bootrom. Make SPL_REMAKE_ELF use a linker script
+specified in SPL_REMAKE_ELF_LDSCRIPT (with the previously hardcoded path
+as the default).
 
 Signed-off-by: Michael Srba <Michael.Srba@seznam.cz>
 Reviewed-by: Simon Glass <sjg@chromium.org>
 ---
- arch/arm/Kconfig                 | 33 ++++++++++++++++++++++++++++++++-
- arch/arm/mach-snapdragon/Kconfig | 10 ++++++++++
- 2 files changed, 42 insertions(+), 1 deletion(-)
+ Makefile           |  9 +++++++--
+ common/spl/Kconfig | 12 ++++++++++++
+ 2 files changed, 19 insertions(+), 2 deletions(-)
 
-diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
-index 850768282ce..255d2035cdc 100644
---- a/arch/arm/Kconfig
-+++ b/arch/arm/Kconfig
-@@ -1136,6 +1136,7 @@ config ARCH_SNAPDRAGON
- 	bool "Qualcomm Snapdragon SoCs"
- 	select ARM64
- 	select DM
-+	select DM_EVENT if USB_DWC3_GENERIC
- 	select DM_GPIO
- 	select DM_SERIAL
- 	select DM_RESET
-@@ -1149,9 +1150,39 @@ config ARCH_SNAPDRAGON
- 	select SAVE_PREV_BL_FDT_ADDR if !ENABLE_ARM_SOC_BOOT0_HOOK
- 	select LINUX_KERNEL_IMAGE_HEADER if !ENABLE_ARM_SOC_BOOT0_HOOK
- 	select SYSRESET
--	select SYSRESET_PSCI
-+	select SYSRESET_PSCI if !SPL
- 	select ANDROID_BOOT_IMAGE_IGNORE_BLOB_ADDR
- 	select MMU_PGPROT
-+	select SUPPORT_SPL
-+
-+	select OF_LIVE if USB_DWC3_GENERIC
-+	select SPL_OF_LIVE if SPL_USB_DWC3_GENERIC
-+	select ARMV8_SPL_EXCEPTION_VECTORS if SPL
-+	select ENABLE_ARM_SOC_BOOT0_HOOK if SPL
-+	select SPL_DM if SPL
-+	select SPL_DM_GPIO if SPL
-+	select SPL_DM_PMIC if SPL
-+	select SPL_DM_USB_GADGET if SPL
-+	select SPL_ENV_SUPPORT if SPL
-+	select SPL_EVENT if SPL_USB_DWC3_GENERIC
-+	select SPL_GPIO if SPL
-+	select SPL_HAS_BSS_LINKER_SECTION if SPL
-+	select SPL_LIBCOMMON_SUPPORT if SPL
-+	select SPL_LIBDISK_SUPPORT if SPL
-+	select SPL_LIBGENERIC_SUPPORT if SPL
-+	select SPL_OF_CONTROL if SPL
-+	select SPL_PINCONF if SPL
-+	select SPL_PINCTRL if SPL
-+	select SPL_PINCTRL_FULL if SPL
-+	select SPL_PINCTRL_GENERIC if SPL
-+	select SPL_PINCONF_RECURSIVE if SPL
-+	select SPL_PINMUX if SPL
-+	select SPL_SPMI if SPL
-+	select SPL_SPMI_MSM if SPL
-+	select SPL_SPRINTF if SPL
-+	select SPL_STRTO if SPL
-+	select SPL_USB_GADGET if SPL
-+	imply SPL_MMC if SPL
- 	imply OF_UPSTREAM
- 	imply CMD_DM
- 	imply DM_USB_GADGET
-diff --git a/arch/arm/mach-snapdragon/Kconfig b/arch/arm/mach-snapdragon/Kconfig
-index c195d478512..a2228e217af 100644
---- a/arch/arm/mach-snapdragon/Kconfig
-+++ b/arch/arm/mach-snapdragon/Kconfig
-@@ -14,6 +14,9 @@ config SYS_VENDOR
- config SYS_MALLOC_F_LEN
- 	default 0x2000
+diff --git a/Makefile b/Makefile
+index 552328f9f2c..b8a3fe0bf81 100644
+--- a/Makefile
++++ b/Makefile
+@@ -2008,12 +2008,17 @@ u-boot.elf: u-boot.bin u-boot-elf.lds FORCE
+ quiet_cmd_u-boot-spl-elf ?= LD      $@
+ 	cmd_u-boot-spl-elf ?= $(LD) spl/u-boot-spl-elf.o -o $@ \
+ 	$(if $(CONFIG_SYS_BIG_ENDIAN),-EB,-EL) \
+-	-T u-boot-elf.lds --defsym=$(CONFIG_PLATFORM_ELFENTRY)=$(CONFIG_SPL_TEXT_BASE) \
++	-T spl/u-boot-spl-elf.lds --defsym=$(CONFIG_PLATFORM_ELFENTRY)=$(CONFIG_SPL_TEXT_BASE) \
+ 	-Ttext=$(CONFIG_SPL_TEXT_BASE)
+-spl/u-boot-spl.elf: spl/u-boot-spl.bin u-boot-elf.lds
++spl/u-boot-spl.elf: spl/u-boot-spl.bin spl/u-boot-spl-elf.lds
+ 	$(Q)$(OBJCOPY) -I binary $(PLATFORM_ELFFLAGS) $< spl/u-boot-spl-elf.o
+ 	$(call if_changed,u-boot-spl-elf)
  
-+config SPL_SYS_MALLOC_F
-+	default y
++SPL_REMAKE_ELF_LDSCRIPT := $(addprefix $(srctree)/,$(CONFIG_SPL_REMAKE_ELF_LDSCRIPT:"%"=%))
 +
- config SPL_SYS_MALLOC_F_LEN
- 	default 0x2000
++spl/u-boot-spl-elf.lds: $(SPL_REMAKE_ELF_LDSCRIPT) prepare FORCE
++	$(call if_changed_dep,cpp_lds)
++
+ u-boot-elf.lds: arch/u-boot-elf.lds prepare FORCE
+ 	$(call if_changed_dep,cpp_lds)
  
-@@ -39,6 +42,13 @@ config SYS_CONFIG_NAME
- 	  Based on this option include/configs/<CONFIG_SYS_CONFIG_NAME>.h header
- 	  will be used for board configuration.
+diff --git a/common/spl/Kconfig b/common/spl/Kconfig
+index 5fa94098e49..5c7b094e6b6 100644
+--- a/common/spl/Kconfig
++++ b/common/spl/Kconfig
+@@ -238,6 +238,18 @@ config SPL_HANDOFF
+ 	  proper. Also SPL can receive information from TPL in the same place
+ 	  if that is enabled.
  
-+config SPL_SHARES_INIT_SP_ADDR
-+	# override the default from common/spl/Kconfig
-+	default n
++config SPL_REMAKE_ELF_LDSCRIPT
++	string "Linker script for SPL ELF"
++	depends on SPL_REMAKE_ELF
++	default "arch/u-boot-elf.lds"
++	help
++	  This allows specifying a linker script that will be used to re-wrap
++	  the SPL binary into an ELF.
 +
-+config SPL_HAVE_INIT_STACK
-+	default y
++	  Some platforms (e.g. at least Qualcomm) use the ELF format in creative
++	  ways, including in the bootrom. For such platforms, you can change
++	  the default linker script to a platform-specific one.
 +
- choice
- 	prompt "Qualcomm boot0.h workaround"
- 	optional
+ config SPL_LDSCRIPT
+ 	string "Linker script for the SPL stage"
+ 	default "arch/arm/cpu/arm926ejs/sunxi/u-boot-spl.lds" if MACH_SUNIV
 
 -- 
 2.54.0
