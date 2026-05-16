@@ -4,85 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78A9BCD4F21
-	for <u-boot@archiver.kernel.org>; Sat, 16 May 2026 15:32:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A581CD4F21
+	for <u-boot@archiver.kernel.org>; Sat, 16 May 2026 16:44:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8AE6384671;
-	Sat, 16 May 2026 17:32:19 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 711EC84676;
+	Sat, 16 May 2026 18:44:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="t4mBP2SH";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="EIVfqld7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CC88584676; Sat, 16 May 2026 17:32:17 +0200 (CEST)
-Received: from mail-oa1-x33.google.com (mail-oa1-x33.google.com
- [IPv6:2001:4860:4864:20::33])
+ id 6F92B8465D; Sat, 16 May 2026 18:44:14 +0200 (CEST)
+Received: from mail-oi1-x244.google.com (mail-oi1-x244.google.com
+ [IPv6:2607:f8b0:4864:20::244])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3A2AA845E3
- for <u-boot@lists.denx.de>; Sat, 16 May 2026 17:32:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0E09F84671
+ for <u-boot@lists.denx.de>; Sat, 16 May 2026 18:44:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x33.google.com with SMTP id
- 586e51a60fabf-404254ffe8aso726433fac.0
- for <u-boot@lists.denx.de>; Sat, 16 May 2026 08:32:15 -0700 (PDT)
+Received: by mail-oi1-x244.google.com with SMTP id
+ 5614622812f47-479aa2dbea2so405077b6e.0
+ for <u-boot@lists.denx.de>; Sat, 16 May 2026 09:44:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1778945534; x=1779550334; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1778949851; x=1779554651; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=BP/tyuimQQpq2VV47bdvKWV9gAOU6WPJaC15i9wrKpA=;
- b=t4mBP2SHOMil533UmN0/kA43Zmg0CT0hK1i5KzRORXfBQNGURnw30L6WgrY0UonSiQ
- HPs048NjFfDbtYFnMYnhswV2dw5+gLIdAzCGEt1tmre4zVgX8EXur1zXuNiKTxV2zDXR
- fHwFPBnJL14i1MGOttepeEVcmqic0ep5LpcZo=
+ bh=DtqChIiFTMkOCFOxAhBgjqO/HV7iN50UTtxOEtqcQDs=;
+ b=EIVfqld71K+O8fIv9vE195NNV3Vn9Y2GWYpKqMGR9/p8KfD2Fx+zeSa0AIVuR0mFGp
+ djaMRq43fGN24zfN0bj/ITl/ehtbBzBvBuDZRcR/OAqi8uiEFYYiEJZzjWEay8/lFo1L
+ w5k+skt0fuuUGC9tZD1566+FO0BDS9n7jLgHI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778945534; x=1779550334;
+ d=1e100.net; s=20251104; t=1778949851; x=1779554651;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=BP/tyuimQQpq2VV47bdvKWV9gAOU6WPJaC15i9wrKpA=;
- b=L8h3a1YNrf1jkn5moTbeEMbiFotZr6Pfuo191zp4DWuMBwk/oPQiqvnhnzDUgI7YcZ
- gihP5smNpc3SOtWcPfiSgWRlHuYEvkR8L/GUq6CUfNNv6gdbqZsQJTXDnVPMigEROYti
- uPcUlXSK+MTOwDKRyBMbqAWYptGbUa3c5EJh//NFlo7R2i1tDjmVtyD2WoiktRRFI1HY
- z86xH0Mk1RE1HwKQzLep9DLRRJrsz4QrsbQfG+ohf7vP1pUm0oplLFTTwTqPE7/+HuTx
- NCESkqP+X0fSSf8wUoT13RkRfDC2FfT7zZ5W456n49UJV01aKMNWC8cRa3G+n5fIAKDT
- 3ZBQ==
-X-Gm-Message-State: AOJu0YzUYM6Occ+/sGUKPNQj/nBkZgWoLs9zgDSUEB5GcWk8Ke3G5ghD
- anztgzmmDb8l29XgzgMZSKWgYKWT44cVzhbjFFm0laNYdhtU6P56wtg1AHa3vAJlUTc=
-X-Gm-Gg: Acq92OHAaNSIKSQ4qmLS4RuPTnRjFQ9GRGMTBtuvck4UnclfE7w/8EY9UinvPOXtOjf
- cy6pPija0dw8axLBY9vu1vRh6qJIPT9/QV9Af1TBiOpKzag8O3OFv3paWmtF9ZGWF61BBgfg5BB
- jpK5RyHLqAWtmQwa2oDOyaw8RqLbEcPm49K8xcsAfrPzVOvNWmRZkLVcRXlf4UpkAeg+8OflBfj
- EMofxmICPFfqmR+s8wCEqzbGutQ/pQLl4awYkXHyQNDkRh5Q/7G+sdpeCW4Z4g8cX9Iwb7Sp3kd
- IzuRjThy8PEcYlSK13QDPp8qUYkEoO3es559devx2NM9o9fRU5zonE82SCLlQGhQR/YoOe103oD
- VMW2zRjPuFI0+KHYf32SAHKCOFbjq9tJJhsIJZgGRVTq6qgLb1/Bg5DHMpfUyqGd1T8SbMeIgAX
- YiM9dcSaMHnmrAoudIbbJDWmCoNXRbbSSmmkTU+0bcfV5DCyznmqkpWbOOFXxTAcRLLO5IPHBHy
- dOW6zmYnBbHecDqH+xCQ5BI74yb03oXdE/4c36NWVCiFBEb8y/6JCazJZE87A==
-X-Received: by 2002:a05:6870:8dcd:b0:430:3591:26c6 with SMTP id
- 586e51a60fabf-439f90ef68amr6834903fac.4.1778945533790; 
- Sat, 16 May 2026 08:32:13 -0700 (PDT)
+ bh=DtqChIiFTMkOCFOxAhBgjqO/HV7iN50UTtxOEtqcQDs=;
+ b=fORdH4UnBCwt0XlrNlLgQS5yzH8EFoxU1d7oTOW39LPiOK4yNa7EKYyF3Ul9Oc4/az
+ aQns21Rtu0wXO3jNsW2hc3i4FjzB6qr+p4hFt0CR7PSgPa6YSGEFeOkGW7N1cqxEjK0N
+ lmlh6cSckVxg+kFmdguE94jQ4dEG5Tfb66EB8sOmnSGMwMrjYxI3SLyXMO8dgG76BrwV
+ AFJmRPxWbyyqJnzGb4BGwNF9bi8zNlaB7sp8+qBpHi4QAdFgzxRNqG2iawrM+ibCGZzA
+ mkqaHBxU86ns/AXY5ZjTbFRcfZh8j9aQ8t1qpQhoess8TyD0LmkMUJQAxhWpfMGDqa05
+ yq4w==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ++lKPn1ctWE++yUcDbFwkDVS3VwTVNoR8gZVxdGRG3DtW8tCziePl4KVCIgK457+Rjrpd8Xk0=@lists.denx.de
+X-Gm-Message-State: AOJu0YwqQgJnMmTRYZJrHDSGFQS73ZtaFZiGp0rKe/uwe15hBY2tm3bF
+ Y9sV1blACDQxTKHVycDRo6ZUB5zTgPVfX+b0PM31aLUq6/CR7uMa6w1IXgvbenNXC+g=
+X-Gm-Gg: Acq92OGA2Xb7IwpR8KMJ698PJYLchXu8j/iVHkU/9ovosv18Ey8lbN4Ulv4wPwqd/Zq
+ XYUgO9Ps0PHZKZlZjOIJfVS/44nku2tdaFhh0UwtWyjXVjEI4/PXMey1ykSq7rR/OHfJ2I4Wqwo
+ LajnLYiiq0hOIXwLcBP+dvyq9uRI8O5RVhSSMhSrStC3eoTdz1DnXU93/c9fqYSICCR3AshUHGt
+ 4qWwP5HDRJXIsaaQt6OTzNwLc3Kg2XUJJm/lI7QscIL6pP83lLnLFu7yo7i61fyLml3llSH7vyO
+ pjSNeELEHcc77/i/CMSjy6nmRXzLOx030b0wawjHnpSCGdHmh2eaFTtPjGGZ9OKPatR9LiEDJCT
+ 03y1fvQwoSBCYE5MPITlyGb5ia8XSsIgyZV/Ho2ZvNbOykymmezEKfWROvfNniykJsbURbxHoAa
+ ue7M8+avjlG8SaiT1uCDJGl6mmL4uEPyFGrHLgQpe35vU7mXbnpMMNYtQcVeps9rX2q4Cvu/nGp
+ YeIfh5F0s1oRR7/tT58eMvsdPnBkasCJHt1L1b1E9WyvwTC3Tc=
+X-Received: by 2002:a05:6808:6785:b0:47c:be93:9214 with SMTP id
+ 5614622812f47-482e56c9a84mr5621620b6e.20.1778949850775; 
+ Sat, 16 May 2026 09:44:10 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
  [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-439fc1fc14csm6769343fac.6.2026.05.16.08.32.12
+ 46e09a7af769-7e55bbd0be3sm3919238a34.15.2026.05.16.09.44.09
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 16 May 2026 08:32:12 -0700 (PDT)
-Date: Sat, 16 May 2026 09:32:10 -0600
+ Sat, 16 May 2026 09:44:10 -0700 (PDT)
+Date: Sat, 16 May 2026 10:44:07 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Raymond Mao <raymondmaoca@gmail.com>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH 3/3] bloblist: Rework bloblist_init and bloblist_maybe_init
-Message-ID: <20260516153210.GO1858239@bill-the-cat>
-References: <20260514175457.4047707-1-trini@konsulko.com>
- <20260514175457.4047707-4-trini@konsulko.com>
- <CAMDkj5zyg1YcjwphhqKiZYX9DpzwjzDWLdecT2=a_0sGbhSCjw@mail.gmail.com>
- <20260515163054.GG1858239@bill-the-cat>
- <CAMDkj5yb1cmqe3FEYnoQzPpG5+VCasi4FX7+RGwe8BLMDwo36w@mail.gmail.com>
+To: Fabio Estevam <festevam@gmail.com>
+Cc: Max Merchel <Max.Merchel@ew.tq-group.com>,
+ Stefano Babic <sbabic@nabladev.com>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
+ u-boot@ew.tq-group.com, u-boot@lists.denx.de
+Subject: Re: [PATCH 0/5] Add support for TQMa6UL[L]x on MBA6ULx
+Message-ID: <20260516164407.GP1858239@bill-the-cat>
+References: <20260508115315.252623-1-Max.Merchel@ew.tq-group.com>
+ <CAOMZO5DruUe7YY0+HiviP2OgsdBPgvJrhEBf0d0kt=J1K_Jbdw@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="owdlBzfXH93kEDvn"
+ protocol="application/pgp-signature"; boundary="yHzl7Ac2gZKOY2Nc"
 Content-Disposition: inline
-In-Reply-To: <CAMDkj5yb1cmqe3FEYnoQzPpG5+VCasi4FX7+RGwe8BLMDwo36w@mail.gmail.com>
+In-Reply-To: <CAOMZO5DruUe7YY0+HiviP2OgsdBPgvJrhEBf0d0kt=J1K_Jbdw@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -101,414 +104,42 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---owdlBzfXH93kEDvn
+--yHzl7Ac2gZKOY2Nc
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, May 15, 2026 at 08:10:48PM -0400, Raymond Mao wrote:
-> Hi Tom,
+On Fri, May 15, 2026 at 10:07:18PM -0300, Fabio Estevam wrote:
+> On Fri, May 8, 2026 at 8:53=E2=80=AFAM Max Merchel <Max.Merchel@ew.tq-gro=
+up.com> wrote:
+> >
+> > Adds support for TQMa6UL[L]x. It has 256M and 512M RAM variants which
+> > are detected by the SPL by initializing them in descending order.
+> > It can boot from SD, MMC, SPI and USB (SDP). SPI however requires an
+> > additional prepended NXP header image which is currently unsupported
+> > in u-boot.
+> >
+> > Pipeline: https://dev.azure.com/u-boot/u-boot/_build/results?buildId=3D=
+13172&view=3Dresults
 >=20
-> On Fri, May 15, 2026 at 12:30=E2=80=AFPM Tom Rini <trini@konsulko.com> wr=
-ote:
-> >
-> > On Fri, May 15, 2026 at 11:05:47AM -0400, Raymond Mao wrote:
-> > > Hi Tom,
-> > >
-> > > On Thu, May 14, 2026 at 1:55=E2=80=AFPM Tom Rini <trini@konsulko.com>=
- wrote:
-> > > >
-> > > > With bloblist, we need to both see if one already exists as well as
-> > > > create one if it does not. However, the current implementation lead=
-s to
-> > > > odd cases where we attempt to create a bloblist before this is poss=
-ible
-> > > > and have things be overly complicated when we are given one to work
-> > > > with.
-> > > >
-> > > > This reworks things to instead have a bloblist_exists function, whi=
-ch as
-> > > > the name implies checks for an existing bloblist. This is used in
-> > > > the case of booting, to see if we have one and in turn if we have a
-> > > > device tree there as well as in the bloblist_init function to see i=
-f we
-> > > > need to do anything.
-> > > >
-> > > > In practical details, we move the logic from bloblist_init that was
-> > > > checking for a bloblist to the new bloblist_exists function and the=
-n can
-> > > > clarify the logic as it is much easier to state when we know we do =
-not
-> > > > have one rather than all the ways we might have one. Then we have t=
-he
-> > > > locations that set gd->bloblist now also set the GD_FLG_BLOBLIST_RE=
-ADY
-> > > > flag.
-> > > >
-> > > > Signed-off-by: Tom Rini <trini@konsulko.com>
-> > > > ---
-> > > >  common/bloblist.c  | 144 +++++++++++++++++++++++------------------=
-----
-> > > >  common/board_f.c   |   4 +-
-> > > >  include/bloblist.h |  32 +++++-----
-> > > >  lib/fdtdec.c       |  15 ++---
-> > > >  4 files changed, 96 insertions(+), 99 deletions(-)
-> > > >
-> > > > diff --git a/common/bloblist.c b/common/bloblist.c
-> > > > index 09afdd1f96b4..51ae9cc50a5f 100644
-> > > > --- a/common/bloblist.c
-> > > > +++ b/common/bloblist.c
-> > > > @@ -448,6 +448,7 @@ int bloblist_new(ulong addr, uint size, uint fl=
-ags, uint align_log2)
-> > > >         hdr->align_log2 =3D align_log2 ? align_log2 : BLOBLIST_BLOB=
-_ALIGN_LOG2;
-> > > >         hdr->chksum =3D 0;
-> > > >         gd->bloblist =3D hdr;
-> > > > +       gd->flags |=3D GD_FLG_BLOBLIST_READY;
-> > > >
-> > > >         return 0;
-> > > >  }
-> > > > @@ -475,6 +476,7 @@ int bloblist_check(ulong addr, uint size)
-> > > >                 return log_msg_ret("Bad checksum", -EIO);
-> > > >         }
-> > > >         gd->bloblist =3D hdr;
-> > > > +       gd->flags |=3D GD_FLG_BLOBLIST_READY;
-> > > >
-> > > >         return 0;
-> > > >  }
-> > > > @@ -576,90 +578,88 @@ int __weak xferlist_from_boot_arg(ulong __alw=
-ays_unused *addr)
-> > > >         return -ENOENT;
-> > > >  }
-> > > >
-> > > > -int bloblist_init(void)
-> > > > +bool bloblist_exists(void)
-> > > >  {
-> > > > -       bool fixed =3D IS_ENABLED(CONFIG_BLOBLIST_FIXED);
-> > > > -       int ret =3D 0;
-> > > > -       ulong addr =3D 0, size;
-> > > > +       int ret;
-> > > > +       ulong addr =3D 0;
-> > > >
-> > > >         /* Check if a valid transfer list passed in */
-> > > > -       if (!xferlist_from_boot_arg(&addr)) {
-> > > > -               size =3D bloblist_get_total_size();
-> > > > -       } else {
-> > > > -               /*
-> > > > -                * If U-Boot is not in the first phase, an existing=
- bloblist must
-> > > > -                * be at a fixed address.
-> > > > -                */
-> > > > -               bool from_addr =3D fixed && !xpl_is_first_phase();
-> > > > -
-> > > > -               /*
-> > > > -                * If Firmware Handoff is mandatory but no transfer=
- list is
-> > > > -                * observed, report it as an error.
-> > > > -                */
-> > > > -               if (IS_ENABLED(CONFIG_BLOBLIST_PASSAGE_MANDATORY))
-> > > > -                       return -ENOENT;
-> > > > -
-> > > > -               ret =3D -ENOENT;
-> > > > -
-> > > > -               if (xpl_prev_phase() =3D=3D PHASE_TPL &&
-> > > > -                   !IS_ENABLED(CONFIG_TPL_BLOBLIST))
-> > > > -                       from_addr =3D false;
-> > > > -               if (fixed)
-> > > > -                       addr =3D IF_ENABLED_INT(CONFIG_BLOBLIST_FIX=
-ED,
-> > > > -                                             CONFIG_BLOBLIST_ADDR);
-> > > > -               size =3D CONFIG_BLOBLIST_SIZE;
-> > > > -
-> > > > -               if (from_addr)
-> > > > -                       ret =3D bloblist_check(addr, size);
-> > > > +       if (!xferlist_from_boot_arg(&addr))
-> > > > +               goto found;
-> > > >
-> > > > -               if (ret)
-> > > > -                       log_debug("Bloblist at %lx not found (err=
-=3D%d)\n",
-> > > > -                                 addr, ret);
-> > > > -               else
-> > > > -                       /* Get the real size */
-> > > > -                       size =3D gd->bloblist->total_size;
-> > > > -       }
-> > > > +       /*
-> > > > +        * If Firmware Handoff is mandatory but no transfer list is
-> > > > +        * observed, report it as an error.
-> > > > +        */
-> > > > +       if (IS_ENABLED(CONFIG_BLOBLIST_PASSAGE_MANDATORY))
-> > > > +               return false;
-> > > >
-> > > > -       if (ret) {
-> > > > -               /*
-> > > > -                * If we don't have a bloblist from a fixed address=
-, or the one
-> > > > -                * in the fixed address is not valid. we must alloc=
-ate the
-> > > > -                * memory for it now.
-> > > > -                */
-> > > > -               if (CONFIG_IS_ENABLED(BLOBLIST_ALLOC)) {
-> > > > -                       void *ptr =3D memalign(BLOBLIST_ALIGN, size=
-);
-> > > > -
-> > > > -                       if (!ptr)
-> > > > -                               return log_msg_ret("alloc", -ENOMEM=
-);
-> > > > -                       addr =3D map_to_sysmem(ptr);
-> > > > -               } else if (!fixed) {
-> > > > -                       return log_msg_ret("BLOBLIST_FIXED is not e=
-nabled",
-> > > > -                                          ret);
-> > > > -               }
-> > > > -               log_debug("Creating new bloblist size %lx at %lx\n"=
-, size,
-> > > > -                         addr);
-> > > > -               ret =3D bloblist_new(addr, size, 0, 0);
-> > > > -       } else {
-> > > > -               log_debug("Found existing bloblist size %lx at %lx\=
-n", size,
-> > > > -                         addr);
-> > > > -       }
-> > > > +       /*
-> > > > +        * We have checked for a valid transfer list being passed. =
-At this
-> > > > +        * point, if we do not have a fixed address for the bloblis=
-t, we cannot
-> > > > +        * be provided with one.
-> > > > +        */
-> > > > +       if (xpl_is_first_phase() || !IS_ENABLED(CONFIG_BLOBLIST_FIX=
-ED))
-> > > > +               return false;
-> > > >
-> > > > -       if (ret)
-> > > > -               return log_msg_ret("ini", ret);
-> > > > -       gd->flags |=3D GD_FLG_BLOBLIST_READY;
-> > > > +       /*
-> > > > +        * Check for a valid list as the configured address.
-> > > > +        */
-> > > > +       addr =3D IF_ENABLED_INT(CONFIG_BLOBLIST_FIXED,
-> > > > +                             CONFIG_BLOBLIST_ADDR);
-> > > > +       ret =3D bloblist_check(addr, CONFIG_BLOBLIST_SIZE);
-> > > > +       if (!ret)
-> > > > +               goto found;
-> > > > +
-> > > > +       log_debug("Bloblist at %lx not found (err=3D%d)\n", addr, r=
-et);
-> > > > +       return false;
-> > > >
-> > > > +found:
-> > > >  #ifdef DEBUG
-> > > >         bloblist_show_stats();
-> > > >         bloblist_show_list();
-> > > >  #endif
-> > > > -
-> > > > -       return 0;
-> > > > +       return true;
-> > > >  }
-> > > >
-> > > > -int bloblist_maybe_init(void)
-> > > > +int bloblist_init(void)
-> > > >  {
-> > > > -       if (CONFIG_IS_ENABLED(BLOBLIST) && !(gd->flags & GD_FLG_BLO=
-BLIST_READY))
-> > > > -               return bloblist_init();
-> > > > +       int ret;
-> > > > +       ulong addr =3D 0, size =3D CONFIG_BLOBLIST_SIZE;
-> > > > +
-> > > > +       if (gd->flags & GD_FLG_BLOBLIST_READY) {
-> > > > +               log_debug("Found existing bloblist size %x at %p\n",
-> > > > +                         gd->bloblist->total_size, gd->bloblist);
-> > > > +               return 0;
-> > > > +       }
-> > > > +
-> > > > +       /*
-> > > > +        * If Firmware Handoff is mandatory but no transfer list ha=
-s been
-> > > > +        * observed by fdtdec_setup, report it as an error.
-> > > > +        */
-> > > > +       if (IS_ENABLED(CONFIG_BLOBLIST_PASSAGE_MANDATORY))
-> > > > +               return -ENOENT;
-> > > > +
-> > > > +       /*
-> > > > +        * If we don't have an existing bloblist, we either need
-> > > > +        * to allocate one now, or initialize the fixed address
-> > > > +        * space as a bloblist.
-> > > > +        */
-> > > > +       if (CONFIG_IS_ENABLED(BLOBLIST_ALLOC)) {
-> > > > +               void *ptr =3D memalign(BLOBLIST_ALIGN, size);
-> > > > +
-> > > > +               if (!ptr)
-> > > > +                       return log_msg_ret("alloc", -ENOMEM);
-> > > > +               addr =3D map_to_sysmem(ptr);
-> > > > +       } else
-> > > > +               addr =3D IF_ENABLED_INT(CONFIG_BLOBLIST_FIXED,
-> > > > +                                     CONFIG_BLOBLIST_ADDR);
-> > > > +
-> > > > +       log_debug("Creating new bloblist size %lx at %lx\n", size,
-> > > > +                 addr);
-> > > > +       ret =3D bloblist_new(addr, size, 0, 0);
-> > > > +       if (ret)
-> > > > +               return log_msg_ret("ini", ret);
-> > > >
-> > > >         return 0;
-> > > >  }
-> > > > @@ -687,7 +687,9 @@ int bloblist_check_reg_conv(ulong rfdt, ulong r=
-zero, ulong rsig, ulong xlist)
-> > > >                 return ret;
-> > > >
-> > > >         if (rfdt !=3D (ulong)bloblist_find(BLOBLISTT_CONTROL_FDT, 0=
-)) {
-> > > > -               gd->bloblist =3D NULL;  /* Reset the gd bloblist po=
-inter */
-> > > > +               /* Remove this bloblist from gd */
-> > > > +               gd->bloblist =3D NULL;
-> > > > +               gd->flags &=3D ~GD_FLG_BLOBLIST_READY;
-> > > >                 return -EIO;
-> > > >         }
-> > > >
-> > > > diff --git a/common/board_f.c b/common/board_f.c
-> > > > index ce87c619e680..c39e3b940d3b 100644
-> > > > --- a/common/board_f.c
-> > > > +++ b/common/board_f.c
-> > > > @@ -894,7 +894,9 @@ static void initcall_run_f(void)
-> > > >         INITCALL(log_init);
-> > > >         INITCALL(initf_bootstage); /* uses its own timer, so does n=
-ot need DM */
-> > > >         INITCALL(event_init);
-> > > > -       INITCALL(bloblist_maybe_init);
-> > > > +#if CONFIG_IS_ENABLED(BLOBLIST)
-> > > > +       INITCALL(bloblist_init);
-> > > > +#endif
-> > > >         INITCALL(setup_spl_handoff);
-> > > >  #if CONFIG_IS_ENABLED(CONSOLE_RECORD_INIT_F)
-> > > >         INITCALL(console_record_init);
-> > > > diff --git a/include/bloblist.h b/include/bloblist.h
-> > > > index e67b2a76358d..4c5787729654 100644
-> > > > --- a/include/bloblist.h
-> > > > +++ b/include/bloblist.h
-> > > > @@ -488,10 +488,24 @@ const char *bloblist_tag_name(enum bloblist_t=
-ag_t tag);
-> > > >   */
-> > > >  int bloblist_reloc(void *to, uint to_size);
-> > > >
-> > > > +/**
-> > > > + * bloblist_exists() - Check for the prior existence of a bloblist
-> > > > + *
-> > > > + * This will check for a transfer list having been passed via stan=
-dard
-> > > > + * convention. If CONFIG_BLOBLIST_PASSAGE_MANDATORY is selected an=
-d one is not
-> > > > + * found, we return false.
-> > > > + *
-> > > > + * If CONFIG_BLOBLIST_FIXED is selected, it uses CONFIG_BLOBLIST_A=
-DDR and
-> > > > + * CONFIG_BLOBLIST_SIZE to check for a bloblist.
-> > > > + *
-> > > > + * Return: true if found, false if not
-> > > > + */
-> > > > +bool bloblist_exists(void);
-> > > > +
-> > > >  /**
-> > > >   * bloblist_init() - Init the bloblist system with a single blobli=
-st
-> > > >   *
-> > > > - * This locates and sets up the blocklist for use.
-> > > > + * This creates a bloblist for use, if not already found.
-> > > >   *
-> > > >   * If CONFIG_BLOBLIST_FIXED is selected, it uses CONFIG_BLOBLIST_A=
-DDR and
-> > > >   * CONFIG_BLOBLIST_SIZE to set up a bloblist for use by U-Boot.
-> > > > @@ -508,22 +522,6 @@ int bloblist_reloc(void *to, uint to_size);
-> > > >   */
-> > > >  int bloblist_init(void);
-> > > >
-> > > > -#if CONFIG_IS_ENABLED(BLOBLIST)
-> > > > -/**
-> > > > - * bloblist_maybe_init() - Init the bloblist system if not already=
- done
-> > > > - *
-> > > > - * Calls bloblist_init() if the GD_FLG_BLOBLIST_READY flag is not =
-set
-> > > > - *
-> > > > - * Return: 0 if OK, -ve on error
-> > > > - */
-> > > > -int bloblist_maybe_init(void);
-> > > > -#else
-> > > > -static inline int bloblist_maybe_init(void)
-> > > > -{
-> > > > -       return 0;
-> > > > -}
-> > > > -#endif /* BLOBLIST */
-> > > > -
-> > > >  /**
-> > > >   * bloblist_check_reg_conv() - Check whether the bloblist is compl=
-iant to
-> > > >   *                            the register conventions according t=
-o the
-> > > > diff --git a/lib/fdtdec.c b/lib/fdtdec.c
-> > > > index c67b6e8c133e..7fd7f7ff01e5 100644
-> > > > --- a/lib/fdtdec.c
-> > > > +++ b/lib/fdtdec.c
-> > > > @@ -1822,17 +1822,12 @@ int fdtdec_setup(void)
-> > > >         int ret =3D -ENOENT;
-> > > >
-> > > >         /*
-> > > > -        * If allowing a bloblist, check that first. There was disc=
-ussion about
-> > > > -        * adding an OF_BLOBLIST Kconfig, but this was rejected.
-> > > > -        *
-> > > > -        * The necessary test is whether the previous phase passed =
-a bloblist,
-> > > > -        * not whether this phase creates one.
-> > > > +        * If allowing a bloblist, check that first. The necessary =
-test is
-> > > > +        * whether the previous phase passed a bloblist, not whethe=
-r this phase
-> > > > +        * creates one.
-> > > >          */
-> > > > -       if (CONFIG_IS_ENABLED(BLOBLIST) &&
-> > > > -           (xpl_prev_phase() !=3D PHASE_TPL ||
-> > > > -            IS_ENABLED(CONFIG_TPL_BLOBLIST))) {
-> > > > -               ret =3D bloblist_maybe_init();
-> > > > -               if (!ret) {
-> > > > +       if (CONFIG_IS_ENABLED(BLOBLIST) && (xpl_prev_phase() !=3D P=
-HASE_TPL)) {
-> > >
-> > > I think this change drops the TPL-provided blobs on TPL->SPL boots.
-> > > When TPL_BLOBLIST is selected, the next phase starts with
-> > > xpl_prev_phase() =3D=3D PHASE_TPL.
-> > > This new guard now skips bloblist_exists(), so gd->flags never gets
-> > > GD_FLG_BLOBLIST_READY; the later bloblist_init() in common/spl/spl.c
-> > > then creates a fresh bloblist and overwrites the fixed-address list
-> > > from TPL.
-> >
-> > Ah right, oops. I guess the only question is if we should continue to
-> > optimize the TPL case (it can't exist) or just always check (maybe
-> > there's some 4 stage boot..).
-> >
->=20
-> That really depends on whether we shall consider the scenario of TPL.
-> For the case of the Arm Firmware Handoff, stages before BL2 are not
-> considered to hand information over to the next stage via Transfer
-> List (aka. bloblist in U-Boot).
+> Interesting that it passed Azure's pipeline. It failed on Gitlab's CI:
 
-OK, I think we can just go with SPL or higher looks for a bloblist, TPL
-can create one but not be passed one. It's simple enough to change if
-there's somehow a 4 stage boot we need to worry about later.
+Looking at the Azure pipeline, it too failed. The mx6 part of the job is
+a failure. It has the same 4 failed to build, but didn't show what the
+board name was that Gitlab has too.
 
 --=20
 Tom
 
---owdlBzfXH93kEDvn
+--yHzl7Ac2gZKOY2Nc
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCagiN9gAKCRAr4qD1Cr/k
-CjnYAP9WcL3TN2bL1Aq+P55+mCznbr/w3Scp5oFUtBdZcuNYtgD/VySm3Upbbj14
-XjblA4bY8Jq5DRMs+zxNbI32NJT38A8=
-=/YuU
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCagie0wAKCRAr4qD1Cr/k
+CozQAQDNsXaOeX6OyARLTYOH5C/MtB/xw4RBwCheAS0cVreI1wEA2lp/9FthhX6t
+ISZJl1xPtJMIHu+4qgWos24S8IvJ3gE=
+=H2BU
 -----END PGP SIGNATURE-----
 
---owdlBzfXH93kEDvn--
+--yHzl7Ac2gZKOY2Nc--
