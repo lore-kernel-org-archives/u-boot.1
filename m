@@ -4,96 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4CD51CD4F21
-	for <u-boot@archiver.kernel.org>; Sat, 16 May 2026 13:28:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64608CD4F21
+	for <u-boot@archiver.kernel.org>; Sat, 16 May 2026 13:31:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 712DA845E3;
-	Sat, 16 May 2026 15:28:57 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B6FDB84671;
+	Sat, 16 May 2026 15:31:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="JHpoPiaZ";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="CtdOrrh+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5611C84659; Sat, 16 May 2026 15:28:56 +0200 (CEST)
-Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
- [IPv6:2a00:1450:4864:20::631])
+ id 9D8BC8467B; Sat, 16 May 2026 15:31:38 +0200 (CEST)
+Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
+ [IPv6:2a00:1450:4864:20::629])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 39E1E8407D
- for <u-boot@lists.denx.de>; Sat, 16 May 2026 15:28:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BB97D845E3
+ for <u-boot@lists.denx.de>; Sat, 16 May 2026 15:31:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x631.google.com with SMTP id
- a640c23a62f3a-bd4f7f05e90so190586266b.2
- for <u-boot@lists.denx.de>; Sat, 16 May 2026 06:28:54 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1778938134; cv=none;
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-bcd0111ea98so142664066b.1
+ for <u-boot@lists.denx.de>; Sat, 16 May 2026 06:31:36 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1778938296; cv=none;
  d=google.com; s=arc-20240605;
- b=iuNtge+JXXlh9qaoiLW3MzaggDlbDDlw8SHDq4Z/A8LQ+WG62MoSCkDXUhT1Stz6dK
- JhkGQHeXZccY8QBl6gsJDvd+sam9vii3F8gv7gaZCWKFMFK1DgPb8QQ4H6yELdIhSUOI
- ffCMiC3uSBz4X/SLgihdfaS3XXMNgrKTnO8EA+nL/dJl1DaRFMFzPAn6HVTXUGuxnduC
- gBCmYilzxRBzBp91gmiBJSC8cNZ37BaOWo1u8FpmmjnMfRPdJKSJ9uGHv1X277p1J5QF
- qDkn8fDLakakDhEIg955GIKLNH09dCxduCmdQ4h1f/9Zw6CzMcPXEECQEMkLd/CXrFJK
- jf+Q==
+ b=gBuJW88gf9QAHzTnkHM9nYwSNrQmgboazuzfK30Xq1d6gGwMdlSCbRtow7QvOnSobV
+ AtD9HeL9Jke3S+UuU5CsDc5KaX5IZ88lO9pkB7HtFMu3Vrht4snvPhKyZIqIJm/5kxIK
+ 1p6wuU5szZ9JZk/Vioma78V5pdXB9tY73hpHoS+RDBWNUP5e4rWua+JSlgw4EsbzOqjG
+ cM0TbcIOl7IRTNI0WqfHV57p0I8DBIR31106clmT5i3hFWf/Wg23II0zGDfDsbfhya+L
+ U0FJa8QXazNk8o4FTpbxIGB7FtKsydxXYWzjluQkQD3NeTDKSCT055Cdd7cpVa1qLNFm
+ LDOQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=H9TlimUVMK6R0PUN5vVsiq2R9HM4B2h/Wn6NkDcIQGQ=;
- fh=dV+BOyvQfqal2evuHSWtSdoatlf3EYFlPsmIsPRe/Bk=;
- b=igfOdBTg/hqOQL13mhWfC1OJwQiCXjBeVGyRJyTCLtTJITLmIANXIJl6wNA/i2NfEm
- RfF+E0I6jSgN32a0VX5e2zcd29sh6t5g/67gi7IfSCTC2BoPAwwtFIZIgATo8DtsH2nG
- UsIX/rL7WTHceAVN2hrz6ptb09U3AOWXAIs+X3Bp4av3Lmui3dxJTTmbWT1tq91gl9Um
- 3LL+cZ8SvK70J2kqjcDh7IBk3B8fDdXCxcWeiNKu8OLlqMZDC621mpA2wkZU5Oyp2xxf
- Hvw7S/P53DCwkKcmHz54Yboq7h2HXALRk2m7wxrwTOdq5KOrp2d64jAEwcLaVLZAzRul
- A5HA==; darn=lists.denx.de
+ bh=dcE1UIzNDIOhRWwk0WuF6w6l9PK30jlgdHAGEfEZNho=;
+ fh=5YhLnYExn+RFXJMHrXa6E+9YNQ7PdWKEtG4iQ2WFeRA=;
+ b=EsvYDECCVK7i0lKs//sXhXqAmuUeCEaClAA2DJHf2dN+EXYptmSVi/TR6v7WwzCRkT
+ O76FYKozSTfK29oProdyYVRK1aj4Spc+HSNAz9Gm8QRyqFqrWBSvMCFiryga1BLXyPWY
+ ZimC1ErfEnYzvD8EBi0RcwUo73hpSXSiJcvrfzH4H7KcEK1ihioh31fwbTWyxgdHStWO
+ FNtwf+yDP5rbu6ly2cY9Nt7ccbQ8Uh5/WM78p0JEgBa6NqUH5lf+zbiSRcNucF72KysP
+ 5HminVuDe9T0tv1nCpTzH/rx1rbHbm7zV1kjMy5V/QxfNctNziUXAbHdfDMxHTAezkL6
+ O+sg==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1778938134; x=1779542934; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1778938296; x=1779543096; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=H9TlimUVMK6R0PUN5vVsiq2R9HM4B2h/Wn6NkDcIQGQ=;
- b=JHpoPiaZZBsOWP0RUmKSQBCVlLDILmWSCPs/zDWKakXaoQeFpYw8/bdAwO55D7/hpl
- uhQ9a+zU+gAMELbZ0nVBjaIzyAM2jq4huvmns7GQdJt1dioyY5GTS/3PWwKHvYKNOs8p
- MNOI9B9A1bnmJ9Wqa6CoYHsBqiSm7Kk8DDVuc=
+ bh=dcE1UIzNDIOhRWwk0WuF6w6l9PK30jlgdHAGEfEZNho=;
+ b=CtdOrrh+uuHW6sLzVOw8jGaXaS/hjUcpSL50ZpKZIckpDbev/8Mc5hPcSpRprRCzYf
+ xPfsxUmo3C0h41RKE/gGCFRFrfY4rlEPFZeWLXVmgASnH2ORvS1A28RokXbmsJc+rIrB
+ Nbe8QAzbxY0DNQLvZDKGSc/MOEZuf81SmqO+U=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778938134; x=1779542934;
+ d=1e100.net; s=20251104; t=1778938296; x=1779543096;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=H9TlimUVMK6R0PUN5vVsiq2R9HM4B2h/Wn6NkDcIQGQ=;
- b=Uho9gyf4s7/Rh5nj4DcWf9yhyqxBhRS/Jlm+6GRktVADcOZBz9SeAqwvK/5q5EIzRG
- KpHZi2lbzERodOqk+9889JfED6wrW40w3brnnsm0ERkdZhwMWWIRXEc1e9UXmBosZiEm
- 3PE15/AIuP160r91bVJiAelOxEq0iCcSj5o3HlErRiheNtjNNLshEj7RJ6l7mmH4mKO+
- GhrVQeBM4i1JpR7HcUypT/HNx2Y7VQSGJK7nlzdAX5IAqkTwrfeSXpyXaO+lohjIivSJ
- qs9EFxLo0EhUet1fWoLxyOpoM9ORuw0oEkqCsd406UcsWhoIC8zdTMiO8p4jcJIeaJD8
- 0vzw==
-X-Forwarded-Encrypted: i=1;
- AFNElJ+TVhyxFLzCboPF+ITALYW3LZpwf8Qvq4rxzCS33fzc9O6GO6OjEXGcuCYF/64UmYPtsjgzUsc=@lists.denx.de
-X-Gm-Message-State: AOJu0YwXBucMK3S/l7wVe0erjVzulbDya7eVRneH4w9NET9iDoIERi2u
- tVYZKXd8nR4MU2xfd9Uw1fsCyB4snsoXo+44wBfwajGpptx7qrhtUhvpyrwSMv5+b//6M1CKewB
- 4qgkXYT2xVXn0KlOlXBxf+gyesn6fIywBYK/xVxi3
-X-Gm-Gg: Acq92OFldPww14ASx7fQM69agVoLzcD4Rj7QjJs9QqpeoqzdY55i7PBm6ka/N010FKk
- YKGFSBmf1fkckf/Z88XHENbZcGMkW0otV27zBdbyzxLcUM/te+B2e1rWQ9TlI63Q2eexPU/q6LY
- 9KOEq5OgnimjFlV3HxSlLaheyxKEfoj4BF9VcoI8YJddBPvimjDoRQs0Nv4l1T+TXZgZB4YPL0S
- 83y3C0I9qSGXS+OZHSuE2LecAl7DEVehW/apgWXesrQHX9J0PMHn4Khj8LZLUu2xvRZD9pTmOT1
- A6bxtA==
-X-Received: by 2002:a17:907:3d45:b0:bd5:27b7:adaf with SMTP id
- a640c23a62f3a-bd527b7af46mr268882666b.33.1778938133641; Sat, 16 May 2026
- 06:28:53 -0700 (PDT)
+ bh=dcE1UIzNDIOhRWwk0WuF6w6l9PK30jlgdHAGEfEZNho=;
+ b=i02YkfmX5F5xfA5iVZ4A1GWazP1Ywz/Yoe8saQDbYG+tbvmQMRmusBAmWhB/UqQ9lF
+ zcWwJC1cHnMQLSqHuip/OB4zeS+nGTrpho+/oDDBv7iu5DavgKBHUycRJfpcO6RRgPYj
+ t27h0SO3qYwfrDg7mvqjuUd1lbbU//IvYihvieXPQT/4RnueMsnq1z3fwYJw06rx4k31
+ +xH6TOeeWZL/MDMkH/ovH09L45H7xves5wikPmlw8CaRfryAGBuKz2e2Ta+mM1DFtx6m
+ 0LVG/r19AZ7UCZW8c6sD0KqR6dJ0JUi5mHkLiUF92YuLPjb2FNfaG9AUvTkLXLq5QZL7
+ a3Kg==
+X-Gm-Message-State: AOJu0Yz/gG2kfDqFvtCscQp1T39dSKYba26kv1TilKl2Qpdz4/joVvzD
+ +wAuG1rQg0DclkyTvqHicIpbukY8piB4XeCyknB+okJ4BubpbnYdWM6uI/Oyf8rdk9zx2zf83aG
+ i7EzfVcXgk2vVd6r+Kg/jqEZJ3DuNg3ciDUpPUGMO
+X-Gm-Gg: Acq92OGbM5Wo19tU2QflMHtFZLTeY2EuaK4wOAO86ijfkqITipU2BxaNSS/7YNVGN0W
+ nN7ZjyeDEvV3CAtTtuBu9dUsGiSJTZaxemP1SnecAsFoBUjzpLDwaYzJRdwDg33az46xxznAfG4
+ ce6fFjxMfpY0yddbcUvK2cRFWm0F0apOyxYNnMZAJ334xQa3JWX3u3CPjK7Rb4BedOutvUZOvUl
+ VDSHWnCOYFwjh7XjRQHUyAz/yFiiR0N5MBrea27nd4ZbQTkgdb8h/cVdLd4szXyKUo+WxKSEdbO
+ nXzuj9nGKQuMjzyskeElacCZvZ0=
+X-Received: by 2002:a17:906:478e:b0:bce:b586:e683 with SMTP id
+ a640c23a62f3a-bd517abe938mr424394766b.43.1778938296138; Sat, 16 May 2026
+ 06:31:36 -0700 (PDT)
 MIME-Version: 1.0
-References: <ageGYp5K7a2hanTC@os.inf.tu-dresden.de>
-In-Reply-To: <ageGYp5K7a2hanTC@os.inf.tu-dresden.de>
+References: <BESP194MB28052CF65AFFB806C625EE84DA042@BESP194MB2805.EURP194.PROD.OUTLOOK.COM>
+In-Reply-To: <BESP194MB28052CF65AFFB806C625EE84DA042@BESP194MB2805.EURP194.PROD.OUTLOOK.COM>
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 16 May 2026 07:28:40 -0600
-X-Gm-Features: AVHnY4JPG8WPjMGdq_wB8NmA37NNGslf-saIec4JXxRG_QIcNZXoB1O2Gk0jT-s
-Message-ID: <CAFLszTgAWM3rj9rSOovRYtz7DC7FfffnirOJnJGMJufnGU94_g@mail.gmail.com>
-Subject: Re: [PATCH v2] common/command.c: Avoid NULL pointer use in
- cmd_auto_complete
-To: adam@l4re.org
-Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
- Tom Rini <trini@konsulko.com>
+Date: Sat, 16 May 2026 07:31:24 -0600
+X-Gm-Features: AVHnY4I-9tHCdS1DczI0YIoJWxIsz7M_y5YAIqB5zg8-TAMONajZnRfWRrqfw_I
+Message-ID: <CAFLszTjuy1N2huOeFVLEiH53EZ5mDU4ko5WiCMM_4mjkQMgNJA@mail.gmail.com>
+Subject: Re: [PATCH] boot: cedit: Check ofnode_read_prop return value
+To: fberder@outlook.fr
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ Simon Glass <sjg@chromium.org>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -111,16 +108,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2026-05-15T20:47:30, Adam Lackorzynski <adam@l4re.org> wrote:
-> common/command.c: Avoid NULL pointer use in cmd_auto_complete
+Hi Francois,
+
+On 2026-05-15T20:57:47, Francois Berder <fberder@outlook.fr> wrote:
+> boot: cedit: Check ofnode_read_prop return value
 >
-> Avoid using ps_prompt having a NULL pointer. For that, use the same
-> approach as in uboot_cli_readline().
+> In h_read_settings, val variable could be NULL due to
+> ofnode_read_prop returning an error. This variable
+> would then be used as the src in strcpy.
 >
-> Suggested-by: Simon Glass <sjg@chromium.org>
-> Signed-off-by: Adam Lackorzynski <adam@l4re.org>
+> Add a NULL check after calling ofnode_read_prop.
 >
-> common/command.c | 14 +++++++++-----
->  1 file changed, 9 insertions(+), 5 deletions(-)
+> Signed-off-by: Francois Berder <fberder@outlook.fr>
+>
+> boot/cedit.c | 2 ++
+>  1 file changed, 2 insertions(+)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
+
+> diff --git a/boot/cedit.c b/boot/cedit.c
+> @@ -500,6 +500,8 @@ static int h_read_settings(struct scene_obj *obj, void *vpriv)
+>               tline = (struct scene_obj_textline *)obj;
+>
+>               val = ofnode_read_prop(node, obj->name, &len);
+> +             if (!val)
+> +                     return log_msg_ret('tline', -EINVAL);
+>               if (len >= tline->max_chars)
+>                       return log_msg_ret('str', -ENOSPC);
+>               strcpy(abuf_data(&tline->buf), val);
+
+Good catch!
+
+Please can you use -ENOENT rather than -EINVAL, as this is more
+consistent with the SCENEOBJT_MENU case a few lines below.
+
+Regards,
+Simon
