@@ -4,32 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC262CD4F21
-	for <u-boot@archiver.kernel.org>; Sat, 16 May 2026 11:41:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4ECB5CD4F25
+	for <u-boot@archiver.kernel.org>; Sat, 16 May 2026 11:41:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AABD684676;
-	Sat, 16 May 2026 13:41:29 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E2C6884692;
+	Sat, 16 May 2026 13:41:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=lst.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EE48B84690; Sat, 16 May 2026 13:41:28 +0200 (CEST)
+ id A18F283EF9; Sat, 16 May 2026 13:41:32 +0200 (CEST)
 Received: from verein.lst.de (verein.lst.de [213.95.11.211])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E834E83EF9
- for <u-boot@lists.denx.de>; Sat, 16 May 2026 13:41:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A9F71846A4
+ for <u-boot@lists.denx.de>; Sat, 16 May 2026 13:41:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=lst.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=duwe@lst.de
 Received: by verein.lst.de (Postfix, from userid 2005)
- id 7E51668D0F; Sat, 16 May 2026 13:41:25 +0200 (CEST)
+ id A0D9F68D15; Sat, 16 May 2026 13:41:28 +0200 (CEST)
 In-Reply-To: <20260516113940.647CE68BEB@verein.lst.de>
 References: <20260516113940.647CE68BEB@verein.lst.de>
-Subject: [PATCH v3 5/9] reset: Add RPi5 rescal reset facilities
+Subject: [PATCH v3 6/9] pci: brcmstb: Get and use bridge and rescal reset
+ properties
 To: Peter Robinson <pbrobinson@gmail.com>, Matthias Brugger <mbrugger@suse.com>
 Cc: Tom Rini <trini@konsulko.com>,"Jan Čermák" <sairon@sairon.cz>,Andrea della Porta <andrea.porta@suse.com>,"Ivan T. Ivanov" <iivanov@suse.de>, Stanimir Varbanov <stanimir.varbanov@suse.com>, Oleksii Moisieiev <Oleksii_Moisieiev@epam.com>, Volodymyr Babchuk <volodymyr_babchuk@epam.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>,Paul Barker <paul.barker.ct@bp.renesas.com>,Patrice Chotard <patrice.chotard@foss.st.com>,Christian Marangi <ansuelsmth@gmail.com>,Patrick Delaunay <patrick.delaunay@foss.st.com>,Huan Zhou <me@per1cycle.org>,Gabriel Fernandez <gabriel.fernandez@foss.st.com>,Kever Yang <kever.yang@rock-chips.com>,Jonas Karlman <jonas@kwiboo.se>,Joseph Chen <chenjh@rock-chips.com>,Elaine Zhang <zhangqing@rock-chips.com>, Pedro Falcato <pfalcato@suse.de>,u-boot@lists.denx.de
-Message-Id: <20260516114125.7E51668D0F@verein.lst.de>
-Date: Sat, 16 May 2026 13:41:25 +0200 (CEST)
+Message-Id: <20260516114128.A0D9F68D15@verein.lst.de>
+Date: Sat, 16 May 2026 13:41:28 +0200 (CEST)
 From: duwe@lst.de (Torsten Duwe)
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -49,172 +50,120 @@ X-Virus-Status: Clean
 
 From: Torsten Duwe <duwe@suse.de>
 
-A driver for Broadcom rescal reset controllers ported from
-linux/drivers/reset/reset-brcmstb-rescal.c to U-Boot.
+Check whether the device tree has nodes for the two reset controls and use
+them if so.
 
 Signed-off-by: Torsten Duwe <duwe@suse.de>
 Co-authored-by: Oleksii Moisieiev <oleksii_moisieiev@epam.com>
 Tested-by: Pedro Falcato <pfalcato@suse.de>
 ---
- configs/rpi_arm64_defconfig          |   1 +
- drivers/reset/Kconfig                |   8 +++
- drivers/reset/Makefile               |   1 +
- drivers/reset/reset-brcmstb-rescal.c | 103 +++++++++++++++++++++++++++
- 4 files changed, 113 insertions(+)
- create mode 100644 drivers/reset/reset-brcmstb-rescal.c
+ drivers/pci/pcie_brcmstb.c | 51 +++++++++++++++++++++++++++++++++++++-
+ 1 file changed, 50 insertions(+), 1 deletion(-)
 
-diff --git a/configs/rpi_arm64_defconfig b/configs/rpi_arm64_defconfig
-index 153d7ed301e..38af5029403 100644
---- a/configs/rpi_arm64_defconfig
-+++ b/configs/rpi_arm64_defconfig
-@@ -45,6 +45,7 @@ CONFIG_PCI_BRCMSTB=y
- CONFIG_PINCTRL=y
- # CONFIG_PINCTRL_GENERIC is not set
- CONFIG_RESET_BRCMSTB=y
-+CONFIG_RESET_BRCMSTB_RESCAL=y
- CONFIG_DM_RNG=y
- CONFIG_RNG_IPROC200=y
- # CONFIG_REQUIRE_SERIAL_CONSOLE is not set
-diff --git a/drivers/reset/Kconfig b/drivers/reset/Kconfig
-index 7f1b2a304e3..485f907b041 100644
---- a/drivers/reset/Kconfig
-+++ b/drivers/reset/Kconfig
-@@ -72,6 +72,14 @@ config RESET_BRCMSTB
- 	  If you wish to use reset resources managed by the Broadcom
- 	  Reset Controller, say Y here. Otherwise, say N.
+diff --git a/drivers/pci/pcie_brcmstb.c b/drivers/pci/pcie_brcmstb.c
+index 261f8790528..1f97cda5cc7 100644
+--- a/drivers/pci/pcie_brcmstb.c
++++ b/drivers/pci/pcie_brcmstb.c
+@@ -21,6 +21,7 @@
+ #include <linux/bitfield.h>
+ #include <linux/log2.h>
+ #include <linux/iopoll.h>
++#include <reset.h>
  
-+config RESET_BRCMSTB_RESCAL
-+	depends on ARCH_BCM283X
-+	bool "Generic Rescal Reset controller driver for Broadcom"
-+	help
-+	  Support rescal reset controller on Broadcom.
-+	  If you wish to use reset resources managed by the Broadcom
-+	  Reset Controller, say Y here. Otherwise, say N.
-+
- config RESET_UNIPHIER
- 	bool "Reset controller driver for UniPhier SoCs"
- 	depends on ARCH_UNIPHIER
-diff --git a/drivers/reset/Makefile b/drivers/reset/Makefile
-index ad5fe6b6184..c369bdb3d6c 100644
---- a/drivers/reset/Makefile
-+++ b/drivers/reset/Makefile
-@@ -14,6 +14,7 @@ obj-$(CONFIG_RESET_TI_SCI) += reset-ti-sci.o
- obj-$(CONFIG_RESET_HSDK) += reset-hsdk.o
- obj-$(CONFIG_RESET_BCM6345) += reset-bcm6345.o
- obj-$(CONFIG_RESET_BRCMSTB) += reset-brcmstb.o
-+obj-$(CONFIG_RESET_BRCMSTB_RESCAL) += reset-brcmstb-rescal.o
- obj-$(CONFIG_RESET_UNIPHIER) += reset-uniphier.o
- obj-$(CONFIG_RESET_AST2500) += reset-ast2500.o
- obj-$(CONFIG_RESET_AST2600) += reset-ast2600.o
-diff --git a/drivers/reset/reset-brcmstb-rescal.c b/drivers/reset/reset-brcmstb-rescal.c
-new file mode 100644
-index 00000000000..fc8fcfa8b3f
---- /dev/null
-+++ b/drivers/reset/reset-brcmstb-rescal.c
-@@ -0,0 +1,103 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/*
-+ * Broadcom STB generic reset controller
-+ *
-+ * Copyright (C) 2024 EPAM Systems
-+ * Moved from linux kernel:
-+ * Copyright (C) 2018-2020 Broadcom
-+ */
-+
-+#include <asm/io.h>
-+#include <dm.h>
-+#include <dm/device_compat.h>
-+#include <errno.h>
-+#include <linux/bitops.h>
-+#include <linux/delay.h>
-+#include <linux/iopoll.h>
-+#include <log.h>
-+#include <malloc.h>
-+#include <reset-uclass.h>
-+
-+#define BRCM_RESCAL_START 0x0
-+#define BRCM_RESCAL_START_BIT BIT(0)
-+#define BRCM_RESCAL_CTRL 0x4
-+#define BRCM_RESCAL_STATUS 0x8
-+#define BRCM_RESCAL_STATUS_BIT BIT(0)
-+
-+struct brcm_rescal_reset {
-+	void __iomem *base;
-+};
-+
-+/* Also doubles a deassert */
-+static int brcm_rescal_reset_set(struct reset_ctl *rst)
+ /* PCIe parameters */
+ #define BRCM_NUM_PCIE_OUT_WINS				4
+@@ -83,6 +84,8 @@ struct brcm_pcie {
+ 
+ 	int			gen;
+ 	bool			ssc;
++	struct reset_ctl	rescal;
++	struct reset_ctl	bridge_reset;
+ 	const struct brcm_pcie_cfg_data *pcie_cfg;
+ };
+ 
+@@ -147,6 +150,34 @@ static void brcm_pcie_perst_set_2712(struct brcm_pcie *pcie, u32 val)
+ 	writel(tmp, pcie->base + PCIE_MISC_PCIE_CTRL);
+ }
+ 
++static void brcm_pcie_get_resets_dt(struct udevice *dev)
 +{
-+	struct brcm_rescal_reset *data = dev_get_priv(rst->dev);
-+	void __iomem *base = data->base;
-+	u32 reg;
++	struct brcm_pcie *pcie = dev_get_priv(dev);
 +	int ret;
 +
-+	reg = readl(base + BRCM_RESCAL_START);
-+	writel(reg | BRCM_RESCAL_START_BIT, base + BRCM_RESCAL_START);
-+	reg = readl(base + BRCM_RESCAL_START);
-+	if (!(reg & BRCM_RESCAL_START_BIT)) {
-+		dev_err(rst->dev, "failed to start SATA/PCIe rescal\n");
-+		return -EIO;
-+	}
-+
-+	ret = readl_poll_timeout(base + BRCM_RESCAL_STATUS, reg,
-+				 (reg & BRCM_RESCAL_STATUS_BIT), 100);
++	ret = reset_get_by_name(dev, "rescal", &pcie->rescal);
 +	if (ret) {
-+		dev_err(rst->dev, "time out on SATA/PCIe rescal\n");
-+		return ret;
++		printf("Unable to get rescal reset\n");
++		return;
 +	}
 +
-+	reg = readl(base + BRCM_RESCAL_START);
-+	writel(reg & ~BRCM_RESCAL_START_BIT, base + BRCM_RESCAL_START);
-+
-+	dev_dbg(rst->dev, "SATA/PCIe rescal success\n");
-+	return 0;
++	ret = reset_get_by_name(dev, "bridge", &pcie->bridge_reset);
++	if (ret) {
++		printf("Unable to get bridge reset\n");
++		return;
++	}
 +}
 +
-+/* A dummy function - deassert/reset does all the work */
-+static int brcm_rescal_reset_assert(struct reset_ctl *rst)
++static void brcm_pcie_do_reset(struct udevice *dev)
 +{
-+	return 0;
++	struct brcm_pcie *pcie = dev_get_priv(dev);
++	int ret;
++
++	ret = reset_deassert(&pcie->rescal);
++	if (ret)
++		printf("failed to deassert 'rescal'\n");
 +}
 +
-+static int brcm_rescal_reset_xlate(struct reset_ctl *reset_ctl,
-+				   struct ofnode_phandle_args *args)
+ static void brcm_pcie_bridge_sw_init_set_generic(struct brcm_pcie *pcie, u32 val)
+ {
+ 	if (val)
+@@ -157,6 +188,14 @@ static void brcm_pcie_bridge_sw_init_set_generic(struct brcm_pcie *pcie, u32 val
+ 			     RGR1_SW_INIT_1_INIT_MASK);
+ }
+ 
++static void brcm_pcie_bridge_sw_init_set_2712(struct brcm_pcie *pcie, u32 val)
 +{
-+	/* This is needed if #reset-cells == 0. */
-+	return 0;
++	if (val)
++		reset_assert(&pcie->bridge_reset);
++	else
++		reset_deassert(&pcie->bridge_reset);
 +}
 +
-+static const struct reset_ops brcm_rescal_reset_ops = {
-+	.rst_deassert = brcm_rescal_reset_set,
-+	.rst_assert = brcm_rescal_reset_assert,
-+	.of_xlate = brcm_rescal_reset_xlate,
-+};
+ /**
+  * brcm_pcie_link_up() - Check whether the PCIe link is up
+  * @pcie: Pointer to the PCIe controller state
+@@ -413,6 +452,12 @@ static int brcm_pcie_probe(struct udevice *dev)
+ 	u16 nlw, cls, lnksta;
+ 	u32 tmp;
+ 
++	/*
++	 * Ensure rescal reset for BCM2712 is really disabled.
++	 */
++	if (pcie->pcie_cfg->type == BCM2712)
++		brcm_pcie_do_reset(dev);
 +
-+static int brcm_rescal_reset_probe(struct udevice *dev)
-+{
-+	struct brcm_rescal_reset *data = dev_get_priv(dev);
+ 	/*
+ 	 * Reset the bridge, assert the fundamental reset. Note for some SoCs,
+ 	 * e.g. BCM7278, the fundamental reset should not be asserted here.
+@@ -611,6 +656,10 @@ static int brcm_pcie_of_to_plat(struct udevice *dev)
+ 		pcie->gen = max_link_speed;
+ 
+ 	pcie->pcie_cfg = (const struct brcm_pcie_cfg_data *)dev_get_driver_data(dev);
 +
-+	data->base = dev_remap_addr(dev);
-+	if (!data->base)
-+		return -EINVAL;
++	if (pcie->pcie_cfg->type == BCM2712)
++		brcm_pcie_get_resets_dt(dev);
 +
-+	return 0;
-+}
-+
-+static const struct udevice_id brcm_rescal_reset_of_match[] = {
-+	{.compatible = "brcm,bcm7216-pcie-sata-rescal"},
-+	{},
-+};
-+
-+U_BOOT_DRIVER(brcmstb_reset_rescal) = {
-+	.name = "brcmstb-reset-rescal",
-+	.id = UCLASS_RESET,
-+	.of_match = brcm_rescal_reset_of_match,
-+	.ops = &brcm_rescal_reset_ops,
-+	.probe = brcm_rescal_reset_probe,
-+	.priv_auto = sizeof(struct brcm_rescal_reset),
-+};
+ 	return 0;
+ }
+ 
+@@ -645,7 +694,7 @@ static const struct brcm_pcie_cfg_data bcm2712_cfg = {
+ 	.offsets	= pcie_offsets_bcm2712,
+ 	.type		= BCM2712,
+ 	.perst_set	= brcm_pcie_perst_set_2712,
+-	.bridge_sw_init_set = brcm_pcie_bridge_sw_init_set_generic,
++	.bridge_sw_init_set = brcm_pcie_bridge_sw_init_set_2712,
+ 	.rc_mode	= brcm_pcie_rc_mode,
+ };
+ 
 -- 
 2.54.0
 
