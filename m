@@ -4,126 +4,138 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39F9FCD4F21
-	for <u-boot@archiver.kernel.org>; Sat, 16 May 2026 08:27:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C03E9CD4F21
+	for <u-boot@archiver.kernel.org>; Sat, 16 May 2026 09:44:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6890A8407D;
-	Sat, 16 May 2026 10:27:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
+	by phobos.denx.de (Postfix) with ESMTP id D08E4845E3;
+	Sat, 16 May 2026 11:44:03 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="O9M5QZ34";
+	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="bUjJbQmm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DA438845E3; Sat, 16 May 2026 10:27:32 +0200 (CEST)
-Received: from MRWPR03CU001.outbound.protection.outlook.com
- (mail-francesouthazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c207::3])
+ id 5123C84609; Sat, 16 May 2026 11:44:03 +0200 (CEST)
+Received: from CH1PR05CU001.outbound.protection.outlook.com
+ (mail-northcentralusazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c105::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5884F83EF9
- for <u-boot@lists.denx.de>; Sat, 16 May 2026 10:27:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 68F7383E76
+ for <u-boot@lists.denx.de>; Sat, 16 May 2026 11:44:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=oss.nxp.com
+ dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=peng.fan@oss.nxp.com
+ spf=pass smtp.mailfrom=tanmay.kathpalia@altera.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=gagb0BMW3St8y0XRa1lnV8iOtuXrQTTWJJkeY+J/HDCIL5/9dGI3YePeeFQt2KCojODvRvkDXXsm5PzkHCMUMLcYsTlDIVMfwhtDJ4cEm6lFAXiGyvv1u/pAIu4AZp8cqL61bw8kV4fDV4rtE9EyrSpA61LsQLDIjjZiF/jOVgwbZvMSRFAGc6STree2ZQP1CZU1e3dEWkZ+hDCnifSEs6sjhoEfSVhrnyH7ps1S/+nbBxGxvWl10W42rtfRQXmHRELvnPj4zEZmq1ZU9H4XPa/4stUV2RtQuCFa9CJj/OOEen/zlrj4ZranGye53fgCvVlV0CNCvtsnwbHhVtq2BQ==
+ b=BeRqvnd32ocGnet1Sn/Ae/oUe+vctsI/SnBy/bprPQKHtAGjT665IKShr6LKMjmXsZJVyM5Ga/dC5+TjqIW8dyr71Me8US8IyMHcfc8RNgv5kNn4L4h2SYl47+pJCNQhWG0lavlgVq7Q8vxclW+Qp0Bwk8ctvE8qhRqL401C4zP6rZ6fRgL7F435TffNHaFUEdnbC1wUzAPfiaQ/OtHCnBP7a2+X/Zrsd3BkGdU4dYEAWKm4gHZ8gAld+RnpVcsUE3YXy1wFjAxT5hTWMSmRStfOmHXGlTuHB0JzmYSqBa7wWDvv3X3jCkGGlct4NwbSCm0qwj3xla7EDI8SMzD/Aw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=xqkg2c4X7B/UvJlRTJUj02RoEijt2bToBX1kG/aNMOI=;
- b=V2nsQYXlsQY2141PnAHjkT+XzGHuhVuvdUY66ouKv00TvCh4s4nPw6kuspdaE3ME7z7f2kDeU84r7hJ2rjPT4ZlKLCwxHnM65ThR7/aGO0eHc+6rp4w3ivKMniPv9vWjjXy21AjGSmbUlsBuhGNgHnLJQjfuueBVI9spTj+yj8SPDFSTzdDmt50KTLHMkm/aU5JTPUi7yiziR1dxT36f6cicPzUbgHpa9U9bNz1iWnl267e48tpk+4dwb70OUxIu9jB+6DM0mhG9UDsX0O3roUSCvg3NUFBxBJI0VT99q7WbBTAqsuNFp1PEhu6z6RBmX1D9Gbr1nixt1WitCvYDew==
+ bh=W3zXhgX9RanJP8RdZ89OvuL1IjJH2qEKn4TxU4joHYo=;
+ b=JOYbTeo4tOO/kcjSM3mSj/oxc9U6+tjRqU9voIdGDLFkezXnOE2AcdgwTH/+yb/9uQ3Yk8Iz3100jqlWUoE2Zyq32zZ/yWvof85EXTtJeMlEyxynEMO0wNaQV5cvJ9ezG5qC5hGtkjG9S6UIL1fDUYk4tfaIpFf1w2taYmr8T+SkhIrQCtASgtYPqwlB2QHOskEWQ6gu1KPG6sJcUvM3DaNNgE7ULNgWsaJAAtUyD/WyFL+BguIW/raDpkGnCjLJv/OfmgSOXyWbM1ZSwvB3wf//eShyAODmqp98OkAW7u4enfR6rDMTibwpQ5hQl8qx1uxJ3jeszIliAZrJ8Y+h3w==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
- dkim=pass header.d=oss.nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
- s=selector1-NXP1-onmicrosoft-com;
+ smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
+ dkim=pass header.d=altera.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
+ s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=xqkg2c4X7B/UvJlRTJUj02RoEijt2bToBX1kG/aNMOI=;
- b=O9M5QZ34jpN6GwuJTA9Cu/c0EZia78INkCrtSkZFIKygpSWCo/yvNE27sTa6ZzyVXOo30KHlPPFL/CmS0Tsvv8DNFVrjYZYgR2UynQHwjtetm2Fv3giilVnn98DtFQEbljgJcI1cUARDnxVtsg33TBI8gv+n3Q95BVY+JQz7WHAUQ9Bh2JaGja/nsgYSI0Ob8CNPCu+RrbUKHQ86BVtUeAFtpwCfUXY90IyU2p5UtJ2Dq3qPnpUQK0YriA90WQ4oD9n+y53ZUfO7lPg2zB0Ga8aCFLLa4tIaK8sjr7SKBWp7AratO524GXdi+7HrACfmdnbJ0sTflF/oAc9lYeAR9Q==
+ bh=W3zXhgX9RanJP8RdZ89OvuL1IjJH2qEKn4TxU4joHYo=;
+ b=bUjJbQmmsuaFZ9N+s1D+4lGKvl44qScRcZUujLC9b6CXjWm4T4JCGkXvz42MYhQFzuttwnk9w5gLZVKcMXzV+GcyWiq02LxF7i7gx0wD0+VRQn1MDGieRc3SBAHjSCZNCLeWCC6eTvRyuF4z3fB/IgAYFu5NXClM4myDrEaNeYou8kqJ1L5G0Jn+RLDsmWP+0DeYA2KCq3ufQnR7dHoAUu+XfpJOXyLoFtjz51qKecJEGsjNACWpgZKjB+xynF49k2QiETypE/Pw49sh7nvBUeCb/3NCsPXoRjo+QA4L4QY8wU0X1upm7YoFIS+bVVEA9oY71dci8tC+vt5u8Ni55w==
 Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=oss.nxp.com;
-Received: from MRWPR04MB12330.eurprd04.prod.outlook.com (2603:10a6:501:7f::23)
- by DBBPR04MB7564.eurprd04.prod.outlook.com (2603:10a6:10:1f7::5) with
+ header.d=none;dmarc=none action=none header.from=altera.com;
+Received: from DM4PR03MB6208.namprd03.prod.outlook.com (2603:10b6:5:39c::19)
+ by SJ0PR03MB7026.namprd03.prod.outlook.com (2603:10b6:a03:4e8::13) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9913.11; Sat, 16 May
- 2026 08:27:23 +0000
-Received: from MRWPR04MB12330.eurprd04.prod.outlook.com
- ([fe80::ca22:f8c8:6aca:7889]) by MRWPR04MB12330.eurprd04.prod.outlook.com
- ([fe80::ca22:f8c8:6aca:7889%6]) with mapi id 15.21.0025.020; Sat, 16 May 2026
- 08:27:22 +0000
-Date: Sat, 16 May 2026 17:44:31 +0800
-From: Peng Fan <peng.fan@oss.nxp.com>
-To: Tanmay Kathpalia <tanmay.kathpalia@altera.com>, Judith Mendez <jm@ti.com>
-Cc: u-boot@lists.denx.de, trini@konsulko.com, peng.fan@nxp.com,
- jh80.chung@samsung.com, marex@denx.de, tien.fong.chee@altera.com
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9913.12; Sat, 16 May
+ 2026 09:43:56 +0000
+Received: from DM4PR03MB6208.namprd03.prod.outlook.com
+ ([fe80::2216:93ef:67b:9e04]) by DM4PR03MB6208.namprd03.prod.outlook.com
+ ([fe80::2216:93ef:67b:9e04%6]) with mapi id 15.21.0025.020; Sat, 16 May 2026
+ 09:43:55 +0000
+Message-ID: <1d2c6aef-9184-44a5-867a-f28762ff4c2c@altera.com>
+Date: Sat, 16 May 2026 15:13:46 +0530
+User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH] mmc: sd: Handle UHS-I voltage signaling without power
  cycle
-Message-ID: <agg8f-Q_RnVI9Gyl@nxa18884-linux.ap.freescale.net>
+To: Peng Fan <peng.fan@oss.nxp.com>, Judith Mendez <jm@ti.com>
+Cc: u-boot@lists.denx.de, trini@konsulko.com, peng.fan@nxp.com,
+ jh80.chung@samsung.com, marex@denx.de, tien.fong.chee@altera.com
 References: <20251021204526.22701-1-tanmay.kathpalia@altera.com>
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20251021204526.22701-1-tanmay.kathpalia@altera.com>
-X-ClientProxiedBy: SGAP274CA0014.SGPP274.PROD.OUTLOOK.COM (2603:1096:4:b6::26)
- To MRWPR04MB12330.eurprd04.prod.outlook.com
- (2603:10a6:501:7f::23)
+ <agg8f-Q_RnVI9Gyl@nxa18884-linux.ap.freescale.net>
+Content-Language: en-US
+From: "Kathpalia, Tanmay" <tanmay.kathpalia@altera.com>
+In-Reply-To: <agg8f-Q_RnVI9Gyl@nxa18884-linux.ap.freescale.net>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: MAXP287CA0002.INDP287.PROD.OUTLOOK.COM
+ (2603:1096:a00:49::23) To DM4PR03MB6208.namprd03.prod.outlook.com
+ (2603:10b6:5:39c::19)
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: MRWPR04MB12330:EE_|DBBPR04MB7564:EE_
-X-MS-Office365-Filtering-Correlation-Id: 68cc172a-b173-4a75-fcc5-08deb324f3ec
-X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
+X-MS-TrafficTypeDiagnostic: DM4PR03MB6208:EE_|SJ0PR03MB7026:EE_
+X-MS-Office365-Filtering-Correlation-Id: d401ca06-aa66-4d67-b4af-08deb32fa52b
+X-MS-Exchange-AtpMessageProperties: SA
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|366016|19092799006|52116014|1800799024|38350700014|11063799003|18002099003|22082099003|56012099003;
-X-Microsoft-Antispam-Message-Info: r6wfLEwV3BqOQT2yjKO0FQRfsoCly3zSoXmtYpj2fhl4hMeBN5Pg2TGkbDufWvArT1dAxXlz/FFLxPsk71LUvhDerRCxNsnOTz+c3cuu+uBXcz5ztMcDpjaCBQ77HK57O5Y627jQOHPH8gPC61hM76xF/2LvbuL8/1wbQreyKDRBlfSHpvAoIdsptZtzvycjkppqTszMQgJVYW01bV3bQFVo4H2lEPSb79Z+wWy/2vplj0iOLbJa1fPZZtS76UNpjCPetEPXFwN9vrRoHEFbccU9yUhxyhJUFjn1L+iFMCdcu3LUelCcL6/ajklrtPP7C7i+ILrmYlfiLoxfFDo1t2vrsI45SFVumcdIMHv5PcwpMkOEiVnKiSpKgUDOyYv1xPVdE+XpgZfOO9blSCE9J7Wv6IhwHy2QdXUkpzTmMlLCSQ2UTPwMEIkVNs3RPUp/Nai6RKR3fWy1KXaFO1LjImLbe1tov72NNiVEeOsJ4Y/7PR+miRRKZ8j8z1P4hZgI9aPRIKdk9yXd97IwEjHrfnacsd1tEJlOyUPilqLSDr+dvNWoJ5AvnOzLMvAz2fnZ/+h6PA9e21WMBKMT6u10yItnOsXpqeRgcOtjIAAotZAKZ007KFD2QSpg80Cbo/rpkzBEPig9fPsmgNzfdzH7uL/t2gbLC6boMsPQf7QJU5NxAafirpJrqngF4Q5Z8M1cFX8kuW9o9JVoXJOd78Qh7ie5UEiuqMhzShWzQ4OgNSopoLPgW9vmBKbe9oqq/m33
+ ARA:13230040|376014|366016|1800799024|18002099003|4143699003|11063799003|56012099003|22082099003|55112099003;
+X-Microsoft-Antispam-Message-Info: kxoD20vj+nnYzs+Cm8okJUfTt6V6LwhqeQMuvaBXFEps8atzjSVC8I/DbJvD2vcJwnk/yfstQj0kE8mBbOJpwn0umojto5z9kxlyUKXZpGpC3WnULqvxAVdRUf/1u3HFixBfoi6dT4aARPd1LZuGtrlSjTL/dIMbksXpm/k48otM+31C2CDWUEMnc3BpByYxOOo8jggeps928qHuFNKde+kxiNW5mXar5fobr6vjDO+SzbrqRJ85Rd9XU/JMo7lBeseD3qvIN0lmFRxgPJ5DwKQuOlYDcA5JmCQwbTr1ip+zgIHw9Sk7qHZO/cwET15bNHzDTbj9QaDn6EtSNXfvWVa7NajrzW6dYVPgvpiigqMKLxnjcd7vnpdGJFqONR12KHMpNDKaRugV3aJkr/xNlJC+Kr8L5LXMVpGcQM/sHKJBalXQEw9aDa1OYbDuQHJs11iaFiSdxuKt4LDYrrB+8ivRbvlfOL7ZwDHJZJVMeBf4IFuVAtXTuUuuorV9hsPiQuDHpvpfjKaNw80xoC5jTEVR6jVMteVs1SbNko/56FfYG8QPUeNv5E1r7pFz8h3/AH5o9o08RAWlhdUhCKluSP5mvQ73Q6MX5qlIpqJa0Yv8GBhRmAVpKwPRQ5sjrAnr9j5fQno/TnBlQkYYmyRN1o4jN8R5+RLcf5LwvAdcivaxPXbAntKS8/ZFpphbdE/+6+dZAQxa9hUZtOXmDZRtcQ==
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:MRWPR04MB12330.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(366016)(19092799006)(52116014)(1800799024)(38350700014)(11063799003)(18002099003)(22082099003)(56012099003);
+ IPV:NLI; SFV:NSPM; H:DM4PR03MB6208.namprd03.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(366016)(1800799024)(18002099003)(4143699003)(11063799003)(56012099003)(22082099003)(55112099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?SP1SN6GSP+qoIVBtMLF4DbRr2raXMDu9YxBEo+hXGlnzXF0MD6yWR5r1JYQr?=
- =?us-ascii?Q?0eTPVzwNS1mELQuDsEWrYHpcofWGcTjL8eeUy2h13hIpXC+1MktVmbWA+EFU?=
- =?us-ascii?Q?xiY+RtC9U4eajxXRoBQsqcVmtr8cqEeUGkRT6On11PzsbJ0aUdg/sC7cU/7x?=
- =?us-ascii?Q?cZLZiDuEkipCKZ+pYAHV8jNk4WsjYY/mn8j1Q9KtRim+OGYDBEf/qk4a6bE1?=
- =?us-ascii?Q?hIROuFx9QahSLo2L6nHR/3AB/230oQBKneUo12a0rjgFgK+v04H3t2qSGA/t?=
- =?us-ascii?Q?TFcrl0+dnSnKwg0Xth8MWg0w9+vsRitcl4bi5ed1dDZtrh2Rxz1LY02javtc?=
- =?us-ascii?Q?9/QK8CsKlj051DcfuInLduR5ju0BDqY0I3mMmyapYN2oypTv4ttbQiFCY9GX?=
- =?us-ascii?Q?u3u+Z/BdBNjHMi7C3qBE2fx6cIr4bFZVlYiBGetpnTen+cNONWd+P1+L2XM3?=
- =?us-ascii?Q?y0ivyOdyGhzysGtJqV8eP9ATqmD97o2R0fqprNJuDnBRgtmYLpYB09dnrJmP?=
- =?us-ascii?Q?MBujlRuk4YuoNn1Azogar2wZCQkls4+gi91g5ipy0xrj657AW18fJY5xt/qs?=
- =?us-ascii?Q?sxgR8NRwYdWKQneYPmhHgbhrUymuserZboDaADxr1nzEEO8tNkxUfVEJjEKb?=
- =?us-ascii?Q?WYJRpA6MZMtthmesguBhJrThSjpXSPQVgOTFs4Rn+6EM0Uawi5pd1aaxEvxZ?=
- =?us-ascii?Q?lH2hBFpS6+H9BY1YuvH/gMNWSMWNTZbAWay78YQKDSryiwKO8Ff20IbhExoB?=
- =?us-ascii?Q?zgiPsT6OTbfQU1oOv5L5NpMM8Kk+Ww8vtMo63v44WpJLfO+cupetUdVSWB5G?=
- =?us-ascii?Q?C7Wu4QHNqza/6D9aE90lcJFfhQ0EpHtoavMv9x1zcfKmCpmhvpMiHhp8pf0G?=
- =?us-ascii?Q?OH92fyLXLmxIl1IDAueiTnUMnBd239K2T1EwQXYxrEa5vlTCwhxoh27KCe3L?=
- =?us-ascii?Q?Ck7bYB642XA8oh7qAve8MNt0lG9uBuk2welZ5WWcmH5qqf7R2FoMDUafX2A4?=
- =?us-ascii?Q?b/cW7XR4ITpXbKDidaqDfxGivfFmdF9A9WeEMnx7++OXsk/aI5/PcR92XANp?=
- =?us-ascii?Q?OLcpmPqAEdnegwnyduTSBXqyFImeMM99m14bWKdvfVjvSiFOFxaJSYW3+pmO?=
- =?us-ascii?Q?JK4RT+W53mFRHmZeoOt4+sJU20nz6TdJ1rNypFwJEVcuWPMWTFy03JCJCQdI?=
- =?us-ascii?Q?b9TveIkhjjBf1xJ7EONGSR13JEUtaPgHkKF7MDgRcW2Xq5kIlo+iFxF4kng1?=
- =?us-ascii?Q?iNVmSxgcb+8meNIY3iuar68fsE5qryuhnfYbhoQBCRx3jtC36CbQQhnTyjXs?=
- =?us-ascii?Q?Wy7u4TO1cAT9cAgCuVX/0iS/LVVO19AL0EQlODNgaw+4IZgrWoB3vc2s3cZM?=
- =?us-ascii?Q?Z1Xj2Y+N/tP7YUdhhHXRrk9z5GPpXW/q5a4YcrF7DDcYybFkunILKQnXL7kg?=
- =?us-ascii?Q?fyca0WmVbw/6iLAI+22UH/wfl9DYB1D+n89Ou5egdMf5e4L7CxGs+xdMaitW?=
- =?us-ascii?Q?Beh9C1kxK8jra+CjotWHck1UtKHoK+owAUEDdDNQKuBmWrEDx3YYodU4k6Ym?=
- =?us-ascii?Q?ZnKYIDAqJ1osBFqKil7yxM++dDyN2c+YJBuG/S4FfOZOUqOypljCs+5Hmzro?=
- =?us-ascii?Q?MCOF0Dt2jzAhFk1nitT2+AXCyt4g69Iq3Sdx8UWriDiKrQ+b5g4IBeKzB4m/?=
- =?us-ascii?Q?mKs8M/JQ8N2SsWxMjRzU2cQMJL+yuxNvwalrKYqlVKW1GnY2oqrH4aAQt99b?=
- =?us-ascii?Q?dXHGJJt72Q=3D=3D?=
-X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 68cc172a-b173-4a75-fcc5-08deb324f3ec
-X-MS-Exchange-CrossTenant-AuthSource: MRWPR04MB12330.eurprd04.prod.outlook.com
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?Y1dVeDNpb2NZNkk4RWVnRE1HNk8wMlc3aDkzdTZtQktkWlRvbThOazhRYnZF?=
+ =?utf-8?B?akFOVGkvNEcvQ1o4U28wTDNzUUwvN1dSbFd2SG40ejU0cTJFalJvL0dHRE0r?=
+ =?utf-8?B?VWRiZEt3NlB3UmRyT0JmWnJIYWd5K2c0akkvWU5YNnloQlpTR29xODltZm81?=
+ =?utf-8?B?YTlOdHFvb0tQR1FXV3VSdWlsSllNdGd2NzNrZU52MXpmWGJoeGVaT1B4QkFq?=
+ =?utf-8?B?b0xyRWZldmMyM085R3hNV3hHWTh6UGZlVTJwYUNvWlZHMTJoN2JHOHBGdUdK?=
+ =?utf-8?B?bythSkZEZGNhYW5lWWpZVmhVbEVNc1pCeTF3YVI1LzU3KzR3ZnI5NTQwZk9i?=
+ =?utf-8?B?bG91NnVKTTlhK0hKcnpWcE45bk1HYzVaQU5kdi9sOWNhU3JITjdSZjJJYTg4?=
+ =?utf-8?B?OXlSei80MW5ieWdtQzdOYXdNT25kQ2lqMUcyK0VKZktJYi9DMU9kK3NocnlM?=
+ =?utf-8?B?UjRHRVBWcnJUOG5aQTdFcHZLVDhKS2ZKSnljMko0SGFsWW80VnFEcDN2bWVy?=
+ =?utf-8?B?UVdPbENIcXdudDJyVVczTkR0L2orVUl1dHp6a3JLUTNYMEJxQWZvK2R6Yk5C?=
+ =?utf-8?B?VGVWWStjZFdSWmFaSklxNDVrcURKUnpOZ2lxZ0g5QUwrR3VXZGxXRVpVOW4r?=
+ =?utf-8?B?YzRaUWhSY1JBL2wvWFhYell5VFpDMDZxYmc0ZEpRYXZ2amplYlRrUVk4WjM3?=
+ =?utf-8?B?anZDam83R0VRUjc4Z2YySE9uYUtCUFhRcnhsakFuam1HZ3FjUU41YzYxRnd1?=
+ =?utf-8?B?Qm82T2VCeHBDSit0c2FyQ2w3R2lLTmNQSS9uQlJodjZOVGhyNXJDMkVYWEhl?=
+ =?utf-8?B?Q1B3UXFjQm9YSyt1cm5rSzF2VTlOcFMwSENJU0x2Q0JkdWI2dmxpbWVaWGxu?=
+ =?utf-8?B?eUtxQmNETy9jRmRKRmVSK0g5MXpIa0lxdHNGb2ZVQnRtSEZFSmUraEtNdHRG?=
+ =?utf-8?B?U1ZocWhuYnE4bk1tME9oMC9XMjdTMzNCL2RDVkc5WnU1MmV2RXFrREtpOHdS?=
+ =?utf-8?B?am9kdnR6ZnZjR1FhdFFkYkZBNm1QbWJJTU9Qazl3VnZ0RWhsY1BBWGlNZDgx?=
+ =?utf-8?B?R3FMMm1VbWNMbDFHRU9Oa0VuWjcrNlZLR3NiTDFhNHI2OHVkQUcrVW1UMjZ4?=
+ =?utf-8?B?VVVyRUNWWStUcVhHRWcxMlRzUGlrNlhCcndLSUtUMks4MkJ2cVBqRHZ2eHF6?=
+ =?utf-8?B?YWZPWXV2bndVRWFNdTAzZ1VVOW9xODRXMHpiMG4zbG1UZXJZVjdoeldlQkdL?=
+ =?utf-8?B?MFptZ3FHejRJWXpadmdtaVJLRkdiVmo2K2M3Z2pGZFpZOWl0Sm1aMnV6b01H?=
+ =?utf-8?B?dkZZYkJmeU5sQ3VRUGs2S2V3L09ocUZrTWNGVnQzV01jVVdyWEZNdEFOR294?=
+ =?utf-8?B?WVlodVl6cjgvaDFpcmZad2tHaU1uT2Zkc1kxMEExdVlVU2ErZjlXc2F5NDRi?=
+ =?utf-8?B?UkNiSXNOTUdUZGFQK0NVbzAzMkRjQkpFb2pCZ1MvQUcxdkw1N2dNc2RwMUdN?=
+ =?utf-8?B?aFgvdzZtRTA3VjVwYXlLY3piM0JWT0pRN1VrL0JpZWNRMmxHMUdCeFp0amtL?=
+ =?utf-8?B?bTdQTXI5SUZ2MVo5MXYwTXUwQmJIUXlldmdOMUhwVXpadkNvQXZNMXJWNkJD?=
+ =?utf-8?B?NnhpM3ZCRnVmMmZGdVRUVE9kZjlLWmJzeUtkNlMxVjNUQ3daMGNHY29uTGM2?=
+ =?utf-8?B?bTUvSTVCYnpHWUttellPZHVaY1QrSmFlVHB1L0FCOFdqV2N6NytXT0l4MUw0?=
+ =?utf-8?B?ZU80LzluV0dlRTFJY09QelUvZDQ3WDNyVGNUWEQ5clFyeGFYNjRhRHdqVXhx?=
+ =?utf-8?B?bHFnK1pNUXMwMjFYKzdVZ2xyQktacTh6R3pmVFVBYU9XbW0ydTVFa2ZpL0No?=
+ =?utf-8?B?czFaSmszS09QRXozejdhRzRDazJ6Z05OLzJqb3pGRmQ0OG5vamMxRCtFQWVZ?=
+ =?utf-8?B?QWVLNzZSSGxEZEduNEQ3UHhhc2xMUnVMcVpPRG13TGc3K2gvcDVod3Q5cHd3?=
+ =?utf-8?B?cEgyWDY5WHZzK0xvckVEUnhCWFY1dHpwejZ2Nkc1MGVxL1c1NEsyT1RmZ0hj?=
+ =?utf-8?B?eWczdmJwdXpodDJNQlRIY1owT0F0dW0wTENrWWxFR0JvbjhZZDE3WWlsM1Ja?=
+ =?utf-8?B?WnoycmJYcFYwbjdnSm94ZnppWXFmeUFEalhBM0l1NlFPYll0K1hoL0RlY2ZF?=
+ =?utf-8?B?Ni9zODZNSStFSktqc0F1M0hndTBhZjNaTm5rQW5MVzEvQ1NZZGVyd0Evbm95?=
+ =?utf-8?B?VWhsTGlTbk1ETURIeUxLQm1xU29qeU1FZFEyd3owWG1Id0NxYnlYajVNWFBU?=
+ =?utf-8?B?VzB3WXR6RlFrYzdIaWpERTZvdnp1aTZ6UG1HenRvRldCM3BxQTNyc1VXL1hH?=
+ =?utf-8?Q?KUyh0LODJWNDAsrQ=3D?=
+X-OriginatorOrg: altera.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: d401ca06-aa66-4d67-b4af-08deb32fa52b
+X-MS-Exchange-CrossTenant-AuthSource: DM4PR03MB6208.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 May 2026 08:27:22.8163 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 May 2026 09:43:55.6901 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: V71wHQkrsXHOn66Zt9kIiBRYqm/a7iiWPIr45VvnYCA30RIDzg79eH9dOmiADADoQCi9Ji7GtFcQv9o1IyzqNQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DBBPR04MB7564
+X-MS-Exchange-CrossTenant-UserPrincipalName: vCOrZfl+eG4T5WyRbMfVsBzUeQQuZ7ejNNRdovuliazwBXQqWXwJg2+Q75bu296xeCBeRKn+MgdW/x30MflIJDiddXg+iuQ9AAf5Qu3eIHg=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR03MB7026
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -140,146 +152,219 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Revisit this patch, since it break one board [1].
+Hi Peng,
+Thank you for reviewing and for the detailed feedback.
 
-[1] https://lore.kernel.org/all/52ec8007-ce50-4f12-b796-4b8c2aa1822e@ti.com/
-
-On Tue, Oct 21, 2025 at 01:45:26PM -0700, Tanmay Kathpalia wrote:
->Some boards have SD card connectors where the power rail cannot be switched
->off by the driver. However there are various circumstances when a card
->might be re-initialized, such as after system resume, warm re-boot, or
->error handling. However, a UHS card will continue to use 1.8V signaling
->unless it is power cycled.
+On 5/16/2026 3:14 PM, Peng Fan wrote:
+> Revisit this patch, since it break one board [1].
 >
->If the card has not been power cycled, it may still be using 1.8V
->signaling. According to the SD spec., the Bus Speed Mode (function group 1)
->bits 2 to 4 are zero if the card is initialized at 3.3V signal level. Thus
->they can be used to determine if the card has already switched to 1.8V
->signaling. Detect that situation and try to initialize a UHS-I (1.8V)
->transfer mode.
+> [1] https://lore.kernel.org/all/52ec8007-ce50-4f12-b796-4b8c2aa1822e@ti.com/
 >
->Signed-off-by: Tanmay Kathpalia <tanmay.kathpalia@altera.com>
->---
-> drivers/mmc/mmc.c | 55 ++++++++++++++++++++++++++++++++++++++---------
-> include/mmc.h     |  3 +++
-> 2 files changed, 48 insertions(+), 10 deletions(-)
+> On Tue, Oct 21, 2025 at 01:45:26PM -0700, Tanmay Kathpalia wrote:
+>> Some boards have SD card connectors where the power rail cannot be switched
+>> off by the driver. However there are various circumstances when a card
+>> might be re-initialized, such as after system resume, warm re-boot, or
+>> error handling. However, a UHS card will continue to use 1.8V signaling
+>> unless it is power cycled.
+>>
+>> If the card has not been power cycled, it may still be using 1.8V
+>> signaling. According to the SD spec., the Bus Speed Mode (function group 1)
+>> bits 2 to 4 are zero if the card is initialized at 3.3V signal level. Thus
+>> they can be used to determine if the card has already switched to 1.8V
+>> signaling. Detect that situation and try to initialize a UHS-I (1.8V)
+>> transfer mode.
+>>
+>> Signed-off-by: Tanmay Kathpalia <tanmay.kathpalia@altera.com>
+>> ---
+>> drivers/mmc/mmc.c | 55 ++++++++++++++++++++++++++++++++++++++---------
+>> include/mmc.h     |  3 +++
+>> 2 files changed, 48 insertions(+), 10 deletions(-)
+>>
+>> diff --git a/drivers/mmc/mmc.c b/drivers/mmc/mmc.c
+>> index ec61ed92e86..e1f62a5d0ad 100644
+>> --- a/drivers/mmc/mmc.c
+>> +++ b/drivers/mmc/mmc.c
+>> @@ -643,6 +643,19 @@ static int mmc_switch_voltage(struct mmc *mmc, int signal_voltage)
+>>
+>> 	return 0;
+>> }
+>> +
+>> +static bool mmc_sd_card_using_v18(struct mmc *mmc)
+>> +{
+>> +	/*
+>> +	 * According to the SD spec., the Bus Speed Mode (function group 1) bits
+>> +	 * 2 to 4 are zero if the card is initialized at 3.3V signal level. Thus
+>> +	 * they can be used to determine if the card has already switched to
+>> +	 * 1.8V signaling.
+>> +	 */
+>> +	bool volt = mmc->sd3_bus_mode &
+>> +	       (SD_MODE_UHS_SDR50 | SD_MODE_UHS_SDR104 | SD_MODE_UHS_DDR50);
+> This is wrong.
+> sd3_bus_mode is sd supported bits, not the current running bits.
 >
->diff --git a/drivers/mmc/mmc.c b/drivers/mmc/mmc.c
->index ec61ed92e86..e1f62a5d0ad 100644
->--- a/drivers/mmc/mmc.c
->+++ b/drivers/mmc/mmc.c
->@@ -643,6 +643,19 @@ static int mmc_switch_voltage(struct mmc *mmc, int signal_voltage)
-> 
-> 	return 0;
-> }
->+
->+static bool mmc_sd_card_using_v18(struct mmc *mmc)
->+{
->+	/*
->+	 * According to the SD spec., the Bus Speed Mode (function group 1) bits
->+	 * 2 to 4 are zero if the card is initialized at 3.3V signal level. Thus
->+	 * they can be used to determine if the card has already switched to
->+	 * 1.8V signaling.
->+	 */
->+	bool volt = mmc->sd3_bus_mode &
->+	       (SD_MODE_UHS_SDR50 | SD_MODE_UHS_SDR104 | SD_MODE_UHS_DDR50);
+> To detect the sd card running bits, need to use:
+> (__be32_to_cpu(switch_status[4]) >> 24) & 0xF
+You are correct that sd3_bus_mode stores the supported bits - as can be
+seen in sd_get_capabilities() where it is filled from the CMD6 status
+response:
 
-This is wrong.
-sd3_bus_mode is sd supported bits, not the current running bits.
+     mmc->sd3_bus_mode = __be32_to_cpu(switch_status[3]) >> 16 & 0x1f;
 
-To detect the sd card running bits, need to use: 
-(__be32_to_cpu(switch_status[4]) >> 24) & 0xF
+However, the intent here is not to read the currently active function
+code, but to use the supported bits as a proxy for the signaling voltage
+level.
 
->+	return volt;
->+}
-> #endif
-> 
-> static int sd_send_op_cond(struct mmc *mmc, bool uhs_en)
->@@ -1369,9 +1382,6 @@ static int sd_get_capabilities(struct mmc *mmc)
-> 	ALLOC_CACHE_ALIGN_BUFFER(__be32, switch_status, 16);
-> 	struct mmc_data data;
-> 	int timeout;
->-#if CONFIG_IS_ENABLED(MMC_UHS_SUPPORT)
->-	u32 sd3_bus_mode;
->-#endif
-> 
-> 	mmc->card_caps = MMC_MODE_1BIT | MMC_CAP(MMC_LEGACY);
-> 
->@@ -1451,16 +1461,16 @@ static int sd_get_capabilities(struct mmc *mmc)
-> 	if (mmc->version < SD_VERSION_3)
-> 		return 0;
-> 
->-	sd3_bus_mode = __be32_to_cpu(switch_status[3]) >> 16 & 0x1f;
->-	if (sd3_bus_mode & SD_MODE_UHS_SDR104)
->+	mmc->sd3_bus_mode = __be32_to_cpu(switch_status[3]) >> 16 & 0x1f;
->+	if (mmc->sd3_bus_mode & SD_MODE_UHS_SDR104)
-> 		mmc->card_caps |= MMC_CAP(UHS_SDR104);
->-	if (sd3_bus_mode & SD_MODE_UHS_SDR50)
->+	if (mmc->sd3_bus_mode & SD_MODE_UHS_SDR50)
-> 		mmc->card_caps |= MMC_CAP(UHS_SDR50);
->-	if (sd3_bus_mode & SD_MODE_UHS_SDR25)
->+	if (mmc->sd3_bus_mode & SD_MODE_UHS_SDR25)
-> 		mmc->card_caps |= MMC_CAP(UHS_SDR25);
->-	if (sd3_bus_mode & SD_MODE_UHS_SDR12)
->+	if (mmc->sd3_bus_mode & SD_MODE_UHS_SDR12)
-> 		mmc->card_caps |= MMC_CAP(UHS_SDR12);
->-	if (sd3_bus_mode & SD_MODE_UHS_DDR50)
->+	if (mmc->sd3_bus_mode & SD_MODE_UHS_DDR50)
-> 		mmc->card_caps |= MMC_CAP(UHS_DDR50);
-> #endif
-> 
->@@ -1830,7 +1840,11 @@ static int sd_select_mode_and_width(struct mmc *mmc, uint card_caps)
-> 	uint widths[] = {MMC_MODE_4BIT, MMC_MODE_1BIT};
-> 	const struct mode_width_tuning *mwt;
-> #if CONFIG_IS_ENABLED(MMC_UHS_SUPPORT)
->-	bool uhs_en = (mmc->ocr & OCR_S18R) ? true : false;
->+	/*
->+	 * Enable UHS mode if the card advertises 1.8V support (S18R in OCR)
->+	 * or is already operating at 1.8V signaling.
->+	 */
->+	bool uhs_en = (mmc->ocr & OCR_S18R) || mmc_sd_card_using_v18(mmc);
+According to the SD Physical Layer Simplified Specification v9.0,
+Section 4.3.10.4 (Switch Function Command, CMD6): the UHS-I speed modes
+SDR50, SDR104, and DDR50 (function group 1 bits 2–4) are only available
+when the card is operating at 1.8V signaling. When the card is
+initialized at 3.3V, those bits read as zero. Therefore, if any of bits
+2-4 are set in the supported field, we can safely infer the card is a
+UHS-I card and, when not power cycled, retains 1.8V signaling.
 
-In theory, 
+Using switch_status[4] to read the currently active function would
+actually NOT work for this scenario. After a warm reboot, the card
+receives CMD0 (GO_IDLE_STATE), which resets the card's selected function
+back to 0 (SDR12/default) — even though the 1.8V signaling level is
+retained. So switch_status[4] would always return 0 in this path,
+making it unsuitable as a 1.8V indicator here.
 
-bool uhs_en = (mmc->ocr & OCR_S18R) ? true : false; is correct.
+>> +	return volt;
+>> +}
+>> #endif
+>>
+>> static int sd_send_op_cond(struct mmc *mmc, bool uhs_en)
+>> @@ -1369,9 +1382,6 @@ static int sd_get_capabilities(struct mmc *mmc)
+>> 	ALLOC_CACHE_ALIGN_BUFFER(__be32, switch_status, 16);
+>> 	struct mmc_data data;
+>> 	int timeout;
+>> -#if CONFIG_IS_ENABLED(MMC_UHS_SUPPORT)
+>> -	u32 sd3_bus_mode;
+>> -#endif
+>>
+>> 	mmc->card_caps = MMC_MODE_1BIT | MMC_CAP(MMC_LEGACY);
+>>
+>> @@ -1451,16 +1461,16 @@ static int sd_get_capabilities(struct mmc *mmc)
+>> 	if (mmc->version < SD_VERSION_3)
+>> 		return 0;
+>>
+>> -	sd3_bus_mode = __be32_to_cpu(switch_status[3]) >> 16 & 0x1f;
+>> -	if (sd3_bus_mode & SD_MODE_UHS_SDR104)
+>> +	mmc->sd3_bus_mode = __be32_to_cpu(switch_status[3]) >> 16 & 0x1f;
+>> +	if (mmc->sd3_bus_mode & SD_MODE_UHS_SDR104)
+>> 		mmc->card_caps |= MMC_CAP(UHS_SDR104);
+>> -	if (sd3_bus_mode & SD_MODE_UHS_SDR50)
+>> +	if (mmc->sd3_bus_mode & SD_MODE_UHS_SDR50)
+>> 		mmc->card_caps |= MMC_CAP(UHS_SDR50);
+>> -	if (sd3_bus_mode & SD_MODE_UHS_SDR25)
+>> +	if (mmc->sd3_bus_mode & SD_MODE_UHS_SDR25)
+>> 		mmc->card_caps |= MMC_CAP(UHS_SDR25);
+>> -	if (sd3_bus_mode & SD_MODE_UHS_SDR12)
+>> +	if (mmc->sd3_bus_mode & SD_MODE_UHS_SDR12)
+>> 		mmc->card_caps |= MMC_CAP(UHS_SDR12);
+>> -	if (sd3_bus_mode & SD_MODE_UHS_DDR50)
+>> +	if (mmc->sd3_bus_mode & SD_MODE_UHS_DDR50)
+>> 		mmc->card_caps |= MMC_CAP(UHS_DDR50);
+>> #endif
+>>
+>> @@ -1830,7 +1840,11 @@ static int sd_select_mode_and_width(struct mmc *mmc, uint card_caps)
+>> 	uint widths[] = {MMC_MODE_4BIT, MMC_MODE_1BIT};
+>> 	const struct mode_width_tuning *mwt;
+>> #if CONFIG_IS_ENABLED(MMC_UHS_SUPPORT)
+>> -	bool uhs_en = (mmc->ocr & OCR_S18R) ? true : false;
+>> +	/*
+>> +	 * Enable UHS mode if the card advertises 1.8V support (S18R in OCR)
+>> +	 * or is already operating at 1.8V signaling.
+>> +	 */
+>> +	bool uhs_en = (mmc->ocr & OCR_S18R) || mmc_sd_card_using_v18(mmc);
+> In theory,
+>
+> bool uhs_en = (mmc->ocr & OCR_S18R) ? true : false; is correct.
+>
+> OCR (including S18R/S18A) only reflects voltage switch negotiation
+> capability and intent, not the current signaling voltage. So your sd card
+> should have OCR_S18R returned per my understanding.
 
-OCR (including S18R/S18A) only reflects voltage switch negotiation
-capability and intent, not the current signaling voltage. So your sd card
-should have OCR_S18R returned per my understanding.
+I think there is a gap in understanding here. The scenario this patch
+targets is warm reboot or system resume - the card was never power cycled,
+so it is still operating at 1.8V signaling.
 
-> #else
-> 	bool uhs_en = false;
-> #endif
->@@ -2701,6 +2715,27 @@ static int mmc_startup(struct mmc *mmc)
-> 		err = sd_get_capabilities(mmc);
-> 		if (err)
-> 			return err;
->+
->+#if CONFIG_IS_ENABLED(MMC_UHS_SUPPORT)
->+		/*
->+		 * If the card has already switched to 1.8V signaling, then
->+		 * set the signal voltage to 1.8V.
->+		 */
->+		if (mmc_sd_card_using_v18(mmc)) {
+In that situation, when ACMD41 is re-issued, the card will NOT assert
+S18A (Switching to 1.8V Accepted) in the OCR response, because the
+voltage negotiation already happened in the previous session and the card
+has no need to re-negotiate. Per the SD Physical Layer Simplified
+Specification v9.0, S18A is set only during the initial 1.8V request
+handshake. A card already running at 1.8V will not set S18A again on a
+subsequent ACMD41 after warm reset.
 
-To switch voltage, ACMD41 is required, see mmc_switch_voltage.
-Forcing switch to 1.8 here has some risk.
+This is exactly the corner case: OCR_S18R/S18A will be zero, yet the card
+is already at 1.8V. The existing code misses this entirely.
 
->+			/*
->+			 * During a signal voltage level switch, the clock must be gated
->+			 * for 5 ms according to the SD spec.
->+			 */
->+			mmc_set_clock(mmc, mmc->clock, MMC_CLK_DISABLE);
->+			err = mmc_set_signal_voltage(mmc, MMC_SIGNAL_VOLTAGE_180);
->+			if (err)
->+				return err;
->+			/* Keep clock gated for at least 10 ms, though spec only says 5 ms */
->+			mdelay(10);
->+			mmc_set_clock(mmc, mmc->clock, MMC_CLK_ENABLE);
->+		}
->+#endif
+>> #else
+>> 	bool uhs_en = false;
+>> #endif
+>> @@ -2701,6 +2715,27 @@ static int mmc_startup(struct mmc *mmc)
+>> 		err = sd_get_capabilities(mmc);
+>> 		if (err)
+>> 			return err;
+>> +
+>> +#if CONFIG_IS_ENABLED(MMC_UHS_SUPPORT)
+>> +		/*
+>> +		 * If the card has already switched to 1.8V signaling, then
+>> +		 * set the signal voltage to 1.8V.
+>> +		 */
+>> +		if (mmc_sd_card_using_v18(mmc)) {
+> To switch voltage, ACMD41 is required, see mmc_switch_voltage.
+> Forcing switch to 1.8 here has some risk.
 
-A proper redesign is required. So I am going to revert this patch.
+Agreed - ACMD41 is required to initiate a voltage switch on a card that is
+currently at 3.3V. However, in this path the card has already completed
+the voltage switch in a prior session and is still running at 1.8V. There
+is no card-side voltage transition happening; only the host controller
+needs to be reconfigured to match the 1.8V signaling level the card
+retained. Sending ACMD41 again in this context would be incorrect, as the
+card is not in a state to re-negotiate voltage.
 
-Thanks
-Peng
+>> +			/*
+>> +			 * During a signal voltage level switch, the clock must be gated
+>> +			 * for 5 ms according to the SD spec.
+>> +			 */
+>> +			mmc_set_clock(mmc, mmc->clock, MMC_CLK_DISABLE);
+>> +			err = mmc_set_signal_voltage(mmc, MMC_SIGNAL_VOLTAGE_180);
+>> +			if (err)
+>> +				return err;
+>> +			/* Keep clock gated for at least 10 ms, though spec only says 5 ms */
+>> +			mdelay(10);
+>> +			mmc_set_clock(mmc, mmc->clock, MMC_CLK_ENABLE);
+>> +		}
+>> +#endif
+> A proper redesign is required. So I am going to revert this patch.
+>
+
+I would respectfully ask to reconsider before reverting. This patch is
+specifically targeted at the warm reboot / system resume / error recovery
+scenario where the card is not power cycled. The check in
+mmc_sd_card_using_v18() acts as a guard - it only triggers when the
+card is already at 1.8V and the normal OCR path did not catch it. On
+a cold boot with a fresh 3.3V card, the UHS supported bits will be zero
+and this path is never entered, so it cannot regress cold-boot behavior
+for any board.
+
+Regarding the reported regression [1], Judith mentioned that he will
+debug once he is back. If possible, let us wait for him to conclude
+before deciding to revert.
+
+This problem is not unique to U-Boot. Similar discussions and solutions
+have been proposed in the Linux community:
+
+https://lore.kernel.org/linux-mmc/a367a679-28f7-898a-c043-27df8c9c9aba@intel.com/
+https://lore.kernel.org/linux-mmc/1506328144-13666-1-git-send-email-adrian.hunter@intel.com/
+
+I am happy to rework this in v2 with a tighter guard condition (already
+addressed in [2]) once we have more information from the regression
+report.
+
+Please let me know your thoughts.
+
+Thanks,
+Tanmay
