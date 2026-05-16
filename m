@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6812CD4851
-	for <u-boot@archiver.kernel.org>; Sun, 17 May 2026 03:16:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A248CD4F3C
+	for <u-boot@archiver.kernel.org>; Sun, 17 May 2026 03:16:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D4E84846CE;
-	Sun, 17 May 2026 05:15:42 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1C7B1846D5;
+	Sun, 17 May 2026 05:15:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=seznam.cz
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=seznam.cz header.i=@seznam.cz header.b="vAB4VR3G";
+	dkim=pass (2048-bit key; secure) header.d=seznam.cz header.i=@seznam.cz header.b="bXIBZzSj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 162F4846AE; Sat, 16 May 2026 20:21:29 +0200 (CEST)
+ id 271798469D; Sat, 16 May 2026 20:21:29 +0200 (CEST)
 Received: from mxd-2-a08.seznam.cz (mxd-2-a08.seznam.cz
  [IPv6:2a02:598:64:8a00::1000:a08])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C16B28469D
+ by phobos.denx.de (Postfix) with ESMTPS id 59CB884693
  for <u-boot@lists.denx.de>; Sat, 16 May 2026 20:21:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=seznam.cz
@@ -28,29 +28,28 @@ Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=michael.srba@seznam.cz
 Received: from email.seznam.cz by smtpc-mxd-f659df87d-k746b
  (smtpc-mxd-f659df87d-k746b [2a02:598:64:8a00::1000:a08])
- id 499699c01298cda9483f559e; Sat, 16 May 2026 20:20:42 +0200 (CEST)
+ id 0b1ab5a45014e1cd0ab379fa; Sat, 16 May 2026 20:20:36 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=seznam.cz; s=szn1;
- t=1778955642; bh=7NIqaG3XoX/YXKTYqapxQDeS9K6M234BGMic1B0jzDk=;
+ t=1778955636; bh=9lkBtIqinfofPMN2YgYbkPt6fycz0zthLlobIW5gTbc=;
  h=From:Date:Subject:MIME-Version:Content-Type:
  Content-Transfer-Encoding:Message-Id:To:Cc;
- b=vAB4VR3GoZNSIAZiXlMLe9BGRn6gkFn/RoY7Eq+6frX4VNrwiU2ZSlj73aDthG5PN
- JJSYnjZehiW4YvvBZlHitm38nY3cnIPB8jReAol24g3XYP1+dAoSMYrBInZvgsmQ3s
- X6DJW4UTgyMkQjUL5W8cQ8WH/dL3rQBuFbsUZLoYDIjaTJXYiI3UJgD6UTfdMwxzoj
- i0k37Te5kIBmLhnT3xAra1IJ+pou1f0q3qFY3TGJ8gFnB+W90CPtcKFLLo/tiowIeW
- ZlXiJq/JqQZBGhe2Ck5CLxv+g1BHfiKQrOEJVEzGqgcwnlvil7qmZldwUgcADQpO4u
- Jfm7uqhVsu7JQ==
+ b=bXIBZzSjuW0pjapg+WOs0OYBLEcwdwb4siCkjUcpIlheb7nVwr4YEJ6bcZgTtRJ07
+ gSeEp68GGh+b7kIrzlPK4KugFo+r23KIh6CP5mSraVVsiliyrY9DOHAEBFeGG7WrwE
+ 6EwL+yGPauL4McbXdshPLZGPv5s/JwZIKg09CGPczIScy3Ig+DzN0E7ai/HKgHJT0P
+ x4GVi7UPf52VaYitio2Ls1+xIomneRTmydKACrqRObxH+AffM5PfWgSQIICxXOHmA1
+ BroJkYXgPzG7dLX7WGrFOT91EZv0pARWWYCUQ8MGxrOX31/CTzgKQ8qWs6TK0wBj2W
+ hv3Ni1+6zml3A==
 Received: from [127.0.0.1] (ip-111-27.static.ccinternet.cz [147.161.27.111])
  by smtpd-relay-745c4d9bbb-4gnxc (szn-email-smtpd/2.0.73) with ESMTPA
- id 36ec9091-32f3-4b4e-8aad-2074691af476;
- Sat, 16 May 2026 20:20:35 +0200
+ id 46c42803-ddd9-43d5-be07-44fc01034dd4;
+ Sat, 16 May 2026 20:20:32 +0200
 From: michael.srba@seznam.cz
-Date: Sat, 16 May 2026 20:19:58 +0200
-Subject: [PATCH v8 09/12] mach-snapdragon: move board_usb_init to
- dragonboard410c.c
+Date: Sat, 16 May 2026 20:19:53 +0200
+Subject: [PATCH v8 04/12] mach-snapdragon: boot0.h: split out msm8916_boot0.h
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260516-qcom_spl-v8-9-69b55c9abffe@seznam.cz>
+Message-Id: <20260516-qcom_spl-v8-4-69b55c9abffe@seznam.cz>
 References: <20260516-qcom_spl-v8-0-69b55c9abffe@seznam.cz>
 In-Reply-To: <20260516-qcom_spl-v8-0-69b55c9abffe@seznam.cz>
 To: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>, 
@@ -109,152 +108,201 @@ X-Virus-Status: Clean
 
 From: Michael Srba <Michael.Srba@seznam.cz>
 
-This function is currently only really needed on db410c,
-move it to the board-specific .c file ahead of introducing
-board_spl.c to simplify things. If db410c is to ever be
-converted to not use board-spefific funtions, the generic
-solution replacing this function should probably not be
-Qualcomm-specific anyway.
+Prepare for supporting alternative boot0.h per-SoC by splitting out
+the existing msm8916-specific code.
+
+There is now a selection mechanism to choose a specific boot0.h
+in the Kconfig. BOOT0_MSM8916_PSCI_WORKAROUND is the only option
+right now, but more can be added. The toplevel boot0.h additionally
+enables conditionally performing the include only in u-boot proper,
+or only in SPL.
 
 Signed-off-by: Michael Srba <Michael.Srba@seznam.cz>
+Reviewed-by: Simon Glass <sjg@chromium.org>
 ---
- arch/arm/mach-snapdragon/board.c                 | 45 +-----------------------
- board/qualcomm/dragonboard410c/dragonboard410c.c | 41 +++++++++++++++++++++
- 2 files changed, 42 insertions(+), 44 deletions(-)
+ arch/arm/mach-snapdragon/Kconfig                   | 16 ++++++
+ arch/arm/mach-snapdragon/include/mach/boot0.h      | 60 +++-------------------
+ .../mach-snapdragon/include/mach/msm8916_boot0.h   | 54 +++++++++++++++++++
+ configs/dragonboard410c_defconfig                  |  1 +
+ configs/hmibsc_defconfig                           |  1 +
+ 5 files changed, 80 insertions(+), 52 deletions(-)
 
-diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/board.c
-index 63055a60af4..b55d73e0e52 100644
---- a/arch/arm/mach-snapdragon/board.c
-+++ b/arch/arm/mach-snapdragon/board.c
-@@ -10,14 +10,10 @@
- #define pr_fmt(fmt) "QCOM: " fmt
+diff --git a/arch/arm/mach-snapdragon/Kconfig b/arch/arm/mach-snapdragon/Kconfig
+index d3de8693b5a..f863daf6bb9 100644
+--- a/arch/arm/mach-snapdragon/Kconfig
++++ b/arch/arm/mach-snapdragon/Kconfig
+@@ -42,4 +42,20 @@ config SYS_CONFIG_NAME
+ 	  Based on this option include/configs/<CONFIG_SYS_CONFIG_NAME>.h header
+ 	  will be used for board configuration.
  
- #include <asm/armv8/mmu.h>
--#include <asm/gpio.h>
- #include <asm/io.h>
- #include <asm/psci.h>
- #include <asm/system.h>
--#include <dm/device.h>
--#include <dm/pinctrl.h>
--#include <dm/uclass-internal.h>
--#include <dm/read.h>
-+#include <dm/ofnode.h>
- #include <power/regulator.h>
- #include <env.h>
- #include <fdt_support.h>
-@@ -29,7 +25,6 @@
- #include <lmb.h>
- #include <malloc.h>
- #include <fdt_support.h>
--#include <usb.h>
- #include <soc/qcom/smem.h>
- #include <sort.h>
- #include <soc/qcom/smem.h>
-@@ -151,44 +146,6 @@ int board_fdt_blob_setup(void **fdtp)
- 	return ret;
- }
- 
++choice
++	prompt "Qualcomm boot0.h workaround"
++	optional
++	help
++	  While U-Boot on Qualcomm platforms doesn't generally need compile-time
++	  adjustments based on the target SoC, workarounds in boot0.h can't
++	  practically detect the SoC at runtime. Enable one of these workarounds
++	  if you know you need it.
++
++config BOOT0_MSM8916_PSCI_WORKAROUND
++	bool "boot0.h workaround for buggy PSCI on the msm8916 SoC"
++	help
++	  Select this if you are building U-Boot proper for an msm8916 board that
++	  uses the buggy PSCI implementation.
++endchoice
++
+ endif
+diff --git a/arch/arm/mach-snapdragon/include/mach/boot0.h b/arch/arm/mach-snapdragon/include/mach/boot0.h
+index 953cccad790..b3c76d6d97d 100644
+--- a/arch/arm/mach-snapdragon/include/mach/boot0.h
++++ b/arch/arm/mach-snapdragon/include/mach/boot0.h
+@@ -1,54 +1,10 @@
+ /* SPDX-License-Identifier: GPL-2.0+ */
 -/*
-- * Some Qualcomm boards require GPIO configuration when switching USB modes.
-- * Support setting this configuration via pinctrl state.
+- * Workaround for "PSCI bug" on DragonBoard 410c
+- * Copyright (C) 2021 Stephan Gerhold <stephan@gerhold.net>
+- *
+- * Syscall parameters taken from Qualcomm's LK fork (scm.h):
+- * Copyright (c) 2011-2015, The Linux Foundation. All rights reserved.
+- *
+- * The PSCI implementation in the TrustZone/tz firmware on DragonBoard 410c has
+- * a bug that starts all other CPU cores in 32-bit mode unless the TZ syscall
+- * that switches from 32-bit to 64-bit mode is executed at least once.
+- *
+- * Normally this happens inside Qualcomm's LK bootloader which runs in 32-bit
+- * mode and uses the TZ syscall to boot a kernel in 64-bit mode. However, if
+- * U-Boot is installed to the "aboot" partition (replacing LK) the switch to
+- * 64-bit mode never happens since U-Boot is already running in 64-bit mode.
+- *
+- * A workaround for this "PSCI bug" is to execute the TZ syscall when entering
+- * U-Boot. That way PSCI is made aware of the 64-bit switch and starts all other
+- * CPU cores in 64-bit mode as well.
 - */
--int board_usb_init(int index, enum usb_init_type init)
--{
--	struct udevice *usb;
--	int ret = 0;
+-#include <linux/arm-smccc.h>
 -
--	/* USB device */
--	ret = uclass_find_device_by_seq(UCLASS_USB, index, &usb);
--	if (ret) {
--		printf("Cannot find USB device\n");
--		return ret;
--	}
+-#define ARM_SMCCC_SIP32_FAST_CALL \
+-	ARM_SMCCC_CALL_VAL(ARM_SMCCC_FAST_CALL, ARM_SMCCC_SMC_32, ARM_SMCCC_OWNER_SIP, 0)
 -
--	ret = dev_read_stringlist_search(usb, "pinctrl-names",
--					 "device");
--	/* No "device" pinctrl state, so just bail */
--	if (ret < 0)
--		return 0;
+-	/*
+-	 * U-Boot might be started in EL2 or EL3 with custom firmware.
+-	 * In that case, we assume that the workaround is not necessary or is
+-	 * handled already by the alternative firmware. Using the syscall in EL2
+-	 * would demote U-Boot to EL1; in EL3 it would probably just crash.
+-	 */
+-	mrs	x0, CurrentEL
+-	cmp	x0, #(1 << 2)	/* EL1 */
+-	bne	reset
 -
--	/* Select "default" or "device" pinctrl */
--	switch (init) {
--	case USB_INIT_HOST:
--		pinctrl_select_state(usb, "default");
--		break;
--	case USB_INIT_DEVICE:
--		pinctrl_select_state(usb, "device");
--		break;
--	default:
--		debug("Unknown usb_init_type %d\n", init);
--		break;
--	}
+-	/* Prepare TZ syscall parameters */
+-	mov	x0, #ARM_SMCCC_SIP32_FAST_CALL
+-	movk	x0, #0x10f	/* SCM_SVC_MILESTONE_CMD_ID */
+-	mov	x1, #0x12	/* MAKE_SCM_ARGS(0x2, SMC_PARAM_TYPE_BUFFER_READ) */
+-	adr	x2, el1_system_param
+-	mov	x3, el1_system_param_end - el1_system_param
 -
--	return 0;
--}
+-	/* Switch PSCI to 64-bit mode. Resets CPU and returns at el1_elr */
+-	smc	#0
 -
- /*
-  * Some boards still need board specific init code, they can implement that by
-  * overriding this function.
-diff --git a/board/qualcomm/dragonboard410c/dragonboard410c.c b/board/qualcomm/dragonboard410c/dragonboard410c.c
-index 36e4d49046e..3c0d1cbb2d8 100644
---- a/board/qualcomm/dragonboard410c/dragonboard410c.c
-+++ b/board/qualcomm/dragonboard410c/dragonboard410c.c
-@@ -8,7 +8,10 @@
- #include <button.h>
- #include <cpu_func.h>
- #include <dm.h>
-+#include <dm/device.h>
- #include <dm/pinctrl.h>
-+#include <dm/read.h>
-+#include <dm/uclass-internal.h>
- #include <env.h>
- #include <init.h>
- #include <mmc.h>
-@@ -19,6 +22,44 @@
- #include <fdt_support.h>
- #include <linux/delay.h>
- 
+-	/* Something went wrong, perhaps PSCI is already in 64-bit mode? */
++#if defined(CONFIG_SPL_BUILD)
+ 	b	reset
+-
+-	.align	3
+-el1_system_param:
+-	.quad	0, 0, 0, 0, 0, 0, 0, 0, 0	/* el1_x0-x8 */
+-	.quad	reset				/* el1_elr */
+-el1_system_param_end:
++#else
++#if defined(CONFIG_BOOT0_MSM8916_PSCI_WORKAROUND)
++#include "msm8916_boot0.h"
++#else
++	b	reset
++#endif
++#endif
+diff --git a/arch/arm/mach-snapdragon/include/mach/msm8916_boot0.h b/arch/arm/mach-snapdragon/include/mach/msm8916_boot0.h
+new file mode 100644
+index 00000000000..953cccad790
+--- /dev/null
++++ b/arch/arm/mach-snapdragon/include/mach/msm8916_boot0.h
+@@ -0,0 +1,54 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
 +/*
-+ * db410c requires GPIO configuration when switching USB modes.
-+ * Support setting this configuration via pinctrl state.
++ * Workaround for "PSCI bug" on DragonBoard 410c
++ * Copyright (C) 2021 Stephan Gerhold <stephan@gerhold.net>
++ *
++ * Syscall parameters taken from Qualcomm's LK fork (scm.h):
++ * Copyright (c) 2011-2015, The Linux Foundation. All rights reserved.
++ *
++ * The PSCI implementation in the TrustZone/tz firmware on DragonBoard 410c has
++ * a bug that starts all other CPU cores in 32-bit mode unless the TZ syscall
++ * that switches from 32-bit to 64-bit mode is executed at least once.
++ *
++ * Normally this happens inside Qualcomm's LK bootloader which runs in 32-bit
++ * mode and uses the TZ syscall to boot a kernel in 64-bit mode. However, if
++ * U-Boot is installed to the "aboot" partition (replacing LK) the switch to
++ * 64-bit mode never happens since U-Boot is already running in 64-bit mode.
++ *
++ * A workaround for this "PSCI bug" is to execute the TZ syscall when entering
++ * U-Boot. That way PSCI is made aware of the 64-bit switch and starts all other
++ * CPU cores in 64-bit mode as well.
 + */
-+int board_usb_init(int index, enum usb_init_type init)
-+{
-+	struct udevice *usb;
-+	int ret = 0;
++#include <linux/arm-smccc.h>
 +
-+	/* USB device */
-+	ret = uclass_find_device_by_seq(UCLASS_USB, index, &usb);
-+	if (ret) {
-+		printf("Cannot find USB device\n");
-+		return ret;
-+	}
++#define ARM_SMCCC_SIP32_FAST_CALL \
++	ARM_SMCCC_CALL_VAL(ARM_SMCCC_FAST_CALL, ARM_SMCCC_SMC_32, ARM_SMCCC_OWNER_SIP, 0)
 +
-+	ret = dev_read_stringlist_search(usb, "pinctrl-names",
-+					 "device");
-+	/* No "device" pinctrl state, so just bail */
-+	if (ret < 0)
-+		return 0;
++	/*
++	 * U-Boot might be started in EL2 or EL3 with custom firmware.
++	 * In that case, we assume that the workaround is not necessary or is
++	 * handled already by the alternative firmware. Using the syscall in EL2
++	 * would demote U-Boot to EL1; in EL3 it would probably just crash.
++	 */
++	mrs	x0, CurrentEL
++	cmp	x0, #(1 << 2)	/* EL1 */
++	bne	reset
 +
-+	/* Select "default" or "device" pinctrl */
-+	switch (init) {
-+	case USB_INIT_HOST:
-+		pinctrl_select_state(usb, "default");
-+		break;
-+	case USB_INIT_DEVICE:
-+		pinctrl_select_state(usb, "device");
-+		break;
-+	default:
-+		debug("Unknown usb_init_type %d\n", init);
-+		break;
-+	}
++	/* Prepare TZ syscall parameters */
++	mov	x0, #ARM_SMCCC_SIP32_FAST_CALL
++	movk	x0, #0x10f	/* SCM_SVC_MILESTONE_CMD_ID */
++	mov	x1, #0x12	/* MAKE_SCM_ARGS(0x2, SMC_PARAM_TYPE_BUFFER_READ) */
++	adr	x2, el1_system_param
++	mov	x3, el1_system_param_end - el1_system_param
 +
-+	return 0;
-+}
++	/* Switch PSCI to 64-bit mode. Resets CPU and returns at el1_elr */
++	smc	#0
 +
- static u32 msm_board_serial(void)
- {
- 	struct mmc *mmc_dev;
++	/* Something went wrong, perhaps PSCI is already in 64-bit mode? */
++	b	reset
++
++	.align	3
++el1_system_param:
++	.quad	0, 0, 0, 0, 0, 0, 0, 0, 0	/* el1_x0-x8 */
++	.quad	reset				/* el1_elr */
++el1_system_param_end:
+diff --git a/configs/dragonboard410c_defconfig b/configs/dragonboard410c_defconfig
+index 51ad265688c..645f0816701 100644
+--- a/configs/dragonboard410c_defconfig
++++ b/configs/dragonboard410c_defconfig
+@@ -11,6 +11,7 @@ CONFIG_ENV_OFFSET=0x0
+ CONFIG_DEFAULT_DEVICE_TREE="qcom/apq8016-sbc"
+ CONFIG_OF_LIBFDT_OVERLAY=y
+ CONFIG_SYS_LOAD_ADDR=0x80080000
++CONFIG_BOOT0_MSM8916_PSCI_WORKAROUND=y
+ CONFIG_IDENT_STRING="\nQualcomm-DragonBoard 410C"
+ CONFIG_REMAKE_ELF=y
+ CONFIG_BUTTON_CMD=y
+diff --git a/configs/hmibsc_defconfig b/configs/hmibsc_defconfig
+index 1e3d744193d..358b13aac77 100644
+--- a/configs/hmibsc_defconfig
++++ b/configs/hmibsc_defconfig
+@@ -12,6 +12,7 @@ CONFIG_ENV_OFFSET=0x0
+ CONFIG_DEFAULT_DEVICE_TREE="apq8016-schneider-hmibsc"
+ CONFIG_OF_LIBFDT_OVERLAY=y
+ CONFIG_SYS_LOAD_ADDR=0x80080000
++CONFIG_BOOT0_MSM8916_PSCI_WORKAROUND=y
+ CONFIG_IDENT_STRING="\nSchneider Electric-HMIBSC"
+ CONFIG_REMAKE_ELF=y
+ # CONFIG_ANDROID_BOOT_IMAGE is not set
 
 -- 
 2.54.0
