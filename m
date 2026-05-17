@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5059CCD4F48
-	for <u-boot@archiver.kernel.org>; Sun, 17 May 2026 19:27:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 353F5CD4F3C
+	for <u-boot@archiver.kernel.org>; Sun, 17 May 2026 19:27:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 450BD8469A;
+	by phobos.denx.de (Postfix) with ESMTP id 82C62846A5;
 	Sun, 17 May 2026 21:26:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=ya.ru
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ya.ru header.i=@ya.ru header.b="U7wedKk2";
+	dkim=pass (1024-bit key; unprotected) header.d=ya.ru header.i=@ya.ru header.b="X1OCh2s6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BBED684690; Sun, 17 May 2026 21:24:59 +0200 (CEST)
-Received: from forward103b.mail.yandex.net (forward103b.mail.yandex.net
- [IPv6:2a02:6b8:c02:900:1:45:d181:d103])
+ id C8D7A83EF9; Sun, 17 May 2026 21:24:59 +0200 (CEST)
+Received: from forward102b.mail.yandex.net (forward102b.mail.yandex.net
+ [178.154.239.149])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EE0D283EF9
- for <u-boot@lists.denx.de>; Sun, 17 May 2026 21:24:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AB23D845E3
+ for <u-boot@lists.denx.de>; Sun, 17 May 2026 21:24:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=ya.ru
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=paullo612@ya.ru
 Received: from mail-nwsmtp-smtp-production-main-70.sas.yp-c.yandex.net
  (mail-nwsmtp-smtp-production-main-70.sas.yp-c.yandex.net
  [IPv6:2a02:6b8:c11:e97:0:640:f294:0])
- by forward103b.mail.yandex.net (Yandex) with ESMTPS id 122DBC0038;
+ by forward102b.mail.yandex.net (Yandex) with ESMTPS id F145CC0009;
  Sun, 17 May 2026 22:24:56 +0300 (MSK)
 Received: by mail-nwsmtp-smtp-production-main-70.sas.yp-c.yandex.net (smtp)
- with ESMTPSA id mOVI2m4SD0U0-55PbZCEl; 
- Sun, 17 May 2026 22:24:55 +0300
+ with ESMTPSA id mOVI2m4SD0U0-pqAMmCI2; 
+ Sun, 17 May 2026 22:24:56 +0300
 X-Yandex-Fwd: 1
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ya.ru; s=mail;
- t=1779045895; bh=8vmHBKu6B7/nRBHGas4bpoOavUE98Xd6XHtMJzMF+9Q=;
+ t=1779045896; bh=eqwalwiYND/MvfmLxAEjUlEshfv60kbwi0MgiW6RNZg=;
  h=Cc:In-Reply-To:Message-Id:To:Date:References:From:Subject;
- b=U7wedKk28YkbCfw1SZqmU3Gi4/tQbP5Dln9gITrpZp/xAnfHkQCSV1Zqn2NGB8p2q
- nJ7g9SBbLsFdgiYlwgY3PlGZxBFPQ09/f2ZubdR2lqmFHx5ZkC9j9JsftDFResouxg
- yYvoWtyiTdBKBOfqP4QpMQUT2F2+tscQqT53wpZE=
+ b=X1OCh2s6Mp0JzoHYVn9/MerPLip1wtyytakuQrA9x3OqAF4VY1IX4oQMgCMeLLclU
+ Gdxzrj4R4TRGtvwOtGnwRzolESZOzaiyU9YLAbEPZL3H93Hz4Xp+HX1jZIpM0LLydx
+ FqHil2QNzdDYGeP6JyqTdKDxPpl5sfwAMJIoUxNk=
 Authentication-Results: mail-nwsmtp-smtp-production-main-70.sas.yp-c.yandex.net;
  dkim=pass header.i=@ya.ru
 From: Pavel Golikov <paullo612@ya.ru>
-Date: Sun, 17 May 2026 22:24:29 +0300
-Subject: [PATCH RFC 03/18] rockchip: rk3568: syscon: Add PMUGRF support for
- OF_PLATDATA
+Date: Sun, 17 May 2026 22:24:30 +0300
+Subject: [PATCH RFC 04/18] rockchip: rk3568: syscon: Add MSCH, SGRF and
+ DDRGRF support
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260517-rk3568-raminit-v1-3-a24e16302a13@ya.ru>
+Message-Id: <20260517-rk3568-raminit-v1-4-a24e16302a13@ya.ru>
 References: <20260517-rk3568-raminit-v1-0-a24e16302a13@ya.ru>
 In-Reply-To: <20260517-rk3568-raminit-v1-0-a24e16302a13@ya.ru>
 To: u-boot@lists.denx.de
@@ -85,42 +85,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The RK3568 has a limited TPL size, so, we expect RK3568 to always use
-OF_PLATDATA for its TPL stage.
-
-Add support for the PMUGRF register region in syscon, which is necessary
-for RK3568's DRAM controller initialization.
+Add support for the MSCH, SGRF and DDRGRF register regions in syscon,
+which are necessary for RK3568's DRAM controller initialization.
 
 Signed-off-by: Pavel Golikov <paullo612@ya.ru>
 ---
- arch/arm/mach-rockchip/rk3568/syscon_rk3568.c | 17 +++++++++++++++++
- 1 file changed, 17 insertions(+)
+ arch/arm/include/asm/arch-rockchip/clock.h    |  1 +
+ arch/arm/mach-rockchip/rk3568/syscon_rk3568.c | 26 +++++++++++++++++++++++++-
+ 2 files changed, 26 insertions(+), 1 deletion(-)
 
+diff --git a/arch/arm/include/asm/arch-rockchip/clock.h b/arch/arm/include/asm/arch-rockchip/clock.h
+index 95b08bfd046..a6b399da4ff 100644
+--- a/arch/arm/include/asm/arch-rockchip/clock.h
++++ b/arch/arm/include/asm/arch-rockchip/clock.h
+@@ -39,6 +39,7 @@ enum {
+ 	ROCKCHIP_SYSCON_PIPE_PHY2_GRF,
+ 	ROCKCHIP_SYSCON_VOP_GRF,
+ 	ROCKCHIP_SYSCON_VO_GRF,
++	ROCKCHIP_SYSCON_DDRGRF,
+ };
+ 
+ /* Standard Rockchip clock numbers */
 diff --git a/arch/arm/mach-rockchip/rk3568/syscon_rk3568.c b/arch/arm/mach-rockchip/rk3568/syscon_rk3568.c
-index 255259eabfd..b9d59a4721e 100644
+index b9d59a4721e..7f6caf9ca67 100644
 --- a/arch/arm/mach-rockchip/rk3568/syscon_rk3568.c
 +++ b/arch/arm/mach-rockchip/rk3568/syscon_rk3568.c
-@@ -21,3 +21,20 @@ U_BOOT_DRIVER(syscon_rk3568) = {
- 	.bind = dm_scan_fdt_dev,
- #endif
+@@ -8,8 +8,11 @@
+ #include <asm/arch-rockchip/clock.h>
+ 
+ static const struct udevice_id rk3568_syscon_ids[] = {
+-	{ .compatible = "rockchip,rk3568-grf", .data = ROCKCHIP_SYSCON_GRF },
++	{ .compatible = "rockchip,rk3568-grf",    .data = ROCKCHIP_SYSCON_GRF    },
+ 	{ .compatible = "rockchip,rk3568-pmugrf", .data = ROCKCHIP_SYSCON_PMUGRF },
++	{ .compatible = "rockchip,rk3568-msch",   .data = ROCKCHIP_SYSCON_MSCH   },
++	{ .compatible = "rockchip,rk3568-sgrf",   .data = ROCKCHIP_SYSCON_SGRF   },
++	{ .compatible = "rockchip,rk3568-ddrgrf", .data = ROCKCHIP_SYSCON_DDRGRF },
+ 	{ }
+ };
+ 
+@@ -37,4 +40,25 @@ U_BOOT_DRIVER(rockchip_rk3568_pmugrf) = {
+ 	.of_match = rk3568_syscon_ids + 1,
+ 	.bind = rk3568_syscon_bind_of_plat,
  };
 +
-+#if CONFIG_IS_ENABLED(OF_PLATDATA)
-+static int rk3568_syscon_bind_of_plat(struct udevice *dev)
-+{
-+	dev->driver_data = dev->driver->of_match->data;
-+	debug("syscon: %s %d\n", dev->name, (uint)dev->driver_data);
-+
-+	return 0;
-+}
-+
-+U_BOOT_DRIVER(rockchip_rk3568_pmugrf) = {
-+	.name = "rockchip_rk3568_pmugrf",
++U_BOOT_DRIVER(rockchip_rk3568_msch) = {
++	.name = "rockchip_rk3568_msch",
 +	.id = UCLASS_SYSCON,
-+	.of_match = rk3568_syscon_ids + 1,
++	.of_match = rk3568_syscon_ids + 2,
 +	.bind = rk3568_syscon_bind_of_plat,
 +};
-+#endif
++
++U_BOOT_DRIVER(rockchip_rk3568_sgrf) = {
++	.name = "rockchip_rk3568_sgrf",
++	.id = UCLASS_SYSCON,
++	.of_match = rk3568_syscon_ids + 3,
++	.bind = rk3568_syscon_bind_of_plat,
++};
++
++U_BOOT_DRIVER(rockchip_rk3568_ddrgrf) = {
++	.name = "rockchip_rk3568_ddrgrf",
++	.id = UCLASS_SYSCON,
++	.of_match = rk3568_syscon_ids + 4,
++	.bind = rk3568_syscon_bind_of_plat,
++};
+ #endif
 
 -- 
 2.25.1
