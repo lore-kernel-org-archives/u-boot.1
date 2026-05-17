@@ -4,59 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7ADBDCD37AC
-	for <u-boot@archiver.kernel.org>; Sun, 17 May 2026 09:04:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8FCDFCD4F47
+	for <u-boot@archiver.kernel.org>; Sun, 17 May 2026 18:14:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6B277845E3;
-	Sun, 17 May 2026 11:04:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=free.fr
+	by phobos.denx.de (Postfix) with ESMTP id B6B39845E3;
+	Sun, 17 May 2026 20:14:02 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=free.fr header.i=@free.fr header.b="sDXHC2OJ";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="rtPbv4+I";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4A4DD8460E; Sun, 17 May 2026 11:04:23 +0200 (CEST)
-Received: from smtp1-g21.free.fr (smtp1-g21.free.fr [212.27.42.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 68A988460E; Sun, 17 May 2026 11:35:53 +0200 (CEST)
+Received: from mail-lj1-x22a.google.com (mail-lj1-x22a.google.com
+ [IPv6:2a00:1450:4864:20::22a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BC48B8407D
- for <u-boot@lists.denx.de>; Sun, 17 May 2026 11:04:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6AFE88466F
+ for <u-boot@lists.denx.de>; Sun, 17 May 2026 11:35:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=free.fr
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=vjardin@free.fr
-Received: from localhost.localdomain (unknown [91.160.0.144])
- (Authenticated sender: vjardin@free.fr)
- by smtp1-g21.free.fr (Postfix) with ESMTPSA id 2232CB00592;
- Sun, 17 May 2026 11:04:03 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=free.fr;
- s=smtp-20201208; t=1779008659;
- bh=vMEfT+f0jYeZiwYjy80vhx7inqGsrajaQ7zsfVGE6m4=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=sDXHC2OJz+ibb6LsSPDRq6nNo7lugd/sx5dj3TkAc8mYfXHTbL57h6a48sv2c7LR0
- QnmplxCCry49b18JlInon++942v8uJMkRda0LNCucawczMGyLhC90WZGIvoAtGZfYU
- EdUECrb3PFEYy+XNFY0arLcf5k8rgnkGhzRFtuVANDlkIhH+ql2R9FXUxbzHpMmm3d
- 3UwavZ5qLFkyekcCCLBhozrxc6k64h6i+tGrXvGLpvlLycAn7YdzuIy/v989uzP0yl
- yJDDteDo6uZMExmGTfjHAY37+fFAzeGfaFqclLXWIn/zbDOI1cT836+Cv4jtJvbQi4
- QEaTjAOiEPAZw==
-From: Vincent Jardin <vjardin@free.fr>
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=shofiqtest@gmail.com
+Received: by mail-lj1-x22a.google.com with SMTP id
+ 38308e7fff4ca-39378db197aso16558841fa.3
+ for <u-boot@lists.denx.de>; Sun, 17 May 2026 02:35:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1779010549; x=1779615349; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=A0d8wVwI6RKTHFFEkTUad71DHw3uLY8Pzlk8ofrLWEw=;
+ b=rtPbv4+I0AUi/nCc4vRMDzatwJDcf6ILyLVkTkpEaawct20KZ1QcLvZW05Z6UfEmhu
+ hHpxbnIuJTJa1pFbfOn1xIpC7dn5IWJ2V9a3g8qJeYOHt0X1twBGE/GDFctQXcaEQsNP
+ woQ6ByvOSyihIJUU0TaJ6yT13b2yyil3K9CNPjcYIUFnpF9JomeWbuz33ims4I859IqH
+ geCsMX2nHsWwbbi+2fdhLUGqrYH7Zvadi2y7z0tU6EifAPEFfK6Jb9080V4yttph3VJB
+ bwKuD6wXnnlr0wyoopRmvL8/KQsJ2l1+Q8bFOtSMEnX/gFNgwA1NcUJTvrocQCSj54aF
+ aolw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1779010549; x=1779615349;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=A0d8wVwI6RKTHFFEkTUad71DHw3uLY8Pzlk8ofrLWEw=;
+ b=X40JmDRyhdC2/mQMIl1uKd/mVbT7ZhVmy2ntTrPDFrRHownUU5zX03lNK95kPQL0wD
+ tXifhAQFTr3woJelq7xmhpSYYRuUta/kX9y+IYpaiRSXT9+fJQje2tPqNbbBsKb+d32E
+ LqGbJI+Uf1SGPu7Q7kUYD0VgZamE8qhdoVltOg104iASyMSW2ObRbhrewN9VFTu16JxV
+ CqQamxggyt7ii+SH43YLJHAs96lhpz3NevdmW126XhPk/blaNgR1Y9lZSdJ2ZPbGePZT
+ ZndY75rFic9e5FXR2ZntZAY0bspvJqLosjUFF/ESIwRaZKoLZb6tBWvd/HwZyYruWTx7
+ aOiw==
+X-Gm-Message-State: AOJu0YyO7CkpoILmZptQeKYtLuq5o5XhfujmmSikPbg/I/O8I0FHA+pf
+ 580A7gI3pM5U+UQvD/8LYbaSH65hIFaSfFxGHjxI6i47PXdoTiDGFTPdG1SsYNVA
+X-Gm-Gg: Acq92OEOxt0wZFj4+Rr5J+14y7a43rYFIIuMdSj1qcFsmivp3Sgz+Hw370qudi80OGc
+ aAoxk/icnaJT6422kK7am79NC1IPMDgzE/oUH+pGvW+IeKFy8kHnq73N9iSCNDJFcRI57uwuaZ3
+ wYQbbaRJKTYWXyp2JLPvd5vVZpaxgCO4wvtv9lBFcUsGR5d8zJ/4MamXCV22etP8rllWBBwfTSo
+ IHn5lT6octZBgd766vTiw3C7n1ZOuoqJsmBp6rtTSB8dLxamWyXt0a0NNf9YtRzB7XWd+MACYC9
+ 4zeciFakyt0jRwdpvEo5KdF4eMPvqApbKubrrriQ5SKZv0VJTO4iLf3KCeRQwG+M/OVk109abQh
+ Uth43ZDYtxS+PpBgDSfl8q6pyKLNeky0WWR0ZkqoIeW9zHUX7ojJBqsp2pI/f+t//dQaCjXIz//
+ 9/a6kVGDQtQ7vsm3+Up49zYyKdWbtzuI/Z0RNWFMzZglJMxwycL5nSel84
+X-Received: by 2002:a05:651c:4184:b0:38b:f632:e0fc with SMTP id
+ 38308e7fff4ca-39561c076ebmr23336251fa.1.1779010549263; 
+ Sun, 17 May 2026 02:35:49 -0700 (PDT)
+Received: from Shofiq.home (87-92-218-151.rev.dnainternet.fi. [87.92.218.151])
+ by smtp.gmail.com with ESMTPSA id
+ 38308e7fff4ca-3958874e9casm4061921fa.25.2026.05.17.02.35.48
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 17 May 2026 02:35:48 -0700 (PDT)
+From: Md Shofiqul Islam <shofiqtest@gmail.com>
 To: u-boot@lists.denx.de
-Cc: Vincent Jardin <vjardin@free.fr>,
- Takahiro Kuwano <Takahiro.Kuwano@infineon.com>,
- Christoph Reiter <christoph.reiter@evk.biz>,
- David Lechner <dlechner@baylibre.com>,
- Flaviu Nistor <flaviu.nistor@gmail.com>, Jeffrey Yu <jeyu@issi.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>,
- Shiji Yang <yangshiji66@outlook.com>, Ssunk <ssunkkan@gmail.com>,
- Takahiro Kuwano <takahiro.kuwano@infineon.com>,
- Tom Rini <trini@konsulko.com>, Vignesh R <vigneshr@ti.com>
-Subject: [PATCH v2] mtd: spi-nor: Add gd55lb02gf chips
-Date: Wed, 20 May 2026 17:00:21 +0200
-Message-ID: <20260520150032.1904130-1-vjardin@free.fr>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <"<20260510222140.603755-1-vjardin@free.fr>">
-References: <"<20260510222140.603755-1-vjardin@free.fr>">
+Cc: festevam@gmail.com, brian.ruley@gehealthcare.com, trini@konsulko.com,
+ shofiqtest@gmail.com
+Subject: [PATCH] clk: imx6q: guard LDB clock init with CONFIG_SPL_BUILD
+Date: Sun, 17 May 2026 12:35:47 +0300
+Message-ID: <20260517093547.149665-1-shofiqtest@gmail.com>
+X-Mailer: git-send-email 2.51.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Sun, 17 May 2026 20:14:01 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,53 +96,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add the GigaDevice GD55LB02GF (256 Mo) similar to gd55lb02ge with
-the same read path flags.
+of_assigned_ldb_sels() and imx6q_init_ldb_clks() are called from
+imx6q_clk_probe() which runs in SPL. SPL never initialises a display,
+so pulling LDB clock selection code into SPL is unnecessary and causes
+an SPL SRAM overflow of 112 bytes with the i.MX6Q LDB clock series.
 
-SPI_NOR_HAS_LOCK and SPI_NOR_HAS_TB do not match this chip's
-status register layout: the GD55LB02GF uses a 5-bit block protect
-field BP0..BP4 plus a CMP bit in SR2 for direction (see datasheet
-"Status Register Block Protection").
+Guard both functions with #if !defined(CONFIG_SPL_BUILD) to exclude
+them from the SPL image. IS_ENABLED() cannot guard function definitions
+so #if is intentional here. This reduces SPL text by ~688 bytes and
+unblocks the patch series CI.
 
-The generic stm-lock helpers drive only BP0..BP2 and assume SR1
-bit 5 is TB, but on this part SR1 bit 5 is BP3.
-Enabling either flag would leave BP3..BP4 unmanaged or corrupt
-BP3 on every lock op.
-A proper support needs a vendor specific lock callback, it is out
-of scope for this table update.
-
-Signed-off-by: Vincent Jardin <vjardin@free.fr>
-Suggested-by: Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
-
+Signed-off-by: Md Shofiqul Islam <shofiqtest@gmail.com>
 ---
-
-Changes in v2:
-- Place the new entry next to gd55lb02ge with style matching the
-  neighbour.
-- Drop SPI_NOR_HAS_LOCK. Did not adopt SPI_NOR_HAS_TB from
-  gd55lb02ge: neither flag matches this chip's SR layout (see
-  comments for the BP0..BP4 / CMP rationale).
-
- drivers/mtd/spi/spi-nor-ids.c | 4 ++++
+ drivers/clk/imx/clk-imx6q.c | 4 ++++
  1 file changed, 4 insertions(+)
 
-diff --git a/drivers/mtd/spi/spi-nor-ids.c b/drivers/mtd/spi/spi-nor-ids.c
-index c0fa98424aa..31a2ba49a87 100644
---- a/drivers/mtd/spi/spi-nor-ids.c
-+++ b/drivers/mtd/spi/spi-nor-ids.c
-@@ -231,6 +231,10 @@ const struct flash_info spi_nor_ids[] = {
- 		     SECT_4K | SPI_NOR_QUAD_READ |
- 		     SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
- 	},
-+	{
-+		INFO("gd55lb02gf", 0xc8601c, 0, 64 * 1024, 4096,
-+		     SECT_4K | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES)
-+	},
- #endif
- #ifdef CONFIG_SPI_FLASH_ISSI		/* ISSI */
- 	/* ISSI */
+diff --git a/drivers/clk/imx/clk-imx6q.c b/drivers/clk/imx/clk-imx6q.c
+index a4649a1a9d9..379155096e8 100644
+--- a/drivers/clk/imx/clk-imx6q.c
++++ b/drivers/clk/imx/clk-imx6q.c
+@@ -156,6 +156,7 @@ static struct clk_div_table video_div_table[] = {
+ 
+ static unsigned int share_count_mipi_core_cfg;
+ 
++#if !defined(CONFIG_SPL_BUILD)
+ static void of_assigned_ldb_sels(struct udevice *dev, int *ldb_di0_sel,
+ 				 int *ldb_di1_sel)
+ {
+@@ -270,6 +271,7 @@ static void imx6q_init_ldb_clks(struct udevice *dev)
+ 
+ 	select_ldb_di_clock_source(ldb_di_clk[0], ldb_di_clk[1]);
+ }
++#endif /* !CONFIG_SPL_BUILD */
+ 
+ static int imx6q_clk_probe(struct udevice *dev)
+ {
+@@ -488,7 +490,9 @@ static int imx6q_clk_probe(struct udevice *dev)
+ 		 * Need to set the clocks now and make them read-only due to a
+ 		 * hardware bug. Fixed on the i.MX6 QuadPlus
+ 		 */
++#if !defined(CONFIG_SPL_BUILD)
+ 		imx6q_init_ldb_clks(dev);
++#endif
+ 		clk_dm(IMX6QDL_CLK_LDB_DI0_SEL,
+ 		       imx_clk_mux_flags(dev, "ldb_di0_sel", base + 0x2c, 9, 3,
+ 					 ldb_di_sels, ARRAY_SIZE(ldb_di_sels),
 -- 
-2.43.0
+2.51.1
 
-base-commit: bfe90a308a94caa9d855440683521ff04122ae2a
-branch: for-upstream/spi-nor-gd55lb02gf
