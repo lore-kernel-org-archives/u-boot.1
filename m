@@ -4,83 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7AF05CD4F3D
-	for <u-boot@archiver.kernel.org>; Sun, 17 May 2026 22:53:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2AC9CD4F3C
+	for <u-boot@archiver.kernel.org>; Sun, 17 May 2026 22:53:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F38A2846E6;
-	Mon, 18 May 2026 00:52:02 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A35438468A;
+	Mon, 18 May 2026 00:52:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="lQfqn5HP";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="FgwvhIpn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9588A8468A; Mon, 18 May 2026 00:52:00 +0200 (CEST)
-Received: from mail-ot1-x343.google.com (mail-ot1-x343.google.com
- [IPv6:2607:f8b0:4864:20::343])
+ id DF7FE84683; Mon, 18 May 2026 00:52:17 +0200 (CEST)
+Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
+ [IPv6:2a00:1450:4864:20::634])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A829A846AD
- for <u-boot@lists.denx.de>; Mon, 18 May 2026 00:51:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F09E084659
+ for <u-boot@lists.denx.de>; Mon, 18 May 2026 00:52:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ot1-x343.google.com with SMTP id
- 46e09a7af769-7dccb8644c4so970519a34.0
- for <u-boot@lists.denx.de>; Sun, 17 May 2026 15:51:57 -0700 (PDT)
+Received: by mail-ej1-x634.google.com with SMTP id
+ a640c23a62f3a-bd36614d329so244529066b.3
+ for <u-boot@lists.denx.de>; Sun, 17 May 2026 15:52:15 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1779058335; cv=none;
+ d=google.com; s=arc-20240605;
+ b=RuLkeO8J737UP1LZt76A8R2kvO8hXjp0J5fXig6OXXbmCDRKEyiILrxV3H/+Tfj+Hp
+ g2+ZdefRZEMRyVDgewDl9MZmxuF6r+eC/89KjCNt9S/Nqy+kZLuRZ0AV+bOofWA5vkVb
+ ac1PtaE4UBRPh6oDfJg0q1gUxsggpGjVJJ7q/me3UpB2yBrsqRbnx5KaUDO+ewyeb0jw
+ WLYDdhfrG8Q52E34FyPj5A44zw8i7oH5YW+gQDcH/pwoTYJ8R4M0d7vAdNynAa8lTph/
+ G8XaQBeE9Pk1LYJwtgOvfD1Sxgr+H3Iag+1p5jvtyFP0slhmuaFyXyVjDK1ixgKC8B9s
+ YKYQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=kVWSYhbmem1d4s2gxvdVvav6sQxUzTBatt0Fo2c9Fro=;
+ fh=Ba4hdmvaL8Iqn+laLAZ6Zwq6KO+OgpTCF9Lsg9Ghi9E=;
+ b=c9M4pc9VPh7IiCS5wCUUmULaUqIpPFWsNxcLkW8x5jyLQ9ijXBwrMEDYh6rnSLhZGb
+ nAHhBWllOfmR2F+nZaDKVpNJ+6Yu9AwSqaUN1m7XLkyNpkSaqrMQxwWD3/2vvDzD7OBu
+ ObKv6lYQCqPYbf1RF3atw/z3E44sWcEL1loV2pFt7O+bPfjY5nb1BaL19j82j+0RWJir
+ 1taLr8bp4K6ZVUA+gY+qI3Sbf1ODZVufyarCGSG5joPh1jCJPhmIoXl2xsqFVknpriAJ
+ Zxnv4IuV+pHTYJm6B/fIWIgH8KI1XdyV9oo/Oi9kwUrF+ow+o9t+b1U9j8zZM5VmjwHw
+ lfJA==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1779058316; x=1779663116; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=J7JfKmCArb6ejFZTvMDjj2BQXssKrM5aB7H76XIw9r8=;
- b=lQfqn5HPSQobKRwo2act1N0CDE1td4lGo+7Ow1vIPgvu4f85/ijdxF0ISlRKKO7nMZ
- raMAxTK2AGH678awFjCME0cs6qN2t071ZcjHP/iq2eaz8OTxOa1zg6MI/0tlC5P8AQGn
- IynB8eAfzQ9qFOm1pM6WGGWJk+LjHVVBpAYWo=
+ d=chromium.org; s=google; t=1779058335; x=1779663135; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=kVWSYhbmem1d4s2gxvdVvav6sQxUzTBatt0Fo2c9Fro=;
+ b=FgwvhIpnL4O8Y7vCYXp69b+db/IF9vv0sSGukvoLXRfSVRNwRSZCEoKYStLt+RsPZX
+ p0tTyQGhiIOaSv7sZ2aP0SUUGIVy2rzXDds6tVnQv5RqEECvlS7ReTI0MET2yk5ed4I9
+ ohqeK2u84FiNdERAkbPOS1tT2T8M10Cjow2ig=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779058316; x=1779663116;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=J7JfKmCArb6ejFZTvMDjj2BQXssKrM5aB7H76XIw9r8=;
- b=LOECe+Z/nHdYCZumi1nys4hpgLCjs9xH1dli2EkVhPAmvzFJXozZhOFZxN+e02aK8w
- kW9P8s6QGBIJkDsFlmOq7B5h4QyKZC1rzd5ltdzotEOFSjsxthgoq28XMR+z5FXEDGF+
- 28zWdV2ITm5drVjnTamwhnUDGisWLFQ2K0Hv/v3pbNi5V19OrBjjOilXRJJptgU8h7nF
- qa6rjLFhhSYJePpj76zi/2jyzSvuYRK5z2vk5fBv1Q/7JU9f4oG2nbTQUHmMaVM8emiB
- 7dUjnJUJqkyST41YrnoWQNKK4pQKn6AdxCNHPoaBJrHMvFPeM6Xk5NTNaZeb3zDLA0IW
- JdQg==
-X-Gm-Message-State: AOJu0Yw95Vxrf5oSxA2cu5FuKlSZmPkszdHn9QcEx1JD4Rro4V7Qcyt1
- zzUyifb4g1OpcqyK45H6CDGwnJaNIR87XBZY8TBDG6K1rLnF81bMW4pWlAQu9O5Mdi4kSepQy6f
- tj+joDyRA3Ok=
-X-Gm-Gg: Acq92OETW++m+ADSqzu6snhIOmm6/isQ1vVdXc8c8F9BV0bDFIF9xSF1pIKs8vfEzVa
- 1xwy55OAopnw/zkU/8n+0eMLy0SiM8GZEnm/ULOVEhX4Y+M57x7quiQMfTpe5tb9SNUS9eM+qsI
- 7k8fjgt58sxuHcSR3900GsG8rIS1I8S32UZ1ipTdKVdFVZ+R+pHXUUJ1fU9m1QcTvpu/AyIXejy
- t8xdgge8S7YAD6DZxSKZLuB3jdEXgKDzfpgkWiF1m4YahuASK0M6aY6GLCsYAFfJVB8+/espSt2
- PO3zJiV9vZrQlBsfdI9Uz8To/R12HoIjlPTCDVvkdN97eLwEftifYZMAQfIHvD0EONTkEjqqKKp
- KJDYHv1zuZ7C6TLNPH8y9UySjynfHVcqXyD3hHivc19yq9usQUdxsZSNNs7UzYMKn7zUv3KRB3p
- UusvkS5hhi6sEpb98zCQ==
-X-Received: by 2002:a05:6830:6606:b0:7de:a2cc:9da2 with SMTP id
- 46e09a7af769-7e4f2b903bemr9153313a34.15.1779058316451; 
- Sun, 17 May 2026 15:51:56 -0700 (PDT)
-Received: from chromium.org ([174.51.25.52]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7e55bc4983asm6386357a34.26.2026.05.17.15.51.55
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 17 May 2026 15:51:55 -0700 (PDT)
-From: Simon Glass <sjg@chromium.org>
-To: u-boot@lists.denx.de
-Cc: Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Martin Schwan <m.schwan@phytec.de>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH 11/11] test: Move disk images to persistent-data directory
-Date: Sun, 17 May 2026 16:51:09 -0600
-Message-ID: <20260517225122.2966807-12-sjg@chromium.org>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260517225122.2966807-1-sjg@chromium.org>
-References: <20260517225122.2966807-1-sjg@chromium.org>
+ d=1e100.net; s=20251104; t=1779058335; x=1779663135;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=kVWSYhbmem1d4s2gxvdVvav6sQxUzTBatt0Fo2c9Fro=;
+ b=d1tZyGMQOp/paKIGguExtCXVVuiq74PGCH9aFZRoiCsVP4pGiJrmg0dVVDspWkzCmI
+ 0AEbnn2JMrSGr50CIRfgoRXbnMJ13drQVKY0U7AVLt26XyYDPagpAg+8zL0N9Eos9MD5
+ hG6R4DpN+91lNnTo2W8B8ngCq9nZYWedajsbhsWr4wZdGUdsyFrmR39ZRQWSs+V3Z28p
+ y01g1S982rdz14zCwKsvzbGl2912m/cqN0AXXM/gRtXRwuo7WiT/Bi/Hupvo3AaIkabk
+ awU9M0+5YjLuYPPXr87lX0crv0RDfqklFOBvHktZ3PLzyPUn4dF8ynmFOSma0b+q3tCM
+ TIyA==
+X-Gm-Message-State: AOJu0YwcPEb5P/OdEvrIoEXb2C6zDCqlaDT20D1kd61NLno20fpo/pRD
+ YAjTY5SdlXhckXFDQNZZf3wsJAGfLCUPvJlBjiv9nu8krEtWb1fIOQpjt+gW/NLrd1acf8XGX5O
+ 7BjItooZplDCcy2foGOp3KLHVc7Xu3dF0bvdUVN/t
+X-Gm-Gg: Acq92OGtu3jIr035lGGlq2gETMdvuusv3cYpJDgSvH/gZghqvmSNxklScL9RoZlwdbE
+ Qmn9CyYIX2qWDFMkUTppPrLxuiskYBj465p4fgIUqoEmDiITALPjYrq3q2/WQ7QozU2wxnJ/DtU
+ LBdnjJ91QZUPi2DalFaW3zAxDbgIwSFKhVuQTRn76rRd8P2/BsxQj9zyOlqJ/77dzXPcLUJWcdQ
+ JFc7x3pt/TvHJw2StVszTpwPp90pk1Stz93z041iE4fRR5AB4SyuKhbw2RwtmbhMSebgx/caqBo
+ +0bfU5kd
+X-Received: by 2002:a17:907:c248:b0:bd4:9a54:afa2 with SMTP id
+ a640c23a62f3a-bd5177f4418mr724503566b.2.1779058335378; Sun, 17 May 2026
+ 15:52:15 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <BESP194MB28052CF65AFFB806C625EE84DA042@BESP194MB2805.EURP194.PROD.OUTLOOK.COM>
+ <CAFLszTjuy1N2huOeFVLEiH53EZ5mDU4ko5WiCMM_4mjkQMgNJA@mail.gmail.com>
+ <BESP194MB2805F515E21C1E89E869D33EDA052@BESP194MB2805.EURP194.PROD.OUTLOOK.COM>
+In-Reply-To: <BESP194MB2805F515E21C1E89E869D33EDA052@BESP194MB2805.EURP194.PROD.OUTLOOK.COM>
+From: Simon Glass <sjg@chromium.org>
+Date: Sun, 17 May 2026 16:52:02 -0600
+X-Gm-Features: AVHnY4LY5KMPwg5kBOyVScGTrYl0jyUB8VJfD5qo0CyZaB8wtI8Ax9DmlnTE7Nk
+Message-ID: <CAFLszTg6_46sEjcUO1xy2tXo=B2cHZ3itt8eQRt4fEvsp3Jqhg@mail.gmail.com>
+Subject: Re: [PATCH] boot: cedit: Check ofnode_read_prop return value
+To: Francois Berder <fberder@outlook.fr>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,108 +109,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-It is annoying to have disk images in the source directory since it
-clutters up the working space.
+Hi Francois,
 
-Remove cur_dir=True from DiskHelper calls so disk images are written to
-the persistent-data directory instead.
+On Sat, 16 May 2026 at 15:11, Francois Berder <fberder@outlook.fr> wrote:
+>
+> Hi Simon,
+>
+> On 5/16/26 15:31, Simon Glass wrote:
+> > Hi Francois,
+> >
+> > On 2026-05-15T20:57:47, Francois Berder <fberder@outlook.fr> wrote:
+> >> boot: cedit: Check ofnode_read_prop return value
+> >>
+> >> In h_read_settings, val variable could be NULL due to
+> >> ofnode_read_prop returning an error. This variable
+> >> would then be used as the src in strcpy.
+> >>
+> >> Add a NULL check after calling ofnode_read_prop.
+> >>
+> >> Signed-off-by: Francois Berder <fberder@outlook.fr>
+> >>
+> >> boot/cedit.c | 2 ++
+> >>  1 file changed, 2 insertions(+)
+> >
+> > Reviewed-by: Simon Glass <sjg@chromium.org>
+> >
+> >> diff --git a/boot/cedit.c b/boot/cedit.c
+> >> @@ -500,6 +500,8 @@ static int h_read_settings(struct scene_obj *obj, void *vpriv)
+> >>               tline = (struct scene_obj_textline *)obj;
+> >>
+> >>               val = ofnode_read_prop(node, obj->name, &len);
+> >> +             if (!val)
+> >> +                     return log_msg_ret('tline', -EINVAL);
+> >>               if (len >= tline->max_chars)
+> >>                       return log_msg_ret('str', -ENOSPC);
+> >>               strcpy(abuf_data(&tline->buf), val);
+> >
+> > Good catch!
+> >
+> > Please can you use -ENOENT rather than -EINVAL, as this is more
+> > consistent with the SCENEOBJT_MENU case a few lines below.
+>
+>
+> When I look at the way u-boot handles ofnode_read_prop returning NULL, I find that it always uses the EINVAL return code instead of ENOENT. Let me know if you still prefer that I change the error code to ENOENT.
 
-Move scsi.img too (used by the bootstd tests) and mmc6.img (used by the
-MBR tests).
+Well it's not a big deal, but -EINVAL is used in of_to_plat methods,
+indicating that there was something wrong with the DT node. In this
+case, we are reading a config-editor definition and it is not released
+to a device, so trying to return a more varied assortment of error
+numbers is helpful for debugging.
 
-Add a few comments as to where the images are used.
-
-This keeps the source tree clean and puts disk images in the same place
-as other test data.
-
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
-
- test/py/img/armbian.py   |  2 +-
- test/py/img/common.py    |  2 +-
- test/py/img/efi.py       |  2 +-
- test/py/tests/test_ut.py | 11 +++++++----
- 4 files changed, 10 insertions(+), 7 deletions(-)
-
-diff --git a/test/py/img/armbian.py b/test/py/img/armbian.py
-index 1bcba3fae63..697b8fcd9a0 100644
---- a/test/py/img/armbian.py
-+++ b/test/py/img/armbian.py
-@@ -126,7 +126,7 @@ booti ${kernel_addr_r} ${ramdisk_addr_r} ${fdt_addr_r}
-         ubman, f'echo here {kernel} {symlink}')
-     os.symlink(kernel, symlink)
-     fsh.mk_fs()
--    img = DiskHelper(ubman.config, mmc_dev, 'mmc', True)
-+    img = DiskHelper(ubman.config, mmc_dev, 'mmc')
-     img.add_fs(fsh, DiskHelper.EXT4)
-     img.create()
-     fsh.cleanup()
-diff --git a/test/py/img/common.py b/test/py/img/common.py
-index 37349c0a2e7..16bf23a4c6f 100644
---- a/test/py/img/common.py
-+++ b/test/py/img/common.py
-@@ -74,7 +74,7 @@ def setup_extlinux_image(ubman, devnum, basename, vmlinux, initrd, dtbdir,
- 
-     fsh.mk_fs()
- 
--    img = DiskHelper(ubman.config, devnum, basename, True)
-+    img = DiskHelper(ubman.config, devnum, basename)
-     img.add_fs(fsh, DiskHelper.VFAT, bootable=True)
- 
-     ext4 = FsHelper(ubman.config, 'ext4', 1, prefix=basename)
-diff --git a/test/py/img/efi.py b/test/py/img/efi.py
-index 4cb0bb95a59..06fda8a90b2 100644
---- a/test/py/img/efi.py
-+++ b/test/py/img/efi.py
-@@ -31,7 +31,7 @@ def setup_efi_image(ubman):
- 
-     fsh.mk_fs()
- 
--    img = DiskHelper(ubman.config, devnum, 'flash', True)
-+    img = DiskHelper(ubman.config, devnum, 'flash')
-     img.add_fs(fsh, DiskHelper.VFAT)
-     img.create()
-     fsh.cleanup()
-diff --git a/test/py/tests/test_ut.py b/test/py/tests/test_ut.py
-index e8d47b79365..2205ba6acf6 100644
---- a/test/py/tests/test_ut.py
-+++ b/test/py/tests/test_ut.py
-@@ -32,7 +32,8 @@ from img.cedit import setup_cedit_file
- def test_ut_dm_init(ubman):
-     """Initialize data for ut dm tests."""
- 
--    fn = ubman.config.source_dir + '/testflash.bin'
-+    # This is used by flash-stick@0 in test.py
-+    fn = ubman.config.persistent_data_dir + '/testflash.bin'
-     if not os.path.exists(fn):
-         data = b'this is a test'
-         data += b'\x00' * ((4 * 1024 * 1024) - len(data))
-@@ -45,8 +46,8 @@ def test_ut_dm_init(ubman):
-         with open(fn, 'wb') as fh:
-             fh.write(data)
- 
--    # Create a file with a single partition
--    fn = ubman.config.source_dir + '/scsi.img'
-+    # Create a file with a single partition (used by /scsi in test.dts) */
-+    fn = ubman.config.persistent_data_dir + '/scsi.img'
-     if not os.path.exists(fn):
-         data = b'\x00' * (2 * 1024 * 1024)
-         with open(fn, 'wb') as fh:
-@@ -54,11 +55,13 @@ def test_ut_dm_init(ubman):
-         utils.run_and_log(
-             ubman, f'sfdisk {fn}', stdin=b'type=83')
- 
-+    # These two are used by test/dm/host.c
-     FsHelper(ubman.config, 'ext2', 2, '2MB').mk_fs()
-     FsHelper(ubman.config, 'fat32', 1, '1MB').mk_fs()
- 
-+    # This is used by test/cmd/mbr.c
-     mmc_dev = 6
--    fn = os.path.join(ubman.config.source_dir, f'mmc{mmc_dev}.img')
-+    fn = os.path.join(ubman.config.persistent_data_dir, f'mmc{mmc_dev}.img')
-     data = b'\x00' * (12 * 1024 * 1024)
-     with open(fn, 'wb') as fh:
-         fh.write(data)
--- 
-2.43.0
-
+Regards,
+Simon
