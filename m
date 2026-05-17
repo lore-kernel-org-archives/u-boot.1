@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 970C4CD4F3C
-	for <u-boot@archiver.kernel.org>; Sun, 17 May 2026 19:28:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0580CD4F3D
+	for <u-boot@archiver.kernel.org>; Sun, 17 May 2026 19:28:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 94FA0846F1;
+	by phobos.denx.de (Postfix) with ESMTP id CE0CE846FC;
 	Sun, 17 May 2026 21:26:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=ya.ru
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ya.ru header.i=@ya.ru header.b="Doimyiit";
+	dkim=pass (1024-bit key; unprotected) header.d=ya.ru header.i=@ya.ru header.b="wEPOdYKe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2CDE18468B; Sun, 17 May 2026 21:25:09 +0200 (CEST)
-Received: from forward101b.mail.yandex.net (forward101b.mail.yandex.net
- [IPv6:2a02:6b8:c02:900:1:45:d181:d101])
+ id 02B6584688; Sun, 17 May 2026 21:25:10 +0200 (CEST)
+Received: from forward102b.mail.yandex.net (forward102b.mail.yandex.net
+ [178.154.239.149])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 42CCD845E3
- for <u-boot@lists.denx.de>; Sun, 17 May 2026 21:25:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0F65983EF9
+ for <u-boot@lists.denx.de>; Sun, 17 May 2026 21:25:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=ya.ru
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=paullo612@ya.ru
 Received: from mail-nwsmtp-smtp-production-main-70.sas.yp-c.yandex.net
  (mail-nwsmtp-smtp-production-main-70.sas.yp-c.yandex.net
  [IPv6:2a02:6b8:c11:e97:0:640:f294:0])
- by forward101b.mail.yandex.net (Yandex) with ESMTPS id C559EC0014;
- Sun, 17 May 2026 22:25:06 +0300 (MSK)
+ by forward102b.mail.yandex.net (Yandex) with ESMTPS id A8279C00C9;
+ Sun, 17 May 2026 22:25:07 +0300 (MSK)
 Received: by mail-nwsmtp-smtp-production-main-70.sas.yp-c.yandex.net (smtp)
- with ESMTPSA id mOVI2m4SD0U0-qOkSd3gb; 
- Sun, 17 May 2026 22:25:06 +0300
+ with ESMTPSA id mOVI2m4SD0U0-TcdyzYNd; 
+ Sun, 17 May 2026 22:25:07 +0300
 X-Yandex-Fwd: 1
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ya.ru; s=mail;
- t=1779045906; bh=u20yP1nc6RpWpeCVX3pLcElYUvjVU3GvPhCJzW0jMTQ=;
+ t=1779045907; bh=oL74VwaypeCVbHtXTJdVBZiTgRN0fmcFw71HK9eiG2I=;
  h=Cc:In-Reply-To:Message-Id:To:Date:References:From:Subject;
- b=DoimyiitHtCeU+w7gBgSENDnIJ4Au/CyBR0FkoY3cqN83ze1IMJyJIs4lYaGzMaTF
- ax41SgjBp+Y4RfKSgifHffEk9nMvve/n61tLqsb0gOLaQMhfkgRhfUv3tacSi9ttmN
- uqPZ7mKDM5LjfF/zCKzChAUicVa7HqpMJEThhAtU=
+ b=wEPOdYKeiu3JwpIvrNXiAQqjifxUYrBR5PEC9OLYu4vBLov7d+tFP7Br7HSASwuOE
+ ekhWyJXgv6NkRl4gwLjBrOqdvYmqqRIKGaHiz/VfNk8md3HRzupqR4wgvTs3QKcEFo
+ cHyYw4KPPm6MFRo1nVQ3v22+SMTL7W+Pd2896WmM=
 Authentication-Results: mail-nwsmtp-smtp-production-main-70.sas.yp-c.yandex.net;
  dkim=pass header.i=@ya.ru
 From: Pavel Golikov <paullo612@ya.ru>
-Date: Sun, 17 May 2026 22:24:39 +0300
-Subject: [PATCH RFC 13/18] rockchip: rk356x: Add register spaces to DMC in
+Date: Sun, 17 May 2026 22:24:40 +0300
+Subject: [PATCH RFC 14/18] rockchip: rk356x: Add DMC related syscons to
  u-boot.dtsi
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260517-rk3568-raminit-v1-13-a24e16302a13@ya.ru>
+Message-Id: <20260517-rk3568-raminit-v1-14-a24e16302a13@ya.ru>
 References: <20260517-rk3568-raminit-v1-0-a24e16302a13@ya.ru>
 In-Reply-To: <20260517-rk3568-raminit-v1-0-a24e16302a13@ya.ru>
 To: u-boot@lists.denx.de
@@ -85,30 +85,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add UTPCTL2 and DDRPHY register spaces, both needed for RK3568's SDRAM
-controller initialization.
+Add ddrgrf, sgrf and msch syscons in u-boot.dtsi. Those are needed for
+RK3568's DRAM controller initialization. Reference them in DMC node.
+DRAM controller also needs CRU, so, add reference to it too.
 
 Signed-off-by: Pavel Golikov <paullo612@ya.ru>
 ---
- arch/arm/dts/rk356x-u-boot.dtsi | 5 ++++-
- 1 file changed, 4 insertions(+), 1 deletion(-)
+ arch/arm/dts/rk356x-u-boot.dtsi | 25 +++++++++++++++++++++++++
+ 1 file changed, 25 insertions(+)
 
 diff --git a/arch/arm/dts/rk356x-u-boot.dtsi b/arch/arm/dts/rk356x-u-boot.dtsi
-index 738b9673d35..b9f300a3274 100644
+index b9f300a3274..3202c1bf534 100644
 --- a/arch/arm/dts/rk356x-u-boot.dtsi
 +++ b/arch/arm/dts/rk356x-u-boot.dtsi
-@@ -16,8 +16,11 @@
+@@ -16,8 +16,33 @@
  		u-boot,spl-boot-order = "same-as-spl", &sdmmc0, &sdhci;
  	};
  
--	dmc: dmc {
-+	dmc: dmc@fe250000 {
- 		compatible = "rockchip,rk3568-dmc";
-+		reg = <0 0xfe250000 0 0x10000
-+		       0 0xfe800000 0 0x10000>;
++	ddrgrf: syscon@fdc40000 {
++		compatible = "rockchip,rk3568-ddrgrf", "syscon";
++		reg = <0x0 0xfdc40000 0x0 0x10000>;
 +
- 		bootph-all;
- 	};
++		bootph-all;
++	};
++
++	sgrf: syscon@fdd18000 {
++		compatible = "rockchip,rk3568-sgrf", "syscon";
++		reg = <0x0 0xfdd18000 0x0 0x4000>;
++
++		bootph-all;
++	};
++
++	msch: syscon@fe100000 {
++		compatible = "rockchip,rk3568-msch", "syscon";
++		reg = <0x0 0xfe100000 0x0 0x2000>;
++
++		bootph-all;
++	};
++
+ 	dmc: dmc@fe250000 {
+ 		compatible = "rockchip,rk3568-dmc";
++		rockchip,ddrgrf = <&ddrgrf>;
++		rockchip,cru = <&cru>;
++		rockchip,msch = <&msch>;
++		rockchip,pmugrf = <&pmugrf>;
+ 		reg = <0 0xfe250000 0 0x10000
+ 		       0 0xfe800000 0 0x10000>;
  
 
 -- 
