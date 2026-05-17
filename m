@@ -4,73 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7CB43CD4F3C
-	for <u-boot@archiver.kernel.org>; Sun, 17 May 2026 20:43:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11217CD4F3D
+	for <u-boot@archiver.kernel.org>; Sun, 17 May 2026 20:49:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C1ABF8465D;
-	Sun, 17 May 2026 22:43:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 622C68465D;
+	Sun, 17 May 2026 22:49:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=free.fr
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="HG9jSiq4";
+	dkim=pass (2048-bit key; unprotected) header.d=free.fr header.i=@free.fr header.b="HlOLKGke";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 375BC8466F; Sun, 17 May 2026 22:43:23 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.66])
+ id 02FF48465D; Sun, 17 May 2026 22:49:32 +0200 (CEST)
+Received: from smtp1-g21.free.fr (smtp1-g21.free.fr [212.27.42.1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 627E6845E3
- for <u-boot@lists.denx.de>; Sun, 17 May 2026 22:43:20 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=5134=DP=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1779050596;
- bh=hdMhvxS9HOEerGcAN4G+tX3jIuuyp3vOyCTMuva7sFM=;
- b=HG9jSiq4nMaNZkXmS6qA3cucXv/LF3z8UyKQP52/ab3FEKxImQ8wtOf903EH9kbuntfrj5pkO
- 4cFfHjItsOqVwozedMNujUI8+KX66Ue4Z+ZUtal1np+EMw8iyaMp+j8CKTdPfBKusVYEy80c4jS
- Xk5fC4Bf2MdNowuC9txkNg65KwIDNGcycS4TWhwuXCVtu4v0HZCDUIcIvIjpA/Lz6aN8G3rbzCr
- fSUQ5M0W9C7sj6rOu+lcrX8ybTsu2ROrtt+Z7ohXzyQMHQCRJVaxVMBHcGOXYsCVFrmvqL+d7wU
- LTz+68KyXsYg4A+9oyefBvF1l+JevyFeABQy0404LGoA==
-X-Forward-Email-ID: 6a0a285751d6696912bb7488
-X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 121.127.44.66
-X-Forward-Email-Version: 2.8.12
-X-Forward-Email-Website: https://forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Report-Abuse-To: abuse@forwardemail.net
-Message-ID: <f81748c8-00b0-4b87-960f-eff2d2f96707@kwiboo.se>
-Date: Sun, 17 May 2026 22:42:59 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id DDACF845E3
+ for <u-boot@lists.denx.de>; Sun, 17 May 2026 22:49:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=quarantine dis=none) header.from=free.fr
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=vjardin@free.fr
+Received: from L30177.local (unknown
+ [IPv6:2a01:e0a:2af:22b0:dca3:1ad8:a26:89cb])
+ (Authenticated sender: vjardin@free.fr)
+ by smtp1-g21.free.fr (Postfix) with ESMTPSA id 0A435B00565;
+ Sun, 17 May 2026 22:49:19 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=free.fr;
+ s=smtp-20201208; t=1779050969;
+ bh=7zjX2bnMtuenRFQN4kN+eMDOIFJgAa0f0ORlDLoBE1g=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=HlOLKGkecuWeqfd04o/PVZc5WH8ub7voYIFptGEYVO88yZYXCFjb0MnxMko6rEsmA
+ uvaUnKBibYk4kwV+JDgVpJAEp89oJGwu2lZCgg1YE2m3PBzY7DAQbgjf9Td5jTOlTX
+ OBarwiU/JzZRZlPacoPhZlRhPHpwi0yOEsNHCjA1MBIIgHNFlAHJXJenMQUsUHeyNg
+ itLP5rhZdOVyZcGBPV6mQASrEYcQBFIJGAtEa8uBlvTnYONII8j67lDkKCfBb73LZT
+ e/rAK9JoZhXLX27PgN5fhjqh+Fr6nUar6bGNeDWuHfTxifd0fU14VyAJdWX6L7kGhu
+ KhVpLGy+lIoIg==
+Date: Sun, 17 May 2026 22:49:18 +0200
+From: Vincent Jardin <vjardin@free.fr>
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Peng Fan <peng.fan@nxp.com>, Sughosh Ganu <sughosh.ganu@arm.com>,
+ Timo tp =?iso-8859-1?Q?Prei=DFl?= <t.preissl@proton.me>,
+ Tom Rini <trini@konsulko.com>, Yao Zi <me@ziyao.cc>
+Subject: Re: [PATCH v1] fs: dispatch null_dev_desc_ok filesystems before
+ block lookup
+Message-ID: <agopzp-8nFc7W8xU@L30177.local>
+References: <20260511115340.675883-1-vjardin@free.fr>
+ <CAFLszTj40xCsVeVMxCCCHAx=N16-LL48OJ4_M_tja1ka48vCrA@mail.gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH RFC 04/18] rockchip: rk3568: syscon: Add MSCH, SGRF and
- DDRGRF support
-To: Pavel Golikov <paullo612@ya.ru>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- Lukasz Majewski <lukma@denx.de>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>,
- Peng Fan <peng.fan@nxp.com>, Patrice Chotard <patrice.chotard@foss.st.com>,
- Yao Zi <me@ziyao.cc>, Finley Xiao <finley.xiao@rock-chips.com>,
- Casey Connolly <casey.connolly@linaro.org>,
- Kuan-Wei Chiu <visitorckw@gmail.com>,
- Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Lukasz Czechowski <lukasz.czechowski@thaumatec.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Marek Vasut <marek.vasut%2Brenesas@mailbox.org>
-References: <20260517-rk3568-raminit-v1-0-a24e16302a13@ya.ru>
- <20260517-rk3568-raminit-v1-4-a24e16302a13@ya.ru>
-Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <20260517-rk3568-raminit-v1-4-a24e16302a13@ya.ru>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <CAFLszTj40xCsVeVMxCCCHAx=N16-LL48OJ4_M_tja1ka48vCrA@mail.gmail.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,88 +73,165 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Pavel,
+Hi Simon,
 
-On 5/17/2026 9:24 PM, Pavel Golikov wrote:
-> Add support for the MSCH, SGRF and DDRGRF register regions in syscon,
-> which are necessary for RK3568's DRAM controller initialization.
+Thanks. See below,
+
+Before I send v2, I'd like your feedbacks,
+
+Le 15/05/26 06:43, Simon Glass a écrit :
+> 1. Typo: 'thue' should be 'the'
+
+ok for v2
+
+> 2. If cmd/ubifs.c is the duplication this patch obsoletes, please
+> either remove it in the same series or reword the motivation - as it
+> stands the duplication is still in-tree after the patch, so the reader
+> is left wondering whether 'load ubifs ...' is now the preferred entry
+> point or whether ubifsload remains supported
+
+I'll reword in v2's commit body. The point of this
+patch is to make load ubifs <addr> <file> a first-class entry
+point that routes through fs_set_blk_dev() like every other
+fstype. ubifsload (cmd/ubifs.c) stays in-tree for backward
+compatibility; removing (or change it to a preferred entry),
+it is not the goal of this commit, but it seems to be a quick win.
+
 > 
-> Signed-off-by: Pavel Golikov <paullo612@ya.ru>
-> ---
->  arch/arm/include/asm/arch-rockchip/clock.h    |  1 +
->  arch/arm/mach-rockchip/rk3568/syscon_rk3568.c | 26 +++++++++++++++++++++++++-
->  2 files changed, 26 insertions(+), 1 deletion(-)
+> Please also spell out which user-visible commands get this new support
+> ('load semihosting ...', 'load ubifs ...').
+
+ok, v2's commit log will show them, per the following.
+For instance, based on my records from today,
+
+My board: NXP LX2160A, U-Boot 2026.04-00933-g0a14371fb76c with
+OpenOCD attached using J-Link for SYS_OPEN / SYS_READ / SYS_FLEN / SYS_CLOSE from
+the host filesystem,
+
+load semihosting
+
+    => load semihosting - 0xc0000000 semihost-test.txt
+    76 bytes read in 835 ms (0 Bytes/s)
+    => md.b 0xc0000000 80
+    c0000000: 53 65 6d 69 68 6f 73 74 69 6e 67 20 74 65 73 74  Semihosting test
+    c0000010: 20 66 69 6c 65 20 66 72 6f 6d 20 55 2d 42 6f 6f   file from U-Boo
+    c0000020: 74 20 70 61 74 63 68 20 76 65 72 69 66 69 63 61  t patch verifica
+    c0000030: 74 69 6f 6e 20 2d 20 32 30 32 36 2d 30 35 2d 31  tion - 2026-05-1
+    c0000040: 37 54 31 35 3a 31 38 3a 34 33 5a 0a ef be ad de  7T15:18:43Z.....
+
+size semihosting
+
+    => size semihosting - semihost-test.txt
+    => printenv filesize
+    filesize=4c
+
+    # OpenOCD debug logs
+    semihosting_common(): op=0x1 (OPEN), param=0xfbb37fe8
+    semihosting_common(): open('/tmp/semihost-test.txt')=12
+    semihosting_common(): op=0xc (FLEN), param=0xfbb37ff8
+    semihosting_common(): op=0x2 (CLOSE), param=0xfbb37ff8
+
+ls semihosting : fs/semihostingfs.c does not registers ls hook in its
+fstype_info, so fs_ls() has no work to do. OpenOCD's
+log confirms no semihosting transaction was issued during
+the ls attempts, as expected:
+
+    => ls semihosting - .
+    => ls semihosting - semihost-test.txt
+    (silent return, no error, no semihosting trap fired)
+
+Without this patch all those commands fail in fs_set_blk_dev()
+with
+  ** Bad device specification semihosting **
+before the FS layer is called.
+
+For ubifs, it is code analysis only, I do not have hardware boards
+to check.
+
+From the code review:
+
+  - fs/ubifs/ubifs.c:ubifs_set_blk_dev() takes (struct blk_desc *,
+    struct disk_partition *) and ignores both, it only checks the
+    global ubifs_mounted.
+
+  - The patched fs_set_blk_dev() dispatch path, for any fstype
+    whose null_dev_desc_ok flag is set, therefore feeds
+    ubifs_set_blk_dev() the NULLs it has been receiving
+    from cmd/ubifs.c all along. No new control flow through
+    fs/ubifs/ ; the patch only adds a second entry point with
+    identical preconditions.
+
+Do you agree ?
+
+The intended behaviour is that after ubi part ... + ubifsmount ...
+have attached and mounted a volume,
+  load ubifs <addr> <file> and
+  ls ubifs <path>
+shall work like every other <fstype> family.
+
+I found those from code reviews, but it seems logic.
+
+>> if (strcmp(info->name, ifname) != 0)
+> if (strcmp(...)) 
+
+I'll change to if (!strcmp(...)) in v2.
+
+> Can you add a test for this, that loads via the new semihosting
+> ifname? Do we need a doc/ update?
+
+OK, for v2, I'll check to add both:
+
+ - test/py/tests/test_semihosting.py exercising load semihosting
+   + comparing the loaded bytes via md.b against a host-staged
+   fixture. Should you have some test logics, I'll appreciate, I am
+   learning with uboot and uboot test frameowrk.
+
+ - a section in doc/usage/cmd/load.rst documenting the
+   ifname-routed null-block-device path and listing the fstypes
+   that opts into it (semihosting, ubifs).
+
+For ubifs, since I cannot add hardware coverage, I'll try to wire
+load ubifs into test/py/tests/test_ubifs.py alongside the
+existing ubifsload invocations.
+
 > 
-> diff --git a/arch/arm/include/asm/arch-rockchip/clock.h b/arch/arm/include/asm/arch-rockchip/clock.h
-> index 95b08bfd046..a6b399da4ff 100644
-> --- a/arch/arm/include/asm/arch-rockchip/clock.h
-> +++ b/arch/arm/include/asm/arch-rockchip/clock.h
-> @@ -39,6 +39,7 @@ enum {
->  	ROCKCHIP_SYSCON_PIPE_PHY2_GRF,
->  	ROCKCHIP_SYSCON_VOP_GRF,
->  	ROCKCHIP_SYSCON_VO_GRF,
-> +	ROCKCHIP_SYSCON_DDRGRF,
->  };
->  
->  /* Standard Rockchip clock numbers */
-> diff --git a/arch/arm/mach-rockchip/rk3568/syscon_rk3568.c b/arch/arm/mach-rockchip/rk3568/syscon_rk3568.c
-> index b9d59a4721e..7f6caf9ca67 100644
-> --- a/arch/arm/mach-rockchip/rk3568/syscon_rk3568.c
-> +++ b/arch/arm/mach-rockchip/rk3568/syscon_rk3568.c
-> @@ -8,8 +8,11 @@
->  #include <asm/arch-rockchip/clock.h>
->  
->  static const struct udevice_id rk3568_syscon_ids[] = {
-> -	{ .compatible = "rockchip,rk3568-grf", .data = ROCKCHIP_SYSCON_GRF },
-> +	{ .compatible = "rockchip,rk3568-grf",    .data = ROCKCHIP_SYSCON_GRF    },
->  	{ .compatible = "rockchip,rk3568-pmugrf", .data = ROCKCHIP_SYSCON_PMUGRF },
-> +	{ .compatible = "rockchip,rk3568-msch",   .data = ROCKCHIP_SYSCON_MSCH   },
-> +	{ .compatible = "rockchip,rk3568-sgrf",   .data = ROCKCHIP_SYSCON_SGRF   },
-> +	{ .compatible = "rockchip,rk3568-ddrgrf", .data = ROCKCHIP_SYSCON_DDRGRF },
+> BTW, what do you think of this 'desc being NULL' approach? We should
+> perhaps improve it so that we can support non-block filesystems more
+> generally.
 
-Please do not add more mappings, all ROCKCHIP_SYSCON usage should
-instead be removed. See [1] and [2] for some uncompleted work.
+You are right that the open-coded "treat NULL block_desc as the
+null-device signal" reads as a bad layering.
 
-Please define constants instead of trying to do dynamic lookup. Drivers
-that typically need to know these reg addresses are already specific for
-a single SoC or needs to be known at compile-time to save space.
+Maybe, as an improvement fro v2: introduce a small
+helper near fs_set_blk_dev_with_part() that names the convention
+explicitly, so the dispatch site is one self-documenting line:
 
-No need to waste cpu cycles at runtime trying to resolve them :-)
+    /*
+     * Some fstypes (semihosting, ubifs) have no underlying block
+     * device and ignore the block_desc argument of their set_blk_dev
+     * hook. The legacy commands (ubifsload, semihosting) just pass
+     * NULL; for load <iface> ... to behave the
+     * same, the dispatcher opts those fstypes in by name.
+     */
+    static const struct fstype_info *
+    fs_lookup_null_dev_info(const char *ifname)
+    {
+            const struct fstype_info *info = fs_get_info_by_ifname(ifname);
 
-[1] https://source.denx.de/u-boot/contributors/kwiboo/u-boot/-/commits/optimize
-[2] https://source.denx.de/u-boot/contributors/kwiboo/u-boot/-/commit/d1601adc6b0bb092b66863e0c515dda5746c6f6f
+            return (info && info->null_dev_desc_ok) ? info : NULL;
+    }
 
-Regards,
-Jonas
+...then the dispatch:
 
->  	{ }
->  };
->  
-> @@ -37,4 +40,25 @@ U_BOOT_DRIVER(rockchip_rk3568_pmugrf) = {
->  	.of_match = rk3568_syscon_ids + 1,
->  	.bind = rk3568_syscon_bind_of_plat,
->  };
-> +
-> +U_BOOT_DRIVER(rockchip_rk3568_msch) = {
-> +	.name = "rockchip_rk3568_msch",
-> +	.id = UCLASS_SYSCON,
-> +	.of_match = rk3568_syscon_ids + 2,
-> +	.bind = rk3568_syscon_bind_of_plat,
-> +};
-> +
-> +U_BOOT_DRIVER(rockchip_rk3568_sgrf) = {
-> +	.name = "rockchip_rk3568_sgrf",
-> +	.id = UCLASS_SYSCON,
-> +	.of_match = rk3568_syscon_ids + 3,
-> +	.bind = rk3568_syscon_bind_of_plat,
-> +};
-> +
-> +U_BOOT_DRIVER(rockchip_rk3568_ddrgrf) = {
-> +	.name = "rockchip_rk3568_ddrgrf",
-> +	.id = UCLASS_SYSCON,
-> +	.of_match = rk3568_syscon_ids + 4,
-> +	.bind = rk3568_syscon_bind_of_plat,
-> +};
->  #endif
-> 
+    info = fs_lookup_null_dev_info(ifname);
+    if (info)
+            return info->set_blk_dev(NULL, NULL);
 
+If you'd rather keep the dispatch open-coded with the shorter
+if (!strcmp()) form you already pointed out, I'll just do that
+and drop the helper; I believe it's a nice-to-have.
+
+Your feedbacks are very welcomed and appreciated, I'll send the v2 asap.
+
+Best regards,
+  Vincent
