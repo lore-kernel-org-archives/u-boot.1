@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F246CD4F3C
-	for <u-boot@archiver.kernel.org>; Sun, 17 May 2026 19:28:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4AED8CD4F3D
+	for <u-boot@archiver.kernel.org>; Sun, 17 May 2026 19:28:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 20BC2846DF;
+	by phobos.denx.de (Postfix) with ESMTP id 5A3DA846E7;
 	Sun, 17 May 2026 21:26:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=ya.ru
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ya.ru header.i=@ya.ru header.b="eKsW38nS";
+	dkim=pass (1024-bit key; unprotected) header.d=ya.ru header.i=@ya.ru header.b="BG0ueDvr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 69C3E8466F; Sun, 17 May 2026 21:25:08 +0200 (CEST)
-Received: from forward102b.mail.yandex.net (forward102b.mail.yandex.net
- [IPv6:2a02:6b8:c02:900:1:45:d181:d102])
+ id 89EF284659; Sun, 17 May 2026 21:25:08 +0200 (CEST)
+Received: from forward100b.mail.yandex.net (forward100b.mail.yandex.net
+ [178.154.239.147])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 69A3E8465D
- for <u-boot@lists.denx.de>; Sun, 17 May 2026 21:25:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5C57584690
+ for <u-boot@lists.denx.de>; Sun, 17 May 2026 21:25:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=ya.ru
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=paullo612@ya.ru
 Received: from mail-nwsmtp-smtp-production-main-70.sas.yp-c.yandex.net
  (mail-nwsmtp-smtp-production-main-70.sas.yp-c.yandex.net
  [IPv6:2a02:6b8:c11:e97:0:640:f294:0])
- by forward102b.mail.yandex.net (Yandex) with ESMTPS id BB720C009E;
- Sun, 17 May 2026 22:25:03 +0300 (MSK)
+ by forward100b.mail.yandex.net (Yandex) with ESMTPS id DCF3E80D09;
+ Sun, 17 May 2026 22:25:05 +0300 (MSK)
 Received: by mail-nwsmtp-smtp-production-main-70.sas.yp-c.yandex.net (smtp)
- with ESMTPSA id mOVI2m4SD0U0-eb68QLvq; 
- Sun, 17 May 2026 22:25:03 +0300
+ with ESMTPSA id mOVI2m4SD0U0-you6iWJq; 
+ Sun, 17 May 2026 22:25:05 +0300
 X-Yandex-Fwd: 1
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ya.ru; s=mail;
- t=1779045903; bh=5CRIIZs/2nTEK5TG5ua38aLnRifkp5pjvqavzkMx78k=;
+ t=1779045905; bh=6oPmBrmggaCc+Vz/89EtRo4wzF1Um/b9hf1pn8RPJY0=;
  h=Cc:In-Reply-To:Message-Id:To:Date:References:From:Subject;
- b=eKsW38nSjPVE3MLRxClZXvvdXA/zdHeCuSP1IUCXqU4j8R3Hva8l2aW6RtCCNFp5a
- ZSbofaMtT4vueg39bYGkhCD51XQQ4mm5oSaUD0nF4xCvEcgjG7Dqkt5azdz1NkNY5Z
- A92Q/3aXeozJ0j6fMWFGPp12Cis2ECRzD91XT6x8=
+ b=BG0ueDvrsDf9G/FKYw7APiyK5Twjne4yDm3m5II3i4GhXw8m2uij8vTz9yRWdT7+0
+ FaVorTVVQ1QQOF0WBsbqT7DjfO/lE4T57r0S1e46fpIQmkz1zP72ZFrCPkCSqZoa+W
+ lblZTdYvg3jSnuTrWELRGm/P0T9Jg71QppsZgAt0=
 Authentication-Results: mail-nwsmtp-smtp-production-main-70.sas.yp-c.yandex.net;
  dkim=pass header.i=@ya.ru
 From: Pavel Golikov <paullo612@ya.ru>
-Date: Sun, 17 May 2026 22:24:36 +0300
-Subject: [PATCH RFC 10/18] ram: rockchip: Add missing bits to common code
- for sdram driver
+Date: Sun, 17 May 2026 22:24:38 +0300
+Subject: [PATCH RFC 12/18] clk: rockchip: rk3568: Reduce code size for TPL
+ build
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260517-rk3568-raminit-v1-10-a24e16302a13@ya.ru>
+Message-Id: <20260517-rk3568-raminit-v1-12-a24e16302a13@ya.ru>
 References: <20260517-rk3568-raminit-v1-0-a24e16302a13@ya.ru>
 In-Reply-To: <20260517-rk3568-raminit-v1-0-a24e16302a13@ya.ru>
 To: u-boot@lists.denx.de
@@ -85,48 +85,138 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add some missing macros used to retrieve SDRAM initialization code
-configuration from global info. Extract PHY and DRAM ODT enable masks
-to separate definitions.
+RK3568 has only 59.5Kb usable SRAM for TPL stage. Disable all clock
+related functionality for TPL build. Clock driver can still be used to
+get GRF syscon reference from it.
 
 Signed-off-by: Pavel Golikov <paullo612@ya.ru>
 ---
- arch/arm/include/asm/arch-rockchip/sdram_common.h | 13 +++++++++++--
- 1 file changed, 11 insertions(+), 2 deletions(-)
+ drivers/clk/rockchip/clk_rk3568.c | 24 ++++++++++++++++++------
+ 1 file changed, 18 insertions(+), 6 deletions(-)
 
-diff --git a/arch/arm/include/asm/arch-rockchip/sdram_common.h b/arch/arm/include/asm/arch-rockchip/sdram_common.h
-index e53e5a9ca58..84fbbeb8d8d 100644
---- a/arch/arm/include/asm/arch-rockchip/sdram_common.h
-+++ b/arch/arm/include/asm/arch-rockchip/sdram_common.h
-@@ -45,6 +45,12 @@
- #define PLL_SSMOD_SPREAD(n)		(((n) >> 1) & 0xff)
- #define PLL_SSMOD_DIV(n)		(((n) >> 9) & 0xff)
- #define PLL_SSMOD_DOWNSPREAD(n)		(((n) >> 17) & 0x3)
-+#define DIS_TRAIN_PRINT(n)		(((n) >> 19) & 0x1)
-+#define DDR_DERATE_EN(n)		(((n) >> 26) & 0x1)
-+#define DDR_PER_BANK_REF_EN(n)		(((n) >> 27) & 0x1)
-+#define DDR_EXT_TEMP_REF(n)		(((n) >> 29) & 0x3)
-+
-+#define DDR_PAGECLOSE_EN(n)		(((n) >> 3) & 0x1)
+diff --git a/drivers/clk/rockchip/clk_rk3568.c b/drivers/clk/rockchip/clk_rk3568.c
+index 199bb51fa6f..384d0c750d5 100644
+--- a/drivers/clk/rockchip/clk_rk3568.c
++++ b/drivers/clk/rockchip/clk_rk3568.c
+@@ -28,6 +28,7 @@ struct rk3568_pmuclk_plat {
+ };
+ #endif
  
- /* sdram_head_info_v2 define */
- /* for *_drv_odten and *_drv_odtoff */
-@@ -69,10 +75,13 @@
++#if !IS_ENABLED(CONFIG_TPL_BUILD)
+ #define RK3568_CPUCLK_RATE(_rate, _aclk_div, _pclk_div)		\
+ {								\
+ 	.rate	= _rate##U,					\
+@@ -2315,6 +2316,7 @@ static ulong rk3568_uart_set_rate(struct rk3568_clk_priv *priv,
  
- /* for *odt_en_freq; */
- #define DRAM_ODT_EN_FREQ_SHIFT		0
-+#define DRAM_ODT_EN_FREQ_MASK		0xfff
- #define PHY_ODT_EN_FREQ_SHIFT		12
-+#define PHY_ODT_EN_FREQ_MASK		0xfff
- #define DRAMODT_EN_FREQ(n)		(((n) >> DRAM_ODT_EN_FREQ_SHIFT) & \
--					 0xfff)
--#define PHYODT_EN_FREQ(n)		(((n) >> PHY_ODT_EN_FREQ_SHIFT) & 0xfff)
-+					 DRAM_ODT_EN_FREQ_MASK)
-+#define PHYODT_EN_FREQ(n)		(((n) >> PHY_ODT_EN_FREQ_SHIFT) & \
-+					 PHY_ODT_EN_FREQ_MASK)
+ 	return rk3568_uart_get_rate(priv, clk_id);
+ }
++#endif
  
- #define PHY_DQ_SR_SHIFT			0
- #define PHY_CA_SR_SHIFT			8
+ static ulong rk3568_clk_get_rate(struct clk *clk)
+ {
+@@ -2327,6 +2329,7 @@ static ulong rk3568_clk_get_rate(struct clk *clk)
+ 	}
+ 
+ 	switch (clk->id) {
++#if !IS_ENABLED(CONFIG_TPL_BUILD)
+ 	case PLL_APLL:
+ 	case ARMCLK:
+ 		rate = rockchip_pll_get_rate(&rk3568_pll_clks[APLL], priv->cru,
+@@ -2486,6 +2489,7 @@ static ulong rk3568_clk_get_rate(struct clk *clk)
+ 	case CPLL_25M:
+ 		rate = rk3568_cpll_div_get_rate(priv, clk->id);
+ 		break;
++#endif
+ 	default:
+ 		return -ENOENT;
+ 	}
+@@ -2504,6 +2508,7 @@ static ulong rk3568_clk_set_rate(struct clk *clk, ulong rate)
+ 	}
+ 
+ 	switch (clk->id) {
++#if !IS_ENABLED(CONFIG_TPL_BUILD)
+ 	case PLL_APLL:
+ 	case ARMCLK:
+ 		if (priv->armclk_hz)
+@@ -2673,6 +2678,7 @@ static ulong rk3568_clk_set_rate(struct clk *clk, ulong rate)
+ 	case CPLL_25M:
+ 		ret = rk3568_cpll_div_set_rate(priv, clk->id, rate);
+ 		break;
++#endif
+ 	default:
+ 		return -ENOENT;
+ 	}
+@@ -2681,6 +2687,7 @@ static ulong rk3568_clk_set_rate(struct clk *clk, ulong rate)
+ };
+ 
+ #if (CONFIG_IS_ENABLED(OF_CONTROL)) || (!CONFIG_IS_ENABLED(OF_PLATDATA))
++#if !IS_ENABLED(CONFIG_TPL_BUILD)
+ static int rk3568_gmac0_src_set_parent(struct clk *clk, struct clk *parent)
+ {
+ 	struct rk3568_clk_priv *priv = dev_get_priv(clk->dev);
+@@ -2823,10 +2830,12 @@ static int rk3568_rkvdec_set_parent(struct clk *clk, struct clk *parent)
+ 
+ 	return 0;
+ }
++#endif
+ 
+ static int rk3568_clk_set_parent(struct clk *clk, struct clk *parent)
+ {
+ 	switch (clk->id) {
++#if !IS_ENABLED(CONFIG_TPL_BUILD)
+ 	case SCLK_GMAC0:
+ 		return rk3568_gmac0_src_set_parent(clk, parent);
+ 	case SCLK_GMAC1:
+@@ -2848,6 +2857,7 @@ static int rk3568_clk_set_parent(struct clk *clk, struct clk *parent)
+ 	case SCLK_GMAC1_RGMII_SPEED:
+ 	case SCLK_GMAC1_RMII_SPEED:
+ 		break;
++#endif
+ 	default:
+ 		return -ENOENT;
+ 	}
+@@ -2864,6 +2874,7 @@ static struct clk_ops rk3568_clk_ops = {
+ #endif
+ };
+ 
++#if !IS_ENABLED(CONFIG_TPL_BUILD)
+ static void rk3568_clk_init(struct rk3568_clk_priv *priv)
+ {
+ 	int ret;
+@@ -2903,18 +2914,14 @@ static void rk3568_clk_init(struct rk3568_clk_priv *priv)
+ 	priv->ppll_hz = rk3568_pmu_pll_get_rate(priv, PPLL);
+ 	priv->hpll_hz = rk3568_pmu_pll_get_rate(priv, HPLL);
+ }
++#endif
+ 
+ static int rk3568_clk_probe(struct udevice *dev)
+ {
+ 	struct rk3568_clk_priv *priv = dev_get_priv(dev);
+-#if CONFIG_IS_ENABLED(OF_PLATDATA)
+-	struct rk3568_clk_plat *plat = dev_get_plat(dev);
+-#endif
++#if !IS_ENABLED(CONFIG_TPL_BUILD)
+ 	int ret;
+ 
+-#if CONFIG_IS_ENABLED(OF_PLATDATA)
+-	priv->cru = map_sysmem(plat->dtd.reg[0], plat->dtd.reg[1]);
+-#endif
+ 	priv->grf = syscon_get_first_range(ROCKCHIP_SYSCON_GRF);
+ 	if (IS_ERR(priv->grf))
+ 		return PTR_ERR(priv->grf);
+@@ -2927,7 +2934,12 @@ static int rk3568_clk_probe(struct udevice *dev)
+ 		debug("%s clk_set_defaults failed %d\n", __func__, ret);
+ 	else
+ 		priv->sync_kernel = true;
++#endif
++#if CONFIG_IS_ENABLED(OF_PLATDATA)
++	struct rk3568_clk_plat *plat = dev_get_plat(dev);
+ 
++	priv->cru = map_sysmem(plat->dtd.reg[0], plat->dtd.reg[1]);
++#endif
+ 	return 0;
+ }
+ 
 
 -- 
 2.25.1
