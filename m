@@ -4,94 +4,103 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2AC9CD4F3C
-	for <u-boot@archiver.kernel.org>; Sun, 17 May 2026 22:53:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0708DCD4F3D
+	for <u-boot@archiver.kernel.org>; Sun, 17 May 2026 22:53:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A35438468A;
-	Mon, 18 May 2026 00:52:18 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E0BB284676;
+	Mon, 18 May 2026 00:52:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="FgwvhIpn";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ioVH5j8+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DF7FE84683; Mon, 18 May 2026 00:52:17 +0200 (CEST)
-Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
- [IPv6:2a00:1450:4864:20::634])
+ id 61D6184676; Mon, 18 May 2026 00:52:25 +0200 (CEST)
+Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
+ [IPv6:2a00:1450:4864:20::629])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F09E084659
- for <u-boot@lists.denx.de>; Mon, 18 May 2026 00:52:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4561D846EB
+ for <u-boot@lists.denx.de>; Mon, 18 May 2026 00:52:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-bd36614d329so244529066b.3
- for <u-boot@lists.denx.de>; Sun, 17 May 2026 15:52:15 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1779058335; cv=none;
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-bccd251d622so310334066b.3
+ for <u-boot@lists.denx.de>; Sun, 17 May 2026 15:52:23 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1779058343; cv=none;
  d=google.com; s=arc-20240605;
- b=RuLkeO8J737UP1LZt76A8R2kvO8hXjp0J5fXig6OXXbmCDRKEyiILrxV3H/+Tfj+Hp
- g2+ZdefRZEMRyVDgewDl9MZmxuF6r+eC/89KjCNt9S/Nqy+kZLuRZ0AV+bOofWA5vkVb
- ac1PtaE4UBRPh6oDfJg0q1gUxsggpGjVJJ7q/me3UpB2yBrsqRbnx5KaUDO+ewyeb0jw
- WLYDdhfrG8Q52E34FyPj5A44zw8i7oH5YW+gQDcH/pwoTYJ8R4M0d7vAdNynAa8lTph/
- G8XaQBeE9Pk1LYJwtgOvfD1Sxgr+H3Iag+1p5jvtyFP0slhmuaFyXyVjDK1ixgKC8B9s
- YKYQ==
+ b=P0nMl7+9Sis3R1PjXm6oDfQWzhcz3vhBrOGypshhZcEVzA0Cb9VJklQpqJ2oY58iX9
+ //DgWVPbkBagWnhEdSrf4RueVqb8rIfKxA9MZyLMBdTBeL3OAxBLIJ4OBG9pRtEgIrTX
+ IxMxy72xLpvzpqLIc3R5iWyEW9hryM7SQs/rCvbFWz6E/gZKhIrULAmxTJGhoVxja6Kb
+ wesS86YvsV3PEK0e+tvrlTZRjPgU+uianvir6r8u9cJ6zxFJPS1+N+k6O8o5c0e6MGHs
+ rbAFNSKAplVR1tRtu3PKBiJ64Rd9WZWOp6l6FdCPX/5nsWv5aXojel0+Pju7WrztgCfZ
+ zbNw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=kVWSYhbmem1d4s2gxvdVvav6sQxUzTBatt0Fo2c9Fro=;
- fh=Ba4hdmvaL8Iqn+laLAZ6Zwq6KO+OgpTCF9Lsg9Ghi9E=;
- b=c9M4pc9VPh7IiCS5wCUUmULaUqIpPFWsNxcLkW8x5jyLQ9ijXBwrMEDYh6rnSLhZGb
- nAHhBWllOfmR2F+nZaDKVpNJ+6Yu9AwSqaUN1m7XLkyNpkSaqrMQxwWD3/2vvDzD7OBu
- ObKv6lYQCqPYbf1RF3atw/z3E44sWcEL1loV2pFt7O+bPfjY5nb1BaL19j82j+0RWJir
- 1taLr8bp4K6ZVUA+gY+qI3Sbf1ODZVufyarCGSG5joPh1jCJPhmIoXl2xsqFVknpriAJ
- Zxnv4IuV+pHTYJm6B/fIWIgH8KI1XdyV9oo/Oi9kwUrF+ow+o9t+b1U9j8zZM5VmjwHw
- lfJA==; darn=lists.denx.de
+ bh=ThaNJ5YKFtIy3pMyM67/scUoO1si5hEDqfbrfhIIwD0=;
+ fh=gBCcreOcmnJCnmOTne/RR6VZWuDXEBCdUiN6nuFlCts=;
+ b=GCznaLHWvI/zaRctNJzRW1Xxtef0mNOODQ6V503ZfsPsR3QGmCwv1e1UgdO5oUsVlp
+ YOxzJdg++ZWUoBALmxBeY0UInEzIZM8foEmpbWJk482M68TT71BKx0m1lIwrJlCP7MuZ
+ NDMLIj4pJv8d1ytHO+eqeM/kQk8wxRsZ3SPAQ/ygOhVFVPaViWgWytWze5ZOwKitkmR5
+ WIV5AerzH00oRd8QLNM/dI9qui/anOHqgOclu+Vxs5M4ElIDkqujTfKi5aKjkzI5H6jI
+ a3bXuEjJ2C7MElC5REPjuU4Eqm8/lXXiC2izXe4x/WkZ6xmwNYaW69WTCRIXkvJyPd3H
+ S9JA==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1779058335; x=1779663135; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1779058343; x=1779663143; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=kVWSYhbmem1d4s2gxvdVvav6sQxUzTBatt0Fo2c9Fro=;
- b=FgwvhIpnL4O8Y7vCYXp69b+db/IF9vv0sSGukvoLXRfSVRNwRSZCEoKYStLt+RsPZX
- p0tTyQGhiIOaSv7sZ2aP0SUUGIVy2rzXDds6tVnQv5RqEECvlS7ReTI0MET2yk5ed4I9
- ohqeK2u84FiNdERAkbPOS1tT2T8M10Cjow2ig=
+ bh=ThaNJ5YKFtIy3pMyM67/scUoO1si5hEDqfbrfhIIwD0=;
+ b=ioVH5j8+hfg9Dy7cf/z4qyK4AE+0ocsYU7q0J61XHbH6vPNsZZWcXPpcT9O9ZqtF6g
+ pkOeDM3jIVjUpfTw4PZ4pK7+ldHleWqLlR3EYc5XwbrKKNsovvrXcfDQDrxoxO6GQ2DC
+ /4KA/HmqkoWk6pJhIxzevw5HRCRSlNj1mHJLc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779058335; x=1779663135;
+ d=1e100.net; s=20251104; t=1779058343; x=1779663143;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=kVWSYhbmem1d4s2gxvdVvav6sQxUzTBatt0Fo2c9Fro=;
- b=d1tZyGMQOp/paKIGguExtCXVVuiq74PGCH9aFZRoiCsVP4pGiJrmg0dVVDspWkzCmI
- 0AEbnn2JMrSGr50CIRfgoRXbnMJ13drQVKY0U7AVLt26XyYDPagpAg+8zL0N9Eos9MD5
- hG6R4DpN+91lNnTo2W8B8ngCq9nZYWedajsbhsWr4wZdGUdsyFrmR39ZRQWSs+V3Z28p
- y01g1S982rdz14zCwKsvzbGl2912m/cqN0AXXM/gRtXRwuo7WiT/Bi/Hupvo3AaIkabk
- awU9M0+5YjLuYPPXr87lX0crv0RDfqklFOBvHktZ3PLzyPUn4dF8ynmFOSma0b+q3tCM
- TIyA==
-X-Gm-Message-State: AOJu0YwcPEb5P/OdEvrIoEXb2C6zDCqlaDT20D1kd61NLno20fpo/pRD
- YAjTY5SdlXhckXFDQNZZf3wsJAGfLCUPvJlBjiv9nu8krEtWb1fIOQpjt+gW/NLrd1acf8XGX5O
- 7BjItooZplDCcy2foGOp3KLHVc7Xu3dF0bvdUVN/t
-X-Gm-Gg: Acq92OGtu3jIr035lGGlq2gETMdvuusv3cYpJDgSvH/gZghqvmSNxklScL9RoZlwdbE
- Qmn9CyYIX2qWDFMkUTppPrLxuiskYBj465p4fgIUqoEmDiITALPjYrq3q2/WQ7QozU2wxnJ/DtU
- LBdnjJ91QZUPi2DalFaW3zAxDbgIwSFKhVuQTRn76rRd8P2/BsxQj9zyOlqJ/77dzXPcLUJWcdQ
- JFc7x3pt/TvHJw2StVszTpwPp90pk1Stz93z041iE4fRR5AB4SyuKhbw2RwtmbhMSebgx/caqBo
- +0bfU5kd
-X-Received: by 2002:a17:907:c248:b0:bd4:9a54:afa2 with SMTP id
- a640c23a62f3a-bd5177f4418mr724503566b.2.1779058335378; Sun, 17 May 2026
- 15:52:15 -0700 (PDT)
+ bh=ThaNJ5YKFtIy3pMyM67/scUoO1si5hEDqfbrfhIIwD0=;
+ b=qYX29WQc+PEwGIkHhti5fiQuu20PMLwd5ReYEIlfA4OEJzkQ78ppkBLYAQKYlZfyfo
+ Sl14xR5vcgOttaDybNeRY6ITW1yPKGLQR/JWefrCZooNjUUkyksN8Y41RfAX+6ZaepVE
+ 21XB1pPAnkBrOClwLD+6JMV78KtGF+uDqPIfWD7zyE1cyV7Qdx6YtMAPXrAEq8nrpLOd
+ iwroc1wfHRC7OFG1Y+76aLIXe3goh/E8lo3q4BZ+rcTQiCObOA+mfD6zQU6GWaLhMMMG
+ cuylQZFiUjJ218jhVADyYyUW4wS+fH5Z/8INx8e3Gt+17GHiOx4cROaoE2HuiH5hEzYj
+ fwdA==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ92oK6XT/YzsquDgaTlmVqZzf9eza0WhJm54b3VKN/ytcRSRQzP6dtSCkpxiD1M+4dBvpc8Ysw=@lists.denx.de
+X-Gm-Message-State: AOJu0Yzj4Y6idT+nFP6TNYko5dhSiFSbyCHgELPpZam9opaqCJF1AIcE
+ ZBaA4elgItkxjbgJuoWIwaHwULzQUVatWFEfckYM8E8BRoW47mdfPjF3nU++z9Sx8GPfIjqe/wj
+ E2ILjHP3/cnoWTYIkPmZpYY3WjXC3CYld7UiTaL9b
+X-Gm-Gg: Acq92OGIa+pQ9Ek+EXWdUv/WJnEFhWNi3Si1S4u3rTe1dLCQ1t/1ev9t5M57qz6Klpp
+ L+mVx06YdlpBNZYX9ZUS2s8cpi7hCctrPORrGFVryvnF4cawLMZEO6ZuliPdvwpNsNcusX5LO6z
+ 4zsynwwjxBaY2NXz+X5LJD9K/+n440X3NDgOkW2+lQQvL/dIopJJlAh8dGzFBTVGbnSlZ2c57Y8
+ bfGAKWUCqxUUj0gjEmHUG5d1NIyxu3Bb1P9iqrEiArFKhwUcHo7CVAGcLjD679ikTOsUGG7nBXE
+ Uwxspwnr
+X-Received: by 2002:a17:906:6185:b0:bc4:b9f5:fe27 with SMTP id
+ a640c23a62f3a-bd51780c8acmr663077566b.10.1779058342735; Sun, 17 May 2026
+ 15:52:22 -0700 (PDT)
 MIME-Version: 1.0
-References: <BESP194MB28052CF65AFFB806C625EE84DA042@BESP194MB2805.EURP194.PROD.OUTLOOK.COM>
- <CAFLszTjuy1N2huOeFVLEiH53EZ5mDU4ko5WiCMM_4mjkQMgNJA@mail.gmail.com>
- <BESP194MB2805F515E21C1E89E869D33EDA052@BESP194MB2805.EURP194.PROD.OUTLOOK.COM>
-In-Reply-To: <BESP194MB2805F515E21C1E89E869D33EDA052@BESP194MB2805.EURP194.PROD.OUTLOOK.COM>
+References: <20260515054327.1033466-1-w.egorov@phytec.de>
+ <20260515145400.GB1858239@bill-the-cat>
+ <CAFLszTid-e+NWrFxoorfrUT23_mztUZP8FRbmT9FJ55M8A+FXA@mail.gmail.com>
+ <20260515160256.GF1858239@bill-the-cat>
+ <CAFLszThfUMe=67xwzbv6TvugH3iCOO=-EoYk6oUshKru-wpDQw@mail.gmail.com>
+ <20260515182441.GI1858239@bill-the-cat>
+ <CAFLszTjHaqck4gVDSiBw0M9V3yZLzUa8+EjaW94G9JcO=-Ny8Q@mail.gmail.com>
+ <20260515184434.GJ1858239@bill-the-cat>
+In-Reply-To: <20260515184434.GJ1858239@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Sun, 17 May 2026 16:52:02 -0600
-X-Gm-Features: AVHnY4LY5KMPwg5kBOyVScGTrYl0jyUB8VJfD5qo0CyZaB8wtI8Ax9DmlnTE7Nk
-Message-ID: <CAFLszTg6_46sEjcUO1xy2tXo=B2cHZ3itt8eQRt4fEvsp3Jqhg@mail.gmail.com>
-Subject: Re: [PATCH] boot: cedit: Check ofnode_read_prop return value
-To: Francois Berder <fberder@outlook.fr>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
+Date: Sun, 17 May 2026 16:52:10 -0600
+X-Gm-Features: AVHnY4LRkoL0spnmof3nve5VsgTQHfWni9_M7H_rXQNydCgxRNpzHvkhpVP0QUc
+Message-ID: <CAFLszTj616BX3ppdVLeR1mcRnXLJ41uUpQkC7gY0NOSn2ffkbw@mail.gmail.com>
+Subject: Re: [PATCH] Makefile: binman: Search board directory before srctree
+To: Tom Rini <trini@konsulko.com>
+Cc: nm@ti.com, Wadim Egorov <w.egorov@phytec.de>, ilias.apalodimas@linaro.org, 
+ marek.vasut+renesas@mailbox.org, sughosh.ganu@arm.com, u-boot@lists.denx.de,
+ upstream@lists.phytec.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -109,55 +118,101 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Francois,
+Hi Tom,
 
-On Sat, 16 May 2026 at 15:11, Francois Berder <fberder@outlook.fr> wrote:
+On Fri, 15 May 2026 at 12:44, Tom Rini <trini@konsulko.com> wrote:
 >
-> Hi Simon,
+> On Fri, May 15, 2026 at 12:32:30PM -0600, Simon Glass wrote:
+> > Hi Tom,
+> >
+> > On Fri, 15 May 2026 at 12:24, Tom Rini <trini@konsulko.com> wrote:
+> > >
+> > > On Fri, May 15, 2026 at 12:13:50PM -0600, Simon Glass wrote:
+> > > > Hi Tom,
+> > > >
+> > > > On Fri, 15 May 2026 at 10:03, Tom Rini <trini@konsulko.com> wrote:
+> > > > >
+> > > > > On Fri, May 15, 2026 at 09:35:10AM -0600, Simon Glass wrote:
+> > > > > > Hi Tom,
+> > > > > >
+> > > > > > On Fri, 15 May 2026 at 08:54, Tom Rini <trini@konsulko.com> wrote:
+> > > > > > >
+> > > > > > > On Fri, May 15, 2026 at 07:43:27AM +0200, Wadim Egorov wrote:
+> > > > > > >
+> > > > > > > > A file like rm-cfg.yaml accidentally left in the source tree root
+> > > > > > > > shadows the board-specific copy. binman builds the wrong YAML, the
+> > > > > > > > resulting rm-cfg.bin may match a different SoC, and we end up with
+> > > > > > > > the following error:
+> > > > > > > >
+> > > > > > > >   k3_system_controller sysctrler: k3_sysctrler_start:
+> > > > > > > >       Boot Notification response failed. ret = -110
+> > > > > > > >
+> > > > > > > > Move the board directory ahead of the srctree root so that the
+> > > > > > > > most-specific match wins.
+> > > > > > > >
+> > > > > > > > Signed-off-by: Wadim Egorov <w.egorov@phytec.de>
+> > > > > > > > ---
+> > > > > > > >  Makefile | 2 +-
+> > > > > > > >  1 file changed, 1 insertion(+), 1 deletion(-)
+> > > > > > > >
+> > > > > > > > diff --git a/Makefile b/Makefile
+> > > > > > > > index 552328f9f2c..1ec29dfe0be 100644
+> > > > > > > > --- a/Makefile
+> > > > > > > > +++ b/Makefile
+> > > > > > > > @@ -1682,7 +1682,7 @@ cmd_binman = $(srctree)/tools/binman/binman $(if $(BINMAN_DEBUG),-D) \
+> > > > > > > >               build -u -d $(binman_dtb) -O . -m \
+> > > > > > > >               --allow-missing --fake-ext-blobs \
+> > > > > > > >               $(if $(BINMAN_ALLOW_MISSING),--ignore-missing) \
+> > > > > > > > -             -I . -I $(srctree) -I $(srctree)/board/$(BOARDDIR) \
+> > > > > > > > +             -I . -I $(srctree)/board/$(BOARDDIR) -I $(srctree) \
+> > > > > > > >               $(foreach f,$(of_list_dirs),-I $(f)) -a of-list=$(of_list) \
+> > > > > > > >               $(foreach f,$(BINMAN_INDIRS),-I $(f)) \
+> > > > > > > >               -a atf-bl1-path=${BL1} \
+> > > > > > >
+> > > > > > > Why do we need to look in $(srctree) itself?
+> > > > > >
+> > > > > > See for example:
+> > > > > >
+> > > > > > arch/arm/dts/k3-j721e-binman.dtsi:308:  private-key =
+> > > > > > "arch/arm/mach-k3/keys/custMpk.pem";
+> > > > >
+> > > > > That's not great, I'm sorry I missed it at the time. I wonder how easy
+> > > > > replacing that key is with a non-dummy key. Hopefully it's done in a way
+> > > > > that doesn't encourage checking private keys in to repositories..
+> > > >
+> > > > Typically we would use an environment var passed in from the Makefile,
+> > > > as we do with BL31, TEE, TI_DM, etc.
+> > > >
+> > > > >
+> > > > > > Also, people sometimes put files in the source tree, e.g. BL31 images,
+> > > > > > in the hope that they will be found.
+> > > > >
+> > > > > That's also a bad practice and what BINMAN_INDIRS is for.
+> > > >
+> > > > Yes, but that came quite a bit later with the bintool stuff (2021).
+> > > >
+> > > > Anyway, with a bit of work I believe we could drop the source dir.
+> > > > Would you like to look at it, or should I?
+> > >
+> > > Well, the first step would be getting some more feedback on how people
+> > > override some of these files for example. Even more environment files
+> > > seems like a bad idea and I'm not sure what BINMAN_INDIRS can't cover
+> > > today.
+> >
+> > Assuming you mean 'environment variables', we do need the actual
+> > filename, not just the directory. We could have default filenames for
+> > each entry type, I suppose. Some do already.
 >
-> On 5/16/26 15:31, Simon Glass wrote:
-> > Hi Francois,
-> >
-> > On 2026-05-15T20:57:47, Francois Berder <fberder@outlook.fr> wrote:
-> >> boot: cedit: Check ofnode_read_prop return value
-> >>
-> >> In h_read_settings, val variable could be NULL due to
-> >> ofnode_read_prop returning an error. This variable
-> >> would then be used as the src in strcpy.
-> >>
-> >> Add a NULL check after calling ofnode_read_prop.
-> >>
-> >> Signed-off-by: Francois Berder <fberder@outlook.fr>
-> >>
-> >> boot/cedit.c | 2 ++
-> >>  1 file changed, 2 insertions(+)
-> >
-> > Reviewed-by: Simon Glass <sjg@chromium.org>
-> >
-> >> diff --git a/boot/cedit.c b/boot/cedit.c
-> >> @@ -500,6 +500,8 @@ static int h_read_settings(struct scene_obj *obj, void *vpriv)
-> >>               tline = (struct scene_obj_textline *)obj;
-> >>
-> >>               val = ofnode_read_prop(node, obj->name, &len);
-> >> +             if (!val)
-> >> +                     return log_msg_ret('tline', -EINVAL);
-> >>               if (len >= tline->max_chars)
-> >>                       return log_msg_ret('str', -ENOSPC);
-> >>               strcpy(abuf_data(&tline->buf), val);
-> >
-> > Good catch!
-> >
-> > Please can you use -ENOENT rather than -EINVAL, as this is more
-> > consistent with the SCENEOBJT_MENU case a few lines below.
->
->
-> When I look at the way u-boot handles ofnode_read_prop returning NULL, I find that it always uses the EINVAL return code instead of ENOENT. Let me know if you still prefer that I change the error code to ENOENT.
+> Yes, I think moving that way is the right direction. I was going to use
+> -scp-path=$(SCP) as an example of something to move away from, but it
+> looks like that's already being done in a way BINMAN_INDIRS should
+> handle.
 
-Well it's not a big deal, but -EINVAL is used in of_to_plat methods,
-indicating that there was something wrong with the DT node. In this
-case, we are reading a config-editor definition and it is not released
-to a device, so trying to return a more varied assortment of error
-numbers is helpful for debugging.
+Yes, the idea is that '-a scp-path=$(SCP)' tells the scp entry-type
+the filename to use. I'm pretty sure we could update the tests to set
+that entry-arg, so we don't need the source dir in the path.
+
+But in any case this patch is correct for now.
 
 Regards,
 Simon
