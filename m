@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1EBD1CD4F3D
-	for <u-boot@archiver.kernel.org>; Sun, 17 May 2026 19:29:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87B44CD4F3D
+	for <u-boot@archiver.kernel.org>; Sun, 17 May 2026 19:29:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C1EE98468B;
-	Sun, 17 May 2026 21:26:28 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 043EE847C8;
+	Sun, 17 May 2026 21:26:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=ya.ru
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ya.ru header.i=@ya.ru header.b="hehopAtx";
+	dkim=pass (1024-bit key; unprotected) header.d=ya.ru header.i=@ya.ru header.b="Z2J9P9++";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2CFD584659; Sun, 17 May 2026 21:25:13 +0200 (CEST)
-Received: from forward100b.mail.yandex.net (forward100b.mail.yandex.net
- [178.154.239.147])
+ id 2F104845E3; Sun, 17 May 2026 21:25:14 +0200 (CEST)
+Received: from forward103b.mail.yandex.net (forward103b.mail.yandex.net
+ [IPv6:2a02:6b8:c02:900:1:45:d181:d103])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2E29C8465D
- for <u-boot@lists.denx.de>; Sun, 17 May 2026 21:25:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4327F8460E
+ for <u-boot@lists.denx.de>; Sun, 17 May 2026 21:25:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=ya.ru
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=paullo612@ya.ru
 Received: from mail-nwsmtp-smtp-production-main-70.sas.yp-c.yandex.net
  (mail-nwsmtp-smtp-production-main-70.sas.yp-c.yandex.net
  [IPv6:2a02:6b8:c11:e97:0:640:f294:0])
- by forward100b.mail.yandex.net (Yandex) with ESMTPS id AFBF580704;
- Sun, 17 May 2026 22:25:10 +0300 (MSK)
+ by forward103b.mail.yandex.net (Yandex) with ESMTPS id BB414C0030;
+ Sun, 17 May 2026 22:25:11 +0300 (MSK)
 Received: by mail-nwsmtp-smtp-production-main-70.sas.yp-c.yandex.net (smtp)
- with ESMTPSA id mOVI2m4SD0U0-II5ULbLN; 
- Sun, 17 May 2026 22:25:10 +0300
+ with ESMTPSA id mOVI2m4SD0U0-ih0Bl9ri; 
+ Sun, 17 May 2026 22:25:11 +0300
 X-Yandex-Fwd: 1
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ya.ru; s=mail;
- t=1779045910; bh=HDOXAVF5+W7tYyNpPq+VSMwDc3bUp7Ikba0qcPdye4Y=;
+ t=1779045911; bh=Cv8D8XZujdfU/sbeJy1zUxEaKqjngbcfqTL/EEjJulA=;
  h=Cc:In-Reply-To:Message-Id:To:Date:References:From:Subject;
- b=hehopAtx16ijkRcGxQ9q4dEPwUcKTQb0AGCgTkt8455xevbgPxV4QRZs1uk4sBYSu
- G0DpLnUyoHfFGcKSzXw/VOJ6j24/nYKI9zg1iI1y3GR1k0eacYsVeJz/6RFL5NMXxf
- Je4k90hhpzm8QVx6Qu8Bpq7xcRKu9HS8+CkKne7Y=
+ b=Z2J9P9++w3sfJDPktUA3z0rDmCRVBdGxmE+2vkPb7yFO7vvVogjQQjTKMW6Bs+fTH
+ TbjJrItQ2ofz/vUn3+TEUl7mgzen8j/co/IrrExvl4L43tS6oUp8AzJaiVb+5ZOHW/
+ uoZlpY57kOHnlTzjYLMDATDiCIFVYu0v8cToxgjs=
 Authentication-Results: mail-nwsmtp-smtp-production-main-70.sas.yp-c.yandex.net;
  dkim=pass header.i=@ya.ru
 From: Pavel Golikov <paullo612@ya.ru>
-Date: Sun, 17 May 2026 22:24:43 +0300
-Subject: [PATCH RFC 17/18] rockchip: rk356x-generic: Initialize SDRAM at
- TPL stage
+Date: Sun, 17 May 2026 22:24:44 +0300
+Subject: [PATCH RFC 18/18] ram: rockchip: rk3568: Limit maximum DDR
+ frequency to 1056 MHz
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260517-rk3568-raminit-v1-17-a24e16302a13@ya.ru>
+Message-Id: <20260517-rk3568-raminit-v1-18-a24e16302a13@ya.ru>
 References: <20260517-rk3568-raminit-v1-0-a24e16302a13@ya.ru>
 In-Reply-To: <20260517-rk3568-raminit-v1-0-a24e16302a13@ya.ru>
 To: u-boot@lists.denx.de
@@ -85,125 +85,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Only LPDDR4 initialization is confirmed to be working for now.
+RK3566 has the same DDR memory controller as RK3568 has. The only
+difference is a maximum supported DDR frequency.
+
+Limit maximum DDR frequency in DDR loader params, so DDR controller can
+be initialized on both RK3566 and RK3568 SoCs.
 
 Signed-off-by: Pavel Golikov <paullo612@ya.ru>
 ---
- arch/arm/mach-rockchip/Kconfig        | 28 +++++++++++++++++++++++++++-
- arch/arm/mach-rockchip/rk3568/Kconfig | 16 ++++++++++++++++
- common/spl/Kconfig.tpl                |  1 +
- configs/generic-rk3568_defconfig      |  1 +
- 4 files changed, 45 insertions(+), 1 deletion(-)
+ drivers/ram/rockchip/sdram-rk3568-loader_params.inc | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/arch/arm/mach-rockchip/Kconfig b/arch/arm/mach-rockchip/Kconfig
-index 108713488af..9a6a580025e 100644
---- a/arch/arm/mach-rockchip/Kconfig
-+++ b/arch/arm/mach-rockchip/Kconfig
-@@ -413,11 +413,15 @@ config ROCKCHIP_RK3528
- config ROCKCHIP_RK3568
- 	bool "Support Rockchip RK3568"
- 	select ARM64
-+	select SUPPORT_TPL
-+	select TPL_HAVE_INIT_STACK if TPL
-+	select TPL_ROCKCHIP_BACK_TO_BROM if TPL
- 	select SUPPORT_SPL
- 	select SPL
- 	select CLK
- 	select PINCTRL
- 	select RAM
-+	select ROCKCHIP_SDRAM_COMMON
- 	select REGMAP
- 	select SYSCON
- 	select BOARD_LATE_INIT
-@@ -433,10 +437,32 @@ config ROCKCHIP_RK3568
- 	imply RNG_ROCKCHIP
- 	imply ROCKCHIP_COMMON_BOARD
- 	imply ROCKCHIP_COMMON_STACK_ADDR
--	imply ROCKCHIP_EXTERNAL_TPL
- 	imply ROCKCHIP_OTP
-+	imply ROCKCHIP_SERIAL if !ROCKCHIP_EXTERNAL_TPL
- 	imply SPL_ATF_NO_PLATFORM_PARAM if SPL_ATF
- 	imply SPL_MMC_HS200_SUPPORT if SPL_MMC && MMC_HS200_SUPPORT
-+	imply TPL if !ROCKCHIP_EXTERNAL_TPL
-+	imply TPL_CLK
-+	imply TPL_DM
-+	imply TPL_LIBCOMMON_SUPPORT
-+	imply TPL_LIBGENERIC_SUPPORT
-+	imply TPL_OF_CONTROL
-+	imply TPL_OF_PLATDATA
-+	imply TPL_RAM
-+	imply TPL_ROCKCHIP_COMMON_BOARD
-+	imply TPL_SERIAL
-+	imply TPL_SYSCON
-+	imply SPL_CLK
-+	imply SPL_DM
-+	imply SPL_DRIVERS_MISC
-+	imply SPL_LIBCOMMON_SUPPORT
-+	imply SPL_LIBGENERIC_SUPPORT
-+	imply SPL_OF_CONTROL
-+	imply SPL_RAM
-+	imply SPL_REGMAP
-+	imply SPL_ROCKCHIP_COMMON_BOARD
-+	imply SPL_SERIAL
-+	imply SPL_SYSCON
- 	help
- 	  The Rockchip RK3568 is a ARM-based SoC with quad-core Cortex-A55,
- 	  including NEON and GPU, 512K L3 cache, Mali-G52 based graphics,
-diff --git a/arch/arm/mach-rockchip/rk3568/Kconfig b/arch/arm/mach-rockchip/rk3568/Kconfig
-index 2730220a18e..893185291d8 100644
---- a/arch/arm/mach-rockchip/rk3568/Kconfig
-+++ b/arch/arm/mach-rockchip/rk3568/Kconfig
-@@ -61,6 +61,10 @@ config TARGET_ORANGEPI_3B_RK3566
+diff --git a/drivers/ram/rockchip/sdram-rk3568-loader_params.inc b/drivers/ram/rockchip/sdram-rk3568-loader_params.inc
+index d9beea3519a..3fcc70d8495 100644
+--- a/drivers/ram/rockchip/sdram-rk3568-loader_params.inc
++++ b/drivers/ram/rockchip/sdram-rk3568-loader_params.inc
+@@ -17,7 +17,7 @@
+ 0, 0, /* reserved */
  
- endchoice
+ /* ddr4 */
+-(1560 << DDR_FREQ_F0_SHIFT) | (324 << DDR_FREQ_F1_SHIFT),
++(1056 << DDR_FREQ_F0_SHIFT) | (324 << DDR_FREQ_F1_SHIFT),
+ (528 << DDR_FREQ_F2_SHIFT) | (780 << DDR_FREQ_F3_SHIFT),
+ (0 << DDR_FREQ_F4_SHIFT) | (0 << DDR_FREQ_F5_SHIFT),
+ /* drv when odt on */
+@@ -39,7 +39,7 @@
+ 	(0x1 << PHY_CLK_SR_SHIFT),
  
-+config SOC_SPECIFIC_OPTIONS # dummy
-+	def_bool y
-+	select HAS_CUSTOM_SYS_INIT_SP_ADDR
-+
- config ROCKCHIP_BOOT_MODE_REG
- 	default 0xfdc20200
+ /* lpddr4 */
+-(1560 << DDR_FREQ_F0_SHIFT) | (324 << DDR_FREQ_F1_SHIFT),
++(1056 << DDR_FREQ_F0_SHIFT) | (324 << DDR_FREQ_F1_SHIFT),
+ (528 << DDR_FREQ_F2_SHIFT) | (780 << DDR_FREQ_F3_SHIFT),
+ (0 << DDR_FREQ_F4_SHIFT) | (0 << DDR_FREQ_F5_SHIFT),
  
-@@ -70,6 +74,18 @@ config ROCKCHIP_STIMER_BASE
- config SYS_SOC
- 	default "rk3568"
- 
-+config TPL_LDSCRIPT
-+	default "arch/arm/mach-rockchip/u-boot-tpl-v8.lds"
-+
-+config TPL_STACK
-+	default 0xfdcd8000
-+
-+config TPL_SYS_MALLOC_F_LEN
-+	default 0x2000
-+
-+config TPL_TEXT_BASE
-+	default 0xfdcc1000
-+
- source "board/rockchip/evb_rk3568/Kconfig"
- source "board/anbernic/rgxx3_rk3566/Kconfig"
- source "board/hardkernel/odroid_m1/Kconfig"
-diff --git a/common/spl/Kconfig.tpl b/common/spl/Kconfig.tpl
-index a535b61ecd3..e64316b8eb3 100644
---- a/common/spl/Kconfig.tpl
-+++ b/common/spl/Kconfig.tpl
-@@ -127,6 +127,7 @@ config TPL_TEXT_BASE
- config TPL_MAX_SIZE
- 	hex "Maximum size (in bytes) for the TPL stage"
- 	default 0x2e000 if ROCKCHIP_RK3399
-+	default 0xe800 if ROCKCHIP_RK3568
- 	default 0x8000 if ROCKCHIP_RK3288 || ROCKCHIP_RV1126
- 	default 0x7000 if ROCKCHIP_RK322X || ROCKCHIP_RK3328 || ROCKCHIP_RK3368
- 	default 0x2800 if ROCKCHIP_PX30
-diff --git a/configs/generic-rk3568_defconfig b/configs/generic-rk3568_defconfig
-index a33c3af9255..4510fa94775 100644
---- a/configs/generic-rk3568_defconfig
-+++ b/configs/generic-rk3568_defconfig
-@@ -81,3 +81,4 @@ CONFIG_USB_GADGET=y
- CONFIG_USB_GADGET_DOWNLOAD=y
- CONFIG_USB_FUNCTION_ROCKUSB=y
- CONFIG_ERRNO_STR=y
-+CONFIG_RAM_ROCKCHIP_LPDDR4=y
 
 -- 
 2.25.1
