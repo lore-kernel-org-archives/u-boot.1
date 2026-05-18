@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B0BECD4F3C
-	for <u-boot@archiver.kernel.org>; Mon, 18 May 2026 05:58:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD9E1CD343F
+	for <u-boot@archiver.kernel.org>; Mon, 18 May 2026 05:58:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 445AC84687;
-	Mon, 18 May 2026 07:57:55 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8262584150;
+	Mon, 18 May 2026 07:57:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="r8cJO79y";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="Gdrq+G9p";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1AECD83AA9; Mon, 18 May 2026 07:57:54 +0200 (CEST)
+ id 4E04F84688; Mon, 18 May 2026 07:57:55 +0200 (CEST)
 Received: from smtp-relay-canonical-0.canonical.com
  (smtp-relay-canonical-0.canonical.com [185.125.188.120])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 21B7083AA9
+ by phobos.denx.de (Postfix) with ESMTPS id 9FCE784150
  for <u-boot@lists.denx.de>; Mon, 18 May 2026 07:57:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=canonical.com
@@ -31,24 +31,24 @@ Received: from LT03 (dynamic-046-114-109-175.46.114.pool.telefonica.de
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id C50264169F; 
- Mon, 18 May 2026 05:57:50 +0000 (UTC)
+ by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id 9B11C416F0; 
+ Mon, 18 May 2026 05:57:51 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1779083871;
- bh=ZHFBD2/sqEw9xpJcKE8cdnHV7auLGJSwUvjfJFOe0Tc=;
+ s=20251003; t=1779083872;
+ bh=5zHUgAdevqUgcmdtpj2MuXNRgqlONo24CO8MVJlLQfA=;
  h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
  MIME-Version;
- b=r8cJO79yDUUyy692JX9u891ulpEWKw/UNz0m8iuemGgP2ib1N9/vo1nFj1IYlPbJC
- RSys4bRXoS/LxHA1iN/rlEM+v9m4AeBX4OZzyGZ/maPzERx/mP49H2HfnKQWh7zz+a
- dR+5Azu9Z/vOosVswT7d9SCtdV0z0pvJXPE6qLh5zDklFjh1lL6CJZ6+b1Ri8Vhxf4
- o4MywqllpqNg6YU/GC9z1fvDkrgYBlvd7ErxBEdRfR2beBSNEOP0v6zEoMhq8CjU64
- ai4Gzt9H4JezgWcDw3aXzTP8USfciC1h2XQjLangQ/e8dy5gPLLaZa9z2GgRQO5IPd
- cOm9+8Q5o4X7PqcxtHEV6bnGjyF2Fik+OAh6kM0aUPGbM1DU1GXCUBUbYSL9yhSgll
- slFNDWYadLu0zH/PjfXQMJY2vhR4+3CBNNQU8rvCGZw++eOTNFDi+/ajw50gQioYk5
- bJUT+kU4MwJCFvJmKaXPKF290jtFH8Ri2I1EARmazuFkFwWh0pWJm3U0LnYuuNVApT
- q4biid57V/yU6DSO+yNvHvJcXmu65U1CZwwvgXJTYdlsPdjVKR5BzOvvo8TkMI006o
- xznUfhCqPYF2TzBN8CmLJ+GPRrFROGPasn1fdCMMIKeYB92PkFEavfAoKvzG4Hmnht
- 6XQuNSP+lKe0+3wIacMij8wg=
+ b=Gdrq+G9pQDqNAFesWmx6KXchQ9EUuzY/rVlBFPYB7DyVNv29kVF6Ymce1LgsdwyF4
+ B1HLUnEdNgop4KPJUJB+6SKVsfAWNkOx3nIoZ25srMpEtCyekqoTOCJgDpkdRLmiaw
+ nGNGXXIIb0JDSFD9pIYKlL1511Y9Yno4EXNqkJ+g+ov7++aJy26CL39sc3jvgv7OCV
+ dknXl1IUE/+2KIHNBZkDMqm6P43ML/up4b58aSC9vvaduRRlFeQASnpZuiPv1CxLKh
+ evK9RHqjuL2Mkv5hRP2L3eVie+eXkxhjfZkNmhssFH8RJlJe9Q7e+g6feGPntH3xrl
+ 3ZSKWm+XIzT2aZZvPns5FhQ4LfrOy/AYbjVhAdkXtC/KqYsGnKKv3hSIbQuRD5HSQ/
+ CmGdh9UvqrW0v29ENdv81n86CLjDsaipwE3lMrij+GJE4iF2hIKI5sK5+Nzps9E7Uk
+ vKmD5IPfVYrQDS5AeSvT87YRJHRsYPQfcccSD5NLz/b/8yvYj7z4FLzGJbhVMYS9sM
+ yMZjV1KWGs0UQuJw5Hp7SAB2Oq1IVeDLUcdCfnVgWxrWl+VlAnEHYWomE/86gCGaCM
+ fN0Snf2oy8Uj3Zcye9Wb2ZSG8G5SAT+PLSyD/9sNRVpdERVA91Unr8dbNsnHnFCngm
+ 0KxcsQrtGeNngxxyhsEVWYqk=
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Tom Rini <trini@konsulko.com>
 Cc: Simon Glass <sjg@chromium.org>, Huang Jianan <jnhuang95@gmail.com>,
@@ -63,9 +63,9 @@ Cc: Simon Glass <sjg@chromium.org>, Huang Jianan <jnhuang95@gmail.com>,
  Peng Fan <peng.fan@nxp.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
  u-boot@lists.denx.de, linux-erofs@lists.ozlabs.org,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/9] fs: move struct fstype_info definition to top of file
-Date: Mon, 18 May 2026 07:57:20 +0200
-Message-ID: <20260518055728.178507-2-heinrich.schuchardt@canonical.com>
+Subject: [PATCH 2/9] fs: print change date in directory listing for FAT
+Date: Mon, 18 May 2026 07:57:21 +0200
+Message-ID: <20260518055728.178507-3-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260518055728.178507-1-heinrich.schuchardt@canonical.com>
 References: <20260518055728.178507-1-heinrich.schuchardt@canonical.com>
@@ -87,117 +87,139 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Structure definitions should precede code using them.
+fs_ls_generic() displays file sizes but no timestamps. The FAT
+filesystem stores a change date in every directory entry and already
+populates fs_dirent::change_time in fat_readdir(). Print the date
+alongside the file size for filesystems that provide it.
+
+Add a u32 capability bitmap (caps) to struct fstype_info. Each bit
+documents a property that the filesystem's readdir() implementation
+guarantees:
+
+  FS_CAP_DATE  BIT(0)  change_time in fs_dirent is valid
+
+fs_ls_generic() tests FS_CAP_DATE once before the loop to select a
+consistent output format for the entire listing:
+
+  12345678  2024-03-15 09:30  filename.txt    (FAT)
+  12345678   filename.txt                     (ext4, squashfs, ...)
+
+Set FS_CAP_DATE for FAT. fat2rtc() loses the __maybe_unused annotation
+since it is now called unconditionally outside XPL builds. The attr,
+create_time, change_time, and access_time fields that were previously
+only populated under CONFIG_EFI_LOADER are now populated whenever
+CONFIG_XPL_BUILD is not set.
+
+Extending the feature to another filesystem requires only adding
+.caps = FS_CAP_DATE to its fstype_info entry and ensuring its readdir()
+fills in fs_dirent::change_time.
 
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
- fs/fs.c | 86 ++++++++++++++++++++++++++++-----------------------------
- 1 file changed, 43 insertions(+), 43 deletions(-)
+ fs/fat/fat.c |  2 +-
+ fs/fs.c      | 38 +++++++++++++++++++++++++++++++++++---
+ 2 files changed, 36 insertions(+), 4 deletions(-)
 
+diff --git a/fs/fat/fat.c b/fs/fat/fat.c
+index c1ccf30771a..7443f5952af 100644
+--- a/fs/fat/fat.c
++++ b/fs/fat/fat.c
+@@ -1539,7 +1539,7 @@ int fat_readdir(struct fs_dir_stream *dirs, struct fs_dirent **dentp)
+ 
+ 	memset(dent, 0, sizeof(*dent));
+ 	strcpy(dent->name, dir->itr.name);
+-	if (CONFIG_IS_ENABLED(EFI_LOADER)) {
++	if (!IS_ENABLED(CONFIG_XPL_BUILD)) {
+ 		dent->attr = dir->itr.dent->attr;
+ 		fat2rtc(le16_to_cpu(dir->itr.dent->cdate),
+ 			le16_to_cpu(dir->itr.dent->ctime), &dent->create_time);
 diff --git a/fs/fs.c b/fs/fs.c
-index 8ea50a6c13c..fe62b71c83c 100644
+index fe62b71c83c..f8e4794c10e 100644
 --- a/fs/fs.c
 +++ b/fs/fs.c
-@@ -38,6 +38,49 @@ static int fs_dev_part;
+@@ -38,6 +38,11 @@ static int fs_dev_part;
  static struct disk_partition fs_partition;
  static int fs_type = FS_TYPE_ANY;
  
-+struct fstype_info {
-+	int fstype;
-+	char *name;
-+	/*
-+	 * Is it legal to pass NULL as .probe()'s  fs_dev_desc parameter? This
-+	 * should be false in most cases. For "virtual" filesystems which
-+	 * aren't based on a U-Boot block device (e.g. sandbox), this can be
-+	 * set to true. This should also be true for the dummy entry at the end
-+	 * of fstypes[], since that is essentially a "virtual" (non-existent)
-+	 * filesystem.
-+	 */
-+	bool null_dev_desc_ok;
-+	int (*probe)(struct blk_desc *fs_dev_desc,
-+		     struct disk_partition *fs_partition);
-+	int (*ls)(const char *dirname);
-+	int (*exists)(const char *filename);
-+	int (*size)(const char *filename, loff_t *size);
-+	int (*read)(const char *filename, void *buf, loff_t offset,
-+		    loff_t len, loff_t *actread);
-+	int (*write)(const char *filename, void *buf, loff_t offset,
-+		     loff_t len, loff_t *actwrite);
-+	void (*close)(void);
-+	int (*uuid)(char *uuid_str);
-+	/*
-+	 * Open a directory stream.  On success return 0 and directory
-+	 * stream pointer via 'dirsp'.  On error, return -errno.  See
-+	 * fs_opendir().
-+	 */
-+	int (*opendir)(const char *filename, struct fs_dir_stream **dirsp);
-+	/*
-+	 * Read next entry from directory stream.  On success return 0
-+	 * and directory entry pointer via 'dentp'.  On error return
-+	 * -errno.  See fs_readdir().
-+	 */
-+	int (*readdir)(struct fs_dir_stream *dirs, struct fs_dirent **dentp);
-+	/* see fs_closedir() */
-+	void (*closedir)(struct fs_dir_stream *dirs);
-+	int (*unlink)(const char *filename);
-+	int (*mkdir)(const char *dirname);
-+	int (*ln)(const char *filename, const char *target);
-+	int (*rename)(const char *old_path, const char *new_path);
-+};
++/*
++ * define FS_CAP_DATE - readdir() populates fs_dirent::change_time
++ */
++#define FS_CAP_DATE	BIT(0)
 +
- void fs_set_type(int type)
- {
- 	fs_type = type;
-@@ -147,49 +190,6 @@ static inline int fs_rename_unsupported(const char *old_path,
+ struct fstype_info {
+ 	int fstype;
+ 	char *name;
+@@ -50,6 +55,10 @@ struct fstype_info {
+ 	 * filesystem.
+ 	 */
+ 	bool null_dev_desc_ok;
++#if !IS_ENABLED(CONFIG_XPL_BUILD)
++	/* Capability flags (FS_CAP_*) */
++	u32 caps;
++#endif
+ 	int (*probe)(struct blk_desc *fs_dev_desc,
+ 		     struct disk_partition *fs_partition);
+ 	int (*ls)(const char *dirname);
+@@ -98,10 +107,19 @@ static inline int fs_ls_unsupported(const char *dirname)
  	return -1;
  }
  
--struct fstype_info {
--	int fstype;
--	char *name;
--	/*
--	 * Is it legal to pass NULL as .probe()'s  fs_dev_desc parameter? This
--	 * should be false in most cases. For "virtual" filesystems which
--	 * aren't based on a U-Boot block device (e.g. sandbox), this can be
--	 * set to true. This should also be true for the dummy entry at the end
--	 * of fstypes[], since that is essentially a "virtual" (non-existent)
--	 * filesystem.
--	 */
--	bool null_dev_desc_ok;
--	int (*probe)(struct blk_desc *fs_dev_desc,
--		     struct disk_partition *fs_partition);
--	int (*ls)(const char *dirname);
--	int (*exists)(const char *filename);
--	int (*size)(const char *filename, loff_t *size);
--	int (*read)(const char *filename, void *buf, loff_t offset,
--		    loff_t len, loff_t *actread);
--	int (*write)(const char *filename, void *buf, loff_t offset,
--		     loff_t len, loff_t *actwrite);
--	void (*close)(void);
--	int (*uuid)(char *uuid_str);
--	/*
--	 * Open a directory stream.  On success return 0 and directory
--	 * stream pointer via 'dirsp'.  On error, return -errno.  See
--	 * fs_opendir().
--	 */
--	int (*opendir)(const char *filename, struct fs_dir_stream **dirsp);
--	/*
--	 * Read next entry from directory stream.  On success return 0
--	 * and directory entry pointer via 'dentp'.  On error return
--	 * -errno.  See fs_readdir().
--	 */
--	int (*readdir)(struct fs_dir_stream *dirs, struct fs_dirent **dentp);
--	/* see fs_closedir() */
--	void (*closedir)(struct fs_dir_stream *dirs);
--	int (*unlink)(const char *filename);
--	int (*mkdir)(const char *dirname);
--	int (*ln)(const char *filename, const char *target);
--	int (*rename)(const char *old_path, const char *new_path);
--};
--
- static struct fstype_info fstypes[] = {
- #if CONFIG_IS_ENABLED(FS_FAT)
- 	{
++/* Forward declaration - defined after fstypes[] */
++static struct fstype_info *fs_get_info(int fstype);
++
+ /* generic implementation of ls in terms of opendir/readdir/closedir */
+ __maybe_unused
+ static int fs_ls_generic(const char *dirname)
+ {
++#if !IS_ENABLED(CONFIG_XPL_BUILD)
++	struct fstype_info *info = fs_get_info(fs_type);
++	bool has_date = !!(info->caps & FS_CAP_DATE);
++#else
++	bool has_date = false;
++#endif
+ 	struct fs_dir_stream *dirs;
+ 	struct fs_dirent *dent;
+ 	int nfiles = 0, ndirs = 0;
+@@ -112,15 +130,26 @@ static int fs_ls_generic(const char *dirname)
+ 
+ 	while ((dent = fs_readdir(dirs))) {
+ 		if (dent->type == FS_DT_DIR) {
+-			printf("            %s/\n", dent->name);
++			printf("          ");
+ 			ndirs++;
+ 		} else if (dent->type == FS_DT_LNK) {
+-			printf("    <SYM>   %s\n", dent->name);
++			printf("    <SYM> ");
+ 			nfiles++;
+ 		} else {
+-			printf(" %8lld   %s\n", dent->size, dent->name);
++			printf(" %8lld ", dent->size);
+ 			nfiles++;
+ 		}
++		if (has_date)
++			printf("%04d-%02d-%02d %02d:%02d ",
++			       dent->change_time.tm_year,
++			       dent->change_time.tm_mon,
++			       dent->change_time.tm_mday,
++			       dent->change_time.tm_hour,
++			       dent->change_time.tm_min);
++		if (dent->type == FS_DT_DIR)
++			printf("%s/\n", dent->name);
++		else
++			printf("%s\n", dent->name);
+ 	}
+ 
+ 	fs_closedir(dirs);
+@@ -196,6 +225,9 @@ static struct fstype_info fstypes[] = {
+ 		.fstype = FS_TYPE_FAT,
+ 		.name = "fat",
+ 		.null_dev_desc_ok = false,
++#if !IS_ENABLED(CONFIG_XPL_BUILD)
++		.caps = FS_CAP_DATE,
++#endif
+ 		.probe = fat_set_blk_dev,
+ 		.close = fat_close,
+ 		.ls = fs_ls_generic,
 -- 
 2.53.0
 
