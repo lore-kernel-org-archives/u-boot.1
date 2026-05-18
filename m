@@ -4,94 +4,107 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41EE6CD4F48
-	for <u-boot@archiver.kernel.org>; Mon, 18 May 2026 08:04:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8754ECD4F3C
+	for <u-boot@archiver.kernel.org>; Mon, 18 May 2026 08:05:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B38B083FEE;
-	Mon, 18 May 2026 10:04:12 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1752483FEE;
+	Mon, 18 May 2026 10:05:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="sc+zEChH";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="MODypdcv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ED83884664; Mon, 18 May 2026 10:04:11 +0200 (CEST)
-Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
- [IPv6:2a00:1450:4864:20::32f])
+ id 11D3F84688; Mon, 18 May 2026 10:05:19 +0200 (CEST)
+Received: from mail-yx1-xb12e.google.com (mail-yx1-xb12e.google.com
+ [IPv6:2607:f8b0:4864:20::b12e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D1A5083AA9
- for <u-boot@lists.denx.de>; Mon, 18 May 2026 10:04:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 65E2983AA9
+ for <u-boot@lists.denx.de>; Mon, 18 May 2026 10:05:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-48909558b3aso21047155e9.0
- for <u-boot@lists.denx.de>; Mon, 18 May 2026 01:04:09 -0700 (PDT)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yx1-xb12e.google.com with SMTP id
+ 956f58d0204a3-65c477a3278so2112063d50.3
+ for <u-boot@lists.denx.de>; Mon, 18 May 2026 01:05:14 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1779091513; cv=none;
+ d=google.com; s=arc-20240605;
+ b=aTs2KjidbYlf9Vd1elFAIFTGThcS2KJ0mzYjtqctFHz33URw0BK040X/G0KCozrafH
+ tDQWwEL4/BGe4Tbd5D496fBqoM9tH0wnkbKEHgXgQzQeC3dK6EcBf+0bc3ob/eLW5zP5
+ yDdvZw70EoJf25+4Fsh9C/CyMlBRsFfGbYhhq/P2X7lmIRdhpzqJhA98ba2pcgPaRBV9
+ DLtrFdAw05KLzXdE5mVivLkAwyBJO/+v6eiYByFy5lGO/An2I6CDSVLUzal0xK4svixy
+ pd+RiTQweOQCJcus93YO/MD6JzpNP9VwxzXagP55wxamZO8lkbCoA9JKZmgBup6Afa7T
+ 185Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=7H7NqasfFwtMBtHZglrlRFdO+xN6xsNACMh27v0c+Tc=;
+ fh=ovq/5t1o7AdIEUD75iX2y2XHOz36vZstehvnqiiYK8I=;
+ b=KnPEZqyyMF7uMsThAtkfB2y67Evez2rpRevzuBPBlCgh33b1s7ZBGyqPsBuO2Iplsu
+ JcOB3xCDFud+aU5VZdiAL3Q50BIXUIHgF9T6K7GRQ5fS6Sp9Vc+/+bOyV9StLbTotXVU
+ uGywjlmAFzQrQ0PYkb28jHRFU6Tz7LXg7vwspOLS+Bze3+unWsrPxdysKI7Up9ZnYKyl
+ Kf7pQZ6+xIjA1kB6rY6xK7nstINTyaqKEPERb3weJemy+GL7p7VWikm6Qdn83xcoVM5s
+ LTpFZrhfRGUhZONGAduIW5JmgXLwHUbwWnoe94ZzIaaCb2dzrbyxq1TByYQ+KzOwbWMr
+ 6ODA==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1779091449; x=1779696249; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=uy/idly42kVMJVVnQuouSrmMtXGNt/cLGbamR2yqOsc=;
- b=sc+zEChHVoC853CBPN3Gx5lKUzVlb7X+5amvXFJ6wlAbe8Ge7c0FPb7GP8Muriml5K
- 3RUw3QkiJIZuPkdfKhbo44F9+ec8jXoMa+xfVGmBJ9dq9+1VfgQPTJ2iE9Qg9HpsE62F
- K22aW4AF6ntQqnm/1ES/fiIKZZeJNoYLfuv3W+o/s8eiTWnJ1kBmyO6ZGCUPm9WbMcmn
- iVi1iTKrIlbDtX+c4eQ5JFJ5fFzLZEWThNOTkkblMYGCV1EBZf4dDHlfZECkXc8LK3wr
- 4KXlebH8194l9HtFzPGCn0xOpBHACm+xTJZlqNqetTQGsApws6eEwlAN0p94MqOTwU1N
- jE2A==
+ d=linaro.org; s=google; t=1779091513; x=1779696313; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=7H7NqasfFwtMBtHZglrlRFdO+xN6xsNACMh27v0c+Tc=;
+ b=MODypdcv8dDRKACWRtEUIOcSItD6DNetsTXnULjHDlsZpuC5cYJueig4FwTJfdgYxN
+ ekLim56Yw3YNRr2Bx2C27uXjUf1iRPqFeI/P8C4jB2sttRSOgQwaLYW4RpwpQ9tZFGQE
+ g3SGEZzD9A2uTc4deLEzaDeQBgnBN80FC6P9ACaqb0gv11LIogMMqiRFw9c4NCc6a2Su
+ m7QMVF/SvITLRjxjqa89R2h18j+b1YdYKbkBo+NBiPI+tsSRW1SLYRXhjypyi4pdIykV
+ w5uAScrI8bBiJgep1eEgyjWf3lg36iJxeT+PHmvVWRPTG0kMuQYuprOG+AJ62O4pDzgf
+ CjDA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779091449; x=1779696249;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=uy/idly42kVMJVVnQuouSrmMtXGNt/cLGbamR2yqOsc=;
- b=Bwg1OYcoXeC3aPngF9RXqheUUIc8F30cy7Ue2NJOnJAkFA1WCAqGXzX7v3CbW/sj/P
- MsIVzggzPd3SFuuw1k39r3RXPngc38ejBg/ddXXy4K0cZgNe3CWnNE43pijzUzyj+3fb
- pzjzW2OU+zIkjCp1p8bx8cBE+IUToBtAbx/BNc/QRbzEoqgBsWKe0edHzPWFEDS5WxuA
- Ho48y0hh0fLULXdyKXH4Rs5BFkcId0uSDn5b5A933utfC0zItmzST4GHeN0YzYdSxcws
- PY/WSy9LYGm83wHT8gVStqMeul6BFis+APTyneHMWmyFLwbQvsPafRc/gfPRso+Wvb0x
- URuQ==
-X-Forwarded-Encrypted: i=1;
- AFNElJ9Te7oL4vyWA9WDHOp1nu4favdPfvHtJk4OLGPixJ8WDNaEqS+xozvvO6nMDNZII7uu4jCC6Cg=@lists.denx.de
-X-Gm-Message-State: AOJu0Yzr4oYI6B76qxO8PoJ6JGeVf0cmH0wjzak+OCzHhFhm3+eyUbF/
- dCvXYsM7pxlJ2xwZyfi1rOeWkUof6w7v6VgkxRUToNbUzmvBQ560IdWffEYaFranSU8=
-X-Gm-Gg: Acq92OEcrcgUMV1GxUIC6NOFojS1BhykQM9/7TLSikUwCR08Xc0i+yd/rdLwwPuOZ+0
- XO2lhM3B2xrYQdK/3epfC8Jv5x1xSVydw3msw1i1g/WWF6Yq3frezwcIYotkIxOkbpAt5LVjKTm
- +szQVlerCg0YXaR71c4G6Fy648Z88jNQpo0/gxWpEZA/3N6StGwfJAoNUOWknzLT4Nin8cHZQG0
- VsuakHt+ndIpUbZ+7Zavt1hYN2oEoUqLTSXswct7uYAL4x4fxI72f7hXmsrEaKhBPMlXfhfLHLx
- geZOvgD3NGWFGDH9wjN+Ral71NMptkCEcxQpTCduvkS/QuyxvfMYXJ6GDhOinLU6nlOVe2c+zkl
- g2ooNmqViRrkukbkbal3o9XEELWcnkQvpTMxVF/+DSIs5H1OCiFTtq43rQWBWrL2Hh3wwSv4hiC
- HOjTKAwn21QhDw9mTzSW8LvIrrO8zhtZdiLOsLMX2b9fhD+ZCA963G7SOFd9B+RQbjYQ==
-X-Received: by 2002:a05:600c:4fc9:b0:489:1c1f:35df with SMTP id
- 5b1f17b1804b1-48fe60e58ecmr194372355e9.10.1779091447893; 
- Mon, 18 May 2026 01:04:07 -0700 (PDT)
-Received: from [192.168.1.36] (p4fc3dd86.dip0.t-ipconnect.de. [79.195.221.134])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-48fea52a0bfsm111640955e9.0.2026.05.18.01.04.06
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 18 May 2026 01:04:07 -0700 (PDT)
-Message-ID: <88fbf22d-f5ef-46c6-affa-ba4f2b0eaf55@linaro.org>
-Date: Mon, 18 May 2026 10:04:06 +0200
+ d=1e100.net; s=20251104; t=1779091513; x=1779696313;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=7H7NqasfFwtMBtHZglrlRFdO+xN6xsNACMh27v0c+Tc=;
+ b=HUtzuJBF4sqUMGH/+68vuWhkKZIqqJIMjZajCkPhZiJjp4+hKjES77BoPLNyANCczG
+ NLVCnlW1CoLjvhDPraPYRomrjH6+alUU5Za2420HIeFzpdTdoaGNj4WLCuGTOYeijxkb
+ sJRH42rP3jONfuFOc554hMRQ8+8gc31T7K2Doycd/F3HaBJNHZe6aJTux2S+OlH29JeD
+ Xj9pNPEQ5/zumCSnMKUaDLoHF9UOZ+KvvbXlO4ZLs8CvRfRmzi9422xQYPLhLQR1jcDq
+ PHrTWUncr7AqON5DtKcOuhCusgj3hDzx1wm/qHhnD53NHtDMxYe0ILOb4L4cHK7E4voB
+ 30QA==
+X-Gm-Message-State: AOJu0YwzV6sqXL+EShZOyG0QeXNcueElYZHioMRYMugZs72Cl1RTDBhP
+ wqyT1QcTmDSRKsSEVyG7JlSAVFWjnkxW7sD6njwtL2fqPFwBLYDOXkgoTOulJyx8J2RJPdO8dfu
+ PKrN9saTT3MLzhz6Z2U5Bm8cmJzrdjV3zXCcV/YGYwA==
+X-Gm-Gg: Acq92OFdi6QVcU1gbj0XaQ5TwqQDYFbeZ9wfuXdx1uVzTGArOMQrJQAZEFV3DhemT2n
+ 3nIvmR46YfsN4ETLyV37GTAD32l6yHz6FqE+NKeCsPMZIiY4/JL4svCX5DyEs/f+Fr7lWTLMZJR
+ 8si4o8V1PJJO9eepoF7o+9Y3kqJ/BpxnBuEMX9FpW4L07/zTuek0JEXNttf/hHgUcTG2HpG1XgI
+ ZOMyMQPBDVDgUStsC6IFpbcu7SwPyZRkyLKfo/9rf8Y7P5WlrV+7DzhRM7iv/bhOunh+mDXy6WB
+ fTy8By6xwlUW+FOlMxGPnzIyCIhxEPTeFn3Wt9wZVEBrpP9QHmZ+X0sJmG+nr4eq1WGQbGZzSNx
+ D8j7CarmorZMtMOcj+CAS4DgMl4u8pR2A3J19JyBEerJAtiTKq7XGlPdN08BNs8fQ+XekrtfwO9
+ 8gsZV237Wjnl6rIlRlIBRKYxYziyyu56wKi31AQjPZB8w+YyhAEPFDKcRb5dE+/YoGTnDKH5F/O
+ kVdcjtgwqMpqf4nvhGarmRQnHhX1OZNT7+gOEGAr7+kaXH+plb20YH1xPGjyqEN90cffQCNzrIL
+ ucDdt7MdJUhzA6NrwSfHt8flzljA+cug7Kx8eXL8BWtzoYRksR/wNs9h2xZn2YL2zUp7rtK7jNY
+ IrvBm8g==
+X-Received: by 2002:a05:690e:d50:b0:651:b938:188b with SMTP id
+ 956f58d0204a3-65e2273520dmr11657289d50.24.1779091512984; Mon, 18 May 2026
+ 01:05:12 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] phy: Kconfig: use bool instead of tristate
-Content-Language: en-US
-To: David Lechner <dlechner@baylibre.com>, Tom Rini <trini@konsulko.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Sumit Garg <sumit.garg@kernel.org>, Nobuhiro Iwamatsu
- <iwamatsu@nigauri.org>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>
-Cc: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de,
- u-boot-qcom@groups.io
-References: <20260513-phy-kconfig-no-tristate-v1-1-c4cbee0c1831@baylibre.com>
-From: Casey Connolly <casey.connolly@linaro.org>
-In-Reply-To: <20260513-phy-kconfig-no-tristate-v1-1-c4cbee0c1831@baylibre.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+References: <20260512-am62_firewall_exception_fix-v1-1-4b274718bdac@ti.com>
+In-Reply-To: <20260512-am62_firewall_exception_fix-v1-1-4b274718bdac@ti.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Mon, 18 May 2026 11:04:36 +0300
+X-Gm-Features: AVHnY4K-ZS7s9q54TiQwlmlnYRUJ5H5BrnDjiaLBhz3kpAoJuX62xHxIg5oP7Zg
+Message-ID: <CAC_iWjJHnzfgMThnUnzd=s_21wndWX57pinNMoq9As+e_TSOOQ@mail.gmail.com>
+Subject: Re: [PATCH master] mach-k3: enable mmu after reserved memory is
+ unmapped
+To: Anshul Dalal <anshuld@ti.com>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
+ Dhruva Gole <d-gole@ti.com>, Mark Kettenis <kettenis@openbsd.org>,
+ Patrice Chotard <patrice.chotard@foss.st.com>, 
+ Moteen Shah <m-shah@ti.com>, Beleswar Padhi <b-padhi@ti.com>,
+ Wadim Egorov <w.egorov@phytec.de>, Chintan Vankar <c-vankar@ti.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,241 +121,145 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Anshul
 
+On Tue, 12 May 2026 at 14:03, Anshul Dalal <anshuld@ti.com> wrote:
+>
+> Currently the sequence to enable caches for the A53/A72 core on K3
+> devices looks as follows:
+>
+>  1. Map entire DDR banks
+>  2. Setup page tables and enable MMU (done by mmu_setup)
+>  3. Unmap reserved-memory regions
+>  4. Enable caches
+>
+> However there is a brief period of execution between #2 and #3 where the
+> core can issue speculative accesses to the entire DDR space (including
+> the reserved-memory regions) despite the caches being disabled.
 
-On 13/05/2026 16:11, David Lechner wrote:
-> Change all uses of tristate in the PHY Kconfigs to bool. U-Boot does
-> not support modules, so tristate does not make sense here.
-> 
-> Signed-off-by: David Lechner <dlechner@baylibre.com>
+This is indeed a problem and the fix looks correct.
+What worries me though is that the mmu is common across v8 boards. Is
+there a way to generalize this instead of adding per board variants?
 
-Reviewed-by: Casey Connolly <casey.connolly@linaro.org>
+Thanks
+/Ilias
+
+>
+> A firewall exception is triggered whenever such speculative access is
+> made to secure DDR region of TFA or OP-TEE. This patch fixes the issue
+> by re-ordering the sequence as follows:
+>
+>  1. Map entire DDR banks
+>  2. Setup page tables
+>  3. Unmap reserved-memory regions
+>  4. Enable MMU
+>  5. Enable caches
+>
+> Fixes: f1c694b8fdde ("mach-k3: map all banks using mem_map_from_dram_banks")
+> Signed-off-by: Anshul Dalal <anshuld@ti.com>
 > ---
->  drivers/phy/Kconfig          | 14 +++++++-------
->  drivers/phy/cadence/Kconfig  |  4 ++--
->  drivers/phy/qcom/Kconfig     | 16 ++++++++--------
->  drivers/phy/renesas/Kconfig  |  6 +++---
->  drivers/phy/rockchip/Kconfig |  2 +-
->  drivers/phy/ti/Kconfig       |  2 +-
->  6 files changed, 22 insertions(+), 22 deletions(-)
-> 
-> diff --git a/drivers/phy/Kconfig b/drivers/phy/Kconfig
-> index 5c8ec2b146f..eafa82fe494 100644
-> --- a/drivers/phy/Kconfig
-> +++ b/drivers/phy/Kconfig
-> @@ -114,7 +114,7 @@ config BCM_SR_PCIE_PHY
->  	  If unsure, say N.
->  
->  config PHY_DA8XX_USB
-> -	tristate "TI DA8xx USB PHY Driver"
-> +	bool "TI DA8xx USB PHY Driver"
->  	depends on PHY && ARCH_DAVINCI
->  	help
->  	  Enable this to support the USB PHY on DA8xx SoCs.
-> @@ -138,7 +138,7 @@ config SPL_PIPE3_PHY
->  	  and omap5
->  
->  config AM654_PHY
-> -	tristate "TI AM654 SERDES support"
-> +	bool "TI AM654 SERDES support"
->  	depends on PHY && ARCH_K3
->  	select REGMAP
->  	select SYSCON
-> @@ -155,7 +155,7 @@ config STI_USB_PHY
->  	  STiH407 SoC families.
->  
->  config PHY_RCAR_GEN2
-> -	tristate "Renesas R-Car Gen2 USB PHY"
-> +	bool "Renesas R-Car Gen2 USB PHY"
->  	depends on PHY && RCAR_GEN2
->  	help
->  	  Support for the Renesas R-Car Gen2 USB PHY. This driver operates the
-> @@ -163,7 +163,7 @@ config PHY_RCAR_GEN2
->  	  allows configuring the module multiplexing.
->  
->  config PHY_RCAR_GEN3
-> -	tristate "Renesas R-Car Gen3 USB PHY"
-> +	bool "Renesas R-Car Gen3 USB PHY"
->  	depends on PHY && CLK && DM_REGULATOR && (RCAR_GEN3 || RZG2L)
->  	default y if (RCAR_GEN3 || RZG2L)
->  	help
-> @@ -171,7 +171,7 @@ config PHY_RCAR_GEN3
->  	  PHY connected to EHCI USB module and controls USB OTG operation.
->  
->  config PHY_STM32_USBPHYC
-> -	tristate "STMicroelectronics STM32 SoC USB HS PHY driver"
-> +	bool "STMicroelectronics STM32 SoC USB HS PHY driver"
->  	depends on PHY && ARCH_STM32MP
->  	help
->  	  Enable this to support the High-Speed USB transceiver that is part of
-> @@ -283,7 +283,7 @@ config PHY_MTK_TPHY
->  	  so you can easily distinguish them by banks layout.
->  
->  config PHY_MTK_UFS
-> -	tristate "MediaTek UFS M-PHY driver"
-> +	bool "MediaTek UFS M-PHY driver"
->  	depends on ARCH_MEDIATEK
->  	depends on PHY
->  	help
-> @@ -337,7 +337,7 @@ config PHY_IMX8M_PCIE
->  	  This PHY is found on i.MX8M devices supporting PCIe.
->  
->  config PHY_XILINX_ZYNQMP
-> -	tristate "Xilinx ZynqMP PHY driver"
-> +	bool "Xilinx ZynqMP PHY driver"
->  	depends on PHY && ARCH_ZYNQMP
->  	help
->  	  Enable this to support ZynqMP High Speed Gigabit Transceiver
-> diff --git a/drivers/phy/cadence/Kconfig b/drivers/phy/cadence/Kconfig
-> index 8c0ab80fbbc..f5f096889fe 100644
-> --- a/drivers/phy/cadence/Kconfig
-> +++ b/drivers/phy/cadence/Kconfig
-> @@ -1,11 +1,11 @@
->  config PHY_CADENCE_SIERRA
-> -	tristate "Cadence Sierra PHY Driver"
-> +	bool "Cadence Sierra PHY Driver"
->  	depends on DM_RESET
->  	help
->  	  Enable this to support the Cadence Sierra PHY driver
->  
->  config PHY_CADENCE_TORRENT
-> -	tristate "Cadence Torrent PHY Driver"
-> +	bool "Cadence Torrent PHY Driver"
->  	depends on DM_RESET
->  	help
->  	  Enable this to support the Cadence Torrent PHY driver
-> diff --git a/drivers/phy/qcom/Kconfig b/drivers/phy/qcom/Kconfig
-> index 49f830abf01..7094903d869 100644
-> --- a/drivers/phy/qcom/Kconfig
-> +++ b/drivers/phy/qcom/Kconfig
-> @@ -7,7 +7,7 @@ config MSM8916_USB_PHY
->  	  This PHY is found on qualcomm dragonboard410c development board.
->  
->  config PHY_QCOM_IPQ4019_USB
-> -	tristate "Qualcomm IPQ4019 USB PHY driver"
-> +	bool "Qualcomm IPQ4019 USB PHY driver"
->  	depends on PHY && ARCH_IPQ40XX
->  	help
->  	  Support for the USB PHY-s on Qualcomm IPQ40xx SoC-s.
-> @@ -21,26 +21,26 @@ config PHY_QCOM_QMP_COMBO
->  	  PHY (USB3 + DisplayPort). Currently only USB3 mode is supported.
->  
->  config PHY_QCOM_QMP_PCIE
-> -	tristate "Qualcomm QMP PCIe PHY driver"
-> +	bool "Qualcomm QMP PCIe PHY driver"
->  	depends on PHY && ARCH_SNAPDRAGON
->  	help
->  	  Enable this to support the PCIe QMP PHY on various Qualcomm chipsets.
->  
->  config PHY_QCOM_QMP_UFS
-> -	tristate "Qualcomm QMP UFS PHY driver"
-> +	bool "Qualcomm QMP UFS PHY driver"
->  	depends on PHY && ARCH_SNAPDRAGON
->  	help
->  	  Enable this to support the UFS QMP PHY on various Qualcomm chipsets.
->  
->  config PHY_QCOM_QUSB2
-> -	tristate "Qualcomm USB QUSB2 PHY driver"
-> +	bool "Qualcomm USB QUSB2 PHY driver"
->  	depends on PHY && ARCH_SNAPDRAGON
->  	help
->  	  Enable this to support the Super-Speed USB transceiver on various
->  	  Qualcomm chipsets.
->  
->  config PHY_QCOM_USB_SNPS_FEMTO_V2
-> -	tristate "Qualcomm SNPS FEMTO USB HS PHY v2"
-> +	bool "Qualcomm SNPS FEMTO USB HS PHY v2"
->  	depends on PHY && ARCH_SNAPDRAGON
->  	help
->  	  Enable this to support the Qualcomm Synopsys DesignWare Core 7nm
-> @@ -48,7 +48,7 @@ config PHY_QCOM_USB_SNPS_FEMTO_V2
->  	  is usually paired with Synopsys DWC3 USB IPs on MSM SOCs.
->  
->  config PHY_QCOM_SNPS_EUSB2
-> -	tristate "Qualcomm Synopsys eUSB2 High-Speed PHY"
-> +	bool "Qualcomm Synopsys eUSB2 High-Speed PHY"
->  	depends on PHY && ARCH_SNAPDRAGON
->  	help
->  	  Enable this to support the Qualcomm Synopsys DesignWare eUSB2
-> @@ -56,7 +56,7 @@ config PHY_QCOM_SNPS_EUSB2
->  	  is usually paired with Synopsys DWC3 USB IPs on MSM SOCs.
->  
->  config PHY_QCOM_USB_HS_28NM
-> -	tristate "Qualcomm 28nm High-Speed PHY"
-> +	bool "Qualcomm 28nm High-Speed PHY"
->  	depends on PHY && ARCH_SNAPDRAGON
->  	help
->  	  Enable this to support the Qualcomm Synopsys DesignWare Core 28nm
-> @@ -65,7 +65,7 @@ config PHY_QCOM_USB_HS_28NM
->  	  IPs on MSM SOCs.
->  
->  config PHY_QCOM_USB_SS
-> -	tristate "Qualcomm USB Super-Speed PHY driver"
-> +	bool "Qualcomm USB Super-Speed PHY driver"
->  	depends on PHY && ARCH_SNAPDRAGON
->  	help
->  	  Enable this to support the Super-Speed USB transceiver on various
-> diff --git a/drivers/phy/renesas/Kconfig b/drivers/phy/renesas/Kconfig
-> index affbee0500c..3358d454e59 100644
-> --- a/drivers/phy/renesas/Kconfig
-> +++ b/drivers/phy/renesas/Kconfig
-> @@ -3,19 +3,19 @@
->  # Phy drivers for Renesas platforms
->  
->  config PHY_R8A779F0_ETHERNET_SERDES
-> -	tristate "Renesas R-Car S4-8 Ethernet SERDES driver"
-> +	bool "Renesas R-Car S4-8 Ethernet SERDES driver"
->  	depends on RCAR_64 && PHY
->  	help
->  	  Support for Ethernet SERDES found on Renesas R-Car S4-8 SoCs.
->  
->  config PHY_R8A78000_ETHERNET_PCS
-> -	tristate "Renesas R-Car X5H Ethernet PCS driver"
-> +	bool "Renesas R-Car X5H Ethernet PCS driver"
->  	depends on RCAR_64 && PHY
->  	help
->  	  Support for Ethernet PCS found on Renesas R-Car X5H SoCs.
->  
->  config PHY_R8A78000_MP_PHY
-> -	tristate "Renesas R-Car X5H Multi-Protocol PHY driver"
-> +	bool "Renesas R-Car X5H Multi-Protocol PHY driver"
->  	depends on RCAR_64 && PHY
->  	help
->  	  Support for Multi-Protocol PHY on Renesas R-Car X5H SoCs.
-> diff --git a/drivers/phy/rockchip/Kconfig b/drivers/phy/rockchip/Kconfig
-> index 80128335d52..6f3d7ebe29e 100644
-> --- a/drivers/phy/rockchip/Kconfig
-> +++ b/drivers/phy/rockchip/Kconfig
-> @@ -49,7 +49,7 @@ config PHY_ROCKCHIP_SNPS_PCIE3
->  	  also be able splited into multiple combinations of lanes.
->  
->  config PHY_ROCKCHIP_USBDP
-> -	tristate "Rockchip USBDP COMBO PHY Driver"
-> +	bool "Rockchip USBDP COMBO PHY Driver"
->  	depends on ARCH_ROCKCHIP
->  	select PHY
->  	help
-> diff --git a/drivers/phy/ti/Kconfig b/drivers/phy/ti/Kconfig
-> index df750b26d66..fe96eb6806f 100644
-> --- a/drivers/phy/ti/Kconfig
-> +++ b/drivers/phy/ti/Kconfig
-> @@ -1,5 +1,5 @@
->  config PHY_J721E_WIZ
-> -	tristate "TI J721E WIZ (SERDES Wrapper) support"
-> +	bool "TI J721E WIZ (SERDES Wrapper) support"
->  	depends on ARCH_K3
->  	help
->  	  This option enables support for WIZ module present in TI's J721E
-> 
+> For testing, I had used an AM62p with the following diff to enable
+> logging from TIFS:
+>
+>   --- a/board/ti/am62px/board-cfg.yaml
+>   +++ b/board/ti/am62px/board-cfg.yaml
+>   @@ -33,5 +33,5 @@ board-cfg:
+>            subhdr:
+>                magic: 0x020C
+>                size: 8
+>   -        trace_dst_enables: 0x00
+>   -        trace_src_enables: 0x00
+>   +        trace_dst_enables: 0xd
+>   +        trace_src_enables: 0x3f
+>
+> Without this patch an exception[1] similar to the following is observed
+> at A53 SPL stage:
+>
+>   FWL Bit  0x1
+>   Exception addr  0x45B08000
+>   FWL Exception  0x1000100
+>    0x60000
+>    0x80002880
+>    0x0
+>    0x141201
+>    0x40
+>
+> [1]: https://software-dl.ti.com/tisci/esd/latest/6_topic_user_guides/firewall_faq.html#how-do-i-debug-firewall-issues
 > ---
-> base-commit: e3e651c480c46b332f16a7555b97c6c6fd640a40
-> change-id: 20260513-phy-kconfig-no-tristate-61bc2d324149
-> 
+>  arch/arm/cpu/armv8/cache_v8.c    |  2 +-
+>  arch/arm/include/asm/armv8/mmu.h |  1 +
+>  arch/arm/mach-k3/common.c        | 10 +++++++++-
+>  3 files changed, 11 insertions(+), 2 deletions(-)
+>
+> diff --git a/arch/arm/cpu/armv8/cache_v8.c b/arch/arm/cpu/armv8/cache_v8.c
+> index 39479df7b21..169e68627e1 100644
+> --- a/arch/arm/cpu/armv8/cache_v8.c
+> +++ b/arch/arm/cpu/armv8/cache_v8.c
+> @@ -777,7 +777,7 @@ void setup_pgtables(void)
+>                 add_map(&mem_map[i]);
+>  }
+>
+> -static void setup_all_pgtables(void)
+> +void setup_all_pgtables(void)
+>  {
+>         u64 tlb_addr = gd->arch.tlb_addr;
+>         u64 tlb_size = gd->arch.tlb_size;
+> diff --git a/arch/arm/include/asm/armv8/mmu.h b/arch/arm/include/asm/armv8/mmu.h
+> index 8aa5f9721c4..969f1745445 100644
+> --- a/arch/arm/include/asm/armv8/mmu.h
+> +++ b/arch/arm/include/asm/armv8/mmu.h
+> @@ -197,6 +197,7 @@ struct mm_region {
+>  /* Used as the memory map for MMU configuration by mmu_setup */
+>  extern struct mm_region *mem_map;
+>  void setup_pgtables(void);
+> +void setup_all_pgtables(void);
+>
+>  /**
+>   * mem_map_from_dram_banks() - Populate mem_map with entries corresponding to
+> diff --git a/arch/arm/mach-k3/common.c b/arch/arm/mach-k3/common.c
+> index b0a75988714..a910c6e3725 100644
+> --- a/arch/arm/mach-k3/common.c
+> +++ b/arch/arm/mach-k3/common.c
+> @@ -265,8 +265,10 @@ void board_prep_linux(struct bootm_headers *images)
+>  void enable_caches(void)
+>  {
+>         void *fdt = (void *)gd->fdt_blob;
+> +       int el = current_el();
+>         int ret;
+>
+> +       /* Map all DDR banks as Normal memory */
+>         ret = mem_map_from_dram_banks(K3_MEM_MAP_FIRST_BANK_IDX, K3_MEM_MAP_LEN,
+>                                      PTE_BLOCK_MEMTYPE(MT_NORMAL) |
+>                                              PTE_BLOCK_INNER_SHARE);
+> @@ -278,8 +280,11 @@ void enable_caches(void)
+>                 printf("%s: Failed to perform reserved-memory fixups (%s)\n",
+>                        __func__, fdt_strerror(ret));
+>
+> -       mmu_setup();
+> +       setup_all_pgtables();
+> +       set_ttbr_tcr_mair(el, gd->arch.tlb_addr, get_tcr(NULL, NULL),
+> +                         MEMORY_ATTRIBUTES);
+>
+> +       /* Unmap reserved memory regions */
+>         if (CONFIG_K3_ATF_LOAD_ADDR >= CFG_SYS_SDRAM_BASE) {
+>                 ret = mmu_unmap_reserved_mem("tfa", true);
+>                 if (ret)
+> @@ -294,6 +299,9 @@ void enable_caches(void)
+>                                __func__, ret);
+>         }
+>
+> +       /* enable the mmu */
+> +       set_sctlr(get_sctlr() | CR_M);
+> +
+>         icache_enable();
+>         dcache_enable();
+>  }
+>
+> ---
+> base-commit: 525ef034e5bed619c0f822da5373ed1fdadc8501
+> change-id: 20260512-am62_firewall_exception_fix-20a335cca769
+>
 > Best regards,
-> --  
-> David Lechner <dlechner@baylibre.com>
-> 
-
--- 
-// Casey (she/her)
-
+> --
+> Anshul Dalal <anshuld@ti.com>
+>
