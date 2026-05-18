@@ -4,126 +4,139 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74C81CD4F3C
-	for <u-boot@archiver.kernel.org>; Mon, 18 May 2026 10:09:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4A71CD4F52
+	for <u-boot@archiver.kernel.org>; Mon, 18 May 2026 10:10:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EBB9484664;
-	Mon, 18 May 2026 12:09:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 375DD84664;
+	Mon, 18 May 2026 12:10:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=pbarker.dev
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="T6dv6Tkn";
+	dkim=pass (2048-bit key; unprotected) header.d=pbarker.dev header.i=@pbarker.dev header.b="mh0du7nm";
+	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="BfHKeBtn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C6BCB8466F; Mon, 18 May 2026 12:09:04 +0200 (CEST)
-Received: from CY7PR03CU001.outbound.protection.outlook.com
- (mail-westcentralusazlp170100005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c112::5])
+ id 6821084664; Mon, 18 May 2026 12:10:56 +0200 (CEST)
+Received: from fhigh-b5-smtp.messagingengine.com
+ (fhigh-b5-smtp.messagingengine.com [202.12.124.156])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E0A1183FEE
- for <u-boot@lists.denx.de>; Mon, 18 May 2026 12:09:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 34B8B83FEE
+ for <u-boot@lists.denx.de>; Mon, 18 May 2026 12:10:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=wP3y5jxgwQ2sMokpg2LohctVHSPANMAH+1ac2Ej1R0a33GEKIo9EXz6vy1H5ucJ3Ys92Y5Euc7SMgHuveJ+e8TjjVt/5ikccjFajBoinKX8FVrIj1SgAt+IQQ12C5fxWJWelZgOsfHI9rJ5bAIqGNVu8Cy02Jpi3M4pqgzI859p0orGJfquaYXppGS7HmxbU629ySb+bAzzODXgyervFEcANf4dTEEKXWHvAM5Imk86Jingl49Qdc+xIhChaqfU2uVSyzXg5e+agFV8T0/svvNJ0+qxGcILFt51UmSUg+QFSp+EAvxdR2Ej+uSg6nusUW4ocxfxwNKcEjQMF8FPb5Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=1X2Wjsje6cyb1tL+0j258sWAjMe5zuybHcJ9zWXItoY=;
- b=LSsrQ+OswOmEU7cEh2DohcJgDsbt+gH6HkX8hpuuW0wdrAfn0sZS2GPI+oVuIyMm8ABq+nLJHQxxPlSe+9xyPmrXeh6f3GkfRfF7jxPZ8vZ/r6HG+eRecPVrf/sHXLatRRbL7ePZJfsTid1ufhbG0XB5KomP8vEe2vzGQ0oxEQXLiERHcvtiOVYr44Hk59Ta+TPj/Wm2tFyuPVR1h2lAW3lEu+Xhb7YzocYlSvga19wikv5iczFOhOXFNsyCscbbaHV35J0QNLop4YUlIf8852kaaDsbzecQ01M+Xlv0TAJ1Xkm7B+6VQNHhNX29xWS2b0DpHxXR7bOyWmStGFgJVw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.23.195) smtp.rcpttodomain=phytec.de smtp.mailfrom=ti.com; dmarc=pass
- (p=quarantine sp=none pct=100) action=none header.from=ti.com; dkim=none
- (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=1X2Wjsje6cyb1tL+0j258sWAjMe5zuybHcJ9zWXItoY=;
- b=T6dv6TknJhaJug6jrhio/+AAQlqOoQ2jP7z8Os+8u0PRy7wmytbwAJq9wdgFK3DivZuCXSuhUshnPaoiCOSIqMf180Z2jMKre2IAM1HHhbbjh+baj7UyRu74Mu21vjvDx/th1pdYDGD2XHNHCQMfH8EVhFCw1DdlyR+DslvDICo=
-Received: from MN0PR02CA0020.namprd02.prod.outlook.com (2603:10b6:208:530::31)
- by IA1PR10MB5921.namprd10.prod.outlook.com (2603:10b6:208:3d7::11)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9913.12; Mon, 18 May
- 2026 10:08:57 +0000
-Received: from BN1PEPF00004688.namprd05.prod.outlook.com
- (2603:10b6:208:530:cafe::76) by MN0PR02CA0020.outlook.office365.com
- (2603:10b6:208:530::31) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.25.23 via Frontend Transport; Mon, 18
- May 2026 10:08:57 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.195)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.23.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.23.195; helo=lewvzet201.ext.ti.com; pr=C
-Received: from lewvzet201.ext.ti.com (198.47.23.195) by
- BN1PEPF00004688.mail.protection.outlook.com (10.167.243.133) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.48.11 via Frontend Transport; Mon, 18 May 2026 10:08:57 +0000
-Received: from DLEE213.ent.ti.com (157.170.170.116) by lewvzet201.ext.ti.com
- (10.4.14.104) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Mon, 18 May
- 2026 05:08:56 -0500
-Received: from DLEE201.ent.ti.com (157.170.170.76) by DLEE213.ent.ti.com
- (157.170.170.116) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Mon, 18 May
- 2026 05:08:55 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE201.ent.ti.com
- (157.170.170.76) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37 via Frontend
- Transport; Mon, 18 May 2026 05:08:55 -0500
-Received: from localhost (ada0543016.dhcp.ti.com [10.24.72.233])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 64IA8soN1655309;
- Mon, 18 May 2026 05:08:55 -0500
+ dmarc=none (p=none dis=none) header.from=pbarker.dev
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=paul@pbarker.dev
+Received: from phl-compute-06.internal (phl-compute-06.internal [10.202.2.46])
+ by mailfhigh.stl.internal (Postfix) with ESMTP id B2E387A00CF;
+ Mon, 18 May 2026 06:10:51 -0400 (EDT)
+Received: from phl-frontend-03 ([10.202.2.162])
+ by phl-compute-06.internal (MEProxy); Mon, 18 May 2026 06:10:52 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=pbarker.dev; h=
+ cc:cc:content-type:content-type:date:date:from:from:in-reply-to
+ :in-reply-to:message-id:mime-version:references:reply-to:subject
+ :subject:to:to; s=fm2; t=1779099051; x=1779185451; bh=aJF4mbeTHA
+ 4sj46zntHpy3jGvrljoJc8eYh86jZqN1g=; b=mh0du7nmgpE0l00k2M1gZOm5jc
+ agoEi8t7rtqv7r6GRmx0WkxUxw61pxa8e/HPPKn8/h50/TgNkXnmS44OXT+LVkOC
+ aruv2RmDYNIh/MBfL11qkeMRdzDCzC0XtJlNRtOtcy5V4eJXApzAKXP5Dag+E89X
+ sOkidmnBXlSTQrXeYhCCugZ2Gd0gGvr1QrI7hTVDvhQxyNMEK0oUtWgtalcNx/zV
+ QiAqTQlk3uuICNE1VgzxFM3jQ5yaIpliSO01LrQMCkCC9iFyD4AK/B9suyaH6Age
+ hXtHJhtemAbj93tx3BscKKAXZgijJwxstcz6v3fRF/f5BRXFCEJygtt1GLWQ==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ messagingengine.com; h=cc:cc:content-type:content-type:date:date
+ :feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
+ :message-id:mime-version:references:reply-to:subject:subject:to
+ :to:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=
+ 1779099051; x=1779185451; bh=aJF4mbeTHA4sj46zntHpy3jGvrljoJc8eYh
+ 86jZqN1g=; b=BfHKeBtnokEOdNT5HWTdlaJujSWqzb1d2+4IMS2vtFRjConZ+WY
+ 1lbeGOLIEQ7f9gfetfL413AqJNuE7EMJrEZzgrj9eOi6ih1+ODzAmDcg5KfIkjbw
+ GbbGou02Fi1w/KKF6J9rN+F/oUra1rVL60aHYp5IFnNC9XVWEltZ3LEHcNN80sJg
+ Kd5ixNtwMpYN/a7+XYT06qyLnIHZezu40lT5rXRbzR0D0EhIEqUHmGv8fGNNcYC9
+ iJ8hCCeeioBurQTkeLLjm5bFSUU48WSlrDd4zgHiPULSzC32yCnbjNTTKGS902S9
+ AL4eNGDzYvFCCROpobeNcNFB15OPacaFtFA==
+X-ME-Sender: <xms:quUKahCBZykmiS5afCBoWUtvF8-yRJfIkwHdnYvZ93ZQ_87_PfD4Lg>
+ <xme:quUKamY685RH6W0PuceCb0iAU5WeQ46qIg9WgoZIpSiT7Jry_IunX5rhJn4MFHHvW
+ pgpWBJ0IhLs5UeXnKf-hZ9SUR892qU6AK4Z9lzBJ1xn9-rNBbozgp0>
+X-ME-Received: <xmr:quUKak4UIt9jYY_KcBJkfY6n0GflDjt6gvvBYqHeZJ8uh5G8hajWFuED0eP517yTbJJM4vonUs666edngWjPiq55rQRZw6D44AkGBg>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefhedrtddtgddufeekiedtucetufdoteggodetrf
+ dotffvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfurfetoffkrfgpnffqhgenuceu
+ rghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmnegfrh
+ hlucfvnfffucdlqdeimdenucfjughrpefkuffhvfevffgjfhgtfgggsehgtderredtreej
+ necuhfhrohhmpefrrghulhcuuegrrhhkvghruceophgruhhlsehpsggrrhhkvghrrdguvg
+ hvqeenucggtffrrghtthgvrhhnpedtudegueevheevjeejleeuudfhieekuefhkeegvdej
+ keegtdfgveetleetjefhffenucffohhmrghinheptddurdhishdpnhhishhtrdhgohhvpd
+ guvghngidruggvnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhf
+ rhhomhepphgruhhlsehpsggrrhhkvghrrdguvghvpdhnsggprhgtphhtthhopeehpdhmoh
+ guvgepshhmthhpohhuthdprhgtphhtthhopehtrhhinhhisehkohhnshhulhhkohdrtgho
+ mhdprhgtphhtthhopehsjhhgsegthhhrohhmihhumhdrohhrghdprhgtphhtthhopehuqd
+ gsohhotheslhhishhtshdruggvnhigrdguvgdprhgtphhtthhopeihohgrnhhnrdgtohhn
+ ghgrlhesshhmihhlvgdrfhhrpdhrtghpthhtohephhhonhhggihurdhjihgrseifihhnug
+ hrihhvvghrrdgtohhm
+X-ME-Proxy: <xmx:quUKanbjSYHC46NSUpB4SZWv3i8aMw4tvC39FDJ3hkx4LOfb_wxDNg>
+ <xmx:quUKajiar6gdO3K8WEO9I4AWe-Uch-ZwmT-1Zgx9cf7cDnYBZa3qeQ>
+ <xmx:quUKao9T71Z59a9KU8h_QFFSe1Y05eMdoIEl9rr1IirpANVGvZsrWQ>
+ <xmx:quUKaupVBmnyHHxzsseQo34yYPHYX3_sml2ZuUj3aj_WQV9IpQFaSw>
+ <xmx:q-UKavahHkQmdXL5qPjuKgbjErzVqgeAYxGVjvYYHXqoDTrM0hSASaXJ>
+Feedback-ID: i51494658:Fastmail
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Mon,
+ 18 May 2026 06:10:50 -0400 (EDT)
+Message-ID: <624edb010c76e59ef3e461fd487e25a2985c0089.camel@pbarker.dev>
+Subject: Re: Status of CVE-2025-24857 in U-Boot
+From: Paul Barker <paul@pbarker.dev>
+To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de, yoann.congal@smile.fr, Hongxu Jia
+ <hongxu.jia@windriver.com>
+Date: Mon, 18 May 2026 11:10:47 +0100
+In-Reply-To: <20260512183611.GQ1858239@bill-the-cat>
+References: <cb01c903e27bd1aa6198a51b138409c08abd3373.camel@pbarker.dev>
+ <20260512183611.GQ1858239@bill-the-cat>
+Autocrypt: addr=paul@pbarker.dev; prefer-encrypt=mutual;
+ keydata=mQINBGC756sBEADXL6cawsZRrDvICz9Y1SG0/lW1me4xpq36obh7a0IGAzp3ywNRb/4MO
+ DTqP4+DD0cIFuDY41/N17g0sNlp8z+/k/IIDmNPtYQOTVmAkrkdDU4BP8dD3Cp1PUw6nrbInfujAJ
+ NrVM0IVDkwKTbL2Nu1P+xns4MIpF9Kj4XN5celYJ9vEJ2n0Bo0nO5T5vg46dihIaDl+24iNIHSsHq
+ YyEdMBfY8kY2RulpaAyFOuaaHdIeDkejVvO5xLSiYLjB5qrRhgH134lJXsuLOsFQ64ybGECuOasnb
+ auevsPBAaroQW0pqVb9FneGrWHxMCLlQHJRqQJRdVa6bsUdp6NWra8/0msPawSrFwGQdfJBTA3aXJ
+ C2CG1JxEgj6QQjEQA49DSjgzdhInbiIK8Vbp/zedM4aVue7qJnwPMTFQM9lYx63b7wLN4Tu8B9YZ0
+ UFdSwMCJuqmYGsYRUYdwM3ArjS0VO6WpU+HBKvzLK5GQfUTSM8KaZ5eA2Uo2ain8SSZb+WptUYKpx
+ F9jbtCPbjpZKzGuX4iHFl9eT75TM9iXJNGAjB5xigkADLwVfPoJ5E53S+KdNVuOWHugyLMPNAQHOw
+ pw5Rey+0zxyzPd4wphutc93UIU5g/029ngAc7DuKCq12jl7fhkjqFlFtYPIc1k7nd+RSezmH/qRes
+ bMErHSX1MBSZQARAQABtB5QYXVsIEJhcmtlciA8cGF1bEBwYmFya2VyLmRldj6JAlcEEwEIAEECGw
+ EFCwkIBwIGFQoJCAsCBBYCAwECHgECF4ACGQEWIQSYsqrBAKw/grtdVGd0l1yBt+ZrrAUCaWoNAgU
+ JCxiQFgAKCRB0l1yBt+ZrrLhdD/sH+qTaxCDUg47eW329yJWCDZmO+iuYzNSyHMs1x0DHKNIQQ8zN
+ pA2S/de4jElQuPHjw/IS8B3VmM62Wuq5vHuxNlFv9IMwrwqi6zhCDui8+nCN/AQGGXousJI/SeZjm
+ Y5gS9cqh4vNY+huqEEfdTFXIfTBRkmnvYozSO2uDB3EMuiWgBlw2uLrtmkvPLn/m/GvEouLNox6wv
+ tcJcIbL59a0+3jv/m7pnWoZXOkWmKQnfFWikqjuKCISNU0gzBSL4UOj8gtQ2z+vu7ffi29b6SV5IL
+ m1yzdbkigEn4HL44lz3N+oHZ3wWsRqqeyGSX5fCfx3tGWg6scZQrpsjT5yq+LiffiXVNpjeJ9KzQw
+ 0cbAZ/9uhk1sWBroP+/gMhsWjlbFYXVlRvkNKGPI22eZtOEz4jF6OrOONyOoY3i26niJUyIgdBpca
+ H0hKUSVQ8VnG7qVTNrQk9BbeoSszqRwViN7lfyVtK9b1TCFuGewOETGn0TPvSzruYCtD3CLm7mjuX
+ AMBpIGoRUiCFVmF1hlOgqDyH4F6zRTHhKLpfmNzfQcg+Uo147Q2IHpoh0mJsL4FEZEI8hFyecX1Pq
+ 7HqnvxGD2OhCof1Z6LDxptX0wbgocnYFNxN5S1owcXZUQOFnzYLlLugrcEjlGCm4Gn7k4SiFERSBj
+ UFsQgIhw/7lVVn4o4rQjUGF1bCBCYXJrZXIgPHBhdWxAcGF1bGJhcmtlci5tZS51az6JAlQEEwEIA
+ D4CGwEFCwkIBwIGFQoJCAsCBBYCAwECHgECF4AWIQSYsqrBAKw/grtdVGd0l1yBt+ZrrAUCaWoNAw
+ UJCxiQFgAKCRB0l1yBt+ZrrHy+EADNMt+ewz8H7BUKpEMMhpaA1VxyXO5IqlKXS0gElMgHYXl7L7C
+ 0/qLfRH96vwVD33zM+f0Vl9aWWkom/k8s42tLyPvX7D5zTrj3r5muJ+d9dXWGwBFXxXlE9YjSP26K
+ bYfRusmRHbbEPlLPSnrr9KYS2FGVD6ViRNhhVguflgPv2i18+fNBE3YyByfNCiQgO/SgaSdh172Ql
+ tuYE1Chk6FD45tCUv3dI9lO2PlVwrciiVYvIv/jiTDEwZOISOClTE/Ha18pxDJfLhS8QQnLWuBNX6
+ HUkLi78fVmVYbcWIkTuSHjfNoGTMaFijMg9Wl6poFrY++Pl0S40681zEIrwZhW5pKoqXoaElt29Yf
+ OwVo6BIsSOLEqKiWsdP7PJTaJYU1ovnshBcOmuXMgc13AjQ4AhEGqI1TaEJ/E1jEDDyTQFeWgrfew
+ YaWdqpgiDmRMTj/tIGVj9iy7qZQICUUtlfm0QK6w6M7qq0GdO2o+S3uVF6y2AxQo8l9LSHiW9O35I
+ juR37zeqv72puYyOteVYJsJaw999HUmhXc/X/J9FQFw8twxPKDLLu+w8MqDo9bhllzR93Zy/OShuG
+ yGybcX3DKO2R+AQ90tXLbxKmHLtrnG/zyDPhLv/LGD480v5hEoT+IS0u9wPD2vP5q36a5DtzqXA/7
+ t9PCamLoCvZLleg7GY7QbUGF1bCBCYXJrZXIgPHBhdWxAcGJya3IudWs+iQJeBDABCgBIFiEEmLKq
+ wQCsP4K7XVRndJdcgbfma6wFAmlqDRwqHSBwYnJrci51ayBkb21haW4gd2lsbCBiZSBhbGxvd2VkI
+ HRvIGxhcHNlAAoJEHSXXIG35muspk0P/1G08N6zGSdw2p8+8f/1HhaYEb9KdQHT1JmQfZUrIHIpD2
+ ELNb91Z6Pz197d/igGpox1dzYOwE0WolWo44ZHX2yw+p9V+HJAUKRe0SPc1iNLkTzaAZ7oYJ1DnFh
+ aaqZi4VtKKabKeorJjcDvl2apMwT0agRuDklU97n++ZUuXIEo1Z9uRqEvXz0iTSY7wPxwfoVOQsgf
+ dN1cBLd9OpoOtJRdDJzQUYqjNoQi+5M6KRfBxPLZkmYb4uCGlp1H4AV50eC61j84LBg1ItvU2u+Fx
+ X2JB7lHTswubprD2ZsSwp1VziU6pUj3vtslMWKpBGslpLtnaO561dihGyElayMd4VFg7VR/TsglJv
+ A10EDs2DMhoYPfRQWvwlr5+jPP6s9H8KSTCGFvQt438rP/gk0lcEZUJK0iE2/yq5gQfaCNI5FLN7C
+ q8LVr00oS4doXfmFFxMq6z1rs5SXZorWssjG7v5DILnPxLqYloQK/ebM5Ixbzm0Lq/8vWL7sw7yOH
+ JVYCHCApGzKNii6rYyHdi0K8UwvpD++GCWLyvbgP/H3l5FqL63gAN0Rw1CO5r22+SmG7aOmekJH3N
+ ChZPI3NMLnKZPJC8ZQZ4S8yb5oA3rqTA2DMODvsrEVlaB2cQ6IWHSa/mvBwA8Ias3771cp4fZS7W7
+ LUewj8JVy0aJsGTwI4invl
+Content-Type: multipart/signed; micalg="pgp-sha512";
+ protocol="application/pgp-signature"; boundary="=-gbeM4mI9V04TnTUB85dx"
+User-Agent: Evolution 3.52.3-0ubuntu1.1 
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="UTF-8"
-Date: Mon, 18 May 2026 15:38:54 +0530
-Message-ID: <DILPXRDLFPM0.1YN1BKZR69L95@ti.com>
-CC: <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, Dhruva Gole
- <d-gole@ti.com>, Mark Kettenis <kettenis@openbsd.org>, Patrice Chotard
- <patrice.chotard@foss.st.com>, Moteen Shah <m-shah@ti.com>, Beleswar Padhi
- <b-padhi@ti.com>, Wadim Egorov <w.egorov@phytec.de>, Chintan Vankar
- <c-vankar@ti.com>
-Subject: Re: [PATCH master] mach-k3: enable mmu after reserved memory is
- unmapped
-From: Anshul Dalal <anshuld@ti.com>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>, Anshul Dalal
- <anshuld@ti.com>
-X-Mailer: aerc 0.21.0-0-g5549850facc2
-References: <20260512-am62_firewall_exception_fix-v1-1-4b274718bdac@ti.com>
- <CAC_iWjJHnzfgMThnUnzd=s_21wndWX57pinNMoq9As+e_TSOOQ@mail.gmail.com>
- <DILOQEO4WE9D.AVK6J4D35NY4@ti.com>
- <CAC_iWjJ9qhN8an2Z=J6+7-N+wPQ31gPAimBSEdHGLkiU5BR_NQ@mail.gmail.com>
-In-Reply-To: <CAC_iWjJ9qhN8an2Z=J6+7-N+wPQ31gPAimBSEdHGLkiU5BR_NQ@mail.gmail.com>
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN1PEPF00004688:EE_|IA1PR10MB5921:EE_
-X-MS-Office365-Filtering-Correlation-Id: 5b2784a6-82f8-4f29-78d9-08deb4c57982
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|82310400026|376014|36860700016|4143699003|56012099003|22082099003|18002099003|3023799003;
-X-Microsoft-Antispam-Message-Info: 2xdjk32Jc0LS5OJHvFgGYN4gpBTlk/CGOgg22VKWvqBeQ/0APRanVfi5x2qK3Q+NwsddUEm+IsgdnL6Xie/gE7X2cDm07imBLpAlOg2hnFQ3aFf6isEPDHNj/9U2MkZGKTrxD/aojUmbo1tuRw5d4PDFSJPE36dujxegRkbfy1gX1jXtThVE7gclSPtbQf/CYAErvj99PnYJE7qQ5Vr9mG0nU1qb0i5szy+I/SwWJtj/K49gbdJBRrsKbOeg31XO4hyU06NPH9U2eJBGgnm/ZcZt6t6uLrl+4suDHQ4a0wkOR4p/vtbzdxJ2jhGwcdJrFFfPMWfT0cF1JUfKZso/uh3HlqYAkGpeVNofvoIRSLww5x19GOzH89VIKuboAh8J6dDowzkq+rI3RM7/vDzQgaHIEUdIE8KrxFH28hZb1bQ1+GmORcqnKERU4eEferrawBMWxYEvdhRoa8mPmOJdG0fO6Q8cmzIf5sdc/CRrNbOvQiZHqU05eQnpP0reEFOtAKqGkUCaFDAWtnxPJ9LGgvkVuj8WCCGrvUrqMHzcH96Plg6IqGZbePEpk9MZp6iaYsQQUBQBNNQqd17maUM6w/nbIQOCH87+UxKYZ7xhBY9ogf64ymtmkMcxWEj2exM+7xqhgp334RqH60u/bdEy4ZTnb2Ky9iKHrA8zdMTglmjL4DoKgy14harFdfxdDlSttBDCgxrym7/ByWvBgb1Rh5gM+701lAXXNdJAk3jitac=
-X-Forefront-Antispam-Report: CIP:198.47.23.195; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:lewvzet201.ext.ti.com; PTR:InfoDomainNonexistent;
- CAT:NONE;
- SFS:(13230040)(1800799024)(82310400026)(376014)(36860700016)(4143699003)(56012099003)(22082099003)(18002099003)(3023799003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 6G1OzRx8LxIGO31cjWfytJAXYnQ82HTEJR0vtMN6YwOm26uH+A3GlnmZSGscoMoNG6a6T2EsGZKelKJMNQ8Pe++2GdLb/FfLGyJO/edjx1dI7h12g3p8sZS12jp5CgtoMvXCh79UKykKeLwNfkEkxdeKv1lRvXGOPI/7I1c2ofsoZ7bhArm215HW8glzTjJKAKQW1T8EkXywbgEvWFilMBys3VPd2cyslyxxTTLkt9lPzsBA3L8u7Lm7pT7M/pX1vemZ+BgikrH/NQguhlYbK+CamjvCLPUa0gc/6aCls+kNrMqCqCbA8EGrDPwcXHD1wOhhFtNLR9HTQgFmF1PJEq1Liu2UluZVgSHW0hzsSlrG3rirqpmL5etJXw8h1UZXm6nEg9ZkkOXFiU7iV78U5J3qhMjdXr0ASrc8lbBUIPJP6ZX1dV9M5qI7R7Z/84CX
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 May 2026 10:08:57.2197 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5b2784a6-82f8-4f29-78d9-08deb4c57982
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.195];
- Helo=[lewvzet201.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: BN1PEPF00004688.namprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR10MB5921
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -140,98 +153,69 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon May 18, 2026 at 3:18 PM IST, Ilias Apalodimas wrote:
-> On Mon, 18 May 2026 at 12:12, Anshul Dalal <anshuld@ti.com> wrote:
->>
->> On Mon May 18, 2026 at 1:34 PM IST, Ilias Apalodimas wrote:
->> > Hi Anshul
->> >
->> > On Tue, 12 May 2026 at 14:03, Anshul Dalal <anshuld@ti.com> wrote:
->> >>
->> >> Currently the sequence to enable caches for the A53/A72 core on K3
->> >> devices looks as follows:
->> >>
->> >>  1. Map entire DDR banks
->> >>  2. Setup page tables and enable MMU (done by mmu_setup)
->> >>  3. Unmap reserved-memory regions
->> >>  4. Enable caches
->> >>
->> >> However there is a brief period of execution between #2 and #3 where =
-the
->> >> core can issue speculative accesses to the entire DDR space (includin=
-g
->> >> the reserved-memory regions) despite the caches being disabled.
->> >
->> > This is indeed a problem and the fix looks correct.
->> > What worries me though is that the mmu is common across v8 boards. Is
->> > there a way to generalize this instead of adding per board variants?
->> >
->>
->> I think the issue here is that mmu_setup does two things, first it sets
->> up the page tables and then it enables the MMU right after that.
->>
->> We could modify mmu_setup so that it only does the former as follows:
->>
->>         --- a/arch/arm/cpu/armv8/cache_v8.c
->>         +++ b/arch/arm/cpu/armv8/cache_v8.c
->>         @@ -801,20 +801,20 @@ static void setup_all_pgtables(void)
->>          /* to activate the MMU we need to set up virtual memory */
->>          __weak void mmu_setup(void)
->>          {
->>                 int el;
->>
->>         +       /* disable the mmu */
->>         +       set_sctlr(get_sctlr() & ~CR_M);
->>         +
->>                 /* Set up page tables only once */
->>                 if (!gd->arch.tlb_fillptr)
->>                         setup_all_pgtables();
->>
->>                 el =3D current_el();
->>                 set_ttbr_tcr_mair(el, gd->arch.tlb_addr, get_tcr(NULL, N=
-ULL),
->>                                   MEMORY_ATTRIBUTES);
->>         -
->>         -       /* enable the mmu */
->>         -       set_sctlr(get_sctlr() | CR_M);
->>          }
->>
->> Then we can have an `mmu_enable` to explicitly enable the MMU:
->>
->>         void mmu_enable(void) {
->>                 /* enable the mmu */
->>                 set_sctlr(get_sctlr() | CR_M);
->>         }
->
-> Ok that sounds reasonable. I greped for mmu_setup() and
-> dcache_enable(), but I can't estimate how intrusive this is going to
-> be to include all v8 boards.
->
 
-From what I can see, mach-k3 is the only user that explicitly calls
-default mmu_setup whereas others just override the weak definition.
+--=-gbeM4mI9V04TnTUB85dx
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-I'll test the next revision on several K3 boards and post the fix.
+On Tue, 2026-05-12 at 12:36 -0600, Tom Rini wrote:
+> On Tue, May 12, 2026 at 11:39:32AM +0100, Paul Barker wrote:
+> > Hi folks,
+> >=20
+> > We recently had a patch sent to Yocto Project to backport a fix for
+> > CVE-2025-24857 to our Scarthgap branch which uses U-Boot 2024.01.
+> > Looking at the CVE info, this has confused me a lot. It says [1]:
+> >=20
+> >   Improper access control for volatile memory containing boot code in
+> >   Universal Boot Loader (U-Boot) before 2017.11 and Qualcomm chips
+> >   IPQ4019, IPQ5018, IPQ5322, IPQ6018, IPQ8064, IPQ8074, and IPQ9574
+> >   could allow an attacker to execute arbitrary code.
+> >=20
+> > The NVD page says it affects U-Boot "Up to (excluding) 2017.11".
+> >=20
+> > But, the patch that says it addresses CVE-2025-24867 was committed to
+> > U-Boot in December 2025 [2]. The first release containing this patch wa=
+s
+> > v2026.01.
+> >=20
+> > Is this commit actually needed to resolve that CVE? Or is it some other
+> > change back in 2017 that fixed the issue? (A yes/no is fine, I don't
+> > need a link to the exact commit)
+> >=20
+> > [1]: https://nvd.nist.gov/vuln/detail/CVE-2025-24857
+> > [2]: https://source.denx.de/u-boot/u-boot/-/commit/87d85139a96a39429120=
+cca838e739408ef971a2
+>=20
+> This is a "funny" one. The reference to v2017.11 is due to when we had a
+> large rework of the FAT code and so the most obvious way to trigger the
+> problem was removed. The changes in commit 87d85139a96a ("fs: fat:
+> Perform sanity checks on getsize in get_fatent()") may, or may not, be
+> only a sanity check against performing similar attacks. So yes, it would
+> make sense for Scarthgap to have this change.
 
-Thanks!
+Hi Tom, Simon,
 
->> >
->> >>
->> >> A firewall exception is triggered whenever such speculative access is
->> >> made to secure DDR region of TFA or OP-TEE. This patch fixes the issu=
-e
->> >> by re-ordering the sequence as follows:
->> >>
->> >>  1. Map entire DDR banks
->> >>  2. Setup page tables
->> >>  3. Unmap reserved-memory regions
->> >>  4. Enable MMU
->> >>  5. Enable caches
->> >>
->> >> Fixes: f1c694b8fdde ("mach-k3: map all banks using mem_map_from_dram_=
-banks")
->> >> Signed-off-by: Anshul Dalal <anshuld@ti.com>
->> >> ---
->>
->> [snip]
+Thanks both for the replies with info on this!
 
+We have accepted the backport of commit 87d85139a96a into our Scarthgap
+stable branch so we should now be covered with both belt and braces.
+
+Best regards,
+
+--=20
+Paul Barker
+
+
+--=-gbeM4mI9V04TnTUB85dx
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+
+iIcEABYKAC8WIQSzjPXf5Y1BDWhU2iCrY1Tsnbr0bgUCagrlpxEccGF1bEBwYmFy
+a2VyLmRldgAKCRCrY1Tsnbr0blPvAQCLCEyAOcphn7wQXFW9Pd51+DQG5wFUU0aA
+c7tEsPg0kAEAgL3OfulkI/I0s+ppY8z9GzI8+qgGxE3MvrCUznWs0gw=
+=zdRa
+-----END PGP SIGNATURE-----
+
+--=-gbeM4mI9V04TnTUB85dx--
