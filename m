@@ -4,90 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25227CD4F49
-	for <u-boot@archiver.kernel.org>; Mon, 18 May 2026 15:55:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A05FCD4F3C
+	for <u-boot@archiver.kernel.org>; Mon, 18 May 2026 15:58:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AC64B83FEE;
-	Mon, 18 May 2026 17:55:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 0CBF883FEE;
+	Mon, 18 May 2026 17:58:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ZK63/FAf";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Q2qtpBAn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 47CAC84664; Mon, 18 May 2026 17:55:08 +0200 (CEST)
-Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
- [IPv6:2a00:1450:4864:20::32d])
+ id 5BF2184119; Mon, 18 May 2026 17:58:49 +0200 (CEST)
+Received: from mail-oa1-x32.google.com (mail-oa1-x32.google.com
+ [IPv6:2001:4860:4864:20::32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 47C5A83EF9
- for <u-boot@lists.denx.de>; Mon, 18 May 2026 17:55:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3560E83EF9
+ for <u-boot@lists.denx.de>; Mon, 18 May 2026 17:58:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wm1-x32d.google.com with SMTP id
- 5b1f17b1804b1-488e1a8ac40so25440785e9.2
- for <u-boot@lists.denx.de>; Mon, 18 May 2026 08:55:04 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x32.google.com with SMTP id
+ 586e51a60fabf-439c3cc76deso1688500fac.1
+ for <u-boot@lists.denx.de>; Mon, 18 May 2026 08:58:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1779119703; x=1779724503; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=eKwwOeREfUOl8PhO4+FC0zekU8n20oKaiFUSgJfqa+Q=;
- b=ZK63/FAfvlM08PerFrHMs5hSy6sZWTK5sWwNiK8WgtaaOILL1oqs5mc3O4ekfujMny
- r/ogIsaIHIVNIcifLPQBZKX6fTdLSvMH+2LmBg3vCE4Ejhij70HzDtqZwpJaRiFf9pCi
- 1TDy55FYGgZcxNFvuzUSMI+ASy7yokH+sOKLZ9zR6i2vjRlPOLYOqe6BGhQgLsgupssh
- z/w5q1AuvUoqyR+5ZekvOI87EmbZ68wCmie7/68kkk3an9cq4eZP0o1QxgIQoZ9iTLBX
- IJgR0ck+AWs7shwT8puUGKVPYUdwL0CKmscZLUQ9QbD3nwJ1myjHyio736clZqoBZ5J5
- hPpg==
+ d=konsulko.com; s=google; t=1779119925; x=1779724725; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=ogM0XgRuDv3jxz/axBveVLzBjZYs/hhqlXjRjdqyLks=;
+ b=Q2qtpBAnA6eaptxa+tNNGQnpNB1HtJ6JjY1aSlT9CggoR3kC1B5yEHLM4OdIeo6GAB
+ CkJwqNckVag8SB0cy6v0qNEz7AHKvsE16E88zGKr9DniSPgYm5vwfYnWgoy8i9ebD6pc
+ vhS0oIH313XQ2WkhkDiSGzzUuBL0lFn84e7Os=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779119703; x=1779724503;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=eKwwOeREfUOl8PhO4+FC0zekU8n20oKaiFUSgJfqa+Q=;
- b=pYK8xM/OcUX7AJ6gvl5aDL6TfLVPjVyLvaMYHMab0L0oerh+GNZAC+tSgDgj5Lu+9U
- LCoOuVbfH9TFGrRIESKeHmhtpMYPsilGDHKKknD9obRPG1L6XdSH8Qk+luHle4Xkb20U
- ixYlsHzk/l14gS4O8FZ+YX4K7/PRFNnc+S80a0kNKWl7NNMVtjNurNqme4r9vNrrgxoN
- Z34Fd3bIHXJ9lgHQQTUqnVaLaN+ZGtbXVOsfjWQKK2YgKILBMWcd2gQp12zStACANXVY
- tdfM2ZM6g1AUM2GreSa54ktv1QS34ksHIuVJh2kINlEX8iMNhps03jzmr7808kfxk6ds
- otIA==
+ d=1e100.net; s=20251104; t=1779119925; x=1779724725;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=ogM0XgRuDv3jxz/axBveVLzBjZYs/hhqlXjRjdqyLks=;
+ b=XALVpL7lfpcepblnMNBrzi5FWyQ4O6SXCMXDjE+BFrMRW0IcbHOR9SbouJMNK54JLC
+ +rbQG+d5jREoDOTdnUyQh3/cwkjK0na4i7HaSqgO4C7Wy//cqi1UfV9Ok9B6bxjkcuZ3
+ RYiDwMtxdFQ92PsbDHcrB0UeDDEvhA9cObTlgkLtGGAhFNduSdtBsHLqrpxI7IW/iXrr
+ VO47hCTN+QG9YrEVVB2/iRJMveJ82dsZfwOojp82aAy0TQSioRXzp7NWUBlsvLEH1CrU
+ 7E3A+4ZS+2/PdUFooINs+NxPjgPG+KC9Xiqv0+j5ssYbVGh5Xn+qPN1IdKUE92SYkzJu
+ xPHQ==
 X-Forwarded-Encrypted: i=1;
- AFNElJ8EgDCvR3CS7hlLBKKSGx/NBbAELpAM2DcF0evMwt2gF/mgK+ywVPhNvA2SzfqUxjDyDX9GcVs=@lists.denx.de
-X-Gm-Message-State: AOJu0Yxf7hMsmxnMOkt1fO3cL0iy+w9Ppx2yZCfsOdqwnwaG3OTRTHS3
- MX0wj5brY1C7eo+zV9jQYo+70Ius3GvBW5vv8PPAdmvmXkEtfAMZn7m/Xzf18vcBkeI=
-X-Gm-Gg: Acq92OEha1LFEAQzMRJW7r2/DgdK5JutaQqvEMsmyCTJtWoJKyLgw7N71F1s3WVrRmS
- ltG8ZweIC8wmYdh7HTV57AEzh8YbFtABEZxVs/e+6MxBvEq6vS/7u09xG/8V4yhBJRGXzycf9HV
- 6CZA7moginbxPV0Wdi14BGd/VrirBIhgOKxfILBOxgs88GEK1C9tNaHHScqFgXQ79nzioojJGpG
- FhuhkjYh6kMrTjiUawOcxdVNdXUSb8FLhfxBRxWtbsLWdtltixX9GAIqrmZ2qRwPqOp1qiNhNEm
- Xs2JNV0lK4zO7LIOalg4v08rIlzH9f5KZasVXGM2FmMFyzTUWkHyJ8Y/jWo6gCRL4jW92+PwTlk
- 4hJQTQcLLcDpA/T+gvNfrPYcvY3KMeRDSMy9dJqqDTZb3dbdARJOccU3+8nf4l/wMXjV755HsLB
- HTutnMOojaQV55YPQNPZDzWJx0/2hHKCLnQBC5kp8dwfxRukFJlT03j93sSzvoKpxRDc+gIg8u1
- spOjiHaWMbe0qY=
-X-Received: by 2002:a05:600c:6290:b0:48f:f199:7a33 with SMTP id
- 5b1f17b1804b1-48ff1997b3emr206850205e9.28.1779119703574; 
- Mon, 18 May 2026 08:55:03 -0700 (PDT)
-Received: from lion.tail248178.ts.net (p4fc3dd86.dip0.t-ipconnect.de.
- [79.195.221.134]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-48feab26ed9sm123610165e9.2.2026.05.18.08.55.01
+ AFNElJ+Aq3YQTyLIxPxQdBMmJo7KY9CpYFipVSPTLrM66/02sl9n7AhrTWsQjQycMPlSUcWawND+gXA=@lists.denx.de
+X-Gm-Message-State: AOJu0YxRirkhtHoquaC1Ghz4/NC9qrOgOUp0drJyrg0zWYUh5LOEblGV
+ g0OIbrJaA5dmqqXi04FJVwG/gw9lPEEnPxpe2AIqo4wHf+oILLUljkMMAMKwj638MQQk2pe5CQ0
+ 0+SnZKE2keOsr
+X-Gm-Gg: Acq92OEKXkOJEMw8lZ/vCvvhgsD4q4ar+fg6RrCEFthz3xHQvRu9vG66gTB6BIqOLzo
+ 4avjhkmyeh2yqjCcXyJFdE9W9IURMdtUD+/JREoWHZoJNiApMtj0crjquVfWhGq3tfcBP23T0fL
+ llEiJ/8JcPdDI2SuPNILrfRWi2EFvS+z8ym6C+k3Ck1oFUU0/DVzP/F9nejDCcgCgiPAfLXjjAd
+ fyt/8AtuMXAM0MGw0/XmyIeEWe8C1PEBXrjEYM97J1dZQD+KrtS4h1ZgDRNFtwRlnFyFx0azie4
+ wXQj2hkef2XZFzWL4KpRf+Mt4luj60UyCpW9G/GKIgIio4zbhcBZF0zxw1bcGGVr+CMwa+QgtT2
+ cRVGG4a7NiFHb8KWzqR/jEu3FmVfZqhXfssnliDCpPMfy/Cw5xIA7/6l64HA6piOa70TDqhviag
+ KEgyGyrpHrIgvLVdlg7q877+AnZ6cPubFhvANp08Mjv6VuFpklpLnAcExeB2BXRDZ6IzJWwffjt
+ 0rX3iBoYEycDEPJUYb80WOYaHeyPsfOgmKWpjyk5mSb8XnTRHw=
+X-Received: by 2002:a05:6820:62a:b0:696:15bf:ca5f with SMTP id
+ 006d021491bc7-69c9430100cmr10002365eaf.19.1779119925432; 
+ Mon, 18 May 2026 08:58:45 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
+ [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-43a956fa075sm4444730fac.10.2026.05.18.08.58.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 18 May 2026 08:55:02 -0700 (PDT)
-From: Casey Connolly <casey.connolly@linaro.org>
-To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de, u-boot-qcom@groups.io
-Cc: Sumit Garg <sumit.garg@kernel.org>, neil.armstrong@linaro.org,
- Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
- Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
- Biswapriyo Nath <nathbappai@gmail.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Timple Raj M <quic_timple@quicinc.com>,
- Casey Connolly <casey.connolly@linaro.org>
-Subject: [PULL] Please pull qcom-next-18May2026
-Date: Mon, 18 May 2026 17:52:18 +0200
-Message-ID: <20260518155457.270420-1-casey.connolly@linaro.org>
-X-Mailer: git-send-email 2.53.0
+ Mon, 18 May 2026 08:58:44 -0700 (PDT)
+Date: Mon, 18 May 2026 09:58:42 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Michal Simek <michal.simek@amd.com>
+Cc: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
+Subject: Re: AI-assisted review
+Message-ID: <20260518155842.GR1858239@bill-the-cat>
+References: <CAFLszTjnL6rn_mTA+jhcrRLF0yEtN4FVwTeGGy9GeGbgdB9fYw@mail.gmail.com>
+ <20260515220758.GM1858239@bill-the-cat>
+ <46705f94-6cef-4016-ab05-7839514e9257@amd.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="B3jBl5VART0gRmbN"
+Content-Disposition: inline
+In-Reply-To: <46705f94-6cef-4016-ab05-7839514e9257@amd.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,86 +101,81 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
 
-Here's the initial next PR for qcom.
+--B3jBl5VART0gRmbN
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-* SM6125 gains initial support
-* The qcom clock drivers get better support for configuring UFS clocks
-* ufetch gets some aesthetic improvements
-* A minor bug in the qcm2290 clock driver is fixed
-* A few qcom drivers get static/constified
-* the GENI serial driver has the RX watermark register properly set
+On Mon, May 18, 2026 at 10:55:40AM +0200, Michal Simek wrote:
+>=20
+>=20
+> On 5/16/26 00:07, Tom Rini wrote:
+> > On Fri, May 15, 2026 at 03:03:21PM -0600, Simon Glass wrote:
+> >=20
+> > > Hi,
+> > >=20
+> > > There was a query on the call this week about whether I am doing
+> > > AI-assisted code review. As I said on the call: yes. Here is a brief
+> > > description of how it works.
+> > >=20
+> > > It is built into Patman (on the Concept tree) with a new 'patman
+> > > review' command. You give it the series name / number, or perhaps a
+> > > patch name/number and it applies the patches to a new branch, does a
+> > > review then adds its comments to its database.
+> > >=20
+> > > A '-d' flag can be used to create draft emails in Gmail (sorry, it
+> > > doesn't support other email programs yet). You then check and update
+> > > the emails and send them (or delete them). I am not an expert in
+> > > handling the 'user voice' part of AI, but have made an attempt to make
+> > > it follow any provided configuration, as well as to scan recent
+> > > reviews to actually create to create a voice.
+> > >=20
+> > > Obviously this is very rudimentary and could be expanded considerably.
+> > > But the mere fact that it creates draft emails is a win for me, even
+> > > if I ultimately delete or rewrite most of the comments. I can imagine
+> > > 10 different ways to improve it to be more useful.
+> > >=20
+> > > I wrote a blog post about it if you want more details, or you can ask=
+ me here.
+> > >=20
+> > > I am very interested in hearing how others are using these new tools
+> > > for code review.
+> >=20
+> > And the big thing for now is that since we as a project do not yet have
+> > an AI policy aside from "please don't". One of the points I was making
+> > on the call is that there's a difference in value between "Human
+> > reviewed it, looks fine" and "Human spent some tokens, agent didn't see
+> > any problems".
+> >=20
+> > And I know several other people have been doing at least first pass
+> > reviews with various agent-tools, it's just no one else has been posting
+> > reviews at your scale. And lessons learned from other projects is that
+> > the prompts are more important than whatever wrapper around the agent
+> > one is using.
+> >=20
+>=20
+> Don't think scale is the problem. Tool and integration is another topic.
 
-Thanks!
+Simon posted approximately 100 reviews in about 24 hours. That scale is
+a problem, when most of them are just reviewed-by tags, from someone
+that has a history of doing human reviews. Reputation is a factor here
+I'm trying to figure out how best to articulate.
 
-The following changes since commit a6f6947e43fba91de3ec5d0390eee7eb1a6a80f7:
+I have thoughts on the rest that I want to get back to later, thanks.
 
-  Merge tag 'mmc-next-2026-05-15' of https://source.denx.de/u-boot/custodians/u-boot-mmc into next (2026-05-15 08:18:49 -0600)
+--=20
+Tom
 
-are available in the Git repository at:
+--B3jBl5VART0gRmbN
+Content-Type: application/pgp-signature; name="signature.asc"
 
-  https://source.denx.de/u-boot/custodians/u-boot-snapdragon.git tags/qcom-next-18May2026
+-----BEGIN PGP SIGNATURE-----
 
-for you to fetch changes up to 0d131b3b06023c3fe0d1a98588e17a7894e318f0:
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCags3LgAKCRAr4qD1Cr/k
+CnI1AQDetZcGlNLTpDFjEmG8yVDjsiEQ9CKSenPNmsUzOVV9jAEAoS0kP+V405LS
+qf00EO6RoKZM1vLplxZMVrrm1Any/Ao=
+=0cNE
+-----END PGP SIGNATURE-----
 
-  board/qualcomm: qcom-phone: Add poweroff command (2026-05-18 11:06:53 +0200)
-
-----------------------------------------------------------------
-Aswin Murugan (1):
-      dts: lemans-evk-u-boot: add override dtsi
-
-Balaji Selvanathan (7):
-      clk: stub: Sort compatible strings alphabetically
-      clk: qcom: clk-stub: Add compatibles for QCS615/SA8775P
-      clk: qcom: sa8775p: Add UFS clock support
-      clk: qcom: qcs615: Add UFS clock support
-      clk: qcom: sc7280: Add UFS clock support
-      drivers: ufs: qcom: Initialize and enable clocks before hardware access
-      ufs: qcom: Remove redundant POST_CHANGE clock setup call
-
-Biswapriyo Nath (6):
-      clk/qcom: Add SM6125 clock driver
-      qcom_defconfig: Enable SM6125 clock driver
-      drivers: pinctrl: Add Qualcomm SM6125 TLMM driver
-      phy: qcom: Add SM6115 and SM6125 to QMP UFS PHY driver
-      clk/qcom: qcm2290: Fix vote_bit of gpll6 clock
-      board/qualcomm: qcom-phone: Add poweroff command
-
-Marek Vasut (3):
-      gpio: qcom_pmic: Staticize and constify driver ops
-      gpio: qcom: Staticize and constify driver ops
-      pci: pcie_dw_qcom: Staticize and constify driver ops
-
-Quentin Schulz (2):
-      cmd: ufetch: show net feature when NET_LWIP is selected
-      cmd: ufetch: only show comma separator if there was a previous feature
-
-Timple Raj M (1):
-      serial: msm-geni: configure RX watermark register
-
- arch/arm/dts/lemans-evk-u-boot.dtsi   |  19 +++
- board/qualcomm/qcom-phone.env         |   1 +
- cmd/ufetch.c                          |  29 ++--
- configs/qcom_defconfig                |   2 +
- drivers/clk/clk-stub.c                |   6 +-
- drivers/clk/qcom/Kconfig              |   8 ++
- drivers/clk/qcom/Makefile             |   1 +
- drivers/clk/qcom/clock-qcm2290.c      |   2 +-
- drivers/clk/qcom/clock-qcs615.c       |  63 +++++++-
- drivers/clk/qcom/clock-sa8775p.c      |  63 ++++++++
- drivers/clk/qcom/clock-sc7280.c       |  52 +++++++
- drivers/clk/qcom/clock-sm6125.c       | 260 ++++++++++++++++++++++++++++++++++
- drivers/gpio/qcom_pmic_gpio.c         |   2 +-
- drivers/gpio/qcom_spmi_gpio.c         |   2 +-
- drivers/pci/pcie_dw_qcom.c            |   2 +-
- drivers/phy/qcom/phy-qcom-qmp-ufs.c   |   2 +
- drivers/pinctrl/qcom/Kconfig          |   8 ++
- drivers/pinctrl/qcom/Makefile         |   1 +
- drivers/pinctrl/qcom/pinctrl-sm6125.c | 147 +++++++++++++++++++
- drivers/serial/serial_msm_geni.c      |   4 +
- drivers/ufs/ufs-qcom.c                |  54 ++++---
- 21 files changed, 694 insertions(+), 34 deletions(-)
- create mode 100644 arch/arm/dts/lemans-evk-u-boot.dtsi
- create mode 100644 drivers/clk/qcom/clock-sm6125.c
- create mode 100644 drivers/pinctrl/qcom/pinctrl-sm6125.c
+--B3jBl5VART0gRmbN--
