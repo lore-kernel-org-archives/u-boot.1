@@ -4,91 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E76DCD343F
-	for <u-boot@archiver.kernel.org>; Mon, 18 May 2026 06:54:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E29B7CD4F48
+	for <u-boot@archiver.kernel.org>; Mon, 18 May 2026 07:24:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D5C1684664;
-	Mon, 18 May 2026 08:54:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id 071E883FEE;
+	Mon, 18 May 2026 09:24:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="VNbWb0k0";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="UKeh3yz/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6542F84687; Mon, 18 May 2026 08:54:51 +0200 (CEST)
-Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
- [IPv6:2a00:1450:4864:20::42f])
+ id F34C884664; Mon, 18 May 2026 08:09:25 +0200 (CEST)
+Received: from mail-pl1-x633.google.com (mail-pl1-x633.google.com
+ [IPv6:2607:f8b0:4864:20::633])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 52D6584664
- for <u-boot@lists.denx.de>; Mon, 18 May 2026 08:54:49 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=dario.binacchi@amarulasolutions.com
-Received: by mail-wr1-x42f.google.com with SMTP id
- ffacd0b85a97d-43d75312379so1837167f8f.1
- for <u-boot@lists.denx.de>; Sun, 17 May 2026 23:54:49 -0700 (PDT)
+ by phobos.denx.de (Postfix) with ESMTPS id B4C2283AA9
+ for <u-boot@lists.denx.de>; Mon, 18 May 2026 08:09:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=prashant.kamble223@gmail.com
+Received: by mail-pl1-x633.google.com with SMTP id
+ d9443c01a7336-2b9ec9443c2so14609465ad.1
+ for <u-boot@lists.denx.de>; Sun, 17 May 2026 23:09:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1779087288; x=1779692088;
- darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=swZTj+mBnyDem0Vmzvdz7LBEsTbhVc3zyakfr8nCa+4=;
- b=VNbWb0k0KaDLrzknCdB+ecIac0lJA99gtN9r3YFzEvfge1wEFaVpzOdGBhq0Mhg/Zu
- 2ZczUd+vsmeMdd8YU+fFjYndqymSe8mhz2DOBZelppTu0d+o0OxOXI+oyWKUv3RC0LKu
- qvYinnj7tS5mLY2rVTmr9+ZyeNdq47E/0Dsu8=
+ d=gmail.com; s=20251104; t=1779084562; x=1779689362; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=T7jx2/cAXQNNFsrtNR9USrRB30+wuXE24E7grvoCneY=;
+ b=UKeh3yz/+FzcV4G6hxmMTFtS9kg4iJLKZPpaO5XqZe6CQ2kE1bACPXME9vK0s8dN0u
+ blgl10PxfQDT2qVENKuwxO2vxN5adzNFusqqYuS7sOG0xywjRAuKI/VAjRAyOrtHrbm1
+ x2o3ykgID0iUplM1ZGN5Kz+Ynj2yrAWHv8RLDQnAr0z1aEJ7ipZHbocsEmdSX9h3gdJn
+ 3hG3DL5wbqXcgKrDlRR2KV8ETWKU6DUIYq6O19m+MT1CIsrT3O7ZAyTMLmTmgEBbtjTn
+ aLjdYaW1E4yZHOxAndoCDZF88mIUetUIFEX7XqevEzjGDr7skOtw1s5K7RlJ2JZUa2hw
+ qrsQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779087288; x=1779692088;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=swZTj+mBnyDem0Vmzvdz7LBEsTbhVc3zyakfr8nCa+4=;
- b=HJExnxiFfKWaQ+2jbivCNe88aaF/tgRfODVCpEASjTtK5qpTuKLcqWEYRQmF0xhGn5
- MWBXNdMMqpCng+1anRucHgaTYv4m9qn6kZaD6Jh3QJ4V6sW7I4vEWcsC8UJjO8YUNBAq
- ty7c88cmwiNCVxHh26ERZwkl01nJB8scisK3OdAqYIdVS6SWZAD1zBa7B4vsprEHZKF8
- n888ZeROyfOgjGLX1jEjNqgwMAqAsxj0r7IF4uOEOcwYI3BWXed8cNCFLAODSManHqMC
- Rg+s5DMjGhTJrWpC98PF9dTIkTFUU0dxXGpyxZ3x8HfcrMmn+V/+3FbYbtFoIP/wZLfJ
- ODMQ==
-X-Gm-Message-State: AOJu0YxZBksbcK376RhQ5V2qDQTlCJD70luYpMHLZrRPFBNYDcxPUe46
- kJ6bS+VSO7d4i6yz/6ksBReYi5AoNwor9Eu26/1PHzFAkaF/5U4uS56NEJTllbxhTBBJu/FU6Mu
- YeJAN
-X-Gm-Gg: Acq92OGPR0kPfohiq7dwQi1sjxwCZeKOAu+Aw6iddQV/O+RJEgSIUQiYmIHci61MYe2
- ExEXra606UVlYmDA6WcsocX/w9lkoCDffBM8knmHxR1frycnCekIXYNKAPpLihxAg1iqNeQS28/
- HhO+1Gy7ONUEbGNNM7LSjgak7e8lm8P4/692tQz6OzIZcsN01TMzd/8CIBqgm42qAMuBhdcXcN6
- ztis9gMEVTgjJDKwgUqjVpkXgzA2hHAazW9SDVNlbpUQ6ymyXH+4PBgCksQ6VtjRHM8xObScd8w
- w0aoaxMJguXwCkwJ8YHMjLR6bhhDY2SsWycL748VAMOX38cgWSLl/nWFAn3oiFSBY8MORhacvsz
- +N2iwn7ASjhwFX1tixDELz5tbVxz6jr79Ru5JZL4QIbdssVt4xFFqUEFEWnlGGDoYeU0lke/q5I
- oCwQoclmedMGH3VFqsigbsDd3mn/JLjhgmEFFsXXaEWyjHvfWmI2mAIoPBSMNtAtRqeTMCkocaa
- ZOKYOY7BKl+vvXhkUr5dpnKvI2CTQOkrlxkUwATlpLIKrdjFXj0KtD1e8YcqMmiDT7uajoGZ6Nn
- U24G3dYvYWWaPP49Kt7OJ69NMlzQQYCYIxo=
-X-Received: by 2002:a05:6000:2387:b0:43e:aa88:f1a8 with SMTP id
- ffacd0b85a97d-45e5b747235mr20583219f8f.6.1779087288486; 
- Sun, 17 May 2026 23:54:48 -0700 (PDT)
-Received: from dario-ThinkPad-P14s-Gen-5.homenet.telecomitalia.it
- (host-82-56-22-134.retail.telecomitalia.it. [82.56.22.134])
+ d=1e100.net; s=20251104; t=1779084562; x=1779689362;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=T7jx2/cAXQNNFsrtNR9USrRB30+wuXE24E7grvoCneY=;
+ b=RBV06FRh0R6CVT8OQdrqZf67XWqXQ1SHgGDwQN985UH8Z6J9BJLOGlCOUlhAt/DS43
+ we/kowVdD97/NwRRQnh8OAm8BUbsZK0XoVukNcdELWfymAmwN6miMBKLQbACEIjXiNjG
+ UO6PEaONUf3PrcSR7z+oqJWGpHiVqAeB3IyIZBut9UitFjosG9OMdS2uwXmXJi85tzbL
+ Tql51ggz7Hx7sIc+E3q+2m4qmBubkn48N1uaQdcwzGmBaNmPObz+bz7ZVrqxYqGJs5ak
+ wia57rNQfYayeCAwqaB2KxKO57d/KocCnkkZ4Zp98RcK3FXibAgt2BMYgTgwYi2LrJ13
+ aC9A==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ+EY2CMeFJBR9bgy7CsPcfvQnDOQ2YeDs+6Z9O7RtLeeBvu9oA9fBS4TL2CatJFWoJpxiTwoHw=@lists.denx.de
+X-Gm-Message-State: AOJu0YxoPPw4mqkB/6+2CVB+5Ql6VPDAWgkQ2j0QPx+m1PYV5NCjn/1W
+ dQQN8v/e60d/urh09GXgVUlWAcwoUevUCqW4nBx94rkliCnnLd0FFiix
+X-Gm-Gg: Acq92OHjjKDd/oXr8kMsLt1LqeOpeD8CBC/V4fdpkkst0FbCgLtnnA7+VcSwhvt7dIT
+ UU33CnfKyIgtK+bjIby+Sxs7WRBi3JWKwlEB7bJ3p3CKwDeJbaNvlrZxuqoDxoMl06XsovSjJIp
+ FI+HZB+QhBJO6Pagcl1RDX7aE6iyhwX3uZDJ+fe4gluQ4dwLYp8kSCkOvdesOcHfA9zpJiRnuoI
+ vUoK7RsMIZuILora21IGX/4DFqrpriO56DqgkMmwLexblJFD0Xf72CfNsNsf621NWdnJxi3f/aU
+ qA421af1TEZYdo9rp1mxkD4r+8bYo41xnBYBj/qoeccQDL10lhsIo3cOveM+bp2seh5HHJK5Tps
+ A9Lz1HoIzWeSC9P0fu0gqdSZhqAyg05mAxQDdlNd4bZioTnerMLwXmIqrHBXSqVtfQccT7EmVQe
+ MUNFvtiUQ2Lln2jC2FrzYQcPt0bCcqhkf0e0uxaklJZW8Nh120bStaxJDGzJRpq2e3lvzuVCFu2
+ bdMeYgsWIwQuw==
+X-Received: by 2002:a17:903:1786:b0:2b0:506b:e6f8 with SMTP id
+ d9443c01a7336-2bd526ce854mr165885375ad.5.1779084562118; 
+ Sun, 17 May 2026 23:09:22 -0700 (PDT)
+Received: from prashant-Victus-by-HP-Gaming-Laptop-15-fa0xxx..
+ ([2402:e280:3e1d:2f8:2784:8946:6812:98f1])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-45da0fe248dsm34308524f8f.30.2026.05.17.23.54.47
+ d9443c01a7336-2bd5bd5f291sm140114075ad.15.2026.05.17.23.09.19
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 17 May 2026 23:54:48 -0700 (PDT)
-From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
-To: u-boot@lists.denx.de
-Cc: Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Kory Maincent <kory.maincent@bootlin.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>, uboot-stm32@st-md-mailman.stormreply.com
-Subject: [PATCH 2/2] board: st: factorize STM32MP FWU multi-bank support
-Date: Mon, 18 May 2026 08:54:28 +0200
-Message-ID: <20260518065443.2531017-2-dario.binacchi@amarulasolutions.com>
+ Sun, 17 May 2026 23:09:21 -0700 (PDT)
+From: Prashant Kamble <prashant.kamble223@gmail.com>
+To: 
+Cc: prashant.kamble223@gmail.com, Bin Meng <bmeng.cn@gmail.com>,
+ Tom Rini <trini@konsulko.com>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>, u-boot@lists.denx.de
+Subject: [PATCH] nvme: fix command ID wraparound handling
+Date: Mon, 18 May 2026 11:38:44 +0530
+Message-ID: <20260518060915.45607-1-prashant.kamble223@gmail.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260518065443.2531017-1-dario.binacchi@amarulasolutions.com>
-References: <20260518065443.2531017-1-dario.binacchi@amarulasolutions.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Mon, 18 May 2026 09:24:19 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,219 +101,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Factorize FWU multi-bank support code common to STM32MP1 and
-STM32MP2 platforms into a dedicated shared source file.
+nvme_get_cmd_id() returns 0 after cmdid reaches USHRT_MAX,
+but fails to reset cmdid itself. As a result, all subsequent
+calls keep returning 0 indefinitely.
 
-No functional change intended.
+Reset cmdid when wraparound occurs so command IDs continue
+incrementing correctly.
 
-Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+Signed-off-by: Prashant Kamble <prashant.kamble223@gmail.com>
 ---
+ drivers/nvme/nvme.c | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
- board/st/common/Makefile      |  1 +
- board/st/common/stm32mp_fwu.c | 55 +++++++++++++++++++++++++++++++++++
- board/st/stm32mp1/stm32mp1.c  | 54 ----------------------------------
- board/st/stm32mp2/stm32mp2.c  | 53 ---------------------------------
- 4 files changed, 56 insertions(+), 107 deletions(-)
- create mode 100644 board/st/common/stm32mp_fwu.c
-
-diff --git a/board/st/common/Makefile b/board/st/common/Makefile
-index 122b13c3aa8d..36dfaddfa0eb 100644
---- a/board/st/common/Makefile
-+++ b/board/st/common/Makefile
-@@ -9,6 +9,7 @@ obj-$(CONFIG_PMIC_STPMIC1) += stpmic1.o
- ifeq ($(CONFIG_ARCH_STM32MP),y)
- obj-$(CONFIG_SET_DFU_ALT_INFO) += stm32mp_dfu.o
- obj-$(CONFIG_$(PHASE_)DFU_VIRT) += stm32mp_dfu_virt.o
-+obj-$(CONFIG_FWU_MULTI_BANK_UPDATE) += stm32mp_fwu.o
- endif
- 
- obj-$(CONFIG_TYPEC_STUSB160X) += stusb160x.o
-diff --git a/board/st/common/stm32mp_fwu.c b/board/st/common/stm32mp_fwu.c
-new file mode 100644
-index 000000000000..ac7ca6bdca2a
---- /dev/null
-+++ b/board/st/common/stm32mp_fwu.c
-@@ -0,0 +1,55 @@
-+// SPDX-License-Identifier: GPL-2.0+ OR BSD-3-Clause
-+/*
-+ * Copyright (C) 2026 Amarula Solutions, Dario Binacchi <dario.binacchi@amarulasolutions.com>
-+ */
-+
-+#include <fwu.h>
-+#include <part_efi.h>
-+#include <asm/io.h>
-+/**
-+ * fwu_plat_get_bootidx() - Get the value of the boot index
-+ * @boot_idx: Boot index value
-+ *
-+ * Get the value of the bank(partition) from which the platform
-+ * has booted. This value is passed to U-Boot from the earlier
-+ * stage bootloader which loads and boots all the relevant
-+ * firmware images
-+ *
-+ */
-+void fwu_plat_get_bootidx(uint *boot_idx)
-+{
-+	*boot_idx = (readl(TAMP_FWU_BOOT_INFO_REG) >>
-+		    TAMP_FWU_BOOT_IDX_OFFSET) & TAMP_FWU_BOOT_IDX_MASK;
-+}
-+
-+int fwu_platform_hook(struct udevice *dev, struct fwu_data *data)
-+{
-+	uint boot_idx;
-+	efi_guid_t boot_uuid, root_uuid;
-+	const efi_guid_t boot_type_guid = PARTITION_XBOOTLDR;
-+	const efi_guid_t root_type_guid =
-+		PARTITION_LINUX_FILE_SYSTEM_DATA_GUID;
-+	char uuidbuf[UUID_STR_LEN + 1];
-+	int retb, retr;
-+
-+	fwu_plat_get_bootidx(&boot_idx);
-+
-+	retb = fwu_mdata_get_image_guid(&boot_uuid, &boot_type_guid, boot_idx);
-+	retr = fwu_mdata_get_image_guid(&root_uuid, &root_type_guid, boot_idx);
-+
-+	if (!retb && !retr) {
-+		uuid_bin_to_str(boot_uuid.b, uuidbuf, UUID_STR_FORMAT_GUID);
-+		env_set("boot_partuuid", uuidbuf);
-+
-+		uuid_bin_to_str(root_uuid.b, uuidbuf, UUID_STR_FORMAT_GUID);
-+		env_set("root_partuuid", uuidbuf);
-+	} else if (!retb && retr) {
-+		log_warning("%s: found boot GUID but missing root GUID (%d)\n",
-+			    __func__, retr);
-+	} else if (!retr && retb) {
-+		log_warning("%s: found root GUID but missing boot GUID (%d)\n",
-+			    __func__, retb);
-+	}
-+
-+	return 0;
-+}
-diff --git a/board/st/stm32mp1/stm32mp1.c b/board/st/stm32mp1/stm32mp1.c
-index 8164a62e9a3a..9b933a2ba0b6 100644
---- a/board/st/stm32mp1/stm32mp1.c
-+++ b/board/st/stm32mp1/stm32mp1.c
-@@ -837,57 +837,3 @@ static void board_copro_image_process(ulong fw_image, size_t fw_size)
- }
- 
- U_BOOT_FIT_LOADABLE_HANDLER(IH_TYPE_COPRO, board_copro_image_process);
--
--#if defined(CONFIG_FWU_MULTI_BANK_UPDATE)
--
--#include <fwu.h>
--
--/**
-- * fwu_plat_get_bootidx() - Get the value of the boot index
-- * @boot_idx: Boot index value
-- *
-- * Get the value of the bank(partition) from which the platform
-- * has booted. This value is passed to U-Boot from the earlier
-- * stage bootloader which loads and boots all the relevant
-- * firmware images
-- *
-- */
--void fwu_plat_get_bootidx(uint *boot_idx)
--{
--	*boot_idx = (readl(TAMP_FWU_BOOT_INFO_REG) >>
--		    TAMP_FWU_BOOT_IDX_OFFSET) & TAMP_FWU_BOOT_IDX_MASK;
--}
--
--int fwu_platform_hook(struct udevice *dev, struct fwu_data *data)
--{
--	uint boot_idx;
--	efi_guid_t boot_uuid, root_uuid;
--	const efi_guid_t boot_type_guid = PARTITION_XBOOTLDR;
--	const efi_guid_t root_type_guid =
--		PARTITION_LINUX_FILE_SYSTEM_DATA_GUID;
--	char uuidbuf[UUID_STR_LEN + 1];
--	int retb, retr;
--
--	fwu_plat_get_bootidx(&boot_idx);
--
--	retb = fwu_mdata_get_image_guid(&boot_uuid, &boot_type_guid, boot_idx);
--	retr = fwu_mdata_get_image_guid(&root_uuid, &root_type_guid, boot_idx);
--
--	if (!retb && !retr) {
--		uuid_bin_to_str(boot_uuid.b, uuidbuf, UUID_STR_FORMAT_GUID);
--		env_set("boot_partuuid", uuidbuf);
--
--		uuid_bin_to_str(root_uuid.b, uuidbuf, UUID_STR_FORMAT_GUID);
--		env_set("root_partuuid", uuidbuf);
--	} else if (!retb && retr) {
--		log_warning("%s: found boot GUID but missing root GUID (%d)\n",
--			    __func__, retr);
--	} else if (!retr && retb) {
--		log_warning("%s: found root GUID but missing boot GUID (%d)\n",
--			    __func__, retb);
--	}
--
--	return 0;
--}
--#endif /* CONFIG_FWU_MULTI_BANK_UPDATE */
--
-diff --git a/board/st/stm32mp2/stm32mp2.c b/board/st/stm32mp2/stm32mp2.c
-index 5cbbbc322a3a..7bc7d2a608fd 100644
---- a/board/st/stm32mp2/stm32mp2.c
-+++ b/board/st/stm32mp2/stm32mp2.c
-@@ -188,56 +188,3 @@ void board_quiesce_devices(void)
+diff --git a/drivers/nvme/nvme.c b/drivers/nvme/nvme.c
+index 2b14437f69c..4f9473367d3 100644
+--- a/drivers/nvme/nvme.c
++++ b/drivers/nvme/nvme.c
+@@ -112,7 +112,10 @@ static __le16 nvme_get_cmd_id(void)
  {
- 	led_boot_off();
+ 	static unsigned short cmdid;
+ 
+-	return cpu_to_le16((cmdid < USHRT_MAX) ? cmdid++ : 0);
++	if (cmdid >= USHRT_MAX)
++		cmdid = 0;
++
++	return cpu_to_le16(cmdid++);
  }
--
--#if defined(CONFIG_FWU_MULTI_BANK_UPDATE)
--
--#include <fwu.h>
--
--/**
-- * fwu_plat_get_bootidx() - Get the value of the boot index
-- * @boot_idx: Boot index value
-- *
-- * Get the value of the bank(partition) from which the platform
-- * has booted. This value is passed to U-Boot from the earlier
-- * stage bootloader which loads and boots all the relevant
-- * firmware images
-- *
-- */
--void fwu_plat_get_bootidx(uint *boot_idx)
--{
--	*boot_idx = (readl(TAMP_FWU_BOOT_INFO_REG) >>
--		    TAMP_FWU_BOOT_IDX_OFFSET) & TAMP_FWU_BOOT_IDX_MASK;
--}
--
--int fwu_platform_hook(struct udevice *dev, struct fwu_data *data)
--{
--	uint boot_idx;
--	efi_guid_t boot_uuid, root_uuid;
--	const efi_guid_t boot_type_guid = PARTITION_XBOOTLDR;
--	const efi_guid_t root_type_guid =
--		PARTITION_LINUX_FILE_SYSTEM_DATA_GUID;
--	char uuidbuf[UUID_STR_LEN + 1];
--	int retb, retr;
--
--	fwu_plat_get_bootidx(&boot_idx);
--
--	retb = fwu_mdata_get_image_guid(&boot_uuid, &boot_type_guid, boot_idx);
--	retr = fwu_mdata_get_image_guid(&root_uuid, &root_type_guid, boot_idx);
--
--	if (!retb && !retr) {
--		uuid_bin_to_str(boot_uuid.b, uuidbuf, UUID_STR_FORMAT_GUID);
--		env_set("boot_partuuid", uuidbuf);
--
--		uuid_bin_to_str(root_uuid.b, uuidbuf, UUID_STR_FORMAT_GUID);
--		env_set("root_partuuid", uuidbuf);
--	} else if (!retb && retr) {
--		log_warning("%s: found boot GUID but missing root GUID (%d)\n",
--			    __func__, retr);
--	} else if (!retr && retb) {
--		log_warning("%s: found root GUID but missing boot GUID (%d)\n",
--			    __func__, retb);
--	}
--
--	return 0;
--}
--#endif /* CONFIG_FWU_MULTI_BANK_UPDATE */
+ 
+ static u16 nvme_read_completion_status(struct nvme_queue *nvmeq, u16 index)
 -- 
 2.43.0
 
-base-commit: 215496fec59b3fa09256b4fb62f92af46e2ec7f9
-branch: fwumdata-ab-stm32mp1
