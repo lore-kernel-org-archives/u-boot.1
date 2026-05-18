@@ -4,79 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE67BCD4F48
-	for <u-boot@archiver.kernel.org>; Mon, 18 May 2026 07:24:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23588CD4F3C
+	for <u-boot@archiver.kernel.org>; Mon, 18 May 2026 07:36:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3F9FA84676;
-	Mon, 18 May 2026 09:24:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=infineon.com
+	by phobos.denx.de (Postfix) with ESMTP id 72F0F83FEE;
+	Mon, 18 May 2026 09:36:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=infineon.com header.i=@infineon.com header.b="BKUPItis";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="fHPs/1EF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 82AD084150; Mon, 18 May 2026 09:10:50 +0200 (CEST)
-Received: from smtp11.infineon.com (smtp11.infineon.com
- [IPv6:2a00:18f0:1e00:4::5])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 0362184150; Mon, 18 May 2026 09:36:37 +0200 (CEST)
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 72D3683EF9
- for <u-boot@lists.denx.de>; Mon, 18 May 2026 09:10:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A0F8483EF9
+ for <u-boot@lists.denx.de>; Mon, 18 May 2026 09:36:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=infineon.com
+ header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=Takahiro.Kuwano@infineon.com
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=infineon.com; i=@infineon.com; q=dns/txt; s=IFXMAIL;
- t=1779088249; x=1810624249;
- h=from:to:cc:subject:date:message-id:references:
- in-reply-to:content-transfer-encoding:mime-version;
- bh=xfRHfUPdTFUblS+B4QaxQD/px4Bmy0lz1C6fyrlR/90=;
- b=BKUPItis2oJzWhxr5ctI2DqEZia7lQ8Poo42nCEVl5LJuF4nz9BUHf3y
- edV5Bx5mC4BZXT5qq5p9QJmTxGm7D6eNen2Tdg6cGfEx+FKPaCjaAyBC+
- Z1tyczyirmpRxxu4kR57T1dMJAN6JRFWM+vdrBQpeuMK0QMma8Rnvceo/ c=;
-X-CSE-ConnectionGUID: JLPxV4npQzGSgWCtucWmLA==
-X-CSE-MsgGUID: mt3FsLNXSkOSaKodcdUimQ==
-X-IronPort-AV: E=McAfee;i="6800,10657,11789"; a="143592297"
-X-IronPort-AV: E=Sophos;i="6.23,241,1770591600"; d="scan'208";a="143592297"
-X-Amp-Result: SKIPPED(no attachment in message)
-Received: from unknown (HELO MUCSE805.infineon.com) ([172.23.29.31])
- by smtp11.infineon.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 18 May 2026 09:10:49 +0200
-Received: from MUCSE811.infineon.com (172.23.29.37) by MUCSE805.infineon.com
- (172.23.29.31) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Mon, 18 May
- 2026 09:10:48 +0200
-Received: from MUCSE815.infineon.com (172.23.29.41) by MUCSE811.infineon.com
- (172.23.29.37) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Mon, 18 May
- 2026 09:10:48 +0200
-Received: from MUCSE815.infineon.com ([fe80::b54c:c0bd:546c:c9be]) by
- MUCSE815.infineon.com ([fe80::b54c:c0bd:546c:c9be%12]) with mapi id
- 15.02.2562.037; Mon, 18 May 2026 09:10:47 +0200
-From: <Takahiro.Kuwano@infineon.com>
-To: <vjardin@free.fr>, <u-boot@lists.denx.de>
-CC: <christoph.reiter@evk.biz>, <dlechner@baylibre.com>,
- <flaviu.nistor@gmail.com>, <jeyu@issi.com>, <miquel.raynal@bootlin.com>,
- <yangshiji66@outlook.com>, <ssunkkan@gmail.com>, <trini@konsulko.com>,
- <vigneshr@ti.com>
-Subject: RE: [PATCH v2] mtd: spi-nor: Add gd55lb02gf chips
-Thread-Topic: [PATCH v2] mtd: spi-nor: Add gd55lb02gf chips
-Thread-Index: AQHc5dwlD838/R5nf0SUzPfs8u2CAbYTVusw
-Date: Mon, 18 May 2026 07:10:47 +0000
-Message-ID: <5a74856d806a4dabad4055498c2c1420@infineon.com>
-References: <"<20260510222140.603755-1-vjardin@free.fr>">
- <20260520150032.1904130-1-vjardin@free.fr>
-In-Reply-To: <20260520150032.1904130-1-vjardin@free.fr>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.161.6.196]
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+ spf=pass smtp.mailfrom=mkorpershoek@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sea.source.kernel.org (Postfix) with ESMTP id F0BD1409B8;
+ Mon, 18 May 2026 07:36:31 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4CCCBC2BCB7;
+ Mon, 18 May 2026 07:36:31 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1779089791;
+ bh=kQzWPvEomlsw9Cnn8e3WQA+2XVnUZINT8Ba+wyPiqr0=;
+ h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+ b=fHPs/1EFTBXN4AKSuQtilsCwoQcomiLV3pl+sTbOB3CfCetjWJs5WEx7qtM0+nCzn
+ ON5ysk18Ow8HRbdTNLlLwdFfYlKNGt0cglCMCTdzMUY+nMxiXIg5pWj6ysrryAvyPr
+ gkMt/J0Ei9PwXn5p6ydPWanvgXJhZGoi+hUaYiqPpqNMDw5IaeZnfDB6kWSoXsdDvR
+ eiYlIKcc545GP1GvVyKDIjYXT3UosOXKxUc2rsmxe9ZowuZGB2KfQ0iK2UGFWUwQMZ
+ LFlrHaP7xzyEETp7ua2KhH13ucY4e1LgPj4ITIVFNs6aUr3f6BA4YO4CohsHCZ78Ev
+ I0eD+4Vx2j2Uw==
+From: Mattijs Korpershoek <mkorpershoek@kernel.org>
+To: Zixun LI <admin@hifiphile.com>, u-boot@lists.denx.de
+Cc: Lukasz Majewski <lukma@denx.de>, Mattijs Korpershoek
+ <mkorpershoek@kernel.org>, Marek Vasut <marex@denx.de>, Tom Rini
+ <trini@konsulko.com>, Zixun LI <zli@ogga.fr>, Andrew Goodbody
+ <andrew.goodbody@linaro.org>, Zixun LI <admin@hifiphile.com>, Stephan
+ Gerhold <stephan.gerhold@linaro.org>
+Subject: Re: [PATCH v2] usb: gadget: atmel: do not disable endpoints in
+ reset_all_endpoints()
+In-Reply-To: <20260515-udc_ep-v2-1-cd335b4e62e4@hifiphile.com>
+References: <20260515-udc_ep-v2-1-cd335b4e62e4@hifiphile.com>
+Date: Mon, 18 May 2026 09:36:28 +0200
+Message-ID: <87lddhw4n7.fsf@kernel.org>
 MIME-Version: 1.0
-X-Mailman-Approved-At: Mon, 18 May 2026 09:24:19 +0200
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,61 +71,97 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> Add the GigaDevice GD55LB02GF (256 Mo) similar to gd55lb02ge with
-> the same read path flags.
->=20
-> SPI_NOR_HAS_LOCK and SPI_NOR_HAS_TB do not match this chip's
-> status register layout: the GD55LB02GF uses a 5-bit block protect
-> field BP0..BP4 plus a CMP bit in SR2 for direction (see datasheet
-> "Status Register Block Protection").
->=20
-> The generic stm-lock helpers drive only BP0..BP2 and assume SR1
-> bit 5 is TB, but on this part SR1 bit 5 is BP3.
-> Enabling either flag would leave BP3..BP4 unmanaged or corrupt
-> BP3 on every lock op.
-> A proper support needs a vendor specific lock callback, it is out
-> of scope for this table update.
->=20
-> Signed-off-by: Vincent Jardin <vjardin@free.fr>
-> Suggested-by: Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
->=20
+Hi Zixun,
+
+Thank you for the patch.
+
+On Fri, May 15, 2026 at 12:05, Zixun LI <admin@hifiphile.com> wrote:
+
+> Endpoints should not be disabled on bus reset inside UDC driver,
+> otherwise a race condition will happen between gadget driver. Gadget
+> driver will free the requests and disable endpoints in disconnect ops.
+>
+> Also remove outdated comment about it in usba_ep_disable().
+>
+> Fixes: 59310d1ecb9f ("usb: gadget: introduce 'enabled' flag in struct usb_ep")
+>
+> Signed-off-by: Zixun LI <admin@hifiphile.com>
+
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
+
+Note: there should not be an empty newline between the fixes and the signed-off.
+It should be:
+
+Fixes: 59310d1ecb9f ("usb: gadget: introduce 'enabled' flag in struct usb_ep")
+Signed-off-by: Zixun LI <admin@hifiphile.com>
+
+Not:
+
+Fixes: 59310d1ecb9f ("usb: gadget: introduce 'enabled' flag in struct usb_ep")
+<empty newline>
+Signed-off-by: Zixun LI <admin@hifiphile.com>
+
+No need to resend a v3 for it, I can fix it up while applying.
+
 > ---
->=20
 > Changes in v2:
-> - Place the new entry next to gd55lb02ge with style matching the
->   neighbour.
-> - Drop SPI_NOR_HAS_LOCK. Did not adopt SPI_NOR_HAS_TB from
->   gd55lb02ge: neither flag matches this chip's SR layout (see
->   comments for the BP0..BP4 / CMP rationale).
->=20
->  drivers/mtd/spi/spi-nor-ids.c | 4 ++++
->  1 file changed, 4 insertions(+)
->=20
-> diff --git a/drivers/mtd/spi/spi-nor-ids.c b/drivers/mtd/spi/spi-nor-ids.=
-c
-> index c0fa98424aa..31a2ba49a87 100644
-> --- a/drivers/mtd/spi/spi-nor-ids.c
-> +++ b/drivers/mtd/spi/spi-nor-ids.c
-> @@ -231,6 +231,10 @@ const struct flash_info spi_nor_ids[] =3D {
->                      SECT_4K | SPI_NOR_QUAD_READ |
->                      SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
->         },
-> +       {
-> +               INFO("gd55lb02gf", 0xc8601c, 0, 64 * 1024, 4096,
-> +                    SECT_4K | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES)
-> +       },
->  #endif
->  #ifdef CONFIG_SPI_FLASH_ISSI           /* ISSI */
->         /* ISSI */
-> --
-> 2.43.0
->=20
-> base-commit: bfe90a308a94caa9d855440683521ff04122ae2a
-> branch: for-upstream/spi-nor-gd55lb02gf
-
-Reviewed-by: Takahiro Kuwano <takahiro.kuwano@infineon.com>
-
-Thanks!
-
-
-
+> - Remove outdated comment in usba_ep_disable()
+> - Reword commit message
+> - Link to v1: https://patch.msgid.link/20260512-udc_ep-v1-1-8a783e44cf7f@hifiphile.com
+>
+> To: Mattijs Korpershoek <mkorpershoek@kernel.org>
+> To: Stephan Gerhold <stephan.gerhold@linaro.org>
+> To: u-boot@lists.denx.de
+> Cc: Lukasz Majewski <lukma@denx.de>
+> Cc: Marek Vasut <marex@denx.de>
+> Cc: Tom Rini <trini@konsulko.com>
+> Cc: Zixun LI <admin@hifiphile.com>
+> Cc: Andrew Goodbody <andrew.goodbody@linaro.org>
+> ---
+>  drivers/usb/gadget/atmel_usba_udc.c | 18 ------------------
+>  1 file changed, 18 deletions(-)
+>
+> diff --git a/drivers/usb/gadget/atmel_usba_udc.c b/drivers/usb/gadget/atmel_usba_udc.c
+> index f7a92ded6da..a2eee2bca2c 100644
+> --- a/drivers/usb/gadget/atmel_usba_udc.c
+> +++ b/drivers/usb/gadget/atmel_usba_udc.c
+> @@ -289,10 +289,6 @@ static int usba_ep_disable(struct usb_ep *_ep)
+>  
+>  	if (!ep->desc) {
+>  		spin_unlock_irqrestore(&udc->lock, flags);
+> -		/* REVISIT because this driver disables endpoints in
+> -		 * reset_all_endpoints() before calling disconnect(),
+> -		 * most gadget drivers would trigger this non-error ...
+> -		 */
+>  		if (udc->gadget.speed != USB_SPEED_UNKNOWN)
+>  			DBG(DBG_ERR, "ep_disable: %s not enabled\n",
+>  			    ep->ep.name);
+> @@ -571,20 +567,6 @@ static void reset_all_endpoints(struct usba_udc *udc)
+>  		list_del_init(&req->queue);
+>  		request_complete(ep, req, -ECONNRESET);
+>  	}
+> -
+> -	/* NOTE:  normally, the next call to the gadget driver is in
+> -	 * charge of disabling endpoints... usually disconnect().
+> -	 * The exception would be entering a high speed test mode.
+> -	 *
+> -	 * FIXME remove this code ... and retest thoroughly.
+> -	 */
+> -	list_for_each_entry(ep, &udc->gadget.ep_list, ep.ep_list) {
+> -		if (ep->desc) {
+> -			spin_unlock(&udc->lock);
+> -			usba_ep_disable(&ep->ep);
+> -			spin_lock(&udc->lock);
+> -		}
+> -	}
+>  }
+>  
+>  static struct usba_ep *get_ep_by_addr(struct usba_udc *udc, u16 wIndex)
+>
+> ---
+> base-commit: 5732bd0f457b4c671e46574d64d4acb099c0f0a5
+> change-id: 20260512-udc_ep-51a3f7a6befb
+>
+> Best regards,
+> --  
+> Zixun LI <admin@hifiphile.com>
