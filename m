@@ -4,107 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8754ECD4F3C
-	for <u-boot@archiver.kernel.org>; Mon, 18 May 2026 08:05:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1BE5ACD4F3C
+	for <u-boot@archiver.kernel.org>; Mon, 18 May 2026 08:20:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1752483FEE;
-	Mon, 18 May 2026 10:05:20 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9A08B83EF9;
+	Mon, 18 May 2026 10:20:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="MODypdcv";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="REJNLAEf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 11D3F84688; Mon, 18 May 2026 10:05:19 +0200 (CEST)
-Received: from mail-yx1-xb12e.google.com (mail-yx1-xb12e.google.com
- [IPv6:2607:f8b0:4864:20::b12e])
+ id 6576183FEE; Mon, 18 May 2026 10:20:29 +0200 (CEST)
+Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
+ [IPv6:2a00:1450:4864:20::32b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 65E2983AA9
- for <u-boot@lists.denx.de>; Mon, 18 May 2026 10:05:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BE238839D9
+ for <u-boot@lists.denx.de>; Mon, 18 May 2026 10:20:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yx1-xb12e.google.com with SMTP id
- 956f58d0204a3-65c477a3278so2112063d50.3
- for <u-boot@lists.denx.de>; Mon, 18 May 2026 01:05:14 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1779091513; cv=none;
- d=google.com; s=arc-20240605;
- b=aTs2KjidbYlf9Vd1elFAIFTGThcS2KJ0mzYjtqctFHz33URw0BK040X/G0KCozrafH
- tDQWwEL4/BGe4Tbd5D496fBqoM9tH0wnkbKEHgXgQzQeC3dK6EcBf+0bc3ob/eLW5zP5
- yDdvZw70EoJf25+4Fsh9C/CyMlBRsFfGbYhhq/P2X7lmIRdhpzqJhA98ba2pcgPaRBV9
- DLtrFdAw05KLzXdE5mVivLkAwyBJO/+v6eiYByFy5lGO/An2I6CDSVLUzal0xK4svixy
- pd+RiTQweOQCJcus93YO/MD6JzpNP9VwxzXagP55wxamZO8lkbCoA9JKZmgBup6Afa7T
- 185Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=7H7NqasfFwtMBtHZglrlRFdO+xN6xsNACMh27v0c+Tc=;
- fh=ovq/5t1o7AdIEUD75iX2y2XHOz36vZstehvnqiiYK8I=;
- b=KnPEZqyyMF7uMsThAtkfB2y67Evez2rpRevzuBPBlCgh33b1s7ZBGyqPsBuO2Iplsu
- JcOB3xCDFud+aU5VZdiAL3Q50BIXUIHgF9T6K7GRQ5fS6Sp9Vc+/+bOyV9StLbTotXVU
- uGywjlmAFzQrQ0PYkb28jHRFU6Tz7LXg7vwspOLS+Bze3+unWsrPxdysKI7Up9ZnYKyl
- Kf7pQZ6+xIjA1kB6rY6xK7nstINTyaqKEPERb3weJemy+GL7p7VWikm6Qdn83xcoVM5s
- LTpFZrhfRGUhZONGAduIW5JmgXLwHUbwWnoe94ZzIaaCb2dzrbyxq1TByYQ+KzOwbWMr
- 6ODA==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ spf=pass smtp.mailfrom=casey.connolly@linaro.org
+Received: by mail-wm1-x32b.google.com with SMTP id
+ 5b1f17b1804b1-4891c0620bcso10928675e9.1
+ for <u-boot@lists.denx.de>; Mon, 18 May 2026 01:20:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1779091513; x=1779696313; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=7H7NqasfFwtMBtHZglrlRFdO+xN6xsNACMh27v0c+Tc=;
- b=MODypdcv8dDRKACWRtEUIOcSItD6DNetsTXnULjHDlsZpuC5cYJueig4FwTJfdgYxN
- ekLim56Yw3YNRr2Bx2C27uXjUf1iRPqFeI/P8C4jB2sttRSOgQwaLYW4RpwpQ9tZFGQE
- g3SGEZzD9A2uTc4deLEzaDeQBgnBN80FC6P9ACaqb0gv11LIogMMqiRFw9c4NCc6a2Su
- m7QMVF/SvITLRjxjqa89R2h18j+b1YdYKbkBo+NBiPI+tsSRW1SLYRXhjypyi4pdIykV
- w5uAScrI8bBiJgep1eEgyjWf3lg36iJxeT+PHmvVWRPTG0kMuQYuprOG+AJ62O4pDzgf
- CjDA==
+ d=linaro.org; s=google; t=1779092425; x=1779697225; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=8xW2NyMIlyLl6WNC3+rQx+P5obOFNiEroI1Da5p0tdU=;
+ b=REJNLAEfzCgvaUPadnqRffQvgjbYB8zoz1V1GsE4XzTn5gvIoHsIoICL++Fij5OLVH
+ UL82io0xOUda+kukBIJQF6/xSrFQE1oSAn2j9YimhYbtExlT9zEXIREYPDHxDGL6BDHr
+ +P4+vtOaKkOGPhj+Yj1zLtTd1ZhFjVrFd2epnWKP9O23YNG3oxraNXODGjiHGPbNfzc2
+ qDq8nRE3YiwtKqwYKdT9RNFyF5nOnBvIuH7V1r9PCRsOCxB2QSMgIxISJ79zl7Q977AK
+ dF4+sgG2dY3GMSyMS9pqk/m2/Js3qizIQmxhKidXIXqUYo8MvWXKZSCnxjkEr3am68lV
+ zIoQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779091513; x=1779696313;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=7H7NqasfFwtMBtHZglrlRFdO+xN6xsNACMh27v0c+Tc=;
- b=HUtzuJBF4sqUMGH/+68vuWhkKZIqqJIMjZajCkPhZiJjp4+hKjES77BoPLNyANCczG
- NLVCnlW1CoLjvhDPraPYRomrjH6+alUU5Za2420HIeFzpdTdoaGNj4WLCuGTOYeijxkb
- sJRH42rP3jONfuFOc554hMRQ8+8gc31T7K2Doycd/F3HaBJNHZe6aJTux2S+OlH29JeD
- Xj9pNPEQ5/zumCSnMKUaDLoHF9UOZ+KvvbXlO4ZLs8CvRfRmzi9422xQYPLhLQR1jcDq
- PHrTWUncr7AqON5DtKcOuhCusgj3hDzx1wm/qHhnD53NHtDMxYe0ILOb4L4cHK7E4voB
- 30QA==
-X-Gm-Message-State: AOJu0YwzV6sqXL+EShZOyG0QeXNcueElYZHioMRYMugZs72Cl1RTDBhP
- wqyT1QcTmDSRKsSEVyG7JlSAVFWjnkxW7sD6njwtL2fqPFwBLYDOXkgoTOulJyx8J2RJPdO8dfu
- PKrN9saTT3MLzhz6Z2U5Bm8cmJzrdjV3zXCcV/YGYwA==
-X-Gm-Gg: Acq92OFdi6QVcU1gbj0XaQ5TwqQDYFbeZ9wfuXdx1uVzTGArOMQrJQAZEFV3DhemT2n
- 3nIvmR46YfsN4ETLyV37GTAD32l6yHz6FqE+NKeCsPMZIiY4/JL4svCX5DyEs/f+Fr7lWTLMZJR
- 8si4o8V1PJJO9eepoF7o+9Y3kqJ/BpxnBuEMX9FpW4L07/zTuek0JEXNttf/hHgUcTG2HpG1XgI
- ZOMyMQPBDVDgUStsC6IFpbcu7SwPyZRkyLKfo/9rf8Y7P5WlrV+7DzhRM7iv/bhOunh+mDXy6WB
- fTy8By6xwlUW+FOlMxGPnzIyCIhxEPTeFn3Wt9wZVEBrpP9QHmZ+X0sJmG+nr4eq1WGQbGZzSNx
- D8j7CarmorZMtMOcj+CAS4DgMl4u8pR2A3J19JyBEerJAtiTKq7XGlPdN08BNs8fQ+XekrtfwO9
- 8gsZV237Wjnl6rIlRlIBRKYxYziyyu56wKi31AQjPZB8w+YyhAEPFDKcRb5dE+/YoGTnDKH5F/O
- kVdcjtgwqMpqf4nvhGarmRQnHhX1OZNT7+gOEGAr7+kaXH+plb20YH1xPGjyqEN90cffQCNzrIL
- ucDdt7MdJUhzA6NrwSfHt8flzljA+cug7Kx8eXL8BWtzoYRksR/wNs9h2xZn2YL2zUp7rtK7jNY
- IrvBm8g==
-X-Received: by 2002:a05:690e:d50:b0:651:b938:188b with SMTP id
- 956f58d0204a3-65e2273520dmr11657289d50.24.1779091512984; Mon, 18 May 2026
- 01:05:12 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1779092425; x=1779697225;
+ h=content-transfer-encoding:in-reply-to:from:references:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=8xW2NyMIlyLl6WNC3+rQx+P5obOFNiEroI1Da5p0tdU=;
+ b=kuEmfU5taDi729qi5brsenC4ah9MUPbQ0fpF76IiAQjxNM2TQQilHzo9ChVVMJ5sTh
+ n0Z3gQwXFqKctB2AqxPCQdTSlnqIkRhfTB4sWkipL5gS1bnhSTV0JtdMOi+8HlXCmXmK
+ I3irhi3kdsSTBe3rC04R4oUOgLvYkeNIKZnIQ3iHU0xEEduF2Wuo7Ns6qDWxfcTRrki0
+ A535+1OufaRejfNfnnOPNU3eP2ZbfXTjYmC8jPhE/Kn6PQHrH4PkOkOXCGT7BYSwCbwv
+ R2jWIXfYS9RUnFoyfCnvs0E7AfB/b0/vA5jumpKxU5l7rXM5Ax4TvDDUVNVNcnxOyAJF
+ 8AZg==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ+pwgt4X+QyKlBgKxTI57sRjO7KL0KB9hHOmg8WyNQqCX3GbYyp26XlB4zCT6a/C7YY8MxZCjs=@lists.denx.de
+X-Gm-Message-State: AOJu0YyED3glfbtRVO4tUvtEco8PM24s/gX6g5VZ03OjVt0Js+g4iA4g
+ F93hcuccECmv0YNYd0RxkS7d85r66xL7F60V3m2Z4dAPRnW2iK/lNHAOHhLGJRox/3c=
+X-Gm-Gg: Acq92OEICpxCK60P/Xh0Iv2cMfUfdK/wpv88cgLAmKGTzAmGwQFkv2OmPihOX80Y3GX
+ PIMkTAWuHY/q+XXeauYN2kUnkP6SyfqjRkTtmeybOOn6DnaYEVCh96jXji60t2Wk07Oo7WQywx+
+ vzgr33Wtqv+SU46hPrfujWKpSW1itwFhrnNN23Bk6q+uc8MfgNg7IMsNxfOM5BpZHQkvXkNYbBN
+ Vmi+yWLcoUf/GpjPICzxej5rfmj6kADZCIlcM4LtXWdB896+gNEzXFE62fKEEkfuoUWvrSe/3ts
+ wmIWMiwhF7AeOEr6mik/r7NxS+329nJVDu8HHC0WeSWsSubnOmnPPojiEOvjZUY8pWz080Z1Dyr
+ hTC/Qm0MIs3LSG/l9df6y3BxzDH9mdc6IlwCBpzSg2OGUu0AHohXhI0V7jPy64oUKnpSx1sIBsg
+ nAHp8XYxXfxrI1nOzIwD6Bs0PqCFJSbY/zfuoIEVaBFI6nNYLAPqMOejLgcswFfCEC7a61gerPS
+ 1Ox
+X-Received: by 2002:a05:600c:2d09:b0:48f:e1ac:c96d with SMTP id
+ 5b1f17b1804b1-48fe61f2bcemr118651465e9.20.1779092424989; 
+ Mon, 18 May 2026 01:20:24 -0700 (PDT)
+Received: from [192.168.1.36] (p4fc3dd86.dip0.t-ipconnect.de. [79.195.221.134])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-48feb029180sm111969315e9.4.2026.05.18.01.20.23
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 18 May 2026 01:20:24 -0700 (PDT)
+Message-ID: <71d9b0d0-e204-4efc-915c-55f242363a95@linaro.org>
+Date: Mon, 18 May 2026 10:20:23 +0200
 MIME-Version: 1.0
-References: <20260512-am62_firewall_exception_fix-v1-1-4b274718bdac@ti.com>
-In-Reply-To: <20260512-am62_firewall_exception_fix-v1-1-4b274718bdac@ti.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Mon, 18 May 2026 11:04:36 +0300
-X-Gm-Features: AVHnY4K-ZS7s9q54TiQwlmlnYRUJ5H5BrnDjiaLBhz3kpAoJuX62xHxIg5oP7Zg
-Message-ID: <CAC_iWjJHnzfgMThnUnzd=s_21wndWX57pinNMoq9As+e_TSOOQ@mail.gmail.com>
-Subject: Re: [PATCH master] mach-k3: enable mmu after reserved memory is
- unmapped
-To: Anshul Dalal <anshuld@ti.com>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
- Dhruva Gole <d-gole@ti.com>, Mark Kettenis <kettenis@openbsd.org>,
- Patrice Chotard <patrice.chotard@foss.st.com>, 
- Moteen Shah <m-shah@ti.com>, Beleswar Padhi <b-padhi@ti.com>,
- Wadim Egorov <w.egorov@phytec.de>, Chintan Vankar <c-vankar@ti.com>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3] mach-snapdragon: Add early EL2 hypervisor switch
+ support
+Content-Language: en-US
+To: Aswin Murugan <aswin.murugan@oss.qualcomm.com>, trini@konsulko.com,
+ neil.armstrong@linaro.org, sumit.garg@kernel.org, sjg@chromium.org,
+ Michael.Srba@seznam.cz, u-boot-qcom@groups.io, u-boot@lists.denx.de
+References: <20260515130934.388894-1-aswin.murugan@oss.qualcomm.com>
+From: Casey Connolly <casey.connolly@linaro.org>
+In-Reply-To: <20260515130934.388894-1-aswin.murugan@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -121,145 +105,139 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Anshul
+Hi Aswin,
 
-On Tue, 12 May 2026 at 14:03, Anshul Dalal <anshuld@ti.com> wrote:
->
-> Currently the sequence to enable caches for the A53/A72 core on K3
-> devices looks as follows:
->
->  1. Map entire DDR banks
->  2. Setup page tables and enable MMU (done by mmu_setup)
->  3. Unmap reserved-memory regions
->  4. Enable caches
->
-> However there is a brief period of execution between #2 and #3 where the
-> core can issue speculative accesses to the entire DDR space (including
-> the reserved-memory regions) despite the caches being disabled.
+On 15/05/2026 15:09, Aswin Murugan wrote:
+> Add support for exiting Gunyah hypervisor and switching to EL2 during
+> early boot. This is required for platforms that boot U-Boot in a
+> hypervisor guest environment where U-Boot needs to run at EL2 to
+> enable other hypervisors like KVM.
+> 
+> The switch is performed via TrustZone SMC call before EL register
+> configuration in start.S. The implementation:
+> 
+> - Checks current exception level and only executes at EL1
+> - Uses TrustZone SMC to exit Gunyah and transition to EL2
+> - Integrates with existing boot0.h workaround infrastructure
 
-This is indeed a problem and the fix looks correct.
-What worries me though is that the mmu is common across v8 boards. Is
-there a way to generalize this instead of adding per board variants?
+This is a lot of words that don't seem to really explain what this
+change does or why it makes sense. Please rewrite this to be a bit more
+concise.
 
-Thanks
-/Ilias
+Could you also describe in the comment at the top of the header file
+(and maybe briefly in the kconfig) which platforms this is supported on?
+Is it just QCS6490? All "Dragonwing" platforms? what's the story here?
 
->
-> A firewall exception is triggered whenever such speculative access is
-> made to secure DDR region of TFA or OP-TEE. This patch fixes the issue
-> by re-ordering the sequence as follows:
->
->  1. Map entire DDR banks
->  2. Setup page tables
->  3. Unmap reserved-memory regions
->  4. Enable MMU
->  5. Enable caches
->
-> Fixes: f1c694b8fdde ("mach-k3: map all banks using mem_map_from_dram_banks")
-> Signed-off-by: Anshul Dalal <anshuld@ti.com>
+Lastly, this should actually be enabled on at least one platform so we
+don't merge dead code. I think this will "just work" on qcs6490 without
+other patches.
+
+Kind regards,
+
+> 
+> A new Kconfig option CONFIG_QCOM_EL2_GUNYAH_EXIT_SUPPORT enables this
+> functionality.
+> 
+> Signed-off-by: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
 > ---
-> For testing, I had used an AM62p with the following diff to enable
-> logging from TIFS:
->
->   --- a/board/ti/am62px/board-cfg.yaml
->   +++ b/board/ti/am62px/board-cfg.yaml
->   @@ -33,5 +33,5 @@ board-cfg:
->            subhdr:
->                magic: 0x020C
->                size: 8
->   -        trace_dst_enables: 0x00
->   -        trace_src_enables: 0x00
->   +        trace_dst_enables: 0xd
->   +        trace_src_enables: 0x3f
->
-> Without this patch an exception[1] similar to the following is observed
-> at A53 SPL stage:
->
->   FWL Bit  0x1
->   Exception addr  0x45B08000
->   FWL Exception  0x1000100
->    0x60000
->    0x80002880
->    0x0
->    0x141201
->    0x40
->
-> [1]: https://software-dl.ti.com/tisci/esd/latest/6_topic_user_guides/firewall_faq.html#how-do-i-debug-firewall-issues
+> Change in v3:
+> - Corrected the logic to accurately detect the current Exception Level (EL)
+>   and fuction properly when U-Boot enters either EL2 or EL1.
+> 
+> Link to v2: https://lore.kernel.org/u-boot/20260515065632.90772-1-aswin.murugan@oss.qualcomm.com/
+> 
+> Change in v2:
+> - EL2 switch is made at early stage instead of doing at the very last stage in
+>   the previous version
+> - This change is based on the patch [1]
+> 
+> [1] https://lore.kernel.org/all/20260508-qcom_spl-v7-4-7d0e22aaaa8f@seznam.cz/
+> 
+> Link to v1: https://lore.kernel.org/u-boot/20260419173829.1074404-1-aswin.murugan@oss.qualcomm.com/
 > ---
->  arch/arm/cpu/armv8/cache_v8.c    |  2 +-
->  arch/arm/include/asm/armv8/mmu.h |  1 +
->  arch/arm/mach-k3/common.c        | 10 +++++++++-
->  3 files changed, 11 insertions(+), 2 deletions(-)
->
-> diff --git a/arch/arm/cpu/armv8/cache_v8.c b/arch/arm/cpu/armv8/cache_v8.c
-> index 39479df7b21..169e68627e1 100644
-> --- a/arch/arm/cpu/armv8/cache_v8.c
-> +++ b/arch/arm/cpu/armv8/cache_v8.c
-> @@ -777,7 +777,7 @@ void setup_pgtables(void)
->                 add_map(&mem_map[i]);
->  }
->
-> -static void setup_all_pgtables(void)
-> +void setup_all_pgtables(void)
->  {
->         u64 tlb_addr = gd->arch.tlb_addr;
->         u64 tlb_size = gd->arch.tlb_size;
-> diff --git a/arch/arm/include/asm/armv8/mmu.h b/arch/arm/include/asm/armv8/mmu.h
-> index 8aa5f9721c4..969f1745445 100644
-> --- a/arch/arm/include/asm/armv8/mmu.h
-> +++ b/arch/arm/include/asm/armv8/mmu.h
-> @@ -197,6 +197,7 @@ struct mm_region {
->  /* Used as the memory map for MMU configuration by mmu_setup */
->  extern struct mm_region *mem_map;
->  void setup_pgtables(void);
-> +void setup_all_pgtables(void);
->
->  /**
->   * mem_map_from_dram_banks() - Populate mem_map with entries corresponding to
-> diff --git a/arch/arm/mach-k3/common.c b/arch/arm/mach-k3/common.c
-> index b0a75988714..a910c6e3725 100644
-> --- a/arch/arm/mach-k3/common.c
-> +++ b/arch/arm/mach-k3/common.c
-> @@ -265,8 +265,10 @@ void board_prep_linux(struct bootm_headers *images)
->  void enable_caches(void)
->  {
->         void *fdt = (void *)gd->fdt_blob;
-> +       int el = current_el();
->         int ret;
->
-> +       /* Map all DDR banks as Normal memory */
->         ret = mem_map_from_dram_banks(K3_MEM_MAP_FIRST_BANK_IDX, K3_MEM_MAP_LEN,
->                                      PTE_BLOCK_MEMTYPE(MT_NORMAL) |
->                                              PTE_BLOCK_INNER_SHARE);
-> @@ -278,8 +280,11 @@ void enable_caches(void)
->                 printf("%s: Failed to perform reserved-memory fixups (%s)\n",
->                        __func__, fdt_strerror(ret));
->
-> -       mmu_setup();
-> +       setup_all_pgtables();
-> +       set_ttbr_tcr_mair(el, gd->arch.tlb_addr, get_tcr(NULL, NULL),
-> +                         MEMORY_ATTRIBUTES);
->
-> +       /* Unmap reserved memory regions */
->         if (CONFIG_K3_ATF_LOAD_ADDR >= CFG_SYS_SDRAM_BASE) {
->                 ret = mmu_unmap_reserved_mem("tfa", true);
->                 if (ret)
-> @@ -294,6 +299,9 @@ void enable_caches(void)
->                                __func__, ret);
->         }
->
-> +       /* enable the mmu */
-> +       set_sctlr(get_sctlr() | CR_M);
+>  arch/arm/mach-snapdragon/Kconfig              |  7 ++++
+>  arch/arm/mach-snapdragon/include/mach/boot0.h |  3 ++
+>  .../include/mach/gunyah_exit_boot0.h          | 35 +++++++++++++++++++
+>  3 files changed, 45 insertions(+)
+>  create mode 100644 arch/arm/mach-snapdragon/include/mach/gunyah_exit_boot0.h
+> 
+> diff --git a/arch/arm/mach-snapdragon/Kconfig b/arch/arm/mach-snapdragon/Kconfig
+> index f863daf6bb9..931d25c1023 100644
+> --- a/arch/arm/mach-snapdragon/Kconfig
+> +++ b/arch/arm/mach-snapdragon/Kconfig
+> @@ -56,6 +56,13 @@ config BOOT0_MSM8916_PSCI_WORKAROUND
+>  	help
+>  	  Select this if you are building U-Boot proper for an msm8916 board that
+>  	  uses the buggy PSCI implementation.
 > +
->         icache_enable();
->         dcache_enable();
->  }
->
-> ---
-> base-commit: 525ef034e5bed619c0f822da5373ed1fdadc8501
-> change-id: 20260512-am62_firewall_exception_fix-20a335cca769
->
-> Best regards,
-> --
-> Anshul Dalal <anshuld@ti.com>
->
+> +config QCOM_EL2_GUNYAH_EXIT_SUPPORT
+> +	bool "Enable early EL2 switch by exiting Gunyah"
+> +	help
+> +	  Exit Gunyah hypervisor and switch to EL2 during early boot. This must
+> +	  happen before EL register configuration in start.S so that U-Boot can
+> +	  run properly at EL2.
+>  endchoice
+>  
+>  endif
+> diff --git a/arch/arm/mach-snapdragon/include/mach/boot0.h b/arch/arm/mach-snapdragon/include/mach/boot0.h
+> index b3c76d6d97d..032a9fbdb12 100644
+> --- a/arch/arm/mach-snapdragon/include/mach/boot0.h
+> +++ b/arch/arm/mach-snapdragon/include/mach/boot0.h
+> @@ -1,9 +1,12 @@
+>  /* SPDX-License-Identifier: GPL-2.0+ */
+> +
+>  #if defined(CONFIG_SPL_BUILD)
+>  	b	reset
+>  #else
+>  #if defined(CONFIG_BOOT0_MSM8916_PSCI_WORKAROUND)
+>  #include "msm8916_boot0.h"
+> +#elif defined(CONFIG_QCOM_EL2_GUNYAH_EXIT_SUPPORT)
+> +#include "gunyah_exit_boot0.h"
+>  #else
+>  	b	reset
+>  #endif
+> diff --git a/arch/arm/mach-snapdragon/include/mach/gunyah_exit_boot0.h b/arch/arm/mach-snapdragon/include/mach/gunyah_exit_boot0.h
+> new file mode 100644
+> index 00000000000..5c5bd3b6691
+> --- /dev/null
+> +++ b/arch/arm/mach-snapdragon/include/mach/gunyah_exit_boot0.h
+> @@ -0,0 +1,35 @@
+> +/* SPDX-License-Identifier: GPL-2.0 */
+> +/*
+> + * Early Gunyah Hypervisor Exit
+> + *
+> + * Exit Gunyah hypervisor and switch to EL2 during early boot. This must
+> + * happen before EL register configuration in start.S so that U-Boot can
+> + * run properly at EL2.
+> + */
+> +
+> +#include <asm/macro.h>
+> +#include <linux/arm-smccc.h>
+> +
+> +/* TrustZone SMC IDs for hypervisor configuration */
+> +#define TZ_EL2_SWITCH_SMC_ID			0x02000121
+> +#define TZ_EL2_SWITCH_PARAM_ID			0x00000023
+> +#define TZ_EL2_SWITCH_PARAM2_EXIT_GUNYAH	0x1
+> +
+> +	/* Only perform hypervisor switch if we're at EL1 */
+> +	switch_el x9, 3f, 2f, 1f
+> +
+> +	/* Save FDT address before we modify x0 */
+> +1:	mov	x9, x0
+> +
+> +	/* Switch to EL2 (exit Gunyah) */
+> +	ldr	w0, =TZ_EL2_SWITCH_SMC_ID
+> +	ldr	w1, =TZ_EL2_SWITCH_PARAM_ID
+> +	mov	w2, wzr
+> +	mov	w3, wzr
+> +	ldr	w4, =TZ_EL2_SWITCH_PARAM2_EXIT_GUNYAH
+> +	smc	#0
+> +
+> +	/* Restore FDT address */
+> +	mov	x0, x9
+> +2:
+> +3:	b	reset
+
+-- 
+// Casey (she/her)
+
