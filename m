@@ -4,113 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E2EBCD4F4A
-	for <u-boot@archiver.kernel.org>; Mon, 18 May 2026 22:40:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7ECF3CD343F
+	for <u-boot@archiver.kernel.org>; Mon, 18 May 2026 22:50:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BAF8584812;
-	Tue, 19 May 2026 00:38:18 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=riscstar.com
+	by phobos.denx.de (Postfix) with ESMTP id 0A0B4846AE;
+	Tue, 19 May 2026 00:50:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=riscstar-com.20251104.gappssmtp.com header.i=@riscstar-com.20251104.gappssmtp.com header.b="RL3eTNVj";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="TThlXp0W";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EE07C8469F; Tue, 19 May 2026 00:33:36 +0200 (CEST)
-Received: from mail-pl1-x635.google.com (mail-pl1-x635.google.com
- [IPv6:2607:f8b0:4864:20::635])
+ id 600B9846C6; Tue, 19 May 2026 00:50:27 +0200 (CEST)
+Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
+ [IPv6:2607:f8b0:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2EEC88465A
- for <u-boot@lists.denx.de>; Tue, 19 May 2026 00:33:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 33EB78469F
+ for <u-boot@lists.denx.de>; Tue, 19 May 2026 00:50:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=riscstar.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=guodong@riscstar.com
-Received: by mail-pl1-x635.google.com with SMTP id
- d9443c01a7336-2bdeed4f717so7809785ad.0
- for <u-boot@lists.denx.de>; Mon, 18 May 2026 15:33:34 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x32e.google.com with SMTP id
+ 46e09a7af769-7e4de538f83so1709916a34.1
+ for <u-boot@lists.denx.de>; Mon, 18 May 2026 15:50:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=riscstar-com.20251104.gappssmtp.com; s=20251104; t=1779143613; x=1779748413;
- darn=lists.denx.de; 
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=8anTdx6cneiOGAoS1BniBF2E/ZT97IVStPPf6ZwhB44=;
- b=RL3eTNVji+vaOwoU/plOnAwGcv4Am6Hhaqr2cMwLp4UybHwgomq+VMTG9653/IPfdJ
- K6W6XhSjCvNvdImF0EIX9GWF8RoU6oChgi31dQ7VXXhakQ7AMweYcOrWuX1+ltqZ6zyo
- ZtlTm0rEmCgA3YbEj3J4cH9cFyC1jDP/2BTzPrip4SknzKVFVpnGyPKQiTgYWswJ6lZL
- gZ0gyL/KUigr5n2xDA4zK94eaNxDHumLY8B0hk7IPmIsTTxiw81kD47BVrkNHzYYOkMB
- mdAnxmHiyvgxj1/0FaNC5nk1SRsT/Ixcs5r+LoQUlUbcmq4+ALdGGrpYOq//Gd+U5Qt6
- NZ/Q==
+ d=konsulko.com; s=google; t=1779144624; x=1779749424; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=dWazLwTeXdG6RpbKlK31ucLk1ZBQ8Z3hXtFQ7UXTBWY=;
+ b=TThlXp0W9Vrl8i+SrjKxEYxBTjD4+TUI3iPHjPxKDGhYncNlg0Dg1WgTeVw3GjroYn
+ kZXWyKK++yD0fLbQihxXVe+Aytt7DwP5TMG4jxIXbaHwxCh8CAC4bYQLm46sj+MXlxRX
+ RzsgBFvtWuIqzbZqe01c40ttH/T9fa0byWNIc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779143613; x=1779748413;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=8anTdx6cneiOGAoS1BniBF2E/ZT97IVStPPf6ZwhB44=;
- b=RxEh/37d0pLeG7DFqDW+eXis0gKK3lSfJYFoK41nJhviMnw6t/lCKhpzvWv92bvBWi
- cCOmm5RDo0meaM6Y9JYTMyYmZ75sfO5iW7cFE5xrB3ea0i27BfjfM2bFPc+EAGqwyGxQ
- tGWVHxNPuLRgBr1RpWQIxQo5VEnFynNEnSXUKTkBkwEqGuG8q2Xt/dqM4VKHJbWuubKh
- /AAe67M79zTM34t5u4iq82gyCC7OrGqHzteRhcDHCS7kJGbPaT8Uq1HEe1QRa6W1w+aD
- ceDXFTZpLyIvdU1SynqI0KVGDUKpe1n63IlBhc6aIUdFGTIf2SrlJGXMTb+RyTHajhui
- d1Rw==
-X-Gm-Message-State: AOJu0Yx4UwrDqoS1HcOzsgbPvPfg7Shu92Wfz/0h6IdJIz7q+CsiZaqB
- DPa7T8CgGSp6C/b247nWfB5faCWsd0jr/FD2TOX4gVBoyzMZpR6/treOmlO+EpTCHO0=
-X-Gm-Gg: Acq92OFKPHuV6BzqRRsg/KfmWAFsu6QxLhX5eIaXqej/dk8DMA80QFOAAkJ2v8q1ZN7
- vd5+A+RHncEUstufQzGes5koag6DdZlppwAfQRE5sPXTB2GJ94kcuhM79iIqoLl1+Mj00T/8PTY
- v3GkjX7z0UKWQvlARVGRRYpfnRQIGLeQyRzeZZAWkJUuLlzIcMpER+qXlP2duPiJxGNGYRV1WTv
- UsoY/pCVEM0Rhj2wGHcuW1eTEGl7QxwU2eHnyOOQXzRKyQglQFn6+K7X1Hv425e5yHM8rNLRtpp
- 6n+l/t/lL0F5ZV/nHPDay2MUMMHQnSeNeUQSCB+D4wbMJS5YGoK8xuNKxHingS8zaYOCWK2P6ll
- QnKBRD5gBFq0rt9eHqmBjWW5KJp706IYNmO1gn3MCHjTXRu6+9zWEHldfrM+CzIGeFtxFy2eEDJ
- 2e85LnofQj2pilHV9nmTnpui5dU7tRIPhFSV5KRnMuhfMzt+mIjoJsDw==
-X-Received: by 2002:a17:902:db01:b0:2bd:2de3:51a4 with SMTP id
- d9443c01a7336-2bd7e8feac3mr191263315ad.27.1779143612497; 
- Mon, 18 May 2026 15:33:32 -0700 (PDT)
-Received: from [127.0.1.1] ([2a12:a305:4::4072])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2bd5bd5ef27sm206379265ad.8.2026.05.18.15.32.58
+ d=1e100.net; s=20251104; t=1779144624; x=1779749424;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=dWazLwTeXdG6RpbKlK31ucLk1ZBQ8Z3hXtFQ7UXTBWY=;
+ b=U9t0l1qCPL/W89t0B8km40s5t5BUYUB9rLD9aZIRm5EpUX8IKBYsa3ilGYdNLPdUFO
+ tkLguxUUyn9JogshM85j+AFDy3ngH8MO1d0QSRz/CSxTAgmhnRHRIuzE5ORg9yiso/jt
+ BJGaHfjdPZZ2lLyxPuX7E/UfxoUrlnuNU3W2FcX4I6fsKU7ZyPRnMR9l9qjAJJBWyBXU
+ Oag+fIX/W9/bTvXoIR6oYKgyb35++ajl1WU6lpZFhWA8IuGzOK/4wBGoFFA1kftHZRwy
+ g7kGDpRmcyKly3cfNnu7AYQKzwMK684lW/WbpJKzg1XwGr+deZ1x7+EetFx+V44DTofX
+ dbqw==
+X-Gm-Message-State: AOJu0YxFjsoUa1VGS+/NPvl3DwW0o5ztmV2iGNIVnGbq5uePAHejZhG0
+ HtQ5dkEXkDK0LbHRqwtjEGBYb0aFwbMJ9d1fQ/kvmwV77H+WiddtOMWyIXHC/Ppilrs=
+X-Gm-Gg: Acq92OE8MSitsL7jAlYjROfT9bXSnPlEXsaMc0UoPco6/w04NEzXOOzqt/R3taPtMoP
+ u/ZrlIQZDbYkKd9B7Hdk73948GjiFU34tK033MU8v8Lbo3fVF37bQL4i1zFsfTj1v5d+BHDKZb2
+ 1CU09OXtspK3iIFxp+htQ2ZNXeBxda4FDBfrw+sy1spp0JY+nFmnUTWCDowmxBepij/QKAnxP4W
+ PeZrtxaw0uHH5UUOEBdVOPVOn2CLwBrtdOQRNAcIPIRB//CNuE29dhVD+2XyDU0V9kxkQ5+TM45
+ sQNTKom3REvQKHDHOx9Vv5Hu5Ru+G4v1po0XnzixDbZt+5rMJ7vEcKPucpjP58GMZaU1Y960GqZ
+ boagmB43w1bMxAV9RchzT2PwxV3mk0GQq4p1jPC5QlwTBd3Vi/jfGyiDi2OwzhDTGNkGivDnHxP
+ D+3U5qaMhiS+uYCCvYNJOcb9COnAgmdjNZ4DFurfHh/YqhCqav/GwAKvLZ4k4JItfdmEX8B2G2r
+ sapgTqUUv8sWlc7e/Uv8HbYCVFOc9TQ4gExLG8teeFBd/O3wew=
+X-Received: by 2002:a05:6830:6689:b0:7dc:d0e3:5bdd with SMTP id
+ 46e09a7af769-7e4f2ba16d0mr11262338a34.19.1779144623905; 
+ Mon, 18 May 2026 15:50:23 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
+ [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7e55bbd0be3sm8663989a34.15.2026.05.18.15.50.22
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 18 May 2026 15:33:32 -0700 (PDT)
-From: Guodong Xu <guodong@riscstar.com>
-Date: Tue, 19 May 2026 06:26:32 -0400
-Subject: [PATCH v4 14/14] doc: spacemit: add K1 SPL build and test guide
-MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260519-b4-k1-spl-bring-up-v4-14-3915a2a904c1@riscstar.com>
-References: <20260519-b4-k1-spl-bring-up-v4-0-3915a2a904c1@riscstar.com>
-In-Reply-To: <20260519-b4-k1-spl-bring-up-v4-0-3915a2a904c1@riscstar.com>
-To: u-boot@lists.denx.de, Kongyang Liu <seashell11234455@gmail.com>, 
- Yixun Lan <dlan@gentoo.org>
-Cc: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>, 
- Patrice Chotard <patrice.chotard@foss.st.com>, 
- Patrick Delaunay <patrick.delaunay@foss.st.com>, 
- Michal Simek <michal.simek@amd.com>, 
- Quentin Schulz <quentin.schulz@cherry.de>, Yao Zi <me@ziyao.cc>, 
- Junhui Liu <junhui.liu@pigmoral.tech>, 
- Peter Korsgaard <peter@korsgaard.com>, 
- Leo Yu-Chi Liang <ycliang@andestech.com>, 
- Raymond Mao <raymond.mao@riscstar.com>, 
- Gabriel Fernandez <gabriel.fernandez@foss.st.com>, 
- Kever Yang <kever.yang@rock-chips.com>, 
- Finley Xiao <finley.xiao@rock-chips.com>, Rick Chen <rick@andestech.com>, 
- Conor Dooley <conor.dooley@microchip.com>, u-boot-spacemit@groups.io, 
- Vincent Legoll <legoll@online.fr>, Huan Zhou <pericycle.cc@gmail.com>, 
- Jamie Gibbons <jamie.gibbons@microchip.com>, 
- Randolph Sheng-Kai Lin <randolph@andestech.com>, 
- Sam Protsenko <semen.protsenko@linaro.org>, Peng Fan <peng.fan@nxp.com>, 
- Heiko Schocher <hs@nabladev.com>, 
- Casey Connolly <casey.connolly@linaro.org>, 
- Justin Swartz <justin.swartz@risingedge.co.za>, 
- Jaehoon Chung <jh80.chung@samsung.com>, 
- David Lechner <dlechner@baylibre.com>, Julien Masson <jmasson@baylibre.com>, 
- Macpaul Lin <macpaul.lin@mediatek.com>, Henrik Grimler <henrik@grimler.se>, 
- Kory Maincent <kory.maincent@bootlin.com>, Anshul Dalal <anshuld@ti.com>, 
- Bo-Chen Chen <rex-bc.chen@mediatek.com>, 
- Justin Klaassen <justin@tidylabs.net>, Guodong Xu <guodong.xu@riscstar.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Guodong Xu <guodong@riscstar.com>, 
+ Mon, 18 May 2026 15:50:23 -0700 (PDT)
+Date: Mon, 18 May 2026 16:50:21 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Cc: u-boot@lists.denx.de,
+ Christian =?iso-8859-1?Q?P=F6tzsch?= <christian.poetzsch@kernkonzept.com>,
+ Adam Lackorzynski <adam@l4re.org>, Bin Meng <bmeng.cn@gmail.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>
-X-Mailer: b4 0.15.1
-X-Mailman-Approved-At: Tue, 19 May 2026 00:38:07 +0200
+Subject: Re: [PATCH] virtio: Staticize and constify driver ops
+Message-ID: <20260518225021.GA482288@bill-the-cat>
+References: <20260510171802.56897-1-marek.vasut+renesas@mailbox.org>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="QMlbX5J712IusnRq"
+Content-Disposition: inline
+In-Reply-To: <20260510171802.56897-1-marek.vasut+renesas@mailbox.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -127,280 +99,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The K1 SPL patchset requires DDR firmware integration and FSBL signing
-steps that are not covered by existing documentation. Add a SoC-level
-guide so reviewers and developers can build and test on hardware.
 
-Signed-off-by: Guodong Xu <guodong@riscstar.com>
+--QMlbX5J712IusnRq
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
----
-v4:
-- New in series. Folded from standalone v2 doc thread.
----
- doc/board/spacemit/index.rst  |   1 +
- doc/board/spacemit/k1-spl.rst | 243 ++++++++++++++++++++++++++++++++++++++++++
- 2 files changed, 244 insertions(+)
+On Sun, May 10, 2026 at 07:17:53PM +0200, Marek Vasut wrote:
 
-diff --git a/doc/board/spacemit/index.rst b/doc/board/spacemit/index.rst
-index e7d3d94e459..a5e35ee12ab 100644
---- a/doc/board/spacemit/index.rst
-+++ b/doc/board/spacemit/index.rst
-@@ -6,4 +6,5 @@ SpacemiT
-    :maxdepth: 1
- 
-    bananapi-f3
-+   k1-spl
- 
-diff --git a/doc/board/spacemit/k1-spl.rst b/doc/board/spacemit/k1-spl.rst
-new file mode 100644
-index 00000000000..187eed56e8e
---- /dev/null
-+++ b/doc/board/spacemit/k1-spl.rst
-@@ -0,0 +1,243 @@
-+.. SPDX-License-Identifier: GPL-2.0-or-later
-+
-+SpacemiT K1 SPL Build and Test Guide
-+=====================================
-+
-+This guide explains how to build and test U-Boot SPL on SpacemiT K1 based
-+boards. It covers building SPL with DDR initialization, generating the signed
-+FSBL image, and deploying via USB fastboot.
-+
-+Tested boards: Banana Pi BPI-F3, MusePi Pro.
-+
-+.. note::
-+
-+   The procedure described here loads SPL into SRAM via USB fastboot and
-+   does not modify the on-board flash, so a power cycle restores the
-+   board's normal boot path.
-+
-+   At this stage of the patchset, SPL initializes DDR and then halts with
-+   "SPL: Unsupported Boot Device!" because SPI NOR storage support is not
-+   yet available in U-Boot proper. This document will be updated when
-+   U-Boot stage support is ready.
-+
-+Prerequisites
-+~~~~~~~~~~~~~
-+
-+- A SpacemiT K1 board with USB Type-C and UART access
-+- USB-to-UART adapter (3.3V TTL)
-+- ``minicom`` or equivalent serial terminal, configured at 115200 8N1
-+- ``fastboot`` tool on the host
-+
-+Hardware Setup
-+~~~~~~~~~~~~~~
-+
-+**1. UART Connection**
-+
-+Remove all other cables first, then attach UART. Connect a 3.3V
-+USB-to-UART cable to the board's UART header (J25 on the BPI-F3)::
-+
-+    BPI-F3 top view
-+    +--------------------------------------------------+
-+    |                                                  |
-+    |   J15: USB-C [====]     [FDL] [PWR] [RST]        |
-+    |                                                  |
-+    |                                                  |
-+    |                              J25 (UART header)   |
-+    |                              [TXD] [RXD] [GND]   |
-+    +--------------------------------------------------+
-+
-+After UART is connected, attach the USB Type-C cable to the OTG port
-+(J15 on BPI-F3) to power on.
-+
-+**2. Serial Console**
-+
-+.. code-block:: console
-+
-+   $ minicom -D /dev/ttyUSB0
-+
-+Default baudrate: 115200.
-+
-+Building U-Boot SPL
-+~~~~~~~~~~~~~~~~~~~~
-+
-+**1. Obtain the DDR training firmware**
-+
-+The DDR training firmware is a proprietary binary provided by SpacemiT. It is
-+not included in U-Boot and must be downloaded separately from:
-+
-+https://github.com/spacemit-com/spacemit-firmware/tree/master/k1/v0.2
-+
-+Download ``ddr_fw.bin`` from that directory.
-+
-+This binary is integrated into the SPL image at build time via the binman
-+framework. When the SPL image is loaded to SRAM (e.g., via USB fastboot),
-+the SPL executes the DDR firmware from SRAM to perform DDR initialization.
-+
-+**2. Obtain OpenSBI fw_dynamic.bin**
-+
-+Any pre-built ``fw_dynamic.bin`` is sufficient. Upstream OpenSBI
-+sources are at https://github.com/riscv-software-src/opensbi if you
-+need to build one.
-+
-+At this stage of the patchset, SPL halts before invoking OpenSBI,
-+but U-Boot's binman still packages ``fw_dynamic.bin`` into
-+``u-boot.itb`` and the build fails if it is missing.
-+
-+**3. Build SPL**
-+
-+.. code-block:: console
-+
-+   $ export CROSS_COMPILE=riscv64-linux-gnu-
-+   $ export ARCH=riscv
-+   $ export DDR_FW_FILE=$(pwd)/ddr_fw.bin
-+   $ export OPENSBI=/path/to/fw_dynamic.bin
-+   $ make spacemit_k1_defconfig
-+   $ make
-+
-+Output: ``u-boot-spl-ddr.bin`` in the build directory. This image contains the
-+SPL code and the DDR firmware blob packaged together via binman.
-+
-+.. note::
-+
-+   If ``DDR_FW_FILE`` is not set, the build completes with an empty
-+   placeholder. The resulting SPL will boot but cannot initialize DDR.
-+
-+**4. Generate signed FSBL image**
-+
-+The K1 BootROM requires a signed first-stage bootloader (FSBL). The signing
-+tool (``tools/build_binary_file.py``) is in SpacemiT's vendor U-Boot repository:
-+
-+.. code-block:: console
-+
-+   $ git clone -b k1-bl-v2.2.y https://gitee.com/spacemit-buildroot/uboot-2022.10
-+
-+The script uses ``fsbl_ddr.json`` which may not exist by default. If
-+``fsbl_ddr.json`` does not exist in
-+``uboot-2022.10/board/spacemit/k1-x/configs/``,
-+create it by copying ``fsbl.json`` and replacing the reference to
-+``u-boot-spl.bin`` with ``u-boot-spl-ddr.bin``:
-+
-+.. code-block:: console
-+
-+   $ cd uboot-2022.10/board/spacemit/k1-x/configs
-+   $ cp fsbl.json fsbl_ddr.json
-+   $ sed -i 's/u-boot-spl\.bin/u-boot-spl-ddr.bin/g' fsbl_ddr.json
-+
-+Create the ``fsbl.sh`` script below in the ``uboot-2022.10`` directory.
-+Update the path variables to match your local setup:
-+
-+.. code-block:: bash
-+
-+   #!/bin/sh
-+   MAINLINE_UBOOT_IMG_PATH="{your path}/u-boot"
-+   MAINLINE_SPL_IMG_PATH="{your path}/u-boot/spl"
-+   FSBL_PATH="{your path}/uboot-2022.10/spl_bin"
-+   KEY_TOOL_PATH="{your path}/uboot-2022.10/tools"
-+   CONFIG_PATH="{your path}/uboot-2022.10/board/spacemit/k1-x/configs"
-+
-+   mkdir -p ${FSBL_PATH}
-+   echo "Clean binaries in ${FSBL_PATH}"
-+   rm -f ${FSBL_PATH}/u-boot-spl-ddr.bin
-+   rm -f ${FSBL_PATH}/u-boot-spl.bin
-+
-+   if [ ! -d ${MAINLINE_SPL_IMG_PATH} ]; then
-+           MAINLINE_UBOOT_IMG_PATH="{your path}/build"
-+           MAINLINE_SPL_IMG_PATH="{your path}/build/spl"
-+   fi
-+
-+   # The signing tool reads u-boot-spl-ddr.bin from the path declared in
-+   # fsbl_ddr.json's "source" field, which is resolved relative to the
-+   # JSON file's directory -- i.e. one level up from CONFIG_PATH, not
-+   # FSBL_PATH. Stage the unsigned binary there before signing.
-+   cp ${MAINLINE_UBOOT_IMG_PATH}/u-boot-spl-ddr.bin ${CONFIG_PATH}/../
-+   python3 ${KEY_TOOL_PATH}/build_binary_file.py \
-+       -c ${CONFIG_PATH}/fsbl_ddr.json \
-+       -o ${FSBL_PATH}/FSBL.bin
-+
-+Then run:
-+
-+.. code-block:: console
-+
-+   $ chmod +x fsbl.sh
-+   $ ./fsbl.sh
-+
-+Output: ``FSBL.bin`` in the ``spl_bin`` directory, ready for deployment.
-+
-+Deploying via USB Fastboot
-+~~~~~~~~~~~~~~~~~~~~~~~~~~~
-+
-+To enter BootROM fastboot mode:
-+
-+1. Power off the board by unplugging its power supply.
-+2. **Press and hold** the FDL button (called "Boot Key" on some boards;
-+   see the board layout above for the BPI-F3).
-+3. While holding the button, use a USB cable to connect the OTG port to
-+   your host. This cable is also used by fastboot to upload the firmware.
-+4. Release the button.
-+
-+On the host, ``fastboot devices`` should list the board::
-+
-+    dfu-device     DFU download
-+
-+The serial console shows the BootROM's USB download handler trace,
-+including a line like::
-+
-+    usb2d_initialize : enter
-+
-+This indicates the board is ready to accept an image via USB.
-+
-+.. tip::
-+
-+   If you are worried about insufficient USB power, you can first plug
-+   in the power, then release the button, and then plug in the USB
-+   cable.
-+
-+On the host:
-+
-+.. code-block:: console
-+
-+   $ sudo fastboot stage FSBL.bin
-+   $ sudo fastboot continue
-+
-+Expected Output
-+~~~~~~~~~~~~~~~~
-+
-+During successful SPL boot with DDR initialization, the serial console
-+shows output like::
-+
-+    <debug_uart>
-+
-+    U-Boot SPL 2026.04-rc4-00430-g8b84b1ed8ea9 (May 08 2026 - 09:08:27 -0400)
-+    Fail to detect board:-19
-+    vdd_core, value:900000
-+    vdd_1v8, value:1800000
-+    vdd_1v8_mmc, value:1800000
-+    DDR firmware: [0xc0815840]:0xf0227179, size:0x8d98
-+    DDR is ready
-+    SPL: Unsupported Boot Device!
-+    SPL: failed to boot from all boot devices
-+    ### ERROR ### Please RESET the board ###
-+
-+To walk through the key lines:
-+
-+- ``DDR firmware: [...], size:0x8d98`` - DDR firmware loaded successfully
-+- ``DDR is ready`` - DDR initialization completed
-+- ``SPL: failed to boot from all boot devices`` - expected at this stage,
-+  confirms that SPL with DDR init is working correctly
-+
-+If SPL hangs before printing DDR messages, verify that ``DDR_FW_FILE`` was set
-+during build and that ``ddr_fw.bin`` is not empty.
-+
-+.. tip::
-+
-+   To see verbose DDR training output from the DDR firmware (per-phase
-+   training pass/fail logs), add ``#define DEBUG`` at the top of
-+   ``board/spacemit/k1/spl.c`` and rebuild. SPL then passes ``puts`` as
-+   the firmware's log callback; otherwise the callback is ``NULL`` and
-+   the firmware runs silently.
-+
-+References
-+~~~~~~~~~~~
-+
-+- `DDR firmware repository <https://github.com/spacemit-com/spacemit-firmware>`_
-+- `SpacemiT vendor U-Boot (signing tool) <https://gitee.com/spacemit-buildroot/uboot-2022.10>`_
+> Set the ops structure as static const. The structure is not accessible
+> from outside of this driver and is not going to be modified at runtime.
+>=20
+> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+> ---
+> Cc: "Christian P=F6tzsch" <christian.poetzsch@kernkonzept.com>
+> Cc: Adam Lackorzynski <adam@l4re.org>
+> Cc: Bin Meng <bmeng.cn@gmail.com>
+> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+> Cc: Tom Rini <trini@konsulko.com>
+> Cc: u-boot@lists.denx.de
+> ---
+>  drivers/virtio/virtio-uclass.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>=20
+> diff --git a/drivers/virtio/virtio-uclass.c b/drivers/virtio/virtio-uclas=
+s.c
+> index c36e9e9b3a7..6e4a3d7a7c1 100644
+> --- a/drivers/virtio/virtio-uclass.c
+> +++ b/drivers/virtio/virtio-uclass.c
+> @@ -400,7 +400,7 @@ UCLASS_DRIVER(virtio) =3D {
+>  	.per_device_auto	=3D sizeof(struct virtio_dev_priv),
+>  };
+> =20
+> -struct bootdev_ops virtio_bootdev_ops =3D {
+> +static const struct bootdev_ops virtio_bootdev_ops =3D {
+>  };
+> =20
+>  static const struct udevice_id virtio_bootdev_ids[] =3D {
 
--- 
-2.43.0
+So, this shows off a problem that needs to be handled differently. In
+boot/bootdev-uclass.c we can't have ops be null. And moving this to
+static const leads to size growth due to the compiler no longer being
+able to play some game that it used to do. I'll post a patch shortly
+that reworks the function in boot/bootdev-uclass.c and then drops these
+empty structs.
 
+--=20
+Tom
+
+--QMlbX5J712IusnRq
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaguXpQAKCRAr4qD1Cr/k
+CjaHAQDZYYKhiNhAkOPwgQT3gFOC5dqG0GRvC03/Ov+WCkvHMgEAjJ8T7fCB9x01
+TLYRhWo7EQxc9mbPvsi9rl/2Y3kkGQw=
+=OP0g
+-----END PGP SIGNATURE-----
+
+--QMlbX5J712IusnRq--
