@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C78ACD4F3C
-	for <u-boot@archiver.kernel.org>; Mon, 18 May 2026 05:59:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F960CD343F
+	for <u-boot@archiver.kernel.org>; Mon, 18 May 2026 05:59:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 01B98846A7;
+	by phobos.denx.de (Postfix) with ESMTP id 3B859846C6;
 	Mon, 18 May 2026 07:58:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="JQen0dAn";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="c7DLp5iU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C047684694; Mon, 18 May 2026 07:57:58 +0200 (CEST)
+ id 763C1846B0; Mon, 18 May 2026 07:57:59 +0200 (CEST)
 Received: from smtp-relay-canonical-0.canonical.com
  (smtp-relay-canonical-0.canonical.com [185.125.188.120])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D8E2F83AA9
- for <u-boot@lists.denx.de>; Mon, 18 May 2026 07:57:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9A0F58466F
+ for <u-boot@lists.denx.de>; Mon, 18 May 2026 07:57:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
@@ -31,24 +31,24 @@ Received: from LT03 (dynamic-046-114-109-175.46.114.pool.telefonica.de
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id D0DEC41796; 
- Mon, 18 May 2026 05:57:55 +0000 (UTC)
+ by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id ACC2541798; 
+ Mon, 18 May 2026 05:57:56 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1779083876;
- bh=fntPcACb4YppDNayz2V3bV811mS5D6YgIKWp8aOhliI=;
+ s=20251003; t=1779083877;
+ bh=k9RkXZxEwl6o/7FfnLzHzC2L0aybsy/Nb+ZQf2WEYeU=;
  h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
  MIME-Version;
- b=JQen0dAnXtTDPAXwuG7u7/TaICf0nLTtcprVG9fiPho3mYiYoKaQTElVPcuoV64lP
- ZBkTsV5VQE3q9ASbcwBAwT5wSI5p/KPnKizimmzLza91LOnvmyHt6yvRVLM7HvxCWi
- cLDCgxinPXH+6gdY6311UNEH4Nl66YBsMEgkVYU9CCD/vQZ7wn1N7PEgXcGGVO5f1a
- Rj66OGBScpSCCSfkSib/nWnvjHasjIgaDmwtkN5FscRc9tdmQorcNGdmzK/pTSA4QC
- 1Nrl38wRQbLMB07WlLDnHcwIUkWaOyNjsTKqP0z9/noLho00Q9jlr8fgIo+wYbQgGg
- 5vkZJwKrk3FwKX3rnjHBgaJSRIu1AIvpUiRsdYzLoZzZk9QpbafQhu2x5bimicXpoL
- nQXS5nBg1DEqpAWUB1Uqcj9d1c99LOs4v5F2G11tMex5D0zKVh6DI/enBonDodFuwp
- 8vcm8cM5H/Xnuvw2S45+VSA8TUl56H2Fbjfjf93ydmZq8Siu4HiEtcU0CspnRPyBgu
- N4R0DgMtcHlDWXH8ACNZtRR4bNg8RSIxSPhhehvQO+GoIpDb2LV9V0iqwUthVQPu7y
- Yerb4kBUcgpPKA2XSdxwhF3kPNzvarj+NSgU44vx/aq/M+AjF2ewqy9kRGR6J0UD6q
- YFVRHqvjKW2sqaGJdeEPeWkk=
+ b=c7DLp5iUteiU+nG2ilDybCk2K+Ck9cM1f0fXomFdixRCKkPTwGNiVoI8nnhEm0Vkl
+ nGgmHY+uh7EAWWaeZ7EGJ6MDNDRhEk5s9BLjIoJiRMsDvofC8Kn2azdyVrN/S5+65+
+ UvwUdFCdEY6xhOEeY31rJGlBuOwUQNRS3uvzcwqcX2wF4ynGquRjgRYQtoPinoF1l2
+ 8puT7oGOL1/hMKnP+ZB2HxAbLGCi/Hwwb/BXDEGyMwWr9fkI9R6kI/aWePy2uK+uP6
+ K1QHwYRAx/bPAT7i4ATI3WE8Kv74390u3YHA6SAngB+0C40FcqhuMPplQnAhR7VmIm
+ FivnAgQrVCyZlbPGPgdNoPSUFI8qIu4ziLZic1jHKbTShwfbaH58M1RJQWt/TsEHvq
+ +R+Hcblo5FSBktF746t70Rx9LqGUqfIC/hTPtUw+ew8raXN7+uDetGIQXXrWieaJxP
+ SVLZFcauU6QtSP7p/Eu3rgu2g7tdrUmaF8CiYFTQ6FiZsq4boqkdCQCn9+c4RkpHlU
+ bnN69mNkr/lTgUC1221o9Q3PUAGqXjIAyu7Pt3nqt5pqSdh446+zUWRkuJ46xl3D+u
+ cyipXYPkngoWDxIZN+mOZ5nhzYlgyvF/eKbipuxFu68NaUx2eg6vjVajPRKAw1vxyn
+ 6jLQBIZdl2lifpl690qYy7PY=
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Tom Rini <trini@konsulko.com>
 Cc: Simon Glass <sjg@chromium.org>, Huang Jianan <jnhuang95@gmail.com>,
@@ -63,9 +63,10 @@ Cc: Simon Glass <sjg@chromium.org>, Huang Jianan <jnhuang95@gmail.com>,
  Peng Fan <peng.fan@nxp.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
  u-boot@lists.denx.de, linux-erofs@lists.ozlabs.org,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 7/9] test: fs: allow optional date field in ls output assertion
-Date: Mon, 18 May 2026 07:57:26 +0200
-Message-ID: <20260518055728.178507-8-heinrich.schuchardt@canonical.com>
+Subject: [PATCH 8/9] test: env: allow optional date field in ls output
+ assertion
+Date: Mon, 18 May 2026 07:57:27 +0200
+Message-ID: <20260518055728.178507-9-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260518055728.178507-1-heinrich.schuchardt@canonical.com>
 References: <20260518055728.178507-1-heinrich.schuchardt@canonical.com>
@@ -88,34 +89,28 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 fs_ls_generic() now prints a date between the file size and filename
-when the filesystem sets FS_CAP_DATE (currently FAT and ext4).  The
-two regex patterns in test_fs1 used ' *' (zero or more spaces) to
-match between the size and filename; that no longer matches when a
-date is present.
+when the filesystem sets FS_CAP_DATE (currently FAT and ext4).
 
-Change ' *' to ' .*' so the pattern matches both the old format
-(size + spaces + name) and the new format (size + spaces + date + name).
+Adjust the assert in test_env.py().
 
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
- test/py/tests/test_fs/test_basic.py | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ test/py/tests/test_env.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/test/py/tests/test_fs/test_basic.py b/test/py/tests/test_fs/test_basic.py
-index 88b163ce305..5f2af9e21d3 100644
---- a/test/py/tests/test_fs/test_basic.py
-+++ b/test/py/tests/test_fs/test_basic.py
-@@ -26,8 +26,8 @@ class TestFsBasic(object):
-             output = ubman.run_command_list([
-                 'host bind 0 %s' % fs_img,
-                 '%sls host 0:0' % fs_cmd_prefix])
--            assert(re.search('2621440000 *%s' % BIG_FILE, ''.join(output)))
--            assert(re.search('1048576 *%s' % SMALL_FILE, ''.join(output)))
-+            assert(re.search('2621440000 .*%s' % BIG_FILE, ''.join(output)))
-+            assert(re.search('1048576 .*%s' % SMALL_FILE, ''.join(output)))
+diff --git a/test/py/tests/test_env.py b/test/py/tests/test_env.py
+index f8713a59ba9..e9d502148bc 100644
+--- a/test/py/tests/test_env.py
++++ b/test/py/tests/test_env.py
+@@ -523,7 +523,7 @@ def test_env_ext4(state_test_env):
+         assert 'Loading Environment from EXT4... OK' in response
  
-         with ubman.log.section('Test Case 1b - ls (invalid dir)'):
-             # In addition, test with a nonexistent directory to see if we crash.
+         response = c.run_command('ext4ls host 0:0')
+-        assert '8192   uboot.env' in response
++        assert(re.search('8192 .*uboot.env', ''.join(response)))
+ 
+         response = c.run_command('env info')
+         assert 'env_valid = valid' in response
 -- 
 2.53.0
 
