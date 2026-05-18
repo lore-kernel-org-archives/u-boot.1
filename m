@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D9F7CD343F
-	for <u-boot@archiver.kernel.org>; Mon, 18 May 2026 05:58:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0EE26CD343F
+	for <u-boot@archiver.kernel.org>; Mon, 18 May 2026 05:58:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BCD248469D;
+	by phobos.denx.de (Postfix) with ESMTP id F07098469F;
 	Mon, 18 May 2026 07:57:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="OgRWW355";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="rS8V2N0c";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5C92184150; Mon, 18 May 2026 07:57:55 +0200 (CEST)
+ id 7B18D845E3; Mon, 18 May 2026 07:57:56 +0200 (CEST)
 Received: from smtp-relay-canonical-0.canonical.com
  (smtp-relay-canonical-0.canonical.com [185.125.188.120])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7B85F803C6
- for <u-boot@lists.denx.de>; Mon, 18 May 2026 07:57:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9E75B83AA9
+ for <u-boot@lists.denx.de>; Mon, 18 May 2026 07:57:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
@@ -31,24 +31,24 @@ Received: from LT03 (dynamic-046-114-109-175.46.114.pool.telefonica.de
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id 6ECDD41788; 
- Mon, 18 May 2026 05:57:52 +0000 (UTC)
+ by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id 7336F41789; 
+ Mon, 18 May 2026 05:57:53 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1779083873;
- bh=zNBjCkgLCNLd0TFoW/ql0+BkXC0NGAZ4SSZHFlT3nig=;
+ s=20251003; t=1779083874;
+ bh=rZ34LCbq2pNFaDxGnKA6p3saaRkrcQKrSdAmHUrGc6A=;
  h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
  MIME-Version;
- b=OgRWW355WJt5ZYTrTRqb4bnphVSb1B5oOywDh3sBvee6VWEK8AF6c2Zwu/p0DcWZy
- 33+Nz1AZ6S7ku2a5hKVald15y03N4SgtbDQaCBQHYh5Ld+auzQXaKpRFtzUdOVqI1g
- Mg2t8j57ZKHXkd0T9ade/jBmufXd7Lts5lUtpyrrjLvyEcsQQTVj9RpigbcSOBic15
- aL3QXRbjRKO/xIHJ85lsktwOeqUtqS664hoanA1winSkMm2htsHRSvYMMNlbK7ZxG+
- yHmEN24xKXFAmnhvHDmToholUQy6FZYav25vbueSouzLk40U8OOZwwNzioFbiXLaBf
- 1aUcHBC4EY0J1gkJmLRzCmVg9tMswC3U+9ePsYw5JaQnFzEcRcYNvROYOJNue+X3b0
- EUv2FAyG6ew0dWoimGX4qmAfBAm3VLuSeml8Bvt43E+eiXtQWWbXKbv9na3R0WmM2U
- 4my5ew3ghzH94V6WEIs+Udow8dXiXUBXOOCV1VvaeJK2gnaZpPfc6q47U1PRReXnJX
- bPrdWuQ9I8HjzpFB0Y5BTp1vv86yT0NldNd5er9YJ4qhf9J+lI2s/sQ0SfMoQxPzgn
- BuhqErZ2wZH1kJOTy689mgiVsm3RIfcAtdHcT+hq3TRcNRvnqWC6x5oPnEqIGrwIDs
- G9DH8hDLoa7FyTogHG+HG9C8=
+ b=rS8V2N0cQs2JYG9WVBHk9l9T7k9f0rg2/UOOuNDRlVOT48GNlsdyajHWOiX15EgUz
+ 2wuK8+UGrTjwSH11lyUPeUB/XMIwMOUR+a6ua8MpWmHIW5VQefIlGVCCtXZIRDiiry
+ 3z58xN/zvcpNwFazZzePE5zyJjptmRRlNydpKgvE/FLBLDqtfxjB1MctVXjaIRMB/Q
+ kfKifQkhJxlUGjaA2sRlVLEoCqrayRfOFUBMVbMfOp4zH3KHy1MoBj7W7np7/EKTzw
+ f7HO7+5jiT/pt8z0dFecrUvhHTP46ErbfTVssDeUhgnF0dqRcRrlauOkDrwDmxsf6F
+ h9skGdW69R7NRfhWikbvSKbmiEasB0YGSMhhHDVuvq6dJG45EF6YNr+WzZv93Kgyx+
+ MHBLUSFuaV6ivFL5OETwZDc4rIc4C1arQh6m1gwsNfb7BQUsKrMsNKdQxLUVLPb6av
+ TkGcFNNMjQVaZM8rLQZx4Y6IDBQUcpS+KIrZyv6ENLpYM6sQAfj+ZOdqN9AaWA+wA9
+ u5l+2M/h0I05e1ta9jXFmI5RyzkG80lKH9Gl+JHu0payNeq8HWNWQcBq98jxArNDdy
+ u+8bBOzpv26Qh+jMzK6eWiHNZiunTAnbo/QwAPcI3cidprj4LbjFx5TpokUYpOrkQq
+ dmmlQV51IvkpjU69P72pyV0c=
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Tom Rini <trini@konsulko.com>
 Cc: Simon Glass <sjg@chromium.org>, Huang Jianan <jnhuang95@gmail.com>,
@@ -63,9 +63,9 @@ Cc: Simon Glass <sjg@chromium.org>, Huang Jianan <jnhuang95@gmail.com>,
  Peng Fan <peng.fan@nxp.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
  u-boot@lists.denx.de, linux-erofs@lists.ozlabs.org,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 3/9] fs: ext4: print change date in directory listing
-Date: Mon, 18 May 2026 07:57:22 +0200
-Message-ID: <20260518055728.178507-4-heinrich.schuchardt@canonical.com>
+Subject: [PATCH 4/9] fs: ext4: don't read time fields in XPL
+Date: Mon, 18 May 2026 07:57:23 +0200
+Message-ID: <20260518055728.178507-5-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260518055728.178507-1-heinrich.schuchardt@canonical.com>
 References: <20260518055728.178507-1-heinrich.schuchardt@canonical.com>
@@ -87,30 +87,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Declare FS_CAP_DATE in the ext4 fstype_info entry so that fs_ls_generic()
-displays the modification date alongside the file size:
+The ext4 readdir implementation populates dent time fields in XML
+builds though that information is never used.
 
- 4096 2024-03-15 09:30 filename.txt
+Guard the three rtc_to_tm() calls with !IS_ENABLED(CONFIG_XPL_BUILD),
+consistent with the FAT driver.
 
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
- fs/fs.c | 3 +++
- 1 file changed, 3 insertions(+)
+ fs/ext4/ext4fs.c | 8 +++++---
+ 1 file changed, 5 insertions(+), 3 deletions(-)
 
-diff --git a/fs/fs.c b/fs/fs.c
-index f8e4794c10e..482a5523712 100644
---- a/fs/fs.c
-+++ b/fs/fs.c
-@@ -261,6 +261,9 @@ static struct fstype_info fstypes[] = {
- 		.fstype = FS_TYPE_EXT,
- 		.name = "ext4",
- 		.null_dev_desc_ok = false,
-+#if !IS_ENABLED(CONFIG_XPL_BUILD)
-+		.caps = FS_CAP_DATE,
-+#endif
- 		.probe = ext4fs_probe,
- 		.close = ext4fs_close,
- 		.ls = fs_ls_generic,
+diff --git a/fs/ext4/ext4fs.c b/fs/ext4/ext4fs.c
+index 3c79a889bc2..abf4a9835bc 100644
+--- a/fs/ext4/ext4fs.c
++++ b/fs/ext4/ext4fs.c
+@@ -319,9 +319,11 @@ int ext4fs_readdir(struct fs_dir_stream *fs_dirs, struct fs_dirent **dentp)
+ 		dent->type = FILETYPE_UNKNOWN;
+ 	}
+ 
+-	rtc_to_tm(fdiro.inode.atime, &dent->access_time);
+-	rtc_to_tm(fdiro.inode.ctime, &dent->create_time);
+-	rtc_to_tm(fdiro.inode.mtime, &dent->change_time);
++	if (!IS_ENABLED(CONFIG_XPL_BUILD)) {
++		rtc_to_tm(le32_to_cpu(fdiro.inode.atime), &dent->access_time);
++		rtc_to_tm(le32_to_cpu(fdiro.inode.ctime), &dent->create_time);
++		rtc_to_tm(le32_to_cpu(fdiro.inode.mtime), &dent->change_time);
++	}
+ 
+ 	dirs->fpos += le16_to_cpu(dirent.direntlen);
+ 	dent->size = fdiro.inode.size;
 -- 
 2.53.0
 
