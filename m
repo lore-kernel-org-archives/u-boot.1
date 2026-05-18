@@ -4,93 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C90A0CD4F4A
-	for <u-boot@archiver.kernel.org>; Mon, 18 May 2026 17:30:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AFF63CD4F4A
+	for <u-boot@archiver.kernel.org>; Mon, 18 May 2026 17:45:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 148B383EF9;
-	Mon, 18 May 2026 19:30:11 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id DA4DE83AA9;
+	Mon, 18 May 2026 19:45:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="F5HHx52b";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Gi8qW8ME";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A51F584119; Mon, 18 May 2026 19:30:09 +0200 (CEST)
-Received: from mail-ot1-x330.google.com (mail-ot1-x330.google.com
- [IPv6:2607:f8b0:4864:20::330])
+ id DFA3483EF9; Mon, 18 May 2026 19:45:07 +0200 (CEST)
+Received: from mail-oi1-x229.google.com (mail-oi1-x229.google.com
+ [IPv6:2607:f8b0:4864:20::229])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3297783AA9
- for <u-boot@lists.denx.de>; Mon, 18 May 2026 19:30:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 92E4580433
+ for <u-boot@lists.denx.de>; Mon, 18 May 2026 19:45:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x330.google.com with SMTP id
- 46e09a7af769-7dcd17e19b6so1383363a34.1
- for <u-boot@lists.denx.de>; Mon, 18 May 2026 10:30:07 -0700 (PDT)
+Received: by mail-oi1-x229.google.com with SMTP id
+ 5614622812f47-479d37e7d7fso733803b6e.1
+ for <u-boot@lists.denx.de>; Mon, 18 May 2026 10:45:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1779125406; x=1779730206; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1779126304; x=1779731104; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=UBZGL+wdKIODP1h6W7B8YQdYc65GeTvm8EYxEDUsrpk=;
- b=F5HHx52bHmv7qJg1221rPGZklc6lZ+5lPrFSqmtcYV17FXBCCRToVkkkN94h+cZrO/
- 8fQnpBLtVBlURNksF/2HA7A6fTC88mTstW9klN0VR6iAk3pmoXWXNY7w9YYzxEq4TDzC
- JnhjYIrRJ48oLvWlA518fsVBMXmRb3PCRRyZU=
+ bh=+zvhgdn/L0qhJChcpOmRdYalgUyqRJhwDXKrj/FC0ls=;
+ b=Gi8qW8MEvsq6gucKZoi4zjmn6QJ4lM1tN/3Kcknjfgq+ebZn0o7e/flhqNLQTm/g6v
+ 3WHF98+0voSuw58Yt1a+Q9pni8EytrMquGvJMaUtgCNBrI7RdvqK7QB9TySRY9GaVvzd
+ GJqmHqWaxaUvReN2um8Rbco9v2otDVynbyzRQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779125406; x=1779730206;
+ d=1e100.net; s=20251104; t=1779126304; x=1779731104;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=UBZGL+wdKIODP1h6W7B8YQdYc65GeTvm8EYxEDUsrpk=;
- b=fsyp0wXLNXBB26RURTWNwHEdxXTuGT4bdkkbigg+fKzewzpyBjb0KaG8oQ7rqDP8NG
- byS7BSMJzPILR9N1UJ/IYdrUf/aD4l6Pni830Bia2iMowzoYCiMpXuSLZKr5l7d843St
- JWL7lJoP5uJ40cweb817zm2dAu7xA+ohOOaQMf8w4obTOIK5Im72oB8Vr282QR5gsoeT
- fZO8WsR/b215636QWDILE6aTbNudsOHF4chrV7CmwuSjZ1xXf4XYenJ4cyM8zDUmD528
- BDYBMmbpZUDPcqIEZ48AYtyGPLvLjUfKiEiSjUKKJ4UkQZY3/OioGexSiYMLgr6IsBxy
- rBrw==
-X-Forwarded-Encrypted: i=1;
- AFNElJ9ZLxg/OwxewQCBbDol6FKxfmTNIxUD64XBCePpqYDM8VkJ9rp/E4OLFPNIu8UljicrMkLu9ag=@lists.denx.de
-X-Gm-Message-State: AOJu0YxIFrC0l3qzPzexIbdFJP8pVVSdBj6eH2862t8qrG+f/eoW0FRG
- pldTcoavmNI3yQROWQdP8XOt70xx0Vrwt//8anTJncsWUOeXtezjgldeQyAKPdIjaG0=
-X-Gm-Gg: Acq92OGgoTlIf8SgVlT8ggIn2rAbU4Zs7zNlSmmmGDFg5D2OiPcF8kgzc22o53tZ6HM
- 9epb/rw3sLgzlEqeg6dbEy5tImdWAk3YDDjAZtCWNrcnWm40OGIMhTuPFRRYv/1xnrkuk8C/fR0
- w9pnTQeoZFRfdDqKeSl42fUWkj/rJiL8noCqiMgdhrnaprIl/w54UEjQn4/SiMZDKunLjeMO6uN
- 9DkUw7p7l0qPFj0f28Boae+QTQg26KEod8Z+CpU5Au8EAdtd11IipKmfm/VajTDGQbJXO4Bu/KJ
- dOIwr8CVv1daZypQ22fPFi+NHef1phAODoLEsY1d1OzMt4VFW7ZIse6RMRV/MivlD8yVbNcMr/j
- bhjfZDaR+z2QfFbCdWlxHNPpUr8065sVSNVC8lUWtXkT0pF+4ie/J6Krc5+Q9xZiy5pc2soEp3E
- OWin+jRyNfYPRoCLIuEZmhAlZxbYu2C5ZwrBFGb3WgVb5DLPTEgPaFvrGZFa8mxqg4Zq6LVsfrS
- E/Qi5kbg8W3I50MM1PKVHuCpBKXmoiLh78MmFA/11kIAWujwuE=
-X-Received: by 2002:a05:6830:6f48:b0:7dc:d7e8:cb37 with SMTP id
- 46e09a7af769-7e4fa0657a5mr12873343a34.21.1779125405644; 
- Mon, 18 May 2026 10:30:05 -0700 (PDT)
+ bh=+zvhgdn/L0qhJChcpOmRdYalgUyqRJhwDXKrj/FC0ls=;
+ b=U62spjj2IeDRFqrUs5WpRz+HWS0FeAZ3SKIfukXCL0cC3BT2p1OCRDySq0M76TyfOQ
+ fNaI6vxHmMifu933riYPrmRDMw+2a7wtCJ5BguY0YDrRbDOIaLGnW8W7QxVSrLV6ASCF
+ +Bo3lrYAcgD4Y21HbcnJUeEU1gFfx3FwziLtwy5kc1004JLzcd3ZbtTku4qltknFp++S
+ k3NIoiWu0sRe+0EfzYyvV1LpM+bk+xeCDIgeE0o5WePlu8NBWQ6ZdPhQhJA2c4uGZbtz
+ Zo4XEI85cozYB6sVnT1vOI4J05SM0BWxmN2H5Zjrmr/ebAnfVTZJiO7KxR9svqQjDSnl
+ TOrA==
+X-Gm-Message-State: AOJu0YzH0NgTi7CC0ieRpnYmg9pTNIg5VV3lNo05R8tafeZetvmF9ZUO
+ c0qBdjIh7/rnILFLp2VxaADIy4eGVaSrJ7ZZg0gNYQV6D1HozJSkJJGPhCoh7BS3uyQ=
+X-Gm-Gg: Acq92OER8h5Mt/920uILODuUSJsTCyl09ldtyj6DE9uAqd3oZ+JcJCrfE4MXA2hyrek
+ L4RwCmOp1xWbtl7eb+oDdQf5pBDvyHLQe2DTxUv7FRSXJtni2hx9yH5D7ADdQcdl6D2JFlCP1lg
+ zLmeMb1kcFMB2CslT9foKB8ztCmG5Xf0oO0JtVsa73LD2mCmsgRgnyIGcNwlILsambDP+a5stXX
+ q+eWHj9WcRt16mGb8MMH7IqlHM6RE6essT5U1N0Hoh8ngvSMR0jlksTbx04dt5J5hSZD3Ox5aJz
+ 8lDqbyp+29ezZ1TieyWOMB1pllUXBVY0FkHM6xeNSAUcVVBpXrq6qOkwuZchW+3IRJP5yKRg8KB
+ wHIl45H4fhEIFAMPF/aNVjbnOe2uC5XqbLuT18V3rj1mjwZqPyXDwVlG4axd4uxoXgGVrObhh/Y
+ 6F0LGRrCSNRlaX+KcWyWG7En4n/WelIsMrkSXEj5nsdc2eIOukxO4wzjNI4o7kULpMSXx/j1pfl
+ 8oh2WIo1VGNMIZTk3M40BzYPpXmwPjT0HEHATONEBokX/ML2z4OcfuJT5jhDg==
+X-Received: by 2002:a05:6808:3c4d:b0:482:aebb:e7c8 with SMTP id
+ 5614622812f47-482e573983bmr9800550b6e.30.1779126304301; 
+ Mon, 18 May 2026 10:45:04 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
  [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7e55b8203a3sm7971368a34.11.2026.05.18.10.30.04
+ 586e51a60fabf-43a956f4957sm4919144fac.12.2026.05.18.10.45.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 18 May 2026 10:30:05 -0700 (PDT)
-Date: Mon, 18 May 2026 11:30:02 -0600
+ Mon, 18 May 2026 10:45:03 -0700 (PDT)
+Date: Mon, 18 May 2026 11:45:00 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
-Cc: nm@ti.com, Wadim Egorov <w.egorov@phytec.de>,
- ilias.apalodimas@linaro.org, marek.vasut+renesas@mailbox.org,
- sughosh.ganu@arm.com, u-boot@lists.denx.de, upstream@lists.phytec.de
-Subject: Re: [PATCH] Makefile: binman: Search board directory before srctree
-Message-ID: <20260518173002.GS1858239@bill-the-cat>
-References: <20260515054327.1033466-1-w.egorov@phytec.de>
- <20260515145400.GB1858239@bill-the-cat>
- <CAFLszTid-e+NWrFxoorfrUT23_mztUZP8FRbmT9FJ55M8A+FXA@mail.gmail.com>
- <20260515160256.GF1858239@bill-the-cat>
- <CAFLszThfUMe=67xwzbv6TvugH3iCOO=-EoYk6oUshKru-wpDQw@mail.gmail.com>
- <20260515182441.GI1858239@bill-the-cat>
- <CAFLszTjHaqck4gVDSiBw0M9V3yZLzUa8+EjaW94G9JcO=-Ny8Q@mail.gmail.com>
- <20260515184434.GJ1858239@bill-the-cat>
- <CAFLszTj616BX3ppdVLeR1mcRnXLJ41uUpQkC7gY0NOSn2ffkbw@mail.gmail.com>
+Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Jaehoon Chung <jh80.chung@samsung.com>,
+ Jerome Forissier <jerome.forissier@arm.com>,
+ Kory Maincent <kory.maincent@bootlin.com>,
+ Kuan-Wei Chiu <visitorckw@gmail.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Marek Vasut <marek.vasut@mailbox.org>, Marek Vasut <marex@denx.de>,
+ Martin Schwan <m.schwan@phytec.de>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Peng Fan <peng.fan@nxp.com>,
+ Philip Molloy <philip.molloy@analog.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Raymond Mao <raymond.mao@riscstar.com>,
+ Stefan Roese <stefan.roese@mailbox.org>, Yao Zi <me@ziyao.cc>
+Subject: Re: [PATCH 00/11] Move test/py image creation into separate per-OS
+ modules
+Message-ID: <20260518174500.GT1858239@bill-the-cat>
+References: <20260517225122.2966807-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="MDDuWk/1F/xYHICN"
+ protocol="application/pgp-signature"; boundary="dcMeiRraROoDolWe"
 Content-Disposition: inline
-In-Reply-To: <CAFLszTj616BX3ppdVLeR1mcRnXLJ41uUpQkC7gY0NOSn2ffkbw@mail.gmail.com>
+In-Reply-To: <20260517225122.2966807-1-sjg@chromium.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -109,148 +111,46 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---MDDuWk/1F/xYHICN
+--dcMeiRraROoDolWe
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sun, May 17, 2026 at 04:52:10PM -0600, Simon Glass wrote:
-> Hi Tom,
+On Sun, May 17, 2026 at 04:50:58PM -0600, Simon Glass wrote:
 >=20
-> On Fri, 15 May 2026 at 12:44, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Fri, May 15, 2026 at 12:32:30PM -0600, Simon Glass wrote:
-> > > Hi Tom,
-> > >
-> > > On Fri, 15 May 2026 at 12:24, Tom Rini <trini@konsulko.com> wrote:
-> > > >
-> > > > On Fri, May 15, 2026 at 12:13:50PM -0600, Simon Glass wrote:
-> > > > > Hi Tom,
-> > > > >
-> > > > > On Fri, 15 May 2026 at 10:03, Tom Rini <trini@konsulko.com> wrote:
-> > > > > >
-> > > > > > On Fri, May 15, 2026 at 09:35:10AM -0600, Simon Glass wrote:
-> > > > > > > Hi Tom,
-> > > > > > >
-> > > > > > > On Fri, 15 May 2026 at 08:54, Tom Rini <trini@konsulko.com> w=
-rote:
-> > > > > > > >
-> > > > > > > > On Fri, May 15, 2026 at 07:43:27AM +0200, Wadim Egorov wrot=
-e:
-> > > > > > > >
-> > > > > > > > > A file like rm-cfg.yaml accidentally left in the source t=
-ree root
-> > > > > > > > > shadows the board-specific copy. binman builds the wrong =
-YAML, the
-> > > > > > > > > resulting rm-cfg.bin may match a different SoC, and we en=
-d up with
-> > > > > > > > > the following error:
-> > > > > > > > >
-> > > > > > > > >   k3_system_controller sysctrler: k3_sysctrler_start:
-> > > > > > > > >       Boot Notification response failed. ret =3D -110
-> > > > > > > > >
-> > > > > > > > > Move the board directory ahead of the srctree root so tha=
-t the
-> > > > > > > > > most-specific match wins.
-> > > > > > > > >
-> > > > > > > > > Signed-off-by: Wadim Egorov <w.egorov@phytec.de>
-> > > > > > > > > ---
-> > > > > > > > >  Makefile | 2 +-
-> > > > > > > > >  1 file changed, 1 insertion(+), 1 deletion(-)
-> > > > > > > > >
-> > > > > > > > > diff --git a/Makefile b/Makefile
-> > > > > > > > > index 552328f9f2c..1ec29dfe0be 100644
-> > > > > > > > > --- a/Makefile
-> > > > > > > > > +++ b/Makefile
-> > > > > > > > > @@ -1682,7 +1682,7 @@ cmd_binman =3D $(srctree)/tools/bin=
-man/binman $(if $(BINMAN_DEBUG),-D) \
-> > > > > > > > >               build -u -d $(binman_dtb) -O . -m \
-> > > > > > > > >               --allow-missing --fake-ext-blobs \
-> > > > > > > > >               $(if $(BINMAN_ALLOW_MISSING),--ignore-missi=
-ng) \
-> > > > > > > > > -             -I . -I $(srctree) -I $(srctree)/board/$(BO=
-ARDDIR) \
-> > > > > > > > > +             -I . -I $(srctree)/board/$(BOARDDIR) -I $(s=
-rctree) \
-> > > > > > > > >               $(foreach f,$(of_list_dirs),-I $(f)) -a of-=
-list=3D$(of_list) \
-> > > > > > > > >               $(foreach f,$(BINMAN_INDIRS),-I $(f)) \
-> > > > > > > > >               -a atf-bl1-path=3D${BL1} \
-> > > > > > > >
-> > > > > > > > Why do we need to look in $(srctree) itself?
-> > > > > > >
-> > > > > > > See for example:
-> > > > > > >
-> > > > > > > arch/arm/dts/k3-j721e-binman.dtsi:308:  private-key =3D
-> > > > > > > "arch/arm/mach-k3/keys/custMpk.pem";
-> > > > > >
-> > > > > > That's not great, I'm sorry I missed it at the time. I wonder h=
-ow easy
-> > > > > > replacing that key is with a non-dummy key. Hopefully it's done=
- in a way
-> > > > > > that doesn't encourage checking private keys in to repositories=
-=2E.
-> > > > >
-> > > > > Typically we would use an environment var passed in from the Make=
-file,
-> > > > > as we do with BL31, TEE, TI_DM, etc.
-> > > > >
-> > > > > >
-> > > > > > > Also, people sometimes put files in the source tree, e.g. BL3=
-1 images,
-> > > > > > > in the hope that they will be found.
-> > > > > >
-> > > > > > That's also a bad practice and what BINMAN_INDIRS is for.
-> > > > >
-> > > > > Yes, but that came quite a bit later with the bintool stuff (2021=
-).
-> > > > >
-> > > > > Anyway, with a bit of work I believe we could drop the source dir.
-> > > > > Would you like to look at it, or should I?
-> > > >
-> > > > Well, the first step would be getting some more feedback on how peo=
-ple
-> > > > override some of these files for example. Even more environment fil=
-es
-> > > > seems like a bad idea and I'm not sure what BINMAN_INDIRS can't cov=
-er
-> > > > today.
-> > >
-> > > Assuming you mean 'environment variables', we do need the actual
-> > > filename, not just the directory. We could have default filenames for
-> > > each entry type, I suppose. Some do already.
-> >
-> > Yes, I think moving that way is the right direction. I was going to use
-> > -scp-path=3D$(SCP) as an example of something to move away from, but it
-> > looks like that's already being done in a way BINMAN_INDIRS should
-> > handle.
+> test_ut.py has accumulated a setup_*_image() helper for every Linux
+> distribution that the bootflow tests want to boot. Each one is mostly
+> shell script and partition layout, so the file is large and the test
+> logic is hidden among image-creation details.
 >=20
-> Yes, the idea is that '-a scp-path=3D$(SCP)' tells the scp entry-type
-> the filename to use. I'm pretty sure we could update the tests to set
-> that entry-arg, so we don't need the source dir in the path.
+> Move each setup function to its own module under test/py/img/, with a
+> shared common.py for mkdir_cond(), copy_partition() and the extlinux
+> helper. Each patch moves one image at a time so reviewers can see the
+> relocation cleanly.
+>=20
+> While here, also redirect the generated disk images to the
+> persistent-data directory instead of writing them under the source
+> tree. The sandbox mmc, scsi and usb-flash drivers now look there first.
+>=20
+> Further improvement are planned, such as using the context manager when
+> creating partitions.
 
-But we shouldn't need anything at all if BINMAN_INDIRS is set to include
-that path. We currently just have "scp.bin" in the dts file. Adding
--scp-path was a solution that made sense at the time, but as we've
-needed to deal with more blobs, we added a generic solution, and now
-just need to deprecate and remove the original per-blob solution.
-
-> But in any case this patch is correct for now.
-
-Agreed.
+I think this further exposes a problem / feedback I gave a while ago
+now. We shouldn't have "distribution" tests, we should have tests that
+exercise the various paths in the code.
 
 --=20
 Tom
 
---MDDuWk/1F/xYHICN
+--dcMeiRraROoDolWe
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCagtMlwAKCRAr4qD1Cr/k
-CotAAQC1vyjYx0xYIHFQ8gOki+3xEMVK6Q8EvLKU8w9DDLSPewEA3rkWX6KKOM4C
-ov07TzLTuzsrkuvvrPMb0O4NxBBnAQU=
-=7wZQ
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCagtQGAAKCRAr4qD1Cr/k
+CjrDAQDicjh1XpHbbxir034rkZMDskdoG5fmbWiEqi1XIWcD7wD/ZRoYJ7O7NdI3
+va9DazF4tm30cvVH6JaLVvHZTMGCfQA=
+=vTbr
 -----END PGP SIGNATURE-----
 
---MDDuWk/1F/xYHICN--
+--dcMeiRraROoDolWe--
