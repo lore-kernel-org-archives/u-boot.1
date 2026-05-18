@@ -4,83 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BDAD4CD4F49
-	for <u-boot@archiver.kernel.org>; Mon, 18 May 2026 14:34:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA4B8CD4F4A
+	for <u-boot@archiver.kernel.org>; Mon, 18 May 2026 14:34:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A7BD884683;
-	Mon, 18 May 2026 16:34:44 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E22DE84693;
+	Mon, 18 May 2026 16:34:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="TuzJXTnw";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="UQDzNHem";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 04F35803C6; Mon, 18 May 2026 16:34:43 +0200 (CEST)
-Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
- [IPv6:2a00:1450:4864:20::431])
+ id 8464A8467A; Mon, 18 May 2026 16:34:48 +0200 (CEST)
+Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
+ [IPv6:2a00:1450:4864:20::434])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1684E84683
- for <u-boot@lists.denx.de>; Mon, 18 May 2026 16:34:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 958DE8469A
+ for <u-boot@lists.denx.de>; Mon, 18 May 2026 16:34:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x431.google.com with SMTP id
- ffacd0b85a97d-45297094718so1847092f8f.3
- for <u-boot@lists.denx.de>; Mon, 18 May 2026 07:34:41 -0700 (PDT)
+Received: by mail-wr1-x434.google.com with SMTP id
+ ffacd0b85a97d-44c350a5b87so1370189f8f.3
+ for <u-boot@lists.denx.de>; Mon, 18 May 2026 07:34:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1779114880; x=1779719680; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1779114886; x=1779719686; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=oPiwsd+TX8wMDHRdro2X04xhUlbWDS55Wo6yvgyjtTY=;
- b=TuzJXTnwPohpPcDW3n/JemJ5eWlhgIWsoW6m4IO7xqgiAb7c+byYlIkG1EG4xMLJy0
- FlWTliPbuXFrnvcDtr86PResAG5i3kQc8F5zEgatmvn92QrXP4fUI9EbEnx4v7WgCGgf
- 7DiSknlrFyZk3X6wQb1bIeVeY3+AVDtg64UTcxqC1VDSCZUEsgumvUd/U7/szmYD+EMq
- 7fbHtWyg28LUfPSNAe9lEcH1RD7Ls7u1Fy2R5FEcRqVH4omfSRSeNMpw5JUhpKkA7qEb
- hoeYouDGtjE/nvkyT0mkVu3RQitRjwsh4VrjLD+z7P5uPIWh06fbWh2QGzDtfflepC18
- y6wA==
+ :reply-to; bh=rwzSfBhLSooGfmZTR2tKTPjnpm4bhJBTtjQrZIDV7WE=;
+ b=UQDzNHemyj/mzbRESG9dN3/PAh5loVTK3C27Z3fQUiV9UNZDzSzmt7tJJnmunlEUNi
+ 4FSCg5Qj5qvRyT3EU0qrLAOrli2xIk2t6vARu9fbTH/nfy4CztnbTejYhhxMT869/z9N
+ cpPyfbCit+Vw/zc6DtXaMWa9jiXNQOqqqHv0uTsQQ2+gNLH2moLR/ENCdvYa8onFLoCP
+ 8oCQi1WiRz5bdlMMxjIcHayC5jgDmN5rQR1L3QJFwC7lrPLFw9+yp5BXr+dBaueXXzeJ
+ PFLbY5laFbUSRlcduGoxs4EZ3pl9bt80sSm1V9jgI44/+UiJ/0NjmXmBDijS0ekd9i2L
+ IYKg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779114880; x=1779719680;
+ d=1e100.net; s=20251104; t=1779114886; x=1779719686;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=oPiwsd+TX8wMDHRdro2X04xhUlbWDS55Wo6yvgyjtTY=;
- b=QNSNIH16mJh/IQmvMDOyfaWRgJAXSqDTi2dnYabFg2hc9g7EBzw4F2Aejbp2EhNdUf
- mkQz1TOq7za6hKbzhKpII6uEPKcxX0QhxRmNWQtkXQ7OkrgKf5a2gX4FV9iPkJ2h+gMz
- mWNbKllx4pyUT9cVOKAm4amjrUDyGXy66C6t2uhruu+XoptoUuzcTizgCpqcoDjmGEnE
- whZdZ2Whsdn2iFRGflm1AoUKSd12fVrMOLFKP56QYjcUEMfTXjxOyAo4EpYNAE30LvMI
- 0TEPcGUJH8LnDdFuhcvwKPqO+5bpEF67FW7KJ7NCNykuE0HDRTbfZT2eCXryAu28Se1S
- vcFQ==
+ bh=rwzSfBhLSooGfmZTR2tKTPjnpm4bhJBTtjQrZIDV7WE=;
+ b=Q7/VCHollPLddJ538taFSjcw/DoUv86PItCXBOq0DPU5TX0GXlSsdm0WzoHfij4arK
+ LwsRp+Gb1/l/Da1hjOZrFdyfiOERSBspInCkBRpaG1P5EEmEAGnHuEv71Ww3pxfkCIrn
+ yHFfsSkBtMXGN/KJkiSRRmSLSY+jxCctk5eyfnlW9/wtzvp8whooi/0ERPkta1mLvnxM
+ iHIerbzklP0lc7l1hwc7dGe+Y9wPjUDs5eID3rvnraGfuTuUE/gaw6E5zxBJVNLoRfRJ
+ tvBcoZKLsINmp23qL/C1fcdYL+FcGV+/MdR5KEoDZDE6GbD6arMYQAGEKYdu2zFV16cQ
+ 5j3A==
 X-Forwarded-Encrypted: i=1;
- AFNElJ90DFQgBCwNvcj7/MtoxUmxkFR1B9mQq32m4b535qP4lt14Lqfe8CY/anJJSD+iAnnUmF2FCe8=@lists.denx.de
-X-Gm-Message-State: AOJu0YxvvIy5VfgTkcknBHCNO0mVHymRVkyevMdlu4WJMCzNKU/gtlIz
- xTa/kX5+LNwDEwMyrHmPEOoWXUGs+Kg1AUubqaeEjo/QQ8zixGxkFdrggqUz98tvQ4A=
-X-Gm-Gg: Acq92OEIyWTR/1SUCXhxtA51Iprak290pt8OpoceoWd/3egX1O9pmpfwctkefNi6nJt
- eDvTGDMWXEn1XsJB8Iz5OENR8bBY0QttaKm6YXGMKfYNhsJpFfqJrrwP9PMdAHLqcJeRkkpgo5j
- uhoCu62uy460c9LRQY3t2SE2mzukJ5McJJBQfeKxrRlkSDL6u6OYB3neeC+Ck+qDL1QK2Zmp/Bm
- Rmvb5DZZUH7PcRr3C+w8r8e3fg/WEHPKn94SxLqDzwlJmXLxsLcawYKCSC2nyx31XclEjy10mNw
- 8eE1T7aRDQ5VIte8jLxoQ9GHenSLuzJEjW7TxrTtHZbfspF9AJ+i5YJJR3plsslX+C9TmLeeEDu
- rezurNWoha4TgMWbyniibu+VN/mqmbzPgFTOzXekdrOJzwuD33RiqfFn0P4QX0gemQFovC5eeXo
- SISBUl3dcMi89lLB5dCaemq0MbL4c0IEDmzxHcOZnbOPKHTarvP2t/xS7p4U7InxKGpOmt4dHvH
- anSFwnBwtQdkeGjWQ==
-X-Received: by 2002:a05:6000:2f83:b0:43b:3d02:7806 with SMTP id
- ffacd0b85a97d-45e5c58ed80mr25731158f8f.28.1779114880309; 
- Mon, 18 May 2026 07:34:40 -0700 (PDT)
+ AFNElJ9OByoI5jxI32TWHv3IqdJNce6pdVKX6a9N3ppKTK1YDzGISu3Bf7/GSZuOjs1Ocy/NmoloIgc=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz82fFz4xUJvn/JKFd50irvZ/OAe7mCOUY+9xC3eVTV6NaE37bx
+ DdZn4uALik/cv3tuV+NBc2nx1ygZBD/jn/xLS/RkNVCsxIzFV+jSooyPlZpKijaXccM=
+X-Gm-Gg: Acq92OG/DOlVvPmovyNQF0hy4TCPkFHkQQWYZjZxe0bSBRYu5yFTR5SHkfaGFp5+57Y
+ /taxpJxZyhQNKjW8PK/hU13cp1Hw7ZNSvBIirhSVD5CyluzWKdfy0usyBC7j2W6QrF1EsiiQINe
+ sgmsU1CPV9zzSIrQ5HwOvo0hT6oviLn4NNvJijcu4oOacMkDJijK+k3o+h5jBpT2u/UgKG2gi0p
+ X4VYt+J2XauGOjYv2OJBAiL+PzLr36aT6S7pgYcFG/c1ZG4Gj5+ZoQFW37f5yf4Zhx61w86L58x
+ t0Ne9kuUgbYU5G5g9yc9K58/YmD5MbPKixvmGpZo0NQFMxsLRed4XTRUw75GO9vu7DckRTCAaPM
+ EsQ39vL7JznqcUseXIK+c+ReCIN0aMyZTdHF9HgpKLO1eRt1aCSpFlifaiFIcKUM5A8G3bTjbQy
+ WM5sqDHbSd6t8pkASnZUsd0ucGus0gXGCxI4vip1IhFeI2i4wbXT8r+Cdw3nKKWUcuf4zP0E5Li
+ D4px4u5iig8PNZ2ag==
+X-Received: by 2002:a5d:5d13:0:b0:43d:7a97:78a2 with SMTP id
+ ffacd0b85a97d-45e5c5e3384mr25116481f8f.28.1779114885838; 
+ Mon, 18 May 2026 07:34:45 -0700 (PDT)
 Received: from ?IPV6:2a01:e0a:106d:1080:1029:e3c5:362e:1250?
  ([2a01:e0a:106d:1080:1029:e3c5:362e:1250])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-45d9ec3b18fsm35055720f8f.11.2026.05.18.07.34.38
+ ffacd0b85a97d-45d9ec3b18fsm35055720f8f.11.2026.05.18.07.34.44
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 18 May 2026 07:34:39 -0700 (PDT)
-Message-ID: <ae2be551-c90d-426a-bfa7-215532e04448@linaro.org>
-Date: Mon, 18 May 2026 16:34:38 +0200
+ Mon, 18 May 2026 07:34:45 -0700 (PDT)
+Message-ID: <3ea57cef-c9fa-440a-b72b-6fc7cf4a2656@linaro.org>
+Date: Mon, 18 May 2026 16:34:44 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH v2 03/15] Revert "test: smem: add basic smem test"
+Subject: Re: [PATCH v2 04/15] Revert "drivers: smem: sandbox"
 To: Casey Connolly <casey.connolly@linaro.org>, u-boot@lists.denx.de,
  Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
@@ -102,7 +102,7 @@ Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Luca Weiss <luca.weiss@fairphone.com>,
  Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 References: <20260504-b4-modernise-smem-v2-0-c01ec2ff3886@linaro.org>
- <20260504-b4-modernise-smem-v2-3-c01ec2ff3886@linaro.org>
+ <20260504-b4-modernise-smem-v2-4-c01ec2ff3886@linaro.org>
 Content-Language: en-US, fr
 Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
@@ -129,7 +129,7 @@ Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
  QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
 Organization: Linaro
-In-Reply-To: <20260504-b4-modernise-smem-v2-3-c01ec2ff3886@linaro.org>
+In-Reply-To: <20260504-b4-modernise-smem-v2-4-c01ec2ff3886@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -150,60 +150,62 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 5/4/26 20:57, Casey Connolly wrote:
-> This reverts commit 20e7705764c4e5ea924f1ea54bb36ebbbeffffe7.
+> This reverts commit 7fd7e2cf339ea2ec570f6dae1cdfaf8e066eb4af.
 > 
 > Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
 > ---
->   test/dm/Makefile |  1 -
->   test/dm/smem.c   | 26 --------------------------
->   2 files changed, 27 deletions(-)
+>   arch/sandbox/dts/test.dts   | 4 ----
+>   configs/sandbox64_defconfig | 2 --
+>   configs/sandbox_defconfig   | 2 --
+>   3 files changed, 8 deletions(-)
 > 
-> diff --git a/test/dm/Makefile b/test/dm/Makefile
-> index 771b703b737d..ace149d4a2b4 100644
-> --- a/test/dm/Makefile
-> +++ b/test/dm/Makefile
-> @@ -111,9 +111,8 @@ obj-$(CONFIG_SCSI) += scsi.o
->   obj-$(CONFIG_DM_SERIAL) += serial.o
->   obj-$(CONFIG_DM_SPI_FLASH) += sf.o
->   obj-$(CONFIG_SIMPLE_BUS) += simple-bus.o
->   obj-$(CONFIG_SIMPLE_PM_BUS) += simple-pm-bus.o
-> -obj-$(CONFIG_SMEM) += smem.o
->   obj-$(CONFIG_SOC_DEVICE) += soc.o
->   obj-$(CONFIG_SOUND) += sound.o
->   obj-$(CONFIG_DM_SPI) += spi.o
->   obj-$(CONFIG_SPMI) += spmi.o
-> diff --git a/test/dm/smem.c b/test/dm/smem.c
-> deleted file mode 100644
-> index 89e74cccc574..000000000000
-> --- a/test/dm/smem.c
-> +++ /dev/null
-> @@ -1,26 +0,0 @@
-> -// SPDX-License-Identifier: GPL-2.0+
-> -/*
-> - * Copyright (C) 2018 Ramon Fried <ramon.fried@gmail.com>
-> - */
+> diff --git a/arch/sandbox/dts/test.dts b/arch/sandbox/dts/test.dts
+> index ac92ebf1afd7..50201ad61ccd 100644
+> --- a/arch/sandbox/dts/test.dts
+> +++ b/arch/sandbox/dts/test.dts
+> @@ -1521,12 +1521,8 @@
+>   		compatible = "sandbox,scsi";
+>   		sandbox,filepath = "scsi.img";
+>   	};
+>   
+> -	smem@0 {
+> -		compatible = "sandbox,smem";
+> -	};
 > -
-> -#include <dm.h>
-> -#include <smem.h>
-> -#include <dm/test.h>
-> -#include <test/test.h>
-> -#include <test/ut.h>
-> -
-> -/* Basic test of the smem uclass */
-> -static int dm_test_smem_base(struct unit_test_state *uts)
-> -{
-> -	struct udevice *dev;
-> -	size_t size;
-> -
-> -	ut_assertok(uclass_get_device(UCLASS_SMEM, 0, &dev));
-> -	ut_assertnonnull(dev);
-> -	ut_assertok(smem_alloc(dev, -1, 0, 16));
-> -	ut_asserteq(0, smem_get_free_space(dev, -1));
-> -	ut_assertnull(smem_get(dev, -1, 0, &size));
-> -
-> -	return 0;
-> -}
-> -DM_TEST(dm_test_smem_base, UTF_SCAN_PDATA | UTF_SCAN_FDT);
+>   	sound {
+>   		compatible = "sandbox,sound";
+>   		cpu {
+>   			sound-dai = <&i2s 0>;
+> diff --git a/configs/sandbox64_defconfig b/configs/sandbox64_defconfig
+> index 60a30d048750..53f7af4270af 100644
+> --- a/configs/sandbox64_defconfig
+> +++ b/configs/sandbox64_defconfig
+> @@ -240,10 +240,8 @@ CONFIG_SANDBOX_RESET=y
+>   CONFIG_DM_RTC=y
+>   CONFIG_RTC_RV8803=y
+>   CONFIG_SCSI=y
+>   CONFIG_SANDBOX_SERIAL=y
+> -CONFIG_SMEM=y
+> -CONFIG_SANDBOX_SMEM=y
+>   CONFIG_SOUND=y
+>   CONFIG_SOUND_SANDBOX=y
+>   CONFIG_SOC_DEVICE=y
+>   CONFIG_SANDBOX_SPI=y
+> diff --git a/configs/sandbox_defconfig b/configs/sandbox_defconfig
+> index f26295103f1c..7f26405e6ed0 100644
+> --- a/configs/sandbox_defconfig
+> +++ b/configs/sandbox_defconfig
+> @@ -331,10 +331,8 @@ CONFIG_RTC_RV8803=y
+>   CONFIG_RTC_HT1380=y
+>   CONFIG_SCSI=y
+>   CONFIG_SANDBOX_SERIAL=y
+>   CONFIG_SANDBOX_SM=y
+> -CONFIG_SMEM=y
+> -CONFIG_SANDBOX_SMEM=y
+>   CONFIG_SOUND=y
+>   CONFIG_SOUND_DA7219=y
+>   CONFIG_SOUND_MAX98357A=y
+>   CONFIG_SOUND_SANDBOX=y
 > 
 
 Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
