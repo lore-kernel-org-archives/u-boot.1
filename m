@@ -4,85 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20CDDCD4F52
-	for <u-boot@archiver.kernel.org>; Mon, 18 May 2026 09:01:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E01ACD4F52
+	for <u-boot@archiver.kernel.org>; Mon, 18 May 2026 09:01:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8FFF68469A;
-	Mon, 18 May 2026 11:01:03 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 32F4D8460E;
+	Mon, 18 May 2026 11:01:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="DPzlNTSU";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="gObDQf9T";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9FFAB84676; Mon, 18 May 2026 11:01:01 +0200 (CEST)
-Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
- [IPv6:2a00:1450:4864:20::332])
+ id E4A6A83EF9; Mon, 18 May 2026 11:01:02 +0200 (CEST)
+Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
+ [IPv6:2a00:1450:4864:20::32a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F13E983EF9
- for <u-boot@lists.denx.de>; Mon, 18 May 2026 11:00:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 99E5A83FEE
+ for <u-boot@lists.denx.de>; Mon, 18 May 2026 11:01:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-48fe26a177cso12821435e9.1
- for <u-boot@lists.denx.de>; Mon, 18 May 2026 02:00:54 -0700 (PDT)
+Received: by mail-wm1-x32a.google.com with SMTP id
+ 5b1f17b1804b1-48a7fe4f40bso25150265e9.0
+ for <u-boot@lists.denx.de>; Mon, 18 May 2026 02:01:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1779094854; x=1779699654; darn=lists.denx.de;
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:from:to:cc:subject:date:message-id:reply-to;
- bh=q5PKZ0zUS0IYiu6+bPNCP2JdmK9qxjXm4M3I4UvOha4=;
- b=DPzlNTSUPH3ODpaMxPjL7a6Na73ngCf7jH66uXE7O1LV5JsEK5UbydFDNZO7OBYn++
- Yw4hCye2QDU/+QE3iEgRaodyChsQrcV7jgKQNG2WDokfrSEiLuku9u/cXHjTixu347gP
- XhABo+yzLpJP9C2XojBNZqyAcfBqoLPhVc+PnKgJHiDOKiqfAsuh0F2LeKZM35u3SZ/U
- MHnX8wURBIJz0EN5UBoAAN+iqKXQlqAll1qy4hI2kzjMufivElE2hRA3Xh/my19DpgTF
- l156y8fY6R9ZUpuOf1K3+Mv4ohS0FT7QOCX9YwniLsG65OvNMspEtjXoC8MfQgY1eOD2
- bS3g==
+ d=linaro.org; s=google; t=1779094860; x=1779699660; darn=lists.denx.de;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=kjlBj6MfvEYLZbvB9hY6FxxkYyPaPq6nJXm2m8+kSvk=;
+ b=gObDQf9TgpLKglKbeKSL31L2qGIcg7MCUQoeJeMkKXZCvQ9hb7qaNQxU4p8O5mLfpg
+ 87t7SLnG9/H0eFHArJCkBM87yU4GPB+eRaylytu6pRwaCT6bKh76vqSIdfvs/OqdDGQy
+ LxwsPx1Tc0O/52fPHb8F8KOfUeR342cBY6P+MLu+r3fZ6wTMtpuDOKQpsuLUAhAOcw9m
+ UMYzxAGKYyDY8tIYVy1ASECesjzvvDofXjVTmjUuwCNbHxwkkzGYWo4tuS6PDXoKUVfP
+ f6h16aitPoQAgJDQMem+YRfmWbjr6RuMuLQ36ESiIMPfI2aeXsOP2v/9mg6e0GrY7bUT
+ jflA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779094854; x=1779699654;
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=q5PKZ0zUS0IYiu6+bPNCP2JdmK9qxjXm4M3I4UvOha4=;
- b=RpJ9WdG7ik+6MNtymfGZn1hoKA/JRhAx18iPrYVNhpX2rh3rfamFmkl4P4+Hhw7Hif
- jBQ/VeAeDESP+3F1hw96fuEmgIzMs8/f9BKEwSMA4Ybsl/tlg++AGVVBjVqtYT3CB9TI
- FipLevtrlvU3UKo3ekrG889aWKIv9SU90XoqP53Kms/+avXJklBNgpGRDeptHHB84ZuA
- MybtP2Y5FcIGhx9Tx/czNT9Ye6tM94ted0h3nwNg16SMlia2NPMTescsogAwmCBGtrWV
- 7wVsCQG4/vaqh5zXPsc14yQzijkkgf3HNhnXGIPkdoqTIzpVYWaa/5p+ZQChzgszbiTX
- 9B0g==
-X-Gm-Message-State: AOJu0YwWr0IKooHpJ5z8JjzRk1k6qtfC4gMWCOFnSMUJQLWc2/KrF4SY
- hVMlARYJwFkinyoCAkn/zch5cy2SC1+3qpjQ9E9gXenna6Fp3X7OewQYj0iryYuTsQ8=
-X-Gm-Gg: Acq92OEGHKWDGGqcF1oVW6VVNXpQM83dlIssoaP3TNZ0++JSPv4YAtZC/zTsdNLUN15
- qAK+pGD+strOi/oTjQu4m9JhqqYjVWOiZ0m3eLZ/AG4NxFIzYD7ZZDKgpwFAKmJlj4gXLe2xJdU
- eoMEttpPhPFuM3fN3uweKxkhlq+OqB1TpI/AkJBGz/bq8BP9Q7U9tpCJczFijXOmH35mXQFp08n
- NsMQ4sFtG4p2UORvaU+lzAmnTxnt6n8ppFmbWYjHTqfL7wI+u7JsockPZFweJCh6iOJVQXv2Dw7
- iZhyL0QI8Oh8YqNTa6lMVVkHyXgV77VI7EzKmtYJ6gzFr6heuNnZkXV1tNmsprLQ8UP81Ep8x97
- Efp4+ykaOG/c9dknIqepvAlKFGcT9vHs5RX8sBT32q5xEWP/kQ5qljWZf+t7+wKu7qurQ15OEYp
- 1WgkD66jeb02qZpjoEbkWrD2IGvJAH144m3A6TLfWxXVhRSZnsCtfaIvrXUQBYTcRwjlA3YJPxL
- z+Oonk=
-X-Received: by 2002:a05:600c:828d:b0:48e:6db3:ff2e with SMTP id
- 5b1f17b1804b1-48fe61eb313mr207224965e9.15.1779094854331; 
- Mon, 18 May 2026 02:00:54 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1779094860; x=1779699660;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=kjlBj6MfvEYLZbvB9hY6FxxkYyPaPq6nJXm2m8+kSvk=;
+ b=KGstvU4ffm1M5yrKKpBdMQYHllOjSOGA7SOd7trtOQuEcSdU7h/vQBpBQBaaKNheql
+ Rvp+YbRl7n7jrvriTZ0fV/c/iSQvgSxSmAG4IdNYLNhUSjKdnS9bBRCd63nTqqEJdurG
+ +6Cv3nYfaGCT4tjxbAuFrb1PTQQ9lJIAtdzzddj2egFaF5ep04gT+NwiBszG4XMiSbmh
+ B8qlaE2XsH4gYUJAOC4solhtnTpUzpF78iK38ChrNzC18/tbHXm658Xxt2v7mtHA7SPf
+ QzyTPS+pQ+g77jw7iZCC66tpc1kIk03duNVewoP/CoW5ATbIwAPWusjhmZSTWjbFTjB1
+ NdLQ==
+X-Gm-Message-State: AOJu0YyQ5ccywugUKm2j+Emq1wcfuzJIWWEXiWuVsI+3HLVcd2ux2kvZ
+ mF17aViBjfp2vSp1JtyeRT/ZWtg/ykujA+8l8BwwOLX2gkIz55XprOAvhEhCeh3wdJA=
+X-Gm-Gg: Acq92OH1n+tZtHWZDZi5zEqF0hDDy7u/lZ++ZKjgbEgNBf+lAm7sD/jxmNLBM9wuIq3
+ 0TylP7EjcLF4SYnXUmJlO2NVx6BDEhHTNqkF6rP+pU93n843UYEaHP2f+nNMf3od7KR0dRRkYNw
+ y9IdG1AnH+B9Un0zdKCJZfRgIOfLtC0kDtsQfbowDqJ9a7wm48N3ZM3OBvUYOSDXDNLSG2NGk3W
+ DoSrCKjr5MUhBuoyng+UP4TcHgyn1goA7uBn6uUX9Av+iDEo1mQj3tHtuC7WNeuMT5OFJt7xPmP
+ tg9MJLvVI9xZEc22/F3RDvcPxArqbyqIAJBao12x38cUGJN8CHmiWFkK3HZi4IVjLelJ2SNfOCR
+ 4wwFKn/TkOxkIvyInCfqjXNPRvEQKJw/jByZTLVcAYgNKTjjQih2y6rn7v1i4yBd81zsE4UcU9D
+ LIyuKOz/DCQ1Ae0uHi5lKx+FMX2QDRzC6JAADPB4vY9o/PDTInfP2DodFp84866VWkzU5q
+X-Received: by 2002:a05:600c:8b05:b0:48f:be94:d82c with SMTP id
+ 5b1f17b1804b1-48fe632518cmr252675005e9.19.1779094859701; 
+ Mon, 18 May 2026 02:00:59 -0700 (PDT)
 Received: from lion.localdomain (p4fc3dd86.dip0.t-ipconnect.de.
  [79.195.221.134]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-48fe5ab3977sm265269425e9.9.2026.05.18.02.00.53
+ 5b1f17b1804b1-48fe5ab3977sm265269425e9.9.2026.05.18.02.00.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 18 May 2026 02:00:53 -0700 (PDT)
+ Mon, 18 May 2026 02:00:59 -0700 (PDT)
 From: Casey Connolly <casey.connolly@linaro.org>
-Subject: [PATCH v5 0/4] armv8: mmu: fix region unmapping and optimise
- set_one_region()
-Date: Mon, 18 May 2026 11:00:49 +0200
-Message-Id: <20260518-b4-mmu-unmap-fixes-v5-0-7802245a40a2@linaro.org>
+Date: Mon, 18 May 2026 11:00:53 +0200
+Subject: [PATCH v5 4/4] armv8: mmu: fix and optimise explicitly unmapping
+ regions
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/32NTQ6CMBhEr2K69jOllBZdeQ/jovQHaoSSFhoN4
- e62uNHEuHyZmTcLCtpbHdBptyCvow3WDQmq/Q7JTgytBqsSI4IJwxXm0FDo+xnmoRcjGPvQAQr
- DNSaSSaoMSsPR6y1Iu8v1zWFublpO2ZQbnQ2T88/tNZa59/cgloBBCMk5Yarmqjrf7SC8Ozjfo
- vwQ6YejID8dNDmMaGpMDKNcHr8c67q+ACwm+YgLAQAA
-X-Change-ID: 20260507-b4-mmu-unmap-fixes-1f7e02c6c4df
+Message-Id: <20260518-b4-mmu-unmap-fixes-v5-4-7802245a40a2@linaro.org>
+References: <20260518-b4-mmu-unmap-fixes-v5-0-7802245a40a2@linaro.org>
+In-Reply-To: <20260518-b4-mmu-unmap-fixes-v5-0-7802245a40a2@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>, Anshul Dalal <anshuld@ti.com>, 
  Casey Connolly <casey.connolly@linaro.org>, 
@@ -91,13 +87,13 @@ Cc: Tom Rini <trini@konsulko.com>, Anshul Dalal <anshuld@ti.com>,
  Patrice Chotard <patrice.chotard@foss.st.com>, 
  Sumit Garg <sumit.garg@kernel.org>
 X-Mailer: b4 0.16-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2155;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=4043;
  i=casey.connolly@linaro.org; h=from:subject:message-id;
- bh=cuih+zXOzi2iv1dBeRK4kGcQTGk/KUYG2ONzWSxYqUY=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhiyuqy5PtLgifaaLLNy0tHClR4Z36xKmILPUg/XLt6wze
- rY88p99RykLgyAHg6yYIov4iWWWTWsv22tsX3ABZg4rE8gQBi5OAZjIN0uGPzxaX9mSYpjZZJl+
- RvTVKTtt27PQW269zWxB/fvMOb+d9jD8U9zcf9nwiemdOUGrt11RUniYzunZbC7ZLP7dvEvitPn
- UMAA=
+ bh=CVZBhJ1Qu1oD7gO74jKJGd+k99lGYy0vXrpsD9R/RRY=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhiyuq67ttU6n3Rcb98clHGm3vsQ6zy6rJblGUCqx++n1j
+ +I3PoZ1lLIwCHIwyIopsoifWGbZtPayvcb2BRdg5rAygQxh4OIUgIkIujIy7Pgi+yHkw8Pe6aLq
+ k2ZM65z8WGWRf9DhpSc0JhsYJypss2P4p/1kuu7m1bN/dn67o7QnQejcTPuNhftM3h9kn/wzPkj
+ +VysA
 X-Developer-Key: i=casey.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -116,50 +112,103 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Currently trying to unmap a region results in slow and largely broken
-behaviour as we unnecessarily split blocks and manually set thousands of
-individual 4k pages instead of higher level blocks.
+As more platforms start ensuring they explicitly unmap reserved-memory
+regions a few issues have appeared with how the existing dynamic mapping
+code works. Fix these and get a small optimisation as well.
 
-This series fixes the behaviour of set_one_region() so that it works properly when called to unmap regions. See patch 4 for details.
+1. Teach pte_type() to actually respect the PTE_TYPE_VALID bit
+2. Don't walk the TLB a second time if we call mmu_change_region_attr()
+   with PTE_TYPE_FAULT (since it would just be a slow nop)
+3. Fix how set_one_region() decides to split blocks.
 
-Patches 1 & 2 improve the existing debug functionality, the pagetable
-dumper will now print most explicitly unmapped regions (since they still
-have their PA intact), as well as adding a new function which does a
-very basic software TLB lookup to help with debugging.
+Today set_one_region() will always split blocks until it reaches the
+smallest granule size (4k) and then update all of these pages. This
+appears to be due to a big in how is_aligned() is implemented, since
+it only evaluates to true if addr and size are both multiples of the
+current granule size, so a mapping aligned to 2M which is 4M in size
+will cleanly result in 2 blocks being set, but a mapping aligned to
+2M which is 4M + 8k in size will result in blocks being split and 1026
+individual pages being set.
 
-Patch 3 de-duplicates some code by moving the loop that always surrounds
-set_one_region() calls into its own function, this also helps with
-readability in the calling functions.
+While for the address it is correct to enforce that it is aligned to
+the current granule size, we only need to check if the region size is
+greater than the current granule size. This allows us to simplify our
+second example above to only 4 entries being updated (assuming no blocks
+have to be split) since we only need to update 2 blocks to map the first
+4M, drastically improving the best-case performance.
 
-Changes in v5:
-- Fix logic in set_one_region() so that pages are correctly unmapped
-- Cleanup get_tcr() use in a few places
-- Minor improvements/cleanup to tlb_debug_lookup()
-- Link to v4: https://patch.msgid.link/20260512-b4-mmu-unmap-fixes-v4-0-fab802f647c9@linaro.org
+In the case where the address is 4k aligned rather than 2M aligned we
+will still be restricted to mapping 4k pages until we reach 2M alignment
+where we could then map a larger 2M granule which previously would never
+happen.
 
-Changes in v4:
-- Fix the new set_regions() common function to never call
-  set_one_region() with level = 0 to match existing behavjour.
-- Link to v3: https://patch.msgid.link/20260507-b4-mmu-unmap-fixes-v3-0-aac7726d87d5@linaro.org
-
-Changes in v3:
-- Reworked entirely to be correct, v2 would cause unrelated pages to
-  get updated too if the region was inside a block.
-- Added additional patches with debugging improvements and code cleanup
-- V2: https://lore.kernel.org/u-boot/20260504183721.646712-1-casey.connolly@linaro.org/
-
+Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
 ---
-Casey Connolly (4):
-      armv8: mmu: add a function to help debug TLB lookups
-      armv8: mmu: teach the pagetable dumper to show explicit FAULT maps
-      armv8: mmu: commonize the set_one_region() loop
-      armv8: mmu: fix and optimise explicitly unmapping regions
+ arch/arm/cpu/armv8/cache_v8.c | 18 ++++++++++++++----
+ 1 file changed, 14 insertions(+), 4 deletions(-)
 
- arch/arm/cpu/armv8/cache_v8.c    | 180 +++++++++++++++++++++++----------------
- arch/arm/include/asm/armv8/mmu.h |   7 ++
- 2 files changed, 115 insertions(+), 72 deletions(-)
----
-base-commit: a6f6947e43fba91de3ec5d0390eee7eb1a6a80f7
+diff --git a/arch/arm/cpu/armv8/cache_v8.c b/arch/arm/cpu/armv8/cache_v8.c
+index 889c566df105..f924e640a4a4 100644
+--- a/arch/arm/cpu/armv8/cache_v8.c
++++ b/arch/arm/cpu/armv8/cache_v8.c
+@@ -162,9 +162,9 @@ u64 get_tcr(u64 *pips, u64 *pva_bits)
+ #define MAX_PTE_ENTRIES 512
+ 
+ static int pte_type(u64 *pte)
+ {
+-	return *pte & PTE_TYPE_MASK;
++	return *pte & PTE_TYPE_VALID ? *pte & PTE_TYPE_MASK : PTE_TYPE_FAULT;
+ }
+ 
+ /* Returns the LSB number for a PTE on level <level> */
+ static int level2shift(int level)
+@@ -991,11 +991,12 @@ u64 *__weak arch_get_page_table(void) {
+ 
+ 	return NULL;
+ }
+ 
++/* Checks if the current PTE is an aligned subset of the region */
+ static bool is_aligned(u64 addr, u64 size, u64 align)
+ {
+-	return !(addr & (align - 1)) && !(size & (align - 1));
++	return !(addr & (align - 1)) && size >= align;
+ }
+ 
+ /* Use flag to indicate if attrs has more than d-cache attributes */
+ static u64 set_one_region(u64 start, u64 size, u64 attrs, bool flag, int level)
+@@ -1003,11 +1004,16 @@ static u64 set_one_region(u64 start, u64 size, u64 attrs, bool flag, int level)
+ 	int levelshift = level2shift(level);
+ 	u64 levelsize = 1ULL << levelshift;
+ 	u64 *pte = find_pte(start, level);
+ 
+-	/* Can we can just modify the current level block PTE? */
++	/* Can we can just modify the current level block/page? */
+ 	if (is_aligned(start, size, levelsize)) {
+-		if (flag) {
++		if (attrs == PTE_TYPE_FAULT) {
++			if (pte_type(pte) == PTE_TYPE_TABLE && level < 3)
++				*pte = 0;
++			else
++				*pte &= ~(PMD_ATTRMASK | PTE_TYPE_MASK | PTE_BLOCK_INNER_SHARE);
++		} else if (flag) {
+ 			*pte &= ~PMD_ATTRMASK;
+ 			*pte |= attrs & PMD_ATTRMASK;
+ 		} else {
+ 			*pte &= ~PMD_ATTRINDX_MASK;
+@@ -1107,8 +1113,12 @@ void mmu_change_region_attr(phys_addr_t addr, size_t size, u64 attrs)
+ 	flush_dcache_range(gd->arch.tlb_addr,
+ 			   gd->arch.tlb_addr + gd->arch.tlb_size);
+ 	__asm_invalidate_tlb_all();
+ 
++	/* If we were unmapping a region then we have nothing to make and can return. */
++	if (attrs == PTE_TYPE_FAULT)
++		return;
++
+ 	mmu_change_region_attr_nobreak(addr, size, attrs);
+ }
+ 
+ int pgprot_set_attrs(phys_addr_t addr, size_t size, enum pgprot_attrs perm)
 
-// Casey (she/they)
+-- 
+2.53.0
 
