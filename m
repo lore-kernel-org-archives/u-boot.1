@@ -4,145 +4,134 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3BC1CD4F49
-	for <u-boot@archiver.kernel.org>; Mon, 18 May 2026 14:05:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0B30CD4F49
+	for <u-boot@archiver.kernel.org>; Mon, 18 May 2026 14:34:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0677583EF9;
-	Mon, 18 May 2026 16:05:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=sttls.nl
+	by phobos.denx.de (Postfix) with ESMTP id 2E17E83EF9;
+	Mon, 18 May 2026 16:34:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=sttls.nl header.i=@sttls.nl header.b="Lzh1hpEj";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="QRH5UL1z";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0D3A483FEE; Mon, 18 May 2026 16:05:10 +0200 (CEST)
-Received: from AM0PR02CU008.outbound.protection.outlook.com
- (mail-westeuropeazlp170130006.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::6])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 023A983FEE; Mon, 18 May 2026 16:34:29 +0200 (CEST)
+Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
+ [IPv6:2a00:1450:4864:20::433])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0E881803C6
- for <u-boot@lists.denx.de>; Mon, 18 May 2026 16:05:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 57B62803C6
+ for <u-boot@lists.denx.de>; Mon, 18 May 2026 16:34:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=sttls.nl
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=Maarten.Brock@sttls.nl
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=BhBmahWU2G1zAFRO3ntQixffKxdtw+lQpp5JeIXH0P0ymbV1vkMcMHVm129vBZtEaqLQTDGxZADDFXT5XPV23gZV1dx31CWdiwI5Cf7iyFmQKLP838/9ctrLAmrXjAoa+n+wbeysi0bLXdt2dQTxlMUBmI0Dif1yC5Yh7O+YXdaF/QbRJZYBiczp7ZJ8SS72zx1cBfnJAt9GR0ypG0l1N9NcRmrKhI06IVe9IV4rgqxkZvfhRN4koveA0OWvraYl4P4F8CiOgV7ALBJ4gvv7rBCcbwEs41evwvIySRvRwCjFdDbC1wgzJwOwJmy2kKoXCrr9Eh467JCfEs9pYotndQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Tbxce9dy09OoZ4EbKYgWdiUYrEVecjxcGgHGrL4Q2GE=;
- b=lPOzYDqS5cmvP0x2A07KJjoxazT2czm9B/QZcGrzs1+Av2SfaT5LJIASq8pYKAuxePVBejiiqo28sWm+NIUpbibsO8TWPHAbkmrsj1NPAkil83Z0cRO/tucWeJGQm+F5VmLDhoenWN6x3CQJtf6qxBbuLnWiIJotNg16O+qeIUChZ115BJcLE+eLUXfp2C+Cn1wvVMA/9sTQXEEIc8k9b+p2djA3YUlJwC74G857ew9UXwwzXZXbmWhlShEeel7jd9egCb051KfCIUCBUDN26GQh2wgcnD6irMKXeLQGmf1coLmvBX6el9Ct/K4QpHsDVXISLQPdBpOZw7prpjoSBw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 13.93.42.39) smtp.rcpttodomain=amd.com smtp.mailfrom=sttls.nl; dmarc=pass
- (p=none sp=none pct=100) action=none header.from=sttls.nl; dkim=none (message
- not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sttls.nl; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Tbxce9dy09OoZ4EbKYgWdiUYrEVecjxcGgHGrL4Q2GE=;
- b=Lzh1hpEjOn3QaW/Wo7FZWvVGxIwb91Knh5KMhnkCrxc4U59jSXAK3qp1aoxnP/b8VGd6V2tv7IYbJ2DRdC3bS1nb3Bhr0zWul0fCnxbDrrUaXhBxl3wF+wY9v+urrR6j/f3tASd/T1CLj+Kv+K6DVO17S++g9Obm577fARWhgVUi5ZznmkZOxCFrIGO+PoNQjgVwKwFEUSitchgGRih2RrfO8ahKKpspOuPrqlna902IcAf+Rff4QiXSEEPARi7+U82voaRX1h/z5VDbrmOn8GK4RRO//sSPEqdTD5W6HXV8aV4mOZ8+zhC1a8w91nJ3903IvvKITlulubb3vhYfow==
-Received: from DUZPR01CA0346.eurprd01.prod.exchangelabs.com
- (2603:10a6:10:4b8::29) by DBAPR05MB7528.eurprd05.prod.outlook.com
- (2603:10a6:10:1a4::12) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.25.23; Mon, 18 May
- 2026 14:05:05 +0000
-Received: from DB5PEPF00014B9B.eurprd02.prod.outlook.com
- (2603:10a6:10:4b8:cafe::61) by DUZPR01CA0346.outlook.office365.com
- (2603:10a6:10:4b8::29) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.25.23 via Frontend Transport; Mon, 18
- May 2026 14:05:05 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 13.93.42.39)
- smtp.mailfrom=sttls.nl; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=sttls.nl;
-Received-SPF: Pass (protection.outlook.com: domain of sttls.nl designates
- 13.93.42.39 as permitted sender) receiver=protection.outlook.com;
- client-ip=13.93.42.39; helo=westeu12-emailsignatures-cloud.codetwo.com; pr=C
-Received: from westeu12-emailsignatures-cloud.codetwo.com (13.93.42.39) by
- DB5PEPF00014B9B.mail.protection.outlook.com (10.167.8.168) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.48.11 via Frontend Transport; Mon, 18 May 2026 14:05:04 +0000
-Received: from DUZPR08CU001.outbound.protection.outlook.com (40.93.64.64) by
- westeu12-emailsignatures-cloud.codetwo.com with CodeTwo SMTP Server (TLS12)
- via SMTP; Mon, 18 May 2026 14:05:04 +0000
-Received: from GV2PR05MB11941.eurprd05.prod.outlook.com
- (2603:10a6:150:2cf::21) by PAWPR05MB10988.eurprd05.prod.outlook.com
- (2603:10a6:102:390::9) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.25.23; Mon, 18 May
- 2026 14:05:01 +0000
-Received: from GV2PR05MB11941.eurprd05.prod.outlook.com
- ([fe80::86e3:136c:737e:e29a]) by GV2PR05MB11941.eurprd05.prod.outlook.com
- ([fe80::86e3:136c:737e:e29a%4]) with mapi id 15.21.0025.020; Mon, 18 May 2026
- 14:05:01 +0000
-From: Maarten Brock <Maarten.Brock@sttls.nl>
-To: Michal Simek <michal.simek@amd.com>, "u-boot@lists.denx.de"
- <u-boot@lists.denx.de>, "git@amd.com" <git@amd.com>, Simon Glass
- <sjg@chromium.org>
-CC: Tom Rini <trini@konsulko.com>
-Subject: RE: [PATCH v3 1/5] reset: Add reset_reset() and reset_reset_bulk() API
-Thread-Topic: [PATCH v3 1/5] reset: Add reset_reset() and reset_reset_bulk()
- API
-Thread-Index: AQHc4rzbCDLskqqraUWKae54XuSMorYTl/zAgAAGb4CAABgoUIAAB54AgAAB5gCAABWDgIAAAOUA
-Date: Mon, 18 May 2026 14:05:01 +0000
-Message-ID: <GV2PR05MB11941B769B4CC8DCBF3E7E27E83032@GV2PR05MB11941.eurprd05.prod.outlook.com>
-References: <cover.1778665323.git.michal.simek@amd.com>
- <b8229b9f7b357cf6013e8423831a9af1d69fefdb.1778665323.git.michal.simek@amd.com>
- <GV2PR05MB1194140D0CFDB4D8C63BB998183032@GV2PR05MB11941.eurprd05.prod.outlook.com>
- <0f7c82f8-dfff-4c0b-84c5-41f189ee042b@amd.com>
- <GV2PR05MB1194186BCEE688E85977E22FE83032@GV2PR05MB11941.eurprd05.prod.outlook.com>
- <12534d6c-6961-4fb7-80c3-d83c3f8d13dd@amd.com>
- <GV2PR05MB11941B4DBA7BBB814C32BFEAF83032@GV2PR05MB11941.eurprd05.prod.outlook.com>
- <50aef2c8-562d-44c6-a8af-315a6266f07a@amd.com>
-In-Reply-To: <50aef2c8-562d-44c6-a8af-315a6266f07a@amd.com>
-Accept-Language: en-US, nl-NL
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Authentication-Results-Original: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=sttls.nl;
-x-ms-traffictypediagnostic: GV2PR05MB11941:EE_|PAWPR05MB10988:EE_|DB5PEPF00014B9B:EE_|DBAPR05MB7528:EE_
-X-MS-Office365-Filtering-Correlation-Id: 03a2b894-7ce3-4b35-24ca-08deb4e6760a
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam-Untrusted: BCL:0;
- ARA:13230040|376014|1800799024|366016|4143699003|56012099003|18002099003|38070700021|22082099003;
-X-Microsoft-Antispam-Message-Info-Original: qGahRY9Mv07Y6XBZQ9D7+HPhjk371wDUAwV8ESVMBkh6hXeZS6dD2P6/mDsco1KIduw8xgoYanata5md/P1/8zZDQWWOL2jb3Ci0AtCZtm30bjVp6y1esECRa8Lg4OwhuvId/NpD3Xn7C4/zTjxqUDZZ7WK81QYZPf+c1siMygOQcs+9p4VeHbk0HHq+vx4zYUg6dcj0E5DSTxZJroKkRWvnkhQjMZvIju2JKpWnbdOw324AZIw/A8wApR9rLtf8QozWUupnJYFsI2A4epIE4UUfwmrziPv6M4Vmci8JlCZjU78CtrswZAMK7sT+M71HPpdd2rvHY4lFjRq8qs0IwItlM/RZTqNY8k9T6d1LB0+TO3JLwhgopnwcMA7tWaLUABlZwzk6INFQnX7zhV+0GWbLs9TD8MMNX6Vn2nKjUGpkq6DMt5I9iiGCE9zKVxO/gYxcKcT4sPHw7RDQHDyJq3w+lQX7oMo2ywN2yUdTP0SFF3QUTEXq1icl2w+TL1fF0SeNWT9oxT3ryz+T+FWXilrJ91VuOAZQ3IrnBCSAft2DgiJuWHN94g1Wmi5rOLvVK/v812AJNHb5GoCXeyBc/exmY2fY4FrzBmUBRyzp22Quqyc9MWLiLJYVYzdPaapzbInPeA+0GbFiNBqqZydI5hjFeMaRO+3VVV2UB1A3LkcPie1Xxume3xaF6ga9RbfLtGEkKvfZrqXyk59OvSEiUqcuHWfLzKS+sQ5Z7ifMATl+NCFxvymJplQG94Q8EGuY
-X-Forefront-Antispam-Report-Untrusted: CIP:255.255.255.255; CTRY:; LANG:en;
- SCL:1; SRV:; IPV:NLI; SFV:NSPM; H:GV2PR05MB11941.eurprd05.prod.outlook.com;
- PTR:; CAT:NONE;
- SFS:(13230040)(376014)(1800799024)(366016)(4143699003)(56012099003)(18002099003)(38070700021)(22082099003);
- DIR:OUT; SFP:1102; 
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wr1-x433.google.com with SMTP id
+ ffacd0b85a97d-45562c41ec7so1382780f8f.1
+ for <u-boot@lists.denx.de>; Mon, 18 May 2026 07:34:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1779114865; x=1779719665; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:from:to:cc:subject:date:message-id
+ :reply-to; bh=6zx9VhzLr0LQ8H0Gp4nDJV4lH9vlXbiudpMM7UsMe9c=;
+ b=QRH5UL1znEU4Bc4VqSWbQfQc2E4jnFTQCFH98boV2zd9P9Wjv2pw8bNB4YRpgc5D03
+ r93SPbY1s5u9W8+u8KryJ0bMosjMbUVbWq03sgiWolkzSsHl0niQBQdgOkRcqURUL2uW
+ kiM8iQzAd+7cP0xEMHpXbvWrliwEJkExXoMiCPBaDWsk1EyR/NgTZbzoo4Qhxd6ZmKq8
+ FajKGz3quE5g5u0yovHoT6bjiBi8WO3WpWHdwTDDijm9OTA60avZ73Cyt5IW9fimZsBy
+ dN+leKSKiSqpJwcIhANE01rkHHkHa1RjPuDwiIKlMDwMTl1prRw/Dvkia9X2sPDu/NZY
+ 7YLA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1779114865; x=1779719665;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=6zx9VhzLr0LQ8H0Gp4nDJV4lH9vlXbiudpMM7UsMe9c=;
+ b=LVztfA5DUxuOYnqbIRRSa3lo18GwRTIGXTAcJa+aTRpLiHf+r8eQzroBBVWImOtd8J
+ abEnvmGvQiTLJe+oM7RYJHNvSlLvl2+3no1or9EvdfigOAFp3q4xpFssCRXfQI3jQNtI
+ Qq1b/Mxo+vjfWxQfCsQiQ6+7IfQweWBI7sco0H9bbftZTZ5gA7k1ilrPdsKdSRf8loGc
+ ToTiRPkhbA0hnni0q/i9HZaUtql5JzwpJ/nVAlGisyumqBCTlv4ppKVrKmaG+BrFiOXQ
+ LelstMXq3zmAwCuUckBfhuyEagjZMhgpPiFLFawZWCa/4RI+Dx3vZWZjEznoCUGd0uPg
+ wuiA==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ/ppJGXlyA6ak4W1Yno0vtTEUpKGoifIUt7iiNgvmDjtkkqYwAQDRcA9NR7g/2JaggFuzGJpeo=@lists.denx.de
+X-Gm-Message-State: AOJu0YyXL9VvjAap6OlG5A4Vg2A6VEYmFCIDinD6J0aLUy58zRv7dcA2
+ zEYD/WsLVL8+DMgpFsZPvAxXuzc89roCYdWDX5x3jhDqxvSUGeEtabw1ujCbkwn7cPg=
+X-Gm-Gg: Acq92OERX8hJoPB49kH6/uq/sI8j61ESQ2QJSG33cWUhaY4fkkfhh7yICfbxWwa07Xw
+ IoAvXkD36IbdlgiJ23ifLGvNLAhbK60rvYcUahePIhiLxqbcea67PhWOmhViCv4drQ4AdlGnfEk
+ YXXlNVyBtAqTytmjRp01IiPRfvkoZ8clk/q5xmciXUCVwy44hmobGX18vo/3SqbDGe129lt2CY9
+ HqnrErQ5PZVJw3cT2jDD6QT7M7DVQrqmH3n6rbSrstnkjqzuRy2Bm31TKUYCK+GChRqyrflS4JH
+ Lld4Y9yff75cKhFxIlmh9MEWsi+//6rma767a9ILf+Wf3hi8u51qD/4fTnUkH0mPR17t2ftHYst
+ jpKRKDiHLlFzO6My/5kmaLDGowYhptzZ5h9AiON7eSb+MyS8dXvz3/fPeis/dvh8qblzrz15Tu2
+ 3GH2+lyyeI0zOvUWObMLEPF+evioBXdEJV1Xb9aPDFN9PAhfPvSc2cRyFkAnTQTdm7ouw78tNX5
+ PMaVF8=
+X-Received: by 2002:a05:6000:200f:b0:45d:b14b:23f8 with SMTP id
+ ffacd0b85a97d-45e5c5af4eamr24139330f8f.18.1779114864403; 
+ Mon, 18 May 2026 07:34:24 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:106d:1080:1029:e3c5:362e:1250?
+ ([2a01:e0a:106d:1080:1029:e3c5:362e:1250])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-45d9ec3b18fsm35055720f8f.11.2026.05.18.07.34.23
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 18 May 2026 07:34:23 -0700 (PDT)
+Message-ID: <fefec34d-4e26-4ecc-a923-a4b2193431b9@linaro.org>
+Date: Mon, 18 May 2026 16:34:22 +0200
 MIME-Version: 1.0
-X-Exchange-RoutingPolicyChecked: IxUJdBE8Li1fxPqis7AJIqyu4jO/wHaX4k3Ebkva+VMid/sazPUdsui9j3YoMS1IeF/hp9um7nG/StnFV3/mGaE/z9/ntgol33+/oop4ZNVTXO6KkwbW56NbDbQoVG8Hy5nhmNI3zDZlru1UDzaEZTx07b58Rg1owCq/qKpTxBGsOxUojbGxNYVPf91VH3Vl95eZF8hX2br+MhlyXCu45yNOC6o5hqlcExhEyLHgtn7RoVlRSpF0Aro2nt+vmsELNcdLhYVk3MDand5whxFbSG1lF357HxlJa+PPIBFgl2VaBN/yDG1Y/9MPDNbIIXuGhR3qECo1ZLcvSTUeCnKrPw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAWPR05MB10988
-X-CodeTwo-MessageID: 8ff15939-859c-4a3c-9b13-f0c154bad2ea.20260518140504@westeu12-emailsignatures-cloud.codetwo.com
-X-CodeTwoProcessed: true
-X-EOPAttributedMessage: 0
-X-MS-Exchange-Transport-CrossTenantHeadersStripped: DB5PEPF00014B9B.eurprd02.prod.outlook.com
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id-Prvs: 513611f6-842d-4d71-4f7d-08deb4e67409
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|36860700016|14060799003|1800799024|35042699022|82310400026|22082099003|56012099003|18002099003|4143699003;
-X-Microsoft-Antispam-Message-Info: rWv/yqNSeJVQJFrQZfTaE5CLW3DTv+v3ZC0FG0hEFBNP4DgJei+V0BdqVxpsV/8c3FrxaU8Kepa70qvMa9WYFNLsEbK+GfftP7Zkx1RprU85vRoL87ZVSRfEOvmvT8SwLqb0Q1E7Fouc4rZTYiCOBgla/aSfAlawtlS9xAUvEGJxCNEWUubbHE5GsKvqTnva3yjRtB79cDjLiG8raJzcqYuoGJ7pyV7Xk1fYahwc92qS7CCs8xoCyO93dfZ2DmBYzoRliCjinkWYq48+6zGiYTzXzE+ExwlsQFvTwTPiJ+5dCximmIorntRzmHrT3A6nluQskhDd1pZuChmH+ZcU5+o35fCwutf1BNZQ+DEnzRNRbT03z1Hkt6mXT25cKdhBy6ns4UpTm+UtvCFrzgPL+1iGypg3E5mPkMgNCG36knMZXGvwFR12B1moe4lR3Sv6BCWPFFrqGYG0g9U8VdshcbwuZK+EAtpgW5k5xKxg0Pg+iFQvGcTwqmRVFDrmX4XMLPzXmSh+IjFdRJhR8NHqnD8kxpYUIdItN3aSh5giVdYfOJPEyQy1TZMCiazvnqoEyDsq7j0CN0DheqcQSmgFtqhvEpEQqGf7GjR/WT6ED7Lpm4t8O34e7y29eoV0Y/fX4a7bNxql6CY0Izs2c8g7FDJjqN5auS0L7FQRed0v3B/OK1F9hApO32Of5B+qvNJKnqY8NtQ8C5hyzKkz99gXH7pgam8BHAOgNg9boO2pDBc=
-X-Forefront-Antispam-Report: CIP:13.93.42.39; CTRY:NL; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:westeu12-emailsignatures-cloud.codetwo.com;
- PTR:westeu12-emailsignatures-cloud.codetwo.com; CAT:NONE;
- SFS:(13230040)(376014)(36860700016)(14060799003)(1800799024)(35042699022)(82310400026)(22082099003)(56012099003)(18002099003)(4143699003);
- DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: c0OQJKTJv2fVKOTD7LEzUaf68DvWr2m5VsHBB4g20iPZuAAbEckaQuB0jymzftEhhiqu4ebTEcpFCR5dqZTJis8jMy7VBCWvP2LOzpWKDsoChbdEZLuHViSMba6Cq/dIludwiEIi90ZPz6Co1F6hUui90c75nQTUFrn93Dtd2/P6NwwfcqLgtKeIkPBsObYoQ0Dd9vujcYrLEZ80Zy5NaHTl94A1pDzTwr83GGisadY4sHYUTIhpwp+Z+yQKuSramgBpSLW99Hpk3yLo5M1m+XLyy9t1tValsjZRmij1outinqKblpGhBtSdiErNUjHUjuHB+1kvTLPzEXeRks47aiqpSwCSLKI0ZT+Dg1Gbp9nmGDT7xDL7GuOytqbrr+fNFsit8m+pb23VEUBoaGt2r5/QWlKiZzkJA3zTGKZ9ohiMNmZRnxSyutA7OKUlIn7I
-X-OriginatorOrg: sttls.nl
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 May 2026 14:05:04.8000 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 03a2b894-7ce3-4b35-24ca-08deb4e6760a
-X-MS-Exchange-CrossTenant-Id: 86583a9a-af49-4f90-b51f-a573c9641d6a
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=86583a9a-af49-4f90-b51f-a573c9641d6a; Ip=[13.93.42.39];
- Helo=[westeu12-emailsignatures-cloud.codetwo.com]
-X-MS-Exchange-CrossTenant-AuthSource: DB5PEPF00014B9B.eurprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DBAPR05MB7528
+User-Agent: Mozilla Thunderbird
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Subject: Re: [PATCH v2 01/15] Revert "dm: SMEM (Shared memory) uclass"
+To: Casey Connolly <casey.connolly@linaro.org>, u-boot@lists.denx.de,
+ Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Peng Fan <peng.fan@nxp.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Alice Guo <alice.guo@nxp.com>, Quentin Schulz <quentin.schulz@cherry.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Kuan-Wei Chiu <visitorckw@gmail.com>, Raymond Mao
+ <raymond.mao@riscstar.com>, Stefan Roese <stefan.roese@mailbox.org>,
+ Philip Molloy <philip.molloy@analog.com>,
+ Jerome Forissier <jerome.forissier@arm.com>,
+ Marek Vasut <marek.vasut@mailbox.org>,
+ Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
+ Rasmus Villemoes <ravi@prevas.dk>, Heiko Schocher <hs@nabladev.com>,
+ Michal Simek <michal.simek@amd.com>, Sughosh Ganu <sughosh.ganu@arm.com>,
+ Antony Kurniawan Soemardi <linux@smankusors.com>,
+ Luca Weiss <luca.weiss@fairphone.com>,
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+References: <20260504-b4-modernise-smem-v2-0-c01ec2ff3886@linaro.org>
+ <20260504-b4-modernise-smem-v2-1-c01ec2ff3886@linaro.org>
+Content-Language: en-US, fr
+Autocrypt: addr=neil.armstrong@linaro.org; keydata=
+ xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
+ GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
+ BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
+ qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
+ 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
+ AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
+ OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
+ Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
+ YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
+ GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
+ UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
+ GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
+ yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
+ QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
+ SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
+ 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
+ Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
+ oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
+ M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
+ 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
+ KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
+ 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
+ QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
+Organization: Linaro
+In-Reply-To: <20260504-b4-modernise-smem-v2-1-c01ec2ff3886@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -154,32 +143,287 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-SGVsbG8gTWljaGFsLA0KDQo+IEZyb206IE1pY2hhbCBTaW1layA8bWljaGFsLnNpbWVrQGFtZC5j
-b20+DQo+IE9uIDUvMTgvMjYgMTU6NDAsIE1hYXJ0ZW4gQnJvY2sgd3JvdGU6DQo+ID4NCj4gPiBI
-b3cgYWJvdXQgc29tZXRoaW5nIGxpa2UgdGhpcz8NCj4gPg0KPiA+IGludCByZXNldF9yZXNldF9i
-dWxrKHN0cnVjdCByZXNldF9jdGxfYnVsayAqYnVsaywgdWxvbmcgZGVsYXlfdXMpDQo+ID4gew0K
-PiA+IAlpbnQgaSwgcmV0LCBzb2Z0ID0gMDsNCj4gPg0KPiA+IAlmb3IgKGkgPSAwOyBpIDwgYnVs
-ay0+Y291bnQ7IGkrKykgew0KPiA+IAkJc3RydWN0IHJlc2V0X29wcyAqb3BzID0gcmVzZXRfZGV2
-X29wcyhidWxrLT5yZXNldHNbaV0uZGV2KTsNCj4gPg0KPiA+IAkJaWYgKG9wcy0+cnN0X3Jlc2V0
-KSB7DQo+ID4gCQkJcmV0ID0gb3BzLT5yc3RfcmVzZXQoJmJ1bGstPnJlc2V0c1tpXSwgZGVsYXlf
-dXMpOw0KPiA+IAkJfSBlbHNlIHsNCj4gPiAJCQlyZXQgPSByZXNldF9hc3NlcnQoJmJ1bGstPnJl
-c2V0c1tpXSk7DQo+ID4gCQkJc29mdCsrOw0KPiANCj4gQnV0IHRoaXMgd2lsbCBoYXZlIHdlaXJk
-IGJlaGF2aW9yIHdoZW4geW91IGhhdmUgbXVsdGlwbGUgcmVzZXQgY29udHJvbGxlcnMgd2hlcmUN
-Cj4gb25lIGhhcyByc3RfcmVzZXQgaW1wbGVtZW50ZWQgYW5kIGFub3RoZXIgbm90LiBUaGVuIG9u
-IHRoYXQgb25lIHdpdGggcnN0X3Jlc2V0DQo+IGFub3RoZXIgZGVhc3NlcnQgaXMgZ29pbmcgdG8g
-YmUgY2FsbGVkLg0KDQo+ICAgICAgICAgZm9yIChpID0gMDsgaSA8IGJ1bGstPmNvdW50OyBpKysp
-IHsNCj4gICAgICAgICAgICAgICAgIHN0cnVjdCByZXNldF9vcHMgKm9wcyA9IHJlc2V0X2Rldl9v
-cHMoYnVsay0+cmVzZXRzW2ldLmRldik7DQo+IA0KPiAgICAgICAgICAgICAgICAgaWYgKCFvcHMt
-PnJzdF9yZXNldCkgew0KDQpEaWQgeW91IG1pc3MgdGhlICggISBvcHMtPnJzdF9yZXNldCApIGhl
-cmU/IEl0IHdpbGwgbm90IGNhbGwgZGVhc3NlcnQgZm9yIHRoZSByc3RfcmVzZXQgY2FzZXMuDQoN
-Cj4gICAgICAgICAgICAgICAgICAgICAgICAgcmV0ID0gcmVzZXRfZGVhc3NlcnQoJmJ1bGstPnJl
-c2V0c1tpXSk7DQo+ICAgICAgICAgICAgICAgICAgICAgICAgIGlmIChyZXQgPCAwKQ0KPiAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgIHJldHVybiByZXQ7DQo+ICAgICAgICAgICAgICAg
-ICB9DQo+ICAgICAgICAgfQ0KDQpJIGRvIGFncmVlIHRoYXQgdGltaW5nIG1pZ2h0IGJlY29tZSBz
-a2V0Y2h5LiBCdXQgSSBkb24ndCBzZWUgYSBvbmUtc2l6ZS1maXRzLWFsbCBzb2x1dGlvbi4NCg0K
-S2luZCByZWdhcmRzLA0KTWFhcnRlbg0KDQo=
+On 5/4/26 20:57, Casey Connolly wrote:
+> SMEM is a highly Qualcomm specific interface, while having a dedicated
+> UCLASS for it offers a nice abstraction, for things like memory layout
+> parsing we need to use it before the driver model is available.
+> 
+> Therefore, it doesn't make sense to fit SMEM into the driver model.
+> Instead let's adopt a model closer to Linux, and parse SMEM really early
+> during boot (as soon as we have the FDT).
+> 
+> This reverts commit 7b384eccc785b596f68448b155cbda26df57fb23.
+> 
+> Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
+> ---
+>   arch/arm/Kconfig           |  1 -
+>   drivers/Kconfig            |  2 --
+>   drivers/Makefile           |  1 -
+>   drivers/smem/Kconfig       | 25 -------------
+>   drivers/smem/Makefile      |  7 ----
+>   drivers/smem/smem-uclass.c | 46 ------------------------
+>   include/dm/uclass-id.h     |  1 -
+>   include/smem.h             | 90 ----------------------------------------------
+>   8 files changed, 173 deletions(-)
+> 
+> diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
+> index f624675eadf8..dadb18e0b8cd 100644
+> --- a/arch/arm/Kconfig
+> +++ b/arch/arm/Kconfig
+> @@ -1141,9 +1141,8 @@ config ARCH_SNAPDRAGON
+>   	select POWER_DOMAIN
+>   	select GPIO_EXTRA_HEADER
+>   	select MSM_SMEM
+>   	select OF_CONTROL
+> -	select SMEM
+>   	select SPMI
+>   	select BOARD_LATE_INIT
+>   	select OF_BOARD
+>   	select SAVE_PREV_BL_FDT_ADDR if !ENABLE_ARM_SOC_BOOT0_HOOK
+> diff --git a/drivers/Kconfig b/drivers/Kconfig
+> index 47606ddc6c8b..aa293df37c57 100644
+> --- a/drivers/Kconfig
+> +++ b/drivers/Kconfig
+> @@ -123,10 +123,8 @@ source "drivers/scsi/Kconfig"
+>   source "drivers/serial/Kconfig"
+>   
+>   source "drivers/sm/Kconfig"
+>   
+> -source "drivers/smem/Kconfig"
+> -
+>   source "drivers/sound/Kconfig"
+>   
+>   source "drivers/soc/Kconfig"
+>   
+> diff --git a/drivers/Makefile b/drivers/Makefile
+> index 43d0ba332818..ca3e87ffb102 100644
+> --- a/drivers/Makefile
+> +++ b/drivers/Makefile
+> @@ -118,9 +118,8 @@ obj-y += pwm/
+>   obj-y += reset/
+>   obj-y += input/
+>   obj-y += iommu/
+>   # SOC specific infrastructure drivers.
+> -obj-y += smem/
+>   obj-y += thermal/
+>   obj-$(CONFIG_TEE) += tee/
+>   obj-$(CONFIG_ARM_FFA_TRANSPORT) += firmware/arm-ffa/
+>   obj-y += axi/
+> diff --git a/drivers/smem/Kconfig b/drivers/smem/Kconfig
+> deleted file mode 100644
+> index e5d7dcc81b17..000000000000
+> --- a/drivers/smem/Kconfig
+> +++ /dev/null
+> @@ -1,25 +0,0 @@
+> -menuconfig SMEM
+> -	bool  "SMEM (Shared Memory mamanger) support"
+> -
+> -if SMEM
+> -
+> -config SANDBOX_SMEM
+> -    bool "Sandbox Shared Memory Manager (SMEM)"
+> -    depends on SANDBOX && DM
+> -    help
+> -      enable SMEM support for sandbox. This is an emulation of a real SMEM
+> -      manager.
+> -      The sandbox driver allocates a shared memory from the heap and
+> -      initialzies it on start.
+> -
+> -config MSM_SMEM
+> -    bool "Qualcomm Shared Memory Manager (SMEM)"
+> -    depends on DM
+> -    depends on ARCH_SNAPDRAGON || ARCH_IPQ40XX
+> -    select DEVRES
+> -    help
+> -      Enable support for the Qualcomm Shared Memory Manager.
+> -      The driver provides an interface to items in a heap shared among all
+> -      processors in a Qualcomm platform.
+> -
+> -endif # menu "SMEM Support"
+> diff --git a/drivers/smem/Makefile b/drivers/smem/Makefile
+> deleted file mode 100644
+> index af3e9b50883c..000000000000
+> --- a/drivers/smem/Makefile
+> +++ /dev/null
+> @@ -1,7 +0,0 @@
+> -# SPDX-License-Identifier: GPL-2.0+
+> -#
+> -# Makefile for the U-Boot SMEM interface drivers
+> -
+> -obj-$(CONFIG_SANDBOX_SMEM) += sandbox_smem.o
+> -obj-$(CONFIG_SMEM) += smem-uclass.o
+> -obj-$(CONFIG_MSM_SMEM) += msm_smem.o
+> diff --git a/drivers/smem/smem-uclass.c b/drivers/smem/smem-uclass.c
+> deleted file mode 100644
+> index 4dea5cc4bf1c..000000000000
+> --- a/drivers/smem/smem-uclass.c
+> +++ /dev/null
+> @@ -1,46 +0,0 @@
+> -// SPDX-License-Identifier: GPL-2.0+
+> -/*
+> - * Copyright (c) 2018 Ramon Fried <ramon.fried@gmail.com>
+> - */
+> -
+> -#define LOG_CATEGORY UCLASS_SMEM
+> -
+> -#include <dm.h>
+> -#include <smem.h>
+> -
+> -int smem_alloc(struct udevice *dev, unsigned int host,
+> -		unsigned int item, size_t size)
+> -{
+> -	struct smem_ops *ops = smem_get_ops(dev);
+> -
+> -	if (!ops->alloc)
+> -		return -ENOSYS;
+> -
+> -	return ops->alloc(host, item, size);
+> -}
+> -
+> -void *smem_get(struct udevice *dev, unsigned int host,
+> -		unsigned int item, size_t *size)
+> -{
+> -	struct smem_ops *ops = smem_get_ops(dev);
+> -
+> -	if (!ops->get)
+> -		return NULL;
+> -
+> -	return ops->get(host, item, size);
+> -}
+> -
+> -int smem_get_free_space(struct udevice *dev, unsigned int host)
+> -{
+> -	struct smem_ops *ops = smem_get_ops(dev);
+> -
+> -	if (!ops->get_free_space)
+> -		return -ENOSYS;
+> -
+> -	return ops->get_free_space(host);
+> -}
+> -
+> -UCLASS_DRIVER(smem) = {
+> -	.id     = UCLASS_SMEM,
+> -	.name       = "smem",
+> -};
+> diff --git a/include/dm/uclass-id.h b/include/dm/uclass-id.h
+> index 36b5d87c304f..fe0aae2720ca 100644
+> --- a/include/dm/uclass-id.h
+> +++ b/include/dm/uclass-id.h
+> @@ -133,9 +133,8 @@ enum uclass_id {
+>   	UCLASS_SCMI_BASE,	/* Interface for SCMI Base protocol */
+>   	UCLASS_SCSI,		/* SCSI device */
+>   	UCLASS_SERIAL,		/* Serial UART */
+>   	UCLASS_SIMPLE_BUS,	/* Bus with child devices */
+> -	UCLASS_SMEM,		/* Shared memory interface */
+>   	UCLASS_SOC,		/* SOC Device */
+>   	UCLASS_SOUND,		/* Playing simple sounds */
+>   	UCLASS_SPI,		/* SPI bus */
+>   	UCLASS_SPI_FLASH,	/* SPI flash */
+> diff --git a/include/smem.h b/include/smem.h
+> deleted file mode 100644
+> index b19c534ebc43..000000000000
+> --- a/include/smem.h
+> +++ /dev/null
+> @@ -1,90 +0,0 @@
+> -/* SPDX-License-Identifier: GPL-2.0+ */
+> -/*
+> - * The shared memory system is an allocate-only heap structure that
+> - * consists of one of more memory areas that can be accessed by the processors
+> - * in the SoC.
+> - *
+> - * Allocation can be done globally for all processors or to an individual processor.
+> - * This is controlled by the @host parameter.
+> - *
+> - * Allocation and management of heap can be implemented in various ways,
+> - * The @item parameter should be used as an index/hash to the memory region.
+> - *
+> - * Copyright (c) 2018 Ramon Fried <ramon.fried@gmail.com>
+> - */
+> -
+> -#ifndef _smemh_
+> -#define _smemh_
+> -
+> -/* struct smem_ops: Operations for the SMEM uclass */
+> -struct smem_ops {
+> -	/**
+> -	 * alloc() - allocate space for a smem item
+> -	 *
+> -	 * @host:	remote processor id, or -1 for all processors.
+> -	 * @item:	smem item handle
+> -	 * @size:	number of bytes to be allocated
+> -	 * @return 0 if OK, -ve on error
+> -	 */
+> -	int (*alloc)(unsigned int host,
+> -		unsigned int item, size_t size);
+> -
+> -	/**
+> -	 * get() - Resolve ptr of size of a smem item
+> -	 *
+> -	 * @host:	the remote processor, of -1 for all processors.
+> -	 * @item:	smem item handle
+> -	 * @size:	pointer to be filled out with the size of the item
+> -	 * @return	pointer on success, NULL on error
+> -	 */
+> -	void *(*get)(unsigned int host,
+> -		unsigned int item, size_t *size);
+> -
+> -	/**
+> -	 * get_free_space() - Get free space in smem in bytes
+> -	 *
+> -	 * @host:   the remote processor identifying a partition, or -1
+> -	 *			for all processors.
+> -	 * @return	free space, -ve on error
+> -	 */
+> -	int (*get_free_space)(unsigned int host);
+> -};
+> -
+> -#define smem_get_ops(dev)	((struct smem_ops *)(dev)->driver->ops)
+> -
+> -/**
+> - * smem_alloc() - allocate space for a smem item
+> - * @host:	remote processor id, or -1
+> - * @item:	smem item handle
+> - * @size:	number of bytes to be allocated
+> - * Return: 0 if OK, -ve on error
+> - *
+> - * Allocate space for a given smem item of size @size, given that the item is
+> - * not yet allocated.
+> - */
+> -int smem_alloc(struct udevice *dev, unsigned int host, unsigned int item, size_t size);
+> -
+> -/**
+> - * smem_get() - resolve ptr of size of a smem item
+> - * @host:	the remote processor, or -1 for all processors.
+> - * @item:	smem item handle
+> - * @size:	pointer to be filled out with size of the item
+> - * Return:	pointer on success, NULL on error
+> - *
+> - * Looks up smem item and returns pointer to it. Size of smem
+> - * item is returned in @size.
+> - */
+> -void *smem_get(struct udevice *dev, unsigned int host, unsigned int item, size_t *size);
+> -
+> -/**
+> - * smem_get_free_space() - retrieve amount of free space in a partition
+> - * @host:	the remote processor identifying a partition, or -1
+> - *			for all processors.
+> - * Return:	size in bytes, -ve on error
+> - *
+> - * To be used by smem clients as a quick way to determine if any new
+> - * allocations has been made.
+> - */
+> -int smem_get_free_space(struct udevice *dev, unsigned int host);
+> -
+> -#endif /* _smem_h_ */
+> 
+
+Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
+
+Thanks,
+Neil
